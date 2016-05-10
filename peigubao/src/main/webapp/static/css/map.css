@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin:0;padding:0;border:0;}
+body {font-family:'微软雅黑'; background: #fff;}
+ul,li,ol,i,em { font-style: normal; list-style: none;}
+ a{text-decoration:none;}
+
+.map_link { width: 1000px; height:16px; line-height: 16px; margin: 15px auto 20px; font-family:"宋体"; font-size: 0; }
+.map_link a { font-size: 14px; color: #2fa8e1; }
+.map_link i { font-size: 14px; color: #404040; padding: 0 0 0 5px; }
+.map { width: 960px; padding: 20px 19px; height: auto; background: #fafafa; border: 1px solid #dfdfdf; margin: 0 auto 50px; overflow: hidden; font-size: 0;} 
+.map dl { width:260px; border-bottom: 1px dotted #000; margin: 0 30px 20px; font-size: 0; padding-bottom: 15px; display: block; float: left;}
+.map dl.last { border-bottom: none;}
+.map dl dt { width: 100%; height: 24px; line-height: 24px; font-size:18px; color: #505050; text-align: left; margin-bottom: 8px;}
+.map dl dd { height:24px; line-height: 24px; font-size: 14px; color: #2fa8e1; display:inline-block; float:left; padding-right: 25px;}
+.map dl dd a { color: #2fa8e1; font-family: "宋体";}
+.map_one { height: 72px;}
+.map_two { height: 120px;}

@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin: 0; padding: 0; font-size: 0;}
+.viewport { max-width: 640px; min-width: 320px; margin: 0 auto;}
+.mainbg { height: 1137px; background: url(../images/wx/banner_wx.jpg) no-repeat center top; background-size: 100%; margin: 0 auto; position: relative; max-width: 640px;min-width: 320px; max-height: 1138px; min-height: 569px;}
+.main_num { display: block; width:112px;height: 48px; line-height: 48px; font-size: 40px; color: #db2342; font-family: "微软雅黑"; font-style: normal; position: absolute; left: 400px; top: 325px; text-align: center; }

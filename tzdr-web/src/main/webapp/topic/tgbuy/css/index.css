@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;border:0;font-size:0;}
+body{font-family:'微软雅黑'; background: #fff;}
+
+.tp_main1 { margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:91px; min-width: 1000px;}
+.tp_main1 img { width: 1920px; height: 91px; position: absolute; top: 0; left: 50%; margin-left: -960px;}
+.tp_main2 { margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:224px; min-width: 1000px;}
+.tp_main2 img { width: 1920px; height: 224px; position: absolute; top: 0; left: 50%; margin-left: -960px;}
+.tp_main2 .choose{width:244px;height:156px;margin-top:35px;margin-left:0px;cursor:pointer}
+#choose1{margin-left:-431px}
+#choose2{margin-left:-122px}
+#choose3{margin-left:186px}
+.tp_main2 .sanjiao{width:36px;height:16px;margin:202px -325px}
+.tp_main3{width:100%;height:1423px;position: relative;background:#cbf3ff; min-width: 1000px;}
+.tp_main3 .shang{position:absolute;margin-left: -500px;left:50%;}
+.tp_main3 .xia{position:absolute;margin-left: -500px;left:50%;margin-top:858px}
+
+
+/*活动一*/
+.huodongyi{width:997px;height:858px;border-left:2px solid #ffda8a;border-right:2px solid #ffda8a;left:50%;position:absolute;margin-left: -500px;margin-top:15px;background:#fffcf7;}
+.huodongyi .hongbao{margin:12px 264px}
+.huodongyi p{font-size:14px;color:#996666;width:840px;background:url(../image/xing.jpg) no-repeat 0px 5px;padding-left:29px;margin:7px 0px 24px 68px;line-height:24px}
+.huodongyi p img{margin-right:18px}
+.huodongyi .fangan{margin:15px 67px 0;}
+.huodongyi .ren{margin:46px 121px 0 40px;float:left}
+.huodongyi .jia{margin:9px -46px;}
+.huodongyi .hong{margin:32px 104px;}
+.tp_imgbox { width: 859px; height: auto; background: #fff; margin-left: 68px;}
+/*活动二*/
+.huodonger{width:997px;height:858px;border-left:2px solid #ffda8a;border-right:2px solid #ffda8a;left:50%;position:absolute;margin-left: -500px;margin-top:15px;background:#fffcf7;}
+.huodonger .plus{margin:12px 264px}
+.huodonger .first{padding-left:29px;background:url(../image/xing.jpg) no-repeat 0px 5px;font-size:14px;color:#996666;margin-left: 68px;line-height:24px}
+.huodonger .firsttop{margin-top:13px}
+.huodonger .zhanshi{margin:9px 67px;display:block}
+.huodonger .diyi{margin:8px 68px}
+.huodonger .dier{margin:8px 41px}
+.huodonger .disan{margin:8px 67px}
+.huodonger .pk{margin:8px 67px}
+.huodonger .rule{font-size:14px;color:#996666;line-height:26px;width:830px;padding-left:32px;margin-left:67px}
+.huodonger .biaotou{margin:12px 66px}
+.huodonger .middle{margin:-12px 66px;width:854px;height:auto;border-left:3px solid #fcaba6;border-right:3px solid #fcaba6;border-bottom:3px solid #fcaba6;border-bottom-left-radius:10px;border-bottom-right-radius:10px}
+.huodonger table{margin:0px 40px}
+.huodonger table tr td{font-size:14px;color:#a9807f;width:80px;margin-top:10px}
+.huodonger .yonghu{width:125px;}
+.huodonger .last{width:300px;}
+.huodonger .red{color:#f60e09;font-weight:bold}
+.huodonger .redtr td{color:#f60e09}
+/*活动三*/
+.huodongsan{width:997px;height:858px;border-left:2px solid #ffda8a;border-right:2px solid #ffda8a;left:50%;position:absolute;margin-left: -500px;margin-top:15px;background:#fffcf7;}
+.huodongsan .butie{margin:12px 264px}
+.huodongsan p{font-size:14px;color:#996666;width:840px;padding-left:29px;background:url(../image/xing.jpg) no-repeat 0px 5px;line-height:24px;margin:11px 0px 24px 68px}
+.huodongsan .caopanshou{margin:15px 68px 0;}
+.huodongsan .step{margin: 0 auto;display: block; padding: 10px 0 40px;}
+.button{position: absolute;margin: 923px 0px 0px -173px; left: 50%;}
+.tp_main3 .tp_top{position:absolute;margin-left: -500px;left:50%;margin-top:1029px}
+.tp_main3 .bottom{position:absolute;margin-left: -500px;left:50%;margin-top:1252px}
+.tp_main3 .introduce{height:208px;width:997px;border-left:2px solid #ffda8a;border-right:2px solid #ffda8a;left:50%;position:absolute;margin-left: -500px;margin-top:1044px;background:#fffcf7;}
+.tp_main3 .introduce .dongdong{margin:12px 264px}
+.tp_main3 .introduce p{font-size:16px;color:#996666;line-height:36px;text-indent:2em;width:850px;margin:10px 80px}
+.tp_foot {  width: 100%; height: 50px; line-height: 50px; background: #3b3b3b; text-align: center; font-size: 14px; color: #b2b2b2; min-width: 1000px;}
+
+

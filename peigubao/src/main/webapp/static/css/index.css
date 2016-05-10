@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;border:0;font-size:100%;}
+body{font-family:'Microsoft YaHei';}
+
+.banner { width: 100%; height: 643px; overflow: hidden; position: relative;}
+.banner img { display: block; width: 1920px; height: 643px; position: absolute; left: 50%; margin-left: -960px; top: 0; }
+.regist { width: 312px; height: auto; background: url(../images/stockfastsignin/rgbg.png) repeat; position: absolute; left: 50%; margin:70px 0 0 180px;}
+.regist h2 { width: 100%; height: 60px; line-height: 70px; font-size:24px; font-family: "微软雅黑"; color: #fff; font-weight: normal; margin-bottom: 10px; text-align: center;}
+.rg_list { width: 265px; height: auto; padding-left: 47px; }
+.rg_list li { display: block; width: 100%; margin-bottom: 5px; height: 56px; position: relative;}
+.rg_list li label { display: inline-block; width:60px; height:24px; line-height: 24p; vertical-align: middle; font-size:18px; color: #fff; float: left;}
+.rg_list li input { float: left;}
+.rg_list li p { clear: both;  width:205px; height: 32px; line-height: 32px; font-size: 14px; color: #fff; margin-left: 60px; }
+.rg_list li p.error { color: #f00;} 
+.rg_list li p i { font-size: 14px; vertical-align: middle; padding-right: 5px; font-style: normal;}
+.rg_list li a.openYZMBox { display: block; width:72px; height: 23px; border: none; background: url(../images/stockfastsignin/btnbg_01.gif) repeat-x; color: #fff; text-align: center; line-height: 23px; float: left; font-size: 12px; cursor: pointer; vertical-align: middle; border-radius: 4px; margin:1px 0 0 5px;}
+.rg_list li span { display: block; float: left; font-size: 12px; color: #fff; vertical-align: middle; height: 14px; line-height: 14px; vertical-align: middle; margin: -1px 0 0 2px; }
+.rg_list li.last { height: 24px;}
+.rg_list li span a { color: #4987dc; font-size: 12px; text-decoration: none;}
+.rg_list li span a:hover { text-decoration: underline;}
+.rg_list li img { width: 72px; height: 24px; margin-left: 5px;}
+.rg_l_ip {width:148px; float: left;vertical-align: middle;  height: 24px; background: #fff; font-size: 14px; color: #333; outline: none; padding: 0 5px; *line-height:24px; line-height: 24px\0;}
+.rg_l_ip2 { width:70px; float: left;vertical-align: middle;  height: 24px; background: #fff; font-size: 14px; color: #333; outline: none; padding: 0 5px; *line-height:24px; line-height: 24px\0; }
+.rg_btn {width:217px; height: 44px; text-align: center; line-height: 44px; background: url(../images/stockfastsignin/btnbg_02.gif) repeat-x; font-size: 18px; color: #fff; cursor: pointer; border-radius: 5px; margin: 8px auto 0;}
+.rg_btn a { color: #fff; text-decoration: none;}
+.rg_link { width:217px; height:44px; line-height: 44px; text-align: center; font-size: 12px; color: #fff; margin: 0 auto;}
+.rg_link a { color: #4987dc; font-size: 12px; text-decoration: none; padding: 0 2px;}
+.rg_link a:hover { text-decoration: underline;} 
+.rule { width: 100%; height: 620px; background: #fff9cb;}
+.rlue_ctn { width: 902px; height: 501px; margin:0 auto; padding-top: 75px; }
+.future { width: 100%; height:615px; background: #fff6f1;   }
+.future_ctn { width:902px; height: 474px; margin: 0 auto;padding-top: 75px; }
+.future_ctn img { width: 902px; height: 474px;}
+.futureday { width: 100%; height: 615px; background: #fff9cb;}
+.futureday_ctn { width: 902px; height: 544px; margin: 0 auto; padding-top: 70px;}
+.rgbox { width: 100%; height: 400px; background: #e0e4e7; }
+.rg_ctn { width: 1000px; height: 343px; background: url(../images/stockfastsignin/rg_pic.gif) no-repeat; margin: 0 auto; position: relative; }
+.rg_ctn a { display: block; width: 140px; height: 185px; position: absolute; right: 62px; top:140px;   }
+.rg_ctn a em { text-indent: -999em;}
+.peibox { width: 100%; height: 565px; background: #fff; }
+.pei_ctn { width: 1000px; height: auto; margin: 0 auto;}
+.rgb_title { width:505px; height: 80px; line-height: 80px; border-bottom: 1px solid #5b1115; text-align: center; font-size:24px; color: #000; }
+.rgb_title em { font-size: 30px; font-style: normal; padding-right: 5px; }
+.pei_mainpic { width: 903px; height: 233px; margin: 45px auto 20px; }
+.pei_link { width: 903px; height: auto; margin: 0 auto; overflow: hidden;}
+.pei_link img { width: 628px; height: 85px; float: left; display: block; margin-top: 60px;}
+.pei_link a {  display: block; float: right; width: 161px; height: 134px; background: url(../images/stockfastsignin/pei_btn.gif) no-repeat;}
+.safebox { width: 100%; height: 675px; background: #e0e4e7; }
+.safe_ctn { width: 1000px; height: auto; margin: 0 auto;}
+.safe_mainpic { width: 921px; height: 458px; margin: 50px auto 0;}
+.rg_bom { width: 100%; height: 50px; background: #930; }
+/*弹出注册框*/
+.floatlayer {width: 1000px;	height: 0;margin: 0 auto;font-size: 0;position: relative;z-index:50;}
+.fl_mask { width: 100%; height: 3000px; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#7F000000', endColorstr='#7F000000');
+	background:rgba(0,0,0,.5); position: fixed; top: 0; left: 0;}
+.fl_regist { width: 325px; height: auto; background: url(../images/stockfastsignin/rgbg.png) repeat; padding-top: 20px; margin: 0 auto; padding-bottom: 7px;}
+.fl_mask { width: 100%; height: 3000px; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#7F000000', endColorstr='#7F000000');
+	background:rgba(0,0,0,.5); position: fixed; top: 0; left: 0;}
+.fl_rgbox { width:960px; height: auto; background: url(../images/stockfastsignin/rg_banner.jpg) no-repeat left bottom; position: fixed; z-index: 20; top: 20%; left: 50%; margin-left: -480px;}
+.fl_rgbox h2 { width: 325px; height: 85px; background: #ea6100; text-align: center; line-height: 85px; font-size:40px; color: #fff; font-weight: normal; margin: 0 auto; *margin-bottom: -5px;}
+.fl_rgclose { width: 39px; height: 35px; background: url(../images/stockfastsignin/close.png) no-repeat; display: block; position: absolute; right: 10px; top: 95px;}
+.fp_box { width: 1000px; height: 547px; margin: 0 auto; }
+.rgbox { width: 100%; height: 380px; background: #e0e4e7; padding: 50px 0 0; }
+.rg_ctn { width: 1000px; height: 289px; background: url(../images/stockfastsignin/rg_pic.gif) no-repeat; margin: 0 auto; position: relative;}
+.rg_ctn a { display: block; width: 140px; height: 185px; position: absolute; right: 62px; top:140px;   }
+.rg_ctn a em { text-indent: -999em;}
+/*注册验证码*/
+.fl_box { width: 320px; height: auto; padding: 10px 10px 30px 10px; background: #fff; border-radius: 5px; -moz-border-radius: 5px; border: 1px solid #e7e7e7;
+  z-index: 1000; color: #666; position: fixed; left: 50%; top: 20%; margin-left: -15%; min-width: 320px;}
+.fl_uc_trade { width: 320px; min-width: 320px;  margin-left: -160px;}
+.fl_navtitle { width: 100%; height: 35px; line-height: 35px; border-bottom: 1px solid #eff2f7;}
+.fl_navtitle h3 {width: 180px;height: 34px;line-height: 34px;font-size: 18px;font-family: "微软雅黑";color: #666;text-align: center;border-bottom: 1px solid #f80;
+	position: relative;top: 1px;float: left;font-weight: normal;}
+.fl_navtitle a.close {display: block; width: 18px;height: 18px;background: url(../images/stockfastsignin/uc/close.gif) no-repeat;float: right;margin-top: 8px;}
+.fl_uc_main {width: 100%;height: auto;margin: 30px 0 20px;}
+.fl_uc_list li input { width: 165px; height: 34px; line-height: 34px\9; border: 1px solid #e5e5e5; border-top: 1px solid #d3d3d3; font-size: 14px;
+  vertical-align: middle; outline: none; margin-right: 10px; padding: 0 10px; color: #666;}
+.fl_uc_list li img { vertical-align: middle;}
+.fl_uc_main p { width: 100%; height: 40px; text-align: left; font-size: 18px; color: #666; text-align: center;}
+.fl_uc_main p.fl_uc_tptitle { font-size: 30px; color: #f96c04; margin-bottom: 30px; }
+.fl_uc_main p i { color: #f98e04; font-size: 18px;}
+.fl_uc_btn { width: 100%; text-align: center;}
+.fl_uc_btn a.fl_rgtk { font-size: 14px; color: #67c3fc;  font-family: "宋体";}
+.fl_uc_btn a {display: inline-block;width: 90%;height: 40px;font-size: 16px;color: #fff;text-align: center;line-height: 40px;margin: 0 auto;border-radius: 5px;}
+.fl_uc_btn a:hover {text-decoration: none;}
+.fl_uc_surebtn { background: #ff9c00;}
+.fl_uc_list li a { font-size: 14px; vertical-align: middle; color: #60bffb; padding-left: 10px; text-decoration: none;}
+.fl_uc_list li input.yzm { height: 40px;width: 80px;}

@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;border:0;font-size:0;}
+body{font-family:'Microsoft YaHei'; background: #fff;}
+
+.tp_main { margin: 0; font-size: 0; width: 100%; height: 200px; overflow: hidden; position: relative;}
+.tp_main img { width: 1920px; height: 200px; position: absolute; top: 0; left: 50%; margin-left: -960px;}
+.tp_mainlist { width: 100%; height: 419px; overflow: hidden; position: relative;}
+.tp_mainlist img { width: 1920px; height: 419px; position: absolute; top: 0; left: 50%; margin-left: -960px;}
+.tp_num { width: 150px; height: 60px; line-height: 60px; text-align: center; font-size: 40px; color: #1a1b29; position: absolute; z-index: 10; left: 50%; font-weight: 900; top: 70px; margin-left: -110px; letter-spacing: 24px; *margin-left: -120px; }
+.tp_join { width: 340px; height: 52px; display: block; text-indent: -999em; position: absolute; z-index: 10; left: 50%; margin-left: -170px; top: 50px; background: url(../images/bg.png) no-repeat;  }
+.tp_link { width: 340px; height: 52px; display: block; text-indent: -999em; position: absolute; z-index: 10; left: 50%; margin-left: -170px; top: 110px; background: url(../images/bg.png) no-repeat;  }
+.tp_ml_list { width: 880px; height: auto; margin: 0 auto; position: relative; }
+.tp_ml_list ul { width: 100%; height: auto; padding-top: 35px;}
+.tp_ml_list ul ol { display: block; width: 100%; height: 32px; line-height: 32px; border-bottom: 2px solid #fbfbfb; }
+.tp_ml_list ul ol li { display: block; width: 25%; text-align: center; height: 32px; line-height: 32px; font-size: 16px; color: #4e1712; float: left;}
+.tp_ml_list ul ol li span { color: #ff4672; font-size: 16px;}
+.tp_ml_list ul ol.title { height: 60px; line-height: 60px; background: #e1e2e3; margin-bottom: 10px; } 
+.tp_ml_list ul ol.title li { display: block; width: 25%; height: 60px; line-height: 60px; font-size: 20px; color: #815e5b; float: left;  }
+.tp_l_btn { display: block; width: 120px; height: 30px; left: 50%; position: absolute; z-index: 10; text-indent: -999em; top: 120px; margin-left: -365px; background: url(../images/bg.png) no-repeat; }
+.tp_l_btn2 { display: block; width: 120px; height: 30px; left: 50%; position: absolute; z-index: 10; text-indent: -999em; top: 120px; margin-left: -63px; background: url(../images/bg.png) no-repeat;}
+.tp_l_btn3 { display: block; width: 120px; height: 30px; left: 50%; position: absolute; z-index: 10; text-indent: -999em; top: 120px; margin-left: 245px; background: url(../images/bg.png) no-repeat;}
+.foot { width: 100%; height: 50px; line-height: 50px; background: #3b3b3b;text-align: center; font-size: 14px; color: #b2b2b2; font-family: "微软雅黑"; }

@@ -1,0 +1,42 @@
+.northCls h3{width: 200px;margin-left:10px;margin-top:10px;}
+.northCls div{position:absolute;top:10px;left: 70%;}
+.northCls .welcome{width: 150px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.nav{list-style-type: none;}
+.nav li
+{
+	margin-left: -28px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	margin-top: 10px;
+	width: 110px;
+}
+.nav li  a
+{
+	text-decoration: none;
+	font-size: 14px;
+}
+.nav li  span{color: #0066FF;}
+.nav li  a:link {color:#787878;} /* 未访问的链接 */
+.nav li  a:visited {color:#788888;} /* 已访问的链接 */
+.nav li  a:hover {color:#787878;} /* 鼠标划过链接 */
+.nav li  a:active {color:#787878;} /* 已选中的链接 */ 

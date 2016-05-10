@@ -1,0 +1,3 @@
+<script charset="utf-8" src="${ctx}/static/plugins/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="${ctx}/static/plugins/kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="${ctx}/static/plugins/kindeditor/themes/simple/simple.css" />

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<!-- 默认Controller扫描，如果以com.tzdr.web开头的项目和组件不用再声明。自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.tzdr.web.controller,com.tzdr.common.web,com.tzdr.web.hkstock.controller" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 定义无Controller的path<->view直接映射 -->
+	<!--  
+	<mvc:view-controller path="/" view-name="/"/>
+	-->
+
+	<mvc:annotation-driven validator="validator">
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.tzdr.common.web.support.DynamicProxyObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json</value>
+						<value>text/json</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			  <!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+                <property name = "supportedMediaTypes">
+                    <list>
+                        <bean class="org.springframework.http.MediaType">
+                            <constructor-arg index="0" value="text"/>
+                            <constructor-arg index="1" value="plain"/>
+                            <constructor-arg index="2" value="UTF-8"/>
+                        </bean>
+                        <bean class="org.springframework.http.MediaType">
+                            <constructor-arg index="0" value="*"/>
+                            <constructor-arg index="1" value="*"/>
+                            <constructor-arg index="2" value="UTF-8"/>
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- 启动对@AspectJ注解的支持 -->
+	<!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
+	<!-- 
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	 -->
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>  
+    </bean>  
+     
+    
+    
+
+	<!-- 定义异常处理  自己也可以扩展HandlerExceptionResolver  -->
+	<bean id="exceptionResolver" class="com.tzdr.web.support.ExceptionResolver"/>  
+	
+	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		定义默认的异常处理页面，当该异常类型的注册时使用
+		<property name="defaultErrorView" value="error"></property>
+		定义异常处理页面用来获取异常信息的变量名，默认名为exception
+		<property name="exceptionAttribute" value="ex"></property>
+		定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error</prop>
+
+				这里还可以继续扩展对不同异常类型的处理
+			</props>
+		</property>
+	</bean>
+ -->
+ 
+ 
+	<!-- 定义JSP文件的位置 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	 <!-- 静态资源映射 -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/upload/**" location="/upload/"/>
+	<mvc:resources mapping="/topic/**" location="/topic/"/>
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>104857600</value><!-- 上传文件大小限制为100M，100*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	<!-- 控制器异常处理 -->
+	
+	<!-- 拦截器配置：可配置多个 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/signin"/>
+			<mvc:exclude-mapping path="/fastsignin"/>
+			<mvc:exclude-mapping path="/newfastsignin"/>
+			<mvc:exclude-mapping path="/stocksignin"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/upload/**"/>
+			<mvc:exclude-mapping path="/topic/**/images/**"/>
+			<mvc:exclude-mapping path="/topic/**/css/**"/>
+			<mvc:exclude-mapping path="/topic/**/js/**"/>
+			<bean class="com.tzdr.web.support.AllUrlInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<!-- /myPath/** 表示拦截根目录下myPath目录的所有请求。根目录配置：/** -->
+			<mvc:mapping path="/user/**"/>
+			<mvc:mapping path="/message/**"/>
+			<mvc:mapping path="/userinfo/**"/>
+			<mvc:mapping path="/generalize/**"/>
+			<mvc:mapping path="/pay/**"/>
+			<mvc:mapping path="/draw/**"/>
+			<mvc:mapping path="/fund/**"/>
+			<mvc:mapping path="/securityInfo/**"/>
+			<mvc:mapping path="/trade/**"/>
+			<mvc:mapping path="/uservolume/**"/>
+			<!-- <mvc:mapping path="/day"/> -->
+			<mvc:mapping path="/userfuture/**"/>
+			<mvc:mapping path="/userftse/**"/>
+			<mvc:mapping path="/usercrudeoil/**"/>
+			<mvc:mapping path="/userhsi/**"/>
+			<mvc:mapping path="/userproduct/**"/>
+			<mvc:mapping path="/uhkstock/**"/>
+			<mvc:mapping path="/userhkstock/**"/>
+			<mvc:mapping path="/usertogether/**"/>
+			<mvc:mapping path="/sifactivites/getkxhlPrize"/>
+			<!-- <mvc:mapping path="/future/**"/> -->
+			<!-- 拦截器顺序：preHandle >> postHandle >> afterCompletion -->
+			<bean class="com.tzdr.web.support.SessionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

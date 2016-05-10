@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin:0;padding:0;border:0;}
+body {font-family:'微软雅黑'; background: #fff;}
+ul,li,ol,i,em { font-style: normal; list-style: none;}
+a{text-decoration:none;}
+.free { width: 998px; height:310px; border:1px solid #ebebeb; margin: 20px auto; }
+.free_title { width: 100%; height: 37px; border-bottom: 1px solid #f60; position: relative; background: #fafafa; }
+.free_title i { display: block; width: 11px; height: 50px; background: url(../images/cp/free_icon.gif) no-repeat; position: absolute; left: -11px; top: -1px;}
+.free_title h2 { width: auto;  height: 37px; line-height: 37px; padding-left: 100px; font-size:20px; color: #f60; }
+.free_c_list { width: 898px; height: auto; padding-left: 100px; overflow: hidden; margin: 10px 0;}
+.free_c_list li { display: block; width: 220px; height: 95px; float: left; }
+.free_c_list li.last { width:300px;}
+.free_c_list li h3 { width: 100%; height: 55px; line-height: 55px; text-align: left; font-size: 14px; color: #444; font-weight: normal; }
+.free_c_list li span { display: block; width: 100%; height: 40px; position: relative; font-size: 14px; color: #f60; line-height: 40px; }
+.free_c_list li span input { width: 126px; height: 38px; border:1px solid #ccc; outline: none; border-radius: 4px; font-size: 22px; color: #f60; text-align: center; margin-right: 5px; vertical-align: middle; outline: none; line-height: 38px\9; *line-height: 38px;  }
+.free_c_list li span input.color { font-size: 16px; color: #cccaca; font-weight: normal; }
+.free_c_list li span select { width: 70px; height: 38px; line-height: 38px; border:1px solid #ccc; vertical-align: middle; border-radius: 4px; outline: none; font-size: 14px; color: #a6a6a6; *height:22px; height: 22px\9;}
+.free_c_list li span b { font-size: 16px;top:0;  position: absolute; line-height: 40px; left: 5px; vertical-align: middle; }
+.free_c_list li span i { font-size: 22px; margin-right: 5px; vertical-align: middle; }
+.free_c_list li span em { font-size: 14px; color: #a6a6a6; margin-left: 10px; vertical-align: middle; }
+.free_c_agree { width: 800px; height: 40px; padding:10px 0; margin: 0 auto; border-top: 1px dashed #bfbfbf;  }
+.free_c_agree input { vertical-align: middle;}
+.free_c_agree span { font-size: 14px; color: #444; vertical-align: middle; line-height: 40px; }
+.free_c_agree span a { color: #444;}
+.free_c_agree span a:hover { color: #3d9fe1;}
+.free_c_agree a.btn { display: block; width: 138px; height: 40px; color: #fff; background: #ff6500; text-align: center; line-height: 38px; border-radius: 4px; float: right; }

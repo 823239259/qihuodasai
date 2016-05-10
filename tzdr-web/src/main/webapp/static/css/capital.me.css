@@ -1,0 +1,103 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin:0;padding:0;border:0;}
+body {font-family:'微软雅黑'; background: #fff;}
+ul,li,ol,i,em { font-style: normal; list-style: none;}
+ a{text-decoration:none;}
+
+.capital { width: 100%; height: auto; background: #f4f4f4; padding: 50px 0 65px;}
+.capital_ctn { width: 998px; height: auto; border: 1px solid #e1e1e1; background: #fff; margin: 0 auto; padding: 30px 0 30px;}
+.cp_main { width: 560px; height: auto; float: left;}
+.cp_m_ctn { width: 100%; height: auto;}
+.cp_m_titl { width: 498px; height: 43px; position: relative; border-bottom: 2px solid #ff6500;}
+.cp_m_titl i { display: block; width: 12px; height: 56px; background: url(../images/cp/cpicon_01.gif) no-repeat; left: -12px; top: 0; position: absolute;}
+.cp_m_titl h3.cp_h1 { width: 203px; height: 43px; line-height: 45px; padding-left: 75px; text-align: left; font-size: 16px; color: #fff; font-weight: normal; background: url(../images/cp/cpicon_03.gif) no-repeat 30px center #ff6500; float: left;} 
+.cp_m_titl h3.cp_h2 { width: 203px; height: 43px; line-height: 45px; padding-left: 75px; text-align: left; font-size: 16px; color: #fff; font-weight: normal; background: url(../images/cp/cpicon_04.gif) no-repeat 30px center #ff6500; float: left;} 
+.cp_m_titl h3.cp_h3 { width: 203px; height: 43px; line-height: 45px; padding-left: 75px; text-align: left; font-size: 16px; color: #fff; font-weight: normal; background: url(../images/cp/cpicon_05.gif) no-repeat 30px center #ff6500; float: left;} 
+.cp_m_titl input { width: 133px; height: 42px; line-height: 42px\0; *line-height:42px; border-top: 1px solid #e1e2dd; border-right: 1px solid #e1e2dd; outline: none; background: url(../images/cp/cpicon_02.gif) no-repeat left top #fafafa; padding-left: 85px; font-size: 22px; color: #f60; }
+.cp_m_titl em { font-size: 12px; color: #f60; position: absolute; top: 18px; right: 8px; height: 20px; line-height: 20px; display: block;}
+.cp_m_list { width: 100%; height: auto; overflow: hidden;}
+.cp_m_list h4 { width: 100%; height: 55px; line-height: 55px; margin-bottom: 10px;}
+.cp_m_list h4 i { font-size: 14px; padding-left: 75px; color: #444; font-weight: normal;}
+.cp_m_list ul { width: 430px; height: auto; overflow: hidden; padding-left: 70px; margin-bottom: 40px;}
+.cp_m_list ul li { display: block; float: left; width: 96px; height: 63px; border: 1px solid #e1e1e1; background: url(../images/cp/cpicon_06.gif) no-repeat right bottom; margin-right: 9px;cursor: pointer; }
+.cp_m_list ul li.on { background: url(../images/cp/cpicon_07.gif) no-repeat right bottom ; border: 1px solid #fdbe11;}
+.cp_m_list ul li p { width: 100%; height: 40px; line-height: 40px; text-align: center; font-size: 14px; color: #444;}
+.cp_m_list ul li span { display: block; width: 100%; text-align: center;height: 16px; line-height: 16px; font-size: 14px; color: #ccc;}
+.cp_m_list ul li p i { color: #f60; font-size: 22px;}
+.cp_sider { width: 385px; height: 608px; padding-left: 50px;
+	border-left: 1px solid #ccc; float: left;}
+.cp_sider h2 { width: 100%; height: 35px; line-height: 35px; font-size: 18px; color: #3d9fe1; font-weight: normal;}
+.cp_sdfont { position:relative; width: 100%; height: 65px; line-height: 65px; font-size: 14px; color: #444;}
+.cp_sdfont label { vertical-align: middle; color: #444; display: inline-block; height: 65px; line-height: 65px;}
+.cp_sdfont a { display: inline-block; width: 16px; height: 16px; background: url(../images/cp/cpicon_08.gif) no-repeat; vertical-align: middle; margin-left: 5px;}
+.cp_sdfont span { width:240px; display: inline-block; height: auto; line-height: 24px; vertical-align: middle;}
+.cp_sdfont span i { color: #f60; font-size: 20px;}
+.cp_color { color: #f60;}
+.cp_sdfont em { position:absolute; width:200px; text-align: right;right: 10px;top:25px; display: inline-block; height: 20px; line-height: 20px; font-size: 14px; color: #f00;padding-left: 10px; vertical-align: middle;}
+.cp_sdfont input { vertical-align: middle; background: #fafafa;}
+.cp_bom { width: 100%; height: auto; clear: both; border-top: 1px solid #ccc; padding: 20px 0 0;}
+.cp_bom p { width: 100%; height: 42px; line-height: 42px; text-align: center; font-size: 16px; color: #444;}
+.cp_b_link { width: 100%; height: 40px; line-height: 40px; text-align: center; font-size: 16px; color: #444;}
+.cp_b_link a { color: #3d9fe1;}
+.cp_b_btn { width: 200px; height: 40px; margin: 15px auto;}
+.cp_b_btn a { display: block; width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 16px; color: #fff; background: #f60; border-radius: 6px;}
+.fl_cpstep { width: 1000px; height: auto; position: relative; margin: 0 auto; z-index: 50;}
+.fl_cpstep1 { width: 360px; height: 280px; position: absolute; top: -95px; left: 470px; z-index: 80;}
+.fl_cpstep1 a { display: block; width: 97px; height: 95px; position: absolute; left: 195px; top: 10px;}
+.fl_cpstep2 { width: 490px; height: 180px; position: absolute; top: -30px; left: 267px; z-index: 80; }
+.fl_cpstep2 p { }
+.fl_cpstep2 a { display: block; width: 155px; height: 55px; position: absolute; left: 260px; top: 80px;}
+.fl_cpstep3 { width: 490px; height: 180px; position: absolute; top: 185px; left: 267px; z-index: 80;}
+.fl_cpstep3 a { display: block; width: 155px; height: 55px; position: absolute; left: 260px; top: 80px;}
+.fl_cpstep4 { width: 490px; height: 180px; position: absolute; top: 399px; left: 267px; z-index: 80;}
+.fl_cpstep4 a { display: block; width: 155px; height: 55px; position: absolute; left: 260px; top: 80px;}
+.fl_cpstep5 { width: 490px; height: 220px; position: absolute; top: 628px; left: 480px; z-index: 80;}
+.fl_cpstep5 a { display: block; width: 155px; height: 55px; position: absolute; left: 68px; top: 155px;}
+.fl_cpstep_chs { width: 200px; height: 24px; position: absolute; top: 0px; left: 233px; background: url(../images/cp/step_05bg.png) no-repeat;padding: 32px 31px 34px 19px;}
+.fl_cpstep_chs input { vertical-align: middle; margin-left: 5px}
+.fl_cpstep_chs span { display: inline-block; height: 24px; line-height: 24px; vertical-align: middle; font-size: 14px; color: #444;}
+.fl_cpstep6 { width: 410px; height: 220px; position: absolute; top: 815px; left: 220px; z-index: 80;}
+.fl_cpstep6 a { display: block; width: 210px; height: 50px; position: absolute; left: 170px; top: 25px;}
+.fl_cpstep_ip { background: url(../images/cp/step_ip.png) no-repeat; height: 42px; line-height: 42px; width: 133px; color: #f60; outline: none; padding: 22px 20px 20px 103px; font-size: 22px; font-family: "微软雅黑"; position: absolute; top: 90px; }
+.fl_cpstpe_font { display: block; width: 20px; height: 20px; line-height: 20px; font-size: 12px; color: #f60; position: absolute; top: 130px; left: 210px;}
+
+.fl_mask {
+
+}
+.uc_pay_promt {
+	width: 250px;
+	height: auto;
+	position: absolute;
+	left: 100px;
+}
+
+.uc_pay_promt i {
+	width: 6px;
+	height: 13px;
+	background: url(../images/cp/pay_03.gif) no-repeat;
+	position: absolute;
+	left: -5px;
+}
+.uc_pay_promt p {
+	width: 230px;
+	height: auto;
+	padding: 5px 10px;
+	line-height: 18px;
+	font-size: 12px;
+	color: #db7c22;
+	border: 1px solid #ffbb76;
+	background: #fff;
+}
+.uc_pay_promt1 {
+	top: 20px;
+}
+.uc_pay_promt1 i { top: 10px;}
+.uc_pay_promt2 {
+	top: 0px;	
+}
+.uc_pay_promt2 i { top: 30px;}
+.uc_pay_promt3 {
+	top: 30px;	
+}
+.uc_pay_promt3 i { top: 30px;}

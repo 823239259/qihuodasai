@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;border:0;font-size:0;}
+body{font-family:'Microsoft YaHei'; background: #fff;}
+
+.tp_main { margin: 0; font-size: 0; width: 100%; height: 167px; overflow: hidden; position: relative;}
+.tp_main img { width: 1920px; height: 167px; position: absolute; top: 0; left: 50%; margin-left: -960px;}
+.main { width: 100%; height: auto; margin: 0 auto;}
+.bg { background: #ffb142;}
+.bg2 { background: #eb5652;}
+.mainctn { width: 1000px; height: auto; margin: 0 auto; padding: 20px 0; position: relative; overflow: hidden;}
+.mainctn img { display: block; margin: 0 auto 20px;}
+.tp_btn { display: block; width:295px; height: 155px; position: absolute; left: 20px; top: 90px; text-indent: -999em;background: url(../images/epbg.png) repeat; }
+.tp_btn2 { display: block; width: 509px; height: 316px; float: left; }
+.tp_mainlist { display: block; float: right; width: 380px; height: auto; background: #fff; }
+.tp_mainlist ul { width:100%; height:176px; overflow:hidden;}
+.tp_mainlist div { width:100%; overflow:hidden;  background:#ffe400;}
+.tp_mainlist h2 { width: 100%; height: 58px; line-height: 58px; font-size:18px; color:#fff; background: #ff8342; text-align: center;   }
+.tp_mainlist ul li { position:relative; display: block; width: 100%; height: 44px; line-height: 44px; overflow: hidden; }
+.tp_mainlist ul li span { display: block; float: left; width: 50%; height: 44px; line-height: 44px; text-align: center; font-size: 14px; color: #6f6667; }
+.tp_mainlist div span { color:#f95063;  display: block; float: left; width: 50%; height: 44px; line-height: 44px; text-align: center; font-size: 14px; }
+.tp_mainlist ul li.other { background: #fdf3cd;}
+.tp_foot {  width: 100%; height: 50px; line-height: 50px; background: #3b3b3b; text-align: center; font-size: 14px; color: #b2b2b2; font-family: "微软雅黑";}

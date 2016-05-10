@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;border:0;font-size:0;}
+body{font-family:'Microsoft YaHei'; background: #fff;}
+
+.banner { width: 100%; height: 270px; overflow: hidden; position: relative;}
+.banner img { width: 1920px; height: 270px; position: absolute; left:50%; top: 0; margin-left: -960px;}
+.banner2 { width: 100%; height: 145px; overflow: hidden; position: relative;}
+.banner2 img { width: 1920px; height: 145px; position: absolute; left: 50%; top: 0; margin-left: -960px;}
+.reward { width: 100%; height: 610px; background: #fbc45b; text-align: center;}
+.reward img { margin-top: 50px;}
+.rule { width: 100%; height: auto; background: url(../images/rule_bg.gif) repeat;}
+.rule_ctn { width: 1000px; height: auto; margin: 0 auto; padding: 50px 0 50px;}
+.rule_ctn h2 { width: 1000px; height: 145px; margin: 0 auto; text-align: center;}
+.rule_font { width: 944px; height: auto; padding: 0 28px; background: #f8679c; margin: 50px 0 0; border-radius: 5px;  }
+.rule_font p { width: 100%; height: 70px; line-height: 70px; border-bottom: 2px solid #f981ad; font-size:18px; font-family: "微软雅黑"; color: #fff;  }
+.rule_font p b { font-size: 18px;}
+.rule_font div { width: 100%; height: auto; overflow: hidden; border-bottom: 2px solid #f981ad; padding: 14px 0;}
+.rule_font div b { display: block; float: left; width: auto; height:24px; line-height: 24px; font-size: 18px; color: #fff; }
+.rule_font div span { display: block; float: left; width: 806px; height: 48px; line-height: 24px; font-size: 18px; color: #fff;}    
+.rank { width: 100%; height: 819px; background: url(../images/rank_bg.gif) no-repeat center top;}
+.rank h2 {  width: 100%; height: 123px;  text-align: center; padding: 65px 0 0; }
+.ranklist { width: 1000px; height: auto; overflow: hidden; margin: 0 auto;}
+.rank_one { width: 330px; height: 476px; background: url(../images/rank_bg.png) no-repeat; padding-top: 70px; float: left;}
+.rank_space { margin: 0 5px;}
+.rank_one h3 { width: 140px; height: 32px; line-height: 32px; padding-left:50px; font-size: 24px; font-family: "微软雅黑"; color: #ffa700; margin: 0 auto; background: url(../images/icon.gif) no-repeat; text-align: left;}
+.rank_one ul { width: 290px; height: auto; padding-top: 10px; margin: 0 auto;}
+.rank_one ul ol { display: block; width: 100%; height: 36px; overflow: hidden;}
+.rank_one ul ol.rk_title { height: 40px; line-height: 40px; }
+.rank_one ul ol.rk_title li { font-family: "微软雅黑";}
+.rank_one ul ol li { display: block; height: 36px; line-height: 36px; float: left; text-align: center; font-family: "Arial"; font-size: 18px; color: #fff;}
+.rank_one ul ol .rank_l_rank { width: 70px; }
+.rank_one ul ol .rank_l_user { width: 110px; }
+.rank_one ul ol .rank_l_income { width: 110px; }
+.rank_one ul ol li img { vertical-align: middle;}

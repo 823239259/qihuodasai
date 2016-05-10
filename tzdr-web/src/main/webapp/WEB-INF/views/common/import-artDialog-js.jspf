@@ -1,0 +1,4 @@
+<script src="${ctx}/static/plugins/artDialog/artDialog.js?skin=orange"></script>
+<script src="${ctx}/static/plugins/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/common/artDialogUtil.js"></script>
+	

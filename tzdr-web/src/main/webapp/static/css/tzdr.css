@@ -1,0 +1,49 @@
+.alertTip {
+	position:absolute;
+	left:0;
+	top:0;
+	_height:40px;
+	padding-bottom:4px;
+	z-index:100000;
+}
+.alertTip div {
+	padding:5px 18px 5px 8px;
+	margin-top:5px;
+	color:#df8315;
+	line-height:100%;
+	border:1px solid #eac37e;
+	background:#fef2da;
+}
+
+
+.alertTip_right div {
+	color:#39C;
+	border:1px solid #dc2c74;
+	background:#f4f4f4;
+}
+.alertTip span {
+	position:absolute;
+	left:20px;
+	bottom:0;
+	_bottom:1px;
+	display:block;
+	width:9px;
+	height:5px;
+	background:url(../images/alert_arrow.gif) no-repeat;
+}
+.alertTip_right span {
+	background-position:0 -5px;
+}
+.alertTip a.close {
+	position:absolute;
+	top:14px;
+	right:5px;
+	display:block;
+	width:8px;
+	height:7px;
+	overflow:hidden;
+	background:url(../images/close.gif) no-repeat;
+}
+.alertTip a.close:hover {
+	background-position:0 -7px;
+}

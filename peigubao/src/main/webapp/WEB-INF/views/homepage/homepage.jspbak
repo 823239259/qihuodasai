@@ -1,0 +1,723 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../common/common.jsp"%>
+<%@include file="../common/import-fileupload-js.jspf"%>
+<%@include file="../common/import-artDialog-js.jspf"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="投资达人提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；投资达人致力于打造中国领先的互联网金融交易平台." name="description">
+<title>投资达人-中国领先的互联网金融交易平台 </title>
+<link rel="stylesheet" href="${ctx}/static/css/login.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/tzdr.css">
+
+
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css">
+<link rel="stylesheet" type="text/css" media="screen and (max-height:780px)" href="${ctx}/static/css/common.mini.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/home.css">
+<link rel="stylesheet" type="text/css" media="screen and (max-height:780px)" href="${ctx}/static/css/home.mini.css">
+
+<script type='text/javascript' src="http://hq.sinajs.cn/list=sz399006"></script>
+<script type='text/javascript' src="http://hq.sinajs.cn/list=sz399001"></script>
+<script type='text/javascript' src="http://hq.sinajs.cn/list=sh000001"></script>
+<script type='text/javascript' src="http://hq.sinajs.cn/list=sz399005"></script>
+<script type='text/javascript' src="${ctx}/static/script/tzdr.js"></script>
+<script type='text/javascript' src="${ctx}/static/script/common/slider3.1.js"></script>
+<script type='text/javascript' src="${ctx}/static/script/homepage/homepage.js?version=20150705"></script>
+<script type='text/javascript' src="${ctx}/static/script/homepage/mini.js?version=20150528001"></script>
+<script type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA2MTY0MV8yMTQyNjFfNDAwMDIwMDE1OF8"></script>
+
+<style type="text/css">
+.ddw_list{ position:absolute; top:-90px; width:100%; height:55px; left:0px; padding:10px 0px;}
+
+</style>
+<!--[if IE 7]>
+<script type="text/javascript" src="${ctx}/static/script/homepage/js/mini.js"></script>
+ <! <![endif]--> 
+
+<!--[if IE 8]>
+<script type="text/javascript" src="${ctx}/static/script/homepage/js/mini.js"></script>
+ <! <![endif]--> 
+
+
+</head>
+<body>
+<!-- 顶部 -->
+<%@ include file="../common/homeheader.jsp"%>
+
+<!--  
+<div class="notic" id="advert">
+	    <p>公告：亲爱的达粉，投资达人网站升级啦！您可以一如既往的正常使用所有功能，但是老客户的提现密码需要进行重置，如有不便敬请谅解。</p>
+	    <a href="javascript:void(0);"></a>
+   
+</div>
+-->
+ <!-- 
+  <div class="floatlayer">
+  	<c:choose>
+  		<c:when test="${showtitle=='show'}">
+	  		 <div class="fl_8800" id="smallactimg" style="display:none">
+			 	<a href="javascript:showact();">
+			 		<img src="${ctx }/static/activies/images/fix_8800.png">
+			 	</a>
+			 </div>
+		 	 <div class="fl_mask"></div>
+		 	 <div class="fl_homead" id="activitiesimg">
+		       	 <img src="${ctx}/static/activies/images/8800ad.png">
+		        <a href="javascript:hideact()" class="fl_adclose" title="关闭"></a>       
+		        <a href="${ctx}/activities" class="fl_adjoin" title="8800" ></a>
+		    </div>
+  		</c:when>
+  		<c:otherwise>
+  		  <div class="fl_8800" id="smallactimg" >
+  		  
+		 	<a href="javascript:showact();">
+		 		<img src="${ctx }/static/activies/images/fix_8800.png" >
+		 	</a>
+		 </div>
+		  <div class="fl_mask" style="display:none"></div>
+	 	 <div class="fl_homead" id="activitiesimg" style="display:none">
+	       	 <img src="${ctx}/static/activies/images/8800ad.png">
+	        <a href="javascript:hideact()" class="fl_adclose" title="关闭"></a>       
+	        <a href="${ctx}/activities" class="fl_adjoin" title="8800" ></a>
+	    </div>
+  		</c:otherwise>
+  	</c:choose>
+	
+ </div>
+  -->
+<!-- 广告,登录块 -->
+<div class="login" id="logindivbg"  >        
+    <div class="loginbox" >
+    			<c:choose>
+    				<c:when test="${banners[0].linkUrl!=null}">
+    					<a href="${banners[0].linkUrl}"  class="login_bannerlink" id="login_bannerlink"></a>
+    					
+    				</c:when>
+    				<c:otherwise>
+    					<a href="#" class="login_bannerlink" ></a>
+    				</c:otherwise>
+    			</c:choose>
+    			
+    			<div class="lgctn" id="lgdiv" style="display:none">
+		            <div class="lg_user">您好，<i id="homepagemobile">${mobile}</i>  <a href="${ctx}/logout">【安全退出】</a></div>
+		            <ul class="lg_info">
+		                <li>
+		                    <label>账户余额：</label>
+		                    <span>
+		                    	
+		                    </span>
+		                </li>
+		                <li>
+		                    <label>融资金额：</label>
+		                    <span>
+		                   
+		                    </span>
+		                </li>
+		            </ul>
+		            <div class="lg_userlv"><label id="userlevel"></label></div>
+		            <div class="lg_userlv"><label id="userVolmeNum"></label></div>
+		            <div class="lg_btn"><a href="${ctx}/user/account">进入我的账户</a></div>
+		            <p class="lg_time">上次登录时间：<i>${lastLoginTime }</i></p>
+
+        </div>
+    		
+		    		<div class="lgctn" id="loginctn">
+		        	<form id="loginForm" name="loginForm" action="" method="post">
+		            <h3>手机号登录</h3>
+		            <div class="lg_ip">
+		                <div class="lg_ipctn">
+		                    <i class="user"></i>
+		                    <input type="text" name="userName" id="userName" value="请输入您的手机号" />
+		                </div>
+		                <div class="lg_ipctn">
+		                    <i class="password"></i>
+		                    <input type="password" name="password" id="password" value="" />
+		               		<i id='pwd-txt' name="pwd-txt" style="position: absolute;width:130px;left: 32px;_top: 0;color: #999;font-size: 14px;display: block" ><!--  请输入您的密码--></i>
+		                </div>
+		                <c:choose>
+		                	<c:when test="${isNeedCode}">
+		                		<div class="lg_ipcode codeLi" style="display:block">
+				                    <input type="text" id="code" name="code" value="输入验证码"/>
+				                    <img src="validate.code"/>
+				                </div>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<div class="lg_ipcode" id="codeLi" name="codeLi" style="display:none">
+				                    <input type="text" id="code" name="code" value="输入验证码"/>
+				                    <img id="validateCode" name="validateCode" src="validate.code"/>
+				                </div>
+		                	</c:otherwise>
+		                </c:choose>
+		                <div class="lg_btn" style="margin-top:15px;"><button id="login" name="login" type="button">立即登录</button></div>
+		            </div>
+		            <div class="lg_link">
+		                <a href="${ctx}/forgetpw" class="on">忘记密码?</a>
+		                <i></i>
+		                <a href="${ctx}/signin">免费注册</a>
+		            </div>
+		            </form>
+		        </div>
+    	
+        <!-- 广告切换 -->
+        <!--  
+        <div class="ad_slider">
+        	<c:forEach  items="${banners}" var="banner" varStatus="status">
+	            <a href="javascript:void(0)" title="${banner.name}"></a>
+	            
+	       </c:forEach>
+        </div>
+        -->
+         <!--<div id="outerdiv">
+            <div class="bannerbox" id="bigbannerbox">
+            	<c:forEach  items="${banners}" var="banner" varStatus="status">
+            	     <a href="${banner.linkUrl}" target="_blank">
+            			<div class="banner" title="${banner.name}" divIndex="${status.index+1}"  background="${ctx}/getRemoteContent?contentUrl=${banner.content}" style="background-image: url(${ctx}/getRemoteContent?contentUrl=${banner.imgPath});;"></div>
+            		</a>
+            	</c:forEach>
+            </div>  
+            
+             <div class="bannerbox" id="smallbannerbox">
+            	<c:forEach  items="${smallbanner}" var="banner" varStatus="status">
+            	     <a href="${banner.linkUrl}" target="_blank">
+            			<div class="banner" title="${banner.name}"  divIndex="${status.index+1}"  background="${ctx}/static/images/home/banner1.jpg"  style="background-image: url(${ctx}/static/images/home/banner1.jpg);"></div>
+            		</a>
+            	</c:forEach>
+            </div>    
+        </div>-->
+    </div>
+   <div class="bannerlist">
+	  <div class="bannerbox" id='bannersm'>
+		  	<c:forEach  items="${smallbanner}" var="banner" varStatus="status">
+	            	     <a href="${banner.linkUrl}"   style="display:none;">
+	            	        <img src="${ctx}/getRemoteContent?contentUrl=${banner.imgPath}" />
+	            		</a>
+	        </c:forEach>
+	  </div>
+	  <!--
+	  <div class="bannerbox" id="bannerbig" style="display:none;">
+            	<c:forEach  items="${banners}" var="banner" varStatus="status">
+            	     <a href="${banner.linkUrl}" style="display:none;">
+            			 <img src="${ctx}/getRemoteContent?contentUrl=${banner.imgPath}" title="${banner.name}"  alt="${banner.name}">
+	            	</a>
+            	</c:forEach>
+       </div>  
+         -->
+	  <div class="ad_slider">
+	  </div>
+	</div>
+</div>
+
+
+<!-- 安全保证 -->
+<div class="h_safe"><!-- 
+    <h2><img src="images/home/title.gif"></h2> -->
+    <ul class="h_safelist">
+        <li>
+            <i class="h_safe1"></i>
+            <h3>资金安全</h3>
+            <p>资金托管招行<br>封闭管理专款专用</p>
+        </li>
+        <li class="h_sf_space h_sf_minic">
+            <i class="h_safe2"></i>
+            <h3>交易安全</h3>
+            <p>券商监管与恒生合作<br>保障您的交易安全</p>
+        </li>
+        <li class="h_sf_space">
+            <i class="h_safe3"></i>
+            <h3>专业风控</h3>
+            <p>多级风控监管体系<br>降低投资风险</p>
+        </li>
+        <li class="last">
+            <i class="h_safe4"></i>
+            <h3>全新模式</h3>
+            <p>随借随还按天收费<br>叠加融资轻松抄底</p>
+        </li>
+    </ul>
+</div>
+
+<!-- 随心配 -->
+<div class="home_trade">
+    <div class="home_tradectn">
+        <div class="home_td">
+            <div class="home_td_title">
+                <a href="${ctx}/day?enter=0" target="_self"></a>
+            </div>
+            <div class="td_money"><img src="${ctx}/static/images/home/td_font.png"></div>
+            <div class="td_btn">
+                <div class="td_btn_icon"><img src="${ctx}/static/images/home/td_icon.gif"></div>
+                <div class="td_pm">
+                    <ul>
+                        <li>融资金额<br>10万</li>
+                        <li>融资倍数<br>5倍</li>
+                        <li>融资天数<br>8天</li>
+                    </ul>
+                    <a href="${ctx}/day?lever=5&capitalMargin=20000&borrowPeriod=8&tradeStart=1">确定方案</a>
+                </div>
+                <div class="td_pmone td_pmye">
+                    <h3>投资本金</h3>
+                    <p>1-5万</p>
+                    <a href="${ctx}/day?enter=1" target="_self">我要申请 ></a>
+                </div>
+                <div class="td_pmone td_pmbl">
+                    <h3>投资本金</h3>
+                    <p>5-30万</p>
+                    <a href="${ctx}/day?enter=2" target="_self">我要申请 ></a>
+                </div>
+                <div class="td_pmone td_pmrd">
+                    <h3>投资本金</h3>
+                    <p>30万以上</p>
+                    <a href="${ctx}/day?enter=3" target="_self">我要申请 ></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- 定制配 -->
+<form method="POST" id="bespokeTradeForm" name="bespokeTradeForm" action="${ctx}/toBespokeTrade">
+<input type="hidden" id="tradeConfigId" name="tradeConfigId"/>
+<input type="hidden" id="tradeStart" name="tradeStart"/>
+<input type="hidden" id="lever" name="lever"/>
+<input type="hidden" id="capitalMargin" name="capitalMargin"/>
+<input type="hidden" id="borrowPeriod" name="borrowPeriod"/>
+<input type="hidden" id="interest" name="interest"/>
+<input type="hidden" id="expenese" name="expenese"/>
+<div class="home_cpital" style="display:none;">
+    <div class="h_cptdicon"><a href="javascript:void(0)">免息配</a></div>
+    <div class="h_cptlist">
+    <c:forEach items="${trades}" var="trade">
+    <input type="hidden" id="interest${trade.id}" value="${trade.interest}"/>
+    <input type="hidden" id="expenese${trade.id}" value="${trade.expenese}"/>
+      <input type="hidden" id="min_lever${trade.id}" />
+   <input type="hidden" id="max_lever${trade.id}" />
+    
+        <div class="h_cpone">
+            <h3>${trade.name}</h3>
+            <ul>
+                <li><label>配资保证金</label>
+                <c:choose>
+                <c:when test="${ empty  trade.minmoneystr}">
+                 <input type="text" class="inputno" id="money${trade.id}" onfocus="moneyValueFocus(this,'<fmt:formatNumber value="${trade.minBond}" pattern="#" />','<fmt:formatNumber value="${trade.maxBond}" pattern="#" />');" onblur="resetmoeny(this,${trade.minBond},${trade.maxBond},'${trade.id}','','')"
+                 minmoney="${trade.minBond}"  maxmoney="${trade.maxBond}"  idstr="${trade.id}"  minMultiple="${trade.minMultiple}"  maxMultiple="${trade.maxMultiple}"  minDuration="${trade.minDuration}"  maxDuration="${trade.maxDuration}"  interest="${trade.interest}"  expenese="${trade.expenese}"  value="<fmt:formatNumber value="${trade.minBond}" pattern="#" />—<fmt:formatNumber value="${trade.maxBond}" pattern="#" />">
+                
+                </c:when>
+                <c:otherwise>
+                 <input type="text" class="inputno" id="money${trade.id}" onfocus="moneyValueFocus(this,'<fmt:formatNumber value="${trade.minBond}" pattern="#" />','<fmt:formatNumber value="${trade.maxBond}" pattern="#" />');" onblur="resetmoeny(this,${trade.minBond},${trade.maxBond},'${trade.id}','${trade.minmoneystr}','${trade.maxmoneystr}')"
+                 minmoney="${trade.minBond}"  maxmoney="${trade.maxBond}"  idstr="${trade.id}"  minMultiple="${trade.minMultiple}"  maxMultiple="${trade.maxMultiple}"  minDuration="${trade.minDuration}"  maxDuration="${trade.maxDuration}"  interest="${trade.interest}"  expenese="${trade.expenese}"  value="${trade.minmoneystr}—${trade.maxmoneystr}">
+                 </c:otherwise>
+                </c:choose>
+               
+                </li>
+                <li><label>配资杠杆</label><c:choose><c:when test="${trade.minMultiple==trade.maxMultiple}"><span><i>${trade.maxMultiple}倍</i></span></c:when><c:otherwise><input type="text" value="请选择" class="h_cpmip" id="pzmultiple${trade.id}" readonly="readonly"/><a href="javascript:void(0);" class="h_cpt_multiple multidiv" iddata="${trade.id}" ></a></c:otherwise></c:choose></li>
+                <li><label>配资天数</label><c:choose><c:when test="${trade.minDuration==trade.maxDuration}">><span><i>${trade.minDuration}天</i></span></c:when><c:otherwise><input type="text" value="请选择" class="h_cpdaysip" id="daymultiple${trade.id}" readonly="readonly"/><a href="javascript:void(0);" class="h_cpt_days pzday"  iddata="${trade.id}" ></a></c:otherwise></c:choose></li>
+                <li><label>操盘金</label><span><i id="zcpj${trade.id}"></i>元</span></li>
+                <li><label>最短保留时长</label><span>${trade.shortestDuration}个交易日</span></li>
+                <li><label>配资利息</label><span><em id="lx${trade.id}">
+                <c:if test="${trade.interest==0}">
+                 	 免费
+                </c:if>
+                </em></span></li>
+                <li><label>配资管理费</label><span>
+                <em id="pzglf${trade.id}">
+                <c:if test="${trade.expenese==0}">
+                 	 免费
+                </c:if>
+                </em></span></li>
+            </ul>
+            <div class="h_cpbtn"><a href="javascript:void(0)" onclick="javascript:toBespokeTrade('${trade.id}',${trade.minBond},${trade.maxBond},${trade.minMultiple},${trade.maxMultiple},${trade.minDuration},${trade.maxDuration})">我要参与</a></div>
+             <div class="h_cptchose h_cptmns" id="multiplediv${trade.id}" style="display:none;">
+             	<c:forEach var="multiple"  begin="${trade.minMultiple}" end="${trade.maxMultiple}">
+					<a href="javascript:void(0);" onclick="javascript:getmultiple(this,'${trade.id}',${multiple});setChangeMoney(this,${trade.minBond},${trade.maxBond},'${trade.id}',${trade.minMultiple},${trade.maxMultiple},${trade.minDuration},${trade.maxDuration},'${trade.interest}','${trade.expenese}','1')" data="${multiple}">${multiple}倍</a>
+				</c:forEach>
+            </div>
+            <div class="h_cptchose h_cptdays" id="pzdaydiv${trade.id}" style="display:none;">
+                <c:forEach var="days"  begin="${trade.minDuration}" end="${trade.maxDuration}">
+					<a href="javascript:void(0);"  onclick="javascript:getDayData(this,'${trade.id}',${days});setChangeMoney(this,${trade.minBond},${trade.maxBond},'${trade.id}',${trade.minMultiple},${trade.maxMultiple},${trade.minDuration},${trade.maxDuration},'${trade.interest}','${trade.expenese}','2')" data="${days}">${days}天</a>
+				</c:forEach>
+            </div>
+        </div>
+      </c:forEach>
+    </div>
+</div>
+</form>
+<div class="home_ctn">
+    <!-- 用户动态 -->
+    <div class="h_usernum" style="display:none;" >
+        <div class="h_untitle">
+            <h3>用户动态</h3>
+            <div class="h_unnum">
+                <span>当前在线人数</span>
+                <i class="h_unnum_mr">${activeUserCount }人</i>
+                <span>已有</span>
+                <i>${usercountstr }位</i>
+                <span>投资人累计配资</span>
+                <i>${moneystr }元</i>
+            </div>
+        </div>
+       <div class="h_unlist" id="FontScroll" style="position: relative;" >   
+        </div>
+    </div>
+    <!--  -->
+    <div class="h_box">
+        <!-- 最新动态 -->
+        <div class="h_news">
+            <div class="h_nwestitle">
+                <i>最新动态</i>
+                
+                <a href="${ctx}/news/newsdata">更多动态</a>
+            </div>
+            <ul class="h_newslist">
+            <c:forEach  items="${newsdata}" var="news" varStatus="status">
+            	<li><a href="${ctx}/news/shownews/${news.id}"  style="text-decoration:none;"  >${news.name }</a><span>${fn:substring(news.defineReleaseTime, 0, 10)}</span></li>
+            </c:forEach>
+            </ul>   
+        </div>
+        <!-- 上证指数 -->
+        <div class="h_uplistctn">
+            <div class="h_uptitle">
+                <i><a href="javascript:void(0);" onclick="openMarketCenter();">上证指数</a></i>
+                
+            </div>
+            <ul class="h_upmain">
+                <li class="h_upm_num"><p><a href="javascript:void(0);" onclick="refreshIndexData();" ><i id="szzs" ></i></a></p>
+                </li>
+                 <li class="h_upm_list">
+                    <p><span id="szprice"></span><i id="increaseszzs"></i></p> 
+                </li>
+                
+                <!--  
+                <li class="h_upm_list">
+                    <p><span>券商</span><i>+3.15%</i></p>
+                    <p><span>券商</span><i>+3.15%</i></p>
+                    <p><span>券商</span><i>+3.15%</i></p>
+                    <p><span>券商</span><i>+3.15%</i></p>
+                </li>
+                -->
+            </ul>
+            <table width="318" border="0" cellspacing="0" cellpadding="0" class="h_up_talbe">
+               <tr>
+                <td width="65" class="color">深圳成指</td>
+                <td width="240"><i id="szczdata"></i><i id="szczprice"></i><i id="increaseszcz"></i></td>
+              </tr>
+               <tr>
+                <td width="65" class="color">上证指数</td>
+                <td width="240"><i id="szzs1"></i><i id="szprice1"></i><i id="increaseszzs1"></i></td>
+              </tr>
+              <tr>
+                <td width="65" class="color">创业板</td>
+                <td width="240"><i id="cybdata"></i><i id="cybprice"></i><i id="increasecyb"></i></td>
+              </tr>
+               <tr>
+                <td width="65" class="color">中小板</td>
+                <td width="240"><i id="zxbdata"></i><i id="zxbprice"></i><i id="increasezxb"></i></td>
+              </tr>
+            
+             
+            </table>
+        </div>
+    </div>
+    
+    <div class="h_box">
+        <div class="h_cpmember">
+            <h3>行业标杆</h3>
+            <a href="${ctx}/company">
+            <img src="${ctx}/static/images/home/member.jpg">
+            </a>
+        </div>
+        <div class="h_cpline">
+        </div>
+        <div class="h_cpbank">
+            <h3>资金托管银行</h3>
+            <img src="${ctx}/static/images/home/bank.jpg">
+        </div>
+        <div class="h_cpline h_cpspace">
+        </div>
+        <div class="h_cpsafe">
+            <h3>协议保全</h3>
+            <a href="${ctx}/help?tab=safety&leftMenu=7" ><img src="${ctx}/static/images/home/safe.jpg"></a>
+
+        </div>
+        <!-- 合作伙伴 -->
+        <div class="h_cplist">
+            <h3>合作伙伴</h3>
+            <div class="h_cpl_list">
+                    <c:forEach  items="${partners}" var="partner" varStatus="status">
+               	    <a href="${partner.linkUrl}" title="${partner.name}" target="_blank">
+           	         <img src="${ctx}/getRemoteContent?contentUrl=${partner.imgPath}" >
+               		</a>
+               </c:forEach>
+
+            </div>
+        </div>
+    </div>
+    
+   
+
+</div>
+<%@ include file="../common/homefooter.jsp"%>
+<%@ include file="../common/dsp.jsp"%>
+</body>
+<script type="text/javascript">
+   $(function () {
+         num = $(".bannerlist .bannerbox a").size();
+        
+         i = 0;
+         for (i = 0; i < num; i++) {
+             $(".ad_slider").append("<a href='javascript:void(0);'></a>");
+         }
+         theInt = null;
+         $(".bannerlist .bannerbox a").eq(0).fadeIn(500);
+         $(".ad_slider a").eq(0).addClass("on");
+         $(".ad_slider a").each(function (i) {
+             $(this).click(function () {
+                 HuanDeng(i);
+                 Change(i);
+             });
+         });
+         HuanDeng = function (p) {
+             clearInterval(theInt);
+             theInt = setInterval(function () {
+                 p++;
+                 if (p < num) {
+                     Change(p);
+                 } else {
+                     p = 0
+                     Change(p);
+                 }
+             }, 10000);
+         }
+         HuanDeng(0);
+         function Change(num) {
+             $(".bannerlist .bannerbox a").fadeOut(500);
+             $(".bannerlist .bannerbox a").eq(num).fadeIn(500);
+             $(".ad_slider a").removeClass("on");
+             var link=$(".bannerlist .bannerbox a").eq(num).attr("href");
+             var title=$(".bannerlist .bannerbox a").eq(num).attr("title");
+             
+             //$(".ad_slider a").eq(num).attr("href",link);
+            $('#login_bannerlink').attr("href",link);
+           //$('#login_bannerlink').attr("title",title);
+             $(".ad_slider a").eq(num).addClass("on");
+         }
+         
+     });
+</script>
+
+<script type="text/javascript">
+var browser={     
+		versions:function(){             
+			var u = navigator.userAgent, 
+			 app = navigator.appVersion;             
+			return {                 
+				trident: u.indexOf('Trident') > -1, //IE内核                 
+				presto: u.indexOf('Presto') > -1, //opera内核                 
+				webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核                 
+				gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核                 
+				mobile: !!u.match(/AppleWebKit.*Mobile.*/)||!!u.match(/AppleWebKit/), //是否为移动终端                 
+				ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端                 
+				android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器                 
+				iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器                 
+				iPad: u.indexOf('iPad') > -1, //是否iPad                 
+				webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部             
+			}; 
+		}() 
+	}  
+</script>
+<script type="text/javascript">
+var ismobie=false;
+if(browser.versions.iPhone||browser.versions.android){
+	ismobie=true;
+}
+
+if(browser.versions.webApp && (browser.versions.mobile)){
+	ismobie=true;
+}
+
+$(document).ready(function() {
+	
+    $('.h_newslist li').hover(function() {
+        $('.h_newslist li').removeClass('on');
+        $(this).addClass('on');
+    });
+    
+    $(".h_newslist li").mouseout(function(){
+    	 $('.h_newslist li').removeClass('on');
+    });
+    //showbanner();
+});
+
+
+var height=$(window).height();
+
+
+
+
+
+function showbanner(){
+	if(!ismobie){
+		  if(height<=780){
+			  $('#logindivbg').css('background-image','url(${ctx}/getRemoteContent?contentUrl=${smallbanner[0].imgPath})');
+		      
+			  $("#bigslider").remove();
+		  }else{
+			 $('#logindivbg').css('background-image','url(${ctx}/getRemoteContent?contentUrl=${banners[0].imgPath})');
+			 $("#smallslider").remove();
+		  }
+	}else{
+		 $('#logindivbg').css('background-image','url(${ctx}/getRemoteContent?contentUrl=${banners[0].imgPath})');
+		 $("#smallslider").remove();
+	}
+	
+}
+
+</script>
+<script type="text/javascript">
+	function SZ(n){
+		var hq_str=eval("hq_str_"+n); 
+		var elements=hq_str.split(",");
+		var data1=(elements[3]*1).toFixed(2); 
+		var data2=(elements[3]-elements[2]).toFixed(2);
+		var data3=(elements[3]-elements[2])*100/(elements[2]*1);
+		return processDataArray(data1,data2,data3);
+	}
+	
+	function processDataArray(data1,data2,data3){ 
+		 data3=isNaN(data3*1)?"--":(data3*1).toFixed(2);
+		 return[data1,data2,data3];
+    }
+    function displayszData(result){
+    	if(parseFloat(result[2])>0){
+    		$("#szzs").addClass("fontred").html(result[0]+"↑");
+    		$("#szprice").addClass("fontred").html(result[1]);
+        	$("#increaseszzs").addClass("fontred").html(result[2]+"%");
+        	$("#szzs1").html(result[0]);
+        	$("#szprice1").html("+"+result[1]);
+        	$("#increaseszzs1").html("+"+result[2]+"%");
+    	}else{
+    		$("#szzs").addClass("fontgreed").html(result[0]+"↓");
+    		$("#szprice").addClass("fontgreed").html(result[1]);
+        	$("#increaseszzs").addClass("fontgreed").html(result[2]+"%");
+        	$("#szzs1").html(result[0]);
+        	$("#szprice1").html(result[1]);
+        	$("#increaseszzs1").html(result[2]+"%");
+    	}
+    	
+    	
+	} 
+    function displaycybData(result){
+    	$("#cybdata").html(result[0]);
+    	$("#cybprice").html(parseFloat(result[1])>0?"+"+result[1]:result[1]);
+    	$("#increasecyb").html(parseFloat(result[2])>0?"+"+result[2]+"%":result[2]+"%");
+	} 
+    function displayszczData(result){
+    	$("#szczdata").html(result[0]);
+    	$("#szczprice").html(parseFloat(result[1])>0?"+"+result[1]:result[1]);
+    	$("#increaseszcz").html(parseFloat(result[2])>0?"+"+result[2]+"%":result[2]+"%");
+	} 
+    function displayzxbData(result){
+    	$("#zxbdata").html(result[0]);
+    	$("#zxbprice").html(parseFloat(result[1])>0?"+"+result[1]:result[1]);
+    	$("#increasezxb").html(parseFloat(result[2])>0?"+"+result[2]+"%":result[2]+"%");
+	} 
+
+    function openMarketCenter(){
+    	
+    	//刷新上证指数数据
+    	refreshIndexData();
+    	
+    	//访问行情中心
+		window.open('http://www.10jqka.com.cn/flash/');
+    }
+    
+    function refreshSZ(win,n){
+		var hq_str=win["hq_str_"+n]; 
+		var elements=hq_str.split(",");
+		var data1=(elements[3]*1).toFixed(2); 
+		var data2=(elements[3]-elements[2]).toFixed(2);
+		var data3=(elements[3]-elements[2])*100/(elements[2]*1);
+		return processDataArray(data1,data2,data3);
+	}
+    
+    //刷新上证指数数据
+    function refreshIndexData(){
+    	
+	    $.ajax({ 
+	        url: "http://hq.sinajs.cn/list=sh000001,sz399001,sz399006,sz399005,sh601006" ,  
+	        cache: true,
+	        dataType: 'script', 
+	        scriptCharset: 'utf-8', 
+	        success: function () { 
+	        	//上证指数
+	    		displayszData(refreshSZ(window,"sh000001"));
+	    		//深圳成指 
+ 	    		displayszczData(refreshSZ(window,"sz399001"));
+ 	    		//创业板块
+ 	    		displaycybData(refreshSZ(window,"sz399006"));
+ 	    		//中小板
+ 	    		displayzxbData(refreshSZ(window,"sz399005"));
+	        } 
+	    });
+    }
+		//创业板块
+		displaycybData(SZ("sz399006"));
+		//上证指数
+		displayszData(SZ("sh000001"));
+		//深圳成指 
+		displayszczData(SZ("sz399001"));
+		//中小板
+		displayzxbData(SZ("sz399005"));
+		
+		$(document).ready(function() {
+			var prefix=getVendorPrefix();
+			if(prefix!="webkit"){
+				 if(height<=780){
+					  $('.h_safelist li i').each(function() {
+					        $(this).hover(function() {
+					            $(this).animate({
+					                backgroundPositionX: '0',
+					                backgroundPositionY: '0'},
+					                200, function() {
+					                 $(this).css("background-position", "0 0");
+					            });
+					        }, function() {
+					           $(this).animate({
+					                backgroundPositionX: '0',
+					                backgroundPositionY: '-75px'},
+					                200, function() {
+					                 $(this).css("background-position", "0 -75px");
+					            });
+					        });
+					    });
+				  }else{
+					     $('.h_safelist li i').each(function() {
+					        $(this).hover(function() {
+					            $(this).animate({
+					                backgroundPositionX: '0',
+					                backgroundPositionY: '0'},
+					                200, function() {
+					                 $(this).css("background-position", "0 0");
+					            });
+					        }, function() {
+					           $(this).animate({
+					                backgroundPositionX: '0',
+					                backgroundPositionY: '-124px'},
+					                200, function() {
+					                 $(this).css("background-position", "0 -124px");
+					            });
+					        });
+					    });
+					    
+				  }
+			}
+			 
+		}); 
+
+</script>
+
+<script type="text/javascript" src="http://links.webscan.360.cn/index/index/0d18c9d17eecdc1debceaeabb359922e"></script>
+
+</html>
+
+

@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;border:0;}
+body{font-family:'微软雅黑'; background: #fff;}
+
+.tp_main1{ margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:137px;}
+.tp_main1 img { width: 1920px; height: 137px; position: absolute; top: 0; left: 50%; margin-left: -960px;}
+.tp_main2{ margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:8px;}
+.tp_main2_in { width: 1920px; height: 8px; position: absolute; top: 0; left: 50%; margin-left: -960px;background:url(../images/newyearspree/bg_sanjiao1.jpg)}
+.tp_main3{ margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:664px;}
+.tp_main3_in { width: 1920px; height: 664px; position: absolute; top: 0; left: 50%; margin-left: -960px;background:#fcd12a}
+.tp_main3_in_ctn{width:900px;height:664px;margin-left:500px}
+.tp_main3_in_ctn .step1{margin:42px 193px}
+.tp_main3_in_ctn p{font-size:18px;color:#ee5d42;text-align:center;margin-bottom:24px;margin-left:20px}
+.tp_main3_in_ctn p span{color:#ffffff;text-decoration:underline;font-weight:bold}
+.tp_main3_in_ctn p a { color:#fff; text-decoration: none;}
+.tp_main3_in_ctn p a:hover { text-decoration: underline;}
+.tp_main3_in_ctn .content1{width:350px;height:400px;margin:3px 306px}
+.tp_main3_in_ctn .content1 a{display:block;margin:20px 50px}
+.tp_main3_in_ctn .content2{width:600px;height:350px;margin:0px 175px}
+.tp_main3_in_ctn .content2 .content2_top{width:560px;height:36px;background:#e64b2f;border-top-left-radius:6px;border-top-right-radius:6px}
+.tp_main3_in_ctn .content2 .content2_top h3{color:#ffe6a1;font-size:20px;font-weight:normal;text-align:center;line-height:36px}
+.tp_main3_in_ctn .content2 .content2_bottom{width:560px;height:271px;background:#ffffff;border-bottom-left-radius:6px;border-bottom-right-radius:6px;padding-top:10px}
+.tp_main3_in_ctn .content2 .content2_bottom table{border-left:1px solid #d9d9d9;border-top:1px solid #d9d9d9;color:#9e6c62;font-size:14px;text-align:center;margin:0px 10px}
+.tp_main3_in_ctn .content2 .content2_bottom table td{border-right:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;}
+.tp_main3_in_ctn .content2 .content2_bottom .first_tr{font-size:16px}
+.tp_main3_in_ctn .content2 .content2_bottom .name{width:164px;height:28px}
+.tp_main3_in_ctn .content2 .content2_bottom .price{width:94px;height:28px}
+.tp_main3_in_ctn .content2 .content2_bottom .condition{width:161px;height:28px}
+.tp_main3_in_ctn .content2 .content2_bottom .status{width:116px;height:28px}
+.tp_main3_in_ctn .content2 .content2_bottom .status a{color:#ff0000;text-decoration:none}
+.tp_main3_in_ctn .content2 .content2_bottom .status a:hover{text-decoration:underline}
+.tp_main4{ margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:5px;}
+.tp_main4_in { width: 1920px; height:5px; position: absolute; top: 0; left: 50%; margin-left: -960px;background:url(../images/newyearspree/bg_sanjiao2.jpg)}
+.tp_main5{ margin: 0; font-size: 0; width: 100%; overflow: hidden; position: relative;height:421px;}
+.tp_main5_in { width: 1920px; height:421px; position: absolute; top: 0; left: 50%; margin-left: -960px;background:#ff6767}
+.tp_main5_in_ctn{width:950px;height:421px;margin-left:500px}
+.tp_main5_in_ctn .step2{margin:53px 193px}
+.tp_main5_in_ctn p{color:#ffffff;font-size:18px;padding-left:27px;margin-bottom:24px;margin-left:17px}
+.tp_main5_in_ctn .p1{background:url(../images/newyearspree/l_01.jpg) no-repeat 0px 3px;margin-top:-11px}
+.tp_main5_in_ctn .p2{background:url(../images/newyearspree/l_02.jpg) no-repeat 0px 3px}
+.tp_main5_in_ctn .p3{background:url(../images/newyearspree/l_03.jpg) no-repeat 0px 3px}
+.tp_main5_in_ctn .p4{background:url(../images/newyearspree/l_04.jpg) no-repeat 0px 3px}
+.tp_main5_in_ctn .p5{background:url(../images/newyearspree/l_05.jpg) no-repeat 0px 3px}
+
+
+.tp_foot {  width: 100%; height: 50px; line-height: 50px; background: #3b3b3b; text-align: center; font-size: 14px; color: #b2b2b2;}

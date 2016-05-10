@@ -1,0 +1,201 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,p,a,span,font,input {margin:0px; padding:0px; border:0px;}
+li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
+
+body {background:#f1f1f1;}
+
+
+header {background:url(../images/agu/head_top.gif) repeat-x; font-family:"微软雅黑"; width:100%;}
+header .top {height:37px; width:1080px; overflow:hidden; clear:both; font-size:14px; margin:0px auto;}
+header .salogan {float:left; color:#808080; line-height:36px;}
+header .top p {float:right;color:#808080; line-height:36px;}
+header .top p a {color:#808080; padding:0px 16px;}
+header .top p a:link,header .top p a:visited { text-decoration:none;}
+header .top p a:hover,header .top p a:active { text-decoration:underline;}
+header .top p span {background:url(../images/agu/phone.png) no-repeat -2px -4px ; line-height:18px; padding-left:22px; margin-left:11px; display:inline-block;}
+header .top p font {color:#f60;}
+header .main { margin:0px auto; height:84px; width:1080px;}
+header .main .logo {float:left;width:185px; height:62px; margin-top:15px;margin-left:-10px}
+header .main .logo a {background:url(../images/agu/logo.png) no-repeat; display:block; width:152px; height:52px;}
+header .main nav {float:right; overflow:hidden; margin-top:22px;}
+header .main nav a {display:block; height:36px; float:right; color:#4c4c4c; font-size:16px; padding:0px 20px; border-radius:3px; line-height:36px; text-decoration:none; margin:0px 5px;}
+header .main nav .cur,header .main nav a:hover,header .main nav a:active {background-color:#ff524f; color:#fff;}
+
+
+/*A股申请成功*/
+.contentAGuSuccess {margin:12px auto 0px auto; width:1080px; height:826px; overflow:hidden; background:white;clear:both;}
+.contentAGuSuccess .title{width:1002px;height:35px;border-bottom:1px solid #E5E5E5;margin:0px 39px;}
+.contentAGuSuccess .title h3{font-size:22px;line-height:12px;margin-left:10px;}
+.contentAGuSuccess h2{width:700px;background:url(../images/agu/gou.png) no-repeat 10px 0px;height:45px;padding:8px 93px;font-size:25px;color:#444444;margin:74px 241px}
+.contentAGuSuccess p{color:#808080;font-size:14px;margin:-80px 338px;width:500px;line-height:30px}
+.contentAGuSuccess #lastP{margin-top:140px;font-size:16px;position:relative}
+.contentAGuSuccess #a1{position:absolute;margin:-6px 19px}
+.contentAGuSuccess #a2{position:absolute;margin:-6px 181px}
+
+
+/*A股操盘须知*/
+.content {margin:13px auto; width:1080px; overflow:hidden; clear:both;background:white;;border:1px solid #E5E5E5;}
+.content .nav{width:1002px;height:58px;border-bottom:2px solid #E5E5E5;margin:0px 39px;}
+.content .nav ul{ overflow:hidden;}
+.content .nav ul li{float:left; display:block; height:58px; line-height:58px;}
+.content .nav ul li a{text-decoration:none;font-size:21px;color:#999999;font-weight:bold;padding-right:25px;padding-left:25px; height:58px; line-height:58px;}
+.content #nowA{color:#FF524F !important}
+.content #nowLi{border-bottom:3px solid #FF524F;position:relative}
+.content #nowLi img{position:absolute;left:50%; margin-left:-5px; bottom:0px;}
+.content h3{font-size:16px;margin:15px 7px 19px;}
+.content p{font-size:14px;text-indent:2em;line-height:32px;margin-left:8px;width:980px}
+.content1{width:1002px;border-bottom:1px solid #E5E5E5;border-bottom-style:dashed;margin:0px 39px;padding-bottom:26px}
+.content #lastContent{border:none;margin-bottom:50px;}
+.content #listTa {  border-left: 1px solid #ddd;border-top: 1px solid #ddd; margin-left:65px; margin-top:10px;}
+.content #listTa tr td { border-right: 1px solid #ddd; border-bottom:1px solid #ddd; width:100px; height:30px; line-height:30px;text-align: center; overflow:hidden;font-size: 14px;}
+.content #listTa tr td:nth-child(2n+1) { background:#eee;}
+/*A股方案列表*/
+.AGuList {margin:12px auto 0px auto; width:1080px; height:826px; overflow:hidden; clear:both;}
+.AGuListLeft{width:238px;height:763px;border:1px solid #E5E5E5;float:left;background:white;}
+.AGuListLeft li{height:50px;padding-left:72px;line-height:50px;font-size:14px;background:url(../images/agu/bg.png) no-repeat ;}
+.AGuListLeft a{text-decoration:none;color:black}
+.AGuListLeft span{margin-left:32px}
+.AGuList #firstLi{height:65px;line-height:65px}
+.AGuList #nowLi{background-color:#6b6b6b;color:white;}
+.AGuList #AGu{margin-left:39px;background-color:#6b6b6b;color:white;}
+.AGuList #gangGu{border-bottom:1px solid #E5E5E5;border-style:dashed;height:49px}
+.AGuList #ziJin{border-bottom:1px solid #E5E5E5;border-style:dashed;height:49px}
+.AGuListRight{float:right;border:1px solid #E5E5E5;width:818px;height:763px;background:white;border-top:none}
+.AGuListRight #firstUl li{float:left;height:38px;}
+.AGuList #li1{width:109px;border-top:3px solid #FF524F;line-height:38px;color:#FF524F;text-align:center}
+.AGuList #li2{width:708px;border-bottom:1px solid #E5E5E5;border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;background:#FCFAFA}
+.AGuListRight table{width:818px;clear:both;margin-top:28px;font-size:15px}
+.AGuList .table1{margin-top:56px !important;}
+.AGuList #td1{color:#FF524F;background:#EAF7FF;height:32px;padding-left:23px;}
+.AGuList #td2{background:#EAF7FF;height:32px;}
+.AGuList #td3,.AGuList #td4,.AGuList #td5,.AGuList #td6,.AGuList #td7{color:#808080}
+.AGuList #td3{padding-left:23px;height:57px;width:162px}
+.AGuList #td4{width:146px}
+.AGuList #td5{width:150px}
+.AGuList #td6{width:136px}
+.AGuList #td7{width:74px}
+.AGuList #td8{position:relative}
+.AGuList #td8 a{position:absolute;margin-top:-3px}
+.AGuList #td9{padding-left:23px;}
+.AGuList #td9,#td10,#td11,#td12,#td13{line-height:13px;}
+.AGuList .changePage{float:right;margin-right:17px;margin-top:55px}
+.AGuList .changePage span{border:1px solid #C5C5C5;padding:6px 8px 6px 8px;font-size:12px;margin-left:3px}
+.AGuList .changePage a{text-decoration:none;color:#C5C5C5}
+.AGuList #nowPage{background:#FF524F;border:1px solid #FF524F}
+
+/*A股方案详情*/
+.AGuDetail {margin:12px auto 0px auto; width:1080px; height:826px; overflow:hidden; clear:both;}
+.AGuDetailLeft{width:238px;height:826px;border:1px solid #E5E5E5;float:left;background:white;}
+.AGuDetailLeft li{height:50px;padding-left:72px;line-height:50px;font-size:14px;background:url(../images/agu/bg.png) no-repeat ;}
+.AGuDetailLeft a{text-decoration:none;color:black}
+.AGuDetailLeft span{margin-left:32px}
+.AGuDetail #firstLi{height:65px;line-height:65px}
+.AGuDetail #nowLi{background-color:#6b6b6b;color:white;}
+.AGuDetail #AGu{margin-left:39px;background-color:#6b6b6b;color:white;}
+.AGuDetail #gangGu{border-bottom:1px solid #E5E5E5;border-style:dashed;height:49px}
+.AGuDetail #ziJin{border-bottom:1px solid #E5E5E5;border-style:dashed;height:49px}
+.AGuDetailRight{float:right;width:818px;height:826px;border-top:none;}
+.AGuDetailRightTop{height:173px;border:1px solid #E5E5E5;background:white;}
+.AGuDetailRightTop h3{height:33px;border-bottom:1px solid #E5E5E5;text-align:center;color:#0791CA;font-size:16px}
+.AGuDetailRightTop1{float:left}
+.AGuDetailRightTop1 p{margin-top:22px}
+.AGuDetail #a1{margin-left:24px}
+.AGuDetail #a2{margin-left:27px}
+.AGuDetailRightTop2{float:left;margin:-6px 60px}
+.AGuDetailRightTop2 p{font-size:14px;margin-top:11px}
+.AGuDetailRightTop2 p em{font-style:normal;color:#FF6600;font-size:16px}
+.AGuDetailRightTop2 a{border-bottom:2px solid #0791F2;text-decoration:none;color: #0791F2}
+.AGuDetailRightMain{border-top:1px solid #E5E5E5;margin-top:10px;background:#FBFBFB;height:700px}
+.AGuDetailRightMain h4{font-weight:normal;margin:24px 24px}
+.AGuDetailRightMain h4 span{font-size:12px;margin-left:24px}
+.AGuDetailRightMain table{border-top:1px solid #E5E5E5;border-left:1px solid #E5E5E5;width:818px;margin-top:-15px}
+.AGuDetailRightMain table td{border-bottom:1px solid #E5E5E5;border-right:1px solid #E5E5E5;height:40px;font-size:14px;text-align:center;width:204px}
+.AGuDetail #td1,#td2,#td3,#td4{background:#f8fcff}
+.AGuDetail #td5,#td6,#td7,#td8{background:white}
+.AGuDetailRightMain table td em{color:#FF6600;font-size:16px;font-style:normal}
+.AGuDetail #secondT{margin-top:13px }
+.AGuDetail .changePage{text-align:center;margin-top:24px}
+.AGuDetail .changePage span{border:1px solid #C5C5C5;padding:6px 8px 6px 8px;font-size:12px;margin-left:3px}
+.AGuDetail .changePage a{text-decoration:none;color:#C5C5C5}
+.AGuDetail #nowPage{background:#FF524F;border:1px solid #FF524F}
+
+/*A股配资界面*/
+.contentAGuJiemian {margin:12px auto 0px auto; width:1080px; height:900px; overflow:hidden; background:white;clear:both;}
+.contentAGuJiemian .title{width:1002px;height:35px;border-bottom:1px solid #E5E5E5;margin:0px 39px;}
+.contentAGuJiemian .title h3{font-size:22px;line-height:12px;margin-left:10px;}
+.AGuJiemianLeft{margin-left:39px;padding-left:8px;float:left;width:513px;height:673px;border-right:1px solid #EBEBEB}
+.AGuJiemianLeft1{overflow:hidden}
+.AGuJiemianLeft1 h6{font-size:16px;font-weight:normal;position:relative;margin:19px 29px}
+.AGuJiemianLeft1 h6 em{font-style:normal;font-size:20px;font-weight:bold;position:absolute;margin:-2px -29px}
+.contentAGuJiemian #AGuJiemianLeft2{margin-top:21px}
+.AGuJiemianLeft form input{width:468px;height:41px;border:1px solid #C5C5C5;border-radius:3px;color:#666666;text-align:center;font-size:14px;margin-top:4px}
+.AGuJiemianLeft form input:focus{border:1px solid #FF5256;outline:none}
+.AGuXuanze{width:96px;height:74px;border: 1px solid #E1E1E1;float:left;margin-right:26px;margin-top:22px;background:url(../images/agu/huijian.png) no-repeat}
+.contentAGuJiemian #xuanzeChoose{border: 1px solid #FF5256;background:url(../images/agu/hongjian.png) no-repeat}
+.contentAGuJiemian .AGuXuanze h3{color:#FF5256;font-size:24px;text-align:center;display:block;margin-top:12px}
+.contentAGuJiemian .AGuXuanze h3 em{font-style:normal;font-size:14px;color:#444444}
+.contentAGuJiemian .AGuXuanze p{color:#999999;font-size:14px;width:100px;text-align:center;margin-top:-17px;display:block}
+.contentAGuJiemian #xuanzeChoose em{color:#FF5256}
+.contentAGuJiemian #xuanzeChoose p{color:#FF5256}
+.AGuJiemianRight{float:left;margin-left:42px;height:673px;}
+.AGuJiemianRight h6{font-size:16px;font-weight:normal;position:relative;margin:19px 29px;margin-bottom:38px}
+.AGuJiemianRight h6 em{font-style:normal;font-size:20px;font-weight:bold;position:absolute;margin:-2px -29px}
+.AGuJiemianRight p{font-size:14px;width:400px;position:relative;margin-bottom:45px}
+.AGuJiemianRight p a{position:absolute;margin:6px 3px;}
+.AGuJiemianRight p span{color:#FF5256;font-size:21px;font-weight:bold;margin-left:4px;margin-right:2px;}
+.contentAGuJiemian #lastP a{margin-top:0px}
+.contentAGuJiemian #radio2{margin-left:24px;margin-right:5px}
+.contentAGuJiemian #radio1{margin-right:5px}
+.AGuJiemianBottom{width:1002px;border-top:1px solid #E5E5E5;margin:0px 39px;clear:both}
+.AGuJiemianBottom p{text-align:center;margin-top:24px;}
+.contentAGuJiemian #tijiao{margin:20px 360px;display:block}
+.contentAGuJiemian #checkbox{margin-right:5px}
+.contentAGuJiemian #bottomP a{text-decoration:none;color:#3D9FE1}
+.contentAGuJiemian #bottomP a:hover{text-decoration:underline}
+
+
+/*A股确认方案支付*/
+.contentAGuComfirm {margin:12px auto 0px auto; width:1080px; height:1100px; overflow:hidden; background:white;clear:both;}
+.contentAGuComfirm .title{width:1002px;height:35px;border-bottom:1px solid #E5E5E5;margin:0px 39px;}
+.contentAGuComfirm .title h3{font-size:22px;line-height:12px;margin-left:10px;}
+.contentAGuComfirm #table1,.contentAGuComfirm #table2{border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;width:1002px;margin:19px 39px;}
+.contentAGuComfirm #table1 td,.contentAGuComfirm #table2 td,.contentAGuComfirm #table3 td,.contentAGuComfirm #table4 td{font-size:14px;}
+.contentAGuComfirm #table1 td em{font-size:20px;font-style:normal;color:#FF524F}
+.contentAGuComfirm #table2 td em{font-size:20px;font-style:normal;color:#FF524F}
+.contentAGuComfirm #table3 td em{font-size:20px;font-style:normal;color:#FF524F}
+.contentAGuComfirm #table4 td em{font-size:20px;font-style:normal;color:#FF524F}
+.contentAGuComfirm h4{padding-left:47px;font-size:16px;margin-top:26px}
+.contentAGuComfirm #tr2 td{border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;text-align:center;height:48px;width:201px;background:#F9F9F9}
+.contentAGuComfirm #table2 #tr2 td{width:500px }
+.contentAGuComfirm #tr3 td{border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;text-align:center;height:38px;}
+.contentAGuComfirm #tr4 td{border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;text-align:center;height:38px;}
+.contentAGuComfirm #table3{border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;width:692px;margin:1px 39px;float:left}
+.contentAGuComfirm #dengyu{float:left;margin-top:42px}
+.contentAGuComfirm #table4{border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;width:214px;margin:1px 39px;float:right}
+.contentAGuComfirm #fukuan{float:right;margin-right:39px;margin-top:10px;clear:both}
+.contentAGuComfirm #fukuan a{margin-left:28px; }
+.contentAGuComfirm #fukuan a img{margin-top:20px}
+.comfirmPrompt1{margin:120px 39px;position:relative;width:302px;height:250px;float:left}
+.comfirmPrompt1 h4{color:#FF524F;font-weight:normal;border-bottom:1px solid #e5e5e5;width:302px;height:28px;padding-left:19px}
+.contentAGuComfirm .cancel{position:absolute;margin:-27px 307px;}
+.comfirmPrompt1 p{margin-top:16px;text-align:center}
+.comfirmPrompt1 em{font-style:normal;color:#FF524F}
+.comfirmPrompt1 p a img{margin-right:21px;margin-top:29px}
+.contentAGuComfirm #firstP1{margin-top:37px}
+.contentAGuComfirm #lastP1{margin-left:20px}
+.comfirmPrompt2 h4{color:#FF524F;font-weight:normal;border-bottom:1px solid #e5e5e5;width:302px;height:28px;padding-left:19px}
+.contentAGuComfirm .cancel{position:absolute;margin:-27px 307px;}
+.comfirmPrompt2{margin:48px 39px;position:relative;width:302px;height:250px;float:left}
+.comfirmPrompt2 p{margin-top:16px;text-align:center}
+.comfirmPrompt2 em{font-style:normal;color:#FF524F}
+.comfirmPrompt2 p a img{margin-right:21px;margin-top:29px}
+.contentAGuComfirm #thePA{background:#ff7e00;color:white;width:173px;height:25px;font-size:12px;line-height:25px;margin:14px 67px}
+.contentAGuComfirm #thePA a{color:white}
+.contentAGuComfirm #lastP2{margin-left:20px;margin-top:-22px}
+
+
+
+footer {background:#3b3b3b; height:50px; margin-top:26px;clear:both}
+footer p {width:1080px; line-height:50px; text-align:center; color:#b2b2b2; font-size:14px; font-family:"微软雅黑"; margin:0px auto;}

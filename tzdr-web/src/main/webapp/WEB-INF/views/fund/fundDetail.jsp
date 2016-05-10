@@ -1,0 +1,501 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../common/common.jsp"%>
+<%@include file="../common/import-fileupload-js.jspf"%>
+<%@include file="../common/import-artDialog-js.jspf"%>
+<%
+	String tab = request.getParameter("tab");
+%>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>资金明细 - 投资达人</title>
+<link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
+<link href="${ctx}/static/css/public.css" rel="stylesheet"
+	type="text/css">
+<link href="${ctx}/static/css/pagination.css" rel="stylesheet"
+	type="text/css" />
+<script src="${ctx}/static/script/common/jquery.pagination.js"
+	type="text/javascript"></script>
+	<!-- 
+<link href="common/tablesorter.css" rel="stylesheet" type="text/css" />
+	 -->
+<script src="${ctx}/static/script/My97DatePicker/WdatePicker.js"
+	type="text/javascript"></script>
+
+<script type='text/javascript'
+	src="${ctx}/static/script/fund/fundDeatail.js?version=20150721"></script>
+<script type='text/javascript'
+	src="${ctx}/static/script/common/dateUtils.js"></script>
+<script type='text/javascript'
+	src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
+<title>投资达人</title>
+<script type="text/javascript">
+	var tab =<%=tab%>;
+
+	var isOut = false;
+
+	$(document).ready(function() {
+		$('#paytype').click(function(event) {
+			event.stopPropagation();
+			$("#paytypediv").show();
+		});
+
+		$(document).click(function() {
+			if (isOut == false) {
+				$("#alltypediv").hide();
+				$("#paytypediv").hide();
+				$("#fundLoantypediv").hide();
+				$("#uniondiv").hide();
+				$("#interestdiv").hide();
+			}
+		});
+
+		$('#alltype').click(function(event) {
+			event.stopPropagation();
+			$("#alltypediv").show();
+		});
+
+		$('#fundLoantype').click(function(event) {
+			event.stopPropagation();
+			$("#fundLoantypediv").show();
+		});
+
+		$('#interesttype').click(function(event) {
+			event.stopPropagation();
+			$("#interestdiv").show();
+		});
+
+		$('#uniontype').click(function(event) {
+			event.stopPropagation();
+			$("#uniondiv").show();
+		});
+
+		$("#alltypediv a").each(function() {
+			$(this).click(function() {
+				$('#fundtype').attr("data-id", $(this).attr("data-id"));
+				var value = $(this).html();
+				$('#fundtype').val(value);
+				$('#alltypediv').hide();
+			});
+
+		});
+
+		$("#paytypediv a").each(function() {
+			$(this).click(function() {
+				var value = $(this).html();
+				$('#changetype').attr("data-id", $(this).attr("data-id"));
+				$('#changetype').val(value);
+				$('#paytypediv').hide();
+			});
+
+		});
+
+		$("#interestdiv a").each(function() {
+			$(this).click(function() {
+				var value = $(this).html();
+				$('#interest').attr("data-id", $(this).attr("data-id"));
+
+				$('#interest').val(value);
+				$('#interestdiv').hide();
+			});
+
+		});
+
+		$("#fundLoantypediv a").each(function() {
+			$(this).click(function() {
+				var value = $(this).html();
+				$('#fundLoan').attr("data-id", $(this).attr("data-id"));
+
+				$('#fundLoan').val(value);
+				$('#fundLoantypediv').hide();
+			});
+
+		});
+
+		$("#uniondiv a").each(function() {
+			$(this).click(function() {
+				var value = $(this).html();
+				$('#union').attr("data-id", $(this).attr("data-id"));
+				$('#union').val(value);
+				$('#uniondiv').hide();
+			});
+
+		});
+
+		var index="${index}";
+		if(index){
+			$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
+		}
+	});
+</script>
+</head>
+<body>
+	<!--顶部 -->
+	<!--个人中心导航 -->
+	<%@ include file="../common/personheader.jsp"%>
+
+	<div class="uc">
+		<!--个人中心导航 -->
+		<%@ include file="../common/leftnav.jsp"%>
+		<!--网银支付-->
+		<div class="uc_mianbar">
+			<!--  
+		<ul class="uc_fsinfo">
+			<li>
+				<h2>账户总资产</h2>
+				<p><i><fmt:formatNumber value="${totalAssets}" type="currency" pattern="0.00#"/>
+								</i>元</p>
+			</li>
+			<li>
+				<h2>操盘配额</h2>
+				<p><i>
+				<fmt:formatNumber value="${totalLending}" type="currency" pattern="0.00#"/>
+				</i>元</p>
+			</li>
+			<li>
+				<h2>风险保证金</h2>
+				<p><i>
+				<fmt:formatNumber value="${totalLeverMoney}" type="currency" pattern="0.00#"/>
+				
+				</i>元</p>
+			</li>
+			<li>
+				<h2>冻结金额</h2>
+				<p><i><fmt:formatNumber value="${user.frzBal}" type="currency" pattern="0.00#"/>
+								</i>元</p>
+			</li>
+			<li>
+				<h2>账户余额</h2>
+				<p><i><fmt:formatNumber value="${user.avlBal}" type="currency" pattern="0.00#"/>
+						</i>元</p>
+			</li>
+		</ul>
+		-->
+			<div class="uc_pay" id="fundtab">
+				<ul class="uc_paynav">
+					<li><a href="javascript:void(0)" class="on">资金明细</a></li>
+					<!--  
+					<li><a href="javascript:void(0)">充值提款</a></li>
+					<li><a href="javascript:void(0)">操盘明细</a></li>
+					<li><a href="javascript:void(0)">利息管理费明细</a></li>
+					<li><a href="javascript:void(0)">推广佣金</a></li>
+					-->
+					<%-- <li><a href="${futureUrl}/fund/detail">期指点点乐模拟盘明细</a></li> --%>
+				</ul>
+
+				<div class="tabcon">
+					<div class="subtab">
+						<!-- 全部明细 -->
+						<div class="uc_trade">
+							<!-- 浮动层 -->
+							<div class="uc_floatlayer">
+								<!-- 类型 -->
+								<div class="uc_bc_option uc_fs_type" id="alltypediv"
+									style="display: none;">
+									<a href="javascript:void(0)" data-id="">全部明细</a>
+									<c:forEach items="${data}" var="type" varStatus="status">
+										<a href="javascript:void(0)" data-id="${type['valueKey']}">${type['valueName']}</a>
+									</c:forEach>
+								</div>
+
+							</div>
+							<div class="uc_fsdetails">
+								<div class="uc_fsmoney">
+									<p>
+										收入<i class="color1" id="incount"><c:choose><c:when test="${!empty infund.count}">${infund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color1" id="insummoney"><c:choose><c:when test="${!empty infund.summoney}"><fmt:formatNumber value="${infund.summoney}" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元
+									</p>
+									<p>
+										支出<i class="color5" id="outcount"><c:choose><c:when test="${!empty outfund.count}">${outfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color5" id="outsummoney"><c:choose><c:when test="${!empty outfund.summoney}"><fmt:formatNumber value="${outfund.summoney}" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元
+									</p>
+								</div>
+								<div class="uc_fssearch">
+									<em>收支类型：</em> <input type="text" class="uc_fs_ip"
+										id="fundtype" name="fundtype" value="全部明细"> <a
+										href="javascript:void(0)" id="alltype"
+										class="uc_fssdown uc_fsiptype"></a> <em>时间：</em> <input
+										type="text" name="allstarttime" readonly="readonly"
+										onclick="WdatePicker();" id="allstarttime" class="uc_fsiptime">
+									<i>—</i> <input type="text" name="allendtime" id="allendtime"
+										readonly="readonly" onclick="WdatePicker();"
+										class="uc_fsiptime"> <span><a
+										href="javascript:void(0)"
+										onclick="findAllData('Searchresult','Pagination');">查询</a></span>
+								</div>
+							</div>
+							<ul class="uc_fslist">
+								<ol class="uc_fsl_title">
+									<li class="uc_fsl165">时间</li>
+									<li class="uc_fsl200">类型</li>
+									<li class="uc_fsl100">收入</li>
+									<li class="uc_fsl100">支出</li>
+									<li class="uc_fsl100">余额</li>
+								</ol>
+								<div>
+									<div id="Searchresult"></div>
+								</div>
+							</ul>
+							<div class="uc_tpage uc_fspage">
+								<div id="Pagination"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="subtab">
+						<!-- 充值取款明细 -->
+						<div class="uc_trade">
+							<div class="uc_floatlayer">
+								<div class="uc_bc_option uc_fs_type" id="paytypediv"
+									style="display: none;">
+									<a href="javascript:void(0)" data-id="1,2,3,4">全部明细</a> <a
+										href="javascript:void(0)" data-id="1">充值存入</a> <a
+										href="javascript:void(0)" data-id="2">提现取出</a>
+										<a href="javascript:void(0)" data-id="3">系统调账</a>
+										<a href="javascript:void(0)" data-id="4">系统冲账</a>
+								</div>
+							</div>
+							<div class="uc_fsdetails">
+								<div class="uc_fsmoney">
+									<p>
+										收入<i class="color1" id="inpaycount"><c:choose><c:when test="${!empty inpayfund.count}">${inpayfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color1" id="inpaysum"><c:choose><c:when test="${!empty inpayfund.summoney}"><fmt:formatNumber value="${inpayfund.summoney}"
+														pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
+									<p>
+										支出<i class="color5" id="outpaycount"><c:choose><c:when test="${!empty outpayfund.count}">${outpayfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color5" id="outpaysum"><c:choose><c:when test="${!empty outpayfund.summoney}"><fmt:formatNumber value="${outpayfund.summoney}" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
+								</div>
+								<div class="uc_fssearch">
+									<em>收支类型：</em> <input type="text" class="uc_fs_ip"
+										id="changetype" data-id="1,2,3,4" name="changetype" value="全部明细">
+									<a href="javascript:void(0)" id="paytype" name="paytype"
+										class="uc_fssdown uc_fsiptype"></a> <em>时间：</em> <input
+										type="text" class="uc_fsiptime" id="paystarttime"
+										onclick="WdatePicker();" readonly="readonly"
+										name="paystarttime"> <i>—</i> <input type="text"
+										class="uc_fsiptime" id="payendtime" onclick="WdatePicker();"
+										readonly="readonly" name="payendtime"> <span><a
+										href="javascript:void(0)"
+										onclick="findpayfund('payfundSearchresult','payfundPagination');">查询</a></span>
+								</div>
+							</div>
+							<ul class="uc_fslist">
+								<ol class="uc_fsl_title">
+									<li class="uc_fsl165">时间</li>
+									<li class="uc_fsl200">类型</li>
+									<li class="uc_fsl100">收入</li>
+									<li class="uc_fsl100">支出</li>
+									<!--  
+									<li class="uc_fsl100">余额</li>
+									-->
+								</ol>
+								<div>
+									<div id="payfundSearchresult"></div>
+								</div>
+							</ul>
+							<div class="uc_tpage uc_fspage">
+								<div id="payfundPagination"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="subtab">
+						<!-- 操盘明细 -->
+						<div class="uc_trade">
+							<div class="uc_floatlayer">
+								<!-- 类型 -->
+								<div class="uc_bc_option uc_fs_type" id="fundLoantypediv"
+									style="display: none;">
+									<a href="javascript:void(0)" data-id="10,11,12,15,16,17,18,25,26,27">全部明细</a>
+									<a href="javascript:void(0)" data-id="10">操盘支出</a> <a
+										href="javascript:void(0)" data-id="15">操盘撤回</a> <a
+										href="javascript:void(0)" data-id="11">利息支出</a> <a
+										href="javascript:void(0)" data-id="12">管理费支出</a> <a
+										href="javascript:void(0)" data-id="16">利润提取</a> <a
+										href="javascript:void(0)" data-id="17">追加保证金</a> <a
+										href="javascript:void(0)" data-id="18">操盘欠费</a>
+										<a
+										href="javascript:void(0)" data-id="25">操盘管理费撤回</a>
+										<a
+										href="javascript:void(0)" data-id="26">操盘利息撤回</a>
+										<a
+										href="javascript:void(0)" data-id="27">补仓欠费</a>
+								</div>
+
+							</div>
+							<div class="uc_fsdetails">
+								<div class="uc_fsmoney">
+									<p>
+										收入<i class="color1" id="inloanfundcount"><c:choose><c:when test="${!empty inloanfund.count}">${inloanfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color1" id="inloanfundsum"><c:choose><c:when test="${!empty inloanfund.summoney}"><fmt:formatNumber value="${inloanfund.summoney}"
+														pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
+									<p>
+										支出<i class="color5" id="outloanfundcount"><c:choose><c:when test="${!empty outloanfund.count}">${outloanfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color5" id="outloanfundsum"><c:choose><c:when test="${!empty outloanfund.summoney}"><fmt:formatNumber value="${outloanfund.summoney}"
+														pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
+								</div>
+
+								<div class="uc_fssearch">
+									<em>收支类型：</em> <input type="text" class="uc_fs_ip"
+										id="fundLoan" data-id="10,11,12,15,16,17,18,25,26,27" name="fundLoan"
+										value="全部明细"> <a href="javascript:void(0)"
+										id="fundLoantype" name="fundLoantype"
+										class="uc_fssdown uc_fsiptype"></a> <em>时间：</em> <input
+										type="text" class="uc_fsiptime" id="loanstarttime"
+										name="loanstarttime" readonly="readonly"
+										onclick="WdatePicker();"> <i>—</i> <input type="text"
+										class="uc_fsiptime" id="loanendtime" name="loanendtime"
+										readonly="readonly" onclick="WdatePicker();"> <span><a
+										href="javascript:void(0)"
+										onclick="findfundLoan('loanSearchresult','loanPagination');">查询</a></span>
+								</div>
+							</div>
+							<ul class="uc_fslist">
+								<ol class="uc_fsl_title">
+									<li class="uc_fsl165">时间</li>
+									<li class="uc_fsl200">类型</li>
+									<li class="uc_fsl100">收入</li>
+									<li class="uc_fsl100">支出</li>
+									<!--  
+									<li class="uc_fsl100">余额</li>
+									-->
+								</ol>
+								<div>
+									<div id="loanSearchresult"></div>
+								</div>
+							</ul>
+							<div class="uc_tpage uc_fspage">
+								<div id="loanPagination"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="subtab">
+						<!-- 利息管理费明细 -->
+						<div class="uc_trade">
+							<div class="uc_floatlayer">
+								<div class="uc_bc_option uc_fs_type" id="interestdiv"
+									style="display: none;">
+									<a href="javascript:void(0)" data-id="11,12,25,26">全部明细</a> <a
+										href="javascript:void(0)" data-id="11">利息支出</a> <a
+										href="javascript:void(0)" data-id="12">管理费支出</a>
+										<a href="javascript:void(0)" data-id="25">操盘管理费撤回</a>
+										 <a href="javascript:void(0)" data-id="26">操盘利息撤回</a>
+								</div>
+							</div>
+							<div class="uc_fsdetails">
+								<div class="uc_fsmoney">
+									<p>
+										收入<i class="color1" id="interestIncount"><c:choose><c:when test="${!empty ininterestfund.count}">${ininterestfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color1" id="interestInsum"><c:choose><c:when test="${!empty ininterestfund.summoney}"><fmt:formatNumber value="${ininterestfund.summoney}"
+														pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
+									<p>支出<i class="color5" id="interestcount"><c:choose><c:when test="${!empty outinterestfund.count}">${outinterestfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color5" id="interestsum"><c:choose><c:when test="${!empty outinterestfund.summoney}"><fmt:formatNumber value="${outinterestfund.summoney}"
+														pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
+								</div>
+								<div class="uc_fssearch">
+									<em>收支类型：</em> <input type="text" class="uc_fs_ip"
+										id="interest" name="interest" data-id="11,12,25,26" value="全部明细">
+									<a href="javascript:void(0)" id="interesttype"
+										name="interesttype" class="uc_fssdown uc_fsiptype"></a> <em>时间：</em>
+									<input type="text" class="uc_fsiptime" id="intereststarttime"
+										onclick="WdatePicker();" readonly="readonly"
+										name="intereststarttime"> <i>—</i> <input type="text"
+										class="uc_fsiptime" id="interestendtime"
+										onclick="WdatePicker();" readonly="readonly"
+										name="interestendtime"> <span><a
+										href="javascript:void(0)"
+										onclick="findinterestdata('interestSearchresult','interestPagination');">查询</a></span>
+								</div>
+							</div>
+							<ul class="uc_fslist">
+								<ol class="uc_fsl_title">
+									<li class="uc_fsl165">时间</li>
+									<li class="uc_fsl200">类型</li>
+									<li class="uc_fsl100">收入</li>
+									<li class="uc_fsl100">支出</li>
+									<!--  
+									<li class="uc_fsl100">余额</li>
+									-->
+								</ol>
+								<div>
+									<div id="interestSearchresult"></div>
+								</div>
+							</ul>
+							<div class="uc_tpage uc_fspage">
+								<div id="interestPagination"></div>
+							</div>
+						</div>
+					</div>
+					  <!--
+					<div class="subtab">
+					-->
+						<!--推广佣金明细 -->
+						<!-- 
+						<div class="uc_trade">
+							<div class="uc_floatlayer">
+								<div class="uc_bc_option uc_fs_type" id="uniondiv"
+									style="display: none;">
+									<a href="javascript:void(0)" data-id="13">全部明细</a> <a
+										href="javascript:void(0)" data-id="13">佣金收入</a>
+
+
+								</div>
+							</div>
+							<div class="uc_fsdetails">
+								<div class="uc_fsmoney">
+									<p>
+										收入<i class="color5" id="inunioncount"> <c:choose>
+												<c:when test="${!empty inunionfund.count}">
+										${inunionfund.count}
+									</c:when>
+												<c:otherwise>0</c:otherwise>
+											</c:choose>
+										</i>笔，共<i class="color5" id="inunionsum"> <c:choose>
+												<c:when test="${!empty inunionfund.summoney}">
+													<fmt:formatNumber value="${inunionfund.summoney}"
+														pattern="##.##" minFractionDigits="2"></fmt:formatNumber>
+												</c:when>
+												<c:otherwise>0.00</c:otherwise>
+											</c:choose>
+										</i>元
+									</p>
+								</div>
+								<div class="uc_fssearch">
+									<em>收支类型：</em> <input type="text" class="uc_fs_ip" id="union"
+										name="union" data-id="13" value="全部明细"> <a
+										href="javascript:void(0)" id="uniontype"
+										class="uc_fssdown uc_fsiptype"></a> <em>时间：</em> <input
+										type="text" class="uc_fsiptime" id="unionstarttime"
+										readonly="readonly" name="unionstarttime"
+										onclick="WdatePicker();"> <i>—</i> <input type="text"
+										class="uc_fsiptime" id="unionendtime" name="unionendtime"
+										readonly="readonly" onclick="WdatePicker();"> <span><a
+										href="javascript:void(0)"
+										onclick="finduniondata('unionSearchresult','unionPagination');">查询</a></span>
+								</div>
+							</div>
+							<ul class="uc_fslist">
+								<ol class="uc_fsl_title">
+									<li class="uc_fsl165">时间</li>
+									<li class="uc_fsl200">类型</li>
+									<li class="uc_fsl100">收入</li>
+									<li class="uc_fsl100">支出</li>
+									
+								</ol>
+								<div>
+									<div id="unionSearchresult"></div>
+								</div>
+							</ul>
+							<div class="uc_tpage uc_fspage">
+								<div id="unionPagination"></div>
+							</div>
+						</div>
+					</div>
+						-->
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<%@ include file="../common/personfooter.jsp"%>
+	<%@ include file="../common/dsp.jsp"%>
+</body>
+
+</html>
+

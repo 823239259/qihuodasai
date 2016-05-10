@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd"
+	default-lazy-init="true">
+
+	<description>Quartz的定时集群任务配置</description>
+
+	<!-- Quartz集群Schduler -->
+	<bean id="clusterQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- Triggers集成 -->
+		<property name="triggers">
+			<list>
+			    <ref bean="feeDeductionTrigger" />
+				<ref bean="realDealTrigger"/>
+				<ref bean="commissionTrigger"/>
+				<ref bean="endOfTransferMoneyTrigger"/>
+				<!-- <ref bean="endOfCommissionMoneyTrigger"/> -->
+<!-- 				<ref bean="queryActivityProfitTrigger"/>
+ -->				
+                <ref bean="programmeExtensionSendMessageTrigger"/>
+                <ref bean="autoLimitParentAccountTrigger"/>
+ 				<ref bean="thawAccountTrigger"/>			
+				<!-- <ref bean="sendMarginRemindMsgTrigger"/> -->
+				<!-- <ref bean="hundsunTokenRefreshTrigger"/>	 -->
+				<ref bean="queryStockCashHistoryTrigger"/>	
+				<ref bean="adjustmentTransferTrigger"/>
+				<ref bean="agentReturnInfoJobTrigger"/>	
+				<ref bean="createUserFundRecordsTrigger"/>
+				<ref bean="thawNextAccountTrigger"/>	
+				<ref bean="userCombostockTrigger"/>		
+				<ref bean="homePageTrigger"/>		
+				<ref bean="bibiPayWithDrawalTrigger"/>	
+			</list>
+		</property>
+		<!--  quartz配置文件路径, 指向cluster配置 -->
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<!-- 启动时延期2秒开始任务 -->
+		<property name="startupDelay" value="2" />
+		<!-- 保存Job数据到数据库所需的数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- Job接受applicationContext的成员变量名 -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+	</bean>
+	
+	
+	<!-- 5点半执行计算点日返点-->
+	<bean id="agentReturnInfoJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="agentReturnInfoJob" />
+		<property name="cronExpression" value="0 30 05 * * ?" />
+	</bean>
+	<bean id="agentReturnInfoJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.AgentReturnInfoJob" />
+	</bean>
+	
+	
+	
+	
+	<!-- 配资状态为【配资中】自动定时划账到子账户接口-->
+    <!-- 23点 -->
+	<bean id="adjustmentTransferTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="adjustmentTransferJob" />
+		<property name="cronExpression" value="0 30 23 * * ?" />
+	</bean>
+	<bean id="adjustmentTransferJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.AdjustmentTransferJob" />
+	</bean>
+
+    <!-- 方案终结T+1划账-->
+    <!-- 每天凌晨2点 -->
+	<bean id="endOfTransferMoneyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="endOfTransferMoneyJobDetail" />
+		<property name="cronExpression" value="0 0 2 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="endOfTransferMoneyJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.EndOfTransferMoney" />
+	</bean>
+	
+	    <!-- T+1方案终结后上午9：00后 佣金划账至母账户-->
+	<!-- <bean id="endOfCommissionMoneyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="endOfCommissionMoneyJobDetail" />
+		<property name="cronExpression" value="0 0 9 * * ?" />
+	</bean>
+	JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群
+	<bean id="endOfCommissionMoneyJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.EndOfCommissionMoney" />
+	</bean> -->
+	
+	
+	    <!-- 母账户配资结束日期[-5 ~ -7]，AM 10点执行 发送提醒短信-->
+	<bean id="programmeExtensionSendMessageTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="programmeExtensionSendMessageJobDetail" />
+		<property name="cronExpression" value="0 0 10 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="programmeExtensionSendMessageJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.ProgrammeExtensionSendMessageJob" />
+	</bean>
+	
+	
+    <!-- 配资截止日期小于等于5天的方案 自动限制账户买入 7点执行-->
+	<bean id="autoLimitParentAccountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoLimitParentAccountJobDetail" />
+		<property name="cronExpression" value="0 0 7 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="autoLimitParentAccountJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.AutoLimitParentAccountJob" />
+	</bean>
+	
+	
+	
+	
+	<!-- Timer式 Trigger定义-->
+	<bean id="feeDeductionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="feeDeductionJobDetail" />
+		<!-- 每天凌晨8点 -->
+		<property name="cronExpression" value="0 0 8 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="feeDeductionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.FeeDeduction" />
+	</bean>
+
+	<!-- Timer式 Trigger定义-->
+	<bean id="realDealTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="realDealJobDetail" />
+		<!-- 每次凌晨3点 -->
+		<property name="cronExpression" value="0 0 3 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="realDealJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.QueryRealDeal" />
+	</bean>
+
+
+	<!-- 佣金任务 -->
+	<!-- Timer式 Trigger定义-->
+	<bean id="commissionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="commissionJobDetail" />
+		<!-- 每天凌晨0点-->
+		<property name="cronExpression" value="0 0 0 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="commissionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.CommissionIncome" />
+	</bean>
+	
+	<!-- 8800活动 用户收益 -->
+	<!-- Timer式 Trigger定义-->
+	<!-- <bean id="queryActivityProfitTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="queryActivityProfitJobDetail" />
+		每天凌晨16点
+		<property name="cronExpression" value="0 0 16 * * ?" />
+	</bean> -->
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<!-- <bean id="queryActivityProfitJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.QueryActivityProfit" />
+	</bean> -->
+	
+	<!-- 解冻下一个交易日开始账号式 Trigger定义-->
+	<bean id="thawAccountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="thawAccountJobDetail" />
+		<!-- 每天凌晨1点 -->
+		<property name="cronExpression" value="0 0 1 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="thawAccountJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.ThawAccount" />
+	</bean>
+	
+	<!-- 补仓提醒 短信 Trigger定义-->
+	<!-- <bean id="sendMarginRemindMsgTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendMarginRemindMsgJobDetail" />
+		每10分钟 
+		<property name="cronExpression" value="0 5/10 8-16 * * ?" />
+	</bean> -->
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<!-- <bean id="sendMarginRemindMsgJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.SendMarginRemindMsg" />
+	</bean> -->
+	
+	<!--  每半个小时刷新一下token Trigger定义-->
+	<!-- <bean id="hundsunTokenRefreshTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="hundsunTokenRefreshJobDetail" />
+		每10分钟 
+		<property name="cronExpression" value="0 15/30 * * * ?" />
+	</bean> -->
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<!-- <bean id="hundsunTokenRefreshJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.HundsunTokenRefresh" />
+	</bean> -->
+	
+	<!-- 定时获取账户资产 Trigger定义-->
+	<bean id="queryStockCashHistoryTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="queryStockCashHistoryJobDetail" />
+		<!-- 每天凌晨1点 -->
+		<property name="cronExpression" value="0 1 0 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="queryStockCashHistoryJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.QueryStockCashHistory" />
+	</bean>
+	
+	<!-- 定时获取用户每日资金记录 Trigger定义-->
+	<bean id="createUserFundRecordsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createUserFundRecordsJobDetail" />
+		<!-- 每天凌晨1点 -->
+		<property name="cronExpression" value="0 10 0 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="createUserFundRecordsJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.CreateUserFundRecords" />
+	</bean>
+	
+	<!--16:30 解冻下一个交易日开始账号式 Trigger定义-->
+	<bean id="thawNextAccountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="thawNextAccountJobDetail" />
+		<!-- 每天16：30点 -->
+		<property name="cronExpression" value="0 30 16 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="thawNextAccountJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.ThawNextAccount" />
+	</bean>
+	
+	<!--16:30 获取用户当日持仓信息-->
+	<bean id="userCombostockTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="userCombostockJobDetail" />
+		<!-- 每天16：30点 -->
+		<property name="cronExpression" value="0 30 16 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="userCombostockJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.QueryUserCombostock" />
+	</bean>
+	
+	<!-- 首页任务 -->
+	<!-- Timer式 Trigger定义-->
+	<bean id="homePageTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="homePageJobDetail" />
+		<!-- 每天凌晨0点-->
+		<property name="cronExpression" value="0 0 0 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="homePageJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.HomePageCinfigJob" />
+	</bean>
+	
+	
+	<!-- 币币支付提现 支付结果定时查询 Trigger定义-->
+	<bean id="bibiPayWithDrawalTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="bibiPayWithDrawalJobDetail" />
+		<!-- 每10分钟  -->
+		<property name="cronExpression" value="0 1/10 8-18 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="bibiPayWithDrawalJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.BibiPayWithDrawJob" />
+	</bean>
+</beans>

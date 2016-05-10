@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
+<title>添加信任设置</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<style type="text/css">
+* { margin: 0; padding: 0; font-size: 0;}
+body { background: #f5f5f5;}
+.tp_set { width: 100%; max-width: 640px; height: auto; margin: 0 auto;}
+.tp_set .mui-content-padded { margin: 10px;}
+.tp_set .mui-content-padded h4 { color: #333;
+  text-align: left;
+  font-size: 15px;
+  font-weight: normal;
+  padding: 15px 0;
+  line-height: 22px;
+}
+.tp_set .mui-content-padded h4 i { font-size: 13px;
+  font-style: normal;
+  border: 1px solid #ec603a;
+  padding: 0px 5px;
+  border-radius: 15px;
+  color: #ec603a;
+  vertical-align: 1px;
+  margin-right: 5px;}
+.tp_set .mui-content-padded img { width: 100%; max-width: 680px;}
+.tp_set a { display: block; width: 90%; height: 40px; line-height: 40px; text-align: center; font-size: 24px; margin: 0 auto; background: #ff7f00; color: #fff; text-decoration: none; border-radius: 10px; margin: 15px auto;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var tpmain = document.getElementById('tpmain');
+	var tppromt = document.getElementById('tppromt');
+    if(isWeiXin()){    	
+    	tppromt.style.display = "block";
+    } else {    	
+    	tpmain.style.display = "block";
+    };
+}
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+</script>
+</head>
+<body>
+<div class="tp_set">
+	<a href="index.html" class="tp_back">返回</a>
+	<div class="mui-content-padded">
+		<h4><i>1</i>第一步，进入“设置”</h4>
+		<img src="images/set_01.jpg">
+		<h4><i>2</i>第二步，进入“通用”</h4>
+		<img src="images/set_02.jpg">
+		<h4><i>3</i>第三步，进入“描述文件”，有的手机显示“设备管理器”</h4>
+		<img src="images/set_03.jpg">
+		<h4><i>4</i>第四步，选择“Shanghai Wear Yang Technology co., LTD”</h4>
+		<img src="images/set_04.jpg">
+		<h4><i>5</i>第五步，点击信任“Shanghai Wear Yang Technology co., LTD” </h4>
+		<img src="images/set_05.jpg">
+		<h4><i>6</i>第六步，点击弹出框中的“信任”，大功告成，可以愉快地进入快抢手APP了！</h4>
+		<img src="images/set_06.jpg">
+	</div>	
+	<a href="index.html" class="tp_back">返回</a>
+</div>
+<span style="display:none">
+<script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script>
+</span>
+</body> 
+</html>

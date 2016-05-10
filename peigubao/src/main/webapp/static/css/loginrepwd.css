@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,p,a,span,font,input {margin:0px; padding:0px; border:0px; font-family:"微软雅黑";}
+li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
+.header {width:739px; height:42px;margin:20px auto;overflow:hidden }
+.header ul{}
+.header li{float:left;margin-right:13px}
+.lg_promt { width:741px; font-size:12px;margin:10px auto 0;text-align:left;text-indent:3.3em;line-height:24px;color:#fff;height:24px;background:#FA8C34;}
+.header #a1{background:url(../images/login/logo1.jpg);display:block;width:136px;height:36px;margin-top:5px;cursor: text;}
+.header #a2{background:url(../images/login/logo2.jpg);display:block;width:108px;height:33px;margin-top:5px}
+.header li p{ width:1px; height:32px; background:#ccc; margin:8px 0 0 0;}
+.header li h3{font-size:28px;color:#333;margin:5px 0 0 0;font-weight: normal; height:33px; line-height:33px;}
+#rightP{font-size:14px;float:right;padding-top:20px}
+#rightP a{color:#60ABE3;text-decoration:none}
+#rightP a:hover{text-decoration:underline}
+/*注册*/
+.register {border:1px solid #CCCCCC;width:739px; margin:0px auto; height:560px; clear:both;}
+.register h3{font-weight:normal;border-bottom:2px solid #FA8C34;padding-bottom:7px;width:661px;margin-left:39px;margin-top:37px}
+.register form{margin:54px 147px}
+.register input{height:32px;width:258px;border:1px solid #C5C5C5;border-radius:3px;color:#BEBEBE;font-size:12px;margin-bottom:30px;margin-left:18px;padding-left:10px; outline:none;}
+.register #phone{background:url(../images/login/phone.png) no-repeat 245px 3px}
+.register #checkPhone{width:151px}
+.register #password,.register #checkPassword{background:url(../images/login/password.png) no-repeat 245px 7px}
+.register p{font-size:14px;width:550px;color:#545454;overflow:hidden;}
+.register #shortP{margin-left:30px}
+.register p em{font-style:normal;color:red;margin-right:10px}
+.register #firstSpan{display:inline-block;width:152px;height:32px;border:1px solid #178E30;color:#178E30;text-align:center;line-height:32px;margin-left:11px;background:#D7EEDB;font-size:12px}
+.register #secondSpan{display:inline-block;width:141px;height:32px;border:1px solid #FF4D4D;color:#FF4D4D;text-align:center;line-height:32px;margin-left:11px;background:#FFE4E5;font-size:12px}
+.register #huoqu1{display:inline-block;width:103px;height:34px;background:#5AA8FA;color:white;line-height:32px;text-align:center;border-radius:3px;margin-left:4px;text-decoration:none}
+.register #huoqu1:hover{background:#2C84E0}
+.register #huoqu2{display:inline-block;width:103px;height:34px;background:#999999;color:white;line-height:32px;text-align:center;border-radius:3px;margin-left:4px;text-decoration:none}
+.register form a img{margin-left:90px}
+.register #checkbox{position:relative;padding-left:30px;margin-left:80px;margin-bottom:28px}
+.register #checkbox input{width:14px;height:14px;position:absolute;margin:1px -19px;}
+.register #checkbox a{text-decoration:none;color:#3D9FE1}
+.register #checkbox a:hover{text-decoration:underline}
+
+
+/*登录*/
+.login {border:1px solid #CCCCCC;width:739px; margin:0px auto; height:543px; clear:both;}
+.login h3{font-weight:normal;border-bottom:2px solid #FA8C34;padding-bottom:7px;width:661px;margin-left:39px;margin-top:37px}
+.login form{margin:106px 163px}
+.login input{height:32px;width:258px;border:1px solid #C5C5C5;border-radius:3px;color:#BEBEBE;font-size:12px;margin-bottom:30px;margin-left:18px;padding-left:10px}
+.login #phone{background:url(../images/login/phone.png) no-repeat 245px 3px}
+.login #password{background:url(../images/login/password.png) no-repeat 245px 7px}
+.login p{font-size:14px;width:440px;color:#545454;overflow:hidden;}
+.login p span{display:inline-block;width:78px;height:32px;border:1px solid #FF4D4D;color:#FF4D4D;text-align:center;line-height:32px;margin-left:14px;background:#FFE4E5}
+.login form a img{margin-left:74px}
+.login #lastP{margin-top:28px}
+.login #forget{color:#3D9FE1;text-decoration:none;margin-left:74px}
+.login #register{color:#3D9FE1;text-decoration:none;float:right;margin-right:98px}
+.login #forget:hover{text-decoration:underline}
+.login #register:hover{text-decoration:underline}
+
+
+/*重置密码*/
+.resetpassword {border:1px solid #CCCCCC;width:739px; margin:0px auto; height:543px; clear:both;}
+.resetpassword h3{font-weight:normal;border-bottom:2px solid #FA8C34;padding-bottom:7px;width:661px;margin-left:39px;margin-top:37px}
+.resetpassword form{margin:54px 147px;}
+.resetpassword form p { margin-bottom:30px;}
+.resetpassword input{height:32px; line-height:32px; line-height:32px/0; width:258px;border:1px solid #C5C5C5;border-radius:3px;color:#545454;font-size:12px;margin-left:18px;padding-left:10px; outline:none;vertical-align: middle;}
+.resetpassword #phone{background:url(../images/login/phone.png) no-repeat 245px 3px}
+.resetpassword #checkPhone{width:151px}
+.resetpassword #password,.resetpassword #checkPassword{background:url(../images/login/password.png) no-repeat 245px 7px}
+.resetpassword p{font-size:14px;width:580px;color:#545454;overflow:hidden; position:relative;}
+.resetpassword p span {position: absolute;left: 370px;top: 0; display:block; height:32px; line-height:32px; padding:0 10px; font-size:12px;}
+.resetpassword #shortP{margin-left:14px}
+.resetpassword p em{font-style:normal;color:red;margin-right:10px}
+.resetpassword #firstSpan{display:inline-block;height:32px;border:1px solid #178E30;color:#178E30;text-align:center;line-height:32px;background:#D7EEDB;font-size:12px;}
+.resetpassword #secondSpan{display:inline-block;height:32px;border:1px solid #FF4D4D;color:#FF4D4D;text-align:center;line-height:32px;background:#FFE4E5;font-size:12px; left:355px;}
+.resetpassword #huoqu1{display:inline-block;width:103px;height:34px;background:#5AA8FA;color:white;line-height:32px;text-align:center;border-radius:3px;margin-left:4px;text-decoration:none}
+.resetpassword #huoqu1:hover{background:#2C84E0}
+.resetpassword #huoqu2{display:inline-block;width:103px;height:34px;background:#999999;color:white;line-height:32px;text-align:center;border-radius:3px;margin-left:4px;text-decoration:none}
+.resetbtn{ display:block; width:270px; height:40px; border:1px solid #dd6f00; background:#ff8c1a;text-align: center;line-height: 40px; color: #fff;border-radius: 5px; margin-left:90px; margin-top:10px; text-decoration:none; }
+.resetbtn:hover { background:#e66803;}
+
+
+
+.footer {clear:both;margin-top:19px;margin-bottom:50px; height:20px; line-height:20px; background:none;}
+.footer p {width:1080px;text-align:center; color:#999; font-size:14px; font-family:"微软雅黑"; margin:0px auto;}

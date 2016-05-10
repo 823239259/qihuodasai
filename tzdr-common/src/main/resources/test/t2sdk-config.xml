@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t2sdk-configuration>
+	<performance   heartbeatTime="120"
+		           acquireConnWaitTime="5000"  registerTime="5" reconnInterval="3"
+		             callBackTime="5000" enmCompress="true" />
+    <parents>    
+		<parent  parentName="tzdr" safeLevel="NONE">
+			<limit licenseFile="/usr/local/license.dat" encrypt="HSBlowfish" />
+			<members>
+				<member no="5" address="222.73.95.208" port="9003"
+				  charset="gbk" poolSize="3" />
+			</members>
+		</parent>
+	</parents>
+	<logAdapter className="com.hundsun.t2sdk.impl.util.CommonLogAdapter" />
+</t2sdk-configuration>
