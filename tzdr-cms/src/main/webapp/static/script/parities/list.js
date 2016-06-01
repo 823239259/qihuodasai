@@ -13,7 +13,7 @@ $(document).ready(function(){
 		rownumbers:true,
 		pagination:true,
 		fitColumns:true,// 自适应列宽
-		queryParams:{search_EQ_deleted:false},
+		queryParams:{},
 		frozenColumns:[[
             {field:'ck',checkbox:true}
 		]],
@@ -35,8 +35,7 @@ var parities={
 		doSearch:function(){
 			$('#edatagrid').datagrid('load',{
 				search_date_GTE_createTime:$("#startTime").val(),
-				search_date_GTE_createTime:$("#endTime").val(),
-				search_EQ_deleted:false
+				search_date_GTE_createTime:$("#endTime").val()
 			});
 		},
 		showCreateWin:function(type){
