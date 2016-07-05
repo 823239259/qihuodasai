@@ -118,7 +118,7 @@
 
 	<!-- Data Source -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="jdbc:mysql://test.db:3306/test_dktai?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"/>
+        <property name="url" value="jdbc:mysql://192.168.0.211:3306/test_dktai?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
 
