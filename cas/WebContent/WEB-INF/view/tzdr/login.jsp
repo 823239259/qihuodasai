@@ -7,8 +7,10 @@
 <%
 	String appPath = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+appPath;
+	String forgetPw = "http"+"://c.tzdr.com:8888/tzdr-web/";
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
+<c:set var="forget" value="<%=forgetPw%>"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
@@ -27,20 +29,20 @@
 <body>
 	<div class="header">
 		<ul>
-			<li><a href="http://c.tzdr.com:8888/tzdr-web/" id="a1"></a></li>
-			<li><a href="javascript: void(0);" id="a2"></a></li>
-			<li><p></p></li>
-			<li><h3>公共用户中心</h3></li>
+			<li><a href="${forget }" id="a1"></a></li>
+			<!-- <li><a href="javascript: void(0);" id="a2"></a></li> -->
+			<!-- <li><p></p></li> -->
+			<li><h3>用户登录中心</h3></li>
 		</ul>
-		<p id="rightP"><a href="http://c.tzdr.com:8888/tzdr-web/">返回首页</a></p>
+		<p id="rightP"><a href="${forget }">返回首页</a></p>
 	</div>
-	<div class="lg_promt">提示：配股宝与投资达人已达成战略合作关系，共享了账号系统，投资达人用户可直接登录配股宝，不用重新注册！</div>
+	<div class="lg_promt"><!-- 提示：配股宝与投资达人已达成战略合作关系，共享了账号系统，投资达人用户可直接登录配股宝，不用重新注册！ --></div>
 	<div class="center1000 clearfix">
 		<div class="logon-wrap clearfix">
 			<form:form method="post" id="fm1" commandName="${commandName}"
 				htmlEscape="true" cssClass="form">
 				<div class="ui-logon login" id="login">
-					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="http://c.tzdr.com:8888/tzdr-web/signin">立即注册</a></p></h3>
+					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget }/signin">立即注册</a></p></h3>
 					<input type="hidden" name="lt" value="${loginTicket}" /> <input
 						type="hidden" name="execution" value="${flowExecutionKey}" /> <input
 						type="hidden" name="_eventId" value="submit" />
@@ -61,7 +63,7 @@
 						<button class="loginbtn" type="button" id="loginbtn">登录</button>
 					</div>
 					<div class="lastP">
-						<a class="forget" href="http://c.tzdr.com:8888/tzdr-web/forgetpw">忘记密码？</a> <a class="registerlink" href="http://c.tzdr.com:8888/tzdr-web/signin">免费注册</a>
+						<a class="forget" href="${forget }/forgetpw">忘记密码？</a> <a class="registerlink" href="${forget }/signin">免费注册</a>
 					</div>
 				</div>
 			</form:form>

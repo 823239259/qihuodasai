@@ -46,7 +46,7 @@
 </div>
 <div class="navbox">
     <div class="nav">
-        <div class="navlogo"><a href="http://www.tzdr.com"><img src="${ctx}/static/images/common-new/logo.png" title="投资达人" alt="投资达人"></a></div>
+        <div class="navlogo"><a href="http://www.tzdr.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="投资达人" alt="投资达人"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" class="on">首页</a></li>
             <li><a id="togetherli" href="${ctx}/together/index">股票合买</a><!-- <i></i> --></li>
