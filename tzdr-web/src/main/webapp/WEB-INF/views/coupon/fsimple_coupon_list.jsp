@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>投资达人-中国领先的互联网金融交易平台</title>
+<title>维胜-中国领先的互联网金融交易平台</title>
 <link href="${ctx}/static/css/uc.css?v=${v}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet" type="text/css" />
 <script type="text/javascript"src="${ctx}/static/script/common/jquery.pagination.js"></script>

@@ -21,7 +21,7 @@
 <script language="javascript" src="${ctx}/static/script/trade/preByDay.js?v=${v}"></script>
 
 
-<title>期指操盘,投资达人-中国领先的互联网金融交易平台</title>
+<title>期指操盘,维胜-中国领先的互联网金融交易平台</title>
 <script type="text/javascript">
 function tradeContract(){
 	var htmlHeight = 800;  //网页高度

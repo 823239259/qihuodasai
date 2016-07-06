@@ -28,7 +28,7 @@
 <script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseIndex.js?v=${v}"></script>
-<title>富时A50- 投资达人</title>
+<title>富时A50- 维胜</title>
 </head>
 <body>
 	<!--顶部 -->

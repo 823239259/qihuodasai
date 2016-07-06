@@ -21,7 +21,7 @@
 <script language="javascript" src="${ctx}/static/script/trade/preByDay.js?v=${v}"></script>
 
 
-<title>恒指期货方案申请成功 - 投资达人</title>
+<title>恒指期货方案申请成功 - 维胜</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.navlist li a').removeClass('on');

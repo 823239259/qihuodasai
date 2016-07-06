@@ -11,7 +11,7 @@
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctx}/static/script/signin/bazaarFastSignIn.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
-<title>快速注册_投资达人-中国领先的互联网金融交易平台</title>
+<title>快速注册_维胜-中国领先的互联网金融交易平台</title>
 </head>
 <body>
 <div class="floatlayer">

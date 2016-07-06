@@ -11,7 +11,7 @@ tab=tab==null?"":tab;
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>帮助中心 - 投资达人</title>
+<title>帮助中心 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/help.css?20150806">
 <script type="text/javascript" src="${ctx}/static/script/common/swfobject.js"></script>

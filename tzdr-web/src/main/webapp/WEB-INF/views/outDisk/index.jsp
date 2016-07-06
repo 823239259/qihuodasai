@@ -13,7 +13,7 @@
 
 <script type="text/javascript" src="${ctx}/static/script/outDisk/index.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
-<title>国际综合 - 投资达人</title>
+<title>国际综合 - 维胜</title>
 
 </head>
 

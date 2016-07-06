@@ -18,7 +18,7 @@
 <link href="${ctx}/static/css/pagination.css" rel="stylesheet" type="text/css" />
 <script src="${ctx}/static/script/common/jquery.pagination.js" type="text/javascript"></script>
 <script language="javascript" src="${ctx}/static/script/trade/preByDay.js?v=${v}"></script>
-<title>随心操盘 - 投资达人</title>
+<title>随心操盘 - 维胜</title>
 <%-- <%
    response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
    response.setHeader("location",basePath); 

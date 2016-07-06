@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>港股开户操盘 - 投资达人</title>
+<title>港股开户操盘 -维胜</title>
 <meta content="港股开户操盘 零门槛 秒开账户 资金快" name="description">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/hkstockSignIn.css?v=${v}"/>
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css"/>

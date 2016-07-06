@@ -30,7 +30,7 @@
 <script language="javascript" src="${ctx}/static/script/trade/preByDay.js?v=${v}"></script>
 
 
-<title>富时A50,投资达人-中国领先的互联网金融交易平台</title>
+<title>富时A50,维胜-中国领先的互联网金融交易平台</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.navlist li a').removeClass('on');

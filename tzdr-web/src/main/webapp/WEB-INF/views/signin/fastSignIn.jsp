@@ -10,7 +10,7 @@
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctx}/static/script/signin/fastSignIn.js?v=${v}"></script>
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
-<title>快速注册 - 投资达人</title>
+<title>快速注册 - 维胜</title>
 </head>
 <body>
 <!-- banner -->

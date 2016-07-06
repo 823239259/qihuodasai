@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title> 免费注册 - 投资达人_创新型期货配资操盘服务平台</title>
+<title> 免费注册 - 维胜_创新型期货配资操盘服务平台</title>
 <meta content="投资达人投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" name="description">
 	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/currencyStockSignIn.css?v=${v}"/>
 	<link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css"/>

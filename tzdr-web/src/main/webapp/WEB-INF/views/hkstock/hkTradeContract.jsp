@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="股票配资,配资,投资达人,股票配资平台,配资平台,借钱炒股,炒股配资,随心配" name="keywords">
 <meta content="投资达人突破性的推出股票配资颠覆产品随心配，随心配能提供灵活多变的低成本配资资金,随心随意尽享股票配资高收益,投资达人致力于打造中国领先的互联网股票配资平台." name="description">
-<title>投资达人-中国领先的互联网股票配资平台 </title>
+<title>维胜-中国领先的互联网股票配资平台 </title>
 <%@ include file="../common/commonkeyword.jsp"%>
 <link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
 <style type="text/css">

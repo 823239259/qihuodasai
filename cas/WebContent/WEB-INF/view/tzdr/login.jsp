@@ -15,7 +15,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登录 - 投资达人</title>
+<title>登录 - 维胜</title>
 <link rel="shortcut icon" href="http://www.tzdr.com/static/ico/tzdr.ico">
 <link rel="stylesheet" href="${ctx}/css/login.css">
 <!-- <script language="javascript" src="http://www.tzdr.com/static/script/common/jquery-1.8.0.min.js"></script> -->

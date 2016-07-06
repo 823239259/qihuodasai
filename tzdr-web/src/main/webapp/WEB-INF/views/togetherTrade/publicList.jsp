@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>参与股票合买  - 投资达人</title>
+	<title>参与股票合买  - 维胜</title>
 	<link href="${ctx}/static/css/pagination.css" rel="stylesheet" type="text/css" /> 
 	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/buy.css?v=${v}">
 	<script language="javascript" src="${ctx}/static/script/tzdr.js"></script>

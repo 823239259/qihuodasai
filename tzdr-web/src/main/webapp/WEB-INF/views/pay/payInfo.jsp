@@ -10,7 +10,7 @@
    %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>账户充值 - 投资达人</title>
+<title>账户充值 - 维胜</title>
  <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721"  type="text/css">
  <link href="${ctx}/static/css/public.css" rel="stylesheet" type="text/css">	
  <link href="${ctx}/static/css/pagination.css" rel="stylesheet" type="text/css" /> 

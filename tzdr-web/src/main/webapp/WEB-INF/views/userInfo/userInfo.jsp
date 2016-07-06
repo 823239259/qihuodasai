@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>个人信息 - 投资达人</title>
+<title>个人信息 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?version=20150721"  />
 <!-- <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script> -->

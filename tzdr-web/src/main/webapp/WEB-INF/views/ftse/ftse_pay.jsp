@@ -21,7 +21,7 @@
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftsePay.js?v=${v}"></script>
 
-<title>支付确认 - 投资达人</title>
+<title>支付确认 - 维胜</title>
 </head>
 <body>
 	<!--顶部 -->

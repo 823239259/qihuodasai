@@ -13,7 +13,7 @@
 <script language="javascript" src="${ctx}/static/script/product/common.js?v=${v}"></script>
 
 <script type="text/javascript" src="${ctx}/static/script/product/commodity.js?v=${v}"></script>
-<title>商品综合 - 投资达人</title>
+<title>商品综合 - 维胜</title>
 
 <script type="text/javascript">
 $(document).ready(function() {

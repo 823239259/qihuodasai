@@ -21,7 +21,7 @@
 <script language="javascript" src="${ctx}/static/script/common/tzdr.user.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/futrue/futrue.js?v=${v}"></script>
 
-<title>支付确认 - 投资达人,投资达人-中国领先的互联网金融交易平台</title>
+<title>支付确认 - 维胜,维胜-中国领先的互联网金融交易平台</title>
 <script type="text/javascript">
 function tradeContract(){
 	var htmlHeight = 800;  //网页高度

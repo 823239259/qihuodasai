@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>免息操盘,投资达人</title>
+<title>免息操盘,维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/free.css">
 <script language="javascript" src="${ctx}/static/script/trade/freeTrade.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/tzdr.js?v=${v}"></script>

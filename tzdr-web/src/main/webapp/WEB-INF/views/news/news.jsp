@@ -14,7 +14,7 @@
  <script src="${ctx}/static/script/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	
  <script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js"></script>
- <title>${news.name} - 投资达人</title>
+ <title>${news.name} - 维胜</title>
 
 </head>
 <body>

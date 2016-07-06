@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>代理赚钱 - 投资达人</title>
+<title>代理赚钱 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?version=20150721">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/tzdr.css">

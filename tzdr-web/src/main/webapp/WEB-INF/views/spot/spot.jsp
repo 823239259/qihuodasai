@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>新华油 - 投资达人</title>
+<title>新华油 - 维胜</title>
 <meta content="新华油,黑色金子,低门槛,高回报" name="description">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/index.css">

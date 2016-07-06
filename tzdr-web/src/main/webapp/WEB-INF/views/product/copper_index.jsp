@@ -31,7 +31,7 @@
 <script type="text/javascript">
     
 </script>
-<title>沪铜 - 投资达人</title>
+<title>沪铜 - 维胜</title>
 </head>
 <body>
 	<!--顶部 -->

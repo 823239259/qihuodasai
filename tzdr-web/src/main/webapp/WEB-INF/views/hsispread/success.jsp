@@ -9,7 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>恒生指数期货急速交易 - 投资达人</title>
+<title>恒生指数期货急速交易 - 维胜</title>
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/hsispreadindex.css?v=${v}">
 

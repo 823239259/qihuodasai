@@ -66,7 +66,7 @@ $(document).ready(function(){
 });
 </script>
 
-<title>支付确认 - 投资达人,投资达人-中国领先的互联网金融交易平台</title>
+<title>支付确认 - 维胜,维胜-中国领先的互联网金融交易平台</title>
 </head>
 <body>
 	<!--顶部 -->

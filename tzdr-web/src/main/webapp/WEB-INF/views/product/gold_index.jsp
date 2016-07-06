@@ -31,7 +31,7 @@
 <script type="text/javascript">
     
 </script>
-<title>沪金- 投资达人</title>
+<title>沪金- 维胜</title>
 </head>
 <body>
 	<!--顶部 -->

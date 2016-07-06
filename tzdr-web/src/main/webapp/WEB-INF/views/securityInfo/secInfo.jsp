@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>安全信息 - 投资达人</title>
+   <title>安全信息 - 维胜</title>
 	 <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721"  type="text/css">
 	 <link href="${ctx}/static/css/public.css" rel="stylesheet" type="text/css">	
 	 <link rel="stylesheet" href="${ctx}/static/css/tzdr.css">

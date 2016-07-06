@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>港股操盘 - 投资达人</title>
+<title>港股操盘 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/cphk.css?v=${v}">
 <script language="javascript" src="${ctx}/static/script/tzdr.js"></script>
 <script src="${ctx}/static/script/hkstock/index.js" type="text/javascript"></script>

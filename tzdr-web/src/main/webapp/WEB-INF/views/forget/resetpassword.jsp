@@ -8,7 +8,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>忘记密码 - 投资达人</title>
+<title>忘记密码 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx }/static/css/loginrepwd.css?v=${v}" />
  <script language="javascript" src="${ctx}/static/script/forget/forget.js?v=${v}"></script>
 </head>

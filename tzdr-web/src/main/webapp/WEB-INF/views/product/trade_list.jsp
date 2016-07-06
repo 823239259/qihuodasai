@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>商品期货方案列表 - 投资达人</title>
+<title>商品期货方案列表 - 维胜</title>
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/static/css/public.css?v=${v}">
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet"

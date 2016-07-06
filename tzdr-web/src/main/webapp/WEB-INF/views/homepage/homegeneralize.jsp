@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta content="投资达人提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；投资达人致力于打造中国领先的互联网金融交易平台." name="description">
-<title>推广赚钱_投资达人-中国领先的互联网金融交易平台</title>
+<title>推广赚钱_维胜-中国领先的互联网金融交易平台</title>
 <link href="${ctx}/static/css/tzdr.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${ctx}/static/generalize/css/sp.css">
 <script type='text/javascript' src="${ctx}/static/script/homepage/generalize.js"></script>

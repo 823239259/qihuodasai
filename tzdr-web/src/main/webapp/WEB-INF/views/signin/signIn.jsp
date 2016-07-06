@@ -15,7 +15,7 @@
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css">
 <script language="javascript" src="${ctx}/static/script/signin/signIn.js?v=${v}"></script>
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
-<title>注册 - 投资达人 </title>
+<title>注册 - 维胜 </title>
 <script type="text/javascript">
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>

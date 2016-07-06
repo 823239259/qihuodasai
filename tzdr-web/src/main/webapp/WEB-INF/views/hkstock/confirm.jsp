@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>港股方案确认 - 投资达人</title>
+<title>港股方案确认 - 维胜</title>
 <%@ include file="../common/commonkeyword.jsp"%>
 <%-- <link href="${ctx}/static/css/public.css?version=20150602" rel="stylesheet"
 	type="text/css"> --%>

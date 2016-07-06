@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>发起股票合买 - 投资达人</title>
+<title>发起股票合买 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/buy.css?v=${v}">
 <script language="javascript" src="${ctx}/static/script/tzdr.js"></script>
 <script src="${ctx}/static/script/togetherTrade/index.js?v=${v}" type="text/javascript"></script>
