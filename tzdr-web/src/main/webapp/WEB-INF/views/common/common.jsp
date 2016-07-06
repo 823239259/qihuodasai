@@ -68,7 +68,8 @@
 		window.open('http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=4000200158&curl=http://www.tzdr.com/','在线客服','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');
 	}
 </script>
-<span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span>
+<!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
+<span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <script>
 $(document).ready(function(e) {
 	$.ajaxSetup({ 

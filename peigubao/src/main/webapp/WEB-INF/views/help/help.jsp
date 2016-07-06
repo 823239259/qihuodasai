@@ -687,7 +687,7 @@ var tab="<%=tab%>";
                 <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win XP用户安装时需注意</h6>   
                 <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序。<br>若程序仍无法运行，请致电客服400-633-9257。</p>  
                 <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win 7用户安装时需注意</h6>  
-                <p style="margin-bottom:40px; text-indent:0;">1，直接下载安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序；<br>	2，若程序无法运行，请补充下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”，再运行TTS系统。<br>若程序仍无法运行，请致电客服400-020-0158。</p> 
+                <p style="margin-bottom:40px; text-indent:0;">1，直接下载安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序；<br>	2，若程序无法运行，请补充下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”，再运行TTS系统。<br>若程序仍无法运行，请致电客服400-852-8008。</p> 
                 <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win 8用户安装时需注意</h6>      
                 <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/vcredist_x86.zip">VC2005运行库</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序。<br>若程序仍无法运行，请致电客服400-633-9257。</p>            
             </div>

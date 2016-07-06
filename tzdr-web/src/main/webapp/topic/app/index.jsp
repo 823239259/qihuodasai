@@ -33,9 +33,8 @@
 	<div class="tp_box"><img src="images/img_03.jpg"></div>
 	<div class="tp_box"><img src="images/img_04.jpg"></div>
 </div>
-<span style="display:none">
-<script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script>
-</span>
+<!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
+<span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <%@ include file="../../WEB-INF/views/common/personfooter.jsp"%>
 </body> 
 </html>

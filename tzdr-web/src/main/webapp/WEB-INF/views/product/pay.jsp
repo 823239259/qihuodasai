@@ -76,7 +76,7 @@
                 <a href="javascript:void(0);" onclick="colseConfirmPayDiv();" class="fl_pb_cancle">取消</a>
                 <a href="javascript:void(0);" status="true" id="confirmPay" class="fl_pb_sure">确定支付</a>
             </div>            
-            <p class="fl_promtfont">注：代金券一般由达人平台活动发放，请大家多多关注。</p>
+            <p class="fl_promtfont">注：代金券一般由维胜平台活动发放，请大家多多关注。</p>
         </div>	
     </div>
 	<div class="capital">

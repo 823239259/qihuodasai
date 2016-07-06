@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>A股操盘方案列表 - 投资达人</title>
+<title>A股操盘方案列表 - 维胜</title>
 <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/static/css/public.css">

@@ -136,7 +136,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		         </tr>
 		     </table>
 		</ul>
-		<p class="fl_uc_userpromt">注意：从2016.03.23 18:00开始，我们的操盘软件已更换成直达快抢手快速下单软件，请新申请操盘方案的用户务必下载新软件！</p>
+		<p class="fl_uc_userpromt"><!-- 注意：从2016.03.23 18:00开始，我们的操盘软件已更换成直达快抢手快速下单软件，请新申请操盘方案的用户务必下载新软件！ --></p>
 		<a href="#" target="_blank" style="display:none; width:100%; height:40px; line-height:40px; font-size:14px; color:#f00; text-align: center; margin:10px auto -10px;">新年High翻天，开箱有壕礼！</a>
 	</div>
 	

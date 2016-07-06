@@ -132,7 +132,8 @@
 	</div>
 </div>
 <div class="tp_foot">Copyright  2016 配股宝 All Rights Reserved 上海禄吉股权投资基金管理有限公司 版权所有 沪ICP备16003566号</div>
-<span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span>
+<!-- <span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
+<span style="display: none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <%@ include file="../../WEB-INF/views/common/count.jsp"%>
 </body> 
 </html>

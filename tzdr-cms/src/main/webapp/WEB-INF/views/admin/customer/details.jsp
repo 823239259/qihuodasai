@@ -31,8 +31,8 @@ function longTimetoStr(value,rowData,rowIndex) {
 </style>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 </head>
-<body>
-    <shiro:hasPermission name="sys:outreach:customer:view">
+<body><!-- sys:outreach:customer:view -->
+    <shiro:hasPermission name="sys:customerService:customer:view">
     <div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'north',split:true,border:false" style="height:150px">
 			<div title="客户信息维护" id="proxy" class="easyui-panel" style="padding:1px;height:auto;">
@@ -120,7 +120,7 @@ function longTimetoStr(value,rowData,rowIndex) {
 	        </form>
 	</div>
 </shiro:hasPermission>
-	<shiro:lacksPermission name="sys:outreach:customer:view">
+	<shiro:lacksPermission name="sys:customerService:customer:view">
 		<%@ include file="../../common/noPermission.jsp"%>
 	</shiro:lacksPermission>
 </body>

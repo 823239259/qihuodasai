@@ -94,7 +94,8 @@
 	<div class="tp_main9"><img src="${ctx}/static/images/currencyStockSignIn/img_28.jpg" alt="行业标杆 最具信赖的互联网机构"></div>
 	<div class="tp_main9"><img src="${ctx}/static/images/currencyStockSignIn/img_29.jpg" alt="协议安全 电子数据保全安全可靠">></div>
 <div class="tp_foot">Copyright © 2016 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
-<span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span>
+<!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
+<span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <script type="text/javascript">
 function linkTo(){
    location.href='tencent://message/?Menu=yes&amp;amp;uin=938061641&amp;amp;Service=58&amp;amp;SigT=A7F6FEA02730C988C183024E338715675A767A94BC607A3E20555FC09D7C64AB232849984FD39FEF87AAA66E792E018181C8B39A3EFA80A26187C0B4AC35664307BEE2F1678AAF21B0CA97D39E6AFF32760CBFD2DB7B7AE58A7DD6E05D20A708DD4BDE6839042EE88E9A1BC004116E148DBD13DE594BE87B&amp;amp;SigU=30E5D5233A443AB2A1AFE5F63E48862C5125899443225C5484627F7769AF3C5FED8FE5E2682E669FFB992E953E203EC4500DC318A6BB47D930C31B6D029C6D28A11A350B1CBF3B56'

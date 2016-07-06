@@ -210,7 +210,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			<a href="javascript:void(0);" status="true" id="f_applyEndTrade"  data_no="" name="f_applyEndTrade" class="fl_uc_surebtn">确定</a>
 			<a href="javascript:void(0);" id="f_applyEndTrade_cance" name="f_applyEndTrade_cance" class="fl_uc_cancelbtn">取消</a>
 		</div>
-        <p class="fl_uspromtfont">注：折扣券一般由达人平台活动发放，请大家多多关注。</p>
+        <!-- <p class="fl_uspromtfont">注：折扣券一般由达人平台活动发放，请大家多多关注</p>。 -->
 	</div>
     
 	<!--顶部 -->

@@ -125,7 +125,8 @@
 
 <div class="tp_foot">Copyright © 2015 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
 <span style="display:none">
-<script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script>
+<!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
+<span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 </span>
 </body> 
 <script type="text/javascript">
