@@ -181,7 +181,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			<a href="javascript:void(0);" id="f_applyEndTrade_cance" name="f_applyEndTrade_cance" class="fl_uc_cancelbtn">取消</a>
 		</div>
 		<a href="#" target="_blank" style="display:none; width:100%; height:40px; line-height:40px; font-size:14px; color:#f00; text-align: center; margin:10px auto -10px;">新年High翻天，开箱有壕礼！</a>
-		<p class="fl_uspromtfont"><!-- 注：折扣券一般由达人平台活动发放，请大家多多关注。 --></p>
+		<p class="fl_uspromtfont"><!-- 注：折扣券一般由维胜平台活动发放，请大家多多关注。 --></p>
 	</div>
     
 	<!--顶部 -->

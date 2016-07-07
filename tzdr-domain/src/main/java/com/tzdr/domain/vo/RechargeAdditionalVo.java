@@ -295,9 +295,9 @@ public class RechargeAdditionalVo implements Serializable {
 	public String getShowSource() {
 		if (!ObjectUtil.equals(null, this.source) 
 				&& Constant.Source.PGB==this.source){
-			return "配股宝";
+			return "维胜";
 		}
-		return "投资达人";
+		return "维胜";
 	}
 
 

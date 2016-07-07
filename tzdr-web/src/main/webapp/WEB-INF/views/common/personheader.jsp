@@ -70,11 +70,11 @@
         	
         </ul>
         <!-- 股票合买 -->
-        <div style="display: none;" class="nav_tknav nav_together">
+         <div style="display: none;" class="nav_tknav nav_together">
             <h2><a href="${ctx}/together/index">股票合买</a></h2>
             <a href="${ctx}/together/index">发起合买</a>
             <a href="${ctx}/together/list">参与合买</a>
-        </div>
+        </div> 
         <!-- 国际期货 -->
         <div style="display: none;" class="nav_tknav nav_profur">
             <h2><a href="${ctx}/outDisk/index">国际期货</a></h2>         

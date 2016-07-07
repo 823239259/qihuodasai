@@ -17,7 +17,7 @@
         <div class="ft_wx">
             <div class="ft_wxtk" style="display: none;">
                 <img src="${ctx}/static/images/common-new/code.jpg">
-                <p>扫二维码关注<br>投资达人公众号</p>
+                <p>扫二维码关注<br>投资大人公众号</p>
             </div>
             <a href="javascript: void(0);"></a>
             <p>微信公众号</p>
@@ -41,7 +41,7 @@
 <div class="cpbox">
     <div class="cp_copyright">
         <div class="cp_link">
-            <p>Copyright ©  2016 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1<i>投资有风险   入市需谨慎</i></p>
+            <p>Copyright ©  2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1<i>投资有风险   入市需谨慎</i></p>
             <p>友情链接：<a href="http://www.csrc.gov.cn/pub/newsite/" target="_blank">证监会</a><a href="http://www.cbrc.gov.cn/index.html"  target="_blank">银监会</a><a href="http://www.circ.gov.cn/web/site0/"  target="_blank">保监会</a><a href="http://www.szse.cn/"  target="_blank">深交所</a><a href="http://www.sse.com.cn/"  target="_blank">上交所</a><a href="http://www.sgx.com/"  target="_blank">新加坡交易所</a><a href="http://www.hkex.com.hk/"  target="_blank">香港交易所</a><a href="https://www.nyse.com/index"  target="_blank">纽约证券交易所</a><a href="http://www.nasdaq.com/"  target="_blank">纳斯达克</a></p>
         </div>
         <div class="cp_cppic">

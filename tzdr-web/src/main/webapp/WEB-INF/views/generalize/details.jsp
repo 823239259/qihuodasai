@@ -171,7 +171,7 @@ $(document).ready(function() {
 					</div>
 					<div class="uc_sp_way">
 				        <h3><i>如何成为代理</i><img src="${ctx}/static/images/uc/sp_03.gif"></h3>
-				        <div class="uc_sp_wayctn"><p><span>请联系投资达人的<i>客服电话400-020-0158</i>或<i>客服qq4000200158</i>，选择您想获得的返点级别，完成相应的审核过程，即可在您的个人中心-代理赚钱栏目看到您的返点数额。<br></span><span>您自己股票操盘和所有下级用户股票操盘时产生的管理费*您选择的代理返点=您的佣金收入。<br></span><span>您可以给下级开设返点数，最高不超过您选择的代理返点级别。</span></p></div>
+				        <div class="uc_sp_wayctn"><p><span>请联系投资达人的<i>客服电话400-020-0158</i>或<i>客服qq 400-852-8008</i>，选择您想获得的返点级别，完成相应的审核过程，即可在您的个人中心-代理赚钱栏目看到您的返点数额。<br></span><span>您自己股票操盘和所有下级用户股票操盘时产生的管理费*您选择的代理返点=您的佣金收入。<br></span><span>您可以给下级开设返点数，最高不超过您选择的代理返点级别。</span></p></div>
 				    </div>
 				    <div class="uc_sp_way">
 				        <h3><i>代理返点级别</i><img src="${ctx}/static/images/uc/sp_03.gif"></h3>

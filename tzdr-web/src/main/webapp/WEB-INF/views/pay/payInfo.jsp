@@ -882,7 +882,7 @@ var tab=<%=tab%>;
 	                        </li>			
 						</ol>
 						<ol>
-							<li><label>收款人账号名称：</label><span>上海信闳投资管理有限公司</span></li>
+							<li><label>收款人账号名称：</label><span>成都盈偷科技有限公司</span></li>
 						</ol>
 					</ul>
 					<%--
@@ -925,7 +925,7 @@ var tab=<%=tab%>;
 			</div>
 			<div class="subtab">
 					<div class="uc_bank">
-						<p class="uc_b_title">您可以通过网上银行或银行柜台向投资达人转账（手续费最多一笔50元）</p>
+						<p class="uc_b_title">您可以通过网上银行或银行柜台向维胜转账（手续费最多一笔50元）</p>
 						<ul class="uc_b_list">
 							<ol class="first">
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
@@ -998,9 +998,9 @@ var tab=<%=tab%>;
 					</div>
 					<div class="uc_banktime">
 						<h3>到账时间:<i>如需马上到账或长时间未到账，可拨打客服电话：400-020-0158</i></h3>
-						<p><i></i>工作日17:30前转账的在资金到账后半小时内完成投资达人网充值</p>
-						<p><i></i>工作日17:30以后转账的在第二个工作日早上09:15前完成投资达人网充值</p>
-						<p><i></i>非工作日转账的将在下一个工作日早上09:15前完成投资达人网充值</p>
+						<p><i></i>工作日17:30前转账的在资金到账后半小时内完成维胜网充值</p>
+						<p><i></i>工作日17:30以后转账的在第二个工作日早上09:15前完成维胜网充值</p>
+						<p><i></i>非工作日转账的将在下一个工作日早上09:15前完成维胜网充值</p>
 					</div>
 			</div>
 			<div class="subtab">

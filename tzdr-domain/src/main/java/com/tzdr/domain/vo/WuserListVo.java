@@ -217,9 +217,9 @@ public class WuserListVo implements Serializable {
 
 	public String getSourceName() {
 		if(this.source == 2 || this.source == 5){
-			sourceName = "配股宝";
+			sourceName = "维胜";
 		}else{
-			sourceName = "投资达人";
+			sourceName = "维胜";
 		}
 		return sourceName;
 	}

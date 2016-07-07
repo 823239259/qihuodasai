@@ -480,7 +480,7 @@ function bandcard(){
 </p>
 </div>
 <div class="color999 font14 mgt10">
-  <p>手机号码是您在投资达人的重要凭证</p>
+  <p>手机号码是您在维胜的重要凭证</p>
 </div>
 </p>
 </div>
@@ -518,7 +518,7 @@ function bandcard(){
 </p>
 </div>
 <div class="color999 font14 mgt10">
-  <p>登录投资达人网站时需要输入的密码</p>
+  <p>登录维胜网站时需要输入的密码</p>
 </div>
 </p>
 </div>

@@ -33,7 +33,7 @@
              <div class="news_map"><img src="${ctx }/static/images/news/map.jpg"></div>   
              <h3>公司总部：中国（上海）自由贸易试验区加太路29号1幢东部404-A21室</h3>
              <h4>客户服务</h4>
-             <p><span>如果您在投资达人的体验过程中有任何疑问，请与客服人员联系。<br></span><span>客服电话：400-020-0158<br></span><span>客服QQ：4000200158<br></span><span>客服QQ群： 196113230</span></p>
+             <p><span>如果您在投资达人的体验过程中有任何疑问，请与客服人员联系。<br></span><span>客服电话：400-020-0158<br></span><span>客服QQ：400-852-8008<br></span><span>客服QQ群： 196113230</span></p>
              <h4>商业合作</h4>
              <p><span>投资达人诚邀有一定客户基础和有股票操盘经验的机构或个人进行商业合作。<br></span><span>合作请联系：marketing@tzdr.com <br></span><span>联系电话：13527539642<br></span><span>联系人：曹经理</span></p>
              <h4>媒体采访</h4>

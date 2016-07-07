@@ -20,19 +20,19 @@
 	<!--个人中心导航 -->
 	<div class="uc_sidebar">
 		<h2 id="oAccount" style="cursor: pointer;"><a href="#">操盘账户</a></h2>
-		<div class="uc_nav">
-			<ul>
+		<%-- <div class="uc_nav">
+			<!-- <ul> -->
 				<li><a id="together" href="${ctx}/usertogether/list">股票合买 </a><i>></i></li>
 				<li><a id="hkstock" href="${ctx}/uhkstock/list">港股操盘 </a><i>></i></li>
 				<li><a id="stock" href="${ctx}/trade/list">A股操盘</a><i>></i></li>
-			</ul>
-		</div>
+			<!-- </ul> -->
+		</div> --%>
 		<div class="uc_nav">
 			<ul>		
 				<%-- <li><a id="hsi" href="${ctx}/userhsi/trade_list">恒指期货</a><i>></i></li>		
 				<li><a id="crudeoil" href="${ctx}/usercrudeoil/trade_list">国际原油</a><i>></i></li> --%>
 				<li><a id="ftse" href="${ctx}/userftse/trade_list">国际期货</a><i>></i></li>
-				<li><a id="product" href="${ctx}/userproduct/trade_list">商品期货</a><i>></i></li>
+				<%-- <li><a id="product" href="${ctx}/userproduct/trade_list">商品期货</a><i>></i></li> --%>
 				<%-- <li><a id="futrue" href="${ctx}/future/trade_list">期指操盘</a><i>></i></li> --%>
 			</ul>
 		</div>
@@ -50,7 +50,7 @@
 				<%-- <li><a id="toUserInfo" href="${ctx}/userinfo/info">个人信息</a><i>></i></li> --%>
 				<li><a id="security" href="${ctx}/securityInfo/secInfo" >安全信息</a><i>></i></li>
 				<li><a id="toMessage" href="${ctx}/message/usermessage">在线留言</a><i>></i></li>
-				<li><a id="toGeneralize" href="${ctx}/generalize/details">代理赚钱</a><i>></i></li>
+				<%-- <li><a id="toGeneralize" href="${ctx}/generalize/details">代理赚钱</a><i>></i></li> --%>
 				<%-- <li><a id="userVolume" href="${ctx}/uservolume/volumelist">抵扣券</a><i>></i></li> --%>
 			</ul>
 		</div>

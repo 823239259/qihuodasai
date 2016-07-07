@@ -119,17 +119,17 @@ public class RechargeListVo implements Serializable {
 		}
 		// 来源
 		if (null == re.getSource()) {
-			this.setSource("投资达人");
+			this.setSource("维胜");
 		} else {
 			switch (re.getSource()) {
 			case Constant.Source.TZDR:
-				this.setSource("投资达人");
+				this.setSource("维胜");
 				break;
 			case Constant.Source.PGB:
-				this.setSource("配股宝");
+				this.setSource("维胜");
 				break;
 			default:
-				this.setSource("投资达人");
+				this.setSource("维胜");
 				break;
 			}
 		}
