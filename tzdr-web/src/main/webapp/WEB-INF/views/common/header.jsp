@@ -46,7 +46,7 @@
 </div>
 <div class="navbox">
     <div class="nav">
-        <div class="navlogo"><a href="http://www.dktai.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
+        <div class="navlogo"><a href="http://test.www.dktai.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" class="on">首页</a></li>
             <li><a id="togetherli" href="${ctx}/together/index">股票合买</a><!-- <i></i> --></li>

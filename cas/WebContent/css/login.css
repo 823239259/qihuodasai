@@ -5,7 +5,7 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .header {width:739px; height:42px;margin:20px auto;overflow:hidden }
 .header ul{}
 .header li{float:left;margin-right:13px}
-.header #a1{background:url(../images/login/new_logo.png);display:block;width:145px;height:40px;margin-top:2px;cursor: text;}
+.header #a1{background:url(../images/login/new_logo.png);display:block;width:104px;height:40px;margin-top:2px;cursor: text;}
 .header #a2{background:url(../images/login/logo2.jpg);display:block;width:108px;height:33px;margin-top:5px}
 .header li p{ width:1px; height:32px; background:#ccc; margin:8px 0 0 0;}
 .header li h3{font-size: 28px;color: #333; margin: 7px 0 0 0;font-weight: normal;height: 33px;line-height: 33px;}

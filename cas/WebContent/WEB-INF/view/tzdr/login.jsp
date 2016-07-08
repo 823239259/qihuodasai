@@ -7,7 +7,7 @@
 <%
 	String appPath = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+appPath;
-	String forgetPw = "http"+"://localhost:8088/tzdr-web/";////www.dktai.com
+	String forgetPw = "http"+"://test.www.dktai.com";//"http"+"://localhost:8088/tzdr-web/";////www.dktai.com
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
 <c:set var="forget" value="<%=forgetPw%>"></c:set>
@@ -73,7 +73,7 @@
 	<!--底部 -->
 	<!-- 公司简介 -->
 	<div class="footer">
-		<p>Copyright © 2016 上海信闳投资管理有限公司 版权所有沪ICP备14048395号-1</p>
+		<p>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</p>
 	</div>
 	<spring:theme code="cas.javascript.file" var="casJavascriptFile" text="" />
 	<script type="text/javascript" src="<c:url value="${casJavascriptFile}" />"></script>
