@@ -32,6 +32,6 @@
 			</form>
 			
 </div>
-<div class="footer"><p>Copyright © 2016 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</p></div>
+<div class="footer"><p>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</p></div>
 </body>
 </html>
