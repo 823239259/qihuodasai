@@ -48,7 +48,7 @@ var tab=<%=tab%>;
 			<a href="javascript:void(0)" class="close"></a>
 		</div>
 		<div class="fl_uc_main">
-			<p class="fl_uc_charge">请在新打开的网上银行<br>页面完成付款<br>充值遇到问题请咨询客服 <br>400-020-0158</p>
+			<p class="fl_uc_charge">请在新打开的网上银行<br>页面完成付款<br>充值遇到问题请咨询客服 <br>400-852-8008</p>
 			
 		</div>
 		<div class="fl_uc_btn">
