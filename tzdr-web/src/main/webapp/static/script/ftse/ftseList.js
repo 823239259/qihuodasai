@@ -111,7 +111,7 @@ function settingAccountInfoFtse(tranAccount,tranPassword,businessType) {
 	$("#window_detail_accountInfoFtse").html(tranAccountTable);
 	$("#hismsg").remove();
 	
-		var hsimsg="<p class='fl_uc_userpromt' id='hismsg'>注意：从2016.03.23 18:00开始，我们的操盘软件已更换成直达快抢手快速下单软件，请新申请操盘方案的用户务必下载新软件！</p>";
+		/*var hsimsg="<p class='fl_uc_userpromt' id='hismsg'>注意：从2016.03.23 18:00开始，我们的操盘软件已更换成直达快抢手快速下单软件，请新申请操盘方案的用户务必下载新软件！</p>";*/
 		$("#window_detail_accountInfoFtse").after(hsimsg);
 	
 };

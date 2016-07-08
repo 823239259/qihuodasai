@@ -128,7 +128,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		         </tr>
 		         <tr>
 		             <td>交易软件：</td>
-		             <td><a target="_blank" href="${ctx}/help?tab=software&leftMenu=8">直达快抢手</a></td>
+		             <td><a target="_blank" href="${ctx}/help?tab=software&leftMenu=8">交易软件下载</a></td>
 		         </tr>
 		         <tr>
 		             <td></td>
