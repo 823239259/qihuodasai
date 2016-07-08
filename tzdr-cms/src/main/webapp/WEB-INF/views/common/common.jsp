@@ -11,7 +11,7 @@
 <script language="javascript" src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
 <script language="javascript" src="${ctx}/static/script/common/commonUtils.js?v=20150625"></script>
 <link rel="stylesheet" type="text/css"  href="${ctx}/static/css/common.css"/>
-<link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
+<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 
 <script>
 	var basepath='${ctx}'+"/";
