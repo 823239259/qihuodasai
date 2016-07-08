@@ -10,7 +10,7 @@
 	<meta name="renderer" content="webkit" />
 	<meta name="robots" content="all" />
 	<meta name="keywords" content="股票、期货" />
-	<meta name="description" content="投资达人投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
+	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<meta name="author" content="www.tzdr.com" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="HandheldFriendly" content="true">
@@ -27,7 +27,7 @@
 	<c:set var="v" value="20160113"></c:set>
 
 	<!-- common css -->
-	<link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
+	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 	<!-- custom css -->
 	<link rel="stylesheet" href="${ctx}/static/css/weixin-lottery.css?v=${v}">
 
@@ -114,7 +114,7 @@
 	    
 	    <div class="main_box">
 	        <img src="${ctx}/static/images/weixinLottery/main_06.jpg">
-	        <p class="main_tel">使用奖品，拨打热线：<a href="tel:400-020-0158">400-020-0158</a></p>
+	        <p class="main_tel">使用奖品，拨打热线：<a href="tel:400-852-8008">400-852-8008</a></p>
 	    </div>
 	</div>
 	

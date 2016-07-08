@@ -25,8 +25,8 @@ if (data != null) {
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>投资达人百万现金大派送 - 投资达人</title>
-<meta content="投资达人百万现金大派送,国际原油实盘资金免费领" name="description">
+<title>维胜百万现金大派送 - 维胜</title>
+<meta content="维胜百万现金大派送,国际原油实盘资金免费领" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css">
 
@@ -89,7 +89,7 @@ function apply(){
 <body>
 <!--顶部 -->
 	<%@ include file="../../WEB-INF/views/common/personheader.jsp"%>
-<div class="tp_main"><img src="images/img_01.jpg" alt="投资达人百万现金大派送" ></div>
+<div class="tp_main"><img src="images/img_01.jpg" alt="维胜百万现金大派送" ></div>
 <div class="tp_main"><img src="images/img_02.jpg" alt="41800元国际原油实盘资金免费领"></div>
 <div class="tp_main"><img src="images/img_03.jpg" alt="盈利可提现,亏损算我们"></div>
 <div class="tp_main"><img src="images/img_04.jpg" alt="仅此一次,机不可失"></div>

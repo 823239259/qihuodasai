@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content="股票配资,配资,投资达人,股票配资平台,配资平台,借钱炒股,炒股配资,随心配" name="keywords">
-<meta content="投资达人突破性的推出股票配资颠覆产品随心配，随心配能提供灵活多变的低成本配资资金,随心随意尽享股票配资高收益,投资达人致力于打造中国领先的互联网股票配资平台." name="description">
+<meta content="股票配资,配资,维胜,股票配资平台,配资平台,借钱炒股,炒股配资,随心配" name="keywords">
+<meta content="维胜突破性的推出股票配资颠覆产品随心配，随心配能提供灵活多变的低成本配资资金,随心随意尽享股票配资高收益,维胜致力于打造中国领先的互联网股票配资平台." name="description">
 <title>维胜-中国领先的互联网股票配资平台 </title>
 <%@ include file="../common/commonkeyword.jsp"%>
-<link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
+<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 <style type="text/css">
 body{ color:#333; line-height:24px; font-size:12px; padding:20px;}
 table{ border:1px solid #bfbfbf; border-right:none; border-top:none;}
@@ -33,8 +33,8 @@ h2{ font-size:14px;}
     投资用户名： <br />
   <strong> </strong><strong>丙方：上海信闳投资管理有限公司</strong> <br />
     联系地址：中国(上海)自由贸易试验区加太路29号1幢东部404-A21室<br />
-    联系电话：400-020-0158<br />
-  <strong>鉴于：</strong> <br />1. 丙方是一家在上海市合法成立并有效存续的有限公司，拥有 http://www.tzdr.com/网站（下称“投资达人”）的经营权，提供信用咨询，为交易提供信息服务；<br>2. 乙方已在投资达人网站注册，并承诺其提供给丙方的信息是完全真实的；<br>3. 甲方承诺对本协议涉及的借款具有完全的支配能力，是其自有闲散资金，为其合法所得；并承诺其提供给丙方的信息是完全真实的；<br>4. 乙方有借款需求，甲方亦同意借款，双方有意成立借贷关系；<br>5. 甲方、乙方同意委托丙方对甲乙双方借款事宜进行全程账户管理和风险控制。<br>
+    联系电话：400-852-8008<br />
+  <strong>鉴于：</strong> <br />1. 丙方是一家在上海市合法成立并有效存续的有限公司，拥有 http://www.tzdr.com/网站（下称“维胜”）的经营权，提供信用咨询，为交易提供信息服务；<br>2. 乙方已在维胜网站注册，并承诺其提供给丙方的信息是完全真实的；<br>3. 甲方承诺对本协议涉及的借款具有完全的支配能力，是其自有闲散资金，为其合法所得；并承诺其提供给丙方的信息是完全真实的；<br>4. 乙方有借款需求，甲方亦同意借款，双方有意成立借贷关系；<br>5. 甲方、乙方同意委托丙方对甲乙双方借款事宜进行全程账户管理和风险控制。<br>
   <strong>据此，根据相关法律法规的规定，各方经协商一致，达成如下协议，以资共同遵照履行：</strong> </p>
   <h2><strong>第一条 借款金额、方式及用途</strong><strong> </strong></h2>
   <p>1. 甲、乙双方同意根据本协议约定出借和使用借款。每一笔借款的总操盘金额、通道使用费、保证金金额、账户管理费、借款期限等双方约定如下： </p>

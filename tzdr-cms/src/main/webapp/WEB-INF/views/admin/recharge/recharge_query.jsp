@@ -142,7 +142,7 @@
 	                <td>
 	                	<select class="easyui-combobox" name="source">
 	                        <option value="">所有网站</option>
-	                        <option value="1">投资达人</option>
+	                        <option value="1">维胜</option>
 	                        <option value="2">配股宝</option>
 	                    </select>
 	                </td>

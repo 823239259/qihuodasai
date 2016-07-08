@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
 <title> 免费注册 - 维胜_创新型期货配资操盘服务平台</title>
-<meta content="投资达人投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" name="description">
+<meta content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" name="description">
 	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/currencyStockSignIn.css?v=${v}"/>
 	<link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css"/>
 	<script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
@@ -76,7 +76,7 @@
 	<div class="tp_main3"><img src="${ctx}/static/images/currencyStockSignIn/img_10.jpg" alt="大连期货交易所"></div>
 	<div class="tp_main3"><img src="${ctx}/static/images/currencyStockSignIn/img_11.jpg" alt="郑州期货交易所"></div>
 	<div class="tp_main3_l"><img src="${ctx}/static/images/currencyStockSignIn/img_12.jpg" alt="中金交易所"></div>
-	<div class="tp_main4"><img src="${ctx}/static/images/currencyStockSignIn/img_13.jpg" alt="做商品期货首选投资达人"></div>
+	<div class="tp_main4"><img src="${ctx}/static/images/currencyStockSignIn/img_13.jpg" alt="做商品期货首选维胜"></div>
 	<div class="tp_main5"><img src="${ctx}/static/images/currencyStockSignIn/img_14.jpg" alt="费用低 门槛低 0利息 0管理费 400元起操盘"></div>
 	<div class="tp_main5"><img src="${ctx}/static/images/currencyStockSignIn/img_15.jpg" alt="高杠杆 高收益 期货式杠杆交易 利润丰厚"></div>
 	<div class="tp_main5"><img src="${ctx}/static/images/currencyStockSignIn/img_16.jpg" alt="期限短 申请快 T+0模式操作 3分钟操盘申请"></div>

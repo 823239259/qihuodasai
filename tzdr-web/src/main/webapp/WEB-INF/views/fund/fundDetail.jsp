@@ -30,7 +30,7 @@
 <script type='text/javascript'
 	src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
-<title>投资达人</title>
+<title>维胜</title>
 <script type="text/javascript">
 	var tab =<%=tab%>;
 

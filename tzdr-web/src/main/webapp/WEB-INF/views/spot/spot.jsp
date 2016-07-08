@@ -263,7 +263,7 @@ ul,li,ol,em,i { list-style: none; font-style: normal;}
 	<h3 class="sp_safetitle">国有交易平台：新华浙江大宗商品交易中心</h3>
 	<p class="sp_safefont">新华浙江大宗商品交易中心由新华社直属企业——中经社控股有限公司全资子公司新华社金融信息交易所与杭州兴利投<br>
 资有限公司共同组建。作为新华社隆重推出的大宗商品交易机构，新华大宗商品交易中心是新华社商品定价权战略布局重要的一环。</p>
-	<p class="sp_safepromt">投资达人是新华大宗交易所会员单位下的顶级代理，为现货用户提供全程指导服务！</p>
+	<p class="sp_safepromt">维胜是新华大宗交易所会员单位下的顶级代理，为现货用户提供全程指导服务！</p>
 	<ul class="sp_safe">
 		<li>
 			<img src="${ctx }/static/images/spot/safe_01.gif">

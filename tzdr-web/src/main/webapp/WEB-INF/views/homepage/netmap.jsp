@@ -43,7 +43,7 @@ $(document).ready(function() {
 </div>
 <div class="map">
     <dl class="map_one">
-        <dt>成为投资达人会员</dt>
+        <dt>成为维胜会员</dt>
         <dd><a href="${ctx}/signin" target="_blank">注册</a></dd>
         <dd><a href="${ctx}/login" target="_blank">登录</a></dd>
     </dl>

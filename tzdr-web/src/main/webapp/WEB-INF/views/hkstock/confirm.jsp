@@ -66,7 +66,7 @@ $(document).ready(function() {
 	</div>
 	<div class=" wzms">实名信息提交后不可修改，请务必认真填写真实资料 一个身份证只能绑定一个帐号。
 
-		如遇到问题，请联系客服 400-020-0158</div>
+		如遇到问题，请联系客服 400-852-8008</div>
 	<div class="smain">
 		<div class="srk">
 			<span class="label">真实姓名：</span><input class="au-ipt"

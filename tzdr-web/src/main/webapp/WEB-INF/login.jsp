@@ -24,7 +24,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content="投资达人提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；投资达人致力于打造中国领先的互联网金融交易平台." name="description">
+<meta content="维胜提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；维胜致力于打造中国领先的互联网金融交易平台." name="description">
 <title>登录_维胜-中国领先的互联网金融交易平台 </title>
 <link rel="stylesheet" href="${ctx}/static/css/login.css">
 <link rel="stylesheet" href="${ctx}/static/css/tzdr.css">

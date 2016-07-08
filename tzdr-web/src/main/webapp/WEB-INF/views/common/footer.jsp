@@ -24,7 +24,7 @@
         </div>
         <div class="ft_tel">
             <h3 class="ft_title">客服热线</h3>
-            <h4>400-020-0158</h4>
+            <h4>400-852-8008</h4>
             <p>工作日08:30-24:00   周末09:00-17:00</p>
         </div>
         <div class="ft_pic">

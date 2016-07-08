@@ -37,7 +37,7 @@
                 <img src="${ctx }/static/images/news/cppic_03.jpg" widht="703" height="192">
             </div>
             <h3><i>公司活动</i></h3>
-            <h5 class="cp_pictitle">踏青拓展活动：奔跑吧！投资达人！</h5>
+            <h5 class="cp_pictitle">踏青拓展活动：奔跑吧！维胜！</h5>
             <p>阳春四月，万物复苏，这是出游玩耍、踏青拓展的美好时节。在这个充满了春天气息的大好日子，公司为增加员工的归属感，促进大家的沟通交流，发扬广大员工群策群力、同舟协作的奋进精神，特组织了四月郊游。</p>
             <div class="cp_piclist">
                 <img src="${ctx }/static/images/news/cppic_04.jpg">

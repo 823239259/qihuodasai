@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>无红包不狂欢现金大红包送不停 - 投资达人</title>
+<title>无红包不狂欢现金大红包送不停 - 维胜</title>
 <meta content="无红包,不狂欢,现金大红包送不停" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 
@@ -19,7 +19,7 @@
 <div class="tp_main"><img src="images/img_04.jpg" alt="活动时间12月7日至12月31日"></div>
 <div class="main bg">
 	<div class="mainctn">
-		<img src="images/title_01.gif" title="投资达人年终大回馈,国际期货红包发发发">
+		<img src="images/title_01.gif" title="维胜年终大回馈,国际期货红包发发发">
 		<img src="images/img_05.gif" title="现金红包详情说明">
 		<img src="images/img_06.gif" title="举个栗子">
 	</div>	

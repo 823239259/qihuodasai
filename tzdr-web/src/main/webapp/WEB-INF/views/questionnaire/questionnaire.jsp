@@ -206,7 +206,7 @@
                 <div class="qs_i_qstitle">
                     <img src="${ctx }/static/activies/images/7.PNG">
                     <em></em>
-                    <span>您是否会主动向您的亲友推荐投资达人股票操盘产品？</span>
+                    <span>您是否会主动向您的亲友推荐维胜股票操盘产品？</span>
                     <i></i>
                 </div>
                 <div class="qs_i_qssel">

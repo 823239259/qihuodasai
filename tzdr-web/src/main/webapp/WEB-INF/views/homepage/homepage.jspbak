@@ -7,7 +7,7 @@
  
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta content="投资达人提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；投资达人致力于打造中国领先的互联网金融交易平台." name="description">
+<meta content="维胜提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；维胜致力于打造中国领先的互联网金融交易平台." name="description">
 <title>维胜-中国领先的互联网金融交易平台 </title>
 <link rel="stylesheet" href="${ctx}/static/css/login.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/tzdr.css">
@@ -48,7 +48,7 @@
 
 <!--  
 <div class="notic" id="advert">
-	    <p>公告：亲爱的达粉，投资达人网站升级啦！您可以一如既往的正常使用所有功能，但是老客户的提现密码需要进行重置，如有不便敬请谅解。</p>
+	    <p>公告：亲爱的达粉，维胜网站升级啦！您可以一如既往的正常使用所有功能，但是老客户的提现密码需要进行重置，如有不便敬请谅解。</p>
 	    <a href="javascript:void(0);"></a>
    
 </div>

@@ -17,14 +17,14 @@
         <div class="ft_wx">
             <div class="ft_wxtk" style="display: none;">
                 <img src="${ctx}/static/images/common-new/code.jpg">
-                <p>扫二维码关注<br>投资达人公众号</p>
+                <p>扫二维码关注<br>维胜公众号</p>
             </div>
             <a href="javascript: void(0);"></a>
             <p>微信公众号</p>
         </div>
         <div class="ft_tel">
             <h3 class="ft_title">客服热线</h3>
-            <h4>400-020-0158</h4>
+            <h4>400-852-8008</h4>
             <p>工作日08:30-24:00   周末09:00-17:00</p>
         </div>
         <div class="ft_pic">

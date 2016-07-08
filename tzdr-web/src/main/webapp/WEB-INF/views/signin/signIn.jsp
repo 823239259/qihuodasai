@@ -10,7 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content="投资达人提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；投资达人致力于打造中国领先的互联网金融交易平台." name="description">
+<meta content="维胜提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；维胜致力于打造中国领先的互联网金融交易平台." name="description">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/newregist.css?v=${v}">
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css">
 <script language="javascript" src="${ctx}/static/script/signin/signIn.js?v=${v}"></script>
@@ -98,7 +98,7 @@
                 <p style="display: none;">推广码有误！</p>
             </li>
         </ul>
-        <div class="rg_agree"><input type="checkbox" checked="checked" id="agreement" name="agreement">我已阅读并同意<a href="javascript:showAgreement();">《投资达人网站服务协议》</a></div>
+        <div class="rg_agree"><input type="checkbox" checked="checked" id="agreement" name="agreement">我已阅读并同意<a href="javascript:showAgreement();">《维胜网站服务协议》</a></div>
         <div class="rg_btn"><a status="true" id="signin" name="signin" href="javascript:void(0);">立即注册</a></div>
         </form>
     </div>
@@ -115,7 +115,7 @@
     	</form>
     </div>
 </div>
-<div class="footer"><p>Copyright © 2016 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</p></div>
+<div class="footer"><p>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</p></div>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

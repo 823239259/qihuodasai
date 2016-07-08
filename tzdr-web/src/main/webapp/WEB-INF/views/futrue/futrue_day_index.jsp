@@ -63,7 +63,7 @@ if (data != null) {
     		}
     	}
     	else {
-    		showMsgDialog("提示","请勾选\"我已阅读并同意《投资达人股指期货合作协议》\"");
+    		showMsgDialog("提示","请勾选\"我已阅读并同意《维胜股指期货合作协议》\"");
     		return false;
     	}
     }
@@ -106,7 +106,7 @@ if (data != null) {
     	});
         });
 </script>
-<title>期指操盘手 - 投资达人</title>
+<title>期指操盘手 - 维胜</title>
 <script type="text/javascript">
 function tradeContract(){
 	var htmlHeight = 800;  //网页高度
@@ -256,7 +256,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p>如您不清楚规则，或有其他疑问，请联系客服：400-020-0158</p>
+					<p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"
 							name="agree"> <span>我已阅读并同意<a
@@ -265,7 +265,7 @@ $(document).ready(function(){
 					<div class="cp_b_btn">
 						<a style="background:#eae9e9;">提交操盘申请</a>
 					</div>
-					<p style="color:#f00;">因中金所新规限制，投资达人期指操盘暂停申请，新开放时间待定</p>
+					<p style="color:#f00;">因中金所新规限制，维胜期指操盘暂停申请，新开放时间待定</p>
 				</div>
 			</div>
 		</div>

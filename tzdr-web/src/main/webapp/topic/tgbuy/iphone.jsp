@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>股票合买百万福利大派送 - 投资达人</title>
+<title>股票合买百万福利大派送 - 维胜</title>
 <meta content="" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
@@ -55,7 +55,7 @@
 		<img src="image/top.jpg" class="tp_top">
 		<div class="introduce">
 			<img src="image/dongdong.jpg" class="dongdong" />
-			<p>股票合买，是投资达人新推出的创新型投资模式。由操盘手发起合买，中小投资者参与合买，再由操盘手进行证券投资。对操盘手而言，可迅速放大收益，一次涨停可多赚50%。对合买者而言，整个投资由操盘手操作，不需要投资者自己进行繁杂的市场分析。不仅有保底收益，还可获得操盘手的部分收益。</p>
+			<p>股票合买，是维胜新推出的创新型投资模式。由操盘手发起合买，中小投资者参与合买，再由操盘手进行证券投资。对操盘手而言，可迅速放大收益，一次涨停可多赚50%。对合买者而言，整个投资由操盘手操作，不需要投资者自己进行繁杂的市场分析。不仅有保底收益，还可获得操盘手的部分收益。</p>
 		</div>
 		<img src="image/bottom.jpg" class="bottom">
 	</div>

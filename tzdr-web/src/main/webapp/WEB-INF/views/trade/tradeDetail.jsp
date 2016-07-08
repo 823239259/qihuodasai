@@ -353,7 +353,7 @@
 				<c:if test="${activityEnd}">
 				<div class="uc_spl_sharelist">
 				<!-- <span>分享到：</span> -->
-					<div class="bshare-custom icon-medium" style="margin-left: 11px;margin-top: inherit;" bshareUrl="<%=ConfUtil.getContext("web.address") %>/share/${trade.groupId}" bshareTitle="股票操盘，放大收益，投资达人8800活动" bshareSummary="你打败 ${rankint}%的活动用户。" bsharePic="<%=ConfUtil.getContext("web.address") %>/static/images/common/logo.jpg">
+					<div class="bshare-custom icon-medium" style="margin-left: 11px;margin-top: inherit;" bshareUrl="<%=ConfUtil.getContext("web.address") %>/share/${trade.groupId}" bshareTitle="股票操盘，放大收益，维胜8800活动" bshareSummary="你打败 ${rankint}%的活动用户。" bsharePic="<%=ConfUtil.getContext("web.address") %>/static/images/common/logo.jpg">
 						<div class="bsPromo bsPromo2"></div>
 						<div class="bsPromo bsPromo2"></div>           	 
 					</div>

@@ -141,7 +141,7 @@
             <li class="last">
                 <label>账户管理费</label>
                 <span><i id = "manageFee"></i>元/交易日</span>
-                <p>由投资达人平台按实际操盘天数收取，非交易日免费</p>
+                <p>由维胜平台按实际操盘天数收取，非交易日免费</p>
             </li>
         </ul>
         <ul class="buy_r_list">

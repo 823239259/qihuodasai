@@ -348,7 +348,7 @@ function showAgreement(){
 	var htmlHeight = 685;  //网页高度
 	var htmlWidth = 1221;  //网页宽度
 	var iLeft = (window.screen.width-10-htmlWidth)/2;  //获得窗口的水平位置;  
-	window.open(basepath+'websiteAgreement','投资达人网站服务协议','height='+htmlHeight+',innerHeight='+htmlHeight+',width='+htmlWidth+',innerWidth='+htmlWidth+',top=0,left='+iLeft+',toolbar=no,menubar=no,scrollbars=yes,resizeable=no,location=no,status=no');  
+	window.open(basepath+'websiteAgreement','维胜网站服务协议','height='+htmlHeight+',innerHeight='+htmlHeight+',width='+htmlWidth+',innerWidth='+htmlWidth+',top=0,left='+iLeft+',toolbar=no,menubar=no,scrollbars=yes,resizeable=no,location=no,status=no');  
 }
 
 //登录验证函数, 由 onsubmit 事件触发

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>春节感恩回馈 - 投资达人</title>
+<title>春节感恩回馈 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
  
@@ -27,8 +27,8 @@
 			<p class="p2">每日免费赠送上限为16手，同一种交易品种对应同种交易手数。</p>
 			<p class="p3">2月22日-2月26日起依次返还，每日最多返还16手。</p>
 			<p class="p4">代理用户暂不享受本次活动。</p>
-			<p class="p5">对活动如有任何疑问，敬请咨询投资达人客服电话400-020-0158。</p>
-			<p class="p6">本次活动只针对恒指期货、国际原油，最终解释权归投资达人所有。</p>
+			<p class="p5">对活动如有任何疑问，敬请咨询维胜客服电话400-020-0158。</p>
+			<p class="p6">本次活动只针对恒指期货、国际原油，最终解释权归维胜所有。</p>
 			<p class="p7">（举个栗子：小明2月8日交易了16手恒指期货。那么对应2月22日如再次交易16手将免除手续费，超过16手的将正常收取手续费。手续费先扣后返。）</p>
 		</div>
 	</div>

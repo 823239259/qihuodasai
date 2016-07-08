@@ -194,7 +194,7 @@
 							<h3>融资金额<a href="javascript:void(0);"><img src="${ctx}/static/images/uc/pay_02.gif"></a></h3>
 							<p id="totalLending"></p>
 							<div class="uc_mlpromt" style="display:none;">
-								<p>投资达人提供您的融资总额</p>
+								<p>维胜提供您的融资总额</p>
 								<i></i>
 							</div>
 						</li>

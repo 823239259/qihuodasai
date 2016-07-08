@@ -98,7 +98,7 @@
 				                <td>
 				                    <select class="easyui-combobox" name="source">
 				                        <option value="">--请选择--</option>
-				                        <option value="1">投资达人</option>
+				                        <option value="1">维胜</option>
 				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
@@ -216,7 +216,7 @@
 				                <td>
 				                    <select class="easyui-combobox" name="source">
 				                        <option value="">--请选择--</option>
-				                        <option value="1">投资达人</option>
+				                        <option value="1">维胜</option>
 				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
@@ -349,7 +349,7 @@
 				                <td>
 				                    <select class="easyui-combobox" name="source" id="source">
 				                        <option value="">--请选择--</option>
-				                        <option value="1">投资达人</option>
+				                        <option value="1">维胜</option>
 				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
@@ -425,7 +425,7 @@
 				                <td>
 				                    <select class="easyui-combobox" name="search_EQ_source">
 				                        <option value="">--请选择--</option>
-				                        <option value="1">投资达人</option>
+				                        <option value="1">维胜</option>
 				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
@@ -561,7 +561,7 @@
 				                <td>
 				                    <select class="easyui-combobox" name="search_EQ_source">
 				                        <option value="">--请选择--</option>
-				                        <option value="1">投资达人</option>
+				                        <option value="1">维胜</option>
 				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>

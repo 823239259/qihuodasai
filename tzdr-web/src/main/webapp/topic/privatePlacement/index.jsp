@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>阳光私募基金 - 投资达人</title>
+<title>阳光私募基金 - 维胜</title>
 <meta content="网络顶尖操盘手获取高额收益" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
@@ -21,9 +21,9 @@
 <div class="tp_main tp_main2"><img src="image/img_07.jpg" ></div>
 <div class="tp_main tp_main3">
 	<div class="tp_main3_top">
-		<h3>投资达人1号基金简介</h3>
+		<h3>维胜1号基金简介</h3>
 	</div>
-	<p>投资达人1号基金系由投资达人与华创期货联合发起，资金由第三方银行托管</br>主要投资于股票市场的高端阳光私募基金。业绩优于一般公募基金。</p>
+	<p>维胜1号基金系由维胜与华创期货联合发起，资金由第三方银行托管</br>主要投资于股票市场的高端阳光私募基金。业绩优于一般公募基金。</p>
 </div>
 <div class="tp_main tp_main4">
 	<div class="tp_main4_top">

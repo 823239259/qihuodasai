@@ -11,8 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
-<title>投资达人网斥上亿巨资,诚招战略合作伙伴加盟 - 投资达人</title>
-<meta content="投资达人网斥上亿巨资,诚招战略合作伙伴加盟,你出人脉我除资金,年入百万倍轻松" name="description">
+<title>维胜网斥上亿巨资,诚招战略合作伙伴加盟 - 维胜</title>
+<meta content="维胜网斥上亿巨资,诚招战略合作伙伴加盟,你出人脉我除资金,年入百万倍轻松" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <script src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
@@ -145,7 +145,7 @@ _czc.push(["_setAccount", "1256807294"]);
  
 <body>
 	<%@ include file="../../WEB-INF/views/common/personheader.jsp"%>
-<div class="tp_main"><img src="images/img_01.jpg" alt="投资达人网斥上亿资金" ></div>
+<div class="tp_main"><img src="images/img_01.jpg" alt="维胜网斥上亿资金" ></div>
 <div class="tp_main"><img src="images/img_02.jpg" alt="诚招战略合作伙伴加盟"></div>
 <div class="tp_main"><img src="images/img_03.jpg" alt="你除人脉我除资金,年入百万倍轻松"></div>
 <div class="tp_main"><img src="images/img_04.jpg" alt="期货投资者,有资源有人脉"></div>
@@ -172,7 +172,7 @@ _czc.push(["_setAccount", "1256807294"]);
 	<div class="message">
 		<div class="message1">
 			<h3>您好</h3>
-			<p class="p1">感谢您来到投资达人，若您有加盟意向，请您为我们留言或使用以下方式联系我们，我们将尽快给您回复，并为您提供最真诚的投资服务，谢谢！</p>
+			<p class="p1">感谢您来到维胜，若您有加盟意向，请您为我们留言或使用以下方式联系我们，我们将尽快给您回复，并为您提供最真诚的投资服务，谢谢！</p>
 			<h2>上 海 信 闳 投 资 管 理 有 限 公 司</h2>
 			<p class="p21">地&nbsp;&nbsp;&nbsp;址：中国（上海）自由贸易实验区加太路29号</p>
 			<p class="p22">1幢东部404-A21室</p>

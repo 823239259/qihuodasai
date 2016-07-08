@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>手机操盘期货,投资更加便利 - 投资达人</title>
-<meta content="投资达人,手机操盘期货,投资更加便利" name="description">
+<title>手机操盘期货,投资更加便利 - 维胜</title>
+<meta content="维胜,手机操盘期货,投资更加便利" name="description">
 <style type="text/css">
 * { font-size: 0; margin: 0; padding: 0;}
 .tp_main { width: 100%; height: auto; position: relative;}

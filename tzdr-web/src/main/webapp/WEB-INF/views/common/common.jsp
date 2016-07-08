@@ -30,7 +30,7 @@
 <script language="javascript" src="${ctx}/static/script/common/discussStock.js?version=20150812"></script>
 <%-- <script language="javascript" src="${ctx}/static/script/common/BizQQWPA.js?version=20150515"></script> --%>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css?version=20150724">
-<link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
+<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 <script type="text/javascript">
 	
 	var basepath='${ctx}'+"/";

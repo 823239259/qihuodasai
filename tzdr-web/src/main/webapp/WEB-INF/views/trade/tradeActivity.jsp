@@ -186,7 +186,7 @@ function tradeContract(){
                 <span><i id="pzje"></i>元</span>
                 <div class="uc_pay_promt uc_pay_promt1" style="display: block;">
                     <i class="uc_pp_arrow"></i>
-                    <p>投资达人借给您炒股的资金。</p>
+                    <p>维胜借给您炒股的资金。</p>
                 </div>
             </div>
             <div class="cp_sdfont">
@@ -226,7 +226,7 @@ function tradeContract(){
                 <span class="cp_color"><i>0</i>元</span><em>6600活动期间省<i id="lx"></i>元</em>
                  <div class="uc_pay_promt uc_pay_promt1" style="display: block;">
                     <i class="uc_pp_arrow"></i>
-                    <p>投资达人借给您炒股的资金利息。</p>
+                    <p>维胜借给您炒股的资金利息。</p>
                 </div>
             </div>
             <div class="cp_sdfont">
@@ -246,7 +246,7 @@ function tradeContract(){
             </div>
         </div>
         <div class="cp_bom">
-            <p>如您不清楚规则，或有其他疑问，请联系客服：400-020-0158</p>
+            <p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="agree">
                 <span>我已阅读并同意<a href="javascript:tradeContract();">《出资协议》</a></span>

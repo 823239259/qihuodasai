@@ -20,8 +20,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>外汇现货 - 投资达人</title>
-<meta content="外汇现货,投资达人" name="description">
+<title>外汇现货 - 维胜</title>
+<meta content="外汇现货,维胜" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <script type="text/javascript">
 $(document).ready(function(){
@@ -68,14 +68,14 @@ $(document).ready(function(){
 	<div class="content">
 		<div class="content1">
 			<h3>交易安全</h3>
-			<p><em>· </em>投资达人在和美国福汇集团战略合作，福汇集团（FXCM）是全球知名的外汇证券交易商，是全球性金融机构。</p>
+			<p><em>· </em>维胜在和美国福汇集团战略合作，福汇集团（FXCM）是全球知名的外汇证券交易商，是全球性金融机构。</p>
 			<p><em>· </em>福汇同时受4家司法机构监管：美国NFA，英国FCA，香港SFC，澳洲ASIC。</p>
-			<p><em>· </em>通过投资达人分发的福汇操盘账号，交易绝对公开、公平、公正、安全！</p>
+			<p><em>· </em>通过维胜分发的福汇操盘账号，交易绝对公开、公平、公正、安全！</p>
 		</div>
 		<div class="content2">
 			<h3>资金安全</h3>
-			<p><em>· </em>投资达人平台无论是在A股操盘、港股操盘、国际期货和商品期货，一直没有让众多投资者失望。努力建设的品牌口碑，为外汇现货投资做担保。</p>
-			<p><em>· </em>无论是初始投资、中途追加资金还是终结方案，投资达人采用实时美元对人民币汇率，不吃利差。</p>
+			<p><em>· </em>维胜平台无论是在A股操盘、港股操盘、国际期货和商品期货，一直没有让众多投资者失望。努力建设的品牌口碑，为外汇现货投资做担保。</p>
+			<p><em>· </em>无论是初始投资、中途追加资金还是终结方案，维胜采用实时美元对人民币汇率，不吃利差。</p>
 			<p><em>· </em> 零手续费，零管理费，零中介费，你盈亏多少就是多少。</p>
 		</div>
 	</div>	

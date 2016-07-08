@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../common/commonkeyword.jsp"%>
-<link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
+<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 <style type="text/css">
 body{ color:#333; line-height:24px; font-size:12px; padding:20px;}
 table{ border:1px solid #bfbfbf; border-right:none; border-top:none;}

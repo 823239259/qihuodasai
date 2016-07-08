@@ -42,7 +42,7 @@
 	</div>
 	<div class="cp_fail">
 		<h3>很抱歉！您的申请失败了！</h3>
-		<p>请联系客服400-020-0158，把您的问题反馈给客服，我们会第一时间解决您的问题。</p>
+		<p>请联系客服400-852-8008，把您的问题反馈给客服，我们会第一时间解决您的问题。</p>
 		<span>您也可以先<a href="${ctx}/help?tab=software&leftMenu=2" target="_blank">下载安装</a>交易软件</span>	
 		<div class="cp_paybtn">
 			<div class="cp_pb_font">您现在可以进入：</div>

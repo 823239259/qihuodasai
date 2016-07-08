@@ -16,7 +16,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
-	<meta name="description" content="投资达人投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
+	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
@@ -27,7 +27,7 @@
 	<c:set var="imgPreURL" value="<%=imgPreURL %>"></c:set>
 
 	<!-- common css -->
-	<link rel="shortcut icon" href="${ctx}/static/ico/tzdr.ico">
+	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 	<link rel="stylesheet" href="${ctx}/static/css/common.css?v=${v}">
 	<!-- custom css -->
 	<link rel="stylesheet" href="${ctx}/static/css/home.css?v=${v}">
@@ -84,7 +84,7 @@
 			<input type="hidden" name="execution" value="" id="J_FlowExecutionKey">
 			<input type="hidden" name="_eventId" value="submit" />
 			
-            <h3>欢迎登录投资达人</h3>
+            <h3>欢迎登录维胜</h3>
             <div class="lg_ip">
                 <div class="lg_ipctn">
                     <i class="user"></i>
@@ -404,16 +404,16 @@
 
 <!-- 选择我们 -->
 <div class="h_box">
-    <h2 class="h_chosetitle">炒股、炒期货为什么选投资达人？</h2>
+    <h2 class="h_chosetitle">炒股、炒期货为什么选维胜？</h2>
     <ul class="hc_box fl">
-        <li class="title"><label>自己炒股</label><span>在投资达人炒股</span></li>
+        <li class="title"><label>自己炒股</label><span>在维胜炒股</span></li>
         <li><label>1万本金</label><span>1万保证金+<i>融资4万操盘金</i></span></li>
         <li><label>买股票10手</label><span>买股票<i>50手</i></span></li>
         <li><label>一个涨停</label><span>一个涨停</span></li>
         <li><label>赚：1000元</label><span>赚：<i>5000元</i>（付少许管理费+利息）</span></li>
     </ul>
     <ul class="hc_box fr">
-        <li class="title"><label>自己炒期货</label><span>在投资达人炒期货</span></li>
+        <li class="title"><label>自己炒期货</label><span>在维胜炒期货</span></li>
         <li><label>11万（本金+保证金）</label><span>1万保证金+<i>融资20万操盘金</i></span></li>
         <li><label>只能买1手恒指</label><span>可买<i>2手</i>恒指</span></li>
         <li><label>涨10%</label><span>涨10%</span></li>

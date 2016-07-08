@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>喊单PK赛火热进行 - 投资达人</title>
+<title>喊单PK赛火热进行 - 维胜</title>
 <meta content="无红包,不狂欢,现金大红包送不停" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
@@ -119,7 +119,7 @@
 	<div class="tp_rank_main"><img src="images/process4.jpg" ></div>
 	<div class="tp_rank_main"><img src="images/process5.jpg" ></div>
 	<div class="tp_rank_main"><img src="images/process6.jpg" ></div>
-		<div class="processButton"><a href="http://www.tzdr.com/signin" style="margin-left:-380px" target='_blank'>注册投资达人会员</a><a href="javascript:void(0)" style="margin-left:-83px" onclick="enter()">立即报名参赛</a><a href="http://zhibo.tzdr.com" style="margin-left:217px" target="_blank">开始喊单比赛</a></div>
+		<div class="processButton"><a href="http://www.tzdr.com/signin" style="margin-left:-380px" target='_blank'>注册维胜会员</a><a href="javascript:void(0)" style="margin-left:-83px" onclick="enter()">立即报名参赛</a><a href="http://zhibo.tzdr.com" style="margin-left:217px" target="_blank">开始喊单比赛</a></div>
 </div>
 </div>
 

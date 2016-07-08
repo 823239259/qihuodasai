@@ -7,7 +7,7 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .header ul{}
 .header li{float:left;margin-right:13px}
 .lg_promt { width:741px; font-size:12px;margin:10px auto 0;text-align:left;text-indent:3.3em;line-height:24px;color:#fff;height:24px;background:#FA8C34;}
-.header #a1{background:url(../images/login/new_logo.png);display:block;width:145px;height:40px;margin-top:2px;cursor: text;}
+.header #a1{background:url(../images/login/new_logo.png);display:block;width:104px;height:40px;margin-top:2px;cursor: text;}
 .header #a2{background:url(../images/login/logo2.jpg);display:block;width:108px;height:33px;margin-top:5px;}
 .header li p{ width:1px; height:32px; background:#ccc; margin:8px 0 0 0;}
 .header li h3{font-size:28px;color:#333;margin:5px 0 0 0;font-weight: normal; height:33px; line-height:33px;}

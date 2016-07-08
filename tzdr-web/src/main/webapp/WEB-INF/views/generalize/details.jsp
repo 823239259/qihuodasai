@@ -163,21 +163,21 @@ $(document).ready(function() {
 						</div>
 						<div class="uc_sp_font">
 							<h3>什么是代理赚钱</h3>
-							<p><span>代理赚钱是投资达人独创的股票操盘行业无限级代理制度，成功邀请下级操盘，即可获得超高收益分成。下级用户再邀请下级用户，所有上级用户均可获得收益分成，轻松赚大钱！<br></span><span>您可以通过朋友、QQ、微信、微博等各种方式进行推广，所有通过您的推广链接访问而来的用户，注册后都将成为您的下级用户，当这些用户在投资达人网站股票操盘时，您便可以赚取下线用户一定比例的返点。</span></p>
-							<h3>为什么要做投资达人代理</h3>
+							<p><span>代理赚钱是维胜独创的股票操盘行业无限级代理制度，成功邀请下级操盘，即可获得超高收益分成。下级用户再邀请下级用户，所有上级用户均可获得收益分成，轻松赚大钱！<br></span><span>您可以通过朋友、QQ、微信、微博等各种方式进行推广，所有通过您的推广链接访问而来的用户，注册后都将成为您的下级用户，当这些用户在维胜网站股票操盘时，您便可以赚取下线用户一定比例的返点。</span></p>
+							<h3>为什么要做维胜代理</h3>
 		           			<p><span>客户提成上不封顶：获得代理资格后，每成功邀请一名下线用户，股票操盘产生管理费后，即可获得相应的返点，提成金额上不封顶，平台将提成自动转至您的达人账户余额中。<br></span><span>限下线无限收益：您不仅可以获得直接下级所产生的收益提成，还可以获得下级的下级、无限下级的所有收益提成。<br></span><span>快捷的操作流程：将您的推广链接通过各种渠道进行宣传，点击您的推广链接进入网站并注册的用户即自动成为您的下级用户。 </span></p>
 						</div>
 
 					</div>
 					<div class="uc_sp_way">
 				        <h3><i>如何成为代理</i><img src="${ctx}/static/images/uc/sp_03.gif"></h3>
-				        <div class="uc_sp_wayctn"><p><span>请联系投资达人的<i>客服电话400-020-0158</i>或<i>客服qq 400-852-8008</i>，选择您想获得的返点级别，完成相应的审核过程，即可在您的个人中心-代理赚钱栏目看到您的返点数额。<br></span><span>您自己股票操盘和所有下级用户股票操盘时产生的管理费*您选择的代理返点=您的佣金收入。<br></span><span>您可以给下级开设返点数，最高不超过您选择的代理返点级别。</span></p></div>
+				        <div class="uc_sp_wayctn"><p><span>请联系维胜的<i>客服电话400-852-8008</i>或<i>客服qq 400-852-8008</i>，选择您想获得的返点级别，完成相应的审核过程，即可在您的个人中心-代理赚钱栏目看到您的返点数额。<br></span><span>您自己股票操盘和所有下级用户股票操盘时产生的管理费*您选择的代理返点=您的佣金收入。<br></span><span>您可以给下级开设返点数，最高不超过您选择的代理返点级别。</span></p></div>
 				    </div>
 				    <div class="uc_sp_way">
 				        <h3><i>代理返点级别</i><img src="${ctx}/static/images/uc/sp_03.gif"></h3>
 				        <table width="608px" border="0" cellspacing="0" cellpadding="0" class="uc_sp_talbe">
 				          <tr>
-				            <td colspan="5">投资达人代理体系返点级别</td>
+				            <td colspan="5">维胜代理体系返点级别</td>
 				          </tr>
 				          <tr>
 				            <td>代理分级</td>
@@ -250,7 +250,7 @@ $(document).ready(function() {
 				    </div>
 				    <div class="uc_sp_way">
 		        		<h3><i>返点结算方式</i><img src="${ctx}/static/images/uc/sp_03.gif"></h3>
-		        		<div class="uc_sp_wayctn"><p>您的下级用户每发生一笔股票操盘，在操盘完成后您就获得一笔返点，当天的返点将在第二天凌晨0点统一为您充值到投资达人网站的账户中。当您的佣金到达10元时，您就可以随时兑换并提现，当然也可以在本站进行股票操盘。</p></div>
+		        		<div class="uc_sp_wayctn"><p>您的下级用户每发生一笔股票操盘，在操盘完成后您就获得一笔返点，当天的返点将在第二天凌晨0点统一为您充值到维胜网站的账户中。当您的佣金到达10元时，您就可以随时兑换并提现，当然也可以在本站进行股票操盘。</p></div>
 
 		    		</div>
 				    <div class="uc_sp_way">
@@ -315,11 +315,11 @@ $(document).ready(function() {
 					</div>
 					<div class="uc_spl_share content">
 						<p class="uc_spl_sfont">
-							牛市来了，小资金如何做大？我最近在投资达人网站股票操盘炒股，收益可扩大15倍，你也可以来试试！<%-- <a href="http://www.tzdr.com?uid=${id}">http://www.tzdr.com?uid=${id}</a> --%>
+							牛市来了，小资金如何做大？我最近在维胜网站股票操盘炒股，收益可扩大15倍，你也可以来试试！<%-- <a href="http://www.tzdr.com?uid=${id}">http://www.tzdr.com?uid=${id}</a> --%>
 						</p>
 						<div class="uc_spl_sharelist">
 							<span>分享到：</span>
-							<div class="bshare-custom icon-medium" style="margin-left: 11px;margin-top: inherit;" bshareUrl="<%=ConfUtil.getContext("web.address") %>/${id}" bshareTitle="股票操盘炒股，放大收益" bshareSummary="牛市来了，小资金如何做大？我最近在投资达人网站股票操盘，收益可扩大15倍，你也可以来试试！" bsharePic="<%=ConfUtil.getContext("web.address") %>/static/images/common/logo.jpg">
+							<div class="bshare-custom icon-medium" style="margin-left: 11px;margin-top: inherit;" bshareUrl="<%=ConfUtil.getContext("web.address") %>/${id}" bshareTitle="股票操盘炒股，放大收益" bshareSummary="牛市来了，小资金如何做大？我最近在维胜网站股票操盘，收益可扩大15倍，你也可以来试试！" bsharePic="<%=ConfUtil.getContext("web.address") %>/static/images/common/logo.jpg">
 								<div class="bsPromo bsPromo2"></div>
 								<div class="bsPromo bsPromo2"></div>           	 
 							</div>

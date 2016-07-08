@@ -2,7 +2,7 @@
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <div class="top">
     <div class="topctn">
-        <div class="top_tel">全国客服热线：400-020-0158</div>
+        <div class="top_tel">全国客服热线：400-852-8008</div>
         <%
        		if(request.getSession().getAttribute("userName")!=null){
        	%>
@@ -46,7 +46,7 @@
 </div>
 <div class="navbox">
     <div class="nav">
-        <div class="navlogo"><a href="http://www.tzdr.com"><img src="${ctx}/static/images/common-new/logo.png" title="投资达人" alt="投资达人"></a></div>
+        <div class="navlogo"><a href="http://www.tzdr.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" class="on">首页</a></li>
             <li><a id="togetherli" href="${ctx}/together/index">股票合买</a><!-- <i></i> --></li>
@@ -125,7 +125,7 @@
         <p class="fl_sv_tent"><a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzkzODA2MTY0MV8zMDUwODdfNDAwMDIwMDE1OF8yXw" target='_blank'></a></p>
         <div class="fl_sv_code">            
             <a href="${ctx}/topic/app/" target="_blank"></a> 
-            <%-- <div class="fl_sv_codetk" style="display: none;"><img src="${ctx}/static/images/common-new/code.png"><p>扫二维码访问<br>投资达人手机站</p></div> --%>
+            <%-- <div class="fl_sv_codetk" style="display: none;"><img src="${ctx}/static/images/common-new/code.png"><p>扫二维码访问<br>维胜手机站</p></div> --%>
         </div>
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>
     </div>

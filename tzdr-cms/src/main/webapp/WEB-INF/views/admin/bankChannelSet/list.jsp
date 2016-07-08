@@ -157,7 +157,7 @@ function pgbbankupdatesub(){
 <body>
 	<shiro:hasPermission name="sys:finance:bankChannel:view">
 	<div id="spifTab" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true" style="margin-top: 5px;">
-			<div title="投资达人设置" data-options="tools:'#p-tools'" style="padding:20px;">
+			<div title="维胜设置" data-options="tools:'#p-tools'" style="padding:20px;">
 			<div id="audittb" style="padding: 5px; height: auto">
 					<div style="margin-bottom: 5px">
 						<%-- <shiro:hasPermission name="sys:finance:bankChannel:create">  

@@ -7,14 +7,14 @@
 		<meta http-equiv="Content-Language" content="zh-CN"/> 
 		<!-- X-UA-Compatible 设置ie8/ie9 的兼容模式 -->
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-		<title>投资达人管理系统主页</title>
+		<title>维胜管理系统主页</title>
 		<%@include file="../common/import-easyui-js.jspf"%>
 		<link  rel="stylesheet" type="text/css" href="${ctx}/static/css/mainframe.css">
 		<script type="text/javascript" src="${ctx}/static/script/mainframe.js"></script>
 	</head>
 	<body class="easyui-layout">
 	<div class="northCls" data-options="region:'north',border:false" style="height:50px;">
-		<h3 >投资达人管理系统</h3>
+		<h3 >维胜管理系统</h3>
 		<div>
 			<span class="welcome">欢迎您：${user.username}</span>
 			<a id="updatePwd" href="javascript:void(0);" onclick="main.openUpdatePwdWin()" class="easyui-linkbutton" data-options="">修改密码</a>
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 	<div data-options="region:'south',border:false" style="height:30px;padding:3px;text-align: center;font-weight: bold;margin-top: 4px;">
-		Copyright©2015 上海信闳投资管理有限公司 版权所有
+		Copyright©2015 成都盈透科技有限公司所有
 	</div>
 	
 	<div id="main" data-options="region:'center',title:''">

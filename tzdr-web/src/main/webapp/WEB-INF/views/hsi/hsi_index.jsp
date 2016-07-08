@@ -28,7 +28,7 @@
 <script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiIndex.js?v=${v}"></script>
-<title>恒指期货 - 投资达人</title>
+<title>恒指期货 - 维胜</title>
 </head>
 <body>
 	<!--顶部 -->
@@ -160,7 +160,7 @@
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p>如您不清楚规则，或有其他疑问，请联系客服：400-020-0158</p>
+					<p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
 						<span>我已阅读并同意<a href="${ctx}/static/hsi/hsi.html" target="_blank">《恒指期货操盘合作协议》</a></span>

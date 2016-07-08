@@ -19,7 +19,7 @@
 <body>
 	<shiro:hasPermission name="sys:operationalConfig:notice:view">
 	<div id="noticeTab" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true" style="margin-top: 5px;">
-			<div title="投资达人公告" data-options="tools:'#p-tools'" style="padding:20px;">
+			<div title="维胜公告" data-options="tools:'#p-tools'" style="padding:20px;">
 	<div id="tb" style="padding: 5px; height: auto">
 		<shiro:hasPermission name="sys:operationalConfig:notice:update">
 		<a href="javascript:void(0)" class="easyui-linkbutton"

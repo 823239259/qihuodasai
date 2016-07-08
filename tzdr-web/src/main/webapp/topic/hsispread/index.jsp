@@ -14,8 +14,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>恒生指数期货极速交易 - 投资达人</title>
-<meta content="恒指期货,极速开户,开户零手续费,零管理费,投资达人" name="description">
+<title>恒生指数期货极速交易 - 维胜</title>
+<meta content="恒指期货,极速开户,开户零手续费,零管理费,维胜" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <script src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">

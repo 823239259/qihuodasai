@@ -71,7 +71,7 @@
 <div class="tp_main1"><img src="${ctx}/static/images/hkStockSignIn/img_02.jpg" alt="我出资金 门槛低至1050元"></div>
 <div class="tp_main1"><img src="${ctx}/static/images/hkStockSignIn/img_03.jpg" alt="你擦盘 开户完成下载交易软件"></div>
 <div class="tp_main1"><img src="${ctx}/static/images/hkStockSignIn/img_04.jpg" alt="盈利全归你 卖出股票收益全归你"></div>
-<div class="tp_main1"><img src="${ctx}/static/images/hkStockSignIn/img_05.jpg" alt="投资达人VS券商开户"></div>
+<div class="tp_main1"><img src="${ctx}/static/images/hkStockSignIn/img_05.jpg" alt="维胜VS券商开户"></div>
 <div class="tp_main1"><img src="${ctx}/static/images/hkStockSignIn/img_06.jpg" alt="开户三分钟完成"></div>
 <div class="tp_main2" style="background:#fafafa;"><img src="${ctx}/static/images/hkStockSignIn/img_07.jpg" alt="注册申请即可交易"></div>
 <div class="tp_main2" style="background:#fafafa;"><img src="${ctx}/static/images/hkStockSignIn/img_08.jpg" alt="申请结算立即出金"></div>

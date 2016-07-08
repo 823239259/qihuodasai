@@ -33,21 +33,21 @@
              <div class="news_map"><img src="${ctx }/static/images/news/map.jpg"></div>   
              <h3>公司总部：中国（上海）自由贸易试验区加太路29号1幢东部404-A21室</h3>
              <h4>客户服务</h4>
-             <p><span>如果您在投资达人的体验过程中有任何疑问，请与客服人员联系。<br></span><span>客服电话：400-020-0158<br></span><span>客服QQ：400-852-8008<br></span><span>客服QQ群： 196113230</span></p>
+             <p><span>如果您在维胜的体验过程中有任何疑问，请与客服人员联系。<br></span><span>客服电话：400-852-8008<br></span><span>客服QQ：400-852-8008<br></span><span>客服QQ群： 196113230</span></p>
              <h4>商业合作</h4>
-             <p><span>投资达人诚邀有一定客户基础和有股票操盘经验的机构或个人进行商业合作。<br></span><span>合作请联系：marketing@tzdr.com <br></span><span>联系电话：13527539642<br></span><span>联系人：曹经理</span></p>
+             <p><span>维胜诚邀有一定客户基础和有股票操盘经验的机构或个人进行商业合作。<br></span><span>合作请联系：marketing@tzdr.com <br></span><span>联系电话：13527539642<br></span><span>联系人：曹经理</span></p>
              <h4>媒体采访</h4>
-               <p><span>投资达人欢迎媒体朋友进一步了解并为我们提供宝贵的建议，共同探讨、推进行业发展。<br></span><span>采访请联系：media@tzdr.com <br></span><span>联系电话：13527539642<br></span><span>联系人：曹经理</span></p>
+               <p><span>维胜欢迎媒体朋友进一步了解并为我们提供宝贵的建议，共同探讨、推进行业发展。<br></span><span>采访请联系：media@tzdr.com <br></span><span>联系电话：13527539642<br></span><span>联系人：曹经理</span></p>
              <h4>加入我们</h4>
-             <p><span>投资达人需要金融证券等行业精英的加入，不断创新、共同成长！<br></span><span>应聘请联系：hr@tzdr.com <br></span><span>联系电话：18512393959<br></span><span>联系人：刘经理</span></p>
+             <p><span>维胜需要金融证券等行业精英的加入，不断创新、共同成长！<br></span><span>应聘请联系：hr@tzdr.com <br></span><span>联系电话：18512393959<br></span><span>联系人：刘经理</span></p>
              <h4>关注我们</h4>
              <ul>
                 <li class="news_con_wb">
-                    <h5>投资达人官网微信</h5>
+                    <h5>维胜官网微信</h5>
                     <img src="${ctx }/static/images/news/wb.jpg">
                 </li>
                 <li class="news_con_wx">
-                    <h5>投资达人官方微博</h5>
+                    <h5>维胜官方微博</h5>
                     <img src="${ctx }/static/images/news/wx.jpg">
                 </li>
              </ul>

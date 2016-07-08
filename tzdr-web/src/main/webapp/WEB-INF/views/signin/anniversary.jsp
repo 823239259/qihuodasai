@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
 <title>周年庆High翻天 开想抢壕礼 - 维胜</title>
-<meta content="投资达人,周年庆high翻天,开箱抢豪礼,百分百中奖" name="description">
+<meta content="维胜,周年庆high翻天,开箱抢豪礼,百分百中奖" name="description">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/anniversary-fastSignin.css?v=${v}"/>
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css"/>
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>

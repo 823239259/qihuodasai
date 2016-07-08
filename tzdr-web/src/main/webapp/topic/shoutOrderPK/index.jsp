@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-<title>喊单PK赛火热进行 - 投资达人</title>
+<title>喊单PK赛火热进行 - 维胜</title>
 <meta content="喊单pk赛火热进行中,当日盈利大于喊单师就有现金拿" name="description">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>

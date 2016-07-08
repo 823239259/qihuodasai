@@ -20,7 +20,7 @@
 	</head>
 	<body>
 			<div id="loginPanel"  cls="login" class="easyui-panel" style="width:500px;height:187px;padding:10px;"
-					data-options="title:'投资达人',collapsible:false,closable:false">
+					data-options="title:'维胜',collapsible:false,closable:false">
 				<form method="post" id="loginForm">
 					<table>
 						<tr>

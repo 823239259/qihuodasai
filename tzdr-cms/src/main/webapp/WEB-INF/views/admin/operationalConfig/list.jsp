@@ -156,7 +156,7 @@
 	<c:if test="${type==4}">
 	<shiro:hasPermission name="sys:operationalConfig:banner:view">
 	<div id="bannerTab" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true" style="margin-top: 5px;">
-		<div title="投资达人banner" data-options="tools:'#p-tools'" style="padding:20px;">
+		<div title="维胜banner" data-options="tools:'#p-tools'" style="padding:20px;">
 		<div id="tb" style="padding: 5px; height: auto">
 			<div>
 				<table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -225,8 +225,8 @@
 		<table id="edatagrid_pgb"></table>
 		</div>
 
-		<!-- 投资达人app-banner -->
-		<div title="投资达人APP-banner" data-options="tools:'#p-tools'" style="padding:20px;">
+		<!-- 维胜app-banner -->
+		<div title="维胜APP-banner" data-options="tools:'#p-tools'" style="padding:20px;">
 			<div id="tb_tzdrApp" style="padding: 5px; height: auto">
 				<div>
 					<table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -333,7 +333,7 @@ openAddIframeWin:function(width,height,title,modelName,TabsId){
 	if($title.indexOf("配股宝")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=add&type=8" style="width:100%;height:100%;"></iframe>';
 	}
-	if($title.indexOf("投资达人APP")>-1){
+	if($title.indexOf("维胜APP")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=add&type=9" style="width:100%;height:100%;"></iframe>';
 	}
 	$('#addWin').window({collapsible:false,minimizable:false,maximizable:maximizableValue,width:width,height:height,title:title,loadingMessage:'正在加载,请等待......',iconCls:'icon-add',closed:true,modal:true,content:html});
@@ -356,7 +356,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 			if($title.indexOf("配股宝")>-1){
 				rowData=$('#edatagrid_pgb').datagrid('getSelected');
 			}
-			if($title.indexOf("投资达人APP")>-1){
+			if($title.indexOf("维胜APP")>-1){
 				rowData=$('#edatagrid_tzdrApp').datagrid('getSelected');
 			}
 	if (null == rowData){
@@ -373,7 +373,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 	if($title.indexOf("配股宝")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=8&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
 	}
-	if($title.indexOf("投资达人APP")>-1){
+	if($title.indexOf("维胜APP")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=9&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
 	}
 	$('#addWin').window({collapsible:false,minimizable:false,maximizable:maximizableValue,width:width,height:height,title:title,loadingMessage:'正在加载,请等待......',iconCls:'icon-edit',closed:true,modal:true,content:html});
@@ -391,7 +391,7 @@ deleteData:function(modelName,TabsId){
 	if($title.indexOf("配股宝")>-1){
 		eda="edatagrid_pgb";
 	}
-	if($title.indexOf("投资达人APP")>-1){
+	if($title.indexOf("维胜APP")>-1){
 		eda="edatagrid_tzdrApp"
 	}
 	

@@ -23,7 +23,7 @@
 //						$('#floatlayer').css('display', 'none');
 //					});*/
 //					art.dialog({
-//					    title: '致投资达人网用户的公开信',
+//					    title: '致维胜网用户的公开信',
 //					    content:data.obj,
 //					    width:925,
 //					    cancelVal: '关闭',

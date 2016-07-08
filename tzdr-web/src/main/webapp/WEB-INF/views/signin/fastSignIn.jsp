@@ -61,7 +61,7 @@
             <li class="last">
                 <label></label>
                 <input id="agreement" type="checkbox" checked="checked">
-                <span>我同意<a href="javascript:showAgreement();"  onclick="_hmt.push(['_trackEvent','cpRegist','click','agree']);">《投资达人服务协议》</a></span>
+                <span>我同意<a href="javascript:showAgreement();"  onclick="_hmt.push(['_trackEvent','cpRegist','click','agree']);">《维胜服务协议》</a></span>
             </li>
         </ul>
         <div id="fastsignin"  status="true" class="rg_btn" onclick="_hmt.push(['_trackEvent','cpRegist','submit','regist']);">免费注册</div>
@@ -124,7 +124,7 @@
 	                <li class="last">
 	                    <label></label>
 	                    <input class="agreement" type="checkbox" checked="checked">
-	                    <span>我同意<a href="javascript:showAgreement();" onclick="_hmt.push(['_trackEvent','cpRegist','click','agree','floatlayer']);">《投资达人服务协议》</a></span>
+	                    <span>我同意<a href="javascript:showAgreement();" onclick="_hmt.push(['_trackEvent','cpRegist','click','agree','floatlayer']);">《维胜服务协议》</a></span>
 	                </li>
 	            </ul>
 	            <div status="true" class="rg_btn fastsignin"><a href="javascript:void(0);" onclick="_hmt.push(['_trackEvent','cpRegist','submit','regist','floatlayer']);">免费注册</a></div>

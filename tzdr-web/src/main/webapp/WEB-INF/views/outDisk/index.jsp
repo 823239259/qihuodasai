@@ -138,7 +138,7 @@
             </table>
         </div>  
         <div class="cp_bom">
-            <p>如您不清楚规则，或有其他疑问，请联系客服：400-020-0158</p>
+            <p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
                 <span>我已阅读并同意<a href="javascript:lookContract();">《国际期货综合操盘合作协议》</a></span>

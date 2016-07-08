@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>股票合买方案${trade.groupId} 总操盘资金<fmt:formatNumber value="${trade.totalOperateMoney}" type="number" maxFractionDigits="2" />元 - 投资达人</title>
+<title>股票合买方案${trade.groupId} 总操盘资金<fmt:formatNumber value="${trade.totalOperateMoney}" type="number" maxFractionDigits="2" />元 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css?v=${v}">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/buy.css?v=${v}"">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?v=${v}">
@@ -86,7 +86,7 @@
 			        <ul class="bd_infolist">
 			            <li class="li1"><label>持仓规则：</label><p>${operatorsInfo }</p></li>
 			            <li class="li2"><label>亏损补仓线：</label><p><fmt:formatNumber value="${trade.warning}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于补仓线时，系统提醒操盘手使用自有资金进行补仓，防止被平仓</p></li>
-			            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到投资达人分发的操盘账户中</p></li>
+			            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到维胜分发的操盘账户中</p></li>
 			            <li class="li4"><label>亏损平仓线：</label><p><fmt:formatNumber value="${trade.open}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于平仓线时，系统将强行平仓，保护合买者的利益</p></li>
 			            <li class="li5"><label>申请操盘天数：</label><p>${trade.naturalDays}天</p></li>
 			            <li class="li6"><label>开始操盘日期：</label><p></p></li>
@@ -121,7 +121,7 @@
 			        <ul class="bd_infolist">
 			            <li class="li1"><label>持仓规则：</label><p>${operatorsInfo }</p></li>
 			            <li class="li2"><label>亏损补仓线：</label><p><fmt:formatNumber value="${trade.warning}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于补仓线时，系统提醒操盘手使用自有资金进行补仓，防止被平仓</p></li>
-			            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到投资达人分发的操盘账户中</p></li>
+			            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到维胜分发的操盘账户中</p></li>
 			            <li class="li4"><label>亏损平仓线：</label><p><fmt:formatNumber value="${trade.open}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于平仓线时，系统将强行平仓，保护合买者的利益</p></li>
 			            <li class="li5"><label>申请操盘天数：</label><p>${trade.naturalDays}天</p></li>
 			            <li class="li6"><label>开始操盘日期：</label><p></p></li>
@@ -163,7 +163,7 @@
 			        <ul class="bd_infolist">
 			            <li class="li1"><label>持仓规则：</label><p>${operatorsInfo }</p></li>
 			            <li class="li2"><label>亏损补仓线：</label><p><fmt:formatNumber value="${trade.warning}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于补仓线时，系统提醒操盘手使用自有资金进行补仓，防止被平仓</p></li>
-			            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到投资达人分发的操盘账户中</p></li>
+			            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到维胜分发的操盘账户中</p></li>
 			            <li class="li4"><label>亏损平仓线：</label><p><fmt:formatNumber value="${trade.open}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于平仓线时，系统将强行平仓，保护合买者的利益</p></li>
 			            <li class="li5"><label>申请操盘天数：</label><p>${trade.naturalDays}天</p></li>
 			            <li class="li6"><label>开始操盘日期：</label><p>${trade.starttimeString}</p></li>
@@ -199,7 +199,7 @@
 		        <ul class="bd_infolist">
 		            <li class="li1"><label>持仓规则：</label><p>${operatorsInfo }</p></li>
 		            <li class="li2"><label>亏损补仓线：</label><p><fmt:formatNumber value="${trade.warning}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于补仓线时，系统提醒操盘手使用自有资金进行补仓，防止被平仓</p></li>
-		            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到投资达人分发的操盘账户中</p></li>
+		            <li class="li3"><label>总操盘资金：</label><p><fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，操盘者和合买者共同出的资金，入金到维胜分发的操盘账户中</p></li>
 		            <li class="li4"><label>亏损平仓线：</label><p><fmt:formatNumber value="${trade.open}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元 ，当操盘资金低于平仓线时，系统将强行平仓，保护合买者的利益</p></li>
 		            <li class="li5"><label>申请操盘天数：</label><p>${trade.naturalDays}天</p></li>
 		            <li class="li6"><label>开始操盘日期：</label><p>${trade.starttimeString}</p></li>
