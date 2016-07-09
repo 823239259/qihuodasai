@@ -878,8 +878,8 @@
  	// 路径配置
     require.config({
         paths:{//${ctx }/static/script
-            'echarts' :href + 'static/script/echarts',
-            'echarts/chart/pie' :href + 'static/script/echarts'
+            'echarts' :href + '/static/script/echarts',
+            'echarts/chart/pie' :href + '/static/script/echarts'
         }
     });
     function loadK(commodity,contract){
