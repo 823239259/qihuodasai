@@ -99,7 +99,7 @@ public class QuotationController {
 			commodityName = "美原油";
 			break;
 		case "CN":
-			commodityName = "富时中国指数";
+			commodityName = "富时A50";
 			break;
 		case "HSI":
 			commodityName = "恒生指数";
