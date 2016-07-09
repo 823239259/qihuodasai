@@ -19,7 +19,7 @@ table.data_web {
     margin-right:8px;
 }
 table.data_web th,table.data_web td{
-height:40px; line-height:40px;color:#34B3E0; border-bottom:1px dotted #f1f1f1; padding:5px 0;
+height:40px; line-height:40px;color:#333; border-bottom:1px dotted #f1f1f1; padding:5px 0;
 }
 table.data_web td {
  color:black;

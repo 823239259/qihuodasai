@@ -45,9 +45,9 @@
 				<div class="cp_main sif_main">
 					<div class="cp_m_ctn">
 		                <div class="cp_m_titl sif_m_title">
-		                    <i></i>
+		                    <!-- <i></i> -->
 		                    <h3 class="cp_h2">选择开仓手数<span>(可持仓的最大手数)</span></h3>
-                    		<input type="text" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;">
+                    		<%-- <input type="text" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;"> --%>
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_tranLever">
@@ -79,9 +79,9 @@
 		            </div>
 		            <div class="cp_m_ctn">
 		                <div class="cp_m_titl sif_m_title">
-		                    <i></i>
+		                    <!-- <i></i> -->
 		                    <h3 class="cp_h1">单手保证金<span>(操盘保证金越多，平仓风险越低)</span></h3>
-	                    		<input type="text" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;">
+	                    		<%-- <input type="text" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;"> --%>
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_traderBond">
@@ -172,7 +172,7 @@
 			</div>
 			<!--操盘须知  -->
 			<div class="capital_rule">
-		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon.png"></div>
+		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
 		        <h2>国际原油介绍：</h2>
 		        <p>在石油期货合约之中，原油期货是交易量最大的品种，我们推出的国际原油是投资世界交易量最大、影响力最广泛的纽约商业交易所轻原油期货合约。该合约规格为每手1000桶，报价单位为美元/桶，价格波动最小单位为1美分，当初一推出后交易活跃，为有史以来最成功的国际商品期货合约，它的成交价格成为国际石油市场关注的焦点。国际原油投资特点：1，全球性市场，操作简单  2，T+0模式，每天可多次交易，增加获利几率  3，杠杆交易原理，以小博大  4，几乎24小时交易，时间自由   5，无涨停板和交割时间限制，特别适合做短线投资。</p>
 		        <h2>交易细则</h2>        

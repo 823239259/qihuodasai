@@ -32,7 +32,7 @@
 	<input type="hidden" name="backtotalMoney" id="backtotalMoney" value="${totalMoney}"/>
 
 <!-- 隐藏域值 -->	
-	<div style="width:998px;margin:0 auto;border:1px solid #e1e1e1;border-bottom:none;color:red;">
+	<div style="width:998px;margin:0 auto;border:1px solid #e1e1e1;border-bottom:none;color:#fc3;">
 		<div style="text-align:center;font-weight:bold;margin:15px 0px;">港股免费操盘活动规则</div>
 		<div style="margin:0px 20px;padding-bottom:10px;line-height:180%;"><p>1，活动时间：2016.04.20 09:30 - 2016.04.28 12:00；</p>
 		<p>2，在此活动期间申请的港股方案一律免除通道使用费和账户管理费，您只需要支付操盘本金；</p>

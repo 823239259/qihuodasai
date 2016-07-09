@@ -68,9 +68,9 @@
 				<div class="cp_main sif_main">
 					<div class="cp_m_ctn">
 		                <div class="cp_m_titl sif_m_title">
-		                    <i></i>
+		                    <!-- <i></i> -->
 		                    <h3 class="cp_h2">选择开仓手数<span>(可持仓的最大手数)</span></h3>
-                    		<input type="text" id="input_tranLever" name="inputTranLever" value="1" readonly="readonly" style="font-size:0;">
+                    		<!-- <input type="text" id="input_tranLever" name="inputTranLever" value="1" readonly="readonly" style="font-size:0;"> -->
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_tranLever">
@@ -114,9 +114,9 @@
 		            </div>
 		            <div class="cp_m_ctn">
 		                <div class="cp_m_titl sif_m_title">
-		                    <i></i>
+		                    <!-- <i></i> -->
 		                    <h3 class="cp_h1">单手保证金<span>(操盘保证金越多，平仓风险越低)</span></h3>
-	                    		<input type="text" id="input_traderBond" name="inputTraderBond" value="2150.00"  readonly="readonly" style="font-size:0;">
+	                    		<!-- <input type="text" id="input_traderBond" name="inputTraderBond" value="2150.00"  readonly="readonly" style="font-size:0;"> -->
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_traderBond">

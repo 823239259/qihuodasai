@@ -24,9 +24,9 @@
 }
 
 .pagination .current {
-    background: #26B;
-    color: #fff;
-	border: solid 1px #AAE;
+    background: #fc3;
+    color: #333;
+	border: solid 1px #fc3;
 	text-align: right; 
 	height: 24px; 
 	line-height: 24px; 

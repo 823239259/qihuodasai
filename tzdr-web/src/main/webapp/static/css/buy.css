@@ -34,7 +34,7 @@ a{text-decoration:none;}
 .buy_r_list li{display:block; font-size:0; border-bottom:1px solid #E6E6E6 ;border-bottom-style:dashed; overflow:hidden;height: 53px;line-height:53px;}
 .buy_r_list li.last { border-bottom:none;}
 .buy_r_list li label{height:53px;width:88px;color:#0AAFF4;display:block; float:left; background-color:#EEFAFF;border-right:1px solid #E6E6E6;text-align:center;line-height:53px;font-size:14px}
-.buy_r_list li span{color:#FF7F00;font-size:17px; float:left; display:block; height: 53px;line-height: 53px; margin-left: 5px;}
+.buy_r_list li span{color:#fc3;font-size:17px; float:left; display:block; height: 53px;line-height: 53px; margin-left: 5px;}
 .buy_r_list li span i{font-size:17px;margin-right:5px}
 .buy_r_list li p{font-size:12px;color:#999999;float:right;width:225px;margin-right:4px;line-height:18px;padding-top:10px;}
 .buy_r_list li p.line { line-height: 34px;}
@@ -46,7 +46,7 @@ a{text-decoration:none;}
 .buy_btn a:hover { background:#e66803;}
 .buy_agree{margin:15px auto;width:400px; text-align: center; height:20px; line-height:20px;}
 .buy_agree em{font-size:14px;vertical-align: middle;}
-.buy_agree a{font-size:14px;color:#0AAFF4;vertical-align: middle;}
+.buy_agree a{font-size:14px;color:#fc3;vertical-align: middle;}
 .buy_agree a:hover{text-decoration:underline}
 .buy_agree input{vertical-align: middle; margin-right:5px;}
 /*支付确定*/

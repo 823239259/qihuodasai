@@ -45,9 +45,9 @@
 				<div class="cp_main sif_main">
 					<div class="cp_m_ctn">
 		                <div class="cp_m_titl sif_m_title">
-		                    <i></i>
+		                    <!-- <i></i> -->
 		                    <h3 class="cp_h2">选择开仓手数<span>(可持仓的最大手数)</span></h3>
-                    		<input type="text" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;">
+                    		<%-- <input type="text" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;"> --%>
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_tranLever">
@@ -79,9 +79,9 @@
 		            </div>
 		            <div class="cp_m_ctn">
 		                <div class="cp_m_titl sif_m_title">
-		                    <i></i>
+		                    <!-- <i></i> -->
 		                    <h3 class="cp_h1">单手保证金<span>(操盘保证金越多，平仓风险越低)</span></h3>
-	                    		<input type="text" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;">
+	                    		<%-- <input type="text" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;"> --%>
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_traderBond">
@@ -172,7 +172,7 @@
 			</div>
 			<!--操盘须知  -->
 			<div class="capital_rule">
-		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon.png"></div>
+		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
 		        <h2>恒指期货介绍</h2>
 		        <p>香港股市价格的重要指标，指数由若干只成份股（即蓝筹股）市值计算出来的，代表了香港交易所所有上市公司的12个月平均市值涵盖率的63%，恒生指数由恒生银行下属恒生指数有限公司负责计算及按季检讨，公布成份股调整。该指数于1969年11月24日首次公开发布。</p>
 		        <h2>交易细则</h2>        
@@ -223,7 +223,7 @@
 		          </tr>
 		          <tr>
 		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=8" style="color:#3d9fe1; padding-right:20px;" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=9" target="_blank"  style="color:#3d9fe1; padding-right:20px;">查看交易说明</a></td>
+		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=8" style="color:#fc3; padding-right:20px;" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=9" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
 		          </tr>
 		        </table>
 		

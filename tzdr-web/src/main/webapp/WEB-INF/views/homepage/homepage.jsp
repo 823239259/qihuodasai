@@ -653,12 +653,16 @@
        		if(request.getSession().getAttribute("userName")!=null){
        	%>
 		<div class="lgctn" id="logondiv">
-            <div class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></div>
-            <ul class="lg_info">
-                <li>
-                    <label>账户余额：</label>
-                    <span>${usermap.user_avlbal }元</span>
-                </li>
+			<h3 class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></h3>
+			<div class="lg_info">
+				<p class="yuei">账户余额：${usermap.user_avlbal }元</p>
+				<div>
+            		<a href="${ctx}/user/account" class="lg_chaopan">操盘账户</a>
+            		<%-- <a href="<%=ConfUtil.getContext("p2p.user.account") %>" style="display:none;">投资账户</a> --%>
+            	</div>
+            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
+			</div>
+        	<p style="border-top: 1px solid #4d4d4d"></p>
                 <%-- <li>
                     <label>A股融资：</label>
                     <span>${usermap.user_money }元</span>
@@ -671,9 +675,6 @@
                     <label>代理等级：</label>
                     <span>${usermap.user_level }级</span>
                 </li> --%>
-            </ul>
-            <div class="lg_btn"><a href="${ctx}/user/account" style="margin-bottom:10px;">操盘账户</a><a href="<%=ConfUtil.getContext("p2p.user.account") %>" style="display:none;">投资账户</a></div>
-            <p class="lg_time" style="display:block;">上次登录时间：<i>${lastLoginTime}</i></p>
         </div>
        	<%
        		}else{
@@ -699,14 +700,14 @@
                     </div>
                     <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
                     <div class="lg_link">
-                        <a href="#" class="left">忘记密码?</a>
-                        <a href="#" class="right">免费注册</a>
+                        <a href="${ctx}/forgetpw" class="left">忘记密码?</a>
+               			 <a href="${ctx}/signin" class="right">免费注册</a>
                     </div>
                 </div>
             </form>
             </div>
             <% } %>
-            <div class="lg_bottom"></div>
+            <!-- <div class="lg_bottom"></div> -->
         </div>
     </div>
 </div>
@@ -715,18 +716,6 @@
     <div class="notice_scroll">
         <h2><i></i>最新动态：</h2>
         <ul class="h_noticlist" id="h_scroll">
-           <!--  <li><i></i><a href="#" target="_blank">测试平台初测结果</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">配资最新详情</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">好运</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">配资</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">股票</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">龙胜</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">投资</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">测试</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">好运</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">配资</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">股票</a><em>2015-11-24</em></li>
-            <li><i></i><a href="#" target="_blank">龙胜</a><em>2015-11-24</em></li> -->
         </ul>
          <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多</a>
     </div>
@@ -771,7 +760,7 @@
                 <p><i class="gou"></i>保证金交易 以小博大</p>
                 <p><i class="gou"></i>白天晚上都可以交易</p>
                 <p><i class="gou"></i>极速开户 T+0结算到账</p>
-                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=7">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=9">实盘系统下载</a></p>
+                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=7">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=8">实盘系统下载</a></p>
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
@@ -1101,7 +1090,7 @@
 				             		    + '<p>今开:'+_data.QOpenPrice+'&nbsp;&nbsp;&nbsp;更新时间:'+_data.TimeStamp+'</p>';
 					 		 $(".right-gengxin").html(topHtml);
 					 	}
-					 html +=  ' "> <p><em>'+commodityName+'</em>'
+					 html +=  ' "> <p><em style="">'+commodityName+'</em>'
 					 	  + '<span style="color: '+color+';">'+qlastPrice+' '+scal+'</span>'
 					 	  + '<span style="color: '+color+';">'+_data.QChangeValue+'</span>'
 					 	  + '<span style="color: '+color+';">'+scal+'</span>';
@@ -1133,5 +1122,4 @@
 		});
 	});
 </script>
-
 </html>

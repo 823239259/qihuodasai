@@ -7,7 +7,7 @@
        		if(request.getSession().getAttribute("userName")!=null){
        	%>
        	<ul>
-            <li class="download" style = "color:red;"><em >你好，<a href="${ctx}/user/account" class="top_myt" style = "color:red;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a href="${ctx}/logout">退出</a></li>
+            <li class="download" style = "color:#999; font-size: 12px;"><em >你好，<a href="${ctx}/user/account" class="top_myt" style = "color:#fc3; padding-left: 10px;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a style="margin-left: 22px;" href="${ctx}/logout">退出</a></li>
             <li class="top_myc"><a href="${ctx}/user/account" class="on">我的账户</a></li>
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
            <%--  <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>

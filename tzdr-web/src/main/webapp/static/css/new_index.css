@@ -24,7 +24,14 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .bannerlist {width: 100%; position: relative; height: 400px; overflow: hidden;}
 .bannerlist .login {width: 1000px; margin: 0 auto; position: relative; height: 400px;}
 .bannerlist .login .loginbox {width: 260px; height: 320px; background-color: #424242;float: right; margin-top: 40px;border-radius: 3px;}
-.bannerlist .login .loginbox h3 {height: 40px;line-height: 40px; font-weight: normal; text-align: center; color: #ffcc33;margin-top: 10px;background-color: #333333;border-bottom: 1px solid #1a1a1a; font-size: 14px;}
+.bannerlist .login .loginbox h3 {height: 40px;line-height: 40px; font-weight: normal; text-align: center; color: #999;margin-top: 10px;background-color: #333333;border-bottom: 1px solid #1a1a1a; font-size: 14px;}
+.bannerlist .login .loginbox h3 a {float: right; text-decoration: none;color: #fc3; margin-right: 10px;}
+.bannerlist .login .loginbox h3 a:hover {text-decoration:underline;}
+.bannerlist .login .loginbox .lg_info {height: 226px; text-align: center; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a;}
+.bannerlist .login .loginbox .lg_info .yuei {color: #fc3; height: 80px; line-height: 80px;}
+.bannerlist .login .loginbox .lg_info a.lg_chaopan{width: 220px; height: 34px; line-height: 34px; font-size: 16px; color: #333; background-color: #fc3; display: block; margin-left: 20px; border-radius: 4px; text-decoration: none;}
+.bannerlist .login .loginbox .lg_info a.lg_chaopan:hover {background-color: #fe3;}
+.bannerlist .login .loginbox .lg_time {font-size: 14px; color: #666; height: 24px; line-height: 24px; margin-top: 40px;}
 .bannerlist .login .lg_ipctn {margin-top: 10px; position: relative;}
 .bannerlist .login .lg_ipctn .user {background: url("../images/image/iPhone.png") no-repeat; width: 12px; height: 18px;position: absolute;left: 10px;top: 8px;}
 .bannerlist .login .lg_ipctn .password {background: url("../images/image/password.png") no-repeat; width: 12px; height: 18px;position: absolute;left: 10px;top: 8px;}
@@ -60,7 +67,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .w_content .left_xiangqing .on {background-color: #292929;}
 .w_content .left_xiangqing .left_xiangmu {width: 190px;height: 80px;border-bottom: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
 .w_content .left_xiangqing .left_xiangmu:hover {cursor: pointer;}
-.w_content .left_xiangqing .left_xiangmu em {color: #999; float: left;width: 45%; font-size: 16px; height: 40px;line-height: 40px; padding-left: 5%;}
+.w_content .left_xiangqing .left_xiangmu em {color: #999; float: left;width: 45%; font-size: 14px; height: 40px;line-height: 40px; padding-left: 5%;}
 .w_content .left_xiangqing .on em {color: #ccc;background-color: #292929;}
 .w_content .left_xiangqing .left_xiangmu span {float: left; width: 45%; font-size: 14px; height: 40px; line-height: 40px; padding-left: 5%;}
 .w_content .right_xiangqing {float: right;}
@@ -126,6 +133,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .notice_scroll ul {width: 760px;height: 16px;line-height: 16px;overflow: hidden;float: left;}
 .notice_scroll ul li {display: block;float: left;width: 379px; text-align: left; height: 16px;line-height: 16px; font-size: 0; border-right: 1px dashed #ccc;}
 .notice_scroll ul li a {text-decoration:none; margin-left:20px; float:left; display: inline-block; height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33;overflow: hidden; padding-right: 20px;vertical-align: middle;text-overflow: ellipsis;white-space: nowrap;}
+.notice_scroll ul li a:hover {text-decoration: underline;}
 .notice_scroll ul li em {margin-right:20px; float:right; font-size: 14px; color: #666666; vertical-align: middle;}
 .notice_scroll h2 {display: block;float: left;padding-right: 35px;padding-left: 10px;height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33; font-weight: normal;border-right: 1px dashed #999999;}
 .notice_scroll h2 i {background: url(../images/image/laba.png) no-repeat;position: absolute;width: 21px; height: 18px;left: 0; top: 14px;}

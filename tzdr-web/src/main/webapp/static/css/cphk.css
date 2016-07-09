@@ -30,14 +30,14 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .cp_m_list ul li p i { color: #0aaff4; font-size: 22px;}
 .cp_sider { width: 405px; height: 608px; padding-left: 45px;
 	border-left: 1px solid #ccc; float: left;}
-.cp_sider h2 { width: 100%; height: 35px; line-height: 35px; font-size: 18px; color: #3d9fe1; font-weight: normal; overflow: hidden; margin-bottom: 20px;}
+.cp_sider h2 { width: 100%; height: 35px; line-height: 35px; font-size: 18px; color: #fc3; font-weight: normal; overflow: hidden; margin-bottom: 20px;}
 .cp_sider h2 a { float: right; font-size:16px; color: #3fa0e4; padding-right: 20px; *margin-top: -35px; }
 .cp_sdfont { position:relative; width: 100%; height: 60px; line-height: 60px; font-size: 14px; color: #444;}
 .cp_sdfont label { vertical-align: top; color: #444; display: inline-block; height: 24px; line-height: 24px;}
 .cp_sdfont label a { display: inline-block; width: 16px; height: 16px; background: url(../images/cp/cpicon_08.gif) no-repeat; vertical-align: middle; margin-left: 5px;}
 .cp_sdfont span { width:270px; display: inline-block; height: auto; line-height: 24px; vertical-align: top;}
-.cp_sdfont span i { color: #0aaff4; font-size: 20px;}
-.cp_sdfont span a { color:#0aaff4; text-decoration: underline;}
+.cp_sdfont span i { color: #fc3; font-size: 20px;}
+.cp_sdfont span a { color:#fc3; text-decoration: underline;}
 .cp_sdfont span a:hover { text-decoration:underline;}
 .cp_color { color: #0aaff4;}
 .cp_sdfont em { position:absolute; width:200px; text-align: right;right: 10px;top:0px; display: inline-block; height: 20px; line-height: 20px; font-size: 14px; color: #f00;padding-left: 10px; }
@@ -49,7 +49,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .cp_b_link { width: 100%; height: 40px; line-height: 40px; text-align: center; font-size: 16px; color: #444;}
 .cp_b_promt { width: 100%; height:24px; line-height: 24px; font-size: 14px; color: #ff924a; text-align: center;  }
 .cp_b_promt i { padding: 0 5px; color: #f00; font-size: 18px; font-family: "Arial";}
-.cp_b_link a { color: #3d9fe1;}
+.cp_b_link a { color: #fc3;}
 .cp_b_btn { width: 200px; height: 40px; margin: 15px auto 0;}
 .cp_b_btn a { display: block; width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 16px; color: #fff; background: #0aaff4; border-radius: 6px;}
 .fl_cpstep { width: 1000px; height: auto; position: relative; margin: 0 auto; z-index: 50;}
