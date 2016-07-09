@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -25,7 +25,11 @@
 	<c:set var="ctx" value="<%=basePath%>"></c:set>
 	<c:set var="v" value="20151127"></c:set>
 	<c:set var="imgPreURL" value="<%=imgPreURL %>"></c:set>
-
+	
+	<link rel="stylesheet" href="${ctx }/static/css/new_index.css">
+    <script src="${ctx }/static/script/jquery-1.8.3.js"></script>
+   
+    
 	<!-- common css -->
 	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 	<link rel="stylesheet" href="${ctx}/static/css/common.css?v=${v}">
@@ -38,14 +42,15 @@
 		var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
 	</script>
-
+ <script src="${ctx }/static/script/esl.js"></script>
+    <script src="${ctx }/static/script/slide-box.js"></script>
 </head>
 <body>
 <!-- header -->
 <%@include file="../common/header.jsp"%>
 
 <!-- 广告,登录块 -->
-<div class="login">
+<!-- <div class="login"> -->
     <div class="loginbox">
     	<%
        		if(request.getSession().getAttribute("userName")!=null){
@@ -133,19 +138,98 @@
     </div>
 	<div class="bannerlist">        
         <!-- 广告切换 -->
-        <div class="ad_slider">
+        <div class="ad_slider"  id="ad-slider">
         	<c:forEach var="b" items="${banners }" varStatus="status">
             	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>>${status.count }</a>
         	</c:forEach>
         </div>
-        <div class="bannerbox" id="bannersm" style="display:block;">
-        	<c:forEach var="b" items="${banners }" varStatus="status">
-            	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
-        	</c:forEach>
+        <div class="slide_box" id="slide-box" style="display:block;">
+        	<div class="slide_banner">
+	        	<c:forEach var="b" items="${banners }" varStatus="status">
+	            	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	        	</c:forEach>
+        	</div>
+        </div>
+         <div class="login">
+	        <div class="loginbox">
+	            <h3>欢迎登陆维胜</h3>
+	            <form id="loginForm" name="loginForm" action="" onsubmit="return" method="post" target="">
+	                <input type="hidden" name="isajax" value="true">
+	                <input type="hidden" name="isframe" value="true">
+	                <input type="hidden" name="lt" value="" id="LoginTicket">
+	                <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
+	                <input type="hidden" name="_eventId" value="submit">
+	                <div class="lg_ip">
+	                    <div class="lg_ipctn">
+	                        <i class="user"></i>
+	                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
+	                        <!-- 请输入手机号码 -->
+	                    </div>
+	                    <div class="lg_ipctn">
+	                        <i class="password"></i>
+	                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
+	                        <!-- 请输入登录密码 -->
+	                    </div>
+	                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
+	                    <div class="lg_link">
+	                        <a href="#" class="left">忘记密码?</a>
+	                        <a href="#" class="right">免费注册</a>
+	                    </div>
+	                </div>
+	            </form>
+	            <div class="lg_bottom"></div>
+	        </div>
+    	</div>
+   </div>
+<!-- </div> -->
+
+<!-- 广告切换 -->
+<div class="bannerlist">
+    <div class="ad_slider" id="ad-slider">
+        <a href="javascript: void(0);" title="1" class="on">1</a>
+        <a href="javascript: void(0);" title="2" class="">2</a>
+        <a href="javascript: void(0);" title="3" class="">3</a>
+        <a href="javascript: void(0);" title="4" class="">4</a>
+    </div>
+    <div class="slide_box" id="slide-box">
+        <div class="slide_banner">
+            <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
+            <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
+            <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
+            <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
+        </div>
+    </div>
+    <div class="login">
+        <div class="loginbox">
+            <h3>欢迎登陆维胜</h3>
+            <form id="loginForm" name="loginForm" action="" onsubmit="return" method="post" target="">
+                <input type="hidden" name="isajax" value="true">
+                <input type="hidden" name="isframe" value="true">
+                <input type="hidden" name="lt" value="" id="LoginTicket">
+                <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
+                <input type="hidden" name="_eventId" value="submit">
+                <div class="lg_ip">
+                    <div class="lg_ipctn">
+                        <i class="user"></i>
+                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
+                        <!-- 请输入手机号码 -->
+                    </div>
+                    <div class="lg_ipctn">
+                        <i class="password"></i>
+                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
+                        <!-- 请输入登录密码 -->
+                    </div>
+                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
+                    <div class="lg_link">
+                        <a href="#" class="left">忘记密码?</a>
+                        <a href="#" class="right">免费注册</a>
+                    </div>
+                </div>
+            </form>
+            <div class="lg_bottom"></div>
         </div>
     </div>
 </div>
-
 <!-- 最新公告 -->
 <div class="h_notic notice-scroll">
     <h2>最新动态：</h2>
@@ -154,7 +238,27 @@
     </ul>
     <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多&gt;&gt;</a>
 </div>
-
+<!-- 最新公告 -->
+<div class="notice h_notic">
+    <div class="notice_scroll">
+        <h2><i></i>最新动态：</h2>
+        <ul class="h_noticlist" id="h_scroll">
+           <!--  <li><i></i><a href="#" target="_blank">测试平台初测结果</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">配资最新详情</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">好运</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">配资</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">股票</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">龙胜</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">投资</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">测试</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">好运</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">配资</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">股票</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">龙胜</a><em>2015-11-24</em></li> -->
+        </ul>
+         <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多</a>
+    </div>
+</div>
 <!-- 安全保证 -->
 <div class="h_safe">
     <ul class="h_safelist">
@@ -436,4 +540,598 @@
 <script src="static/script/homepage/homepage.js?version=20151127"></script>
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
+</html>
+ --%>
+ <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.umpay.api.log.SysOutLogger"%>
+<%@page import="com.tzdr.common.utils.ConfUtil"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />	
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="apple-mobile-web-app-title" content="html5" />
+	<meta name="format-detection" content="telephone=no,email=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
+	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
+	<%
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
+		String imgPreURL = ConfUtil.getContext("banner.url");
+	%>
+	<c:set var="ctx" value="<%=basePath%>"></c:set>
+	<c:set var="v" value="20151127"></c:set>
+	<c:set var="imgPreURL" value="<%=imgPreURL %>"></c:set>
+	<%-- <link rel="stylesheet" href="${ctx}/static/css/common.css?v=${v}">
+	<!-- custom css -->
+	<link rel="stylesheet" href="${ctx}/static/css/home.css?v=${v}"> --%>
+	<link rel="stylesheet" href="${ctx }/static/css/new_index.css">
+    <script src="${ctx }/static/script/jquery-1.8.3.js"></script>
+   
+    
+	<!-- common css -->
+	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
+
+
+	<!-- common js -->
+	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript">
+		var basepath = "<%=basePath%>" + "/";
+		var casServerLoginUrl = "<%=casServerLoginUrl%>";
+	</script>
+ <script src="${ctx }/static/script/esl.js"></script>
+    <script src="${ctx }/static/script/slide-box.js"></script>
+<style type="text/css">
+	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
+	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
+	
+</style>
+</head>
+
+<body>
+<!-- header -->
+<%@include file="../common/header.jsp"%>
+<%-- <div class="top-title">
+    <div class="topctn">
+        <div class="top_tel"><!--<i></i>-->全国客服热线：400-852-8008$</div>
+        <ul>
+            <li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
+            <li><a href="${ctx}/help?tab=software&amp;leftMenu=1" target="_blank">交易软件下载</a></li>
+            <!--<li><a href="http://test.www.dktai.com:80/topic/app/" target="_blank">手机APP</a></li>-->
+           <!-- <li><a href="http://zhibo.tzdr.com" target="_blank">喊单直播间</a></li>-->
+            <li><a href="${ctx}/help?tab=newbie&amp;leftMenu=1" target="_blank">新手指南</a></li>
+        </ul>
+    </div>
+</div> --%>
+<%-- <div class="navbox">
+    <div class="nav">
+        <div class="navlogo"><a href="#"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
+        <ul class="navlist">
+            <li><a class="on"  href="${ctx}/" style="padding: 27px 16px 26px 16px;">首页</a></li>
+             <li><a href="${ctx}/hsi/index">恒指期货</a></li>
+            <li><a href="${ctx}/crudeoil/index">国际原油</a></li>
+            <li><a href="${ctx}/ftse/index">富时A50</a></li>
+            <li><a href="${ctx}/outDisk/index">国际综合</a></li>
+             <%
+        		if(request.getSession().getAttribute("userName") !=null){
+        	%>
+           		<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mc">我的账户</a></li>
+        	<%
+        		}else{
+        	%>
+            	<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mcnot">我的账户</a></li>
+        	<%
+        		}
+        	%>
+        </ul>
+    </div>
+</div> --%>
+<!-- 广告切换 -->
+<div class="bannerlist">
+    <div class="ad_slider" id="ad-slider">
+       <c:forEach var="b" items="${banners }" varStatus="status">
+            	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>>${status.count }</a>
+        </c:forEach>
+    </div>
+    <div class="slide_box" id="slide-box">
+        <div class="slide_banner">
+           <c:forEach var="b" items="${banners }" varStatus="status">
+	            	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	       </c:forEach>
+        </div>
+    </div>
+    <div class="login">
+        <div class="loginbox">
+        <%
+       		if(request.getSession().getAttribute("userName")!=null){
+       	%>
+		<div class="lgctn" id="logondiv">
+            <div class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></div>
+            <ul class="lg_info">
+                <li>
+                    <label>账户余额：</label>
+                    <span>${usermap.user_avlbal }元</span>
+                </li>
+                <%-- <li>
+                    <label>A股融资：</label>
+                    <span>${usermap.user_money }元</span>
+                </li>
+                <li>
+                    <label>港股融资：</label>
+                    <span>${usermap.hk_money }港元</span>
+                </li>
+                <li style="display:none;">
+                    <label>代理等级：</label>
+                    <span>${usermap.user_level }级</span>
+                </li> --%>
+            </ul>
+            <div class="lg_btn"><a href="${ctx}/user/account" style="margin-bottom:10px;">操盘账户</a><a href="<%=ConfUtil.getContext("p2p.user.account") %>" style="display:none;">投资账户</a></div>
+            <p class="lg_time" style="display:block;">上次登录时间：<i>${lastLoginTime}</i></p>
+        </div>
+       	<%
+       		}else{
+       	%>
+        <div class="lgctn" id="logindiv">
+            <h3>欢迎登陆维胜</h3>
+             <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
+                <input type="hidden" name="isajax" value="true">
+                <input type="hidden" name="isframe" value="true">
+                <input type="hidden" name="lt" value="" id="LoginTicket">
+                <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
+                <input type="hidden" name="_eventId" value="submit">
+                <div class="lg_ip">
+                    <div class="lg_ipctn">
+                        <i class="user"></i>
+                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
+                        <!-- 请输入手机号码 -->
+                    </div>
+                    <div class="lg_ipctn">
+                        <i class="password"></i>
+                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
+                        <!-- 请输入登录密码 -->
+                    </div>
+                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
+                    <div class="lg_link">
+                        <a href="#" class="left">忘记密码?</a>
+                        <a href="#" class="right">免费注册</a>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <% } %>
+            <div class="lg_bottom"></div>
+        </div>
+    </div>
+</div>
+<!-- 最新公告 -->
+<div class="notice  h_notic">
+    <div class="notice_scroll">
+        <h2><i></i>最新动态：</h2>
+        <ul class="h_noticlist" id="h_scroll">
+           <!--  <li><i></i><a href="#" target="_blank">测试平台初测结果</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">配资最新详情</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">好运</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">配资</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">股票</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">龙胜</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">投资</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">测试</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">好运</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">配资</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">股票</a><em>2015-11-24</em></li>
+            <li><i></i><a href="#" target="_blank">龙胜</a><em>2015-11-24</em></li> -->
+        </ul>
+         <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多</a>
+    </div>
+</div>
+<!--content-->
+<div class="w_content">
+    <div class="w_center">
+        <div class="w_center_border"></div>
+        <div class="w_center_top">
+            <div class="left-shangzheng">
+                <p>实时行情</p>
+            </div>
+            <div class="right-gengxin">
+                <p>昨收：1351.07     每日幅度：1338.63 - 1352.33</p>
+                <p>今开：1351.07     更新时间：2016/07/05 16:58</p>
+            </div>
+        </div>
+        <div class="w_center_xiangqing">
+            <div class="left_xiangqing">
+                <div class="left_hidden">
+                   
+                </div>
+            </div>
+            <div class="right_xiangqing">
+                <div id="main" style="height:400px; width: 800px;"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        	
+        </script>
+    <div class="w-qihuo">
+        <div class="w_center_border"></div>
+        <div class="w-qihuo-title">
+            <h3>国际期货</h3>
+            <a href="${ctx}/outDisk/index">查看更多</a>
+        </div> 
+        <div class="w-qihuo-content">
+            <div class="w-qihuo-caopan">
+                <div class="w-qihuo-img"><img src="static/images/image/qidai-1.png" alt=""/></div>
+                <p><i class="gou"></i>交人民币保证金操盘美元账户</p>
+                <p><i class="gou"></i>保证金交易 以小博大</p>
+                <p><i class="gou"></i>白天晚上都可以交易</p>
+                <p><i class="gou"></i>极速开户 T+0结算到账</p>
+                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=7">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=9">实盘系统下载</a></p>
+            </div>
+            <div class="w-guopjiqihuo">
+                <h3>【恒指期货】</h3>
+                <h4><i>40</i>元/单边</h4>
+                <ul>
+                    <li>• 港股指数 金融市场更加成熟</li>
+                    <li>• 交易灵活 技术分析更有效</li>
+                    <li>• 一天12个小时可以交易 盈利时间长</li>
+                    <li>• T+0交易 随时锁定利润</li>
+                </ul>
+                <div class="money">
+                    <p>总共操盘: 4795人</p>
+                    <p>总共交易: 41733手</p>
+                </div>
+                <p class="chaopan"><a href="${ctx}/hsi/index">申请操盘</a></p>
+            </div>
+            <div class="w-guopjiqihuo">
+                <h3>【国际原油】</h3>
+                <h4><i>45</i>元/单边</h4>
+                <ul>
+                    <li>• 全球玩家用户量最大 涨跌迅猛</li>
+                    <li>• 高透明度便于基本面分析</li>
+                    <li>• 全球交易市场无人操控</li>
+                    <li>• 全球交易市场无人操控</li>
+                </ul>
+                <div class="money">
+                    <p>总共操盘: 4795人</p>
+                    <p>总共交易: 41733手</p>
+                </div>
+                <p class="chaopan"><a href="${ctx}/crudeoil/index">申请操盘</a></p>
+            </div>
+            <div class="w-guopjiqihuo" style="border-right: 10px solid #424242;">
+                <h3>【富时A50】</h3>
+                <h4><i>39</i>元/单边</h4>
+                <ul>
+                    <li>A股精准风向标 免庄家操控</li>
+                    <li>• 门槛低 超短线 交易灵活</li>
+                    <li>• 国际版“IF指数” 操盘人数多</li>
+                    <li>• 国际版“IF指数” 操盘人数多</li>
+                </ul>
+                <div class="money">
+                    <p>总共操盘: 4795人</p>
+                    <p>总共交易: 41733手</p>
+                </div>
+                <p class="chaopan"><a href="${ctx}/ftse/index">申请操盘</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="safe">
+    <div class="safelist">
+        <ul>
+            <li>
+                <p class="safelist-img"><img src="static/images/image/chuangxin.png"></p>
+                <h2>模式创新</h2>
+                <p class="safelist-lis">光速开户，降低交易门槛</p>
+            </li>
+            <li>
+                <p class="safelist-img"><img src="static/images/image/zijin.png"></p>
+                <h2>资金安全</h2>
+                <p class="safelist-lis">专款专用，资金封闭管理</p>
+            </li>
+            <li>
+                <p class="safelist-img"><img src="static/images/image/jiaoyi.png"></p>
+                <h2>交易安全</h2>
+                <p class="safelist-lis">杜绝对赌，保障您的交易安全</p>
+            </li>
+            <li>
+                <p class="safelist-img"><img src="static/images/image/zhuanye.png"></p>
+                <h2>专业指导</h2>
+                <p class="safelist-lis">投资管家，提供指导策略</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="xuanzhe">
+    <div class="xuanzhelist">
+        <p class="xuanzhe-title">炒期货为什么选择维胜</p>
+        <p>
+            <img src="static/images/image/zjichao.png" alt=""/>
+            <img src="static/images/image/vs.png" alt="" class="vs-img"/>
+            <img src="static/images/image/weishengchao.png" alt=""/>
+        </p>
+    </div>
+</div>
+<div class="h_partner">
+    <div class="h_partner_content">
+        <p class="h_chosetitle"><span>合作伙伴与媒体报道</span></p>
+        <p class="h_img">
+            <a href="#"><img src="static/images/image/pingan-bank.png" alt="" style="margin-left: 0;"/></a>
+            <a href="#"><img src="static/images/image/huatai-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/guotai-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/haitong-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/wukuang-bank.png" alt="" style="margin-right: 0;"/></a>
+            <a href="#"><img src="static/images/image/xinlang-bank.png" alt="" style="margin-left: 0"/></a>
+            <a href="#"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/dongfang-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/hexun-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
+            <a href="#"><img src="static/images/image/fenghuang-bank.png" alt="" style="margin-right: 0;"/></a>
+        </p>
+    </div>
+</div>
+<!-- footer -->
+<%@include file="../common/footer.jsp"%>
+<!-- custom js -->
+<script src="static/script/homepage/homepage.js?version=20151127"></script>
+<%@ include file="/WEB-INF/views/common/count.jsp"%>
+</body>
+<script type="text/javascript">
+    var href = window.location.href;
+ 	// 路径配置
+    require.config({
+        paths:{//${ctx }/static/script
+            'echarts' :href + 'static/script/echarts',
+            'echarts/chart/pie' :href + 'static/script/echarts'
+        }
+    });
+    function loadK(commodity,contract){
+    	 // 使用
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                	document.getElementById('main').innerHTML = "";
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main'));
+                    var rawData = [];
+                    $.ajax({
+    					url:"Quotation/doGetQk?commodity="+commodity+"&contract="+contract+"",
+    					type:"get",
+    					dateType:"json",
+    					success:function(data){
+    						var resultData = data.data;
+    						$.each(resultData,function (i,item){
+    							var openPrice = item.OpenPrice;
+    							var closePrice = item.LastPrice;
+    							var chaPrice = closePrice - openPrice;
+    							var sgData = [item.DateTime,openPrice,closePrice,chaPrice,"",item.LowPrice,item.HighPrice,"","","-"];
+    							rawData[i] = sgData;
+    						});
+    						 var dates = rawData.map(function (item) {
+    			                    return item[0];
+    			                });
+
+    			                var data = rawData.map(function (item) {
+    			                    return [+item[1], +item[2], +item[5], +item[6]];
+    			                });
+    			                var option = {
+    			                    title: {
+    			                        text: 'K线图'
+    			                    },
+    			                    backgroundColor: '#21202D',
+    			                  //  legend: {
+    			                    //    data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30'],
+    			                      //  inactiveColor: '#777',
+    			                        //textStyle: {
+    			                          //  color: '#fff'
+    			                        //}
+    			                    //},
+    			                    tooltip: {
+    			                        trigger: 'axis',
+    			                        axisPointer: {
+    			                            animation: false,
+    			                            lineStyle: {
+    			                                color: '#376df4',
+    			                                width: 2,
+    			                                opacity: 1
+    			                            }
+    			                        }
+    			                    },
+    			                    xAxis: {
+    			                        type: 'category',
+    			                        data: dates,
+    			                        axisLine: { lineStyle: { color: '#8392A5' } }
+    			                    },
+    			                    yAxis: {
+    			                        scale: true,
+    			                        axisLine: { lineStyle: { color: '#8392A5' } },
+    			                        splitLine: { show: false }
+    			                    },
+    			                    dataZoom: [{
+    			                        textStyle: {
+    			                            color: '#8392A5'
+    			                        },
+    			                        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+    			                        handleSize: '80%',
+    			                        dataBackground: {
+    			                            areaStyle: {
+    			                                color: '#8392A5'
+    			                            },
+    			                            lineStyle: {
+    			                                opacity: 0.8,
+    			                                color: '#8392A5'
+    			                            }
+    			                        },
+    			                        handleStyle: {
+    			                            color: '#fff',
+    			                            shadowBlur: 3,
+    			                            shadowColor: 'rgba(0, 0, 0, 0.6)',
+    			                            shadowOffsetX: 2,
+    			                            shadowOffsetY: 2
+    			                        }
+    			                    }, {
+    			                        type: 'inside'
+    			                    }],
+    			                    animation: false,
+    			                    series: [
+    			                        {
+    			                            type: 'candlestick',
+    			                           // name: '日K',
+    			                            data: data,
+    			                            itemStyle: {
+    			                                normal: {
+    			                                    color: '#FD1050',
+    			                                    color0: '#0CF49B',
+    			                                    borderColor: '#FD1050',
+    			                                    borderColor0: '#0CF49B'
+    			                                }
+    			                            }
+    			                        },
+    			                        {
+    			                            //name: 'MA5',
+    			                            type: 'line',
+    			                           // data: calculateMA(5, data),
+    			                            smooth: true,
+    			                            showSymbol: false,
+    			                            lineStyle: {
+    			                                normal: {
+    			                                    width: 1
+    			                                }
+    			                            }
+    			                        },
+    			                        {
+    			                          //  name: 'MA10',
+    			                            type: 'line',
+    			                           // data: calculateMA(10, data),
+    			                            smooth: true,
+    			                            showSymbol: false,
+    			                            lineStyle: {
+    			                                normal: {
+    			                                    width: 1
+    			                                }
+    			                            }
+    			                        },
+    			                        {
+    			                         //   name: 'MA20',
+    			                            type: 'line',
+    			                           // data: calculateMA(20, data),
+    			                            smooth: true,
+    			                            showSymbol: false,
+    			                            lineStyle: {
+    			                                normal: {
+    			                                    width: 1
+    			                                }
+    			                            }
+    			                        },
+    			                        {
+    			                            //name: 'MA30',
+    			                            type: 'line',
+    			                            //data: calculateMA(30, data),
+    			                            smooth: true,
+    			                            showSymbol: false,
+    			                            lineStyle: {
+    			                                normal: {
+    			                                    width: 1
+    			                                }
+    			                            }
+    			                        }
+    			                    ]
+    			                };
+    			                // 为echarts对象加载数据
+    			                myChart.setOption(option);
+    					}
+    				});
+                    function calculateMA(dayCount, data) {
+                        var result = [];
+                        for (var i = 0, len = data.length; i < len; i++) {
+                            if (i < dayCount) {
+                                result.push('-');
+                                continue;
+                            }
+                            var sum = 0;
+                            for (var j = 0; j < dayCount; j++) {
+                                sum += data[i - j][1];
+                            }
+                            result.push(sum / dayCount);
+                        }
+                        return result;
+                    }
+
+
+                   
+                }
+        );
+    }
+    $(function(){
+		$.ajax({
+			url:"Quotation/doGetCommodity",
+			type:"get",
+			dateType:"json",
+			success:function(result){
+				 var data = result.data;
+				 for(var i = 0 ; i < data.length; i++){
+					 var html = '';
+					 var item = data[i];
+					 var _data = item.data;
+					 var commodityName = item.commodityName;
+					 var qlastPrice = _data.QLastPrice;
+					 var scal = _data.QChangeRate;
+					 var bs = "↑";
+					 var color = " #ff5500";
+					 if(scal < 0){
+						 bs = "↓";
+						 color = "#0bffa4";
+					 }
+					 html += '<div topData = "'+_data.QPreClosingPrice+'&'+_data.QLowPrice+'&'+_data.QHighPrice+'&'+_data.QOpenPrice+'&'+_data.TimeStamp+'" data = "'+_data.CommodityNo+'&'+item.contract+'"  class="left_xiangmu left_x'+i+'';
+					 	if(i == 0){
+					 		 html += ' on';	
+					 		loadK(_data.CommodityNo,item.contract);
+					 		var topHtml = '<p>昨收:'+_data.QPreClosingPrice+'&nbsp;&nbsp;&nbsp; 每日幅度:'+_data.QLowPrice+' - '+_data.QHighPrice+'</p>'
+				             		    + '<p>今开:'+_data.QOpenPrice+'&nbsp;&nbsp;&nbsp;更新时间:'+_data.TimeStamp+'</p>';
+					 		 $(".right-gengxin").html(topHtml);
+					 	}
+					 html +=  ' "> <p><em>'+commodityName+'</em>'
+					 	  + '<span style="color: '+color+';">'+qlastPrice+' '+scal+'</span>'
+					 	  + '<span style="color: '+color+';">'+_data.QChangeValue+'</span>'
+					 	  + '<span style="color: '+color+';">'+scal+'</span>';
+					 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
+				
+					 $(".left_x"+i+"").bind("click",function(){
+						 var obj = $(this);
+						 var da = obj.attr("data");
+						 if(da != null){
+						 var daArray = da.split("&");
+							  loadK(daArray[0],daArray[1]);
+						 }
+						 var topData = obj.attr("topData");
+						 if(topData != null){
+							 var topDataArray = topData.split("&");
+							 var topHtml = '<p>昨收:'+topDataArray[0]+'&nbsp;&nbsp;&nbsp;每日幅度:'+topDataArray[1]+' - '+topDataArray[2]+'</p>'
+							               +'<p>今开:'+topDataArray[3]+'&nbsp;&nbsp;&nbsp; 更新时间:'+topDataArray[4]+'</p>';
+							             $(".right-gengxin").html(topHtml);
+							 
+						 }
+						 var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+						 left_xiangmu.each(function(){
+							 left_xiangmu.removeClass('on');
+						 });
+						  obj.addClass('on');
+					 });
+				 }
+			}
+		});
+	});
+</script>
+
 </html>

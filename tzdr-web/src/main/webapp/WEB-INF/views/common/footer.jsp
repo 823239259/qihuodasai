@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 公司简介 -->
-<div class="copyright">
+<%-- <div class="copyright">
     <div class="footer_ctn">
         <div class="ft_link">            
             <a href="${ctx}/news/newsdata?colname=8a2868ab4be94f15014be9a25cff03e0" target="_blank">达人动态</a>
@@ -48,6 +48,61 @@
             <a href="https://credit.szfw.org/CX20160302013752300118.html" target="_blank"><img src="${ctx}/static/images/common-new/cppic_01.gif"></a>
             <a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com" target="_blank"><img src="${ctx}/static/images/common-new/cppic_02.gif"></a>
             <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname" target="_blank"><img src="${ctx}/static/images/common-new/cppic_03.gif"></a>
+        </div>
+    </div>
+</div> --%>
+<div class="copyright">
+    <div class="copyright_content">
+        <div class="copyright_link">
+            <ul class="link">
+                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a25cff03e0">达人动态</a></li>
+                <li><a href="${ctx }/about">公司简介</a></li>
+                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a17d1303df">市场热点</a></li>
+                <li><a href="${ctx }/company">公司资质</a></li>
+                <li><a href="${ctx }/help?tab=newbie&leftMenu=1">帮助中心</a></li>
+                <li><a href="${ctx }/contact">联系我们</a></li>
+            </ul>
+            <ul class="follow">
+                <li>关注我们：</li>
+                <li><a href="http://www.weibo.com/shxhtzdr"><i class="weibo"></i></a></li>
+                <li><a href="javascript: void(0);"><i class="weixin"></i></a></li>
+            </ul>
+        </div>
+        <div class="copyright_contact">
+            <h3>客服热线</h3>
+            <p>400-852-8008</p>
+            <p>工作日：8:30 - 24:00</p>
+            <p>周末：09:00 - 17:00</p>
+        </div>
+        <div class="copyright_interaction">
+            <h3>交流互动</h3>
+            <p>期货操盘QQ群：</p>
+            <p><a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=802aa738876d3098418e2bab4cd59451ddfc7ca7b9d7de3f20aa09777ddb8ed8">498543006</a></p>
+            <p>国际期货</p>
+        </div>
+    </div>
+</div>
+<div class="copybox">
+    <div class="copybox_content">
+        <div class="cp_link">
+            <ul>
+                <li>友情链接：</li>
+                <li><a href="http://www.csrc.gov.cn/pub/newsite/">证监会</a></li>
+                <li><a href="http://www.cbrc.gov.cn/index.html">银监会</a></li>
+                <li><a href="http://www.circ.gov.cn/web/site0/">保监会</a></li>
+                <li><a href="http://www.szse.cn/">深交所</a></li>
+                <li><a href="http://www.sse.com.cn/">上交所</a></li>
+                <li><a href="http://www.sgx.com/">新加坡交易所</a></li>
+                <li><a href="http://www.hkex.com.hk/">香港交易所</a></li>
+                <li><a href="https://www.nyse.com/index">纽约证券交易所</a></li>
+                <li><a href="http://www.nasdaq.com/">纳斯达克</a></li>
+            </ul>
+            <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 沪ICP备14048395号-1  投资有风险，入市需谨慎</p>
+        </div>
+        <div class="cp_cppic">
+            <a href="https://credit.szfw.org/CX20160302013752300118.html"><img src="static/images/image/shiming.png"></a>
+            <a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com"><img src="static/images/image/anquan.png"></a>
+            <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname"><img src="static/images/image/chengxing.png"></a>
         </div>
     </div>
 </div>

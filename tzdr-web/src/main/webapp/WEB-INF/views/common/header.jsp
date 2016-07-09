@@ -1,28 +1,27 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
-<div class="top">
+<div class="top-title">
     <div class="topctn">
-        <div class="top_tel">全国客服热线：400-852-8008</div>
+        <div class="top_tel"><!--<i></i>-->全国客服热线：400-852-8008</div>
         <%
        		if(request.getSession().getAttribute("userName")!=null){
        	%>
        	<ul>
-            <li class="download"><em>你好，<a href="${ctx}/user/account" class="top_myt"><%=request.getSession().getAttribute("userName").toString() %></a></em><a href="${ctx}/logout">退出</a></li>
+            <li class="download" style = "color:red;"><em >你好，<a href="${ctx}/user/account" class="top_myt" style = "color:red;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a href="${ctx}/logout">退出</a></li>
             <li class="top_myc"><a href="${ctx}/user/account" class="on">我的账户</a></li>
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
-            <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>
-            <li><a href="http://zhibo.tzdr.com" target="_blank" style="color:#f57c00;">喊单直播间</a></li>
+           <%--  <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>
+            <li><a href="http://zhibo.tzdr.com" target="_blank" style="color:#f57c00;">喊单直播间</a></li> --%>
             <li><a href="${ctx}/help?tab=newbie&leftMenu=1" target="_blank">新手指南</a></li>
         </ul>
        	<%
        		}else{
        	%>
        	<ul>
-            <li><a href="${ctx}/user/account">登录</a></li>
-            <li><a href="${ctx}/signin">注册</a></li>
+       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
-            <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>
-            <li><a href="http://zhibo.tzdr.com" target="_blank" style="color:#f57c00;">喊单直播间</a></li>
+           <%--  <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>
+            <li><a href="http://zhibo.tzdr.com" target="_blank" style="color:#f57c00;">喊单直播间</a></li> --%>
             <li><a href="${ctx}/help?tab=newbie&leftMenu=1" target="_blank">新手指南</a></li>
         </ul>
        	<%
@@ -49,12 +48,18 @@
         <div class="navlogo"><a href="http://test.www.dktai.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" class="on">首页</a></li>
-            <li><a id="togetherli" href="${ctx}/together/index">股票合买</a><!-- <i></i> --></li>
+           <%--  <li><a id="togetherli" href="${ctx}/together/index">股票合买</a><!-- <i></i> --></li>
             <li><a id="hkstockli" href="${ctx}/hkstock/index">港股操盘</a><img src="${ctx}/static/images/common/hkicon.gif" class="hkicon"></li>
             <li><a id="internationalFutures" href="${ctx}/ftse/index" class="nav_l_future">国际期货</a><i></i></li>
             <li><a id="productli" href="${ctx}/commodity/index">商品期货</a></li>
-            <%-- <li><a id="future-index" href="${ctx}/future/index" class="nav_l_sif">股指期货</a><i></i></li> --%>
+            <li><a id="future-index" href="${ctx}/future/index" class="nav_l_sif">股指期货</a><i></i></li>
             <li><a id="fxspot" href="${ctx}/topic/fxspot/">外汇现货</a></li>
+            
+            <li><a class="on"  href="#" style="padding: 27px 16px 26px 16px;">首页</a></li> --%>
+            <li><a href="${ctx}/hsi/index">恒指期货</a></li>
+            <li><a href="${ctx}/crudeoil/index">国际原油</a></li>
+            <li><a href="${ctx}/ftse/index">富时A50</a></li>
+            <li><a href="${ctx}/outDisk/index">国际综合</a></li>
                       
             <%
         		if(request.getSession().getAttribute("userName") !=null){
