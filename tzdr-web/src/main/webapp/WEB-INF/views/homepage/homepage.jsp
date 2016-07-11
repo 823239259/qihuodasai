@@ -680,7 +680,7 @@
        		}else{
        	%>
         <div class="lgctn" id="logindiv">
-            <h3>欢迎登陆维胜</h3>
+            <h3>欢迎登录维胜</h3>
              <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
                 <input type="hidden" name="isajax" value="true">
                 <input type="hidden" name="isframe" value="true">
@@ -729,8 +729,8 @@
                 <p>实时行情</p>
             </div>
             <div class="right-gengxin">
-                <p>昨收：1351.07     每日幅度：1338.63 - 1352.33</p>
-                <p>今开：1351.07     更新时间：2016/07/05 16:58</p>
+                <p>昨收：<span class = "zs">1351.07</span>     每日幅度：<span class = "fd">1338.63 - 1352.33</span></p>
+                <p>今开：<span class = "jk">1351.07</span>     更新时间：<span class = "gxsj">2016/07/05 16:58</span></p>
             </div>
         </div>
         <div class="w_center_xiangqing">
@@ -742,6 +742,7 @@
             <div class="right_xiangqing">
                 <div id="main" style="height:400px; width: 800px;"></div>
             </div>
+            <a href = "" id = "mainSqcp" >申请操盘</a>
         </div>
     </div>
     <script type="text/javascript">
@@ -867,6 +868,7 @@
         </p>
     </div>
 </div>
+<input type="hidden" id = "dqCommodNo"/>
 <!-- footer -->
 <%@include file="../common/footer.jsp"%>
 <!-- custom js -->
@@ -882,6 +884,38 @@
             'echarts/chart/pie' :href + '/static/script/echarts'
         }
     });
+ 	
+    var rawData = [];
+    var loadCount = 0;
+    var myChart = null;
+    var loadKcount = 0 ;
+    function loadKData(commodity,contract){
+    	$(function(){
+    		var rawDataLength = rawData.length - 1;
+            var beginTime = "2016.07.11";
+            if(rawDataLength > 0){
+            	beginTime = rawData[rawDataLength][0];
+            }
+            $.ajax({
+           	 url:"Quotation/doGetQk?commodity="+commodity+"&contract="+contract+"&beginTime="+beginTime,
+   			 type:"get",
+   			 dateType:"json",
+   			 success:function(data){
+   				 var resultData = data.data;
+   					$.each(resultData,function (i,item){
+   						var j = rawDataLength + i;
+   						var openPrice = item.OpenPrice;
+   						var closePrice = item.LastPrice;
+   						var chaPrice = closePrice - openPrice;
+   						var sgData = [item.DateTime,openPrice,closePrice,chaPrice,"",item.LowPrice,item.HighPrice,"","","-"];
+   						rawData[j] = sgData;
+   					});
+   					loadK();
+   			 }
+            });
+    	});
+    	 
+    }
     function loadK(commodity,contract){
     	 // 使用
         require(
@@ -890,23 +924,9 @@
                     'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
                 ],
                 function (ec) {
-                	document.getElementById('main').innerHTML = "";
+                	/* document.getElementById('main').innerHTML = ""; */
                     // 基于准备好的dom，初始化echarts图表
-                    var myChart = ec.init(document.getElementById('main'));
-                    var rawData = [];
-                    $.ajax({
-    					url:"Quotation/doGetQk?commodity="+commodity+"&contract="+contract+"",
-    					type:"get",
-    					dateType:"json",
-    					success:function(data){
-    						var resultData = data.data;
-    						$.each(resultData,function (i,item){
-    							var openPrice = item.OpenPrice;
-    							var closePrice = item.LastPrice;
-    							var chaPrice = closePrice - openPrice;
-    							var sgData = [item.DateTime,openPrice,closePrice,chaPrice,"",item.LowPrice,item.HighPrice,"","","-"];
-    							rawData[i] = sgData;
-    						});
+                    var	 myChart = ec.init(document.getElementById('main'));
     						 var dates = rawData.map(function (item) {
     			                    return item[0];
     			                });
@@ -990,7 +1010,7 @@
     			                        {
     			                            //name: 'MA5',
     			                            type: 'line',
-    			                           // data: calculateMA(5, data),
+    			                           /*  data: calculateMA(5, data), */
     			                            smooth: true,
     			                            showSymbol: false,
     			                            lineStyle: {
@@ -1002,7 +1022,7 @@
     			                        {
     			                          //  name: 'MA10',
     			                            type: 'line',
-    			                           // data: calculateMA(10, data),
+    			                            /* data: calculateMA(10, data), */
     			                            smooth: true,
     			                            showSymbol: false,
     			                            lineStyle: {
@@ -1014,7 +1034,7 @@
     			                        {
     			                         //   name: 'MA20',
     			                            type: 'line',
-    			                           // data: calculateMA(20, data),
+    			                           /*  data: calculateMA(20, data), */
     			                            smooth: true,
     			                            showSymbol: false,
     			                            lineStyle: {
@@ -1026,7 +1046,7 @@
     			                        {
     			                            //name: 'MA30',
     			                            type: 'line',
-    			                            //data: calculateMA(30, data),
+    			                            /* data: calculateMA(30, data), */
     			                            smooth: true,
     			                            showSymbol: false,
     			                            lineStyle: {
@@ -1038,10 +1058,8 @@
     			                    ]
     			                };
     			                // 为echarts对象加载数据
-    			                myChart.setOption(option);
-    					}
-    				});
-                    function calculateMA(dayCount, data) {
+	    			            myChart.setOption(option);
+                     function calculateMA(dayCount, data) {
                         var result = [];
                         for (var i = 0, len = data.length; i < len; i++) {
                             if (i < dayCount) {
@@ -1055,71 +1073,157 @@
                             result.push(sum / dayCount);
                         }
                         return result;
-                    }
-
-
-                   
+                    } 
                 }
         );
     }
-    $(function(){
-		$.ajax({
-			url:"Quotation/doGetCommodity",
-			type:"get",
-			dateType:"json",
-			success:function(result){
-				 var data = result.data;
-				 for(var i = 0 ; i < data.length; i++){
-					 var html = '';
-					 var item = data[i];
-					 var _data = item.data;
-					 var commodityName = item.commodityName;
-					 var qlastPrice = _data.QLastPrice;
-					 var scal = _data.QChangeRate;
-					 var bs = "↑";
-					 var color = " #ff5500";
-					 if(scal < 0){
-						 bs = "↓";
-						 color = "#0bffa4";
-					 }
-					 html += '<div topData = "'+_data.QPreClosingPrice+'&'+_data.QLowPrice+'&'+_data.QHighPrice+'&'+_data.QOpenPrice+'&'+_data.TimeStamp+'" data = "'+_data.CommodityNo+'&'+item.contract+'"  class="left_xiangmu left_x'+i+'';
-					 	if(i == 0){
-					 		 html += ' on';	
-					 		loadK(_data.CommodityNo,item.contract);
-					 		var topHtml = '<p>昨收:'+_data.QPreClosingPrice+'&nbsp;&nbsp;&nbsp; 每日幅度:'+_data.QLowPrice+' - '+_data.QHighPrice+'</p>'
-				             		    + '<p>今开:'+_data.QOpenPrice+'&nbsp;&nbsp;&nbsp;更新时间:'+_data.TimeStamp+'</p>';
-					 		 $(".right-gengxin").html(topHtml);
-					 	}
-					 html +=  ' "> <p><em style="">'+commodityName+'</em>'
-					 	  + '<span style="color: '+color+';">'+qlastPrice+' '+scal+'</span>'
-					 	  + '<span style="color: '+color+';">'+_data.QChangeValue+'</span>'
-					 	  + '<span style="color: '+color+';">'+scal+'</span>';
-					 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
-				
-					 $(".left_x"+i+"").bind("click",function(){
-						 var obj = $(this);
-						 var da = obj.attr("data");
-						 if(da != null){
-						 var daArray = da.split("&");
-							  loadK(daArray[0],daArray[1]);
+    var interValData = null;
+    function bindLoadKDataInterValData(CommodityNo,contract){
+    	interValData = window.setInterval(function(){loadKData(CommodityNo,contract)}, 3000);
+ 		loadCount ++;
+    }
+    function clearLoadKDataInterVal(){
+    	if(interValData != null){
+	    	window.clearInterval(interValData);
+    	}
+    }
+    function exctionLoadK(CommodityNo,contract){
+	 	clearLoadKDataInterVal();
+	 	bindLoadKDataInterValData(CommodityNo,contract);
+    }
+    function propHrefCP(commod){
+    	$(function(){
+	    	if(commod == "HSI"){
+		 		 $("#mainSqcp").prop("href",href + "hsi/index");
+		 	 }else if(commod == "CL"){
+		 		 $("#mainSqcp").prop("href",href + "crudeoil/index");
+		 	 }else if(commod == "CN"){
+		 		 $("#mainSqcp").prop("href",href + "ftse/index");
+		 	 }else{
+		 		 $("#mainSqcp").prop("href",href + "outDisk/index");
+		 	 }
+    	});
+    }
+   $(function(){
+    		$(".w_center_xiangqing .left_xiangqing .left_hidden").html("");
+			$.ajax({
+				url:"Quotation/doGetCommodity",
+				type:"get",
+				dateType:"json",
+				async: false,
+				success:function(result){
+					 var data = result.data;
+					 for(var i = 0 ; i < data.length; i++){
+						 var html = '';
+						 var item = data[i];
+						 var size = item.DotSize;
+						 var _data = item.data;
+						 var commodityName = item.commodityName;
+						 var qlastPrice = (parseInt(_data.QLastPrice)).toFixed(size);
+						 var qpreCloseingPrice = (parseInt(_data.QPreClosingPrice)).toFixed(size);
+						 var qLowPrice = (parseInt(_data.QLowPrice)).toFixed(size);
+						 var qHighPrice = (parseInt(_data.QHighPrice)).toFixed(size);
+						 var qOpenPrice = (parseInt(_data.QOpenPrice)).toFixed(size);
+						 var scal = (parseInt(_data.QChangeRate)).toFixed(size);
+						 var bs = "↑";
+						 var color = " #ff5500";
+						 if(scal < 0){
+							 bs = "↓";
+							 color = "#0bffa4";
 						 }
-						 var topData = obj.attr("topData");
-						 if(topData != null){
-							 var topDataArray = topData.split("&");
-							 var topHtml = '<p>昨收:'+topDataArray[0]+'&nbsp;&nbsp;&nbsp;每日幅度:'+topDataArray[1]+' - '+topDataArray[2]+'</p>'
-							               +'<p>今开:'+topDataArray[3]+'&nbsp;&nbsp;&nbsp; 更新时间:'+topDataArray[4]+'</p>';
-							             $(".right-gengxin").html(topHtml);
-							 
+						 html += '<div topData = "'+qpreCloseingPrice+'&'+qLowPrice+'&'+qHighPrice+'&'+qOpenPrice+'&'+_data.TimeStamp+'" data = "'+_data.CommodityNo+'&'+item.contract+'"  class="left_xiangmu left_x'+i+'';
+						 if(loadCount  == 0){
+						 	 html += ' on';
+						 	loadKData(_data.CommodityNo,item.contract);
+						 	loadK(_data.CommodityNo,item.contract);
+						 	exctionLoadK(_data.CommodityNo,item.contract);
+						 	propHrefCP(_data.CommodityNo);
+						 	$(".zs").text(qpreCloseingPrice);	
+						    $(".fd").text(qLowPrice+' - '+qHighPrice);
+						    $(".jk").text(qOpenPrice);
+						    $(".gxsj").text(_data.TimeStamp);
+						    $("#dqCommodNo").val(_data.CommodityNo);
 						 }
-						 var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
-						 left_xiangmu.each(function(){
-							 left_xiangmu.removeClass('on');
+						 html +=  ' "> <p><em style="">'+commodityName+'</em>'
+						 	  + '<span class = "qlast'+i+'" style="color: '+color+';">'+qlastPrice+'</span>'
+						 	  + '<span class = "qchange'+i+'" style="color: '+color+';">'+(parseInt(_data.QChangeValue)).toFixed(size)+'</span>'
+						 	  + '<span class = "scal'+i+'" style="color: '+color+';">'+scal+'</span>';
+						 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
+						 $(".left_x"+i+"").bind("click",function(){
+							 var obj = $(this);
+							 var da = obj.attr("data");
+							 if(da != null){
+								  rawData=[];
+							 	  var daArray = da.split("&");
+							 	  var commod = daArray[0];
+							 	  var contract = daArray[1];
+							 	  loadKData(commod,contract);
+							 	  exctionLoadK(commod,contract);
+							 	  $("#dqCommodNo").val(commod);
+							 	  propHrefCP(commod);
+							 }
+							 var topData = obj.attr("topData");
+							 if(topData != null){
+								 var topDataArray = topData.split("&");	
+								 $(".zs").text(topDataArray[0]);	
+								 $(".fd").text(topDataArray[1]+' - '+topDataArray[2]);
+								 $(".jk").text(topDataArray[3]);
+								 $(".gxsj").text(_data.TimeStamp);
+							 }
+							 var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+							 left_xiangmu.each(function(){
+								 left_xiangmu.removeClass('on');
+							 });
+							  obj.addClass('on');
 						 });
-						  obj.addClass('on');
-					 });
-				 }
-			}
+					 }
+				}
+			});
 		});
-	});
+	   window.setInterval(function(){ $(function(){
+		   	$.ajax({
+		   		url:"Quotation/doGetCommodity",
+					type:"get",
+					dateType:"json",
+					async: false,
+					success:function(result){
+						 var data = result.data;
+						 for(var i = 0 ; i < data.length; i++){
+							 var html = '';
+							 var item = data[i];
+							 var size = item.DotSize;
+							 var _data = item.data;
+							 var commodityName = item.commodityName;
+							 var qlastPrice = (parseInt(_data.QLastPrice)).toFixed(size);
+							 var qpreCloseingPrice = (parseInt(_data.QPreClosingPrice)).toFixed(size);
+							 var qLowPrice = (parseInt(_data.QLowPrice)).toFixed(size);
+							 var qHighPrice = (parseInt(_data.QHighPrice)).toFixed(size);
+							 var qOpenPrice = (parseInt(_data.QOpenPrice)).toFixed(size);
+							 var scal = (parseInt(_data.QChangeRate)).toFixed(size);
+							 var qChangeValue = (parseInt(_data.QChangeValue)).toFixed(size);
+							 var bs = "↑";
+							 var color = " #ff5500";
+							 if(scal < 0){
+								 bs = "↓";
+								 color = "#0bffa4";
+							 }
+							 $(".qlast"+i+"").text(qlastPrice);
+							 $(".qchange"+i+"").text(qChangeValue);
+							 $(".scal"+i+"").text(scal);
+							 $(".qlast"+i+"").css(color);
+							 $(".qchange"+i+"").css(color);
+							 $(".scal"+i+"").css(color);
+							 var contractNo = $("#dqCommodNo").val();
+							 if(contractNo == _data.CommodityNo){
+								 $(".zs").text(qpreCloseingPrice);	
+								 $(".fd").text(qLowPrice+' - '+qHighPrice);
+								 $(".jk").text(qOpenPrice);
+								 $(".gxsj").text(_data.TimeStamp);
+							 }
+						 }
+					}
+		   	});
+		   });
+	   },500)
 </script>
 </html>

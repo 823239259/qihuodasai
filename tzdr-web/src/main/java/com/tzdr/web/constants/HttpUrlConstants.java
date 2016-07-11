@@ -9,7 +9,11 @@ public class HttpUrlConstants {
 	/**
 	 * 查询品种接口
 	 */
-	public static final String QUOTATION_QRYCOMMODITY = QUOTATION + "/qryContract";
+	public static final String QUOTATION_QRYCOMMODITY = QUOTATION + "/qryCommodity";
+	/**
+	 * 查询合约接口
+	 */
+	public static final String QUOTATION_QRYCOMTRACT = QUOTATION + "/qryContract";
 	/**
 	 * 获取实时数据
 	 */
