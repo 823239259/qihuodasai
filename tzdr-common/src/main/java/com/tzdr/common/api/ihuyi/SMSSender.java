@@ -43,7 +43,7 @@ public class SMSSender {
 	private SMSSender() {
 		account = IhuyiConfigUtil.getContext("tzdr.ihuyi.account");
 		password = IhuyiConfigUtil.getContext("tzdr.ihuyi.password");
-		Url = ConfUtil.getContext("ihuyi.url");
+		Url = IhuyiConfigUtil.getContext("ihuyi.url");
 	}
 
 	public static synchronized SMSSender getInstance() {
