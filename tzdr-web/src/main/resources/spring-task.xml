@@ -9,8 +9,8 @@
 	<!--token更新-->
 	<bean id="refreshWebTokenTask" class="com.tzdr.web.quartz.WebHsTokenRefresh"></bean>
 	
-	<task:scheduler id="refreshWebTokenScheduler" pool-size="5"/>
+	<!-- <task:scheduler id="refreshWebTokenScheduler" pool-size="5"/>
 	<task:scheduled-tasks scheduler="refreshWebTokenScheduler">
 		<task:scheduled ref="refreshWebTokenTask" method="executeRefreh" cron="0 15/30 * * * ?"/>
-	</task:scheduled-tasks>
+	</task:scheduled-tasks> -->
 </beans>

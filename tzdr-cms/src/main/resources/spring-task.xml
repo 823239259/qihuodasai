@@ -9,8 +9,8 @@
 	<!--token更新-->
 	<bean id="refreshTokenTask" class="com.tzdr.cms.quartz.HundsunTokenRefresh"></bean>
 	
-	<task:scheduler id="refreshTokenScheduler" pool-size="5"/>
+	<!-- <task:scheduler id="refreshTokenScheduler" pool-size="5"/>
 	<task:scheduled-tasks scheduler="refreshTokenScheduler">
 		<task:scheduled ref="refreshTokenTask" method="executeRefreh" cron="0 15/30 * * * ?"/>
-	</task:scheduled-tasks>
+	</task:scheduled-tasks> -->
 </beans>
