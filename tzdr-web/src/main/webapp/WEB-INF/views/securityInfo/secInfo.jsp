@@ -93,7 +93,7 @@ function bandcard(){
 
 <body>
 <div id="div_Mask"  style="display:none;"></div>
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 <!--弹出框-->
 <div id="div_loading">
 <!--001-->
@@ -578,7 +578,7 @@ function bandcard(){
 </div>
 </div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <script type="text/javascript">
 $("#idcard_front").fileupload({
     url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内

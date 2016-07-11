@@ -19,7 +19,7 @@
 
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<div class="capital">
 	<form action="${ctx}/userOutDisk/pay" id="settingForm" method="post">
 	<input type="hidden" id="traderBondAttr" name="traderBondAttr" value="${outDiskParameters[0].traderBond}" >
@@ -280,7 +280,7 @@
         </table>
     </div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){

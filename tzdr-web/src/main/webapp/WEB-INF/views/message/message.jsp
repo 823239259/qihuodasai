@@ -14,7 +14,7 @@
 </head>
 <body>
 <!--顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<%@include file="../common/header.jsp"%>
 <!-- 弹出层 -->
 <div class="floatlayer">
 	<div class="uc_m_select" style="display:none;">
@@ -89,7 +89,7 @@
 	</div>
 </div>
 <!--底部 -->
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

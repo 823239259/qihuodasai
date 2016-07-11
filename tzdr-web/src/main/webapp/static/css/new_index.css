@@ -18,8 +18,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .navlist {width: auto; float: right; margin-top: 33px; font-style: normal; list-style: none;}
 .navlist li {display:block; float: left; width: auto; margin: 0 18px; font-size: 16px;}
 .navlist li a {text-decoration: none; color: #999;padding-top: 28px}
-.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33;}
-.navlist li a:hover {border-bottom:2px solid #ffcc33; color: #ffcc33;;cursor: pointer;padding-bottom: 26px;}
+.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+.navlist li a:hover {border-bottom:2px solid #ffcc33; color: #ffcc33;;cursor: pointer; padding-bottom: 26px;}
 /*slide-box*/
 .bannerlist {width: 100%; position: relative; height: 400px; overflow: hidden;}
 .bannerlist .login {width: 1000px; margin: 0 auto; position: relative; height: 400px;}

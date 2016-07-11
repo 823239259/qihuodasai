@@ -27,7 +27,7 @@ var tab="<%=tab%>";
 </head>
 <body>
 <!--顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<%@include file="../common/header.jsp"%>
 <div class="help">
     <div class="hp_nav">
         <ul>
@@ -983,7 +983,7 @@ var tab="<%=tab%>";
     </div>
 </div>
 <!--底部 -->
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <script type="text/javascript">
 	var tab = '${tab}';
 	var leftMenu = '${leftMenu}';

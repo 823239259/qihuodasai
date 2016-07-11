@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<div class="uc">
 		<!--个人中心导航 -->
 		<%@ include file="../common/leftnav.jsp"%>
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

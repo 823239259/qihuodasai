@@ -8,8 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../common/commonkeyword.jsp"%>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?version=20150804">
-<link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
-<link rel="stylesheet" type="text/css" href="${ctx}/static/css/capital.css">
+<%-- <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css"> --%>
+<%-- <link rel="stylesheet" type="text/css" href="${ctx}/static/css/capital.css"> --%>
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script language="javascript" src="${ctx}/static/script/account/account.js?version=20150804"></script>
 <script language="javascript" src="${ctx}/static/script/tzdr.js"></script>
@@ -22,7 +22,7 @@
 
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<c:if test="${isActivityType eq 1}">
 		<!-- 浮动层 -->
 		<div class="floatlayer">
@@ -402,7 +402,8 @@
 		<div class="clear"></div>
 	</div>
 	<!--底部 -->
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
+<!-- footer -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

@@ -134,7 +134,7 @@
 <body>
 	<!--顶部 -->
 	<!--个人中心导航 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 
 	<div class="uc">
 		<!--个人中心导航 -->
@@ -493,7 +493,7 @@
 		</div>
 	</div>
 
-	<%@ include file="../common/personfooter.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 </body>
 
