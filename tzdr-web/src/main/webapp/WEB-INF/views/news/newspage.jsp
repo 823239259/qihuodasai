@@ -19,7 +19,7 @@
 </head>
 <body>
 <!-- 顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<%@include file="../common/header.jsp"%>
 <input type="hidden" name="pageno" id="pageno">
 <div class="news">
     <div class="news_siderbar">
@@ -68,7 +68,7 @@
 
 </div>
 <!-- 公司简介 -->
-<%@ include file="../common/homefooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

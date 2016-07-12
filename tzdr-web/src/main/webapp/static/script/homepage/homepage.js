@@ -73,11 +73,11 @@ $(function () {
 		    var scrollHeight = $(document).height();//高度
 		    var windowHeight = $(this).height();//整体高度
 		    if (scrollTop + windowHeight >= scrollHeight-80) {
-		    	$(".notice-fixed").fadeOut();
-		    	$(".notice-relative").fadeIn();
+		    	$(".notice-fixed").fadeOut(1000);
+		    	$(".notice-relative").fadeIn(1000);
 			} else {
-				$(".notice-fixed").fadeIn();
-				$(".notice-relative").fadeOut();
+				$(".notice-fixed").fadeIn(1000);
+				$(".notice-relative").fadeOut(1000);
 			}
     	}
 	});

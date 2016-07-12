@@ -36,7 +36,7 @@ $(document).ready(function() {
 </head>
 <body>
 <!-- 顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<%@include file="../common/header.jsp"%>
 <div class="floatlayer">
     <div class="fl_mask" style="display:none;"></div>
     <div class="fl_conimg fl_box1" style="display:none;">
@@ -174,7 +174,7 @@ $(document).ready(function() {
 
 </div>
 
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 
