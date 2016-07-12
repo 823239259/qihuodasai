@@ -1143,7 +1143,6 @@
 		   		url:"Quotation/doGetCommodity",
 					type:"get",
 					dateType:"json",
-					async: false,
 					success:function(result){
 						 var data = result.data;
 						 for(var i = 0 ; i < data.length; i++){
