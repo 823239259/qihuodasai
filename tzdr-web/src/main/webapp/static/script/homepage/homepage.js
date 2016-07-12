@@ -4,36 +4,45 @@ $(function () {
 	islogin();
 	
 	// banner切换
-	num = $(".bannerlist .bannerbox a").size();
-	i = 0;
-	theInt = null;
-	$(".bannerlist .bannerbox a").eq(0).fadeIn(500);
-	$(".ad_slider a").eq(0).addClass("on");
-	$(".ad_slider a").each(function (i) {
-		$(this).click(function () {
-			HuanDeng(i);
-			Change(i);
-		});
-	});
-	HuanDeng = function (p) {
-	clearInterval(theInt);
-	theInt = setInterval(function () {
-		p++;
-		if (p < num) {
-			Change(p);
-		} else {
-			p = 0
-			Change(p);
-		}
-		}, 5000);
-	}
-	HuanDeng(0);
-	function Change(num) {
-		$(".bannerlist .bannerbox a").fadeOut(500);
-		$(".bannerlist .bannerbox a").eq(num).fadeIn(500);
-		$(".ad_slider a").removeClass("on");
-		$(".ad_slider a").eq(num).addClass("on");
-	}
+	var num = $("#slide-box a").size();
+    var i = 0;
+    var theInt = null;
+    $("#ad-slider a").eq(0).addClass("on");
+    $("#slide-box a").eq(0).fadeIn(500);
+    $("#ad-slider a").each(function (i) {
+        $(this).click(function () {
+            Change(i);
+            HuanDeng(i);
+        });
+    });
+    HuanDeng = function (i) {
+        clearInterval(theInt);
+        theInt = setInterval(function () {
+            i++;
+            if (i < num) {
+                Change(i);
+            } else {
+                i = 0
+                Change(i);
+            }
+        }, 5000);
+    }
+    HuanDeng(0);
+    function Change(i) {
+        $("#slide-box a").fadeOut(500);
+        $("#slide-box a").eq(i).fadeIn(500);
+        $("#ad-slider a").removeClass("on");
+        $("#ad-slider a").eq(i).addClass("on");
+        
+    }
+    // 股市tab切换
+	var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+    left_xiangmu.each(function(){
+        left_xiangmu.click(function(){
+            left_xiangmu.removeClass('on');
+            $(this).addClass('on');
+        });
+    })
 	
 	// 加载最新公告
 	$.ajax({
@@ -63,7 +72,21 @@ $(function () {
 			
 		}
 	});
+    
+    
 });
+	
+//检测公告
+function checkNotice() {
+	var noticeid = getCookie("noticeid");
+	var loaclNoticeid = $("#noticeid").val();
+	if(noticeid === loaclNoticeid) {
+		$(".site-notice").remove();
+	} else {
+		$(".notice-fixed").fadeIn("slow");
+	}
+} 
+
 
 //邮箱验证规则
 var emailForm  = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;

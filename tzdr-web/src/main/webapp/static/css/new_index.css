@@ -182,9 +182,9 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .notice-fixed {z-index: 999;position: fixed;width: 100%;height: auto;margin: 0 auto;left: 0;right: 0;bottom: 0;min-width: 1000px;}
 /*.notice-absolute {width: 100%;height: auto;background: url(../images/common-new/noticbg.png) repeat;}*/
 .notice-style {width: 1000px; height:auto; margin: 0 auto;}
-.notice-title {width: 100%;height: 22px;line-height: 22px;text-align: left;font-size: 12px;color: #fff;font-weight: normal;}
-.notice-content {width: 100%;height: auto;line-height: 26px;font-size: 12px;color: #fff;text-align: left;text-indent: 2em;min-height: 52px;}
-.notice-close {display: block;width: 34px;height: 32px;background: url(../images/common-new/close.png) no-repeat;position: absolute;left: 50%;margin-left: 520px;top: 50%;margin-top: -16px;}
+.notice-title {text-align: left;font-weight: normal; font-size: 16px;color: #fc3;}
+.notice-content {width: 100%;height: auto;line-height: 26px;font-size: 12px;color: #fc3;text-align: left;text-indent: 2em;min-height: 52px;}
+.notice-close {display: block;width: 22px;height: 22px;background: url(../images/common-new/gongao-chacha.png) no-repeat;position: absolute; top: 10px; right: 0;}
 .notice-content a { color: #fef700; text-decoration: underline;}
 .hkicon { width:55px; height:24px;position: absolute; top: -25px; left: 28px;}
 .fl_notic { width: 100%; height: auto; background: url(../images/common-new/noticbg.png) repeat; position: fixed; left: 0; bottom: 0; padding: 8px 0; min-width: 1000px;  border-top: 1px solid #b73c40;}
@@ -192,11 +192,13 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .fl_ntctn h3 { width: 100%; height: 22px; line-height: 22px; text-align: left; font-size: 12px; color: #fff;  font-weight: normal; }
 .fl_ntctn div { width: 100%; height: auto; line-height: 26px; font-size: 12px; color: #fff; text-align: left; text-indent: 2em; min-height: 52px; }
 
-.site-touming {background: #000; height: 10px; width: 100%; opacity: 0.8;}
-.site-content {background: #333;}
+.site-touming {background: #000; height: 10px; width: 100%; opacity: 0.5;}
+.gonggao-title-bj {background: #333; border-bottom: 1px solid #1a1a1a;}
+.notice-title-bj {width: 1000px; margin: 0 auto; height: 40px; line-height: 40px; position: relative;}
+.site-notice .nr {border-top: 1px solid #4d4d4d; background: #333; padding: 20px 0;}
 
-
-
-
+/* weixin */
+.follow .erweima 
+.erweima-wxtk {position: absolute;top: -156px;left: -44px;}
 
 

@@ -65,7 +65,12 @@
             <ul class="follow">
                 <li>关注我们：</li>
                 <li><a href="http://www.weibo.com/shxhtzdr" target="_blank"><i class="weibo"></i></a></li>
-                <li><a href="javascript: void(0);" target="_blank"><i class="weixin"></i></a></li>
+                <li class="erweima" style="position: relative;">
+                	<a href="javascript: void(0);" target="_blank"><i class="weixin"></i></a>
+		            <div class="erweima-wxtk" style="display: none;">
+		                <img src="${ctx}/static/images/common-new/erweima.png">
+		            </div>
+                </li>
             </ul>
         </div>
         <div class="copyright_contact">
@@ -107,27 +112,45 @@
     </div>
 </div>
 <!-- 网站公告 -->
-<!-- <div class="site-notice notice-fixed" style="display: block;">
-	<div class="notice-style">
-		<h3 class="notice-title">尊敬的用户：</h3>
-		<div class="notice-content"></div>
-		<a href="javascript: closeNotice();" class="notice-close"></a>
-	</div>
+<div class="site-notice notice-fixed">
+	<p class="site-touming"></p>
+	<div class="gonggao-title-bj">
+		<div class="notice-title-bj">
+			<h3 class="notice-title">维胜公告栏</h3>
+			<a href="javascript: closeNotice();" class="notice-close"></a>
+		</div>	
+	</div>	
+	<div class="nr">
+		<div class="notice-style">
+			<div class="notice-content">
+				<p></p>
+			</div>
+		</div>	
+	</div>	
 </div>
 <input id="noticeid" type="hidden" value="123456" />
-<div class="site-notice fl_notic" style="position: relative;display: none;">
-    <div class="fl_ntctn">
-        <h3>尊敬的用户：</h3>
-        <div class="notice-content"></div>
-        <a href="javascript: closeNotice();" class="fl_n_close"></a>
-    </div>
-</div> -->
+<div class="site-notice notice-fixed" style="position: relative;display: none;">
+	<p class="site-touming"></p>
+	<div class="gonggao-title-bj">
+		<div class="notice-title-bj">
+			<h3 class="notice-title">维胜公告栏</h3>
+			<a href="javascript: closeNotice();" class="notice-close"></a>
+		</div>	
+	</div>
+    <div class="nr">
+		<div class="notice-style">
+			<div class="notice-content">
+				<p></p>
+			</div>
+		</div>	
+	</div>	
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
-	    $('.ft_wx a').hover(function() {
-	        $('.ft_wxtk ').show();
+		$('.follow .erweima').hover(function() {
+	        $('.erweima-wxtk').show();
 	    }, function() {
-	        $('.ft_wxtk ').hide();
+	        $('.erweima-wxtk').hide();
 	    });
 	    
 	    var showNotice = false;
@@ -166,24 +189,15 @@
 				}
 	    	}
 		});
+	    
 	});
-	// 检测公告
-	function checkNotice() {
-		var noticeid = getCookie("noticeid");
-		var loaclNoticeid = $("#noticeid").val();
-		if(noticeid === loaclNoticeid) {
-			$(".site-notice").remove();
-		} else {
-			$(".notice-fixed").fadeIn("slow");
-		}
-	} 
 	// 关闭公告
 	function closeNotice() {
 		$(".site-notice").remove();
 		// cookie记录公告已删除
 		addCookie("noticeid", $("#noticeid").val());
 	}
-	//添加cookie 
+
 	function addCookie(objName, objValue){
 		if(objValue==""){
 			var Num="";
@@ -198,7 +212,7 @@
 	    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
 	}
 	//获取指定名称的cookie的值 
-	/* function getCookie(c_name) {
+	function getCookie(c_name) {
 		if (document.cookie.length > 0) {
 			var c_start = document.cookie.indexOf(c_name + "=");
 			if(c_start != -1) {
