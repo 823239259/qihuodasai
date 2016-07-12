@@ -629,6 +629,7 @@ public class FSimpleFtseUserTradeServiceImpl extends
 			sql.append("	(ifnull(userTrade.trader_total,0)-ifnull(userTrade.golden_money,0)) as lossMoney,\n");
 			sql.append("	userTrade.line_loss as lineLoss,\n");
 			sql.append("	userTrade.trader_total as traderTotal,\n");
+			sql.append("	userTrade.tran_fees_total as tranFeesTotal,\n");
 			sql.append("	userTrade.tran_lever as tranLever,\n");
 			sql.append("	userTrade.tran_account as tranAccount,\n");
 			sql.append("	userTrade.tran_password as tranPassword,\n");

@@ -39,7 +39,6 @@ public class QuotationController {
 		JSONArray jsonArray = new JSONArray();
 		//请求品种
 		String resultDataCommodity = HttpRequest.httpPost(HttpUrlConstants.QUOTATION_QRYCOMMODITY, null);
-		System.out.println(resultDataCommodity);
 		if(resultDataCommodity.length() > 0){
 			JSONObject resultCommodityJson = JSONObject.parseObject(resultDataCommodity);
 			String commodityData = resultCommodityJson.getString("data");
