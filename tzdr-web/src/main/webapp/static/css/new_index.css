@@ -48,7 +48,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .bannerlist .lg_bottom {width: 100%;height: 39px; background-color: #333333;border-top: 1px solid #4d4d4d;}
 .slide_box {width: 100%; height: 400px; position: absolute;}
 .slide_banner {width:1920px; /*图片宽度*/ position:absolute; left:50%; margin-left:-960px; /*图片宽度的一半*/}
-.slide_box a {width: 100%;  height: 400px; position: absolute;}
+.slide_box a {width: 100%;  height: 400px; position: absolute; display: block;}
 .slide_box img { position: absolute;}
 .ad_slider {position: absolute; width: 100%; text-align: center;z-index: 10; bottom: 10px;}
 .ad_slider a{width: 29px; height: 29px; cursor: pointer; text-align: center; line-height: 29px; font-size: 16px; color: #000000; font-family: "Arial"; display: inline-block; text-decoration: none; background-color: #f9faf9; border-radius: 15px;}

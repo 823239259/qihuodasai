@@ -193,6 +193,10 @@
     </div>
     <div class="slide_box" id="slide-box">
         <div class="slide_banner">
+        	<a href="javascript: void(0);" title="1" class="on">1</a>
+	        <a href="javascript: void(0);" title="2" class="">2</a>
+	        <a href="javascript: void(0);" title="3" class="">3</a>
+	        <a href="javascript: void(0);" title="4" class="">4</a>
             <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
             <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
             <a href="#"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1003704465,1400426357&fm=116&gp=0.jpg"></a>
@@ -636,16 +640,16 @@
 <!-- 广告切换 -->
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
-       <c:forEach var="b" items="${banners }" varStatus="status">
-            	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>>${status.count }</a>
+        <c:forEach var="b" items="${banners }" varStatus="status">
+        	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>>${status.count }</a>
         </c:forEach>
     </div>
     <div class="slide_box" id="slide-box">
-        <div class="slide_banner">
+       	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
-	            	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	       </c:forEach>
-        </div>
+    	</div>
     </div>
     <div class="login">
         <div class="loginbox">
