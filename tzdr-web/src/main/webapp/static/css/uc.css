@@ -97,8 +97,8 @@ ul,li,ol,i,em { list-style: none; font-style: normal;}
 }
 
 .uc_paybtn { width: 154px; height: 38px; margin: 22px auto;}
-.uc_paybtn a { display: block; width: 154px; height: 38px; text-align: center; line-height: 38px; font-size: 16px; font-family: "微软雅黑"; color: #fff; background: url(../images/uc/pay_btn.gif) no-repeat;}
-.uc_paybtn a:hover { text-decoration: none; background: url(../images/uc/pay_btnhover.gif) no-repeat;}
+.uc_paybtn a { display: block; width: 154px; height: 38px; text-align: center; line-height: 38px; font-size: 16px; font-family: "微软雅黑"; background: #fc3;color: #333;border-radius: 4px;}
+.uc_paybtn a:hover { text-decoration: none; background: #fe3;}
 
 .uc_pay_promt { 
 	width: 250px;
@@ -1327,9 +1327,9 @@ width: 196px; background: #fff; *position:  }
 	display: inline-block; 
 	width: 96px;
 	height: 38px;
-	background: url(../images/uc/uc_icon.gif) no-repeat 0px -493px;
+	background: #fc3;
 	font-size: 16px;
-	color: #fff;
+	color: #333;
 	text-align: center;
 	line-height: 38px;
 	vertical-align: middle;
@@ -1338,7 +1338,7 @@ width: 196px; background: #fff; *position:  }
 }
 .uc_fssearch span a:hover { 
 	text-decoration: none;
-	background: url(../images/uc/uc_icon.gif) no-repeat 0px -531px;
+	background: #fe3;
 	
 }
 .uc_fspage {

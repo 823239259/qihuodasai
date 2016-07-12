@@ -8,7 +8,8 @@
 <meta content="维胜提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；维胜致力于打造中国领先的互联网金融交易平台." name="description">
 <style type="text/css">
  .font_size_15 {font-size: 15px; color: #f60; }
- .font_size_22 {font-size: 22px; color: #f60; }                       
+ .font_size_22 {font-size: 22px; color: #f60; }   
+#hengzhiqidai {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}                     
 </style>
 <%-- <link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" /> --%>
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
@@ -24,12 +25,6 @@
 <title>支付确认 - 维胜</title>
 </head>
 <body>
-	<script>
-		$(document).ready(function(){
-			$('.navlist li a').removeClass('on');
-			$("#hengzhiqidai").addClass("on");
-		});
-	</script>
 	<!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 	<div class="floatlayer" id="notPay" style="display:none;">

@@ -102,7 +102,7 @@
                 <li><a href="https://www.nyse.com/index" target="_blank">纽约证券交易所</a></li>
                 <li><a href="http://www.nasdaq.com/" target="_blank">纳斯达克</a></li>
             </ul>
-            <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 沪ICP备14048395号-1  投资有风险，入市需谨慎</p>
+            <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备14048395号-1  投资有风险，入市需谨慎</p>
         </div>
         <div class="cp_cppic">
             <a href="https://credit.szfw.org/CX20160302013752300118.html" target="_blank"><img src="${ctx}/static/images/image/shiming.png"></a>

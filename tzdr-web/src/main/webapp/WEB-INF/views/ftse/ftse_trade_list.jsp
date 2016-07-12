@@ -33,6 +33,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .tzdr-data01 { width:98%; margin:0 auto;}
 #window_detail_accountInfo table { padding:5px 0 5px 30px;}
 #window_detail_accountInfo table tr td { height:24px; line-height:24px;}
+#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js"></script>

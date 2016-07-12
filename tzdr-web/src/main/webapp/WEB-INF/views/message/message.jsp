@@ -11,6 +11,9 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/message/message.js?version=20150721"></script>
+<style>
+	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+</style>
 </head>
 <body>
 <!--顶部 -->

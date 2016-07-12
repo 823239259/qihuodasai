@@ -19,6 +19,7 @@
 	font-size: 22px;
 	color: #f60;
 }
+ #guojiyuanyou {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
@@ -31,12 +32,6 @@
 <title>国际原油 - 维胜</title>
 </head>
 <body>
-	<script>
-		$(document).ready(function(){
-			$('.navlist li a').removeClass('on');
-			$("#guojiyuanyou").addClass("on");
-		});
-	</script>
 	<!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 	<form action="${ctx}/usercrudeoil/pay" id="settingForm" method="post">

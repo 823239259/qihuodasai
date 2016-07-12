@@ -19,6 +19,7 @@
 	font-size: 22px;
 	color: #f60;
 }
+#fushia50 {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
@@ -31,12 +32,6 @@
 <title>富时A50- 维胜</title>
 </head>
 <body>
-	<script>
-		$(document).ready(function(){
-			$('.navlist li a').removeClass('on');
-			$("#fushia50").addClass("on");
-		});
-	</script>
 	<!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 	<form action="${ctx}/userftse/pay" id="settingForm" method="post">

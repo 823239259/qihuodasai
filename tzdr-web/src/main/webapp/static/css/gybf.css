@@ -319,20 +319,24 @@
 	margin-left:30px;}
 .tck01 .anniu .btn-h01 {
     display:block;
-	background:url(../images/btn.png) no-repeat -210px 0px;
+	background:#fc3;
     width: 156px;
     height: 40px;
     line-height: 40px;
-    color: #FFF;
-    text-shadow: 1px 1px 0px #E27214;
+    color: #333;
+    text-shadow: 1px 1px 0px #fc3;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
 	float:left;
 	font-size:16px;
+	border: 1px solid #333;
+	border-radius: 4px;
 }
 .tck01 .anniu .btn-h01:hover {
-    background-position: -210px -40px;
+    background:#fe3;
+    color: #333;
+    text-decoration: none;
 }
 .tck01 .anniu .btn-h0101 {
     display:block;

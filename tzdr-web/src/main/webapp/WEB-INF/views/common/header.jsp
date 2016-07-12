@@ -56,11 +56,12 @@
             <li><a id="fxspot" href="${ctx}/topic/fxspot/">外汇现货</a></li>
             
             <li><a class="on"  href="#" style="padding: 27px 16px 26px 16px;">首页</a></li> --%>
+            <li><a id="guojizonghe" href="${ctx}/outDisk/index">国际综合</a></li>
+            <li><a id="fushia50" href="${ctx}/ftse/index">富时A50</a></li>
             <li><a id="hengzhiqidai" href="${ctx}/hsi/index">恒指期货</a></li>
             <li><a id="guojiyuanyou" href="${ctx}/crudeoil/index">国际原油</a></li>
-            <li><a id="fushia50" href="${ctx}/ftse/index">富时A50</a></li>
-            <li><a id="guojizonghe" href="${ctx}/outDisk/index">国际综合</a></li>
-                      
+            
+                
             <%
         		if(request.getSession().getAttribute("userName") !=null){
         	%>

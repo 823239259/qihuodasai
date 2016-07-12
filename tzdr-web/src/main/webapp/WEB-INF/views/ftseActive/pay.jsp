@@ -18,7 +18,7 @@
 .step ul li.on span { background: url(${ctx}/static/images/capital/stepon.png) no-repeat;}
 .step ul li.on p { color:#ff6500;font-weight: bold; }
 .step ul li.on i { display: block; width: 100%; height: 2px; background: #ff6500; position: absolute; top: 11px; left: 0; }
-                   
+#ftseli {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}                   
 </style>
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
 <%-- <link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" /> --%>
@@ -33,9 +33,6 @@
 
 <script type="text/javascript" >
 $(document).ready(function(){
-	$('.navlist li a').removeClass('on');
-	$("#ftseli").addClass("on");
-	
 	var isShow = $("input[name='showAvl']").val();
 	if(isShow == 1){
 		$("#notPay").show();

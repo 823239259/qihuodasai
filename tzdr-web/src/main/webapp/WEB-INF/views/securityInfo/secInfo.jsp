@@ -16,7 +16,9 @@
      <script src="${ctx}/static/script/tzdr.js" type="text/javascript"></script>
 <script src="${ctx}/static/script/common/tzdr.user.js?version=20150724" type="text/javascript"></script>		
     <!--[if lte IE 9]><script src="js/html5.js"></script><![endif]-->
-
+<style>
+	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+</style>
 </head>
 
 

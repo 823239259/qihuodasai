@@ -11,6 +11,9 @@
 <script type="text/javascript"src="${ctx}/static/script/common/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/coupon/coupon_common.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/coupon/coupon_list.js?v=${v}"></script>
+<style>
+	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+</style>
 <body>
 	<!-- 弹窗口 -->
 	<div class="uc_floatlayer" id="redDev" style="display: none">

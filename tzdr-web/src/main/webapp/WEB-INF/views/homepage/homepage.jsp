@@ -595,7 +595,7 @@
 <style type="text/css">
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
-	
+	.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 </head>
 
@@ -745,7 +745,7 @@
                 </div>
             </div>
             <div class="right_xiangqing">
-                <div id="main" style="height:400px; width: 800px;"></div>
+                <div id="main" style="height:500px; width: 800px;"></div>
             </div>
         </div>
     </div>
@@ -756,7 +756,7 @@
         <div class="w_center_border"></div>
         <div class="w-qihuo-title">
             <h3>国际期货</h3>
-            <a href="${ctx}/outDisk/index">查看更多</a>
+            <a href="${ctx}/outDisk/index" target="_blank">查看更多</a>
         </div> 
         <div class="w-qihuo-content">
             <div class="w-qihuo-caopan">
@@ -765,7 +765,7 @@
                 <p><i class="gou"></i>保证金交易 以小博大</p>
                 <p><i class="gou"></i>白天晚上都可以交易</p>
                 <p><i class="gou"></i>极速开户 T+0结算到账</p>
-                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=7">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=8">实盘系统下载</a></p>
+                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=7" target="_blank">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=8" target="_blank">实盘系统下载</a></p>
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
@@ -780,7 +780,7 @@
                     <p>总共操盘: 4795人</p>
                     <p>总共交易: 41733手</p>
                 </div>
-                <p class="chaopan"><a href="${ctx}/hsi/index">申请操盘</a></p>
+                <p class="chaopan"><a href="${ctx}/hsi/index" target="_blank">申请操盘</a></p>
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【国际原油】</h3>
@@ -795,7 +795,7 @@
                     <p>总共操盘: 4795人</p>
                     <p>总共交易: 41733手</p>
                 </div>
-                <p class="chaopan"><a href="${ctx}/crudeoil/index">申请操盘</a></p>
+                <p class="chaopan"><a href="${ctx}/crudeoil/index" target="_blank">申请操盘</a></p>
             </div>
             <div class="w-guopjiqihuo" style="border-right: 10px solid #424242;">
                 <h3>【富时A50】</h3>
@@ -810,7 +810,7 @@
                     <p>总共操盘: 4795人</p>
                     <p>总共交易: 41733手</p>
                 </div>
-                <p class="chaopan"><a href="${ctx}/ftse/index">申请操盘</a></p>
+                <p class="chaopan"><a href="${ctx}/ftse/index" target="_blank">申请操盘</a></p>
             </div>
         </div>
     </div>
