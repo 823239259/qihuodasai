@@ -56,7 +56,7 @@
         <div class="copyright_link">
             <ul class="link">
                 <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a25cff03e0" target="_blank">维胜动态</a></li>
-                <li><a href="${ctx }/about">公司简介</a></li>
+                <li><a href="${ctx }/about" target="_blank">公司简介</a></li>
                 <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a17d1303df" target="_blank">市场热点</a></li>
                 <li><a href="${ctx }/company" target="_blank">公司资质</a></li>
                 <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
@@ -64,9 +64,9 @@
             </ul>
             <ul class="follow">
                 <li>关注我们：</li>
-                <li><a href="http://www.weibo.com/shxhtzdr" target="_blank"><i class="weibo"></i></a></li>
+                <li><a href="http://www.weibo.com/shxhtzdr" target="_blank" class="weibo"></a></li>
                 <li class="erweima" style="position: relative;">
-                	<a href="javascript: void(0);" target="_blank"><i class="weixin"></i></a>
+                	<a href="javascript: void(0);" target="_blank" class="weixin"></a>
 		            <div class="erweima-wxtk" style="display: none;">
 		                <img src="${ctx}/static/images/common-new/erweima.png">
 		            </div>
@@ -102,7 +102,7 @@
                 <li><a href="https://www.nyse.com/index" target="_blank">纽约证券交易所</a></li>
                 <li><a href="http://www.nasdaq.com/" target="_blank">纳斯达克</a></li>
             </ul>
-            <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备14048395号-1  投资有风险，入市需谨慎</p>
+            <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
         </div>
         <div class="cp_cppic">
             <a href="https://credit.szfw.org/CX20160302013752300118.html" target="_blank"><img src="${ctx}/static/images/image/shiming.png"></a>
@@ -128,9 +128,9 @@
 		</div>	
 	</div>	
 </div>
-<input id="noticeid" type="hidden" value="123456" />
-<div class="site-notice notice-fixed" style="position: relative;display: none;">
-	<p class="site-touming"></p>
+<input id="noticeid" type="hidden" value="144" />
+<div class="site-notice notice-relative" style="position: relative; display: none;">
+	<p class="site-touming" style="margin-top: -5px;"></p>
 	<div class="gonggao-title-bj">
 		<div class="notice-title-bj">
 			<h3 class="notice-title">维胜公告栏</h3>
@@ -146,85 +146,142 @@
 	</div>	
 </div>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('.follow .erweima').hover(function() {
-	        $('.erweima-wxtk').show();
-	    }, function() {
-	        $('.erweima-wxtk').hide();
-	    });
-	    
-	    var showNotice = false;
-	    var content="";
-	    $.ajax({
-	    	url:basepath+"findnewData",
-	    	data:{},
-	    	type:'POST',
-	    	success:function(nitives){
-	    		var reg1=new RegExp("&lt;","g"); 
-	    		var reg2=new RegExp("&gt;","g"); 
-	    		$(nitives).each(function(){
-	    			content = $(this).attr("content");
-	    			content=content.replace(reg1,"<");
-	    			content=content.replace(reg2,">");
-	    			$('.notice-content').html(content);
-	    			$('#noticeid').val($(this).attr("version"));
-	    		    // 检查公告
-	    		    checkNotice();
-	    		    showNotice = true;
-	    		})
-	    	},dataType:'json'
-	    })
-	    
-	    $(window).scroll(function () {
-	    	if(showNotice) {
-			    var scrollTop = $(this).scrollTop();//滚动条位置
-			    var scrollHeight = $(document).height();//高度
-			    var windowHeight = $(this).height();//整体高度
-			    if (scrollTop + windowHeight >= scrollHeight-80) {
-			    	$(".notice-fixed").fadeOut("fast");
-			    	$(".fl_notic").fadeIn("fast");
-				} else {
-					$(".fl_notic").fadeOut("fast");
-					$(".notice-fixed").fadeIn("fast");
-				}
-	    	}
-		});
-	    
-	});
-	// 关闭公告
-	function closeNotice() {
-		$(".site-notice").remove();
-		// cookie记录公告已删除
-		addCookie("noticeid", $("#noticeid").val());
-	}
-
-	function addCookie(objName, objValue){
-		if(objValue==""){
-			var Num="";
-			for(var i=0;i<6;i++){ 
-				Num+=Math.floor(Math.random()*10); 
-			} 
-			objValue=Num;
-		}
-		var days = 365; 
-	    var exp = new Date(); 
-	    exp.setTime(exp.getTime() + days*24*60*60*1000); 
-	    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
-	}
-	//获取指定名称的cookie的值 
-	function getCookie(c_name) {
-		if (document.cookie.length > 0) {
-			var c_start = document.cookie.indexOf(c_name + "=");
-			if(c_start != -1) {
-				c_start = c_start + c_name.length + 1; 
-				c_end = document.cookie.indexOf(";", c_start)
-				if(c_end == -1) {
-					c_end = document.cookie.length;
-				}
-			    return unescape(document.cookie.substring(c_start, c_end))
+$(function () {
+	// 是否登录
+	flushLoginTicket();
+	islogin();
+	
+	// banner切换
+	var num = $("#slide-box a").size();
+    var i = 0;
+    var theInt = null;
+    $("#ad-slider a").eq(0).addClass("on");
+    $("#slide-box a").eq(0).fadeIn(500);
+    $("#ad-slider a").each(function (i) {
+        $(this).click(function () {
+            Change(i);
+            HuanDeng(i);
+        });
+    });
+    HuanDeng = function (i) {
+        clearInterval(theInt);
+        theInt = setInterval(function () {
+            i++;
+            if (i < num) {
+                Change(i);
+            } else {
+                i = 0
+                Change(i);
+            }
+        }, 5000);
+    }
+    HuanDeng(0);
+    function Change(i) {
+        $("#slide-box a").fadeOut(500);
+        $("#slide-box a").eq(i).fadeIn(500);
+        $("#ad-slider a").removeClass("on");
+        $("#ad-slider a").eq(i).addClass("on");
+        
+    }
+    // 股市tab切换
+	var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+    left_xiangmu.each(function(){
+        left_xiangmu.click(function(){
+            left_xiangmu.removeClass('on');
+            $(this).addClass('on');
+        });
+    })
+	
+	// 加载最新公告
+    var showNotice = false;
+    var content="";
+    $.ajax({
+    	url:basepath+"findnewData",
+    	data:{},
+    	type:'POST',
+    	success:function(nitives){
+    		var reg1=new RegExp("&lt;","g"); 
+    		var reg2=new RegExp("&gt;","g"); 
+    		$(nitives).each(function(){
+    			content = $(this).attr("content");
+    			content=content.replace(reg1,"<");
+    			content=content.replace(reg2,">");
+    			$('.notice-content').html(content);
+    			$('#noticeid').val($(this).attr("version"));
+    		    // 检查公告
+    		    checkNotice();
+    		    showNotice = true;
+    		})
+    	},dataType:'json'
+    })
+    
+    $(window).scroll(function () {
+    	if(showNotice) {
+		    var scrollTop = $(this).scrollTop();//滚动条位置
+		    var scrollHeight = $(document).height();//高度
+		    var windowHeight = $(this).height();//整体高度
+		    if (scrollTop + windowHeight >= scrollHeight-80) {
+		    	$(".notice-fixed").fadeOut();
+		    	$(".notice-relative").fadeIn();
+			} else {
+				$(".notice-fixed").fadeIn();
+				$(".notice-relative").fadeOut();
 			}
-		}
-		return ""
+    	}
+	});
+    /*二维码*/
+    $('.follow .erweima').hover(function() {
+        $('.erweima-wxtk').show();
+    }, function() {
+        $('.erweima-wxtk').hide();
+    });
+    
+});
+	
+//检测公告
+function checkNotice() {
+	var noticeid = getCookie("noticeid");
+	var loaclNoticeid = $("#noticeid").val();
+	if(noticeid === loaclNoticeid) {
+		$(".site-notice").remove();
+	} else {
+		$(".notice-fixed").fadeIn("slow");
 	}
+}
+ // 关闭公告
+function closeNotice() {
+	$(".site-notice").remove();
+	// cookie记录公告已删除
+	addCookie("noticeid", $("#noticeid").val());
+}
+
+function addCookie(objName, objValue){
+	if(objValue==""){
+		var Num="";
+		for(var i=0;i<6;i++){ 
+			Num+=Math.floor(Math.random()*10); 
+		} 
+		objValue=Num;
+	}
+	var days = 365; 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() + days*24*60*60*1000); 
+    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
+}
+//获取指定名称的cookie的值 
+function getCookie(c_name) {
+	if (document.cookie.length > 0) {
+		var c_start = document.cookie.indexOf(c_name + "=");
+		if(c_start != -1) {
+			c_start = c_start + c_name.length + 1; 
+			c_end = document.cookie.indexOf(";", c_start)
+			if(c_end == -1) {
+				c_end = document.cookie.length;
+			}
+		    return unescape(document.cookie.substring(c_start, c_end))
+		}
+	}
+	return ""
+}
 </script><!-- <script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script> -->
 <span style="display: none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>

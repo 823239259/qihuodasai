@@ -45,34 +45,48 @@ $(function () {
     })
 	
 	// 加载最新公告
-	$.ajax({
-		url:basepath+"findnews",
-		type:'POST',
-		data:{},
-		dataType:"json",
-		success:function(news){
-			var newsStr = "";
-			$(news).each(function(i){
-				newsStr = newsStr + "<li><i></i><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("name")+"</a><em><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("addtime")+"</a></em></li>";
-			})
-			$('.h_noticlist').html(newsStr);
-			
-			setTimeout(function(){
-				// 最新公告滚动效果
-				var box=document.getElementById("h_scroll"),can=true; 
-				box.innerHTML+=box.innerHTML; 
-				box.onmouseover=function(){can=false}; 
-				box.onmouseout=function(){can=true}; 
-				new function (){ 
-				var stop=box.scrollTop%18==0&&!can; 
-				if(!stop)box.scrollTop==parseInt(box.scrollHeight/2)?box.scrollTop=0:box.scrollTop++; 
-				setTimeout(arguments.callee,box.scrollTop%17?30:3000); 
-				};
-			},2000);
-			
-		}
-	});
+    var showNotice = false;
+    var content="";
+    $.ajax({
+    	url:basepath+"findnewData",
+    	data:{},
+    	type:'POST',
+    	success:function(nitives){
+    		var reg1=new RegExp("&lt;","g"); 
+    		var reg2=new RegExp("&gt;","g"); 
+    		$(nitives).each(function(){
+    			content = $(this).attr("content");
+    			content=content.replace(reg1,"<");
+    			content=content.replace(reg2,">");
+    			$('.notice-content').html(content);
+    			$('#noticeid').val($(this).attr("version"));
+    		    // 检查公告
+    		    checkNotice();
+    		    showNotice = true;
+    		})
+    	},dataType:'json'
+    })
     
+    $(window).scroll(function () {
+    	if(showNotice) {
+		    var scrollTop = $(this).scrollTop();//滚动条位置
+		    var scrollHeight = $(document).height();//高度
+		    var windowHeight = $(this).height();//整体高度
+		    if (scrollTop + windowHeight >= scrollHeight-80) {
+		    	$(".notice-fixed").fadeOut();
+		    	$(".notice-relative").fadeIn();
+			} else {
+				$(".notice-fixed").fadeIn();
+				$(".notice-relative").fadeOut();
+			}
+    	}
+	});
+    /*二维码*/
+    $('.follow .erweima').hover(function() {
+        $('.erweima-wxtk').show();
+    }, function() {
+        $('.erweima-wxtk').hide();
+    });
     
 });
 	
@@ -85,8 +99,42 @@ function checkNotice() {
 	} else {
 		$(".notice-fixed").fadeIn("slow");
 	}
-} 
+}
+ // 关闭公告
+function closeNotice() {
+	$(".site-notice").remove();
+	// cookie记录公告已删除
+	addCookie("noticeid", $("#noticeid").val());
+}
 
+function addCookie(objName, objValue){
+	if(objValue==""){
+		var Num="";
+		for(var i=0;i<6;i++){ 
+			Num+=Math.floor(Math.random()*10); 
+		} 
+		objValue=Num;
+	}
+	var days = 365; 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() + days*24*60*60*1000); 
+    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
+}
+//获取指定名称的cookie的值 
+function getCookie(c_name) {
+	if (document.cookie.length > 0) {
+		var c_start = document.cookie.indexOf(c_name + "=");
+		if(c_start != -1) {
+			c_start = c_start + c_name.length + 1; 
+			c_end = document.cookie.indexOf(";", c_start)
+			if(c_end == -1) {
+				c_end = document.cookie.length;
+			}
+		    return unescape(document.cookie.substring(c_start, c_end))
+		}
+	}
+	return ""
+}
 
 //邮箱验证规则
 var emailForm  = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;

@@ -98,7 +98,7 @@
 		<%@ include file="../common/leftnav.jsp"%>
 		<!--网银支付-->
 		<div class="uc_mianbar">		
-			<div class="uc_mainbanner" style="display:block;"><a href="http://www.tzdr.com/news/shownews/8af5e81853413bf90153593cf80c7273" target="_blank"><img src="${ctx}/static/images/uc/banner.png" alt="现金红包送不停"></a></div>
+			<div class="uc_mainbanner" style="display:none;"><a href="http://www.tzdr.com/news/shownews/8af5e81853413bf90153593cf80c7273" target="_blank"><img src="${ctx}/static/images/uc/banner.png" alt="现金红包送不停"></a></div>
 			<div class="uc_siflist" style="margin-bottom:20px;">
 				<div class="uc_sl_nav">
 					<a href="javascript:void(0);" class="on">账户概况</a>

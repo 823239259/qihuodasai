@@ -641,7 +641,7 @@
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
         <c:forEach var="b" items="${banners }" varStatus="status">
-        	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>>${status.count }</a>
+        	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>></a>
         </c:forEach>
     </div>
     <div class="slide_box" id="slide-box">
@@ -684,7 +684,7 @@
        		}else{
        	%>
         <div class="lgctn" id="logindiv">
-            <h3>欢迎登录维胜</h3>
+            <h3>登录</h3>
              <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
                 <input type="hidden" name="isajax" value="true">
                 <input type="hidden" name="isframe" value="true">
@@ -711,7 +711,7 @@
             </form>
             </div>
             <% } %>
-            <!-- <div class="lg_bottom"></div> -->
+            <div class="lg_bottom"></div>
         </div>
     </div>
 </div>
@@ -721,7 +721,7 @@
         <h2><i></i>最新动态：</h2>
         <ul class="h_noticlist" id="h_scroll">
         </ul>
-         <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多</a>
+         <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多动态</a>
     </div>
 </div>
 <!--content-->
@@ -765,7 +765,7 @@
                 <p><i class="gou"></i>保证金交易 以小博大</p>
                 <p><i class="gou"></i>白天晚上都可以交易</p>
                 <p><i class="gou"></i>极速开户 T+0结算到账</p>
-                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=7" target="_blank">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=8" target="_blank">实盘系统下载</a></p>
+                <p style="padding-left: 0;"><a href="${ctx}/outDisk/index" target="_blank">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=8" target="_blank">实盘系统下载</a></p>
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
@@ -797,7 +797,7 @@
                 </div>
                 <p class="chaopan"><a href="${ctx}/crudeoil/index" target="_blank">申请操盘</a></p>
             </div>
-            <div class="w-guopjiqihuo" style="border-right: 10px solid #424242;">
+            <div class="w-guopjiqihuo" style="border-right: 10px solid #292929;">
                 <h3>【富时A50】</h3>
                 <h4><i>39</i>元/单边</h4>
                 <ul>
@@ -855,20 +855,20 @@
     <div class="h_partner_content">
         <p class="h_chosetitle"><span>合作伙伴与媒体报道</span></p>
         <p class="h_img">
-            <a href="javascript:void(0)"><img src="static/images/image/pingan-bank.png" alt="" style="margin-left: 0;"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/pingan-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/huatai-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/guotai-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/haitong-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt="" style="margin-right: 0;"/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/xinlang-bank.png" alt="" style="margin-left: 0"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/xinlang-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/dongfang-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/hexun-bank.png" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/fenghuang-bank.png" alt="" style="margin-right: 0;"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/fenghuang-bank.png" alt=""/></a>
         </p>
     </div>
 </div>
@@ -936,7 +936,7 @@
                 title: {
                     text: 'K线图'
                 },
-                backgroundColor: '#21202D',
+                backgroundColor: '#333',
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -1101,10 +1101,10 @@
 						    $(".gxsj").text(_data.TimeStamp);
 						    $("#dqCommodNo").val(_data.CommodityNo);
 						 }
-						 html +=  ' "> <p><em style="">'+commodityName+'</em>'
-						 	  + '<span class = "qlast'+i+'" style="color: '+color+';">'+qlastPrice+'</span>'
-						 	  + '<span class = "qchange'+i+'" style="color: '+color+';">'+(parseFloat(_data.QChangeValue)).toFixed(size)+'</span>'
-						 	  + '<span class = "scal'+i+'" style="color: '+color+';">'+scal+'</span>';
+						 html +=  ' "> <p><em style="" class = "right">'+commodityName+'</em>'
+						 	  + '<span class = "qlast'+i+' left" style="color: '+color+';">'+qlastPrice+'</span>'
+						 	  + '<span class = "qchange'+i+' right" style="color: '+color+';">'+(parseFloat(_data.QChangeValue)).toFixed(size)+'</span>'
+						 	  + '<span class = "scal'+i+' left" style="color: '+color+';">'+scal+'</span>';
 						 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
 						 $(".left_x"+i+"").bind("click",function(){
 							 loadK();
