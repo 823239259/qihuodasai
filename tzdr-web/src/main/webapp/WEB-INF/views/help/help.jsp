@@ -41,14 +41,14 @@ var tab="<%=tab%>";
     <!--股票操盘-->
     <div class="hp_ctn configuration hp_content">
         <div class="hp_siderbar">
-            <a href="javascript:void(0);"  data="1">什么是港股操盘</a>
-            <a href="javascript:void(0);" data="2">港股新手指南</a>
-            <a href="javascript:void(0);" data="3">港股操盘规则</a>
-            <a href="javascript:void(0);" data="7">港股操盘限制</a>
-            <a href="javascript:void(0);" data="10">港股黑名单</a>
-            <a href="javascript:void(0);" data="4">港股收费介绍</a>
-            <a href="javascript:void(0);" data="5">港股穿仓处理</a>
-            <a href="javascript:void(0);" data="6">港股停牌股处理</a>
+            <a href="javascript:void(0);"  data="1">什么是港股操盘<i>></i></a>
+            <a href="javascript:void(0);" data="2">港股新手指南<i>></i></a>
+            <a href="javascript:void(0);" data="3">港股操盘规则<i>></i></a>
+            <a href="javascript:void(0);" data="7">港股操盘限制<i>></i></a>
+            <a href="javascript:void(0);" data="10">港股黑名单<i>></i></a>
+            <a href="javascript:void(0);" data="4">港股收费介绍<i>></i></a>
+            <a href="javascript:void(0);" data="5">港股穿仓处理<i>></i></a>
+            <a href="javascript:void(0);" data="6">港股停牌股处理<i>></i></a>
         </div>
         <div class="hp_mainbar  hp_mbox1">
             <h1>什么是港股操盘</h1>
@@ -195,11 +195,11 @@ var tab="<%=tab%>";
     <!-- 期指操盘 -->    
     <div class="hp_ctn rule hp_content" style="display: none">
     	<div class="hp_siderbar rule_siderbar">
-            <a href="javascript:void(0)" data="5">国际综合</a>
-            <a href="javascript:void(0)" data="0">富时A50</a>
-            <a href="javascript:void(0)" data="9">恒指操盘</a>
-            <a href="javascript:void(0)" data="8">国际原油</a>
-            <a href="javascript:void(0)" data="2">商品综合</a>
+            <a href="javascript:void(0)" data="5">国际综合<i>></i></a>
+            <a href="javascript:void(0)" data="0">富时A50<i>></i></a>
+            <a href="javascript:void(0)" data="9">恒指操盘<i>></i></a>
+            <a href="javascript:void(0)" data="8">国际原油<i>></i></a>
+            <a href="javascript:void(0)" data="2">商品综合<i>></i></a>
         </div>
         <div class="hp_mainbar hp_mbox0" style="display:none;">        	
             <h1>富时A50</h1>     
@@ -724,13 +724,13 @@ var tab="<%=tab%>";
     <!--安全保障  -->
     <div class="hp_ctn safety hp_content" style="display: none">
         <div class="hp_siderbar safety_siderbar">
-            <a href="javascript:void(0);" class="on" data="1">安全保障</a>
-            <a href="javascript:void(0);" data="2">法律保障</a>
-            <a href="javascript:void(0);" data="3">资金安全保障</a>
-            <a href="javascript:void(0);" data="4">信息安全保障</a>
-            <a href="javascript:void(0);" data="5">交易安全保障</a>
-            <a href="javascript:void(0);" data="6">专业风控保障</a>
-             <a href="javascript:void(0);" data="7">协议安全保障</a>
+            <a href="javascript:void(0);" class="on" data="1">安全保障<i>></i></a>
+            <a href="javascript:void(0);" data="2">法律保障<i>></i></a>
+            <a href="javascript:void(0);" data="3">资金安全保障<i>></i></a>
+            <a href="javascript:void(0);" data="4">信息安全保障<i>></i></a>
+            <a href="javascript:void(0);" data="5">交易安全保障<i>></i></a>
+            <a href="javascript:void(0);" data="6">专业风控保障<i>></i></a>
+             <a href="javascript:void(0);" data="7">协议安全保障<i>></i></a>
         </div>
         <div class="hp_mainbar hp_mbox1">
         	<h1>安全保障</h1>
@@ -801,21 +801,21 @@ var tab="<%=tab%>";
     <!--交易软件下载  -->
     <div class="hp_ctn software hp_content" style="display:none;">
         <div class="hp_siderbar software_siderbar">
-            <a href="javascript:void(0)" class="on" data="1">股票交易系统</a>            
-            <a href="javascript:void(0)" data="12">股票掌上交易系统</a>
-            <a href="javascript:void(0)" data="8">国际期货交易系统</a>
-            <a href="javascript:void(0)" data="9">商品期货交易系统</a>
+            <!-- <a href="javascript:void(0)" class="on" data="1">股票交易系统<i style="right: 20px;">></i></a>   -->          
+            <!-- <a href="javascript:void(0)" data="12">股票掌上交易系统<i style="right: 20px;">></i></a> -->
+            <a href="javascript:void(0)" data="8">国际期货交易系统<i style="right: 20px;">></i></a>
+           <!--  <a href="javascript:void(0)" data="9">商品期货交易系统<i style="right: 20px;">></i></a> -->
         </div>
         <div class="hp_mainbar hp_mbox1" style="display:none;">
-            <h1 style="border-bottom:1px solid #d1d1d1;">钱隆TTS股票交易系统<span style="font-size:16px; color:#f00; padding-left:10px;">请股票合买和港股操盘的用户下载此软件！</span></h1>    
+            <h1 style="border-bottom:1px solid #d1d1d1;">钱隆TTS股票交易系统<span style="font-size:16px; color:#fc3; padding-left:10px;">请股票合买和港股操盘的用户下载此软件！</span></h1>    
             <div class="hp_tts">               
-                <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win XP用户安装时需注意</h6>   
+                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win XP用户安装时需注意</h6>   
                 <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序。<br>若程序仍无法运行，请致电客服400-852-8008。</p>  
-                <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win 7用户安装时需注意</h6>  
+                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win 7用户安装时需注意</h6>  
                 <p style="margin-bottom:40px; text-indent:0;">1，直接下载安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序；<br>	2，若程序无法运行，请补充下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”，再运行TTS系统。<br>若程序仍无法运行，请致电客服400-852-8008。</p> 
-                <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win 8用户安装时需注意</h6>      
+                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win 8用户安装时需注意</h6>      
                 <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/vcredist_x86.zip">VC2005运行库</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序。<br>若程序仍无法运行，请致电客服400-852-8008。</p>            
-            	<h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">钱隆TTS本身不带行情，推荐第三方行情系统：</h6>   
+            	<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">钱隆TTS本身不带行情，推荐第三方行情系统：</h6>   
             	<p style="text-indent:0;">选择一，<a href="http://zjcmpp.hexin.com.cn/soft/THS_freeldy.exe">“同花顺免费炒股软件”</a>，下载安装后无需登录即可打开软件<br>1，沪深A股和港股都可以看行情<br>2，港股实时行情，20只个股的展示限制，但可以手工查询指定的个股看实时行情，另外还需手动刷新行情。注意：手工查询时，应输入股票名称首字母，输入代码无效。</p>
             	<p style="text-indent:0;">选择二，<a href="http://www.tdx.com.cn/products/level2/new_tdx.exe">“通达信金融分析终端软件”</a>，下载安装、启动软件后选择“免费精选行情登录”，无需账号即可登录 <br>1，沪深A股和港股都可以看行情<br>2，港股行情延时15分钟，但会展示所有港股股票</p>
             </div>
@@ -837,18 +837,18 @@ var tab="<%=tab%>";
         <div class="hp_mainbar hp_mbox8" style="display:none;">
             <h1 style="border-bottom:1px solid #d1d1d1;">直达-快抢手快速下单软件</h1> 
             <div class="hp_tts">   
-           		<h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">移动手机用户安装时需注意：</h6> 
+           		<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">移动手机用户安装时需注意：</h6> 
            		<p style="margin-bottom:10px; text-indent:0;">1，安卓手机请扫描二维码下载、安装快抢手APP；</p>              
                 <img src="${ctx}/static/images/help/softcode.png">
                 <p style="margin-bottom:40px; text-indent:0;">2，iPhone手机暂不支持，iOS APP即将推出。</p>
-                <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">Win XP用户安装时需注意：</h6>   
+                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">Win XP用户安装时需注意：</h6>   
                 <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/Microsoft.NET.exe">.NET Framework 4.0</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”，然后启动软件。</p>  
-                <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">win 7用户安装时需注意</h6>  
+                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win 7用户安装时需注意</h6>  
                 <p style="margin-bottom:40px; text-indent:0;">1，下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”；<br>2，若软件提示“此安装程序需要.NET Framework 4.0”，再下载并安装“<a href="http://update.tzdr.com/Future/download/Microsoft.NET.exe">.NET Framework 4.0</a>”，再安装“快抢手快速下单软件”，然后启动软件。</p>
-                <h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">Win 8/8.1、Win 10用户安装时需注意</h6>      
+                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">Win 8/8.1、Win 10用户安装时需注意</h6>      
                 <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”，安装时有风险预警，请继续选择安装；<br>2，更改软件以兼容模式运行，如下图，更改后再启动软件；：<br><img src="${ctx}/static/images/help/jr_01.gif" style="height:407px;margin-right: 20px;"><img src="${ctx}/static/images/help/jr_02.gif" style="width:320px;"><br>3，请务必更改兼容性！否则启动软件后，登录界面没有交易和行情服务器选择，无法登录软件。</p>            
-            	<h6 style="font-weight:bold;color:#f00; margin-bottom:10px;">若程序仍无法运行，请致电客服400-852-8008。</h6>
-            	<h6 style="font-weight:bold;color:#f00; margin-bottom:10px; margin-top:40px;">快抢手快速下单软件使用基本说明：</h6>
+            	<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">若程序仍无法运行，请致电客服400-852-8008。</h6>
+            	<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px; margin-top:40px;">快抢手快速下单软件使用基本说明：</h6>
             </div>        
             <h3 style="line-height:24px; margin:10px 0 15px; color:#333;">1，第一次登录软件后，默认是没有任何合约显示，黑色区域内单击右键，选择“设置合约显示”</h3>
             <img src="${ctx}/static/images/help/kq_01.gif">
@@ -873,7 +873,7 @@ var tab="<%=tab%>";
             <img src="${ctx}/static/images/help/pro_05.gif" width="606">
         </div>        
         <div class="hp_mainbar hp_mbox12" style="display:none;">
-        	<h1 style="border-bottom:1px solid #d1d1d1;">股票掌上交易系统<span style="font-size:16px; color:#f00; padding-left:10px;">股票合买的用户可以使用此软件！</span></h1>
+        	<h1 style="border-bottom:1px solid #d1d1d1;">股票掌上交易系统<span style="font-size:16px; color:#fc3; padding-left:10px;">股票合买的用户可以使用此软件！</span></h1>
         	<h1>一、如何进入掌上交易</h1>
         	<h4>1、关注微信（推荐）</h4>
         	<h3>第一步：在微信中搜索维胜或shxhtzdr，关注维胜微信公众号，或扫描下图二维码直接关注。</h3>
@@ -896,12 +896,12 @@ var tab="<%=tab%>";
     <!--新手指南  -->
     <div class=" hp_ctn hp_guide newbie hp_content" style="display: none">
         <div class="hp_siderbar newbie_siderbar ">
-            <a href="javascript:void(0)" class="on" data="1">注册</a>
-            <a href="javascript:void(0)" data="2">登录</a>
-            <a href="javascript:void(0)" data="3">实名</a>
-            <a href="javascript:void(0)" data="4">充值</a>
-            <a href="javascript:void(0)" data="5">提现</a>
-            <a href="javascript:void(0)" data="6">常见问题</a>
+            <a href="javascript:void(0)" class="on" data="1">注册<i>></i></a>
+            <a href="javascript:void(0)" data="2">登录<i>></i></a>
+            <a href="javascript:void(0)" data="3">实名<i>></i></a>
+            <a href="javascript:void(0)" data="4">充值<i>></i></a>
+            <a href="javascript:void(0)" data="5">提现<i>></i></a>
+            <a href="javascript:void(0)" data="6">常见问题<i>></i></a>
         </div>
         <div class="hp_mainbar hp_mbox1" >
         	<h2>如何注册成为维胜用户？</h2>

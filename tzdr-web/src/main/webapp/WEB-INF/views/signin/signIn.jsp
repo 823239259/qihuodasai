@@ -46,13 +46,13 @@
         </div>
     </div>
 </div>
-
 <div class="header">
 	<ul>
 		<li><a href="${ctx}/" id="a1"></a></li>
 	</ul>
 	<p id="rightP"><a href="${ctx}/">返回首页</a></p>
 </div>
+<div class="lg_promt"></div>
 <div class="register">
     <div class="rg_ctn">
         <h3>用户注册<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">已有账号？<a href="${ctx}/user/account">立即登录</a></p></h3>
@@ -61,13 +61,14 @@
             <li>
                 <i>*</i><label>手机号码</label>               
                 <input type="text" class="phone rg_l_ip rg_l_iperror" id="mobile" name="mobile" maxlength="11">
-                <span class="rg_l_promt" style="display: none">以后用该手机号码登录平台</span>               
+                <span class="rg_l_promt" style="display: none">以后用该手机号码登录平台！</span>               
                 <p style="display: none;" class="rg_l_error">该手机号码已经存在</p>
+                <i class="mobile-iphone"></i>
             </li>
             <li>
                 <i>*</i><label>手机验证</label>   
                 <input type="text" class="rg_l_codeip rg_l_tlcode rg_l_ip" id="code" name="code" maxlength="6">
-                <span class="rg_l_promt" style="display: none">请先获取验证码</span>
+                <span class="rg_l_promt" style="display: none">请先获取验证码！</span>
                 <!-- <a href="javascript:void(0);" status="true" id="getCode" name="getCode" class="rg_l_codebtn">获取验证码</a> -->
                 <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn" onclick="_hmt.push(['_trackEvent','signin','click','sendcode']);">获取验证码</a>
                 <p style="display: none;" class="rg_l_error">输入验证码有误！</p>
@@ -82,7 +83,7 @@
                 <i>*</i><label>确认密码</label> 
                 <input type="password" class="rg_l_password rg_l_ip" id="affirmpassword" name="affirmpassword" maxlength="16">
                 <span class="rg_l_promt" style="display: none">请再输入一次您设置的密码</span>
-                <p style="display: none;" class="rg_l_error">两次密码不一致</p>
+                <p style="display: none;" class="rg_l_error">两次密码不一致！</p>
             </li>
             <li>
                 <i></i><label>邀请码</label> 

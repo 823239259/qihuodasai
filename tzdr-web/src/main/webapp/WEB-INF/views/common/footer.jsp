@@ -55,17 +55,17 @@
     <div class="copyright_content">
         <div class="copyright_link">
             <ul class="link">
-                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a25cff03e0">达人动态</a></li>
+                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a25cff03e0" target="_blank">维胜动态</a></li>
                 <li><a href="${ctx }/about">公司简介</a></li>
-                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a17d1303df">市场热点</a></li>
-                <li><a href="${ctx }/company">公司资质</a></li>
-                <li><a href="${ctx }/help?tab=newbie&leftMenu=1">帮助中心</a></li>
-                <li><a href="${ctx }/contact">联系我们</a></li>
+                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a17d1303df" target="_blank">市场热点</a></li>
+                <li><a href="${ctx }/company" target="_blank">公司资质</a></li>
+                <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
+                <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
             </ul>
             <ul class="follow">
                 <li>关注我们：</li>
-                <li><a href="http://www.weibo.com/shxhtzdr"><i class="weibo"></i></a></li>
-                <li><a href="javascript: void(0);"><i class="weixin"></i></a></li>
+                <li><a href="http://www.weibo.com/shxhtzdr" target="_blank"><i class="weibo"></i></a></li>
+                <li><a href="javascript: void(0);" target="_blank"><i class="weixin"></i></a></li>
             </ul>
         </div>
         <div class="copyright_contact">
@@ -87,27 +87,27 @@
         <div class="cp_link">
             <ul>
                 <li>友情链接：</li>
-                <li><a href="http://www.csrc.gov.cn/pub/newsite/">证监会</a></li>
-                <li><a href="http://www.cbrc.gov.cn/index.html">银监会</a></li>
-                <li><a href="http://www.circ.gov.cn/web/site0/">保监会</a></li>
-                <li><a href="http://www.szse.cn/">深交所</a></li>
-                <li><a href="http://www.sse.com.cn/">上交所</a></li>
-                <li><a href="http://www.sgx.com/">新加坡交易所</a></li>
-                <li><a href="http://www.hkex.com.hk/">香港交易所</a></li>
-                <li><a href="https://www.nyse.com/index">纽约证券交易所</a></li>
-                <li><a href="http://www.nasdaq.com/">纳斯达克</a></li>
+                <li><a href="http://www.csrc.gov.cn/pub/newsite/" target="_blank">证监会</a></li>
+                <li><a href="http://www.cbrc.gov.cn/index.html" target="_blank">银监会</a></li>
+                <li><a href="http://www.circ.gov.cn/web/site0/" target="_blank">保监会</a></li>
+                <li><a href="http://www.szse.cn/" target="_blank">深交所</a></li>
+                <li><a href="http://www.sse.com.cn/" target="_blank">上交所</a></li>
+                <li><a href="http://www.sgx.com/" target="_blank">新加坡交易所</a></li>
+                <li><a href="http://www.hkex.com.hk/" target="_blank">香港交易所</a></li>
+                <li><a href="https://www.nyse.com/index" target="_blank">纽约证券交易所</a></li>
+                <li><a href="http://www.nasdaq.com/" target="_blank">纳斯达克</a></li>
             </ul>
             <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 沪ICP备14048395号-1  投资有风险，入市需谨慎</p>
         </div>
         <div class="cp_cppic">
-            <a href="https://credit.szfw.org/CX20160302013752300118.html"><img src="static/images/image/shiming.png"></a>
-            <a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com"><img src="static/images/image/anquan.png"></a>
-            <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname"><img src="static/images/image/chengxing.png"></a>
+            <a href="https://credit.szfw.org/CX20160302013752300118.html" target="_blank"><img src="${ctx}/static/images/image/shiming.png"></a>
+            <a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com" target="_blank"><img src="${ctx}/static/images/image/anquan.png"></a>
+            <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname" target="_blank"><img src="${ctx}/static/images/image/chengxing.png"></a>
         </div>
     </div>
 </div>
 <!-- 网站公告 -->
-<div class="site-notice notice-fixed" style="display: none;">
+<!-- <div class="site-notice notice-fixed" style="display: block;">
 	<div class="notice-style">
 		<h3 class="notice-title">尊敬的用户：</h3>
 		<div class="notice-content"></div>
@@ -121,7 +121,7 @@
         <div class="notice-content"></div>
         <a href="javascript: closeNotice();" class="fl_n_close"></a>
     </div>
-</div>
+</div> -->
 <script type="text/javascript">
 	$(document).ready(function() {
 	    $('.ft_wx a').hover(function() {
@@ -176,7 +176,7 @@
 		} else {
 			$(".notice-fixed").fadeIn("slow");
 		}
-	}
+	} 
 	// 关闭公告
 	function closeNotice() {
 		$(".site-notice").remove();
@@ -198,7 +198,7 @@
 	    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
 	}
 	//获取指定名称的cookie的值 
-	function getCookie(c_name) {
+	/* function getCookie(c_name) {
 		if (document.cookie.length > 0) {
 			var c_start = document.cookie.indexOf(c_name + "=");
 			if(c_start != -1) {

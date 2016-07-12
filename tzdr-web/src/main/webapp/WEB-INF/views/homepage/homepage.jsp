@@ -729,8 +729,9 @@
                 <p>实时行情</p>
             </div>
             <div class="right-gengxin">
-                <p>昨收：<span class = "zs">1351.07</span>     每日幅度：<span class = "fd">1338.63 - 1352.33</span></p>
-                <p>今开：<span class = "jk">1351.07</span>     更新时间：<span class = "gxsj">2016/07/05 16:58</span></p>
+                <p><span class = "zs">昨收：1351.07</span><span class = "fd">每日幅度：1338.63 - 1352.33</span></p>
+                <p><span class = "jk">今开：1351.07</span><span class = "gxsj">更新时间：2016/07/05 16:58</span></p>
+                <a href = "#" id = "mainSqcp" >申请操盘</a>
             </div>
         </div>
         <div class="w_center_xiangqing">
@@ -742,7 +743,6 @@
             <div class="right_xiangqing">
                 <div id="main" style="height:400px; width: 800px;"></div>
             </div>
-            <a href = "" id = "mainSqcp" >申请操盘</a>
         </div>
     </div>
     <script type="text/javascript">
@@ -851,20 +851,20 @@
     <div class="h_partner_content">
         <p class="h_chosetitle"><span>合作伙伴与媒体报道</span></p>
         <p class="h_img">
-            <a href="#"><img src="static/images/image/pingan-bank.png" alt="" style="margin-left: 0;"/></a>
-            <a href="#"><img src="static/images/image/huatai-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/guotai-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/haitong-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/wukuang-bank.png" alt="" style="margin-right: 0;"/></a>
-            <a href="#"><img src="static/images/image/xinlang-bank.png" alt="" style="margin-left: 0"/></a>
-            <a href="#"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/dongfang-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/hexun-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
-            <a href="#"><img src="static/images/image/fenghuang-bank.png" alt="" style="margin-right: 0;"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/pingan-bank.png" alt="" style="margin-left: 0;"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/huatai-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/guotai-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/haitong-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt="" style="margin-right: 0;"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/xinlang-bank.png" alt="" style="margin-left: 0"/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/dongfang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/hexun-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/fenghuang-bank.png" alt="" style="margin-right: 0;"/></a>
         </p>
     </div>
 </div>
@@ -1119,12 +1119,12 @@
 						 var size = item.DotSize;
 						 var _data = item.data;
 						 var commodityName = item.commodityName;
-						 var qlastPrice = (parseInt(_data.QLastPrice)).toFixed(size);
-						 var qpreCloseingPrice = (parseInt(_data.QPreClosingPrice)).toFixed(size);
-						 var qLowPrice = (parseInt(_data.QLowPrice)).toFixed(size);
-						 var qHighPrice = (parseInt(_data.QHighPrice)).toFixed(size);
-						 var qOpenPrice = (parseInt(_data.QOpenPrice)).toFixed(size);
-						 var scal = (parseInt(_data.QChangeRate)).toFixed(size);
+						 var qlastPrice = (parseDouble(_data.QLastPrice)).toFixed(size);
+						 var qpreCloseingPrice = (parseDouble(_data.QPreClosingPrice)).toFixed(size);
+						 var qLowPrice = (parseDouble(_data.QLowPrice)).toFixed(size);
+						 var qHighPrice = (parseDouble(_data.QHighPrice)).toFixed(size);
+						 var qOpenPrice = (parseDouble(_data.QOpenPrice)).toFixed(size);
+						 var scal = (parseDouble(_data.QChangeRate)).toFixed(size);
 						 var bs = "↑";
 						 var color = " #ff5500";
 						 if(scal < 0){
@@ -1146,7 +1146,7 @@
 						 }
 						 html +=  ' "> <p><em style="">'+commodityName+'</em>'
 						 	  + '<span class = "qlast'+i+'" style="color: '+color+';">'+qlastPrice+'</span>'
-						 	  + '<span class = "qchange'+i+'" style="color: '+color+';">'+(parseInt(_data.QChangeValue)).toFixed(size)+'</span>'
+						 	  + '<span class = "qchange'+i+'" style="color: '+color+';">'+(parseDouble(_data.QChangeValue)).toFixed(size)+'</span>'
 						 	  + '<span class = "scal'+i+'" style="color: '+color+';">'+scal+'</span>';
 						 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
 						 $(".left_x"+i+"").bind("click",function(){
@@ -1194,13 +1194,13 @@
 							 var size = item.DotSize;
 							 var _data = item.data;
 							 var commodityName = item.commodityName;
-							 var qlastPrice = (parseInt(_data.QLastPrice)).toFixed(size);
-							 var qpreCloseingPrice = (parseInt(_data.QPreClosingPrice)).toFixed(size);
-							 var qLowPrice = (parseInt(_data.QLowPrice)).toFixed(size);
-							 var qHighPrice = (parseInt(_data.QHighPrice)).toFixed(size);
-							 var qOpenPrice = (parseInt(_data.QOpenPrice)).toFixed(size);
-							 var scal = (parseInt(_data.QChangeRate)).toFixed(size);
-							 var qChangeValue = (parseInt(_data.QChangeValue)).toFixed(size);
+							 var qlastPrice = (parseDouble(_data.QLastPrice)).toFixed(size);
+							 var qpreCloseingPrice = (parseDouble(_data.QPreClosingPrice)).toFixed(size);
+							 var qLowPrice = (parseDouble(_data.QLowPrice)).toFixed(size);
+							 var qHighPrice = (parseDouble(_data.QHighPrice)).toFixed(size);
+							 var qOpenPrice = (parseDouble(_data.QOpenPrice)).toFixed(size);
+							 var scal = (parseDouble(_data.QChangeRate)).toFixed(size);
+							 var qChangeValue = (parseDouble(_data.QChangeValue)).toFixed(size);
 							 var bs = "↑";
 							 var color = " #ff5500";
 							 if(scal < 0){

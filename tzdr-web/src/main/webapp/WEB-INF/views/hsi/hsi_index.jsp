@@ -31,6 +31,12 @@
 <title>恒指期货 - 维胜</title>
 </head>
 <body>
+	<script>
+		$(document).ready(function(){
+			$('.navlist li a').removeClass('on');
+			$("#hengzhiqidai").addClass("on");
+		});
+	</script>
 	<!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 	<form action="${ctx}/userhsi/pay" id="settingForm" method="post">
@@ -47,7 +53,7 @@
 		                <div class="cp_m_titl sif_m_title">
 		                    <!-- <i></i> -->
 		                    <h3 class="cp_h2">选择开仓手数<span>(可持仓的最大手数)</span></h3>
-                    		<%-- <input type="text" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;"> --%>
+                    		<input type="hidden" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;">
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_tranLever">
@@ -81,7 +87,7 @@
 		                <div class="cp_m_titl sif_m_title">
 		                    <!-- <i></i> -->
 		                    <h3 class="cp_h1">单手保证金<span>(操盘保证金越多，平仓风险越低)</span></h3>
-	                    		<%-- <input type="text" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;"> --%>
+	                    		<input type="hidden" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;">
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_traderBond">
@@ -99,7 +105,7 @@
 				<div class="cp_sider sif_sider">
 					<h2>确认操盘规则</h2>
 					<div class="cp_sdfont">
-						<label>操盘须知：</label><span style="color:#ff6500; font-size:16px;">香港恒指期货当期主力合约（${contract}）</span>
+						<label>操盘须知：</label><span style="color:#333; font-size:16px;">香港恒指期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
 						<label>交易时间：</label><span><i style="font-size:18px;">9:20-11:55，13:05-16:10，17:05-23:40</i></span>

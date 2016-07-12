@@ -162,7 +162,7 @@ function getFtseDataList(index,type,
         		html = html + "<td>" + n.businessTypeStr + "</td>";
         		html = html + "<td>" + (n.businessType == 8 ? '' : n.tranLever) + "</td>";
             	html = html + "<td>" + n.appTimeStr + "</td>";
-            	html = html + "<td> <font color='#FF0000'>" + n.useTradeDay + "交易日</font></td>";
+            	html = html + "<td> <font color='#fc3'>" + n.useTradeDay + "交易日</font></td>";
             	html = html + "<td>" + n.stateTypeStr + "</td>";
             	html = html + "<td>" + $.formatMoney(Number(n.traderTotal)) + "美元</td>";
             	html = html + "<td>" + $.formatMoney(Number(n.lineLoss)) + "美元</td>";
@@ -188,7 +188,7 @@ function getFtseDataList(index,type,
 	            	+n.endParities+","
 	            	+ n.tranFeesTotal +"," + n.endAmount +","+n.businessType+","+n.tranActualLever +","+n.crudeTranActualLever +","+n.hsiTranActualLever+ ","+n.mdtranActualLever+","
 	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+"));\" " +
-	            	"style=\"cursor:pointer;color:#34b3e0;\" class='uc_tlbtn_btn_see' >账单详细</a></td>";
+	            	"style=\"cursor:pointer;color:#fc3;\" class='uc_tlbtn_btn_see' >账单详细</a></td>";
             	}else{
             		html = html + "<td></td>";
             		html = html + "<td></td>";

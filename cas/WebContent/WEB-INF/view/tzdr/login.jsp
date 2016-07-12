@@ -16,7 +16,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录 - 维胜</title>
-<link rel="shortcut icon" href="http://www.tzdr.com/static/ico/tzdr.ico">
+<link rel="shortcut icon" href="${ctx}/images/login/weisheng-icon.png">
 <link rel="stylesheet" href="${ctx}/css/login.css">
 <!-- <script language="javascript" src="http://www.tzdr.com/static/script/common/jquery-1.8.0.min.js"></script> -->
 <script language="javascript" src="resources/jquery.min.js"></script>
@@ -42,18 +42,20 @@
 			<form:form method="post" id="fm1" commandName="${commandName}"
 				htmlEscape="true" cssClass="form">
 				<div class="ui-logon login" id="login">
-					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget }/signin">立即注册</a></p></h3>
+					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${ctx}/tzdr-web/signin">立即注册</a></p></h3>
 					<input type="hidden" name="lt" value="${loginTicket}" /> <input
 						type="hidden" name="execution" value="${flowExecutionKey}" /> <input
 						type="hidden" name="_eventId" value="submit" />
 					<div class="logon-ipt userNameLi" style="margin-top: 80px;">
 						<label>手机号码</label> 
+						<i class="iphone"></i>	
 						<input id="username" name="username"  class="holder userName" tabindex="1" accesskey="n" type="text" maxlength="11" autocomplete="off"/>
 						<div class="ui-err loginError usernameError" style="display: none; width:140px;">
 						</div>
 					</div>
 					<div class="logon-ipt mgt20 passwordLi">
 						<label>登录密码</label> 
+						<i class="password-img"></i>	
 						<input id="password" name="password" tabindex="2" class="password" type="password" value="" maxlength="16" autocomplete="off" /> 
 						<div class="ui-err loginError passwordError" style="display: none; width:140px;">
 							<form:errors path="*" id="msg" htmlEscape="false" cssStyle="display: none;" />

@@ -31,6 +31,12 @@
 <title>国际原油 - 维胜</title>
 </head>
 <body>
+	<script>
+		$(document).ready(function(){
+			$('.navlist li a').removeClass('on');
+			$("#guojiyuanyou").addClass("on");
+		});
+	</script>
 	<!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 	<form action="${ctx}/usercrudeoil/pay" id="settingForm" method="post">
@@ -47,7 +53,7 @@
 		                <div class="cp_m_titl sif_m_title">
 		                    <!-- <i></i> -->
 		                    <h3 class="cp_h2">选择开仓手数<span>(可持仓的最大手数)</span></h3>
-                    		<%-- <input type="text" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;"> --%>
+                    		<input type="hidden" id="input_tranLever" name="inputTranLever" value="${fSimpleConfigList[0].tranLever}" readonly="readonly" style="font-size:0;">
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_tranLever">
@@ -81,7 +87,7 @@
 		                <div class="cp_m_titl sif_m_title">
 		                    <!-- <i></i> -->
 		                    <h3 class="cp_h1">单手保证金<span>(操盘保证金越多，平仓风险越低)</span></h3>
-	                    		<%-- <input type="text" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;"> --%>
+	                   		<input type="hidden" id="input_traderBond" name="inputTraderBond" value="${fSimpleConfigList[0].traderBond}"  readonly="readonly" style="font-size:0;">
 		                </div>
 		                <div class="cp_m_list sif_m_list">
 		                    <ul class="zk_ul_futrue_traderBond">
@@ -99,7 +105,7 @@
 				<div class="cp_sider sif_sider">
 					<h2>确认操盘规则</h2>
 					<div class="cp_sdfont">
-						<label>操盘须知：</label> <span style="color:#ff6500; font-size:16px;">美国轻质原油期货当期主力合约（${contract}）</span>
+						<label>操盘须知：</label> <span style="color:#333; font-size:16px;">美国轻质原油期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
 						<label>交易时间：</label><span><i>9:05-23:55</i></span>
@@ -223,7 +229,7 @@
 		          </tr>
 		          <tr>
 		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=8" style="color:#3d9fe1; padding-right:20px;" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=8" target="_blank"  style="color:#3d9fe1; padding-right:20px;">查看交易说明</a></td>
+		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=8" style="color:#fc3; padding-right:20px;" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=8" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
 		          </tr>
 		        </table>
 		

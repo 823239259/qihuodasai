@@ -22,7 +22,7 @@ table.data_web th,table.data_web td{
 height:40px; line-height:40px;color:#333; border-bottom:1px dotted #f1f1f1; padding:5px 0;
 }
 table.data_web td {
- color:black;
+ color:#666;
  background-color:white;
  vertical-align:middle;
 }
@@ -35,8 +35,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 #window_detail_accountInfo table tr td { height:24px; line-height:24px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
-<script type="text/javascript"
-	src="${ctx}/static/script/common/jquery.pagination.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseList.js?v=${v}"></script>

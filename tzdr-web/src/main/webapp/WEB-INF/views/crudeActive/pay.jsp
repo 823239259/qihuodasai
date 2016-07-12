@@ -21,7 +21,7 @@
                      
 </style>
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
-<link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" />
+<%-- <link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" /> --%>
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css" />	
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet" type="text/css" />
@@ -68,7 +68,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<div class="floatlayer" id="notPay" style="display:none;">
 		<div class="fl_mask"></div>
 		<div class="fl_box fl_uc_bank">
@@ -171,7 +171,7 @@ $(document).ready(function(){
 			</div>
 		</form>
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){

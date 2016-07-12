@@ -15,7 +15,7 @@
 
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 <div class="floatlayer">
     <form method="post" action="${ctx}/usertogether/success">
     <input type="hidden" name="recommendMoney" id="recommendMoney" value="${recommendMoney}"/>
@@ -133,7 +133,7 @@
         <a href="${ctx}/together/index" class="bp_b_bank">返回修改</a>
     </div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>
     

@@ -10,7 +10,7 @@
  .font_size_15 {font-size: 15px; color: #f60; }
  .font_size_22 {font-size: 22px; color: #f60; }                       
 </style>
-<link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" />
+<%-- <link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" /> --%>
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/static/css/tzdr.css?v=${v}" rel="stylesheet" type="text/css" />	
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
@@ -24,8 +24,14 @@
 <title>支付确认 - 恒生指数,维胜-中国领先的互联网金融交易平台</title>
 </head>
 <body>
+	<script>
+		$(document).ready(function(){
+			$('.navlist li a').removeClass('on');
+			$("#guojiyuanyou").addClass("on");
+		});
+	</script>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<div class="floatlayer" id="notPay" style="display:none;">
 		<div class="fl_mask"></div>
 		<div class="fl_box fl_uc_bank">
@@ -168,7 +174,7 @@
 			</div>
 		</form>
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){
