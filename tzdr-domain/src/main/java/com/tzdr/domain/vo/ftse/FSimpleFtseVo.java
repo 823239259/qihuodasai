@@ -96,6 +96,7 @@ public class FSimpleFtseVo implements Serializable {
 	/**
 	 * 交易手续费
 	 */
+	@AllowExcel(name = "申请手续费")
 	private BigDecimal tranFees;
 	
 	/**
