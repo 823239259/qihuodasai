@@ -506,7 +506,7 @@ public class SecurityInfoController{
 			email=wuser.getEmail();
 		}
 			
-		boolean flag=securityInfoService.sendEmail(userverified.getTname(),email, randomStr, "投资达人");
+		boolean flag=securityInfoService.sendEmail(userverified.getTname(),email, randomStr, "维胜");
 		//securityInfoService.sendSms("18022301330","安全信息修改绑定手机",randomStr);
 		securityInfoService.update(userverified);
 		if(flag)

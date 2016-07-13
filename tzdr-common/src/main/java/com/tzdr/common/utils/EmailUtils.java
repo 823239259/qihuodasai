@@ -289,7 +289,7 @@ public class EmailUtils {
 			files.add(new File("F:\\","7.jpg"));
 			List<String> pramas = new ArrayList<String>();
 			pramas.add("081913");
-			pramas.add("投资达人");
+			pramas.add("维胜");
 			EmailUtils.getInstance().sendMailTemp(to, "email",pramas);
 //			pramas.add("投资达人qweqwe");
 //			EmailUtils.getInstance().sendMailTemp(to, subject, "commissionIncome/", "commissionIncomeExceptioneMail", ".ftl", pramas, null);

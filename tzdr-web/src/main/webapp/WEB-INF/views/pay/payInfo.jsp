@@ -884,7 +884,7 @@ var tab=<%=tab%>;
 	                        </li>			
 						</ol>
 						<ol>
-							<li><label>收款人账号名称：</label><span>成都盈偷科技有限公司</span></li>
+							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
 						</ol>
 					</ul>
 					<%--
