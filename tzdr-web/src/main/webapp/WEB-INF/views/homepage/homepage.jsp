@@ -1244,7 +1244,9 @@
 		   					});
 		   					//追加到容器中
 		   					var option = setOption(addKData);
-		   					myChart.setOption(option);
+		   					if(myChart != null){
+			   					myChart.setOption(option);
+		   					}
 		   				 }
 	            });
 	    	});

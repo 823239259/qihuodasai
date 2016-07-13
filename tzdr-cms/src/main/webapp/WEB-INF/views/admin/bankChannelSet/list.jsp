@@ -225,7 +225,7 @@ function pgbbankupdatesub(){
 			
 			
 			<!-- 配股宝 -->
-			<div title="配股宝设置" data-options="tools:'#p-tools'" style="padding:20px;">
+			<div title="维胜设置" data-options="tools:'#p-tools'" style="padding:20px;">
 			<div id="audittb" style="padding: 5px; height: auto">
 					<div style="margin-bottom: 5px">
 						<%-- <shiro:hasPermission name="sys:finance:bankChannel:create">  

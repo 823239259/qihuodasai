@@ -36,7 +36,7 @@
 	<table id="edatagrid" style="margin-top: 5px;"></table>
 		</div>
 		<!-- 维胜公告 -->
-				<div title="配股宝公告" data-options="tools:'#p-tools'" style="padding:20px;">
+				<div title="维胜公告" data-options="tools:'#p-tools'" style="padding:20px;">
 	<div id="tb_pgb" style="padding: 5px; height: auto">
 		<shiro:hasPermission name="sys:operationalConfig:notice:update">
 		<a href="javascript:void(0)" class="easyui-linkbutton"

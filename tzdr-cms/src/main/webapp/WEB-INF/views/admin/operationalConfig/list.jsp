@@ -190,8 +190,8 @@
 		<table id="edatagrid"></table>
 		</div>
 		
-		<!-- 配股宝banner -->
-		<div title="配股宝banner" data-options="tools:'#p-tools'" style="padding:20px;">
+		<!-- 维胜banner -->
+		<div title="维胜banner" data-options="tools:'#p-tools'" style="padding:20px;">
 		<div id="tb_pgb" style="padding: 5px; height: auto">
 			<div>
 				<table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
