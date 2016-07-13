@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>公司资质 - 维胜</title>
 <link rel="stylesheet" href="${ctx}/static/css/login.css">
-<link rel="stylesheet" href="${ctx}/static/css/news.css?20120520">
+<link rel="stylesheet" href="${ctx}/static/css/news.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/tzdr.css">
 <script type='text/javascript' src="${ctx}/static/script/tzdr.js"></script>
 <script type="text/javascript">
@@ -114,12 +114,12 @@ $(document).ready(function() {
 </div>
 <div class="news">
      <div class="news_siderbar">
-        <h2>关于我们</h2>
-          <a href="${ctx }/about" >公司简介</a>
-        <a href="${ctx }/company"  class="on">公司资质</a>
-        <a href="${ctx }/partner">合作伙伴</a>
-        <a href="${ctx }/contact">联系我们</a>
-        <a href="${ctx }/companypic">公司展示</a>
+        <!-- <h2>关于我们</h2> -->
+        <a href="${ctx }/about" >公司简介<span>&gt;</span></a>
+        <%-- <a href="${ctx }/company"  class="on">公司资质<span>&gt;</span></a>
+        <a href="${ctx }/partner">合作伙伴<span>&gt;</span></a> --%>
+        <a href="${ctx }/contact">联系我们<span>&gt;</span></a>
+        <%-- <a href="${ctx }/companypic">公司展示<span>&gt;</span></a> --%>
     </div>
     <div class="news_mainbar">
         <h2>公司资质</h2>

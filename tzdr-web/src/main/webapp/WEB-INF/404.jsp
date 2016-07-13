@@ -13,7 +13,7 @@
 <body>
 
 <!--顶部 -->
-<%@ include file="views/common/personheader.jsp"%>
+<%@ include file="views/common/header.jsp"%>
 <!-- 404 -->
 <div class="error">
     <div class="errorbox">
@@ -38,6 +38,6 @@
     </div>
 </div>
 <!--底部 -->
-<%@ include file="views/common/personfooter.jsp"%>
+<%@ include file="views/common/footer.jsp"%>
 </body>
 </html>

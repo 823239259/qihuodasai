@@ -21,12 +21,12 @@
 <div class="newsbox">
 	<div class="news">
 	     <div class="news_siderbar">
-	        <h2>关于我们</h2>
-	         <a href="${ctx }/about"  class="on">公司简介</a>
-	        <a href="${ctx }/company" >公司资质</a>
-	        <a href="${ctx }/partner">合作伙伴</a>
-	        <a href="${ctx }/contact">联系我们</a>
-	        <a href="${ctx }/companypic">公司展示</a>
+	        <!-- <a href="#">关于我们</a> -->
+	        <a href="${ctx }/about"  class="on">公司简介<span>&gt;</span></a>
+	        <%-- <a href="${ctx }/company" >公司资质<span>&gt;</span></a>
+	        <a href="${ctx }/partner">合作伙伴<span>&gt;</span></a> --%>
+	        <a href="${ctx }/contact">联系我们<span>&gt;</span></a>
+	       <%--  <a href="${ctx }/companypic">公司展示<span>&gt;</span></a> --%>
 	    </div>
 	    <div class="news_mainbar">
 	        <h2>公司简介</h2>

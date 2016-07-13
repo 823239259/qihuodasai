@@ -23,22 +23,22 @@
 <input type="hidden" name="pageno" id="pageno">
 <div class="news">
     <div class="news_siderbar">
-    	<h2><a href="${ctx}/news/newsdata" iddata="" title="新闻中心" >新闻中心</a></h2>
+    	<a href="${ctx}/news/newsdata" iddata="" title="新闻中心" >新闻中心<span>&gt;</span></a>
        
     	<c:forEach  items="${newscols}" var="newscol" varStatus="status">
     		<c:choose>
     			<c:when test="${col!=null}">
     			   <c:choose>
 	    				<c:when test="${col.name==newscol.name}">
-	    					<a href="javascript:void(0)" class="on" id="colnameon" title="${newscol.name}" iddata="${newscol.id}">${newscol.name}</a>
+	    					<a href="javascript:void(0)" class="on" id="colnameon" title="${newscol.name}" iddata="${newscol.id}">${newscol.name}<span>&gt;</span></a>
 	    				</c:when>
 	    				<c:otherwise>
-	    					<a href="javascript:void(0)"  title="${newscol.name}"  iddata="${newscol.id}">${newscol.name}</a>
+	    					<a href="javascript:void(0)"  title="${newscol.name}"  iddata="${newscol.id}">${newscol.name}<span>&gt;</span></a>
 	    				</c:otherwise>
     				</c:choose>
     			</c:when>
     			<c:otherwise>
-    				<a href="javascript:void(0)"  title="${newscol.name}"  iddata="${newscol.id}">${newscol.name}</a>
+    				<a href="javascript:void(0)"  title="${newscol.name}"  iddata="${newscol.id}">${newscol.name}<span>&gt;</span></a>
     			</c:otherwise>
     		</c:choose>
 		</c:forEach>

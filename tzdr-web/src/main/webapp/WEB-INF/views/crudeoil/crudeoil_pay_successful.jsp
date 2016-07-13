@@ -31,7 +31,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<div class="capital" style="background-color: white;">
 		<div class="cp_suc" style="margin:auto;border: 1px solid #F1F1F1">
 			<h3>申请成功！账户将以短信形式通知</h3>
@@ -43,7 +43,7 @@ $(document).ready(function(){
 			</div>		
 		</div>
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){

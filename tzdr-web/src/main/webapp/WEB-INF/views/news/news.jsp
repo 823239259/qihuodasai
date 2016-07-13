@@ -19,18 +19,18 @@
 </head>
 <body>
 <!-- 顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<%@include file="../common/header.jsp"%>
 <div class="news">
 	<input type="hidden" name="newscolname" id="newscolname" value="${news.parentConfig.id}">
     <div class="news_siderbar">
-        <h2><a href="${ctx}/news/newsdata" iddata="" >新闻中心</a></h2>
+        <a href="${ctx}/news/newsdata" iddata="" >新闻中心<span>&gt;</span></a>
         <c:forEach  items="${newscols}" var="newscol" varStatus="status">
         	<c:choose>
         		<c:when test="${newscol.id==news.parentConfig.id}">
-        		 <a  href="${ctx}/news/newsdata?colname=${newscol.id}" class="on" id="${newscol.id}">${newscol.name}</a>
+        		 <a  href="${ctx}/news/newsdata?colname=${newscol.id}" class="on" id="${newscol.id}">${newscol.name}<span>&gt;</span></a>
         		</c:when>
         		<c:otherwise>
-        		 <a href="${ctx}/news/newsdata?colname=${newscol.id}" id="${newscol.id}">${newscol.name}</a>
+        		 <a href="${ctx}/news/newsdata?colname=${newscol.id}" id="${newscol.id}">${newscol.name}<span>&gt;</span></a>
         		</c:otherwise>
         	</c:choose>
 		</c:forEach>
@@ -59,7 +59,7 @@
 </div>
 
 <!-- 公司简介 -->
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

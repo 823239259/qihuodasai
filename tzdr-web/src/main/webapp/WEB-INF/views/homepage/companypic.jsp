@@ -8,22 +8,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>公司展示 - 维胜</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css">
+<%-- <link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css"> --%>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/news.css">
 <script type='text/javascript' src="${ctx}/static/script/tzdr.js"></script>
 </head>
 
 <body>
 <!-- 顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<%@include file="../common/header.jsp"%>
 <div class="news">
      <div class="news_siderbar">
-        <h2>关于我们</h2>
-        <a href="${ctx }/about">公司简介</a>
-        <a href="${ctx }/company">公司资质</a>
-        <a href="${ctx }/partner">合作伙伴</a>
-        <a href="${ctx }/contact">联系我们</a>
-        <a href="${ctx }/companypic" class="on">公司展示</a>
+        <!-- <h2>关于我们</h2> -->
+        <a href="${ctx }/about">公司简介<span>&gt;</span></a>
+        <%-- <a href="${ctx }/company">公司资质<span>&gt;</span></a>
+        <a href="${ctx }/partner">合作伙伴<span>&gt;</span></a> --%>
+        <a href="${ctx }/contact">联系我们<span>&gt;</span></a>
+        <%-- <a href="${ctx }/companypic" class="on">公司展示<span>&gt;</span></a> --%>
     </div>
     <div class="news_mainbar">
         <h2>公司展示</h2>
@@ -47,7 +47,7 @@
     </div>
 
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

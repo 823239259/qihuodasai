@@ -25,10 +25,10 @@
 	<form action="${ctx}/userOutDisk/pay" id="settingForm" method="post">
 	<input type="hidden" id="traderBondAttr" name="traderBondAttr" value="${outDiskParameters[0].traderBond}" >
     <div class="mc_nav">
-        <a href="${ctx}/outDisk/index" class="on">国际综合<i></i></a>
-        <a href="${ctx}/ftse/index">富时A50</a>
         <a href="${ctx}/hsi/index">恒指期货</a>
-        <a href="${ctx}/crudeoil/index">国际原油</a>
+		<a href="${ctx}/crudeoil/index">国际原油</a>
+		<a href="${ctx}/ftse/index">富时A50</a>
+        <a href="${ctx}/outDisk/index" class="on">国际综合<i></i></a>
     </div>
     <div class="capital_ctn cpx_ctn">
         <div class="cpx_main">

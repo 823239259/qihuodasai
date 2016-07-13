@@ -3,10 +3,10 @@ $(document).ready(function(){
 		message_foucs:function(obj,text,dis){
 			$(obj).text(text);
 			$(obj).css("display",dis);
-			$(obj).css("border","1px solid #178E30");
-		 	$(obj).css("background","#D7EEDB");
-		 	$(obj).css("color","green");
-		 	$(obj).closest("p").find("input").css("border","1px solid #178E30");
+			$(obj).css("border","1px solid #fff");
+		 	$(obj).css("background","#fff");
+		 	$(obj).css("color","#fc3");
+		 	$(obj).closest("p").find("input").css("border","1px solid #fc3");
 		} ,
 		message_blus:function(obj,text,dis){
 			 $(obj).closest("p").find("input").css("border","1px solid #C5C5C5");
@@ -16,10 +16,10 @@ $(document).ready(function(){
 		},
 		error:function(obj,text,dis){
 			 $(obj).text(text);
-			 $(obj).css("color","red");
-			 $(obj).closest("p").find("input").css("border","1px solid #FF4D4D");
-			 $(obj).css("border","1px solid #FF4D4D");
-			 $(obj).css("background","#FFE4E5");
+			 $(obj).css("color","#333");
+			 $(obj).closest("p").find("input").css("border","1px solid #fc3");
+			 $(obj).css("border","1px solid #fff");
+			 $(obj).css("background","#fff");
 			 $(obj).css("display",dis);
 		}
 	}

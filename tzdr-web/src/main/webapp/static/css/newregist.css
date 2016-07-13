@@ -23,16 +23,16 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .register {border:1px solid #CCCCCC;width:739px; margin:0px auto; height:560px; clear:both;}
 .register h3{font-weight:normal;border-bottom:2px solid #fc3;padding-bottom:7px;width:661px;margin-left:39px;margin-top:37px;font-size: 1.17em;}
 .register form {margin:54px 147px}
-.register .rg_l_ip {height:32px; *line-height:32px; line-height:32px\0; vertical-align: middle; width:258px;border:1px solid #C5C5C5;border-radius:3px;color:#545454;font-size:12px;margin-left:18px;padding-left:10px;outline: none; background: #333; color: #fc3;}
+.register .rg_l_ip {height:32px; *line-height:32px; line-height:32px\0; vertical-align: middle; width:258px;border:1px solid #999;border-radius:3px;font-size:12px;margin-left:18px;padding-left:10px;outline: none; color: #333;}
 /* .register input.phone{background:url(../images/login/phone.png) no-repeat 245px 3px} */
 .register input.rg_l_tlcode{width:151px}
-.register .rg_l_ip:focus { border:1px solid #333;}
-.register input.rg_l_iperror { border:1px solid #333;outline: none;}
+.register .rg_l_ip:focus { border:1px solid #fc3;}
+.register input.rg_l_iperror { border:1px solid #999;outline: none;}
 .register .rg_list i.mobile-iphone {background: url(../images/login/iPhone.png) no-repeat; width: 12px; height: 18px; position: absolute; right: 195px; top: 8px;}
 .register input.rg_l_password,.register input.{background:url(../images/login/password.png) no-repeat 245px 7px;outline: none;}
 .register ul li {font-size:14px;width:550px;color:#545454;overflow:hidden; position:relative;margin-bottom:30px;}
 .register #shortP{margin-left:30px}
-.register ul li i{font-style:normal;color:red;vertical-align: middle;display: inline-block;width: 10px;height: 34px;line-height: 40px;}
+.register ul li i{font-style:normal;color:#fc3;vertical-align: middle;display: inline-block;width: 10px;height: 34px;line-height: 40px;}
 .register ul li label {display: inline-block; width: 60px; height: 34px; line-height: 34px; vertical-align: middle; text-align: right;}
 .register #firstSpan{display:inline-block;width:152px;height:32px;border:1px solid #178E30;color:#178E30;text-align:center;line-height:32px;margin-left:11px;background:#D7EEDB;font-size:12px}
 .register #secondSpan{display:inline-block;width:141px;height:32px;border:1px solid #FF4D4D;color:#FF4D4D;text-align:center;line-height:32px;margin-left:11px;background:#FFE4E5;font-size:12px}

@@ -44,7 +44,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .bannerlist .login .lg_link .right {float: right; color: #ffcc33;}
 .bannerlist .login .lg_link a {text-decoration: none; font-size: 14px;}
 .bannerlist .login .lg_link a:hover {text-decoration: underline; color: #ffee33;}
-.bannerlist .lg_bottom {width: 100%;height: 39px; background-color: #333333;border-top: 1px solid #4d4d4d;}
+.bannerlist .lg_bottom {width: 100%;height: 37px; background-color: #333333;border-top: 1px solid #4d4d4d;}
 .slide_box {width: 100%; height: 360px; position: absolute;}
 .slide_banner {width:1920px; /*图片宽度*/ position:absolute; left:50%; margin-left:-960px; /*图片宽度的一半*/}
 .slide_box a {width: 100%;  height: 360px; position: absolute; display: block;}
@@ -55,8 +55,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 /*content*/
 .w_content {background: url("../images/image/logo-beijing.png");  height: 1105px; padding: 39px 0;}
 .w_center {width: 1010px;margin: 0 auto; background: url("../images/image/logo-beijing2.png") no-repeat; height: 610px;border-radius: 5px;}
-.w_center_border {border-top: 10px solid #424242; border-radius: 5px; width: 1000px; margin: 0 auto;}
-.w_center_top {width: 1000px;margin: 0 auto; height: 80px;background-color: #333333;border-bottom: 1px solid #1a1a1a;}
+.w_center_border {border-top: 10px solid #424242; border-radius: 5px; width: 1000px; margin: 0 auto;background: #424242;height: 10px;}
+.w_center_top {width: 1000px;margin: 0 auto;margin-top: -10px; height: 80px;background-color: #333333;border-bottom: 1px solid #1a1a1a;}
 .w_content .left-shangzheng {float: left;width: 200px; color: #ffcc33; font-size: 20px; line-height: 80px; height: 80px; text-align: center;}
 .w_content .right-gengxin{float: right; width: 800px;color: #666; font-size: 14px; padding-top: 15px;}
 .w_content .right-gengxin p {margin-top: 5px;}
@@ -95,18 +95,18 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 }
 /*end*/
 .w-qihuo {width: 1010px;margin: 32px auto 0; height: 470px; background: url("../images/image/logo-beijing1.png") no-repeat;}
-.w-qihuo .w-qihuo-title {height: 80px;border-bottom: 1px solid #1a1a1a; margin-top: -5px; background-color: #333333; width: 1000px; margin: 0 auto;}
+.w-qihuo .w-qihuo-title {height: 80px;border-bottom: 1px solid #1a1a1a; background-color: #333333; width: 1000px; margin: 0 auto; margin-top: -10px; }
 .w-qihuo .w-qihuo-title h3 {color: #ffcc33; font-size: 20px; font-weight: normal; height: 80px; line-height: 80px; float: left; margin-left: 60px;}
 .w-qihuo .w-qihuo-title a{padding: 5px;display: block;float: right; width: 58px;height: 16px;line-height: 16px;font-size: 12px;color: #ffcf3f;text-align: center;text-decoration: none; border: 1px solid #ffcf3f;border-radius: 5px; margin-top: 26px;margin-right: 25px;}
 .w-qihuo .w-qihuo-title a:hover {background-color: #ffee33; color: #333; border: 1px solid #ffee33;}
 .w-qihuo .w-qihuo-content {border-top: 1px solid #4d4d4d; width: 1000px; margin: 0 auto;}
-.w-qihuo .w-qihuo-content .w-qihuo-caopan {float: left; width: 195px; height: 365px;border-right: 5px solid #292929;}
+.w-qihuo .w-qihuo-content .w-qihuo-caopan {float: left; width: 195px; height: 370px;border-right: 5px solid #292929;}
 .w-qihuo .w-qihuo-content .w-qihuo-caopan .w-qihuo-img {text-align: center;padding: 20px 0;}
 .w-qihuo .w-qihuo-content .w-qihuo-caopan p {font-size: 12px;padding-left: 10px; color: #666666; height: 18px; line-height: 18px; margin-bottom: 10px;}
 .w-qihuo .w-qihuo-content .w-qihuo-caopan p > a{display: block;width: 98px;height: 26px; line-height: 26px; text-align: center; border: 1px solid #ffcf3f;font-size: 14px;color: #ffcf3f; border-radius: 3px; margin: 13px auto 0; text-decoration: none;}
 .w-qihuo .w-qihuo-content .w-qihuo-caopan p > a:hover {background-color: #ffee33; color: #333333; border: 1px solid #ffee33;}
 .w-qihuo .w-qihuo-content .w-qihuo-caopan p .gou {background: url("../images/image/gou.png") no-repeat; width: 12px; height: 12px;display: block; position: relative; float: left;padding-right: 5px; margin-top: 4px;}
-.w-qihuo .w-qihuo-content .w-guopjiqihuo {float: left; width: 260px; height: 365px;border-right: 5px solid #292929;}
+.w-qihuo .w-qihuo-content .w-guopjiqihuo {float: left; width: 260px; height: 368px;border-right: 5px solid #292929;}
 .w-qihuo .w-qihuo-content .w-guopjiqihuo h3 {width: 100%;height: 58px;line-height: 58px;text-align: center;font-size: 20px;color: #cccccc;font-weight: normal; }
 .w-qihuo .w-qihuo-content .w-guopjiqihuo h4{width: 100%;height: 38px;line-height: 38px;text-align: center;font-size: 14px;color: #ffcc33;font-weight: normal;}
 .w-qihuo .w-qihuo-content .w-guopjiqihuo h4 i {font-size: 24px; padding: 0 2px;}
@@ -147,7 +147,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .h_partner {width: 100%; height: 275px; background: url("../images/image/logo-beijing.png"); border-bottom: 10px solid #424242;}
 .h_partner_content {width: 1010px; margin: 0 auto;}
 .h_partner_content .h_chosetitle {text-align: center; font-size: 20px; padding: 40px 0; color: #333333;}
-.h_partner_content img {margin-bottom: 10px;}
+.h_partner_content img {margin-bottom: 1px;}
 .h_partner .h_img {margin-top: 15px;}
 .h_partner .h_img a:hover { cursor: default;}
 /*copyright*/
@@ -200,7 +200,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .site-notice .nr {border-top: 1px solid #4d4d4d; background: #333; padding: 20px 0;}
 
 /* weixin */
-.follow .erweima .erweima-wxtk {position: absolute;top: -156px;left: -40px; height: 145px;}
+.follow .erweima .erweima-wxtk {position: absolute;top: -152px;left: -43px;}
 .follow .erweima .erweima-wxtk img {height: 150px;}
 
 

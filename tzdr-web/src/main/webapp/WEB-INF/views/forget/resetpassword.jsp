@@ -19,16 +19,16 @@
 	</ul>
 	<p id="rightP"><a href="${ctx}/">返回首页</a></p>
 </div>
+<div class="lg_promt"></div>
 <div class="resetpassword">
 			<h3>密码重置<p id="rightP" style="margin-top:-15px; *margin-top:-34px;width: 150px; text-align: right;">没有账号？<a href="${ctx }/signin">立即注册</a></p></h3>
 			<form id="resetForm">
 			<input type="hidden" class="token"  value=""> 
-				<p><em>*</em>手机号码<input type="text" id="phone" maxlength="11"/><span id="firstSpan"  style="display:none">请输入注册时填写的手机号</span></span></p>
+				<p><em>*</em>手机号码<input type="text" id="phone" maxlength="11"/><span id="firstSpan"  style="display:none">请输入注册时填写的手机号</span></span><i class="mobile-iphone"></i></p>
 				<p><em>*</em>手机确认<input type="text" id="checkPhone" /><a href="javascript:void(0)" id="huoqu1">获取确认码</a><span id="checkback2" style="display:none"></span></p>
-				<p id="shortP"><em>*</em>新密码<input type="password" id="password" /><span id="secondSpan"  style="display:none">6-10位数字和字母组成</span></p>
-				<p><em>*</em>确认密码<input type="password" id="checkPassword" /><span id="checkback4" style="display:none"></span></p>
+				<p id="shortP"><em>*</em>新密码<input type="password" id="password" /><span id="secondSpan"  style="display:none">6-10位数字和字母组成</span><i class="password-img" style="right: 244px;"></i></p>
+				<p><em>*</em>确认密码<input type="password" id="checkPassword" /><span id="checkback4" style="display:none"></span><i class="password-img"></i></p>
 				<a href="javascript:void(0)" id="resetpassword" class="resetbtn">确认重置</a>
-				
 			</form>
 			
 </div>

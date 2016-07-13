@@ -22,45 +22,67 @@ a{outline:none;blr:expression(this.onFocus=this.blur());}
 }
 .newsbox { width:100%; height:auto; background:#fff;}
 .news_siderbar {
-	width: 254px;
-	height: auto;
 	float: left;
+	width: 180px;
+    height: auto;
+    float: left;
+    border: 1px solid #e0e0e0;
+    font-size: "微软雅黑";
+    background: #fafafa;
 }
 .news_siderbar h2 {
-	width: 230px;
-	height: 50px; 
-	text-align: center;
-	line-height: 50px; 
-	font-size: 18px;
-	color: #fff;
-	background: #febd11;
 	font-weight: normal;
-	margin-bottom: 8px;
-	
 }
-.news_siderbar h2 a { background: none; color: #fff; font-size: 18px; padding-left: 0; width: 230px; text-align: center;}
-.news_siderbar h2 a.on { width: 230px;height: 50px; padding: 0; line-height: 50px; background: none; text-align: center; }
+.news_siderbar h2 a {     
+    height: 45px;
+    line-height: 45px;
+    width: 123px;
+    padding-left: 57px;
+    text-align: left;
+    font-size: 14px;
+    color: #666; 
+    text-align: left;
+}
 .news_siderbar a {
 	display: block;
-	width: 195px;
-	height: 52px;
-	line-height: 50px;
-	padding-bottom: 2px;
-	padding-left: 35px;
-	background: url(../images/news/navbg.gif) no-repeat left center;
-	font-size: 16px;
-	color: #666;
-	margin-bottom: 8px;
+    height: 45px;
+    line-height: 45px;
+    width: 123px;
+    padding-left: 57px;
+    text-align: left;
+    font-size: 14px;
+    color: #666;
+}
+.news_siderbar a span {
+	font-family: "宋体";
+    font-size: 14px;
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    float: right;
+    margin-right: 30px;
 }
 .news_siderbar a.on {
-	width: 219px;
-	height: 50px; 
-	padding: 0 0 2px 35px;
-	border-bottom: none;
-	background: url(../images/news/navon.gif) no-repeat left center;
-	color: #fff;
+    position: relative;
+    left: -1px;
+    background: #333;
+    text-decoration: none;
+    color: #ffcc33;
+    width: 125px;
 }
-.news_siderbar a:hover { text-decoration: none;}
+.news_siderbar a.on span {
+}
+.news_siderbar a:hover {
+    position: relative;
+    left: -1px;
+    background: #333;
+    color: #ffcc33;
+    text-decoration: none;
+    width: 125px;
+}
+.news_siderbar a:hover i{
+	
+}
 .uc_tpage { 
  	width: 100%;
  	height: 28px;

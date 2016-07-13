@@ -37,10 +37,10 @@
 	<form action="${ctx}/userhsi/pay" id="settingForm" method="post">
 		<div class="capital">		
 			<div class="mc_nav">
-		        <a href="${ctx}/outDisk/index">国际综合<i></i></a>
-		        <a href="${ctx}/ftse/index">富时A50</a>
 		        <a href="${ctx}/hsi/index" class="on">恒指期货</a>
-		        <a href="${ctx}/crudeoil/index">国际原油</a>
+				<a href="${ctx}/crudeoil/index">国际原油</a>
+				<a href="${ctx}/ftse/index">富时A50</a>
+		        <a href="${ctx}/outDisk/index">国际综合<i></i></a>
 		    </div>
 			<div class="capital_ctn">
 				<div class="cp_main sif_main">

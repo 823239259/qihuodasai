@@ -39,11 +39,11 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .login { position:relative; border:1px solid #CCCCCC;width:739px; margin:0px auto; height:543px; clear:both;}
 .login h3{font-weight:normal;border-bottom:2px solid #fc3;padding-bottom:7px;width:661px;margin-left:39px;margin-top:37px}
 .login form{margin:106px 163px}
-.login input{vertical-align: middle;height:32px;width:235px;border:1px solid #424242;border-radius:3px;color:#fc3;font-size:12px;margin-left:18px;padding-left:32px; outline:none;}
-.login input:focus { border:1px solid #424242;}
-.login input.error { border:1px solid #333;}
-.login input.holder {background: #424242;}
-.login input.password{background: #424242;}
+.login input{vertical-align: middle;height:32px;width:235px;border:1px solid #999;border-radius:3px;color:#333;font-size:12px;margin-left:18px;padding-left:32px; outline:none;}
+.login input:focus { border:1px solid #fc3;}
+.login input.error { border:1px solid #999;}
+/* .login input.holder {background: #424242;} */
+/* .login input.password{background: #424242;} */
 .login .logon-ipt { position:relative;font-size:14px;width:440px;color:#545454;margin-bottom:25px; margin-left:157px;}
 .login .logon-ipt label {vertical-align: middle;}
 .login .logon-ipt i.iphone {display: block; position: absolute; background: url("../images/login/iPhone.png") no-repeat; width: 12px; height: 18px; position: absolute; left: 88px; top: 8px;}

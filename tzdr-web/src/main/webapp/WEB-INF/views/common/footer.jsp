@@ -51,14 +51,15 @@
         </div>
     </div>
 </div> --%>
+<div style="width: 100%;height: 327px;" id="ungundontiao">
 <div class="copyright">
     <div class="copyright_content">
         <div class="copyright_link">
             <ul class="link">
-                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a25cff03e0" target="_blank">维胜动态</a></li>
+                <li><a href="${ctx }/news/newsdata?colname=ff8080814e956d02014e95788e300001" target="_blank">维胜动态</a></li>
                 <li><a href="${ctx }/about" target="_blank">公司简介</a></li>
-                <li><a href="${ctx }/news/newsdata?colname=8a2868ab4be94f15014be9a17d1303df" target="_blank">市场热点</a></li>
-                <li><a href="${ctx }/company" target="_blank">公司资质</a></li>
+                <li><a href="${ctx }/news/newsdata?colname=ff8080814f73cadc014f73cf0f6b0001" target="_blank">市场热点</a></li>
+                <%-- <li><a href="${ctx }/company" target="_blank">公司资质</a></li> --%>
                 <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
                 <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
             </ul>
@@ -110,6 +111,7 @@
             <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname" target="_blank"><img src="${ctx}/static/images/image/chengxing.png"></a>
         </div>
     </div>
+</div>
 </div>
 <!-- 网站公告 -->
 <div class="site-notice notice-fixed">
@@ -192,7 +194,7 @@ $(function () {
         });
     })
 	
-	// 加载最新公告
+	/* // 加载最新公告
     var showNotice = false;
     var content="";
     $.ajax({
@@ -234,7 +236,7 @@ $(function () {
         $('.erweima-wxtk').show();
     }, function() {
         $('.erweima-wxtk').hide();
-    });
+    }); */
     
 });
 	
@@ -248,7 +250,7 @@ function checkNotice() {
 		$(".notice-fixed").fadeIn("slow");
 	}
 }
- // 关闭公告
+/*  // 关闭公告
 function closeNotice() {
 	$(".site-notice").remove();
 	// cookie记录公告已删除
@@ -282,6 +284,6 @@ function getCookie(c_name) {
 		}
 	}
 	return ""
-}
+} */
 </script><!-- <script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script> -->
 <span style="display: none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
