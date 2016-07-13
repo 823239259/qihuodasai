@@ -365,7 +365,7 @@ $(document).ready(function(){
 						showMsgDialog("提示","密码设置失败 !");
 					}else{
 						//window.location.href=basepath+"forgetpw?step=3";
-						showMsgDialogRestPassWordLoadLoginUrl("提示","恭喜你，密码重置成功 !");
+						showMsgDialogRestPassWordLoadLoginUrl("提示","恭喜你，密码重置成功 !",3000);
 						//window.location.href=basepath+"/user/account";
 					}
 				}else{

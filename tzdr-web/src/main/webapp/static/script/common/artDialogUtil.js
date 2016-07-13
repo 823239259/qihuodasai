@@ -76,7 +76,7 @@ function  showMsgDialog(title,content,time)
 	});
 }
 
-function showMsgDialogRestPassWordLoadLoginUrl(title,content){
+function showMsgDialogRestPassWordLoadLoginUrl(title,content,time){
 	var dialog = art.dialog({
 	    title: title,
 	    width:200,
