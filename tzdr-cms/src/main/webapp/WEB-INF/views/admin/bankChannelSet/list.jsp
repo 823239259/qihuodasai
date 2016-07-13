@@ -51,7 +51,7 @@ $(document).ready(function(){
 	var tt=$("#spifTab").tabs({
 		border:false,
 	    onSelect:function(title){
-	    	if("配股宝设置"==title){
+	    	if("维胜设置"==title){
 	    		peigubaoinfo();
 	    	}
 	    }

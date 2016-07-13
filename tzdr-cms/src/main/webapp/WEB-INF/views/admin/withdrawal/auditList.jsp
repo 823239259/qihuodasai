@@ -99,7 +99,7 @@
 				                    <select class="easyui-combobox" name="source">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">配股宝</option>
+				                        <option value="2">维胜</option>
 				                    </select>
 				                </td>
 								<td class="label right">
@@ -217,7 +217,7 @@
 				                    <select class="easyui-combobox" name="source">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">配股宝</option>
+				                        <option value="2">维胜</option>
 				                    </select>
 				                </td>
 								<td class="label right">
@@ -350,7 +350,7 @@
 				                    <select class="easyui-combobox" name="source" id="source">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">配股宝</option>
+				                        <option value="2">维胜</option>
 				                    </select>
 				                </td>
 				                </tr>
@@ -426,7 +426,7 @@
 				                    <select class="easyui-combobox" name="search_EQ_source">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">配股宝</option>
+				                        <option value="2">维胜</option>
 				                    </select>
 				                </td>
 				                </tr>
@@ -562,7 +562,7 @@
 				                    <select class="easyui-combobox" name="search_EQ_source">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">配股宝</option>
+				                        <option value="2">维胜</option>
 				                    </select>
 				                </td>
 				                </tr>

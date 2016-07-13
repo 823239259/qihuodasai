@@ -21,10 +21,10 @@ $(document).ready(function(){
 			{field:'subordinateSites',title:'所属网站',width:100,sortable:true,
 				formatter: function(value,row,index){
 					if(row.typeKey=="smsContentRegisterPGB"||row.typeKey=="smsContentOthersPGB"){
-						return "配股宝";
+						return "维胜";
 					}
 					if(row.typeKey=="smsContentRegister"||row.typeKey=="smsContentOthers"){
-						return "投资达人";
+						return "维胜";
 					}
 				}},
 		]],

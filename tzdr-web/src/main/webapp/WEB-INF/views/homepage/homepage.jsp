@@ -1414,6 +1414,7 @@
 		    		sendMessage('QryCommodity','""')
 		    	}else if(method == "OnRspQryCommodity"){
 		    		var commoditys = jsonData.Parameters;
+		    		console.log(jsonData);
 		    		var size = commoditys.length;
 		    		//生成实时行情html
 		    		console.log(commoditys);
@@ -1462,7 +1463,8 @@
 		    		}
 		    		for(var i = 0 ; i < size ; i++){
 		    			var comm = commoditys[i];
-		    			sendMessage('QryContract','{"CommodityNo":"'+comm.CommodityNo+'"}');
+		    			//sendMessage('QryContract','{"CommodityNo":"'+comm.CommodityNo+'"}');
+		    			sendMessage('Subscribe','{"CommodityNo":"'+comm.CommodityNo+'","ContractNo":"'+comm.MainContract+'"}');
 		    		}
 		    	}else if(method == "OnRspQryContract"){
 		    		 var catracts = jsonData.Parameters;

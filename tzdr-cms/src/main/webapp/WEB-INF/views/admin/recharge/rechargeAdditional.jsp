@@ -52,7 +52,7 @@
 		                    <select class="easyui-combobox" name="search_EQ_source" id="source1">
 		                        <option value="">所有网站</option>
 		                        <option value="1">维胜</option>
-		                        <option value="2">配股宝</option>
+		                        <option value="2">维胜</option>
 		                    </select>
 		                </td>
 						<td colspan="2">

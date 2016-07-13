@@ -101,13 +101,13 @@ $(document).ready(function(){
 	$("#bannerTab").tabs({
 		border:false,
 	    onSelect:function(title){
-	    	if(title=="配股宝banner"){
+	    	if(title=="维胜banner"){
 				gridParams.toolbar="#tb_pgb";
 				gridParams.url=basepath+'admin/config/banner/easyuiPage';
 				gridParams.queryParams={search_EQ_deleted:false,search_EQ_type:8};
 				gridParams.columns[0][9].hidden=false;
 				$("#edatagrid_pgb").datagrid(gridParams);
-			}else if(title=="投资达人APP-banner"){
+			}else if(title=="维胜APP-banner"){
 				gridParams.toolbar="#tb_tzdrApp";
 				gridParams.url=basepath+'admin/config/banner/easyuiPage';
 				gridParams.queryParams={search_EQ_deleted:false,search_EQ_type:9};
@@ -169,13 +169,13 @@ var opConfig={
 		},
 		doSearch:function(type,TabsId){
 			var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
-			if($title=="配股宝banner"){
+			if($title=="维胜banner"){
 				$('#edatagrid_pgb').datagrid('load',{
 					search_LIKE_name : $('#name_pgb').val(),
 					search_EQ_deleted:false,
 					search_EQ_type:type
 				});
-			}else if($title =="投资达人APP-banner"){
+			}else if($title =="维胜APP-banner"){
 				$('#edatagrid_tzdrApp').datagrid('load',{
 					search_LIKE_name : $('#name_tzdrApp').val(),
 					search_EQ_deleted:false,
