@@ -352,8 +352,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 	
 	var rowData=$('#edatagrid').datagrid('getSelected');
 	var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
-
-			if($title.indexOf("维胜")>-1){
+			if($title.indexOf("配股宝")>-1){
 				rowData=$('#edatagrid_pgb').datagrid('getSelected');
 			}
 			if($title.indexOf("维胜APP")>-1){
@@ -370,7 +369,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 	}
 	
 	var html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=4&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
-	if($title.indexOf("维胜")>-1){
+	if($title.indexOf("配股宝")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=8&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
 	}
 	if($title.indexOf("维胜APP")>-1){
@@ -388,7 +387,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 deleteData:function(modelName,TabsId){
 	var eda="edatagrid";
 	var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
-	if($title.indexOf("维胜")>-1){
+	if($title.indexOf("配股宝")>-1){
 		eda="edatagrid_pgb";
 	}
 	if($title.indexOf("维胜APP")>-1){
