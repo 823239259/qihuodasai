@@ -904,7 +904,7 @@ var tab=<%=tab%>;
 					<div class="uc_ap_link">
 							<div class="uc_ap_code">
 								
-								<img src="${ctx}/static/images/uc/code.png?v=20150717">
+								<img src="${ctx}/static/images/uc/new_code.png?v=20150717">
 								<p>手机支付宝扫一扫，快速转账，<i>0手续费</i></p>
 							</div>
 							<div class="uc_ap_aplink">
@@ -930,7 +930,7 @@ var tab=<%=tab%>;
 						<p class="uc_b_title">您可以通过网上银行或银行柜台向维胜转账（手续费最多一笔50元）</p>
 						<ul class="uc_b_list">
 							<ol class="first">
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_05.jpg"></li>
+								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_19.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>1289 0715 5110 501</i></span>
 									<span>户名：<i>成都盈透科技有限公司</i></span>
