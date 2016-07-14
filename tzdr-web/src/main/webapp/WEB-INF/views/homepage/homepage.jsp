@@ -1520,7 +1520,8 @@
 							 var bs = "↑";
 							 var jj = "+";
 							 var color = " #ff5500";
-							 if(scal < 0){
+							 console.log(_data.QChangeRate);
+							 if(_data.QChangeRate < 0){
 								 bs = "↓";
 								 jj = "";
 								 color = "#0bffa4";
