@@ -20,9 +20,9 @@ ul,li,ol,i,em { list-style: none; font-style: normal;}
 .uc_mainbanner { width: 808px; heigth:150px; margin-bottom:15px;}
 .uc_sidebar { width: 180px;height: auto; float: left; border: 1px solid #e0e0e0; font-size: "微软雅黑"; background: #fafafa;}
 .uc_sidebar h2 a {display: block; width: 125px; height: 45px; line-height: 45px; padding-left:57px; text-align: left; font-size: 14px; color: #666;}
-.uc_sidebar h2 {position: relative;}
+.uc_sidebar h2 {position: relative; font-weight: bolder;}
 .uc_sidebar h2 i {position: absolute;color:#666; font-family: "宋体"; font-size: 14px; display: block; height: 45px; line-height: 45px; right: 30px; top: 2px; }
-.uc_sidebar h2 a.on,.uc_sidebar h2 a:hover { display: block; width: 125px; height: 45px; line-height: 45px; padding-left:57px; background: #333; font-size: 14px; color: #ffcc33;  text-decoration: none; position: relative; left: -1px;  }
+.uc_sidebar h2 a.on,.uc_sidebar h2 a:hover {font-weight: normal; display: block; width: 125px; height: 45px; line-height: 45px; padding-left:57px; background: #333; font-size: 14px; color: #ffcc33;  text-decoration: none; position: relative; left: -1px;  }
 .uc_sidebar h2 a.on i{color: #fc3;}
 .uc_nav { width: 100%; height: auto;}
 .uc_nav h3 { width: 100%; height: 35px; line-height: 35px; font-size: 14px; color: #fff; background: #666; text-align: center;}
