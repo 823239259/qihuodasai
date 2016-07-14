@@ -280,7 +280,7 @@ public class DrawMoneyController {
 						logger.error("插入取款数据失败"+e1.getMessage());
 						String dataDetail="userInfo:id:"+user.getId()+"|mobile:"+user.getMobile()+"orderId:"+orderId+"|ip:"+ip+"|异常："+e1.getMessage();
 						EmailExceptionHandler.getInstance().HandleExceptionWithData(e1, "插入提现数据失败", this.getClass().getName()+":moreSuccess", dataDetail);
-						 jsonResult.setMessage("提现失败，请联系客服 400-020-0158");
+						 jsonResult.setMessage("提现失败，请联系客服400-852-8008");
 						 return jsonResult;
 					}
 					 if(flag){
@@ -332,7 +332,7 @@ public class DrawMoneyController {
 									if(json!=null){
 										String code=json.getString("retCode");
 										 if(!Constants.Draw.SUCCESS.equals(code)){
-											 jsonResult.setMessage("提现失败，请联系客服 400-020-0158");
+											 jsonResult.setMessage("提现失败，请联系客服 400-852-8008");
 										 }else{
 											//发送短信
 												Map<String,String> map= new HashMap<String,String>();
@@ -342,12 +342,12 @@ public class DrawMoneyController {
 														"draw.money.template", map).start();
 										 }
 									}else{
-										 jsonResult.setMessage("提现失败，请联系客服 400-020-0158");
+										 jsonResult.setMessage("提现失败，请联系客服 400-852-8008");
 									}
 							}
 						 }
 					 }else{
-						 jsonResult.setMessage("提现失败，请联系客服 400-020-0158");
+						 jsonResult.setMessage("提现失败，请联系客服 400-852-8008");
 					 }
 				 }else {
 					 if(bank==null){
@@ -670,7 +670,7 @@ public class DrawMoneyController {
 		if (Bibipay.HANDLE_SUCCESS_STATUS != bbResult.getIntValue("status")){
 			logger.info("币币支付调用取款接口失败，"+bbResult);
 			EmailExceptionHandler.getInstance().HandleHintWithData("币币支付调用取款接口失败","bbDrawMoney", bbResult.toJSONString());
-			return new JsonResult("提现失败，请联系客服 400-020-0158");
+			return new JsonResult("提现失败，请联系客服 400-852-8008");
 		}
 		
 		// 更新币币订单号到提现记录中
