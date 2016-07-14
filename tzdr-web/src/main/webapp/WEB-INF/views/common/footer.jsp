@@ -236,7 +236,7 @@ $(function () {
         $('.erweima-wxtk').show();
     }, function() {
         $('.erweima-wxtk').hide();
-    }); */
+    }); 
     
 });
 	

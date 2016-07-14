@@ -192,7 +192,7 @@ background: rgba(0,0,0,0);}
 .mc_nav { width: 998px; height: 46px; margin: 0 auto -1px; position: relative; font-size: 0; text-align: left; background: #333; border:1px solid #e1e1e1; border-bottom: none;}
 .mc_nav a { display: inline-block; width: 175px; height: 46px; text-align: center; line-height: 46px; font-size:16px; color: #fc3;text-decoration: none; vertical-align: middle; background: #333;}
 .mc_nav a.on,.mc_nav a:hover { height: 46px; line-height: 46px; background: #fc3; color: #333;}
-.mc_nav a i { display:block; width:21px; height:9px; background:url(../images/cx/icon_06.png) no-repeat;position: absolute; left: 120px; top: 10px; }
+.mc_nav a i { /* display:block; width:21px; height:9px; background:url(../images/cx/icon_06.png) no-repeat;position: absolute; left: 120px; top: 10px;  */}
 /*外盘综合*/
 .cpx_ctn { padding: 0 26px 30px; width: 946px;}
 .cpx_main { width: 100%; height: auto;}
