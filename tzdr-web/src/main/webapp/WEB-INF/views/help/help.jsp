@@ -32,9 +32,9 @@ var tab="<%=tab%>";
     <div class="hp_nav">
         <ul>
             <li><a href="javascript:void(0);" class="helpTitle" data-type="newbie">新手指南</a></li>
-            <li><a href="javascript:void(0);" class=" helpTitle" data-type="configuration">港股操盘</a></li>
+           <!--  <li><a href="javascript:void(0);" class=" helpTitle" data-type="configuration">港股操盘</a></li> -->
             <li><a href="javascript:void(0);" class="helpTitle" data-type="rule">期货操盘</a></li>
-            <li><a href="javascript:void(0);" class="helpTitle" data-type="software">交易软件下载</a></li>
+            <li><a href="javascript:void(0);" class="helpTitle" data-type="software">易盛交易软件</a></li>
             <li><a href="javascript:void(0);" class="helpTitle" data-type="safety">安全保障</a></li>
         </ul>
     </div>
@@ -195,20 +195,20 @@ var tab="<%=tab%>";
     <!-- 期指操盘 -->    
     <div class="hp_ctn rule hp_content" style="display: none">
     	<div class="hp_siderbar rule_siderbar">
+    		<a href="javascript:void(0)" data="0">恒指操盘<i>></i></a>
+    		<a href="javascript:void(0)" data="8">国际原油<i>></i></a>
+    	 	<a href="javascript:void(0)" data="9">富时A50<i>></i></a>
             <a href="javascript:void(0)" data="5">国际综合<i>></i></a>
-            <a href="javascript:void(0)" data="0">富时A50<i>></i></a>
-            <a href="javascript:void(0)" data="9">恒指操盘<i>></i></a>
-            <a href="javascript:void(0)" data="8">国际原油<i>></i></a>
-            <a href="javascript:void(0)" data="2">商品综合<i>></i></a>
+            <!-- <a href="javascript:void(0)" data="2">商品综合<i>></i></a> -->
         </div>
-        <div class="hp_mainbar hp_mbox0" style="display:none;">        	
+        <div class="hp_mainbar hp_mbox9" style="display:none;">        	
             <h1>富时A50</h1>     
             <p>新华富时中国A50指数包含了中国A股市场市值最大 的50家公司，其总市值占A股总市值的33%，是最能代表中国A股市场的指数，许多国际投资者把这一指数看作是衡量中国市场的精确指标。</p>  
             <h2>富时A50操盘流程：</h2>	
             <p>1、申请操盘：进入首页-富时A50，您可以随心随意的选择不同的开仓手数，支付不同的保证金。</p>            
-            <img src="${ctx }/static/images/help/new_05.gif" width="700">           
+            <img src="${ctx }/static/images/help/vs-help-22.png" width="700">           
             <p>2、操盘账号：操盘发起成功后，进入我的账户-富时A50等待发放账号。</p>           
-            <img src="${ctx }/static/images/help/new_06.gif" width="700">    
+            <img src="${ctx }/static/images/help/vs-help-18.png" width="700">    
             <p>3、开户处理时间：交易时间：系统将在30分钟内下发操盘账户；非交易时间：系统将在次日开盘前下发操盘账户。</p>
             <p>注意事项：如遇市场行情好，开户数多时可能遇到排队的情况，开户可能会有延迟。我们会按照发起时间顺序在第一时间为您开出。在等待开户时，您可以先去了解<a href="${ctx}/help?tab=software&leftMenu=8">富时A50交易软件</a></p>
        		<h2>富时A50操盘规则：</h2>
@@ -229,9 +229,9 @@ var tab="<%=tab%>";
             <p>在石油期货合约之中，原油期货是交易量最大的品种，我们推出的国际原油是投资世界交易量最大、影响力最广泛的纽约商业交易所轻原油期货合约。该合约规格为每手1000桶，报价单位为美元/桶，价格波动最小单位为1美分，当初一推出后交易活跃，为有史以来最成功的国际商品期货合约，它的成交价格成为国际石油市场关注的焦点。国际原油投资特点：1，全球性市场，操作简单  2，T+0模式，每天可多次交易，增加获利几率  3，杠杆交易原理，以小博大  4，几乎24小时交易，时间自由   5，无涨停板和交割时间限制，特别适合做短线投资。</p>  
             <h2>国际原油操盘流程：</h2>	
             <p>1、申请操盘：进入首页-国际原油，您可以随心随意的选择不同的开仓手数，支付不同的保证金。</p>            
-            <img src="${ctx }/static/images/help/cl_01.gif" width="700">           
+            <img src="${ctx }/static/images/help/vs-help-21.png" width="700">           
             <p>2、操盘账号：操盘发起成功后，进入我的账户-国际原油等待发放账号。</p>           
-            <img src="${ctx }/static/images/help/cl_02.gif" width="700">    
+            <img src="${ctx }/static/images/help/vs-help-24.png" width="700">    
             <p>3、开户处理时间：交易时间：系统将在30分钟内下发操盘账户；非交易时间：系统将在次日开盘前下发操盘账户。</p>
             <p>注意事项：如遇市场行情好，开户数多时可能遇到排队的情况，开户可能会有延迟。我们会按照发起时间顺序在第一时间为您开出。在等待开户时，您可以先去了解<a href="${ctx}/help?tab=software&leftMenu=8">易盛外盘交易软件</a></p>
        		<h2>国际原油操盘规则：</h2>
@@ -247,14 +247,14 @@ var tab="<%=tab%>";
        		<p>7)结算规则：操盘盈亏=账户所有持仓平仓结算后账户余额-操盘初始资金；如操盘盈利，则盈利作为报酬归乙方所有，如操盘亏损且亏损额度小于或等于操盘保证金金额的，则亏损由乙方承担，直接从操盘保证金中扣除；超出操盘保证金部分丙方保留追讨权利；乙方同意结算金额以交易系统后台清算数据为准。</p>
         	<p>8)国际原油收取技术服务费每手125元。</p>        	
         </div>                      
-        <div class="hp_mainbar hp_mbox9" style="display:none;">        	
+        <div class="hp_mainbar hp_mbox0" style="display:none;">        	
             <h1>恒指期货</h1>     
             <p>香港股市价格的重要指标，指数由若干只成份股（即蓝筹股）市值计算出来的，代表了香港交易所所有上市公司的12个月平均市值涵盖率的63%，恒生指数由恒生银行下属恒生指数有限公司负责计算及按季检讨，公布成份股调整。该指数于1969年11月24日首次公开发布。</p>  
             <h2>恒指期货操盘流程：</h2>	
             <p>1、申请操盘：进入首页-恒指期货，您可以随心随意的选择不同的开仓手数，支付不同的保证金。</p>            
-            <img src="${ctx }/static/images/help/hsi_01.gif" width="700">           
+            <img src="${ctx }/static/images/help/vs-help-20.png" width="700">           
             <p>2、操盘账号：操盘发起成功后，进入我的账户-恒指期货等待发放账号。</p>           
-            <img src="${ctx }/static/images/help/hsi_02.gif" width="700">    
+            <img src="${ctx }/static/images/help/vs-help-23.png" width="700">    
             <p>3、开户处理时间：交易时间：系统将在30分钟内下发操盘账户；非交易时间：系统将在次日开盘前下发操盘账户。</p>
             <p>注意事项：如遇市场行情好，开户数多时可能遇到排队的情况，开户可能会有延迟。我们会按照发起时间顺序在第一时间为您开出。在等待开户时，您可以先去了解<a href="${ctx}/help?tab=software&leftMenu=8">易盛外盘交易软件</a></p>
        		<h2>恒指期货操盘规则：</h2>
@@ -423,9 +423,9 @@ var tab="<%=tab%>";
 			<br>
 			<h2>国际综合期货操盘流程：</h2>
 			<p>1、申请操盘：进入首页-国际综合，您可以随心随意的选择不同操盘保证金。操盘保证金不同，总操盘金、平仓线、初始可开仓手数不同。注：国际综合没有开仓手数限制!</p>            
-            <img src="${ctx }/static/images/help/cpx_01.gif" width="700">           
+            <img src="${ctx }/static/images/help/vs-help-25.png" width="700">           
             <p>2、操盘账号：操盘发起成功后，进入我的账户-国际期货，等待发放账号。</p>           
-            <img src="${ctx }/static/images/help/cpx_02.gif" width="700">    
+            <img src="${ctx }/static/images/help/vs-help-16.png" width="700">    
             <p>3、开户处理时间：交易时间：系统将在30分钟内下发操盘账户；非交易时间：系统将在次日开盘前下发操盘账户。</p>			
 			<h2>国际综合期货注意事项：</h2>
        		<p>1)交易品种：美原油（CME CL）、富时A50（SGX CN）、恒生指数期货（HKE HSI）、日经指数225（SGX NK）、迷你道琼（CME-CBOT YM）、迷你纳指（CME NQ）、迷你标普（CME ES）、德国DAX指数（EUREX FDAX）当月主力合约，以平台实际公示可交易品种为准。</p>	
@@ -730,7 +730,7 @@ var tab="<%=tab%>";
             <a href="javascript:void(0);" data="4">信息安全保障<i>></i></a>
             <a href="javascript:void(0);" data="5">交易安全保障<i>></i></a>
             <a href="javascript:void(0);" data="6">专业风控保障<i>></i></a>
-             <a href="javascript:void(0);" data="7">协议安全保障<i>></i></a>
+            <!--  <a href="javascript:void(0);" data="7">协议安全保障<i>></i></a> -->
         </div>
         <div class="hp_mainbar hp_mbox1">
         	<h1>安全保障</h1>
@@ -801,25 +801,25 @@ var tab="<%=tab%>";
     <!--交易软件下载  -->
     <div class="hp_ctn software hp_content" style="display:none;">
         <div class="hp_siderbar software_siderbar">
-            <!-- <a href="javascript:void(0)" class="on" data="1">股票交易系统<i style="right: 20px;">></i></a>   -->          
-            <!-- <a href="javascript:void(0)" data="12">股票掌上交易系统<i style="right: 20px;">></i></a> -->
-            <a href="javascript:void(0)" data="8">国际期货交易系统<i style="right: 20px;">></i></a>
+            <!-- <a href="javascript:void(0)" class="on" data="1">股票交易系统<i style="right: 20px;">></i></a>       
+            <a href="javascript:void(0)" data="12">股票掌上交易系统<i style="right: 20px;">></i></a> --> 
+            <a href="javascript:void(0)" class="on" data="1">国际期货交易系统<i style="right: 20px;">></i></a>
            <!--  <a href="javascript:void(0)" data="9">商品期货交易系统<i style="right: 20px;">></i></a> -->
         </div>
         <div class="hp_mainbar hp_mbox1" style="display:none;">
-            <h1 style="border-bottom:1px solid #d1d1d1;">钱隆TTS股票交易系统<span style="font-size:16px; color:#fc3; padding-left:10px;">请股票合买和港股操盘的用户下载此软件！</span></h1>    
+            <h1 style="border-bottom:1px solid #d1d1d1;">易盛极星客户端说明<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
             <div class="hp_tts">               
-                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win XP用户安装时需注意</h6>   
-                <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序。<br>若程序仍无法运行，请致电客服400-852-8008。</p>  
-                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win 7用户安装时需注意</h6>  
-                <p style="margin-bottom:40px; text-indent:0;">1，直接下载安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序；<br>	2，若程序无法运行，请补充下载并安装“<a href="http://update.tzdr.com/Future/download/.netFramework3.5.exe">.NET Framework 3.5</a>”，再运行TTS系统。<br>若程序仍无法运行，请致电客服400-852-8008。</p> 
-                <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win 8用户安装时需注意</h6>      
-                <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/vcredist_x86.zip">VC2005运行库</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/%E9%92%B1%E9%9A%86TTS.exe">钱隆TTS股票交易系统</a>”，然后启动程序。<br>若程序仍无法运行，请致电客服400-852-8008。</p>            
-            	<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">钱隆TTS本身不带行情，推荐第三方行情系统：</h6>   
-            	<p style="text-indent:0;">选择一，<a href="http://zjcmpp.hexin.com.cn/soft/THS_freeldy.exe">“同花顺免费炒股软件”</a>，下载安装后无需登录即可打开软件<br>1，沪深A股和港股都可以看行情<br>2，港股实时行情，20只个股的展示限制，但可以手工查询指定的个股看实时行情，另外还需手动刷新行情。注意：手工查询时，应输入股票名称首字母，输入代码无效。</p>
-            	<p style="text-indent:0;">选择二，<a href="http://www.tdx.com.cn/products/level2/new_tdx.exe">“通达信金融分析终端软件”</a>，下载安装、启动软件后选择“免费精选行情登录”，无需账号即可登录 <br>1，沪深A股和港股都可以看行情<br>2，港股行情延时15分钟，但会展示所有港股股票</p>
+                <h6 style="font-weight:bold;color:#fc3;margin-bottom: 40px;">1, 启动易盛极星客户端，弹出登录窗口，在登录窗口的‘行情服务器’，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改</h6>   
+                <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-27.png"><a href="#"></a></p>  
+                <h6 style="font-weight:bold;color:#fc3;">2、在交易服务器窗口，输入交易账号和密码，勾选同步登录行情，点击登录</h6>  
+                <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-28.png"><a href=""></a></p> 
+                <h6 style="font-weight:bold;color:#fc3;">3, 登录成功后，在交易界面直接输入合约代码或者在外盘纵览下选择自己需要的期货合约，直接定位该合约的行情数据</h6> 
+                <p style="color:red;font-size: 14px; margin-top: 40px;">注：行情信息属于公共信息，当行情波动大时，各个行情软件都可能会出现不能及时刷新等问题，具体成交点位，以交易软件成交为准。</p>     
+                <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-29.png"><a href=""></a></p>            
+            	<h6 style="font-weight:bold;color:#fc3; margin-top:10px;margin-bottom: 50px;">4、4、在软件横向下单区域，选择需要交易合约进行『买入』或『卖出』，开始国际期货操盘； 或者在行情列表双击需要交易合约所在行，对应合约信息将自动添加到横向下单板块</h6>  
+            	<p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-30.png"><a href=""></a></p>
             </div>
-            <ul class="hp_tts_down">
+           <!--  <ul class="hp_tts_down">
                 <li>
                 	<a href="javascript:void(0);" style="cursor:text;">钱隆TTS介绍</a>
                 	<p>钱隆TTS资管之家客户端，是资管专用的投资交易委托下单系统， 支持股票交易相关买入、卖出、信息查询等功能，具有交易灵活可靠、交易速度快、 系统稳定等特点。</p>	
@@ -832,7 +832,7 @@ var tab="<%=tab%>";
                     <a href="javascript:void(0);" style="cursor:text;">VC2005运行库介绍</a>
                     <p>运行库是一个经过封装的程序模块，如果不使用运行库，操作系统在运行程序时找不到对应的运行库程序就无法运行。运行钱隆TTS交易软件，电脑系统必须已经安装VC运行库。</p>
                 </li>
-            </ul>    
+            </ul>  -->   
         </div>
         <div class="hp_mainbar hp_mbox8" style="display:none;">
             <h1 style="border-bottom:1px solid #d1d1d1;">直达-快抢手快速下单软件</h1> 
@@ -905,49 +905,49 @@ var tab="<%=tab%>";
         </div>
         <div class="hp_mainbar hp_mbox1" >
         	<h2>如何注册成为维胜用户？</h2>
-        	<p>第一步：打开维胜首页(www.tzdr.com)，点击首页头部“注册”，跳转注册页面；</p>
-        	<img src="${ctx}/static/images/help/rg_01.jpg" width="600" style="margin-left:30px;">
+        	<p>第一步：打开维胜首页(www.vs.com)，点击首页头部“注册”，跳转注册页面；</p>
+        	<img src="${ctx}/static/images/help/vs-help-4.png" width="600" style="margin-left:30px;">
         	<p>第二步：填写手机号码、手机验证码、密码、确认密码、推广码等信息；</p>
-        	<img src="${ctx}/static/images/help/rg_02.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-5.png" width="600" style="margin-left:30px;">
         	<p>第三步：提交信息，注册成功。</p>
-        	<img src="${ctx}/static/images/help/rg_03.jpg" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-15.png" width="600" style="margin-left:30px;">
         </div>
         <div class="hp_mainbar hp_mbox2" style="display:none;">
         	<h2>如何登录维胜网站？</h2>
         	<p>方法一：在首页顶登录框，填写手机号和密码，点击登录；</p>
-        	<img src="${ctx}/static/images/help/lg_01.jpg" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-1.png" width="600" style="margin-left:30px;">
         	<p>方法二：</p>
         	<p>1.在首页顶部点击登录，跳转登录页；</p>
-        	<img src="${ctx}/static/images/help/lg_02.jpg" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-2.png" width="600" style="margin-left:30px;">
         	<p>2.填写手机号码、密码，点击登录；</p>
-        	<img src="${ctx}/static/images/help/lg_03.jpg" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-3.png" width="600" style="margin-left:30px;">
         </div>
         <div class="hp_mainbar hp_mbox3" style="display:none;">
         	<h2>如何完成实名认证？</h2>
-        	<p>第一步，进入个人中心—安全信息，实名认证模块，点击立即认证；</p>
-        	<img src="${ctx}/static/images/help/name_01.png" width="600" style="margin-left:30px;">
+        	<p>第一步，进入账户中心—安全信息，实名认证模块，点击立即认证；</p>
+        	<img src="${ctx}/static/images/help/vs-help-6.png" width="600" style="margin-left:30px;">
         	<p>第二步，填写真实实名、身份证号码提交，认证成功</p>
-        	<img src="${ctx}/static/images/help/name_02.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-7.png" width="600" style="margin-left:30px;">
         </div>
         <div class="hp_mainbar hp_mbox4" style="display:none;">
         	<h2>如何充值？</h2>
-        	<p>第一步，进入个人中心—账户充值，选择充值方式；</p>
-        	<img src="${ctx}/static/images/help/charge_01.jpg" width="600" style="margin-left:30px;">
+        	<p>第一步，进入账户中心—账户充值，选择充值方式；</p>
+        	<img src="${ctx}/static/images/help/vs-help-8.png" width="600" style="margin-left:30px;">
         	<p>第二步，填写充值金额和相关资料，提交；</p>
-        	<img src="${ctx}/static/images/help/charge_02.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-9.png" width="600" style="margin-left:30px;">
         	<p>第三步，完成支付，等待转账。</p>        	
         </div>
         <div class="hp_mainbar hp_mbox5" style="display:none;">
         	<h2>如何提现？</h2>
-        	<p>第一步，进入个人中心—我要提现，选择银行卡管理；添加银行卡，选择开户银行，填写银行卡号和确认卡号，点击保存；</p>
-        	<img src="${ctx}/static/images/help/wd_01.jpg" width="600" style="margin-left:30px;">
+        	<p>第一步，进入账户中心—我要提现，选择银行卡管理；添加银行卡，选择开户银行，填写银行卡号和确认卡号，点击保存；</p>
+        	<img src="${ctx}/static/images/help/vs-help-10.png" width="600" style="margin-left:30px;">
         	<p>第二步，设置提现密码：</p>
         	<p>a.进入个人中心—安全信息页面，在提块密码模块点击“立即设置”；</p>
-        	<img src="${ctx}/static/images/help/wd_02.jpg" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-11.png" width="600" style="margin-left:30px;">
         	<p>b.填写提现密码和确认提现密码。</p>
-        	<img src="${ctx}/static/images/help/wd_03.gif" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-12.png" style="margin-left:30px;">
         	<p>第三步，选择我要提现选项卡，填写提现金额、提现银行、提现密码，点击下一步；</p>
-        	<img src="${ctx}/static/images/help/wd_04.gif" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-13.png" width="600" style="margin-left:30px;">
        		<p>第四步，等待提现到账。</p>
        </div>            
        <div class="hp_mainbar hp_mbox6" >

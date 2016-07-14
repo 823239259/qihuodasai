@@ -230,7 +230,7 @@
 		          </tr>		          
 		          <tr>
 		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=9" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=7" target="_blank">查看交易说明</a></td>
+		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=7" target="_blank">查看交易说明</a></td>
 		          </tr>
 		        </table>
 		

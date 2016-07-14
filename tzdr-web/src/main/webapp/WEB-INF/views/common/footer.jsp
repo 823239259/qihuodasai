@@ -172,11 +172,11 @@ $(function () {
             if (i < num) {
                 Change(i);
             } else {
-                i = 0
+                i = 0;
                 Change(i);
             }
         }, 5000);
-    }
+    };
     HuanDeng(0);
     function Change(i) {
         $("#slide-box a").fadeOut(500);
@@ -184,7 +184,7 @@ $(function () {
         $("#ad-slider a").removeClass("on");
         $("#ad-slider a").eq(i).addClass("on");
         
-    }
+    };
     // 股市tab切换
 	var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
     left_xiangmu.each(function(){

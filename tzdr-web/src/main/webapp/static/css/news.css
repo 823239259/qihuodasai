@@ -335,7 +335,11 @@ a{outline:none;blr:expression(this.onFocus=this.blur());}
 	height: 48px;
 	line-height: 48px;
 	background: url(../images/news/cp_titlebg.gif) no-repeat;
+	margin: 20px 0;
 }
+.news_cp .xuanzhgevs {width: 20%; float: left; margin: 0 2%; height: 180px;}
+.news_cp .xuanzhgevs h4 {text-align: center;}
+.news_cp .xuanzhgevs li {height: auto; line-height: 28px;font-size: 13px;color: #666;}
 .news_cp h4 {
     width: 100%; height: 40px; line-height: 40px; font-size: 18px; font-family: "微软雅黑"; color: #333;
 }
@@ -351,8 +355,6 @@ a{outline:none;blr:expression(this.onFocus=this.blur());}
 	line-height: 28px;
 	font-size: 13px;
 	color: #666;
-	padding: 10px 8px;
-	margin-bottom: 20px;
 	text-indent: 2em;
 }
 .news_cp p b { font-weight: bold;}
