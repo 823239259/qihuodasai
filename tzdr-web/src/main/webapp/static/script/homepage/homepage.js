@@ -182,6 +182,7 @@ function deleteIFrame(iframeName) {
 // 由于一个 login ticket 只允许使用一次, 当每次登录需要调用该函数刷新 lt
 function flushLoginTicket() {
 	var _services = 'service=' + encodeURIComponent(basepath+"indexSSO");
+	alert(_services);
 	$.getScript(casServerLoginUrl + '?' + _services + '&get-lt=true&n=' + new Date().getTime(), function() {
 		// 将返回的 _loginTicket 变量设置到 input name="lt" 的value中。
 		$('#J_LoginTicket').val(_loginTicket);

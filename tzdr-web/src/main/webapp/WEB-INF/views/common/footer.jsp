@@ -1,4 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.umpay.api.log.SysOutLogger"%>
+<%@page import="com.tzdr.common.utils.ConfUtil"%>
 <!-- 公司简介 -->
 <%-- <div class="copyright">
     <div class="footer_ctn">
@@ -148,53 +150,8 @@
 	</div>	
 </div>
 <script type="text/javascript">
-$(function () {
-	// 是否登录
-	flushLoginTicket();
-	islogin();
-	
-	// banner切换
-	var num = $("#slide-box a").size();
-    var i = 0;
-    var theInt = null;
-    $("#ad-slider a").eq(0).addClass("on");
-    $("#slide-box a").eq(0).fadeIn(500);
-    $("#ad-slider a").each(function (i) {
-        $(this).click(function () {
-            Change(i);
-            HuanDeng(i);
-        });
-    });
-    HuanDeng = function (i) {
-        clearInterval(theInt);
-        theInt = setInterval(function () {
-            i++;
-            if (i < num) {
-                Change(i);
-            } else {
-                i = 0;
-                Change(i);
-            }
-        }, 5000);
-    };
-    HuanDeng(0);
-    function Change(i) {
-        $("#slide-box a").fadeOut(500);
-        $("#slide-box a").eq(i).fadeIn(500);
-        $("#ad-slider a").removeClass("on");
-        $("#ad-slider a").eq(i).addClass("on");
-        
-    };
-    // 股市tab切换
-	var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
-    left_xiangmu.each(function(){
-        left_xiangmu.click(function(){
-            left_xiangmu.removeClass('on');
-            $(this).addClass('on');
-        });
-    })
-	
-	/* // 加载最新公告
+ $(function () {
+	 // 加载最新公告
     var showNotice = false;
     var content="";
     $.ajax({
@@ -232,13 +189,13 @@ $(function () {
     	}
 	});
     /*二维码*/
-    $('.follow .erweima').hover(function() {
+     $('.follow .erweima').hover(function() {
         $('.erweima-wxtk').show();
     }, function() {
         $('.erweima-wxtk').hide();
     }); 
     
-});
+}); 
 	
 //检测公告
 function checkNotice() {
@@ -255,7 +212,7 @@ function closeNotice() {
 	$(".site-notice").remove();
 	// cookie记录公告已删除
 	addCookie("noticeid", $("#noticeid").val());
-}
+}*/
 
 function addCookie(objName, objValue){
 	if(objValue==""){
@@ -284,6 +241,6 @@ function getCookie(c_name) {
 		}
 	}
 	return ""
-} */
+} 
 </script><!-- <script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script> -->
 <span style="display: none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
