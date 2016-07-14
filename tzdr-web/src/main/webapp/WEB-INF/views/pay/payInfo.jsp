@@ -69,7 +69,7 @@ var tab=<%=tab%>;
 				<!--  
 				<li><a href="javascript:void(0);" class="on">快捷支付</a></li>
 				-->
-				<li><a href="javascript:void(0);">网银充值</a></li>
+				<!-- <li><a href="javascript:void(0);">网银充值</a></li> -->
 				<li><a href="javascript:void(0);">支付宝转账</a></li>
 				<li><a href="javascript:void(0);">银行转账</a></li>
 				<li><a href="javascript:void(0);">充值记录</a></li>
@@ -139,7 +139,7 @@ var tab=<%=tab%>;
 					 </form>
 				</div>
 				-->
-				<div class="subtab">
+				<%-- <div class="subtab">
 					<form id="netbank" action="" method="post" target="_blank"  >
 						
 						<div class="uc_olbank">
@@ -156,8 +156,8 @@ var tab=<%=tab%>;
 									</c:choose>
 								</c:forEach>
 						  </ul>
-						<%-- <div class="uc_olbankmore uc_oldown1" style="display:block;"><a href="javascript:void(0);"	class="uc_olbankdown"><img src="${ctx }/static/images/uc/pay_bank.gif"></a></div>
-						<div class="uc_olbankmore uc_olup1" style="display:none;"><a href="javascript:void(0);" class="uc_olbankup"><img src="${ctx }/static/images/uc/pay_bankup.gif"></a></div> --%>
+						<div class="uc_olbankmore uc_oldown1" style="display:block;"><a href="javascript:void(0);"	class="uc_olbankdown"><img src="${ctx }/static/images/uc/pay_bank.gif"></a></div>
+						<div class="uc_olbankmore uc_olup1" style="display:none;"><a href="javascript:void(0);" class="uc_olbankup"><img src="${ctx }/static/images/uc/pay_bankup.gif"></a></div>
 					</div>
 					<div class="uc_olmoney">
 						<h3 class="uc_pbtitle">填写充值金额</h3>
@@ -831,7 +831,7 @@ var tab=<%=tab%>;
 						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
 					</div>
 				</form>
-			</div>
+			</div> --%>
 			<div class="subtab">
 				<div id="alipay1" style="padding:20px 50px 50px;">
 					<!-- 支付宝转账 -->
@@ -877,9 +877,9 @@ var tab=<%=tab%>;
 							<li><label>支付宝账号：</label><input type="text"><a href="javascript:;" class="btn">立即绑定</a></li>
 						</ol>
 						<ol>
-							<li><label>收款人支付宝账户：</label><span>xinhong1@tzdr.com</span>
+							<li><label>收款人支付宝账户：</label><span>vs@vs.com</span>
 							<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">
-							<input type="hidden" id="popText" value="xinhong1@tzdr.com">
+							<input type="hidden" id="popText" value="vs@vs.com">
 							</a>
 	                        </li>			
 						</ol>
@@ -889,9 +889,9 @@ var tab=<%=tab%>;
 					</ul>
 					<%--
 					<ul class="uc_ap_info uc_ap_info1">
-						<li><label>收款人支付宝账户：</label><span>xinhong1@tzdr.com</span>
+						<li><label>收款人支付宝账户：</label><span>vs@vs.com</span>
 						<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">复制
-						<input type="hidden" id="popText" value="xinhong1@tzdr.com">
+						<input type="hidden" id="popText" value="vs@vs.com">
 						</a>
                         </li>
 						<li><label>账户名称：</label><span>上海信闳投资管理有限公司</span></li>
@@ -930,14 +930,22 @@ var tab=<%=tab%>;
 						<p class="uc_b_title">您可以通过网上银行或银行柜台向维胜转账（手续费最多一笔50元）</p>
 						<ul class="uc_b_list">
 							<ol class="first">
+								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_05.jpg"></li>
+								<li class="uc_b_l_info">
+									<span>帐号：<i>1289 0715 5110 501</i></span>
+									<span>户名：<i>成都盈透科技有限公司</i></span>
+									<span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
+								</li>
+							</ol>
+							<%-- <ol class="first">
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>3100 1518 0000 5003 1146</i></span>
 									<span>户名：<i>上海信闳投资管理有限公司</i></span>
 									<span>开户行：<i>中国建设银行上海黄浦支行</i></span>
 								</li>
-							</ol>
-							<ol>
+							</ol> --%>
+							<%-- <ol>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>1001 2689 1901 6802 706</i></span>
@@ -960,15 +968,16 @@ var tab=<%=tab%>;
 									<span>户名：<i>上海信闳投资管理有限公司</i></span>
 									<span>开户行：<i>中国银行上海市大世界支行</i></span>
 								</li>
-							</ol>
+							</ol> --%>
 						</ul>
 						<!-- 弹出框 -->
 				<div class="uc_floatlayer">
 					<div class="uc_bc_option uc_b_bank" style="display:none;">
-						<a data-id="ccb" href="javascript:void(0)">中国建设银行</a>
+						<a data-id="icbc" href="javascript:void(0)">中国招商银行</a>
+						<!-- <a data-id="ccb" href="javascript:void(0)">中国建设银行</a>
 						<a data-id="icbc" href="javascript:void(0)">中国工商银行</a>
 						<a data-id="abc" href="javascript:void(0)">中国农业银行</a>
-						<a data-id="boc" href="javascript:void(0)">中国银行</a>
+						<a data-id="boc" href="javascript:void(0)">中国银行</a> -->
 					</div>
 
 				</div>
@@ -992,10 +1001,10 @@ var tab=<%=tab%>;
 					</div>
 
 						<div class="uc_b_promt"><i>注意事项</i></div>
-						<p class="uc_b_promtfont" style="display:none;">1、转账时请增加转账零头（如100.85）</br>2、转账备注中请务必填写<i>注册手机号和注册用户名</i>，方便我们确认是您的汇款</br>3、转账成功后，<i>请拨打客服热线400-020-0158，或将回单发给QQ客服，</i>以便我们及时帮您处理</p>
+						<p class="uc_b_promtfont" style="display:none;">1、转账时请增加转账零头（如100.85）</br>2、转账备注中请务必填写<i>注册手机号和注册用户名</i>，方便我们确认是您的汇款</br>3、转账成功后，<i>请拨打客服热线400-852-8008，或将回单发给QQ客服，</i>以便我们及时帮您处理</p>
 						<p class="uc_b_promtfont">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
 						<div class="uc_paybtn">
-						<a href="javascript:void(0)" id="BizQQWPA" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=4000200158&site=qq&menu=yes','QQ在线','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');">
+						<a href="javascript:void(0)" id="BizQQWPA" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=4008528008&site=qq&menu=yes','QQ在线','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');">
         				发给QQ客服</a></div>
 					</div>
 					<div class="uc_banktime">

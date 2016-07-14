@@ -587,7 +587,7 @@
 	<!-- common js -->
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
-		var basepath = "<%=basePath%>" + "/";
+		 var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
 	</script>
  <script src="${ctx }/static/script/esl.js"></script>
@@ -890,7 +890,7 @@
 <!-- footer -->
 <%@include file="../common/footer.jsp"%>
 <!-- custom js -->
-<script src="static/script/homepage/homepage.js?version=20151127"></script>
+<!-- <script src="static/script/homepage/homepage.js?version=20151127"></script> -->
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
 <script type="text/javascript">
@@ -1248,16 +1248,17 @@
 		   			 dateType:"json",
 		   			 success:function(data){
 		   				 var resultData = data.data;
-		   				 var addKData = [];
+		   				 /* var addKData = []; */
 		   					$.each(resultData,function (i,item){
+		   						var j = rawDataLength + i;
 		   						var openPrice = item.OpenPrice;
 		   						var closePrice = item.LastPrice;
 		   						var chaPrice = closePrice - openPrice;
 		   						var sgData = [item.DateTime,openPrice,closePrice,chaPrice,"",item.LowPrice,item.HighPrice,"","","-"];
-		   						addKData[i] = sgData;
+		   						rawData[j] = sgData;
 		   					});
 		   					//追加到容器中
-		   					var option = setOption(addKData);
+		   					var option = setOption(rawData);
 		   					if(myChart != null){
 			   					myChart.setOption(option);
 		   					}
@@ -1449,11 +1450,11 @@
 						 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
 						 contractData[i] = {'cname':_data.CommodityName,'Cmno':_data.CommodityNo,'doSize':doSize};
 						 $(".left_x"+i+"").bind("click",function(){
+							 rawData=[];
 							 loadK();
 							 var obj = $(this);
 							 var da = obj.attr("data");
 							 if(da != null){
-								  rawData=[];
 							 	  var daArray = da.split("&");
 							 	  var commod = daArray[0];
 							 	  var contract = daArray[1];
@@ -1541,7 +1542,7 @@
 							 }
 							 $(".left_x"+i+"").attr("data",""+_data.CommodityNo+"&"+_data.ContractNo+"");
 							 $(".left_x"+i+" .right").text(_data_.cname);
-							 $(".qlast"+i+"").text(jj  + qlastPrice + " " + bs);
+							 $(".qlast"+i+"").text(qlastPrice + " " + bs);
 							 $(".qchange"+i+"").text(jj + qChangeValue);
 							 $(".scal"+i+"").text(jj + scal + "%");
 							 $(".qlast"+i+"").css("color",color);
