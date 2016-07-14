@@ -578,7 +578,7 @@
 	<link rel="stylesheet" href="${ctx}/static/css/home.css?v=${v}"> --%>
 	<link rel="stylesheet" href="${ctx }/static/css/new_index.css">
     <script src="${ctx }/static/script/jquery-1.8.3.js"></script>
-   
+    <script src="${ctx }/static/script/homepage/gundongtiao.js"></script>
     
 	<!-- common css -->
 	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
@@ -596,6 +596,11 @@
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
 	.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+	.left_hidden{float: left; width: 195px; }
+	#left_xiangqing{background: #333; float: left;height: 508px;  width: 195px; position: relative;overflow: hidden;}
+    #left_xiangqing .w_content .left_hidden{float: left; width: 195px;}
+    #left_xiangqing .scroll_y{background: #fc3;position: absolute; right: 0;width: 5px;}
+    #left_xiangqing .scroll_ymove{background: #292929; height: 508px;position: absolute; right: 0;width: 5px;z-index: 2;}
 </style>
 </head>
 
@@ -739,11 +744,21 @@
             </div>
         </div>
         <div class="w_center_xiangqing">
-            <div class="left_xiangqing">
+            <div class="left_xiangqing" id="left_xiangqing">
                 <div class="left_hidden">
                    
+                   
                 </div>
+                <div class="scroll_ymove">
+        			<div class="scroll_y" unorbind="unbind"></div>
+    			</div>
+		    <!--<div class="scroll_xmove">
+		        	<div class="scroll_x" unorbind="unbind"></div>
+		    	</div>-->
+    			<input type="hidden" id="whichscro">
             </div>
+            <div style="width: 5px; height: 510px; background: #292929; float: left; position: relative; right: 5px;
+            "></div>
             <div class="right_xiangqing">
                 <div id="main" style="height:500px; width: 800px;"></div>
             </div>
@@ -872,7 +887,6 @@
         </p>
     </div>
 </div>
-<input type="hidden" id = "dqCommodNo"/>
 <!-- footer -->
 <%@include file="../common/footer.jsp"%>
 <!-- custom js -->
@@ -1559,5 +1573,16 @@
 	    socket.onerror = function(evt){
 		   
 	    }
+	    
+	    $(".left_hidden").mouseover(function(){
+	        $("#whichscro").val($.trim($(this).parent().attr("id")))
+	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
+	            var scrollfathter1=document.getElementById($.trim($(this).parent().attr("id")));
+	            scrollfathter1.addEventListener("touchstart", touchStart, false);
+	            scrollfathter1.addEventListener("touchmove", touchMove, false);
+	            scrollfathter1.addEventListener("touchend", touchEnd, false);
+	        }
+	    });
+	    scroll_y("left_xiangqing","left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely","")
 </script>
 </html>

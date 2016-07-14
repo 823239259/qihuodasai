@@ -19,7 +19,7 @@
 </script>
 	<!--个人中心导航 -->
 	<div class="uc_sidebar">
-		<h2 id="oAccount" style="cursor: pointer;"><a href="#">操盘账户<i>></i></a></h2>
+		<h2 id="oAccount" style="cursor: pointer;"><a href="#">账户中心<i>></i></a></h2>
 		<%-- <div class="uc_nav">
 			<!-- <ul> -->
 				<li><a id="together" href="${ctx}/usertogether/list">股票合买 </a><i>></i></li>
