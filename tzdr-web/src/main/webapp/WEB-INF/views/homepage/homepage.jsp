@@ -1528,6 +1528,8 @@
 							 var qOpenPrice = (parseFloat(_data.QOpenPrice)).toFixed(size);
 							 var scal = (parseFloat(_data.QChangeRate)).toFixed(size);
 							 var qChangeValue = (parseFloat(_data.QChangeValue)).toFixed(size);
+							 var qBidPrice1 = (parseFloat(_data.QBidPrice1)).toFixed(size);
+							 var qAskQty1 =  (parseFloat(_data.QAskQty1)).toFixed(size);
 							 var bs = "↑";
 							 var jj = "+";
 							 var color = " #ff5500";
@@ -1546,9 +1548,9 @@
 							 $(".scal"+i+"").css("color",color);
 							 var CNo = $("#dqCommodNo").val();
 							 if(CNo == _data.CommodityNo){
-								 $(".zs").text("昨收:"+qpreCloseingPrice);	
-								 $(".fd").text("每日幅度:"+qLowPrice+' - '+qHighPrice);
-								 $(".jk").text("今开:"+qOpenPrice);
+								 $(".zs").text("最新买价:"+qBidPrice1);	
+								 $(".fd").text("最新价:"+qlastPrice);
+								 $(".jk").text("最新卖价:"+qAskQty1);
 								 $(".gxsj").text("更新时间:"+_data.TimeStamp);
 							 }
 							 if(loadInitCommod != null && loadInitCommod == _data.CommodityNo && loadCount == 0){
