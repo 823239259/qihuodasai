@@ -30,7 +30,8 @@
     <div class="news_mainbar">
         <h2>公司地址</h2>
         <div class="news_con">
-             <div class="news_map"><img src="${ctx }/static/images/help/vs-help-26.png" style="width: 703px;height: 274px;"></div>   
+             <div class="news_map"><img src="${ctx }/static/images/help/vs-help-26.png" style="width: 703px;height: 274px;"></div> 
+             <h3>维胜网</h3>  
              <h3>成都盈透科技有限公司</h3>
              <h3>四川省成都市武侯区世纪城南路599号软件园D区</h3>
              <h4>客户服务</h4>

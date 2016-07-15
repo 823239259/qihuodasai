@@ -809,14 +809,14 @@ var tab="<%=tab%>";
         <div class="hp_mainbar hp_mbox1" style="display:none;">
             <h1 style="border-bottom:1px solid #d1d1d1;">易盛极星客户端说明<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
             <div class="hp_tts">               
-                <h6 style="font-weight:bold;color:#fc3;margin-bottom: 40px;">1, 启动易盛极星客户端，弹出登录窗口，在登录窗口的‘行情服务器’，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改</h6>   
+                <h6 style="font-weight:bold;color:#fc3;margin-bottom: 40px;">1, 启动易盛极星客户端，在弹出登录窗口，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改</h6>   
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-27.png"><a href="#"></a></p>  
                 <h6 style="font-weight:bold;color:#fc3;">2、在交易服务器窗口，输入交易账号和密码，勾选同步登录行情，点击登录</h6>  
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-28.png"><a href=""></a></p> 
                 <h6 style="font-weight:bold;color:#fc3;">3, 登录成功后，在交易界面直接输入合约代码或者在外盘纵览下选择自己需要的期货合约，直接定位该合约的行情数据</h6> 
                 <p style="color:red;font-size: 14px; margin-top: 40px;">注：行情信息属于公共信息，当行情波动大时，各个行情软件都可能会出现不能及时刷新等问题，具体成交点位，以交易软件成交为准。</p>     
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-29.png"><a href=""></a></p>            
-            	<h6 style="font-weight:bold;color:#fc3; margin-top:10px;margin-bottom: 50px;">4、4、在软件横向下单区域，选择需要交易合约进行『买入』或『卖出』，开始国际期货操盘； 或者在行情列表双击需要交易合约所在行，对应合约信息将自动添加到横向下单板块</h6>  
+            	<h6 style="font-weight:bold;color:#fc3; margin-top:10px;margin-bottom: 50px;">4、在软件横向下单区域，选择需要交易合约进行『买入』或『卖出』，开始国际期货操盘； 或者在行情列表双击需要交易合约所在行，对应合约信息将自动添加到横向下单板块</h6>  
             	<p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-30.png"><a href=""></a></p>
             </div>
            <!--  <ul class="hp_tts_down">
@@ -906,48 +906,48 @@ var tab="<%=tab%>";
         <div class="hp_mainbar hp_mbox1" >
         	<h2>如何注册成为维胜用户？</h2>
         	<p>第一步：打开维胜首页(www.vs.com)，点击首页头部“注册”，跳转注册页面；</p>
-        	<img src="${ctx}/static/images/help/vs-help-4.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-4.png" width="677" style="margin-left:30px;">
         	<p>第二步：填写手机号码、手机验证码、密码、确认密码、推广码等信息；</p>
-        	<img src="${ctx}/static/images/help/vs-help-5.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-5.png" width="677" style="margin-left:30px;">
         	<p>第三步：提交信息，注册成功。</p>
-        	<img src="${ctx}/static/images/help/vs-help-15.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-15.png" width="677" style="margin-left:30px;">
         </div>
         <div class="hp_mainbar hp_mbox2" style="display:none;">
         	<h2>如何登录维胜网站？</h2>
         	<p>方法一：在首页顶登录框，填写手机号和密码，点击登录；</p>
-        	<img src="${ctx}/static/images/help/vs-help-1.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-1.png" width="677" style="margin-left:30px;">
         	<p>方法二：</p>
         	<p>1.在首页顶部点击登录，跳转登录页；</p>
-        	<img src="${ctx}/static/images/help/vs-help-2.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-2.png" width="677" style="margin-left:30px;">
         	<p>2.填写手机号码、密码，点击登录；</p>
-        	<img src="${ctx}/static/images/help/vs-help-3.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-3.png" width="677" style="margin-left:30px;">
         </div>
         <div class="hp_mainbar hp_mbox3" style="display:none;">
         	<h2>如何完成实名认证？</h2>
         	<p>第一步，进入账户中心—安全信息，实名认证模块，点击立即认证；</p>
-        	<img src="${ctx}/static/images/help/vs-help-6.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-6.png" width="677" style="margin-left:30px;">
         	<p>第二步，填写真实实名、身份证号码提交，认证成功</p>
-        	<img src="${ctx}/static/images/help/vs-help-7.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-7.png" width="677" style="margin-left:30px;">
         </div>
         <div class="hp_mainbar hp_mbox4" style="display:none;">
         	<h2>如何充值？</h2>
         	<p>第一步，进入账户中心—账户充值，选择充值方式；</p>
-        	<img src="${ctx}/static/images/help/vs-help-8.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-8.png" width="677" style="margin-left:30px;">
         	<p>第二步，填写充值金额和相关资料，提交；</p>
-        	<img src="${ctx}/static/images/help/vs-help-9.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-9.png" width="677" style="margin-left:30px;">
         	<p>第三步，完成支付，等待转账。</p>        	
         </div>
         <div class="hp_mainbar hp_mbox5" style="display:none;">
         	<h2>如何提现？</h2>
         	<p>第一步，进入账户中心—我要提现，选择银行卡管理；添加银行卡，选择开户银行，填写银行卡号和确认卡号，点击保存；</p>
-        	<img src="${ctx}/static/images/help/vs-help-10.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-10.png" width="677" style="margin-left:30px;">
         	<p>第二步，设置提现密码：</p>
         	<p>a.进入个人中心—安全信息页面，在提块密码模块点击“立即设置”；</p>
-        	<img src="${ctx}/static/images/help/vs-help-11.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-11.png" width="677" style="margin-left:30px;">
         	<p>b.填写提现密码和确认提现密码。</p>
         	<img src="${ctx}/static/images/help/vs-help-12.png" style="margin-left:30px;">
         	<p>第三步，选择我要提现选项卡，填写提现金额、提现银行、提现密码，点击下一步；</p>
-        	<img src="${ctx}/static/images/help/vs-help-13.png" width="600" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-13.png" width="677" style="margin-left:30px;">
        		<p>第四步，等待提现到账。</p>
        </div>            
        <div class="hp_mainbar hp_mbox6" >

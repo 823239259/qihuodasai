@@ -577,6 +577,7 @@
 	<!-- custom css -->
 	<link rel="stylesheet" href="${ctx}/static/css/home.css?v=${v}"> --%>
 	<link rel="stylesheet" href="${ctx }/static/css/new_index.css">
+	<link href="${ctx }/static/css/trade.css?v=20151127" rel="stylesheet" type="text/css" />
     <script src="${ctx }/static/script/jquery-1.8.3.js"></script>
     <script src="${ctx }/static/script/homepage/gundongtiao.js"></script>
     

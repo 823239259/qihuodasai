@@ -910,7 +910,7 @@ var tab=<%=tab%>;
 							<div class="uc_ap_aplink">
 								<div class="uc_ap_aplink">
 									<span><a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank"><img src="${ctx}/static/images/uc/alipay.gif"></a></span>
-									<a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank" class="uc_ap_apbtn">去支付宝网站转账>></a>
+									<a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank" class="uc_ap_apbtn">去支付宝网站转账</a>
 									<i>*手续费将由支付宝收取，具体请咨询支付宝</i>
 								</div>
 								
