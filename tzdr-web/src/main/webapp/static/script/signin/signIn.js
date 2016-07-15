@@ -390,7 +390,7 @@ $(document).ready(function(){
 							$("#loginUsername").val(mobile);
 							$("#loginPassword").val(password);
 							$("#loginForm").submit();*/
-							window.location.href = window.location.host + "/signinsucess";
+							window.location.href = "/signinsucess";
 							/*
 							//达人论股系统登录
 							discussStockLogin(data.data.key,function(){

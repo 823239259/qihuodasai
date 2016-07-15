@@ -647,7 +647,7 @@
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
         <c:forEach var="b" items="${banners }" varStatus="status">
-        	<a href="javascript: void(0);" title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>></a>
+        	<a  title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>></a>
         </c:forEach>
     </div>
     <div class="slide_box" id="slide-box">
@@ -739,8 +739,8 @@
                 <p>实时行情</p>
             </div>
             <div class="right-gengxin">
-                <p><span class = "zs">昨收：1351.07</span><span class = "fd">每日幅度：1338.63 - 1352.33</span></p>
-                <p><span class = "jk">今开：1351.07</span><span class = "gxsj">更新时间：2016/07/05 16:58</span></p>
+                <p><span class = "jk"></span><span class = "fd"></span></p>
+                <p><span class = "zs"></span><span class = "gxsj"></span></p>
                 <a href = "#" id = "mainSqcp" target="_blank">申请操盘</a>
             </div>
         </div>
