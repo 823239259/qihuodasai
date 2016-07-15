@@ -65,7 +65,7 @@
                 <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
                 <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
             </ul>
-            <ul class="follow">
+           <%--  <ul class="follow">
                 <li>关注我们：</li>
                 <li><a href="http://www.weibo.com/shxhtzdr" target="_blank" class="weibo"></a></li>
                 <li class="erweima" style="position: relative;">
@@ -74,7 +74,7 @@
 		                <img src="${ctx}/static/images/common-new/erweima.png">
 		            </div>
                 </li>
-            </ul>
+            </ul> --%>
         </div>
         <div class="copyright_contact">
             <h3>客服热线</h3>
@@ -108,9 +108,9 @@
             <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
         </div>
         <div class="cp_cppic">
-            <a href="https://credit.szfw.org/CX20160302013752300118.html" target="_blank"><img src="${ctx}/static/images/image/shiming.png"></a>
-            <a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com" target="_blank"><img src="${ctx}/static/images/image/anquan.png"></a>
-            <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname" target="_blank"><img src="${ctx}/static/images/image/chengxing.png"></a>
+            <img src="${ctx}/static/images/image/shiming.png">
+            <img src="${ctx}/static/images/image/anquan.png">
+            <img src="${ctx}/static/images/image/chengxing.png">
         </div>
     </div>
 </div>
@@ -151,6 +151,7 @@
 </div>
 <script type="text/javascript">
  $(function () {
+	 $(".site-notice").remove();
 	 // 加载最新公告
     var showNotice = false;
     var content="";
@@ -165,12 +166,12 @@
     			content = $(this).attr("content");
     			content=content.replace(reg1,"<");
     			content=content.replace(reg2,">");
-    			$('.notice-content').html(content);
-    			$('#noticeid').val($(this).attr("version"));
-    		    // 检查公告
-    		    checkNotice();
-    		    showNotice = true;
-    		})
+    			$('.notice-content').html();
+   				$('#noticeid').val($(this).attr("version"));
+   			 	// 检查公告
+   	   		    checkNotice();
+   	   		    showNotice = true;
+    		});
     	},dataType:'json'
     })
     
@@ -201,7 +202,7 @@
 function checkNotice() {
 	var noticeid = getCookie("noticeid");
 	var loaclNoticeid = $("#noticeid").val();
-	if(noticeid === loaclNoticeid) {
+	if(noticeid === loaclNoticeid && loaclNoticeid != null && loaclNoticeid.length> 0) {
 		$(".site-notice").remove();
 	} else {
 		$(".notice-fixed").fadeIn("slow");
