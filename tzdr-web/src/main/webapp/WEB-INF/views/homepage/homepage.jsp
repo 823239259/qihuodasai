@@ -888,6 +888,7 @@
         </p>
     </div>
 </div>
+<input type= "hidden" id = "dqCommodNo"/>
 <!-- footer -->
 <%@include file="../common/footer.jsp"%>
 <!-- custom js -->
