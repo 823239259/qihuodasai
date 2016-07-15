@@ -56,7 +56,6 @@ public class AuthenticationFilter implements Filter {
 			 cookieq.setPath("/");
 			((HttpServletResponse)resp).addCookie(cookieq);
 		}
-		System.out.println(request.getHeader("referer"));
 		String remoteUserName = request.getRemoteUser();
 		if(StringUtils.isNotEmpty(remoteUserName) && WebUtil.sessionFailure(request)) { // SSO已登录 但 当前系统未创建session
 			WUser wUser = wUserService.getWUserByMobile(remoteUserName);
