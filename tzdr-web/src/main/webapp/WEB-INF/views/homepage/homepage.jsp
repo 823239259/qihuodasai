@@ -1415,7 +1415,7 @@
 	    	socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 	    }
 	    
-	    var url = "ws://192.168.0.213:9002";
+	    var url = "ws://socket.dktai.com:9002";
 	    var socket = new WebSocket(url);
 	    socket.onopen = function(evt){
 			sendMessage('Login','{"serName":"13677622344","PassWord":"a123456"}');
