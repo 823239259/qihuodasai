@@ -15,26 +15,42 @@ function scrollFunc(e,father){
         var t1=document.getElementById("wheelDelta");
         var t2=document.getElementById("detail");
         if(e.wheelDelta){//IE/Opera/Chrome
-            var thisvalue=parseInt(e.wheelDelta);
-            if(thisvalue>=0){
-                thisvalue=-parseInt(e.wheelDelta);
-                scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue)
-                t1.value=e.wheelDelta;
-            }else{
-                thisvalue=-parseInt(e.wheelDelta);
-                scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue)
-                t1.value=e.wheelDelta;
-            }
-        }else if(e.detail){//Firefox
-            var thisvalue=parseInt(e.detail);
-            if(thisvalue>=0){
-                scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue)
-                t2.value=e.detail;
-            }else{
-                scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue)
-                t2.value=e.detail;
-            }
-        }
+			var thisvalue=parseInt(e.wheelDelta);
+			if(thisvalue>=0){
+				thisvalue=-parseInt(e.wheelDelta);
+				scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue);
+				if(!e.wheelDelta){
+					t1.value=e.wheelDelta;
+				}else{
+					
+				}
+			}else{
+				thisvalue=-parseInt(e.wheelDelta);
+				scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue);
+				if(!e.wheelDelta){
+					t2.value=e.wheelDelta;
+				}else{
+					
+				}
+			}
+		}else if(e.detail){//Firefox
+			var thisvalue=parseInt(e.detail);
+			if(thisvalue>=0){
+				scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue)
+				if(!e.detail){
+					t1.value=e.detail;
+				}else{
+					
+				}
+			}else{
+				scroll_y(father,"left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely",thisvalue)
+				if(!e.detail){
+					t2.value=e.detail;
+				}else{
+					
+				}
+			}
+		}
     }
 }
 /*注册事件web端*/
