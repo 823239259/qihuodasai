@@ -781,7 +781,7 @@
                 <p><i class="gou"></i>保证金交易 以小博大</p>
                 <p><i class="gou"></i>白天晚上都可以交易</p>
                 <p><i class="gou"></i>极速开户 T+0结算到账</p>
-                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=5" target="_blank">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=8" target="_blank">实盘系统下载</a></p>
+                <p style="padding-left: 0;"><a href="${ctx}/help?tab=rule&leftMenu=5" target="_blank">操盘细则</a><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">实盘系统下载</a></p>
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
