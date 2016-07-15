@@ -15,10 +15,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<%@ include file="../common/commonkeyword.jsp"%> 
 	<link rel="stylesheet" href="${ctx}/static/css/regist.css?version=20150507">
-	<script language="javascript" src="${ctx}/static/script/signin/signInSucess.js?version=20150618"></script>
+	<script language="javascript" src="${ctx}/static/script/signin/signInSucess.js?version=20150618"></script> 
 </head>
 <body>
-<%@ include file="../common/homeheader.jsp"%>
+<%@ include file="../common/header.jsp"%>
 <input type="hidden" id="type" name="type" value="${type}"/>
 <input type="hidden" id="backUrl" value="${backUrl}"/>
 <input type="hidden" id="source" value="${source}"/>
@@ -49,7 +49,7 @@
         <p><a href="${ctx}" class="rgs_backhome">返回首页</a></p>
     </div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<%@ include file="../common/footer.jsp"%>
 <script>
 !function(w,d,e){
 var _orderno='<%=username%>';  //替换此处!;
