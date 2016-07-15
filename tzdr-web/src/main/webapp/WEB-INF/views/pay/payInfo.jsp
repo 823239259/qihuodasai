@@ -973,7 +973,7 @@ var tab=<%=tab%>;
 						<!-- 弹出框 -->
 				<div class="uc_floatlayer">
 					<div class="uc_bc_option uc_b_bank" style="display:none;">
-						<a data-id="icbc" href="javascript:void(0)">中国招商银行</a>
+						<a data-id="cmb" href="javascript:void(0)">中国招商银行</a>
 						<!-- <a data-id="ccb" href="javascript:void(0)">中国建设银行</a>
 						<a data-id="icbc" href="javascript:void(0)">中国工商银行</a>
 						<a data-id="abc" href="javascript:void(0)">中国农业银行</a>

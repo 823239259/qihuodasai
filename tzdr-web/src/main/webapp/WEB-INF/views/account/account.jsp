@@ -219,7 +219,7 @@
 					</ul>
 				</div>
 				<%-- 股票操盘 --%>
-				<div class="uc_sl_siflist uc_sl_siflist2" style="display:block;">
+				<%-- <div class="uc_sl_siflist uc_sl_siflist2" style="display:block;">
 					<div class="uc_sl_sifmoney">
 						<ul class="uc_sl_moneylist uc_sl_moneylist2">
 							<li>
@@ -284,7 +284,7 @@
 							</li>
 						</ul>	
 					</div>		
-				</div>
+				</div> --%>
 			</div>
 			<%--< div class="uc_siflist">
 				<!-- 股指期货 -->
