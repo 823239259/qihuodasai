@@ -170,10 +170,10 @@
 		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/future/day_pay</url-pattern>
 	</filter-mapping>	
-	<filter-mapping>
+	<!-- <filter-mapping>
 		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/signinsucess</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/hsiSpread/success</url-pattern>

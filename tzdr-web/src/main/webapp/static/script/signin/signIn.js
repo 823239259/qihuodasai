@@ -334,7 +334,6 @@ $(document).ready(function(){
 		    cancel: true //为true等价于function(){}
 		});
 		return;*/
-		
 		var $this = $(this);
 		var mobile =  $.trim($("#mobile").val());
 		var source = $.trim($("#source").val());
@@ -378,7 +377,7 @@ $(document).ready(function(){
 						var backData=$.trim($("#backData").val());
 						var source = $.trim($("#source").val());
 						
-						alert("恭喜，注册成功！");	
+					/*	alert("恭喜，注册成功！");	*/
 						
 						if(backData && source == 3){
 							var form = $("<form action='"+backData+"' method='post'>");
@@ -386,11 +385,12 @@ $(document).ready(function(){
 							form.append("<input type=hidden name=userName value='" + data.data.userName + "'/></form>");
 							form.appendTo(document.body).submit();
 						}else{
-							$('#backData').val(data.data.from);
+							/*$('#backData').val(data.data.from);
 							//隐藏向CAS服务端提交登录的用户名和密码
 							$("#loginUsername").val(mobile);
 							$("#loginPassword").val(password);
-							$("#loginForm").submit();
+							$("#loginForm").submit();*/
+							window.location.href = window.location.host + "/signinsucess";
 							/*
 							//达人论股系统登录
 							discussStockLogin(data.data.key,function(){

@@ -816,7 +816,7 @@
                 <h3>【富时A50】</h3>
                 <h4><i>39</i>元/单边</h4>
                 <ul>
-                    <li>A股精准风向标 免庄家操控</li>
+                    <li>• A股精准风向标 免庄家操控</li>
                     <li>• 门槛低 超短线 交易灵活</li>
                     <li>• 国际版“IF指数” 操盘人数多</li>
                     <li>• 国际版“IF指数” 操盘人数多</li>
@@ -890,7 +890,7 @@
 <!-- footer -->
 <%@include file="../common/footer.jsp"%>
 <!-- custom js -->
-<!-- <script src="static/script/homepage/homepage.js?version=20151127"></script> -->
+<script src="static/script/homepage/homepage.js?version=20151127"></script>
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
 <script type="text/javascript">

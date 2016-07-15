@@ -42,7 +42,7 @@
 			<form:form method="post" id="fm1" commandName="${commandName}"
 				htmlEscape="true" cssClass="form">
 				<div class="ui-logon login" id="login">
-					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${ctx}/signin">立即注册</a></p></h3>
+					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget}/signin">立即注册</a></p></h3>
 					<input type="hidden" name="lt" value="${loginTicket}" /> <input
 						type="hidden" name="execution" value="${flowExecutionKey}" /> <input
 						type="hidden" name="_eventId" value="submit" />
