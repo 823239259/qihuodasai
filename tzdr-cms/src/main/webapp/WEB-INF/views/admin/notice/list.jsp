@@ -93,7 +93,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 	}
 	
 	var html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=4&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
-	if($title.indexOf("配股宝")>-1){
+	if($title.indexOf("维胜")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=8&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
 	}
 	$('#addWin').window({collapsible:false,minimizable:false,maximizable:maximizableValue,width:width,height:height,title:title,loadingMessage:'正在加载,请等待......',iconCls:'icon-edit',closed:true,modal:true,content:html});
