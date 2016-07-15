@@ -931,11 +931,18 @@ var tab="<%=tab%>";
         </div>
         <div class="hp_mainbar hp_mbox4" style="display:none;">
         	<h2>如何充值？</h2>
-        	<p>第一步，进入账户中心—账户充值，选择充值方式；</p>
-        	<img src="${ctx}/static/images/help/vs-help-8.png" width="677" style="margin-left:30px;">
-        	<p>第二步，填写充值金额和相关资料，提交；</p>
-        	<img src="${ctx}/static/images/help/vs-help-9.png" width="677" style="margin-left:30px;">
-        	<p>第三步，完成支付，等待转账。</p>        	
+        	<p style="font-weight: bolder; font-size: 14px;">支付宝充值方式</p>
+        	<p>第一步, 进入账户充值-支付宝转账页面，输入支付宝账号，点击立即绑定</p>
+        	<img src="${ctx}/static/images/help/vs-help-31.png" width="677" style="margin-left:30px;">
+        	<p>第二步, 绑定支付宝账号后，有两种转账方式：
+       1、手机支付宝扫描二维码方式转账   
+       2、点击‘去支付宝网站转账’链接在支付宝网站进行转账</p>
+        	<img src="${ctx}/static/images/help/vs-help-32.png" width="677" style="margin-left:30px;">
+        	<p>第三步, 完成支付，等待转账</p>
+        	<p style="font-weight: bolder; font-size: 14px;">银行转账方式</p>
+        	<p>第一步, 进入账户充值-银行转账页面，选择转账银行并输入转账金额和流水号，点击提交</p>
+        	<img src="${ctx}/static/images/help/vs-help-33.png" width="677" style="margin-left:30px;">
+        	<p>第二步, 完成支付，等待转账。</p>        	
         </div>
         <div class="hp_mainbar hp_mbox5" style="display:none;">
         	<h2>如何提现？</h2>
