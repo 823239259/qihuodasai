@@ -936,11 +936,11 @@ var tab="<%=tab%>";
         	<p>第二步, 绑定支付宝账号后，有两种转账方式：
        1、手机支付宝扫描二维码方式转账   
        2、点击‘去支付宝网站转账’链接在支付宝网站进行转账</p>
-        	<img src="${ctx}/static/images/help/vs-help-32.png" width="677" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-37.png" width="677" style="margin-left:30px;">
         	<p>第三步, 完成支付，等待转账</p>
         	<p style="font-weight: bolder; font-size: 14px;">银行转账方式</p>
         	<p>第一步, 进入账户充值-银行转账页面，选择转账银行并输入转账金额和流水号，点击提交</p>
-        	<img src="${ctx}/static/images/help/vs-help-33.png" width="677" style="margin-left:30px;">
+        	<img src="${ctx}/static/images/help/vs-help-38.png" width="677" style="margin-left:30px;">
         	<p>第二步, 完成支付，等待转账。</p>        	
         </div>
         <div class="hp_mainbar hp_mbox5" style="display:none;">
