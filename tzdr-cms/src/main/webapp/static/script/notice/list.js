@@ -69,7 +69,7 @@ function updateStatus(status) {
 	var $noticeGrid ="";
 	
 	var title=$("#noticeTab").tabs('getSelected').panel('options').title;
-			if("维胜公告"==title){
+			if("配股宝公告"==title){
 				$noticeGrid = $("#" + viewData.dataGridId_pgb);
 			}else if("维胜公告"==title){
 				$noticeGrid = $("#" + viewData.dataGridId);
@@ -89,7 +89,7 @@ function updateStatus(status) {
 			if (data.success) {
 				row.status = status;
 			
-						if("维胜公告"==title){
+						if("配股宝公告"==title){
 							$("#" + viewData.dataGridId_pgb).datagrid('updateRow', {
 								index : rowIndex,
 								row : row
@@ -122,7 +122,7 @@ $(function() {
 	$("#noticeTab").tabs({
 		border:false,
 	    onSelect:function(title){
-			if("维胜公告"==title){
+			if("配股宝公告"==title){
 				peigubaoNotice();
 			}
 	    }
