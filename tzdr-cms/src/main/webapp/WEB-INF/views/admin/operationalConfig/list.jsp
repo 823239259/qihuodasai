@@ -191,7 +191,7 @@
 		</div>
 		
 		<!-- 维胜banner -->
-		<div title="维胜banner" data-options="tools:'#p-tools'" style="padding:20px;">
+		<%-- <div title="维胜banner" data-options="tools:'#p-tools'" style="padding:20px;">
 		<div id="tb_pgb" style="padding: 5px; height: auto">
 			<div>
 				<table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -223,7 +223,7 @@
 			</div>
 		</div>
 		<table id="edatagrid_pgb"></table>
-		</div>
+		</div> --%>
 
 		<!-- 维胜app-banner -->
 		<div title="维胜APP-banner" data-options="tools:'#p-tools'" style="padding:20px;">
@@ -330,7 +330,7 @@ openAddIframeWin:function(width,height,title,modelName,TabsId){
 	}
 	var html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=add&type=4" style="width:100%;height:100%;"></iframe>';
 	var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
-	if($title.indexOf("维胜")>-1){
+	if($title.indexOf("配股宝")>-1){
 		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=add&type=8" style="width:100%;height:100%;"></iframe>';
 	}
 	if($title.indexOf("维胜APP")>-1){
