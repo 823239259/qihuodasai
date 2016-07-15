@@ -1,7 +1,7 @@
 package com.tzdr.web.constants;
 
 public class HttpUrlConstants {
-	private static final String QUOTATION = "http://192.168.0.213:8080";
+	private static final String QUOTATION = "http://socket.dktai.com:9003";
 	/**
 	 * 获取K线图URL
 	 */
