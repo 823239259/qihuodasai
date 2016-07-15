@@ -181,7 +181,7 @@ public class DrawMoneyListVoNew implements Serializable{
 			return sourceStr;
 		}
 		if (Constant.Source.TZDR==this.source){
-			return "投资达人";
+			return "维胜";
 		}
 		if (Constant.Source.PGB==this.source){
 			return "配股宝";
