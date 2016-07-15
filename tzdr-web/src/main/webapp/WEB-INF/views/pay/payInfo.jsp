@@ -1001,11 +1001,11 @@ var tab=<%=tab%>;
 					</div>
 
 						<div class="uc_b_promt"><i>注意事项</i></div>
-						<p class="uc_b_promtfont" style="display:none;">1、转账时请增加转账零头（如100.85）</br>2、转账备注中请务必填写<i>注册手机号和注册用户名</i>，方便我们确认是您的汇款</br>3、转账成功后，<i>请拨打客服热线400-852-8008，或将回单发给QQ客服，</i>以便我们及时帮您处理</p>
+						<p class="uc_b_promtfont" style="display:none;">1、转账时请增加转账零头（如100.85）</br>2、转账备注中请务必填写<i>注册手机号和注册用户名</i>，方便我们确认是您的汇款</br>3、转账成功后，<i>请拨打客服热线400-852-8008<!-- ，或将回单发给QQ客服 -->，</i>以便我们及时帮您处理</p>
 						<p class="uc_b_promtfont">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
-						<div class="uc_paybtn">
+						<!-- <div class="uc_paybtn">
 						<a href="javascript:void(0)" id="BizQQWPA" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=4008528008&site=qq&menu=yes','QQ在线','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');">
-        				发给QQ客服</a></div>
+        				发给QQ客服</a></div> -->
 					</div>
 					<div class="uc_banktime">
 						<h3>到账时间:<i>如需马上到账或长时间未到账，可拨打客服电话：400-852-8008</i></h3>

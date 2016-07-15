@@ -185,7 +185,7 @@ a{outline:none;blr:expression(this.onFocus=this.blur());}
 	width: 703px;
 	height: auto;
 	float: right;
-	padding: 0 20px 0 10px;
+	padding: 0 30px 0 30px;
 	border: 1px solid #eff2f7;
 }
 .news_mainbar h2 {
@@ -334,12 +334,15 @@ a{outline:none;blr:expression(this.onFocus=this.blur());}
 	width: 100%; 
 	height: 48px;
 	line-height: 48px;
-	background: url(../images/news/cp_titlebg.gif) no-repeat;
-	margin: 20px 0;
+	border-bottom:1px solid #e6e6e6;
+	margin: 0;
+    text-align: center;
+    margin-bottom: 30px;
 }
-.news_cp .xuanzhgevs {width: 20%; float: left; margin: 0 2%; height: 180px;}
-.news_cp .xuanzhgevs h4 {text-align: center;}
-.news_cp .xuanzhgevs li {height: auto; line-height: 28px;font-size: 13px;color: #666;}
+.news_cp .xuanzhgevs {width: 50%; float: left;height: 106px; padding-bottom:30px;}
+.news_cp .xuanzhgevs h4 {text-align: center;height: 50px;line-height: 50px; color: #fc3; margin-bottom: 10px;}
+.news_cp .xuanzhgevs h4 i{background: url("../images/news/jj-vs-beijing1.png") no-repeat;  width: 60px;height: 50px;line-height: 50px; display: inline-block;}
+.news_cp .xuanzhgevs li {height: auto; line-height: 28px;font-size: 13px;color: #666; text-align: center;}
 .news_cp h4 {
     width: 100%; height: 40px; line-height: 40px; font-size: 18px; font-family: "微软雅黑"; color: #333;
 }
