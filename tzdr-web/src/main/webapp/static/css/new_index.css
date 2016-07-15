@@ -145,11 +145,12 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .notice_scroll h2 {display: block;float: left;padding-right: 35px;padding-left: 10px;height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33; font-weight: normal;border-right: 1px dotted #999999;}
 .notice_scroll h2 i {background: url(../images/image/laba.png) no-repeat;position: absolute;width: 21px; height: 18px;left: 0; top: 14px;}
 /*h_partner*/
-.h_partner {width: 100%; height: 275px; background: url("../images/image/logo-beijing.png"); border-bottom: 10px solid #424242;}
-.h_partner_content {width: 1010px; margin: 0 auto;}
+.h_partner {width: 100%; height: 226px; background: url("../images/image/logo-beijing.png"); border-bottom: 10px solid #424242;}
+.h_partner_content {width: 1000px; margin: 0 auto;}
 .h_partner_content .h_chosetitle {text-align: center; font-size: 20px; padding: 40px 0; color: #333333;}
-.h_partner_content img {margin-bottom: 1px;}
+.h_partner_content img {margin: 0 4px;}
 .h_partner .h_img {margin-top: 15px;}
+.h_partner .h_img a{float: left;}
 .h_partner .h_img a:hover { cursor: default;}
 /*copyright*/
 .copyright {width: 100%; height: 205px; background-color: #333333; border-bottom: 1px solid #1a1a1a;}

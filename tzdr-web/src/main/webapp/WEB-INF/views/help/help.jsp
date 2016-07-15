@@ -34,7 +34,7 @@ var tab="<%=tab%>";
             <li><a href="javascript:void(0);" class="helpTitle" data-type="newbie">新手指南</a></li>
            <!--  <li><a href="javascript:void(0);" class=" helpTitle" data-type="configuration">港股操盘</a></li> -->
             <li><a href="javascript:void(0);" class="helpTitle" data-type="rule">期货操盘</a></li>
-            <li><a href="javascript:void(0);" class="helpTitle" data-type="software">易盛交易软件</a></li>
+            <li><a href="javascript:void(0);" class="helpTitle" data-type="software">交易软件下载</a></li>
             <li><a href="javascript:void(0);" class="helpTitle" data-type="safety">安全保障</a></li>
         </ul>
     </div>
@@ -803,36 +803,35 @@ var tab="<%=tab%>";
         <div class="hp_siderbar software_siderbar">
             <!-- <a href="javascript:void(0)" class="on" data="1">股票交易系统<i style="right: 20px;">></i></a>       
             <a href="javascript:void(0)" data="12">股票掌上交易系统<i style="right: 20px;">></i></a> --> 
-            <a href="javascript:void(0)" class="on" data="1">国际期货交易系统<i style="right: 20px;">></i></a>
-           <!--  <a href="javascript:void(0)" data="9">商品期货交易系统<i style="right: 20px;">></i></a> -->
+            <a href="javascript:void(0)" class="on" data="1">易盛极星交易系统<i style="right: 20px;">></i></a>
+            <a href="javascript:void(0)" data="22">维胜快手交易系统<i style="right: 20px;">></i></a>
         </div>
         <div class="hp_mainbar hp_mbox1" style="display:none;">
+        	<a href="http://139.196.228.143/download/Epolestar_9.0_Client.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-34.png"></a>
             <h1 style="border-bottom:1px solid #d1d1d1;">易盛极星客户端说明<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
-            <div class="hp_tts">               
-                <h6 style="font-weight:bold;color:#fc3;margin-bottom: 40px;">1, 启动易盛极星客户端，在弹出登录窗口，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改</h6>   
+            <div class="hp_tts">    
+            	<h1 style="line-height: 20px;font-size: 16px;margin-bottom: 20px;">1, 启动易盛极星客户端，弹出登录窗口，在登录窗口的‘行情服务器’，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改。</h1>           
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-27.png"><a href="#"></a></p>  
-                <h6 style="font-weight:bold;color:#fc3;">2、在交易服务器窗口，输入交易账号和密码，勾选同步登录行情，点击登录</h6>  
+                <h6 style="font-weight: normal;color:#fc3;">2、在交易服务器窗口，输入交易账号和密码，勾选同步登录行情，点击登录</h6>  
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-28.png"><a href=""></a></p> 
-                <h6 style="font-weight:bold;color:#fc3;">3, 登录成功后，在交易界面直接输入合约代码或者在外盘纵览下选择自己需要的期货合约，直接定位该合约的行情数据</h6> 
+                <h6 style="font-weight: normal;color:#fc3;">3, 登录成功后，在交易界面直接输入合约代码或者在外盘纵览下选择自己需要的期货合约，直接定位该合约的行情数据</h6> 
                 <p style="color:red;font-size: 14px; margin-top: 40px;">注：行情信息属于公共信息，当行情波动大时，各个行情软件都可能会出现不能及时刷新等问题，具体成交点位，以交易软件成交为准。</p>     
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-29.png"><a href=""></a></p>            
-            	<h6 style="font-weight:bold;color:#fc3; margin-top:10px;margin-bottom: 50px;">4、在软件横向下单区域，选择需要交易合约进行『买入』或『卖出』，开始国际期货操盘； 或者在行情列表双击需要交易合约所在行，对应合约信息将自动添加到横向下单板块</h6>  
+            	<h6 style="font-weight: normal;color:#fc3; margin-top:10px;margin-bottom: 50px;">4、在软件横向下单区域，选择需要交易合约进行『买入』或『卖出』，开始国际期货操盘；或者在行情列表双击需要交易合约所在行，对应合约信息将自动添加到横向下单板块</h6>  
             	<p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-30.png"><a href=""></a></p>
             </div>
-           <!--  <ul class="hp_tts_down">
-                <li>
-                	<a href="javascript:void(0);" style="cursor:text;">钱隆TTS介绍</a>
-                	<p>钱隆TTS资管之家客户端，是资管专用的投资交易委托下单系统， 支持股票交易相关买入、卖出、信息查询等功能，具有交易灵活可靠、交易速度快、 系统稳定等特点。</p>	
-                </li>
-                <li>
-                    <a href="javascript:void(0);" style="cursor:text;">.Net Framework3.5介绍</a>
-                    <p>.Net Framework3.5是支持和运行应用程序内部Windows的组件。运行钱隆TTS交易软件，电脑操作系统必须已安装.Net Framework3.5。</p>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" style="cursor:text;">VC2005运行库介绍</a>
-                    <p>运行库是一个经过封装的程序模块，如果不使用运行库，操作系统在运行程序时找不到对应的运行库程序就无法运行。运行钱隆TTS交易软件，电脑系统必须已经安装VC运行库。</p>
-                </li>
-            </ul>  -->   
+        </div>
+        <div class="hp_mainbar hp_mbox22" style="display:none;">
+        	<a href="http://139.196.228.143/download/%E7%BB%B4%E8%83%9C%E6%9C%9F%E8%B4%A7%E5%BF%AB%E6%89%8B%E7%89%88v1.0_%E5%AE%9E%E7%9B%98.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-35.png"></a>
+            <h1 style="border-bottom:1px solid #d1d1d1;">维胜快手交易系统<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
+            <div class="hp_tts">    
+            	<h1 style="line-height: 20px;font-size: 16px;margin-bottom: 20px;">1, 启动易盛极星客户端，弹出登录窗口，在登录窗口的‘行情服务器’，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改。</h1>           
+                <p style="color:red;font-size: 14px;">维胜快手交易端软件简介<p>
+                <p>维胜交易端在功能及界面上虽然做了很多针对国内用户使用习惯的改进和优化，但是对于一部分的终端客户而言还是稍显复杂，针对一部分客户的需求，我司独立开发了一套简易 版的交易端——维胜快手交易系统。</p>
+                <p>该快手交易端界面清晰，操作简单，学习成本低，大大降低了客户的使用难度。该快手交易系统 软件针对港交所品种的下单问题上做了优化，即软件会自动以限价超价的形式进行下单，以 达到市价成交的效果，软件默认超价 50 个点，使得对应品种的下单更为便捷、快速。</p>
+                <p>登陆后界面如图所示，界面主要信息字段一目了然，清晰易懂。</p>
+                <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-36.png"><a href="#"></a></p>  
+            </div>
         </div>
         <div class="hp_mainbar hp_mbox8" style="display:none;">
             <h1 style="border-bottom:1px solid #d1d1d1;">直达-快抢手快速下单软件</h1> 

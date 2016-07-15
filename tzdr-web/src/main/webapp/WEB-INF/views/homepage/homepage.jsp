@@ -871,20 +871,14 @@
     <div class="h_partner_content">
         <p class="h_chosetitle"><span>合作伙伴与媒体报道</span></p>
         <p class="h_img">
-            <a href="javascript:void(0)"><img src="static/images/image/pingan-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/huatai-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/guotai-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/zhaoshang-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/haitong-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" style="margin-left: 0px" alt=""/></a>
             <a href="javascript:void(0)"><img src="static/images/image/xinlang-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/wukuang-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/dongfang-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/hexun-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/tengxun-bank.png" alt=""/></a>
-            <a href="javascript:void(0)"><img src="static/images/image/fenghuang-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/huaxing-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/huanan-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/anjin-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/xiangcai-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/zhida-bank.png" alt=""/></a>
+            <a href="javascript:void(0)"><img src="static/images/image/zhongdian-bank.png" style="margin-right: 0px" alt=""/></a>
         </p>
     </div>
 </div>
