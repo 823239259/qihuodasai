@@ -202,7 +202,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .site-notice .nr {border-top: 1px solid #4d4d4d; background: #333; padding: 20px 0;}
 
 /* weixin */
-.follow .erweima .erweima-wxtk {position: absolute;top: -152px;left: -43px;}
+.follow .erweima .erweima-wxtk {position: absolute;top: -152px;left: -43px; height: 150px;}
 .follow .erweima .erweima-wxtk img {height: 150px;}
 
 
