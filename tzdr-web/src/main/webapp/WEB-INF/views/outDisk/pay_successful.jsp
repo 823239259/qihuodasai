@@ -38,7 +38,7 @@ $(document).ready(function(){
 			<p>交易时间：系统将在30分钟内下发操盘账户；<br>非交易时间：系统将在次日开盘前下发操盘账户。</p>		
 			<div class="cp_paybtn">
 				<div class="cp_pb_font"></div>
-				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=software&leftMenu=8">下载交易软件</a></div>
+				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=software&leftMenu=1">下载交易软件</a></div>
 				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=rule&leftMenu=5">查看交易说明</a></div>	
 			</div>		
 		</div>
