@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script type="text/javascript" src="../js/mui.min.js"></script> 
+    <script type="text/javascript" src="../js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
+    <script>
+    	mui.init();
+    	mui.plusReady(function(){
+    		document.getElementById("telBtn").addEventListener("tap",function(){
+    			mui.callService();
+    		});
+    		document.getElementById("back").addEventListener("tap",function(){
+    			history.back();
+    		});
+    	});
+    	
+    	
+    </script>
+</head>
+<body>	
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 id="nav-title" class="mui-title">我的账户</h1>
+		<a href="#" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+</body>
+</html>

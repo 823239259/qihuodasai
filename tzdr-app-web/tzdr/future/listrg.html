@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>操盘方案</title>
+     <script type="text/javascript" src="../../js/mui.min.js"></script> 
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+   <script>
+    	mui.init();    	
+    	mui.plusReady(function(){
+    		
+  			document.getElementById("regist").addEventListener("tap",function(){
+				mui.openWindow("../login/regist.html");
+			});
+			
+			document.getElementById("login").addEventListener("tap",function(){
+				mui.openWindow("../login/login.html");
+			});
+			//初始化监听底部事件
+			tzdr.init.initButtomListener();
+			document.getElementById("telBtn").addEventListener("tap",function(){
+    			mui.callService();
+    		});
+  		});
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>-->
+		<h1 class="mui-title">操盘方案</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+		<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="navon" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a    id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>
+<div class="mui-content list_nolg">
+	<img src="../../images/list_02.png" />
+	<div class="mui-content-padded">
+		<h4>请登录后管理操盘方案</h4>		
+	</div>
+	<div class="main_nolg">		
+		<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>		
+		<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist">新用户注册</button>
+	</div>
+</div>
+</body>
+</html>

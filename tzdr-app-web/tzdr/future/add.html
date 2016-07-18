@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>追加保证金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script>
+    	mui.init();
+    	var win=null;
+    	mui.plusReady(function(){
+    		
+    		win=plus.webview.currentWebview();
+    		//初始化监听头部和底部事件
+			tzdr.init.initHearListener();
+  			//tzdr.init.initButtomListener();
+  			
+    		document.getElementById("charge").addEventListener("tap",function(){
+    			mui.openWindow("../account/charge.html");
+    		});
+    		
+    		document.getElementById("toappend").addEventListener("tap",function(){
+    			this.setAttribute('disabled','disabled')  //禁用按钮
+    			append_fund();
+    		});
+    		
+    		//获取账户余额
+    		mui.app_request("/user/getbalancerate",{
+    			 "businessType":1
+    		},function(result){
+    			if(!mui.isnull(result.data.balance)){
+    				document.getElementById("balance").innerHTML=result.data.balance+"元";
+    				document.getElementById('rate').innerHTML=result.data.rate;
+    			}else{
+    				mui.toast("用户余额不存在，请重新登录！");
+    				mui.cacheUser.clear();
+    				mui.openWindow("../login/login.html");
+    			}
+    		},function(result){
+    			mui.toast(result.message);
+    			return;
+    		})
+    		
+    	});
+    	//追加保证金
+    	function append_fund(){
+    		var app_fund=document.getElementById("app_fund").value;
+    		var balance=document.getElementById("balance").innerHTML;
+    		if(mui.isnull(app_fund)){
+    			mui.toast("追加金额不能为空！！");
+    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
+    			return;
+    		}
+    		if(app_fund<2000){
+    			mui.toast("追加金额最低2000元！！");
+    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
+    			return;
+    		}
+    		balance=parseFloat(balance);
+    		if(balance<app_fund){
+    			mui.toast("余额不足，请立即充值!");
+    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
+    			return;
+    		}
+    		// 弹出提示信息对话框
+			plus.nativeUI.confirm( "是否向该方案追加资金"+app_fund+"元?", function(e){
+				if(e.index==0){
+					document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用 
+					return ;
+				}
+				mui.app_request("/user/ftrade/addbond",{
+	    			"id":win.did,
+					"addBond":app_fund
+	    		},function(result){
+	    			mui.toast("申请成功，系统会尽快处理！");
+	    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用    
+	    			mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
+	    			return;
+	    		},function(result){
+	    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
+	    			if(result.code==2){
+						mui.toast("余额不足,无法追加保证金！");
+						return;
+					}else if(result.code==3 || result.code== 6){
+						mui.toast("未找到该方案，无法追加保证金！");
+						return;
+					}else if(result.code==4){
+						mui.toast("该方案已完结，无法追加保证金！");
+						return;
+					}else if(result.code==5){
+						mui.toast("追加金额低于默认最小金额！");
+						return;
+					}else if(result.code==7){
+						mui.toast("追加金额不能为空！");
+						return;
+					}else{
+						mui.toast("系统繁忙，请稍后再试！");
+						return;
+					}
+	    		})
+			}, "追加资金", ["取消","确定"] );
+    	}
+    	
+    	
+    	//实时换算美元
+    	function changetousa(){
+    		var app_fund=document.getElementById("app_fund").value;
+    		var rate=document.getElementById("rate").innerText;
+    		if(mui.isnull(app_fund)){
+    			mui.toast("追加保证金不能为空且不能输入非法字符！！");
+    			document.getElementById("app_fund").value="";
+    			document.getElementById("money_usa").innerHTML="0美元";
+    			return;
+    		}
+    		if(!tzdr.moneyUtils.testDecimal(app_fund)){
+    			mui.toast("最多输入小数点后两位");
+    			document.getElementById("app_fund").value="";
+    			document.getElementById("money_usa").innerHTML="0美元";
+    			return;
+    		}
+    		app_fund=app_fund/rate;
+    		//保留两位小数
+    		app_fund=Math.floor(app_fund * 100) / 100;
+    		
+    		document.getElementById("money_usa").innerHTML=app_fund+"美元";
+    		
+    	}
+    	
+    	
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 class="mui-title">追加保证金</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+	<!--<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="navon" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a    id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>-->
+<div class="mui-content add_money">
+	<ul class="mui-table-view aw_bc_bank">
+		<li class="mui-table-view-cell">
+			<a class="mui-navigate-right" href="javascript:void(0);" id="charge">
+				<label>账户余额：</label>
+				<span class="add_color" id="balance">1002.34元</span>
+				<b>去充值</b>
+			</a>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>追加金额：</label>
+			<input  type="number" class="mui-input-clear" placeholder="输入金额" id="app_fund" oninput="changetousa();">
+		</li>		
+	</ul>		
+	<ul class="mui-table-view aw_bc_bank">
+		<li class="mui-table-view-cell">
+			<label>换算汇率：</label>
+			<span><span id='rate'>6.4</span>人民币 = 1美元</span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>换算美元：</label>
+			<span class="add_color" id="money_usa">0.00美元</span>
+		</li>		
+	</ul>		
+	<div class="mui-content-padded">
+		<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="toappend">立即追加</button>
+	</div>
+	<div class="mui-content-padded">
+		<h5>温馨提示：</h5>
+		<p>1、最低追加金额为2000元。</p>
+		<p>2、系统将在下个交易日前为您的操盘账户追加保证金。</p>
+		<p>3、追加成功后，系统将短信通知您。</p>
+	</div>
+</div>
+</body>
+</html>
