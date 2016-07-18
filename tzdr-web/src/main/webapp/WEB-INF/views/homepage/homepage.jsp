@@ -1476,29 +1476,8 @@
 		    		}
 		    		for(var i = 0 ; i < size ; i++){
 		    			var comm = commoditys[i];
-		    			//sendMessage('QryContract','{"CommodityNo":"'+comm.CommodityNo+'"}');
 		    			sendMessage('Subscribe','{"CommodityNo":"'+comm.CommodityNo+'","ContractNo":"'+comm.MainContract+'"}');
 		    		}
-		    	}else if(method == "OnRspQryContract"){
-		    		 var catracts = jsonData.Parameters;
-		    		 var size = catracts.length;
-		    		 var mincatract = null;
-		    		 var minContractNo = null;
-		    		 if(size > 0){
-		    			 mincatract = catracts[0];
-		    			 minContractNo = parseInt(mincatract.ContractNo);
-		    		 }
-		    		 for(var i = 0 ; i < size ; i ++){
-		    			 var contr = catracts[i];
-		    			 var conNo = parseInt(contr.ContractNo);
-		    			 if(minContractNo > conNo){
-		    				 mincatract = contr;
-		    				 minContractNo = conNo;
-		    			 }
-		    		 }
-		    		 if(mincatract != null){
-			    		 sendMessage('Subscribe', '{"CommodityNo":"'+mincatract.CommodityNo+'","ContractNo":"'+mincatract.ContractNo+'"}');
-		    		 }
 		    	}else if(method == "OnRspSubscribe"){
 		    	}else if(method == "OnRtnQuote"){
 		    		var size = contractData.length;

@@ -151,7 +151,6 @@
 </div>
 <script type="text/javascript">
  $(function () {
-	 $(".site-notice").remove();
 	 // 加载最新公告
     var showNotice = false;
     var content="";
@@ -201,19 +200,17 @@
 //检测公告
 function checkNotice() {
 	var noticeid = getCookie("noticeid");
-	var loaclNoticeid = $("#noticeid").val();
-	if(noticeid === loaclNoticeid && loaclNoticeid != null && loaclNoticeid.length> 0) {
+	if(noticeid != null && noticeid.length > 0) {
 		$(".site-notice").remove();
 	} else {
 		$(".notice-fixed").fadeIn("slow");
 	}
 }
-/*  // 关闭公告
+// 关闭公告
 function closeNotice() {
 	$(".site-notice").remove();
-	// cookie记录公告已删除
 	addCookie("noticeid", $("#noticeid").val());
-}*/
+}
 
 function addCookie(objName, objValue){
 	if(objValue==""){
