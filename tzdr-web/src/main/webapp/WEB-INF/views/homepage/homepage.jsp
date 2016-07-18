@@ -550,19 +550,10 @@
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="renderer" content="webkit" />	
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="HandheldFriendly" content="true" />
-	<meta name="MobileOptimized" content="320" />
-	<meta name="apple-mobile-web-app-title" content="html5" />
-	<meta name="format-detection" content="telephone=no,email=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
@@ -1551,7 +1542,15 @@
 	    socket.onerror = function(evt){
 		   
 	    }
-	    
+	    function gundongtiao(){
+	    	$("#whichscro").val($.trim($(this).parent().attr("id")))
+	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
+	            var scrollfathter1=document.getElementById($.trim($(this).parent().attr("id")));
+	            scrollfathter1.addEventListener("touchstart", touchStart, false);
+	            scrollfathter1.addEventListener("touchmove", touchMove, false);
+	            scrollfathter1.addEventListener("touchend", touchEnd, false);
+	        }		
+	    }
 	    $(".left_hidden").mouseover(function(){
 	        $("#whichscro").val($.trim($(this).parent().attr("id")))
 	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
@@ -1562,5 +1561,11 @@
 	        }
 	    });
 	    scroll_y("left_xiangqing","left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely","")
+	   
+	    $(document).ready(function () { 
+
+	    	gundongtiao();
+
+	    })
 </script>
 </html>
