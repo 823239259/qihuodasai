@@ -176,7 +176,7 @@
     
     $(window).scroll(function () {
     	if(showNotice) {
-		    var scrollTop = $(this).scrollTop();//滚动条位置
+		    var scrollTop = $(this).scrollTop(); //滚动条位置
 		    var scrollHeight = $(document).height();//高度
 		    var windowHeight = $(this).height();//整体高度
 		    if (scrollTop + windowHeight >= scrollHeight-80) {

@@ -20,8 +20,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .navlist li a {text-decoration: none; color: #999;padding-top: 28px}
 .navlist li a:hover {border-bottom:2px solid #ffcc33; color: #ffcc33;;cursor: pointer; padding-bottom: 26px;}
 /*slide-box*/
-.bannerlist {width: 100%; position: relative; height: 360px; overflow: hidden;}
-.bannerlist .login {width: 1000px; margin: 0 auto; position: relative;}
+.bannerlist {width: 100%; position: relative; height: 360px;}
+.bannerlist .login {width: 1010px; margin: 0 auto; position: relative;}
 .bannerlist .login .loginbox {width: 260px;height: 323px;margin: 20px auto 0; float: right;border-radius: 4px; background: #424242;}
 .bannerlist .login .loginbox h3 {height: 40px;line-height: 40px; font-weight: normal; text-align: center; color: #999;margin-top: 10px;background-color: #333333;border-bottom: 1px solid #1a1a1a; font-size: 14px;}
 .bannerlist .login .loginbox h3 a {float: right; text-decoration: none;color: #fc3; margin-right: 10px;}
@@ -43,13 +43,15 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .bannerlist .login .lg_link a {text-decoration: none; font-size: 14px;}
 .bannerlist .login .lg_link a:hover {text-decoration: underline; color: #ffee33;}
 .bannerlist .lg_bottom {width: 100%;height: 37px; background-color: #333333;border-top: 1px solid #4d4d4d;}
-.slide_box {width: 100%; height: 360px; position: absolute;}
+.slide_box {width: 100%; height: 360px; position: absolute; overflow: hidden;}
 .slide_banner {width:1920px; /*图片宽度*/ position:absolute; left:50%; margin-left:-960px; /*图片宽度的一半*/}
 .slide_box a {width: 100%;  height: 360px; position: absolute; display: block;}
-.slide_box img { position: absolute;}
+.slide_box img { position: absolute; width: 100%;}
 .ad_slider {position: absolute; width: 100%; text-align: center;z-index: 10; bottom: 10px;}
-.ad_slider a{width: 48px; height: 3px; cursor: pointer; text-align: center; line-height: 5px; font-size: 16px; color: #000000; font-family: "Arial"; display: inline-block; text-decoration: none; border-radius: 15px;border: 1px solid #333; background: #fc3; margin: 0 4px;}
-.ad_slider a.on {color: red; background: #333;}
+.ad_slider a{padding-bottom: 5px;}
+.ad_slider a:hover {cursor:pointer;}
+.ad_slider span {width: 48px; height: 3px; cursor: pointer; text-align: center; line-height: 5px; font-size: 16px; color: #000000; font-family: "Arial"; display: inline-block; text-decoration: none; border-radius: 15px;border: 1px solid #333; background: #fc3; margin: 0 4px;}
+.ad_slider a.on span {color: red; background: #333;}
 /*content*/
 .w_content_app {background: url("../images/image/logo-beijing.png"); width: 100%;}
 .w_content {background: url("../images/image/logo-beijing.png");  height: 1105px; width: 1010px;  padding: 39px 0; margin: 0 auto;}

@@ -2,7 +2,7 @@
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -90,7 +90,7 @@
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
         <c:forEach var="b" items="${banners }" varStatus="status">
-        	<a  title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>></a>
+        	<a  title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>><span></span></a>
         </c:forEach>
     </div>
     <div class="slide_box" id="slide-box">

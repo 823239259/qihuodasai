@@ -696,12 +696,15 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
 
 /*悬浮*/
 .floatlayer { width: 1000px; height: 0; position: relative; margin: 0 auto; z-index: 20;}
-.fl_server { width: 50px; height: auto; position: fixed; right: 0px; top: 50%; margin-top: -50px; z-index: 50; }
+.fl_server { width: 50px; height: auto; position: fixed; right: 0px;  bottom: 10%; margin-top: -50px; z-index: 50; }
+.fl_server_top {position: fixed;right: 0px;top: 10%;z-index: 50;}
+.fl_server_top a {display: block; width: 50px;height: 50px;background: url(../images/common-new/bottom-bottom.png) no-repeat;}
+.fl_server_top a:hover {background: url(../images/common-new/bottom-bottom-on.png) no-repeat;}
 .fl_server a { display: block; width: 40px; height: 40px; margin-bottom: 5px;}
 .fl_sv_tent a { display: block; width: 40px; height: 40px; background: url(../images/common-new/fix_01.png) no-repeat;}
 .fl_sv_tent a:hover { background: url(../images/common-new/fix_02.png) no-repeat;}
-.fl_sv_up a { display: block; width: 40px; height: 40px; background: url(../images/common-new/fix_07.png) no-repeat;}
-.fl_sv_up a:hover { background: url(../images/common-new/fix_08.png) no-repeat;}
+.fl_sv_up a { display: block; width: 50px; height: 50px; background: url(../images/common-new/bottom-top.png) no-repeat;}
+.fl_sv_up a:hover { background: url(../images/common-new/bottom-top-on.png) no-repeat;}
 .fl_sv_code a { display: block; width: 40px; height: 40px; background: url(../images/common-new/fix_03.png) no-repeat;}
 .fl_sv_code a:hover {  background: url(../images/common-new/fix_04.png) no-repeat; }
 .fl_sv_notic a { display: block; width: 40px; height: 40px; background: url(../images/common-new/fix_05.png) no-repeat;}

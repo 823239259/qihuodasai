@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
+<link href="${ctx }/static/css/trade.css?v=20151127" rel="stylesheet" type="text/css" />
 <div class="top-title">
     <div class="topctn">
         <div class="top_tel"><!--<i></i>-->全国客服热线：400-852-8008</div>
@@ -136,6 +137,9 @@
             <%--  <div class="fl_sv_codetk" style="display: none;"><img src="${ctx}/static/images/common-new/code.png"><p>扫二维码访问<br>维胜手机站</p></div> --%>
         </div>
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>
+    </div>
+    <div class="fl_server_top">
+    	<a href="javascript: scrollBottom();"></a>
     </div>
 </div>
 <script type="text/javascript">
@@ -284,5 +288,8 @@ function getCookie(c_name) {
 function scrollTop() {
 	$('html, body').animate({scrollTop: '0px'}, 800);
 	//$('html, body').animate({scrollTop:$('.bottom').offset().top}, 800);
+}
+function scrollBottom() {
+	$('html,body').animate({scrollTop: $(document).height()}, 800);
 }
 </script>
