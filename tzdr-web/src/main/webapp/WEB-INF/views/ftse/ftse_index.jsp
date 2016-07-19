@@ -180,7 +180,7 @@
 		        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list">
 		          <tr>
 		            <td class="first">风险提示</td>
-		            <td class="font">股市有风险，投资需谨慎</td>
+		            <td class="font">投资有风险，入市需谨慎</td>
 		          </tr>
 		          <tr>
 		            <td class="first">操盘须知</td>

@@ -132,7 +132,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		         </tr>
 		         <tr>
 		             <td></td>
-		             <td><a target="_blank" href="${ctx}/help?tab=rule&leftMenu=9">恒指期货操盘细则</a></td>
+		             <td><a target="_blank" href="${ctx}/help?tab=rule&leftMenu=0">恒指期货操盘细则</a></td>
 		         </tr>
 		     </table>
 		</ul>

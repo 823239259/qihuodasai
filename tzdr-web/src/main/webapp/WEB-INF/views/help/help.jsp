@@ -948,7 +948,7 @@ var tab="<%=tab%>";
         	<p>第一步，进入账户中心—我要提现，选择银行卡管理；添加银行卡，选择开户银行，填写银行卡号和确认卡号，点击保存；</p>
         	<img src="${ctx}/static/images/help/vs-help-10.png" width="677" style="margin-left:30px;">
         	<p>第二步，设置提现密码：</p>
-        	<p>a.进入个人中心—安全信息页面，在提块密码模块点击“立即设置”；</p>
+        	<p>a.进入个人中心—安全信息页面，在提现密码模块点击“立即设置”；</p>
         	<img src="${ctx}/static/images/help/vs-help-11.png" width="677" style="margin-left:30px;">
         	<p>b.填写提现密码和确认提现密码。</p>
         	<img src="${ctx}/static/images/help/vs-help-12.png" style="margin-left:30px;">
