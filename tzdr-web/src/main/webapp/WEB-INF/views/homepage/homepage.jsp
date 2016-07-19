@@ -231,7 +231,7 @@
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
-                <h4><i>${showmap.hsi[0].valueData }</i>元/单边</h4>
+                <h4><i>${showmap.hsi[0].valueData }</i>元/双边</h4>
                 <ul>
                     <li>• 港股指数 金融市场更加成熟</li>
                     <li>• 交易灵活 技术分析更有效</li>
@@ -246,7 +246,7 @@
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【国际原油】</h3>
-                <h4><i>${showmap.fco[0].valueData }</i>元/单边</h4>
+                <h4><i>${showmap.fco[0].valueData }</i>元/双边</h4>
                 <ul>
                     <li>• 全球玩家用户量最大 涨跌迅猛</li>
                     <li>• 高透明度便于基本面分析</li>
@@ -261,7 +261,7 @@
             </div>
             <div class="w-guopjiqihuo" style="border-right: 10px solid #292929;">
                 <h3>【富时A50】</h3>
-                <h4><i>${showmap.ffa50[0].valueData }</i>元/单边</h4>
+                <h4><i>${showmap.ffa50[0].valueData }</i>元/双边</h4>
                 <ul>
                     <li>• A股精准风向标 免庄家操控</li>
                     <li>• 门槛低 超短线 交易灵活</li>
