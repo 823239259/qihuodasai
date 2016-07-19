@@ -2,8 +2,8 @@
 body {font-family: '微软雅黑'; background: #fff;}
 ul,li,ol,i,em { font-style: normal; list-style: none;}
 /* top */
-.top-title {width: 100%; height: 34px; background: #333333; border-bottom: 1px solid #1a1a1a;}
-.topctn {width: 1000px; height: 34px; margin: 0 auto; position: relative; z-index: 20;}
+.top-title {width: 100%;background: #333333; border-bottom: 1px solid #1a1a1a;height: 34px;margin: 0 auto;}
+.topctn {width: 1000px; height: 34px; margin: 0 auto; position: relative; z-index: 20;padding:0 5px; background: #333;border-bottom: 1px solid #1a1a1a;}
 .top_tel {width: auto; height: 34px; line-height: 34px; color: #999; font-size: 14px; float: left;}
 .top_tel i {width: 20px; height: 22px; display: block; float: left; margin-top: 2px; margin-right: 2px;}
 .topctn ul {float: right; width: auto; height: 20px; padding: 6px 0; overflow: hidden;}
@@ -12,8 +12,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .topctn ul li a:hover {text-decoration: underline; color: #ffcc33;}
 .topctn ul .sign_span {color: #666666;}
 /*navbox*/
-.navbox {width: 100%; height: 84px; z-index: 15; position: relative; border-top: 1px solid #4d4d4d; background-color: #333333;}
-.nav {width: 1000px; height: 84px; margin: 0 auto; position: relative;}
+.navbox {width: 100%; height:84px; z-index: 15; position: relative; border-top: 1px solid #4d4d4d; background-color: #333333; margin: 0 auto;}
+.nav {width: 1000px; height: 84px; margin: -1px auto 0; position: relative; padding:0 5px; background: #333; border-top: 1px solid #4d4d4d;}
 .navlogo {float: left; margin-top: 20px;}
 .navlist {width: auto; float: right; margin-top: 33px; font-style: normal; list-style: none;}
 .navlist li {display:block; float: left; width: auto; margin: 0 18px; font-size: 16px;}
@@ -22,14 +22,12 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 /*slide-box*/
 .bannerlist {width: 100%; position: relative; height: 360px; overflow: hidden;}
 .bannerlist .login {width: 1000px; margin: 0 auto; position: relative;}
-.bannerlist .login .loginbox {width: 260px; height: 320px; background-color: #424242;float: right; margin-top: 20px;border-radius: 3px;}
+.bannerlist .login .loginbox {width: 260px;height: 323px;margin: 20px auto 0; float: right;border-radius: 4px; background: #424242;}
 .bannerlist .login .loginbox h3 {height: 40px;line-height: 40px; font-weight: normal; text-align: center; color: #999;margin-top: 10px;background-color: #333333;border-bottom: 1px solid #1a1a1a; font-size: 14px;}
 .bannerlist .login .loginbox h3 a {float: right; text-decoration: none;color: #fc3; margin-right: 10px;}
 .bannerlist .login .loginbox h3 a:hover {text-decoration:underline;}
 .bannerlist .login .loginbox .lg_info {background: #333; height: 226px; text-align: center; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a;}
 .bannerlist .login .loginbox .lg_info .yuei {color: #fc3; height: 80px; line-height: 80px;}
-.bannerlist .login .loginbox .lg_info a.lg_chaopan{width: 220px; height: 34px; line-height: 34px; font-size: 16px; color: #333; background-color: #fc3; display: block; margin-left: 20px; border-radius: 4px; text-decoration: none;}
-.bannerlist .login .loginbox .lg_info a.lg_chaopan:hover {background-color: #fe3;}
 .bannerlist .login .loginbox .lg_time {font-size: 14px; color: #666; height: 24px; line-height: 24px; margin-top: 40px;}
 .bannerlist .login .lg_ipctn {margin-top: 10px; position: relative;}
 .bannerlist .login .lg_ipctn .user {background: url("../images/image/iPhone.png") no-repeat; width: 12px; height: 18px;position: absolute;left: 10px;top: 8px;}
@@ -53,16 +51,17 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .ad_slider a{width: 48px; height: 3px; cursor: pointer; text-align: center; line-height: 5px; font-size: 16px; color: #000000; font-family: "Arial"; display: inline-block; text-decoration: none; border-radius: 15px;border: 1px solid #333; background: #fc3; margin: 0 4px;}
 .ad_slider a.on {color: red; background: #333;}
 /*content*/
-.w_content {background: url("../images/image/logo-beijing.png");  height: 1105px; width: 100%;  padding: 39px 0;}
+.w_content_app {background: url("../images/image/logo-beijing.png"); width: 100%;}
+.w_content {background: url("../images/image/logo-beijing.png");  height: 1105px; width: 1010px;  padding: 39px 0; margin: 0 auto;}
 .w_center {width: 1010px;margin: 0 auto; background: url("../images/image/logo-beijing2.png") no-repeat; height: 610px;border-radius: 5px;}
 .w_center_border {border-top: 10px solid #424242; border-radius: 5px; width: 1000px; margin: 0 auto;background: #424242;height: 10px;}
 .w_center_top {width: 1000px;margin: 0 auto;margin-top: -10px; height: 80px;background-color: #333333;border-bottom: 1px solid #1a1a1a;}
 .w_content .left-shangzheng {float: left;width: 200px; color: #ffcc33; font-size: 20px; line-height: 80px; height: 80px; text-align: center;}
-.w_content .right-gengxin{float: right; width: 800px;color: #666; font-size: 14px; padding-top: 15px;}
+.w_content .right-gengxin{float: right; width: 800px;color: #666; font-size: 14px; padding-top: 15px;position: relative;}
 .w_content .right-gengxin p {margin-top: 5px;}
 .w_content .right-gengxin .zs, .w_content .right-gengxin .jk {display: inline-block; text-align: right; width: 290px;}
 .w_content .right-gengxin .fd, .w_content .right-gengxin .gxsj {display: inline-block; text-align: left; width: 297px; padding-left: 42px;}
-#mainSqcp {background: url(../images/image/caopan-button.png) no-repeat; float: right; text-decoration: none;color: #333;width: 80px;height: 36px;line-height: 32px;text-align: center; margin-top: -38px;margin-right: 25px;}
+#mainSqcp {background: url(../images/image/caopan-button.png) no-repeat; float: right; text-decoration: none;color: #333;width: 80px;height: 36px;line-height: 32px;text-align: center;margin-right: 25px; position: absolute; right: 0; top: 24px;}
 #mainSqcp:hover {background: url(../images/image/caopan-button-on.png) no-repeat;}
 .w_content .w_center_xiangqing {border-top: 1px solid #4d4d4d; width: 1000px; margin: 0 auto;}
 .w_content .left_xiangqing {float: left; width: 195px;height: 508px; overflow: scroll;overflow-x: hidden;}
@@ -119,8 +118,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .w-qihuo .w-qihuo-content .w-guopjiqihuo .money > p {font-size: 14px; color: #ffcc33; margin: 10px 0 0 70px;}
 .w-qihuo .w-qihuo-content .w-guopjiqihuo .chaopan {text-align: center; margin-top: 11px;}
 /*.safe*/
-.safe {width: 100%; height: 270px; border-top: 10px solid #424242; border-bottom: 1px solid #1a1a1a; background-color: #333333;}
-.safe .safelist {width: 1000px; margin: 0 auto;height: 270px;}
+.safe {width: 100%; height: 270px; border-top: 10px solid #424242; border-bottom: 1px solid #1a1a1a; background-color: #333333; margin: 0 auto;}
+.safe .safelist {width: 1000px; margin: 0 auto;height: 270px;padding: 0 5px;background: #333; border-top: 10px solid #424242; border-bottom: 1px solid #1a1a1a;position: relative;top: -10px;}
 .safe .safelist ul li {float: left;width: 250px;text-align: center; padding-top: 60px;}
 .safe .safelist ul li h2 {margin-top: 10px; color: #ffcc33; font-size: 16px;}
 .safe .safelist ul li .safelist-lis {margin-top: 8px;color: #ffcc33; font-size: 14px;}
@@ -128,34 +127,35 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .safelist img {-webkit-transition: all 1s linear;-moz-transition: all 1s linear;-o-transition: all 1s linear;-ms-transition: all 1s linear;transition: all 1s linear;}
 .safelist img:hover {-webkit-transform: scale(-1,1);-moz-transform: scale(-1,1);-o-transform: scale(-1,1);-ms-transform: scale(-1,1);transform: scale(-1,1);}
 /*xuanzhe*/
-.xuanzhe {width: 100%; height: 298px; border-top: 1px solid #4d4d4d; background-color: #333333;}
-.xuanzhelist {width: 850px; margin: 0 auto; height: 298px;}
+.xuanzhe {width: 100%; height: 298px; border-top: 1px solid #4d4d4d; background-color: #333333; margin: 0 auto;}
+.xuanzhelist {width: 1000px; margin: 0 auto; height: 298px; padding: 0 5px;background: #333; border-top: 1px solid #4d4d4d; position: relative;top: -1px;}
 .xuanzhelist .xuanzhe-title {color: #ffcc33; text-align: center; font-size: 20px; padding: 40px 0;}
 .xuanzhelist img {float: left;}
 .xuanzhelist .vs-img {position: relative;top: 30px; padding: 0 50px;}
 /*notice*/
-.notice {width: 100%; height: 46px; background-color: #333333;}
-.notice_scroll {width: 985px;height: 16px;padding: 15px 0 15px 15px;margin: 0 auto; position: relative;}
-.notice_scroll > a { margin-top: -6px;padding:5px;display: block;float: right;width: 58px;height: 16px;line-height: 16px;font-size: 12px;color: #ffcf3f;text-align: center; text-decoration: none;border: 1px solid #ffcf3f;border-radius: 5px;}
+.notice {width: 100%; height: 46px; background-color: #333333; margin: 0 auto;}
+.notice_scroll {width: 1000px; height: 46px; padding-left: 15px;margin: 0 auto; position: relative; margin: 0 auto; background: #333333; padding: 0 5px;}
+.notice_scroll > a {margin-top: 9px; padding:5px;display: block;float: right;width: 58px;height: 16px;line-height: 16px;font-size: 12px;color: #ffcf3f;text-align: center; text-decoration: none;border: 1px solid #ffcf3f;border-radius: 5px;}
 .notice_scroll > a:hover {background-color: #ffff33;color: #333333; border: 1px solid #ffee33;}
-.notice_scroll ul {width: 760px;height: 16px;line-height: 16px;overflow: hidden;float: left;}
+.notice_scroll ul {margin-top: 15px; width: 760px;height: 16px;line-height: 16px;overflow: hidden;float: left;}
 .notice_scroll ul li {display: block;float: left;width: 379px; text-align: left; height: 17px;line-height: 17px; font-size: 0; border-right: 1px dotted #ccc;}
 .notice_scroll ul li a {text-decoration:none; margin-left:20px; float:left; display: inline-block; height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33;overflow: hidden; padding-right: 20px;vertical-align: middle;text-overflow: ellipsis;white-space: nowrap;}
 .notice_scroll ul li a:hover {text-decoration: underline;}
 .notice_scroll ul li em a {float:right; font-size: 14px; color: #666666; vertical-align: middle;}
-.notice_scroll h2 {display: block;float: left;padding-right: 35px;padding-left: 10px;height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33; font-weight: normal;border-right: 1px dotted #999999;}
+.notice_scroll h2 {margin-top: 15px; display: block;float: left;padding-right: 40px;padding-left: 20px;height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33; font-weight: normal;border-right: 1px dotted #999999;}
 .notice_scroll h2 i {background: url(../images/image/laba.png) no-repeat;position: absolute;width: 21px; height: 18px;left: 0; top: 14px;}
 /*h_partner*/
-.h_partner {width: 100%; height: 226px; background: url("../images/image/logo-beijing.png"); border-bottom: 10px solid #424242;}
-.h_partner_content {width: 1000px; margin: 0 auto;}
+.h_partner_app {width: 100%; height: 226px;}
+.h_partner {margin: 0 auto; width: 100%; height: 226px; background: url("../images/image/logo-beijing.png"); border-bottom: 10px solid #424242;}
+.h_partner_content {height: 226px; width: 1000px; margin: 0 auto; padding: 0 5px; background: url("../images/image/logo-beijing.png");}
 .h_partner_content .h_chosetitle {text-align: center; font-size: 20px; padding: 40px 0; color: #333333;}
 .h_partner_content img {margin: 0 4px;}
 .h_partner .h_img {margin-top: 15px;}
 .h_partner .h_img a{float: left;}
 .h_partner .h_img a:hover { cursor: default;}
 /*copyright*/
-.copyright {width: 100%; height: 205px; background-color: #333333; border-bottom: 1px solid #1a1a1a;}
-.copyright_content {width: 1000px; margin: 0 auto;}
+.copyright {width: 100%; height: 205px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
+.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 205px; border-bottom: 1px solid #1a1a1a;}
 .copyright_link, .copyright_interaction, .copyright_contact {float: left;margin-top: 30px;}
 .copyright_link ul {margin-top: 10px; width: 510px; height: 40px; line-height: 40px;}
 .copyright_link ul li {float: left; margin-right: 20px; font-size: 14px; color: #666666;}
@@ -174,8 +174,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .copyright_contact h3 {height: 40px; line-height: 40px; margin: 10px 0; color: #999999; font-weight: normal; font-size: 14px;}
 .copyright_contact p {color: #666666; font-size: 12px; margin-top: 5px;}
 /*copybox*/
-.copybox {width: 100%; height: 120px; background-color: #333333; border-top: 1px solid #4d4d4d;}
-.copybox_content {width: 1000px; margin: 0 auto;}
+.copybox {width: 100%; height: 120px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
+.copybox_content {width: 1000px; margin: 0 auto;background-color: #333333; height: 120px; border-top: 1px solid #4d4d4d; padding: 0 5px; position: relative; top: -1px;}
 .cp_link {width: 670px; padding-top: 40px; height: 80px; float: left;}
 .cp_link p {color: #666; font-size: 12px; margin-top: 20px; height: 25px; line-height: 25px;}
 .cp_link ul li {float: left; color: #666; font-size: 12px; margin-right: 10px;}

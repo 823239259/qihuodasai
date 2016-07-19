@@ -3,8 +3,8 @@
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
-<head>	
+<html>
+<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
@@ -101,70 +101,72 @@
     	</div>
     </div>
     <div class="login">
-        <div class="loginbox">
-        <%
-       		if(request.getSession().getAttribute("userName")!=null){
-       	%>
-		<div class="lgctn" id="logondiv">
-			<h3 class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></h3>
-			<div class="lg_info">
-				<p class="yuei">账户余额：${usermap.user_avlbal }元</p>
-				<div>
-            		<a href="${ctx}/user/account" class="lg_chaopan">操盘账户</a>
-            		<%-- <a href="<%=ConfUtil.getContext("p2p.user.account") %>" style="display:none;">投资账户</a> --%>
-            	</div>
-            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
-			</div>
-        	<p style="border-top: 1px solid #4d4d4d"></p>
-                <%-- <li>
-                    <label>A股融资：</label>
-                    <span>${usermap.user_money }元</span>
-                </li>
-                <li>
-                    <label>港股融资：</label>
-                    <span>${usermap.hk_money }港元</span>
-                </li>
-                <li style="display:none;">
-                    <label>代理等级：</label>
-                    <span>${usermap.user_level }级</span>
-                </li> --%>
-        </div>
-       	<%
-       		}else{
-       	%>
-        <div class="lgctn" id="logindiv">
-            <h3>登录</h3>
-             <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
-                <input type="hidden" name="isajax" value="true">
-                <input type="hidden" name="isframe" value="true">
-                <input type="hidden" name="lt" value="" id="LoginTicket">
-                <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
-                <input type="hidden" name="_eventId" value="submit">
-                <div class="lg_ip">
-                    <div class="lg_ipctn">
-                        <i class="user"></i>
-                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
-                        <!-- 请输入手机号码 -->
-                    </div>
-                    <div class="lg_ipctn">
-                        <i class="password"></i>
-                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
-                        <!-- 请输入登录密码 -->
-                    </div>
-                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
-                    <div class="lg_link">
-                        <a href="${ctx}/forgetpw" class="left">忘记密码?</a>
-               			 <a href="${ctx}/signin" class="right">免费注册</a>
-                    </div>
-                </div>
-            </form>
-            </div>
-            <% } %>
-            <div class="lg_bottom"></div>
-        </div>
+    	
+	        <div class="loginbox">
+	        <%
+	       		if(request.getSession().getAttribute("userName")!=null){
+	       	%>
+			<div class="lgctn" id="logondiv">
+				<h3 class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></h3>
+				<div class="lg_info">
+					<p class="yuei">账户余额：${usermap.user_avlbal }元</p>
+					<div>
+	            		<a href="${ctx}/user/account" class="lg_chaopan">操盘账户</a>
+	            		<%-- <a href="<%=ConfUtil.getContext("p2p.user.account") %>" style="display:none;">投资账户</a> --%>
+	            	</div>
+	            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
+				</div>
+	        	<p style="border-top: 1px solid #4d4d4d"></p>
+	                <%-- <li>
+	                    <label>A股融资：</label>
+	                    <span>${usermap.user_money }元</span>
+	                </li>
+	                <li>
+	                    <label>港股融资：</label>
+	                    <span>${usermap.hk_money }港元</span>
+	                </li>
+	                <li style="display:none;">
+	                    <label>代理等级：</label>
+	                    <span>${usermap.user_level }级</span>
+	                </li> --%>
+	        </div>
+	       	<%
+	       		}else{
+	       	%>
+	        <div class="lgctn" id="logindiv">
+	            <h3>登录</h3>
+	             <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
+	                <input type="hidden" name="isajax" value="true">
+	                <input type="hidden" name="isframe" value="true">
+	                <input type="hidden" name="lt" value="" id="LoginTicket">
+	                <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
+	                <input type="hidden" name="_eventId" value="submit">
+	                <div class="lg_ip">
+	                    <div class="lg_ipctn">
+	                        <i class="user"></i>
+	                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
+	                        <!-- 请输入手机号码 -->
+	                    </div>
+	                    <div class="lg_ipctn">
+	                        <i class="password"></i>
+	                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
+	                        <!-- 请输入登录密码 -->
+	                    </div>
+	                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
+	                    <div class="lg_link">
+	                        <a href="${ctx}/forgetpw" class="left">忘记密码?</a>
+	               			 <a href="${ctx}/signin" class="right">免费注册</a>
+	                    </div>
+	                </div>
+	            </form>
+	            </div>
+	            <% } %>
+	            <div class="lg_bottom"></div>
+   		</div>
     </div>
 </div>
 <!-- 最新公告 -->
+<div style="background: #333; height: 46px;">
 <div class="notice  h_notic">
     <div class="notice_scroll">
         <h2><i></i>最新动态：</h2>
@@ -173,7 +175,9 @@
          <a href="${ctx}/news/newsdata" class="h_n_more" target="_blank">更多动态</a>
     </div>
 </div>
+</div>
 <!--content-->
+<div class="w_content_app">
 <div class="w_content">
     <div class="w_center">
         <div class="w_center_border"></div>
@@ -182,9 +186,9 @@
                 <p>实时行情</p>
             </div>
             <div class="right-gengxin">
+            	<a href = "#" id = "mainSqcp" target="_blank">申请操盘</a>
                 <p><span class = "jk"></span><span class = "fd"></span></p>
                 <p><span class = "zs"></span><span class = "gxsj"></span></p>
-                <a href = "#" id = "mainSqcp" target="_blank">申请操盘</a>
             </div>
         </div>
         <div class="w_center_xiangqing">
@@ -273,6 +277,8 @@
         </div>
     </div>
 </div>
+</div>
+<div style="background: #333; height: 580px;">
 <div class="safe">
     <div class="safelist">
         <ul>
@@ -302,13 +308,15 @@
 <div class="xuanzhe">
     <div class="xuanzhelist">
         <p class="xuanzhe-title">炒期货为什么选择维胜</p>
-        <p>
+        <p style="width: 850px;margin: 0 auto;">
             <img src="static/images/image/zjichao.png" alt=""/>
             <img src="static/images/image/vs.png" alt="" class="vs-img"/>
             <img src="static/images/image/weishengchao.png" alt=""/>
         </p>
     </div>
 </div>
+</div>
+<div class="h_partner_app">
 <div class="h_partner">
     <div class="h_partner_content">
         <p class="h_chosetitle"><span>合作伙伴与媒体报道</span></p>
@@ -323,6 +331,7 @@
             <a href="javascript:void(0)"><img src="static/images/image/zhongdian-bank.png" style="margin-right: 0px" alt=""/></a>
         </p>
     </div>
+</div>
 </div>
 <input type= "hidden" id = "dqCommodNo"/>
 <!-- footer -->

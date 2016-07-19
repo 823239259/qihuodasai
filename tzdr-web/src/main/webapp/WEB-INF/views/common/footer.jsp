@@ -53,7 +53,7 @@
         </div>
     </div>
 </div> --%>
-<div style="width: 100%;height: 327px;" id="ungundontiao">
+<div style="background: #333;height: 327px;" id="ungundontiao">
 <div class="copyright">
     <div class="copyright_content">
         <div class="copyright_link">

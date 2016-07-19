@@ -43,6 +43,8 @@
         </div>
     </div>
 </div>
+
+<div style="background: #333; height: 85px;">
 <div class="navbox">
     <div class="nav">
         <div class="navlogo"><a href="http://www.dktai.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
@@ -122,7 +124,9 @@
         </div>
     </div>
 </div>
+</div>
 <!-- 浮动层 -->
+
 <div class="floatlayer">
     <!-- 联系客服、返回顶部 -->
     <div class="fl_server">
