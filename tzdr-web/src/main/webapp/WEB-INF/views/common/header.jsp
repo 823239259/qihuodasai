@@ -138,9 +138,9 @@
         </div>
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>
     </div>
-    <div class="fl_server_top">
+    <!-- <div class="fl_server_top">
     	<a href="javascript: scrollBottom();"></a>
-    </div>
+    </div> -->
 </div>
 <script type="text/javascript">
 $(document).ready(function() {

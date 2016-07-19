@@ -29,6 +29,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .bannerlist .login .loginbox .lg_info {background: #333; height: 226px; text-align: center; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a;}
 .bannerlist .login .loginbox .lg_info .yuei {color: #fc3; height: 80px; line-height: 80px;}
 .bannerlist .login .loginbox .lg_time {font-size: 14px; color: #666; height: 24px; line-height: 24px; margin-top: 40px;}
+.bannerlist .login .loginbox .lg_info a.lg_chaopan{height: 34px;width: 220px;line-height: 34px;font-size: 16px;color: #333;background-color: #fc3;display: block;margin-left: 20px;border-radius: 4px;text-decoration: none;}
+.bannerlist .login .loginbox .lg_info a.lg_chaopan:hover {background-color: #fe3;}
 .bannerlist .login .lg_ipctn {margin-top: 10px; position: relative;}
 .bannerlist .login .lg_ipctn .user {background: url("../images/image/iPhone.png") no-repeat; width: 12px; height: 18px;position: absolute;left: 10px;top: 8px;}
 .bannerlist .login .lg_ipctn .password {background: url("../images/image/password.png") no-repeat; width: 12px; height: 18px;position: absolute;left: 10px;top: 8px;}
@@ -176,7 +178,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .copyright_contact h3 {height: 40px; line-height: 40px; margin: 10px 0; color: #999999; font-weight: normal; font-size: 14px;}
 .copyright_contact p {color: #666666; font-size: 12px; margin-top: 5px;}
 /*copybox*/
-.copybox {width: 100%; height: 120px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
+.copybox {width: 100%; height: 121px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
 .copybox_content {width: 1000px; margin: 0 auto;background-color: #333333; height: 120px; border-top: 1px solid #4d4d4d; padding: 0 5px; position: relative; top: -1px;}
 .cp_link {width: 670px; padding-top: 40px; height: 80px; float: left;}
 .cp_link p {color: #666; font-size: 12px; margin-top: 20px; height: 25px; line-height: 25px;}
