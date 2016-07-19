@@ -39,7 +39,7 @@ $(document).ready(function(){
 			<div class="cp_paybtn">
 				<div class="cp_pb_font"></div>
 				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=software&leftMenu=1">下载交易软件</a></div>
-				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=rule&leftMenu=9">查看交易说明</a></div>	
+				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=rule&leftMenu=0">查看交易说明</a></div>	
 			</div>		
 		</div>
 	</div>
