@@ -123,7 +123,7 @@
     		}
     		app_fund=app_fund/rate;
     		//保留两位小数
-    		app_fund=Math.floor(app_fund * 100) / 100;
+    		app_fund=Math.round(app_fund * 100) / 100;
     		
     		document.getElementById("money_usa").innerHTML=app_fund+"美元";
     		

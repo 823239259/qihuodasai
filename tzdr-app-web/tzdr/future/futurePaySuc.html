@@ -16,6 +16,9 @@
   			//tzdr.init.initButtomListener();
   			win=plus.webview.currentWebview();
   			
+  			//判断是否秒配成功
+  			executePay(win.isPay);
+  			
 			document.getElementById("openHome").addEventListener("tap",function(){
 				
 				if(mui.isnull(win.type+'')||mui.isnull(win.vid)){
@@ -36,9 +39,15 @@
 					case 8:
 						mui.openWindow({url:"DetailCp.html",id:"DetailCp.html",extras:{did:win.vid}});
 						break;
+					case 9:
+						mui.openWindow({url:"DetailLhsi.html",id:"DetailLhsi.html",extras:{did:win.vid}});
+						break;
 					default:
-						mui.toast("系统繁忙，请稍后再试！");
-						mui.openWindow("list.html");
+						var s=plus.webview.getWebviewById("scheme");
+					    if(s){
+							mui.app_refresh('scheme');
+						}
+						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
 						break;
 				}
 				
@@ -54,6 +63,19 @@
 			});
     		
 		});
+		
+		function executePay(stateType){
+			if(stateType==4){
+				document.getElementById("ex_pay").style.display="block";
+				document.getElementById("ex_no_pay").style.display="none";
+				document.getElementById("openHome").innerHTML="立即去操盘";
+			}else{
+				document.getElementById("ex_no_pay").style.display="block";
+				document.getElementById("ex_pay").style.display="none";
+				document.getElementById("openHome").innerHTML="进入方案详情";
+			}
+		};
+		
 	</script>
 </head>  
 <body>
@@ -79,10 +101,16 @@
 <div class="mui-content pay_suc">
 	<img src="../../images/suc_01.png" />
 	<div class="mui-content-padded">
-		<h4>方案申请成功，<br>操盘账号将以短信通知！</h4>
-		<p>交易时间内：系统将在30分钟内下发操盘账户</p>
-		<p>非交易时间：系统将在次日开盘前下发操盘账户</p>
-		<p style="text-align: center;"><button type="button" id="openHome">进入操盘详情</button></p>
+		<div id="ex_pay" style="display: none;">
+			<h4>操盘方案申请成功！<br>交易账户已经分配！</h4>
+		</div>
+		<div id="ex_no_pay" style="display:block; margin-bottom: 30px;;">
+			<h4>操盘方案申请成功！</br>交易账户正在排队开户中...</h4>
+			<p>交易时间：系统将在30分钟内处理</p>
+			<p>非交易时间：系统将在下个交易日开盘前处理</p>
+			<p>开户成功系统将短信通知您</p>
+		</div>
+		<p style="text-align: center;"><button type="button" id="openHome">进入方案详情</button></p>
 	</div>
 </div>
 </body>

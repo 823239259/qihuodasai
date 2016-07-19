@@ -10,6 +10,21 @@
     <link href="css/own.css" rel="stylesheet"/>
 </head>
 <body>
+<!--弹出广告-->
+<div class="app_qj" id="app_qj" style="display: none;"></div>
+<div class="app_tc" id="app_tc" style="display: none;">
+		<div class="app_tc_bj">
+			<img class="app_img1" src="images/app-g.png">
+	        <i id="closebtn" class="app_img2"><img src="images/app_x.png"></i>
+	        <div class="app_img3">
+	        <a href="javascript:void(0);" id="partake"><img src="images/app_an.png" width="150px"></a>	        	
+	    </div>
+	        
+	</div>
+</div>	
+<!--弹出广告 end-->
+
+	
 	<header class="mui-bar mui-bar-nav own-topbg"> 
 		<a href="javascript:void(0);" id="toNews"><img src="images/news.png" id="newsimg"></a>
 		<h1 id="nav-title" class="mui-title">投资达人</h1>
@@ -17,11 +32,15 @@
 	</header>
 	<nav class="navlist">
 		<a class="navon" href="javascript:void(0);" id="product">
-			<span class="mui-icon mui-icon-list"></span>
-			<span class="mui-tab-label">产品</span>
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">操盘</span>
+		</a>
+		<a class="" href="javascript:void(0);"  id="ftogether">
+			<span class="mui-icon mui-icon-flag"></span>
+			<span class="mui-tab-label">合买</span>
 		</a>
 		<a class="" href="javascript:void(0);"  id="scheme">
-			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-icon mui-icon-list"></span>
 			<span class="mui-tab-label">方案</span>
 		</a>
 		<a class="" id="account" href="javascript:void(0);">
@@ -47,7 +66,7 @@
 					<img src="images/icon_01.png" />
 					<h2>A股行情风向标</h2>
 					<p>交易手续费：<i id="cn_tranfee">0元/手</i></p>
-					<p><label>交易时间：</label><span>09:05-15:50 16:45-23:55</span></p>
+					<p><label>交易时间：</label><span>09:05-16:25，17:20-01:50</span></p>
 				</a>
 			</li>
 			<li class="mui-table-view-cell">
@@ -55,7 +74,15 @@
 					<img src="images/icon_02.png" />
 					<h2>港版IF 全网最低手续费</h2>
 					<p>交易手续费：<i id="hsi_tranfee">0元/手</i></p>
-					<p><label>交易时间：</label><span>09:20-11:55 13:05-16:10 17:05-23:40</span></p>					
+					<p><label>交易时间：</label><span>09:20-16:10，17:05-23:40</span></p>					
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0);" id="lhsi">
+					<img src="images/icon_05.png" /><!--小恒指图片-->
+					<h2>小恒指期货 交易门槛低</h2>
+					<p>交易手续费：<i id="lhsi_tranfee">0元/手</i></p>
+					<p><label>交易时间：</label><span>09:20-16:10，17:05-23:40</span></p>
 				</a>
 			</li>
 			<li class="mui-table-view-cell">
@@ -63,20 +90,22 @@
 					<img src="images/icon_03.png" />
 					<h2>全天候交易 夜盘行情更好</h2>
 					<p>交易手续费：<i id="cl_tranfee">0元/手</i></p>
-					<p><label>交易时间：</label><span>09:05-23:55</span></p>
+					<p><label>交易时间：</label><span>06:05-04:55</span></p>
 				</a>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
 					<img src="images/icon_04.png" />
-					<h2>一个账号可交易8个品种</h2>
-					<p>富时A50、恒指期货、国际原油、小纳指、小道指、德国DAX、日经225、标普500</p>									
+					<h2>一个账号可交易10个品种</h2>
+					<p>富时A50、恒指期货、国际原油、迷你纳指、迷你道指、迷你标普、德国DAX、日经225、小恒指、美黄金</p>									
 				</a>
 			</li>
+			
 		</ul>
 	</div>
 </body>
-	<script type="text/javascript" charset="utf-8">		
+	<script type="text/javascript" charset="utf-8">	
+	
 		mui.init({
 				swipeBack:true //启用右滑关闭功能
 			});
@@ -102,6 +131,9 @@
 			});
 			document.getElementById("cp").addEventListener("tap",function(){
 				mui.openWindow("tzdr/future/cp.html","cp");  
+			});
+			document.getElementById("lhsi").addEventListener("tap",function(){
+				mui.openWindow("tzdr/future/lhsi.html","lhsi");  
 			});
 			//获取手续费
 			setTranfees();
@@ -244,36 +276,65 @@
 				);
 			}
 			
+				function setTranfees(){
+					mui.app_request("/ftrade/goods",{},function(result){
+					if (result.data.isFtogetherActivityTime){
+							var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
+							if (mui.isnull(ftogether_activity_show)){
+								document.getElementById("app_qj").style.display="block";
+								document.getElementById("app_tc").style.display="block";
+								
+								// 弹出框关闭
+								document.getElementById("closebtn").addEventListener('tap', function() {
+									closeActivityImg();
+								});
+								// 跳转到合买页面
+								document.getElementById("partake").addEventListener('tap', function() {
+									closeActivityImg();
+									var p=plus.webview.getWebviewById("ftogether");
+									if(p){
+										mui.app_refresh('ftogether');  
+									}
+									mui.openWindow({url:mui.app_filePath("tzdr/buy/buy.html"),id:"ftogether"});
+								});
+							}
+					}
+					if(!mui.isnull(result.data.tradeList)){
+						mui.each(result.data.tradeList,function(i,item){
+							  
+							switch (item.type){
+								case 0:
+									document.getElementById("cn_tranfee").innerHTML=item.tradeFees+"元/手";
+									break;
+								case 6:
+									document.getElementById("cl_tranfee").innerHTML=item.tradeFees+"元/手";
+									break;
+								case 7:
+									document.getElementById("hsi_tranfee").innerHTML=item.tradeFees+"元/手";
+									break;
+								case 9:
+									document.getElementById("lhsi_tranfee").innerHTML=item.tradeFees+"元/手";
+								break;
+								default:
+									break;
+							}
+						});
+					}
+				},function(result){
+					mui.toast("系统繁忙，请刷新再试！");
+					return;
+				});
+			}
 			
-			
-		});	
-		
-		
-		function setTranfees(){
-			mui.app_request("/ftrade/goods",{},function(result){
-				if(!mui.isnull(result.data.tradeList)){
-					mui.each(result.data.tradeList,function(i,item){
-						  
-						switch (item.type){
-							case 0:
-								document.getElementById("cn_tranfee").innerHTML=item.tradeFees+"元/手";
-								break;
-							case 6:
-								document.getElementById("cl_tranfee").innerHTML=item.tradeFees+"元/手";
-								break;
-							case 7:
-								document.getElementById("hsi_tranfee").innerHTML=item.tradeFees+"元/手";
-								break;
-							default:
-								break;
-						}
-					});
+			// 关闭活动图片
+			function closeActivityImg (){
+				document.getElementById("app_tc").style.display="none";
+				document.getElementById("app_qj").style.display="none";
+				var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
+				if (mui.isnull(ftogether_activity_show)){
+					plus.storage.setItem("ftogether_activity_show","has-show");
 				}
-			},function(result){
-				mui.toast("系统繁忙，请刷新再试！");
-				return;
-			});
-		}
-		
+			}
+		});	
 	</script>
 </html>

@@ -225,7 +225,24 @@
     			b.innerHTML="日经225 - 0手";
     			tradelever_info.appendChild(b);
     		}
-    		
+    		if(!mui.isnull(confirmInfo.hstranLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="小恒指 - "+confirmInfo.hstranLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="小恒指 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
+    		if(!mui.isnull(confirmInfo.agtranLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="美黄金 - "+confirmInfo.agtranLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="美黄金 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
     	}
     	
     	
@@ -263,7 +280,8 @@
     				id:"futurePaySuc.html",
     				extras:{
     					type:win.businessType,
-    					vid:result.data
+    					vid:result.data.id,
+    					isPay:result.data.stateType
     				}
     				});
     			return;

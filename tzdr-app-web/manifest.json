@@ -239,7 +239,11 @@
 					"images/icon_04.png",
 					"images/news.png",
 					"images/newson.png",
-					"images/banner_load.jpg"
+					"images/banner_load.jpg",
+					"images/app_x.png",
+					"images/icon_05.png",
+					"images/app-g.png",
+					"images/app_an.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -251,7 +255,9 @@
 					"tzdr/future/cp.html",
 					"tzdr/future/listrg.html",
 					"tzdr/account/accountno.html",
-					"tzdr/news/news.html"
+					"tzdr/news/news.html",
+					"tzdr/buy/buy.html",
+					"tzdr/future/lhsi.html"
 				],
 				"priority": 0
 			},
@@ -738,7 +744,8 @@
 				],
 				"refer": [
 					"tzdr/future/DetailCn.html",
-					"home.html"
+					"home.html",
+					"tzdr/future/DetailLhsi.html"
 				],
 				"priority": 0
 			},
@@ -761,6 +768,48 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/buy/buy.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"images/rank_01.png",
+					"js/mui.pullToRefresh.material.js",
+					"images/buy_up.png",
+					"images/buy_qu.png",
+					"images/rank_03.png",
+					"images/buy_down.png",
+					"images/rank_02.png",
+					"images/buy_win.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"home.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/lhsi.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/future/pay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/DetailLhsi.html": {
+				"resources": [
+					"images/list_01.png"
 				],
 				"refer": [],
 				"priority": 0

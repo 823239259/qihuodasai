@@ -100,7 +100,7 @@
     		if(mui.isnull(details.appendTraderBond)){
     			document.getElementById("appendTraderBond").innerHTML="0元";
     		}else{
-    			document.getElementById("appendTraderBond").innerHTML=(details.appendTraderBond)+"元";
+    			document.getElementById("appendTraderBond").innerHTML=tzdr.moneyUtils.formatCurrency(details.appendTraderBond)+"元";
     		}
     		document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.traderTotal)+"美元";
     		document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.lineLoss)+"美元";
@@ -241,7 +241,7 @@
 		</li>			
 		<li class="mui-table-view-cell">
 			<label>交易时间：</label>
-			<span>9:20-11:55 13:05-16:10 17:05-23:40</span>
+			<span>09:20-16:10 17:05-23:40</span>
 		</li>
 	</ul>	
 	<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
@@ -333,7 +333,7 @@
 	</ul>	
 	<ul class="mui-table-view sc_listsc">
 		<li class="mui-table-view-cell">
-			<label>结算金额(￥)：</label>
+			<label>结算金额(¥)：</label>
 			<span id="endAmount">8,355.24元</span>
 		</li>
 	</ul>

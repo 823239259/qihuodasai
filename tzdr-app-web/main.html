@@ -16,40 +16,8 @@
 	  	var wgtVer=null;
 		mui.plusReady(function(){
 			
-			// 获取本地应用资源版本号
-			plus.runtime.getProperty(plus.runtime.appid,function(inf){
-				wgtVer=inf.version;
-			});
-			
-			//检查更新版本
-			checkUpdate(function(){
-				if (mui.cacheUser.isLogin()){
-					mui.openWindow("home.html");
-				}
-			});
-			
-    		document.getElementById("regist").addEventListener("tap",function(){
-				mui.openWindow("tzdr/login/regist.html");
-			});
-			document.getElementById("visit").addEventListener("tap",function(){
-				mui.openWindow("home.html");
-			});
-			document.getElementById("login").addEventListener("tap",function(){
-				mui.openWindow("tzdr/login/login.html","login");
-			});
-			
 			//状态栏设置
 			setstatus();
-			
-			if (mui.os.stream) {
-			    //创建桌面快捷方式
-			    if (mui.isFunction(plus.navigator.createShortcut)) {
-			        plus.navigator.createShortcut({
-			            name: "投资达人",
-			            icon: "images/icons/icon180x180.png"
-			        }); //注意换成自己的名字和图标
-			    }
-			}
 			
 			//Android双击home键退出应用
 			mui.back = function(){
@@ -65,6 +33,24 @@
 					} 
 				}
         	};
+			
+			// 获取本地应用资源版本号
+			plus.runtime.getProperty(plus.runtime.appid,function(inf){
+				wgtVer=inf.version;
+				//检查更新版本 
+				checkUpdate(function(){
+					document.getElementById("regist").addEventListener("tap",function(){
+					mui.openWindow("tzdr/login/regist.html");
+					});
+					document.getElementById("visit").addEventListener("tap",function(){
+						mui.openWindow("home.html");
+					});
+					document.getElementById("login").addEventListener("tap",function(){
+						mui.openWindow("tzdr/login/login.html","login");
+					});
+				});
+			});
+			
 		});
 		
 		//状态栏设置
@@ -76,24 +62,68 @@
 		
 		// 检测更新
 		function checkUpdate(_callback){
-			//获取网银充值账户余额信息
+			//获取最新版本信息
 			mui.app_request('/getVersion',{force:true},
 				function(result){
+					//最新版本号
 					var newVer = result.data.version;
-					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){
+					//是否强制升级
+					var isForceUpdate = false;
+					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){  //没有最新版本
 						_callback();
+						if (mui.cacheUser.isLogin()){
+							mui.openWindow("home.html");
+						}
+						return;
+					}
+					//获取最新大版本号
+					var newSub = newVer.substr(0,1);
+					//获取当前大版本号
+					var wgtVerSub = wgtVer.substr(0,1);
+					if(newSub!=wgtVerSub){ //检测升级版本是否大版本还是小版本
+						if(!tzdr.is_appstore){ //当前版本是否是苹果AppStore
+							//弹出系统提示对话框
+							plus.nativeUI.alert( "本次升级有较大更新，请务必重新下载安装！", function(){
+								var _download_url = tzdr.constants.api_domain+"upload/H50967E1D_0407095938.apk";
+								switch (plus.os.name ) {  //根据客户端修改充值文本框属性
+						        case "Android":
+							        //下载最新apk  
+									plus.runtime.openURL(_download_url);
+							        break;
+						        case "iOS":
+							    	//下载最新ipa
+									plus.runtime.openURL(tzdr.constants.ipa_download_url);
+									break;
+						        default:
+							        //下载最新apk  
+									plus.runtime.openURL(_download_url);
+							        break;
+						    	}
+							}, "软件升级", "立即下载" );
+						}
+						return;
 					}else{
+						_callback();
 						//弹出版本升级提示信息对话框
-						plus.nativeUI.confirm( "检测到有新版本需要升级，是否升级到最新版本?", function(e){
+						plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
 							if(e.index==0){
-								downWgt(_callback);	// 下载升级包
+								downWgt(function(){
+									if (mui.cacheUser.isLogin()){
+										mui.openWindow("home.html");
+									}
+								});	// 下载升级包
 							}else{
-								_callback();
+								if (mui.cacheUser.isLogin()){
+									mui.openWindow("home.html");
+								}
 							}
-						}, "软件升级", ["升级","稍后再说"] );
+						}, "软件升级", ["升级","稍后再说"] );					
 					}
 				},function(result){
 					_callback();
+					if(mui.cacheUser.isLogin()){
+						mui.openWindow("home.html");
+					}
 					return; 
 				}
     		);
@@ -102,13 +132,14 @@
 		// 下载wgt文件
 		function downWgt(_callback){
 			plus.nativeUI.showWaiting("下载升级包...");
-			plus.downloader.createDownload(tzdr.constants.api_domain +"upload/H50967E1D.wgt", {filename:"_doc/update/"}, function(d,status){
+			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';
+			plus.downloader.createDownload(tzdr.constants.api_domain +"upload/"+_filename, {filename:"_doc/update/"}, function(d,status){
 				plus.nativeUI.closeWaiting();
 				if (status == 200) { 
 					installWgt(d.filename,_callback);	// 安装wgt包
 				}else{
 					// 弹出系统提示对话框
-					plus.nativeUI.alert( "下载升级包失败！", function(){
+					plus.nativeUI.alert( "下载升级包失败！如多次失败请到官网下载最新APP。", function(){
 						_callback();
 					}, "软件升级", "确定" );
 				}
@@ -124,7 +155,7 @@
 			},function(e){
 				plus.nativeUI.closeWaiting();
 				// 弹出系统提示对话框
-				plus.nativeUI.alert( "应用升级失败！", function(){
+				plus.nativeUI.alert( "应用升级失败！如多次失败请到官网下载最新APP。", function(){
 					_callback();
 				}, "软件升级", "确定" );
 			});

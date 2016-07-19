@@ -84,6 +84,9 @@
     				case 7:
     					mui.openWindow("../agree/hsiru.html");
     					break;
+    				case 9:
+    					mui.openWindow("../agree/hsiru.html");
+    					break;
     				default:
     					break;
     			}
@@ -105,6 +108,9 @@
     					break;
     				case 7:
     					title.innerHTML="恒指期货-支付确认";
+    					break;
+    				case 9:
+    					title.innerHTML="小恒指-支付确认";
     					break;
     				default:
     					title.innerHTML="支付确认";
@@ -219,7 +225,8 @@
     				id:"futurePaySuc.html",
     				extras:{
     					type:win.businessType,
-    					vid:result.data
+    					vid:result.data.id,
+    					isPay:result.data.stateType
     				}
     				});
     			return;

@@ -57,9 +57,10 @@
   							}
   						});
   						this.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 on");
-  						var bonds_num=parseInt(tzdr.moneyUtils.reverseMoney(this.innerHTML));  
+  						var bonds_num=parseFloat(tzdr.moneyUtils.reverseMoney(this.innerHTML));  
   						//切换详细数据
-  						mui.each(paramListAll,function(i,item){   
+  						mui.each(paramListAll,function(i,item){ 
+  							
   							if(!mui.isnull(bonds_num)&&bonds_num==item.traderBond){
   								
   								init_params=item;
@@ -106,6 +107,7 @@
     	
     	
     	function setParams(ParamsList){
+    		
 			document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
@@ -174,43 +176,53 @@
 			switch (contractList.tradeType){
 				case 0:
 					td_1.innerHTML="富时A50";
-					td_3.innerHTML="09:05-15:50<br>16:45-23:55";
+					td_3.innerHTML="09:05-16:25<br>17:20-01:50";
 					td_5.innerHTML="只交易富时A50时，初始最大可持仓"+(mui.isnull(init_params.tranLever) ? 0 : init_params.tranLever)+"手";
 					break;
 				case 6:
 					td_1.innerHTML="国际原油";
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML="06:05-04:55";
 					td_5.innerHTML="只交易国际原油时，初始最大可持仓"+(mui.isnull(init_params.crudeTranLever) ? 0 : init_params.crudeTranLever)+"手";
 					break;
 				case 7:
 					td_1.innerHTML="恒指期货";
-					td_3.innerHTML="09:20-11:55<br>13:05-16:10<br>17:05-23:40";
+					td_3.innerHTML="09:20-16:10<br>17:05-23:40";
 					td_5.innerHTML="只交易恒指期货时，初始最大可持仓"+(mui.isnull(init_params.hsiTranLever) ? 0 : init_params.hsiTranLever)+"手";
 					break;
 				case 9:
 					td_1.innerHTML="迷你道指";
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML="06:05-04:55";
 					td_5.innerHTML="只交易迷你道指时，初始最大可持仓"+(mui.isnull(init_params.mdtranLever) ? 0 : init_params.mdtranLever)+"手";
 					break;
 				case 10:
 					td_1.innerHTML="迷你纳指";
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML="06:05-04:55";
 					td_5.innerHTML="只交易迷你纳指时，初始最大可持仓"+(mui.isnull(init_params.mntranLever) ? 0 : init_params.mntranLever)+"手";
 					break;
 				case 11:
 					td_1.innerHTML="迷你标普";  
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML="06:05-04:55";
 					td_5.innerHTML="只交易迷你标普时，初始最大可持仓"+(mui.isnull(init_params.mbtranLever) ? 0 : init_params.mbtranLever)+"手";
 					break;
 				case 12:
 					td_1.innerHTML="德国DAX";
-					td_3.innerHTML="14:05-23:55";
+					td_3.innerHTML="14:05-03:55";
 					td_5.innerHTML="只交易德国DAX时，初始最大可持仓"+(mui.isnull(init_params.daxtranLever) ? 0 : init_params.daxtranLever)+"手";
 					break;
 				case 13:
 					td_1.innerHTML="日经225";
-					td_3.innerHTML="09:05-14:20<br>15:20-23:55";
+					td_3.innerHTML="07:35-14:20<br>15:20-01:50";
 					td_5.innerHTML="只交易日经225时，初始最大可持仓"+(mui.isnull(init_params.nikkeiTranLever) ? 0 : init_params.nikkeiTranLever)+"手";
+					break;
+				case 14:
+					td_1.innerHTML="小恒指";
+					td_3.innerHTML="09:20-16:10<br>17:05-23:40";
+					td_5.innerHTML="只交易小恒指时，初始最大可持仓"+(mui.isnull(init_params.lhsiTranActualLever) ? 0 : init_params.lhsiTranActualLever)+"手";
+					break;
+				case 15:
+					td_1.innerHTML="美黄金";
+					td_3.innerHTML="06:05-04:55";
+					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.agTranActualLever) ? 0 : init_params.agTranActualLever)+"手";
 					break;
 				default:
 					break;
@@ -259,6 +271,12 @@
 					break;
 				case 8:
 					td_5.innerHTML="只交易日经225时，初始最大可持仓"+(mui.isnull(init_params.nikkeiTranLever) ? 0 : init_params.nikkeiTranLever)+"手";
+					break;
+				case 9:
+					td_5.innerHTML="只交易小恒指时，初始最大可持仓"+(mui.isnull(init_params.lhsiTranActualLever) ? 0 : init_params.lhsiTranActualLever)+"手";
+					break;
+				case 10:
+					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.agTranActualLever) ? 0 : init_params.agTranActualLever)+"手";
 					break;
 				default:
 					break;
@@ -311,7 +329,7 @@
 			<span id="lineLoss">10,450美元</span>
 		</li>
 	</ul>
-	<h5 class="ap_choosetitle"><span>可交易品种：</span><b>一个账号可同时交易8种期货产品</b></h5>
+	<h5 class="ap_choosetitle"><span>可交易品种：</span><b>一个账号可同时交易10种期货产品</b></h5>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
 			<thead>

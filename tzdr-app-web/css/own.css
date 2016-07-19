@@ -1,4 +1,4 @@
-.own-topbg { background: #dc3c38;}
+.own-topbg { background: #dc3c38; z-index: 10;}
 .own-topbg a img {width: 38px; margin-top: 5px;}
 .mui-title { font-size: 18px;}
 .top-tel { display: block; width: auto; height: 44px; line-height: 44px; font-size: 14px; color: #fff; float: right;}
@@ -10,6 +10,8 @@
 .main_list .mui-table-view-cell p { width: 70%; line-height: 20px; margin-left: 75px; font-size: 12px;white-space: normal;}
 .main_list .mui-table-view-cell p i { color: #dc382c; font-style: normal; }
 .main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;}
+.rg_banner { width: 95%; margin: 0 auto;}
+.rg_banner img { width: 100%;}
 @media only screen and (min-width: ) {
 	
 }
@@ -171,6 +173,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .sc_list .mui-table-view { background: none; }
 .sc_list .mui-table-view .mui-table-view-cell { background:#fff; margin-bottom: 15px;}
 .sc_list .mui-table-view .mui-table-view-cell:after { background: none;}
+.sc_list .mui-table-view .mui-table-view-cell br { clear: both;}
 .sc_list .mui-table-view:before { background: none;}
 .sc_list .mui-table-view:after { background: none;}
 .sc_list .mui-table-view li h4 { width: 100%; text-align: left; color: #808080; font-weight: normal; font-size: 16px; margin-bottom: 10px;}
@@ -180,7 +183,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .sc_list .mui-table-view li .sc_money { width: 55%; float: right;font-size: 16px;}
 .sc_list .mui-table-view li.sc_open { border-top:1px solid #ff9334; border-bottom: 1px solid #FF9334;}
 .sc_list .mui-table-view li.sc_open span { color: #FF9334;}
-@media only screen and (max-width:320px ) {
+@media only screen and (max-width:360px ) {
 	.sc_list .mui-table-view li label { width: 100%; padding-right: 0;}
 	.sc_list .mui-table-view li span { width: 100%;}
 }
@@ -282,10 +285,11 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .pay_list li .pay_money i {border-radius: 20px; background: #38be4e;  color: #fff; width: 20px; height: 20px; vertical-align: middle;  text-align: left; line-height: 20px; margin-right: 3px;}
 .pay_list li .pay_nomoney { position: absolute; right: 10px; font-size: 14px; color: #ff6663;}
 .pay_list li .pay_nomoney i { vertical-align: middle;}
-.pay_suc img { width: 60px; display: block; margin: 15% auto 0;}
-.pay_suc .mui-content-padded h4 { text-align: center; font-weight: normal; color: #333; margin-bottom: 40px;}
+.pay_suc img { width: 50px; display: block; margin: 15% auto 0;}
+.pay_suc .mui-content-padded h4 { text-align: center; font-weight: normal; color: #333; margin-bottom: 40px; line-height: 40px;}
 .pay_suc .mui-content-padded p { text-align: left; padding: 0 20px;}
 .pay_suc .mui-content-padded p a { color: #00a5e0; font-size: 17px; text-decoration: underline; display: block; margin: 20px auto; text-align: center;}
+.pay_suc .mui-content-padded p button { width: 170px;display: block;margin: 0 auto;line-height: 30px;font-size: 18px;}
 .mui-content-padded p a {color: #F74C31;}
 .pay_cp .sc_listac li p { float: left; width: 65%;}
 .pay_cp .sc_listac li label { display: block; float: left;}
@@ -321,3 +325,142 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ruc_list .ru_list { width: 800px;}
 .ruc_list .ru_list tr td:first-child { width: 100px;}
 .ios_set p { padding: 0 10px;}
+/*期货合买*/
+#buy_nav {background: #dc3c38; text-align: center; font-size: 0; }
+#buy_nav a.mui-control-item { display: inline-block; border: 1px solid #fcebea; width: 120px; height: 32px; line-height: 32px;border-radius: 0 15px 15px 0; padding: 0 20px; background: #dc382c; color: #fff; font-size: 17px; margin-top: 10px; }
+#buy_nav a:first-child { border-radius: 15px 0 0 15px;}
+#buy_nav a.mui-active {  background:#fcebea; color: #dc382c;}
+.buy_navbox { overflow: hidden; margin: 6px auto; width: 245px;}
+.buy_banner { width: 100%; height: auto;}
+.buy_banner img { display: block; width: 100%;}
+.buy_list { background: none;}
+.buy_list li.mui-table-view-cell { margin-bottom: 20px; background: #fff; overflow: hidden; padding-right: 15px; }
+.buy_list li:after { background: none;}
+.buy_list li .bl_info { float: left;}
+.buy_list li .bl_info h3 { font-weight: normal; font-size: 17px; margin-bottom: 10px;}
+.buy_list li .bl_info h3 b { vertical-align: middle;}
+.buy_list li .bl_info h3 i { display: inline-block;  font-size: 13px; font-style: normal; vertical-align: middle; color: #fff; padding: 3px 5px; border-radius: 3px; margin-left: 5px;}
+.buy_list li .bl_info h3 i.bl_i_star { background: #feb850;}
+.buy_list li .bl_info h3 i.bl_i_ing { background: #66beed;}
+.buy_list li.bl_over .bl_info h3 i { background: #bebebe;}
+.buy_list li .bl_qu { float: right; overflow: hidden;}
+.buy_list li .bl_qu p { color: #88888d; width: 110px;}
+.buy_list li .bl_qu p:first-child { margin-bottom: 10px;}
+.buy_list li .bl_qu p i { display: inline-block; font-size: 12px; font-style: normal; padding: 0 5px 0 15px; border-radius: 2px; text-align: center; margin-right: 5px;}
+.buy_list li p i { border: 1px solid #10aeff; color: #10aeff;}
+.buy_list li p.bl_qu_up i {background:url(../images/buy_up.png) no-repeat 5px center;color: #ff6663; border: 1px solid #ff6663;}
+.buy_list li p.bl_qu_down i {background:url(../images/buy_down.png) no-repeat 5px center;color: #38be4e; border: 1px solid #38be4e;}
+.buy_list li.bl_over p i.bl_qu_win { background:url(../images/buy_win.png) no-repeat 2px center;}
+.buy_list li.bl_over p i.bl_qu_qu { background:url(../images/buy_qu.png) no-repeat 2px center;}
+.buy_btn button { background: #38be4e; border: none;}
+.buy_btn button:hover { border: none; background: #38be4e;}
+.bl_list .mui-table-view li h4 { font-size: 14px;}
+.bl_list .mui-table-view li label { font-size: 17px;}
+.bl_list_title { width: 100%; height: 50px; line-height: 50px; text-align: center; color: #dc382c; border-bottom: 1px solid #e6e6e6; background: #fff;}
+.bl_list_title i { padding-left: 20px; font-style: normal;}
+.buydate .bd_mainbox { background: #fff; border-bottom: 1px solid #c8c7cc; margin-bottom: 20px; }
+.buydate .bd_main { margin: 0 15px;}
+.buydate .bd_main .bd_mainnum { width: 100%; overflow: hidden; padding-top: 20px;}
+.buydate .bd_main .bd_mainnum p { display: block; width: 50%; text-align: center; float: left; height: 18px; line-height: 18px;}
+.buydate .bd_main .bd_mainnum p.up { color: #ff6663;}
+.buydate .bd_main .bd_mainnum i { display: inline-block; width: 14px; height: 14px; border-radius: 7px; vertical-align: middle; margin-right: 5px;}
+.buydate .bd_main .bd_mainnum p.up i { background:#ff6663;}
+.buydate .bd_main .bd_mainnum p.down { color: #38be4e;}
+.buydate .bd_main .bd_mainnum p.down i { background: #38BE4E;}
+.buydate .bd_main .bd_mainnum p:first-child { border-right: 1px solid #999;}
+.buydate .bd_main .bd_mainbtn { width: 100%;}
+.buydate .bd_main .bd_mainbtn p { overflow: hidden; width: 100%;}
+.buydate .bd_main .bd_mainbtn p span { display: block; float: left; width: 69%; text-align: left; font-size: 17px; border:1px solid #e5e5e5; padding: 8px 10px; }
+.buydate .bd_main .bd_mainbtnov p span { width: 98%; margin: 0 auto;}
+.buydate .bd_main .bd_mainbtnov .bd_mainbtnbox { position: relative;}
+.buydate .bd_main .bd_mainbtnov { position: relative;}
+.buydate .bd_main .bd_mainbtnov img { width:65px; display: block; position: absolute; top: -8px; right: 10px;}
+.buydate .bd_main .bd_mainbtn span i { font-size: 18px; float: right;}
+.buydate .bd_main .bd_mainbtn p.up span { color: #ff6663; border:1px solid #ff6663;}
+.buydate .bd_main .bd_mainbtn p.down span {color: #38be4e; border: 1px solid #38be4e;;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_font { width: 69%; float: left;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_font span {display: block; float: left; width: 100%; text-align: left; font-size: 17px; border:1px solid #e5e5e5; padding: 8px 10px;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn { float: right;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn a { display: block; font-size: 17px;color: #fff; padding:9px 8px; border-radius: 5px;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn a.up {background: #FF6663; margin-bottom: 11px;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn a.down { background: #38BE4E;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_font span.up {color: #ff6663; border: 1px solid #ff6663; margin-bottom: 10px;}
+.buydate .bd_main .bd_mainbtn .bd_mainbtn_font span.down {color: #38be4e; border: 1px solid #38be4e;}
+.buydate .bd_ctn i { font-size: 14px; float: right; font-style: normal; color: #bebebe;}
+.buydate ul { margin-bottom: 20px;}
+.buydate ul li .up { color: #ff6663;}
+.buydate ul li .down { color: #38BE4E;}
+.buydate .bd_overlist li span {display: inline-block; width: 65px;}
+.buydate .bd_overlist li ol { display: block; width: 50%; float: left; margin: 0; padding: 0;}
+.bd_btn a { display: block; width: 90%; border: 1px solid #808080; margin: 0 auto; text-align: center; font-size: 17px; color: #393939; padding: 10px 0; border-radius: 8px; background: #fff;}
+
+.buydate .buyinfo li b { float: right; font-weight: normal; color: #888; }
+.buydate .buyinfo li i { font-style: normal;}
+.buydate .bi_st span.bi_st_over { color: #999;}
+.buydate .bi_st span.bi_st_trade { color: #66beed;}
+.buydate .bi_st span.bi_st_start { color: #ff9334;}
+.buydate .buyinfo li span.bi_add { display: block; position: absolute; width:100px; height: 28px; background: #38be4e; right: 10px; top: 8px; color: #fff; font-size: 17px;  line-height: 28px; text-align: center; border-radius: 4px; cursor: pointer;}
+.buy_rank { padding: 0 10px;}
+.buy_rank h2 { width: 100%; text-align: center; font-weight: normal; color: #505050; text-align: left; font-size: 17px; padding: 5px 10px;}
+.buy_rank table { border-right:1px solid #e0e0e0; border-top:1px solid #e0e0e0; width: 94%; padding:0 3%; margin: 0 auto;}
+.buy_rank table td { border:1px solid #e0e0e0; border-top: none;  border-right: noen; height: 32px; line-height: 32px; text-align: left; padding-left: 10px;}
+.buy_rank table td:first-child { text-align: center; padding-left: 0;}
+.buy_rank table td:last-child {text-align: right; padding-right: 10px; padding-left: ;}
+.buy_rank table td b { display: inline-block; width: 24px; height: 24px; text-align: center; line-height: 24px; color: #fff; vertical-align: middle; }
+.buy_rank table td i { font-style: normal; color: #ff9334; font-size: 17px;}
+.br_num1 { background: url(../images/rank_01.png) no-repeat center center; background-size: 75%; }
+.br_num2 { background: url(../images/rank_02.png) no-repeat center center; background-size: 75%; }
+.br_num3 { background: url(../images/rank_03.png) no-repeat center center; background-size: 75%; }
+.br_nav { width: 100%; height: 85px; background: #dc382c;}
+.buy_record  { padding:0 10px; }
+.buy_record h2 { width: 100%; text-align: center; font-size: 17px; font-weight: normal; margin: 20px 0; height: 20px; line-height: 20px;}
+.buy_record h2 img { height: 20px; vertical-align: middle; padding-right: 5px;}
+.buy_record h2 span { vertical-align: middle;}
+.buy_record h2 i { font-style: normal; padding-right: 4px;}
+.buy_record table { width: 100%; border:1px solid #e0e0e0; border-bottom: none; border-right: none;}
+.buy_record table td { text-align: center; line-height: 20px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; vertical-align: middle; padding: 8px 0;}
+.buy_record table tr { background: #fffac5;}
+.buy_record table tr.no { background: #fff;}
+.buy_record p { width: 100%; font-size: 14px; text-align: center; color: #808080; padding-top: 10px;}
+.bd_mapbox { position: relative; }
+.bd_mapbox #countDown { position: absolute; top:30%; z-index: 5; margin: 0 auto; left:50%; }
+.bd_mapbox #countDown div { margin: 0 auto; text-align: center; font-size: 17px; margin-bottom: 10px;}
+.bd_mapbox #countDown span { background: #000; border-radius: 4px; color: #fff; display: inline-block; width: 30px; text-align: center; height: 30px; line-height: 30px; font-size: 17px;}
+.bd_mapbox #countDown { font-size: 0;}
+.bd_mapbox #countDown i { display: inline-block; font-size: 17px; font-style: normal; font-weight: bold; margin: 0 5px; }
+.bd_linebox { position: relative; margin: 0 auto;}
+.bd_linebox p { position: absolute; width: 100%; text-align: center; top: 30px; left: 0px; }
+.bd_linebox span { display: block; position: absolute; left: 10px; z-index: 5; font-size: 12px;  }
+.mui-numbox { width: 160px;}
+.sc_buy .mui-table-view li .sc_data { width: 55%;}
+.sc_buy .mui-table-view li .sc_money { width: 45%;}
+@media only screen and (max-width: 400px) {
+	.buydate .bd_main .bd_mainbtn .bd_mainbtn_font { width: 98%; float: none; overflow: hidden;}
+	.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn { float: none; overflow: hidden; margin-top: 10px; }
+	.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn a { float: left; margin-right: 10px; width: 45%; text-align: center;}
+	.buydate .bd_main .bd_mainbtn .bd_mainbtn_btn a.up{ margin-bottom: 0;}
+	.buydate .bd_overlist li ol label { display: block; width: 100%;}
+	.buydate .bd_overlist li ol span {  display: block; width: 100%;}
+	.buydate .bd_ctn i { float: none; padding-left: 20px;}
+}
+@media only screen and (max-width: 340px) {
+	.buy_list li .bl_qu { overflow: hidden; clear: both; overflow: hidden; float: left; padding-top: 10px;}
+	.buy_list li .bl_qu p { float: left;}
+}
+
+/*弹出广告*/
+.app_qj{ z-index:98; top:0px; position:fixed; background:#000; width:100%; height:100%; opacity:0.6;}
+.app_tc{z-index:99; position:fixed; top:6%; left:3%;width:94%;}
+.app_tc .app_tc_bj{ position:relative;}
+.app_tc .app_tc_bj .app_img1{width:100%;}
+.app_tc .app_tc_bj .app_img2{ cursor:pointer; position:absolute; top:5%; right:5%;}
+.app_tc .app_tc_bj .app_img2 img{ width: 1.3em;}
+.app_tc .app_tc_bj .app_img3{position:absolute; bottom:10%; width: 100%;}
+.app_tc .app_tc_bj .app_img3 a{ display: block; width: 150px; margin-left: auto; margin-right: auto;}
+/*弹出广告 end*/
+
+.me_through{text-decoration:line-through;}
+.mo_through{ margin-left: 8px;}
+.mf_through{ font-size: 17px; margin-top: 10px; margin-left: 5px;}
+
+

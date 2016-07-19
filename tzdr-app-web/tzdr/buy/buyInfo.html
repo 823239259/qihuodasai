@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>合买详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		mui.init({});
+		var win;
+		var recordId;
+		var tradeID;
+		var direction;
+		var price;
+		var fullCopies;
+		mui.plusReady(function(){  
+			//初始化监听头部和底部事件
+			//tzdr.init.initHearListener();
+			win = plus.webview.currentWebview();
+			recordId = win.recordId;
+		  	// 请求获取合买详情 
+			mui.app_request('/user/ftogether_trade/detail',{"recordId":recordId},
+				function(result){
+					// 设置方案参数
+					tradeID = result.data.tradeId;
+					direction = result.data.direction;
+					price = result.data.price;
+					fullCopies = result.data.fullCopies;
+					//设置详情信息
+					document.getElementById("tradeName").innerHTML=result.data.species;
+					document.getElementById("contract").innerHTML=result.data.contract;
+					document.getElementById("opertimesRange").innerHTML=result.data.openTimeStr;
+					// 设置方向
+					if (result.data.direction==1){
+						document.getElementById("direction").innerHTML="看涨";
+						document.getElementById("direction_perfect").innerHTML="看涨";
+						document.getElementById("addCopies").style.backgroundColor="#ff6663";
+					}
+					if (result.data.direction==2){
+						document.getElementById("direction").innerHTML="看跌";
+						document.getElementById("direction_perfect").innerHTML="看跌";
+					}
+					// 设置百分比
+					if (result.data.allCopies==0){
+						document.getElementById("perfect").innerHTML="0.00";
+					}else
+					{
+						document.getElementById("perfect").innerHTML=((result.data.allSameDireCopies/result.data.allCopies)*100).toFixed(2);
+					}
+					document.getElementById("copies").innerHTML=result.data.copies;
+					document.getElementById("price").innerHTML=result.data.price;
+					document.getElementById("buyed_copies").innerHTML=result.data.copies;
+					document.getElementById("payMoney").innerHTML=result.data.payMoney; 
+					// 设置状态显示
+					if (result.data.status==1){ 
+						document.getElementById("buying").style.display="block";
+						document.getElementById("trade_status").className="bi_st_start";
+						document.getElementById("trade_status").innerHTML="合买中";
+					}
+					else
+					{
+						// 设置退回参数
+						document.getElementById("partake_copies").innerHTML=result.data.copies-result.data.backCopies;
+						document.getElementById("back_copies").innerHTML=result.data.backCopies;
+						document.getElementById("back_money").innerHTML=result.data.backMoney;
+						if (result.data.status==2){
+							document.getElementById("trade_status").className="bi_st_trade";
+							document.getElementById("trade_status").innerHTML="操盘中";
+							document.getElementById("backinfo").style.display="block";
+							document.getElementById("back_msg").style.display="block";
+						}
+						else
+						{
+							document.getElementById("trade_status").className="bi_st_over";
+							document.getElementById("trade_status").innerHTML="已结算";
+							document.getElementById("backinfo").style.display="block";
+							document.getElementById("back_msg").style.display="block";
+							if (result.data.copies > result.data.backCopies){
+								document.getElementById("endInfo").style.display="block";
+							}
+							// 设置结算参数
+							var achieveProfitLoss =  result.data.achieveProfitLoss;
+							if (achieveProfitLoss<0){
+								document.getElementById("achieveProfitLossLable").innerHTML='亏损金额：';
+								document.getElementById("profit_perfectLabel").innerHTML='亏损占比：';
+							}
+							document.getElementById("achieveProfitLoss").innerHTML=achieveProfitLoss;
+							var tempCopies = result.data.copies-result.data.backCopies;		
+							var tempPerfect = (tempCopies==0?"0.00":(((tempCopies/result.data.sameDireCopies)*100).toFixed(2)));
+							if (achieveProfitLoss == 0){
+								tempPerfect = "0.00";
+							}
+							document.getElementById("profit_perfect").innerHTML=tempPerfect;
+							document.getElementById("actualSettlementMoney").innerHTML=result.data.actualSettlementMoney;
+						}
+						document.getElementById("opend").style.display="block";
+					}
+					
+				},function(result){
+	      			
+	      		}
+			);
+   	  	
+   	  	//  绑定参与份数跳转
+   	  		document.getElementById("lookrecord").addEventListener("tap",function(){
+			  		mui.openWindow({url:"/tzdr/buy/record.html",id:"tradeRecord",extras:{tradeID:tradeID,direction:direction,fullCopies:fullCopies,price:price}});
+			});
+			
+      		// 绑定追加合买事件
+      		document.getElementById("addCopies").addEventListener("tap",function(){ 
+		  		toPay(tradeID,direction,price);
+		  	});
+		  	
+		  	// 绑定方案状态点击事件
+      		document.getElementById("trade_status_btn").addEventListener("tap",function(){ 
+		  		var p=plus.webview.getWebviewById("buyDate");
+				if(p){
+					mui.app_refresh('buyDate');   
+				}
+	    		mui.openWindow({url:"/tzdr/buy/buyDate.html",id:"buyDate",extras:{tradeID:tradeID}});
+		  	});
+		});
+		
+		//跳转到支付提交页面
+		function  toPay(tradeID,direction,price){
+			if (mui.isnull(price) || mui.isnull(tradeID) || mui.isnull(direction)){
+				mui.toast("请求数据异常！不能购买.");
+				return;
+			}
+			mui.openWindow({url:"/tzdr/buy/pay.html",id:"togetherPay",extras:{tradeID:tradeID,direction:direction,price:price,pageID:"buyInfo"}});
+		}
+	</script>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav own-topbg">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+	<h1 class="mui-title">合买详情</h1>		
+</header>
+<div class="mui-content buydate">
+	<ul class="mui-table-view buyinfo">
+		<li class="mui-table-view-cell">
+			<label>合买标的：</label>
+			<span><t id="tradeName"></t><i id="contract" style="padding-left: 10px;"></i></span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>操盘时间：</label>
+			<span id="opertimesRange"></span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>合买方向：</label>
+			<span id="direction">看跌</span>
+			<b><t id="perfect">0</t>%<t id="direction_perfect"></t></b>
+		</li>		
+		<!--操盘中、已结算-->
+		<li class="mui-table-view-cell" id="opend" style="display: none;">
+			<label>合买份数：</label>
+			<span id="copies"></span>份
+			<b><t id="price">0</t>元/份</b>
+		</li>		
+		<!--合买中-->
+		<li class="mui-table-view-cell" id="buying" style="display: none;">
+			<label>合买份数：</label>
+			<span id="buyed_copies">6</span>份
+			<span class="mui-icon mui-icon-plusempty bi_add" id="addCopies">追加合买</span>
+		</li>	
+		<li class="mui-table-view-cell">
+			<label>支付金额：</label>
+			<span id="payMoney">0</span>元  
+		</li>		
+	</ul>	
+	<ul class="mui-table-view mui-table-view-chevron bi_st">
+		<li class="mui-table-view-cell">
+			<a class="mui-navigate-right" href="javascript:void(0);" id="trade_status_btn">
+				<label>方案状态：</label>
+				<span id="trade_status"></span>
+			</a>
+		</li>
+	</ul>
+	<!--操盘中、已结算详情-->
+	<ul class="mui-table-view mui-table-view-chevron" style="display: none;" id="backinfo">
+		<li class="mui-table-view-cell">
+			<a class="mui-navigate-right" href="javascript:void(0);" id="lookrecord">
+				<label>参与操盘：</label>
+				<span id="partake_copies">0</span>份
+			</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>返回份数：</label>
+			<span id="back_copies">0</span>份
+		</li>	
+		<li class="mui-table-view-cell">
+			<label>返回金额：</label>
+			<span id="back_money">0</span>元
+		</li>	
+	</ul>
+	<p id="back_msg" style="display: none; padding: 0 10px;">合买停止时，未满单的合买失效，系统自动退款</p>		
+	<!--已结算信息-->
+	<ul class="mui-table-view mui-table-view-chevron" style="display: none;" id="endInfo">
+		<li class="mui-table-view-cell">
+			<label id="achieveProfitLossLable">盈利金额：</label>
+			<span id="achieveProfitLoss">0</span>元
+		</li>	
+		<li class="mui-table-view-cell">
+			<label id="profit_perfectLabel">盈利占比：</label>
+			<span id="profit_perfect">0</span>%
+		</li>	
+		<li class="mui-table-view-cell">
+			<label>结算金额：</label>
+			<span id="actualSettlementMoney">0</span>元
+		</li>	
+	</ul>
+</body>
+</html>

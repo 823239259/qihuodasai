@@ -53,13 +53,13 @@
 	<div class="mui-content ac_charge">
 		<div id="slider" class="mui-slider">
 			<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-				<!--<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>-->
+				<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>
 				<a class="mui-control-item" id="alipay">支付宝转账</a>
 				<a class="mui-control-item" id="bankPay">银行转账</a>
 			</div>
-			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
 			<div class="mui-slider-group" id="itembox">
-				<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 					<div id="" class="mui-scroll-wrapper ac_online">
 						<ul class="mui-table-view">
 							<li class="mui-table-view-cell">
@@ -72,6 +72,10 @@
 								<input type="tel" id="rechargeMoney" class="mui-input-clear" placeholder="输入金额" data-input-clear="5">
 							</li>
 						</ul>	
+						<div class="mui-content-padded" style="margin-top: -15px;">
+							<p>1.单笔充值最多5万元(含5万)，单日充值最多10万元(不含10万)；</p>
+							<p>2.具体充值限额以您的银行卡快捷支付限额为准。</p>
+						</div>
 						<ul class="mui-table-view">
 							<li class="mui-table-view-cell">
 								<label>支付渠道</label>
@@ -80,10 +84,10 @@
 						</ul>	
 						<div class="ac_btn">
 							<button type="button" id="recharge-btn" class="mui-btn mui-btn-block lg-btnlogin">立即充值</button>								
-						</div>											
+						</div>	
 					</div>
 				</div>
-				-->
+				
 				<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">
 					<div id="" class="mui-scroll-wrapper ac_online">
 						<div class="mui-scroll">							
@@ -98,7 +102,7 @@
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell" >
 									<label>收款人支付宝账户</label>
-									<span>xinhong1@tzdr.com</span>
+									<span>zhitoubao@126.com</span>
 								</li> 
 								<li class="mui-table-view-cell">
 									<label>收款人账户名称</label>
@@ -201,10 +205,10 @@
 
 			
 			document.getElementById("openappliy").addEventListener("tap",function(){
-				plus.runtime.openURL("https://qr.alipay.com/apw0bil8n60d7vqx6b");
+				plus.runtime.openURL("https://qr.alipay.com/apw1hz7ddal8e7zsfe");
 				
 			}); 
-			/*switch (plus.os.name ) {  //根据客户端修改充值文本框属性
+			switch (plus.os.name ) {  //根据客户端修改充值文本框属性
 		        case "Android":
 		        document.getElementById("rechargeMoney").setAttribute('type','tel');
 		        break;
@@ -215,9 +219,9 @@
 		        document.getElementById("rechargeMoney").setAttribute('type','number'); 
 		        break;
 		    }
-			*/
+			
 			//获取网银充值账户余额信息
-			/*mui.app_request('/user/getbalancerate',{'businessType':3},
+			mui.app_request('/user/getbalancerate',{'businessType':3},
 					function(result){
 						var balance = result.data.balance; 
     					document.getElementById("balanceSpan").innerHTML= balance+'元';
@@ -225,7 +229,7 @@
     				},function(result){
 						return; 
     				}
-    		);*/
+    		);
     		
     		tzdr.init.initHearListener();
   			//tzdr.init.initButtomListener();
@@ -237,9 +241,9 @@
     			history.back();
     		});*/ 
     		
-    		/*document.getElementById("onlinePay").addEventListener("tap",function(){
+    		document.getElementById("onlinePay").addEventListener("tap",function(){
     			document.getElementById("onlinePay").href="#item1mobile";
-    		});*/
+    		});
 
     		document.getElementById("alipay").addEventListener("tap",function(){
     			document.getElementById("alipay").href="#item2mobile";
@@ -249,7 +253,7 @@
     		});
     		
     		//添加充值金额文本框监听
-    		/*document.getElementById("rechargeMoney").addEventListener('input',function(){
+    		document.getElementById("rechargeMoney").addEventListener('input',function(){
     			if(this.value && !Number(this.value)){  //非数字赋值空
     				var _length = this.value.length;
     				moneyHandle(this.value.substr(0,_length-1),this);  //删除非金额字符
@@ -261,20 +265,25 @@
     				this.value = _temp_value.length > 2 ? this.value.substr(0,_length-1) : this.value;
     				return;
     			}
-			})*/
+			})
     		
     		//网银充值“立即充值”操作
-    		/*document.getElementById("recharge-btn").addEventListener("tap",function(){
+    		document.getElementById("recharge-btn").addEventListener("tap",function(){
     			var money = document.getElementById("rechargeMoney").value;
     			if(mui.isnull(money)){
     				mui.toast("充值金额不能为空");
     				return;
     			}
     			//充值"操作"
-				mui.app_request('/user/pay/ebankrecharge',{
+				mui.app_request('/user/pay/ebankrecharge',{ 
 					"money":money
 					},function(result){
-						var payParams = {mobilePayUrl:result.data.mobilePayUrl,merchantaccount:result.data.merchantaccount,data:result.data.data,encryptkey:result.data.encryptkey};
+					 var payParams = {"payurl":result.data.payurl,"vamount":result.data.vamount,"vmd5info":result.data.vmd5info,
+						 "vmid":result.data.vmid,"vmoneytype":result.data.vmoneytype,"vordername":result.data.vordername,
+						 "vorderstatus":result.data.vorderstatus,"vorid":result.data.vorid,"vpmode":result.data.vpmode,
+						 "vrcvaddr":result.data.vrcvaddr,"vrcvname":result.data.vrcvname,"vrcvpost":result.data.vrcvpost,
+						 "vrcvtel":result.data.vrcvtel,"vurl":result.data.vurl,"vymd":result.data.vymd};
+						//var payParams ={mobilePayUrl:result.data.mobilePayUrl,merchantaccount:result.data.merchantaccount,data:result.data.data,encryptkey:result.data.encryptkey};
 						payPage = plus.webview.create('pay.html','pay.html',{},payParams)
 	    				plus.webview.show(payPage);
 						return;
@@ -285,13 +294,17 @@
 						}else if(result.code==3){
 							mui.toast("充值金额必须大于或等于1、小于或等于5000000！");
 							return;
-						}else{
+						}else if(result.code==4){
+							mui.toast("在线网银每天限额10万元，超额部分请选择其他方式充值！");
+							return;
+						}
+						else{
 							mui.toast("系统繁忙，请稍后再试！");
 							return;
 						}
 					}
 				);
-    		});*/
+    		});
     		
     		//获取支付宝账号
     		getalipayAcount();

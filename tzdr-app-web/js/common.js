@@ -142,6 +142,7 @@
 	
 	//校验非空,true为空；false不空
 	mui.isnull=function(data){
+		//alert(data);  
 		return data==null || data == "" || typeof(data) == "undefined" || data.length == 0 ? true : false;
 	}
 	
@@ -255,7 +256,7 @@ var tzdr = {
 	// 系统常量
 	constants:{
 		//接口域名地址
-		//api_domain:"http://192.168.10.34:8080/tzdr-app/",
+		//api_domain:"http://192.168.10.115:8080/tzdr-app/",
 		api_domain:"http://c.tzdr.com:8888/tzdr-app/", 
 		//api_domain:"http://app.tzdr.com/",
 		//图片地址
@@ -266,7 +267,12 @@ var tzdr = {
 		//密钥
 		user_secret:'user_secret',
 		//用户手机号
-		user_mobile:'user_mobile'
+		user_mobile:'user_mobile',
+		//区分appstore，如:false=否，true=是,默认值为false
+		is_appstore:false,
+		//企业ipa下载地址
+		ipa_download_url:'itms-services://?action=download-manifest&url=https://update.tzdr.com/Future/download/test_tzdr_app/tzdr.plist'
+		//ipa_download_url:'itms-services://?action=download-manifest&url=https://update.tzdr.com/Future/download/ios_tzdr_app/tzdr.plist'
 	},
 	cacheNews:{
 		// 新闻加载日期
@@ -387,7 +393,7 @@ var tzdr = {
 					    if(s){
 							mui.app_refresh('scheme');
 						}
-						mui.openWindow({url:mui.app_filePath("tzdr/future/list.html"),id:"scheme"});
+						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
 						return;
 					}
 					mui.openWindow({url:mui.app_filePath("tzdr/future/listrg.html"),id:"noscheme"});
@@ -401,6 +407,13 @@ var tzdr = {
 					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
 				});
 			
+				document.getElementById("ftogether").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("ftogether");
+					if(p){
+						mui.app_refresh('ftogether');  
+					}
+					mui.openWindow({url:mui.app_filePath("tzdr/buy/buy.html"),id:"ftogether"});
+				});
 			
 		}
 	},
@@ -428,6 +441,7 @@ var tzdr = {
 		 */  
 		formatCurrency:function(s,n) { 
 			var num=s;
+			s = Math.abs(s);
 			n = n>0 && n<=20 ? n : 2;
 			s = parseFloat((s+"").replace(/[^\d\.-]/g,"")).toFixed(n)+""; 
 			var l = s.split(".")[0].split("").reverse(), 
@@ -436,11 +450,20 @@ var tzdr = {
 			for(i = 0;i<l.length;i++){ 
 			t+=l[i]+((i+1)%3==0 && (i+1) != l.length ? "," : ""); 
 			} 
+			
+			var result = num;
 			if(n==0||num.toString().indexOf(".")==-1){
 				
-				return t.split("").reverse().join("");
+				   result = t.split("").reverse().join("");
+			}else 
+			{
+					result = t.split("").reverse().join("")+"."+r; 
 			}
-			return t.split("").reverse().join("")+"."+r; 
+		
+			if (num<0){
+				result = "-"+result;
+			}
+			return result;
 		},
 		/**
 		 * 金额数值去掉','号

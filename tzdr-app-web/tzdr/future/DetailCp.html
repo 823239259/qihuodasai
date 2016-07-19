@@ -223,6 +223,22 @@
     				h5.innerHTML="日经225";
     				p.innerHTML=details.nikkeiTranActualLever+"手";
     				break;
+    			case 14:
+    				h5.innerHTML="小恒指";
+    				var lhsiLever = details.lhsiTranActualLever;
+    				if(mui.isnull(lhsiLever)){
+    					lhsiLever = 0;
+    				}
+    				p.innerHTML=lhsiLever+"手";
+    				break;
+    			case 15:
+    				h5.innerHTML="美黄金";
+    				var aglever = details.agTranActualLever;
+    				if(mui.isnull(aglever)){
+    					aglever = 0;
+    				}
+    				p.innerHTML=aglever+"手";
+    				break;
     			default:
     				break;
     		}
@@ -262,6 +278,12 @@
     				break;
     			case 13:
     				b.innerHTML="日经225  "+outDiskList.mainContract;
+    				break;
+    			case 14:
+    				b.innerHTML="小恒指  "+outDiskList.mainContract;
+    				break;
+    			case 15:
+    				b.innerHTML="美黄金  "+outDiskList.mainContract;
     				break;
     			default:
     				break;
@@ -320,7 +342,7 @@
 		</li>			
 		<li class="mui-table-view-cell">
 			<label>交易时间：</label>
-			<span>9:05-23:55 不同期货不同交易时间段</span>
+			<span>06:05-04:55 不同期货不同交易时间段</span>
 		</li>
 	</ul>		
 	<div class="sc_listopen" id="opening" style="display: none;">开户中</div>

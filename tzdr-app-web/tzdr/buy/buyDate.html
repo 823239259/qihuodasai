@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>合买详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/echarts.common.min.js"></script>
+	<script>
+		mui.init({});
+		var win;
+		var tradeID;
+		var  pieEchartsTitle;
+		// 合买结束时间
+		var buying_end_time=0;
+		// 操盘结束时间
+		var oper_end_time=0;
+		
+		// -----------折线配置------------------------------指定图表的配置项和数据
+		var line_options = {
+			title: {
+				text: "操盘详情："
+			},
+			/*tooltip: {
+				trigger: "axis"
+			},*/
+			legend: {
+				data: ["看涨行情线","看跌行情线"],
+				x: "center",
+   				y: "bottom"
+			},
+			toolbox: {
+				show: true,
+				feature: {
+					mark: {
+						show: true
+					},
+					magicType: {
+						show: false,
+						type: ["line", "bar"]
+					},
+				}
+			},
+			
+			xAxis: [{
+				type: "category",
+				boundaryGap: false,
+				data:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+				splitLine: {
+					show: false
+				},
+				axisTick: {
+					show: true,
+            		inside: true
+				},
+				axisLabel: {
+					show: false
+				}
+			}],
+			yAxis: [{
+				type: "value",
+				name: "",
+				max:10,
+				min:-10, 
+				splitLine: {
+					show: false
+				},
+				axisTick: {
+					show: false
+				},
+				axisLabel: {
+					show: false
+				}
+			}],
+			series: [{
+				name: "看涨行情线",
+				type: "line",
+				symbol:"none",
+				data:[0],
+				itemStyle:{
+					normal: {
+						color : "#FF3030"
+					}
+				}
+			},{
+				name: "看跌行情线",
+				type: "line",
+				symbol:"none",
+				data:[0],
+			 	itemStyle:{
+					normal: {
+						color : "#458B00"
+					}
+				}
+			}
+			],
+			//backgroundColor:"rgb(255, 255, 255)",
+			grid: {
+		        x: 64
+		    }
+		};
+		// 基于准备好的dom，初始化echarts实例
+		var line_Chart;
+		// -----------折线配置------------------------------
+		
+		// -----------饼图配置------------------------------
+		var pie_Chart;
+		// 指定图表的配置项和数据
+		var pie_options = { 
+			 title: {
+			        //text:"加载中...",
+			        //subtext: '<div>s</div>',
+			        x: 'center',
+			        y: 'center'
+			  },
+			    calculable: false,
+			    series: [
+				 {
+				 	    silent:true,
+			            name: "",
+			            type: "pie",
+			            radius: ["100%", "80%"],
+			            itemStyle: {
+			                normal: {
+			                    label: {
+			                        show: false
+			                    },
+			                    labelLine: {
+			                        show: false
+			                    }
+			                },
+			                emphasis: {
+			                    label: {
+			                        show: true,
+			                        position: "center",
+			                        textStyle: {
+			                            fontSize: "30",
+			                            fontWeight: "bold"
+			                        }
+			                    }
+			                }
+			            },
+			            data: [
+			                
+			                {
+			                    value: 0,
+			                    name: "看跌",
+			                    itemStyle: {
+									normal: {
+										color : "#458B00"
+									}
+								}
+			                },
+			                {
+			                    value: 0,
+			                    name: "看涨",
+			                    itemStyle: {
+									normal: {
+										color : "#FF3030"
+									}
+								}
+			                }
+			            ]
+			        }
+			    ]
+			};
+		// -----------饼图配置------------------------------
+		mui.plusReady(function(){  			
+			//初始化监听头部和底部事件
+			//tzdr.init.initHearListener();
+			win = plus.webview.currentWebview();
+			tradeID = win.tradeID;
+			
+			//-------------------- 操盘详情折线图---------------------------
+			//line_Chart = echarts.init(document.getElementById('line_echart'));	
+			//line_Chart.setOption(line_options); 
+		
+			// 使用刚指定的配置项和数据显示图表。
+			//line_Chart.setOption(line_options); 
+			//-------------------- 操盘详情折线图--------------------------- 
+			
+			//看涨参与提交
+			document.getElementById("risePay").addEventListener("tap",function(){
+		  		toPay(tradeID,1);
+		  	});
+		  	
+		  	//看跌参与提交
+			document.getElementById("dropPay").addEventListener("tap",function(){ 
+		  		toPay(tradeID,2);
+		    });
+		   // 查看我的盈亏
+		   document.getElementById("lookprofitLoss").addEventListener("tap",function(){ 
+		   		//获取合买记录id
+				var recordId = this.getAttribute("recordId");
+		  		mui.openWindow({url:"/tzdr/buy/buyInfo.html",id:"buyInfo",extras:{recordId:recordId}});
+		    }); 
+		    // 查看合买规则
+		    document.getElementById("tran_info").addEventListener("tap",function(){
+		  		mui.openWindow({url:"/tzdr/agree/buyru.html",id:"buyru"});
+		    });
+		    
+		  	// 请求获取合买详情 
+			mui.app_request('/ftogether_trade/detail',{"tradeID":tradeID},
+				function(result){
+					document.getElementById("trade_status").value=result.data.status;
+					//设置合买、操盘结束时间
+					buying_end_time=result.data.openTime-5*60;
+					oper_end_time=result.data.openTime+result.data.operateTime*60;
+					//设置标题
+					document.getElementById("mui_title_id").innerHTML=result.data.name;
+					//设置价格
+      				document.getElementById("price").innerHTML=result.data.price;
+      				//设置看涨看跌百分比
+      				var totalCopies = result.data.riseCopies+result.data.dropCopies;
+					var risePerfect = totalCopies==0?0:((result.data.riseCopies/totalCopies)*100).toFixed(2);
+					var dropPerfect = totalCopies==0?0:((result.data.dropCopies/totalCopies)*100).toFixed(2);
+					document.getElementById("risePerfect").innerHTML=risePerfect;
+					document.getElementById("dropPerfect").innerHTML=dropPerfect;
+					//设置合买状态对应的满单份数
+      				// 合买中
+      				if (result.data.status==1){
+      					document.getElementById("buy_bd_mainbtn").style.display='block';
+      					document.getElementById("end_bd_mainbtn").style.display='none';
+						//计算满单份数
+						var riseOrders = parseInt(result.data.riseCopies/result.data.fullCopies);
+						var dropOrders = parseInt(result.data.dropCopies/result.data.fullCopies); 
+						document.getElementById("buy_rise_copies").innerHTML=result.data.riseCopies;
+						document.getElementById("buy_rise_full_copies").innerHTML=riseOrders;
+						document.getElementById("buy_drop_copies").innerHTML=result.data.dropCopies;
+						document.getElementById("buy_drop_full_copies").innerHTML=dropOrders;
+						pieEchartsTitle="合买倒计时";
+						setInterval('setCountdown('+buying_end_time+')',1000);
+      				}
+      				//操盘中和已结算
+      				if (result.data.status==2 || result.data.status==3){
+      					document.getElementById("buy_bd_mainbtn").style.display='none';
+      					document.getElementById("end_bd_mainbtn").style.display='block';
+      					//计算退回份数，满单数
+      					//计算满单份数
+						var riseOrders = parseInt(result.data.realRiseCopies/result.data.fullCopies);
+						var dropOrders = parseInt(result.data.realDropCopies/result.data.fullCopies); 
+						
+      					document.getElementById("realRiseCopies").innerHTML=result.data.riseCopies;
+						document.getElementById("realDropCopies").innerHTML=result.data.dropCopies;;
+						document.getElementById("rise_full_copies").innerHTML=riseOrders;
+						document.getElementById("drop_full_copies").innerHTML=dropOrders;
+						document.getElementById("rise_back_copies").innerHTML=result.data.riseCopies%result.data.fullCopies;
+						document.getElementById("drop_back_copies").innerHTML=result.data.dropCopies%result.data.fullCopies;
+						//alert(result.data.own);
+						// 已结算设置 赚钱的图标
+						if (result.data.status==3){
+							if (!mui.isnull(result.data.callClosePoint) 
+									&& !mui.isnull(result.data.callOpenPoint) 
+									&& result.data.callClosePoint>result.data.callOpenPoint){
+								document.getElementById("rise_profit_icon").style.display="block";
+							}
+							if (!mui.isnull(result.data.putClosePoint) 
+								&& !mui.isnull(result.data.putOpenPoint)
+								&& result.data.putClosePoint<result.data.putOpenPoint){
+								document.getElementById("drop_profit_icon").style.display="block";
+							}
+							setPieShow("方案已结算");
+							// 设置能否查看交易盈亏
+							if(result.data.own){
+								document.getElementById("lookprofitLoss").setAttribute("recordId",result.data.recordId);
+								document.getElementById("lookprofitLoss").style.display="block";
+							}
+						}else
+						{
+							pieEchartsTitle="操盘倒计时";
+							setInterval('setCountdown('+oper_end_time+')',1000);
+						}		
+					
+      				}
+      				//设置综合参数显示
+      				document.getElementById("full_copies").innerHTML=result.data.fullCopies;
+      				document.getElementById("operate_time").innerHTML=result.data.operateTimeStr;
+      				document.getElementById("contract").innerHTML=result.data.contract; 
+      				document.getElementById("targetProfitPoint").innerHTML=result.data.targetProfitPoint;
+      				document.getElementById("floatMoint").innerHTML=result.data.floatMoint; 
+      				document.getElementById("stopPoint").innerHTML=result.data.stopPoint; 
+      				document.getElementById("tradeName").innerHTML=result.data.species;   
+      				    //盈利结算规则
+      				document.getElementById("price_profit").innerHTML=result.data.price;
+      				document.getElementById("profitFee").innerHTML=result.data.profitFee; 
+      				document.getElementById("profitCopiesPrice").innerHTML=result.data.profitCopiesPrice; 
+      				    //亏损结算规则
+      				document.getElementById("price_loss").innerHTML=result.data.price;
+      				document.getElementById("lossFee").innerHTML=result.data.lossFee;  
+      				document.getElementById("lossCopiesPrice").innerHTML=result.data.lossCopiesPrice;   
+      				if (!mui.isnull(result.data.callOpenPoint)){
+      					//设置开平仓点位
+      					document.getElementById("callOpenPoint").innerHTML=result.data.callOpenPoint.toFixed(2);
+      					document.getElementById("callProfitPoint").innerHTML=(result.data.callOpenPoint+result.data.targetProfitPoint).toFixed(2); 
+      					document.getElementById("callStopPoint").innerHTML=(result.data.callOpenPoint-result.data.stopPoint).toFixed(2); 
+      				}
+      				
+      				if (!mui.isnull(result.data.putOpenPoint)){
+      					document.getElementById("putOpenPoint").innerHTML=result.data.putOpenPoint.toFixed(2); 
+      					document.getElementById("putProfitPoint").innerHTML=(result.data.putOpenPoint-result.data.targetProfitPoint).toFixed(2);
+      					document.getElementById("putStopPoint").innerHTML=(result.data.putOpenPoint+result.data.stopPoint).toFixed(2);
+      				}
+      				if (!mui.isnull(result.data.callClosePoint)){
+      					document.getElementById("callClosePoint").innerHTML=result.data.callClosePoint.toFixed(2); 
+      					var callprofit = (result.data.callClosePoint-result.data.callOpenPoint).toFixed(2); 
+      					document.getElementById("call_profitAndloss").innerHTML=callprofit>0?("+"+callprofit):callprofit;
+      				}
+      				
+      				if (!mui.isnull(result.data.putClosePoint)){
+      					document.getElementById("putClosePoint").innerHTML=result.data.putClosePoint.toFixed(2); 
+      					var putprofit = (result.data.putOpenPoint-result.data.putClosePoint).toFixed(2);
+      					document.getElementById("put_profitAndloss").innerHTML=putprofit>0?("+"+putprofit):putprofit;
+      				}
+      				     	
+      				//------------------------------------------------------监听合买记录点击事件---------------------------------------
+      				document.getElementById("lookUP").addEventListener("tap",function(){
+				  		mui.openWindow({url:"/tzdr/buy/record.html",id:"tradeRecord",extras:{tradeID:tradeID,direction:1,fullCopies:result.data.fullCopies,price:result.data.price}});
+				  	}); 	
+				  	document.getElementById("buying_lookUP").addEventListener("tap",function(){
+				  		mui.openWindow({url:"/tzdr/buy/record.html",id:"tradeRecord",extras:{tradeID:tradeID,direction:1,fullCopies:result.data.fullCopies,price:result.data.price}});
+				  	}); 
+				  	document.getElementById("lookDOWN").addEventListener("tap",function(){ 
+				  		mui.openWindow({url:"/tzdr/buy/record.html",id:"tradeRecord",extras:{tradeID:tradeID,direction:2,fullCopies:result.data.fullCopies,price:result.data.price}});
+				  	}); 
+				  	document.getElementById("buying_lookDOWN").addEventListener("tap",function(){
+				  		mui.openWindow({url:"/tzdr/buy/record.html",id:"tradeRecord",extras:{tradeID:tradeID,direction:2,fullCopies:result.data.fullCopies,price:result.data.price}});
+				  	});
+				  	//------------------------------------------------------监听合买记录点击事件---------------------------------------
+      				//---------------------------------------------画图表----------------------------------------------------------------
+					// 基于准备好的dom，初始化echarts实例
+					pie_Chart = echarts.init(document.getElementById('circle_chart'));
+					// 指定图表的配置项和数据
+					pie_options.series[0].data[1].value=risePerfect;
+					pie_options.series[0].data[0].value=dropPerfect;
+					// 使用刚指定的配置项和数据显示图表。
+					pie_Chart.setOption(pie_options);
+					//---------------------------------------------画图表----------------------------------------------------------------	
+      				
+      				// 操盘详情折线图--
+					queryLineData(tradeID);  
+					// 操盘详情折线图--
+      			},function(result){
+      				mui.toast("系统繁忙，请稍候再试！");
+      		});
+      			
+		});
+		
+		//获取折线图行情数据
+		function queryLineData(tradeID){
+			mui.app_request('/ftogether_trade/line_data',{"tradeID":tradeID},
+				function(result){
+					  if (mui.isnull(result) || mui.isnull(result.data) 
+					  	|| (mui.isnull(result.data.callOpenPoint)
+					  	&& mui.isnull(result.data.putOpenPoint)))
+					  {
+					  	document.getElementById("write_oper").style.display="block";
+					  }
+					  // 操盘中和结算
+					  if (document.getElementById("trade_status").value != 1 ){
+					  	  var riseOrders = document.getElementById("rise_full_copies").innerHTML;
+						  var dropOrders = 	document.getElementById("drop_full_copies").innerHTML;
+						 // alert(riseOrders+"|"+dropOrders);
+						  if (parseInt(dropOrders)==0 && parseInt(riseOrders)==0 ){
+								document.getElementById("write_oper").innerHTML="未操盘";
+								document.getElementById("write_oper").style.display="block";
+							}
+						 //设置行情点数
+						var riseFloatPoint = result.data.riseFloatPoint;
+						var dropFloatPoint = result.data.dropFloatPoint;
+						line_options.series[0].name="看涨行情线"+(mui.isnull(riseFloatPoint)?'':(riseFloatPoint>0?("+"+riseFloatPoint):riseFloatPoint)+"点");  
+					  	line_options.series[1].name="看跌行情线"+(mui.isnull(dropFloatPoint)?'':(dropFloatPoint>0?("+"+dropFloatPoint):dropFloatPoint)+"点");
+					  	line_options.legend.data=["看涨行情线"+(mui.isnull(riseFloatPoint)?'':(riseFloatPoint>0?("+"+riseFloatPoint):riseFloatPoint)+"点"),
+					  			"看跌行情线"+(mui.isnull(dropFloatPoint)?'':(dropFloatPoint>0?("+"+dropFloatPoint):dropFloatPoint)+"点")];
+					  }
+					 
+					  
+					  line_options.series[0].data=result.data.riseData;  
+					  line_options.series[1].data=result.data.dropData;
+					
+	    			  line_options.xAxis[0].data=result.data.xAxisData;  
+	    			  line_options.yAxis[0].min=result.data.minPoint;
+	    			  line_options.yAxis[0].max=result.data.maxPoint;
+	    			  line_Chart = echarts.init(document.getElementById('line_echart'));	
+	    			  line_Chart.clear(); 
+	    			  //alert(JSON.stringify(line_options));
+	    			  line_Chart.setOption(line_options);
+	    			  document.getElementById("dropStop").style.top=parseInt((85/result.data.maxPoint)*result.data.stopPoint+55)+"px"; 
+	    			  document.getElementById("riseStop").style.bottom=parseInt((85/result.data.maxPoint)*result.data.stopPoint+55)+"px"; 
+	    			 // alert(document.getElementById("riseStop").style.bottom);
+				},
+				function(result){
+				}
+		);
+		}
+		//跳转到支付提交页面
+		function  toPay(tradeID,direction){
+			if (mui.cacheUser.isLogin()){
+				var price = document.getElementById("price").innerHTML;
+				if (mui.isnull(price)){
+					mui.toast("系统异常，价格有误！不能购买.");
+					return;
+				}
+				var p=plus.webview.getWebviewById("togetherPay");
+				if(p){
+						mui.app_refresh('togetherPay');   
+				}
+				mui.openWindow({url:"/tzdr/buy/pay.html",id:"togetherPay",extras:{tradeID:tradeID,direction:direction,price:price,pageID:"buyDate"}});
+			}else
+			{
+				mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"buyDate"}});
+			}
+			
+		}
+		// 处理倒计时
+		function setCountdown(endTime){
+			document.getElementById("countDown").style.display="block";
+			var countwd=document.getElementById("countDown").clientWidth;
+			document.getElementById("countDown").style.marginLeft=(0-countwd/2)+'px';
+	        var NowTime = new Date();
+	         if (NowTime.getTime()/1000>oper_end_time){
+	        	setPieShow("等待结算...");
+	        	return ;
+	        }
+	        
+	        if (NowTime.getTime()/1000<=oper_end_time && NowTime.getTime()/1000>=buying_end_time){
+	        	endTime = oper_end_time;
+	        	pieEchartsTitle="操盘倒计时";
+	        }
+	        var EndTime= new Date(endTime*1000); //截止时间 前端路上 http://www.51xuediannao.com/qd63/
+	       	document.getElementById("pieEchartsTitle").innerHTML=pieEchartsTitle;
+
+	        var t =EndTime.getTime() - NowTime.getTime();
+	        var d=Math.floor(t/1000/60/60/24);
+	        var h=Math.floor(t/1000/60/60%24);
+	        var m=Math.floor(t/1000/60%60);
+	        var s=Math.floor(t/1000%60);
+	        document.getElementById("down_hour").innerHTML = h<10?("0"+h):h;
+	        document.getElementById("down_minute").innerHTML = m<10?("0"+m):m;
+	        document.getElementById("down_sec").innerHTML = s<10?("0"+s):s;
+		}
+		//控制饼图中间部位显示值
+		function setPieShow(pieTitle){ 
+			
+			document.getElementById("countDown").style.display="block";
+			
+			document.getElementById("hmsec").style.display="none";
+			document.getElementById("countDown").style.top="90px";
+			var countwd=document.getElementById("countDown").clientWidth;
+		
+			document.getElementById("countDown").style.marginLeft=(0-countwd/2)+'px';  
+			document.getElementById("pieEchartsTitle").innerHTML=pieTitle;
+			
+		}
+	</script>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav own-topbg">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+	<h1 class="mui-title" id="mui_title_id">合买详情</h1>		
+	<a href="javascript:void(0);" class="top-tel" id="tran_info">合买细则</a>
+</header>
+<div class="mui-content buydate">
+	<input type="hidden" id="trade_status" />
+	<div class="bd_mainbox">
+		<div class="bd_main">
+			<div class="bd_mainnum">
+				 <p class="up"><i></i>看涨：<span id="risePerfect">0</span>%</p>
+				 <p class="down"><i></i>看跌：<span id="dropPerfect">0</span>%</p>			
+			</div>
+			<div class="bd_mapbox">
+				<!--占比图表-->
+			    <div id="circle_chart" style="height:210px;margin-bottom: 10px;"></div>
+				<div id="countDown" style="display: none;">
+					<div id="pieEchartsTitle">操盘倒计时</div>
+					<div id="hmsec">
+						<span id="down_hour"></span><i>:</i>
+						<span id="down_minute"></span><i>:</i>
+						<span id="down_sec"></span>
+					</div>
+				</div>
+			</div>
+			<!--合买中-->
+			<div class="bd_mainbtn" id="buy_bd_mainbtn" style="display: none;">
+				<div class="bd_mainbtn_font">
+					<span class="up" id="buying_lookUP">看涨方向：合买<t id="buy_rise_copies">0</t>份，满<t id="buy_rise_full_copies">0</t>单<i class="mui-icon mui-icon-arrowright"></i></span>
+					<span class="down" id="buying_lookDOWN">看跌方向：合买<t id="buy_drop_copies">0</t>份，满<t id="buy_drop_full_copies">0</t>单<i class="mui-icon mui-icon-arrowright"></i></span>
+				</div>
+				<div class="bd_mainbtn_btn">
+					<a id="risePay" href="javascript:void(0);" class="up">我要看涨</a>
+					<a id="dropPay" href="javascript:void(0);" class="down">我要看跌</a>
+				</div>
+				<p class="up"></p>			
+				<p class="down"></p>
+			</div>
+			<!--已结算-->			
+			<div class="bd_mainbtn bd_mainbtnov" id="end_bd_mainbtn">
+				<div class="bd_mainbtnbox">
+					<p class="up"  id="lookUP"><span>看涨方向：合买<t id="realRiseCopies">0</t>份，操盘<t id="rise_full_copies">0</t>单,退<t id="rise_back_copies">0</t>份<i class="mui-icon mui-icon-arrowright"></i></span></p>
+					<img src="../../images/buy_01.png" style="top: -5px;display: none;" id="rise_profit_icon">
+				</div>		
+				<div class="bd_mainbtnbox">
+					<p class="down"  id="lookDOWN"><span>看跌方向：合买<t id="realDropCopies">0</t>份，操盘<t id="drop_full_copies">0</t>单,退<t id="drop_back_copies">0</t>份<i class="mui-icon mui-icon-arrowright"></i></span></p>
+					<img src="../../images/buy_01.png" style="top: -5px;display: none;" id="drop_profit_icon">
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<label>合买价格：</label>
+			<span><span id="price">1000</span>元/份</span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>合买规则：</label>
+			<span>每<t id="full_copies">0</t>份满1单，未满单份数将退款</span>
+		</li>		
+	</ul>	
+	<ul class="mui-table-view bd_ctn">
+		<li class="mui-table-view-cell">
+			<label>操盘时间：</label>
+			<span id="operate_time"></span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>操盘合约：</label>
+			<span id="contract"></span>  
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>止盈点数：</label>
+			<span id="targetProfitPoint">0</span>点
+			<i><t id="tradeName"></t>一个跳动<span id="floatMoint">0</span>指数点</i>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>止损点数：</label>
+			<span id="stopPoint">62.5</span>点
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>盈利结算：</label>
+			<span><t id="price_profit">0</t>元-<t id="profitFee">0</t>元+盈利点数*<t id="profitCopiesPrice">0</t>元/份</span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>亏损结算：</label>
+			<span><t id="price_loss">0</t>元-<t id="lossFee">0</t>元-亏损点数*<t id="lossCopiesPrice">0</t>元/份</span>
+		</li>		
+	</ul>
+	<div class="bd_linebox">
+		<p id="write_oper" style="display: none;">等待操盘中...</p>
+		<div id="line_echart" style="height:300px;"></div>
+		<span style="top:55px;">看涨止盈</span>
+		<span style="top: 95px;" id="dropStop">看跌止损</span>
+		<span style="top: 140px;">开仓点位</span>
+		<span style="bottom: 95px" id="riseStop">看涨止损</span>
+		<span style="bottom: 55px;">看跌止盈</span>
+	</div>
+	<ul class="mui-table-view bd_overlist">
+		<li class="mui-table-view-cell">
+			<ol>
+				<label>看涨开仓点位:</label>
+				<span class="up" id="callOpenPoint"></span>
+			</ol>
+			<ol>
+				<label>看跌开仓点位:</label>
+				<span class="down" id="putOpenPoint"></span>
+			</ol>
+		</li>
+		<li class="mui-table-view-cell">
+			<ol>
+			<label>看涨止盈点位:</label>
+			<span class="up" id="callProfitPoint"></span>
+			</ol>
+			<ol>
+			<label>看跌止盈点位:</label>
+			<span class="down" id="putProfitPoint"></span>
+			</ol>
+		</li>
+		<li class="mui-table-view-cell">
+			<ol>
+			<label>看涨止损点位:</label>
+			<span class="up" id="callStopPoint"></span>
+			</ol>
+			<ol>
+			<label>看跌止损点位:</label>
+			<span class="down" id="putStopPoint"></span>
+			</ol>
+		</li>
+	</ul>
+	<ul class="mui-table-view bd_overlist">
+		<li class="mui-table-view-cell">
+			<ol>
+			<label>看涨平仓点位:</label>
+			<span class="up" id="callClosePoint"></span>
+			</ol>
+			<ol>
+			<label>看跌平仓点位:</label>
+			<span class="down" id="putClosePoint"></span>
+			</ol>
+		</li>
+		<li class="mui-table-view-cell">
+			<ol>
+			<label>看涨交易盈亏:</label>
+			<span class="up" id="call_profitAndloss"></span>
+			</ol>
+			<ol>
+			<label>看跌交易盈亏:</label>
+			<span class="down" id="put_profitAndloss"></span>
+			</ol>
+		</li>
+	</ul>
+	<div class="bd_btn" id="lookprofitLoss" recordId="" style=" display: none;"><a href="javascript:void(0);">查看我的盈亏</a></div>
+</div>
+</body>
+</html>
