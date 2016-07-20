@@ -1,6 +1,7 @@
 * { margin:0;padding:0;border:0; font-size: 100%;}
 body {font-family: '微软雅黑'; background: #fff;}
 ul,li,ol,i,em { font-style: normal; list-style: none;}
+.top-title a:hover, .navbox a:hover, .bannerlist a:hover, .h_notic a:hover, .w_content a:hover, .copyright a:hover, .copybox a:hover {cursor: pointer;}
 /* top */
 .top-title {width: 100%;background: #333333; border-bottom: 1px solid #1a1a1a;height: 34px;margin: 0 auto;}
 .topctn {width: 1000px; height: 34px; margin: 0 auto; position: relative; z-index: 20;padding:0 5px; background: #333;border-bottom: 1px solid #1a1a1a;}
