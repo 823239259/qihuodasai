@@ -6,6 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport"content="width=1010"/> 
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
@@ -30,6 +31,7 @@
 
 	<!-- common js -->
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
+	<script src="${ctx}/static/script/jquery-1.8.3.js"></script>
 	<script type="text/javascript">
 		 var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
@@ -89,19 +91,21 @@
 <!-- 广告切换 -->
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
+    	<p style="width: 1000px;
+    margin: 0 auto;">
         <c:forEach var="b" items="${banners }" varStatus="status">
         	<a  title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>><span></span></a>
         </c:forEach>
+        </p>
     </div>
     <div class="slide_box" id="slide-box">
        	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
-	    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	    	<a href="javascript:void(0);" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	       </c:forEach>
     	</div>
     </div>
     <div class="login">
-    	
 	        <div class="loginbox">
 	        <%
 	       		if(request.getSession().getAttribute("userName")!=null){
@@ -341,332 +345,6 @@
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
 <script type="text/javascript">
-    /* var href = window.location.href;
- 	// 路径配置
-    require.config({
-        paths:{//${ctx }/static/script
-            'echarts' :href + '/static/script/echarts',
-            'echarts/chart/pie' :href + '/static/script/echarts'
-        }
-    });
- 	
-    var rawData = [];
-    var loadCount = 0;
-    var loadKcount = 0 ;
-    var	 myChart = null;
-    //加载K线图数据模型
-    function loadKData(commodity,contract){
-    	$(function(){
-    		var rawDataLength = rawData.length - 1;
-            var url = "Quotation/doGetQk?commodity="+commodity+"&contract="+contract;
-            if(rawDataLength > 0){
-            	var beginTime = rawData[rawDataLength][0];
-            	url +="&beginTime="+beginTime;
-            }
-            $.ajax({
-	           	 url : url,
-	   			 type:"get",
-	   			 dateType:"json",
-	   			 success:function(data){
-	   				 var resultData = data.data;
-	   				 var addKData = [];
-	   					$.each(resultData,function (i,item){
-	   						var openPrice = item.OpenPrice;
-	   						var closePrice = item.LastPrice;
-	   						var chaPrice = closePrice - openPrice;
-	   						var sgData = [item.DateTime,openPrice,closePrice,chaPrice,"",item.LowPrice,item.HighPrice,"","","-"];
-	   						addKData[i] = sgData;
-	   					});
-	   					//追加到容器中
-	   					var option = setOption(addKData);
-	   					myChart.setOption(option);
-	   				 }
-            });
-    	});
-    }
-    //设置数据参数（为画图做准备）
-    function setOption(rawData){
-    	var dates = rawData.map(function (item) {
-            return item[0];
-        });
-
-        var data = rawData.map(function (item) {
-            return [+item[1], +item[2], +item[5], +item[6]];
-        });
-    	var option = {
-                title: {
-                    text: '1分钟K线',
-                    textStyle: {
-                    	color : "#ffcc33"
-                    }
-                },
-                backgroundColor: '#333',
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        animation: false,
-                        lineStyle: {
-                            color: '#376df4',
-                            width: 2,
-                            opacity: 1
-                        }
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    data: dates,
-                    axisLine: { lineStyle: { color: '#8392A5' } }
-                },
-                yAxis: {
-                    scale: true,
-                    axisLine: { lineStyle: { color: '#8392A5' } },
-                    splitLine: { show: false }
-                },
-                dataZoom: [{
-                    textStyle: {
-                        color: '#8392A5'
-                    },
-                    handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-                    handleSize: '80%',
-                    dataBackground: {
-                        areaStyle: {
-                            color: '#8392A5'
-                        },
-                        lineStyle: {
-                            opacity: 0.8,
-                            color: '#8392A5'
-                        }
-                    },
-                    handleStyle: {
-                        color: '#fff',
-                        shadowBlur: 3,
-                        shadowColor: 'rgba(0, 0, 0, 0.6)',
-                        shadowOffsetX: 2,
-                        shadowOffsetY: 2
-                    }
-                }, {
-                    type: 'inside'
-                }],
-                animation: false,
-                series: [
-                    {
-                        type: 'candlestick',
-                        name:"1分钟K线",
-                        data: data,
-                        itemStyle: {
-                            normal: {
-                                color: '#FD1050',
-                                color0: '#0CF49B',
-                                borderColor: '#FD1050',
-                                borderColor0: '#0CF49B'
-                            }
-                        }
-                    }
-                ]
-            };
-    	return option;
-    }
-    function calculateMA(dayCount, data) {
-        var result = [];
-        for (var i = 0, len = data.length; i < len; i++) {
-            if (i < dayCount) {
-                result.push('-');
-                continue;
-            }
-            var sum = 0;
-            for (var j = 0; j < dayCount; j++) {
-                sum += data[i - j][1];
-            }
-            result.push(sum / dayCount);
-        }
-        return result;
-    } 
-    
-    //生成一个K线图容器
-    function loadK(){
-    	 // 使用
-        require(
-                [
-                    'echarts',
-                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
-                ],
-                function (ec) {
-                	
-                    // 基于准备好的dom，初始化echarts图表
-                    myChart = ec.init(document.getElementById('main'));
-                	var option = setOption(rawData);
-    			    // 为echarts对象加载数据
-	    			myChart.setOption(option);
-                }
-        );
-    }
-    var interValData = null;
-    function bindLoadKDataInterValData(CommodityNo,contract){
-    	interValData = window.setInterval(function(){loadKData(CommodityNo,contract)}, 3000);
- 		loadCount ++;
-    }
-    function clearLoadKDataInterVal(){
-    	if(interValData != null){
-	    	window.clearInterval(interValData);
-    	}
-    }
-    function exctionLoadK(CommodityNo,contract){
-	 	clearLoadKDataInterVal();
-	 	bindLoadKDataInterValData(CommodityNo,contract);
-    }
-    function propHrefCP(commod){
-    	$(function(){
-	    	if(commod == "HSI"){
-		 		 $("#mainSqcp").prop("href",href + "hsi/index");
-		 	 }else if(commod == "CL"){
-		 		 $("#mainSqcp").prop("href",href + "crudeoil/index");
-		 	 }else if(commod == "CN"){
-		 		 $("#mainSqcp").prop("href",href + "ftse/index");
-		 	 }else{
-		 		 $("#mainSqcp").prop("href",href + "outDisk/index");
-		 	 }
-    	});
-    }
-   $(function(){
-	 		//初始化K线图容器
-	   		loadK();
-    		$(".w_center_xiangqing .left_xiangqing .left_hidden").html("");
-			$.ajax({
-				url:"Quotation/doGetCommodity",
-				type:"get",
-				dateType:"json",
-				success:function(result){
-					 var data = result.data;
-					 for(var i = 0 ; i < data.length; i++){
-						 var html = '';
-						 var item = data[i];
-						 var size = item.DotSize;
-						 var _data = item.data;
-						 var commodityName = item.commodityName;
-						 var qlastPrice = (parseFloat(_data.QLastPrice)).toFixed(size);
-						 var qpreCloseingPrice = (parseFloat(_data.QPreClosingPrice)).toFixed(size);
-						 var qLowPrice = (parseFloat(_data.QLowPrice)).toFixed(size);
-						 var qHighPrice = (parseFloat(_data.QHighPrice)).toFixed(size);
-						 var qOpenPrice = (parseFloat(_data.QOpenPrice)).toFixed(size);
-						 var scal = (parseFloat(_data.QChangeRate)).toFixed(size);
-						 var bs = "↑";
-						 var jj = "+";
-						 var color = " #ff5500";
-						 if(scal < 0){
-							 bs = "↓";
-							 jj = "";
-							 color = "#0bffa4";
-						 }
-						 html += '<div topData = "'+qpreCloseingPrice+'&'+qLowPrice+'&'+qHighPrice+'&'+qOpenPrice+'&'+_data.TimeStamp+'" data = "'+_data.CommodityNo+'&'+item.contract+'"  class="left_xiangmu left_x'+i+'';
-						 if(loadCount  == 0){
-						 	 html += ' on';
-						 	loadKData(_data.CommodityNo,item.contract);
-						 	exctionLoadK(_data.CommodityNo,item.contract);
-						 	propHrefCP(_data.CommodityNo);
-						 	$(".zs").text(qpreCloseingPrice);	
-						    $(".fd").text(qLowPrice+' - '+qHighPrice);
-						    $(".jk").text(qOpenPrice);
-						    $(".gxsj").text(_data.TimeStamp);
-						    $("#dqCommodNo").val(_data.CommodityNo);
-						 }
-						 html +=  ' "> <p><em style="" class = "right">'+commodityName+'</em>'
-						 	  + '<span class = "qlast'+i+' left" style="color: '+color+';">'+ jj  + qlastPrice + " " + bs +'</span>'
-						 	  + '<span class = "qchange'+i+' right" style="color: '+color+';">'+ jj + (parseFloat(_data.QChangeValue)).toFixed(size)+'</span>'
-						 	  + '<span class = "scal'+i+' left" style="color: '+color+';">'+ jj + scal  + "%" +'</span>';
-						 $(".w_center_xiangqing .left_xiangqing .left_hidden").append(html);
-						 $(".left_x"+i+"").bind("click",function(){
-							 loadK();
-							 var obj = $(this);
-							 var da = obj.attr("data");
-							 if(da != null){
-								  rawData=[];
-							 	  var daArray = da.split("&");
-							 	  var commod = daArray[0];
-							 	  var contract = daArray[1];
-							 	  loadKData(commod,contract);
-							 	  exctionLoadK(commod,contract);
-							 	  $("#dqCommodNo").val(commod);
-							 	  propHrefCP(commod);
-							 }
-							 var topData = obj.attr("topData");
-							 if(topData != null){
-								 var topDataArray = topData.split("&");	
-								 $(".zs").text("昨收:"+topDataArray[0]);	
-								 $(".fd").text("每日幅度:"+topDataArray[1]+' - '+topDataArray[2]);
-								 $(".jk").text("今开:"+topDataArray[3]);
-								 $(".gxsj").text("更新时间:"+_data.TimeStamp);
-							 }
-							 var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
-							 left_xiangmu.each(function(){
-								 left_xiangmu.removeClass('on');
-							 });
-							  obj.addClass('on');
-						 });
-					 }
-				}
-			});
-		});
-	   window.setInterval(function(){ $(function(){
-		   	$.ajax({
-		   		url:"Quotation/doGetCommodity",
-					type:"get",
-					dateType:"json",
-					success:function(result){
-						 var data = result.data;
-						 for(var i = 0 ; i < data.length; i++){
-							 var html = '';
-							 var item = data[i];
-							 var size = item.DotSize;
-							 var _data = item.data;
-							 var commodityName = item.commodityName;
-							 var qlastPrice = (parseFloat(_data.QLastPrice)).toFixed(size);
-							 var qpreCloseingPrice = (parseFloat(_data.QPreClosingPrice)).toFixed(size);
-							 var qLowPrice = (parseFloat(_data.QLowPrice)).toFixed(size);
-							 var qHighPrice = (parseFloat(_data.QHighPrice)).toFixed(size);
-							 var qOpenPrice = (parseFloat(_data.QOpenPrice)).toFixed(size);
-							 var scal = (parseFloat(_data.QChangeRate)).toFixed(size);
-							 var qChangeValue = (parseFloat(_data.QChangeValue)).toFixed(size);
-							 var bs = "↑";
-							 var jj = "+";
-							 var color = " #ff5500";
-							 if(scal < 0){
-								 bs = "↓";
-								 jj = "";
-								 color = "#0bffa4";
-							 }
-							 $(".qlast"+i+"").text(jj  + qlastPrice + " " + bs);
-							 $(".qchange"+i+"").text(jj + qChangeValue);
-							 $(".scal"+i+"").text(jj + scal + "%");
-							 $(".qlast"+i+"").css(color);
-							 $(".qchange"+i+"").css(color);
-							 $(".scal"+i+"").css(color);
-							 var contractNo = $("#dqCommodNo").val();
-							 if(contractNo == _data.CommodityNo){
-								 $(".zs").text("昨收:"+qpreCloseingPrice);	
-								 $(".fd").text("每日幅度:"+qLowPrice+' - '+qHighPrice);
-								 $(".jk").text("今开:"+qOpenPrice);
-								 $(".gxsj").text("更新时间:"+_data.TimeStamp);
-							 }
-						 }
-					}
-		   	});
-		   });
-	   },1000);
-	   
-	   var webSocketUrl = "ws://192.168.0.213:9002";
-	   var socket = new WebSocket(webSocketUrl);
-	   socket.onopen = function(evt){
-		   
-	   };
-	   socket.onclose = function(evt){
-		   
-	   };
-	   socket.onmessage = function(evt){
-		   
-	   };
-	   socket.onerror = function(evt){
-		   
-	   } */
 	   var href = window.location.href;
 	 	// 路径配置
 	    require.config({
@@ -1002,15 +680,6 @@
 	    socket.onerror = function(evt){
 		   
 	    }
-	    function gundongtiao(){
-	    	$("#whichscro").val($.trim($(this).parent().attr("id")))
-	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
-	            var scrollfathter1=document.getElementById($.trim($(this).parent().attr("id")));
-	            scrollfathter1.addEventListener("touchstart", touchStart, false);
-	            scrollfathter1.addEventListener("touchmove", touchMove, false);
-	            scrollfathter1.addEventListener("touchend", touchEnd, false);
-	        }		
-	    }
 	    $(".left_hidden").mouseover(function(){
 	        $("#whichscro").val($.trim($(this).parent().attr("id")))
 	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
@@ -1022,10 +691,5 @@
 	    });
 	    scroll_y("left_xiangqing","left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely","")
 	   
-	    $(document).ready(function () { 
-
-	    	gundongtiao();
-
-	    })
 </script>
 </html>
