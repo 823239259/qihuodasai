@@ -24,7 +24,7 @@ $(document).ready(function() {
 			$(".demo").css({display: ""});
 		}else if(data_type == "rule"){
 			$(".rule").css({display: ""});
-			 window.location.href=basepath+"help?tab=rule&leftMenu=0";
+			 window.location.href=basepath+"help?tab=rule&leftMenu=9";
 		}else if(data_type == "safety"){
 			$(".safety").css({display: ""});
 			 window.location.href=basepath+"help?tab=safety&leftMenu=1";

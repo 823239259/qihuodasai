@@ -180,7 +180,7 @@
 		        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list">
 		          <tr>
 		            <td class="first">风险提示</td>
-		            <td class="font">股市有风险，投资需谨慎</td>
+		            <td class="font">投资有风险，入市需谨慎</td>
 		          </tr>
 		          <tr>
 		            <td class="first">操盘须知</td>
@@ -228,7 +228,7 @@
 		          </tr>
 		          <tr>
 		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;"  target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=9" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
+		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;"  target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=0" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
 		          </tr>
 		        </table>
 		
