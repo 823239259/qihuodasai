@@ -31,11 +31,11 @@ var tab="<%=tab%>";
 <div class="help">
     <div class="hp_nav">
         <ul>
-            <li><a href="javascript:void(0);" class="helpTitle" data-type="newbie">新手指南</a></li>
            <!--  <li><a href="javascript:void(0);" class=" helpTitle" data-type="configuration">港股操盘</a></li> -->
-            <li><a href="javascript:void(0);" class="helpTitle" data-type="rule">期货操盘</a></li>
+            <li><a href="javascript:void(0);" class="helpTitle" data-type="rule">新手指南</a></li>
             <li><a href="javascript:void(0);" class="helpTitle" data-type="software">交易软件下载</a></li>
             <li><a href="javascript:void(0);" class="helpTitle" data-type="safety">安全保障</a></li>
+            <li><a href="javascript:void(0);" class="helpTitle" data-type="newbie">帮助中心</a></li>
         </ul>
     </div>
     <!--股票操盘-->
@@ -195,6 +195,7 @@ var tab="<%=tab%>";
     <!-- 期指操盘 -->    
     <div class="hp_ctn rule hp_content" style="display: none">
     	<div class="hp_siderbar rule_siderbar">
+    		<a href="javascript:void(0)" data="1">新手必读<i>></i></a>
     		<a href="javascript:void(0)" data="9">恒指操盘<i>></i></a>
     		<a href="javascript:void(0)" data="8">国际原油<i>></i></a>
     	 	<a href="javascript:void(0)" data="0">富时A50<i>></i></a>
@@ -223,7 +224,44 @@ var tab="<%=tab%>";
        		<p>c）乙方自行设定的与交易有关的各项规则如与丙方在系统中设置的规则冲突时，乙方设置内容无效。</p>
        		<p>7)结算规则：操盘盈亏=账户所有持仓平仓结算后账户余额-操盘初始资金；如操盘盈利，则盈利作为报酬归乙方所有，如操盘亏损且亏损额度小于或等于操盘保证金金额的，则亏损由乙方承担，直接从操盘保证金中扣除；超出操盘保证金部分丙方保留追讨权利；乙方同意结算金额以交易系统后台清算数据为准。</p>
         	<p>8)富时A50收取技术服务费每手49元。</p>        	
-        </div>              
+        </div>    
+        <div class="hp_mainbar hp_mbox1 h_xsbd" style="display:none;">    
+        	<img style="margin-top:1px;" src="${ctx }/static/images/help/vs-help-xsbd-1.png"> 
+        	<img src="${ctx }/static/images/help/vs-help-xsbd-2.png">  	
+            <h5><span>1</span>平台简介</h5>   
+            <p style="margin-top:40px;">维胜网由成都盈透科技有限公司开发运营，成都盈透科技有限公司由国际专业投资机构与国内领先互联网运营商共同出资设立，致力于构建中国专业的创新商业应用平台，以互动新媒体、游戏、金融等领域为主线，为涉及行业领域提供领先的互联网产品、技术以及运营方案。</p>  
+            <p>维胜网秉承专业、创新、全面、精细的核心理念，结合当前主要的互联网技术与运营手段，为合作伙伴与客户带来最大的价值。</p>
+            <p>维胜网主要团队成员在政府、互联网、媒体与金融方面具备多年的从业经验；同时与国内相关的行业领跑者建立了紧密的战略合作关系。</p>
+            <h5><span>2</span>平台模式</h5> 
+            <img src="${ctx }/static/images/help/vs-help-xsbd-3.png">  	
+            <h5><span>3</span>产品优势</h5> 
+            <img src="${ctx }/static/images/help/vs-help-xsbd-4.png">  	
+            <h5><span>4</span>平台优势</h5> 
+            <img src="${ctx }/static/images/help/vs-help-xsbd-5.png">  
+            <img src="${ctx }/static/images/help/vs-help-xsbd-6.png">  
+            <h5><span>1</span>维胜网操盘流程</h5>
+            <img src="${ctx }/static/images/help/vs-help-xsbd-7.png">
+            <h5><span>2</span>维胜网收费标准</h5>
+            <h6><span>费用类型</span><span>标准收费</span></h6>
+            <table border="0" cellspacing="0" cellpadding="0">
+    			<tbody>
+    				<tr class="beij"><td>充值</td><td>无</td></tr>
+				    <tr><td>提现</td><td>无</td></tr>
+				    <tr class="beij"><td>开户</td><td>无</td></tr>
+				    <tr><td>账户管理费</td><td>无</td></tr>
+				    <tr class="beij"><td>交易手续费：富时A50</td><td>49元/手</td></tr>
+				    <tr><td>交易手续费：富时A50</td><td>69元/手</td></tr>
+				    <tr class="beij"><td>交易手续费：国际原油</td><td>89元/手</td></tr>
+    			</tbody>
+			</table>
+            <img src="${ctx }/static/images/help/vs-help-xsbd-8.png">
+            <div class="wanzuan">
+	            <span><a href="${ctx}/hsi/index" target="_blank">恒指期货>></a></span>
+	            <span><a href="${ctx}/crudeoil/index" target="_blank">国际原油>></a></span>
+	            <span><a href="${ctx}/ftse/index" target="_blank">富时A50>></a></span>
+	            <span><a href="${ctx}/outDisk/index" target="_blank">国际综合>></a></span>
+            </div>
+        </div>            
         <div class="hp_mainbar hp_mbox8" style="display:none;">        	
             <h1>国际原油</h1>     
             <p>在石油期货合约之中，原油期货是交易量最大的品种，我们推出的国际原油是投资世界交易量最大、影响力最广泛的纽约商业交易所轻原油期货合约。该合约规格为每手1000桶，报价单位为美元/桶，价格波动最小单位为1美分，当初一推出后交易活跃，为有史以来最成功的国际商品期货合约，它的成交价格成为国际石油市场关注的焦点。国际原油投资特点：1，全球性市场，操作简单  2，T+0模式，每天可多次交易，增加获利几率  3，杠杆交易原理，以小博大  4，几乎24小时交易，时间自由   5，无涨停板和交割时间限制，特别适合做短线投资。</p>  
@@ -825,7 +863,6 @@ var tab="<%=tab%>";
         	<a href="http://139.196.228.143/download/%E7%BB%B4%E8%83%9C%E6%9C%9F%E8%B4%A7%E5%BF%AB%E6%89%8B%E7%89%88v1.0_%E5%AE%9E%E7%9B%98.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-35.png"></a>
             <h1 style="border-bottom:1px solid #d1d1d1;">维胜快手交易系统<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
             <div class="hp_tts">    
-            	<h1 style="line-height: 20px;font-size: 16px;margin-bottom: 20px;">1, 启动易盛极星客户端，弹出登录窗口，在登录窗口的‘行情服务器’，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改。</h1>           
                 <p style="color:red;font-size: 14px;">维胜快手交易端软件简介<p>
                 <p>维胜交易端在功能及界面上虽然做了很多针对国内用户使用习惯的改进和优化，但是对于一部分的终端客户而言还是稍显复杂，针对一部分客户的需求，我司独立开发了一套简易 版的交易端——维胜快手交易系统。</p>
                 <p>该快手交易端界面清晰，操作简单，学习成本低，大大降低了客户的使用难度。该快手交易系统 软件针对港交所品种的下单问题上做了优化，即软件会自动以限价超价的形式进行下单，以 达到市价成交的效果，软件默认超价 50 个点，使得对应品种的下单更为便捷、快速。</p>
@@ -969,8 +1006,7 @@ var tab="<%=tab%>";
             <h2 class="hp_mbtitle">5、申请方案成功如何查询交易账户和密码？</h2>
             <p>申请方案成功后，达人将通过短信进行提醒，收到短信后就可在您的达人账户查看您的交易账号和密码，首先点击我的账户；然后找到操盘账户，点击“股票操盘”；最后在操盘详细下点击“交易账户”即可查看。</p>
             <h2 class="hp_mbtitle">6、为什么会限制买入，如何解除？</h2>
-            <p>为了控制您的风险，当您方案的资产总值触及到补仓线（预警值）时，系统会自动限制买入，如您补充保证金到补仓线之上或反弹后资产到补仓线之上，可以进行限制买入的解除，解除时间在每天的两次收市之后，当然需要提前解除可随时联系客户。此外，但
-您的账户处于欠费状态，同样会限制买入的。补费后即可解除。</p>
+            <p>为了控制您的风险，当您方案的资产总值触及到补仓线（预警值）时，系统会自动限制买入，如您补充保证金到补仓线之上或反弹后资产到补仓线之上，可以进行限制买入的解除，解除时间在每天的两次收市之后，当然需要提前解除可随时联系客服。此外，您的账户处于欠费状态，同样会限制买入的。补费后即可解除。</p>
 			<h2 class="hp_mbtitle">7、为什么补交管理费后仍不能买入？</h2>
             <p>每日管理费将在早上8:00扣除，如您在8:00后补交当日管理费，则顺延至下一个交易日统一扣除，补交后请及时联系客服解除限制买入。</p>
             <h2 class="hp_mbtitle">8、管理费欠费会被平仓吗？</h2>

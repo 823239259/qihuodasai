@@ -62,8 +62,8 @@
                 <li><a href="${ctx }/about" target="_blank">公司简介</a></li>
                 <li><a href="${ctx }/news/newsdata?colname=ff8080814f73cadc014f73cf0f6b0001" target="_blank">市场热点</a></li>
                 <%-- <li><a href="${ctx }/company" target="_blank">公司资质</a></li> --%>
-                <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
                 <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
+                <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
             </ul>
            <%--  <ul class="follow">
                 <li>关注我们：</li>
@@ -78,7 +78,7 @@
         </div>
         <div class="copyright_contact">
             <h3>客服热线</h3>
-            <p>400-852-8008</p>
+            <p><span>400</span>-<span>852</span>-<span>8008</span></p>
             <p>工作日：8:30 - 24:00</p>
             <p>周末：09:00 - 17:00</p>
         </div>
