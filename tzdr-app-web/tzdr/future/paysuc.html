@@ -56,11 +56,14 @@
 	<img src="../../images/suc_01.png" />
 	<div class="mui-content-padded">
 		<h4>已充值成功，<br>请返回充值页面！</h4>
-		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backNow" href="../account/charge.html">立即返回</a>
+		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backNow" >立即返回</a>
 	</div>
 </div>
 <script>
-	
+		document.getElementById("backNow").addEventListener("tap",function(){
+    			mui.back();
+    		});
+  			
 </script>
 </body>
 </html>
