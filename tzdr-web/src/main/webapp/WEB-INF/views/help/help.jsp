@@ -241,7 +241,7 @@ var tab="<%=tab%>";
             <img src="${ctx }/static/images/help/vs-help-xsbd-6.png">  
             <h5><span>1</span>维胜网操盘流程</h5>
             <img src="${ctx }/static/images/help/vs-help-xsbd-7.png">
-            <h5><span>1</span>维胜网收费标准</h5>
+            <h5><span>2</span>维胜网收费标准</h5>
             <h6><span>费用类型</span><span>标准收费</span></h6>
             <table border="0" cellspacing="0" cellpadding="0">
     			<tbody>
