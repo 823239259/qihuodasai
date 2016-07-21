@@ -24,7 +24,6 @@
 					function(result) {
 					},
 					function(result) {
-						alert(result);
 						var charge = JSON.parse(result);
 						pingpp.createPayment(charge, function(result, err) {
 							if(result == "success") {

@@ -197,7 +197,8 @@
 					"css/mui.min.css",
 					"images/main.png",
 					"js/common.js",
-					"css/common.css"
+					"css/common.css",
+					"images/icons/LOGO.png"
 				],
 				"refer": [
 					"tzdr/login/login.html",
@@ -243,7 +244,11 @@
 					"images/app_x.png",
 					"images/icon_05.png",
 					"images/app-g.png",
-					"images/app_an.png"
+					"images/app_an.png",
+					"images/icon4.png",
+					"images/icon1.png",
+					"images/icon3.png",
+					"images/icon2.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -317,7 +322,9 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"tzdr/commonback.html"
+					"tzdr/commonback.html",
+					"js/jquery-1.11.3.js",
+					"js/pingpp.js"
 				],
 				"refer": [
 					"tzdr/account/bbpay.html",
