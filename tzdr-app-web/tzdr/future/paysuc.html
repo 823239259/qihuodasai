@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>充值成功</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
     <style>
     	body {
     	  width: 100%;
@@ -52,12 +56,12 @@
 	<img src="../../images/suc_01.png" />
 	<div class="mui-content-padded">
 		<h4>已充值成功，<br>请返回充值页面！</h4>
-		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backNow" >立即</a>
+		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backNow" >立即返回</a>
 	</div>
 </div>
 <script>
 		document.getElementById("backNow").addEventListener("tap",function(){
-    			mui.openWindow("../accout/charge.html");
+    			mui.back();
     		});
 </script>
 </body>
