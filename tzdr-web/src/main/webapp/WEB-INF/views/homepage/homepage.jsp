@@ -6,7 +6,6 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport"content="width=1010"/> 
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
@@ -22,16 +21,11 @@
 	<link rel="stylesheet" href="${ctx}/static/css/home.css?v=${v}"> --%>
 	<link rel="stylesheet" href="${ctx }/static/css/new_index.css">
 	<link href="${ctx }/static/css/trade.css?v=20151127" rel="stylesheet" type="text/css" />
-    <script src="${ctx }/static/script/jquery-1.8.3.js"></script>
     <script src="${ctx }/static/script/homepage/gundongtiao.js"></script>
-    
 	<!-- common css -->
 	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
-
-
 	<!-- common js -->
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
-	<script src="${ctx}/static/script/jquery-1.8.3.js"></script>
 	<script type="text/javascript">
 		 var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
@@ -91,21 +85,19 @@
 <!-- 广告切换 -->
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
-    	<p style="width: 1000px;
-    margin: 0 auto;">
         <c:forEach var="b" items="${banners }" varStatus="status">
         	<a  title="${status.count }" <c:if test="${status.index }==0">class="on"</c:if>><span></span></a>
         </c:forEach>
-        </p>
     </div>
     <div class="slide_box" id="slide-box">
        	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
-	    	<a href="javascript:void(0);" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	       </c:forEach>
     	</div>
     </div>
     <div class="login">
+    	
 	        <div class="loginbox">
 	        <%
 	       		if(request.getSession().getAttribute("userName")!=null){
@@ -680,6 +672,15 @@
 	    socket.onerror = function(evt){
 		   
 	    }
+	    function gundongtiao(){
+	    	$("#whichscro").val($.trim($(this).parent().attr("id")))
+	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
+	            var scrollfathter1=document.getElementById($.trim($(this).parent().attr("id")));
+	            scrollfathter1.addEventListener("touchstart", touchStart, false);
+	            scrollfathter1.addEventListener("touchmove", touchMove, false);
+	            scrollfathter1.addEventListener("touchend", touchEnd, false);
+	        }		
+	    }
 	    $(".left_hidden").mouseover(function(){
 	        $("#whichscro").val($.trim($(this).parent().attr("id")))
 	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
@@ -689,7 +690,7 @@
 	            scrollfathter1.addEventListener("touchend", touchEnd, false);
 	        }
 	    });
-	    scroll_y("left_xiangqing","left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely","")
-	   
+	    scroll_y("left_xiangqing","left_hidden","scroll_y","scroll_ymove","scroll_x","scroll_xmove","","wheely","");	
+	    
 </script>
 </html>
