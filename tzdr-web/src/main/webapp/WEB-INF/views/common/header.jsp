@@ -3,7 +3,7 @@
 <link href="${ctx }/static/css/trade.css?v=20151127" rel="stylesheet" type="text/css" />
 <div class="top-title">
     <div class="topctn">
-        <div class="top_tel"><!--<i></i>-->全国客服热线：400-852-8008</div>
+        <div class="top_tel"><!--<i></i>-->全国客服热线：<span>400</span>-<span>852</span>-<span>8008</span></div>
         <%
        		if(request.getSession().getAttribute("userName")!=null){
        	%>
@@ -13,7 +13,7 @@
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
            <%--  <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>
             <li><a href="http://zhibo.tzdr.com" target="_blank" style="color:#f57c00;">喊单直播间</a></li> --%>
-            <li><a href="${ctx}/help?tab=newbie&leftMenu=1" target="_blank">新手指南</a></li>
+            <li><a href="${ctx}/help?tab=rule&leftMenu=1" target="_blank">新手指南</a></li>
         </ul>
        	<%
        		}else{
@@ -23,7 +23,7 @@
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
            <%--  <li><a href="${ctx}/topic/app/" target="_blank" style="color:#f57c00;">手机APP</a></li>
             <li><a href="http://zhibo.tzdr.com" target="_blank" style="color:#f57c00;">喊单直播间</a></li> --%>
-            <li><a href="${ctx}/help?tab=newbie&leftMenu=1" target="_blank">新手指南</a></li>
+            <li><a href="${ctx}/help?tab=rule&leftMenu=1" target="_blank">新手指南</a></li>
         </ul>
        	<%
        		}

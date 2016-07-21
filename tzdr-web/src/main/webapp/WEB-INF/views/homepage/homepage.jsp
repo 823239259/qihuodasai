@@ -1,4 +1,4 @@
- <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +6,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=1010">
+	<!-- <meta name="viewport" content="user-scalable=no" /> -->
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
@@ -27,12 +30,12 @@
 	<!-- common js -->
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
-		 var basepath = "<%=basePath%>" + "/";
+		var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
 	</script>
- <script src="${ctx }/static/script/esl.js"></script>
+	<script src="${ctx }/static/script/esl.js"></script>
     <script src="${ctx }/static/script/slide-box.js"></script>
-<style type="text/css">
+	<style type="text/css">
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
 	.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
@@ -41,47 +44,11 @@
     #left_xiangqing .w_content .left_hidden{float: left; width: 195px;}
     #left_xiangqing .scroll_y{background: #fc3;position: absolute; right: 0;width: 5px;}
     #left_xiangqing .scroll_ymove{background: #292929; height: 508px;position: absolute; right: 0;width: 5px;z-index: 2;}
-</style>
+	</style>
 </head>
-
 <body>
 <!-- header -->
 <%@include file="../common/header.jsp"%>
-<%-- <div class="top-title">
-    <div class="topctn">
-        <div class="top_tel"><!--<i></i>-->全国客服热线：400-852-8008$</div>
-        <ul>
-            <li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
-            <li><a href="${ctx}/help?tab=software&amp;leftMenu=1" target="_blank">交易软件下载</a></li>
-            <!--<li><a href="http://test.www.dktai.com:80/topic/app/" target="_blank">手机APP</a></li>-->
-           <!-- <li><a href="http://zhibo.tzdr.com" target="_blank">喊单直播间</a></li>-->
-            <li><a href="${ctx}/help?tab=newbie&amp;leftMenu=1" target="_blank">新手指南</a></li>
-        </ul>
-    </div>
-</div> --%>
-<%-- <div class="navbox">
-    <div class="nav">
-        <div class="navlogo"><a href="#"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
-        <ul class="navlist">
-            <li><a class="on"  href="${ctx}/" style="padding: 27px 16px 26px 16px;">首页</a></li>
-             <li><a href="${ctx}/hsi/index">恒指期货</a></li>
-            <li><a href="${ctx}/crudeoil/index">国际原油</a></li>
-            <li><a href="${ctx}/ftse/index">富时A50</a></li>
-            <li><a href="${ctx}/outDisk/index">国际综合</a></li>
-             <%
-        		if(request.getSession().getAttribute("userName") !=null){
-        	%>
-           		<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mc">我的账户</a></li>
-        	<%
-        		}else{
-        	%>
-            	<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mcnot">我的账户</a></li>
-        	<%
-        		}
-        	%>
-        </ul>
-    </div>
-</div> --%>
 <!-- 广告切换 -->
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
@@ -92,12 +59,16 @@
     <div class="slide_box" id="slide-box">
        	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
-	    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           	<c:if test="${not empty b.linkUrl }">
+			    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           	</c:if>
+	           	<c:if test="${empty b.linkUrl }">
+			    	<a href="javascript:void(0);"  style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           	</c:if>
 	       </c:forEach>
     	</div>
     </div>
     <div class="login">
-    	
 	        <div class="loginbox">
 	        <%
 	       		if(request.getSession().getAttribute("userName")!=null){
@@ -113,18 +84,6 @@
 	            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
 				</div>
 	        	<p style="border-top: 1px solid #4d4d4d"></p>
-	                <%-- <li>
-	                    <label>A股融资：</label>
-	                    <span>${usermap.user_money }元</span>
-	                </li>
-	                <li>
-	                    <label>港股融资：</label>
-	                    <span>${usermap.hk_money }港元</span>
-	                </li>
-	                <li style="display:none;">
-	                    <label>代理等级：</label>
-	                    <span>${usermap.user_level }级</span>
-	                </li> --%>
 	        </div>
 	       	<%
 	       		}else{
@@ -189,10 +148,7 @@
         </div>
         <div class="w_center_xiangqing">
             <div class="left_xiangqing" id="left_xiangqing">
-                <div class="left_hidden">
-                   
-                   
-                </div>
+                <div class="left_hidden"></div>
                 <div class="scroll_ymove">
         			<div class="scroll_y" unorbind="unbind"></div>
     			</div>
@@ -201,15 +157,12 @@
 		    	</div>-->
     			<input type="hidden" id="whichscro">
             </div>
-            <div style="width: 5px; height: 510px; background: #292929; float: left; position: relative; right: 5px;
-            "></div>
+            <div style="width: 5px; height: 510px; background: #292929; float: left; position: relative; right: 5px;"></div>
             <div class="right_xiangqing">
                 <div id="main" style="height:500px; width: 800px;"></div>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        </script>
     <div class="w-qihuo">
         <div class="w_center_border"></div>
         <div class="w-qihuo-title">
@@ -592,8 +545,36 @@
 							 left_xiangmu.each(function(){
 								 left_xiangmu.removeClass('on');
 							 });
-							  obj.addClass('on');
+							 obj.addClass('on');
 						 });
+						 var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+						 left_xiangmu.each(function(){
+						    left_xiangmu.on('touchstart',function(){
+						    	rawData=[];
+								 loadK();
+								 var obj = $(this);
+								 var da = obj.attr("data");
+								 if(da != null){
+								 	  var daArray = da.split("&");
+								 	  var commod = daArray[0];
+								 	  var contract = daArray[1];
+								 	  loadKData(commod,contract);
+								 	  exctionLoadK(commod,contract);
+								 	  $("#dqCommodNo").val(commod);
+								 	  propHrefCP(commod);
+								 }
+								 var topData = obj.attr("topData");
+								 if(topData != null){
+									 var topDataArray = topData.split("&");	
+									 $(".zs").text("昨收:"+topDataArray[0]);	
+									 $(".fd").text("每日幅度:"+topDataArray[1]+' - '+topDataArray[2]);
+									 $(".jk").text("今开:"+topDataArray[3]);
+									 $(".gxsj").text("更新时间:"+_data.TimeStamp);
+								 }
+						    	left_xiangmu.removeClass('on');
+						        $(this).addClass('on');
+						    });
+						 })
 		    		}
 		    		for(var i = 0 ; i < size ; i++){
 		    			var comm = commoditys[i];
