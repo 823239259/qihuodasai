@@ -48,22 +48,17 @@
     </style>
 </head>
 <body>
-	<!--<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">标题</h1>
-	</header>-->
 <div class="mui-content pay_suc">
 	<img src="../../images/suc_01.png" />
 	<div class="mui-content-padded">
 		<h4>已充值成功，<br>请返回充值页面！</h4>
-		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backNow" >立即返回</a>
+		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backNow" >立即</a>
 	</div>
 </div>
 <script>
 		document.getElementById("backNow").addEventListener("tap",function(){
-    			mui.back();
+    			mui.openWindow("../accout/charge.html");
     		});
-  			
 </script>
 </body>
 </html>
