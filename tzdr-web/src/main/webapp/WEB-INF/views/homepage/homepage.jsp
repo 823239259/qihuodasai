@@ -6,6 +6,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=1010">
 	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
@@ -92,7 +94,12 @@
     <div class="slide_box" id="slide-box">
        	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
-	    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           	<c:if test="${not empty b.linkUrl }">
+			    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           	</c:if>
+	           	<c:if test="${empty b.linkUrl }">
+			    	<a target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           	</c:if>
 	       </c:forEach>
     	</div>
     </div>
@@ -337,6 +344,10 @@
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
 <script type="text/javascript">
+		$(function() {
+		// 股市tab切换
+		
+	})
 	   var href = window.location.href;
 	 	// 路径配置
 	    require.config({
@@ -592,8 +603,36 @@
 							 left_xiangmu.each(function(){
 								 left_xiangmu.removeClass('on');
 							 });
-							  obj.addClass('on');
+							 obj.addClass('on');
 						 });
+						 var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+						 left_xiangmu.each(function(){
+						    left_xiangmu.on('touchstart',function(){
+						    	rawData=[];
+								 loadK();
+								 var obj = $(this);
+								 var da = obj.attr("data");
+								 if(da != null){
+								 	  var daArray = da.split("&");
+								 	  var commod = daArray[0];
+								 	  var contract = daArray[1];
+								 	  loadKData(commod,contract);
+								 	  exctionLoadK(commod,contract);
+								 	  $("#dqCommodNo").val(commod);
+								 	  propHrefCP(commod);
+								 }
+								 var topData = obj.attr("topData");
+								 if(topData != null){
+									 var topDataArray = topData.split("&");	
+									 $(".zs").text("昨收:"+topDataArray[0]);	
+									 $(".fd").text("每日幅度:"+topDataArray[1]+' - '+topDataArray[2]);
+									 $(".jk").text("今开:"+topDataArray[3]);
+									 $(".gxsj").text("更新时间:"+_data.TimeStamp);
+								 }
+						    	left_xiangmu.removeClass('on');
+						        $(this).addClass('on');
+						    });
+						 })
 		    		}
 		    		for(var i = 0 ; i < size ; i++){
 		    			var comm = commoditys[i];
