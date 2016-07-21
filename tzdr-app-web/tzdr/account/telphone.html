@@ -127,17 +127,12 @@
 			        o.removeAttribute("disabled");            
 			        o.innerHTML="获取验证码";  
 			        time_new = 60;
-			        o.style.background="#FFCC33";
-			        o.style.border="1px solid #333333";
-			       o.style.color="#333333";
+			        o.style.background="#d3413d";
 			    } else {  
 			        o.setAttribute("disabled", true);  
 			        o.innerHTML="倒计时(" + time_new + ")";   
 			        time_new--;  
-//			        o.style.background="rgb(211, 211, 211)";
-  o.style.background="#FFCC33";
-			        o.style.border="1px solid #333333";
-			       o.style.color="#333333";
+			        o.style.background="rgb(211, 211, 211)";
 			       setTimeout(function() {  
 			            tzdr.smsTime_new(o);  
 			        },  

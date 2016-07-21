@@ -43,7 +43,7 @@
 		if(mui.checkNetwork()==false){ 
 			mui.toast("当前网络不给力，请稍后再试"); 
 			return;
-		}		
+		}
 	    //plus.nativeUI.showWaiting('正在努力加载中...'); 
 		var onSuccess = arguments[2]?arguments[2]:function(){};
 		var onError = arguments[3]?arguments[3]:function(){};
@@ -77,7 +77,6 @@
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
 				 //plus.nativeUI.closeWaiting();
-				//alert("textStatus="+textStatus+",errorThrown="+errorThrown);
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -256,13 +255,18 @@ var tzdr = {
 	// 系统常量
 	constants:{
 		//接口域名地址
-		//api_domain:"http://192.168.2.131:8081/tzdr-app/",
-		//api_domain:"http://c.tzdr.com:8888/tzdr-app/", 
-		api_domain:"http://app.tzdr.com/",
+		//api_domain:"http://192.168.10.115:8080/tzdr-app/",
+		api_domain:"http://hedaoqing.oicp.net/tzdr-app/",
+		
+		//api_domain:"http://c.tzdr.com:8888/tzdr-app/",
+		
+		//api_domain:"http://app.tzdr.com/",
 		//图片地址
-		//base_images_url:'http://192.168.2.131:80/tzdr-cms/',
+		base_images_url:'http://hedaoqing.oicp.net/tzdr-cms/',
+		
 		//base_images_url:'http://c.tzdr.com:8888/tzdr-cms/', 
-		base_images_url:'http://images.tzdr.com/', 
+		
+		//base_images_url:'http://images.tzdr.com/', 
 		//token
 		user_token:'user_token',
 		//密钥
@@ -489,12 +493,18 @@ tzdr.smsTime=function(o){
         o.removeAttribute("disabled");            
         o.innerHTML="获取验证码";  
         time = 60;  
-        o.style.background="#d3413d";
+        //o.style.background="#d3413d";
+       o.style.background="#33333";
+      
+         o.style.color="#FFCC33";
     } else {  
         o.setAttribute("disabled", true);  
         o.innerHTML="倒计时(" + time + ")";  
         time--;  
-        o.style.background="rgb(211, 211, 211)";
+        //o.style.background="rgb(211, 211, 211)";
+       o.style.background="#333333";
+
+         o.style.color="#FFCC33";
         setTimeout(function() {  
             tzdr.smsTime(o);  
         },  
