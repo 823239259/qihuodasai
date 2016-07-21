@@ -53,7 +53,7 @@
 a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .mui-action-back i { font-style: normal; font-size:14px; vertical-align: 2px;}
 .lg_codebtn { position: absolute; background: #333333; color: #FFCC33; border: none; right: 10px; top: 7px; width: 90px; z-index: 5;}
-.lg_codebtn:hover { background-color: #ffdd33;}
+.lg_codebtn:hover { }
 .mui-content-padded p a,.mui-content-padded p { color: #999999;}
 .mui-content-padded p i { font-style: normal;}
 .mui-input-row .mui-input-clear~.mui-icon-clear, .mui-input-row .mui-input-password~.mui-icon-eye, .mui-input-row .mui-input-speech~.mui-icon-speech { color: #FFCC33;}
