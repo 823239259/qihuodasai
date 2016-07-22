@@ -188,7 +188,7 @@
                     <li>• T+0交易 随时锁定利润</li>
                 </ul>
                 <div class="money">
-                    <p>总共操盘: ${showmap.ffa50[1].valueData }人</p>
+                    <p>总共操盘: ${showmap.hsi[1].valueData }人</p>
                     <p>总共交易: ${showmap.hsi[2].valueData }手</p>
                 </div>
                 <p class="chaopan"><a href="${ctx}/hsi/index" target="_blank">申请操盘</a></p>
@@ -200,11 +200,11 @@
                     <li>• 全球玩家用户量最大 涨跌迅猛</li>
                     <li>• 高透明度便于基本面分析</li>
                     <li>• 全球交易市场无人操控</li>
-                    <li>• 全球交易市场无人操控</li>
+                    <li>• 来自纽约商业交易所 行业标准</li>
                 </ul>
                 <div class="money">
-                    <p>总共操盘: ${showmap.ffa50[1].valueData }人</p>
-                    <p>总共交易: ${showmap.ffa50[2].valueData }手</p>
+                    <p>总共操盘: ${showmap.fco[1].valueData }人</p>
+                    <p>总共交易: ${showmap.fco[2].valueData }手</p>
                 </div>
                 <p class="chaopan"><a href="${ctx}/crudeoil/index" target="_blank">申请操盘</a></p>
             </div>
@@ -215,7 +215,7 @@
                     <li>• A股精准风向标 免庄家操控</li>
                     <li>• 门槛低 超短线 交易灵活</li>
                     <li>• 国际版“IF指数” 操盘人数多</li>
-                    <li>• 国际版“IF指数” 操盘人数多</li>
+                    <li>• 来自新加坡交易所 透明公正</li>
                 </ul>
                 <div class="money">
                     <p>总共操盘: ${showmap.ffa50[1].valueData }人</p>

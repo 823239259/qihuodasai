@@ -141,7 +141,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .notice {width: 100%; height: 46px; background-color: #333333; margin: 0 auto;}
 .notice_scroll {width: 1000px; height: 46px; padding-left: 15px;margin: 0 auto; position: relative; margin: 0 auto; background: #333333; padding: 0 5px;}
 .notice_scroll > a {margin-top: 9px; padding:5px;display: block;float: right;width: 58px;height: 16px;line-height: 16px;font-size: 12px;color: #ffcf3f;text-align: center; text-decoration: none;border: 1px solid #ffcf3f;border-radius: 5px;}
-.notice_scroll > a:hover {background-color: #ffff33;color: #333333; border: 1px solid #ffee33;}
+.notice_scroll > a:hover {text-decoration: none; background-color: #ffff33;color: #333333; border: 1px solid #ffee33;}
 .notice_scroll ul {margin-top: 15px; width: 760px;height: 16px;line-height: 16px;overflow: hidden;float: left;}
 .notice_scroll ul li {display: block;float: left;width: 379px; text-align: left; height: 17px;line-height: 17px; font-size: 0; border-right: 1px dotted #ccc;}
 .notice_scroll ul li a {text-decoration:none; margin-left:20px; float:left; display: inline-block; height: 16px;line-height: 16px;font-size: 14px;color: #ffcc33;overflow: hidden; padding-right: 20px;vertical-align: middle;text-overflow: ellipsis;white-space: nowrap;}
