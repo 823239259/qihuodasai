@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>公司简介 - 投资达人</title>
+<title>公司简介 - 维胜</title>
 <link rel="stylesheet" href="${ctx}/static/css/login.css">
 <link rel="stylesheet" href="${ctx}/static/css/news.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/tzdr.css">
