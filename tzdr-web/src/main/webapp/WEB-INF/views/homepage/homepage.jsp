@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
 	<!-- <meta name="viewport" content="user-scalable=no" /> -->
-	<title>维胜 - 中国领先的互联网普惠金融平台 </title>
+	<title>维胜 - 中国领先的国际期货及衍生品互联网交易平台</title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
