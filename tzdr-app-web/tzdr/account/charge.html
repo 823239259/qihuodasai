@@ -270,8 +270,28 @@ var payPage = null; //定义币币支付页面对象变量
 					});
 				});*/
 				document.getElementById("alipayapp-btn").addEventListener("tap", function() {
-						var w =	plus.webview.create("http://hedaoqing.oicp.net/tzdr-app-web/tzdr/account/openUrlPay.html","12",{top:"45px"},{money:"1"});
-						w.show(); 
+					/*mui.app_request('/user/pay/pingplusplus', {
+						"money": 1,
+						"payWay":4
+					}, 
+					function(result) {
+					},
+					function(result) {
+						var charge = JSON.parse(result);
+						pingpp.createPayment(charge, function(result, err) {
+							if(result == "success") {
+								// 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+							} else if(result == "fail") {
+								// charge 不正确或者微信公众账号支付失败时会在此处返回
+							} else if(result == "cancel") {
+								// 微信公众账号支付取消支付
+							}
+						});
+					}
+					);*/
+					var money = document.getElementById("rechargeMoneyAlipayApp").value;
+					var w = plus.webview.create("http://hedaoqing.oicp.net/tzdr-app-web/tzdr/account/openUrlPay.html","pay",{height:"45px"},{money:money});
+					w.show();
 				});
 				/*switch(plus.os.name) { //根据客户端修改充值文本框属性
 					case "Android":

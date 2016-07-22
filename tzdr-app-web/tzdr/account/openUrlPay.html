@@ -18,8 +18,9 @@
 		<script type="text/javascript">
 		mui.init()
 			mui.plusReady(function() {
+				var h= plus.webview.getWebviewById("pay"); 
 				mui.app_request('/user/pay/pingplusplus', {
-						"money": 1,
+						"money": h.money,
 						"payWay":4
 					}, 
 					function(result) {
