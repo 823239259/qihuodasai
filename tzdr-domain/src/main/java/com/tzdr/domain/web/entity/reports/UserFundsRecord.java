@@ -1,6 +1,7 @@
 package com.tzdr.domain.web.entity.reports;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -192,6 +193,20 @@ public class UserFundsRecord implements Serializable {
 	 */
 	@SqlColumn
 	private String uid;
+
+	/**
+	 * 抵扣金额
+	 */
+	@SqlColumn
+	private BigDecimal discountActualMoney;
+	
+	public BigDecimal getDiscountActualMoney() {
+		return discountActualMoney;
+	}
+
+	public void setDiscountActualMoney(BigDecimal discountActualMoney) {
+		this.discountActualMoney = discountActualMoney;
+	}
 
 	public String getMobile() {
 		return mobile;

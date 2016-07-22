@@ -380,6 +380,10 @@ public class DataDicKeyConstants {
 	 */
 	public static final String BB_FEE = "bbFee";
 	
+	/**
+	 * 易支付支付提现手续费
+	 */
+	public static final String PAYEASE_FEE = "payeaseFee";
 	
 	/**
 	 * 商品期货-橡胶
@@ -458,4 +462,26 @@ public class DataDicKeyConstants {
 	 * 方案类型
 	 */
 	public static final String ACTIVITY_TYPE="activityType";
+	
+	/**
+	 * 期货合买类型
+	 */
+	public static final String FTOGETHER_TRADE_TYPE="FtogetherTradeType";
+	
+	/**
+	 * 期货合买活动时间配置
+	 */
+	public static final String FTOGETHER_ACTIVITY_TIME="FtogetherActivityTime";
+	
+	
+	/**
+	 * 活动开始时间
+	 */
+	public static final String START_TIME="startTime";
+	
+	
+	/**
+	 * 活动结束时间
+	 */
+	public static final String END_TIME="endTime";
 }

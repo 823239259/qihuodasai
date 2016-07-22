@@ -71,10 +71,14 @@
       </form>
       
       <a id="btn" href="#" onclick="$.easyui.datagridQuery('dg003','queryForm')" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'">查询</a>
-      <!-- ResetButton --> 
+      <!-- ResetButton -->
+      <shiro:hasPermission name="sys:settingParams:channelPromotion:update">
       <a id="btn_1" href="#" onclick="reset()" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-undo'">重置</a>
-      <shiro:hasPermission name="sys:customerService:agent:update">
+      </shiro:hasPermission>
+      <shiro:hasPermission name="sys:settingParams:channelPromotion:delete">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteChannel()">删除</a>
+      </shiro:hasPermission>
+        <shiro:hasPermission name="sys:settingParams:channelPromotion:create">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addChannelWindowOpen()">新增</a>
       </shiro:hasPermission>
     </div>

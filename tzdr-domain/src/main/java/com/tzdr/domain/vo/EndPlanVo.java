@@ -50,8 +50,12 @@ public class EndPlanVo implements Serializable {
 	private String programNo;
 
 	@SqlColumn(name = "lever_money")
-	@AllowExcel(name = "配资保证金")
+	@AllowExcel(name = "保证金")
 	private Double leverMoney;
+
+	@SqlColumn(name = "voucher_actual_money")
+	@AllowExcel(name = "代金券")
+	private BigDecimal voucherMoney;
 
 	// 总操盘资金
 	@AllowExcel(name = "总操盘资金")
@@ -235,6 +239,14 @@ public class EndPlanVo implements Serializable {
 
 	public void setLeverMoney(Double leverMoney) {
 		this.leverMoney = leverMoney;
+	}
+
+	public BigDecimal getVoucherMoney() {
+		return voucherMoney;
+	}
+
+	public void setVoucherMoney(BigDecimal voucherMoney) {
+		this.voucherMoney = voucherMoney;
 	}
 
 	public Double getTotalLeverMoney() {

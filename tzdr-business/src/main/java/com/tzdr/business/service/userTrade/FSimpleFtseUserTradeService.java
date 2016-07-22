@@ -181,4 +181,5 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	 * 分配账号时，判断是否是已分配
 	 */
 	String passSaveAccount(String id);
+	
 }

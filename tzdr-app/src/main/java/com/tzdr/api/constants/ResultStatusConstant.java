@@ -729,6 +729,13 @@ public class ResultStatusConstant {
 		* 未实名认证
 		*/
 		public static final String NOT_CERTIFICATION="13";
+		
+		
+		/**
+		* 网银限制，单笔提现金额不能超过500000元，每天可提现5笔。
+		*/
+
+		public static final String EASEPAY_LIMIT_MAX_MONEY="14";
 	}
 	
 	
@@ -1077,5 +1084,52 @@ public class ResultStatusConstant {
 		 * 充值金额错误
 		 */
 		public static final String MONEY_ERROR = "3";
+		
+		
+		/**
+		 * 超过当日充值最大金额
+		 */
+		public static final String OVER_MAX_DAY_CHARGE = "4";
+	}
+	
+	
+	/**
+	 * 期货合买支付接口结果返回
+	 * @author zhouchen
+	 * 2016年5月25日 下午1:42:56
+	 */
+	public static class FtogetherTradePay{
+		
+		/**
+		 * 已经开始操盘不能再合买
+		 */
+		public static final String GAME_IS_ALREADY_STARTED = "3";
+		
+		/**
+		 * 方案已经结算
+		 */
+		public static final String TRADE_ALREADY_END = "4";
+		
+		
+		/**
+		 * 已经看跌不能看涨
+		 */
+		public static final String ALREADY_PUT_CANOT_CALL = "5";
+		
+		/**
+		 *  已经看涨不能看跌
+		 */
+		public static final String ALREADY_CALL_CANOT_PUT = "6";
+		
+		/**
+		 *  余额不足
+		 */
+		public static final String NOT_SUFFICIENT_FUNDS = "7";
+		
+		
+		/**
+		 *  超过最大份数限制
+		 */
+		public static final String OVER_MAX_COPIES = "8";
 	}
 }

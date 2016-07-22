@@ -35,6 +35,13 @@ public class PGBPaymentSupportBank extends BaseCrudEntity {
 	 * 30018 - 中国工商银行
 	 */
 	private String bbpayCode;
+	
+	/**
+	 * 易支付支付 银行代码
+	 * 3 -招商银行  4-建设银行
+	 */
+	private String payeaseCode;
+	
 	/**
 	 * 币币支付提现 联行号
 	 * 中国工商银行-102100099996
@@ -60,6 +67,12 @@ public class PGBPaymentSupportBank extends BaseCrudEntity {
 	 */
 	private Integer supportUmpay=0;
 	
+	/**
+	 * 是否支持易支付
+	 * 0 不支持
+	 * 1 支持
+	 */
+	private Integer supportPayEase=0;
 	
 	/**
 	 * 是否支持币币支付提现
@@ -74,6 +87,14 @@ public class PGBPaymentSupportBank extends BaseCrudEntity {
 	 * 1 支持
 	 */
 	private Integer supportUmdraw=1;
+	
+	/**
+	 * 是否支持易支付提现
+	 * 0 不支持
+	 * 1 支持
+	 */
+	private Integer supportEasedraw=1;
+	
 	
 	/**
 	 * 银行图标路径 供页面显示专用
@@ -158,6 +179,30 @@ public class PGBPaymentSupportBank extends BaseCrudEntity {
 
 	public void setSupportUmdraw(Integer supportUmdraw) {
 		this.supportUmdraw = supportUmdraw;
+	}
+
+	public String getPayeaseCode() {
+		return payeaseCode;
+	}
+
+	public void setPayeaseCode(String payeaseCode) {
+		this.payeaseCode = payeaseCode;
+	}
+
+	public Integer getSupportPayEase() {
+		return supportPayEase;
+	}
+
+	public void setSupportPayEase(Integer supportPayEase) {
+		this.supportPayEase = supportPayEase;
+	}
+
+	public Integer getSupportEasedraw() {
+		return supportEasedraw;
+	}
+
+	public void setSupportEasedraw(Integer supportEasedraw) {
+		this.supportEasedraw = supportEasedraw;
 	}
 	
 	

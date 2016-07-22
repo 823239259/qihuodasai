@@ -312,7 +312,7 @@ public class StockCurrentHistoryService extends BaseServiceImpl<StockCurrentHist
 			paramValues.put("endTime", TypeConvert.strToZeroDate(TypeConvert.dbDateYmd(),1,-1).getTime()/1000);
 		}
 		
-		StringBuffer sqlBuf = new StringBuffer("SELECT u.mobile,real_name realName,card_capital_margin cardCapitalMargin,balance_capital_margin balanceCapitalMargin,amount_capital amountCapital,lastday_balance lastdayBalance,income_recharge incomeRecharge,income_rebate incomeRebate,income_other incomeOther,profit,management_fee managementFee,profit_money profitMoney,-`revoke_manager_money` revokeManagerMoney,interest_fee interestFee,-revoke_interest revokeInterest,deduction_fee deductionFee,actual_fee actualFee,draw_fee drawFee,drawing_fee drawingFee,cover_money AS coverMoney,all_money AS allMoney,plat_balance platBalance,fund_date fundDate	FROM w_userfund_record,w_user u WHERE uid=u.id AND fund_date>=:beginTime and fund_date<=:endTime ");
+		StringBuffer sqlBuf = new StringBuffer("SELECT u.mobile,real_name realName,card_capital_margin cardCapitalMargin,balance_capital_margin balanceCapitalMargin,amount_capital amountCapital,lastday_balance lastdayBalance,income_recharge incomeRecharge,income_rebate incomeRebate,income_other incomeOther,profit,management_fee managementFee,profit_money profitMoney,-`revoke_manager_money` revokeManagerMoney,interest_fee interestFee,-revoke_interest revokeInterest,deduction_fee deductionFee,actual_fee actualFee,draw_fee drawFee,drawing_fee drawingFee,cover_money AS coverMoney,all_money AS allMoney,plat_balance platBalance,fund_date fundDate FROM w_userfund_record,w_user u WHERE uid=u.id AND fund_date>=:beginTime and fund_date<=:endTime ");
 		
 		String mobile = connVo.getValueStr("mobile");
 		if (mobile != null) {

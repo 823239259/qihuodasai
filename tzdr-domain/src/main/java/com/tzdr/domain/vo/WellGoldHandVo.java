@@ -1,6 +1,7 @@
 package com.tzdr.domain.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import jodd.util.ObjectUtil;
@@ -463,6 +464,32 @@ public class WellGoldHandVo implements Serializable {
 
 	public void setNewStatusStr(String newStatusStr) {
 		this.newStatusStr = newStatusStr;
+	}
+	
+	/**
+	 * 代金券使用金额
+	 */
+	private BigDecimal voucherActualMoney;
+
+	public BigDecimal getVoucherActualMoney() {
+		return voucherActualMoney;
+	}
+
+	public void setVoucherActualMoney(BigDecimal voucherActualMoney) {
+		this.voucherActualMoney = voucherActualMoney;
+	}
+	
+	/**
+	 * 账户类型
+	 */
+	private String userType;
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	
 }

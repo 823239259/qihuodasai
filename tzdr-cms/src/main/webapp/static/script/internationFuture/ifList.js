@@ -100,7 +100,9 @@ function input() {
 			$("#mbTradeNumTR").show();
 			$("#daxTradeNumTR").show();
 			$("#nikkeiTradeNumTR").show();
-			$("#inputWin").css("height","400px");
+			$("#lhsiTradeNumTR").show();
+			$("#agTradeNumTR").show();
+			$("#inputWin").css("height","457px");
 		
 		}else
 		{
@@ -113,6 +115,8 @@ function input() {
 			$("#mbTradeNumTR").hide();
 			$("#daxTradeNumTR").hide();
 			$("#nikkeiTradeNumTR").hide();
+			$("#lhsiTradeNumTR").hide();
+			$("#agTradeNumTR").hide();
 			$("#inputWin").css("height","250px");
 
 		}
@@ -124,6 +128,15 @@ function input() {
 			$("#traderBond").val(rows[0].traderBond);
 			$("#tranProfitLoss").val("");
 			$("#tranActualLever").val("");
+			$("#hsiTranActualLever").val("");
+			$("#crudeTranActualLever").val("");
+			$("#mdtranActualLever").val("");
+			$("#mntranActualLever").val("");
+			$("#mbtranActualLever").val("");
+			$("#daxtranActualLever").val("");
+			$("#nikkeiTranActualLever").val("");
+			$("#lhsiTranActualLever").val("");
+			$("#agTranActualLever").val("");
 			$("#inputWin").show();
 			$("#inputWin").window('open');
 		}
@@ -138,41 +151,57 @@ function inputSave() {
 	if ($("#inputWin").form("validate")) {
 		var profit = $("#tranProfitLoss").val();
 		var commission = $("#tranActualLever").val();
+
 		var crudeTranActualLever = $("#crudeTranActualLever").val();
 		var hsiTranActualLever = $("#hsiTranActualLever").val();
-		
 		var mdtranActualLever = $("#mdtranActualLever").val();
 		var mbtranActualLever = $("#mbtranActualLever").val();
 		var daxtranActualLever = $("#daxtranActualLever").val();
 		var nikkeiTranActualLever = $("#nikkeiTranActualLever").val();
 		var mntranActualLever = $("#mntranActualLever").val();
-		
+		// 2016-05-17 国际综合中追加小恒指和美黄金 By Ryan.he
+		var lhsiTranActualLever = $("#lhsiTranActualLever").val();
+		var agTranActualLever = $("#agTranActualLever").val();
+
+		if (!profit) {
+			Check.messageBox("提示","请输入对应交易盈亏！");
+			return ;
+		}
+
+		// 国际综合
 		if (rows[0].businessType == "国际综合"){
-			if (!crudeTranActualLever || !hsiTranActualLever ){
+			if (!commission || !crudeTranActualLever || !hsiTranActualLever
+					|| !mdtranActualLever || !mbtranActualLever || !daxtranActualLever
+					|| !nikkeiTranActualLever || !mntranActualLever
+					|| !lhsiTranActualLever || !agTranActualLever) {
+
 				Check.messageBox("提示","请输入对应交易手数！");
 				return ;
 			}
-			if(crudeTranActualLever < 0 || hsiTranActualLever<0 
-					|| commission < 0 || mdtranActualLever<0 
-					|| daxtranActualLever < 0 || mbtranActualLever<0
-					|| nikkeiTranActualLever < 0 || mntranActualLever<0){
+			if(commission < 0 || crudeTranActualLever < 0 || hsiTranActualLever < 0 
+					|| mdtranActualLever<0 || mbtranActualLever < 0 || daxtranActualLever < 0
+					|| nikkeiTranActualLever < 0 || mntranActualLever < 0
+					|| lhsiTranActualLever < 0 || agTranActualLever < 0) {
+
 				Check.messageBox("提示","输入的数据有误,交易手数不能输入负数！");
 				return;
 			}
-		}else
-		{
+		// 单独产品
+		} else {
 			if(commission < 0){
 				Check.messageBox("提示","输入的数据有误，交易手数不能输入负数！");
 				return;
 			}
 		}
+
 		eyWindow.wprogress("系统提示","系统处理中,请稍候...");
 		$.post(Check.rootPath() + "/admin/internation/future/input" 
 				,{"id":rows[0].id,"tranProfitLoss":profit,"tranActualLever":commission,
 				"crudeTranActualLever":crudeTranActualLever,"hsiTranActualLever":hsiTranActualLever,
 				"mdtranActualLever":mdtranActualLever,"mbtranActualLever":mbtranActualLever,
 				"daxtranActualLever":daxtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
-				"mntranActualLever":mntranActualLever} ,
+				"mntranActualLever":mntranActualLever,"lhsiTranActualLever":lhsiTranActualLever,
+				"agTranActualLever":agTranActualLever} ,
 				function(data){
 					eyWindow.closeProgress();
 					if (data.success) {
@@ -189,8 +218,17 @@ function inputSave() {
 	
 };
 function inputClose() {
-	$("#crudeTranActualLever").val("");
+	$("#tranProfitLoss").val("");
+	$("#tranActualLever").val("");
 	$("#hsiTranActualLever").val("");
+	$("#crudeTranActualLever").val("");
+	$("#mdtranActualLever").val("");
+	$("#mntranActualLever").val("");
+	$("#mbtranActualLever").val("");
+	$("#daxtranActualLever").val("");
+	$("#nikkeiTranActualLever").val("");
+	$("#lhsiTranActualLever").val("");
+	$("#agTranActualLever").val("");
 	$("#inputWin").show();
 	$("#inputWin").window('close');
 };
@@ -279,6 +317,8 @@ function tradeCount() {
 		$('#mbCount').html(filterNull(rows[0].mbtranActualLever));
 		$('#daxCount').html(filterNull(rows[0].daxtranActualLever));
 		$('#nikkeiCount').html(filterNull(rows[0].nikkeiTranActualLever));
+		$('#lhsiCount').html(filterNull(rows[0].lhsiTranActualLever));
+		$('#agCount').html(filterNull(rows[0].agTranActualLever));
 		/*$('#a50Count').html(rows[0].tranActualLever);
 		$('#hsiCount').html(rows[0].hsiTranActualLever);
 		$('#crudeCount').html(rows[0].crudeTranActualLever);
@@ -326,6 +366,10 @@ $(document).ready(function() {
 					if (filterNull(rows[i].crudeTranActualLever) != 0) {
 						tranActLever = rows[i].crudeTranActualLever;
 					}
+					// 小恒指
+					if (filterNull(rows[i].lhsiTranActualLever) != 0) {
+						tranActLever = rows[i].lhsiTranActualLever;
+					}  
 					// 交易手数
 					$("#hasAuditData").datagrid('updateRow',{
 						index:i,

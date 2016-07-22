@@ -10,7 +10,7 @@
 	<name>tzdr-olog</name>
 
 	<dependencies>
-		<dependency>
+		<dependency> 
 			<groupId>com.tzdr</groupId>
 			<artifactId>tzdr-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

@@ -41,7 +41,6 @@
             </tr>
        </thead>
     </table>
-        <shiro:hasPermission name="sys:finance:rechargeHandBatch:recharge">
 	    <div id="dg003Toolbar">
 	       <form id="queryForm" method="post">
 		     <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -77,7 +76,6 @@
 		    	<a href="${ctx}/admin/rechargeHandBatch/downloadTemplate" class="easyui-linkbutton" iconCls="icon-ok">下载excel模版</a>
 		    </div>
 	    </div>
-        </shiro:hasPermission>
     </div>	
 </div>
 	<div id="handRechargeImportId" class="easyui-dialog" title="数据导入"

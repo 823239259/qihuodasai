@@ -24,6 +24,7 @@ public class Dates {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Dates.class);
 	
+	public static final String WEEK_NAMES[] = { "周日", "周一", "周二", "周三", "周四", "周五","周六" };
 	public static final String CHINE_DATE_FORMAT_TO_MINUTE="yyyy-MM-dd HH:mm";
 	public static final String CHINESE_DATE_FORMAT_LONG = "yyyyMMdd";
 	public static final String CHINESE_DATE_FORMAT_LINE = "yyyy-MM-dd";
@@ -364,4 +365,35 @@ public class Dates {
             } 
           return true;
      }
+	
+	/**
+	 * 获取包含星期几的 日期格式
+	 * @param date
+	 * @param pattern
+	 * @return MM.dd 周- HH:mm
+	 * pattern格式 中必须包含【周】处理时进行替换
+	 */
+	public static String getContainsWeekStr(Long date,String pattern){
+		Date  dateTime = Dates.parseLong2Date(date);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(dateTime);
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)-1;
+		String resultDate = Dates.format(dateTime, pattern);
+		return resultDate.replace("周",WEEK_NAMES[dayOfWeek]);
+	}
+	
+	
+	/**
+	 * 时间相加
+	 * @param date
+	 * @param day
+	 * @return
+	 */
+	public static Date addDay(Date date,int day) {
+		    Calendar cl = Calendar.getInstance();
+		    cl.setTime(date);
+		    cl.add(Calendar.DATE,day);
+		    return cl.getTime();
+	}
+	
 }

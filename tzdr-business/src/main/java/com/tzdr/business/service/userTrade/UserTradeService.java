@@ -11,9 +11,11 @@ import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.ConnditionVo;
 import com.tzdr.common.web.support.EasyUiPageInfo;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.vo.EndMoneyVo;
 import com.tzdr.domain.vo.EndProgramVo;
 import com.tzdr.domain.vo.MonitorSchemeVo;
+import com.tzdr.domain.vo.MonthEndVo;
 import com.tzdr.domain.vo.NotEnoughBalanceVo;
 import com.tzdr.domain.vo.PositionDetailsVo;
 import com.tzdr.domain.vo.SettingNotWarningVo;
@@ -656,11 +658,78 @@ public interface UserTradeService extends BaseService<UserTrade> {
 	 * @param volumeDetailId
 	 * @return
 	 */
-	public UserTrade  buildUserTrade(UserTrade userTrade,WUser user,String volumeDetailId);
+	public UserTrade   buildUserTrade(UserTrade userTrade,WUser user,String volumeDetailId,String scope);
+	
+	
+	/**
+	 * 创建 并保存月月配方案
+	 * @param userTrade
+	 * @param user
+	 * @return
+	 */
+	public UserTrade   buildUserMonthTrade(UserTrade userTrade,WUser user,Integer tradeMonth);
+	
+
+	/**
+	 * 根据活动类型、状态、预计结束时间查询
+	 * @param status
+	 * @param andActivityType
+	 * @param estimateEndtime
+	 * @return
+	 */
+	public List<UserTrade> findByStatusAndActivityTypeAndEstimateEndtime(Short status,int andActivityType,Long estimateEndtime);
+
+	/**
+	 * 延期月月配方案
+	 * @param usertrade  延期方案
+	 * @param delayMonth 延期月数
+	 * @param isJob  是否定时任务
+	 */
+	public JsonResult delayMonthTrade(UserTrade  usertrade,Integer delayMonth,boolean isJob);
+	
+	
+	/**
+	 * 查询即将到期的月月配方案
+	 * @param status
+	 * @param andActivityType
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public List<UserTrade> findSoonExpireMonthTrades(Short status,int andActivityType,Long start,Long end);
 	
 	
 	/**
 	 * 查询用户是否申请过配资方案
 	 */
 	public boolean  isHaveNoTrade(WUser user);
+	
+	/**
+	 * 具体结束时间只有10天的方案
+	 * @param page
+	 * @param conn
+	 * @return
+	 */
+	public PageInfo<MonthEndVo> monthNearEndList(PageInfo<MonthEndVo> page, ConnditionVo conn);
+	/**
+	 * 已经到期的方案
+	 * @param page
+	 * @param conn
+	 * @return
+	 */
+	public PageInfo<MonthEndVo> monthEndList(PageInfo<MonthEndVo> page, ConnditionVo conn);
+	/**
+	 * 方案详情里面的资金明细
+	 * @param userToken
+	 * @param userTrade
+	 * @return
+	 */
+	public List<Map<String,Object>> getdetailList(WUser userToken,UserTrade userTrade );
+	/**
+	 * 求方案详情里的总操盘费用
+	 * @param userToken
+	 * @param userTrade
+	 * @return
+	 */
+	public List<Map<String,Object>> getSumMoney(WUser userToken,String groupId );
 }

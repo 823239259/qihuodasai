@@ -160,6 +160,20 @@ public class UserFTradeDetailsVo implements Serializable {
 	private Integer nikkeiTranActualLever;
 	
 	/**
+	 * 小恒指
+	 */
+	@SqlColumn(name="lhsi_tran_actual_lever")
+	private Integer lhsiTranActualLever;
+	
+	/**
+	 * 美黄金
+	 * @return
+	 */
+	@SqlColumn(name="ag_tran_actual_lever")
+	private Integer agTranActualLever;
+	
+	
+	/**
 	 * 结算金额
 	 */
 	@SqlColumn(name="end_amount")
@@ -397,4 +411,22 @@ public class UserFTradeDetailsVo implements Serializable {
 	public void setOutDiskVoList(List<OutDiskVo> outDiskVoList) {
 		this.outDiskVoList = outDiskVoList;
 	}
+
+	public Integer getLhsiTranActualLever() {
+		return lhsiTranActualLever;
+	}
+
+	public void setLhsiTranActualLever(Integer lhsiTranActualLever) {
+		this.lhsiTranActualLever = lhsiTranActualLever;
+	}
+
+	public Integer getAgTranActualLever() {
+		return agTranActualLever;
+	}
+
+	public void setAgTranActualLever(Integer agTranActualLever) {
+		this.agTranActualLever = agTranActualLever;
+	}
+	
+	
 }

@@ -43,13 +43,13 @@ public class RechargeList   extends BaseEntity {
 	private String reAccountId;//充值人员编号
 	
 	/**
-	 * 充值渠道 1:联动优势 2：币币支付
+	 * 充值渠道 1:联动优势 2：币币支付 3:易支付
 	 */
 	private Integer paymentChannel=0;
 	
 	
 	/**
-	 * 来源：1:投资达人 2：配股宝
+	 * 来源：1:维胜 2：配股宝
 	 */
 	private Integer source=1;
 	

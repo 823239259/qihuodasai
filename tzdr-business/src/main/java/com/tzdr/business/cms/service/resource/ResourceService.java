@@ -132,7 +132,7 @@ public class ResourceService  extends BaseServiceImpl<Resource, ResourceDao>  {
         String permissionResourceIdentity = permission.substring(0, permission.lastIndexOf(":"));
 
         //如果权限字符串中的资源 是 以资源为前缀 则有权限 如a:b 具有a:b的权限
-        if(permissionResourceIdentity.startsWith(actualResourceIdentity)) {
+        if(StringUtil.equals(permissionResourceIdentity,actualResourceIdentity)) {
             return true;
         }
 

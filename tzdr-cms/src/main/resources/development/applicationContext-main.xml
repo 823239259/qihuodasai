@@ -46,7 +46,7 @@
         <property name="filters" value="wall,stat" />
 
     </bean>
-    
+
       <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
@@ -67,11 +67,11 @@
         <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
-     
+
 
     <import resource="applicationContext-common.xml"/>
     <import resource="applicationContext-jpa.xml"/>
-        <!-- <import resource="applicationContext-myBatis.xml"/>-->
+    <!-- <import resource="applicationContext-myBatis.xml"/>-->
     <import resource="applicationContext-olog.xml"/>
     <import resource="applicationContext-shiro.xml"/>
     <import resource="applicationContext-quartz.xml"/>

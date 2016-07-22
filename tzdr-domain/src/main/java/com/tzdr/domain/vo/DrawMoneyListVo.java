@@ -149,7 +149,7 @@ public class DrawMoneyListVo implements Serializable{
 	
 	
 	/**
-	 * 来源：1:投资达人 2：配股宝
+	 * 来源：1:维胜 2：配股宝
 	 */
 	private Integer source=1;
 	 @AllowExcel(name="来源网站")
@@ -171,7 +171,7 @@ public class DrawMoneyListVo implements Serializable{
 			return "维胜";
 		}
 		if (Constant.Source.PGB==this.source){
-			return "维胜";
+			return "配股宝";
 		}
 		return sourceStr;
 	}
@@ -388,6 +388,9 @@ public class DrawMoneyListVo implements Serializable{
 		}
 		if (Constant.PaymentChannel.UM_PAY==this.paymentChannel){
 			return "联动优势";
+		}
+		if (Constant.PaymentChannel.EASE_PAY==this.paymentChannel){
+			return "易支付";
 		}
 		return paymentChannelStr;
 	}

@@ -38,6 +38,8 @@ import com.tzdr.cms.utils.DataGridVo;
 import com.tzdr.cms.utils.WebUtil;
 import com.tzdr.common.api.bbpay.Bibipay;
 import com.tzdr.common.api.bbpay.util.BbUtil;
+import com.tzdr.common.api.payease.PayEase;
+import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.exception.EmailExceptionHandler;
@@ -284,7 +286,7 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 			if(vdrawList.getStatus() == 3){
 				return new JsonResult(false,"该数据已经取消提现，请勿审核！");
 			}
-			 
+		
 			// 如果该提现记录来源是配股宝则调用配股宝审核接口
 			if (Constant.Source.PGB==vdrawList.getSource()){
 				log.info("配股宝提现记录进行审核操作：系统操作员【"+authService.getCurrentUser().getRealname()+"】,"
@@ -294,13 +296,21 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 				return WebUtil.pgbAuditWithdraw(id);
 			}
 			
+			 
+			// 更新审核为成功状态
+			DrawList drawList=withdrawalService.updateAuditStatus(id,1);
+			
+			
+			// 易支付调用接口
+			if (Constant.PaymentChannel.EASE_PAY == vdrawList.getPaymentChannel()){
+				return payeaseDrawMoney(vdrawList);
+			}
+						
 			// 币币支付调用接口
 			if (Constant.PaymentChannel.BB_PAY == vdrawList.getPaymentChannel()){
 				return bbDrawMoney(vdrawList);
 			}
 			
-			// 更新审核为成功状态
-			DrawList drawList=withdrawalService.updateAuditStatus(id,1);
 						
 			// 联动优势调用接口
 			JSONObject jsonObject =  drawMoneyService.drawMoney(id);
@@ -451,5 +461,49 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 		drawMoneyService.updatDrawBybbOrderId(drawList.getId(),bbResult.getString("order_number"));
 		
 		return new JsonResult(resultMsg);
+	}
+	
+	/**
+	 * 易支付提现处理
+	 * @param drawList
+	 * @param dmoney
+	 * @param paymentSupportBank
+	 * @param user
+	 * @param bankCard
+	 * @return
+	 */
+	private JsonResult payeaseDrawMoney(DrawList drawList){
+		log.info("cms提现审核调用易支付支付接口参数：金额["+drawList.getMoney()+"],卡号["+drawList.getCard()+"]");
+
+		//提现手续费
+		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
+		Double handleFee = 0.00;
+		
+		if(!StringUtil.isBlank(handleFeeStr)) {
+			handleFee = Double.valueOf(handleFeeStr);
+		}
+		
+		Double dmoney = drawList.getMoney();
+		if(BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+			//扣除手续费
+			dmoney = BigDecimalUtils.subRound(dmoney, handleFee);
+		} 
+		WUser user=drawList.getUser();
+		//校验是否支持该银行提现
+		PaymentSupportBank paymentSupportBank = paymentSupportBankService.findByAbbreviation(drawList.getSubbank());
+		// 调用提现接口
+		// 格式：分帐信息总行数|分帐总金额|$收方帐号|收方帐户名|收方开户行|收方省份|收方城市|付款金额| 客户标识|联行号
+		JSONObject result =PayEaseUtil.tzdrDrawMony(dmoney, paymentSupportBank.getBbpayContactNumber(), drawList.getCard(), 
+				user.getUserVerified().getTname(), drawList.getNo(),paymentSupportBank.getBankName());
+		if (PayEase.WITHDRAW_INTERFACE_SUCCESS != result.getIntValue("status")){
+			log.info("易支付调用取款接口失败，"+result.toJSONString());
+			EmailExceptionHandler.getInstance().HandleHintWithData("cms调用易支付调用取款接口失败","PayEaseDrawMoney", result.toJSONString());
+			return new JsonResult(false,result.getString("desc"));			
+		}
+		
+		//withdrawalService.updateApiAuditStatus(drawList.getId(),1);
+		// 更新商户号和商户秘钥 到提现记录中，以便获取提现状态时方便
+		drawMoneyService.updatDrawPayeaseInfo(drawList.getId(),result.getString("vmid"),result.getString("secret"));
+		return new JsonResult("审核提现成功！");
 	}
 }

@@ -91,7 +91,11 @@ public class StatusPageController {
 		List<WuserVo> usercount=this.wuserService.getUserCount();
 		List<WuserVo> moneycount=this.wuserService.getUserTradecount();
 		String usercountstr=this.transnum(usercount.get(0).getUsercount().longValue()*100);
-		String moneystr=this.transmoneynum(moneycount.get(0).getTotalMoney()*1000);
+		Double totalmoney = moneycount.get(0).getTotalMoney();
+		String moneystr = "";
+		if(totalmoney != null){
+			moneystr=this.transmoneynum(moneycount.get(0).getTotalMoney()*1000);
+		}
 	
 		
 		List<OperationalConfig> newscols=this.operationalConfigService.findData(Constants.Mainpage.NEWSCOLUMN_STATUS);

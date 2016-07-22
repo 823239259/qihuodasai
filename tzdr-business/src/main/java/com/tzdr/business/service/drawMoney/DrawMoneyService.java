@@ -258,4 +258,14 @@ public interface DrawMoneyService{
 	 */
 	public DrawList insertDraw(int source,WUser user, String money, String bankcard,
 			PGBPaymentSupportBank paymentSupportBank, String ip, String orderId,int withdrawSetting);
+	
+	
+	
+	/**
+	 * 更新易支付商户相关信息
+	 * @param id
+	 * @param vmid 商户号
+	 * @param secret 商户秘钥
+	 */
+	public void updatDrawPayeaseInfo(String id,String vmid,String secret);
 }

@@ -506,7 +506,7 @@ function bandcard(){
 </p>
 </div>
 <div class="color999 font14 mgt10">
-  <p>绑定邮箱后，可作登录时使用</p>
+  <p>绑定邮箱后，可接收行情资讯</p>
 </div>
 </p>
 </div>

@@ -20,7 +20,7 @@ public class ContractParities extends BaseCrudEntity{
 	private String typeName;
 	
 	/**  
-	 * 业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指】
+	 * 业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指   8.综合操盘（app） 9.小恒指】
 	 */
 	private Integer businessType;
 	

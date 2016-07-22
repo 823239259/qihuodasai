@@ -30,18 +30,20 @@ public interface FSimpleCouponService extends BaseService<FSimpleCoupon> {
 	 * 查询用户已发放并未过期的优惠券
 	 * 
 	 * @param userId
-	 * @param type 优惠券类型：1-现金红包，2-代金券，3-折扣券
-	 * @param scope 使用范围：存储国际期货的业务ID 【0.富时A50  （1.沪金     2.沪银   3.沪铜   4.橡胶）=5.商品期货  6.原油    7. 恒指  8.国际综合】
+	 * @param type 优惠券类型：1-现金红包，2-代金券，3-折扣券 4-实物 5 抵扣卷
+	 * @param scope 使用范围：存储国际期货的业务ID 【0.富时A50  （1.沪金     2.沪银   3.沪铜   4.橡胶）=5.商品期货  6.原油    7. 恒指  8.国际综合 9.小恒指】
 	 * @return
 	 */
 	List<Map<String, Object>> queryCouponByUserId(String userId, int type, int scope);
+
+	List<Map<String, Object>> queryCouponByUserId(String userId, int[] type, int scope);
 	
 	/**
 	 * 判断优惠券是否有效
 	 * 
 	 * @param coupon
 	 * @param type 优惠券类型：1-现金红包，2-代金券，3-折扣券
-	 * @param scope 使用范围：存储国际期货的业务ID 【0.富时A50  （1.沪金     2.沪银   3.沪铜   4.橡胶）=5.商品期货  6.原油    7. 恒指  8.国际综合】
+	 * @param scope 使用范围：存储国际期货的业务ID 【0.富时A50  （1.沪金     2.沪银   3.沪铜   4.橡胶）=5.商品期货  6.原油    7. 恒指  8.国际综合 9，商品综合，10港股，11 A股 12 股票合买 13 小恒指】
 	 * @return
 	 */
 	boolean isCouponValid(FSimpleCoupon coupon, int type, int scope);
@@ -61,9 +63,10 @@ public interface FSimpleCouponService extends BaseService<FSimpleCoupon> {
 	* @param pageIndex 每页步长
 	* @param perPage   当前页码
 	* @param uid  用户编号
+	* @param platform 平台
 	* @return
 	 */
-	public PageInfo<FSimpleCouponWebVo> findDataList(String pageIndex,String perPage,String uid);
+	public PageInfo<FSimpleCouponWebVo> findDataList(String pageIndex,String perPage,String uid,String platform);
 
 	/**
 	* @Title: updateFSimpleCoupon    
@@ -160,5 +163,15 @@ public interface FSimpleCouponService extends BaseService<FSimpleCoupon> {
 	 * @return
 	 */
 	public String unpackDistilCoupon(String uid, String userName, String userPhone, long anniversaryTime);
+
+	/**
+	 * 得到用户未过去的所有优惠券
+	 * @param userId
+	 * @param scope
+	 * @return
+	 */
+	public List<Map<String,Object>> getFSC(String userId,int scope);
+
+	public boolean isCouponValided(FSimpleCoupon coupon, int scope);
 
 }

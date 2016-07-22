@@ -18,7 +18,7 @@ public class FSimpleConfig extends BaseCrudEntity {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * 交易品种类型【0.富时A50；5：富时A50方案参数设置  1.沪金     2.沪银   3.沪铜   4.橡胶   6.原油    7. 恒指】
+	 * 交易品种类型【0.富时A50；5：富时A50方案参数设置  1.沪金     2.沪银   3.沪铜   4.橡胶   6.原油    7.恒指   8.综合操盘 (app) 9.小恒指】
 	 */
 	private Integer type;
 	

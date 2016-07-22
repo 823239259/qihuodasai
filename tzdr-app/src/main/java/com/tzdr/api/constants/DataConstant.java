@@ -470,6 +470,13 @@ public interface DataConstant {
 	 */
 	public static final int BUSINESSTYPE_WITHDRAW = 4;
 	
+	
+
+	/**
+	 * 业务类型【期货合买活动】
+	 */
+	public static final int BUSINESSTYPE_FTOGETHER_ACTIVITY= 5;
+	
 	/**
 	* @Title: DataConstant.java     
 	* @Description:  支付状态   

@@ -274,10 +274,11 @@ public class UserFTradeController {
 		WUser wuser = wUserService.get(uid);		
 		//应付金额
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO);
-		//A50 \ 国际期货 \ 原油
+		//A50 \ 国际期货 \ 原油  \ 小恒指
 		if (BusinessTypeEnum.A50.getValue()==businessType 
 				||BusinessTypeEnum.CRUDE.getValue()==businessType 
-				||BusinessTypeEnum.HSI.getValue()==businessType){
+				||BusinessTypeEnum.HSI.getValue()==businessType
+				||BusinessTypeEnum.LHSI.getValue()==businessType){
 			int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
 			FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(cfgBusinessType,String.valueOf(tranLever));  //获取配置方案信息
 			if (ObjectUtil.equals(null, fSimpleConfig)){
@@ -342,7 +343,7 @@ public class UserFTradeController {
 		//应付金额
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO);
 		
-		//A50 \ 国际期货 \ 原油
+		//A50 \ 国际期货 \ 原油 \ 小恒指
 		int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
 		FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(cfgBusinessType,String.valueOf(tranLever));  //获取配置方案信息
 		if (ObjectUtil.equals(null, fSimpleConfig)){
@@ -395,6 +396,8 @@ public class UserFTradeController {
 		fSimpleFtseUserTrade.setLineLoss(fSimpleConfig.getLineLoss());
 		fSimpleFtseUserTrade.setFeeManage(fSimpleConfig.getFeeManage());
 		fSimpleFtseUserTrade.setTranFees(totalTranFees);
+		//设置来源
+		fSimpleFtseUserTrade.setSource(2);
 		//审核中
 		fSimpleFtseUserTrade.setStateType(1);
 		fSimpleFtseUserTrade.setBusinessType(businessType);  //国际原油
@@ -410,7 +413,7 @@ public class UserFTradeController {
 		} else {
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);
 		}
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade.getId());		
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade);		
 	}
 	
 	/**
@@ -470,13 +473,16 @@ public class UserFTradeController {
 		
 		fSimpleFtseUserTrade.setCrudeTranFees(outDiskPrice.get(1).getPrice());
 		fSimpleFtseUserTrade.setHsiTranFees(outDiskPrice.get(2).getPrice());
-		
+		//设置来源
+		fSimpleFtseUserTrade.setSource(2);
 		//设置新增品种价格
 		fSimpleFtseUserTrade.setMdTranFees(outDiskPrice.get(3).getPrice());
 		fSimpleFtseUserTrade.setMnTranFees(outDiskPrice.get(4).getPrice());
 		fSimpleFtseUserTrade.setMbTranFees(outDiskPrice.get(5).getPrice());
 		fSimpleFtseUserTrade.setDaxTranFees(outDiskPrice.get(6).getPrice());
 		fSimpleFtseUserTrade.setNikkeiTranFees(outDiskPrice.get(7).getPrice());
+		fSimpleFtseUserTrade.setLhsiTranFees(outDiskPrice.get(8).getPrice());
+		fSimpleFtseUserTrade.setAgTranFees(outDiskPrice.get(9).getPrice());
 		//审核中
 		fSimpleFtseUserTrade.setStateType(1);
 		fSimpleFtseUserTrade.setBusinessType(businessType); 
@@ -491,6 +497,6 @@ public class UserFTradeController {
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);
 		}
 			
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade.getId());		
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade);		
 	}
 }

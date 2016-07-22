@@ -22,7 +22,7 @@ public class FTradeVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 交易品种类型，如：type=0(富时A50),type=6(国际原油),type=7(恒生指数),type=8(综合操盘);
+	 * 交易品种类型，如：type=0(富时A50),type=6(国际原油),type=7(恒生指数),type=8(综合操盘),type=9(小恒指);
 	 */
 	@SqlColumn(name="type")
 	private Integer type;

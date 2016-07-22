@@ -41,6 +41,17 @@ $(document).ready(function(){
 				}else if($(this).attr("supportUmpay")==0){
 						str=str+"<td><input type='checkbox' name='supportUmpay"+i+"'/></td>";
 				}
+				if("华夏银行"!=($(this).attr("bankName"))){
+				if($(this).attr("supportPayEase")==1){
+					str=str+"<td><input type='checkbox' checked='checked' name='supportPayEase"+i+"'/></td>";
+				}else if($(this).attr("supportPayEase")==0){
+						str=str+"<td><input type='checkbox' name='supportPayEase"+i+"'/></td>";
+				}
+				}else{
+					str=str+"<td></td>";
+				}
+				
+				
 				if(i%2!=0){
 					str+="</tr>";
 				}
@@ -87,6 +98,17 @@ function peigubaoinfo(){
 				}else if($(this).attr("supportUmpay")==0){
 						str=str+"<td><input type='checkbox' name='pgbsupportUmpay"+i+"'/></td>";
 				}
+				
+				if("华夏银行"!=($(this).attr("bankName"))){
+					if($(this).attr("supportPayEase")==1){
+						str=str+"<td><input type='checkbox' checked='checked' name='pgbsupportPayEase"+i+"'/></td>";
+				}else if($(this).attr("supportPayEase")==0){
+						str=str+"<td><input type='checkbox' name='pgbsupportPayEase"+i+"'/></td>";
+					}
+				}else{
+					str=str+"<td></td>";
+				}
+				
 				if(i%2!=0){
 					str+="</tr>";
 				}
@@ -182,6 +204,7 @@ function pgbbankupdatesub(){
 							<th>银行名称</th>
 							<th>币币支付</th>
 							<th>联动优势</th>
+							<th>易支付</th>
 					</thead>
 					<tbody>
 					<tr>
@@ -194,6 +217,21 @@ function pgbbankupdatesub(){
 									<td>
 										<input type="radio" name="withdrawSetting" value="1"/>
 									</td>
+									<td>
+										<input type="radio" name="withdrawSetting" value="3"/>
+									</td>
+								</c:when>
+								<c:when test="${withdrawSetting==3}">
+									<td>所有银行</td>
+									<td>
+										<input type="radio" name="withdrawSetting" value="2"/>
+									</td>
+									<td>
+										<input type="radio" name="withdrawSetting" value="1"/>
+									</td>
+									<td>
+										<input type="radio" name="withdrawSetting" value="3" checked="checked"/>
+									</td>
 								</c:when>
 								<c:otherwise>
 									<td>所有银行</td>
@@ -202,6 +240,9 @@ function pgbbankupdatesub(){
 									</td>
 									<td>
 										<input type="radio" name="withdrawSetting" value="1"  checked="checked"/>
+									</td>
+									<td>
+										<input type="radio" name="withdrawSetting" value="3"/>
 									</td>
 								</c:otherwise>
 						</c:choose>
@@ -214,9 +255,11 @@ function pgbbankupdatesub(){
 				<th>银行名称</th>
 				<th>币币支付</th>
 				<th>联动优势</th>
+				<th>易支付</th>
 				<th>银行名称</th>
 				<th>币币支付</th>
 				<th>联动优势</th>
+				<th>易支付</th>
 				</thead>
 				<tbody></tbody>
 				</table>
@@ -250,6 +293,7 @@ function pgbbankupdatesub(){
 							<th>银行名称</th>
 							<th>币币支付</th>
 							<th>联动优势</th>
+							<th>易支付</th>
 					</thead>
 					<tbody>
 					<tr>
@@ -262,6 +306,21 @@ function pgbbankupdatesub(){
 									<td>
 										<input type="radio" name="pgbWithdrawSetting" value="1"/>
 									</td>
+									<td>
+										<input type="radio" name="pgbWithdrawSetting" value="3"/>
+									</td>
+								</c:when>
+								<c:when test="${pgbWithdrawSetting==3}">
+									<td>所有银行</td>
+									<td>
+										<input type="radio" name="pgbWithdrawSetting" value="2"/>
+									</td>
+									<td>
+										<input type="radio" name="pgbWithdrawSetting" value="1"/>
+									</td>
+									<td>
+										<input type="radio" name="pgbWithdrawSetting" value="3" checked="checked"/>
+									</td>
 								</c:when>
 								<c:otherwise>
 									<td>所有银行</td>
@@ -270,6 +329,9 @@ function pgbbankupdatesub(){
 									</td>
 									<td>
 										<input type="radio" name="pgbWithdrawSetting" value="1"  checked="checked"/>
+									</td>
+									<td>
+										<input type="radio" name="pgbWithdrawSetting" value="3"/>
 									</td>
 								</c:otherwise>
 						</c:choose>
@@ -282,9 +344,11 @@ function pgbbankupdatesub(){
 				<th>银行名称</th>
 				<th>币币支付</th>
 				<th>联动优势</th>
+				<th>易支付</th>
 				<th>银行名称</th>
 				<th>币币支付</th>
 				<th>联动优势</th>
+				<th>易支付</th>
 				</thead>
 				<tbody></tbody>
 				</table>

@@ -21,7 +21,7 @@ $(document).ready(function(){
 			{field:'subordinateSites',title:'所属网站',width:100,sortable:true,
 				formatter: function(value,row,index){
 					if(row.typeKey=="smsContentRegisterPGB"||row.typeKey=="smsContentOthersPGB"){
-						return "维胜";
+						return "配股宝";
 					}
 					if(row.typeKey=="smsContentRegister"||row.typeKey=="smsContentOthers"){
 						return "维胜";

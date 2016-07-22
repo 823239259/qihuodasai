@@ -1,11 +1,12 @@
 $(document).ready(function(){
+	//alert(1);
 	$("#edatagrid").datagrid({
 		nowrap: true,
 		autoRowHeight: false,
 		striped: true,//True 就把行条纹化。（即奇偶行使用不同背景色）
 		collapsible:true,
 		url:basepath+'admin/allTrades/queryChildTrades',
-		toolbar:'#tb',
+		//toolbar:'#tb',
 		rownumbers:true,
 		pagination:true,
 		fitColumns:true,// 自适应列宽
@@ -23,7 +24,16 @@ $(document).ready(function(){
 				return moneyUtils.format(value,2);
 			}},
 			{field:'feeDay',title:'配资管理费',width:80},
-			{field:'apr',title:'配资利息',width:90,sortable:true},
+			{field:'apr',title:'应收利息',width:90,sortable:true},
+			
+			{field:'dapr',title:'实收利息',width:90,sortable:true,formatter: function(value,row,index){
+		    	if(value < 0){
+		    		return "0";
+		    	}else{
+		    		return null==value?0:value.toFixed(2);
+		    	}
+		    	
+		    }},
 			{field:'addtime',title:'配资日期',width:160,sortable:true,formatter: function(value,row,index){
 				return getFormatDateByLong(value,'yyyy-MM-dd hh:mm:ss');
 			}}

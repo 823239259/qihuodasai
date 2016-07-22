@@ -12,6 +12,7 @@ import com.tzdr.common.utils.Dates;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
 import com.tzdr.domain.constants.Constant;
+import com.tzdr.domain.web.entity.UserTrade;
 
 /**
  * @Description: TODO(配资信息VO类)
@@ -20,7 +21,10 @@ import com.tzdr.domain.constants.Constant;
  * @date 2015年1月5日 下午3:39:20
  */
 public class UserTradeCmsVo implements Serializable {
-
+	
+	
+	
+	
 	private String id;
 	/**
 	* 
@@ -149,7 +153,10 @@ public class UserTradeCmsVo implements Serializable {
 	/**
 	 * 预计自然结束天数(算利息)
 	 */
-	@AllowExcel(name = "配资天数")
+	@AllowExcel(name = "配资时长")
+	private String naturalDaysStr;
+	
+	
 	private BigInteger naturalDays;
 
 	/**
@@ -157,6 +164,17 @@ public class UserTradeCmsVo implements Serializable {
 	 */
 	@AllowExcel(name = "已使用天数")
 	private Long tradingDays = 0l;
+	
+	
+	
+	
+	/**
+	 * 追加方案时长
+	 */
+	private BigInteger prolongMonth;
+	@AllowExcel(name = "追加方案时长")
+	private String  prolongMonthStr;
+	
 
 	@AllowExcel(name = "最短保留时长(交易日)")
 	private Integer shortestDuration;
@@ -321,7 +339,8 @@ public class UserTradeCmsVo implements Serializable {
 	 * 股票资产
 	 */
 	private double stockAssets;
-
+	
+	
 	/**
 	 * 现金余额
 	 */
@@ -372,6 +391,11 @@ public class UserTradeCmsVo implements Serializable {
 	 * 方案编号
 	 */
 	private String programNo;
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 	public String getProgramNo() {
 		return programNo;
@@ -479,7 +503,7 @@ public class UserTradeCmsVo implements Serializable {
 	}
 
 	public UserTradeCmsVo() {
-
+		
 	}
 
 	public UserTradeCmsVo(String uid, String account, String password, Double totalLending, Double totalLeverMoney, Double totalAppendLeverMoney, Double warning, Double open, BigInteger starttime,
@@ -1043,4 +1067,56 @@ public class UserTradeCmsVo implements Serializable {
 	public void setNewStatusStr(String newStatusStr) {
 		this.newStatusStr = newStatusStr;
 	}
+	
+	
+
+	/**
+	 * 实收利息
+	 */
+	private Double dapr;
+
+	public Double getDapr() {
+		return dapr;
+	}
+
+	public void setDapr(Double dapr) {
+		
+		this.dapr = dapr;
+		
+	}
+
+	public BigInteger getProlongMonth() {
+		return prolongMonth;
+	}
+
+	public void setProlongMonth(BigInteger prolongMonth) {
+		this.prolongMonth = prolongMonth;
+	}
+
+	public String getNaturalDaysStr() {
+		if (UserTrade.ActivityType.MONTH_TRADE==activityType  
+				&& !ObjectUtil.equals(null,this.naturalDays)){
+			return  (this.naturalDays.intValue()/Constant.MONTH_TRADE_MONTH_DAYS)+"月";
+		}
+		return naturalDays+"天";
+	}
+
+	public void setNaturalDaysStr(String naturalDaysStr) {
+		this.naturalDaysStr = naturalDaysStr;
+	}
+
+	public String getProlongMonthStr() {
+		if (UserTrade.ActivityType.MONTH_TRADE==activityType  
+				&& !ObjectUtil.equals(null,this.prolongMonth)
+				&& this.prolongMonth.intValue()>Constant.FtogetherGame.ZERO){
+			return prolongMonth+"个月";
+		}
+		return prolongMonthStr;
+	}
+
+	public void setProlongMonthStr(String prolongMonthStr) {
+		this.prolongMonthStr = prolongMonthStr;
+	}
+
+	
 }

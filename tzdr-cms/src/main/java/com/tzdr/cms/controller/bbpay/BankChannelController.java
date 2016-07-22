@@ -75,6 +75,11 @@ private DataMapService dataMapService;
 			}else if(request.getParameter("supportBbpay"+i)==null){
 				bc.setSupportBbpay(0);
 			}
+			if(request.getParameter("supportPayEase"+i)!=null){
+				bc.setSupportPayEase(Integer.valueOf(request.getParameter("supportPayEase"+i)));
+			}else if(request.getParameter("supportPayEase"+i)==null){
+					bc.setSupportPayEase(0);
+			}
 			bankChannelService.save(bc);
 		}
 		

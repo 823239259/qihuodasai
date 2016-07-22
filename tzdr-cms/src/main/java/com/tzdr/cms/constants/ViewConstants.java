@@ -1009,7 +1009,20 @@ public class ViewConstants {
 		
 		public static String LIST_VIEW="/views/admin/internationFuture/list";
 	}
-	
+
+	public static class futureAccount{
+		public static String LIST_VIEW = "/views/admin/futureAccount/list";
+	}
+
+	/**
+	 * 期货合买
+	 */
+	public static class togetherFuture{
+		public static String LIST_VIEW = "/views/admin/togetherFuture/list";
+		public static String TRADE_LIST = "/views/admin/fTogetherTrade/list";
+		public static String RECORD_LIST = "/views/admin/fTogetherTrade/recordList";
+	}
+
 	/**
 	 * 支付银行管理页面处理
 	 */
@@ -1054,5 +1067,10 @@ public class ViewConstants {
 
 	public static class channelPromotion{
 		public static String LIST_VIEW="/views/admin/channelPromotion/list";
+	}
+	
+	
+	public static class MonthTrade{
+		public static String LIST_VIEW="/views/admin/monthTradeParams/list";
 	}
 }

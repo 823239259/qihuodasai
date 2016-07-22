@@ -11,7 +11,7 @@ import com.tzdr.common.utils.SqlColumn;
 
 /**
  * 用户资金报表 Vo
- * @author Lin Feng
+ * @author LinFeng
  *
  */
 public class UserFundsNewVo implements Serializable{

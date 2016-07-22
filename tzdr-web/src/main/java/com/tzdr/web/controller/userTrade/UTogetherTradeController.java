@@ -32,6 +32,7 @@ import com.tzdr.business.service.account.ParentAccountService;
 import com.tzdr.business.service.combine.CombineInfoService;
 import com.tzdr.business.service.contractsave.ContractsaveService;
 import com.tzdr.business.service.datamap.DataMapService;
+import com.tzdr.business.service.future.FSimpleCouponService;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.realdeal.RealDealService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
@@ -64,6 +65,7 @@ import com.tzdr.domain.web.entity.UserFund;
 import com.tzdr.domain.web.entity.UserTrade;
 import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
+import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 import com.tzdr.web.constants.Constants;
 import com.tzdr.web.constants.ViewConstants;
 import com.tzdr.web.utils.UserSessionBean;
@@ -108,6 +110,8 @@ public class UTogetherTradeController {
 	private HandTradeService handTradeService;
 	@Autowired
 	private TogetherTradeService togetherTradeService;
+	@Autowired
+    private FSimpleCouponService fSimpleCouponService;
 	
 	/**
 	 * 跳转到方案支付页
@@ -303,185 +307,195 @@ public class UTogetherTradeController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/success")
-	public String tradeOk(ModelMap modelMap,  Double totalMoney,Double recommendMoney,  Integer lever,  Integer days, HttpServletRequest request, HttpServletResponse response)
+	 public String tradeOk(ModelMap modelMap, Double totalMoney, Double recommendMoney, Integer lever, Integer days,String voucherId, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		UserSessionBean userSessionBean = (UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+		 UserSessionBean userSessionBean = (UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 
-		if (ObjectUtil.equals(userSessionBean, null)) {
-			throw new UserTradeException("no.user", null);
-		}
+	        if (ObjectUtil.equals(userSessionBean, null)) {
+	            throw new UserTradeException("no.user", null);
+	        }
 
-		WUser wuser = wUserService.getUser(userSessionBean.getId());
-		try {
-			TogetherConfig togetherConfig = togetherConfigService.getParams();
-			if (ObjectUtil.equals(null, togetherConfig)) {
-				return this.toIndexpage(modelMap);
-			}
-			UserVerified userVerified = securityInfoService.findByUserId(userSessionBean.getId());
-			if(ObjectUtils.equals(userVerified, null)||ObjectUtils.equals(userVerified.getIdcard(), null)){
-				return this.toIndexpage(modelMap);
-			}
-			// 总操盘资金是否合法
-			if (totalMoney < togetherConfig.getMinMoney() || totalMoney > togetherConfig.getMaxMoney()) {
-				return this.toIndexpage(modelMap);
-			}
-			// 校验倍数是否合法
-			String leverStr = lever + "";
+	        WUser wuser = wUserService.getUser(userSessionBean.getId());
+	        try {
+	            TogetherConfig togetherConfig = togetherConfigService.getParams();
+	            if (ObjectUtil.equals(null, togetherConfig)) {
+	                return this.toIndexpage(modelMap);
+	            }
+	            UserVerified userVerified = securityInfoService.findByUserId(userSessionBean.getId());
+	            if (ObjectUtils.equals(userVerified, null) || ObjectUtils.equals(userVerified.getIdcard(), null)) {
+	                return this.toIndexpage(modelMap);
+	            }
+	            // 总操盘资金是否合法
+	            if (totalMoney < togetherConfig.getMinMoney() || totalMoney > togetherConfig.getMaxMoney()) {
+	                return this.toIndexpage(modelMap);
+	            }
+	            // 校验倍数是否合法
+	            String leverStr = lever + "";
 
-			String[] levers = togetherConfig.getMoneyRatio().split(Constants.SEPERATOR_SEMICOLON);
+	            String[] levers = togetherConfig.getMoneyRatio().split(Constants.SEPERATOR_SEMICOLON);
 
-			if (ArrayUtils.isEmpty(levers)) {
-				return this.toIndexpage(modelMap);
-			} else {
-				boolean flag = false;
-				for (String configLever : levers) {
-					if (leverStr.equals(configLever)) {
-						flag = true;
-					}
-				}
-				if (!flag) {
-					return this.toIndexpage(modelMap);
-				}
-			}
-			// 校验天数是否合法
-			String daysStr = days + "";
+	            if (ArrayUtils.isEmpty(levers)) {
+	                return this.toIndexpage(modelMap);
+	            } else {
+	                boolean flag = false;
+	                for (String configLever : levers) {
+	                    if (leverStr.equals(configLever)) {
+	                        flag = true;
+	                    }
+	                }
+	                if (!flag) {
+	                    return this.toIndexpage(modelMap);
+	                }
+	            }
+	            // 校验天数是否合法
+	            String daysStr = days + "";
 
-			String[] recommendDay = togetherConfig.getRecommendDay().split(Constants.SEPERATOR_SEMICOLON);
+	            String[] recommendDay = togetherConfig.getRecommendDay().split(Constants.SEPERATOR_SEMICOLON);
 
-			if (ArrayUtils.isEmpty(recommendDay)) {
-				return this.toIndexpage(modelMap);
-			} else {
-				boolean flag = false;
-				for (String daysLever : recommendDay) {
-					if (daysStr.equals(daysLever)) {
-						flag = true;
-					}
-				}
-				if (!flag) {
-					return this.toIndexpage(modelMap);
-				}
-			}
-			//计算配资金额 = 总操盘金 - 保证金
-			double capitalAmount = BigDecimalUtils.sub(totalMoney, recommendMoney);	
+	            if (ArrayUtils.isEmpty(recommendDay)) {
+	                return this.toIndexpage(modelMap);
+	            } else {
+	                boolean flag = false;
+	                for (String daysLever : recommendDay) {
+	                    if (daysStr.equals(daysLever)) {
+	                        flag = true;
+	                    }
+	                }
+	                if (!flag) {
+	                    return this.toIndexpage(modelMap);
+	                }
+	            }
+	            //计算配资金额 = 总操盘金 - 保证金
+	            double capitalAmount = BigDecimalUtils.sub(totalMoney, recommendMoney);
 
-			double shortLine = 0.0; // 补仓
-			double openLine = 0.0; // 平仓
-			if (1 <= lever && lever <= 5) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.1);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.07);
-			} else if (lever == 6) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0867);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.06);
-			} else if (lever == 7) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0929);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0571);
-			} else if (lever == 8) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0875);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0563);
-			} else if (lever == 9) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0644);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0433);
-			} else if (lever == 10) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.06);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.04);
-			} else if (lever == 11) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0682);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0409);
-			} else if (lever == 12) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0625);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0375);
-			} else if (lever == 13) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0577);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0346);
-			} else if (lever == 14) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.0536);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.0321);
-			} else if (lever == 15) {
-				shortLine = BigDecimalUtils.mul(capitalAmount, 1.05);
-				openLine = BigDecimalUtils.mul(capitalAmount, 1.03);
-			}
-			shortLine = BigDecimalUtils.round(shortLine, 0);
-			openLine = BigDecimalUtils.round(openLine, 0);
-			TradeConfig config = tradeConfigService.findTradeConfig(days, recommendMoney, lever);
-			if (ObjectUtil.equals(config, null)) {
-				String detail = "borrwPeriod:" + days + "lever:" + lever + "capitalMargin:" + recommendMoney;
-				log.error("利息配置有误" + detail);
-				throw new UserTradeException("no.interest.config", null);
-			}
+	            double shortLine = 0.0; // 补仓
+	            double openLine = 0.0; // 平仓
+	            if (1 <= lever && lever <= 5) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.1);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.07);
+	            } else if (lever == 6) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0867);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.06);
+	            } else if (lever == 7) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0929);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0571);
+	            } else if (lever == 8) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0875);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0563);
+	            } else if (lever == 9) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0644);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0433);
+	            } else if (lever == 10) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.06);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.04);
+	            } else if (lever == 11) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0682);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0409);
+	            } else if (lever == 12) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0625);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0375);
+	            } else if (lever == 13) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0577);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0346);
+	            } else if (lever == 14) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.0536);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.0321);
+	            } else if (lever == 15) {
+	                shortLine = BigDecimalUtils.mul(capitalAmount, 1.05);
+	                openLine = BigDecimalUtils.mul(capitalAmount, 1.03);
+	            }
+	            shortLine = BigDecimalUtils.round(shortLine, 0);
+	            openLine = BigDecimalUtils.round(openLine, 0);
+	            TradeConfig config = tradeConfigService.findTradeConfig(days, recommendMoney, lever);
+	            if (ObjectUtil.equals(config, null)) {
+	                String detail = "borrwPeriod:" + days + "lever:" + lever + "capitalMargin:" + recommendMoney;
+	                log.error("利息配置有误" + detail);
+	                throw new UserTradeException("no.interest.config", null);
+	            }
+	            // 优惠券是否过期
+	            if(voucherId != null && !"".equals(voucherId)){
+	                FSimpleCoupon voucher = fSimpleCouponService.get(voucherId);
+	                if (!this.fSimpleCouponService.isCouponValided(voucher, 12)){
+	                    voucherId = null;
+	                }
+	            }
 
-			// 合买利息系数
-			double foenusRatio = togetherConfig.getFoenusRatio();
-			// 合买管理费系数
-			double manageRatio = togetherConfig.getManageRatio();
-			// 利息（天）
-			double interestFee = BigDecimalUtils.mulRound(BigDecimalUtils.mulRound(config.getDailyInterest(), capitalAmount), foenusRatio);
-			// 管理费（天）
-			double manageFee = BigDecimalUtils.mulRound(BigDecimalUtils.mulRound(config.getDailyManagementFee(), capitalAmount), manageRatio);
-			// 总利息
-			double totalInterestFee = BigDecimalUtils.mulRound(interestFee, days);
-			// 需要支付的总金额 = 配资保证金 + 总利息
-			double needPay = BigDecimalUtils.addRound(recommendMoney, totalInterestFee);
-			// 加上下个交易日的管理费
-			double needNextdayPay = BigDecimalUtils.addRound(needPay, manageFee);
-			// 是否够利息和配资金额
-			double payEnough = BigDecimalUtils.sub(wuser.getAvlBal(), needPay);
-			// 是否够利息和配资金额和下个交易日管理费
-			double payNextdayEnough = BigDecimalUtils.sub(wuser.getAvlBal(), needNextdayPay);
-			if (payNextdayEnough < 0) {
-				return this.toIndexpage(modelMap);
-			}
-			if (payEnough < 0) {
-				return this.toIndexpage(modelMap);
-			}
-			UserTrade userTrade = new UserTrade();
-			// 属于合买配资
-			userTrade.setActivityType(UserTrade.ActivityType.TOGETHER_TRADE);
-			userTrade.setWuser(wuser);
-			userTrade.setType((short) 0);
-			userTrade.setFeeType((short) 2);
-			userTrade.setTradeStart((short) 1);// 下个交易日生效
-			userTrade.setMoney(capitalAmount);
-			userTrade.setWarning(shortLine);
-			userTrade.setOpen(openLine);
-			userTrade.setLever(lever);
-			userTrade.setLeverMoney(recommendMoney);
-			userTrade.setAddtime(Dates.getCurrentLongDate());
-			// 计算交易日(合买配资默认下个交易日生效)
-			String tradeDay = tradeDayService.getNextTradeDay();
-			Date trade = Dates.parse(tradeDay, Dates.CHINESE_DATE_FORMAT_LONG);
+	            // 合买利息系数
+	            double foenusRatio = togetherConfig.getFoenusRatio();
+	            // 利息（天）
+	            double interestFee = BigDecimalUtils.mulRound(BigDecimalUtils.mulRound(config.getDailyInterest(), capitalAmount), foenusRatio);
+	            // 总利息
+	            double totalInterestFee = BigDecimalUtils.mulRound(interestFee, days);
+	            // 合买管理费系数
+	            double manageRatio = togetherConfig.getManageRatio();
 
-			userTrade.setStarttime(trade.getTime() / 1000);
-			String expirationDate = tradeDayService.getEndDate(tradeDay, days);
-			Date estimateEnd = Dates.parse(expirationDate, Dates.CHINESE_DATE_FORMAT_LONG);
-			userTrade.setEstimateEndtime(estimateEnd.getTime() / 1000);
-			userTrade.setNaturalDays((long) days);
-			long tradeDays = tradeDayService.getTradeDays(tradeDay, expirationDate);
-			userTrade.setStartdays((int) tradeDays);
-			// 日(管理费)
-			userTrade.setFeeDay(manageFee);
-			// 月(利息)
-			userTrade.setFeeMonth(interestFee);
-			userTrade.setTotalLeverMoney(totalMoney);
-			synchronized (lock) {
-				userTrade = userTradeService.buildUserTrade(userTrade, wuser, "");
-				// 生成合买trade记录 
-				TogetherTrade tTrade = new TogetherTrade();
-				tTrade.setTid(userTrade.getId());
-				tTrade.setGid(userTrade.getGroupId());
-				tTrade.setType(1);
-				tTrade.setProfitRatio(togetherConfig.getProfitRatio());
-				togetherTradeService.save(tTrade);
-			}
-			wuser.setUserType("1");
-			wUserService.update(wuser);
-			modelMap.put("groupId", userTrade.getGroupId());
-		} catch (UserTradeException e) {
-			String dataDetail = "userInfo:id:" + wuser.getId() + "|mobile:" + wuser.getMobile() + "|异常：" + e.getResourceMessage();
-			log.error(dataDetail);
-			EmailExceptionHandler.getInstance().HandleExceptionWithData(e, "申请配资失败异常", this.getClass().getName() + ":tradeOk", dataDetail);
-			return this.toIndexpage(modelMap);
-		}
-		return "redirect:/usertogether/tradeSuccess";
+	            // 管理费（天）
+	            double manageFee = BigDecimalUtils.mulRound(BigDecimalUtils.mulRound(config.getDailyManagementFee(), capitalAmount), manageRatio);
+
+	            // 需要支付的总金额 = 配资保证金 + 总利息
+	            double needPay = BigDecimalUtils.addRound(recommendMoney, totalInterestFee);
+	            // 加上下个交易日的管理费
+	            double needNextdayPay = BigDecimalUtils.addRound(needPay, manageFee);
+	            // 是否够利息和配资金额
+	            double payEnough = BigDecimalUtils.sub(wuser.getAvlBal(), needPay);
+	            // 是否够利息和配资金额和下个交易日管理费
+	            double payNextdayEnough = BigDecimalUtils.sub(wuser.getAvlBal(), needNextdayPay);
+	            if (payNextdayEnough < 0) {
+	                return this.toIndexpage(modelMap);
+	            }
+	            if (payEnough < 0) {
+	                return this.toIndexpage(modelMap);
+	            }
+
+	                UserTrade userTrade = new UserTrade();
+	                // 属于合买配资
+	                userTrade.setActivityType(UserTrade.ActivityType.TOGETHER_TRADE);
+	                userTrade.setWuser(wuser);
+	                userTrade.setType((short) 0);
+	                userTrade.setFeeType((short) 2);
+	                userTrade.setTradeStart((short) 1);// 下个交易日生效
+	                userTrade.setMoney(capitalAmount);
+	                userTrade.setWarning(shortLine);
+	                userTrade.setOpen(openLine);
+	                userTrade.setLever(lever);
+	                userTrade.setLeverMoney(recommendMoney);
+	                userTrade.setAddtime(Dates.getCurrentLongDate());
+	                // 计算交易日(合买配资默认下个交易日生效
+	                String tradeDay = tradeDayService.getNextTradeDay();
+	                Date trade = Dates.parse(tradeDay, Dates.CHINESE_DATE_FORMAT_LONG);
+
+	                userTrade.setStarttime(trade.getTime() / 1000);
+	                String expirationDate = tradeDayService.getEndDate(tradeDay, days);
+	                Date estimateEnd = Dates.parse(expirationDate, Dates.CHINESE_DATE_FORMAT_LONG);
+	                userTrade.setEstimateEndtime(estimateEnd.getTime() / 1000);
+	                userTrade.setNaturalDays((long) days);
+	                long tradeDays = tradeDayService.getTradeDays(tradeDay, expirationDate);
+	                userTrade.setStartdays((int) tradeDays);
+	                // 日(管理费)
+	                userTrade.setFeeDay(manageFee);
+	                // 月(利息)
+	                userTrade.setFeeMonth(interestFee);
+	                userTrade.setTotalLeverMoney(totalMoney);
+	                synchronized (lock) {
+	                    userTrade = userTradeService.buildUserTrade(userTrade, wuser, voucherId,"12");
+	                    // 生成合买trade记录
+	                    TogetherTrade tTrade = new TogetherTrade();
+	                    tTrade.setTid(userTrade.getId());
+	                    tTrade.setGid(userTrade.getGroupId());
+	                    tTrade.setType(1);
+	                    tTrade.setProfitRatio(togetherConfig.getProfitRatio());
+	                    togetherTradeService.save(tTrade);
+	                }
+	                wuser.setUserType("1");
+	                wUserService.update(wuser);
+	                modelMap.put("groupId", userTrade.getGroupId());
+	            }catch(UserTradeException e){
+	                String dataDetail = "userInfo:id:" + wuser.getId() + "|mobile:" + wuser.getMobile() + "|异常：" + e.getResourceMessage();
+	                log.error(dataDetail);
+	                EmailExceptionHandler.getInstance().HandleExceptionWithData(e, "申请配资失败异常", this.getClass().getName() + ":tradeOk", dataDetail);
+	                return this.toIndexpage(modelMap);
+	            }
+	            return "redirect:/usertogether/tradeSuccess";
 		
 	}
 	@RequestMapping(value = "/tradeSuccess")

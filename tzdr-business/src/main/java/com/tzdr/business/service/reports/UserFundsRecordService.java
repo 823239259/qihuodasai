@@ -95,7 +95,7 @@ public class UserFundsRecordService extends BaseServiceImpl<UserFundsRecord,User
 		sqlBuf.setLength(0);
 		sqlBuf.append("SELECT t.uid,\n");
 		sqlBuf.append("			sum(t.money) AS amountCapital,\n");
-		sqlBuf.append("			sum(t.lever_money+t.append_lever_money) AS balanceCapitalMargin \n");
+		sqlBuf.append("			sum(t.lever_money+t.append_lever_money-ifnull(t.voucher_actual_money,0)) AS balanceCapitalMargin \n");
 		sqlBuf.append("		FROM w_user_trade t  \n");
 		sqlBuf.append("		WHERE ((t.`status`=1 OR t.`status`=0)  and t.addtime <=?) \n");
 		sqlBuf.append("			OR (t.`status`=2 AND t.endtime >=? AND t.addtime <=?) \n");
@@ -162,7 +162,7 @@ public class UserFundsRecordService extends BaseServiceImpl<UserFundsRecord,User
 		sqlBuf.append("	ABS(IFNULL(sum(if(f.type=21,f.money,0)),0))  as incomeOther, \n");
 		sqlBuf.append("	ABS(IFNULL(sum(if(f.type=24,f.money,0)),0)) as deductionFee, \n");
 		sqlBuf.append("	ABS(IFNULL(sum(if(f.type=25,f.money,0)),0)) as revokeManagerMoney, \n");
-		sqlBuf.append("	ABS(IFNULL(sum(if(f.type=26,f.money,0)),0)) as revokeInterest \n");
+		sqlBuf.append("	ROUND(ABS(IFNULL(sum(if(f.type=26,f.money,0)),0)),2) as revokeInterest \n");
 		sqlBuf.append("from w_user_fund f  \n");
 		sqlBuf.append("where f.pay_status=1 AND f.uptime >=? and  f.uptime <=? \n");
 		sqlBuf.append("group by f.uid");
@@ -185,6 +185,47 @@ public class UserFundsRecordService extends BaseServiceImpl<UserFundsRecord,User
 			wufList = null;
 			wufListRS = null;
 		}
+		
+		logger.info("------------------用户资金记录任务--------股票抵扣利息金额-------------------");
+		sqlBuf.setLength(0);
+		sqlBuf.append("SELECT tu.uid, IFNULL(sum(tu.discount_actual_money), 0) as discountActualMoney\n");
+		sqlBuf.append("FROM w_user_trade tu \n");
+		sqlBuf.append("WHERE tu.addtime >= ? and tu.addtime <= ? \n");
+		sqlBuf.append("GROUP BY tu.uid");
+		List<Map<String,Object>> dsList = this.getEntityDao().queryMapBySql(sqlBuf.toString(), beginTime,endTime);
+		List<UserFundsRecord> dsListRS = TypeConvert.objectsToListDataByMethod(dsList,UserFundsRecord.class);
+		if(dsListRS != null){
+			for(UserFundsRecord obj : dsListRS){
+				UserFundsRecord tmp = listMap.get(obj.getUid());
+				
+				if(tmp!=null)listMap.get(obj.getUid()).setInterestFee(obj.getDiscountActualMoney().doubleValue()+tmp.getInterestFee());
+				if(tmp!=null)listMap.get(obj.getUid()).setDeductionFee(obj.getDiscountActualMoney().doubleValue()+tmp.getDeductionFee());
+			}
+			dsList = null;
+			dsListRS = null;
+		}
+		logger.info("------------------用户资金记录任务--------股票抵扣利息金额-------------------");
+		
+		logger.info("------------------用户资金记录任务--------股票保证金卡卷金额-------------------");
+		sqlBuf.setLength(0);
+		sqlBuf.append("SELECT tu.uid, sum(tu.deduction_lever_money) as cardCapitalMargin \n");
+		sqlBuf.append("FROM w_user_trade tu \n");
+		sqlBuf.append("WHERE  tu.status=2 and tu.endtime >= ? and tu.endtime <= ? \n");
+		sqlBuf.append("GROUP BY tu.uid");
+		List<Map<String,Object>> cardList = this.getEntityDao().queryMapBySql(sqlBuf.toString(), beginTime,endTime);
+		List<UserFundsRecord> cardListRS = TypeConvert.objectsToListDataByMethod(cardList,UserFundsRecord.class);
+		if(cardListRS != null){
+			for(UserFundsRecord obj : cardListRS){
+				UserFundsRecord tmp = listMap.get(obj.getUid());
+				if(tmp!=null)listMap.get(obj.getUid()).setCardCapitalMargin(obj.getCardCapitalMargin()+tmp.getCardCapitalMargin());
+			}
+			cardList = null;
+			cardListRS = null;
+		}
+		logger.info("------------------用户资金记录任务--------股票保证金卡卷金额-------------------");
+		
+		
+		
 		logger.info("------------------用户资金记录任务--------query用户资金明细-------------------");
 		//利润提取
 		sqlBuf.setLength(0);

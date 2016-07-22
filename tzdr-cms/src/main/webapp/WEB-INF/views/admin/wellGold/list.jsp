@@ -116,12 +116,13 @@
 							<th field="mobile" width="180" sortable="true">手机号码</th>
 							<th field="tname" width="150">客户姓名</th>
 							<th field="groupId" width="150">方案编号</th>
-							<th field="leverMoney" width="150">配资保证金</th>
+							<th field="leverMoney" width="150">操盘保证金（元）</th>
+							<th field="voucherActualMoney" width="150" data-options="formatter:vam">代金券（元）</th>
 							<th field="money" width="150">配资金额</th>
 							<th field="totalLeverMoney" width="150">总操盘资金</th>
-							<th field="feeType" width="150">账户类型</th>
 							<th field="warning" width="100">亏损补仓线</th>
 							<th field="openline" width="150">亏损平仓线</th>
+							<th field="feeType" width="150" >账户类型</th>
 							<th field="createTimeValue" width="200">提交时间</th>
 							<th field="tradeStart" width="200">交易开始时间</th>
 							<th field="activityTypeStr" width="200">方案类型</th>
@@ -131,6 +132,33 @@
 			        </thead>
    				</table>
 			</div>
+			<script type="text/javascript">
+				//代金券
+				function vam(val,row,index){
+					var lm = row.leverMoney;
+					if(val <= lm){
+						return val;
+					}else{
+						return lm;
+					}
+				}
+				
+				/* //账户类型
+				function ut(val,row,index) {
+					if(val == '-1'){
+						return '平台';
+					}else if(val == '-2'){
+						return 'web渠道';
+					}else if(val == '-3'){
+						return 'cms渠道';
+					}else if(val == '0'){
+						return 'web注册账户';
+					}else if(val == '1'){
+						return '配资用户';
+					}
+				} */
+			
+			</script>
 			<div title="方案审核记录" data-options="tools:'#p-tools'" style="padding:20px;">
 				<div id="hasAaudittb" style="padding: 5px; height: auto">
 					<div>
@@ -233,7 +261,8 @@
 							<th field="account" width="150">交易账户</th>
 							<th field="accountName" width="150">交易账户名</th>
 							<th field="groupId" width="150">方案编号</th>
-							<th field="leverMoney" width="150">配资保证金</th>
+							<th field="leverMoney" width="150">操盘保证金（元）</th>
+							<th field="voucherActualMoney" width="150" data-options="formatter:vam">代金券（元）</th>
 							<th field="money" width="150">配资金额</th>
 							<th field="totalLeverMoney" width="160">总操盘资金</th>
 							<th field="warning" width="180">亏损补仓线</th>

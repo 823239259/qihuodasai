@@ -64,7 +64,11 @@ public class AppendLevelMoneyFailService extends BaseServiceImpl<AppendLevelMone
 			// 区别股票合买短信
 			if((UserTrade.ActivityType.TOGETHER_TRADE+"").equals(id.split(":")[1])) {
 				SMSSender.getInstance().send(dataService.getSmsContentOthers(), wUser.getMobile(), MessageUtils.message("together.append.Level.Money.Fail",appendLevelMoneyFail.getGroupId(),appendLevelMoneyFail.getAppendMoney()));
-			} else {
+			}
+			else if((UserTrade.ActivityType.MONTH_TRADE+"").equals(id.split(":")[1])) {
+				PgbSMSSender.getInstance().send(dataService.getPgbSmsContentOthers(), wUser.getMobile(), MessageUtils.message("month.append.Level.Money.Fail",appendLevelMoneyFail.getGroupId(),appendLevelMoneyFail.getAppendMoney()));
+			}
+			else {
 				PgbSMSSender.getInstance().send(dataService.getPgbSmsContentOthers(), wUser.getMobile(), MessageUtils.message("Append.Level.Money.Fail",appendLevelMoneyFail.getGroupId(),appendLevelMoneyFail.getAppendMoney()));
 			}
 			
@@ -76,7 +80,7 @@ public class AppendLevelMoneyFailService extends BaseServiceImpl<AppendLevelMone
 			Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(),
 				easyUiPage.getPage());
-		String sql = " SELECT trade.activity_type activityType, alm.id, usr.id uid, usr.mobile, uv.tname realName, acc.account_name accountName, acc.account accountNo, alm.group_id groupId, alm.append_money appendMoney, alm.append_date appendDate, alm.update_user handlerName, alm.update_time handleDate, alm.`status`, trade.fee_type feeType FROM w_append_level_money_fail alm INNER JOIN w_account acc ON alm.account_id = acc.id INNER JOIN w_user usr ON usr.id = alm.uid INNER JOIN w_user_verified uv ON uv.uid = usr.id LEFT JOIN w_user_trade trade ON trade.group_id = alm.group_id and trade.type=0 ";
+		String sql = " SELECT trade.activity_type activityType, alm.id, usr.id uid, usr.mobile, uv.tname realName, acc.account_name accountName, acc.account accountNo, alm.group_id groupId, alm.append_money appendMoney, alm.append_date appendDate, alm.update_user handlerName, alm.update_time handleDate, alm.`status`, trade.fee_type feeType FROM w_append_level_money_fail alm INNER JOIN w_account acc ON alm.account_id = acc.id INNER JOIN w_user usr ON usr.id = alm.uid INNER JOIN w_user_verified uv ON uv.uid = usr.id LEFT JOIN w_user_trade trade ON trade.group_id = alm.group_id and trade.type in(0,1) ";
 		// params 查询参数 依次 存入
 		List<Object> params = Lists.newArrayList();
 		MultiListParam multilistParam = new MultiListParam(easyUiPage,

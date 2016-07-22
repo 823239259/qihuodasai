@@ -254,7 +254,7 @@ function pageselectCallback(page_index, jq){
 
 
 //网银支付
-function doNetPayment(){
+/*function doNetPayment1(){
 	var banktype=$("#netbank input[name='banktype']:checked").val();
 	var money = $("#money").val();
 	if(money==""){
@@ -276,8 +276,8 @@ function doNetPayment(){
 	}
 	$('.fl_mask').show();
 	$('#issucessdiv').show();
-	document.forms["netbank"].action=basepath+"pay/netbankPayment";
-	document.forms["netbank"].submit();
+	document.forms["netbank"].action=basepath+"pay/netbankPayment";//
+	document.forms["netbank"].submit();*/
 	//$("#netbank").submit();
 	
 	 /*$.post(basepath+"/pay/netPayment",{"banktype":banktype,"money":money},function(data){  
@@ -296,9 +296,51 @@ function doNetPayment(){
 				
 			}
 		},"json"); */
+//}
+
+function doNetPayment(){
+	var banktype=$("#netbank input[name='banktype']:checked").val();
+	var money = $("#money").val();
+	if(money==""){
+		showMsgDialog("提示","请填写金额");
+		$("#money").focus();
+		return ;
+	}
+	
+	if(!isMoney(money)){
+		showMsgDialog("提示","充值金额填写错误");
+		$("#money").focus();
+		return ;
+	}
+	
+	if(parseFloat(money)<1){
+		showMsgDialog("提示","充值金额必须大于等于1元");
+		$("#money").focus();
+		return ;
+	}
+/*	$('.fl_mask').show();
+	$('#issucessdiv').show();*/
+	$.ajax({
+		url:"/tzdr-web/pay/pingplusplus",
+		type:"post",
+		data:{
+			money:money,
+			payWay:6
+		},
+		success:function(result){
+			var charge = JSON.parse(result);
+			pingpp.createPayment(charge, function(result, err){
+				  if (result == "success") {
+				    // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+				  } else if (result == "fail") {
+				    // charge 不正确或者微信公众账号支付失败时会在此处返回
+				  } else if (result == "cancel") {
+				    // 微信公众账号支付取消支付
+				  }
+				});
+		}
+	});
 }
-
-
 //快捷支付
 function doPayment(){
 	var banktype=$("#quickPayForm input[name='banktype']:checked").val();

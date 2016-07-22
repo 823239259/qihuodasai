@@ -3,6 +3,7 @@ package com.tzdr.business.service.pay;
 import java.util.Map;
 
 import com.tzdr.common.api.bbpay.vo.PayParamsObject;
+import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.domain.web.entity.RechargeList;
@@ -62,7 +63,39 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @author zhangjun
 	 */
 	public void updateEntity(String orderId, String  tradeNo,String  tradeState,String  payDate,int status);
-
+	
+	/**
+	 * 支付插入一条初始化数据
+	 * @param source 来源
+	 * @param user 当前登陆用户
+	 * @param bankname 银行名称
+	 * @param status 状态
+	 * @param bankCard 银行卡
+	 * @param paymoney 充值金额
+	 * @param ip ip地址
+	 * @param paytype 支付方式
+	 * @param orderNo 订单号
+	 * @author HEDAOQING
+	 *     		2016.07.19
+	 * @return
+	 */
+	public String doSavePingPPRecharge(String payWay, int source,
+								WUser user,
+								Integer status,
+								String bankCard,
+								String payMoney,
+								String ip,
+								String payType,
+								String orderNo);
+	
+	/**
+	 * 充值成功后的更新
+	 * @param orderNo 订单号（系统内部）
+	 * @param amount  支付金额
+	 * @param transactionNo 三方交易流水号
+	 * @param timePaid  支付完成时间
+	 */
+	public void doUpdatePingPPPaySuccessRecharge(String orderNo,String channel,Double amount,String transactionNo,String timePaid);
 	/**
 	 * 根据id查询用户
 	 * @param userId
@@ -124,4 +157,25 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @return
 	 */
 	public Map<String,Object>  bbPay(WUser user,PayParamsObject sendObject,int source,String sreturl);
+	
+	
+	/** 
+	 * 首信易支付处理
+	 * @param vamount 充值金额
+	 * @param vpmode  充值方式  
+	 * @param source 来源
+	 * @param orderFlag 生产订单号时的标记位值
+	 * @return
+	 */
+	public PayEaseParams  PayEasePay(WUser user,PayEaseParams payEaseParams, int source,String orderFlag);
+	
+	
+
+	/**
+	 * 获取用户当日往某个商户的充值金额
+	 * @param uid 用户id
+	 * @param vmid 商户id
+	 * @return
+	 */
+	public Double  getUserDayCharges(String uid,String vmid);
 }

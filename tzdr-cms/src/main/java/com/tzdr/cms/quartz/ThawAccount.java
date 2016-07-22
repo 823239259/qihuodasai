@@ -1,20 +1,10 @@
 package com.tzdr.cms.quartz;
 
-import java.util.List;
-
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-
-import com.google.common.collect.Lists;
-import com.tzdr.business.service.userTrade.UserTradeService;
-import com.tzdr.common.utils.ConfUtil;
-import com.tzdr.common.utils.EmailUtils;
-import com.tzdr.common.utils.Exceptions;
-import com.tzdr.common.utils.SpringUtils;
 
 /**
 * @Description: 解冻下一个交易日开始的账户
@@ -26,7 +16,7 @@ public class ThawAccount  extends QuartzJobBean{
 	
 	public static final Logger logger = LoggerFactory.getLogger(ThawAccount.class);
 
-	private static UserTradeService userTradeService;
+	//private static UserTradeService userTradeService;
 
 
 	@Override
@@ -34,7 +24,7 @@ public class ThawAccount  extends QuartzJobBean{
 			throws JobExecutionException {
 		logger.info("-----------------解冻恒生账号任务--------begin-------------------");		
 
-		try 
+		/*try 
 		{
 			userTradeService = SpringUtils.getBean(UserTradeService.class);
 			//解冻下一个交易日开始的账户
@@ -42,7 +32,7 @@ public class ThawAccount  extends QuartzJobBean{
 		} catch (BeansException e) {
 			logger.error(Exceptions.getStackTraceAsString(e));
 			HandleException(e, "executeInternal");
-		}
+		}*/
 		logger.info("----------------解冻恒生账号任务--------end-------------------");		
 
 	}
@@ -53,7 +43,7 @@ public class ThawAccount  extends QuartzJobBean{
 	 * @param e
 	 * @param method
 	 */
-	private void HandleException(Exception e, String method) {
+	/*private void HandleException(Exception e, String method) {
 		// 发送邮件
 		String devEmail = ConfUtil.getContext("mail.to.dev");
 		List<String> pramas = Lists.newArrayList();
@@ -67,5 +57,5 @@ public class ThawAccount  extends QuartzJobBean{
 			logger.error("email:", ex.getMessage());
 		}
 		logger.error(methodName + ",error::{}", exception);
-	}
+	}*/
 }

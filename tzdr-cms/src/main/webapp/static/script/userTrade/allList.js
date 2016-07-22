@@ -10,6 +10,7 @@ $(document).ready(function(){
 		pagination:true,
 		singleSelect:true,
 		fitColumns:true,// 自适应列宽
+		fit:true,
 		frozenColumns:[[
             {field:'ck',checkbox:true}
 		]],
@@ -34,8 +35,9 @@ $(document).ready(function(){
 				return moneyUtils.format(value,2);
 			}},*/
 			{field:'tradeStatus',title:'方案状态',width:80},
-			{field:'naturalDays',title:'配资天数',width:90,sortable:true},
+			{field:'naturalDaysStr',title:'配资时长',width:90},
 			{field:'tradingDays',title:'已使用天数',width:100},
+			{field:'prolongMonthStr',title:'追加方案时长',width:90},
 			{field:'shortestDuration',title:'最短保留时长(交易日)',width:100},
 			{field:'addtime',title:'方案创建时间',width:160,sortable:true,formatter: function(value,row,index){
 				return getFormatDateByLong(value,'yyyy-MM-dd hh:mm:ss');

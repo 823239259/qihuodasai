@@ -7,9 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
-import com.tzdr.business.service.userTrade.UserTradeService;
-import com.tzdr.common.utils.SpringUtils;
-
 /**
  * 
  * <p></p>
@@ -29,8 +26,8 @@ public class EndOfTransferMoney extends QuartzJobBean {
 			throws JobExecutionException {
 		logger.info("------------------终结方案划账任务--------begin-------------------");
 
-		UserTradeService userTradeService = SpringUtils.getBean(UserTradeService.class);
-		userTradeService.endOfTransferMoney();
+		/*UserTradeService userTradeService = SpringUtils.getBean(UserTradeService.class);
+		userTradeService.endOfTransferMoney();*/
 		logger.info("------------------终结方案划账任务--------end-------------------");
 
 		

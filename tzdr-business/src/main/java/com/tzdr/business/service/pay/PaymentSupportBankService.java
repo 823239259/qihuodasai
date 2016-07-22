@@ -23,7 +23,7 @@ import com.tzdr.domain.web.entity.PaymentSupportBank;
 
 
 /**
- * 支付 支持的银行管理service
+ * 支付 支持的银行管理service  
  * @zhouchen
  * 2015年11月30日
  */
@@ -80,11 +80,11 @@ public class PaymentSupportBankService extends BaseServiceImpl<PaymentSupportBan
 	}
 	
 	/**
-	 * 获取支付 充值支持的银行
+	 * 获取支付 充值支持的银行  
 	 * @return
 	 */
 	public List<PaymentSupportBankVo> querySupportPayBanks(){
-		String sql = "SELECT bank_name bankName, abbreviation abbreviation, icon_path iconPath FROM w_payment_support_bank WHERE support_bbpay = 1 OR support_umpay = 1 ORDER BY weight ASC ";
+		String sql = "SELECT bank_name bankName, abbreviation abbreviation, icon_path iconPath FROM w_payment_support_bank WHERE support_bbpay = 1 OR support_umpay = 1 OR support_pay_ease=1 ORDER BY weight ASC ";
 		List<PaymentSupportBankVo>  bankVos = this.nativeQuery(sql, null,PaymentSupportBankVo.class);
 		return  bankVos;
 	}
@@ -109,7 +109,7 @@ public class PaymentSupportBankService extends BaseServiceImpl<PaymentSupportBan
 	 * @return
 	 */
 	public List<PaymentSupportBankVo> querySupportDrawBanks(int withdrawSetting){
-		if (withdrawSetting !=1 && withdrawSetting !=2){
+		if (withdrawSetting !=1 && withdrawSetting !=2 && withdrawSetting !=3){
 			return null;
 		}
 		String sql = "SELECT bank_name bankName, abbreviation abbreviation  FROM w_payment_support_bank";
@@ -120,6 +120,11 @@ public class PaymentSupportBankService extends BaseServiceImpl<PaymentSupportBan
 		if (withdrawSetting==2){
 			sql = sql + " WHERE support_bbdraw = 1 ORDER BY weight ASC ";
 		}
+		
+		if (withdrawSetting==3){
+			sql = sql + " WHERE support_easedraw = 1 ORDER BY weight ASC ";
+		}
+		
 		List<PaymentSupportBankVo>  bankVos = this.nativeQuery(sql, null,PaymentSupportBankVo.class);
 		return  bankVos;
 	}

@@ -99,6 +99,12 @@ public class HsiSetParameterController extends BaseCmsController<FSimpleConfig>{
 			return new JsonResult(false,"服务器忙！");
 		}
 	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * 新增或跟新方案配资
 	 * @param response

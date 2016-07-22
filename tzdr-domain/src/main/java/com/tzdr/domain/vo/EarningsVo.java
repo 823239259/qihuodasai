@@ -2,7 +2,6 @@ package com.tzdr.domain.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 import com.tzdr.common.utils.AllowExcel;
 import com.tzdr.common.utils.SqlColumn;
@@ -52,12 +51,37 @@ public class EarningsVo implements Serializable {
 		this.groupId = groupId;
 	}
 
+	@SqlColumn
+	private Long addtime;
+
+	@SqlColumn
+	private BigDecimal discountActualMoney; 
+
+	public Long getAddtime() {
+		return addtime;
+	}
+
+	public void setAddtime(Long addtime) {
+		this.addtime = addtime;
+	}
+
+	public BigDecimal getDiscountActualMoney() {
+		return discountActualMoney;
+	}
+
+	public void setDiscountActualMoney(BigDecimal discountActualMoney) {
+		this.discountActualMoney = discountActualMoney;
+	}
+
 	private String programNo;
 	//(t.lever_money + t.append_lever_money) '保证金',
 	@SqlColumn
 	@AllowExcel(name="保证金")
 	private Double leverMoney;
-	
+
+	@SqlColumn
+	@AllowExcel(name = "抵扣保证金")
+	private Double deduction_lever_money;
 	//t.lever '倍数'
 	@SqlColumn
 	@AllowExcel(name="倍数")
@@ -178,6 +202,9 @@ public class EarningsVo implements Serializable {
 	}
 
 	public BigDecimal getDeductMoney() {
+		if (null != this.discountActualMoney){
+			return this.discountActualMoney.add(null==deductMoney?new BigDecimal(0):deductMoney);
+		}
 		return deductMoney;
 	}
 
@@ -190,11 +217,11 @@ public class EarningsVo implements Serializable {
 	}
 
 	public BigDecimal getRealIncomeMoney() {
-		if (this.interestMoney != null && this.deductMoney != null) {
+		/*if (this.interestMoney != null && this.deductMoney != null) {
 			this.realIncomeMoney = this.interestMoney.subtract(this.deductMoney, MathContext.DECIMAL32);
 			this.realIncomeMoney = TypeConvert.scale(this.realIncomeMoney, TypeConvert.SCALE_VALUE);
-		}
-		return realIncomeMoney;
+		}*/
+		return this.realIncomeMoney;
 	}
 
 	public void setRealIncomeMoney(BigDecimal realIncomeMoney) {
@@ -242,6 +269,10 @@ public class EarningsVo implements Serializable {
 	}
 
 	public Double getLeverMoney() {
+		return leverMoney;
+	}
+
+	public void setLeverMoney(Double leverMoney) {
 		if (this.leverMoney != null) {
 			BigDecimal leverMoneyBig = 
 					TypeConvert.scale(new BigDecimal(this.leverMoney), TypeConvert.SCALE_VALUE);
@@ -249,10 +280,6 @@ public class EarningsVo implements Serializable {
 				this.leverMoney = leverMoneyBig.doubleValue();
 			}
 		}
-		return leverMoney;
-	}
-
-	public void setLeverMoney(Double leverMoney) {
 		this.leverMoney = leverMoney;
 	}
 
@@ -314,7 +341,12 @@ public class EarningsVo implements Serializable {
 	public void setRevokeInterest(BigDecimal revokeInterest) {
 		this.revokeInterest = revokeInterest;
 	}
-	
-	
 
+	public Double getDeduction_lever_money() {
+		return deduction_lever_money;
+	}
+
+	public void setDeduction_lever_money(Double deduction_lever_money) {
+		this.deduction_lever_money = deduction_lever_money;
+	}
 }

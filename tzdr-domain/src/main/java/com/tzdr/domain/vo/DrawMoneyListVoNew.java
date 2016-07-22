@@ -409,6 +409,9 @@ public class DrawMoneyListVoNew implements Serializable{
 		if (Constant.PaymentChannel.UM_PAY==this.paymentChannel){
 			return "联动优势";
 		}
+		if (Constant.PaymentChannel.EASE_PAY==this.paymentChannel){
+			return "易支付";
+		}
 		return paymentChannelStr;
 	}
 

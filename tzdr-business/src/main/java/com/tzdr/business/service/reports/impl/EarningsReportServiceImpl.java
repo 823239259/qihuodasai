@@ -1,11 +1,13 @@
 package com.tzdr.business.service.reports.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.tzdr.business.service.reports.EarningsReportService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
@@ -39,8 +41,9 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 			+ " ) as totalmoney FROM ("
 				+ " SELECT t.activity_type activityType, ROUND(ifnull(wtt.profit_money, 0),2) profitMoney, w.mobile ,v.tname, (SELECT min(w.account_name) FROM w_account w WHERE w.id = t.account_id) account "
 				+ " ,(SELECT min(p.account_name) FROM w_parent_account p WHERE p.account_no = t.parent_account_no) hsBelongBroker,t.program_no programNo"
-				+ " ,(t.lever_money + t.append_lever_money) leverMoney"
+				+ " ,(t.lever_money + t.append_lever_money-ifnull(t.voucher_actual_money,0)) leverMoney"
 				+ " ,t.lever lever "
+				+ " ,t.deduction_lever_money deduction_lever_money"
 				+ " ,(TO_DAYS(NOW()) - TO_DAYS(FROM_UNIXTIME(t.starttime, '%Y%m%d')) + 1) opDay"
 				//+ " ,t.natural_days opDay"
 				+ " ,CAST( (    "
@@ -78,7 +81,8 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 				+ "    select SUM(d.money)  from w_free_diff d,w_account acc where d.type='1' "
 				+ "       and d.account=acc.account_name and t.account_id=acc.id  "
 				+ "  AND d.addtime BETWEEN :beginTime AND :endTime )"
-				+ " AS DECIMAL(10, 2) ) freemoney ,t.group_id groupId ,"
+				+ " AS DECIMAL(10, 2) ) freemoney ,t.group_id groupId , t.addtime addtime, "
+				+ " IF(t.addtime >= :beginTime AND t.addtime<= :endTime, t.discount_actual_money, 0) discountActualMoney, "
 				+ "  CAST( (    "
 				+ "    select SUM(d.money)  from w_free_diff d,w_account acc where d.type='2' "
 				+ "       and d.account=acc.account_name and t.account_id=acc.id  "
@@ -146,8 +150,34 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 				params.add(activityType);
 			}
 			//sqlBuf.append(" ORDER BY utemp.programNo");
-		return this.getEntityDao().queryDataByParamsSql(connVo.autoOrderBy(sqlBuf.toString(),EarningsVo.class),
+			List<EarningsVo> earningsVos =  this.getEntityDao().queryDataByParamsSql(connVo.autoOrderBy(sqlBuf.toString(),EarningsVo.class),
 				EarningsVo.class,null,paramNames.toArray(new String[paramNames.size()]), params.toArray());
+			if (CollectionUtils.isEmpty(earningsVos)){
+				return earningsVos;
+			}
+			for (int i = 0; i < earningsVos.size(); i++) {
+				EarningsVo earningsVo = earningsVos.get(i);
+				Long addtime = earningsVo.getAddtime();
+				BigDecimal discountActualMoney = earningsVo.getDiscountActualMoney();
+				BigDecimal realIncomeMoney = earningsVo.getInterestMoney();
+				if(null == realIncomeMoney){
+					realIncomeMoney = new BigDecimal(0);
+				}
+				earningsVos.get(i).setRealIncomeMoney(realIncomeMoney.add(null==earningsVo.getRevokeInterest()?new BigDecimal(0):earningsVo.getRevokeInterest()));
+				if (null != discountActualMoney &&  discountActualMoney.compareTo(BigDecimal.ZERO) != 0) {
+					// 当前取得都是实收利息			
+					BigDecimal interestMoney = realIncomeMoney;
+					Long beginTime = (Long)params.get(0);
+					Long endTime = (Long)params.get(1);
+					
+					if (beginTime <= addtime && addtime <= endTime) {
+						interestMoney = realIncomeMoney.add(discountActualMoney).setScale(2);
+					}
+					earningsVos.get(i).setInterestMoney(interestMoney);
+				}
+				
+			}
+		return earningsVos;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -163,8 +193,9 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 			+ " ) as totalmoney FROM ("
 				+ " SELECT t.activity_type activityType, ROUND(ifnull(wtt.profit_money, 0),2) profitMoney, w.mobile ,v.tname, (SELECT min(w.account_name) FROM w_account w WHERE w.id = t.account_id) account "
 				+ " ,(SELECT min(p.account_name) FROM w_parent_account p WHERE p.account_no = t.parent_account_no) hsBelongBroker,t.program_no programNo"
-				+ " ,(t.lever_money + t.append_lever_money) leverMoney"
+				+ " ,(t.lever_money + t.append_lever_money - ifnull(t.voucher_actual_money,0)) leverMoney"
 				+ " ,t.lever lever "
+				+ " ,t.deduction_lever_money deduction_lever_money"
 				+ " ,(TO_DAYS(NOW()) - TO_DAYS(FROM_UNIXTIME(t.starttime, '%Y%m%d')) + 1) opDay"
 				+ " ,CAST( (    "
 				+ "       SELECT SUM(ABS(uf.money)) FROM w_user_fund uf "
@@ -201,7 +232,8 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 				+ "    select SUM(d.money)  from w_free_diff d,w_account acc where d.type='1' "
 				+ "       and d.account=acc.account_name and t.account_id=acc.id  "
 				+ "  AND d.addtime BETWEEN :beginTime AND :endTime )"
-				+ " AS DECIMAL(10, 2) ) freemoney ,t.group_id groupId ,"
+				+ " AS DECIMAL(10, 2) ) freemoney ,t.group_id groupId , t.addtime addtime, "
+				+ " IF(t.addtime >= :beginTime AND t.addtime<= :endTime, t.discount_actual_money, 0) discountActualMoney, "
 				+ "  CAST( (    "
 				+ "    select SUM(d.money)  from w_free_diff d,w_account acc where d.type='2' "
 				+ "       and d.account=acc.account_name and t.account_id=acc.id  "
@@ -261,6 +293,29 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 			
 		PageInfo<EarningsVo> pageInfo= getEntityDao().queryDataByParamsSql(dataPage, sqlBuf.toString(),EarningsVo.class,paramValues,null);
 	
+		for (int i = 0; i < pageInfo.getPageResults().size(); i++) {
+			EarningsVo earningsVo = pageInfo.getPageResults().get(i);
+			Long addtime = earningsVo.getAddtime();
+			BigDecimal discountActualMoney = earningsVo.getDiscountActualMoney();
+			BigDecimal realIncomeMoney = earningsVo.getInterestMoney();
+			if(null == realIncomeMoney){
+				realIncomeMoney = new BigDecimal(0);
+			}
+			pageInfo.getPageResults().get(i).setRealIncomeMoney(realIncomeMoney.add(null==earningsVo.getRevokeInterest()?new BigDecimal(0):earningsVo.getRevokeInterest()));
+			if (null != discountActualMoney &&  discountActualMoney.compareTo(BigDecimal.ZERO) != 0) {
+				// 当前取得都是实收利息			
+				BigDecimal interestMoney = realIncomeMoney;
+				Long beginTime = (Long)paramValues.get("beginTime");
+				Long endTime = (Long)paramValues.get("endTime");
+				
+				if (beginTime <= addtime && addtime <= endTime) {
+					interestMoney = realIncomeMoney.add(discountActualMoney).setScale(2);
+				}
+				pageInfo.getPageResults().get(i).setInterestMoney(interestMoney);
+			}
+			
+		}
+		
 		return pageInfo;
 	}
 
@@ -272,14 +327,16 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 		List<Object> params = new ArrayList<Object>();
 		//5人工调账、银行 4、支付宝3
 		StringBuffer sqlBuf = new StringBuffer(
-			" SELECT sum(utemp.revokeManagerMoney) AS revokeManagerMoney,sum(utemp.revokeInterest) AS revokeInterest,sum(utemp.leverMoney) AS leverMoney,sum(utemp.lever) AS lever,sum(utemp.opDay) as opDay,sum(utemp.managerMoney) as managerMoney,"
+			" SELECT sum(deduction_lever_money) as deduction_lever_money,sum(discountActualMoney) as discountActualMoney,sum(utemp.revokeManagerMoney) AS revokeManagerMoney,sum(utemp.revokeInterest) AS revokeInterest,sum(utemp.leverMoney) AS leverMoney,sum(utemp.lever) AS lever,sum(utemp.opDay) as opDay,sum(utemp.managerMoney) as managerMoney,"
 			    + " sum(utemp.backMoney) AS backMoney,sum(utemp.profitMoney) AS profitMoney,sum(utemp.interest) AS interest,sum(utemp.freemoney) AS freemoney, "
 			    + " sum(CAST("
 			    + " ifnull(freemoney,0)+ifnull(managerMoney,0)+ifnull(transmoney,0)+ifnull(interest,0) - ifnull(deductMoney,0)+ifnull(revokeManagerMoney,0)+ifnull(revokeInterest,0)+(case when profitMoney<0 then 0 else profitMoney end) AS DECIMAL(10, 2) "
 			    + " )) as totalmoney FROM ("
 				+ " SELECT t.activity_type activityType, ROUND(ifnull(wtt.profit_money, 0),2) profitMoney, w.mobile ,v.tname, (SELECT min(w.account_name) FROM w_account w WHERE w.id = t.account_id) account "
 				+ " ,(SELECT min(p.account_name) FROM w_parent_account p WHERE p.account_no = t.parent_account_no) hsBelongBroker,t.program_no programNo"
-				+ " ,(t.lever_money + t.append_lever_money) leverMoney"
+				+ " ,(t.lever_money + t.append_lever_money - ifnull(t.voucher_actual_money,0)) leverMoney"
+				+ " ,IF(t.addtime >= :beginTime AND t.addtime<= :endTime, t.discount_actual_money, 0) discountActualMoney"
+				+ " ,t.deduction_lever_money deduction_lever_money"
 				+ " ,t.lever lever "
 				+ " ,(TO_DAYS(NOW()) - TO_DAYS(FROM_UNIXTIME(t.starttime, '%Y%m%d')) + 1) opDay"
 				+ " ,CAST( (    "
@@ -390,6 +447,17 @@ public class EarningsReportServiceImpl extends BaseServiceImpl<WUser, WUserDao> 
 		
 		if(earningsVoList != null && earningsVoList.size() > 0){
 			earningsVo = earningsVoList.get(0);
+			BigDecimal discountActualMoney = earningsVo.getDiscountActualMoney();
+			BigDecimal realIncomeMoney = earningsVo.getInterestMoney();
+			if(null == realIncomeMoney){
+				realIncomeMoney = new BigDecimal(0);
+			}
+			earningsVo.setRealIncomeMoney(realIncomeMoney.add(null==earningsVo.getRevokeInterest()?new BigDecimal(0):earningsVo.getRevokeInterest()));
+			if (null != discountActualMoney &&  discountActualMoney.compareTo(BigDecimal.ZERO) != 0) {
+				BigDecimal interestMoney = realIncomeMoney;
+				interestMoney = realIncomeMoney.add(discountActualMoney).setScale(2);
+				earningsVo.setInterestMoney(interestMoney);
+			}
 		}
 		
 		return earningsVo;

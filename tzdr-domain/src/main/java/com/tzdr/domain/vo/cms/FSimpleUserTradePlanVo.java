@@ -44,16 +44,18 @@ public class FSimpleUserTradePlanVo implements Serializable {
 	private String tranAccount;
 
 	/**
+	 * 方案申请时间
+	 */
+	private BigInteger appTime;
+	@AllowExcel(name = "方案申请时间")
+	private String appTimeValue;
+
+	/**
 	 * 启用时间
 	 */
 	private BigInteger appStartTime;
 	@AllowExcel(name = "启用时间")
 	private String appStartTimeValue;
-
-	/**
-	 * 方案申请时间
-	 */
-	private BigInteger appTime;
 
 	/**
 	 * 手数
@@ -118,9 +120,11 @@ public class FSimpleUserTradePlanVo implements Serializable {
 	/**
 	 * 折扣券面值
 	 */
-	@AllowExcel(name = "折扣券(折)")
-	private BigDecimal discountMoney;
 
+	private BigDecimal discountMoney;
+		@AllowExcel(name = "折扣券")
+
+	private String discountMoneyStr;
 	/**
 	 * 抵扣券抵扣手续费
 	 */
@@ -153,7 +157,10 @@ public class FSimpleUserTradePlanVo implements Serializable {
 	private BigInteger endTime;
 	@AllowExcel(name = "结算时间")
 	private String endTimeValue;
-
+	/**
+	 * 优惠券类型
+	 */
+	private String  type;
 	/**
 	 * 方案号TG+ID号
 	 */
@@ -347,6 +354,17 @@ public class FSimpleUserTradePlanVo implements Serializable {
 		this.appTime = appTime;
 	}
 
+	public String getAppTimeValue() {
+		if (appTime != null) {
+			appTimeValue = Dates.format(Dates.parseLong2Date(appTime.longValue()));
+		}
+		return appTimeValue;
+	}
+
+	public void setAppTimeValue(String appTimeValue) {
+		this.appTimeValue = appTimeValue;
+	}
+
 	public BigInteger getUseTranDay() {
 		return useTranDay;
 	}
@@ -453,7 +471,7 @@ public class FSimpleUserTradePlanVo implements Serializable {
 	// }
 
 	public BigDecimal getDiscountMoney() {
-		return discountMoney;
+			return discountMoney;
 	}
 
 	public void setDiscountMoney(BigDecimal discountMoney) {
@@ -476,4 +494,27 @@ public class FSimpleUserTradePlanVo implements Serializable {
 		this.endAmountCal = endAmountCal;
 	}
 
+
+
+	public String getDiscountMoneyStr() {
+		if (null != discountMoney && null != type) {
+			if ("3" .equals(type)) {
+				discountMoneyStr = discountMoney.doubleValue() + "折";
+			} else if ("6".equals(type)) {
+				discountMoneyStr = discountMoney.toString() + "元";
+			}
+		}
+		return discountMoneyStr;
+	}
+	public void setDiscountMoneyStr(String discountMoneyStr) {
+		this.discountMoneyStr = discountMoneyStr;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

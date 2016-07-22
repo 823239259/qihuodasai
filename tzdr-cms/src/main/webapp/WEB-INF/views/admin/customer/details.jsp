@@ -31,7 +31,7 @@ function longTimetoStr(value,rowData,rowIndex) {
 </style>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 </head>
-<body><!-- sys:outreach:customer:view -->
+<body>
     <shiro:hasPermission name="sys:customerService:customer:view">
     <div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'north',split:true,border:false" style="height:150px">

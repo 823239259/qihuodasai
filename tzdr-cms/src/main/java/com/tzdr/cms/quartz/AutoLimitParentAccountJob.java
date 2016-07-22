@@ -27,8 +27,8 @@ public class AutoLimitParentAccountJob  extends QuartzJobBean{
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException {
 		logger.info("------------------自动限制买入定时任备执行开始--------begin-------------------");
-		EndPlanService endPlanService = SpringUtils.getBean(EndPlanService.class);
-		endPlanService.autoLimitParentAccount();
+	/*	EndPlanService endPlanService = SpringUtils.getBean(EndPlanService.class);
+		endPlanService.autoLimitParentAccount();*/
 		logger.info("------------------自动限制买入定时任备执行开始--------end-------------------");
 		
 	}

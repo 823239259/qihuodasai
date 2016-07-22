@@ -30,7 +30,8 @@
 				<th field="account" width="150">交易账号</th>
 				<th field="accountName" width="150" sortable="true">交易账户名</th>
 				<th field="programNo" width="150">方案编号 </th>
-				<th field="leverMoney" width="150">配资保证金</th>
+				<th field="leverMoney" width="150">保证金</th>
+				<th field="voucherMoney" width="150">代金券</th><!-- voucherActualMoney实际使用的优惠券金额 -->
 				<th field="totalLeverMoney" width="150" sortable="true">总操盘资金 </th>
 				<th field="feeType" width="150">账户类型 </th>
 				<th field="endSubTimeStr" width="150" sortable="true">提交时间</th>
@@ -103,7 +104,8 @@
 				<th field="account" width="150">交易账号</th>
 				<th field="accountName" width="150" sortable="true" >交易账户名</th>
 				<th field="programNo" width="150">方案编号 </th>
-				<th field="leverMoney" width="150">配资保证金</th>
+				<th field="leverMoney" width="150">保证金</th>
+				<th field="voucherMoney" width="150">代金券</th><!-- voucherActualMoney实际使用的优惠券金额 -->
 				<th field="totalLeverMoney" width="150" sortable="true" >总操盘资金 </th>
 				<th field="feeType" width="150">账户类型 </th>
 				<th field="endSubTimeStr" width="150" sortable="true">提交时间</th>
@@ -176,9 +178,10 @@
 				<th field="account" width="150">交易账号</th>
 				<th field="accountName" width="150" sortable="true" >交易账户名</th>
 				<th field="programNo" width="150">方案编号 </th>
-				<th field="leverMoney" width="150">配资保证金</th>
+				<th field="leverMoney" width="150">保证金</th>
+				<th field="voucherMoney" width="150">代金券</th><!-- voucherActualMoney实际使用的优惠券金额 -->
 				<th field="totalLeverMoney" width="150" sortable="true" >总操盘资金 </th>
-				<th field="finishedMoneyStr" width="150">结算金额 </th>
+				<th field="finishedMoneyStr" width="150">操盘余额</th>
 				<th field="auditEndStatusStr" width="150">审核状态 </th>
 				<th field="feeType" width="150">账户类型 </th>
 				<th field="endAuditUserIdStr" width="150">审核人 </th>

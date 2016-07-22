@@ -17,6 +17,7 @@
  <script src="${ctx}/static/script/common/jquery.pagination.js" type="text/javascript"></script>
  
  <script type='text/javascript' src="${ctx}/static/script/pay/pay.js?version=20150721"></script>
+  <script type='text/javascript' src="${ctx}/static/script/pingpp.js?version=20150721"></script>
  <script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js"></script>
  <script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
 
@@ -69,7 +70,7 @@ var tab=<%=tab%>;
 				<!--  
 				<li><a href="javascript:void(0);" class="on">快捷支付</a></li>
 				-->
-				<!-- <li><a href="javascript:void(0);">网银充值</a></li> -->
+				<li><a href="javascript:void(0);">网银充值</a></li> 
 				<li><a href="javascript:void(0);">支付宝转账</a></li>
 				<li><a href="javascript:void(0);">银行转账</a></li>
 				<li><a href="javascript:void(0);">充值记录</a></li>
@@ -139,7 +140,7 @@ var tab=<%=tab%>;
 					 </form>
 				</div>
 				-->
-				<%-- <div class="subtab">
+				<div class="subtab">
 					<form id="netbank" action="" method="post" target="_blank"  >
 						
 						<div class="uc_olbank">
@@ -831,7 +832,7 @@ var tab=<%=tab%>;
 						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
 					</div>
 				</form>
-			</div> --%>
+			</div>
 			<div class="subtab">
 				<div id="alipay1" style="padding:20px 50px 50px;">
 					<!-- 支付宝转账 -->

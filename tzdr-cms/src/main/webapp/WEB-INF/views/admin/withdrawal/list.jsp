@@ -87,6 +87,7 @@
 				                        <option value="">--请选择--</option>
 				                        <option value="1">联动优势</option>
 				                        <option value="2">币币支付</option>
+				                        <option value="3">易支付</option>
 				                    </select>
 				                </td>
 				                <td class="label right">来源网站:</td>
@@ -94,7 +95,7 @@
 				                    <select class="easyui-combobox" name="search_EQ_source" id="source1">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">维胜</option>
+				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
 				                </tr>
@@ -128,7 +129,7 @@
 				                    <select class="easyui-combobox" name="source2"  id="source2">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">维胜</option>
+				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
 				                </tr>
@@ -171,7 +172,7 @@
 				                    <select class="easyui-combobox" name="source3" id="source3">
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">维胜</option>
+				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
 				                </tr>
@@ -202,7 +203,7 @@
 				                    <select class="easyui-combobox" name="source4" id="source4" >
 				                        <option value="">--请选择--</option>
 				                        <option value="1">维胜</option>
-				                        <option value="2">维胜</option>
+				                        <option value="2">配股宝</option>
 				                    </select>
 				                </td>
 				                </tr>

@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.tzdr.business.service.MonthUserTradeService.MonthUserTradeService;
 import com.tzdr.business.service.exception.RuntimeTzdrException;
 import com.tzdr.business.service.userTrade.NoticeRecordService;
 import com.tzdr.business.service.userTrade.UserTradeService;
@@ -24,11 +26,14 @@ import com.tzdr.cms.utils.WebUtil;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.ConnditionVo;
-
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.vo.ArrearsEndDetail;
 import com.tzdr.domain.vo.EndProgramVo;
+import com.tzdr.domain.vo.MonthEndVo;
+import com.tzdr.domain.web.entity.MonthUserTrade;
 import com.tzdr.domain.web.entity.UserTrade;
+
+import freemarker.core.ReturnInstruction.Return;
 
 /**
  * @author zhouchen
@@ -42,7 +47,10 @@ public class ArrearsEndController extends BaseCmsController<UserTrade> {
 
 	@Autowired
 	private UserTradeService userTradeService;
-
+	
+	@Autowired
+	private MonthUserTradeService MonthUserTradeService;
+	
 	@Autowired
 	private NoticeRecordService noticeRecordService;
 
@@ -126,5 +134,57 @@ public class ArrearsEndController extends BaseCmsController<UserTrade> {
 		DataGridVo<ArrearsEndDetail> grid = new DataGridVo<ArrearsEndDetail>();
 		grid.add(arrearsEndDetailList);
 		WebUtil.printText(JSON.toJSONString(grid), response);
+	}
+	
+	
+	@RequestMapping("/monthNearEndValue")
+	public void monthNearEnd(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		try {
+			DataGridVo<MonthEndVo> grid = new DataGridVo<MonthEndVo>();
+			PageInfo<MonthEndVo> dataPage = new PageInfo<MonthEndVo>(
+					request);
+			ConnditionVo connVo = new ConnditionVo(request);
+			PageInfo<MonthEndVo> voes = this.userTradeService.monthNearEndList(
+					dataPage, connVo);
+			grid.add(voes.getPageResults());
+			grid.setTotal(voes.getTotalCount());
+			WebUtil.printText(JSON.toJSONString(grid), response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/monthEndValue")
+	public void monthEnd(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		try {
+			DataGridVo<MonthEndVo> grid = new DataGridVo<MonthEndVo>();
+			PageInfo<MonthEndVo> dataPage = new PageInfo<MonthEndVo>(
+					request);
+			ConnditionVo connVo = new ConnditionVo(request);
+			PageInfo<MonthEndVo> voes = this.userTradeService.monthEndList(
+					dataPage, connVo);
+			grid.add(voes.getPageResults());
+			grid.setTotal(voes.getTotalCount());
+			WebUtil.printText(JSON.toJSONString(grid), response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/changeType",method={RequestMethod.POST,RequestMethod.GET})
+	public JsonResult changeType(String tradeId) {
+		JsonResult jsonResult = new JsonResult(false);
+		MonthUserTrade userTrade = MonthUserTradeService.findByTradeId(tradeId);
+		if(null == userTrade){
+			jsonResult.setMessage("找不到该方案");
+			return jsonResult;
+		}
+		userTrade.setIsManualDelay(0);
+		MonthUserTradeService.update(userTrade);
+		jsonResult.setSuccess(true);
+		jsonResult.setMessage("限买解除成功！");
+		return jsonResult;
 	}
 }

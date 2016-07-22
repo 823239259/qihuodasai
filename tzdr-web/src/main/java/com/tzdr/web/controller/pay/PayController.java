@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Maps;
+import com.tzdr.business.pay.pingpp.config.enums.Channel;
+import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
@@ -209,12 +211,34 @@ public class PayController {
 			request.setAttribute("message", message);
 			 return ViewConstants.PayViewJsp.NET_PAY_MAIN_VIEW;
 		}
-		
 		message="系统暂不支持此银行充值！";
 		return ViewConstants.PayViewJsp.NET_PAY_MAIN_VIEW;
 	}
-	
-	
+	/**
+	 * ping++支付
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/pingplusplus",method = RequestMethod.POST)
+	public String pingplusplus(HttpServletRequest request){
+		System.out.println("执行中。。。");
+		UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+		WUser user = this.payService.getUser(userSessionBean.getId());
+		String paymoney=request.getParameter("money");
+		String payWay = request.getParameter("payWay");
+		if(paymoney != null && Integer.parseInt(paymoney) > 0){
+			int status=Constants.PayStatus.NO_PROCESSING;
+			String paytype=Constants.PayType.ALIPAY;
+			int source = Constant.Source.TZDR;
+			String ip = IpUtils.getIpAddr(request);
+			String orderNo = ChargeExample.randomNo();
+			String charage = payService.doSavePingPPRecharge(payWay,source,user,status,"",paymoney,ip,paytype,orderNo);
+			System.out.println(charage);
+			return charage;
+		}
+		return null;
+	}
 	private static Object lock = new Object();
 	
 	/**

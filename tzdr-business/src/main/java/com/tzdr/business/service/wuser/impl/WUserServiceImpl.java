@@ -854,13 +854,33 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 				}
 			}
 			
-			if(sourceObj != null){
-				if (TypeConvert.objToStrIsNotNull(sourceObj) != null ) {
+			if (sourceObj != null) {
+				if (TypeConvert.objToStrIsNotNull(sourceObj) != null) {
+					StringBuilder whereBuilder = new StringBuilder();
 					int source = Integer.parseInt(String.valueOf(sourceObj));
-					String sqlSource = source == 1 ? " AND w.source IN(?,?)" :" AND w.source NOT IN(?,?)";
-					sqlBuf.append(sqlSource);
-					params.add(2);
-					params.add(5);
+					switch (source) {
+					case 2:
+					case 5:
+					case 6:
+					case 7:
+						whereBuilder.append(" and w.source = ?");
+						params.add(source);
+						break;
+					case 1:
+						whereBuilder.append(" and w.source not in (?,?,?,?)");
+						params.add(2);
+						params.add(5);
+						params.add(6);
+						params.add(7);
+						break;
+					}
+					/*
+					String sqlSource = source == 1 ? " AND w.source IN(?,?)"
+							: " AND w.source NOT IN(?,?)";
+							*/
+					sqlBuf.append(whereBuilder.toString());
+					//params.add(2);
+					//params.add(5);
 				}
 			}
 			

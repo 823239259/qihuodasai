@@ -69,7 +69,7 @@ public class DrawListAuditVo implements Serializable{
 			return "维胜";
 		}
 		if (Constant.Source.PGB==this.source){
-			return "维胜";
+			return "配股宝";
 		}
 		return sourceStr;
 	}
@@ -232,6 +232,9 @@ public class DrawListAuditVo implements Serializable{
 		}
 		if (Constant.PaymentChannel.UM_PAY==tempChannel){
 			return "联动优势";
+		}
+		if (Constant.PaymentChannel.EASE_PAY==tempChannel){
+			return "易支付";
 		}
 		return paymentChannelStr;
 	}

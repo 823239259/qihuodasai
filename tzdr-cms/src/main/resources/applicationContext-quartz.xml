@@ -32,6 +32,9 @@
 				<ref bean="userCombostockTrigger"/>		
 				<ref bean="homePageTrigger"/>		
 				<ref bean="bibiPayWithDrawalTrigger"/>	
+				<ref bean="payeaseWithDrawalTrigger"/>	
+				<ref bean="monthTradeTrigger"/>	
+				
 			</list>
 		</property>
 		<!--  quartz配置文件路径, 指向cluster配置 -->
@@ -278,5 +281,29 @@
 	<bean id="bibiPayWithDrawalJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="durability" value="false"/>
 		<property name="jobClass" value="com.tzdr.cms.quartz.BibiPayWithDrawJob" />
+	</bean>
+	
+	<!-- 易支付提现 支付结果定时查询 Trigger定义-->
+	<bean id="payeaseWithDrawalTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="payeaseWithDrawalJobDetail" />
+		<!-- 每10分钟  -->
+		<property name="cronExpression" value="0 5/10 * * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="payeaseWithDrawalJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.PayEaseWithDrawJob" />
+	</bean>
+	
+	<!-- 月月配自动延期定时提醒 Trigger定义-->
+	<bean id="monthTradeTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="monthTradeJobDetail" />
+		<!-- 每10分钟  -->
+		<property name="cronExpression" value="0 20 8 * * ?" />
+	</bean>
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id="monthTradeJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.MonthTradeJob" />
 	</bean>
 </beans>

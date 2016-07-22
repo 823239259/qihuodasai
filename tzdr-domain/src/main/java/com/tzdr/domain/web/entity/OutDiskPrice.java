@@ -22,7 +22,8 @@ public class OutDiskPrice extends BaseCrudEntity{
 	
 	/**
 	 * 交易品种
-	 * 业务类型【0.富时A50  6.原油    7. 恒指   9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225】
+	 * 业务类型【0.富时A50  6.原油    7. 恒指   9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225、
+	 *       14小恒指、15美黄金】
 	 */
 	private Integer tradeType;
 	

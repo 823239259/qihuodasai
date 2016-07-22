@@ -90,6 +90,7 @@ public class EndPlanController  extends BaseCmsController<WUser> {
 					endPlanoneVo.setAccountName(endPlanVo.getAccountName());
 					endPlanoneVo.setProgramNo(endPlanVo.getProgramNo());
 					endPlanoneVo.setLeverMoney(endPlanVo.getLeverMoney());
+					endPlanoneVo.setVoucherMoney(endPlanoneVo.getVoucherMoney());
 					endPlanoneVo.setTotalLeverMoney(endPlanVo.getTotalLeverMoney());
 					endPlanoneVo.setFeeType(endPlanVo.getFeeType());
 					endPlanoneVo.setEndSubTimeStr(endPlanVo.getEndSubTimeStr());
@@ -140,6 +141,7 @@ public class EndPlanController  extends BaseCmsController<WUser> {
 					endPlanoneVo.setAccountName(endPlanVo.getAccountName());
 					endPlanoneVo.setProgramNo(endPlanVo.getProgramNo());
 					endPlanoneVo.setLeverMoney(endPlanVo.getLeverMoney());
+					endPlanoneVo.setVoucherMoney(endPlanVo.getVoucherMoney());
 					endPlanoneVo.setTotalLeverMoney(endPlanVo.getTotalLeverMoney());
 					endPlanoneVo.setFeeType(endPlanVo.getFeeType());
 					endPlanoneVo.setEndSubTimeStr(endPlanVo.getEndSubTimeStr());

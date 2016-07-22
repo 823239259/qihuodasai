@@ -108,6 +108,11 @@ public class EarningsReportController  extends BaseCmsController<WUser> {
 		// 盈利分成
 		BigDecimal profitMoney = new BigDecimal(0);
 		BigDecimal totalMoney = new BigDecimal(0);
+		BigDecimal deductMoney = new BigDecimal(0);
+		
+		BigDecimal realIncomeMoney = new BigDecimal(0);
+		
+		Double deduction_lever_money = 0d;
 		//BigDecimal opDay = new BigDecimal(0);
 		int opDay = 0;
 		Integer lever = 0;
@@ -157,9 +162,19 @@ public class EarningsReportController  extends BaseCmsController<WUser> {
 				if (vo.getRevokeManagerMoney() !=null){
 					revokeManagerMoney = TypeConvert.add(revokeManagerMoney.doubleValue(), vo.getRevokeManagerMoney().doubleValue());
 				}
-				if (vo.getRevokeManagerMoney() !=null){
+				if (vo.getRevokeInterest() !=null){
 					revokeInterest = TypeConvert.add(revokeInterest.doubleValue(), vo.getRevokeInterest().doubleValue());
 				}
+				if (vo.getDeductMoney() !=null){
+					deductMoney = TypeConvert.add(deductMoney.doubleValue(), vo.getDeductMoney().doubleValue());
+				}
+				if (vo.getRealIncomeMoney() !=null){
+					realIncomeMoney = TypeConvert.add(realIncomeMoney.doubleValue(), vo.getRealIncomeMoney().doubleValue());
+				}
+				if (vo.getDeduction_lever_money() !=null){
+					deduction_lever_money = deduction_lever_money+vo.getDeduction_lever_money(); 
+				}
+				
 			}
 		}
 		
@@ -178,7 +193,9 @@ public class EarningsReportController  extends BaseCmsController<WUser> {
 		// 配资利息撤回、配资管理费撤回
 		total.setRevokeInterest(TypeConvert.scale(revokeInterest, 2));
 		total.setRevokeManagerMoney(TypeConvert.scale(revokeManagerMoney, 2));
-		
+		total.setDeductMoney(TypeConvert.scale(deductMoney,2));
+		total.setRealIncomeMoney(TypeConvert.scale(realIncomeMoney,2));
+		total.setDeduction_lever_money(TypeConvert.scale(new BigDecimal(deduction_lever_money),2).doubleValue());
 		total.setHsBelongBroker(isPage ? "小计：" : "合计：");
 		total.setActivityType(-1);
 		
@@ -198,7 +215,8 @@ public class EarningsReportController  extends BaseCmsController<WUser> {
 			// 配资利息撤回、配资管理费撤回
 			totalEarningsVo.setRevokeInterest(TypeConvert.scale(totalEarningsVo.getRevokeInterest()==null?new BigDecimal(0):totalEarningsVo.getRevokeInterest(), 2));
 			totalEarningsVo.setRevokeManagerMoney(TypeConvert.scale(totalEarningsVo.getRevokeManagerMoney()==null?new BigDecimal(0):totalEarningsVo.getRevokeManagerMoney(), 2));
-			
+			totalEarningsVo.setDeduction_lever_money(TypeConvert.scale(totalEarningsVo.getDeduction_lever_money()==null?new BigDecimal(0):new BigDecimal(totalEarningsVo.getDeduction_lever_money()), 2).doubleValue());
+
 			totalEarningsVo.setHsBelongBroker("合计：");
 			totalEarningsVo.setActivityType(-1);
 			data.add(totalEarningsVo);

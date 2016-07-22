@@ -45,10 +45,10 @@ import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 
 
 /**
- * 
+ *
  * <p>
  * </p>
- * 
+ *
  * @author WangPinQun
  * @see FSimpleProductUserTradeServiceImpl
  * @version 2.0 2015年9月16日下午14:33:13
@@ -64,31 +64,32 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 	@Autowired
 	private WUserService wUserService;
 
+
 	@Autowired
 	private TradeDayService tradeDayService;
-	
+
 	@Autowired
 	private RechargeListService rechargeListService;
 
 	@Autowired
 	private FSimpleProductAppendLevelMoneyService fSimpleProductAppendLevelMoneyService;
-	
+
 	@Autowired
 	private FHandleFtseUserTradeService fHandleFtseUserTradeService;
-	
+
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
-	
+
 	@Override
 	public PageInfo<Object> getEarningData(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams) {
 		// TODO Auto-generated method stub
 		String sql = "SELECT f.id," + "f.uid," + "w.mobile," + "v.tname AS username,"
 				+ "f.business_type AS businessType," + "f.tran_account AS tranAccount,"
-				+ "f.app_time AS appTime," + "f.app_starttime AS appStartTime," 
+				+ "f.app_time AS appTime," + "f.app_starttime AS appStartTime,"
 				+ "f.app_end_time AS appEndTime," + "f.tran_lever AS tranLever,"
 				+ "f.trader_bond AS traderBond," + "f.append_trader_bond AS appendTraderBond,"
 				+ "f.tran_profit_loss AS tranProfitLoss," + "f.tran_fees_total AS tranFeesTotal,"
-				+ "f.update_time AS updateTime," +"f.end_time AS endTime," + "f.state_type AS stateType ," 
+				+ "f.update_time AS updateTime," +"f.end_time AS endTime," + "f.state_type AS stateType ,"
 				+ "f.end_actual_money AS endActualMoney," +"f.discount_money AS discountMoney," + "f.discount_actual_money AS discountActualMoney "
 				+ "FROM f_simple_ftse_user_trade f,w_user w,w_user_verified v "
 				+ "WHERE f.uid=w.id AND w.id=v.uid AND f.business_type in (1,2,3,4,20)"
@@ -137,9 +138,11 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 				+ "f.discount_actual_money as discountActualMoney," // 抵扣金额
 				+ "f.end_amount_cal as endAmountCal,"  // 结算金额 
 				+ "f.end_amount AS endAmount," + "f.end_time AS endTime," + "f.program_no AS programNo,"
-				+ "f.state_type AS stateType " + "FROM f_simple_ftse_user_trade f,w_user w,w_user_verified v "
-				+ "WHERE f.uid=w.id AND w.id=v.uid AND f.business_type in (1,2,3,4,20) AND f.state_type in (2,3,4,6) "
-				+ "ORDER BY stateType ASC, useTranDay DESC, appStartTime DESC";
+				+ "f.state_type AS stateType, "
+				+ "(select CONVERT(s.type,CHAR) from f_simple_coupon s where f.discount_id = s.id) AS type "
+				+ "FROM f_simple_ftse_user_trade f,w_user w,w_user_verified v "
+				+ "WHERE f.uid=w.id AND w.id=v.uid AND f.business_type in (1,2,3,4,20) AND  f.state_type in (2,3,4,6) "
+				+ "ORDER BY stateType ASC, appEndTime DESC, endTime DESC";
 
 		MultiListParam multilistParam = new MultiListParam(easyUiPage, searchParams, Lists.newArrayList(), sql);
 
@@ -186,7 +189,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 //				}
 //			});
 		}
-		
+
 		planData.setPageResults(newList);
 		return planData;
 	}
@@ -209,7 +212,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 			int type = userTrade.getBusinessType().intValue();
 
 			//添加充值记录，内含资金明细记录添加和账户余额修改
-			rechargeListService.futureHandlerSaveRechargeStateWeb(userTrade.getProgramNo(), 
+			rechargeListService.futureHandlerSaveRechargeStateWeb(userTrade.getProgramNo(),
 					wUser.getMobile(), userTrade.getTraderBond().toString(), "【" + getTypeName(type) + "】开户申请不通过，保证金返还", TypeConvert.SYS_TYPE_ADJUSTMENT_OF_ACCOUNTS);
 		}
 	}
@@ -248,6 +251,8 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 		if (userTrade == null) {
 			return;
 		}
+
+		BigDecimal discountActualMoney =new BigDecimal(0);
 		if (userTrade.getStateType() == 2 || userTrade.getStateType() == 3 || userTrade.getStateType()==4) {
 			// 总保证金=操盘保证金+补充保证金总和
 			BigDecimal bond = userTrade.getTraderBond();
@@ -255,29 +260,46 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 				bond = bond.add(userTrade.getAppendTraderBond());
 			}
 			userTrade.setTranProfitLoss(tranProfitLoss);
-			
-			// -------------新增折扣券--------------------
-			//折扣券(折)
-			BigDecimal discountMoney = userTrade.getDiscountMoney();
-			//抵扣券抵扣手续费
-			BigDecimal discountActualMoney = userTrade.getDiscountActualMoney();
-			if(discountMoney != null){
-				//未折扣的管理费
-				BigDecimal unDiscountMoney = tranFeesTotal;
-				//折扣=折扣券(折)/10
-				discountMoney = discountMoney.divide(new BigDecimal(10),4,BigDecimal.ROUND_HALF_EVEN);
-				//折扣后交易手续费总额=交易手续费总额*折扣
-				tranFeesTotal = tranFeesTotal.multiply(discountMoney, MathContext.DECIMAL32);
-				//抵扣券抵扣手续费总额=交易手续费总额-折扣后交易手续费总额
-				discountActualMoney = unDiscountMoney.subtract(tranFeesTotal) ;
-				userTrade.setDiscountActualMoney(discountActualMoney);  
+			if(null != userTrade.getDiscountId()) {
+				FSimpleCoupon voucher = fSimpleCouponService.get(userTrade.getDiscountId());
+				if (voucher.getType() == 3) {
+					// -------------新增折扣券--------------------
+					//折扣券(折)
+					BigDecimal discountMoney = userTrade.getDiscountMoney();
+					//抵扣券抵扣手续费
+					if (discountMoney != null) {
+						//未折扣的管理费
+						BigDecimal unDiscountMoney = tranFeesTotal;
+						//折扣=折扣券(折)/10
+						discountMoney = discountMoney.divide(new BigDecimal(10));
+						//折扣后交易手续费总额=交易手续费总额*折扣
+						tranFeesTotal = tranFeesTotal.multiply(discountMoney, MathContext.DECIMAL32);
+						//抵扣券抵扣手续费总额=交易手续费总额-折扣后交易手续费总额
+						discountActualMoney = unDiscountMoney.subtract(tranFeesTotal);
+						userTrade.setDiscountActualMoney(discountActualMoney);
+					}
+					// -------------新增折扣券--------------------
+					// -------------新增抵扣卷--------------------
+				} else if (voucher.getType() == 6) {
+					BigDecimal discountMoney = userTrade.getDiscountMoney();
+					//抵扣券抵扣手续费
+					if (discountMoney != null) {
+						//折扣后交易手续费总额=交易手续费总额*折扣
+						if (tranFeesTotal.compareTo(discountMoney) >= 0) {
+							discountActualMoney = discountMoney;
+							tranFeesTotal = tranFeesTotal.subtract(discountMoney);
+						} else {
+							discountActualMoney = tranFeesTotal;
+							tranFeesTotal = new BigDecimal(0);
+						}
+						//抵扣券抵扣手续费总额=交易手续费总额-折扣后交易手续费总额
+						userTrade.setDiscountActualMoney(discountActualMoney);
+					}
+				}
 			}
-			// -------------新增折扣券--------------------
-			
-			
 			userTrade.setTranFeesTotal(tranFeesTotal);
-			
-			// -------------新增折扣券--------------------
+
+			// -------------新增抵扣券--------------------
 			// 结算金额=总保证金+交易盈亏-交易手续费
 			BigDecimal  endAmountCal  = bond.add(tranProfitLoss).subtract(tranFeesTotal);
 			userTrade.setEndAmountCal(endAmountCal);  //设置结算金额
@@ -301,7 +323,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 			userTrade.setEndActualMoney(endActualMoney);  //设置实际抵扣金额
 			userTrade.setEndAmount(endAmount); //设置实际结算金额
 			// -------------新增折扣券--------------------
-			
+
 			// 修改操盘记录
 			userTrade.setStateType(3);
 			userTrade.setUpdateTime(Dates.getCurrentLongDate());
@@ -343,7 +365,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 			if(userTrade.getEndAmount().doubleValue()<0){
 				sysType=TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS;
 			}
-			
+
 			//添加充值记录，内含资金明细记录添加和账户余额修改
 			rechargeListService.futureHandlerSaveRechargeStateWeb(userTrade.getProgramNo(),
 					wUser.getMobile(), userTrade.getEndAmount().toString(), "【" + getTypeName(type) + "】" + remark, sysType);
@@ -351,12 +373,12 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 		return "";
 
 	}
-	
+
 	@Override
 	public FSimpleFtseUserTrade executePayable(
 			FSimpleFtseUserTrade fSimpleFtseUserTrade, String mobile,
 			BigDecimal payable) throws Exception {
-		
+
 		fSimpleFtseUserTrade.setAppTime(TypeConvert.dbDefaultDate());
 		this.save(fSimpleFtseUserTrade);
 		fSimpleFtseUserTrade.setProgramNo("GT" + fSimpleFtseUserTrade.getId());
@@ -376,16 +398,16 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 		}
 //		fHandleFtseUserTradeService.saveHandleFtseUserTrade(fSimpleFtseUserTrade); // 保存商品期货收益报表记录
 
-		rechargeListService.futureHandlerSaveRechargeStateWeb("GT"+ fSimpleFtseUserTrade.getId(), 
+		rechargeListService.futureHandlerSaveRechargeStateWeb("GT"+ fSimpleFtseUserTrade.getId(),
 				mobile, payable.toString(), remark, TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS);
 		return fSimpleFtseUserTrade;
 	}
-	
+
 	@Override
 	public FSimpleFtseUserTrade executePayable(
 			FSimpleFtseUserTrade fSimpleFtseUserTrade, FSimpleCoupon voucher, String mobile,
 			BigDecimal payable) throws Exception {
-		
+
 		fSimpleFtseUserTrade.setAppTime(TypeConvert.dbDefaultDate());
 		this.save(fSimpleFtseUserTrade);
 		// 更新优惠券状态为已使用
@@ -409,7 +431,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 		}
 //		fHandleFtseUserTradeService.saveHandleFtseUserTrade(fSimpleFtseUserTrade); // 保存商品期货收益报表记录
 
-		rechargeListService.futureHandlerSaveRechargeStateWeb("GT"+ fSimpleFtseUserTrade.getId(), 
+		rechargeListService.futureHandlerSaveRechargeStateWeb("GT"+ fSimpleFtseUserTrade.getId(),
 				mobile, payable.toString(), remark, TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS);
 		return fSimpleFtseUserTrade;
 	}
@@ -426,7 +448,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 
 	@Override
 	public void addAppendTraderBond(FSimpleFtseUserTrade fSimpleFtseUserTrade,
-			Double appendMoney, WUser wuser) throws Exception {
+									Double appendMoney, WUser wuser) throws Exception {
 		Integer type = fSimpleFtseUserTrade.getBusinessType();
 		String remark="";
 		if(type == 1){
@@ -441,50 +463,50 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 			remark = "商品期货(商品综合)追加保证金";
 		}
 		BigDecimal payMoney = new BigDecimal(appendMoney);  //追加保证金
-		
+
 		fSimpleFtseUserTrade.setAppendTraderBond(TypeConvert.scale(fSimpleFtseUserTrade.getAppendTraderBond().add(payMoney),2));
-		
+
 		//追加保证金划款
-		rechargeListService.futureHandlerSaveRechargeStateWeb(fSimpleFtseUserTrade.getProgramNo(), 
+		rechargeListService.futureHandlerSaveRechargeStateWeb(fSimpleFtseUserTrade.getProgramNo(),
 				wuser.getMobile(), appendMoney.toString(), remark, TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS);
-		
+
 		//更新股指追加保证金
 		this.update(fSimpleFtseUserTrade);
-		
+
 		//创建追加保证金记录
 		FSimpleProductAppendLevelMoney fSimpleProductAppendLevelMoney = new FSimpleProductAppendLevelMoney(wuser.getId(),fSimpleFtseUserTrade.getProgramNo(),appendMoney,type);
-		
+
 		fSimpleProductAppendLevelMoneyService.save(fSimpleProductAppendLevelMoney);  //保存追加保证金记录
-	
+
 	}
 
 	/**
 	 * 根据类型获取类型名称
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
 	private String getTypeName(int type) {
 		switch (type) {
-		case 1:
-			return "沪金期货";
-		case 2:
-			return "沪银期货";
-		case 3:
-			return "沪铜期货";
-		case 4:
-			return "橡胶期货";
-		case 20:
-			return "商品综合";
-		default:
-			break;
+			case 1:
+				return "沪金期货";
+			case 2:
+				return "沪银期货";
+			case 3:
+				return "沪铜期货";
+			case 4:
+				return "橡胶期货";
+			case 20:
+				return "商品综合";
+			default:
+				break;
 		}
 		return "";
 	}
 
 	/**
 	 * 获取已操盘时间
-	 * 
+	 *
 	 * @param appStartTime
 	 * @param appEndTime
 	 * @return
@@ -507,6 +529,11 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 			}
 		}
 		return new BigInteger(String.valueOf(day));
+	}
+
+	@Override
+	protected FSimpleFtseUserTradeDao getEntityDao() throws BusinessException {
+		return super.getEntityDao();
 	}
 
 	/**
@@ -534,10 +561,10 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 		discount.setStatus(new Short("3"));
 		discount.setUseTime(TypeConvert.dbDefaultDate());
 		this.fSimpleCouponService.update(discount);
-		
+
 		this.update(fSimpleFtseUserTrade);
 	}
-	
+
 //	/**
 //	 * 获取商品期货收益报表记录
 //	 * @param userTrade
@@ -572,5 +599,5 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 ////		fHandleFtseUserTrade.setGoldenMoney(userTrade.getGoldenMoney());
 //		return fHandleFtseUserTrade;
 //	}
-	
+
 }

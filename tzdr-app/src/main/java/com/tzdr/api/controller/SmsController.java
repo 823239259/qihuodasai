@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import jodd.util.ObjectUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -26,6 +28,7 @@ import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.Dates;
+import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.RandomCodeUtil;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.web.entity.SecurityCode;
@@ -38,6 +41,7 @@ import com.tzdr.domain.web.entity.SecurityCode;
 @Controller
 @RequestMapping(value = "/")
 public class SmsController {
+	private static Logger log = LoggerFactory.getLogger(SmsController.class);
 
 	@Autowired
 	private ApiUserService  apiUserService;
@@ -87,6 +91,8 @@ public class SmsController {
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
 		String template = "ihuyi.verification.code.template";
+		// 获取短信通道
+		int smsChannel = 0;
 		if (DataConstant.SEND_SMS_TYPE_REGIST==type){
 			if (!ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_EXIST,"mobile.exist.");
@@ -94,7 +100,11 @@ public class SmsController {
 			if (sendTimes>=DataConstant.SMS_LIMIT_NUMBER){
 				return new ApiResult(false,ResultStatusConstant.FAIL,"over.max.limit.number.");
 			}
-			template = "ihuyi.verification.signin.code.template";
+			
+			// 获取短信通道
+			smsChannel = ((DataConstant.SEND_SMS_TYPE_REGIST == type) ? dataMapService.getSmsContentRegister() : dataMapService.getSmsContentOthers());
+			
+			template = smsChannel == 3 ? "tzdr.alidayu.signin.code.template" : "ihuyi.verification.signin.code.template";
 			
 			smsParams.put("module",DataConstant.SEND_SMS_TYPE_REGIST_MODULE);
 			DataConstant.SMS_LIMIT_MAPS.put(mobile,sendTimes+DataConstant.ONE);
@@ -104,7 +114,9 @@ public class SmsController {
 		if (DataConstant.SEND_SMS_TYPE_FORGET_PWD==type){
 			if (ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_NOT_EXIST,"mobile.not.exist.");
-			}		
+			}	
+			// 获取短信通道
+			smsChannel = ((DataConstant.SEND_SMS_TYPE_REGIST == type) ? dataMapService.getSmsContentRegister() : dataMapService.getSmsContentOthers());
 			smsParams.put("module", DataConstant.SEND_SMS_TYPE_FORGET_PWD_MODULE);
 		}
 		
@@ -118,9 +130,7 @@ public class SmsController {
 		securityCodeService.saveSecurityCode(securityCode,mobile);  //保存验证码信息
 		
 		smsParams.put("code", randomCode);
-		// 获取短信通道
-		int smsChannel = ((DataConstant.SEND_SMS_TYPE_REGIST == type) ? dataMapService.getSmsContentRegister() : dataMapService.getSmsContentOthers());
-		
+		log.info("-----短信接口监听IP端口日志信息："+IpUtils.getIpAddr(request)+"--------");
 		if (!SMSSender.getInstance().sendByTemplate(smsChannel, mobile, template, smsParams)) { // 判断短信发送是否成功
 			return new ApiResult(false, ResultStatusConstant.FAIL, "send.fail.");
 		}

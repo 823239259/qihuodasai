@@ -34,7 +34,8 @@ function pass(type,tabs) {
 			$("#daxtranActualLever").val("");
 			$("#mdtranActualLever").val("");
 			$("#nikkeiTranActualLever").val("");
-			
+			$("#hstranActualLever").val("");
+			$("#agtranActualLever").val("");
 			$("#passWin").window({title:'添加'});
 		} else if(type==2){
 			var rows = $("#edatagrid").datagrid('getSelections');
@@ -52,6 +53,11 @@ function pass(type,tabs) {
 				$("#daxtranActualLever").val(rows[0].daxtranActualLever);
 				$("#mdtranActualLever").val(rows[0].mdtranActualLever);
 				$("#nikkeiTranActualLever").val(rows[0].nikkeiTranActualLever);
+				$("#mdtranActualLever").val(rows[0].mdtranActualLever);
+				$("#nikkeiTranActualLever").val(rows[0].nikkeiTranActualLever);
+				$("#hstranActualLever").val(rows[0].hstranActualLever);
+				$("#agtranActualLever").val(rows[0].agtranActualLever);
+				
 				$("#passWin").window({title:'修改'});
 			}else{
 				return;
@@ -104,12 +110,15 @@ function passSave() {
 			var daxtranActualLever = $("#daxtranActualLever").val();
 			var mdtranActualLever = $("#mdtranActualLever").val();
 			var nikkeiTranActualLever = $("#nikkeiTranActualLever").val();
+			var hstranActualLever = $("#hstranActualLever").val();
+			var agtranActualLever = $("#agtranActualLever").val();
 			
 			var parameters = '{}';
 			if(setParameterType==1){
 				parameters = {"traderBond":traderBond,"traderTotal":traderTotal,"lineLoss":lineLoss,"goldenMoney":goldenMoney,"atranActualLever":ATranActualLever,
 						"htranActualLever":HTranActualLever,"ytranActualLever":YTranActualLever,"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
-						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever};
+						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
+						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/create",
 						parameters,
 						function(data){
@@ -125,7 +134,8 @@ function passSave() {
 				parameters = {"id":rows[0].id,"traderBond":traderBond,"traderTotal":traderTotal,"lineLoss":lineLoss,"goldenMoney":goldenMoney,"atranActualLever":ATranActualLever,
 						"htranActualLever":HTranActualLever,"ytranActualLever":YTranActualLever,
 						"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
-						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever};
+						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
+						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/update",
 						parameters,
 						function(data){
@@ -213,9 +223,13 @@ function tradeToS(value,row,index){
 		return '德国DAX';
 	}else if (value==13){
 		return '日经225';
+	}else if (value==14){
+		return '小恒指';
+	}else if (value==15){
+		return '美黄金';
 	}
 	
-	// 9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225
+	// 9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225、14.小恒指、15.美黄金
 }
 
 function priceToS(value,row,index){
@@ -277,14 +291,18 @@ $(document).ready(function(){
 							<th field="traderTotal" width="150">总操盘资金（美元）</th>
 							<th field="lineLoss" width="150">亏损平仓线（美元）</th>
 							<th field="goldenMoney" width="150">入金金额（美元）</th>
-							<th field="atranActualLever" width="150">A50交易手数</th>
-							<th field="htranActualLever" width="150">恒指交易手数</th>
-							<th field="ytranActualLever" width="150">原油交易手数</th>
-							<th field="mdtranActualLever" width="150">迷你道指交易手数</th>
-							<th field="mntranActualLever" width="150">迷你纳指交易手数</th>
-							<th field="mbtranActualLever" width="150">迷你标普交易手数</th>
-							<th field="daxtranActualLever" width="150">德国DAX交易手数</th>
-							<th field="nikkeiTranActualLever" width="150">日经225交易手数</th>
+							
+							<th field="atranActualLever" width="150" hidden="true">A50交易手数</th>
+							<th field="htranActualLever" width="150" hidden="true">恒指交易手数</th>
+							<th field="ytranActualLever" width="150" hidden="true">原油交易手数</th>
+							<th field="mdtranActualLever" width="150" hidden="true">迷你道指交易手数</th>
+							<th field="mntranActualLever" width="150" hidden="true">迷你纳指交易手数</th>
+							<th field="mbtranActualLever" width="150" hidden="true">迷你标普交易手数</th>
+							<th field="daxtranActualLever" width="150" hidden="true">德国DAX交易手数</th>
+							<th field="nikkeiTranActualLever" width="150" hidden="true">日经225交易手数</th>
+							<th field="hstranActualLever" width="150" hidden="true">小恒指交易手数</th>
+							<th field="agtranActualLever" width="150" hidden="true">美黄金交易手数</th>
+							
 							<th field="updateTime" width="150" formatter="DateToS">更新时间</th>
 							<th field="updateUser" width="150">操作人</th>
 			            </tr>
@@ -401,6 +419,17 @@ $(document).ready(function(){
                 <td><span ></span></td>
             </tr>
             <tr>
+                <td class="label right">小恒指交易手数:</td>
+                <td>
+                   <input id="hstranActualLever" name="hstranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td class="label right">美黄金交易手数:</td>
+                <td>
+                   <input id="agtranActualLever" name="agtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td><span ></span></td>
+            </tr>
+            <tr>
                 <td align="center" colspan="5">
 	               <a id="btn" href="javascript:void(0);" onclick="passSave()" class="easyui-linkbutton">提交</a>
 	               <a id="btn" href="javascript:void(0);" onclick="passClose()" class="easyui-linkbutton">取消</a>
@@ -424,11 +453,13 @@ $(document).ready(function(){
 				    <option value="0">富时A50</option>
 				    <option value="7">恒指期货</option>
 				    <option value="6">国际原油</option>
-				     <option value="9">迷你道指</option>
+				    <option value="9">迷你道指</option>
 				    <option value="10">迷你纳指</option>
 				    <option value="11">迷你标普</option>
-				     <option value="12">德国DAX</option>
+				    <option value="12">德国DAX</option>
 				    <option value="13">日经225</option>
+				    <option value="14">小恒指</option>
+				    <option value="15">美黄金</option>
 				</select>
                 </td>
                 <td><span ></span></td>

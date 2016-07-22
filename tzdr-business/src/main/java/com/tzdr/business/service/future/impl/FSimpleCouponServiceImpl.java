@@ -69,7 +69,7 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 		public PageInfo<Object> queryData(EasyUiPageInfo  easyUiPage,Map<String, Object> searchParams) {
 			PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(), easyUiPage.getPage());
 			
-			String sql = " SELECT sc.id id,sc.name name,sc.type type,sc.scope scope,sc.money money,sc.cycle cycle,sc.deadline deadline,sc.create_user createUser,sc.create_time createTime,COUNT(sc.name) numToHave,count(case when sc.status in (2,3)  then sc. NAME end) numToLost FROM  f_simple_coupon sc group by sc.name";
+			String sql = " SELECT sc.id id,sc.platform platform,sc.name name,sc.type type,sc.scope scope,sc.money money,sc.cycle cycle,IF(ISNULL(sc.cycle),sc.deadline,NULL) deadline,sc.create_user createUser,sc.create_time createTime,COUNT(sc.name) numToHave,count(case when sc.status in (2,3)  then sc. NAME end) numToLost FROM  f_simple_coupon sc group by sc.name";
 			//params  查询参数  依次 存入
 			MultiListParam  multilistParam  = new MultiListParam(easyUiPage, searchParams,null, sql);
 			pageInfo = oldMultiListPageQuery(multilistParam,FSimpleCouponManageVo.class);
@@ -87,10 +87,42 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 		sql.append(" and ifnull(deadline, unix_timestamp(date_add(from_unixtime(grant_time),interval cycle day))) > ? ");
 		sql.append(" order by money desc ");
 		scope = (1 == scope || 2 == scope || 3 == scope || 4 == scope || 20 == scope) ? 5 : scope;
-
+		switch (scope) {
+		// 小恒指
+		case 9:
+			scope = 13;
+			break;
+		default:
+			break;
+		}
 		return this.getEntityDao().queryMapBySql(sql.toString(), userId, type, scope, Dates.getCurrentLongDate());
 
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public List<Map<String, Object>> queryCouponByUserId(String userId, int[] type, int scope) {
+		if ("".equals(userId)) {
+			return new ArrayList<Map<String, Object>>();
+		}
+		String tp = " and type in(";
+		for(int i : type){
+			tp = tp + i + ","; 
+		}
+		tp = tp.substring(0, tp.length()-1) + ") ";
+		StringBuffer sql = new StringBuffer(" select * from f_simple_coupon fsc ");
+		sql.append(" where user_id = ? and status = 2 and find_in_set(?, scope) " +tp);
+		sql.append(" and ifnull(deadline, unix_timestamp(date_add(from_unixtime(grant_time),interval cycle day))) > unix_timestamp(NOW()) ");
+		sql.append(" GROUP BY fsc.name");
+		sql.append(" order by money desc ");
+		scope = (1 == scope || 2 == scope || 3 == scope || 4 == scope || 20 == scope) ? 5 : scope;
+		scope = 9 == scope ? 13 : scope;
+		return this.getEntityDao().queryMapBySql(sql.toString(), userId,  scope);
+		
+	}
+	
 	@Override
 	public List<FSimpleCoupon> findByName(String name) {
 		// TODO Auto-generated method stub
@@ -107,6 +139,7 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 	public boolean isCouponValid(FSimpleCoupon coupon, int type, int scope) {
 		// 匹配优惠券类型，状态和范围
 		scope = (1 == scope || 2 == scope || 3 == scope || 4 == scope || 20 ==scope) ? 5 : scope;
+		scope = scope == 9 ? 13 :scope;
 		if (null == coupon || type != coupon.getType() || coupon.getStatus() != 2 || coupon.getScope().indexOf(scope + "") < 0) {
 			return false;
 		}
@@ -123,17 +156,19 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 		if (deadLine < Dates.getCurrentLongDate()) {
 			return false;
 		}
-
 		return true;
 	}
 
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public PageInfo<FSimpleCouponWebVo> findDataList(String pageIndex,
-			String perPage, String uid) {
+			String perPage, String uid, String platform) {
 		PageInfo<FSimpleCouponWebVo> pageInfo= new PageInfo<FSimpleCouponWebVo>(Integer.valueOf(perPage),Integer.valueOf(pageIndex)+1);
 		
-		StringBuffer sql = new StringBuffer(" SELECT * FROM f_simple_coupon f WHERE f.user_id = ? and f.type in(1,2,3) ORDER BY ");
+		StringBuffer sql = new StringBuffer(" SELECT * FROM f_simple_coupon f WHERE f.user_id = ? and f.type in(1,2,3,6) and f.platform like '%"+platform+"%' ORDER BY ");
 		sql.append(" if(UNIX_TIMESTAMP(NOW()) > f.deadline,4,f.`status`) ");
 		sql.append(" ASC,f.grant_time DESC ");
 		
@@ -185,7 +220,7 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 	public PageInfo<Object> queryList(EasyUiPageInfo  easyUiPage,Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(), easyUiPage.getPage());
 		
-		String sql = " SELECT sc.id id, sc.`name`, sc.type type, sc.scope scope, sc.money money, sc.create_time createTime, IF (( sc.`status` = 2 AND UNIX_TIMESTAMP( DATE_FORMAT(NOW(), '%Y-%m-%d %H:%m:%s')) > sc.deadline ),'4', CAST(sc.`status` AS CHAR)) `status`, sc.grant_time grantTime, sc.use_time useTime, sc.user_id userId, sc.user_name userName, sc.user_phone userPhone FROM f_simple_coupon sc where sc.status <> 1 order by status,grant_time desc ";
+		String sql = " SELECT sc.id id, sc.`name`, sc.type type, sc.scope scope, sc.platform platform, sc.money money, sc.create_time createTime, IF (( sc.`status` = 2 AND UNIX_TIMESTAMP( DATE_FORMAT(NOW(), '%Y-%m-%d %H:%m:%s')) > DATE_FORMAT(sc.deadline,'%Y-%m-%d %H:%m:%s') ),'4', CAST(sc.`status` AS CHAR)) `status`, sc.grant_time grantTime, sc.use_time useTime, sc.user_id userId, sc.user_name userName, sc.user_phone userPhone FROM f_simple_coupon sc where sc.status <> 1 order by status,grant_time desc ";
 		//params  查询参数  依次 存入
 		MultiListParam  multilistParam  = new MultiListParam(easyUiPage, searchParams,null, sql);
 		pageInfo = multiListPageQuery(multilistParam,FSimpleCouponUseVo.class);
@@ -210,12 +245,13 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 			fSimpleCoupon.setMoney(fSimpleCouponManageVo.getMoney());
 			fSimpleCoupon.setType(fSimpleCouponManageVo.getType());
 			fSimpleCoupon.setScope(fSimpleCouponManageVo.getScope());
+			fSimpleCoupon.setPlatform(fSimpleCouponManageVo.getPlatform());
 			fSimpleCoupon.setName(name);
 			//判断使用的是截止日期还是使用周期
-			if(fSimpleCouponManageVo.getDeadline()!=null){
+			if(fSimpleCouponManageVo.getDeadline()!=null){//截止日期
 				fSimpleCoupon.setDeadline(fSimpleCouponManageVo.getDeadline().longValue());
 			}
-			if(fSimpleCouponManageVo.getCycle()!=0&&fSimpleCouponManageVo.getCycle()!=null){
+			if(fSimpleCouponManageVo.getCycle()!=0&&fSimpleCouponManageVo.getCycle()!=null){//周期
 				fSimpleCoupon.setCycle(fSimpleCouponManageVo.getCycle());
 			}
 			//设置创建人、创建日期等数据
@@ -238,14 +274,15 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 				fSimpleCoupon.setMoney(fS.get(0).getMoney());
 				fSimpleCoupon.setType(fS.get(0).getType());
 				fSimpleCoupon.setScope(fS.get(0).getScope());
+				fSimpleCoupon.setPlatform(fS.get(0).getPlatform());
 				fSimpleCoupon.setName(fS.get(0).getName());
 				for (int j = 0; j <fS.size(); j++) {
-					if(deadline!=null&&deadline.toString()!=""&&cycle==0){
+					if(deadline != null && deadline.toString() != "" && cycle == 0){
 						fSimpleCoupon.setDeadline(deadline);
 						//如果原来的优惠券截止日期不为空，则对其重新设置截止日期
 						fS.get(j).setDeadline(deadline);
 					}
-					if(cycle!=null&&cycle!=0&&cycle.toString()!=""){
+					if(cycle != null && cycle != 0 && cycle.toString() != ""){
 						fSimpleCoupon.setCycle(cycle);
 						//如果原来的优惠券使用周期不为空，则对其重新设置使用周期，同时计算出其截止日期（根据发放时间GrantTime）
 						fS.get(j).setCycle(cycle);
@@ -590,5 +627,39 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 
 		return this.getEntityDao().queryMapBySql(sql.toString(), type);
 	}
-	
+
+	public List<Map<String, Object>> getFSC(String userId,int scope){
+		if ("".equals(userId)) {
+			return new ArrayList<Map<String, Object>>();
+		}
+		StringBuffer sql = new StringBuffer(" select id, type,money from f_simple_coupon ");
+		sql.append(" where user_id = ? and type in(2,3,6) and status = 2 and find_in_set(?, scope) ");
+		sql.append(" and ifnull(deadline, unix_timestamp(date_add(from_unixtime(grant_time),interval cycle day))) > ? ");
+		sql.append(" order by money desc ");
+		return this.getEntityDao().queryMapBySql(sql.toString(),userId,scope ,Dates.getCurrentLongDate());
+	}
+
+
+	@Override
+	public boolean isCouponValided(FSimpleCoupon coupon, int scope) {
+		// 匹配优惠券类型，状态和范围
+		scope = (1 == scope || 2 == scope || 3 == scope || 4 == scope || 20 ==scope) ? 5 : scope;
+		if (null == coupon  || coupon.getStatus() != 2 || coupon.getScope().indexOf(scope + "") < 0) {
+			return false;
+		}
+		// 判断代金券是否过期
+		Long deadLine = coupon.getDeadline(); // 截止日期
+		if (null == deadLine) {
+			Long grantTime = coupon.getGrantTime(); // 发放时间
+			Integer cycle = coupon.getCycle(); // 截止周期
+			if (null == grantTime || null == cycle || 0 > cycle) {
+				return false;
+			}
+			deadLine = Dates.toDate(Dates.dateAddDay(Dates.parseLong2Date(grantTime), cycle)).getTime() / 1000;
+		}
+		if (deadLine < Dates.getCurrentLongDate()) {
+			return false;
+		}
+		return true;
+	}
 }

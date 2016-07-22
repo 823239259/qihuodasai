@@ -34,7 +34,7 @@ import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 
 
 /**
- * 国际期货 A50、原油、恒指 合并处理
+ * 国际期货 A50、原油、恒指、小恒指 合并处理
  * @zhouchen
  * 2015年11月20日
  */

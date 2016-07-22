@@ -156,7 +156,7 @@
 	<c:if test="${type==4}">
 	<shiro:hasPermission name="sys:operationalConfig:banner:view">
 	<div id="bannerTab" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true" style="margin-top: 5px;">
-		<div title="维胜banner" data-options="tools:'#p-tools'" style="padding:20px;">
+		<div title="投资达人banner" data-options="tools:'#p-tools'" style="padding:20px;">
 		<div id="tb" style="padding: 5px; height: auto">
 			<div>
 				<table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -190,8 +190,8 @@
 		<table id="edatagrid"></table>
 		</div>
 		
-		<!-- 维胜banner -->
-		<%-- <div title="维胜banner" data-options="tools:'#p-tools'" style="padding:20px;">
+		<!-- 配股宝banner -->
+		<div title="配股宝banner" data-options="tools:'#p-tools'" style="padding:20px;">
 		<div id="tb_pgb" style="padding: 5px; height: auto">
 			<div>
 				<table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -223,9 +223,9 @@
 			</div>
 		</div>
 		<table id="edatagrid_pgb"></table>
-		</div> --%>
+		</div>
 
-		<!-- 维胜app-banner -->
+		<!-- 投资达人app-banner -->
 		<div title="维胜APP-banner" data-options="tools:'#p-tools'" style="padding:20px;">
 			<div id="tb_tzdrApp" style="padding: 5px; height: auto">
 				<div>
@@ -352,6 +352,7 @@ openEditIframeWin:function(width,height,title,modelName,TabsId){
 	
 	var rowData=$('#edatagrid').datagrid('getSelected');
 	var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
+
 			if($title.indexOf("配股宝")>-1){
 				rowData=$('#edatagrid_pgb').datagrid('getSelected');
 			}

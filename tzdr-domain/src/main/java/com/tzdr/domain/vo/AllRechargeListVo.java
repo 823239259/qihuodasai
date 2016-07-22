@@ -116,7 +116,7 @@ private static final long serialVersionUID = 6997408108243390441L;
 		} else if (Constant.Source.TZDR == this.getSource()) {
 			this.setSourceStr("维胜");
 		} else if (Constant.Source.PGB == this.getSource()) {
-			this.setSourceStr("维胜");
+			this.setSourceStr("配股宝");
 		}
 		return sourceStr;
 	}
@@ -420,6 +420,9 @@ private static final long serialVersionUID = 6997408108243390441L;
 		}
 		if (Constant.PaymentChannel.UM_PAY==tempChannel){
 			return "联动优势";
+		}
+		if (Constant.PaymentChannel.EASE_PAY==tempChannel){
+			return "易支付";
 		}
 		return "";
 	}

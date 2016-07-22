@@ -24,8 +24,26 @@
 				<td>
 					<input type="hidden" name="typeKey" value="${dataMap.typeKey}" />
 					<input type="hidden" name="typeName" value="${dataMap.typeName}" />
-					<input class="easyui-combobox" id="valueKey" name="valueKey" value="${dataMap.valueKey}" 
-							data-options="url:'${ctx}/admin/smsChannel/getSmsChannel?typeKey=smsChannel',valueField:'valueKey',textField:'valueName',panelHeight:'auto',required:true" />
+					<%-- <input class="easyui-combobox" id="valueKey" name="valueKey" value="${dataMap.valueKey}" 
+							data-options="url:'${ctx}/admin/smsChannel/getSmsChannel?typeKey=smsChannel&currentTypeKey=${dataMap.typeKey}',valueField:'valueKey',textField:'valueName',panelHeight:'auto',required:true" /> --%>
+					<c:choose>
+						<c:when test="${dataMap.typeKey=='smsContentRegister'}">
+							<input class="easyui-combobox" id="valueKey" value="${dataMap.valueKey}" name="valueKey" data-options='
+										url:"${ctx}/admin/component/dataMapCombobox?key=smsChannel&includes=1,2,3",
+										valueField:"id",
+										panelHeight:100,
+										required:true,
+										textField:"text"'>
+						</c:when>
+						<c:otherwise>
+							<input class="easyui-combobox" id="valueKey" value="${dataMap.valueKey}" name="valueKey" data-options='
+										url:"${ctx}/admin/component/dataMapCombobox?key=smsChannel&includes=1,2",
+										valueField:"id",
+										panelHeight:100,
+										required:true,
+										textField:"text"'>
+						</c:otherwise>
+					</c:choose>
 					<input type="hidden" id="valueName" name="valueName" value="${dataMap.valueName}" />
 					<input type="hidden" name="weight" value="${dataMap.weight}" />
 				</td>

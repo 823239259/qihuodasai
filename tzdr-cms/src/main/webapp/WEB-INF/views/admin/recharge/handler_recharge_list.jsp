@@ -40,7 +40,6 @@
             </tr>
        </thead>
     </table>
-        <shiro:hasPermission name="sys:finance:rechargeHand:recharge">
 	    <div id="dg003Toolbar">
 	       <form id="queryForm" method="post">
 		     <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -74,15 +73,20 @@
 	            <tr>
 	                <td class="label">&nbsp;</td>
 	                <td colspan="3">
+	                 <shiro:hasPermission name="sys:finance:rechargeHand:view"> 
 	                <a id="btn" href="#" onclick="$.easyui.datagridQuery('dg003','queryForm')" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
-	                <a id="excelBtn" href="#" onclick="$.easyui.exportExcel('dg003','queryForm')" class="easyui-linkbutton" data-options="iconCls:'icon-excel'">导出</a>
+	                </shiro:hasPermission>
+	                 <shiro:hasPermission name="sys:finance:rechargeHand:export">                
+	               		 <a id="excelBtn" href="#" onclick="$.easyui.exportExcel('dg003','queryForm')" class="easyui-linkbutton" data-options="iconCls:'icon-excel'">导出</a>
+	                </shiro:hasPermission>
 	                </td>
 	            </tr>
 	          </table>
 	        </form>
+	        <shiro:hasPermission name="sys:finance:rechargeHand:recharge"> 
 	            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="handlerPayOpen()">充值</a>
+	        </shiro:hasPermission>
 	    </div>
-        </shiro:hasPermission>
     </div>
      
 </div>

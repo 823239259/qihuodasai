@@ -22,6 +22,7 @@ import com.tzdr.api.constants.BusinessTypeEnum;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.business.app.service.FTradeService;
+import com.tzdr.business.service.togetherFuture.FTogetherTradeService;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.app.vo.FTradeParamsVo;
 import com.tzdr.domain.app.vo.FTradeVo;
@@ -45,7 +46,8 @@ public class FTradeController {
 	@Autowired
 	private FTradeService fTradeService;
 	
-	
+	@Autowired
+	private FTogetherTradeService fTogetherTradeService;
 	
 	/**
 	* @Title: goods    
@@ -73,13 +75,15 @@ public class FTradeController {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("tradeList", dataList);
 		
+		// 操盘页面  获取下期货合买活动图片显示
+		dataMap.put("isFtogetherActivityTime",fTogetherTradeService.checkActivityTime());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,null,dataMap);
 	}
 	
 	
 	/**
 	 * 获取操盘参数
-	 * @param businessType 业务类型 0.富时A50  6.原油 7.恒指 8.国际综合
+	 * @param businessType 业务类型 0.富时A50  6.原油 7.恒指 8.国际综合 9.小恒指
 	 * @param modelMap
 	 * @param request
 	 * @param response
@@ -94,10 +98,11 @@ public class FTradeController {
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.is.error.");
 		}
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		// 获取A50、恒指、原油的操盘参数
+		// 获取A50、恒指、原油、小恒指的操盘参数
 		if (BusinessTypeEnum.A50.getValue()==businessType 
 				|| BusinessTypeEnum.CRUDE.getValue()==businessType 
-				|| BusinessTypeEnum.HSI.getValue()==businessType ){
+				|| BusinessTypeEnum.HSI.getValue()==businessType 
+				|| BusinessTypeEnum.LHSI.getValue()==businessType){
 			 int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
 			 List<FTradeParamsVo> fTradeParamsVos  = fTradeService.queryFtradeParams(cfgBusinessType);
 			 // 如果是恒指获取配置的固定手续费

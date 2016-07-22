@@ -59,7 +59,7 @@ public class FSimpleProductAppendLevelMoneyService extends BaseServiceImpl<FSimp
 				+ "w_user w,w_user_verified v "
 				+ "WHERE f.uid=w.id AND w.id=v.uid AND fut.program_no=f.program_no "
 				+ "AND f.type in (1,2,3,4,20) AND f.status in (0,1)"
-				+ "ORDER BY f.status ASC,appendDate ASC,updateTime DESC";
+				+ "ORDER BY f.status ASC,updateTime DESC,appendDate ASC";
 		
 		MultiListParam multilistParam = new MultiListParam(easyUiPage,
 				searchParams, Lists.newArrayList(), sql);

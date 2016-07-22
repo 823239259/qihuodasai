@@ -61,7 +61,7 @@ public class EndPlanServiceImpl extends BaseServiceImpl<WUser, WUserDao> impleme
 				+ " ( SELECT t.activity_type activityType, w.mobile,(SELECT v.tname FROM w_user_verified v WHERE v.uid = w.id) tname,"
 				+ " (SELECT min(w.account) FROM w_account w WHERE w.id = t.account_id) account,"
 				+ " (SELECT min(w.account_name) FROM w_account w WHERE w.id = t.account_id) accountName,"
-				+ " t.program_no,t.lever_money,t.total_lever_money,h.end_sub_time,t.group_id ,t.fee_type feeType"
+				+ " t.program_no,(IFNULL(t.lever_money,0) - IFNULL(t.voucher_actual_money,0)) as lever_money,t.voucher_actual_money,t.total_lever_money,h.end_sub_time,t.group_id ,t.fee_type feeType"
 				+ " FROM w_user_trade t LEFT JOIN w_hand_trade h ON h.trade_id = t.id "
 				+ " LEFT JOIN w_user w ON t.uid = w.id "
 				+ " WHERE 1=1 AND t.fee_type in (2,3) AND h.audit_end_status = 0 AND h.finished_money IS NULL");
@@ -113,7 +113,7 @@ public class EndPlanServiceImpl extends BaseServiceImpl<WUser, WUserDao> impleme
 				+ " ( SELECT t.activity_type activityType, w.mobile,(SELECT v.tname FROM w_user_verified v WHERE v.uid = w.id) tname,"
 				+ " (SELECT min(w.account) FROM w_account w WHERE w.id = t.account_id) account,"
 				+ " (SELECT min(w.account_name) FROM w_account w WHERE w.id = t.account_id) accountName,"
-				+ " t.program_no,t.lever_money,t.total_lever_money,h.end_sub_time,t.group_id,t.fee_type feeType"
+				+ " t.program_no,(IFNULL(t.lever_money,0) - IFNULL(t.voucher_actual_money,0)) as lever_money,t.voucher_actual_money,t.total_lever_money,h.end_sub_time,t.group_id,t.fee_type feeType"
 				+ " FROM w_user_trade t LEFT JOIN w_hand_trade h ON h.trade_id = t.id "
 				+ " LEFT JOIN w_user w ON t.uid = w.id "
 				+ " WHERE 1=1 AND t.fee_type in (2,3) AND h.audit_end_status = 0 "
@@ -167,7 +167,7 @@ public class EndPlanServiceImpl extends BaseServiceImpl<WUser, WUserDao> impleme
 				+ " ( SELECT t.activity_type activityType, w.mobile,(SELECT v.tname FROM w_user_verified v WHERE v.uid = w.id) tname,"
 				+ " (SELECT min(w.account) FROM w_account w WHERE w.id = t.account_id) account,"
 				+ " (SELECT min(w.account_name) FROM w_account w WHERE w.id = t.account_id) accountName,"
-				+ " t.program_no,t.lever_money,t.total_lever_money,h.end_sub_time,h.end_audit_time,"
+				+ " t.program_no,(IFNULL(t.lever_money,0) - IFNULL(t.voucher_actual_money,0)) as lever_money,t.voucher_actual_money,t.total_lever_money,h.end_sub_time,h.end_audit_time,"
 				+ " h.audit_end_status, t.finished_money, t.fee_type feeType,"
 				+ " (SELECT s.realname FROM sys_user s WHERE s.id = h.end_audit_user_id) endAuditUserIdStr "
 				+ " FROM w_user_trade t LEFT JOIN w_hand_trade h ON h.trade_id = t.id "
@@ -261,7 +261,12 @@ public class EndPlanServiceImpl extends BaseServiceImpl<WUser, WUserDao> impleme
 				if (flag){
 					SMSSender.getInstance().sendByTemplateClasspath(dataMapService.getSmsContentOthers(), "togetherPlanEnd01", mobile,varUserTrade.getGroupId(),failCause);
 				}else{
-					PgbSMSSender.getInstance().sendByTemplateClasspath(dataMapService.getSmsContentOthers(), "planEnd01", mobile,varUserTrade.getProgramNo(),failCause);
+					if (StringUtil.equals(activityType,String.valueOf(UserTrade.ActivityType.MONTH_TRADE))){
+						PgbSMSSender.getInstance().sendByTemplateClasspath(dataMapService.getSmsContentOthers(), "monthEndFail", mobile,varUserTrade.getProgramNo(),failCause);
+					}else
+					{
+						PgbSMSSender.getInstance().sendByTemplateClasspath(dataMapService.getSmsContentOthers(), "planEnd01", mobile,varUserTrade.getProgramNo(),failCause);
+					}
 				}
 			}
 			catch(Exception e) {e.printStackTrace();}

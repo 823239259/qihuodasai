@@ -3,6 +3,7 @@ package com.tzdr.api.util;
 import javax.servlet.http.HttpServletRequest;
 
 import jodd.util.Base64;
+import jodd.util.StringUtil;
 
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.support.CacheUser;
@@ -46,6 +47,9 @@ public class AuthUtils{
 	 */
 	public static CacheUser getCacheUser(HttpServletRequest request){
 		String token = request.getHeader(DataConstant.APP_TOKEN);
+		if (StringUtil.isBlank(token) || StringUtil.equals("null",token)){
+			return new CacheUser();
+		}
 		return DataConstant.CACHE_USER_MAP.get(token);
 	}
 	

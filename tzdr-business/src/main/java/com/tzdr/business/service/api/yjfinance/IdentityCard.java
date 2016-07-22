@@ -103,7 +103,7 @@ public class IdentityCard {
 			SimpleCheckByJsonResponse scbr = client.simpleCheckByJson(scbj);			
 			String result = scbr.getSimpleCheckByJsonResult();	
 			
-			log.debug("实名认证返回结果：{}",result);
+			log.info("实名认证返回结果：{}",result);
 			queryBalanceWarning();
 			
 			JSONObject resultJson=JSONObject.parseObject(result);

@@ -243,7 +243,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else if (TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS.equals(rechargeList.getSysType())) {
 						userFund.setType(TypeConvert.USER_FUND_C_TYPE_ARTIFICIAL_DEDUCTIONS);
@@ -269,7 +269,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else {
 						throw new WuserDoesNotExistException("com.tzdr.business.userfund.message",null);
@@ -337,7 +337,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else if (TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS.equals(rechargeList.getSysType())) {
 						userFund.setType(TypeConvert.USER_FUND_C_TYPE_ARTIFICIAL_DEDUCTIONS);
@@ -363,7 +363,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else {
 						throw new WuserDoesNotExistException("com.tzdr.business.userfund.message",null);
@@ -425,7 +425,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else if (TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS.equals(rechargeList.getSysType())) {
 						userFund.setType(TypeConvert.USER_FUND_C_TYPE_ARTIFICIAL_DEDUCTIONS);
@@ -451,7 +451,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else {
 						throw new WuserDoesNotExistException("com.tzdr.business.userfund.message",null);
@@ -520,7 +520,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else if (TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS.equals(rechargeList.getSysType())) {
 						userFund.setType(TypeConvert.USER_FUND_C_TYPE_ARTIFICIAL_DEDUCTIONS);
@@ -546,7 +546,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 						opVo.add(vo.amount);
 						log.info(TypeConvert.printPaymentOperationLog(opVo));
 						
-						sendEmailAccountAdjustment(vo);
+						//sendEmailAccountAdjustment(vo);
 					}
 					else {
 						throw new WuserDoesNotExistException("com.tzdr.business.userfund.message",null);

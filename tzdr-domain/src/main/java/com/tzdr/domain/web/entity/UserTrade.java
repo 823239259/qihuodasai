@@ -13,6 +13,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.tzdr.common.domain.BaseEntity;
 
+import java.math.BigDecimal;
+
 
 @Entity
 @Table(name="w_user_trade")
@@ -45,6 +47,12 @@ public class UserTrade  extends BaseEntity {
 		 * 合买股票
 		 */
 		public static final int TOGETHER_TRADE = 4;
+		
+		
+		/**
+		 *  月月配
+		 */
+		public static final int MONTH_TRADE = 5;
 
 			
 	}
@@ -53,7 +61,7 @@ public class UserTrade  extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * 0:按天配资(随心配)，1:按月配资,2:追加按天配资
+	 * 0:按天配资(随心配)，1:按月配资,2:追加按天配资 
 	 */ 
 	private Short type;
 	/**
@@ -128,6 +136,23 @@ public class UserTrade  extends BaseEntity {
 	 * 配资周期（为月配资准备）
 	*/
 	private Long deadline;
+	/**
+	 * 优惠券ID（类型为代金券）
+	 */
+	@Column
+	private String voucherId;
+	/**
+	 * 代金券使用金额
+	 */
+	@Column
+	private BigDecimal voucherActualMoney;
+
+	/**
+	 * 抵扣券抵扣手续费
+	 */
+	@Column
+	private BigDecimal discountActualMoney;
+
 	/**
 	 * 预计交易结束时间
 	 */
@@ -251,12 +276,26 @@ public class UserTrade  extends BaseEntity {
 	 * 活动类型 0：没有活动，1：8800活动 2:6600活动
 	 */
 	private int activityType=0;
-	
+
 	/**
 	 * 拥金状态 1：为成功 、2 为失败
 	 */
 	private String commissionState;
-	
+
+	/**
+	 * 抵扣保证金
+	 */
+	private Double deductionLeverMoney;
+
+	@Column(name="deduction_lever_money")
+	public Double getDeductionLeverMoney() {
+		return deductionLeverMoney;
+	}
+
+	public void setDeductionLeverMoney(Double deductionLeverMoney) {
+		this.deductionLeverMoney = deductionLeverMoney;
+	}
+
 	public String getCommissionState() {
 		return commissionState;
 	}
@@ -692,5 +731,28 @@ public class UserTrade  extends BaseEntity {
 	public void setNewStatus(Integer newStatus) {
 		this.newStatus = newStatus;
 	}
-	
+
+	public String getVoucherId() {
+		return voucherId;
+	}
+
+	public void setVoucherId(String voucherId) {
+		this.voucherId = voucherId;
+	}
+
+	public BigDecimal getVoucherActualMoney() {
+		return voucherActualMoney;
+	}
+
+	public void setVoucherActualMoney(BigDecimal voucherActualMoney) {
+		this.voucherActualMoney = voucherActualMoney;
+	}
+
+	public BigDecimal getDiscountActualMoney() {
+		return discountActualMoney;
+	}
+
+	public void setDiscountActualMoney(BigDecimal discountActualMoney) {
+		this.discountActualMoney = discountActualMoney;
+	}
 }

@@ -19,19 +19,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Maps;
+import com.alibaba.fastjson.JSONObject;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.request.BankTransferRequest;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.api.service.ApiUserService;
+import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
 import com.tzdr.common.api.bbpay.util.BbConfigUtil;
-import com.tzdr.common.api.bbpay.vo.PayParamsObject;
+import com.tzdr.common.api.payease.PayEase;
+import com.tzdr.common.api.payease.util.PayEaseUtil;
+import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.UserVerified;
@@ -163,7 +166,30 @@ public class UserPayController {
 				
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"submit.success.");
 	}	
-	
+	/**
+	 * ping++支付
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/pingplusplus",method = RequestMethod.POST)
+	public String pingplusplus(HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user = this.payService.getUser(uid);
+		String paymoney=request.getParameter("money");
+		String payWay = request.getParameter("payWay");
+		if(paymoney != null && Integer.parseInt(paymoney) > 0){
+			int status=0;
+			String paytype = "3" ;
+			int source = 1;
+			String ip = IpUtils.getIpAddr(request);
+			String orderNo = ChargeExample.randomNo();
+			String charage = payService.doSavePingPPRecharge(payWay,source,user,status,"",paymoney,ip,paytype,orderNo);
+			System.out.println(charage);
+			return charage;
+		}
+		return null;
+	}
 	/**
 	* @Title: ebankrecharge    
 	* @Description: 网页充值接口 
@@ -174,37 +200,35 @@ public class UserPayController {
 	 */
 	@RequestMapping(value = "/ebankrecharge")
 	@ResponseBody
-	public ApiResult ebankrecharge(Double money,HttpServletResponse response,HttpServletRequest request){
+	public ApiResult ebankrecharge(String money,HttpServletResponse response,HttpServletRequest request){
 		
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		
+		Double  dbmoney = Double.valueOf(money);
 		if(money == null){  //判断充值金额不能为空
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_NOT_NULL,"The money cannot be empty");
 		}
 		
-		if(money < 1 || money > 5000000){  //判断金额范围
+		if(dbmoney < 1){  //判断金额范围
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"The money must be greater than or equal to 1 less than or equal to 5000000");
 		}
 		
-		if(money > Math.floor(money*100)/100){  //判断小数是否保留2位
+		if(dbmoney > Math.floor(dbmoney*100)/100){  //判断小数是否保留2位
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"Top-up amount can only keep 2 decimal places");
 		}
 		
+		//校验用户当日通过手机app的充值金额，不能超过10w
+		/*Double  userCharges =  payService.getUserDayCharges(uid,PayEaseConfigUtil.getContext("tzdr_app_account"));
+		if (!ObjectUtil.equals(null,userCharges) && BigDecimalUtils.add(userCharges, dbmoney) >= 100000){
+			return new ApiResult(false,ResultStatusConstant.PayConstant.OVER_MAX_DAY_CHARGE,"over.max.day.charges,max.money less than 100000");
+		}
+		*/
 		WUser user = this.payService.getUser(uid);   //获取用户信息
 		
 		String ip=IpUtils.getIpAddr(request);	 //获取客户端IP
 		
-		PayParamsObject payParamsObject = new PayParamsObject(ip,null,DataConstant.PayStatus.NO_PROCESSING, money.toString(),DataConstant.BBPAY_PNC);  //创建币币支付对象
-		
-		Map<String, Object> bibiParams = Maps.newHashMap();
-		bibiParams = payService.bbPay(user, payParamsObject,Constant.Source.TZDR,APP_SRETURL);
-
-		Map<String,Object> dataMap = new HashMap<String,Object>(); 
-		dataMap.put("mobilePayUrl", bibiParams.get("mobilePayUrl"));
-		dataMap.put("merchantaccount", bibiParams.get("merchantaccount"));
-		dataMap.put("data", bibiParams.get("data"));
-		dataMap.put("encryptkey", bibiParams.get("encryptkey"));
-		
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",dataMap);
+	   PayEaseParams  payEaseParams = new PayEaseParams(PayEase.WAP_PAY_PMODE, money, ip,DataConstant.PayStatus.NO_PROCESSING,"");
+	   payEaseParams = this.payService.PayEasePay(user, PayEaseUtil.tzdrAppPay(payEaseParams),Constant.Source.TZDR,Constant.SystemFlag.TZDR_APP);
+	   System.out.println(JSONObject.toJSONString(payEaseParams));
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",payEaseParams);
 	}
 }

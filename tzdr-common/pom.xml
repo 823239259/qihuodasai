@@ -198,5 +198,34 @@
 			</systemPath>
 		</dependency>
 		<!-- 币币支付新增jar -->
+		<!-- 首信易支付新增jar -->
+		<dependency>
+			<groupId>bouncycastle</groupId>
+			<artifactId>payease</artifactId>
+			<version>0.1</version>
+			<scope>system</scope>
+			<systemPath>
+			${project.basedir}/lib/BouncyCastle_s.jar
+			</systemPath>
+		</dependency>
+		<!-- 首信易付新增jar -->
+		<!-- 阿里大鱼新增jar -->
+		<dependency>  
+			<groupId>taobao.sms</groupId>
+			<artifactId>taobao-sms</artifactId>
+			<version>0.1</version>
+			<scope>system</scope>
+			<systemPath>
+			${project.basedir}/lib/taobao-sms-sdk.jar
+			</systemPath>
+		</dependency>
+		<!-- ping++ -->
+		<dependency> 
+		    <groupId>Pingplusplus</groupId>
+		    <artifactId>pingpp-java</artifactId>
+		    <version>2.1.7</version>
+		    <type>jar</type>
+		</dependency>
+		<!-- 阿里大鱼新增jar -->
 	</dependencies>
 </project>

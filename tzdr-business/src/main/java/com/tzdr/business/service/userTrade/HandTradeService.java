@@ -646,7 +646,7 @@ public class HandTradeService extends BaseServiceImpl<HandTrade, HandTradeDao> {
 
 		String sql = " SELECT userTrade.activity_type activityType, userTrade.fee_type feeType,userTrade.new_status newStatus,userTrade.trade_start tradeStart, handTrade.id, userTrade.id tradeId, usr.mobile, uver.tname, sum(userTrade.lever_money) leverMoney,"
 				+ " sum(userTrade.money) money, sum( userTrade.total_lever_money ) totalLeverMoney, userTrade.warning, userTrade.`open` openline,"
-				+ " userTrade.group_id groupId, handTrade.audit_status auditStatus, handTrade.create_time createTime FROM w_hand_trade handTrade,"
+				+ " userTrade.group_id groupId, handTrade.audit_status auditStatus, handTrade.create_time createTime,userTrade.voucher_actual_money voucherActualMoney FROM w_hand_trade handTrade,"
 				+ " w_user_trade userTrade, w_user usr, w_user_verified uver WHERE userTrade.id = handTrade.trade_id AND usr.id = userTrade.uid "
 				+ "AND usr.id = uver.uid AND handTrade.`type` in (1,2) and userTrade.fee_type in (2,3)  and handTrade.`audit_status` = 0  GROUP BY userTrade.group_id ORDER BY handTrade.create_time ASC ";
 
@@ -655,7 +655,7 @@ public class HandTradeService extends BaseServiceImpl<HandTrade, HandTradeDao> {
 					+ " ( SELECT userTrade.activity_type activityType, userTrade.fee_type feeType,userTrade.new_status newStatus,handTrade.id, userTrade.id tradeId, usr.mobile, uver.tname,"
 					+ " sum(userTrade.lever_money) leverMoney, sum(userTrade.money) money, sum( userTrade.total_lever_money ) totalLeverMoney, userTrade.warning, userTrade.`open` openline,"
 					+ " userTrade.group_id groupId, userTrade.account, acc.account_name accountName, handTrade.audit_status auditStatus, "
-					+ " handTrade.create_time createTime, handTrade.update_user auditUser, handTrade.update_time auditTime FROM "
+					+ " handTrade.create_time createTime, handTrade.update_user auditUser, handTrade.update_time auditTime,userTrade.voucher_actual_money voucherActualMoney,usr.user_type userType FROM "
 					+ " w_hand_trade handTrade, w_user_trade userTrade, w_user usr, w_user_verified uver, w_account acc WHERE userTrade.id = handTrade.trade_id AND usr.id = userTrade.uid AND usr.id = uver.uid AND handTrade.`type` in (0,1,2) "
 					+ " AND handTrade.`audit_status` = 1 and userTrade.fee_type in (0,1,2,3)  AND acc.id = userTrade.account_id GROUP BY userTrade.group_id ORDER BY handTrade.update_time DESC"
 					+ " ) "
@@ -664,7 +664,7 @@ public class HandTradeService extends BaseServiceImpl<HandTrade, HandTradeDao> {
 					+ " sum(userTrade.lever_money) leverMoney, sum(userTrade.money) money, sum( userTrade.total_lever_money ) totalLeverMoney,"
 					+ " userTrade.warning, userTrade.`open` openline, userTrade.group_id groupId, '' account, '' accountName, "
 					+ " handTrade.audit_status auditStatus, handTrade.create_time createTime, handTrade.update_user auditUser,"
-					+ " handTrade.update_time auditTime FROM w_hand_trade handTrade, w_user_trade userTrade, w_user usr, w_user_verified uver "
+					+ " handTrade.update_time auditTime,userTrade.voucher_actual_money voucherActualMoney,usr.user_type userType FROM w_hand_trade handTrade, w_user_trade userTrade, w_user usr, w_user_verified uver "
 					+ " WHERE userTrade.id = handTrade.trade_id AND usr.id = userTrade.uid AND usr.id = uver.uid AND handTrade.`type` in (0,1,2) AND "
 					+ " handTrade.`audit_status` in(0,2) and userTrade.fee_type in (0,1,2,3) GROUP BY userTrade.group_id "
 					+ " )"
@@ -767,7 +767,12 @@ public class HandTradeService extends BaseServiceImpl<HandTrade, HandTradeDao> {
 				this.togetherUserListService.generateTogetherUsers(userTrade.getGroupId());
 				new SMSSenderThread(wuser.getMobile(), smsTemplate, map).start();
 
-			} else {
+			}
+			else if (UserTrade.ActivityType.MONTH_TRADE == wellGoldHandVo.getActivityType()) {
+				smsTemplate = "month.trade.ok.code.template";
+				new SMSPgbSenderThread(wuser.getMobile(), smsTemplate, map).start();
+			}
+			else {
 				new SMSPgbSenderThread(wuser.getMobile(), smsTemplate, map).start();
 			}
 
@@ -781,7 +786,8 @@ public class HandTradeService extends BaseServiceImpl<HandTrade, HandTradeDao> {
 
 					if (UserTrade.ActivityType.TOGETHER_TRADE == wellGoldHandVo.getActivityType()) {
 						new SMSSendForContentThread(wuser.getMobile(), notEnoughContent, 2000).start();
-					} else {
+						
+					} else if (UserTrade.ActivityType.MONTH_TRADE != wellGoldHandVo.getActivityType()){
 						new SMSPgbSendForContentThread(wuser.getMobile(), notEnoughContent, 2000).start();
 					}
 

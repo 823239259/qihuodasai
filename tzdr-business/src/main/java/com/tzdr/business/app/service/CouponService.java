@@ -111,4 +111,26 @@ public class CouponService extends BaseServiceImpl<FSimpleCoupon, FSimpleCouponD
 		
 		return fSimpleCoupon;
 	}
+	
+	/**
+	 * @Description 根据适用范围获取用户优惠券 
+	 * @param scope
+	 * @param userId
+	 * @return
+	 */
+	/*@SuppressWarnings("unchecked")
+	public List<FSimpleCoupon> getFSimpleCouponByScope(String scope,String userId){
+		if(StringUtil.isBlank(scope) || StringUtil.isBlank(userId)){
+			return null;
+		}
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT * ");
+		sql.append(" FROM f_simple_coupon f ");
+		sql.append(" WHERE f.user_id=? AND f.scope like ? AND F.AND fsc.status = 2 ");
+		sql.append(" AND fsc.deadline >= UNIX_TIMESTAMP(NOW()) ");
+		sql.append(" AND fsc.deleted = 0 GROUP BY fsc.name");
+		sql.append(" ORDER BY f.grant_time DESC ");
+		List<FSimpleCoupon> dataList =this.getEntityDao().queryListBySql(sql.toString(), FSimpleCoupon.class, null, new Object[]{userId,scope});
+		return dataList; 
+	}*/
 }

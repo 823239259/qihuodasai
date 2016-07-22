@@ -41,7 +41,8 @@ public class NoticeRecord extends BaseEntity {
 	private Long noticeTime=Dates.getCurrentLongDate();
 	
 	/**
-	 * 通知类型： 1-次日余额不足电话通知  2-补仓提醒电话通知  3-次日余额不足短信通知  4-当日不够扣费短信通知 5-低于补仓线时发送的短信 
+	 * 通知类型： 1-次日余额不足电话通知  2-补仓提醒电话通知  3-次日余额不足短信通知  4-当日不够扣费短信通知 5-低于补仓线时发送的短信  
+	 * 		  11-月月配即将到期定时提醒短信   12月月配自动延期成功或失败短信
 	 */
 	private Integer type;
 

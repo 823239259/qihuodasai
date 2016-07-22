@@ -6,9 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.tzdr.business.service.userTrade.UserTradeService;
-import com.tzdr.common.utils.SpringUtils;
-
 /**
  * 
  * <p></p>
@@ -27,8 +24,8 @@ public class AdjustmentTransferJob  extends QuartzJobBean{
 			throws JobExecutionException {
 		
 		logger.info("------------------验资中自动划账任务--------begin-------------------");
-		UserTradeService userTradeService = SpringUtils.getBean(UserTradeService.class);
-		userTradeService.adjustmentTransfer();
+		/*UserTradeService userTradeService = SpringUtils.getBean(UserTradeService.class);
+		userTradeService.adjustmentTransfer();*/
 		logger.info("------------------验资中自动划账任务--------end-------------------");
 		
 	}

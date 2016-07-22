@@ -33,7 +33,7 @@ public class FSimpleCouponWebVo implements Serializable{
 	private String title;
 	
 	/**
-	 * 优惠券类型：1-现金红包，2-代金券，3-折扣券
+	 * 优惠券类型：1-现金红包，2-代金券，3-折扣券，6-抵扣券
 	 */
 	@SqlColumn
 	private Short type;
@@ -69,6 +69,12 @@ public class FSimpleCouponWebVo implements Serializable{
 	 */
 	@SqlColumn
 	private Short status;
+
+	/**
+	 * 适用范围
+	 */
+	@SqlColumn
+	private String scope;
 
 	public String getId() {
 		return id;
@@ -173,5 +179,13 @@ public class FSimpleCouponWebVo implements Serializable{
 
 	public void setStatus(Short status) {
 		this.status = status;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public void setScope(String scope) {
+		this.scope = scope;
 	}
 }

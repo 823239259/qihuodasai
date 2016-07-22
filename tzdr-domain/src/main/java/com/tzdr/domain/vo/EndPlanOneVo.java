@@ -4,11 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.tzdr.common.utils.AllowExcel;
-import com.tzdr.common.utils.SqlColumn;
-import com.tzdr.common.utils.SqlOrder;
-import com.tzdr.common.utils.TypeConvert;
-import com.tzdr.domain.cache.CacheManager;
-import com.tzdr.domain.cache.DataDicKeyConstants;
 
 /**
  * 
@@ -47,8 +42,11 @@ public class EndPlanOneVo implements Serializable {
 	private String programNo;
 
 
-	@AllowExcel(name = "配资保证金")
+	@AllowExcel(name = "保证金")
 	private Double leverMoney;
+
+	@AllowExcel(name = "代金券")
+	private BigDecimal voucherMoney;
 
 	// 总操盘资金
 
@@ -132,6 +130,14 @@ public class EndPlanOneVo implements Serializable {
 
 	public void setLeverMoney(Double leverMoney) {
 		this.leverMoney = leverMoney;
+	}
+
+	public BigDecimal getVoucherMoney() {
+		return voucherMoney;
+	}
+
+	public void setVoucherMoney(BigDecimal voucherMoney) {
+		this.voucherMoney = voucherMoney;
 	}
 
 	public Double getTotalLeverMoney() {

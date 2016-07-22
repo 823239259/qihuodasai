@@ -1243,6 +1243,31 @@ public class BaseJpaDaoImpl<T, ID extends Serializable> extends
 		List<Map<String,Object>> data = query.getResultList();
 		return data;
 	}
+
+	@Override
+	public Map<String, Object> queryMapObj(String sql, Object... params) {
+		Query query = this.em.createNativeQuery(sql);
+		
+		SQLQuery sqlQuery = null;
+		try {
+			Field field = query.getClass().getDeclaredField("query");
+			field.setAccessible(true);
+			sqlQuery = (SQLQuery)field.get(query);
+			field.setAccessible(false);
+			sqlQuery.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		int i = 0;
+		if (params != null && params.length > 0) {
+			for (Object obj:params) {
+				query.setParameter(++i, obj);
+			}
+		}
+		Map<String,Object> data = (Map<String, Object>) query.getSingleResult();
+		return data;
+	}
 	
 /*
 	@Override

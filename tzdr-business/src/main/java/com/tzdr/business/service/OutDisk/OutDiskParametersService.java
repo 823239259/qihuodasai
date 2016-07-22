@@ -69,6 +69,8 @@ public class OutDiskParametersService extends BaseServiceImpl<OutDiskParameters,
 		odp.setMntranActualLever(o.getMntranActualLever());
 		odp.setDaxtranActualLever(o.getDaxtranActualLever());
 		odp.setNikkeiTranActualLever(o.getNikkeiTranActualLever());
+		odp.setHstranActualLever(o.getHstranActualLever());
+		odp.setAgtranActualLever(o.getAgtranActualLever());
 		setOperateLog(odp,"修改国际综合参数设置","edit");
 		super.update(odp);
 	}

@@ -23,7 +23,7 @@
 </head>
 <body>
 
-	<shiro:hasPermission name="sys:accountant:userFund:export">
+	<shiro:hasPermission name="sys:accountant:userFund:view">
 <!-- toolbar="#toolbar" -->
 	<table id="dg003"  class="easyui-datagrid" width="100%" style="height:auto;"
              url="${ctx}/admin/userFund/data" pagination="true" showFooter="true"

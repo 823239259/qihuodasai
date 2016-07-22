@@ -11,7 +11,8 @@ public enum BusinessTypeEnum {
 	    A50_CONFIG(5),
 	    CRUDE(6), 
 	    HSI(7), 
-	    MULTIPLE(8);
+	    MULTIPLE(8),
+		LHSI(9);
 	    
 	    private int value;
 	 
@@ -43,6 +44,9 @@ public enum BusinessTypeEnum {
 	    	if (BusinessTypeEnum.MULTIPLE.getValue()==businessType){
 	    		return true;
 	    	}
+	    	if (BusinessTypeEnum.LHSI.getValue()==businessType){
+	    		return true;
+	    	}
 	    	return false;
 	    }
 	    
@@ -65,6 +69,9 @@ public enum BusinessTypeEnum {
 	    	}
 	    	if (BusinessTypeEnum.MULTIPLE.getValue()==businessType){
 	    		return "投资国际综合方案申请(划款)。";
+	    	}
+	    	if (BusinessTypeEnum.LHSI.getValue()==businessType){
+	    		return "投资小恒指方案申请(划款)。";
 	    	}
 	    	return "";
 	    }

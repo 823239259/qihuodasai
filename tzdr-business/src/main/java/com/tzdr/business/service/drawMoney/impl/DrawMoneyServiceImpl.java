@@ -640,6 +640,10 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList,WithdrawalDao
 			if (withdrawSetting == Constant.PaymentChannel.BB_PAY){
 				handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.BB_FEE);
 			}
+			// 易支付支付手续费另算
+			if (withdrawSetting == Constant.PaymentChannel.EASE_PAY){
+				handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
+			}
 			Double handleFee = 0.00;
 			//提现金额
 			Double dmoney = Double.valueOf(money);
@@ -657,7 +661,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList,WithdrawalDao
 			drawList.setMoney(dmoney);
 			drawList.setCard(bankcard);
 			drawList.setNo(orderId);
-			drawList.setFee(2);//手续费2元
+			drawList.setFee(handleFee);//手续费2元
 			drawList.setName(user.getUserVerified().getTname());
 			drawList.setStatus((short)21);//提现处理中
 			drawList.setBank(paymentSupportBank.getBankName());
@@ -759,6 +763,10 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList,WithdrawalDao
 			if (withdrawSetting == Constant.PaymentChannel.BB_PAY){
 				handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.BB_FEE);
 			}
+			//易支付手续费另算
+			if (withdrawSetting == Constant.PaymentChannel.EASE_PAY){
+				handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
+			}
 			Double handleFee = 0.00;
 			//提现金额
 			Double dmoney = Double.valueOf(money);
@@ -776,7 +784,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList,WithdrawalDao
 			drawList.setMoney(dmoney);
 			drawList.setCard(bankcard);
 			drawList.setNo(orderId);
-			drawList.setFee(2);//手续费2元
+			drawList.setFee(handleFee);//手续费2元
 			drawList.setName(user.getUserVerified().getTname());
 			drawList.setStatus((short)21);//提现处理中
 			drawList.setBank(paymentSupportBank.getBankName());
@@ -839,5 +847,17 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList,WithdrawalDao
 			userFundService.save(fund);
 			
 			return drawList;
+	}
+
+
+	@Override
+	public void updatDrawPayeaseInfo(String id, String vmid, String secret) {
+		DrawList drawList=this.getEntityDao().get(id);
+		if(ObjectUtil.equals(null, drawList)){
+			return;
+		}
+		drawList.setNBank(vmid);
+		drawList.setNArea(secret);
+		super.update(drawList);
 	}
 }

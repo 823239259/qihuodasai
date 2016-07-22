@@ -84,8 +84,11 @@
 	                <td>
 						<select id="source" class="easyui-combobox" name="source" style="width:100px;height:30px;">
 						    <option value="">请选择</option>
-						    <option value="0">维胜</option>
-						    <option value="1">维胜</option>
+						    <option value="7">维胜APP</option>
+						    <option value="1">维胜Web</option>
+						    <option value="5">配股宝Web</option>
+						    <option value="2">配股宝Wap</option>
+						    <option value="6">喊单直播间</option>
 						</select>
 					</td>
 	                <td class="label right">&nbsp;</td>

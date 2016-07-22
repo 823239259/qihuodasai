@@ -106,7 +106,7 @@ public class RechargeAdditionalVo implements Serializable {
 	private String  ip;
 
 	/**
-	 * 充值来源（1:投资达人 2：配股宝）
+	 * 充值来源（1:维胜 2：配股宝）
 	 */
 	private Integer  source;
 	
@@ -295,7 +295,7 @@ public class RechargeAdditionalVo implements Serializable {
 	public String getShowSource() {
 		if (!ObjectUtil.equals(null, this.source) 
 				&& Constant.Source.PGB==this.source){
-			return "维胜";
+			return "配股宝";
 		}
 		return "维胜";
 	}

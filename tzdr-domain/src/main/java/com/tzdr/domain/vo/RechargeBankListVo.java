@@ -211,7 +211,7 @@ public class RechargeBankListVo implements Serializable {
 				&& Constant.Source.PGB==this.source){
 			return "配股宝";
 		}
-		return "投资达人";
+		return "维胜";
 	}
 
 	public void setSource(Integer source) {

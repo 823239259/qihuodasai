@@ -18,15 +18,20 @@ public class FSimpleCouponUseVo implements Serializable{
 	private String name;
 
 	/**
-	 * 优惠券类型：1-现金红包，2-代金券，3-折扣券，4-实物，5-优惠券
+	 * 优惠券类型：1-现金红包，2-代金券，3-折扣券，4-实物，5-优惠券，6-抵扣卷
 	 */
 	private int type;
 
 	/**
-	 * 使用范围：存储国际期货的业务ID 【0.富时A50  （1.沪金     2.沪银   3.沪铜   4.橡胶）=5.商品期货  6.原油    7. 恒指  8.国际综合】
+	 * 使用范围：存储国际期货的业务ID 【0.富时A50  （1.沪金     2.沪银   3.沪铜   4.橡胶）=5.商品期货  6.原油    7. 恒指  8.国际综合 5.商品综合 10港股，11 A股 12 股票合买 13小恒指】
 	 * 多个使用逗号分隔，如：0,5,6,7,8
 	 */
 	private String scope;
+
+	/**
+	 * 使用平台
+	 */
+	private String platform;
 
 	/**
 	 * 优惠券面值：类型为现金红包和代金券时，面值单位为元，类型为折扣券时，面值单位为折，并且数值不能大于10；
@@ -97,6 +102,14 @@ public class FSimpleCouponUseVo implements Serializable{
 
 	public void setScope(String scope) {
 		this.scope = scope;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
 	}
 
 	public BigDecimal getMoney() {

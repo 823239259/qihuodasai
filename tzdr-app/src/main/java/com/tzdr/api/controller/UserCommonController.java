@@ -28,6 +28,7 @@ import com.tzdr.api.util.AuthUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.togetherFuture.FTogetherTradeService;
 import com.tzdr.business.service.userTrade.FSimpleParitiesService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.domain.cache.CacheManager;
@@ -64,6 +65,10 @@ public class UserCommonController {
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
 	
+	@Autowired
+	private FTogetherTradeService  fTogetherTradeService;
+	
+	
 	/**
 	* @Title: getbalancerate    
 	* @Description: 获取用户余额以及当前汇率信息
@@ -88,6 +93,12 @@ public class UserCommonController {
 		dataMap.put("username", wuser.getUserVerified().getTname());   //用户实名
 		dataMap.put("isCertification",RequestUtils.isCertification(wuser));
 		
+		//校验用户是否满足期货合买活动要求
+		if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
+			dataMap.put("isFtogetherActivityUser",fTogetherTradeService.checkActivityTime() && fTogetherTradeService.checkIsNewUser(uid));   // 是否满足活动免费要求
+			dataMap.put("activityFreeMoney",Constant.FtogetherGame.ACTIVITY_FREE_MONEY);
+		}
+		
 		if (DataConstant.BUSINESSTYPE_WITHDRAW==businessType){
 			// 获取提现手续费
 			Double drawHandleFee = DataConstant.DEFAULT_HANDLE_FEE;
@@ -100,6 +111,10 @@ public class UserCommonController {
 			if (Constant.PaymentChannel.BB_PAY == withdrawSetting){
 				//提现手续费
 				handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.BB_FEE);
+			}
+			if (Constant.PaymentChannel.EASE_PAY == withdrawSetting){
+				//提现手续费
+				handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
 			}
 			if (StringUtil.isNotBlank(handleFeeStr)){
 				drawHandleFee = NumberUtils.toDouble(handleFeeStr);

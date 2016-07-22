@@ -234,7 +234,7 @@ public class UserService extends BaseServiceImpl<User, UserDao> {
 	    }
 	 
 	public List<User> findByOrganization(Long organizationID){
-		 return getEntityDao().findByOrganization(new Organization(organizationID));
+		 return getEntityDao().findByDeletedFalseAndOrganization(new Organization(organizationID));
 	 }
 	
 	

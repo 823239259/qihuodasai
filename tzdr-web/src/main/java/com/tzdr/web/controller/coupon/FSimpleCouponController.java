@@ -69,7 +69,7 @@ public class FSimpleCouponController {
 		}
 		String pageIndex = request.getParameter("pageIndex");
 		String perPage = request.getParameter("perPage");	
-		PageInfo<FSimpleCouponWebVo> pageInfo = this.fSimpleCouponService.findDataList(pageIndex, perPage,userSessionBean.getId());
+		PageInfo<FSimpleCouponWebVo> pageInfo = this.fSimpleCouponService.findDataList(pageIndex, perPage,userSessionBean.getId(),"维胜");
 		
 		return pageInfo;
 	}

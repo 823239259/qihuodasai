@@ -68,9 +68,15 @@ private DataMapService dataMapService;
 			}else if(request.getParameter("pgbsupportBbpay"+i)==null){
 				bc.setSupportBbpay(0);
 			}
+			if(request.getParameter("pgbsupportPayEase"+i)!=null){
+				bc.setSupportPayEase(Integer.valueOf(request.getParameter("pgbsupportPayEase"+i)));
+			}else if(request.getParameter("pgbsupportPayEase"+i)==null){
+				bc.setSupportPayEase(0);
+			}
+			
 			pgbbankChannelService.save(bc);
 		}
-		
+		request.setAttribute("pgbWithdrawSetting",pgbWithdrawSetting);
 		return "success";
 	}
 

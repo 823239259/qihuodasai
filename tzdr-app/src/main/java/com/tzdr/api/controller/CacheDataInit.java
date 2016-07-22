@@ -1,6 +1,8 @@
 package com.tzdr.api.controller;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,5 +43,10 @@ public class CacheDataInit {
 	private JsonResult initdata() {
 		new CacheManager(dataMapDao);
 		return  new JsonResult("刷新成功！");
+	}
+	
+	@RequestMapping("/paysuccess")
+	public String  paysuccess(HttpServletRequest request,HttpServletResponse response){
+		return "/views/success";
 	}
 }

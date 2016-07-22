@@ -72,7 +72,7 @@ $(document).ready(function(){
 	    	if (title == '提现处理中审核'){
 	    		initData.dataGridId="processingData";
 	    		gridParams.toolbar='#processingtb';
-	    		gridParams.queryParams={search_EQ_status:21,search_LTE_addtime:parseInt(new Date().getTime()/1000)-86400};
+	    		gridParams.queryParams={search_EQ_status:21,search_LTE_addtime:parseInt(new Date().getTime()/1000)-43200};
 	    		gridParams.columns[0][8].hidden=true;
 	    		gridParams.columns[0][9].hidden=true;
 	    		$("#"+initData.dataGridId).datagrid(gridParams);
@@ -113,7 +113,7 @@ var withdrawal={
 			$('#processingData').datagrid('load',{
 				search_LIKE_mobile : $('#mobile2').val(),
 				search_EQ_status:21,
-				search_LTE_addtime:parseInt(new Date().getTime()/1000)-86400,
+				search_LTE_addtime:parseInt(new Date().getTime()/1000)-43200,
 				search_EQ_source : $('#source2').combobox('getValue')
 			});
 		},

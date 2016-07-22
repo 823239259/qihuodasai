@@ -128,6 +128,15 @@ public class FHandleFtseUserTradeVo2 implements Serializable {
 	@AllowExcel(name="实际盈亏(元)")
 	private BigDecimal actualProfitLoss;
 
+	
+	/**
+	 * 平台来源 1:网站平台   2:APP平台   默认1
+	 */
+	private Integer source;
+	@AllowExcel(name="平台来源")
+	private String sourceStr;
+	
+	
 	/**  
 	 * 状态【1.开户中、2.申请结算、3.待结算、4.操盘中  5.审核不通过 、6.已结算】
 	 */
@@ -186,7 +195,7 @@ public class FHandleFtseUserTradeVo2 implements Serializable {
 	private String tranPassword;
 	
 	
-	
+
 	
 	/**
 	 * 方案号TG+ID号
@@ -201,6 +210,29 @@ public class FHandleFtseUserTradeVo2 implements Serializable {
 	/**
 	 * 追加保证金额
 	 */
+	
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
+	public String getSourceStr() {
+		String str="";
+		if(this.source!=null&&this.source==2){
+			str="APP平台";
+		}else{
+			str="网站平台";
+		}
+		return str;
+	}
+
+	public void setSourceStr(String sourceStr) {
+		this.sourceStr = sourceStr;
+	}
+	
 	
 	public BigDecimal getAppendTraderBond() {
 		return appendTraderBond;

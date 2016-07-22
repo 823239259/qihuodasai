@@ -3,9 +3,14 @@
  */
 function endSolation(id, suffUrl) {
 	if ($.easyui.validateSelectItems($("#" + id),1)) {
+		var rows = $("#" + id).datagrid('getSelections');
+		if (rows[0].isManualDelay==1 ||  rows[0].isManualDelay==2){
+			Check.messageBox("提示", "该方案已经延期，不能终结！");
+			return ;
+		}
+		
 		$.messager.confirm("提示", "确定要终结方案?", function (r) {
 			if (r) {
-				var rows = $("#" + id).datagrid('getSelections');
 				var row = rows[0];
 	            $.messager.progress({
 	                title:'提示',
@@ -30,8 +35,42 @@ function endSolation(id, suffUrl) {
 	}
 }
 
-function changeStatus(status){
-	var rows = $("#dg003").datagrid('getChecked');
+function changetype(tid){ 
+	if ($.easyui.validateSelectItems($("#" + tid),1)) {
+		var rows = $("#"+tid).datagrid('getSelections');
+		if (rows[0].isManualDelay!=1 && rows[0].isManualDelay!=2){
+			Check.messageBox("提示", "该方案不能解除！");
+			return ;
+		}
+		$.messager.confirm("确认提示","确认限买已解除？", function(r){
+			if(r){
+			var tradeId=rows[0].tradeId;
+			$.messager.progress({
+	            title:'提示',
+	            msg:'执行中...'
+	        });
+			$.post($.easyui.path() + "/admin/arrearsEnd/changeType" 
+					,{"tradeId":tradeId} ,function(result){
+				if (result.success) {
+					$("#" + tid).datagrid('reload');
+		            $.messager.progress('close');
+					Check.messageBox("提示", result.message);
+				}
+				else {
+					 $.messager.progress('close');
+					Check.messageBox("提示", result.message, "error");
+				}
+					});
+			}
+		});
+		
+	}		
+	
+}
+
+
+function changeStatus(){
+	var rows = $("#dg003").datagrid('getSelections');
 	if (!rows || rows.length==0){
 		eyWindow.walert("更新提示","请选择数据", 'info');
 		return;
@@ -110,3 +149,21 @@ function closeSettlementScheme() {
 		}
 	});
 }
+
+$(document).ready(function(){
+	$('#dg003').datagrid({   
+	    rowStyler:function(index,row){   
+	        if (row.isManualDelay==1 ){   
+	            return 'background-color:yellow;';   
+	        }   
+	    }   
+	});
+	
+	$('#ths_jin_dg003').datagrid({   
+	    rowStyler:function(index,row){   
+	        if (row.isManualDelay==2){   
+	            return 'background-color:yellow;';   
+	        }   
+	    }   
+	});
+});

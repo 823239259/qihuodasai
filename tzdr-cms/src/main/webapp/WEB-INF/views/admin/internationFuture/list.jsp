@@ -51,7 +51,7 @@ function timeConvert(value,rowData,rowIndex) {
 								</td>
 								<td>
 									<input id="startTime" name="search_date_GTE_appTime" class="Wdate" type="text" onFocus="var endTime=$dp.$('endTime');WdatePicker({onpicked:function(){endTime.focus();},maxDate:'#F{$dp.$D(\'endTime\')}'})"/>
-								      至  <input id="endTime" name="search_date_LTE_appTime" class="Wdate" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})"/>							      
+								      至  <input id="endTime" name="search_date_LTE_appTime" class="Wdate" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})"/>
 								</td>
 								<td class="label right">
 									<span>开仓手数</span>
@@ -71,13 +71,26 @@ function timeConvert(value,rowData,rowIndex) {
 										<option value="6">国际原油</option>
 										<option value="7">恒生指数</option>
 										<option value="8">国际综合</option>
+										<option value="9">小恒指</option>
 								</select></td>
-								<td class="label right">
+								
+								<td class="label right"><span>平台来源：</span></td>
+								<td><select id="search_EQ_source"
+									class="easyui-combobox" name="search_EQ_source"
+									style="width: 100px; height: 25px;">
+										<option value="">全部</option>
+										<option value="1">网站平台</option>
+										<option value="2">APP平台</option>
+								</select></td>
+								
+							</tr>
+							<tr>
+							<td class="label right">
 									<span> </span>
 								</td>
 								<td >
 									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="datagridUtils.datagridQuery('edatagrid','auditSearchForm')">查询</a>
-								</td>
+							</td>
 							</tr>
 						</table>	
 					</form>
@@ -126,6 +139,7 @@ function timeConvert(value,rowData,rowIndex) {
 							<th field="tranPassword" width="120">操盘密码</th>
 							<th field="appTime" width="200" sortable="true">提交时间</th>
 							<th field="updateTime" width="200" sortable="true">处理时间</th>
+							<th field="sourceStr" width="150">平台来源</th>
 							<th field="programNo" width="150">方案编号</th>
 							<th field="stateType" width="100">状态</th>
 			            </tr>
@@ -161,6 +175,7 @@ function timeConvert(value,rowData,rowIndex) {
 										<option value="6">国际原油</option>
 										<option value="7">恒生指数</option>
 										<option value="8">国际综合</option>
+										<option value="9">小恒指</option>
 								</select></td>
 								<td class="label right"><span>状态：</span></td>
 								<td><select id="search_IN_status"
@@ -172,6 +187,15 @@ function timeConvert(value,rowData,rowIndex) {
 								</select></td>
 							</tr>
 							<tr>
+								<td class="label right"><span>平台来源：</span></td>
+								<td><select id="search_EQ_source"
+									class="easyui-combobox" name="search_EQ_source"
+									style="width: 100px; height: 25px;">
+										<option value="">全部</option>
+										<option value="1">网站平台</option>
+										<option value="2">APP平台</option>
+								</select></td>
+							
 								<td class="label right"><span> </span></td>
 								<td colspan="3" class="label"><a href="javascript:void(0)" class="easyui-linkbutton"
 									iconCls="icon-search"
@@ -213,6 +237,7 @@ function timeConvert(value,rowData,rowIndex) {
 							<th field="appendDateValue" width="120" sortable="true">申请追加时间</th>
 							<th field="updateTimeValue" width="120" sortable="true">处理时间</th>
 							<th field="statusValue" width="100" sortable="true">状态</th>
+							<th field="sourceStr" width="150">平台来源</th>
 			            </tr>
 			        </thead>
    				</table>
@@ -235,6 +260,7 @@ function timeConvert(value,rowData,rowIndex) {
 										<option value="6">国际原油</option>
 										<option value="7">恒生指数</option>
 										<option value="8">国际综合</option>
+										<option value="9">小恒指</option>
 								</select></td>
 							</tr>
 							<tr>
@@ -288,7 +314,7 @@ function timeConvert(value,rowData,rowIndex) {
 								<td class="label right">
 									<span>结算状态：</span>
 								</td>
-								<td colspan="3">
+								<td >
 									<select id="search_EQ_stateType" class="easyui-combobox" name="search_EQ_stateType" style="width:100px;height:27px;">
 									    <option value="" selected="selected">所有状态</option>
 									    <option value="4">操盘中</option>
@@ -297,6 +323,15 @@ function timeConvert(value,rowData,rowIndex) {
 									    <option value="6">已结算</option>
 									</select>
 								</td>
+								
+								<td class="label right"><span>平台来源：</span></td>
+								<td><select id="search_EQ_source"
+									class="easyui-combobox" name="search_EQ_source"
+									style="width: 100px; height: 25px;">
+										<option value="">全部</option>
+										<option value="1">网站平台</option>
+										<option value="2">APP平台</option>
+								</select></td>
 							</tr>
 							<tr>
 								<td class="label right">
@@ -344,8 +379,8 @@ function timeConvert(value,rowData,rowIndex) {
 									}
 									return value;
 								}">申请手续费(元)</th>
-								<th field="appStarttime" width="150" sortable="true">账户启用日期</th>
 								<th field="appTime" width="150" sortable="true">方案申请时间</th>
+								<th field="appStarttime" width="150" sortable="true">账户启用日期</th>
 								<th field="tranLever" width="160">可开仓手数</th>
 								<th field="useTranDay" width="150">已操盘时间</th>
 								<th field="traderBond" width="150">操盘保证金(元)</th>
@@ -366,13 +401,14 @@ function timeConvert(value,rowData,rowIndex) {
 								<th field="nikkeiTranActualLever" width="160">日经225交易手数</th> -->
 								
 								<th field="tranFeesTotal" width="160">交易手续费(元)</th>
-								<th field="discountMoney" width="150">折扣券(折)</th>
+								<th field="discountMoneyStr" width="150">优惠券</th>
 								<th field="discountActualMoney" width="150">抵扣手续费(元)</th>
 								<th field="endParities" width="160">汇率</th>
 								<th field="endAmountCal" width="160">结算金额(元)</th>
 								<th field="endAmount" width="160">实际结算金额(元)</th>
 								<th field="appEndTime" width="160" sortable="true">申请结算时间</th>
 								<th field="endTime" width="160" sortable="true">结算时间</th>
+								<th field="sourceStr" width="150">平台来源</th>
 								<th field="programNo" width="150">方案编号</th>
 								<th field="stateType" width="100">结算状态</th>
 				            </tr>
@@ -502,8 +538,22 @@ function timeConvert(value,rowData,rowIndex) {
                    <input id="nikkeiTranActualLever" name="nikkeiTranActualLever" class="easyui-validatebox"  data-options=""/>
                 </td>
                 <td><span style="color: red;">不能输入负数</span></td>
-              </tr>
-       
+			</tr>
+			<tr style="display: none;" id="lhsiTradeNumTR">
+                <td class="label right">小恒指交易手数:</td>
+                <td>
+                   <input id="lhsiTranActualLever" name="lhsiTranActualLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+              	<td><span style="color: red;">不能输入负数</span></td>
+            </tr>
+            <tr style="display: none;" id="agTradeNumTR">
+                <td class="label right">美黄金交易手数:</td>
+                <td>
+                   <input id="agTranActualLever" name="agTranActualLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
+
             <tr>
                 <td align="center" colspan="3">
                 <a id="btn" href="javascript:void(0);" onclick="inputSave()" class="easyui-linkbutton">提交</a>
@@ -515,7 +565,7 @@ function timeConvert(value,rowData,rowIndex) {
 	</div>
 	<!-- window 交易手数弹框 -->
 	<div id="tradeCountWin" class="easyui-window" title="交易手数" 
-		style="width:600px;height:200px;display:none;border:none; overflow: hidden;top:4%" 
+		style="width:600px;height:280px;display:none;border:none; overflow: hidden;top:4%" 
         data-options="iconCls:'icon-search',modal:true,closed:true">
        <!--  hello ,this is window. -->
        <form id="tradeCountForm">
@@ -546,6 +596,17 @@ function timeConvert(value,rowData,rowIndex) {
 	               	<td align="center" id='mbCount'></td>
 	               	<td align="center" id='daxCount'></td>
 	               	<td align="center" id='nikkeiCount'></td>
+        		</tr>
+        	</table>
+        	<br/>
+        	<table border="0" style="font-size:12px;" class="conn"  width="50%" cellpadding="0" cellspacing="0">
+        		<tr>
+        			<td class="label center">小恒指</td>
+        			<td class="label center">美黄金</td>
+        		</tr>
+        		<tr>
+        			<td align="center" id='lhsiCount'></td>
+	               	<td align="center" id='agCount'></td>
         		</tr>
         	</table>
         </form>

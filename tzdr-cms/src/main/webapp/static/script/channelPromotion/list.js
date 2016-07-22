@@ -18,9 +18,9 @@ function saveCss(){
 function getChannelSel1(){
 	var na = $('#channerl1').find("option:selected").text();
 	if(na != '所有渠道'){
-		$.post(basepath+'/admin/channelPromotion/typeList',{'type':2,'name':na},function(data){
+		$.post(Check.rootPath()+'/admin/channelPromotion/typeList',{'type':2,'name':na},function(data){
 			var list=data.obj;
-			$("#channerl2").empty();
+			$("#channerl2").empty();aaaaaa
 			saveCss();
 			$("#channerl2").append("<option value=''>所有渠道</option>");
 			for(var i=0;i<list.length;i++){
@@ -30,7 +30,7 @@ function getChannelSel1(){
 			}
 		});
 	}else{
-		$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+		$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 			var list2=data.obj.two;
 			$("#channerl2").empty();
 			var list3=data.obj.three;
@@ -60,7 +60,7 @@ function getChannelSel2(){
 	var na2 = $('#channerl2').find("option:selected").text();
 	var na = na1 + ',' + na2;
 	if( na2 != '所有渠道' ){
-		$.post(basepath+'/admin/channelPromotion/typeList',{'type':3,'name':na},function(data){
+		$.post(Check.rootPath()+'/admin/channelPromotion/typeList',{'type':3,'name':na},function(data){
 			var list=data.obj;
 			$("#channerl3").empty();
 			saveCss();
@@ -72,7 +72,7 @@ function getChannelSel2(){
 			}
 		});
 	}else{
-		$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+		$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 			var list3=data.obj.three;
 			$("#channerl3").empty();
 			saveCss();
@@ -92,7 +92,7 @@ function reloadSel() {
 	/**
 	 * 初始化一级渠道
 	 */
-	$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 		//alert(data.obj.length);
 		var list1=data.obj.one;
 		$("#channerl1").empty();
@@ -106,7 +106,7 @@ function reloadSel() {
 	/**
 	 * 初始化二级渠道
 	 */
-	$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 		var list2=data.obj.two;
 		$("#channerl2").empty();
 		$("#channerl2").append("<option value=''>所有渠道</option>");
@@ -119,7 +119,7 @@ function reloadSel() {
 	/**
 	 * 初始化三级渠道
 	 */
-	$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 		var list3=data.obj.three;
 		$("#channerl3").empty();
 		$("#channerl3").append("<option value=''>所有渠道</option>");
@@ -132,7 +132,7 @@ function reloadSel() {
 	/**
 	 * addWindowInit
 	 */
-	$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 		var list=data.obj.one;
 		$("#addSe1").empty();
 		$("#addSe1").append("<option value=''>所有渠道</option>");
@@ -142,7 +142,7 @@ function reloadSel() {
 			}
 		}
 	});
-	$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 		var list=data.obj.two;
 		$("#addSe2").empty();
 		$("#addSe2").append("<option value=''>所有渠道</option>");
@@ -152,7 +152,7 @@ function reloadSel() {
 			}
 		}
 	});
-	$.post(basepath+'/admin/channelPromotion/getMap',function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/getMap',function(data){
 		var list=data.obj.three;
 		$("#addSe3").empty();
 		$("#addSe3").append("<option value=''>所有渠道</option>");
@@ -204,7 +204,7 @@ function giveValue(id){
  * 添加
  */
 function addChannelSave() {
-	$.post(basepath+'/admin/channelPromotion/create',$('#voForm').serialize(),function(data){
+	$.post(Check.rootPath()+'/admin/channelPromotion/create',$('#voForm').serialize(),function(data){
 		Check.messageBox("提示",data.message);
 		if(data.success){
 			addChannelClose();
@@ -218,11 +218,19 @@ function addChannelSave() {
  * 删除
  */
 function deleteChannel(){
+	if($("#dg003").datagrid("getSelected") == null){
+		$.messager.show({
+			title:'提示',
+			msg:'请选择[' + 1+ ']条数据',
+			timeout:5000,
+			showType:'slide'
+		});
+	}
 	var nodeId = $("#dg003").datagrid("getSelected").id;
 	$.messager.confirm("提示", "是否确认删除条记录?", function (r) {
 		if (r) {
 			eyWindow.wprogress("系统提示","系统处理中,请稍候...");
-			$.post(basepath+'/admin/channelPromotion/deleteChannel',{'id':nodeId},function(data){
+			$.post(Check.rootPath()+'/admin/channelPromotion/deleteChannel',{'id':nodeId},function(data){
 				if(data.success){
 					eyWindow.closeProgress();
 					Check.messageBox("提示",data.message);

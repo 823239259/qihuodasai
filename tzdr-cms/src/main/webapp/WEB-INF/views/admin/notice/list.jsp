@@ -36,7 +36,7 @@
 	<table id="edatagrid" style="margin-top: 5px;"></table>
 		</div>
 		<!-- 配股宝公告 -->
-				<div title="配股宝公告" data-options="tools:'#p-tools'" style="padding:20px;">
+				<div title="配股宝公告" data-options="tools:'#p-tools'" style="padding:20px;">
 	<div id="tb_pgb" style="padding: 5px; height: auto">
 		<shiro:hasPermission name="sys:operationalConfig:notice:update">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
@@ -74,32 +74,32 @@ var noticetest={
  * @param modelName  模块名称  如：user、org、role。。。。
  * @param TabsId easyui-tabs的id
  */
-		openEditIframeWin:function(width,height,title,modelName,TabsId){
-			
-			var rowData=$('#edatagrid').datagrid('getSelected');
-			var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
+openEditIframeWin:function(width,height,title,modelName,TabsId){
+	
+	var rowData=$('#edatagrid').datagrid('getSelected');
+	var $title=$("#"+TabsId).tabs('getSelected').panel('options').title;
 
-					if($title.indexOf("配股宝")>-1){
-						rowData=$('#edatagrid_pgb').datagrid('getSelected');
-					}
-			if (null == rowData){
-				eyWindow.walert("修改提示",'请选择要修改的行', 'info');
-				return;
+			if($title.indexOf("配股宝")>-1){
+				rowData=$('#edatagrid_pgb').datagrid('getSelected');
 			}
-			
-			var maximizableValue=false;
-			if ("config/news"==modelName){ 
-				 maximizableValue=true;
-			}
-			
-			var html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=4&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
-			if($title.indexOf("éè¡å®")>-1){
-				html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=8&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
-			}
-			$('#addWin').window({collapsible:false,minimizable:false,maximizable:maximizableValue,width:width,height:height,title:title,loadingMessage:'æ­£å¨å è½½,è¯·ç­å¾......',iconCls:'icon-edit',closed:true,modal:true,content:html});
-			$('#addWin').window('open');
-			
-		}
+	if (null == rowData){
+		eyWindow.walert("修改提示",'请选择要修改的行', 'info');
+		return;
+	}
+	
+	var maximizableValue=false;
+	if ("config/news"==modelName){ 
+		 maximizableValue=true;
+	}
+	
+	var html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=4&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
+	if($title.indexOf("配股宝")>-1){
+		html = '<iframe scrolling="yes" frameborder="0"  src="'+basepath+'admin/'+modelName+'/edit?fromType=edit&type=8&id='+rowData.id+'" style="width:100%;height:100%;"></iframe>';
+	}
+	$('#addWin').window({collapsible:false,minimizable:false,maximizable:maximizableValue,width:width,height:height,title:title,loadingMessage:'正在加载,请等待......',iconCls:'icon-edit',closed:true,modal:true,content:html});
+	$('#addWin').window('open');
+	
+}
 }
 </script>
 </html>

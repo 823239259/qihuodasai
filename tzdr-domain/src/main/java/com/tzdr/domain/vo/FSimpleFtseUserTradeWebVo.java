@@ -131,25 +131,25 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	 *迷你道指交易手数
 	 */
 	@SqlColumn(name="mdtran_actual_lever")
-	private Integer mdtranActualLever;
+	private Integer mdtranActualLever = new Integer(0);
 	
 	/**
 	 * 迷你纳指交易手数
 	 */
 	@SqlColumn(name="mntran_actual_lever")
-	private Integer mntranActualLever;
+	private Integer mntranActualLever = new Integer(0);
 	
 	/**
 	 * 迷你标普交易手数
 	 */
 	@SqlColumn(name="mbtran_actual_lever")
-	private Integer mbtranActualLever;
+	private Integer mbtranActualLever = new Integer(0);
 	
 	/**
 	 * 德国DAX交易手数
 	 */
 	@SqlColumn(name="daxtran_actual_lever")
-	private Integer daxtranActualLever;
+	private Integer daxtranActualLever = new Integer(0);
 	
 	
 	
@@ -157,8 +157,20 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	 * 日经225交易手数
 	 */
 	@SqlColumn(name="nikkei_tran_actual_lever")
-	private Integer nikkeiTranActualLever;
-	
+	private Integer nikkeiTranActualLever = new Integer(0);
+
+	/**
+	 * 小恒指交易手数
+	 */
+	@SqlColumn(name="lhsi_tran_actual_lever")
+	private Integer lhsiTranActualLever = new Integer(0);
+
+	/**
+	 * 美黄金交易手数
+	 */
+	@SqlColumn(name="ag_tran_actual_lever")
+	private Integer agTranActualLever = new Integer(0);
+
 	/**
 	 * 交易手续费总额
 	 */
@@ -204,7 +216,7 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	private String stateTypeStr = "";
 
 	/**  
-	 * 业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指   8.国际综合】
+	 * 业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指   8.国际综合 9 小恒指】
 	 */
 	@SqlColumn(name="business_type")
 	private Integer businessType;
@@ -499,6 +511,8 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 				this.businessTypeStr = "恒指期货";
 			}else if(this.businessType == 8){
 				this.businessTypeStr = "国际综合 ";
+			}else if(this.businessType == 9){
+				this.businessTypeStr = "小恒指 ";
 			}
 		}else{
 			businessTypeStr = "";
@@ -537,6 +551,18 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	}
 	public void setNikkeiTranActualLever(Integer nikkeiTranActualLever) {
 		this.nikkeiTranActualLever = nikkeiTranActualLever;
+	}
+	public Integer getLhsiTranActualLever() {
+		return lhsiTranActualLever;
+	}
+	public void setLhsiTranActualLever(Integer lhsiTranActualLever) {
+		this.lhsiTranActualLever = lhsiTranActualLever;
+	}
+	public Integer getAgTranActualLever() {
+		return agTranActualLever;
+	}
+	public void setAgTranActualLever(Integer agTranActualLever) {
+		this.agTranActualLever = agTranActualLever;
 	}
 	
 	

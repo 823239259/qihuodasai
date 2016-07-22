@@ -74,7 +74,7 @@ public class FSimpleConfigServiceImpl extends BaseServiceImpl<FSimpleConfig, FSi
 
 	@Override
 	public JsonResult saveOrUpdateConfig(FSimpleConfigVo simpleConfig,int type) throws Exception {
-		log.info("保存或更新富时A50方案/国际原油/恒生指数 配置信息。。。");
+		log.info("保存或更新富时A50方案/国际原油/恒生指数/小恒指  配置信息。。。");
 		User currentUser = this.authService.getCurrentUser();
 		if(!StringUtil.isBlank(simpleConfig.getId())){//ID 存在更新
 			FSimpleConfig newConfig = this.get(simpleConfig.getId());
@@ -117,6 +117,8 @@ public class FSimpleConfigServiceImpl extends BaseServiceImpl<FSimpleConfig, FSi
 				name = "国际原油";
 			}else if(type == 7){
 				name = "恒生指数";
+			}else if(type == 9){
+				name = "小恒指";
 			}
 			newConfig.setTypeName(name);
 			this.save(newConfig);

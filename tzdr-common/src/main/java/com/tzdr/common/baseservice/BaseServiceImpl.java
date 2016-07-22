@@ -542,6 +542,24 @@ public abstract class BaseServiceImpl<T, M extends BaseDao<T>> implements
    }
    
    /**
+    * 纯sql 的更新操作
+    * @param sql
+    * @param params
+    * @return
+    */
+   public int  nativeUpdate(String sql,Object... params){
+	    Query update = em.createNativeQuery(sql);
+		if (ArrayUtils.isEmpty(params)){	
+			return update.executeUpdate();
+		}
+		
+		for (int i=1;i<=params.length;i++){
+			update.setParameter(i, params[i-1]);
+		}
+		return update.executeUpdate();
+   }
+   
+   /**
     * 批量保存数据
     * @param sql
     * @param batchSize

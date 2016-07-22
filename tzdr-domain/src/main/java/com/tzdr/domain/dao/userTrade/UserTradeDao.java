@@ -82,7 +82,7 @@ public interface UserTradeDao extends BaseJpaDao<UserTrade, String>,JpaSpecifica
 	 * @param Starttime 交易开始时间
 	 * @return
 	 */
-	@Query("from UserTrade  where status=?1 and starttime<=?2")
+	@Query("from UserTrade  where activityType != 5 and status=?1 and starttime<=?2")
 	public List<UserTrade> findUserTrades(short status,Long Starttime);
 	
 	/*@Query(
@@ -133,5 +133,28 @@ public interface UserTradeDao extends BaseJpaDao<UserTrade, String>,JpaSpecifica
 	 * @return
 	 */
 	public  List<UserTrade> findByWuserAndActivityTypeIn(WUser user,List<Integer> activityTypeList) ;	
+	
+	
+	/**
+	 * 根据活动类型、状态、预计结束时间查询
+	 * @param status
+	 * @param andActivityType
+	 * @param estimateEndtime
+	 * @return
+	 */
+	public List<UserTrade> findByStatusAndActivityTypeAndEstimateEndtime(Short status,int andActivityType,Long estimateEndtime);
 
+	
+	/**
+	 * 查询即将到期的月月配方案
+	 * @param status
+	 * @param andActivityType
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	@Query("from UserTrade  where status=?1 and activityType=?2 and estimateEndtime>=?3 and estimateEndtime<=?4")
+	public List<UserTrade> findSoonExpireMonthTrades(Short status,int andActivityType,Long start,Long end);
+
+	
 }

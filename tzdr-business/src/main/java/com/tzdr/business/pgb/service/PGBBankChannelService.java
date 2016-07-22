@@ -97,7 +97,7 @@ public class PGBBankChannelService extends BaseServiceImpl<PGBPaymentSupportBank
 	 * @return
 	 */
 	public List<PaymentSupportBankVo> querySupportPayBanks(){
-		String sql = "SELECT bank_name bankName, abbreviation abbreviation, icon_path iconPath FROM pgb_payment_support_bank WHERE support_bbpay = 1 OR support_umpay = 1 ORDER BY weight ASC ";
+		String sql = "SELECT bank_name bankName, abbreviation abbreviation, icon_path iconPath FROM pgb_payment_support_bank WHERE support_bbpay = 1 OR support_umpay = 1  OR support_pay_ease=1 ORDER BY weight ASC ";
 		List<PaymentSupportBankVo>  bankVos = this.nativeQuery(sql, null,PaymentSupportBankVo.class);
 		return  bankVos;
 	}
@@ -122,7 +122,7 @@ public class PGBBankChannelService extends BaseServiceImpl<PGBPaymentSupportBank
 	 * @return
 	 */
 	public List<PaymentSupportBankVo> querySupportDrawBanks(int withdrawSetting){
-		if (withdrawSetting !=1 && withdrawSetting !=2){
+		if (withdrawSetting !=1 && withdrawSetting !=2 && withdrawSetting !=3){
 			return null;
 		}
 		String sql = "SELECT bank_name bankName, abbreviation abbreviation  FROM pgb_payment_support_bank";
@@ -133,6 +133,11 @@ public class PGBBankChannelService extends BaseServiceImpl<PGBPaymentSupportBank
 		if (withdrawSetting==2){
 			sql = sql + " WHERE support_bbdraw = 1 ORDER BY weight ASC ";
 		}
+		
+		if (withdrawSetting==3){
+			sql = sql + " WHERE support_easedraw = 1 ORDER BY weight ASC ";
+		}
+		
 		List<PaymentSupportBankVo>  bankVos = this.nativeQuery(sql, null,PaymentSupportBankVo.class);
 		return  bankVos;
 	}

@@ -31,7 +31,7 @@ public class FinternationFutureMoneyVo implements Serializable {
 	private String username;
 
 	/**
-	 * 商品类型【 0.A50   6.国际原油   7.恒生指数 8.国际综合】
+	 * 商品类型【 0.A50   6.国际原油   7.恒生指数 8.国际综合 9.小恒指】
 	 */
 	private Integer type;
 	@AllowExcel(name = "交易品种")
@@ -88,6 +88,38 @@ public class FinternationFutureMoneyVo implements Serializable {
 	private Integer status;
 	@AllowExcel(name = "状态")
 	private String statusValue;
+	
+	
+	/**
+	 * 平台来源 1:网站平台   2:APP平台   默认1
+	 */
+	private Integer source;
+	@AllowExcel(name="平台来源")
+	private String sourceStr;
+	
+	
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
+	public String getSourceStr() {
+		String str="";
+		if(this.source!=null&&this.source==2){
+			str="APP平台";
+		}else{
+			str="网站平台";
+		}
+		return str;
+	}
+
+	public void setSourceStr(String sourceStr) {
+		this.sourceStr = sourceStr;
+	}
+	
 	
 	
 	public BigDecimal getLineLoss() {
@@ -152,6 +184,9 @@ public class FinternationFutureMoneyVo implements Serializable {
 				break;
 			case 8:
 				typeValue = "国际综合";
+				break;
+			case 9:
+				typeValue = "小恒指";
 				break;
 			default:
 				break;

@@ -99,6 +99,19 @@ public class FTradeParamsVo implements Serializable {
 		@SqlColumn(name="mdtran_actual_lever")
 		private Integer mdtranLever;
 
+		/**
+		 * 小恒指
+		 */
+		@SqlColumn(name="hstran_actual_lever")
+		private Integer lhsiTranActualLever;
+		
+		/**
+		 * 美黄金
+		 * @return
+		 */
+		@SqlColumn(name="agtran_actual_lever")
+		private Integer agTranActualLever;
+		
 		public BigDecimal getTranFees() {
 			return tranFees;
 		}
@@ -201,6 +214,22 @@ public class FTradeParamsVo implements Serializable {
 
 		public void setMdtranLever(Integer mdtranLever) {
 			this.mdtranLever = mdtranLever;
+		}
+
+		public Integer getLhsiTranActualLever() {
+			return lhsiTranActualLever;
+		}
+
+		public void setLhsiTranActualLever(Integer lhsiTranActualLever) {
+			this.lhsiTranActualLever = lhsiTranActualLever;
+		}
+
+		public Integer getAgTranActualLever() {
+			return agTranActualLever;
+		}
+
+		public void setAgTranActualLever(Integer agTranActualLever) {
+			this.agTranActualLever = agTranActualLever;
 		}
 		
 		

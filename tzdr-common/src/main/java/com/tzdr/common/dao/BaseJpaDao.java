@@ -167,6 +167,16 @@ public interface BaseJpaDao<T, ID extends Serializable> extends
 	 */
 	public List<Map<String,Object>> queryMapBySql(String sql,Object...params);
 	
+	
+	
+	/**
+	 * 
+	 * @param sql
+	 * @param params
+	 * @return Map<String,Object>
+	 */
+	public Map<String,Object> queryMapObj(String sql,Object...params);
+	
 	/**
 	 * 查询页面
 	 * 建议使用 public List queryListBySql(String sql,Class clazz,Object...params);

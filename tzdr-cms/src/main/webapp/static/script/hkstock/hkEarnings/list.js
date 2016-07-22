@@ -34,6 +34,11 @@ $(function() {
 			title : '保证金',
 			width : 150
 		}, {
+			field : 'deduction_lever_money',
+			title : '抵扣保证金',
+			width : 150
+
+		},{
 			field : 'lever',
 			title : '倍数',
 			width : 150
@@ -137,6 +142,10 @@ $(function() {
 			title : '保证金',
 			width : 150
 		}, {
+			field : 'deduction_lever_money',
+			title : '抵扣保证金',
+			width : 150
+		},{
 			field : 'lever',
 			title : '倍数',
 			width : 150

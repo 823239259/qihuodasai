@@ -64,6 +64,9 @@ public class TogetherUserListService extends BaseServiceImpl<TogetherUserList, T
 			togetherUser.setUid(vo.getUid());
 			String uphone = vo.getUphone();
 			int size = uphone.length();
+			logger.info("----------------------------------------------------------------");
+			logger.info("TogetherUserListService mobile :" + uphone);
+			logger.info("----------------------------------------------------------------");
 			String newUphone = uphone.substring(0,3)+"*****"+uphone.substring(size-3,size);
 			togetherUser.setUphone(newUphone);
 			if (togetherUserList.size() - 1 == i) {

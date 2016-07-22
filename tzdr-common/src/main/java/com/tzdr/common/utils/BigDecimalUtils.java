@@ -361,4 +361,17 @@ public class BigDecimalUtils {
 		BigDecimal b2 = new BigDecimal(Double.toString(v2));
 		return b1.compareTo(b2);
 	}
+	
+	/**
+	 * 提供精确的小数位四舍五入处理。
+	 * 
+	 * @param v
+	 *            需要四舍五入的数字
+	 * @param scale
+	 *            小数点后保留几位  必须大于0
+	 * @return 四舍五入后的结果
+	 */
+	public static BigDecimal roundTwo(BigDecimal value) {
+		return value.setScale(SCALE, BigDecimal.ROUND_HALF_UP);
+	}
 }

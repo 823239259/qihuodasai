@@ -57,6 +57,7 @@ public class FinternationFutureAppendLevelMoneyService extends BaseServiceImpl<F
 				+ "f.dollar_money as dollarMoney, "
 				+ "f.append_date AS appendDate,"
 				+ "f.update_time AS updateTime,"
+				+ "fut.source AS source,"
 				+ "w.mobile,"
 				+ "v.tname AS username "
 				+ "FROM f_internation_future_append_level_money f,"
@@ -109,6 +110,8 @@ public class FinternationFutureAppendLevelMoneyService extends BaseServiceImpl<F
 			return "恒生指数";
 		case 8:
 			return "国际综合";
+		case 9:
+			return "小恒指";
 		default:
 			break;
 		}

@@ -26,7 +26,7 @@ public class OperationalConfig extends BaseCrudEntity {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 1:友情链接 2：新闻栏目 3：新闻 4：banner 5：合作伙伴6:登陆背景图 7 托管银行  8 配股宝banner 9投资达人APP-bannaer
+	 * 1:友情链接 2：新闻栏目 3：新闻 4：banner 5：合作伙伴6:登陆背景图 7 托管银行  8 配股宝banner 9维胜APP-bannaer
 	 */
 	private  Integer  type;
 

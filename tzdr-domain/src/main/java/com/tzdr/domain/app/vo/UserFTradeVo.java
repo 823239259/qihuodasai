@@ -55,7 +55,7 @@ public class UserFTradeVo implements Serializable {
 	private Integer stateType;
 	
 	/**
-	 * 业务类型 如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;
+	 * 业务类型 如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;9:小恒指;
 	 */
 	@SqlColumn(name="business_type")
 	private Integer businessType;

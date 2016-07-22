@@ -46,7 +46,7 @@ public class UserBankServiceImpl extends BaseServiceImpl<UserBank,UserBankDao> i
 	public List<UserBank> findUserDefaultBankByuserId(String userId){
 		Map<String,Object> map=new HashMap<String,Object>();
 		Map<String,Boolean> sortMap=new HashMap<String,Boolean>();
-		map.put("EQ_isdefault", 1);
+		//map.put("EQ_isdefault", 1);
 		map.put("EQ_uid", userId);
 		//sortMap.put("addtime", true);
 		

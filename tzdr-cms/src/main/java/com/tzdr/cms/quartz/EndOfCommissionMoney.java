@@ -29,8 +29,8 @@ public class EndOfCommissionMoney extends QuartzJobBean {
 			throws JobExecutionException {
 		
 		logger.info("------------------佣金划账至母账户任务--------begin-------------------");
-		UserTradeService userTradeService = SpringUtils.getBean(UserTradeService.class);
-		userTradeService.endOfCommission();
+		/*UserTradeService userTradeService = SpringUtils.getBean(UserTradeService.class);
+		userTradeService.endOfCommission();*/
 		logger.info("------------------佣金划账至母账户任务--------end-------------------");
 
 		

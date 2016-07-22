@@ -115,6 +115,10 @@ public class JsonResult {
 		this.obj=object;
 	}
 
-	
+	public JsonResult(String message,boolean success,Object object) {
+		super();
+		this.message = message;
+		this.obj = object;
+	}
 	
 }

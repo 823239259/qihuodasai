@@ -70,8 +70,6 @@ public class OutDiskParameters extends BaseCrudEntity{
 	 */
 	private Integer daxtranActualLever;
 	
-	
-	
 	/**
 	 * 日经225交易手数
 	 */
@@ -82,8 +80,17 @@ public class OutDiskParameters extends BaseCrudEntity{
 	 */
 	private Integer mdtranActualLever;
 	
+	/**
+	 * 小恒指
+	 */
+	private Integer hstranActualLever;
 	
+	/**
+	 * 美黄金
+	 */
+	private Integer agtranActualLever;
 
+	
 	public BigDecimal getTraderBond() {
 		return traderBond;
 	}
@@ -178,6 +185,22 @@ public class OutDiskParameters extends BaseCrudEntity{
 
 	public void setMdtranActualLever(Integer mdtranActualLever) {
 		this.mdtranActualLever = mdtranActualLever;
+	}
+
+	public Integer getHstranActualLever() {
+		return hstranActualLever;
+	}
+
+	public void setHstranActualLever(Integer hstranActualLever) {
+		this.hstranActualLever = hstranActualLever;
+	}
+
+	public Integer getAgtranActualLever() {
+		return agtranActualLever;
+	}
+
+	public void setAgtranActualLever(Integer agtranActualLever) {
+		this.agtranActualLever = agtranActualLever;
 	}
 
 	

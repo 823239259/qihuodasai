@@ -57,7 +57,7 @@
 							<td>收款银行:</td>
 							<td>
 								<input class="easyui-combobox" id="tradeAccount" value="${additionalVo.tradeAccount}" name="tradeAccount" data-options="
-										url:'${ctx}/admin/recharge/dataMapCombobox?key=bankname&includes=ccb,icbc,abc,boc',
+										url:'${ctx}/admin/recharge/dataMapCombobox?key=bankname&includes=ccb,abc,boc,cmb',
 										valueField:'id',
 										panelHeight:100,
 										required:true,
@@ -82,7 +82,7 @@
 							<td>
 								<select class="easyui-combobox" name="source" id="source"  data-options="panelHeight:50">
 			                        <option value="1">维胜</option>
-			                        <option value="2">维胜</option>
+			                        <option value="2">配股宝</option>
 			                    </select>
 							</td>
 						</tr>

@@ -151,9 +151,3 @@ function endOfPlanNoPassClose01() {
 	$("#endOfPlanNoPass01").window('close');
 		
 };
-
-
-
-
-
-

@@ -38,6 +38,7 @@ import com.tzdr.domain.vo.BibiTreatDrawListVo;
 import com.tzdr.domain.vo.DrawListAuditVo;
 import com.tzdr.domain.vo.DrawMoneyListVo;
 import com.tzdr.domain.vo.DrawMoneyListVoNew;
+import com.tzdr.domain.vo.PayeaseTreatDrawListVo;
 import com.tzdr.domain.web.entity.DrawList;
 
 /**
@@ -480,6 +481,16 @@ public class WithdrawalService extends BaseServiceImpl<DrawList,WithdrawalDao> {
 		String sql = "SELECT id,trade_no bbOrderId from w_draw_list where payment_channel = 2 AND LENGTH(trade_no)>0 AND `status`=21 ";
 		return nativeQuery(sql,null,BibiTreatDrawListVo.class);
 	}	
+	
+	
+	/**
+	 * 获取易支付提现待处理订单
+	 */
+	public List<PayeaseTreatDrawListVo> queryPayEaseTreatOrders(){
+		String sql = " SELECT id, `no` orderId, nbank vmid, narea secret FROM w_draw_list WHERE payment_channel = 3 AND LENGTH(nbank) > 0 AND LENGTH(narea) > 0 AND `status` = 21 ";
+		return nativeQuery(sql,null,PayeaseTreatDrawListVo.class);
+	}	
+	
 	
 	
 	

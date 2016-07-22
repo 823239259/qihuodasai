@@ -79,6 +79,16 @@ public class FTradeApplyVo implements Serializable {
 		 *迷你道指交易手数
 		 */
 		private Integer mdtranLever;
+		
+		/**
+		 *小恒指交易手数
+		 */
+		private Integer hstranLever;
+		
+		/**
+		 *美黄金交易手数
+		 */
+		private Integer agtranLever;
 
 
 		public BigDecimal getTraderTotal() {
@@ -181,6 +191,23 @@ public class FTradeApplyVo implements Serializable {
 		}
 		
 		
+		
+		public Integer getHstranLever() {
+			return hstranLever;
+		}
+
+		public void setHstranLever(Integer hstranLever) {
+			this.hstranLever = hstranLever;
+		}
+
+		public Integer getAgtranLever() {
+			return agtranLever;
+		}
+
+		public void setAgtranLever(Integer agtranLever) {
+			this.agtranLever = agtranLever;
+		}
+
 		public FTradeApplyVo(FSimpleConfig fSimpleConfig,BigDecimal payable,Double balance) {
 			this.tranLever = NumberUtils.toInt(fSimpleConfig.getTranLever());
 			this.traderTotal=fSimpleConfig.getTraderMoney();
@@ -198,6 +225,8 @@ public class FTradeApplyVo implements Serializable {
 			this.mbtranLever = outDiskParameters.getMbtranActualLever();
 			this.daxtranLever = outDiskParameters.getDaxtranActualLever();
 			this.nikkeiTranLever = outDiskParameters.getNikkeiTranActualLever();
+			this.hstranLever = outDiskParameters.getHstranActualLever();
+			this.agtranLever = outDiskParameters.getAgtranActualLever();
 			
 			this.traderTotal=outDiskParameters.getTraderTotal();
 			this.lineLoss=outDiskParameters.getLineLoss();

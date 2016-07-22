@@ -41,8 +41,11 @@ import com.tzdr.business.service.drawMoney.UserBankService;
 import com.tzdr.business.service.drawMoneyData.DrawMoneyDataService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.thread.SMSPgbSenderThread;
+import com.tzdr.business.service.thread.SMSSenderThread;
 import com.tzdr.common.api.bbpay.Bibipay;
 import com.tzdr.common.api.bbpay.util.BbUtil;
+import com.tzdr.common.api.payease.PayEase;
+import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.api.umpay.WithdrawPay;
 import com.tzdr.common.api.umpay.data.WithdrawPayExtendInfo;
 import com.tzdr.common.api.umpay.data.WithdrawPayInfo;
@@ -163,7 +166,8 @@ public class UserWithDrawController {
 		//获取提现渠道设置参数
 		int withdrawSetting = dataMapService.getWithDrawSetting();
 		if (Constant.PaymentChannel.BB_PAY!=withdrawSetting
-				&& Constant.PaymentChannel.UM_PAY !=withdrawSetting){
+				&& Constant.PaymentChannel.UM_PAY !=withdrawSetting
+				&& Constant.PaymentChannel.EASE_PAY !=withdrawSetting){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"system.withdraw.setting.error.");
 		}
 		
@@ -343,7 +347,8 @@ public class UserWithDrawController {
 		//获取提现渠道设置参数
 		int withdrawSetting = dataMapService.getWithDrawSetting();
 		if (Constant.PaymentChannel.BB_PAY !=withdrawSetting 
-				&& Constant.PaymentChannel.UM_PAY !=withdrawSetting){
+				&& Constant.PaymentChannel.UM_PAY !=withdrawSetting
+				&& Constant.PaymentChannel.EASE_PAY !=withdrawSetting){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.error.");
 		}
 		if (Constant.PaymentChannel.BB_PAY==withdrawSetting 
@@ -356,13 +361,22 @@ public class UserWithDrawController {
 			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.NOT_SUPPORT_THE_BANK,"not.support.the.bank.");
 
 		}
+		
+		if (Constant.PaymentChannel.EASE_PAY==withdrawSetting 
+				&& DataConstant.PAYMENT_SUPPORT != paymentSupportBank.getSupportEasedraw()){
+			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.NOT_SUPPORT_THE_BANK,"not.support.the.bank.");
+		}
 		// 币币支付最多不超过50000
 		if (Constant.PaymentChannel.BB_PAY==withdrawSetting 
 				&& Double.valueOf(money)>=50000){
 			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.BB_LIMIT_MAX_MONEY,"bb.limit.max.money.");
 		}
 		
-		
+		// 易支付支付最多不超过500000
+		if (Constant.PaymentChannel.EASE_PAY ==withdrawSetting
+				&& Double.valueOf(money)>=500000){
+			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.EASEPAY_LIMIT_MAX_MONEY,"easepay.limit.max.money.");
+		}
 		
 		WUser user=drawMoneyService.getUser(uid);
 		if (ObjectUtil.equals(null, user)){
@@ -446,6 +460,10 @@ public class UserWithDrawController {
 			if (Constant.PaymentChannel.BB_PAY==withdrawSetting){
 				return bbDrawMoney(drawList,money, paymentSupportBank, user, card);
 			}
+			//易支付
+			if (Constant.PaymentChannel.EASE_PAY==withdrawSetting){
+				return payeaseDrawMoney(drawList,money, paymentSupportBank, user, card);
+			}
 			// 联动优势
 			if (Constant.PaymentChannel.UM_PAY==withdrawSetting){ 
 				//开始调用接口
@@ -476,12 +494,12 @@ public class UserWithDrawController {
 				WithdrawPay draw=WithdrawPay.getInstance();
 				JSONObject jsonResult=null;
 				try {
-					logger.info("API接口-开始调用取款接口,金额:"+dmoney+", orderId:"+orderId+", 账号:"+user.getMobile());
+					logger.info("APP接口-开始调用取款接口,金额:"+dmoney+", orderId:"+orderId+", 账号:"+user.getMobile());
 					jsonResult = draw.getWithdrawResponse(withdrawPayInfo,extendInfo);
 					logger.info("结束调用取款接口.");
 				} catch (Exception e) {
-					logger.error("API接口-调用取款接口失败"+e.getMessage());
-					String dataDetail="API接口:userInfo:id:"+user.getId()+"|mobile:"+user.getMobile()+"orderId:"+orderId+"|ip:"+ip+"|异常："+e.getMessage();
+					logger.error("APP接口-调用取款接口失败"+e.getMessage());
+					String dataDetail="APP接口:userInfo:id:"+user.getId()+"|mobile:"+user.getMobile()+"orderId:"+orderId+"|ip:"+ip+"|异常："+e.getMessage();
 					EmailExceptionHandler.getInstance().HandleExceptionWithData(e, "API接口--调用取款接口失败", this.getClass().getName()+":moreSuccess", dataDetail);
 				}
 				
@@ -551,4 +569,46 @@ public class UserWithDrawController {
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"withdraw.success.");
 	}
 	
+
+	/**
+	 * 易支付提现处理
+	 * @param drawList
+	 * @param dmoney
+	 * @param paymentSupportBank
+	 * @param user
+	 * @param bankCard
+	 * @return
+	 */
+	private ApiResult payeaseDrawMoney(DrawList drawList,Double dmoney,PaymentSupportBank paymentSupportBank,WUser user,String bankCard){
+		logger.info("投资达人app端提现调用易支付支付接口参数：金额["+dmoney+"],卡号["+bankCard+"]");
+		//提现手续费
+		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
+		Double handleFee = 0.00;
+		if(!StringUtil.isBlank(handleFeeStr)) {
+			handleFee = Double.valueOf(handleFeeStr);
+		}
+		
+		if(BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+			//扣除手续费
+			dmoney = BigDecimalUtils.subRound(dmoney, handleFee);
+		} 
+		// 调用提现接口
+		// 格式：分帐信息总行数|分帐总金额|$收方帐号|收方帐户名|收方开户行|收方省份|收方城市|付款金额| 客户标识|联行号
+		JSONObject result =PayEaseUtil.tzdrDrawMony(dmoney, paymentSupportBank.getBbpayContactNumber(), drawList.getCard(), 
+				user.getUserVerified().getTname(), drawList.getNo(),paymentSupportBank.getBankName());
+		if (PayEase.WITHDRAW_INTERFACE_SUCCESS != result.getIntValue("status")){
+			logger.info("易支付调用取款接口失败，"+result.toJSONString());
+			EmailExceptionHandler.getInstance().HandleHintWithData("易支付调用取款接口失败","PayEaseDrawMoney", result.toJSONString());
+			return new ApiResult(false,ResultStatusConstant.FAIL,"withdraw.fail;transfer.withdraw.interface.fail.");			
+		}
+		
+		// 更新商户号和商户秘钥 到提现记录中，以便获取提现状态时方便
+		drawMoneyService.updatDrawPayeaseInfo(drawList.getId(),result.getString("vmid"),result.getString("secret"));
+		//发送短信
+		Map<String,String> map= new HashMap<String,String>();
+		map.put("account", user.getMobile());
+		map.put("money", dmoney.toString());
+		new SMSSenderThread(user.getMobile(),"draw.money.template", map).start();
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"withdraw.success.");
+	}
 }

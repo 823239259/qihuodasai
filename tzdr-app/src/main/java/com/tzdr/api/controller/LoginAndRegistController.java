@@ -1,15 +1,22 @@
 package com.tzdr.api.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jodd.mail.MailException;
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
+import org.apache.axis2.databinding.types.soapencoding.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,16 +34,19 @@ import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.api.service.ApiTradeService;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.service.feededuction.FeeDuductionService;
+import com.tzdr.business.service.future.FSimpleCouponService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
+import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
+import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 
 /**
  * <B>说明: </B>用户操作相关接口
@@ -64,6 +74,9 @@ public class LoginAndRegistController {
 	
 	@Autowired
 	private FeeDuductionService feeDuductionService;
+	
+	@Autowired
+	private FSimpleCouponService fSimpleCouponService;
 
 	private static Object lock = new Object();
 	
@@ -119,7 +132,7 @@ public class LoginAndRegistController {
 		}
 		
 		WUser wUser = new WUser();     //创建注册对象信息
-		wUser.setSource(Constant.Source.TZDR);
+		wUser.setSource(Constant.RegistSource.APP_TZDR_REGIST);
 		WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
 		wUser.setUserType("0");
 		wUser.setParentNode(platformDefaultWuser);
@@ -141,8 +154,28 @@ public class LoginAndRegistController {
 		String ip = IpUtils.getIpAddr(request);
 		wUser.setLastLoginIp(ip);
 		wUser.setRegCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
-		synchronized (lock) {
-			wUserService.saveWUser(wUser);
+		try {
+			synchronized (lock) {
+				wUserService.saveWUser(wUser);
+				//活动发放注册券
+				String couponName=MessageUtils.message("regist.app.coupon");
+				List<FSimpleCoupon> coupons=this.fSimpleCouponService.findByStatusAndName((short)1, couponName);
+				//发放
+				if(checkRegistCoupon(coupons)){
+					FSimpleCoupon f=coupons.get(0);
+					f.setUserId(wUser.getId());
+					f.setUserPhone(mobile);
+					f.setStatus((short)2);
+					f.setGrantTime(new Date().getTime()/1000);
+					if(f.getCycle()!=null && f.getCycle()!=0){
+						Long grantTime = f.getGrantTime();
+						Long deadLine = Dates.toDate(Dates.dateAddDay(Dates.parseLong2Date(grantTime),f.getCycle())).getTime() / 1000;
+						f.setDeadline(deadLine);
+					}
+					fSimpleCouponService.update(f);
+				}
+			}
+		} catch (Exception e) {
 		}
 		//p2p 同步注册
 		new RegistP2pThread(mobile,password,wUser.getLoginSalt()).start();
@@ -195,4 +228,26 @@ public class LoginAndRegistController {
 		DataConstant.CACHE_USER_MAP.put(appToken,new CacheUser(wUser,secretKey));
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"login.success.",jsonObject);
 	} 
+	
+	
+	/**
+	 * 检查注册券是否存在
+	 * @return
+	 */
+	public boolean checkRegistCoupon(List<FSimpleCoupon> coupons){
+		//判断查询数据是否为空
+		if(CollectionUtils.isEmpty(coupons)){
+			return false;
+		}
+		FSimpleCoupon f = coupons.get(0);
+		//判断优惠券状态是否为1
+		if(f.getStatus()!=1){
+			return false;
+		}
+		//判断优惠券截止日期是否过期
+		if(f.getDeadline() != null && f.getDeadline() < Dates.getCurrentLongDate()){
+			return false;
+		}
+		return true;
+	}
 }

@@ -37,7 +37,7 @@ public class Notice extends BaseEntity {
 	private int status;
 	
 	/**
-	 * 字段说明：1.投资达人  2.配股宝
+	 * 字段说明：1.维胜  2.配股宝
 	 */
 	@Column(name="diff")
 	private int diff;

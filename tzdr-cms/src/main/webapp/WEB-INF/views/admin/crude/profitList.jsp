@@ -73,12 +73,14 @@ function timeConvert(value,rowData,rowIndex) {
 									<input id="startTime2" name="search_date_GTE_endTime" class="Wdate" type="text" onFocus="var endTime2=$dp.$('endTime2');WdatePicker({onpicked:function(){endTime2.focus();},maxDate:'#F{$dp.$D(\'endTime2\')}'})"/>
 								      至  <input id="endTime2" name="search_date_LTE_endTime" class="Wdate" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime2\')}'})"/>							      
 								</td>
-								<td class="label right">
-									<span>&nbsp;</span>
-								</td>
-								<td >
-									
-								</td>
+								<td class="label right"><span>平台来源：</span></td>
+								<td><select id="search_EQ_source"
+									class="easyui-combobox" name="search_EQ_source"
+									style="width: 100px; height: 25px;">
+										<option value="">全部</option>
+										<option value="1">网站平台</option>
+										<option value="2">APP平台</option>
+								</select></td>
 							</tr>
 						</table>	
 					</form>
@@ -120,7 +122,9 @@ function timeConvert(value,rowData,rowIndex) {
 							<th field="discountMoney" width="160">折扣券（折）</th>
 							<th field="discountActualMoney" width="160">抵扣手续费(元)</th>
 							<th field="actualProfitLoss" width="160">实际盈亏(元)</th>
+							<th field="sourceStr" width="150">平台来源</th>
 							<th field="stateType" width="100">结算状态</th>
+							
 			            </tr>
 			        </thead>
    				</table>

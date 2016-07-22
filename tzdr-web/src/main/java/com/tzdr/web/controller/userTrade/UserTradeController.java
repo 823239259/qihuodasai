@@ -404,7 +404,7 @@ public class UserTradeController {
 			WUser wuser = wUserService.getUser(user.getId());
 						
 			synchronized(lock) {
-				userTrade=userTradeService.buildUserTrade(userTrade, wuser, volumeDetailId);
+				userTrade=userTradeService.buildUserTrade(userTrade, wuser, volumeDetailId,"11");
 			}	
 			
 			// 新增返回feetype

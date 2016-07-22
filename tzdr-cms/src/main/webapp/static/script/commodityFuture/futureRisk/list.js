@@ -345,8 +345,8 @@ $(function() {
 			width : 100,
 			sortable : true
 		}, {
-			field : 'appStartTime',
-			title : '启用时间',
+			field : 'appTime',
+			title : '方案申请时间',
 			width : 200,
 			sortable : true,
 			formatter : function(value, row, index) {
@@ -356,8 +356,8 @@ $(function() {
 				return "";
 			}
 		}, {
-			field : 'appTime',
-			title : '方案申请时间',
+			field : 'appStartTime',
+			title : '启用时间',
 			width : 200,
 			sortable : true,
 			formatter : function(value, row, index) {
@@ -444,8 +444,8 @@ $(function() {
 			sortable : true
 		},
 		 {
-			field : 'discountMoney',
-			title : '折扣券(折)',
+			field : 'discountMoneyStr',
+			title : '优惠券',
 			width : 150,
 			sortable : true
 		},

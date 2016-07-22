@@ -11,6 +11,7 @@ import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tzdr.common.api.alidayu.AlidayuSMSSender;
 import com.tzdr.common.api.ihuyi.util.IhuyiConfigUtil;
 import com.tzdr.common.api.lianyus.LianyusSMSSender;
 import com.tzdr.common.exception.EmailExceptionHandler;
@@ -144,6 +145,11 @@ public class SMSSender {
 	 * 
 	 */
 	public boolean sendByTemplate(int smsChannel, String mobile, String templateKey, Map<String, String> map) {
+		if(smsChannel == 3){  // 判断短信通道：1-互亿无线；2-lianyus；3-阿里大鱼；默认使用互亿无线
+			boolean flag = AlidayuSMSSender.getInstance().sendByTemplate(mobile, templateKey, map);
+			log.info("短信通道:{},手机号：{},msg:{}",  smsChannel, mobile, (flag?"短信发送成功":"短信发送失败"));
+			return flag;
+		}
 		String template = ConfUtil.getContext(templateKey);
 		String content = "";
 		if ("ihuyi.verification.code.template".equals(templateKey)) {

@@ -41,7 +41,7 @@ public class FSimpleFtseVo implements Serializable {
 	private String tname;
 	
 	/**  
-	 * 业务状态【0.富时A50 6.原油    7. 恒指  8.国际综合】
+	 * 业务状态【0.富时A50 6.原油    7. 恒指  8.国际综合 9.小恒指】
 	 */
 	@AllowExcel(name="交易品种")
 	private Integer businessType;
@@ -96,7 +96,7 @@ public class FSimpleFtseVo implements Serializable {
 	/**
 	 * 交易手续费
 	 */
-	@AllowExcel(name = "申请手续费")
+  @AllowExcel(name = "申请手续费")
 	private BigDecimal tranFees;
 	
 	/**
@@ -165,9 +165,16 @@ public class FSimpleFtseVo implements Serializable {
 	 *迷你道指交易手数
 	 */
 	private Integer mdtranActualLever;
-	
-	
-	
+
+	/**
+	 * 小恒指交易手数
+	 */
+	private Integer lhsiTranActualLever;
+
+	/**
+	 * 美黄金交易手数
+	 */
+	private Integer agTranActualLever;
 
 	/**
 	 * 交易手续费总额
@@ -212,6 +219,13 @@ public class FSimpleFtseVo implements Serializable {
 	private BigInteger updateTime;
 	
 	/**
+	 * 平台来源 1:网站平台   2:APP平台   默认1
+	 */
+	private Integer source;
+	@AllowExcel(name="平台来源")
+	private String sourceStr;
+	
+	/**
 	 * 方案号TG+ID号
 	 */
 	@AllowExcel(name="方案编号")
@@ -229,6 +243,31 @@ public class FSimpleFtseVo implements Serializable {
     private Boolean deleted;
     
     private BigInteger version;
+
+    
+    
+    
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
+	public String getSourceStr() {
+		String str="";
+		if(this.source!=null&&this.source==2){
+			str="APP平台";
+		}else{
+			str="网站平台";
+		}
+		return str;
+	}
+
+	public void setSourceStr(String sourceStr) {
+		this.sourceStr = sourceStr;
+	}
 
 	public String getId() {
 		return id;
@@ -478,6 +517,7 @@ public class FSimpleFtseVo implements Serializable {
 		case 6:return "国际原油";
 		case 7:return "恒生指数";
 		case 8:return "国际综合";
+		case 9:return "小恒指";
 		default:return "";
 	}
 	}
@@ -556,6 +596,22 @@ public class FSimpleFtseVo implements Serializable {
 
 	public void setNikkeiTranActualLever(Integer nikkeiTranActualLever) {
 		this.nikkeiTranActualLever = nikkeiTranActualLever;
+	}
+
+	public Integer getLhsiTranActualLever() {
+		return lhsiTranActualLever;
+	}
+
+	public void setLhsiTranActualLever(Integer lhsiTranActualLever) {
+		this.lhsiTranActualLever = lhsiTranActualLever;
+	}
+
+	public Integer getAgTranActualLever() {
+		return agTranActualLever;
+	}
+
+	public void setAgTranActualLever(Integer agTranActualLever) {
+		this.agTranActualLever = agTranActualLever;
 	}
 
 	public Integer getMdtranActualLever() {

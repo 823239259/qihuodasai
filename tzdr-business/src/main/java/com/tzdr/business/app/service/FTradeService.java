@@ -94,8 +94,8 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	public List<FTradeVo> findGoods(){
 		StringBuffer sql  = new StringBuffer();
 		sql.append(" SELECT f.type,f.type_name,f.tran_fees FROM f_simple_config f ");
-		sql.append(" WHERE f.type in(?,?,?) GROUP BY f.type ORDER BY IF(f.type=7,'5.5',f.type) ASC ");
-		List<FTradeVo> dataList = this.getEntityDao().queryListBySql(sql.toString(), FTradeVo.class, null, new Object[]{5,6,7});
+		sql.append(" WHERE f.type in(?,?,?,?) GROUP BY f.type ORDER BY IF(f.type=7,'5.5',f.type) ASC ");
+		List<FTradeVo> dataList = this.getEntityDao().queryListBySql(sql.toString(), FTradeVo.class, null, new Object[]{5,6,7,9});
 		FTradeVo ftradeVo = new FTradeVo();
 		ftradeVo.setType(defaultType);
 		ftradeVo.setTypeName(defaultTypeName);
@@ -137,9 +137,9 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT f.id,f.trader_total,f.line_loss,f.tran_lever,f.app_time,f.state_type,f.business_type ");
 		sql.append(" FROM f_simple_ftse_user_trade f ");
-		sql.append(" WHERE f.uid=? AND f.business_type in(?,?,?,?) ");
+		sql.append(" WHERE f.uid=? AND f.business_type in(?,?,?,?,?) ");
 		sql.append(" ORDER BY f.app_time DESC ");
-		List<UserFTradeVo> userFTradeVoList = this.getEntityDao().queryListBySql(sql.toString(), UserFTradeVo.class, null, new Object[]{uid,0,6,7,8});
+		List<UserFTradeVo> userFTradeVoList = this.getEntityDao().queryListBySql(sql.toString(), UserFTradeVo.class, null, new Object[]{uid,0,6,7,8,9});
 		return userFTradeVoList;
 	}
 	
@@ -155,7 +155,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		sql.append(" ,f.trader_total,f.line_loss,f.fee_manage,f.tran_fees,f.tran_account ");
 		sql.append(" ,f.tran_password,f.end_time,f.tran_profit_loss,f.end_parities ");
 		sql.append(" ,f.tran_fees_total,f.tran_actual_lever,f.crude_tran_actual_lever,f.mdtran_actual_lever ");
-		sql.append(" ,f.hsi_tran_actual_lever,f.mntran_actual_lever,f.mbtran_actual_lever ");
+		sql.append(" ,f.hsi_tran_actual_lever,f.mntran_actual_lever,f.mbtran_actual_lever,f.ag_tran_actual_lever,f.lhsi_tran_actual_lever ");
 		sql.append(" ,f.daxtran_actual_lever,f.nikkei_tran_actual_lever ");
 		sql.append(" ,f.end_amount,f.state_type,f.business_type ");
 		sql.append(" FROM f_simple_ftse_user_trade f ");
@@ -166,7 +166,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		//方案详情信息
 		UserFTradeDetailsVo userFTradeDetailsVo =  null;
 		
-		//业务类型 如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;
+		//业务类型 如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;9:小恒指
 		Integer businessType = null;
 		
 		if(!CollectionUtils.isEmpty(userFTradeDetailsVoList)){  //判断集合是否为空
@@ -226,7 +226,9 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		}else if(type == 8){
 			remark ="国际期货(国际综合)追加保证金。";
 		}
-		
+		else if(type == 9){
+			remark ="国际期货(迷你恒指)追加保证金。";
+		}
 		fSimpleFtseUserTrade.setAppendTraderBond(TypeConvert.scale(fSimpleFtseUserTrade.getAppendTraderBond().add(addbond),2));
 		
 		//追加保证金划款
@@ -281,7 +283,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	 * @return
 	 */
 	public List<FTradeParamsVo> queryFtradeParams(int businessType){
-		StringBuffer sql = new StringBuffer("SELECT tran_lever,tran_fees,line_loss,fee_manage,trader_bond,trader_money trader_total from f_simple_config where type=? order by trader_bond asc");
+		StringBuffer sql = new StringBuffer("SELECT tran_lever,tran_fees,line_loss,fee_manage,trader_bond,trader_money trader_total from f_simple_config where type=? order by CAST(tran_lever as SIGNED) asc, trader_bond asc");
 		List<FTradeParamsVo> ftradeParamsVos = this.getEntityDao().queryListBySql(sql.toString(), FTradeParamsVo.class, null, businessType);
 		return ftradeParamsVos;
 	}
@@ -291,7 +293,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	 * @return
 	 */
 	public List<FTradeParamsVo> queryFtradeParams(){
-		StringBuffer sql = new StringBuffer(" SELECT atran_actual_lever tran_lever, htran_actual_lever, ytran_actual_lever, mntran_actual_lever, mbtran_actual_lever, daxtran_actual_lever, nikkei_tran_actual_lever, mdtran_actual_lever, line_loss, trader_bond, trader_total FROM w_out_disk_parameters ORDER BY trader_bond ASC ");
+		StringBuffer sql = new StringBuffer(" SELECT atran_actual_lever tran_lever, htran_actual_lever, ytran_actual_lever, mntran_actual_lever, mbtran_actual_lever, daxtran_actual_lever, nikkei_tran_actual_lever, mdtran_actual_lever, hstran_actual_lever, agtran_actual_lever,line_loss, trader_bond, trader_total FROM w_out_disk_parameters ORDER BY trader_bond ASC ");
 		List<FTradeParamsVo> ftradeParamsVos = this.getEntityDao().queryListBySql(sql.toString(), FTradeParamsVo.class, null);
 		return ftradeParamsVos;
 	}

@@ -126,7 +126,7 @@ public class RechargeListVo implements Serializable {
 				this.setSource("维胜");
 				break;
 			case Constant.Source.PGB:
-				this.setSource("维胜");
+				this.setSource("配股宝");
 				break;
 			default:
 				this.setSource("维胜");

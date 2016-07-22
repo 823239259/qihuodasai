@@ -7,9 +7,9 @@
 	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	
 	<!--token更新-->
-	<bean id="refreshTokenTask" class="com.tzdr.cms.quartz.HundsunTokenRefresh"></bean>
+	<!-- <bean id="refreshTokenTask" class="com.tzdr.cms.quartz.HundsunTokenRefresh"></bean>
 	
-	<!-- <task:scheduler id="refreshTokenScheduler" pool-size="5"/>
+	<task:scheduler id="refreshTokenScheduler" pool-size="5"/>
 	<task:scheduled-tasks scheduler="refreshTokenScheduler">
 		<task:scheduled ref="refreshTokenTask" method="executeRefreh" cron="0 15/30 * * * ?"/>
 	</task:scheduled-tasks> -->

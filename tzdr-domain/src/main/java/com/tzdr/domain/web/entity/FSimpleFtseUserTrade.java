@@ -112,9 +112,16 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 *迷你道指交易手续费
 	 */
 	private BigDecimal mdTranFees;
+
+	/**
+	 * 小恒指交易手续费
+	 */
+	private BigDecimal lhsiTranFees;
 	
-	
-	
+	/**
+	 * 美黄金交易手续费
+	 */
+	private BigDecimal agTranFees;
 
 	/**
 	 * 申请时间
@@ -143,7 +150,7 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	
 	/**
 	 * 交易手数
-	 * 备注：当businessType=8 国际综合时，此字段表示A50交易手数，否则为当前类型交易手数
+	 * 备注：当businessType=8 国际综合时，此字段表示A50交易手数，否则为当前类型交易手数 
 	 */
 	private Integer tranActualLever;
 	
@@ -184,9 +191,17 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 *迷你道指交易手数
 	 */
 	private Integer mdtranActualLever;
-	
-	
-	
+
+	/**
+	 * 小恒指交易手数
+	 */
+	private Integer lhsiTranActualLever;
+
+	/**
+	 * 美黄金交易手数
+	 */
+	private Integer agTranActualLever;
+
 	/**
 	 * 交易手续费总额
 	 */
@@ -202,7 +217,7 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 */
 	private BigDecimal endAmount;
 	
-		/**
+	/**
 	 * 结算金额-未扣除优惠券
 	 */
 	private BigDecimal endAmountCal;
@@ -240,14 +255,29 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	private BigDecimal goldenMoney;
 	
 	/**  
-	 * 业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指  8.国际综合  20.商品综合】
+	 * 业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指   8.国际综合  9.小恒指     20.商品综合】
 	 */
 	private Integer businessType;
+	
+	/**
+	 * 平台来源   1：网站平台    2：APP平台
+	 */
+	private Integer source=1;
+	
+	
+	
+	
 
 	public FSimpleFtseUserTrade() {
 	}
+	@Column(name = "source")
+	public Integer getSource() {
+		return source;
+	}
 
-	
+	public void setSource(Integer source) {
+		this.source = source;
+	}
 
 	@Column(name = "uid", nullable = false, length = 32)
 	public String getUid() {
@@ -547,6 +577,18 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 		this.nikkeiTranFees = nikkeiTranFees;
 	}
 
+	public BigDecimal getLhsiTranFees() {
+		return lhsiTranFees;
+	}
+	public void setLhsiTranFees(BigDecimal lhsiTranFees) {
+		this.lhsiTranFees = lhsiTranFees;
+	}
+	public BigDecimal getAgTranFees() {
+		return agTranFees;
+	}
+	public void setAgTranFees(BigDecimal agTranFees) {
+		this.agTranFees = agTranFees;
+	}
 	public BigDecimal getMdTranFees() {
 		return mdTranFees;
 	}
@@ -595,6 +637,18 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 		this.mdtranActualLever = mdtranActualLever;
 	}
 	
+	public Integer getLhsiTranActualLever() {
+		return lhsiTranActualLever;
+	}
+	public void setLhsiTranActualLever(Integer lhsiTranActualLever) {
+		this.lhsiTranActualLever = lhsiTranActualLever;
+	}
+	public Integer getAgTranActualLever() {
+		return agTranActualLever;
+	}
+	public void setAgTranActualLever(Integer agTranActualLever) {
+		this.agTranActualLever = agTranActualLever;
+	}
 	@Column(name = "end_amount_cal")
 	public BigDecimal getEndAmountCal() {
 		return endAmountCal;

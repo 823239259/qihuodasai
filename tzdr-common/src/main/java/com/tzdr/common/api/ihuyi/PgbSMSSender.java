@@ -2,6 +2,8 @@ package com.tzdr.common.api.ihuyi;
 
 import java.util.Map;
 
+import jodd.util.StringUtil;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -150,7 +152,8 @@ public class PgbSMSSender {
 			content = String.format(template, map.get("module"), map.get("code"));
 		} else if ("ihuyi.verification.signin.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("module"), map.get("code"));
-		} else if ("ihuyi.trade.ok.code.template".equals(templateKey)) {
+		} else if ("ihuyi.trade.ok.code.template".equals(templateKey) 
+				|| StringUtil.equals("month.trade.ok.code.template",templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
 		} else if ("hk.ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
@@ -160,7 +163,8 @@ public class PgbSMSSender {
 			content = String.format(template, map.get("account"), map.get("money"));
 		} else if ("hk.ihuyi.end.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("groupId"), map.get("leverMoney"), map.get("accrualValue"), map.get("endMoney"));
-		} else if ("ag.ihuyi.end.trade.ok.code.template".equals(templateKey)) {
+		} else if ("ag.ihuyi.end.trade.ok.code.template".equals(templateKey) 
+				|| StringUtil.equals("month.ihuyi.end.trade.ok.code.template",templateKey)) {
 			content = String.format(template, map.get("group"), map.get("totalInvest"), map.get("accrualValue"), map.get("revocationMoney"));
 		}
 		return send(smsChannel, mobile, content);

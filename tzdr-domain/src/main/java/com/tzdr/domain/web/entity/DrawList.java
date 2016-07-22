@@ -133,8 +133,15 @@ public class DrawList extends BaseCrudEntity {
 	 * 转帐凭证图片
 	 */
 	private String img;
+	/**
+	 * 易支付时 NBank 存储商户号
+	 */
 	private String NBank;
+	/**
+	 * 易支付时 NArea 存储商户秘钥
+	 */
 	private String NArea;
+	
 	private String NCity;
 	//初审人
 	private String firstAuditUser;
@@ -172,13 +179,13 @@ public class DrawList extends BaseCrudEntity {
 	
 	
 	/**
-	 * 充值渠道 1:联动优势 2：币币支付
+	 * 充值渠道 1:联动优势 2：币币支付 3:易支付
 	 */
 	private Integer paymentChannel=0;
 	
 	
 	/**
-	 * 来源：1:投资达人 2：配股宝
+	 * 来源：1:维胜 2：配股宝
 	 */
 	private Integer source=1;
 	

@@ -216,11 +216,26 @@ public class WuserListVo implements Serializable {
 	}
 
 	public String getSourceName() {
-		if(this.source == 2 || this.source == 5){
-			sourceName = "维胜";
-		}else{
-			sourceName = "维胜";
+		if(this.source == 2) {
+			sourceName = "配股宝Wap";
+		} else if(this.source == 5) {
+			sourceName = "配股宝Web";
+		} else if(this.source == 6) {
+			sourceName = "喊单直播间";
+		} else if(this.source == 7) {
+			sourceName = "维胜APP";
+		} else {
+			sourceName = "维胜Web";
 		}
+		
+		/*
+		if(this.source == 2 || this.source == 5){
+			sourceName = "配股宝";
+		}else{
+			sourceName = "投资达人";
+		}
+		*/
+		
 		return sourceName;
 	}
 
