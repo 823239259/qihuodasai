@@ -306,7 +306,8 @@
 					"tzdr/account/telphone.html",
 					"tzdr/account/coupon.html",
 					"tzdr/login/login.html",
-					"tzdr/account/updatePW.html"
+					"tzdr/account/updatePW.html",
+					"tzdr/scheme.html"
 				],
 				"priority": 0
 			},
@@ -659,7 +660,8 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"tzdr/account/account.html"
+					"tzdr/account/account.html",
+					"tzdr/future/paycp.html"
 				],
 				"priority": 0
 			},
@@ -672,7 +674,9 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"tzdr/future/futurePaySuc.html"
+					"tzdr/future/futurePaySuc.html",
+					"tzdr/account/charge.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
@@ -797,7 +801,8 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"home.html"
+					"home.html",
+					"tzdr/buy/buyDate.html"
 				],
 				"priority": 0
 			},
@@ -817,6 +822,28 @@
 			"tzdr/future/DetailLhsi.html": {
 				"resources": [
 					"images/list_01.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/scheme.html": {
+				"resources": [
+					"images/list_02.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/buy/buy.html"
+				],
+				"priority": 0
+			},
+			"tzdr/buy/buyDate.html": {
+				"resources": [
+					"images/buy_01.png",
+					"js/echarts.common.min.js"
 				],
 				"refer": [],
 				"priority": 0

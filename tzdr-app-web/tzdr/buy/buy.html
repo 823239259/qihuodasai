@@ -50,22 +50,21 @@
 				//合买方案
 	    		mui.app_request("/ftogether_trade/list",{pageNo:pageNo},
 	    			function(result){
-	    				
+	    					var s=JSON.stringify(result);
 	    					if (mui.isnull(result.data) || result.data.length< 10){
 	    						if (obj){
 	    							obj.endPullUpToRefresh(true);
 	    						}
 	    					}else
 	    					{
-	    						pageNo = pageNo+1;
 	    						if (obj){
 	    							obj.endPullUpToRefresh();
 	    						}
 	    					
 	    					}
+	    					pageNo = pageNo+1;
 	    				var _html='';
 	    				for (var i in result.data) { 
-	    					
 	    					if (result.data[i].status==1){
 	    						_html +='<li class="mui-table-view-cell" tradeID="'+result.data[i].id+'">'
 								_html +='<div class="bl_info">'

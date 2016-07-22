@@ -150,10 +150,10 @@
     mui.callService=function(){
 			plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",function(e){
 				if(e.index==1){
-					plus.device.dial("4000200158",false);
+					plus.device.dial("4008528008",false);
 				}
 			},
-			"400-020-0158",["取消","呼叫"]);
+			"400-852-8008",["取消","呼叫"]);
     }
     
 

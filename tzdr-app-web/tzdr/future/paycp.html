@@ -15,8 +15,6 @@
     		win=plus.webview.currentWebview();
     		//初始化监听头部和底部事件
   			//tzdr.init.initButtomListener();
-  			
-  			
   			//获取支付申请数据
   			mui.app_request("/user/ftrade/apply",{
   				"traderBond":win.traderBond,
@@ -38,10 +36,8 @@
   				}else{
   					defalut.innerHTML="不使用代金券";
   				}
-  				
   				//比较余额是否充足
 	  			compares();
-	  			
   			},function(result){
   				if(result.code==2){
   					mui.toast("申请失败");
@@ -50,14 +46,24 @@
   			})
   			
   			document.getElementById("chargeto").addEventListener("tap",function(){
-  				mui.openWindow("../account/charge.html");
-  			});
-  			
-  			
-  			
-  			
-  			
-  			
+  				alert("123   ");
+  				var w = plus.webview.create( "http://www.baidu.com",'id123',{},{preload:"preload webview"});
+				w.show(); // 显示窗口
+//	  			mui.openWindow({url:'../account/charge.html?id=8888'}{
+//                  id: '../account/charge.html?id=8888',
+//                  url: '../account/charge.html?id=8888',
+//                  show: {
+//                      aniShow: 'pop-in'
+//                  },
+//                  extras: {//extras里面的就是参数了
+//                      entrance: "mapDetail",
+//                      ProjectName: "工程名称"
+//                  },
+//                  waiting: {
+//                      autoShow: true, //自动显示等待框，默认为true
+//                  }
+//              });
+	  			});
   			document.getElementById("voucher").addEventListener("change",function(){
 
   				//判断是否余额充足测哈change功能
@@ -78,7 +84,9 @@
   			document.getElementById("tran_info").addEventListener("tap",function(){
   				mui.openWindow("../agree/cpru.html");
   			});
-    	});
+  			
+							
+    	
     	
     	
     	function compareAddvoucher(){

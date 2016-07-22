@@ -154,23 +154,6 @@
 					<div id="item3mobile" class="mui-slider-item mui-control-content ac_bank">
 						<div id="" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
-								<div class="ac_banklist">
-									<img src="../../images/bank_01.gif" />
-									<p>账号：3100 1518 0000 5003 1146<br>户名：上海信闳投资管理有限公司<br>开户行：中国建设银行上海黄浦支行</p>
-								</div>
-								<div class="ac_banklist">
-									<img src="../../images/bank_02.gif" />
-									<p>账号：1001 2689 1901 6802 706<br>户名：上海信闳投资管理有限公司<br>开户行：中国工商银行上海金陵东路支行</p>
-								</div>
-								<div class="ac_banklist">
-									<img src="../../images/bank_03.gif" />
-									<p>账号：0335 7100 0400 11335<br>户名：上海信闳投资管理有限公司<br>开户行：中国农业银行上海西藏南路支行</p>
-								</div>
-								<div class="ac_banklist">
-									<img src="../../images/bank_04.gif" />
-									<p>账号：4572 6756 9167<br>户名：上海信闳投资管理有限公司<br>开户行：中国银行上海大世界支行</p>
-								</div>
-								<p class="ac_bankpromt">向投资达人转账后，请录入流水单号，方便及时核实到账</p>
 								<ul class="mui-table-view">
 									<li class="mui-table-view-cell">
 										<label>转入银行</label>
@@ -191,6 +174,23 @@
 										<input type="text" class="mui-input-clear" placeholder="" data-input-clear="5" id="serialnum">
 									</li>
 								</ul>
+								<div class="ac_banklist" style="margin-top: 20px">
+									<img src="../../images/bank_01.gif" />
+									<p>账号：3100 1518 0000 5003 1146<br>户名：上海信闳投资管理有限公司<br>开户行：中国建设银行上海黄浦支行</p>
+								</div>
+								<div class="ac_banklist">
+									<img src="../../images/bank_02.gif" />
+									<p>账号：1001 2689 1901 6802 706<br>户名：上海信闳投资管理有限公司<br>开户行：中国工商银行上海金陵东路支行</p>
+								</div>
+								<div class="ac_banklist">
+									<img src="../../images/bank_03.gif" />
+									<p>账号：0335 7100 0400 11335<br>户名：上海信闳投资管理有限公司<br>开户行：中国农业银行上海西藏南路支行</p>
+								</div>
+								<div class="ac_banklist">
+									<img src="../../images/bank_04.gif" />
+									<p>账号：4572 6756 9167<br>户名：上海信闳投资管理有限公司<br>开户行：中国银行上海大世界支行</p>
+								</div>
+								<p class="ac_bankpromt">向维胜转账后，请录入流水单号，方便及时核实到账</p>
 								<div class="ac_btn">
 									<button id="openbankPay" class="mui-btn mui-btn-block lg-btnlogin" type="button">确认提交</button>
 								</div>
@@ -219,7 +219,7 @@
 				$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"})
 				$("#item3mobile").addClass("mui-active");
 				$("#item6mobile").removeClass("mui-active");
-				$("#itembox").css({"-webkit-transform": "translate3d(-527px, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
+				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
 			});
 			/*mui.init({
 
@@ -245,7 +245,13 @@ var payPage = null; //定义币币支付页面对象变量
 			var pay_id = null;
 			var pays = {};
 			mui.plusReady(function() {
-				
+			//var thisURL = document.URL;
+			//alert(thisURL);
+			
+//			var wv = plus.webview.currentWebview();
+//              var vText = wv.ProjectName;//这样就能接收到上个页面传过来的值了
+//              alert(vText);
+//              alert(JSON.stringify(wv));
 				/*document.getElementById("openappliy").addEventListener("tap", function() {
 					plus.runtime.openURL("https://qr.alipay.com/apw1hz7ddal8e7zsfe");
 					$.ajax({
@@ -290,7 +296,7 @@ var payPage = null; //定义币币支付页面对象变量
 					}
 					);*/
 					var money = document.getElementById("rechargeMoneyAlipayApp").value;
-					var w = plus.webview.create("http://hedaoqing.oicp.net/tzdr-app-web/tzdr/account/openUrlPay.html","pay",{height:"45px"},{money:money});
+					var w = plus.webview.create("http://hedaoqing.oicp.net/tzdr-app-web/tzdr/account/openUrlPay.html","pay",{top:"45px"},{money:money});
 					w.show();
 				});
 				/*switch(plus.os.name) { //根据客户端修改充值文本框属性
