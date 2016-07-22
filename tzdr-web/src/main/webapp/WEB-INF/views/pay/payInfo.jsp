@@ -932,7 +932,7 @@ var tab=<%=tab%>;
 							<ol class="first">
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_19.jpg"></li>
 								<li class="uc_b_l_info">
-									<span>帐号：<i>1289 0715 5110 501</i></span>
+									<span>账号：<i>1289 0715 5110 501</i></span>
 									<span>户名：<i>成都盈透科技有限公司</i></span>
 									<span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
 								</li>
