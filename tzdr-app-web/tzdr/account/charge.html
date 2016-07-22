@@ -240,7 +240,7 @@
 					drag: true, //默认为true
 				}
 			});
-var payPage = null; //定义币币支付页面对象变量
+			var payPage = null; //定义币币支付页面对象变量
 			var win = null;
 			var pay_id = null;
 			var pays = {};
@@ -248,32 +248,16 @@ var payPage = null; //定义币币支付页面对象变量
 			//var thisURL = document.URL;
 			//alert(thisURL);
 			
-//			var wv = plus.webview.currentWebview();
-//              var vText = wv.ProjectName;//这样就能接收到上个页面传过来的值了
-//              alert(vText);
-//              alert(JSON.stringify(wv));
-				/*document.getElementById("openappliy").addEventListener("tap", function() {
+			  var wv = plus.webview.currentWebview();
+              var vText = wv.money;//这样就能接收到上个页面传过来的值了
+              var balance = parseFloat(document.getElementById("balanceSpan").innerHTML);
+              var vTextlength = vText.length;
+              var cb = vText.substring(0,vTextlength - 1);
+              var chargeBalance = cb.replace(",","");
+              var chargeAmount = chargeBalance - balance; 
+              document.getElementById("rechargeMoneyAlipayApp").value = chargeAmount;
+			  /*document.getElementById("openappliy").addEventListener("tap", function() {
 					plus.runtime.openURL("https://qr.alipay.com/apw1hz7ddal8e7zsfe");
-					$.ajax({
-						url: "/tzdr-web/pay/pingplusplus",
-						type: "POST",
-						data: {
-							money: 1,
-							payWay:3
-						},
-						success: function(result) {
-							var charge = JSON.parse(result);
-							pingpp.createPayment(charge, function(result, err) {
-								if(result == "success") {
-									// 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
-								} else if(result == "fail") {
-									// charge 不正确或者微信公众账号支付失败时会在此处返回
-								} else if(result == "cancel") {
-									// 微信公众账号支付取消支付
-								}
-							});
-						}
-					});
 				});*/
 				document.getElementById("alipayapp-btn").addEventListener("tap", function() {
 					/*mui.app_request('/user/pay/pingplusplus', {

@@ -54,9 +54,16 @@
   			
   			
   			document.getElementById("chargeto").addEventListener("tap",function(){
-  				mui.openWindow("../account/charge.html");
+  				var money = document.getElementById("traderBond").innerHTML;
+  				mui.openWindow({
+				    url:'../account/charge.html',
+				    id:'account',
+				    extras:{
+				        money : money,
+				        version:'0.5.8'
+				    }
+				});
   			});
-  			
   			document.getElementById("voucher").addEventListener("change",function(){
 
   				//判断是否余额充足需要测哈change功能
@@ -240,7 +247,7 @@
     			}
     			
     		})
-    	};
+    	}
     		
     </script>
 </head>
