@@ -82,7 +82,14 @@ public class PayController {
 		request.setAttribute("supportBanks",paymentSupportBankService.querySupportPayBanks());
 		return ViewConstants.PayViewJsp.PAY_MAIN_VIEW;
 	}
-	
+	/**
+	 * 手机APP支付成功跳转页面
+	 * @return
+	 */
+	@RequestMapping(value = "/paySucApp")
+	public String paySucApp(){
+		return "/views/pay/paysuc";
+	}
 	
 	
 	
