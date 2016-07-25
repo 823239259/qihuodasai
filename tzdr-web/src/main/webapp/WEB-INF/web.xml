@@ -72,7 +72,7 @@
 		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
 		<init-param>
 			<param-name>casServerUrlPrefix</param-name>
-			<param-value>http://hedaoqing.oicp.net/cas/</param-value>
+			<param-value>http://localhost:8080/cas/</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
@@ -85,12 +85,12 @@
 		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
 		<init-param>
 			<param-name>casServerLoginUrl</param-name>
-			<param-value>http://hedaoqing.oicp.net/cas/login</param-value>
+			<param-value>http://localhost:8080/cas/login</param-value>
 			<!-- 使用的CAS-Server的登录地址,一定是到登录的action -->
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://hedaoqing.oicp.net</param-value>
+			<param-value>http://localhost:8080</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 		<init-param>  
@@ -313,12 +313,12 @@
 		<filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
 		<init-param>
 			<param-name>casServerUrlPrefix</param-name>
-			<param-value>http://hedaoqing.oicp.net/cas/</param-value>
+			<param-value>http://localhost:8080/cas/</param-value>
 			<!-- 使用的CAS-Server的地址,一定是在浏览器输入该地址能正常打开CAS-Server的根地址 -->
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://hedaoqing.oicp.net</param-value>
+			<param-value>http://localhost:8080</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 	</filter>
