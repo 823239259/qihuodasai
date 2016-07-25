@@ -40,7 +40,7 @@ table.conn td.center {
 <body>
 <table border="0" style="font-size:12px;width:300px;" class="conn" cellpadding="0" cellspacing="0">
             <tr>
-                <th colspan="2">投资达人系统手工调账[凭证]</th>
+                <th colspan="2">维胜系统手工调账[凭证]</th>
             </tr>
             <tr>
                 <td class="label right">操作员：</td>
