@@ -64,14 +64,13 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,title){
 	            	}
 	            	html+='<li class="uc_fsl100 uc_fslcon" id="fslcon'+title+i+'">'+
 					"<a href='javascript:void(0);' onclick='javascript:showdetail("+showid+")' class='uc_fsllink'>详情</a>"+
-					'<div class="uc_fslpromt" id="detaildiv'+title+i+'"  style="display:none;">'+
-						'<i class="uc_ucp_icon"></i>'+
-						'<p class="uc_flspormtbox">详情：'+detail+'</p>'+
-						"<a href='javascript:void(0);' onclick='javascript:closedetail("+showid+")' class='uc_fslclose'></a>"+
-					'</div>'+
-				'</li>';
+					'</li>';
 	            	html +="</ol>";
-	            	
+	            	html+='<div class="uc_fslpromt" id="detaildiv'+title+i+'"  style="display:none;">'+
+	                '<i class="uc_ucp_icon"></i>'+
+	                '<p class="uc_flspormtbox">详情：'+detail+'</p>'+
+	                "<a href='javascript:void(0);' onclick='javascript:closedetail("+showid+")' class='uc_fslclose'></a>"+
+	                '</div>';
 	            }); 
 	           
 	            $('#'+divid).html(html); 

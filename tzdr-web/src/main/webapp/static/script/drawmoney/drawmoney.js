@@ -83,7 +83,7 @@ $(document).ready(function(){
 			showMsgDialog("提示",secwarn);
 			return;
 		}else if(warncard!="" && warncard!=undefined){
-			showMsgDialog("提示","未绑定银行卡，请先绑定银行卡");
+			showMsgDialog("提示","未绑定银行卡，请先绑定银行卡,<a style='color: #fc3' href='javascript:void(0)' class='bank_guanli' onclick='bankGuanli();'>银行卡管理</a>");
 			return;
 		}
 		
@@ -94,7 +94,7 @@ $(document).ready(function(){
 			showMsgDialog("提示",secwarn);
 			return;
 		}else if(warncard!="" && warncard!=undefined){
-			showMsgDialog("提示","未绑定银行卡，请先绑定银行卡");
+			showMsgDialog("提示","未绑定银行卡，请先绑定银行卡,<a style='color: #fc3' href='javascript:void(0)' class='bank_guanli' onclick='bankGuanli();'>银行卡管理</a>");
 			return;
 		}
 		
@@ -399,9 +399,11 @@ function getwarncard(){
 
 function bankmanage(){
 	showtab("",1);
-	
 }
 
+function bankGuanli(){
+	window.location.href=basepath+"/draw/drawmoney?tab=1";
+}
 
 //初始化tab页面
 inittab=function(id){
