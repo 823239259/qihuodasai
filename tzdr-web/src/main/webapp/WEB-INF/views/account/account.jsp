@@ -192,7 +192,7 @@
 								<i></i>
 							</div>
 						</li>				
-						<li>
+						<%-- <li>
 							<h3>融资金额<a href="javascript:void(0);"><img src="${ctx}/static/images/uc/pay_02.gif"></a></h3>
 							<p id="totalLending"></p>
 							<div class="uc_mlpromt" style="display:none;">
@@ -207,7 +207,7 @@
 								<p>您融资时缴纳的保证金</p>
 								<i></i>
 							</div>
-						</li>
+						</li> --%>
 						<li>
 							<h3>冻结金额<a href="javascript:void(0);"><img src="${ctx}/static/images/uc/pay_02.gif"></a></h3>
 							<p id="frzBal"></p>
