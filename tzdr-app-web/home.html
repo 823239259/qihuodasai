@@ -50,8 +50,8 @@
 	</nav>
 	<div class="mui-content own-mainlist">
 		<div class="mui-slider" id="slider">
-		  	<div class="mui-slider-group mui-slider-loop" id="bannerloop">
-		  		<div class="mui-slider-item"><a href="javascript:void(0);"><img src="images/banner_load.jpg"/></a></div>
+		  	<div class="mui-slider-group mui-slider-loop" id="bannerloop" style="width: 100%;height:300px">
+		  		<div class="mui-slider-item" ><a href="javascript:void(0);"><img src="images/banner_load.jpg"/></a></div>
 		  	</div>
 		  	<div class="mui-slider-indicator" id="indicatorid">
 				<!--<div class="mui-indicator mui-active"></div>
@@ -179,12 +179,12 @@
 			function addBanner(banner,firstend){
 				var _html='';
 				if (firstend){
-					 _html='<div class="mui-slider-item mui-slider-item-duplicate">';
+					 _html='<div class="mui-slider-item mui-slider-item-duplicate" >';
 				}
 				else{ 
 					 _html='<div class="mui-slider-item">';
 				}
-				_html +='<a href="javascript:void(0);" id="'+banner.newId+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title="" />';
+				_html +='<a href="javascript:void(0);" id="'+banner.newId+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title="" style="height:260px" />';
 				_html +='</a></div>';
 				return _html;
 			}

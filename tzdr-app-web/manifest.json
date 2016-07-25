@@ -332,7 +332,8 @@
 					"tzdr/account/pay.html",
 					"tzdr/account/account.html",
 					"tzdr/future/list.html",
-					"home.html"
+					"home.html",
+					"tzdr/account/openUrlPay.html"
 				],
 				"priority": 0
 			},

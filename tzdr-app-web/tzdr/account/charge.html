@@ -216,7 +216,7 @@
 		$("#itembox").css({"-webkit-transform": "translate3d(0px, 0px, 0px) translateZ(0px)", "-webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)","transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
 			});
 			bankPay.addEventListener("tap", function() {
-				$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"})
+				$("#sliderProgressBar").css({"transform":"translate3d(100%, 0px, 0px) translateZ(0px)"})
 				$("#item3mobile").addClass("mui-active");
 				$("#item6mobile").removeClass("mui-active");
 				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
@@ -271,7 +271,7 @@
 					}
 					);*/
 					var money = document.getElementById("rechargeMoneyAlipayApp").value;
-					var w = plus.webview.create("http://hedaoqing.oicp.net/tzdr-app-web/tzdr/account/openUrlPay.html","pay",{top:"45px"},{money:money});
+					var w = plus.webview.create("openUrlPay.html","pay",{top:"45px"},{money:money});
 					w.show();
 				});
 				/*switch(plus.os.name) { //根据客户端修改充值文本框属性
@@ -523,6 +523,15 @@
 				});
 				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
 			})(mui);
+			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+			  //注意slideNumber是从0开始的；
+				//alert(event.detail.slideNumber );
+			if(event.detail.slideNumber==0){
+					$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"});
+			}else if(event.detail.slideNumber==1){
+				$("#sliderProgressBar").css({"transform":"translate3d(100%, 0px, 0px) translateZ(0px)"})
+			}
+			});
 		</script> 
 	</body>
 
