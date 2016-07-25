@@ -46,23 +46,15 @@
   			})
   			
   			document.getElementById("chargeto").addEventListener("tap",function(){
-  				alert("123   ");
-  				var w = plus.webview.create( "http://www.baidu.com",'id123',{},{preload:"preload webview"});
-				w.show(); // 显示窗口
-//	  			mui.openWindow({url:'../account/charge.html?id=8888'}{
-//                  id: '../account/charge.html?id=8888',
-//                  url: '../account/charge.html?id=8888',
-//                  show: {
-//                      aniShow: 'pop-in'
-//                  },
-//                  extras: {//extras里面的就是参数了
-//                      entrance: "mapDetail",
-//                      ProjectName: "工程名称"
-//                  },
-//                  waiting: {
-//                      autoShow: true, //自动显示等待框，默认为true
-//                  }
-//              });
+  				var money = document.getElementById("traderBond").innerHTML;
+		  			mui.openWindow({
+				    url:'../account/charge.html',
+				    id:'account',
+				    extras:{
+				        money : money,
+				        version:'0.5.8'
+				    }
+				});
 	  			});
   			document.getElementById("voucher").addEventListener("change",function(){
 
@@ -303,6 +295,7 @@
     			}
     		})
     	}
+    	}); 
     </script>
 </head>
 <body>
@@ -364,7 +357,7 @@
 	</ul>	
 	<div class="ac_btn">
 		<button class="mui-btn mui-btn-block pay_btn" type="button" style="display: none;"  id="payto">确认支付</button>	
-		<button class="mui-btn mui-btn-block pay_btn" type="button" style="display: none;" id="chargeto">立即去充值123</button>							
+		<button class="mui-btn mui-btn-block pay_btn" type="button" style="display: none;" id="chargeto">立即去充值</button>							
 	</div>		
 </div>
 </body>

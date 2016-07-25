@@ -878,7 +878,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/account/charge.html"
+				],
 				"priority": 0
 			}
 		},
