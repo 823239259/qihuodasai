@@ -178,7 +178,7 @@ public class UserPayController {
 		WUser user = this.payService.getUser(uid);
 		String paymoney=request.getParameter("money");
 		String payWay = request.getParameter("payWay");
-		if(paymoney != null && Integer.parseInt(paymoney) > 0){
+		if(paymoney != null && Double.parseDouble(paymoney) > 0){
 			int status=0;
 			String paytype = "3" ;
 			int source = 1;
