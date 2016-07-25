@@ -247,15 +247,6 @@
 			mui.plusReady(function() {
 			//var thisURL = document.URL;
 			//alert(thisURL);
-			
-			  var wv = plus.webview.currentWebview();
-              var vText = wv.money;//这样就能接收到上个页面传过来的值了
-              var balance = parseFloat(document.getElementById("balanceSpan").innerHTML);
-              var vTextlength = vText.length;
-              var cb = vText.substring(0,vTextlength - 1);
-              var chargeBalance = cb.replace(",","");
-              var chargeAmount = chargeBalance - balance; 
-              document.getElementById("rechargeMoneyAlipayApp").value = chargeAmount;
 			  /*document.getElementById("openappliy").addEventListener("tap", function() {
 					plus.runtime.openURL("https://qr.alipay.com/apw1hz7ddal8e7zsfe");
 				});*/
@@ -302,6 +293,17 @@
 					function(result) {
 						var balance = result.data.balance;
 						document.getElementById("balanceSpan").innerHTML = balance + '元';
+						var wv = plus.webview.currentWebview();
+		              	var vText = wv.money;//这样就能接收到上个页面传过来的值了
+		             	if(vText != null){
+			              var balance = parseFloat(document.getElementById("balanceSpan").innerHTML).toFixed(2);
+			              var vTextlength = vText.length;
+			              var cb = vText.substring(0,vTextlength - 1);
+			              var chargeBalance = cb.replace(",","");
+			              var chargeAmount = chargeBalance - balance; 
+			             console.log(chargeAmount);
+			              document.getElementById("rechargeMoneyAlipayApp").value = chargeAmount;
+		              }
 						return;
 					},
 					function(result) {
@@ -440,7 +442,6 @@
 				document.getElementById("openbankPay").addEventListener("tap", function() {
 					banksPay();
 				});
-
 			});
 
 			//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
