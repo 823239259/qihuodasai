@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.domain.web.entity.future.FSimpleCoupon;
+
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
@@ -86,7 +89,7 @@ import com.tzdr.web.utils.WebUtil;
 /**
  * @Description:
  * @ClassName: UserTradeController.java
- * @author Lin Feng
+ * @author LinFeng
  * @date 2015年1月5日
  */
 @Controller
@@ -120,7 +123,10 @@ public class UserTradeController {
 	private VolumeDetailService volumeDetailService;
 	@Autowired
 	private SecurityInfoService securityInfoService;
-	
+
+	@Autowired
+	private FSimpleCouponService fSimpleCouponService;
+
 	@Autowired
 	private RealDealService realDealService;
 	
@@ -160,6 +166,7 @@ public class UserTradeController {
 		modelMap.put("totalManagerMo", wUser.getTotalManagerMo());//累计管理费
 		modelMap.put("totalAccrual",totalAccrual);//累计盈亏
 		modelMap.put("totalAccrualRate",totalAccrualRate);//盈亏率
+
 		return ViewConstants.UserTradeViewJsp.LIST;
 	}
 
@@ -180,7 +187,7 @@ public class UserTradeController {
 	 */
 	@RequestMapping(value = "/success")
 	public String tradeOk(ModelMap modelMap, int lever, int tradeStart,
-			Short type, double capitalMargin, int borrowPeriod,String volumeDetailId,
+			Short type, double capitalMargin, int borrowPeriod,String voucherId,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
@@ -219,8 +226,8 @@ public class UserTradeController {
 				
 				if (capitalMargin>CacheManager.getMaxCapitalAmount()||capitalMargin<300) {
 					throw new UserTradeException("no.capital.margin", null);
-				}	
-			
+				}
+
 				if (borrowPeriod>180||capitalMargin<2) {
 					throw new UserTradeException("no.borrow.period", null);
 				}
@@ -352,7 +359,7 @@ public class UserTradeController {
 			}
 						
 			synchronized(lock) {
-				userTrade=userTradeService.buildUserTrade(userTrade, wuser, volumeDetailId);
+				userTrade=userTradeService.buildUserTrade(userTrade, wuser, voucherId ,"11");
 				
 				/**
 				* @Description: (处理配资合同动态参数)
@@ -580,6 +587,14 @@ public class UserTradeController {
 				modelMap.put("activityEnd", true);
 			}
 		}
+		// 获取已使用自然日
+		String today = Dates.format(Dates.CHINESE_DATE_FORMAT_LONG);
+        String startDay = Dates.parseBigInteger2Date(
+                userTradeCmsVo.getStarttime(),
+                Dates.CHINESE_DATE_FORMAT_LONG);
+        long useDays = tradeDayService.getNaturalDays(startDay,today);
+        modelMap.put("useDays", useDays);
+        
 		modelMap.put("isExtractableProfit", isExtractableProfit);
 		modelMap.put("isAddProgram",isAddProgrom(userTradeCmsVo)?1:0);
 		String operatorsInfo = operatorsInfo(userTradeCmsVo.getTotalLending());

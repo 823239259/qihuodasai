@@ -5,7 +5,7 @@
 <%@include file="../common/notice.jsp"%>
 <div class="header">
 	<div class="top">
-    	<div class="salogan">欢迎您来到配股宝，股市有风险，投资须谨慎！</div>
+    	<div class="salogan"><a href="${ctx}/topic/overseas/" target="_blank" style="color:#808080;">海外用户入口</a></div>
         <p>
         	<%
        			if(request.getSession().getAttribute("userName")!=null){
@@ -23,10 +23,12 @@
     </div>
     <div class="main">
     	<div class="logo"><a href="${ctx}/"></a></div>
-        <div class="nav" id="navlist">
-        	<a id="nav_my" href="${ctx}/user/account">我的账户</a>
-            <!-- <a id="hkstockli" href="#">港股操盘</a> -->
-			<a id="stockli" href="${ctx}/day?enter=0">A股操盘</a>
+    	<p style="float: left;margin-top: 40px;color: #f00; height: 20px;line-height: 20px; font-size:16px;">股市有风险，投资须谨慎！</p>
+       <div class="nav" id="navlist">
+        	<a id="nav_my" href="${ctx}/user/account">我的账户</a> 
+        	<a id="hkstockli" href="${ctx}/hkstock/index">港股操盘</a>           	
+			<a id="monthli" href="${ctx}/monthTrade/index">月月操盘</a>
+			<a id="stockli" href="${ctx}/day?enter=0">随心操盘</a>
             <a href="${ctx}/" class="cur">首页</a>
         </div>
     </div>

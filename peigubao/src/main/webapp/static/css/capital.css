@@ -4,11 +4,18 @@
 body {font-family:'微软雅黑'; background: #fff;}
 ul,li,ol,i,em { font-style: normal; list-style: none;}
 a{text-decoration:none;}
-
+.clearfix:after {
+visibility: hidden;
+display: block;
+font-size: 0;
+content: ".";
+clear: both;
+height: 0;
+}
 .capital { width: 100%; height: auto; background: #f1f1f1; padding: 15px 0; margin: 0 auto;  border: none;}
 .capital_ctn { width: 998px; height: auto; border: 1px solid #e1e1e1; background: #fff; margin: 0 auto; padding: 0 40px;}
 .cp_title { width: 100%; height: 57px; line-height: 57px; font-size: 20px; color: #232323; text-align: left; border-bottom: 1px solid #e5e5e5; font-weight: bold;  }
-.cp_main { width: 514px; height: auto; float: left; border-right: 1px solid #e5e5e5;}
+.cp_main { width: 514px; height: auto; float: left;}
 .cp_m_ctn { width: 100%; height: auto;}
 .cp_m_num { width: 100%; height: 58px; line-height: 58px; font-size:16px; color: #232323;  }
 .cp_m_num i {  font-size: 22px; padding-right: 5px; vertical-align:-1px;}
@@ -26,23 +33,22 @@ a{text-decoration:none;}
 .cp_m_list ul.cp_m_mul li.no { background:none;}
 .cp_m_list ul.cp_m_mul li.no span,.cp_m_list ul.cp_m_mul li.no p i { color:#ccc;}
 .cp_m_list ul.cp_m_mul li.on { background:none; }
-.cp_m_list ul li { display: block; float: left; width: 96px; height: 74px; border: 1px solid #e1e1e1; background: url(../images/cp/ico_02.gif) no-repeat left top; margin-right: 25px;cursor: pointer; margin-bottom: 22px; }
+.cp_m_list ul li { display: block; float: left; width: 96px; height: 55px; border: 1px solid #e1e1e1; background: url(../images/cp/ico_02.gif) no-repeat left top; margin-right: 25px;cursor: pointer; margin-bottom: 22px; }
 .cp_m_list ul li.on { background: url(../images/cp/ico_01.gif) no-repeat left top; border: 1px solid #ff5256;}
 .cp_m_list ul li.on span { color: #ff5256;}
 .cp_m_list ul li.on p { color: #ff5256;}
 .cp_m_list ul li p { width: 100%; height: 42px; line-height: 42px; text-align: center; font-size: 14px; color: #444; padding-top: 5px;}
 .cp_m_list ul li span { display: block; width: 100%; text-align: center;height: 16px; line-height: 16px; font-size: 14px; color: #999; padding-bottom: 12px; }
 .cp_m_list ul li p i { color: #ff5256; font-size: 22px;}
-.cp_sider { width: 405px; height: 608px; padding-left: 45px; float: left;}
+.cp_sider { width: 438px; height: 608px; padding-left: 45px; float: left; border-left:1px solid #e5e5e5;}
 .cp_sider .cp_m_num { margin-bottom: 20px;}
 .cp_sider h2 { width: 100%; height: 35px; line-height: 35px; font-size: 18px; color: #3d9fe1; font-weight: normal; overflow: hidden; margin-bottom: 10px;}
 .cp_sider h2 a { float: right; font-size:16px; color: #3fa0e4; padding-right: 20px; *margin-top: -35px; }
 .cp_sdfont { position:relative; width: 100%; height: 58px; line-height: 58px; font-size: 14px; color: #444;}
 .cp_sdfont label { vertical-align: top; color: #444; display: inline-block; height: 24px; line-height: 24px;}
 .cp_sdfont label a { display: inline-block; width: 16px; height: 16px; background: url(../images/cp/cpicon_08.gif) no-repeat; vertical-align: middle; margin-left: 5px;}
-.cp_sdfont span { width:260px; display: inline-block; height: auto; line-height: 24px; vertical-align: top;}
+.cp_sdfont span { width:332px; display: inline-block; height: auto; line-height: 24px; vertical-align: top;}
 .cp_sdfont span i { color: #ff5256; font-size: 20px;}
-.cp_color { color: #ff6500;}
 .cp_sdfont em { position:absolute; width:200px; text-align: right;right: 10px;top:0px; display: inline-block; height: 20px; line-height: 20px; font-size: 14px; color: #f00;padding-left: 10px; }
 .cp_sdfont input { vertical-align: middle; background: #fafafa;}
 .cp_sdfont i.cp_sd_time { display: inline-block; height: 24px; line-height: 24px; vertical-align: top; }

@@ -57,6 +57,16 @@ public class SSOController {
 	}
 	
 	/**
+	 * 随心操盘
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/toMonthSSO")
+	public String toMonth(HttpServletRequest request, HttpServletResponse response){
+		return "redirect:/monthTrade/index";
+	}
+	/**
 	 * 单点登录后进入股指操盘——期指随心乐
 	 * @param request
 	 * @param response

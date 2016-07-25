@@ -66,16 +66,17 @@ $(document).ready(function(){
 		 //showPageDialog(basepath+"securityInfo/toForgetdrawPwd","忘记密码",600,300);
 		 $("#updatefogetcode").css("display","block"); 
 		 $("#div_Mask").css("display","block");
+		 $('#updatemoneypwddiv').css("display","none");
 		 clearCount();
-		  $.post(basepath+"securityInfo/sendPhoneCode?type=draw",function(data){  
-				if(data.success){
-					if(data.message!="" && data.message!=null){
-						if(data.message=="success"){
-							countReset($("#fogetvalidatecode"),60,60);
-						}
-				    }	
-				}
-			},"json"); 
+//		  $.post(basepath+"securityInfo/sendPhoneCode?type=draw",function(data){  
+//				if(data.success){
+//					if(data.message!="" && data.message!=null){
+//						if(data.message=="success"){
+//							countReset($("#fogetvalidatecode"),60,60);
+//						}
+//				    }	
+//				}
+//			},"json"); 
 		}); 
 	 
 	  $("#nextfogetdrawpwdBtn").click(function(){
@@ -347,6 +348,9 @@ $(document).ready(function(){
 		 }else if(!checkpwd(cnewpwd)){
 			    $.alertTip($("#agindrawmoneypwd"),"请输入6-16位字母和数字组成的确认密码");
 				return;
+		 }else if(pwd==newpwd){
+			 	$.alertTip($("#newdrawmoneypwd"),"新密码不能与原提现密码相同");
+				return;
 		 }else if(cnewpwd!=newpwd){
 			   $.alertTip($("#agindrawmoneypwd"),"新密码和确认密码不一致");
 				return;
@@ -526,6 +530,11 @@ function validateCard(){
 
 //到实名相片上传
 function toupdateCardFile(){
+	
+	if(!($('#t_name') && $('#t_name').text() !="")){
+		showMsgDialog("提示","照片认证前请先进行实名认证！");
+		return;
+	}
 	$("#cardInfofile").css("display","block"); 
 	$("#div_Mask").show();
 	$("#idcard_front").val("");
@@ -588,18 +597,18 @@ function updateMobile(){
 		//初始化定义光标位置
 		$("#phonecode").focus();
 	}
-	setbtnvalue("validatecode");
+//	setbtnvalue("validatecode");
 	clearCount();
-	countReset($("#validatecode"),60,waittime);
-	$.post(basepath+"securityInfo/sendPhoneCode?type=phone",function(data){  
-		if(data.success){
-			if(data.message!="" && data.message!=null){
-				if(data.message=="success"){
-					alert("已成功发送验证码");
-			}
-		  }	
-		}
-	},"json"); 
+//	countReset($("#validatecode"),60,waittime);
+//	$.post(basepath+"securityInfo/sendPhoneCode?type=phone",function(data){  
+//		if(data.success){
+//			if(data.message!="" && data.message!=null){
+//				if(data.message=="success"){
+//					alert("已成功发送验证码");
+//			}
+//		  }	
+//		}
+//	},"json"); 
 	
 }
 

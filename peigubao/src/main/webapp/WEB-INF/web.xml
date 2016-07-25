@@ -197,6 +197,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
+		<url-pattern>/toMonthSSO</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/toFutureIndexSSO</url-pattern>
 	</filter-mapping>
 	<filter-mapping>

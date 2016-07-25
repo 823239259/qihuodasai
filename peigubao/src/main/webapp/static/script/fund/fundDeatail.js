@@ -98,7 +98,10 @@ function getdetail(obj){
 	var lidStr = new String(obj.lid);
 	if ((8==lidStr.length) && ("HK"==lidStr.substring(0,2))){
 		detailUrl = "uhkstock/detail/";
+	}else if((8==lidStr.length) && ("MM"==lidStr.substring(0,2))){
+		detailUrl = "user/monthTrade/detail/";
 	}
+	
 	if((9==lidStr.length) && ("HM"==lidStr.substring(0,2))){
 		if(type=="15"||type=="10"||type=="16"||type=="18" || type=="27"){
 			detail="合买方案["+obj.lid+"]</a>"+obj.remark;

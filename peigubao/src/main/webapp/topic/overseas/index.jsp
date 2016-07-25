@@ -55,9 +55,11 @@
 			<h4>北京时间周一至周五08:30-24:00</h4>
 			<div>
 				<p class="p1">电话：(＋86)400-633-9257</p>
-				<p class="p2">邮箱：market@peigubao.com</p>
-				<p class="p3">Q Q：2167073552</p>
-				<p class="p4">Skype：peigubao</p>
+				<P class="p2">固话：(＋86)023-63412652</P>
+				<p class="p3">邮箱：market@peigubao.com</p>
+				<p class="p4">Q Q：2167073552</p>
+				<p class="p5">Skype：peigubao</p>
+				<p class="p6">地址：中国（上海）自由贸易试验区锦绣东路2777弄21号楼112室</p>
 			</div>
 			<img src="image/right.png" class="right"/>
 		</div>
@@ -111,7 +113,7 @@
 		<img src="image/add1.png" class="first"/>
 		<img src="image/add2.png" />
 		<img src="image/add3.png" />
-		<a href="http://www.peigubao.com/day?enter=0" target="_blank"><img src="image/donow.png" /></a>
+		<a href="http://www.peigubao.com" target="_blank"><img src="image/donow.png" /></a>
 		<p>如果您或您亲友拥有中国大陆的手机号、银行卡和身份证</p>
 	</div>
 	<div class="tp_main6">
@@ -132,8 +134,8 @@
 	</div>
 </div>
 <div class="tp_foot">Copyright  2016 配股宝 All Rights Reserved 上海禄吉股权投资基金管理有限公司 版权所有 沪ICP备16003566号</div>
-<!-- <span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
-<span style="display: none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
+<span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span>
 <%@ include file="../../WEB-INF/views/common/count.jsp"%>
 </body> 
+<script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fefdbe85ed40718431ac8d75254634f49' type='text/javascript'%3E%3C/script%3E")) </script>
 </html>

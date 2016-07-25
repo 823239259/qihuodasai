@@ -1,13 +1,13 @@
 package com.tzdr.web.controller.userTrade;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.userTrade.FSimpleConfigService;
+import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
@@ -89,7 +89,10 @@ public class UserTradeEnterController {
 	
 	@Autowired
 	private SecurityInfoService securityInfoService;
-	
+
+	@Autowired
+	private FSimpleCouponService fSimpleCouponService;
+
 	@Autowired
 	private RealDealService realDealService;
 	
@@ -326,10 +329,12 @@ public class UserTradeEnterController {
 			HttpServletRequest request) {
 		String expenese=request.getParameter("expenese");
 		String interest=request.getParameter("interest");
-		
+		String voucherId=request.getParameter("voucherId");
+
 		JsonResult jsonResult = new JsonResult(false);
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession().getAttribute(
 				Constants.TZDR_USER_SESSION);
+
 
 		//配资金额
 		double capitalAmount = BigDecimalUtils.mul(capitalMargin, lever);
@@ -372,11 +377,37 @@ public class UserTradeEnterController {
 			manageFee=BigDecimalUtils.mul(manageFee,Double.valueOf(expenese));
 			manageFee=BigDecimalUtils.divRound(manageFee, 100);
 		}
-		
+
+
 		//总利息  = 利息  x 借款期限
 		double totalInterestFee = BigDecimalUtils.mul(interestFee,borrowPeriod);
 		//需要支付的总金额 = 配资保证金  + 总利息
-		double needPay = BigDecimalUtils.addRound(capitalMargin, totalInterestFee);
+		if(voucherId != null &&!voucherId.equals("")){
+			FSimpleCoupon voucher = fSimpleCouponService.get(voucherId);
+			if(fSimpleCouponService.isCouponValided(voucher,11)){
+				switch (voucher.getType()){
+					case 2:
+						if(voucher.getMoney().doubleValue()>=capitalMargin) {
+							capitalMargin = 0;
+						}else {
+							capitalMargin = capitalMargin-voucher.getMoney().doubleValue();
+						}
+						break;
+					case 3:
+						totalInterestFee =totalInterestFee*voucher.getMoney().doubleValue()/10;
+						break;
+					case 6:
+						if(voucher.getMoney().doubleValue()>=totalInterestFee) {
+							totalInterestFee = 0;
+						}else {
+							totalInterestFee = totalInterestFee-voucher.getMoney().doubleValue();
+						}
+						break;
+					default:break;
+				}
+			}
+		}
+		double needPay;
 		double needNextdayPay=0;
 		WUser wuser = wUserService.getUser(userSessionBean.getId());
 		UserVerified userVerified = securityInfoService.findByUserId(userSessionBean.getId());
@@ -393,7 +424,9 @@ public class UserTradeEnterController {
 			needPay=BigDecimalUtils.addRound(needPay,manageFee);
 			needNextdayPay=BigDecimalUtils.addRound(needNextdayPay, manageFee);
 		}
-	
+
+
+
 	    //“立即交易类型时”需要支付的金额
 		double payEnough= BigDecimalUtils.sub(wuser.getAvlBal(), needPay);
 		//“下一个交易类型时”需要支付的金额
@@ -414,7 +447,10 @@ public class UserTradeEnterController {
 		//限制当天当个用户配资数
 		String limitTradeNum = dataMapService.isLimitTodayTradeNum();
 		map.put("limitTradeNum", limitTradeNum);
-		
+
+
+
+
 		if (payNextdayEnough < 0) {
 			map.put("needNext", "on");
 		}
@@ -823,7 +859,36 @@ public class UserTradeEnterController {
 		shortLine = BigDecimalUtils.round(shortLine,0);
 		openLine = BigDecimalUtils.round(openLine,0);
 		String operatorsInfo = operatorsInfo(capitalAmount);
+		List<Map<String, Object>> methods = new ArrayList<>();
+		List<Map<String, Object>> fscs = fSimpleCouponService.getFSC(userSessionBean.getId(), 11);
+		if (null != fscs && !fscs.isEmpty()) {
+			for (Map fsc : fscs) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("id", fsc.get("id"));
+				String money =fsc.get("money").toString();
+				Integer types =Integer.valueOf(fsc.get("type").toString());
+				String voucher = "";
+				switch (types) {
+					case 2:
+						money=money.split("\\.")[0];
+						voucher = money + "元代金券";
+						break;
+					case 3:
+						money=money.substring(0,money.length()-1);
+						voucher = money + "折折扣券";
+						break;
+					case 6:
+						money=money.split("\\.")[0];
+						voucher = money +"元抵扣券";
+						break;
+					default:break;
+				}
+				map.put("voucher",voucher );
+				methods.add(map);
+			}
+		}
 
+		modelMap.put("voucher",methods);
 		modelMap.put("lever", lever);
 		modelMap.put("type", type);
 		modelMap.put("tradeStart", tradeStart);

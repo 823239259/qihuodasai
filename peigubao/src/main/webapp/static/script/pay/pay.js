@@ -222,7 +222,7 @@ function getDataList(index,type){
 	            		html+="<li class='uc_re_time'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>";
 		            	n.no
 	            	//}
-	            	html+="<li class='uc_re_num120'>"+no+"</li>";
+	            	html+="<li class='uc_re_num120' title='"+no+"'>"+no+"</li>";
 	            	html+="<li class='uc_re_way80'>"+n.paytypevalue+"</li>";
 	            	html+="<li class='uc_re_money100'>"+n.money+"元</li>";
 	            	html+="<li class='uc_re_money100'>"+actualMoney+"元</li>";

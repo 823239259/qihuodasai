@@ -117,6 +117,7 @@ $(document).ready(function() {
 				var data=result.obj.pageResults;
 				var total = result.obj.totalCount;   
 				var table='<div class="uc_tlisttitle">';
+				table+='<span class="fl type">方案类型：{12}</span>'
 				table+='<span class="fl">方案编号：{0}<i>{10}</i></span>';
 				table+='<span class="fl time">开始时间：{1}<i></span>';	
 				table+='</div>';
@@ -143,7 +144,8 @@ $(document).ready(function() {
 				table+='	<p class="uc_tlist_con">{8}</p>';
 				table+='</li>';
 				table+='<li class="uc_tlbtn">';
-				table+='{11}<div class="ut_tlbtn_detail"><a href="'+basepath+'trade/detail/{0}" class="uc_tlbtn_btn" id="opt_btn{0}">操盘详情</a>';
+				
+				table+='{11}<div class="ut_tlbtn_detail"><a href="'+basepath+'{13}" class="uc_tlbtn_btn" id="opt_btn{0}">操盘详情</a>';
 				
 				var detail='	<span style="display:none;" class="uc_tlist_link">交易账户</span>';
 				detail+='<span style="display:none;"><a href="javascript:endProject(\'{5}\',{6});" class="uc_tlist_stopbtn" >终结方案</a></span></div>';
@@ -208,7 +210,16 @@ $(document).ready(function() {
 					
 					var _remarginbtn = 1 == this.status ? '<a href="javascript:;" onclick="'+(this.feeType == 0 || this.feeType == 1  ? 'tentative();' : 'showRemarginBox(\''+this.groupId+'\');')+'" class="uc_tllist_add">追加保证金</a>' : '';
 					_remarginbtn = "";
-					var head=$.format(table,this.groupId,getFormatDateByLong(this.starttime,'yyyy-MM-dd'),getFormatDateByLong(this.endtime,'yyyy-MM-dd'),$.formatMoney(this.totalOperateMoney),$.formatMoney(this.totalLending),$.formatMoney(this.totalLeverMoney),$.formatMoney(this.totalAppendLeverMoney),totalAccrual,tradeStatus,feelTypeName,_iscNo, _remarginbtn);
+					var detail_path = "trade/detail/"+this.groupId;
+					var  activityType = this.activityType;
+					if (activityType==5){
+						activityType = "月月操盘";
+						detail_path = "user/monthTrade/detail/"+this.groupId;
+					}else
+					{
+						activityType = "随心操盘";
+					}
+					var head=$.format(table,this.groupId,getFormatDateByLong(this.starttime,'yyyy-MM-dd'),getFormatDateByLong(this.endtime,'yyyy-MM-dd'),$.formatMoney(this.totalOperateMoney),$.formatMoney(this.totalLending),$.formatMoney(this.totalLeverMoney),$.formatMoney(this.totalAppendLeverMoney),totalAccrual,tradeStatus,feelTypeName,_iscNo, _remarginbtn,activityType,detail_path);
 					var content=""
 					/*if(this.status==1){
 						content=$.format(detail,$.formatMoney(this.warning),$.formatMoney(this.open),this.hsBelongBroker,this.account,this.password,this.groupId,this.feeType);

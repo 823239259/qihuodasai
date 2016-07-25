@@ -166,6 +166,62 @@ changeFivteenToEighteen = function(card) {
 };
 
 $(document).ready(function(e) {
+
+	$("#interesfee1").val($("#interesfee i").text());
+	$("#managefee1").val($("#managefee i").text());
+	$("#needpaynum1").val($("#needpaynum i").text());
+
+	$("#voucher").bind("change",function(){
+		$("#interesfee i").text($("#interesfee1").val());
+		$("#managefee i").text($("#managefee1").val());
+		$("#needpaynum i").text($("#needpaynum1").val());
+		var voucher =$(this).children('option:selected').text();
+		$("#voucher_id").val($(this).children('option:selected').val());
+		var interesfee =$("#interesfee i").text();
+		var managefee =$("#managefee i").text();
+		var needpaynum =$("#needpaynum i").text();
+		var lengs;
+		if(voucher.indexOf("代金券")>0){
+			lengs=voucher.indexOf("元代金券");
+			voucher=voucher.substring(0,lengs);
+			var prices =Number(interesfee.replace(/[^0-9-.]/g, ''));
+			if(prices<=Number(voucher)){
+				$("#interesfee i").text("0");
+				var needpayVal = Number(needpaynum.replace(/[^0-9-.]/g, ''))-prices;
+				$("#needpaynum i").text($.formatMoney(needpayVal));
+			}else{
+				var interesfeeVal = Number(interesfee.replace(/[^0-9-.]/g, ''))-Number(voucher);
+				$("#interesfee i").text($.formatMoney(interesfeeVal));
+				var needpayVal = Number(needpaynum.replace(/[^0-9-.]/g, ''))-Number(voucher);
+				$("#needpaynum i").text($.formatMoney(needpayVal))
+			}
+		}else if(voucher.indexOf("折扣券")>0){
+			lengs=voucher.indexOf("折折扣券");
+			voucher=voucher.substring(0,lengs);
+			var price =managefee.replace(/[^0-9-.]/g, '');
+			var managefeeVal =price*(Number(voucher)/10);
+			$("#managefee i").text($.formatMoney(managefeeVal))
+			var needpayVal = Number(needpaynum.replace(/[^0-9-.]/g, ''))-(price-price*(Number(voucher)/10));
+			$("#needpaynum i").text($.formatMoney(needpayVal))
+		}else if(voucher.indexOf("抵扣券")>0){
+			lengs=voucher.indexOf("元抵扣券");
+			voucher=voucher.substring(0,lengs);
+			var price =managefee.replace(/[^0-9-.]/g, '');
+			if(price <= Number(voucher)){
+				$("#managefee i").text(0);
+				var needpayVal = Number(needpaynum.replace(/[^0-9-.]/g, ''))-Number(managefee);
+				$("#needpaynum i").text($.formatMoney(needpayVal))
+			}else{
+				var managefeeVal =price-Number(voucher);
+				$("#managefee i").text($.formatMoney(managefeeVal));
+				var needpayVal = Number(needpaynum.replace(/[^0-9-.]/g, ''))-Number(voucher);
+				$("#needpaynum i").text($.formatMoney(needpayVal))
+
+			}
+		}
+	});
+
+
 	$('#navlist a').removeClass('cur');
 	$("#stockli").addClass("cur");
 
@@ -197,8 +253,8 @@ $(document).ready(function(e) {
 		var tradetype=$("#tradetype").val();
 		var interest=$("#interest").val();
 		var expenese=$("#expenese").val();
-	
-		$.post(basepath + "check.json", {borrowPeriod:borrowPeriod,lever:lever,capitalMargin:capitalMargin,tradeStart:tradeStart,tradetype:tradetype,interest:interest,expenese:expenese,ajax:1}, function(result) {
+		var voucherId =$("#voucher_id").val();
+		$.post(basepath + "check.json", {borrowPeriod:borrowPeriod,lever:lever,capitalMargin:capitalMargin,tradeStart:tradeStart,tradetype:tradetype,voucherId:voucherId,interest:interest,expenese:expenese,ajax:1}, function(result) {
 				if (result.success) {
 					$('#userTodayTradeNum').val(result.data.userTodayTradeNum);
 					$('#limitTradeNum').val(result.data.limitTradeNum);

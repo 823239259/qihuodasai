@@ -22,26 +22,27 @@
 		<div class="uc_nav">
 			<ul>
 				<li><a id="stock" href="${ctx}/trade/list" class="icon1">A股方案</a><i>></i></li>
-				<!-- <li><a id="hkstock" href="#" class="icon2">港股方案 </a><i>></i></li> -->
+				<li><a id="hkstock" href="${ctx}/uhkstock/list" class="icon2">港股方案 </a><i>></i></li>
 			</ul>
 		</div>
 		<div class="uc_nav">
 			<ul>				
 				<li><a id="paynav" href="${ctx}/pay/payinfo" class="icon3">我要充值</a><i>></i></li>
 				<li><a id="drawnav" href="${ctx}/draw/drawmoney" class="icon4">我要提现</a><i>></i></li>
-				<li><a id="fund" href="${ctx}/fund/fundDetail" class="icon5">资金明细</a><i>></i></li>			
+				<li><a id="fund" href="${ctx}/fund/fundDetail" class="icon5">资金明细</a><i>></i></li>
+				<li><a id="coupon" href="${ctx}/user/coupon/list" class="icon8">我的优惠</a><i>></i></li>			
 			</ul>
 		</div>
-		<div class="uc_nav" style="margin-bottom:100px;">
+		<div class="uc_nav">
 			<ul>
 				<li><a id="toUserInfo" href="${ctx}/userinfo/info" class="icon6">个人信息</a><i>></i></li>
 				<li><a id="security" href="${ctx}/securityInfo/secInfo" class="icon7">安全信息</a><i>></i></li>				
 			</ul>
 		</div>
-		<%-- <div class="uc_nav">
+		 <div class="uc_nav" style="margin-bottom:100px;">
 			<ul>
-				<li><a id="toGeneralize" href="${ctx}/generalize/details">代理赚钱</a><i>></i></li>
-				<li><a id="userVolume" href="${ctx}/uservolume/volumelist">抵扣券</a><i>></i></li>
+				<li><a id="toGeneralize" href="${ctx}/generalize/details" class="icon010">股票代理</a><i>></i></li>
+				<%--<li><a id="userVolume" href="${ctx}/uservolume/volumelist">抵扣券</a><i>></i></li> --%>
 			</ul>
-		</div> --%>
+		</div>
 	</div>

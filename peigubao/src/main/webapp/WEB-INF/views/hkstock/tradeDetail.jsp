@@ -216,7 +216,8 @@
 					<ol class="ul_td_rulefont">
 						<li>
 							<label>操盘须知</label>
-							<span>${operatorsInfo}</span>
+							<span>${operatorsInfo}<a href="http://www.peigubao.com/help?status=2#heimingdan">港股黑名单>></a></span>
+							<span></span>
 						</li>
 					</ol>
 				</ul>	

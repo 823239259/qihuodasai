@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/static/css/public.css">
-<link href="${ctx}/static/css/public.css" rel="stylesheet"
-	type="text/css">
 <link href="${ctx}/static/css/pagination.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
@@ -39,9 +37,9 @@
 			<div class="uc_pay">
 				<ul class="uc_paynav">
 					<li data="all"><a href="javascript:void(0);" class="on">方案列表</a></li>
-					<li data="need"><a href="javascript:void(0);">待添加保证金</a></li>
+	<!--  				<li data="need"><a href="javascript:void(0);">待添加保证金</a></li>
 					<li data="opt"><a href="javascript:void(0);">操盘中</a></li>
-					<li data="closed"><a href="javascript:void(0);">已完结</a></li>
+					<li data="closed"><a href="javascript:void(0);">已完结</a></li> -->
 				</ul>
 				<!-- 全部申请 -->
 				<div class="uc_trade">					

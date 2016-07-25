@@ -38,11 +38,6 @@ body{font-family:'微软雅黑'; background: #fff;}
 .tp_main3 .step2 h3 {color:#8b4016;font-size:24px;font-weight:normal;background:url(../image/step2.png) no-repeat 0px 0px;height:40px;padding-left:45px;line-height:40px}
 .tp_main3 .step2 h4 {color:#8b4016;font-size:16px;font-weight:normal;}
 .tp_main3 .step2 div {border:1px solid #996c33;border-radius:5px;border-style:dashed;width:265px;height:166px;margin:11px 0px;float:left}
-.tp_main3 .step2 div p {color:#8b4016;font-size:14px;font-weight:bold;height:32px;line-height:32px;padding-left:39px;margin:4px 0px 10px 4px}
-.tp_main3 .step2 div .p1 {background:url(../image/phone.png) no-repeat}
-.tp_main3 .step2 div .p2 {background:url(../image/mail.png) no-repeat}
-.tp_main3 .step2 div .p3 {background:url(../image/qq.png) no-repeat}
-.tp_main3 .step2 div .p4 {background:url(../image/skype.png) no-repeat}
 .tp_main3 .step2 .right {margin:78px 7px}
 .tp_main3 .step3 {margin:37px 57px;width:280px;height:220px;float:left}
 .tp_main3 .step3 h3 {color:#8b4016;font-size:24px;font-weight:normal;background:url(../image/step3.png) no-repeat 0px 0px;height:40px;padding-left:45px;line-height:40px}
@@ -88,5 +83,12 @@ body{font-family:'微软雅黑'; background: #fff;}
 .tp_main6 .software h3 {font-size:18px;color:#525252;font-weight:normal;text-align:center;padding-top:47px}
 .tp_main6 .software a{color:#2098d5;font-size:14px;display:block;text-align:center;margin-top:43px}
 .tp_foot {  width: 100%; height: 50px; line-height: 50px; background: #3b3b3b; text-align: center; font-size: 14px; color: #b2b2b2;}
-
+.tp_main3 .step2 div p {color:#8b4016;font-size:14px;font-weight:bold;height:32px;padding-left:25px;margin:4px 0px -12px 10px}
+.tp_main3 .step2 div .p1 {background:url(../image/phone.png) no-repeat}
+.tp_main3 .step2 div .p2 {background:url(../image/phone.png) no-repeat}
+.tp_main3 .step2 div .p3 {background:url(../image/mail.png) no-repeat}
+.tp_main3 .step2 div .p4 {background:url(../image/QQ.png) no-repeat}
+.tp_main3 .step2 div .p5 {background:url(../image/skype.png) no-repeat}
+.tp_main3 .step2 div .p6 {background:url(../image/place.png) no-repeat}
+.message{text-align:center;font-size:14px;color:#8b4016;}
 

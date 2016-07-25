@@ -75,8 +75,7 @@ public class SecurityInfoController{
 		WUser user=this.securityInfoService.getUsesrbyId(userSessionBean.getId());
 		List<UserBank> banks=userBankService.findUserDefaultBankByuserId(userSessionBean.getId());
 		if(banks!=null && banks.size()>0){
-			UserBank bank=banks.get(0);
-			request.setAttribute("bank", bank.getCard().substring(0, 4)+"********"+ bank.getCard().substring(bank.getCard().length()-4,bank.getCard().length()));
+			request.setAttribute("bankNum", banks.size());
 		}
 		
 		String email=user.getEmail();
@@ -97,6 +96,14 @@ public class SecurityInfoController{
 			String cardstr=StringCodeUtils.buildIdCard(userverified.getIdcard());
 			cardstr=cardstr.substring(0,2)+"**********"+cardstr.substring(cardstr.length()-2,cardstr.length());
 			request.setAttribute("idcard", cardstr);
+		}
+		//真实姓名加*,如：李**
+		if(userverified!=null && StringUtil.isNotBlank(userverified.getTname())){
+			String tname=userverified.getTname().substring(0, 1);
+			for (int i = 1; i < userverified.getTname().length(); i++) {
+				tname+="*";
+			}
+			request.setAttribute("tname", tname);
 		}
 		request.setAttribute("user", user);
 		request.setAttribute("mobile", StringCodeUtils.buildMobile(user.getMobile()));

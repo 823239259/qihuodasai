@@ -1,3 +1,17 @@
+// 得到来源网页
+var visitrecord_from = null;
+var searchUrl = location.search;
+var params = searchUrl.substr(searchUrl.indexOf("?") + 1);
+if (params) {  //取参数信息
+    //from参数必须在推广链接最后http://localhost:8080/peigubao/signin?p=100089&from=http://localhost:8080/peigubao/help?status=3
+    var fromstr;
+    if (params.indexOf("from=") != -1) {
+    	 fromstr = params.substr(params.indexOf("from=") + 5, params.length);
+         if (fromstr && fromstr.length > 0) {
+             visitrecord_from = decodeURIComponent(fromstr);
+         }
+    }
+}
 $(document).ready(function(){
 	
 	// 进入登录页，则获取login ticket，该函数在下面定义。
@@ -86,7 +100,7 @@ $(document).ready(function(){
 				$.alertTip($(this),"验证码不能空 ！");
 				return;
 			}
-			$.post(basepath+"send_mobile_code",{mobile:mobile,yzmCode:yzm,ajax:1},function(data){  //获取短信验证码信息
+			$.post(basepath+"send_mobile_sms_code",{mobile:mobile,yzmCode:yzm,ajax:1},function(data){  //获取短信验证码信息
 				$("#refresh_code").attr("src",basepath+"validate.code?1=" + Math.random()*10000);
 				if(data.success){
 					if(data.message!="" && data.message!=null){
@@ -105,39 +119,33 @@ $(document).ready(function(){
 							$this.css({background:'#ff9c00'});
 							$.alertTip($("#getSMSCode"),"验证码错误！");
 							return;
-						}else if(data.message == "highOperation"){
+						}else{
+							var openYZMBoxOject = $("#openYZMBox");
+							colseYZMBox();
 							$this.attr("status",true);
 							$this.css({background:'#ff9c00'});
-							$.alertTip($("#getSMSCode"),"操作过于频繁，请稍后再重试！");
+							openYZMBoxOject.attr("status",false);
+							var mobileObj = $("#phone");
+							mobileObj.parent().find("i").css({display: "none"});
+							mobileObj.parent().find("p").html("请输入正确的手机号码");
+							openYZMBoxOject.css({background:'#D3D3D3'});
+							openYZMBoxOject.text("重新发送(" + wait + ")");
+							$.alertTip($("#openYZMBox"),data.message == "highOperation" ? "操作过于频繁，请稍后再重试！" : "每天只能获取5次验证码 ！");
+							countdown(openYZMBoxOject);  //按钮设置倒计时
 							return;
 						}
-						else if(data.message == "sendMobileMessage") {//符合发送短息条件
-							colseYZMBox();
-							$.post(basepath+"send_mobile_message",{mobile:mobile,yzmCode:yzm,ajax:1},function(resultData){  //获取短信验证码信息
-								if (resultData.message=="sendMobileCodeFail"){
-									$this.attr("status",true);
-									$this.css({background:'#ff9c00'});
-									$.alertTip($("#openYZMBox"),"每天只能获取5次验证码 ！");
-									 return;
-								}else
-								{
-									
-									$this.attr("status",true);
-									$this.css({background:'#ff9c00'});
-									$("#openYZMBox").css({background:'#D3D3D3'});
-									$("#openYZMBox").text(wait+"秒后重新获取");
-									// $.alertTip($("#openYZMBox"),"发送成功");
-									countdown($("#openYZMBox"));  //按钮设置倒计时
-								}
-							},"json");
-						}
 					}else{
+						var openYZMBoxOject = $("#openYZMBox");
 						colseYZMBox();
 						$this.attr("status",true);
 						$this.css({background:'#ff9c00'});
-						$("#openYZMBox").css({background:'#D3D3D3'});
-						$("#openYZMBox").text(wait+"秒后重新获取");
-						countdown($("#openYZMBox"));  //按钮设置倒计时
+						openYZMBoxOject.attr("status",false);
+						var mobileObj = $("#phone");
+						mobileObj.parent().find("i").css({display: "none"});
+						mobileObj.parent().find("p").html("请输入正确的手机号码");
+						openYZMBoxOject.css({background:'#D3D3D3'});
+						openYZMBoxOject.text("重新发送(" + wait + ")");
+						countdown(openYZMBoxOject);  //按钮设置倒计时
 					}
 				}else{
 					$this.attr("status",true);

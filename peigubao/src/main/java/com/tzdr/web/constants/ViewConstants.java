@@ -94,7 +94,7 @@ public class ViewConstants {
 	}
 	
 	/**
-	 * @Description: TODO(忘记密码页面位置)
+	 * @Description: RDO(忘记密码页面位置)
 	 * @ClassName: ForgetWiewJsp
 	 * @author wangpinqun
 	 * @date 2014年12月24日 上午9:31:45
@@ -195,6 +195,9 @@ public class ViewConstants {
 		
 		//到币币页面支付
 		public static final String BIBI_PAY_MAIN_VIEW = "/views/pay/bbPay";
+		
+		//到易支付页面支付
+		public static final String PAY_MAIN_MAIN_VIEW = "views/pay/payEase";
 				
 	}
 	
@@ -333,6 +336,43 @@ public class ViewConstants {
 			 * 定制配资详情页面
 			 */
 			public static final String BESPOKETRADE="/views/trade/bespaketrade";
+			
+			//配资主页面
+			public static final String MONTH_PER_BY_DAY = "/views/monthTrade/perByDay";
+			//其它配资页面
+			public static final String MONTH_OTHER_PER_BY_DAY = "/views/monthTrade/otherPerByDay";
+			//配资页面
+			public static final String MONTH_TRADE = "/views/monthTrade/trade";				
+			//配资成功页面
+			public static final String MONTH_TRADE_OK = "/views/monthTrade/tradeOk";
+			//配资列表
+			public static final String MONTH_LIST = "/views/monthTrade/tradeList";
+			//配资详细
+			public static final String MONTH_DETAIL = "/views/monthTrade/tradeDetail";
+			//追加方案
+			public static final String MONTH_MORE = "/views/monthTrade/tradeAddMore";
+			/**
+			 * 配资合同
+			 */
+			public static final String MONTH_TRADECONTRACT="/views/monthTrade/tradeContract";
+			
+			/**
+			 * 追加配资
+			 */
+			public static final String MONTH_MORETRADE="/views/monthTrade/tradeMore";
+			/**
+			 * 配资失败页面
+			 */
+			public static final String MONTH_TRADE_FAIL="/views/monthTrade/tradeFail";
+			/**
+			 * 8800页面
+			 */
+			public static final String MONTH_TRADE_ACTIVITY="/views/monthTrade/tradeActivity";
+
+			/**
+			 * 定制配资详情页面
+			 */
+			public static final String MONTH_BESPOKETRADE="/views/monthTrade/bespaketrade";
 			
 		}
 	
@@ -623,5 +663,16 @@ public class ViewConstants {
 		public static final String PAY_SUCCESSFUL = "/views/crudeActive/pay_successful";
 		
     }
-    
+
+    /**
+     * 优惠券相关
+     * @author Guanrui.he
+     *
+     */
+    public static class FSimpleCouponJsp {
+    	/**
+    	 * 我的优惠券
+    	 */
+    	public static final String LIST = "/views/coupon/fsimple_coupon_list";
+    }
 }

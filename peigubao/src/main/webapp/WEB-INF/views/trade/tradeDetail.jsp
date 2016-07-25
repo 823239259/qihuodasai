@@ -209,7 +209,7 @@
 					</tr>
 					<tr>
 						<td id="td5">${trade.naturalDays}天</td>
-						<td id="td6">${trade.tradingDays}天</td>
+						<td id="td6">${useDays}天</td>
 						<td id="td7">${trade.starttimeString}</td>
 						<td id="td8">${trade.estimateEndtimeString}</td>
 					</tr>

@@ -216,10 +216,11 @@ public class SignInController{
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
 		smsParams.put("module", "注册");
 		smsParams.put("code", randomCode);
-		if(!PgbSMSSender.getInstance().sendByTemplate(dataMapService.getPgbSmsContentRegister(), mobile, "ihuyi.verification.signin.code.template", smsParams)){ //判断短信发送是否成功
+		log.info("-----短信接口send_mobile_message监听IP端口日志信息："+IpUtils.getIpAddr(request)+"--------");
+		/*if(!PgbSMSSender.getInstance().sendByTemplate(dataMapService.getPgbSmsContentRegister(), mobile, "ihuyi.verification.signin.code.template", smsParams)){ //判断短信发送是否成功
 			jsonResult.setMessage("sendMobileCodeFail");
 			return jsonResult;
-		}
+		}*/
 		
 		Map<Object, Object> tokenParams = new HashMap<Object, Object>();
 		tokenParams.put("token", Md5Utils.hash(randomCode+mobile));
@@ -295,6 +296,7 @@ public class SignInController{
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
 		smsParams.put("module", "注册");
 		smsParams.put("code", randomCode);
+		log.info("-----短信接口监听IP端口日志信息："+IpUtils.getIpAddr(request)+"--------");
 		if(!PgbSMSSender.getInstance().sendByTemplate(dataMapService.getPgbSmsContentRegister(), mobile, "ihuyi.verification.signin.code.template", smsParams)){ //判断短信发送是否成功
 			jsonResult.setMessage("sendMobileCodeFail");
 			return jsonResult;

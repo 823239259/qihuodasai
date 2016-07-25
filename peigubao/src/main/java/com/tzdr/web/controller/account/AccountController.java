@@ -94,9 +94,9 @@ public class AccountController {
 			if(banks != null && banks.size()>0){   //判断是否绑定手机号码
 				safetyCount += 1;
 			}
-			if(userVerified.getEmailActive() != null && userVerified.getEmailActive() == 1){     //判断是否绑定邮箱
-				safetyCount += 1;
-			}
+//			if(userVerified.getEmailActive() != null && userVerified.getEmailActive() == 1){     //判断是否绑定邮箱
+//				safetyCount += 1;
+//			}
 			if(userVerified.getIdcard() != null && !StringUtil.isBlank(userVerified.getIdcard())){    //判断实名是否认证
 				safetyCount += 1;
 			}

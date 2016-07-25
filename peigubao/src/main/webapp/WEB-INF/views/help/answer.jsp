@@ -18,7 +18,7 @@
 		<ul>
 			<li><a href="${ctx}/help?status=5">关于我们</a></li>
 			<li><a href="${ctx}/help?status=1">A股操盘须知</a></li>
-			<!-- <li><a href="#">港股操盘须知</a></li> -->
+			<li><a href="${ctx}/help?status=2">港股操盘须知</a></li>
 			<li><a href="${ctx}/help?status=3">交易软件下载</a></li>
 			<li id="nowLi"><a href="javascript:void(0)" id="nowA">常见问答</a><img src="${ctx }/static/images/qa/sanjiao.png" /></li>
 		</ul>

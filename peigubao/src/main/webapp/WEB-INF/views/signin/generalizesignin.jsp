@@ -98,18 +98,44 @@
 	<div class="tp_main1"><img src="${ctx}/static/images/generalizesignin/img_02.jpg" ></div>
 	<div class="tp_main1"><img src="${ctx}/static/images/generalizesignin/img_03.jpg" ></div>
 	<div class="tp_main1"><img src="${ctx}/static/images/generalizesignin/img_04.jpg" ></div>
-	<div class="tp_main1_l"><img src="${ctx}/static/images/generalizesignin/img_05.jpg" ></div>
+	<div class="tp_main1"><img src="${ctx}/static/images/generalizesignin/img_05.jpg" ></div>
 </div>
-<div class="tp_main2"><img src="${ctx}/static/images/generalizesignin/img_06.jpg" ></div>
-<div class="tp_main2"><img src="${ctx}/static/images/generalizesignin/img_07.jpg" ></div>
-<div class="tp_main2 tp_main3"><img src="${ctx}/static/images/generalizesignin/img_08.jpg" ></div>
-<div class="tp_main2 tp_main4" style="background:#fafafa;"><img src="${ctx}/static/images/generalizesignin/img_14.jpg"></div>
-<div class="tp_main2" style="background:#fafafa;"><img src="${ctx}/static/images/generalizesignin/img_09.jpg" ></div>
-<div class="tp_main2_m" style="background:#fafafa;"><img src="${ctx}/static/images/generalizesignin/img_10.jpg" ></div>
-<div class="tp_main2 tp_main6"><div class="button"><a href="javascript:scrollTop();"><img src="${ctx}/static/images/generalizesignin/button.jpg"></a></div></div>
-<div class="tp_main2 tp_main5"><img src="${ctx}/static/images/generalizesignin/img_11.jpg" ></div>
-<div class="tp_main2"><img src="${ctx}/static/images/generalizesignin/img_12.jpg" ></div>
-<div class="tp_main2_l"><img src="${ctx}/static/images/generalizesignin/img_13.jpg" ></div>
+<!--创新-->
+<div class="cx_quan">
+    <div class="tp_cx cx_logo">
+        <img src="${ctx}/static/images/generalizesignin/cx_logo.jpg" >
+    </div>
+    <div class="tp_cx cx_con">
+        <img src="${ctx}/static/images/generalizesignin/cx_con.jpg" >
+    </div>
+</div>
+<!--创新 end-->
+<!--会员-->
+<div class="hy_quan">
+	<div class="tp_cx hy_logo">
+        <img src="${ctx}/static/images/generalizesignin/hy_logo.jpg" >
+    </div>
+    
+    <div class="tp_cx hy_con">
+        <img src="${ctx}/static/images/generalizesignin/hy_con.jpg" >
+    </div>
+    
+    <div class="tp_cx clearx">
+    	    <div class="tp_button button"><a href="javascript:scrollTop();"><img src="${ctx}/static/images/generalizesignin/button.jpg"></a></div>
+    </div>
+</div>
+<!--会员end-->
+<!--安全-->
+<div class="cx_quan">
+    <div class="tp_cx cx_logo">
+        <img src="${ctx}/static/images/generalizesignin/aq_logo.jpg" >
+    </div>
+    <div class="tp_cx aq_con">
+        <img src="${ctx}/static/images/generalizesignin/aq_con.jpg" >
+    </div>
+</div>
+<!--安全 end-->
+
 <%-- cas ajax登录 --%>
 <div style="display: none;">
 	<form id="loginForm" action="${casServerLoginUrl}" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">

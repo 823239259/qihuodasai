@@ -87,7 +87,7 @@
                 <span class="rg_l_promt" style="display: none">请再输入一次您设置的密码</span>
                 <p style="display: none;" class="rg_l_error">两次密码不一致</p>
             </li>
-            <li style="display:none;">
+            <li>
                 <i></i><label>邀请码</label> 
                 <c:choose>
 					<c:when test="${!empty generalizeUid}">

@@ -147,7 +147,7 @@ function setNeedMoney(){
 			</div>
 			<div class="fl_l_main">
 				<ul class="fl_l_list">
-					<li><label>账户余额：</label><span><i id="submitConfirm_balance"></i>元</span></li>
+					<li><label>账户余额：</label><span ><i id="submitConfirm_balance"></i>元</span></li>
 					<li><label>支付金额：</label><span><i id="submitConfirm_pay"></i>元</span></li>
 				</ul>
 			</div>
@@ -190,8 +190,7 @@ function setNeedMoney(){
 				</c:when>
 				<c:otherwise><form method="POST" action="${ctx}/trade/success"></c:otherwise>
 			</c:choose>
-	
-	
+		<input type="hidden" name="voucherId" id="voucher_id" />
 		<input type="hidden" name="lever" id="lever" value="${lever}"/>
 		<input type="hidden" name="type"  value="${type}"/>
 		<input type="hidden" name="tradeStart" id="tradeStart" value="${tradeStart}"/>
@@ -266,19 +265,22 @@ function setNeedMoney(){
 				</tr>
 				<tr>
 					<td>
-						<p><i><fmt:formatNumber value="${capitalMargin}" pattern="###,###" ></fmt:formatNumber></i>元</p>
+						<p><span id="interesfee"><i><fmt:formatNumber value="${capitalMargin}" pattern="###,###" ></fmt:formatNumber></i>元</span></p>
+						<input id="interesfee1" type="hidden" value="${capitalMargin}"/>
 					</td>
-					<td><p><span><i><fmt:formatNumber value="${totalInterestFee}" type="number" minFractionDigits="2" ></fmt:formatNumber></i>元</span></p>
+					<td><p><span id ="managefee"><i><fmt:formatNumber value="${totalInterestFee}" type="number" minFractionDigits="2" ></fmt:formatNumber></i>元</span></p>
+						<input id ="managefee1" type="hidden" value="${totalInterestFee}"/>
 					</td>
 					<td><p><span><i><fmt:formatNumber value="${payManageFee==null?0:payManageFee}" type="number" minFractionDigits="2" ></fmt:formatNumber></i>元</span></p>
 					</td>
-					<td><p><span><i><fmt:formatNumber value="${needPay}" type="number" minFractionDigits="2" ></fmt:formatNumber></i>元</span></p>
+					<td><p><span id="needpaynum"><i><fmt:formatNumber value="${needPay}" type="number" minFractionDigits="2" ></fmt:formatNumber></i>元</span></p>
+						<input id="needpaynum1" type="hidden" value="${needPay}"/>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<input type="hidden" name="volumeDetailId" id="volumeDetailId">
-		</form>
+		</div>
+				</form>
 		
 <%-- 	
 		<div class="cp_paymoney" style="display:none;">
@@ -301,7 +303,23 @@ function setNeedMoney(){
 				</div>
 			</c:if>
 		</div> --%>
+					<div style="float: right;margin: 20px 0px 20px 0px">
+						<label>优惠券：</label>
+						<select id="voucher">
+							<c:choose>
+								<c:when test="${fn:length(voucher) == 0 }">
+									<option value="">无优惠券</option>
+								</c:when>
+								<c:otherwise>
+									<option value="">不使用优惠券</option>
+									<c:forEach var="vo" items="${voucher }">
+										<option value="${vo.id }" >${vo.voucher }</option>
+									</c:forEach>
 
+								</c:otherwise>
+							</c:choose>
+						</select>
+					</div>
 		<div class="cp_paybtn">
 			<div class="uc_paybtn cp_btnsure"><a href="javascript:void(0);" id="sub">下一步</a></div>
 			<c:if test="${empty isFree}">

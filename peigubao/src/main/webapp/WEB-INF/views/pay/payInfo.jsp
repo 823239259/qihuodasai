@@ -876,7 +876,7 @@ var tab=<%=tab%>;
 							<li><label>支付宝账号：</label><input type="text"><a href="javascript:;" class="btn">立即绑定</a></li>
 						</ol>
 						<ol>
-							<li><label>收款人支付宝账户：</label><span>peigubao@163.com</span>
+							<li><label>收款人支付宝账户：</label><span>peigubao1@126.com</span>
 							<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">
 							<input type="hidden" id="popText" value="peigubao@163.com">
 							</a>
@@ -903,7 +903,7 @@ var tab=<%=tab%>;
 					<div class="uc_ap_link">
 							<div class="uc_ap_code">
 								
-								<img src="${ctx}/static/images/uc/code.png?v=20150717">
+								<img src="${ctx}/static/images/uc/peigubao_code.png?v=201507178">
 								<p>手机支付宝扫一扫，快速转账，<i>0手续费</i></p>
 							</div>
 							<div class="uc_ap_aplink">

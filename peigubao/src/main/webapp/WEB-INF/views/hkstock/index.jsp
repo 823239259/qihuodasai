@@ -37,7 +37,7 @@
    		<!-- 倍数处理 --><input id="sublever" name="lever" type="hidden"></input>
 		<!-- 总操盘资金--><input id="subTotalMoney"  name="totalMoney" type="hidden"></input>
 		<!-- 保证金--><input id="subBailMoney"  name="bailMoney" type="hidden"></input>        
-        <div class="cp_title">港股操盘</div>
+        <!--<div class="cp_title">港股操盘</div>-->
         <div class="cp_main">
             <div class="cp_m_ctn">            	
             	<div class="cp_m_num"><i>①</i>输入总操盘金</div>
@@ -55,13 +55,13 @@
                     			<c:when test="${money.index==0}">
                     				<li class="on" data="${recommendHoldMoney}">
 			                            <p><i><fmt:formatNumber type="number" value="${recommendHoldMoney/10000}" maxFractionDigits="1"/>万</i>港元</p>
-			                            <span>总操盘金额</span>
+			                            
 		                        	</li>
                     			</c:when>
                     			<c:otherwise>
                     				<li  data="${recommendHoldMoney}">
 			                            <p><i><fmt:formatNumber type="number" value="${recommendHoldMoney/10000}" maxFractionDigits="1"/>万</i>港元</p>
-		                        		<span>总操盘金额</span>
+		                        		
 		                        	</li>
                     			</c:otherwise>
                     		</c:choose>
@@ -92,13 +92,13 @@
                     			<c:when test="${day.index==0}">
 			                        <li data="${recommendHoldDay}" class="on">
 			                            <p><i>${recommendHoldDay}</i>天</p>
-			                            <span>操盘天数</span>			                            
+			                            			                            
 			                        </li>
 			                     </c:when>
 			                     <c:otherwise>
 			                     	<li data="${recommendHoldDay}">
 			                            <p><i>${recommendHoldDay}</i>天</p>
-			                            <span>操盘天数</span>
+			                            
 			                        </li>
 			                     </c:otherwise>
 			                 </c:choose>
@@ -107,11 +107,15 @@
                 </div>
             </div>
         </div>
-        <div class="cp_sider">            
+        <div class="cp_sider" style="border-left:1px solid #e5e5e5; margin-left:-1px; ">            
         	<div class="cp_m_num"><i>④</i>确认操盘规则</div>
             <div class="cp_sdfont">
                 <label>操盘须知：</label>
-                <span id="operatorsInfo"></span>
+                <span><span style="width:initial; display:initial;"   id="operatorsInfo"></span><a style="color:#0aaff4;" href="http://www.peigubao.com/help?status=2">查看更多港股规则>></a></span>
+            </div>
+            <div class="cp_sdfont">
+                <label>交易时间：</label>
+                <span><i >9:30-12:00,13:00-16:00</i></span>
             </div>
             <div class="cp_sdfont">
                 <label>总操盘资金(HK$)：</label>

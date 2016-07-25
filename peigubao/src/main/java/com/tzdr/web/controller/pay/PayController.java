@@ -21,6 +21,8 @@ import com.tzdr.business.pgb.service.PGBBankChannelService;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
 import com.tzdr.common.api.bbpay.vo.PayParamsObject;
+import com.tzdr.common.api.payease.util.PayEaseUtil;
+import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.ValidatorUtil;
@@ -182,6 +184,16 @@ public class PayController {
 		if(ObjectUtil.equals(null, paymentSupportBank)){
 			message="系统暂不支持此银行充值！";
 			return ViewConstants.PayViewJsp.NET_PAY_MAIN_VIEW;
+		}
+		
+		// 支持币币和联动和易支付 
+		if (paymentSupportBank.getSupportPayEase()==Constants.PAYMENT_SUPPORT 
+				||(paymentSupportBank.getSupportBbpay()==Constants.PAYMENT_SUPPORT
+				 && paymentSupportBank.getSupportUmpay()==Constants.PAYMENT_SUPPORT
+				 && paymentSupportBank.getSupportPayEase()==Constants.PAYMENT_SUPPORT)){
+			
+			    return payease(new PayEaseParams(paymentSupportBank.getPayeaseCode(),paymoney, 
+			    		ip, Constants.PayStatus.NO_PROCESSING, banktype), response, request);
 		}
 		if ((paymentSupportBank.getSupportBbpay()==Constants.PAYMENT_SUPPORT
 			 && paymentSupportBank.getSupportUmpay()==Constants.PAYMENT_SUPPORT)
@@ -367,4 +379,33 @@ public class PayController {
 		
 		return ViewConstants.PayViewJsp.BIBI_PAY_MAIN_VIEW;
 	}
+	
+	/**
+	 * 首信易支付
+	 * @param response
+	 * @param request
+	 * @return
+	 */
+	private String payease(PayEaseParams  payEaseParams,HttpServletResponse response,HttpServletRequest request){
+			String errorMsg = "";
+			if(StringUtil.isBlank(payEaseParams.getAbbreviation()) 
+					|| StringUtil.isBlank(payEaseParams.getVpmode())){
+				errorMsg =  "非法请求，请先选择支付银行！";
+			}
+			if(Double.valueOf(payEaseParams.getVamount()) < 1){
+				errorMsg =  "充值金额不能小于1元！";
+			}
+			
+			if (StringUtil.isNotBlank(errorMsg)){
+				request.setAttribute("errorMsg",errorMsg);
+				return ViewConstants.PayViewJsp.PAY_MAIN_MAIN_VIEW;
+			}
+			
+			UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+			WUser user = this.payService.getUser(userSessionBean.getId());
+			PayEaseParams  easeParams = this.payService.PayEasePay(user, PayEaseUtil.pgbWebPay(payEaseParams),Constant.Source.PGB,Constant.SystemFlag.PGB_WEB);
+			request.setAttribute("payEaseParams",easeParams);
+			return  ViewConstants.PayViewJsp.PAY_MAIN_MAIN_VIEW;
+	}
+	
 }

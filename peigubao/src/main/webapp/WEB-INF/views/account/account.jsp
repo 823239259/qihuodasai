@@ -173,14 +173,14 @@
 								</c:otherwise>
 							</c:choose>
 							<%-- 邮箱 --%>
-							<c:choose>
+							<%-- <c:choose>
 								<c:when test="${!empty userVerified && userVerified.emailActive == 1 }">
 									<a id="secInfo" href="javascript:void(0);" class="yxon" title="邮箱"></a>
 								</c:when>
 								<c:otherwise>
 									<a id="secInfo" href="javascript:void(0);o" class="yx" title="邮箱"></a>
 								</c:otherwise>
-							</c:choose>
+							</c:choose> --%>
 						</p>
 					</div>
 					<ul class="uc_sm_money">

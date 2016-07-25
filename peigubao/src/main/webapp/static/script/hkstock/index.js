@@ -97,13 +97,13 @@ $(document).ready(function(e) {
 							
 							bailHtml = bailHtml+"<li class='on' data='"+result.obj.bailArray[i].bailMoney+"' lever='"+(i+1)+"'> ";
 							bailHtml = bailHtml+"<p><i>"+$.formatMoney(result.obj.bailArray[i].bailMoney)+"</i>元</p> ";
-							bailHtml = bailHtml+"<span>保证金</span> ";
+							bailHtml = bailHtml+"<span></span> ";
 							bailHtml = bailHtml+"</li> ";
 						}else
 						{
 							bailHtml = bailHtml+"<li data='"+result.obj.bailArray[i].bailMoney+"' lever='"+(i+1)+"' > ";
 							bailHtml = bailHtml+"<p><i>"+$.formatMoney(result.obj.bailArray[i].bailMoney)+"</i>元</p> ";
-							bailHtml = bailHtml+"<span>保证金</span> ";
+							bailHtml = bailHtml+"<span></span> ";
 							bailHtml = bailHtml+"</li> ";
 						}
 					}

@@ -16,7 +16,7 @@
 <link href="${ctx}/static/css/pagination.css" rel="stylesheet" type="text/css" />
 <script src="${ctx}/static/script/common/jquery.pagination.js" type="text/javascript"></script>
 <script language="javascript" src="${ctx}/static/script/trade/preByDay.js?v=${v}"></script>
-<title>A股操盘申请 - 配股宝</title>
+<title>随心操盘申请 - 配股宝</title>
 <%-- <%
    response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
    response.setHeader("location",basePath); 
@@ -122,7 +122,7 @@ $(document).ready(function(){
 	<input type="hidden" name="max" id="max" value="${max}"/>
 	<input type="hidden" name="enter" id="enter" value="${enter}"/>
     <div class="capital_ctn">    	
-        <div class="cp_title">A股操盘</div>
+      
         <div class="cp_main">
             <div class="cp_m_ctn">
             	<div class="cp_m_num"><i>①</i>输入操盘保证金</div>
@@ -133,19 +133,19 @@ $(document).ready(function(){
 							<ul>
                         <li class="on"  data="10000">
                             <p><i>1万</i>元</p>
-                            <span>保证金额</span>
+                            
                         </li>
                         <li data="20000">
                             <p><i>2万</i>元</p>
-                            <span>保证金额</span>
+                            
                         </li>
                         <li data="30000">
                             <p><i>3万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="50000">
                             <p><i>5万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                     </ul>
 						</c:when>
@@ -153,19 +153,19 @@ $(document).ready(function(){
 							<ul>
                         <li class="on"  data="50000">
                             <p><i>5万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="100000">
                             <p><i>10万</i>元</p>
-                            <span>保证金额</span>
+                            
                         </li>
                         <li data="200000">
                             <p><i>20万</i>元</p>
-                            <span>保证金额</span>
+                            
                         </li>
                         <li data="300000">
                             <p><i>30万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                     </ul>
 						</c:when>
@@ -173,19 +173,19 @@ $(document).ready(function(){
 							<ul>
                         <li class="on"  data="500000">
                             <p><i>50万</i>元</p>
-                            <span>保证金额</span>
+                          
                         </li>
                         <li data="1000000">
                             <p><i>100万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="3000000">
                             <p><i>300万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="5000000">
                             <p><i>500万</i>元</p>
-                            <span>保证金额</span>
+                            
                         </li>
                     </ul>
 						</c:when>
@@ -193,19 +193,19 @@ $(document).ready(function(){
 							<ul>
                         <li  data="10000">
                             <p><i>1万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="100000">
                             <p><i>10万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="300000">
                             <p><i>30万</i>元</p>
-                            <span>保证金额</span>
+                           
                         </li>
                         <li data="500000">
                             <p><i>50万</i>元</p>
-                            <span>保证金额</span>
+                            
                         </li>
                     </ul>
 						</c:otherwise>
@@ -223,24 +223,24 @@ $(document).ready(function(){
                     <ul class="cp_m_mul">
                         <li data="1" class="no">
                             <p><i>1倍</i></p>
-                            <span>放大倍数</span>
+                           
                         </li>
                         <li data="2" class="no">
                             <p><i>2倍</i></p>
-                            <span>放大倍数</span>
+                           
                         </li>
                         <li data="3" class="no"> 
                             <p><i>3倍</i></p>
-                            <span>放大倍数</span>
+                            
                         </li>
                         
                         <li data="4" class="no">
                             <p><i>4倍</i></p>
-                            <span>放大倍数</span>
+                            
                         </li>
                         <li data="5" class="no">
                             <p><i>5倍</i></p>
-                            <span>放大倍数</span>
+                            
                         </li>
                     </ul>
                 </div>
@@ -254,19 +254,19 @@ $(document).ready(function(){
                     <ul>
                         <li data="8">
                             <p><i>8天</i></p>
-                            <span>操盘天数</span>
+                           
                         </li>
                         <li data="14">
                             <p><i>14天</i></p>
-                            <span>操盘天数</span>
+                           
                         </li>
                         <li data="30">
                             <p><i>30天</i></p>
-                            <span>操盘天数</span>
+                           
                         </li>
                         <li data="60">
                             <p><i>60天</i></p>
-                            <span>操盘天数</span>
+                           
                         </li>
                     </ul>
                 </div>
@@ -351,7 +351,7 @@ $(document).ready(function(){
             <div class="cp_b_btn"><a href="javascript:void(0);" id="submit">提交操盘申请</a></div>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="agree">
-                <span>我已阅读并同意<a href="javascript:tradeContract();">《A股操盘合作协议》</a></span>
+                <span>我已阅读并同意<a href="javascript:tradeContract();">《随心操盘合作协议》</a></span>
             </div>
             <c:if test="${isOpen eq '1' and loginStatus eq 1}">		
               <div class="cp_b_promt">* 为保障更多用户获得操盘，本时段每用户最大操盘配额限<i><fmt:formatNumber value="${maxLeverMoney}" pattern="###,###" ></fmt:formatNumber></i>元</div>

@@ -240,7 +240,7 @@ function getDataList(index){
 	            	html+="<li class='uc_re_num'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>";
 	            	html+="<li class='uc_re_num'>"+n.bank+"</li>";
 	            	html+="<li class='uc_re_num2'>"+n.money+"元</li>";
-	            	if(n.status != 3 && (n.isAudit == 0 || n.isAudit == -1)){
+	            	if(n.status ==21 && (n.isAudit == 0 || n.isAudit == -1)){
 	            		html+="<li class='uc_re_num2'>提现审核中 </li>";
 	            		html+="<li class='uc_re_num2'><a id='cancelDraw' data_id="+n.id+" status='true' name='cancelDraw' href='javascript:void(0)'>取消提现<a/></li>";
 	            	}else{

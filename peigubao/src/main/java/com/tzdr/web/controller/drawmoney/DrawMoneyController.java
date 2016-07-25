@@ -30,8 +30,11 @@ import com.tzdr.business.service.drawMoney.UserBankService;
 import com.tzdr.business.service.drawMoneyData.DrawMoneyDataService;
 import com.tzdr.business.service.securityInfo.impl.SecurityInfoServiceImpl;
 import com.tzdr.business.service.thread.SMSPgbSenderThread;
+import com.tzdr.business.service.thread.SMSSenderThread;
 import com.tzdr.common.api.bbpay.Bibipay;
 import com.tzdr.common.api.bbpay.util.BbUtil;
+import com.tzdr.common.api.payease.PayEase;
+import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.api.umpay.WithdrawPay;
 import com.tzdr.common.api.umpay.data.WithdrawPayExtendInfo;
 import com.tzdr.common.api.umpay.data.WithdrawPayInfo;
@@ -121,6 +124,9 @@ public class DrawMoneyController {
 		if (withdrawSetting==Constant.PaymentChannel.BB_PAY){
 			handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.BB_FEE);
 		}
+		if (withdrawSetting==Constant.PaymentChannel.EASE_PAY){
+			handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
+		}
 		request.setAttribute("handleFee",handleFeeStr);
 		// 获取提现支持的银行
 		request.setAttribute("supportBanks",paymentSupportBankService.querySupportDrawBanks(withdrawSetting));
@@ -166,7 +172,8 @@ public class DrawMoneyController {
 			//获取提现渠道设置参数
 			int withdrawSetting = dataMapService.getPgbWithDrawSetting();
 			if (Constant.PaymentChannel.BB_PAY !=withdrawSetting 
-					&& Constant.PaymentChannel.UM_PAY !=withdrawSetting){
+					&& Constant.PaymentChannel.UM_PAY !=withdrawSetting
+					&& Constant.PaymentChannel.EASE_PAY !=withdrawSetting){
 				 jsonResult.setMessage("系统维护中，请稍候再试！");
 				 return jsonResult;
 			}
@@ -180,6 +187,11 @@ public class DrawMoneyController {
 				 jsonResult.setMessage("网银平台暂不支持此银行提现，请重新添加银行！");
 				 return jsonResult;
 			}
+			if (Constant.PaymentChannel.EASE_PAY==withdrawSetting 
+					&& Constants.PAYMENT_SUPPORT != paymentSupportBank.getSupportEasedraw()){
+				 jsonResult.setMessage("网银平台暂不支持此银行提现，请重新添加银行！");
+				 return jsonResult;
+			}
 			// 币币支付最多不超过50000
 			if (Constant.PaymentChannel.BB_PAY==withdrawSetting 
 					&& Double.valueOf(money)>=50000){
@@ -187,6 +199,14 @@ public class DrawMoneyController {
 				 return jsonResult;
 			}
 			
+			
+			// 易支付支付最多不超过500000
+			if (Constant.PaymentChannel.EASE_PAY ==withdrawSetting
+					&& Double.valueOf(money)>=500000){
+				 jsonResult.setMessage("因网银限制，单笔提现金额要小于500000元，每天可提现5笔。");
+				 return jsonResult;
+			}
+						
 			//判断是否有欠费记录
 			DrawBlackList drawBlackList = drawBlackListService.getDrawBlackListByUid(userSessionBean.getId());
 			if(null != drawBlackList){
@@ -290,6 +310,11 @@ public class DrawMoneyController {
 						 if(moneyval>dmoney){
 							if (Constant.PaymentChannel.BB_PAY==withdrawSetting){
 								return bbDrawMoney(drawList,dmoney, paymentSupportBank, user, bankcard);
+							}
+
+							// 易支付
+							if (Constant.PaymentChannel.EASE_PAY==withdrawSetting){
+								return payeaseDrawMoney(drawList,dmoney, paymentSupportBank, user, bankcard);
 							}
 							if (Constant.PaymentChannel.UM_PAY==withdrawSetting){ 
 									//开始调用接口
@@ -627,7 +652,18 @@ public class DrawMoneyController {
 				data.put("statusValue", drawList.getStatusValue());
 				jsonResult.setData(data);
 				return jsonResult;
-			}else if(isAudit != null && (isAudit == 1 || isAudit == 2)){  //判断是否已经审核过
+			}
+			// 只有提现处理方可取消
+			else if ( 21 !=  status)
+			{	
+				jsonResult.setMessage("dataAlreadyDispose");
+				data.put("status", drawList.getStatus());
+				data.put("statusValue", drawList.getStatusValue());
+				jsonResult.setData(data);
+				return jsonResult;
+				
+			}
+			else if(isAudit != null && (isAudit == 1 || isAudit == 2 )){  //判断是否已经审核过
 				jsonResult.setMessage("dataAlreadyDispose");
 				data.put("status", drawList.getStatus());
 				data.put("statusValue", drawList.getStatusValue());
@@ -683,7 +719,45 @@ public class DrawMoneyController {
 		return new JsonResult();
 	}
 	
-	public static void main(String[] args) {
+	/**
+	 * 易支付提现处理
+	 * @param drawList
+	 * @param dmoney
+	 * @param paymentSupportBank
+	 * @param user
+	 * @param bankCard
+	 * @return
+	 */
+	private JsonResult payeaseDrawMoney(DrawList drawList,Double dmoney,PGBPaymentSupportBank paymentSupportBank,WUser user,String bankCard){
+		logger.info("PC端提现调用易支付支付接口参数：金额["+dmoney+"],卡号["+bankCard+"]");
+		//提现手续费
+		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,DataDicKeyConstants.PAYEASE_FEE);
+		Double handleFee = 0.00;
+		if(!StringUtil.isBlank(handleFeeStr)) {
+			handleFee = Double.valueOf(handleFeeStr);
+		}
 		
+		if(BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+			//扣除手续费
+			dmoney = BigDecimalUtils.subRound(dmoney, handleFee);
+		} 
+		// 调用提现接口
+		// 格式：分帐信息总行数|分帐总金额|$收方帐号|收方帐户名|收方开户行|收方省份|收方城市|付款金额| 客户标识|联行号
+		JSONObject result =PayEaseUtil.pgbDrawMony(dmoney, paymentSupportBank.getBbpayContactNumber(), drawList.getCard(), 
+				user.getUserVerified().getTname(), drawList.getNo(),paymentSupportBank.getBankName());
+		if (PayEase.WITHDRAW_INTERFACE_SUCCESS != result.getIntValue("status")){
+			logger.info("易支付调用取款接口失败，"+result.toJSONString());
+			EmailExceptionHandler.getInstance().HandleHintWithData("易支付调用取款接口失败","PayEaseDrawMoney", result.toJSONString());
+			return new JsonResult("提现失败，请联系客服 400-020-0158");
+		}
+		
+		// 更新商户号和商户秘钥 到提现记录中，以便获取提现状态时方便
+		drawMoneyService.updatDrawPayeaseInfo(drawList.getId(),result.getString("vmid"),result.getString("secret"));
+		//发送短信
+		Map<String,String> map= new HashMap<String,String>();
+		map.put("account", user.getMobile());
+		map.put("money", dmoney.toString());
+		new SMSSenderThread(user.getMobile(),"draw.money.template", map).start();
+		return new JsonResult();
 	}
 }

@@ -139,10 +139,10 @@ function bandcard(){
 <div class="navtitle"><a class="nava" >修改绑定手机
 </a><a class="close" onclick="javascript:closeDiv('updateMobile')"></a></div>
 <div class="smain">
-<div class="srk">
+<div class="srk" style="padding-left:30px;">
   <span class="label">原手机号：</span><a class="fontarail" >${mobile }</a>
 </div>
-<div class="srk">
+<div class="srk" style="line-height:28px; padding-left:49px;">
   <input class="au-ipt mglt30"  id="phonecode" name="phonecode" type="text">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <!--  
@@ -152,7 +152,7 @@ function bandcard(){
   </div>
 </div>
 
-<div class="anniu">
+<div class="anniu" style="margin-left:70px;">
  <a class="btn-h01"  id="nextsmsBtn" onclick="javascript:tonextvalidatephonecode();">下一步</a><a class="btn-h02" onclick="javascript:closeDiv('updateMobile')">取&nbsp;消</a>
   </div>
 </div>
@@ -185,89 +185,9 @@ function bandcard(){
   </div> -->
 </div>
 
-<div class="anniu">
+<div class="anniu" style="margin-left:100px">
  <a class="btn-h01"  id="nextsmsBtn" onclick="javascript:updatephone();">下一步</a><a class="btn-h02" onclick="javascript:closeDiv('updatenextMobile')">取&nbsp;消</a>
   </div>
-</div>
-
-
-
-<!--003-->
-<div class="tck01" id="bandingEmail" style="display:none;">
-<div class="navtitle"><a class="nava" >绑定邮箱</a><a class="close" onclick="javascript:closeDiv('bandingEmail')"></a></div>
-<div class="smain">
-<div class="srk">
-  <span class="label">邮箱：</span>
-  <input class="au-ipt" name="email" id="email" type="text">
-</div>
-<div class="srk"> <span class="label">验证码：</span>
-    <input class="au-ipt" name="emailcode" id="emailcode" type="text">
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <!--  
-    <input type="button" id="validateemailcode" value="获取验证码">
-    -->
-   	 <a href="javascript:void(0)"  name="validateemailcode" id="validateemailcode" class=" colorf60 mglt10" style="text-decoration:none">获取验证码
-    </a>
-   
-   
-  </div>
-</div>
-  
- <div class="anniu">
- <a class="btn-h01" onclick="javascript:bindEmail();">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('bandingEmail')">取&nbsp;消</a>
-  </div> 
-</div>
-
-<!--002-->
-<div class="tck01" id="sendoldMobile" style="display:none;">
-<div class="navtitle"><a class="nava" >修改绑定邮箱
-</a><a class="close" onclick="javascript:closeDiv('sendoldMobile')"></a></div>
-<div class="smain">
-<div class="srk">
-  <span class="label">原邮箱：</span><a class="fontarail" >${email }</a>
-</div>
-<div class="srk">
-  <input class="au-ipt mglt30"  id="oldemailcode" name="oldemailcode" type="text">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <!--  
-    <input type="button" id="oldemailvalidatecode" value="">
-    -->
-    <a href="javascript:void(0)"  name="oldemailvalidatecode" id="oldemailvalidatecode" class=" colorf60 mglt10" style="text-decoration:none">获取验证码
-</a>
-
-  </div>
-</div>
-
-<div class="anniu">
- <a class="btn-h01"  id="nextsmsBtn" onclick="javascript:donextupdateEmail();">下一步</a><a class="btn-h02" onclick="javascript:closeDiv('sendoldMobile')">取&nbsp;消</a>
-  </div>
-</div>
-
-<!--003-->
-<div class="tck01" id="updatebandingEmail" style="display:none;">
-<div class="navtitle"><a class="nava" >绑定邮箱</a><a class="close" onclick="javascript:closeDiv('updatebandingEmail')"></a></div>
-<div class="smain">
-<div class="srk">
-  <span class="label">邮箱：</span>
-  <input class="au-ipt" name="newemail" id="newemail" type="text">
-</div>
-<div class="srk"> <span class="label">验证码：</span>
-    <input class="au-ipt" name="newemailcode" id="newemailcode" type="text">
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <td>
-    <!--  
-    <input type="button" id="randomemailcodes" value="获取验证码">
-    -->
-    <a href="javascript:void(0)"  name="randomemailcodes" id="randomemailcodes" class=" colorf60 mglt10" style="text-decoration:none">获取验证码
-</a>
-    </td>
-   
-  </div>
-</div>
-  
- <div class="anniu">
- <a class="btn-h01" onclick="javascript:updateEmail();">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('updatebandingEmail')">取&nbsp;消</a>
-  </div> 
 </div>
 
 
@@ -292,7 +212,7 @@ function bandcard(){
 </div>
 
 <div class="tck01" id="updatefogetcode" style="display:none;">
-	<div class="navtitle"><a class="nava" >修改提现密码
+	<div class="navtitle"><a class="nava" >设置提现密码
 	</a><a class="close" onclick="javascript:closeDiv('updatefogetcode')"></a></div>
 	<div class="smain">
 	<div class="srk">
@@ -338,7 +258,7 @@ function bandcard(){
 <!--004-->
 <div class="tck01" id="updatemoneypwddiv" style="display:none;">
 <div class="navtitle">
-<a class="nava" >设置提现密码</a>
+<a class="nava" >修改提现密码</a>
 <a class="close" onclick="javascript:closeDiv('updatemoneypwddiv')"></a>
 </div>
 <div class=" smain">
@@ -361,6 +281,9 @@ function bandcard(){
  <div class="anniu">
  <a class="btn-h01" id="resetmoneypwdbtn">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('updatemoneypwddiv')">取&nbsp;消</a>
   </div> 
+  <div class="bth_wj">
+   <a class='' id='forgetdrawPwd' href='javascript:void(0)'>忘记密码?</a>
+   </div>
 </div>
 
 <!--005-->
@@ -434,148 +357,159 @@ function bandcard(){
 
 <%@ include file="../common/leftnav.jsp"%>
 <div class="rightmain">
+
 <div class="nav">安全信息</div>
-<div class="centmain">
-<div class="ulmain">
-<div class="pmain">
-<img src="${ctx}/static/images/sgrz01.png" width="60" height="55">
-<p><a class="font15 ftwtb">实名认证</a>
-</p>
-<p id="cardInfo">
-<c:choose> 
-<c:when test="${not empty requestScope.userverified.idcard && requestScope.userverified.status=='2'}">  
-	<a class="colorred font14 fontarail ">${requestScope.idcard }</a><a class="color34b3e0 font14 mglt10">照片认证通过</a>
-</c:when>
-<c:when test="${not empty requestScope.userverified.idcard && requestScope.userverified.status=='1'}">  
-           <a class="colorred font14 fontarail ">${requestScope.idcard }</a><a class="color34b3e0 font14 mglt10" href="javascript:toupdateCardFile();" title="请再次上次照片">照片未认证通过</a>
- </c:when> 
- <c:when test="${not empty requestScope.userverified.idcard && requestScope.userverified.status=='6'}">  
-          <a class="colorred font14 fontarail ">${requestScope.idcard }</a><a class="color34b3e0 font14 mglt10">照片审核中</a>
- </c:when> 
-  <c:when test="${not empty requestScope.userverified.idcard && requestScope.userverified.status=='3'}">  
-       <a class='colorred font14 fontarail '>${requestScope.idcard }</a><a class='color34b3e0 font14 mglt10' href='javascript:toupdateCardFile();'>上传照片</a>
-</c:when> 
-<c:when test="${ empty requestScope.userverified.idcard && requestScope.userverified.validatenum>='3'}">   
-<a class="colorred font14 ">认证失败(请联系客服处理)</a>
-</c:when>
-  <c:when test="${not empty requestScope.userverified.idcard && not empty requestScope.userverified.status}">  
-       <a class=' colorred font14 fontarail '>${requestScope.idcard }</a><a class='color34b3e0 font14 mglt10' href='javascript:toupdateCardFile();'>上传照片</a>
-</c:when> 
-<c:otherwise>
-<a class="colorred font14 ">未认证</a><a class="color34b3e0 font14 mglt20" href="javascript:authcard();">立即认证</a>
-</c:otherwise>
-</c:choose>
-</p>
-</div>
-<div class="color999 font14 mgt10">保障安全,只有完成实名认证才能提现
-</div>
-</p>
+
+<div class="conner">
+        	<ul>        	
+        	<c:choose>
+        	<c:when test="${not empty requestScope.userverified.idcard && not empty requestScope.userverified.tname}">
+        		 <!--已实名验证状态-->
+                <li >
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_yes.png"></div></div>
+                    <div class="con_name left"><h3>实名认证</h3></div>
+                    <div class="con_con left"><p>${requestScope.idcard }<strong id='t_name'>${requestScope.tname }</strong></p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="#"></a></div></div>
+                </li>
+                 <!--已实名验证状态 end-->
+        	</c:when>
+        	<c:when test="${ empty requestScope.userverified.idcard && requestScope.userverified.validatenum>='3' }">
+        		<!--实名认证失败  -->
+        		<li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>实名认证</h3></div>
+                    <div class="con_con left"><p>认证失败(请联系客服处理)</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="#"></a></div></div></div>
+                </li>
+                <!--实名认证失败 end-->
+        	</c:when>
+        	<c:otherwise>
+        		<!--未实名验证状态-->
+            	<li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>实名认证</h3></div>
+                    <div class="con_con left"><p>实名认证后，才能申请操盘方案和提现</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="javascript:authcard();"><img src="${ctx}/static/images/security/security_1.png"></a></div></div>
+                </li>
+                <!--未实名验证状态 end-->
+        	</c:otherwise>
+        	</c:choose>
+            	
+                <c:choose>
+                <c:when test="${requestScope.userverified.status=='2' }"><!--照片认证通过  -->
+                <!--照片已验证状态-->
+                <li >
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_yes.png"></div></div>
+                    <div class="con_name left"><h3>照片认证</h3></div>
+                    <div class="con_con left"><p>已成功认证身份证照片</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="#"></a></div></div>
+                </li>
+                <!--照片已验证状态 end-->
+                
+                </c:when>
+                <c:when test="${requestScope.userverified.status=='1' }"><!-- 照片未认证通过  -->
+                <!--照片审核未通过状态-->
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>照片认证</h3></div>
+                    <div class="con_con left"><p>审核未通过，请重新认证</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="javascript:toupdateCardFile();"><img src="${ctx}/static/images/security/security_1.png"></a></div></div>
+                </li>
+                <!--照片审核未通过状态 end-->
+                </c:when>
+                <c:when test="${requestScope.userverified.status=='6' }"><!--照片审核中  -->
+                  <!--照片待审核状态-->
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>照片认证</h3></div>
+                    <div class="con_con left"><p>上传身份证照片，增加账号安全度</p></div>
+                    <div class="con_img left" style="font-size:18px;"><div class="con_ren"><a href="javascript:void(0);" style="cursor: default;"><img src="${ctx}/static/images/security/security_7.png"></a></div></div>
+                </li>
+                <!--照片待审核状态 end-->
+                
+                </c:when>
+                <c:otherwise><!-- 照片未认证 -->
+                  <!--照片未认证状态-->
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>照片认证</h3></div>
+                    <div class="con_con left"><p>上传身份证照片，增加账号安全度</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="javascript:toupdateCardFile();"><img src="${ctx}/static/images/security/security_1.png"></a></div></div>
+                </li>
+                <!--照片未认证状态 end-->
+                
+                </c:otherwise>
+                </c:choose>
+               
+                <!--手机已验证状态-->                
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_yes.png"></div></div>
+                    <div class="con_name left"><h3>绑定手机</h3></div>
+                    <div class="con_con left"><p>${mobile }，使用此号码登录配股宝</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="javascript:updateMobile();"><img src="${ctx}/static/images/security/security_2.png"></a></div></div>
+                </li>
+                <!--手机已验证状态 end-->
+                
+                <c:choose>
+                <c:when test="${not empty requestScope.bankNum && requestScope.bankNum > 0 }">
+                <!--已银行卡绑定状态-->
+                <li >
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_yes.png"></div></div>
+                    <div class="con_name left"><h3>绑定银行卡</h3></div>
+                    <div class="con_con left"><p>已成功绑定${requestScope.bankNum }张银行卡</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="javascript:bandcard()"><img src="${ctx}/static/images/security/security_3.png"></a></div></div>
+                </li>
+                <!--已银行卡绑定状态 end-->
+                </c:when>
+                <c:otherwise>
+                 <!--未银行卡绑定状态-->
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>绑定银行卡</h3></div>
+                    <div class="con_con left"><p>绑定银行卡后才能申请提现</p></div>
+                    <div class="con_img left"><div class="con_ren"><a href="javascript:bandcard()"><img src="${ctx}/static/images/security/security_4.png"></a></div></div>
+                </li>
+                <!--未银行卡绑定状态 end-->
+                </c:otherwise>
+                </c:choose>
+                
+                <!--已登录状态-->
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_yes.png"></div></div>
+                    <div class="con_name left"><h3>登录密码</h3></div>
+                    <div class="con_con left"><p>请设置较为复杂的登录密码，保护帐号安全</p></div>
+                    <div class="con_img left"><div class="con_ren"><a id="toupdatepwd" href="javascript:void(0)"><img src="${ctx}/static/images/security/security_2.png"></a></div></div>
+                </li>
+                 <!--已登录状态 end-->
+                 
+                 <c:choose>
+                 <c:when test="${not empty requestScope.userverified.drawMoneyPwd }">
+                   <!--已提现密码状态-->
+                <li >
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_yes.png"></div></div>
+                    <div class="con_name left"><h3>提现密码</h3></div>
+                    <div class="con_con left"><p>提现需要输入的密码</p></div>
+                    <div class="con_img left"><div class="con_ren"><a id='resetmoneypwd' href='javascript:resetMoneyPwd();'><img src="${ctx}/static/images/security/security_2.png"></a></div></div>
+                </li>
+                 <!--已提现密码状态 end-->
+                 
+                 </c:when>
+                 <c:otherwise>
+                 <!--未提现密码状态-->
+                <li>
+                	<div class="con_ifo left"><div class="con_i"><img src="${ctx}/static/images/security/security_no.png"></div></div>
+                    <div class="con_name left"><h3>提现密码</h3></div>
+                    <div class="con_con left"><p>为了您的资金安全，请设置提现密码</p></div>
+                    <div class="con_img left"><div class="con_ren"><a id="moneypwd" href="javascript:void(0);"><img src="${ctx}/static/images/security/security_5.png"></a></div></div>
+                </li>
+                 <!--未提现密码状态 end-->
+                 </c:otherwise>
+                 </c:choose>
+            </ul>
+        </div>
 </div>
 
-<div class="ulmain mglt10">
-<div class="pmain">
-<img src="${ctx}/static/images/bdsj.png" width="60" height="55">
-<p><a class="font15 ftwtb">绑定手机</a>
-</p>
-<p><a class="font14 fontarail colorred ">${mobile }</a><a class="color34b3e0 font14 mglt20" href="javascript:updateMobile();">修改</a>
-</p>
-</div>
-<div class="color999 font14 mgt10">
-  <p>手机号码是您在配股宝的重要凭证</p>
-</div>
-</p>
-</div>
 
-<div class="ulmain mglt10">
-<div class="pmain">
-<img src="${ctx}/static/images/bdyx.png" width="60" height="55">
-<p><a class="font15 ftwtb">绑定邮箱</a>
-</p>
-<p id="emaildivinfo">
-<c:choose> 
-<c:when test="${not empty requestScope.user.email }">  
-	
-	<a class="colorred fontarail ">${email }</a><a class='color34b3e0 font14 mglt20' href='javascript:toupdateEmail();'>修改</a>
-</c:when>
-<c:when test="${ empty requestScope.user.email}">  
-	
-	<a class="colorred font14 ">未绑定</a><a class="color34b3e0 font14 mglt20" href="javascript:toBandingPhone();">立即绑定</a>
-</c:when>
-</c:choose>
-</p>
-</div>
-<div class="color999 font14 mgt10">
-  <p>绑定邮箱后，可作登录时使用</p>
-</div>
-</p>
-</div>
-
-<div class="ulmain">
-<div class="pmain">
-<img src="${ctx}/static/images/dlmm.png" width="60" height="55">
-<p><a class="font15 ftwtb">登录密码</a>
-</p>
-<p><a class="color34b3e0 font14 ">已设置</a><a class="color34b3e0 font14 mglt20" id="toupdatepwd" href="javascript:void(0)">修改</a>
-</p>
-</div>
-<div class="color999 font14 mgt10">
-  <p>登录配股宝网站时需要输入的密码</p>
-</div>
-</p>
-</div>
-
-<div class="ulmain mglt10">
-<div class="pmain">
-<img src="${ctx}/static/images/txmm.png" width="60" height="55">
-<p><a class="font15 ftwtb">提现密码</a>
-</p>
-<p id="moneypwdset">
-<c:choose> 
-<c:when test="${not empty requestScope.userverified.drawMoneyPwd }">  
-<a class='color34b3e0 font14 '>已设置</a>
-<a class='color34b3e0 font14 mglt10' id='resetmoneypwd' href='javascript:resetMoneyPwd();'>立即修改</a>
-<a class='color34b3e0 font14 mglt10' id='forgetdrawPwd' href='javascript:void(0)'>忘记密码</a>
-
- </c:when>
- <c:otherwise>
-  <a class="colorred font14 ">未设置</a>
- <a class="color34b3e0 font14 mglt20" id="moneypwd" href="javascript:void(0);">立即设置</a>
- </c:otherwise>
- </c:choose>
-</p>
-</div>
-<div class="color999 font14 mgt10">
-  <p>保障资金安全，提现需要设置提现密码</p>
-</div>
-</p>
-</div>
-<div class="ulmain mglt10">
-  <div class="pmain">
-      <img src="${ctx }/static/images/yhk.png" width="60" height="55">
-      
-      <p><a class="font15 ftwtb">绑定银行卡</a></p>
-      
-           <c:choose> 
-			<c:when test="${not empty requestScope.bank}">
-			 <p><a class="colorred font14 ">${requestScope.bank }</a>
-			 <a class="color34b3e0 font14 mglt20" href="javascript:bandcard()" >修改</a>
-			 </p>
-			</c:when>
-			<c:otherwise>
-			 <p><a class="colorred font14 ">未绑定</a>
-		      <a class="color34b3e0 font14 mglt20" href="javascript:bandcard()" >立即绑定</a>
-		      </p>
-			</c:otherwise>
-		</c:choose>
-  </div>
-  
-  <div class="color999 font14 mgt10">
-    <p>绑定银行卡后，充值提现更方便</p>
-  </div>
-
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
