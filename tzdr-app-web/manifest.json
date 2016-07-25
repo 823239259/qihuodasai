@@ -644,7 +644,8 @@
 					"images/acp_06.gif",
 					"css/mui.min.css",
 					"images/acp_05.gif",
-					"images/acp_01.png"
+					"images/acp_01.png",
+					"images/list_02.png"
 				],
 				"refer": [
 					"tzdr/future/list.html",
