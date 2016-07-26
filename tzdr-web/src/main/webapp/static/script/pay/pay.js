@@ -321,7 +321,7 @@ function doNetPayment(){
 /*	$('.fl_mask').show();
 	$('#issucessdiv').show();*/
 	$.ajax({
-		url:"/tzdr-web/pay/pingplusplus",
+		url:"/pay/pingplusplus",
 		type:"post",
 		data:{
 			money:money,
