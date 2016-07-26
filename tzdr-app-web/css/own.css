@@ -156,7 +156,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ac_coupon .mui-table-view { background: none;}
 .ac_coupon .mui-table-view .mui-table-view-cell { border-top: 1px solid #dbdbdb; border-bottom: 1px solid #DBDBDB; background: #fff; margin-bottom: 15px; padding: 0;}
 .ac_coupon .mui-table-view .mui-table-view-cell h3 { font-size: 19px; font-weight: normal; padding: 10px 15px; border-bottom: 1px solid #DBDBDB; margin: 0;}
-.ac_coupon .mui-table-view .mui-table-view-cell h3 a { display: block; float: right; border: 1px solid #333333; border-radius: 5px; color: #FFCC33; padding: 5px; font-size: 14px; margin-top: -4px;background-color: #FFCC33; }
+.ac_coupon .mui-table-view .mui-table-view-cell h3 a { display: block; float: right; border: 1px solid #333333; border-radius: 5px; color: #333333; padding: 5px; font-size: 14px; margin-top: -4px;background-color: #FFCC33; }
 .ac_coupon #no_list img { display: block; margin: 100px auto 0; width: 80px;}
 .ac_coupon #no_list span { display: block;  text-align: center; font-size: 18px; margin: 20px auto;}
 .ac_coupon .mui-table-view #no_list { border: none;}

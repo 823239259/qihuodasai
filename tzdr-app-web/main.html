@@ -51,6 +51,7 @@
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				wgtVer=inf.version;
+				alert(wgtVer);
 				//检查更新版本 
 				checkUpdate(function(){
 					document.getElementById("regist").addEventListener("tap",function(){
@@ -81,6 +82,7 @@
 				function(result){
 					//最新版本号
 					var newVer = result.data.version;
+					alert(newVer);
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){  //没有最新版本

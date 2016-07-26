@@ -284,12 +284,10 @@
                  //图片切换时，触发动画
                
                document.querySelector('.mui-slider').addEventListener('slide', function(event) {
-                    //注意slideNumber是从0开始的；
-                    var index = event.detail.slideNumber + 1;
-                  
+                      var index = event.detail.slideNumber + 1;
                     if (index == 2 || index == 3) {
                         var item = document.getElementById("tips-" + index);
-                        if (item.classList.contains("mui-hidden")){
+                        if (item.classList.contains("mui-hidden")) {
                             item.classList.remove("mui-hidden");
                             item.classList.add("guide-show");
                         }
