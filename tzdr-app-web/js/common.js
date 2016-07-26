@@ -413,13 +413,13 @@ var tzdr = {
 					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
 				});
 			
-				document.getElementById("ftogether").addEventListener("tap",function(){
+				/*document.getElementById("ftogether").addEventListener("tap",function(){
 					var p=plus.webview.getWebviewById("ftogether");
 					if(p){
 						mui.app_refresh('ftogether');  
 					}
 					mui.openWindow({url:mui.app_filePath("tzdr/buy/buy.html"),id:"ftogether"});
-				});
+				});*/
 			
 		}
 	},
@@ -531,7 +531,7 @@ tzdr.kuaiqiangshou=function(obj){
 					//判断是否已经安装Android apk true:启动app false:下载app
 					has_android=true;
 					
-					if(tzdr.judge_android()){
+					/*if(tzdr.judge_android()){
 						hasDown_android=true;
 						obj.innerHTML="打开交易软件";
 						document.getElementById("android_info").style.display="block";
@@ -539,15 +539,15 @@ tzdr.kuaiqiangshou=function(obj){
 						hasDown_android=false;
 						obj.innerHTML="下载交易软件";
 						document.getElementById("android_info").style.display="none";
-					}
+					}*/
 					break;
 				case "iOS":
 					//判断是否已经安装iOS ipa  true:启动app false:下载app
-					has_ios=true;
+					/*has_ios=true;
 					hasDown_ios=true; 
 					obj.innerHTML="打开交易软件";
 					document.getElementById("ios_info").style.display="block";
-					document.getElementById("ios_down").style.display="none";
+					document.getElementById("ios_down").style.display="none";*/
 					break;
 				default:
 					break;

@@ -346,7 +346,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 /*期货合买*/
 #buy_nav {background: #FFCC33; text-align: center; font-size: 0; }
 #buy_nav a.mui-control-item { display: inline-block; border: 1px solid #333333; width: 120px; height: 32px; line-height: 32px;border-radius: 0 15px 15px 0; padding: 0 20px; background: #FFCC33; color:#33333; font-size: 17px; margin-top: 10px; }
-#buy_nav a:first-child { border-radius: 15px 0 0 15px;}
+#buy_nav a:first-child { border-radius: 15px;}
 #buy_nav a.mui-active {  background:#333333; color: #FFCC33;}
 .buy_navbox { overflow: hidden; margin: 6px auto; width: 245px;}
 .buy_banner { width: 100%; height: auto;}
