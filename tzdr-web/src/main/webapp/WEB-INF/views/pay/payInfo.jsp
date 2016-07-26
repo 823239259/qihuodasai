@@ -842,7 +842,7 @@ var tab=<%=tab%>;
 							<fmt:formatNumber value="${requestScope.user.avlBal}" type="currency" pattern="0.00#"/>
 								
 							</i>元</span></li>
-							<li><label>充值金额：</label><input type="text" name="money" id="money"  onKeyUp="javascript:clearNoNumber(event,this)"  class="uc_p_ip3" ><span>元</span></li>
+							<li><label>充值金额：</label><input type="hidden" value="6" name = "payWay" id= "payWay"/><input type="text" name="money" id="money"  onKeyUp="javascript:clearNoNumber(event,this)"  class="uc_p_ip3" ><span>元</span></li>
 						</ul>
 						<div class="uc_paybtn uc_olbtn"><a href="javascript:void(0);" onclick="doNetPayment();">立即充值</a></div>
 					</div>

@@ -216,7 +216,6 @@ public class PayController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/pingplusplus",method = RequestMethod.POST)
 	public String pingplusplus(HttpServletRequest request){
 		System.out.println("执行中。。。");
@@ -231,8 +230,8 @@ public class PayController {
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();
 			String charage = payService.doSavePingPPRecharge(payWay,source,user,status,"",paymoney,ip,paytype,orderNo);
-			System.out.println(charage);
-			return charage;
+			request.setAttribute("charge", charage );
+			return "/views/pay/pingppPay";
 		}
 		return null;
 	}

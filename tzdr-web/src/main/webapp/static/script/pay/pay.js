@@ -320,7 +320,10 @@ function doNetPayment(){
 	}
 /*	$('.fl_mask').show();
 	$('#issucessdiv').show();*/
-	$.ajax({
+	document.forms["netbank"].action=basepath+"pay/pingplusplus";//
+	document.forms["netbank"].submit();
+	//$("#netbank").submit();
+	/*$.ajax({
 		url:"/pay/pingplusplus",
 		type:"post",
 		data:{
@@ -339,7 +342,7 @@ function doNetPayment(){
 				  }
 				});
 		}
-	});
+	});*/
 }
 //快捷支付
 function doPayment(){
