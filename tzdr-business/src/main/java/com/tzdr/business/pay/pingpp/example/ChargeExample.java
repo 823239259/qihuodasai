@@ -24,7 +24,7 @@ public class ChargeExample {
 		Charge charge = null;
 		String channel = pingPPModel.getChannel();
 		Map<String, Object> chargeMap = new HashMap<String, Object>();
-		chargeMap.put("amount", pingPPModel.getAmount());
+		chargeMap.put("amount", pingPPModel.getAmount() * 100);
 		chargeMap.put("currency", pingPPModel.getCurrency());
 		chargeMap.put("subject", pingPPModel.getSubject());
 		chargeMap.put("body", pingPPModel.getBody());
