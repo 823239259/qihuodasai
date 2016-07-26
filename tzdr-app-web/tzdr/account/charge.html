@@ -75,7 +75,7 @@
 								<li class="mui-table-view-cell">
 									<label>充值金额</label>
 									<span>元</span>
-									<input type="tel" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5">
+									<input type="number" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5">
 								</li>
 							</ul>
 							<div class="mui-content-padded" style="margin-top: -15px;">
@@ -279,13 +279,18 @@
 						});
 					}
 					);*/
-				plus.nativeUI.showWaiting( "正在联系服务器进行支付..." );
-							setTimeout( function(){
-								plus.nativeUI.closeWaiting();
-							}, 2000 );
-					var money = document.getElementById("rechargeMoneyAlipayApp").value;
-					var w = plus.webview.create("openUrlPay.html","pay",{top:"45px"},{money:money});
-					w.show();
+				var money = document.getElementById("rechargeMoneyAlipayApp").value;
+				if(money !== null && money.length > 0 && money > 0){
+					plus.nativeUI.showWaiting( "正在联系服务器进行支付..." );
+								setTimeout( function(){
+									plus.nativeUI.closeWaiting();
+								}, 2000 );
+						
+						var w = plus.webview.create("openUrlPay.html","pay",{top:"45px"},{money:money});
+						w.show();
+					}else{
+						mui.toast("请输入充值金额！");
+					}
 				});
 				/*switch(plus.os.name) { //根据客户端修改充值文本框属性
 					case "Android":
