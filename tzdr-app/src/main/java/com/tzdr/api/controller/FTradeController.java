@@ -106,14 +106,14 @@ public class FTradeController {
 			 int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
 			 List<FTradeParamsVo> fTradeParamsVos  = fTradeService.queryFtradeParams(cfgBusinessType);
 			 // 如果是恒指获取配置的固定手续费
-			 if (BusinessTypeEnum.HSI.getValue()==businessType){
+			/* if (BusinessTypeEnum.HSI.getValue()==businessType){
 				 String hsiTranFees = MessageUtils.message("tzdr.app.hsi.tran.fees");
 				 if (StringUtils.isNotBlank(hsiTranFees)){
 					 for (FTradeParamsVo fTradeParamsVo:fTradeParamsVos){
 						 fTradeParamsVo.setTranFees(new BigDecimal(hsiTranFees));	
 					 }
 				 }
-			 }
+			 }*/
 			 dataMap.put("paramList",fTradeParamsVos);
 			 dataMap.put("contractList", fTradeService.findOutDiskVos(businessType));
 		}
