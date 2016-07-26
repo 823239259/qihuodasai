@@ -58,6 +58,20 @@
 
 	<repositories>
 		<repository>
+			<id>aliyun</id>
+			<name>aliyun nexus</name>
+			<url>http://maven.aliyun.com/nexus/</url>
+		</repository>
+		<repository>
+		    <snapshots>
+		        <enabled>false</enabled>
+		    </snapshots>
+		    <id>central</id>
+		    <name>bintray</name>
+		    <url>http://jcenter.bintray.com</url>
+		</repository>
+		<!-- oschina仓库挂了，暂时屏蔽
+		<repository>
 			<id>oschina Releases</id>
 			<name>oschina Releases</name>
 			<url>http://maven.oschina.net/content/groups/public</url>
@@ -66,15 +80,16 @@
 			<id>oschina thirdparty</id>
 			<name>oschina thirdparty</name>
 			<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
-		</repository>
+		</repository> 
+		-->
 	</repositories>
-	<pluginRepositories>
+	<!-- <pluginRepositories>
 		<pluginRepository>
 			<id>oschina Releases</id>
 			<name>oschina Releases</name>
 			<url>http://maven.oschina.net/content/groups/public</url>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories> -->
 
 	<build>
 		<resources>
