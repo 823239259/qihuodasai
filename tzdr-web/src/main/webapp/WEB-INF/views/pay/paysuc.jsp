@@ -39,7 +39,7 @@
 </head>
 <body>
 <div class="pay_suc">
-	<img src="../static/images/suc_01.png" />
+	<img src="static/images/suc_01.png" />
 	<div class="mui-content-padded">
 		<h4>已充值成功</h4>
 	</div>

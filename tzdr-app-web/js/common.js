@@ -317,8 +317,9 @@ var tzdr = {
 	 * @param {Object} mobile
 	 */
 	validate_mobile:function (mobile){
-		var mobilePattern=/^(((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;//手机校验规则
-		if(!mobilePattern.test(mobile)){
+		//var mobilePattern=/^(((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;//手机校验规则
+		var mobilePattern={mobile: /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/ };
+		if(!mobilePattern.mobile.test(mobile)){
     			return false;
     	}
 		return true;
