@@ -70,8 +70,9 @@ var tab=<%=tab%>;
 				<!--  
 				<li><a href="javascript:void(0);" class="on">快捷支付</a></li>
 				-->
-				<li><a href="javascript:void(0);">网银充值</a></li> 
-				<li><a href="javascript:void(0);">支付宝转账</a></li>
+				<li><a href="javascript:void(0);">支付宝充值</a></li>
+				<!-- <li><a href="javascript:void(0);">网银充值</a></li> 
+				<li><a href="javascript:void(0);">支付宝转账</a></li> -->
 				<li><a href="javascript:void(0);">银行转账</a></li>
 				<li><a href="javascript:void(0);">充值记录</a></li>
 			</ul>
@@ -140,7 +141,7 @@ var tab=<%=tab%>;
 					 </form>
 				</div>
 				-->
-				<div class="subtab">
+				<%-- <div class="subtab">
 					<form id="netbank" action="" method="post" target="_blank"  >
 						
 						<div class="uc_olbank">
@@ -832,8 +833,26 @@ var tab=<%=tab%>;
 						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
 					</div>
 				</form>
-			</div>
+			</div> --%>
 			<div class="subtab">
+					<form id="netbank" action="" method="post" target="_blank"  >
+					<div class="uc_olmoney">
+						<ul class="uc_pblist">
+							<li><label>账户余额：</label><span><i>
+							<fmt:formatNumber value="${requestScope.user.avlBal}" type="currency" pattern="0.00#"/>
+								
+							</i>元</span></li>
+							<li><label>充值金额：</label><input type="text" name="money" id="money"  onKeyUp="javascript:clearNoNumber(event,this)"  class="uc_p_ip3" ><span>元</span></li>
+						</ul>
+						<div class="uc_paybtn uc_olbtn"><a href="javascript:void(0);" onclick="doNetPayment();">立即充值</a></div>
+					</div>
+					<div class="uc_olpromt">
+						<h3>温馨提示：</h3>
+						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
+					</div>
+				</form>
+			</div>
+			<%-- <div class="subtab">
 				<div id="alipay1" style="padding:20px 50px 50px;">
 					<!-- 支付宝转账 -->
 						<div class="uc_alipay">
@@ -846,16 +865,16 @@ var tab=<%=tab%>;
 									<label>支付宝账号：</label>
 									<input type="text" id="alipayaccount" name="alipayaccount" >
 								</li>
-								<%--
+								
 								<li>
 									<label>充值金额：</label>
 									<input type="text" id="alimoney" name="alimoney" maxlength="7" onKeyUp="javascript:clearNoNumber(event,this)">
 								</li>
-								 --%>
+								
 							</ul>
-							<%--
+							
 							<div class="uc_paybtn uc_apbtn"><a id="aliSubmitBtn" href="javascript:void(0)" onclick="doAliCharge();">立即充值</a></div>
-							 --%>
+							
 							 <div class="uc_paybtn uc_apbtn"><a id="aliSubmitBtn" href="javascript:void(0)" onclick="doAliCharge();">立即绑定</a></div>
 						</div>
 						<div class="uc_banktime uc_aptime">
@@ -888,7 +907,7 @@ var tab=<%=tab%>;
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
 						</ol>
 					</ul>
-					<%--
+					
 					<ul class="uc_ap_info uc_ap_info1">
 						<li><label>收款人支付宝账户：</label><span>vs@vs.com</span>
 						<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">复制
@@ -901,7 +920,7 @@ var tab=<%=tab%>;
 						<li><label>您的支付宝账户：</label><span id="payaliaccount"></span></li>
 						<li><label>转入金额：</label><span><i id="payalimoney"></i>元</span><a href="javascript:void(0)" onClick="toAliCharge();">修改金额</a></li>
 					</ul>
-					--%>
+					
 					<div class="uc_ap_link">
 							<div class="uc_ap_code">
 								
@@ -925,7 +944,7 @@ var tab=<%=tab%>;
 		
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<div class="subtab">
 					<div class="uc_bank">
 						<p class="uc_b_title">您可以通过网上银行或银行柜台向维胜转账（手续费最多一笔50元）</p>
