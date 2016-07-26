@@ -245,7 +245,7 @@ public class FSimpleCouponServiceImpl extends BaseServiceImpl<FSimpleCoupon, FSi
 			fSimpleCoupon.setMoney(fSimpleCouponManageVo.getMoney());
 			fSimpleCoupon.setType(fSimpleCouponManageVo.getType());
 			fSimpleCoupon.setScope(fSimpleCouponManageVo.getScope());
-			fSimpleCoupon.setPlatform(fSimpleCouponManageVo.getPlatform());
+			fSimpleCoupon.setPlatform("维胜");//fSimpleCouponManageVo.getPlatform()
 			fSimpleCoupon.setName(name);
 			//判断使用的是截止日期还是使用周期
 			if(fSimpleCouponManageVo.getDeadline()!=null){//截止日期

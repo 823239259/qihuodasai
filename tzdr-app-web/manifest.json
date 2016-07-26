@@ -7,7 +7,7 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.2.10",/*应用版本名称*/
+		"name": "1.0.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -164,21 +164,21 @@
 						"retina35": "images/boot/ios/start640x960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "images/boot/ios/start640x1136.png",
 						"retina47": "images/boot/ios/start750x1334.png",
-						"retina55": "images/boot/ios/start1242x2208.png","retina55l":"C:/Users/丽丽/Desktop/start1.png"
+						"retina55": "images/boot/ios/start1242x2208.png","retina55l":"images/boot/android/start1.png"
 					},
 					"ipad": {
 						"portrait": "images/boot/ios/start768x1004.png", /*iPad竖屏启动图片，分辨率：768x1004*/
 						"portrait-retina": "images/boot/ios/start1536x2008.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "C:/Users/丽丽/Desktop/start1.png", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "C:/Users/丽丽/Desktop/start1.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"landscape": "images/boot/android/start1.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "images/boot/android/start1.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
 						"portrait7": "images/boot/ios/start768x1024.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
 						"portrait-retina7": "images/boot/ios/start1536x2048.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "C:/Users/丽丽/Desktop/start1.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": "C:/Users/丽丽/Desktop/start1.png"
+						"landscape7": "images/boot/android/start1.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "images/boot/android/start1.png"
 					}
 				},
 				"android": {
-					"mdpi": "C:/Users/丽丽/Desktop/start1.png", /*普通屏启动图片，分辨率：240x282*/
+					"mdpi": "images/boot/android/start1.png", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "images/boot/android/start1.png", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "images/boot/android/start1.png", /*高分屏启动图片，分辨率：480x762*/
 					"xhdpi": "images/boot/android/start1.png", /*720P高分屏启动图片，分辨率：720x1242*/

@@ -103,7 +103,7 @@
 						<label>操盘须知：</label> <span style="color:#333; font-size:16px;">美国轻质原油期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label><span><i>9:05-23:55</i></span>
+						<label>交易时间：</label><span><i>09:20-16:10,17：05-23:40</i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
@@ -200,7 +200,7 @@
 		          </tr>
 		          <tr>
 		            <td class="first">交易时间</td>
-		            <td class="font">9:05-23:55</td>
+		            <td class="font">09:20-16:10,17：05-23:40</td>
 		          </tr>
 		          <tr>
 		            <td class="first">涨跌幅限制</td>

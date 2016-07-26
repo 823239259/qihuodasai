@@ -31,7 +31,7 @@
 			<ul>	
 				<%-- <li><a id="hsi" href="${ctx}/userhsi/trade_list">恒指期货</a><i>></i></li>		
 				<li><a id="crudeoil" href="${ctx}/usercrudeoil/trade_list">国际原油</a><i>></i></li> --%>
-				<li><a id="ftse" href="${ctx}/userftse/trade_list">国际期货</a><i>></i></li>
+				<li><a id="ftse" href="${ctx}/userftse/trade_list">操盘记录</a><i>></i></li>
 				<%-- <li><a id="product" href="${ctx}/userproduct/trade_list">商品期货</a><i>></i></li> --%>
 				<%-- <li><a id="futrue" href="${ctx}/future/trade_list">期指操盘</a><i>></i></li> --%>
 			</ul>

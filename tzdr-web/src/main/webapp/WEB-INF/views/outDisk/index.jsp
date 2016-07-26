@@ -76,28 +76,28 @@
                 <tr>
                     <td>富时A50</td>
                     <td>${outDiskPrice[0].mainContract}</td>
-                    <td>9:05-15:50，16:45-23:55</td>
+                    <td>9:05-16:25，17:20-01:50</td>
                     <td>只交易富时A50时，初始最大可持仓<i id='ATranActualLever'>${outDiskParameters[0].atranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[0].price}</i>元/手</td>
                 </tr>
                 <tr>
                     <td>恒指期货</td>
                     <td>${outDiskPrice[2].mainContract}</td>
-                    <td>9:20-11:55，13:05-16:10，17:05-23:40</td>
+                    <td>09:20-16:10，17:05-23:40</td>
                     <td>只交易恒指期货时，初始最大可持仓<i id='HTranActualLever'>${outDiskParameters[0].htranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[2].price}</i>元/手</td>
                 </tr>
                 <tr>
                     <td>国际原油</td>
                     <td>${outDiskPrice[1].mainContract}</td>
-                    <td>9:05-23:55</td>
+                    <td>06:05-04:55</td>
                     <td>只交易国际原油时，初始最大可持仓<i id='YTranActualLever'>${outDiskParameters[0].ytranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[1].price}</i>元/手</td>
                 </tr>
                 <tr>
                     <td>迷你道琼</td>
                     <td>${outDiskPrice[3].mainContract}</td>
-                    <td>9:05-23:55</td>
+                    <td>06:05-04:55</td>
                     <td>只交易迷你道琼时，初始最大可持仓<i id='mdtranActualLever'>${outDiskParameters[0].mdtranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[3].price}</i>元/手</td>
                 </tr>
@@ -105,7 +105,7 @@
                 <tr>
                     <td>迷你纳斯达克</td>
                     <td>${outDiskPrice[4].mainContract}</td>
-                    <td>9:05-23:55</td>
+                    <td>06:05-04:55</td>
                     <td>只交易迷你纳斯达克时，初始最大可持仓<i id='mntranActualLever'>${outDiskParameters[0].mntranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[4].price}</i>元/手</td>
                 </tr>
@@ -113,7 +113,7 @@
                 <tr>
                     <td>迷你标准普尔</td>
                     <td>${outDiskPrice[5].mainContract}</td>
-                    <td>9:05-23:55</td>
+                    <td>06:05-04:55</td>
                     <td>只交易迷你标准普尔时，初始最大可持仓<i id='mbtranActualLever'>${outDiskParameters[0].mbtranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[5].price}</i>元/手</td>
                 </tr>
@@ -121,7 +121,7 @@
                 <tr>
                     <td>德国DAX</td>
                     <td>${outDiskPrice[6].mainContract}</td>
-                    <td>14:05-23:55</td>
+                    <td>14:05-03:55</td>
                     <td>只交易德国DAX时，初始最大可持仓<i id='daxtranActualLever'>${outDiskParameters[0].daxtranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[6].price}</i>元/手</td>
                 </tr>
@@ -129,7 +129,7 @@
                 <tr>
                     <td>日经225</td>
                     <td>${outDiskPrice[7].mainContract}</td>
-                    <td>09:05-14:20，15:20-23:55</td>
+                    <td>07:35-14:20，15:20-01:50</td>
                     <td>只交易日经225时，初始最大可持仓<i id='nikkeiTranActualLever'>${outDiskParameters[0].nikkeiTranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[7].price}</i>元/手</td>
                 </tr>

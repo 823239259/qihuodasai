@@ -175,7 +175,7 @@ function getFtseDataList(index,type,
             		if(n.stateType == 2){
             			html = html + "<a href='javascript:void(0);' class='uc_tlbtn_btn_no' style='color:#fff;margin: 5px auto 0;background:#D3D3D3;'>已申请终结</a>";
             		}else if(n.stateType == 4){
-            			html = html + "<a href='javascript:void(0);' data_no="+n.id+" onclick=\"showAppendMoneyBox('"+n.id+"')\" class='uc_tllist_add' style='color:#fff;margin: 5px auto 0;'>补充保证金</a>";
+            			html = html + "<a href='javascript:void(0);' data_no="+n.id+" onclick=\"showAppendMoneyBox('"+n.id+"')\" class='uc_tllist_add' style='color:#333;margin: 5px auto 0;'>补充保证金</a>";
             			html = html + "<a href='javascript:void(0);' data_no="+n.id+" onclick=\"showApplyEndTradeBox("+n.businessType+",'"+n.id+"')\" class='uc_tlbtn_btn_no' style='color:#fff;margin: 5px auto 0;'>终结方案</a>";
             		}
             		html = html + "</td>";
