@@ -186,7 +186,7 @@ function settingEndInfoFtse(traderBond,tranProfitLoss,parities,tranCommission,en
 			$(this).html($.formatMoney(Number(traderBond))+'元');
 		}
 		else if (i == 2) {
-			$(this).html($.formatMoney(Number(tranProfitLoss))+'美元（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）');
+			$(this).html($.formatMoney(Number(tranProfitLoss))+'美元');//（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）
 		}
 		else if (i == 3){
 			$(this).html('1:'+Number(parities).toFixed(6));

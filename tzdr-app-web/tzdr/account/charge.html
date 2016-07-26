@@ -217,7 +217,7 @@
 				$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"})
 				$("#item6mobile").addClass("mui-active");
 				$("#item3mobile").removeClass("mui-active");
-				$("#alipayApp").css({"color":"#FFCC33"});
+				//$("#alipayApp").css({"color":"#FFCC33"});
 //				$("#bankPay").removeClass("titleActive");
 		$("#itembox").css({"-webkit-transform": "translate3d(0px, 0px, 0px) translateZ(0px)", "-webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)","transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
 			});
@@ -280,16 +280,20 @@
 					}
 					);*/
 				var money = document.getElementById("rechargeMoneyAlipayApp").value;
-				if(money !== null && money.length > 0 && money > 0){
+				if(money !== null && money.length > 0 && money > 1){
 					plus.nativeUI.showWaiting( "正在联系服务器进行支付..." );
 								setTimeout( function(){
 									plus.nativeUI.closeWaiting();
 								}, 2000 );
-						
 						var w = plus.webview.create("openUrlPay.html","pay",{top:"45px"},{money:money});
 						w.show();
 					}else{
-						mui.toast("请输入充值金额！");
+						if(money > 0 && money < 1){
+							mui.toast("充值金额不能小于1元");
+						}else{
+							mui.toast("请输入充值金额！");
+						}
+						
 					}
 				});
 				/*switch(plus.os.name) { //根据客户端修改充值文本框属性

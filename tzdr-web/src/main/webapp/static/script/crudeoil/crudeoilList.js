@@ -11,7 +11,7 @@ function settingEndInfoCrudeOil(traderBond,appendTraderBond,tranProfitLoss,parit
 			$(this).html($.formatMoney(Number(appendTraderBond))+'元');
 		}
 		else if (i == 3) {
-			$(this).html($.formatMoney(Number(tranProfitLoss))+'美元（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）');
+			$(this).html($.formatMoney(Number(tranProfitLoss))+'美元');//（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）
 		}
 		else if (i == 4){
 			$(this).html('1:'+Number(parities).toFixed(6));
