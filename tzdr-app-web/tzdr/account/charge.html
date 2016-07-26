@@ -280,7 +280,7 @@
 					}
 					);*/
 				var money = document.getElementById("rechargeMoneyAlipayApp").value;
-				if(money !== null && money.length > 0 && money > 1){
+				if(money !== null && money.length > 0 && money >= 1){
 					plus.nativeUI.showWaiting( "正在联系服务器进行支付..." );
 								setTimeout( function(){
 									plus.nativeUI.closeWaiting();
