@@ -686,4 +686,12 @@ public class HomePageController {
 		List<OperationalConfigVo> newsdata=this.operationalConfigService.findTopNews(1,3);
 		return newsdata;
 	}
+	/**
+	 * 手机APP支付成功跳转页面
+	 * @return
+	 */
+	@RequestMapping(value = "/paySucApp")
+	public String paySucApp(){
+		return "/views/pay/paysuc";
+	}
 }

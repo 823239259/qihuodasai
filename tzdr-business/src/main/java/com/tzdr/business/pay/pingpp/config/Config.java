@@ -28,7 +28,7 @@ public class Config {
 	/**
 	 * 支付宝手机网站支付成功跳转页面
 	 */
-	public static String ALIPAY_WAP_SUCCESS_URL="http://test.www.dktai.com/pay/paySucApp";
+	public static String ALIPAY_WAP_SUCCESS_URL="http://test.www.dktai.com/paySucApp";
 	public static String BODY = "维胜充值";
 	public static String SUBJECT = "维胜充值购买";
 	static {
