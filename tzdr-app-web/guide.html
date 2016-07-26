@@ -45,10 +45,11 @@
                 position: absolute;
                 left: 0;
                 bottom: 13%;
-                height: 6%;
+                height: 20%;
                 width: 100%;
                 color: #fff;
                 display: -moz-box;
+                text-align: center;
             }
             .animate h2 {
                 text-align: center;
@@ -202,16 +203,22 @@
            	height: 40px;
            	border:1px solid #FFFFFF;
            	text-align: center;
+           	text-align: center;
+         	display: block;
+         	margin-left:-17%;
            }
-           .runLeft{
+           .runLeft{ 
            	display: inline;
+           }
+           #slider{
+				width: 100%;           	
            }
         </style>
     </head>
  
     <body>
     	
-        <div id="slider" class="mui-slider mui-fullscreen" style="background-color: black;">
+        <div id="slider" class="mui-slider mui-fullscreen">
             <div class="mui-slider-group">
                 <!-- 第一张 -->
                 <div class="mui-slider-item">
@@ -251,7 +258,7 @@
 				<a id="skip" href="#">跳过</a>
 </div>
             <script src="js/mui.min.js"></script>
-            <script>http://127.0.0.1:8020/tzdr-app-web/images/guide4.png
+            <script>/*http://127.0.0.1:8020/tzdr-app-web/images/guide4.png*/
                 mui.back = function() {};
                 mui.plusReady(function() {
                     if (mui.os.ios) {
@@ -290,7 +297,7 @@
                         if (item.classList.contains("mui-hidden")) {
                             item.classList.remove("mui-hidden");
                             item.classList.add("guide-show");
-                        }
+                        } 
                     }
                  });
       </script>

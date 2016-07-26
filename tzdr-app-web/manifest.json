@@ -249,7 +249,8 @@
 					"images/icon4.png",
 					"images/icon1.png",
 					"images/icon3.png",
-					"images/icon2.png"
+					"images/icon2.png",
+					"images/banner3.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -837,7 +838,10 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"images/status_02.png",
+					"images/status_03.png",
+					"images/status_04.png"
 				],
 				"refer": [
 					"tzdr/buy/buy.html",
@@ -892,7 +896,9 @@
 					"fonts/mui.ttf",
 					"images/guide4.png",
 					"images/guide2.png",
-					"images/guide3.png"
+					"images/guide3.png",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [
 					"main.html"

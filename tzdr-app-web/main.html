@@ -12,6 +12,9 @@
     	body{
     		background-color: #ffcc33;
     	}
+    	#main-status{
+    		display: none;
+    	}
     </style>
     <script>  
     	mui.init();
@@ -28,9 +31,10 @@
 			 	mui.openWindow({
                 			url: 'guide.html',
                        		 id: 'guide1'
-                		})
+                	})
 			 	}else{
-                		
+                		var status =  document.getElementById("main-status");
+                		status.style.display = "block";
                 	};
 			 	
 			//Android双击home键退出应用
@@ -51,7 +55,7 @@
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				wgtVer=inf.version;
-				alert(wgtVer);
+				//alert(wgtVer);
 				//检查更新版本 
 				checkUpdate(function(){
 					document.getElementById("regist").addEventListener("tap",function(){
@@ -82,7 +86,7 @@
 				function(result){
 					//最新版本号
 					var newVer = result.data.version;
-					alert(newVer);
+					//alert(newVer);
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){  //没有最新版本
@@ -179,7 +183,7 @@
     </script>
 </head>
 <body>
-<div class="mui-content main_page">
+<div class="mui-content main_page" id = "main-status">
 	<img src="images/icons/LOGO.png" />
 	<div class="main_link">
 		<a href="javascript:void(0);" id="login" class="main_login">登录</a>
