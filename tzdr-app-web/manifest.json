@@ -327,7 +327,8 @@
 					"css/mui.min.css",
 					"tzdr/commonback.html",
 					"js/jquery-1.11.3.js",
-					"js/pingpp.js"
+					"js/pingpp.js",
+					"images/bank1.png"
 				],
 				"refer": [
 					"tzdr/account/bbpay.html",
@@ -718,7 +719,8 @@
 				"refer": [
 					"tzdr/login/regist.html",
 					"tzdr/login/login.html",
-					"home.html"
+					"home.html",
+					"tzdr/account/accountno.html"
 				],
 				"priority": 0
 			},
@@ -807,7 +809,8 @@
 				"refer": [
 					"home.html",
 					"tzdr/buy/buyDate.html",
-					"tzdr/scheme.html"
+					"tzdr/scheme.html",
+					"tzdr/future/listrg.html"
 				],
 				"priority": 0
 			},

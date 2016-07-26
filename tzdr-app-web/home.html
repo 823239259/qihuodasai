@@ -169,7 +169,7 @@
 						document.getElementById('indicatorid').innerHTML=indicator_content; 
 					}
 					var slider = mui("#slider");  
-					slider.slider({interval: 5000});
+					slider.slider({interval: 3000});
 				},
 				function(){
 					
@@ -184,7 +184,7 @@
 				else{ 
 					 _html='<div class="mui-slider-item">';
 				}
-				_html +='<a href="javascript:void(0);" id="'+banner.newId+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title="" style="height:260px" />';
+				_html +='<a href="javascript:void(0);" id="'+banner.newId+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title=""/>';
 				_html +='</a></div>';
 				return _html;
 			}

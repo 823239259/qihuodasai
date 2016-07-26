@@ -9,7 +9,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="stylesheet" href="css/mui.min.css">
         <style>
-            #close {
+            /*#close {
                 position: absolute;
                 width: 160px;
                 left: 50%;
@@ -19,7 +19,7 @@
                 padding: 10px;
                 color: #fff;
                 border-color: #fff;
-            }
+            }*/
             .item-logo {
                 width: 100%;
                 height: 100%;
@@ -41,7 +41,7 @@
                 left: 50%;
                 margin-left: -100px;
             }
-            .animate {
+            /*.animate {
                 position: absolute;
                 left: 0;
                 bottom: 13%;
@@ -66,7 +66,7 @@
             .animate li:nth-child(3) {
                 text-align: left;
                 float: right;
-            }
+            }*/
             .animated {
                 -webkit-animation-duration: 1s;
                 -webkit-animation-play-state: paused;
@@ -198,14 +198,26 @@
            	line-height: 40px;
            	color:#FFCC33;
            }
+          #myBtn {
+		    width: 100%;
+		    height: 80px;
+		    position: absolute;
+		    top: 75%;
+		    left: -4%;
+		    text-align: center;
+				}
            #close{
            	width: 120px;
            	height: 40px;
            	border:1px solid #FFFFFF;
            	text-align: center;
-           	text-align: center;
          	display: block;
-         	margin-left:-17%;
+         	margin: auto;
+         	color:#FFFFFF;
+         	position: absolute;
+         	top:85%;
+         	left:35%;
+         /*	margin-left:-17%;*/
            }
            .runLeft{ 
            	display: inline;
@@ -243,9 +255,7 @@
                 <div class="mui-slider-item">
                     <div class="item-logo">
                         <img src="images/guide4.png" style="width: 100%;height: 100%;">
-                        <div class="animate">
-                            <button id='close' class="mui-btn mui-btn-warning mui-btn-outlined">立刻体验 <span class="mui-icon mui-icon-arrowright"></span></button>
-                        </div>
+                        <button id='close'  class="mui-btn mui-btn-warning mui-btn-outlined">立刻体验 <span class="mui-icon mui-icon-arrowright"></span></button>
                     </div>
                 </div>
             </div>
@@ -294,7 +304,7 @@
                       var index = event.detail.slideNumber + 1;
                     if (index == 2 || index == 3) {
                         var item = document.getElementById("tips-" + index);
-                        if (item.classList.contains("mui-hidden")) {
+                        if (item != null && item.classList.contains("mui-hidden")) {
                             item.classList.remove("mui-hidden");
                             item.classList.add("guide-show");
                         } 
