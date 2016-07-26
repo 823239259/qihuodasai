@@ -63,7 +63,7 @@ public class FTradeController {
 	public ApiResult goods(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 	
 		 List<FTradeVo> dataList = fTradeService.findGoods();
-		 // 如果是恒指获取配置的固定手续费
+		 /*// 如果是恒指获取配置的固定手续费
 		 String hsiTranFees = MessageUtils.message("tzdr.app.hsi.tran.fees");
 		 if (StringUtils.isNotBlank(hsiTranFees)){
 			 for (FTradeVo fTradeVo:dataList){
@@ -71,7 +71,7 @@ public class FTradeController {
 					 fTradeVo.setTradeFees(new BigDecimal(hsiTranFees));	
 				 }
 			 }
-		 }
+		 }*/
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("tradeList", dataList);
 		
