@@ -55,8 +55,8 @@
 		<div class="mui-content ac_charge">
 			<div id="slider" class="mui-slider">
 				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<!--<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>-->
-					<!--<a class="mui-control-item" id="alipay">支付宝转账</a>-->
+					<!--<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>
+					<a class="mui-control-item" id="alipay">支付宝转账</a>-->
 					<a class="mui-control-item" id="alipayApp">充值</a>
 					<a class="mui-control-item" id="bankPay">银行转账</a>
 				</div>
@@ -90,7 +90,7 @@
 							</div>
 						</div>
 					</div>
-					<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="" class="mui-scroll-wrapper ac_online">
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
@@ -117,9 +117,9 @@
 								<button type="button" id="recharge-btn" class="mui-btn mui-btn-block lg-btnlogin">立即充值</button>
 							</div>
 						</div>
-					</div>-->
+					</div>
 
-					<!--<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">
+					<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">
 						<div id="" class="mui-scroll-wrapper ac_online">
 							<div class="mui-scroll">
 								<ul id="list" class="mui-table-view mui-table-view-chevron">
@@ -221,6 +221,7 @@
 				$("#item6mobile").removeClass("mui-active");
 				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
 			});
+	mui.init();
 			/*mui.init({
 
 		    swipeBack: false, 
@@ -527,10 +528,16 @@
 			  //注意slideNumber是从0开始的；
 				//alert(event.detail.slideNumber );
 			if(event.detail.slideNumber==0){
+				$("#item6mobile").addClass("mui-active");
+				$("#item3mobile").removeClass("mui-active");
+				$("#itembox").css({"-webkit-transform": "translate3d(0px, 0px, 0px) translateZ(0px)", "-webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)","transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
 					$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"});
 			}else if(event.detail.slideNumber==1){
 				$("#sliderProgressBar").css({"transform":"translate3d(100%, 0px, 0px) translateZ(0px)"})
-			}
+				$("#item3mobile").addClass("mui-active");
+				$("#item6mobile").removeClass("mui-active");
+				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
+		}
 			});
 		</script> 
 	</body>

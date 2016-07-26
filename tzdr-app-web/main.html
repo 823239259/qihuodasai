@@ -23,7 +23,16 @@
 			
 			//状态栏设置
 			setstatus();
-			
+			 if(plus.storage.getItem("guide")==null){
+			 	plus.storage.setItem("guide","1");
+			 	mui.openWindow({
+                			url: 'guide.html',
+                       		 id: 'guide1'
+                		})
+			 	}else{
+                		
+                	};
+			 	
 			//Android双击home键退出应用
 			mui.back = function(){
                if(!first) {
