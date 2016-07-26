@@ -6,8 +6,8 @@
 .own-mainlist { padding-bottom:46px;}
 .main_list .mui-table-view-cell { min-height: 92px;}
 .main_list .mui-table-view-cell img { width: 70px; height:70px; position: absolute;}
-.main_list .mui-table-view-cell h2 {width: 70%; height: 20px; line-height: 20px; text-align: left; font-size: 12px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
-.main_list .mui-table-view-cell p { width: 70%; line-height: 20px; margin-left: 75px; font-size: 10px;white-space: normal;color:#999999;}
+.main_list .mui-table-view-cell h2 {width: 70%; height: 20px; line-height: 20px; text-align: left; font-size: 14px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
+.main_list .mui-table-view-cell p { width: 70%; line-height: 20px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
 .main_list .mui-table-view-cell p i { color: #FFCC33; font-style: normal; }
 .main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;}
 .rg_banner { width: 95%; margin: 0 auto;}
