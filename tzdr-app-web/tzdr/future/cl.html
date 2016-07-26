@@ -11,6 +11,8 @@
 	<script>
 		mui.init();
 		var paramListAll=null;
+		var contractListAll=null;
+    	var init_params=null;
 		mui.plusReady(function(){
 			//初始化监听头部和底部事件
   			//tzdr.init.initButtomListener();
@@ -151,6 +153,7 @@
 					trade_leve:trade_leve
 				}
 				});
+				mui.cacheUser.clearCachePages("cl.html");
 			}
 			else
 			{

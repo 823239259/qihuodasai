@@ -276,11 +276,11 @@
                     }
                      plus.navigator.closeSplashscreen();
                     if(plus.storage.getItem("guide")==null){
-                		plus.storage.setItem("guide","1");
-                    
+                		plus.storage.setItem("guide","1123123");
+                    		
                 
                 	}else{
-                		
+//              		alert(plus.storage.getItem("guide"));
                 	};
                 });
                  //立即体验按钮点击事件
@@ -288,14 +288,14 @@
                     //打开关于页面
                     mui.openWindow({
                         url: 'main.html',
-                        id: 'close'
+                        id: 'main.html'
                     });
                 }, false);
                  document.getElementById("skip").addEventListener('tap', function(event) {
                     //打开关于页面
                     mui.openWindow({
                         url: 'main.html',
-                        id: 'close1'
+                        id: 'main.html1'
                     });
                 }, false);
                  //图片切换时，触发动画
