@@ -11,7 +11,7 @@
 </head>
 <body>
 <!--弹出广告-->
-<div class="app_qj" id="app_qj" style="display: none;"></div>
+<!--<div class="app_qj" id="app_qj" style="display: none;"></div>
 <div class="app_tc" id="app_tc" style="display: none;">
 		<div class="app_tc_bj">
 			<img class="app_img1" src="images/app-g.png">
@@ -21,7 +21,7 @@
 	    </div>
 	        
 	</div>
-</div>	
+</div>	-->
 <!--弹出广告 end-->
 
 	
@@ -52,6 +52,7 @@
 		<div class="mui-slider" id="slider">
 		  	<div class="mui-slider-group mui-slider-loop" id="bannerloop" >
 		  		<div class="mui-slider-item" ><a href="javascript:void(0);"><img src="images/banner_load.jpg"/></a></div>
+		  		<div class="mui-slider-item"><img src="images/banner3.png"> </div>
 		  	</div>
 		  	<div class="mui-slider-indicator" id="indicatorid">
 				<!--<div class="mui-indicator mui-active"></div>
@@ -278,26 +279,26 @@
 			
 				function setTranfees(){
 					mui.app_request("/ftrade/goods",{},function(result){
-					if (result.data.isFtogetherActivityTime){
-							var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
-							if (mui.isnull(ftogether_activity_show)){
-								document.getElementById("app_qj").style.display="block";
-								document.getElementById("app_tc").style.display="block";
-								
-								// 弹出框关闭
-								document.getElementById("closebtn").addEventListener('tap', function() {
-									closeActivityImg();
-								});
-								// 跳转到合买页面
-								document.getElementById("partake").addEventListener('tap', function() {
-									closeActivityImg();
-									var p=plus.webview.getWebviewById("ftogether");
-									if(p){
-										mui.app_refresh('ftogether');  
-									}
-									mui.openWindow({url:mui.app_filePath("tzdr/buy/buy.html"),id:"ftogether"});
-								});
-							}
+//					if (result.data.isFtogetherActivityTime){
+////							var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
+//							if (mui.isnull(ftogether_activity_show)){
+//								document.getElementById("app_qj").style.display="block";
+//								document.getElementById("app_tc").style.display="block";
+//								
+//								// 弹出框关闭
+////								document.getElementById("closebtn").addEventListener('tap', function() {
+////									closeActivityImg();
+////								});
+//								// 跳转到合买页面
+////								document.getElementById("partake").addEventListener('tap', function() {
+////									closeActivityImg();
+////									var p=plus.webview.getWebviewById("ftogether");
+////									if(p){
+////										mui.app_refresh('ftogether');  
+////									}
+////									mui.openWindow({url:mui.app_filePath("tzdr/buy/buy.html"),id:"ftogether"});
+////								});
+//							}
 					}
 					if(!mui.isnull(result.data.tradeList)){
 						mui.each(result.data.tradeList,function(i,item){
@@ -327,14 +328,14 @@
 			}
 			
 			// 关闭活动图片
-			function closeActivityImg (){
-				document.getElementById("app_tc").style.display="none";
-				document.getElementById("app_qj").style.display="none";
-				var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
-				if (mui.isnull(ftogether_activity_show)){
-					plus.storage.setItem("ftogether_activity_show","has-show");
-				}
-			}
+//			function closeActivityImg (){
+//				document.getElementById("app_tc").style.display="none";
+//				document.getElementById("app_qj").style.display="none";
+//				var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
+//				if (mui.isnull(ftogether_activity_show)){
+//					plus.storage.setItem("ftogether_activity_show","has-show");
+//				}
+//			}
 		});	
 	</script>
 </html>
