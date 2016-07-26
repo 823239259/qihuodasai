@@ -70,7 +70,6 @@
 		    <name>bintray</name>
 		    <url>http://jcenter.bintray.com</url>
 		</repository>
-		<!-- oschina仓库挂了，暂时屏蔽
 		<repository>
 			<id>oschina Releases</id>
 			<name>oschina Releases</name>
@@ -81,15 +80,14 @@
 			<name>oschina thirdparty</name>
 			<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
 		</repository> 
-		-->
 	</repositories>
-	<!-- <pluginRepositories>
+	<pluginRepositories>
 		<pluginRepository>
 			<id>oschina Releases</id>
 			<name>oschina Releases</name>
 			<url>http://maven.oschina.net/content/groups/public</url>
 		</pluginRepository>
-	</pluginRepositories> -->
+	</pluginRepositories>
 
 	<build>
 		<resources>

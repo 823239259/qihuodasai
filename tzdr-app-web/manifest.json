@@ -264,7 +264,8 @@
 					"tzdr/account/accountno.html",
 					"tzdr/news/news.html",
 					"tzdr/buy/buy.html",
-					"tzdr/future/lhsi.html"
+					"tzdr/future/lhsi.html",
+					"tzdr/scheme.html"
 				],
 				"priority": 0
 			},
@@ -849,7 +850,9 @@
 				],
 				"refer": [
 					"tzdr/buy/buy.html",
-					"home.html"
+					"home.html",
+					"tzdr/account/account.html",
+					"tzdr/future/DetailCn.html"
 				],
 				"priority": 0
 			},

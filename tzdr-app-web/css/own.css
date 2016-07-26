@@ -4,12 +4,12 @@
 .top-tel { display: block; width: auto; height: 44px; line-height: 44px; font-size: 14px; color: #fff; float: right;}
 .mui-iframe-wrapper { height: 45px; overflow: hidden;}
 .own-mainlist { padding-bottom:46px;}
-.main_list .mui-table-view-cell { min-height: 92px;}
-.main_list .mui-table-view-cell img { width: 70px; height:70px; position: absolute;}
+.main_list .mui-table-view-cell { min-height: 92px;overflow: hidden;height: auto;position: relative;}
+.main_list .mui-table-view-cell img { width: 70px; height:70px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
 .main_list .mui-table-view-cell h2 {width: 70%; height: 20px; line-height: 20px; text-align: left; font-size: 14px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
-.main_list .mui-table-view-cell p { width: 70%; line-height: 20px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
+.main_list .mui-table-view-cell p {  line-height: 20px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
 .main_list .mui-table-view-cell p i { color: #FFCC33; font-style: normal; }
-.main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;}
+.main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;padding-right: 40px;}
 .rg_banner { width: 95%; margin: 0 auto;}
 .rg_banner img { width: 100%;}
 @media only screen and (min-width: ) {
@@ -346,7 +346,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 /*期货合买*/
 #buy_nav {background: #FFCC33; text-align: center; font-size: 0; }
 #buy_nav a.mui-control-item { display: inline-block; border: 1px solid #333333; width: 120px; height: 32px; line-height: 32px;border-radius: 0 15px 15px 0; padding: 0 20px; background: #FFCC33; color:#33333; font-size: 17px; margin-top: 10px; }
-#buy_nav a:first-child { border-radius: 15px 0 0 15px;}
+#buy_nav a:first-child { border-radius: 15px;}
 #buy_nav a.mui-active {  background:#333333; color: #FFCC33;}
 .buy_navbox { overflow: hidden; margin: 6px auto; width: 245px;}
 .buy_banner { width: 100%; height: auto;}
