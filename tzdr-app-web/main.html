@@ -12,7 +12,7 @@
     	body{
     		background-color: #ffcc33;
     	}
-    	#main-status{
+    	#main_status{
     		display: none;
     	}
     </style>
@@ -27,14 +27,16 @@
 			//状态栏设置
 			setstatus();
 			 if(plus.storage.getItem("guide")==null){
-			 	plus.storage.setItem("guide","1");
+			 	
+			 plus.storage.setItem("guide","12");
 			 	mui.openWindow({
                 			url: 'guide.html',
                        		 id: 'guide.html'
                 	})
+			 		
 			 	}else{
-                		var status =  document.getElementById("main-status");
-                		status.style.display = "block";
+                		var statusR =  document.getElementById("main_status");
+                		statusR.style.display = "block";
                 	};
 			 	
 			//Android双击home键退出应用
@@ -183,7 +185,7 @@
     </script>
 </head>
 <body>
-<div class="mui-content main_page" id = "main-status">
+<div class="mui-content main_page" id = "main_status">
 	<img src="images/icons/LOGO.png" />
 	<div class="main_link">
 		<a href="javascript:void(0);" id="login" class="main_login">登录</a>

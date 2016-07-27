@@ -7,7 +7,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="stylesheet" href="css/mui.min.css">
+		      <script src="js/mui.min.js"></script>
+		    <script src="js/common.js"></script>
+		    <link href="css/mui.min.css" rel="stylesheet"/>
+		    <link rel="stylesheet" type="text/css" href="css/own.css"/>
         <style>
             /*#close {
                 position: absolute;
@@ -197,6 +200,7 @@
            	text-align: center;
            	line-height: 40px;
            	color:#FFCC33;
+           	z-index: 999;
            }
           #myBtn {
 		    width: 100%;
@@ -206,6 +210,14 @@
 		    left: -4%;
 		    text-align: center;
 				}
+				#closeGuide{
+					width: 100%;
+					height:80px;
+					
+					position: absolute;
+					top:80%;
+					text-align: center;
+				}
            #close{
            	width: 120px;
            	height: 40px;
@@ -214,10 +226,7 @@
          	display: block;
          	margin: auto;
          	color:#FFFFFF;
-         	position: absolute;
-         	top:85%;
-         	left:35%;
-         /*	margin-left:-17%;*/
+         	margin: auto;
            }
            .runLeft{ 
            	display: inline;
@@ -225,6 +234,7 @@
            #slider{
 				width: 100%;           	
            }
+           
         </style>
     </head>
  
@@ -255,7 +265,10 @@
                 <div class="mui-slider-item">
                     <div class="item-logo">
                         <img src="images/guide4.png" style="width: 100%;height: 100%;">
-                        <button id='close'  class="mui-btn mui-btn-warning mui-btn-outlined">立刻体验 <span class="mui-icon mui-icon-arrowright"></span></button>
+                        <div id="closeGuide">
+                        	  <button id='close'  class="mui-btn mui-btn-warning mui-btn-outlined">立刻体验 <span class="mui-icon mui-icon-arrowright"></span></button>
+                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -264,40 +277,47 @@
 						<div class="mui-indicator"></div>
 						<div class="mui-indicator"></div>
 						<div class="mui-indicator"></div>
+						
 				</div>
-				<a id="skip" href="#">跳过</a>
+				<a id="skip" href="main.html">跳过</a>
 </div>
-            <script src="js/mui.min.js"></script>
-            <script>/*http://127.0.0.1:8020/tzdr-app-web/images/guide4.png*/
+           
+            <script>
                 mui.back = function() {};
                 mui.plusReady(function() {
                     if (mui.os.ios) {
                         plus.navigator.setFullscreen(true);
                     }
-                     plus.navigator.closeSplashscreen();
-                    if(plus.storage.getItem("guide")==null){
-                		plus.storage.setItem("guide","1123123");
-                    		
-                
-                	}else{
-//              		alert(plus.storage.getItem("guide"));
-                	};
+                   plus.navigator.closeSplashscreen();
+//                if(plus.storage.getItem("guide")==null){
+
+//            	}else{
+//            		alert(plus.storage.getItem("guide"));
+//            	};
+//            	document.getElementById("skip").addEventListener("tap",function(event){
+//                  			mui.openWindow({
+//                  				 url: 'main.html',
+//                     				 id: 'main.html1'
+//                  			});
+//                  		},false)
+					document.getElementById("close").addEventListener('tap', function(event) {
+					                    //打开关于页面
+					                    mui.openWindow({
+					                        url: 'main.html',
+					                        id: 'main.html'
+					                    });
+					                }, false);
+//               document.getElementById("skip").addEventListener('tap', function(event) {
+//                  //打开关于页面
+//                  alert("123")
+//                  mui.openWindow({
+//                      url: 'main.html',
+//                      id: 'main.html1'
+//                  });
+//              }, true);
                 });
                  //立即体验按钮点击事件
-                document.getElementById("close").addEventListener('tap', function(event) {
-                    //打开关于页面
-                    mui.openWindow({
-                        url: 'main.html',
-                        id: 'main.html'
-                    });
-                }, false);
-                 document.getElementById("skip").addEventListener('tap', function(event) {
-                    //打开关于页面
-                    mui.openWindow({
-                        url: 'main.html',
-                        id: 'main.html1'
-                    });
-                }, false);
+                
                  //图片切换时，触发动画
                
                document.querySelector('.mui-slider').addEventListener('slide', function(event) {
