@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>国际期货方案列表 - 维胜</title>
+<title>操盘记录 - 维胜</title>
 <link rel="stylesheet" href="${ctx}/static/css/uc.css?v=${v}" type="text/css">
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/static/css/public.css?v=${v}">
@@ -194,7 +194,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		<div class="uc_mianbar">
 			<div class="uc_pay">
 				<ul class="uc_paynav">
-					<li data="ftseAll"><a href="javascript:void(0);" class="tzdr-tab" id="appStateFtse" class="on">国际期货</a></li>
+					<li data="ftseAll"><a href="javascript:void(0);" class="tzdr-tab" id="appStateFtse" class="on">操盘记录</a></li>
 				</ul>
 				
 				<div id="appStateFtseData" class="tzdr-data01" style="padding:2px; width:98%; margin:0 auto;">
