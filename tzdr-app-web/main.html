@@ -100,13 +100,18 @@
 					}
 					//获取最新大版本号
 					var newSub = newVer.substr(0,1);
+					alert(newVer);
+					alert(newSub);
 					//获取当前大版本号
 					var wgtVerSub = wgtVer.substr(0,1);
-					if(newSub!=wgtVerSub){ //检测升级版本是否大版本还是小版本
-						if(!tzdr.is_appstore){ //当前版本是否是苹果AppStore
+					alert(wgtVer);
+					alert(wgtVerSub);
+					if(newSub!=wgtVerSub){//检测升级版本是否大版本还是小版本
+						if(!tzdr.is_appstore){//当前版本是否是苹果AppStore
 							//弹出系统提示对话框
-							plus.nativeUI.alert( "本次升级有较大更新，请务必重新下载安装！", function(){
-								var _download_url = tzdr.constants.api_domain+"upload/H50967E1D_0407095938.apk";
+							plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+								var _download_url = tzdr.constants.api_domain+"upload/H50967E1D_.apk";
+							//http://api.dktai.com/
 								switch (plus.os.name ) {  //根据客户端修改充值文本框属性
 						        case "Android":
 							        //下载最新apk  
@@ -154,7 +159,7 @@
 		// 下载wgt文件
 		function downWgt(_callback){
 			plus.nativeUI.showWaiting("下载升级包...");
-			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';
+			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';//判断是不是苹果市场  、苹果市场选择第一个下载的name 
 			plus.downloader.createDownload(tzdr.constants.api_domain +"upload/"+_filename, {filename:"_doc/update/"}, function(d,status){
 				plus.nativeUI.closeWaiting();
 				if (status == 200) { 

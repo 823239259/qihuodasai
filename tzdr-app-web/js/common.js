@@ -48,6 +48,8 @@
 		var onSuccess = arguments[2]?arguments[2]:function(){};
 		var onError = arguments[3]?arguments[3]:function(){};
 		var func_url = tzdr.constants.api_domain + func_url;
+		//http://api.dktai.com/+
+		
 		mui.ajax(func_url,{  
 			headers:{
 				'token':mui.cacheUser.get(tzdr.constants.user_token),
