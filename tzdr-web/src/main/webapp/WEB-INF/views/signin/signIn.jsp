@@ -70,7 +70,7 @@
                 <input type="text" class="rg_l_codeip rg_l_tlcode rg_l_ip" id="code" name="code" maxlength="6">
                 <span class="rg_l_promt" style="display: none">请先获取验证码！</span>
                 <!-- <a href="javascript:void(0);" status="true" id="getCode" name="getCode" class="rg_l_codebtn">获取验证码</a> -->
-                <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn" onclick="_hmt.push(['_trackEvent','signin','click','sendcode']);">获取验证码</a>
+                <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn">获取验证码</a>
                 <p style="display: none;" class="rg_l_error">输入验证码有误！</p>
             </li>
             <li>
