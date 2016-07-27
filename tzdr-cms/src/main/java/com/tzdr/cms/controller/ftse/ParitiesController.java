@@ -127,6 +127,7 @@ public class ParitiesController extends BaseCmsController<FSimpleParities> {
 				easyUiPage.setSort("createTime");
 				easyUiPage.setOrder(EasyuiUtil.DESC);
 			}
+			searchParams.put("EQ_deleted", false);
 			//查询数据
 			PageInfo<Object> pageInfo =simpleParitiesService.queryParitiesDatas(easyUiPage, searchParams);
 			
