@@ -742,7 +742,8 @@
 				],
 				"refer": [
 					"tzdr/login/regist.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/future/listrg.html"
 				],
 				"priority": 0
 			},
