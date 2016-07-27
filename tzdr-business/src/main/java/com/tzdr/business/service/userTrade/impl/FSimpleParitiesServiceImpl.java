@@ -82,7 +82,6 @@ public class FSimpleParitiesServiceImpl extends
 		sql.append("FROM f_simple_parities where 1 = 1");
 		
 		List<Object> params = Lists.newArrayList();
-		searchParams.put("EQ_deleted", false);
 		MultiListParam multilistParam = new MultiListParam(easyUiPage,searchParams, params, sql.toString());
 
 		pageInfo = multiListPageQuery(multilistParam, FSimpleParitiesVo.class);
