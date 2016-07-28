@@ -17,9 +17,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录 - 维胜</title>
 <link rel="shortcut icon" href="${ctx}/images/login/weisheng-icon.png">
-<link rel="stylesheet" href="${ctx}/css/login.css">
+<link rel="stylesheet" href="${ctx}/css/login.css?ver=20150901">
 <!-- <script language="javascript" src="http://www.tzdr.com/static/script/common/jquery-1.8.0.min.js"></script> -->
-<script language="javascript" src="resources/jquery.min.js"></script>
+<script language="javascript" src="resources/jquery.min.js?ver=20150901"></script>
 <script type="text/javascript">
 	var basepath = '${ctx}' + "/";
 </script>

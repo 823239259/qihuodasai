@@ -22,19 +22,19 @@
 	<%-- <link rel="stylesheet" href="${ctx}/static/css/common.css?v=${v}">
 	<!-- custom css -->
 	<link rel="stylesheet" href="${ctx}/static/css/home.css?v=${v}"> --%>
-	<link rel="stylesheet" href="${ctx }/static/css/new_index.css">
-	<link href="${ctx }/static/css/trade.css?v=20151127" rel="stylesheet" type="text/css" />
-    <script src="${ctx }/static/script/homepage/gundongtiao.js"></script>
+	<link rel="stylesheet" href="${ctx }/static/css/new_index.css?v=${v}">
+	<link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
+    <script src="${ctx }/static/script/homepage/gundongtiao.js?v=${v}"></script>
 	<!-- common css -->
 	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 	<!-- common js -->
-	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
+	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js?v=${v}"></script>
 	<script type="text/javascript">
 		var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
 	</script>
-	<script src="${ctx }/static/script/esl.js"></script>
-    <script src="${ctx }/static/script/slide-box.js"></script>
+	<script src="${ctx }/static/script/esl.js?v=${v}"></script>
+    <script src="${ctx }/static/script/slide-box.js?v=${v}"></script>
 	<style type="text/css">
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
