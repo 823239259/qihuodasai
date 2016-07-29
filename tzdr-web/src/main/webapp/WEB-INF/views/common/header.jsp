@@ -133,8 +133,11 @@
     <div class="fl_server">
        <!--  <p class="fl_sv_tent"><a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzkzODA2MTY0MV8zMDUwODdfNDAwMDIwMDE1OF8yXw" target='_blank'></a></p> -->
         <div class="fl_sv_code">
-           <%--  <a href="${ctx}/topic/app/" target="_blank"></a>  --%>
-            <%--  <div class="fl_sv_codetk" style="display: none;"><img src="${ctx}/static/images/common-new/code.png"><p>扫二维码访问<br>维胜手机站</p></div> --%>
+        	<a href="${ctx}/topic/app/" target="_blank">
+        		<div class="fl_sv_codetk" style="display: none;">
+        			<img src="${ctx}/static/images/common-new/appxiazai-app.png">
+        		</div>
+        	</a>
         </div>
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>
     </div>
