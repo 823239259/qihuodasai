@@ -83,7 +83,7 @@
                 <tr>
                     <td>恒指期货</td>
                     <td>${outDiskPrice[2].mainContract}</td>
-                    <td>09:20-16:40，17:05-23:40</td>
+                    <td>09:20-16:25，17:05-23:40</td>
                     <td>只交易恒指期货时，初始最大可持仓<i id='HTranActualLever'>${outDiskParameters[0].htranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[2].price}</i>元/手</td>
                 </tr>
