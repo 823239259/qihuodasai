@@ -64,7 +64,7 @@
                     <span><i>免费</i></span>
                 </li>
             </ul>
-            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易8种期货产品)</i></h2>
+            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易10种期货产品)</i></h2>
             <table border="0" cellspacing="0" cellpadding="0" class="cpx_ru_list">
                 <thead>
                     <td width="11%">期货产品</td>
@@ -83,7 +83,7 @@
                 <tr>
                     <td>恒指期货</td>
                     <td>${outDiskPrice[2].mainContract}</td>
-                    <td>09:20-16:10，17:05-23:40</td>
+                    <td>09:20-16:40，17:05-23:40</td>
                     <td>只交易恒指期货时，初始最大可持仓<i id='HTranActualLever'>${outDiskParameters[0].htranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[2].price}</i>元/手</td>
                 </tr>
