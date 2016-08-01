@@ -102,7 +102,9 @@
 								迷你纳斯达克<i><fmt:formatNumber value="${outDiskPrice[4].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
 								迷你普尔<i><fmt:formatNumber value="${outDiskPrice[5].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
 								德国DAX<i><fmt:formatNumber value="${outDiskPrice[6].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								日经225<i><fmt:formatNumber value="${outDiskPrice[7].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
+								日经225<i><fmt:formatNumber value="${outDiskPrice[7].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								小恒指<i><fmt:formatNumber value="${outDiskPrice[8].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								美黄金<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
 							</p>
 						</li>
 						<li>
@@ -115,7 +117,13 @@
 					<ul class="cp_paylist cp_ovpayrule">
 						<li>							
 							<h3>操盘须知</h3>
-							<p class="big">投资国际期货富时A50<i>(${outDiskPrice[0].mainContract})</i>、恒指期货<i>(${outDiskPrice[2].mainContract})</i>、国际原油<i>(${outDiskPrice[1].mainContract})</i>、迷你道琼<i>(${outDiskPrice[3].mainContract})</i>、迷你纳斯达克<i>(${outDiskPrice[4].mainContract})</i>、迷你标普<i>(${outDiskPrice[5].mainContract})</i>、德国DAX<i>(${outDiskPrice[6].mainContract})</i>、日经225<i>(${outDiskPrice[7].mainContract})</i>当期主力合约</p>
+							<p class="big">
+							投资国际期货富时A50<i>(${outDiskPrice[0].mainContract})</i>、恒指期货
+							<i>(${outDiskPrice[2].mainContract})</i>、国际原油<i>(${outDiskPrice[1].mainContract})</i>、迷你道琼
+							<i>(${outDiskPrice[3].mainContract})</i>、迷你纳斯达克<i>(${outDiskPrice[4].mainContract})</i>、迷你标普
+							<i>(${outDiskPrice[5].mainContract})</i>、德国DAX<i>(${outDiskPrice[6].mainContract})</i>、日经225
+							<i>(${outDiskPrice[7].mainContract})</i>、<i>(${outDiskPrice[8].mainContract})</i>、小恒指
+							<i>(${outDiskPrice[9].mainContract})</i>、美黄金当期主力合约</p>
 						</li>
 						<li>							
 							<h3>亏损平仓线($)</h3>

@@ -32,7 +32,7 @@
     </div>
     <div class="capital_ctn cpx_ctn">
         <div class="cpx_main">
-            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘8种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
+            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘10种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
             <ul class="cplx_mianlist">
             <c:forEach items="${outDiskParameters}" var="outDiskParameters" varStatus="status">
               		<c:choose>
