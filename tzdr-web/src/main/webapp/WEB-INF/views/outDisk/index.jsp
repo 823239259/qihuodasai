@@ -134,12 +134,12 @@
                     <td><i>${outDiskPrice[7].price}</i>元/手</td>
                 </tr>
                 <tr>
-                	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">11:55-12:00, 14:20-14:25, 15:50-15:55, 16:10-16:15, 23:40-23:45</i>五个时段所有品种只能平仓，不能开仓。</td>
+                	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">14:20-14:26，16:25-16:31，16:10-16:16，23:40-23:46，01:50-02:01，03:55-04:01，04:55-05:01</i>七个时段所有品种只能平仓，不能开仓。</td>
                 </tr>
             </table>
         </div>  
         <div class="cp_bom">
-            <p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+            <p><a href="${ctx}/help?tab=rule&leftMenu=5" style="color:#fc3;" target="_blank">查看国际期货操盘细则,</a>若还有疑问，请联系客服：400-852-8008</p>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
                 <span>我已阅读并同意<a href="javascript:lookContract();">《国际期货综合操盘合作协议》</a></span>
@@ -150,7 +150,7 @@
     </form>
     
     <!--操盘须知  -->
-    <div class="capital_rule cpx_rule">
+    <%-- <div class="capital_rule cpx_rule">
         <h2 class="cpx_title cpx_t_icon4"><b>操盘规则：</b></h2>     
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list2">
             <thead>
@@ -279,7 +279,7 @@
             <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;"  target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=5" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
           </tr>
         </table>
-    </div>
+    </div> --%>
 </div>
 <%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
