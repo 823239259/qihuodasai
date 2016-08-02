@@ -58,7 +58,10 @@ public class ViewConstants {
 		 * 注册页面
 		 */
 		public static final String SIGNIN_VIEW = "/views/signin/signIn";
-		
+		/**
+		 * 上线推广注册页面
+		 */
+		public static final String EXTENDSIONSIGN_VEIW = "/views/activies/skLuckyDraw";
 		/**
 		 * 注册成功页面
 		 */
