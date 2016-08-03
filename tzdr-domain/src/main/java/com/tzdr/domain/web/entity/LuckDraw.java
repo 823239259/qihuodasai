@@ -13,7 +13,7 @@ public class LuckDraw extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private String uid;//用户id
 	private Double money;//抽奖金额
-	private Long crateTime;//抽奖时间
+	private Long createTime;//抽奖时间
 	private String activity;//抽奖来源的活动
 	@Column(name="uid")
 	public String getUid() {
@@ -38,20 +38,14 @@ public class LuckDraw extends BaseEntity{
 		this.activity = activity;
 	}
 	
+	
 	@Column(name="create_time")
-	public Long getCrateTime() {
-		return crateTime;
+	public Long getCreateTime() {
+		return createTime;
 	}
-	public void setCrateTime(Long crateTime) {
-		this.crateTime = crateTime;
-	}
-	public LuckDraw(String uid, Double money, Long crateTime, String activity) {
-		super();
-		this.uid = uid;
-		this.money = money;
-		this.crateTime = crateTime;
-		this.activity = activity;
-	}
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}	
 	public LuckDraw() {
 		super();
 	}

@@ -1181,7 +1181,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 				update(user);
 				//增加用户的抽奖记录
 				LuckDraw draw = new LuckDraw();
-				draw.setCrateTime(new Date().getTime()/1000);
+				draw.setCreateTime(new Date().getTime()/1000);
 				draw.setUid(user.getId());
 				draw.setMoney(money);
 				draw.setActivity(activity);
