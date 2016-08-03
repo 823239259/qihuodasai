@@ -22,6 +22,14 @@ public class ActivityReward extends BaseEntity{
 	private Double money;//补贴金额,抽奖的用户此处默认为0
 	private String activity;
 	private Long createTime;
+	private String ftseTradeId;
+	@Column(name = "ftse_trade_id")
+	public String getFtseTradeId() {
+		return ftseTradeId;
+	}
+	public void setFtseTradeId(String ftseTradeId) {
+		this.ftseTradeId = ftseTradeId;
+	}
 	@Column(name = "create_time")
 	public Long getCreateTime() {
 		return createTime;
@@ -79,13 +87,19 @@ public class ActivityReward extends BaseEntity{
 		this.istip = istip;
 	}
 	
-	public ActivityReward(String reward_type, String type, Boolean isvalid, String uid, Boolean istip) {
+	
+	public ActivityReward(String reward_type, String type, Boolean isvalid, String uid, Boolean istip, Double money,
+			String activity, Long createTime, String ftseTradeId) {
 		super();
 		this.reward_type = reward_type;
 		this.type = type;
 		this.isvalid = isvalid;
 		this.uid = uid;
 		this.istip = istip;
+		this.money = money;
+		this.activity = activity;
+		this.createTime = createTime;
+		this.ftseTradeId = ftseTradeId;
 	}
 	public ActivityReward() {
 		super();

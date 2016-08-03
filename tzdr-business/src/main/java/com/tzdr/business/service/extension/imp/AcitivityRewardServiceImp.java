@@ -49,6 +49,12 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 		List<ActivityReward> activityRewards = new ArrayList<>();
 		//单日总的交易手数
 		for (FSimpleFtseUserTrade fSimpleFtseUserTrade : fSimpleFtseUserTrades) {
+			String uid = fSimpleFtseUserTrade.getUid();
+			//验证该用户在同一天是否有补贴
+			ActivityReward reward = this.doGetValidationIsReward(uid , ExtensionConstants.ACTIVITY_TYPE, startTime, endTime, ExtensionConstants.REWARD_TYPE_SUBSIDY);
+			if(reward != null){
+				continue;
+			}
 			int actualLever = fSimpleFtseUserTrade.getTranActualLever()
 								+fSimpleFtseUserTrade.getCrudeTranActualLever()
 								+fSimpleFtseUserTrade.getHsiTranActualLever()
@@ -59,8 +65,7 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 								+fSimpleFtseUserTrade.getMdtranActualLever()
 								+fSimpleFtseUserTrade.getLhsiTranActualLever()
 								+fSimpleFtseUserTrade.getAgTranActualLever();
-			//是否满足补贴条件一：单日交易满10手
-			String uid = fSimpleFtseUserTrade.getUid();
+			
 			//补贴金额
 			Double subMoney = 0.00;
 			Long createTime = new Date().getTime()/1000;
@@ -117,9 +122,6 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
 		for (ActivityReward activityReward : activityRewards) {
 			String uid = activityReward.getUid();
-			//验证该用户在同一天是否有补贴
-			ActivityReward reward = this.doGetValidationIsReward(uid , ExtensionConstants.ACTIVITY_TYPE, startTime, endTime, ExtensionConstants.REWARD_TYPE_SUBSIDY);
-			if(reward == null){
 				Double addMoney = activityReward.getMoney();
 				WUser user = wUserService.getUser(uid);
 				if(user != null){
@@ -141,7 +143,6 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 						logger.info("通知补贴到账的短信发送异常");
 					}
 				}
-			}
 		}
 		
 	}

@@ -61,7 +61,7 @@ public class ExtendsionSignController {
 	 * @return
 	 */
 	@RequestMapping(value = "/view",method = RequestMethod.GET)
-	public String extendSignView(HttpServletRequest request,
+	public String extendSignView(ModelMap modelMap,HttpServletRequest request,
 								@RequestParam(value = "channelCode",required = false)String channelCode,
 								@RequestParam(value = "activity",required = false) String activity){
 		GeneralizeVisit  generalizeVisit = new GeneralizeVisit();
@@ -75,6 +75,7 @@ public class ExtendsionSignController {
 		generalizeVisit.setUrl(request.getRequestURL().toString()+"?"+request.getQueryString());
 		generalizeVisit.setActivity(ExtensionConstants.ACTIVITY_TYPE);
 		generalizeService.saveGeneralizeVisit(generalizeVisit);
+		modelMap.put("channelCode", channelCode);
 		return ViewConstants.SignInViewJsp.EXTENDSIONSIGN_VEIW;
 	}
 	/**

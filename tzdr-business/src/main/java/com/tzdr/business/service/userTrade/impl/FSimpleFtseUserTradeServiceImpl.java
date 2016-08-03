@@ -729,11 +729,11 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 this.update(simpleFtseUserTrade);
 //				handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade); // 保存收益报表记录
             }
-            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile());
+            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile(),wellGoldA50.getId());
             return new JsonResult(true, "方案结算成功！");
         }
     }
-    public void validationIsTradeSubsidy(String uid,String mobile){
+    public void validationIsTradeSubsidy(String uid,String mobile,String id){
     	List<FSimpleFtseUserTrade> fstvos = getEntityDao().findById(uid);
     	int size = fstvos.size();
     	//如果是第一次交易
@@ -751,6 +751,7 @@ public class FSimpleFtseUserTradeServiceImpl extends
 	    			activityReward.setMoney(0.00);
 	    			activityReward.setActivity(ExtensionConstants.ACTIVITY_TYPE);
 	    			activityReward.setCreateTime(new Date().getTime()/1000);
+	    			activityReward.setFtseTradeId(id);
 	    			activityRewardService.doSave(activityReward);
 	    			try {
 	    				//获取短信通道

@@ -1193,7 +1193,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 				userFund.setType(TypeConvert.LUCK_DRAW);
 				userFund.setRemark("首次亏损抽奖：" + money + "元");
 				userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
-				//更新用户抽奖权限表
+				//更新用户抽奖权限表--标识为此抽奖次数已被使用
 				activityReward.setIsvalid(true);
 				activityReward.setMoney(money);
 				activityRewardService.update(activityReward);
