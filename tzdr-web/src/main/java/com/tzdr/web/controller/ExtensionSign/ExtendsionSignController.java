@@ -286,6 +286,7 @@ public class ExtendsionSignController {
 		resultJson.appendData("subsidy", subsidy);
 		resultJson.appendData("subsidyMoney", subsidymoney);
 		resultJson.appendData("subsidytip", subsidytip);
+		resultJson.appendData("islogin", true);
 		return resultJson;
 	} 
 	public GeneralizeChannel getChannel(String params){
