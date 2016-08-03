@@ -204,3 +204,12 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .ks_footer {height: 60px; line-height: 60px; color: #666; background: #333; font-size: 12px;}
 .ks_footer p{width: 1000px; margin: 0 auto;}
 .ks_footer img {float: right; margin-top: 12px; margin-right: 15px;}
+/* 成功 */
+.ks-cg {background: url("../images/login/ks-zhucecg_bj.png"); height: 550px; width: 1000px; margin: 50px auto 0;}
+.ks-cg .ks-cg_centent {width: 270px; margin: 0 auto;text-align: center; padding-top: 180px;}
+.ks-cg .ks-cg_ts1 {color: #333; font-size: 28px; font-weight: bolder;}
+.ks-cg .ks-cg_ts1 img {position: relative; top: 10px;}
+.ks-cg .ks-cg_ts2 {color: #333; font-size: 16px; margin-top: 20px;}
+.ks-cg .ks-cg_ts4 {color: #666; font-size: 12px; margin-top: 10px;}
+.ks-cg .ks-cg_ts3 a{text-decoration: none;color: #333; width: 255px;display: inline-block;height: 34px;line-height: 34px;background: #fc3;border-radius: 4px;margin-top: 30px;}
+.ks-cg .ks-cg_ts3 a:hover {background: #fe3;}
