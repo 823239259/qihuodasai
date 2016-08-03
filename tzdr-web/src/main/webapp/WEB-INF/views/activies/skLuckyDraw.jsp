@@ -41,8 +41,22 @@
              duration:8000,
              callback:function (){
                  $(".money").html(txt);
-                 kszx();
                  bRotate = !bRotate;
+                 $(function(){
+                	$.ajax({
+                		url:"/extendsion/sign/luckDraw",
+                		type:"post",
+						data:{
+							money:txt
+						},
+						success:function(result){
+							 var data = result.data.result;
+							 if(data){
+								 kszx();
+							 }
+						}
+                	}) ;
+                 });
              }
          })
      };
