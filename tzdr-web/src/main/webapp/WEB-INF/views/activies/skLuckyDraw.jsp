@@ -31,6 +31,21 @@
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
 	</script>
 	<script type="text/javascript">
+	 var bRotate = false;
+	 function rotateFn(awards, angles, txt){
+         bRotate = !bRotate;
+         $('#rotate').stopRotate();
+         $('#rotate').rotate({
+             angle:0,
+             animateTo:angles+1800,
+             duration:8000,
+             callback:function (){
+                 $(".money").html(txt);
+                 kszx();
+                 bRotate = !bRotate;
+             }
+         })
+     };
     $(function (){
         var rotateTimeOut = function (){
             $('#rotate').rotate({
@@ -42,22 +57,7 @@
                 }
             });
         };
-        var bRotate = false;
-
-        var rotateFn = function (awards, angles, txt){
-            bRotate = !bRotate;
-            $('#rotate').stopRotate();
-            $('#rotate').rotate({
-                angle:0,
-                animateTo:angles+1800,
-                duration:8000,
-                callback:function (){
-                    $(".money").html(txt);
-                    kszx();
-                    bRotate = !bRotate;
-                }
-            })
-        };
+        
         $('.pointer').click(function (){
         	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 				if(data.success){
@@ -173,7 +173,7 @@
 			<div>系统已经通过现金红包的方式存入您的账户！</div>
 		</div>
 		<div class="anniu">
-	 		<a href="${ctx}tzdr-web/user/account" onclick="javascript:closeDiv('kszj')">查看账户</a>
+	 		<a href="${ctx}/user/account" onclick="javascript:closeDiv('kszj')">查看账户</a>
 	 	</div> 
 	</div>
 	<div class="tck01" id="zp" style="display: none;">
