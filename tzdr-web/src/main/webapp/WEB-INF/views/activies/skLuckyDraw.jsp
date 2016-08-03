@@ -61,12 +61,16 @@
         $('.pointer').click(function (){
         	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 				if(data.success){
-					if(data.data.luck == 1 && data.data.luckNum > 0){
-						zhuanpan();
-						return;
-					}else if(data.data.luck == 0  && data.data.luckNum <= 0){
-						kszxno();
-						return;
+					if(data.data.islogin){
+						if(data.data.luck == 1 && data.data.luckNum > 0){
+							zhuanpan();
+							return;
+						}else if(data.data.luck == 0  && data.data.luckNum <= 0){
+							kszxno();
+							return;
+						}
+					}else{
+						zhuce();
 					}
 				}else{
 					showMsgDialog("提示","系统繁忙，请稍候重试......");
@@ -135,6 +139,18 @@
 		});  
     		
     }
+    function zhuce(){
+    	$("#zc").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+    }
 	</script>
 	<style type="text/css">
 		.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
@@ -169,6 +185,18 @@
 		</div>
 		<div class="anniu">
 	 		<a href="${ctx}/ftse/index" onclick="javascript:closeDiv('zp')">立即操盘</a>
+	 	</div> 
+	</div>
+	<div class="tck01" id="zc" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示</a><a class="close" onclick="javascript:closeDiv('zc')"></a>
+		</div>
+		<div class="smain">
+			<div>你还未登录，赶紧去登陆吧!</div>
+		</div>
+		<div class="anniu">
+	 		<a href="${ctx}/user/account">立即登录</a>
+	 		<a  onclick="javascript:closeDiv('zc')">取消</a>
 	 	</div> 
 	</div>
 </div>
