@@ -1175,7 +1175,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 		ActivityReward activityReward = activityRewardService.doGetById(rewardId);
 		if(activityReward != null){
 			//验证提交的金额是否和后台随机的金额一致
-			if(activityReward.getMoney() == money){
+			if(Double.compare(activityReward.getMoney(), money) == 0){
 				WUser user = getUser(uid);
 				if(user != null){
 					user.setFund(user.getFund() + money);
@@ -1209,5 +1209,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 			flag = false;
 		}
 		return flag;
+	}
+	public static void main(String[] args) {
 	}
 }
