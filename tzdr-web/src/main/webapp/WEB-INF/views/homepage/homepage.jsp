@@ -101,13 +101,13 @@
 				if(data.data.islogin){
 					var luckNum = data.data.luckNum;
 					var subsidyMoney = data.data.subsidyMoney;
-					if(data.data.lucktip = 1 && data.data.subsidytip == 1){
+					if(data.data.lucktip == 1 && data.data.subsidytip == 1){
 						skmsbt(luckNum,subsidyMoney);
 						return;
-					}else if(data.data.lucktip = 1  && data.data.subsidytip == 0){
+					}else if(data.data.lucktip == 1  && data.data.subsidytip == 0){
 						skbt(luckNum);
 						return;
-					}else if(data.data.subsidytip = 1 && data.data.lucktip == 0){
+					}else if(data.data.subsidytip == 1 && data.data.lucktip == 0){
 						sk_bt(subsidyMoney);
 						return;
 					}
