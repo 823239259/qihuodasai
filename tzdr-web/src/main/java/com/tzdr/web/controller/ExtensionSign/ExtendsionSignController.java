@@ -197,6 +197,14 @@ public class ExtendsionSignController {
 		return jsonResult;
 	}
 	/**
+	 * 跳转到注册成功页面
+	 * @return
+	 */
+	@RequestMapping(value="/extensionSignSuc",method = RequestMethod.GET)
+	public String extensionSignSucView(){
+		return ViewConstants.SignInViewJsp.EXTENDSION_SUCCESS_FUL_VEIW;
+	}
+	/**
 	 * 大转盘抽奖活动增加抽奖用户的账户金额
 	 * @param money
 	 * @param id

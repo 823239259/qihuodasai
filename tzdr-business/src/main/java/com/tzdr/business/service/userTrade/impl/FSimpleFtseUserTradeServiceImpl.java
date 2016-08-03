@@ -20,6 +20,7 @@ import com.hundsun.t2sdk.common.util.CollectionUtils;
 import com.tzdr.business.cms.service.auth.AuthService;
 import com.tzdr.business.service.account.AccountService;
 import com.tzdr.business.service.crudeActive.CrudeActiveService;
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.extension.ActivityRewardService;
 import com.tzdr.business.service.ftseActive.FtseActiveService;
 import com.tzdr.business.service.future.FSimpleCouponService;
@@ -34,6 +35,7 @@ import com.tzdr.business.service.userTrade.FSimpleParitiesService;
 import com.tzdr.business.service.userTrade.FinternationFutureAppendLevelMoneyService;
 import com.tzdr.business.service.userTrade.HandTradeService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.exception.BusinessException;
@@ -109,7 +111,8 @@ public class FSimpleFtseUserTradeServiceImpl extends
     private FSimpleCouponService fSimpleCouponService;
     @Autowired
     private ActivityRewardService activityRewardService;
-
+    @Autowired
+	private DataMapService dataMapService;
     @Override
     public FSimpleFtseUserTrade executePayable(
             FSimpleFtseUserTrade fSimpleFtseUserTrade, String mobile,
@@ -726,11 +729,11 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 this.update(simpleFtseUserTrade);
 //				handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade); // 保存收益报表记录
             }
-            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid());
+            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile());
             return new JsonResult(true, "方案结算成功！");
         }
     }
-    public void validationIsTradeSubsidy(String uid){
+    public void validationIsTradeSubsidy(String uid,String mobile){
     	List<FSimpleFtseUserTrade> fstvos = getEntityDao().findById(uid);
     	int size = fstvos.size();
     	//如果是第一次交易
@@ -749,6 +752,13 @@ public class FSimpleFtseUserTradeServiceImpl extends
 	    			activityReward.setActivity(ExtensionConstants.ACTIVITY_TYPE);
 	    			activityReward.setCreateTime(new Date().getTime()/1000);
 	    			activityRewardService.doSave(activityReward);
+	    			try {
+	    				//获取短信通道
+		    			Integer smsChannel = dataMapService.getSmsContentOthers();
+		    			SMSSender.getInstance().sendByTemplate(smsChannel , mobile, "activity.luck.ihuyi.code.template",null );
+					} catch (Exception e) {
+						log.info("通知抽奖的短信发送异常");
+					}
 	    		}
 	    	}
     	}

@@ -1,5 +1,6 @@
 package com.tzdr.cms.quartz;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -32,5 +33,7 @@ public class LossFreeRebatesJob extends QuartzJobBean{
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, -1);
 		return cal.getTime().getTime();
+	}
+	public static void main(String[] args) throws ParseException {
 	}
 }

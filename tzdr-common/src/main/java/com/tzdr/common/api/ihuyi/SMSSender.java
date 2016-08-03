@@ -173,7 +173,9 @@ public class SMSSender {
 		} else if ("ag.ihuyi.end.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("totalInvest"), map.get("accrualValue"), map.get("revocationMoney"));
 		} else if("subdsion.ihuyi.code.template".equals(templateKey)){
-			content = String.format(template, map.get("username"), map.get("money"));
+			content = String.format(template , map.get("money"));
+		} else if("activity.luck.ihuyi.code.template".equals(templateKey)){
+			content = String.format(template);
 		}
 		return send(smsChannel, mobile, content);
 	}

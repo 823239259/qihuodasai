@@ -1,6 +1,5 @@
 package com.tzdr.domain.web.entity;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ public class LuckDraw extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	private String uid;//用户id
 	private Double money;//抽奖金额
-	private Date crateTime;//抽奖时间
+	private Long crateTime;//抽奖时间
 	private String activity;//抽奖来源的活动
 	@Column(name="uid")
 	public String getUid() {
@@ -30,13 +29,7 @@ public class LuckDraw extends BaseEntity{
 	public void setMoney(Double money) {
 		this.money = money;
 	}
-	@Column(name = "createTime")
-	public Date getCrateTime() {
-		return crateTime;
-	}
-	public void setCrateTime(Date crateTime) {
-		this.crateTime = crateTime;
-	}
+	
 	@Column(name="activity")
 	public String getActivity() {
 		return activity;
@@ -45,7 +38,15 @@ public class LuckDraw extends BaseEntity{
 		this.activity = activity;
 	}
 	
-	public LuckDraw(String uid, Double money, Date crateTime, String activity) {
+	@Column(name="create_time")
+	public Long getCrateTime() {
+		return crateTime;
+	}
+	public void setCrateTime(Long crateTime) {
+		this.crateTime = crateTime;
+	}
+	public LuckDraw(String uid, Double money, Long crateTime, String activity) {
+		super();
 		this.uid = uid;
 		this.money = money;
 		this.crateTime = crateTime;

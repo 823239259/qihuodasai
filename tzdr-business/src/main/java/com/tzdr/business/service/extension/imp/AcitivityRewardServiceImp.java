@@ -133,10 +133,13 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 					userFund.setType(TypeConvert.ACTIVITY_LOSS_FREE_REWARD);
 					userFund.setRemark("免损补贴：" + addMoney + "元");
 					userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
-					smsParams.put("username", user.getUname());
 					smsParams.put("money", String.valueOf(addMoney));
-					//发送短信通知用户
-					SMSSender.getInstance().sendByTemplate(smsChannel , user.getMobile(), "subdsion.ihuyi.code.template",smsParams );
+					try{
+						//发送短信通知用户
+						SMSSender.getInstance().sendByTemplate(smsChannel , user.getMobile(), "subdsion.ihuyi.code.template",smsParams );
+					} catch (Exception e) {
+						logger.info("通知补贴到账的短信发送异常");
+					}
 				}
 			}
 		}
