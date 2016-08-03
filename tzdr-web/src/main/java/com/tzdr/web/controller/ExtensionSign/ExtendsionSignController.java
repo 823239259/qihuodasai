@@ -1,10 +1,12 @@
 package com.tzdr.web.controller.ExtensionSign;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +56,28 @@ public class ExtendsionSignController {
 	private GeneralizeService generalizeService;
 	@Autowired
 	private ActivityRewardService activityRewardService;
-
+	@RequestMapping(value = "/testJob")
+	@ResponseBody
+	public JsonResult testJob(){
+		activityRewardService.doSaveActivityReward(getStartTime(), getEndTime());
+		return new JsonResult();
+	}
+	private static Long getStartTime(){
+		long current = getCalendar();
+		return (current/(1000*3600*24)*(1000*3600*24)-TimeZone.getDefault().getRawOffset())/1000;//今天零点零分零秒的毫秒数
+	}
+	private static Long getEndTime(){
+		return (getStartTime()*1000+24*60*60*1000-1)/1000;//今天23点59分59秒的毫秒数;
+	}
+	private static Long getCalendar(){
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 0);
+		return cal.getTime().getTime();
+	}
+	public static void main(String[] args) {
+		System.out.println(getStartTime());
+		System.out.println(getEndTime());
+	}
 	/**
 	 * 上线推广注册页面
 	 * 

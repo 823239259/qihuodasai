@@ -1,5 +1,6 @@
 package com.tzdr.business.service.extension.imp;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -74,27 +75,24 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 					Double endAmount = fSimpleFtseUserTrade.getEndAmount().doubleValue();
 					Double bondAmount = fSimpleFtseUserTrade.getTraderBond().doubleValue();
 					if(endAmount != null && bondAmount != null){
-						Double jAmount = bondAmount + endAmount;
+						Double jAmount = endAmount - bondAmount;
 						if(jAmount < 0){
+							subMoney = Math.abs(jAmount);
 							if(actualLever >= ExtensionConstants.SUBSIDYLEVER10 && actualLever < ExtensionConstants.SUBSIDYLEVER20 ){
-								if(jAmount <= ExtensionConstants.SUBSIDY10MONEY){
-									subMoney = jAmount;
-								}else{
+								if(subMoney > ExtensionConstants.SUBSIDY10MONEY){
 									subMoney = ExtensionConstants.SUBSIDY10MONEY;
 								}
 							}else if(actualLever >= ExtensionConstants.SUBSIDYLEVER20 && actualLever < ExtensionConstants.SUBSIDYLEVER40){
-								if(jAmount <= ExtensionConstants.SUBSIDY20MONEY){
-									subMoney = jAmount;
-								}else{
+								if(subMoney > ExtensionConstants.SUBSIDY20MONEY){
 									subMoney =ExtensionConstants.SUBSIDY20MONEY;
 								}
 							}else if(actualLever >= ExtensionConstants.SUBSIDYLEVER40){
-								if(jAmount <= ExtensionConstants.SUBSIDY40MONEY){
-									subMoney = jAmount;
-								}else{
+								if(subMoney > ExtensionConstants.SUBSIDY40MONEY){
 									subMoney =ExtensionConstants.SUBSIDY40MONEY;
 								}
 							}
+							BigDecimal b =  new   BigDecimal(subMoney);
+							subMoney = b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
 							ActivityReward activityReward = new ActivityReward();
 							activityReward.setIstip(false);
 			    			activityReward.setIsvalid(true);
