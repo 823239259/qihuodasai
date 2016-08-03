@@ -734,7 +734,7 @@ public class FSimpleFtseUserTradeServiceImpl extends
         }
     }
     public void validationIsTradeSubsidy(String uid,String mobile,String id){
-    	List<FSimpleFtseUserTrade> fstvos = getEntityDao().findById(uid);
+    	List<FSimpleFtseUserTrade> fstvos = getEntityDao().findByUid(uid);
     	int size = fstvos.size();
     	//如果是第一次交易
     	if(size > 0){

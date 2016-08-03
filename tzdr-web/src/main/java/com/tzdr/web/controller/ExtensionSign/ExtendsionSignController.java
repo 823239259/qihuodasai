@@ -130,7 +130,7 @@ public class ExtendsionSignController {
 		}
 		
 		WUser wUser = new WUser();     //创建注册对象信息
-		wUser.setSource(source);
+		wUser.setSource(source == null ? 1 : source);
 		WUser platformDefaultWuser = wUserService.queryByUserType(Constants.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
 		wUser.setUserType("0");
 		wUser.setParentNode(platformDefaultWuser);
@@ -140,7 +140,14 @@ public class ExtendsionSignController {
 		wUser.setRegIp(IpUtils.getIpAddr(request));
 		GeneralizeChannel generalizeChannel = getChannel(channelCode);
 		if(generalizeChannel != null){
-			wUser.setChannel(generalizeChannel.getTypeThreeTitle());   //设置渠道
+			String channelName = generalizeChannel.getTypeThreeTitle();
+			if(channelName == null || channelName.length() <= 0){
+				channelName = generalizeChannel.getTypeTwoTitle();
+				if(channelName == null || channelName.length() <= 0){
+					channelName= generalizeChannel.getTypeOneTitle();
+				}
+			}
+			wUser.setChannel(channelName);   //设置渠道
 			wUser.setKeyword(generalizeChannel.getUrlKey());//设置关键字
 		}
 		if(!StringUtil.isBlank(parentGeneralizeId) ){
@@ -213,7 +220,9 @@ public class ExtendsionSignController {
 	 */
 	@RequestMapping(value = "/luckDraw" , method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult luckDraw(@RequestParam("money") Double money,@RequestParam("id") String id){
+	public JsonResult luckDraw(@RequestParam("money") Double money,HttpServletRequest request){
+		UserSessionBean userSessionBean = (UserSessionBean)request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+		String id = userSessionBean.getId();
 		JsonResult resultJson = null;
 		if(money > 0){
 			 boolean flag = wUserService.luckDrawUpdateUser(money, id);
@@ -234,9 +243,14 @@ public class ExtendsionSignController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/validationTip",method = RequestMethod.POST)
-	public JsonResult validationTip(@RequestParam("id")String id,
-			@RequestParam(value = "activity",required = false) String activity){
+	public JsonResult validationTip(HttpServletRequest request,@RequestParam(value = "activity",required = false) String activity){
+		UserSessionBean userSessionBean = (UserSessionBean)request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 		JsonResult resultJson = new JsonResult(); 
+		if(userSessionBean == null){
+			resultJson.appendData("islogin", false);
+			return resultJson;
+		}
+		String id = userSessionBean.getId();
 		//目前活动初始化，默认001
 		activity = ExtensionConstants.ACTIVITY_TYPE;
 		Integer luck = 0;//是否可以抽奖

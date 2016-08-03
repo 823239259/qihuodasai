@@ -19,6 +19,7 @@ import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
  */
 public interface FSimpleFtseUserTradeDao extends BaseJpaDao<FSimpleFtseUserTrade, String> {
 	List<FSimpleFtseUserTrade> findById(String id);
+	List<FSimpleFtseUserTrade> findByUid(String uid);
 	List<FSimpleFtseUserTrade> findByUidAndBusinessType(String id,int type);
 	@Query(value = "select tran_fees,end_actual_money,end_actual_money,voucher_id,voucher_money,voucher_actual_money,discount_actual_money,discount_money,discount_id,discount_actual_money,"
 			 + "app_time,source,business_type,golden_money, update_time,state_type,use_tran_day,end_time,end_parities,end_amount_cal,tran_profit_loss,tran_fees_total,app_end_time,tran_password,"
