@@ -226,10 +226,13 @@ public class ExtendsionSignController {
 		JsonResult resultJson = null;
 		if(money > 0){
 			 boolean flag = wUserService.luckDrawUpdateUser(money, id);
-			 if(flag)
+			 if(flag){
 				 resultJson = new JsonResult("领取奖励成功，奖金已自动发放到账户余额");
-			 else
-				 resultJson = new JsonResult("该用户已抽过一次");
+				 resultJson.appendData("result", true);
+			 }else{
+				 resultJson = new JsonResult("领取奖励失败");
+				 resultJson.appendData("result", false);
+			 }
 		}else{
 			resultJson = new JsonResult("金额错误");
 		}
