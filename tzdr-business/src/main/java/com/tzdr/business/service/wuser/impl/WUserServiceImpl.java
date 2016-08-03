@@ -1169,36 +1169,41 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 
 	}
 	@Override
-	public boolean luckDrawUpdateUser(Double money, String uid) {
+	public boolean luckDrawUpdateUser(Double money, String uid,String rewardId) {
 		boolean flag = true;
 		String activity = ExtensionConstants.ACTIVITY_TYPE;
-		ActivityReward activityReward = activityRewardService.findByUidAndActivity(uid,activity ,false,ExtensionConstants.REWARD_TYPE_LUCK_DRAW);
+		ActivityReward activityReward = activityRewardService.doGetById(rewardId);
 		if(activityReward != null){
-			WUser user = getUser(uid);
-			if(user != null){
-				user.setFund(user.getFund() + money);
-				//更新用户的账户余额
-				update(user);
-				//增加用户的抽奖记录
-				LuckDraw draw = new LuckDraw();
-				draw.setCreateTime(new Date().getTime()/1000);
-				draw.setUid(user.getId());
-				draw.setMoney(money);
-				draw.setActivity(activity);
-				luckDrawService.save(draw);
-				//增加充值记录
-				UserFund userFund = new UserFund();
-				userFund.setUid(user.getId());
-				userFund.setMoney(money);
-				userFund.setType(TypeConvert.LUCK_DRAW);
-				userFund.setRemark("首次亏损抽奖：" + money + "元");
-				userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
-				//更新用户抽奖权限表--标识为此抽奖次数已被使用
-				activityReward.setIsvalid(true);
-				activityReward.setMoney(money);
-				activityRewardService.update(activityReward);
+			//验证提交的金额是否和后台随机的金额一致
+			if(activityReward.getMoney() == money){
+				WUser user = getUser(uid);
+				if(user != null){
+					user.setFund(user.getFund() + money);
+					//更新用户的账户余额
+					update(user);
+					//增加用户的抽奖记录
+					LuckDraw draw = new LuckDraw();
+					draw.setCreateTime(new Date().getTime()/1000);
+					draw.setUid(user.getId());
+					draw.setMoney(money);
+					draw.setActivity(activity);
+					luckDrawService.save(draw);
+					//增加充值记录
+					UserFund userFund = new UserFund();
+					userFund.setUid(user.getId());
+					userFund.setMoney(money);
+					userFund.setType(TypeConvert.LUCK_DRAW);
+					userFund.setRemark("首次亏损抽奖：" + money + "元");
+					userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
+					//更新用户抽奖权限表--标识为此抽奖次数已被使用
+					activityReward.setIsvalid(true);
+					activityReward.setMoney(money);
+					activityRewardService.update(activityReward);
+				}else{
+					flag = false;
+				}
 			}else{
-				flag = false;
+				flag =false;
 			}
 		}else{
 			flag = false;

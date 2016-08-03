@@ -33,4 +33,10 @@ public interface ActivityRewaryDao extends  BaseJpaDao<ActivityReward, String>,J
 	 */
 	@Query("from  ActivityReward  where uid = ?1 and activity = ?2 and create_time between ?3 and ?4 and reward_type = ?5")
 	ActivityReward doGetValidationIsReward(String uid , String activity, Long startTime, Long endTime,String rewardType);
+	/**
+	 * 获取奖励记录
+	 * @param id
+	 * @return
+	 */
+	ActivityReward findById(String id);
 }

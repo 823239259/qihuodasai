@@ -375,5 +375,5 @@ public interface WUserService  extends BaseService<WUser>{
 	 * @param money
 	 * @param uid
 	 */
-	public boolean luckDrawUpdateUser(Double money,String uid);
+	public boolean luckDrawUpdateUser(Double money,String uid,String rewardId);
 }

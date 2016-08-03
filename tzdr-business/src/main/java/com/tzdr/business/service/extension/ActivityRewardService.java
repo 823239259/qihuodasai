@@ -43,4 +43,15 @@ public interface ActivityRewardService extends BaseService<ActivityReward>{
 	 * @return
 	 */
 	public ActivityReward doGetValidationIsReward(String uid , String activity, Long startTime, Long endTime,String rewardType);
+	/**
+	 * 修改奖励
+	 * @return
+	 */
+	public boolean doUpdateReward(ActivityReward activityReward);
+	/**
+	 * 获取奖励记录
+	 * @param id
+	 * @return
+	 */
+	public ActivityReward doGetById(String id);
 }

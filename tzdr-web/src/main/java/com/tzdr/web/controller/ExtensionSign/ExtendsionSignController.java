@@ -225,13 +225,13 @@ public class ExtendsionSignController {
 	 */
 	@RequestMapping(value = "/luckDraw", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult luckDraw(@RequestParam("money") Double money, HttpServletRequest request) {
+	public JsonResult luckDraw(@RequestParam("money") Double money, HttpServletRequest request,@RequestParam("rewardId")String rewardId) {
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		String id = userSessionBean.getId();
 		JsonResult resultJson = null;
 		if (money > 0) {
-			boolean flag = wUserService.luckDrawUpdateUser(money, id);
+			boolean flag = wUserService.luckDrawUpdateUser(money, id,rewardId);
 			if (flag) {
 				resultJson = new JsonResult("领取奖励成功，奖金已自动发放到账户余额");
 				resultJson.appendData("result", true);
@@ -272,7 +272,8 @@ public class ExtendsionSignController {
 		Integer lucktip = 0;// 抽奖是否需要提示
 		Integer subsidytip = 0;// 补贴是否需要提示
 		Double subsidymoney = 0.00;// 补贴的金额
-		Integer money = 0;
+		Integer index = 0;
+		Integer money = 0 ;
 		// 查询用户是否还有抽奖机会
 		ActivityReward activityReward = activityRewardService.findByUidAndActivity(id, activity, false,
 				ExtensionConstants.REWARD_TYPE_LUCK_DRAW);
@@ -282,7 +283,10 @@ public class ExtendsionSignController {
 		if (activityReward != null) {
 			luck = 1;
 			luckNum = 1;
-			money = this.PercentageRandom();
+			index = this.PercentageRandom();
+			money = this.comperTo(index);
+			activityReward.setMoney((double)money);
+			activityRewardService.doUpdateReward(activityReward);
 			if (!activityReward.getIstip()) {
 				lucktip = 1;
 			}
@@ -294,7 +298,6 @@ public class ExtendsionSignController {
 			}
 			for (ActivityReward reward : rewards) {
 				subsidymoney += reward.getMoney();
-
 			}
 		}
 		resultJson.appendData("luck", luck);
@@ -304,7 +307,9 @@ public class ExtendsionSignController {
 		resultJson.appendData("subsidyMoney", subsidymoney);
 		resultJson.appendData("subsidytip", subsidytip);
 		resultJson.appendData("islogin", true);
+		resultJson.appendData("index", index);
 		resultJson.appendData("money", money);
+		resultJson.appendData("rewardid", activityReward != null ? activityReward.getId():null);
 		return resultJson;
 	}
 
@@ -346,20 +351,37 @@ public class ExtendsionSignController {
 		double randomNumber;
 		randomNumber = Math.random();
 		if (randomNumber >= 0 && randomNumber <= rate0) {
-			return 2;
+			return 0;
 		} else if (randomNumber >= rate0 / 100 && randomNumber <= rate0 + rate1) {
-			return 5;
+			return 1;
 		} else if (randomNumber >= rate0 + rate1 && randomNumber <= rate0 + rate1 + rate2) {
-			return 10;
+			return 2;
 		} else if (randomNumber >= rate0 + rate1 + rate2 && randomNumber <= rate0 + rate1 + rate2 + rate3) {
-			return 50;
+			return 3;
 		} else if (randomNumber >= rate0 + rate1 + rate2 + rate3
 				&& randomNumber <= rate0 + rate1 + rate2 + rate3 + rate4) {
-			return 500;
+			return 4;
 		} else if (randomNumber >= rate0 + rate1 + rate2 + rate3 + rate4
 				&& randomNumber <= rate0 + rate1 + rate2 + rate3 + rate4 + rate5) {
-			return 1000;
+			return 5;
 		}
-		return 2;
+		return 0;
+	}
+	private int comperTo(int index){
+		int money = 2;
+		if(index == 0){
+			money = 2;
+		}else if(index == 1){
+			money = 5;
+		}else if(index == 2){
+			money = 10;
+		}else if(index ==3){
+			money = 50;
+		}else if(index == 4){
+			money = 2;
+		}else if(index ==5){
+			money = 2;
+		}
+		return money;
 	}
 }

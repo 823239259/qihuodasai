@@ -170,4 +170,13 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 	public ActivityReward doGetValidationIsReward(String uid , String activity, Long startTime, Long endTime,String rewardType) {
 		return getEntityDao().doGetValidationIsReward(uid, activity, startTime, endTime, rewardType);
 	}
+	@Override
+	public boolean doUpdateReward(ActivityReward activityReward) {
+		getEntityDao().update(activityReward);
+		return true;
+	}
+	@Override
+	public ActivityReward doGetById(String id) {
+		return getEntityDao().findById(id);
+	}
 }
