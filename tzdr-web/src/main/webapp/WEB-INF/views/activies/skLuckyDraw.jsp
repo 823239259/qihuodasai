@@ -32,6 +32,7 @@
 	</script>
 	<script type="text/javascript">
 	 var bRotate = false;
+	 var rewardid = null;
 	 function rotateFn(awards, angles, txt){
          bRotate = !bRotate;
          $('#rotate').stopRotate();
@@ -47,7 +48,8 @@
                 		url:"/extendsion/sign/luckDraw",
                 		type:"post",
 						data:{
-							money:txt
+							money:txt,
+							rewardId:rewardid
 						},
 						success:function(result){
 							 var data = result.data.result;
@@ -77,7 +79,10 @@
 				if(data.success){
 					if(data.data.islogin){
 						if(data.data.luck == 1 && data.data.luckNum > 0){
-							zhuanpan();
+							var money = data.data.money;
+							var index = data.data.index;
+							rewardid = data.data.rewardid;
+							zhuanpan(money,index);
 							return;
 						}else if(data.data.luck == 0  && data.data.luckNum <= 0){
 							kszxno();
@@ -98,31 +103,32 @@
         return Math.floor(Math.random()*(m-n+1)+n)
     }
     
-    function zhuanpan(){
+    function zhuanpan(money,index){
     	if(bRotate)return;
-        var a= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3];
-        var index = Math.floor((Math.random()*a.length));
-        var item = rnd(a[index],a[index]);
+        /* var a= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3];
+        var index = Math.floor((Math.random()*a.length)); */
+        /* var item = rnd(a[index],a[index]); */
+        var item = rnd(index,index); 
         switch (item) {
             case 0:
                 //var angle = [26, 88, 137, 185, 235, 287, 337];
-                rotateFn(0,181,'2');
+                rotateFn(0,181, money);
                 break;
             case 1:
                 //var angle = [88, 137, 185, 235, 287];
-                rotateFn(1, 241, '5');
+                rotateFn(1, 241, money);
                 break;
             case 2:
                 //var angle = [137, 185, 235, 287];
-                rotateFn(2, 120, '10');
+                rotateFn(2, 120, money);
                 break;
             case 3:
                 //var angle = [137, 185, 235, 287];
-                rotateFn(3, 300, '50');
+                rotateFn(3, 300, money);
                 break;
             case 4:
                 //var angle = [185, 235, 287];
-                rotateFn(4, 185, '免单4元');
+                rotateFn(4, 185, money);
                 break;
         }
     }
