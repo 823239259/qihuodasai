@@ -108,7 +108,7 @@
 						skbt(luckNum);
 						return;
 					}else if(data.data.subsidytip = 1 && data.data.luck == 0){
-						skbt(luckNum);
+						sk_bt(luckNum);
 						return;
 					}
 				}else{
