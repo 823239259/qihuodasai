@@ -60,7 +60,7 @@ public class ExtendsionSignController {
 	 * 	2016.08.01
 	 * @return
 	 */
-	@RequestMapping(value = "/view",method = RequestMethod.POST)
+	@RequestMapping(value = "/view",method = RequestMethod.GET)
 	public String extendSignView(HttpServletRequest request,
 								@RequestParam(value = "channelCode",required = false)String channelCode,
 								@RequestParam(value = "activity",required = false) String activity){
