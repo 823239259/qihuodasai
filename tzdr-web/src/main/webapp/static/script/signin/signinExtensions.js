@@ -322,18 +322,6 @@ $(document).ready(function(){
 	});
 	//注册
 	$("#signin").on("click", function(){
-		/*art.dialog({
-		    title: '提示',
-		    content:'为响应政府整顿配资市场，本站已经暂时关闭注册功能，如有疑问请联系客服热线400-020-0158',
-		    width:400,
-		    cancelVal: '关闭',
-		    background: '#BBBBBB', // 背景色 
-		    opacity:0.87, 
-		    zIndex:9900,
-		    lock:true,
-		    cancel: true //为true等价于function(){}
-		});
-		return;*/
 		var $this = $(this);
 		var mobile =  $.trim($("#mobile").val());
 		var source = $.trim($("#source").val());
@@ -341,6 +329,7 @@ $(document).ready(function(){
 		var password =  $("#password").val();
 		var affirmPassword =  $.trim($("#affirmpassword").val());
 		var parentGeneralizeId = $.trim($("#generalizeId").val());
+		var channelCode = $("#channelCode").val();
 		var status = $("#agreement").attr("checked");
 		if($(this).attr("status") == "true"){
 			$this.attr("status",false);
@@ -351,7 +340,7 @@ $(document).ready(function(){
 				$this.text("注册");
 				return;
 			}
-			$.post(basepath+"signin_operation",{source:source,mobile:mobile,code:code,password:password,parentGeneralizeId:parentGeneralizeId,ajax:1},function(data){ //注册
+			$.post(basepath+"/sign",{channelCode:channelCode,source:source,mobile:mobile,code:code,password:password,parentGeneralizeId:parentGeneralizeId,ajax:1},function(data){ //注册
 				if(data.success){
 					if(data.message!="" && data.message!=null){
 						if(data.message=="mobileIsExist"){
@@ -377,7 +366,6 @@ $(document).ready(function(){
 						var backData=$.trim($("#backData").val());
 						var source = $.trim($("#source").val());
 						
-					/*	alert("恭喜，注册成功！");	*/
 						
 						if(backData && source == 3){
 							var form = $("<form action='"+backData+"' method='post'>");
@@ -385,19 +373,7 @@ $(document).ready(function(){
 							form.append("<input type=hidden name=userName value='" + data.data.userName + "'/></form>");
 							form.appendTo(document.body).submit();
 						}else{
-							/*$('#backData').val(data.data.from);
-							//隐藏向CAS服务端提交登录的用户名和密码
-							$("#loginUsername").val(mobile);
-							$("#loginPassword").val(password);
-							$("#loginForm").submit();*/
-							window.location.href = "/signinsucess";
-							/*
-							//达人论股系统登录
-							discussStockLogin(data.data.key,function(){
-								var form = $("<form action='"+basepath+"signinsucess' method='post'><input type='hidden' name='volumeNum' value='" + data.data.volumeNum + "'/><input type='hidden' name='volumePrice' value='" + data.data.volumePrice + "'/></form>");
-								form.appendTo(document.body).submit();
-							});
-							*/
+							window.location.href = "/extensionSignSuc";
 						}
 					}
 				}else{
