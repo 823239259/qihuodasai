@@ -53,7 +53,7 @@
 	
 	</style>
 	<script type="text/javascript">
-	function skbt(){
+	function skbt(luckNum){
 		$(".luckNum").html(luckNum);
     	$("#skbt").css("display","block");
     	$("#div_Mask").show();
@@ -67,7 +67,7 @@
 		});  
     		
     }
-	function sk_bt(){
+	function sk_bt(subsidyMoney){
 		$(".subsidyMoney").html(subsidyMoney);
     	$("#sk_bt").css("display","block");
     	$("#div_Mask").show();
