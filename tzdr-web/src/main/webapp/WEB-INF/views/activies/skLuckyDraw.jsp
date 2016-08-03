@@ -45,7 +45,7 @@
                  bRotate = !bRotate;
                  $(function(){
                 	$.ajax({
-                		url:"/extendsion/sign/luckDraw",
+                		url:basepath+"/extendsion/sign/luckDraw",
                 		type:"post",
 						data:{
 							money:txt,
