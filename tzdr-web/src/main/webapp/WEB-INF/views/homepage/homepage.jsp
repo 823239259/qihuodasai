@@ -35,6 +35,8 @@
 	</script>
 	<script src="${ctx }/static/script/esl.js?v=${v}"></script>
     <script src="${ctx }/static/script/slide-box.js?v=${v}"></script>
+    <link href="${ctx}/static/css/gybf.css" rel="stylesheet" type="text/css">		
+    <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?version=20150724"></script>
 	<style type="text/css">
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
@@ -44,12 +46,127 @@
     #left_xiangqing .w_content .left_hidden{float: left; width: 195px;}
     #left_xiangqing .scroll_y{background: #fc3;position: absolute; right: 0;width: 5px;}
     #left_xiangqing .scroll_ymove{background: #292929; height: 508px;position: absolute; right: 0;width: 5px;z-index: 2;}
+	.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
+	.anniu {text-align: center;}
+	.smain {text-align: center;}
+	.tck01 .anniu a {margin-left: 0;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
+	
 	</style>
+	<script type="text/javascript">
+	function skbt(){
+		$(".luckNum").html(luckNum);
+    	$("#skbt").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+    		
+    }
+	function sk_bt(){
+		$(".subsidyMoney").html(subsidyMoney);
+    	$("#sk_bt").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+    		
+    }
+    function skmsbt(luckNum,subsidyMoney){
+    	$(".luckNum").html(luckNum);
+    	$(".subsidyMoney").html(subsidyMoney);
+    	$("#skmsbt").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+    }
+    $(function(){
+    	$.post(basepath+"/extendsion/sign/validationTip",function(data){
+			if(data.success){
+				if(data.data.islogin){
+					var luckNum = data.data.luckNum;
+					var subsidyMoney = data.data.subsidyMoney;
+					if(data.data.luck = 1 && data.data.subsidytip == 1 && data.data.subsidy ==1){
+						skmsbt(luckNum,subsidyMoney);
+						return;
+					}else if(data.data.luck = 1  && data.data.luckNum == 0){
+						skbt(luckNum);
+						return;
+					}else if(data.data.subsidytip = 1 && data.data.luck == 0){
+						skbt(luckNum);
+						return;
+					}
+				}else{
+					
+				}
+			}else{
+				showMsgDialog("提示","系统繁忙，请稍候重试......");
+			}
+		},"json");
+    })
+	</script>
 </head>
 <body>
 <!-- header -->
 <%@include file="../common/header.jsp"%>
 <!-- 广告切换 -->
+<!-- 弹出层 -->
+<div id="div_Mask"  style="display:none;"></div>
+<div class="div_loading">
+	<div class="tck01" id="skbt" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">好消息！</a><a class="close" onclick="javascript:closeDiv('skbt')"></a>
+		</div>
+		<div class="smain">
+			<div>恭喜您获得<span class="luckNum"></span>次首亏抽奖机会！</div>
+		</div>
+		<div class="anniu">
+	 		<a href="${ctx}/extendsion/sign/luck/view" onclick="javascript:closeDiv('skbt')">立即抽奖</a>
+	 	</div> 
+	</div>
+	<div class="tck01" id="skmsbt" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">好消息！</a><a class="close" onclick="javascript:closeDiv('skmsbt')"></a>
+		</div>
+		<div class="smain">
+			<div>恭喜您获得<span class="luckNum"></span>次首亏抽奖机会！</div>
+			<div>并获得免损金牌活动<span class="subsidyMoney"></span>元现金红包奖励</div>
+			<div>系统已经通过现金红包的方式存入您的账户！</div>	
+		</div>
+		<div class="anniu">
+	 		<a href="${ctx}/extendsion/sign/luck/view" onclick="javascript:closeDiv('skmsbt')">立即抽奖</a>
+	 		<a href="${ctx}/user/account" onclick="javascript:closeDiv('skmsbt')">查看账户</a>
+	 	</div> 
+	</div>
+	<div class="tck01" id="sk_bt" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">好消息！</a><a class="close" onclick="javascript:closeDiv('sk_bt')"></a>
+		</div>
+		<div class="smain">
+			<div>并获得免损金牌活动<span class="subsidyMoney"></span>元现金红包奖励</div>
+			<div>系统已经通过现金红包的方式存入您的账户！</div>	
+		</div>
+		<div class="anniu">
+	 		<a href="${ctx}/user/account" onclick="javascript:closeDiv('sk_bt')">查看账户</a>
+	 	</div> 
+	</div>
+</div>
+
 <div class="bannerlist">
     <div class="ad_slider" id="ad-slider">
         <c:forEach var="b" items="${banners }" varStatus="status">
