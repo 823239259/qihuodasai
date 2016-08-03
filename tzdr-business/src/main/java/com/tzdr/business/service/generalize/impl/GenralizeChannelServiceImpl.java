@@ -150,4 +150,7 @@ public class GenralizeChannelServiceImpl extends BaseServiceImpl<GeneralizeChann
 			return new JsonResult(false,"删除失败！");
 		}
     }
+    public List<GeneralizeChannel> findByParamAndDeletedFalse(String params){
+    	return this.getEntityDao().findByParamAndDeletedFalse(params);
+    }
 }

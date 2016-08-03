@@ -2,6 +2,7 @@ package com.tzdr.business.service.userTrade;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import com.tzdr.common.baseservice.BaseService;
@@ -181,5 +182,20 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	 * 分配账号时，判断是否是已分配
 	 */
 	String passSaveAccount(String id);
+	/**
+	 * 获取用户首次操盘的第一条数据
+	 * @param pageIndex
+	 * @param perPage
+	 * @param uid
+	 * @return
+	 */
+	public PageInfo<FSimpleFtseUserTradeWebVo> findFristTradeDataByUid(String pageIndex,String perPage,String uid);
 	
+	/**
+	 * 查询制定结算时间之间的结算数据 
+	 * @param beginTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime);
 }

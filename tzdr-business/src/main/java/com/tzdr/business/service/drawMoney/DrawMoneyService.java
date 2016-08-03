@@ -236,6 +236,15 @@ public interface DrawMoneyService{
 			PaymentSupportBank  paymentSupportBank, String ip, String orderId,int withdrawSetting);
 	
 	
+	public boolean doGoWithdrawals(int source,
+									WUser user,
+									String money,
+									String bankcard,
+									PaymentSupportBank paymentSupportBank,
+									String ip,
+									String orderId,
+									int withdrawSetting);
+	
 	/**
 	 * 更新币币订单结算成功后的币币订单id
 	 * @param id

@@ -61,18 +61,6 @@ public class WeixinLotteryController {
 		return ViewConstants.ActiviesJsp.WEIXIN_LOTTERY_INDEX;
 	}
 	/**
-	 * 抽奖页面
-	 * 
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/luck/view")
-	public String view(@RequestParam(value = "channelCode",required = false)String channelCode,
-			@RequestParam(value = "activity",required = false) String activity) {
-		return ViewConstants.SignInViewJsp.EXTENDSIONSIGN_VEIW;
-	}
-	/**
 	 * 抽奖页面-拦截登录
 	 * 
 	 * @param request

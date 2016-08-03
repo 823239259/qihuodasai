@@ -480,7 +480,7 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 		PingPPModel pingPPModel = new PingPPModel();
 		pingPPModel.setAmount(money);
 		pingPPModel.setBody(Config.BODY);
-		pingPPModel.setChannel(payWayChannl.getChannelCode());
+		pingPPModel.setChannel("wx");//payWayChannl.getChannelCode());
 		pingPPModel.setClient_ip(ip);
 		pingPPModel.setCurrency("cny");
 		pingPPModel.setOrder_no(orderNo);

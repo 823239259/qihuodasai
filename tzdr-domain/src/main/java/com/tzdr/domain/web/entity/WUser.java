@@ -132,6 +132,7 @@ public class WUser extends BaseEntity {
 	 * '1: web 2:wap 3:bbs';
 	 */
 	private int source;
+	private String keyword;
 	
 	public Long getLastbeforeloginTime() {
 		return lastbeforeloginTime;
@@ -912,6 +913,14 @@ public class WUser extends BaseEntity {
 
 	public void setSource(int source) {
 		this.source = source;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 	

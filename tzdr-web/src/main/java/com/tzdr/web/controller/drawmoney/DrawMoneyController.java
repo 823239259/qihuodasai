@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -385,8 +387,149 @@ public class DrawMoneyController {
 		   return jsonResult;
 		}
 	}
-	
-	
+	/**
+	 * 提现
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/doWithdrawals",method = RequestMethod.POST)
+	public JsonResult doGoWithdrawals(HttpServletRequest request
+									  ,HttpServletResponse response
+										,@RequestParam String bankcard
+										,@RequestParam String money
+										,@RequestParam String drawpwd
+										,@RequestParam String bankname
+										,@RequestParam String randcode){
+		synchronized(lock) {
+			PaymentSupportBank paymentSupportBank = paymentSupportBankService.findByAbbreviation(bankname);
+			String bankSupport = validationBankSupport(paymentSupportBank);
+			JsonResult jsonResult = new JsonResult();
+			if(bankSupport.equals("true")){
+				UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+				//获取提现渠道设置参数
+				int withdrawSetting = dataMapService.getWithDrawSetting();
+				//判断是否有欠费记录
+				DrawBlackList drawBlackList = drawBlackListService.getDrawBlackListByUid(userSessionBean.getId());
+				if(null != drawBlackList){
+					jsonResult.setMessage("existArrearage");
+					jsonResult.setObj(drawBlackList.getReason());
+					return jsonResult;
+				}
+				//先判断是否要输入验证码
+				Object obj =  request.getServletContext().getAttribute(com.tzdr.web.constants.Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY);
+				ConcurrentHashMap<String,DrawMoneyFailBean> failMap =  (ConcurrentHashMap<String, DrawMoneyFailBean>) (obj == null ? null : obj);
+				WUser user=drawMoneyService.getUser(userSessionBean.getId());
+				String loginname=user.getMobile();
+				DrawMoneyFailBean  failBean = failMap == null || failMap.isEmpty() || !failMap.containsKey(loginname) ? null : failMap.get(loginname);
+				String sessionCode = (String)request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+				if(failBean != null && com.tzdr.web.constants.Constants.DRAW_FAIL_MAX_COUNT_SESSION < failBean.getDrawFailCount() && (StringUtil.isBlank(randcode) || !randcode.equalsIgnoreCase(sessionCode))){
+					failBean.setDrawFailCount(failBean.getDrawFailCount() + 1);
+					Map<Object, Object> data = new HashMap<Object, Object>();
+					data.put("isNeedCode", false);
+					if(com.tzdr.web.constants.Constants.LOGIN_FAIL_MAX_COUNT_SESSION < failBean.getDrawFailCount()){
+						data.put("isNeedCode", true);
+					}
+					request.getSession().setAttribute(Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY,failBean.getDrawFailCount());  //添加或修改取现失败次数
+					DrawMoneyFail.addDrawFailBean(failBean, request, response);   //修改取消失败次数
+					jsonResult.setData(data);
+					jsonResult.setMessage("codeError");
+					return jsonResult;
+				}
+				Double avlbal=user.getAvlBal()==null?0:user.getAvlBal();
+				UserVerified userverified=user.getUserVerified();
+				String moneypwd=securityInfoService.getBuildPwd(drawpwd, user);
+				 List<DrawList> list=drawMoneyService.findDrawCount(user);
+				 //提现时间控制
+				 List<DataMap> drawDate=dataMapService.findByTypeKey(DataDicKeyConstants.DRAW_DATE);
+				 if(list.size()>=5){
+					 jsonResult.setMessage("当天提现次数不能超过5次");
+					 return jsonResult;
+				 } 
+				 //余额大于提现金额并且配置用户大于10元
+				 if(Double.valueOf(money)<10){
+					  jsonResult.setMessage("每次提现金额不能小于10元");
+					  return jsonResult;
+				 } 
+				 //提现时间控制
+				 if(drawDate!=null && drawDate.size()>0){
+					 DataMap datamap=drawDate.get(0);
+					 String keydate=datamap.getValueKey();
+					 Date startdate=DateUtils.stringToDate(keydate,"yyyy-MM-dd HH:mm");
+					 if(new Date().getTime()<=startdate.getTime()){
+						 jsonResult.setMessage("截止【"+keydate+"】为系统升级时间，暂停提现功能！给您带来的不便敬请谅解！");
+						  return jsonResult;
+					 }
+				 }
+					if(avlbal>=Double.valueOf(money)){//余额大于取款金额
+						UserBank bank=this.drawMoneyService.findUsercardbycard(bankcard,user.getId());
+						if(bank!=null && moneypwd.equals(userverified.getDrawMoneyPwd())){
+							 String ip=IpUtils.getIpAddr(request);
+							 String orderId=drawMoneyService.getRandomStr(20);
+							 //提现处理
+							 drawMoneyService.doGoWithdrawals(Constant.Source.TZDR,
+									 						 user,
+									 						 money,
+									 						 bankcard,
+									 						 paymentSupportBank,
+									 						 ip,
+									 						 orderId,
+									 						 withdrawSetting);
+						 }else {
+							 if(bank==null){
+								 jsonResult.setMessage("绑定的银行卡不存在");
+							 }else if(!moneypwd.equals(userverified.getDrawMoneyPwd())){
+									//提现密码错误加入错误次数
+								 if(failBean == null){
+									    failBean = new DrawMoneyFailBean();
+									    failBean.setUserName(loginname);
+									    failBean.setDrawFailCount(1);
+									    failBean.setValidDate(new Date());
+									}else{
+										failBean.setDrawFailCount(failBean.getDrawFailCount() + 1);
+									}
+									Map<Object, Object> data = new HashMap<Object, Object>();
+									data.put("isNeedCode", false);
+									if(obj != null && Constants.DRAW_FAIL_MAX_COUNT_SESSION < failBean.getDrawFailCount()){
+										data.put("isNeedCode", true);
+									}
+									request.getSession().setAttribute(Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY,failBean.getDrawFailCount());  //添加或修改session登录失败次数
+									DrawMoneyFail.addDrawFailBean(failBean, request, response);  //添加或修改application失败次数
+									jsonResult.setData(data);
+									jsonResult.setMessage("提现密码错误");
+								   return jsonResult;
+							   }
+						 }
+					}else{
+						jsonResult.setMessage("账户余额小于提现金额");
+					}
+					if(failBean != null){
+						DrawMoneyFail.removeDrawFailBean(failBean, request, response);    //删除application取现失败次数(包含失效数据)
+					}
+					request.getSession().removeAttribute(Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY);   //清空是否需要验证码取现失败次数
+					request.getServletContext().removeAttribute(Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY);
+			}else{
+				jsonResult.setMessage(bankSupport);
+			}
+			return null;
+		}
+		
+		
+	}
+	/**
+	 * 验证银行是否支持
+	 * @param bankName
+	 * @return
+	 */
+	public String validationBankSupport(PaymentSupportBank paymentSupportBank){
+		String result = null;
+		//校验是否支持该银行提现
+		if (ObjectUtil.equals(null, paymentSupportBank)){
+			result = "网银平台暂不支持此银行提现，请重新添加银行！";
+		}else{
+			result = "true";
+		}
+		return result;
+	}
 	/**
 	 * 根据用户和取款实体生成取款参数对象
 	 * @param user 用户对象

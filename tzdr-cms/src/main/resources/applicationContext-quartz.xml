@@ -34,7 +34,7 @@
 				<ref bean="bibiPayWithDrawalTrigger"/>	
 				<ref bean="payeaseWithDrawalTrigger"/>	
 				<ref bean="monthTradeTrigger"/>	
-				
+				<ref bean="activityLossFreeTrigger" />
 			</list>
 		</property>
 		<!--  quartz配置文件路径, 指向cluster配置 -->
@@ -305,5 +305,16 @@
 	<bean id="monthTradeJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="durability" value="false"/>
 		<property name="jobClass" value="com.tzdr.cms.quartz.MonthTradeJob" />
+	</bean>
+	
+	
+	<!-- 活动免损补贴 -->
+	<bean id="activityLossFreeTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+		<property name="jobDetail" ref="activityLossFree" />
+		<property name="cronExpression" value="0 0 8 * * ?" />
+	</bean>
+	<bean id="activityLossFree" class="org.springframework.scheduling.quartz.JobDetailFactoryBean" >
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.LossFreeRebatesJob" />
 	</bean>
 </beans>

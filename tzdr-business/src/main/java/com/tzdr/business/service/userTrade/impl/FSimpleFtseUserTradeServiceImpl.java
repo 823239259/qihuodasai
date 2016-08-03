@@ -20,6 +20,7 @@ import com.hundsun.t2sdk.common.util.CollectionUtils;
 import com.tzdr.business.cms.service.auth.AuthService;
 import com.tzdr.business.service.account.AccountService;
 import com.tzdr.business.service.crudeActive.CrudeActiveService;
+import com.tzdr.business.service.extension.ActivityRewardService;
 import com.tzdr.business.service.ftseActive.FtseActiveService;
 import com.tzdr.business.service.future.FSimpleCouponService;
 import com.tzdr.business.service.futureMatchAccount.FutureMatchAccountService;
@@ -43,12 +44,15 @@ import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.common.web.support.MultiListParam;
 import com.tzdr.domain.cms.entity.user.User;
+import com.tzdr.domain.constants.Constant;
+import com.tzdr.domain.constants.ExtensionConstants;
 import com.tzdr.domain.dao.userTrade.FSimpleFtseUserTradeDao;
 import com.tzdr.domain.vo.FSimpleFtseUserTradeWebVo;
 import com.tzdr.domain.vo.ftse.FHandleFtseUserTradeVo;
 import com.tzdr.domain.vo.ftse.FHandleFtseUserTradeVo2;
 import com.tzdr.domain.vo.ftse.FSimpleFtseManageVo;
 import com.tzdr.domain.vo.ftse.FSimpleFtseVo;
+import com.tzdr.domain.web.entity.ActivityReward;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.FSimpleParities;
 import com.tzdr.domain.web.entity.FinternationFutureAppendLevelMoney;
@@ -103,6 +107,8 @@ public class FSimpleFtseUserTradeServiceImpl extends
     private FinternationFutureAppendLevelMoneyService finternationFutureAppendLevelMoneyService;
     @Autowired
     private FSimpleCouponService fSimpleCouponService;
+    @Autowired
+    private ActivityRewardService activityRewardService;
 
     @Override
     public FSimpleFtseUserTrade executePayable(
@@ -293,7 +299,17 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 FSimpleFtseUserTradeWebVo.class, null, uid);
         return pageInfo;
     }
-
+    @SuppressWarnings("unchecked")
+    @Override
+    public PageInfo<FSimpleFtseUserTradeWebVo> findFristTradeDataByUid(String pageIndex,String perPage,String uid){
+    	 PageInfo<FSimpleFtseUserTradeWebVo> pageInfo = new PageInfo<FSimpleFtseUserTradeWebVo>(Integer.valueOf(perPage), Integer.valueOf(pageIndex) + 1);
+         pageInfo = this.getEntityDao().queryPageBySql(pageInfo, " SELECT * FROM f_simple_ftse_user_trade f WHERE f.business_type in(0,6,7,8,9) AND f.uid = ? ORDER BY f.end_time asc",
+                 FSimpleFtseUserTradeWebVo.class, null, uid);
+         return pageInfo;
+    }
+    public List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime){
+    	return this.getEntityDao().findLossPlan(beginTime, endTime);
+    }
     @Override
     public PageInfo<Object> queryWellGoldDatas(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams, int type, int businessType) throws Exception {
 
@@ -710,10 +726,33 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 this.update(simpleFtseUserTrade);
 //				handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade); // 保存收益报表记录
             }
+            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid());
             return new JsonResult(true, "方案结算成功！");
         }
     }
-
+    public void validationIsTradeSubsidy(String uid){
+    	List<FSimpleFtseUserTrade> fstvos = getEntityDao().findById(uid);
+    	int size = fstvos.size();
+    	//如果是第一次交易
+    	if(size > 0){
+	    	if(size == 1){
+	    		FSimpleFtseUserTrade fstvo = fstvos.get(0);
+	    		//如果第一次交易亏损可参与抽奖
+	    		if(fstvo.getTranProfitLoss().intValue() < 0){
+	    			ActivityReward activityReward = new ActivityReward();
+	    			activityReward.setIstip(false);
+	    			activityReward.setIsvalid(false);
+	    			activityReward.setReward_type(ExtensionConstants.REWARD_TYPE_LUCK_DRAW);
+	    			activityReward.setUid(uid);
+	    			activityReward.setType(ExtensionConstants.SubsidyType.LUCK_DRAW);
+	    			activityReward.setMoney(0.00);
+	    			activityReward.setActivity(ExtensionConstants.ACTIVITY_TYPE);
+	    			activityReward.setCreateTime(new Date().getTime()/1000);
+	    			activityRewardService.doSave(activityReward);
+	    		}
+	    	}
+    	}
+    }
     @Override
     public boolean isHave(String uid, int type) {
         List<FSimpleFtseUserTrade> list = simpleFtseUserTradeDao.findByUidAndBusinessType(uid, type);

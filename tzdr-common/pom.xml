@@ -158,7 +158,24 @@
 			</systemPath>
 		</dependency>
 		<!-- 联动优势接口jar -->
-		
+		<dependency>sword-lang-2.0.0.jar
+			<groupId>com.wechat4j</groupId>
+			<artifactId>wechat4j</artifactId>
+			<version>1.2.0</version>
+			<scope>system</scope>
+			<systemPath>
+			${project.basedir}/lib/wechat4j-1.2.0.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>sword.lang</groupId>
+			<artifactId>sword</artifactId>
+			<version>2.0.0</version>
+			<scope>system</scope>
+			<systemPath>
+			${project.basedir}/lib/sword-lang-2.0.0.jar
+			</systemPath>
+		</dependency>
 		<!-- XSS protect jar -->
 		<dependency>
 			<groupId>blogspot.radialmind</groupId>

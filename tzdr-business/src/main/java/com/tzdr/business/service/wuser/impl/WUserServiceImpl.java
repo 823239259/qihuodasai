@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,8 @@ import com.tzdr.business.cms.service.user.PasswordService;
 import com.tzdr.business.cms.service.user.UserExtendService;
 import com.tzdr.business.exception.WuserException;
 import com.tzdr.business.service.datamap.DataMapService;
+import com.tzdr.business.service.extension.ActivityRewardService;
+import com.tzdr.business.service.extension.LuckDrawService;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.securityInfo.impl.SecurityInfoServiceImpl;
 import com.tzdr.business.service.thread.SMSPgbSendForContentThread;
@@ -56,6 +59,7 @@ import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
 import com.tzdr.domain.cms.entity.user.User;
 import com.tzdr.domain.cms.entity.user.UserExtend;
+import com.tzdr.domain.constants.ExtensionConstants;
 import com.tzdr.domain.dao.pay.UserFundDao;
 import com.tzdr.domain.dao.wuser.WUserDao;
 import com.tzdr.domain.vo.ActivityWuserVo;
@@ -66,7 +70,8 @@ import com.tzdr.domain.vo.UserVerifiedVo;
 import com.tzdr.domain.vo.WuserListVo;
 import com.tzdr.domain.vo.WuserParentVo;
 import com.tzdr.domain.vo.WuserVo;
-import com.tzdr.domain.vo.future.FSimpleCouponWebVo;
+import com.tzdr.domain.web.entity.ActivityReward;
+import com.tzdr.domain.web.entity.LuckDraw;
 import com.tzdr.domain.web.entity.NoticeRecord;
 import com.tzdr.domain.web.entity.UserFund;
 import com.tzdr.domain.web.entity.UserVerified;
@@ -111,6 +116,12 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 	
 	@Autowired
 	private DataMapService dataMapService;
+	
+	@Autowired
+	private LuckDrawService luckDrawService;
+	
+	@Autowired
+	private ActivityRewardService activityRewardService;
 	
 	@Override
 	public WUser getWUserByMobile(String mobile) {
@@ -812,7 +823,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 				  " SELECT w.id,v.tname,w.uname,w.email,w.mobile,w.ctime,w.user_type userType"
 				+ " ,v.idcard,w.last_login_time lastLoginTime,w.avl_bal avlBal,"
 				+ " (SELECT SUM(t.money)FROM w_user_trade t WHERE t.uid=w.id AND t.`status`=1) allocationMoney"
-				+ " , w.frz_bal frzBal,v.alipay_account alipayAccount,w.source "
+				+ " , w.frz_bal frzBal,v.alipay_account alipayAccount,w.source,w.channel,w.keyword "
 				+ " FROM w_user w LEFT JOIN w_user_verified v ON w.id=v.uid WHERE 1=1 ");
 		List<Object> params = new ArrayList<Object>();
 		if (connVo != null) {
@@ -825,6 +836,8 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 			Object sourceObj = connVo.getValue("source");
 			Object tnameObj = connVo.getValue("tname");
 			Object alipayAccountObj = connVo.getValue("alipayAccount");
+			Object channel = connVo.getValue("channel");
+			Object keyword = connVo.getValue("keyword");
 			if (ctimeStrStartObj != null && ctimeStrEndObj != null) {
 				if (TypeConvert.objToStrIsNotNull(ctimeStrStartObj) != null &&
 						TypeConvert.objToStrIsNotNull(ctimeStrEndObj) != null) {
@@ -853,7 +866,18 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 					params.add(String.valueOf(mailObj) + "%");
 				}
 			}
-			
+			if(channel != null){
+				if(TypeConvert.objToStrIsNotNull(channel) != null){
+					sqlBuf.append(" AND w.channel like ?");
+					params.add(String.valueOf(channel) + "%");
+				}
+			}
+			if(keyword != null){
+				if(TypeConvert.objToStrIsNotNull(keyword) != null){
+					sqlBuf.append(" AND w.keyword like ?");
+					params.add(String.valueOf(keyword) + "%");
+				}
+			}
 			if (sourceObj != null) {
 				if (TypeConvert.objToStrIsNotNull(sourceObj) != null) {
 					StringBuilder whereBuilder = new StringBuilder();
@@ -890,7 +914,6 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 					params.add(String.valueOf(tnameObj) + "%");
 				}
 			}
-			
 			if(alipayAccountObj != null){
 				if (TypeConvert.objToStrIsNotNull(alipayAccountObj) != null ) {
 					sqlBuf.append(" AND v.alipay_account like ?");
@@ -1144,5 +1167,42 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 	public void lowerUserRebates(String mobile){
 		super.nativeQuery(mobile);
 
+	}
+	@Override
+	public boolean luckDrawUpdateUser(Double money, String uid) {
+		boolean flag = true;
+		String activity = ExtensionConstants.ACTIVITY_TYPE;
+		ActivityReward activityReward = activityRewardService.findByUidAndActivity(uid,activity ,false,ExtensionConstants.REWARD_TYPE_LUCK_DRAW);
+		if(activityReward != null){
+			WUser user = getUser(uid);
+			if(user != null){
+				user.setFund(user.getFund() + money);
+				//更新用户的账户余额
+				update(user);
+				//增加用户的抽奖记录
+				LuckDraw draw = new LuckDraw();
+				draw.setCrateTime(new Date());
+				draw.setUid(user.getId());
+				draw.setMoney(money);
+				draw.setActivity(activity);
+				luckDrawService.save(draw);
+				//增加充值记录
+				UserFund userFund = new UserFund();
+				userFund.setUid(user.getId());
+				userFund.setMoney(money);
+				userFund.setType(TypeConvert.LUCK_DRAW);
+				userFund.setRemark("首次亏损抽奖：" + money + "元");
+				userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
+				//更新用户抽奖权限表
+				activityReward.setIsvalid(true);
+				activityReward.setMoney(money);
+				activityRewardService.update(activityReward);
+			}else{
+				flag = false;
+			}
+		}else{
+			flag = false;
+		}
+		return flag;
 	}
 }

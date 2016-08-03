@@ -36,6 +36,8 @@
 				<th field="ctimeStr" width="150">注册时间 </th>
 				<th field="lastLoginTimeStr" width="150">最后登陆时间</th>
 				<th field="sourceName" width="120">来源网站</th>
+				<th field="channel" width="120">渠道来源</th>
+				<th field="keyword" width="120">关键词来源</th>
             </tr>
         </thead>
     </table>
@@ -77,6 +79,13 @@
 	                <td><input name="tname" type="text" /></td>
 	                <td class="label right">支付宝帐号:</td>
 	                <td><input name="alipayAccount">
+	                </td>
+	            </tr>
+	            <tr>
+	                <td class="label right">渠道来源:</td>
+	                <td><input name="channel" type="text" /></td>
+	                <td class="label right">关键词来源:</td>
+	                <td><input name="keyword">
 	                </td>
 	            </tr>
 	            <tr>

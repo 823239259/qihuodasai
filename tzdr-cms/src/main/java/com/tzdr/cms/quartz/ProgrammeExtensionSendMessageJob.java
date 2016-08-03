@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.tzdr.business.service.endplan.EndPlanService;
-import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.common.utils.SpringUtils;
 
 /**

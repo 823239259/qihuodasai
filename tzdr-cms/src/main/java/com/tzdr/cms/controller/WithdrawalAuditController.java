@@ -339,7 +339,32 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 			return new JsonResult(false,jsonObject.getString("retMsg"));			*/				
 			
 	}
-	
+	/**
+	 * 提现
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "doAuit",method = RequestMethod.POST)
+	public JsonResult doAuit(HttpServletRequest request,@RequestParam("id") String id){
+		synchronized(lock) {
+			JsonResult resultJson = null;
+			DrawList vdrawList = withdrawalService.findByDrawList(id);
+			if (vdrawList.getIsAudit() != -1){
+				resultJson = new JsonResult(false,"该数据已经处理过审核操作，请勿多次提交！");
+			}
+			if(vdrawList.getStatus() == 3){
+				resultJson = new JsonResult(false,"该数据已经取消提现，请勿审核！");
+			}
+			boolean result =withdrawalService.doAuit(id,1);
+			if(result){
+				resultJson = new JsonResult("审核成功！");
+			}else{
+				resultJson = new JsonResult("审核异常,请召唤技术");
+			}
+			return resultJson;
+		}
+	}
 
 	/**
 	 * 线下审核通过

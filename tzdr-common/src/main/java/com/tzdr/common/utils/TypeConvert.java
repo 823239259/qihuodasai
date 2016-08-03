@@ -1546,7 +1546,14 @@ public class TypeConvert {
 	 * 配资中划转成功
 	 */
 	public final static Short ADJUST_MENT_SUCCESSFUL = 1;
-	
+	/**
+	 * 活动抽奖，奖励
+	 */
+	public final static Integer LUCK_DRAW= 30;
+	/**
+	 * 活动免损补贴
+	 */
+	public final static Integer ACTIVITY_LOSS_FREE_REWARD = 31;
 	
 	/**
 	 * 方案审核状态"未通过"

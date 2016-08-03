@@ -248,7 +248,21 @@ public class WithdrawalService extends BaseServiceImpl<DrawList,WithdrawalDao> {
 					+ "审核通过客户【手机号："+drawList.getUser().getMobile()+",姓名："+drawList.getName()+"】提现，金额："+drawList.getMoney());			
 			return drawList;
 	}
-	
+	public boolean doAuit(String id,int isAudit){
+		DrawList drawList = getEntityDao().get(id);
+		drawList.setIsAudit(isAudit);
+		drawList.setUpdateUser(authService.getCurrentUser().getRealname());
+		drawList.setUpdateTime(Dates.getCurrentLongDate());
+		drawList.setUpdateUserId(authService.getCurrentUser().getId());
+		super.update(drawList);
+		DataMap dataMap = dataMapService.getWithDrawMoney();
+		logger.info("审核操作："+(isAudit==1?"成功！":"失败！系统自动恢复为未审核状态。")+";系统操作员【"+authService.getCurrentUser().getRealname()+"】,"
+				+ "提现审核配置金额【"+(ObjectUtil.equals(null, dataMap)?DataDicKeyConstants.DEFAULT_WITHDRAW_MONEY_VALUE_NAME:dataMap.getValueName())+"】;"
+				+ "审核通过客户【手机号："+drawList.getUser().getMobile()+",姓名："+drawList.getName()+"】提现，金额："+drawList.getMoney());			
+		//开始提现操作
+		
+		return true;
+	}
 	/**
 	 * 初审通过
 	 * @param id
