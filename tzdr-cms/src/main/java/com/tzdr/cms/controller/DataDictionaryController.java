@@ -94,8 +94,11 @@ public class DataDictionaryController extends BaseCmsController<DataMap>
 					String dateEndTime = dataMapsEnd.get(0).getValueName();
 					Date endDate = df.parse(dateEndTime);
 					Date startDate =  df.parse(dataTime);
-					ActivityConfig.activity_onLineEndTime = endDate.getTime();
-					ActivityConfig.activity_onLineStartTime = startDate.getTime();
+					long start = startDate.getTime();
+					long end = endDate.getTime();
+					ActivityConfig.map.put("activity_onLineEndTime", String.valueOf(end));
+					ActivityConfig.map.put("activity_onLineStartTime", String.valueOf(start));
+					System.out.println(ActivityConfig.map);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();

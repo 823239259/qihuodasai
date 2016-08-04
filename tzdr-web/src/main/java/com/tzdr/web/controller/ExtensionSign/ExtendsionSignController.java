@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.extension.ActivityRewardService;
 import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.generalize.GeneralizeService;
@@ -57,6 +58,8 @@ public class ExtendsionSignController {
 	private GeneralizeService generalizeService;
 	@Autowired
 	private ActivityRewardService activityRewardService;
+	@Autowired
+	private DataMapService dataMapService;
 	@RequestMapping(value = "/testJob")
 	@ResponseBody
 	public JsonResult testJob(){
@@ -90,7 +93,7 @@ public class ExtendsionSignController {
 	public String extendSignView(ModelMap modelMap, HttpServletRequest request,
 			@RequestParam(value = "channelCode", required = false) String channelCode,
 			@RequestParam(value = "activity", required = false) String activity) {
-		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+		if(dataMapService.activityExpired()){
 			GeneralizeVisit generalizeVisit = new GeneralizeVisit();
 			String ip = IpUtils.getIpAddr(request);
 			generalizeVisit.setClieantIp(ip);
@@ -138,7 +141,7 @@ public class ExtendsionSignController {
 			String code, String password, String parentGeneralizeId, String yzmCode, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
-		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+		if(dataMapService.activityExpired()){
 			if (wUserService.getWUserByMobile(mobile) != null) { // 判断手机号码是否已存在
 				jsonResult.setMessage("mobileIsExist");
 				return jsonResult;
@@ -241,7 +244,7 @@ public class ExtendsionSignController {
 	 */
 	@RequestMapping(value = "/extensionSignSuc", method = RequestMethod.GET)
 	public String extensionSignSucView(ModelMap modelMap,HttpServletRequest  request) {
-		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+		if(dataMapService.activityExpired()){
 			modelMap.put("islogin", true);
 			modelMap.put("m", request.getParameter("m"));
 			modelMap.put("p", request.getParameter("p"));
@@ -260,7 +263,7 @@ public class ExtendsionSignController {
 	@ResponseBody
 	public JsonResult luckDraw(@RequestParam("money") Double money, HttpServletRequest request,@RequestParam("rewardId")String rewardId) {
 		JsonResult resultJson = null;
-		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+		if(dataMapService.activityExpired()){
 			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 					.getAttribute(Constants.TZDR_USER_SESSION);
 			String id = userSessionBean.getId();
@@ -292,7 +295,7 @@ public class ExtendsionSignController {
 	public JsonResult validationTip(HttpServletRequest request,
 			@RequestParam(value = "activity", required = false) String activity) {
 		JsonResult resultJson = new JsonResult();
-		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+		if(dataMapService.activityExpired()){
 			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 					.getAttribute(Constants.TZDR_USER_SESSION);
 			if (userSessionBean == null) {

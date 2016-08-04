@@ -46,103 +46,104 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 	}
 	@Override
 	public void doSaveActivityReward(Long startTime, Long endTime) {
-		List<FSimpleFtseUserTrade> fSimpleFtseUserTrades = fSimpleFtseUserTradeService.findLossPlan(startTime, endTime);
-		List<ActivityReward> activityRewards = new ArrayList<>();
-		//单日总的交易手数
-		for (FSimpleFtseUserTrade fSimpleFtseUserTrade : fSimpleFtseUserTrades) {
-			String uid = fSimpleFtseUserTrade.getUid();
-			//验证该用户在同一天是否有补贴
-			ActivityReward reward = this.doGetValidationIsReward(uid , ExtensionConstants.ACTIVITY_TYPE, startTime, endTime, ExtensionConstants.REWARD_TYPE_SUBSIDY);
-			if(reward != null){
-				continue;
-			}
-			int actualLever = fSimpleFtseUserTrade.getTranActualLever()
-								+fSimpleFtseUserTrade.getCrudeTranActualLever()
-								+fSimpleFtseUserTrade.getHsiTranActualLever()
-								+fSimpleFtseUserTrade.getMntranActualLever()
-								+fSimpleFtseUserTrade.getMbtranActualLever()
-								+fSimpleFtseUserTrade.getDaxtranActualLever()
-								+fSimpleFtseUserTrade.getNikkeiTranActualLever()
-								+fSimpleFtseUserTrade.getMdtranActualLever()
-								+fSimpleFtseUserTrade.getLhsiTranActualLever()
-								+fSimpleFtseUserTrade.getAgTranActualLever();
-			
-			//补贴金额
-			Double subMoney = 0.00;
-			Long createTime = new Date().getTime()/1000;
-			try {
-				if(actualLever >= 10){
-					Double endAmount = fSimpleFtseUserTrade.getEndAmount().doubleValue();
-					Double bondAmount = fSimpleFtseUserTrade.getTraderBond().doubleValue();
-					if(endAmount != null && bondAmount != null){
-						Double jAmount = endAmount - bondAmount;
-						if(jAmount < 0){
-							subMoney = Math.abs(jAmount);
-							if(actualLever >= ExtensionConstants.SUBSIDYLEVER10 && actualLever < ExtensionConstants.SUBSIDYLEVER20 ){
-								if(subMoney > ExtensionConstants.SUBSIDY10MONEY){
-									subMoney = ExtensionConstants.SUBSIDY10MONEY;
+		if(dataMapService.activityExpired()){
+			List<FSimpleFtseUserTrade> fSimpleFtseUserTrades = fSimpleFtseUserTradeService.findLossPlan(startTime, endTime);
+			List<ActivityReward> activityRewards = new ArrayList<>();
+			//单日总的交易手数
+			for (FSimpleFtseUserTrade fSimpleFtseUserTrade : fSimpleFtseUserTrades) {
+				String uid = fSimpleFtseUserTrade.getUid();
+				//验证该用户在同一天是否有补贴
+				ActivityReward reward = this.doGetValidationIsReward(uid , ExtensionConstants.ACTIVITY_TYPE, startTime, endTime, ExtensionConstants.REWARD_TYPE_SUBSIDY);
+				if(reward != null){
+					continue;
+				}
+				int actualLever = fSimpleFtseUserTrade.getTranActualLever()
+									+fSimpleFtseUserTrade.getCrudeTranActualLever()
+									+fSimpleFtseUserTrade.getHsiTranActualLever()
+									+fSimpleFtseUserTrade.getMntranActualLever()
+									+fSimpleFtseUserTrade.getMbtranActualLever()
+									+fSimpleFtseUserTrade.getDaxtranActualLever()
+									+fSimpleFtseUserTrade.getNikkeiTranActualLever()
+									+fSimpleFtseUserTrade.getMdtranActualLever()
+									+fSimpleFtseUserTrade.getLhsiTranActualLever()
+									+fSimpleFtseUserTrade.getAgTranActualLever();
+				
+				//补贴金额
+				Double subMoney = 0.00;
+				Long createTime = new Date().getTime()/1000;
+				try {
+					if(actualLever >= 10){
+						Double endAmount = fSimpleFtseUserTrade.getEndAmount().doubleValue();
+						Double bondAmount = fSimpleFtseUserTrade.getTraderBond().doubleValue();
+						if(endAmount != null && bondAmount != null){
+							Double jAmount = endAmount - bondAmount;
+							if(jAmount < 0){
+								subMoney = Math.abs(jAmount);
+								if(actualLever >= ExtensionConstants.SUBSIDYLEVER10 && actualLever < ExtensionConstants.SUBSIDYLEVER20 ){
+									if(subMoney > ExtensionConstants.SUBSIDY10MONEY){
+										subMoney = ExtensionConstants.SUBSIDY10MONEY;
+									}
+								}else if(actualLever >= ExtensionConstants.SUBSIDYLEVER20 && actualLever < ExtensionConstants.SUBSIDYLEVER40){
+									if(subMoney > ExtensionConstants.SUBSIDY20MONEY){
+										subMoney =ExtensionConstants.SUBSIDY20MONEY;
+									}
+								}else if(actualLever >= ExtensionConstants.SUBSIDYLEVER40){
+									if(subMoney > ExtensionConstants.SUBSIDY40MONEY){
+										subMoney =ExtensionConstants.SUBSIDY40MONEY;
+									}
 								}
-							}else if(actualLever >= ExtensionConstants.SUBSIDYLEVER20 && actualLever < ExtensionConstants.SUBSIDYLEVER40){
-								if(subMoney > ExtensionConstants.SUBSIDY20MONEY){
-									subMoney =ExtensionConstants.SUBSIDY20MONEY;
-								}
-							}else if(actualLever >= ExtensionConstants.SUBSIDYLEVER40){
-								if(subMoney > ExtensionConstants.SUBSIDY40MONEY){
-									subMoney =ExtensionConstants.SUBSIDY40MONEY;
-								}
+								BigDecimal b =  new   BigDecimal(subMoney);
+								subMoney = b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
+								ActivityReward activityReward = new ActivityReward();
+								activityReward.setIstip(false);
+				    			activityReward.setIsvalid(true);
+				    			activityReward.setReward_type(ExtensionConstants.REWARD_TYPE_SUBSIDY);
+				    			activityReward.setUid(uid);
+				    			activityReward.setType(ExtensionConstants.SubsidyType.SUBA50);
+				    			activityReward.setMoney(subMoney);
+				    			activityReward.setActivity(ExtensionConstants.ACTIVITY_TYPE);
+				    			activityReward.setCreateTime(createTime);
+				    			activityRewards.add(activityReward);
 							}
-							BigDecimal b =  new   BigDecimal(subMoney);
-							subMoney = b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
-							ActivityReward activityReward = new ActivityReward();
-							activityReward.setIstip(false);
-			    			activityReward.setIsvalid(true);
-			    			activityReward.setReward_type(ExtensionConstants.REWARD_TYPE_SUBSIDY);
-			    			activityReward.setUid(uid);
-			    			activityReward.setType(ExtensionConstants.SubsidyType.SUBA50);
-			    			activityReward.setMoney(subMoney);
-			    			activityReward.setActivity(ExtensionConstants.ACTIVITY_TYPE);
-			    			activityReward.setCreateTime(createTime);
-			    			activityRewards.add(activityReward);
+						}else{
+							logger.info(uid + "补贴异常");
 						}
-					}else{
-						logger.info(uid + "补贴异常");
 					}
+				} catch (Exception e) {
+					logger.info(uid + "补贴异常");
 				}
-			} catch (Exception e) {
-				logger.info(uid + "补贴异常");
+			}
+			if(activityRewards.size() > 0){
+				this.saves(activityRewards);
+			}
+			//获取短信通道
+			Integer smsChannel = dataMapService.getSmsContentOthers();
+			Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
+			for (ActivityReward activityReward : activityRewards) {
+				String uid = activityReward.getUid();
+					Double addMoney = activityReward.getMoney();
+					WUser user = wUserService.getUser(uid);
+					if(user != null){
+						user.setFund(user.getFund() + addMoney);
+						//更新用户的账户余额
+						wUserService.update(user);
+						//增加充值记录
+						UserFund userFund = new UserFund();
+						userFund.setUid(user.getId());
+						userFund.setMoney(addMoney);
+						userFund.setType(TypeConvert.ACTIVITY_LOSS_FREE_REWARD);
+						userFund.setRemark("免损补贴：" + addMoney + "元");
+						userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
+						smsParams.put("money", String.valueOf(addMoney));
+						try{
+							//发送短信通知用户
+							SMSSender.getInstance().sendByTemplate(smsChannel , user.getMobile(), "subdsion.ihuyi.code.template",smsParams );
+						} catch (Exception e) {
+							logger.info("通知补贴到账的短信发送异常");
+						}
+					}
 			}
 		}
-		if(activityRewards.size() > 0){
-			this.saves(activityRewards);
-		}
-		//获取短信通道
-		Integer smsChannel = dataMapService.getSmsContentOthers();
-		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
-		for (ActivityReward activityReward : activityRewards) {
-			String uid = activityReward.getUid();
-				Double addMoney = activityReward.getMoney();
-				WUser user = wUserService.getUser(uid);
-				if(user != null){
-					user.setFund(user.getFund() + addMoney);
-					//更新用户的账户余额
-					wUserService.update(user);
-					//增加充值记录
-					UserFund userFund = new UserFund();
-					userFund.setUid(user.getId());
-					userFund.setMoney(addMoney);
-					userFund.setType(TypeConvert.ACTIVITY_LOSS_FREE_REWARD);
-					userFund.setRemark("免损补贴：" + addMoney + "元");
-					userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
-					smsParams.put("money", String.valueOf(addMoney));
-					try{
-						//发送短信通知用户
-						SMSSender.getInstance().sendByTemplate(smsChannel , user.getMobile(), "subdsion.ihuyi.code.template",smsParams );
-					} catch (Exception e) {
-						logger.info("通知补贴到账的短信发送异常");
-					}
-				}
-		}
-		
 	}
 
 	@Override

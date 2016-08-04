@@ -19,11 +19,9 @@ public class LossFreeRebatesJob extends QuartzJobBean{
 	private Logger logger = LoggerFactory.getLogger(LossFreeRebatesJob.class);
 	@Override
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
-		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
 			ActivityRewardService activityRewardService = SpringUtils.getBean(ActivityRewardService.class);
 			activityRewardService.doSaveActivityReward(getStartTime(), getEndTime());
 			logger.info(getStartTime()+"-"+getEndTime()+"奖励执行完毕");
-		}
 	}
 	private static Long getStartTime(){
 		long current = getCalendar();
