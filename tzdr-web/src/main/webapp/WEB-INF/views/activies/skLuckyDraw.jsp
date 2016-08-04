@@ -216,7 +216,7 @@
 			<a class="nava">提示</a><a class="close" onclick="javascript:closeDiv('zc')"></a>
 		</div>
 		<div class="smain">
-			<div>你还未登录，赶紧去登陆吧!</div>
+			<div>你还未登录，赶紧去登录吧!</div>
 		</div>
 		<div class="anniu">
 	 		<a class="anniuzu" href="${ctx}/user/account">立即登录</a>
