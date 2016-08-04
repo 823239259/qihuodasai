@@ -373,7 +373,7 @@ $(document).ready(function(){
 							form.append("<input type=hidden name=userName value='" + data.data.userName + "'/></form>");
 							form.appendTo(document.body).submit();
 						}else{
-							window.location.href = basepath + "/extendsion/sign/extensionSignSuc";
+							window.location.href = basepath + "/extendsion/sign/extensionSignSuc?m="+mobile+"&p"+password;
 						}
 					}
 				}else{

@@ -4,6 +4,7 @@
 <%@ include file="../common/import-artDialog-js.jspf"%>
 <%
 	String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
+
 %>
 <c:set var="casServerLoginUrl" value="<%=casServerLoginUrl%>"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,7 +30,9 @@
 	            window.location.href = "${ctx}";
 	        }
 	    },1000);
-	 });
+		var login = $("#login").val();
+		$("#loginForm").submit();
+	});
 </script>
 <style>
 	.ks_footer {position: absolute; bottom: 0; width: 100%;}
@@ -49,6 +52,16 @@
 <div class="ks-cg">
 	<div class="ks-cg_centent">
 		<p class="ks-cg_ts1"><img src="${ctx}/static/images/login/ks-zhucecg.png">恭喜您注册成功~</p>
+		<form action="<%=casServerLoginUrl%>" id= "loginForm"  method="post">
+			<input type="hidden" value="${islogin}"  id = "login"/>
+			<input type="hidden" value="${m}" name = "username" id = "m"/>
+			<input type="hidden" value="${p}" name = "password" id = "p"/>
+			<input type="hidden" name="isajax" value="true">
+	        <input type="hidden" name="isframe" value="true">
+	        <input type="hidden" name="lt" value="" id="LoginTicket">
+	        <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
+	        <input type="hidden" name="_eventId" value="submit">
+        </form>
 		<p class="ks-cg_ts2">您已成功注册维胜网站！</p>
 		<p class="ks-cg_ts3"><a class="logo" href="${ctx}">立即操盘</a></p>
 		<p class="ks-cg_ts4"><span class="cg_djs">3</span>S后自动跳转网站首页</p>
