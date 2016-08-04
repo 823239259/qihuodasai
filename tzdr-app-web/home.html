@@ -98,11 +98,13 @@
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
 					<img src="images/icon4.png" />
 					<h2>一个账号可交易10个品种</h2>
-					<p>富时A50、恒指期货、国际原油、迷你纳指、迷你道指、迷你标普、德国DAX、日经225、小恒指、美黄金</p>		
+					<p>富时A50、恒指期货、国际原油、迷你纳指、迷你道指、迷你标普、德国DAX、日经225、小恒指、美黄金</p>
+					
 				</a>
 			</li>
 			
 		</ul>
+		<!--<button class="mui-btn" id="mybtnCheshi">点击</button>-->
 	</div>
 </body>
 	<script type="text/javascript" charset="utf-8">	
@@ -112,6 +114,30 @@
 			});
 		
 			mui.plusReady(function(){ 
+//				var mybtnCheshi=document.querySelector("#mybtnCheshi");
+//				var socket;
+//					  function sendMessage(method,parameters){
+//					        scoket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+//					    }
+//				mybtnCheshi.addEventListener("tap",function(){
+//					  var url="ws://socket.dktai.com:9002";
+//				         scoket=new WebSocket(url);
+//				        scoket.onopen = function() {
+//				            sendMessage('Login', '{"serName":"13677622344","PassWord":"a123456"}')
+//				        }
+//				        scoket.onmessage=function(res){
+//				           console.log(JSON.stringify(res));
+//				            var data=res.data;
+//				            var jsonData = JSON.parse(data);
+//				            var method = jsonData.Method;
+//				           alert(jsonData.Parameters.RealName)
+//				            alert(method);
+//				
+//				        }
+//				        scoket.onerror=function(res){
+//				            console.log(JSON.stringify(res))
+//				        }
+//				});
 			
   			tzdr.init.initHearListener();
   			tzdr.init.initButtomListener(true);

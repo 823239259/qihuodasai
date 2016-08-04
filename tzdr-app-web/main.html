@@ -17,6 +17,12 @@
     	}
     </style>
     <script>  
+    function showWindow(){
+			 	mui.openWindow({
+                			url: 'guide.html',
+                       		 id: 'guide.html'
+                	})
+			 }
     	mui.init();
     	//Android双击home键退出应用
     	var first = null;
@@ -29,11 +35,7 @@
 			 if(plus.storage.getItem("guide")==null){
 			 	
 			 plus.storage.setItem("guide","12");
-			 	mui.openWindow({
-                			url: 'guide.html',
-                       		 id: 'guide.html'
-                	})
-			 		
+			 setTimeout(showWindow,1);		
 			 	}else{
                 		var statusR =  document.getElementById("main_status");
                 		statusR.style.display = "block";
@@ -100,12 +102,8 @@
 					}
 					//获取最新大版本号
 					var newSub = newVer.substr(0,1);
-					alert(newVer);
-					alert(newSub);
 					//获取当前大版本号
 					var wgtVerSub = wgtVer.substr(0,1);
-					alert(wgtVer);
-					alert(wgtVerSub);
 					if(newSub!=wgtVerSub){//检测升级版本是否大版本还是小版本
 						if(!tzdr.is_appstore){//当前版本是否是苹果AppStore
 							//弹出系统提示对话框
