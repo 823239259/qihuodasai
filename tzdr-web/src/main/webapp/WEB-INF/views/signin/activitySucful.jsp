@@ -3,7 +3,7 @@
 <%@ include file="../common/common.jsp"%>
 <%@ include file="../common/import-artDialog-js.jspf"%>
 <%
-	String casServerLoginUrl="http"+"://localhost:8080/cas/login";//ConfUtil.getContext("SSO.casServer.loginUrl");
+	String casServerLoginUrl = ConfUtil.getContext("SSO.casServer.loginUrl");
 
 %>
 <c:set var="casServerLoginUrl" value="<%=casServerLoginUrl%>"></c:set>
@@ -62,12 +62,11 @@ function flushLoginTicket() {
 	    var cgdjs = setInterval(function(){
 	        djs--;
 	        $(".cg_djs").html(djs);
-           
 	        if(djs==0){
 	        	clearInterval(cgdjs);
-	            window.location.href = "${ctx}/user/account";
+				window.location.href="${ctx}/user/account";	        	
 	        }
-	    },1000); 
+	    },1000);
 	});
 </script>
 <style>
