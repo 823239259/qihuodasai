@@ -63,8 +63,8 @@ function flushLoginTicket() {
 	        $(".cg_djs").html(djs);
 	        if(djs==0){
 	        	clearInterval(cgdjs);
-	            window.location.href = "${ctx}/user/account";
 	            $("#loginForm").submit();
+	            window.location.href = "${ctx}/user/account";
 	        }
 	    },1000); 
 	});
