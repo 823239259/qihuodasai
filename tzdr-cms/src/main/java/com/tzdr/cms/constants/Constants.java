@@ -107,6 +107,7 @@ public class Constants {
 	 * 字符串间隔符*
 	 */
 	public static final String SEPERATOR_SEMICOLON  = ";";
+	
 	//支付状态
 	public static class PayStatus{
 		/**

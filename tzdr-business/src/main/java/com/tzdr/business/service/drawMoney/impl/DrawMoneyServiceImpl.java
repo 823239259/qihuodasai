@@ -860,4 +860,112 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList,WithdrawalDao
 		drawList.setNArea(secret);
 		super.update(drawList);
 	}
+
+
+	@Override
+	public boolean doGoWithdrawals(int source, WUser user, String money, String bankcard,
+			PaymentSupportBank paymentSupportBank, String ip, String orderId, int withdrawSetting) {
+		//人工审核数据
+		DrawMoneyData moneydata=drawMoneyDataService.getAduitMoneyByType("2",Double.valueOf(money));
+		//线下审核数据
+		DrawMoneyData linedata=drawMoneyDataService.getAduitMoneyByType("3",Double.valueOf(money));
+		double moneyval=0;
+		double maxAuditMoney=0;
+		String auditMoneyRang="";//审核金额范围
+		if(moneydata!=null){
+			moneyval=moneydata.getMinmoney();
+			auditMoneyRang=moneyval+"--"+moneydata.getMaxmoney();
+		}else if(linedata!=null){
+			maxAuditMoney=linedata.getMinmoney();	
+			auditMoneyRang=maxAuditMoney+"--"+linedata.getMaxmoney();
+		}
+		//提现手续费
+		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
+		Double handleFee = 0.00;
+		//提现金额
+		Double dmoney = Double.valueOf(money);
+		if(!StringUtil.isBlank(handleFeeStr)) {
+			handleFee = Double.valueOf(handleFeeStr);
+		}
+		DrawList drawList=new DrawList();
+		// 新增支付渠道
+		drawList.setSource(source);
+		drawList.setPaymentChannel(withdrawSetting);
+		drawList.setAddip(ip);
+		drawList.setUser(user);
+		drawList.setAddtime(new Date().getTime()/1000);
+		drawList.setMoney(dmoney);
+		drawList.setCard(bankcard);
+		drawList.setNo(orderId);
+		drawList.setFee(handleFee);//手续费2元
+		drawList.setName(user.getUserVerified().getTname());
+		drawList.setStatus((short)21);//提现处理中
+		drawList.setBank(paymentSupportBank.getBankName());
+		drawList.setSubbank(paymentSupportBank.getAbbreviation());
+		if(moneydata!=null){
+			drawList.setAuditId(moneydata.getId());
+			drawList.setRemark("后台开始审核提现金额，审核金额范围："+auditMoneyRang);
+			//发送短信
+			Map<String,String> map= new HashMap<String,String>();
+			map.put("account", user.getMobile());
+			map.put("money", money);
+			new SMSSenderThread(user.getMobile(),
+					"draw.money.template", map).start();
+		}else if(linedata!=null){
+			drawList.setBelowLine(1);
+			drawList.setRemark("后台开始线下审核提现金额，审核金额范围："+auditMoneyRang);
+			//发送短信
+			Map<String,String> map= new HashMap<String,String>();
+			map.put("account", user.getMobile());
+			map.put("money", money);
+			new SMSSenderThread(user.getMobile(),
+					"draw.money.template", map).start();
+		}else {
+			drawList.setUpdateTime(Dates.getCurrentLongDate());
+			drawList.setUpdateUser("system");
+			drawList.setIsAudit(1);
+			drawList.setRemark("调用提现接口数据插入");
+		}
+		getEntityDao().save(drawList);
+		//更新user的冻结金额
+		Double frzBal=user.getFrzBal()==null?0:user.getFrzBal();//冻结金额
+		Double acctBal=user.getAcctBal()==null?0:user.getAcctBal();
+		Double avlBal=user.getAvlBal()==null?0:user.getAvlBal();
+		double newfrzbal=BigDecimalUtils.add(frzBal, dmoney);
+		acctBal=BigDecimalUtils.sub(acctBal, dmoney);
+		avlBal=BigDecimalUtils.sub(avlBal, dmoney);
+		user.setFrzBal(newfrzbal);
+		user.setAvlBal(avlBal);
+		this.wUserService.updateUser(user);
+		//插入充值记录表
+		UserFund fund=new UserFund();
+		fund.setMoney(-drawList.getMoney());
+		fund.setType(2);//取现
+		fund.setNo(orderId);
+		fund.setUid(user.getId());
+		fund.setFreeze(newfrzbal);//冻结金额
+		fund.setAmount(avlBal);
+		fund.setPayStatus((short)1);
+		//根据是否收取手续费 记录相应备注
+		if(BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+			fund.setRemark(DateUtils.dateTimeToString(new Date(), 
+					"yyyy-MM-dd HH:mm:ss")+"提现"+drawList.getMoney()+"元；提现手续费"+handleFee+"元；"
+							+ "实际到账金额"+BigDecimalUtils.subRound(drawList.getMoney(), handleFee)+"元");
+		} else {
+			fund.setRemark(DateUtils.dateTimeToString(new Date(), 
+					"yyyy-MM-dd HH:mm:ss")+"提现"+drawList.getMoney()+"元；提现手续费0元；实际到账金额"+drawList.getMoney()+"元");
+		}
+		fund.setAddtime(new Date().getTime()/1000);
+		fund.setUptime(new Date().getTime()/1000);
+		userFundService.save(fund);
+		//获取设置的取款金额，如果取款金额大于设置的取款金额后台需要审核
+		DrawMoneyData drawMaxMoney=drawMoneyDataService.getAduitMoneyByType("1");
+		if(drawMaxMoney != null){
+			Double maxMoney=drawMaxMoney.getMaxmoney();
+			if(maxMoney > dmoney){
+				//TODO 开始提现逻辑
+			}
+		}
+		return false;
+	}
 }

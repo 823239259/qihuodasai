@@ -103,7 +103,7 @@
 						<label>操盘须知：</label> <span style="color:#333; font-size:16px;">新华富时A50指数当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label> <span><i>06:05-04:55</i></span>
+						<label>交易时间：</label> <span><i>09:05-16:25，17:20-01:50</i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+					<p><a href="${ctx}/help?tab=rule&leftMenu=0" style="color:#fc3;" target="_blank">查看富时A50操盘细则,</a>若还有疑问，请联系客服：400-852-8008</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
 						<span>我已阅读并同意<a href="${ctx}/static/ftse/a50.html" target="_blank">《富时A50操盘合作协议》</a></span>
@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<!--操盘须知  -->
-			<div class="capital_rule">
+			<%-- <div class="capital_rule">
 		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
 		        <h2>富时A50指数介绍</h2>
 		        <p>为满足中国国内投资者以及合格境外机构投资者(QFII)需求所推出的实时可交易指数，将通过电子交易平台“SGXQUEST”进行，以美元标价进行交易结算。新华富时中国A50指数包含了中国A股市场市值最大的50家公司，其总市值占A股总市值的33%，是最能代表中国A股市场的指数，许多国际投资者把这一指数看作是衡量中国市场的精确指标。</p>
@@ -232,7 +232,7 @@
 		          </tr>
 		        </table>
 		
-		    </div>
+		    </div> --%>
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

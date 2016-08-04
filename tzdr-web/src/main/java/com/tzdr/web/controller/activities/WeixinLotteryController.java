@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.business.service.activity.ActivityKudoService;
@@ -47,7 +48,7 @@ public class WeixinLotteryController {
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		return ViewConstants.ActiviesJsp.WEIXIN_LOTTERY_LOGIN;
 	}
-
+	
 	/**
 	 * 抽奖页面
 	 * 
@@ -59,7 +60,6 @@ public class WeixinLotteryController {
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
 		return ViewConstants.ActiviesJsp.WEIXIN_LOTTERY_INDEX;
 	}
-
 	/**
 	 * 抽奖页面-拦截登录
 	 * 

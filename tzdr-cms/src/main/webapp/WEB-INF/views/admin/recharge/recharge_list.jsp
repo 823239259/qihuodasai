@@ -191,7 +191,7 @@
                 <td>
                 <input class="easyui-combobox" 
                 id="bankId" type="text" name="bankname" 
-                data-options="valueField:'id',required:true,textField:'text',url:'${ctx}/admin/recharge/dataMapCombobox?key=bankname&includes=ccb,icbc,abc,boc'" 
+                data-options="valueField:'id',required:true,textField:'text',url:'${ctx}/admin/recharge/dataMapCombobox?key=bankname&includes=ccb,icbc,abc,boc,cmb'" 
                 />
                 </td>
             </tr>

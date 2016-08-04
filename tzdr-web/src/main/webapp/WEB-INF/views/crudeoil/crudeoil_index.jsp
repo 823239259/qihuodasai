@@ -103,7 +103,7 @@
 						<label>操盘须知：</label> <span style="color:#333; font-size:16px;">美国轻质原油期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label><span><i>09:20-16:10,17：05-23:40</i></span>
+						<label>交易时间：</label><span><i>06:05-04:55</i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+					<p><a href="${ctx}/help?tab=rule&leftMenu=8" style="color:#fc3;" target="_blank">查看国际原油操盘细则,</a>若还有疑问，请联系客服：400-852-8008</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
 						<span>我已阅读并同意<a href="${ctx}/static/crudeoil/crudeoil.html" target="_blank">《国际原油操盘合作协议》</a></span>
@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<!--操盘须知  -->
-			<div class="capital_rule">
+			<%-- <div class="capital_rule">
 		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
 		        <h2>国际原油介绍：</h2>
 		        <p>在石油期货合约之中，原油期货是交易量最大的品种，我们推出的国际原油是投资世界交易量最大、影响力最广泛的纽约商业交易所轻原油期货合约。该合约规格为每手1000桶，报价单位为美元/桶，价格波动最小单位为1美分，当初一推出后交易活跃，为有史以来最成功的国际商品期货合约，它的成交价格成为国际石油市场关注的焦点。国际原油投资特点：1，全球性市场，操作简单  2，T+0模式，每天可多次交易，增加获利几率  3，杠杆交易原理，以小博大  4，几乎24小时交易，时间自由   5，无涨停板和交割时间限制，特别适合做短线投资。</p>
@@ -228,7 +228,7 @@
 		          </tr>
 		        </table>
 		
-		    </div>
+		    </div> --%>
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

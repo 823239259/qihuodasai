@@ -191,6 +191,8 @@ public class UOutDiskController {
 					st.setMbTranFees(outDiskPrice.get(5).getPrice());
 					st.setDaxTranFees(outDiskPrice.get(6).getPrice());
 					st.setNikkeiTranFees(outDiskPrice.get(7).getPrice());
+					st.setLhsiTranFees(outDiskPrice.get(8).getPrice());
+					st.setAgTranFees(outDiskPrice.get(9).getPrice());
 					//审核中
 					st.setStateType(1);
 					st.setBusinessType(8); 

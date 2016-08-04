@@ -5,7 +5,7 @@ body {font-family:'微软雅黑'; background: #fff;}
 ul,li,ol,i,em { font-style: normal; list-style: none;}
  a{text-decoration:none;}
 
-.capital { width: 100%; height: auto; background: #fff; padding: 15px 0 50px; margin: 0 auto;  border: none; border-bottom: 1px solid #e3e3e3;}
+.capital { width: 100%; height: auto; background: #fff; padding: 15px 0 50px; margin: 0 auto;  border: none;}
 .capital_ctn { width: 998px; height: auto; border: 1px solid #e1e1e1; background: #fff; margin: 0 auto; padding: 30px 0 30px;}
 .cp_main { width: 545px; height: auto; float: left;}
 .cp_m_ctn { width: 100%; height: auto;}

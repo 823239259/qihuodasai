@@ -26,4 +26,10 @@ public interface GeneralizeChannelService extends BaseService<GeneralizeChannel>
     public Map<String,List<String>> getList();
     
     public JsonResult delete(GeneralizeChannel generalizeChannel);
+    /**
+     * 获取渠道
+     * @param params
+     * @return
+     */
+    public List<GeneralizeChannel> findByParamAndDeletedFalse(String params);
 }

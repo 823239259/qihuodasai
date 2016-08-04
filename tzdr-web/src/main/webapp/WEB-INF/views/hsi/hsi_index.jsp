@@ -103,7 +103,7 @@
 						<label>操盘须知：</label><span style="color:#333; font-size:16px;">香港恒指期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label><span><i style="font-size:18px;">9:05-16:25，17:20-01:50</i></span>
+						<label>交易时间：</label><span><i style="font-size:18px;">09:20—16:25，17:20—23:40</i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+					<p><a href="${ctx}/help?tab=rule&leftMenu=9" style="color:#fc3;" target="_blank">查看恒指期货操盘细则,</a>若还有疑问，请联系客服：400-852-8008</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
 						<span>我已阅读并同意<a href="${ctx}/static/hsi/hsi.html" target="_blank">《恒指期货操盘合作协议》</a></span>
@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<!--操盘须知  -->
-			<div class="capital_rule">
+			<!--<div class="capital_rule">
 		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
 		        <h2>恒指期货介绍</h2>
 		        <p>香港股市价格的重要指标，指数由若干只成份股（即蓝筹股）市值计算出来的，代表了香港交易所所有上市公司的12个月平均市值涵盖率的63%，恒生指数由恒生银行下属恒生指数有限公司负责计算及按季检讨，公布成份股调整。该指数于1969年11月24日首次公开发布。</p>
@@ -228,7 +228,7 @@
 		          </tr>
 		        </table>
 		
-		    </div>
+		    </div> -->
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

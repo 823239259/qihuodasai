@@ -25,6 +25,7 @@ public class GeneralizeVisit  extends BaseEntity {
 	
 	private String generalizeId;
 	
+	private String activity;
 	@Column(name="clieant_ip")
 	public String getClieantIp() {
 		return this.clieantIp;
@@ -78,4 +79,13 @@ public class GeneralizeVisit  extends BaseEntity {
 	public void setGeneralizeId(String generalizeId) {
 		this.generalizeId = generalizeId;
 	}
+	@Column(name="activity")
+	public String getActivity() {
+		return activity;
+	}
+
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+	
 }

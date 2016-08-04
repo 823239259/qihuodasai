@@ -27,7 +27,7 @@
 /**
 蒙版信息控件
 用法：
-1.引用 mask.css
+1.引用 .css
 2.引用 mask.js
 3.调用方法
 var obj=new MaskControl();

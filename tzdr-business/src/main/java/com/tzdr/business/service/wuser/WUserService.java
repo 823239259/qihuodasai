@@ -370,4 +370,10 @@ public interface WUserService  extends BaseService<WUser>{
 	 * @return
 	 */
 	public void lowerUserRebates(String mobile);
+	/**
+	 * 用户抽奖更新用户信息
+	 * @param money
+	 * @param uid
+	 */
+	public boolean luckDrawUpdateUser(Double money,String uid,String rewardId);
 }

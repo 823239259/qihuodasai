@@ -80,6 +80,26 @@ public class WuserListVo implements Serializable {
 	@SqlColumn
 	private Integer source;
 	private String sourceName;
+	@SqlColumn
+	private String channel;
+	@SqlColumn
+	private String keyword;
+	
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	public String getId() {
 		return id;

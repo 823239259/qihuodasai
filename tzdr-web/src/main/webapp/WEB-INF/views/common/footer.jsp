@@ -65,16 +65,17 @@
                 <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
                 <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
             </ul>
-           <%--  <ul class="follow">
+            <ul class="follow">
                 <li>关注我们：</li>
-                <li><a href="http://www.weibo.com/shxhtzdr" target="_blank" class="weibo"></a></li>
-                <li class="erweima" style="position: relative;">
-                	<a href="javascript: void(0);" target="_blank" class="weixin"></a>
-		            <div class="erweima-wxtk" style="display: none;">
-		                <img src="${ctx}/static/images/common-new/erweima.png">
-		            </div>
+                <li><a href="http://weibo.com/weishengjinrong" target="_blank" class="weibo"></a></li>
+                <li class="erweima" style="position: relative; margin-right: 20px;">
+                	<a href="javascript: void(0);" target="_blank" class="weixin">
+                		<div class="erweima-wxtk" style="display: none;">
+		                	<img src="${ctx}/static/images/common-new/erweima.png">
+		            	</div>
+                	</a>
                 </li>
-            </ul> --%>
+            </ul>
         </div>
         <div class="copyright_contact">
             <h3>客服热线</h3>
