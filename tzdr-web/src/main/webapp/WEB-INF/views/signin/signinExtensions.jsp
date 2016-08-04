@@ -57,7 +57,7 @@
 <div class="ks_header">
 	<div class="ks_content">
 		<a class="logo" href="http://www.dktai.com">
-			<img src="http://localhost:8080/tzdr-web/static/images/common-new/new_logo.png" title="维胜" alt="维胜">
+			<img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜">
 		</a>
 		<p>
 			全国客服热线<span>400</span>-<span>852</span>-<span>8008</span>
