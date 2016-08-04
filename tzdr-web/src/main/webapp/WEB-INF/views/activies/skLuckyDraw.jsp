@@ -179,6 +179,10 @@
 		.anniu a {margin-left: 30px;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
 		.money {color:#fc3;}
 		.navtitle .nava {width: 550px; text-align: center;}
+		.tck01 {width: 350px;height: 160px;}
+		.anniuzu:hover{background: #fe3; cursor: pointer;}
+		.anniu .anniuqx {background: #666; color: #fff;}
+		.anniu .anniuqx:hover {background: #333; cursor: pointer;}
 	</style>
 </head>
 <body>
@@ -193,7 +197,7 @@
 			<div>系统已经通过现金红包的方式存入您的账户！</div>
 		</div>
 		<div class="anniu">
-	 		<a href="${ctx}/user/account" onclick="javascript:closeDiv('kszj')">查看账户</a>
+	 		<a class="anniuzu" href="${ctx}/user/account" onclick="javascript:closeDiv('kszj')">查看账户</a>
 	 	</div> 
 	</div>
 	<div class="tck01" id="zp" style="display: none;">
@@ -204,7 +208,7 @@
 			<div>您暂时没有抽奖机会！赶紧去操盘吧</div>
 		</div>
 		<div class="anniu">
-	 		<a href="${ctx}/ftse/index" onclick="javascript:closeDiv('zp')">立即操盘</a>
+	 		<a class="anniuzu" href="${ctx}/ftse/index" onclick="javascript:closeDiv('zp')">立即操盘</a>
 	 	</div> 
 	</div>
 	<div class="tck01" id="zc" style="display: none;">
@@ -215,8 +219,8 @@
 			<div>你还未登录，赶紧去登陆吧!</div>
 		</div>
 		<div class="anniu">
-	 		<a href="${ctx}/user/account">立即登录</a>
-	 		<a  onclick="javascript:closeDiv('zc')">取消</a>
+	 		<a class="anniuzu" href="${ctx}/user/account">立即登录</a>
+	 		<a class="anniuqx"  onclick="javascript:closeDiv('zc')">取消</a>
 	 	</div> 
 	</div>
 </div>

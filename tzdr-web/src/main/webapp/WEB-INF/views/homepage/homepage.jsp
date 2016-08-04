@@ -40,7 +40,7 @@
 	<style type="text/css">
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
-	.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+	#shouye {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 	.left_hidden{float: left; width: 195px; }
 	#left_xiangqing{background: #333; float: left;height: 508px;  width: 195px; position: relative;overflow: hidden;}
     #left_xiangqing .w_content .left_hidden{float: left; width: 195px;}
