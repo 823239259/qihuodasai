@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.tzdr.business.service.extension.ActivityRewardService;
+import com.tzdr.common.config.ActivityConfig;
 import com.tzdr.common.utils.SpringUtils;
 
 
@@ -18,9 +19,11 @@ public class LossFreeRebatesJob extends QuartzJobBean{
 	private Logger logger = LoggerFactory.getLogger(LossFreeRebatesJob.class);
 	@Override
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
-		ActivityRewardService activityRewardService = SpringUtils.getBean(ActivityRewardService.class);
-		activityRewardService.doSaveActivityReward(getStartTime(), getEndTime());
-		logger.info(getStartTime()+"-"+getEndTime()+"奖励执行完毕");
+		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+			ActivityRewardService activityRewardService = SpringUtils.getBean(ActivityRewardService.class);
+			activityRewardService.doSaveActivityReward(getStartTime(), getEndTime());
+			logger.info(getStartTime()+"-"+getEndTime()+"奖励执行完毕");
+		}
 	}
 	private static Long getStartTime(){
 		long current = getCalendar();

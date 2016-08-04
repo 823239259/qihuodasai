@@ -1,4 +1,7 @@
 package com.tzdr.cms.controller;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +27,7 @@ import com.tzdr.cms.constants.Constants;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
 import com.tzdr.common.baseservice.BaseService;
+import com.tzdr.common.config.ActivityConfig;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.entity.DataMap;
 
@@ -75,17 +80,39 @@ public class DataDictionaryController extends BaseCmsController<DataMap>
 	public void setResourceIdentity(String resourceIdentity) {
 		super.setResourceIdentity("sys:system:datamap");
 	}
-	
+	@RequestMapping(value = "updateActivityDate",method =  RequestMethod.POST)
+	@ResponseBody
+	public String updateActivityDate(HttpServletRequest request){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:ss");
+		//更新活动时间
+		List<DataMap> dataMapsStart = dataMapService.findByTypeKey("activityOnlineStartTime");
+		if(dataMapsStart != null && dataMapsStart.size() > 0){
+			String dataTime =  dataMapsStart.get(0).getValueName();
+			try {
+				List<DataMap> dataMapsEnd = dataMapService.findByTypeKey("activityOnlineEndTime");
+				if(dataMapsEnd != null && dataMapsEnd.size() > 0){
+					String dateEndTime = dataMapsEnd.get(0).getValueName();
+					Date endDate = df.parse(dateEndTime);
+					Date startDate =  df.parse(dataTime);
+					ActivityConfig.activity_onLineEndTime = endDate.getTime();
+					ActivityConfig.activity_onLineStartTime = startDate.getTime();
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 	@RequestMapping(value="list")
 	public String list(HttpServletRequest  request){
 		return ViewConstants.OpertinalConfigViewJsp.DATA_MAP_LIST_VIEW;
 	}
-
 	
 	@RequestMapping(value = "/edit")
 	public String edit(HttpServletRequest request,@RequestParam("fromType") String fromType,
 			@RequestParam(value="id",required=false) String id) throws Exception 
 	{
+		//更新活动时间
 		request.setAttribute("fromType",fromType);
 		if (StringUtil.equals(fromType,Constants.ADD)){
 			return ViewConstants.OpertinalConfigViewJsp.DATA_MAP_EDIT_VIEW;			

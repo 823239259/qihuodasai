@@ -442,5 +442,20 @@ var baseUtils={
 					eyWindow.walert("错误提示", "系统异常，错误类型textStatus: "+textStatus+",异常对象errorThrown: "+errorThrown, 'error');
 				}
 			});
+		},
+		updateActivityDate:function(url,iframe){
+			ajaxPost({
+				url : basepath + url,
+				cache : false,
+				async : false,
+				data : $("#addForm").serialize(),
+				success : function(data) {
+						eyWindow.walert("更新成功", "更新活动时间成功", 'info');
+						return;
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					eyWindow.walert("错误提示", "系统异常，错误类型textStatus: "+textStatus+",异常对象errorThrown: "+errorThrown, 'error');
+				}
+			});
 		}
 }

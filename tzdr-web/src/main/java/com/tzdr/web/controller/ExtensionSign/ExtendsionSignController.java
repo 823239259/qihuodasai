@@ -25,6 +25,7 @@ import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.generalize.GeneralizeService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.config.ActivityConfig;
 import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.StringCodeUtils;
@@ -89,18 +90,20 @@ public class ExtendsionSignController {
 	public String extendSignView(ModelMap modelMap, HttpServletRequest request,
 			@RequestParam(value = "channelCode", required = false) String channelCode,
 			@RequestParam(value = "activity", required = false) String activity) {
-		GeneralizeVisit generalizeVisit = new GeneralizeVisit();
-		String ip = IpUtils.getIpAddr(request);
-		generalizeVisit.setClieantIp(ip);
-		generalizeVisit.setCreatedate(new Date().getTime() / 1000);
-		generalizeVisit.setDeleted(false);
-		generalizeVisit.setCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
-		generalizeVisit.setGeneralizeId(null);
-		generalizeVisit.setParam(channelCode);
-		generalizeVisit.setUrl(request.getRequestURL().toString() + "?" + request.getQueryString());
-		generalizeVisit.setActivity(ExtensionConstants.ACTIVITY_TYPE);
-		generalizeService.saveGeneralizeVisit(generalizeVisit);
-		modelMap.put("channelCode", channelCode);
+		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+			GeneralizeVisit generalizeVisit = new GeneralizeVisit();
+			String ip = IpUtils.getIpAddr(request);
+			generalizeVisit.setClieantIp(ip);
+			generalizeVisit.setCreatedate(new Date().getTime() / 1000);
+			generalizeVisit.setDeleted(false);
+			generalizeVisit.setCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
+			generalizeVisit.setGeneralizeId(null);
+			generalizeVisit.setParam(channelCode);
+			generalizeVisit.setUrl(request.getRequestURL().toString() + "?" + request.getQueryString());
+			generalizeVisit.setActivity(ExtensionConstants.ACTIVITY_TYPE);
+			generalizeService.saveGeneralizeVisit(generalizeVisit);
+			modelMap.put("channelCode", channelCode);
+		}
 		return ViewConstants.SignInViewJsp.EXTENDSIONSIGN_VEIW;
 	}
 
@@ -135,97 +138,99 @@ public class ExtendsionSignController {
 			String code, String password, String parentGeneralizeId, String yzmCode, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
-		if (wUserService.getWUserByMobile(mobile) != null) { // 判断手机号码是否已存在
-			jsonResult.setMessage("mobileIsExist");
-			return jsonResult;
-		}
-		SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile); // 获取验证码信息
-		if (securityCode == null || StringUtil.isBlank(code) || !code.equals(securityCode.getSecurityCode())) { // 判断验证码是否正确
-			jsonResult.setMessage("codeError");
-			return jsonResult;
-		} else if ((new Date().getTime() / 1000) - (securityCode.getCreatedate()) > 5 * 60) { // 判断验证码是否失效
-			jsonResult.setMessage("codeTimeOut");
-			return jsonResult;
-		} else if (!StringUtil.isBlank(parentGeneralizeId)
-				&& wUserService.findByGeneralizeId(parentGeneralizeId) == null) {
-			jsonResult.setMessage("generalizeIdError");
-			return jsonResult;
-		}
-
-		WUser wUser = new WUser(); // 创建注册对象信息
-		wUser.setSource(source == null ? 1 : source);
-		WUser platformDefaultWuser = wUserService.queryByUserType(Constants.TZDR_DEFAULT_USERTYPE).get(0); // 获取平台默认用户
-		wUser.setUserType("0");
-		wUser.setParentNode(platformDefaultWuser);
-		wUser.setPassword(password);
-		wUser.setMobile(mobile);
-		wUser.setCtime((new Date().getTime() / 1000));
-		wUser.setRegIp(IpUtils.getIpAddr(request));
-		GeneralizeChannel generalizeChannel = getChannel(channelCode);
-		if (generalizeChannel != null) {
-			String channelName = generalizeChannel.getTypeThreeTitle();
-			if (channelName == null || channelName.length() <= 0) {
-				channelName = generalizeChannel.getTypeTwoTitle();
+		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+			if (wUserService.getWUserByMobile(mobile) != null) { // 判断手机号码是否已存在
+				jsonResult.setMessage("mobileIsExist");
+				return jsonResult;
+			}
+			SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile); // 获取验证码信息
+			if (securityCode == null || StringUtil.isBlank(code) || !code.equals(securityCode.getSecurityCode())) { // 判断验证码是否正确
+				jsonResult.setMessage("codeError");
+				return jsonResult;
+			} else if ((new Date().getTime() / 1000) - (securityCode.getCreatedate()) > 5 * 60) { // 判断验证码是否失效
+				jsonResult.setMessage("codeTimeOut");
+				return jsonResult;
+			} else if (!StringUtil.isBlank(parentGeneralizeId)
+					&& wUserService.findByGeneralizeId(parentGeneralizeId) == null) {
+				jsonResult.setMessage("generalizeIdError");
+				return jsonResult;
+			}
+	
+			WUser wUser = new WUser(); // 创建注册对象信息
+			wUser.setSource(source == null ? 1 : source);
+			WUser platformDefaultWuser = wUserService.queryByUserType(Constants.TZDR_DEFAULT_USERTYPE).get(0); // 获取平台默认用户
+			wUser.setUserType("0");
+			wUser.setParentNode(platformDefaultWuser);
+			wUser.setPassword(password);
+			wUser.setMobile(mobile);
+			wUser.setCtime((new Date().getTime() / 1000));
+			wUser.setRegIp(IpUtils.getIpAddr(request));
+			GeneralizeChannel generalizeChannel = getChannel(channelCode);
+			if (generalizeChannel != null) {
+				String channelName = generalizeChannel.getTypeThreeTitle();
 				if (channelName == null || channelName.length() <= 0) {
-					channelName = generalizeChannel.getTypeOneTitle();
+					channelName = generalizeChannel.getTypeTwoTitle();
+					if (channelName == null || channelName.length() <= 0) {
+						channelName = generalizeChannel.getTypeOneTitle();
+					}
+				}
+				wUser.setChannel(channelName); // 设置渠道
+				wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
+			}
+			if (!StringUtil.isBlank(parentGeneralizeId)) {
+				WUser generalizeWuser = null;
+				if (!StringUtil.isBlank(parentGeneralizeId)) {
+					generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId);
+				}
+				if (generalizeWuser != null) {
+					wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null ? 0.00
+							: generalizeWuser.getSubordinateDefaultRebate());
+					wUser.setParentNode(generalizeWuser);
 				}
 			}
-			wUser.setChannel(channelName); // 设置渠道
-			wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
-		}
-		if (!StringUtil.isBlank(parentGeneralizeId)) {
-			WUser generalizeWuser = null;
-			if (!StringUtil.isBlank(parentGeneralizeId)) {
-				generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId);
+			wUser.setLastLoginTime((new Date().getTime() / 1000));
+			String ip = IpUtils.getIpAddr(request);
+			wUser.setLastLoginIp(ip);
+			wUser.setRegCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
+			synchronized (lock) {
+				wUserService.saveWUser(wUser);
 			}
-			if (generalizeWuser != null) {
-				wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null ? 0.00
-						: generalizeWuser.getSubordinateDefaultRebate());
-				wUser.setParentNode(generalizeWuser);
+	
+			// p2p 同步注册
+			new RegistP2pThread(mobile, password, wUser.getLoginSalt()).start();
+			wUser = wUserService.login(mobile, password); // 登录
+			UserSessionBean userSessionBean = new UserSessionBean();
+			userSessionBean.setId(wUser.getId());
+			userSessionBean.setEmail(wUser.getEmail());
+			userSessionBean.setMobile(wUser.getMobile());
+			userSessionBean.setUname(wUser.getUname());
+			request.getSession().setAttribute(Constants.TZDR_USER_SESSION, userSessionBean); // 保存都信息
+			// 设置cookie
+			ResourceBundle prop = ResourceBundle.getBundle("webconf");
+			String cookieCodestr = prop.getString("cookieconf");
+			String domain = prop.getString("cookiedomain");
+			Long nowdate = new Date().getTime() / 1000;
+			String cookieval = wUser.getMobile() + "," + nowdate + "," + cookieCodestr;
+			cookieval = Base64.encodeToString(cookieval);
+			Cookie mainCookie = new Cookie("tzdrUser", cookieval);
+			mainCookie.setDomain(domain);
+			mainCookie.setPath("/");
+			mainCookie.setMaxAge(60 * 30);
+			response.addCookie(mainCookie);
+	
+			String userName = null; // 用户名称
+			if (!StringUtil.isBlank(wUser.getMobile())) { // 手机号码加*
+				String userMobile = wUser.getMobile();
+				userName = StringCodeUtils.buildMobile(userMobile);
 			}
+			request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USERNAME_SESSION, userName);
+			Map<Object, Object> data = new HashMap<Object, Object>();
+			data.put("volumeNum", wUser.getVolumeNum());
+			data.put("volumePrice", wUser.getVolumePrice());
+			data.put("key", Base64.encodeToString(wUser.getId()));
+			data.put("userName", userName);
+			jsonResult.setData(data);
 		}
-		wUser.setLastLoginTime((new Date().getTime() / 1000));
-		String ip = IpUtils.getIpAddr(request);
-		wUser.setLastLoginIp(ip);
-		wUser.setRegCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
-		synchronized (lock) {
-			wUserService.saveWUser(wUser);
-		}
-
-		// p2p 同步注册
-		new RegistP2pThread(mobile, password, wUser.getLoginSalt()).start();
-		wUser = wUserService.login(mobile, password); // 登录
-		UserSessionBean userSessionBean = new UserSessionBean();
-		userSessionBean.setId(wUser.getId());
-		userSessionBean.setEmail(wUser.getEmail());
-		userSessionBean.setMobile(wUser.getMobile());
-		userSessionBean.setUname(wUser.getUname());
-		request.getSession().setAttribute(Constants.TZDR_USER_SESSION, userSessionBean); // 保存都信息
-		// 设置cookie
-		ResourceBundle prop = ResourceBundle.getBundle("webconf");
-		String cookieCodestr = prop.getString("cookieconf");
-		String domain = prop.getString("cookiedomain");
-		Long nowdate = new Date().getTime() / 1000;
-		String cookieval = wUser.getMobile() + "," + nowdate + "," + cookieCodestr;
-		cookieval = Base64.encodeToString(cookieval);
-		Cookie mainCookie = new Cookie("tzdrUser", cookieval);
-		mainCookie.setDomain(domain);
-		mainCookie.setPath("/");
-		mainCookie.setMaxAge(60 * 30);
-		response.addCookie(mainCookie);
-
-		String userName = null; // 用户名称
-		if (!StringUtil.isBlank(wUser.getMobile())) { // 手机号码加*
-			String userMobile = wUser.getMobile();
-			userName = StringCodeUtils.buildMobile(userMobile);
-		}
-		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USERNAME_SESSION, userName);
-		Map<Object, Object> data = new HashMap<Object, Object>();
-		data.put("volumeNum", wUser.getVolumeNum());
-		data.put("volumePrice", wUser.getVolumePrice());
-		data.put("key", Base64.encodeToString(wUser.getId()));
-		data.put("userName", userName);
-		jsonResult.setData(data);
 		return jsonResult;
 	}
 
@@ -236,9 +241,11 @@ public class ExtendsionSignController {
 	 */
 	@RequestMapping(value = "/extensionSignSuc", method = RequestMethod.GET)
 	public String extensionSignSucView(ModelMap modelMap,HttpServletRequest  request) {
-		modelMap.put("islogin", true);
-		modelMap.put("m", request.getParameter("m"));
-		modelMap.put("p", request.getParameter("p"));
+		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+			modelMap.put("islogin", true);
+			modelMap.put("m", request.getParameter("m"));
+			modelMap.put("p", request.getParameter("p"));
+		}
 		return ViewConstants.SignInViewJsp.EXTENDSION_SUCCESS_FUL_VEIW;
 	}
 
@@ -252,21 +259,23 @@ public class ExtendsionSignController {
 	@RequestMapping(value = "/luckDraw", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult luckDraw(@RequestParam("money") Double money, HttpServletRequest request,@RequestParam("rewardId")String rewardId) {
-		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
-				.getAttribute(Constants.TZDR_USER_SESSION);
-		String id = userSessionBean.getId();
 		JsonResult resultJson = null;
-		if (money > 0) {
-			boolean flag = wUserService.luckDrawUpdateUser(money, id,rewardId);
-			if (flag) {
-				resultJson = new JsonResult("领取奖励成功，奖金已自动发放到账户余额");
-				resultJson.appendData("result", true);
+		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+					.getAttribute(Constants.TZDR_USER_SESSION);
+			String id = userSessionBean.getId();
+			if (money > 0) {
+				boolean flag = wUserService.luckDrawUpdateUser(money, id,rewardId);
+				if (flag) {
+					resultJson = new JsonResult("领取奖励成功，奖金已自动发放到账户余额");
+					resultJson.appendData("result", true);
+				} else {
+					resultJson = new JsonResult("领取奖励失败");
+					resultJson.appendData("result", false);
+				}
 			} else {
-				resultJson = new JsonResult("领取奖励失败");
-				resultJson.appendData("result", false);
+				resultJson = new JsonResult("金额错误");
 			}
-		} else {
-			resultJson = new JsonResult("金额错误");
 		}
 		return resultJson;
 	}
@@ -282,60 +291,62 @@ public class ExtendsionSignController {
 	@RequestMapping(value = "/validationTip", method = RequestMethod.POST)
 	public JsonResult validationTip(HttpServletRequest request,
 			@RequestParam(value = "activity", required = false) String activity) {
-		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
-				.getAttribute(Constants.TZDR_USER_SESSION);
 		JsonResult resultJson = new JsonResult();
-		if (userSessionBean == null) {
-			resultJson.appendData("islogin", false);
-			return resultJson;
-		}
-		String id = userSessionBean.getId();
-		// 目前活动初始化，默认001
-		activity = ExtensionConstants.ACTIVITY_TYPE;
-		Integer luck = 0;// 是否可以抽奖
-		Integer luckNum = 0;// 抽奖次数
-		Integer subsidy = 0;// 是否有补贴
-		Integer lucktip = 0;// 抽奖是否需要提示
-		Integer subsidytip = 0;// 补贴是否需要提示
-		Double subsidymoney = 0.00;// 补贴的金额
-		Integer index = 0;
-		Integer money = 0 ;
-		// 查询用户是否还有抽奖机会
-		ActivityReward activityReward = activityRewardService.findByUidAndActivity(id, activity, false,
-				ExtensionConstants.REWARD_TYPE_LUCK_DRAW);
-		// 查询是否还有补贴的机会
-		List<ActivityReward> rewards = activityRewardService.doGetActivitySubsidy(id, activity, true,
-				ExtensionConstants.REWARD_TYPE_SUBSIDY, false);
-		if (activityReward != null) {
-			luck = 1;
-			luckNum = 1;
-			index = this.PercentageRandom();
-			money = this.comperTo(index);
-			activityReward.setMoney((double)money);
-			activityRewardService.doUpdateReward(activityReward);
-			if (!activityReward.getIstip()) {
-				lucktip = 1;
+		if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+					.getAttribute(Constants.TZDR_USER_SESSION);
+			if (userSessionBean == null) {
+				resultJson.appendData("islogin", false);
+				return resultJson;
 			}
-		}
-		if (rewards != null) {
-			if (rewards.size() > 0) {
-				subsidytip = 1;
-				subsidy = 1;
+			String id = userSessionBean.getId();
+			// 目前活动初始化，默认001
+			activity = ExtensionConstants.ACTIVITY_TYPE;
+			Integer luck = 0;// 是否可以抽奖
+			Integer luckNum = 0;// 抽奖次数
+			Integer subsidy = 0;// 是否有补贴
+			Integer lucktip = 0;// 抽奖是否需要提示
+			Integer subsidytip = 0;// 补贴是否需要提示
+			Double subsidymoney = 0.00;// 补贴的金额
+			Integer index = 0;
+			Integer money = 0 ;
+			// 查询用户是否还有抽奖机会
+			ActivityReward activityReward = activityRewardService.findByUidAndActivity(id, activity, false,
+					ExtensionConstants.REWARD_TYPE_LUCK_DRAW);
+			// 查询是否还有补贴的机会
+			List<ActivityReward> rewards = activityRewardService.doGetActivitySubsidy(id, activity, true,
+					ExtensionConstants.REWARD_TYPE_SUBSIDY, false);
+			if (activityReward != null) {
+				luck = 1;
+				luckNum = 1;
+				index = this.PercentageRandom();
+				money = this.comperTo(index);
+				activityReward.setMoney((double)money);
+				activityRewardService.doUpdateReward(activityReward);
+				if (!activityReward.getIstip()) {
+					lucktip = 1;
+				}
 			}
-			for (ActivityReward reward : rewards) {
-				subsidymoney += reward.getMoney();
+			if (rewards != null) {
+				if (rewards.size() > 0) {
+					subsidytip = 1;
+					subsidy = 1;
+				}
+				for (ActivityReward reward : rewards) {
+					subsidymoney += reward.getMoney();
+				}
 			}
+			resultJson.appendData("luck", luck);
+			resultJson.appendData("luckNum", luckNum);
+			resultJson.appendData("lucktip", lucktip);
+			resultJson.appendData("subsidy", subsidy);
+			resultJson.appendData("subsidyMoney", subsidymoney);
+			resultJson.appendData("subsidytip", subsidytip);
+			resultJson.appendData("islogin", true);
+			resultJson.appendData("index", index);
+			resultJson.appendData("money", money);
+			resultJson.appendData("rewardid", activityReward != null ? activityReward.getId():null);
 		}
-		resultJson.appendData("luck", luck);
-		resultJson.appendData("luckNum", luckNum);
-		resultJson.appendData("lucktip", lucktip);
-		resultJson.appendData("subsidy", subsidy);
-		resultJson.appendData("subsidyMoney", subsidymoney);
-		resultJson.appendData("subsidytip", subsidytip);
-		resultJson.appendData("islogin", true);
-		resultJson.appendData("index", index);
-		resultJson.appendData("money", money);
-		resultJson.appendData("rewardid", activityReward != null ? activityReward.getId():null);
 		return resultJson;
 	}
 

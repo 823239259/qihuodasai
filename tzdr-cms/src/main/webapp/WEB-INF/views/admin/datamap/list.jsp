@@ -43,6 +43,9 @@
 			<shiro:hasPermission name="sys:system:datamap:update"> 
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="baseUtils.openEditwin(500,300,'修改数据','dataDic')">修改</a>
 			</shiro:hasPermission>
+			<shiro:hasPermission name="sys:system:datamap:update"> 
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="baseUtils.updateActivityDate('admin/dataDic/updateActivityDate')">更新活动时间</a>
+			</shiro:hasPermission>
 		</div>
 	</div>
 	<table id="edatagrid"></table>

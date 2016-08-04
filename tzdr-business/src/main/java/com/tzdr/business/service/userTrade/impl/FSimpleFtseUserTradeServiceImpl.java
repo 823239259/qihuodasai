@@ -37,6 +37,7 @@ import com.tzdr.business.service.userTrade.HandTradeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.config.ActivityConfig;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.exception.BusinessException;
 import com.tzdr.common.utils.Dates;
@@ -729,7 +730,9 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 this.update(simpleFtseUserTrade);
 //				handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade); // 保存收益报表记录
             }
-            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile(),wellGoldA50.getId());
+            if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+            	this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile(),wellGoldA50.getId());
+            }
             return new JsonResult(true, "方案结算成功！");
         }
     }
