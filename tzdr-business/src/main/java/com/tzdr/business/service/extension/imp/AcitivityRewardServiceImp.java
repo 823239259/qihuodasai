@@ -131,7 +131,7 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 						UserFund userFund = new UserFund();
 						userFund.setUid(user.getId());
 						userFund.setMoney(addMoney);
-						userFund.setType(TypeConvert.ACTIVITY_LOSS_FREE_REWARD);
+						userFund.setType(TypeConvert.USER_FUND_C_TYPE_ARTIFICIAL_RECHARGE);
 						userFund.setRemark("免损补贴：" + addMoney + "元");
 						userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
 						smsParams.put("money", String.valueOf(addMoney));
