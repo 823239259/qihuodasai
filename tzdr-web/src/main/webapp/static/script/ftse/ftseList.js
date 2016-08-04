@@ -1,7 +1,7 @@
 
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
-		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever) {
+		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever) {
 	$("#window_detail_endInfoFtse").find("p").html("");
 	var i = 0;
 	$("#window_detail_endInfoFtse").find("p").each(function(){
@@ -60,6 +60,14 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>日经225交易手数</h3>';
 		tradeDev+= '<p>'+nikkeiTranActualLever+'手</p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<h3>小恒指交易手数</h3>';
+		tradeDev+= '<p>'+lhsiTranActualLever+'手</p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<h3>美黄金交易手数</h3>';
+		tradeDev+= '<p>'+agTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '</ul>';
 		$("#window_detail_endInfoFtse_trade").html(tradeDev);
@@ -187,7 +195,7 @@ function getFtseDataList(index,type,
 	            	+ n.tranProfitLoss + ","
 	            	+n.endParities+","
 	            	+ n.tranFeesTotal +"," + n.endAmount +","+n.businessType+","+n.tranActualLever +","+n.crudeTranActualLever +","+n.hsiTranActualLever+ ","+n.mdtranActualLever+","
-	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+"));\" " +
+	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+","+n.hstranActualLever+","+n.agtranActualLever+"));\" " +
 	            	"style=\"cursor:pointer;color:#fc3;\" class='uc_tlbtn_btn_see' >账单详细</a></td>";
             	}else{
             		html = html + "<td></td>";
