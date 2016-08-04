@@ -235,8 +235,10 @@ public class ExtendsionSignController {
 	 * @return
 	 */
 	@RequestMapping(value = "/extensionSignSuc", method = RequestMethod.GET)
-	public String extensionSignSucView(ModelMap modelMap) {
+	public String extensionSignSucView(ModelMap modelMap,HttpServletRequest  request) {
 		modelMap.put("islogin", true);
+		modelMap.put("m", request.getParameter("m"));
+		modelMap.put("p", request.getParameter("p"));
 		return ViewConstants.SignInViewJsp.EXTENDSION_SUCCESS_FUL_VEIW;
 	}
 
