@@ -148,13 +148,7 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 
 	@Override
 	public ActivityReward findByUidAndActivity(String uid, String activity,Boolean isvalid,String rewardType) {
-		ActivityReward activityReward = getEntityDao().doGetActivityLuckDraw(uid,activity,isvalid,rewardType);
-		ActivityReward reward = activityReward;
-		if(reward != null){
-			reward.setIstip(true);
-			getEntityDao().update(reward);
-		}
-		return activityReward;
+		return getEntityDao().doGetActivityLuckDraw(uid,activity,isvalid,rewardType);
 	}
 	public List<ActivityReward> doGetActivitySubsidy(String uid, String activity,Boolean isvalid,String rewardType ,Boolean istip){
 		List<ActivityReward> activityRewards = getEntityDao().doGetActivitySubsidy(uid, activity, isvalid, rewardType, istip);

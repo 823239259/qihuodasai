@@ -325,10 +325,12 @@ public class ExtendsionSignController {
 				index = this.PercentageRandom();
 				money = this.comperTo(index);
 				activityReward.setMoney((double)money);
-				activityRewardService.doUpdateReward(activityReward);
 				if (!activityReward.getIstip()) {
 					lucktip = 1;
+					activityReward.setIstip(true);
 				}
+				activityReward.setIstip(true);
+				activityRewardService.doUpdateReward(activityReward);
 			}
 			if (rewards != null) {
 				if (rewards.size() > 0) {

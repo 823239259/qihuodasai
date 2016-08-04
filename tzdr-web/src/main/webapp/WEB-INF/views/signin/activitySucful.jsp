@@ -57,14 +57,14 @@ function flushLoginTicket() {
 
 	/* 倒计时  */
 	$(function(){
-		 $("#loginForm").submit();
 		var djs = $(".cg_djs").html();
 	    var cgdjs = setInterval(function(){
 	        djs--;
 	        $(".cg_djs").html(djs);
 	        if(djs==0){
-	        	clearInterval(cgdjs);
-				window.location.href="${ctx}/user/account";	        	
+	        	clearInterval(cgdjs);/* 
+				$("#loginForm").submit(); */
+				window.location.href="${ctx}/user/account";	   
 	        }
 	    },1000);
 	});
