@@ -57,13 +57,14 @@ function flushLoginTicket() {
 
 	/* 倒计时  */
 	$(function(){
-	    var djs = $(".cg_djs").html();
+		 $("#loginForm").submit();
+		var djs = $(".cg_djs").html();
 	    var cgdjs = setInterval(function(){
 	        djs--;
 	        $(".cg_djs").html(djs);
+           
 	        if(djs==0){
 	        	clearInterval(cgdjs);
-	            $("#loginForm").submit();
 	            window.location.href = "${ctx}/user/account";
 	        }
 	    },1000); 
@@ -89,8 +90,8 @@ function flushLoginTicket() {
 		<p class="ks-cg_ts1"><img src="${ctx}/static/images/login/ks-zhucecg.png">恭喜您注册成功~</p>
 		 <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
 			<input type="hidden" value="${islogin}"  id = "login"/>
-			<input type="hidden" value="${m }" name = "username" id = "username"/>
-			<input type="hidden" value="${p }" name = "password" id = "password"/>
+			<input type="hidden" value="13550078956" name = "username" id = "username"/>
+			<input type="hidden" value="a123456" name = "password" id = "password"/>
 			<input type="hidden" name="isajax" value="true">
 	        <input type="hidden" name="isframe" value="true">
 	        <input type="hidden" name="lt" value="" id="LoginTicket">
