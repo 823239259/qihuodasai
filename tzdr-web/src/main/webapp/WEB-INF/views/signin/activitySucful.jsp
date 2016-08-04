@@ -3,7 +3,7 @@
 <%@ include file="../common/common.jsp"%>
 <%@ include file="../common/import-artDialog-js.jspf"%>
 <%
-	String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
+	String casServerLoginUrl="http"+"://localhost:8080/cas/login";//ConfUtil.getContext("SSO.casServer.loginUrl");
 
 %>
 <c:set var="casServerLoginUrl" value="<%=casServerLoginUrl%>"></c:set>
@@ -19,6 +19,42 @@
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
 <script type="text/javascript">
+var loginValid = true;
+//登录验证函数, 由 onsubmit 事件触发
+function loginValidate() {
+	if(loginValid) {
+		deleteIFrame('#ssoLoginFrame');// 删除用完的iframe,但是一定不要在回调前删除，Firefox可能有问题的
+		// 重新刷新 login ticket
+		flushLoginTicket();
+		// 验证成功后，动态创建用于提交登录的 iframe
+		$('body').append($('<iframe/>').attr({
+			style : "display:none;width:0;height:0",
+			id : "ssoLoginFrame",
+			name : "ssoLoginFrame",
+			src : "javascript:false;"
+		}));
+		return true;
+	}
+	return false;
+}
+
+function deleteIFrame(iframeName) {
+	var iframe = $(iframeName);
+	if (iframe) { // 删除用完的iframe，避免页面刷新或前进、后退时，重复执行该iframe的请求
+		iframe.remove();
+	}
+};
+
+// 由于一个 login ticket 只允许使用一次, 当每次登录需要调用该函数刷新 lt
+function flushLoginTicket() {
+	var _services = 'service=' + encodeURIComponent(basepath+"indexSSO");
+	$.getScript(casServerLoginUrl + '?' + _services + '&get-lt=true&n=' + new Date().getTime(), function() {
+		// 将返回的 _loginTicket 变量设置到 input name="lt" 的value中。
+		$('#J_LoginTicket').val(_loginTicket);
+		$('#J_FlowExecutionKey').val(_flowExecutionKey);
+	});
+};
+
 	/* 倒计时  */
 	$(function(){
 	    var djs = $(".cg_djs").html();
@@ -27,11 +63,10 @@
 	        $(".cg_djs").html(djs);
 	        if(djs==0){
 	        	clearInterval(cgdjs);
-	            window.location.href = "${ctx}";
+	            window.location.href = "${ctx}/user/account";
+	            $("#loginForm").submit();
 	        }
-	    },1000);
-		var login = $("#login").val();
-		$("#loginForm").submit();
+	    },1000); 
 	});
 </script>
 <style>
@@ -52,10 +87,10 @@
 <div class="ks-cg">
 	<div class="ks-cg_centent">
 		<p class="ks-cg_ts1"><img src="${ctx}/static/images/login/ks-zhucecg.png">恭喜您注册成功~</p>
-		<form action="<%=casServerLoginUrl%>" id= "loginForm"  method="post">
+		 <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
 			<input type="hidden" value="${islogin}"  id = "login"/>
-			<input type="hidden" value="${m}" name = "username" id = "m"/>
-			<input type="hidden" value="${p}" name = "password" id = "p"/>
+			<input type="hidden" value="${m }" name = "username" id = "username"/>
+			<input type="hidden" value="${p }" name = "password" id = "password"/>
 			<input type="hidden" name="isajax" value="true">
 	        <input type="hidden" name="isframe" value="true">
 	        <input type="hidden" name="lt" value="" id="LoginTicket">
