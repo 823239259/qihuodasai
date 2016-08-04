@@ -20,6 +20,12 @@
 <script type="text/javascript">
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
+<script type="text/javascript">
+	function scrollTop() {
+		$('html, body').animate({scrollTop: '0px'}, 800);
+		//$('html, body').animate({scrollTop:$('.bottom').offset().top}, 800);
+	}
+</script>
 <style>
 	.rg_l_error { display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ; position: relative;left: 0px;top: 0;text-align: left;margin-left: 20px;}
 	.rg_l_promt {display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ;position: relative;left: 0px;top: 0;text-align: left;margin-left: 20px;}
@@ -189,7 +195,7 @@
 				<p>行情资讯24小时推送</p>
 			</div>
 		</div>
-		<p class="ks_zp"><a href="${ctx}/ftse/index">点我立即操盘</a><p>
+		<p class="ks_zp"><a href="javascript:scrollTop();">点我立即注册</a><p>
 	</div>
 </div>
 <div class="ks_footer">
