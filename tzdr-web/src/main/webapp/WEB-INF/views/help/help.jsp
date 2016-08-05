@@ -995,7 +995,7 @@ var tab="<%=tab%>";
             </div>
         </div>
         <div class="hp_mainbar hp_mbox21" style="display:none;">
-        	<a href="http://socket.vs.com/download/%e7%bb%b4%e8%83%9c%e4%ba%a4%e6%98%93%e6%a0%87%e5%87%86%e7%89%88v1.0.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-39.png"></a>
+        	<a href="http://socket.vs.com/download/%e7%bb%b4%e8%83%9c%e4%ba%a4%e6%98%93%e6%a0%87%e5%87%86%e7%89%88v1.0.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-39.png" style="margin-top: 10px; margin-left: 10px;"></a>
             <h1 style="border-bottom:1px solid #d1d1d1;">维胜交易标准版</h1>    
             <div class="hp_tts">   
                 <p style="color:red;font-size: 14px;">维胜交易标准版产品简介<p>
@@ -1019,7 +1019,7 @@ var tab="<%=tab%>";
             </div>
         </div>
         <div class="hp_mainbar hp_mbox22" style="display:none;">
-        	<a href="http://139.196.228.143/download/%E7%BB%B4%E8%83%9C%E6%9C%9F%E8%B4%A7%E5%BF%AB%E6%89%8B%E7%89%88v1.0_%E5%AE%9E%E7%9B%98.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-35.png"></a>
+        	<a href="http://139.196.228.143/download/%E7%BB%B4%E8%83%9C%E6%9C%9F%E8%B4%A7%E5%BF%AB%E6%89%8B%E7%89%88v1.0_%E5%AE%9E%E7%9B%98.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-35.png" style="margin-top: 10px; margin-left: 10px;"></a>
             <h1 style="border-bottom:1px solid #d1d1d1;">维胜快手交易系统<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
             <div class="hp_tts">    
                 <p style="color:red;font-size: 14px;">维胜快手交易端软件简介<p>
