@@ -77,7 +77,7 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 						Double bondAmount = fSimpleFtseUserTrade.getTraderBond().doubleValue();
 						if(endAmount != null && bondAmount != null){
 							DecimalFormat df = new DecimalFormat("0.00");
-							Double jAmount =  new Double(df.format(fSimpleFtseUserTrade.getTranProfitLoss().subtract(fSimpleFtseUserTrade.getEndParities()).doubleValue()));
+							Double jAmount =  new Double(df.format(fSimpleFtseUserTrade.getTranProfitLoss().multiply(fSimpleFtseUserTrade.getEndParities()).doubleValue()));
 							if(jAmount < 0){
 								subMoney = Math.abs(jAmount);
 								if(actualLever >= ExtensionConstants.SUBSIDYLEVER10 && actualLever < ExtensionConstants.SUBSIDYLEVER20 ){
@@ -146,7 +146,6 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 			}
 		}
 	}
-
 	@Override
 	public ActivityReward findByUidAndActivity(String uid, String activity,Boolean isvalid,String rewardType) {
 		return getEntityDao().doGetActivityLuckDraw(uid,activity,isvalid,rewardType);
