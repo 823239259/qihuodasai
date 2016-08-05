@@ -1,6 +1,7 @@
 package com.tzdr.business.service.extension.imp;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -67,7 +68,6 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 									+fSimpleFtseUserTrade.getMdtranActualLever()
 									+fSimpleFtseUserTrade.getLhsiTranActualLever()
 									+fSimpleFtseUserTrade.getAgTranActualLever();
-				
 				//补贴金额
 				Double subMoney = 0.00;
 				Long createTime = new Date().getTime()/1000;
@@ -76,7 +76,8 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 						Double endAmount = fSimpleFtseUserTrade.getEndAmount().doubleValue();
 						Double bondAmount = fSimpleFtseUserTrade.getTraderBond().doubleValue();
 						if(endAmount != null && bondAmount != null){
-							Double jAmount = fSimpleFtseUserTrade.getTranProfitLoss().doubleValue();
+							DecimalFormat df = new DecimalFormat("0.00");
+							Double jAmount =  new Double(df.format(fSimpleFtseUserTrade.getTranProfitLoss().subtract(fSimpleFtseUserTrade.getEndParities()).doubleValue()));
 							if(jAmount < 0){
 								subMoney = Math.abs(jAmount);
 								if(actualLever >= ExtensionConstants.SUBSIDYLEVER10 && actualLever < ExtensionConstants.SUBSIDYLEVER20 ){
