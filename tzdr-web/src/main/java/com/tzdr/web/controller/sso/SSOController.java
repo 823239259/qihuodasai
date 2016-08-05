@@ -30,7 +30,7 @@ public class SSOController {
 	 * @param backData
 	 * @param key
 	 * @param modelMap
-	 * @param request
+	 * @param requestw
 	 * @param response
 	 * @return
 	 * @throws UnsupportedEncodingException 
@@ -262,16 +262,6 @@ public class SSOController {
 	@RequestMapping(value = "/toCommodityAllIndexSSO")
 	public String toComprehensiveCommodityIndexSSO(HttpServletRequest request, HttpServletResponse response){
 		return "redirect:/commodity/index";
-	}
-	/**
-	 * 商品期货综合
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/toUserAccountSSO")
-	public String toUserAccountSSOSSO(HttpServletRequest request, HttpServletResponse response){
-		return "redirect:/";
 	}
 	
 	
