@@ -69,7 +69,7 @@ public class OutDiskController {
 		JsonResult  result = null;
 		if(CollectionUtils.isEmpty(outDiskParametersList)){
 			 result = new JsonResult(false, "保证金有误！");
-		}else{
+		}else{	
 			OutDiskParameters outDiskParameters= outDiskParametersList.get(0);
 			resultData.put("traderBond", outDiskParameters.getTraderBond());
 			resultData.put("traderTotal", outDiskParameters.getTraderTotal());
