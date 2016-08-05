@@ -24,11 +24,11 @@ public class Config {
 	/**
 	 * 支付宝网页充值成功跳转页面
 	 */
-	public static String ALIPAY_PC_SUCCESS_URL = "http://www.dktai.com/user/account";
+	public static String ALIPAY_PC_SUCCESS_URL = "http://www.vs.com/user/account";
 	/**
 	 * 支付宝手机网站支付成功跳转页面
 	 */
-	public static String ALIPAY_WAP_SUCCESS_URL="http://www.dktai.com/paySucApp";
+	public static String ALIPAY_WAP_SUCCESS_URL="http://www.vs.com/paySucApp";
 	public static String BODY = "维胜充值";
 	public static String SUBJECT = "维胜充值购买";
 	static {

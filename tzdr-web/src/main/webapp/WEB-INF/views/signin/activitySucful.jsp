@@ -78,7 +78,7 @@ function flushLoginTicket() {
 <input type="hidden" id="source" value="${source}"/>
 <div class="ks_header">
 	<div class="ks_content">
-		<a class="logo" href="http://www.dktai.com">
+		<a class="logo" href="http://www.vs.com">
 			<img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜">
 		</a>
 		<p style="float: right;">全国客服热线<span>400</span>-<span>852</span>-<span>8008</span></p>

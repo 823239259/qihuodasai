@@ -75,7 +75,7 @@ public class ExtendsionSignController {
 	}
 	private static Long getCalendar(){
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, 0);
+		cal.add(Calendar.DATE, -1);
 		return cal.getTime().getTime();
 	}
 	public static void main(String[] args) {

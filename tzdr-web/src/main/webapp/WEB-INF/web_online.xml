@@ -91,7 +91,7 @@
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://www.dktai.com</param-value>
+			<param-value>http://www.vs.com</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 		<init-param>  
@@ -319,7 +319,7 @@
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://www.dktai.com</param-value>
+			<param-value>http://www.vs.com</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 	</filter>
