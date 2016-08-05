@@ -19,42 +19,6 @@
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
 <script type="text/javascript">
-var loginValid = true;
-//登录验证函数, 由 onsubmit 事件触发
-function loginValidate() {
-	if(loginValid) {
-		deleteIFrame('#ssoLoginFrame');// 删除用完的iframe,但是一定不要在回调前删除，Firefox可能有问题的
-		// 重新刷新 login ticket
-		flushLoginTicket();
-		// 验证成功后，动态创建用于提交登录的 iframe
-		$('body').append($('<iframe/>').attr({
-			style : "display:none;width:0;height:0",
-			id : "ssoLoginFrame",
-			name : "ssoLoginFrame",
-			src : "javascript:false;"
-		}));
-		return true;
-	}
-	return false;
-}
-
-function deleteIFrame(iframeName) {
-	var iframe = $(iframeName);
-	if (iframe) { // 删除用完的iframe，避免页面刷新或前进、后退时，重复执行该iframe的请求
-		iframe.remove();
-	}
-};
-
-// 由于一个 login ticket 只允许使用一次, 当每次登录需要调用该函数刷新 lt
-function flushLoginTicket() {
-	var _services = 'service=' + encodeURIComponent(basepath+"indexSSO");
-	$.getScript(casServerLoginUrl + '?' + _services + '&get-lt=true&n=' + new Date().getTime(), function() {
-		// 将返回的 _loginTicket 变量设置到 input name="lt" 的value中。
-		$('#J_LoginTicket').val(_loginTicket);
-		$('#J_FlowExecutionKey').val(_flowExecutionKey);
-	});
-};
-
 	/* 倒计时  */
 	$(function(){
 		var djs = $(".cg_djs").html();
@@ -87,16 +51,7 @@ function flushLoginTicket() {
 <div class="ks-cg">
 	<div class="ks-cg_centent">
 		<p class="ks-cg_ts1"><img src="${ctx}/static/images/login/ks-zhucecg.png">恭喜您注册成功~</p>
-		 <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
-			<input type="hidden" value="${islogin}"  id = "login"/>
-			<input type="hidden" value="13550078956" name = "username" id = "username"/>
-			<input type="hidden" value="a123456" name = "password" id = "password"/>
-			<input type="hidden" name="isajax" value="true">
-	        <input type="hidden" name="isframe" value="true">
-	        <input type="hidden" name="lt" value="" id="LoginTicket">
-	        <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
-	        <input type="hidden" name="_eventId" value="submit">
-        </form>
+		
 		<p class="ks-cg_ts2">您已成功注册维胜网站！</p>
 		<p class="ks-cg_ts3"><a class="logo" href="${ctx}">立即操盘</a></p>
 		<p class="ks-cg_ts4"><span class="cg_djs">3</span>S后自动跳转网站首页</p>
