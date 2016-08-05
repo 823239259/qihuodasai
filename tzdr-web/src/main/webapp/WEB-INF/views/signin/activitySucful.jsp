@@ -19,19 +19,23 @@
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
 <script type="text/javascript">
+window.onload = function(){
 	/* 倒计时  */
 	$(function(){
-		var djs = $(".cg_djs").html();
+		var m = $("#username").val();
+		var p = $("#password").val();
+		 var djs = $(".cg_djs").html();
 	    var cgdjs = setInterval(function(){
 	        djs--;
 	        $(".cg_djs").html(djs);
 	        if(djs==0){
-	        	clearInterval(cgdjs);/* 
-				$("#loginForm").submit(); */
-				window.location.href="${ctx}/user/account";	   
+	        	clearInterval(cgdjs); 
+				$("#loginForm").submit();
 	        }
 	    },1000);
 	});
+}
+	
 </script>
 <style>
 	.ks_footer {position: absolute; bottom: 0; width: 100%;}
@@ -51,7 +55,11 @@
 <div class="ks-cg">
 	<div class="ks-cg_centent">
 		<p class="ks-cg_ts1"><img src="${ctx}/static/images/login/ks-zhucecg.png">恭喜您注册成功~</p>
-		
+		 <form id="loginForm" name="loginForm" action="${ctx }/" method="post">
+			<input type="hidden" value="${m }" name = "m" id = "username"/>
+			<input type="hidden" value="${p }" name = "p" id = "password"/>
+			<input type = "hidden" value="1" name = "islogin" id= "islogin">
+        </form>
 		<p class="ks-cg_ts2">您已成功注册维胜网站！</p>
 		<p class="ks-cg_ts3"><a class="logo" href="${ctx}">立即操盘</a></p>
 		<p class="ks-cg_ts4"><span class="cg_djs">3</span>S后自动跳转网站首页</p>

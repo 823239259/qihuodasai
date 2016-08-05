@@ -1,79 +1,3 @@
-$(function () {
-	// 是否登录
-	flushLoginTicket();
-	islogin();
-	
-	// banner切换
-	var num = $("#slide-box a").size();
-    var i = 0;
-    var theInt = null;
-    $("#ad-slider a").eq(0).addClass("on");
-    $("#slide-box a").eq(0).fadeIn(500);
-    $("#ad-slider a").each(function (i) {
-        $(this).click(function () {
-            Change(i);
-            HuanDeng(i);
-        });
-    });
-    HuanDeng = function (i) {
-        clearInterval(theInt);
-        theInt = setInterval(function () {
-            i++;
-            if (i < num) {
-                Change(i);
-            } else {
-                i = 0
-                Change(i);
-            }
-        }, 5000);
-    }
-    HuanDeng(0);
-    function Change(i) {
-        $("#slide-box a").fadeOut(500);
-        $("#slide-box a").eq(i).fadeIn(500);
-        $("#ad-slider a").removeClass("on");
-        $("#ad-slider a").eq(i).addClass("on");
-        
-    }
-    // 股市tab切换
-	var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
-    left_xiangmu.each(function(){
-        left_xiangmu.click(function(){
-            left_xiangmu.removeClass('on');
-            $(this).addClass('on');
-        });
-    })
-    
- // 加载最新动态
-	$.ajax({
-		url:basepath+"findnews",
-		type:'POST',
-		data:{},
-		dataType:"json",
-		success:function(news){
-			var newsStr = "";
-			$(news).each(function(i){
-				newsStr = newsStr + "<li><i></i><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("name")+"</a><em><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("addtime")+"</a></em></li>";
-			})
-			$('.h_noticlist').html(newsStr);
-			
-			setTimeout(function(){
-				// 最新公告滚动效果
-				var box=document.getElementById("h_scroll"),can=true; 
-				box.innerHTML+=box.innerHTML; 
-				box.onmouseover=function(){can=false}; 
-				box.onmouseout=function(){can=true}; 
-				new function (){ 
-				var stop=box.scrollTop%18==0&&!can; 
-				if(!stop)box.scrollTop==parseInt(box.scrollHeight/2)?box.scrollTop=0:box.scrollTop++; 
-				setTimeout(arguments.callee,box.scrollTop%17?30:3000); 
-				};
-			},2000);
-			
-		}
-	});
-});
-
 //邮箱验证规则
 var emailForm  = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 //手机号码规则
@@ -107,9 +31,8 @@ form.on("keypress", "input", function(event){
 		return false;
 	}
 })
-
 //登录操作
-$("#login").click(function(){
+$("#login").bind("click",function(){
 	var $this = $(this);
 	$this.text("正在登录");
 	$this.attr("disabled","disabled");
@@ -202,4 +125,89 @@ function islogin(){
 			$("#logondiv").hide();
 		}
 	},"json");
+}
+$(function () {
+	
+	// 是否登录
+	flushLoginTicket();
+	islogin();
+	
+	// banner切换
+	var num = $("#slide-box a").size();
+    var i = 0;
+    var theInt = null;
+    $("#ad-slider a").eq(0).addClass("on");
+    $("#slide-box a").eq(0).fadeIn(500);
+    $("#ad-slider a").each(function (i) {
+        $(this).click(function () {
+            Change(i);
+            HuanDeng(i);
+        });
+    });
+    HuanDeng = function (i) {
+        clearInterval(theInt);
+        theInt = setInterval(function () {
+            i++;
+            if (i < num) {
+                Change(i);
+            } else {
+                i = 0
+                Change(i);
+            }
+        }, 5000);
+    }
+    HuanDeng(0);
+    function Change(i) {
+        $("#slide-box a").fadeOut(500);
+        $("#slide-box a").eq(i).fadeIn(500);
+        $("#ad-slider a").removeClass("on");
+        $("#ad-slider a").eq(i).addClass("on");
+        
+    }
+    // 股市tab切换
+	var left_xiangmu   = $(".w_content .w_center_xiangqing .left_xiangmu");
+    left_xiangmu.each(function(){
+        left_xiangmu.click(function(){
+            left_xiangmu.removeClass('on');
+            $(this).addClass('on');
+        });
+    })
+    
+ // 加载最新动态
+	$.ajax({
+		url:basepath+"findnews",
+		type:'POST',
+		data:{},
+		dataType:"json",
+		success:function(news){
+			var newsStr = "";
+			$(news).each(function(i){
+				newsStr = newsStr + "<li><i></i><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("name")+"</a><em><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("addtime")+"</a></em></li>";
+			})
+			$('.h_noticlist').html(newsStr);
+			
+			setTimeout(function(){
+				// 最新公告滚动效果
+				var box=document.getElementById("h_scroll"),can=true; 
+				box.innerHTML+=box.innerHTML; 
+				box.onmouseover=function(){can=false}; 
+				box.onmouseout=function(){can=true}; 
+				new function (){ 
+				var stop=box.scrollTop%18==0&&!can; 
+				if(!stop)box.scrollTop==parseInt(box.scrollHeight/2)?box.scrollTop=0:box.scrollTop++; 
+				setTimeout(arguments.callee,box.scrollTop%17?30:3000); 
+				};
+			},2000);
+			
+		}
+	});
+});
+window.onload = function(){
+	$(function(){
+		var islogin = $("#islogin");
+		if(islogin.val() == "1"){
+			loginValid = true;
+			$("#login").click();
+		}
+	});
 }

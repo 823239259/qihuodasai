@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jodd.util.StringUtil;
 
@@ -158,7 +159,6 @@ public class HomePageController {
 	 */
 	@RequestMapping(value = "/")
 	public String homepage(ModelMap modelMap,String uid,HttpServletRequest request,HttpServletResponse response){
-		
 		UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 		String mobile="";
 		String lastLoginTime="";	
@@ -251,10 +251,18 @@ public class HomePageController {
 		modelMap.put("lastLoginTime", lastLoginTime);
 		modelMap.put("mobile", mobile);
 		modelMap.put("banners", banners);
-		
+		modelMap.put("islogin", request.getParameter("islogin"));
+		modelMap.put("m", request.getParameter("m"));
+		modelMap.put("p", request.getParameter("p"));
 		return ViewConstants.HomePageViewJsp.HOME_PAGE;
 	}
-	
+
+	@RequestMapping(value = "toHomepage")
+	public String toHomePage(HttpServletRequest request,ModelMap modelMap){
+		String m = request.getParameter("m");
+		String p = request.getParameter("p");
+		return "redirect:/?m="+m+"&p="+p+"&islogin=1";
+	}
 	/**
 	 * 查询友情链接 用于登陆后的显示,使用JSONP
 	 * @param modelMap

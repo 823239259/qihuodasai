@@ -207,6 +207,7 @@
 	       	%>
 	        <div class="lgctn" id="logindiv">
 	            <h3>登录</h3>
+	            	<input type="hidden" value="${islogin }" id = "islogin"> 
 	             <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
 	                <input type="hidden" name="isajax" value="true">
 	                <input type="hidden" name="isframe" value="true">
@@ -216,12 +217,12 @@
 	                <div class="lg_ip">
 	                    <div class="lg_ipctn">
 	                        <i class="user"></i>
-	                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
+	                        <input type="tel" id="username" name="username" value="${m }" placeholder="请输入手机号码">
 	                        <!-- 请输入手机号码 -->
 	                    </div>
 	                    <div class="lg_ipctn">
 	                        <i class="password"></i>
-	                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
+	                        <input type="password" id="password" name="password" value="${p }" placeholder="请输入登录密码">
 	                        <!-- 请输入登录密码 -->
 	                    </div>
 	                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
