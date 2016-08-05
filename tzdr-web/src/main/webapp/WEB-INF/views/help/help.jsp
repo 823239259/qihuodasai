@@ -979,7 +979,7 @@ var tab="<%=tab%>";
             <a href="javascript:void(0)" data="22">维胜快手交易系统<i style="right: 20px;">></i></a>
         </div>
         <div class="hp_mainbar hp_mbox1" style="display:none;">
-        	<a href="http://139.196.228.143/download/Epolestar_9.0_Client.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-34.png"></a>
+        	<a href="http://139.196.228.143/download/Epolestar_9.0_Client.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-34.png" style="margin-top: 10px; margin-left: 10px;"></a>
             <h1 style="border-bottom:1px solid #d1d1d1;">易盛极星客户端说明<span style="font-size:16px; color:#fc3; padding-left:10px;"><!-- 请股票合买和港股操盘的用户下载此软件！ --></span></h1>    
             <div class="hp_tts">    
             	<h6 style="color: #fc3;">1, 启动易盛极星客户端，弹出登录窗口，在登录窗口的‘行情服务器’，进入行情服务器账号和密码输入窗口，默认的行情服务器账号和密码，不进行修改。</h6>           
