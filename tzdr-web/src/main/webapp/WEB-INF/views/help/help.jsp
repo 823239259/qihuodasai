@@ -976,7 +976,7 @@ var tab="<%=tab%>";
             <!-- <a href="javascript:void(0)" class="on" data="1">股票交易系统<i style="right: 20px;">></i></a>       
             <a href="javascript:void(0)" data="12">股票掌上交易系统<i style="right: 20px;">></i></a> --> 
             <a href="javascript:void(0)" class="on" data="1">易盛极星交易系统<i style="right: 20px;">></i></a>
-            <a href="javascript:void(0)" data="21">维胜交易标准版<i style="right: 20px;">></i></a>
+            <a href="javascript:void(0)" data="21">维胜交易标准系统<i style="right: 20px;">></i></a>
             <a href="javascript:void(0)" data="22">维胜快手交易系统<i style="right: 20px;">></i></a>
         </div>
         <div class="hp_mainbar hp_mbox1" style="display:none;">
