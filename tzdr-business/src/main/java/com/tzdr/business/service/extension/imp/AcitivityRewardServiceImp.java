@@ -76,7 +76,7 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 						Double endAmount = fSimpleFtseUserTrade.getEndAmount().doubleValue();
 						Double bondAmount = fSimpleFtseUserTrade.getTraderBond().doubleValue();
 						if(endAmount != null && bondAmount != null){
-							Double jAmount = endAmount - bondAmount;
+							Double jAmount = fSimpleFtseUserTrade.getTranProfitLoss().doubleValue();
 							if(jAmount < 0){
 								subMoney = Math.abs(jAmount);
 								if(actualLever >= ExtensionConstants.SUBSIDYLEVER10 && actualLever < ExtensionConstants.SUBSIDYLEVER20 ){
