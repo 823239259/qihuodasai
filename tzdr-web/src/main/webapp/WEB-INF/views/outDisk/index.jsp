@@ -138,7 +138,7 @@
                     <td>小恒指</td>
                     <td>${outDiskPrice[8].mainContract}</td>
                     <td>09:20—16:25，17:20—23:40</td>
-                    <td>只交易小恒指时，初始最大可持仓<i id='nikkeiTranActualLever'>${outDiskParameters[0].hstranActualLever}</i>手</td>
+                    <td>只交易小恒指时，初始最大可持仓<i id='hstranActualLever'>${outDiskParameters[0].hstranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[8].price}</i>元/手</td>
                 </tr>
                 
@@ -146,7 +146,7 @@
                     <td>美黄金</td>
                     <td>${outDiskPrice[9].mainContract}</td>
                     <td>06:05-04:55</td>
-                    <td>只交易美黄金时，初始最大可持仓<i id='nikkeiTranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td>只交易美黄金时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[9].price}</i>元/手</td>
                 </tr>
                 <tr>

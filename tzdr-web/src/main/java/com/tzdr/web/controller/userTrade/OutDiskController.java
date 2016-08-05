@@ -83,7 +83,8 @@ public class OutDiskController {
 			resultData.put("mdtranActualLever", outDiskParameters.getMdtranActualLever());
 			resultData.put("nikkeiTranActualLever", outDiskParameters.getNikkeiTranActualLever());
 			resultData.put("daxtranActualLever", outDiskParameters.getDaxtranActualLever());
-			
+			resultData.put("hstranActualLever", outDiskParameters.getHstranActualLever());
+			resultData.put("agtranActualLever", outDiskParameters.getAgtranActualLever());
 			result = new JsonResult(true, "处理成功！");
 			result.setObj(resultData);
 		}

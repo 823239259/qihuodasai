@@ -37,7 +37,8 @@ function getData(){
 			$("#daxtranActualLever").html(result.obj.daxtranActualLever);
 			$("#mdtranActualLever").html(result.obj.mdtranActualLever);
 			$("#nikkeiTranActualLever").html(result.obj.nikkeiTranActualLever);
-			
+			$("#hstranActualLever").html(result.obj.hstranActualLever);
+			$("#agtranActualLever").html(result.obj.agtranActualLever);
 		} else {
 			showMsgDialog("提示",result.message);
 		}
