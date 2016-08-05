@@ -61,6 +61,8 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '<h3>日经225交易手数</h3>';
 		tradeDev+= '<p>'+nikkeiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
+		tradeDev+= '</ul>';
+		tradeDev+= '<ul>';
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>小恒指交易手数</h3>';
 		tradeDev+= '<p>'+lhsiTranActualLever+'手</p>';
