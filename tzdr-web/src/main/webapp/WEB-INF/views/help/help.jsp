@@ -1008,7 +1008,7 @@ var tab="<%=tab%>";
                 <img src="${ctx}/static/images/help/vs-help-40.png" style="margin-left: 30px; margin-bottom: 20px; margin-top: 10px;">
                 <p style="font-size: 16px; color: #fc3;">2、进入交易端页面，用户可根据自身对期货的了解选择模拟操盘，和实际操盘。模拟操盘针对新手用户，更快的上手。实盘操盘必须现在维胜的官网申请操盘方案，获得操盘账号和密码方可进入，如下图；</p>
                 <img src="${ctx}/static/images/help/vs-help-41.png" style="margin-left: 30px; margin-bottom: 20px; margin-top: 10px;">
-                <p style="font-size: 16px; color: #fc3;">3、进入交易客户端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手办、限价版；</p>
+                <p style="font-size: 16px; color: #fc3;">3、进入交易客户端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手版、限价版；</p>
                 <img src="${ctx}/static/images/help/vs-help-42.png" style="margin-left: 30px; margin-bottom: 20px; margin-top: 10px;">
                 <p style="font-size: 16px; color: #fc3;">4、点击鼠标右键提示选择合约，您可以添加您感兴趣的合进行观察行情，再点击确认，行情便添加成功。</p>
                 <img src="${ctx}/static/images/help/vs-help-43.png" style="margin-left: 30px; margin-bottom: 20px; margin-top: 10px;">
