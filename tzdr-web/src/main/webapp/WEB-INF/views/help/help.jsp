@@ -1005,17 +1005,17 @@ var tab="<%=tab%>";
                 <p style="color:red;font-size: 14px;">维胜交易标准版使用简介<p>
                 <p>1, 启动维胜交易客户端，弹出登录窗口，在登录窗口的‘输入您的账号和密码您可自行选择是否记住密码或者自动登录。 账号信息填入完毕之后，点击【立即登录】按钮，进入交易端页面。</p>
                 <p>注意：账号默认为VS，账号和密码用户可随便输入。</p>
-                <img src="${ctx}/static/images/help/vs-help-40.png">
+                <img src="${ctx}/static/images/help/vs-help-40.png" style="margin-left: 30px;">
                 <p>2、进入交易端页面，用户可根据自身对期货的了解选择模拟操盘，和实际操盘。模拟操盘针对新手用户，更快的上手。实盘操盘必须现在维胜的官网申请操盘方案，获得操盘账号和密码方可进入，如下图；</p>
-                <img src="${ctx}/static/images/help/vs-help-41.png">
+                <img src="${ctx}/static/images/help/vs-help-41.png" style="margin-left: 30px;">
                 <p>3、进入交易客户端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手办、限价版；</p>
-                <img src="${ctx}/static/images/help/vs-help-42.png">
+                <img src="${ctx}/static/images/help/vs-help-42.png" style="margin-left: 30px;">
                 <p>4、点击鼠标右键提示选择合约，您可以添加您感兴趣的合进行观察行情，再点击确认，行情便添加成功。</p>
-                <img src="${ctx}/static/images/help/vs-help-43.png">
+                <img src="${ctx}/static/images/help/vs-help-43.png" style="margin-left: 30px;">
                 <p>5、购买合约：第一步：用户可在行情列表中，鼠标点击您选中的合约代码，第二步：观看维胜的左下角的交易板块，填入您想购买合约的数量；第三步：点击买入按钮，弹出下单确认窗口；第四步：核对您的订单信息是否正确，若点击【确认】按钮，购买完成；点击【取消】按钮，购买失败。</p>
-                <img src="${ctx}/static/images/help/vs-help-44.png">
+                <img src="${ctx}/static/images/help/vs-help-44.png" style="margin-left: 30px;">
                 <p>6、卖出合约：用户点击选中的持仓合约，选择卖出的合约，点击卖出即可卖出。也可右击选择平仓也可进行卖出合约。</p>
-                <img src="${ctx}/static/images/help/vs-help-45.png">
+                <img src="${ctx}/static/images/help/vs-help-45.png" style="margin-left: 30px;">
             </div>
         </div>
         <div class="hp_mainbar hp_mbox22" style="display:none;">

@@ -71,6 +71,7 @@
                 duration:8000,
                 callback:function (){
                     alert('网络超时，请检查您的网络设置！');
+                    flag = true;
                 }
             });
         };
@@ -163,7 +164,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
-    		
+		flag = true;	
     }
     function zhuce(){
     	$("#zc").css("display","block");
@@ -176,6 +177,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     }
     function frequently(){
     	$("#frequently").css("display","block");
@@ -188,6 +190,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     }
 	</script>
 	<style type="text/css">
