@@ -7,7 +7,7 @@
 <%
 	String appPath = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+appPath;
-	String forgetPw = "http"+"://www.vs.com/";//"http"+"://localhost:8088/tzdr-web/";////www.vs.com
+	String forgetPw = "http"+"://test.www.vs.com/";//"http"+"://localhost:8088/tzdr-web/";////www.vs.com
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
 <c:set var="forget" value="<%=forgetPw%>"></c:set>
@@ -42,7 +42,7 @@
 			<form:form method="post" id="fm1" commandName="${commandName}"
 				htmlEscape="true" cssClass="form">
 				<div class="ui-logon login" id="login">
-					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget}/signin">立即注册</a></p></h3>
+					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget}signin">立即注册</a></p></h3>
 					<input type="hidden" name="lt" value="${loginTicket}" /> <input
 						type="hidden" name="execution" value="${flowExecutionKey}" /> <input
 						type="hidden" name="_eventId" value="submit" />
@@ -65,7 +65,7 @@
 						<button class="loginbtn" type="button" id="loginbtn">登录</button>
 					</div>
 					<div class="lastP">
-						<a class="forget" href="${forget }/forgetpw">忘记密码？</a> <a class="registerlink" href="${forget }/signin">免费注册</a>
+						<a class="forget" href="${forget }forgetpw">忘记密码？</a> <a class="registerlink" href="${forget }signin">免费注册</a>
 					</div>
 				</div>
 			</form:form>
