@@ -730,7 +730,7 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 this.update(simpleFtseUserTrade);
 //				handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade); // 保存收益报表记录
             }
-            if(ActivityConfig.now_time < ActivityConfig.activity_onLineEndTime){
+            if(dataMapService.activityExpired()){
             	this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile(),wellGoldA50.getId());
             }
             return new JsonResult(true, "方案结算成功！");

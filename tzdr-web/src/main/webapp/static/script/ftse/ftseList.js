@@ -197,7 +197,7 @@ function getFtseDataList(index,type,
 	            	+ n.tranProfitLoss + ","
 	            	+n.endParities+","
 	            	+ n.tranFeesTotal +"," + n.endAmount +","+n.businessType+","+n.tranActualLever +","+n.crudeTranActualLever +","+n.hsiTranActualLever+ ","+n.mdtranActualLever+","
-	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+","+n.hstranActualLever+","+n.agtranActualLever+"));\" " +
+	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+","+n.lhsiTranActualLever+","+n.agTranActualLever+"));\" " +
 	            	"style=\"cursor:pointer;color:#fc3;\" class='uc_tlbtn_btn_see' >账单详细</a></td>";
             	}else{
             		html = html + "<td></td>";

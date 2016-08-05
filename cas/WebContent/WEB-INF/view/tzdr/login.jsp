@@ -7,7 +7,7 @@
 <%
 	String appPath = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+appPath;
-	String forgetPw = "http"+"://www.dktai.com";//"http"+"://localhost:8088/tzdr-web/";////www.dktai.com
+	String forgetPw = "http"+"://www.vs.com/";//"http"+"://localhost:8088/tzdr-web/";////www.vs.com
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
 <c:set var="forget" value="<%=forgetPw%>"></c:set>
