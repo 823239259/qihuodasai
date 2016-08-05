@@ -976,6 +976,7 @@ var tab="<%=tab%>";
             <!-- <a href="javascript:void(0)" class="on" data="1">股票交易系统<i style="right: 20px;">></i></a>       
             <a href="javascript:void(0)" data="12">股票掌上交易系统<i style="right: 20px;">></i></a> --> 
             <a href="javascript:void(0)" class="on" data="1">易盛极星交易系统<i style="right: 20px;">></i></a>
+            <a href="javascript:void(0)" data="21">维胜交易标准版<i style="right: 20px;">></i></a>
             <a href="javascript:void(0)" data="22">维胜快手交易系统<i style="right: 20px;">></i></a>
         </div>
         <div class="hp_mainbar hp_mbox1" style="display:none;">
@@ -991,6 +992,30 @@ var tab="<%=tab%>";
                 <p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-29.png"><a href=""></a></p>            
             	<h6 style="font-weight: normal;color:#fc3; margin-top:10px;margin-bottom: 50px;">4、在软件横向下单区域，选择需要交易合约进行『买入』或『卖出』，开始国际期货操盘；或者在行情列表双击需要交易合约所在行，对应合约信息将自动添加到横向下单板块</h6>  
             	<p style="margin-bottom:40px; text-indent:0;"><img style="width:100%" alt="" src="${ctx }/static/images/help/vs-help-30.png"><a href=""></a></p>
+            </div>
+        </div>
+        <div class="hp_mainbar hp_mbox21" style="display:none;">
+        	<a href="http://socket.vs.com/download/%e7%bb%b4%e8%83%9c%e4%ba%a4%e6%98%93%e6%a0%87%e5%87%86%e7%89%88v1.0.zip" ><img  alt="" src="${ctx }/static/images/help/vs-help-39.png"></a>
+            <h1 style="border-bottom:1px solid #d1d1d1;">维胜交易标准版</h1>    
+            <div class="hp_tts">   
+                <p style="color:red;font-size: 14px;">维胜交易标准版产品简介<p>
+                <p>维胜交易标准版由盈透公司内部针对新老喜欢期货的用户开发的一套简单易懂的操盘软件。功能及界面上虽然做了很多改进和优化。</p>
+                <p>该交易端界面清晰，操作简单，学习成本低，大大降低了客户的使用难度。该快手交易系统 软件针对港交所品种的下单问题上做了优化，即软件会自动以限价超价的形式进行下单，以达到市价成交的效果，软件默认超价 50 个点，使得对应品种的下单更为便捷、快速。</p>
+                <p>登陆后界面如图所示，界面主要信息字段一目了然，清晰易懂。</p>
+                <p style="color:red;font-size: 14px;">维胜交易标准版使用简介<p>
+                <p>1, 启动维胜交易客户端，弹出登录窗口，在登录窗口的‘输入您的账号和密码您可自行选择是否记住密码或者自动登录。 账号信息填入完毕之后，点击【立即登录】按钮，进入交易端页面。</p>
+                <p>注意：账号默认为VS，账号和密码用户可随便输入。</p>
+                <img src="${ctx}/static/images/help/vs-help-40.png">
+                <p>2、进入交易端页面，用户可根据自身对期货的了解选择模拟操盘，和实际操盘。模拟操盘针对新手用户，更快的上手。实盘操盘必须现在维胜的官网申请操盘方案，获得操盘账号和密码方可进入，如下图；</p>
+                <img src="${ctx}/static/images/help/vs-help-41.png">
+                <p>3、进入交易客户端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手办、限价版；</p>
+                <img src="${ctx}/static/images/help/vs-help-42.png">
+                <p>4、点击鼠标右键提示选择合约，您可以添加您感兴趣的合进行观察行情，再点击确认，行情便添加成功。</p>
+                <img src="${ctx}/static/images/help/vs-help-43.png">
+                <p>5、购买合约：第一步：用户可在行情列表中，鼠标点击您选中的合约代码，第二步：观看维胜的左下角的交易板块，填入您想购买合约的数量；第三步：点击买入按钮，弹出下单确认窗口；第四步：核对您的订单信息是否正确，若点击【确认】按钮，购买完成；点击【取消】按钮，购买失败。</p>
+                <img src="${ctx}/static/images/help/vs-help-44.png">
+                <p>6、卖出合约：用户点击选中的持仓合约，选择卖出的合约，点击卖出即可卖出。也可右击选择平仓也可进行卖出合约。</p>
+                <img src="${ctx}/static/images/help/vs-help-45.png">
             </div>
         </div>
         <div class="hp_mainbar hp_mbox22" style="display:none;">
