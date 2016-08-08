@@ -157,6 +157,17 @@
 			}
 		},"json");
     })
+    window.onload=function(){
+    	$(function(){
+    		$(".bannerList").each(function(){
+    		   var $this =	$(this);
+    		   var href =  $this.attr("href");
+    		   if(href.indexOf("sign/luck/view") > 0){
+    			   $this.attr("target","_self");
+    		   }
+    		});
+    	});
+    }
 	</script>
 </head>
 <body>
@@ -215,10 +226,10 @@
        	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
 	           	<c:if test="${not empty b.linkUrl }">
-			    	<a href="${b.linkUrl }" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+			    	<a href="${b.linkUrl }" class = "bannerList" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	           	</c:if>
 	           	<c:if test="${empty b.linkUrl }">
-			    	<a href="javascript:void(0);"  style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+			    	<a href="javascript:void(0);" class = "bannerList"  style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	           	</c:if>
 	       </c:forEach>
     	</div>

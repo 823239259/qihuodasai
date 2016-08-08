@@ -134,6 +134,7 @@
 			<mvc:exclude-mapping path="/topic/**/images/**"/>
 			<mvc:exclude-mapping path="/topic/**/css/**"/>
 			<mvc:exclude-mapping path="/topic/**/js/**"/>
+			<mvc:exclude-mapping path="/Quotation/**"/>
 			<bean class="com.tzdr.web.support.AllUrlInterceptor"></bean>
 		</mvc:interceptor>
 		<mvc:interceptor>
