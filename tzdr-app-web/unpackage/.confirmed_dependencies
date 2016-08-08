@@ -79,7 +79,8 @@
       "tzdr/future/listrg.html",
       "tzdr/account/accountno.html",
       "tzdr/buy/buy.html",
-      "tzdr/future/lhsi.html"
+      "tzdr/future/lhsi.html",
+      "tzdr/scheme.html"
     ]
   },
   "list.html": {
@@ -211,7 +212,8 @@
       "fonts/mui.ttf",
       "css/mui.min.css",
       "js/jquery-1.11.3.js",
-      "js/pingpp.js"
+      "js/pingpp.js",
+      "images/bank1.png"
     ],
     "refer": [
       "tzdr/future/list.html",
@@ -629,7 +631,8 @@
       "css/mui.min.css",
       "css/own.css",
       "js/mui.min.js",
-      "js/common.js"
+      "js/common.js",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -655,7 +658,8 @@
       "css/mui.min.css",
       "css/own.css",
       "js/mui.min.js",
-      "js/common.js"
+      "js/common.js",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -675,7 +679,8 @@
       "css/mui.min.css",
       "css/own.css",
       "js/mui.min.js",
-      "js/common.js"
+      "js/common.js",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -696,7 +701,8 @@
       "css/mui.min.css",
       "css/own.css",
       "js/mui.min.js",
-      "js/common.js"
+      "js/common.js",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -815,7 +821,25 @@
   },
   "tzdr/scheme.html": {
     "resources": [
-      "images/list_02.png"
+      "images/list_02.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html"
+    ]
+  },
+  "tzdr/account/openUrlPay.html": {
+    "resources": [
+      "css/own.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/jquery-1.11.3.js",
+      "js/pingpp.js"
     ]
   }
 }
