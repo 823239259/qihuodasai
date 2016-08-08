@@ -17,7 +17,8 @@
       "main.html",
       "tzdr/account/account.html",
       "tzdr/future/listrg.html",
-      "tzdr/account/accountno.html"
+      "tzdr/account/accountno.html",
+      "guide.html"
     ]
   },
   "tzdr/login/login.html": {
@@ -350,7 +351,8 @@
       "js/common.js",
       "css/mui.min.css",
       "css/own.css",
-      "images/list_02.png"
+      "images/list_02.png",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -817,7 +819,8 @@
   "tzdr/future/DetailLhsi.html": {
     "resources": [
       "images/list_01.png"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/scheme.html": {
     "resources": [
@@ -840,6 +843,19 @@
       "js/common.js",
       "js/jquery-1.11.3.js",
       "js/pingpp.js"
+    ],
+    "refer": []
+  },
+  "guide.html": {
+    "resources": [
+      "images/guide1.png",
+      "fonts/mui.ttf",
+      "images/guide4.png",
+      "images/guide2.png",
+      "images/guide3.png"
+    ],
+    "refer": [
+      "main.html"
     ]
   }
 }
