@@ -354,7 +354,15 @@ public class ExtendsionSignController {
 		}
 		return resultJson;
 	}
-
+	/**
+	 * 推广码页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/invitation/code", method = RequestMethod.GET)
+	public String invitationCode(ModelMap modelMap,HttpServletRequest  request) {
+		return ViewConstants.SignInViewJsp.EXTENDSION_INVITATION_CODE;
+	} 
 	public GeneralizeChannel getChannel(String params) {
 		List<GeneralizeChannel> generaList = channelService.findByParamAndDeletedFalse(params);
 		GeneralizeChannel channel2 = null;

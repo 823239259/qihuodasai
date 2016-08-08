@@ -71,6 +71,10 @@ public class ViewConstants {
 		 */
 		public static final String EXTENDSION_SUCCESS_FUL_VEIW= "/views/signin/activitySucful";
 		/**
+		 * 推广码页面
+		 */
+		public static final String EXTENDSION_INVITATION_CODE = "/views/invitationCode/invitationCode";
+		/**
 		 * 注册成功页面
 		 */
 		public static final String SIGNINSUCESS_VIEW = "/views/signin/signInSucess";
