@@ -262,6 +262,7 @@
 	 		<a class="anniuqx"  onclick="javascript:closeDiv('zc')">取消</a>
 	 	</div> 
 </div>
+</div>
 <div class="bannerlist">
 	<div class="slide_box">
 		<div class="slide_banner">
