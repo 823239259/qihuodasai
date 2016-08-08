@@ -258,13 +258,13 @@ var tzdr = {
 	constants:{
 		//接口域名地址
 		//api_domain:"http://192.168.10.115:8080/tzdr-app/",
-		api_domain:"http://api.dktai.com/",
+		api_domain:"http://api.vs.com/",
 		
 		//api_domain:"http://c.tzdr.com:8888/tzdr-app/",
 		
 		//api_domain:"http://app.tzdr.com/",
 		//图片地址
-		base_images_url:'http://manage.dktai.com/',
+		base_images_url:'http://manage.vs.com/',
 		
 		//base_images_url:'http://c.tzdr.com:8888/tzdr-cms/', 
 		
