@@ -19,6 +19,9 @@
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
 <script type="text/javascript">
+	_CWiQ.push(['_trackReg', 1]); //段代码需要加在注册成功页上
+</script>
+<script type="text/javascript">
 window.onload = function(){
 	/* 倒计时  */
 	$(function(){

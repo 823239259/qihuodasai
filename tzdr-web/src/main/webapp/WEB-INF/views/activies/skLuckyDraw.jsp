@@ -143,7 +143,7 @@
     function kszx(){
     	$("#kszj").css("display","block");
     	$("#div_Mask").show();
-		var windowWidth = document.documentElement.clientWidth;   
+		/* var windowWidth = document.documentElement.clientWidth;   
 		var windowHeight = document.documentElement.clientHeight;   
 		var popupHeight = $(".tck01").height();   
 		var popupWidth = $(".tck01").width();    
@@ -151,56 +151,29 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
-		flag = true;
+		flag = true; */
     }
     function kszxno(){
     	$("#zp").css("display","block");
     	$("#div_Mask").show();
-		var windowWidth = document.documentElement.clientWidth;   
-		var windowHeight = document.documentElement.clientHeight;   
-		var popupHeight = $(".tck01").height();   
-		var popupWidth = $(".tck01").width();    
-		$(".tck01").css({     
-		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-		 "left": (windowWidth-popupWidth)/2   
-		});  
-		flag = true;	
     }
     function zhuce(){
     	$("#zc").css("display","block");
     	$("#div_Mask").show();
-		var windowWidth = document.documentElement.clientWidth;   
-		var windowHeight = document.documentElement.clientHeight;   
-		var popupHeight = $(".tck01").height();   
-		var popupWidth = $(".tck01").width();    
-		$(".tck01").css({     
-		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-		 "left": (windowWidth-popupWidth)/2   
-		});  
-		flag = true;
     }
     function frequently(){
     	$("#frequently").css("display","block");
     	$("#div_Mask").show();
-		var windowWidth = document.documentElement.clientWidth;   
-		var windowHeight = document.documentElement.clientHeight;   
-		var popupHeight = $(".tck01").height();   
-		var popupWidth = $(".tck01").width();    
-		$(".tck01").css({     
-		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-		 "left": (windowWidth-popupWidth)/2   
-		});  
-		flag = true;
     }
 	</script>
 	<style type="text/css">
-		.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
+		.div_loading {width: 372px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto; position: relative;}
 		.anniu {text-align: center;}
 		.smain {text-align: center;}
 		.anniu a {margin-left: 30px;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
 		.money {color:#fc3;}
 		.navtitle .nava {width: 550px; text-align: center;}
-		.tck01 {width: 350px;height: 160px;}
+		.tck01 {width: 350px;height: 160px; margin-top: 50%;top: 150px;left: 0;}
 		.anniuzu:hover{background: #fe3; cursor: pointer;}
 		.anniu .anniuqx {background: #666; color: #fff;}
 		.anniu .anniuqx:hover {background: #333; cursor: pointer;}
