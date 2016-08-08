@@ -109,7 +109,11 @@
 			document.getElementById("account").value="";
 			document.getElementById("password").value="";
 		};
-	
+//		function MacthValue(){
+//			var mobile=document.getElementById("account").value;
+//			var mobilePattern={mobile: /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/ };
+//			
+//		}
 		function userLogin(){
 			var mobile=document.getElementById("account").value;
 			var password=document.getElementById("password").value;
@@ -171,11 +175,11 @@
 		<form id='login-form' class="mui-input-group">
 			<div class="mui-input-row">
 				<label>手机号码</label>
-				<input id='account' type="tel" class="mui-input-clear mui-input" placeholder="请输入账号" autocomplete="off">
+				<input id='account' type="tel" class="mui-input-clear mui-input" placeholder="请输入账号" autocomplete="off"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 			</div>
 			<div class="mui-input-row mui-password">
 				<label>登录密码</label>
-				<input id="password" type="password" class="mui-input-password" placeholder="请输入密码" autocomplete="off">
+				<input id="password" type="password" class="mui-input-password" placeholder="请输入密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
 			</div>	
 		</form>
 		<div class="mui-content-padded">

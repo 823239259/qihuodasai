@@ -75,7 +75,7 @@
 								<li class="mui-table-view-cell">
 									<label>充值金额</label>
 									<span>元</span>
-									<input type="number" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5">
+									<input type="number" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 								</li>
 							</ul>
 							<div class="mui-content-padded" style="margin-top: -15px;">
@@ -176,11 +176,11 @@
 									</li>
 									<li class="mui-table-view-cell">
 										<label>转账金额</label>
-										<input type="number" class="mui-input-clear" placeholder="" data-input-clear="5" id="bank_money">
+										<input type="number" class="mui-input-clear" placeholder="" data-input-clear="5" id="bank_money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 									</li>
 									<li class="mui-table-view-cell">
 										<label>流水单号</label>
-										<input type="text" class="mui-input-clear" placeholder="" data-input-clear="5" id="serialnum">
+										<input type="text" class="mui-input-clear" placeholder="" data-input-clear="5" id="serialnum" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 									</li>
 								</ul>
 								
