@@ -24,6 +24,43 @@
 <c:set var="p2pMyBorrowMoney" value="<%=p2pMyBorrowMoney%>"></c:set>
 <c:set var="p2pMyInvestment" value="<%=p2pMyInvestment%>"></c:set>
 <c:set var="futureUrl" value="<%=futureUrl %>"></c:set>
+<script type='text/javascript'>
+
+window._CWiQ = window._CWiQ || [];
+
+window.BX_CLIENT_ID = 38474; // 帐号ID
+
+(function() {
+
+var c = document.createElement('script')
+
+,p = 'https:'==document.location.protocol;
+
+c.type = 'text/javascript';
+
+c.async = true;
+
+c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
+
+var h = document.getElementsByTagName('script')[0];
+
+h.parentNode.insertBefore(c, h);
+
+})();
+
+</script>
+
+<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
+
+</script>
+
+<script type='text/javascript'>
+
+    window.BX_CLIENT_ID = 38474; // 帐号ID
+
+    BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+
+</script>
 <script language="javascript" src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
 <script language="javascript" src="${ctx}/static/script/common/commonUtils.js"></script>
 <!-- <script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script> -->
