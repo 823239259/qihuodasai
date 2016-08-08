@@ -92,9 +92,7 @@
 		"Camera": {},
 		"Gallery": {},
 		"Barcode": {},
-		"Geolocation": {},"Messaging":{},"Statistic":{
-		"description": "管理统计插件"
-		}
+		"Geolocation": {},"Messaging":{},"Statistic":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -103,11 +101,7 @@
 		},
 		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-
-		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a2a12867e58ecf320036b2","channelid_ios":"appstore","appkey_android":"57a2a12867e58ecf320036b2","channelid_android":"android"}}},
-
 		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"5716fab8e0f55a394c00216b","channelid_android":"android"}}},
-
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -166,26 +160,26 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "images/boot/ios/start1.png", /*iPhone3启动图片选，分辨率：320x480*/
+						"default": "images/boot/android/start1.png", /*iPhone3启动图片选，分辨率：320x480*/
 						"retina35": "images/boot/ios/640#960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "images/boot/ios/640#1136.png",
 						"retina47": "images/boot/ios/750#1334.png",
-						"retina55": "images/boot/ios/1242#2208.png","retina55l":"images/boot/android/1080#1920.png"
+						"retina55": "images/boot/ios/1242#2208.png","retina55l":"images/boot/android/start1.png"
 					},
 					"ipad": {
-						"portrait": "images/boot/android/start1.png", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "images/boot/android/1080#1920.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "images/boot/android/1080#1920.png", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "images/boot/android/1080#1920.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "images/boot/android/1080#1920.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "images/boot/android/1080#1920.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "images/boot/android/1080#1920.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": "images/boot/ios/1242#2208.png"
+						"portrait": "images/boot/ios/start1.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "images/boot/ios/start1.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "images/boot/android/start1.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "images/boot/ios/start1.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "images/boot/ios/start1.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "images/boot/ios/start1.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "images/boot/android/start1.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "images/boot/ios/start1.png"
 					}
 				},
 				"android": {
-					"mdpi": "images/boot/android/480#800.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "images/boot/android/480#800.png", /*大屏启动图片，分辨率：320x442*/
+					"mdpi": "images/boot/android/start1.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "images/boot/android/start1.png", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "images/boot/android/480#800.png", /*高分屏启动图片，分辨率：480x762*/
 					"xhdpi": "images/boot/android/720#1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
 					"xxhdpi": "images/boot/android/1080#1920.png"
@@ -912,9 +906,7 @@
 					"images/guide2.png",
 					"images/guide3.png",
 					"js/mui.min.js",
-					"css/mui.min.css",
-					"css/own.css",
-					"js/common.js"
+					"css/mui.min.css"
 				],
 				"refer": [
 					"main.html"
@@ -940,17 +932,7 @@
 	},
 	"fullscreen": true,
 	"unpackage":[
-
-	  "images/ac_07.png",
-	  "images/ac_08.png",
-	  "images/acp_04.gif",
-	  "tzdr/account/bankcode.html",
-	  "tzdr/account/share.html",
-	  "tzdr/account/withdcode.html",
-	  "tzdr/future/paysuc.html"
-
 	  "css/mui.css",
 	  "js/mui.js"
-
 	]
 }
