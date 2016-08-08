@@ -73,7 +73,7 @@ public class ViewConstants {
 		/**
 		 * 跳转到推广码页面
 		 */
-		public static final String TXTENDSION_INVATION_CODE = "/veiws/invitationCode/invitationCode";
+		public static final String TXTENDSION_INVATION_CODE = "/views/fund/invitationCode";
 		/**
 		 * 注册成功页面
 		 */
