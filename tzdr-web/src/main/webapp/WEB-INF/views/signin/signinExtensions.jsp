@@ -56,7 +56,7 @@
 </div>
 <div class="ks_header">
 	<div class="ks_content">
-		<a class="logo" href="http://www.dktai.com">
+		<a class="logo" href="http://www.vs.com">
 			<img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜">
 		</a>
 		<p>

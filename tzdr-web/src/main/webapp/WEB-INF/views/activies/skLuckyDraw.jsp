@@ -1,3 +1,6 @@
+<%@page
+	import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
@@ -136,6 +139,9 @@
            /* console.log(item);*/
         });
     });
+    function login(){
+    		window.location.href=basepath+"/toLuckDrawSSO"; 
+    }
     function rnd(n, m){
         return Math.floor(Math.random()*(m-n+1)+n)
     }
@@ -252,7 +258,7 @@
 			<div>你还未登录，赶紧去登陆吧!</div>
 		</div>
 		<div class="anniu">
-	 		<a href="${ctx}/user/account">立即登录</a>
+	 		<a  href="javascript:void();" onclick="login()">立即登录</a>
 	 		<a  onclick="javascript:closeDiv('zc')">取消</a>
 	 	</div> 
 	</div>

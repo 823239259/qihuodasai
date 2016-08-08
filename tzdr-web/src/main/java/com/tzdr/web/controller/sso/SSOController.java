@@ -30,7 +30,7 @@ public class SSOController {
 	 * @param backData
 	 * @param key
 	 * @param modelMap
-	 * @param request
+	 * @param requestw
 	 * @param response
 	 * @return
 	 * @throws UnsupportedEncodingException 
@@ -263,7 +263,9 @@ public class SSOController {
 	public String toComprehensiveCommodityIndexSSO(HttpServletRequest request, HttpServletResponse response){
 		return "redirect:/commodity/index";
 	}
-	
-	
+	@RequestMapping(value = "/toLuckDrawSSO")
+	public String toLuckDraw(HttpServletRequest request, HttpServletResponse response){
+		return "redirect:/extendsion/sign/luck/view";
+	}
 	
 }
