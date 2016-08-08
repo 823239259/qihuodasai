@@ -160,26 +160,26 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "images/boot/android/start1.png", /*iPhone3启动图片选，分辨率：320x480*/
+						"default": "images/boot/ios/640#960.png", /*iPhone3启动图片选，分辨率：320x480*/
 						"retina35": "images/boot/ios/640#960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "images/boot/ios/640#1136.png",
 						"retina47": "images/boot/ios/750#1334.png",
-						"retina55": "images/boot/ios/1242#2208.png","retina55l":"images/boot/android/start1.png"
+						"retina55": "images/boot/ios/1242#2208.png","retina55l":"images/boot/ios/640#960.png"
 					},
 					"ipad": {
-						"portrait": "images/boot/ios/start1.png", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "images/boot/ios/start1.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "images/boot/android/start1.png", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "images/boot/ios/start1.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "images/boot/ios/start1.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "images/boot/ios/start1.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "images/boot/android/start1.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": "images/boot/ios/start1.png"
+						"portrait": "images/boot/ios/640#960.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "images/boot/ios/640#960.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "images/boot/android/480#800.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "images/boot/ios/640#960.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "images/boot/ios/640#960.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "images/boot/ios/640#960.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "images/boot/ios/640#960.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "images/boot/ios/640#960.png"
 					}
 				},
 				"android": {
-					"mdpi": "images/boot/android/start1.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "images/boot/android/start1.png", /*大屏启动图片，分辨率：320x442*/
+					"mdpi": "images/boot/android/480#800.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "images/boot/android/480#800.png", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "images/boot/android/480#800.png", /*高分屏启动图片，分辨率：480x762*/
 					"xhdpi": "images/boot/android/720#1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
 					"xxhdpi": "images/boot/android/1080#1920.png"
