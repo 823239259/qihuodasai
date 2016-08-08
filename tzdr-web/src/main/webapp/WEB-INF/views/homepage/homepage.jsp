@@ -28,6 +28,44 @@
 	<!-- common css -->
 	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 	<!-- common js -->
+	<script type='text/javascript'>
+
+		window._CWiQ = window._CWiQ || [];
+		
+		window.BX_CLIENT_ID = 38474; // 帐号ID
+		
+		(function() {
+		
+		var c = document.createElement('script')
+		
+		,p = 'https:'==document.location.protocol;
+		
+		c.type = 'text/javascript';
+		
+		c.async = true;
+		
+		c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
+		
+		var h = document.getElementsByTagName('script')[0];
+		
+		h.parentNode.insertBefore(c, h);
+		
+		})();
+		
+	</script>
+
+	<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
+	
+	</script>
+
+	<script type='text/javascript'>
+	
+	window.BX_CLIENT_ID = 38474; // 帐号ID
+	
+	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+	
+	</script>
+	
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js?v=${v}"></script>
 	<script type="text/javascript">
 		var basepath = "<%=basePath%>" + "/";
@@ -40,17 +78,17 @@
 	<style type="text/css">
 	.ft_wx a:hover { background: url(../static/images/common-new/wxon.png) no-repeat; }
 	.ft_wx a { display: block; width: 50px; height: 50px; background: url(../static/images/common-new/wx.png) no-repeat;}
-	.navlist li a.on{color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+	#shouye {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 	.left_hidden{float: left; width: 195px; }
 	#left_xiangqing{background: #333; float: left;height: 508px;  width: 195px; position: relative;overflow: hidden;}
     #left_xiangqing .w_content .left_hidden{float: left; width: 195px;}
     #left_xiangqing .scroll_y{background: #fc3;position: absolute; right: 0;width: 5px;}
     #left_xiangqing .scroll_ymove{background: #292929; height: 508px;position: absolute; right: 0;width: 5px;z-index: 2;}
-	.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
+	.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto; position: relative;}
 	.anniu {text-align: center;}
 	.smain {text-align: center;}
 	.tck01 .anniu a {margin-left: 0;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
-	
+	.tck01 {width: 350px;height: 160px; margin-top: 50%;top: 150px;left: -44px;}
 	</style>
 	<script type="text/javascript">
 	function skbt(luckNum){
@@ -207,6 +245,7 @@
 	       	%>
 	        <div class="lgctn" id="logindiv">
 	            <h3>登录</h3>
+	            	<input type="hidden" value="${islogin }" id = "islogin"> 
 	             <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
 	                <input type="hidden" name="isajax" value="true">
 	                <input type="hidden" name="isframe" value="true">
@@ -216,12 +255,12 @@
 	                <div class="lg_ip">
 	                    <div class="lg_ipctn">
 	                        <i class="user"></i>
-	                        <input type="tel" id="username" name="username" value="" placeholder="请输入手机号码">
+	                        <input type="tel" id="username" name="username" value="${m }" placeholder="请输入手机号码">
 	                        <!-- 请输入手机号码 -->
 	                    </div>
 	                    <div class="lg_ipctn">
 	                        <i class="password"></i>
-	                        <input type="password" id="password" name="password" value="" placeholder="请输入登录密码">
+	                        <input type="password" id="password" name="password" value="${p }" placeholder="请输入登录密码">
 	                        <!-- 请输入登录密码 -->
 	                    </div>
 	                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
@@ -600,7 +639,7 @@
 	    	socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 	    }
 	    
-	    var url = "ws://socket.dktai.com:9002";
+	    var url = "ws://socket.vs.com:9002";
 	    var socket = new WebSocket(url);
 	    socket.onopen = function(evt){
 			sendMessage('Login','{"serName":"13677622344","PassWord":"a123456"}');

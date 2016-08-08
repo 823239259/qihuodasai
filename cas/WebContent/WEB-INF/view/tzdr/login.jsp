@@ -7,7 +7,7 @@
 <%
 	String appPath = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+appPath;
-	String forgetPw = "http"+"://www.dktai.com";//"http"+"://localhost:8088/tzdr-web/";////www.dktai.com
+	String forgetPw = "http"+"://test.www.vs.com/";//"http"+"://localhost:8088/tzdr-web/";////www.vs.com
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
 <c:set var="forget" value="<%=forgetPw%>"></c:set>
@@ -19,6 +19,43 @@
 <link rel="shortcut icon" href="${ctx}/images/login/weisheng-icon.png">
 <link rel="stylesheet" href="${ctx}/css/login.css?ver=20150901">
 <!-- <script language="javascript" src="http://www.tzdr.com/static/script/common/jquery-1.8.0.min.js"></script> -->
+	<script type='text/javascript'>
+
+		window._CWiQ = window._CWiQ || [];
+		
+		window.BX_CLIENT_ID = 38474; // 帐号ID
+		
+		(function() {
+		
+		var c = document.createElement('script')
+		
+		,p = 'https:'==document.location.protocol;
+		
+		c.type = 'text/javascript';
+		
+		c.async = true;
+		
+		c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
+		
+		var h = document.getElementsByTagName('script')[0];
+		
+		h.parentNode.insertBefore(c, h);
+		
+		})();
+		
+	</script>
+
+	<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
+	
+	</script>
+
+	<script type='text/javascript'>
+	
+	window.BX_CLIENT_ID = 38474; // 帐号ID
+	
+	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+	
+	</script>
 <script language="javascript" src="resources/jquery.min.js?ver=20150901"></script>
 <script type="text/javascript">
 	var basepath = '${ctx}' + "/";
@@ -42,7 +79,7 @@
 			<form:form method="post" id="fm1" commandName="${commandName}"
 				htmlEscape="true" cssClass="form">
 				<div class="ui-logon login" id="login">
-					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget}/signin">立即注册</a></p></h3>
+					<h3>用户登录<p id="rightP" style="margin-top:-15px; *margin-top:-34px;">没有账号？<a href="${forget}signin">立即注册</a></p></h3>
 					<input type="hidden" name="lt" value="${loginTicket}" /> <input
 						type="hidden" name="execution" value="${flowExecutionKey}" /> <input
 						type="hidden" name="_eventId" value="submit" />
@@ -65,7 +102,7 @@
 						<button class="loginbtn" type="button" id="loginbtn">登录</button>
 					</div>
 					<div class="lastP">
-						<a class="forget" href="${forget }/forgetpw">忘记密码？</a> <a class="registerlink" href="${forget }/signin">免费注册</a>
+						<a class="forget" href="${ctx}forgetpw">忘记密码？</a> <a class="registerlink" href="${ctx}signin">免费注册</a>
 					</div>
 				</div>
 			</form:form>
