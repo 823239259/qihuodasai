@@ -111,7 +111,7 @@ public class ExtendsionSignController {
 	public String extenLuckView() {
 		return ViewConstants.SignInViewJsp.EXTENDSION_LUCK_VEIW;
 	}
-
+	
 	private Object lock = new Object();
 
 	/**
@@ -335,7 +335,15 @@ public class ExtendsionSignController {
 		resultJson.appendData("rewardid", activityReward != null ? activityReward.getId():null);
 		return resultJson;
 	}
-
+	/**
+	 * 跳转到推广码页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/invitation/code")
+	public String invitationCode(HttpServletRequest request){
+		return ViewConstants.SignInViewJsp.TXTENDSION_INVATION_CODE;
+	}
 	public GeneralizeChannel getChannel(String params) {
 		List<GeneralizeChannel> generaList = channelService.findByParamAndDeletedFalse(params);
 		GeneralizeChannel channel2 = null;
