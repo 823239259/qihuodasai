@@ -69,7 +69,6 @@
 	</script>
 	<script type="text/javascript">
 	 var bRotate = false;
-	 var flag = true;
 	 var rewardid = null;
 	 function rotateFn(awards, angles, txt){
          bRotate = !bRotate;
@@ -108,17 +107,11 @@
                 duration:8000,
                 callback:function (){
                     alert('网络超时，请检查您的网络设置！');
-                    flag = true;
                 }
             });
         };
+        
         $('.pointer').click(function (){
-        	if(flag){
-        		flag = false;
-        	}else{
-        		frequently();
-        		return;
-        	}
         	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 				if(data.success){
 					if(data.data.islogin){
@@ -180,7 +173,7 @@
     function kszx(){
     	$("#kszj").css("display","block");
     	$("#div_Mask").show();
-		/* var windowWidth = document.documentElement.clientWidth;   
+		var windowWidth = document.documentElement.clientWidth;   
 		var windowHeight = document.documentElement.clientHeight;   
 		var popupHeight = $(".tck01").height();   
 		var popupWidth = $(".tck01").width();    
@@ -188,32 +181,41 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
-		flag = true; */
+    		
     }
     function kszxno(){
     	$("#zp").css("display","block");
     	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+    		
     }
     function zhuce(){
     	$("#zc").css("display","block");
     	$("#div_Mask").show();
-    }
-    function frequently(){
-    	$("#frequently").css("display","block");
-    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
     }
 	</script>
 	<style type="text/css">
-		.div_loading {width: 372px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto; position: relative;}
+		.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
 		.anniu {text-align: center;}
 		.smain {text-align: center;}
 		.anniu a {margin-left: 30px;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
 		.money {color:#fc3;}
 		.navtitle .nava {width: 550px; text-align: center;}
-		.tck01 {width: 350px;height: 160px; margin-top: 50%;top: 150px;left: 0;}
-		.anniuzu:hover{background: #fe3; cursor: pointer;}
-		.anniu .anniuqx {background: #666; color: #fff;}
-		.anniu .anniuqx:hover {background: #333; cursor: pointer;}
 	</style>
 </head>
 <body>
@@ -228,16 +230,8 @@
 			<div>系统已经通过现金红包的方式存入您的账户！</div>
 		</div>
 		<div class="anniu">
-	 		<a class="anniuzu" href="${ctx}/user/account" onclick="javascript:closeDiv('kszj')">查看账户</a>
+	 		<a href="${ctx}/user/account" onclick="javascript:closeDiv('kszj')">查看账户</a>
 	 	</div> 
-	</div>
-	<div class="tck01" id="frequently" style="display: none;">
-		<div class="navtitle">
-			<a class="nava">温馨提示</a><a class="close" onclick="javascript:closeDiv('frequently')"></a>
-		</div>
-		<div class="smain">
-			<div style = "font-size:20px;"><br/>操作频繁，请稍后再试!</div>
-		</div>
 	</div>
 	<div class="tck01" id="zp" style="display: none;">
 		<div class="navtitle">
@@ -247,7 +241,7 @@
 			<div>您暂时没有抽奖机会！赶紧去操盘吧</div>
 		</div>
 		<div class="anniu">
-	 		<a class="anniuzu" href="${ctx}/ftse/index" onclick="javascript:closeDiv('zp')">立即操盘</a>
+	 		<a href="${ctx}/ftse/index" onclick="javascript:closeDiv('zp')">立即操盘</a>
 	 	</div> 
 	</div>
 	<div class="tck01" id="zc" style="display: none;">
@@ -255,13 +249,13 @@
 			<a class="nava">提示</a><a class="close" onclick="javascript:closeDiv('zc')"></a>
 		</div>
 		<div class="smain">
-			<div>你还未登录，赶紧去登录吧!</div>
+			<div>你还未登录，赶紧去登陆吧!</div>
 		</div>
 		<div class="anniu">
-	 		<a class="anniuzu" href="${ctx}/user/account">立即登录</a>
-	 		<a class="anniuqx"  onclick="javascript:closeDiv('zc')">取消</a>
+	 		<a href="${ctx}/user/account">立即登录</a>
+	 		<a  onclick="javascript:closeDiv('zc')">取消</a>
 	 	</div> 
-</div>
+	</div>
 </div>
 <div class="bannerlist">
 	<div class="slide_box">
