@@ -157,7 +157,15 @@
 		// 下载wgt文件
 		function downWgt(_callback){
 			plus.nativeUI.showWaiting("下载升级包...");
-			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';//判断是不是苹果市场  、苹果市场选择第一个下载的name 
+//			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';//判断是不是苹果市场  、苹果市场选择第一个下载的name 
+			var _filename;
+			if(tzdr.constants.is_appstore==true){
+				var _filename='H50967E1D.wgt';
+			
+			}else{
+				var _filename='H50967E1DAPPSTORE.wgt';
+			}
+			//alert(_filename);
 			plus.downloader.createDownload(tzdr.constants.api_domain +"upload/"+_filename, {filename:"_doc/update/"}, function(d,status){
 				plus.nativeUI.closeWaiting();
 				if (status == 200) { 
