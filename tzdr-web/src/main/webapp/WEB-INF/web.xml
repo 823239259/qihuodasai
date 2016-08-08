@@ -307,6 +307,10 @@
 		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/userCommodity/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS Filter</filter-name>
+		<url-pattern>/toLuckDrawSSO</url-pattern>
+	</filter-mapping>
 	<!-- 该过滤器负责对Ticket的校验工作 -->
 	<filter>
 		<filter-name>CAS Validation Filter</filter-name>

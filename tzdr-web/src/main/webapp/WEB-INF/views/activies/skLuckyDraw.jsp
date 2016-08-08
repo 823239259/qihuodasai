@@ -224,7 +224,6 @@
 	 		<a class="anniuzu" href="${ctx}/user/account">立即登录</a>
 	 		<a class="anniuqx"  onclick="javascript:closeDiv('zc')">取消</a>
 	 	</div> 
-	</div>
 </div>
 <div class="bannerlist">
 	<div class="slide_box">

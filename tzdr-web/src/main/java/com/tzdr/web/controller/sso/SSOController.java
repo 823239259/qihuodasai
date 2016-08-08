@@ -263,6 +263,9 @@ public class SSOController {
 	public String toComprehensiveCommodityIndexSSO(HttpServletRequest request, HttpServletResponse response){
 		return "redirect:/commodity/index";
 	}
-	
+	@RequestMapping(value = "/toLuckDrawSSO")
+	public String toLuckDraw(HttpServletRequest request, HttpServletResponse response){
+		return "redirect:/extendsion/sign/luck/view";
+	}
 	
 }

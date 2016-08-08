@@ -363,7 +363,7 @@ public class ExtendsionSignController {
 		}
 		return channel2;
 	}
-
+	
 	/**
 	 * 2出现的概率为%50
 	 */
