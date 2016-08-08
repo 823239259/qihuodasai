@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 (function($) {
 	// 校验网络 
 	var network = true;
@@ -618,7 +618,7 @@ tzdr.kuaiqiangshou=function(obj){
         }
 	}
 
-=======
+
 (function($) {
 	// 校验网络 
 	var network = true;
@@ -1240,4 +1240,4 @@ tzdr.kuaiqiangshou=function(obj){
         }
 	}
 
->>>>>>> branch 'master' of https://git.oschina.net/invtoolbusiness/dktai.git
+ 
