@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>操盘方案</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		//启用双击监听
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:'list_sub.html',
+				id:'list_sub.html',
+				styles:{
+					top: '45px',
+					bottom: '0px',
+				}
+			}]
+		});
+		var contentWebview = null;
+		mui.plusReady(function(){
+			//锁定竖屏方向
+			//tzdr.screenSet();
+			tzdr.init.initHearListener();
+    		document.querySelector('header').addEventListener('doubletap',function(){ 
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});   
+		});
+		
+		
+		
+
+	</script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>-->
+		<h1 class="mui-title">操盘方案</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+<div class="mui-content">
+	<!--<ul class="mui-table-view">
+		<li class="mui-table-view-cell sc_open">
+			<h4>2016-02-25 11:34</h4>
+			<div class="sc_data">
+				<label>交易品种</label>
+				<span>恒指期货</span><br>
+				<label>开仓手数</label>
+				<span>40手</span>
+			</div>
+			<div class="sc_money">
+				<label>总操盘资金</label>
+				<span>388,000美元</span><br>
+				<label>亏损平仓线</label>
+				<span>388,000美元</span>
+			</div>
+			<p class="sc_statusfont"><img src="../../images/status_01.png"></p>
+		</li>	
+		<li class="mui-table-view-cell sc_trade">
+			<h4>2016-02-25 11:34</h4>
+			<div class="sc_data">
+				<label>交易品种</label>
+				<span>恒指期货</span><br>
+				<label>开仓手数</label>
+				<span>40手</span>
+			</div>
+			<div class="sc_money">
+				<label>总操盘资金</label>
+				<span>388,000美元</span><br>
+				<label>亏损平仓线</label>
+				<span>388,000美元</span>
+			</div>			
+			<p class="sc_statusfont">操盘中</p>
+		</li>	
+		<li class="mui-table-view-cell sc_fail">
+			<h4>2016-02-25 11:34</h4>
+			<div class="sc_data">
+				<label>交易品种</label>
+				<span>恒指期货</span><br>
+				<label>开仓手数</label>
+				<span>40手</span>
+			</div>
+			<div class="sc_money">
+				<label>总操盘资金</label>
+				<span>388,000美元</span><br>
+				<label>亏损平仓线</label>
+				<span>388,000美元</span>
+			</div>
+			<p class="sc_statusfont">开户失败</p>
+		</li>		
+	</ul>-->
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>币币支付</title>
+    <script type="text/javascript" src="../../js/mui.min.js"></script>  
+    <script type="text/javascript" src="../../js/common.js"></script>
+</head>
+<body class="ui-page-login">	
+	<div style="display: none;">
+		<form id="payform"  method="post">
+			<input type="text" name="v_mid"  id="v_mid">
+			<input type="text" name="v_oid"  id="v_oid">
+			<input type="text" name="v_rcvname"  id="v_rcvname">
+			<input type="text" name="v_rcvaddr" id="v_rcvaddr">
+			<input type="text" name="v_rcvtel" id="v_rcvtel">
+			<input type="text" name="v_rcvpost" id="v_rcvpost">
+			<input type="text" name="v_amount"  id="v_amount">
+			<input type="text" name="v_ymd"  id="v_ymd">
+			<input type="text" name="v_orderstatus" id="v_orderstatus">
+			<input type="text" name="v_ordername" id="v_ordername">
+			<input type="text" name="v_moneytype" id="v_moneytype">
+			<input type="text" name="v_url"  id="v_url">
+			<input type="text" name="v_md5info"  id="v_md5info">
+			<input type="text" name="v_pmode" id="v_pmode" >
+			<button type="submit">提交</button>
+		</form>
+	</div>
+</body>
+<script>
+	mui.init();  //初始化
+	var ws = null; //定义当前页面对象
+	mui.plusReady(function(){
+		ws = plus.webview.currentWebview(); //获取当前页面对象
+		
+		var payurl = ws.payurl;  //获取页面传参数信息【payurl】
+		var vamount = ws.vamount;  //获取页面传参数信息【vamount】
+		var vmd5info = ws.vmd5info;  //获取页面传参数信息【vmd5info】
+		var vmid = ws.vmid;  //获取页面传参数信息【vmid】
+		var vmoneytype = ws.vmoneytype;  //获取页面传参数信息【vmoneytype】
+		var vordername = ws.vordername;  //获取页面传参数信息【vordername】
+		var vorderstatus = ws.vorderstatus;  //获取页面传参数信息【vorderstatus】
+		var vorid = ws.vorid;  //获取页面传参数信息【vorid】
+		var vpmode = ws.vpmode;  //获取页面传参数信息【vpmode】
+		var vrcvaddr = ws.vrcvaddr;  //获取页面传参数信息【vrcvaddr】
+		var vrcvname = ws.vrcvname;  //获取页面传参数信息【vrcvname】
+		var vrcvpost = ws.vrcvpost;  //获取页面传参数信息【vrcvpost】
+		var vrcvtel = ws.vrcvtel;  //获取页面传参数信息【vrcvtel】
+		var vurl = ws.vurl;  //获取页面传参数信息【vurl】
+		var vymd = ws.vymd;  //获取页面传参数信息【vymd】
+		
+		//访问币币支付充值页面
+		document.getElementById("payform").action = payurl;
+		document.getElementById("v_amount").value = vamount;
+		document.getElementById("v_md5info").value = vmd5info;
+		document.getElementById("v_mid").value = vmid;
+		document.getElementById("v_moneytype").value = vmoneytype;
+		document.getElementById("v_ordername").value = vordername;
+		document.getElementById("v_orderstatus").value = vorderstatus;
+		document.getElementById("v_oid").value = vorid;
+		document.getElementById("v_pmode").value = vpmode;
+		document.getElementById("v_rcvaddr").value = vrcvaddr;
+		document.getElementById("v_rcvname").value = vrcvname;
+		document.getElementById("v_rcvpost").value = vrcvpost;
+		document.getElementById("v_rcvtel").value = vrcvtel;
+		document.getElementById("v_url").value = vurl;
+		document.getElementById("v_ymd").value = vymd;		
+		document.getElementById("payform").submit(); 
+	});
+</script>
+</html>

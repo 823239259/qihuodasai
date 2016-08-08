@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>新闻正文</title>
+    <link rel="stylesheet" href="../../css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/own.css" />
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 class="mui-title">新闻详情</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+<div class="mui-content">
+	<div class="mui-content-padded news_info">
+		<h3 id="newstitle">维胜</h3>
+		<h4>发布时间：<em id="issueDate">2016-02-16 15:27</em></h4>
+		<p id="content"></p>
+	</div>	
+</div>
+<script>	
+		mui.init({
+		});
+		
+		mui.plusReady(function(){  
+			var win = plus.webview.currentWebview();
+			var nid = win.nid;
+			if (mui.isnull(nid)){
+				return;
+			}
+			// 请求获取详情信息
+			mui.app_request('news/detail',
+			{nid:nid},
+			function(result){
+				document.getElementById('newstitle').innerHTML=result.data.title;
+				document.getElementById('issueDate').innerHTML=result.data.issueDate;
+				document.getElementById('content').innerHTML=result.data.content;
+			},function(error){
+				
+			});
+		}); 
+		
+			
+		document.getElementById("back").addEventListener("tap",function(){
+				history.back();
+		});
+		document.getElementById("telBtn").addEventListener("tap",function(){
+			mui.callService();
+		});
+	</script>  
+</body>
+	
+</html>

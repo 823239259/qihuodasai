@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>富时A50 - 方案详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script>
+    	mui.init();
+    	var win=null;
+    	var tranlever=null;
+    	mui.plusReady(function(){
+    		win=plus.webview.currentWebview();
+    		//初始化监听头部和底部事件
+			tzdr.init.initHearListener();
+  			//tzdr.init.initButtomListener();
+    		//获取当前方案信息   方案ID: win.did
+    		mui.app_request("/user/ftrade/details",{
+    			"id":win.did
+    		},function(result){
+    			if(!mui.isnull(result.data.details)){
+    				tranlever=result.data.details.tranLever;
+    				//获取详细数据
+    				setDetails(result.data.details);
+    				//获取主力合约 
+    				mui.each(result.data.details.outDiskVoList,function(i,item){
+    					setOutDisks(item);
+    				});
+    				
+    			}
+    			
+    		},function(result){
+    			mui.toast(result.message);
+    			return;
+    		});
+    		document.getElementById("tran_info").addEventListener("tap",function(){
+  				mui.openWindow("../agree/a50ru.html");
+  			});
+    		
+    		
+    		
+
+    		
+    		
+    		document.getElementById("copyaccount").addEventListener("tap",function(){
+    			var t_text=document.getElementById("trade_account").innerHTML;
+    			copytoClip(t_text);
+    		});
+    		
+    		document.getElementById("copypw").addEventListener("tap",function(){
+    			var t_text=document.getElementById("trade_password").innerHTML;
+    			copytoClip(t_text);
+    		});
+    		
+    		document.getElementById("add_fund").addEventListener("tap",function(){
+    			//追加保证金
+    			mui.openWindow({
+    				url:"add.html",
+    				id:"add.html",
+    				extras:{
+    					did:win.did,businessPageId:'DetailCn.html'  
+    				}
+    			});
+    		});
+    		
+    		//给申请终结方案添加点击事件
+    		document.getElementById("endtolist").addEventListener("tap",function(){
+    			document.getElementById("endtolist").setAttribute("disabled",true);
+		    	//获取当前页面信息
+				mui.app_request("/user/getbalancerate",{
+					"businessType":2,'couponBusinessType':0
+				},function(result){
+					document.getElementById("endtolist").removeAttribute("disabled");
+					//申请终结方案
+	    			mui.openWindow({
+	    				url:"end.html",
+	    				id:"end.html",
+	    				extras:{
+	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:0,businessPageId:'DetailCn.html' 
+	    				}
+	    			});
+				},function(result){
+					document.getElementById("endtolist").removeAttribute("disabled");
+					mui.toast("系统繁忙，请稍后再试！");
+					return;
+				});
+    		});
+    	});
+    	
+    	
+    	function setDetails(details){
+    		document.getElementById("trade_account").innerHTML=details.tranAccount;
+    		document.getElementById("trade_password").innerHTML=details.tranPassword;
+    		document.getElementById("app_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.appTime,"yyyy-MM-dd hh:mm");
+    		document.getElementById("tranLever").innerHTML=details.tranLever+"手";
+    		document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(details.traderBond)+"元";
+    		if(mui.isnull(details.appendTraderBond)){
+    			document.getElementById("appendTraderBond").innerHTML="0元";
+    		}else{
+    			document.getElementById("appendTraderBond").innerHTML=tzdr.moneyUtils.formatCurrency(details.appendTraderBond)+"元";
+    		}
+    		document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.traderTotal)+"美元";
+    		document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.lineLoss)+"美元";
+    		if(mui.isnull(details.feeManage)){
+    			document.getElementById("feeManage").innerHTML="免费";
+    		}else{
+    			document.getElementById("feeManage").innerHTML=details.feeManage+"元";
+    		}
+    		document.getElementById("tranFees").innerHTML=details.tranFees;
+    		
+    		//显示状态
+    		switch (details.stateType){
+    			case 1:
+    				document.getElementById("opening").style.display="block";
+    				/*document.getElementById("todownload").style.display="none";*/
+    				break;
+    			case 2:
+    				document.getElementById("endtolist").style.display="block";
+    				document.getElementById("endtolist").innerHTML="方案终结处理中";
+    				document.getElementById("endtolist").setAttribute("disabled",true);
+    				/*document.getElementById("todownload").style.display="none";*/
+    				
+    				break;
+    			case 3:
+    				document.getElementById("endtolist").style.display="block";
+    				document.getElementById("endtolist").innerHTML="方案终结处理中";
+    				document.getElementById("endtolist").setAttribute("disabled",true);
+    				/*document.getElementById("todownload").style.display="none";*/
+    				
+    				break;
+    			case 5:
+    				document.getElementById("open_fail").style.display="block";
+    				/*document.getElementById("todownload").style.display="none";*/
+    				break;
+    			case 6:
+    				document.getElementById("end").style.display="block";
+    				/*document.getElementById("todownload").style.display="none";*/
+    				//设置结算信息
+    				setEnd_info(details);
+    				break;
+    			default:
+    				document.getElementById("using").style.display="none";
+    				document.getElementById("endtolist").style.display="block";
+    				document.getElementById("add_fund").style.display="block";
+    				document.getElementById("trade_info").style.display="block";
+    				/*var obj=document.getElementById("download_bun");
+    				tzdr.kuaiqiangshou(obj);*/
+    				break;
+    		}
+    		
+    	};
+    	
+    	function setEnd_info(details){
+    		document.getElementById("end_info").style.display="block";
+    		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
+    		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
+    		if (details.tranProfitLoss<0){
+    			document.getElementById("tranProfitLoss").className='dt_m_loss';
+    		}
+    		document.getElementById("endParities").innerHTML="1美元 = "+details.endParities+"人民币";
+    		document.getElementById("tranActualLever").innerHTML=details.tranActualLever+"手";
+    		document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
+    		if(details.endAmount>=0){
+    			document.getElementById("endAmount").innerHTML="+"+tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
+    		}else{
+    			document.getElementById("endAmount").innerHTML=tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
+    		}
+    	};
+    	
+    	function setOutDisks(outDiskList){
+    		
+    		document.getElementById("mainContract").innerHTML=outDiskList.mainContract;
+    		var tradeType="";
+    		
+    		if(outDiskList.tradeType==0||!mui.isnull(outDiskList.tradeType)&&!mui.isnull(tranlever+'')){
+    			switch (outDiskList.tradeType){
+    				case 0:
+    				tradeType="富时A50";
+    					break;
+    				case 6:
+    				tradeType="国际原油";
+    					break;
+    				case 7:
+    				tradeType="恒指期货";
+    					break;
+    				default:
+    					break;
+    			}
+    			
+    		}
+    		document.querySelector(".mui-title").innerHTML="方案: "+tradeType+" "+tranlever+"手";
+    	};
+    	
+    	
+    	//点击复制方法
+		function copytoClip(text){
+			if(plus.os.name=="Android"){
+				var Context=plus.android.importClass("android.content.Context");
+				var main=plus.android.runtimeMainActivity();
+				var clip=main.getSystemService(Context.CLIPBOARD_SERVICE);
+				plus.android.invoke(clip,"setText",text);   
+				mui.toast("复制成功！");
+			}else{
+				var UIPasteboard=plus.ios.importClass("UIPasteboard");
+				var generalPasteboard=UIPasteboard.generalPasteboard();
+				generalPasteboard.setValueforPasteboardType(text,"public.utf8-plain-text");
+				var value=generalPasteboard.valueForPasteboardType("public.utf8-plain-text");
+				mui.toast("复制成功！");
+			}
+		} 
+    	
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 class="mui-title">富时A50</h1>		
+		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
+	</header>
+	<!--<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="navon" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a    id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>-->
+<div class="mui-content sc_listdeta">	
+	<ul class="mui-table-view sc_listtime">
+		<li class="mui-table-view-cell">
+			<label>投资标的：</label>
+			<p>新华富时A50指数当期主力合约<i id="mainContract">xxx</i></p>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>交易时间：</label>
+			<span>09:05-16:25 17:20-01:50</span>
+		</li>
+	</ul>	
+	<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
+	<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
+	<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
+	<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
+	<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
+		<li class="mui-table-view-cell">
+			<label>操盘账户：</label>
+			<span id="trade_account">1000000</span>
+			<a href="javascript:void(0);" id="copyaccount">点击复制<img src="../../images/list_01.png"></a>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>操盘密码：</label>
+			<span id="trade_password">1000000</span>
+			<a href="javascript:void(0);" id="copypw">点击复制<img src="../../images/list_01.png"></a>
+		</li>
+	</ul>
+	<!--<div class="ac_btn" id="todownload">
+		<button id="download_bun" class="mui-btn mui-btn-block sc_listbtn" type="button">打开交易软件</button>								
+	</div>	-->		
+	<div class="dl_main">
+		<div class="mui-content-padded">
+			<div id="ios_down" style="display: none;"><h4>选择“安装”后，请按Home键到桌面查看安装进度。</h4></div>
+			<div id="ios_info" style="display: none;">
+			<h4>① 需要先安装交易软件快抢手，第一次安装后，需要到桌面手动启动1次快抢手</h4>
+			<h4>② 手动启动快抢手时，会提示“未授信任的企业级开发者”，iOS8及之前版本请选择“信任”，<a href="set.html">iOS9版本请查看设置方法>></a></h4>
+			<h4>③  <a href="use.html">查看交易软件快抢手的使用教程>></a></h4></div>
+			<div id="android_info" style="display: none;"><h4><a href="use.html">查看交易软件快抢手的使用教程>></a></h4></div>
+		</div>
+	</div>
+	<ul class="mui-table-view sc_listsc">
+		<li class="mui-table-view-cell">
+			<label>方案申请时间：</label>
+			<span id="app_time">2016-01-29 14:49</span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>最大持仓手数：</label>
+			<span id="tranLever">4手</span>
+		</li>	
+		<li class="mui-table-view-cell">
+			<label>操盘保证金(¥)：</label>
+			<span id="traderBond">27,750元</span>
+		</li>	
+		<li class="mui-table-view-cell">
+			<label>追加保证金(¥)：</label>
+			<span id="appendTraderBond">0元</span>
+			<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
+		</li>	
+		<li class="mui-table-view-cell">
+			<label>总操盘资金($)：</label>
+			<span id="traderTotal">10,750美元</span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>亏损平仓线($)：</label>
+			<span id="lineLoss">10,450美元</span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>账户管理费(¥)：</label>
+			<span id="feeManage">免费</span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>交易手续费(¥)：</label>
+			<span><i id="tranFees">58</i>元/手(双边)</span>
+		</li>
+	</ul>	
+	<div id="end_info" style="display: none;">
+	<ul class="mui-table-view dt_money">
+		<li class="mui-table-view-cell">
+			<label>方案结算时间：</label>
+			<span id="end_time">2016-02-08 16:10</span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>交易盈亏($)：</label>
+			<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>美元结算汇率：</label>
+			<span id="endParities">1美元 = 6.5327人民币</span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>交易手数：</label>
+			<span id="tranActualLever">0手</span>
+		</li>
+		<li class="mui-table-view-cell">
+			<label>交易手续费(¥)：</label>
+			<span id="tranFeesTotal">3,334元</span>
+		</li>
+	</ul>	
+	<ul class="mui-table-view sc_listsc">
+		<li class="mui-table-view-cell">
+			<label>结算金额(¥)：</label>
+			<span id="endAmount">8,355.24元</span>
+		</li>
+	</ul>
+	<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
+	</div>
+	<div class="ac_btn">
+		<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
+	</div>		
+</div>
+</body>
+</html>

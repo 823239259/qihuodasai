@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>终结方案</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 class="mui-title">终结方案</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+	<!--<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="navon" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a    id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>-->
+	<div class="mui-content sc_end">
+		<ul class="mui-table-view aw_bc_bank">
+			<li class="mui-table-view-cell">
+				<label>当前汇率：</label>
+				<span>1美元 =<span id='rateRMB' name="rateRMB">6.5337</span>人民币</span>
+			</li>			
+			<li class="mui-table-view-cell">
+				<label>折扣券(¥)：</label>
+				<select id="coupon_list" name="coupon_list" class="mui-btn mui-btn-block">
+					<option value="">无折扣券</option>
+				</select>
+			</li>		
+		</ul>		
+		<div class="mui-content-padded">
+			<button type="button" id="end_btn" name="end_btn" class="mui-btn mui-btn-block lg-btnlogin">确认终结</button>
+		</div>
+		<div class="mui-content-padded">
+			<h5>温馨提示：</h5>
+			<p>1、系统将在下个交易日开盘前终结</p>
+			<p>2、折扣券一般由维胜平台活动发放，请大家多多关注</p>
+		</div>
+	</div>
+</body>
+<script>
+	mui.init();
+	var win=null;
+	
+	mui.plusReady(function(){
+		
+		//获取当前窗口
+		win = plus.webview.currentWebview();   
+		var _trade_id = win.did;   //方案编号
+		var _rate = win.rate;   //汇率
+		var _coupons = win.coupons;  //折扣劵列表信息
+		var _businessType = win.businessType;  //业务类型 业务类型 如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;
+
+		//初始化监听头部和底部事件
+		tzdr.init.initHearListener();
+		//tzdr.init.initButtomListener();
+		
+		//设置最新汇率
+		document.getElementById('rateRMB').innerHTML=_rate;
+		
+		if(!mui.isnull(_coupons)){  //判断是否有折扣劵
+			var _coupon_options = '<option value="">不使用折扣劵</option>';
+			//获取折扣劵
+			mui.each(_coupons,function(i,item){
+				var _coupon_id = item.id;
+				var _coupon_money = item.money;
+				_coupon_options+= i == 0 ? '<option value="'+_coupon_id+'" selected="selected">'+_coupon_money+'折折扣券</option>' : '<option value="'+_coupon_id+'">'+_coupon_money+'折折扣券</option>';
+			});
+			document.getElementById('coupon_list').innerHTML=_coupon_options;
+		}
+		//给申请终结按钮添加点击事件
+		document.getElementById('end_btn').addEventListener('tap',function(){
+			this.setAttribute('disabled','disabled')  //禁用按钮
+			//获取折扣劵选项
+			var _coupon_option_value = document.getElementById('coupon_list').value;
+			if(!_coupon_option_value){
+				_businessType = '';
+			}
+			
+			//弹出提示信息对话框
+			plus.nativeUI.confirm( "是否终结该方案？", function(e){
+				if(e.index == 0){
+					document.getElementById('end_btn').removeAttribute('disabled'); 
+					return;
+				}
+				mui.app_request('/user/ftrade/endtrade',
+					{
+						"id":_trade_id,"cId":_coupon_option_value,"businessType":_businessType
+					},function(result){
+						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
+						mui.toast("申请成功，系统会尽快处理！");
+						mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
+						return;
+					},function(result){
+						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
+						if(result.code==2){
+							mui.toast("未找到该方案,无法申请终结！");
+							return;
+						}else if(result.code==3){
+							mui.toast("已申请终结，不能重复申请！");
+							return;
+						}else if(result.code==4){
+							mui.toast("该方案为非操盘中，无法申请终结！");
+							return;
+						}else if(result.code==5){
+							mui.toast("未找到该折扣劵劵，申请终结失败！");
+							return;
+						}else if(result.code==6){
+							mui.toast("该折扣劵无法使用，申请终结失败！");
+							return;
+						}else if(result.code==7 || result.code==8 || result.code==9){
+							mui.toast("请求数据有误，无法申请终结！");
+							return;
+						}else{
+							mui.toast("系统繁忙，请稍后再试！");
+							return;
+						}
+					}
+				);
+			}, "终结方案", ["取消","确定"] );
+		});
+    	
+    });
+</script>
+</html>

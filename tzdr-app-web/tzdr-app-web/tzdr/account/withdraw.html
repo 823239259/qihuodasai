@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>我要提现</title>
+    <link rel="stylesheet" href="../../css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/own.css" />
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		mui.init({
+//		    subpages:[{
+//		      url:'../commonback.html',
+//		      id:'common.html',
+//		      styles:{
+//		        top:'0px',//mui标题栏默认高度为45px；
+//		      }
+//		    }]
+		  });   
+		var Certification=false;
+		var balance=null;
+		var drawHandleFee=null;
+		var SetDrawPwd=false;
+		mui.plusReady(function(){
+			  
+    		//初始化监听头部和底部事件
+			tzdr.init.initHearListener();
+  			//tzdr.init.initButtomListener();
+  			
+    		document.getElementById("bindBankCard").addEventListener("tap",function(){
+    			bindBankcard();
+    		});
+    		document.getElementById("bank_info").addEventListener("tap",function(){
+    			bindBankcard();
+    		});
+    		
+    		document.getElementById("drawPage").addEventListener("tap",function(){
+    				//打开设置提现密码页面
+    				mui.openWindow("withdcode.html");
+    		});
+    		
+    		
+    		
+    		document.getElementById("drawmoneysub").addEventListener("tap",function(){
+    			drawmoneySubmit();
+    		});
+    		
+    		
+    		//获取默认绑定的银行卡信息
+    		mui.app_request("user/withdraw/bank_list",{},
+    		function(result){
+    			if(!mui.isnull(result.data)){
+    				mui.each(result.data,function(i){
+    					
+    				
+    					if(result.data[i].default){
+    						setbankinfo(result.data[i]);
+    					}
+    				});
+    			}
+    			
+    		},function(result){
+    			if(result.code==3){
+    				mui.toast("用户信息不存在！");
+    				return;
+    			}else if(result.code==2){
+    				mui.toast("获取失败");
+    				return;
+    			}
+    		});
+    		
+    		
+    		//去后台接口校验是否实名认证
+			mui.app_request("/user/getbalancerate",{
+				"businessType":4 
+			},function(result){
+				balance=document.getElementById("balance");
+				drawHandleFee=document.getElementById("drawHandleFee");
+				//是否实名
+				if(result.data.isCertification){
+					Certification=true;
+				}
+				if(!mui.isnull(result.data.balance)){
+					balance.innerHTML=result.data.balance;
+				}else{
+					balance.innerHTML="0.00";
+				}
+				
+				if(!mui.isnull(result.data.drawHandleFee)){
+					drawHandleFee.innerHTML=result.data.drawHandleFee;
+				}else{
+					drawHandleFee.innerHTML="0.00";
+				}
+				//是否设置了提现密码
+				if(result.data.isSetDrawPwd){
+					SetDrawPwd=true;
+					document.getElementById("drawpassword").placeholder="输入密码";
+					document.getElementById("drawpassword").removeAttribute("readonly");
+					document.getElementById("drawpassword").off("tap");
+					
+				}else{
+					document.getElementById("drawpassword").placeholder="未设置提现密码";
+					document.getElementById("drawpassword").setAttribute("readonly","readonly");
+					document.getElementById("drawpassword").addEventListener("tap",function(){
+	    				//打开设置提现密码页面
+	    				mui.openWindow("withdcode.html");
+    				});
+				}
+			},function(result){
+				return;
+			});
+    		
+		});
+		
+		
+		function drawMoney(){
+			var drawmoney=document.getElementById("drawmoney").value;
+			var balance=document.getElementById("balance").innerHTML;
+			var drawHandleFee=document.getElementById("drawHandleFee");
+			
+			if(mui.isnull(drawmoney)){
+				document.getElementById("drawmoney").value="";
+				mui.toast("不能输入非法字符");
+				return;
+			}
+			
+			if(mui.isnull(balance)){
+				mui.toast("余额不足，请充值！");
+				return;
+			}
+			
+			if(!tzdr.moneyUtils.testDecimal(drawmoney)){
+				mui.toast("最多输入小数点后两位");
+				document.getElementById("drawmoney").value="";
+				document.getElementById("draw_time").innerHTML="0";
+				return;
+			}
+			
+			
+			var draw_time= balance - drawmoney ;
+			
+			var iscould= draw_time >= 0 ? true : false;
+			if(iscould){
+				if(drawmoney>=5000){
+					drawHandleFee.innerHTML="0.00";
+				}
+				
+				document.getElementById("draw_time").innerHTML=tzdr.moneyUtils.decimal(drawmoney-drawHandleFee.innerHTML,2);
+				
+			}else{
+				mui.toast("余额不足，请充值！");
+				return;
+			}
+			
+		};
+		
+		var abbreviation=null;
+		var card=null;
+		function setbankinfo(bank){
+			var bank_info=document.getElementById("bank_info");
+			bank_info.setAttribute("style","display: block;");
+			document.getElementById("defult").setAttribute("style","display: none;");
+			var a=document.createElement("a");
+			a.setAttribute("class","mui-navigate-right");
+			var img=document.createElement("img");
+			abbreviation=bank.abbreviation;
+			img.setAttribute("src","../../images/bank/"+bank.abbreviation+".png");
+			var h3=document.createElement("h3");
+			h3.innerText=bank.bankName;
+			var p=document.createElement("p");
+			p.innerText=bank.card;
+			card=bank.card;
+			
+			a.appendChild(h3);
+			a.appendChild(p);
+			a.appendChild(img);
+			bank_info.appendChild(a);
+		}
+		
+		
+		
+
+		function bindBankcard(){
+			
+			if(!Certification){
+				plus.nativeUI.confirm("请先进行实名认证",function(e){
+					if(e.index==1){
+						mui.openWindow({url:"verified.html",id:"verified",extras:{backPage:'withdraw'}});
+					}else if(e.index==0){
+						mui.openWindow("withdraw.html","withdraw");
+					}
+				},"提示",['取消','去认证']);
+			return;
+			}
+			
+			//去绑定银行卡
+			mui.openWindow("bankcode.html","bankcode");
+		}
+		
+		//确认提现
+		function drawmoneySubmit(){
+			var bank_info=document.getElementById("bank_info").style.display;
+			var drawpassword=document.getElementById("drawpassword").value;
+			var drawmoney=document.getElementById("drawmoney").value;
+			var defult=document.getElementById("defult").style.display;
+			if(bank_info=="none"&&defult=="block"){
+				mui.toast("请绑定银行卡");
+				return;
+			}
+			if(!SetDrawPwd){
+				mui.toast("请设置提现密码");
+				return;
+			}
+			
+			if(mui.isnull(drawpassword)){
+				mui.toast("请输入提现密码");
+				return;
+			}
+			if(mui.isnull(abbreviation)||mui.isnull(card)){
+				mui.toast("请绑定银行卡");
+				return;
+			}
+			if(mui.isnull(drawmoney)){
+				mui.toast("提现金额不能为空");
+				return;
+			}
+			mui.app_request("user/withdraw/handle",{
+				"bank":abbreviation,
+				"card":card,
+			   "money":drawmoney,
+			   "withdrawPwd":drawpassword
+			},function(result){
+				mui.toast("提交成功，系统会尽快处理！");
+				document.getElementById("drawmoney").value="";
+				document.getElementById("drawmoney").placeholder="输入金额";
+				setTimeout(function(){
+					location.reload(true);
+				},1500);
+					
+				
+				return;
+			},function(result){
+				if(result.code==0){
+					mui.toast("token失效");
+					return;
+				}else if(result.code==2){
+					mui.toast("提现失败");
+					return;
+				}else if(result.code==3){
+					mui.toast("用户信息不存在");
+					return;
+				}else if(result.code==4){
+					mui.toast("银行卡卡号不存在");
+					return;
+				}else if(result.code==5){
+					mui.toast("你的账户已被限制提现，具体原因为："+result.message+",请联系客服解除限制！");
+					return;
+				}else if(result.code==6){
+					mui.toast("系统升级期间无法提现");
+					return;
+				}else if(result.code==7){
+					mui.toast("余额不足不能提现");
+					return;
+				}else if(result.code==8){
+					mui.toast("当天取款次数不能超过5次");
+					return;
+				}else if(result.code==9){
+					mui.toast("每次提现金额不能小于10元");
+					return;
+				}else if(result.code==10){
+					mui.toast("提现密码错误");
+					return;
+				}else if(result.code==11){
+					mui.toast("网银平台暂不支持此银行提现，请重新添加银行！");
+					return;
+				}else if(result.code==12){
+					mui.toast("网银限制，单笔提现金额不能超过50000元，每天可提现5笔。");
+					return;
+				}else if(result.code==13){
+					mui.toast("未实名认证");
+					return;
+				}
+				
+			})
+			
+			
+		};
+		
+	</script>
+
+</head>
+<body>
+
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 id="nav-title" class="mui-title">我要提现</h1>
+		<a href="javascript:void(0);" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+
+	<!--<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a  class="navon"  id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>-->
+	<div class="mui-content ac_tel">
+		<ul class="mui-table-view aw_bank">
+			<li class="mui-table-view-cell" style="display: none;" id="bank_info">
+				<!--<a class="mui-navigate-right" href="javascript:void(0);">
+					<img src="../../images/icbc.gif" />
+					<h3>中国工商银行</h3>
+					<p>6222023100061111111</p>
+				</a>-->
+			</li>
+			<li class="mui-table-view-cell" id="defult">
+				<a class="mui-navigate-right" id="bindBankCard">
+					<img src="../../images/ac_code.gif" />
+					<label>未绑定银行卡</label>
+				</a>
+			</li>
+		</ul>
+		<ul class="mui-table-view aw_withlist">
+			<li class="mui-table-view-cell">
+				<label>账户余额</label>
+				<span><i id="balance"></i>元</span>
+			</li>
+			<li class="mui-table-view-cell">
+				<label>提现金额</label>
+				<span>元</span>
+				<input id="drawmoney" type="number" class="mui-input-clear" placeholder="输入金额" data-input-clear="5" oninput="drawMoney()">
+			</li>
+			<li class="mui-table-view-cell">
+				<label>提现手续费</label>
+				<span><i id="drawHandleFee"></i>元</span>
+			</li>
+			<li class="mui-table-view-cell">
+				<label>实际到账</label>
+				<span><i id="draw_time"></i>元</span>
+			</li>
+		</ul>			
+		<ul class="mui-table-view aw_withpassword">
+			<li class="mui-table-view-cell">		 		
+				<a class="mui-navigate-right" href="javascript:void(0);">
+					<label>提现密码</label>
+					<input  id="drawpassword" type="password" class="mui-input-clear" placeholder="输入密码" data-input-clear="5" >
+					<b class="aw_withpasslink" id="drawPage"></b>
+				</a>
+			</li>
+		</ul>	
+		<div class="ac_btn">
+			<button id="drawmoneysub" type="button" class="mui-btn mui-btn-block lg-btnlogin">确认提现</button>								
+		</div>			
+		<div class="mui-content-padded">
+			<h5>温馨提示：</h5>
+			<p>1、提现金额在5000元以下，将收取银行手续费5元；5000元以上，不收取手续费。</p>
+			<p>2、目前每个用户每天只能提现5笔。</p>
+		</div>
+	</div>
+</body>
+</html>

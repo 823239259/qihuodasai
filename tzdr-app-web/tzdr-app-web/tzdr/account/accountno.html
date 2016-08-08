@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>我的账户</title>
+    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" href="../../css/own.css" />
+    <style>
+    .mui-backdrop { z-index: 10;}
+    .mui-bar-tab { z-index: 15;}
+    </style>
+    <script>
+    	mui.init();    	
+    	mui.plusReady(function(){
+    		//初始化监听头部和底部事件
+  			tzdr.init.initButtomListener();
+  			
+  			document.getElementById("regist").addEventListener("tap",function(){
+				mui.openWindow("../login/regist.html");
+			});
+			
+			document.getElementById("login").addEventListener("tap",function(){
+				mui.openWindow("../login/login.html");
+			});
+  		});
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<h1 class="mui-title">我的账户</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+	
+	<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">操盘</span>
+		</a>
+		<!--<a class="" href="javascript:void(0);"  id="ftogether">
+			<span class="mui-icon mui-icon-flag"></span>
+			<span class="mui-tab-label">合买</span>
+		</a>-->
+		<a class="" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a  class="navon"  id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>
+	<div class="mui-content">
+		<div class="mui-content-padded ac_money">
+			<h2 id="title_name">请先登录</h2>
+			<h3 id="title_balance">0.00元</h3>
+			<p>账户余额</p>
+		</div>			
+		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="charge"><img src="../../images/ac_01.png"><i>我要充值</i></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="withdraw"><img src="../../images/ac_02.png"><i>我要提现</i></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="funddetail"><img src="../../images/ac_03.png"><i>资金明细</i></a>
+			</li>
+		</ul>
+		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="user_verified"><img src="../../images/ac_04.png"><i>实名认证</i><b><span id="Certification">未认证</span></b></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="telPhone"><img src="../../images/ac_05.png"><i>手机绑定</i><b>未绑定</b></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)"><img src="../../images/ac_06.png"><i>登录密码</i><b>未登录</b></a>
+			</li>
+		</ul>
+		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="coupon"><img src="../../images/ac_04.png"><i>优惠券</i></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)"><img src="../../images/ac_05.png"><i>邀请好友</i><b>有奖励</b></a>
+			</li>
+		</ul>
+		<ul class="mui-table-view ac_listbtn">
+			<li class="mui-table-view-cell" style="text-align: center;">
+				<a  href="#quitaccc">退出账户</a>
+			</li>
+		</ul>
+	</div>	
+	<div class="mui-backdrop"></div>
+	<div class="main_nolg">		
+		<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>		
+		<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist">新用户注册</button>
+	</div>
+</body>
+</html>

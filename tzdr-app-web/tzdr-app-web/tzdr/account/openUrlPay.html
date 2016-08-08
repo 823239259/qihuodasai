@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>充值</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/own.css" />
+	</head>
+	<body>
+	</body>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="../../js/pingpp.js"></script>
+		<script type="text/javascript">
+		mui.init()
+			mui.plusReady(function() {
+				var h= plus.webview.getWebviewById("pay"); 
+				mui.app_request('/user/pay/pingplusplus', {
+						"money": h.money,
+						"payWay":4
+					}, 
+					function(result) {
+					},
+					function(result) {
+						var charge = JSON.parse(result);
+						pingpp.createPayment(charge, function(result, err) {
+							if(result == "success") {
+								// 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+							} else if(result == "fail") {
+								// charge 不正确或者微信公众账号支付失败时会在此处返回
+							} else if(result == "cancel") {
+								// 微信公众账号支付取消支付
+							}
+							});
+						}
+					);				
+			});
+		</script>
+</html>

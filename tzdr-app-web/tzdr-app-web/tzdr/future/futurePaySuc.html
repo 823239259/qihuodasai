@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>申请成功</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		mui.init();
+		var win=null;
+		mui.plusReady(function(){
+			// 初始化
+  			//tzdr.init.initButtomListener();
+  			win=plus.webview.currentWebview();
+  			
+  			//判断是否秒配成功
+  			executePay(win.isPay);
+  			
+			document.getElementById("openHome").addEventListener("tap",function(){
+				
+				if(mui.isnull(win.type+'')||mui.isnull(win.vid)){
+					mui.toast("确认支付失败，请重新确认！");
+					mui.back();
+					return;
+				}
+				switch (win.type){
+					case 6:
+						mui.openWindow({url:"DetailCl.html",id:"DetailCl.html",extras:{did:win.vid}});
+						break;
+					case 0:
+						mui.openWindow({url:"DetailCn.html",id:"DetailCn.html",extras:{did:win.vid}});
+						break;
+					case 7:
+						mui.openWindow({url:"DetailHsi.html",id:"DetailHsi.html",extras:{did:win.vid}});
+						break;
+					case 8:
+						mui.openWindow({url:"DetailCp.html",id:"DetailCp.html",extras:{did:win.vid}});
+						break;
+					case 9:
+						mui.openWindow({url:"DetailLhsi.html",id:"DetailLhsi.html",extras:{did:win.vid}});
+						break;
+					default:
+						var s=plus.webview.getWebviewById("scheme");
+					    if(s){
+							mui.app_refresh('scheme');
+						}
+						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
+						break;
+				}
+				
+			});
+			
+			
+			document.getElementById("telBtn").addEventListener("tap",function(){
+    			mui.callService();
+    		});
+    		
+			document.getElementById("open_home").addEventListener("tap",function(){
+				mui.openWindow("../../home.html");
+			});
+    		
+		});
+		
+		function executePay(stateType){
+			if(stateType==4){
+				document.getElementById("ex_pay").style.display="block";
+				document.getElementById("ex_no_pay").style.display="none";
+				document.getElementById("openHome").innerHTML="立即去操盘";
+			}else{
+				document.getElementById("ex_no_pay").style.display="block";
+				document.getElementById("ex_pay").style.display="none";
+				document.getElementById("openHome").innerHTML="进入方案详情";
+			}
+		};
+		
+	</script>
+</head>  
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg"> 
+		<a class="mui-icon-closeempty mui-icon  mui-pull-left" id="open_home" style="color:#333333"><i></i></a>
+		<h1 class="mui-title">申请成功</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+	</header>
+	<!--<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="navon" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a    id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>-->
+<div class="mui-content pay_suc">
+	<!--<span class=" mui-icon mui-icon-closeempty" id="mycolose"></span>-->
+	<img src="../../images/suc_01.png" />
+	<div class="mui-content-padded">
+		<div id="ex_pay" style="display: none;">
+			<h4>操盘方案申请成功！<br>交易账户已经分配！</h4>
+		</div>
+		<div id="ex_no_pay" style="display:block; margin-bottom: 30px;;">
+			<h4>操盘方案申请成功！</br>交易账户正在排队开户中...</h4>
+			<p>交易时间：系统将在30分钟内处理</p>
+			<p>非交易时间：系统将在下个交易日开盘前处理</p>
+			<p>开户成功系统将短信通知您</p>
+		</div>
+		<p style="text-align: center;"><button type="button" id="openHome">进入方案详情</button></p>
+	</div>
+</div>
+</body>
+</html>

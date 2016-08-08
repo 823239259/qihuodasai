@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>支付确认</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script>
+    	mui.init();
+    	win=null;
+    	mui.plusReady(function(){
+    		win=plus.webview.currentWebview();
+    		//初始化监听头部和底部事件
+  			//tzdr.init.initButtomListener();
+  			
+  			//获取支付申请数据
+  			mui.app_request("/user/ftrade/apply",{
+  				"traderBond":win.traderBond,
+			    "tranLever":win.trade_leve,
+				"businessType":win.businessType
+  			},function(result){  
+  				if(!mui.isnull(result.data)){
+  					//读取详细数据
+  					setconfirmInfo(result.data.confirmInfo);
+  					//读取代金券
+  					mui.each(result.data.voucherList,function(i,item){
+  						setvoucherList(item);
+  					});
+  				}
+  				var defalut=document.getElementById("default");
+  				if(mui.isnull(result.data.voucherList)){
+  					defalut.innerHTML="无代金券";
+  				}else{
+  					defalut.innerHTML="不使用代金券";
+  				}
+  				
+  				//比较余额是否充足
+	  			compares();
+	  			
+  				
+  			},function(result){
+  				if(result.code==2){
+  					mui.toast("申请失败");
+  					return;
+  				}
+  				
+  			})
+  			
+  			//头部设置
+  			titleset();
+  			
+  			
+  			document.getElementById("chargeto").addEventListener("tap",function(){
+  				var money = document.getElementById("traderBond").innerHTML;
+  				mui.openWindow({
+				    url:'../account/charge.html',
+				    id:'charge.html',
+				    extras:{
+				        money : money,
+				        version:'0.5.8'
+				    }
+				});
+  			});
+  			document.getElementById("voucher").addEventListener("change",function(){
+
+  				//判断是否余额充足需要测哈change功能
+  				compareAddvoucher();
+  			});
+  			
+  			document.getElementById("payto").addEventListener("tap",function(){
+  				this.setAttribute('disabled','disabled')  //禁用按钮
+  				//支付确认
+  				payMoney();
+  			});
+  			
+  			document.getElementById("back").addEventListener("tap",function(){
+    			mui.back();
+    		});
+  			
+  			document.getElementById("tran_info").addEventListener("tap",function(){
+  				switch (win.businessType){
+    				case 0:
+    					mui.openWindow("../agree/a50ru.html");
+    					break;
+    				case 6:
+    					mui.openWindow("../agree/clru.html");
+    					break;
+    				case 7:
+    					mui.openWindow("../agree/hsiru.html");
+    					break;
+    				case 9:
+    					mui.openWindow("../agree/hsiru.html");
+    					break;
+    				default:
+    					break;
+    			}
+  			});
+  			
+    	});
+    	
+    	
+    	function titleset(){  
+    			
+    			
+    			var title=document.querySelector(".mui-title");
+    			switch (win.businessType){
+    				case 0:
+    					title.innerHTML="富时A50-支付确认";
+    					break;
+    				case 6:
+    					title.innerHTML="国际原油-支付确认";
+    					break;
+    				case 7:
+    					title.innerHTML="恒指期货-支付确认";
+    					break;
+    				case 9:
+    					title.innerHTML="小恒指-支付确认";
+    					break;
+    				default:
+    					title.innerHTML="支付确认";
+    					break;
+    			}
+    		
+    	};
+    	
+    	function compareAddvoucher(){
+    		var voucher=document.getElementById("voucher").value;
+    		var balance=document.getElementById("balance").innerHTML;
+    		var traderBond=document.getElementById("traderBond").innerHTML;
+    		balance=tzdr.moneyUtils.reverseMoney(balance);
+    		traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
+    		
+    		
+    		if(mui.isnull(voucher)||voucher==-1){
+    			mui.toast("请选择代金券");
+    			return;
+    		}
+    		
+    		var isThrough=(parseFloat(voucher)+balance) >= traderBond ? true : false;
+    		
+    		if(isThrough){
+    			document.getElementById("pays_money").style.display="block";
+    			document.getElementById("payto").style.display="block";
+    			document.getElementById("pays_nomoney").style.display="none";
+    			document.getElementById("chargeto").style.display="none";
+    		}else{
+    			document.getElementById("pays_nomoney").style.display="block";
+    			document.getElementById("chargeto").style.display="block";
+    			document.getElementById("pays_money").style.display="none";
+    			document.getElementById("payto").style.display="none";
+    		}
+    		
+    	}
+    	
+    	
+    	function compares(){
+    		var balance=document.getElementById("balance").innerHTML;
+    		var traderBond=document.getElementById("traderBond").innerHTML;
+    		
+    		balance=tzdr.moneyUtils.reverseMoney(balance);
+    		traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
+    		 
+    		
+
+    		if(balance>=traderBond){
+    			document.getElementById("pays_money").style.display="block";
+    			document.getElementById("payto").style.display="block";
+    		}else{
+    			document.getElementById("pays_nomoney").style.display="block";
+    			document.getElementById("chargeto").style.display="block";
+    		}
+    	};
+    	
+    	function setvoucherList(voucherList){
+    		//alert(voucherList.id+"---"+voucherList.money);  
+    		var voucher=document.getElementById("voucher");
+    		
+    		if(!mui.isnull(voucherList)){
+    			var option_1=document.createElement("option");
+    			option_1.innerHTML=voucherList.money+"元代金券";
+    			option_1.setAttribute("id",voucherList.id);
+    			option_1.value=voucherList.money;  
+    			voucher.appendChild(option_1);
+    		}
+    	};
+    	
+    	
+    	function setconfirmInfo(confirmInfo){
+    		document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(confirmInfo.lineLoss)+"美元";
+    		document.getElementById("trade_leve").innerHTML=confirmInfo.tranLever+"手";
+    		document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(confirmInfo.traderTotal)+"美元";
+    		document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(confirmInfo.payable)+"元";
+    		document.getElementById("balance").innerHTML=tzdr.moneyUtils.formatCurrency(confirmInfo.balance)+"元";
+    		
+    	};
+    	
+    	
+    	function payMoney(){
+    		var options=document.getElementById("voucher");
+    		var traderBond=document.getElementById("traderBond").innerHTML;
+    		var trade_leve=document.getElementById("trade_leve").innerHTML;
+    		traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
+			trade_leve=parseInt(trade_leve);
+    		if(mui.isnull(trade_leve)){
+    			mui.toast("系统繁忙，请刷新再试！");
+    			return;
+    		}
+    		var vid = options[options.selectedIndex].getAttribute("id");
+    		
+    		if(mui.isnull(vid)){
+    			vid=0;
+    		} 
+
+    		mui.app_request("/user/ftrade/handle",{
+    			"vid":vid,
+				"traderBond":win.traderBond,
+				"tranLever":trade_leve,
+				"businessType":win.businessType
+    		},function(result){
+    			var pay=plus.webview.getWebviewById("pay.html");
+    			setTimeout(function(){
+    				if(pay){
+					pay.close();
+				}
+    			},1000);
+    			
+    			mui.openWindow({
+    				url:"futurePaySuc.html",
+    				id:"futurePaySuc.html",
+    				extras:{
+    					type:win.businessType,
+    					vid:result.data.id,
+    					isPay:result.data.stateType
+    				}
+    				});
+    			return;
+    		},function(result){
+    			if(result.code==3){
+    				mui.toast("余额不足");
+    				return;
+    			}else if(result.code==2){
+    				mui.toast("支付确认失败");
+    				return;
+    			}
+    			
+    		})
+    	}
+    		
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 class="mui-title"></h1>		
+		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
+	</header>
+	<!--<nav class="navlist">
+		<a href="javascript:void(0);" id="product">
+			<span class="mui-icon mui-icon-list"></span>
+			<span class="mui-tab-label">产品</span>
+		</a>
+		<a class="navon" href="javascript:void(0);"  id="scheme">
+			<span class="mui-icon mui-icon-compose"></span>
+			<span class="mui-tab-label">方案</span>
+		</a>
+		<a    id="account" href="javascript:void(0);">
+			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+			<span class="mui-tab-label" >账户</span>
+		</a>
+	</nav>-->
+<div class="mui-content sc_listdeta">	
+	<h3 class="pay_title">操盘方案</h3>
+	<ul class="mui-table-view sc_listac">
+		<li class="mui-table-view-cell">
+			<label>最大持仓手数：</label>
+			<span id="trade_leve">4手</span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>总操盘资金($)：</label>
+			<span id="traderTotal">10,750美元</span>
+		</li>		
+		<li class="mui-table-view-cell">
+			<label>亏损平仓线($)：</label>
+			<span id="lineLoss">10,450美元</span>
+		</li>
+	</ul>
+	<h3 class="pay_title">操盘费用</h3>
+	<ul class="mui-table-view pay_list">
+		<li class="mui-table-view-cell">
+			<label>账户余额(¥)：</label>
+			<span id="balance">10,750元</span>
+			<p class="pay_money" id="pays_money" style="display: none;"><i class="mui-icon mui-icon-checkmarkempty"></i>余额充足</p>
+			<p class="pay_nomoney" id="pays_nomoney" style="display: none;"><i class="mui-icon mui-icon-close-filled"></i>余额不足</p>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>支付金额(¥)：</label>
+			<span id="traderBond">10,450元</span>
+			<b>操盘保证金</b>
+		</li>		
+		<li class="mui-table-view-cell">
+			<label>代金券(¥)：</label>
+			<select class="mui-btn mui-btn-block" id="voucher">
+				<option id="default" value="-1">无代金券</option>
+			</select>
+		</li>
+	</ul>	
+	<div class="ac_btn">
+		<button class="mui-btn mui-btn-block pay_btn" type="button" style="display: none;"  id="payto">确认支付</button>	
+		<button class="mui-btn mui-btn-block pay_btn" type="button" style="display: none;" id="chargeto">立即去充值</button>
+	</div>		
+</div>
+</body>
+</html>
