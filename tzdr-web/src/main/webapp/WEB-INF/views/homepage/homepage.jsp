@@ -1,12 +1,10 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.umpay.api.log.SysOutLogger"%>
-<%@page import="com.tzdr.common.utils.ConfUtil"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ include file="../common/common.jsp"%>
+<%@include file="../common/import-artDialog-js.jspf"%>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
-	<meta name="baidu-site-verification" content="esNYCmChIX" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
@@ -14,7 +12,7 @@
 	<title>维胜 - 中国领先的国际期货及衍生品互联网交易平台</title>
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
 	<%
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+		//String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
 		String imgPreURL = ConfUtil.getContext("banner.url");
 	%>
@@ -30,44 +28,6 @@
 	<!-- common css -->
 	<link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 	<!-- common js -->
-	<script type='text/javascript'>
-
-		window._CWiQ = window._CWiQ || [];
-		
-		window.BX_CLIENT_ID = 38474; // 帐号ID
-		
-		(function() {
-		
-		var c = document.createElement('script')
-		
-		,p = 'https:'==document.location.protocol;
-		
-		c.type = 'text/javascript';
-		
-		c.async = true;
-		
-		c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
-		
-		var h = document.getElementsByTagName('script')[0];
-		
-		h.parentNode.insertBefore(c, h);
-		
-		})();
-		
-	</script>
-
-	<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
-	
-	</script>
-
-	<script type='text/javascript'>
-	
-	window.BX_CLIENT_ID = 38474; // 帐号ID
-	
-	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
-	
-	</script>
-	
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js?v=${v}"></script>
 	<script type="text/javascript">
 		var basepath = "<%=basePath%>" + "/";

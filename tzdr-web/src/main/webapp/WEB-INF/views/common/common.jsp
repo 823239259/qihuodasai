@@ -1,3 +1,5 @@
+<%@page import="com.tzdr.web.constants.Constants"%>
+<%@page import="com.tzdr.web.utils.UserSessionBean"%>
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -27,48 +29,14 @@
 <script language="javascript" src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
 <script language="javascript" src="${ctx}/static/script/common/commonUtils.js"></script>
 <!-- <script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script> -->
-<script language="javascript" src="${ctx}/static/script/common/discussStock.js?version=20150812"></script>
+<script language="javascript" src="${ctx}/static/script/common/discussStock.js?v=${v}"></script>
 <%-- <script language="javascript" src="${ctx}/static/script/common/BizQQWPA.js?version=20150515"></script> --%>
 <%-- <link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css?version=20150724"> --%>
 <link rel="stylesheet" href="${ctx }/static/css/new_index.css?v=${v}">
 <link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
-<script type='text/javascript'>
 
-		window._CWiQ = window._CWiQ || [];
-		
-		window.BX_CLIENT_ID = 38474; // 帐号ID
-		
-		(function() {
-		
-		var c = document.createElement('script')
-		
-		,p = 'https:'==document.location.protocol;
-		
-		c.type = 'text/javascript';
-		
-		c.async = true;
-		
-		c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
-		
-		var h = document.getElementsByTagName('script')[0];
-		
-		h.parentNode.insertBefore(c, h);
-		
-		})();
-		
-	</script>
-
-	<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
+<%@ include file="../common/dsp.jsp"%> <!-- 统计 -->
 	
-	</script>
-
-	<script type='text/javascript'>
-	
-	window.BX_CLIENT_ID = 38474; // 帐号ID
-	
-	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
-	
-	</script>
 <script type="text/javascript">
 	
 	var basepath='${ctx}'+"/";
