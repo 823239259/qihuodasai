@@ -2,6 +2,7 @@
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -159,7 +160,7 @@
     })
     window.onload=function(){
     	$(function(){
-    		$(".bannerList").each(function(){
+    		$(".bannerList1").each(function(){
     		   var $this =	$(this);
     		   var href =  $this.attr("href");
     		   if(href.indexOf("sign/luck/view") > 0){
@@ -226,10 +227,15 @@
        	<div class="slide_banner">
            <c:forEach var="b" items="${banners }" varStatus="status">
 	           	<c:if test="${not empty b.linkUrl }">
-			    	<a href="${b.linkUrl }" class = "bannerList" target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
-	           	</c:if>
+	           		<c:if test="${fn:contains(b.linkUrl,\'sign/luck/view\')}">
+	           			<a href="${b.linkUrl }"  target="_self" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           		</c:if>
+	           		<c:if test="${fn:contains(b.linkUrl,'sign/luck/view') == false}">
+			    		<a href="${b.linkUrl }"  target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+	           		</c:if>
+	           </c:if>
 	           	<c:if test="${empty b.linkUrl }">
-			    	<a href="javascript:void(0);" class = "bannerList"  style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
+				    	<a href="javascript:void(0);"   style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	           	</c:if>
 	       </c:forEach>
     	</div>
