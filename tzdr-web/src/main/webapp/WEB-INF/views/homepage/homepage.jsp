@@ -92,6 +92,7 @@
 		.money {color:#fc3;}
 		.navtitle .nava {width: 550px; text-align: center;}
 		.tck01 {width: 350px;}
+		#shouye {color: #ffcc33;border-bottom: 2px solid #ffcc33;padding-bottom: 26px;}
 	</style>
 	<script type="text/javascript">
 	function skbt(luckNum){

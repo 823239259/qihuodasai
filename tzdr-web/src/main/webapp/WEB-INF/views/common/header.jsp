@@ -50,7 +50,7 @@
     <div class="nav">
         <div class="navlogo"><a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
         <ul class="navlist">
-            <li><a href="${ctx}/" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
+            <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
            <%--  <li><a id="togetherli" href="${ctx}/together/index">股票合买</a><!-- <i></i> --></li>
             <li><a id="hkstockli" href="${ctx}/hkstock/index">港股操盘</a><img src="${ctx}/static/images/common/hkicon.gif" class="hkicon"></li>
             <li><a id="internationalFutures" href="${ctx}/ftse/index" class="nav_l_future">国际期货</a><i></i></li>
