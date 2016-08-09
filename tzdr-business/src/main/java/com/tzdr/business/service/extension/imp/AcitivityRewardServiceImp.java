@@ -172,4 +172,9 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 	public ActivityReward doGetById(String id) {
 		return getEntityDao().findById(id);
 	}
+	@Override
+	public List<ActivityReward> doGetByUid(String uid, String activity) {
+		return getEntityDao().doGetByUidAndActivity(uid, activity);
+	}
+	
 }
