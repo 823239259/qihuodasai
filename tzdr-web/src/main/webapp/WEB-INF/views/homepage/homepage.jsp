@@ -137,7 +137,6 @@
 		});  
     }
     $(function(){
-    	skbt();
     	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 			if(data.success){
 				if(data.data.islogin){
