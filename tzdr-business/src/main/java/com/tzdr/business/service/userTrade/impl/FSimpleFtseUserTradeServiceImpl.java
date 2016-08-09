@@ -764,6 +764,7 @@ public class FSimpleFtseUserTradeServiceImpl extends
 		    			Integer smsChannel = dataMapService.getSmsContentOthers();
 		    			SMSSender.getInstance().sendByTemplate(smsChannel , mobile, "activity.luck.ihuyi.code.template",null );
 					} catch (Exception e) {
+						e.printStackTrace();
 						log.info("通知抽奖的短信发送异常");
 					}
 	    		}
