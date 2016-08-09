@@ -1,6 +1,8 @@
-/.project
-*/.project
-*/.classpath
-*/.settings/*
-*/target/*
-/.DS_Store
+.project
+.classpath
+.settings
+target
+.gitignore
+.DS_Store
+*.ipa
+*.apk
