@@ -39,4 +39,6 @@ public interface FSimpleFtseUserTradeDao extends BaseJpaDao<FSimpleFtseUserTrade
 		     + "IF(SUM(trader_bond) IS NULL,0, SUM(trader_bond)) AS trader_bond ,"
 		     + "uid FROM f_simple_ftse_user_trade WHERE state_type = 6 AND  end_time BETWEEN ?1 AND ?2  GROUP BY uid",nativeQuery = true)
 	List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime);
+	@Query("from FSimpleFtseUserTrade where tranProfitLoss < 0 and uid = ?1")
+	List<FSimpleFtseUserTrade> findByUidFristLoss(String uid);
 }
