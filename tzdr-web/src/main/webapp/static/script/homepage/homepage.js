@@ -53,7 +53,7 @@ $(function () {
 		success:function(news){
 			var newsStr = "";
 			$(news).each(function(i){
-				newsStr = newsStr + "<li><i></i><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("name")+"</a><em><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("addtime")+"</a></em></li>";
+				newsStr = newsStr + "<li><i></i><a style='display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width: 250px;' href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("name")+"</a><em><a href=\""+basepath+"news/shownews/"+$(this).attr("id")+"\" target=\"_blank\">"+$(this).attr("addtime")+"</a></em></li>";
 			})
 			$('.h_noticlist').html(newsStr);
 			
