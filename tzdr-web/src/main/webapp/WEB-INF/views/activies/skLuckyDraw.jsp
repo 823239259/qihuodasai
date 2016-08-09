@@ -26,9 +26,9 @@
 	<!-- common js -->
 	<script src="${ctx}/static/script/common/jquery-1.8.0.min.js?v=${v}"></script>
 	<script src="${ctx}/static/script/activies/kszp.js?v=${v}"></script>
-    <link href="${ctx}/static/css/gybf.css" rel="stylesheet" type="text/css">	
-    <link href="${ctx}/static/css/skLuckyDraw.css" rel="stylesheet" type="text/css">	
-    <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?version=20150724"></script>
+    <link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">	
+    <link href="${ctx}/static/css/skLuckyDraw.css?v=${v}" rel="stylesheet" type="text/css">	
+    <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?v=${v}"></script>
 	<script type="text/javascript">
 		var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
@@ -222,6 +222,7 @@
 		.anniu a {margin-left: 30px;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
 		.money {color:#fc3;}
 		.navtitle .nava {width: 550px; text-align: center;}
+		.tck01 {width: 350px;}
 	</style>
 </head>
 <body>

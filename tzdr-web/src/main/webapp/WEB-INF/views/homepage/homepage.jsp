@@ -85,11 +85,13 @@
     #left_xiangqing .w_content .left_hidden{float: left; width: 195px;}
     #left_xiangqing .scroll_y{background: #fc3;position: absolute; right: 0;width: 5px;}
     #left_xiangqing .scroll_ymove{background: #292929; height: 508px;position: absolute; right: 0;width: 5px;z-index: 2;}
-	.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto; position: relative;}
-	.anniu {text-align: center;}
-	.smain {text-align: center;}
-	.tck01 .anniu a {margin-left: 0;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
-	.tck01 {width: 350px;height: 160px; margin-top: 50%;top: 150px;left: -44px;}
+	.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
+		.anniu {text-align: center;}
+		.smain {text-align: center;}
+		.anniu a {margin-left: 30px;background: #fc3;color: #333;text-decoration: none;height: 40px;line-height: 40px;display: inline-block; width: 100px;}
+		.money {color:#fc3;}
+		.navtitle .nava {width: 550px; text-align: center;}
+		.tck01 {width: 350px;}
 	</style>
 	<script type="text/javascript">
 	function skbt(luckNum){
@@ -135,6 +137,7 @@
 		});  
     }
     $(function(){
+    	skbt();
     	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 			if(data.success){
 				if(data.data.islogin){
