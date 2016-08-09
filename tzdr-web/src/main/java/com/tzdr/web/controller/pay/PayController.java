@@ -1,5 +1,7 @@
 package com.tzdr.web.controller.pay;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +14,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Maps;
+import com.tzdr.business.pay.gopay.DateUtil;
+import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
+import com.tzdr.business.pay.gopay.model.GoPayRequestModel;
+import com.tzdr.business.pay.gopay.model.GoTakeRequestModel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
@@ -234,6 +241,7 @@ public class PayController {
 		}
 		return null;
 	}
+	
 	private static Object lock = new Object();
 	
 	/**

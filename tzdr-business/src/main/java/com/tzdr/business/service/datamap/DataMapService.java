@@ -1,6 +1,8 @@
 package com.tzdr.business.service.datamap;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import com.google.common.collect.Maps;
 import com.tzdr.business.cms.service.auth.AuthService;
 import com.tzdr.business.exception.DataMapException;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.config.ActivityConfig;
 import com.tzdr.common.exception.BusinessException;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.domain.api.constants.Constant;
@@ -394,5 +397,24 @@ public class DataMapService extends BaseServiceImpl<DataMap, DataMapDao> {
 		   String withdrawSetting = dataMaps.get(0).getValueKey();
 		   return NumberUtils.toInt(withdrawSetting);
 	   }
+	}
+	public boolean activityExpired(){
+		boolean flag = false;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:ss");
+			List<DataMap> dataMapsEnd = findByTypeKey("activityOnlineEndTime");
+			if(dataMapsEnd != null && dataMapsEnd.size() > 0){
+				String dateEndTime = dataMapsEnd.get(0).getValueName();
+				Date endDate;
+				try {
+					endDate = df.parse(dateEndTime);
+					long end = endDate.getTime();
+					if(new Long(end).longValue() > new Long(ActivityConfig.now_time).longValue()){
+						flag = true;
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		return flag;
 	}
 }

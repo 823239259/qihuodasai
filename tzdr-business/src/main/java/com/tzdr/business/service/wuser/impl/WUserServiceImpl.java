@@ -1192,7 +1192,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 					UserFund userFund = new UserFund();
 					userFund.setUid(user.getId());
 					userFund.setMoney(money);
-					userFund.setType(TypeConvert.LUCK_DRAW);
+					userFund.setType(TypeConvert.USER_FUND_C_TYPE_ARTIFICIAL_RECHARGE);
 					userFund.setRemark("首次亏损抽奖：" + money + "元");
 					userFundService.rechargeOperation(userFund, TypeConvert.TAKE_DEPOSIT_TYPE_INSTORE);
 					//更新用户抽奖权限表--标识为此抽奖次数已被使用
