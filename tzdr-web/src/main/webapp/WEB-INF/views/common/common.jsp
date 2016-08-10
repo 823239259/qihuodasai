@@ -17,6 +17,12 @@
 	String p2pMyBorrowMoney = ConfUtil.getContext("p2p.my.borrow.money");  
 	String p2pMyInvestment = ConfUtil.getContext("p2p.my.investment");  
 	String futureUrl=ConfUtil.getContext("tzdr.future.url");
+	
+	UserSessionBean userSessionBean = (UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+	String userId = null;
+	if(userSessionBean != null){
+		userId = userSessionBean.getId();
+	}
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
 <c:set var="v" value="20151127"></c:set>

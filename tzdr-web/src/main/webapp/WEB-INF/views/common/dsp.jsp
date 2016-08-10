@@ -1,12 +1,9 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.tzdr.web.constants.Constants"%>
+<%@page import="com.tzdr.web.utils.UserSessionBean"%>
 <%
-UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
-	.getAttribute(Constants.TZDR_USER_SESSION);
-	String userId = null;
-	if(userSessionBean != null){
-	userId = userSessionBean.getId();
-}
+	
 %>
 <script type='text/javascript'>
 	var userId = "<%=userId%>";
