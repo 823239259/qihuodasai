@@ -84,8 +84,29 @@
 			$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
 		}
 		
-		
+		$('.fzwz a.anniucopy').on('click',function() {
+            var $this = $(this);
+            var $target = $this.prev(),
+                    $copy = $this.closest('.fzwz'),
+                    $str = $('<div class="pop">按 Ctrl+C 复制地址</div>');
+            var a =$target.select();
+            $copy.find('.pop').stop(true).remove();
+            $str.appendTo($copy).fadeIn();
+            $(".pop").css({
+                position: "absolute",
+                top: "30px",
+                color: "#fc3"
+            });
+            setTimeout(function() {
+                $copy.find('.pop').fadeOut();
+            }, 3000);
+        })
 	});
+</script>
+<script>
+	$(function(){
+		
+	})
 </script>
 <style>
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
@@ -112,7 +133,10 @@
 					<div class="subtab">
 						<div class="my_invitationCode">
 							<p class="my_jieshao">以下网址是 您对外界进行推广的地址，您可以通过朋友、QQ、微信、博客进行推广，所有通过该地址访问过来的人，注册就都属于您的用户，而当这些用户在本站股票操盘时，您就可以赚取佣金了。</p>
-							<p class="fzwz"><span class="wangzhi">http//www.vs.com</span><span class="copy">复制链接地址</span></p>
+							<p class="fzwz">
+								<input type="text" class="wangzhi" value="http//www.vs.com">
+            					<a href="javascript:" class="anniucopy">复制链接地址</a>
+            				</p>
 							<textarea maxlength="3000"></textarea>
 							<p><span class="fenxiang">分享到: </span>
                     			<a href="#" onclick="shareToSinaWB(event)" title="分享到新浪微博"><img alt="" src="${ctx}/static/images/uc/fenxiang_sina.jpg"></a>
@@ -191,6 +215,5 @@
 	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 </body>
-
 </html>
 

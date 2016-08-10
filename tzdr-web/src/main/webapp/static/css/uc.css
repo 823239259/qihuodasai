@@ -3453,8 +3453,12 @@ body{font-family: "微软雅黑"}
 .my_invitationCode {width: 732px; height: auto; padding: 20px 30px;}
 .my_invitationCode textarea {width: 720px; height: 140px;border: 1px solid #e3e3e3; outline: none;padding: 0 10px;font-size: 15px; color: #666;resize: none;font-size: 16px;font-family: "Arial";color: #333; margin-top: 20px;padding: 5px;} 
 .my_jieshao {font-size: 14px; line-height: 22px;}
-.my_invitationCode .fzwz {font-size: 14px;background: #f0f0f0;  height: 40px; line-height: 40px; padding-left: 10px; margin-top: 20px;}
-.my_invitationCode .copy {background-color: #fc3; height: 40px; line-height: 40px; display: block; width: 150px; text-align: center; float: right;}
-.my_invitationCode .copy:hover{ cursor: pointer; background: #fe3;}
+.my_invitationCode .fzwz {position: relative;font-size: 14px;background: #f0f0f0;  height: 40px; line-height: 40px; padding-left: 10px; margin-top: 20px;}
+.my_invitationCode .anniucopy {text-decoration: none; color: #333;;background-color: #fc3; height: 40px; line-height: 40px; display: block; width: 150px; text-align: center; float: right;}
+.my_invitationCode .anniucopy:hover{ cursor: pointer; background: #fe3;}
 .my_invitationCode img {margin-top: 24px; margin-left: 10px;}
 .my_invitationCode .fenxiang {position: relative; top: -15px;}
+.my_invitationCode .wangzhi {background: #f0f0f0;}
+.my_invitationCode .wangzhi:focus {outline: none;}
+
+
