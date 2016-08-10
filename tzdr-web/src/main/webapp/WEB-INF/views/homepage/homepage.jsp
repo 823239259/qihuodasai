@@ -790,15 +790,7 @@
 	    socket.onerror = function(evt){
 		   
 	    }
-	    function gundongtiao(){
-	    	$("#whichscro").val($.trim($(this).parent().attr("id")))
-	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
-	            var scrollfathter1=document.getElementById($.trim($(this).parent().attr("id")));
-	            scrollfathter1.addEventListener("touchstart", touchStart, false);
-	            scrollfathter1.addEventListener("touchmove", touchMove, false);
-	            scrollfathter1.addEventListener("touchend", touchEnd, false);
-	        }		
-	    }
+	    
 	    $(".left_hidden").mouseover(function(){
 	        $("#whichscro").val($.trim($(this).parent().attr("id")))
 	        if ((navigator.userAgent.match(/(iPhone|Android|iPad)/i))){
