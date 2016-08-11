@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>代理赚钱 - 维胜</title>
+<title>我的邀请码 - 维胜</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?version=20150721">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/tzdr.css">
@@ -47,7 +47,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<%@include file="../common/header.jsp"%>
 	<c:choose>
 		<c:when test="${!empty rebate}"><input type="hidden" value="<fmt:formatNumber value="${rebate}" pattern="###" minFractionDigits="0"></fmt:formatNumber>" class="myRebate"/></c:when>
 		<c:otherwise><input type="hidden" value="0" class="myRebate"/></c:otherwise>
@@ -84,21 +84,21 @@ $(document).ready(function() {
 		<div class="uc_mianbar">
 			<div class="uc_pay">
 				<ul class="uc_paynav">
-					<li class="generalize" id="detail"><a
+					<!-- <li class="generalize" id="detail"><a
 						href="javascript:void(0);" class="on">代理详情</a></li>
 					<li class="generalize" id="subordinates"><a
 						href="javascript:void(0);">我的下级</a></li>
 					<li class="generalize" id="visitors"><a
-						href="javascript:void(0);">访问记录</a></li>
+						href="javascript:void(0);">访问记录</a></li> -->
 					<li class="generalize" id="generalize"><a
-						href="javascript:void(0);">推广链接</a></li>
-					<li class="generalize" id="incomeQuery"><a
-					    href="javascript:void(0);">收益查询</a></li>
+						href="javascript:void(0);" class="on">推广链接</a></li>
+					<!-- <li class="generalize" id="incomeQuery"><a
+					    href="javascript:void(0);">收益查询</a></li> -->
 					<li class="generalize" id="generalizemoney"><a
 					    href="javascript:void(0);">推广佣金明细</a></li>
 				</ul>
 				<!--推广详情  -->
-				<div class="generalizeSubtab" id="detailDiv" style="display:">
+				<%-- <div class="generalizeSubtab" id="detailDiv" style="display:">
 					<ul class="uc_sp_num">
 						<li><label>我的返点：</label>
 						<i>
@@ -288,9 +288,9 @@ $(document).ready(function() {
 					</ul>
 					<div id="PagSubordinatesInation"></div> 
 				</div>
-			</div>
+			</div> --%>
 			<!--访问记录  -->
-			<div class="generalizeSubtab" id="visitorsDiv" style="display: none">
+			<!-- <div class="generalizeSubtab" id="visitorsDiv" style="display: none">
 				<div class="uc_record">
 					<p class="uc_rdnum">
 						访问IP共<i class="totalVisitClieantIp">4</i>个，访问次数共<i class="totalVisit">4</i>个
@@ -303,9 +303,9 @@ $(document).ready(function() {
 					</ul>
 					<div id="PagVisitorsInation"></div> 
 				</div>
-			</div>
+			</div> -->
 			<!--推广链接  -->
-			<div class="generalizeSubtab" id="generalizeDiv" style="display: none">
+			<div class="generalizeSubtab" id="generalizeDiv" style="display: block">
 				<div class="uc_splink">
 					<p class="uc_spl_font">以下网址是您对外界进行推广的地址，您可以通过朋友、QQ、微信、博客进行推广，所有通过该地址访问过来的人，注册后就都属于您的用户，而当这些用户在本站股票操盘时，您就可以赚取佣金了，详细的推广情况可到访问记录里查看。</p>
 					<div class="uc_spl_link link">
@@ -319,7 +319,7 @@ $(document).ready(function() {
 						</p>
 						<div class="uc_spl_sharelist">
 							<span>分享到：</span>
-							<div class="bshare-custom icon-medium" style="margin-left: 11px;margin-top: inherit;" bshareUrl="<%=ConfUtil.getContext("web.address") %>/${id}" bshareTitle="股票操盘炒股，放大收益" bshareSummary="牛市来了，小资金如何做大？我最近在维胜网站股票操盘，收益可扩大15倍，你也可以来试试！" bsharePic="<%=ConfUtil.getContext("web.address") %>/static/images/common/logo.jpg">
+							<div class="bshare-custom icon-medium" style="margin-left: 11px;margin-top: inherit;" bshareUrl="<%=ConfUtil.getContext("web.address") %>/${id}" bshareTitle="股票操盘炒股，放大收益" bshareSummary="牛市来了，小资金如何做大？我最近在维胜网站股票操盘，收益可扩大15倍，你也可以来试试！" bsharePic="<%=ConfUtil.getContext("web.address") %>/static/images/common-new/new_logo.png">
 								<div class="bsPromo bsPromo2"></div>
 								<div class="bsPromo bsPromo2"></div>           	 
 							</div>
@@ -329,7 +329,7 @@ $(document).ready(function() {
 			</div>
 			
 			<!--收益查询 -->
-			<div class="generalizeSubtab" id="incomeQueryDiv" style="display:none;">
+			<!-- <div class="generalizeSubtab" id="incomeQueryDiv" style="display:none;">
 			
 			
 					
@@ -359,13 +359,13 @@ $(document).ready(function() {
 							<div id="unionSearchresult_agent"></div>
 						</div>
 					</ul>
-					<!--ul class="uc_relist visitorsList">
-					</ul-->
+					ul class="uc_relist visitorsList">
+					</ul
 					<div id="PagVisitorsInation_agent"></div> 
 					
 				</div>
 			
-			</div>
+			</div> -->
 			<div class="generalizeSubtab"  id="generalizemoneyDiv" style="display: none">
 						<!--推广佣金明细 -->
 				<div class="uc_trade">
@@ -399,7 +399,7 @@ $(document).ready(function() {
 						</div>
 						<div class="uc_fssearch" style="width:780px;">
 						   <em>手机后四位：</em>
-						   <input type="text" id="fourthMobile" class="uc_fsiptime uc_spmipsp">
+						   <input type="text" maxlength="4" id="fourthMobile" class="uc_fsiptime uc_spmipsp">
 							<em>收支类型：</em> 
 							<input type="text" class="uc_fs_ip uc_sp_type" id="union"
 								name="union" data-id="13" value="全部明细"> <a
@@ -437,7 +437,7 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<!--底部 -->
-	<%@ include file="../common/personfooter.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 	<script type="text/javascript">
 		var tab = '${tab}';
 		if($.trim(tab) != null && $.trim(tab).length > 0 && $("#"+tab) != null && $("#"+tab).length > 0){
@@ -447,6 +447,5 @@ $(document).ready(function() {
 			$("#"+tab+"Div").css({display:""});
 		}
 	</script>
-	<%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

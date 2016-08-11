@@ -49,7 +49,23 @@ $(document).ready(function(){
 		moviePath: basepath+"static/script/common/ZeroClipboard.swf"
 	});
 	clip.on("complete", function(client, args){
-		alert("已复制到剪切板");
+		/*alert("已复制到粘贴板");*/
+		var $this = $(this);
+        var $target = $this.prev(),
+                $copy = $this.closest('.uc_spl_link'),
+                $str = $('<div class="pop">已复制到粘贴板</div>');
+        var a =$target.select();
+        $copy.find('.pop').stop(true).remove();
+        $str.appendTo($copy).fadeIn();
+        $(".pop").css({
+            position: "absolute",
+            top: "-22px",
+            right: "56px",
+        	color: "#fc3"
+        });
+        setTimeout(function() {
+            $copy.find('.pop').fadeOut();
+        }, 3000);
 	});	
 	
 	//设置默认返点
