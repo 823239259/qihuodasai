@@ -361,7 +361,15 @@ public class ExtendsionSignController {
 		}
 		return resultJson;
 	}
-
+	/**
+	 * 新手福利
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping(value = "/noviceWelfare")
+	public String noviceWelfare(HttpServletRequest reqest){
+		return ViewConstants.SignInViewJsp.EXTENDSION_NOVICEWELFARE;
+	}
 	public GeneralizeChannel getChannel(String params) {
 		List<GeneralizeChannel> generaList = channelService.findByParamAndDeletedFalse(params);
 		GeneralizeChannel channel2 = null;

@@ -75,6 +75,10 @@ public class ViewConstants {
 		 */
 		public static final String TXTENDSION_INVATION_CODE = "/views/fund/invitationCode";
 		/**
+		 * 新手福利
+		 */
+		public static final String EXTENDSION_NOVICEWELFARE = "/views/activies/novicewelfare";
+		/**
 		 * 注册成功页面
 		 */
 		public static final String SIGNINSUCESS_VIEW = "/views/signin/signInSucess";
