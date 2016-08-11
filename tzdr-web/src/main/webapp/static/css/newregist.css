@@ -170,17 +170,19 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .ks_header .denglu {float: right;}
 .ks_header .denglu a {color: #fc3; color: #fc3; text-decoration: none;}
 .ks_header .denglu a:hover {text-decoration:underline}
-.ks_zuce {width: 100%; position: relative; height: 400px; background: url("../images/login/ks_banner1.png") center center;}
-.ks_zuce .ks_zuce_content {width: 1000px; margin: 0 auto; height: 400px; }
-.ks_zuce .rg_ctn {float: right;width: 260px; height: 340px; margin-top: 30px; background: #333; border-radius: 4px;}
+.ks_zuce {width: 100%; position: relative; height: 360px; background: url("../images/login/ks_banner2.png") center center;}
+.ks_zuce .ks_zuce_content {width: 1000px; margin: 0 auto; height: 360px; }
+.ks_zuce .rg_ctn {float: right;width: 260px; height: 340px; margin-top: 10px; background: #333; border-radius: 4px;}
 .ks_zuce .rg_ctn .tt {background: #424242; height: 20px; border-radius: 4px;}
 .ks_zuce .rg_ctn .form {padding-top: 20px; height: 300px; margin-top: -10px; background-color: #333;}
 .ks_zuce .rg_list li {list-style-type:none; text-align: center;height: 54px;}
 .ks_zuce .rg_list li  input {width: 202px; padding: 9px;background-color: #fff8bb;border-radius: 4px;color: #333;font-size: 12px;outline: none;}
 .ks_zuce .rg_l_codebtn {position: absolute; width: 90px; text-align: center; font-size: 12px; background: #fc3; height: 34px; line-height: 34px; border-radius: 4px; right: 20px;color: #333;text-decoration: none;}
-.ks_why {background: #e63956; width: 100%; border-top: 20px solid #333; padding-bottom: 80px;}
+.ks_why {background: #e64560; width: 100%; border-top: 20px solid #333; padding-bottom: 80px;}
 .ks_why .ks_why_content {width: 1000px; margin: 0 auto;}
 .ks_why .ks_why_js_1 {margin-top: 60px; background: url("../images/login/ks-zhucejs1.png"); width: 1000px; height: 30px; line-height: 30px; text-align: center; color: #fc3; font-size: 16px;}
+.ks_why .ks_why_sxbs {background: url("../images/login/ks_why_sx.png"); width: 1000px; height: 91px;}
+.ks_why .ks_why_sx {height: 61px; line-height: 61px; color: #ccc; font-size: 14px; text-align: center;}
 .ks_why .ks_why_bt {height: 100px;margin-top: 30px;}
 .ks_why .ks_why_bt h2 {height: 40px; line-height: 40px; color: #333; font-size: 20px;}
 .ks_why .ks_why_bt p {height: 60px; line-height: 60px; color: #ccc; font-size: 14px;}
