@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.tzdr.business.pay.gopay.GoConfigStatus;
 import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
 import com.tzdr.business.pay.gopay.model.GoPayCallBackModel;
@@ -66,6 +67,13 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 		model.setTranIP(request.getParameter("tranIP"));
 		model.setRespCode(request.getParameter("respCode"));
 		model.setCallBackSign(request.getParameter("signValue"));
+		model.setBankCode(request.getParameter("bankCode"));
+		model.setBuyerContact(request.getParameter("buyerContact"));
+		model.setBuyerName(request.getParameter("buyerName"));
+		model.setGoodsName(request.getParameter("goodsName"));
+		model.setGoodsDetail(request.getParameter("goodsDetail"));
+		model.setMsgExt(request.getParameter("msgExt"));
+		logger.info(model.toString());
 		return model;
 	}
 	public GoPayCallBackModel signValidation(HttpServletRequest request){

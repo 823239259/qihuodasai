@@ -89,8 +89,22 @@ public class GoPayCallBackModel {
 	 * 商户后台通知地址
 	 */
 	private  String backgroundMerUrl;
+	/**
+	 * 商户代码
+	 */
 	private String merchantID;
+	/**
+	 * 响应的信息
+	 * @return
+	 */
+	private String msgExt;
 	
+	public String getMsgExt() {
+		return msgExt;
+	}
+	public void setMsgExt(String msgExt) {
+		this.msgExt = msgExt;
+	}
 	public String getMerchantID() {
 		return merchantID;
 	}
@@ -228,6 +242,17 @@ public class GoPayCallBackModel {
 	}
 	public void setBackgroundMerUrl(String backgroundMerUrl) {
 		this.backgroundMerUrl = backgroundMerUrl;
+	}
+	@Override
+	public String toString() {
+		return "GoPayCallBackModel [orderId=" + orderId + ", gopayOutOrderId=" + gopayOutOrderId + ", respCode="
+				+ respCode + ", callBackSign=" + callBackSign + ", merOrderNum=" + merOrderNum + ", tranAmt=" + tranAmt
+				+ ", feeAmt=" + feeAmt + ", tranDateTime=" + tranDateTime + ", tranIP=" + tranIP + ", goodsName="
+				+ goodsName + ", goodsDetail=" + goodsDetail + ", buyerName=" + buyerName + ", buyerContact="
+				+ buyerContact + ", signValue=" + signValue + ", gopayServerTime=" + gopayServerTime + ", bankCode="
+				+ bankCode + ", userType=" + userType + ", version=" + version + ", tradCode=" + tradCode
+				+ ", signType=" + signType + ", frontMerUrl=" + frontMerUrl + ", backgroundMerUrl=" + backgroundMerUrl
+				+ ", merchantID=" + merchantID + ", msgExt=" + msgExt + "]";
 	}
 	
 	
