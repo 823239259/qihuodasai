@@ -28,47 +28,11 @@
 	<script src="${ctx}/static/script/activies/kszp.js?v=${v}"></script>
     <link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">	
     <link href="${ctx}/static/css/skLuckyDraw.css?v=${v}" rel="stylesheet" type="text/css">	
+    <link rel="stylesheet" href="${ctx}/static/css/new_index.css?v=20151127">
     <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?v=${v}"></script>
 	<script type="text/javascript">
 		var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
-	</script>
-	<script type='text/javascript'>
-
-		window._CWiQ = window._CWiQ || [];
-		
-		window.BX_CLIENT_ID = 38474; // 帐号ID
-		
-		(function() {
-		
-		var c = document.createElement('script')
-		
-		,p = 'https:'==document.location.protocol;
-		
-		c.type = 'text/javascript';
-		
-		c.async = true;
-		
-		c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
-		
-		var h = document.getElementsByTagName('script')[0];
-		
-		h.parentNode.insertBefore(c, h);
-		
-		})();
-		
-	</script>
-
-	<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
-	
-	</script>
-
-	<script type='text/javascript'>
-	
-	window.BX_CLIENT_ID = 38474; // 帐号ID
-	
-	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
-	
 	</script>
 	<script type="text/javascript">
 	 var bRotate = false;
@@ -224,8 +188,11 @@
 		.navtitle .nava {width: 550px; text-align: center;}
 		.tck01 {width: 350px;}
 	</style>
+
 </head>
 <body>
+<!--顶部 -->
+	<%@include file="../common/header.jsp"%>
 <div id="div_Mask"  style="display:none;"></div>
 <div class="div_loading">
 	<div class="tck01" id="kszj" style="display: none;">
