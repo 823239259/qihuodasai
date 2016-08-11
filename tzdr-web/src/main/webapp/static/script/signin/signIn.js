@@ -390,7 +390,7 @@ $(document).ready(function(){
 							$("#loginUsername").val(mobile);
 							$("#loginPassword").val(password);
 							$("#loginForm").submit();*/
-							window.location.href = "/signinsucess";
+							window.location.href = "/tzdr-web/signinsucess";
 							/*
 							//达人论股系统登录
 							discussStockLogin(data.data.key,function(){

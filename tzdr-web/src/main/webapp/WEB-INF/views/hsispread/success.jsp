@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%com.tzdr.web.utils.UserSessionBean userSessionBean=
- (com.tzdr.web.utils.UserSessionBean) request.getSession().getAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION);
- String username=userSessionBean.getMobile();
- %>
-<%@ include file="../common/common.jsp"%>
+	
 <%@include file="../common/import-artDialog-js.jspf"%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
@@ -14,7 +10,11 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/hsispreadindex.css?v=${v}">
 
 <meta content="24倍杠杆助力恒指,低门槛,高收益" name="description">
-
+<%
+ com.tzdr.web.utils.UserSessionBean userSessionBean=
+ (com.tzdr.web.utils.UserSessionBean) request.getSession().getAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION);
+ String username=userSessionBean.getMobile();
+ %>
 </head>
  
 <body>

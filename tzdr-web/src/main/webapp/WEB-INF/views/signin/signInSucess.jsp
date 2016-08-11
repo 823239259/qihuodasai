@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <% com.tzdr.web.utils.UserSessionBean userSessionBean=
- (com.tzdr.web.utils.UserSessionBean) request.getSession().getAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION);
- String username = "";
- if(userSessionBean != null){
- 	username=userSessionBean.getMobile();
- }
- %>
-<%@ include file="../common/common.jsp"%>
 <%@include file="../common/import-artDialog-js.jspf"%>
+ <%@ include file="../common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
@@ -18,6 +11,15 @@
 	<script language="javascript" src="${ctx}/static/script/signin/signInSucess.js?version=20150618"></script> 
 </head>
 <body>
+<% 
+ String username = "";
+ if(userSessionBean == null){
+	 userSessionBean = (UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+ }
+ if(userSessionBean != null){
+	 username=userSessionBean.getMobile();
+ }
+ %>
 <%@ include file="../common/header.jsp"%>
 <input type="hidden" id="type" name="type" value="${type}"/>
 <input type="hidden" id="backUrl" value="${backUrl}"/>

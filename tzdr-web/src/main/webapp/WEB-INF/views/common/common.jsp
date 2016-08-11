@@ -42,7 +42,18 @@
 <link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
 
 <%@ include file="../common/dsp.jsp"%> <!-- 统计 -->
-	
+<script type="text/javascript">
+	var userId = "<%=userId%>";
+	window._CWiQ = window._CWiQ || [];
+	window.BX_CLIENT_ID = userId; // 帐号ID
+	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
+	var c = document.createElement('script'),p = 'https:'==document.location.protocol;
+	c.type = 'text/javascript';
+	c.async = true;
+	c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
+	var h = document.getElementsByTagName('script')[0];
+	h.parentNode.insertBefore(c, h);
+</script>
 <script type="text/javascript">
 	
 	var basepath='${ctx}'+"/";
