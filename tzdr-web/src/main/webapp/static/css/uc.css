@@ -3022,12 +3022,12 @@ width: 196px; background: #fff; *position:  }
 	margin: 7px 0;
 	overflow: hidden;
 }
-.uc_spl_sharelist .bshare-sinaminiblog{background: url(../images/uc/fenxiang_sina.jpg) no-repeat; width: 8px; height: 40px;}
+/* .uc_spl_sharelist .bshare-sinaminiblog{background: url(../images/uc/fenxiang_sina.jpg) no-repeat; width: 8px; height: 40px;}
 .uc_spl_sharelist .bshare-weixin{background: url(../images/uc/fenxiang_weixin.jpg) no-repeat; width: 8px; height: 40px;}
 .uc_spl_sharelist .bshare-qqim{background: url(../images/uc/fenxiang_qq.jpg) no-repeat; width: 8px; height: 40px;}
 .uc_spl_sharelist .bshare-qqmb{background: url(../images/uc/fenxiang_tengxun.jpg) no-repeat; width: 8px; height: 40px;}
 .uc_spl_sharelist .bshare-qzone{background: url(../images/uc/fenxiang_zone.jpg) no-repeat; width: 8px; height: 40px;}
-.uc_spl_sharelist .bshare-more {background: url(../images/uc/fenxiang_more.png) no-repeat; width: 8px; height: 40px;}
+.uc_spl_sharelist .bshare-more {background: url(../images/uc/fenxiang_more.png) no-repeat; width: 8px; height: 40px;} */
 
 .uc_spl_sharelist span {
 	display: block;
@@ -3036,10 +3036,11 @@ width: 196px; background: #fff; *position:  }
 	height: 38px;
 	line-height: 38px;
 	padding-left: 13px;
-	/* background: url(../images/uc/link_icon.gif) no-repeat; */
+	background: url(../images/uc/link_icon.gif) no-repeat;
 	color: #333;
 	font-size: 12px;
-	margin-top: 8px;
+	margin-top: 4px;
+	margin-right: 10px;
 }
 .uc_spl_sharelist ul {
 	width: auto;
