@@ -219,6 +219,7 @@ public class ViewConstants {
 		
 		//到币币页面支付
 		public static final String BIBI_PAY_MAIN_VIEW = "/views/pay/bbPay";
+		
 				
 	}
 	

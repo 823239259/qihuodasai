@@ -452,17 +452,8 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 		return (Double) this.nativeQueryOne(sql,params );
 	}
 	@Override
-	public String doSavePingPPRecharge(String payWay,int source, WUser user, Integer status, String bankCard,
+	public String doSavePingPPRecharge(Channel payWayChannl,int source, WUser user, Integer status, String bankCard,
 			String payMoney, String ip, String payType, String orderNo) {
-		Channel payWayChannl = null;
-		if(payWay == null){
-			payWayChannl = Channel.ALIPAY_PC_DIRECT;
-		}else{
-			payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
-			if(payWayChannl == null){
-				payWayChannl = Channel.ALIPAY_PC_DIRECT;
-			}
-		}
 		Double money = Double.valueOf(payMoney);
 		RechargeList charge=new RechargeList();
 		charge.setUid(user.getId());
@@ -477,24 +468,20 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 		charge.setNo(orderNo);
 		charge.setStatus(status);
 		charge=getEntityDao().save(charge);
-		PingPPModel pingPPModel = new PingPPModel();
-		pingPPModel.setAmount(money);
-		pingPPModel.setBody(Config.BODY);
-		pingPPModel.setChannel(payWayChannl.getChannelCode());//;
-		pingPPModel.setClient_ip(ip);
-		pingPPModel.setCurrency("cny");
-		pingPPModel.setOrder_no(orderNo);
-		pingPPModel.setSubject(Config.SUBJECT);
-		return ChargeExample.createCharge(pingPPModel).toString();
+		if(charge != null){
+			return "1";
+		}
+		return "0";
 	}
 
 	@Override
-	public void doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid) {
+	public void doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark) {
 		RechargeList charge=getEntityDao().findByNo(orderNo);
-		if(charge!=null){
+		Integer status = TradeStatus.SUCCESS.getCode();
+		if(charge!=null && charge.getStatus() != status){
 			String userId=charge.getUid();
-			charge.setStatus(TradeStatus.SUCCESS.getCode());
-			Double money = amount / 100;
+			charge.setStatus(status);
+			Double money = amount;
 			Date date=new Date();
 			long time=date.getTime()/1000;
 			charge.setOktime(time);
@@ -509,7 +496,7 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 			if(fund == null){
 				fund=new UserFund();
 				fund.setMoney(money);
-				fund.setRemark("支付宝充值"+money+"元");
+				fund.setRemark(remark);
 				fund.setType(1);
 				fund.setNo(orderNo);
 				fund.setUid(userId);

@@ -64,7 +64,8 @@ public class PingPPPayCallBackController extends BaseCmsController<RechargeList>
 						logger.info("transaction_no======>" + transactionNo);
 						logger.info("amount===>" + amount);
 						logger.info("channel====>" + channel);
-						payService.doUpdatePingPPPaySuccessRecharge(orderNo, channel, amount, transactionNo, timePaid);
+						Double money = amount / 100;
+						payService.doUpdatePingPPPaySuccessRecharge(orderNo, channel,money , transactionNo, timePaid,"支付宝充值"+money+"元");
 					}
 				}
 		} catch (IOException e) {

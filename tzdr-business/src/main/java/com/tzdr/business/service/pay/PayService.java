@@ -2,6 +2,7 @@ package com.tzdr.business.service.pay;
 
 import java.util.Map;
 
+import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.common.api.bbpay.vo.PayParamsObject;
 import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.baseservice.BaseService;
@@ -79,7 +80,7 @@ public interface PayService extends BaseService<RechargeList>{
 	 *     		2016.07.19
 	 * @return
 	 */
-	public String doSavePingPPRecharge(String payWay, int source,
+	public String doSavePingPPRecharge(Channel payWayChannl, int source,
 								WUser user,
 								Integer status,
 								String bankCard,
@@ -95,7 +96,7 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @param transactionNo 三方交易流水号
 	 * @param timePaid  支付完成时间
 	 */
-	public void doUpdatePingPPPaySuccessRecharge(String orderNo,String channel,Double amount,String transactionNo,String timePaid);
+	public void doUpdatePingPPPaySuccessRecharge(String orderNo,String channel,Double amount,String transactionNo,String timePaid,String remark);
 	/**
 	 * 根据id查询用户
 	 * @param userId
