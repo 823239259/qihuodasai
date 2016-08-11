@@ -26,6 +26,7 @@ import com.tzdr.api.request.BankTransferRequest;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.api.service.ApiUserService;
+import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
@@ -179,12 +180,21 @@ public class UserPayController {
 		String paymoney=request.getParameter("money");
 		String payWay = request.getParameter("payWay");
 		if(paymoney != null && Double.parseDouble(paymoney) > 0){
+			Channel payWayChannl = null;
+			if(payWay == null){
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
+			}else{
+				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
+				if(payWayChannl == null){
+					payWayChannl = Channel.ALIPAY_PC_DIRECT;
+				}
+			}
 			int status=0;
 			String paytype = "3" ;
 			int source = 1;
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();
-			String charage = payService.doSavePingPPRecharge(payWay,source,user,status,"",paymoney,ip,paytype,orderNo);
+			String charage = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
 			System.out.println(charage);
 			return charage;
 		}
