@@ -92,6 +92,8 @@
 							kszxno();
 							return;
 						}
+					}else if(data.data.islogin == 'undefined ' || data.data.islogin == undefined ){
+						actEnd();
 					}else{
 						zhuce();
 					}
@@ -178,6 +180,18 @@
 		 "left": (windowWidth-popupWidth)/2   
 		});  
     }
+    function actEnd(){
+    	$("#actEnd").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+    }
 	</script>
 	<style type="text/css">
 		.div_loading {width: 285px;height: 100%;text-align: left;z-index: 10000;margin: 0 auto;}
@@ -195,6 +209,17 @@
 	<%@include file="../common/header.jsp"%>
 <div id="div_Mask"  style="display:none;"></div>
 <div class="div_loading">
+	<div class="tck01" id="actEnd" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示！</a><a class="close" onclick="javascript:closeDiv('actEnd')"></a>
+		</div>
+		<div class="smain">
+			<div>活动已结束！</div>
+		</div>
+		<div class="anniu">
+	 		<a  onclick="javascript:closeDiv('actEnd')">确定</a>
+	 	</div> 
+	</div>
 	<div class="tck01" id="kszj" style="display: none;">
 		<div class="navtitle">
 			<a class="nava">您中奖啦！</a><a class="close" onclick="javascript:closeDiv('kszj')"></a>

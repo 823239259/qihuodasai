@@ -81,7 +81,6 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 		if(model != null){
 			String signValue;
 			try {
-				logger.info(GoPayTradeData.callBackEncodeSignValue(model));
 				signValue = GoPayTradeData.md5CallBackEncodeSignValue(model);
 				if(model.getCallBackSign().equals(signValue)){
 					return model;
@@ -95,7 +94,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 		return null;
 	}
 	public String resultGoWay(){
-		return "RespCode=0000|JumpURL=http://hedaoqing.oicp.net/tzdr-web";
+		return "RespCode=0000|JumpURL=http://hedaoqing.oicp.net/tzdr-web/user/account?a=1";
 	}
 	@Override
 	public BaseService<RechargeList> getBaseService() {
