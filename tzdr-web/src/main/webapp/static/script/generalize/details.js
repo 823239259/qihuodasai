@@ -59,8 +59,9 @@ $(document).ready(function(){
         $str.appendTo($copy).fadeIn();
         $(".pop").css({
             position: "absolute",
-            top: "-22px",
-            right: "56px",
+            top: "-27px",
+            right: "28px",
+            fontSize: "20px",
         	color: "#fc3"
         });
         setTimeout(function() {
