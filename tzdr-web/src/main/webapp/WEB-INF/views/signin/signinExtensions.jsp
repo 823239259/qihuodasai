@@ -195,7 +195,7 @@
 				<p>行情资讯24小时推送</p>
 			</div>
 		</div>
-		<p class="ks_zp"><a href="${ctx}/ftse/index">点我立即操盘</a><p>
+		<p class="ks_zp"><a href="#" onclick="signinExtenScrollTop()">点我立即注册</a><p>
 	</div>
 </div>
 <div class="ks_footer">
@@ -208,4 +208,10 @@
 </div>
 <%@ include file="../common/dsp.jsp"%>
 </body>
+<script type="text/javascript">
+	function signinExtenScrollTop(){
+		$('body,html').animate({scrollTop:0},500);
+		return false;
+	}
+</script>
 </html>
