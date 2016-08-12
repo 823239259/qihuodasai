@@ -257,8 +257,7 @@ public class PayController {
 				pingPPModel.setCurrency("cny");
 				pingPPModel.setOrder_no(orderNo);
 				pingPPModel.setSubject(Config.SUBJECT);
-				ChargeExample.createCharge(pingPPModel).toString();
-				request.setAttribute("charge", result );
+				request.setAttribute("charge", ChargeExample.createCharge(pingPPModel).toString() );
 			}
 			return "/views/pay/pingppPay";
 		}
