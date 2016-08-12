@@ -314,11 +314,11 @@ function doGopay(){
 		return ;
 	}
 	
-	/*if(parseFloat(money)<1){
+	if(parseFloat(money)<1){
 		showMsgDialog("提示","充值金额必须大于等于1元");
 		$("#gopaymoney").focus();
 		return ;
-	}*/
+	}
 	document.forms["goNetbank"].action=basepath+"pay/goPayView";
 	document.forms["goNetbank"].submit();
 }
