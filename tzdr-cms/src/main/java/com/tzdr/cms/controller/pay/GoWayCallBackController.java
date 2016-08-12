@@ -94,7 +94,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 		return null;
 	}
 	public String resultGoWay(){
-		return "RespCode=0000|JumpURL=http://hedaoqing.oicp.net/tzdr-web/user/account?a=1";
+		return "RespCode=0000|JumpURL=http://www.vs.com/user/account?a=1";
 	}
 	@Override
 	public BaseService<RechargeList> getBaseService() {
