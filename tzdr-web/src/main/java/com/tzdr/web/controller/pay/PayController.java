@@ -317,7 +317,7 @@ public class PayController {
 				goPayRequestModel.setTranAmt(money);
 				goPayRequestModel.setFeeAmt("0");
 				goPayRequestModel.setTranDateTime(DateUtil.getDate("yyyyMMddHHmmss"));
-				goPayRequestModel.setTranIP("127.0.0.1");
+				goPayRequestModel.setTranIP(ip);
 				goPayRequestModel.setGoodsName("维胜充值");
 				goPayRequestModel.setGoodsDetail("维胜充值");
 				try {

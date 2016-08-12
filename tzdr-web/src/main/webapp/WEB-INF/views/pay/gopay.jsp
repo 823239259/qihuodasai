@@ -44,6 +44,8 @@
 						$("input[name = isRepeatSubmit]").val(data.isRepeatSubmit);
 						$("input[name = signValue]").val(data.signValue);
 						$("#form").submit(); 
+					 }else{
+						 alert("支付跳转失败,请重试");
 					 }
 				}
 			});
