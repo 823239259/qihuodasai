@@ -340,7 +340,7 @@ $(document).ready(function() {
 						<li class="uc_tl120">手机号</li>
 						<li class="uc_tl50">姓名</li>
 						<li class="uc_tl50">级别</li>
-						<li class="uc_tl50">返点%</li>
+						<!-- <li class="uc_tl50">返点%</li> -->
 						<li class="uc_tl90">直接下线(人)</li>
 						<li class="uc_tl90">所有下线(人)</li>
 						<!-- <li class="uc_tl110">累计佣金收入(元)</li>

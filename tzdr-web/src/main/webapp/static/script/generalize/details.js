@@ -243,12 +243,12 @@ function getSubordinatesDataList(index){
 					subordinatesListHtml+="<li class='uc_tl120'>"+this.mobile+"</li>";
 					subordinatesListHtml+="<li class='uc_tl50'>"+this.tname+"</li>";
 					subordinatesListHtml+="<li class='uc_tl50'>"+(this.userGrade == null || this.userGrade == 0 ? "股民1级" : this.userGrade == 1 ? "股师": "股神")+"</li>";
-					subordinatesListHtml+="<li class='uc_tl50'>"+this.rebate+"</li>";
+					/*subordinatesListHtml+="<li class='uc_tl50'>"+this.rebate+"</li>";*/
 					subordinatesListHtml+="<li class='uc_tl90'>"+this.totalChild+"</li>";
 					subordinatesListHtml+="<li class='uc_tl90'>"+this.allChildNumber+"</li>";
-					subordinatesListHtml+="<li class='uc_tl110'><em>"+(this.totalReturnCommission).toFixed(2)+"</em></li>";
+					//subordinatesListHtml+="<li class='uc_tl110'><em>"+(this.totalReturnCommission).toFixed(2)+"</em></li>";
 					//subordinatesListHtml+="<li class='uc_tl139'>"+getFormatDateByLong(this.ctime,'yyyy-MM-dd hh:mm:ss')+"</li>";
-					subordinatesListHtml+="<li class='uc_lowerbtn updateSubordinatesRebate'><a href='javascript:void(0);' data-id="+this.id+" data-value='"+this.rebate+"'>修改</a></li>";
+					//subordinatesListHtml+="<li class='uc_lowerbtn updateSubordinatesRebate'><a href='javascript:void(0);' data-id="+this.id+" data-value='"+this.rebate+"'>修改</a></li>";
 					subordinatesListHtml +="</ol>";
 				});
 				$('.subordinatesList').html(subordinatesListHtml); 
