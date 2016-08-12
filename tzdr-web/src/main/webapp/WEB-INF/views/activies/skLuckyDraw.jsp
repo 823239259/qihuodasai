@@ -37,6 +37,7 @@
 	<script type="text/javascript">
 	 var bRotate = false;
 	 var rewardid = null;
+	 var flag = true;
 	 function rotateFn(awards, angles, txt){
          bRotate = !bRotate;
          $('#rotate').stopRotate();
@@ -59,6 +60,7 @@
 							 var data = result.data.result;
 							 if(data){
 								 kszx();
+								 flag = true;
 							 }
 						}
                 	}) ;
@@ -79,6 +81,12 @@
         };
         
         $('.pointer').click(function (){
+        	if(flag){
+        		flag = false;
+        	}else{
+        		frequently();
+        		return;
+        	}
         	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 				if(data.success){
 					if(data.data.islogin){
@@ -153,6 +161,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     		
     }
     function kszxno(){
@@ -166,6 +175,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     		
     }
     function zhuce(){
@@ -179,6 +189,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     }
     function actEnd(){
     	$("#actEnd").css("display","block");
@@ -191,6 +202,20 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
+    }
+    function frequently(){
+    	$("#frequently").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+		flag = true;
     }
 	</script>
 	<style type="text/css">
@@ -219,6 +244,14 @@
 		<div class="anniu">
 	 		<a  onclick="javascript:closeDiv('actEnd')">确定</a>
 	 	</div> 
+	</div>
+	<div class="tck01" id="frequently" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">温馨提示</a><a class="close" onclick="javascript:closeDiv('frequently')"></a>
+		</div>
+		<div class="smain">
+			<div style = "font-size:20px;"><br/>操作频繁，请稍后再试!</div>
+		</div>
 	</div>
 	<div class="tck01" id="kszj" style="display: none;">
 		<div class="navtitle">
