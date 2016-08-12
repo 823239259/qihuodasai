@@ -44,6 +44,9 @@ $(document).ready(function() {
 	
 });
 </script>
+<style>
+	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+</style>
 </head>
 <body>
 	<!--顶部 -->
@@ -85,17 +88,18 @@ $(document).ready(function() {
 			<div class="uc_pay">
 				<ul class="uc_paynav">
 					<!-- <li class="generalize" id="detail"><a
-						href="javascript:void(0);" class="on">代理详情</a></li>
-					<li class="generalize" id="subordinates"><a
-						href="javascript:void(0);">我的下级</a></li>
-					<li class="generalize" id="visitors"><a
-						href="javascript:void(0);">访问记录</a></li> -->
+						href="javascript:void(0);" class="on">代理详情</a></li> -->
 					<li class="generalize" id="generalize"><a
 						href="javascript:void(0);" class="on">推广链接</a></li>
+					<li class="generalize" id="subordinates"><a
+						href="javascript:void(0);" >我的下级</a></li>
+					<!-- <li class="generalize" id="visitors"><a
+						href="javascript:void(0);">访问记录</a></li> -->
+					
 					<!-- <li class="generalize" id="incomeQuery"><a
 					    href="javascript:void(0);">收益查询</a></li> -->
-					<li class="generalize" id="generalizemoney"><a
-					    href="javascript:void(0);">推广佣金明细</a></li>
+					<!-- <li class="generalize" id="generalizemoney"><a
+					    href="javascript:void(0);">推广佣金明细</a></li> -->
 				</ul>
 				<!--推广详情  -->
 				<%-- <div class="generalizeSubtab" id="detailDiv" style="display:">
@@ -327,7 +331,27 @@ $(document).ready(function() {
 					</div>
 				</div>
 			</div>
-			
+				<!--我的下级  -->
+			<div class="generalizeSubtab" id="subordinatesDiv" style="display: none">
+				<!-- <li class="uc_lowerbtn updateDefaultRebate"><a href="javascript:void(0);">设置下级默认返点</a></li> -->
+				<div class="uc_lower">
+					<%-- <div class="uc_lw_btn"><a class="updateDefaultRebate" href="javascript:void(0);">设置下级默认返点</a><span id="mySubordinateDefaultRebate">下级默认返点：<fmt:formatNumber value="${subordinateDefaultRebate}" pattern="###" minFractionDigits="0"></fmt:formatNumber>%</span></div> --%>
+					<ul class="uc_retitle">
+						<li class="uc_tl120">手机号</li>
+						<li class="uc_tl50">姓名</li>
+						<li class="uc_tl50">级别</li>
+						<li class="uc_tl50">返点%</li>
+						<li class="uc_tl90">直接下线(人)</li>
+						<li class="uc_tl90">所有下线(人)</li>
+						<!-- <li class="uc_tl110">累计佣金收入(元)</li>
+						li class="uc_tl139">注册时间</li
+						<li class="uc_lowerbtn"></li> -->
+					</ul>
+					<ul class="uc_relist subordinatesList">
+					</ul>
+					<div id="PagSubordinatesInation"></div> 
+				</div>
+			</div>
 			<!--收益查询 -->
 			<!-- <div class="generalizeSubtab" id="incomeQueryDiv" style="display:none;">
 			
