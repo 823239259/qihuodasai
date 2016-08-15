@@ -43,16 +43,16 @@
 
 <%@ include file="../common/dsp.jsp"%> <!-- 统计 -->
 <script type="text/javascript">
-	var userId = "<%=userId%>";
-	window._CWiQ = window._CWiQ || [];
-	window.BX_CLIENT_ID = userId; // 帐号ID
-	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
-	var c = document.createElement('script'),p = 'https:'==document.location.protocol;
-	c.type = 'text/javascript';
-	c.async = true;
-	c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
-	var h = document.getElementsByTagName('script')[0];
-	h.parentNode.insertBefore(c, h);
+var _zzsiteid="g2CiQ0pbhOF";
+var _zzid = "g2CiQ0pbhOE";
+(function() {
+  var zz = document.createElement('script');
+  zz.type = 'text/javascript';
+  zz.async = true;
+  zz.src = 'https:' == document.location.protocol ? 'https://daima.adpengshun.com/api/trace.js' : 'http://daima.adpengshun.com/trace/api/trace.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(zz, s);
+})();
 </script>
 <script type="text/javascript">
 	
