@@ -143,6 +143,7 @@ public class Constants {
 		public static final String NET_BANK = "2";// 网银
 		public static final String ALIPAY = "3";// 支付宝
 		public static final String TRANSBANK = "4";// 银行转账
+		public static final String GO_WAY = "5";//国付宝
 	}
 
 	// 身份证状态

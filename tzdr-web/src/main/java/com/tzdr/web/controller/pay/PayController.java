@@ -1,5 +1,7 @@
 package com.tzdr.web.controller.pay;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +14,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Maps;
+import com.tzdr.business.pay.gopay.DateUtil;
+import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
+import com.tzdr.business.pay.gopay.model.GoPayRequestModel;
+import com.tzdr.business.pay.pingpp.config.Config;
+import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
+import com.tzdr.business.pay.pingpp.model.PingPPModel;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
@@ -228,15 +238,106 @@ public class PayController {
 			int source = Constant.Source.TZDR;
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();
-			String charage = payService.doSavePingPPRecharge(payWay,source,user,status,"",paymoney,ip,paytype,orderNo);
-			request.setAttribute("charge", charage );
+			Channel payWayChannl = null;
+			if(payWay == null){
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
+			}else{
+				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
+				if(payWayChannl == null){
+					payWayChannl = Channel.ALIPAY_PC_DIRECT;
+				}
+			}
+			String result = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
+			if(result.equals("1")){
+				PingPPModel pingPPModel = new PingPPModel();
+				pingPPModel.setAmount(Double.valueOf(paymoney));
+				pingPPModel.setBody(Config.BODY);
+				pingPPModel.setChannel(payWayChannl.getChannelCode());//;
+				pingPPModel.setClient_ip(ip);
+				pingPPModel.setCurrency("cny");
+				pingPPModel.setOrder_no(orderNo);
+				pingPPModel.setSubject(Config.SUBJECT);
+				request.setAttribute("charge", ChargeExample.createCharge(pingPPModel).toString() );
+			}
 			return "/views/pay/pingppPay";
 		}
 		return null;
 	}
-	
+	@RequestMapping(value="/goPayView",method = RequestMethod.GET)
+	public String goPayView(ModelMap modelMap,
+			@RequestParam("gopaymoney")Double gopaymoney,
+			@RequestParam("gopayWay") String gopayWay) throws UnsupportedEncodingException{
+		modelMap.put("money", gopaymoney);
+		modelMap.put("payway", gopayWay);
+		return "/views/pay/gopay";
+	}
+
 	private static Object lock = new Object();
-	
+	/**
+	 * 国付宝支付
+	 * @param response
+	 * @param request
+	 * @return
+	 * @date 2016年08月10日
+	 * @author hedaoqing
+	 */
+	@ResponseBody
+	@RequestMapping(value="/gopay",method = RequestMethod.POST)
+	public JsonResult gopay(ModelMap modelMap,HttpServletResponse response,
+						HttpServletRequest request,
+						@RequestParam("paymoney")Double gopaymoney,
+						@RequestParam("gopayWay") String gopayWay){
+		boolean flag = false;
+		String message = "";
+		if(gopaymoney != null && gopaymoney > 0){
+			String money = String.valueOf(gopaymoney);
+			UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
+			WUser user = this.payService.getUser(userSessionBean.getId());
+			String ip=IpUtils.getIpAddr(request);	
+			String orderNo = ChargeExample.randomNo();
+			Channel payWayChannl = null;
+			if(gopayWay == null){
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
+			}else{
+				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(gopayWay));
+				if(payWayChannl == null){
+					payWayChannl = Channel.ALIPAY_PC_DIRECT;
+				}
+			}
+			int status=Constants.PayStatus.NO_PROCESSING;
+			String paytype=Constants.PayType.GO_WAY;
+			int source = Constant.Source.TZDR;
+			String result = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",money,ip,paytype,orderNo);
+			if(result.equals("1")){
+				GoPayRequestModel goPayRequestModel = new GoPayRequestModel();
+				goPayRequestModel.setBuyerContact("");
+				goPayRequestModel.setBuyerName("");
+				goPayRequestModel.setMerOrderNum(orderNo);
+				goPayRequestModel.setTranAmt(money);
+				goPayRequestModel.setFeeAmt("0");
+				goPayRequestModel.setTranDateTime(DateUtil.getDate("yyyyMMddHHmmss"));
+				goPayRequestModel.setTranIP(ip);
+				goPayRequestModel.setGoodsName("维胜充值");
+				goPayRequestModel.setGoodsDetail("维胜充值");
+				try {
+					String tradeData = GoPayTradeData.createTradeData(goPayRequestModel);
+					message = tradeData;
+					flag = true;
+					logger.info(tradeData);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}else{
+				message = "操作失败，请重试!";
+			}
+		}else{
+			message = "金额错误";
+		}
+		JsonResult resultJson = new JsonResult();
+		resultJson.setSuccess(flag);
+		resultJson.appendData("data", message);
+		return resultJson;
+	}
 	/**
 	 * 支付宝转账
 	 * @param response

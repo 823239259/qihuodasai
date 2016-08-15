@@ -40,7 +40,9 @@
         <listener-class>com.tzdr.web.controller.homepage.OnlineListener</listener-class>
     </listener>
     <!-- 设置servlet编码开始 -->
-  
+    <listener> 
+    	 <listener-class >com.tzdr.business.pay.gopay.GoLoadConfig</listener-class > 
+     </listener >
     <filter>
         <filter-name>Set Character Encoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -59,7 +61,11 @@
         <filter-name>Set Character Encoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+   <!--  <servlet>
+    	<servlet-name>GoPay</servlet-name>
+	   <servlet-class>com.tzdr.business.pay.gopay.GoLoadConfig</servlet-class>
+	   <load-on-startup>1</load-on-startup>
+    </servlet> -->
     
     <!-- ========================单点登录开始 ======================== -->
 	<!-- 用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->

@@ -115,6 +115,12 @@
 </div>
 <div class="ks_why">
 	<div class="ks_why_content">
+		<div class="ks_why_sxbs">
+			<p class="ks_why_js_1" style="">免费秘籍-新手免1手双边交易手续费</p>
+			<p class="ks_why_sx">首次终结方案时，自动免除一手交易费，交易产品不限！</p>
+		</div>
+		
+		
 		<p class="ks_why_js_1" style="">免损秘籍-如何获得3000元损失补贴！</p>
 		<div class="ks_why_bt">
 			<div class="ks_why_btleft">
@@ -189,7 +195,7 @@
 				<p>行情资讯24小时推送</p>
 			</div>
 		</div>
-		<p class="ks_zp"><a href="${ctx}/ftse/index">点我立即操盘</a><p>
+		<p class="ks_zp"><a href="#" onclick="signinExtenScrollTop()">点我立即注册</a><p>
 	</div>
 </div>
 <div class="ks_footer">
@@ -202,4 +208,10 @@
 </div>
 <%@ include file="../common/dsp.jsp"%>
 </body>
+<script type="text/javascript">
+	function signinExtenScrollTop(){
+		$('body,html').animate({scrollTop:0},500);
+		return false;
+	}
+</script>
 </html>

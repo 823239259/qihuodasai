@@ -729,12 +729,18 @@ public class FSimpleFtseUserTradeServiceImpl extends
                 this.update(simpleFtseUserTrade);
 //				handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade); // 保存收益报表记录
             }
-            this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile(),wellGoldA50.getId());
+           if(dataMapService.activityExpired()){
+            	this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(),wuser.getMobile(),wellGoldA50.getId());
+            }
             return new JsonResult(true, "方案结算成功！");
         }
     }
     public void validationIsTradeSubsidy(String uid,String mobile,String id){
-    	List<FSimpleFtseUserTrade> fstvos = getEntityDao().findByUid(uid);
+        List<ActivityReward> activityRewards = activityRewardService.doGetByUid(uid, "001");
+    	if(activityRewards != null && activityRewards.size() > 0){
+    		return;
+    	}
+        List<FSimpleFtseUserTrade> fstvos = getEntityDao().findByUidFristLoss(uid);
     	int size = fstvos.size();
     	//如果是第一次交易
     	if(size > 0){
@@ -758,6 +764,7 @@ public class FSimpleFtseUserTradeServiceImpl extends
 		    			Integer smsChannel = dataMapService.getSmsContentOthers();
 		    			SMSSender.getInstance().sendByTemplate(smsChannel , mobile, "activity.luck.ihuyi.code.template",null );
 					} catch (Exception e) {
+						e.printStackTrace();
 						log.info("通知抽奖的短信发送异常");
 					}
 	    		}

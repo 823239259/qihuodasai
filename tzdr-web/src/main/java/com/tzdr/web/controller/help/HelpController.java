@@ -36,4 +36,5 @@ public class HelpController {
 		modelMap.put("leftMenu", leftMenu);
 		return ViewConstants.HelpViewJsp.HELP_INDEX_VIEW;
 	}
+
 }

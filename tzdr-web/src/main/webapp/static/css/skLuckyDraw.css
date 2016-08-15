@@ -21,3 +21,13 @@
 .bannercenter .ksbt-border {border-left: 1px solid #663300; border-right: 1px solid #663300; width: 396px; text-align: center; border-bottom: 1px solid #663300;}
 .bannercenter .ksbt-border li {border-top: 1px solid #663300;}
 .ks-footer {height: 70px; line-height: 70px; text-align: center; background: #fcc129; color: #663300; font-size: 14px;}
+
+/* 新手福利 */
+.xsfl-title {width: 100%;position: relative;height: 360px;background: url("../images/login/noviceWelfare-title.png") center center;}
+.xsfl-bottom {width: 1000px;position: relative;height: 81px;background: url("../images/login/noviceWelfare-bottom.png"); margin: 0 auto; text-align: center;line-height: 72px;font-size: 16px; color: #fff;}
+.xsfl-content {width: 1000px;position: relative;height: 260px; border-bottom: 1px solid #1358ae; margin: 0 auto;}
+.xsfl-fs {float: right; margin-top: 50px;}
+.xsfl-xx {float: left;}
+.xsfl-xx-title {margin-top: 50px; color: #1358ae; font-size: 16px;}
+.xsfl-xx-js {color: #1358ae; font-size: 14px; margin-top: 5px;}
+.xsfl-footer {margin-top: 73px; color: #849ecc; font-size: 14px; background: #1358ae; height: 60px; line-height: 60px; text-align: center;}

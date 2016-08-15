@@ -49,7 +49,24 @@ $(document).ready(function(){
 		moviePath: basepath+"static/script/common/ZeroClipboard.swf"
 	});
 	clip.on("complete", function(client, args){
-		alert("已复制到剪切板");
+		/*alert("已复制到粘贴板");*/
+		var $this = $(this);
+        var $target = $this.prev(),
+                $copy = $this.closest('.uc_spl_link'),
+                $str = $('<div class="pop">已复制到粘贴板</div>');
+        var a =$target.select();
+        $copy.find('.pop').stop(true).remove();
+        $str.appendTo($copy).fadeIn();
+        $(".pop").css({
+            position: "absolute",
+            top: "-27px",
+            right: "28px",
+            fontSize: "20px",
+        	color: "#fc3"
+        });
+        setTimeout(function() {
+            $copy.find('.pop').fadeOut();
+        }, 3000);
 	});	
 	
 	//设置默认返点
@@ -227,12 +244,12 @@ function getSubordinatesDataList(index){
 					subordinatesListHtml+="<li class='uc_tl120'>"+this.mobile+"</li>";
 					subordinatesListHtml+="<li class='uc_tl50'>"+this.tname+"</li>";
 					subordinatesListHtml+="<li class='uc_tl50'>"+(this.userGrade == null || this.userGrade == 0 ? "股民1级" : this.userGrade == 1 ? "股师": "股神")+"</li>";
-					subordinatesListHtml+="<li class='uc_tl50'>"+this.rebate+"</li>";
+					/*subordinatesListHtml+="<li class='uc_tl50'>"+this.rebate+"</li>";*/
 					subordinatesListHtml+="<li class='uc_tl90'>"+this.totalChild+"</li>";
 					subordinatesListHtml+="<li class='uc_tl90'>"+this.allChildNumber+"</li>";
-					subordinatesListHtml+="<li class='uc_tl110'><em>"+(this.totalReturnCommission).toFixed(2)+"</em></li>";
+					//subordinatesListHtml+="<li class='uc_tl110'><em>"+(this.totalReturnCommission).toFixed(2)+"</em></li>";
 					//subordinatesListHtml+="<li class='uc_tl139'>"+getFormatDateByLong(this.ctime,'yyyy-MM-dd hh:mm:ss')+"</li>";
-					subordinatesListHtml+="<li class='uc_lowerbtn updateSubordinatesRebate'><a href='javascript:void(0);' data-id="+this.id+" data-value='"+this.rebate+"'>修改</a></li>";
+					//subordinatesListHtml+="<li class='uc_lowerbtn updateSubordinatesRebate'><a href='javascript:void(0);' data-id="+this.id+" data-value='"+this.rebate+"'>修改</a></li>";
 					subordinatesListHtml +="</ol>";
 				});
 				$('.subordinatesList').html(subordinatesListHtml); 

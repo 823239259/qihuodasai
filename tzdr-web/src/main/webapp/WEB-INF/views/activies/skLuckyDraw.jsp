@@ -28,51 +28,16 @@
 	<script src="${ctx}/static/script/activies/kszp.js?v=${v}"></script>
     <link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">	
     <link href="${ctx}/static/css/skLuckyDraw.css?v=${v}" rel="stylesheet" type="text/css">	
+    <link rel="stylesheet" href="${ctx}/static/css/new_index.css?v=20151127">
     <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?v=${v}"></script>
 	<script type="text/javascript">
 		var basepath = "<%=basePath%>" + "/";
 		var casServerLoginUrl = "<%=casServerLoginUrl%>";
 	</script>
-	<script type='text/javascript'>
-
-		window._CWiQ = window._CWiQ || [];
-		
-		window.BX_CLIENT_ID = 38474; // 帐号ID
-		
-		(function() {
-		
-		var c = document.createElement('script')
-		
-		,p = 'https:'==document.location.protocol;
-		
-		c.type = 'text/javascript';
-		
-		c.async = true;
-		
-		c.src = (p?'https://':'http://')+'tp.ana.pjdsp.com/boot/0';
-		
-		var h = document.getElementsByTagName('script')[0];
-		
-		h.parentNode.insertBefore(c, h);
-		
-		})();
-		
-	</script>
-
-	<script type='text/javascript' src="http://tp.ana.pjdsp.com/js/vc.min.js">
-	
-	</script>
-
-	<script type='text/javascript'>
-	
-	window.BX_CLIENT_ID = 38474; // 帐号ID
-	
-	BDX_DMP.trackPdmp('38474'); //访客分类名称是给访客贴的标签，可以自定义，例如： 访问过官网、注册用户等。
-	
-	</script>
 	<script type="text/javascript">
 	 var bRotate = false;
 	 var rewardid = null;
+	 var flag = true;
 	 function rotateFn(awards, angles, txt){
          bRotate = !bRotate;
          $('#rotate').stopRotate();
@@ -95,6 +60,7 @@
 							 var data = result.data.result;
 							 if(data){
 								 kszx();
+								 flag = true;
 							 }
 						}
                 	}) ;
@@ -115,6 +81,12 @@
         };
         
         $('.pointer').click(function (){
+        	if(flag){
+        		flag = false;
+        	}else{
+        		frequently();
+        		return;
+        	}
         	$.post(basepath+"/extendsion/sign/validationTip",function(data){
 				if(data.success){
 					if(data.data.islogin){
@@ -128,6 +100,8 @@
 							kszxno();
 							return;
 						}
+					}else if(data.data.islogin == 'undefined ' || data.data.islogin == undefined ){
+						actEnd();
 					}else{
 						zhuce();
 					}
@@ -187,6 +161,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     		
     }
     function kszxno(){
@@ -200,6 +175,7 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
     		
     }
     function zhuce(){
@@ -213,6 +189,33 @@
 		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 		 "left": (windowWidth-popupWidth)/2   
 		});  
+		flag = true;
+    }
+    function actEnd(){
+    	$("#actEnd").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+		flag = true;
+    }
+    function frequently(){
+    	$("#frequently").css("display","block");
+    	$("#div_Mask").show();
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+		 "left": (windowWidth-popupWidth)/2   
+		});  
+		flag = true;
     }
 	</script>
 	<style type="text/css">
@@ -224,10 +227,32 @@
 		.navtitle .nava {width: 550px; text-align: center;}
 		.tck01 {width: 350px;}
 	</style>
+
 </head>
 <body>
+<!--顶部 -->
+	<%@include file="../common/header.jsp"%>
 <div id="div_Mask"  style="display:none;"></div>
 <div class="div_loading">
+	<div class="tck01" id="actEnd" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示！</a><a class="close" onclick="javascript:closeDiv('actEnd')"></a>
+		</div>
+		<div class="smain">
+			<div>活动已结束！</div>
+		</div>
+		<div class="anniu">
+	 		<a  onclick="javascript:closeDiv('actEnd')">确定</a>
+	 	</div> 
+	</div>
+	<div class="tck01" id="frequently" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">温馨提示</a><a class="close" onclick="javascript:closeDiv('frequently')"></a>
+		</div>
+		<div class="smain">
+			<div style = "font-size:20px;"><br/>操作频繁，请稍后再试!</div>
+		</div>
+	</div>
 	<div class="tck01" id="kszj" style="display: none;">
 		<div class="navtitle">
 			<a class="nava">您中奖啦！</a><a class="close" onclick="javascript:closeDiv('kszj')"></a>

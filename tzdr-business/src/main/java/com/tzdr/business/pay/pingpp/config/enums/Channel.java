@@ -16,7 +16,11 @@ public enum Channel {
 	/**
 	 * 支付宝 PC 网页支付
 	 */
-	ALIPAY_PC_DIRECT(6,"alipay_pc_direct", " 支付宝 PC 网页支付");
+	ALIPAY_PC_DIRECT(6,"alipay_pc_direct", " 支付宝 PC 网页支付"),
+	/**
+	 * 国付宝
+	 */
+	GO_WAY(7,"go_way","国付宝支付");
 	private Integer channel;
 	private String channelCode;
 

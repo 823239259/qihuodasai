@@ -75,6 +75,10 @@ public class ViewConstants {
 		 */
 		public static final String TXTENDSION_INVATION_CODE = "/views/fund/invitationCode";
 		/**
+		 * 新手福利
+		 */
+		public static final String EXTENDSION_NOVICEWELFARE = "/views/activies/novicewelfare";
+		/**
 		 * 注册成功页面
 		 */
 		public static final String SIGNINSUCESS_VIEW = "/views/signin/signInSucess";
@@ -219,6 +223,7 @@ public class ViewConstants {
 		
 		//到币币页面支付
 		public static final String BIBI_PAY_MAIN_VIEW = "/views/pay/bbPay";
+		
 				
 	}
 	

@@ -39,4 +39,9 @@ public interface ActivityRewaryDao extends  BaseJpaDao<ActivityReward, String>,J
 	 * @return
 	 */
 	ActivityReward findById(String id);
+	/**
+	 * 用户查询是否有抽奖
+	 */
+	@Query("from ActivityReward where uid = ?1 and activity = ?2")
+	List<ActivityReward> doGetByUidAndActivity(String uid,String activity);
 }

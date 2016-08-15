@@ -54,4 +54,11 @@ public interface ActivityRewardService extends BaseService<ActivityReward>{
 	 * @return
 	 */
 	public ActivityReward doGetById(String id);
+	/**
+	 * 用户查询是否有抽奖
+	 * @param uid
+	 * @param activity
+	 * @return
+	 */
+	public List<ActivityReward> doGetByUid(String uid,String activity);
 }

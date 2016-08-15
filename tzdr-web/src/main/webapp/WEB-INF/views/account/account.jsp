@@ -405,7 +405,5 @@
 	</div>
 	<!--底部 -->
 <%@include file="../common/footer.jsp"%>
-<!-- footer -->
-<%@ include file="../common/dsp.jsp"%>
 </body>
 </html>
