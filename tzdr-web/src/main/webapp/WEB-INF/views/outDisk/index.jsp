@@ -138,7 +138,7 @@
                     <td>小恒指</td>
                     <td>${outDiskPrice[8].mainContract}</td>
                     <td>09:20—16:25，17:20—23:40</td>
-                    <td>只交易日经225时，初始最大可持仓<i id='nikkeiTranActualLever'>${outDiskParameters[0].nikkeiTranActualLever}</i>手</td>
+                    <td>只交易日经225时，初始最大可持仓<i id='hstranActualLever'>${outDiskParameters[0].hstranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[8].price}</i>元/手</td>
                 </tr>
                 
@@ -146,8 +146,8 @@
                     <td>美黄金</td>
                     <td>${outDiskPrice[9].mainContract}</td>
                     <td>06:05-04:55</td>
-                    <td>只交易日经225时，初始最大可持仓<i id='nikkeiTranActualLever'>${outDiskParameters[0].nikkeiTranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[8].price}</i>元/手</td>
+                    <td>只交易日经225时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
                 </tr>
                 <tr>
                 	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">14:20-14:26，16:25-16:31，16:10-16:16，23:40-23:46，01:50-02:01，03:55-04:01，04:55-05:01</i>七个时段所有品种只能平仓，不能开仓。</td>
