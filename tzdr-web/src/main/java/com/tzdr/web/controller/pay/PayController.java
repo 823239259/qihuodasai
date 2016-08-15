@@ -305,7 +305,7 @@ public class PayController {
 				}
 			}
 			int status=Constants.PayStatus.NO_PROCESSING;
-			String paytype=Constants.PayType.GO_WAY;
+			String paytype=Constants.PayType.NET_BANK;
 			int source = Constant.Source.TZDR;
 			String result = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",money,ip,paytype,orderNo);
 			if(result.equals("1")){
