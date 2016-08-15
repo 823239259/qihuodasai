@@ -744,7 +744,7 @@
 							 var qLowPrice = (parseFloat(_data.QLowPrice)).toFixed(size);
 							 var qHighPrice = (parseFloat(_data.QHighPrice)).toFixed(size);
 							 var qOpenPrice = (parseFloat(_data.QOpenPrice)).toFixed(size);
-							 var scal = (parseFloat(_data.QChangeRate)).toFixed(size);
+							 var scal = (parseFloat(_data.QChangeRate)).toFixed(2);
 							 var qChangeValue = (parseFloat(_data.QChangeValue)).toFixed(size);
 							 var qBidPrice1 = (parseFloat(_data.QBidPrice1)).toFixed(size);
 							 var qAskPrice1 =  (parseFloat(_data.QAskPrice1)).toFixed(size);
