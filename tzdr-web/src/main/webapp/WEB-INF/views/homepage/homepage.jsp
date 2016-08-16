@@ -194,7 +194,7 @@
 	           		<c:if test="${fn:contains(b.linkUrl,\'sign/luck/view\')}">
 	           			<a href="${b.linkUrl }"  target="_self" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	           		</c:if>
-	           		<c:if test="${fn:contains(b.linkUrl,'sign/luck/view') == false}">
+	           		<c:if test="${fn:contains(b.linkUrl,\'sign/luck/view\') == false}">
 			    		<a href="${b.linkUrl }"  target="_blank" style="display: none;"><img src="${imgPreURL }${b.imgPath }" title="banner" alt="banner"></a>
 	           		</c:if>
 	           </c:if>
