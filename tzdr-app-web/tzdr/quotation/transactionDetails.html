@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/quotation.css" />
+ 		<!--<link href="../../css/own.css" rel="stylesheet"/>-->
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack"></a>
+		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst">富时A501608</p><p>CNQ16</p></h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-slider">
+				<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" id="Time">分时</a>
+					<a class="mui-control-item" id="Candlestick">K线</a>
+					<a class="mui-control-item" id="TradingCenter" >交易中心</a>
+				</div>
+				<div id="sliderProgressBarQuotation" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group" >
+					<div id="TimeChart">123</div>
+				</div>
+				<div class="mui-slider-group" >
+					<div id="CandlestickChart"></div>
+				</div>
+			</div>
+			<div class="buttomFix">
+				<div class="buttomFixLeft mui-col-xs-6">
+					<p>卖<span id="buyPrices" class="PricesLeft">123</span ><span id="buyPricesNumber" class="PricesRight">12</span></p>
+					<p>买<span id="sellPrices" class="PricesLeft">123</span ><span id="sellPricesNumber" class="PricesRight">12</span></p>
+					<p>成交量<span id="volumePricesNumber" class="PricesRight">12</span></p>
+				</div>
+				<div class="buttomFixRight mui-col-xs-6">
+					<p id="freshPrices">15725</p>
+					<p id="domnRange">55.0/+0.85%</p>
+				</div>
+				<div class="BuyDiv">
+				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价"></div>
+				</div>
+				<div class="buyBtn">
+					<button type="button" class="mui-btn mui-col-xs-5" id="buy">买入</button>
+					<button type="button" class="mui-btn mui-col-xs-5" id="sell">卖出</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>
