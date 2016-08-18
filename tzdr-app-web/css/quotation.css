@@ -2,8 +2,12 @@
 .mainTitle{
 	line-height: 16px;
 }
+body{
+	background-color: #2B2B2B;
+}
 p{
 	margin: 0px;
+	color:#FFFFFF;
 }
 .mainTitle p{
 	margin-bottom: 0px;
@@ -51,7 +55,7 @@ p{
 	background: -o-linear-gradient(#2B2B2B,#2B2B2B) !important;
 }
 .mui-slider{
-	border-bottom: 1px solid #454545;
+	/*border-bottom: 1px solid #454545;*/
 	background-color: #666666;
 }
 #TimeChart{
@@ -151,7 +155,7 @@ font-size: 14px;
 .buyBtn{
 	clear: all;
 	background-color: #2B2B2B;
-	height:60px;
+	/*height:60px;*/
 	padding: 13px 10px;
 	text-align: center;
 }
@@ -170,7 +174,8 @@ font-size: 14px;
 .Assets{
 	width: 100%;
 	height:40px;
-	padding:4px 0px
+	padding:4px 0px;
+	border-bottom: 1px solid #454545;
 }
 .Assets p span{
 	font-size: 12px;
@@ -189,15 +194,136 @@ font-size: 14px;
 }
 .ProductInformation{
 	overflow: hidden;
-	padding:0px 20px;
+	padding:3px 0px;
 	color:#FFFFFF;
+	border-bottom: 1px solid #454545;
 }
 .ProductInformationLeft,.ProductInformationRight{
 	float: left;
+	overflow: hidden;
+	padding:0px 15px;
+	width: 50%;
 }
-.ProductInformationLeft p,.ProductInformationRight p{
-	color:#FFFFFF;
+.ProductInformationLeft{
+	padding:10px 15px;
+}
+.ProductInformationLeft p{
+	font-size: 14px;
+}
+.ProductInformationRight{
+	overflow: hidden;
+}
+.ProductInformationRight p{
+	font-size: 12px;
+	line-height: ;
 }
 .grayFont{
 	color:#999999;
+}
+.whiteFont{
+	color:#FFFFFF;
+}
+.dataRight{
+	display: block;
+	float: right;
+
+}
+#buyFuture{
+	border-bottom: 1px solid #454545;
+}
+#buyFuture label{
+	color:#FFFFFF;
+}
+#buyFuture span{
+	display: inline-block;
+	width: 50%;
+	height:40px;
+	line-height: 40px;
+	font-size: 12px;
+	border-bottom: 1px solid #454545;
+	padding:0px 15px;
+	
+}
+#buyFuture .radioChoice{
+	width: 25px;
+	height:25px;
+	display: table-cell;
+	vertical-align: middle;
+	color:#FFFFFF;
+	background-color: #FFFFFF;
+	margin-right: 15px;
+}.buyBtnPrices{
+	border-bottom: 1px solid #FFFFFF;
+}
+.listStyle {
+	background-color: #2B2B2B;
+	border:none;
+	/*width: 100%;*/
+	padding: 0px;
+}
+.listStyle  .mui-navigate-right{
+	color:#999999;
+}
+.listStyle li{
+	border-bottom: 1px solid  #454545;
+}
+.listStyle .mui-navigate-right span{
+	display: inline-block;
+	height:40px;;
+	width: 120px;
+	padding:15px 0px;
+	line-height: auto;
+	text-align: center;
+	font-size: 12px;
+	word-break: normal;
+	color:#999999;
+	width: 120px;
+	/*vertical-align: middle;*/
+}
+.mui-navigate-right:after, .mui-push-right:after{
+	content:"";
+}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+	border:none;
+}
+#kilAnorder{
+	background-color: #cccccc;
+	border:none;
+	margin-top: 30px;
+}
+#fisrtLi .mui-navigate-right span{
+	display: inline-block;
+	height:30px;;
+	width: 120px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	word-break: normal;
+	color:#FFFFFF;
+}
+#allOpen,#Open{
+	margin:0px 10px;
+	background-color:#cccccc;
+}
+#Entrust{
+	width: 100%;
+}
+#Entrust .mui-navigate-right span{
+	width: 120px;
+}
+#Deal .mui-navigate-right span{
+	width: 120px;
+}
+#sliderProgressBarQuotation{
+	background-color: #fcc900;
+}
+.mui-control-item{
+	color:#cccccc !important;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	color:#fcc900 !important;
+	border-bottom: 2px solid #fcc900;
+}
+.mui-control-item{
+	color:#CCCCCC;
 }
