@@ -83,12 +83,12 @@
             <p>工作日：8:30 - 24:00</p>
             <p>周末：09:00 - 17:00</p>
         </div>
-        <!-- <div class="copyright_interaction">
+        <div class="copyright_interaction">
             <h3>交流互动</h3>
             <p>期货操盘QQ群：</p>
-            <p><a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=802aa738876d3098418e2bab4cd59451ddfc7ca7b9d7de3f20aa09777ddb8ed8">498543006</a></p>
+            <p><a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=802aa738876d3098418e2bab4cd59451ddfc7ca7b9d7de3f20aa09777ddb8ed8">4008528008</a></p>
             <p>国际期货</p>
-        </div> -->
+        </div>
     </div>
 </div>
 <div class="copybox">
