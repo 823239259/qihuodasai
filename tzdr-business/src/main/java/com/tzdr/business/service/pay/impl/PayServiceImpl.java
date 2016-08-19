@@ -22,11 +22,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tzdr.business.exception.BibiPayException;
 import com.tzdr.business.exception.PayeaseException;
-import com.tzdr.business.pay.pingpp.config.Config;
 import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.config.enums.TradeStatus;
-import com.tzdr.business.pay.pingpp.example.ChargeExample;
-import com.tzdr.business.pay.pingpp.model.PingPPModel;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
@@ -475,11 +472,12 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 	}
 
 	@Override
-	public void doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark) {
+	public String  doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark) {
 		RechargeList charge=getEntityDao().findByNo(orderNo);
 		Integer status = TradeStatus.SUCCESS.getCode();
+		String userId =  null;
 		if(charge!=null && charge.getStatus() != status){
-			String userId=charge.getUid();
+			userId=charge.getUid();
 			charge.setStatus(status);
 			Double money = amount;
 			Date date=new Date();
@@ -509,6 +507,6 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 				logger.info("交易完成：订单号{}",orderNo);
 			}
 		}
-		
+		return userId;
 	}
 }

@@ -22,12 +22,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
+import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.pay.pingpp.example.BackExample;
 import com.tzdr.business.pay.pingpp.example.WebhooksVerifyExample;
 import com.tzdr.business.service.pay.PayService;
+import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.cms.support.BaseCmsController;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.domain.web.entity.RechargeList;
+import com.tzdr.domain.web.entity.WUser;
 
 @Controller
 @RequestMapping(value = "/pingpp")
@@ -35,6 +39,11 @@ public class PingPPPayCallBackController extends BaseCmsController<RechargeList>
 	private Logger logger = LoggerFactory.getLogger(PingPPPayCallBackController.class);
 	@Autowired
 	private PayService payService;
+	
+	@Autowired
+	private MessagePromptService messagePromptService;
+	@Autowired
+	private WUserService wUserService;
 
 	@RequestMapping(value = "/alipay/callback", method = RequestMethod.POST,produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -65,7 +74,18 @@ public class PingPPPayCallBackController extends BaseCmsController<RechargeList>
 						logger.info("amount===>" + amount);
 						logger.info("channel====>" + channel);
 						Double money = amount / 100;
-						payService.doUpdatePingPPPaySuccessRecharge(orderNo, channel,money , transactionNo, timePaid,"支付宝充值"+money+"元");
+						String userId = payService.doUpdatePingPPPaySuccessRecharge(orderNo, channel,money , transactionNo, timePaid,"支付宝充值"+money+"元");
+						try {
+							if(userId != null){
+								WUser user =  wUserService.getUser(userId);
+								if(user != null){
+									messagePromptService.sendMessage(PromptTypes.isAlipayRecharge, user.getMobile());
+								}
+							}
+						} catch (Exception e) {
+							logger.info("发送邮件失败",e);
+						}
+						
 					}
 				}
 		} catch (IOException e) {

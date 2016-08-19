@@ -14,21 +14,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
+import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.pay.gopay.GoConfigStatus;
 import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
 import com.tzdr.business.pay.gopay.model.GoPayCallBackModel;
 import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.service.pay.PayService;
+import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.cms.support.BaseCmsController;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.domain.web.entity.RechargeList;
+import com.tzdr.domain.web.entity.WUser;
 @Controller
 @RequestMapping(value = "/goway")
 public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 	private Logger logger = LoggerFactory.getLogger(GoWayCallBackController.class);
 	@Autowired
 	private PayService payService;
+	@Autowired
+	private WUserService wUserService;
+	@Autowired
+	private MessagePromptService messagePromptService;
 	@ResponseBody
 	@RequestMapping(value = "/callback",method = RequestMethod.POST)
 	public String goWayCallBack(HttpServletRequest request) throws DocumentException{
@@ -46,7 +53,17 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 				logger.info("merOrderNum=======>" + merOrderNum);
 				logger.info("tranAmt======>" + tranAmt);
 				logger.info("orderId===>" + orderId);
-				payService.doUpdatePingPPPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount, orderId, null,"国付宝充值"+amount+"元");
+				String userId = payService.doUpdatePingPPPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount, orderId, null,"国付宝充值"+amount+"元");
+				try {
+					if(userId != null){
+						WUser user =  wUserService.getUser(userId);
+						if(user != null){
+							messagePromptService.sendMessage(PromptTypes.isBankReCharge, user.getMobile());
+						}
+					}
+				} catch (Exception e) {
+					logger.info("发送邮件失败",e);
+				}
 			}
 		}
 		return resultGoWay();

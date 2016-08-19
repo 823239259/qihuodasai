@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hundsun.t2sdk.common.util.UUID;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
+import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.service.contract.ContractParitiesService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.future.FSimpleCouponService;
@@ -80,10 +82,13 @@ public class UFSimpleCrudeOilUserTradeController {
 	
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
-	
+
 	
 	@Autowired
 	private ContractParitiesService contractParitiesService;
+	
+	@Autowired
+	private MessagePromptService messagePromptService;
 	/**
 	 * 汇率类型
 	 */
@@ -356,6 +361,17 @@ public class UFSimpleCrudeOilUserTradeController {
 			}
 		}
 		this.pay(modelMap, inputTraderBond, inputTranLever,request,attr);
+		//TODO 申请操盘，支付成功给工作人员发送Email
+		try {
+			
+				if(wuser != null){
+					messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getMobile());
+				}
+			
+		} catch (Exception e) {
+			log.info("发送邮件失败",e);
+		}
+		
 		return ViewConstants.FSimpleCrudeOilUserTradeJsp.CRUDE_OIL_PAY;
 	}
 	
@@ -421,7 +437,9 @@ public class UFSimpleCrudeOilUserTradeController {
 		fSimpleFtseUserTrade.setAppEndTime(Dates.getCurrentLongDate());  //申请终结时间
 		
 		fSimpleFtseUserTradeService.update(fSimpleFtseUserTrade);
-		
+		WUser wuser = wUserService.get(userSessionBean.getId());   //获取用户信息
+		//TODO 终结方案，给工作人员发送Email
+		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
 		return jsonResult;
 	}
 	
@@ -544,7 +562,9 @@ public class UFSimpleCrudeOilUserTradeController {
 
 		//追加保证金
 		fSimpleFtseUserTradeService.addAppendTraderBond(fSimpleFtseUserTrade, appendMoney,rate,dollar, wuser);
+		//TODO 追加保证金，给工作人员发送Email
 		
+		messagePromptService.sendMessage(PromptTypes.isAddBond, wuser.getMobile());
 		return jsonResult;
 	}
 }
