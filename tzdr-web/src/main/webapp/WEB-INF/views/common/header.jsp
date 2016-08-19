@@ -131,16 +131,15 @@
 <div class="floatlayer">
     <!-- 联系客服、返回顶部 -->
     <div class="fl_server">
-        <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>
-        <div class="fl_sv_code">
+    	<p class="fl_sv_tent"><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&aty=0&a=0&curl=&ty=1" target='_blank'></a></p>
+    	<div class="fl_sv_code">
         	<a href="javascript:void(0)" target="_blank">
         		<div class="fl_sv_codetk" style="display: none;">
         			<img src="${ctx}/static/images/common-new/appxiazai-app.png">
         		</div>
         	</a>
         </div>
-        <p class="fl_sv_tent"><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&aty=0&a=0&curl=&ty=1" target='_blank'></a></p>
-		       
+        <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>   
     </div>
     <!-- <div class="fl_server_top">
     	<a href="javascript: scrollBottom();"></a>
