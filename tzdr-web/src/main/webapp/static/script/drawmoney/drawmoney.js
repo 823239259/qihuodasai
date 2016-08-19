@@ -105,8 +105,15 @@ $(document).ready(function(){
 		var bankname=$("#bankname").attr("data-id");
 		var card=$("#card").val();
 		var agincard=$("#agincard").val();
+		var prov = $(".address .prov option:selected").text();
+		var city = $(".address .city option:selected").text();
+		var address = $(".address input[name=address]").val();
 		if(bankname==undefined||bankname==""){
 			showMsgDialog("提示","请选择银行");
+			return;
+		}
+		if(prov == "请选择" || city == "请选择" || address == ""){
+			showMsgDialog("提示","请输出地址");
 			return;
 		}
 		if(card==""){
@@ -128,7 +135,7 @@ $(document).ready(function(){
 			return;
 		}
 		
-		 $.post(basepath+"draw/savecard",{"bankname":bankname,"card":card,"agincard":agincard},function(data){  
+		 $.post(basepath+"draw/savecard",{"bankname":bankname,"prov":prov,"city":city,"address":address,"card":card,"agincard":agincard},function(data){  
 				if(data.success){
 					window.location.href=basepath+"draw/drawmoney?tab=1";
 					
