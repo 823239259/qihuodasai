@@ -139,7 +139,7 @@
         		</div>
         	</a>
         </div>
-        <p class="fl_sv_tent"><a href="http://shang.qq.com/wpa/qunwpa?idkey=802aa738876d3098418e2bab4cd59451ddfc7ca7b9d7de3f20aa09777ddb8ed8" target='_blank'></a></p>
+        <p class="fl_sv_tent"><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&aty=0&a=0&curl=&ty=1" target='_blank'></a></p>
 		       
     </div>
     <!-- <div class="fl_server_top">

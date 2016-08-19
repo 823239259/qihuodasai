@@ -86,7 +86,7 @@
         <div class="copyright_interaction">
             <h3>交流互动</h3>
             <p>期货操盘QQ群：</p>
-            <p><a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=802aa738876d3098418e2bab4cd59451ddfc7ca7b9d7de3f20aa09777ddb8ed8">4008528008</a></p>
+            <p><a target="_blank" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&aty=0&a=0&curl=&ty=1">4008528008</a></p>
             <p>国际期货</p>
         </div>
     </div>
