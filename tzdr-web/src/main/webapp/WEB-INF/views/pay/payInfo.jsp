@@ -122,15 +122,48 @@ var tab=<%=tab%>;
 									<span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
 								</li>
 							</ol>
+							
+							<%-- <ol class="first">
+								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
+								<li class="uc_b_l_info">
+									<span>帐号：<i>3100 1518 0000 5003 1146</i></span>
+									<span>户名：<i>上海信闳投资管理有限公司</i></span>
+									<span>开户行：<i>中国建设银行上海黄浦支行</i></span>
+								</li>
+							</ol> --%>
+							<ol>
+								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
+								<li class="uc_b_l_info">
+									<span>帐号：<i>9558 8344 0200 0949 840</i></span>
+									<span>户名：<i>成都盈透科技有限公司 </i></span>
+									<span>开户行：<i>中国工商银行府河音乐花园支行</i></span>
+								</li>
+							</ol>
+							<%-- <ol>
+								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_03.jpg"></li>
+								<li class="uc_b_l_info">
+									<span>帐号：<i>0335 7100 0400 11335</i></span>
+									<span>户名：<i>上海信闳投资管理有限公司 </i></span>
+									<span>开户行：<i>中国农业银行上海西藏南路支行 </i></span>
+								</li>
+							</ol> --%>
+							<ol>
+								<li class="uc_b_l_bank" ><img src="${ctx}/static/images/banks/bank_10.jpg"></li>
+								<li class="uc_b_l_info">
+									<span>帐号：<i>1158 4367 7712</i></span>
+									<span>户名：<i>成都盈透科技有限公司</i></span>
+									<span>开户行：<i>中国银行天府新区华阳支行</i></span>
+								</li>
+							</ol>
 						</ul>
 						<!-- 弹出框 -->
 				<div class="uc_floatlayer">
 					<div class="uc_bc_option uc_b_bank" style="display:none;">
 						<a data-id="cmb" href="javascript:void(0)">中国招商银行</a>
-						<!-- <a data-id="ccb" href="javascript:void(0)">中国建设银行</a>
+						<<!-- a data-id="ccb" href="javascript:void(0)">中国建设银行</a> -->
 						<a data-id="icbc" href="javascript:void(0)">中国工商银行</a>
-						<a data-id="abc" href="javascript:void(0)">中国农业银行</a>
-						<a data-id="boc" href="javascript:void(0)">中国银行</a> -->
+						<!-- <a data-id="abc" href="javascript:void(0)">中国农业银行</a> -->
+						<a data-id="boc" href="javascript:void(0)">中国银行</a>
 					</div>
 
 				</div>
