@@ -39,7 +39,7 @@ public class MessagePromptService {
 			typeKey = "riskEmail";
 		} else if (submitType.equalsIgnoreCase(PromptTypes.isEndScheme)) {
 			fristParam = "申请列表";
-			twoParam = "申请结算";
+			twoParam = "申请结算方案的";
 			url = "http://test.manage.vs.com/admin/internation/future/list";
 			typeKey = "riskEmail";
 		} else if (submitType.equalsIgnoreCase(PromptTypes.isAlipayRecharge)) {
