@@ -411,13 +411,13 @@ var tzdr = {
 					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
 				});
 			
-				/*document.getElementById("ftogether").addEventListener("tap",function(){
-					var p=plus.webview.getWebviewById("ftogether");
+				document.getElementById("quotationMain").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("quotationMain");
 					if(p){
-						mui.app_refresh('ftogether');  
+						mui.app_refresh('quotationMain');  
 					}
-					mui.openWindow({url:mui.app_filePath("tzdr/buy/buy.html"),id:"ftogether"});
-				});*/
+					mui.openWindow({url:mui.app_filePath("tzdr/quotation/quotationMain.html"),id:"quotationMain"});
+				});
 			
 		}
 	},

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/quotation.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" ></a>
+		<h1 class="mui-title">操盘登录</h1>		
+		<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
+	</header>
+	<div class="mui-content operateLogin">
+		<form  class="mui-input-group blackBg">
+			<div class="mui-input-row">
+				<label>手机号码</label>
+				<input id='account' type="tel" class="mui-input-clear mui-input" placeholder="请输入账号" autocomplete="off"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+			</div>
+			<div class="mui-input-row mui-password">
+				<label>登录密码</label>
+				<input id="password" type="password" class="mui-input-password" placeholder="请输入密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+			</div>	
+		</form>
+		<div class="mui-content-padded">
+			<button  class="mui-btn mui-btn-block lg-btnlogin">立即登录</button>
+		<div class="link-area"><a id='forgetPassword' href="javascript:void(0)">忘记密码</a><a id='regLogin' href="javascript:void(0)">没有账号？<span>立即注册</span></a>
+			</div>
+		</div>
+		<div class="mui-content-padded oauth-area">
+		</div>
+	</div>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

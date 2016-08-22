@@ -2,6 +2,9 @@
 .mainTitle{
 	line-height: 16px;
 }
+#quotationTitle span{
+	color:#FFFFFF;
+}
 body{
 	background-color: #2B2B2B;
 }
@@ -58,21 +61,25 @@ p{
 	/*border-bottom: 1px solid #454545;*/
 	background-color: #666666;
 }
-#TimeChart{
+#TimeChart1{
 	background-color: #CCCCCC;
 	color:black !important;
 }
 #CandlestickChart{
+	width: 100%;
 	background-color: #CCCCCC;
 	color:black !important;
+}
+#CandlestickChartDiv{
+		width: 100%;;
 }
 #buttomFix{
 	height: 192px;
 	width: 100%;
 	background-color: #2B2B2B;
 	overflow: hidden;
-	position: fixed;
-	bottom: 0px;
+	/*position: fixed;
+	bottom: 0px;*/
 }
 .buttomFixLeft,.buttomFixRight{
 	background-color: #2B2B2B;
@@ -147,7 +154,7 @@ font-size: 14px;
 .BuyContentLeft input{
 	background-color:#2B2B2B;
 	border:none;
-	width:80%;
+	width:70%;
 	color:#cccccc;
 	font-size: 14px;
 	text-align: center;
@@ -218,7 +225,7 @@ font-size: 14px;
 	line-height: ;
 }
 .grayFont{
-	color:#999999;
+	color:#999999 !important;
 }
 .whiteFont{
 	color:#FFFFFF;
@@ -278,7 +285,6 @@ font-size: 14px;
 	word-break: normal;
 	color:#999999;
 	width: 120px;
-	/*vertical-align: middle;*/
 }
 .mui-navigate-right:after, .mui-push-right:after{
 	content:"";
@@ -326,4 +332,89 @@ font-size: 14px;
 }
 .mui-control-item{
 	color:#CCCCCC;
+}
+.operateLogin{
+	background-color: #2B2B2B;
+}
+.blackBg{
+	background-color: #2B2B2B;
+}
+.operateLogin label{
+	color:#FFFFFF;
+}
+.operateLogin input{
+	color:#656565;
+}
+
+.operateLogin button {
+	background-color: #fcc900;
+	border:none;
+}
+.link-area a{
+	color:#FFFFFF;
+	display: inline-block;
+	width: 50%;
+	}
+.link-area	#regLogin{
+	text-align: right;
+}
+.link-area a span{
+	color:#FFCC33;
+}
+#fisrtLlist{
+	color:#FFFFFF;
+	height:40px;
+	line-height: 40px;
+	font-size: 14px;
+	width: 100%;
+	border:1px solid  #454545;
+	text-align: center;
+}
+#fisrtLlist  span{
+	display:  inline-block;
+	width: 25%;
+}
+.productList span,.productList p{
+	color:#FFFFFF;
+}
+.productList div{
+	float: left;
+}
+.productContentLeft{
+	height:50px;
+	width: 25%;
+	text-align: center;
+	padding:13px 0px;
+	font-size: 12px;
+	line-height: 14px;
+}
+.productContentRight{
+	height:50px;
+	width: 75%;
+	padding:15px 0px;
+	text-align: center;
+	line-height: 20px;
+}
+.productContentRight span{
+	display: inline-block;
+	width: 32%;
+	text-align: center;
+}
+.redFont{
+	color:#e9392a !important;
+}
+.redBg{
+	margin: auto;
+	width: 80%;
+	height:20px;
+	background-color: #e9392a;
+}
+.greenFont{
+	color:#16a951!important;
+}
+.greenBg{
+	margin: auto;
+	width: 80%;
+	height:20px;
+	background-color: #16a951;
 }
