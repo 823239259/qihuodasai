@@ -3,6 +3,8 @@ package com.tzdr.business.cms.service.messagePrompt;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,10 @@ import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.common.utils.EmailUtils;
 import com.tzdr.domain.entity.DataMap;
 
+
 @Service
 public class MessagePromptService {
+	public static final Logger logger = LoggerFactory.getLogger(MessagePromptService.class);
 
 	@Autowired
 	private DataMapService dataMapService;
@@ -77,6 +81,7 @@ public class MessagePromptService {
 				try {
 					emailUtils.sendBatchMailTemp("审核", null, "messagePrompt", ".ftl", list, null,
 							dataMap2.getValueName());
+					logger.info("发送给"+dataMap2.getTypeName()+"的邮件成功！！");
 				} catch (Exception e) {
 					e.printStackTrace();
 

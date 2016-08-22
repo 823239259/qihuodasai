@@ -350,6 +350,16 @@ public class UFSimpleCrudeOilUserTradeController {
 					this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable,"投资国际原油期货申请（划款）。",MONEYDETAILTYPE);
 				}
 				request.getSession(false).removeAttribute("tokenTzdr");
+				//TODO 申请操盘，支付成功给工作人员发送Email
+				try {
+					
+						if(wuser != null){
+							messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getMobile());
+						}
+					
+				} catch (Exception e) {
+					log.info("发送邮件失败",e);
+				}
 				return ViewConstants.FSimpleCrudeOilUserTradeJsp.CRUDE_OIL_PAY_SUCCESSFUL;
 			}
 			else {
@@ -361,16 +371,7 @@ public class UFSimpleCrudeOilUserTradeController {
 			}
 		}
 		this.pay(modelMap, inputTraderBond, inputTranLever,request,attr);
-		//TODO 申请操盘，支付成功给工作人员发送Email
-		try {
-			
-				if(wuser != null){
-					messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getMobile());
-				}
-			
-		} catch (Exception e) {
-			log.info("发送邮件失败",e);
-		}
+	
 		
 		return ViewConstants.FSimpleCrudeOilUserTradeJsp.CRUDE_OIL_PAY;
 	}
@@ -439,7 +440,12 @@ public class UFSimpleCrudeOilUserTradeController {
 		fSimpleFtseUserTradeService.update(fSimpleFtseUserTrade);
 		WUser wuser = wUserService.get(userSessionBean.getId());   //获取用户信息
 		//TODO 终结方案，给工作人员发送Email
-		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
+		try {
+			messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
+		} catch (Exception e) {
+			log.info("发送邮件失败",e);
+		}
+		
 		return jsonResult;
 	}
 	
@@ -563,8 +569,12 @@ public class UFSimpleCrudeOilUserTradeController {
 		//追加保证金
 		fSimpleFtseUserTradeService.addAppendTraderBond(fSimpleFtseUserTrade, appendMoney,rate,dollar, wuser);
 		//TODO 追加保证金，给工作人员发送Email
-		
-		messagePromptService.sendMessage(PromptTypes.isAddBond, wuser.getMobile());
+		try {
+			messagePromptService.sendMessage(PromptTypes.isAddBond, wuser.getMobile());
+		} catch (Exception e) {
+			log.info("发送邮件失败",e);
+		}
+	
 		return jsonResult;
 	}
 }

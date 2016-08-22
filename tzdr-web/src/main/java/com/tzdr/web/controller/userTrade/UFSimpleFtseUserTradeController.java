@@ -355,6 +355,16 @@ public class UFSimpleFtseUserTradeController {
 							1);
 				}
 				request.getSession(false).removeAttribute("tokenTzdr");
+				// TODO 申请操盘，支付成功给工作人员发送Email
+				try {
+
+					if (wuser != null) {
+						messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getMobile());
+					}
+
+				} catch (Exception e) {
+					log.info("发送邮件失败", e);
+				}
 				return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY_SUCCESSFUL;
 			} else {
 				if (payable.compareTo(avlBal) > 0) {
@@ -542,6 +552,7 @@ public class UFSimpleFtseUserTradeController {
 		String rate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
 		data.put("exchangeRate", rate); // 当前固定汇率
 		jsonResult.setData(data);
+
 		return jsonResult;
 	}
 
@@ -607,7 +618,7 @@ public class UFSimpleFtseUserTradeController {
 		} catch (Exception e) {
 			log.info("发送邮件失败", e);
 		}
-		
+
 		return jsonResult;
 	}
 }

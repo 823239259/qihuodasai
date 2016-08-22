@@ -33,6 +33,7 @@ import com.tzdr.business.pay.pingpp.model.PingPPModel;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
+import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.bbpay.vo.PayParamsObject;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.IpUtils;
@@ -72,6 +73,12 @@ import com.tzdr.web.utils.UserSessionBean;
 public class PayController {
 	@Autowired
 	private PayService payService;
+	
+	@Autowired
+	private WUserService wUserService;
+	
+	@Autowired
+	private MessagePromptService messagePromptService;
 
 	@Autowired
 	private UserVerifiedService userVerifiedService;
@@ -429,6 +436,13 @@ public class PayController {
 			} else {
 				jsonResult.setMessage("流水号不能为空");
 			}
+		}
+		WUser wuser = wUserService.get(userSessionBean.getId()); // 获取用户信息
+		// TODO 充值银行审核，给工作人员发送Email
+		try {
+			messagePromptService.sendMessage(PromptTypes.isBankReCharge, wuser.getMobile());
+		} catch (Exception e) {
+			logger.info("发送邮件失败", e);
 		}
 		return jsonResult;
 	}
