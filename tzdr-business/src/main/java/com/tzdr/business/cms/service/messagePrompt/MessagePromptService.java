@@ -33,12 +33,12 @@ public class MessagePromptService {
 			url = "http://test.manage.vs.com/admin/internation/future/list";
 			typeKey = "riskEmail";
 		} else if (submitType.equalsIgnoreCase(PromptTypes.isAddBond)) {
-			fristParam = "申请列表";
+			fristParam = "补充保证金";
 			twoParam = "补充保证金";
 			url = "http://test.manage.vs.com/admin/internation/future/list";
 			typeKey = "riskEmail";
 		} else if (submitType.equalsIgnoreCase(PromptTypes.isEndScheme)) {
-			fristParam = "申请列表";
+			fristParam = "方案管理";
 			twoParam = "申请结算方案的";
 			url = "http://test.manage.vs.com/admin/internation/future/list";
 			typeKey = "riskEmail";
