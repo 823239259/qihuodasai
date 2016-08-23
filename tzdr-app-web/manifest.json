@@ -7,7 +7,7 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.2",/*应用版本名称*/
+		"name": "1.0.3",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -250,7 +250,11 @@
 					"images/icon1.png",
 					"images/icon3.png",
 					"images/icon2.png",
-					"images/banner3.png"
+					"images/banner3.png",
+					"images/1.0.png",
+					"images/2.png",
+					"images/3.png",
+					"images/0.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -265,7 +269,9 @@
 					"tzdr/news/news.html",
 					"tzdr/buy/buy.html",
 					"tzdr/future/lhsi.html",
-					"tzdr/scheme.html"
+					"tzdr/scheme.html",
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/quotation/transactionDetails.html"
 				],
 				"priority": 0
 			},
@@ -297,7 +303,11 @@
 					"css/mui.min.css",
 					"images/ac_01.png",
 					"images/ac_03.png",
-					"tzdr/commonback.html"
+					"tzdr/commonback.html",
+					"images/3.0.png",
+					"images/0.png",
+					"images/2.png",
+					"images/1.png"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
@@ -310,7 +320,8 @@
 					"tzdr/account/coupon.html",
 					"tzdr/login/login.html",
 					"tzdr/account/updatePW.html",
-					"tzdr/scheme.html"
+					"tzdr/scheme.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
@@ -537,7 +548,8 @@
 				],
 				"refer": [
 					"tzdr/future/list.html",
-					"tzdr/future/pay.html"
+					"tzdr/future/pay.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
@@ -716,7 +728,8 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"images/2.0.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
@@ -738,7 +751,8 @@
 					"images/ac_06.png",
 					"css/mui.min.css",
 					"images/ac_01.png",
-					"images/ac_03.png"
+					"images/ac_03.png",
+					"images/3.0.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
@@ -847,13 +861,16 @@
 					"css/mui.min.css",
 					"images/status_02.png",
 					"images/status_03.png",
-					"images/status_04.png"
+					"images/status_04.png",
+					"images/2.0.png",
+					"images/1.png"
 				],
 				"refer": [
 					"tzdr/buy/buy.html",
 					"home.html",
 					"tzdr/account/account.html",
-					"tzdr/future/DetailCn.html"
+					"tzdr/future/DetailCn.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
@@ -921,6 +938,62 @@
 					"js/common.js",
 					"js/jquery-1.11.3.js",
 					"js/pingpp.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/quotation/quotationMain.html": {
+				"resources": [
+					"images/0.0.png",
+					"js/common.js",
+					"images/1.png",
+					"css/quotation.css",
+					"images/2.png",
+					"css/own.css",
+					"images/3.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"home.html",
+					"tzdr/quotation/transactionDetails.html",
+					"tzdr/account/account.html",
+					"tzdr/scheme.html"
+				],
+				"priority": 0
+			},
+			"tzdr/quotation/transactionDetails.html": {
+				"resources": [
+					"js/chart.js",
+					"js/echarts.js",
+					"js/esl.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css",
+					"js/echarts.min (2).js"
+				],
+				"refer": [
+					"tzdr/quotation/trade.html"
+				],
+				"priority": 0
+			},
+			"tzdr/quotation/trade.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css",
+					"js/trade.market.js",
+					"js/util.js",
+					"js/jquery-1.11.3.js",
+					"js/trade.js",
+					"js/trade.data.model.js",
+					"js/jquery.base64.js",
+					"js/trade.send.js"
 				],
 				"refer": [],
 				"priority": 0

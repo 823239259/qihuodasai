@@ -38,7 +38,7 @@
 	<div class="mui-content">
 		<div id="fisrtLlist"><span>合约名称</span><span>最新价</span><span>成交量</span><span>涨跌幅</span></div>
 		<div class="productList">
-			<a>
+			<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">国际原油</p>
 				<p class="grayFont CommodityNo">CL1610</p>
@@ -49,6 +49,7 @@
 				<span><p class="redBg ChangeRate">+35%</p></span>
 			</div>
 			</a>
+			<a class='openPage'>
 				<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName ">恒指期货</p>
 				<p class="grayFont CommodityNo">HSI1608</p>
@@ -58,6 +59,8 @@
 				<span class="LastVolume">5</span>
 				<span ><p class="greenBg ChangeRate">-5%</p></span>
 			</div>
+				</a>
+				<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">富时A50</p>
 				<p class="grayFont CommodityNo">CN1608</p>
@@ -67,6 +70,8 @@
 				<span class="LastVolume">5</span>
 				<span ><p class="redBg ChangeRate">+45%</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 				<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">德国DAX</p>
 				<p class="grayFont CommodityNo">DAX1609</p>
@@ -76,6 +81,8 @@
 				<span class="LastVolume">5</span>
 				<span ><p class="redBg ChangeRate">-3%</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">美黄金</p>
 				<p class="grayFont CommodityNo">GC1612</p>
@@ -85,6 +92,8 @@
 				<span class="LastVolume">34</span>
 				<span ><p class="redBg ChangeRate">+5%</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 				<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">小恒指</p>
 				<p class="grayFont CommodityNo">MH1608</p>
@@ -94,6 +103,8 @@
 				<span class="LastVolume">5</span>
 				<span ><p class="redBg ChangeRate">-5%</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">迷你道琼</p>
 				<p class="grayFont CommodityNo">YM1609</p>
@@ -103,6 +114,8 @@
 				<span class="LastVolume">-</span>
 				<span ><p class="redBg ChangeRate">-</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 				<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">迷你纳斯达克</p>
 				<p class="grayFont CommodityNo">NQ1609</p>
@@ -112,6 +125,8 @@
 				<span class="LastVolume">-</span>
 				<span ><p class="redBg ChangeRate">-</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">日经225</p>
 				<p class="grayFont CommodityNo">NK1609</p>
@@ -121,6 +136,8 @@
 				<span class="LastVolume">-</span>
 				<span ><p class="redBg ChangeRate">-</p></span>
 			</div>
+			</a>
+			<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
 				<p class="productName">迷你标准普尔</p>
 				<p class="grayFont CommodityNo">ES1609</p>
@@ -130,6 +147,7 @@
 				<span class="LastVolume">-</span>
 				<span ><p class="redBg ChangeRate">-</p></span>
 			</div>
+			</a>
 		</div>
 	</div>
 		<script type="text/javascript">
@@ -137,9 +155,10 @@
   			tzdr.init.initButtomListener(true);
 			mui.init();
 			mui.plusReady(function(){
-						
-			})
-		var url = "ws://socket.dktai.com:9002";
+				
+ 			
+			
+				var url = "ws://192.168.0.213:9006";
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
@@ -156,11 +175,13 @@
 					var CommodityNo1=[];
 					var CommodityNo2=[];
 					var DotSize=[];
+					var ExchangeNo=[]
 					var product={
 					    CommodityName:CommodityName,
 					    CommodityNo1:CommodityNo1,
 					    CommodityNo2:CommodityNo2,
-					    DotSize:DotSize
+					    DotSize:DotSize,
+					    ExchangeNo:ExchangeNo,
 					}
 					socket.onclose = function(evt){
 					};
@@ -170,25 +191,28 @@
 					    var method = jsonData.Method;
 					
 					    if(method=="OnRspLogin"){
-					        socket.send('{"Method":"QryCommodity","Parameters":""}');
+					    	  sendMessage('QryCommodity',null)
+//					        socket.send('{"Method":"QryCommodity","Parameters":""}');
 					    }else if(method == "OnRspQryCommodity"){
-					    	
 					        var commoditys = jsonData.Parameters;
 					        var size = commoditys.length;
-					        var setTime=null;
-					            console.log(commoditys);
+					        var setTime=null;			          
 					        for(var i=0;i<size;i++){
 					            product.CommodityName[i]=commoditys[i].CommodityName;
 					            product.CommodityNo1[i]=commoditys[i].MainContract;
 					            product.CommodityNo2[i]=commoditys[i].CommodityNo;
 					           	product.DotSize[i]=commoditys[i].DotSize;
-					            socket.send('{"Method":"Subscribe","Parameters":{"CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
+					           	product.ExchangeNo[i]=commoditys[i].ExchangeNo;
+					            socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 					        }
 					    }else if(method == "OnRspQryHistory"){
 					        var jsonData=JSON.parse(evt.data);
-					    }else if(method == "OnRtnQuote"){					    
+					    }else if(method == "OnRtnQuote"){	
+					    	
 					         var MoreData=JSON.parse(evt.data);
+//					         console.log(JSON.stringify(evt.data));
 					        	insertData(MoreData);
+
 					    }
 					};
 					socket.onerror = function(evt){
@@ -196,22 +220,132 @@
 					};
 					setTimeout(function(){
 						AddTo()
-					},800)
+					},800);
 				function AddTo(){
-				    console.log(product.CommodityName.length);
 				    var productList=document.getElementsByClassName("productList")[0];
 				     productList.innerHTML=""
 				    for(var i=0;i<product.CommodityName.length;i++){
-           				 productList.innerHTML+="<a><div class='productContentLeft' class='mui-col-xs-3'>" +
+           				 productList.innerHTML+="<a class='openPage'><div class='productContentLeft' class='mui-col-xs-3'>" +
                     " <p class='productName'>"+product.CommodityName[i]+"</p> " +
                     "<p class='grayFont CommodityNo'>"+product.CommodityNo2[i]+product.CommodityNo1[i]+"</p>" +
                     " </div> " +
                     "<div class='productContentRight' class='mui-col-xs-9'> " +
                     "<span class='reenFont QLastPrice'>-</span> <span class='LastVolume'>-</span> <span class='redBg ChangeRate'><p>-</p></span> </div></a>"
-
-    				}
-				}					
-					
+						
+						
+    				};
+    				function ManufacturingData(i){
+    					var data=[];
+    					console.log(JSON.stringify(product));
+    					return data=[product.CommodityName[i],product.CommodityNo1[i],product.CommodityNo2[i],product.ExchangeNo[i],product.DotSize[i]];
+    				};
+    				var data0=new ManufacturingData(0);
+    				var data1=new ManufacturingData(1);
+    				var data2=new ManufacturingData(2);
+    				var data3=new ManufacturingData(3);
+    				var data4=new ManufacturingData(4);
+    				var data5=new ManufacturingData(5);
+    				var data6=new ManufacturingData(6);
+    				var data7=new ManufacturingData(7);
+    				var data8=new ManufacturingData(8);
+    				var data9=new ManufacturingData(9);
+    				var pageOpen= document.getElementsByClassName("openPage");
+    				addListener();
+    				function addListener(){
+    						pageOpen[0].addEventListener("tap",function(){
+    							 plus.storage.setItem("productIF",data0)
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data0,
+									}
+								});
+								});
+								pageOpen[1].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data1,
+									}
+								});
+								});
+								pageOpen[2].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data2,
+									}
+								});
+								});
+								pageOpen[3].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data3,
+									}
+								});
+								});
+								pageOpen[4].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data4,
+									}
+								});
+								});
+								pageOpen[5].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data5,
+									}
+								});
+								});
+								pageOpen[6].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data6,
+									}
+								});
+								});
+								pageOpen[7].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data7,
+									}
+								});
+								});
+								pageOpen[8].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data8,
+									}
+								});
+								});
+								pageOpen[9].addEventListener("tap",function(){
+								mui.openWindow({
+									url:"transactionDetails.html",
+									id:"transactionDetails.html",
+									 extras:{
+										name:data9,
+									}
+								});
+								});
+    				};
+				
+							};
 			function insertData(MoreData){
 			   	var productName=document.getElementsByClassName("productName");
 			   	var CommodityNo=document.getElementsByClassName("CommodityNo");
@@ -252,127 +386,129 @@
 //			   	}
 				switch(MoreData.Parameters.CommodityNo){
 					case "CL":
-					LastVolume[0].innerText=MoreData.Parameters.QLastVolume;
-					if(Number(MoreData.Parameters.QChangeRate.toFixed(4))<0){
-						ChangeRate[0].innerText=MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+					LastVolume[0].innerText=MoreData.Parameters.TotalVolume;
+					if(Number(MoreData.Parameters.ChangeRate.toFixed(4))<0){
+						ChangeRate[0].innerText=MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 						
 						ChangeRate[0].className="greenBg ChangeRate";
 					}else{
-						ChangeRate[0].innerText="+"+MoreData.Parameters.QChangeRate.toFixed(2)+"%";
-						ChangeRate[0].className="redBg ChangeRate"
+						ChangeRate[0].innerText="+"+MoreData.Parameters.ChangeRate.toFixed(2)+"%";
+						ChangeRate[0].className="redBg ChangeRate";
 					}
-					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-						LastPrice[0].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[0]);
-						LastPrice[0].className="greenFont QLastPrice"
+					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
+						LastPrice[0].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[0]);
+						LastPrice[0].className="greenFont QLastPrice";
 					}else{
-						LastPrice[0].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[0]);;
-						LastPrice[0].className="redFont QLastPrice"	
+						LastPrice[0].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[0]);;
+						LastPrice[0].className="redFont QLastPrice"	;
 					}
 					 break;
 					 case "HSI":
-					 	LastVolume[1].innerText=MoreData.Parameters.QLastVolume;
-					 	if(Number(MoreData.Parameters.QChangeRate.toFixed(2))<0){
-						ChangeRate[1].innerText=MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+					 	LastVolume[1].innerText=MoreData.Parameters.TotalVolume;
+					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
+						ChangeRate[1].innerText=MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 						ChangeRate[1].className="greenBg ChangeRate";
 					}else{
-						ChangeRate[1].innerText="+"+MoreData.Parameters.QChangeRate.toFixed(2)+"%";
-						ChangeRate[1].className="redBg ChangeRate"
+						ChangeRate[1].innerText="+"+MoreData.Parameters.ChangeRate.toFixed(2)+"%";
+						ChangeRate[1].className="redBg ChangeRate";
 					};
-					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-						LastPrice[1].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[1]);;
-						LastPrice[1].className="greenFont QLastPrice"
+					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
+						LastPrice[1].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[1]);;
+						LastPrice[1].className="greenFont QLastPrice";
 					}else{
-						LastPrice[1].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[1]);;
-						LastPrice[1].className="redFont QLastPrice"	
+						LastPrice[1].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[1]);;
+						LastPrice[1].className="redFont QLastPrice"	;
 					};
 					 	 break;
 					 case "CN":
-					 	LastVolume[2].innerText=MoreData.Parameters.QLastVolume;
-					 	if(Number(MoreData.Parameters.QChangeRate.toFixed(2))<0){
-						ChangeRate[2].innerText=MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+					 	LastVolume[2].innerText=MoreData.Parameters.TotalVolume;
+					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
+						ChangeRate[2].innerText=MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 					
 						ChangeRate[2].className="greenBg ChangeRate";
 					}else{
-						ChangeRate[2].innerText="+"+MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+						ChangeRate[2].innerText="+"+MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 						ChangeRate[2].className="redBg ChangeRate"
 					};
-					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-						LastPrice[2].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[2]);;
+					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
+						LastPrice[2].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[2]);;
 						LastPrice[2].className="greenFont QLastPrice"
 					}else{
-						LastPrice[2].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[2]);;
+						LastPrice[2].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[2]);;
 						LastPrice[2].className="redFont QLastPrice"	
 					}
 					 	 break;
 					 case "DAX":
-					 	LastVolume[3].innerText=MoreData.Parameters.QLastVolume;
-					 	if(Number(MoreData.Parameters.QChangeRate.toFixed(2))<0){
-						ChangeRate[3].innerText=MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+					 
+					 	LastVolume[3].innerText=MoreData.Parameters.TotalVolume;
+					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
+						ChangeRate[3].innerText=MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 						
 						ChangeRate[3].className="greenBg ChangeRate";
 					}else{
-						ChangeRate[3].innerText="+"+MoreData.Parameters.QChangeRate.toFixed(2)+"%";
-						ChangeRate[3].className="redBg ChangeRate"
+						ChangeRate[3].innerText="+"+MoreData.Parameters.ChangeRate.toFixed(2)+"%";
+						ChangeRate[3].className="redBg ChangeRate";
 					};
-					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-						LastPrice[3].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[3]);;
-						LastPrice[3].className="greenFont QLastPrice"
+					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
+						LastPrice[3].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[3]);
+						LastPrice[3].className="greenFont QLastPrice";
 					}else{
-						LastPrice[3].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[3]);;
-						LastPrice[3].className="redFont QLastPrice"	
+						LastPrice[3].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[3]);
+						LastPrice[3].className="redFont QLastPrice"	;
 					};
 					 	 break;
 					 case "GC":
-					 	LastVolume[4].innerText=MoreData.Parameters.QLastVolume;
-					 	if(Number(MoreData.Parameters.QChangeRate.toFixed(2))<0){
-						ChangeRate[4].innerText=MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+					 	LastVolume[4].innerText=MoreData.Parameters.TotalVolume;
+					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
+						ChangeRate[4].innerText=MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 						
 						ChangeRate[4].className="greenBg ChangeRate";
 					}else{
-						ChangeRate[4].innerText="+"+MoreData.Parameters.QChangeRate.toFixed(2)+"%";
-						ChangeRate[4].className="redBg ChangeRate"
+						ChangeRate[4].innerText="+"+MoreData.Parameters.ChangeRate.toFixed(2)+"%";
+						ChangeRate[4].className="redBg ChangeRate";
 					};
-					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-						LastPrice[4].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[4]);;
-						LastPrice[4].className="greenFont QLastPrice"
+					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
+						LastPrice[4].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[4]);
+						LastPrice[4].className="greenFont QLastPrice";
 					}else{
-						LastPrice[4].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[4]);;
-						LastPrice[4].className="redFont QLastPrice"	
+						LastPrice[4].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[4]);
+						LastPrice[4].className="redFont QLastPrice"	;
 					}
 					 	 break;
 					 case "MHI":
-					 	LastVolume[5].innerText=MoreData.Parameters.QLastVolume;
-					 	if(Number(MoreData.Parameters.QChangeRate.toFixed(2))<0){
-						ChangeRate[5].innerText=MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+					 	LastVolume[5].innerText=MoreData.Parameters.TotalVolume;
+					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
+						ChangeRate[5].innerText=MoreData.Parameters.ChangeRate.toFixed(2)+"%";
 						
 						ChangeRate[5].className="greenBg ChangeRate";
 					}else{
-						ChangeRate[5].innerText="+"+MoreData.Parameters.QChangeRate.toFixed(2)+"%";
+						ChangeRate[5].innerText="+"+parseFloat(MoreData.Parameters.QChangeRate).toFixed(2)+"%";
 						ChangeRate[5].className="redBg ChangeRate";
 					};
 					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-						LastPrice[5].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[5]);;
+						LastPrice[5].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[5]);;
 						LastPrice[5].className="greenFont QLastPrice"
 					}else{
-						LastPrice[5].innerText=MoreData.Parameters.QLastPrice.toFixed(product.DotSize[5]);;
-						LastPrice[5].className="redFont QLastPrice"	
+						LastPrice[5].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[5]);;
+						LastPrice[5].className="redFont QLastPrice"	;
 					}
 					 	 break;
 					 case "YM":
-					 	LastVolume[6].innerText=MoreData.Parameters.QLastVolume;
+					 	LastVolume[6].innerText=MoreData.Parameters.TotalVolume;
 					 	 break;
 					 case "Yk":
-					 	LastVolume[7].innerText=MoreData.Parameters.QLastVolume;
+					 	LastVolume[7].innerText=MoreData.Parameters.TotalVolume;
 					 	 break;
 					 case "NQ":
-					 	LastVolume[8].innerText=MoreData.Parameters.QLastVolume;
+					 	LastVolume[8].innerText=MoreData.Parameters.TotalVolume;
 					 	 break;
 					 case "ES":
-					 	LastVolume[9].innerText=MoreData.Parameters.QLastVolume;
+					 	LastVolume[9].innerText=MoreData.Parameters.TotalVolume;
 					 	 break;
 					
 				}
 			}
+			});
 		</script>
 	</body>
 </html>

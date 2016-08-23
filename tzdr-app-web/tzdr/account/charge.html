@@ -319,6 +319,7 @@
 						var balance = result.data.balance;
 						document.getElementById("balanceSpan").innerHTML = balance + '元';
 						var wv = plus.webview.currentWebview();
+						console.log(JSON.stringify(wv));
 		              	var vText = wv.money;//这样就能接收到上个页面传过来的值了
 		             	if(vText != null){
 			              var balance = parseFloat(document.getElementById("balanceSpan").innerHTML).toFixed(2);

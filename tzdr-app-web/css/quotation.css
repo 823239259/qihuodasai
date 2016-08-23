@@ -374,12 +374,14 @@ font-size: 14px;
 	display:  inline-block;
 	width: 25%;
 }
+
 .productList span,.productList p{
 	color:#FFFFFF;
 }
 .productList div{
 	float: left;
 }
+
 .productContentLeft{
 	height:50px;
 	width: 25%;

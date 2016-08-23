@@ -29,7 +29,7 @@
 			</div>	
 		</form>
 		<div class="mui-content-padded">
-			<button  class="mui-btn mui-btn-block lg-btnlogin">立即登录</button>
+			<button  class="mui-btn mui-btn-block lg-btnlogin" id="operateLogin">立即登录</button>
 		<div class="link-area"><a id='forgetPassword' href="javascript:void(0)">忘记密码</a><a id='regLogin' href="javascript:void(0)">没有账号？<span>立即注册</span></a>
 			</div>
 		</div>
@@ -38,6 +38,20 @@
 	</div>
 		<script type="text/javascript">
 			mui.init()
+			mu.plusReady(function(){
+				document.getElementById("operateLogin").addEventListener(function(){
+					var account=document.getElementById("account").value;
+					var password=document.getElementById("password").value;
+					if(mui.isnull(account)){
+		    			mui.toast("请输入账号");
+		    			return;
+    					};
+    					if(mui.isnull(account)){
+		    			mui.toast("请输入密码");
+		    			return;
+    					}
+				});
+			})
 		</script>
 	</body>
 

@@ -15,14 +15,14 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack"></a>
-		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst">富时A501608</p><p>CNQ16</p></h1>
+		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		</header>
 		<div class="mui-content">
 				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
-					<a class="mui-control-item" id="Candlestick" href="#CandlestickChart">K线</a>
+					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
 					<a class="mui-control-item" id="TradingCenter" >交易中心</a>
-			</div>
+				</div>
 					<div style="width: 100%;">
 						<div class="mui-control-content mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;height:250px;"></div>
@@ -32,16 +32,33 @@
 							<div   id="CandlestickChartDiv" style="width:100%;height:300px;"></div>
 						</div>
 					</div>
+					<!--<div class="mui-slider">
+						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+							<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
+							<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
+							<a class="mui-control-item" id="TradingCenter" >交易中心</a>
+						</div>
+						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+						<div class="mui-slider-group">
+							<div  class="mui-slider-item mui-control-content mui-active" id="TimeChart1">
+								<div id="timeChart" style="width:100%;height:250px;"></div>
+								<div id="volumeChart" style="width:100%;height:130px;"></div>
+							</div>
+							<div  class="mui-slider-item mui-control-content" id="CandlestickChart">
+								<div   id="CandlestickChartDiv" style="width:100%;height:300px;"></div>
+							</div>
+						</div>
+					</div>-->
 			</div>
 			<div class="buttomFix">
 				<div class="buttomFixLeft mui-col-xs-6">
-					<p>卖<span id="buyPrices" class="PricesLeft">123</span ><span id="buyPricesNumber" class="PricesRight">12</span></p>
-					<p>买<span id="sellPrices" class="PricesLeft">123</span ><span id="sellPricesNumber" class="PricesRight">12</span></p>
-					<p>成交量<span id="volumePricesNumber" class="PricesRight">12</span></p>
+					<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
+					<p>买<span id="sellPrices" class="PricesLeft">-</span ><span id="sellPricesNumber" class="PricesRight">-</span></p>
+					<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
 				</div>
 				<div class="buttomFixRight mui-col-xs-6">
-					<p id="freshPrices">15725</p>
-					<p id="domnRange">55.0/+0.85%</p>
+					<p id="freshPrices">-</p>
+					<p id="domnRange">-</p>
 				</div>
 				<div class="BuyDiv">
 				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价"></div>
@@ -50,10 +67,18 @@
 					<button type="button" class="mui-btn mui-col-xs-5" id="buy">买入</button>
 					<button type="button" class="mui-btn mui-col-xs-5" id="sell">卖出</button>
 				</div>
-			
 		</div>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+//			mui.plusReady(function(){
+//				var bb=plus.webview.currentWebview();
+//				console.log(JSON.stringify(bb));
+//				alert(JSON.stringify(bb))
+//				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+//				mainTitleFirst.innerHTML=bb.name;
+//				
+//			});
+			
 		</script>
 		<script src="../../js/chart.js"></script>
 	</body>
