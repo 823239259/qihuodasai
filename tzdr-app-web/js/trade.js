@@ -34,78 +34,76 @@ var url = "ws://192.168.0.213:6060";
 var username = "Q517029969";
 var password = $.base64.encode("123456");
 var socket = new WebSocket(url);
-$(function() {
-	socket.onopen = function() {
-		Trade.doLogin(username, password);
-	}
-	socket.onclose = function() {
-		alert("链接关闭");
-	}
-	socket.onmessage = function(evt) {
-		var dataString = evt.data;
-		var data = JSON.parse(dataString);
-		var method = data.Method;
-		var parameters = data.Parameters;
-		if (parameters != null) {
-			if (method == "OnRspLogin") {
-				var code = parameters.Code;
-				var loginMessage = parameters.Message;
-				if (code == 0) {
-					initDom();
-				} else {
-					alert(loginMessage);
-				}
-				//查询个人账户信息回复
-			} else if (method == "OnRspQryAccount") {
-				var accountParam = parameters;
-				updateBalance(accountParam);
-				//查询订单信息回复
-			} else if (method == "OnRspQryOrder") {
-				var orderStatus = parameters.OrderStatus;
-				var orderParam = parameters;
-				appendOrder(orderParam);
-				if (orderStatus < 3) {
-					appendDesignates(orderParam);
-				}
-				//查询成交记录回复
-			} else if (method == "OnRspQryTrade") {
-				appendTradeSuccess(parameters);
-				//查询持仓信息回复
-			} else if (method == "OnRspQryHold") {
-				var positionParam = parameters;
-				appendPostionAndUpdate(positionParam);
-				//报单录入请求回复
-			} else if (method == "OnRspOrderInsert") {
-				var insertOrderParam = parameters;
-				appendOrder(insertOrderParam);
-				appendDesignates(insertOrderParam);
-				//订单状态通知
-			} else if (method == "OnRtnOrderState") {
-				var orderParam = parameters;
-				updateOrder(orderParam);
-				var orderStatusWeHooks = orderParam.OrderStatus;
-				//当订单状态改变
-				var orderId = orderParam.OrderID;
-				if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4) {
-					delDesignatesDomByOrderId(orderId);
-				} else if (orderStatusWeHooks == 0) {
-					appendDesignates(orderParam);
-				} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
-					updateDesignatesDom(orderParam);
-				}
-				//订单成交通知
-			} else if (method == "OnRtnOrderTraded") {
-				var tradeParam = parameters;
-				appendTradeSuccess(tradeParam);
-				appendPostionAndUpdate(tradeParam);
-				//资金变化通知
-			} else if (method == "OnRtnMoney") {
-				var accountParam = parameters;
-				updateBalance(accountParam)
+socket.onopen = function() {
+	Trade.doLogin(username, password);
+}
+socket.onclose = function() {
+	alert("链接关闭");
+}
+socket.onmessage = function(evt) {
+	var dataString = evt.data;
+	var data = JSON.parse(dataString);
+	var method = data.Method;
+	var parameters = data.Parameters;
+	if (parameters != null) {
+		if (method == "OnRspLogin") {
+			var code = parameters.Code;
+			var loginMessage = parameters.Message;
+			if (code == 0) {
+				initDom();
+			} else {
+				alert(loginMessage);
 			}
+			//查询个人账户信息回复
+		} else if (method == "OnRspQryAccount") {
+			var accountParam = parameters;
+			updateBalance(accountParam);
+			//查询订单信息回复
+		} else if (method == "OnRspQryOrder") {
+			var orderStatus = parameters.OrderStatus;
+			var orderParam = parameters;
+			appendOrder(orderParam);
+			if (orderStatus < 3) {
+				appendDesignates(orderParam);
+			}
+			//查询成交记录回复
+		} else if (method == "OnRspQryTrade") {
+			appendTradeSuccess(parameters);
+			//查询持仓信息回复
+		} else if (method == "OnRspQryHold") {
+			var positionParam = parameters;
+			appendPostionAndUpdate(positionParam);
+			//报单录入请求回复
+		} else if (method == "OnRspOrderInsert") {
+			var insertOrderParam = parameters;
+			appendOrder(insertOrderParam);
+			appendDesignates(insertOrderParam);
+			//订单状态通知
+		} else if (method == "OnRtnOrderState") {
+			var orderParam = parameters;
+			updateOrder(orderParam);
+			var orderStatusWeHooks = orderParam.OrderStatus;
+			//当订单状态改变
+			var orderId = orderParam.OrderID;
+			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4) {
+				delDesignatesDomByOrderId(orderId);
+			} else if (orderStatusWeHooks == 0) {
+				appendDesignates(orderParam);
+			} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
+				updateDesignatesDom(orderParam);
+			}
+			//订单成交通知
+		} else if (method == "OnRtnOrderTraded") {
+			var tradeParam = parameters;
+			appendTradeSuccess(tradeParam);
+			appendPostionAndUpdate(tradeParam);
+			//资金变化通知
+		} else if (method == "OnRtnMoney") {
+			var accountParam = parameters;
+			updateBalance(accountParam)
 		}
 	}
-});
+}
 /**
  * 请求数据-初始化dom 
  */
@@ -321,7 +319,6 @@ function validationDesignatesIsExsit(param){
  * @param {Object} positonParam 最新数据
  */
 function updateDesignatesDom(designatesParam){
-	console.log(designatesParam);
 	var contractCode = designatesParam.ContractCode;
 	var orderId = designatesParam.OrderID;
 	var drection = designatesParam.Drection;
@@ -329,9 +326,7 @@ function updateDesignatesDom(designatesParam){
 	var orderNum = parseInt(designatesParam.OrderNum);
 	var orderStatus = designatesParam.OrderStatus;
 	var $thisHoldNum = $("li[data-tion-designates='"+orderId+"'] span[class = 'desig4']");
-	var $thisDrectionText = $("li[data-tion-designates='"+orderId+"'] span[class = 'desig1']");
 	var holdNum =  parseInt($thisHoldNum.text());
-	var oldDrectionText = $thisDrectionText.text();
 	if(orderStatus == 2){
 		holdNum = holdNum - orderNum;
 	}
@@ -341,7 +336,6 @@ function updateDesignatesDom(designatesParam){
 		//deleteDesignatesContractCode(contractCode);
 	}else if(holdNum != 0){
 		$thisHoldNum.text(holdNum);
-		$thisDrectionText.text(drectionText);
 		//添加数据到本地储存
 		designates[orderId] = designatesParam;
 		//更新储存数据
