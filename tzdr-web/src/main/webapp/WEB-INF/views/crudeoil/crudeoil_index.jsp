@@ -29,7 +29,9 @@
 <script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/static/script/crudeoil/crudeoilCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/crudeoil/crudeoilIndex.js?v=${v}"></script>
-<title>国际原油 - 维胜</title>
+<title>国际原油_维胜-中国领先的国际期货及衍生品互联网交易平台</title>
+<meta name="keywords" content="维胜，国际期货，原油，国际原油，期货，配资，原油配资，期货开户，外盘，期货公司，期货平台，炒期货，模拟盘"/>
+<meta name="description" content="国际原油-国际原油是最重要的石油期货，是以远期石油价格为标的物品的期货品种。具有交易灵活，资金杠杆适合短线投资等特性。"/>
 </head>
 <body>
 	<!--顶部 -->

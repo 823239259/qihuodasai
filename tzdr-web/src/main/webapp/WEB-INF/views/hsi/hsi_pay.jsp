@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content="维胜提供股票操盘、P2P贷款、投资理财、股指期货等交易服务，更高的收益，更加安全可靠；维胜致力于打造中国领先的互联网金融交易平台." name="description">
+<meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
+<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <style type="text/css">
  .font_size_15 {font-size: 15px; color: #f60; }
  .font_size_22 {font-size: 22px; color: #f60; }   
@@ -21,8 +22,7 @@
 <script language="javascript" src="${ctx}/static/script/common/tzdr.user.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiPay.js?v=${v}"></script>
-
-<title>支付确认 - 维胜</title>
+<title>支付确认- 恒指期货  - 维胜-中国领先的国际期货及衍生品互联网交易平台</title>
 </head>
 <body>
 	<!--顶部 -->
