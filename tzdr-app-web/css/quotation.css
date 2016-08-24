@@ -328,7 +328,7 @@ font-size: 14px;
 }
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
 	color:#fcc900 !important;
-	border-bottom: 2px solid #fcc900;
+	border-bottom: 2px solid #fcc900 ;
 }
 .mui-control-item{
 	color:#CCCCCC;

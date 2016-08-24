@@ -6,7 +6,7 @@
 				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 				mainTitleFirst.innerHTML=bb.name[0];
 				CommodityNo.innerHTML=bb.name[2]+bb.name[1];
-				console.log(bb.name[3])
+//				console.log(bb.name[3])
 				document.getElementById("TradingCenter").addEventListener("tap",function(){
 					mui.openWindow({
 						url:"trade.html",
@@ -50,6 +50,7 @@
                     /* document.getElementById('main').innerHTML = ""; */
                     // 基于准备好的dom，初始化echarts图表
                     myChart = ec.init(document.getElementById('CandlestickChartDiv'));
+                   
                     var option = setOption(rawData);
                     // 为echarts对象加载数据
 //                  setTimeout(function(){
@@ -59,13 +60,13 @@
                     timeChart=ec.init(document.getElementById("timeChart"));
                     var option1=setOption1(timeData);
                     timeChart.setOption(option1);
-                    volumeChart=ec.init(document.getElementById("volumeChart"));
-                    var volumeChartOption=volumeChartSetOption();
-                    volumeChart.setOption(volumeChartOption);;
-                    ec.connect("group1");
+//                  volumeChart=ec.init(document.getElementById("volumeChart"));
+//                  var volumeChartOption=volumeChartSetOption();
+//                  volumeChart.setOption(volumeChartOption);;
+//                  ec.connect("group1");
                 }
         );
-
+		
     }
 
     function sendMessage(method,parameters){
@@ -74,25 +75,24 @@
  	var time1;
     var url = "ws://192.168.0.213:9006";
     var socket = new WebSocket(url);
+    var setIntval = null;
     socket.onopen = function(evt){
         sendMessage('Login','{"serName":"13677622344","PassWord":"a123456"}');
     };
     socket.onclose = function(evt){
+    	setIntval.clear();
     };
     socket.onmessage = function(evt){
         var data = evt.data;
         var jsonData = JSON.parse(data);
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
-//          sendMessage('QryCommodity','""')
-		console.log(bb.name[3])
+		var date=new Date();
    sendMessage('QryHistory','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'"}');
    sendMessage('Subscribe','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'"}');
-        setTimeout(function(){
-            setInterval(function(){
-//          	 sendMessage('QryHistory','{"ExchangeNo":"NYMEX","CommodityNo":"CL","ContractNo":"'+1610+'","BeginTime":"'+time1+'","HisQuoteType":1}');
-                sendMessage('QryHistory','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'","BeginTime":"'+time1+'","HisQuoteType":1}');	
-            },30000);
+   		
+        setIntval = setInterval(function(){
+            sendMessage('QryHistory','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'","BeginTime":"'+time1+'","HisQuoteType":1}');
         },30000);
         }else if(method == "OnRspQryHistory"){
             var jsonData=JSON.parse(evt.data);
@@ -101,14 +101,12 @@
             handleVolumeChartData(jsonData);
         }else if(method == "OnRtnQuote"){
         	var DATA=JSON.parse(evt.data);
-//      	var DATA=JSON.stringify(DATA.Parameters.QAskQty1)
         	insertDATA(DATA);
         }
     };
     socket.onerror = function(evt){
 
     };
-   
     var domnRange=document.getElementById("domnRange");
     var freshPrices=document.getElementById("freshPrices");
     var volumePricesNumber=document.getElementById("volumePricesNumber");
@@ -125,6 +123,7 @@
     	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(bb.name[4]);
     	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(bb.name[4])+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
     }
+    var ww=1;
     function processingData(jsonData){
     	  var lent=rawData.length;
         var Len=jsonData.Parameters.length;    
@@ -134,28 +133,23 @@
             var chaPrice = closePrice - openPrice;
             time1=jsonData.Parameters[i].DateTime;
             var sgData = [jsonData.Parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",jsonData.Parameters[i].LowPrice,jsonData.Parameters[i].HighPrice,"","","-"];
-             rawData[lent+i] = sgData;
-          
+	         rawData[lent+i] = sgData;
         }; 
           time1=jsonData.Parameters[Len-1].DateTimeStamp;
         var option = setOption(rawData);
         if(myChart != null){
-				setTimeout(function(){
-					myChart.setOption(option);
-					 var CandlestickChart=document.getElementById("CandlestickChart");
-//					 console.log(CandlestickChart.offsetWidth);
-					 setInterval(function(){
-					 	if(CandlestickChart.offsetWidth==0){
-					 		
-					 	}else{
-				 		myChart.resize();
-					 	}
-					 },100)
-				},1000)
+        	myChart.setOption(option);
+        	document.getElementById("Candlestick").addEventListener("tap",function(){
+
+			setTimeout(function(){
+        			myChart.resize();	
+        		},50)
+       });
         }
     }
 
     //设置数据参数（为画图做准备）
+   
     function setOption(rawData){
         var dates = rawData.map(function (item) {
             return item[0];
@@ -176,6 +170,12 @@
             }
         }
     },
+    grid: {
+               x: 10,
+               y:20,
+               x2:20,
+               y2:20
+           },
     xAxis: {
         type: 'category',
         data: dates,
@@ -188,6 +188,10 @@
         splitArea: {
                     show: false
                 },
+                axisLabel: {
+                        inside: true,
+                        margin: 4
+                    },
                   splitLine: {
                     show: true,
                     lineStyle: {
@@ -236,143 +240,7 @@
             }
         }
     ]
-};
-//      var option = {
-//             tooltip: [{
-//                      trigger: 'axis',
-//              axisPointer: {
-//                  animation: false,
-//                  lineStyle: {
-//                 color: '#376df4',
-//                 width: 2,
-//                opacity: 1
-//          }
-//              }}
-//                     ],
-//          grid: {
-//              left: '5px',
-//              right: '5px',
-//              top: '10px',
-//              bottom: '10px',
-//              containLabel: true
-//          },
-////          title: {
-////              text: '1分钟K线',
-////              textStyle: {
-////                  color : "#ffcc33"
-////              }
-////          },
-//          backgroundColor: '#fffff',
-//          xAxis:[
-//              {
-//                  type: 'category',
-////                    data: dates,
-//                  data:volumeChartData.time,
-//                  scale: true,
-//                  boundaryGap : true,
-//                  axisLabel: {
-//                      show: true,
-//                      margin: 8
-//                  },
-//                  axisTick: {
-//                      show: false
-//                  },
-//                  axisLine: {
-//                      show:false,
-//                      onZero: true,
-//                      lineStyle: {
-//                          color: "black",
-//                          width: 1
-//                      }
-//                  },
-//                  splitLine: {
-//                      show: true,
-//                      lineStyle: {
-//                          color:"#eee"
-//                      }
-//                  },
-//                  splitNumber: 2,
-//              }
-//          ],
-//          yAxis:
-//                  [
-//          {
-//              type: 'value',
-//              scale: true,
-//              splitArea: {
-//                  show: false
-//              },
-//              axisLabel: {
-//                  inside: true,
-//                  margin: 4
-//              },
-//              axisTick: {
-//                  show: false
-//              },
-//              axisLine: {
-//                  show: false,
-//                  lineStyle: {
-//                      color: "black"
-//                  }
-//              },
-//              splitNumber: 2,
-//              splitLine: {
-//                  show: true,
-//                  lineStyle: {
-//                      color: "#eee"
-//                  }
-//              }
-//          }
-//                  ],
-//          dataZoom: [{
-//              textStyle: {
-//                  color: '#8392A5'
-//              },
-//              handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-//              handleSize: '80%',
-//              dataBackground: {
-//                  areaStyle: {
-//                      color: '#8392A5'
-//                  },
-//                  lineStyle: {
-//                      opacity: 0.8,
-//                      color: '#8392A5'
-//                  }
-//              },
-//              handleStyle: {
-//                  color: '#fff',
-//                  shadowBlur: 3,
-//                  shadowColor: 'rgba(0, 0, 0, 0.6)',
-//                  shadowOffsetX: 2,
-//                  shadowOffsetY: 2
-//              }
-//          }, {
-//              type: 'inside'
-//          }],
-//          animation: false,
-//          series: [
-//              {
-//                  type: 'candlestick',
-//                  name:"1分钟K线",
-//                  data: data,
-//                  itemStyle: {
-//                      normal: {
-//                          color: 'rgb(246, 100, 70)',
-//                          color0: 'rgb(192, 231, 140)',
-//                          borderColor: 'rgb(246, 100, 70)',
-//                          borderColor0: 'rgb(192, 231, 140)'
-//                      }
-//                  },
-//                  label: {
-//                      normal: {
-//                          show: true,
-//                          position: 'inside'
-//                      }
-//                  },
-//                  symbolSize: 2
-//              }
-//          ]
-//      };
+		}
         return option;
     }
     function handleTime(json){
@@ -410,32 +278,6 @@
                show: false,
            },
            animation: false,
-//         dataZoom: [{
-//             show:false,
-//             textStyle: {
-//                 color: '#8392A5'
-//             },
-//             handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-//             handleSize: '80%',
-//             dataBackground: {
-//                 areaStyle: {
-//                     color: '#8392A5'
-//                 },
-//                 lineStyle: {
-//                     opacity: 0.8,
-//                     color: '#8392A5'
-//                 }
-//             },
-//             handleStyle: {
-//                 color: '#fff',
-//                 shadowBlur: 3,
-//                 shadowColor: 'rgba(0, 0, 0, 0.6)',
-//                 shadowOffsetX: 2,
-//                 shadowOffsetY: 2
-//             }
-//         }, {
-//             type: 'inside'
-//         }],
 //           xAxis: {
 //               show:false,
 //               type : 'category',
@@ -445,18 +287,23 @@
 ////               splitNumber: 2,
 //               data : data1.time
 //           },
-           xAxis:[
-               {
-                   show: false,
-                   type : 'category',
-                   position:'bottom',
-                   boundaryGap : true,
-                   axisTick: {onGap:false},
-                   splitLine: {show:false},
-                   axisLine: { lineStyle: { color: '#8392A5' } },
-                   data :volumeChartData.time
-               }
-           ],
+//         xAxis:[
+//             {
+//                 show: true,
+//                 type : 'category',
+//                 position:'bottom',
+//                 boundaryGap : true,
+//                 axisTick: {onGap:false},
+//                 splitLine: {show:false},
+//                 axisLine: { lineStyle: { color: '#8392A5' } },
+//                 data :volumeChartData.time
+//             }
+//         ],
+				 xAxis:[{
+				type: 'category',
+		        data: data1.time,
+		        axisLine: { lineStyle: { color: '#8392A5' } }
+						}],	
            yAxis:  [
                {
                    type: 'value',
@@ -466,6 +313,10 @@
                    splitArea: {
                        show: false
                    },
+                    axisLabel: {
+                        inside: true,
+                        margin: 4
+                    },
                   splitLine: {
                     show: true,
                     lineStyle: {
@@ -475,10 +326,10 @@
                }
            ],
            grid: {
-               x: 50,
-               y:5,
+               x: 10,
+               y:20,
                x2:20,
-               y2:3
+               y2:20
            },
            series: {type: 'line',
                label: {
@@ -508,8 +359,8 @@
         };
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
-            volumeChart.setOption(option);
-           volumeChart.group="group1";
+//          volumeChart.setOption(option);
+//         volumeChart.group="group1";
         }
     }
     function volumeChartSetOption(data) {
