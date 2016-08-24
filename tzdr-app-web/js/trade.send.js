@@ -8,6 +8,10 @@ function sendMessage(method,parameters){
 }
 var TradeUrl = {
 	/**
+	 * soketurl
+	 */
+	SocketUrl:"ws://192.168.2.123:9002",
+	/**
 	 * 登录url
 	 */
 	LoginUrl:"Login",
@@ -81,7 +85,7 @@ var Trade = {
 			 * @param {Object} orderNum 订单数量
 			 * @param {Object} drection 买卖方向（0：买，1：卖）
 			 * @param {Object} priceType 价格类型:限价0，市价1，止损2
-			 * @param {Object} limitPrice 订单价格，如果是市价可以不填这个字段
+			 * @param {Object} limitPrice 订单价格
 			 * @param {Object} triggerPrice 触发价(止损单需要)
 			 * @param {Object} orderRef 报单引用，用户自己生成
 			 */
@@ -194,3 +198,4 @@ function doGetMarketPrice(price,miniTikeSize,drection){
 	}
 	return parseFloat(newPrice).toFixed(2);
 }
+var socket = new WebSocket(TradeUrl.SocketUrl);

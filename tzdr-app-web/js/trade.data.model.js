@@ -34,6 +34,7 @@ function createDesignatesParam(param) {
  * 创建交易数据 
  * @param {Object} ExchangeNo
  * @param {Object} CommodityNo
+ * @param {Object} ContractNo
  * @param {Object} OrderNum
  * @param {Object} Drection
  * @param {Object} PriceType

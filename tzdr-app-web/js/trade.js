@@ -30,10 +30,8 @@ var entrustsIndex = 0;
 var tradesIndex = 0;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
-var url = "ws://192.168.0.213:6060";
 var username = "Q517029969";
 var password = $.base64.encode("123456");
-var socket = new WebSocket(url);
 socket.onopen = function() {
 	Trade.doLogin(username, password);
 }
@@ -629,50 +627,7 @@ function deleteDesignatesContractCode(param){
 	}
 }
 
-/**
- * 平仓处理 
- * @param {Object} param
- */
-function selling(param){
-	var sellingParam = param;
-	for(var i = 0 ; i < sellingParam.length ; i ++){
-		var selling = sellingParam[i];
-		Trade.doInsertOrder(selling.ExchangeNo,
-							selling.CommodityNo,
-							selling.ContractNo,
-							selling.OrderNum,
-							selling.Drection,
-							selling.PriceType,
-							selling.LimitPrice,
-							selling.TriggerPrice,
-							selling.OrderRef);
-		
-	}
-}
-/**
- * 撤单处理 
- * @param {Object} param
- */
-function cancleOrder(param){
-	var cancleParam = param;
-	for (var i = 0 ; i < cancleParam.length ; i++) {
-		var cancle = cancleParam[i];
-		Trade.doCancelOrder(cancle.orderSysId,
-							cancle.orderId,
-							cancle.exchangeNo,
-							cancle.commodityNo,
-							cancle.contractNo,
-							cancle.orderNum,
-							cancle.drection,
-							cancle.orderPrice);
-	}
-}
-/**
- * 生成报单引用 
- */
-function doGetOrderRef(){
-	return new Date().getTime();
-}
+
 /**
  * 计算开仓均价 
  * @param {Object} price
