@@ -37,6 +37,7 @@
 				<th field="money" width="150">金额 </th>
 				<th field="remark" width="150">原因 </th>
 				<th field="uptimeStr" width="150">充值时间</th>
+				<th field="realname" width="150">审核人</th>
             </tr>
        </thead>
     </table>

@@ -204,7 +204,6 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 		synchronized (lock) {
 			
 			UserFund userFund = new UserFund();
-			
 			userFund.setUid(rechargeList.getUid());
 			userFund.setMoney(rechargeList.getActualMoney());
 			userFund.setAddtime(TypeConvert.dbDefaultDate());
@@ -214,7 +213,6 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 			userFund.setNo(rechargeList.getNo() == null?"":rechargeList.getNo());
 			userFund.setRemark(remark == null?"":remark);
 			userFund.setUptime(TypeConvert.dbDefaultDate());
-			
 			WUser wuser = wuserService.getUser(rechargeList.getUid());
 			Double oldAvlBal = wuser.getAvlBal();
 			if (wuser != null) {
@@ -284,6 +282,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 			else {
 				throw new WuserDoesNotExistException("com.tzdr.business.userfund.message",null);
 			}
+			
 		}
 	}
 	

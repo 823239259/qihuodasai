@@ -93,6 +93,10 @@ public class HandUserFundVo implements Serializable {
 	private String inMoney;
 	//去出
 	private String outMoney;
+	//审核人
+	@AllowExcel(name="审核人")
+	@SqlColumn
+	private String realname;
 	
 
 	public HandUserFundVo() {
@@ -283,6 +287,14 @@ public class HandUserFundVo implements Serializable {
 
 	public void setOutMoney(String outMoney) {
 		this.outMoney = outMoney;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 	
 
