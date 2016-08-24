@@ -9,39 +9,35 @@ import com.tzdr.common.domain.BaseEntity;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
 
-
 @Entity
-@Table(name="w_user_bank")
+@Table(name = "w_user_bank")
 public class UserBank extends BaseEntity {
-
 
 	/**
 	 * 
-	 */ 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private String uid;
 	private String bank;
-	private String province;
-	private String city;
+	private String provinceCity;//省市
 	private String subbank;
 	private String card;
+	private String accountAddress;
 	private short isdefault;
-	private long addtime;//添加时间
-	private String bankimgpath;//银行卡图片路径
-	@Transient 
-	private String bankvalue;//银行转化
+	private long addtime;// 添加时间
+	private String bankimgpath;// 银行卡图片路径
+	@Transient
+	private String bankvalue;// 银行转化
+
 	public String getBankvalue() {
-		 return CacheManager.getDataMapByKey(DataDicKeyConstants.BANKNAME, this.bank);
-			
+		return CacheManager.getDataMapByKey(DataDicKeyConstants.BANKNAME, this.bank);
+
 	}
 
 	public void setBankvalue(String bankvalue) {
 		this.bankvalue = bankvalue;
 	}
-
-
-
 
 	public String getBankimgpath() {
 		return bankimgpath;
@@ -51,7 +47,7 @@ public class UserBank extends BaseEntity {
 		this.bankimgpath = bankimgpath;
 	}
 
-	@Column(name="addtime")
+	@Column(name = "addtime")
 	public long getAddtime() {
 		return addtime;
 	}
@@ -60,7 +56,7 @@ public class UserBank extends BaseEntity {
 		this.addtime = addtime;
 	}
 
-	@Column(name="uid", length=32)
+	@Column(name = "uid", length = 32)
 	public String getUid() {
 		return this.uid;
 	}
@@ -69,7 +65,7 @@ public class UserBank extends BaseEntity {
 		this.uid = uid;
 	}
 
-	@Column(name="bank", nullable=false, length=100)
+	@Column(name = "bank", nullable = false, length = 100)
 	public String getBank() {
 		return this.bank;
 	}
@@ -78,25 +74,16 @@ public class UserBank extends BaseEntity {
 		this.bank = bank;
 	}
 
-	@Column(name="province", nullable=false, length=100)
-	public String getProvince() {
-		return this.province;
+	@Column(name = "province_city", nullable = false, length = 100)
+	public String getProvinceCity() {
+		return this.provinceCity;
 	}
 
-	public void setProvince(String province) {
-		this.province = province;
+	public void setProvinceCity(String provinceCity) {
+		this.provinceCity = provinceCity;
 	}
 
-	@Column(name="city", nullable=false, length=100)
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	@Column(name="subbank", nullable=false)
+	@Column(name = "subbank", nullable = false)
 	public String getSubbank() {
 		return this.subbank;
 	}
@@ -105,7 +92,7 @@ public class UserBank extends BaseEntity {
 		this.subbank = subbank;
 	}
 
-	@Column(name="card", nullable=false, length=100)
+	@Column(name = "card", nullable = false, length = 100)
 	public String getCard() {
 		return this.card;
 	}
@@ -114,7 +101,7 @@ public class UserBank extends BaseEntity {
 		this.card = card;
 	}
 
-	@Column(name="isdefault")
+	@Column(name = "isdefault")
 	public short getIsdefault() {
 		return this.isdefault;
 	}
@@ -122,4 +109,14 @@ public class UserBank extends BaseEntity {
 	public void setIsdefault(short isdefault) {
 		this.isdefault = isdefault;
 	}
+
+	@Column(name = "account_Address", nullable = false, length = 100)
+	public String getAccountAddress() {
+		return accountAddress;
+	}
+
+	public void setAccountAddress(String accountAddress) {
+		this.accountAddress = accountAddress;
+	}
+
 }
