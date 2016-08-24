@@ -60,16 +60,14 @@ function updateLoadWebParam(param) {
  */
 function updateFloatProfit() {
 	for (var i = 0; i < positionsIndex; i++) {
-		var $thisDrection = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position1']");
 		var $this = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position4']");
+		var $thisAvgPrice = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position3']");
+		var $thisHoldNum = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position2']");
 		//验证该平仓数据是否存在列表中
 		if ($this.html() == undefined) {
 			continue;
 		}
-		if ($thisDrection.html() == undefined) {
-			continue;
-		}
-		var floatProfit = doGetFloatingProfit($("#lastPrice").text(), $("#contractSize").val(), parseInt($thisDrection.attr("data-drection")));
+		var floatProfit = doGetFloatingProfit(parseFloat($("#lastPrice").text()), parseFloat($thisAvgPrice.text()) , $("#contractSize").val(),$("#miniTikeSize").val(),parseInt($thisHoldNum.text()));
 		$this.text(floatProfit);
 	}
 }

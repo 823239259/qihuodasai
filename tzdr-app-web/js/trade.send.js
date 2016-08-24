@@ -11,6 +11,7 @@ var TradeUrl = {
 	 * soketurl
 	 */
 	SocketUrl:"ws://192.168.2.123:9002",
+	
 	/**
 	 * 登录url
 	 */
@@ -197,5 +198,15 @@ function doGetMarketPrice(price,miniTikeSize,drection){
 		newPrice = price - priceRange;
 	}
 	return parseFloat(newPrice).toFixed(2);
+}
+/**
+ * 计算浮动盈亏
+ * @param {Object} lastPrice
+ * @param {Object} tradeAvgPrice
+ * @param {Object} contractSize
+ */
+function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum){
+	var price = lastPrice - tradeAvgPrice;
+	return parseFloat((price * contractSize / miniTikeSize) * orderNum).toFixed(2);
 }
 var socket = new WebSocket(TradeUrl.SocketUrl);

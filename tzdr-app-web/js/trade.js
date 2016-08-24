@@ -144,21 +144,21 @@ function appendPosition(data){
 	if(validationLastPrice()){
 		floatingProft = price;
 	}else{
-		floatingProft = doGetFloatingProfit($("#lastPrice").text(),$("#contractSize").val(),drection);
+		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum);
 	}
 	var cls = 'position-index'+positionsIndex;
-	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+'" style="width: 720px;">'
+	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi"  >'
 				+ '<a class="mui-navigate-right" >'
-				+ '		<p>'
+				+ '		'
 				+ '			<span class = "position0">'+holdParam.ExchangeNo+""+contractCode+'</span>'
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
 				+ '			<span class = "position3">'+price+'</span>'
-				+ '			<span class = "position4">'+floatingProft+'</span>'
+				+ '			<span class = "position4 dateTimeL">'+floatingProft+'</span>'
 				+ '			<span class = "position5" style = "display:none">'+holdParam.CommodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+holdParam.ContractNo+'</span>'
 				+ '         <span class = "position7" style = "display:none">'+holdParam.ExchangeNo+'</span>'
-				+ '		</p>'
+				+ '		'
 				+ '	</a>'
 				+ '</li>';
 	$("#positionList").append(html);
@@ -210,9 +210,9 @@ function updatePositionDom(positonParam){
 		holdNum = holdNum + orderNum;
 		price = price + oldPrice;
 		drectionText = analysisPositionDrection(drection);
+		$thisPrcie.text(doGetOpenAvgPrice(price,holdNum));
 	}else if(drection != oldDrection){
 		holdNum = holdNum - orderNum;
-		price = oldPrice - price;
 		if(holdNum == 0){	
 			//当持仓为空时，清理dom节点和存储数据
 			delPositionDom(contractCode);
@@ -234,8 +234,7 @@ function updatePositionDom(positonParam){
 		}
 	}
 	if(holdNum != 0){
-		//$thisPrcie.text(doGetOpenAvgPrice(price,holdNum));
-		$thisHoldNum.text(holdNum);
+		$thisHoldNum.text(Math.abs(holdNum));
 		$thisDrectionText.html(drectionText);
 		$thisDrectionText.attr("data-drection",drection);
 		//添加数据到本地储存
@@ -276,21 +275,21 @@ function appendDesignates(data){
 	var orderId = designatesParam.OrderID;
 	var desContract = designatesParam.ContractCode;
 	var cls = 'designate-index'+designatesIndex;
-	var html =   '<li data-tion-designates = '+orderId+' data-orderId = '+orderId+' data-index='+designatesIndex+' contract-code-designates = '+desContract+'   class = "'+cls+'" style="width: 720px;">'
+	var html =   '<li data-tion-designates = '+orderId+' data-orderId = '+orderId+' data-index='+designatesIndex+' contract-code-designates = '+desContract+'   class = "'+cls+' Guadan" ">'
 				+'	<a class="mui-navigate-right" >'
-				+'		<p >'
+				+'		'
 				+'			<span class = "desig0">'+desContract+'</span>'
 				+'			<span class = "desig1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+'			<span class = "desig2">'+designatesParam.OrderPrice+'</span>'
 				+'			<span class = "desig3">'+designatesParam.OrderNum+'</span>'
 				+'			<span class = "desig4">'+cdNum+'</span>'
-				+'			<span class = "desig5">'+designatesParam.InsertDateTime+'</span>'
+				+'			<span class = "desig5 dateTimeL">'+designatesParam.InsertDateTime+'</span>'
 				+'			<span class = "desig6" style = "display:none;">'+designatesParam.OrderSysID+'</span>'
 				+ '			<span class = "desig7" style = "display:none">'+designatesParam.CommodityNo+'</span>'
 				+ '			<span class = "desig8" style = "display:none">'+designatesParam.ContractNo+'</span>'
 				+ '         <span class = "desig9" style = "display:none">'+designatesParam.ExchangeNo+'</span>'
 				+ '         <span class = "desig10" style = "display:none">'+orderId+'</span>'
-				+'		</p>'
+				+'		'
 				+'	</a>'
 				+'</li>';
 	$("#postersOrder").append(html);
@@ -333,7 +332,7 @@ function updateDesignatesDom(designatesParam){
 		delDesignatesDomByOrderId(orderId);
 		//deleteDesignatesContractCode(contractCode);
 	}else if(holdNum != 0){
-		$thisHoldNum.text(holdNum);
+		$thisHoldNum.text(Math.abs(holdNum));
 		//添加数据到本地储存
 		designates[orderId] = designatesParam;
 		//更新储存数据
@@ -360,9 +359,9 @@ function appendOrder(data){
 	}
 	var orderId = orderParam.OrderID;
 	var cls = 'entrust'+entrustsIndex;
-	var html = '<li data-tion-order='+orderId+' contract-code-order = '+orderParam.ContractCode+'  class = "'+cls+'" style="width: 960px;">'
+	var html = '<li data-tion-order='+orderId+' contract-code-order = '+orderParam.ContractCode+'  class = "'+cls+' EntrustOreder " ">'
 				+'	<a class="mui-navigate-right" >'
-				+'		<p >'
+				+'		'
 				+'			<span class = "order0">'+orderParam.ContractCode+'</span>'
 				+'			<span class = "order1">'+orderStatusText+'</span>'
 				+'			<span class = "order2">'+drectionText+'</span>'
@@ -370,8 +369,8 @@ function appendOrder(data){
 				+'			<span class = "order4">'+orderNum+'</span>'
 				+'			<span class = "order5">'+tradeNum+'</span>'
 				+'			<span class = "order6">'+cdNum+'</span>'
-				+'			<span class = "order7">'+orderParam.InsertDateTime+'</span>'
-				+'		</p>'
+				+'			<span class = "dateTimeL order7">'+orderParam.InsertDateTime+'</span>'
+				+'		'
 				+'	</a>'
 				+'</li>';
 	$("#Entrust").append(html);
@@ -410,15 +409,15 @@ function appendTradeSuccess(data){
 	var drectionText = analysisDrection(drection);
 	var orderId = tradeParam.OrderID;
 	var cls = 'trade'+tradesIndex;
-	var html = '<li data-tion-trade = '+orderId+' contract-code-trade = '+tradeParam.ContractCode+'   class = "'+cls+'" style="width: 600px;">'
+	var html = '<li data-tion-trade = '+orderId+' contract-code-trade = '+tradeParam.ContractCode+'   class = "'+cls+' liContent PositionLi" ">'
 				+'<a class="mui-navigate-right" >'
-				+'	<p>'
+				+'	'
 				+'		<span class = "trade0">'+tradeParam.ContractCode+'</span>'
 				+'		<span class = "trade1">'+drectionText+'</span>'
 				+'      <span class = "trade2">'+tradeParam.TradePrice+'</span>'
 				+'		<span class = "trade3">'+tradeParam.TradeNum+'</span>'
 				+'		<span class = "trade4">'+tradeParam.TradeDateTime+'</span>'
-				+'	</p>'
+				+'	'
 				+'	</a>'
 				+'</li>';
 	$("#Deal").append(html);

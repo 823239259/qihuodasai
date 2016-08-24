@@ -41,7 +41,7 @@
 					<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
 				</div>
 				<div class="buttomFixRight mui-col-xs-6">
-					<p id="freshPrices">-</p>
+					<p id="freshPrices">47.38</p>
 					<p id="domnRange">-</p>
 				</div>
 				<div class="BuyDiv">
@@ -52,28 +52,20 @@
 					<button type="button" class="mui-btn mui-col-xs-5 buy" id="sell" data-tion-buy = "1">卖出</button>
 				</div>
 				<div style="display: none;">
-					<input type="text" id = "exchangeNo"/>
-					<input type="text" id= "commodityNo" />
-					<input type="text" id="contractNo" />
-					<input type="text" id="contractSize"/>
+					<input type="text" value = "HSI" id = "exchangeNo"/>
+					<input type="text" value = "CL" id = "commodityNo" />
+					<input type="text" value="1610" id = "contractNo" />
+					<input type="text" value="10" id = "contractSize"/>
+					<input type="text" value="0.01" id = "miniTikeSize"/>
 				</div>
 		</div>
 		<script type="text/javascript">
 			mui.init();
-//			mui.plusReady(function(){
-//				var bb=plus.webview.currentWebview();
-//				console.log(JSON.stringify(bb));
-//				alert(JSON.stringify(bb))
-//				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
-//				mainTitleFirst.innerHTML=bb.name;
-//				
-//			});
-			
 		</script>
 		<script src="../../js/chart.js"></script> 
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
-		<script type="text/javascript" src="../../js/trade.send.js" ></script>
 		<script type="text/javascript" src="../../js/trade.data.model.js" ></script>
+		<script type="text/javascript" src="../../js/trade.send.js" ></script>
 		<script type="text/javascript" src="../../js/util.js" ></script>
 		<script type="text/javascript" src="../../js/market.trade.js" ></script>
 	</body>
