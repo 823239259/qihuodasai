@@ -7,6 +7,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../js/mui.min.js"></script>
 		 <script src="../../js/common.js"></script>
+		 <script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
+		 <script type="text/javascript" src="../../js/jquery.base64.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
 		 <script type="text/javascript" src="../../js/util.js" ></script>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
@@ -22,12 +24,12 @@
 	<div class="mui-content operateLogin">
 		<form  class="mui-input-group blackBg">
 			<div class="mui-input-row">
-				<label>手机号码</label>
-				<input id='account' type="tel" class="mui-input-clear mui-input" placeholder="请输入账号" autocomplete="off"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+				<label>操盘账号</label>
+				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您操盘账号" >
 			</div>
 			<div class="mui-input-row mui-password">
 				<label>登录密码</label>
-				<input id="password" type="password" class="mui-input-password" placeholder="请输入密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+				<input id="password" type="password" class="mui-input-password" placeholder="请输入您账号密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
 			</div>	
 		</form>
 		<div class="mui-content-padded">
@@ -40,39 +42,77 @@
 	</div>
 		<script type="text/javascript">
 			mui.init()
-			mu.plusReady(function(){
-				document.getElementById("operateLogin").addEventListener(function(){
+			mui.plusReady(function(){
+				var Transfer=plus.webview.currentWebview();
+				var commdityNo = Transfer.commdityNo;
+				document.getElementById("regLogin").addEventListener("tap",function(){
+					var url = "";
+					var urlId = "";
+					switch(commdityNo){
+						//A50
+						case  "CN":
+								url = "../future/cn.html";
+								urlId = "cn";
+							break;
+						//恒指
+						case  "HSI":
+								url = "../future/hsi.html";
+								urlId = "hsi";
+							break;
+						//原油
+						case  "CL":
+								url = "../future/cl.html";
+								urlId = "cl";
+							break;
+						default:
+								url = "../future/cp.html";
+								urlId = "cp";
+							break;
+					}
+					mui.openWindow({
+									url:url,
+									id:urlId
+								});
+				});
+				document.getElementById("forgetPassword").addEventListener("tap",function(){
+					mui.callService();
+				});
+				socket.onopen = function(){
+				}
+				socket.onmessage = function(evt){
+					var dataString = evt.data;
+					var data = JSON.parse(dataString);
+					var method = data.Method;
+					var parameters = data.Parameters;
+					if (method == "OnRspLogin") {
+						var code = parameters.Code;
+						var loginMessage = parameters.Message;
+						if (code == 0) {
+							mui.cacheUser.setCach("account",account);
+							mui.cacheUser.setCach("password",pwd);
+							alert("登录成功");
+						} else {
+							alert("登录失败");
+						}
+					} 
+				}
+				var account = null;
+				var pwd = null;
+				$("#operateLogin").click(function(){
 					var account=document.getElementById("account").value;
-					var password=document.getElementById("password").value;
+					var pwd=$.base64.encode(document.getElementById("password").value);
 					if(mui.isnull(account)){
 		    			mui.toast("请输入账号");
 		    			return;
-    					};
-					if(mui.isnull(account)){
+						};
+					if(mui.isnull(pwd)){
 		    			mui.toast("请输入密码");
 		    			return;
 					}
-					socket.onopen = function(){
-						Trade.doLogin(account,password);
-					}
-					socket.onmessage = function(evt){
-						var dataString = evt.data;
-						var data = JSON.parse(dataString);
-						var method = data.Method;
-						var parameters = data.Parameters;
-						if (method == "OnRspLogin") {
-							var code = parameters.Code;
-							var loginMessage = parameters.Message;
-							if (code == 0) {
-								localStorage.setItem("account",account);
-								localStorage.setItem("password",password);
-							} else {
-								alert("登录失败");
-							}
-						}
-					}
+					Trade.doLogin(account,pwd); 
 				});
-			})
+			});
+			
 		</script>
 	</body>
 
