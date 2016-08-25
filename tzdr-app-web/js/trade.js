@@ -30,10 +30,11 @@ var entrustsIndex = 0;
 var tradesIndex = 0;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
-var username = "Q517029969";
-var password = $.base64.encode("123456");
-socket.onopen = function() {
-	Trade.doLogin(username, password);
+localStorage.clear();
+alert(username); 
+socket.onopen = function() { 
+	if(username != null) 
+		Trade.doLogin(username, password);
 }
 socket.onclose = function() {
 	alert("链接关闭");
@@ -409,7 +410,7 @@ function appendTradeSuccess(data){
 	var drectionText = analysisDrection(drection);
 	var orderId = tradeParam.OrderID;
 	var cls = 'trade'+tradesIndex;
-	var html = '<li data-tion-trade = '+orderId+' contract-code-trade = '+tradeParam.ContractCode+'   class = "'+cls+' liContent PositionLi" ">'
+	var html = '<li data-tion-trade = '+orderId+' contract-code-trade = '+tradeParam.ContractCode+'   class = "'+cls+' DealLi" ">'
 				+'<a class="mui-navigate-right" >'
 				+'	'
 				+'		<span class = "trade0">'+tradeParam.ContractCode+'</span>'

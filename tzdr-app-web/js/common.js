@@ -114,13 +114,8 @@
 			}
 			return true;
 		},
-		isOperateLogin:function(){
-			var user_token=plus.storage.getItem(tzdr.constants.user_token);
-			var user_secret=plus.storage.getItem(tzdr.constants.user_secret);  
-			if(mui.isnull(user_token)||mui.isnull(user_secret)){  
-				return false;
-			}
-			return true;
+		setCach:function(key,value){
+			plus.storage.setItem(key,value);
 		},
 		/**
 		 * 清除当前页面以外的其他页面

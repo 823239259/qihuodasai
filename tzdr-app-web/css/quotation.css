@@ -176,7 +176,19 @@ font-size: 14px;
 }
 #sell{
 	background-color:#16a951;
-	margin-left: 5px;;
+	margin-left: 5px;
+}
+#marketBuy{
+		margin-right: 5px;;
+	background-color:#e9392a;
+	height: 40px;
+	line-height: 28px;
+}
+#marketSell{
+	margin-left: 5px;
+	background-color:#16a951;
+	height: 40px;
+	line-height: 28px;
 }
 .Assets{
 	width: 100%;
@@ -295,41 +307,9 @@ font-size: 14px;
 	color:#CCCCCC;
 
 }
-/*.listStyle li a span:nth-last-child(1){
-	width: 120px;
-}*/
-/*.listStyle  .mui-navigate-right{
-	display: inline-block;
-	width: 100%;
-	height:40px;
-	color:#999999;
+#trade{
+	background-color: #2B2B2B;
 }
-.listStyle li{
-	height:40px;
-	border-bottom: 1px solid  #454545;
-}
-.fisrtLlist  span{
-	display:  inline-block;
-	width: 25%;
-}
-.listStyle .mui-navigate-right span{
-	display: inline-block;
-	height:40px;;
-	width: 120px;
-	padding:15px 0px;
-	line-height: 10px;
-	text-align: center;
-	font-size: 12px;
-	word-break: normal;
-	color:#999999;
-	width: 120px;
-}
-.listStyle  .mui-navigate-right p{
-	height:40px;
-	padding:0px;
-	line-height: 40px;
-	width: 100%;
-}*/
 .mui-navigate-right:after, .mui-push-right:after{
 	content:"";
 }
@@ -474,4 +454,13 @@ font-size: 14px;
 }
 .EntrustOreder a{
 	width: 650px;
+}
+.DealLi{
+	width: 430px;
+}
+.DealLi  a{
+	width:480px ;
+}
+input{
+	text-align: center;
 }

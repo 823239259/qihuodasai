@@ -72,11 +72,11 @@ var Btn = {
 function alertProtype(alertContent, alertTitle, btnArray, successCallBack, colseCallBack,param) {
 	mui.confirm(alertContent, alertTitle, btnArray, function(e) {
 		if(e.index == 1) {
-			if(param != null)
-				successCallBack(param);
+			successCallBack(param);
 		} else {
-			if(param != null)
+			if(colseCallBack != undefined || colseCallBack != null)
 				colseCallBack(param);
 		}
 	})
 }
+function colseCallBack(){}

@@ -10,7 +10,7 @@ var TradeUrl = {
 	/**
 	 * soketurl
 	 */
-	SocketUrl:"ws://192.168.2.123:9002",
+	SocketUrl:"ws://192.168.0.213:6060",
 	
 	/**
 	 * 登录url
@@ -126,6 +126,7 @@ var Trade = {
 			}
 		}
 var MarketUrl = {
+			SocketUrl:"ws://192.168.0.213:9006",
 			/**
 			 * 登录url
 			 */
@@ -141,45 +142,11 @@ var MarketUrl = {
 			/**
 			 * 订阅url
 			 */
-			Subscribe:"Subscribe"
-}
-function marketSendMessage(method,parameters){
-	marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-}
-var Market = {
+			SubscribeUrl:"Subscribe",
 			/**
-			 * 登录
-			 * @param {Object} username
-			 * @param {Object} password
+			 * 历史url
 			 */
-			doLogin:function(username,password){
-				marketSendMessage(MarketUrl.Login,'{"UserName":"'+username+'","PassWord":"'+password+'"}');
-			},
-			/**
-			 * 
-			 * 获取品种
-			 * @param {Object} exchangeNo 交易所代码
-			 */
-		    doCommodity:function(exchangeNo){
-		    	marketSendMessage(MarketUrl.QryCommodityUrl,'{"ExchangeNo":"'+exchangeNo+'"}');
-		    },
-		    /**
-		     * 获取合约
-		     * @param {Object} exchangeNo 交易所代码
-		     * @param {Object} comodityNo 品种代码
-		     */
-		    doContract:function(exchangeNo,comodityNo){
-		    	marketSendMessage(MarketUrl.QryContractUrl,'{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+comodityNo+'"}')
-		    },
-		    /**
-		     * 订阅
-		     * @param {Object} exchangeNo 交易所代码
-		     * @param {Object} comodityNo 品种代码
-		     * @param {Object} contractNo 合约代码
-		     */
-		    doSubscribe:function(exchangeNo,comodityNo,contractNo){
-		    	marketSendMessage(MarketUrl.Subscribe,'{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+comodityNo+'","ContractNo":"'+contractNo+'"}')
-		    }
+			QryHistoryUrl:"QryHistory"
 }
 /**
  * 获取市场价格
@@ -209,4 +176,10 @@ function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,o
 	var price = lastPrice - tradeAvgPrice;
 	return parseFloat((price * contractSize / miniTikeSize) * orderNum).toFixed(2);
 }
+/**
+ * 连接交易
+ */
 var socket = new WebSocket(TradeUrl.SocketUrl);
+var username = localStorage.getItem("account");
+
+var password = localStorage.getItem("password");

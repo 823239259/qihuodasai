@@ -1,6 +1,6 @@
 var marketSocket = new WebSocket("ws://192.168.0.213:9006");
 var initSubscribe = 0;
-var marketLoadParam = {}
+var marketLoadParam = {};
 marketSocket.onopen = function() {
 	Market.doLogin("13677622344", "a123456");
 }

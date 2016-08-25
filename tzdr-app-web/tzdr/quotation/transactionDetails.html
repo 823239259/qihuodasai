@@ -11,9 +11,8 @@
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
 		<script src="../../js/esl.js"></script>
- 		<!--<link href="../../css/own.css" rel="stylesheet"/>-->
 	</head>
-	<body>
+	<body style="background-color: #2B2B2B">
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack"></a>
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
@@ -22,7 +21,7 @@
 				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
-					<a class="mui-control-item" id="TradingCenter" >交易中心</a>
+					<a class="mui-control-item" id="TradingCenter" href="#trade" >交易中心</a>
 					</div>
 					<div style="width: 100%;">
 						<div class="mui-control-content mui-active" id="TimeChart1">
@@ -32,7 +31,64 @@
 						<div class="mui-control-content " id="CandlestickChart">
 							<div   id="CandlestickChartDiv" style="width:100%;height:250px;"></div>
 						</div>
+						<div class="mui-control-content" id="trade">
+							<div class="Assets">
+				<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
+				<p><span>总资产</span><span>保证金</span><span>余额</span></p>
+			</div>
+			<div class="ProductInformation">
+				<div class="ProductInformationLeft">
+					<p class="whiteFont" id = "tradeTitle">富时A501608</p>
+					<p class="grayFont" id = "tradeContractTitle">CNQ16</p>
+				</div>
+				<div class="ProductInformationRight">
+					<p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
+					<p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
+					<p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
+				</div>
+			</div>
+				<form id="buyFuture">
+					<span><input type="radio" checked name="prices" value="1" class="radioChoice"><label>快手板</label></span><span><input type="radio" class="radioChoice" value="0" name="prices"><label>限价板</label></span>
+					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" placeholder="输入价格"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" placeholder="输入手数"></div>
+					<div class="buyBtn">
+					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
+					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
 					</div>
+				</form>
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active" href="#item1">持仓</a>
+					<a class="mui-control-item" href="#item2">挂单</a>
+					<a class="mui-control-item" href="#item3">委托</a>
+					<a class="mui-control-item" href="#item4">成交</a>
+			</div>
+			<div>
+				<div id="item1" class="mui-control-content mui-active" >
+						<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
+							<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeL">浮动盈利</span></a></li>
+						</ul>
+					<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
+					<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
+				</div>
+				<div id="item2" class="mui-control-content">
+								<ul  id="postersOrder" class="listStyle" style="height: 180px; width: 100%;" >
+										<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">成交时间</span></a></li>
+								</ul>
+						<button type="button" class="mui-btn mui-col-xs-10" id="kilAnorder">撤单</button>
+				</div>
+				<div id="item3" class="mui-control-content" style="width: 100%;">
+						<ul  id="Entrust" class="listStyle" style="height: 180px;" >
+							<li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
+						</ul>
+				</div>
+				<div id="item4" class="mui-control-content" >
+						<ul  id="Deal" class="listStyle" style="height: 180px;">
+							<li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
+							<!--<li style="width: 600px;"><a class="mui-navigate-right" ><p><span>美原油09</span><span>买</span><span>1</span><span>2</span><span>2016.08.08 18:03:11</span></p></a></li>-->
+						</ul>
+				</div>
+			</div>
+				</div>
+			</div>
 			</div>
 			<div class="buttomFix">
 				<div class="buttomFixLeft mui-col-xs-6">
@@ -45,29 +101,279 @@
 					<p id="domnRange">-</p>
 				</div>
 				<div class="BuyDiv">
-				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1" id = "orderNum"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价"></div>
+				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1" id = "orderNum"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
 				</div>
 				<div class="buyBtn">
-					<button type="button" class="mui-btn mui-col-xs-5 buy" id="buy" data-tion-buy = "0">买入</button>
-					<button type="button" class="mui-btn mui-col-xs-5 buy" id="sell" data-tion-buy = "1">卖出</button>
+					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketBuy" data-tion-buy = "0">买入</button>
+					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
-				<div style="display: none;">
+				<!--<div style="display: none;">
 					<input type="text" value = "HSI" id = "exchangeNo"/>
 					<input type="text" value = "CL" id = "commodityNo" />
 					<input type="text" value="1610" id = "contractNo" />
 					<input type="text" value="10" id = "contractSize"/>
 					<input type="text" value="0.01" id = "miniTikeSize"/>
-				</div>
+				</div>-->
+				<div style="display: none;">
+				<input type="text"  id = "lastPriceNone" />
+				<input type="text"  id = "exchangeNo"/> 
+				<input type="text"  id = "commodeityNo"/>
+				<input type="text"  id = "contractNo"/>
+				<input type="text"  id = "contractSize" />
+				<input type="text"  id= "miniTikeSize"/>
+				<input type="text"  id = "doSize"/>
+			</div>
 		</div>
-		<script type="text/javascript">
-			mui.init();
-		</script>
-		<script src="../../js/chart.js"></script> 
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
 		<script type="text/javascript" src="../../js/trade.data.model.js" ></script>
 		<script type="text/javascript" src="../../js/trade.send.js" ></script>
 		<script type="text/javascript" src="../../js/util.js" ></script>
-		<script type="text/javascript" src="../../js/market.trade.js" ></script>
+		<script src="../../js/chart.js"></script>
+		<script type="text/javascript" src="../../js/trade.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				var Transfer=plus.webview.currentWebview();
+				var CommodityNo=document.getElementById("CommodityNo");
+				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+				mainTitleFirst.innerHTML=Transfer.name[0];
+				CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+				document.getElementById("TradingCenter").addEventListener("tap",function(){
+					document.getElementsByClassName("buttomFix")[0].style.display="none";
+					if(vadationIsLogin()){
+						
+					}
+				})
+				document.getElementById("Time").addEventListener("tap",function(){
+					document.getElementsByClassName("buttomFix")[0].style.display="block";
+				});
+				document.getElementById("Candlestick").addEventListener("tap",function(){
+					document.getElementsByClassName("buttomFix")[0].style.display="block";
+				});
+				init(Transfer.name);
+				username = mui.cacheUser.get("account");
+				password = mui.cacheUser.get("password");
+			});
+		</script>
+		<script>
+			/**
+			 * 获取行情请求的数据-并初始化页面 
+			 */
+			function init(param){
+				$("#exchangeNo").val(param[3]);
+				$("#commodeityNo").val(param[2]);
+				$("#contractNo").val(param[1]);
+				$("#contractSize").val(param[5]);
+				$("#lastPrice").text(param[7]);
+				$("#lastPriceNone").val(param[7]);
+				$("#miniTikeSize").val(param[6]);
+				$("#doSize").val(param[4]);
+			}
+			$(function(){
+				//提交订单
+				$(".buy").click(function(){
+					var content = "你确定要提交订单吗?";
+					alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$(this));
+				});
+				$("#allOpen").click(function(){
+					var content = "合约是否全部平仓?";
+					alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),ddoInsertAllSellingOrder);
+				});
+				$("#Open").click(function(){
+					var content = "当前合约是否平仓?";
+					alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertSellingOrder);
+				});
+				$("#kilAnorder").click(function(){
+					var content = "您是否真的要进行撤单操作?";
+					alertProtype(content,"确认撤单?",Btn.confirmedAndCancle(),doInsertCancleOrder);
+				});
+				$(".marketBuy").click(function(){
+					if(vadationIsLogin()){
+						var content = "你确定要提交订单吗?";
+						var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),buy,null,$(this));
+					}
+				});
+			});
+			function vadationIsLogin(){
+				if(username == null){
+						alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
+						return false;
+				}
+				return true;
+			}
+			function openLogin(){
+				mui.openWindow({
+					url:"../login/operateLogin.html",
+					id : "operateLogin",
+					 extras:{
+								commdityNo:$("#commodeityNo").val(),
+								backpageID:"transactionDetails"
+							}
+				});
+			}
+			/**
+			 * 下单操作 
+			 */
+			function doInsertOrder(param){
+				if(validationLastPrice()){
+					alertProtype("交易错误","提示",Btn.confirmed());
+					return;
+				}
+				var $this = param;
+				var tradeDrection = $this.attr("data-tion-buy");
+				var orderNumber = $("#orderNumber").val();
+				var orderPrice = $("#orderPrice").val();
+				var priceType = $("input[type='radio']:checked").val();
+				
+				if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
+					alertProtype("手数输入错误数量","提示",Btn.confirmed());
+					return;
+				}
+				if(priceType == 1){
+					orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),tradeDrection);
+				}
+				if(orderPrice == null || isNaN(orderNumber) || orderPrice <= 0 || orderPrice.length <= 0 ){
+					alertProtype("价格输入错误","提示",Btn.confirmed());
+					return;
+				}
+				var exchanageNo = $("#exchangeNo").val();
+				var commodeityNo = $("#commodeityNo").val();
+				var contractNo = $("#contractNo").val();
+				Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,orderPrice,0,doGetOrderRef());
+			}
+			/**
+			 * 全部平仓操作 
+			 */
+			function doInsertAllSellingOrder(){
+				var contractParam = new Array();
+				for (var i = 0 ; i < positionsIndex ; i++) {
+					//验证该平仓数据是否存在列表中
+					if($(".position-index"+i+"").html() == undefined){
+						continue;
+					}
+					var contract = positionContractCode[i];
+					contractParam[i] = contract;
+				}
+				var tradeParam = doGetTradeBasicParam(contractParam);
+				selling(tradeParam);
+			}
+			/**
+			 * 平仓操作 
+			 */
+			function doInsertSellingOrder(){
+				var positonDom = $(".position-index"+positionWholeIndex+"");
+				//验证该平仓数据是否存在列表中
+				if(positonDom.html() == undefined){
+					alertProtype("交易错误","提示",Btn.confirmed());
+					return;
+				}
+				var contractParam = new Array();
+				contractParam[0] = positionWholeContract;
+				var tradeParam = doGetTradeBasicParam(contractParam);
+				selling(tradeParam);
+			}
+			/**
+			 * 撤单确认操作 
+			 */
+			function doInsertCancleOrder(){
+				var designateDom = $(".designate-index"+designateWholeIndex+"");
+				if(designateDom.html() == undefined){
+					return;
+				}
+				var contractParam = new Array();
+				contractParam[0] = designateWholeContracts;
+				var cancleParam = doGetCancelOrderBasicParam(contractParam);
+				cancleOrder(cancleParam);
+			}
+			/**
+			 * 获取平仓的基本信息 
+			 * @param {Object} param
+			 */
+			function doGetTradeBasicParam(param){
+				var tradeParam = new Array();
+				var length = param.length;
+				for(var i = 0 ; i < length ; i++){
+					var contract = param[i];
+					var $contractCode  = $("li[contract-code-position='"+contract+"'] span[class = 'position0']").text();
+					var $drection =  $("li[contract-code-position='"+contract+"'] span[class = 'position1']").attr("data-drection");
+					var $holdNum =  $("li[contract-code-position='"+contract+"'] span[class = 'position2']").text();
+					var $openAvgPrice =  $("li[contract-code-position='"+contract+"'] span[class = 'position3']").text();
+					var $floatingProfit =  $("li[contract-code-position='"+contract+"'] span[class = 'position4']").text();
+					var $commodityNo =  $("li[contract-code-position='"+contract+"'] span[class = 'position5']").text();
+					var $contractNo =  $("li[contract-code-position='"+contract+"'] span[class = 'position6']").text();
+					var $exchangeNo =  $("li[contract-code-position='"+contract+"'] span[class = 'position7']").text();
+					var drection = 0;
+					if($drection == 0){
+						drection = 1;	
+					}
+					if(validationLastPrice()){
+						alertProtype("金额错误","提示",Btn.confirmed());
+						return;
+					}
+					var limitPirce = doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
+					var orderRef = new Date().getTime();
+					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,1,limitPirce,0,doGetOrderRef());
+					tradeParam[i] = sellingParam;
+				}
+				return tradeParam;
+			}
+			function doGetCancelOrderBasicParam(param){
+				var cancleParam = new Array();
+				var length = param.length;		
+				for(var i = 0 ; i < length ; i++){
+					var contract = param[i];
+					var $contractCode  = $("li[data-tion-designates='"+contract+"'] span[class = 'desig0']").text();
+					var $drection =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig1']").attr("data-drection");
+					var $orderPrice =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig2']").text();
+					var $orderNum =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig3']").text();
+					var $cdNum =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig4']").text();
+					var $InsertDateTime =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig5']").text();
+					var $OrderSysID =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig6']").text();
+					var $commodityNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig7']").text();
+					var $contractNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig8']").text();
+					var $exchangeNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig9']").text();
+					var $orderId =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig10']").text();
+					var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,$orderPrice);
+					cancleParam[i] = cancleOrderParam;
+				}
+				return cancleParam;
+			}
+	function buy(param){
+		var $this = param;
+		var lastPrice = $("#freshPrices").text();
+		if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)){
+			alertProtype("交易错误","提示",Btn.confirmed());
+			return;
+		}
+		var exchangeNo = $("#exchangeNo").val();
+		var commodityNo = $("#commodeityNo").val();
+		var contractNo = $("#contractNo").val();
+		var contractSize = $("#contractSize").val();
+		var miniTikeSize = $("#miniTikeSize").val();
+		var orderNum = $("#orderNum").val();
+		var drection = $this.attr("data-tion-buy");
+		var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+		var priceType = 0;
+		var tradeParam = createSellingParam(exchangeNo,commodityNo,contractNo,orderNum,drection,priceType,limitPrice,0,doGetOrderRef());
+		var param = new Array();
+		param[0] = tradeParam;
+		selling(param);
+	}
+
+			/**
+			 * 验证最新价格 
+			 */
+			function validationLastPrice(){
+				var lastPrice = $("#lastPrice").text();
+				if(lastPrice == undefined || lastPrice == null || lastPrice.length == 0 || parseFloat(lastPrice) <= 0){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		
+	</script>
+
 	</body>
 
 </html>

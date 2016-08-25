@@ -1,29 +1,124 @@
-//var href = window.location.href;
-    // 路径配置
-    mui.plusReady(function(){
+mui.plusReady(function(){
     	var Transfer=plus.webview.currentWebview();
 		var CommodityNo=document.getElementById("CommodityNo");
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+		$("#tradeTitle").text(Transfer.name[0]);
+		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
-		document.getElementById("TradingCenter").addEventListener("tap",function(){
-			var transfer = Transfer.name;
-			var transferLength = transfer.length;
-			transfer[transferLength] = document.getElementById("freshPrices").innerHTML;
-			mui.openWindow({
-				url:"trade.html",
-				id:"trade.html",
-				extras:{
-					Transfer:transfer
-			}});
-		});
-    var aa=require.config({
-        paths:{
-            'echarts' :'../../js/echarts.min (2)',
-            'echarts/chart/pie' :'../../js/echarts.min (2)',
-        }
+		var aa=require.config({
+	    paths:{
+	        'echarts' :'../../js/echarts.min (2)',
+	        'echarts/chart/pie' :'../../js/echarts.min (2)',
+	    }
     });
+	var time1;
+    var url = MarketUrl.SocketUrl;
+    var marketSocket = new WebSocket(url);
+    var setIntval = null;
+    var marketLoadParam = {}
+    
+    marketSocket.onopen = function(evt){
+       masendMessage('Login','{"UserName":"13677622344","PassWord":"a123456"}');
+    };
+    marketSocket.onclose = function(evt){
+    	if(setIntval != null)
+    		setIntval.clear();
+    };
+    marketSocket.onmessage = function(evt){
+        var data = evt.data;
+        var jsonData = JSON.parse(data);
+        var method = jsonData.Method;
+        if(method=="OnRspLogin"){
+		    var date=new Date();
+		    var exchangeNo = $("#exchangeNo").val();
+		    var commodityNo = $("#commodeityNo").val();
+		    var contractNo = $("#contractNo").val();
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+	        setIntval = setInterval(function(){
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","BeginTime":"'+time1+'","HisQuoteType":1}');
+	        },30000);
+	       masendMessage('QryCommodity','{"ExchangeNo":"'+exchangeNo+'"}');
+        }else if(method == "OnRspQryHistory"){
+            var historyParam = jsonData;
+            processingData(historyParam);
+            handleTime(historyParam);
+            handleVolumeChartData(historyParam);
+        }else if(method == "OnRtnQuote"){ 
+        	var quoteParam = jsonData;
+        	if(quoteParam.Parameters == null)return;
+        	insertDATA(quoteParam);
+        	var subscribeParam = quoteParam.Parameters;
+			var newCommdityNo = subscribeParam.CommodityNo;
+			var newContractNo = subscribeParam.ContractNo;
+			marketLoadParam[newCommdityNo] = subscribeParam;
+			//如果是当前合约与品种更新行情数据，和浮动盈亏
+			if (valiationIsPresent(newCommdityNo, newContractNo)) {
+				updateLoadWebParam(subscribeParam);
+				updateFloatProfit();
+			}
+        }else if(method == "OnRspQryCommodity"){
+        	var commoditys = jsonData.Parameters;
+        	if(commoditys.Parameters == null)return;
+        	var newCommdityNo = commoditys.CommodityNo;
+			var newContractNo = commoditys.ContractNo;
+			//如果是当前合约与品种更新乘数
+			if (valiationIsPresent(newCommdityNo, newContractNo)) {
+				$("#contractSize").val(commoditys.ContractSize);
+			}
+        }
+    };
+    marketSocket.onerror = function(evt){
+    };
+    function masendMessage(method,parameters){
+        marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+    }
+ 	
+    /**
+	 * 更新行情数据 
+	 * @param {Object} param
+	 */
+	function updateLoadWebParam(param) {
+		$("#lastPrice").text(param.LastPrice);
+		$("#sellLastPrice").text(param.AskPrice1);
+		$("#buyLastPrice").text(param.BidPrice1);
+		$("#totalVolume").text(param.TotalVolume);
+		$("#askQty").text(param.AskQty1);
+		$("#bidQty").text(param.BidQty1);
+		$("#buyBtn_P").text(param.BidPrice1);
+		$("#sellBtn_P").text(param.AskPrice1);
+	}
+    /**
+	 * 更新浮动盈亏 
+	 */
+	function updateFloatProfit() {
+		for (var i = 0; i < positionsIndex; i++) {
+			var $this = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position4']");
+			var $thisAvgPrice = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position3']");
+			var $thisHoldNum = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position2']");
+			//验证该平仓数据是否存在列表中
+			if ($this.html() == undefined) {
+				continue;
+			}
+			var floatProfit = doGetFloatingProfit(parseFloat($("#lastPrice").text()), parseFloat($thisAvgPrice.text()) , $("#contractSize").val(),$("#miniTikeSize").val(),parseInt($thisHoldNum.text()));
+			$this.text(floatProfit);
+		}
+	}
+    /**
+	 * 验证是否是当前品种和合约 
+	 * @param {Object} commodeityNo 品种
+	 * @param {Object} contractNo 合约
+	 */
+	function valiationIsPresent(commodeityNo, contractNo) {
+		if (commodeityNo == $("#commodeityNo").val() && contractNo == $("#contractNo").val()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+//var href = window.location.href;
     var rawData = [];
     var	 myChart = null;
     var timeChart=null;
@@ -73,72 +168,36 @@
         );
 		
     }
-
-    function sendMessage(method,parameters){
-        socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-    }
- 	var time1;
-    var url = "ws://192.168.0.213:9006";
-    var socket = new WebSocket(url);
-    var setIntval = null;
-    socket.onopen = function(evt){
-        sendMessage('Login','{"serName":"13677622344","PassWord":"a123456"}');
-    };
-    socket.onclose = function(evt){
-    	setIntval.clear();
-    };
-    socket.onmessage = function(evt){
-        var data = evt.data;
-        var jsonData = JSON.parse(data);
-        var method = jsonData.Method;
-        if(method=="OnRspLogin"){
-		var date=new Date();
-   sendMessage('QryHistory','{"ExchangeNo":"'+Transfer.name[3]+'","CommodityNo":"'+Transfer.name[2]+'","ContractNo":"'+Transfer.name[1]+'"}');
-   sendMessage('Subscribe','{"ExchangeNo":"'+Transfer.name[3]+'","CommodityNo":"'+Transfer.name[2]+'","ContractNo":"'+Transfer.name[1]+'"}');
-   		
-        setIntval = setInterval(function(){
-            sendMessage('QryHistory','{"ExchangeNo":"'+Transfer.name[3]+'","CommodityNo":"'+Transfer.name[2]+'","ContractNo":"'+Transfer.name[1]+'","BeginTime":"'+time1+'","HisQuoteType":1}');
-        },30000);
-        }else if(method == "OnRspQryHistory"){
-            var jsonData=JSON.parse(evt.data);
-            processingData(jsonData);
-            handleTime(jsonData);
-            handleVolumeChartData(jsonData);
-        }else if(method == "OnRtnQuote"){
-        	var DATA=JSON.parse(evt.data);
-        	insertDATA(DATA);
-        }
-    };
-    socket.onerror = function(evt){
-
-    };
+  
     var domnRange=document.getElementById("domnRange");
     var freshPrices=document.getElementById("freshPrices");
     var volumePricesNumber=document.getElementById("volumePricesNumber");
     var buyPrices=document.getElementById("buyPrices");
-    	var buyPricesNumber=document.getElementById("buyPricesNumber");
-    	var sellPrices=document.getElementById("sellPrices");
-    	var sellPricesNumber=document.getElementById("sellPricesNumber");
+    var buyPricesNumber=document.getElementById("buyPricesNumber");
+    var sellPrices=document.getElementById("sellPrices");
+    var sellPricesNumber=document.getElementById("sellPricesNumber");
     function insertDATA(DATA){
-    	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(Transfer.name[4]);
+    	var doSize = $("#doSize").val();
+    	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
-    	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(Transfer.name[4]);
+    	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
     	sellPricesNumber.innerHTML=DATA.Parameters.BidQty1;
     	volumePricesNumber.innerHTML=DATA.Parameters.LastVolume;
-    	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(Transfer.name[4]);
-    	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(Transfer.name[4])+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
+    	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(doSize);
+    	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
     }
-    var ww=1;
     function processingData(jsonData){
-    	  var lent=rawData.length;
-        var Len=jsonData.Parameters.length;    
+    		var parameters = jsonData.Parameters;
+    		if(parameters == null)return;
+    	   var lent=rawData.length;
+        	var Len=parameters.length;    
         	for(var i=0;i<Len;i++){
             var openPrice = jsonData.Parameters[i].OpenPrice;
             var closePrice = jsonData.Parameters[i].LastPrice;
             var chaPrice = closePrice - openPrice;
             time1=jsonData.Parameters[i].DateTime;
             var sgData = [jsonData.Parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",jsonData.Parameters[i].LowPrice,jsonData.Parameters[i].HighPrice,"","","-"];
-	         rawData[lent+i] = sgData;
+	         rawData[lent+i] = sgData; 
         }; 
           time1=jsonData.Parameters[Len-1].DateTimeStamp;
         var option = setOption(rawData);
@@ -487,7 +546,10 @@
       };
         return option
 }
-    
+
+		});
+	   
+	    
 //if (mui.cacheUser.){
 //				mui.openWindow({
 //				url:"trade.html",
@@ -502,15 +564,15 @@
 //			{
 //				mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"cp"}});
 //			}
-	});
+
 /**
  * 获取行情请求的数据-并初始化页面 
  */
-function init(param){
-	console.log(param);
-	$("#exchangeNo").val(param[3]);
-	$("#commodeityNo").val(param[2]);
-	$("#contractNo").val(param[1]);
-	$("#contractSize").val(param[5]);
-	$("#miniTikeSize").val(param[6]);
-}
+//function init(param){
+//	console.log(param);
+//	$("#exchangeNo").val(param[3]);
+//	$("#commodeityNo").val(param[2]);
+//	$("#contractNo").val(param[1]);
+//	$("#contractSize").val(param[5]);
+//	$("#miniTikeSize").val(param[6]);
+//}
