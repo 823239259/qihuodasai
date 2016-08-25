@@ -392,6 +392,7 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 			        		addUserFund.setPayStatus(TypeConvert.UN_PAID);
 			        		addUserFund.setTypeStatus(1);
 			        		addUserFund.setUid(wuser.getId());
+			        		addUserFund.setSysUserId(arrearsUserFund.getSysUserId());
 			        		this.save(addUserFund);
 			        		//取出余额支付欠费
 		        		}
@@ -461,6 +462,7 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 			        		addUserFund.setUid(wuser.getId());
 			        		addUserFund.setTypeStatus(1);
 			        		addUserFund.setRemark(TypeConvert.payRemark("补仓欠费", addUserFund.getMoney()));
+			        		addUserFund.setSysUserId(arrearsUserFund.getSysUserId());
 			        		this.save(addUserFund);
 			        		//取出余额支付欠费
 		        		}
@@ -716,8 +718,8 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 		StringBuffer sqlBuf = new StringBuffer(
 				  "  SELECT w.id,v.tname,u.mobile,w.uid,w.`no`,w.type,w.money,w.amount,"
 				+" w.freeze,w.lid,w.trx_id trxId,w.rid,w.ruid,w.addtime,w.uptime,w.remark,s.realname"
-				+" FROM sys_user s , w_user_fund w  LEFT JOIN w_user u ON w.uid = u.id LEFT JOIN w_user_verified v ON w.uid=v.uid" 
-				+" WHERE  1=1 AND(w.type = 3 OR w.type = 4) GROUP BY w.id ");
+				+" FROM w_user_fund w  LEFT JOIN sys_user s on w.sys_user_id=s.id   LEFT JOIN w_user u ON w.uid = u.id LEFT JOIN w_user_verified v ON w.uid=v.uid" 
+				+" WHERE  1=1 AND(w.type = 3 OR w.type = 4)");
 		if (conn != null) {
 			String mobile = TypeConvert.objToStrIsNotNull(conn.getValue("mobile"));
 			if (mobile != null) {
