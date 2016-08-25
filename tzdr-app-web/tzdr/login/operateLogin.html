@@ -77,34 +77,32 @@
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
 				});
-			});
-			var account = null;
-			var pwd = null;
-			socket.onopen = function(){
-			}
-			socket.onmessage = function(evt){
-				var dataString = evt.data;
-				var data = JSON.parse(dataString);
-				var method = data.Method;
-				var parameters = data.Parameters;
-				if (method == "OnRspLogin") {
-					var code = parameters.Code;
-					var loginMessage = parameters.Message;
-					if (code == 0) {
-						localStorage.setItem("account",account);
-						localStorage.setItem("password",pwd);
-						mui.toast("登录成功");
-						if (win.backpageID){ 
-							username = account;
-							password = pwd;
-	      					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
-	      					return;
-      					}
-					} else {
-						alert("登录失败");
-					}
-				} 
-			}
+				socket.onopen = function(){
+				}
+				socket.onmessage = function(evt){
+					var dataString = evt.data;
+					var data = JSON.parse(dataString);
+					var method = data.Method;
+					var parameters = data.Parameters;
+					if (method == "OnRspLogin") {
+						var code = parameters.Code;
+						var loginMessage = parameters.Message;
+						if (code == 0) {
+							localStorage.setItem("account",account);
+							localStorage.setItem("password",pwd);
+							mui.toast("登录成功");
+							mui.openWindow({
+								url:"../quotation/transactionDetails.html",
+								id :"transactionDetails",
+								extras:{
+									name:Transfer.name
+								}
+							})
+						} else {
+							alert("登录失败");
+						}
+					} 
+				}
 				$("#operateLogin").click(function(){
 					//if(username == null){
 						account=document.getElementById("account").value;
@@ -122,6 +120,8 @@
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
 					}*/
 				});
+			});
+			
 		</script>
 	</body>
 

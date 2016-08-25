@@ -30,6 +30,8 @@ var entrustsIndex = 0;
 var tradesIndex = 0;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
+localStorage.clear();
+alert(username); 
 socket.onopen = function() { 
 	if(username != null) 
 		Trade.doLogin(username, password);
