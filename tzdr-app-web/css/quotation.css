@@ -464,3 +464,14 @@ font-size: 14px;
 input{
 	text-align: center;
 }
+#fisrtLlist{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	color: #FFFFFF;
+}
+#fisrtLlist span{
+	display: inline-block;
+	width: 25%;
+	text-align: center;
+}

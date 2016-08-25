@@ -9,8 +9,8 @@ mui.plusReady(function(){
 		init(Transfer.name);
 		var aa=require.config({
 	    paths:{
-	        'echarts' :'../../js/echarts.min (2)',
-	        'echarts/chart/pie' :'../../js/echarts.min (2)',
+	        'echarts' :'../../js/echarts',
+	        'echarts/chart/pie' :'../../js/echarts',
 	    }
     });
 	var time1;
@@ -186,20 +186,44 @@ mui.plusReady(function(){
     	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(doSize);
     	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
     }
+    var timeNumber=0
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
     		if(parameters == null)return;
     	   var lent=rawData.length;
-        	var Len=parameters.length;    
+        	var Len=parameters.length; 
+        	var lastTime=jsonData.Parameters[Len-1].DateTimeStamp;
+        	var lastHour1=lastTime.split(" ");
+        	var lastHour=lastTime.split(" ")[1]; 
+        	var lastHourTime=lastHour.split(":")
+        	var lastHourTime1=lastHourTime[0];
+//      	var dateTimeHour=;
+			lastHourTime1=lastHourTime1-1;
+        	var str=lastHourTime1+":"+lastHourTime[1]+":"+lastHourTime[2];
+        	var str2=lastHour1[0]+" "+str;
+        	console.log(str2);
+        	var j=0;
         	for(var i=0;i<Len;i++){
-            var openPrice = jsonData.Parameters[i].OpenPrice;
-            var closePrice = jsonData.Parameters[i].LastPrice;
-            var chaPrice = closePrice - openPrice;
-            time1=jsonData.Parameters[i].DateTime;
-            var sgData = [jsonData.Parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",jsonData.Parameters[i].LowPrice,jsonData.Parameters[i].HighPrice,"","","-"];
-	         rawData[lent+i] = sgData; 
+        		if(str2<=jsonData.Parameters[i].DateTimeStamp && jsonData.Parameters[i].DateTimeStamp<=lastTime){
+        			
+        			var openPrice = jsonData.Parameters[i].OpenPrice;
+		            var closePrice = jsonData.Parameters[i].LastPrice;
+		            var chaPrice = closePrice - openPrice;
+		            time1=jsonData.Parameters[i].DateTime;
+		            var sgData = [jsonData.Parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",jsonData.Parameters[i].LowPrice,jsonData.Parameters[i].HighPrice,"","","-"];
+			         rawData[lent+j] = sgData; 
+			         j++;
+        		}
+            
         }; 
           time1=jsonData.Parameters[Len-1].DateTimeStamp;
+          console.log(rawData);
+          if(timeNumber==0){
+          	timeNumber=1;
+          }else{
+          	rawData.splice(0,1);
+          }
+          console.log(rawData.length);
         var option = setOption(rawData);
         if(myChart != null){
         	myChart.setOption(option);
