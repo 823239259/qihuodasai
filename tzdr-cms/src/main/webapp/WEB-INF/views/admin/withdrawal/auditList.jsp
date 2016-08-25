@@ -124,7 +124,7 @@
 						<th field="paymentChannelStr" width="150">网银通道</th>
 						<th field="bank" width="150">提现银行</th>
 						<th field="card" width="150">银行卡号</th>
-						<th field="province_city" width="150">开户地址</th>
+						<th field="acc_address" width="150">开户地址</th>
 						<th field="money" width="150">提现金额</th>
 						<th field="balance" width="150" formatter="balanceformatter">平台余额</th>
 						<th field="addtime" width="150">提现申请时间</th>
@@ -244,7 +244,7 @@
 						<th field="paymentChannelStr" width="150">网银通道</th>
 						<th field="bank" width="150">提现银行</th>
 						<th field="card" width="150">银行卡号</th>
-						<th field="province_city" width="150">开户地址</th>
+						<th field="acc_address" width="150">开户地址</th>
 						<th field="money" width="150">提现金额</th>
 						<th field="balance" width="150" >平台余额</th>
 						<th field="addtime" width="150">提现申请时间</th>
@@ -486,7 +486,7 @@
 							<th field="tname" width="150">客户姓名</th>
 							<th field="bank" width="150">提现银行</th>
 							<th field="card" width="150">银行卡号</th>
-							<th field="province_city" width="150">开户地址</th>
+							<th field="acc_address" width="150">开户地址</th>
 							<th field="money" width="150"  sortable="true">提现金额</th>
 							<th field="balance" width="100"  formatter="balanceformatter">平台余额</th>
 							<th field="exportAddtime" width="200">提现申请时间</th>
@@ -610,7 +610,7 @@
 								<th field="tname" width="150">客户姓名</th>
 								<th field="bank" width="150">提现银行</th>
 								<th field="card" width="150">银行卡号</th>
-								<th field="province_city" width="150">开户地址</th>
+								<th field="acc_address" width="150">开户地址</th>
 								<th field="money" width="150"  sortable="true">提现金额</th>
 								<th field="exportAddtime" width="200">提现申请时间</th>
 								<th field="auditStatusValue" width="150" sortable="true" >审核状态</th>

@@ -181,6 +181,7 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 		if (connVo.isNotExcel(pageInfo.getPageResults(), response,"线下待审核列表.xls")) {
 			return new EasyUiPageData(pageInfo);
 		}
+		
 		return new EasyUiPageData(pageInfo);
 	}
 	

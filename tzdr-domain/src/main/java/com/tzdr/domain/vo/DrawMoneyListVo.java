@@ -65,7 +65,7 @@ public class DrawMoneyListVo implements Serializable {
 	 * 开户地址
 	 */
 	@AllowExcel(name = "开户地址")
-	private String province_city;
+	private String acc_address;
 
 	
 	/**
@@ -390,13 +390,15 @@ public class DrawMoneyListVo implements Serializable {
 		this.paymentChannelStr = paymentChannelStr;
 	}
 
-	public String getProvince_city() {
-		return province_city;
+	public String getAcc_address() {
+		return acc_address;
 	}
 
-	public void setProvinceCity(String province_city) {
-		this.province_city = province_city;
+	public void setAcc_address(String acc_address) {
+		this.acc_address = acc_address;
 	}
+
+
 
 
 
