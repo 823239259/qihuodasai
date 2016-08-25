@@ -180,6 +180,6 @@ function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,o
  * 连接交易
  */
 var socket = new WebSocket(TradeUrl.SocketUrl);
-var username = null;
+var username = localStorage.getItem("account");
 
-var password = null;
+var password = localStorage.getItem("password");

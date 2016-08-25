@@ -77,42 +77,49 @@
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
 				});
-				socket.onopen = function(){
-				}
-				socket.onmessage = function(evt){
-					var dataString = evt.data;
-					var data = JSON.parse(dataString);
-					var method = data.Method;
-					var parameters = data.Parameters;
-					if (method == "OnRspLogin") {
-						var code = parameters.Code;
-						var loginMessage = parameters.Message;
-						if (code == 0) {
-							mui.cacheUser.setCach("account",account);
-							mui.cacheUser.setCach("password",pwd);
-							alert("登录成功");
-						} else {
-							alert("登录失败");
-						}
-					} 
-				}
-				var account = null;
-				var pwd = null;
-				$("#operateLogin").click(function(){
-					var account=document.getElementById("account").value;
-					var pwd=$.base64.encode(document.getElementById("password").value);
-					if(mui.isnull(account)){
-		    			mui.toast("请输入账号");
-		    			return;
-						};
-					if(mui.isnull(pwd)){
-		    			mui.toast("请输入密码");
-		    			return;
-					}
-					Trade.doLogin(account,pwd); 
-				});
 			});
-			
+			var account = null;
+			var pwd = null;
+			socket.onopen = function(){
+			}
+			socket.onmessage = function(evt){
+				var dataString = evt.data;
+				var data = JSON.parse(dataString);
+				var method = data.Method;
+				var parameters = data.Parameters;
+				if (method == "OnRspLogin") {
+					var code = parameters.Code;
+					var loginMessage = parameters.Message;
+					if (code == 0) {
+						localStorage.setItem("account",account);
+						localStorage.setItem("password",pwd);
+						mui.toast("登录成功");
+						mui.openWindow({
+							url:"../quotation/transactionDetails.html",
+							id :"transactionDetails"
+						})
+					} else {
+						alert("登录失败");
+					}
+				} 
+			}
+				$("#operateLogin").click(function(){
+					//if(username == null){
+						account=document.getElementById("account").value;
+						pwd=$.base64.encode(document.getElementById("password").value);
+						if(mui.isnull(account)){
+			    			mui.toast("请输入账号");
+			    			return;
+							};
+						if(mui.isnull(pwd)){
+			    			mui.toast("请输入密码");
+			    			return;
+						}
+						Trade.doLogin(account,pwd); 
+					/*}else{
+						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
+					}*/
+				});
 		</script>
 	</body>
 
