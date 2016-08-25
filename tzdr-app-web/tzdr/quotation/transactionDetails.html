@@ -151,11 +151,11 @@
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 				});
 				init(Transfer.name);
-				username = mui.cacheUser.get("account");
-				password = mui.cacheUser.get("password");
+				cachTranFers(Transfer.name);
 			});
 		</script>
 		<script>
+			var tranferParam = null ;
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
@@ -169,23 +169,34 @@
 				$("#miniTikeSize").val(param[6]);
 				$("#doSize").val(param[4]);
 			}
+			function cachTranFers(param){
+				tranferParam = param;
+			}
 			$(function(){
 				//提交订单
 				$(".buy").click(function(){
-					var content = "你确定要提交订单吗?";
-					alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$(this));
+					if(vadationIsLogin()){
+						var content = "你确定要提交订单吗?";
+						alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$(this));
+					}
 				});
 				$("#allOpen").click(function(){
-					var content = "合约是否全部平仓?";
-					alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),ddoInsertAllSellingOrder);
+					if(vadationIsLogin()){
+						var content = "合约是否全部平仓?";
+						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),ddoInsertAllSellingOrder);
+					}
 				});
 				$("#Open").click(function(){
-					var content = "当前合约是否平仓?";
-					alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertSellingOrder);
+					if(vadationIsLogin()){
+						var content = "当前合约是否平仓?";
+						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertSellingOrder);
+					}
 				});
 				$("#kilAnorder").click(function(){
-					var content = "您是否真的要进行撤单操作?";
-					alertProtype(content,"确认撤单?",Btn.confirmedAndCancle(),doInsertCancleOrder);
+					if(vadationIsLogin()){
+						var content = "您是否真的要进行撤单操作?";
+						alertProtype(content,"确认撤单?",Btn.confirmedAndCancle(),doInsertCancleOrder);
+					}
 				});
 				$(".marketBuy").click(function(){
 					if(vadationIsLogin()){
@@ -207,7 +218,7 @@
 					id : "operateLogin",
 					 extras:{
 								commdityNo:$("#commodeityNo").val(),
-								backpageID:"transactionDetails"
+								name : tranferParam
 							}
 				});
 			}
