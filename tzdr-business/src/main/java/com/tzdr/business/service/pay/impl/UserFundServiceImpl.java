@@ -714,10 +714,10 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 	public PageInfo<HandUserFundVo> queryHandlerRecharge(PageInfo<HandUserFundVo> page,ConnditionVo conn) {
 		List<Object> params = new ArrayList<Object>();
 		StringBuffer sqlBuf = new StringBuffer(
-				  " SELECT w.id,v.tname,u.mobile,w.uid,w.`no`,w.type,w.money,w.amount,"
-				+ " w.freeze,w.lid,w.trx_id trxId,w.rid,w.ruid,w.addtime,w.uptime,w.remark "
-				+ " FROM w_user_fund w LEFT JOIN w_user u ON w.uid = u.id LEFT JOIN w_user_verified v ON w.uid=v.uid "
-				+ " WHERE 1=1 AND(w.type = 3 OR w.type = 4) ");
+				  "  SELECT w.id,v.tname,u.mobile,w.uid,w.`no`,w.type,w.money,w.amount,"
+				+" w.freeze,w.lid,w.trx_id trxId,w.rid,w.ruid,w.addtime,w.uptime,w.remark,s.realname"
+				+" FROM sys_user s , w_user_fund w  LEFT JOIN w_user u ON w.uid = u.id LEFT JOIN w_user_verified v ON w.uid=v.uid" 
+				+" WHERE  1=1 AND(w.type = 3 OR w.type = 4) GROUP BY w.id ");
 		if (conn != null) {
 			String mobile = TypeConvert.objToStrIsNotNull(conn.getValue("mobile"));
 			if (mobile != null) {

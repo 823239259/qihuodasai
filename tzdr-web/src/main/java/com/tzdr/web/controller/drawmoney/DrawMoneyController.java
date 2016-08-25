@@ -610,8 +610,12 @@ public class DrawMoneyController {
 		String bankname = request.getParameter("bankname");
 		String card = request.getParameter("card");
 		String agincard = request.getParameter("agincard");
+		String prov = request.getParameter("prov");// 省
+		String city = request.getParameter("city");// 市
+		String address = request.getParameter("address");// 具体地址
+		String provinceCity=StringUtil.join(prov,city);
 		JsonResult jsonResult = new JsonResult(false);
-
+	
 		if (StringUtil.isNotBlank(card)) {
 			if (card.equals(agincard)) {
 				UserBank ubank = drawMoneyService.findUsercardbycard(card, userSessionBean.getId());
@@ -619,7 +623,7 @@ public class DrawMoneyController {
 				if (ubank == null) {
 					String path = this.getBankpathbybankname(bankname);
 
-					UserBank bank = drawMoneyService.saveCard(user, bankname, card, path);
+					UserBank bank = drawMoneyService.saveCard(user, bankname, card, path,address,provinceCity);
 					jsonResult.setSuccess(true);
 					jsonResult.setObj(bank);
 					jsonResult.setMessage(StringCodeUtils.buildBank(bank.getCard()));

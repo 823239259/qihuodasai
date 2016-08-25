@@ -1,18 +1,23 @@
 //var href = window.location.href;
     // 路径配置
     mui.plusReady(function(){
-    	var bb=plus.webview.currentWebview();
-				var CommodityNo=document.getElementById("CommodityNo");
-				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
-				mainTitleFirst.innerHTML=bb.name[0];
-				CommodityNo.innerHTML=bb.name[2]+bb.name[1];
-//				console.log(bb.name[3])
-				document.getElementById("TradingCenter").addEventListener("tap",function(){
-					mui.openWindow({
-						url:"trade.html",
-						id:"trade.html",
-					});
-				});
+    	var Transfer=plus.webview.currentWebview();
+		var CommodityNo=document.getElementById("CommodityNo");
+		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+		mainTitleFirst.innerHTML=Transfer.name[0];
+		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+		init(Transfer.name);
+		document.getElementById("TradingCenter").addEventListener("tap",function(){
+			var transfer = Transfer.name;
+			var transferLength = transfer.length;
+			transfer[transferLength] = document.getElementById("freshPrices").innerHTML;
+			mui.openWindow({
+				url:"trade.html",
+				id:"trade.html",
+				extras:{
+					Transfer:transfer
+			}});
+		});
     var aa=require.config({
         paths:{
             'echarts' :'../../js/echarts.min (2)',
@@ -88,11 +93,11 @@
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
 		var date=new Date();
-   sendMessage('QryHistory','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'"}');
-   sendMessage('Subscribe','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'"}');
+   sendMessage('QryHistory','{"ExchangeNo":"'+Transfer.name[3]+'","CommodityNo":"'+Transfer.name[2]+'","ContractNo":"'+Transfer.name[1]+'"}');
+   sendMessage('Subscribe','{"ExchangeNo":"'+Transfer.name[3]+'","CommodityNo":"'+Transfer.name[2]+'","ContractNo":"'+Transfer.name[1]+'"}');
    		
         setIntval = setInterval(function(){
-            sendMessage('QryHistory','{"ExchangeNo":"'+bb.name[3]+'","CommodityNo":"'+bb.name[2]+'","ContractNo":"'+bb.name[1]+'","BeginTime":"'+time1+'","HisQuoteType":1}');
+            sendMessage('QryHistory','{"ExchangeNo":"'+Transfer.name[3]+'","CommodityNo":"'+Transfer.name[2]+'","ContractNo":"'+Transfer.name[1]+'","BeginTime":"'+time1+'","HisQuoteType":1}');
         },30000);
         }else if(method == "OnRspQryHistory"){
             var jsonData=JSON.parse(evt.data);
@@ -115,13 +120,13 @@
     	var sellPrices=document.getElementById("sellPrices");
     	var sellPricesNumber=document.getElementById("sellPricesNumber");
     function insertDATA(DATA){
-    	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(bb.name[4]);
+    	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(Transfer.name[4]);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
-    	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(bb.name[4]);
+    	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(Transfer.name[4]);
     	sellPricesNumber.innerHTML=DATA.Parameters.BidQty1;
     	volumePricesNumber.innerHTML=DATA.Parameters.LastVolume;
-    	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(bb.name[4]);
-    	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(bb.name[4])+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
+    	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(Transfer.name[4]);
+    	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(Transfer.name[4])+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
     }
     var ww=1;
     function processingData(jsonData){
@@ -158,7 +163,7 @@
             return [+item[1], +item[2], +item[5], +item[6]];
         });
         var option = {
-    backgroundColor: '#21202D',
+    backgroundColor: '#2B2B2B',
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -259,7 +264,7 @@
     function setOption1(){
         var  data1=timeData;
        var  option = {
-       	backgroundColor: '#21202D',
+       	backgroundColor: '#2B2B2B',
            tooltip : {
                show: true,
                trigger: 'axis',
@@ -366,7 +371,7 @@
     function volumeChartSetOption(data) {
         var  dataVolume=volumeChartData;
       var  option = {
-      	backgroundColor: '#21202D',
+      	backgroundColor: '#2B2B2B',
           tooltip: {
               trigger: 'axis'
           },
@@ -498,3 +503,14 @@
 //				mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"cp"}});
 //			}
 	});
+/**
+ * 获取行情请求的数据-并初始化页面 
+ */
+function init(param){
+	console.log(param);
+	$("#exchangeNo").val(param[3]);
+	$("#commodeityNo").val(param[2]);
+	$("#contractNo").val(param[1]);
+	$("#contractSize").val(param[5]);
+	$("#miniTikeSize").val(param[6]);
+}

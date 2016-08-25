@@ -199,6 +199,10 @@ public class UserWithDrawController {
 		String uid =AuthUtils.getCacheUser(request).getUid();
 		String card = bankRequest.getCard();
 		String bank = bankRequest.getBank();
+		String prov = request.getParameter("prov");// 省
+		String city = request.getParameter("city");// 市
+		String address = request.getParameter("address");// 具体地址
+		String provinceCity=StringUtil.join(prov,city);
 		if (StringUtil.isBlank(card) || StringUtil.isBlank(uid)|| StringUtil.isBlank(bank)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.error.");
 		}
@@ -220,7 +224,7 @@ public class UserWithDrawController {
 		}
 		
 		String path=RequestUtils.getBankpathbybankname(bank);
-		drawMoneyService.saveCard(user,bank,card,path);
+		drawMoneyService.saveCard(user,bank,card,path,address,provinceCity);
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"add.success.");
 

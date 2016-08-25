@@ -870,7 +870,8 @@
 			"fonts/mui.ttf",
 			"images/guide4.png",
 			"images/guide2.png",
-			"images/guide3.png"
+			"images/guide3.png",
+			"main.html"
 		],
 		"refer": [
 			"main.html"
@@ -907,7 +908,12 @@
 			"css/mui.min.css",
 			"css/quotation.css",
 			"js/echarts.min (2).js",
-			"js/jquery-1.11.3.js"
+			"js/jquery-1.11.3.js",
+			"js/util.js",
+			"js/trade.data.model.js",
+			"js/jquery.base64.js",
+			"js/market.trade.js",
+			"js/trade.send.js"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html"

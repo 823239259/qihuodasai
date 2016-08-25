@@ -260,32 +260,76 @@ font-size: 14px;
 	background-color: #FFFFFF;
 	margin-right: 15px;
 }.buyBtnPrices{
-	border-bottom: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
 }
 .listStyle {
 	background-color: #2B2B2B;
 	border:none;
-	/*width: 100%;*/
+	width: 100%;
+	overflow-x: scroll;
 	padding: 0px;
 }
-.listStyle  .mui-navigate-right{
+#item2,#item1,#item3,#item4{
+	text-align: center;
+}
+.listStyle li{
+	height:40px;
+	text-align: left;
+	border-bottom: 1px solid  #454545;
+	line-height: 40px;
+} 
+.listStyle li  a{
+	height:40px;
+	width: 100%;
+	display: inline-block;
+	line-height: 40px;
+	color:#CCCCCC;
+	font-size: 12px;
+	
+}
+.listStyle li a span{
+	text-align: center;
+	display: inline-block;
+	width: 70px;
+	height:40px;
+	color:#CCCCCC;
+
+}
+/*.listStyle li a span:nth-last-child(1){
+	width: 120px;
+}*/
+/*.listStyle  .mui-navigate-right{
+	display: inline-block;
+	width: 100%;
+	height:40px;
 	color:#999999;
 }
 .listStyle li{
+	height:40px;
 	border-bottom: 1px solid  #454545;
+}
+.fisrtLlist  span{
+	display:  inline-block;
+	width: 25%;
 }
 .listStyle .mui-navigate-right span{
 	display: inline-block;
 	height:40px;;
 	width: 120px;
 	padding:15px 0px;
-	line-height: auto;
+	line-height: 10px;
 	text-align: center;
 	font-size: 12px;
 	word-break: normal;
 	color:#999999;
 	width: 120px;
 }
+.listStyle  .mui-navigate-right p{
+	height:40px;
+	padding:0px;
+	line-height: 40px;
+	width: 100%;
+}*/
 .mui-navigate-right:after, .mui-push-right:after{
 	content:"";
 }
@@ -297,16 +341,17 @@ font-size: 14px;
 	border:none;
 	margin-top: 30px;
 }
-#fisrtLi .mui-navigate-right span{
+/*.fisrtLi .mui-navigate-right span{
 	display: inline-block;
-	height:30px;;
+	height:40px;;
 	width: 120px;
-	line-height: 30px;
+	line-height: 10px;
 	text-align: center;
 	font-size: 12px;
 	word-break: normal;
 	color:#FFFFFF;
-}
+}*/
+
 #allOpen,#Open{
 	margin:0px 10px;
 	background-color:#cccccc;
@@ -314,12 +359,12 @@ font-size: 14px;
 #Entrust{
 	width: 100%;
 }
-#Entrust .mui-navigate-right span{
+/*#Entrust .mui-navigate-right span{
 	width: 120px;
 }
 #Deal .mui-navigate-right span{
 	width: 120px;
-}
+}*/
 #sliderProgressBarQuotation{
 	background-color: #fcc900;
 }
@@ -361,20 +406,6 @@ font-size: 14px;
 .link-area a span{
 	color:#FFCC33;
 }
-#fisrtLlist{
-	color:#FFFFFF;
-	height:40px;
-	line-height: 40px;
-	font-size: 14px;
-	width: 100%;
-	border:1px solid  #454545;
-	text-align: center;
-}
-#fisrtLlist  span{
-	display:  inline-block;
-	width: 25%;
-}
-
 .productList span,.productList p{
 	color:#FFFFFF;
 }
@@ -419,4 +450,28 @@ font-size: 14px;
 	width: 80%;
 	height:20px;
 	background-color: #16a951;
+}
+/*.liContent span {
+	padding:0px 0px 15px 0px;
+}*/
+.dateTimeL{
+		width: 115px !important;
+}
+.PositionLi{
+	width: 410px;
+}
+.PositionLi a{
+	width: 410px;
+}
+.Guadan{
+	width:480px ;
+}
+.Guadan  a{
+	width:480px ;
+}
+.EntrustOreder{
+	width: 650px;
+}
+.EntrustOreder a{
+	width: 650px;
 }

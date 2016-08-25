@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -39,11 +38,11 @@
 				</div>
 			</div>
 				<form id="buyFuture">
-					<span><input type="radio" checked name="prices" value="1" class="radioChoice"><label>市价</label></span><span><input type="radio" class="radioChoice" value="0" name="prices"><label>现价</label></span>
-					<div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" placeholder="1"></div><div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" placeholder="市价"></div>
+					<span><input type="radio" checked name="prices" value="1" class="radioChoice"><label>快手板</label></span><span><input type="radio" class="radioChoice" value="0" name="prices"><label>限价板</label></span>
+					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" placeholder="输入价格"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" placeholder="输入手数"></div>
 					<div class="buyBtn">
-					<button type="button" class="mui-btn mui-col-xs-5 buy" id = "buy" data-tion-buy = "0" ><p id = "buyBtn_P" class="buyBtnPrices" >0.00</p><p>买</p></button>
-					<button type="button" class="mui-btn mui-col-xs-5 buy" id = "sell" data-tion-buy = "1"><p id = "sellBtn_P" class="buyBtnPrices" >0.00</p><p >卖</p></button>
+					<button type="button" class="mui-btn mui-col-xs-5 buy" id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class="buyBtnPrices" >0.00</p></button>
+					<button type="button" class="mui-btn mui-col-xs-5 buy" id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class="buyBtnPrices" >0.00</p></button>
 					</div>
 				</form>
 				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -61,33 +60,27 @@
 			</a>
 			</div>
 			<div>
-				<div id="item1" class="mui-control-content mui-active" style="width: 100%; overflow-x: scroll;" >
-						<ul id="positionList" class="listStyle">
-							<li id="fisrtLi" style="width: 720px;"><a class="mui-navigate-right" ><p ><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span>浮动盈</span></p></a></li>
-							<!--<li style="width: 720px;">
-								<a class="mui-navigate-right" >
-									<p><span>多</span><span>123</span><span>123</span><span>1</span><span>2</span></p>
-								</a>
-							</li>-->
+				<div id="item1" class="mui-control-content mui-active" >
+						<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
+							<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeL">浮动盈利</span></a></li>
 						</ul>
-						<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
-						<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
+					<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
+					<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
 				</div>
-				<div id="item2" class="mui-control-content" style="width: 100%; overflow-x: scroll;">
-							<ul  id="postersOrder" class="listStyle">
-							<li id="fisrtLi" style="width: 720px;"><a class="mui-navigate-right" ><p ><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span>成交时间</span></p></a></li>
-							<!--<li style="width: 720px;"><a class="mui-navigate-right" ><p ><span>美原油09</span><span>买</span><span>123</span><span>1</span><span>2</span><span>2016.08.08 18:03:11</span></p></a></li>-->
-						</ul>
+				<div id="item2" class="mui-control-content">
+								<ul  id="postersOrder" class="listStyle" style="height: 180px; width: 100%;" >
+										<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">成交时间</span></a></li>
+								</ul>
 						<button type="button" class="mui-btn mui-col-xs-10" id="kilAnorder">撤单</button>
 				</div>
-				<div id="item3" class="mui-control-content" style="width: 100%; overflow-x: scroll;">
-						<ul  id="Entrust" class="listStyle">
-							<li id="fisrtLi" style="width: 960px;"><a class="mui-navigate-right" ><p ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span>下单时间</span></p></a></li>
+				<div id="item3" class="mui-control-content" style="width: 100%;">
+						<ul  id="Entrust" class="listStyle" style="height: 180px;" >
+							<li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
 						</ul>
 				</div>
-				<div id="item4" class="mui-control-content" style="width: 100%; overflow-x: scroll;">
-						<ul  id="Deal" class="listStyle">
-							<li id="fisrtLi" style="width: 600px;"><a class="mui-navigate-right" ><p ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span>成交时间</span></p></a></li>
+				<div id="item4" class="mui-control-content" >
+						<ul  id="Deal" class="listStyle" style="height: 180px;">
+							<li class="PositionLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
 							<!--<li style="width: 600px;"><a class="mui-navigate-right" ><p><span>美原油09</span><span>买</span><span>1</span><span>2</span><span>2016.08.08 18:03:11</span></p></a></li>-->
 						</ul>
 				</div>
@@ -98,99 +91,134 @@
 				<input type="text" value="CL" id = "commodeityNo"/>
 				<input type="text" value="1610" id = "contractNo"/>
 				<input type="text" value = "0.01" id = "contractSize" />
+				<input type="text" value = "0.00" id= "miniTikeSize"/>
 			</div>
 		</div>
 		<script type="text/javascript">
 			mui.init({
-				swipeBack:true //启用右滑关闭功能
+				swipeBack:false //启用右滑关闭功能
 			});
 			(function($) {
 				$('#scroll').scroll({
+					scrollY: true,
+					scrollX: true,
 					indicators: true //是否显示滚动条
 				});
-			})(mui);
+			})(mui); 
+			mui.plusReady(function(){
+				var TransferValue=plus.webview.currentWebview();
+				init(TransferValue.Transfer);
+			});
 		</script>
 		<script>
+			
+//			var btnArray = ['取消', '确认'];
+//			var alertTitle="标题";
+//			var alertContent="内容"
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
-			function init(){
-				$("#exchangeNo").val(getUrlParam("exchangeNo"));
-				$("#commodeityNo").val(getUrlParam("commodeityNo"));
-				$("#contractNo").val(getUrlParam("contractNo"));
-				$("#contractSize").val(getUrlParam("contractSize"));
-				$("#lastPrice").text(getUrlParam("lastPrice"));
+			function init(param){
+				$("#exchangeNo").val(param[3]);
+				$("#commodeityNo").val(param[2]);
+				$("#contractNo").val(param[1]);
+				$("#contractSize").val(param[5]);
+				$("#lastPrice").text(param[7]);
+				$("#lastPriceNone").val(param[7]);
+				$("#miniTikeSize").val(param[6]);
 			}
 			$(function(){
-				//init();
 				//提交订单
 				$(".buy").click(function(){
-					if(validationLastPrice()){
-						alert("金额错误");
-						return;
-					}
-					var $this = $(this);
-					var tradeDrection = $this.attr("data-tion-buy");
-					var orderNumber = $("#orderNumber").val();
-					var orderPrice = $("#orderPrice").val();
-					var priceType = $("input[type='radio']:checked").val();
-					if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
-						alert("手数输入错误数量");
-						return;
-					}
-					if(priceType == 1){
-						orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#contractSize").val(),tradeDrection);
-					}
-					if(orderPrice == null || isNaN(orderNumber) || orderPrice <= 0 || orderPrice.length <= 0 ){
-						alert("价格输入错误");
-						return;
-					}
-					var isFlag = confirm("你确定要提交订单吗");
-					if(isFlag){
-						var exchanageNo = $("#exchangeNo").val();
-						var commodeityNo = $("#commodeityNo").val();
-						var contractNo = $("#contractNo").val();
-						
-						Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,orderPrice,5,doGetOrderRef());
-					}
+					var content = "你确定要提交订单吗?";
+					alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder);
 				});
 				$("#allOpen").click(function(){
-					var contractParam = new Array();
-					for (var i = 0 ; i < positionsIndex ; i++) {
-						//验证该平仓数据是否存在列表中
-						if($(".position-index"+i+"").html() == undefined){
-							continue;
-						}
-						var contract = positionContractCode[i];
-						contractParam[i] = contract;
-					}
-					var tradeParam = doGetTradeBasicParam(contractParam);
-					selling(tradeParam);
+					var content = "合约是否全部平仓?";
+					alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),ddoInsertAllSellingOrder);
 				});
 				$("#Open").click(function(){
-					var positonDom = $(".position-index"+positionWholeIndex+"");
-					//验证该平仓数据是否存在列表中
-					if(positonDom.html() == undefined){
-						alert("交易错误");
-						return;
-					}
-					var contractParam = new Array();
-					contractParam[0] = positionWholeContract;
-					var tradeParam = doGetTradeBasicParam(contractParam);
-					selling(tradeParam);
+					var content = "当前合约是否平仓?";
+					alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertSellingOrder);
 				});
 				$("#kilAnorder").click(function(){
-					var designateDom = $(".designate-index"+designateWholeIndex+"");
-					if(designateDom.html() == undefined){
-						alert("交易错误");
-						return;
-					}
-					var contractParam = new Array();
-					contractParam[0] = designateWholeContracts;
-					var cancleParam = doGetCancelOrderBasicParam(contractParam);
-					cancleOrder(cancleParam);
+					var content = "您是否真的要进行撤单操作?";
+					alertProtype(content,"确认撤单?",Btn.confirmedAndCancle(),doInsertCancleOrder);
 				});
 			});
+			/**
+			 * 下单操作 
+			 */
+			function doInsertOrder(){
+				if(validationLastPrice()){
+					alertProtype("金额错误","提示",Btn.confirmed());
+					return;
+				}
+				var $this = $(this);
+				var tradeDrection = $this.attr("data-tion-buy");
+				var orderNumber = $("#orderNumber").val();
+				var orderPrice = $("#orderPrice").val();
+				var priceType = $("input[type='radio']:checked").val();
+				if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
+					alertProtype("手数输入错误数量","提示",Btn.confirmed());
+					return;
+				}
+				if(priceType == 1){
+					orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#contractSize").val(),tradeDrection);
+				}
+				if(orderPrice == null || isNaN(orderNumber) || orderPrice <= 0 || orderPrice.length <= 0 ){
+					alertProtype("价格输入错误","提示",Btn.confirmed());
+					return;
+				}
+				var exchanageNo = $("#exchangeNo").val();
+				var commodeityNo = $("#commodeityNo").val();
+				var contractNo = $("#contractNo").val();
+				Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,orderPrice,0,doGetOrderRef());
+			}
+			/**
+			 * 全部平仓操作 
+			 */
+			function doInsertAllSellingOrder(){
+				var contractParam = new Array();
+				for (var i = 0 ; i < positionsIndex ; i++) {
+					//验证该平仓数据是否存在列表中
+					if($(".position-index"+i+"").html() == undefined){
+						continue;
+					}
+					var contract = positionContractCode[i];
+					contractParam[i] = contract;
+				}
+				var tradeParam = doGetTradeBasicParam(contractParam);
+				selling(tradeParam);
+			}
+			/**
+			 * 平仓操作 
+			 */
+			function doInsertSellingOrder(){
+				var positonDom = $(".position-index"+positionWholeIndex+"");
+				//验证该平仓数据是否存在列表中
+				if(positonDom.html() == undefined){
+					alertProtype("交易错误","提示",Btn.confirmed());
+					return;
+				}
+				var contractParam = new Array();
+				contractParam[0] = positionWholeContract;
+				var tradeParam = doGetTradeBasicParam(contractParam);
+				selling(tradeParam);
+			}
+			/**
+			 * 撤单确认操作 
+			 */
+			function doInsertCancleOrder(){
+				var designateDom = $(".designate-index"+designateWholeIndex+"");
+				if(designateDom.html() == undefined){
+					return;
+				}
+				var contractParam = new Array();
+				contractParam[0] = designateWholeContracts;
+				var cancleParam = doGetCancelOrderBasicParam(contractParam);
+				cancleOrder(cancleParam);
+			}
 			/**
 			 * 获取平仓的基本信息 
 			 * @param {Object} param
@@ -213,10 +241,10 @@
 						drection = 1;	
 					}
 					if(validationLastPrice()){
-						alert("金额错误");
+						alertProtype("金额错误","提示",Btn.confirmed());
 						return;
 					}
-					var limitPirce = doGetFloatingProfit(parseFloat($("#lastPrice").text()),$("#contractSize").val(),drection);
+					var limitPirce = doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
 					var orderRef = new Date().getTime();
 					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,1,limitPirce,0,doGetOrderRef());
 					tradeParam[i] = sellingParam;
@@ -243,12 +271,6 @@
 					cancleParam[i] = cancleOrderParam;
 				}
 				return cancleParam;
-			}
-			/**
-			  * 获取浮动盈亏 
-			  */
-			function doGetFloatingProfit(lastPrice,miniTikeSize,drection){
-				return doGetMarketPrice(lastPrice,miniTikeSize,drection);
 			}
 			/**
 			 * 验证最新价格 

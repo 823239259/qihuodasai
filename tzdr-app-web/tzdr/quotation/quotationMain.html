@@ -155,33 +155,32 @@
   			tzdr.init.initButtomListener(true);
 			mui.init();
 			mui.plusReady(function(){
-				
- 			
-			
+				//链接socket;
 				var url = "ws://192.168.0.213:9006";
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 					}
-					
-					
 					socket.onopen = function(evt){
 					    var user="13677622344";
 					    var pwd="a123456";
 					    socket.send('{"Method":"Login","Parameters":{"UserName":"' + user +'","PassWord":"' + pwd +'"}}');
-					
 					};
 					var CommodityName=[];
 					var CommodityNo1=[];
 					var CommodityNo2=[];
 					var DotSize=[];
-					var ExchangeNo=[]
+					var ExchangeNo=[];
+					var MiniTikeSize=[];
+					var ContractSize = [];
 					var product={
 					    CommodityName:CommodityName,
 					    CommodityNo1:CommodityNo1,
 					    CommodityNo2:CommodityNo2,
 					    DotSize:DotSize,
 					    ExchangeNo:ExchangeNo,
+					    MiniTikeSize:MiniTikeSize,
+					    ContractSize:ContractSize
 					}
 					socket.onclose = function(evt){
 					};
@@ -189,10 +188,8 @@
 					    var data = evt.data;
 					    var jsonData = JSON.parse(data);
 					    var method = jsonData.Method;
-					
 					    if(method=="OnRspLogin"){
 					    	  sendMessage('QryCommodity',null)
-//					        socket.send('{"Method":"QryCommodity","Parameters":""}');
 					    }else if(method == "OnRspQryCommodity"){
 					        var commoditys = jsonData.Parameters;
 					        var size = commoditys.length;
@@ -203,20 +200,18 @@
 					            product.CommodityNo2[i]=commoditys[i].CommodityNo;
 					           	product.DotSize[i]=commoditys[i].DotSize;
 					           	product.ExchangeNo[i]=commoditys[i].ExchangeNo;
+					           	product.MiniTikeSize[i]=commoditys[i].MiniTikeSize;
+					            product.ContractSize[i]=commoditys[i].ContractSize;
 					            socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 					        }
 					    }else if(method == "OnRspQryHistory"){
 					        var jsonData=JSON.parse(evt.data);
 					    }else if(method == "OnRtnQuote"){	
-					    	
 					         var MoreData=JSON.parse(evt.data);
-//					         console.log(JSON.stringify(evt.data));
 					        	insertData(MoreData);
-
 					    }
 					};
 					socket.onerror = function(evt){
-					
 					};
 					setTimeout(function(){
 						AddTo()
@@ -236,8 +231,7 @@
     				};
     				function ManufacturingData(i){
     					var data=[];
-    					console.log(JSON.stringify(product));
-    					return data=[product.CommodityName[i],product.CommodityNo1[i],product.CommodityNo2[i],product.ExchangeNo[i],product.DotSize[i]];
+    					return data=[product.CommodityName[i],product.CommodityNo1[i],product.CommodityNo2[i],product.ExchangeNo[i],product.DotSize[i],product.ContractSize[i],product.MiniTikeSize[i]];
     				};
     				var data0=new ManufacturingData(0);
     				var data1=new ManufacturingData(1);
@@ -253,7 +247,6 @@
     				addListener();
     				function addListener(){
     						pageOpen[0].addEventListener("tap",function(){
-    							 plus.storage.setItem("productIF",data0)
 								mui.openWindow({
 									url:"transactionDetails.html",
 									id:"transactionDetails.html",
@@ -352,38 +345,6 @@
 			    var LastVolume=document.getElementsByClassName("LastVolume");
 			    var ChangeRate=document.getElementsByClassName("ChangeRate");
 			    var LastPrice=document.getElementsByClassName("QLastPrice")
-//			   	for(var i=0;i<productName.length;i++){
-//			   		productName[i].innerText=product.CommodityName[i];
-//			   		CommodityNo[i].innerText=product.CommodityNo2[i]+product.CommodityNo1[i];
-//			   	}
-//			   console.log(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice))
-//			   	if(MoreData.Parameters.CommodityNo=="CL"){
-//			   		LastVolume[0].innerText=MoreData.Parameters.QLastVolume;
-////			   		for(var j=0;j<product.CommodityName.length;j++){
-//////			   			if(MoreData.Parameters.CommodityNo==product.CommodityNo2[j]){
-//////			   			};
-////			   			
-////			   		}
-//			   			
-//			   	}else if(MoreData.Parameters.CommodityNo=="HSI"){
-//			   		LastVolume[1].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="CN"){
-//			   		LastVolume[2].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="DAX"){
-//			   		LastVolume[3].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="GC"){
-//			   		LastVolume[4].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="MHI"){
-//			   		LastVolume[5].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="YM"){
-//			   		LastVolume[6].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="NQ"){
-//			   		LastVolume[7].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="NK"){
-//			   		LastVolume[8].innerText=MoreData.Parameters.QLastVolume;
-//			   	}else if(MoreData.Parameters.CommodityNo=="ES"){
-//			   		LastVolume[9].innerText=MoreData.Parameters.QLastVolume;
-//			   	}
 				switch(MoreData.Parameters.CommodityNo){
 					case "CL":
 					LastVolume[0].innerText=MoreData.Parameters.TotalVolume;

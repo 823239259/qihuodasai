@@ -21,6 +21,7 @@
 					{field:'paymentChannelStr',title:'网银通道',width:100},	
 					{field:'bank',title:'提现银行',width:170,sortable:true},
 					{field:'card',title:'银行卡号',width:180,sortable:true},
+			 	    {field:'province_city',title:'开户地址',width:180,sortable:true},
 					{field:'money',title:'提现金额',width:100,sortable:true},
 					{field:'balance',title:'平台余额',width:100,sortable:true,hidden:false},
 					{field:'addtime',title:'提现申请时间',width:150,sortable:true,formatter: function(value,row,index){
