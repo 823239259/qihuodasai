@@ -7,6 +7,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../js/mui.min.js"></script>
 		 <script src="../../js/common.js"></script>
+		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
+		 <script type="text/javascript" src="../../js/util.js" ></script>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 	</head>
@@ -46,10 +48,29 @@
 		    			mui.toast("请输入账号");
 		    			return;
     					};
-    					if(mui.isnull(account)){
+					if(mui.isnull(account)){
 		    			mui.toast("请输入密码");
 		    			return;
-    					}
+					}
+					socket.onopen = function(){
+						Trade.doLogin(account,password);
+					}
+					socket.onmessage = function(evt){
+						var dataString = evt.data;
+						var data = JSON.parse(dataString);
+						var method = data.Method;
+						var parameters = data.Parameters;
+						if (method == "OnRspLogin") {
+							var code = parameters.Code;
+							var loginMessage = parameters.Message;
+							if (code == 0) {
+								localStorage.setItem("account",account);
+								localStorage.setItem("password",password);
+							} else {
+								alert("登录失败");
+							}
+						}
+					}
 				});
 			})
 		</script>
