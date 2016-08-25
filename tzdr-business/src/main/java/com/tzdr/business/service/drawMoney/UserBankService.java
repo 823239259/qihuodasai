@@ -69,4 +69,6 @@ public interface UserBankService {
 	 * @return
 	 */
 	List<UserBank> findUserDefaultBankByuserId(String id);
+	
+
 }

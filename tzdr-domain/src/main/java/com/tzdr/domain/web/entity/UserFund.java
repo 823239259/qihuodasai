@@ -63,6 +63,8 @@ public class UserFund  extends BaseEntity {
 	private short status;
 	private String remark;
 	
+	private String sysUserId;//审核人
+	
 	@Transient 
 	private String typevalue;
 	public String getTypevalue() {
@@ -274,6 +276,7 @@ public class UserFund  extends BaseEntity {
 		this.addtime = addtime;
 		this.remark = remark;
 		this.payStatus = payStatus;
+		
 	}
 
 	@Column(name="business_type")
@@ -283,6 +286,14 @@ public class UserFund  extends BaseEntity {
 
 	public void setBusinessType(Integer businessType) {
 		this.businessType = businessType;
+	}
+	@Column(name="sys_user_id",length=32)
+	public String getSysUserId() {
+		return sysUserId;
+	}
+
+	public void setSysUserId(String sysUserId) {
+		this.sysUserId = sysUserId;
 	}
 	
 }

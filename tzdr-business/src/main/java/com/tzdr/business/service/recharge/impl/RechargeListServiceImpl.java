@@ -202,11 +202,12 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 	@Override
 	public RechargeList addUpdateRechargeList(RechargeList rechargeList,Integer userType,String remark) {
 		synchronized (lock) {
-			
+			User user = authService.getCurrentUser();//获取当前登录用户
 			UserFund userFund = new UserFund();
 			userFund.setUid(rechargeList.getUid());
 			userFund.setMoney(rechargeList.getActualMoney());
 			userFund.setAddtime(TypeConvert.dbDefaultDate());
+			userFund.setSysUserId(user.getId().toString());
 			if (userType != null) {
 				userFund.setType(userType);
 			}

@@ -141,6 +141,10 @@ public class DrawList extends BaseCrudEntity {
 	 * 易支付时 NArea 存储商户秘钥
 	 */
 	private String NArea;
+	/**
+	 * 银行卡开户地址
+	 */
+	private String accAddress;
 	
 	private String NCity;
 	//初审人
@@ -452,6 +456,15 @@ public class DrawList extends BaseCrudEntity {
 
 	public void setSource(Integer source) {
 		this.source = source;
+	}
+
+	@Column(name="acc_address", length=255)
+	public String getAccAddress() {
+		return accAddress;
+	}
+
+	public void setAccAddress(String accAddress) {
+		this.accAddress = accAddress;
 	}
 	
 	
