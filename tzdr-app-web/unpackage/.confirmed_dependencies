@@ -913,10 +913,13 @@
 			"js/trade.data.model.js",
 			"js/jquery.base64.js",
 			"js/market.trade.js",
-			"js/trade.send.js"
+			"js/trade.send.js",
+			"js/allChart.js",
+			"js/trade.js"
 		],
 		"refer": [
-			"tzdr/quotation/trade.html"
+			"tzdr/quotation/trade.html",
+			"tzdr/login/operateLogin.html"
 		]
 	},
 	"tzdr/quotation/trade.html": {
@@ -933,6 +936,23 @@
 			"js/trade.data.model.js",
 			"js/jquery.base64.js",
 			"js/trade.send.js"
+		]
+	},
+	"tzdr/login/operateLogin.html": {
+		"resources": [
+			"js/common.js",
+			"js/util.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/jquery.base64.js",
+			"css/quotation.css",
+			"js/trade.send.js"
+		],
+		"refer": [
+			"tzdr/future/cl.html",
+			"tzdr/future/cn.html"
 		]
 	}
 }

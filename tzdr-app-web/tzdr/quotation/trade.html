@@ -98,14 +98,8 @@
 			mui.init({
 				swipeBack:false //启用右滑关闭功能
 			});
-			(function($) {
-				$('#scroll').scroll({
-					scrollY: true,
-					scrollX: true,
-					indicators: true //是否显示滚动条
-				});
-			})(mui); 
 			mui.plusReady(function(){
+			var Transfer=plus.webview.currentWebview();
 				var TransferValue=plus.webview.currentWebview();
 				init(TransferValue.Transfer);
 			});
