@@ -647,7 +647,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 
 	@Override
 	public DrawList insertDraw(int source, WUser user, String money, String bankcard,
-			PaymentSupportBank paymentSupportBank, String ip, String orderId, int withdrawSetting) {
+			PaymentSupportBank paymentSupportBank, String ip, String orderId, int withdrawSetting,String accAddress) {
 		// 人工审核数据
 		DrawMoneyData moneydata = drawMoneyDataService.getAduitMoneyByType("2", Double.valueOf(money));
 		// 线下审核数据
@@ -697,6 +697,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 		drawList.setStatus((short) 21);// 提现处理中
 		drawList.setBank(paymentSupportBank.getBankName());
 		drawList.setSubbank(paymentSupportBank.getAbbreviation());
+		drawList.setAccAddress(accAddress);
 		if (moneydata != null) {
 			drawList.setAuditId(moneydata.getId());
 			drawList.setRemark("后台开始审核提现金额，审核金额范围：" + auditMoneyRang);

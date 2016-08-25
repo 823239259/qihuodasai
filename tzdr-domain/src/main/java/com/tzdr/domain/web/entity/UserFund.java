@@ -267,7 +267,7 @@ public class UserFund  extends BaseEntity {
 	}
 
 	public UserFund(String uid, String no, Integer type, double money,
-			Long addtime, String remark, short payStatus,String sysUserId) {
+			Long addtime, String remark, short payStatus) {
 		super();
 		this.uid = uid;
 		this.no = no;
@@ -276,7 +276,7 @@ public class UserFund  extends BaseEntity {
 		this.addtime = addtime;
 		this.remark = remark;
 		this.payStatus = payStatus;
-		this.sysUserId=sysUserId;
+		
 	}
 
 	@Column(name="business_type")

@@ -334,7 +334,6 @@ public class UserWithDrawController {
 		String  abbreviation = withDrawRequest.getBank();
 		String withdrawPwd = withDrawRequest.getWithdrawPwd();
 		Double money = withDrawRequest.getMoney();
-		
 		if (ObjectUtil.equals(null,money) 
 				|| StringUtil.isBlank(abbreviation) 
 				|| StringUtil.isBlank(card) 
@@ -444,7 +443,7 @@ public class UserWithDrawController {
 		DrawList drawList = null;
 		try 
 		{
-			drawList = drawMoneyService.insertDraw(Constant.Source.TZDR,user,String.valueOf(money),card,paymentSupportBank,ip,orderId,withdrawSetting);
+			drawList = drawMoneyService.insertDraw(Constant.Source.TZDR,user,String.valueOf(money),card,paymentSupportBank,ip,orderId,withdrawSetting,drawBank.getAccountAddress());
 			flag=true;
 		} catch (Exception exception) {
 			logger.error("API接口-插入取款数据失败"+exception.getMessage());

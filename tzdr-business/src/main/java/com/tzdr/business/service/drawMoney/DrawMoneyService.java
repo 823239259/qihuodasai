@@ -279,7 +279,7 @@ public interface DrawMoneyService {
 	 * @param withdrawSetting
 	 */
 	public DrawList insertDraw(int source, WUser user, String money, String bankcard,
-			PaymentSupportBank paymentSupportBank, String ip, String orderId, int withdrawSetting);
+			PaymentSupportBank paymentSupportBank, String ip, String orderId, int withdrawSetting,String accAddress);
 
 	public boolean doGoWithdrawals(int source, WUser user, String money, String bankcard,
 			PaymentSupportBank paymentSupportBank, String ip, String orderId, int withdrawSetting);

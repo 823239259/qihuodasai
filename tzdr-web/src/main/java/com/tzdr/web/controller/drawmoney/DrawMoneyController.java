@@ -288,6 +288,7 @@ public class DrawMoneyController {
 				// String maxAuditMoney=ObjectUtil.equals(null, dmap)?
 				// DataDicKeyConstants.DEFAULT_WITHDRAW_MONEY_VALUE_NAME:dmap.get(DataDicKeyConstants.WITHDRAWAL_AUDIT_MAX_MONEY);
 				UserBank bank = this.drawMoneyService.findUsercardbycard(bankcard, user.getId());
+				String accAddress=bank.getProvinceCity();//获取此银行卡的开户地址
 				if (bank != null && moneypwd.equals(userverified.getDrawMoneyPwd())) {
 					String ip = IpUtils.getIpAddr(request);
 					String orderId = drawMoneyService.getRandomStr(20);
@@ -295,7 +296,7 @@ public class DrawMoneyController {
 					try {
 						// drawMoneyService.insertDraw(user,money,bankcard,bankname,ip,orderId,moneyval,maxAuditMoney);
 						drawList = drawMoneyService.insertDraw(Constant.Source.TZDR, user, money, bankcard,
-								paymentSupportBank, ip, orderId, withdrawSetting);
+								paymentSupportBank, ip, orderId, withdrawSetting,accAddress);
 						//// 提现插入实体后，发送邮件给工作人员初审
 						// messagePromptService.sendMessage(PromptTypes.isTheTrial,
 						// user.getMobile());
