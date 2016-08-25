@@ -94,10 +94,12 @@
 						localStorage.setItem("account",account);
 						localStorage.setItem("password",pwd);
 						mui.toast("登录成功");
-						mui.openWindow({
-							url:"../quotation/transactionDetails.html",
-							id :"transactionDetails"
-						})
+						if (win.backpageID){ 
+							username = account;
+							password = pwd;
+	      					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
+	      					return;
+      					}
 					} else {
 						alert("登录失败");
 					}
