@@ -359,10 +359,10 @@
 			                    ChangeRate[i].className = "redBg ChangeRate";
 			                }
 			                if (Number(MoreData.Parameters.LastPrice) - Number(MoreData.Parameters.PreSettlePrice) < 0) {
-			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[0]);
+			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[i]);
 			                    LastPrice[i].className = "greenFont QLastPrice";
 			                } else {
-			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[0]);
+			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[i]);
 			                    ;
 			                    LastPrice[i].className = "redFont QLastPrice";
 			

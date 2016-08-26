@@ -200,34 +200,29 @@ mui.plusReady(function(){
 			}
 	    }
     var timeNumber=0
+    var num=0
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
     		if(parameters == null)return;
     	   var lent=rawData.length;
         	var Len=parameters.length; 
-        	var lastTime=jsonData.Parameters[Len-1].DateTimeStamp;
-        	var lastHour1=lastTime.split(" ");
-        	var lastHour=lastTime.split(" ")[1]; 
-        	var lastHourTime=lastHour.split(":")
-        	var lastHourTime1=lastHourTime[0];
-//      	var dateTimeHour=;
-			lastHourTime1=lastHourTime1-1;
-        	var str=lastHourTime1+":"+lastHourTime[1]+":"+lastHourTime[2];
-        	var str2=lastHour1[0]+" "+str;
-        	console.log(str2);
-        	var j=0;
+        	var fistListData=null;
+        	if(num==0){
+        		fistListData=parameters.splice(-60);
+        		num++;
+        	}else{
+        		fistListData=parameters;
+        	}
+        	splice()
         	for(var i=0;i<Len;i++){
-        		if(str2<=jsonData.Parameters[i].DateTimeStamp && jsonData.Parameters[i].DateTimeStamp<=lastTime){
-        			var openPrice = jsonData.Parameters[i].OpenPrice;
-		            var closePrice = jsonData.Parameters[i].LastPrice;
+        			var openPrice = fistListData[i].OpenPrice;
+		            var closePrice = fistListData[i].LastPrice;
 		            var chaPrice = closePrice - openPrice;
-		            time1=jsonData.Parameters[i].DateTime;
-		            var sgData = [jsonData.Parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",jsonData.Parameters[i].LowPrice,jsonData.Parameters[i].HighPrice,"","","-"];
-			         rawData[lent+j] = sgData; 
-			         j++;
-        		}
-            
-        }; 
+		            time1=fistListData[i].DateTime;
+		            var sgData = [fistListData[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",fistListData[i].LowPrice,fistListData[i].HighPrice,"","","-"];
+			         rawData[lent+i] = sgData; 
+       		 }; 
+        	
           time1=jsonData.Parameters[Len-1].DateTimeStamp;
           console.log(rawData);
           if(timeNumber==0){
@@ -235,7 +230,7 @@ mui.plusReady(function(){
           }else{
           	rawData.splice(0,1);
           }
-          console.log(rawData.length);
+//        console.log(rawData.length);
         var option = setOption(rawData);
         if(myChart != null){
         	myChart.setOption(option);
@@ -268,7 +263,7 @@ mui.plusReady(function(){
                 width: 2,
                 opacity: 1
             }
-        }
+        },
     },
     grid: {
                x: 10,
@@ -285,6 +280,9 @@ mui.plusReady(function(){
         scale: true,
         axisLine: { lineStyle: { color: '#8392A5' } },
         splitLine: { show: false },
+        axisTick:{
+                   	show:false,
+                   },
         splitArea: {
                     show: false
                 },
@@ -293,7 +291,7 @@ mui.plusReady(function(){
                         margin: 4
                     },
                   splitLine: {
-                    show: true,
+                    show: false,
                     lineStyle: {
                         color: "#8392A5"
                     }
@@ -352,7 +350,7 @@ mui.plusReady(function(){
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1]
             timeData.timeLabel[TimeLength+i]=str2;
-            timeData.time=Parameters[i].DateTimeStamp
+            timeData.time[i]=str2
             timeData.prices[TimeLength+i]=Parameters[i].LastPrice;
         }
         var option = setOption1();
@@ -367,12 +365,19 @@ mui.plusReady(function(){
        	backgroundColor: '#2B2B2B',
            tooltip : {
                show: true,
+               transitionDuration:0,
                trigger: 'axis',
                axisPointer : {
-                   type : 'line'
+                   type : 'line',
+                   animation: false,
+		            lineStyle: {
+		                color: '#ffffff',
+		                width: 1,
+		                opacity: 1
+		            }
                },
                formatter: function(params) {
-                   var time  = params[0].name;
+               	  var time  = params[0].name;
                    var val   = params[0].value;
                    var html  = time + '<br/>' +
                            '价格: ' + val + '<br/>';
@@ -409,11 +414,15 @@ mui.plusReady(function(){
 		        data: data1.time,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 						}],	
+						
            yAxis:  [
                {
                    type: 'value',
                    scale: true,
                    position:"left",
+                   axisTick:{
+                   	show:false,
+                   },
                     axisLine: { lineStyle: { color: '#8392A5' } },
                    splitArea: {
                        show: false
@@ -423,7 +432,7 @@ mui.plusReady(function(){
                         margin: 4
                     },
                   splitLine: {
-                    show: true,
+                    show: false,
                     lineStyle: {
                         color: "#8392A5"
                     }

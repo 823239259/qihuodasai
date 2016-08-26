@@ -66,7 +66,7 @@
 					mui.openWindow("tzdr/login/regist.html");
 					});
 					document.getElementById("visit").addEventListener("tap",function(){
-						mui.openWindow("home.html");
+						mui.openWindow("tzdr/quotation/quotationMain.html");
 					});
 					document.getElementById("login").addEventListener("tap",function(){
 						mui.openWindow("tzdr/login/login.html","login");
@@ -134,12 +134,12 @@
 							if(e.index==0){
 								downWgt(function(){
 									if (mui.cacheUser.isLogin()){
-										mui.openWindow("home.html");
+										mui.openWindow("tzdr/quotation/quotationMain.html");
 									}
 								});	// 下载升级包
 							}else{
 								if (mui.cacheUser.isLogin()){
-									mui.openWindow("home.html");
+									mui.openWindow("tzdr/quotation/quotationMain.html");
 								}
 							}
 						}, "软件升级", ["升级","稍后再说"] );					
@@ -147,7 +147,7 @@
 				},function(result){
 					_callback();
 					if(mui.cacheUser.isLogin()){
-						mui.openWindow("home.html");
+						mui.openWindow("tzdr/quotation/quotationMain.html");
 					}
 					return; 
 				}
