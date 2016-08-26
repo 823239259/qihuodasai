@@ -35,7 +35,6 @@ socket.onopen = function() {
 		Trade.doLogin(username, password);
 }
 socket.onclose = function() {
-	alert("链接关闭");
 }
 socket.onmessage = function(evt) {
 	var dataString = evt.data;
@@ -70,11 +69,17 @@ socket.onmessage = function(evt) {
 		} else if (method == "OnRspQryHold") {
 			var positionParam = parameters;
 			appendPostionAndUpdate(positionParam);
+			$(".myLi").click(function(){
+				$(this).toggleClass("toggleClassBack");
+			});
 			//报单录入请求回复
 		} else if (method == "OnRspOrderInsert") {
 			var insertOrderParam = parameters;
 			appendOrder(insertOrderParam);
-			appendDesignates(insertOrderParam);
+			var inserOrderStatus = insertOrderParam.OrderStatus;
+			if(inserOrderStatus < 3){
+				appendDesignates(insertOrderParam);
+			}
 			//订单状态通知
 		} else if (method == "OnRtnOrderState") {
 			var orderParam = parameters;
@@ -82,7 +87,7 @@ socket.onmessage = function(evt) {
 			var orderStatusWeHooks = orderParam.OrderStatus;
 			//当订单状态改变
 			var orderId = orderParam.OrderID;
-			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4) {
+			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
 				delDesignatesDomByOrderId(orderId);
 			} else if (orderStatusWeHooks == 0) {
 				appendDesignates(orderParam);
@@ -146,7 +151,7 @@ function appendPosition(data){
 		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum);
 	}
 	var cls = 'position-index'+positionsIndex;
-	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi"  >'
+	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi myLi"  >'
 				+ '<a class="mui-navigate-right" >'
 				+ '		'
 				+ '			<span class = "position0">'+holdParam.ExchangeNo+""+contractCode+'</span>'
@@ -274,7 +279,7 @@ function appendDesignates(data){
 	var orderId = designatesParam.OrderID;
 	var desContract = designatesParam.ContractCode;
 	var cls = 'designate-index'+designatesIndex;
-	var html =   '<li data-tion-designates = '+orderId+' data-orderId = '+orderId+' data-index='+designatesIndex+' contract-code-designates = '+desContract+'   class = "'+cls+' Guadan" ">'
+	var html =   '<li data-tion-designates = '+orderId+' data-orderId = '+orderId+' data-index='+designatesIndex+' contract-code-designates = '+desContract+'   class = "'+cls+' Guadan  myLi" ">'
 				+'	<a class="mui-navigate-right" >'
 				+'		'
 				+'			<span class = "desig0">'+desContract+'</span>'
@@ -358,7 +363,7 @@ function appendOrder(data){
 	}
 	var orderId = orderParam.OrderID;
 	var cls = 'entrust'+entrustsIndex;
-	var html = '<li data-tion-order='+orderId+' contract-code-order = '+orderParam.ContractCode+'  class = "'+cls+' EntrustOreder " ">'
+	var html = '<li data-tion-order='+orderId+' contract-code-order = '+orderParam.ContractCode+'  class = "'+cls+' EntrustOreder  myLi" ">'
 				+'	<a class="mui-navigate-right" >'
 				+'		'
 				+'			<span class = "order0">'+orderParam.ContractCode+'</span>'
@@ -408,14 +413,14 @@ function appendTradeSuccess(data){
 	var drectionText = analysisDrection(drection);
 	var orderId = tradeParam.OrderID;
 	var cls = 'trade'+tradesIndex;
-	var html = '<li data-tion-trade = '+orderId+' contract-code-trade = '+tradeParam.ContractCode+'   class = "'+cls+' DealLi" ">'
+	var html = '<li data-tion-trade = '+orderId+' contract-code-trade = '+tradeParam.ContractCode+'   class = "'+cls+' DealLi myLi" ">'
 				+'<a class="mui-navigate-right" >'
 				+'	'
 				+'		<span class = "trade0">'+tradeParam.ContractCode+'</span>'
 				+'		<span class = "trade1">'+drectionText+'</span>'
 				+'      <span class = "trade2">'+tradeParam.TradePrice+'</span>'
 				+'		<span class = "trade3">'+tradeParam.TradeNum+'</span>'
-				+'		<span class = "trade4">'+tradeParam.TradeDateTime+'</span>'
+				+'		<span class = "trade4 dateTimeL">'+tradeParam.TradeDateTime+'</span>'
 				+'	'
 				+'	</a>'
 				+'</li>';

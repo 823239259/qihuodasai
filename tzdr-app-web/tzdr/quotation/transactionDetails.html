@@ -14,7 +14,7 @@
 	</head>
 	<body style="background-color: #2B2B2B">
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack"></a>
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id="backClose"></a>
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		</header>
 		<div class="mui-content">
@@ -48,8 +48,20 @@
 				</div>
 			</div>
 				<form id="buyFuture">
-					<span><input type="radio" checked name="prices" value="1" class="radioChoice"><label>快手板</label></span><span><input type="radio" class="radioChoice" value="0" name="prices"><label>限价板</label></span>
-					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" placeholder="输入价格"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" placeholder="输入手数"></div>
+					<div class="butomBoreder">
+						<div class="mui-input-row mui-radio radioDiv mui-left">
+						<label>快手板</label>
+						<input type="radio" checked name="prices" value="1" class="radioChoice mui-radio">
+					</div>
+					<div class="mui-input-row mui-radio radioDiv mui-left">
+						<label>限价板</label>
+						<input type="radio" class="radioChoice mui-radio" value="0" name="prices">
+					</div>
+					</div>
+					
+					
+					<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
+					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" placeholder="输入价格" type="number"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" placeholder="输入手数" type="number"></div>
 					<div class="buyBtn">
 					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
 					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
@@ -97,11 +109,11 @@
 					<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
 				</div>
 				<div class="buttomFixRight mui-col-xs-6">
-					<p id="freshPrices">47.38</p>
+					<p id="freshPrices">0.00</p>
 					<p id="domnRange">-</p>
 				</div>
 				<div class="BuyDiv">
-				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1" id = "orderNum"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
+				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
 				</div>
 				<div class="buyBtn">
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketBuy" data-tion-buy = "0">买入</button>
@@ -132,7 +144,7 @@
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
 			mui.init();
-			mui.plusReady(function(){
+			mui.plusReady(function(){ 
 				var Transfer=plus.webview.currentWebview();
 				var CommodityNo=document.getElementById("CommodityNo");
 				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
@@ -152,6 +164,35 @@
 				});
 				init(Transfer.name);
 				cachTranFers(Transfer.name);
+//				setTimeout(function(){
+//					adddE();
+//				},10000)
+					
+						$(".myLi").click(function(){
+						alert($(this).index());
+						$(this).toggleClass("toggleClassBack");
+						});
+				
+					
+				
+				
+//				function adddE(){
+//					var liD = document.getElementsByClassName("myli");
+//					var leng = liD.length;
+//					
+//					for(var i=0;i<=leng;i++){
+//						liD[i].addEventListener("tap",function(){
+//							
+//							$(this).toggleClass("toggleClassBack");
+//						})
+//					}
+//				}
+//				.addEventListener("tap",function(){
+//					alert($(this).index());
+//					$(this).toggleClass("toggleClassBack");
+//				
+//				})
+				
 			});
 		</script>
 		<script>
@@ -173,6 +214,9 @@
 				tranferParam = param;
 			}
 			$(function(){
+				$("#backClose").click(function(){
+					socket.close();
+				});
 				//提交订单
 				$(".buy").click(function(){
 					if(vadationIsLogin()){
@@ -183,7 +227,7 @@
 				$("#allOpen").click(function(){
 					if(vadationIsLogin()){
 						var content = "合约是否全部平仓?";
-						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),ddoInsertAllSellingOrder);
+						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertAllSellingOrder);
 					}
 				});
 				$("#Open").click(function(){
@@ -321,9 +365,9 @@
 						alertProtype("金额错误","提示",Btn.confirmed());
 						return;
 					}
-					var limitPirce = doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
+					var limitPirce = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize"),$drection)//doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
 					var orderRef = new Date().getTime();
-					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,1,limitPirce,0,doGetOrderRef());
+					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
 					tradeParam[i] = sellingParam;
 				}
 				return tradeParam;
@@ -344,7 +388,7 @@
 					var $contractNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig8']").text();
 					var $exchangeNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig9']").text();
 					var $orderId =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig10']").text();
-					var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,$orderPrice);
+					var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
 					cancleParam[i] = cancleOrderParam;
 				}
 				return cancleParam;

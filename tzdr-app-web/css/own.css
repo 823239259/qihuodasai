@@ -4,12 +4,38 @@
 .top-tel { display: block; width: auto; height: 44px; line-height: 44px; font-size: 14px; color: #fff; float: right;}
 .mui-iframe-wrapper { height: 45px; overflow: hidden;}
 .own-mainlist { padding-bottom:46px;}
-.main_list .mui-table-view-cell { min-height: 92px;overflow: hidden;height: auto;position: relative;}
+.main_list{
+	padding-bottom: 10px;
+}
+.futureTitle{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	background-color: #2B2B2B;
+	color:#cccccc;
+	padding-left: 15px;
+}
+.main_list .mui-table-view-cell { min-height: 92px;overflow: hidden;height: auto;position: relative; color:#999999;}
 .main_list .mui-table-view-cell img { width: 70px; height:70px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
-.main_list .mui-table-view-cell h2 {width: 70%; height: 20px; line-height: 20px; text-align: left; font-size: 14px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
-.main_list .mui-table-view-cell p {  line-height: 20px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
-.main_list .mui-table-view-cell p i { color: #FFCC33; font-style: normal; }
-.main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;padding-right: 40px;}
+.main_list .mui-table-view-cell h2 {width: 70%; height: 30px; line-height: 30px; text-align: left; font-size: 14px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
+.main_list .mui-table-view-cell p { color:#999999; line-height: 30px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
+.main_list .mui-table-view-cell .buttomP{border-top:1px solid #e6e6e6;width: 100%;margin-top: 30px;}
+.main_list .mui-table-view-cell p i { color: #2b2b2b; font-style: normal; }
+.main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:80px;margin-top: 10px;}
+.main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;padding-right: 0px;margin-right: -50px;}
+.mui-table-view-cell:after{
+	content:none;
+}
+.main_list .mui-table-view-cell .mui-navigate-right{
+	padding-bottom: 0px;
+	border-bottom: 1px solid #454545;
+	padding-left: 0px;
+	margin-left: 0px;
+	padding-right: 15px;
+	color:#999999;
+	margin-right: 25px;
+}
 .rg_banner { width: 95%; margin: 0 auto;}
 .rg_banner img { width: 100%;}
 @media only screen and (min-width: ) {
@@ -480,5 +506,10 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .me_through{text-decoration:line-through;}
 .mo_through{ margin-left: 8px;}
 .mf_through{ font-size: 17px; margin-top: 10px; margin-left: 5px;}
-
-
+.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+	border-radius: 0px;
+}
+.mui-input-row input{
+	text-align: center;
+	background-color: #2B2B2B;
+}

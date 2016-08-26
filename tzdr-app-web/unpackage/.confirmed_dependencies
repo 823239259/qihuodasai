@@ -365,7 +365,10 @@
 			"css/own.css",
 			"images/list_02.png",
 			"fonts/mui.ttf",
-			"images/2.0.png"
+			"images/2.0.png",
+			"images/1.png",
+			"images/3.png",
+			"images/0.png"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -374,7 +377,8 @@
 			"home.html",
 			"tzdr/login/login.html",
 			"tzdr/future/listrg.html",
-			"tzdr/login/regist.html"
+			"tzdr/login/regist.html",
+			"tzdr/quotation/quotationMain.html"
 		],
 		"priority": 0
 	},
@@ -550,7 +554,11 @@
 			"images/ac_04.png",
 			"images/ac_05.png",
 			"images/ac_06.png",
-			"images/3.0.png"
+			"images/3.0.png",
+			"fonts/mui.ttf",
+			"images/0.png",
+			"images/2.png",
+			"images/1.png"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -559,7 +567,8 @@
 			"home.html",
 			"tzdr/login/login.html",
 			"tzdr/future/listrg.html",
-			"tzdr/login/regist.html"
+			"tzdr/login/regist.html",
+			"tzdr/quotation/quotationMain.html"
 		],
 		"priority": 0
 	},
@@ -894,7 +903,8 @@
 			"home.html",
 			"tzdr/quotation/transactionDetails.html",
 			"tzdr/account/account.html",
-			"tzdr/scheme.html"
+			"tzdr/scheme.html",
+			"tzdr/account/accountno.html"
 		]
 	},
 	"tzdr/quotation/transactionDetails.html": {
@@ -915,7 +925,9 @@
 			"js/market.trade.js",
 			"js/trade.send.js",
 			"js/allChart.js",
-			"js/trade.js"
+			"js/trade.js",
+			"js/reconnecting-websocket.min.js",
+			"js/reconnecting-websocket.js"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
@@ -952,7 +964,8 @@
 		],
 		"refer": [
 			"tzdr/future/cl.html",
-			"tzdr/future/cn.html"
+			"tzdr/future/cn.html",
+			"tzdr/quotation/transactionDetails.html"
 		]
 	}
 }

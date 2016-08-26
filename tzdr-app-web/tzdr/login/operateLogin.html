@@ -34,7 +34,7 @@
 		</form>
 		<div class="mui-content-padded">
 			<button  class="mui-btn mui-btn-block lg-btnlogin" id="operateLogin">立即登录</button>
-		<div class="link-area"><a id='forgetPassword' href="javascript:void(0)">忘记密码</a><a id='regLogin' href="javascript:void(0)">没有账号？<span>立即注册</span></a>
+			<div class="link-area"><a id='forgetPassword' href="javascript:void(0)">忘记密码</a><a id='regLogin' href="javascript:void(0)">没有账号？<span>立即注册</span></a>
 			</div>
 		</div>
 		<div class="mui-content-padded oauth-area">
@@ -90,6 +90,7 @@
 						if (code == 0) {
 							localStorage.setItem("account",account);
 							localStorage.setItem("password",pwd);
+							plus.nativeUI.closeWaiting();
 							mui.toast("登录成功");
 							mui.openWindow({
 								url:"../quotation/transactionDetails.html",
@@ -115,7 +116,8 @@
 			    			mui.toast("请输入密码");
 			    			return;
 						}
-						Trade.doLogin(account,pwd); 
+						Trade.doLogin(account,pwd);
+						plus.nativeUI.showWaiting( "正在登录中" )
 					/*}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
 					}*/
