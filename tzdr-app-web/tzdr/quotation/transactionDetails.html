@@ -14,7 +14,7 @@
 	</head>
 	<body style="background-color: #2B2B2B">
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id="backClose"></a>
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "backClose"></a>
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		</header>
 		<div class="mui-content">
@@ -23,7 +23,7 @@
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
 					<a class="mui-control-item" id="TradingCenter" href="#trade" >交易中心</a>
 					</div>
-					<div style="width: 100%;">
+					<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;height:250px;"></div>
 							<!--<div id="volumeChart" style="width:100%;height:130px;"></div>-->
@@ -59,9 +59,8 @@
 					</div>
 					</div>
 					
-					
 					<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
-					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" placeholder="输入价格" type="number"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" placeholder="1" type="number"></div>
+					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" disabled="disabled" placeholder="输入价格" type="number"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" value="1" placeholder="1" type="number"></div>
 					<div class="buyBtn">
 					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
 					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
@@ -151,11 +150,13 @@
 				mainTitleFirst.innerHTML=Transfer.name[0];
 				CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
 				document.getElementById("TradingCenter").addEventListener("tap",function(){
-					document.getElementsByClassName("buttomFix")[0].style.display="none";
-					if(vadationIsLogin()){
-						
+					if(username != null){
+						document.getElementsByClassName("buttomFix")[0].style.display="none";
+						document.getElementById("tradeContentId").style.display = "block";
+					}else{
+						openLogin(); 
 					}
-				})
+				});
 				document.getElementById("Time").addEventListener("tap",function(){
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 				});
@@ -185,9 +186,20 @@
 			function cachTranFers(param){
 				tranferParam = param;
 			}
-			$(function(){
-				$("#backClose").click(function(){
-					socket.close();
+			$(function(){ 
+				$(".mui-action-back").bind("click",function(){
+					Trade.doLoginOut(username);
+				});
+				$("input[type='radio']").click(function(){
+					var type = $("input[type = 'radio']:checked").val();
+					var orderPrice = $("#orderPrice");
+					if(type == 1){
+						orderPrice.prop("disabled",true);
+						orderPrice.val("市价");
+					}else{
+						$("#orderPrice").prop("disabled",false);
+						orderPrice.val("请输入价格");
+					}
 				});
 				//提交订单
 				$(".buy").click(function(){
@@ -234,7 +246,8 @@
 					id : "operateLogin",
 					 extras:{
 								commdityNo:$("#commodeityNo").val(),
-								name : tranferParam
+								name : tranferParam,
+								backpageID:"transactionDetails"
 							}
 				});
 			}
@@ -303,12 +316,16 @@
 			 * 撤单确认操作 
 			 */
 			function doInsertCancleOrder(){
-				var designateDom = $(".designate-index"+designateWholeIndex+"");
-				if(designateDom.html() == undefined){
-					return;
-				}
+				var lengthIndex= designatesOrderId.length;
 				var contractParam = new Array();
-				contractParam[0] = designateWholeContracts;
+				for(var i = 0 ; i < lengthIndex ; i++){
+					var orderId = designatesOrderId[i];
+					var designateDom  = $("li[contract-code-position='"+orderId+"']");
+					if(designateDom.html() == undefined){
+						return;
+					}
+					contractParam[0] = orderId;
+				}
 				var cancleParam = doGetCancelOrderBasicParam(contractParam);
 				cancleOrder(cancleParam);
 			}

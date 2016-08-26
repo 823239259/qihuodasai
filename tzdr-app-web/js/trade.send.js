@@ -17,6 +17,10 @@ var TradeUrl = {
 	 */
 	LoginUrl:"Login",
 	/**
+	 * 登出url
+	 */
+	LoginOut:"Logout",
+	/**
 	 * 获取个人账户信息url
 	 */
 	QryAccountUrl:"QryAccount",
@@ -39,7 +43,11 @@ var TradeUrl = {
 	/**
 	 * 报单撤销url
 	 */
-	CancelOrderUrl:"CancelOrder"
+	CancelOrderUrl:"CancelOrder",
+	/**
+	 * 错误通知
+	 */
+	OnError : "OnError"
 }
 var Trade = {
 			/**
@@ -49,6 +57,13 @@ var Trade = {
 			 */
 			doLogin:function(username,password){
 				sendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'"}');
+			},
+			/**
+			 * 登出
+			 * @param {Object} username
+			 */
+			doLoginOut:function(username){
+				sendMessage(TradeUrl.LoginOut,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 获取个人账户信息

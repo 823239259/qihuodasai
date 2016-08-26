@@ -20,6 +20,8 @@ var positionContractCode = {};
 var designates = {};
 //挂单-合约名称为key
 var designatesContract = {};
+//保存需要撤销挂单的orderId
+var designatesOrderId = [];
 //委托
 var entrusts = {};
 //成交
@@ -30,7 +32,7 @@ var entrustsIndex = 0;
 var tradesIndex = 0;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
-socket.onopen = function() { 
+socket.onopen = function() {
 	if(username != null) 
 		Trade.doLogin(username, password);
 }
@@ -48,7 +50,7 @@ socket.onmessage = function(evt) {
 			if (code == 0) {
 				initDom();
 			} else {
-				alert(loginMessage);
+				alertProtype("获取信息失败!请重新登录","提示",Btn.confirmed(),openLogin());
 			}
 			//查询个人账户信息回复
 		} else if (method == "OnRspQryAccount") {
@@ -100,6 +102,10 @@ socket.onmessage = function(evt) {
 		} else if (method == "OnRtnMoney") {
 			var accountParam = parameters;
 			updateBalance(accountParam)
+		}else if(method = "OnError"){
+			var code = parameters.Code;
+			var loginMessage = parameters.Message;
+			alertProtype(loginMessage,"提示",Btn.confirmed());
 		}
 	}
 }
@@ -563,6 +569,14 @@ function addDesignatesBindClick(cls){
 			var $this = $(this);
 			designateWholeContracts = $this.attr("data-tion-designates");
 			designateWholeIndex = $this.attr("data-index");
+			var lengthIndex = designatesOrderId.length;
+			for(var i = 0 ; i < lengthIndex ; i++){ 
+				if(designatesOrderId[i] == designatesContract){
+					designatesIndex.remove(i);
+				}else{
+					designatesOrderId[i] = designatesContract;
+				}
+			}
 			 $this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
 		});
 	});
