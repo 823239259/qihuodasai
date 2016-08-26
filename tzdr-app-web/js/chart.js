@@ -171,7 +171,8 @@ mui.plusReady(function(){
 		
     }
   
-    var domnRange=document.getElementById("domnRange");
+    var changeValue=document.getElementById("changeValue");
+     var rose=document.getElementById("rose");
     var freshPrices=document.getElementById("freshPrices");
     var volumePricesNumber=document.getElementById("volumePricesNumber");
     var buyPrices=document.getElementById("buyPrices");
@@ -179,6 +180,7 @@ mui.plusReady(function(){
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
     function insertDATA(DATA){
+    	var doSize=$("#doSize").val();
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
     	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
@@ -190,61 +192,58 @@ mui.plusReady(function(){
 			 }else {
 			freshPrices.className = "redFont";
 		}
-		domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
+		changeValue.innerHTML=DATA.Parameters.ChangeRate.toFixed(2)+"%";
 		if(Number(DATA.Parameters.ChangeRate)==0){
-				 domnRange.className = "whiteFont";
+				 changeValue.className = "whiteFont";
 			 }else if(Number(DATA.Parameters.ChangeRate)>0){
-				domnRange.className = "redFont";
+				changeValue.className = "redFont";
 			}else if(Number(DATA.Parameters.ChangeRate)<0){
-				 domnRange.className = "greenFont";
+				 changeValue.className = "greenFont";
 			}
-	    }
-    var timeNumber=0
-    var num=0
+	    rose.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+"/";
+		if(Number(DATA.Parameters.ChangeValue)==0){
+				 rose.className = "whiteFont";
+			 }else if(Number(DATA.Parameters.ChangeValue)>0){
+				rose.className = "redFont";
+			}else if(Number(DATA.Parameters.ChangeValue)<0){
+				 rose.className = "greenFont";
+			}
+		}
+    var timeNumber=0;
+    var num=0;
+    var addRawData;
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
     		if(parameters == null)return;
-    	   var lent=rawData.length;
+    	    var lent=rawData.length;
         	var Len=parameters.length; 
         	var fistListData=null;
-        	if(num==0){
-        		fistListData=parameters.splice(-60);
-        		num++;
-        	}else{
-        		fistListData=parameters;
-        	}
-        	splice()
         	for(var i=0;i<Len;i++){
-        			var openPrice = fistListData[i].OpenPrice;
-		            var closePrice = fistListData[i].LastPrice;
+        			var openPrice = parameters[i].OpenPrice;
+		            var closePrice = parameters[i].LastPrice;
 		            var chaPrice = closePrice - openPrice;
-		            time1=fistListData[i].DateTime;
-		            var sgData = [fistListData[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",fistListData[i].LowPrice,fistListData[i].HighPrice,"","","-"];
+		            time1=parameters[i].DateTime;
+		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         rawData[lent+i] = sgData; 
-       		 }; 
-        	
-          time1=jsonData.Parameters[Len-1].DateTimeStamp;
-          console.log(rawData);
-          if(timeNumber==0){
-          	timeNumber=1;
-          }else{
-          	rawData.splice(0,1);
-          }
-//        console.log(rawData.length);
-        var option = setOption(rawData);
-        if(myChart != null){
-        	myChart.setOption(option);
-        	document.getElementById("Candlestick").addEventListener("tap",function(){
-
-			setTimeout(function(){
-        			myChart.resize();	
-        		},50)
-       });
-        }
+       		};
+       		var splitLength = rawData.length;
+       		if(splitLength > 60){
+       			splitLength = splitLength - 60;
+       		}
+		    addRawData = rawData.splice(-60);
+		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
+        	var option = setOption(addRawData);
+	        if(myChart != null){
+	        	myChart.setOption(option);
+	        	document.getElementById("Candlestick").addEventListener("tap",function(){
+					document.getElementsByClassName("buttomFix")[0].style.display="block";
+					setTimeout(function(){
+		        			myChart.resize();	
+		        		},10);
+	       });
+	    }
     }
-
     //设置数据参数（为画图做准备）
-   
     function setOption(rawData){
         var dates = rawData.map(function (item) {
             return item[0];
@@ -253,91 +252,91 @@ mui.plusReady(function(){
             return [+item[1], +item[2], +item[5], +item[6]];
         });
         var option = {
-    backgroundColor: '#2B2B2B',
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            animation: false,
-            lineStyle: {
-                color: '#376df4',
-                width: 2,
-                opacity: 1
-            }
-        },
-    },
-    grid: {
-               x: 10,
-               y:20,
-               x2:20,
-               y2:20
-           },
-    xAxis: {
-        type: 'category',
-        data: dates,
-        axisLine: { lineStyle: { color: '#8392A5' } }
-    },
-    yAxis: {
-        scale: true,
-        axisLine: { lineStyle: { color: '#8392A5' } },
-        splitLine: { show: false },
-        axisTick:{
-                   	show:false,
-                   },
-        splitArea: {
-                    show: false
-                },
-                axisLabel: {
-                        inside: true,
-                        margin: 4
-                    },
-                  splitLine: {
-                    show: false,
-                    lineStyle: {
-                        color: "#8392A5"
-                    }
-                }
-    },
-//  dataZoom: [{
-//      textStyle: {
-//          color: '#8392A5'
-//      },
-//      handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-//      handleSize: '80%',
-//      dataBackground: {
-//          areaStyle: {
-//              color: '#8392A5'
-//          },
-//          lineStyle: {
-//              opacity: 0.8,
-//              color: '#8392A5'
-//          }
-//      },
-//      handleStyle: {
-//          color: '#fff',
-//          shadowBlur: 3,
-//          shadowColor: 'rgba(0, 0, 0, 0.6)',
-//          shadowOffsetX: 2,
-//          shadowOffsetY: 2
-//      }
-//  }, {
-//      type: 'inside'
-//  }],
-    animation: false,
-    series: [
-        {
-            type: 'candlestick',
-            name: '',
-            data: data,
-            itemStyle: {
-                normal: {
-                    color: '#FD1050',
-                    color0: '#0CF49B',
-                    borderColor: '#FD1050',
-                    borderColor0: '#0CF49B'
-                }
-            }
-        }
-    ]
+		    backgroundColor: 'rgba(43, 43, 43, 0)',
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            animation: false,
+		            lineStyle: {
+		                color: '#376df4',
+		                width: 2,
+		                opacity: 1
+		            }
+		        },
+		    },
+		    grid: {
+		               x: 43,
+		               y:20,
+		               x2:20,
+		               y2:20
+		           },
+		    xAxis: {
+		        type: 'category',
+		        data: dates,
+		        axisLine: { lineStyle: { color: '#8392A5' } }
+		    },
+		    yAxis: {
+		        scale: true,
+		        axisLine: { lineStyle: { color: '#8392A5' } },
+		        splitLine: { show: false },
+		        axisTick:{
+		                   	show:false,
+		                   },
+		        splitArea: {
+		                    show: false
+		                },
+		                axisLabel: {
+		                        inside: false,
+		                        margin: 4
+		                    },
+		                  splitLine: {
+		                    show: true,
+		                    lineStyle: {
+		                        color: "#8392A5"
+		                    }
+		                }
+		    },
+		//  dataZoom: [{
+		//      textStyle: {
+		//          color: '#8392A5'
+		//      },
+		//      handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+		//      handleSize: '80%',
+		//      dataBackground: {
+		//          areaStyle: {
+		//              color: '#8392A5'
+		//          },
+		//          lineStyle: {
+		//              opacity: 0.8,
+		//              color: '#8392A5'
+		//          }
+		//      },
+		//      handleStyle: {
+		//          color: '#fff',
+		//          shadowBlur: 3,
+		//          shadowColor: 'rgba(0, 0, 0, 0.6)',
+		//          shadowOffsetX: 2,
+		//          shadowOffsetY: 2
+		//      }
+		//  }, {
+		//      type: 'inside'
+		//  }],
+		    animation: false,
+		    series: [
+		        {
+		            type: 'candlestick',
+		            name: '',
+		            data: data,
+		            itemStyle: {
+		                normal: {
+		                    color: '#FD1050',
+		                    color0: '#0CF49B',
+		                    borderColor: '#FD1050',
+		                    borderColor0: '#0CF49B'
+		                }
+		            }
+		        }
+		    ]
 		}
         return option;
     }
@@ -362,7 +361,7 @@ mui.plusReady(function(){
     function setOption1(){
         var  data1=timeData;
        var  option = {
-       	backgroundColor: '#2B2B2B',
+       	backgroundColor: 'rgba(43, 43, 43, 0)',
            tooltip : {
                show: true,
                transitionDuration:0,
@@ -428,11 +427,11 @@ mui.plusReady(function(){
                        show: false
                    },
                     axisLabel: {
-                        inside: true,
-                        margin: 4
+                        inside: false,
+                        margin: 4,
                     },
                   splitLine: {
-                    show: false,
+                    show: true,
                     lineStyle: {
                         color: "#8392A5"
                     }
@@ -440,7 +439,7 @@ mui.plusReady(function(){
                }
            ],
            grid: {
-               x: 10,
+               x: 40,
                y:20,
                x2:20,
                y2:20
@@ -455,7 +454,12 @@ mui.plusReady(function(){
                lineStyle: {
                    normal: {
                        width: 1,
-                       color: "#fda729"
+                       color: "#ffffff"
+                   }
+               },
+               itemStyle:{
+               	 normal: {
+                       color: "#ffffff"
                    }
                },
                symbolSize: 2,

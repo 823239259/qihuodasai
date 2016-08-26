@@ -204,7 +204,8 @@
 					"tzdr/login/login.html",
 					"tzdr/login/regist.html",
 					"home.html",
-					"guide.html"
+					"guide.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},

@@ -18,86 +18,89 @@
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		</header>
 		<div class="mui-content">
-				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
-					<a class="mui-control-item" id="TradingCenter" href="#trade" >交易中心</a>
+					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
 					<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content mui-active" id="TimeChart1">
-							<div id="timeChart" style="width:100%;height:250px;"></div>
+
+								<div id="timeChart" style="width:100%;height:250px;"></div>
 							<!--<div id="volumeChart" style="width:100%;height:130px;"></div>-->
 						</div>
 						<div class="mui-control-content " id="CandlestickChart">
-							<div   id="CandlestickChartDiv" style="width:100%;height:250px;"></div>
+							<div class="mui-loading">
+								<div   id="CandlestickChartDiv" style="width:100%;height:250px;"></div>
+							</div>
 						</div>
 						<div class="mui-control-content" id="trade">
 							<div class="Assets">
-				<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
-				<p><span>总资产</span><span>保证金</span><span>余额</span></p>
-			</div>
-			<div class="ProductInformation">
-				<div class="ProductInformationLeft">
-					<p class="whiteFont" id = "tradeTitle">富时A501608</p>
-					<p class="grayFont" id = "tradeContractTitle">CNQ16</p>
-				</div>
-				<div class="ProductInformationRight">
-					<p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
-					<p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
-					<p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
-				</div>
-			</div>
-				<form id="buyFuture">
-					<div class="butomBoreder">
-						<div class="mui-input-row mui-radio radioDiv mui-left">
-						<label>市价</label>
-						<input type="radio" checked name="prices" value="1" class="radioChoice mui-radio">
+								<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
+								<p><span>总资产</span><span>保证金</span><span>余额</span></p>
+							</div>
+							<div class="ProductInformation">
+								<div class="ProductInformationLeft">
+									<p class="whiteFont" id = "tradeTitle">富时A501608</p>
+									<p class="grayFont" id = "tradeContractTitle">CNQ16</p>
+								</div>
+								<div class="ProductInformationRight">
+									<p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
+									<p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
+									<p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
+								</div>
+							</div>
+							<form id="buyFuture">
+								<div class="butomBoreder">
+									<div class="mui-input-row mui-radio radioDiv mui-left">
+									<label>市价</label>
+									<input type="radio" checked name="prices" value="1" class="radioChoice mui-radio">
+								</div>
+								<div class="mui-input-row mui-radio radioDiv mui-left">
+									<label>限价</label>
+									<input type="radio" class="radioChoice mui-radio" value="0" name="prices">
+								</div>
+								</div>
+								
+								<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
+								<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice"  disabled="disabled"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" value="1" placeholder="1" type="number"></div>
+								<div class="buyBtn">
+								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
+								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
+								</div>
+							</form>
+							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+								<a class="mui-control-item mui-active" href="#item1">持仓</a>
+								<a class="mui-control-item" href="#item2">挂单</a>
+								<a class="mui-control-item" href="#item3">委托</a>
+								<a class="mui-control-item" href="#item4">成交</a>
+							</div>
+				<div>
+					<div id="item1" class="mui-control-content mui-active" >
+							<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
+								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeL">浮动盈利</span></a></li>
+							</ul>
+						<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
+						<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
 					</div>
-					<div class="mui-input-row mui-radio radioDiv mui-left">
-						<label>限价</label>
-						<input type="radio" class="radioChoice mui-radio" value="0" name="prices">
+					<div id="item2" class="mui-control-content">
+							<ul  id="postersOrder" class="listStyle" style="height: 180px; width: 100%;" >
+								<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">成交时间</span></a></li>
+							</ul>
+							<button type="button" class="mui-btn mui-col-xs-10" id="kilAnorder">撤单</button>
+					</div>
+					<div id="item3" class="mui-control-content" style="width: 100%;">
+							<ul  id="Entrust" class="listStyle" style="height: 180px;" >
+								<li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
+							</ul>
+					</div>
+					<div id="item4" class="mui-control-content" >
+							<ul  id="Deal" class="listStyle" style="height: 180px;">
+								<li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
+								<!--<li style="width: 600px;"><a class="mui-navigate-right" ><p><span>美原油09</span><span>买</span><span>1</span><span>2</span><span>2016.08.08 18:03:11</span></p></a></li>-->
+							</ul>
 					</div>
 					</div>
-					
-					<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
-					<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" disabled="disabled" placeholder="输入价格" type="number"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" value="1" placeholder="1" type="number"></div>
-					<div class="buyBtn">
-					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
-					<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
-					</div>
-				</form>
-				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-					<a class="mui-control-item mui-active" href="#item1">持仓</a>
-					<a class="mui-control-item" href="#item2">挂单</a>
-					<a class="mui-control-item" href="#item3">委托</a>
-					<a class="mui-control-item" href="#item4">成交</a>
-			</div>
-			<div>
-				<div id="item1" class="mui-control-content mui-active" >
-						<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
-							<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeL">浮动盈利</span></a></li>
-						</ul>
-					<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
-					<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
-				</div>
-				<div id="item2" class="mui-control-content">
-								<ul  id="postersOrder" class="listStyle" style="height: 180px; width: 100%;" >
-										<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">成交时间</span></a></li>
-								</ul>
-						<button type="button" class="mui-btn mui-col-xs-10" id="kilAnorder">撤单</button>
-				</div>
-				<div id="item3" class="mui-control-content" style="width: 100%;">
-						<ul  id="Entrust" class="listStyle" style="height: 180px;" >
-							<li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
-						</ul>
-				</div>
-				<div id="item4" class="mui-control-content" >
-						<ul  id="Deal" class="listStyle" style="height: 180px;">
-							<li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
-							<!--<li style="width: 600px;"><a class="mui-navigate-right" ><p><span>美原油09</span><span>买</span><span>1</span><span>2</span><span>2016.08.08 18:03:11</span></p></a></li>-->
-						</ul>
-				</div>
-			</div>
 				</div>
 			</div>
 			</div>
@@ -109,22 +112,15 @@
 				</div>
 				<div class="buttomFixRight mui-col-xs-6">
 					<p id="freshPrices">0.00</p>
-					<p id="domnRange">-</p>
+					<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
 				</div>
 				<div class="BuyDiv">
-				<div class="BuyContentLeft"><label>手数:</label><input placeholder="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
+				<div class="BuyContentLeft"><label>手数:</label><input  value="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
 				</div>
 				<div class="buyBtn">
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketBuy" data-tion-buy = "0">买入</button>
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
-				<!--<div style="display: none;">
-					<input type="text" value = "HSI" id = "exchangeNo"/>
-					<input type="text" value = "CL" id = "commodityNo" />
-					<input type="text" value="1610" id = "contractNo" />
-					<input type="text" value="10" id = "contractSize"/>
-					<input type="text" value="0.01" id = "miniTikeSize"/>
-				</div>-->
 				<div style="display: none;">
 				<input type="text"  id = "lastPriceNone" />
 				<input type="text"  id = "exchangeNo"/> 
@@ -150,22 +146,29 @@
 				mainTitleFirst.innerHTML=Transfer.name[0];
 				CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
 				document.getElementById("TradingCenter").addEventListener("tap",function(){
-					if(username != null){
+					if(vadationIsLogin()){
 						document.getElementsByClassName("buttomFix")[0].style.display="none";
 						document.getElementById("tradeContentId").style.display = "block";
-					}else{
-						openLogin(); 
+						$("#TradingCenter").prop("href","#trade");
 					}
 				});
 				document.getElementById("Time").addEventListener("tap",function(){
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 				});
-				document.getElementById("Candlestick").addEventListener("tap",function(){
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-				});
+				var candlestickChartItem = document.getElementById('CandlestickChart');
+//				var html1="<div   id='CandlestickChartDiv' style='width:100%;height:250px;'></div>"
+//				document.getElementById("Candlestick").addEventListener("tap",function(){
+//					document.getElementsByClassName("buttomFix")[0].style.display="block";
+//					
+////					if (candlestickChartItem.querySelector('.mui-loading')) {
+////						alert("3434")
+////							setTimeout(function() {
+////								candlestickChartItem.innerHTML = html1;
+////							}, 500);
+////						}
+//				});
 				init(Transfer.name);
 				cachTranFers(Transfer.name);
-				
 			});
 		</script>
 		<script>
@@ -194,11 +197,11 @@
 					var type = $("input[type = 'radio']:checked").val();
 					var orderPrice = $("#orderPrice");
 					if(type == 1){
+						orderPrice.prop("placeholder","市价");
 						orderPrice.prop("disabled",true);
-						orderPrice.val("市价");
 					}else{
 						$("#orderPrice").prop("disabled",false);
-						orderPrice.val("请输入价格");
+						orderPrice.prop("placeholder","请输入价格");
 					}
 				});
 				//提交订单

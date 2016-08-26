@@ -8,7 +8,6 @@
     <script src="js/common.js"></script>
     <link href="css/mui.min.css" rel="stylesheet"/>
     <link href="css/own.css" rel="stylesheet"/>
-    
 </head>
 <body>
 <!--弹出广告-->
@@ -99,6 +98,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
 					<img src="images/icon4.png" />
 					<h2>一个账号可交易10个品种</h2>
+					<p>交易手续费：<i id="cl_tranfee">49元/手</i>起</p>
 					<p class="buttomP"><label>交易时间：</label><span>06:05-04:55</span></p>
 					
 				</a>
@@ -157,8 +157,8 @@
 				mui.openWindow("tzdr/future/hsi.html","hsi"); 
 			});
 			document.getElementById("cp").addEventListener("tap",function(){
-				mui.openWindow("tzdr/future/cp.html","cp"); 
-//				mui.openWindow("tzdr/quotation/transactionDetails.html","cp");  
+//				mui.openWindow("tzdr/future/cp.html","cp"); 
+				mui.openWindow("tzdr/quotation/transactionDetails.html","cp"); 
 			});
 //			document.getElementById("lhsi").addEventListener("tap",function(){
 //				mui.openWindow("tzdr/future/lhsi.html","lhsi");  
