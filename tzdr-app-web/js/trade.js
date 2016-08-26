@@ -151,7 +151,7 @@ function appendPosition(data){
 	if(validationLastPrice()){
 		floatingProft = price;
 	}else{
-		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum);
+		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),holdNum);
 	}
 	var cls = 'position-index'+positionsIndex;
 	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi myLi"  >'

@@ -187,9 +187,9 @@ function doGetMarketPrice(price,miniTikeSize,drection){
  * @param {Object} tradeAvgPrice
  * @param {Object} contractSize
  */
-function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum){
+function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,orderNum){
 	var price = lastPrice - tradeAvgPrice;
-	return parseFloat((price * contractSize / miniTikeSize) * orderNum).toFixed(2);
+	return parseFloat((price * contractSize) * orderNum).toFixed(2);
 }
 /**
  * 连接交易
