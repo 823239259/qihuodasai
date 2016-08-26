@@ -69,9 +69,6 @@ socket.onmessage = function(evt) {
 		} else if (method == "OnRspQryHold") {
 			var positionParam = parameters;
 			appendPostionAndUpdate(positionParam);
-			$(".myLi").click(function(){
-				$(this).toggleClass("toggleClassBack");
-			});
 			//报单录入请求回复
 		} else if (method == "OnRspOrderInsert") {
 			var insertOrderParam = parameters;
@@ -526,6 +523,7 @@ function addPositionBindClick(cls){
 			var $this = $(this);
 			positionWholeContract = $this.attr("data-tion-position");
 		    positionWholeIndex = $this.attr("data-index");
+		    $this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
 		});
 	});
 }
@@ -538,6 +536,7 @@ function addTradeBindClick(cls){
 		$("."+cls+"").bind("click",function(){
 			var $this = $(this);
 			tradeWholeContracts = $this.attr("data-tion-trade");
+			 $this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
 		});
 	});
 }
@@ -550,6 +549,7 @@ function addOrderBindClick(cls){
 		$("."+cls+"").bind("click",function(){
 			var $this = $(this);
 			orderWholeContracts = $this.attr("data-tion-order");
+			 $this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
 		});
 	});
 }
@@ -563,6 +563,7 @@ function addDesignatesBindClick(cls){
 			var $this = $(this);
 			designateWholeContracts = $this.attr("data-tion-designates");
 			designateWholeIndex = $this.attr("data-index");
+			 $this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
 		});
 	});
 }

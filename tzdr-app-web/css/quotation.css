@@ -239,7 +239,7 @@ p{
 	color:#999999 !important;
 }
 .whiteFont{
-	color:#FFFFFF;
+	color:#FFFFFF !important;
 }
 .dataRight{
 	display: block;
@@ -523,3 +523,7 @@ input{
 .mui-table-view-cell:after{
 	content:none;
 }
+.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
+	color:#FFCC33;
+}
+

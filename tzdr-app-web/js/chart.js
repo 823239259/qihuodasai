@@ -132,9 +132,11 @@ mui.plusReady(function(){
     var echarts;
     var time=[];
     var prices=[];
+    var timeLabel=[]
     var timeData={
         "time":time,
-        "prices":prices
+        "prices":prices,
+        "timeLabel":timeLabel
     };
     loadK();
     //生成一个K线图容器
@@ -177,15 +179,26 @@ mui.plusReady(function(){
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
     function insertDATA(DATA){
-    	var doSize = $("#doSize").val();
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
     	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
     	sellPricesNumber.innerHTML=DATA.Parameters.BidQty1;
     	volumePricesNumber.innerHTML=DATA.Parameters.LastVolume;
-    	freshPrices.innerHTML=DATA.Parameters.LastPrice.toFixed(doSize);
-    	domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
-    }
+    	freshPrices.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
+    	if (Number(DATA.Parameters.LastPrice) - Number(DATA.Parameters.PreSettlePrice) < 0) {
+			 freshPrices.className = "greenFont";
+			 }else {
+			freshPrices.className = "redFont";
+		}
+		domnRange.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+" / "+DATA.Parameters.ChangeRate.toFixed(2)+"%";
+		if(Number(DATA.Parameters.ChangeRate)==0){
+				 domnRange.className = "whiteFont";
+			 }else if(Number(DATA.Parameters.ChangeRate)>0){
+				domnRange.className = "redFont";
+			}else if(Number(DATA.Parameters.ChangeRate)<0){
+				 domnRange.className = "greenFont";
+			}
+	    }
     var timeNumber=0
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
@@ -205,7 +218,6 @@ mui.plusReady(function(){
         	var j=0;
         	for(var i=0;i<Len;i++){
         		if(str2<=jsonData.Parameters[i].DateTimeStamp && jsonData.Parameters[i].DateTimeStamp<=lastTime){
-        			
         			var openPrice = jsonData.Parameters[i].OpenPrice;
 		            var closePrice = jsonData.Parameters[i].LastPrice;
 		            var chaPrice = closePrice - openPrice;
@@ -334,9 +346,14 @@ mui.plusReady(function(){
     function handleTime(json){
         var Len=json.Parameters.length;
         var TimeLength=timeData.time.length;
+       	var Parameters=json.Parameters
         for(var i=0;i<Len;i++){
-            timeData.time[TimeLength+i]=json.Parameters[i].DateTimeStamp;
-            timeData.prices[TimeLength+i]=json.Parameters[i].LastPrice;
+        	var time2=Parameters[i].DateTimeStamp.split(" ");
+        	var str1=time2[1].split(":");
+        	var str2=str1[0]+":"+str1[1]
+            timeData.timeLabel[TimeLength+i]=str2;
+            timeData.time=Parameters[i].DateTimeStamp
+            timeData.prices[TimeLength+i]=Parameters[i].LastPrice;
         }
         var option = setOption1();
         if(timeChart != null){

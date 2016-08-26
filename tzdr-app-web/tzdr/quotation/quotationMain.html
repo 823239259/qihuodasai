@@ -44,9 +44,9 @@
 				<p class="grayFont CommodityNo">CL1610</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="redFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span><p class="redBg ChangeRate">-</p></span>
+				<span><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -55,9 +55,9 @@
 				<p class="grayFont CommodityNo">HSI1608</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="greenFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="greenBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 				</a>
 				<a class='openPage'>
@@ -66,9 +66,9 @@
 				<p class="grayFont CommodityNo">CN1608</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="redFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -77,9 +77,9 @@
 				<p class="grayFont CommodityNo">DAX1609</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="greenFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -88,9 +88,9 @@
 				<p class="grayFont CommodityNo">GC1612</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="redFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -99,9 +99,9 @@
 				<p class="grayFont CommodityNo">MH1608</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="greenFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -110,9 +110,9 @@
 				<p class="grayFont CommodityNo">YM1609</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="redFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -121,9 +121,9 @@
 				<p class="grayFont CommodityNo">NQ1609</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="greenFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -132,9 +132,9 @@
 				<p class="grayFont CommodityNo">NK1609</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="greenFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 			<a class='openPage'>
@@ -143,9 +143,9 @@
 				<p class="grayFont CommodityNo"><span class="CommodityNoName">ES</span>1609</p>
 			</div>
 			<div class="productContentRight" class="mui-col-xs-9">
-				<span class="greenFont QLastPrice">-</span>
+				<span class=" QLastPrice">-</span>
 				<span class="LastVolume">-</span>
-				<span ><p class="redBg ChangeRate">-</p></span>
+				<span ><p class=" ChangeRate">-</p></span>
 			</div>
 			</a>
 		</div>
@@ -347,8 +347,7 @@
 			        var ChangeRate = document.getElementsByClassName("ChangeRate");
 			        var LastPrice = document.getElementsByClassName("QLastPrice");
 			        var productContentLeft = document.getElementsByClassName("CommodityNoName");
-			        for (var i = 0; i < productContentLeft.length; i++) {
-			            console.log(productContentLeft.length);
+			        for (var i = 0; i < productContentLeft.length; i++) {          
 			            if (MoreData.Parameters.CommodityNo == productContentLeft[i].innerHTML) {
 			                LastVolume[i].innerText = MoreData.Parameters.TotalVolume;
 			                if (Number(MoreData.Parameters.ChangeRate.toFixed(4)) < 0) {
@@ -378,7 +377,7 @@
 			    var LastVolume=document.getElementsByClassName("LastVolume");
 			    var ChangeRate=document.getElementsByClassName("ChangeRate");
 			    var LastPrice=document.getElementsByClassName("QLastPrice");
-			    console.log(MoreData.Parameters)
+			    
 				switch(MoreData.Parameters.CommodityNo){
 					case "CL":
 					LastVolume[0].innerText=MoreData.Parameters.TotalVolume;

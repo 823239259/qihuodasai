@@ -20,9 +20,8 @@
 .main_list .mui-table-view-cell img { width: 70px; height:70px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
 .main_list .mui-table-view-cell h2 {width: 70%; height: 30px; line-height: 30px; text-align: left; font-size: 14px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
 .main_list .mui-table-view-cell p { color:#999999; line-height: 30px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
-.main_list .mui-table-view-cell .buttomP{border-top:1px solid #e6e6e6;width: 100%;margin-top: 30px;}
 .main_list .mui-table-view-cell p i { color: #2b2b2b; font-style: normal; }
-.main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:80px;margin-top: 10px;}
+.main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:75px;margin-top: 10px; border-top:1px solid #e6e6e6;}
 .main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;padding-right: 0px;margin-right: -50px;}
 .mui-table-view-cell:after{
 	content:none;
@@ -78,7 +77,7 @@
 .link-area a#forgetPassword { float: right;}
 a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .mui-action-back i { font-style: normal; font-size:14px; vertical-align: 2px;}
-.lg_codebtn { position: absolute; background: #333333; color: #FFCC33; border: none; right: 10px; top: 7px; width: 90px; z-index: 5;}
+.lg_codebtn { position: absolute; background: #454545; color: #FFCC33; border: none; right: 10px; top: 7px; width: 90px; z-index: 5;}
 .lg_codebtn:hover { background: #333333; color: #FFCC33;}
 .mui-content-padded p a,.mui-content-padded p { color: #999999;}
 .mui-content-padded p i { font-style: normal;}
@@ -512,4 +511,14 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .mui-input-row input{
 	text-align: center;
 	background-color: #2B2B2B;
+	color:#666666;
+}
+.mui-navigate-right:after, .mui-push-right:after{
+	right:0px;
+	content:'\e583';
+}
+.RegistrationTips{
+	width: 100%;
+	text-align: center!important;
+	color:#FFFFFF!important;
 }
