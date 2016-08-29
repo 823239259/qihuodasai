@@ -105,7 +105,7 @@
 						<label>操盘须知：</label><span style="color:#333; font-size:16px;">香港恒指期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label><span><i style="font-size:18px;">09:20—16:25，17:20—23:40</i></span>
+						<label>交易时间：</label><span><i style="font-size:18px;">09:20-11:55，13:05-16:25，17:20-23:40</i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
