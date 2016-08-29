@@ -224,7 +224,8 @@
 				"refer": [
 					"home.html",
 					"tzdr/login/regist.html",
-					"tzdr/login/password.html"
+					"tzdr/login/password.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
@@ -874,7 +875,9 @@
 					"images/status_03.png",
 					"images/status_04.png",
 					"images/2.0.png",
-					"images/1.png"
+					"images/1.png",
+					"images/3.png",
+					"images/0.png"
 				],
 				"refer": [
 					"tzdr/buy/buy.html",

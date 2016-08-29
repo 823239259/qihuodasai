@@ -243,7 +243,6 @@ mui.plusReady(function(){
 		   		}
 		   }
 		   badata=addRawData.slice(-60)
-		   console.log(badata.length);
         	var option = setOption(badata);
 	        if(myChart != null){
 	        	myChart.setOption(option);
@@ -464,10 +463,11 @@ mui.plusReady(function(){
                x2:20,
                y2:20
            },
-           series: {type: 'line',
+           series: {
+           	type: 'line',
                label: {
                    normal: {
-                       show: true,
+                       show: false,
                        position: 'inside'
                    },
                },
