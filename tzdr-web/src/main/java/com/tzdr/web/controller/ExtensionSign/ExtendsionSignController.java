@@ -26,11 +26,14 @@ import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.generalize.GeneralizeService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
+import com.tzdr.common.utils.RandomCodeUtil;
 import com.tzdr.common.utils.StringCodeUtils;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.constants.ExtensionConstants;
+import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.web.entity.ActivityReward;
 import com.tzdr.domain.web.entity.GeneralizeChannel;
 import com.tzdr.domain.web.entity.GeneralizeVisit;
@@ -105,6 +108,8 @@ public class ExtendsionSignController {
 			generalizeVisit.setActivity(ExtensionConstants.ACTIVITY_TYPE);
 			generalizeService.saveGeneralizeVisit(generalizeVisit);
 			modelMap.put("channelCode", channelCode);
+			List<DataMap> dataMaps = dataMapService.findByTypeKey("websiteRecord");
+			modelMap.put("footNote", dataMaps != null && dataMaps.size() >0 ?dataMaps.get(0).getValueName():"");
 		}
 		return ViewConstants.SignInViewJsp.EXTENDSIONSIGN_VEIW;
 	}
@@ -239,6 +244,11 @@ public class ExtendsionSignController {
 			data.put("volumePrice", wUser.getVolumePrice());
 			data.put("key", Base64.encodeToString(wUser.getId()));
 			data.put("userName", userName);
+			Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
+			smsParams.put("module", "注册");
+			String randomCode = RandomCodeUtil.randStr(6);   //生成6为验证码
+			smsParams.put("code", randomCode);
+            SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile, "ihuyi.activity.signin.success.template", smsParams);
 			jsonResult.setData(data);
 		}
 		return jsonResult;

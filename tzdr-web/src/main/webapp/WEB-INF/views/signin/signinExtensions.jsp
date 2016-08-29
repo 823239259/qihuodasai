@@ -272,7 +272,7 @@ function getCookie(c_name) {
 </div>
 <div class="ks_footer" style="position: relative;">
 	<p>
-		<span>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</span>
+		<span>${footNote}<!-- Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 --></span>
 		<img src="${ctx}/static/images/image/chengxing.png" style="margin-right: 0;">
     	<img src="${ctx}/static/images/image/anquan.png">
     	<img src="${ctx}/static/images/image/shiming.png">
