@@ -198,7 +198,8 @@
 					"images/main.png",
 					"js/common.js",
 					"css/common.css",
-					"images/icons/LOGO.png"
+					"images/icons/LOGO.png",
+					"manifest.json"
 				],
 				"refer": [
 					"tzdr/login/login.html",

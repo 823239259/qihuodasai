@@ -413,13 +413,17 @@ p{
 .link-area a span{
 	color:#FFCC33;
 }
+.productList {
+	width: 100%;
+	height: 500px;
+	margin-top: 45px;
+}
 .productList span,.productList p{
 	color:#FFFFFF;
 }
 .productList div{
 	float: left;
 }
-
 .productContentLeft{
 	height:50px;
 	width: 25%;
@@ -441,7 +445,7 @@ p{
 }
 .productContentRight span{
 	display: inline-block;
-	width: 32%;
+	width: 31%;
 	text-align: center;
 }
 .redFont{
@@ -500,8 +504,9 @@ input{
 	height: 40px;
 	line-height: 40px;
 	color: #FFFFFF;
-	position: relative;
-	top:0px; 
+	position: fixed;
+	top:45px;
+	background-color: #2B2B2B;
 }
 #fisrtLlist span{
 	display: inline-block;
@@ -528,4 +533,3 @@ input{
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
 	color:#FFCC33;
 }
-

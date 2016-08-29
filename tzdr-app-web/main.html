@@ -29,7 +29,10 @@
     	//当前应用版本号
 	  	var wgtVer=null;
 		mui.plusReady(function(){
-			
+			//获取友盟的统计代码
+//			mui.getJSON("manifest.json",null,function(data){
+//				alert(data.plus.distribute.plugins.statics.umeng.appkey_android)
+//			});
 			//状态栏设置
 			setstatus();
 			 if(plus.storage.getItem("guide")==null){

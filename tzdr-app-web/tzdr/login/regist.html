@@ -120,8 +120,7 @@
       			 'mobile':mobile,
 			    'code':code,
 			    'password':password
-      		},function(result){
-      			
+      	},function(result){
       				mui.toast("恭喜您注册成功！");
       				//存储用户信息
       				mui.cacheUser.save(result.data.token,result.data.secret,mobile);

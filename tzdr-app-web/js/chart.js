@@ -154,10 +154,7 @@ mui.plusReady(function(){
                     myChart = ec.init(document.getElementById('CandlestickChartDiv'));
                    
                     var option = setOption(rawData);
-                    // 为echarts对象加载数据
-//                  setTimeout(function(){
-//                  	 myChart.setOption(option);
-//                  },1000);
+
                     echarts=ec;
                     timeChart=ec.init(document.getElementById("timeChart"));
                     var option1=setOption1(timeData);
@@ -211,31 +208,43 @@ mui.plusReady(function(){
 		}
     var timeNumber=0;
     var num=0;
-
+ 	
+ 	 var parameters1=null;
     function processingData(jsonData){
-    	    var addRawData;
+    		 var addRawData=[];
+    		 var badata=null;
     		var parameters = jsonData.Parameters;
+    		var Len=parameters.length;
+    		parameters1=parameters;
     		if(parameters == null)return;
     	    var lent=rawData.length;
-        	var Len=parameters.length; 
-        	var fistListData=null;
-        	for(var i=0;i<Len;i++){
-        			var openPrice = parameters[i].OpenPrice;
-		            var closePrice = parameters[i].LastPrice;
+    	    var newData=null;
+    	    if(Len>60){
+    	    	newData=parameters.slice(-60);
+    	    }else{
+    	    	newData=parameters;
+    	    }
+    	    var newDataLength=newData.length;
+        	for(var i=0;i<newDataLength;i++){
+        			var openPrice = newData[i].OpenPrice;
+		            var closePrice = newData[i].LastPrice;
 		            var chaPrice = closePrice - openPrice;
-		            time1=parameters[i].DateTime;
-		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
+		            time1=newData[i].DateTime;
+		            var sgData = [newData[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",newData[i].LowPrice,newData[i].HighPrice,"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
-       		if(timeNumber==0){
-       			addRawData=rawData.slice(-60);
-				timeNumber++;
-       		}else{
-       			rawData.splice(0,1);
-       		}
-       		console.log(rawData.length);
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
-        	var option = setOption(addRawData);
+		   var lent1=rawData.length;
+		   for(var i=0;i<lent1-2;i++){
+		   		if(rawData[i][0]==rawData[i+1][0]){
+		   			
+		   		}else{
+		   			addRawData.push(rawData[i]);
+		   		}
+		   }
+		   badata=addRawData.slice(-60)
+		   console.log(badata.length);
+        	var option = setOption(badata);
 	        if(myChart != null){
 	        	myChart.setOption(option);
 	        	document.getElementById("Candlestick").addEventListener("tap",function(){
