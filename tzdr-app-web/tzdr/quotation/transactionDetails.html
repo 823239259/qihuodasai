@@ -323,7 +323,7 @@
 				var contractParam = new Array();
 				for(var i = 0 ; i < lengthIndex ; i++){
 					var orderId = designatesOrderId[i];
-					var designateDom  = $("li[contract-code-position='"+orderId+"']");
+					var designateDom  = $("li[data-tion-designates='"+orderId+"']");
 					if(designateDom.html() == undefined){
 						return;
 					}
@@ -357,7 +357,7 @@
 						alertProtype("金额错误","提示",Btn.confirmed());
 						return;
 					}
-					var limitPirce = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize"),$drection)//doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
+					var limitPirce = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),drection)//doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
 					var orderRef = new Date().getTime();
 					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
 					tradeParam[i] = sellingParam;

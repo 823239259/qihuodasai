@@ -268,7 +268,6 @@ function appendDesignatesAndUpdate(param){
  * @param {Object} data
  */
 function appendDesignates(data){
-	console.log(data);
 	var designatesParam = data;
 	var drection = designatesParam.Drection;
 	var orderNum = designatesParam.OrderNum;
@@ -569,15 +568,8 @@ function addDesignatesBindClick(cls){
 			var $this = $(this);
 			designateWholeContracts = $this.attr("data-tion-designates");
 			designateWholeIndex = $this.attr("data-index");
-			var lengthIndex = designatesOrderId.length;
-			for(var i = 0 ; i < lengthIndex ; i++){ 
-				if(designatesOrderId[i] == designatesContract){
-					designatesIndex.remove(i);
-				}else{
-					designatesOrderId[i] = designatesContract;
-				}
-			}
-			 $this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
+			designatesOrderId[0] = designateWholeContracts;
+			$this.addClass("toggleClassBack").siblings().removeClass("toggleClassBack");
 		});
 	});
 }
