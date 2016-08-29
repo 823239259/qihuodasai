@@ -211,8 +211,9 @@ mui.plusReady(function(){
 		}
     var timeNumber=0;
     var num=0;
-    var addRawData;
+
     function processingData(jsonData){
+    	    var addRawData;
     		var parameters = jsonData.Parameters;
     		if(parameters == null)return;
     	    var lent=rawData.length;
@@ -226,12 +227,13 @@ mui.plusReady(function(){
 		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
-//     		var splitLength = rawData.length;
-//     		if(splitLength > 60){
-//     			splitLength = splitLength - 60;
-//     		}
-		    addRawData = rawData.splice(-60);
-		    console.log(addRawData.length);
+       		if(timeNumber==0){
+       			addRawData=rawData.slice(-60);
+				timeNumber++;
+       		}else{
+       			rawData.splice(0,1);
+       		}
+       		console.log(rawData.length);
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
         	var option = setOption(addRawData);
 	        if(myChart != null){
