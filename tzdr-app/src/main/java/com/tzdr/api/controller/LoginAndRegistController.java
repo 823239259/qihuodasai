@@ -1,19 +1,14 @@
 package com.tzdr.api.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jodd.mail.MailException;
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
-import org.apache.axis2.databinding.types.soapencoding.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -35,6 +30,7 @@ import com.tzdr.business.api.service.ApiTradeService;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.service.feededuction.FeeDuductionService;
 import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
@@ -44,6 +40,7 @@ import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
+import com.tzdr.domain.web.entity.GeneralizeChannel;
 import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
@@ -77,6 +74,8 @@ public class LoginAndRegistController {
 	
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
+	@Autowired
+	private GeneralizeChannelService channelService;
 
 	private static Object lock = new Object();
 	
@@ -140,7 +139,19 @@ public class LoginAndRegistController {
 		wUser.setMobile(mobile);
 		wUser.setCtime((new Date().getTime()/1000));
 		wUser.setRegIp(IpUtils.getIpAddr(request));
-		//设置渠道
+		GeneralizeChannel generalizeChannel = getChannel(channel);
+		if (generalizeChannel != null) {
+			String channelName = generalizeChannel.getTypeThreeTitle();
+			if (channelName == null || channelName.length() <= 0) {
+				channelName = generalizeChannel.getTypeTwoTitle();
+				if (channelName == null || channelName.length() <= 0) {
+					channelName = generalizeChannel.getTypeOneTitle();
+				}
+			}
+			wUser.setChannel(channelName); // 设置渠道
+			wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
+		}
+		/*//设置渠道
 		wUser.setChannel(channel);  
 		//推广人编号
 		if(StringUtil.isNotBlank(parentGeneralizeId)){
@@ -149,7 +160,7 @@ public class LoginAndRegistController {
 				wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null? 0.00:generalizeWuser.getSubordinateDefaultRebate());
 				wUser.setParentNode(generalizeWuser);
 			}
-		}
+		}*/
 		wUser.setLastLoginTime(Dates.getCurrentLongDate());
 		String ip = IpUtils.getIpAddr(request);
 		wUser.setLastLoginIp(ip);
@@ -190,7 +201,14 @@ public class LoginAndRegistController {
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	
-	
+	public GeneralizeChannel getChannel(String params) {
+		List<GeneralizeChannel> generaList = channelService.findByParamAndDeletedFalse(params);
+		GeneralizeChannel channel2 = null;
+		if (generaList.size() > 0) {
+			channel2 = generaList.get(0);
+		}
+		return channel2;
+	}
 	/**
 	 * 系统登录接口
 	 * @param requestObj
