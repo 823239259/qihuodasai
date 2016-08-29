@@ -82,7 +82,7 @@ public class ActivityController {
 	 *            2016.08.01
 	 * @return
 	 */
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult extendSignView(ModelMap modelMap, HttpServletRequest request,
 			@RequestParam(value = "channelCode", required = false) String channelCode,
@@ -114,7 +114,7 @@ public class ActivityController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/regist",method=RequestMethod.GET)
+	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
 		
