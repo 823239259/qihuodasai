@@ -21,6 +21,77 @@
 <script type="text/javascript">
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
+<script type="text/javascript">
+$(function () {
+	 // 加载最新公告
+   var showNotice = false;
+   var content="";
+   $.ajax({
+   	url:basepath+"findnewData",
+   	data:{},
+   	type:'POST',
+   	success:function(nitives){
+   		var reg1=new RegExp("&lt;","g"); 
+   		var reg2=new RegExp("&gt;","g"); 
+   		$(nitives).each(function(){
+   			content = $(this).attr("content");
+   			content=content.replace(reg1,"<");
+   			content=content.replace(reg2,">");
+   			$('.notice-content').html(content);
+  			$('#noticeid1').val($(this).attr("version1"));
+  			// 检查公告
+  	   	    checkNotice1();
+  	   		showNotice = true;
+   		});
+   	},dataType:'json'
+   })
+   
+}); 
+	
+//检测公告
+function checkNotice1() {
+	var noticeid = getCookie("noticeid1");
+	if(noticeid != null && noticeid.length > 0) {
+		$(".site-notice").remove();
+	} else {
+		$(".notice-fixed").fadeIn("slow");
+	}
+}
+//关闭公告
+function closeNotice1() {
+	$(".site-notice").remove();
+	addCookie("noticeid1", $("#noticeid1").val());
+}
+
+function addCookie(objName, objValue){
+	if(objValue==""){
+		var Num="";
+		for(var i=0;i<6;i++){ 
+			Num+=Math.floor(Math.random()*10); 
+		} 
+		objValue=Num;
+	}
+	var days = 365; 
+   var exp = new Date(); 
+   exp.setTime(exp.getTime() + days*24*60*60*1000); 
+   document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
+}
+//获取指定名称的cookie的值 
+function getCookie(c_name) {
+	if (document.cookie.length > 0) {
+		var c_start = document.cookie.indexOf(c_name + "=");
+		if(c_start != -1) {
+			c_start = c_start + c_name.length + 1; 
+			c_end = document.cookie.indexOf(";", c_start)
+			if(c_end == -1) {
+				c_end = document.cookie.length;
+			}
+		    return unescape(document.cookie.substring(c_start, c_end))
+		}
+	}
+	return ""
+} 
+</script>
 <style>
 	.rg_l_error { display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ; position: relative;left: 0px;top: 0;text-align: left;margin-left: 20px;}
 	.rg_l_promt {display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ;position: relative;left: 0px;top: 0;text-align: left;margin-left: 20px;}
@@ -199,13 +270,21 @@
 		<p class="ks_zp"><a href="#" onclick="signinExtenScrollTop()">点我立即注册</a><p>
 	</div>
 </div>
-<div class="ks_footer">
+<div class="ks_footer" style="position: relative;">
 	<p>
 		<span>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</span>
 		<img src="${ctx}/static/images/image/chengxing.png" style="margin-right: 0;">
     	<img src="${ctx}/static/images/image/anquan.png">
     	<img src="${ctx}/static/images/image/shiming.png">
     </p>
+    <div class="site-notice notice-relative" style="position: absolute;top: 0px; width: 100%; background: #333;">
+		<div class="notice-style" style="height: 60px; position: relative;">
+			<a href="javascript: closeNotice1();" class="notice-close" style="top: 18px;"></a>
+			<div class="notice-content" style="height: 60px; line-height: 60px; text-align: center;">
+				<p></p>
+			</div>
+		</div>
+	</div>
 </div>
 <%@ include file="../common/dsp.jsp"%>
 </body>
@@ -214,5 +293,77 @@
 		$('body,html').animate({scrollTop:0},500);
 		return false;
 	}
+</script>
+<script type="text/javascript">
+ $(function () {
+	 // 加载最新公告
+    var showNotice = false;
+    var content="";
+    $.ajax({
+    	url:basepath+"findnewData",
+    	data:{},
+    	type:'POST',
+    	success:function(nitives){
+    		console.log(nitives);
+    		var reg1=new RegExp("&lt;","g"); 
+    		var reg2=new RegExp("&gt;","g"); 
+    		$(nitives).each(function(){
+    			content = $(this).attr("content");
+    			content=content.replace(reg1,"<");
+    			content=content.replace(reg2,">");
+    			$('.notice-content').html();
+   				$('#noticeid1').val($(this).attr("version1"));
+   			 	// 检查公告
+   	   		    checkNotice1();
+   	   		    showNotice = true;
+    		});
+    	},dataType:'json'
+    })
+    
+}); 
+	
+//检测公告
+function checkNotice1() {
+	var noticeid = getCookie("noticeid1");
+	if(noticeid != null && noticeid.length > 0) {
+		$(".site-notice").remove();
+	} else {
+		$(".notice-fixed").fadeIn("slow");
+	}
+}
+// 关闭公告
+function closeNotice1() {
+	$(".site-notice").remove();
+	addCookie("noticeid1", $("#noticeid1").val());
+}
+
+function addCookie(objName, objValue){
+	if(objValue==""){
+		var Num="";
+		for(var i=0;i<6;i++){ 
+			Num+=Math.floor(Math.random()*10); 
+		} 
+		objValue=Num;
+	}
+	var days = 365; 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() + days*24*60*60*1000); 
+    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
+}
+//获取指定名称的cookie的值 
+function getCookie(c_name) {
+	if (document.cookie.length > 0) {
+		var c_start = document.cookie.indexOf(c_name + "=");
+		if(c_start != -1) {
+			c_start = c_start + c_name.length + 1; 
+			c_end = document.cookie.indexOf(";", c_start)
+			if(c_end == -1) {
+				c_end = document.cookie.length;
+			}
+		    return unescape(document.cookie.substring(c_start, c_end))
+		}
+	}
+	return ""
+} 
 </script>
 </html>
