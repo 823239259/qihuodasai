@@ -226,11 +226,12 @@ mui.plusReady(function(){
 		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
-       		var splitLength = rawData.length;
-       		if(splitLength > 60){
-       			splitLength = splitLength - 60;
-       		}
+//     		var splitLength = rawData.length;
+//     		if(splitLength > 60){
+//     			splitLength = splitLength - 60;
+//     		}
 		    addRawData = rawData.splice(-60);
+		    console.log(addRawData.length);
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
         	var option = setOption(addRawData);
 	        if(myChart != null){
@@ -263,6 +264,14 @@ mui.plusReady(function(){
 		                opacity: 1
 		            }
 		        },
+		         formatter: function (params) {
+		            var res = params[0].name;
+//		            console.log(JSON.stringify(params));
+		            res += '<br/>' + params[0].seriesName;
+		            res += '<br/>  开盘 : ' + params[0].value[0] + '  最高 : ' + params[0].value[3];
+		            res += '<br/>  收盘 : ' + params[0].value[1] + '  最低 : ' + params[0].value[2];
+		            return res;
+		        }
 		    },
 		    grid: {
 		               x: 43,
