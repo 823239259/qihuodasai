@@ -1,4 +1,5 @@
 mui.plusReady(function(){
+		var muiSpinner=document.getElementsByClassName("mui-spinner");
     	var Transfer=plus.webview.currentWebview();
 		var CommodityNo=document.getElementById("CommodityNo");
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
@@ -12,7 +13,10 @@ mui.plusReady(function(){
 	        'echarts' :'../../js/echarts',
 	        'echarts/chart/pie' :'../../js/echarts',
 	    }
-    });
+    	});
+    	setTimeout(function(){
+					muiSpinner[0].style.display="none";
+			},200);
 	var time1;
     var url = MarketUrl.SocketUrl;
     var marketSocket = new WebSocket(url);
@@ -96,15 +100,15 @@ mui.plusReady(function(){
 	 */
 	function updateFloatProfit() {
 		for (var i = 0; i < positionsIndex; i++) {
-			var $this = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position4']");
-			var $thisAvgPrice = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position3']");
-			var $thisHoldNum = $("li[contract-code-position='" + positionContractCode[i] + "'] span[class = 'position2']");
+			var $thisFloat = $("li[contract-code-position = " + positionContractCode[i] + "] span[class = 'position4 dateTimeL']");
+			var $thisAvgPrice = $("li[contract-code-position = " + positionContractCode[i] + "] span[class = 'position3']");
+			var $thisHoldNum = $("li[contract-code-position = " + positionContractCode[i] + "] span[class = 'position2']");
 			//验证该平仓数据是否存在列表中
-			if ($this.html() == undefined) {
-				continue;
+			if ($thisAvgPrice.text() == undefined) {
+				continue; 
 			}
 			var floatProfit = doGetFloatingProfit(parseFloat($("#lastPrice").text()), parseFloat($thisAvgPrice.text()) , $("#contractSize").val(),$("#miniTikeSize").val(),parseInt($thisHoldNum.text()));
-			$this.text(floatProfit);
+			$thisFloat.text(floatProfit);
 		}
 	}
     /**
@@ -174,7 +178,7 @@ mui.plusReady(function(){
     var buyPricesNumber=document.getElementById("buyPricesNumber");
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
-    	var doSize=$("#doSize").val();
+    var doSize=$("#doSize").val();
     function insertDATA(DATA){
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
@@ -227,11 +231,11 @@ mui.plusReady(function(){
         		var time2=newData[i].DateTimeStamp.split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = newData[i].OpenPrice;
-		            var closePrice = newData[i].LastPrice;
+        			var openPrice = parseFloat(newData[i].OpenPrice).toFixed(doSize);
+		            var closePrice = parseFloat(newData[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
 		            time1=newData[i].DateTime;
-		            var sgData = [str2,openPrice.toFixed(doSize),closePrice.toFixed(doSize),chaPrice.toFixed(doSize),"",newData[i].LowPrice.toFixed(doSize),newData[i].HighPrice.toFixed(doSize),"","","-"];
+		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(newData[i].LowPrice).toFixed(doSize),parseFloat(newData[i].HighPrice).toFixed(doSize),"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
@@ -248,23 +252,27 @@ mui.plusReady(function(){
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
-		  		console.log("234");
 		  		myChart.setOption(CandlestickChartOption);
 		  	}
     }
     document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(myChart != null){
-						plus.nativeUI.showWaiting( "正在加载内容" );
-								setTimeout( function(){
-								plus.nativeUI.closeWaiting();
-							}, 200 );
-							document.getElementsByClassName("buttomFix")[0].style.display="block";
-							setTimeout(function(){
-								 	myChart.resize();	
-									myChart.setOption(CandlestickChartOption);
-				        			myChart.resize();	
-				        			firstTimeNumber++;
-				        		},10);
+				 	setTimeout(function(){
+				 		muiSpinner[1].style.display="none";
+				 	},200)
+//				 	if(firstTimeNumber==0){
+//				 		plus.nativeUI.showWaiting( "正在加载内容" );
+//							firstTimeNumber=1;
+//				 	}	
+//					setTimeout( function(){
+//						plus.nativeUI.closeWaiting();
+//					}, 200 );
+					document.getElementsByClassName("buttomFix")[0].style.display="block";
+						setTimeout(function(){
+						 	myChart.resize();	
+							myChart.setOption(CandlestickChartOption);
+		        			myChart.resize();	
+		        		},10);
 			    }
 	});
     //设置数据参数（为画图做准备）
@@ -373,6 +381,7 @@ mui.plusReady(function(){
 		}
         return option;
     }
+    var timeChartNumber=0
     function handleTime(json){
         var Len=json.Parameters.length;
         var TimeLength=timeData.time.length;
@@ -383,7 +392,7 @@ mui.plusReady(function(){
         	var str2=str1[0]+":"+str1[1]
             timeData.timeLabel[TimeLength+i]=str2;
             timeData.time[i]=str2
-            timeData.prices[TimeLength+i]=Parameters[i].LastPrice;
+            timeData.prices[TimeLength+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize);
         }
         var option = setOption1();
         if(timeChart != null){
@@ -635,10 +644,5 @@ mui.plusReady(function(){
         return option
 }
 
-/**
- * 关闭行情额链接 
- */
-	document.getElementById("backClose").addEventListener("tap",function(){
-		marketSocket.close();
-	});
+
 });

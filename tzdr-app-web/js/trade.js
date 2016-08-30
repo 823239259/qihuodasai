@@ -32,82 +32,89 @@ var entrustsIndex = 0;
 var tradesIndex = 0;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
-socket.onopen = function() {
-	if(username != null) 
-		Trade.doLogin(username, password);
-}
-socket.onclose = function() {
-}
-socket.onmessage = function(evt) {
-	var dataString = evt.data;
-	var data = JSON.parse(dataString);
-	var method = data.Method;
-	var parameters = data.Parameters;
-	if (parameters != null) {
-		if (method == "OnRspLogin") {
-			var code = parameters.Code;
-			var loginMessage = parameters.Message;
-			if (code == 0) {
-				initDom();
-			} else {
-				alertProtype("获取信息失败!请重新登录","提示",Btn.confirmed(),openLogin());
+loadSocket();
+function loadSocket(){
+	if(socket != null){
+		socket.onopen = function() {
+			if(username != null) 
+				Trade.doLogin(username, password);
+		}
+		socket.onclose = function() {
+		}
+		socket.onmessage = function(evt) {
+			var dataString = evt.data;
+			var data = JSON.parse(dataString);
+			var method = data.Method;
+			var parameters = data.Parameters;
+			if (parameters != null) {
+				if (method == "OnRspLogin") {
+					var code = parameters.Code;
+					var loginMessage = parameters.Message;
+					if (code == 0) {
+						initDom();
+					} else {
+						clearLogin();
+						alertProtype("登录失败!请重新登录","提示",Btn.confirmed(),openLogin());
+					}
+					//查询个人账户信息回复
+				} else if (method == "OnRspQryAccount") {
+					var accountParam = parameters;
+					updateBalance(accountParam);
+					//查询订单信息回复
+				} else if (method == "OnRspQryOrder") {
+					var orderStatus = parameters.OrderStatus;
+					var orderParam = parameters;
+					appendOrder(orderParam);
+					if (orderStatus < 3) {
+						appendDesignates(orderParam);
+					}
+					//查询成交记录回复
+				} else if (method == "OnRspQryTrade") {
+					appendTradeSuccess(parameters);
+					//查询持仓信息回复
+				} else if (method == "OnRspQryHold") {
+					var positionParam = parameters;
+					appendPostionAndUpdate(positionParam);
+					//报单录入请求回复
+				} else if (method == "OnRspOrderInsert") {
+					var insertOrderParam = parameters;
+					appendOrder(insertOrderParam);
+					var inserOrderStatus = insertOrderParam.OrderStatus;
+					if(inserOrderStatus < 3){
+						appendDesignates(insertOrderParam);
+					}
+					//订单状态通知
+				} else if (method == "OnRtnOrderState") {
+					var orderParam = parameters;
+					updateOrder(orderParam);
+					var orderStatusWeHooks = orderParam.OrderStatus;
+					//当订单状态改变
+					var orderId = orderParam.OrderID;
+					if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
+						delDesignatesDomByOrderId(orderId);
+					} else if (orderStatusWeHooks == 0) {
+						appendDesignates(orderParam);
+					} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
+						updateDesignatesDom(orderParam);
+					}
+					//订单成交通知
+				} else if (method == "OnRtnOrderTraded") {
+					var tradeParam = parameters;
+					appendTradeSuccess(tradeParam);
+					appendPostionAndUpdate(tradeParam);
+					mui.toast("成交("+tradeParam.ContractCode+",价格:"+tradeParam.TradePrice+",手数:"+tradeParam.TradeNum+"手,交易号:"+tradeParam.TradeNo+")");
+					//资金变化通知
+				} else if (method == "OnRtnMoney") {
+					var accountParam = parameters;
+					updateBalance(accountParam)
+			}else if(method = "OnError"){
+				var code = parameters.Code;
+				var loginMessage = parameters.Message;
+				alertProtype(loginMessage,"提示",Btn.confirmed());
 			}
-			//查询个人账户信息回复
-		} else if (method == "OnRspQryAccount") {
-			var accountParam = parameters;
-			updateBalance(accountParam);
-			//查询订单信息回复
-		} else if (method == "OnRspQryOrder") {
-			var orderStatus = parameters.OrderStatus;
-			var orderParam = parameters;
-			appendOrder(orderParam);
-			if (orderStatus < 3) {
-				appendDesignates(orderParam);
-			}
-			//查询成交记录回复
-		} else if (method == "OnRspQryTrade") {
-			appendTradeSuccess(parameters);
-			//查询持仓信息回复
-		} else if (method == "OnRspQryHold") {
-			var positionParam = parameters;
-			appendPostionAndUpdate(positionParam);
-			//报单录入请求回复
-		} else if (method == "OnRspOrderInsert") {
-			var insertOrderParam = parameters;
-			appendOrder(insertOrderParam);
-			var inserOrderStatus = insertOrderParam.OrderStatus;
-			if(inserOrderStatus < 3){
-				appendDesignates(insertOrderParam);
-			}
-			//订单状态通知
-		} else if (method == "OnRtnOrderState") {
-			var orderParam = parameters;
-			updateOrder(orderParam);
-			var orderStatusWeHooks = orderParam.OrderStatus;
-			//当订单状态改变
-			var orderId = orderParam.OrderID;
-			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
-				delDesignatesDomByOrderId(orderId);
-			} else if (orderStatusWeHooks == 0) {
-				appendDesignates(orderParam);
-			} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
-				updateDesignatesDom(orderParam);
-			}
-			//订单成交通知
-		} else if (method == "OnRtnOrderTraded") {
-			var tradeParam = parameters;
-			appendTradeSuccess(tradeParam);
-			appendPostionAndUpdate(tradeParam);
-			//资金变化通知
-		} else if (method == "OnRtnMoney") {
-			var accountParam = parameters;
-			updateBalance(accountParam)
-		}else if(method = "OnError"){
-			var code = parameters.Code;
-			var loginMessage = parameters.Message;
-			alertProtype(loginMessage,"提示",Btn.confirmed());
 		}
 	}
+}
 }
 /**
  * 请求数据-初始化dom 
@@ -148,10 +155,8 @@ function appendPosition(data){
 		price = holdParam.TradePrice;
 	}
 	var floatingProft = 0.00;
-	if(validationLastPrice()){
-		floatingProft = price;
-	}else{
-		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),holdNum);
+	if(!validationLastPrice()){
+		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum);
 	}
 	var cls = 'position-index'+positionsIndex;
 	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi myLi"  >'
@@ -209,6 +214,7 @@ function updatePositionDom(positonParam){
 	var $thisHoldNum = $("li[contract-code-position='"+contractCode+"'] span[class = 'position2']");
 	var $thisDrectionText = $("li[contract-code-position='"+contractCode+"'] span[class = 'position1']");
 	var $thisPrcie = $("li[contract-code-position='"+contractCode+"'] span[class = 'position3']");
+	var $floatingProft = $("li[contract-code-position='"+contractCode+"'] span[class = 'position4 dateTimeL']");
 	var holdNum =  parseInt($thisHoldNum.text());
 	var oldDrection = parseInt($thisDrectionText.attr("data-drection"));
 	var oldPrice = parseFloat($thisPrcie.text()) *  holdNum;
@@ -217,7 +223,9 @@ function updatePositionDom(positonParam){
 		holdNum = holdNum + orderNum;
 		price = price + oldPrice;
 		drectionText = analysisPositionDrection(drection);
-		$thisPrcie.text(doGetOpenAvgPrice(price,holdNum));
+		var openAvgPrice = doGetOpenAvgPrice(price,holdNum);
+		$thisPrcie.text(openAvgPrice);
+		$floatingProft.text(doGetFloatingProfit(parseFloat($("#lastPrice").text()),openAvgPrice,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum));
 	}else if(drection != oldDrection){
 		holdNum = holdNum - orderNum;
 		if(holdNum == 0){	
@@ -508,7 +516,7 @@ function analysisOrderStatus(orderStatus){
 	}else if(orderStatus == 2){
 		orderStatusText = "部分提交";
 	}else if(orderStatus == 3){
-		orderStatusText = "完全提交";
+		orderStatusText = "完全成交";
 	}else if(orderStatus == 4){
 		orderStatusText = "已撤单";
 	}else if(orderStatus == 5){

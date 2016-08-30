@@ -182,14 +182,23 @@ function doGetMarketPrice(price,miniTikeSize,drection){
 	return parseFloat(newPrice).toFixed(2);
 }
 /**
+ * 
  * 计算浮动盈亏
- * @param {Object} lastPrice
- * @param {Object} tradeAvgPrice
- * @param {Object} contractSize
- */
-function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,orderNum){
+ * @param {Object} lastPrice 最新价
+ * @param {Object} tradeAvgPrice 均价
+ * @param {Object} contractSize 没手乘数
+ * @param {Object} miniTikeSize 
+ * @param {Object} orderNum 持仓手数
+*/
+function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum){
 	var price = lastPrice - tradeAvgPrice;
-	return parseFloat((price * contractSize) * orderNum).toFixed(2);
+	return parseFloat((price * contractSize) * orderNum / miniTikeSize).toFixed(2);
+}
+function clearLogin(){
+	localStorage.removeItem("account");
+	localStorage.removeItem("password");
+	username = null;
+	password = null;
 }
 /**
  * 连接交易
