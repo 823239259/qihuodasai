@@ -16,15 +16,16 @@ mui.plusReady(function(){
 	var time1;
     var url = MarketUrl.SocketUrl;
     var marketSocket = new WebSocket(url);
-    var setIntval = null;
+    var setIntvalTime = null;
     var marketLoadParam = {}
     
     marketSocket.onopen = function(evt){
        masendMessage('Login','{"UserName":"13677622344","PassWord":"a123456"}');
     };
     marketSocket.onclose = function(evt){
-    	if(setIntval != null)
-    		setIntval.clear();
+    	if(setIntvalTime != null)
+    		clearInterval(setIntvalTime);
+    		console.log("断开")
     };
     marketSocket.onmessage = function(evt){
         var data = evt.data;
@@ -37,7 +38,7 @@ mui.plusReady(function(){
 		    var contractNo = $("#contractNo").val();
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-	        setIntval = setInterval(function(){
+	        setIntvalTime = setInterval(function(){
 	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","BeginTime":"'+time1+'","HisQuoteType":1}');
 	        },30000);
 	       masendMessage('QryCommodity','{"ExchangeNo":"'+exchangeNo+'"}');
@@ -152,9 +153,7 @@ mui.plusReady(function(){
                     /* document.getElementById('main').innerHTML = ""; */
                     // 基于准备好的dom，初始化echarts图表
                     myChart = ec.init(document.getElementById('CandlestickChartDiv'));
-                   
                     var option = setOption(rawData);
-
                     echarts=ec;
                     timeChart=ec.init(document.getElementById("timeChart"));
                     var option1=setOption1(timeData);
@@ -167,7 +166,6 @@ mui.plusReady(function(){
         );
 		
     }
-  
     var changeValue=document.getElementById("changeValue");
      var rose=document.getElementById("rose");
     var freshPrices=document.getElementById("freshPrices");
@@ -176,8 +174,8 @@ mui.plusReady(function(){
     var buyPricesNumber=document.getElementById("buyPricesNumber");
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
-    function insertDATA(DATA){
     	var doSize=$("#doSize").val();
+    function insertDATA(DATA){
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
     	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
@@ -208,11 +206,11 @@ mui.plusReady(function(){
 		}
     var timeNumber=0;
     var num=0;
- 	
- 	 var parameters1=null;
+    var firstTimeNumber=0;
+    var CandlestickChartOption=null;
     function processingData(jsonData){
     		 var addRawData=[];
-    		 var badata=null;
+    		 var newChartData=null;
     		var parameters = jsonData.Parameters;
     		var Len=parameters.length;
     		parameters1=parameters;
@@ -226,11 +224,14 @@ mui.plusReady(function(){
     	    }
     	    var newDataLength=newData.length;
         	for(var i=0;i<newDataLength;i++){
+        		var time2=newData[i].DateTimeStamp.split(" ");
+		        	var str1=time2[1].split(":");
+		        	var str2=str1[0]+":"+str1[1]
         			var openPrice = newData[i].OpenPrice;
 		            var closePrice = newData[i].LastPrice;
 		            var chaPrice = closePrice - openPrice;
 		            time1=newData[i].DateTime;
-		            var sgData = [newData[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",newData[i].LowPrice,newData[i].HighPrice,"","","-"];
+		            var sgData = [str2,openPrice.toFixed(doSize),closePrice.toFixed(doSize),chaPrice.toFixed(doSize),"",newData[i].LowPrice.toFixed(doSize),newData[i].HighPrice.toFixed(doSize),"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
@@ -242,18 +243,30 @@ mui.plusReady(function(){
 		   			addRawData.push(rawData[i]);
 		   		}
 		   }
-		   badata=addRawData.slice(-60)
-        	var option = setOption(badata);
-	        if(myChart != null){
-	        	myChart.setOption(option);
-	        	document.getElementById("Candlestick").addEventListener("tap",function(){
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-					setTimeout(function(){
-		        			myChart.resize();	
-		        		},10);
-	       });
-	    }
+		   newChartData=addRawData.slice(-60)
+        	CandlestickChartOption = setOption(newChartData);
+        	if(firstTimeNumber==0){
+		  			
+		  	}else{
+		  		console.log("234");
+		  		myChart.setOption(CandlestickChartOption);
+		  	}
     }
+    document.getElementById("Candlestick").addEventListener("tap",function(){
+				 if(myChart != null){
+						plus.nativeUI.showWaiting( "正在加载内容" );
+								setTimeout( function(){
+								plus.nativeUI.closeWaiting();
+							}, 200 );
+							document.getElementsByClassName("buttomFix")[0].style.display="block";
+							setTimeout(function(){
+								 	myChart.resize();	
+									myChart.setOption(CandlestickChartOption);
+				        			myChart.resize();	
+				        			firstTimeNumber++;
+				        		},10);
+			    }
+	});
     //设置数据参数（为画图做准备）
     function setOption(rawData){
         var dates = rawData.map(function (item) {
@@ -266,14 +279,15 @@ mui.plusReady(function(){
 		    backgroundColor: 'rgba(43, 43, 43, 0)',
 		    tooltip: {
 		        trigger: 'axis',
-		        axisPointer: {
-		            animation: false,
+		        axisPointer : {
+                   type : 'line',
+                   animation: false,
 		            lineStyle: {
-		                color: '#376df4',
-		                width: 2,
+		                color: '#ffffff',
+		                width: 1,
 		                opacity: 1
 		            }
-		        },
+             	  },
 		         formatter: function (params) {
 		            var res = params[0].name;
 //		            console.log(JSON.stringify(params));
@@ -621,32 +635,10 @@ mui.plusReady(function(){
         return option
 }
 
-		});
-	   
-	    
-//if (mui.cacheUser.){
-//				mui.openWindow({
-//				url:"trade.html",
-//				id:"trade.html",
-//				extras:{
-//					traderBond:traderBond,
-//					businessType:8
-//				}
-//				});
-//			}
-//			else
-//			{
-//				mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"cp"}});
-//			}
-
 /**
- * 获取行情请求的数据-并初始化页面 
+ * 关闭行情额链接 
  */
-//function init(param){
-//	console.log(param);
-//	$("#exchangeNo").val(param[3]);
-//	$("#commodeityNo").val(param[2]);
-//	$("#contractNo").val(param[1]);
-//	$("#contractSize").val(param[5]);
-//	$("#miniTikeSize").val(param[6]);
-//}
+	document.getElementById("backClose").addEventListener("tap",function(){
+		marketSocket.close();
+	});
+});

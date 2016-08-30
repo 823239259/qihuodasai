@@ -206,6 +206,7 @@
 					    ContractSize:ContractSize
 					}
 					socket.onclose = function(evt){
+						console.log("关闭连接");
 					};
 					socket.onmessage = function(evt){
 					    var data = evt.data;
@@ -273,6 +274,7 @@
     				//添加产品的点击事件 
     				function addListener(){
     						pageOpen[0].addEventListener("tap",function(){
+								socket.close();
 								mui.openWindow({
 									url:"transactionDetails.html",
 									id:"transactionDetails.html",
@@ -282,85 +284,94 @@
 								});
 								});
 								pageOpen[1].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data1,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data1,
+										}
+									});
 								});
 								pageOpen[2].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data2,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data2,
+										}
+									});
 								});
 								pageOpen[3].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data3,
-									}
-								});
+									 socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data3,
+										}
+									});
 								});
 								pageOpen[4].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data4,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data4,
+										}
+									});
 								});
 								pageOpen[5].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data5,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data5,
+										}
+									});
 								});
 								pageOpen[6].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data6,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data6,
+										}
+									});
 								});
 								pageOpen[7].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data7,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data7,
+										}
+									});
 								});
 								pageOpen[8].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data8,
-									}
-								});
+									socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data8,
+										}
+									});
 								});
 								pageOpen[9].addEventListener("tap",function(){
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data9,
-									}
-								});
+								socket.close();
+									mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails.html",
+										 extras:{
+											name:data9,
+										}
+									});
 								});
     				};
 				
@@ -396,138 +407,15 @@
 			            }
 			        }
 			    }
-//			function insertData(MoreData){
-//			   	var productName=document.getElementsByClassName("productName");
-//			   	var CommodityNo=document.getElementsByClassName("CommodityNo");
-//			    var LastVolume=document.getElementsByClassName("LastVolume");
-//			    var ChangeRate=document.getElementsByClassName("ChangeRate");
-//			    var LastPrice=document.getElementsByClassName("QLastPrice");
-//			    
-//				switch(MoreData.Parameters.CommodityNo){
-//					case "CL":
-//					LastVolume[0].innerText=MoreData.Parameters.TotalVolume;
-//					if(Number(MoreData.Parameters.ChangeRate.toFixed(4))<0){
-//						ChangeRate[0].innerText=parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						
-//						ChangeRate[0].className="greenBg ChangeRate";
-//					}else{
-//						ChangeRate[0].innerText="+"+parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						ChangeRate[0].className="redBg ChangeRate";
-//					}
-//					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
-//						LastPrice[0].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[0]);
-//						LastPrice[0].className="greenFont QLastPrice";
-//					}else{
-//						LastPrice[0].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[0]);;
-//						LastPrice[0].className="redFont QLastPrice"	;
-//						
-//					}
-//					 break;
-//					 case "HSI":
-//					 	LastVolume[1].innerText=MoreData.Parameters.TotalVolume;
-//					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
-//						ChangeRate[1].innerText=parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						ChangeRate[1].className="greenBg ChangeRate";
-//					}else{
-//						ChangeRate[1].innerText="+"+parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						ChangeRate[1].className="redBg ChangeRate";
-//					};
-//					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
-//						LastPrice[1].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[1]);;
-//						LastPrice[1].className="greenFont QLastPrice";
-//					}else{
-//						LastPrice[1].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[1]);;
-//						LastPrice[1].className="redFont QLastPrice"	;
-//					};
-//					 	 break;
-//					 case "CN":
-//					 	LastVolume[2].innerText=MoreData.Parameters.TotalVolume;
-//					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
-//						ChangeRate[2].innerText=parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//					
-//						ChangeRate[2].className="greenBg ChangeRate";
-//					}else{
-//						ChangeRate[2].innerText="+"+parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						ChangeRate[2].className="redBg ChangeRate"
-//					};
-//					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
-//						LastPrice[2].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[2]);;
-//						LastPrice[2].className="greenFont QLastPrice"
-//					}else{
-//						LastPrice[2].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[2]);;
-//						LastPrice[2].className="redFont QLastPrice"	
-//					}
-//					 	 break;
-//					 case "DAX":
-//					 
-//					 	LastVolume[3].innerText=MoreData.Parameters.TotalVolume;
-//					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
-//						ChangeRate[3].innerText=parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						
-//						ChangeRate[3].className="greenBg ChangeRate";
-//					}else{
-//						ChangeRate[3].innerText="+"+parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						ChangeRate[3].className="redBg ChangeRate";
-//					};
-//					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
-//						LastPrice[3].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[3]);
-//						LastPrice[3].className="greenFont QLastPrice";
-//					}else{
-//						LastPrice[3].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[3]);
-//						LastPrice[3].className="redFont QLastPrice"	;
-//					};
-//					 	 break;
-//					 case "GC":
-//					 	LastVolume[4].innerText=MoreData.Parameters.TotalVolume;
-//					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
-//						ChangeRate[4].innerText=parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						
-//						ChangeRate[4].className="greenBg ChangeRate";
-//					}else{
-//						ChangeRate[4].innerText="+"+parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						ChangeRate[4].className="redBg ChangeRate";
-//					};
-//					if(Number(MoreData.Parameters.LastPrice)-Number(MoreData.Parameters.PreSettlePrice)<0){
-//						LastPrice[4].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[4]);
-//						LastPrice[4].className="greenFont QLastPrice";
-//					}else{
-//						LastPrice[4].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[4]);
-//						LastPrice[4].className="redFont QLastPrice"	;
-//					}
-//					 	 break;
-//					 case "MHI":
-//					 	LastVolume[5].innerText=MoreData.Parameters.TotalVolume;
-//					 	if(Number(MoreData.Parameters.ChangeRate.toFixed(2))<0){
-//						ChangeRate[5].innerText=parseFloat(MoreData.Parameters.ChangeRate.toFixed(2))+"%";
-//						
-//						ChangeRate[5].className="greenBg ChangeRate";
-//					}else{
-//						ChangeRate[5].innerText="+"+parseFloat(MoreData.Parameters.QChangeRate.toFixed(2))+"%";
-//						ChangeRate[5].className="redBg ChangeRate";
-//					};
-//					if(Number(MoreData.Parameters.QLastPrice)-Number(MoreData.Parameters.QPreSettlePrice)<0){
-//						LastPrice[5].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[5]);;
-//						LastPrice[5].className="greenFont QLastPrice"
-//					}else{
-//						LastPrice[5].innerText=MoreData.Parameters.LastPrice.toFixed(product.DotSize[5]);;
-//						LastPrice[5].className="redFont QLastPrice"	;
-//					}
-//					 	 break;
-//					 case "YM":
-//					 	LastVolume[6].innerText=MoreData.Parameters.TotalVolume;
-//					 	 break;
-//					 case "Yk":
-//					 	LastVolume[7].innerText=MoreData.Parameters.TotalVolume;
-//					 	 break;
-//					 case "NQ":
-//					 	LastVolume[8].innerText=MoreData.Parameters.TotalVolume;
-//					 	 break;
-//					 case "ES":
-//					 	LastVolume[9].innerText=MoreData.Parameters.TotalVolume;
-//					 	 break;
-//					
-//				}
-//			}
+			document.getElementById("product").addEventListener("tap",function(){
+					socket.close();
+			});
+			document.getElementById("scheme").addEventListener("tap",function(){
+					socket.close();
+			});
+			document.getElementById("account").addEventListener("tap",function(){
+					socket.close();
+			})
 			});
 		</script>
 	</body>
