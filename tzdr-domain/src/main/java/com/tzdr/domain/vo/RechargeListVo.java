@@ -73,7 +73,7 @@ public class RechargeListVo implements Serializable {
 	 */
 	private String source;
 	
-	private String realname;//操作员
+	
 	
 	
 	public RechargeListVo(RechargeList re,WUser wuser) {

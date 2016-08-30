@@ -248,7 +248,7 @@ public class ExtendsionSignController {
 			smsParams.put("module", "注册");
 			String randomCode = RandomCodeUtil.randStr(6);   //生成6为验证码
 			smsParams.put("code", randomCode);
-            SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile, "ihuyi.activity.signin.success.template", smsParams);
+            SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile, "ihuyi.verification.signin.success.template", smsParams);
 			jsonResult.setData(data);
 		}
 		return jsonResult;

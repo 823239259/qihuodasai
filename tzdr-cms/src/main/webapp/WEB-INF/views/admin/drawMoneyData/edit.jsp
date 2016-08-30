@@ -17,7 +17,7 @@
 	function saveInfo(type){
 		var id=$("#id").val();
 		var type=$("#type").val();
-		if(type!=="2"){
+		if(type=="1"){
 			$("#firstAuditId").val("");
 			$("#reAuditId").val("");
 		}
@@ -34,7 +34,7 @@
 	
 	function setData(){
 		var type=$("#type").val();
-		if(type=="2"){
+		if(type=="2"||type=="3"){
 			$("#firstAuditTr").show();
 			$("#reAuditTr").show();
 			
@@ -93,7 +93,7 @@
 									<select name="reAuditId" id="reAuditId" style="width:150px">
 					                 	 <option value=" " ></option>
 					                 	<c:forEach items="${list}" var="item">
-					                 	 <option value="${item.id }" ${item.id eq entity.reAuditId ? 'selected' : ''}>${item.realname}</option>
+					                 	 	<option value="${item.id }" ${item.id eq entity.reAuditId ? 'selected' : ''}>${item.realname}</option>
 										</c:forEach>
 					                 </select>
 								</td>

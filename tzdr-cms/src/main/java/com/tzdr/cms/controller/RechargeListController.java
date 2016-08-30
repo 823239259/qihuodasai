@@ -8,13 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jodd.util.ObjectUtil;
+import jodd.util.StringUtil;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.hibernate.StaleObjectStateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -309,8 +314,8 @@ public class RechargeListController  extends BaseCmsController<RechargeList> {
 	
 	
 	@RequestMapping(value = "/updateRechargeState")
-	public void updateRechargeState(HttpServletRequest request,HttpServletResponse resp) {
-		
+	public void updateRechargeState(HttpServletRequest request,HttpServletResponse resp,Model model) {
+		User user = this.authService.getCurrentUser();
 		try {
 			String id = request.getParameter("id");
 			String stateValue = request.getParameter("stateValue");
@@ -375,6 +380,7 @@ public class RechargeListController  extends BaseCmsController<RechargeList> {
 				//状态
 				rechargeList.setOktime(TypeConvert.dbDefaultDate());
 				rechargeList.setStatus(new Integer(stateValue));
+				rechargeList.setReAccountId(user.getId()+"");
 				this.rechargeListService.addUpdateRechargeList(rechargeList,
 						TypeConvert.USER_FUND_C_TYPE_RECHARGE,
 						TypeConvert.payRemark("支付宝", rechargeList.getActualMoney()));
@@ -417,6 +423,7 @@ public class RechargeListController  extends BaseCmsController<RechargeList> {
 				rechargeList.setOktime(TypeConvert.dbDefaultDate());
 				rechargeList.setStatus(new Integer(stateValue));
 				rechargeList.setRemark(remark == null ? "":remark);
+				rechargeList.setReAccountId(user.getId()+"");
 				this.rechargeListService.addUpdateRechargeList(rechargeList,
 						TypeConvert.USER_FUND_C_TYPE_RECHARGE,
 						TypeConvert.payRemark("银行转账", rechargeList.getActualMoney()));
@@ -537,6 +544,13 @@ public class RechargeListController  extends BaseCmsController<RechargeList> {
 			for (RechargeList re:recharges.getPageResults()) {
 				WUser wuser = wuserService.getUser(re.getUid());
 				RechargeListVo rechargeListVo = new RechargeListVo(re,wuser);
+				String reAccountId = re.getReAccountId();
+				if(StringUtil.isNotBlank(reAccountId)){
+					User uesr1 = userService.get(Long.valueOf(reAccountId));
+					if(uesr1 != null){
+						rechargeListVo.setRechargeAccountName(uesr1.getRealname());
+					}
+				}
 				grid.add(rechargeListVo);
 			}
 			grid.setTotal(recharges.getTotalCount());
@@ -552,11 +566,17 @@ public class RechargeListController  extends BaseCmsController<RechargeList> {
 		try {
 			DataGridVo<RechargeListVo> grid = new DataGridVo<RechargeListVo>();
 			PageInfo<RechargeList> dataPage = new PageInfo<RechargeList>(request);
-			
 			PageInfo<RechargeList> recharges = this.rechargeListService.queryBankHaveRecharge(dataPage);
 			for (RechargeList re:recharges.getPageResults()) {
 				WUser wuser = wuserService.getUser(re.getUid());
 				RechargeListVo rechargeListVo = new RechargeListVo(re,wuser);
+				String reAccountId = re.getReAccountId();
+				if(StringUtil.isNotBlank(reAccountId)){
+					User uesr1 = userService.get(Long.valueOf(reAccountId));
+					if(uesr1 != null){
+						rechargeListVo.setRechargeAccountName(uesr1.getRealname());
+					}
+				}
 				grid.add(rechargeListVo);
 			}
 			grid.setTotal(recharges.getTotalCount());
