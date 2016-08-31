@@ -93,7 +93,7 @@
      
 </div>
 
-<div id="addHandler" class="easyui-window" title="新增充值" style="padding:2px;width:350px;height:300px;display:none; overflow: hidden;"
+<div id="addHandler" class="easyui-window" title="新增充值" style="padding:2px;width:350px;height:340px;display:none; overflow: hidden;"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         <form id="bankPayForm">
         <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
