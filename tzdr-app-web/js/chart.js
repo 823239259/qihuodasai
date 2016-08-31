@@ -652,9 +652,10 @@ mui.plusReady(function(){
         return option
 }
 	document.getElementById("backClose").addEventListener("tap",function(){
+		plus.webview.getWebviewById("quotationMain.html").reload();
 		marketSocket.close();
 		if(username != null){ 
 			socket.close();
-		}
+		};
 	})
 });
