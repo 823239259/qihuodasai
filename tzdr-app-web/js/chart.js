@@ -87,14 +87,19 @@ mui.plusReady(function(){
 	 * @param {Object} param
 	 */
 	function updateLoadWebParam(param) {
-		$("#lastPrice").text(param.LastPrice);
-		$("#sellLastPrice").text(param.AskPrice1);
-		$("#buyLastPrice").text(param.BidPrice1);
+		var doSize = 2;
+		var size = $("#doSize").val();
+		if(size != undefined || size.length > 0){
+			doSize = size;
+		}
+		$("#lastPrice").text(parseFloat(param.LastPrice).toFixed(doSize));
+		$("#sellLastPrice").text(parseFloat(param.AskPrice1).toFixed(doSize));
+		$("#buyLastPrice").text(parseFloat(param.BidPrice1).toFixed(doSize));
 		$("#totalVolume").text(param.TotalVolume);
 		$("#askQty").text(param.AskQty1);
 		$("#bidQty").text(param.BidQty1);
-		$("#buyBtn_P").text(param.BidPrice1);
-		$("#sellBtn_P").text(param.AskPrice1);
+		$("#buyBtn_P").text(parseFloat(param.BidPrice1).toFixed(doSize));
+		$("#sellBtn_P").text(parseFloat(param.AskPrice1).toFixed(doSize));
 	}
     /**
 	 * 更新浮动盈亏 
@@ -652,7 +657,7 @@ mui.plusReady(function(){
         return option
 }
 	document.getElementById("backClose").addEventListener("tap",function(){
-		plus.webview.getWebviewById("quotationMain.html").reload();
+		plus.webview.getWebviewById("quotationMain").reload();
 		marketSocket.close();
 		if(username != null){ 
 			socket.close();

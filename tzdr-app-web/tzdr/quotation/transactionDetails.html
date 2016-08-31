@@ -64,7 +64,7 @@
 								</div>
 								
 								<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
-								<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice"  disabled="disabled"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber" value="1" placeholder="1" type="number"></div>
+								<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" value="1" placeholder="1" type="number"></div>
 								<div class="buyBtn">
 								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
 								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
@@ -79,7 +79,7 @@
 				<div>
 					<div id="item1" class="mui-control-content mui-active" >
 							<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
-								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeL">浮动盈利</span></a></li>
+								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeL">浮动盈亏</span></a></li>
 							</ul>
 						<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
 						<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
@@ -199,7 +199,7 @@
 						orderPrice.prop("disabled",true);
 					}else{
 						$("#orderPrice").prop("disabled",false);
-						orderPrice.prop("placeholder","输入价格");
+						orderPrice.prop("value",$("#lastPrice").text()); 
 					}
 				});
 				if(username == null){
@@ -209,16 +209,35 @@
 				$(".buy").click(function(){
 					if(vadationIsLogin()){
 						var orderNumber = $("#orderNumber").val();
+						if(orderNumber <= 0){
+							mui.toast("请输入正确的手数");
+							return;
+						}
+						if(orderNumber > 200){
+							mui.toast("最多只能输入200手");
+							return;
+						}
+						var priceType = $("input[type='radio']:checked").val();
 						var orderPrice = $("#orderPrice").val();
+						var tradeDrection = $(this).attr("data-tion-buy"); 
+						if(priceType == 0){
+							if(orderPrice <= 0 || orderPrice.length <= 0){
+								mui.toast("请输入正确的价格");
+								return;
+							}
+						}else if(priceType == 1){
+							orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),tradeDrection);
+						}
 						var commodeityNo = $("#commodeityNo").val();
 						var contractNo = $("#contractNo").val();
-						var content = "确定提交订单："+commodeityNo+contractNo+",价格("+orderPrice+",手数("+orderNumber+"))";
+						var content = "确定提交订单："+commodeityNo+contractNo+",价格("+orderPrice+"),手数("+orderNumber+")";
 						alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$(this));
 					}
 				});
 				$("#allOpen").click(function(){
 					var allOpen = $(".PositionLi");
 					if(allOpen.length <= 1){
+						mui.toast("没有持仓合约");
 						return;
 					}
 					if(vadationIsLogin()){
@@ -228,6 +247,7 @@
 				});
 				$("#Open").click(function(){
 					if(positionWholeContract == null){
+						mui.toast("请选择需要平仓的合约");
 						return;
 					}
 					if(vadationIsLogin()){
@@ -255,6 +275,14 @@
 						var orderNum = $("#orderNum").val();
 						var miniTikeSize = $("#miniTikeSize").val();
 						var orderNum = $("#orderNum").val();
+						if(orderNum <= 0 ){
+							mui.toast("请输入正确的手数"); 
+							return;
+						}
+						if(orderNum > 200){
+							mui.toast("最多只能输入200手"); 
+							return;
+						}
 						var drection = $this.attr("data-tion-buy");
 						var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
 						var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";

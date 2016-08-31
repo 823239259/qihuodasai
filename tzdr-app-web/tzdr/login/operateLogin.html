@@ -18,7 +18,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" ></a>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ></a>
 		<h1 class="mui-title">操盘登录</h1>		
 		<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
 	</header>
@@ -42,8 +42,20 @@
 		</div>
 	</div>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
 			mui.plusReady(function(){
+				var islogin = false;
+				/**
+				 * 登录超时处理 
+				 */
+				function setTimeOutIsLogin(){
+					setTimeout(function(){
+						if(!islogin){
+							plus.nativeUI.closeWaiting();
+							mui.toast("网络不给力");
+						}
+					},10000);
+				}
 				var Transfer=plus.webview.currentWebview();
 				var commdityNo = Transfer.commdityNo;
 				var account = null;
@@ -80,6 +92,9 @@
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
 				});
+				document.getElementById("backClose").addEventListener("tap",function(){
+					backReload(); 
+				});
 				var loginSocket = new WebSocket(TradeUrl.SocketUrl);
 				loginSocket.onopen = function(){
 				}
@@ -92,11 +107,12 @@
 						var code = parameters.Code;
 						var loginMessage = parameters.Message;
 						if (code == 0) {
-							 plus.webview.getWebviewById("transactionDetails.html").reload();
+							 backReload();
 							localStorage.setItem("account",account);
 							localStorage.setItem("password",pwd);
 							plus.nativeUI.closeWaiting();
 							mui.toast("登录成功");
+							islogin = true;
 							if (Transfer.backpageID){
 		      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
 		      					return;
@@ -120,13 +136,17 @@
 			    			return;
 						}
 						loginSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}'); 
-						plus.nativeUI.showWaiting( "正在登录中" )
+						plus.nativeUI.showWaiting( "正在登录中" );
+						setTimeOutIsLogin();
 					}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
 					}
 				});
 				function loginSendMessage(method,parameters){
 	    			loginSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+				}
+				function backReload(){
+					plus.webview.getWebviewById("transactionDetails.html").reload();
 				}
 			});
 			
