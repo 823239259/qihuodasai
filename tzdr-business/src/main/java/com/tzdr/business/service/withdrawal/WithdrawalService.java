@@ -381,7 +381,7 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 		User user = authService.getCurrentUser();
 		String sql = "select dl.source source,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit, dl.uid, dl.id, u.mobile, dl.bank, dl.card, dl.status, \r";
 		sql += "dl.money,  DATE_FORMAT(FROM_UNIXTIME(dl.addtime),'%Y-%m-%d %H:%i:%s') addtime, dl.oktime, v.tname, u.avl_bal balance, dl.update_time auditTime, \r";
-		sql += "dl.update_user auditUser  from w_draw_list dl,w_user_verified v,w_user u where dl.uid=v.uid and u.id=dl.uid and u.id=v.uid and dl.`status`=21 \r";
+		sql += "dl.update_user auditUser,dl.acc_address from w_draw_list dl,w_user_verified v,w_user u where dl.uid=v.uid and u.id=dl.uid and u.id=v.uid and dl.`status`=21 \r";
 
 		if ("firstAudit".equals(type)) {// 初审列表
 			sql += " and dl.audit_id in (select id from w_draw_money_data wm where wm.first_audit_id=?)   \r";
