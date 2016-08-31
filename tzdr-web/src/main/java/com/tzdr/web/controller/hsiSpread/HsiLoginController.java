@@ -246,7 +246,12 @@ public class HsiLoginController {
 		jsonResult.setMessage("success");
 		if(jsonResult.getMessage()!=null&&jsonResult.getMessage().equals("success")){
 			//用户注册成功之后给用户手机发送短信
-			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+			boolean b=SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		if(b){
+			log.info("手机号为："+mobile+"的用户注册成功，已发送短信成功");
+		}else{
+			log.info("手机号为："+mobile+"的用户注册成功，发送短信失败");
+		}
 		}
 		return jsonResult;
 	}
