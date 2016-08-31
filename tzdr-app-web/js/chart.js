@@ -24,7 +24,7 @@ mui.plusReady(function(){
     var marketLoadParam = {}
     
     marketSocket.onopen = function(evt){
-       masendMessage('Login','{"UserName":"13677622344","PassWord":"a123456"}');
+       masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
     };
     marketSocket.onclose = function(evt){
     	if(setIntvalTime != null)
@@ -297,9 +297,7 @@ mui.plusReady(function(){
 		            }
              	  },
 		         formatter: function (params) {
-		            var res = params[0].name;
-//		            console.log(JSON.stringify(params));
-		            res += '<br/>' + params[0].seriesName;
+		            var res = "时间："+params[0].name;
 		            res += '<br/>  开盘 : ' + params[0].value[0] + '  最高 : ' + params[0].value[3];
 		            res += '<br/>  收盘 : ' + params[0].value[1] + '  最低 : ' + params[0].value[2];
 		            return res;
@@ -433,7 +431,7 @@ mui.plusReady(function(){
                formatter: function(params) {
                	  var time  = params[0].name;
                    var val   = params[0].value;
-                   var html  = time + '<br/>' +
+                   var html  = '时间：'+time + '<br/>' +
                            '价格: ' + val + '<br/>';
                    return html;
                },

@@ -15,12 +15,12 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <h1 class="mui-title" id="quotationTitle"><span>行情</span></h1>
+		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
 		</header>
 	<nav class="navlist">
 		<a class="navon" href="javascript:void(0);" id="quotationMain">
 			<span class="mui-icon"><img src="../../images/0.0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">行情</span>
+			<span class="mui-tab-label">行情交易</span>
 		</a>
 		<a class="" href="javascript:void(0);"  id="product">
 			<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
@@ -179,14 +179,14 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-				var url = MarketConfig.MarketSocketUrl;
+				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 					}
 					socket.onopen = function(evt){
-					    var user="13677622344";
-					    var pwd="a123456";
+					    var user = marketUserName;
+					    var pwd = marketPassword;
 					    socket.send('{"Method":"Login","Parameters":{"UserName":"' + user +'","PassWord":"' + pwd +'"}}');
 					};
 					//设置变量

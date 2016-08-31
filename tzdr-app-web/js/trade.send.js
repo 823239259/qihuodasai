@@ -10,7 +10,7 @@ var TradeUrl = {
 	/**
 	 * soketurl
 	 */
-	SocketUrl:TradeConfig.TradeSocketUrl,
+	SocketUrl:tradeSocketUrl,
 	
 	/**
 	 * 登录url
@@ -141,7 +141,7 @@ var Trade = {
 			}
 		}
 var MarketUrl = {
-			SocketUrl:MarketConfig.MarketSocketUrl,
+			SocketUrl:marketSocketUrl,
 			/**
 			 * 登录url
 			 */
