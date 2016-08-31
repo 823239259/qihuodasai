@@ -18,7 +18,7 @@ public class BankRequest extends BaseRequet {
 	 * 银行名称关键字  icbc/abc ...
 	 */
 	private String bank;
-	
+
 	/**
 	 * 银行卡号
 	 */

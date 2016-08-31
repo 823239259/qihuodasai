@@ -20,9 +20,11 @@ function usernameIsExits() {
 	}
 	$.post(Check.rootPath() + "/admin/wUser/isUsernameExist" 
 			,{"username":username} ,function(data){
-		if (data == "Y") {
+		if (data.success) {
 			$("#userExitsLabel").html("校验通过");
 			$("#userExitsLabel").css({"color":"green"});
+			
+			$("#userAmount").text(data.obj);
 		}
 		else {
 			$("#userExitsLabel").html("手机号不存在");
