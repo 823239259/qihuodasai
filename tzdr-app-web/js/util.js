@@ -21,16 +21,16 @@ function doGetOrderRef() {
 function selling(param) {
 	var sellingParam = param;
 	for(var i = 0; i < sellingParam.length; i++) {
-		var selling = sellingParam[i];
-		Trade.doInsertOrder(selling.ExchangeNo,
-			selling.CommodityNo,
-			selling.ContractNo,
-			selling.OrderNum,
-			selling.Drection,
-			selling.PriceType,
-			selling.LimitPrice,
-			selling.TriggerPrice,
-			selling.OrderRef);
+		var sellings = sellingParam[i];
+		Trade.doInsertOrder(sellings.ExchangeNo,
+							sellings.CommodityNo,
+							sellings.ContractNo,
+							sellings.OrderNum,
+							sellings.Drection,
+							sellings.PriceType,
+							sellings.LimitPrice,
+							sellings.TriggerPrice,
+							sellings.OrderRef);
 
 	}
 }

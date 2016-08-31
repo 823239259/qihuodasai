@@ -998,7 +998,8 @@
 					"js/allChart.js",
 					"js/trade.js",
 					"js/reconnecting-websocket.min.js",
-					"js/reconnecting-websocket.js"
+					"js/reconnecting-websocket.js",
+					"js/common.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",

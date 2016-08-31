@@ -30,17 +30,24 @@ var positionsIndex = 0;
 var designatesIndex = 0;
 var entrustsIndex = 0;
 var tradesIndex = 0;
+var tradeStatusFlag = false; 
+var tradeSetTimeOut = null;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 loadSocket();
+function referPage(){
+	plus.webview.getWebviewById("transactionDetails.html").reload();
+}
 function loadSocket(){
 	if(socket != null){
-		socket.onopen = function() {
+		socket.onopen = function() { 
 			if(username != null) 
 				Trade.doLogin(username, password);
 		}
 		socket.onclose = function() {
-			console.log("交易连接断开");
+			if(!loginOutFlag){
+				alertProtype("发现交易连接不稳定,点击确定重新连接","提示",Btn.confirmed(),referPage);
+			}
 		}
 		socket.onmessage = function(evt) {
 			var dataString = evt.data;
@@ -66,15 +73,27 @@ function loadSocket(){
 					var orderStatus = parameters.OrderStatus;
 					var orderParam = parameters;
 					appendOrder(orderParam);
-					if (orderStatus < 3) {
+					if (orderStatus < 3) { 
 						appendDesignates(orderParam);
+					}
+					if(getDesgnateIndex == 0){
+						Trade.doTrade(username);
+						getDesgnateIndex++;
 					}
 					//查询成交记录回复
 				} else if (method == "OnRspQryTrade") {
 					appendTradeSuccess(parameters);
+					if(getSuccessIndex == 0){
+						Trade.doAccount(username);
+						getSuccessIndex++;
+					} 
 					//查询持仓信息回复
 				} else if (method == "OnRspQryHold") {
-					var positionParam = parameters;
+					if(getTradeIndex == 0){
+						Trade.doOrder(username);
+						getTradeIndex++;
+					}
+					var positionParam = parameters; 
 					appendPostionAndUpdate(positionParam);
 					//报单录入请求回复
 				} else if (method == "OnRspOrderInsert") {
@@ -83,6 +102,11 @@ function loadSocket(){
 					var inserOrderStatus = insertOrderParam.OrderStatus;
 					if(inserOrderStatus < 3){
 						appendDesignates(insertOrderParam);
+					}
+					plus.nativeUI.closeWaiting();
+					tradeStatusFlag = true;
+					if(tradeSetTimeOut != null){
+						clearTimeout(tradeSetTimeOut);
 					}
 					//订单状态通知
 				} else if (method == "OnRtnOrderState") {
@@ -104,7 +128,7 @@ function loadSocket(){
 					appendTradeSuccess(tradeParam);
 					appendPostionAndUpdate(tradeParam);
 					mui.toast("成交("+tradeParam.ContractCode+",价格:"+tradeParam.TradePrice+",手数:"+tradeParam.TradeNum+"手,交易号:"+tradeParam.TradeNo+")");
-					//资金变化通知
+				//资金变化通知
 				} else if (method == "OnRtnMoney") {
 					var accountParam = parameters;
 					updateBalance(accountParam)
@@ -121,10 +145,13 @@ function loadSocket(){
  * 请求数据-初始化dom 
  */
 function initDom(){
-	Trade.doAccount(username);
-	Trade.doOrder(username);
-	Trade.doTrade(username);
-	Trade.doHold(username);
+	//Trade.doAccount(username); 
+	if(getHoldIndex == 0){
+		Trade.doHold(username);
+		getHoldIndex++;
+	}
+	/*Trade.doOrder(username);
+	Trade.doTrade(username);*/
 }
 /**
  * 追加和更新持仓信息 
@@ -156,8 +183,12 @@ function appendPosition(data){
 		price = holdParam.TradePrice;
 	}
 	var floatingProft = 0.00;
-	if(!validationLastPrice()){
-		floatingProft = doGetFloatingProfit(parseFloat($("#lastPrice").text()),price,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum);
+	var commdityNo = holdParam.CommodityNo;
+	var contractNo = holdParam.ContractNo;
+	var comm = marketCommdity[commdityNo+contractNo];
+	if(comm != undefined){ 
+		var lastPrice = marketCommdityLastPrice[commdityNo+contractNo];
+		floatingProft = doGetFloatingProfit(parseFloat(lastPrice),price,comm.ContractSize,comm.MiniTikeSize,holdNum) +":"+  comm.CurrencyNo; 
 	}
 	var cls = 'position-index'+positionsIndex;
 	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi myLi"  >'
@@ -175,6 +206,12 @@ function appendPosition(data){
 				+ '	</a>'
 				+ '</li>';
 	$("#positionList").append(html);
+	var $floatingProft = $("li[contract-code-position='"+contractCode+"'] span[class = 'position4 dateTimeL']"); 
+	if(floatingProft < 0 ){
+		$floatingProft.css("color","green");
+	}else {
+		$floatingProft.css("color","red");
+	}
 	positions[orderId] = holdParam;
 	//添加储存数据
 	positionsContract[contractCode] = createPostionsParam(holdParam);
@@ -196,20 +233,21 @@ function validationPostionIsExsit(param){
 }
 /**
  * 
- * 更新持仓信息 
+ * 更新持仓信息  
  * @param {Object} positonParam 最新数据
  */
 function updatePositionDom(positonParam){
-	var contractCode = positonParam.ContractCode;
-	var orderId = positonParam.TradeNo;
-	var drection = positonParam.Drection;
-	var orderNum = parseInt(positonParam.HoldNum);
+	var holdParam = positonParam;
+	var contractCode = holdParam.ContractCode;
+	var orderId = holdParam.TradeNo;
+	var drection = holdParam.Drection;
+	var orderNum = parseInt(holdParam.HoldNum);
 	if(isNaN(orderNum)){
-		orderNum = parseInt(positonParam.TradeNum);
+		orderNum = parseInt(holdParam.TradeNum);
 	}
-	var newprice = positonParam.OpenAvgPrice;
+	var newprice = holdParam.OpenAvgPrice;
 	if(newprice == undefined){
-		newprice = positonParam.TradePrice;
+		newprice = holdParam.TradePrice;
 	}
 	var drectionText = null;
 	var $thisHoldNum = $("li[contract-code-position='"+contractCode+"'] span[class = 'position2']");
@@ -226,7 +264,20 @@ function updatePositionDom(positonParam){
 		drectionText = analysisPositionDrection(drection);
 		var openAvgPrice = doGetOpenAvgPrice(price,holdNum);
 		$thisPrcie.text(openAvgPrice);
-		$floatingProft.text(doGetFloatingProfit(parseFloat($("#lastPrice").text()),openAvgPrice,$("#contractSize").val(),$("#miniTikeSize").val(),holdNum));
+		var commdityNo = holdParam.CommodityNo;
+		var contractNo = holdParam.ContractNo;
+		var comm = marketCommdity[commdityNo+contractNo];
+		var lastPrice = marketCommdityLastPrice[commdityNo+contractNo];
+		var floatingProft = 0.00; 
+		if(comm != undefined){
+			floatingProft = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,comm.ContractSize,comm.MiniTikeSize,holdNum) +":"+  comm.CurrencyNo;
+		} 
+		$floatingProft.text(floatingProft);
+		if(floatingProft < 0 ){
+			$floatingProft.css("color","green");
+		}else {
+			$floatingProft.css("color","red");
+		}
 	}else if(drection != oldDrection){
 		holdNum = holdNum - orderNum;
 		if(holdNum == 0){	

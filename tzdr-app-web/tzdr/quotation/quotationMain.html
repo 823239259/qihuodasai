@@ -148,28 +148,6 @@
 					<span ><p class=" ChangeRate">-</p></span>
 				</div>
 			</a>
-			<a class='openPage'>
-				<div class="productContentLeft mui-col-xs-3" >
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo"><span class="CommodityNoName">-</span>-</p>
-				</div>
-				<div class="productContentRight mui-col-xs-9" >
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</a>
-			<a class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo"><span class="CommodityNoName">-</span>-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</a>
 		</div>
 	</div>
 		<script type="text/javascript">
@@ -393,10 +371,10 @@
 			            if (MoreData.Parameters.CommodityNo == productContentLeft[i].innerHTML) {
 			                LastVolume[i].innerText = MoreData.Parameters.TotalVolume;
 			                if (Number(MoreData.Parameters.ChangeRate.toFixed(4)) < 0) {
-			                    ChangeRate[i].innerText = parseFloat(MoreData.Parameters.ChangeRate.toFixed(2)) + "%";
+			                    ChangeRate[i].innerText = MoreData.Parameters.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "greenBg ChangeRate";
 			                } else {
-			                    ChangeRate[i].innerText = "+" + parseFloat(MoreData.Parameters.ChangeRate.toFixed(2)) + "%";
+			                    ChangeRate[i].innerText = "+" + MoreData.Parameters.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "redBg ChangeRate";
 			                }
 			                if (Number(MoreData.Parameters.LastPrice) - Number(MoreData.Parameters.PreSettlePrice) < 0) {
