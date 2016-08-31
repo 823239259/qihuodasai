@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../js/mui.min.js"></script>
 		 <script src="../../js/common.js"></script>
+		 <script type="text/javascript" src="../../js/common.config.js" ></script>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
@@ -178,7 +179,7 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-				var url = "ws://socket.vs.com:9002";
+				var url = MarketConfig.MarketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');

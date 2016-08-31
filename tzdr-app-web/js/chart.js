@@ -653,5 +653,8 @@ mui.plusReady(function(){
 }
 	document.getElementById("backClose").addEventListener("tap",function(){
 		marketSocket.close();
+		if(username != null){ 
+			socket.close();
+		}
 	})
 });
