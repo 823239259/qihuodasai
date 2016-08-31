@@ -1,5 +1,6 @@
 package com.tzdr.common.api.ihuyi;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -176,6 +177,8 @@ public class SMSSender {
 			content = String.format(template , map.get("money"));
 		} else if("activity.luck.ihuyi.code.template".equals(templateKey)){
 			content = String.format(template);
+		}else if("ihuyi.verification.signin.success.template".equals(templateKey)){
+			content = String.format(template);
 		}
 		return send(smsChannel, mobile, content);
 	}
@@ -198,5 +201,4 @@ public class SMSSender {
 		String content = TypeConvert.getActivityFileContent(filePath, params);
 		return send(smsChannel, mobile, content);
 	}
-
 }

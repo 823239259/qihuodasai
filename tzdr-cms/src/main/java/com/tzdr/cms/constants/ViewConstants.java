@@ -415,6 +415,10 @@ public class ViewConstants {
 		public static final String NOT_PASS_VIEW="/views/admin/withdrawal/notPass";
 		
 		/**
+		 * 审核不通过原因显示页面
+		 */
+		public static final String NO_AUTHORITY_VIEW="/views/admin/withdrawal/noAuthority";
+		/**
 		 * 待审核列表
 		 */
 		public static final String AUDIT_LIST_VIEW="/views/admin/withdrawal/auditList";

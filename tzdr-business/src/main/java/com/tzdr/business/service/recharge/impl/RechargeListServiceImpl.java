@@ -698,14 +698,14 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 	public PageInfo<AllRechargeListVo> queryRecharge(PageInfo<AllRechargeListVo> page,ConnditionVo conn) {
 		List<Object> params = new ArrayList<Object>();
 		//5人工调账、银行 4、支付宝3
-		StringBuffer sqlBuf = new StringBuffer("SELECT t.id, w.mobile,"
+		StringBuffer sqlBuf = new StringBuffer("SELECT  t.id, w.mobile,"
 				+ " t.payment_channel paymentChannel,"
 				+ " IF(t.type=3 AND t.`status` IN(0,1),"
 				+ " IFNULL(v.tname,IF(LENGTH(t.uid)=32,'',t.uid)),v.tname) tname"
 				+ ", t.no rechargeID, t.trade_no tradeNo, "
 				+ " t.trade_account tradeAccountBank, t.money, t.type, t.addtime,"
-				+ " t.actual_money actualMoney, t.`status`, t.oktime, t.source"
-				+ " FROM w_recharge_list t"
+				+ " t.actual_money actualMoney, t.`status`, t.oktime, t.source ,su.realname"
+				+ " FROM w_recharge_list t left join sys_user su on su.id=t.re_account_id"
 				+ " LEFT JOIN w_user_verified v "
 				+ " ON t.uid = v.uid "
 				+ " LEFT JOIN w_user w"

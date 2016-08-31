@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,8 @@ import com.tzdr.domain.vo.HandUserFundVo;
 import com.tzdr.domain.vo.RechargeListVo;
 import com.tzdr.domain.web.entity.RechargeList;
 import com.tzdr.domain.web.entity.WUser;
+
+import jodd.util.StringUtil;
 
 /**
  * 
@@ -416,7 +421,17 @@ public class RechargeHandController  extends BaseCmsController<RechargeList> {
 			PageInfo<RechargeList> recharges = this.rechargeListService.queryAlipayHaveRecharge(dataPage);
 			for (RechargeList re:recharges.getPageResults()) {
 				WUser wuser = wuserService.getUser(re.getUid());
+				
 				RechargeListVo rechargeListVo = new RechargeListVo(re,wuser);
+				String reAccountId = re.getReAccountId();
+				if(reAccountId != null){
+					User uesr1 = userService.get(reAccountId);
+					if(uesr1 != null){
+						rechargeListVo.setRechargeAccountName(uesr1.getRealname());
+						System.out.println(uesr1.getRealname());
+					}
+				}
+				
 				grid.add(rechargeListVo);
 			}
 			grid.setTotal(recharges.getTotalCount());

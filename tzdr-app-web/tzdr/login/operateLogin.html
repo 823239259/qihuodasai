@@ -79,9 +79,10 @@
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
 				});
-				socket.onopen = function(){
+				var loginSocket = new WebSocket(TradeUrl.SocketUrl);
+				loginSocket.onopen = function(){
 				}
-				socket.onmessage = function(evt){
+				loginSocket.onmessage = function(evt){
 					var dataString = evt.data;
 					var data = JSON.parse(dataString);
 					var method = data.Method;
@@ -106,7 +107,7 @@
 					} 
 				}
 				$("#operateLogin").click(function(){
-					//if(username == null){
+					if(username == null){
 						account=document.getElementById("account").value;
 						pwd=$.base64.encode(document.getElementById("password").value);
 						if(mui.isnull(account)){
@@ -117,12 +118,15 @@
 			    			mui.toast("请输入密码");
 			    			return;
 						}
-						Trade.doLogin(account,pwd); 
+						loginSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}'); 
 						plus.nativeUI.showWaiting( "正在登录中" )
-					/*}else{
+					}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
-					}*/
+					}
 				});
+				function loginSendMessage(method,parameters){
+	    			loginSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+				}
 			});
 			
 		</script>

@@ -178,7 +178,7 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-				var url = "ws://192.168.0.213:9006";
+				var url = "ws://socket.vs.com:9002";
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
@@ -230,11 +230,10 @@
 					        }
 					        //插入主力合约
 					        AddTo()
-					    }else if(method == "OnRspQryHistory"){
-					        var jsonData=JSON.parse(evt.data);
 					    }else if(method == "OnRtnQuote"){	
 					         var MoreData=JSON.parse(evt.data);
 					         //更新行情的数据
+//					         console.log(JSON.stringify(evt.data));
 					        	insertData1(MoreData);
 					    }
 					};
@@ -378,6 +377,11 @@
 				};
 				//插入行情的方法
 			 function insertData1(MoreData) {
+			 	if(MoreData.Parameters.CommodityNo=="CN"){
+			 		//console.log("123")
+			 		//console.log(MoreData.Parameters.TotalVolume);
+			 	}
+			 		
 			        var productName = document.getElementsByClassName("productName");
 			        var CommodityNo = document.getElementsByClassName("CommodityNo");
 			        var LastVolume = document.getElementsByClassName("LastVolume");
@@ -389,7 +393,6 @@
 			                LastVolume[i].innerText = MoreData.Parameters.TotalVolume;
 			                if (Number(MoreData.Parameters.ChangeRate.toFixed(4)) < 0) {
 			                    ChangeRate[i].innerText = parseFloat(MoreData.Parameters.ChangeRate.toFixed(2)) + "%";
-			
 			                    ChangeRate[i].className = "greenBg ChangeRate";
 			                } else {
 			                    ChangeRate[i].innerText = "+" + parseFloat(MoreData.Parameters.ChangeRate.toFixed(2)) + "%";
@@ -401,7 +404,6 @@
 			                } else {
 			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[i]);
 			                    LastPrice[i].className = "redFont QLastPrice";
-			
 			                }
 			
 			            }

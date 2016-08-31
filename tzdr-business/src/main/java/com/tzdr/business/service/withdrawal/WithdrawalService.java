@@ -21,6 +21,7 @@ import com.tzdr.business.cms.exception.ParentAccountException;
 import com.tzdr.business.cms.service.auth.AuthService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.drawMoney.DrawMoneyService;
+import com.tzdr.business.service.drawMoneyData.DrawMoneyDataService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.dao.support.SearchFilter;
 import com.tzdr.common.domain.PageInfo;
@@ -40,6 +41,7 @@ import com.tzdr.domain.vo.DrawMoneyListVo;
 import com.tzdr.domain.vo.DrawMoneyListVoNew;
 import com.tzdr.domain.vo.PayeaseTreatDrawListVo;
 import com.tzdr.domain.web.entity.DrawList;
+import com.tzdr.domain.web.entity.DrawMoneyData;
 
 /**
  * 提现记录
@@ -53,7 +55,10 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 	public static final Logger logger = LoggerFactory.getLogger(WithdrawalService.class);
 	@Autowired
 	private DrawMoneyService drawMoneyService;
-
+	
+	@Autowired
+	private DrawMoneyDataService drawMoneyDataService;
+	
 	@Autowired
 	private AuthService authService;
 
@@ -198,12 +203,35 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 		drawList.setUpdateUser(authService.getCurrentUser().getRealname());
 		drawList.setUpdateTime(Dates.getCurrentLongDate());
 		drawList.setUpdateUserId(authService.getCurrentUser().getId());
+		
 		super.update(drawList);
 		DataMap dataMap = dataMapService.getWithDrawMoney();
 		logger.info("线下划账审核通过，系统操作员【" + authService.getCurrentUser().getRealname() + "】," + "提现审核配置金额【"
 				+ (ObjectUtil.equals(null, dataMap) ? DataDicKeyConstants.DEFAULT_WITHDRAW_MONEY_VALUE_NAME
 						: dataMap.getValueName())
 				+ "】;" + "审核通过客户【手机号：" + drawList.getUser().getMobile() + ",姓名：" + drawList.getName() + "】提现，金额："
+				+ drawList.getMoney());
+
+	}
+
+	
+
+	/**
+	 * 线下初审核通过
+	 * 
+	 * @param id
+	 */
+	public void preLineAuditPass(String id) {
+		DrawList drawList = getEntityDao().get(id);
+		drawList.setIsAudit(-1);
+		drawList.setFirstAuditUser(authService.getCurrentUser().getRealname());
+		drawList.setFirstAuditTime(Dates.getCurrentLongDate());
+		super.update(drawList);
+		DataMap dataMap = dataMapService.getWithDrawMoney();
+		logger.info("线下划账审核(初审)通过，系统操作员【" + authService.getCurrentUser().getRealname() + "】," + "提现审核配置金额【"
+				+ (ObjectUtil.equals(null, dataMap) ? DataDicKeyConstants.DEFAULT_WITHDRAW_MONEY_VALUE_NAME
+						: dataMap.getValueName())
+				+ "】;" + "初步审核通过客户【手机号：" + drawList.getUser().getMobile() + ",姓名：" + drawList.getName() + "】提现，金额："
 				+ drawList.getMoney());
 
 	}
@@ -318,8 +346,8 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 		tempDrawList.setAremark(drawList.getAremark());
 		tempDrawList.setIsAudit(2);
 		if ("1".equals(type)) {// 初审
-			tempDrawList.setFirstAuditUser(authService.getCurrentUser().getRealname());
-			tempDrawList.setFirstAuditTime(Dates.getCurrentLongDate());
+				tempDrawList.setFirstAuditUser(authService.getCurrentUser().getRealname());
+				tempDrawList.setFirstAuditTime(Dates.getCurrentLongDate());
 		} else {
 			tempDrawList.setUpdateUser(authService.getCurrentUser().getRealname());
 			tempDrawList.setUpdateTime(Dates.getCurrentLongDate());

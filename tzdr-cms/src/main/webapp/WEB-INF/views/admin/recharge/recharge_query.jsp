@@ -38,7 +38,7 @@
 					<th field="status" width="150">充值状态 </th>
 					<th field="oktime" width="150">充值时间</th>
 					<th field="source" width="150">来源网站</th>
-					<th field="realname" width="150">操作员</th>
+					<th field="rechargeAccountName" width="150">操作员</th>
 	            </tr>
 	        </thead>
         </table>
@@ -57,7 +57,7 @@
 				<th field="status" width="150">充值状态 </th>
 				<th field="oktime" width="150">充值时间</th>
 				<th field="source" width="150">来源网站</th>
-				<th field="realname" width="150">操作员</th>
+				<th field="rechargeAccountName" width="150">操作员</th>
             </tr>
         </thead>
     </table>

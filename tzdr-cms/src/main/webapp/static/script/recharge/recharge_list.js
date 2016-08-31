@@ -168,7 +168,6 @@ function confirmBankPay() {
 	if (!$("#bankPayForm").form("validate")) {
 		return false;
 	}
-	
 	var rows = $("#dg002").datagrid('getSelections');
 	var id = rows[0].id;
 	var money = rows[0].money - 0;

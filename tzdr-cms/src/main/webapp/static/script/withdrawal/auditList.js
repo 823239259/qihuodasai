@@ -91,16 +91,18 @@ $(document).ready(function(){
 	    		$("#"+initData.dataGridId).datagrid(gridParams);
 	    	}
 	    	
-	    	if (title == '线下转账待审核列表'){
+	    	if(title=='线下转账待审核【初审】'){
+	    		$("#preBelowLineAuditData").datagrid("options").url=basepath+"admin/withdrawAudit/getDatas?type=auditList";
+	    		$("#preBelowLineAuditData").datagrid("reload");
+	    	}
+	    	if (title == '线下转账待审核【复审】'){
 	    		$("#belowLineAuditData").datagrid("options").url=basepath+"admin/withdrawAudit/getDatas?type=auditList";
 	    		$("#belowLineAuditData").datagrid("reload");
 	    	}
-	    	
 	    	if (title == '线下转账已审核列表'){
 	    		$("#belowLineHasAuditData").datagrid("options").url=basepath+"admin/withdrawAudit/getDatas?type=auditList";
 	    		$("#belowLineHasAuditData").datagrid("reload");
 	    	}
-	    	
 	    	if (title == '提现待审核【初审】'){
 	    		
 	    		$("#datagrid2").datagrid("options").url=basepath+"admin/withdrawAudit/listFirstAuditDrawData?type=firstAudit";
@@ -165,7 +167,7 @@ var auditWithDraw={
 			$.messager.confirm("确认提示","请确认您选择的记录是否通过审核？", function(result){
 				if (result){
 					ajaxPost({
-						url : basepath + "admin/withdrawAudit/firstAudit",
+						url : basepath + "admin/withdrawAudit/preLineAuditPass",
 						cache : false,
 						async : false,
 						data : {
@@ -188,8 +190,35 @@ var auditWithDraw={
 			});	
 	},
 	
+	lineAuditNotPass:function(type,datagridId){
+		var rows = $("#"+datagridId).datagrid('getChecked');
+		
+		if (type==4||type==5){
+			
+			if (!rows || rows.length==0 || rows[0].id==null){
+					eyWindow.walert("提示","请选择对应的数据记录", 'info');
+					return;
+			}else{
+				$.ajax({  
+					type:'post',      
+					url:basepath+ "admin/withdrawAudit/lineAuthority?type="+type,  
+					success:function(data){  
+						
+						if(!data.success){
+							eyWindow.walert("错误提示", data.message, 'error');
+						    	return;
+						}else{
+							baseUtils.openIframeWin(600, 300,'审核不通过原因','admin/withdrawAudit/auditNotPass?fromType='+type+'&id='+rows[0].id+"&datagridId="+datagridId);
+						}
+						
+					}  
+				});  
+			}
+		}
+	},
 	auditNotPass:function(type,datagridId){
 		var rows = $("#"+datagridId).datagrid('getChecked');
+		
 		if (type==1){
 			if (!rows || rows.length==0){
 				eyWindow.walert("提示","请选择对应的数据记录", 'info');
@@ -201,6 +230,7 @@ var auditWithDraw={
 				eyWindow.walert("提示","请选择对应的数据记录", 'info');
 				return;
 			}
+		
 			
 			var isAudit = rows[0].isAudit;
 			if (isAudit==1){
@@ -210,7 +240,7 @@ var auditWithDraw={
 		}
 		
 		baseUtils.openIframeWin(600, 300,'审核不通过原因','admin/withdrawAudit/auditNotPass?fromType='+type+'&id='+rows[0].id+"&datagridId="+datagridId);
-
+        
 	},
 	lineAuditPass:function(){
 		var rows = $("#belowLineAuditData").datagrid('getChecked');
@@ -224,7 +254,6 @@ var auditWithDraw={
 			if (result){
 				ajaxPost({
 					url : basepath + "admin/withdrawAudit/lineAuditPass",
-					cache : false,
 					async : false,
 					data : {
 						"id" :rows[0].id
@@ -232,6 +261,37 @@ var auditWithDraw={
 					success : function(data) {
 						if (data.success) {
 							$("#belowLineAuditData").datagrid('reload');
+							eyWindow.walert("成功提示", data.message, 'info');
+							return;
+						}
+						eyWindow.walert("错误提示", data.message, 'error');
+					},
+					error : function() {
+						eyWindow.walert("错误提示", "系统异常", 'error');
+					}
+				});
+			}});
+	},
+	preLineAuditPass:function(){
+		var rows = $("#preBelowLineAuditData").datagrid('getChecked');
+		if (!rows || rows.length==0){
+			eyWindow.walert("提示","请选择数据", 'info');
+			return;
+		}
+		
+		
+		$.messager.confirm("确认提示","请确认您选择的记录是否通过审核？", function(result){
+			if (result){
+				ajaxPost({
+					url : basepath + "admin/withdrawAudit/preLineAuditPass",
+					cache : false,
+					async : false,
+					data : {
+						"id" :rows[0].id
+					},
+					success : function(data) {
+						if (data.success) {
+							$("#preBelowLineAuditData").datagrid('reload');
 							eyWindow.walert("成功提示", data.message, 'info');
 							return;
 						}

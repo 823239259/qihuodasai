@@ -89,6 +89,7 @@ private static final long serialVersionUID = 6997408108243390441L;
 	@AllowExcel(name="充值状态")
 	private String statusStr;
 	
+	
 	@SqlColumn
 	private BigInteger oktime;
 	
@@ -97,6 +98,7 @@ private static final long serialVersionUID = 6997408108243390441L;
 	
 	@SqlColumn
 	private Integer source;
+	
 	
 	public Integer getSource() {
 		return source;
@@ -110,6 +112,8 @@ private static final long serialVersionUID = 6997408108243390441L;
 	@AllowExcel(name="来源网站")
 	private String sourceStr;
 	
+	@SqlColumn
+	private String realname;//操作员
 	public String getSourceStr() {
 		if (null == this.getSource()) {
 			// this.setSourceStr("投资达人");
@@ -410,6 +414,7 @@ private static final long serialVersionUID = 6997408108243390441L;
 	
 
 	
+
 	public String getPaymentChannelStr() {
 		Integer tempChannel = this.getPaymentChannel();
 		if (ObjectUtil.equals(null, tempChannel)){
@@ -430,6 +435,14 @@ private static final long serialVersionUID = 6997408108243390441L;
 
 	public void setPaymentChannelStr(String paymentChannelStr) {
 		this.paymentChannelStr = paymentChannelStr;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 	
 	

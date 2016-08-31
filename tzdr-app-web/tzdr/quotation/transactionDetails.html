@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -16,6 +15,7 @@
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "backClose"></a>
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
+		    <a class="whiteFont" id="switchAccount">切换账号</a>
 		</header>
 		<div class="mui-content">
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -25,16 +25,15 @@
 					</div>
 					<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content mui-active" id="TimeChart1">
-
+								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>
 								<div id="timeChart" style="width:100%;height:250px;"></div>
-							<!--<div id="volumeChart" style="width:100%;height:130px;"></div>-->
+								<!--<div id="volumeChart" style="width:100%;height:130px;"></div>-->
 						</div>
 						<div class="mui-control-content " id="CandlestickChart">
-							<!--<div class="mui-loading" style="width:100%;height:250px;">-->
-								<!--<div class="mui-spinner">
-									</div>-->
+								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>
 								<div   id="CandlestickChartDiv" style="width:100%;height:250px;"></div>
-							<!--</div>-->
 						</div>
 						<div class="mui-control-content" id="trade">
 							<div class="Assets">
@@ -167,6 +166,9 @@
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
+//			$(function(){
+//				plus.nativeUI.showWaiting( "正在加载内容" );
+//			})
 			function init(param){
 				$("#exchangeNo").val(param[3]);
 				$("#commodeityNo").val(param[2]);
@@ -182,8 +184,15 @@
 			}
 			$(function(){ 
 				$(".mui-action-back").bind("click",function(){
+					if(username != null){ 
+						socket.close();
+					}
+				});
+				$("#switchAccount").click(function(){
 					if(username != null){
-						Trade.doLoginOut(username);
+						alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
+					}else{
+						openLogin();
 					}
 				});
 				$("input[type='radio']").click(function(){
@@ -194,29 +203,44 @@
 						orderPrice.prop("disabled",true);
 					}else{
 						$("#orderPrice").prop("disabled",false);
-						orderPrice.prop("placeholder","请输入价格");
+						orderPrice.prop("placeholder","输入价格");
 					}
 				});
+				if(username == null){
+					$("#switchAccount").text("登录账号");
+				}
 				//提交订单
 				$(".buy").click(function(){
 					if(vadationIsLogin()){
-						var content = "你确定要提交订单吗?";
+						var orderNumber = $("#orderNumber").val();
+						var orderPrice = $("#orderPrice").val();
+						var commodeityNo = $("#commodeityNo").val();
+						var contractNo = $("#contractNo").val();
+						var content = "确定提交订单："+commodeityNo+contractNo+",价格("+orderPrice+",手数("+orderNumber+"))";
 						alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$(this));
 					}
 				});
 				$("#allOpen").click(function(){
+					var allOpen = $(".PositionLi");
+					if(allOpen.length <= 1){
+						return;
+					}
 					if(vadationIsLogin()){
 						var content = "合约是否全部平仓?";
 						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertAllSellingOrder);
 					}
 				});
 				$("#Open").click(function(){
+					if(positionWholeContract == null){
+						return;
+					}
 					if(vadationIsLogin()){
 						var content = "当前合约是否平仓?";
 						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertSellingOrder);
 					}
 				});
 				$("#kilAnorder").click(function(){
+					if(designateWholeContracts == null)return;
 					if(vadationIsLogin()){
 						var content = "您是否真的要进行撤单操作?";
 						alertProtype(content,"确认撤单?",Btn.confirmedAndCancle(),doInsertCancleOrder);
@@ -224,11 +248,29 @@
 				});
 				$(".marketBuy").click(function(){
 					if(vadationIsLogin()){
-						var content = "你确定要提交订单吗?";
-						var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),buy,null,$(this));
+						var $this = $(this);
+						var lastPrice = $("#freshPrices").text();
+						if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)){
+							alertProtype("交易错误","提示",Btn.confirmed());
+							return;
+						}
+						var commodityNo = $("#commodeityNo").val();
+						var contractNo = $("#contractNo").val();
+						var orderNum = $("#orderNum").val();
+						var miniTikeSize = $("#miniTikeSize").val();
+						var orderNum = $("#orderNum").val();
+						var drection = $this.attr("data-tion-buy");
+						var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+						var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";
+						var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),buy,null,$this);
 					}
 				});
 			});
+			function switchAccount(){
+				clearLogin();
+				$("#switchAccount").text("登陆账户");
+				openLogin();
+			}
 			function vadationIsLogin(){
 				if(username == null){
 						alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin,alertCallBack);
@@ -248,7 +290,6 @@
 				});
 			};
 			function alertCallBack(){
-				console.log("345")
 				if($("#TradingCenter").hasClass("mui-active")==true){
 					$("#TradingCenter").removeClass(" mui-active");
 					$("#trade").removeClass(" mui-active");
@@ -325,6 +366,8 @@
 				contractParam[0] = positionWholeContract;
 				var tradeParam = doGetTradeBasicParam(contractParam);
 				selling(tradeParam);
+				positionWholeContract = null;
+				positionWholeIndex = 0;
 			}
 			/**
 			 * 撤单确认操作 
@@ -342,6 +385,8 @@
 				}
 				var cancleParam = doGetCancelOrderBasicParam(contractParam);
 				cancleOrder(cancleParam);
+				designateWholeContracts = null;
+				designateWholeIndex = 0;
 			}
 			/**
 			 * 获取平仓的基本信息 
