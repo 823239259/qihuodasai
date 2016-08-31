@@ -184,8 +184,7 @@
 			}
 			$(function(){ 
 				$(".mui-action-back").bind("click",function(){
-					marketSocket.close();
-					if(username != null){
+					if(username != null){ 
 						socket.close();
 					}
 				});

@@ -141,7 +141,7 @@ var Trade = {
 			}
 		}
 var MarketUrl = {
-			SocketUrl:"ws://192.168.0.213:9006",
+			SocketUrl:"ws://socket.vs.com:9002",
 			/**
 			 * 登录url
 			 */

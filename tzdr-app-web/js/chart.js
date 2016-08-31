@@ -29,7 +29,7 @@ mui.plusReady(function(){
     marketSocket.onclose = function(evt){
     	if(setIntvalTime != null)
     		clearInterval(setIntvalTime);
-    		console.log("断开")
+    		console.log("断开" + JSON.stringify(evt));
     };
     marketSocket.onmessage = function(evt){
         var data = evt.data;
@@ -44,14 +44,15 @@ mui.plusReady(function(){
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
 	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","BeginTime":"'+time1+'","HisQuoteType":1}');
-	        },30000);
+	        },3000);
 	       masendMessage('QryCommodity','{"ExchangeNo":"'+exchangeNo+'"}');
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
             processingData(historyParam);
             handleTime(historyParam);
             handleVolumeChartData(historyParam);
-        }else if(method == "OnRtnQuote"){ 
+        }else if(method == "OnRtnQuote"){
+//      	console.log("订阅成功"); 
         	var quoteParam = jsonData;
         	if(quoteParam.Parameters == null)return;
         	insertDATA(quoteParam);
@@ -161,7 +162,6 @@ mui.plusReady(function(){
                     echarts=ec;
                     timeChart=ec.init(document.getElementById("timeChart"));
                     var option1=setOption1(timeData);
-                    timeChart.setOption(option1);
 //                  volumeChart=ec.init(document.getElementById("volumeChart"));
 //                  var volumeChartOption=volumeChartSetOption();
 //                  volumeChart.setOption(volumeChartOption);;
@@ -184,7 +184,7 @@ mui.plusReady(function(){
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
     	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
     	sellPricesNumber.innerHTML=DATA.Parameters.BidQty1;
-    	volumePricesNumber.innerHTML=DATA.Parameters.LastVolume;
+    	volumePricesNumber.innerHTML=DATA.Parameters.TotalVolume;
     	freshPrices.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
     	if (Number(DATA.Parameters.LastPrice) - Number(DATA.Parameters.PreSettlePrice) < 0) {
 			 freshPrices.className = "greenFont";
@@ -213,8 +213,8 @@ mui.plusReady(function(){
     var firstTimeNumber=0;
     var CandlestickChartOption=null;
     function processingData(jsonData){
-    		 var addRawData=[];
-    		 var newChartData=null;
+    		var addRawData=[];
+    		var newChartData=null;
     		var parameters = jsonData.Parameters;
     		var Len=parameters.length;
     		parameters1=parameters;
@@ -242,39 +242,34 @@ mui.plusReady(function(){
 		   var lent1=rawData.length;
 		   for(var i=0;i<lent1-2;i++){
 		   		if(rawData[i][0]==rawData[i+1][0]){
-		   			
+		   			addRawData[addRawData.length-1]=rawData[i+1];
 		   		}else{
 		   			addRawData.push(rawData[i]);
 		   		}
 		   }
-		   newChartData=addRawData.slice(-60)
+		   newChartData=addRawData.slice(-60);
         	CandlestickChartOption = setOption(newChartData);
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
 		  		myChart.setOption(CandlestickChartOption);
 		  	}
-    }
-    document.getElementById("Candlestick").addEventListener("tap",function(){
+		  	document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(myChart != null){
 				 	setTimeout(function(){
 				 		muiSpinner[1].style.display="none";
 				 	},200)
-//				 	if(firstTimeNumber==0){
-//				 		plus.nativeUI.showWaiting( "正在加载内容" );
-//							firstTimeNumber=1;
-//				 	}	
-//					setTimeout( function(){
-//						plus.nativeUI.closeWaiting();
-//					}, 200 );
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 						setTimeout(function(){
 						 	myChart.resize();	
 							myChart.setOption(CandlestickChartOption);
 		        			myChart.resize();	
+		        			firstTimeNumber++;
 		        		},10);
 			    }
 	});
+    }
+    
     //设置数据参数（为画图做准备）
     function setOption(rawData){
         var dates = rawData.map(function (item) {
@@ -382,18 +377,31 @@ mui.plusReady(function(){
         return option;
     }
     var timeChartNumber=0
+    var timePrice=[];
+     var timeLabel=[];
     function handleTime(json){
         var Len=json.Parameters.length;
-        var TimeLength=timeData.time.length;
-       	var Parameters=json.Parameters
+        var TimeLength=timeData.timeLabel.length;
+       	var Parameters=json.Parameters;
+       	var leng=timePrice.length;
         for(var i=0;i<Len;i++){
         	var time2=Parameters[i].DateTimeStamp.split(" ");
         	var str1=time2[1].split(":");
-        	var str2=str1[0]+":"+str1[1]
-            timeData.timeLabel[TimeLength+i]=str2;
-            timeData.time[i]=str2
-            timeData.prices[TimeLength+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize);
+        	var str2=str1[0]+":"+str1[1];
+//      	timeLabel[leng+i]=str2;
+//      	timePrice[leng+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize);
+			timeData.timeLabel[TimeLength+i]=str2;
+        	timeData.prices[TimeLength+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize); 	
         }
+		for(var i=0;i<timeData.timeLabel.length-2;i++){
+			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
+//				console.log("35");
+				timeData.timeLabel.splice(i,1);
+				timeData.prices.splice(i,1);
+			}else{
+				
+			}
+		}
         var option = setOption1();
         if(timeChart != null){
             timeChart.setOption(option);
@@ -452,7 +460,7 @@ mui.plusReady(function(){
 //         ],
 				 xAxis:[{
 				type: 'category',
-		        data: data1.time,
+		        data: data1.timeLabel,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 						}],	
 						
@@ -643,6 +651,7 @@ mui.plusReady(function(){
       };
         return option
 }
-
-
+	document.getElementById("backClose").addEventListener("tap",function(){
+		marketSocket.close();
+	})
 });
