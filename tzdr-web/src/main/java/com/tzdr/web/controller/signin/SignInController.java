@@ -307,6 +307,7 @@ public class SignInController{
 		}
 		
 		//p2p 同步注册
+		
 		new RegistP2pThread(mobile,password,wUser.getLoginSalt()).start();
 		wUser = wUserService.login(mobile, password); //登录
 		UserSessionBean userSessionBean = new UserSessionBean();
@@ -345,6 +346,17 @@ public class SignInController{
 		}
 		data.put("from", from);
 		jsonResult.setData(data);
+		try{
+			//用户注册成功之后给用户手机发送短信
+			boolean b=SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		if(b){
+			log.info("手机号为："+mobile+"的用户注册成功，已发送短信成功");
+		}else{
+			log.info("手机号为："+mobile+"的用户注册成功，发送短信失败");
+		}
+		}catch(Exception e){
+			log.info("短信发送给："+mobile+"出现异常");
+		}
 		return jsonResult;
 	}
 	

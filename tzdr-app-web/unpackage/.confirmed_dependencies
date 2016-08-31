@@ -902,7 +902,8 @@
 			"images/3.png",
 			"js/mui.min.js",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/common.config.js"
 		],
 		"refer": [
 			"home.html",

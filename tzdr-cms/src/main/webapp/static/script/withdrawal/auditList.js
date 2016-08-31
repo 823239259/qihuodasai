@@ -22,15 +22,15 @@
 					{field:'bank',title:'提现银行',width:170,sortable:true},
 					{field:'card',title:'银行卡号',width:180,sortable:true},
 			 	    {field:'acc_address',title:'开户地址',width:180,sortable:true},
-					{field:'money',title:'提现金额',width:100,sortable:true},
 					{field:'balance',title:'平台余额',width:100,sortable:true,hidden:false},
+					 {field:'money',title:'提现金额',width:100,sortable:true,hidden:false},
 					{field:'addtime',title:'提现申请时间',width:150,sortable:true,formatter: function(value,row,index){
 						if (validateIsNull(value)){
 							return;
 						}
 						return getFormatDateByLong(value,'yyyy-MM-dd hh:mm:ss');
 					}},
-					{field:'isAudit',title:'审核状态',width:80,hidden:true,sortable:true,formatter: function(value,row,index){
+					{field:'isAudit',title:'审核状态',width:80,sortable:true,formatter: function(value,row,index){
 						if (value==1){
 							return "通过";
 						}else if((value==0 || value==-1 ) && row.id != null ){

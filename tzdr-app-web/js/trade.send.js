@@ -10,7 +10,7 @@ var TradeUrl = {
 	/**
 	 * soketurl
 	 */
-	SocketUrl:"ws://192.168.0.213:6060",
+	SocketUrl:tradeSocketUrl,
 	
 	/**
 	 * 登录url
@@ -141,7 +141,7 @@ var Trade = {
 			}
 		}
 var MarketUrl = {
-			SocketUrl:"ws://192.168.0.213:9006",
+			SocketUrl:marketSocketUrl,
 			/**
 			 * 登录url
 			 */

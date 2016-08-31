@@ -35,6 +35,7 @@
 				<th field="typeStr" width="150">调账类型 </th>
 				<th field="no" width="150">流水号 </th>
 				<th field="money" width="150">金额 </th>
+				<th field="amount" width="150">用户余额 </th>
 				<th field="remark" width="150">原因 </th>
 				<th field="uptimeStr" width="150">充值时间</th>
 				<th field="realname" width="150">审核人</th>
@@ -92,7 +93,7 @@
      
 </div>
 
-<div id="addHandler" class="easyui-window" title="新增充值" style="padding:2px;width:350px;height:300px;display:none; overflow: hidden;"
+<div id="addHandler" class="easyui-window" title="新增充值" style="padding:2px;width:350px;height:340px;display:none; overflow: hidden;"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         <form id="bankPayForm">
         <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -102,6 +103,12 @@
                 <td>
                     <span id="userExitsLabel"></span>
                 </td>
+            </tr>
+            <tr>
+             <td class="label right">账户余额：</td>
+              <td>
+                    <span id="userAmount">0</span>元
+              </td>
             </tr>
              <tr>
                 <td class="label right">调账类型</td>

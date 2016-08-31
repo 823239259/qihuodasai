@@ -44,6 +44,8 @@ public class DrawListAuditVo implements Serializable{
 	private Long auditTime; 
 	@SqlColumn
 	private String  auditUser ;
+	@SqlColumn
+	private String  acc_address ;
 	
 	private String starttime;
 	private String endtime;
@@ -242,6 +244,12 @@ public class DrawListAuditVo implements Serializable{
 
 	public void setPaymentChannelStr(String paymentChannelStr) {
 		this.paymentChannelStr = paymentChannelStr;
+	}
+	public String getAcc_address() {
+		return acc_address;
+	}
+	public void setAcc_address(String acc_address) {
+		this.acc_address = acc_address;
 	}
 	
 	

@@ -40,6 +40,7 @@ function loadSocket(){
 				Trade.doLogin(username, password);
 		}
 		socket.onclose = function() {
+			console.log("交易连接断开");
 		}
 		socket.onmessage = function(evt) {
 			var dataString = evt.data;

@@ -244,10 +244,6 @@ public class HsiLoginController {
 		data.put("password", password);
 		jsonResult.setData(data);
 		jsonResult.setMessage("success");
-		if(jsonResult.getMessage()!=null&&jsonResult.getMessage().equals("success")){
-			//用户注册成功之后给用户手机发送短信
-			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-		}
 		return jsonResult;
 	}
 	/**
