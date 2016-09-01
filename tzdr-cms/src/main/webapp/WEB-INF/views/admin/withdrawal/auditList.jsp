@@ -428,7 +428,7 @@
 						<shiro:hasPermission name="sys:finance:withdrawAudit:audit">
 							<a href="javascript:void(0)" class="easyui-linkbutton"
 								iconCls="icon-edit" plain="true"
-								onclick="auditWithDraw.lineAuditNotPass(5,'preBelowLineAuditData')">审核不通过</a>
+								onclick="auditWithDraw.lineAuditNotPass(1,'preBelowLineAuditData')">审核不通过</a>
 						</shiro:hasPermission>
 					</div>
 				</div>
@@ -542,7 +542,7 @@
 						<shiro:hasPermission name="sys:finance:withdrawAudit:audit">
 							<a href="javascript:void(0)" class="easyui-linkbutton"
 								iconCls="icon-edit" plain="true"
-								onclick="auditWithDraw.lineAuditNotPass(4,'belowLineAuditData')">审核不通过</a>
+								onclick="auditWithDraw.lineAuditNotPass(3,'belowLineAuditData')">审核不通过</a>
 						</shiro:hasPermission>
 
 						<shiro:hasPermission name="sys:finance:withdrawAudit:export">

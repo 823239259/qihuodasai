@@ -212,7 +212,7 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 		DrawMoneyData draw = drawMoneyDataService.getAduitMoneyByType("3");
 		User u = authService.getCurrentUser();
 		JsonResult jsonResult=new JsonResult();
-		if (type == 5) {// 为线下转账初审
+		if (type == 1) {// 为线下转账初审
 			if(draw!=null){
 				if (draw.getFirstAuditId() != u.getId()) {
 					jsonResult.setMessage("对不起，你没有此项权限！");
@@ -225,9 +225,9 @@ public class WithdrawalAuditController extends BaseCmsController<DrawList> {
 				jsonResult.setSuccess(false);
 			}
 		}
-		if(type==4){
+		if(type==3){
 			if(draw!=null){
-				if (draw.getFinalAuditId() != u.getId()) {
+				if (draw.getReAuditId() != u.getId()) {
 					jsonResult.setMessage("对不起，你没有此项权限！");
 					jsonResult.setSuccess(false);
 				}else{
