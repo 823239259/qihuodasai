@@ -75,14 +75,6 @@ mui.plusReady(function(){
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
         }else if(method == "OnRspQryCommodity"){
         	var commoditys = jsonData.Parameters;
-        	/*var commoditys = jsonData.Parameters;
-        	if(commoditys.Parameters == null)return;
-        	var newCommdityNo = commoditys.CommodityNo;
-			var newContractNo = commoditys.ContractNo;
-			//如果是当前合约与品种更新乘数
-			if (valiationIsPresent(newCommdityNo, newContractNo)) {
-				$("#contractSize").val(commoditys.ContractSize);
-			}*/
 			if(commoditys == null)return;
 			var size = commoditys.length;
 			for(var i = 0 ; i < size ; i++){
@@ -96,7 +88,6 @@ mui.plusReady(function(){
 				}
 				setMarketCommdity(newCommdityNo+newContractNo,comm);
 				
-				/*marketCommdity[newCommdityNo+newContractNo] = comm;*/
 				masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 			}
         }
@@ -147,16 +138,20 @@ mui.plusReady(function(){
 			var lastPrice = param.LastPrice;
 			var comm = marketCommdity[newContract];
 			if(comm == undefined)return;
-			var $thisFloat = $("li[contract-code-position = " + newContract + "] span[class = 'position4 dateTimeL']");
+			
+			var $thisFloat = $("#floatValue"+newContract);//$("li[contract-code-position = " + newContract + "] span[class = 'position4 dateTimeL']");
 			var $thisAvgPrice = $("li[contract-code-position = " + newContract + "] span[class = 'position3']");
 			var $thisHoldNum = $("li[contract-code-position = " + newContract + "] span[class = 'position2']");
+			var $thisDrection = $("li[contract-code-position = " + newContract + "] span[class = 'position1']");
+			var drection = $thisDrection.attr("data-drection");
 			//验证该平仓数据是否存在列表中
 			if ($thisAvgPrice.text() == undefined) { 
 				return;
 			}
-			var floatProfit = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($thisAvgPrice.text()) , comm.ContractSize,comm.MiniTikeSize,parseInt($thisHoldNum.text())) +":"+ comm.CurrencyNo;
-			$thisFloat.text(floatProfit);
-			if(parseFloat(floatProfit) < 0 ){
+			var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($thisAvgPrice.text()) , comm.ContractSize,comm.MiniTikeSize,parseInt($thisHoldNum.text()),drection);
+			var floatProfit = floatP +":"+ comm.CurrencyNo;
+			$thisFloat.val(floatProfit); 
+			if(parseFloat(floatP) < 0 ){
 				$thisFloat.css("color","green");
 			}else {
 				$thisFloat.css("color","red");
@@ -238,20 +233,34 @@ mui.plusReady(function(){
     	sellPricesNumber.innerHTML=DATA.Parameters.BidQty1;
     	volumePricesNumber.innerHTML=DATA.Parameters.TotalVolume;
     	freshPrices.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
+    	if(Number(DATA.Parameters.AskPrice1) - Number(DATA.Parameters.PreSettlePrice) < 0){
+    		buyPrices.className = "PricesLeft greenFont";
+    	}else if(Number(DATA.Parameters.AskPrice1) - Number(DATA.Parameters.PreSettlePrice) > 0){
+    		buyPrices.className = "PricesLeft redFont";
+    	}else{
+    		buyPrices.className = "PricesLeft whiteFont";
+    	};
+    	if(Number(DATA.Parameters.BidPrice1) - Number(DATA.Parameters.PreSettlePrice) < 0){
+    		sellPrices.className = "PricesLeft greenFont";
+    	}else if(Number(DATA.Parameters.BidPrice1) - Number(DATA.Parameters.PreSettlePrice) > 0){
+    		sellPrices.className = "PricesLeft redFont";
+    	}else{
+    		sellPrices.className = "PricesLeft whiteFont";
+    	};
     	if (Number(DATA.Parameters.LastPrice) - Number(DATA.Parameters.PreSettlePrice) < 0) {
 			 freshPrices.className = "greenFont";
-			 }else {
+		 }else {
 			freshPrices.className = "redFont";
 		}
-		changeValue.innerHTML=DATA.Parameters.ChangeRate.toFixed(2)+"%";
 		if(Number(DATA.Parameters.ChangeRate)==0){
 				 changeValue.className = "whiteFont";
-			 }else if(Number(DATA.Parameters.ChangeRate)>0){
+		 }else if(Number(DATA.Parameters.ChangeRate)>0){
 				changeValue.className = "redFont";
-			}else if(Number(DATA.Parameters.ChangeRate)<0){
+		}else if(Number(DATA.Parameters.ChangeRate)<0){
 				 changeValue.className = "greenFont";
-			}
+		}
 	    rose.innerHTML=DATA.Parameters.ChangeValue.toFixed(doSize)+"/";
+	    changeValue.innerHTML=DATA.Parameters.ChangeRate.toFixed(2)+"%";
 		if(Number(DATA.Parameters.ChangeValue)==0){
 				 rose.className = "whiteFont";
 			 }else if(Number(DATA.Parameters.ChangeValue)>0){
@@ -265,42 +274,30 @@ mui.plusReady(function(){
     var firstTimeNumber=0;
     var CandlestickChartOption=null;
     function processingData(jsonData){
-    		var addRawData=[];
-    		var newChartData=null;
     		var parameters = jsonData.Parameters;
     		var Len=parameters.length;
-    		parameters1=parameters;
     		if(parameters == null)return;
     	    var lent=rawData.length;
-    	    var newData=null;
-    	    if(Len>60){
-    	    	newData=parameters.slice(-60);
-    	    }else{
-    	    	newData=parameters;
-    	    }
-    	    var newDataLength=newData.length;
-        	for(var i=0;i<newDataLength;i++){
-        		var time2=newData[i].DateTimeStamp.split(" ");
+        	for(var i=0;i<Len;i++){
+        		var time2=parameters[i].DateTimeStamp.split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = parseFloat(newData[i].OpenPrice).toFixed(doSize);
-		            var closePrice = parseFloat(newData[i].LastPrice).toFixed(doSize);
+        			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
+		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
-		            time1=newData[i].DateTime;
-		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(newData[i].LowPrice).toFixed(doSize),parseFloat(newData[i].HighPrice).toFixed(doSize),"","","-"];
+		            time1=parameters[i].DateTime;
+		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
-		   var lent1=rawData.length;
-		   for(var i=0;i<lent1-2;i++){
-		   		if(rawData[i][0]==rawData[i+1][0]){
-		   			addRawData[addRawData.length-1]=rawData[i+1];
-		   		}else{
-		   			addRawData.push(rawData[i]);
-		   		}
-		   }
-		   newChartData=addRawData.slice(-60);
-        	CandlestickChartOption = setOption(newChartData);
+        	for(var i=0;i<rawData.length-1;i++){
+        		if(rawData[i][0]==rawData[i+1][0]){
+//      			console.log(rawData[i+1][0]);
+        			rawData.splice(i,1);
+        		}
+        	}
+        	var newData=rawData.slice(-60);
+        		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
@@ -345,8 +342,8 @@ mui.plusReady(function(){
              	  },
 		         formatter: function (params) {
 		            var res = "时间:"+params[0].name;
-		            res += '<br/>  开盘 : ' + params[0].value[0] + '  最高 : ' + params[0].value[3];
-		            res += '<br/>  收盘 : ' + params[0].value[1] + '  最低 : ' + params[0].value[2];
+		            res += '<br/>  开盘 : ' + params[0].value[0] + '<br/>  最高 : ' + params[0].value[3];
+		            res += '<br/>  收盘 : ' + params[0].value[1] + '<br/>  最低 : ' + params[0].value[2];
 		            return res;
 		        }
 		    },
@@ -445,7 +442,6 @@ mui.plusReady(function(){
         }
 		for(var i=0;i<timeData.timeLabel.length-2;i++){
 			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
-//				console.log("35");
 				timeData.timeLabel.splice(i,1);
 				timeData.prices.splice(i,1);
 			}else{
@@ -702,8 +698,10 @@ mui.plusReady(function(){
         return option
 }
 	document.getElementById("backClose").addEventListener("tap",function(){
-		plus.webview.getWebviewById("quotationMain").reload();
-		alert("23")
+		var re = plus.webview.getWebviewById("quotationMain");
+		if(re != null || re != undefined){
+			re.reload(); 
+		}
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 		marketSocket.close();
 		if(username != null){
@@ -711,5 +709,6 @@ mui.plusReady(function(){
 			socket.close();
 			loginOutFlag = true;
 		};
+		mui.back();
 	})
 });

@@ -319,17 +319,6 @@ p{
 	border:none;
 	margin-top: 30px;
 }
-/*.fisrtLi .mui-navigate-right span{
-	display: inline-block;
-	height:40px;;
-	width: 120px;
-	line-height: 10px;
-	text-align: center;
-	font-size: 12px;
-	word-break: normal;
-	color:#FFFFFF;
-}*/
-
 #allOpen,#Open{
 	margin:0px 10px;
 	background-color:#cccccc;
@@ -337,12 +326,7 @@ p{
 #Entrust{
 	width: 100%;
 }
-/*#Entrust .mui-navigate-right span{
-	width: 120px;
-}
-#Deal .mui-navigate-right span{
-	width: 120px;
-}*/
+
 #sliderProgressBarQuotation{
 	background-color: #fcc900;
 }
@@ -382,7 +366,7 @@ p{
 	height: 50px;
 	line-height: 30px;
 	width: 110%;
-	font-size: 12px;
+	/*font-size: 14px;*/
 }
 
 .operateLogin button {
@@ -472,11 +456,15 @@ p{
 .dateTimeL{
 		width: 115px !important;
 }
+.dateTimeFloat{
+	width: 160px !important;
+	text-anchor: center;
+}
 .PositionLi{
-	width: 420px;
+	width: 465px;
 }
 .PositionLi a{
-	width: 420px;
+	width: 465px;
 }
 .Guadan{
 	width:490px ;

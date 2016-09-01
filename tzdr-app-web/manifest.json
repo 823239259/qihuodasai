@@ -1003,7 +1003,8 @@
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
-					"tzdr/login/operateLogin.html"
+					"tzdr/login/operateLogin.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
@@ -1035,7 +1036,8 @@
 					"css/mui.min.css",
 					"js/jquery.base64.js",
 					"css/quotation.css",
-					"js/trade.send.js"
+					"js/trade.send.js",
+					"js/common.config.js"
 				],
 				"refer": [
 					"tzdr/future/cl.html",

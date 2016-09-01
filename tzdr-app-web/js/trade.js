@@ -185,10 +185,12 @@ function appendPosition(data){
 	var floatingProft = 0.00;
 	var commdityNo = holdParam.CommodityNo;
 	var contractNo = holdParam.ContractNo;
-	var comm = marketCommdity[commdityNo+contractNo];
+	var comm = marketCommdity[commdityNo+contractNo]; 
+	var floatP = 0.00;
 	if(comm != undefined){ 
 		var lastPrice = marketCommdityLastPrice[commdityNo+contractNo];
-		floatingProft = doGetFloatingProfit(parseFloat(lastPrice),price,comm.ContractSize,comm.MiniTikeSize,holdNum) +":"+  comm.CurrencyNo; 
+		floatP = doGetFloatingProfit(parseFloat(lastPrice),price,comm.ContractSize,comm.MiniTikeSize,holdNum,drection);
+		floatingProft = floatP +":"+  comm.CurrencyNo; 
 	}
 	var cls = 'position-index'+positionsIndex;
 	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi myLi"  >'
@@ -198,7 +200,7 @@ function appendPosition(data){
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
 				+ '			<span class = "position3">'+price+'</span>'
-				+ '			<span class = "position4 dateTimeL">'+floatingProft+'</span>'
+				+ '			<span class = "position4 dateTimeL"><input readonly = "readonly" type="text" value = "'+floatingProft+'" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;background-color:transparent;font-size:12px;width:160px;" id = "floatValue'+contractCode+'" /></span>'
 				+ '			<span class = "position5" style = "display:none">'+holdParam.CommodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+holdParam.ContractNo+'</span>'
 				+ '         <span class = "position7" style = "display:none">'+holdParam.ExchangeNo+'</span>'
@@ -207,7 +209,7 @@ function appendPosition(data){
 				+ '</li>';
 	$("#positionList").append(html);
 	var $floatingProft = $("li[contract-code-position='"+contractCode+"'] span[class = 'position4 dateTimeL']"); 
-	if(floatingProft < 0 ){
+	if(floatP < 0 ){
 		$floatingProft.css("color","green");
 	}else {
 		$floatingProft.css("color","red");
@@ -253,7 +255,7 @@ function updatePositionDom(positonParam){
 	var $thisHoldNum = $("li[contract-code-position='"+contractCode+"'] span[class = 'position2']");
 	var $thisDrectionText = $("li[contract-code-position='"+contractCode+"'] span[class = 'position1']");
 	var $thisPrcie = $("li[contract-code-position='"+contractCode+"'] span[class = 'position3']");
-	var $floatingProft = $("li[contract-code-position='"+contractCode+"'] span[class = 'position4 dateTimeL']");
+	var $floatingProft =$("#floatValue"+contractCode); //$("li[contract-code-position='"+contractCode+"'] span[class = 'position4 dateTimeL']");
 	var holdNum =  parseInt($thisHoldNum.text());
 	var oldDrection = parseInt($thisDrectionText.attr("data-drection"));
 	var oldPrice = parseFloat($thisPrcie.text()) *  holdNum;
@@ -269,11 +271,13 @@ function updatePositionDom(positonParam){
 		var comm = marketCommdity[commdityNo+contractNo];
 		var lastPrice = marketCommdityLastPrice[commdityNo+contractNo];
 		var floatingProft = 0.00; 
+		var floatP = 0.00;
 		if(comm != undefined){
-			floatingProft = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,comm.ContractSize,comm.MiniTikeSize,holdNum) +":"+  comm.CurrencyNo;
+			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,comm.ContractSize,comm.MiniTikeSize,holdNum,drection);
+			floatingProft = floatP +":"+  comm.CurrencyNo;
 		} 
-		$floatingProft.text(floatingProft);
-		if(floatingProft < 0 ){
+		$floatingProft.val(floatingProft);
+		if(floatP < 0 ){
 			$floatingProft.css("color","green");
 		}else {
 			$floatingProft.css("color","red");
@@ -637,11 +641,38 @@ function addDesignatesBindClick(cls){
  * 更新用户资金信息
  * @param {Object} accountParam
  */
+var usdBanlance = 0.00;
+var usdDeposit = 0.00
+var usdCanuse = 0.00;
+var eurBanlance = 0.00;
+var eurDeposit = 0.00;
+var eurCanuse = 0.00;
+var hkdBanlance = 0.00;
+var hkdDeposit = 0.00;
+var hkdCanuse = 0.00;
 function updateBalance(accountParam){
 	$(function(){
-		$("#todayBalance").text((parseFloat(accountParam.TodayBalance)).toFixed(2));
-		$("#deposit").text((parseFloat(accountParam.Deposit)).toFixed(2));
-		$("#todayCanUse").text((parseFloat(accountParam.TodayCanUse)).toFixed(2));
+		var currencyNo = accountParam.CurrencyNo;
+		var banlance = accountParam.TodayBalance;
+		var deposit = accountParam.Deposit;
+		var canuse = accountParam.TodayCanUse;
+		var currentRate = accountParam.CurrencyRate;
+		if(currencyNo == "USD"){
+			usdBanlance = banlance * currentRate;
+			usdDeposit = deposit * currentRate;
+			usdCanuse = canuse * currentRate;
+		}else if(currencyNo == "EUR"){
+			eurBanlance = banlance * currentRate;
+			eurDeposit = deposit * currentRate;
+			eurCanuse = canuse * currentRate;
+		}else if(currencyNo == "HKD"){
+			hkdBanlance = banlance * currentRate;
+			hkdDeposit = deposit * currentRate;
+			hkdCanuse = canuse * currentRate;
+		}
+		$("#todayBalance").text(parseFloat(usdBanlance+eurBanlance+hkdBanlance).toFixed(2));
+		$("#deposit").text(parseFloat(usdDeposit+eurDeposit+hkdDeposit).toFixed(2));
+		$("#todayCanUse").text(parseFloat(usdCanuse+eurCanuse+hkdCanuse).toFixed(2));
 	});
 }
 /**

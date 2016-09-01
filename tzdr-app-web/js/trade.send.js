@@ -190,8 +190,13 @@ function doGetMarketPrice(price,miniTikeSize,drection){
  * @param {Object} miniTikeSize 
  * @param {Object} orderNum 持仓手数
 */
-function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum){
-	var price = lastPrice - tradeAvgPrice;
+function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum,drection){
+	var price = 0.00;
+	if(drection == 0){
+		price = lastPrice - tradeAvgPrice;
+	}else if(drection == 1){
+		price = tradeAvgPrice - lastPrice;
+	}
 	return parseFloat((price * contractSize) * orderNum / miniTikeSize).toFixed(2);
 }
 function clearLogin(){
