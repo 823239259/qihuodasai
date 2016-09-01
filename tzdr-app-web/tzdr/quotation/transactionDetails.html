@@ -71,10 +71,10 @@
 								</div>
 							</form>
 							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-								<a class="mui-control-item mui-active" href="#item1">持仓</a>
-								<a class="mui-control-item" href="#item2">挂单</a>
-								<a class="mui-control-item" href="#item3">委托</a>
-								<a class="mui-control-item" href="#item4">成交</a>
+								<a class="mui-control-item mui-active" href="#item1" id = "holdCC">持仓</a>
+								<a class="mui-control-item" href="#item2" id = "desgnateGD">挂单</a>
+								<a class="mui-control-item" href="#item3" id = "tradeWT">委托</a>
+								<a class="mui-control-item" href="#item4" id = "successCJ">成交</a>
 							</div>
 				<div>
 					<div id="item1" class="mui-control-content mui-active" >
@@ -170,6 +170,11 @@
 //			$(function(){
 //				plus.nativeUI.showWaiting( "正在加载内容" );
 //			})
+			function setTimeOutInsertOrder(){
+				tradeSetTimeOut = setTimeout(function(){
+								plus.nativeUI.closeWaiting(); 
+							},5000);
+			}
 			function init(param){
 				$("#exchangeNo").val(param[3]);
 				$("#commodeityNo").val(param[2]);
@@ -183,6 +188,11 @@
 			function cachTranFers(param){
 				tranferParam = param;
 			}
+			var getHoldIndex = 0;
+			var getDesgnateIndex = 0;
+			var getTradeIndex = 0;
+			var getSuccessIndex = 0;
+			var loginOutFlag = false;
 			$(function(){ 
 				$("#switchAccount").click(function(){
 					if(username != null){
@@ -199,8 +209,11 @@
 						orderPrice.prop("value",""); 
 						orderPrice.prop("disabled",true);
 					}else{
+						var lastPrice = $("#lastPrice").text();
 						orderPrice.prop("disabled",false);
-						orderPrice.prop("value",$("#lastPrice").text()); 
+						orderPrice.prop("value",lastPrice); 
+						$("#buyBtn_P").text(lastPrice);
+						$("#sellBtn_P").text(lastPrice);
 						orderPrice.prop("placeholder","");
 					}
 				});
@@ -297,7 +310,7 @@
 			});
 			function switchAccount(){
 				clearLogin();
-				$("#switchAccount").text("登陆账户");
+				$("#switchAccount").text("登录账户");
 				openLogin();
 			}
 			function vadationIsLogin(){
@@ -333,7 +346,6 @@
 				}else{
 					console.log("错误")
 				}
-				;
 			}
 			/**
 			 * 下单操作 
@@ -364,22 +376,28 @@
 				var commodeityNo = $("#commodeityNo").val();
 				var contractNo = $("#contractNo").val();
 				Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,orderPrice,0,doGetOrderRef());
+				plus.nativeUI.showWaiting();
+				setTimeOutInsertOrder(); 
 			}
 			/**
 			 * 全部平仓操作 
 			 */
 			function doInsertAllSellingOrder(){
-				var contractParam = new Array();
 				for (var i = 0 ; i < positionsIndex ; i++) {
+					var contractParam = new Array();
 					//验证该平仓数据是否存在列表中
 					if($(".position-index"+i+"").html() == undefined){
 						continue;
 					}
 					var contract = positionContractCode[i];
-					contractParam[i] = contract;
+					contractParam[0] = contract;
+					var tradeParam = doGetTradeBasicParam(contractParam);
+					selling(tradeParam);
 				}
-				var tradeParam = doGetTradeBasicParam(contractParam);
-				selling(tradeParam);
+				plus.nativeUI.showWaiting();
+				setTimeOutInsertOrder();
+				positionWholeContract = null;
+				positionWholeIndex = 0;
 			}
 			/**
 			 * 平仓操作 
@@ -397,6 +415,8 @@
 				selling(tradeParam);
 				positionWholeContract = null;
 				positionWholeIndex = 0;
+				plus.nativeUI.showWaiting();
+				setTimeOutInsertOrder();
 			}
 			/**
 			 * 撤单确认操作 
@@ -416,6 +436,8 @@
 				cancleOrder(cancleParam);
 				designateWholeContracts = null;
 				designateWholeIndex = 0;
+				plus.nativeUI.showWaiting();
+				setTimeOutInsertOrder();
 			}
 			/**
 			 * 获取平仓的基本信息 
@@ -441,9 +463,10 @@
 					if(validationLastPrice()){
 						alertProtype("金额错误","提示",Btn.confirmed());
 						return;
-					}
-					var limitPirce = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),drection)//doGetFloatingProfit(parseFloat($("#lastPrice").text()),parseFloat($openAvgPrice),$("#contractSize").val(),$("#miniTikeSize").val(),$holdNum);
-					var orderRef = new Date().getTime();
+					} 
+					var lastPrice = marketCommdityLastPrice[$commodityNo+$contractNo];
+					var comm = marketCommdity[$commodityNo+$contractNo];
+					var limitPirce = doGetMarketPrice(lastPrice,comm.MiniTikeSize,drection);
 					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
 					tradeParam[i] = sellingParam;
 				}
@@ -466,7 +489,7 @@
 					var $exchangeNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig9']").text();
 					var $orderId =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig10']").text();
 					var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
-					cancleParam[i] = cancleOrderParam;
+					cancleParam[i] = cancleOrderParam; 
 				}
 				return cancleParam;
 			}
