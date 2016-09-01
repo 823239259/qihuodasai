@@ -38,13 +38,30 @@
 			<div class="link-area"><a id='forgetPassword' href="javascript:void(0)">忘记密码</a><a id='regLogin' href="javascript:void(0)">没有账号？<span>立即申请</span></a>
 			</div>
 		</div>
-		<div class="mui-content-padded oauth-area">
-		</div>
+		<!--<div class="mui-content-padded">
+			<p class="RegistrationTips"><input name="checkbox" value="Item 1" type="checkbox" checked id="loginCheckbox">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
+		</div>-->
+		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
+				<input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked">
+				<p id="loginAgree">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
+			</div>
 	</div>
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){
 				var islogin = false;
+				var num=0
+				$("#checkBox").click(function(){
+					if(num==0){
+						$("#checkBox").val(2);
+						num=1
+					}else{
+						$("#checkBox").val(1);
+						num=0;
+					}
+					
+//					console.log($("#checkBox").val())
+				})
 				/**
 				 * 登录超时处理 
 				 */
@@ -126,11 +143,18 @@
 				$("#operateLogin").click(function(){
 					if(username == null){
 						account=document.getElementById("account").value;
+						if($("#checkBox").val()==1){
+						        
+						}else{
+						     mui.toast("请选择协议"); 
+						   return;
+						  };
 						pwd=$.base64.encode(document.getElementById("password").value);
 						if(mui.isnull(account)){
 			    			mui.toast("请输入账号");
 			    			return;
 							};
+			
 						if(mui.isnull(pwd)){
 			    			mui.toast("请输入密码");
 			    			return;
@@ -146,8 +170,14 @@
 	    			loginSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 				}
 				function backReload(){
-					plus.webview.getWebviewById("transactionDetails.html").reload();
-				}
+					plus.webview.getWebviewById("transactionDetails").reload();
+				};
+				document.getElementById("tzdr_info").addEventListener("tap",function(){
+					mui.openWindow({
+						url:"../agree/tradingMarket.html",
+						id:"tradingMarket"
+					})
+				})
 			});
 			
 		</script>

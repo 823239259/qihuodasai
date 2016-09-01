@@ -6,6 +6,7 @@ var marketCommdityLastPrice = {};
 function setMarketCommdityLastPrice(key,value){
 	marketCommdityLastPrice[key] = value;
 }
+var reconnect=null;
 mui.plusReady(function(){
 		var muiSpinner=document.getElementsByClassName("mui-spinner");
     	var Transfer=plus.webview.currentWebview();
@@ -37,6 +38,11 @@ mui.plusReady(function(){
     	if(setIntvalTime != null)
     		clearInterval(setIntvalTime);
     		console.log("断开" + JSON.stringify(evt));
+    	if(reconnect != false){
+    		if(username==null){
+    			alertProtype("服务器连接已超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
+    		}
+    	}
     };
     marketSocket.onmessage = function(evt){
         var data = evt.data;
@@ -56,8 +62,8 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
+              handleTime(historyParam);
             processingData(historyParam);
-            handleTime(historyParam);
             handleVolumeChartData(historyParam);
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
@@ -118,8 +124,8 @@ mui.plusReady(function(){
 		var newContractNo = param.ContractNo;
 		var comm = marketCommdity[newCommdityNo+newContractNo];
 		if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
-			$("#buyBtn_P").text(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,0));
-			$("#sellBtn_P").text(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,1));
+			$("#buyBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,0)).toFixed(doSize));
+			$("#sellBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,1)).toFixed(doSize));
 		}
 	}
     /**
@@ -138,7 +144,6 @@ mui.plusReady(function(){
 			var lastPrice = param.LastPrice;
 			var comm = marketCommdity[newContract];
 			if(comm == undefined)return;
-			
 			var $thisFloat = $("#floatValue"+newContract);//$("li[contract-code-position = " + newContract + "] span[class = 'position4 dateTimeL']");
 			var $thisAvgPrice = $("li[contract-code-position = " + newContract + "] span[class = 'position3']");
 			var $thisHoldNum = $("li[contract-code-position = " + newContract + "] span[class = 'position2']");
@@ -153,8 +158,10 @@ mui.plusReady(function(){
 			$thisFloat.val(floatProfit); 
 			if(parseFloat(floatP) < 0 ){
 				$thisFloat.css("color","green");
-			}else {
+			}else if(parseFloat(floatP) > 0){
 				$thisFloat.css("color","red");
+			}else{
+				$thisFloat.css("color","white");
 			}
 		}
 		
@@ -292,23 +299,22 @@ mui.plusReady(function(){
 		   time1=jsonData.Parameters[Len-1].DateTimeStamp;
         	for(var i=0;i<rawData.length-1;i++){
         		if(rawData[i][0]==rawData[i+1][0]){
-//      			console.log(rawData[i+1][0]);
         			rawData.splice(i,1);
         		}
         	}
         	var newData=rawData.slice(-60);
-//      	console.log(newData.length);
         		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
+		  		myChart.resize();
 		  		myChart.setOption(CandlestickChartOption);
 		  	}
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(myChart != null){
 				 	setTimeout(function(){
 				 		muiSpinner[1].style.display="none";
-				 	},200)
+				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 						setTimeout(function(){
 						 	myChart.resize();	
@@ -441,7 +447,7 @@ mui.plusReady(function(){
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize); 	
         }
-		for(var i=0;i<timeData.timeLabel.length-2;i++){
+		for(var i=0;i<timeData.timeLabel.length-1;i++){
 			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
 				timeData.timeLabel.splice(i,1);
 				timeData.prices.splice(i,1);
@@ -508,9 +514,9 @@ mui.plusReady(function(){
 				 xAxis:[{
 				type: 'category',
 		        data: data1.timeLabel,
-		        axisLine: { lineStyle: { color: '#8392A5' } }
+		        axisLine: { lineStyle: { color: '#8392A5' } },
+		        boundaryGap: false
 						}],	
-						
            yAxis:  [
                {
                    type: 'value',
@@ -705,11 +711,15 @@ mui.plusReady(function(){
 		}
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 		marketSocket.close();
+		reconnect=false;
 		if(username != null){
 			Trade.doLoginOut(username);
 			socket.close();
 			loginOutFlag = true;
 		};
 		mui.back();
-	})
+	});
+	function reconnectPage(){
+		plus.webview.getWebviewById("transactionDetails").reload();
+	}
 });

@@ -8,7 +8,7 @@
 	"name": "维胜",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.3",/*应用版本名称*/
-		"code": "85"
+		"code": "86"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -969,14 +969,16 @@
 					"css/mui.min.css",
 					"js/common.config.js",
 					"js/jquery-1.11.3.js",
-					"js/jquery.base64.js"
+					"js/jquery.base64.js",
+					"js/util.js"
 				],
 				"refer": [
 					"home.html",
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/account/account.html",
 					"tzdr/scheme.html",
-					"tzdr/account/accountno.html"
+					"tzdr/account/accountno.html",
+					"tzdr/future/listrg.html"
 				],
 				"priority": 0
 			},
@@ -1044,7 +1046,8 @@
 				"refer": [
 					"tzdr/future/cl.html",
 					"tzdr/future/cn.html",
-					"tzdr/quotation/transactionDetails.html"
+					"tzdr/quotation/transactionDetails.html",
+					"tzdr/agree/tradingMarket.html"
 				],
 				"priority": 0
 			}

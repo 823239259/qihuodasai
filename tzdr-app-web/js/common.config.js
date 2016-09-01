@@ -27,7 +27,7 @@ var MarketConfig = {
  * 测试行情配置
  */
 var MarketConfigTest = { 
-	MarketSocketUrl:"ws://socket.vs.com:9002",
+	MarketSocketUrl:"ws://quote.vs.com:9002",
 //	MarketSocketUrl:"ws://192.168.2.123:9002",
 	username:"13677622344",
 	password:"a123456"

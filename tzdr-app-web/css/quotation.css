@@ -29,35 +29,12 @@ p{
 #sliderProgressBarQuotation{
 	color:#cccccc;
 }
-.mui-segmented-control .mui-control-item{
-	transition: none;
-	-webkit-transition: none;
-	background: linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -webkit-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -moz-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -ms-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -o-linear-gradient(#2B2B2B,#2B2B2B) !important;
-}
-.mui-slider-indicator{
-	transition: none;
-	background: linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -webkit-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -moz-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -ms-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -o-linear-gradient(#2B2B2B,#2B2B2B) !important;
-}
 .mui-slider-indicator #Time,#Candlestick,#TradingCenter{
 	color:#cccccc;
 	height:38px;
 	line-height: 38px;
 	background-color: #2B2B2B;
-	background: linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -webkit-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -moz-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -ms-linear-gradient(#2B2B2B,#2B2B2B) !important;
-	background: -o-linear-gradient(#2B2B2B,#2B2B2B) !important;
 }
-
 #TimeChart1{
 	background-color: #2B2B2B;
 	color:black !important;
@@ -315,14 +292,31 @@ p{
 	border:none;
 }
 #kilAnorder{
+	width: 70%;
 	background-color: #cccccc;
+	display: block;
 	border:none;
-	margin-top: 30px;
+	position: fixed;
+	bottom: 1%;
+	left: 15%;
 }
 #allOpen,#Open{
-	margin:0px 10px;
 	background-color:#cccccc;
+	position: fixed;
 }
+#allOpen{
+	bottom: 1%;
+	left: 5%;
+}
+#Open{
+	bottom: 1%;
+	right: 5%;
+}
+#positionList,#postersOrder{
+	width: 100%;
+	padding-bottom: 45px;
+}
+
 #Entrust{
 	width: 100%;
 }
@@ -529,4 +523,34 @@ input{
 	height: 43px;
 	line-height: 43px;
 	font-size: 14px;
+}
+#refresh{
+	color:#FFFFFF;
+}
+.mui-content{
+	background-color: #2B2B2B;
+}
+.RegistrationTips{
+	width: 100%;
+	text-align: center;
+}
+#loginIform{
+	width: 100%;
+	text-align: center;
+	height: 40px;
+	margin: 0px;
+}
+.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
+	/*left:25%;*/
+}
+.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
+	left:10px;
+}
+#loginAgree{
+	width: 100%;
+	text-align: left;
+	padding-left:40px;
+	height: 40px!important;
+	line-height: 40px !important;
+	
 }

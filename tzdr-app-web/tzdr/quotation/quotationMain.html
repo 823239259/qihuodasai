@@ -16,6 +16,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
+		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
 		</header>
 	<nav class="navlist">
 		<a class="navon" href="javascript:void(0);" id="quotationMain">
@@ -150,6 +151,7 @@
 			</a>
 		</div>
 	</div>
+	<script src="../../js/util.js"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript">
 		//初始化导航栏
@@ -158,6 +160,7 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
+				var reconnect=null;
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
@@ -187,8 +190,12 @@
 					}
 					socket.onclose = function(evt){
 						console.log("关闭连接");
+						if(reconnect != false){
+							alertProtype("服务器连接已超时,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
+						}
+
 					};
-					socket.onmessage = function(evt){
+					socket.onmessage = function(evt){ 
 					    var data = evt.data;
 					    var jsonData = JSON.parse(data);
 					    var method = jsonData.Method;
@@ -244,9 +251,10 @@
 			            var data=ManufacturingData(index);
 			            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 			            socket.close();
+			            reconnect=false;
 			            mui.openWindow({
 							url:"transactionDetails.html",
-							id:"transactionDetails.html",
+							id:"transactionDetails",
 							 extras:{
 								name:data,
 							}
@@ -255,7 +263,6 @@
 				};
 				//插入行情的方法
 			 function insertData1(MoreData) {
-			 	console.log(JSON.stringify(MoreData));
 			        var productName = document.getElementsByClassName("productName");
 			        var CommodityNo = document.getElementsByClassName("CommodityNo");
 			        var LastVolume = document.getElementsByClassName("LastVolume");
@@ -285,13 +292,25 @@
 			    }
 			document.getElementById("product").addEventListener("tap",function(){
 					socket.close();
+					reconnect=false;
 			});
 			document.getElementById("scheme").addEventListener("tap",function(){
 					socket.close();
+					reconnect=false;
 			});
 			document.getElementById("account").addEventListener("tap",function(){
 					socket.close();
-			})
+					reconnect=false;
+			});
+			document.getElementById("refresh").addEventListener("tap",function(){
+				var re = plus.webview.getWebviewById("quotationMain");
+					if(re != null || re != undefined){
+						re.reload(); 
+					}
+			});
+			function referPage(){
+				plus.webview.getWebviewById("quotationMain").reload();
+			}
 			});
 		</script>
 	</body>

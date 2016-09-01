@@ -173,7 +173,7 @@
 			function setTimeOutInsertOrder(){
 				tradeSetTimeOut = setTimeout(function(){
 								plus.nativeUI.closeWaiting(); 
-							},5000);
+							},10000);
 			}
 			function init(param){
 				$("#exchangeNo").val(param[3]);
@@ -190,6 +190,11 @@
 			}
 			var loginOutFlag = false;
 			$(function(){ 
+				$('#password').bind('input propertychange', function() {
+				  	var orderPrice = $("#orderPrice").val();
+				  	$("#buyBtn_P").val(orderPrice);
+				  	$("#sellBtn_P").val(orderPrice);
+				});
 				$("#switchAccount").click(function(){
 					if(username != null){
 						alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
@@ -202,9 +207,10 @@
 					var orderPrice = $("#orderPrice");
 					var lastPrice = $("#lastPrice").text();
 					var miniTikeSize = $("#miniTikeSize").val();
-					if(type == 1){ 
-						$("#buyBtn_P").text(doGetMarketPrice(lastPrice,miniTikeSize,0));
-						$("#sellBtn_P").text(doGetMarketPrice(lastPrice,miniTikeSize,1));
+					var doSize = $("#doSize").val();
+					if(type == 1){  
+						$("#buyBtn_P").text(parseFloat(doGetMarketPrice(lastPrice,miniTikeSize,0)).toFixed(doSize));
+						$("#sellBtn_P").text(parseFloat(doGetMarketPrice(lastPrice,miniTikeSize,1)).toFixed(doSize));
 						orderPrice.prop("placeholder","市价");
 						orderPrice.prop("value",""); 
 						orderPrice.prop("disabled",true);
@@ -430,6 +436,7 @@
 						return;
 					}
 					contractParam[0] = orderId;
+					cancleOrderId = orderId;
 				}
 				var cancleParam = doGetCancelOrderBasicParam(contractParam);
 				cancleOrder(cancleParam);

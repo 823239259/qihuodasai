@@ -37,21 +37,23 @@ var getHoldIndex = 0;
 var getDesgnateIndex = 0;
 var getTradeIndex = 0;
 var getSuccessIndex = 0;
+//撤单时保存的orderId
+var cancleOrderId = null;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 loadSocket();
 function referPage(){
-	plus.webview.getWebviewById("transactionDetails.html").reload();
+	plus.webview.getWebviewById("transactionDetails").reload();
 }
 function loadSocket(){
 	if(socket != null){
-		socket.onopen = function() { 
+		socket.onopen = function() {
 			if(username != null) 
 				Trade.doLogin(username, password);
 		}
 		socket.onclose = function() {
 			if(!loginOutFlag){
-				alertProtype("发现交易连接不稳定,点击确定重新连接","提示",Btn.confirmed(),referPage);
+				alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
 			}
 		}
 		socket.onmessage = function(evt) {
@@ -107,6 +109,8 @@ function loadSocket(){
 					var inserOrderStatus = insertOrderParam.OrderStatus;
 					if(inserOrderStatus < 3){
 						appendDesignates(insertOrderParam);
+					}else if(inserOrderStatus == 5 || inserOrderStatus == 6){
+						mui.toast("交易失败("+insertOrderParam.ContractCode+","+insertOrderParam.StatusMsg+")");
 					}
 					plus.nativeUI.closeWaiting();
 					tradeStatusFlag = true;
@@ -126,6 +130,11 @@ function loadSocket(){
 						appendDesignates(orderParam);
 					} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
 						updateDesignatesDom(orderParam);
+					}
+					if(cancleOrderId != null && cancleOrderId == orderId){
+						mui.toast("撤单成功,"+orderParam.ContractCode+"订单【"+orderId+"】");
+						plus.nativeUI.closeWaiting();
+						clearTimeout(tradeSetTimeOut);
 					}
 					//订单成交通知
 				} else if (method == "OnRtnOrderTraded") {
@@ -216,8 +225,10 @@ function appendPosition(data){
 	var $floatingProft = $("li[contract-code-position='"+contractCode+"'] span[class = 'position4 dateTimeL']"); 
 	if(floatP < 0 ){
 		$floatingProft.css("color","green");
-	}else {
+	}else if(floatP > 0){
 		$floatingProft.css("color","red");
+	}else{
+		$floatingProft.css("color","white");
 	}
 	positions[orderId] = holdParam;
 	//添加储存数据
@@ -284,8 +295,10 @@ function updatePositionDom(positonParam){
 		$floatingProft.val(floatingProft);
 		if(floatP < 0 ){
 			$floatingProft.css("color","green");
-		}else {
+		}else if(floatP > 0){
 			$floatingProft.css("color","red");
+		}else{
+			$floatingProft.css("color","white");
 		}
 	}else if(drection != oldDrection){
 		holdNum = holdNum - orderNum;
@@ -468,7 +481,7 @@ function updateOrder(data){
 	var orderNum = orderParam.OrderNum;
 	var cdNum = 0;
 	if(orderStatus == 4){
-		cdNum = orderNum = tradeNum;
+		cdNum = orderNum - tradeNum;
 	}
 	$thisOrderStatusText.text(analysisOrderStatus(orderStatus));
 	$thiscdNum.text(cdNum);
@@ -646,59 +659,37 @@ function addDesignatesBindClick(cls){
  * 更新用户资金信息
  * @param {Object} accountParam
  */
-var usdBanlance = 0.00;
-var usdDeposit = 0.00
-var usdCanuse = 0.00;
-var eurBanlance = 0.00;
-var eurDeposit = 0.00;
-var eurCanuse = 0.00;
-var hkdBanlance = 0.00;
-var hkdDeposit = 0.00;
-var hkdCanuse = 0.00;
-var usdRate = 0.00;
-var eurRate = 0.00;
-var hkdRate = 0.00;
 var uehIndex = 0;
-/**
- * 缓存汇率
- */
-function loadCachRate(accountParam){
-	var accountNo = accountParam.AccountNo;
-	var currentRate = accountParam.CurrencyRate;
-	if(accountNo == "USD"){
-		usdRate = currentRate;
-	}else if(accountNo == "EUR"){
-		eurRate = currentRate;
-	}else if(accountNo == "HKD"){
-		hkdRate = currentRate;
-	}
-	uehIndex++;
-}
+var loadCachBanlance = {};
+var loadCachDeposit = {};
+var loadCachCanuse = {};
+var loadCachAccountNo = {};
 function updateBalance(accountParam){
-	if(uehIndex < 3 && accountParam.CurrencyRate != undefined){
-		loadCachRate(accountParam);
+	var accountNo = accountParam.AccountNo;
+	var cachBanlace = loadCachBanlance[accountNo];
+	var banlance = accountParam.TodayBalance;
+	var deposit = accountParam.Deposit;
+	var canuse = accountParam.TodayCanUse;
+	loadCachBanlance[accountNo] = banlance;
+	loadCachDeposit[accountNo] = deposit;
+	loadCachCanuse[accountNo] = canuse;
+	if(cachBanlace == undefined || cachBanlace.length <= 0){
+		loadCachAccountNo[uehIndex] = accountNo;
+		uehIndex++;
 	}
+	var $banlance = 0.00;
+	var $deposit = 0.00
+	var $canuse = 0.00
 	$(function(){
-		var accountNo = accountParam.AccountNo;
-		var banlance = accountParam.TodayBalance;
-		var deposit = accountParam.Deposit;
-		var canuse = accountParam.TodayCanUse;
-		if(accountNo == "USD"){
-			usdBanlance = banlance * usdRate;
-			usdDeposit = deposit * usdRate;
-			usdCanuse = canuse * usdRate;
-		}else if(accountNo == "EUR"){
-			eurBanlance = banlance * eurRate;
-			eurDeposit = deposit * eurRate;
-			eurCanuse = canuse * eurRate;
-		}else if(accountNo == "HKD"){
-			hkdBanlance = banlance * hkdRate;
-			hkdDeposit = deposit * hkdRate;
-			hkdCanuse = canuse * hkdRate;
+		for(var i = 0 ; i < uehIndex; i++){
+			var ac = loadCachAccountNo[i]; 
+			$banlance = $banlance + loadCachBanlance[ac];
+			$deposit = $deposit + loadCachDeposit[ac];
+			$canuse = $canuse + loadCachCanuse[ac];
 		}
-		$("#todayBalance").text(parseFloat(usdBanlance+eurBanlance+hkdBanlance).toFixed(2));
-		$("#deposit").text(parseFloat(usdDeposit+eurDeposit+hkdDeposit).toFixed(2));
-		$("#todayCanUse").text(parseFloat(usdCanuse+eurCanuse+hkdCanuse).toFixed(2));
+		$("#todayBalance").text(parseFloat($banlance).toFixed(2));
+		$("#deposit").text(parseFloat($deposit).toFixed(2));
+		$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
 	});
 }
 /**
@@ -761,5 +752,5 @@ function deleteDesignatesContractCode(param){
  * @param {Object} num
  */
 function doGetOpenAvgPrice(price,num){
-	return parseFloat(price / num).toFixed(2);
+	return Math.round(parseFloat(price / num).toFixed(2));
 }
