@@ -193,7 +193,7 @@ var auditWithDraw={
 	lineAuditNotPass:function(type,datagridId){
 		var rows = $("#"+datagridId).datagrid('getChecked');
 		
-		if (type==4||type==5){
+
 			
 			if (!rows || rows.length==0 || rows[0].id==null){
 					eyWindow.walert("提示","请选择对应的数据记录", 'info');
@@ -214,7 +214,7 @@ var auditWithDraw={
 					}  
 				});  
 			}
-		}
+		
 	},
 	auditNotPass:function(type,datagridId){
 		var rows = $("#"+datagridId).datagrid('getChecked');
