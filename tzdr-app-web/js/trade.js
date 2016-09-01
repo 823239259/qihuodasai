@@ -650,25 +650,46 @@ var eurCanuse = 0.00;
 var hkdBanlance = 0.00;
 var hkdDeposit = 0.00;
 var hkdCanuse = 0.00;
+var usdRate = 0.00;
+var eurRate = 0.00;
+var hkdRate = 0.00;
+var uehIndex = 0;
+/**
+ * 缓存汇率
+ */
+function loadCachRate(accountParam){
+	var accountNo = accountParam.AccountNo;
+	var currentRate = accountParam.CurrencyRate;
+	if(accountNo == "USD"){
+		usdRate = currentRate;
+	}else if(accountNo == "EUR"){
+		eurRate = currentRate;
+	}else if(accountNo == "HKD"){
+		hkdRate = currentRate;
+	}
+	uehIndex++;
+}
 function updateBalance(accountParam){
+	if(uehIndex < 3){
+		loadCachRate(accountParam);
+	}
 	$(function(){
-		var currencyNo = accountParam.CurrencyNo;
+		var accountNo = accountParam.AccountNo;
 		var banlance = accountParam.TodayBalance;
 		var deposit = accountParam.Deposit;
 		var canuse = accountParam.TodayCanUse;
-		var currentRate = accountParam.CurrencyRate;
-		if(currencyNo == "USD"){
-			usdBanlance = banlance * currentRate;
-			usdDeposit = deposit * currentRate;
-			usdCanuse = canuse * currentRate;
-		}else if(currencyNo == "EUR"){
-			eurBanlance = banlance * currentRate;
-			eurDeposit = deposit * currentRate;
-			eurCanuse = canuse * currentRate;
-		}else if(currencyNo == "HKD"){
-			hkdBanlance = banlance * currentRate;
-			hkdDeposit = deposit * currentRate;
-			hkdCanuse = canuse * currentRate;
+		if(accountNo == "USD"){
+			usdBanlance = banlance * usdRate;
+			usdDeposit = deposit * usdRate;
+			usdCanuse = canuse * usdRate;
+		}else if(accountNo == "EUR"){
+			eurBanlance = banlance * eurRate;
+			eurDeposit = deposit * eurRate;
+			eurCanuse = canuse * eurRate;
+		}else if(accountNo == "HKD"){
+			hkdBanlance = banlance * hkdRate;
+			hkdDeposit = deposit * hkdRate;
+			hkdCanuse = canuse * hkdRate;
 		}
 		$("#todayBalance").text(parseFloat(usdBanlance+eurBanlance+hkdBanlance).toFixed(2));
 		$("#deposit").text(parseFloat(usdDeposit+eurDeposit+hkdDeposit).toFixed(2));

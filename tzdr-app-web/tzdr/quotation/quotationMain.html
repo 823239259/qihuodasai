@@ -150,6 +150,7 @@
 			</a>
 		</div>
 	</div>
+	<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript">
 		//初始化导航栏
 			tzdr.init.initHearListener();
@@ -236,131 +237,25 @@
     				function ManufacturingData(i){
     					var data=[];
     					return data=[product.CommodityName[i],product.CommodityNo1[i],product.CommodityNo2[i],product.ExchangeNo[i],product.DotSize[i],product.ContractSize[i],product.MiniTikeSize[i]];
-    				};
-    				var data0=new ManufacturingData(0);
-    				var data1=new ManufacturingData(1);
-    				var data2=new ManufacturingData(2);
-    				var data3=new ManufacturingData(3);
-    				var data4=new ManufacturingData(4);
-    				var data5=new ManufacturingData(5);
-    				var data6=new ManufacturingData(6);
-    				var data7=new ManufacturingData(7);
-    				var data8=new ManufacturingData(8);
-    				var data9=new ManufacturingData(9);
-    				var pageOpen= document.getElementsByClassName("openPage");
-    				addListener();
-    				//添加产品的点击事件 
-    				function addListener(){
-    						pageOpen[0].addEventListener("tap",function(){
-								socket.close();
-								mui.openWindow({
-									url:"transactionDetails.html",
-									id:"transactionDetails.html",
-									 extras:{
-										name:data0,
-									}
-								});
-								});
-								pageOpen[1].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data1,
-										}
-									});
-								});
-								pageOpen[2].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data2,
-										}
-									});
-								});
-								pageOpen[3].addEventListener("tap",function(){
-									 socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data3,
-										}
-									});
-								});
-								pageOpen[4].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data4,
-										}
-									});
-								});
-								pageOpen[5].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data5,
-										}
-									});
-								});
-								pageOpen[6].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data6,
-										}
-									});
-								});
-								pageOpen[7].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data7,
-										}
-									});
-								});
-								pageOpen[8].addEventListener("tap",function(){
-									socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data8,
-										}
-									});
-								});
-								pageOpen[9].addEventListener("tap",function(){
-								socket.close();
-									mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails.html",
-										 extras:{
-											name:data9,
-										}
-									});
-								});
-    				};
-				
+	    				};
+			    	$(".openPage").click(function(){
+			            var _this = $(this);
+			            var index=_this.index();
+			            var data=ManufacturingData(index);
+			            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+			            socket.close();
+			            mui.openWindow({
+							url:"transactionDetails.html",
+							id:"transactionDetails.html",
+							 extras:{
+								name:data,
+							}
+						});
+			      });
 				};
 				//插入行情的方法
 			 function insertData1(MoreData) {
-			 	if(MoreData.Parameters.CommodityNo=="CN"){
-			 		//console.log("123")
-			 		//console.log(MoreData.Parameters.TotalVolume);
-			 	}
-			 		
+			 	console.log(JSON.stringify(MoreData));
 			        var productName = document.getElementsByClassName("productName");
 			        var CommodityNo = document.getElementsByClassName("CommodityNo");
 			        var LastVolume = document.getElementsByClassName("LastVolume");

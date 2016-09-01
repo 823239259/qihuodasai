@@ -903,7 +903,9 @@
 			"js/mui.min.js",
 			"fonts/mui.ttf",
 			"css/mui.min.css",
-			"js/common.config.js"
+			"js/common.config.js",
+			"js/jquery-1.11.3.js",
+			"js/jquery.base64.js"
 		],
 		"refer": [
 			"home.html",
