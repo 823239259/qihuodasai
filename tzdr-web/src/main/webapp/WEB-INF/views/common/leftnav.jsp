@@ -51,7 +51,7 @@
 				<li><a id="security" href="${ctx}/securityInfo/secInfo" >安全信息</a><i>></i></li>
 				<li><a id="toMessage" href="${ctx}/message/usermessage">在线留言</a><i>></i></li>
 				<%-- <li><a id="invitationCode" href="${ctx}/extendsion/sign/invitation/code">我的邀请码</a><i>></i></li> --%>
-				<li><a id="toGeneralize" href="${ctx}/generalize/details">我的邀请码</a><i>></i></li>
+				<%-- <li><a id="toGeneralize" href="${ctx}/generalize/details">我的邀请码</a><i>></i></li> --%>
 				<%-- <li><a id="userVolume" href="${ctx}/uservolume/volumelist">抵扣券</a><i>></i></li> --%>
 			</ul>
 		</div>

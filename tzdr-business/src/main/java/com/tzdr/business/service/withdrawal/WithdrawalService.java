@@ -78,7 +78,7 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 	public PageInfo<Object> queryList(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(), easyUiPage.getPage());
 
-		String sql = " SELECT dl.source source,first_audit_time firstAuditTime,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit,dl.first_audit_user firstAuditUser,dl.uid, dl.id, us.mobile, dl.bank, dl.card,dl.acc_address, dl.`status`, dl.money,dl.addtime, dl.oktime, uv.tname, us.avl_bal balance, dl.update_time auditTime,dl.update_user auditUser FROM  w_draw_list dl, w_user us, w_user_verified uv WHERE us.id = dl.uid AND uv.uid = us.id";
+		String sql = " SELECT dl.source source,first_audit_time firstAuditTime,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit,dl.first_audit_user firstAuditUser,dl.uid, dl.id, us.mobile, dl.bank, dl.card,dl.acc_address, dl.`status`, dl.money,dl.addtime, dl.oktime, uv.tname, us.avl_bal balance, dl.update_time auditTime,dl.update_user auditUser FROM  w_draw_list dl, w_user us, w_user_verified uv WHERE us.id = dl.uid AND uv.uid = us.id order by dl.addtime desc";
 		// params 查询参数 依次 存入
 		MultiListParam multilistParam = new MultiListParam(easyUiPage, searchParams, null, sql);
 		pageInfo = multiListPageQuery(multilistParam, DrawMoneyListVo.class);
@@ -348,7 +348,7 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 		if ("1".equals(type)) {// 初审
 				tempDrawList.setFirstAuditUser(authService.getCurrentUser().getRealname());
 				tempDrawList.setFirstAuditTime(Dates.getCurrentLongDate());
-		} else {
+		} else if("3".equals(type)){
 			tempDrawList.setUpdateUser(authService.getCurrentUser().getRealname());
 			tempDrawList.setUpdateTime(Dates.getCurrentLongDate());
 			tempDrawList.setUpdateUserId(authService.getCurrentUser().getId());
@@ -451,7 +451,7 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 			params.add(vo.getSource());
 		}
 
-		sql += " order by dl.addtime";
+		sql += " order by dl.addtime desc";
 		PageInfo<DrawListAuditVo> page = getEntityDao().queryPageBySql(dataPage, sql, DrawListAuditVo.class, null,
 				params.toArray());
 		return page;

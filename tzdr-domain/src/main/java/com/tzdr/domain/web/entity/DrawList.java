@@ -168,7 +168,7 @@ public class DrawList extends BaseCrudEntity {
 
 	/**
 	 * 默认的UpdateUser 为审核人---
-	 * 是否审核 0：未审核  1：已审核，审核通过   2:审核不通过-1初审核通过,
+	 * 是否审核 0：未审核  1：已审核，审核通过   2:审核不通过-1初审核通过
 	 */
 	private Integer isAudit=0;
 	
