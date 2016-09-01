@@ -329,7 +329,7 @@ public class SignInController {
 
 		// p2p 同步注册
 
-		new RegistP2pThread(mobile, password, wUser.getLoginSalt()).start();
+//		new RegistP2pThread(mobile, password, wUser.getLoginSalt()).start();
 		wUser = wUserService.login(mobile, password); // 登录
 		UserSessionBean userSessionBean = new UserSessionBean();
 		userSessionBean.setId(wUser.getId());
