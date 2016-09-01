@@ -198,6 +198,7 @@ var tab="<%=tab%>";
     <div class="hp_ctn rule hp_content" style="display: none">
     	<div class="hp_siderbar rule_siderbar">
     		<a href="javascript:void(0)" data="1">新手必读<i>></i></a>
+    		<a href="javascript:void(0)" data="3">网站操作流程<i>></i></a>
     		<a href="javascript:void(0)" data="9">恒指操盘<i>></i></a>
     		<a href="javascript:void(0)" data="8">国际原油<i>></i></a>
     	 	<a href="javascript:void(0)" data="0">富时A50<i>></i></a>
@@ -301,7 +302,55 @@ var tab="<%=tab%>";
 	            <span><a href="${ctx}/ftse/index" target="_blank">富时A50>></a></span>
 	            <span><a href="${ctx}/outDisk/index" target="_blank">国际综合>></a></span>
             </div>
-        </div>            
+        </div>   
+        <div class="hp_mainbar hp_mbox3" style="display:none;">    
+        	<h2>第一步，手机号注册/登录</h2>
+        	<p> 首先，我们得有个账号打开维胜网（www.vs.com）官网，点击首页登录窗口右下角“免费注册”按钮（您也可以选择上方的另一个入口“注册”</p>
+        	<img src="${ctx}/static/images/help/vs-help-4.png" width="677" style="margin-left:30px;">
+        	<p>两个入口都会来到注册页面，请按照相应位置分别填写相关信息</p>
+        	<img src="${ctx}/static/images/help/vs-help-5.png" width="677" style="margin-left:30px;">
+        	<p>填好之后点击提交，维胜账户就成功注册了</p>
+        	<img src="${ctx}/static/images/help/vs-help-15.png" width="677" style="margin-left:30px;">
+        	<p>登录亦同，打开维胜网，在首页登录窗口输入注册手机号和密码就登录成功了~</p>
+        	<h2>第二步，认证个人信息</h2>
+        	<p>登录成功点击右上方“我的账户”来到账户中心</p>
+        	<img src="${ctx}/static/images/help/vs-help-46.png" width="677" style="margin-left:30px;">
+        	<p>点击左侧“安全信息”进行安全设置，在这里您可以自行设置各项密码和保护机制；</p>
+        	<img src="${ctx}/static/images/help/vs-help-6.png" width="677" style="margin-left:30px;">
+        	<p>接下来，点击“实名认证”下方的“立即认证”，在弹出的认证窗口中，根据左侧提示填写真实姓名和与之匹配的身份证号码进行验证</p>
+        	<img src="${ctx}/static/images/help/vs-help-7.png" width="677" style="margin-left:30px;">
+        	<h2>第三步，账户充值</h2>
+        	<p>目前我们的充值通道有支付宝、第三方支付平台（国付宝）、银行转账；您可以选择对您更方便的充值方式~</p>
+        	<img src="${ctx}/static/images/help/vs-help-47.png" width="677" style="margin-left:30px;">
+        	<h2>第四步，期货方案开户申请</h2>
+        	<p>账号准备完毕，开始申请操盘开户，这里以“富时A50”为例做介绍，（其余类型期货操作相同）</p>
+        	<p>点击首页 - “富时A50”之后选择适合自己的开仓数点击“提交操盘申请”按钮系统会自动计算保证金等金额</p>
+        	<img src="${ctx}/static/images/help/vs-help-22.png" width="677" style="margin-left:30px;">
+        	<p>之后再做支付确认即可</p>
+        	<h2>第五步，获取交易账号</h2>
+        	<p>方案发起成功后，进入“我的账户”查看发放的账号</p>
+        	<img src="${ctx}/static/images/help/vs-help-18.png" width="677" style="margin-left:30px;">
+        	<h2>第六步，下载交易客户端</h2>
+        	<p>PC — Windows平台我们提供的交易软件有自主开发的维胜标准版和维胜快手客户端；以及易盛极星，您可按需选择（下载地址：维胜网首页 - 新手指南 - 交易软件下载）</p>
+        	<p>App不用电脑，手机也能随时操盘。移动端，我们有Android（安卓）和iOS双平台应用。Android：http://api.vs.com/upload/vsapp.apkiOS：请于App Store搜索“维胜”</p>
+        	<h2>第七步，投资交易</h2>
+        	<p>1、打开维胜标准版客户端，进入软件，用户可根据自身对期货的了解选择模拟操盘，和实际操盘。模拟操盘针对新手用户，更快的上手。实盘操盘必须现在维胜的官网申请操盘方案，获得操盘账号和密码方可进入。</p>
+        	<p>2、根据相应账户登录交易端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手版、限价版；</p>
+        	<img src="${ctx}/static/images/help/vs-help-41.png" width="677" style="margin-left:30px;">
+        	<p>3、点击鼠标右键提示选择合约，您可以添加您感兴趣的合进行观察行情，再点击确认，行情便添加成功。</p>
+        	<p>4、购买合约：第一步：用户可在行情列表中，鼠标点击您选中的合约代码，第二步：观看维胜的左下角的交易板块，填入您想购买合约的数量；第三步：点击买入按钮，弹出下单确认窗口；第四步：核对您的订单信息是否正确，若点击【确认】按钮，购买完成；点击【取消】按钮，购买失败。</p>
+        	<p>5、卖出合约：用户点击选中的持仓合约，选择卖出的合约，点击卖出即可卖出。也可右击选择平仓也可进行卖出合约。</p>
+        	<img src="${ctx}/static/images/help/vs-help-42.png" width="677" style="margin-left:30px;">
+        	<h2>第八步，追加保证金</h2>
+        	<p>如果您有持仓过夜的需求（需申请），亦或是操盘资金不足那么就需要再追加保证金，才可继续操盘；</p>
+        	<p>进入“我的账户” - 操盘记录，选择您正在操盘中的方案，点击右侧“追加保证金”，并按提示充值相应金额即可；</p>
+        	<p>Tips：追加的保证金，将会直接打入您的操盘账户无须等待开户充值等操作</p>
+			<h2>第九步，申请结算/提现</h2>
+        	<p>进入“我的账户” - 账户中心选择需要提现的期货类型，在右方“操作”一栏下可以对开户的期货进行结算操作，点击“申请结算”之后就等待资金到账</p>
+        	<p>待结算完成后，就可以对资金进行提现仍是在“我的账户”中，在左侧选择“我要提现”，就将跳转至提现页面（第一次提现需要添加银行卡、设置提现密码才能继续操作）</p>
+        	<img src="${ctx}/static/images/help/vs-help-10.png" width="677" style="margin-left:30px;">
+			<p>在“我的账户”中，左侧选择“我要提现”，并输入相应信息点击“下一步”就可以乖乖等资金到账啦~</p>
+        </div>          
         <div class="hp_mainbar hp_mbox8" style="display:none;">        	
             <h1>国际原油操盘细则</h1>     
             <h2>国际原油介绍：</h2>
