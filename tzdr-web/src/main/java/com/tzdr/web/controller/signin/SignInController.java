@@ -355,7 +355,9 @@ public class SignInController{
 			log.info("手机号为："+mobile+"的用户注册成功，发送短信失败");
 		}
 		}catch(Exception e){
+			e.printStackTrace();
 			log.info("短信发送给："+mobile+"出现异常");
+			
 		}
 		return jsonResult;
 	}
