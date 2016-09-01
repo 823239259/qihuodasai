@@ -277,13 +277,13 @@ function getCookie(c_name) {
     	<img src="${ctx}/static/images/image/anquan.png">
     	<img src="${ctx}/static/images/image/shiming.png">
     </p>
-    <div class="site-notice notice-relative" style="position: relative;bottom:20px; width: 50%;heigh:5px; background:black;">
+    <!-- <div class="site-notice notice-relative" style="position: relative;bottom:20px; width: 50%;heigh:5px; background:black;">
 		<span style="size: 60px;position: relative;left:10px">尊敬的用户如果您有问题，欢迎随时拨打我们的客服热线：400-852-8008</span>
 		<div class="notice-style" style="height: 40px;width:20px; bottom:60px;left:260px;position: relative;">
 			<a href="javascript: closeNotice1();" class="notice-close" style="top: 18px;"></a>
 			
 		</div>
-	</div>
+	</div> -->
 </div>
 <%@ include file="../common/dsp.jsp"%>
 </body>
