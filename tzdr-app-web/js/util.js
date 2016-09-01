@@ -74,8 +74,7 @@ function alertProtype(alertContent, alertTitle, btnArray, successCallBack, colse
 		if(e.index == 1) {
 			successCallBack(param);
 		} else {
-			if(colseCallBack != undefined || colseCallBack != null)
-				colseCallBack(param);
+			colseCallBack(param);
 		}
 	})
 }

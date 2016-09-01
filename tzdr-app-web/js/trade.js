@@ -32,6 +32,11 @@ var entrustsIndex = 0;
 var tradesIndex = 0;
 var tradeStatusFlag = false; 
 var tradeSetTimeOut = null;
+
+var getHoldIndex = 0;
+var getDesgnateIndex = 0;
+var getTradeIndex = 0;
+var getSuccessIndex = 0;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 loadSocket();
@@ -670,7 +675,7 @@ function loadCachRate(accountParam){
 	uehIndex++;
 }
 function updateBalance(accountParam){
-	if(uehIndex < 3){
+	if(uehIndex < 3 && accountParam.CurrencyRate != undefined){
 		loadCachRate(accountParam);
 	}
 	$(function(){

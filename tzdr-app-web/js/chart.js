@@ -297,7 +297,7 @@ mui.plusReady(function(){
         		}
         	}
         	var newData=rawData.slice(-60);
-        	console.log(newData.length);
+//      	console.log(newData.length);
         		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
