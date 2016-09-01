@@ -331,8 +331,8 @@ var tab="<%=tab%>";
         	<p>方案发起成功后，进入“我的账户”查看发放的账号</p>
         	<img src="${ctx}/static/images/help/vs-help-18.png" width="677" style="margin-left:30px;">
         	<h2>第六步，下载交易客户端</h2>
-        	<p>PC — Windows平台我们提供的交易软件有自主开发的维胜标准版和维胜快手客户端；以及易盛极星，您可按需选择（下载地址：维胜网首页 - 新手指南 - 交易软件下载）</p>
-        	<p>App不用电脑，手机也能随时操盘。移动端，我们有Android（安卓）和iOS双平台应用。Android：http://api.vs.com/upload/vsapp.apkiOS：请于App Store搜索“维胜”</p>
+        	<p>PC — Windows平台我们提供的交易软件有自主开发的<b style="font-weight: bold;">维胜标准版</b>和<b style="font-weight: bold;">维胜快手客户端</b>；以及<b style="font-weight: bold;">易盛极星</b>，您可按需选择（下载地址：维胜网首页 - 新手指南 - 交易软件下载）</p>
+        	<p>App不用电脑，手机也能随时操盘。移动端，我们有Android（安卓）和iOS双平台应用。</br>Android：http://api.vs.com/upload/vsapp.apk</br>iOS：请于App Store搜索“维胜”</p>
         	<h2>第七步，投资交易</h2>
         	<p>1、打开维胜标准版客户端，进入软件，用户可根据自身对期货的了解选择模拟操盘，和实际操盘。模拟操盘针对新手用户，更快的上手。实盘操盘必须现在维胜的官网申请操盘方案，获得操盘账号和密码方可进入。</p>
         	<p>2、根据相应账户登录交易端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手版、限价版；</p>
