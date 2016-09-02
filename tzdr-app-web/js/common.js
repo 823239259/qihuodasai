@@ -277,8 +277,7 @@ var tzdr = {
 		//区分appstore，如:false=否，true=是,默认值为false
 		is_appstore:false,
 		//企业ipa下载地址
-		ipa_download_url:'itms-services://?action=download-manifest&url=https://update.tzdr.com/Future/download/test_tzdr_app/tzdr.plist'
-		//ipa_download_url:'itms-services://?action=download-manifest&url=https://update.tzdr.com/Future/download/ios_tzdr_app/tzdr.plist'
+		ipa_download_url:'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8'
 	},
 	cacheNews:{
 		// 新闻加载日期
