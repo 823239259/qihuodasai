@@ -133,6 +133,8 @@
       	},function(result){
       				mui.toast("登录成功！"); 
       				//存储用户信息
+//    				alert("123");
+      				console.log(JSON.stringify(result));
       				mui.cacheUser.save(result.data.token,result.data.secret,mobile);
       				if (win.backpageID){ 
       					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息

@@ -136,7 +136,7 @@
 						setTimeOutIsLogin();
 						var loginSocket = new WebSocket(TradeUrl.SocketUrl);
 						loginSocket.onopen = function(){
-							loginSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}'); 
+							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}}');
 						}
 						loginSocket.onmessage = function(evt){
 							var dataString = evt.data;
@@ -167,9 +167,6 @@
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
 					}
 				});
-				function loginSendMessage(method,parameters){
-	    			loginSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-				}
 				function backReload(){
 					plus.webview.getWebviewById("transactionDetails").reload();
 				};
