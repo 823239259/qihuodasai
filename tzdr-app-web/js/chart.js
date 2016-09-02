@@ -307,7 +307,7 @@ mui.plusReady(function(){
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
-		  		myChart.resize();
+//		  		myChart.resize();
 		  		myChart.setOption(CandlestickChartOption);
 		  	}
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){

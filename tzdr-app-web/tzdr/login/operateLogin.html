@@ -143,12 +143,6 @@
 				$("#operateLogin").click(function(){
 					if(username == null){
 						account=document.getElementById("account").value;
-						if($("#checkBox").val()==1){
-						        
-						}else{
-						     mui.toast("请选择协议"); 
-						   return;
-						  };
 						pwd=$.base64.encode(document.getElementById("password").value);
 						if(mui.isnull(account)){
 			    			mui.toast("请输入账号");
@@ -159,6 +153,12 @@
 			    			mui.toast("请输入密码");
 			    			return;
 						}
+						if($("#checkBox").val()==1){
+						        
+						}else{
+						     mui.toast("您还未勾选协议"); 
+						   return;
+						  };
 						loginSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}'); 
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();

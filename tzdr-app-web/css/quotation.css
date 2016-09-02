@@ -546,7 +546,7 @@ input{
 
 
 .mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-	left:15%;
+	left:13.5%;
 }
 @media only screen and (min-device-width : 320px ) {
 	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
@@ -560,7 +560,7 @@ input{
 }
 @media only screen and (min-device-width : 414px ) {
 	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:16%;
+		left:13.5%;
 	}
 }
 #loginAgree{
