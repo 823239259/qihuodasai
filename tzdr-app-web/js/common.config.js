@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var marketSocketUrl = "";
 var marketUserName = "";
@@ -19,7 +19,7 @@ var TradeConfigTest = {
  * 行情配置
  */
 var MarketConfig = {
-	MarketSocketUrl:"ws://socket.vs.com:9002",
+	MarketSocketUrl:"ws://quote.vs.com:9002",
 	username:"13677622344",
 	password:"a123456"
 }
@@ -27,8 +27,8 @@ var MarketConfig = {
  * 测试行情配置
  */
 var MarketConfigTest = { 
-	//MarketSocketUrl:"ws://quote.vs.com:9002",
-  MarketSocketUrl:"ws://socket.vs.com:9002",
+	MarketSocketUrl:"ws://quote.vs.com:9002",
+	//MarketSocketUrl:"ws://socket.vs.com:9002",
 	username:"13677622344",
 	password:"a123456"
 }

@@ -64,7 +64,7 @@
 								</div> 
 								
 								<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
-								<div class="BuyContentLeft"><label>价格:</label><input id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" value="1" placeholder="1" type="number"></div>
+								<div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
 								<div class="buyBtn">
 								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
 								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
@@ -81,14 +81,14 @@
 							<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
 								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
 							</ul>
-						<button type="button" class="mui-btn mui-col-xs-5" id="allOpen">全部平仓</button>
-						<button type="button" class="mui-btn mui-col-xs-5" id="Open">平仓</button>
+						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
+						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
 					</div>
 					<div id="item2" class="mui-control-content">
 							<ul  id="postersOrder" class="listStyle" style="height: 180px; width: 100%;" >
 								<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
 							</ul>
-							<button type="button" class="mui-btn mui-col-xs-10" id="kilAnorder">撤单</button>
+							<button type="button" class="mui-btn mui-col-xs-10 focusButton" id="kilAnorder">撤单</button>
 					</div>
 					<div id="item3" class="mui-control-content" style="width: 100%;">
 							<ul  id="Entrust" class="listStyle" style="height: 180px;" >
@@ -119,7 +119,7 @@
 				<div class="BuyContentLeft"><label>手数:</label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
 				</div>
 				<div class="buyBtn">
-					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketBuy" data-tion-buy = "0">买入</button>
+					<button type="button" class="mui-btn mui-col-xs-5 marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
 				<div style="display: none;">
@@ -160,6 +160,21 @@
 				var candlestickChartItem = document.getElementById('CandlestickChart');
 				init(Transfer.name);
 				cachTranFers(Transfer.name);
+				var i = 0 ;
+				$(window).resize(function() {
+					if(i % 2 == 0){  
+						 $(".focusButton").css("display","none");
+					}else{
+						$(".focusButton").css("display","block");
+					}
+					i++; 
+				});
+				 /*$("input[type= 'number']").resize(function(){
+					$(".focusButton").css("display","none");
+				}); */
+				/*$("input[type= 'number']").resize(function(){ 
+					$(".focusButton").css("display","block"); 
+				})*/
 			});
 		</script>
 		<script>
