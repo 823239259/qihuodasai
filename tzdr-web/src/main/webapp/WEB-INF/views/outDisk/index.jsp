@@ -123,7 +123,7 @@
                 <tr>
                     <td>德国DAX</td>
                     <td>${outDiskPrice[6].mainContract}</td>
-                    <td>13:05-23:55</td>
+                    <td>13:55-23:55</td>
                     <td>只交易德国DAX时，初始最大可持仓<i id='daxtranActualLever'>${outDiskParameters[0].daxtranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[6].price}</i>元/手</td>
                 </tr>
