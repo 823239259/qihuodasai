@@ -97,6 +97,7 @@ public class FinternationFutureMoneyVo implements Serializable {
 	@AllowExcel(name="平台来源")
 	private String sourceStr;
 	
+	private String operator;//操作员
 	
 	public Integer getSource() {
 		return source;
@@ -295,6 +296,14 @@ public class FinternationFutureMoneyVo implements Serializable {
 
 	public void setDollarMoney(Double dollarMoney) {
 		this.dollarMoney = dollarMoney;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 
 }

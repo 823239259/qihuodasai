@@ -142,6 +142,7 @@ function timeConvert(value,rowData,rowIndex) {
 							<th field="sourceStr" width="150">平台来源</th>
 							<th field="programNo" width="150">方案编号</th>
 							<th field="stateType" width="100">状态</th>
+							<th field="operator" width="100">操作员</th>
 			            </tr>
 			        </thead>
    				</table>
@@ -238,6 +239,7 @@ function timeConvert(value,rowData,rowIndex) {
 							<th field="updateTimeValue" width="120" sortable="true">处理时间</th>
 							<th field="statusValue" width="100" sortable="true">状态</th>
 							<th field="sourceStr" width="150">平台来源</th>
+							<th field="operator" width="100">操作员</th>
 			            </tr>
 			        </thead>
    				</table>
@@ -411,6 +413,7 @@ function timeConvert(value,rowData,rowIndex) {
 								<th field="sourceStr" width="150">平台来源</th>
 								<th field="programNo" width="150">方案编号</th>
 								<th field="stateType" width="100">结算状态</th>
+								<th field="operator" width="100">操作员</th>
 				            </tr>
 				        </thead>
 	   				</table>

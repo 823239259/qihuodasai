@@ -264,7 +264,10 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 */
 	private Integer source=1;
 	
-	
+	/**
+	 * 操作员
+	 */
+	private String operator;
 	
 	
 
@@ -715,6 +718,15 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	public void setEndActualMoney(BigDecimal endActualMoney) {
 		this.endActualMoney = endActualMoney;
 	}
+
+	@Column
+	public String getOperator() {
+		return operator;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
 
 	/**
 	 * 优惠券ID（类型为代金券）

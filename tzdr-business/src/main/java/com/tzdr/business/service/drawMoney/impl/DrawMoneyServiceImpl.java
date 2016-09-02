@@ -21,6 +21,8 @@ import org.springframework.util.CollectionUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.hundsun.t2sdk.interfaces.T2SDKException;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
+import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.exception.UserTradeException;
 import com.tzdr.business.service.api.hundsun.HundsunJres;
 import com.tzdr.business.service.datamap.DataMapService;
@@ -94,6 +96,8 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 	private DataMapService dataMapService;
 	@Autowired
 	private DrawMoneyDataService drawMoneyDataService;
+	@Autowired
+	private MessagePromptService messagePromptService;
 
 	@Override
 	public UserVerified findByUserId(String userId) {
@@ -706,6 +710,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			map.put("account", user.getMobile());
 			map.put("money", money);
 			new SMSSenderThread(user.getMobile(), "draw.money.template", map).start();
+			messagePromptService.sendMessage(PromptTypes.isTheTrial, user.getMobile());//提现初审邮件
 		} else if (linedata != null) {
 			drawList.setBelowLine(1);
 			drawList.setRemark("后台开始线下审核提现金额，审核金额范围：" + auditMoneyRang);
@@ -714,6 +719,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			map.put("account", user.getMobile());
 			map.put("money", money);
 			new SMSSenderThread(user.getMobile(), "draw.money.template", map).start();
+			messagePromptService.sendMessage(PromptTypes.isLineTransfer, user.getMobile());//线下提现初审邮件
 		} else {
 			drawList.setUpdateTime(Dates.getCurrentLongDate());
 			drawList.setUpdateUser("system");

@@ -59,6 +59,11 @@ public class FinternationFutureAppendLevelMoney extends BaseCrudEntity {
 	 */
 	private Double  parities=0.0;
 	
+	/**
+	 * 操作员
+	 * @return
+	 */
+	private String operator;
 
 	public String getUid() {
 		return uid;
@@ -137,6 +142,14 @@ public class FinternationFutureAppendLevelMoney extends BaseCrudEntity {
 
 	public void setParities(Double parities) {
 		this.parities = parities;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 	
 	

@@ -10,82 +10,82 @@ import com.tzdr.common.utils.AllowExcel;
 import com.tzdr.common.utils.Dates;
 
 /**
- * 富时A50开户查询  VO
- * @author wucholiang
- * 2015年9月17日 上午11:23:50
+ * 富时A50开户查询 VO
+ * 
+ * @author wucholiang 2015年9月17日 上午11:23:50
  */
 public class FSimpleFtseVo implements Serializable {
-	
+
 	private static final long serialVersionUID = -6469817179539585309L;
-	
+
 	/**
 	 * 申请ID
 	 */
 	private String id;
-	
+
 	/**
 	 * 用户编号
 	 */
 	private String uid;
-	
+
 	/**
 	 * 用户手机号
 	 */
-	@AllowExcel(name="手机号码")
+	@AllowExcel(name = "手机号码")
 	private String mobile;
-	
+
 	/**
 	 * 客户姓名
 	 */
-	@AllowExcel(name="客户姓名")
+	@AllowExcel(name = "客户姓名")
 	private String tname;
-	
-	/**  
-	 * 业务状态【0.富时A50 6.原油    7. 恒指  8.国际综合 9.小恒指】
+
+	/**
+	 * 业务状态【0.富时A50 6.原油 7. 恒指 8.国际综合 9.小恒指】
 	 */
-	@AllowExcel(name="交易品种")
+	@AllowExcel(name = "交易品种")
 	private Integer businessType;
-	
+
 	/**
 	 * 总保证金额
 	 */
-	@AllowExcel(name="操盘保证金(元)")
+	@AllowExcel(name = "操盘保证金(元)")
 	private BigDecimal traderBond;
-	
+
 	/**
 	 * 代金券使用金额
 	 */
-    @AllowExcel(name="实际代金券(元)")
+	@AllowExcel(name = "实际代金券(元)")
 	private BigDecimal voucherActualMoney;
-	
+
 	/**
 	 * 入金金额 = 215*开仓手数
 	 */
-	@AllowExcel(name="入金金额(美元)")
+	@AllowExcel(name = "入金金额(美元)")
 	private BigDecimal bondDollar;
-	
+
 	/**
 	 * 总操盘资金(美元) - 亏损平仓线(美元) = 授信金额(美元)
 	 */
-	@AllowExcel(name="授信金额(美元)")
+	@AllowExcel(name = "授信金额(美元)")
 	private BigDecimal lossMoney;
-	
+
 	/**
 	 * 亏损平仓线
 	 */
-	@AllowExcel(name="亏损平仓线(美元)")
+	@AllowExcel(name = "亏损平仓线(美元)")
 	private BigDecimal lineLoss;
-	
+
 	/**
 	 * 总操盘金额
 	 */
-	@AllowExcel(name="总操盘资金(美元)")
+	@AllowExcel(name = "总操盘资金(美元)")
 	private BigDecimal traderTotal;
-	
+
 	/**
 	 * 开仓手数
 	 */
-	@AllowExcel(name="可开仓手数")
+	@AllowExcel(name = "可开仓手数")
 	private Integer tranLever;
 
 	/**
@@ -96,73 +96,68 @@ public class FSimpleFtseVo implements Serializable {
 	/**
 	 * 交易手续费
 	 */
-  @AllowExcel(name = "申请手续费")
+	@AllowExcel(name = "申请手续费")
 	private BigDecimal tranFees;
-	
+
 	/**
 	 * 开始时间（使用日期）
 	 */
 	private BigInteger appStarttime;
-	
+
 	/**
 	 * 交易账号
 	 */
-	@AllowExcel(name="操盘账户")
+	@AllowExcel(name = "操盘账户")
 	private String tranAccount;
-	
+
 	/**
 	 * 账号密码
 	 */
-	@AllowExcel(name="操盘密码")
+	@AllowExcel(name = "操盘密码")
 	private String tranPassword;
-	
-	
+
 	/**
 	 * 申请终结时间
 	 */
 	private BigInteger appEndTime;
-	
+
 	/**
 	 * 交易手数
 	 */
 	private Integer tranActualLever;
-	
+
 	/**
 	 * 国际原油交易手数
 	 */
 	private Integer crudeTranActualLever;
-	
+
 	/**
 	 * 恒生指数交易手数
 	 */
 	private Integer hsiTranActualLever;
-	
-	
 
 	/**
 	 * 迷你纳指交易手数
 	 */
 	private Integer mntranActualLever;
-	
+
 	/**
 	 * 迷你标普交易手数
 	 */
 	private Integer mbtranActualLever;
-	
+
 	/**
 	 * 德国DAX交易手数
 	 */
 	private Integer daxtranActualLever;
-	
-	
-	
+
 	/**
 	 * 日经225交易手数
 	 */
 	private Integer nikkeiTranActualLever;
-	
+
 	/**
-	 *迷你道指交易手数
+	 * 迷你道指交易手数
 	 */
 	private Integer mdtranActualLever;
 
@@ -180,27 +175,27 @@ public class FSimpleFtseVo implements Serializable {
 	 * 交易手续费总额
 	 */
 	private BigDecimal tranFeesTotal;
-	
+
 	/**
 	 * 交易盈亏
 	 */
 	private BigDecimal tranProfitLoss;
-	
+
 	/**
 	 * 结算金额
 	 */
 	private BigDecimal endAmount;
-	
+
 	/**
 	 * 汇率【美元($)-人民币(¥)】
 	 */
 	private BigDecimal endParities;
-	
+
 	/**
 	 * 结算时间
 	 */
 	private BigInteger endTime;
-	
+
 	/**
 	 * 实际操盘时间
 	 */
@@ -209,44 +204,43 @@ public class FSimpleFtseVo implements Serializable {
 	/**
 	 * 申请时间
 	 */
-	@AllowExcel(name="提交时间")
+	@AllowExcel(name = "提交时间")
 	private BigInteger appTime;
-	
+
 	/**
 	 * 更改时间
 	 */
-	@AllowExcel(name="处理时间")
+	@AllowExcel(name = "处理时间")
 	private BigInteger updateTime;
-	
+
 	/**
-	 * 平台来源 1:网站平台   2:APP平台   默认1
+	 * 平台来源 1:网站平台 2:APP平台 默认1
 	 */
 	private Integer source;
-	@AllowExcel(name="平台来源")
+	@AllowExcel(name = "平台来源")
 	private String sourceStr;
-	
+
 	/**
 	 * 方案号TG+ID号
 	 */
-	@AllowExcel(name="方案编号")
+	@AllowExcel(name = "方案编号")
 	private String programNo;
-	
-	/**  
-	 * 状态【1.开户中、2.申请结算、3.待结算、4.操盘中  5.审核不通过 、6.已结算】
+
+	/**
+	 * 状态【1.开户中、2.申请结算、3.待结算、4.操盘中 5.审核不通过 、6.已结算】
 	 */
-	@AllowExcel(name="状态")
+	@AllowExcel(name = "状态")
 	private Integer stateType;
 
 	/**
-     * 逻辑删除flag
-     */
-    private Boolean deleted;
-    
-    private BigInteger version;
+	 * 逻辑删除flag
+	 */
+	private Boolean deleted;
 
-    
-    
-    
+	private BigInteger version;
+
+	private String operator;// 操作员
+
 	public Integer getSource() {
 		return source;
 	}
@@ -256,11 +250,11 @@ public class FSimpleFtseVo implements Serializable {
 	}
 
 	public String getSourceStr() {
-		String str="";
-		if(this.source!=null&&this.source==2){
-			str="APP平台";
-		}else{
-			str="网站平台";
+		String str = "";
+		if (this.source != null && this.source == 2) {
+			str = "APP平台";
+		} else {
+			str = "网站平台";
 		}
 		return str;
 	}
@@ -332,7 +326,7 @@ public class FSimpleFtseVo implements Serializable {
 	public void setTraderTotal(BigDecimal traderTotal) {
 		this.traderTotal = traderTotal;
 	}
-	
+
 	public BigDecimal getBondDollar() {
 		return bondDollar;
 	}
@@ -374,7 +368,7 @@ public class FSimpleFtseVo implements Serializable {
 	}
 
 	public String getAppTime() {
-		if (ObjectUtil.equals(null,this.appTime)){
+		if (ObjectUtil.equals(null, this.appTime)) {
 			return "";
 		}
 		return Dates.parseBigInteger2Date(this.appTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
@@ -385,7 +379,7 @@ public class FSimpleFtseVo implements Serializable {
 	}
 
 	public String getAppStarttime() {
-		if (ObjectUtil.equals(null,this.appStarttime)){
+		if (ObjectUtil.equals(null, this.appStarttime)) {
 			return "";
 		}
 		return Dates.parseBigInteger2Date(this.appStarttime, Dates.CHINESE_DATETIME_FORMAT_LINE);
@@ -412,7 +406,7 @@ public class FSimpleFtseVo implements Serializable {
 	}
 
 	public String getAppEndTime() {
-		if (ObjectUtil.equals(null,this.appEndTime)){
+		if (ObjectUtil.equals(null, this.appEndTime)) {
 			return "";
 		}
 		return Dates.parseBigInteger2Date(this.appEndTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
@@ -463,7 +457,7 @@ public class FSimpleFtseVo implements Serializable {
 	}
 
 	public String getEndTime() {
-		if (ObjectUtil.equals(null,this.endTime)){
+		if (ObjectUtil.equals(null, this.endTime)) {
 			return "";
 		}
 		return Dates.parseBigInteger2Date(this.endTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
@@ -480,19 +474,26 @@ public class FSimpleFtseVo implements Serializable {
 	public void setUseTranDay(Integer useTranDay) {
 		this.useTranDay = useTranDay;
 	}
-	
-	/**  
-	 * 状态【1.开户中、2.申请结算、3.待结算、4.操盘中  5.审核不通过 、6.已结算】
+
+	/**
+	 * 状态【1.开户中、2.申请结算、3.待结算、4.操盘中 5.审核不通过 、6.已结算】
 	 */
 	public String getStateType() {
 		switch (stateType.intValue()) {
-			case 1:return "开户中";
-			case 2:return "申请结算";
-			case 3:return "待结算";
-			case 4:return "操盘中";
-			case 5:return "申请已拒绝";
-			case 6:return "已结算";
-			default:return "";
+		case 1:
+			return "开户中";
+		case 2:
+			return "申请结算";
+		case 3:
+			return "待结算";
+		case 4:
+			return "操盘中";
+		case 5:
+			return "申请已拒绝";
+		case 6:
+			return "已结算";
+		default:
+			return "";
 		}
 	}
 
@@ -501,7 +502,7 @@ public class FSimpleFtseVo implements Serializable {
 	}
 
 	public String getUpdateTime() {
-		if (ObjectUtil.equals(null,this.updateTime)){
+		if (ObjectUtil.equals(null, this.updateTime)) {
 			return "";
 		}
 		return Dates.parseBigInteger2Date(this.updateTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
@@ -513,13 +514,19 @@ public class FSimpleFtseVo implements Serializable {
 
 	public String getBusinessType() {
 		switch (businessType.intValue()) {
-		case 0:return "富时A50";
-		case 6:return "国际原油";
-		case 7:return "恒生指数";
-		case 8:return "国际综合";
-		case 9:return "小恒指";
-		default:return "";
-	}
+		case 0:
+			return "富时A50";
+		case 6:
+			return "国际原油";
+		case 7:
+			return "恒生指数";
+		case 8:
+			return "国际综合";
+		case 9:
+			return "小恒指";
+		default:
+			return "";
+		}
 	}
 
 	public void setBusinessType(Integer businessType) {
@@ -621,7 +628,13 @@ public class FSimpleFtseVo implements Serializable {
 	public void setMdtranActualLever(Integer mdtranActualLever) {
 		this.mdtranActualLever = mdtranActualLever;
 	}
-	
-	
-	
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
 }

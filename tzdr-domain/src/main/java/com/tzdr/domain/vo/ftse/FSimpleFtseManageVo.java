@@ -216,7 +216,7 @@ public class FSimpleFtseManageVo implements Serializable {
 	/**
 	 * 交易手续费
 	 */
-  @AllowExcel(name = "申请手续费")
+	@AllowExcel(name = "申请手续费")
 	private BigDecimal tranFees;
 
 	/**
@@ -236,15 +236,13 @@ public class FSimpleFtseManageVo implements Serializable {
 	@AllowExcel(name = "结算时间")
 	private BigInteger endTime;
 
-
 	/**
-	 * 平台来源 1:网站平台   2:APP平台   默认1
+	 * 平台来源 1:网站平台 2:APP平台 默认1
 	 */
 	private Integer source;
-	@AllowExcel(name="平台来源")
+	@AllowExcel(name = "平台来源")
 	private String sourceStr;
-	
-	
+
 	/**
 	 * 方案号TG+ID号
 	 */
@@ -269,12 +267,16 @@ public class FSimpleFtseManageVo implements Serializable {
 
 	private BigInteger version;
 
-
 	/**
 	 * 优惠券类型
 	 */
-	private String  type;
-	 
+	private String type;
+	
+	/**
+	 * 操作员
+	 */
+	private String operator;
+
 	public Integer getSource() {
 		return source;
 	}
@@ -284,11 +286,11 @@ public class FSimpleFtseManageVo implements Serializable {
 	}
 
 	public String getSourceStr() {
-		String str="";
-		if(this.source!=null&&this.source==2){
-			str="APP平台";
-		}else{
-			str="网站平台";
+		String str = "";
+		if (this.source != null && this.source == 2) {
+			str = "APP平台";
+		} else {
+			str = "网站平台";
 		}
 		return str;
 	}
@@ -296,6 +298,7 @@ public class FSimpleFtseManageVo implements Serializable {
 	public void setSourceStr(String sourceStr) {
 		this.sourceStr = sourceStr;
 	}
+
 	public String getId() {
 		return id;
 	}
@@ -380,8 +383,7 @@ public class FSimpleFtseManageVo implements Serializable {
 		if (ObjectUtil.equals(null, this.appTime)) {
 			return "";
 		}
-		return Dates.parseBigInteger2Date(this.appTime,
-				Dates.CHINESE_DATETIME_FORMAT_LINE);
+		return Dates.parseBigInteger2Date(this.appTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
 	}
 
 	public void setAppTime(BigInteger appTime) {
@@ -392,8 +394,7 @@ public class FSimpleFtseManageVo implements Serializable {
 		if (ObjectUtil.equals(null, this.appStarttime)) {
 			return "";
 		}
-		return Dates.parseBigInteger2Date(this.appStarttime,
-				Dates.CHINESE_DATETIME_FORMAT_LINE);
+		return Dates.parseBigInteger2Date(this.appStarttime, Dates.CHINESE_DATETIME_FORMAT_LINE);
 	}
 
 	public void setAppStarttime(BigInteger appStarttime) {
@@ -429,8 +430,7 @@ public class FSimpleFtseManageVo implements Serializable {
 		if (ObjectUtil.equals(null, this.appEndTime)) {
 			return "";
 		}
-		return Dates.parseBigInteger2Date(this.appEndTime,
-				Dates.CHINESE_DATETIME_FORMAT_LINE);
+		return Dates.parseBigInteger2Date(this.appEndTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
 	}
 
 	public void setAppEndTime(BigInteger appEndTime) {
@@ -438,14 +438,14 @@ public class FSimpleFtseManageVo implements Serializable {
 	}
 
 	public Integer getTranActualLever() {
-		if (this.businessType == 6 || this.businessType == 7 || this.businessType == 9 ) {
+		if (this.businessType == 6 || this.businessType == 7 || this.businessType == 9) {
 			if (this.businessType == 6) {
 				this.crudeTranActualLever = this.tranActualLever;
 			}
 			if (this.businessType == 7) {
 				this.hsiTranActualLever = this.tranActualLever;
 			}
-			
+
 			if (this.businessType == 9) {
 				this.lhsiTranActualLever = this.tranActualLever;
 			}
@@ -502,8 +502,7 @@ public class FSimpleFtseManageVo implements Serializable {
 		if (ObjectUtil.equals(null, this.endTime)) {
 			return "";
 		}
-		return Dates.parseBigInteger2Date(this.endTime,
-				Dates.CHINESE_DATETIME_FORMAT_LINE);
+		return Dates.parseBigInteger2Date(this.endTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
 	}
 
 	public void setEndTime(BigInteger endTime) {
@@ -548,8 +547,7 @@ public class FSimpleFtseManageVo implements Serializable {
 		if (ObjectUtil.equals(null, this.updateTime)) {
 			return "";
 		}
-		return Dates.parseBigInteger2Date(this.updateTime,
-				Dates.CHINESE_DATETIME_FORMAT_LINE);
+		return Dates.parseBigInteger2Date(this.updateTime, Dates.CHINESE_DATETIME_FORMAT_LINE);
 	}
 
 	public void setUpdateTime(BigInteger updateTime) {
@@ -571,7 +569,7 @@ public class FSimpleFtseManageVo implements Serializable {
 		default:
 			return "";
 		}
-		
+
 	}
 
 	public void setBusinessType(Integer businessType) {
@@ -709,7 +707,7 @@ public class FSimpleFtseManageVo implements Serializable {
 	public String getDiscountMoneyStr() {
 
 		if (null != discountMoney && null != type) {
-			if ("3" .equals(type)) {
+			if ("3".equals(type)) {
 				discountMoneyStr = discountMoney.doubleValue() + "折";
 			} else if ("6".equals(type)) {
 				discountMoneyStr = discountMoney.toString() + "元";
@@ -729,6 +727,14 @@ public class FSimpleFtseManageVo implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 
 }
