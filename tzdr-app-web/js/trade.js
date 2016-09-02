@@ -39,6 +39,8 @@ var getTradeIndex = 0;
 var getSuccessIndex = 0;
 //撤单时保存的orderId
 var cancleOrderId = null;
+//交易是否连接成功
+var isConnection = false;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 loadSocket();
@@ -63,15 +65,18 @@ function loadDom(method){
 		} 
 	}
 }
-function loadSocket(){
+function loadSocket(){ 
 	if(socket != null){
 		socket.onopen = function() {
+			isConnection = true;
 			if(username != null) 
 				Trade.doLogin(username, password);
 		}
-		socket.onclose = function() {
-			if(!loginOutFlag){
-				alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
+		socket.onclose = function() { 
+			if(!loginOutFlag){  
+				clearLogin();
+				alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
+				//alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
 			}
 		}
 		socket.onmessage = function(evt) {
@@ -88,7 +93,7 @@ function loadSocket(){
 						initDom();
 					} else {
 						clearLogin();
-						alertProtype("登录失败!请重新登录","提示",Btn.confirmed(),openLogin());
+						alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
 					}
 					//查询个人账户信息回复
 				} else if (method == "OnRspQryAccount") {
@@ -161,11 +166,15 @@ function loadSocket(){
 		}
 	}
 }
+	/*if(!isConnection){
+		clearLogin();
+		alertProtype("自动登录异常，是否重新登录","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
+	}*/
 }
 /**
  * 请求数据-初始化dom 
  */
-function initDom(){
+function initDom(){ 
 	//Trade.doAccount(username); 
 	if(getHoldIndex == 0){
 		Trade.doHold(username);

@@ -40,7 +40,7 @@ mui.plusReady(function(){
     		console.log("断开" + JSON.stringify(evt));
     	if(reconnect != false){
     		if(username==null){
-    			alertProtype("服务器连接已超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
+    			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
     		}
     	}
     };
