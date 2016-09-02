@@ -112,34 +112,7 @@
 				document.getElementById("backClose").addEventListener("tap",function(){
 					backReload(); 
 				});
-				var loginSocket = new WebSocket(TradeUrl.SocketUrl);
-				loginSocket.onopen = function(){
-				}
-				loginSocket.onmessage = function(evt){
-					var dataString = evt.data;
-					var data = JSON.parse(dataString);
-					var method = data.Method;
-					var parameters = data.Parameters;
-					if (method == "OnRspLogin") {
-						var code = parameters.Code;
-						var loginMessage = parameters.Message;
-						if (code == 0) {
-							 backReload();
-							localStorage.setItem("account",account);
-							localStorage.setItem("password",pwd);
-							plus.nativeUI.closeWaiting();
-							mui.toast("登录成功");
-							islogin = true;
-							if (Transfer.backpageID){
-		      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
-		      					return;
-      						}
-						} else {
-							alertProtype(loginMessage,"提示",Btn.confirmed());
-							plus.nativeUI.closeWaiting();
-						}
-					} 
-				}
+				
 				$("#operateLogin").click(function(){
 					if(username == null){
 						account=document.getElementById("account").value;
@@ -159,9 +132,37 @@
 						     mui.toast("您还未勾选协议"); 
 						   return;
 						  };
-						loginSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}'); 
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
+						var loginSocket = new WebSocket(TradeUrl.SocketUrl);
+						loginSocket.onopen = function(){
+							loginSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}'); 
+						}
+						loginSocket.onmessage = function(evt){
+							var dataString = evt.data;
+							var data = JSON.parse(dataString);
+							var method = data.Method;
+							var parameters = data.Parameters;
+							if (method == "OnRspLogin") {
+								var code = parameters.Code;
+								var loginMessage = parameters.Message;
+								if (code == 0) {
+									backReload();
+									localStorage.setItem("account",account);
+									localStorage.setItem("password",pwd);
+									plus.nativeUI.closeWaiting();
+									mui.toast("登录成功");
+									islogin = true;
+									if (Transfer.backpageID){
+				      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
+				      					return;
+		      						}
+								} else {
+									alertProtype(loginMessage,"提示",Btn.confirmed());
+									plus.nativeUI.closeWaiting();
+								}
+							} 
+						}
 					}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
 					}

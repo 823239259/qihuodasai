@@ -130,12 +130,10 @@
 			mui.app_request('/login',{ 
       			 'loginName':mobile,
 			    'password':password
-      		},function(result){
-      			
+      	},function(result){
       				mui.toast("登录成功！"); 
       				//存储用户信息
       				mui.cacheUser.save(result.data.token,result.data.secret,mobile);
-      				//alert(win.backpageID);
       				if (win.backpageID){ 
       					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
       					return;

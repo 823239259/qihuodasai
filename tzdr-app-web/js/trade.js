@@ -148,6 +148,9 @@ function loadSocket(){
 						plus.nativeUI.closeWaiting();
 						clearTimeout(tradeSetTimeOut);
 					}
+					if(orderStatusWeHooks == 5 || orderStatusWeHooks == 6){
+						mui.toast("交易失败("+orderParam.ContractCode+","+orderParam.StatusMsg+")");
+					}
 					//订单成交通知
 				} else if (method == "OnRtnOrderTraded") {
 					var tradeParam = parameters;
