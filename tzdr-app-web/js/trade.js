@@ -45,6 +45,24 @@ loadSocket();
 function referPage(){
 	plus.webview.getWebviewById("transactionDetails").reload();
 }
+function loadDom(method){
+	if(method == "OnRspQryHold"){
+		if(getTradeIndex == 0){
+			Trade.doOrder(username);
+			getTradeIndex++;
+		}
+	}else if(method == "OnRspQryOrder"){
+		if(getDesgnateIndex == 0){
+			Trade.doTrade(username);
+			getDesgnateIndex++;
+		}
+	}else if(method == "OnRspQryTrade"){
+		if(getSuccessIndex == 0){
+			Trade.doAccount(username);
+			getSuccessIndex++;
+		} 
+	}
+}
 function loadSocket(){
 	if(socket != null){
 		socket.onopen = function() {
@@ -60,6 +78,7 @@ function loadSocket(){
 			var dataString = evt.data;
 			var data = JSON.parse(dataString);
 			var method = data.Method;
+			loadDom(method);
 			var parameters = data.Parameters;
 			if (parameters != null) {
 				if (method == "OnRspLogin") {
@@ -83,23 +102,11 @@ function loadSocket(){
 					if (orderStatus < 3) { 
 						appendDesignates(orderParam);
 					}
-					if(getDesgnateIndex == 0){
-						Trade.doTrade(username);
-						getDesgnateIndex++;
-					}
 					//查询成交记录回复
 				} else if (method == "OnRspQryTrade") {
 					appendTradeSuccess(parameters);
-					if(getSuccessIndex == 0){
-						Trade.doAccount(username);
-						getSuccessIndex++;
-					} 
 					//查询持仓信息回复
 				} else if (method == "OnRspQryHold") {
-					if(getTradeIndex == 0){
-						Trade.doOrder(username);
-						getTradeIndex++;
-					}
 					var positionParam = parameters; 
 					appendPostionAndUpdate(positionParam);
 					//报单录入请求回复
