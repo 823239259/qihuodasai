@@ -34,6 +34,7 @@ import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
@@ -189,7 +190,7 @@ public class LoginAndRegistController {
 		} catch (Exception e) {
 		}
 		//p2p 同步注册
-		new RegistP2pThread(mobile,password,wUser.getLoginSalt()).start();
+		//new RegistP2pThread(mobile,password,wUser.getLoginSalt()).start();
 		JSONObject  jsonObject = new JSONObject();
 		//登录成功 返回用户唯一标志token和对应由密码种子+uid生成的key值
 		String appToken = AuthUtils.createToken(wUser.getId());
@@ -198,6 +199,12 @@ public class LoginAndRegistController {
 		jsonObject.put(DataConstant.SECRET_KEY,secretKey);
 		// 缓存用户信息
 		DataConstant.CACHE_USER_MAP.put(appToken,new CacheUser(wUser,secretKey));
+		// 用户注册成功之后给用户手机发送短信
+		try {
+			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		} catch (Exception e) {
+			
+		}
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	

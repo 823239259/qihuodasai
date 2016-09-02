@@ -28,6 +28,8 @@ import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.app.service.FTradeService;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
+import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.service.OutDisk.OutDiskParametersService;
 import com.tzdr.business.service.OutDisk.OutDiskPriceService;
 import com.tzdr.business.service.future.FSimpleCouponService;
@@ -60,7 +62,9 @@ import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 public class UserFTradeController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(UserFTradeController.class);
-
+	@Autowired
+	private MessagePromptService messagePromptService;
+	
 	@Autowired
 	private FTradeService fTradeService;
 	
@@ -183,13 +187,13 @@ public class UserFTradeController {
 		}
 		
 		fTradeService.addbond(wuser, fSimpleFtseUserTrade, payMoney);  //追加保证金
-		
+		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getUname());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful addBond",null);
 	}
 	
 	/**
 	* @Title: details    
-	* @Description: 追加保证金
+	* @Description: 申请终结方案
 	* @param id  方案编号
 	* @param addBond  追加金额
 	* @param modelMap
@@ -203,7 +207,7 @@ public class UserFTradeController {
 	public ApiResult endtrade(String id,String cId,Integer businessType,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 	
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		
+		WUser wuser = wUserService.get(uid);
 		if (StringUtil.isBlank(id)){  //判断方案编号是否为空
 			return new ApiResult(false,ResultStatusConstant.EndtradeConstant.ID_NOT_NULL,"The id cannot be empty");
 		}
@@ -243,7 +247,7 @@ public class UserFTradeController {
 		}
 		
 		fTradeService.endtrade(fSimpleFtseUserTrade, discount);  //申请终结方案
-		
+		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getUname());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful endTrade",null);
 	}
 	
@@ -317,7 +321,6 @@ public class UserFTradeController {
 		// 代金券
 		List<Map<String, Object>> vouchers = this.fSimpleCouponService.queryCouponByUserId(uid,DataConstant.BUSINESSTYPE_APPLY_COUPONS, businessType);
 		dataMap.put("voucherList",vouchers);
-		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"apply.Successful",dataMap);
 	}
 	
@@ -413,6 +416,7 @@ public class UserFTradeController {
 		} else {
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);
 		}
+		messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getUname());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade);		
 	}
 	

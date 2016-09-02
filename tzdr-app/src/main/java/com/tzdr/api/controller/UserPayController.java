@@ -26,6 +26,8 @@ import com.tzdr.api.request.BankTransferRequest;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.api.service.ApiUserService;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
+import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.service.pay.PayService;
@@ -61,6 +63,8 @@ public class UserPayController {
 	 * app支付成功，商户前端返回地址
 	 */
 	public static final String APP_SRETURL = BbConfigUtil.getContext(DataConstant.APP_SRETURL);
+	@Autowired
+	private MessagePromptService messagePromptService;
 	
 	@Autowired
 	private ApiUserService  apiUserService;
@@ -164,7 +168,7 @@ public class UserPayController {
 		String ip=IpUtils.getIpAddr(request);
 		payService.insertEntity(Constant.Source.TZDR,wUser,bankTransferRequest.getAbbreviation(),DataConstant.PAY_NO_PROCESSING,
 				"",String.valueOf(money),ip,DataConstant.TRANSBANK_TYPE,bankTransferRequest.getSerialnum());
-				
+		messagePromptService.sendMessage(PromptTypes.isLineTransfer, wUser.getUname());
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"submit.success.");
 	}	
 	/**
