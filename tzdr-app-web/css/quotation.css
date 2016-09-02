@@ -540,17 +540,33 @@ input{
 	height: 40px;
 	margin: 0px;
 }
-.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-	/*left:25%;*/
+.mui-checkbox input[type=checkbox], .mui-radio input[type=radio]{
+	right: 45%;
 }
+
+
 .mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-	left:10px;
+	left:15%;
+}
+@media only screen and (min-device-width : 320px ) {
+	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
+		left:8%;
+	}
+}
+@media only screen and (min-device-width : 375px ) {
+	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
+		left:15%;
+	}
+}
+@media only screen and (min-device-width : 414px ) {
+	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
+		left:16%;
+	}
 }
 #loginAgree{
 	width: 100%;
-	text-align: left;
-	padding-left:40px;
+	/*padding-left:40px;*/
+	text-align: center;
 	height: 40px!important;
 	line-height: 40px !important;
-	
 }
