@@ -663,6 +663,7 @@ var uehIndex = 0;
 var loadCachBanlance = {};
 var loadCachDeposit = {};
 var loadCachCanuse = {};
+var loadCurrencyRate = {};
 var loadCachAccountNo = {};
 function updateBalance(accountParam){
 	var accountNo = accountParam.AccountNo;
@@ -670,9 +671,12 @@ function updateBalance(accountParam){
 	var banlance = accountParam.TodayBalance;
 	var deposit = accountParam.Deposit;
 	var canuse = accountParam.TodayCanUse;
+	var currency = accountParam.CurrencyRate; 
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
 	loadCachCanuse[accountNo] = canuse;
+	if(currency != undefined)
+		loadCurrencyRate[accountNo] = currency;
 	if(cachBanlace == undefined || cachBanlace.length <= 0){
 		loadCachAccountNo[uehIndex] = accountNo;
 		uehIndex++;
@@ -683,9 +687,9 @@ function updateBalance(accountParam){
 	$(function(){
 		for(var i = 0 ; i < uehIndex; i++){
 			var ac = loadCachAccountNo[i]; 
-			$banlance = $banlance + loadCachBanlance[ac];
-			$deposit = $deposit + loadCachDeposit[ac];
-			$canuse = $canuse + loadCachCanuse[ac];
+			$banlance = $banlance + loadCachBanlance[ac] * loadCurrencyRate[ac];
+			$deposit = $deposit + loadCachDeposit[ac] * loadCurrencyRate[ac];
+			$canuse = $canuse + loadCachCanuse[ac]  * loadCurrencyRate[ac];
 		}
 		$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 		$("#deposit").text(parseFloat($deposit).toFixed(2));
