@@ -884,7 +884,8 @@
 					"home.html",
 					"tzdr/account/account.html",
 					"tzdr/future/DetailCn.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/future/DetailHsi.html"
 				],
 				"priority": 0
 			},

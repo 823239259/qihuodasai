@@ -859,12 +859,16 @@
 			"images/2.0.png",
 			"images/1.png",
 			"images/3.png",
-			"images/0.png"
+			"images/0.png",
+			"images/status_02.png",
+			"images/status_04.png"
 		],
 		"refer": [
 			"tzdr/account/account.html",
 			"home.html",
-			"tzdr/quotation/quotationMain.html"
+			"tzdr/quotation/quotationMain.html",
+			"tzdr/future/DetailCn.html",
+			"tzdr/future/DetailHsi.html"
 		]
 	},
 	"tzdr/account/openUrlPay.html": {
