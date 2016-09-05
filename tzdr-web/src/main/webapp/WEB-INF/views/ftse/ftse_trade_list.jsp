@@ -93,11 +93,11 @@ table.data_web td a { padding:0 5px; color:#f80; }
 				<h3>补充保证金</h3>
 				<p></p>
 			</li>
-			<li style="width:240px;">
+			<li style="width:235px;">
 				<h3>交易盈亏</h3>
 				<p></p>
 			</li>
-			<li style="width:120px;">
+			<li style="width:125px;">
 				<h3>汇率<em>(美元：人民币)</em></h3>
 				<p></p>
 			</li>
