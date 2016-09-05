@@ -53,7 +53,13 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 				logger.info("merOrderNum=======>" + merOrderNum);
 				logger.info("tranAmt======>" + tranAmt);
 				logger.info("orderId===>" + orderId);
-				String userId = payService.doUpdatePingPPPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount, orderId, null,"国付宝充值"+amount+"元");
+				String remark = "";
+				if(respCode.equals("0000")){
+					remark = "国付宝充值"+amount+"元";
+				}else{
+					remark = model.getMsgExt();
+				}
+				String userId = payService.doUpdateGoPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount, orderId, null,remark,respCode);
 				try {
 					if(userId != null){
 						WUser user =  wUserService.getUser(userId);

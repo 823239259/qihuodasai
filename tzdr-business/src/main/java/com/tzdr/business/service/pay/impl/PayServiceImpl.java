@@ -474,7 +474,7 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 	@Override
 	public String  doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark) {
 		RechargeList charge=getEntityDao().findByNo(orderNo);
-		Integer status = TradeStatus.SUCCESS.getCode();
+		Integer status = TradeStatus.FAIL.getCode();
 		String userId =  null;
 		if(charge!=null && charge.getStatus() != status){
 			userId=charge.getUid();
@@ -492,6 +492,51 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 			//插入充值记录表
 			UserFund fund =  userFundService.findUserfundByNo(orderNo, userId);
 			if(fund == null){
+				fund=new UserFund();
+				fund.setMoney(money);
+				fund.setRemark(remark);
+				fund.setType(1);
+				fund.setNo(orderNo);
+				fund.setUid(userId);
+				fund.setPayStatus((short)1);//已支付
+				fund.setTrxId(transactionNo);
+				fund.setAddtime(new Date().getTime()/1000);
+				fund.setUptime(new Date().getTime()/1000);
+				fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss")+"充值"+money+"元");
+				userFundService.arrearsProcess(fund);
+				logger.info("交易完成：订单号{}",orderNo);
+			}
+		}
+		return userId;
+	}
+	@Override
+	public String  doUpdateGoPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark,String respCode) {
+		RechargeList charge=getEntityDao().findByNo(orderNo);
+		Integer status = 0;
+		if(respCode.equals("9999")){
+			status = TradeStatus.PENDING.getCode();
+		}else if(respCode.equals("0000")){
+			status = TradeStatus.SUCCESS.getCode();
+		}else{
+			status = TradeStatus.FAIL.getCode();
+		}
+		String userId =  null;
+		if(charge!=null && charge.getStatus() != TradeStatus.SUCCESS.getCode()){
+			userId=charge.getUid();
+			charge.setStatus(status);
+			Double money = amount;
+			Date date=new Date();
+			long time=date.getTime()/1000;
+			charge.setOktime(time);
+			charge.setTradeNo(transactionNo);
+			charge.setAddtime(time);
+			charge.setActualMoney(money);
+			Channel cha = Channel.newInstance(channel);
+			charge.setPaymentChannel(cha == null ? Channel.GO_WAY.getChannel() : cha.getChannel());
+			this.getEntityDao().update(charge);
+			//插入充值记录表
+			UserFund fund =  userFundService.findUserfundByNo(orderNo, userId);
+			if(fund == null && respCode.equals("0000")){
 				fund=new UserFund();
 				fund.setMoney(money);
 				fund.setRemark(remark);

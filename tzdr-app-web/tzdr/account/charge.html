@@ -58,8 +58,8 @@
 		<div class="mui-content ac_charge">
 			<div id="slider" class="mui-slider">
 				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<!--<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>
-					<a class="mui-control-item" id="alipay">支付宝转账</a>-->
+					<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>
+					<!--<a class="mui-control-item" id="alipay">支付宝转账</a>-->
 					<a class="mui-control-item mui-active" id="alipayApp">支付宝充值</a>
 					<a class="mui-control-item" id="bankPay" >银行转账</a>
 				</div>
@@ -94,7 +94,7 @@
 							</div>
 						</div>
 					</div>
-				<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="" class="mui-scroll-wrapper ac_online">
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
@@ -123,7 +123,7 @@
 						</div>
 					</div>
 
-					<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">
+					<!--<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">
 						<div id="" class="mui-scroll-wrapper ac_online">
 							<div class="mui-scroll">
 								<ul id="list" class="mui-table-view mui-table-view-chevron">
@@ -375,37 +375,26 @@
 					}
 				});
 
-				/*//网银充值“立即充值”操作
+				//网银充值“立即充值”操作
 				document.getElementById("recharge-btn").addEventListener("tap", function() {
 					var money = document.getElementById("rechargeMoney").value;
 					if(mui.isnull(money)) {
 						mui.toast("充值金额不能为空");
-						return;
+						return;  
 					}
 					//充值"操作"
-					mui.app_request('/user/pay/ebankrecharge', {
-						"money": money
+					mui.app_request('/user/pay/gopay', {
+						"goPaymoney": money,
+						"gopayWay":7
 					}, function(result) {
-						var payParams = {
-							"payurl": result.data.payurl,
-							"vamount": result.data.vamount,
-							"vmd5info": result.data.vmd5info,
-							"vmid": result.data.vmid,
-							"vmoneytype": result.data.vmoneytype,
-							"vordername": result.data.vordername,
-							"vorderstatus": result.data.vorderstatus,
-							"vorid": result.data.vorid,
-							"vpmode": result.data.vpmode,
-							"vrcvaddr": result.data.vrcvaddr,
-							"vrcvname": result.data.vrcvname,
-							"vrcvpost": result.data.vrcvpost,
-							"vrcvtel": result.data.vrcvtel,
-							"vurl": result.data.vurl,
-							"vymd": result.data.vymd
-						};
-						//var payParams ={mobilePayUrl:result.data.mobilePayUrl,merchantaccount:result.data.merchantaccount,data:result.data.data,encryptkey:result.data.encryptkey};
-						payPage = plus.webview.create('pay.html', 'pay.html', {}, payParams)
-						plus.webview.show(payPage);
+						var data = result.data;
+						payPage = mui.openWindow({
+							url:"gopay.html", 
+							id:"gopay",
+							extras:{
+								data:result
+							}
+						});
 						return;
 					}, function(result) {
 						if(result.code == 2) {
@@ -422,7 +411,7 @@
 							return;
 						}
 					});
-				});*/
+				});
 
 				/*//获取支付宝账号
 				getalipayAcount();*/

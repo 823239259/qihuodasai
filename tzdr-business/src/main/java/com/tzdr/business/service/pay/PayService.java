@@ -98,6 +98,17 @@ public interface PayService extends BaseService<RechargeList>{
 	 */
 	public String doUpdatePingPPPaySuccessRecharge(String orderNo,String channel,Double amount,String transactionNo,String timePaid,String remark);
 	/**
+	 * 国付宝充值完成的更新
+	 * @param orderNo
+	 * @param channel
+	 * @param amount
+	 * @param transactionNo
+	 * @param timePaid
+	 * @param remark
+	 * @param respCode
+	 */
+	public String doUpdateGoPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark,String respCode);
+	/**
 	 * 根据id查询用户
 	 * @param userId
 	 * @return

@@ -1,5 +1,6 @@
 package com.tzdr.api.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -28,6 +30,9 @@ import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
+import com.tzdr.business.pay.gopay.DateUtil;
+import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
+import com.tzdr.business.pay.gopay.model.GoPayRequestModel;
 import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.service.pay.PayService;
@@ -39,6 +44,7 @@ import com.tzdr.common.api.payease.PayEase;
 import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.utils.IpUtils;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
@@ -203,6 +209,74 @@ public class UserPayController {
 			return charage;
 		}
 		return null;
+	}
+	/**
+	 * 国付宝充值
+	 * @param request
+	 * @param money
+	 * @return
+	 */
+	@RequestMapping(value = "/gopay",method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult goPay(HttpServletRequest request,@RequestParam("goPaymoney") Double goPaymoney, @RequestParam("gopayWay") String gopayWay){
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		if(goPaymoney == null){  //判断充值金额不能为空
+			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_NOT_NULL,"The money cannot be empty");
+		}
+		
+		if(goPaymoney < 1){  //判断金额范围
+			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"The money must be greater than or equal to 1 less than or equal to 5000000");
+		}
+		
+		if(goPaymoney > Math.floor(goPaymoney*100)/100){  //判断小数是否保留2位
+			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"Top-up amount can only keep 2 decimal places");
+		}
+		String money = String.valueOf(goPaymoney);
+		WUser user = payService.getUser("ff80808156e575ec0156f82208820010");
+		String ip=IpUtils.getIpAddr(request);	 //获取客户端IP
+		String orderNo = ChargeExample.randomNo();
+		Channel payWayChannl = null;
+		if (gopayWay == null) {
+			payWayChannl = Channel.ALIPAY_PC_DIRECT;
+		} else {
+			payWayChannl = Channel.newInstanceChannel(Integer.parseInt(gopayWay));
+			if (payWayChannl == null) {
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
+			}
+		}
+		int status = 0;
+		String paytype = "2";
+		int source = 1;
+		String message = null;
+		boolean flag = false;
+		String result = payService.doSavePingPPRecharge(payWayChannl, source, user, status, "", money, ip, paytype,orderNo);
+		if (result.equals("1")) {
+			GoPayRequestModel goPayRequestModel = new GoPayRequestModel();
+			goPayRequestModel.setBuyerContact("");
+			goPayRequestModel.setBuyerName("");
+			goPayRequestModel.setMerOrderNum(orderNo);
+			goPayRequestModel.setTranAmt(money);
+			goPayRequestModel.setFeeAmt("0");
+			goPayRequestModel.setTranDateTime(DateUtil.getDate("yyyyMMddHHmmss"));
+			goPayRequestModel.setTranIP(ip);
+			goPayRequestModel.setGoodsName("维胜充值");
+			goPayRequestModel.setGoodsDetail("维胜充值");
+			goPayRequestModel.setBuyerName("MWEB");//移动支付标识，固定值
+			try {
+				String tradeData = GoPayTradeData.createTradeData(goPayRequestModel);
+				message = tradeData;
+				flag = true;
+				logger.info(tradeData);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		} else {
+			message = "操作失败，请重试!";
+		}
+		ApiResult resultJson = new ApiResult();
+		resultJson.setSuccess(flag);
+		resultJson.setData(message);
+		return resultJson;
 	}
 	/**
 	* @Title: ebankrecharge    

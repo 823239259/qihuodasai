@@ -24,7 +24,9 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-
+	<listener> 
+    	 <listener-class >com.tzdr.business.pay.gopay.GoLoadConfig</listener-class > 
+     </listener >
     <!-- 设置servlet编码开始 -->
     <filter>
         <filter-name>Set Character Encoding</filter-name>
