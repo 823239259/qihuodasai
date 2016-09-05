@@ -48,12 +48,6 @@
             <div class="fl_navtitle">
                 <h3 class="fl_logintitle">确认支付</h3><a href="javascript:void(0);" class="close" onclick="colseConfirmPayDiv();"></a>
             </div>
-            <!-- 
-            <div class="fl_uc_main">
-                <p class="fl_promtfont">是否确定支付<i>${payable}</i>元</p>
-            	<a href="#" target="_blank" style="display:none; width:100%; height:40px; line-height:40px; font-size:14px; color:#f00; text-align: center; margin:-20px auto 15px;">新年High翻天，开箱有壕礼！</a>
-            </div>
-             -->
             <div class="fl_uc_main">            	
             	<ul class="fl_paylist">
             		<li><label>账户余额：</label><span><i id="banlance"><fmt:formatNumber value="${avlBal}" pattern="###.##" /></i>元</span></li>
@@ -153,14 +147,6 @@
 						<div class="cp_btnback"><a href="${ctx}/hsi/index">返回修改</a></div>
 					</div>
 				</div>
-				<%--<div class="cp_paymoney" style="display:none;">--%>
-					<%--<!-- 账户余额充足的时候，span隐藏 -->--%>
-					<%--<c:if test="${showAvl == 1}">--%>
-					<%--<span>您的账户余额只剩<i>${avlBal_user}</i>元，本次支付还差<i>${payable_avlBal_user}</i>元。<a href="${ctx}/pay/payinfo">立即充值</a></span>--%>
-					<%--</c:if>--%>
-					<%--<p>应付款：<em>￥${payable}</em>元</p>--%>
-					<%--<input type="hidden" name="showAvl" value="${showAvl}" />--%>
-				<%--</div>--%>
 			</div>
 		</form>
 	</div>

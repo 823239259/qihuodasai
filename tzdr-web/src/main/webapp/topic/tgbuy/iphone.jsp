@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<img src="image/xia.jpg" class="xia">
-		<a href="http://www.tzdr.com/together/index" target="_blank"><img src="image/button.jpg" / class="button"></a>
+		<a href="http://www.vs.com/together/index" target="_blank"><img src="image/button.jpg" / class="button"></a>
 		<img src="image/top.jpg" class="tp_top">
 		<div class="introduce">
 			<img src="image/dongdong.jpg" class="dongdong" />

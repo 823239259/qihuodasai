@@ -38,7 +38,7 @@ $(document).ready(function() {
 <!-- 顶部 -->
 <%@ include file="../common/personheader.jsp"%>
 <div class="map_link">
-    <a href="http://www.tzdr.com/" target="_blank">首页</a>
+    <a href="http://www.vs.com/" target="_blank">首页</a>
     <i>></i>
     <i>网站地图</i>
 </div>

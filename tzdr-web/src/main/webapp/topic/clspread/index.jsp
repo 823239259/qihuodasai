@@ -129,14 +129,14 @@ function verifyMobile(type){
  
 <body>
 <div class="top">
-	<p class="top_logo"><a href="http://www.tzdr.com/" target="_blank"><img src="images/logo.png"></a></p>
+	<p class="top_logo"><a href="http://www.vs.com/" target="_blank"><img src="images/logo.png"></a></p>
 	<p class="top_tel">客服热线：400-020-158</p>
 	<div class="top_nav">
-		<a href="http://www.tzdr.com/crudeoil/index" target="_blank">原油期货申请入口</a>
+		<a href="http://www.vs.com/crudeoil/index" target="_blank">原油期货申请入口</a>
 		<i></i>
-		<a href="http://www.tzdr.com/signin" target="_blank">免费注册</a>
+		<a href="http://www.vs.com/signin" target="_blank">免费注册</a>
 		<i></i>
-		<a href="http://www.tzdr.com/cas/login" target="_blank">登录</a>
+		<a href="http://www.vs.com/cas/login" target="_blank">登录</a>
 	</div>
 </div>
 <div class="banner">
@@ -183,24 +183,24 @@ function verifyMobile(type){
 		<a href="javascript:void(0);" class="setp_down"><img src="images/page_down.gif"></a>
 		<!-- 注册 -->
 		<div class="main_steppic" style="display:block;">
-			<div class="main_stpetitle"><a href="http://www.tzdr.com/signin" target="_blank">点击注册，进入免费注册页面</a></div>
+			<div class="main_stpetitle"><a href="http://www.vs.com/signin" target="_blank">点击注册，进入免费注册页面</a></div>
 			<img src="images/pic_01.jpg">
 		</div>
 		<!-- 充值 -->
 		<div class="main_steppic" style="display:none;">
-			<div class="main_stpetitle"><a href="http://www.tzdr.com/pay/payinfo" target="_blank">进入我的账户→账户充值页，选择支付渠道</a></div>
+			<div class="main_stpetitle"><a href="http://www.vs.com/pay/payinfo" target="_blank">进入我的账户→账户充值页，选择支付渠道</a></div>
 			<img src="images/pic_02.gif">
 			<p>网银充值，及时到账；支付宝转账，5分钟内到账。<br>若您是原油期货新手，想试玩原油期货，最低充值2600元；原油期货高手充值没有上限</p>
 		</div>
 		<!-- 申请 -->
 		<div class="main_steppic" style="display:none;">
-			<div class="main_stpetitle"><a href="http://www.tzdr.com/crudeoil/index" target="_blank">进入原油期货操盘申请页面，申请方案</a></div>
+			<div class="main_stpetitle"><a href="http://www.vs.com/crudeoil/index" target="_blank">进入原油期货操盘申请页面，申请方案</a></div>
 			<img src="images/pic_03.gif">
 			<p>原油期货新手，申请1手的方案吧；原油期货高手请随意选择；然后确认支付！</p>
 		</div>
 		<!-- 获取交易账号 -->
 		<div class="main_steppic" style="display:none;">
-			<div class="main_stpetitle"><a href="http://www.tzdr.com/usercrudeoil/trade_list" target="_blank">进入我的账户→原油期货，查看操盘方案里的交易账号</a></div>
+			<div class="main_stpetitle"><a href="http://www.vs.com/usercrudeoil/trade_list" target="_blank">进入我的账户→原油期货，查看操盘方案里的交易账号</a></div>
 			<img src="images/pic_04.gif">
 			<p>交易账户开户成功后，我们会以短信的方式通知您</p>
 		</div>
@@ -222,7 +222,7 @@ function verifyMobile(type){
 		<a href="javascript:void(0);" class="setp_down"><img src="images/page_down.gif"></a>
 		<!-- 登录 -->
 		<div class="main_steppic" style="display:block;">
-			<div class="main_stpetitle"><a href="http://www.tzdr.com/help?tab=software&leftMenu=8" target="_blank">点击这里，下载操盘软件-易盛系统</a></div>
+			<div class="main_stpetitle"><a href="http://www.vs.com/help?tab=software&leftMenu=8" target="_blank">点击这里，下载操盘软件-易盛系统</a></div>
 			<img src="images/pic_05.jpg">
 			<p>打开软件切换到交易服务器，使用我们为您开好的交易账号进行登录</p>
 		</div>
@@ -238,7 +238,7 @@ function verifyMobile(type){
 		</div>
 		<!-- 终结操盘方案 -->
 		<div class="main_steppic" style="display:none;">
-			<div class="main_stpetitle"><a href="http://www.tzdr.com/usercrudeoil/trade_list" target="_blank">进入我的账户→原油期货合约，查看操盘方案里的终结方案</a></div>
+			<div class="main_stpetitle"><a href="http://www.vs.com/usercrudeoil/trade_list" target="_blank">进入我的账户→原油期货合约，查看操盘方案里的终结方案</a></div>
 			<img src="images/pic_08.gif">
 			<p>当您赚钱后或行情不好时，随时可终结方案，盈亏金额转入您的账户余额！</p>
 		</div>

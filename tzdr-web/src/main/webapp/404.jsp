@@ -153,10 +153,10 @@
         <p>Copyright©2015 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</p>
     </div>
       <div class="cp_img" style="text-align:center;">
-    	<a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com"  target="_blank" >
+    	<a href="http://webscan.360.cn/index/checkwebsite/url/www.vs.com"  target="_blank" >
     	<img border="0" src="http://img.webscan.360.cn/status/pai/hash/0d18c9d17eecdc1debceaeabb359922e"/>
     	</a>
-    	<a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname" target="_blank" >
+    	<a href="http://www.anquan.org/authenticate/cert/?site=www.vs.com&at=realname" target="_blank" >
     		<img src="${ctx}/static/images/common/anquan.png">
     	</a>
     	<!-- 

@@ -124,7 +124,7 @@
 						</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>亏损平仓线($)<!-- <a href="javascript:void(0);"></a> -->：</label> 
+						<label>亏损平仓线($)</label> 
 						<span>
 							<i id="lineLoss_id">
 	                			<fmt:formatNumber value="${fSimpleConfigList[0].lineLoss}" pattern="#,###"></fmt:formatNumber>
@@ -173,68 +173,6 @@
 					</div>
 				</div>
 			</div>
-			<!--操盘须知  -->
-			<%-- <div class="capital_rule">
-		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
-		        <h2>富时A50指数介绍</h2>
-		        <p>为满足中国国内投资者以及合格境外机构投资者(QFII)需求所推出的实时可交易指数，将通过电子交易平台“SGXQUEST”进行，以美元标价进行交易结算。新华富时中国A50指数包含了中国A股市场市值最大的50家公司，其总市值占A股总市值的33%，是最能代表中国A股市场的指数，许多国际投资者把这一指数看作是衡量中国市场的精确指标。</p>
-		        <h2>交易细则</h2>        
-		        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list">
-		          <tr>
-		            <td class="first">风险提示</td>
-		            <td class="font">投资有风险，入市需谨慎</td>
-		          </tr>
-		          <tr>
-		            <td class="first">操盘须知</td>
-		            <td class="font">交易资金按美元计价，人民币兑换美元，汇率按照中行当天第一开市时间来算，出入金按照现钞卖出价。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">指数标的</td>
-		            <td class="font">新华富时A50指数包含在上交所深交所挂牌，按市值划分最大的前50家A股上市公司。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">合约年份</td>
-		            <td class="font">2个连续近月，及每个年度的3月，6月，9月和12月</td>
-		          </tr>
-		          <tr>
-		            <td class="first">最后交易日</td>
-		            <td class="font">合约月份的倒数第二个交易日</td>
-		          </tr>
-		          <tr>
-		            <td class="first">最小波动价</td>
-		            <td class="font">2.5个指数点(2.5美元)</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易时间</td>
-		            <td class="font">06:05-04:55，不能跨时段交易。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">涨跌幅限制</td>
-		            <td class="font">当价格较前一交易日结算价格上升或下跌10%时-10分钟冷却期（限于± 10%以内）之后，当价格较前一交易日的结算价上升或下跌15%--10分钟冷却期（限于± 10%以内），稍后将不再为该交易日 的剩余时间设定任何价格限制，合约期满的最后交易日无价格限幅。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">操盘保证金</td>
-		            <td class="font">用户出现亏损时的赔付，结束时如无亏损全额退还，保证金越高，平仓风险越低。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易手续费</td>
-		            <td class="font">用于支付交易佣金、印花税、过户费和实盘资金占用费。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">账户管理费</td>
-		            <td class="font">按交易日计算，当前免费。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">亏损平仓线</td>
-		            <td class="font">总操盘资金低于亏损平仓线时，系统自动平仓。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;"  target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=0" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
-		          </tr>
-		        </table>
-		
-		    </div> --%>
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

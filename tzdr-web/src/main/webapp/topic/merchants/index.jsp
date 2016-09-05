@@ -153,10 +153,10 @@ _czc.push(["_setAccount", "1256807294"]);
 <div class="tp_ctn">
 	<div class="tp_prd">
 		<img src="images/img_06.gif">
-		<a href="http://www.tzdr.com/hsi/index" style="left:72px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','恒指']);">查看详细</a>
-		<a href="http://www.tzdr.com/crudeoil/index" style="left:265px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','原油']);">查看详细</a>
-		<a href="http://www.tzdr.com/ftse/index" style="left:456px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','A50']);">查看详细</a>
-		<a href="http://www.tzdr.com/product/gold_index" style="left:650px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','商品期货']);">查看详细</a>
+		<a href="http://www.vs.com/hsi/index" style="left:72px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','恒指']);">查看详细</a>
+		<a href="http://www.vs.com/crudeoil/index" style="left:265px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','原油']);">查看详细</a>
+		<a href="http://www.vs.com/ftse/index" style="left:456px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','A50']);">查看详细</a>
+		<a href="http://www.vs.com/product/gold_index" style="left:650px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','商品期货']);">查看详细</a>
 		<a href="#" style="left:842px;" target="_blank" onclick="_czc.push(['_trackEvent','招商','查看详细','股指期货']);">查看详细</a>
 	</div>
 </div>

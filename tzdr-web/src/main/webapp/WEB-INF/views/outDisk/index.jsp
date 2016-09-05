@@ -140,17 +140,58 @@
                     <td>小恒指</td>
                     <td>${outDiskPrice[8].mainContract}</td>
                     <td>09:20—11:55，13:05—16:25，17:20—23:40</td>
-                    <td>只交易日经225时，初始最大可持仓<i id='hstranActualLever'>${outDiskParameters[0].hstranActualLever}</i>手</td>
+                    <td>只交易小恒指时，初始最大可持仓<i id='hstranActualLever'>${outDiskParameters[0].hstranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[8].price}</i>元/手</td>
                 </tr>
                 
                 <tr>
                     <td>美黄金</td>
                     <td>${outDiskPrice[9].mainContract}</td>
-                    <td>09:05-23:55</td>
+                    <td>09:20-16:25,17:20-23:40</td>
+                    <td>只交易美黄金时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
+                </tr>
+                
+                <tr>
+                    <td>H股指数</td>
+                    <td>${outDiskPrice[9].mainContract}</td>
+                    <td>09:20-16:25,17:20-23:40</td>
+                    <td>只交易H股指数时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
+                </tr>
+                
+                <tr>
+                    <td>小H股指数</td>
+                    <td>${outDiskPrice[9].mainContract}</td>
+                    <td>09:20-16:25,17:20-23:40</td>
                     <td>只交易日经225时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
                     <td><i>${outDiskPrice[9].price}</i>元/手</td>
                 </tr>
+                
+                <tr>
+                    <td>美铜</td>
+                    <td>${outDiskPrice[9].mainContract}</td>
+                    <td>06:05-04:55</td>
+                    <td>只交易美铜时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
+                </tr>
+                
+                <tr>
+                    <td>美白银</td>
+                    <td>${outDiskPrice[9].mainContract}</td>
+                    <td>06:05-04:55</td>
+                    <td>只交美白银时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
+                </tr>
+                
+                <tr>
+                    <td>小原油</td>
+                    <td>${outDiskPrice[9].mainContract}</td>
+                    <td>06:05-04:55</td>
+                    <td>只交小原油时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
+                </tr>
+                
                 <tr>
                 	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">11:55-12:00,14:25-14:30,16:25-16:30,16:30-16:35,11:40-11:45,11:55-12:00</i>六个时段所有品种只能平仓，不能开仓。</td>
                 </tr>
@@ -166,138 +207,6 @@
         </div>
     </div>
     </form>
-    
-    <!--操盘须知  -->
-    <%-- <div class="capital_rule cpx_rule">
-        <h2 class="cpx_title cpx_t_icon4"><b>操盘规则：</b></h2>     
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list2">
-            <thead>
-                <td width="8%">期货产品</td>
-                <td width="10%">上市交易所</td>
-                <td>本期主力合约</td>
-                <td>最小波动点</td>
-                <td>最小波动价</td>
-                <td wdith="10%">交易时间</td>
-                <td>交易周期</td>
-                <td>双持持仓</td>
-                <td>涨跌幅限制</td>
-            </thead>
-            <tr>
-                <td>富时A50</td>
-                <td>新加坡交易所</td>
-                <td>${outDiskPrice[0].mainContract}</td>
-                <td>2.5</td>
-                <td>2.5美元</td>
-                <td class="base">9:05-15:50<br>16:45-23:55<br>不能跨时段持仓</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">当涨跌幅±10%和±15%时，<br>分别熔断10分钟，<br>之后无涨跌幅限制</td>
-            </tr>
-            <tr>
-                <td>恒指期货</td>
-                <td>香港交易所</td>
-                <td>${outDiskPrice[2].mainContract}</td>
-                <td>1</td>
-                <td>50港元</td>
-                <td class="base">9:20-11:55<br>13:05-16:10<br>17:05-23:40<br>不能跨时段持仓</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td>无涨跌幅限制</td>
-            </tr>
-            <tr>
-                <td>国际原油</td>
-                <td>纽约商业交易所</td>
-                <td>${outDiskPrice[1].mainContract}</td>
-                <td>0.01</td>
-                <td>10美元</td>
-                <td>9:05-23:55</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">±10美元，暂停交易5分钟<br>后再扩大±10美元，<br>以此循环</td>
-            </tr>
-            <tr>
-                <td>迷你道琼</td>
-                <td>芝加哥交易所</td>
-                <td>${outDiskPrice[3].mainContract}</td>
-                <td>1</td>
-                <td>5美元</td>
-                <td>9:05-23:55</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">7%,13%,20%(仅跌停)三级熔断</td>
-            </tr>
-            <tr>
-                <td>迷你纳斯达克</td>
-                <td>芝加哥交易所</td>
-                <td>${outDiskPrice[4].mainContract}</td>
-                <td>0.25</td>
-                <td>5美元</td>
-                <td>9:05-23:55</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">7%,13%,20%(仅跌停)三级熔断</td>
-            </tr>
-            <tr>
-                <td>迷你标普</td>
-                <td>芝加哥交易所</td>
-                <td>${outDiskPrice[5].mainContract}</td>
-                <td>0.25</td>
-                <td>12.5美元</td>
-                <td>9:05-23:55</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">7%,13%,20%(仅跌停)三级熔断</td>
-            </tr>
-            <tr>
-                <td>德国DAX</td>
-                <td>欧洲期货交易所</td>
-                <td>${outDiskPrice[6].mainContract}</td>
-                <td>0.5</td>
-                <td>12.5欧元</td>
-                <td>14:05-23:55</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">无</td>
-            </tr>
-            <tr>
-                <td>日经225</td>
-                <td>新加坡交易所</td>
-                <td>${outDiskPrice[7].mainContract}</td>
-                <td>5</td>
-                <td>2500日元</td>
-                <td class="base">09:05-14:20<Br>15:20-23:55</td>
-                <td>日内，不能隔夜</td>
-                <td>不能双向持仓</td>
-                <td class="base">±7.5%,±12.5%<br>(熔断均为15分钟;即月合约在最后交易日无涨跌停)</td>
-            </tr>
-        </table>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list">
-          <tr>
-            <td class="first">操盘保证金</td>
-            <td class="font">用户出现亏损时的赔付，结束时如无亏损全额退还，保证金越高，平仓风险越低。</td>
-          </tr>
-          <tr>
-            <td class="first">亏损平仓线</td>
-            <td class="font">总操盘资金低于亏损平仓线时，系统自动平仓。</td>
-          </tr>
-          <tr>
-            <td class="first">账户管理费</td>
-            <td class="font">按交易日计算，当前免费。</td>
-          </tr>
-          <tr>
-            <td class="first">交易手续费</td>
-            <td class="font">用于支付交易佣金、印花税、过户费和实盘资金占用费。</td>
-          </tr>
-          <tr>
-            <td class="first">终结方案结算</td>
-            <td class="font">根据您的操盘盈亏，美元兑换人民币，汇率取中国银行当天的第一笔现钞卖出价。</td>
-          </tr>
-          <tr>
-            <td class="first">交易软件</td>
-            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;"  target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=5" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
-          </tr>
-        </table>
-    </div> --%>
 </div>
 <%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>

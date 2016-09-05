@@ -106,7 +106,12 @@
 								德国DAX<i><fmt:formatNumber value="${outDiskPrice[6].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
 								日经225<i><fmt:formatNumber value="${outDiskPrice[7].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
 								小恒指<i><fmt:formatNumber value="${outDiskPrice[8].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								美黄金<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
+								美黄金<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								H股指数<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								小H股指数<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								美铜<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								美白银<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								小原油<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
 							</p>
 						</li>
 						<li>
@@ -125,7 +130,10 @@
 							<i>(${outDiskPrice[3].mainContract})</i>、迷你纳斯达克<i>(${outDiskPrice[4].mainContract})</i>、迷你标普
 							<i>(${outDiskPrice[5].mainContract})</i>、德国DAX<i>(${outDiskPrice[6].mainContract})</i>、日经225
 							<i>(${outDiskPrice[7].mainContract})</i>、小恒指<i>(${outDiskPrice[8].mainContract})</i>、美黄金
-							<i>(${outDiskPrice[9].mainContract})</i></p>
+							<i>(${outDiskPrice[9].mainContract})</i>、H股指数<i>(${outDiskPrice[8].mainContract})</i>
+							、小H股指数<i>(${outDiskPrice[8].mainContract})</i>、美铜<i>(${outDiskPrice[8].mainContract})</i>
+							、美白银<i>(${outDiskPrice[8].mainContract})</i>、小原油<i>(${outDiskPrice[8].mainContract})</i>
+							</p>
 						</li>
 						<li>							
 							<h3>亏损平仓线($)</h3>

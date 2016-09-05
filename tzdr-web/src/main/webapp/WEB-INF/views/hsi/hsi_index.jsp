@@ -173,64 +173,6 @@
 					</div>
 				</div>
 			</div>
-			<!--操盘须知  -->
-			<!--<div class="capital_rule">
-		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
-		        <h2>恒指期货介绍</h2>
-		        <p>香港股市价格的重要指标，指数由若干只成份股（即蓝筹股）市值计算出来的，代表了香港交易所所有上市公司的12个月平均市值涵盖率的63%，恒生指数由恒生银行下属恒生指数有限公司负责计算及按季检讨，公布成份股调整。该指数于1969年11月24日首次公开发布。</p>
-		        <h2>交易细则</h2>        
-		        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list">
-		          <tr>
-		            <td class="first">风险提示</td>
-		            <td class="font">投资有风险，入市需谨慎</td>
-		          </tr>
-		          <tr>
-		            <td class="first">操盘须知</td>
-		            <td class="font">交易资金按美元计价，人民币兑换美元，汇率按照中行当天第一开市时间来算，出入金按照现钞卖出价。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">指数标的</td>
-		            <td class="font">香港交易所，恒生指数期货</td>
-		          </tr>
-		          <tr>
-		            <td class="first">最后交易日</td>
-		            <td class="font">每月倒数第二个交易日</td>
-		          </tr>
-		          <tr>
-		            <td class="first">最小波动价</td>
-		            <td class="font">1个指数点（50港元）</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易时间</td>
-		            <td class="font">9:05-16:25，17:20-01:50，不能跨时段交易。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">涨跌幅限制</td>
-		            <td class="font">无涨跌幅限制</td>
-		          </tr>
-		          <tr>
-		            <td class="first">操盘保证金</td>
-		            <td class="font">用户出现亏损时的赔付，结束时如无亏损全额退还，保证金越高，平仓风险越低。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易手续费</td>
-		            <td class="font">用于支付交易佣金、印花税、过户费和实盘资金占用费。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">账户管理费</td>
-		            <td class="font">按交易日计算，当前免费。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">亏损平仓线</td>
-		            <td class="font">总操盘资金低于亏损平仓线时，系统自动平仓。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=9" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
-		          </tr>
-		        </table>
-		
-		    </div> -->
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

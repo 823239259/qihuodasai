@@ -589,7 +589,7 @@
 							<p> 交易软件：<a href="${ctx}/help?tab=software&leftMenu=2" target="_blank">独立委托版</a></p>
 						</c:otherwise>
 					</c:choose> --%>
-					<p> 交易软件：1.若您的交易帐号以“<i style='color: red;'>6236</i>”开头，需使用钱江版交易软件，请“<a href='http://www.ihoms.com/file/xunlei/downloadxunlei/HOMS_QiJian/ZhengShi/DuLi/homs_duli.exe?fileCode=10&sourceType=4' target='_blank'>立即下载</a>”;<br><em class="uc_tlpromtsp2">2.若您的交易帐号以“<i style='color: red;'>8709</i>”开头，需使用涌金版交易软件，请“<a href='http://www.tzdr.com/static/apply/HOMS_YONGJINBAN_jiaoyiduan.exe' target='_blank'>立即下载</a>”；</em><br><em class="uc_tlpromtsp2">3.若您的交易帐号以“<i style="color: red;">15703</i>”开头，需使用钱隆TTS股票交易系统，请“<a href='${ctx}/help?tab=software&leftMenu=1' target="_blank">立即下载</a>”。</em></p>
+					<p> 交易软件：1.若您的交易帐号以“<i style='color: red;'>6236</i>”开头，需使用钱江版交易软件，请“<a href='http://www.ihoms.com/file/xunlei/downloadxunlei/HOMS_QiJian/ZhengShi/DuLi/homs_duli.exe?fileCode=10&sourceType=4' target='_blank'>立即下载</a>”;<br><em class="uc_tlpromtsp2">2.若您的交易帐号以“<i style='color: red;'>8709</i>”开头，需使用涌金版交易软件，请“<a href='http://www.vs.com/static/apply/HOMS_YONGJINBAN_jiaoyiduan.exe' target='_blank'>立即下载</a>”；</em><br><em class="uc_tlpromtsp2">3.若您的交易帐号以“<i style="color: red;">15703</i>”开头，需使用钱隆TTS股票交易系统，请“<a href='${ctx}/help?tab=software&leftMenu=1' target="_blank">立即下载</a>”。</em></p>
 					<%--
 					<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp提示：1.停牌股处理规则，<a href="${ctx}/help?tab=configuration&leftMenu=6" target="_blank">点击查看</a><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2.方案最长可延期至：${parentEndDate }<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3.平仓后方案会继续保留并产生费用，停止产生费用请终结方案。</p>
 					 --%>

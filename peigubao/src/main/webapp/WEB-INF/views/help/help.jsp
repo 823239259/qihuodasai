@@ -836,7 +836,7 @@ var tab="<%=tab%>";
         </div>
         <div class="hp_mainbar hp_mbox1" >
         	<h2>如何注册成为投资达人用户？</h2>
-        	<p>第一步：打开投资达人首页(www.tzdr.com)，点击首页头部“注册”，跳转注册页面；</p>
+        	<p>第一步：打开投资达人首页(www.vs.com)，点击首页头部“注册”，跳转注册页面；</p>
         	<img src="${ctx}/static/images/help/rg_01.jpg" width="600" style="margin-left:30px;">
         	<p>第二步：填写手机号码、手机验证码、密码、确认密码、推广码等信息；</p>
         	<img src="${ctx}/static/images/help/rg_02.png" width="600" style="margin-left:30px;">

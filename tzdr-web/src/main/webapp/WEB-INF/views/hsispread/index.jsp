@@ -23,7 +23,7 @@
  
 <body>
 <div class="hsi_top">
-	<p class="hsi_top_logo fl"><a href="http://www.tzdr.com/" target="_blank"><img src="${ctx}/static/images/hsispread/logo.png"></a></p>
+	<p class="hsi_top_logo fl"><a href="http://www.vs.com/" target="_blank"><img src="${ctx}/static/images/hsispread/logo.png"></a></p>
 	<p class="hsi_top_tel fr">客服热线：400-020-158</p>
 </div>
 
@@ -44,9 +44,9 @@
 <div class="money"><img src="${ctx}/static/images/hsispread/money.gif"></div>
 <div class="main">
     <img src="${ctx}/static/images/hsispread/pic_01.gif">
-    <a href="http://www.tzdr.com/ftse/index" target="_blank" class="tp_l_btn">查看详情</a>
-    <a href="http://www.tzdr.com/crudeoil/index" target="_blank" class="tp_l_btn2">查看详情</a>
-    <a href="http://www.tzdr.com/product/gold_index" target="_blank" class="tp_l_btn3">查看详情</a>
+    <a href="http://www.vs.com/ftse/index" target="_blank" class="tp_l_btn">查看详情</a>
+    <a href="http://www.vs.com/crudeoil/index" target="_blank" class="tp_l_btn2">查看详情</a>
+    <a href="http://www.vs.com/product/gold_index" target="_blank" class="tp_l_btn3">查看详情</a>
 </div>
 <div class="main2">
     <img src="${ctx}/static/images/hsispread/pic_02.gif">

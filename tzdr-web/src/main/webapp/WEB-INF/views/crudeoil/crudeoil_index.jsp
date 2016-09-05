@@ -173,64 +173,6 @@
 					</div>
 				</div>
 			</div>
-			<!--操盘须知  -->
-			<%-- <div class="capital_rule">
-		        <div class="cp_ru_icon"><img src="${ctx}/static/images/cp/icon_1.png"></div>
-		        <h2>国际原油介绍：</h2>
-		        <p>在石油期货合约之中，原油期货是交易量最大的品种，我们推出的国际原油是投资世界交易量最大、影响力最广泛的纽约商业交易所轻原油期货合约。该合约规格为每手1000桶，报价单位为美元/桶，价格波动最小单位为1美分，当初一推出后交易活跃，为有史以来最成功的国际商品期货合约，它的成交价格成为国际石油市场关注的焦点。国际原油投资特点：1，全球性市场，操作简单  2，T+0模式，每天可多次交易，增加获利几率  3，杠杆交易原理，以小博大  4，几乎24小时交易，时间自由   5，无涨停板和交割时间限制，特别适合做短线投资。</p>
-		        <h2>交易细则</h2>        
-		        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cp_ru_list">
-		          <tr>
-		            <td class="first">风险提示</td>
-		            <td class="font">投资有风险，入市需谨慎</td>
-		          </tr>
-		          <tr>
-		            <td class="first">人民币兑换</td>
-		            <td class="font">操盘资金按美元计价，人民币兑换美元，汇率按照中行当天第一开市时间来算，出入金按照现钞卖出价</td>
-		          </tr>
-		          <tr>
-		            <td class="first">指数标的</td>
-		            <td class="font">纽约商业交易所，原油期货</td>
-		          </tr>
-		          <tr>
-		            <td class="first">最后交易日</td>
-		            <td class="font">交割月份前一个月的25日是工作日，则该日之前倒数第三个交易日是最后交易日：如果交割月份的25日不是工作日，那么25日前倒数第四个交易日是最后交易日</td>
-		          </tr>
-		          <tr>
-		            <td class="first">最小波动价</td>
-		            <td class="font">0.01个指数点</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易时间</td>
-		            <td class="font">09:20-16:10,17：05-23:40</td>
-		          </tr>
-		          <tr>
-		            <td class="first">涨跌幅限制</td>
-		            <td class="font">±10美元，暂停交易5分钟后再扩大±10美元，以此循环</td>
-		          </tr>
-		          <tr>
-		            <td class="first">操盘保证金</td>
-		            <td class="font">用户出现亏损时的赔付，结束时如无亏损全额退还，保证金越高，平仓风险越低。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易手续费</td>
-		            <td class="font">用于支付交易佣金、印花税、过户费和实盘资金占用费。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">账户管理费</td>
-		            <td class="font">按交易日计算，当前免费。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">亏损平仓线</td>
-		            <td class="font">总操盘资金低于亏损平仓线时，系统自动平仓。</td>
-		          </tr>
-		          <tr>
-		            <td class="first">交易软件</td>
-		            <td class="font"><a href="${ctx}/help?tab=software&leftMenu=1" style="color:#fc3; padding-right:20px;" target="_blank">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=8" target="_blank"  style="color:#fc3; padding-right:20px;">查看交易说明</a></td>
-		          </tr>
-		        </table>
-		
-		    </div> --%>
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

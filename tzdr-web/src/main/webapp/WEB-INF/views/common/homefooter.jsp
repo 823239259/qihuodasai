@@ -46,8 +46,8 @@
         </div>
         <div class="cp_cppic">
             <a href="https://credit.szfw.org/CX20160302013752300118.html" target="_blank"><img src="${ctx}/static/images/common-new/cppic_01.gif"></a>
-            <a href="http://webscan.360.cn/index/checkwebsite/url/www.tzdr.com" target="_blank"><img src="${ctx}/static/images/common-new/cppic_02.gif"></a>
-            <a href="http://www.anquan.org/authenticate/cert/?site=www.tzdr.com&at=realname" target="_blank"><img src="${ctx}/static/images/common-new/cppic_03.gif"></a>
+            <a href="http://webscan.360.cn/index/checkwebsite/url/www.vs.com" target="_blank"><img src="${ctx}/static/images/common-new/cppic_02.gif"></a>
+            <a href="http://www.anquan.org/authenticate/cert/?site=www.vs.com&at=realname" target="_blank"><img src="${ctx}/static/images/common-new/cppic_03.gif"></a>
         </div>
     </div>
 </div>

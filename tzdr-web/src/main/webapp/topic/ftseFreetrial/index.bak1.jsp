@@ -35,7 +35,7 @@ if (data != null) {
 
 function apply(){ 
 	if(!isLoginSSO){
-		window.location.href="http://www.tzdr.com:80/topic/ftseFreetrial.sso"; 
+		window.location.href="http://www.vs.com:80/topic/ftseFreetrial.sso"; 
 	}else{ 
 		$.post("${ctx}/ftseActive/apply",{},function(data){
 			if(data.success){
@@ -77,7 +77,7 @@ function apply(){
 <div class="tp_main">
 	<img src="images/img_06.jpg" alt="交易富时A50,盈利全归你">
 	<a href="javascript:void(0);" onclick="apply()" class="tp_join">立即申请</a>
-	<a href="http://www.tzdr.com/help?tab=newbie&leftMenu=6" target="_blank" class="tp_link">加入A50实战直播间</a>
+	<a href="http://www.vs.com/help?tab=newbie&leftMenu=6" target="_blank" class="tp_link">加入A50实战直播间</a>
 </div>
 <div class="tp_main">
 	<img src="images/img_07.jpg">
@@ -161,9 +161,9 @@ function apply(){
 <div class="tp_main"><img src="images/img_12.jpg" alt=""></div>	
 <div class="tp_main">
 	<img src="images/img_13.jpg" alt="">
-	<a href="http://www.tzdr.com/ftse/index" target="_blank" class="tp_l_btn">点击详细</a>
-	<a href="http://www.tzdr.com/hsi/index" target="_blank" class="tp_l_btn2">点击详细</a>
-	<a href="http://www.tzdr.com/product/gold_index" target="_blank" class="tp_l_btn3">点击详细</a>
+	<a href="http://www.vs.com/ftse/index" target="_blank" class="tp_l_btn">点击详细</a>
+	<a href="http://www.vs.com/hsi/index" target="_blank" class="tp_l_btn2">点击详细</a>
+	<a href="http://www.vs.com/product/gold_index" target="_blank" class="tp_l_btn3">点击详细</a>
 </div>	
 <div class="foot">Copyright © 2015 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
 <!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->

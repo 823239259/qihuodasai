@@ -315,7 +315,7 @@ $(document).ready(function() {
 					</div>
 					<div class="uc_spl_share content">
 						<p class="uc_spl_sfont">
-							牛市来了，小资金如何做大？我最近在配股宝网站股票操盘炒股，收益可扩大15倍，你也可以来试试！<%-- <a href="http://www.tzdr.com?uid=${id}">http://www.tzdr.com?uid=${id}</a> --%>
+							牛市来了，小资金如何做大？我最近在配股宝网站股票操盘炒股，收益可扩大15倍，你也可以来试试！<%-- <a href="http://www.vs.com?uid=${id}">http://www.vs.com?uid=${id}</a> --%>
 						</p>
 						<div class="uc_spl_sharelist">
 							<span>分享到：</span>

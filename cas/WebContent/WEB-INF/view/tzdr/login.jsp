@@ -20,7 +20,7 @@
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <link rel="shortcut icon" href="${ctx}/images/login/weisheng-icon.png">
 <link rel="stylesheet" href="${ctx}/css/login.css?ver=20150901">
-<!-- <script language="javascript" src="http://www.tzdr.com/static/script/common/jquery-1.8.0.min.js"></script> -->
+<!-- <script language="javascript" src="http://www.vs.com/static/script/common/jquery-1.8.0.min.js"></script> -->
 <script type="text/javascript">
 var _zzsiteid="g2CiQ0pbhOF";
 var _zzid = "g2CiQ0pbhOE";
