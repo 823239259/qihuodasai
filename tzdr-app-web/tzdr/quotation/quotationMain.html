@@ -160,7 +160,7 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-				var reconnect=null;
+//				var reconnect=null;
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
@@ -189,10 +189,10 @@
 					    ContractSize:ContractSize
 					}
 					socket.onclose = function(evt){
-						console.log("关闭连接");
-						if(reconnect != false){
-							alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
-						}
+//						console.log("关闭连接");
+//						if(reconnect != false){
+//							alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
+//						}
 
 					};
 					socket.onmessage = function(evt){ 
@@ -241,6 +241,8 @@
 						
     				};
     				//生成页面传递的数据
+    				$(".productList").css("height",50*product.CommodityName.length+12+"px");
+    				console.log($(".productList").height());
     				function ManufacturingData(i){
     					var data=[];
     					return data=[product.CommodityName[i],product.CommodityNo1[i],product.CommodityNo2[i],product.ExchangeNo[i],product.DotSize[i],product.ContractSize[i],product.MiniTikeSize[i]];
@@ -251,7 +253,7 @@
 			            var data=ManufacturingData(index);
 			            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 			            socket.close();
-			            reconnect=false;
+//			            reconnect=false;
 			            mui.openWindow({
 							url:"transactionDetails.html",
 							id:"transactionDetails",
@@ -292,15 +294,15 @@
 			    }
 			document.getElementById("product").addEventListener("tap",function(){
 					socket.close();
-					reconnect=false;
+//					reconnect=false;
 			});
 			document.getElementById("scheme").addEventListener("tap",function(){
 					socket.close();
-					reconnect=false;
+//					reconnect=false;
 			});
 			document.getElementById("account").addEventListener("tap",function(){
 					socket.close();
-					reconnect=false;
+//					reconnect=false;
 			});
 			document.getElementById("refresh").addEventListener("tap",function(){
 				var re = plus.webview.getWebviewById("quotationMain");
