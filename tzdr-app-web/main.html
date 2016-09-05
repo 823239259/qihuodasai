@@ -40,7 +40,6 @@
 			}else if(plus.os.name=="Android"){
 				mui.getJSON("manifest.json",null,function(data){
 					chanel=data.plus.distribute.plugins.statics.umeng.appkey_android;
-					alert(chanel);
 					plus.storage.setItem("chanel",chanel);
 				});
 			}
@@ -61,7 +60,7 @@
 							mui.openWindow("tzdr/login/regist.html","regist");
 						});
 					document.getElementById("visit").addEventListener("tap",function(){
-						alert(plus.storage.getItem("chanel"));
+//						alert(plus.storage.getItem("chanel"));
 						if(mui.checkNetwork()==false){
 							mui.toast("当前网络不给力，请稍后再试"); 
 							return;
@@ -95,7 +94,7 @@
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				wgtVer=inf.version;
-				console.log(wgtVer);
+//				console.log(wgtVer);
 				//检查更新版本 
 				checkUpdate(function(){
 				});
