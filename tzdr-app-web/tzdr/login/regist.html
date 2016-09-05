@@ -14,7 +14,6 @@
     	mui.plusReady(function(){
     		//清除遗留数据
     		clearinfo();
-    		
     		document.getElementById("back").addEventListener("tap",function(){
     			history.back();
     		});
@@ -78,15 +77,13 @@
       			
       		});
     	}  
-    	
-    	
-    	
     	function registUser(){
     		var mobile=document.getElementById("account").value;
 			var code=document.getElementById("password").value;
 			var password=document.getElementById("password_confirm").value;
 			var password2=document.getElementById("email").value;//确认密码
-			
+			var channel=plus.storage.getItem("chanel");
+			console.log(channel);
 			//这里要对手机号码进行格式校验
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("手机号码不正确");
@@ -119,7 +116,8 @@
 			mui.app_request('/regist',{ 
       			 'mobile':mobile,
 			    'code':code,
-			    'password':password
+			    'password':password,
+			    "channel":channel
       	},function(result){
       				mui.toast("恭喜您注册成功！");
       				//存储用户信息
