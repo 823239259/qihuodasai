@@ -40,7 +40,6 @@
 			}else if(plus.os.name=="Android"){
 				mui.getJSON("manifest.json",null,function(data){
 					chanel=data.plus.distribute.plugins.statics.umeng.appkey_android;
-					alert(chanel);
 					plus.storage.setItem("chanel",chanel);
 				});
 			}
@@ -61,7 +60,7 @@
 							mui.openWindow("tzdr/login/regist.html","regist");
 						});
 					document.getElementById("visit").addEventListener("tap",function(){
-						alert(plus.storage.getItem("chanel"));
+//						alert(plus.storage.getItem("chanel"));
 						if(mui.checkNetwork()==false){
 							mui.toast("当前网络不给力，请稍后再试"); 
 							return;
@@ -95,7 +94,7 @@
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				wgtVer=inf.version;
-				console.log(wgtVer);
+//				console.log(wgtVer);
 				//检查更新版本 
 				checkUpdate(function(){
 				});
@@ -191,7 +190,7 @@
 		// 下载wgt文件
 		function downWgt(_callback){
 			plus.nativeUI.showWaiting("下载升级包...");
-			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D11.wgt';//判断是不是苹果市场  、苹果市场选择第一个下载的name 
+			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';//判断是不是苹果市场  、苹果市场选择第一个下载的name 
 			plus.downloader.createDownload(tzdr.constants.api_domain +"upload/"+_filename, {filename:"_doc/update/"}, function(d,status){
 				console.log(tzdr.constants.api_domain +"upload/"+_filename);
 				plus.nativeUI.closeWaiting();
