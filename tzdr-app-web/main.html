@@ -94,7 +94,6 @@
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				wgtVer=inf.version;
-//				console.log(wgtVer);
 				//检查更新版本 
 				checkUpdate(function(){
 				});
@@ -115,7 +114,6 @@
 				function(result){
 					//最新版本号
 					var newVer = result.data.version;
-					console.log(newVer);
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){  //没有最新版本
@@ -157,7 +155,6 @@
 						if(newSub<wgtVerSub){
 							
 						}else{
-							console.log("进去"); 
 							if(newSubSmall > wgtVerSubSmall){
 							_callback();
 						//弹出版本升级提示信息对话框
@@ -192,7 +189,6 @@
 			plus.nativeUI.showWaiting("下载升级包...");
 			var _filename = tzdr.constants.is_appstore ? 'H50967E1DAPPSTORE.wgt':'H50967E1D.wgt';//判断是不是苹果市场  、苹果市场选择第一个下载的name 
 			plus.downloader.createDownload(tzdr.constants.api_domain +"upload/"+_filename, {filename:"_doc/update/"}, function(d,status){
-				console.log(tzdr.constants.api_domain +"upload/"+_filename);
 				plus.nativeUI.closeWaiting();
 				if (status == 200) { 
 					installWgt(d.filename,_callback);	// 安装wgt包
