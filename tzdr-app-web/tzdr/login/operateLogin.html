@@ -62,6 +62,8 @@
 					
 //					console.log($("#checkBox").val())
 				})
+				$("#account").val(endLoginAccount == null?"":endLoginAccount);
+				$("#password").val(endLoginPassword == null ? "" : endLoginPassword);
 				/**
 				 * 登录超时处理 
 				 */
@@ -150,6 +152,8 @@
 									backReload();
 									localStorage.setItem("account",account);
 									localStorage.setItem("password",pwd);
+									localStorage.setItem("endLoginAccount",account);
+									localStorage.setItem("endLoginPassword",pwd);
 									plus.nativeUI.closeWaiting();
 									mui.toast("登录成功");
 									islogin = true;
