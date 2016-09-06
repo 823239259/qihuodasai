@@ -54,7 +54,6 @@
             <li><a id="internationalFutures" href="${ctx}/ftse/index" class="nav_l_future">国际期货</a><i></i></li>
             <li><a id="productli" href="${ctx}/commodity/index">商品期货</a></li>
            	<li><a id="fxspot" href="${ctx}/topic/fxspot/">外汇现货</a></li>
-            <%-- <li><a id="future-index" href="${ctx}/future/index" class="nav_l_sif">股指期货</a><i></i></li> --%>
                        
             <%
         		if(request.getSession().getAttribute("userName") !=null){
@@ -69,52 +68,10 @@
         	%>
         	
         </ul>
-        <!-- 股票合买 -->
-         <div style="display: none;" class="nav_tknav nav_together">
-            <h2><a href="${ctx}/together/index">股票合买</a></h2>
-            <a href="${ctx}/together/index">发起合买</a>
-            <a href="${ctx}/together/list">参与合买</a>
-        </div> 
-        <!-- 国际期货 -->
-        <div style="display: none;" class="nav_tknav nav_profur">
-            <h2><a href="${ctx}/outDisk/index">国际期货</a></h2>         
-            <a href="${ctx}/outDisk/index">国际综合</a>
-            <a href="${ctx}/ftse/index">富时A50</a>
-            <a href="${ctx}/hsi/index">恒指期货</a>
-            <a href="${ctx}/crudeoil/index">国际原油</a>   
-        </div>
-        <!-- 商品期货 -->
-        <div style="display: none;" class="nav_tknav nav_pronav">
-            <h2><a href="${ctx}/commodity/index">商品期货</a></h2>
-            <a href="${ctx}/commodity/index">商品综合</a>
-            <a href="${ctx}/product/gold_index">沪金</a>
-            <a href="${ctx}/product/sliver_index">沪银</a>
-            <a href="${ctx}/product/copper_index">沪铜</a>
-            <a href="${ctx}/product/rubber_index">橡胶</a>
-        </div>
         <!-- 我的账户 -->
         <div style="display: none;" class="nav_tknav nav_mcnav">
             <h2><a href="${ctx}/user/account">我的账户</a></h2>
             <a href="${ctx}/user/account">操盘账户</a>
-            <a href="<%=ConfUtil.getContext("p2p.user.account")%>">投资账户</a>
-        </div>
-        <!-- 股指期货 -->
-        <div style="display: none;" class="nav_tknav nav_prosif">
-            <h2><a href="${ctx}/future/index">股指期货</a></h2>
-            <a href="${ctx}/future/index">期指随心乐</a>
-            <a href="${ctx}/future/day_index">期指天天乐</a>
-            <%-- <%
-           		String futUrl = ConfUtil.getContext("tzdr.future.url");
-        		if(request.getRemoteUser()!=null){
-        	%>
-        		<a href="<%=futUrl%>/login/virtual.jsp">期指点点乐</a>
-        	<%
-        		}else{
-        	%>
-        		<a href="<%=futUrl%>/virtualFuserTrade/open">期指点点乐</a> 
-        	<%
-        		}
-        	%> --%>
         </div>
     </div>
 </div>
@@ -124,25 +81,17 @@
     <div class="fl_server">
         <p class="fl_sv_tent"><a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzkzODA2MTY0MV8zMDUwODdfNDAwMDIwMDE1OF8yXw" target='_blank'></a></p>
         <div class="fl_sv_code">            
-           <%--  <a href="${ctx}/topic/app/" target="_blank"></a>  --%>
-            <%-- <div class="fl_sv_codetk" style="display: none;"><img src="${ctx}/static/images/common-new/code.png"><p>扫二维码访问<br>维胜手机站</p></div> --%>
+         
         </div>
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>
     </div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		 /* $('.top_myc').hover(function() {
-		        $('.top_myname').show();
-		    }); */
-		    /* $('.top_myt').hover(function() {
-		        $('.top_mytel').show();
-		    }); */
-		    
-		    $('.top_mynav').hover(function() {
-			}, function() {
-			    $(this).hide();
-			});
+	    $('.top_mynav').hover(function() {
+		}, function() {
+		    $(this).hide();
+		});
 	    $('.nav_l_together').hover(function() {
 			$('.nav_together').show();
 		});
@@ -155,10 +104,6 @@
 		$('.nav_l_sif').hover(function() {
 			$('.nav_prosif').show();
 		});
-		/* $('.nav_l_mc').hover(function() {
-			$('.nav_mcnav').show();
-		}); */
-		
 		$('.nav_tknav').hover(function() {
 		}, function() {
 		    $(this).hide();
@@ -169,11 +114,6 @@
 	    }, function() {
 	        $('.fl_sv_codetk ').hide();
 	    }); 
-	   /*  $('.top_myc').hover(function() {
-	        $('.top_myname').show();
-	    }); $('.top_myt').hover(function() {
-	        $('.top_mytel').show();
-	    }); */
 	    $('.top_mynav').hover(function() {
 		}, function() {
 		    $(this).hide();

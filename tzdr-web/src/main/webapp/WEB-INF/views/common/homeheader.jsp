@@ -34,13 +34,11 @@
             <h2><%=request.getSession().getAttribute("userName").toString() %></h2>
             <%} %>
             <a href="${ctx}/user/account">操盘账户</a>
-            <a href="<%=ConfUtil.getContext("p2p.user.account")%>">投资账户</a>
         </div>
         <!-- 我的账户 -->
         <div class="top_mynav top_myname" style="display:none; top:1px;">
             <h2>我的账户</h2>
             <a href="${ctx}/user/account">操盘账户</a>
-            <a href="<%=ConfUtil.getContext("p2p.user.account")%>">投资账户</a>
         </div>
     </div>
 </div>
@@ -96,7 +94,6 @@
         <div style="display: none;" class="nav_tknav nav_mcnav">
             <h2><a href="${ctx}/user/account">我的账户</a></h2>
             <a href="${ctx}/user/account">操盘账户</a>
-            <a href="<%=ConfUtil.getContext("p2p.user.account")%>">投资账户</a>
         </div>
         <!-- 股指期货 -->
         <div style="display: none;" class="nav_tknav nav_prosif">
