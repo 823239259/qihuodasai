@@ -9,7 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我的邀请码 - 维胜</title>
+<title>我的邀请码 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
 <link href="${ctx}/static/css/public.css" rel="stylesheet"
 	type="text/css">

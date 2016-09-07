@@ -23,7 +23,7 @@
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftsePay.js?v=${v}"></script>
 
-<title>支付确认 - 富时A50- 维胜 -中国领先的国际期货及衍生品互联网交易平台</title>
+<title>支付确认 - 富时A50- 维胜金融 -中国领先的国际期货及衍生品互联网交易平台</title>
 </head>
 <body>
 	<!--顶部 -->

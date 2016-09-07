@@ -29,7 +29,7 @@
 <script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiIndex.js?v=${v}"></script>
-<title>恒指期货_维胜-中国领先的国际期货及衍生品互联网交易平台</title>
+<title>恒指期货-维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <meta name="keywords" content="维胜，国际期货，恒指，期货，配资，期货配资，期货开户，外盘，期货公司，期货平台，炒期货，模拟盘"/>
 <meta name="description" content="恒指期货-以恒生指数为产品内容的期货交易品种，特色主要是高成本效益、交易成本低廉及结算公司履约保证，与国内商品期货最大的区别在于大盘体量大不易被政策控制。"/>
 </head>

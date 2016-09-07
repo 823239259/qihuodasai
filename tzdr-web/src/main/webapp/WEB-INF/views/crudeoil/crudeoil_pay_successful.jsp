@@ -22,7 +22,7 @@
 <script language="javascript" src="${ctx}/static/script/trade/preByDay.js?v=${v}"></script>
 
 
-<title>国际原油方案申请成功 - 维胜-中国领先的国际期货及衍生品互联网交易平台</title>
+<title>国际原油方案申请成功 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.navlist li a').removeClass('on');

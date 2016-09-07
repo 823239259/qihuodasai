@@ -22,7 +22,7 @@
 <script language="javascript" src="${ctx}/static/script/common/tzdr.user.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/hsi/hsiPay.js?v=${v}"></script>
-<title>支付确认- 恒指期货  - 维胜-中国领先的国际期货及衍生品互联网交易平台</title>
+<title>支付确认- 恒指期货  - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 </head>
 <body>
 	<!--顶部 -->

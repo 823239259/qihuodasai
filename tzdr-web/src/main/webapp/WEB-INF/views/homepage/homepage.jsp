@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
 	<!-- <meta name="viewport" content="user-scalable=no" /> -->
-	<title>维胜-中国领先的国际期货及衍生品互联网交易平台</title>
+	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 	<meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 	<%
@@ -216,7 +216,6 @@
 					<p class="yuei">账户余额：${usermap.user_avlbal }元</p>
 					<div>
 	            		<a href="${ctx}/user/account" class="lg_chaopan">操盘账户</a>
-	            		<%-- <a href="<%=ConfUtil.getContext("p2p.user.account") %>" style="display:none;">投资账户</a> --%>
 	            	</div>
 	            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
 				</div>
