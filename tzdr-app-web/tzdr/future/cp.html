@@ -176,52 +176,52 @@
 			switch (contractList.tradeType){
 				case 0:
 					td_1.innerHTML="富时A50";
-					td_3.innerHTML="09:05-16:25<br>17:20-01:50";
+					td_3.innerHTML="9:05-16:30<br>17:20-23:55";
 					td_5.innerHTML="只交易富时A50时，初始最大可持仓"+(mui.isnull(init_params.tranLever) ? 0 : init_params.tranLever)+"手";
 					break;
 				case 6:
 					td_1.innerHTML="国际原油";
-					td_3.innerHTML="06:05-04:55";
+					td_3.innerHTML="09:05-23:55";
 					td_5.innerHTML="只交易国际原油时，初始最大可持仓"+(mui.isnull(init_params.crudeTranLever) ? 0 : init_params.crudeTranLever)+"手";
 					break;
 				case 7:
 					td_1.innerHTML="恒指期货";
-					td_3.innerHTML="09:20-16:10<br>17:05-23:40";
+					td_3.innerHTML="09:20-11:55<br>13:05-16:25<br>17:20-23:40";
 					td_5.innerHTML="只交易恒指期货时，初始最大可持仓"+(mui.isnull(init_params.hsiTranLever) ? 0 : init_params.hsiTranLever)+"手";
 					break;
 				case 9:
 					td_1.innerHTML="迷你道指";
-					td_3.innerHTML="06:05-04:55";
+					td_3.innerHTML="09:05-23:55";
 					td_5.innerHTML="只交易迷你道指时，初始最大可持仓"+(mui.isnull(init_params.mdtranLever) ? 0 : init_params.mdtranLever)+"手";
 					break;
 				case 10:
 					td_1.innerHTML="迷你纳指";
-					td_3.innerHTML="06:05-04:55";
+					td_3.innerHTML="09:05-23:55";
 					td_5.innerHTML="只交易迷你纳指时，初始最大可持仓"+(mui.isnull(init_params.mntranLever) ? 0 : init_params.mntranLever)+"手";
 					break;
 				case 11:
 					td_1.innerHTML="迷你标普";  
-					td_3.innerHTML="06:05-04:55";
+					td_3.innerHTML="09:05-23:55";
 					td_5.innerHTML="只交易迷你标普时，初始最大可持仓"+(mui.isnull(init_params.mbtranLever) ? 0 : init_params.mbtranLever)+"手";
 					break;
 				case 12:
 					td_1.innerHTML="德国DAX";
-					td_3.innerHTML="14:05-03:55";
+					td_3.innerHTML="13:55-23:55";
 					td_5.innerHTML="只交易德国DAX时，初始最大可持仓"+(mui.isnull(init_params.daxtranLever) ? 0 : init_params.daxtranLever)+"手";
 					break;
 				case 13:
 					td_1.innerHTML="日经225";
-					td_3.innerHTML="07:35-14:20<br>15:20-01:50";
+					td_3.innerHTML="09:05-14:25<br>15:20-23:55";
 					td_5.innerHTML="只交易日经225时，初始最大可持仓"+(mui.isnull(init_params.nikkeiTranLever) ? 0 : init_params.nikkeiTranLever)+"手";
 					break;
 				case 14:
 					td_1.innerHTML="小恒指";
-					td_3.innerHTML="09:20-16:10<br>17:05-23:40";
+					td_3.innerHTML="09:20-11:55<br>13:05—16:25<br>17:20-23:40";
 					td_5.innerHTML="只交易小恒指时，初始最大可持仓"+(mui.isnull(init_params.lhsiTranActualLever) ? 0 : init_params.lhsiTranActualLever)+"手";
 					break;
 				case 15:
 					td_1.innerHTML="美黄金";
-					td_3.innerHTML="06:05-04:55";
+					td_3.innerHTML="09:20-16:25<br>17:20-23:40";
 					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.agTranActualLever) ? 0 : init_params.agTranActualLever)+"手";
 					break;
 				default:
@@ -335,7 +335,7 @@
 			<thead>
 				<td width="100px">期货产品</td>
 				<td width="100px">主力合约</td>
-				<td width="150px">交易时间段</td>
+				<td width="150px">维胜交易时间段</td>
 				<td width="120px">交易手续费</td>
 				<td width="350px">初始可持仓手数</td>
 			</thead>

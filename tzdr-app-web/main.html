@@ -24,57 +24,45 @@
                 	})
 			 }
     	mui.init();
-    	
     	//Android双击home键退出应用
     	var first = null;
     	//当前应用版本号
 	  	var wgtVer=null;
 		mui.plusReady(function(){
-			//获取友盟的统计代码
-			var chanel=null;
-			if(plus.os.name=="iOS"){
-				mui.getJSON("manifest.json",null,function(data){
-					chanel=data.plus.distribute.plugins.statics.umeng.appkey_ios;
-					plus.storage.setItem("chanel",chanel);
-				});
-			}else if(plus.os.name=="Android"){
-				mui.getJSON("manifest.json",null,function(data){
-					chanel=data.plus.distribute.plugins.statics.umeng.appkey_android;
-					plus.storage.setItem("chanel",chanel);
-				});
+			if (mui.cacheUser.isLogin()){
+				mui.openWindow("tzdr/quotation/quotationMain.html","quotationMain");
+//				return;
 			}
 			//状态栏设置
 			setstatus();
 			 if(plus.storage.getItem("guide")==null){
-			 	
-			 plus.storage.setItem("guide","12");
-			 setTimeout(showWindow,1);		
+				 plus.storage.setItem("guide","12");
+				 setTimeout(showWindow,1);		
 			 	}else{
-                		var statusR =  document.getElementById("main_status");
-                		statusR.style.display = "block";
-                		document.getElementById("regist").addEventListener("tap",function(){
-							if(mui.checkNetwork()==false){
-								mui.toast("当前网络不给力，请稍后再试"); 
-								return;
-							}
-							mui.openWindow("tzdr/login/regist.html","regist");
-						});
-					document.getElementById("visit").addEventListener("tap",function(){
-//						alert(plus.storage.getItem("chanel"));
+            		var statusR =  document.getElementById("main_status");
+            		statusR.style.display = "block";
+            		document.getElementById("regist").addEventListener("tap",function(){
 						if(mui.checkNetwork()==false){
 							mui.toast("当前网络不给力，请稍后再试"); 
 							return;
 						}
-						mui.openWindow("tzdr/quotation/quotationMain.html","quotationMain");
+						mui.openWindow("tzdr/login/regist.html","regist");
 					});
-					document.getElementById("login").addEventListener("tap",function(){
-						if(mui.checkNetwork()==false){
-							mui.toast("当前网络不给力，请稍后再试"); 
-							return;
-						}
-						mui.openWindow("tzdr/login/login.html","login");
-						});
-                	};
+				document.getElementById("visit").addEventListener("tap",function(){
+					if(mui.checkNetwork()==false){
+						mui.toast("当前网络不给力，请稍后再试"); 
+						return;
+					}
+					mui.openWindow("tzdr/quotation/quotationMain.html","quotationMain");
+				});
+				document.getElementById("login").addEventListener("tap",function(){
+					if(mui.checkNetwork()==false){
+						mui.toast("当前网络不给力，请稍后再试"); 
+						return;
+					}
+					mui.openWindow("tzdr/login/login.html","login");
+					});
+            };
 			 	
 			//Android双击home键退出应用
 			mui.back = function(){

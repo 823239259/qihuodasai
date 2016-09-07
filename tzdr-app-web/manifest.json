@@ -101,7 +101,7 @@
 		},
 		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57a2a12867e58ecf320036b2","channelid_android":"android"}}},
+		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57aa88e7e0f55a8ab00023c9","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -364,7 +364,8 @@
 					"fonts/mui.ttf",
 					"css/own.css",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"manifest.json"
 				],
 				"refer": [],
 				"priority": 0
@@ -555,7 +556,9 @@
 				"refer": [
 					"tzdr/future/list.html",
 					"tzdr/future/pay.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/agree/a50.html",
+					"tzdr/agree/a50ru.html"
 				],
 				"priority": 0
 			},
@@ -615,7 +618,9 @@
 				],
 				"refer": [
 					"tzdr/future/pay.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/agree/cl.html",
+					"tzdr/agree/clru.html"
 				],
 				"priority": 0
 			},
@@ -628,7 +633,8 @@
 					"fonts/mui.ttf"
 				],
 				"refer": [
-					"tzdr/future/pay.html"
+					"tzdr/future/pay.html",
+					"tzdr/agree/hsi.html"
 				],
 				"priority": 0
 			},
@@ -687,7 +693,9 @@
 				],
 				"refer": [
 					"tzdr/account/account.html",
-					"tzdr/future/paycp.html"
+					"tzdr/future/paycp.html",
+					"tzdr/agree/cp.html",
+					"tzdr/agree/cpru.html"
 				],
 				"priority": 0
 			},
@@ -1056,6 +1064,83 @@
 				"priority": 0
 			},
 			"tzdr/account/withdcode.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/cpru.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/clru.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/cl.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/hsi.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/a50.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/a50ru.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/cp.html": {
 				"resources": [
 					"css/own.css",
 					"js/common.js",

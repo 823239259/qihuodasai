@@ -217,10 +217,10 @@
 					        }
 					        //插入主力合约
 					        AddTo()
-					    }else if(method == "OnRtnQuote"){	
+					    }else if(method == "OnRspSubscribe"){
+					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data);
 					         //更新行情的数据
-//					         console.log(JSON.stringify(evt.data));
 					        	insertData1(MoreData);
 					    }
 					};
