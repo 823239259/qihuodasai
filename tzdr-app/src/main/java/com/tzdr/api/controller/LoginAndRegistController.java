@@ -91,9 +91,6 @@ public class LoginAndRegistController {
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.addHeader("Access-Control-Allow-Methods","POST,GET");
-		response.addHeader("Access-Control-Allow-Headers","x-requested-with,content-type");
 		String mobile=requestObj.getMobile();
 		String code=requestObj.getCode();
 		String password=requestObj.getPassword();
