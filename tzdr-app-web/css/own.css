@@ -522,3 +522,6 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	text-align: center!important;
 	color:#FFFFFF!important;
 }
+#changePwd{
+	display: none;
+}

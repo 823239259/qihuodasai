@@ -260,14 +260,10 @@ var tzdr = {
 	// 系统常量
 	constants:{
 		//接口域名地址
-		api_domain:"http://hedaoqing.oicp.net/tzdr-app/",
-		//api_domain:"http://api.vs.com/",
+//		api_domain:"http://192.168.2.174:8080/tzdr-app/",
+		api_domain:"http://api.vs.com/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
-		
-		//base_images_url:'http://c.tzdr.com:8888/tzdr-cms/', 
-		
-		//base_images_url:'http://images.tzdr.com/', 
 		//token
 		user_token:'user_token',
 		//密钥

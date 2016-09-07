@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var marketSocketUrl = "";
 var marketUserName = "";
@@ -28,7 +28,6 @@ var MarketConfig = {
  */
 var MarketConfigTest = { 
 	MarketSocketUrl:"ws://quote.vs.com:9002",
-	//MarketSocketUrl:"ws://socket.vs.com:9002",
 	username:"13677622344",
 	password:"a123456"
 }
