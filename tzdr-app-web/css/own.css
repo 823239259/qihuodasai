@@ -525,3 +525,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 #changePwd{
 	display: none;
 }
+
+#pwdForm input{
+	text-align: left;
+}

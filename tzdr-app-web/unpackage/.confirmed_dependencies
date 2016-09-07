@@ -391,7 +391,8 @@
 			"js/mui.min.js",
 			"js/common.js",
 			"css/mui.min.css",
-			"css/own.css"
+			"css/own.css",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"tzdr/account/account.html",
