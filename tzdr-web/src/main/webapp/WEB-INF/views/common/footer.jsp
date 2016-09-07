@@ -43,15 +43,15 @@
         <div class="cp_link">
             <ul>
                 <li>相关网站：</li>
-                <li><a href="javascript:void(0)">证监会</a></li>
-                <li><a href="javascript:void(0)">银监会</a></li>
-                <li><a href="javascript:void(0)">保监会</a></li>
-                <li><a href="javascript:void(0)">深交所</a></li>
-                <li><a href="javascript:void(0)">上交所</a></li>
-                <li><a href="javascript:void(0)">新加坡交易所</a></li>
-                <li><a href="javascript:void(0)">香港交易所</a></li>
-                <li><a href="javascript:void(0)">纽约证券交易所</a></li>
-                <li><a href="javascript:void(0)">纳斯达克</a></li>
+                <li>证监会</li>
+                <li>银监会</li>
+                <li>保监会</li>
+                <li>深交所</li>
+                <li>上交所</li>
+                <li>新加坡交易所</li>
+                <li>香港交易所</li>
+                <li>纽约证券交易所</li>
+                <li>纳斯达克</li>
             </ul>
             <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
         </div>
