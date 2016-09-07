@@ -68,7 +68,13 @@
         <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
-     
+      <mvc:interceptors>
+     	<!--设置跨域拦截器-->  	
+		<mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.tzdr.api.interceptor.CrossDomainInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
     <import resource="applicationContext-common.xml"/>
     <import resource="applicationContext-jpa.xml"/>

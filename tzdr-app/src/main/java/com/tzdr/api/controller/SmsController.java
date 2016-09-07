@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import jodd.util.ObjectUtil;
 
@@ -72,8 +73,10 @@ public class SmsController {
 	 */
 	@RequestMapping(value = "/sms",method=RequestMethod.POST)
 	@ResponseBody
-	public ApiResult sendSms(String mobile,int type,HttpServletRequest request) {
-	
+	public ApiResult sendSms(String mobile,int type,HttpServletRequest request,HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods","POST,GET");
+		response.addHeader("Access-Control-Allow-Headers","x-requested-with,content-type");
 		if (!RequestUtils.isMobileNum(mobile)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"mobile.parrten.error.");
 		}
