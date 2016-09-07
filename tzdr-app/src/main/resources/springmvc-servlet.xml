@@ -123,5 +123,11 @@
 			<!-- 拦截器顺序：preHandle >> postHandle >> afterCompletion -->
 			<bean class="com.tzdr.api.support.SessionInterceptor"></bean>
 		</mvc:interceptor>
+     	<!--设置跨域拦截器-->  
+		<mvc:interceptor>
+             <mvc:mapping path="/regist" />
+             <mvc:mapping path="/sms" />
+            <bean class="com.tzdr.api.interceptor.CrossDomainInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
