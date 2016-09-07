@@ -42,7 +42,7 @@
 <div style="background: #333; height: 85px;">
 <div class="navbox">
     <div class="nav">
-        <div class="navlogo"><a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜" alt="维胜"></a></div>
+        <div class="navlogo"><a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
             <li><a id="hengzhiqidai" href="${ctx}/hsi/index">恒指期货</a></li>
