@@ -21,6 +21,7 @@
 <link rel="shortcut icon" href="${ctx}/images/login/weisheng-icon.png">
 <link rel="stylesheet" href="${ctx}/css/login.css?ver=20150901">
 <!-- <script language="javascript" src="http://www.vs.com/static/script/common/jquery-1.8.0.min.js"></script> -->
+<!-- start 吉鹏代码 -->
 <script type="text/javascript">
 var _zzsiteid="g2CiQ0pbhOF";
 var _zzid = "g2CiQ0pbhOE";
@@ -33,6 +34,14 @@ var _zzid = "g2CiQ0pbhOE";
   s.parentNode.insertBefore(zz, s);
 })();
 </script>
+<!-- end 吉鹏代码 -->
+<!-- <!— Start Alexa Certify Javascript —> -->
+<script type="text/javascript">
+_atrk_opts = { atrk_acct:"lhQPn1QolK10WR", domain:"vs.com",dynamic: true};
+(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=lhQPn1QolK10WR" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- <!— End Alexa Certify Javascript —> -->
 <script language="javascript" src="resources/jquery.min.js?ver=20150901"></script>
 <script type="text/javascript">
 	var basepath = '${ctx}' + "/";
@@ -44,13 +53,11 @@ var _zzid = "g2CiQ0pbhOE";
 	<div class="header">
 		<ul>
 			<li><a href="${forget }" id="a1"></a></li>
-			<!-- <li><a href="javascript: void(0);" id="a2"></a></li> -->
-			<!-- <li><p></p></li> -->
 			<li><h3>用户登录中心</h3></li>
 		</ul>
 		<p id="rightP"><a href="${forget }">返回首页</a></p>
 	</div>
-	<div class="lg_promt"><!-- 提示：配股宝与投资达人已达成战略合作关系，共享了账号系统，投资达人用户可直接登录配股宝，不用重新注册！ --></div>
+	<div class="lg_promt"></div>
 	<div class="center1000 clearfix">
 		<div class="logon-wrap clearfix">
 			<form:form method="post" id="fm1" commandName="${commandName}"
@@ -93,6 +100,6 @@ var _zzid = "g2CiQ0pbhOE";
 	</div>
 	<spring:theme code="cas.javascript.file" var="casJavascriptFile" text="" />
 	<script type="text/javascript" src="<c:url value="${casJavascriptFile}" />"></script>
-	<!-- <span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
+	<span style="display: none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span>
 </body>
 </html>
