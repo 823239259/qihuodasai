@@ -140,7 +140,10 @@
       					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
       					return;
       				}
-      				plus.webview.getWebviewById("quotationMain").reload(); 
+      				var wsreload = plus.webview.getWebviewById("quotationMain");
+      				if(wsreload != null){
+	      				wsreload.reload(); 
+      				}
       				mui.openWindow("../quotation/quotationMain.html","quotationMain");
       				return;
       			
