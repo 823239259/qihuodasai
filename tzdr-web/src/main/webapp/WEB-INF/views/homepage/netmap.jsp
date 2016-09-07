@@ -101,10 +101,7 @@ $(document).ready(function() {
         <dd><a href="${ctx}/help?tab=configuration" target="_blank">实盘申请介绍</a></dd>
     </dl>
     <dl class="map_two last">
-        <dt>关于我们</dt>
         <dd><a href="${ctx}/abort" target="_blank">公司简介</a></dd>
-        <dd><a href="${ctx}/company" target="_blank">公司资质</a></dd>
-        <dd><a href="${ctx}/partner" target="_blank">合作伙伴</a></dd>
         <dd><a href="${ctx}/contact" target="_blank">联系我们</a></dd>
     </dl>
 </div>

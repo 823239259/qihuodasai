@@ -80,6 +80,7 @@ public class LoginAndRegistController {
 
 	private static Object lock = new Object();
 	
+	
 	/**
 	 * 系统注册接口
 	 * @param requestObj
@@ -90,7 +91,6 @@ public class LoginAndRegistController {
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
-		
 		String mobile=requestObj.getMobile();
 		String code=requestObj.getCode();
 		String password=requestObj.getPassword();

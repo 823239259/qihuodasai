@@ -20,12 +20,8 @@
 <%@include file="../common/header.jsp"%>
 <div class="news">
     <div class="news_siderbar">
-       <!--  <h2>关于我们</h2> -->
         <a href="${ctx }/about" >公司简介<span>&gt;</span></a>
-        <%-- <a href="${ctx }/company">公司资质<span>&gt;</span></a>
-        <a href="${ctx }/partner" class="on">合作伙伴<span>&gt;</span></a> --%>
         <a href="${ctx }/contact">联系我们<span>&gt;</span></a>
-        <%-- <a href="${ctx }/companypic">公司展示<span>&gt;</span></a> --%>
     </div>
     <div class="news_mainbar">
         <h2>合作伙伴</h2>
