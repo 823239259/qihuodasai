@@ -217,7 +217,10 @@
 					        }
 					        //插入主力合约
 					        AddTo()
-					    }else if(method == "OnRtnQuote"){	
+					    }else if(method == "OnRspSubscribe"){
+//					    	var MoreData=JSON.parse(evt.data);
+//					    	console.log(JSON.stringify(MoreData));
+					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data);
 					         //更新行情的数据
 //					         console.log(JSON.stringify(evt.data));
@@ -264,6 +267,7 @@
 				};
 				//插入行情的方法
 			 function insertData1(MoreData) {
+//			 	console.log(JSON.stringify(MoreData));
 			        var productName = document.getElementsByClassName("productName");
 			        var CommodityNo = document.getElementsByClassName("CommodityNo");
 			        var LastVolume = document.getElementsByClassName("LastVolume");
