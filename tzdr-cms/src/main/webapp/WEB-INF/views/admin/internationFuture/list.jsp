@@ -452,12 +452,12 @@ function timeConvert(value,rowData,rowIndex) {
 	</div>
 	<!-- window 结算录入信息弹框 -->
 	<div id="inputWin" class="easyui-window" title="录入结果" 
-		style="width:450px;height:250px;display:none;border:none; overflow: hidden;top:4%"
+		style="width:450px;height:250px;display:none;border:none; overflow:scroll;top:4%"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         <form id="inputForm">
-        <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
+        <table id="mainTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
              <tr>
-                <td class="label right">手机号码:</td>
+                <td class="label right" style="width:30px">手机号码:</td>
                 <td>
                    <input id="mobile" name="mobile" class="easyui-textbox" disabled="disabled"  />
                 </td>
@@ -514,7 +514,7 @@ function timeConvert(value,rowData,rowIndex) {
                 <td><span style="color: red;">不能输入负数</span></td>
             </tr>
             
-           <tr style="display: none;" id="mnTradeNumTR">
+           <tr style="display:none;" id="mnTradeNumTR">
                 <td class="label right">迷你纳指交易手数:</td>
                 <td>
                    <input id="mntranActualLever" name="mntranActualLever" class="easyui-validatebox"  data-options=""/>
@@ -556,7 +556,41 @@ function timeConvert(value,rowData,rowIndex) {
                 </td>
                 <td><span style="color: red;">不能输入负数</span></td>
 			</tr>
-
+			<tr style="display: none;" id="hsTradeNumTR">
+                <td class="label right">H股指交易手数:</td>
+                <td>
+                   <input id="hStockMarketLever" name="hStockMarketLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
+	         <tr style="display: none;" id="xHsTradeNumTR">
+                <td class="label right">小H股指交易手数:</td>
+                <td>
+                   <input id="xHStockMarketLever" name="xHStockMarketLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
+			   <tr style="display: none;" id="acTradeNumTR">
+                <td class="label right">美铜交易手数:</td>
+                <td>
+                   <input id="AmeCopperMarketLever" name="AmeCopperMarketLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
+			   <tr style="display: none;" id="asTradeNumTR">
+                <td class="label right">美白银交易手数:</td>
+                <td>
+                   <input id="AmeSilverMarketLever" name="AmeSilverMarketLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
+			   <tr style="display: none;" id="scTradeNumTR">
+                <td class="label right">小原油交易手数:</td>
+                <td>
+                   <input id="smallCrudeOilMarketLever" name="smallCrudeOilMarketLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
             <tr>
                 <td align="center" colspan="3">
                 <a id="btn" href="javascript:void(0);" onclick="inputSave()" class="easyui-linkbutton">提交</a>
@@ -568,7 +602,7 @@ function timeConvert(value,rowData,rowIndex) {
 	</div>
 	<!-- window 交易手数弹框 -->
 	<div id="tradeCountWin" class="easyui-window" title="交易手数" 
-		style="width:600px;height:280px;display:none;border:none; overflow: hidden;top:4%" 
+		style="width:600px;height:350px;display:none;border:none; overflow: hidden;top:4%" 
         data-options="iconCls:'icon-search',modal:true,closed:true">
        <!--  hello ,this is window. -->
        <form id="tradeCountForm">
@@ -602,14 +636,32 @@ function timeConvert(value,rowData,rowIndex) {
         		</tr>
         	</table>
         	<br/>
-        	<table border="0" style="font-size:12px;" class="conn"  width="50%" cellpadding="0" cellspacing="0">
+        	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
         		<tr>
         			<td class="label center">小恒指</td>
         			<td class="label center">美黄金</td>
+        			<td class="label center">H股指</td>
+        			<td class="label center">小H股指</td>
         		</tr>
         		<tr>
         			<td align="center" id='lhsiCount'></td>
 	               	<td align="center" id='agCount'></td>
+	               	<td align="center" id='hsCount'></td>
+	               	<td align="center" id='xhsCount'></td>
+        		</tr>
+        	</table>
+        	<table border="0" style="font-size:12px;" class="conn"  width="75%" cellpadding="0" cellspacing="0">
+        		<tr>
+        			<td class="label center">美铜</td>
+        			<td class="label center">美白银</td>
+        			<td class="label center">小原油</td>
+        			
+        		</tr>
+        		<tr>
+        			<td align="center" id='acCount'></td>
+	               	<td align="center" id='asCount'></td>
+	               	<td align="center" id='scCount'></td>
+	               
         		</tr>
         	</table>
         </form>

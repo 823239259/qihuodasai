@@ -36,9 +36,16 @@ function pass(type,tabs) {
 			$("#nikkeiTranActualLever").val("");
 			$("#hstranActualLever").val("");
 			$("#agtranActualLever").val("");
+			$("#hIndexActualLever").val("");
+			$("#xhIndexActualLever").val("");
+			$("#aCopperActualLever").val("");
+			$("#aSilverActualLever").val("");
+			$("#smaActualLever").val("");
 			$("#passWin").window({title:'添加'});
 		} else if(type==2){
+			
 			var rows = $("#edatagrid").datagrid('getSelections');
+			
 			if (Check.validateSelectItems($("#edatagrid"),1)) {
 				$("#traderBond").val(rows[0].traderBond);
 				$("#traderTotal").val(rows[0].traderTotal);
@@ -57,8 +64,13 @@ function pass(type,tabs) {
 				$("#nikkeiTranActualLever").val(rows[0].nikkeiTranActualLever);
 				$("#hstranActualLever").val(rows[0].hstranActualLever);
 				$("#agtranActualLever").val(rows[0].agtranActualLever);
-				
+				$("#hIndexActualLever").val(rows[0].hIndexActualLever);
+				$("#xhIndexActualLever").val(rows[0].xhIndexActualLever);
+				$("#aCopperActualLever").val(rows[0].aCopperActualLever);
+				$("#aSilverActualLever").val(rows[0].aSilverActualLever);
+				$("#smaActualLever").val(rows[0].smaActualLever);
 				$("#passWin").window({title:'修改'});
+		
 			}else{
 				return;
 			}
@@ -92,6 +104,7 @@ function pass(type,tabs) {
 	
 	
 };
+
 function passSave() {
 	var rows = $("#edatagrid").datagrid('getSelections');
 	
@@ -112,13 +125,20 @@ function passSave() {
 			var nikkeiTranActualLever = $("#nikkeiTranActualLever").val();
 			var hstranActualLever = $("#hstranActualLever").val();
 			var agtranActualLever = $("#agtranActualLever").val();
-			
+			var hIndexActualLever=$("#hIndexActualLever").val();
+			var xhIndexActualLever=$("#xhIndexActualLever").val();
+			var aCopperActualLever=$("#aCopperActualLever").val();
+			var aSilverActualLever=$("#aSilverActualLever").val();
+			var smaActualLever=$("#smaActualLever").val();
+		
+		
 			var parameters = '{}';
 			if(setParameterType==1){
 				parameters = {"traderBond":traderBond,"traderTotal":traderTotal,"lineLoss":lineLoss,"goldenMoney":goldenMoney,"atranActualLever":ATranActualLever,
 						"htranActualLever":HTranActualLever,"ytranActualLever":YTranActualLever,"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
 						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
-						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever};
+						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever,"hIndexActualLever":hIndexActualLever,"xhIndexActualLever":xhIndexActualLever,
+						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/create",
 						parameters,
 						function(data){
@@ -135,7 +155,8 @@ function passSave() {
 						"htranActualLever":HTranActualLever,"ytranActualLever":YTranActualLever,
 						"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
 						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
-						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever};
+						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever,"hIndexActualLever":hIndexActualLever,"xhIndexActualLever":xhIndexActualLever,
+						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/update",
 						parameters,
 						function(data){
@@ -161,29 +182,30 @@ function passSave() {
 			var tradeType=tr;
 			var mainContract = $("#mainContract").val();
 			var price = $("#price").val();
+			var tradTime=$("#tradTime").val();
 			var parameters = '{}';
 			if(setParameterType==1){
-				parameters = {"tradeType":tradeType,"mainContract":mainContract,"price":price};
+				parameters = {"tradeType":tradeType,"mainContract":mainContract,"price":price,"tradTime":tradTime};
 				$.post(Check.rootPath() + "/admin/OutDiskPrice/create",
 						parameters,
 						function(data){
 							if (data.success) {
 								Check.messageBox("提示",data.message);
 								$("#edatagridP").datagrid('reload');
-								passClose() ;
+								passClose();
 							} else {
 								Check.messageBox("提示",data.message,"error");
 							}
 				});
 			} else if(setParameterType==2){
-				parameters = {"id":$rows[0].id,"tradeType":tradeType,"mainContract":mainContract,"price":price};
+				parameters = {"id":$rows[0].id,"tradeType":tradeType,"mainContract":mainContract,"price":price,"tradTime":tradTime};
 				$.post(Check.rootPath() + "/admin/OutDiskPrice/update",
 						parameters,
 						function(data){
 							if (data.success) {
 								Check.messageBox("提示",data.message);
 								$("#edatagridP").datagrid('reload');
-								passClose() ;
+								passClose();
 							} else {
 								Check.messageBox("提示",data.message,"error");
 							}
@@ -227,6 +249,16 @@ function tradeToS(value,row,index){
 		return '小恒指';
 	}else if (value==15){
 		return '美黄金';
+	}else if(value==16){
+		return 'H股指';
+	}else if(value==17){
+		return '小H股指';
+	}else if(value==18){
+		return '美铜';
+	}else if(value==19){
+		return '美白银';
+	}else if(value==20){
+		return '小原油';
 	}
 	
 	// 9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225、14.小恒指、15.美黄金
@@ -291,7 +323,6 @@ $(document).ready(function(){
 							<th field="traderTotal" width="150">总操盘资金（美元）</th>
 							<th field="lineLoss" width="150">亏损平仓线（美元）</th>
 							<th field="goldenMoney" width="150">入金金额（美元）</th>
-							
 							<th field="atranActualLever" width="150" hidden="true">A50交易手数</th>
 							<th field="htranActualLever" width="150" hidden="true">恒指交易手数</th>
 							<th field="ytranActualLever" width="150" hidden="true">原油交易手数</th>
@@ -302,7 +333,11 @@ $(document).ready(function(){
 							<th field="nikkeiTranActualLever" width="150" hidden="true">日经225交易手数</th>
 							<th field="hstranActualLever" width="150" hidden="true">小恒指交易手数</th>
 							<th field="agtranActualLever" width="150" hidden="true">美黄金交易手数</th>
-							
+							<th field="hIndexActualLever" width="150" hidden="true">H股指交易手数</th>
+							<th field="xhIndexActualLever" width="150" hidden="true">小H股指交易手数</th>
+							<th field="aCopperActualLever" width="150" hidden="true">美铜交易手数</th>
+							<th field="aSilverActualLever" width="150" hidden="true">美白银交易手数</th>
+							<th field="smaActualLever" width="150" hidden="true">小原油交易手数</th>
 							<th field="updateTime" width="150" formatter="DateToS">更新时间</th>
 							<th field="updateUser" width="150">操作人</th>
 			            </tr>
@@ -336,8 +371,10 @@ $(document).ready(function(){
 							<th field="tradeType" width="150" sortable="true" formatter="tradeToS">交易品种</th>
 							<th field="mainContract" width="150">主力合约</th>
 							<th field="price" width="150"  formatter="priceToS">价格</th>
+							<th field="tradTime" width="150">交易时间</th>
 							<th field="updateTime" width="150" formatter="DateToS">更新时间</th>
 							<th field="updateUser" width="150">操作人</th>
+							
 			            </tr>
 			        </thead>
    				</table>
@@ -347,7 +384,7 @@ $(document).ready(function(){
 	
 	<!-- 国际综合参数操作弹框-->
 	<div id="passWin" class="easyui-window" title="编辑" 
-		style="width:600px;height:350px;display:none;border:none; overflow: hidden;"
+		style="width:600px;height:380px;display:none;border:none; overflow: hidden;"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         <form id="passForm">
         <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
@@ -429,6 +466,37 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
+             <tr>
+                <td class="label right">H股指交易手数:</td>
+                <td>
+                   <input id="hIndexActualLever" name="hIndexActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td class="label right">小H股指交易手数:</td>
+                <td>
+                   <input id="xhIndexActualLever" name="xhIndexActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td><span ></span></td>
+            </tr>
+                 <tr>
+                <td class="label right">美铜交易手数:</td>
+                <td>
+                   <input id="aCopperActualLever" name="aCopperActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td class="label right">美白银交易手数:</td>
+                <td>
+                   <input id="aSilverActualLever" name="aSilverActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td><span ></span></td>
+            </tr>
+            <tr>
+              </tr>
+                 <tr>
+                <td class="label right">小原油交易手数:</td>
+                <td>
+                   <input id="smaActualLever" name="smaActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+               
+            </tr>
             <tr>
                 <td align="center" colspan="5">
 	               <a id="btn" href="javascript:void(0);" onclick="passSave()" class="easyui-linkbutton">提交</a>
@@ -460,6 +528,11 @@ $(document).ready(function(){
 				    <option value="13">日经225</option>
 				    <option value="14">小恒指</option>
 				    <option value="15">美黄金</option>
+				    <option value="16">H股指</option>
+				    <option value="17">小H股指</option>
+				    <option value="18">美铜</option>
+				    <option value="19">美白银</option>
+				    <option value="20">小原油</option>
 				</select>
                 </td>
                 <td><span ></span></td>
@@ -478,12 +551,21 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
+             <tr>  
+                <td class="label right">交易时间:</td>
+                <td>
+                   <input id="tradTime" name="tradTime" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+                <td><span ></span></td>
+            </tr>
+         
             <tr>
                 <td align="center" colspan="3">
 	               <a id="btn" href="javascript:void(0);" onclick="passSave()" class="easyui-linkbutton">提交</a>
 	               <a id="btn" href="javascript:void(0);" onclick="passClose()" class="easyui-linkbutton">取消</a>
                </td>
             </tr>
+            
         </table>
         </form>
 	</div>

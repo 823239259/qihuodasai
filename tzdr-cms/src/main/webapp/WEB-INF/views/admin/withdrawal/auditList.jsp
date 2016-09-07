@@ -357,6 +357,7 @@
 				<table id="hasAuditData" data-options="toolbar:hasAaudittb"></table>
 			</div>
 			<!-- 线下 -->
+			<shiro:hasPermission name="sys:finance:withdrawAudit:thetrial">
 				<div title="线下转账待审核【初审】" data-options="tools:'#p-tools'"
 				style="padding: 20px;">
 				<div id="preBelowLineAudittb" style="padding: 5px; height: auto">
@@ -467,6 +468,8 @@
 				</div>
 			
 			</div>
+			</shiro:hasPermission>
+			<shiro:hasPermission name="sys:finance:withdrawAudit:review">
 			<!-- 线下 -->
 			<div title="线下转账待审核【复审】" data-options="tools:'#p-tools'"
 				style="padding: 20px;">
@@ -584,6 +587,7 @@
 					</thead>
 				</table>
 			</div>
+			</shiro:hasPermission>
 			<div title="线下转账已审核列表" data-options="tools:'#p-tools'"
 				style="padding: 20px;">
 				<div id="belowLineHasAaudittb" style="padding: 5px; height: auto">
@@ -608,10 +612,8 @@
 										class="Wdate" type="text"
 										onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime6\')}'})" />
 									</td>
-
 								</tr>
 								<tr>
-
 									<td class="label right"><span>提现银行：</span></td>
 									<td><input class="easyui-validatebox"
 										name="search_LIKE_bank"></td>

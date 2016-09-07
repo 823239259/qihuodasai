@@ -614,7 +614,7 @@ public class DrawMoneyController {
 		String prov = request.getParameter("prov");// 省
 		String city = request.getParameter("city");// 市
 		String address = request.getParameter("address");// 具体地址
-		String provinceCity=StringUtil.join(prov,city);
+		String provinceCity=StringUtil.join(prov,city,address);
 		JsonResult jsonResult = new JsonResult(false);
 	
 		if (StringUtil.isNotBlank(card)) {

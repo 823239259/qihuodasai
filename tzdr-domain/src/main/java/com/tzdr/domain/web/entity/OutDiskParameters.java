@@ -2,6 +2,7 @@ package com.tzdr.domain.web.entity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -44,52 +45,94 @@ public class OutDiskParameters extends BaseCrudEntity{
 	 */
 	private Integer atranActualLever;
 	
+	
+	
 	/**
 	 * 恒指交易手数
 	 */
 	private Integer htranActualLever;
+	
+	
 	
 	/**
 	 *原油交易手数
 	 */
 	private Integer ytranActualLever;
 	
+
 	
 	/**
 	 * 迷你纳指交易手数
 	 */
 	private Integer mntranActualLever;
+
 	
 	/**
 	 * 迷你标普交易手数
 	 */
 	private Integer mbtranActualLever;
 	
+	
 	/**
 	 * 德国DAX交易手数
 	 */
 	private Integer daxtranActualLever;
 	
+	
+	
 	/**
 	 * 日经225交易手数
 	 */
 	private Integer nikkeiTranActualLever;
-	
+
 	/**
 	 *迷你道指交易手数
 	 */
 	private Integer mdtranActualLever;
-	
 	/**
-	 * 小恒指
+	 * 小恒指交易手数
 	 */
 	private Integer hstranActualLever;
-	
+
 	/**
-	 * 美黄金
+	 * 美黄金交易手数
 	 */
 	private Integer agtranActualLever;
 
+	/**
+	 * 
+	 * H股指数交易手数
+	 */
+
+	private Integer  hIndexActualLever;
+	
+	/**
+	 * 
+	 * 小H股指数交易手数
+	 */
+	
+	private Integer xhIndexActualLever;
+
+	/**
+	 * 
+	 * 美铜交易手数
+	 */
+	
+	private Integer aCopperActualLever;
+	
+	/**
+	 * 
+	 * 美白银交易手数
+	 */
+
+	private Integer aSilverActualLever;
+	
+	/**
+	 * 
+	 * 小原油交易手数
+	 */
+	
+	private Integer smaActualLever;
 	
 	public BigDecimal getTraderBond() {
 		return traderBond;
@@ -203,7 +246,52 @@ public class OutDiskParameters extends BaseCrudEntity{
 		this.agtranActualLever = agtranActualLever;
 	}
 
+	@Column(name="hIndexActualLever")
+	public Integer gethIndexActualLever() {
+		return hIndexActualLever;
+	}
+
+	public void sethIndexActualLever(Integer hIndexActualLever) {
+		this.hIndexActualLever = hIndexActualLever;
+	}
+
+	@Column(name="xhIndexActualLever")
+	public Integer getxhIndexActualLever() {
+		return xhIndexActualLever;
+	}
+
+	public void setxhIndexActualLever(Integer xhIndexActualLever) {
+		this.xhIndexActualLever = xhIndexActualLever;
+	}
+
+	@Column(name="aCopperActualLever")
+	public Integer getaCopperActualLever() {
+		return aCopperActualLever;
+	}
+
+	public void setaCopperActualLever(Integer aCopperActualLever) {
+		this.aCopperActualLever = aCopperActualLever;
+	}
+
+	@Column(name="aSilverActualLever")
+	public Integer getaSilverActualLever() {
+		return aSilverActualLever;
+	}
+
+	public void setaSilverActualLever(Integer aSilverActualLever) {
+		this.aSilverActualLever = aSilverActualLever;
+	}
+
+	@Column(name="smaActualLever")
+	public Integer getSmaActualLever() {
+		return smaActualLever;
+	}
+
 	
+	public void setSmaActualLever(Integer smaActualLever) {
+		this.smaActualLever = smaActualLever;
+	}
+
 	
 	
 
