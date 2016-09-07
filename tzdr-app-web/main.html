@@ -31,7 +31,6 @@
 		mui.plusReady(function(){
 			if (mui.cacheUser.isLogin()){
 				mui.openWindow("tzdr/quotation/quotationMain.html","quotationMain");
-//				return;
 			}
 			//状态栏设置
 			setstatus();
@@ -171,7 +170,6 @@
 				}
     		);
 		}
-		
 		// 下载wgt文件
 		function downWgt(_callback){
 			plus.nativeUI.showWaiting("下载升级包...");
