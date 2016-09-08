@@ -528,3 +528,11 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 #pwdForm input{
 	text-align: left;
 }
+.loginPassword{
+	line-height: 21px !important;
+	padding-left: 0px!important;
+}
+#drawpassword{
+	text-align: right;
+	padding-right: 40px;
+}

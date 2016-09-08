@@ -189,10 +189,6 @@
 					    ContractSize:ContractSize
 					}
 					socket.onclose = function(evt){
-//						console.log("关闭连接");
-//						if(reconnect != false){
-//							alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
-//						}
 
 					};
 					socket.onmessage = function(evt){ 
@@ -202,10 +198,12 @@
 					    if(method=="OnRspLogin"){
 					    	  sendMessage('QryCommodity',null)
 					    }else if(method == "OnRspQryCommodity"){
+					    	console.log(JSON.stringify(jsonData));
 					        var commoditys = jsonData.Parameters;
 					        var size = commoditys.length;
 					        var setTime=null;			          
 					        for(var i=0;i<size;i++){
+					        	console.log(i);
 					            product.CommodityName[i]=commoditys[i].CommodityName;
 					            product.CommodityNo1[i]=commoditys[i].MainContract;
 					            product.CommodityNo2[i]=commoditys[i].CommodityNo;
@@ -213,14 +211,16 @@
 					           	product.ExchangeNo[i]=commoditys[i].ExchangeNo;
 					           	product.MiniTikeSize[i]=commoditys[i].MiniTikeSize;
 					            product.ContractSize[i]=commoditys[i].ContractSize;
-					            socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
+					           socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 					        }
 					        //插入主力合约
 					        AddTo()
 					    }else if(method == "OnRspSubscribe"){
+//					    	console.log(JSON.stringify(jsonData));
 					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data);
 					         //更新行情的数据
+//					         console.log(JSON.stringify(MoreData));
 					        	insertData1(MoreData);
 					    }
 					};
@@ -292,16 +292,16 @@
 			        }
 			    }
 			document.getElementById("product").addEventListener("tap",function(){
-					socket.close();
-//					reconnect=false;
+				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+				socket.close();
 			});
 			document.getElementById("scheme").addEventListener("tap",function(){
+				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 					socket.close();
-//					reconnect=false;
 			});
 			document.getElementById("account").addEventListener("tap",function(){
+				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 					socket.close();
-//					reconnect=false;
 			});
 			document.getElementById("refresh").addEventListener("tap",function(){
 				var re = plus.webview.getWebviewById("quotationMain");
