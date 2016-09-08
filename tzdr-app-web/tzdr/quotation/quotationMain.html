@@ -160,7 +160,7 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-//				var reconnect=null;
+//				console.log(new Date());
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
@@ -198,6 +198,7 @@
 					    if(method=="OnRspLogin"){
 					    	  sendMessage('QryCommodity',null)
 					    }else if(method == "OnRspQryCommodity"){
+//					    	console.log(new Date());
 					    	console.log(JSON.stringify(jsonData));
 					        var commoditys = jsonData.Parameters;
 					        var size = commoditys.length;
@@ -289,7 +290,8 @@
 			                }
 			
 			            }
-			        }
+			        };
+//			        console.log(new Date());
 			    }
 			document.getElementById("product").addEventListener("tap",function(){
 				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');

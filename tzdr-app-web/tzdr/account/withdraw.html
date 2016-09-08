@@ -38,14 +38,9 @@
     				//打开设置提现密码页面
     				mui.openWindow("withdcode.html");
     		});
-    		
-    		
-    		
     		document.getElementById("drawmoneysub").addEventListener("tap",function(){
     			drawmoneySubmit();
     		});
-    		
-    		
     		//获取默认绑定的银行卡信息
     		mui.app_request("user/withdraw/bank_list",{},
     		function(result){

@@ -59,12 +59,12 @@
 			<div id="slider" class="mui-slider">
 				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>
-					<a class="mui-control-item" id="alipayApp">支付宝充值</a>
+					<!--<a class="mui-control-item" id="alipayApp">支付宝充值</a>-->
 					<a class="mui-control-item" id="bankPay" >银行转账</a>
 				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 				<div class="mui-slider-group" id="itembox">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+					<div id="item1mobile" class="mui-slider-item mui-control-content ">
 						<div id="" class="mui-scroll-wrapper ac_online">
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
@@ -92,7 +92,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="item6mobile" class="mui-slider-item mui-control-content">
+					<!--<div id="item6mobile" class="mui-slider-item mui-control-content">
 						<div id="" class="mui-scroll-wrapper ac_online">
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
@@ -102,7 +102,7 @@
 								<li class="mui-table-view-cell">
 									<label>充值金额</label>
 									<span>元</span>
-									<!--<input type="number" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">-->
+									<!--<input type="number" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 								<input type="number" id="rechargeMoneyAlipayApp" class="mui-input-clear" placeholder="输入金额" data-input-clear="5" >
 								</li>
 							</ul>
@@ -115,12 +115,12 @@
 									<label>支付渠道</label>
 									<img src="../../images/ac_bank.gif" class="ac_bankpic" />
 								</li>
-							</ul>-->
+							</ul>
 							<div class="ac_btn">
 								<button type="button" id="alipayapp-btn" class="mui-btn mui-btn-block lg-btnlogin">立即充值</button>
 							</div>
 						</div>
-					</div>
+					</div>-->
 
 					<!--<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">
 						<div id="" class="mui-scroll-wrapper ac_online">
@@ -215,23 +215,7 @@
 			var scheight = document.documentElement.clientHeight;
 			var infoheihgt = scheight - 44 - 57;
 			item.style.height = infoheihgt + 'px';
-//			alipayApp.addEventListener("tap", function() {
-//				$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"})
-//				$("#item6mobile").addClass("mui-active");
-//				$("#item3mobile").removeClass("mui-active");
-//				//$("#alipayApp").css({"color":"#FFCC33"});
-////				$("#bankPay").removeClass("titleActive");
-//		$("#itembox").css({"-webkit-transform": "translate3d(0px, 0px, 0px) translateZ(0px)", "-webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)","transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
-//			});
-//			bankPay.addEventListener("tap", function() {
-//				$("#sliderProgressBar").css({"transform":"translate3d(100%, 0px, 0px) translateZ(0px)"})
-//				$("#item3mobile").addClass("mui-active");
-//				$("#item6mobile").removeClass("mui-active");
-//				$("#bankPay").addClass("titleActive");
-//				$("#alipayApp").removeClass("titleActive");
-//				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
-//			});
-	mui.init();
+			mui.init();
 			/*mui.init({
 
 		    swipeBack: false, 
@@ -261,8 +245,8 @@
 			  /*document.getElementById("openappliy").addEventListener("tap", function() {
 					plus.runtime.openURL("https://qr.alipay.com/apw1hz7ddal8e7zsfe");
 				});*/
-				document.getElementById("alipayapp-btn").addEventListener("tap", function() {
-					/*mui.app_request('/user/pay/pingplusplus', {
+				/*document.getElementById("alipayapp-btn").addEventListener("tap", function() {
+					mui.app_request('/user/pay/pingplusplus', {
 						"money": 1,
 						"payWay":4
 					}, 
@@ -280,7 +264,7 @@
 							}
 						});
 					}
-					);*/
+					);
 				var money = document.getElementById("rechargeMoneyAlipayApp").value;
 				if(money !== null && money.length > 0 && money >= 1){
 					plus.nativeUI.showWaiting( "正在联系服务器进行支付..." );
@@ -325,7 +309,7 @@
 			              var cb = vText.substring(0,vTextlength - 1);
 			              var chargeBalance = cb.replace(",","");
 			              var chargeAmount = chargeBalance - balance; 
-			              document.getElementById("rechargeMoneyAlipayApp").value = chargeAmount;
+			              document.getElementById("rechargeMoney").value = chargeAmount;
 		              }
 						return;
 					},
@@ -335,9 +319,9 @@
 				);
 
 				tzdr.init.initHearListener();
-				document.getElementById("alipayApp").addEventListener("tap", function() {
-					document.getElementById("alipayApp").href = "#item6mobile";
-				});
+//				document.getElementById("alipayApp").addEventListener("tap", function() {
+//					document.getElementById("alipayApp").href = "#item6mobile";
+//				});
 				document.getElementById("bankPay").addEventListener("tap", function() {
 					document.getElementById("bankPay").href = "#item3mobile";
 				});
@@ -345,7 +329,7 @@
 					document.getElementById("onlinePay").href = "#item1mobile";
 				});
 				//添加充值金额文本框监听
-				document.getElementById("alipayapp-btn").addEventListener('input', function() {
+				document.getElementById("rechargeMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
 						var _length = this.value.length;
 						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
@@ -358,7 +342,6 @@
 						return;
 					}
 				});
-
 				//网银充值“立即充值”操作
 				document.getElementById("recharge-btn").addEventListener("tap", function() {
 					var money = document.getElementById("rechargeMoney").value;
@@ -499,7 +482,6 @@
 					}
 				})
 			}
-
 			/*function getalipayAcount() {
 				mui.app_request("/user/pay/getalipayacount", {}, function(result) {
 					if(mui.isnull(result.data.alipayAcount)) {
@@ -514,7 +496,6 @@
 					return;
 				})
 			};*/
-
 			(function($) {
 				$('.mui-scroll-wrapper').scroll({
 					indicators: true //是否显示滚动条
