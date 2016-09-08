@@ -106,7 +106,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ac_charge { padding-bottom: 0;}
 .ac_tel .mui-input-group .mui-input-row #oldPhone { color: #000;}
 .ac_tel .mui-input-group .mui-input-row #newPhone { color: #000;}
-.ac_tel .mui-input-row input { height: 45px; line-height: 45px;float: left;}
+.ac_tel .mui-input-row input { height: 45px; line-height: 45px;float: left;text-align: left;}
 .ac_charge #segmentedControl { background: #fff; border-bottom: 1px solid #e0e0e0;}
 .ac_charge #segmentedControl a { color: #6a6a6a; }
 .ac_charge #segmentedControl a.mui-active { color: #FFCC33;}
@@ -525,7 +525,6 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 #changePwd{
 	display: none;
 }
-
 #pwdForm input{
 	text-align: left;
 }

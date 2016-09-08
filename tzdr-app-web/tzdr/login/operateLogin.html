@@ -63,12 +63,13 @@
 //					console.log($("#checkBox").val())
 				})
 				$("#account").val(endLoginAccount == null?"":endLoginAccount);
-				$("#password").val(endLoginPassword == null ? "" : endLoginPassword);
+				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
 				/**
 				 * 登录超时处理 
 				 */
+				var loginSetTimeOut = null;
 				function setTimeOutIsLogin(){
-					setTimeout(function(){
+					loginSetTimeOut = setTimeout(function(){
 						if(!islogin){
 							plus.nativeUI.closeWaiting();
 							mui.toast("网络不给力");
@@ -166,6 +167,12 @@
 									plus.nativeUI.closeWaiting();
 								}
 							} 
+						}
+						loginSocket.onclose = function(){
+							if(loginSetTimeOut != null){ 
+								clearTimeout(loginSetTimeOut);
+							}
+							plus.webview.getWebviewById("operateLogin").reload();
 						}
 					}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());

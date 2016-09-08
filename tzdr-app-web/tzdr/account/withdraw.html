@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../css/own.css" />
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script src="../../js/jquery-1.11.3.js"></script>
 	<script>
 		mui.init({
 //		    subpages:[{
@@ -94,11 +95,15 @@
 					document.getElementById("drawpassword").placeholder="输入密码";
 					document.getElementById("drawpassword").removeAttribute("readonly");
 					document.getElementById("drawpassword").off("tap");
+//						$("#drawpassword").off("click");
 //					document.getElementById("changePwd").style.display="block";
 				}else{
 					document.getElementById("drawpassword").placeholder="未设置提现密码";
 					document.getElementById("drawpassword").setAttribute("readonly","readonly");
 //					document.getElementById("changePwd").style.display="none";
+//					$("#drawpassword").on("click",function(){
+//						mui.openWindow("withdcode.html");
+//					})
 					document.getElementById("drawpassword").addEventListener("tap",function(){
 	    				//打开设置提现密码页面
 	    				mui.openWindow("withdcode.html");
@@ -121,7 +126,6 @@
 				mui.toast("不能输入非法字符");
 				return;
 			}
-			
 			if(mui.isnull(balance)){
 				mui.toast("余额不足，请充值！");
 				return;

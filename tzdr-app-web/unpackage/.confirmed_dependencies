@@ -605,7 +605,8 @@
       "css/mui.min.css",
       "css/own.css",
       "js/mui.min.js",
-      "js/common.js"
+      "js/common.js",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -627,7 +628,9 @@
       "js/mui.min.js",
       "js/common.js",
       "images/ac_code.gif",
-      "fonts/mui.ttf"
+      "fonts/mui.ttf",
+      "js/jquery-1.11.3.js",
+      "images/bank/ccb.png"
     ],
     "refer": [
       "tzdr/account/account.html",
