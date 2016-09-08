@@ -32,6 +32,10 @@ public class PromptTypes {
 	 * 充值审核（银行）
 	 */
 	public static final String isBankReCharge = "isBank";
+	/**
+	 * 网银充值
+	 */
+	public static final String isInternetBanking = "isInternetBanking";
 
 	/**
 	 * 线下转账审核
