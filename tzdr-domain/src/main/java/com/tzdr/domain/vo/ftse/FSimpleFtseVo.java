@@ -264,6 +264,7 @@ public class FSimpleFtseVo implements Serializable {
 
 	private BigInteger version;
 
+	@AllowExcel(name = "操作员")
 	private String operator;// 操作员
 
 	public Integer getSource() {
