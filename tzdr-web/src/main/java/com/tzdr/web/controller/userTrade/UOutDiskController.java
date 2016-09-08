@@ -202,11 +202,11 @@ public class UOutDiskController {
 					st.setNikkeiTranFees(outDiskPrice.get(7).getPrice());
 					st.setLhsiTranFees(outDiskPrice.get(8).getPrice());
 					st.setAgTranFees(outDiskPrice.get(9).getPrice());
-					st.sethSTranFees(outDiskPrice.get(11).getPrice());//H股指
-					st.setxHSTranFees(outDiskPrice.get(12).getPrice());//小H股指
-					st.setAmeCTranFees(outDiskPrice.get(13).getPrice());//美铜
-					st.setAmeSTranFees(outDiskPrice.get(14).getPrice());//美白银
-					st.setSmallCTranFees(outDiskPrice.get(15).getPrice());//小原油
+					st.sethSTranFees(outDiskPrice.get(10).getPrice());//H股指
+					st.setxHSTranFees(outDiskPrice.get(11).getPrice());//小H股指
+					st.setAmeCTranFees(outDiskPrice.get(12).getPrice());//美铜
+					st.setAmeSTranFees(outDiskPrice.get(13).getPrice());//美白银
+					st.setSmallCTranFees(outDiskPrice.get(14).getPrice());//小原油
 					
 					// 审核中
 					st.setStateType(1);
