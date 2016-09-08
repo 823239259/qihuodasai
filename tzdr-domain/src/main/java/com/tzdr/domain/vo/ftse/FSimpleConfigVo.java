@@ -106,6 +106,9 @@ public class FSimpleConfigVo implements Serializable {
      * 最后一次的操作内容
      */
     private  String operateContent;
+    
+    
+    
 
 	public String getId() {
 		return id;

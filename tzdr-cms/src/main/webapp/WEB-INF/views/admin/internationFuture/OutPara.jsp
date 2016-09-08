@@ -51,6 +51,7 @@ function pass(type,tabs) {
 				$("#traderTotal").val(rows[0].traderTotal);
 				$("#lineLoss").val(rows[0].lineLoss);
 				$("#goldenMoney").val(rows[0].goldenMoney);
+				$("#tradTime").val(rows[0].tradTime);
 				$("#atranActualLever").val(rows[0].atranActualLever);
 				$("#htranActualLever").val(rows[0].htranActualLever);
 				$("#ytranActualLever").val(rows[0].ytranActualLever);
@@ -83,6 +84,7 @@ function pass(type,tabs) {
 			$("#tradeType_S").combobox('setValue','');
 			$("#mainContract").val("");
 			$("#price").val("");
+			$("#tradTime").val("");
 			$("#passWinP").window({title:'添加'});
 		} else if(type==2){
 			var rows = $("#edatagridP").datagrid('getSelections');
@@ -91,6 +93,7 @@ function pass(type,tabs) {
 				$("#tradeType_S").combobox('select',rows[0].tradeType);
 				$("#mainContract").val(rows[0].mainContract);
 				$("#price").val(rows[0].price);
+				$("#tradTime").val(rows[0].tradTime);
 				$("#passWinP").window({title:'修改'});
 				
 			}else{
