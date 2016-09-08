@@ -88,7 +88,6 @@ public class OutDiskController {
 			resultData.put("ATranActualLever", outDiskParameters.getAtranActualLever());
 			resultData.put("HTranActualLever", outDiskParameters.getHtranActualLever());
 			resultData.put("YTranActualLever", outDiskParameters.getYtranActualLever());
-
 			resultData.put("mbtranActualLever", outDiskParameters.getMbtranActualLever());
 			resultData.put("mntranActualLever", outDiskParameters.getMntranActualLever());
 			resultData.put("mdtranActualLever", outDiskParameters.getMdtranActualLever());
@@ -96,6 +95,11 @@ public class OutDiskController {
 			resultData.put("daxtranActualLever", outDiskParameters.getDaxtranActualLever());
 			resultData.put("hstranActualLever", outDiskParameters.getHstranActualLever());
 			resultData.put("agtranActualLever", outDiskParameters.getAgtranActualLever());
+			resultData.put("hIndexActualLever", outDiskParameters.gethIndexActualLever());
+			resultData.put("xhIndexActualLever", outDiskParameters.getxhIndexActualLever());
+			resultData.put("aCopperActualLever", outDiskParameters.getaCopperActualLever());
+			resultData.put("aSilverActualLever", outDiskParameters.getaSilverActualLever());
+			resultData.put("smaActualLever", outDiskParameters.getSmaActualLever());
 			result = new JsonResult(true, "处理成功！");
 			result.setObj(resultData);
 		}

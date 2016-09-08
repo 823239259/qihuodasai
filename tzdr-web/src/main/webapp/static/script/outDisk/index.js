@@ -39,6 +39,11 @@ function getData(){
 			$("#nikkeiTranActualLever").html(result.obj.nikkeiTranActualLever);
 			$("#hstranActualLever").html(result.obj.hstranActualLever);
 			$("#agtranActualLever").html(result.obj.agtranActualLever);
+			$("#hIndexActualLever").html(result.obj.hIndexActualLever);
+			$("#xhIndexActualLever").html(result.obj.xhIndexActualLever);
+			$("#aCopperActualLever").html(result.obj.aCopperActualLever);
+			$("#aSilverActualLever").html(result.obj.aSilverActualLever);
+			$("#smaActualLever").html(result.obj.smaActualLever);
 		} else {
 			showMsgDialog("提示",result.message);
 		}
