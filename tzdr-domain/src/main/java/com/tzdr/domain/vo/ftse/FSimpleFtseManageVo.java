@@ -301,6 +301,7 @@ public class FSimpleFtseManageVo implements Serializable {
 	/**
 	 * 操作员
 	 */
+    @AllowExcel(name = "操作员")
 	private String operator;
 
 	public Integer getSource() {
@@ -763,19 +764,19 @@ public class FSimpleFtseManageVo implements Serializable {
 		this.operator = operator;
 	}
 
-	public Integer gethStockMarketLever() {
+	public Integer getHStockMarketLever() {
 		return hStockMarketLever;
 	}
 
-	public void sethStockMarketLever(Integer hStockMarketLever) {
+	public void setHStockMarketLever(Integer hStockMarketLever) {
 		this.hStockMarketLever = hStockMarketLever;
 	}
 
-	public Integer getxHStockMarketLever() {
+	public Integer getXHStockMarketLever() {
 		return xHStockMarketLever;
 	}
 
-	public void setxHStockMarketLever(Integer xHStockMarketLever) {
+	public void setXHStockMarketLever(Integer xHStockMarketLever) {
 		this.xHStockMarketLever = xHStockMarketLever;
 	}
 
