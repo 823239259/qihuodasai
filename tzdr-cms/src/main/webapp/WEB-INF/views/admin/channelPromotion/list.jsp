@@ -117,7 +117,7 @@
         </tr>
         <tr>
           <td class="label right">代码</td>
-          <td colspan="2"><input id="addPm" class="easyui-numberbox" name="param" type="text" onkeyup="value=value.replace(/[\W]/g,'')"  style="width: 99%" /></td>
+          <td colspan="2"><input id="addPm" class="easyui-textbox" name="param" type="text" onkeyup="value=value.replace(/[\W]/g,'')"  style="width: 99%" /></td>
         </tr>
         <tr>
           <td align="center" colspan="3">
