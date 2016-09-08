@@ -170,6 +170,31 @@ public class FSimpleFtseVo implements Serializable {
 	 * 美黄金交易手数
 	 */
 	private Integer agTranActualLever;
+	
+	/**
+	 * H股指交易手数
+	 */
+	private Integer hStockMarketLever;
+	
+	/**
+	 * 小H股指交易手数
+	 */
+	private Integer xHStockMarketLever;
+	
+	/**
+	 * 美铜交易手数
+	 */
+	private Integer AmeCopperMarketLever;
+	
+	/**
+	 * 美白银交易手数
+	 */
+	private Integer AmeSilverMarketLever;
+	
+	/**
+	 * 小原油交易手数
+	 */
+	private Integer smallCrudeOilMarketLever;
 
 	/**
 	 * 交易手续费总额
@@ -635,6 +660,46 @@ public class FSimpleFtseVo implements Serializable {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public Integer gethStockMarketLever() {
+		return hStockMarketLever;
+	}
+
+	public void sethStockMarketLever(Integer hStockMarketLever) {
+		this.hStockMarketLever = hStockMarketLever;
+	}
+
+	public Integer getxHStockMarketLever() {
+		return xHStockMarketLever;
+	}
+
+	public void setxHStockMarketLever(Integer xHStockMarketLever) {
+		this.xHStockMarketLever = xHStockMarketLever;
+	}
+
+	public Integer getAmeCopperMarketLever() {
+		return AmeCopperMarketLever;
+	}
+
+	public void setAmeCopperMarketLever(Integer ameCopperMarketLever) {
+		AmeCopperMarketLever = ameCopperMarketLever;
+	}
+
+	public Integer getAmeSilverMarketLever() {
+		return AmeSilverMarketLever;
+	}
+
+	public void setAmeSilverMarketLever(Integer ameSilverMarketLever) {
+		AmeSilverMarketLever = ameSilverMarketLever;
+	}
+
+	public Integer getSmallCrudeOilMarketLever() {
+		return smallCrudeOilMarketLever;
+	}
+
+	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
+		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
 	}
 
 }

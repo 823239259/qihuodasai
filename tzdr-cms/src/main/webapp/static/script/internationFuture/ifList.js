@@ -91,6 +91,7 @@ function input() {
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
 		
 		if (rows[0].businessType == "国际综合"){
+			
 			$("#a50td").html("A50交易手数:");
 			$("#hsiTradeNumTR").show();
 			$("#crudeTradeNumTR").show();
@@ -102,6 +103,11 @@ function input() {
 			$("#nikkeiTradeNumTR").show();
 			$("#lhsiTradeNumTR").show();
 			$("#agTradeNumTR").show();
+			$("#hsTradeNumTR").show();
+			$("#xHsTradeNumTR").show();
+			$("#acTradeNumTR").show();
+			$("#asTradeNumTR").show();
+			$("#scTradeNumTR").show();
 			$("#inputWin").css("height","457px");
 		
 		}else
@@ -117,6 +123,11 @@ function input() {
 			$("#nikkeiTradeNumTR").hide();
 			$("#lhsiTradeNumTR").hide();
 			$("#agTradeNumTR").hide();
+			$("#hsTradeNumTR").hide();
+			$("#xHsTradeNumTR").hide();
+			$("#acTradeNumTR").hide();
+			$("#asTradeNumTR").hide();
+			$("#scTradeNumTR").hide();
 			$("#inputWin").css("height","250px");
 
 		}
@@ -137,6 +148,11 @@ function input() {
 			$("#nikkeiTranActualLever").val("");
 			$("#lhsiTranActualLever").val("");
 			$("#agTranActualLever").val("");
+			$("#hStockMarketLever").val("");
+			$("#xHStockMarketLever").val("");
+			$("#AmeCopperMarketLever").val("");
+			$("#AmeSilverMarketLever").val("");
+			$("#smallCrudeOilMarketLever").val("");
 			$("#inputWin").show();
 			$("#inputWin").window('open');
 		}
@@ -162,7 +178,11 @@ function inputSave() {
 		// 2016-05-17 国际综合中追加小恒指和美黄金 By Ryan.he
 		var lhsiTranActualLever = $("#lhsiTranActualLever").val();
 		var agTranActualLever = $("#agTranActualLever").val();
-
+		var hStockMarketLever=$("#hStockMarketLever").val();
+		var xHStockMarketLever=$("#xHStockMarketLever").val();
+		var AmeCopperMarketLever=$("#AmeCopperMarketLever").val();
+		var AmeSilverMarketLever=$("#AmeSilverMarketLever").val();
+		var smallCrudeOilMarketLever=$("#smallCrudeOilMarketLever").val();
 		if (!profit) {
 			Check.messageBox("提示","请输入对应交易盈亏！");
 			return ;
@@ -173,7 +193,8 @@ function inputSave() {
 			if (!commission || !crudeTranActualLever || !hsiTranActualLever
 					|| !mdtranActualLever || !mbtranActualLever || !daxtranActualLever
 					|| !nikkeiTranActualLever || !mntranActualLever
-					|| !lhsiTranActualLever || !agTranActualLever) {
+					|| !lhsiTranActualLever || !agTranActualLever||!hStockMarketLever||!xHStockMarketLever
+					||!AmeCopperMarketLever||!AmeSilverMarketLever||!smallCrudeOilMarketLever) {
 
 				Check.messageBox("提示","请输入对应交易手数！");
 				return ;
@@ -181,7 +202,8 @@ function inputSave() {
 			if(commission < 0 || crudeTranActualLever < 0 || hsiTranActualLever < 0 
 					|| mdtranActualLever<0 || mbtranActualLever < 0 || daxtranActualLever < 0
 					|| nikkeiTranActualLever < 0 || mntranActualLever < 0
-					|| lhsiTranActualLever < 0 || agTranActualLever < 0) {
+					|| lhsiTranActualLever < 0 || agTranActualLever < 0||hStockMarketLever<0||xHStockMarketLever<0
+					||AmeCopperMarketLever<0||AmeSilverMarketLever<0||smallCrudeOilMarketLever<0) {
 
 				Check.messageBox("提示","输入的数据有误,交易手数不能输入负数！");
 				return;
@@ -201,7 +223,8 @@ function inputSave() {
 				"mdtranActualLever":mdtranActualLever,"mbtranActualLever":mbtranActualLever,
 				"daxtranActualLever":daxtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 				"mntranActualLever":mntranActualLever,"lhsiTranActualLever":lhsiTranActualLever,
-				"agTranActualLever":agTranActualLever} ,
+				"agTranActualLever":agTranActualLever,"hStockMarketLever":hStockMarketLever,"xHStockMarketLever":xHStockMarketLever,
+				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,"smallCrudeOilMarketLever":smallCrudeOilMarketLever} ,
 				function(data){
 					eyWindow.closeProgress();
 					if (data.success) {
@@ -229,6 +252,11 @@ function inputClose() {
 	$("#nikkeiTranActualLever").val("");
 	$("#lhsiTranActualLever").val("");
 	$("#agTranActualLever").val("");
+	$("#hStockMarketLever").val("");
+	$("#xHStockMarketLever").val("");
+	$("#AmeCopperMarketLever").val("");
+	$("#AmeSilverMarketLever").val("");
+	$("#smallCrudeOilMarketLever").val("");
 	$("#inputWin").show();
 	$("#inputWin").window('close');
 };
@@ -319,6 +347,11 @@ function tradeCount() {
 		$('#nikkeiCount').html(filterNull(rows[0].nikkeiTranActualLever));
 		$('#lhsiCount').html(filterNull(rows[0].lhsiTranActualLever));
 		$('#agCount').html(filterNull(rows[0].agTranActualLever));
+		$('#hsCount').html(filterNull(rows[0].hStockMarketLever));
+		$('#xhsCount').html(filterNull(rows[0].xHStockMarketLever));
+		$('#acCount').html(filterNull(rows[0].ameCopperMarketLever));
+		$('#asCount').html(filterNull(rows[0].ameSilverMarketLever));
+		$('#scCount').html(filterNull(rows[0].smallCrudeOilMarketLever));
 		/*$('#a50Count').html(rows[0].tranActualLever);
 		$('#hsiCount').html(rows[0].hsiTranActualLever);
 		$('#crudeCount').html(rows[0].crudeTranActualLever);

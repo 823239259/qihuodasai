@@ -167,6 +167,32 @@ public class FSimpleFtseManageVo implements Serializable {
 	private Integer agTranActualLever;
 
 	/**
+	 * H股指交易手数
+	 */
+	@AllowExcel(name = "H股指交易手数")
+	private Integer hStockMarketLever;
+	/**
+	 * 小H股指交易手数
+	 */
+	@AllowExcel(name = "小H股指交易手数")
+	private Integer xHStockMarketLever;
+	/**
+	 * 美铜交易手数
+	 */
+	@AllowExcel(name = "美铜交易手数")
+	private Integer ameCopperMarketLever;
+	/**
+	 * 美白银交易手数
+	 */
+	@AllowExcel(name = "美白银交易手数")
+	private Integer ameSilverMarketLever;
+	/**
+	 * 小原油交易手数
+	 */
+	@AllowExcel(name = "小原油交易手数")
+	private Integer smallCrudeOilMarketLever;
+	
+	/**
 	 * 交易手续费总额
 	 */
 	@AllowExcel(name = "交易手续费")
@@ -735,6 +761,48 @@ public class FSimpleFtseManageVo implements Serializable {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public Integer gethStockMarketLever() {
+		return hStockMarketLever;
+	}
+
+	public void sethStockMarketLever(Integer hStockMarketLever) {
+		this.hStockMarketLever = hStockMarketLever;
+	}
+
+	public Integer getxHStockMarketLever() {
+		return xHStockMarketLever;
+	}
+
+	public void setxHStockMarketLever(Integer xHStockMarketLever) {
+		this.xHStockMarketLever = xHStockMarketLever;
+	}
+
+
+
+	public Integer getAmeCopperMarketLever() {
+		return ameCopperMarketLever;
+	}
+
+	public void setAmeCopperMarketLever(Integer ameCopperMarketLever) {
+		this.ameCopperMarketLever = ameCopperMarketLever;
+	}
+
+	public Integer getAmeSilverMarketLever() {
+		return ameSilverMarketLever;
+	}
+
+	public void setAmeSilverMarketLever(Integer ameSilverMarketLever) {
+		this.ameSilverMarketLever = ameSilverMarketLever;
+	}
+
+	public Integer getSmallCrudeOilMarketLever() {
+		return smallCrudeOilMarketLever;
+	}
+
+	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
+		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
 	}
 
 }

@@ -122,6 +122,31 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 美黄金交易手续费
 	 */
 	private BigDecimal agTranFees;
+	
+	/**
+	 * H股指交易手续费
+	 */
+	private  BigDecimal hSTranFees;
+	
+	/**
+	 * 小H股指交易手续费
+	 */
+	private  BigDecimal xHSTranFees;
+	
+	/**
+	 * 美铜交易手续费
+	 */
+	private  BigDecimal ameCTranFees;
+	
+	/**
+	 * 美白银交易手续费
+	 */
+	private  BigDecimal ameSTranFees;
+	
+	/**
+	 * 小原油交易手续费
+	 */
+	private  BigDecimal smallCTranFees;
 
 	/**
 	 * 申请时间
@@ -201,6 +226,32 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 美黄金交易手数
 	 */
 	private Integer agTranActualLever;
+	
+	/**
+	 * H股指交易手数
+	 */
+	private Integer hStockMarketLever;
+	
+	/**
+	 * 小H股指交易手数
+	 */
+	private Integer xHStockMarketLever;
+	
+	/**
+	 * 美铜交易手数
+	 */
+	private Integer AmeCopperMarketLever;
+	
+	/**
+	 * 美白银交易手数
+	 */
+	private Integer AmeSilverMarketLever;
+	
+	/**
+	 * 小原油交易手数
+	 */
+	private Integer smallCrudeOilMarketLever;
+
 
 	/**
 	 * 交易手续费总额
@@ -725,6 +776,70 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	}
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+
+	public Integer gethStockMarketLever() {
+		return hStockMarketLever;
+	}
+	public void sethStockMarketLever(Integer hStockMarketLever) {
+		this.hStockMarketLever = hStockMarketLever;
+	}
+	public Integer getxHStockMarketLever() {
+		return xHStockMarketLever;
+	}
+	public void setxHStockMarketLever(Integer xHStockMarketLever) {
+		this.xHStockMarketLever = xHStockMarketLever;
+	}
+	public Integer getAmeCopperMarketLever() {
+		return AmeCopperMarketLever;
+	}
+	public void setAmeCopperMarketLever(Integer ameCopperMarketLever) {
+		AmeCopperMarketLever = ameCopperMarketLever;
+	}
+	public Integer getAmeSilverMarketLever() {
+		return AmeSilverMarketLever;
+	}
+	public void setAmeSilverMarketLever(Integer ameSilverMarketLever) {
+		AmeSilverMarketLever = ameSilverMarketLever;
+	}
+	public Integer getSmallCrudeOilMarketLever() {
+		return smallCrudeOilMarketLever;
+	}
+	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
+		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
+	}
+
+
+	public BigDecimal gethSTranFees() {
+		return hSTranFees;
+	}
+	public void sethSTranFees(BigDecimal hSTranFees) {
+		this.hSTranFees = hSTranFees;
+	}
+	public BigDecimal getxHSTranFees() {
+		return xHSTranFees;
+	}
+	public void setxHSTranFees(BigDecimal xHSTranFees) {
+		this.xHSTranFees = xHSTranFees;
+	}
+	public BigDecimal getAmeCTranFees() {
+		return ameCTranFees;
+	}
+	public void setAmeCTranFees(BigDecimal ameCTranFees) {
+		this.ameCTranFees = ameCTranFees;
+	}
+	public BigDecimal getAmeSTranFees() {
+		return ameSTranFees;
+	}
+	public void setAmeSTranFees(BigDecimal ameSTranFees) {
+		this.ameSTranFees = ameSTranFees;
+	}
+	public BigDecimal getSmallCTranFees() {
+		return smallCTranFees;
+	}
+	public void setSmallCTranFees(BigDecimal smallCTranFees) {
+		this.smallCTranFees = smallCTranFees;
 	}
 
 

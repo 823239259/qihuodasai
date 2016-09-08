@@ -13,7 +13,7 @@
     	mui.init();
     	mui.plusReady(function(){
     		//获取友盟的统计代码
-    		var channel;
+    		/*var channel;
     		if(plus.os.name=="iOS"){
     			mui.getJSON("../../manifest.json",null,function(data){
     				channel=data.plus.distribute.plugins.statics.umeng.appkey_ios;
@@ -26,7 +26,7 @@
     			mui.getJSON("../../manifest.json",null,function(data){
     				channel=data.plus.distribute.plugins.statics.umeng.appkey_android;
     			});
-    		}
+    		}*/
     		//清除遗留数据
     		clearinfo();
     		document.getElementById("back").addEventListener("tap",function(){
@@ -40,13 +40,13 @@
     			getCode();
     		});
     		document.getElementById("reg").addEventListener("tap",function(){
-    			registUser(channel);
+    			registUser();
     		});
     		
     		document.getElementById("tzdr_info").addEventListener("tap",function(){
     			mui.openWindow("../agree/tzdr.html");
     		});
-    	});
+   
     	
     	
     	function clearinfo(){
@@ -90,12 +90,13 @@
       			
       		});
     	}  
-    	function registUser(channel){
+    	function registUser(){
     		var mobile=document.getElementById("account").value;
 			var code=document.getElementById("password").value;
 			var password=document.getElementById("password_confirm").value;
 			var password2=document.getElementById("email").value;//确认密码
 			//这里要对手机号码进行格式校验
+			var channel="57aa88e7e0f55a8ab00023c9";
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("手机号码不正确");
     			return;
@@ -164,7 +165,7 @@
 			
 			
     	};
-    	
+ 	});
     </script>
 </head>
 <body style="background-color: #2B2B2B">	

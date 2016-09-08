@@ -529,7 +529,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					|| null == wellGoldA50.getMdtranActualLever() || null == wellGoldA50.getMntranActualLever()
 					|| null == wellGoldA50.getMbtranActualLever() || null == wellGoldA50.getNikkeiTranActualLever()
 					|| null == wellGoldA50.getDaxtranActualLever() || null == wellGoldA50.getLhsiTranActualLever()
-					|| null == wellGoldA50.getAgTranActualLever()) {
+					|| null == wellGoldA50.getAgTranActualLever()||null==wellGoldA50.gethStockMarketLever()||null==wellGoldA50.getxHStockMarketLever()
+					||null==wellGoldA50.getAmeCopperMarketLever()||null==wellGoldA50.getAmeSilverMarketLever()||null==wellGoldA50.getSmallCrudeOilMarketLever()) {
 				return new JsonResult(false, "交易手数输入有误，请核对后重新输入！");
 			}
 			simpleFtseUserTrade.setCrudeTranActualLever(wellGoldA50.getCrudeTranActualLever()); // 原油交易手数
@@ -542,6 +543,11 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			simpleFtseUserTrade.setDaxtranActualLever(wellGoldA50.getDaxtranActualLever()); // 德国dax交易手数
 			simpleFtseUserTrade.setLhsiTranActualLever(wellGoldA50.getLhsiTranActualLever()); // 小恒指交易手数
 			simpleFtseUserTrade.setAgTranActualLever(wellGoldA50.getAgTranActualLever()); // 美黄金交易手数
+			simpleFtseUserTrade.sethStockMarketLever(wellGoldA50.getxHStockMarketLever());//H股指
+			simpleFtseUserTrade.setxHStockMarketLever(wellGoldA50.getxHStockMarketLever());//小H股指
+			simpleFtseUserTrade.setAmeCopperMarketLever(wellGoldA50.getAmeCopperMarketLever());//美铜
+			simpleFtseUserTrade.setAmeSilverMarketLever(wellGoldA50.getAmeSilverMarketLever());//美白银
+			simpleFtseUserTrade.setSmallCrudeOilMarketLever(wellGoldA50.getSmallCrudeOilMarketLever());//小原油
 		}
 		/**
 		 * 获取汇率
@@ -601,7 +607,21 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					: simpleFtseUserTrade.getAgTranFees();
 			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getAgTranActualLever()).multiply(agTranFees,
 					MathContext.DECIMAL32));
-
+            //计算H股指交易手续费
+			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.gethStockMarketLever())
+					.multiply(simpleFtseUserTrade.getHsiTranFees(), MathContext.DECIMAL32));
+			//计算小H股指交易手续费
+			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getxHStockMarketLever())
+					.multiply(simpleFtseUserTrade.getxHSTranFees(), MathContext.DECIMAL32));
+			//计算美铜交易手续费
+			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getAmeCopperMarketLever())
+					.multiply(simpleFtseUserTrade.getAmeCTranFees(), MathContext.DECIMAL32));
+			//计算美白银交易手续费
+			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getAmeSilverMarketLever())
+					.multiply(simpleFtseUserTrade.getAmeSTranFees(), MathContext.DECIMAL32));
+			//计算小原油交易手续费
+			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getSmallCrudeOilMarketLever())
+					.multiply(simpleFtseUserTrade.getSmallCTranFees(), MathContext.DECIMAL32));
 		}
 
 		// 抵扣券抵扣手续费
@@ -953,7 +973,11 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			sql.append("	userTrade.nikkei_tran_actual_lever as nikkeiTranActualLever,\n");
 			sql.append("	userTrade.lhsi_tran_actual_lever as lhsiTranActualLever,\n");
 			sql.append("	userTrade.ag_tran_actual_lever as agTranActualLever,\n");
-
+			sql.append("	userTrade.h_stock_market_lever as hStockMarketLever,\n");
+			sql.append("	userTrade.xhstock_market_lever as xHStockMarketLever,\n");
+			sql.append("	userTrade.ame_copper_market_lever as ameCopperMarketLever,\n");
+			sql.append("	userTrade.ame_silver_market_lever ameSilverMarketLever,\n");
+			sql.append("	userTrade.small_crude_oil_market_lever smallCrudeOilMarketLever,\n");
 			sql.append("	userTrade.tran_fees as tranFees,\n");
 			sql.append("	userTrade.tran_fees_total as tranFeesTotal,\n");
 			sql.append("	userTrade.discount_money as discountMoney,\n");

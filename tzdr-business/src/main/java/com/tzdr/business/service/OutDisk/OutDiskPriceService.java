@@ -50,6 +50,7 @@ public class OutDiskPriceService extends BaseServiceImpl<OutDiskPrice, OutDiskPr
 		odp.setTradeType(o.getTradeType());
 		odp.setMainContract(o.getMainContract());
 		odp.setPrice(o.getPrice());
+		odp.setTradTime(o.getTradTime());
 		setOperateLog(odp,"修改国际综合价格设置","edit");
 		super.update(odp);
 	}
