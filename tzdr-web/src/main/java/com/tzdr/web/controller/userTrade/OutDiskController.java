@@ -20,15 +20,18 @@ import com.alibaba.fastjson.JSONObject;
 import com.hundsun.t2sdk.common.util.CollectionUtils;
 import com.tzdr.business.service.OutDisk.OutDiskParametersService;
 import com.tzdr.business.service.OutDisk.OutDiskPriceService;
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.common.web.support.JsonResult;
+import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.web.entity.OutDiskParameters;
 import com.tzdr.domain.web.entity.OutDiskPrice;
 import com.tzdr.web.constants.ViewConstants;
+
 /**
  * 
  * <B>说明: 国际综合</B>
- * @author Liu Yang
- * 2016年2月23日
+ * 
+ * @author Liu Yang 2016年2月23日
  */
 @Controller
 @RequestMapping("/outDisk")
@@ -37,47 +40,55 @@ public class OutDiskController {
 	private OutDiskParametersService outDiskParametersService;
 	@Autowired
 	private OutDiskPriceService outDiskPriceService;
-	
+	@Autowired
+	private DataMapService dataMapService;
+
 	@SuppressWarnings("unused")
 	private static Logger log = LoggerFactory.getLogger(OutDiskController.class);
+
 	/**
 	 * 配资页面
+	 * 
 	 * @param modelMap
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value = "/index")
-	public String index(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
 		List<OutDiskParameters> outDiskParameters = outDiskParametersService.findAllOutDiskParameters();
 		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();
+		List<DataMap> dataMap = dataMapService.findByTypeKey("transTime");
 		
 		modelMap.put("outDiskParameters", outDiskParameters);
 		modelMap.put("outDiskPrice", outDiskPrice);
+		modelMap.put("transTime",dataMap.get(0).getValueName());
 		return ViewConstants.OutDiskJsp.INDEX;
 	}
+
 	/**
 	 * 获取配资数据
+	 * 
 	 * @param traderBond
 	 * @return
 	 */
-	@RequestMapping(value = "/data.json" , method = RequestMethod.POST)
+	@RequestMapping(value = "/data.json", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult  showData(@RequestParam BigDecimal traderBond){
+	public JsonResult showData(@RequestParam BigDecimal traderBond) {
 		List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);
-		JSONObject  resultData = new JSONObject();
-		JsonResult  result = null;
-		if(CollectionUtils.isEmpty(outDiskParametersList)){
-			 result = new JsonResult(false, "保证金有误！");
-		}else{
-			OutDiskParameters outDiskParameters= outDiskParametersList.get(0);
+		JSONObject resultData = new JSONObject();
+		JsonResult result = null;
+		if (CollectionUtils.isEmpty(outDiskParametersList)) {
+			result = new JsonResult(false, "保证金有误！");
+		} else {
+			OutDiskParameters outDiskParameters = outDiskParametersList.get(0);
 			resultData.put("traderBond", outDiskParameters.getTraderBond());
 			resultData.put("traderTotal", outDiskParameters.getTraderTotal());
 			resultData.put("lineLoss", outDiskParameters.getLineLoss());
 			resultData.put("ATranActualLever", outDiskParameters.getAtranActualLever());
 			resultData.put("HTranActualLever", outDiskParameters.getHtranActualLever());
 			resultData.put("YTranActualLever", outDiskParameters.getYtranActualLever());
-			
+
 			resultData.put("mbtranActualLever", outDiskParameters.getMbtranActualLever());
 			resultData.put("mntranActualLever", outDiskParameters.getMntranActualLever());
 			resultData.put("mdtranActualLever", outDiskParameters.getMdtranActualLever());
@@ -88,12 +99,7 @@ public class OutDiskController {
 			result = new JsonResult(true, "处理成功！");
 			result.setObj(resultData);
 		}
-		return  result;
+		return result;
 	}
-	
-	
-	
-	
-	
-	
+
 }
