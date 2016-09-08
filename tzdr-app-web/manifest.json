@@ -355,7 +355,8 @@
 					"tzdr/future/list.html",
 					"home.html",
 					"tzdr/account/openUrlPay.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/future/paycp.html"
 				],
 				"priority": 0
 			},
@@ -475,7 +476,12 @@
 				"refer": [
 					"tzdr/account/account.html",
 					"tzdr/account/withdcode.html",
-					"tzdr/account/bankcode.html"
+					"tzdr/account/bankcode.html",
+					"tzdr/future/paycp.html",
+					"tzdr/future/cp.html",
+					"tzdr/future/cn.html",
+					"tzdr/future/hsi.html",
+					"tzdr/future/cl.html"
 				],
 				"priority": 0
 			},
@@ -638,7 +644,8 @@
 				],
 				"refer": [
 					"tzdr/future/pay.html",
-					"tzdr/agree/hsi.html"
+					"tzdr/agree/hsi.html",
+					"home.html"
 				],
 				"priority": 0
 			},
@@ -699,7 +706,8 @@
 					"tzdr/account/account.html",
 					"tzdr/future/paycp.html",
 					"tzdr/agree/cp.html",
-					"tzdr/agree/cpru.html"
+					"tzdr/agree/cpru.html",
+					"home.html"
 				],
 				"priority": 0
 			},

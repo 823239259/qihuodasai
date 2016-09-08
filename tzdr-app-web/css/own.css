@@ -536,3 +536,17 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	text-align: right;
 	padding-right: 40px;
 }
+#modifyPassword{
+	display: inline-block;
+	margin-top: 15px;
+	margin-left: 15px;
+	color:#FFCC33;
+}
+#backPage{
+	color:#000000;
+}
+#backPage i{
+	color:#000000;
+	font-size: 15px;
+	font-style: normal;
+}
