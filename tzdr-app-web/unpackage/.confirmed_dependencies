@@ -1,1088 +1,1088 @@
 {
-	"main.html": {
-		"resources": [
-			"css/own.css",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"images/main.png",
-			"js/common.js",
-			"images/icons/icon180x180.png",
-			"images/icons/LOGO.png",
-			"manifest.json",
-			"/manifest.json"
-		],
-		"refer": [
-			"tzdr/login/login.html",
-			"home.html",
-			"tzdr/login/regist.html",
-			"tzdr/future/list.html",
-			"main.html",
-			"tzdr/account/account.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/accountno.html",
-			"guide.html",
-			"tzdr/quotation/quotationMain.html"
-		]
-	},
-	"tzdr/login/login.html": {
-		"resources": [
-			"js/common.js",
-			"fonts/mui.ttf",
-			"css/own.css",
-			"js/mui.min.js",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"home.html",
-			"tzdr/login/regist.html",
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/login/password.html",
-			"tzdr/quotation/quotationMain.html"
-		]
-	},
-	"home.html": {
-		"resources": [
-			"list.html",
-			"css/own.css",
-			"images/banner.jpg",
-			"js/common.js",
-			"images/icon_03.png",
-			"images/icon_02.png",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"images/icon_01.png",
-			"images/icon_04.png",
-			"fonts/mui.ttf",
-			"images/news.png",
-			"images/newson.png",
-			"images/app_x.png",
-			"images/icon_05.png",
-			"images/banner_load.jpg",
-			"images/app-g.png",
-			"images/app_an.png",
-			"images/icon4.png",
-			"images/icon1.png",
-			"images/icon3.png",
-			"images/icon2.png",
-			"images/1.0.png",
-			"images/2.png",
-			"images/3.png",
-			"images/0.png"
-		],
-		"refer": [
-			"list.html",
-			"tzdr/account/account.html",
-			"tzdr/future/list.html",
-			"tzdr/news/newslist.html",
-			"tzdr/future/cp.html",
-			"tzdr/future/hsi.html",
-			"tzdr/future/cn.html",
-			"tzdr/future/cl.html",
-			"home.html",
-			"main.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/accountno.html",
-			"tzdr/buy/buy.html",
-			"tzdr/future/lhsi.html",
-			"tzdr/scheme.html",
-			"tzdr/quotation/quotationMain.html",
-			"tzdr/quotation/transactionDetails.html",
-			"tzdr/news/news.html"
-		]
-	},
-	"list.html": {
-		"resources": [
-			"images/banner.jpg",
-			"images/icon_03.png",
-			"images/icon_02.png",
-			"fonts/mui.ttf",
-			"images/icon_01.png",
-			"images/icon_04.png"
-		],
-		"refer": []
-	},
-	"tzdr/account/account.html": {
-		"resources": [
-			"images/ac_02.png",
-			"tzdr/commonback.html",
-			"images/ac_04.png",
-			"images/ac_05.png",
-			"images/ac_06.png",
-			"images/ac_01.png",
-			"images/ac_03.png",
-			"js/mui.min.js",
-			"js/common.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"fonts/mui.ttf",
-			"images/3.0.png",
-			"images/0.png",
-			"images/2.png",
-			"images/1.png"
-		],
-		"refer": [
-			"tzdr/commonback.html",
-			"tzdr/account/charge.html",
-			"tzdr/account/fundDetail.html",
-			"tzdr/account/updatePW.html",
-			"tzdr/account/coupon.html",
-			"tzdr/account/verified.html",
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/withdraw.html",
-			"tzdr/account/telphone.html",
-			"tzdr/scheme.html",
-			"tzdr/quotation/quotationMain.html"
-		]
-	},
-	"tzdr/login/regist.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"manifest.json"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/news/newslist.html": {
-		"resources": [
-			"css/own.css",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/common.js"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/news/news.html"
-		]
-	},
-	"tzdr/future/list.html": {
-		"resources": [
-			"css/own.css",
-			"css/mui.min.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"tzdr/future/list_sub.html"
-		],
-		"refer": [
-			"tzdr/future/list_sub.html",
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/future/cp.html": {
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/paycp.html",
-			"tzdr/agree/cp.html",
-			"tzdr/agree/cpru.html"
-		],
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		]
-	},
-	"tzdr/account/charge.html": {
-		"resources": [
-			"images/bank_04.gif",
-			"images/bank_01.gif",
-			"images/ac_bank.gif",
-			"images/bank_03.gif",
-			"images/bank_02.gif",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/jquery-1.11.3.js",
-			"js/pingpp.js",
-			"images/bank1.png"
-		],
-		"refer": [
-			"tzdr/future/list.html",
-			"tzdr/account/pay.html",
-			"home.html",
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/openUrlPay.html",
-			"tzdr/future/paycp.html",
-			"tzdr/account/gopay.html"
-		]
-	},
-	"tzdr/account/pay.html": {
-		"resources": [
-			"tzdr/account/bbpay.html",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"tzdr/account/bbpay.html",
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/account/fundDetail.html": {
-		"resources": [
-			"tzdr/account/fundDetail_sub.html",
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js"
-		],
-		"refer": [
-			"tzdr/account/fundDetail_sub.html",
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/future/list_sub.html": {
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/DetailCp.html",
-			"tzdr/future/DetailHsi.html",
-			"tzdr/future/DetailCn.html",
-			"tzdr/future/DetailCl.html"
-		],
-		"resources": [
-			"js/mui.min.js",
-			"js/common.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"images/list_02.png",
-			"fonts/mui.ttf"
-		]
-	},
-	"tzdr/account/updatePW.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/account/coupon.html": {
-		"resources": [
-			"images/acp_03.gif",
-			"images/acp_02.png",
-			"images/acp_06.gif",
-			"images/acp_05.gif",
-			"images/acp_01.png",
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"images/acp_04.gif",
-			"fonts/mui.ttf",
-			"images/list_02.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/account/verified.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/future/listrg.html": {
-		"href": "tzdr/future/listrg.html",
-		"resources": [
-			"js/mui.min.js",
-			"js/common.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"images/list_02.png",
-			"fonts/mui.ttf",
-			"images/2.0.png",
-			"images/1.png",
-			"images/3.png",
-			"images/0.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/login/regist.html",
-			"tzdr/quotation/quotationMain.html"
-		],
-		"priority": 0
-	},
-	"tzdr/login/password.html": {
-		"href": "tzdr/login/password.html",
-		"resources": [
-			"js/mui.min.js",
-			"js/common.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/bbpay.html": {
-		"href": "tzdr/account/bbpay.html",
-		"resources": [
-			"js/mui.min.js",
-			"js/common.js"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/add.html": {
-		"href": "tzdr/future/add.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/charge.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/end.html": {
-		"href": "tzdr/future/end.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/DetailCp.html": {
-		"href": "tzdr/future/DetailCp.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"images/list_01.png",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/DetailCp.html",
-			"tzdr/future/add.html",
-			"tzdr/future/end.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/DetailHsi.html": {
-		"href": "tzdr/future/DetailHsi.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"images/list_01.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/DetailHsi.html",
-			"tzdr/future/add.html",
-			"tzdr/future/end.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/DetailCn.html": {
-		"href": "tzdr/future/DetailCn.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"images/list_01.png",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/DetailCn.html",
-			"tzdr/future/add.html",
-			"tzdr/future/end.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/DetailCl.html": {
-		"href": "tzdr/future/DetailCl.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"images/list_01.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/add.html",
-			"tzdr/future/DetailCl.html",
-			"tzdr/future/end.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/accountno.html": {
-		"href": "tzdr/account/accountno.html",
-		"resources": [
-			"js/mui.min.js",
-			"js/common.js",
-			"css/mui.min.css",
-			"css/own.css",
-			"images/ac_01.png",
-			"images/ac_02.png",
-			"images/ac_03.png",
-			"images/ac_04.png",
-			"images/ac_05.png",
-			"images/ac_06.png",
-			"images/3.0.png",
-			"fonts/mui.ttf",
-			"images/0.png",
-			"images/2.png",
-			"images/1.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/login/regist.html",
-			"tzdr/quotation/quotationMain.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/withdcode.html": {
-		"href": "tzdr/account/withdcode.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/bankcode.html": {
-		"href": "tzdr/account/bankcode.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/withdraw.html",
-			"tzdr/account/verified.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/withdraw.html": {
-		"href": "tzdr/account/withdraw.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"images/ac_code.gif",
-			"fonts/mui.ttf",
-			"js/jquery-1.11.3.js",
-			"images/bank/ccb.png",
-			"images/bank/psbc.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/account/withdcode.html",
-			"tzdr/account/bankcode.html",
-			"tzdr/account/verified.html",
-			"tzdr/future/paycp.html",
-			"tzdr/future/cp.html",
-			"tzdr/future/cn.html",
-			"tzdr/future/hsi.html",
-			"tzdr/future/cl.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/fundDetail_sub.html": {
-		"href": "tzdr/account/fundDetail_sub.html",
-		"resources": [
-			"js/mui.min.js",
-			"js/common.js",
-			"css/mui.min.css",
-			"css/own.css"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/account/telphone.html": {
-		"href": "tzdr/account/telphone.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/paysuc.html": {
-		"href": "tzdr/future/paysuc.html",
-		"resources": [
-			"images/suc_01.png"
-		],
-		"refer": [],
-		"priority": 0
-	},
-	"tzdr/future/paycp.html": {
-		"href": "tzdr/future/paycp.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/paysuc.html",
-			"tzdr/account/charge.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/pay.html": {
-		"href": "tzdr/future/pay.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/paysuc.html",
-			"tzdr/account/charge.html",
-			"tzdr/future/futurePaySuc.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/hsi.html": {
-		"href": "tzdr/future/hsi.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/pay.html",
-			"tzdr/agree/hsi.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/cn.html": {
-		"href": "tzdr/future/cn.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/pay.html",
-			"tzdr/agree/a50.html",
-			"tzdr/agree/a50ru.html"
-		],
-		"priority": 0
-	},
-	"tzdr/news/news.html": {
-		"href": "tzdr/news/news.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
-		],
-		"priority": 0
-	},
-	"tzdr/future/cl.html": {
-		"href": "tzdr/future/cl.html",
-		"resources": [
-			"css/mui.min.css",
-			"css/own.css",
-			"js/mui.min.js",
-			"js/common.js",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/list.html",
-			"home.html",
-			"tzdr/login/login.html",
-			"tzdr/future/listrg.html",
-			"tzdr/future/pay.html",
-			"tzdr/agree/cl.html",
-			"tzdr/agree/clru.html"
-		],
-		"priority": 0
-	},
-	"tzdr/buy/buy.html": {
-		"resources": [
-			"js/mui.pullToRefresh.js",
-			"images/rank_01.png",
-			"js/mui.pullToRefresh.material.js",
-			"images/buy_up.png",
-			"images/buy_qu.png",
-			"images/rank_03.png",
-			"images/buy_down.png",
-			"images/rank_02.png",
-			"images/buy_win.png",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"home.html"
-		]
-	},
-	"tzdr/future/lhsi.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"tzdr/future/pay.html"
-		]
-	},
-	"tzdr/future/futurePaySuc.html": {
-		"resources": [
-			"images/suc_01.png"
-		],
-		"refer": [
-			"tzdr/future/DetailLhsi.html"
-		]
-	},
-	"tzdr/future/DetailLhsi.html": {
-		"resources": [
-			"images/list_01.png"
-		],
-		"refer": []
-	},
-	"tzdr/scheme.html": {
-		"resources": [
-			"images/list_02.png",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"fonts/mui.ttf",
-			"images/2.0.png",
-			"images/1.png",
-			"images/3.png",
-			"images/0.png",
-			"images/status_02.png",
-			"images/status_04.png",
-			"images/status_03.png"
-		],
-		"refer": [
-			"tzdr/account/account.html",
-			"home.html",
-			"tzdr/quotation/quotationMain.html",
-			"tzdr/future/DetailCn.html",
-			"tzdr/future/DetailHsi.html",
-			"tzdr/future/DetailCp.html"
-		]
-	},
-	"tzdr/account/openUrlPay.html": {
-		"resources": [
-			"css/own.css",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/common.js",
-			"js/jquery-1.11.3.js",
-			"js/pingpp.js"
-		],
-		"refer": []
-	},
-	"guide.html": {
-		"resources": [
-			"images/guide1.png",
-			"fonts/mui.ttf",
-			"images/guide4.png",
-			"images/guide2.png",
-			"images/guide3.png",
-			"main.html"
-		],
-		"refer": [
-			"main.html"
-		]
-	},
-	"tzdr/quotation/quotationMain.html": {
-		"resources": [
-			"images/0.0.png",
-			"js/common.js",
-			"images/1.png",
-			"css/quotation.css",
-			"images/2.png",
-			"css/own.css",
-			"images/3.png",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/common.config.js",
-			"js/jquery-1.11.3.js",
-			"js/jquery.base64.js",
-			"js/util.js"
-		],
-		"refer": [
-			"home.html",
-			"tzdr/quotation/transactionDetails.html",
-			"tzdr/account/account.html",
-			"tzdr/scheme.html",
-			"tzdr/account/accountno.html",
-			"tzdr/future/listrg.html"
-		]
-	},
-	"tzdr/quotation/transactionDetails.html": {
-		"resources": [
-			"js/chart.js",
-			"js/echarts.js",
-			"js/esl.js",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"css/quotation.css",
-			"js/echarts.min (2).js",
-			"js/jquery-1.11.3.js",
-			"js/util.js",
-			"js/trade.data.model.js",
-			"js/jquery.base64.js",
-			"js/market.trade.js",
-			"js/trade.send.js",
-			"js/allChart.js",
-			"js/trade.js",
-			"js/reconnecting-websocket.min.js",
-			"js/reconnecting-websocket.js",
-			"js/common.config.js"
-		],
-		"refer": [
-			"tzdr/quotation/trade.html",
-			"tzdr/login/operateLogin.html",
-			"tzdr/quotation/quotationMain.html"
-		]
-	},
-	"tzdr/quotation/trade.html": {
-		"resources": [
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"css/quotation.css",
-			"js/trade.market.js",
-			"js/util.js",
-			"js/jquery-1.11.3.js",
-			"js/trade.js",
-			"js/trade.data.model.js",
-			"js/jquery.base64.js",
-			"js/trade.send.js"
-		],
-		"refer": []
-	},
-	"tzdr/login/operateLogin.html": {
-		"resources": [
-			"js/common.js",
-			"js/util.js",
-			"js/mui.min.js",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/jquery.base64.js",
-			"css/quotation.css",
-			"js/trade.send.js",
-			"js/common.config.js"
-		],
-		"refer": [
-			"tzdr/future/cl.html",
-			"tzdr/future/cn.html",
-			"tzdr/quotation/transactionDetails.html",
-			"tzdr/agree/tradingMarket.html",
-			"tzdr/future/hsi.html"
-		]
-	},
-	"tzdr/agree/cpru.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tzdr/agree/clru.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tzdr/agree/cl.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tzdr/agree/hsi.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tzdr/agree/a50.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tzdr/agree/a50ru.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"tzdr/agree/cp.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	}
+  "main.html": {
+    "resources": [
+      "css/own.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/main.png",
+      "js/common.js",
+      "images/icons/icon180x180.png",
+      "images/icons/LOGO.png",
+      "manifest.json",
+      "/manifest.json"
+    ],
+    "refer": [
+      "tzdr/login/login.html",
+      "home.html",
+      "tzdr/login/regist.html",
+      "tzdr/future/list.html",
+      "main.html",
+      "tzdr/account/account.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/accountno.html",
+      "guide.html",
+      "tzdr/quotation/quotationMain.html"
+    ]
+  },
+  "tzdr/login/login.html": {
+    "resources": [
+      "js/common.js",
+      "fonts/mui.ttf",
+      "css/own.css",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "home.html",
+      "tzdr/login/regist.html",
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/login/password.html",
+      "tzdr/quotation/quotationMain.html"
+    ]
+  },
+  "home.html": {
+    "resources": [
+      "list.html",
+      "css/own.css",
+      "images/banner.jpg",
+      "js/common.js",
+      "images/icon_03.png",
+      "images/icon_02.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/icon_01.png",
+      "images/icon_04.png",
+      "fonts/mui.ttf",
+      "images/news.png",
+      "images/newson.png",
+      "images/app_x.png",
+      "images/icon_05.png",
+      "images/banner_load.jpg",
+      "images/app-g.png",
+      "images/app_an.png",
+      "images/icon4.png",
+      "images/icon1.png",
+      "images/icon3.png",
+      "images/icon2.png",
+      "images/1.0.png",
+      "images/2.png",
+      "images/3.png",
+      "images/0.png"
+    ],
+    "refer": [
+      "list.html",
+      "tzdr/account/account.html",
+      "tzdr/future/list.html",
+      "tzdr/news/newslist.html",
+      "tzdr/future/cp.html",
+      "tzdr/future/hsi.html",
+      "tzdr/future/cn.html",
+      "tzdr/future/cl.html",
+      "home.html",
+      "main.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/accountno.html",
+      "tzdr/buy/buy.html",
+      "tzdr/future/lhsi.html",
+      "tzdr/scheme.html",
+      "tzdr/quotation/quotationMain.html",
+      "tzdr/quotation/transactionDetails.html",
+      "tzdr/news/news.html"
+    ]
+  },
+  "list.html": {
+    "resources": [
+      "images/banner.jpg",
+      "images/icon_03.png",
+      "images/icon_02.png",
+      "fonts/mui.ttf",
+      "images/icon_01.png",
+      "images/icon_04.png"
+    ],
+    "refer": []
+  },
+  "tzdr/account/account.html": {
+    "resources": [
+      "images/ac_02.png",
+      "tzdr/commonback.html",
+      "images/ac_04.png",
+      "images/ac_05.png",
+      "images/ac_06.png",
+      "images/ac_01.png",
+      "images/ac_03.png",
+      "js/mui.min.js",
+      "js/common.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "fonts/mui.ttf",
+      "images/3.0.png",
+      "images/0.png",
+      "images/2.png",
+      "images/1.png"
+    ],
+    "refer": [
+      "tzdr/commonback.html",
+      "tzdr/account/charge.html",
+      "tzdr/account/fundDetail.html",
+      "tzdr/account/updatePW.html",
+      "tzdr/account/coupon.html",
+      "tzdr/account/verified.html",
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/withdraw.html",
+      "tzdr/account/telphone.html",
+      "tzdr/scheme.html",
+      "tzdr/quotation/quotationMain.html"
+    ]
+  },
+  "tzdr/login/regist.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "manifest.json"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/news/newslist.html": {
+    "resources": [
+      "css/own.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/common.js"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/news/news.html"
+    ]
+  },
+  "tzdr/future/list.html": {
+    "resources": [
+      "css/own.css",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "tzdr/future/list_sub.html"
+    ],
+    "refer": [
+      "tzdr/future/list_sub.html",
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/future/cp.html": {
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/paycp.html",
+      "tzdr/agree/cp.html",
+      "tzdr/agree/cpru.html"
+    ],
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ]
+  },
+  "tzdr/account/charge.html": {
+    "resources": [
+      "images/bank_04.gif",
+      "images/bank_01.gif",
+      "images/ac_bank.gif",
+      "images/bank_03.gif",
+      "images/bank_02.gif",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/jquery-1.11.3.js",
+      "js/pingpp.js",
+      "images/bank1.png"
+    ],
+    "refer": [
+      "tzdr/future/list.html",
+      "tzdr/account/pay.html",
+      "home.html",
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/openUrlPay.html",
+      "tzdr/future/paycp.html",
+      "tzdr/account/gopay.html"
+    ]
+  },
+  "tzdr/account/pay.html": {
+    "resources": [
+      "tzdr/account/bbpay.html",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "tzdr/account/bbpay.html",
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/account/fundDetail.html": {
+    "resources": [
+      "tzdr/account/fundDetail_sub.html",
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js"
+    ],
+    "refer": [
+      "tzdr/account/fundDetail_sub.html",
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/future/list_sub.html": {
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/DetailCp.html",
+      "tzdr/future/DetailHsi.html",
+      "tzdr/future/DetailCn.html",
+      "tzdr/future/DetailCl.html"
+    ],
+    "resources": [
+      "js/mui.min.js",
+      "js/common.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "images/list_02.png",
+      "fonts/mui.ttf"
+    ]
+  },
+  "tzdr/account/updatePW.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/account/coupon.html": {
+    "resources": [
+      "images/acp_03.gif",
+      "images/acp_02.png",
+      "images/acp_06.gif",
+      "images/acp_05.gif",
+      "images/acp_01.png",
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "images/acp_04.gif",
+      "fonts/mui.ttf",
+      "images/list_02.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/account/verified.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/future/listrg.html": {
+    "href": "tzdr/future/listrg.html",
+    "resources": [
+      "js/mui.min.js",
+      "js/common.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "images/list_02.png",
+      "fonts/mui.ttf",
+      "images/2.0.png",
+      "images/1.png",
+      "images/3.png",
+      "images/0.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/login/regist.html",
+      "tzdr/quotation/quotationMain.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/login/password.html": {
+    "href": "tzdr/login/password.html",
+    "resources": [
+      "js/mui.min.js",
+      "js/common.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/bbpay.html": {
+    "href": "tzdr/account/bbpay.html",
+    "resources": [
+      "js/mui.min.js",
+      "js/common.js"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/add.html": {
+    "href": "tzdr/future/add.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/charge.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/end.html": {
+    "href": "tzdr/future/end.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/DetailCp.html": {
+    "href": "tzdr/future/DetailCp.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "images/list_01.png",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/DetailCp.html",
+      "tzdr/future/add.html",
+      "tzdr/future/end.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/DetailHsi.html": {
+    "href": "tzdr/future/DetailHsi.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "images/list_01.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/DetailHsi.html",
+      "tzdr/future/add.html",
+      "tzdr/future/end.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/DetailCn.html": {
+    "href": "tzdr/future/DetailCn.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "images/list_01.png",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/DetailCn.html",
+      "tzdr/future/add.html",
+      "tzdr/future/end.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/DetailCl.html": {
+    "href": "tzdr/future/DetailCl.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "images/list_01.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/add.html",
+      "tzdr/future/DetailCl.html",
+      "tzdr/future/end.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/accountno.html": {
+    "href": "tzdr/account/accountno.html",
+    "resources": [
+      "js/mui.min.js",
+      "js/common.js",
+      "css/mui.min.css",
+      "css/own.css",
+      "images/ac_01.png",
+      "images/ac_02.png",
+      "images/ac_03.png",
+      "images/ac_04.png",
+      "images/ac_05.png",
+      "images/ac_06.png",
+      "images/3.0.png",
+      "fonts/mui.ttf",
+      "images/0.png",
+      "images/2.png",
+      "images/1.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/login/regist.html",
+      "tzdr/quotation/quotationMain.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/withdcode.html": {
+    "href": "tzdr/account/withdcode.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/bankcode.html": {
+    "href": "tzdr/account/bankcode.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/withdraw.html",
+      "tzdr/account/verified.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/withdraw.html": {
+    "href": "tzdr/account/withdraw.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "images/ac_code.gif",
+      "fonts/mui.ttf",
+      "js/jquery-1.11.3.js",
+      "images/bank/ccb.png",
+      "images/bank/psbc.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/account/withdcode.html",
+      "tzdr/account/bankcode.html",
+      "tzdr/account/verified.html",
+      "tzdr/future/paycp.html",
+      "tzdr/future/cp.html",
+      "tzdr/future/cn.html",
+      "tzdr/future/hsi.html",
+      "tzdr/future/cl.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/fundDetail_sub.html": {
+    "href": "tzdr/account/fundDetail_sub.html",
+    "resources": [
+      "js/mui.min.js",
+      "js/common.js",
+      "css/mui.min.css",
+      "css/own.css"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/account/telphone.html": {
+    "href": "tzdr/account/telphone.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/paysuc.html": {
+    "href": "tzdr/future/paysuc.html",
+    "resources": [
+      "images/suc_01.png"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "tzdr/future/paycp.html": {
+    "href": "tzdr/future/paycp.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/paysuc.html",
+      "tzdr/account/charge.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/pay.html": {
+    "href": "tzdr/future/pay.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/paysuc.html",
+      "tzdr/account/charge.html",
+      "tzdr/future/futurePaySuc.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/hsi.html": {
+    "href": "tzdr/future/hsi.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/pay.html",
+      "tzdr/agree/hsi.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/cn.html": {
+    "href": "tzdr/future/cn.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/pay.html",
+      "tzdr/agree/a50.html",
+      "tzdr/agree/a50ru.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/news/news.html": {
+    "href": "tzdr/news/news.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/future/cl.html": {
+    "href": "tzdr/future/cl.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/own.css",
+      "js/mui.min.js",
+      "js/common.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/list.html",
+      "home.html",
+      "tzdr/login/login.html",
+      "tzdr/future/listrg.html",
+      "tzdr/future/pay.html",
+      "tzdr/agree/cl.html",
+      "tzdr/agree/clru.html"
+    ],
+    "priority": 0
+  },
+  "tzdr/buy/buy.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "images/rank_01.png",
+      "js/mui.pullToRefresh.material.js",
+      "images/buy_up.png",
+      "images/buy_qu.png",
+      "images/rank_03.png",
+      "images/buy_down.png",
+      "images/rank_02.png",
+      "images/buy_win.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "home.html"
+    ]
+  },
+  "tzdr/future/lhsi.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "tzdr/future/pay.html"
+    ]
+  },
+  "tzdr/future/futurePaySuc.html": {
+    "resources": [
+      "images/suc_01.png"
+    ],
+    "refer": [
+      "tzdr/future/DetailLhsi.html"
+    ]
+  },
+  "tzdr/future/DetailLhsi.html": {
+    "resources": [
+      "images/list_01.png"
+    ],
+    "refer": []
+  },
+  "tzdr/scheme.html": {
+    "resources": [
+      "images/list_02.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "images/2.0.png",
+      "images/1.png",
+      "images/3.png",
+      "images/0.png",
+      "images/status_02.png",
+      "images/status_04.png",
+      "images/status_03.png"
+    ],
+    "refer": [
+      "tzdr/account/account.html",
+      "home.html",
+      "tzdr/quotation/quotationMain.html",
+      "tzdr/future/DetailCn.html",
+      "tzdr/future/DetailHsi.html",
+      "tzdr/future/DetailCp.html"
+    ]
+  },
+  "tzdr/account/openUrlPay.html": {
+    "resources": [
+      "css/own.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/jquery-1.11.3.js",
+      "js/pingpp.js"
+    ],
+    "refer": []
+  },
+  "guide.html": {
+    "resources": [
+      "images/guide1.png",
+      "fonts/mui.ttf",
+      "images/guide4.png",
+      "images/guide2.png",
+      "images/guide3.png",
+      "main.html"
+    ],
+    "refer": [
+      "main.html"
+    ]
+  },
+  "tzdr/quotation/quotationMain.html": {
+    "resources": [
+      "images/0.0.png",
+      "js/common.js",
+      "images/1.png",
+      "css/quotation.css",
+      "images/2.png",
+      "css/own.css",
+      "images/3.png",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/common.config.js",
+      "js/jquery-1.11.3.js",
+      "js/jquery.base64.js",
+      "js/util.js"
+    ],
+    "refer": [
+      "home.html",
+      "tzdr/quotation/transactionDetails.html",
+      "tzdr/account/account.html",
+      "tzdr/scheme.html",
+      "tzdr/account/accountno.html",
+      "tzdr/future/listrg.html"
+    ]
+  },
+  "tzdr/quotation/transactionDetails.html": {
+    "resources": [
+      "js/chart.js",
+      "js/echarts.js",
+      "js/esl.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/quotation.css",
+      "js/echarts.min (2).js",
+      "js/jquery-1.11.3.js",
+      "js/util.js",
+      "js/trade.data.model.js",
+      "js/jquery.base64.js",
+      "js/market.trade.js",
+      "js/trade.send.js",
+      "js/allChart.js",
+      "js/trade.js",
+      "js/reconnecting-websocket.min.js",
+      "js/reconnecting-websocket.js",
+      "js/common.config.js"
+    ],
+    "refer": [
+      "tzdr/quotation/trade.html",
+      "tzdr/login/operateLogin.html",
+      "tzdr/quotation/quotationMain.html"
+    ]
+  },
+  "tzdr/quotation/trade.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/quotation.css",
+      "js/trade.market.js",
+      "js/util.js",
+      "js/jquery-1.11.3.js",
+      "js/trade.js",
+      "js/trade.data.model.js",
+      "js/jquery.base64.js",
+      "js/trade.send.js"
+    ],
+    "refer": []
+  },
+  "tzdr/login/operateLogin.html": {
+    "resources": [
+      "js/common.js",
+      "js/util.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/jquery.base64.js",
+      "css/quotation.css",
+      "js/trade.send.js",
+      "js/common.config.js"
+    ],
+    "refer": [
+      "tzdr/future/cl.html",
+      "tzdr/future/cn.html",
+      "tzdr/quotation/transactionDetails.html",
+      "tzdr/agree/tradingMarket.html",
+      "tzdr/future/hsi.html"
+    ]
+  },
+  "tzdr/agree/cpru.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/agree/clru.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/agree/cl.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/agree/hsi.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/agree/a50.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/agree/a50ru.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/agree/cp.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  }
 }
