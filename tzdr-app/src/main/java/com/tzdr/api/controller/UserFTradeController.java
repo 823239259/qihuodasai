@@ -187,7 +187,7 @@ public class UserFTradeController {
 		}
 		
 		fTradeService.addbond(wuser, fSimpleFtseUserTrade, payMoney);  //追加保证金
-		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
+		messagePromptService.sendMessage(PromptTypes.isAddBond, wuser.getMobile());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful addBond",null);
 	}
 	
@@ -363,12 +363,12 @@ public class UserFTradeController {
 		//交易费
 		BigDecimal totalTranFees = new BigDecimal(DataConstant.ZERO).add(fSimpleConfig.getTranFees());
 		// 如果是恒指获取配置的固定手续费
-		 if (BusinessTypeEnum.HSI.getValue()==businessType){
+		/* if (BusinessTypeEnum.HSI.getValue()==businessType){
 			 String hsiTranFees = MessageUtils.message("tzdr.app.hsi.tran.fees");
 			 if (StringUtils.isNotBlank(hsiTranFees)){
 				 totalTranFees= new BigDecimal(hsiTranFees);
 			 }
-		 }
+		 }*/
 		 
 		BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString());
 		// 验证代金券
