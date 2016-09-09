@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
 	<!-- <meta name="viewport" content="user-scalable=no" /> -->
-	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
+	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台【官网】</title>
 	<meta name="keywords" content="维胜,期货,国际期货,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,无息配资,都城投资,投资达人,A50交易,多空多头空头,投机套保套利,外盘期货公司,国际期货开户,国际期货公司,外盘期货交易模拟软件"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 	<%
