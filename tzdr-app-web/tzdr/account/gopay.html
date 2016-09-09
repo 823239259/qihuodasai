@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>国付宝支付</title>
+<link rel="stylesheet" href="../../css/own.css" />
 <script src="../../js/mui.min.js"></script>
  <script src="../../js/common.js"></script>
 <link rel="stylesheet" href="../../css/mui.min.css" />
@@ -34,12 +35,26 @@
 		$("input[name = isRepeatSubmit]").val(data.isRepeatSubmit);
 		$("input[name = signValue]").val(data.signValue);
 		$("#form").submit(); 	
+		document.getElementById("back").addEventListener("tap",function(){
+			mui.back();
+		})
+//		document.getElementById("back").addEventListener("tap",function(){
+//			var backPage=plus.storage.getItem("backPage");
+//			if(backPage==null || backPage==undefined){
+//				mui.back();
+//			}else{
+//				mui.openWindow({
+//					url:"../future/"+backPage
+//					id:backPage
+//				})
+//			}
+//		});
 	});
 	
 </script>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav own-topbg">
+	<header class="mui-bar mui-bar-nav own-topbg" style="background-color: #FFCC33;">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 	</header>
 	<form action="https://gateway.gopay.com.cn/Trans/MobileClientAction.do" method="POST" id = "form" style="display: none;"> 

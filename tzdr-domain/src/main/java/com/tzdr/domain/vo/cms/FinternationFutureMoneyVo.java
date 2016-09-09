@@ -97,6 +97,7 @@ public class FinternationFutureMoneyVo implements Serializable {
 	@AllowExcel(name="平台来源")
 	private String sourceStr;
 	
+	@AllowExcel(name="操作员")
 	private String operator;//操作员
 	
 	public Integer getSource() {

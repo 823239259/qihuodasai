@@ -170,12 +170,12 @@ public class FSimpleFtseManageVo implements Serializable {
 	 * H股指交易手数
 	 */
 	@AllowExcel(name = "H股指交易手数")
-	private Integer hStockMarketLever;
+	private Integer heStockMarketLever;
 	/**
 	 * 小H股指交易手数
 	 */
 	@AllowExcel(name = "小H股指交易手数")
-	private Integer xHStockMarketLever;
+	private Integer xhStockMarketLever;
 	/**
 	 * 美铜交易手数
 	 */
@@ -301,6 +301,7 @@ public class FSimpleFtseManageVo implements Serializable {
 	/**
 	 * 操作员
 	 */
+    @AllowExcel(name = "操作员")
 	private String operator;
 
 	public Integer getSource() {
@@ -763,23 +764,24 @@ public class FSimpleFtseManageVo implements Serializable {
 		this.operator = operator;
 	}
 
-	public Integer gethStockMarketLever() {
-		return hStockMarketLever;
+
+
+
+	public Integer getHeStockMarketLever() {
+		return heStockMarketLever;
 	}
 
-	public void sethStockMarketLever(Integer hStockMarketLever) {
-		this.hStockMarketLever = hStockMarketLever;
+	public void setHeStockMarketLever(Integer heStockMarketLever) {
+		this.heStockMarketLever = heStockMarketLever;
 	}
 
-	public Integer getxHStockMarketLever() {
-		return xHStockMarketLever;
+	public Integer getXhStockMarketLever() {
+		return xhStockMarketLever;
 	}
 
-	public void setxHStockMarketLever(Integer xHStockMarketLever) {
-		this.xHStockMarketLever = xHStockMarketLever;
+	public void setXhStockMarketLever(Integer xhStockMarketLever) {
+		this.xhStockMarketLever = xhStockMarketLever;
 	}
-
-
 
 	public Integer getAmeCopperMarketLever() {
 		return ameCopperMarketLever;

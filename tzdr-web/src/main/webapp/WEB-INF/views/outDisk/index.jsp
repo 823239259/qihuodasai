@@ -34,7 +34,7 @@
     </div>
     <div class="capital_ctn cpx_ctn">
         <div class="cpx_main">
-            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘10种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
+            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘15种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
             <ul class="cplx_mianlist">
             <c:forEach items="${outDiskParameters}" var="outDiskParameters" varStatus="status">
               		<c:choose>
@@ -156,7 +156,7 @@
                     <td>H股指数</td>
                     <td>${outDiskPrice[10].mainContract}</td>
                     <td>${outDiskPrice[10].tradTime}</td>
-                    <td>只交易H股指数时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].hIndexActualLever}</i>手</td>
+                    <td>只交易H股指数时，初始最大可持仓<i id='hIndexActualLever'>${outDiskParameters[0].hIndexActualLever}</i>手</td>
                     <td><i>${outDiskPrice[10].price}</i>元/手</td>
                 </tr>
                 
@@ -164,7 +164,7 @@
                     <td>小H股指数</td>
                     <td>${outDiskPrice[11].mainContract}</td>
                     <td>${outDiskPrice[11].tradTime}</td>
-                    <td>只交易日经225时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].xhIndexActualLever}</i>手</td>
+                    <td>只交易日经225时，初始最大可持仓<i id='xhIndexActualLever'>${outDiskParameters[0].xhIndexActualLever}</i>手</td>
                     <td><i>${outDiskPrice[11].price}</i>元/手</td>
                 </tr>
                 
@@ -172,7 +172,7 @@
                     <td>美铜</td>
                     <td>${outDiskPrice[12].mainContract}</td>
                     <td>${outDiskPrice[12].tradTime}</td>
-                    <td>只交易美铜时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].aCopperActualLever}</i>手</td>
+                    <td>只交易美铜时，初始最大可持仓<i id='aCopperActualLever'>${outDiskParameters[0].aCopperActualLever}</i>手</td>
                     <td><i>${outDiskPrice[12].price}</i>元/手</td>
                 </tr>
                 
@@ -180,7 +180,7 @@
                     <td>美白银</td>
                     <td>${outDiskPrice[13].mainContract}</td>
                     <td>${outDiskPrice[13].tradTime}</td>
-                    <td>只交美白银时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].aSilverActualLever}</i>手</td>
+                    <td>只交美白银时，初始最大可持仓<i id='aSilverActualLever'>${outDiskParameters[0].aSilverActualLever}</i>手</td>
                     <td><i>${outDiskPrice[13].price}</i>元/手</td>
                 </tr>
                 
@@ -188,7 +188,7 @@
                     <td>小原油</td>
                     <td>${outDiskPrice[14].mainContract}</td>
                     <td>${outDiskPrice[14].tradTime}</td>
-                    <td>只交小原油时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].smaActualLever}</i>手</td>
+                    <td>只交小原油时，初始最大可持仓<i id='smaActualLever'>${outDiskParameters[0].smaActualLever}</i>手</td>
                     <td><i>${outDiskPrice[14].price}</i>元/手</td>
                 </tr>
                 
