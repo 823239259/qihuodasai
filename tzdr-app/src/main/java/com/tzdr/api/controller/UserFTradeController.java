@@ -487,6 +487,11 @@ public class UserFTradeController {
 		fSimpleFtseUserTrade.setNikkeiTranFees(outDiskPrice.get(7).getPrice());
 		fSimpleFtseUserTrade.setLhsiTranFees(outDiskPrice.get(8).getPrice());
 		fSimpleFtseUserTrade.setAgTranFees(outDiskPrice.get(9).getPrice());
+		fSimpleFtseUserTrade.sethSTranFees(outDiskPrice.get(10).getPrice());
+		fSimpleFtseUserTrade.setxHSTranFees(outDiskPrice.get(11).getPrice());
+		fSimpleFtseUserTrade.setAmeCTranFees(outDiskPrice.get(12).getPrice());
+		fSimpleFtseUserTrade.setAmeSTranFees(outDiskPrice.get(13).getPrice());
+		fSimpleFtseUserTrade.setSmallCTranFees(outDiskPrice.get(14).getPrice());
 		//审核中
 		fSimpleFtseUserTrade.setStateType(1);
 		fSimpleFtseUserTrade.setBusinessType(businessType); 
