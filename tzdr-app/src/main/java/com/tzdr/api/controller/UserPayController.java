@@ -232,7 +232,7 @@ public class UserPayController {
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"Top-up amount can only keep 2 decimal places");
 		}
 		String money = String.valueOf(goPaymoney);
-		WUser user = payService.getUser("ff80808156e575ec0156f82208820010");
+		WUser user = payService.getUser(uid);
 		String ip=IpUtils.getIpAddr(request);	 //获取客户端IP
 		String orderNo = ChargeExample.randomNo();
 		Channel payWayChannl = null;

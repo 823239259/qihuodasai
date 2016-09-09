@@ -47,7 +47,6 @@
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 	</bean>
 	
-	
 	<!-- 5点半执行计算点日返点-->
 	<bean id="agentReturnInfoJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="agentReturnInfoJob" />
