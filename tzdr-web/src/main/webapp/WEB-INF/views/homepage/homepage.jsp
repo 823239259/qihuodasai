@@ -322,7 +322,7 @@
                     <li>• 监管严格，市场成熟</li>
                     <li>• 履约保证，更安全透明</li>
                     <li>• 高成本效益，更高收益</li>
-                    <li>• 交易费低廉，双边低至49</li>
+                    <li>• 交易费低廉，双边低至69</li>
                 </ul>
                 <div class="money">
                     <p>总共操盘: ${showmap.hsi[1].valueData }人</p>
