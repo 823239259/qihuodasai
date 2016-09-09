@@ -116,7 +116,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	public List<OutDiskVo> findOutDiskVos(){
 		
 		StringBuffer sql  = new StringBuffer();
-		sql.append("SELECT p.trade_type,p.main_contract,p.price FROM w_out_disk_price p ORDER BY p.trade_type ASC ");
+		sql.append("SELECT p.trade_type,p.main_contract,p.price,trad_time FROM w_out_disk_price p ORDER BY p.trade_type ASC ");
 		List<OutDiskVo> outDiskVoList = this.getEntityDao().queryListBySql(sql.toString(), OutDiskVo.class, null, new Object[]{});
 		
 		return outDiskVoList;

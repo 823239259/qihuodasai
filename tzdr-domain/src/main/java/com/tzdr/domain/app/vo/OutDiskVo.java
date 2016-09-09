@@ -36,6 +36,12 @@ public class OutDiskVo implements Serializable{
 	 */
 	@SqlColumn(name="price")
 	private BigDecimal price;
+	
+	/**
+	 * 交易时间
+	 */
+	@SqlColumn(name="trad_time")
+	private String tradTime;
 
 	public Integer getTradeType() {
 		return tradeType;
@@ -60,4 +66,13 @@ public class OutDiskVo implements Serializable{
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
+	public String getTradTime() {
+		return tradTime;
+	}
+
+	public void setTradTime(String tradTime) {
+		this.tradTime = tradTime;
+	}
+	
 }

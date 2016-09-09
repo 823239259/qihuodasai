@@ -89,8 +89,27 @@ public class FTradeApplyVo implements Serializable {
 		 *美黄金交易手数
 		 */
 		private Integer agtranLever;
+		/**
+		 * H股指交易手数
 
-
+		 */
+        private Integer hStockMarketLever;
+        /**
+         * 小H股指交易手数
+         */
+        private Integer xHStockMarketLever;
+        /**
+         * 美铜交易手数
+         */
+        private Integer ameCopperMarketLever;
+        /**
+         * 美白银交易手数
+         */
+        private Integer ameSilverMarketLever;
+        /**
+         * 小原油交易手数
+         */
+        private Integer smallCrudeOilMarketLever;
 		public BigDecimal getTraderTotal() {
 			return traderTotal;
 		}
@@ -208,6 +227,46 @@ public class FTradeApplyVo implements Serializable {
 			this.agtranLever = agtranLever;
 		}
 
+		public Integer gethStockMarketLever() {
+			return hStockMarketLever;
+		}
+
+		public void sethStockMarketLever(Integer hStockMarketLever) {
+			this.hStockMarketLever = hStockMarketLever;
+		}
+
+		public Integer getxHStockMarketLever() {
+			return xHStockMarketLever;
+		}
+
+		public void setxHStockMarketLever(Integer xHStockMarketLever) {
+			this.xHStockMarketLever = xHStockMarketLever;
+		}
+
+		public Integer getAmeCopperMarketLever() {
+			return ameCopperMarketLever;
+		}
+
+		public void setAmeCopperMarketLever(Integer ameCopperMarketLever) {
+			this.ameCopperMarketLever = ameCopperMarketLever;
+		}
+
+		public Integer getAmeSilverMarketLever() {
+			return ameSilverMarketLever;
+		}
+
+		public void setAmeSilverMarketLever(Integer ameSilverMarketLever) {
+			this.ameSilverMarketLever = ameSilverMarketLever;
+		}
+
+		public Integer getSmallCrudeOilMarketLever() {
+			return smallCrudeOilMarketLever;
+		}
+
+		public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
+			this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
+		}
+
 		public FTradeApplyVo(FSimpleConfig fSimpleConfig,BigDecimal payable,Double balance) {
 			this.tranLever = NumberUtils.toInt(fSimpleConfig.getTranLever());
 			this.traderTotal=fSimpleConfig.getTraderMoney();
@@ -227,7 +286,11 @@ public class FTradeApplyVo implements Serializable {
 			this.nikkeiTranLever = outDiskParameters.getNikkeiTranActualLever();
 			this.hstranLever = outDiskParameters.getHstranActualLever();
 			this.agtranLever = outDiskParameters.getAgtranActualLever();
-			
+			this.hStockMarketLever = outDiskParameters.gethIndexActualLever();
+			this.xHStockMarketLever = outDiskParameters.getxhIndexActualLever();
+			this.ameCopperMarketLever = outDiskParameters.getaCopperActualLever();
+			this.ameSilverMarketLever = outDiskParameters.getaSilverActualLever();
+			this.smallCrudeOilMarketLever = outDiskParameters.getSmaActualLever();
 			this.traderTotal=outDiskParameters.getTraderTotal();
 			this.lineLoss=outDiskParameters.getLineLoss();
 			this.payable=payable;
