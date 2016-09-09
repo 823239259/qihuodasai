@@ -70,7 +70,7 @@ var tab=<%=tab%>;
 		<div class="uc_pay" id="banktab">			
 			<ul class="uc_paynav">
 				<li><a href="javascript:void(0);" class="on">网银充值</a></li> 
-				<li><a href="javascript:void(0);">支付宝充值</a></li>
+				<!-- <li><a href="javascript:void(0);">支付宝充值</a></li> -->
 				<li><a href="javascript:void(0);">银行转账</a></li>
 				<li><a href="javascript:void(0);">充值记录</a></li>
 			</ul>
@@ -94,7 +94,7 @@ var tab=<%=tab%>;
 					</div>
 				</form>
 			</div> 
-			<div class="subtab">
+			<%-- <div class="subtab">
 					<form id="netbank" action="" method="post" target="_blank"  >
 					<div class="uc_olmoney">
 						<ul class="uc_pblist">
@@ -111,7 +111,7 @@ var tab=<%=tab%>;
 						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
 					</div>
 				</form>
-			</div>
+			</div> --%>
 			<div class="subtab">
 					<div class="uc_bank">
 						<p class="uc_b_title">您可以通过网上银行或银行柜台向维胜转账（手续费最多一笔50元）</p>

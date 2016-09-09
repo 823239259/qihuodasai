@@ -258,7 +258,8 @@ public class PayController {
 	 */
 	@RequestMapping(value = "/pingplusplus", method = RequestMethod.POST)
 	public String pingplusplus(HttpServletRequest request) {
-		System.out.println("执行中。。。");
+		if(true)return "";
+		//System.out.println("执行中。。。");
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		WUser user = this.payService.getUser(userSessionBean.getId());
