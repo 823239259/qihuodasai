@@ -529,7 +529,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					|| null == wellGoldA50.getMdtranActualLever() || null == wellGoldA50.getMntranActualLever()
 					|| null == wellGoldA50.getMbtranActualLever() || null == wellGoldA50.getNikkeiTranActualLever()
 					|| null == wellGoldA50.getDaxtranActualLever() || null == wellGoldA50.getLhsiTranActualLever()
-					|| null == wellGoldA50.getAgTranActualLever()||null==wellGoldA50.gethStockMarketLever()||null==wellGoldA50.getxHStockMarketLever()
+					|| null == wellGoldA50.getAgTranActualLever()||null==wellGoldA50.getHeStockMarketLever()||null==wellGoldA50.getXhStockMarketLever()
 					||null==wellGoldA50.getAmeCopperMarketLever()||null==wellGoldA50.getAmeSilverMarketLever()||null==wellGoldA50.getSmallCrudeOilMarketLever()) {
 				return new JsonResult(false, "交易手数输入有误，请核对后重新输入！");
 			}
@@ -543,8 +543,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			simpleFtseUserTrade.setDaxtranActualLever(wellGoldA50.getDaxtranActualLever()); // 德国dax交易手数
 			simpleFtseUserTrade.setLhsiTranActualLever(wellGoldA50.getLhsiTranActualLever()); // 小恒指交易手数
 			simpleFtseUserTrade.setAgTranActualLever(wellGoldA50.getAgTranActualLever()); // 美黄金交易手数
-			simpleFtseUserTrade.sethStockMarketLever(wellGoldA50.getxHStockMarketLever());//H股指
-			simpleFtseUserTrade.setxHStockMarketLever(wellGoldA50.getxHStockMarketLever());//小H股指
+			simpleFtseUserTrade.sethStockMarketLever(wellGoldA50.getHeStockMarketLever());//H股指
+			simpleFtseUserTrade.setxHStockMarketLever(wellGoldA50.getXhStockMarketLever());//小H股指
 			simpleFtseUserTrade.setAmeCopperMarketLever(wellGoldA50.getAmeCopperMarketLever());//美铜
 			simpleFtseUserTrade.setAmeSilverMarketLever(wellGoldA50.getAmeSilverMarketLever());//美白银
 			simpleFtseUserTrade.setSmallCrudeOilMarketLever(wellGoldA50.getSmallCrudeOilMarketLever());//小原油
@@ -974,8 +974,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			sql.append("	userTrade.nikkei_tran_actual_lever as nikkeiTranActualLever,\n");
 			sql.append("	userTrade.lhsi_tran_actual_lever as lhsiTranActualLever,\n");
 			sql.append("	userTrade.ag_tran_actual_lever as agTranActualLever,\n");
-			sql.append("	userTrade.h_stock_market_lever as hStockMarketLever,\n");
-			sql.append("	userTrade.xhstock_market_lever as xHStockMarketLever,\n");
+			sql.append("	userTrade.h_stock_market_lever as heStockMarketLever,\n");
+			sql.append("	userTrade.xhstock_market_lever as xhStockMarketLever,\n");
 			sql.append("	userTrade.ame_copper_market_lever as ameCopperMarketLever,\n");
 			sql.append("	userTrade.ame_silver_market_lever as ameSilverMarketLever,\n");
 			sql.append("	userTrade.small_crude_oil_market_lever as smallCrudeOilMarketLever,\n");

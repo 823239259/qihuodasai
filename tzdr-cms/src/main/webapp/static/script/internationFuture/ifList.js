@@ -148,8 +148,8 @@ function input() {
 			$("#nikkeiTranActualLever").val("");
 			$("#lhsiTranActualLever").val("");
 			$("#agTranActualLever").val("");
-			$("#hStockMarketLever").val("");
-			$("#xHStockMarketLever").val("");
+			$("#heStockMarketLever").val("");
+			$("#xhStockMarketLever").val("");
 			$("#AmeCopperMarketLever").val("");
 			$("#AmeSilverMarketLever").val("");
 			$("#smallCrudeOilMarketLever").val("");
@@ -178,8 +178,8 @@ function inputSave() {
 		// 2016-05-17 国际综合中追加小恒指和美黄金 By Ryan.he
 		var lhsiTranActualLever = $("#lhsiTranActualLever").val();
 		var agTranActualLever = $("#agTranActualLever").val();
-		var hStockMarketLever=$("#hStockMarketLever").val();
-		var xHStockMarketLever=$("#xHStockMarketLever").val();
+		var heStockMarketLever=$("#heStockMarketLever").val();
+		var xhStockMarketLever=$("#xhStockMarketLever").val();
 		var AmeCopperMarketLever=$("#AmeCopperMarketLever").val();
 		var AmeSilverMarketLever=$("#AmeSilverMarketLever").val();
 		var smallCrudeOilMarketLever=$("#smallCrudeOilMarketLever").val();
@@ -193,7 +193,7 @@ function inputSave() {
 			if (!commission || !crudeTranActualLever || !hsiTranActualLever
 					|| !mdtranActualLever || !mbtranActualLever || !daxtranActualLever
 					|| !nikkeiTranActualLever || !mntranActualLever
-					|| !lhsiTranActualLever || !agTranActualLever||!hStockMarketLever||!xHStockMarketLever
+					|| !lhsiTranActualLever || !agTranActualLever||!heStockMarketLever||!xhStockMarketLever
 					||!AmeCopperMarketLever||!AmeSilverMarketLever||!smallCrudeOilMarketLever) {
 
 				Check.messageBox("提示","请输入对应交易手数！");
@@ -202,7 +202,7 @@ function inputSave() {
 			if(commission < 0 || crudeTranActualLever < 0 || hsiTranActualLever < 0 
 					|| mdtranActualLever<0 || mbtranActualLever < 0 || daxtranActualLever < 0
 					|| nikkeiTranActualLever < 0 || mntranActualLever < 0
-					|| lhsiTranActualLever < 0 || agTranActualLever < 0||hStockMarketLever<0||xHStockMarketLever<0
+					|| lhsiTranActualLever < 0 || agTranActualLever < 0||heStockMarketLever<0||xhStockMarketLever<0
 					||AmeCopperMarketLever<0||AmeSilverMarketLever<0||smallCrudeOilMarketLever<0) {
 
 				Check.messageBox("提示","输入的数据有误,交易手数不能输入负数！");
@@ -223,7 +223,7 @@ function inputSave() {
 				"mdtranActualLever":mdtranActualLever,"mbtranActualLever":mbtranActualLever,
 				"daxtranActualLever":daxtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 				"mntranActualLever":mntranActualLever,"lhsiTranActualLever":lhsiTranActualLever,
-				"agTranActualLever":agTranActualLever,"hStockMarketLever":hStockMarketLever,"xHStockMarketLever":xHStockMarketLever,
+				"agTranActualLever":agTranActualLever,"heStockMarketLever":heStockMarketLever,"xhStockMarketLever":xhStockMarketLever,
 				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,"smallCrudeOilMarketLever":smallCrudeOilMarketLever} ,
 				function(data){
 					eyWindow.closeProgress();
@@ -252,8 +252,8 @@ function inputClose() {
 	$("#nikkeiTranActualLever").val("");
 	$("#lhsiTranActualLever").val("");
 	$("#agTranActualLever").val("");
-	$("#hStockMarketLever").val("");
-	$("#xHStockMarketLever").val("");
+	$("#heStockMarketLever").val("");
+	$("#xhStockMarketLever").val("");
 	$("#AmeCopperMarketLever").val("");
 	$("#AmeSilverMarketLever").val("");
 	$("#smallCrudeOilMarketLever").val("");
@@ -347,8 +347,8 @@ function tradeCount() {
 		$('#nikkeiCount').html(filterNull(rows[0].nikkeiTranActualLever));
 		$('#lhsiCount').html(filterNull(rows[0].lhsiTranActualLever));
 		$('#agCount').html(filterNull(rows[0].agTranActualLever));
-		$('#hsCount').html(filterNull(rows[0].hStockMarketLever));
-		$('#xhsCount').html(filterNull(rows[0].xHStockMarketLever));
+		$('#hsCount').html(filterNull(rows[0].heStockMarketLever));
+		$('#xhsCount').html(filterNull(rows[0].xhStockMarketLever));
 		$('#acCount').html(filterNull(rows[0].ameCopperMarketLever));
 		$('#asCount').html(filterNull(rows[0].ameSilverMarketLever));
 		$('#scCount').html(filterNull(rows[0].smallCrudeOilMarketLever));
