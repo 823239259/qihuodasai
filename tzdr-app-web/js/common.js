@@ -62,6 +62,7 @@
 			success:function(data){ 
 				// plus.nativeUI.closeWaiting();
 			    //获得服务器响应
+			    
 			    if (data.success){
 			    	onSuccess(data);
 			    }
@@ -260,8 +261,8 @@ var tzdr = {
 	// 系统常量
 	constants:{
 		//接口域名地址
-//		api_domain:"http://192.168.2.174:8080/tzdr-app/",
-		api_domain:"http://api.vs.com/",
+		api_domain:"http://192.168.2.174:8080/tzdr-app/",
+//		api_domain:"http://api.vs.com/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token

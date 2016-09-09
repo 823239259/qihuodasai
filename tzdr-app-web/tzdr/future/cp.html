@@ -14,18 +14,16 @@
     	var contractListAll=null;
     	var init_params=null;
     	mui.plusReady(function(){
-    		
     		//初始化监听头部和底部事件
   		//	tzdr.init. ();
   			//获取综合操盘数据
   			mui.app_request("/ftrade/params",{
   				"businessType":8
   			},function(result){
-  				 
+  				console.log(JSON.stringify(result));
   				if(!mui.isnull(result.data)){
   					paramListAll=result.data.paramList;
   					mui.each(paramListAll,function(i,item){
-  						
   						//动态创建操盘保证金子元素
   						createtranLevers(item);
   						//读取第一个默认的集合详细数据 
@@ -70,19 +68,21 @@
   							}
   						});
   				});
-  			
-			
   				}
   			},function(result){
+  				console.log(JSON.stringify(result))
   				mui.toast(result.message);
   				return;
   			})
- 			document.getElementById("backPage").addEventListener("tap",function(){
-				mui.openWindow({
-					url:"../../home.html",
-					id:"home.html"
-				})
-			});
+// 			document.getElementById("backPage").addEventListener("tap",function(){
+//				mui.openWindow({
+//					url:"../../home.html",
+//					id:"home.html"
+//				})
+//			});
+			document.getElementById("back").addEventListener("tap",function(){
+		    			mui.back();
+		    });
   			document.getElementById("openPay").addEventListener("tap",function(){
 //				this.setAttribute('disabled','disabled')  //禁用按钮
   				openPays();
@@ -158,69 +158,93 @@
 		
 		
 		function setmainContract(contractList){
+			console.log(JSON.stringify(contractList))
 			var table=document.getElementById("table_list");
 			var tr=document.createElement("tr");
-			
 			var td_1=document.createElement("td");
 			var td_2=document.createElement("td");
 			var td_3=document.createElement("td");
 			var td_4=document.createElement("td");
 			var td_5=document.createElement("td");
-			
 			td_2.innerHTML=contractList.mainContract;
 			td_4.innerHTML=contractList.price+"元/手";
-			
-			
+			var tradeTime = contractList.tradTime;
+			console.log(JSON.stringify(init_params)); 
 			switch (contractList.tradeType){
 				case 0:
 					td_1.innerHTML="富时A50";
-					td_3.innerHTML="9:05-16:30<br>17:20-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易富时A50时，初始最大可持仓"+(mui.isnull(init_params.tranLever) ? 0 : init_params.tranLever)+"手";
 					break;
 				case 6:
 					td_1.innerHTML="国际原油";
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易国际原油时，初始最大可持仓"+(mui.isnull(init_params.crudeTranLever) ? 0 : init_params.crudeTranLever)+"手";
 					break;
 				case 7:
 					td_1.innerHTML="恒指期货";
-					td_3.innerHTML="09:20-11:55<br>13:05-16:25<br>17:20-23:40";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易恒指期货时，初始最大可持仓"+(mui.isnull(init_params.hsiTranLever) ? 0 : init_params.hsiTranLever)+"手";
 					break;
 				case 9:
 					td_1.innerHTML="迷你道指";
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易迷你道指时，初始最大可持仓"+(mui.isnull(init_params.mdtranLever) ? 0 : init_params.mdtranLever)+"手";
 					break;
 				case 10:
 					td_1.innerHTML="迷你纳指";
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易迷你纳指时，初始最大可持仓"+(mui.isnull(init_params.mntranLever) ? 0 : init_params.mntranLever)+"手";
 					break;
 				case 11:
 					td_1.innerHTML="迷你标普";  
-					td_3.innerHTML="09:05-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易迷你标普时，初始最大可持仓"+(mui.isnull(init_params.mbtranLever) ? 0 : init_params.mbtranLever)+"手";
 					break;
 				case 12:
 					td_1.innerHTML="德国DAX";
-					td_3.innerHTML="13:55-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易德国DAX时，初始最大可持仓"+(mui.isnull(init_params.daxtranLever) ? 0 : init_params.daxtranLever)+"手";
 					break;
 				case 13:
 					td_1.innerHTML="日经225";
-					td_3.innerHTML="09:05-14:25<br>15:20-23:55";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易日经225时，初始最大可持仓"+(mui.isnull(init_params.nikkeiTranLever) ? 0 : init_params.nikkeiTranLever)+"手";
 					break;
 				case 14:
 					td_1.innerHTML="小恒指";
-					td_3.innerHTML="09:20-11:55<br>13:05—16:25<br>17:20-23:40";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易小恒指时，初始最大可持仓"+(mui.isnull(init_params.lhsiTranActualLever) ? 0 : init_params.lhsiTranActualLever)+"手";
 					break;
 				case 15:
 					td_1.innerHTML="美黄金";
-					td_3.innerHTML="09:20-16:25<br>17:20-23:40";
+					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.agTranActualLever) ? 0 : init_params.agTranActualLever)+"手";
+					break;
+				case 16:
+					td_1.innerHTML="H股指数";
+					td_3.innerHTML=tradeTime;
+					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.hIndexActualLever) ? 0 : init_params.hIndexActualLever)+"手";
+					break;
+				case 17:
+					td_1.innerHTML="小H股指数";
+					td_3.innerHTML=tradeTime;
+					td_5.innerHTML="只交易小H股指数时，初始最大可持仓"+(mui.isnull(init_params.xhIndexActualLever) ? 0 : init_params.xhIndexActualLever)+"手";
+					break;
+				case 18:
+					td_1.innerHTML="美铜";
+					td_3.innerHTML=tradeTime;
+					td_5.innerHTML="只交易美铜时，初始最大可持仓"+(mui.isnull(init_params.aCopperActualLever) ? 0 : init_params.aCopperActualLever)+"手";
+					break;
+				case 19:
+					td_1.innerHTML="美白银";
+					td_3.innerHTML=tradeTime;
+					td_5.innerHTML="只交易美白银时，初始最大可持仓"+(mui.isnull(init_params.aSilverActualLever) ? 0 : init_params.aSilverActualLever)+"手";
+					break;
+				case 20:
+					td_1.innerHTML="小原油";
+					td_3.innerHTML=tradeTime;
+					td_5.innerHTML="只交易小原油时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
 					break;
 				default:
 					break;
@@ -276,38 +300,35 @@
 				case 10:
 					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.agTranActualLever) ? 0 : init_params.agTranActualLever)+"手";
 					break;
+				case 11:
+					td_5.innerHTML="只交易H股指数时，初始最大可持仓"+(mui.isnull(init_params.hIndexActualLever) ? 0 : init_params.hIndexActualLever)+"手";
+				break;
+				case 12:
+					td_5.innerHTML="只交易小H股指数时，初始最大可持仓"+(mui.isnull(init_params.xhIndexActualLever) ? 0 : init_params.xhIndexActualLever)+"手";
+				break;
+				case 13:
+					td_5.innerHTML="只交易美铜时，初始最大可持仓"+(mui.isnull(init_params.aCopperActualLever) ? 0 : init_params.aCopperActualLever)+"手";
+				break;
+				case 14:
+					td_5.innerHTML="只交易美白银时，初始最大可持仓"+(mui.isnull(init_params.aSilverActualLever) ? 0 : init_params.aSilverActualLever)+"手";
+				break;
+				case 15: 
+					td_5.innerHTML="只交易小原油时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
+				break;
 				default:
 					break;
 			}
-				
 			}
-			
-			
-			
 		}
 		
     </script>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-icon mui-icon-left-nav mui-pull-left" id="backPage"><i>返回</i></a>
+		<a class="mui-action-back mui-icon mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 		<h1 class="mui-title">综合操盘</h1>		
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
-	<!--<nav class="navlist">
-		<a href="javascript:void(0);" id="product">
-			<span class="mui-icon mui-icon-list"></span>
-			<span class="mui-tab-label">产品</span>
-		</a>
-		<a class="navon" href="javascript:void(0);"  id="scheme">
-			<span class="mui-icon mui-icon-compose"></span>
-			<span class="mui-tab-label">方案</span>
-		</a>
-		<a    id="account" href="javascript:void(0);">
-			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
-	</nav> -->  
 <div class="mui-content ap_main">
 	<h5 class="ap_choosetitle"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9" id="bond_num">

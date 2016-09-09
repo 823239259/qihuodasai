@@ -288,9 +288,8 @@
 						var wv = plus.webview.currentWebview();
 						console.log(JSON.stringify(wv));
 		              	var vText = wv.money;//这样就能接收到上个页面传过来的值了
-		              	var backPage=wv.backPage;
-		              	plus.storage.setItem("backPage",backPage);
-		              	console.log(plus.storage.getItem("backPage"));
+//		              	var backPage=wv.backPage;
+//		              	plus.storage.setItem("backPage",backPage);
 		             	if(vText != null){
 			              var balance = parseFloat(document.getElementById("balanceSpan").innerHTML).toFixed(2);
 			              var vTextlength = vText.length;
