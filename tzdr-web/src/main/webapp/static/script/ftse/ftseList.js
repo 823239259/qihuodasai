@@ -69,23 +69,23 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>H股指数</h3>';
-		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+heIndexActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>小H股指数</h3>';
-		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+xheIndexActualLever+'手</p>';
 		tradeDev+= '</li>'; 
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>美铜</h3>';
-		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+ameCopperActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>美白银</h3>';
-		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+ameSilverActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3>小原油</h3>';
-		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+smaActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:186px;">';
 		tradeDev+= '<h3></h3>';
@@ -222,8 +222,9 @@ function getFtseDataList(index,type,
 	            	+ n.appendTraderBond + ","
 	            	+ n.tranProfitLoss + ","
 	            	+n.endParities+","
-	            	+ n.tranFeesTotal +"," + n.endAmount +","+n.businessType+","+n.tranActualLever +","+n.crudeTranActualLever +","+n.hsiTranActualLever+ ","+n.mdtranActualLever+","
-	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+","+n.lhsiTranActualLever+","+n.agTranActualLever+"));\" " +
+	             	+ n.tranFeesTotal +"," + n.endAmount +","+n.businessType+","+n.tranActualLever +","+n.crudeTranActualLever +","+n.hsiTranActualLever+ ","+n.mdtranActualLever+","
+	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+","+n.lhsiTranActualLever+","+n.agTranActualLever+","+n.heIndexActualLever+","
+	            	+n.xheIndexActualLever+","+n.ameCopperActualLever+","+n.ameSilverActualLever+","+n.smaActualLever+"));\" " +
 	            	"style=\"cursor:pointer;color:#fc3;\" class='uc_tlbtn_btn_see' >账单详细</a></td>";
             	}else{
             		html = html + "<td></td>";

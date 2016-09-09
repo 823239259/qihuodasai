@@ -172,6 +172,31 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	private Integer agTranActualLever = new Integer(0);
 
 	/**
+	 * H股指交易手数
+	 */
+	@SqlColumn(name="h_stock_market_lever")
+	private Integer heIndexActualLever = new Integer(0);
+	/**
+	 * 小H股指交易手数
+	 */
+	@SqlColumn(name="xhstock_market_lever")
+	private Integer xheIndexActualLever = new Integer(0);
+	/**
+	 * 美铜交易手数
+	 */
+	@SqlColumn(name="ame_copper_market_lever")
+	private Integer ameCopperActualLever = new Integer(0);
+	/**
+	 * 美白银交易手数
+	 */
+	@SqlColumn(name="ame_silver_market_lever")
+	private Integer ameSilverActualLever = new Integer(0);
+	/**
+	 * 小原油交易手数
+	 */
+	@SqlColumn(name="small_crude_oil_market_lever")
+	private Integer smaActualLever = new Integer(0);
+	/**
 	 * 交易手续费总额
 	 */
 	@SqlColumn(name="tran_fees_total")
@@ -564,6 +589,38 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	public void setAgTranActualLever(Integer agTranActualLever) {
 		this.agTranActualLever = agTranActualLever;
 	}
+	public Integer getHeIndexActualLever() {
+		return heIndexActualLever;
+	}
+	public void setHeIndexActualLever(Integer heIndexActualLever) {
+		this.heIndexActualLever = heIndexActualLever;
+	}
+	public Integer getXheIndexActualLever() {
+		return xheIndexActualLever;
+	}
+	public void setXheIndexActualLever(Integer xheIndexActualLever) {
+		this.xheIndexActualLever = xheIndexActualLever;
+	}
+	public Integer getAmeCopperActualLever() {
+		return ameCopperActualLever;
+	}
+	public void setAmeCopperActualLever(Integer ameCopperActualLever) {
+		this.ameCopperActualLever = ameCopperActualLever;
+	}
+	public Integer getAmeSilverActualLever() {
+		return ameSilverActualLever;
+	}
+	public void setAmeSilverActualLever(Integer ameSilverActualLever) {
+		this.ameSilverActualLever = ameSilverActualLever;
+	}
+	public Integer getSmaActualLever() {
+		return smaActualLever;
+	}
+	public void setSmaActualLever(Integer smaActualLever) {
+		this.smaActualLever = smaActualLever;
+	}
+
+
 	
 	
 	

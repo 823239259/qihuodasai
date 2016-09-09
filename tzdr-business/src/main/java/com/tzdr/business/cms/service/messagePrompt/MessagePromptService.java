@@ -57,7 +57,7 @@ public class MessagePromptService {
 				}else if(submitType.equalsIgnoreCase(PromptTypes.isInternetBanking)){
 					fristParam = "网银充值";
 					twoParam = "网银充值成功";
-					url = "http://manage.vs.com/admin/rechargeReview/list";
+					url = "http://manage.vs.com/admin/recharge/rechargeQuery";
 					typeKey = "fundEmail";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isLineTransfer)) {
 					fristParam = "线下转账待审核";

@@ -174,7 +174,7 @@ public class UserPayController {
 		String ip=IpUtils.getIpAddr(request);
 		payService.insertEntity(Constant.Source.TZDR,wUser,bankTransferRequest.getAbbreviation(),DataConstant.PAY_NO_PROCESSING,
 				"",String.valueOf(money),ip,DataConstant.TRANSBANK_TYPE,bankTransferRequest.getSerialnum());
-		messagePromptService.sendMessage(PromptTypes.isLineTransfer, wUser.getUname());
+		messagePromptService.sendMessage(PromptTypes.isBankReCharge, wUser.getUname());
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"submit.success.");
 	}	
 	/**
