@@ -1,7 +1,7 @@
 
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
-		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever) {
+		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever) {
 	$("#window_detail_endInfoFtse").find("p").html("");
 	var i = 0;
 	$("#window_detail_endInfoFtse").find("p").each(function(){
@@ -24,6 +24,12 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(endAmount))+'元');
 		}
 	});
+	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+    $(".sif_money").css({
+        top:"50%",
+        marginTop: -detailInfoFtseHeight
+
+    })
 	$("#window_detail_endInfoFtse_trade").html('');
 	if(businessType == 8){
 		var tradeDev = '<ul>';
