@@ -876,6 +876,7 @@ public class DrawMoneyController {
 			return new JsonResult("提现失败，请联系客服 400-852-8008");
 		}
 
+		
 		// 更新币币订单号到提现记录中
 		drawMoneyService.updatDrawBybbOrderId(drawList.getId(), bbResult.getString("order_number"));
 		// 发送短信
