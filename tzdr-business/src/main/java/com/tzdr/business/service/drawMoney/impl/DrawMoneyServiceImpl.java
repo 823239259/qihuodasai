@@ -710,11 +710,6 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			map.put("account", user.getMobile());
 			map.put("money", money);
 			new SMSSenderThread(user.getMobile(), "draw.money.template", map).start();
-			try {
-				messagePromptService.sendMessage(PromptTypes.isTheTrial, user.getMobile());//提现初审邮件
-			} catch (Exception e) {
-	           logger.info("申请提现发送邮件给工作人员失败！");
-			}
 		} else if (linedata != null) {
 			drawList.setBelowLine(1);
 			drawList.setRemark("后台开始线下审核提现金额，审核金额范围：" + auditMoneyRang);
@@ -723,11 +718,6 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			map.put("account", user.getMobile());
 			map.put("money", money);
 			new SMSSenderThread(user.getMobile(), "draw.money.template", map).start();
-			try {
-				messagePromptService.sendMessage(PromptTypes.isLineTransfer, user.getMobile());//线下提现初审邮件
-			} catch (Exception e) {
-	           logger.info("线下申请提现发送邮件给工作人员失败！");
-			}
 		} else {
 			drawList.setUpdateTime(Dates.getCurrentLongDate());
 			drawList.setUpdateUser("system");

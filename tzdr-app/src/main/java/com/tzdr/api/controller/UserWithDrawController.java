@@ -544,6 +544,11 @@ public class UserWithDrawController {
 				new SMSPgbSenderThread(user.getMobile(), "draw.money.template", map).start();
 			}
 		}
+		try {
+			messagePromptService.sendMessage(PromptTypes.isTheTrial, user.getMobile());//提现初审邮件
+		} catch (Exception e) {
+           logger.info("申请提现发送邮件给工作人员失败！");
+		}
 		return new ApiResult(true, ResultStatusConstant.SUCCESS, "withdraw.success.");
 	}
 

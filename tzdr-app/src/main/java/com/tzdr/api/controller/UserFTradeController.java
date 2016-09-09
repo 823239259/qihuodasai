@@ -187,7 +187,7 @@ public class UserFTradeController {
 		}
 		
 		fTradeService.addbond(wuser, fSimpleFtseUserTrade, payMoney);  //追加保证金
-		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getUname());
+		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful addBond",null);
 	}
 	
@@ -247,7 +247,7 @@ public class UserFTradeController {
 		}
 		
 		fTradeService.endtrade(fSimpleFtseUserTrade, discount);  //申请终结方案
-		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getUname());
+		messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful endTrade",null);
 	}
 	
@@ -416,7 +416,7 @@ public class UserFTradeController {
 		} else {
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);
 		}
-		messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getUname());
+		messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getMobile());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade);		
 	}
 	
