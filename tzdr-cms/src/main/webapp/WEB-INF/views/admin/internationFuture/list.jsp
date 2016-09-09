@@ -559,14 +559,14 @@ function timeConvert(value,rowData,rowIndex) {
 			<tr style="display: none;" id="hsTradeNumTR">
                 <td class="label right">H股指交易手数:</td>
                 <td>
-                   <input id="hStockMarketLever" name="hStockMarketLever" class="easyui-validatebox"  data-options=""/>
+                   <input id="heStockMarketLever" name="heStockMarketLever" class="easyui-validatebox"  data-options=""/>
                 </td>
                 <td><span style="color: red;">不能输入负数</span></td>
 			</tr>
 	         <tr style="display: none;" id="xHsTradeNumTR">
                 <td class="label right">小H股指交易手数:</td>
                 <td>
-                   <input id="xHStockMarketLever" name="xHStockMarketLever" class="easyui-validatebox"  data-options=""/>
+                   <input id="xhStockMarketLever" name="xhStockMarketLever" class="easyui-validatebox"  data-options=""/>
                 </td>
                 <td><span style="color: red;">不能输入负数</span></td>
 			</tr>
