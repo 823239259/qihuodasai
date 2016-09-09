@@ -609,7 +609,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					MathContext.DECIMAL32));
             //计算H股指交易手续费
 			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.gethStockMarketLever())
-					.multiply(simpleFtseUserTrade.getHsiTranFees(), MathContext.DECIMAL32));
+					.multiply(simpleFtseUserTrade.gethSTranFees(), MathContext.DECIMAL32));
 			//计算小H股指交易手续费
 			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getxHStockMarketLever())
 					.multiply(simpleFtseUserTrade.getxHSTranFees(), MathContext.DECIMAL32));
