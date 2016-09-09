@@ -112,6 +112,43 @@ public class FTradeParamsVo implements Serializable {
 		@SqlColumn(name="agtran_actual_lever")
 		private Integer agTranActualLever;
 		
+		/**
+		 * H股指
+		 * @return
+		 */
+		@SqlColumn(name="h_index_actual_lever")
+		private Integer hIndexActualLever;
+		
+		/**
+		 * 小H股指
+		 * @return
+		 */
+		@SqlColumn(name="xh_index_actual_lever")
+		private Integer xhIndexActualLever;
+		
+		/**
+		 * 美铜
+		 * @return
+		 */
+		@SqlColumn(name="a_copper_actual_lever")
+		private Integer aCopperActualLever;
+		
+		/**
+		 * 美白银
+		 * @return
+		 */
+		@SqlColumn(name="a_silver_actual_lever")
+		private Integer aSilverActualLever;
+		
+		/**
+		 * 小原油
+		 * @return
+		 */
+		@SqlColumn(name="sma_actual_lever")
+		private Integer smaActualLever;
+		
+		
+		
 		public BigDecimal getTranFees() {
 			return tranFees;
 		}
@@ -230,6 +267,46 @@ public class FTradeParamsVo implements Serializable {
 
 		public void setAgTranActualLever(Integer agTranActualLever) {
 			this.agTranActualLever = agTranActualLever;
+		}
+
+		public Integer gethIndexActualLever() {
+			return hIndexActualLever;
+		}
+
+		public void sethIndexActualLever(Integer hIndexActualLever) {
+			this.hIndexActualLever = hIndexActualLever;
+		}
+
+		public Integer getXhIndexActualLever() {
+			return xhIndexActualLever;
+		}
+
+		public void setXhIndexActualLever(Integer xhIndexActualLever) {
+			this.xhIndexActualLever = xhIndexActualLever;
+		}
+
+		public Integer getaCopperActualLever() {
+			return aCopperActualLever;
+		}
+
+		public void setaCopperActualLever(Integer aCopperActualLever) {
+			this.aCopperActualLever = aCopperActualLever;
+		}
+
+		public Integer getaSilverActualLever() {
+			return aSilverActualLever;
+		}
+
+		public void setaSilverActualLever(Integer aSilverActualLever) {
+			this.aSilverActualLever = aSilverActualLever;
+		}
+
+		public Integer getSmaActualLever() {
+			return smaActualLever;
+		}
+
+		public void setSmaActualLever(Integer smaActualLever) {
+			this.smaActualLever = smaActualLever;
 		}
 		
 		
