@@ -319,10 +319,10 @@
                 <h3>【恒指期货】</h3>
                 <h4><i>${showmap.hsi[0].valueData }</i>元/双边</h4>
                 <ul>
-                    <li>• 港股指数 金融市场更加成熟</li>
-                    <li>• 交易灵活 技术分析更有效</li>
-                    <li>• 一天12个小时可以交易 盈利时间长</li>
-                    <li>• T+0交易 随时锁定利润</li>
+                    <li>• 监管严格，市场成熟</li>
+                    <li>• 履约保证，更安全透明</li>
+                    <li>• 高成本效益，更高收益</li>
+                    <li>• 交易费低廉，双边低至49</li>
                 </ul>
                 <div class="money">
                     <p>总共操盘: ${showmap.hsi[1].valueData }人</p>
@@ -334,10 +334,10 @@
                 <h3>【国际原油】</h3>
                 <h4><i>${showmap.fco[0].valueData }</i>元/双边</h4>
                 <ul>
-                    <li>• 全球玩家用户量最大 涨跌迅猛</li>
-                    <li>• 高透明度便于基本面分析</li>
-                    <li>• 全球交易市场无人操控</li>
-                    <li>• 来自纽约商业交易所 行业标准</li>
+                    <li>• 轻原油，更优质</li>
+                    <li>• 国际市场，更透明</li>
+                    <li>• 交易时间长，更多盈利</li>
+                    <li>• T+0双向，多头空头都有赚</li>
                 </ul>
                 <div class="money">
                     <p>总共操盘: ${showmap.fco[1].valueData }人</p>
@@ -349,10 +349,10 @@
                 <h3>【富时A50】</h3>
                 <h4><i>${showmap.ffa50[0].valueData }</i>元/双边</h4>
                 <ul>
-                    <li>• A股精准风向标 免庄家操控</li>
-                    <li>• 门槛低 超短线 交易灵活</li>
-                    <li>• 国际版“IF指数” 操盘人数多</li>
-                    <li>• 来自新加坡交易所 透明公正</li>
+                    <li>• A股大盘，趋势投资</li>
+                    <li>• 超低门槛，短线灵活</li>
+                    <li>• 国际IF指数，主流品种</li>
+                    <li>• 新加坡指数，更成熟透明</li>
                 </ul>
                 <div class="money">
                     <p>总共操盘: ${showmap.ffa50[1].valueData }人</p>

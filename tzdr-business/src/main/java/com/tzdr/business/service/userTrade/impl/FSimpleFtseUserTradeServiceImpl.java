@@ -784,6 +784,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 
 				simpleFtseUserTrade.setStateType(6); // 6.已结算
 				simpleFtseUserTrade.setEndTime(Dates.getCurrentLongDate());
+				simpleFtseUserTrade.setOperator(authService.getCurrentUser().getRealname());
 				this.update(simpleFtseUserTrade);
 				// handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade);
 				// // 保存收益报表记录
@@ -976,8 +977,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			sql.append("	userTrade.h_stock_market_lever as hStockMarketLever,\n");
 			sql.append("	userTrade.xhstock_market_lever as xHStockMarketLever,\n");
 			sql.append("	userTrade.ame_copper_market_lever as ameCopperMarketLever,\n");
-			sql.append("	userTrade.ame_silver_market_lever ameSilverMarketLever,\n");
-			sql.append("	userTrade.small_crude_oil_market_lever smallCrudeOilMarketLever,\n");
+			sql.append("	userTrade.ame_silver_market_lever as ameSilverMarketLever,\n");
+			sql.append("	userTrade.small_crude_oil_market_lever as smallCrudeOilMarketLever,\n");
 			sql.append("	userTrade.tran_fees as tranFees,\n");
 			sql.append("	userTrade.tran_fees_total as tranFeesTotal,\n");
 			sql.append("	userTrade.discount_money as discountMoney,\n");

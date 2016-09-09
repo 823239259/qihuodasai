@@ -64,7 +64,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 					if(userId != null){
 						WUser user =  wUserService.getUser(userId);
 						if(user != null){
-							messagePromptService.sendMessage(PromptTypes.isBankReCharge, user.getMobile());
+							messagePromptService.sendMessage(PromptTypes.isInternetBanking, user.getMobile());
 						}
 					}
 				} catch (Exception e) {

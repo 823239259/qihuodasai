@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../css/own.css" />
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script src="../../js/jquery-1.11.3.js"></script>
 	<script>
 		mui.init({
 //		    subpages:[{
@@ -32,19 +33,13 @@
     		document.getElementById("bank_info").addEventListener("tap",function(){
     			bindBankcard();
     		});
-    		
-    		document.getElementById("drawPage").addEventListener("tap",function(){
-    				//打开设置提现密码页面
-    				mui.openWindow("withdcode.html");
-    		});
-    		
-    		
-    		
+      		document.getElementById("modifyPassword").addEventListener("tap",function(){
+	    				//打开设置提现密码页面
+	    				mui.openWindow("withdcode.html");
+    				});
     		document.getElementById("drawmoneysub").addEventListener("tap",function(){
     			drawmoneySubmit();
     		});
-    		
-    		
     		//获取默认绑定的银行卡信息
     		mui.app_request("user/withdraw/bank_list",{},
     		function(result){
@@ -93,21 +88,15 @@
 					SetDrawPwd=true;
 					document.getElementById("drawpassword").placeholder="输入密码";
 					document.getElementById("drawpassword").removeAttribute("readonly");
-					document.getElementById("drawpassword").off("tap");
-//					document.getElementById("changePwd").style.display="block";
+					$("#modifyPassword").css("display","block");
 				}else{
+					$("#modifyPassword").css("display","block");
 					document.getElementById("drawpassword").placeholder="未设置提现密码";
 					document.getElementById("drawpassword").setAttribute("readonly","readonly");
-//					document.getElementById("changePwd").style.display="none";
-					document.getElementById("drawpassword").addEventListener("tap",function(){
-	    				//打开设置提现密码页面
-	    				mui.openWindow("withdcode.html");
-    				});
 				}
 			},function(result){
 				return;
 			});
-    		
 		});
 		
 		
@@ -121,7 +110,6 @@
 				mui.toast("不能输入非法字符");
 				return;
 			}
-			
 			if(mui.isnull(balance)){
 				mui.toast("余额不足，请充值！");
 				return;
@@ -331,20 +319,25 @@
 		</ul>			
 		<ul class="mui-table-view aw_withpassword">
 			<li class="mui-table-view-cell">		 		
-				<a class="mui-navigate-right" href="javascript:void(0);">
-					<label>提现密码</label>
+				<!--<a class="mui-navigate-right" href="javascript:void(0);">-->
+					<div class="mui-input-row mui-password">
+						<label class="loginPassword">提现密码</label>
+						<input id="drawpassword" type="password" class="mui-input-password" placeholder="请输入密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+					</div>
+					<!--<label>提现密码</label>
 					<input  id="drawpassword" type="password" class="mui-input-clear" placeholder="输入密码" data-input-clear="5" >
-					<b class="aw_withpasslink" id="drawPage"></b>
-				</a>
+					<b class="aw_withpasslink" id="drawPage"></b>-->
+				<!--</a>-->
 			</li>
 			<!--<li class="mui-table-view-cell" id="changePwd">		 		
 				<a class="mui-navigate-right" href="javascript:void(0);">
 					<label>修改提现密码</label>
-					<input  id="modifyPassword" type="password" class="mui-input-clear" placeholder="修改提现密码" data-input-clear="5" readonly="readonly">
+					<input  id="" type="password" class="mui-input-clear" placeholder="修改提现密码" data-input-clear="5" readonly="readonly">
 					<b class="aw_withpasslink" id="drawPage"></b>
 				</a>
 			</li>-->
-		</ul>	
+		</ul>
+		<a id="modifyPassword">修改提现密码</a>
 		<div class="ac_btn">
 			<button id="drawmoneysub" type="button" class="mui-btn mui-btn-block lg-btnlogin">确认提现</button>								
 		</div>			
