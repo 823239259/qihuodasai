@@ -93,6 +93,12 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '</li>';
 		tradeDev+= '</ul>';
 		$("#window_detail_endInfoFtse_trade").html(tradeDev);
+		var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+	    $(".sif_money").css({
+	        top:"50%",
+	        marginTop: -detailInfoFtseHeight
+
+	    })
 	}
 };
 
