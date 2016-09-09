@@ -707,7 +707,8 @@
 					"tzdr/future/paycp.html",
 					"tzdr/agree/cp.html",
 					"tzdr/agree/cpru.html",
-					"home.html"
+					"home.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},

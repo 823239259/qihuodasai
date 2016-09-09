@@ -160,7 +160,6 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-//				console.log(new Date());
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
@@ -198,13 +197,10 @@
 					    if(method=="OnRspLogin"){
 					    	  sendMessage('QryCommodity',null)
 					    }else if(method == "OnRspQryCommodity"){
-//					    	console.log(new Date());
-					    	console.log(JSON.stringify(jsonData));
 					        var commoditys = jsonData.Parameters;
 					        var size = commoditys.length;
 					        var setTime=null;			          
 					        for(var i=0;i<size;i++){
-					        	console.log(i);
 					            product.CommodityName[i]=commoditys[i].CommodityName;
 					            product.CommodityNo1[i]=commoditys[i].MainContract;
 					            product.CommodityNo2[i]=commoditys[i].CommodityNo;
@@ -217,11 +213,10 @@
 					        //插入主力合约
 					        AddTo()
 					    }else if(method == "OnRspSubscribe"){
-//					    	console.log(JSON.stringify(jsonData));
+
 					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data);
 					         //更新行情的数据
-//					         console.log(JSON.stringify(MoreData));
 					        	insertData1(MoreData);
 					    }
 					};
@@ -291,7 +286,6 @@
 			
 			            }
 			        };
-//			        console.log(new Date());
 			    }
 			document.getElementById("product").addEventListener("tap",function(){
 				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
