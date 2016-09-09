@@ -365,6 +365,9 @@ p{
 .operateLogin button {
 	background-color: #fcc900;
 	border:none;
+	height: 45px;
+	line-height: 15px;
+	margin-top: 15px;
 }
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
 	border-radius: none !important;
@@ -373,22 +376,6 @@ p{
 }
 .muiLine{
 	width: 100%;
-}
-.link-area a{
-	color:#FFFFFF;
-	display: inline-block;
-	}
-.link-area a:nth-child(1){
-	width: 40%;
-}
-.link-area a:nth-child(2){
-	width: 60%;
-}
-.link-area	#regLogin{
-	text-align: right;
-}
-.link-area a span{
-	color:#FFCC33;
 }
 .productList {
 	width: 100%;
@@ -567,4 +554,11 @@ input{
 	text-align: center;
 	height: 40px!important;
 	line-height: 40px !important;
+}
+#forgetPassword{
+	position: absolute;
+	right: 10px;
+	line-height: 44px;
+	color:#FFFFFF;
+	font-size: 14px
 }

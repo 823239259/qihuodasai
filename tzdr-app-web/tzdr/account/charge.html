@@ -225,6 +225,15 @@
 			var pay_id = null;
 			var pays = {};
 			mui.plusReady(function() {
+				var wv = plus.webview.currentWebview();
+				document.getElementById("back").addEventListener("tap",function(){
+					 var backId = wv.backId;
+					 var backIdObj = plus.webview.getWebviewById(backId);
+					 if(backIdObj != null){
+					 	backIdObj.reload();
+					 	mui.back();
+					 }
+				});
 			//var thisURL = document.URL;
 			//alert(thisURL);
 			  /*document.getElementById("openappliy").addEventListener("tap", function() {
@@ -285,7 +294,6 @@
 					function(result) {
 						var balance = result.data.balance;
 						document.getElementById("balanceSpan").innerHTML = balance + '元';
-						var wv = plus.webview.currentWebview();
 						console.log(JSON.stringify(wv));
 		              	var vText = wv.money;//这样就能接收到上个页面传过来的值了
 //		              	var backPage=wv.backPage;
@@ -341,13 +349,20 @@
 						"gopayWay":7
 					}, function(result) {
 						var data = result.data;
-						payPage = mui.openWindow({
+						plus.nativeUI.showWaiting( "正在跳转..." );
+						setTimeout(function(){
+							plus.nativeUI.closeWaiting();
+						},2000);
+						var w = plus.webview.create("gopay.html","gopay",{top:"45px"},{data:result});
+						w.show();
+						/*payPage = mui.openWindow({
 							url:"gopay.html", 
+							
 							id:"gopay",
 							extras:{
 								data:result
 							}
-						});
+						});*/
 						return;
 					}, function(result) {
 						if(result.code == 2) {

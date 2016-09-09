@@ -68,7 +68,13 @@
   			
   			
     		document.getElementById("charge").addEventListener("tap",function(){
-    			mui.openWindow("charge.html","charge");
+    			mui.openWindow({
+    				url:"charge.html",
+    				id:"charge.html",
+    				extras:{
+    					 backId:"account"
+    				}
+    			});
     		});
     		
     		document.getElementById("withdraw").addEventListener("tap",function(){

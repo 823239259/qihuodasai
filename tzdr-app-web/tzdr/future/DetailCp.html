@@ -283,8 +283,23 @@
     				b.innerHTML="小恒指  "+outDiskList.mainContract;
     				break;
     			case 15:
-    				b.innerHTML="美黄金  "+outDiskList.mainContract;
+    				b.innerHTML="美黄金  <br>"+outDiskList.mainContract;
     				break;
+				case 16:
+					b.innerHTML="H股指数  "+outDiskList.mainContract;
+					break;
+				case 17:
+					b.innerHTML="小H股指数  "+outDiskList.mainContract;
+					break;
+				case 18:
+					b.innerHTML="美铜  "+outDiskList.mainContract;
+					break;
+				case 19:
+					b.innerHTML="美白银   "+outDiskList.mainContract;
+					break;
+				case 20:
+					b.innerHTML="小原油"+outDiskList.mainContract;
+					break;
     			default:
     				break;
     		}
@@ -342,7 +357,7 @@
 		</li>			
 		<li class="mui-table-view-cell">
 			<label>交易时间：</label>
-			<span>06:05-04:55 不同期货不同交易时间段</span>
+			<span>09:05-23:55 不同期货不同交易时间段</span>
 		</li>
 	</ul>		
 	<div class="sc_listopen" id="opening" style="display: none;">开户中</div>

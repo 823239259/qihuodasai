@@ -53,7 +53,8 @@
 				    id:'charge.html',
 				    extras:{
 				        money : money,
-				       backPage:"cp.html"
+				       backPage:"cp.html",
+				       backId:"paycp.html"
 				    }
 				});
 	  			});
@@ -242,6 +243,53 @@
     		}else{
     			var b=document.createElement("b");
     			b.innerHTML="美黄金 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
+    		
+    		
+    		if(!mui.isnull(confirmInfo.hStockMarketLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="H股指数 - "+confirmInfo.hStockMarketLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="H股指数 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
+    		if(!mui.isnull(confirmInfo.xHStockMarketLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="小H股指数- "+confirmInfo.xHStockMarketLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="小H股指数 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
+    		if(!mui.isnull(confirmInfo.ameCopperMarketLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="美铜 - "+confirmInfo.ameCopperMarketLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="美铜 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
+    		if(!mui.isnull(confirmInfo.ameSilverMarketLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="美白银 - "+confirmInfo.ameSilverMarketLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="美白银 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
+    		if(!mui.isnull(confirmInfo.smallCrudeOilMarketLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="小原油 - "+confirmInfo.smallCrudeOilMarketLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="小原油 - 0手";
     			tradelever_info.appendChild(b);
     		}
     	}

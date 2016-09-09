@@ -356,7 +356,8 @@
 					"home.html",
 					"tzdr/account/openUrlPay.html",
 					"tzdr/login/login.html",
-					"tzdr/future/paycp.html"
+					"tzdr/future/paycp.html",
+					"tzdr/account/gopay.html"
 				],
 				"priority": 0
 			},
@@ -471,7 +472,8 @@
 					"css/mui.min.css",
 					"images/icbc.gif",
 					"js/jquery-1.11.3.js",
-					"images/bank/ccb.png"
+					"images/bank/ccb.png",
+					"images/bank/psbc.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -909,7 +911,8 @@
 					"tzdr/account/account.html",
 					"tzdr/future/DetailCn.html",
 					"tzdr/quotation/quotationMain.html",
-					"tzdr/future/DetailHsi.html"
+					"tzdr/future/DetailHsi.html",
+					"tzdr/future/DetailCp.html"
 				],
 				"priority": 0
 			},
@@ -1072,7 +1075,8 @@
 					"tzdr/future/cl.html",
 					"tzdr/future/cn.html",
 					"tzdr/quotation/transactionDetails.html",
-					"tzdr/agree/tradingMarket.html"
+					"tzdr/agree/tradingMarket.html",
+					"tzdr/future/hsi.html"
 				],
 				"priority": 0
 			},

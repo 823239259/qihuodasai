@@ -538,8 +538,10 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 }
 #modifyPassword{
 	display: inline-block;
+	width: 100%;
+	text-align: right;
 	margin-top: 15px;
-	margin-left: 15px;
+	padding-right: 15px;
 	color:#FFCC33;
 }
 #backPage{

@@ -244,7 +244,8 @@
 			"tzdr/login/login.html",
 			"tzdr/future/listrg.html",
 			"tzdr/account/openUrlPay.html",
-			"tzdr/future/paycp.html"
+			"tzdr/future/paycp.html",
+			"tzdr/account/gopay.html"
 		]
 	},
 	"tzdr/account/pay.html": {
@@ -468,7 +469,9 @@
 			"css/mui.min.css",
 			"css/own.css",
 			"js/mui.min.js",
-			"js/common.js"
+			"js/common.js",
+			"images/list_01.png",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -631,7 +634,8 @@
 			"images/ac_code.gif",
 			"fonts/mui.ttf",
 			"js/jquery-1.11.3.js",
-			"images/bank/ccb.png"
+			"images/bank/ccb.png",
+			"images/bank/psbc.png"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -882,14 +886,16 @@
 			"images/3.png",
 			"images/0.png",
 			"images/status_02.png",
-			"images/status_04.png"
+			"images/status_04.png",
+			"images/status_03.png"
 		],
 		"refer": [
 			"tzdr/account/account.html",
 			"home.html",
 			"tzdr/quotation/quotationMain.html",
 			"tzdr/future/DetailCn.html",
-			"tzdr/future/DetailHsi.html"
+			"tzdr/future/DetailHsi.html",
+			"tzdr/future/DetailCp.html"
 		]
 	},
 	"tzdr/account/openUrlPay.html": {
@@ -1005,7 +1011,8 @@
 			"tzdr/future/cl.html",
 			"tzdr/future/cn.html",
 			"tzdr/quotation/transactionDetails.html",
-			"tzdr/agree/tradingMarket.html"
+			"tzdr/agree/tradingMarket.html",
+			"tzdr/future/hsi.html"
 		]
 	},
 	"tzdr/agree/cpru.html": {

@@ -213,7 +213,7 @@
 					        //插入主力合约
 					        AddTo()
 					    }else if(method == "OnRspSubscribe"){
-
+								console.log(JSON.stringify(jsonData))
 					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data);
 					         //更新行情的数据
@@ -248,7 +248,6 @@
 			            var data=ManufacturingData(index);
 			            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 			            socket.close();
-//			            reconnect=false;
 			            mui.openWindow({
 							url:"transactionDetails.html",
 							id:"transactionDetails",
@@ -269,10 +268,15 @@
 			        for (var i = 0; i < productContentLeft.length; i++) {          
 			            if (MoreData.Parameters.CommodityNo == productContentLeft[i].innerHTML) {
 			                LastVolume[i].innerText = MoreData.Parameters.TotalVolume;
-			                if (Number(MoreData.Parameters.ChangeRate.toFixed(4)) < 0) {
+			                if (Number(MoreData.Parameters.ChangeRate) < 0) {
 			                    ChangeRate[i].innerText = MoreData.Parameters.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "greenBg ChangeRate";
-			                } else {
+			                }
+//			                else if(Number(MoreData.Parameters.ChangeRate) = 0){
+//			                	 ChangeRate[i].innerText = MoreData.Parameters.ChangeRate.toFixed(2) + "%";
+//			                    ChangeRate[i].className = " ChangeRate";
+//			                }
+			                else {
 			                    ChangeRate[i].innerText = "+" + MoreData.Parameters.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "redBg ChangeRate";
 			                }

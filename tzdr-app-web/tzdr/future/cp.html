@@ -158,7 +158,6 @@
 		
 		
 		function setmainContract(contractList){
-			console.log(JSON.stringify(contractList))
 			var table=document.getElementById("table_list");
 			var tr=document.createElement("tr");
 			var td_1=document.createElement("td");
@@ -169,7 +168,6 @@
 			td_2.innerHTML=contractList.mainContract;
 			td_4.innerHTML=contractList.price+"元/手";
 			var tradeTime = contractList.tradTime;
-			console.log(JSON.stringify(init_params)); 
 			switch (contractList.tradeType){
 				case 0:
 					td_1.innerHTML="富时A50";
@@ -224,7 +222,7 @@
 				case 16:
 					td_1.innerHTML="H股指数";
 					td_3.innerHTML=tradeTime;
-					td_5.innerHTML="只交易美黄金时，初始最大可持仓"+(mui.isnull(init_params.hIndexActualLever) ? 0 : init_params.hIndexActualLever)+"手";
+					td_5.innerHTML="只交易H股指数时，初始最大可持仓"+(mui.isnull(init_params.hIndexActualLever) ? 0 : init_params.hIndexActualLever)+"手";
 					break;
 				case 17:
 					td_1.innerHTML="小H股指数";
