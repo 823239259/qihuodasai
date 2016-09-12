@@ -32,6 +32,13 @@
 			if (mui.cacheUser.isLogin()){
 				mui.openWindow("tzdr/quotation/quotationMain.html","quotationMain");
 			}
+//			mui.ajaxSettings.xhr = function(protocol) {
+//                  return new window.XMLHttpRequest();
+//             };
+//			mui.getJSON("manifest.json",null,function(data){
+//				alert("manifest.json1234")
+//				alert("data.plus.distribute.plugins.statics.umeng"+JSON.stringify(data.plus.distribute.plugins.statics.umeng));
+//			});
 			//状态栏设置
 			setstatus();
 			 if(plus.storage.getItem("guide")==null){

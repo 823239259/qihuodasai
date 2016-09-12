@@ -151,6 +151,8 @@ public class LoginAndRegistController {
 			}
 			wUser.setChannel(channelName); // 设置渠道
 			wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
+		}else{
+			wUser.setChannel(channel);
 		}
 		/*//设置渠道
 		wUser.setChannel(channel);  
@@ -203,7 +205,7 @@ public class LoginAndRegistController {
 		try {
 			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
