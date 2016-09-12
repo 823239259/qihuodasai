@@ -202,7 +202,11 @@ public class LoginAndRegistController {
 		// 缓存用户信息
 		DataConstant.CACHE_USER_MAP.put(appToken,new CacheUser(wUser,secretKey));
 		// 用户注册成功之后给用户手机发送短信
-		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		try {
+			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	
