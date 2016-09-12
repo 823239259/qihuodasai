@@ -152,6 +152,7 @@ public class SMSSender {
 			return flag;
 		}
 		String template = ConfUtil.getContext(templateKey);
+		log.info("template"+template);
 		String content = "";
 		if ("ihuyi.verification.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("module"), map.get("code"));
@@ -180,6 +181,7 @@ public class SMSSender {
 		}else if("ihuyi.verification.signin.success.template".equals(templateKey)){
 			content = String.format(template);
 		}
+		log.info("发送模板内容为："+content);
 		return send(smsChannel, mobile, content);
 	}
 
