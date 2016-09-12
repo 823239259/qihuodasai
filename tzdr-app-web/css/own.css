@@ -340,7 +340,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .pay_cp .sc_listac li span.pay_cpfont { clear: both; color: #999999; font-size: 14px; width: 100%; display: block; padding-top: 10px;}
 .navlist {bottom: 0; display: table; width: 100%; height: 50px; padding: 0; table-layout: fixed; border-top: 0; border-bottom: 0;-webkit-touch-callout: none; background: #333333;position: fixed;
   z-index: 55; right: 0; left: 0;backface-visibility: hidden;-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .7); box-shadow: 0 0 2px rgba(0, 0, 0, .7);}
-.navlist a {display: table-cell; overflow: hidden; width: 1%; height: 50px; text-align: center; vertical-align: middle; white-space: nowrap;  text-overflow: ellipsis; color: #999999;}
+.navlist a {display: table-cell; overflow: hidden; width: 1%; height: 50px; text-align: center; vertical-align: middle; white-space: nowrap;  text-overflow: ellipsis; color: #999999;background-color: #2B2B2B;border-top: 1px solid #454545;}
 .navlist a.navon { color: #FFCC33;}
 .navlist a .mui-icon {top: 3px; width: 24px; height: 24px; padding-top: 0;  padding-bottom: 0;font-size: 24px; position: relative;  z-index: 20;}
 .navlist .mui-icon~.mui-tab-label {
