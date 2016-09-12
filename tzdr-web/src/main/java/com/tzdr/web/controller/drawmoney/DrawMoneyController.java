@@ -103,7 +103,8 @@ public class DrawMoneyController {
 
 	@Autowired
 	private PaymentSupportBankService paymentSupportBankService;
-
+	@Autowired
+	private MessagePromptService messagePromptService;
 	/**
 	 * 取现首页
 	 * 
@@ -411,6 +412,7 @@ public class DrawMoneyController {
 			if (failBean != null) {
 				DrawMoneyFail.removeDrawFailBean(failBean, request, response); // 删除application取现失败次数(包含失效数据)
 			}
+			messagePromptService.sendMessage(PromptTypes.isTheTrial, user.getMobile());
 			request.getSession().removeAttribute(Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY); // 清空是否需要验证码取现失败次数
 			request.getServletContext().removeAttribute(Constants.DRAW_FAIL_MAX_COUNT_SESSION_KEY);
 			return jsonResult;
@@ -874,6 +876,7 @@ public class DrawMoneyController {
 			return new JsonResult("提现失败，请联系客服 400-852-8008");
 		}
 
+		
 		// 更新币币订单号到提现记录中
 		drawMoneyService.updatDrawBybbOrderId(drawList.getId(), bbResult.getString("order_number"));
 		// 发送短信

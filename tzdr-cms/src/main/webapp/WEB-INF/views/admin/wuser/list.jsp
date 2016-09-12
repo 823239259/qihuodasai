@@ -28,8 +28,15 @@
 				<th field="tname" width="150">用户姓名</th>
 				<th field="userType" width="150">用户类型</th>
 				<th field="allocationMoney" width="150">配资金额</th>
-				<th field="avlBal" width="150">余额</th>
+				<th field="avlBal" width="150">账号余额</th>
 				<th field="frzBal" width="150">冻结金额</th>
+				<th field="totalCharge" width="150">总充值金额</th>
+				<th field="totalOperate" width="150">总申请操盘金额</th>
+				<th field="htranActualLever" width="150">恒指操盘手数</th>
+				<th field="ytranActualLever" width="150">原油操盘手数</th>
+				<th field="atranActualLever" width="150">富时A50操盘手数</th>
+				<th field="interActualLever" width="150">国际综合操盘手数</th>
+			    <th field="withDrawMoney" width="150">申请提现金额</th>
 				<th field="idcard" width="150">身份证号</th>
 				<th field="email" width="150">邮箱 </th>
 				<th field="alipayAccount" width="150">支付宝帐号</th>
