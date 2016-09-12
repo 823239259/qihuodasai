@@ -151,6 +151,8 @@ public class LoginAndRegistController {
 			}
 			wUser.setChannel(channelName); // 设置渠道
 			wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
+		}else{
+			wUser.setChannel(channel);
 		}
 		/*//设置渠道
 		wUser.setChannel(channel);  
@@ -200,11 +202,7 @@ public class LoginAndRegistController {
 		// 缓存用户信息
 		DataConstant.CACHE_USER_MAP.put(appToken,new CacheUser(wUser,secretKey));
 		// 用户注册成功之后给用户手机发送短信
-		try {
-			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-		} catch (Exception e) {
-			
-		}
+		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	
