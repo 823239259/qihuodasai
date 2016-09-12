@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>行情</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../js/mui.min.js"></script>
 		 <script src="../../js/common.js"></script>
@@ -15,6 +15,7 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
+			<a class="mui-left" id="tutorial">新手指南</a>
 		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
 		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
 		</header>
@@ -213,9 +214,13 @@
 					        //插入主力合约
 					        AddTo()
 					    }else if(method == "OnRspSubscribe"){
-//								console.log(JSON.stringify(jsonData))
+							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
+					         //更新行情的数据
+					         	console.log(JSON.stringify(MoreData));
+					        	insertData1(MoreData);
+					        
 					    }else if(method == "OnRtnQuote"){
-					         var MoreData=JSON.parse(evt.data);
+					         var MoreData=JSON.parse(evt.data).Parameters;
 					         //更新行情的数据
 					        	insertData1(MoreData);
 					    }
@@ -266,10 +271,10 @@
 			        var LastPrice = document.getElementsByClassName("QLastPrice");
 			        var productContentLeft = document.getElementsByClassName("CommodityNoName");
 			        for (var i = 0; i < productContentLeft.length; i++) {          
-			            if (MoreData.Parameters.CommodityNo == productContentLeft[i].innerHTML) {
-			                LastVolume[i].innerText = MoreData.Parameters.TotalVolume;
-			                if (Number(MoreData.Parameters.ChangeRate) < 0) {
-			                    ChangeRate[i].innerText = MoreData.Parameters.ChangeRate.toFixed(2) + "%";
+			            if (MoreData.CommodityNo == productContentLeft[i].innerHTML) {
+			                LastVolume[i].innerText = MoreData.TotalVolume;
+			                if (Number(MoreData.ChangeRate) < 0) {
+			                    ChangeRate[i].innerText = MoreData.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "greenBg ChangeRate";
 			                }
 //			                else if(Number(MoreData.Parameters.ChangeRate) = 0){
@@ -277,14 +282,14 @@
 //			                    ChangeRate[i].className = " ChangeRate";
 //			                }
 			                else {
-			                    ChangeRate[i].innerText = "+" + MoreData.Parameters.ChangeRate.toFixed(2) + "%";
+			                    ChangeRate[i].innerText = "+" + MoreData.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "redBg ChangeRate";
 			                }
-			                if (Number(MoreData.Parameters.LastPrice) - Number(MoreData.Parameters.PreSettlePrice) < 0) {
-			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[i]);
+			                if (Number(MoreData.LastPrice) - Number(MoreData.PreSettlePrice) < 0) {
+			                    LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
 			                    LastPrice[i].className = "greenFont QLastPrice";
 			                } else {
-			                    LastPrice[i].innerText = MoreData.Parameters.LastPrice.toFixed(product.DotSize[i]);
+			                    LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
 			                    LastPrice[i].className = "redFont QLastPrice";
 			                }
 			
