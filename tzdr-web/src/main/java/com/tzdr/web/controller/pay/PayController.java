@@ -107,6 +107,8 @@ public class PayController {
 		UserVerified userverified = this.payService.findByUserId(user.getId());
 		request.setAttribute("userverified", userverified);
 		request.setAttribute("user", user);
+		String balance = request.getParameter("balance");
+		request.setAttribute("money", balance);
 		request.setAttribute("supportBanks", paymentSupportBankService.querySupportPayBanks());
 		return ViewConstants.PayViewJsp.PAY_MAIN_VIEW;
 	}
@@ -260,6 +262,53 @@ public class PayController {
 	public String pingplusplus(HttpServletRequest request) {
 		if(true)return "";
 		//System.out.println("执行中。。。");
+		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+				.getAttribute(Constants.TZDR_USER_SESSION);
+		WUser user = this.payService.getUser(userSessionBean.getId());
+		String paymoney = request.getParameter("money");
+		String payWay = request.getParameter("payWay");
+		if (paymoney != null && Double.parseDouble(paymoney) > 0) {
+			int status = Constants.PayStatus.NO_PROCESSING;
+			String paytype = Constants.PayType.ALIPAY;
+			int source = Constant.Source.TZDR;
+			String ip = IpUtils.getIpAddr(request);
+			String orderNo = ChargeExample.randomNo();
+			Channel payWayChannl = null;
+			if (payWay == null) {
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
+			} else {
+				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
+				if (payWayChannl == null) {
+					payWayChannl = Channel.ALIPAY_PC_DIRECT;
+				}
+			}
+			String result = payService.doSavePingPPRecharge(payWayChannl, source, user, status, "", paymoney, ip,
+					paytype, orderNo);
+			if (result.equals("1")) {
+				PingPPModel pingPPModel = new PingPPModel();
+				pingPPModel.setAmount(Double.valueOf(paymoney));
+				pingPPModel.setBody(Config.BODY);
+				pingPPModel.setChannel(payWayChannl.getChannelCode());// ;
+				pingPPModel.setClient_ip(ip);
+				pingPPModel.setCurrency("cny");
+				pingPPModel.setOrder_no(orderNo);
+				pingPPModel.setSubject(Config.SUBJECT);
+				request.setAttribute("charge", ChargeExample.createCharge(pingPPModel).toString());
+			}
+			return "/views/pay/pingppPay";
+		}
+		return null;
+	}
+	
+	/**
+	 * ping++支付
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/wx/pingplusplus", method = RequestMethod.GET)
+	public String wxPingplusplus(HttpServletRequest request) {
+		System.out.println("执行中。。。");
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		WUser user = this.payService.getUser(userSessionBean.getId());

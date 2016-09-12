@@ -18,7 +18,7 @@ public class ActivityConfig {
 	 */
 	public static long now_time = new Date().getTime();
 	
-	public static Map<String, String> map = new HashMap<>();
+	public static Map<String, String> map = new HashMap<String, String>();
 	public static boolean comparTo(){
 		Long end = new Long(map.get("activity_onLineEndTime"));
 		Long now = new Long(now_time);

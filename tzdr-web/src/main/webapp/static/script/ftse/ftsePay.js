@@ -27,16 +27,24 @@ $(document).ready(function(){
  * 检测余额是否充足
  */
 function checkBanlanceEnough() {
-	var balance = $("#banlance").text(); // 账户余额
-	var payable = $("#payable").text(); // 实际支付金额
-	if(parseFloat(balance) < parseFloat(payable)) {
+	var balance =parseFloat($("#banlance").text()); // 账户余额
+	var payable = parseFloat($("#payable").text()); // 实际支付金额
+	var content = "";
+	if(balance < payable) {
 		$("#notEnoughPay").show();
-		$("#confirmPay").attr("status",false);
-		$("#confirmPay").attr("class","fl_pb_nosure");
+		$("#confirmPay").attr("status",true);
+		//$("#confirmPay").attr("class","fl_pb_nosure");
+		$("#confirmPay").text("去充值");
+		bindPay((payable - balance));
+		content = "你的账户余额只剩"+banlace+"元,本次充值支付还差"+banlace+"元";
 	} else {
+		bindConfirmPay();
 		$("#notEnoughPay").hide();
 		$("#confirmPay").attr("status",true);
+		$("#confirmPay").text("确认支付");
+		content = "你的账户余额只剩"+banlace+"元,本次充值支付完毕剩余"+banlace+"元";
 	}
+	$("#notEnoughPay").text(content);
 }
 /*
  * 代金券优惠
@@ -58,14 +66,24 @@ function vocherSeleted(obj) {
 function colseConfirmPayDiv() {
 	$("#confirmPayDiv").hide();
 };
-
-$('#confirmPay').live('click',function(){
-	var status =  $(this).attr("status");
-	$(this).attr("status",false);
-	if(status == "true"){
-		$("#confirmPayDiv").hide();
-		$(this).attr("status",true);
-		$("#voucherId").val($("#voucher").val());
-		$('#forPaySubmit').click();
-	}
-});
+/**
+ * 绑定去充值事件
+ */
+function bindPay(banlace){
+	$("#confirmPay").attr("href",basepath + "pay/payinfo?balance="+banlace);
+}
+/**
+ * 绑定确认支付事件
+ */
+function bindConfirmPay(){
+	$('#confirmPay').bind('click',function(){
+		var status =  $(this).attr("status");
+		$(this).attr("status",false);
+		if(status == "true"){
+			$("#confirmPayDiv").hide();
+			$(this).attr("status",true);
+			$("#voucherId").val($("#voucher").val());
+			$('#forPaySubmit').click();
+		}
+	});
+}
