@@ -343,6 +343,7 @@ p{
 }
 .operateLogin label,input{
 	display: inline-block;
+	text-align: left;
 }
 .mui-input-group .mui-input-row{
 	height: 50px;
@@ -359,6 +360,7 @@ p{
 	height: 50px;
 	line-height: 30px;
 	width: 110%;
+	text-align: left;
 }
 
 .operateLogin button {
@@ -572,4 +574,14 @@ input{
 #tutorial{
 	color:#FFFFFF;
 	line-height: 43px;
+}
+.mui-input-row select{
+	height: 50px;
+	line-height: 50px;
+	background-color: #2B2B2B;
+	color:#FFFFFF;
+	text-align: center;
+}
+.mui-select:before{
+	top:15px;
 }
