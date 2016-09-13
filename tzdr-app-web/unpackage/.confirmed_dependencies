@@ -93,7 +93,8 @@
 			"tzdr/quotation/quotationMain.html",
 			"tzdr/quotation/transactionDetails.html",
 			"tzdr/news/news.html",
-			"tzdr/quotation/activity.html"
+			"tzdr/quotation/activity.html",
+			"tzdr/news/active.html"
 		]
 	},
 	"list.html": {
@@ -1146,6 +1147,15 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/mui.min.js"
+		]
+	},
+	"tzdr/news/active.html": {
+		"resources": [
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		]
 	}
 }
