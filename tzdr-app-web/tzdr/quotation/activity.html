@@ -12,34 +12,44 @@
 		.activetyBanner{
 			width: 100%;
 		}
+		.mui-content{
+			background-color: #FFFFFF;
+			overflow: hidden;
+		}
 		.activetyBanner img{
 			width: 100%;
 			height: auto;
 		}
 		.activeContent{
 			width: 96%;
-			padding:15px 2%;
+			padding:15px 2% 0px;
 		}
 		.activeContent img{
 			width: 100%;
 		}
 		.activeContent p{
 			color:#542d1e;
+			font-size: 10px;
+			text-align:left;
+			line-height: 15px;
 		}
-		/*.activeContentTitle{
-			width: 100%;
-			height: 70px;
-			color:#fef8de;
-			text-align: center;
-			background-image: url(../../images/backgound1.jpg) ;
-			background-repeat: no-repeat;
-		}*/
-		.numberBg{
-			display: inline-block;
-			width: 50px;
-			height: 50px;
+		#buttomImg{
+			border-top: 1px solid #ffae24;
+		}
+		#bottomImage{
+			width:100%;
+			height: auto;
 		}
 	</style>
+	<script>
+		mui.init();
+		
+		mui.plusReady(function(){
+			var muiContent=document.getElementsByClassName("mui-content")[0];
+			offsetHeight=muiContent.offsetHeight;
+			muiContent.style.height=offsetHeight-5+"px";
+		})
+	</script>
 	</head>
 	<body>
 		<div class="mui-content">
@@ -48,13 +58,16 @@
 			</div>
 			<div class="activeContent">
 			<!--	<div class="activeContentTitle"><h3>App专属特权-手机端交易，双边手续费每手最高减10元！</h3></div>-->
-				<img src="../../images/activeTitle.png">
+			<img src="../../images/activeTitle.png">
 				<p>活动期间，使用手机App进行操盘交易，可享受APP交易专属手续费优惠！</p>
-				<div class="mainContent">
-					<h3><div class="numberBg">1</div>国际原油</h3>
-				</div>
-				
+				<img src='../../images/buttom.jpg' id='buttomImg'>
+				<p>活动说明：</p>
+					<p>1、活动同享：App专属活动与网站首笔交易费免费和补损3000元 活动可同时享受。</p>
+					<p>2、奖励条件：本活动仅限在APP进行交易的用户享有。</p>
+					<p>3、奖励发放：结算方案时，凡是在APP进行交易的手续费自动减免。</p>
+					<p>4、发生在活动期间内的交易才可享受该活动优惠。</p>
 			</div>
+			<img src='../../images/backgoundTop.png' id="bottomImage">
 		</div>
 	</body>
 </html>
