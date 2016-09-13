@@ -25,14 +25,15 @@
 	</header>
 	<div class="mui-content operateLogin">
 		<form  class="mui-input-group blackBg">
-			<div class="mui-input-row mui-select">
+			<div class="mui-input-row">
+				<label>选择操盘账号</label>
+				<select class="accountSelect">
+					<option class="mui-selected">请选择操盘账号</option>
+				</select>
+			</div>
+			<div class="mui-input-row">
 				<label>操盘账号</label>
 				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您操盘账号" >
-				<!--<select class="accountSelect">
-					<option class="mui-selected"></option>
-				</select>-->
-				<!--<label>操盘账号</label>
-				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您操盘账号" >-->
 			</div>
 			<div class="mui-input-row mui-password">
 				<label>登录密码</label>
@@ -65,6 +66,32 @@
 					}else{
 						$("#checkBox").val(1);
 						num=0;
+					}
+				});
+				$("#account").attr("disabled","disabled");
+				$("#password").attr("readonly","readonly");
+				var arr=[1,2,3,4,5];
+				var Len=arr.length;
+				for(var i=0;i<=Len;i++){
+					if(i==Len){
+						$(".accountSelect").append("<option value='test'>其他</option>")
+					}else{
+						$(".accountSelect").append("<option value="+arr[i]+">"+arr[i]+"</option>")
+					}
+					
+				};
+				$(".accountSelect").change(function(){
+					var val=$(".accountSelect").val();
+					if(val=="test"){
+						$("#account").removeAttr("disabled");
+						$("#password").removeAttr("readonly");
+						$("#account").val("");
+						$("#password").val("");
+					}else{
+						$("#account").val(val);
+						$("#password").val(val);
+						$("#account").attr("disabled","disabled");
+						$("#password").attr("readonly","readonly");
 					}
 				})
 				$("#account").val(endLoginAccount == null?"":endLoginAccount);
@@ -120,7 +147,6 @@
 				document.getElementById("backClose").addEventListener("tap",function(){
 					backReload(); 
 				});
-				
 				$("#operateLogin").click(function(){
 					if(username == null){
 						account=document.getElementById("account").value;
@@ -191,7 +217,8 @@
 						url:"../agree/tradingMarket.html",
 						id:"tradingMarket"
 					})
-				})
+				});
+				$("#account")
 			});
 			
 		</script>
