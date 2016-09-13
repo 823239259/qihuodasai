@@ -125,7 +125,7 @@
 			var iscould= draw_time >= 0 ? true : false;
 			if(iscould){
 				drawHandleFee.innerHTML=tzdr.moneyUtils.decimal(drawmoney*0.01,2);
-				document.getElementById("draw_time").innerHTML=tzdr.moneyUtils.decimal(drawmoney*0.99,2);
+				document.getElementById("draw_time").innerHTML=tzdr.moneyUtils.decimal(drawmoney-drawHandleFee.innerHTML,2);
 			}else{
 				mui.toast("余额不足，请充值！");
 				return;
