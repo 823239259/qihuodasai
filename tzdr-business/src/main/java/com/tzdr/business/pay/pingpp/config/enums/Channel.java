@@ -20,7 +20,11 @@ public enum Channel {
 	/**
 	 * 国付宝
 	 */
-	GO_WAY(7,"go_way","国付宝支付");
+	GO_WAY(7,"go_way","国付宝支付"),
+	/**
+	 * 微信扫码支付
+	 */
+	WX_PUB_QR(8,"wx_pub_qr","微信扫码支付");
 	private Integer channel;
 	private String channelCode;
 

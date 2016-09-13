@@ -39,6 +39,9 @@ public class ChargeExample {
         	extra.put("success_url",Config.ALIPAY_PC_SUCCESS_URL);
         }else if(channel.equals(Channel.ALIPAY_WAP.getChannelCode())){
         	extra.put("success_url",Config.ALIPAY_WAP_SUCCESS_URL);
+        }else if(channel.equals(Channel.WX_PUB_QR.getChannelCode())){
+        	extra.put("limit_pay","no_credit");//设置表示微信扫码支付不能使用信用卡支付
+        	extra.put("product_id", "12345678");
         }
         chargeMap.put("extra", extra);
         try {
