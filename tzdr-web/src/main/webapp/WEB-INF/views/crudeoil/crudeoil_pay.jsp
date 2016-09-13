@@ -86,6 +86,14 @@
             <p class="fl_promtfont">注：代金券一般由维胜平台活动发放，请大家多多关注。</p>
         </div>	
     </div>
+    <form style = "display: none;" action="${ctx}/pay/payinfo" id = "toPayInfoForm" method = "get">
+    	<input type="hidden" value = "0" name = "balance"/>
+    	<input type="hidden" value = "1" name = "isFlag"/>
+    	<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />
+		<input type="hidden" name="inputTranLever" value="${inputTranLever}" />
+		<input type="hidden" name="payUrl" value = "usercrudeoil/paySuccessful"/>
+		<input type="submit" id = "toPayInfoSubmit"/>
+    </form>
 	<div class="capital">
 		<form action="${ctx}/usercrudeoil/paySuccessful" id="payableForm" method="post">
 			<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />

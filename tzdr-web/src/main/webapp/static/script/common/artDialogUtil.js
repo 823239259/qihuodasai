@@ -92,6 +92,21 @@ function showMsgDialogRestPassWordLoadLoginUrl(title,content,time){
 	});
 	
 }
+function showMsgDialogPaySuc(title,content,time){
+	var dialog = art.dialog({
+	    title: title,
+	    width:200,
+	    content:content,
+	    icon: 'warning', 
+	    cancelVal: '关闭',
+	    background:'#BBBBBB',
+	    opacity:0.87, 
+	    zIndex:9900,  
+	    lock:true,
+	    time:time,
+	    cancel: function(){window.location.href=basepath+"/user/account";}//true //为true等价于function(){}
+	});
+}
 /**
  * 点击关闭刷新页面
  * @param title

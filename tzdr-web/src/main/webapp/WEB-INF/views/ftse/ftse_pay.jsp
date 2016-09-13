@@ -22,6 +22,7 @@
 <script language="javascript" src="${ctx}/static/script/common/tzdr.user.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftsePay.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/Util.js?v=${v}"></script>
 
 <title>支付确认 - 富时A50- 维胜金融 -中国领先的国际期货及衍生品互联网交易平台</title>
 </head>
@@ -57,6 +58,7 @@
              -->
             <div class="fl_uc_main">
             	<ul class="fl_paylist">
+            		<input type="hidden" value = "0" id = "isFlagToPay"/>
             		<li><label>账户余额：</label><span><i id="banlance"><fmt:formatNumber value="${avlBal}" pattern="###.##" /></i>元</span></li>
             		<li><label>支付金额：</label><span><i id="payable"><fmt:formatNumber value="${payable}" pattern="###.##" /></i>元</span></li>
             		<input type="hidden" id="payableFiexd" value="${payable}" />
@@ -86,6 +88,14 @@
             <p class="fl_promtfont">注：代金券一般由维胜平台活动发放，请大家多多关注。</p>
         </div>	
     </div>
+    <form style = "display: none;" action="${ctx}/pay/payinfo" id = "toPayInfoForm" method = "get">
+    	<input type="hidden" value = "0" name = "balance"/>
+    	<input type="hidden" value = "1" name = "isFlag"/>
+    	<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />
+		<input type="hidden" name="inputTranLever" value="${inputTranLever}" />
+		<input type="hidden" name="payUrl" value = "userftse/paySuccessful"/>
+		<input type="submit" id = "toPayInfoSubmit"/>
+    </form>
 	<div class="capital">
 		<form action="${ctx}/userftse/paySuccessful" id="payableForm" method="post">
 			<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />

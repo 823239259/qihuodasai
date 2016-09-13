@@ -78,10 +78,7 @@ function addCookie(objName, objValue){
 		} 
 		objValue=Num;
 	}
-	var days = 365; 
-    var exp = new Date(); 
-    exp.setTime(exp.getTime() + days*24*60*60*1000); 
-    document.cookie = objName+"="+ escape (objValue)+";path=/;expires="+exp.toGMTString(); 
+    document.cookie = objName+"="+ escape (objValue)+";path=/;expires=0"; 
 }
 //获取指定名称的cookie的值 
 function getCookie(c_name) {

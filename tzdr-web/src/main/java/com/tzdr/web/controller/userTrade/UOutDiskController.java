@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,23 +15,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hundsun.t2sdk.common.util.CollectionUtils;
 import com.hundsun.t2sdk.common.util.UUID;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
+import com.tzdr.business.pay.pingpp.config.enums.TradeStatus;
 import com.tzdr.business.service.OutDisk.OutDiskParametersService;
 import com.tzdr.business.service.OutDisk.OutDiskPriceService;
 import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.utils.TypeConvert;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.OutDiskParameters;
 import com.tzdr.domain.web.entity.OutDiskPrice;
+import com.tzdr.domain.web.entity.RechargeList;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 import com.tzdr.web.constants.ViewConstants;
+import com.tzdr.web.utils.CookiesUtil;
 import com.tzdr.web.utils.UserSessionBean;
 
 /**
@@ -54,7 +62,8 @@ public class UOutDiskController {
 	private WUserService wUserService;
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
-
+	@Autowired
+	private PayService payService;
 	/**
 	 * 资金明细业务类型
 	 */
@@ -117,7 +126,44 @@ public class UOutDiskController {
 			return ViewConstants.OutDiskJsp.PAY;
 		}
 	}
-
+	/**
+	 * 国付宝支付前台地址回调
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/callback/frontmer")
+	public String doGoPayCallBackFrontMer(HttpServletRequest request){
+		request.setAttribute("orderId", request.getParameter("merOrderNum"));
+		return "/views/pay/paysuc";
+	}
+	/**
+	 * 验证订单是否支付成功
+	 * @param orderId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/validation/order/pay")
+	public JsonResult validationOrderPay(HttpServletRequest request,HttpServletResponse response){
+		//缓存订单是否在有效期内
+		Cookie cookie = CookiesUtil.getCookieByName(request, "orderId");
+		String orderId = null;
+		boolean flag = false;
+		JsonResult resultJson = new JsonResult();
+		if(cookie != null){
+			orderId = cookie.getValue();
+			log.info("支付完成验证订单:"+orderId);
+			RechargeList rechageList = payService.findByNo(orderId);
+			if(rechageList != null){
+				if(rechageList.getStatus() == TradeStatus.SUCCESS.getCode()){
+					flag = true;
+				}
+			}
+		}
+		log.info("验证结果:"+flag);
+		resultJson.setSuccess(flag);
+		resultJson.setMessage(String.valueOf(request.getSession(false).getAttribute("tokenTzdr")));
+		return resultJson;
+	}
 	/**
 	 * 支付成功页面
 	 * 
