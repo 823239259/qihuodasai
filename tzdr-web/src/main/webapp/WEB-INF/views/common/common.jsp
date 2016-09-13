@@ -32,15 +32,12 @@
 <c:set var="p2pMyBorrowMoney" value="<%=p2pMyBorrowMoney%>"></c:set>
 <c:set var="p2pMyInvestment" value="<%=p2pMyInvestment%>"></c:set>
 <c:set var="futureUrl" value="<%=futureUrl %>"></c:set>
-<script language="javascript" src="${ctx}/static/script/common/jquery-1.8.0.min.js"></script>
+<script language="javascript" src="${ctx}/static/script/common/jquery-1.8.0.min.js?v=${v}"></script>
 <script language="javascript" src="${ctx}/static/script/common/commonUtils.js"></script>
 <!-- <script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script> -->
 <script language="javascript" src="${ctx}/static/script/common/discussStock.js?v=${v}"></script>
-<%-- <script language="javascript" src="${ctx}/static/script/common/BizQQWPA.js?version=20150515"></script> --%>
-<%-- <link rel="stylesheet" type="text/css" href="${ctx}/static/css/common.css?version=20150724"> --%>
 <link rel="stylesheet" href="${ctx }/static/css/new_index.css?v=${v}">
 <link rel="shortcut icon" href="${ctx}/static/ico/icon.png">
-
 <%@ include file="../common/dsp.jsp"%>
 <!-- start 吉鹏代码 -->
 <script type="text/javascript">
@@ -64,19 +61,10 @@ _atrk_opts = { atrk_acct:"lhQPn1QolK10WR", domain:"vs.com",dynamic: true};
 <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=lhQPn1QolK10WR" style="display:none" height="1" width="1" alt="" /></noscript>
 <!-- <!— End Alexa Certify Javascript —> -->
 <script type="text/javascript">
-	
 	var basepath='${ctx}'+"/";
 	var isLoginSSO=Boolean("${sessionScope.tzdrUser}");
 	var sc_width = $(window).height() ;
-	//if(isIE = navigator.userAgent.indexOf("MSIE")!=-1) { 
-		/* if(sc_width >= 780){
-		    loadjscssfile(basepath+'static/css/common.css','css');
-		}else{
-		    loadjscssfile(basepath+'static/css/common.mini.css','css');
-		} */
-	//} 
 	function loadjscssfile(filename,filetype){
-
 	    if(filetype == "js"){
 	        var fileref = document.createElement('script');
 	        fileref.setAttribute("type","text/javascript");
@@ -91,7 +79,6 @@ _atrk_opts = { atrk_acct:"lhQPn1QolK10WR", domain:"vs.com",dynamic: true};
 	   if(typeof fileref != "undefined"){
 	        document.getElementsByTagName("head")[0].appendChild(fileref);
 	    }
-	    
 	}
 	var stockForumBasePath = '${sfb}'+"/";
 	var isOpanStockForum = '${iosf}';

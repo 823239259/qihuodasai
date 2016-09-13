@@ -66,7 +66,7 @@
                     <span><i>免费</i></span>
                 </li>
             </ul>
-            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易10种期货产品)</i></h2>
+            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易15种期货产品)</i></h2>
             <table border="0" cellspacing="0" cellpadding="0" class="cpx_ru_list">
                 <thead>
                     <td width="11%">期货产品</td>
