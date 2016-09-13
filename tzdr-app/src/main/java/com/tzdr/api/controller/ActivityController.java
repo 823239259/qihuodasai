@@ -72,7 +72,7 @@ public class ActivityController {
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
 	/**
-	 * 上线推广注册页面 （f）
+	 * 上线推广注册页面
 	 * 
 	 * @param request
 	 *            2016.08.01
