@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="../common/common.jsp"%>
 <%@include file="../common/import-artDialog-js.jspf"%>
@@ -8,17 +7,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
-	<!-- <meta name="viewport" content="user-scalable=no" /> -->
 	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台【官网】</title>
 	<meta name="keywords" content="维胜,期货,国际期货,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,无息配资,都城投资,投资达人,A50交易,多空多头空头,投机套保套利,外盘期货公司,国际期货开户,国际期货公司,外盘期货交易模拟软件"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 	<%
-		//String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
 		String imgPreURL = ConfUtil.getContext("banner.url");
 	%>
-	<c:set var="ctx" value="<%=basePath%>"></c:set>
-	<c:set var="v" value="20151127"></c:set>
 	<c:set var="imgPreURL" value="<%=imgPreURL %>"></c:set>
 	<link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
 	<link href="${ctx }/static/css/homepage.css?v=${v}" rel="stylesheet" type="text/css" />
@@ -115,7 +110,6 @@
 <body>
 <!-- header -->
 <%@include file="../common/header.jsp"%>
-<!-- 广告切换 -->
 <!-- 弹出层 -->
 <div id="div_Mask"  style="display:none;"></div>
 <div class="div_loading">
@@ -182,55 +176,55 @@
     	</div>
     </div>
     <div class="login">
-	        <div class="loginbox">
-	        <%
-	       		if(request.getSession().getAttribute("userName")!=null){
-	       	%>
-			<div class="lgctn" id="logondiv">
-				<h3 class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></h3>
-				<div class="lg_info">
-					<p class="yuei">账户余额：${usermap.user_avlbal }元</p>
-					<div>
-	            		<a href="${ctx}/user/account" class="lg_chaopan">操盘账户</a>
-	            	</div>
-	            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
-				</div>
-	        	<p style="border-top: 1px solid #4d4d4d"></p>
-	        </div>
-	       	<%
-	       		}else{
-	       	%>
-	        <div class="lgctn" id="logindiv">
-	            <h3>登录</h3>
-	            	<input type="hidden" value="${islogin }" id = "islogin"> 
-	             <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
-	                <input type="hidden" name="isajax" value="true">
-	                <input type="hidden" name="isframe" value="true">
-	                <input type="hidden" name="lt" value="" id="LoginTicket">
-	                <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
-	                <input type="hidden" name="_eventId" value="submit">
-	                <div class="lg_ip">
-	                    <div class="lg_ipctn">
-	                        <i class="user"></i>
-	                        <input type="tel" id="username" name="username" value="${m }" placeholder="请输入手机号码">
-	                        <!-- 请输入手机号码 -->
-	                    </div>
-	                    <div class="lg_ipctn">
-	                        <i class="password"></i>
-	                        <input type="password" id="password" name="password" value="${p }" placeholder="请输入登录密码">
-	                        <!-- 请输入登录密码 -->
-	                    </div>
-	                    <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
-	                    <div class="lg_link">
-	                        <a href="${ctx}/forgetpw" class="left">忘记密码?</a>
-	               			 <a href="${ctx}/signin" class="right">免费注册</a>
-	                    </div>
+        <div class="loginbox">
+        <%
+       		if(request.getSession().getAttribute("userName")!=null){
+       	%>
+		<div class="lgctn" id="logondiv">
+			<h3 class="lg_user">您好，<i>${mobile}</i><a href="${ctx}/logout">【安全退出】</a></h3>
+			<div class="lg_info">
+				<p class="yuei">账户余额：${usermap.user_avlbal }元</p>
+				<div>
+            		<a href="${ctx}/user/account" class="lg_chaopan">操盘账户</a>
+            	</div>
+            	<p class="lg_time" style="display:block;">上次登录时间：<br><i>${lastLoginTime}</i></p>
+			</div>
+        	<p style="border-top: 1px solid #4d4d4d"></p>
+        </div>
+       	<%
+       		}else{
+       	%>
+        <div class="lgctn" id="logindiv">
+			<h3>登录</h3>
+            <input type="hidden" value="${islogin }" id = "islogin"> 
+            <form id="loginForm" name="loginForm" action="<%=casServerLoginUrl%>" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
+				<input type="hidden" name="isajax" value="true">
+	            <input type="hidden" name="isframe" value="true">
+	            <input type="hidden" name="lt" value="" id="LoginTicket">
+	            <input type="hidden" name="execution" value="e3s1" id="J_FlowExecutionKey">
+	            <input type="hidden" name="_eventId" value="submit">
+	            <div class="lg_ip">
+		            <div class="lg_ipctn">
+		                <i class="user"></i>
+		                <input type="tel" id="username" name="username" value="${m }" placeholder="请输入手机号码">
+		                <!-- 请输入手机号码 -->
+		            </div>
+	                <div class="lg_ipctn">
+	                    <i class="password"></i>
+	                    <input type="password" id="password" name="password" value="${p }" placeholder="请输入登录密码">
+	                    <!-- 请输入登录密码 -->
 	                </div>
-	            </form>
+	                <div class="lg_btn"><button id="login" type="button">立即登录</button></div>
+	                <div class="lg_link">
+	                    <a href="${ctx}/forgetpw" class="left">忘记密码?</a>
+	           			 <a href="${ctx}/signin" class="right">免费注册</a>
+	                </div>
 	            </div>
-	            <% } %>
-	            <div class="lg_bottom"></div>
-   		</div>
+            </form>
+        </div>
+        <% } %>
+        <div class="lg_bottom"></div>
+        </div>
     </div>
 </div>
 <!-- 最新公告 -->

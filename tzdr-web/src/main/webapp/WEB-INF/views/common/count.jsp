@@ -1,5 +1,4 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
     var visitrecord_p = null;                //获取推广
     var visitrecord_uid = null;              //获取渠道

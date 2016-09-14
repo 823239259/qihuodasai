@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <script type="text/javascript">
-	
  $(document).ready(function(){
 	var nav=$('.uc_sidebar').find('div.uc_nav ul li');
 	nav.click(function(){
@@ -31,7 +30,6 @@
 				<li><a id="drawnav" href="${ctx}/draw/drawmoney" >我要提现</a><i>></i></li>
 				<li><a id="fund" href="${ctx}/fund/fundDetail">资金明细</a><i>></i></li>
 				<li><a id="coupon" href="${ctx}/user/coupon/list">我的优惠</a><i>></i></li>
-			
 			</ul>
 		</div>
 		<div class="uc_nav" style="border-bottom:none;">

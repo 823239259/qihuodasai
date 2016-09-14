@@ -1088,3 +1088,132 @@ changeFivteenToEighteen = function(card) {
     }
     return card;
 };
+
+/* + */
+/**
+蒙版信息控件
+用法：
+1.引用 .css
+2.引用 mask.js
+3.调用方法
+var obj=new MaskControl();
+//显示蒙版提示信息
+obj.show("显示的提示信息");
+//隐藏蒙版提示信息
+obj.hide();
+//显示提示信息，并隔timeOut(1000代表1秒)自动关闭
+obj.autoDelayHide=function(html,timeOut)
+*/
+function MaskControl(){
+	this.show=function(html){
+		var loader=$("#div_maskContainer");
+		if(loader.length==0){
+			loader=$("<div id='div_maskContainer'><div id='div_Mask' ></div><div id='div_loading' ></div></div>");
+			$("body").append(loader);
+		}
+		self.loader=loader;
+		var w=$(window).width();
+		var h=$(window).height();
+		var divMask=$("#div_Mask");
+		divMask.css("top",0).css("left",0).css("width",w).css("height",h);
+		var tipDiv=$("#div_loading");
+		if(html==undefined)
+		html="";
+		tipDiv.html(html);
+		loader.show();
+		var x=(w-tipDiv.width())/2;
+		var y=(h-tipDiv.height())/2;
+		tipDiv.css("left",x);
+		tipDiv.css("top",y);
+	},
+	this.hide=function(){
+		var loader=$("#div_maskContainer");
+		if(loader.length==0) return ;
+		loader.remove();
+	},
+	this.autoDelayHide=function(html,timeOut){
+		var loader=$("#div_maskContainer");
+		if(loader.length==0) {
+			this.show(html);
+		}
+		else{
+			var tipDiv=$("#div_loading");
+			tipDiv.html(html);
+		}
+		if(timeOut==undefined) timeOut=3000;
+		window.setTimeout(this.hide,timeOut);
+	}
+} 
+
+function bandcard(){
+	var idcard='${requestScope.idcard}';
+	if(idcard!=""){
+		window.location.href=basepath+"/draw/drawmoney?tab=1";
+	}else{
+		showMsgDialog("提示","请先进行实名认证");
+	}
+}
+/* + */
+$("#idcard_front").fileupload({
+    url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内
+    dataType:'json',
+    formData:{dir:"upload/idcard",fileType:"img",limitSize:2},//如果需要额外添加参数可以在这里添加
+    done:function(e,result){
+    	result = result.result;
+    	var imgurl = result.url;
+    	if(result.error==""){
+    		alert("上传成功");
+    		$("#idcardfrontfile").val(imgurl);
+    		showfilename(imgurl,"idcard_frontspan");
+    	}else{
+    		alert(result.error);
+    	}
+    	
+    	//document.getElementById("idcardfrontfile").value=url;
+    	
+    }
+});
+
+$("#idcard_back").fileupload({
+    url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内
+    dataType:'json',
+    formData:{dir:"upload/idcard",fileType:"img",limitSize:2},//如果需要额外添加参数可以在这里添加
+    done:function(e,result){
+    	result = result.result;
+    	var imgurl = result.url;
+    	//document.getElementById("idcardfrontfile").value=url;
+    	
+    	if(result.error==""){
+    		alert("上传成功");
+    		$("#idcardbackfile").val(imgurl);
+    		showfilename(imgurl,"idcard_backspan");
+    	}else{
+    		alert(result.error);
+    	}
+    }
+});
+
+$("#idcard_path").fileupload({
+    url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内
+    dataType:'json',
+    formData:{dir:"upload/idcard",fileType:"img",limitSize:2},//如果需要额外添加参数可以在这里添加
+    done:function(e,result){
+    	result = result.result;
+    	var url = result.url;
+    	//document.getElementById("idcardfrontfile").value=url;
+    	if(result.error==""){
+    		alert("上传成功");
+    		$("#idcardpathfile").val(url);
+    		showfilename(url,"idcardspan");
+    	}else{
+    		alert(result.error);
+    	}
+    }
+});
+
+function showfilename(fileurl,id){
+	var length=fileurl.lastIndexOf("/");
+	var filename=fileurl.substring(length+1,fileurl.length);
+	var name=filename.substring(filename.length-8,filename.length);
+	$("#"+id).html(name);
+}
