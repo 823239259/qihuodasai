@@ -793,6 +793,14 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			if (dataMapService.activityExpired()) {
 				this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(), wuser.getMobile(), wellGoldA50.getId());
 			}
+			Double wEndAmount = simpleFtseUserTrade.getEndAmount().doubleValue();
+			Double wbond = simpleFtseUserTrade.getTraderBond().doubleValue() + simpleFtseUserTrade.getAppendTraderBond().doubleValue();
+			Double wMxAmount = wbond;
+			if(wEndAmount > wbond){
+				wMxAmount = wEndAmount;
+			}
+			wuser.setCountOperateMoney(wuser.getCountOperateMoney() + wMxAmount);
+			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
 	}
@@ -1123,13 +1131,15 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		}
 		return "";
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
-	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid){
+	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid) {
 		if(!StringUtils.isEmpty(uid)){
-			return simpleFtseUserTradeDao.findByUidAndStateType(uid);
-			
+			return	this.getEntityDao().findByUidAndStateType(uid);
 		}
-		return new ArrayList<>();
-	} 
+		return null;
+	}
+	
+	
 }
