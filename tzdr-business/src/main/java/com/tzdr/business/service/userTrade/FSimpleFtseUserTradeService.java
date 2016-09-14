@@ -198,4 +198,8 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	 * @return
 	 */
 	public List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime);
+	
+	
+	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid);
+	
 }

@@ -41,4 +41,7 @@ public interface FSimpleFtseUserTradeDao extends BaseJpaDao<FSimpleFtseUserTrade
 	List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime);
 	@Query("from FSimpleFtseUserTrade where tranProfitLoss < 0 and uid = ?1")
 	List<FSimpleFtseUserTrade> findByUidFristLoss(String uid);
+	
+	@Query("from FSimpleFtseUserTrade where stateType=4 and uid=?1")
+	List<FSimpleFtseUserTrade> findByUidAndStateType(String uid);
 }

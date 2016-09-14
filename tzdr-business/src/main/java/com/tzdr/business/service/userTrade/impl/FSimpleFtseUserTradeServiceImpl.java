@@ -2,6 +2,7 @@ package com.tzdr.business.service.userTrade.impl;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -1122,4 +1123,11 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		}
 		return "";
 	}
+	
+	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid){
+		if(!StringUtils.isEmpty(uid)){
+			return simpleFtseUserTradeDao.findByUidAndStateType(uid);
+		}
+		return new ArrayList<>();
+	} 
 }
