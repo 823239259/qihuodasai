@@ -435,7 +435,6 @@ mui.plusReady(function(){
      var timeLabel=[];
     function handleTime(json){
         var Len=json.Parameters.length;
-        console.log(Len);
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters;
        	var leng=timePrice.length;

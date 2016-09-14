@@ -60,8 +60,6 @@
     				return;
     			}
     		});
-    		
-    		
     		//去后台接口校验是否实名认证
 			mui.app_request("/user/getbalancerate",{
 				"businessType":4 
@@ -309,7 +307,8 @@
 				<label>实际到账</label>
 				<span><i id="draw_time"></i>元</span>
 			</li>
-		</ul>			
+		</ul>
+		<p id="freeMoney"><span>免费提现金额</span><span><i id="freeCashMoney">123元</i></span></p>
 		<ul class="mui-table-view aw_withpassword">
 			<li class="mui-table-view-cell">		 		
 				<!--<a class="mui-navigate-right" href="javascript:void(0);">-->
@@ -322,6 +321,10 @@
 					<b class="aw_withpasslink" id="drawPage"></b>-->
 				<!--</a>-->
 			</li>
+			<!--<li class="mui-table-view-cell">		 		
+				<label>免费提现金额</label>
+					<span><i >123</i>元</span>
+			</li>-->
 			<!--<li class="mui-table-view-cell" id="changePwd">		 		
 				<a class="mui-navigate-right" href="javascript:void(0);">
 					<label>修改提现密码</label>

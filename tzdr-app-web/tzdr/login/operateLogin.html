@@ -68,18 +68,38 @@
 						num=0;
 					}
 				});
-				$("#account").attr("disabled","disabled");
-				$("#password").attr("readonly","readonly");
-				var arr=[1,2,3,4,5];
-				var Len=arr.length;
-				for(var i=0;i<=Len;i++){
-					if(i==Len){
-						$(".accountSelect").append("<option value='test'>其他</option>")
-					}else{
-						$(".accountSelect").append("<option value="+arr[i]+">"+arr[i]+"</option>")
-					}
+				/*
+				 * 选择账号
+				 */
+				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
+				var user=[];
+				
+				user_mobile=18609975932;
+				alert(user_mobile);
+				mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
+					console.log(JSON.stringify(result));
+					var data=result.data;
+					var Len=data.length;
+					for(var i=0;i<=Len;i++){
+						if(i==Len){
+							$(".accountSelect").append("<option value='test'>其他</option>")
+						}else{
+							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
+							var acount={};
+							acount.tranAccount=data[i].tranAccount;
+							acount.tranPassword=data[i].tranPassword;
+							user[i]=acount;
+						}
+					};
+				},function(result){
+					console.log(JSON.stringify(result));
+				});
+				if(user_mobile==null || user_mobile==undefined || user_mobile==""){
 					
-				};
+				}else{
+					$("#account").attr("disabled","disabled");
+					$("#password").attr("readonly","readonly");
+				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
 					if(val=="test"){
@@ -88,10 +108,15 @@
 						$("#account").val("");
 						$("#password").val("");
 					}else{
-						$("#account").val(val);
-						$("#password").val(val);
-						$("#account").attr("disabled","disabled");
-						$("#password").attr("readonly","readonly");
+						for(var i=0;i<user.length;i++){
+							if(val==user[i].tranAccount){
+								$("#account").val(val);
+								$("#password").val(user[i].tranPassword);
+								$("#account").attr("disabled","disabled");
+								$("#password").attr("readonly","readonly");
+							}
+						}
+						
 					}
 				})
 				$("#account").val(endLoginAccount == null?"":endLoginAccount);
