@@ -59,7 +59,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 				}else{
 					remark = model.getMsgExt();
 				}
-				String userId = payService.doUpdateGoPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount, orderId, null,remark,respCode);
+				String userId = payService.doUpdateGoPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount , orderId, null,remark,respCode);
 				try {
 					if(userId != null){
 						WUser user =  wUserService.getUser(userId);

@@ -59,6 +59,13 @@ intervalTime =  setInterval(function(){
 								$("input[name = 'inputTranLever']").val(getCookie("lever"));
 								$("input[name = 'tokenTzdr']").val(result.message);
 								$("#payableForm").attr("action","${ctx}/" + payUrl);
+								$.ajax({
+									url:"${ctx}/userOutDisk/clearPayCookie",
+									type:"post",
+									success:function(result){
+										
+									}
+								})
 								$("input[type = 'submit']").click();
 								return ;
 						}else{

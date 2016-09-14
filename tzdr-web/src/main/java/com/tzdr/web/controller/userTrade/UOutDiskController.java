@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -163,6 +164,19 @@ public class UOutDiskController {
 		resultJson.setSuccess(flag);
 		resultJson.setMessage(String.valueOf(request.getSession(false).getAttribute("tokenTzdr")));
 		return resultJson;
+	} 
+	/**
+	 * 清除支付cookie
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/clearPayCookie",method = RequestMethod.POST)
+	public void clearPayCookieData(HttpServletRequest request,HttpServletResponse response){
+		CookiesUtil.delCookies("orderId", response);
+		CookiesUtil.delCookies("bond", response);
+		CookiesUtil.delCookies("lever", response);
+		CookiesUtil.delCookies("payurl", response);
+		log.info("清除支付cookie数据成功");
 	}
 	/**
 	 * 支付成功页面

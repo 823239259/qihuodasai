@@ -20,9 +20,10 @@
 	if(userSessionBean != null){
 		userId = userSessionBean.getId();
 	}
+	long vtime = new Date().getTime();
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
-<c:set var="v" value="20160914"></c:set>
+<c:set var="v" value="<%= vtime %>"></c:set>
 <c:set var="sfb" value="<%=stockForumBasePath%>"></c:set>
 <c:set var="iosf" value="<%=isOpanStockForum%>"></c:set>
 <c:set var="p2pAccount" value="<%=p2pAccount%>"></c:set>
