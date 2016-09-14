@@ -48,7 +48,7 @@ intervalTime =  setInterval(function(){
 		$("#time").text(time);
 		if(time == 0){
 			var payUrl = getCookie("payurl");
-			if(payUrl != null || payUrl != "null" || payUrl != undefined || payUrl.length > 0){
+			if(payUrl != null && payUrl != "null" && payUrl != undefined && payUrl.length > 0){
 				//验证订单是否支付成功
 				$.ajax({
 					url:"${ctx}/userOutDisk/validation/order/pay",
@@ -60,24 +60,28 @@ intervalTime =  setInterval(function(){
 								$("input[name = 'tokenTzdr']").val(result.message);
 								$("#payableForm").attr("action","${ctx}/" + payUrl);
 								$("input[type = 'submit']").click();
-								return;
+								return ;
 						}else{
-							showMsgDialogPaySuc("提示","方案购买失败，请重新购买",5000);
+							showMsgDialog("提示", "购买方案失败，请重新购买");
+							 setTimeout(function(){
+								 $("input[type = 'submit']").click();
+							 }, 3000);
+							 return;
 						}
 					}
 				});
-			clearInterval(intervalTime);
+			}else{
+				$("input[type = 'submit']").click();
 			}
-			window.location.href=basepath+"/user/account";
+			clearInterval(intervalTime);
 		}
 	}, 1000);
 </script>
 <body>
 <div class="pay_suc">
-	<img src="static/images/suc_01.png" />
 	<div class="mui-content-padded">
-		<h4>已充值成功</h4>
-		<p id = "time">0</p>
+		<h4>已充值成功,<b id = "time">5</b>秒后自动跳转...</h4>
+		
 	</div>
 	<form action="${ctx}/user/account" style = "display: none;" id="payableForm" method="post">
 		<input type="hidden" name="inputTraderBond" value="0" />
