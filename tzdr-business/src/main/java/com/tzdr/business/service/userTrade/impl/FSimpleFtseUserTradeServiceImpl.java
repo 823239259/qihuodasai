@@ -1124,9 +1124,11 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		return "";
 	}
 	
+	@Override
 	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid){
 		if(!StringUtils.isEmpty(uid)){
 			return simpleFtseUserTradeDao.findByUidAndStateType(uid);
+			
 		}
 		return new ArrayList<>();
 	} 
