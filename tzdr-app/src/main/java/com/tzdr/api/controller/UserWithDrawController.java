@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
@@ -57,6 +58,7 @@ import com.tzdr.common.utils.BigDecimalUtils;
 import com.tzdr.common.utils.DateUtils;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.IpUtils;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
@@ -331,7 +333,30 @@ public class UserWithDrawController {
 		withdrawPayInfo.setRecvGateId(ubank.getBank().toUpperCase());
 		return withdrawPayInfo;
 	}
-
+	/**
+	 * 计算体现手续费
+	 * @param request
+	 * @param money
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/drawFee",method = RequestMethod.POST)
+	public JsonResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
+		JsonResult resultJson = new JsonResult(false);
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		Double fee = drawMoneyService.drawFee(uid, money);
+		String message = "";
+		if(fee == null){
+			message = "用户错误";
+		}else if(fee < 0){
+			message = "账户余额不足";
+		}else{
+			resultJson.setSuccess(true);
+			message = String.valueOf(fee);
+		}
+		resultJson.setMessage(message);
+		return resultJson;
+	} 
 	/**
 	 * 申请提现接口
 	 * 

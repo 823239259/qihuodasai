@@ -195,7 +195,6 @@ $(document).ready(function(){
 	$('#money').bind({
 		keyup: function() {
 			var _money = $(this).val();
-			
 			if(isMoney(_money, true)) {
 				if(_money < 5000) {
 					$('#handle-fee').text($("#handleFee").val());
@@ -204,6 +203,25 @@ $(document).ready(function(){
 					$('#handle-fee').text('0.00');
 					$('#actual-money').text((_money - 0).toFixed(2));
 				}
+				$.ajax({
+					url:basepath+"/draw/drawFee",
+					type:"post",
+					data:{
+						money : _money
+					},
+					success:function(result){
+						var message = result.message;
+						if(result.success){
+							$("#handle-fee").text(message);
+							var balace = parseFloat(_money) + parseFloat(message);
+							if(balace > parseFloat($("#balance").text())){
+								showMsgDialog("提示","账户余额不足");
+							}
+						}else{
+							showMsgDialog("提示",message);
+						}
+					}
+				});
 				return;
 			}
 			$('#handle-fee').text('0.00');
