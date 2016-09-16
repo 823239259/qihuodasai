@@ -9,75 +9,27 @@
 <meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>操盘记录 - 维胜金融 -中国领先的国际期货及衍生品互联网交易平台</title>
 <link rel="stylesheet" href="${ctx}/static/css/uc.css?v=${v}" type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/static/css/public.css?v=${v}">
-<link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet"
-	type="text/css">
-<link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet"
-	type="text/css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css?v=${v}">
+<link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
+<link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet" type="text/css" />
 <style type="text/css">
-table.data_web {
-    margin:4px;
-    margin-right:8px;
-}
-table.data_web th,table.data_web td{
-height:40px; line-height:40px;color:#333; border-bottom:1px dotted #f1f1f1; padding:5px 0;
-}
-table.data_web td {
- color:#666;
- background-color:white;
- vertical-align:middle;
-}
-table.data_web td.selected{
-  border-bottom:1px dotted #F1F1F1;
-}
+table.data_web {margin:4px;  margin-right:8px;}
+table.data_web th,table.data_web td{height:40px; line-height:40px;color:#333; border-bottom:1px dotted #f1f1f1; padding:5px 0;}
+table.data_web td {color:#666; background-color:white;vertical-align:middle;}
+table.data_web td.selected{border-bottom:1px dotted #F1F1F1;}
 table.data_web td a { padding:0 5px; color:#f80; }
 .tzdr-data01 { width:98%; margin:0 auto;}
 #window_detail_accountInfo table { padding:5px 0 5px 30px;}
 #window_detail_accountInfo table tr td { height:24px; line-height:24px;}
 #nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
-<script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseList.js?v=${v}"></script>
-	
-<script type="text/javascript">
-    
-    var isOut = false; 
-    var index="${index}";
-    <!--访问记录  -->
-    $(document).ready(function(){
-    	$("#oAccount").find("a").removeClass("on");
-	    $('.uc_sidebar').find("div.uc_nav ul a").each(function(){
-		$(this).removeClass('on');
-		});
-	    $('.navlist li a').removeClass('on');
-		$("#nav_my").addClass("on");
-	    $("#ftse").parent().addClass("on");
-	    $.easyui.rechangeSetValue(".tzdr-tab",null,function(tag){
-	    	$("#appStateFtsePage").html("");
-	    	$(".tzdr-data01").hide();
-	    	var tabId = $(tag).attr("id");
-	    	var id = tabId + "Data";
-	    	var type = "";
-	    	if(id == "appStateFtseData"){  //国际期货
-	    		type = "0";
-	    		getFtseDataList(page_index,type,
-			    		tabId,"appStateFtsePage","pay");
-	    	}
-	    	$("#" + id).show();
-	    },null);
-	    
-    	$("#appStateFtse").trigger("click");
-    });
-    
-</script>
-
 </head>
 <body>
-	
 	<!-- 账单明细 -->
 	<div class="sif_money sif_money_div ftse_money" id="detailInfoFtse" style="display:none;">
 		<div class="fl_navtitle">
@@ -111,22 +63,18 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			</li>
 		</ul>
 		<div id="window_detail_endInfoFtse_trade">
-			
 		</div>
 	</div>
-	
 	<!-- 交易账号 -->
 	<div class="sif_money sif_money_div" id="accountDetailInfoFtse" style="display:none;">
 		<div class="fl_navtitle">
 			<h3>交易账户</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#accountDetailInfoFtse')" class="close"></a>
 		</div>
-		<ul id="window_detail_accountInfoFtse">
-		     		     
+		<ul id="window_detail_accountInfoFtse">  		     
 		</ul>
 		<a href="#" target="_blank" style="display:none; width:100%; height:40px; line-height:40px; font-size:14px; color:#f00; text-align: center; margin:-10px auto 15px;">新年High翻天，开箱有壕礼！</a>
 	</div>
-	
 	<!-- 追加保证金 -->
 	<div class="fl_box fl_uc_trade sif_money_div" id="appendMoneyDetailInfo" name="appendMoneyDetailInfo" style="display:none;">
 		<div class="fl_navtitle">
@@ -161,7 +109,6 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			<a href="javascript:void(0);"  id="f_appendMoney_cance" name="f_appendMoney_cance" class="fl_uc_cancelbtn">取消</a>
 		</div>
 	</div>
-	
 	<!-- 终止操盘 -->
 	<div class="fl_box fl_uc_trade sif_money_div" id="applyEndTrade" name="applyEndTrade"  style="display:none;">
 		<div class="fl_navtitle">
@@ -185,20 +132,17 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		<a href="#" target="_blank" style="display:none; width:100%; height:40px; line-height:40px; font-size:14px; color:#f00; text-align: center; margin:10px auto -10px;">新年High翻天，开箱有壕礼！</a>
 		<p class="fl_uspromtfont"> 注：折扣券一般由维胜平台活动发放，请大家多多关注。 </p>
 	</div>
-    
 	<!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 	<div class="uc">
 		<!--个人中心导航 -->
 		<%@ include file="../common/leftnav.jsp"%>
-
 		<!--网银支付-->
 		<div class="uc_mianbar">
 			<div class="uc_pay">
 				<ul class="uc_paynav">
 					<li data="ftseAll"><a href="javascript:void(0);" class="tzdr-tab" id="appStateFtse" class="on">操盘记录</a></li>
 				</ul>
-				
 				<div id="appStateFtseData" class="tzdr-data01" style="padding:2px; width:98%; margin:0 auto;">
 				    <table  cellspacing="0" class="data_web" cellpadding="0" width="100%" border="0" >
 				        <thead>
@@ -215,11 +159,9 @@ table.data_web td a { padding:0 5px; color:#f80; }
 					        <th>操作</th>
 				        </thead>
 				        <tbody style="text-align:center;">
-				            
 				        </tbody>
 				    </table>
 				</div>
-				
 				<div id="appStateFtsePage"></div>
 				<!-- 全部申请 -->
 				<div class="uc_trade">					
@@ -227,14 +169,11 @@ table.data_web td a { padding:0 5px; color:#f80; }
 				</div>
 				<div id="Pagination" style="margin: 20px 0;"></div>
 			</div>
-
 		</div>
 		<!-- 遮罩层 -->
 		<div class="fl_mask" style="display:none; z-index:20;"></div>
-
 	</div>
 	<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>
-

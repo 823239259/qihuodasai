@@ -7,19 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../common/commonkeyword.jsp"%>
-<link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?version=20150804">
-<script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
-<script language="javascript" src="${ctx}/static/script/account/account.js?version=20150804"></script>
-<script language="javascript" src="${ctx}/static/script/tzdr.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?v=${v}">
+<script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js?v=${v}"></script>
+<script language="javascript" src="${ctx}/static/script/account/account.js?v=${v}"></script>
+<script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <style type="text/css">
-	#secInfo{
-		cursor: pointer;
-	}
+	#secInfo{cursor: pointer;}
 	.uc_sidebar h2 {font-weight: normal;}
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 </head>
-
 <body>
 <!--顶部 -->
 	<%@include file="../common/header.jsp"%>

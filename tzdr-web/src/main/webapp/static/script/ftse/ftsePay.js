@@ -20,7 +20,6 @@ $(document).ready(function(){
 		vocherSeleted();
 		return false;
 	});
-	
 	$("#voucher").change(vocherSeleted);
 });
 /*
@@ -35,14 +34,16 @@ function checkBanlanceEnough() {
 		$("#confirmPay").attr("status",true);
 		//$("#confirmPay").attr("class","fl_pb_nosure");
 		$("#confirmPay").text("去充值");
-		bindPay((payable - balance));
-		content = "你的账户余额只剩"+banlace+"元,本次充值支付还差"+banlace+"元";
+		var chaBanlance = payable - balance;
+		bindPay(chaBanlance);
+		content = "你的账户余额只剩"+balance+"元,本次充值支付还差"+chaBanlance+"元";
+		$("input[name = 'balance']").val(chaBanlance);
 	} else {
 		bindConfirmPay();
 		$("#notEnoughPay").hide();
 		$("#confirmPay").attr("status",true);
 		$("#confirmPay").text("确认支付");
-		content = "你的账户余额只剩"+banlace+"元,本次充值支付完毕剩余"+banlace+"元";
+		content = "你的账户余额只剩"+balance+"元,本次充值支付完毕剩余"+(balance - payable)+"元";
 	}
 	$("#notEnoughPay").text(content);
 }
@@ -70,7 +71,16 @@ function colseConfirmPayDiv() {
  * 绑定去充值事件
  */
 function bindPay(banlace){
-	$("#confirmPay").attr("href",basepath + "pay/payinfo?balance="+banlace);
+	$('#confirmPay').bind('click',function(){
+		var status =  $(this).attr("status");
+		$(this).attr("status",false);
+		if(status == "true"){
+			$("#confirmPayDiv").hide();
+			$(this).attr("status",true);
+			$("#voucherId").val($("#voucher").val());
+			$('#toPayInfoSubmit').click();
+		}
+	});
 }
 /**
  * 绑定确认支付事件

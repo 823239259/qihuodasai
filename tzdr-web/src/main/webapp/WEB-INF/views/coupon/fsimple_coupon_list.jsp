@@ -10,7 +10,7 @@
 <title>我的优惠-维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link href="${ctx}/static/css/uc.css?v=${v}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet" type="text/css" />
-<script type="text/javascript"src="${ctx}/static/script/common/jquery.pagination.js"></script>
+<script type="text/javascript"src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/coupon/coupon_common.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/coupon/coupon_list.js?v=${v}"></script>
 <style>

@@ -16,7 +16,8 @@
 				type:"post",
 				data:{
 					paymoney:$("#money").val(),
-					gopayWay:$("#payWay").val()
+					gopayWay:$("#payWay").val(),
+					isFlag:$("#isFlag").val()
 				},
 				success:function(result){
 					 if(result.success){
@@ -84,5 +85,6 @@
 	</form>
 	<input type="hidden" value="${money }" id = "money"/>
 	<input type="hidden" value="${payway }" id = "payWay">
+	<input type="hidden" value="${isFlag }" id = "isFlag">
 </body>
 </html>

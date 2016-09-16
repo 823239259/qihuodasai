@@ -45,10 +45,12 @@ import com.tzdr.common.utils.BigDecimalUtils;
 import com.tzdr.common.utils.DateUtils;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.StringCodeUtils;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.dao.withdrawal.WithdrawalDao;
+import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.pgb.entity.PGBPaymentSupportBank;
 import com.tzdr.domain.vo.UserTradeCmsVo;
 import com.tzdr.domain.web.entity.DrawList;
@@ -666,10 +668,15 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			maxAuditMoney = linedata.getMinmoney();
 			auditMoneyRang = maxAuditMoney + "--" + linedata.getMaxmoney();
 		}
-
+		// 提现金额
+		Double dmoney = Double.valueOf(money);
 		// 提现手续费
-		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
-		// 币币支付手续费另算
+		Double fee = this.drawFee(user.getId(), dmoney);
+		String handleFeeStr = fee == null || (fee+dmoney) > user.getAvlBal() ? "0.00" : String.valueOf(fee);//CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
+		if(handleFeeStr.equals("0.00")){
+			return null;
+		}
+		/*// 币币支付手续费另算
 		if (withdrawSetting == Constant.PaymentChannel.BB_PAY) {
 			handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,
 					DataDicKeyConstants.BB_FEE);
@@ -678,10 +685,8 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 		if (withdrawSetting == Constant.PaymentChannel.EASE_PAY) {
 			handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,
 					DataDicKeyConstants.PAYEASE_FEE);
-		}
+		}*/
 		Double handleFee = 0.00;
-		// 提现金额
-		Double dmoney = Double.valueOf(money);
 		if (!StringUtil.isBlank(handleFeeStr)) {
 			handleFee = Double.valueOf(handleFeeStr);
 		}
@@ -994,5 +999,26 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			}
 		}
 		return false;
+	}
+	@Override
+	public Double drawFee(String userid,Double money) {
+		WUser user =  getUser(userid);
+		if(user == null){
+			return null;
+		}
+		Double operateMoney = user.getCountOperateMoney();
+		operateMoney =  operateMoney == null ? 0.00 : operateMoney;
+		List<DataMap> dataMap = dataMapService.findByTypeKey("withdrawScale");
+		Double scal = 0.00;
+		if(dataMap != null && dataMap.size() > 0){
+			scal = Double.parseDouble(dataMap.get(0).getValueName());
+		}
+		Double chaMoney = operateMoney - money;//计算提现后剩余提现额度
+		//结果大于0 ，则表示剩余提现免额充足，不需要收取手续费,则设置计算提现手续费的基础金额为0 
+		if(chaMoney > 0){
+			chaMoney = 0.00;
+		}
+		Double feeMoney = Math.abs(chaMoney) * scal;
+		return feeMoney;
 	}
 }

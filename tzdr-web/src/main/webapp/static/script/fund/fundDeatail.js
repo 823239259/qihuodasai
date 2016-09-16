@@ -282,5 +282,99 @@ showtab=function(id,tabnum){
 	 tts.eq(tabnum).addClass('on');
 	 currTabCon.show().siblings().hide();
 }
-	 
-	
+
+/* + */	 
+var isOut = false;
+$(document).ready(function() {
+	$('#paytype').click(function(event) {
+		event.stopPropagation();
+		$("#paytypediv").show();
+	});
+
+	$(document).click(function() {
+		if (isOut == false) {
+			$("#alltypediv").hide();
+			$("#paytypediv").hide();
+			$("#fundLoantypediv").hide();
+			$("#uniondiv").hide();
+			$("#interestdiv").hide();
+		}
+	});
+
+	$('#alltype').click(function(event) {
+		event.stopPropagation();
+		$("#alltypediv").show();
+	});
+
+	$('#fundLoantype').click(function(event) {
+		event.stopPropagation();
+		$("#fundLoantypediv").show();
+	});
+
+	$('#interesttype').click(function(event) {
+		event.stopPropagation();
+		$("#interestdiv").show();
+	});
+
+	$('#uniontype').click(function(event) {
+		event.stopPropagation();
+		$("#uniondiv").show();
+	});
+
+	$("#alltypediv a").each(function() {
+		$(this).click(function() {
+			$('#fundtype').attr("data-id", $(this).attr("data-id"));
+			var value = $(this).html();
+			$('#fundtype').val(value);
+			$('#alltypediv').hide();
+		});
+
+	});
+
+	$("#paytypediv a").each(function() {
+		$(this).click(function() {
+			var value = $(this).html();
+			$('#changetype').attr("data-id", $(this).attr("data-id"));
+			$('#changetype').val(value);
+			$('#paytypediv').hide();
+		});
+
+	});
+
+	$("#interestdiv a").each(function() {
+		$(this).click(function() {
+			var value = $(this).html();
+			$('#interest').attr("data-id", $(this).attr("data-id"));
+
+			$('#interest').val(value);
+			$('#interestdiv').hide();
+		});
+
+	});
+
+	$("#fundLoantypediv a").each(function() {
+		$(this).click(function() {
+			var value = $(this).html();
+			$('#fundLoan').attr("data-id", $(this).attr("data-id"));
+
+			$('#fundLoan').val(value);
+			$('#fundLoantypediv').hide();
+		});
+
+	});
+
+	$("#uniondiv a").each(function() {
+		$(this).click(function() {
+			var value = $(this).html();
+			$('#union').attr("data-id", $(this).attr("data-id"));
+			$('#union').val(value);
+			$('#uniondiv').hide();
+		});
+
+	});
+
+	var index="${index}";
+	if(index){
+		$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
+	}
+});	

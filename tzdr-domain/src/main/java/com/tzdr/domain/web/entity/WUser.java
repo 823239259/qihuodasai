@@ -1,5 +1,6 @@
 package com.tzdr.domain.web.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,6 +134,12 @@ public class WUser extends BaseEntity {
 	 */
 	private int source;
 	private String keyword;
+	
+	/**
+	 * 累积总操盘金额(提现免手续费额度)
+	 */
+    private Double countOperateMoney=0.0;
+    
 	
 	public Long getLastbeforeloginTime() {
 		return lastbeforeloginTime;
@@ -921,6 +928,14 @@ public class WUser extends BaseEntity {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public Double getCountOperateMoney() {
+		return countOperateMoney;
+	}
+
+	public void setCountOperateMoney(Double countOperateMoney) {
+		this.countOperateMoney = countOperateMoney;
 	}
 	
 	

@@ -12,125 +12,17 @@
 <meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
 <meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>资金明细 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
-<link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
-<link href="${ctx}/static/css/public.css" rel="stylesheet"
-	type="text/css">
-<link href="${ctx}/static/css/pagination.css" rel="stylesheet"
-	type="text/css" />
-<script src="${ctx}/static/script/common/jquery.pagination.js"
-	type="text/javascript"></script>
-	<!-- 
-<link href="common/tablesorter.css" rel="stylesheet" type="text/css" />
-	 -->
-<script src="${ctx}/static/script/My97DatePicker/WdatePicker.js"
-	type="text/javascript"></script>
-
-<script type='text/javascript'
-	src="${ctx}/static/script/fund/fundDeatail.js?version=20150721"></script>
-<script type='text/javascript'
-	src="${ctx}/static/script/common/dateUtils.js"></script>
-<script type='text/javascript'
-	src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/tzdr.js"></script>
-<title>维胜</title>
+<link rel="stylesheet" href="${ctx}/static/css/uc.css?v=${v}" type="text/css">
+<link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
+<link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet" type="text/css" />
+<script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
+<script src="${ctx}/static/script/My97DatePicker/WdatePicker.js?v=${v}" type="text/javascript"></script>
+<script type='text/javascript' src="${ctx}/static/script/fund/fundDeatail.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript">
 	var tab =<%=tab%>;
-
-	var isOut = false;
-
-	$(document).ready(function() {
-		$('#paytype').click(function(event) {
-			event.stopPropagation();
-			$("#paytypediv").show();
-		});
-
-		$(document).click(function() {
-			if (isOut == false) {
-				$("#alltypediv").hide();
-				$("#paytypediv").hide();
-				$("#fundLoantypediv").hide();
-				$("#uniondiv").hide();
-				$("#interestdiv").hide();
-			}
-		});
-
-		$('#alltype').click(function(event) {
-			event.stopPropagation();
-			$("#alltypediv").show();
-		});
-
-		$('#fundLoantype').click(function(event) {
-			event.stopPropagation();
-			$("#fundLoantypediv").show();
-		});
-
-		$('#interesttype').click(function(event) {
-			event.stopPropagation();
-			$("#interestdiv").show();
-		});
-
-		$('#uniontype').click(function(event) {
-			event.stopPropagation();
-			$("#uniondiv").show();
-		});
-
-		$("#alltypediv a").each(function() {
-			$(this).click(function() {
-				$('#fundtype').attr("data-id", $(this).attr("data-id"));
-				var value = $(this).html();
-				$('#fundtype').val(value);
-				$('#alltypediv').hide();
-			});
-
-		});
-
-		$("#paytypediv a").each(function() {
-			$(this).click(function() {
-				var value = $(this).html();
-				$('#changetype').attr("data-id", $(this).attr("data-id"));
-				$('#changetype').val(value);
-				$('#paytypediv').hide();
-			});
-
-		});
-
-		$("#interestdiv a").each(function() {
-			$(this).click(function() {
-				var value = $(this).html();
-				$('#interest').attr("data-id", $(this).attr("data-id"));
-
-				$('#interest').val(value);
-				$('#interestdiv').hide();
-			});
-
-		});
-
-		$("#fundLoantypediv a").each(function() {
-			$(this).click(function() {
-				var value = $(this).html();
-				$('#fundLoan').attr("data-id", $(this).attr("data-id"));
-
-				$('#fundLoan').val(value);
-				$('#fundLoantypediv').hide();
-			});
-
-		});
-
-		$("#uniondiv a").each(function() {
-			$(this).click(function() {
-				var value = $(this).html();
-				$('#union').attr("data-id", $(this).attr("data-id"));
-				$('#union').val(value);
-				$('#uniondiv').hide();
-			});
-
-		});
-
-		var index="${index}";
-		if(index){
-			$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
-		}
-	});
 </script>
 <style>
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
@@ -140,7 +32,6 @@
 	<!--顶部 -->
 	<!--个人中心导航 -->
 	<%@include file="../common/header.jsp"%>
-
 	<div class="uc">
 		<!--个人中心导航 -->
 		<%@ include file="../common/leftnav.jsp"%>
@@ -189,7 +80,6 @@
 					-->
 					<%-- <li><a href="${futureUrl}/fund/detail">期指点点乐模拟盘明细</a></li> --%>
 				</ul>
-
 				<div class="tabcon">
 					<div class="subtab">
 						<!-- 全部明细 -->
@@ -204,7 +94,6 @@
 										<a href="javascript:void(0)" data-id="${type['valueKey']}">${type['valueName']}</a>
 									</c:forEach>
 								</div>
-
 							</div>
 							<div class="uc_fsdetails">
 								<div class="uc_fsmoney">
@@ -246,7 +135,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="subtab">
 						<!-- 充值取款明细 -->
 						<div class="uc_trade">
@@ -301,7 +189,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="subtab">
 						<!-- 操盘明细 -->
 						<div class="uc_trade">
@@ -324,7 +211,6 @@
 										<a
 										href="javascript:void(0)" data-id="27">补仓欠费</a>
 								</div>
-
 							</div>
 							<div class="uc_fsdetails">
 								<div class="uc_fsmoney">
@@ -335,7 +221,6 @@
 										支出<i class="color5" id="outloanfundcount"><c:choose><c:when test="${!empty outloanfund.count}">${outloanfund.count}</c:when><c:otherwise>0</c:otherwise></c:choose></i>笔，共<i class="color5" id="outloanfundsum"><c:choose><c:when test="${!empty outloanfund.summoney}"><fmt:formatNumber value="${outloanfund.summoney}"
 														pattern="##.##" minFractionDigits="2"></fmt:formatNumber></c:when><c:otherwise>0.00</c:otherwise></c:choose></i>元</p>
 								</div>
-
 								<div class="uc_fssearch">
 									<em>收支类型：</em> <input type="text" class="uc_fs_ip"
 										id="fundLoan" data-id="10,11,12,15,16,17,18,25,26,27" name="fundLoan"
@@ -370,7 +255,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="subtab">
 						<!-- 利息管理费明细 -->
 						<div class="uc_trade">
@@ -428,13 +312,9 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
 	<%@include file="../common/footer.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 </body>
-
 </html>
-

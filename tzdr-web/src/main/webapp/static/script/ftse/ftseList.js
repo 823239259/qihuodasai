@@ -458,3 +458,31 @@ $("#f_applyEndTrade_cance").live('click',function(){
 		closeWindow('#applyEndTrade');
 	}
 });
+
+var isOut = false; 
+var index="${index}";
+/* 访问记录  */
+$(document).ready(function(){
+	$("#oAccount").find("a").removeClass("on");
+    $('.uc_sidebar').find("div.uc_nav ul a").each(function(){
+	$(this).removeClass('on');
+	});
+    $('.navlist li a').removeClass('on');
+	$("#nav_my").addClass("on");
+    $("#ftse").parent().addClass("on");
+    $.easyui.rechangeSetValue(".tzdr-tab",null,function(tag){
+    	$("#appStateFtsePage").html("");
+    	$(".tzdr-data01").hide();
+    	var tabId = $(tag).attr("id");
+    	var id = tabId + "Data";
+    	var type = "";
+    	if(id == "appStateFtseData"){  //国际期货
+    		type = "0";
+    		getFtseDataList(page_index,type,
+		    		tabId,"appStateFtsePage","pay");
+    	}
+    	$("#" + id).show();
+    },null);
+    
+	$("#appStateFtse").trigger("click");
+});

@@ -22,7 +22,7 @@ public class GoPayTradeData {
 		param.put("signType", GoPayRequestModel.getSignType());
 		param.put("tranCode", GoPayRequestModel.getTradCode());
 		param.put("merchantID",GoPayRequestModel.getCustomerId());
-		//param.put("frontMerUrl", GoPayRequestModel.getFrontMerUrl());
+		param.put("frontMerUrl", GoPayRequestModel.getFrontMerUrl());
 		param.put("backgroundMerUrl", GoPayRequestModel.getBackgroundMerUrl());
 		param.put("virCardNoIn", GoPayRequestModel.getPayAcctId());
 		param.put("currencyType", GoPayRequestModel.getCurrencyType());
@@ -70,7 +70,7 @@ public class GoPayTradeData {
 				+ "tranAmt=["+requestModel.getTranAmt()+"]"
 				+ "feeAmt=["+requestModel.getFeeAmt()+"]"
 				+ "tranDateTime=["+requestModel.getTranDateTime()+"]"
-				+ "frontMerUrl=[]"
+				+ "frontMerUrl=["+GoPayRequestModel.getFrontMerUrl()+"]"
 				+ "backgroundMerUrl=["+GoPayRequestModel.getBackgroundMerUrl()+"]"
 				+ "orderId=[]"
 				+ "gopayOutOrderId=[]"
@@ -88,7 +88,7 @@ public class GoPayTradeData {
 				+ "tranAmt=["+requestModel.getTranAmt()+"]"
 				+ "feeAmt=["+requestModel.getFeeAmt()+"]"
 				+ "tranDateTime=["+requestModel.getTranDateTime()+"]"
-				+ "frontMerUrl=[]"
+				+ "frontMerUrl=["+requestModel.getFrontMerUrl()+"]"
 				+ "backgroundMerUrl=["+requestModel.getBackgroundMerUrl()+"]"
 				+ "orderId=["+requestModel.getOrderId()+"]"
 				+ "gopayOutOrderId=["+requestModel.getGopayOutOrderId()+"]"

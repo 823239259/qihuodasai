@@ -1,7 +1,6 @@
 package com.tzdr.web.controller.pay;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +45,7 @@ import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.web.constants.Constants;
 import com.tzdr.web.constants.ViewConstants;
+import com.tzdr.web.utils.CookiesUtil;
 import com.tzdr.web.utils.UserSessionBean;
 
 /**
@@ -98,7 +98,7 @@ public class PayController {
 	 * @author zhangjun
 	 */
 	@RequestMapping(value = "/payinfo")
-	public String payInfo(HttpServletRequest request) throws Exception {
+	public String payInfo(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		WUser user = this.payService.getUser(userSessionBean.getId());
@@ -109,6 +109,14 @@ public class PayController {
 		request.setAttribute("user", user);
 		String balance = request.getParameter("balance");
 		request.setAttribute("money", balance);
+		String isFlag = request.getParameter("isFlag");
+		//如果支付是从申请方案跳转而来就缓存方案数据
+		if(isFlag != null && isFlag.equals("1")){
+			request.setAttribute("isFlag", isFlag);
+			CookiesUtil.addCookie(response, "bond", request.getParameter("inputTraderBond"), 600);
+			CookiesUtil.addCookie(response, "lever", request.getParameter("inputTranLever"), 600);
+			CookiesUtil.addCookie(response, "payurl", request.getParameter("payUrl"), 600);
+		}
 		request.setAttribute("supportBanks", paymentSupportBankService.querySupportPayBanks());
 		return ViewConstants.PayViewJsp.PAY_MAIN_VIEW;
 	}
@@ -301,7 +309,7 @@ public class PayController {
 	}
 	
 	/**
-	 * ping++支付
+	 * 微信支付
 	 * 
 	 * @param request
 	 * @return
@@ -349,9 +357,10 @@ public class PayController {
 
 	@RequestMapping(value = "/goPayView", method = RequestMethod.GET)
 	public String goPayView(ModelMap modelMap, @RequestParam("gopaymoney") Double gopaymoney,
-			@RequestParam("gopayWay") String gopayWay) throws UnsupportedEncodingException {
+			@RequestParam("gopayWay") String gopayWay,HttpServletRequest request) throws UnsupportedEncodingException {
 		modelMap.put("money", gopaymoney);
 		modelMap.put("payway", gopayWay);
+		modelMap.put("isFlag", request.getParameter("isFlag"));
 		return "/views/pay/gopay";
 	}
 
@@ -372,6 +381,7 @@ public class PayController {
 			@RequestParam("paymoney") Double gopaymoney, @RequestParam("gopayWay") String gopayWay) {
 		boolean flag = false;
 		String message = "";
+		String isFlag = request.getParameter("isFlag");
 		if (gopaymoney != null && gopaymoney > 0) {
 			String money = String.valueOf(gopaymoney);
 			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
@@ -379,6 +389,11 @@ public class PayController {
 			WUser user = this.payService.getUser(userSessionBean.getId());
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();
+			//当支付从申请方案跳转则需要缓存数据，有效时间为10分钟
+			if(isFlag != null && isFlag.equals("1")){
+				CookiesUtil.addCookie(response, "orderId", orderNo , 600);
+			}
+			//如果是充值是从申请方案跳转则需要缓存订单号
 			Channel payWayChannl = null;
 			if (gopayWay == null) {
 				payWayChannl = Channel.ALIPAY_PC_DIRECT;
@@ -423,7 +438,6 @@ public class PayController {
 		resultJson.appendData("data", message);
 		return resultJson;
 	}
-
 	/**
 	 * 支付宝转账
 	 * 

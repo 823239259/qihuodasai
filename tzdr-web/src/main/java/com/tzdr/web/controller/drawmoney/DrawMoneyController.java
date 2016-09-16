@@ -148,7 +148,31 @@ public class DrawMoneyController {
 		request.setAttribute("banks", banks);
 		return ViewConstants.DrawMoney.DRAW_MAIN_VIEW;
 	}
-
+	/**
+	 * 计算体现手续费
+	 * @param request
+	 * @param money
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/drawFee",method = RequestMethod.POST)
+	public JsonResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
+		JsonResult resultJson = new JsonResult(false);
+		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+				.getAttribute(Constants.TZDR_USER_SESSION);
+		Double fee = drawMoneyService.drawFee(userSessionBean.getId(), money);
+		String message = "";
+		if(fee == null){
+			message = "用户错误";
+		}else if(fee < 0){
+			message = "账户余额不足";
+		}else{
+			resultJson.setSuccess(true);
+			message = String.valueOf(fee);
+		}
+		resultJson.setMessage(message);
+		return resultJson;
+	} 
 	private static Object lock = new Object();
 
 	/**
@@ -301,6 +325,10 @@ public class DrawMoneyController {
 						//// 提现插入实体后，发送邮件给工作人员初审
 						// messagePromptService.sendMessage(PromptTypes.isTheTrial,
 						// user.getMobile());
+						if(drawList == null){
+							jsonResult.setMessage("提现申请错误,如有疑问请联系客服400-852-8008");
+							return jsonResult;
+						}
 					} catch (Exception e1) {
 						flag = false;
 						logger.error("插入取款数据失败" + e1.getMessage());

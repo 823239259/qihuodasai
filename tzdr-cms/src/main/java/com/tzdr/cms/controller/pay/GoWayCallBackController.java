@@ -59,7 +59,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 				}else{
 					remark = model.getMsgExt();
 				}
-				String userId = payService.doUpdateGoPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount, orderId, null,remark,respCode);
+				String userId = payService.doUpdateGoPaySuccessRecharge(merOrderNum, Channel.GO_WAY.getChannelCode(), amount , orderId, null,remark,respCode);
 				try {
 					if(userId != null){
 						WUser user =  wUserService.getUser(userId);
@@ -117,7 +117,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 		return null;
 	}
 	public String resultGoWay(){
-		return "RespCode=0000|JumpURL=http://www.vs.com/user/account?a=1";
+		return "RespCode=0000|JumpURL=http://hedaoqing.oicp.net/tzdr-web/userOutDisk/callback/frontmer?gowaySign=1";//http://www.vs.com/user/account?a=1
 	}
 	@Override
 	public BaseService<RechargeList> getBaseService() {
