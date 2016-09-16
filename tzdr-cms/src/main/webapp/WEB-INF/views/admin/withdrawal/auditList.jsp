@@ -458,6 +458,7 @@
 								<th field="card" width="150">银行卡号</th>
 								<th field="acc_address" width="150">开户地址</th>
 								<th field="money" width="150" sortable="true">提现金额</th>
+								<th field="fee" width="150" sortable="true">提现手续费</th>
 								<th field="balance" width="100" formatter="balanceformatter">平台余额</th>
 								<th field="exportAddtime" width="200">提现申请时间</th>
 								<th field="sourceStr" width="150" formatter="sourceformatter">来源网站</th>
@@ -580,6 +581,7 @@
 							<th field="card" width="150">银行卡号</th>
 							<th field="acc_address" width="150">开户地址</th>
 							<th field="money" width="150" sortable="true">提现金额</th>
+							<th field="fee" width="150" sortable="true">提现手续费</th>
 							<th field="balance" width="100" formatter="balanceformatter">平台余额</th>
 							<th field="exportAddtime" width="200">提现申请时间</th>
 							<th field="sourceStr" width="150" formatter="sourceformatter">来源网站</th>
@@ -694,6 +696,7 @@
 							<th field="card" width="150">银行卡号</th>
 							<th field="acc_address" width="150">开户地址</th>
 							<th field="money" width="150" sortable="true">提现金额</th>
+							<th field="fee" width="150" sortable="true">提现手续费</th>
 							<th field="exportAddtime" width="200">提现申请时间</th>
 							<th field="auditStatusValue" width="150" sortable="true">审核状态</th>
 							<th field="firstAuditUser" width="150" sortable="true">初审人</th>

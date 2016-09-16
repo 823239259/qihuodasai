@@ -213,8 +213,8 @@ $(document).ready(function(){
 						var message = result.message;
 						if(result.success){
 							$("#handle-fee").text(message);
-							var balace = parseFloat(_money) + parseFloat(message);
-							if(balace > parseFloat($("#balance").text())){
+							$("#actual-money").text(parseFloat(_money) - parseFloat(message));
+							if(_money > parseFloat($("#balance").text())){
 								showMsgDialog("提示","账户余额不足");
 							}
 						}else{

@@ -140,6 +140,7 @@ public class WUser extends BaseEntity {
 	 */
     private Double countOperateMoney=0.0;
     
+    private Double countNotOperateMoney = 0.00;
 	
 	public Long getLastbeforeloginTime() {
 		return lastbeforeloginTime;
@@ -936,6 +937,14 @@ public class WUser extends BaseEntity {
 
 	public void setCountOperateMoney(Double countOperateMoney) {
 		this.countOperateMoney = countOperateMoney;
+	}
+
+	public Double getCountNotOperateMoney() {
+		return countNotOperateMoney;
+	}
+
+	public void setCountNotOperateMoney(Double countNotOperateMoney) {
+		this.countNotOperateMoney = countNotOperateMoney;
 	}
 	
 	

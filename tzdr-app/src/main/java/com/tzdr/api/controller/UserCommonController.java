@@ -92,7 +92,7 @@ public class UserCommonController {
 		dataMap.put("balance", wuser.getAvlBal());   //当前余额
 		dataMap.put("username", wuser.getUserVerified().getTname());   //用户实名
 		dataMap.put("isCertification",RequestUtils.isCertification(wuser));
-		
+		dataMap.put("operateMoney", wuser.getCountOperateMoney());
 		//校验用户是否满足期货合买活动要求
 		if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
 			dataMap.put("isFtogetherActivityUser",fTogetherTradeService.checkActivityTime() && fTogetherTradeService.checkIsNewUser(uid));   // 是否满足活动免费要求
