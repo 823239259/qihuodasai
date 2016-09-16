@@ -341,8 +341,8 @@ public class UserWithDrawController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/drawFee",method = RequestMethod.POST)
-	public JsonResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
-		JsonResult resultJson = new JsonResult(false);
+	public ApiResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
+		ApiResult resultJson = new ApiResult(false);
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		Double fee = drawMoneyService.drawFee(uid, money);
 		String message = "";

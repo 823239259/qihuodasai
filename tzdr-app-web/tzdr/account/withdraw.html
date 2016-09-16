@@ -23,6 +23,7 @@
 		var balance=null;
 		var drawHandleFee=null;
 		var SetDrawPwd=false;
+		var freeCashMoney = null;
 		mui.plusReady(function(){
 			  
     		//初始化监听头部和底部事件
@@ -66,6 +67,7 @@
 			},function(result){
 				balance=document.getElementById("balance");
 				drawHandleFee=document.getElementById("drawHandleFee");
+				freeCashMoney = document.getElementById("freeCashMoney");
 				//是否实名
 				if(result.data.isCertification){
 					Certification=true;
@@ -80,6 +82,11 @@
 					drawHandleFee.innerHTML=result.data.drawHandleFee;
 				}else{
 					drawHandleFee.innerHTML="0.00";
+				}
+				if(!mui.isnull(result.data.operateMoney)){
+					freeCashMoney.innerHTML=result.data.operateMoney;
+				}else{
+					freeCashMoney.innerHTML="0.00";
 				}
 				//是否设置了提现密码
 				if(result.data.isSetDrawPwd){
@@ -100,6 +107,29 @@
 		
 		function drawMoney(){
 			var drawmoney=document.getElementById("drawmoney").value;
+			if(mui.isnull(drawmoney)){
+				document.getElementById("drawmoney").value="";
+				mui.toast("不能输入非法字符");
+				return;
+			}
+			if(drawmoney > parseFloat($("#balance").text())){
+				mui.toast("账户余额不足");
+				return;
+			}
+			mui.app_request("user/withdraw/drawFee",{
+				"money":drawmoney
+			},function(result){
+				var message = result.message;
+				$("#drawHandleFee").text(message);
+				if(!isNaN(message)){
+					$("#draw_time").text(drawmoney - message);
+				}
+				return;
+			},function(result){
+				mui.toast(result.message);
+				return;
+			}) 
+			/*var drawmoney=document.getElementById("drawmoney").value;
 			var balance=document.getElementById("balance").innerHTML;
 			var drawHandleFee=document.getElementById("drawHandleFee");
 			
@@ -127,7 +157,7 @@
 			}else{
 				mui.toast("余额不足，请充值！");
 				return;
-			}
+			}*/
 			
 		};
 		
@@ -260,7 +290,6 @@
 				
 			})
 			
-			
 		};
 		
 	</script>
@@ -308,7 +337,7 @@
 				<span><i id="draw_time"></i>元</span>
 			</li>
 		</ul>
-		<p id="freeMoney"><span>免费提现金额</span><span><i id="freeCashMoney">123元</i></span></p>
+		<p id="freeMoney"><span>免费提现金额</span><span><i id="freeCashMoney">0元</i></span></p>
 		<ul class="mui-table-view aw_withpassword">
 			<li class="mui-table-view-cell">		 		
 				<!--<a class="mui-navigate-right" href="javascript:void(0);">-->
