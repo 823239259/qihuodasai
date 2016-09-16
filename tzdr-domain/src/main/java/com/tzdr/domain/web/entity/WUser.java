@@ -139,8 +139,6 @@ public class WUser extends BaseEntity {
 	 * 累积总操盘金额(提现免手续费额度)
 	 */
     private Double countOperateMoney=0.0;
-    
-    private Double countNotOperateMoney = 0.00;
 	
 	public Long getLastbeforeloginTime() {
 		return lastbeforeloginTime;
@@ -939,13 +937,6 @@ public class WUser extends BaseEntity {
 		this.countOperateMoney = countOperateMoney;
 	}
 
-	public Double getCountNotOperateMoney() {
-		return countNotOperateMoney;
-	}
-
-	public void setCountNotOperateMoney(Double countNotOperateMoney) {
-		this.countNotOperateMoney = countNotOperateMoney;
-	}
 	
 	
 }

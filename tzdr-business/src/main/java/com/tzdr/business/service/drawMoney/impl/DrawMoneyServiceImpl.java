@@ -469,8 +469,8 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 					double frz = BigDecimalUtils.sub(frzbal, drawList.getMoney());
 					double userfunds = BigDecimalUtils.sub(funds, drawList.getMoney());
 					Double countOperateMoney = wuser.getCountOperateMoney();
-					Double countNotOperateMoney = wuser.getCountNotOperateMoney();
-					wuser.setCountOperateMoney((countOperateMoney == null ? 0.00 : countOperateMoney) + (countNotOperateMoney == null ? 0.00 : countNotOperateMoney));
+					Double countNoOperateMoney = drawList.getOperateMoney();
+					wuser.setCountOperateMoney((countOperateMoney == null ? 0.00 : countOperateMoney) + (countNoOperateMoney == null ? 0.00 : countNoOperateMoney));
 					wuser.setFund(userfunds);// 总资金加回去
 					wuser.setFrzBal(frz);// 冻结金额减少
 					// wuser.setAvlBal(BigDecimalUtils.add(wuser.getAvlBal(),drawList.getMoney()));//账号余额加入
@@ -623,8 +623,8 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			double frz = BigDecimalUtils.sub(frzbal, drawList.getMoney());
 			double userfunds = BigDecimalUtils.sub(funds, drawList.getMoney());
 			Double countOperateMoney = wuser.getCountOperateMoney();
-			Double countNotOperateMoney = wuser.getCountNotOperateMoney();
-			wuser.setCountOperateMoney((countOperateMoney == null ? 0.00 : countOperateMoney) + (countNotOperateMoney == null ? 0.00 : countNotOperateMoney));
+			Double countNoOperateMoney = drawList.getOperateMoney();
+			wuser.setCountOperateMoney((countOperateMoney == null ? 0.00 : countOperateMoney) + (countNoOperateMoney == null ? 0.00 : countNoOperateMoney));
 			wuser.setFund(userfunds);// 总资金加回去
 			wuser.setFrzBal(frz);// 冻结金额减少
 			wuser.setAvlBal(BigDecimalUtils.add(wuser.getAvlBal(), drawList.getMoney()));// 账号余额加入
@@ -735,24 +735,26 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			drawList.setIsAudit(1);
 			drawList.setRemark("调用提现接口数据插入");
 		}
+		Double operateMoney = user.getCountOperateMoney();
+		operateMoney = operateMoney == null ? 0: operateMoney;
+		Double chaMoney = BigDecimalUtils.sub(operateMoney,dmoney);
+		if(chaMoney > 0){
+			user.setCountOperateMoney(chaMoney);
+			drawList.setOperateMoney(dmoney);
+		}else{
+			user.setCountOperateMoney(0.00);
+		}
+		if(operateMoney > 0 && chaMoney <= 0){
+			drawList.setOperateMoney(operateMoney);
+		}
 		getEntityDao().save(drawList);
 		// 更新user的冻结金额
 		Double frzBal = user.getFrzBal() == null ? 0 : user.getFrzBal();// 冻结金额
 		Double acctBal = user.getAcctBal() == null ? 0 : user.getAcctBal();
 		Double avlBal = user.getAvlBal() == null ? 0 : user.getAvlBal();
-		Double operateMoney = user.getCountOperateMoney();
-		operateMoney = operateMoney == null ? 0: operateMoney;
 		double newfrzbal = BigDecimalUtils.add(frzBal, dmoney);
 		acctBal = BigDecimalUtils.sub(acctBal, dmoney);
 		avlBal = BigDecimalUtils.sub(avlBal, dmoney);
-		Double chaMoney = BigDecimalUtils.sub(operateMoney,dmoney);
-		if(chaMoney < 0){
-			user.setCountOperateMoney(0.00);
-			user.setCountNotOperateMoney(operateMoney);
-		}else{
-			user.setCountOperateMoney(chaMoney);
-			user.setCountNotOperateMoney(dmoney);
-		}
 		user.setFrzBal(newfrzbal);
 		user.setAvlBal(avlBal);
 		this.wUserService.updateUser(user);
