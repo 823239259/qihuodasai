@@ -82,7 +82,7 @@
 					var Len=data.length;
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
-							$(".accountSelect").append("<option value='test'>其他</option>")
+							$(".accountSelect").append("<option value='test'>其他</option>");
 						}else{
 							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
 							var acount={};
@@ -91,6 +91,9 @@
 							user[i]=acount;
 						}
 					};
+					if(Len==0){
+						$(".accountSelect").append("<option value='test'>其他</option>");
+					}
 				},function(result){
 					console.log(JSON.stringify(result));
 				});
