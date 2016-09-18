@@ -62,6 +62,7 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
+            console.log(historyParam.Parameters.length);
               handleTime(historyParam);
             processingData(historyParam);
             handleVolumeChartData(historyParam);
@@ -283,6 +284,7 @@ mui.plusReady(function(){
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
     		var Len=parameters.length;
+    		console.log(Len);
     		if(parameters == null)return;
     	    var lent=rawData.length;
         	for(var i=0;i<Len;i++){
@@ -435,7 +437,6 @@ mui.plusReady(function(){
      var timeLabel=[];
     function handleTime(json){
         var Len=json.Parameters.length;
-        console.log(Len);
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters;
        	var leng=timePrice.length;
