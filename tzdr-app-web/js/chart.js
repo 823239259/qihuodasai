@@ -56,7 +56,7 @@ mui.plusReady(function(){
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"," Count":"'+1+'","HisQuoteType":1}');
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
 	        },3000);
 	       //masendMessage('QryCommodity','{"ExchangeNo":"'+exchangeNo+'"}');
 	       masendMessage('QryCommodity',null);
@@ -435,6 +435,7 @@ mui.plusReady(function(){
      var timeLabel=[];
     function handleTime(json){
         var Len=json.Parameters.length;
+        console.log(Len);
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters;
        	var leng=timePrice.length;
