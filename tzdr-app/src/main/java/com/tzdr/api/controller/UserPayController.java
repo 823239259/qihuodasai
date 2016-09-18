@@ -185,7 +185,6 @@ public class UserPayController {
 	@ResponseBody
 	@RequestMapping(value = "/pingplusplus",method = RequestMethod.POST)
 	public String pingplusplus(HttpServletRequest request){
-		if(true)return "";
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
 		String paymoney=request.getParameter("money");
@@ -200,7 +199,7 @@ public class UserPayController {
 					payWayChannl = Channel.ALIPAY_PC_DIRECT;
 				}
 			}
-			int status = 0;
+			int status=0;
 			String paytype = "3" ;
 			int source = 1;
 			String ip = IpUtils.getIpAddr(request);
