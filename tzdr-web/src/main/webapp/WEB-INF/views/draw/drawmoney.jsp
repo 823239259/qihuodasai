@@ -106,7 +106,7 @@
 									</span></li>
 									<li><label>提现金额：</label> <input type="text"
 										class="uc_wdip" onKeyUp="javascript:clearNoDouble(event,this)"
-										name="money" id="money" style="width:310px;"> <span>元</span></li>
+										name="money" id="money" style="width:310px;"> <span>元&nbsp;<b id = "moneyTip" class = "uc_wdpassword"></b></span></li>
 									<li><label>提现银行：</label> <c:choose>
 											<c:when test="${fn:length(requestScope.banks) >= 1}">
 												<input type="text" id="bankcard" name="bankcard"
