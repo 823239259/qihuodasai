@@ -74,8 +74,8 @@
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
 				var user=[];
 				
-				user_mobile=18609975932;
-				alert(user_mobile);
+//				user_mobile=18609975932;
+//				alert(user_mobile);
 				mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
 					console.log(JSON.stringify(result));
 					var data=result.data;
