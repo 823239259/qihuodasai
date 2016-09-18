@@ -32,6 +32,7 @@ import com.tzdr.business.service.feededuction.FeeDuductionService;
 import com.tzdr.business.service.future.FSimpleCouponService;
 import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
+import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.ihuyi.SMSSender;
@@ -41,6 +42,7 @@ import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
+import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.GeneralizeChannel;
 import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
@@ -77,6 +79,9 @@ public class LoginAndRegistController {
 	private FSimpleCouponService fSimpleCouponService;
 	@Autowired
 	private GeneralizeChannelService channelService;
+	
+	@Autowired
+	private FSimpleFtseUserTradeService fSimpleFtseUserTradeService;
 
 	private static Object lock = new Object();
 	
@@ -276,5 +281,20 @@ public class LoginAndRegistController {
 			return false;
 		}
 		return true;
+	}
+	
+	//用户操盘中账户
+	@RequestMapping(value = "/operateLogin",method=RequestMethod.POST)
+	@ResponseBody 
+	public ApiResult operateLogin(HttpServletRequest request,HttpServletResponse httpServletResponse){
+		
+		String mobile=request.getParameter("mobile");
+		WUser wUser=wUserService.getWUserByMobile(mobile);
+		ApiResult apiResult=new ApiResult();
+		if(wUser!=null){
+			List<FSimpleFtseUserTrade> list=fSimpleFtseUserTradeService.findByUidAndStateType(wUser.getId());
+			apiResult.setData(list);
+		}
+		return apiResult;
 	}
 }

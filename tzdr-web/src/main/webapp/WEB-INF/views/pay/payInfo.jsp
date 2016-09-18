@@ -6,7 +6,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
    <%
    		String tab=request.getParameter("tab");
-   
    %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,28 +13,24 @@
 <meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>账户充值 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
  <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721"  type="text/css">
- <link href="${ctx}/static/css/public.css" rel="stylesheet" type="text/css">	
- <link href="${ctx}/static/css/pagination.css" rel="stylesheet" type="text/css" /> 
- <script src="${ctx}/static/script/common/jquery.pagination.js" type="text/javascript"></script>
- 
- <script type='text/javascript' src="${ctx}/static/script/pay/pay.js?version=20150721"></script>
-  <script type='text/javascript' src="${ctx}/static/script/pingpp.js?version=20150721"></script>
- <script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js"></script>
- <script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
-
+ <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">	
+ <link href="${ctx}/static/css/pagination.css?v=${v}" rel="stylesheet" type="text/css" /> 
+ <script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
+ <script type='text/javascript' src="${ctx}/static/script/pay/pay.js?v=${v}"></script>
+  <script type='text/javascript' src="${ctx}/static/script/pingpp.js?v=${v}"></script>
+ <script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js?v=${v}"></script>
+ <script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js?v=${v}"></script>
 <script type="text/javascript">
-var tab=<%=tab%>;
+	var tab=<%=tab%>;
 </script>
 <style>
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 </head>
 <body>
-
 <!--顶部 -->
 	<%@include file="../common/header.jsp"%>
 		<!-- 浮动层 -->
-	<!-- 浮动层 -->
 		<div class="floatlayer">
 		<div class="uc_pay_promt" style="display:none;">
 			<i class="uc_pp_arrow"></i>
@@ -54,7 +49,6 @@ var tab=<%=tab%>;
 		</div>
 		<div class="fl_uc_main">
 			<p class="fl_uc_charge">请在新打开的网上银行<br>页面完成付款<br>充值遇到问题请咨询客服 <br>400-852-8008</p>
-			
 		</div>
 		<div class="fl_uc_btn">
 			<a href="javascript:void(0)" class="fl_uc_cancelbtn">返回修改</a>
@@ -62,7 +56,6 @@ var tab=<%=tab%>;
 		</div>
 	</div>
 	</div>
-	
 <div class="uc">
 	<!--个人中心导航 -->
 	<%@ include file="../common/leftnav.jsp"%>
@@ -83,9 +76,13 @@ var tab=<%=tab%>;
 							<li><label>账户余额：</label><span><i>
 							<fmt:formatNumber value="${requestScope.user.avlBal}" type="currency" pattern="0.00#"/>
 							</i>元</span></li>
-							<li><label>充值金额：</label><input type="hidden" value="7" name = "gopayWay" id= "gopayWay"/><input type="text" value="${money}" name="gopaymoney" id="gopaymoney" onKeyUp="javascript:clearNoNumber(event,this)"   class="uc_p_ip3" ><span>元</span></li>
+							<li><label>充值金额：</label>
+							<input type = "hidden" id = "isFlag" name = "isFlag" value ="${isFlag }" />
+							<input type = "hidden" id = "isFlagMoney" name = "isFlagMoney" value ="${money }" />
+							<input type="hidden" value="7" name = "gopayWay" id= "gopayWay"/><!-- onKeyUp="javascript:clearNoNumber(event,this)" -->
+							<input type="text" value="${money}" name="gopaymoney" id="gopaymoney"    class="uc_p_ip3" ><span>元</span></li>
 						</ul><!--  -->
-						<div class="uc_paybtn uc_olbtn"><a href="javascript:void(0);" onclick="doGopay();">立即充值</a></div>
+						<div class="uc_paybtn uc_olbtn"><a id = "payButton" href="javascript:void(0);" onclick="doGopay();">立即充值</a></div>
 					</div>
 					
 					<div class="uc_olpromt">
@@ -124,7 +121,6 @@ var tab=<%=tab%>;
 									<span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
 								</li>
 							</ol>
-							
 							<%-- <ol class="first">
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
 								<li class="uc_b_l_info">
@@ -167,7 +163,6 @@ var tab=<%=tab%>;
 						<!-- <a data-id="abc" href="javascript:void(0)">中国农业银行</a> -->
 						<a data-id="boc" href="javascript:void(0)">中国银行</a>
 					</div>
-
 				</div>
 				<ul class="uc_b_money">
 					<li>
@@ -184,23 +179,22 @@ var tab=<%=tab%>;
 						<input type="text" id="serialnum" name="serialnum">
 					</li>
 				</ul>
-					<div class="uc_paybtn uc_b_btn">
-						<a href="javascript:void(0)" onclick="doTransmany();">提交</a>
-					</div>
-
-						<div class="uc_b_promt"><i>注意事项</i></div>
-						<p class="uc_b_promtfont" style="display:none;">1、转账时请增加转账零头（如100.85）</br>2、转账备注中请务必填写<i>注册手机号和注册用户名</i>，方便我们确认是您的汇款</br>3、转账成功后，<i>请拨打客服热线400-852-8008<!-- ，或将回单发给QQ客服 -->，</i>以便我们及时帮您处理</p>
-						<p class="uc_b_promtfont">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
-						<!-- <div class="uc_paybtn">
-						<a href="javascript:void(0)" id="BizQQWPA" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=4008528008&site=qq&menu=yes','QQ在线','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');">
-        				发给QQ客服</a></div> -->
-					</div>
-					<div class="uc_banktime">
-						<h3>到账时间:<i>如需马上到账或长时间未到账，可拨打客服电话：400-852-8008</i></h3>
-						<p><i></i>工作日17:30前转账的在资金到账后半小时内完成维胜网充值</p>
-						<p><i></i>工作日17:30以后转账的在第二个工作日早上09:15前完成维胜网充值</p>
-						<p><i></i>非工作日转账的将在下一个工作日早上09:15前完成维胜网充值</p>
-					</div>
+				<div class="uc_paybtn uc_b_btn">
+					<a href="javascript:void(0)" onclick="doTransmany();">提交</a>
+				</div>
+					<div class="uc_b_promt"><i>注意事项</i></div>
+					<p class="uc_b_promtfont" style="display:none;">1、转账时请增加转账零头（如100.85）</br>2、转账备注中请务必填写<i>注册手机号和注册用户名</i>，方便我们确认是您的汇款</br>3、转账成功后，<i>请拨打客服热线400-852-8008<!-- ，或将回单发给QQ客服 -->，</i>以便我们及时帮您处理</p>
+					<p class="uc_b_promtfont">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
+					<!-- <div class="uc_paybtn">
+					<a href="javascript:void(0)" id="BizQQWPA" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=4008528008&site=qq&menu=yes','QQ在线','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');">
+       				发给QQ客服</a></div> -->
+				</div>
+				<div class="uc_banktime">
+					<h3>到账时间:<i>如需马上到账或长时间未到账，可拨打客服电话：400-852-8008</i></h3>
+					<p><i></i>工作日17:30前转账的在资金到账后半小时内完成维胜网充值</p>
+					<p><i></i>工作日17:30以后转账的在第二个工作日早上09:15前完成维胜网充值</p>
+					<p><i></i>非工作日转账的将在下一个工作日早上09:15前完成维胜网充值</p>
+				</div>
 			</div>
 			<div class="subtab">
 				<div class="uc_recharge">
@@ -211,7 +205,6 @@ var tab=<%=tab%>;
 						<li class="uc_re_money100">提交金额</li>
 						<li class="uc_re_money100">实际到账金额</li>
 						<li class="uc_re_ope100">状态</li>
-
 					</ul>
 					<!--  
 					<iframe runat="server" src="${ctx}/pay/payHistorty" width="750" height="400" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
@@ -220,19 +213,13 @@ var tab=<%=tab%>;
 						<div id="Searchresult">  
 						</div> 
 					</ul>
-					<div id="Pagination"></div> 
-					
-			
-					
+					<div id="Pagination"></div> 					
 				</div>
 			</div>	
 		  </div>
-		</div>
-			
+		</div>		
 	</div>
-	
 </div>
-
 	<%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>

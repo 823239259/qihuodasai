@@ -97,4 +97,4 @@
 		</div>	
 	</div>	
 </div>
-<script type='text/javascript' src="${ctx}/static/script/common/footer.js"></script>
+<script type='text/javascript' src="${ctx}/static/script/common/footer.js?v=${v}"></script>

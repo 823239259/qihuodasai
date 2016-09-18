@@ -5,138 +5,55 @@
    <%@include file="../common/import-artDialog-js.jspf"%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    	<meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
-   <title>安全信息 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
-	 <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721"  type="text/css">
-	 <link href="${ctx}/static/css/public.css" rel="stylesheet" type="text/css">	
-	 <link rel="stylesheet" href="${ctx}/static/css/tzdr.css">
-	 <link rel="stylesheet" href="${ctx}/static/css/base.css"  type="text/css">
-    <link href="${ctx}/static/css/gybf.css" rel="stylesheet" type="text/css">	
-    <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?version=20150724"></script>
-     <script src="${ctx}/static/script/tzdr.js" type="text/javascript"></script>
-<script src="${ctx}/static/script/common/tzdr.user.js?version=20150724" type="text/javascript"></script>		
+    <title>安全信息 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
+	<link rel="stylesheet" href="${ctx}/static/css/uc.css?v=${v}"  type="text/css">
+	<link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">	
+	<link rel="stylesheet" href="${ctx}/static/css/tzdr.css?v=${v}">
+	<link rel="stylesheet" href="${ctx}/static/css/base.css?v=${v}"  type="text/css">
+    <link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">	
+    <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?v=${v}"></script>
+    <script src="${ctx}/static/script/tzdr.js?v=${v}" type="text/javascript"></script>
+	<script src="${ctx}/static/script/common/tzdr.user.js?v=${v}" type="text/javascript"></script>		
     <!--[if lte IE 9]><script src="js/html5.js"></script><![endif]-->
 <style>
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+	#div_loading {height:0;}
 </style>
 </head>
-
-
-<script>
-
-/**
-蒙版信息控件
-用法：
-1.引用 .css
-2.引用 mask.js
-3.调用方法
-var obj=new MaskControl();
-//显示蒙版提示信息
-obj.show("显示的提示信息");
-//隐藏蒙版提示信息
-obj.hide();
-//显示提示信息，并隔timeOut(1000代表1秒)自动关闭
-obj.autoDelayHide=function(html,timeOut)
-*/
-function MaskControl(){
-this.show=function(html){
-var loader=$("#div_maskContainer");
-if(loader.length==0){
-loader=$("<div id='div_maskContainer'><div id='div_Mask' ></div><div id='div_loading' ></div></div>");
-$("body").append(loader);
-}
-self.loader=loader;
-var w=$(window).width();
-var h=$(window).height();
-var divMask=$("#div_Mask");
-divMask.css("top",0).css("left",0).css("width",w).css("height",h);
-var tipDiv=$("#div_loading");
-if(html==undefined)
-html="";
-tipDiv.html(html);
-loader.show();
-var x=(w-tipDiv.width())/2;
-var y=(h-tipDiv.height())/2;
-tipDiv.css("left",x);
-tipDiv.css("top",y);
-},
-this.hide=function(){
-var loader=$("#div_maskContainer");
-if(loader.length==0) return ;
-loader.remove();
-},
-this.autoDelayHide=function(html,timeOut){
-var loader=$("#div_maskContainer");
-if(loader.length==0) {
-this.show(html);
-}
-else{
-var tipDiv=$("#div_loading");
-tipDiv.html(html);
-}
-if(timeOut==undefined) timeOut=3000;
-window.setTimeout(this.hide,timeOut);
-}
-
-} 
-
-
-function bandcard(){
-	var idcard='${requestScope.idcard}';
-	if(idcard!=""){
-		window.location.href=basepath+"/draw/drawmoney?tab=1";
-	}else{
-		showMsgDialog("提示","请先进行实名认证");
-	}
-}
-
-
-</script>
-
 <body>
 <div id="div_Mask"  style="display:none;"></div>
-	<%@include file="../common/header.jsp"%>
+<%@include file="../common/header.jsp"%>
 <!--弹出框-->
 <div id="div_loading">
 <!--001-->
-
 <div class="tck01" id="idcardDiv" style="display:none;" >
 <div class="navtitle"><a class="nava" style="width:90px;" >实名认证</a><a class="close" onclick="javascript:closeDiv('idcardDiv')"></a></div>
-<div class=" wzms"> 实名信息提交后不可修改，请务必认真填写真实资料
-
- 一个身份证只能绑定一个帐号。
-
-如遇到问题，请联系客服 400-852-8008
-</div>
+<div class=" wzms"> 实名信息提交后不可修改，请务必认真填写真实资料一个身份证只能绑定一个帐号。如遇到问题，请联系客服 400-852-8008</div>
 <div class="smain" >
-<div class="srk">
-<span class="label">真实姓名：</span><input class="au-ipt" name="cardname" id="cardname" type="text">
+	<div class="srk">
+		<span class="label">真实姓名：</span><input class="au-ipt" name="cardname" id="cardname" type="text">
+	</div>
+	<div class="srk">
+		<span class="label">身份证号：</span>
+    	<input class="au-ipt" name="input" name="idcard" id="idcard" type="text">
+  	</div>
 </div>
-<div class="srk"> <span class="label">身份证号：</span>
-    <input class="au-ipt" name="input" name="idcard" id="idcard" type="text">
-  </div>
- </div>
 <!--001-1-->  
- <div class="anniu">
- <a class="btn-h01" id="validating" onclick="javascript:validateCard();">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('idcardDiv')">取&nbsp;消</a>
+<div class="anniu">
+	<a class="btn-h01" id="validating" onclick="javascript:validateCard();">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('idcardDiv')">取&nbsp;消</a>
 </div>
 </div>
-
 <div  id="maxcarderrorNum" class="tck01" style="display:none;" >
 <div class="navtitle"><a class="nava" style="width:90px;" >实名认证</a><a class="close"></a></div>
 <div class=" pdmain" style="padding:30px;">
   <p><img src="${ctx}/static/images/wrong.png" class="mglt30" width="48" height="48"><span class="font16">您已3次验证错误，请联系客服进行实名认证！</span></p>
 </div>
-  
- <div class="anniu">
- <a class="btn-h0101"  onclick="javascript:closeDiv('maxcarderrorNum');">提&nbsp;交</a></div>
+<div class="anniu">
+	<a class="btn-h0101"  onclick="javascript:closeDiv('maxcarderrorNum');">提&nbsp;交</a></div>
 </div>
-
-
-
-
 <!--002-->
 <div class="tck01" id="updateMobile" style="display:none;">
 <div class="navtitle"><a class="nava" >修改绑定手机
@@ -154,23 +71,18 @@ function bandcard(){
 </a>
   </div>
 </div>
-
 <div class="anniu">
  <a class="btn-h01"  id="nextsmsBtn" onclick="javascript:tonextvalidatephonecode();">下一步</a><a class="btn-h02" onclick="javascript:closeDiv('updateMobile')">取&nbsp;消</a>
   </div>
 </div>
-
 <!--002-->
 <div class="tck01" id="updatenextMobile" style="display:none;">
-
 <div class="navtitle"><a class="nava" >修改绑定手机
 </a><a class="close" onclick="javascript:closeDiv('updatenextMobile')"></a></div>
 <div class="smain">
-
 <div class="srk">
  <span class="label">手机号：</span><input class="au-ipt mglt30"  id="newphone" name="newphone" type="text">
   &nbsp;&nbsp;&nbsp;&nbsp;
-	
 </div>
 <div class="srk">
  <span class="label">验证码：</span><input class="au-ipt mglt30"  id="newcode" name="newcode" type="text">
@@ -187,14 +99,10 @@ function bandcard(){
   	<a href='javascript:void(0);'><img src='validate.code' id='refresh_code' style="width: 85px;height: 29px;" class='rg_l_codeimg'></a>
   </div> -->
 </div>
-
 <div class="anniu">
  <a class="btn-h01"  id="nextsmsBtn" onclick="javascript:updatephone();">下一步</a><a class="btn-h02" onclick="javascript:closeDiv('updatenextMobile')">取&nbsp;消</a>
   </div>
 </div>
-
-
-
 <!--003-->
 <div class="tck01" id="bandingEmail" style="display:none;">
 <div class="navtitle"><a class="nava" >绑定邮箱</a><a class="close" onclick="javascript:closeDiv('bandingEmail')"></a></div>
@@ -211,16 +119,12 @@ function bandcard(){
     -->
    	 <a href="javascript:void(0)"  name="validateemailcode" id="validateemailcode" class=" colorf60 mglt10" style="text-decoration:none">获取验证码
     </a>
-   
-   
   </div>
 </div>
-  
  <div class="anniu">
  <a class="btn-h01" onclick="javascript:bindEmail();">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('bandingEmail')">取&nbsp;消</a>
   </div> 
 </div>
-
 <!--002-->
 <div class="tck01" id="sendoldMobile" style="display:none;">
 <div class="navtitle"><a class="nava" >修改绑定邮箱
@@ -235,17 +139,13 @@ function bandcard(){
   <!--  
     <input type="button" id="oldemailvalidatecode" value="">
     -->
-    <a href="javascript:void(0)"  name="oldemailvalidatecode" id="oldemailvalidatecode" class=" colorf60 mglt10" style="text-decoration:none">获取验证码
-</a>
-
-  </div>
+    <a href="javascript:void(0)"  name="oldemailvalidatecode" id="oldemailvalidatecode" class=" colorf60 mglt10" style="text-decoration:none">获取验证码</a>
 </div>
-
+</div>
 <div class="anniu">
  <a class="btn-h01"  id="nextsmsBtn" onclick="javascript:donextupdateEmail();">下一步</a><a class="btn-h02" onclick="javascript:closeDiv('sendoldMobile')">取&nbsp;消</a>
   </div>
 </div>
-
 <!--003-->
 <div class="tck01" id="updatebandingEmail" style="display:none;">
 <div class="navtitle"><a class="nava" >绑定邮箱</a><a class="close" onclick="javascript:closeDiv('updatebandingEmail')"></a></div>
@@ -261,19 +161,14 @@ function bandcard(){
     <!--  
     <input type="button" id="randomemailcodes" value="获取验证码">
     -->
-    <a href="javascript:void(0)"  name="randomemailcodes" id="randomemailcodes" class=" colorf60 mglt10" style="text-decoration:none">获取验证码
-</a>
+    <a href="javascript:void(0)"  name="randomemailcodes" id="randomemailcodes" class=" colorf60 mglt10" style="text-decoration:none">获取验证码</a>
     </td>
-   
   </div>
 </div>
-  
  <div class="anniu">
  <a class="btn-h01" onclick="javascript:updateEmail();">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('updatebandingEmail')">取&nbsp;消</a>
   </div> 
 </div>
-
-
 <!--004-->
 <div class="tck01" id="moneypwddiv" style="display:none;">
 <div class="navtitle"><a class="nava" >设置提现密码</a><a class="close" onclick="javascript:closeDiv('moneypwddiv')"></a></div>
@@ -288,12 +183,10 @@ function bandcard(){
     <font class="aginmeneypwderror" ></font>
   </div>
  </div>
-  
  <div class="anniu">
  <a class="btn-h01" id="moneypwdbtn">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('moneypwddiv')">取&nbsp;消</a>
   </div> 
 </div>
-
 <div class="tck01" id="updatefogetcode" style="display:none;">
 	<div class="navtitle"><a class="nava" >修改提现密码
 	</a><a class="close" onclick="javascript:closeDiv('updatefogetcode')"></a></div>
@@ -301,7 +194,6 @@ function bandcard(){
 	<div class="srk">
 	  <span class="label">手机号：</span><a class="fontarail" >${mobile}</a>
 	</div>
-	
 	<div class="srk">
 	  <input class="au-ipt mglt30"  id="drawcode" name="drawcode" type="text">
 	  &nbsp;&nbsp;&nbsp;&nbsp;
@@ -310,13 +202,10 @@ function bandcard(){
 		</a>
 	  </div>
 	</div>
-	
 	<div class="anniu">
 	 <a class="btn-h01"  id="nextfogetdrawpwdBtn" >下一步</a><a class="btn-h02" onclick="javascript:closeDiv('updatefogetcode')">取&nbsp;消</a>
 	  </div>
 </div>
-
-
 <!--004-->
 <div class="tck01" id="forgetmoneypwddiv" style="display:none;">
 <div class="navtitle"><a class="nava" >设置提现密码</a><a class="close" onclick="javascript:closeDiv('forgetmoneypwddiv')"></a></div>
@@ -331,13 +220,10 @@ function bandcard(){
     <font class="aginmeneypwderror" ></font>
   </div>
  </div>
-  
  <div class="anniu">
  <a class="btn-h01" id="updateforgetmoneypwdbtn">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('forgetmoneypwddiv')">取&nbsp;消</a>
   </div> 
 </div>
-
-
 <!--004-->
 <div class="tck01" id="updatemoneypwddiv" style="display:none;">
 <div class="navtitle">
@@ -360,16 +246,13 @@ function bandcard(){
     <font class="agindrawmoneypwderror" ></font>
   </div>
  </div>
-  
  <div class="anniu">
  <a class="btn-h01" id="resetmoneypwdbtn">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('updatemoneypwddiv')">取&nbsp;消</a>
   </div> 
 </div>
-
 <!--005-->
 <div class="tck01" id="updatepwddiv" style="display:none;" >
 <div class="navtitle"><a class="nava" >修改登录密码</a><a class="close" onclick="javascript:closeDiv('updatepwddiv')"></a></div>
-
 <div class="smain">
 <div class="srk">
 <span class="label">原登录密码：</span>
@@ -386,16 +269,13 @@ function bandcard(){
   <font class=" color999 mglt10 cnewpwd" ></font>
   </div>
 </div>
-  
  <div class="anniu">
  <a class="btn-h01" id="doupdatepwd">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('updatepwddiv')">取&nbsp;消</a>
 </div>
 </div>
-
 <!--006-->
 <div class="tck01" id="cardInfofile" style="display:none;" >
 <div class="navtitle"><a class="nava" >身份证信息上传</a><a class="close" onclick="javascript:closeDiv('cardInfofile')"></a></div>
-
 <div class="smain">
 <div class="srk">
 <span class="label">身份证正面照片：</span>
@@ -424,17 +304,13 @@ function bandcard(){
   </span>
   </div>
  </div>
-  
  <div class="anniu">
  <a class="btn-h01" id="cardinfobtn" onclick="javascript:uploadCardFile();">上&nbsp;传</a><a class="btn-h02" onclick="javascript:closeDiv('cardInfofile')">暂不上传</a>
 </div>
 </div>
-
-
 </div>
 <!--弹出框-->
 <div class="centmain">
-
 <%@ include file="../common/leftnav.jsp"%>
 <div class="rightmain">
 <div class="nav">安全信息</div>
@@ -474,21 +350,18 @@ function bandcard(){
 </div>
 </p>
 </div>
-
 <div class="ulmain mglt10">
 <div class="pmain">
 <img src="${ctx}/static/images/bdsj.png" width="60" height="55">
 <p><a class="font15 ftwtb">绑定手机</a>
 </p>
-<p><a class="font14 fontarail colorred ">${mobile }</a><a class="color34b3e0 font14 mglt20" href="javascript:updateMobile();">修改</a>
-</p>
+<p><a class="font14 fontarail colorred ">${mobile }</a><a class="color34b3e0 font14 mglt20" href="javascript:updateMobile();">修改</a></p>
 </div>
 <div class="color999 font14 mgt10">
   <p>手机号码是您在维胜的重要凭证</p>
 </div>
 </p>
 </div>
-
 <div class="ulmain mglt10">
 <div class="pmain">
 <img src="${ctx}/static/images/bdyx.png" width="60" height="55">
@@ -497,11 +370,9 @@ function bandcard(){
 <p id="emaildivinfo">
 <c:choose> 
 <c:when test="${not empty requestScope.user.email }">  
-	
 	<a class="colorred fontarail ">${email }</a><a class='color34b3e0 font14 mglt20' href='javascript:toupdateEmail();'>修改</a>
 </c:when>
 <c:when test="${ empty requestScope.user.email}">  
-	
 	<a class="colorred font14 ">未绑定</a><a class="color34b3e0 font14 mglt20" href="javascript:toBandingPhone();">立即绑定</a>
 </c:when>
 </c:choose>
@@ -512,21 +383,18 @@ function bandcard(){
 </div>
 </p>
 </div>
-
 <div class="ulmain">
 <div class="pmain">
 <img src="${ctx}/static/images/dlmm.png" width="60" height="55">
 <p><a class="font15 ftwtb">登录密码</a>
 </p>
-<p><a class="color34b3e0 font14 ">已设置</a><a class="color34b3e0 font14 mglt20" id="toupdatepwd" href="javascript:void(0)">修改</a>
-</p>
+<p><a class="color34b3e0 font14 ">已设置</a><a class="color34b3e0 font14 mglt20" id="toupdatepwd" href="javascript:void(0)">修改</a></p>
 </div>
 <div class="color999 font14 mgt10">
   <p>登录维胜网站时需要输入的密码</p>
 </div>
 </p>
 </div>
-
 <div class="ulmain mglt10">
 <div class="pmain">
 <img src="${ctx}/static/images/txmm.png" width="60" height="55">
@@ -538,7 +406,6 @@ function bandcard(){
 <a class='color34b3e0 font14 '>已设置</a>
 <a class='color34b3e0 font14 mglt10' id='resetmoneypwd' href='javascript:resetMoneyPwd();'>立即修改</a>
 <a class='color34b3e0 font14 mglt10' id='forgetdrawPwd' href='javascript:void(0)'>忘记密码</a>
-
  </c:when>
  <c:otherwise>
   <a class="colorred font14 ">未设置</a>
@@ -555,9 +422,7 @@ function bandcard(){
 <div class="ulmain mglt10">
   <div class="pmain">
       <img src="${ctx }/static/images/yhk.png" width="60" height="55">
-      
       <p><a class="font15 ftwtb">绑定银行卡</a></p>
-      
            <c:choose> 
 			<c:when test="${not empty requestScope.bank}">
 			 <p><a class="colorred font14 ">${requestScope.bank }</a>
@@ -571,11 +436,9 @@ function bandcard(){
 			</c:otherwise>
 		</c:choose>
   </div>
-  
   <div class="color999 font14 mgt10">
     <p>绑定银行卡后，充值提现更方便</p>
   </div>
-
 </div>
 </div>
 </div>
@@ -583,71 +446,6 @@ function bandcard(){
 </div>
 </div>
 <%@include file="../common/footer.jsp"%>
-<script type="text/javascript">
-$("#idcard_front").fileupload({
-    url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内
-    dataType:'json',
-    formData:{dir:"upload/idcard",fileType:"img",limitSize:2},//如果需要额外添加参数可以在这里添加
-    done:function(e,result){
-    	result = result.result;
-    	var imgurl = result.url;
-    	if(result.error==""){
-    		alert("上传成功");
-    		$("#idcardfrontfile").val(imgurl);
-    		showfilename(imgurl,"idcard_frontspan");
-    	}else{
-    		alert(result.error);
-    	}
-    	
-    	//document.getElementById("idcardfrontfile").value=url;
-    	
-    }
-});
-
-$("#idcard_back").fileupload({
-    url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内
-    dataType:'json',
-    formData:{dir:"upload/idcard",fileType:"img",limitSize:2},//如果需要额外添加参数可以在这里添加
-    done:function(e,result){
-    	result = result.result;
-    	var imgurl = result.url;
-    	//document.getElementById("idcardfrontfile").value=url;
-    	
-    	if(result.error==""){
-    		alert("上传成功");
-    		$("#idcardbackfile").val(imgurl);
-    		showfilename(imgurl,"idcard_backspan");
-    	}else{
-    		alert(result.error);
-    	}
-    }
-});
-
-$("#idcard_path").fileupload({
-    url:basepath+"fileUpload",//文件上传地址，当然也可以直接写在input的data-url属性内
-    dataType:'json',
-    formData:{dir:"upload/idcard",fileType:"img",limitSize:2},//如果需要额外添加参数可以在这里添加
-    done:function(e,result){
-    	result = result.result;
-    	var url = result.url;
-    	//document.getElementById("idcardfrontfile").value=url;
-    	if(result.error==""){
-    		alert("上传成功");
-    		$("#idcardpathfile").val(url);
-    		showfilename(url,"idcardspan");
-    	}else{
-    		alert(result.error);
-    	}
-    }
-});
-
-function showfilename(fileurl,id){
-	var length=fileurl.lastIndexOf("/");
-	var filename=fileurl.substring(length+1,fileurl.length);
-	var name=filename.substring(filename.length-8,filename.length);
-	$("#"+id).html(name);
-}
-</script>
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

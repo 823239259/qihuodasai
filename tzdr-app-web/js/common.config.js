@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var marketSocketUrl = "";
 var marketUserName = "";
@@ -27,7 +27,8 @@ var MarketConfig = {
  * 测试行情配置
  */
 var MarketConfigTest = { 
-	MarketSocketUrl:"ws://139.224.24.206:9002",
+//	MarketSocketUrl:"ws://139.224.24.206:9002",
+	MarketSocketUrl:"ws://192.168.2.123:9002",
 	username:"13677622344",
 	password:"a123456"
 }

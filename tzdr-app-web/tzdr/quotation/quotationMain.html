@@ -214,11 +214,9 @@
 					        //插入主力合约
 					        AddTo()
 					    }else if(method == "OnRspSubscribe"){
-							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
-					         //更新行情的数据
-					         	console.log(JSON.stringify(MoreData));
-					        	insertData1(MoreData);
-					        
+//							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
+//					         //更新行情的数据
+//					        	insertData1(MoreData);
 					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data).Parameters;
 					         //更新行情的数据
@@ -313,6 +311,12 @@
 					if(re != null || re != undefined){
 						re.reload(); 
 					}
+			});
+			document.getElementById("tutorial").addEventListener("tap",function(){
+				mui.openWindow({
+					url:"tutorial.html",
+					id:"tutorial"
+				})
 			});
 			function referPage(){
 				plus.webview.getWebviewById("quotationMain").reload();

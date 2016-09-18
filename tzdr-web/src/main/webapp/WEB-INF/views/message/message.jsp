@@ -66,7 +66,6 @@
 				<textarea maxlength="3000"></textarea>				
 				<div class="uc_paybtn uc_msbtn msbtn"><a href="javascript:void(0);" >提交</a></div>
 			</div>
-			
 			<div class="messageList">
 				<c:if test="${!empty messageList}">
 					<c:forEach items="${messageList}" var="message" varStatus="status">

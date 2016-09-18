@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
-<link href="${ctx }/static/css/trade.css?v=20151127" rel="stylesheet" type="text/css" />
+<link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
 <div class="top-title">
     <div class="topctn">
         <div class="top_tel"><!--<i></i>-->全国客服热线：<span>400</span>-<span>852</span>-<span>8008</span></div>
@@ -24,18 +24,6 @@
        	<%
        		}
        	%>
-       	<!-- 我的账户 -->
-       	<div class="top_mynav top_mytel" style="display: none; top:1px;">
-       		<% if(request.getSession().getAttribute("userName") != null){%>
-            <h2><%=request.getSession().getAttribute("userName").toString() %></h2>
-            <%} %>
-            <a href="${ctx}/user/account">操盘账户</a>
-        </div>
-        <!-- 我的账户 -->
-        <div class="top_mynav top_myname" style="display:none; top:1px;">
-            <h2>我的账户</h2>
-            <a href="${ctx}/user/account">操盘账户</a>
-        </div>
     </div>
 </div>
 <div style="background: #333; height: 85px;">

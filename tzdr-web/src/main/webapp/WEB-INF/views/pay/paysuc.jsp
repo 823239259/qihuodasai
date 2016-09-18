@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common/common.jsp"%>
+ <%@include file="../common/import-artDialog-js.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,15 +36,67 @@
 		  margin-bottom: 40px;
 		  font-size: 18px;
 		}
-    	
     </style>
 </head>
+<script type="text/javascript" src="${ctx}/static/script/Util.js?v=${v}"></script>
+
+<script type="text/javascript">
+var time = 5; 
+var intervalTime = null;
+intervalTime =  setInterval(function(){
+		time = time - 1;
+		$("#time").text(time);
+		if(time == 0){
+			var payUrl = getCookie("payurl");
+			if(payUrl != null && payUrl != "null" && payUrl != undefined && payUrl.length > 0){
+				//验证订单是否支付成功
+				$.ajax({
+					url:"${ctx}/userOutDisk/validation/order/pay",
+					type:"get",
+					success:function(result){
+						if(result.success){
+								$("input[name = 'inputTraderBond']").val(getCookie("bond"));
+								$("input[name = 'inputTranLever']").val(getCookie("lever"));
+								$("input[name = 'tokenTzdr']").val(result.message);
+								$("#payableForm").attr("action","${ctx}/" + payUrl);
+								$.ajax({
+									url:"${ctx}/userOutDisk/clearPayCookie",
+									type:"post",
+									success:function(result){
+										
+									}
+								})
+								$("input[type = 'submit']").click();
+								return ;
+						}else{
+							showMsgDialog("提示", "购买方案失败，请重新购买");
+							 setTimeout(function(){
+								 $("input[type = 'submit']").click();
+							 }, 3000);
+							 return;
+						}
+					}
+				});
+			}else{
+				$("input[type = 'submit']").click();
+			}
+			clearInterval(intervalTime);
+		}
+	}, 1000);
+</script>
 <body>
 <div class="pay_suc">
-	<img src="static/images/suc_01.png" />
 	<div class="mui-content-padded">
-		<h4>已充值成功</h4>
+		<h4>已充值成功,<b id = "time">5</b>秒后自动跳转...</h4>
+		
 	</div>
+	<form action="${ctx}/user/account" style = "display: none;" id="payableForm" method="post">
+		<input type="hidden" name="inputTraderBond" value="0" />
+		<input type="hidden" name="inputTranLever" value="0" />
+		<input type="hidden" name="tokenTzdr" value="0" />
+		<input type="hidden" name="voucherId" value="" />
+		<input type="submit"/>
+	</form>
 </div>
 </body>
 </html>

@@ -76,7 +76,7 @@ public class AccountController {
 	private static Object lock = new Object();
 	
 	/**
-	* @Description: TODO(个人中心首页         )
+	* @Description: TODO(  个人中心首页)
 	* @Title: account
 	* @param modelMap
 	* @param request

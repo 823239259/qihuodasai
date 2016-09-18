@@ -552,3 +552,26 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	font-size: 15px;
 	font-style: normal;
 }
+#freeMoney{
+	width: 100%;
+	font-size: 16px;;
+	line-height: 30px;
+	height: 30px;
+	text-align: right;
+	padding-right: 15px;
+	vertical-align: middle;
+	margin: 0px;
+	position: relative;
+	top:2%;
+}
+#freeMoney span{
+	display: inline-block;
+	width: auto;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 5px;
+}
+#freeMoney #freeCashMoney{
+	font-style: normal;
+	color:#FFCC33;
+}
