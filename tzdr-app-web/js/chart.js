@@ -56,7 +56,7 @@ mui.plusReady(function(){
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","BeginTime":"'+time1+'","HisQuoteType":1}');
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"," Count":"'+1+'","HisQuoteType":1}');
 	        },3000);
 	       //masendMessage('QryCommodity','{"ExchangeNo":"'+exchangeNo+'"}');
 	       masendMessage('QryCommodity',null);
