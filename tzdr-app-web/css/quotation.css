@@ -475,6 +475,7 @@ input{
 #fisrtLlist{
 	width: 100%;
 	height: 40px;
+	padding:0px 2%;
 	line-height: 40px;
 	color: #FFFFFF;
 	position: fixed;
@@ -487,6 +488,9 @@ input{
 	display: inline-block;
 	width: 25%;
 	text-align: center;
+}
+#fisrtLlistSpan{
+	text-align: left!important;
 }
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
 	border-radius: 0px;
