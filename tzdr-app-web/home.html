@@ -55,7 +55,7 @@
 				<!--<div class="mui-indicator mui-active"></div>
 				<div class="mui-indicator"></div>
 				<div class="mui-indicator"></div>
-				<div class="mui-indicator"></div>--> 
+				<div class="mui-indicator"></div>-->
 			</div>
 		</div>
 		<div class="futureTitle">国际期货推荐</div>
@@ -95,7 +95,6 @@
 			</li>
 			
 		</ul>
-		<!--<button class="mui-btn" id="mybtnCheshi">点击</button>-->
 	</div>
 </body>
 	<script type="text/javascript" charset="utf-8">	
@@ -121,8 +120,8 @@
 				mui.openWindow("tzdr/future/hsi.html","hsi"); 
 			});
 			document.getElementById("cp").addEventListener("tap",function(){
-				mui.openWindow("tzdr/future/cp.html","cp"); 
-//				mui.openWindow("tzdr/quotation/activity.html","activity"); 
+//				mui.openWindow("tzdr/future/cp.html","cp"); 
+				mui.openWindow("tzdr/quotation/activity.html","activity"); 
 			});
 //			document.getElementById("lhsi").addEventListener("tap",function(){
 //				mui.openWindow("tzdr/future/lhsi.html","lhsi");  
@@ -184,7 +183,15 @@
 		mui("#bannerloop").on('tap','a',function(){		 
 			//获取id
 			var nid = this.getAttribute("id");
-	    	mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
+			nid="http://www.dcloud.io/";
+			var str="http"
+			if(nid.indexOf(str)==-1){
+				mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
+			}else{
+				mui.openWindow({url:"tzdr/news/active.html",id:"active",extras:{nid:nid}});
+			}
+//			mui.openWindow({url:"tzdr/quotation/activity.html",id:"activity"});
+////	    	mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
 		});
 		
 			//获取新闻列表信息
