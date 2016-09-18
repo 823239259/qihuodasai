@@ -767,15 +767,18 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 		fund.setFreeze(newfrzbal);// 冻结金额
 		fund.setAmount(avlBal);
 		fund.setPayStatus((short) 1);
+		fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss") + "提现" + drawList.getMoney()
+			+ "元；提现手续费" + handleFee + "元；" + "实际到账金额" + BigDecimalUtils.subRound(drawList.getMoney(), handleFee)
+			+ "元");
 		// 根据是否收取手续费 记录相应备注
-		if (BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+		/*if (BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
 			fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss") + "提现" + drawList.getMoney()
 					+ "元；提现手续费" + handleFee + "元；" + "实际到账金额" + BigDecimalUtils.subRound(drawList.getMoney(), handleFee)
 					+ "元");
 		} else {
 			fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss") + "提现" + drawList.getMoney()
 					+ "元；提现手续费0元；实际到账金额" + drawList.getMoney() + "元");
-		}
+		}*/
 		fund.setAddtime(new Date().getTime() / 1000);
 		fund.setUptime(new Date().getTime() / 1000);
 		userFundService.save(fund);
