@@ -575,7 +575,10 @@ input{
 	font-size: 14px
 }
 #tutorial{
-	color:#FFFFFF;
-	line-height: 43px;
+	vertical-align: middle;
 }
-
+#tutorial img{
+	width: 24px;
+	height: auto;
+	margin-top: 10px;
+}
