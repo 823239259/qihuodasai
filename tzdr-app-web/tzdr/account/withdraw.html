@@ -106,7 +106,7 @@
 		
 		
 		function drawMoney(){
-			var drawmoney=document.getElementById("drawmoney").value;
+			/* var drawmoney=document.getElementById("drawmoney").value;
 			if(mui.isnull(drawmoney)){
 				document.getElementById("drawmoney").value="";
 				mui.toast("不能输入非法字符");
@@ -128,8 +128,8 @@
 			},function(result){
 				mui.toast(result.message);
 				return;
-			}) 
-			/*var drawmoney=document.getElementById("drawmoney").value;
+			})  */
+			var drawmoney=document.getElementById("drawmoney").value;
 			var balance=document.getElementById("balance").innerHTML;
 			var drawHandleFee=document.getElementById("drawHandleFee");
 			
@@ -149,22 +149,15 @@
 				document.getElementById("draw_time").innerHTML="0";
 				return;
 			}
-			
-			
 			var draw_time= balance - drawmoney ;
-			
 			var iscould= draw_time >= 0 ? true : false;
 			if(iscould){
-				if(drawmoney>=5000){
-					drawHandleFee.innerHTML="0.00";
-				}
-				
+				drawHandleFee.innerHTML=tzdr.moneyUtils.decimal(drawmoney*0.01,2);
 				document.getElementById("draw_time").innerHTML=tzdr.moneyUtils.decimal(drawmoney-drawHandleFee.innerHTML,2);
-				
 			}else{
 				mui.toast("余额不足，请充值！");
 				return;
-			}*/
+			}
 			
 		};
 		
@@ -375,8 +368,8 @@
 		</div>			
 		<div class="mui-content-padded">
 			<h5>温馨提示：</h5>
-			<p>1、提现金额在5000元以下，将收取银行手续费5元；5000元以上，不收取手续费。</p>
-			<p>2、目前每个用户每天只能提现5笔。</p>
+			<p>1、到账时间：工作日09：00——16:30申请，24小时内到账，最快5分钟到账。其余时间申请，将在下一个工作日到账。</p>
+			<p>2、提现手续费 1%（适用于充值后，未实际操盘用户）0元（适用于操盘用户提现）。手续费和实际到账的金额注意核算规则为扣除1%参照下图。</p>
 		</div>
 	</div>
 </body>
