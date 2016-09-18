@@ -161,7 +161,8 @@
 			"tzdr/future/list.html",
 			"home.html",
 			"tzdr/login/login.html",
-			"tzdr/future/listrg.html"
+			"tzdr/future/listrg.html",
+			"tzdr/quotation/quotationMain.html"
 		]
 	},
 	"tzdr/news/newslist.html": {
@@ -940,7 +941,8 @@
 			"js/common.config.js",
 			"js/jquery-1.11.3.js",
 			"js/jquery.base64.js",
-			"js/util.js"
+			"js/util.js",
+			"images/newUser.png"
 		],
 		"refer": [
 			"home.html",
@@ -1136,7 +1138,10 @@
 			"images/tutorial/4.png",
 			"images/tutorial/26.png",
 			"images/tutorial/7.png",
-			"images/tutorial/17.png"
+			"images/tutorial/17.png",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		]
 	}
 }

@@ -73,13 +73,11 @@
 				 */
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
 				var user=[];
-				
-//				user_mobile=18609975932;
-//				alert(user_mobile);
 				mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
 					console.log(JSON.stringify(result));
 					var data=result.data;
 					var Len=data.length;
+					console.log(Len);
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
 							$(".accountSelect").append("<option value='test'>其他</option>");
@@ -91,9 +89,7 @@
 							user[i]=acount;
 						}
 					};
-					if(Len==0){
-						$(".accountSelect").append("<option value='test'>其他</option>");
-					}
+					
 				},function(result){
 					console.log(JSON.stringify(result));
 				});
@@ -115,11 +111,10 @@
 							if(val==user[i].tranAccount){
 								$("#account").val(val);
 								$("#password").val(user[i].tranPassword);
-								$("#account").attr("disabled","disabled");
-								$("#password").attr("readonly","readonly");
 							}
 						}
-						
+						$("#account").attr("disabled","disabled");
+						$("#password").attr("readonly","readonly");
 					}
 				})
 				$("#account").val(endLoginAccount == null?"":endLoginAccount);
