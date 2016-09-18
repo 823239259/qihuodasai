@@ -62,7 +62,7 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
-            console.log(historyParam.Parameters.length);
+//          console.log(historyParam.Parameters.length);
               handleTime(historyParam);
             processingData(historyParam);
             handleVolumeChartData(historyParam);
@@ -284,7 +284,7 @@ mui.plusReady(function(){
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
     		var Len=parameters.length;
-    		console.log(Len);
+//  		console.log(Len);
     		if(parameters == null)return;
     	    var lent=rawData.length;
         	for(var i=0;i<Len;i++){
