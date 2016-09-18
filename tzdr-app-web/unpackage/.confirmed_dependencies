@@ -93,7 +93,8 @@
 			"tzdr/quotation/quotationMain.html",
 			"tzdr/quotation/transactionDetails.html",
 			"tzdr/news/news.html",
-			"tzdr/quotation/activity.html"
+			"tzdr/quotation/activity.html",
+			"tzdr/news/active.html"
 		]
 	},
 	"list.html": {
@@ -947,7 +948,8 @@
 			"tzdr/account/account.html",
 			"tzdr/scheme.html",
 			"tzdr/account/accountno.html",
-			"tzdr/future/listrg.html"
+			"tzdr/future/listrg.html",
+			"tzdr/quotation/tutorial.html"
 		]
 	},
 	"tzdr/quotation/transactionDetails.html": {
@@ -1097,6 +1099,44 @@
 			"images/bannerActivity.png",
 			"images/activeTitle.png",
 			"images/backgound1.jpg"
+		]
+	},
+	"tzdr/quotation/tutorial.html": {
+		"resources": [
+			"images/tutorial/27.png",
+			"images/tutorial/3.png",
+			"images/tutorial/4(1).png",
+			"css/noviceIntroduction.css",
+			"images/tutorial/18.png",
+			"images/tutorial/30.png",
+			"images/tutorial/24.png",
+			"images/tutorial/12.png",
+			"images/tutorial/25.png",
+			"images/tutorial/11.png",
+			"images/tutorial/2.png",
+			"images/tutorial/6.png",
+			"images/tutorial/29.png",
+			"images/tutorial/23.png",
+			"images/tutorial/32.png",
+			"images/tutorial/13.png",
+			"images/tutorial/19.png",
+			"images/tutorial/31.png",
+			"images/tutorial/28.png",
+			"images/tutorial/14.png",
+			"images/tutorial/22.png",
+			"images/tutorial/20.png",
+			"images/tutorial/21.png",
+			"images/tutorial/8.png",
+			"images/tutorial/16.png",
+			"images/tutorial/10.png",
+			"images/tutorial/5.png",
+			"images/tutorial/9.png",
+			"images/tutorial/1.png",
+			"images/tutorial/15.png",
+			"images/tutorial/4.png",
+			"images/tutorial/26.png",
+			"images/tutorial/7.png",
+			"images/tutorial/17.png"
 		]
 	}
 }
