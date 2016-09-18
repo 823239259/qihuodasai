@@ -40,7 +40,7 @@ function checkBanlanceEnough() {
 		$("input[name = 'balance']").val(chaBanlance);
 	} else {
 		bindConfirmPay();
-		$("#notEnoughPay").hide();
+		//$("#notEnoughPay").hide();
 		$("#confirmPay").attr("status",true);
 		$("#confirmPay").text("确认支付");
 		content = "你的账户余额只剩"+balance+"元,本次充值支付完毕剩余"+(balance - payable)+"元";
