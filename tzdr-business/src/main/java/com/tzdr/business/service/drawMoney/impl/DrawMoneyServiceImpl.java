@@ -1040,6 +1040,6 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			chaMoney = 0.00;
 		}
 		Double feeMoney = Math.abs(chaMoney) * scal;
-		return feeMoney;
+		return Math.round(feeMoney * 100) * 0.01d;
 	}
 }

@@ -915,7 +915,4 @@ public class DrawMoneyController {
 		return new JsonResult();
 	}
 
-	public static void main(String[] args) {
-
-	}
 }
