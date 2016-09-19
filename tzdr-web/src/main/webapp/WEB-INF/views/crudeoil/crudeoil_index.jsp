@@ -11,14 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-.font_size_15 {
-	font-size: 15px;
-	color: #f60;
-}
-.font_size_22 {
-	font-size: 22px;
-	color: #f60;
-}
+.font_size_15 {font-size: 15px; color: #f60;}
+.font_size_22 {font-size: 22px; color: #f60;}
  #guojiyuanyou {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
@@ -105,7 +99,7 @@
 						<label>操盘须知：</label> <span style="color:#333; font-size:16px;">美国轻质原油期货当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label><span><i>09:05-23:55</i></span>
+						<label>交易时间：</label><span><i>09:05-23:55，<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</c></i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
