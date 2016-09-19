@@ -793,13 +793,14 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			if (dataMapService.activityExpired()) {
 				this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(), wuser.getMobile(), wellGoldA50.getId());
 			}
-			Double wEndAmount = simpleFtseUserTrade.getEndAmount().doubleValue();
-			Double wbond = simpleFtseUserTrade.getTraderBond().doubleValue() + simpleFtseUserTrade.getAppendTraderBond().doubleValue();
-			Double wMxAmount = wbond;
-			if(wEndAmount > wbond){
-				wMxAmount = wEndAmount;
+			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue();
+			Double absTranProfitLoss = Math.abs(tranProfitLoss);
+			Double endAmlount = Math.abs(simpleFtseUserTrade.getEndAmount().doubleValue());
+			Double wEndAmount = endAmlount;
+			if(tranProfitLoss < 0){
+				wEndAmount = wEndAmount + absTranProfitLoss;
 			}
-			wuser.setCountOperateMoney(wuser.getCountOperateMoney() + wMxAmount);
+			wuser.setCountOperateMoney(wuser.getCountOperateMoney() + wEndAmount);
 			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
