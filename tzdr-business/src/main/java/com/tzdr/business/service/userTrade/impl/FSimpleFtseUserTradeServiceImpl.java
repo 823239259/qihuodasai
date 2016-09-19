@@ -793,7 +793,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			if (dataMapService.activityExpired()) {
 				this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(), wuser.getMobile(), wellGoldA50.getId());
 			}
-			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue();
+			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue() * simpleFtseUserTrade.getEndParities().doubleValue();
 			Double absTranProfitLoss = Math.abs(tranProfitLoss);
 			Double endAmlount = Math.abs(simpleFtseUserTrade.getEndAmount().doubleValue());
 			Double wEndAmount = endAmlount;
