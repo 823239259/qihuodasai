@@ -738,7 +738,7 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
 .fl_pay {
     padding: 0;
     border: none;
-    width: 30%;
+    width: 420px;
     height: auto;
     /* padding: 10px 10px 30px 10px; */
     background: #fff;
@@ -750,7 +750,7 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
     position: fixed;
     left: 50%;
     top: 20%;
-    margin-left: -15%;
+    margin-left: -210px;
     min-width: 320px;
 }
 
