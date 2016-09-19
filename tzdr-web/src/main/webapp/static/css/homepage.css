@@ -97,3 +97,27 @@
 .tck01 {width: 350px;}
 #shouye {color: #ffcc33;border-bottom: 2px solid #ffcc33;padding-bottom: 26px;}
 .ft_wx a:hover { background: url(../images/common-new/wxon.png) no-repeat; }
+
+/*hang qing xian shi cuo wu */
+.w_center_upgrade {width: 1010px; margin: 0 auto; background: url("../images/image/logo-beijing-chucuo.png") no-repeat; height: 610px; border-radius: 5px;}
+.w_center_upgrade_center {width: 1000px; margin: 0 auto;}
+.w_center_upgrade_title {width: 960px; margin-left: 20px; }
+.w_upgrade_title {border-bottom: 1px solid #ccc;font-size: 30px; color: #333; height: 90px;line-height: 90px; text-align: center;}
+.w_upgrade_js {font-size: 16px; color: #333; margin-top: 25px; }
+.w_center_upgrade_title .ul {height: 140px;}
+.w_center_upgrade_title .ul li{float: left; width: 192px; height: 28px; line-height: 28px; text-align: center; margin-top: 50px;} 
+.w_center_upgrade_title .ul li .Chrome {background: url("../images/image/logo-beijing-icon.png") 0px 70px; height: 28px;  width: 28px; display: inline-block; position: relative; top: 9px}
+.w_center_upgrade_title .ul li .Firefox {background: url("../images/image/logo-beijing-icon.png") -33px 70px; height: 28px;  width: 28px; display: inline-block; position: relative; top: 7px }
+.w_center_upgrade_title .ul li .Safari {background: url("../images/image/logo-beijing-icon.png") -67px 70px; height: 28px;  width: 28px; display: inline-block; position: relative; top: 7px}
+.w_center_upgrade_title .ul li .sll {background: url("../images/image/logo-beijing-icon.png") -98px 70px; height: 28px;  width: 28px; display: inline-block; position: relative; top: 7px}
+.w_center_upgrade_title .ul li .IE {background: url("../images/image/logo-beijing-icon.png") -132px 70px; height: 28px;  width: 28px; display: inline-block; position: relative; top: 7px}
+.w_center_upgrade_title .ul li a {color: #333;}
+.w_center_upgrade_title .ul li a:hover {color: #fc3;}
+.w_upgrade_xz {border-top: 1px solid #ccc;}
+.xz_title {font-size: 16px; color: #333; margin-top: 25px;}
+.w_upgrade_xz ul {float: left; text-align: center; width: 320px; margin-top: 65px;}
+.w_upgrade_xz .pc {background: url("../images/image/logo-beijing-icon.png") 0px 0px; height: 122px;  width: 122px; display: inline-block;}
+.w_upgrade_xz .ios {background: url("../images/image/logo-beijing-icon.png") 126px 0px; height: 122px;  width: 122px; display: inline-block;}
+.w_upgrade_xz .android {background: url("../images/image/logo-beijing-icon.png") -138px 0px; height: 122px;  width: 122px; display: inline-block;}
+.w_upgrade_xz .xz_title {font-size: 16px; color: #666; margin-top: 10px;}
+.w_center_upgrade a:hover {cursor: pointer;}
