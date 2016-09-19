@@ -30,7 +30,7 @@
 					<option class="mui-selected">请选择操盘账号</option>
 				</select>
 			</div>
-			<div class="mui-input-row" >
+			<div class="mui-input-row" id="userAcount">
 				<label>操盘账号</label>
 				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您操盘账号" >
 			</div>
@@ -97,6 +97,7 @@
 				}else{
 					$("#account").attr("disabled","disabled");
 					$("#password").attr("readonly","readonly");
+					$("#userAcount").css("display","none");
 				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
@@ -105,6 +106,7 @@
 						$("#password").removeAttr("readonly");
 						$("#account").val("");
 						$("#password").val("");
+						$("#userAcount").css("display","block");
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
@@ -114,6 +116,7 @@
 						}
 						$("#account").attr("disabled","disabled");
 						$("#password").attr("readonly","readonly");
+						$("#userAcount").css("display","none");
 					}
 				})
 				$("#account").val(endLoginAccount == null?"":endLoginAccount);
