@@ -37,7 +37,7 @@ function checkBanlanceEnough() {
 		$("#confirmPay").text("去充值");
 		var chaBanlance = payable - balance;
 		bindPay(chaBanlance);
-		content = "你的账户余额只剩"+balance+"元,本次充值支付还差"+chaBanlance+"元";
+		content = "你的账户余额"+balance+"元,本次支付还差"+chaBanlance+"元";
 		$("input[name = 'balance']").val(chaBanlance);
 	} else {
 		bindConfirmPay();
@@ -45,7 +45,7 @@ function checkBanlanceEnough() {
 		//$("#notEnoughPay").hide();
 		$("#confirmPay").attr("status",true);
 		$("#confirmPay").text("确认支付");
-		content = "你的账户余额只剩"+balance+"元,本次充值支付完毕剩余"+(balance - payable)+"元";
+		content = "你的账户余额"+balance+"元,本次支付完毕剩余"+(balance - payable)+"元";
 	}
 	$("#notEnoughPay").text(content);
 }
