@@ -799,11 +799,16 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			BigDecimal appendBondBig = simpleFtseUserTrade.getAppendTraderBond();
 			Double appendBond = appendBondBig == null ? 0.00:appendBondBig.doubleValue() ;
 			Double endAmlount = simpleFtseUserTrade.getEndAmount().doubleValue();
+			Double tradeFeeTotalDouble = 0.00;
+			BigDecimal tradeFeeTotal = simpleFtseUserTrade.getTranFeesTotal();
+			if(tradeFeeTotal != null){
+				tradeFeeTotalDouble = tradeFeeTotal.doubleValue();
+			}
 			if(tranProfitLoss < 0){
 				if(endAmlount < 0){
 					endAmlount = absTranProfitLoss;
 				}else{
-					endAmlount = appendBond + bond;
+					endAmlount = (appendBond + bond - tradeFeeTotalDouble);
 				}
 			}
 			Double countOperateMoney = wuser.getCountOperateMoney();
