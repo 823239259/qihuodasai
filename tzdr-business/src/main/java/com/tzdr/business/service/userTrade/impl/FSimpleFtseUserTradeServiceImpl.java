@@ -795,12 +795,18 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			}
 			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue() * simpleFtseUserTrade.getEndParities().doubleValue();
 			Double absTranProfitLoss = Math.abs(tranProfitLoss);
-			Double endAmlount = Math.abs(simpleFtseUserTrade.getEndAmount().doubleValue());
-			Double wEndAmount = endAmlount;
+			Double bond = simpleFtseUserTrade.getTraderBond().doubleValue();
+			BigDecimal appendBondBig = simpleFtseUserTrade.getAppendTraderBond();
+			Double appendBond = appendBondBig == null ? 0.00:appendBondBig.doubleValue() ;
+			Double endAmlount = simpleFtseUserTrade.getEndAmount().doubleValue();
 			if(tranProfitLoss < 0){
-				wEndAmount = wEndAmount + absTranProfitLoss;
+				if(endAmlount < 0){
+					endAmlount = absTranProfitLoss;
+				}else{
+					endAmlount = appendBond + bond;
+				}
 			}
-			wuser.setCountOperateMoney(Math.round((wuser.getCountOperateMoney() + wEndAmount) * 100) * 0.01d);
+			wuser.setCountOperateMoney(Math.round((wuser.getCountOperateMoney() + endAmlount) * 100) * 0.01d);
 			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
