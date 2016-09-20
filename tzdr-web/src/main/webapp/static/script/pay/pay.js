@@ -334,6 +334,45 @@ function doGopay(){
 	document.forms["goNetbank"].action=basepath+"pay/goPayView";
 	document.forms["goNetbank"].submit();
 }
+
+/*微信支付*/
+$(function(){
+	/*绑定微信号*/
+	$("#weixinbank .weixin_bind").click(function(){
+		var weiixn = $("#weiixn").val();
+		if(weiixn==""){
+			showMsgDialog("提示","请填写微信账号");
+			$("#weiixn").focus();
+			return ;
+		}
+		/*var reg=/^[a-zA-Z\d_]{5,}$/;    
+		if(reg.test(weiixn)){
+			showMsgDialog("提示","微信号格式有误");
+			$("#weiixn").focus();
+			return ;
+		}*/
+		$.post(basepath+"/pay/wx/bind/account",{"weiixn":weiixn},function(data){  
+			if(data.success){
+				if(data.message!="" && data.message!=null){
+					if(data.message == weiixn){
+						showMsgDialog("提示","微信号已存在，请更换其他账号绑定！");
+					}else if(data.message != weiixn){
+						showMsgDialog("提示","绑定成功！");
+						window.location.href=basepath+"/pay/payinfo?tab=1";
+					}else{
+						
+					}
+				}
+			}
+		},"json"); 
+	});
+	/*修改微信号*/
+	$("#weixinbank .weixin_update").click(function(){
+		$("#weixin_bind").show();
+		$("#weixin_update").hide();
+	});
+});
+
 /**
  * 支付宝充值
  */

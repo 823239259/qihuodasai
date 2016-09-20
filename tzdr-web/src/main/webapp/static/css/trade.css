@@ -779,3 +779,9 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
 .cpp_ovpayrule li p {height: 38px; line-height: 38px;}
 .cpp_ovpayrule li p.big {line-height: 38px;text-align: center;}
 .cpp_ovpayrule li p.big a {  color: #34b3e0; font-size: 14px; text-decoration: underline;}
+/* 微信支付 */
+#weixinbank .weixin_bind {text-align: center; background: #fc3; border: 1px solid #fc3; border-radius: 3px; padding: 0 10px;}
+#weixinbank .weixin_bind:hover{background: #fe3; border: 1px solid #fe3; cursor: pointer;}
+#weixinbank .weixin_update {text-align: center; background: #fc3; border: 1px solid #fc3; border-radius: 3px; padding: 0 10px; margin-left: 10px;}
+#weixinbank .weixin_update:hover{background: #fe3; border: 1px solid #fe3; cursor: pointer;}
+
