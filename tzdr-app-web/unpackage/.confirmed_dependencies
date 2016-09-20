@@ -975,7 +975,10 @@
 			"js/trade.js",
 			"js/reconnecting-websocket.min.js",
 			"js/reconnecting-websocket.js",
-			"js/common.config.js"
+			"js/common.config.js",
+			"js/chart.config.js",
+			"js/timechart.config.js",
+			"js/candlestick.config.js"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
