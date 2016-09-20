@@ -806,12 +806,17 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					endAmlount = appendBond + bond;
 				}
 			}
-			wuser.setCountOperateMoney(Math.round((wuser.getCountOperateMoney() + endAmlount) * 100) * 0.01d);
+			Double countOperateMoney = wuser.getCountOperateMoney();
+			if(countOperateMoney == null){
+				countOperateMoney = 0.00;
+			}
+			Double new_CountOperateMoney = countOperateMoney+endAmlount;
+			BigDecimal bd = new BigDecimal(new_CountOperateMoney);  
+			wuser.setCountOperateMoney(bd.doubleValue());
 			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
 	}
-
 	public void validationIsTradeSubsidy(String uid, String mobile, String id) {
 		List<ActivityReward> activityRewards = activityRewardService.doGetByUid(uid, "001");
 		if (activityRewards != null && activityRewards.size() > 0) {

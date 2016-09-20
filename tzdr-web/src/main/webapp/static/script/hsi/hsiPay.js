@@ -41,6 +41,7 @@ function checkBanlanceEnough() {
 		$("input[name = 'balance']").val(chaBanlance);
 	} else {
 		bindConfirmPay();
+		$("#notEnoughPay").show();
 		//$("#notEnoughPay").hide();
 		$("#confirmPay").attr("status",true);
 		$("#confirmPay").text("确认支付");
