@@ -522,7 +522,7 @@ public class PayController {
 		WUser user = this.payService.getUser(userSessionBean.getId());
 		JsonResult resultJson = new JsonResult(true);
 		if (StringUtil.isNotBlank(account)) {
-			synchronized (lock) {
+			synchronized (lock) { 
 				UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
 				if (ObjectUtil.equals(null, userVerified)) {
 					UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());

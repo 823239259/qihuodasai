@@ -155,11 +155,36 @@ public class UserPayController {
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"Successful binding");
 	}
 	
-	
+	/**
+	 * 绑定微信账号
+	 * @param request
+	 * @return 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/wx/bind/account",method = RequestMethod.POST)
+	public JsonResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user = this.payService.getUser(uid);
+		JsonResult resultJson = new JsonResult(true);
+		if (StringUtil.isNotBlank(account)) {
+			UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
+			if (ObjectUtil.equals(null, userVerified)) {
+				UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+				// 绑定微信账号
+				uv.setWxAccount(account);
+				userVerifiedService.update(uv);
+			} else {
+				resultJson.setMessage("微信账号已存在");
+			}
+		} else {
+			resultJson.setMessage("微信账号不能为空");
+		}
+		return resultJson;
+	}
 	/**
 	 * 银行转账接口
 	 * @param bankTransferRequest
-	 * @return
+	 * @return 
 	 */
 	@RequestMapping(value = "/bank_transfer",method=RequestMethod.POST)
 	@ResponseBody

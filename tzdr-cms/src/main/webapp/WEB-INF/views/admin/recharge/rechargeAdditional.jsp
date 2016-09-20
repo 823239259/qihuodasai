@@ -90,6 +90,7 @@
 					<th field="mobile" width="150" sortable="true">手机号 </th>
 					<th field="username" width="150" sortable="true">用户姓名</th>
 					<th field="alipayNo" width="150">支付宝账号</th>
+					<th field="wechatNo" width="150">微信账号</th>
 					<th field="bankCard" width="150">银行卡号</th>
 					<th field="tradeNo" width="150">交易号 </th>
 					<th field="money" width="150" sortable="true">充值表单金额 </th>
