@@ -37,7 +37,6 @@ mui.plusReady(function(){
     marketSocket.onclose = function(evt){
     	if(setIntvalTime != null)
     		clearInterval(setIntvalTime);
-    		//console.log("断开" + JSON.stringify(evt));
     	if(reconnect != false){
     		if(username==null){
     			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
@@ -58,12 +57,13 @@ mui.plusReady(function(){
 	        setIntvalTime = setInterval(function(){
 	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
 	        },3000);
-	       //masendMessage('QryCommodity','{"ExchangeNo":"'+exchangeNo+'"}');
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
-//          console.log(historyParam.Parameters.length);
-              handleTime(historyParam);
+			if(historyParam.Parameters==null){
+				return
+			};
+             handleTime(historyParam);
             processingData(historyParam);
             handleVolumeChartData(historyParam);
         }else if(method == "OnRtnQuote"){
@@ -94,7 +94,6 @@ mui.plusReady(function(){
 					$("#contractSize").val(comm.ContractSize);
 				}
 				setMarketCommdity(newCommdityNo+newContractNo,comm);
-				
 				masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 			}
         }
@@ -184,6 +183,7 @@ mui.plusReady(function(){
     var	 myChart = null;
     var timeChart=null;
     var volumeChart=null;
+    var CandlestickVolumeChart=null;
     var volumeChartTime=[];
     var volumeChartPrices=[];
     var volumeChartData={
@@ -217,10 +217,10 @@ mui.plusReady(function(){
                     echarts=ec;
                     timeChart=ec.init(document.getElementById("timeChart"));
                     var option1=setOption1(timeData);
-//                  volumeChart=ec.init(document.getElementById("volumeChart"));
-//                  var volumeChartOption=volumeChartSetOption();
-//                  volumeChart.setOption(volumeChartOption);;
-//                  ec.connect("group1");
+                    volumeChart=ec.init(document.getElementById("volumeChart"));
+                    CandlestickVolumeChart=ec.init(document.getElementById("CandlestickVolumeChart"));
+                    ec.connect("group1");
+                     ec.connect("group2");
                 }
         );
 		
@@ -281,10 +281,10 @@ mui.plusReady(function(){
     var num=0;
     var firstTimeNumber=0;
     var CandlestickChartOption=null;
+    var CandlestickVolumeChartOption=null;
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
     		var Len=parameters.length;
-//  		console.log(Len);
     		if(parameters == null)return;
     	    var lent=rawData.length;
         	for(var i=0;i<Len;i++){
@@ -309,9 +309,9 @@ mui.plusReady(function(){
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
-//		  		myChart.resize();
 		  		myChart.setOption(CandlestickChartOption);
-		  	}
+		  	};
+		  	myChart.group="group2";
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(myChart != null){
 				 	setTimeout(function(){
@@ -388,31 +388,6 @@ mui.plusReady(function(){
 		                    }
 		                }
 		    },
-		//  dataZoom: [{
-		//      textStyle: {
-		//          color: '#8392A5'
-		//      },
-		//      handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-		//      handleSize: '80%',
-		//      dataBackground: {
-		//          areaStyle: {
-		//              color: '#8392A5'
-		//          },
-		//          lineStyle: {
-		//              opacity: 0.8,
-		//              color: '#8392A5'
-		//          }
-		//      },
-		//      handleStyle: {
-		//          color: '#fff',
-		//          shadowBlur: 3,
-		//          shadowColor: 'rgba(0, 0, 0, 0.6)',
-		//          shadowOffsetX: 2,
-		//          shadowOffsetY: 2
-		//      }
-		//  }, {
-		//      type: 'inside'
-		//  }],
 		    animation: false,
 		    series: [
 		        {
@@ -444,8 +419,6 @@ mui.plusReady(function(){
         	var time2=Parameters[i].DateTimeStamp.split(" ");
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];
-//      	timeLabel[leng+i]=str2;
-//      	timePrice[leng+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize);
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=parseFloat(Parameters[i].LastPrice).toFixed(doSize); 	
         }
@@ -492,27 +465,6 @@ mui.plusReady(function(){
                show: false,
            },
            animation: false,
-//           xAxis: {
-//               show:false,
-//               type : 'category',
-//               splitLine: {
-//                   show: true
-//               },
-////               splitNumber: 2,
-//               data : data1.time
-//           },
-//         xAxis:[
-//             {
-//                 show: true,
-//                 type : 'category',
-//                 position:'bottom',
-//                 boundaryGap : true,
-//                 axisTick: {onGap:false},
-//                 splitLine: {show:false},
-//                 axisLine: { lineStyle: { color: '#8392A5' } },
-//                 data :volumeChartData.time
-//             }
-//         ],
 				 xAxis:[{
 				type: 'category',
 		        data: data1.timeLabel,
@@ -576,15 +528,26 @@ mui.plusReady(function(){
     }
     function handleVolumeChartData(json){
         var Len=json.Parameters.length;
+        var Parameters=json.Parameters;
         var VolumeLength=volumeChartData.time.length;
         for(var i=0;i<Len;i++){
-            volumeChartData.time[VolumeLength+i]=json.Parameters[i].DateTimeStamp;
-            volumeChartData.prices[VolumeLength+i]=json.Parameters[i].Volume;
+        	var time2=Parameters[i].DateTimeStamp.split(" ");
+        	var str1=time2[1].split(":");
+        	var str2=str1[0]+":"+str1[1];
+            volumeChartData.time[VolumeLength+i]=str2;
+            volumeChartData.prices[VolumeLength+i]=Parameters[i].Volume;
         };
+        var TimeLength= volumeChartData.time.length;
+		for(var i=0;i<volumeChartData.time.length-1;i++){
+			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
+				volumeChartData.time.splice(i,1);
+				volumeChartData.prices.splice(i,1);
+			}
+		}
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
-//          volumeChart.setOption(option);
-//         volumeChart.group="group1";
+            volumeChart.setOption(option);
+           	volumeChart.group="group1";
         }
     }
     function volumeChartSetOption(data) {
@@ -601,93 +564,40 @@ mui.plusReady(function(){
                 show: false,
             },
              animation: false,
-//			grid: {
-//             x: 80,
-//             y:5,
-//             x2:20,
-//             y2:30
-//        },
-			grid: {
-               x: 50,
-               y:30,
+			 grid: {
+               x: 40,
+               y:20,
                x2:20,
-               y2:30
+               y2:20
            },
-//grid: {
-//          top: '12%',
-//          left: '2%',
-//          right: '10%',
-//          containLabel: true
-//      },
-//        dataZoom: [{
-//            textStyle: {
-//                color: '#8392A5'
-//            },
-//            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-//            handleSize: '80%',
-//            dataBackground: {
-//                areaStyle: {
-//                    color: '#8392A5'
-//                },
-//                lineStyle: {
-//                    opacity: 0.8,
-//                    color: '#8392A5'
-//                }
-//            },
-//            handleStyle: {
-//                color: '#fff',
-//                shadowBlur: 3,
-//                shadowColor: 'rgba(0, 0, 0, 0.6)',
-//                shadowOffsetX: 2,
-//                shadowOffsetY: 2
-//            }
-//        }, {
-//            type: 'inside'
-//        }],
           xAxis:[
               {
                   type : 'category',
                   position:'bottom',
-                  boundaryGap : true,
+                 boundaryGap: false,
                   axisTick: {onGap:false},
                   splitLine: {show:false},
                    axisLine: { lineStyle: { color: '#8392A5' } },
                   data : dataVolume.time
               }
           ],
-//        yAxis: [
-//            {
-//                type: 'value',
-//                scale: false,
-////                  axisLabel:{
-////                      
-////                  },
-//                  axisLabel: {
-//                  	show:true,
-//                      formatter: function (a) {
-//                          console.log(a);
-//                          a = +a;
-//                          return isFinite(a)
-//                                  ? echarts.format.addCommas(+a / 100)
-//                                  : '';
-//                      }
-//                  },
-//                name: '成交量(万)',
-//            }
-//        ],
- yAxis: [
-            {
+		 yAxis: [
+		            {
                 type : 'value',
-                name : '成交量(万)',
+//              name : '成交量(万)',
                  axisLine: { lineStyle: { color: '#8392A5' } },
-                axisLabel: {
-                    formatter: function (a) {
-                        a = +a;
-                        return isFinite(a)
-                            ? echarts.format.addCommas(+a / 1000)
-                            : '';
-                    }
-                },
+	              axisTick:{
+	               	show:false,
+	              },
+	              scale:true,
+//              axisLabel: {
+//                  formatter: function (a) {
+//                      a = +a;
+//                      return isFinite(a)
+//                          ? echarts.format.addCommas(+a / 1000)
+//                          : '';
+//                  }
+//              },
                 splitLine: {
                     show: true,
                     lineStyle: {
@@ -700,6 +610,26 @@ mui.plusReady(function(){
               {
                   name: '成交量',
                   type: 'bar',
+//                 markLine: {
+//		                data: [
+//		                    {type: 'average', name: '平均值'},
+//		                    [{
+//		                        symbol: 'none',
+//		                        x: '90%',
+//		                        yAxis: 'max'
+//		                    }, {
+//		                        symbol: 'circle',
+//		                        label: {
+//		                            normal: {
+//		                                position: 'start',
+//		                                formatter: '最大值'
+//		                            }
+//		                        },
+//		                        type: 'max',
+//		                        name: '最高点'
+//		                    }]
+//		                ]
+//		            },
                   data:dataVolume.prices
               }
           ]
