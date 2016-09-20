@@ -109,6 +109,12 @@ public interface RechargeListService extends BaseService<RechargeList>{
 	 */
 	public PageInfo<RechargeBankListVo> queryNetBankListRecharge(PageInfo<RechargeBankListVo> page);
 	/**
+	 * 查询微信支付审核列表信息
+	 * @param page
+	 * @return
+	 */
+	public PageInfo<RechargeBankListVo> queryWechatListRecharge(PageInfo<RechargeBankListVo> page);
+	/**
 	 * 查询银行卡充值
 	 * @param page DataPage<RechargeList>
 	 * @param 

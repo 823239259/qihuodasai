@@ -84,7 +84,10 @@ public class UserVerified extends BaseEntity{
 	private Long updatUserId;//修改人
 	
 	private String moneyActive;//是否设置了提现密码0未设置,1设置
-	
+	/**
+	 * 微信账号
+	 */
+	private String wxAccount;
 	/**
 	 * 支付宝账号
 	 */
@@ -298,4 +301,13 @@ public class UserVerified extends BaseEntity{
 	public void setAlipayAccount(String alipayAccount) {
 		this.alipayAccount = alipayAccount;
 	}
+
+	public String getWxAccount() {
+		return wxAccount;
+	}
+
+	public void setWxAccount(String wxAccount) {
+		this.wxAccount = wxAccount;
+	}
+	
 }

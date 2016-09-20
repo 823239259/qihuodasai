@@ -48,5 +48,17 @@ public class UserVerifiedServiceImpl extends BaseServiceImpl<UserVerified, UserV
 		}
 		return null;
 	}
-
+	/**
+	 * 根据微信账户查询 userVerified
+	 */
+	@Override
+	public UserVerified queryUserVerifiedByWechatAccount(String aliAccount) {
+		Map<String,Object> equals = new HashMap<String,Object>();
+		equals.put("wxAccount", aliAccount);
+		List<UserVerified> userVerifieds = this.getEntityDao().queryBySimple(equals, null, null);
+		if (!CollectionUtils.isEmpty(userVerifieds) && 1 == userVerifieds.size()) {
+			return userVerifieds.get(0);
+		}
+		return null;
+	}
 }

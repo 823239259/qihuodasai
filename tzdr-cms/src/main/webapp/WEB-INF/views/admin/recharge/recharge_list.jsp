@@ -34,6 +34,12 @@
 		  $("#dg003").datagrid("selectRecord",rows003[0].id);
 	  }
 	  $("#dg003").datagrid('reload');
+	  
+	  var rows004 = $("#dg004").datagrid('getSelections');
+	  if (rows004 && rows004.length > 0) {
+		  $("#dg004").datagrid("selectRecord",rows004[0].id);
+	  }
+	  $("#dg004").datagrid('reload');
   };
 
 </script>
@@ -135,6 +141,36 @@
      </shiro:hasPermission>
       <shiro:hasPermission name="sys:finance:rechargeReview:rechargeFail">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="failNetBankPay()">充值失败</a>
+    	</shiro:hasPermission>
+    </div>
+    
+    </div>
+    <div title="微信充值审核" style="padding:1px;">
+        <table id="dg004" class="easyui-datagrid" width="100%" idField="id" toolbar="#dg004Toolbar"
+             url="${ctx}/admin/rechargeReview/listDataWechat" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="id" data-options="checkbox:true"></th>
+				<th field="mobileNo" width="150">手机号 </th>
+				<th field="tname" width="150">用户姓名</th>
+				<th field="tradeNo" width="150">流水号</th>
+				<th field="tradeAccountBank" width="150">收款银行</th>
+				<th field="money" width="150">充值表单金额</th>
+				<th field="addtimeStr" width="150">提交时间</th>
+				<th field="actualMoney" width="150">实际到账金额 </th>
+				<th field="statusStr" width="150">充值状态 </th>
+				<th field="uptimeStr" width="150">充值时间</th>
+				<th field="source" width="150">来源网站</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="dg004Toolbar">
+       <shiro:hasPermission name="sys:finance:rechargeReview:recharge">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="wechatPayOpen()">确认充值</a>
+     </shiro:hasPermission>
+      <shiro:hasPermission name="sys:finance:rechargeReview:rechargeFail">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="failWechatPay()">充值失败</a>
     	</shiro:hasPermission>
     </div>
     
@@ -265,8 +301,8 @@
             </tr> --%>
             <tr>
                 <td align="center" colspan="2">
-                <a id="netBtn" href="#" onclick="confirmNetBankPay()" class="easyui-linkbutton">提交</a>
-               <a id="netBtn" href="#" onclick="bankNetPayClose()" class="easyui-linkbutton">取消</a>
+                <a id="btn" href="#" onclick="confirmNetBankPay()" class="easyui-linkbutton">提交</a>
+               <a id="btn" href="#" onclick="bankNetPayClose()" class="easyui-linkbutton">取消</a>
                </td>
             </tr>
         </table>
@@ -274,6 +310,37 @@
         
 </div>
 
+<div id="wechatPay" class="easyui-window" title="新增充值" style="padding:2px;width:300px;height:200px;display:none; overflow: hidden;"
+        data-options="iconCls:'icon-save',modal:true,closed:true">
+        <form id="wechatPayForm">
+        <table border="0" style="margin: 2px;font-size:12px;" cellpadding="5" cellspacing="0">
+            <tr>
+                <td>充值金额</td>
+                <td><input  type="text" id="wechatAmountId" class="easyui-numberbox" precision="2" data-options="required:true" /></td>
+            </tr>
+            <tr>
+                <td>流水号</td>
+                <td><input class="easyui-validatebox" id="wechatTradeNoId" type="text" name="name" data-options="required:true" /></td>
+            </tr>
+            <%-- <tr>
+                <td>收款银行</td>
+                <td>
+                <input class="easyui-combobox" 
+                id="netBankId" type="text" name="bankname" 
+                data-options="valueField:'id',required:true,textField:'text',url:'${ctx}/admin/recharge/dataMapCombobox?key=bankname&includes=ccb,icbc,abc,boc,cmb'" 
+                />
+                </td>
+            </tr> --%>
+            <tr>
+                <td align="center" colspan="2">
+                <a id="btn" href="#" onclick="confirmWechatPay()" class="easyui-linkbutton">提交</a>
+               <a id="btn" href="#" onclick="bankWechatClose()" class="easyui-linkbutton">取消</a>
+               </td>
+            </tr>
+        </table>
+        </form>
+        
+</div>
 
 
 

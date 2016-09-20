@@ -78,4 +78,27 @@ public class ApiRechargeService extends BaseServiceImpl<RechargeList,RechargeLis
 		
 		this.getEntityDao().save(charge);
 	}
+	/**
+	 * 微信自动充值  保存记录
+	 * @param charge
+	 */
+	public void  autoWechat(RechargeList charge){
+		//生成订单号
+		String 	orderId=this.getRandomStr(20);
+		charge.setAddtime(Dates.getCurrentLongDate());
+		charge.setNo(orderId);
+		//匹配成功 直接充值
+		if (charge.getStatus()==TypeConvert.RECHARGE_LIST_PAYS_STATUS_SUCCESS){
+			charge.setOktime(Dates.getCurrentLongDate());
+			
+			this.getEntityDao().save(charge);
+			this.rechargeListService.addUpdateRechargeList(charge,
+					TypeConvert.USER_FUND_C_TYPE_RECHARGE,
+					TypeConvert.payRemark(TypeConvert.SYS_TYPE_WECHAT_ACCOUNTS_NAME, charge.getActualMoney()));
+			return ;
+			
+		}
+		
+		this.getEntityDao().save(charge);
+	}
 }
