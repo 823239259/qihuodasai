@@ -636,7 +636,17 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 				+ " ORDER BY w.addtime DESC";
 		return this.rechargeListDao.queryPageBySql(page,sql, RechargeBankListVo.class, null, null);
 	}
-
+	public PageInfo<RechargeBankListVo> queryNetBankListRecharge(PageInfo<RechargeBankListVo> page){
+		String sql = " SELECT w.id,(SELECT u.mobile FROM w_user u WHERE u.id=w.uid)mobile,"
+				+ " (SELECT v.tname FROM w_user_verified v WHERE v.uid=w.uid)tname"
+				+ " ,w.trade_no,w.trade_account,w.money,w.actual_money,w.`status`"
+				+ " ,w.uptime,w.addtime,w.source FROM w_recharge_list w "
+				+ " WHERE w.type='2' "
+				+ createAuditRuleSql()
+				+ " AND w.`status`= " + TypeConvert.RECHARGE_LIST_PAYS_STATUS_WAITING
+				+ " ORDER BY w.addtime DESC";
+		return this.rechargeListDao.queryPageBySql(page,sql, RechargeBankListVo.class, null, null);
+	}
 	
 	/**
 	 * 生成 审核规则 sql

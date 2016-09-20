@@ -176,7 +176,29 @@ public class RechargeReviewController  extends BaseCmsController<RechargeList> {
 			e.printStackTrace();
 		}
 	}
-	
+	@RequestMapping(value = "/listDataNetBank")
+	public void listDataNetBank(HttpServletRequest request,HttpServletResponse resp) throws Exception {
+		try {
+			/*DataGridVo<RechargeListVo> grid = new DataGridVo<RechargeListVo>();
+			PageInfo<RechargeList> dataPage = new PageInfo<RechargeList>(request);
+			
+			PageInfo<RechargeList> recharges = this.rechargeListService.queryBankRecharge(dataPage);
+			for (RechargeList re:recharges.getPageResults()) {
+				WUser wuser = wuserService.getUser(re.getUid());
+				RechargeListVo rechargeListVo = new RechargeListVo(re,wuser);
+				grid.add(rechargeListVo);
+			}*/
+			DataGridVo<RechargeBankListVo> grid = new DataGridVo<RechargeBankListVo>();
+			PageInfo<RechargeBankListVo> dataPage= new PageInfo<RechargeBankListVo>(request);
+			dataPage = this.rechargeListService.queryNetBankListRecharge(dataPage);
+			grid.add(dataPage.getPageResults());
+			grid.setTotal(dataPage.getTotalCount());
+			WebUtil.printText(JSON.toJSONString(grid), resp);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@RequestMapping(value = "/listRecharge")
 	public void listRecharge(@ModelAttribute RechargeListVo rechargeList,HttpServletRequest request,HttpServletResponse resp) throws Exception {
 		try {

@@ -1,4 +1,122 @@
+/**
+ * 网银充值打开充值确认框
+ */
+function netBankPayOpen() {
+	var rows = $("#dg003").datagrid('getSelections');
+	if (Check.validateSelectItems($("#dg003"),1)) {
+		
+		if (rows[0].statusValue - 0 == 21) {
+			$.messager.show({
+	            title:'提示',
+	            msg:'已充值后不能在充值',
+	            timeout:5000,
+	            showType:'slide'
+	        });
+		}
+		else {
+			$("#netBankAmountId").numberbox('setValue',"");
+			$("#netBankTradeNoId").val("");
+			//$("#bankId").combobox('reload');
+			$("#netBankPay").show();
+			$("#netBankPay").window('open');
+		}
+		
+	}
+};
+/**
+ * 提交
+ */
+function confirmNetBankPay() {
+	
+	if (!$("#netBankPayForm").form("validate")) {
+		return false;
+	}
+	var rows = $("#dg003").datagrid('getSelections');
+	var id = rows[0].id;
+	var money = rows[0].money - 0;
+	var rechargeAmount = $("#netBankAmountId").val() - 0;
+	/**
+	if (rows[0].tradeNo != $("#bankTradeNoId").val()) {
+		Check.messageBox("提示","流水号与转账记录流水号不匹配充值失败!","warning");
+		return;
+	}
+	**/
+	
+	if (money != rechargeAmount) {
+		$.messager.confirm('提示', '输入金额与用户提交金额不相等，请确认充值金额是否正确?', function(r){
+    		if (r){
+    			$.post(Check.rootPath() + "/admin/recharge/updateRechargeState" 
+    					,{"id":id, "stateValue":"21","tradeNo":$("#netBankTradeNoId").val(),"bankname":$("#netBankId").combobox("getValue"),"actualMoney":rechargeAmount} ,function(data){
+    				if (data == "success") {
+    					Check.messageBox("提示","更新成功");
+    					$("#dg003").datagrid('reload');
+    					bankPayClose();
+    				}
+    				else {
+    					Check.messageBox("提示",data,"error");
+    				}
+    			});
+    		}
+		});
+	}
+	else {
+		$.post(Check.rootPath() + "/admin/recharge/updateRechargeState" 
+				,{"id":id, "stateValue":"21","tradeNo":$("#netBankTradeNoId").val(),"actualMoney":rechargeAmount} ,function(data){
+			if (data == "success") {
+				Check.messageBox("提示","更新成功");
+				$("#dg003").datagrid('reload');
+				netBankPayClose();
+			}
+			else {
+				Check.messageBox("提示",data,"error");
+			}
+		});
+	}
+	
+};
+function failNetBankPay() {
+	var rows = $("#dg003").datagrid('getSelections');
+	if (Check.validateSelectItems($("#dg003"),1)) {
+		if (rows[0].statusValue - 0 == 1) {
+			$.messager.show({
+	            title:'提示',
+	            msg:'已标记为"充值失败"不能重复提交!',
+	            timeout:5000,
+	            showType:'slide'
+	        });
+		}
+		else if (rows[0].statusValue - 0 == 21) {
+			$.messager.show({
+	            title:'提示',
+	            msg:'"充值成功"后不能修改为"充值失败"!',
+	            timeout:5000,
+	            showType:'slide'
+	        });
+		}
+		else {
+			var id = rows[0].id;
+			$.messager.confirm('提示', '请确认是否需要标记本项为充值失败?', function(r){
+	    		if (r){
+	    			$.post(Check.rootPath() + "/admin/recharge/failUpdateRechargeState" 
+	    					,{"id":id, "stateValue":1} ,function(data){
+	    				if (data == "success") {
+	    					Check.messageBox("提示","更新成功");
+	    					$("#dg003").datagrid('reload');
+	    				}
+	    				else {
+	    					Check.messageBox("提示",data,"error");
+	    				}
+	    			});
+	    			
+	    		}
+			});
+		}
+	}
+};
 
+function netBankPayClose() {
+	$("#netBankPay").window('close');
+};
 //function update
 function alibaPayClose() {
 	$("#alibaPay").window('close');
@@ -254,17 +372,15 @@ function failBankPay() {
 		
 	}
 };
-
-
-
-
-
-
-
-
 function bankPayClose() {
 	$("#bankPay").window('close');
 };
+
+
+
+
+
+
 
 
 

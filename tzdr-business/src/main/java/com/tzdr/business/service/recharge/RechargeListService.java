@@ -102,8 +102,12 @@ public interface RechargeListService extends BaseService<RechargeList>{
 	 * @return PageInfo<RechargeBankListVo>
 	 */
 	public PageInfo<RechargeBankListVo> queryBankListRecharge(PageInfo<RechargeBankListVo> page);
-	
-	
+	/**
+	 * 查询网银充值审核列表
+	 * @param page
+	 * @return
+	 */
+	public PageInfo<RechargeBankListVo> queryNetBankListRecharge(PageInfo<RechargeBankListVo> page);
 	/**
 	 * 查询银行卡充值
 	 * @param page DataPage<RechargeList>
