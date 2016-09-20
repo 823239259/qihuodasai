@@ -123,7 +123,7 @@
 			var li=document.createElement("li");
 			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3");
 			li.innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
-			trade_num.appendChild(li);
+			trade_num.appendChild(l可交易品种：i);
 		};
 		function openPays(){
 			var traderBond=document.getElementById("traderBond").innerHTML;
@@ -328,7 +328,7 @@
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
 <div class="mui-content ap_main">
-	<h5 class="ap_choosetitle"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
+	<h5 class="ap_choosetitle" style="height: 0;"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9" id="bond_num">
 		
 	</ul>
@@ -346,7 +346,7 @@
 			<span id="lineLoss">10,450美元</span>
 		</li>
 	</ul>
-	<h5 class="ap_choosetitle"><span>可交易品种：</span><b>一个账号可同时交易15种期货产品</b></h5>
+	<h5 class="ap_choosetitle" style="height: 100%;"><span>可交易品种：</span><b>一个账号可同时交易15种期货产品</b><p>（注意：请不要在交易时间外持单，以免被系统强制平仓）</p></h5>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
 			<thead>
