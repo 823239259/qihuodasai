@@ -27,8 +27,8 @@ $(document).ready(function(){
  * 检测余额是否充足
  */
 function checkBanlanceEnough() {
-	var balance = $("#banlance").text(); // 账户余额
-	var payable = $("#payable").text(); // 实际支付金额
+	var balance =parseFloat($("#banlance").text()); // 账户余额
+	var payable = parseFloat($("#payable").text()); // 实际支付金额
 	var content = "";
 	if(balance < payable) {
 		$("#notEnoughPay").show();
