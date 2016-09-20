@@ -218,7 +218,7 @@ $(document).ready(function(){
 						var message = result.message;
 						if(result.success){
 							$("#handle-fee").text(message);
-							$("#actual-money").text(parseFloat(_money) - parseFloat(message));
+							$("#actual-money").text(parseFloat(_money).toFixed(2) - parseFloat(message).toFixed(2));
 							if(_money > parseFloat($("#balance").text())){
 								//showMsgDialog("提示","账户余额不足");
 								$("#moneyTip").text("账户余额不足");

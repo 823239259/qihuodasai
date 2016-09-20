@@ -800,7 +800,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			if(tranProfitLoss < 0){
 				wEndAmount = wEndAmount + absTranProfitLoss;
 			}
-			wuser.setCountOperateMoney(wuser.getCountOperateMoney() + wEndAmount);
+			wuser.setCountOperateMoney(Math.round((wuser.getCountOperateMoney() + wEndAmount) * 100) * 0.01d);
 			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
