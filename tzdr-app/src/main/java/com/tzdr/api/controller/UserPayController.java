@@ -165,7 +165,7 @@ public class UserPayController {
 	public JsonResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
-		JsonResult resultJson = new JsonResult(true);
+		JsonResult resultJson = new JsonResult(false);
 		if (StringUtil.isNotBlank(account)) {
 			UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
 			if (ObjectUtil.equals(null, userVerified)) {
@@ -173,6 +173,7 @@ public class UserPayController {
 				// 绑定微信账号
 				uv.setWxAccount(account);
 				userVerifiedService.update(uv);
+				resultJson.setSuccess(true);
 			} else {
 				resultJson.setMessage("微信账号已存在");
 			}

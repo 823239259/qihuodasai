@@ -337,10 +337,18 @@ function doGopay(){
 
 /*微信支付*/
 $(function(){
+	var userAccount =  $("#userAccount").text();
+	if(userAccount != undefined && userAccount != "" && userAccount.length > 0){
+		$("#weixin_bind").hide();
+		$("#weixin_update").show();
+	}else{
+		$("#weixin_bind").show();
+		$("#weixin_update").hide();
+	}
 	/*绑定微信号*/
-	$("#weixinbank .weixin_bind").click(function(){
-		var weiixn = $("#weiixn").val();
-		if(weiixn==""){
+	$(".weixin_bind").click(function(){
+		var weixin = $("#weixin").val();
+		if(weixin==""){
 			showMsgDialog("提示","请填写微信账号");
 			$("#weiixn").focus();
 			return ;
@@ -351,18 +359,14 @@ $(function(){
 			$("#weiixn").focus();
 			return ;
 		}*/
-		$.post(basepath+"/pay/wx/bind/account",{"weiixn":weiixn},function(data){  
+		$.post(basepath+"/pay/wx/bind/account",{"account":weixin},function(data){  
 			if(data.success){
-				if(data.message!="" && data.message!=null){
-					if(data.message == weiixn){
-						showMsgDialog("提示","微信号已存在，请更换其他账号绑定！");
-					}else if(data.message != weiixn){
-						showMsgDialog("提示","绑定成功！");
-						window.location.href=basepath+"/pay/payinfo?tab=1";
-					}else{
-						
-					}
-				}
+				showMsgDialog("提示","绑定成功！");
+				$("#weixin_bind").hide();
+				$("#weixin_update").show();
+				$("#userAccount").text(weixin);
+			}else{
+				showMsgDialog("提示",data.message);
 			}
 		},"json"); 
 	});
@@ -370,6 +374,7 @@ $(function(){
 	$("#weixinbank .weixin_update").click(function(){
 		$("#weixin_bind").show();
 		$("#weixin_update").hide();
+		$("#weixin").val($("#userAccount").text());
 	});
 });
 

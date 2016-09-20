@@ -117,8 +117,8 @@
 						<ul class="uc_pblist">
 							<li><label><span>d</span>微信支付</label></li>
 							<!-- 这里给一个东西判断显示 绑定与修改 -->
-							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" id="weiixn" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
-							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;">13558767655</span><span class="weixin_update">修改绑定</span></li>
+							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
+							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li>
 							<li><label>收款人微信账号：</label><span>1369866402@1369866402</span></li>
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
 						</ul>

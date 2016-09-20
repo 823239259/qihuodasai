@@ -520,7 +520,7 @@ public class PayController {
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		WUser user = this.payService.getUser(userSessionBean.getId());
-		JsonResult resultJson = new JsonResult(true);
+		JsonResult resultJson = new JsonResult(false);
 		if (StringUtil.isNotBlank(account)) {
 			synchronized (lock) { 
 				UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
@@ -529,6 +529,7 @@ public class PayController {
 					// 绑定微信账号
 					uv.setWxAccount(account);
 					userVerifiedService.update(uv);
+					resultJson.setSuccess(true);
 				} else {
 					resultJson.setMessage("微信账号已存在");
 				}
