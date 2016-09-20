@@ -10,7 +10,7 @@
     var volumeChartPrices=[];
     var volumeChartData={
         "time":volumeChartTime,
-        "prices":volumeChartPrices
+        "volume":volumeChartPrices
     };
     var timePrice=[];
      var timeLabel=[];
@@ -69,12 +69,13 @@
                show: false,
            },
            animation: false,
-				 xAxis:[{
-				type: 'category',
-		        data: data1.timeLabel,
-		        axisLine: { lineStyle: { color: '#8392A5' } },
-		        boundaryGap: false
-						}],	
+			 xAxis:[{
+					type: 'category',
+					show:false,
+			        data: data1.timeLabel,
+			        axisLine: { lineStyle: { color: '#8392A5' } },
+			        boundaryGap: false
+			}],	
            yAxis:  [
                {
                    type: 'value',
@@ -103,7 +104,7 @@
                x: 40,
                y:20,
                x2:20,
-               y2:20
+               y2:5
            },
            series: {
            	type: 'line',
@@ -139,13 +140,13 @@
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];
             volumeChartData.time[VolumeLength+i]=str2;
-            volumeChartData.prices[VolumeLength+i]=Parameters[i].Volume;
+            volumeChartData.volume[VolumeLength+i]=Parameters[i].TotalVolume;
         };
         var TimeLength= volumeChartData.time.length;
 		for(var i=0;i<volumeChartData.time.length-1;i++){
 			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
 				volumeChartData.time.splice(i,1);
-				volumeChartData.prices.splice(i,1);
+				volumeChartData.volume.splice(i,1);
 			}
 		}
         var option =volumeChartSetOption(volumeChartData);
@@ -159,7 +160,16 @@
       var  option = {
       	backgroundColor: '#2B2B2B',
           tooltip: {
-              trigger: 'axis'
+              trigger: 'axis',
+              axisPointer : {
+                   type : 'line',
+                   animation: false,
+		            lineStyle: {
+		                color: '#ffffff',
+		                width: 1,
+		                opacity: 1
+		            }
+               },
           },
           legend: {
               data:['最新成交价']
@@ -170,7 +180,7 @@
              animation: false,
 			 grid: {
                x: 40,
-               y:20,
+               y:30,
                x2:20,
                y2:20
            },
@@ -188,20 +198,20 @@
 		 yAxis: [
 		            {
                 type : 'value',
-//              name : '成交量(万)',
+                name : '成交量(万)',
                  axisLine: { lineStyle: { color: '#8392A5' } },
 	              axisTick:{
 	               	show:false,
 	              },
 	              scale:true,
-//              axisLabel: {
-//                  formatter: function (a) {
-//                      a = +a;
-//                      return isFinite(a)
-//                          ? echarts.format.addCommas(+a / 1000)
-//                          : '';
-//                  }
-//              },
+                axisLabel: {
+                    formatter: function (a) {
+                    	   a = +a;
+                    	    return isFinite(a)
+                            ? echarts.format.addCommas(+a / 10000)
+                            : '';
+                    }
+                },
                 splitLine: {
                     show: true,
                     lineStyle: {
@@ -234,7 +244,7 @@
 //		                    }]
 //		                ]
 //		            },
-                  data:dataVolume.prices
+                  data:dataVolume.volume
               }
           ]
       };

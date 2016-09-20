@@ -1,12 +1,10 @@
-    var firstTimeNumber=0;
-    var rawData = [];
-    var CandlestickChartOption=null;
-    var CandlestickVolumeChartOption=null;
-    var CandlestickVolumeChartTime=[];
-    var CandlestickVolumeChartVolume=[];
-    var CandlestickVolumeData={
-    	time:CandlestickVolumeChartTime,
-    	volume:CandlestickVolumeChartVolume
+    var dayCandlestickChartDivNum=0;
+    var dayCandlestickChartData = [];
+    var dayCandlestickVolumeChartTime=[];
+    var dayCandlestickVolumeChartVolume=[];
+    var dayCandlestickVolumeData={
+    	time:dayCandlestickVolumeChartTime,
+    	volume:dayCandlestickVolumeChartVolume
     }
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
@@ -20,43 +18,43 @@
         			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
 		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
-			         rawData[lent+i] = sgData; 
+		            var sgData = [parameters[i].DateTimeStamp,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
+			         dayCandlestickChartData[lent+i] = sgData; 
        		};
-        	for(var i=0;i<rawData.length-1;i++){
-        		if(rawData[i][0]==rawData[i+1][0]){
-        			rawData.splice(i,1);
+        	for(var i=0;i<dayCandlestickChartData.length-1;i++){
+        		if(dayCandlestickChartData[i][0]==dayCandlestickChartData[i+1][0]){
+        			dayCandlestickChartData.splice(i,1);
         		}
         	}
-        	var newData=rawData.slice(-60);
-        		CandlestickChartOption = setOption(newData);
-        	if(firstTimeNumber==0){
+        	var newData=dayCandlestickChartData.slice(-60);
+        	var Option = dayCandlestickChartSetOption(newData);
+        	if(dayCandlestickChartDivNum==0){
 		  			
 		  	}else{
-		  		myChart.setOption(CandlestickChartOption);
+		  		dayCandlestickChartDiv.setOption(Option);
 		  	};
-		  	myChart.group="group2";
+		  	dayCandlestickChartDiv.group="group2";
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){
-				 if(myChart != null){
+				 if(dayCandlestickChartDiv != null){
 				 	setTimeout(function(){
-				 		muiSpinner[1].style.display="none";
+				 		muiSpinner[2].style.display="none";
 				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 						setTimeout(function(){
-						 	myChart.resize();	
-							myChart.setOption(CandlestickChartOption);
-		        			myChart.resize();	
-		        			firstTimeNumber++;
+						 	dayCandlestickChartDiv.resize();	
+							dayCandlestickChartDiv.setOption(Option);
+		        			dayCandlestickChartDiv.resize();	
+		        			dayCandlestickChartDivNum++;
 		        		},10);
 			    }
 		});
     }
     //设置数据参数（为画图做准备）
-    function setOption(rawData){
-        var dates = rawData.map(function (item) {
+    function dayCandlestickChartSetOption(newData){
+        var dates = newData.map(function (item) {
             return item[0];
         });
-        var data = rawData.map(function (item) {
+        var data = newData.map(function (item) {
             return [+item[1], +item[2], +item[5], +item[6]];
         });
         var option = {
@@ -83,12 +81,11 @@
 		               x: 43,
 		               y:20,
 		               x2:20,
-		               y2:5
+		               y2:20
 		           },
 		    xAxis: {
 		        type: 'category',
 		        data: dates,
-		        show:false,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 		    },
 		    yAxis: {
@@ -131,10 +128,10 @@
 		}
         return option;
     };
-    var firstTimeNum=0;
-     var volumeTime=[];
-    var volumeV=[];
-    function processingCandlestickVolumeData(data){
+    var dayFirstTimeNum=0;
+     var dayVolumeTime=[];
+    var dayVolumeV=[];
+    function processingDayCandlestickVolumeData(data){
     		var parameters = data.Parameters;
     		var Len=parameters.length;
     		if(parameters == null)return;
@@ -154,7 +151,7 @@
         	}
         	CandlestickVolumeData.time=volumeTime.slice(-60);
         	CandlestickVolumeData.volume=volumeV.slice(-60);
-//      	console.log(CandlestickVolumeData.time);
+        	console.log(CandlestickVolumeData.time);
         	var option= CandlestickVolumeChartSetoption(CandlestickVolumeData);
         	if(firstTimeNum==0){
 		  			
@@ -168,7 +165,7 @@
 						 	CandlestickVolumeChart.resize();	
 							CandlestickVolumeChart.setOption(option);
 		        			CandlestickVolumeChart.resize();	
-		        			firstTimeNum++;
+		        			firstTimeNumber++;
 		        		},10);
 			    }
 		});
@@ -198,7 +195,7 @@
 	             animation: false,
 				 grid: {
 	               x: 40,
-	               y:30,
+	               y:20,
 	               x2:20,
 	               y2:20
 	           },
@@ -216,20 +213,20 @@
 			 yAxis: [
 			            {
 	                type : 'value',
-	              name : '成交量(万)',
+	//              name : '成交量(万)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
 		              },
 		              scale:true,
-	              axisLabel: {
-	                  formatter: function (a) {
-                        a = +a;
-                        return isFinite(a)
-                            ? echarts.format.addCommas(+a / 10000)
-                            : '';
-                    }
-	              },
+	//              axisLabel: {
+	//                  formatter: function (a) {
+	//                      a = +a;
+	//                      return isFinite(a)
+	//                          ? echarts.format.addCommas(+a / 1000)
+	//                          : '';
+	//                  }
+	//              },
 	                splitLine: {
 	                    show: true,
 	                    lineStyle: {

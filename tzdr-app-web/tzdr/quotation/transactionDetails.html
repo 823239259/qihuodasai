@@ -21,6 +21,7 @@
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
+					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
 					<div style="width: 100%;" id="tradeContentId">
@@ -35,6 +36,12 @@
 								</div>
 								<div   id="CandlestickChartDiv" style="width:100%;height:250px;"></div>
 								<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						</div>
+						<div class="mui-control-content " id="dayCandlestickChart">
+								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>
+								<div   id="dayCandlestickChartDiv" style="width:100%;height:250px;"></div>
+								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content" id="trade">
 							<div class="Assets">
@@ -173,12 +180,6 @@
 					}
 					i++; 
 				});
-				 /*$("input[type= 'number']").resize(function(){
-					$(".focusButton").css("display","none");
-				}); */
-				/*$("input[type= 'number']").resize(function(){ 
-					$(".focusButton").css("display","block"); 
-				})*/
 			});
 		</script>
 		<script>
@@ -366,6 +367,9 @@
 					}else if($("#TimeChart1").hasClass("mui-active")==true){
 						$("#TimeChart1").addClass(" mui-active");
 						$("#Time").addClass(" mui-active");
+					}else if($("#dayCandlestickChart").hasClass("mui-active")==true){
+						$("#dayCandlestickChart").addClass(" mui-active");
+						$("#dayCandlestickBtn").addClass(" mui-active");
 					}
 				}else{
 //					console.log("错误")

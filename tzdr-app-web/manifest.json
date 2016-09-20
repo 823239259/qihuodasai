@@ -478,7 +478,9 @@
 					"js/jquery-1.11.3.js",
 					"images/bank/ccb.png",
 					"images/bank/psbc.png",
-					"images/bank/cmb.png"
+					"images/bank/cmb.png",
+					"images/bank/abc.png",
+					"images/bank/cmbc.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -1184,7 +1186,21 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"css/app.css",
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"js/city.data.js",
+					"images/bank/citic.png",
+					"images/bank/gdb.png",
+					"images/bank/abc.png",
+					"images/bank/cmb.png",
+					"images/bank/cmbc.png",
+					"images/bank/spdb.png",
+					"js/jquery-1.11.3.js",
+					"images/bank/boc.png"
 				],
 				"refer": [],
 				"priority": 0
