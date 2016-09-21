@@ -115,16 +115,19 @@
 				<form id="weixinbank" action="" method="post" target="_blank">
 					<div class="uc_olmoney">
 						<ul class="uc_pblist">
-							<li><label><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 10px; margin-right: 10px;">微信支付</label></li>
+							<li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
 							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
 							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li>
 							<li><label>收款人微信账号：</label><span>1369866402@1369866402</span></li>
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
 						</ul>
 					</div>
-					<div class="uc_olpromt">
-						<h3>温馨提示：</h3>
-						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
+					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;">
+						<img src="${ctx}/static/images/weixin.png" style="float: left;">
+						<div style="float: left;">
+							<h3>温馨提示：</h3>
+							<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
+						</div>
 					</div>
 				</form>
 			</div>
