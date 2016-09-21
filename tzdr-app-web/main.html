@@ -86,8 +86,7 @@
 			plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				wgtVer=inf.version;
 				//检查更新版本 
-				checkUpdate(function(){
-				});
+				checkUpdate(function(){});
 			});
 		});
 		
@@ -176,24 +175,32 @@
     		);
 		}
 		function updateApk(data){
+			var data={"Android":{
+				version:"2.0.2",
+				url:""},
+				"iOS":{
+				version:"2.0.1",
+				url:""}
+			}
 			if(plus.os.name=="Android"){
 					//最新版本号
-					var newVerAndroid = data.version;
+					var newVerAndroid = data.Android.version;
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVerAndroid)||!(wgtVer&&newVerAndroid&&(wgtVer!=newVerAndroid))){  //没有最新版本
-//						_callback();
 						if (mui.cacheUser.isLogin()){
 							mui.openWindow("tzdr/quotation/quotationMain.html");
 						}
 						return;
 					};
+					var AndroidEditionNew = newVerAndroid.split(".");
+					var AndroidEditionWgt = wgtVer.split(".");
 					//获取数据库版本号
-					var newSubAndroid = newVerAndroid.substr(0,1);
+					var newSubAndroid = AndroidEditionNew[0];
 					//应用的版本号
-					var wgtVerSubAndroid = wgtVer.substr(0,1);
-					var newSubSmallAndroid=Number(newVerAndroid.substr(2));
-					var wgtVerSubSmallAndroid=Number(wgtVer.substr(2));
+					var wgtVerSubAndroid = AndroidEditionWgt[0];
+					var newSubSmallAndroid=Number(AndroidEditionNew[1]+"."+AndroidEditionNew[2]);
+					var wgtVerSubSmallAndroid=Number(AndroidEditionWgt[1]+"."+AndroidEditionWgt[2]);
 					if(newSubAndroid > wgtVerSubAndroid){//检测升级版本是否大版本还是小版本				
 							//弹出系统提示对话框
 							plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
@@ -226,7 +233,7 @@
 				}
 			}else if(plus.os.name=="iOS"){
 					//最新版本号
-					var newVeriOS = data.version;
+					var newVeriOS = data.iOS.version;
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVeriOS)||!(wgtVer&&newVeriOS&&(wgtVer!=newVeriOS))){  //没有最新版本
@@ -237,7 +244,9 @@
 						return;
 					};
 					//获取数据库版本号
+					var newVeriOSEdition = newVeriOS.split(".");
 					var newSubiOS = newVer.substr(0,1);
+					console.log(newVeriOSEdition);
 					//应用的版本号
 					var wgtVerSubiOS = wgtVer.substr(0,1);
 					var newSubSmalliOS=Number(newVer.substr(2));
