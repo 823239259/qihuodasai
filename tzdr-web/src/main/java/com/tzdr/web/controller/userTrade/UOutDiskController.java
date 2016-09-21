@@ -176,6 +176,7 @@ public class UOutDiskController {
 		CookiesUtil.delCookies("bond", response);
 		CookiesUtil.delCookies("lever", response);
 		CookiesUtil.delCookies("payurl", response);
+		CookiesUtil.delCookies("vocherid", response);
 		log.info("清除支付cookie数据成功");
 	}
 	/**

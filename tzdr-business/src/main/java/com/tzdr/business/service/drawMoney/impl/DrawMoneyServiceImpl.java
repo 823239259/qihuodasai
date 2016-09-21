@@ -1,5 +1,6 @@
 package com.tzdr.business.service.drawMoney.impl;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1040,6 +1041,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			chaMoney = 0.00;
 		}
 		Double feeMoney = Math.abs(chaMoney) * scal;
-		return feeMoney;
+		BigDecimal bd = new BigDecimal(feeMoney); 
+		return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 }

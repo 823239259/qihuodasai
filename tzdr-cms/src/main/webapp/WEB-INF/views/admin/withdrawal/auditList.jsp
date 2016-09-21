@@ -459,6 +459,7 @@
 								<th field="acc_address" width="150">开户地址</th>
 								<th field="money" width="150" sortable="true">提现金额</th>
 								<th field="fee" width="150" sortable="true">提现手续费</th>
+								<th field="actualMoney" width="150" sortable="true">实际到账金额</th>
 								<th field="balance" width="100" formatter="balanceformatter">平台余额</th>
 								<th field="exportAddtime" width="200">提现申请时间</th>
 								<th field="sourceStr" width="150" formatter="sourceformatter">来源网站</th>
@@ -582,6 +583,7 @@
 							<th field="acc_address" width="150">开户地址</th>
 							<th field="money" width="150" sortable="true">提现金额</th>
 							<th field="fee" width="150" sortable="true">提现手续费</th>
+							<th field="actualMoney" width="150" sortable="true">实际到账金额</th>
 							<th field="balance" width="100" formatter="balanceformatter">平台余额</th>
 							<th field="exportAddtime" width="200">提现申请时间</th>
 							<th field="sourceStr" width="150" formatter="sourceformatter">来源网站</th>

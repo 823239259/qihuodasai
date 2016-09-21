@@ -41,7 +41,6 @@ import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.web.constants.Constants;
 import com.tzdr.web.constants.ViewConstants;
-import com.tzdr.web.thread.RegistP2pThread;
 import com.tzdr.web.utils.UserSessionBean;
 
 import jodd.util.Base64;
@@ -101,7 +100,7 @@ public class ExtendsionSignController {
 			generalizeVisit.setClieantIp(ip);
 			generalizeVisit.setCreatedate(new Date().getTime() / 1000);
 			generalizeVisit.setDeleted(false);
-			generalizeVisit.setCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
+			//generalizeVisit.setCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
 			generalizeVisit.setGeneralizeId(null);
 			generalizeVisit.setParam(channelCode);
 			generalizeVisit.setUrl(request.getRequestURL().toString() + "?" + request.getQueryString());

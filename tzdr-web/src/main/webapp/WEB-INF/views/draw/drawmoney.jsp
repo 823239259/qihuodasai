@@ -102,7 +102,12 @@
 									<li><label>账户余额：</label> <span> <em id="balance">
 												<fmt:formatNumber value="${requestScope.user.avlBal}"
 													type="currency" pattern="0.00#" />
-										</em>元
+										</em>元&nbsp;<b>(累计免提现手续费金额:<c:if test="${user.countOperateMoney  == null || user.countOperateMoney == ''}">
+																				<em>0</em>
+																		</c:if>
+																		<c:if test="${user.countOperateMoney  != null && user.countOperateMoney != ''}">
+																				<em>${user.countOperateMoney }</em>
+																		</c:if>)</b>
 									</span></li>
 									<li><label>提现金额：</label> <input type="text"
 										class="uc_wdip" onKeyUp="javascript:clearNoDouble(event,this)"
