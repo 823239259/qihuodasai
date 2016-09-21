@@ -41,6 +41,15 @@
             </div>
         </div>	
 	</div>
+	<form style = "display: none;" action="${ctx}/pay/payinfo" id = "toPayInfoForm" method = "get">
+    	<input type="hidden" value = "0" name = "balance"/>
+    	<input type="hidden" value = "1" name = "isFlag"/>
+    	<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />
+		<input type="hidden" name="inputTranLever" value="${inputTranLever}" />
+		<input type="hidden" id = "inputVocherId"  name ="inputVocherId" value = "">
+		<input type="hidden" name="payUrl" value = "userhsi/paySuccessful"/>
+		<input type="submit" id = "toPayInfoSubmit"/>
+    </form>
     <!-- 确认支付 -->
     <div class="floatlayer" id="confirmPayDiv" style="display:none;">
 		<div class="fl_mask"></div>
