@@ -36,7 +36,7 @@
 				<th field="ytranActualLever" width="150">原油操盘手数</th>
 				<th field="atranActualLever" width="150">富时A50操盘手数</th>
 				<th field="interActualLever" width="150">国际综合操盘手数</th>
-			    <th field="withDrawMoney" width="150">申请提现金额</th>
+			    <th field="withDrawMoney" width="150">累计提现金额</th>
 				<th field="idcard" width="150">身份证号</th>
 				<th field="email" width="150">邮箱 </th>
 				<th field="alipayAccount" width="150">支付宝帐号</th>
@@ -116,6 +116,7 @@
            <%--  <shiro:hasPermission name="sys:customerService:wuser:insteadActivityUser">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="insteadActivityUser()">变为6600活动用户</a>
             </shiro:hasPermission> --%>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-excel" onclick="$.easyui.exportExcel('dg','queryForm')">导出</a>
     </div>
     <!-- <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a>
