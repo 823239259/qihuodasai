@@ -318,6 +318,7 @@ public interface DrawMoneyService {
 	 *            商户秘钥
 	 */
 	public void updatDrawPayeaseInfo(String id, String vmid, String secret);
+	
 	/**
 	 * 计算提现手续费
 	 * @param userid 用户id
