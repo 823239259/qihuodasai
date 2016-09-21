@@ -9,7 +9,7 @@
 .information-concern {background: #c2e3ff; width: 100%; height: 240px;}
 .information-concern .concern-center {width: 1000px; margin: 0 auto; height: 240px; text-align: center;}
 .information-concern .concern-center ul {float: left; width: 250px; height: 240px; text-align: center; color: #1e2878; font-size: 16px;}
-.information-concern .concern-center .weixin {background: url("../images/information-icon.png") -271px 0px; width: 120px; height: 120px; margin-left: 65px; margin-top: 50px;}
+.information-concern .concern-center .weixin {background: url("../images/information-icon.png") -275px 0px; width: 120px; height: 120px; margin-left: 65px; margin-top: 50px;}
 .information-concern .concern-center .app {background: url("../images/information-icon.png") -430px 0px; width: 120px; height: 120px; margin-left: 65px; margin-top: 50px;}
 .information-concern .concern-center .furx {font-size: 20px; margin-top: 50px;}
 .information-concern .concern-center ul li {margin-bottom: 15px;}

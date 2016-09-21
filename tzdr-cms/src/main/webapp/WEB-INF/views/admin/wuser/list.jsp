@@ -116,7 +116,7 @@
            <%--  <shiro:hasPermission name="sys:customerService:wuser:insteadActivityUser">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="insteadActivityUser()">变为6600活动用户</a>
             </shiro:hasPermission> --%>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-excel" onclick="$.easyui.exportExcel('dg','queryForm')">导出</a>
+           <!--  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-excel" onclick="$.easyui.exportExcel('dg','queryForm')">导出</a> -->
     </div>
     <!-- <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a>
