@@ -496,6 +496,7 @@
 					} 
 					var lastPrice = marketCommdityLastPrice[$commodityNo+$contractNo];
 					var comm = marketCommdity[$commodityNo+$contractNo];
+					if(comm == undefined)continue;
 					var limitPirce = doGetMarketPrice(lastPrice,comm.MiniTikeSize,drection);
 					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
 					tradeParam[i] = sellingParam;

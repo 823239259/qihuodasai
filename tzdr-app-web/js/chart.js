@@ -7,11 +7,7 @@ function setMarketCommdityLastPrice(key,value){
 	marketCommdityLastPrice[key] = value;
 }
 var reconnect=null;
-var url = MarketUrl.SocketUrl;
-var marketSocket = new WebSocket(url);
-function masendMessage(method,parameters){
-        marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-}
+var marketSocket = null;
 mui.plusReady(function(){
     	var Transfer=plus.webview.currentWebview();
 		var CommodityNo=document.getElementById("CommodityNo");
@@ -24,10 +20,11 @@ mui.plusReady(function(){
     	setTimeout(function(){
 					muiSpinner[0].style.display="none";
 			},200);
-
+	var url = MarketUrl.SocketUrl;
+	marketSocket = new WebSocket(url);
     var setIntvalTime = null;
     var marketLoadParam = {}
-    marketSocket.onopen = function(evt){
+	marketSocket.onopen = function(evt){
        masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
     };
     marketSocket.onclose = function(evt){
@@ -81,7 +78,7 @@ mui.plusReady(function(){
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
 				insertDATA(quoteParam);
-			} 
+			}
 			updateFloatProfit(subscribeParam);
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
         }else if(method == "OnRspQryCommodity"){
@@ -96,7 +93,7 @@ mui.plusReady(function(){
 				//如果是当前合约与品种更新乘数
 				if (valiationIsPresent(newCommdityNo, newContractNo)) {
 					$("#contractSize").val(comm.ContractSize);
-				}
+				} 
 				setMarketCommdity(newCommdityNo+newContractNo,comm);
 				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 			}
@@ -133,7 +130,7 @@ mui.plusReady(function(){
 	 * 更新浮动盈亏 
 	 */
 	function updateFloatProfit(param) {
-		var isFlag = false;
+		var isFlag = false; 
 		var newContract = param.CommodityNo+param.ContractNo;
 		for (var i = 0; i < positionsIndex; i++) {
 			if(newContract == positionContractCode[i]){
@@ -248,5 +245,9 @@ mui.plusReady(function(){
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();
-	}
+	} 
 });
+function masendMessage(method,parameters){
+	 marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+}
+ 
