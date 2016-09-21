@@ -31,7 +31,7 @@ import com.tzdr.domain.web.entity.WUser;
  * @date 2014年12月23日
  * @version 1.0
  */
-public interface DrawMoneyService {
+public interface DrawMoneyService { 
 	/**
 	 * 根据用户id查询用户安全信息
 	 * 
