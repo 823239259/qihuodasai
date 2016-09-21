@@ -80,6 +80,7 @@ function bindPay(banlace){
 			$("#confirmPayDiv").hide();
 			$(this).attr("status",true);
 			$("#inputVocherId").val($("#voucher").val());
+			$("input[name = 'balance']").val(banlace);
 			$('#toPayInfoSubmit').click();
 		}
 	});

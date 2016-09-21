@@ -78,6 +78,7 @@ function bindPay(banlace){
 		if(status == "true"){
 			$("#confirmPayDiv").hide();
 			$(this).attr("status",true);
+			$("input[name = 'balance']").val(banlace);
 			$("#inputVocherId").val($("#voucher").val());
 			$('#toPayInfoSubmit').click();
 		}
