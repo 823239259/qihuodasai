@@ -7,6 +7,11 @@ function setMarketCommdityLastPrice(key,value){
 	marketCommdityLastPrice[key] = value;
 }
 var reconnect=null;
+var url = MarketUrl.SocketUrl;
+var marketSocket = new WebSocket(url);
+function masendMessage(method,parameters){
+        marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+}
 mui.plusReady(function(){
     	var Transfer=plus.webview.currentWebview();
 		var CommodityNo=document.getElementById("CommodityNo");
@@ -19,8 +24,7 @@ mui.plusReady(function(){
     	setTimeout(function(){
 					muiSpinner[0].style.display="none";
 			},200);
-    var url = MarketUrl.SocketUrl;
-    var marketSocket = new WebSocket(url);
+
     var setIntvalTime = null;
     var marketLoadParam = {}
     marketSocket.onopen = function(evt){
@@ -94,15 +98,12 @@ mui.plusReady(function(){
 					$("#contractSize").val(comm.ContractSize);
 				}
 				setMarketCommdity(newCommdityNo+newContractNo,comm);
-				masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
+				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 			}
         }
     };
     marketSocket.onerror = function(evt){
     };
-    function masendMessage(method,parameters){
-        marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-    }
  	
     /**
 	 * 更新行情数据 

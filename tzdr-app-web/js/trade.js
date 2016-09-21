@@ -109,7 +109,9 @@ function loadSocket(){
 					}
 					//查询成交记录回复
 				} else if (method == "OnRspQryTrade") {
-					appendTradeSuccess(parameters);
+					var holdParam = parameters;
+					appendTradeSuccess(holdParam);
+					subscribeHold(holdParam.ExchangeNo,holdParam.CommodityNo,holdParam.ContractNo);
 					//查询持仓信息回复
 				} else if (method == "OnRspQryHold") {
 					var positionParam = parameters; 
@@ -173,6 +175,9 @@ function loadSocket(){
 		clearLogin();
 		alertProtype("自动登录异常，是否重新登录","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
 	}*/
+}
+function subscribeHold(exchageNo,commodityNo,contractNo){
+	masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
 /**
  * 请求数据-初始化dom 
