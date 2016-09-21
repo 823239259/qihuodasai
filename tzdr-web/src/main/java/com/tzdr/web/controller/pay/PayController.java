@@ -116,6 +116,7 @@ public class PayController {
 			CookiesUtil.addCookie(response, "bond", request.getParameter("inputTraderBond"), 600);
 			CookiesUtil.addCookie(response, "lever", request.getParameter("inputTranLever"), 600);
 			CookiesUtil.addCookie(response, "payurl", request.getParameter("payUrl"), 600);
+			CookiesUtil.addCookie(response, "vocherid", request.getParameter("inputVocherId"), 600);
 		}
 		request.setAttribute("supportBanks", paymentSupportBankService.querySupportPayBanks());
 		return ViewConstants.PayViewJsp.PAY_MAIN_VIEW;

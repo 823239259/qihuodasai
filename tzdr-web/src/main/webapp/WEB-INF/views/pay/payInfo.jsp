@@ -84,7 +84,7 @@
 							<input type="text" value="${money}" name="gopaymoney" id="gopaymoney"    class="uc_p_ip3" ><span>元</span></li>
 						</ul><!--  -->
 						<div class="uc_paybtn uc_olbtn"><a id = "payButton" href="javascript:void(0);" onclick="doGopay();">立即充值</a></div>
-						<div style="margin-left: 65px;font-size: 14px; color: #fc3;">注意：选择确认，自动付款并提交操盘申请。</div>
+						<div id = "fatip" style="margin-left: 65px;font-size: 14px; color: #fc3;">注意：选择确认，自动付款并提交操盘申请。</div>
 					</div>
 					
 					<div class="uc_olpromt">

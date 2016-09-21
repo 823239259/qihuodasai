@@ -79,7 +79,7 @@ function bindPay(banlace){
 		if(status == "true"){
 			$("#confirmPayDiv").hide();
 			$(this).attr("status",true);
-			$("#voucherId").val($("#voucher").val());
+			$("#inputVocherId").val($("#voucher").val());
 			$('#toPayInfoSubmit').click();
 		}
 	});

@@ -73,7 +73,16 @@ function colseConfirmPayDiv() {
  * 绑定去充值事件
  */
 function bindPay(banlace){
-	$("#confirmPay").attr("href",basepath + "pay/payinfo?balance="+banlace+"&isFlag=1");
+	$('#confirmPay').bind('click',function(){
+		var status =  $(this).attr("status");
+		$(this).attr("status",false);
+		if(status == "true"){
+			$("#confirmPayDiv").hide();
+			$(this).attr("status",true);
+			$("#inputVocherId").val($("#voucher").val());
+			$('#toPayInfoSubmit').click();
+		}
+	});
 }
 /**
  * 绑定确认支付事件

@@ -57,6 +57,7 @@ intervalTime =  setInterval(function(){
 						if(result.success){
 								$("input[name = 'inputTraderBond']").val(getCookie("bond"));
 								$("input[name = 'inputTranLever']").val(getCookie("lever"));
+								$("input[name = 'voucherId']").val(getCookie("vocherid"));
 								$("input[name = 'tokenTzdr']").val(result.message);
 								$("#payableForm").attr("action","${ctx}/" + payUrl);
 								$.ajax({
