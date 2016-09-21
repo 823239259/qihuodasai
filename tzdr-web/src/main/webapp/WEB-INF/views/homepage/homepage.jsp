@@ -10,6 +10,8 @@
 	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台【官网】</title>
 	<meta name="keywords" content="维胜,期货,国际期货,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,无息配资,都城投资,投资达人,A50交易,多空多头空头,投机套保套利,外盘期货公司,国际期货开户,国际期货公司,外盘期货交易模拟软件"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+	<meta name="sogou_site_verification" content="rM6RBuyJcq"/>
+	<meta name="360-site-verification" content="130a887517d7b56c6f630e2188d9d027" />
 	<%
 		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
 		String imgPreURL = ConfUtil.getContext("banner.url");
@@ -425,40 +427,46 @@
 </body>
 <script type="text/javascript" src = "static/script/homepage/homepage.trade.js"></script> 
 <script>
-	$(document).ready(function(){
-		var brow=$.browser;
-		var bInfo="";
-		if(brow.msie){ /* ie */
-		    bInfo=brow.version;
-		    if(bInfo < 10.0){
-		    	$(".w_center").hide();
-		    	$(".w_center_upgrade").show();
-		    }
-		}
-		else if(brow.mozilla){ /* Firefox */
-			if(bInfo < 35.0){
-		    	$(".w_center").hide();
-		    	$(".w_center_upgrade").show();
-		    }
-		}
-		else if(brow.safari){  /* safari */
-			if(bInfo < 7.1){
-		    	$(".w_center").hide();
-		    	$(".w_center_upgrade").show();
-		    }
-		}
-		else if(brow.opera){   /* opera */
-			if(bInfo < 27.0){
-		    	$(".w_center").hide();
-		    	$(".w_center_upgrade").show();
-		    }
-		}
-		else if(brow.webkit){
-			if(bInfo < 31.0){
-		    	$(".w_center").hide();
-		    	$(".w_center_upgrade").show();
-		    }
-		}
-	});
+$(function(){
+    /*Query 从 1.9 版开始，移除了 .browser和.browser.version ， 取而代之的是 $.support 方法*/
+    var explorer = navigator.userAgent ;
+    var brow=$.browser;
+    if (explorer.indexOf("MSIE") >= 0) {
+        if(brow.version < 10.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if (explorer.indexOf("Firefox") >= 0) {
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Chrome") >= 0){
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Opera") >= 0){
+        if(brow.version < 11.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Safari") >= 0){
+        if(brow.version < 6.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    /* else if(explorer.indexOf("Netscape")>= 0) {
+        if(brow.version < 35.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    } */
+});
 </script>
 </html>

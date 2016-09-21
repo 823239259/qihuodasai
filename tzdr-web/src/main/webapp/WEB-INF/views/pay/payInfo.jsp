@@ -125,7 +125,7 @@
 							<ol>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
 								<li class="uc_b_l_info">
-									<span>帐号：<i>4402 9391 1910 0042 543</i></span>
+									<span>帐号：<i>9558 8344 0200 0949 840</i></span>
 									<span>户名：<i>成都盈透科技有限公司 </i></span>
 									<span>开户行：<i>中国工商银行府河音乐花园支行</i></span>
 								</li>
@@ -138,22 +138,6 @@
 									<span>开户行：<i>中国银行天府新区华阳支行</i></span>
 								</li>
 							</ol>
-							<ol class="first">
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>5105 0140 6137 0000 0421</i></span>
-									<span>户名：<i>成都盈透科技有限公司</i></span>
-									<span>开户行：<i>中国建设银行成都世纪城新会展支行</i></span>
-								</li>
-							</ol>
-							<ol>
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_03.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>2280 8201 0400 0559 5</i></span>
-									<span>户名：<i>成都盈透科技有限公司 </i></span>
-									<span>开户行：<i>中国农业银行成都新希望国际支行</i></span>
-								</li>
-							</ol>
 						</ul>
 						<!-- 弹出框 -->
 				<div class="uc_floatlayer">
@@ -161,8 +145,6 @@
 						<a data-id="cmb" href="javascript:void(0)">中国招商银行</a>
 						<a data-id="icbc" href="javascript:void(0)">中国工商银行</a>
 						<a data-id="boc" href="javascript:void(0)">中国银行</a>
-						<a data-id="ccb" href="javascript:void(0)">中国建设银行</a>
-						<a data-id="abc" href="javascript:void(0)">中国农业银行</a>
 					</div>
 				</div>
 				<ul class="uc_b_money">
