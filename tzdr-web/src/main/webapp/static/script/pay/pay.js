@@ -179,6 +179,9 @@ $(document).ready(function(){
 	var isFlag = $("#isFlag").val();
 	if(isFlag == "1"){
 		$("#payButton").text("充值并购买方案");
+		$("#fatip").show();
+	}else{
+		$("#fatip").hide();
 	}
 });
 
