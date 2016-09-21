@@ -267,6 +267,36 @@
             </div>
         </div>
     </div>
+    <div class="w_center_upgrade" style="display: none;">
+    	<div class="w_center_upgrade_center">
+    		<div class="w_center_upgrade_title">
+    			<p class="w_upgrade_title">显示出错了！</p>
+    			<p class="w_upgrade_js">您正在使用的浏览器版本过低。这意味着浏览器未升级前你无法观看实时行情！推荐使用以下浏览器的最新版本：</p>
+    			<ul class="ul">
+    				<li><a href="http://sw.bos.baidu.com/sw-search-sp/software/a7958cfcdbd6e/ChromeStandalone_53.0.2785.116_Setup.exe"><span class="Chrome"></span>谷歌浏览器</a></li>
+    				<li><a href="http://download.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe"><span class="Firefox"></span>火狐浏览器</a></li>
+    				<li><a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2015_08_31_13/bind2/12966/Safari_5.34.57.2_12966_BDdl.exe"><span class="Safari"></span>Safari浏览器</a></li>
+    				<li><a href="http://down.360safe.com/se/360se8.1.1.226.exe"><span class="sll"></span>360浏览器</a></li>
+    				<li><a href="http://sw.bos.baidu.com/sw-search-sp/software/8666749b3f7a7/IE10-Windows6.1-zh-cn.exe"><span class="IE"></span>IE浏览器</a></li>
+    			</ul>
+    			<div class="w_upgrade_xz">
+    				<p class="xz_title">您可以一边升级浏览器版本，一边扫码下载维胜金融APP或客户端，随心，随时，随地进行交易</p>
+    				<ul>
+    					<li><a class="pc" href="http://socket.vs.com/download/%e7%bb%b4%e8%83%9c%e4%ba%a4%e6%98%93%e6%a0%87%e5%87%86%e7%89%88v1.0.zip"></a></li>
+    					<li class="xz_title">PC标准版下载</li>
+    				</ul>
+    				<ul>
+    					<li class="ios"></li>
+    					<li class="xz_title">iOS下载</li>
+    				</ul>
+    				<ul>
+    					<li class="android"></li>
+    					<li class="xz_title">Android下载</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>
+    </div>
     <div class="w-qihuo">
         <div class="w_center_border"></div>
         <div class="w-qihuo-title">
@@ -394,4 +424,47 @@
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
 <script type="text/javascript" src = "static/script/homepage/homepage.trade.js"></script> 
+<script>
+$(function(){
+    /*Query 从 1.9 版开始，移除了 .browser和.browser.version ， 取而代之的是 $.support 方法*/
+    var explorer = navigator.userAgent ;
+    var brow=$.browser;
+    if (explorer.indexOf("MSIE") >= 0) {
+        if(brow.version < 10.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if (explorer.indexOf("Firefox") >= 0) {
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Chrome") >= 0){
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Opera") >= 0){
+        if(brow.version < 11.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Safari") >= 0){
+        if(brow.version < 6.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    /* else if(explorer.indexOf("Netscape")>= 0) {
+        if(brow.version < 35.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    } */
+});
+</script>
 </html>
