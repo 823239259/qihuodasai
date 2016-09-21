@@ -1,8 +1,11 @@
 package com.tzdr.domain.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 
+import com.tzdr.common.utils.AllowExcel;
 import com.tzdr.common.utils.SqlColumn;
 import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.domain.cache.CacheManager;
@@ -18,89 +21,99 @@ import com.tzdr.domain.cache.CacheManager;
 public class WuserListVo implements Serializable {
 	
 	private static final long serialVersionUID = 5413198153714337951L;
-	
 	@SqlColumn
 	private String id;
 	
 	@SqlColumn
 	private String tname;
-	
+	@AllowExcel(name = "用户昵称")
 	@SqlColumn
 	private String uname;//用户昵称
-	
+	@AllowExcel(name = "邮箱")
 	@SqlColumn
 	private String email;//邮箱
-	
+	@AllowExcel(name = "手机号")
 	@SqlColumn
 	private String mobile;//手机号
-	
+	@AllowExcel(name = "注册时间")
 	@SqlColumn
 	private BigInteger ctime;//注册时间
-	
-	private String ctimeStr;
-	
 	/**
 	 * 用户类型
 	 */
+	@AllowExcel(name = "用户类型")
 	@SqlColumn
 	private String userType;
-	
+	@AllowExcel(name = "身份证号")
 	@SqlColumn
 	private String idcard;//身份证号
-	
+	@AllowExcel(name = "最后登陆时间")
 	@SqlColumn
 	private BigInteger lastLoginTime;//最后登陆时间
-	
-	private String lastLoginTimeStr;
-	
 	/**
 	 * 账户余额
 	 */
+	@AllowExcel(name = "账户余额")
 	@SqlColumn
 	private Double avlBal;
-	
 	/**
 	 * 配资保证金
 	 */
+	@AllowExcel(name = "配资保证金")
 	@SqlColumn
 	private Double allocationMoney;
 	//冻结金额
+	@AllowExcel(name = "冻结金额")
 	@SqlColumn
 	private Double frzBal;
-	
 	/**
 	 * 支付宝帐号
 	 */
+	@AllowExcel(name = "支付宝帐号")
 	@SqlColumn
 	private String alipayAccount;
-	
 	/**
 	 * 来源网站
 	 */
+	@AllowExcel(name = "来源网站")
 	@SqlColumn
 	private Integer source;
-	private String sourceName;
+	@AllowExcel(name = "渠道来源")
 	@SqlColumn
 	private String channel;
+	@AllowExcel(name = "关键词来源")
 	@SqlColumn
 	private String keyword;
+
+
+	private String ctimeStr;
 	
-	public String getChannel() {
-		return channel;
-	}
-
-	public void setChannel(String channel) {
-		this.channel = channel;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
+	private String lastLoginTimeStr;
+	
+	private String sourceName;
+	
+	@AllowExcel(name = "总充值金额")
+	@SqlColumn
+	private Double totalCharge;//总充值金额
+	@AllowExcel(name = "总申请操盘金额")
+	@SqlColumn
+	private BigDecimal totalOperate;//总申请操盘金额
+	@AllowExcel(name = "恒指操盘手数")
+	@SqlColumn
+	private BigDecimal htranActualLever;//恒指操盘手数
+	@AllowExcel(name = "原油操盘手数")
+	@SqlColumn
+	private BigDecimal ytranActualLever;//原油操盘手数
+	@AllowExcel(name = "富时A50操盘手数")
+	@SqlColumn
+	private BigDecimal atranActualLever;//富时A50操盘手数
+	@AllowExcel(name = "国际综合操盘手数")
+	@SqlColumn
+	private BigDecimal interActualLever;//国际综合操盘手数
+	@AllowExcel(name = "申请提现金额")
+	@SqlColumn
+	private Double withDrawMoney;//申请提现金额
+	
 	public String getId() {
 		return id;
 	}
@@ -197,6 +210,41 @@ public class WuserListVo implements Serializable {
 		this.frzBal = frzBal;
 	}
 
+	public String getAlipayAccount() {
+		return alipayAccount;
+	}
+
+	public void setAlipayAccount(String alipayAccount) {
+		this.alipayAccount = alipayAccount;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	
+
+	
 	public String getCtimeStr() {
 		if (this.ctime != null) {
 			this.ctimeStr = TypeConvert.long1000ToDatetimeStr(this.ctime.longValue());
@@ -219,22 +267,7 @@ public class WuserListVo implements Serializable {
 		this.lastLoginTimeStr = lastLoginTimeStr;
 	}
 
-	public String getAlipayAccount() {
-		return alipayAccount;
-	}
-
-	public void setAlipayAccount(String alipayAccount) {
-		this.alipayAccount = alipayAccount;
-	}
-
-	public Integer getSource() {
-		return source;
-	}
-
-	public void setSource(Integer source) {
-		this.source = source;
-	}
-
+	
 	public String getSourceName() {
 		if(this.source == 2) {
 			sourceName = "配股宝Wap";
@@ -262,5 +295,64 @@ public class WuserListVo implements Serializable {
 	public void setSourceName(String sourceName) {
 		this.sourceName = sourceName;
 	}
+
+	public Double getTotalCharge() {
+		return totalCharge;
+	}
+
+	public void setTotalCharge(Double totalCharge) {
+		this.totalCharge = totalCharge;
+	}
+
+	public BigDecimal getTotalOperate() {
+		return totalOperate;
+	}
+
+	public void setTotalOperate(BigDecimal totalOperate) {
+		this.totalOperate = totalOperate;
+		
+	}
+
+	public BigDecimal getHtranActualLever() {
+		return htranActualLever;
+	}
+
+	public void setHtranActualLever(BigDecimal htranActualLever) {
+		this.htranActualLever = htranActualLever;
+	}
+
+	public BigDecimal getYtranActualLever() {
+		return ytranActualLever;
+	}
+
+	public void setYtranActualLever(BigDecimal ytranActualLever) {
+		this.ytranActualLever = ytranActualLever;
+	}
+
+	public BigDecimal getAtranActualLever() {
+		return atranActualLever;
+	}
+
+	public void setAtranActualLever(BigDecimal atranActualLever) {
+		this.atranActualLever = atranActualLever;
+	}
+
+	public BigDecimal getInterActualLever() {
+		return interActualLever;
+	}
+
+	public void setInterActualLever(BigDecimal interActualLever) {
+		this.interActualLever = interActualLever;
+	}
+
+	public Double getWithDrawMoney() {
+		return withDrawMoney;
+	}
+
+	public void setWithDrawMoney(Double withDrawMoney) {
+		this.withDrawMoney = withDrawMoney;
+	}
+
+
 
 }
