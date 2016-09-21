@@ -53,8 +53,8 @@ button.aui_state_highlight:active { border-color:#ff9d00; filter: progid:DXImage
 .aui_w { background-position:left top; _png:orange/ie6/w.png; }
 .aui_e { background-position: right bottom; _png:orange/ie6/e.png; }
 aui_icon, .aui_main { padding-top:3px; }
-@media screen and (min-width:0) {
-	.aui_outer { border-radius:8px; box-shadow:0 5px 15px rgba(2, 37, 69, .4); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition: -webkit-box-shadow linear .2s; transition: -webkit-box-shadow linear .2s; }
+
+	.aui_outer {left: 50%;margin-left: -134px;  position: fixed; top: 50%; margin-top: -82px; border-radius:8px; box-shadow:0 5px 15px rgba(2, 37, 69, .4); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition: -webkit-box-shadow linear .2s; transition: -webkit-box-shadow linear .2s; }
 	.aui_state_drag .aui_outer { box-shadow:none; }
 	.aui_state_lock .aui_outer { box-shadow:0 3px 26px rgba(0, 0, 0, .9); }
 	.aui_outer:active { box-shadow:0 0 5px rgba(2, 37, 69, .1)!important; }
@@ -69,7 +69,7 @@ aui_icon, .aui_main { padding-top:3px; }
 	.aui_n { background-position: 0 -36px; }
 	.aui_s { background-position: 0 -67px; }
 	.aui_w, .aui_e { background-image:url(orange/bg_css3_2.png); }
-}
+
 .aui_state_noTitle .aui_nw, .aui_state_noTitle .aui_ne, .aui_state_noTitle .aui_sw, .aui_state_noTitle .aui_se { width:3px; height:3px; }
 .aui_state_noTitle .aui_inner { border:1px solid #666; background:#FFF; }
 .aui_state_noTitle .aui_outer { box-shadow:none; }
