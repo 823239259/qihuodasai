@@ -46,6 +46,7 @@
     	<input type="hidden" value = "1" name = "isFlag"/>
     	<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />
 		<input type="hidden" name="inputTranLever" value="${inputTranLever}" />
+		<input type="hidden" id = "inputVocherId"  name ="inputVocherId" value = "">
 		<input type="hidden" name="payUrl" value = "userhsi/paySuccessful"/>
 		<input type="submit" id = "toPayInfoSubmit"/>
     </form>
