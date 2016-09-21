@@ -35,17 +35,16 @@ function checkBanlanceEnough() {
 		$("#confirmPay").attr("status",true);
 		//$("#confirmPay").attr("class","fl_pb_nosure");
 		$("#confirmPay").text("去充值");
-		var chaBanlance = payable - balance;
+		var chaBanlance = parseFloat(payable - balance).toFixed(2);
 		bindPay(chaBanlance);
 		content = "你的账户余额"+balance+"元,本次支付还差"+chaBanlance+"元";
-		$("input[name = 'balance']").val(chaBanlance);
 	} else {
 		bindConfirmPay();
-		$("#notEnoughPay").show();
 		//$("#notEnoughPay").hide();
+		$("#notEnoughPay").show();
 		$("#confirmPay").attr("status",true);
 		$("#confirmPay").text("确认支付");
-		content = "你的账户余额"+balance+"元,本次支付完毕剩余"+(balance - payable)+"元";
+		content = "你的账户余额"+balance+"元,本次支付完毕剩余"+parseFloat((balance - payable)).toFixed(2)+"元";
 	}
 	$("#notEnoughPay").text(content);
 }
