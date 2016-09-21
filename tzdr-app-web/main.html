@@ -103,69 +103,69 @@
 			//获取最新版本信息
 			mui.app_request('/getVersion',{force:true},
 				function(result){
-					
-					//最新版本号
-					var newVer = result.data.version;
-					//是否强制升级
-					var isForceUpdate = false;
-					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){  //没有最新版本
-						_callback();
-						if (mui.cacheUser.isLogin()){
-							mui.openWindow("tzdr/quotation/quotationMain.html");
-						}
-						return;
-					}
-					//获取数据库版本号
-					var newSub = newVer.substr(0,1);
-					//应用的版本号
-					var wgtVerSub = wgtVer.substr(0,1);
-					var newSubSmall=Number(newVer.substr(2));
-					var wgtVerSubSmall=Number(wgtVer.substr(2));
-					if(newSub > wgtVerSub){//检测升级版本是否大版本还是小版本
-						if(!tzdr.is_appstore){//当前版本是否是苹果AppStore
-							//弹出系统提示对话框
-							plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
-								var _download_url = tzdr.constants.api_domain+"upload/H50967E1D_.apk";
-								switch (plus.os.name ) {  //根据客户端修改充值文本框属性
-						        case "Android":
-							        //下载最新apk  
-									plus.runtime.openURL(_download_url);
-							        break;
-						        case "iOS":
-							    	//下载最新ipa
-									plus.runtime.openURL(tzdr.constants.ipa_download_url);
-									break;
-						        default:
-							        //下载最新apk  
-									plus.runtime.openURL(_download_url);
-							        break;
-						    	}
-							}, "软件升级", "立即下载" );
-						}
-						return;
-					}else{
-						if(newSub<wgtVerSub){
-							
-						}else{
-							if(newSubSmall > wgtVerSubSmall){
-							_callback();
-						//弹出版本升级提示信息对话框
-						plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
-							if(e.index==0){
-								downWgt(function(){
-									if (mui.cacheUser.isLogin()){
-										mui.openWindow("tzdr/quotation/quotationMain.html");
-									}
-								});	// 下载升级包
-							}else{
-								if (mui.cacheUser.isLogin()){
-									mui.openWindow("tzdr/quotation/quotationMain.html");
-								}
-							}
-						}, "软件升级", ["升级","稍后再说"] );					
-					}
-					}	
-				}	
+					updateApk(result.data)
+//					//最新版本号
+//					var newVer = result.data.version;
+//					//是否强制升级
+//					var isForceUpdate = false;
+//					if(mui.isnull(newVer)||!(wgtVer&&newVer&&(wgtVer!=newVer))){  //没有最新版本
+//						_callback();
+//						if (mui.cacheUser.isLogin()){
+//							mui.openWindow("tzdr/quotation/quotationMain.html");
+//						}
+//						return;
+//					}
+//					//获取数据库版本号
+//					var newSub = newVer.substr(0,1);
+//					//应用的版本号
+//					var wgtVerSub = wgtVer.substr(0,1);
+//					var newSubSmall=Number(newVer.substr(2));
+//					var wgtVerSubSmall=Number(wgtVer.substr(2));
+//					if(newSub > wgtVerSub){//检测升级版本是否大版本还是小版本
+//						if(!tzdr.is_appstore){//当前版本是否是苹果AppStore
+//							//弹出系统提示对话框
+//							plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+//								var _download_url = tzdr.constants.api_domain+"upload/H50967E1D_.apk";
+//								switch (plus.os.name ) {  //根据客户端修改充值文本框属性
+//						        case "Android":
+//							        //下载最新apk  
+//									plus.runtime.openURL(_download_url);
+//							        break;
+//						        case "iOS":
+//							    	//下载最新ipa
+//									plus.runtime.openURL(tzdr.constants.ipa_download_url);
+//									break;
+//						        default:
+//							        //下载最新apk  
+//									plus.runtime.openURL(_download_url);
+//							        break;
+//						    	}
+//							}, "软件升级", "立即下载" );
+//						}
+//						return;
+//					}else{
+//						if(newSub<wgtVerSub){
+//							
+//						}else{
+//							if(newSubSmall > wgtVerSubSmall){
+//							_callback();
+//						//弹出版本升级提示信息对话框
+//						plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+//							if(e.index==0){
+//								downWgt(function(){
+//									if (mui.cacheUser.isLogin()){
+//										mui.openWindow("tzdr/quotation/quotationMain.html");
+//									}
+//								});	// 下载升级包
+//							}else{
+//								if (mui.cacheUser.isLogin()){
+//									mui.openWindow("tzdr/quotation/quotationMain.html");
+//								}
+//							}
+//						}, "软件升级", ["升级","稍后再说"] );					
+//					}
+//					}	
+//				}	
 				},function(result){
 					_callback();
 					if(mui.cacheUser.isLogin()){
@@ -182,17 +182,17 @@
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVerAndroid)||!(wgtVer&&newVerAndroid&&(wgtVer!=newVerAndroid))){  //没有最新版本
-						_callback();
+//						_callback();
 						if (mui.cacheUser.isLogin()){
 							mui.openWindow("tzdr/quotation/quotationMain.html");
 						}
 						return;
 					};
 					//获取数据库版本号
-					var newSubAndroid = newVer.substr(0,1);
+					var newSubAndroid = newVerAndroid.substr(0,1);
 					//应用的版本号
 					var wgtVerSubAndroid = wgtVer.substr(0,1);
-					var newSubSmallAndroid=Number(newVer.substr(2));
+					var newSubSmallAndroid=Number(newVerAndroid.substr(2));
 					var wgtVerSubSmallAndroid=Number(wgtVer.substr(2));
 					if(newSubAndroid > wgtVerSubAndroid){//检测升级版本是否大版本还是小版本				
 							//弹出系统提示对话框
@@ -202,11 +202,11 @@
 							}, "软件升级", "立即下载" );
 						return;
 					}else{
-						if(newSnewSubAndroidub<wgtVerSubAndroid){
+						if(newSubAndroid<wgtVerSubAndroid){
 							
 						}else{
 							if(newSubSmallAndroid > wgtVerSubSmallAndroid){
-							_callback();
+//							_callback();
 							//弹出版本升级提示信息对话框
 							plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
 								if(e.index==0){
@@ -230,7 +230,7 @@
 					//是否强制升级
 					var isForceUpdate = false;
 					if(mui.isnull(newVeriOS)||!(wgtVer&&newVeriOS&&(wgtVer!=newVeriOS))){  //没有最新版本
-						_callback();
+//						_callback();
 						if (mui.cacheUser.isLogin()){
 							mui.openWindow("tzdr/quotation/quotationMain.html");
 						}
@@ -250,11 +250,11 @@
 							}, "软件升级", "立即下载" );
 						return;
 					}else{
-						if(newSnewSubiOS<wgtVerSubiOS){
+						if(newSubiOS<wgtVerSubiOS){
 							
 						}else{
 							if(newSubSmalliOS > wgtVerSubSmalliOS){
-							_callback();
+//							_callback();
 							//弹出版本升级提示信息对话框
 							plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
 								if(e.index==0){

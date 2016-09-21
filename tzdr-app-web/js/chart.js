@@ -45,6 +45,7 @@ mui.plusReady(function(){
 		    var commodityNo = $("#commodeityNo").val();
 		    var contractNo = $("#contractNo").val();
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
 	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
@@ -52,13 +53,19 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
+//          console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
-            handleTime(historyParam);
-            processingData(historyParam);
-            handleVolumeChartData(historyParam);
-            processingCandlestickVolumeData(historyParam)
+			if(historyParam.Parameters[0].HisQuoteType==0){
+				handleTime(historyParam);
+				processingData(historyParam);
+	            handleVolumeChartData(historyParam);
+	            processingCandlestickVolumeData(historyParam)
+			}else if(historyParam.Parameters[0].HisQuoteType==1440){
+				processingDayCandlestickData(historyParam)
+				processingDayCandlestickVolumeData(historyParam);
+			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
         	if(quoteParam.Parameters == null)return;

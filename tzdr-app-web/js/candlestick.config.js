@@ -10,6 +10,7 @@
     }
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
+    		console.log(JSON.stringify(jsonData));
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=rawData.length;
@@ -144,7 +145,7 @@
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
         			volumeTime[lent+i]=str2;
-        			volumeV[lent+i]=parameters[i].TotalVolume;
+        			volumeV[lent+i]=parameters[i].Volume;
        		};
         	for(var i=0;i<volumeTime.length-1;i++){
         		if(volumeTime[i]==volumeTime[i+1]){
@@ -216,19 +217,19 @@
 			 yAxis: [
 			            {
 	                type : 'value',
-	              name : '成交量(万)',
+//	              name : '成交量(万)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
 		              },
 		              scale:true,
 	              axisLabel: {
-	                  formatter: function (a) {
-                        a = +a;
-                        return isFinite(a)
-                            ? echarts.format.addCommas(+a / 10000)
-                            : '';
-                    }
+//	                  formatter: function (a) {
+//                      a = +a;
+//                      return isFinite(a)
+//                          ? echarts.format.addCommas(+a / 10000)
+//                          : '';
+//                  }
 	              },
 	                splitLine: {
 	                    show: true,
