@@ -816,8 +816,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 				countOperateMoney = 0.00;
 			}
 			Double new_CountOperateMoney = countOperateMoney+endAmlount;
-			BigDecimal bd = new BigDecimal(new_CountOperateMoney);  
-			wuser.setCountOperateMoney(bd.doubleValue());
+			BigDecimal bd = new BigDecimal(new_CountOperateMoney); 
+			wuser.setCountOperateMoney(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
