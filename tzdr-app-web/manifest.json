@@ -478,7 +478,9 @@
 					"js/jquery-1.11.3.js",
 					"images/bank/ccb.png",
 					"images/bank/psbc.png",
-					"images/bank/cmb.png"
+					"images/bank/cmb.png",
+					"images/bank/spdb.png",
+					"images/bank/cmbc.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",

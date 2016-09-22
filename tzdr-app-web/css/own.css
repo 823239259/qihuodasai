@@ -555,14 +555,14 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 #freeMoney{
 	width: 100%;
 	font-size: 16px;;
-	line-height: 30px;
-	height: 30px;
+	line-height:45px;
+	height: 45px;
 	text-align: right;
 	padding-right: 15px;
 	vertical-align: middle;
 	margin: 0px;
-	position: relative;
-	top:2%;
+	/*position: relative;
+	top:2%;*/
 }
 #freeMoney span{
 	display: inline-block;
@@ -577,4 +577,9 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 }
 .freeCashMoneyColor{
 	color:#FFCC33;
+}
+.bottomTip{
+	margin: 0px 0px 0px 80px;
+	/*width: 100%;
+	padding-left: 100px;*/
 }

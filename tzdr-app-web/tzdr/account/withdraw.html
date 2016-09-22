@@ -122,6 +122,7 @@
 				var message = result.message;
 				$("#drawHandleFee").text(message);
 				if(!isNaN(message)){
+					console.log("45");
 					$("#draw_time").text(drawmoney - message);
 				}
 				return;
@@ -323,6 +324,9 @@
 				<label>账户余额</label>
 				<span><i id="balance"></i>元</span>
 			</li>
+		</ul>	
+		<p id="freeMoney"><span>累计免提现手续费金额为：</span><span class="freeCashMoneyColor"><i id="freeCashMoney">0.00</i>元</span></p>	
+		<ul class="mui-table-view aw_withlist">	
 			<li class="mui-table-view-cell">
 				<label>提现金额</label>
 				<span>元</span>
@@ -336,9 +340,9 @@
 				<label>实际到账</label>
 				<span><i id="draw_time"></i>元</span>
 			</li>
-		</ul>
-		<p id="freeMoney"><span>免费提现金额</span><span class="freeCashMoneyColor"><i id="freeCashMoney">0.00</i>元</span></p>
-		<ul class="mui-table-view aw_withpassword">
+		<!--</ul>-->
+		
+		<!--<ul class="mui-table-view aw_withpassword">-->
 			<li class="mui-table-view-cell">		 		
 				<!--<a class="mui-navigate-right" href="javascript:void(0);">-->
 					<div class="mui-input-row mui-password">
@@ -369,7 +373,9 @@
 		<div class="mui-content-padded">
 			<h5>温馨提示：</h5>
 			<p>1、到账时间：工作日09：00——16:30申请，24小时内到账，最快5分钟到账。其余时间申请，将在下一个工作日到账。</p>
-			<p>2、提现手续费 1%（适用于充值后，未实际操盘用户）0元（适用于操盘用户提现）。手续费和实际到账的金额注意核算规则为扣除1%参照下图。</p>
+			<p>2、提现手续费 ：</p>
+			<p class="bottomTip">1%（适用于充值后，未实际操盘用户）。</p>
+			<p class="bottomTip">0元（适用于操盘用户提现）。</p>
 		</div>
 	</div>
 </body>
