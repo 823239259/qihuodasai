@@ -52,9 +52,31 @@
 	</bean>
 	<!-- Jpa Entity Manager 配置 -->
 	<!-- <bean id="entityManagerFactory2"
-		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-		 <property name="persistenceUnitName" value="dataSource2" />
-	</bean> -->
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource2" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter2" />
+		<property name="packagesToScan" value="com.tzdr.cpp" />
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.jpa.HibernatePersistenceProvider" />
+		</property> -->
+		<!-- <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
+				<prop key="net.sf.ehcache.configurationResourceName">${net.sf.ehcache.configurationResourceName}</prop>
+				<prop key="hibernate.ejb.naming_strategy">${hibernate.ejb.naming_strategy}</prop>
+				只扫描class文件，不扫描hbm，默认两个都搜索
+				<prop key="hibernate.archive.autodetection">class</prop>
+				不检查@NamedQuery
+				<prop key="hibernate.query.startup_check">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="javax.persistence.sharedCache.mode">${javax.persistence.sharedCache.mode}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+			</props>
+		</property> -->
+	</bean>
 	
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -65,7 +87,7 @@
 		</property>
 	</bean>
 	
-	<!-- <bean id="hibernateJpaVendorAdapter2"
+	 <!-- <bean id="hibernateJpaVendorAdapter2"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform">
 			<bean factory-method="getDialect" class="com.tzdr.common.dao.support.Hibernates">
