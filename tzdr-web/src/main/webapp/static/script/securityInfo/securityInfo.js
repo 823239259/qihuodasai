@@ -1119,8 +1119,8 @@ function MaskControl(){
 		var tipDiv=$("#div_loading");
 		if(html==undefined)
 		html="";
-		tipDiv.html(html);
-		loader.show();
+		tipDiv.html(html); 
+		loader.show(); 
 		var x=(w-tipDiv.width())/2;
 		var y=(h-tipDiv.height())/2;
 		tipDiv.css("left",x);
