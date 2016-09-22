@@ -198,19 +198,19 @@
 		 yAxis: [
 		            {
                 type : 'value',
-//              name : '成交量(万)',
+                name : '成交量(万)',
                  axisLine: { lineStyle: { color: '#8392A5' } },
 	              axisTick:{
 	               	show:false,
 	              },
 	              scale:true,
                 axisLabel: {
-//                  formatter: function (a) {
-//                  	   a = +a;
-//                  	    return isFinite(a)
-//                          ? echarts.format.addCommas(+a / 10000)
-//                          : '';
-//                  }
+                    formatter: function (a) {
+                    	   a = +a;
+                    	    return isFinite(a)
+                            ? echarts.format.addCommas(+a / 10000)
+                            : '';
+                    }
                 },
                 splitLine: {
                     show: true,

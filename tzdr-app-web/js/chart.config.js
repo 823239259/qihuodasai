@@ -26,10 +26,10 @@
                     /* document.getElementById('main').innerHTML = ""; */
                     // 基于准备好的dom，初始化echarts图表
                     myChart = ec.init(document.getElementById('CandlestickChartDiv'));
-                    var option = setOption(rawData);
+//                  var option = setOption(rawData);
                     echarts=ec;
                     timeChart=ec.init(document.getElementById("timeChart"));
-                    var option1=setOption1(timeData);
+//                  var option1=setOption1(timeData);
                     volumeChart=ec.init(document.getElementById("volumeChart"));
                     CandlestickVolumeChart=ec.init(document.getElementById("CandlestickVolumeChart"));
                     ec.connect("group1");
