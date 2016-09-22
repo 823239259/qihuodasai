@@ -21,6 +21,7 @@
         			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
 		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
+		            console.log(parameters[i].DateTimeStamp);
 		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
@@ -30,6 +31,7 @@
         		}
         	}
         	var newData=rawData.slice(-60);
+//      	console.log(newData);
         		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
