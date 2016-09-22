@@ -38,7 +38,7 @@
 		}
     </style>
 </head>
-<script type="text/javascript" src="${ctx}/static/script/Util.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/Utils.js?v=${v}"></script>
 
 <script type="text/javascript">
 var time = 5; 
