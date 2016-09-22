@@ -802,7 +802,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 						+ " ,v.idcard,w.last_login_time lastLoginTime,w.avl_bal avlBal,"
 						+ " (SELECT SUM(t.money)FROM w_user_trade t WHERE t.uid=w.id AND t.`status`=1) allocationMoney"
 						+ " , w.frz_bal frzBal,v.alipay_account alipayAccount,w.source,w.channel,w.keyword, "
-						+ "(SELECT SUM(l.actual_money) FROM w_recharge_list l WHERE l.uid=w.id AND l.type>=2 AND l.type<=4 or l.is_recharge=1 ) totalCharge,"
+						+ "(SELECT SUM(l.actual_money) FROM w_recharge_list l WHERE l.uid=w.id AND l.type>=2 AND (l.type<=4 or l.is_recharge=1) ) totalCharge,"
 						+ "(SELECT convert(SUM(f.trader_bond + f.append_trader_bond),decimal) FROM f_simple_ftse_user_trade f WHERE f.uid=w.id AND (f.state_type <> 1 OR f.state_type <> 5)) totalOperate,"
 						+ "(SELECT SUM(f.tran_actual_lever) FROM f_simple_ftse_user_trade f WHERE f.uid=w.id  AND business_type = 7  AND (f.state_type <> 1 OR f.state_type <> 5)) htranActualLever,"
 						+ "(SELECT SUM(f.tran_actual_lever) FROM f_simple_ftse_user_trade f WHERE f.uid=w.id AND  business_type = 6 AND  (f.state_type <> 1 OR f.state_type <> 5) ) ytranActualLever,"

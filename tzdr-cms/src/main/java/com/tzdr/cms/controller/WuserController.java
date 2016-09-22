@@ -131,6 +131,9 @@ public class WuserController extends BaseCmsController<WUser> {
 			PageInfo<WuserListVo> dataPage = new PageInfo<WuserListVo>(request);
 			ConnditionVo connVo = new ConnditionVo(request);
 			dataPage = this.wuserService.queryDataPageWuserListVo(dataPage, connVo);
+			if(connVo.isExcel(dataPage.getPageResults(),resp,"所有用户列表.xls")){
+				WebUtil.printText(JSON.toJSONString(grid), resp);
+			}
 			if (dataPage.getPageResults() != null) {
 				for (WuserListVo wu : dataPage.getPageResults()) {
 					grid.add(wu);
