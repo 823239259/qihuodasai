@@ -47,6 +47,7 @@ import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 import com.tzdr.web.constants.Constants;
 import com.tzdr.web.constants.ViewConstants;
+import com.tzdr.web.utils.CookiesUtil;
 import com.tzdr.web.utils.UserSessionBean;
 
 /**
@@ -131,7 +132,7 @@ public class UFSimpleFtseUserTradeController {
 	}
 
 	@RequestMapping(value = "/pay")
-	public String pay(ModelMap modelMap, BigDecimal inputTraderBond, Integer inputTranLever, HttpServletRequest request,
+	public String pay(HttpServletResponse response,ModelMap modelMap, BigDecimal inputTraderBond, Integer inputTranLever, HttpServletRequest request,
 			RedirectAttributes attr) {
 
 		Object object = request.getSession().getAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION);
@@ -241,7 +242,9 @@ public class UFSimpleFtseUserTradeController {
 		ContractParities newConfig = contractParitiesService.get("00001");
 		modelMap.put("contract", newConfig.getContract());
 
-		request.getSession(false).setAttribute("tokenTzdr", UUID.randomUUID());
+		Object uuid = UUID.randomUUID();
+		request.getSession(false).setAttribute("tokenTzdr", uuid);
+		CookiesUtil.addCookie(response, "tokenTzdr", String.valueOf(uuid), 600);
 		return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 	}
 
@@ -251,19 +254,19 @@ public class UFSimpleFtseUserTradeController {
 			throws Exception {
 
 		if (inputTraderBond == null || inputTranLever == null) {
-			this.pay(modelMap, inputTraderBond, inputTranLever, request, attr);
+			this.pay(response,modelMap, inputTraderBond, inputTranLever, request, attr);
 			return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 		}
 
 		FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(CONFIGTYPE, String.valueOf(inputTranLever)); // 获取配置方案信息
 
 		if (fSimpleConfig == null) {
-			this.pay(modelMap, inputTraderBond, inputTranLever, request, attr);
+			this.pay(response,modelMap, inputTraderBond, inputTranLever, request, attr);
 			return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 		}
 
 		if (fSimpleConfig.getTraderBond().compareTo(inputTraderBond) != 0) { // 判断当前配置方案单手保证金是正确
-			this.pay(modelMap, inputTraderBond, inputTranLever, request, attr);
+			this.pay(response,modelMap, inputTraderBond, inputTranLever, request, attr);
 			return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 		}
 
@@ -278,12 +281,12 @@ public class UFSimpleFtseUserTradeController {
 			UserSessionBean userSessionBean = (UserSessionBean) object;
 			uid = userSessionBean.getId();
 		} else {
-			this.pay(modelMap, inputTraderBond, inputTranLever, request, attr);
+			this.pay(response,modelMap, inputTraderBond, inputTranLever, request, attr);
 			return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 		}
 
 		if (uid == null) {
-			this.pay(modelMap, inputTraderBond, inputTranLever, request, attr);
+			this.pay(response,modelMap, inputTraderBond, inputTranLever, request, attr);
 			return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 		}
 
@@ -375,7 +378,7 @@ public class UFSimpleFtseUserTradeController {
 				}
 			}
 		}
-		this.pay(modelMap, inputTraderBond, inputTranLever, request, attr);
+		this.pay(response,modelMap, inputTraderBond, inputTranLever, request, attr);
 		return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY;
 	}
 
