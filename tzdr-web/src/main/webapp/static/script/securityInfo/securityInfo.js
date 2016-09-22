@@ -1088,7 +1088,6 @@ changeFivteenToEighteen = function(card) {
     }
     return card;
 };
-};
 
 /* + */
 /**
