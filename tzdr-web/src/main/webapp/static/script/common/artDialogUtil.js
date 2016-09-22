@@ -74,8 +74,15 @@ function  showMsgDialog(title,content,time)
 	    time:time,
 	    cancel: true//true //为true等价于function(){}
 	});
+	/*为了弹出层居中  配合 orange.css  aui_outer*/
+	$(".aui_outer").css("position","fixed");
+	$(".aui_outer button").click(function(){
+		$(".aui_outer").removeAttr("style");
+	});
+	$(".aui_outer .aui_close").click(function(){
+		$(".aui_outer").removeAttr("style");
+	});
 }
-
 function showMsgDialogRestPassWordLoadLoginUrl(title,content,time){
 	var dialog = art.dialog({
 	    title: title,

@@ -54,7 +54,8 @@ button.aui_state_highlight:active { border-color:#ff9d00; filter: progid:DXImage
 .aui_e { background-position: right bottom; _png:orange/ie6/e.png; }
 aui_icon, .aui_main { padding-top:3px; }
 
-	.aui_outer {left: 50%;margin-left: -134px;  position: fixed; top: 50%; margin-top: -82px; border-radius:8px; box-shadow:0 5px 15px rgba(2, 37, 69, .4); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition: -webkit-box-shadow linear .2s; transition: -webkit-box-shadow linear .2s; }
+	.aui_outer {border-radius:8px; box-shadow:0 5px 15px rgba(2, 37, 69, .4); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition: -webkit-box-shadow linear .2s; transition: -webkit-box-shadow linear .2s; }
+	.aui_outer {left: 50%;margin-left: -134px;   top: 50%; margin-top: -82px;} /* 为了弹出层居中关联 artDialogUtil.js showMsgDialog */
 	.aui_state_drag .aui_outer { box-shadow:none; }
 	.aui_state_lock .aui_outer { box-shadow:0 3px 26px rgba(0, 0, 0, .9); }
 	.aui_outer:active { box-shadow:0 0 5px rgba(2, 37, 69, .1)!important; }
