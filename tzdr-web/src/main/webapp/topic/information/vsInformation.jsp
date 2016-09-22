@@ -56,7 +56,7 @@
 			</ul>
 			<ul>
 				<li class="app"></li>
-				<li>APP下载</li>
+				<li>APP下载 <span style="font-size: 14px;"> (iOS&Android)</span></li>
 			</ul>
 			<ul>
 				<li class="furx">客服热线</li>
