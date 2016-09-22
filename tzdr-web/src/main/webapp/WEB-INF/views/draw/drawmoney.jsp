@@ -103,10 +103,10 @@
 												<fmt:formatNumber value="${requestScope.user.avlBal}"
 													type="currency" pattern="0.00#" />
 										</em>元&nbsp;<b>(累计免提现手续费金额:<c:if test="${user.countOperateMoney  == null || user.countOperateMoney == ''}">
-																				<em>0</em>
+																				<em>0元</em>
 																		</c:if>
 																		<c:if test="${user.countOperateMoney  != null && user.countOperateMoney != ''}">
-																				<em>${user.countOperateMoney }</em>
+																				<em>${user.countOperateMoney }元</em>
 																		</c:if>)</b>
 									</span></li>
 									<li><label>提现金额：</label> <input type="text"
