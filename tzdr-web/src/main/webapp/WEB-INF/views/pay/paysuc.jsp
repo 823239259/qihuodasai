@@ -92,10 +92,10 @@ intervalTime =  setInterval(function(){
 		
 	</div>
 	<form action="${ctx}/user/account" style = "display: none;" id="payableForm" method="post">
-		<input type="hidden" name="inputTraderBond" value="0" />
+		<input type="hidden" name="inputTraderBond"  value="0" />
 		<input type="hidden" name="inputTranLever" value="0" />
 		<input type="hidden" name="tokenTzdr" value="0" />
-		<input type="hidden" name="voucherId" value="" />
+		<input type="hidden" name="voucherId" value="d" />
 		<input type="submit"/>
 	</form>
 </div>

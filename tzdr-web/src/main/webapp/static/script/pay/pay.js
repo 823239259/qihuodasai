@@ -321,19 +321,19 @@ function doGopay(){
 		return ;
 	}
 	
-	/*if(parseFloat(money)<1){
+	if(parseFloat(money)<1){
 		showMsgDialog("提示","充值金额必须大于等于1元");
 		$("#gopaymoney").focus();
 		return ;
-	}*/
-	/*if($("#isFlag").val() == "1"){
+	}
+	if($("#isFlag").val() == "1"){
 		var payMoney = parseFloat($("#isFlagMoney").val());
 		if(parseFloat(money) < payMoney){
 			showMsgDialog("提示","充值金额不能少于"+payMoney+"元");
 			$("#gopaymoney").focus();
 			return;
 		}
-	}*/
+	}
 	document.forms["goNetbank"].action=basepath+"pay/goPayView";
 	document.forms["goNetbank"].submit();
 }

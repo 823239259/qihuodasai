@@ -73,7 +73,7 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 			}
 			return resultGoWay(model.getFrontMerUrl());
 		}
-		return resultGoWay("http://www.vs.com/user/account?a=1");
+		return resultFailGoWay("http://www.vs.com/user/account?a=1");
 	}
 	public GoPayCallBackModel setReqestModel(HttpServletRequest request){
 		GoPayCallBackModel model = new GoPayCallBackModel();
@@ -118,7 +118,10 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 		return null;
 	}
 	public String resultGoWay(String fromUrl){
-		return "RespCode=0000|JumpURL=" + fromUrl;//http://hedaoqing.oicp.net/tzdr-web/userOutDisk/callback/frontmer?gowaySign=1  http://www.vs.com/user/account?a=1
+		return "RespCode=0000|JumpURL=http://www.vs.com/userOutDisk/callback/frontmer?gowaySign=1";//  http://www.vs.com/user/account?a=1
+	}
+	public String resultFailGoWay(String fromUrl){
+		return "RespCode=0000|JumpURL=http://www.vs.com/user/account?a=1";//  http://www.vs.com/user/account?a=1
 	}
 	@Override
 	public BaseService<RechargeList> getBaseService() {
