@@ -1043,7 +1043,8 @@
 					"js/common.config.js",
 					"js/chart.config.js",
 					"js/timechart.config.js",
-					"js/candlestick.config.js"
+					"js/candlestick.config.js",
+					"js/dayCandlestick.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
