@@ -8,7 +8,7 @@
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "2.0.3",/*应用版本名称*/
-		"code": "20160909"
+		"code": "20160922"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -260,7 +260,8 @@
 					"images/1.0.png",
 					"images/2.png",
 					"images/3.png",
-					"images/0.png"
+					"images/0.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -1238,6 +1239,17 @@
 					"images/tutorial/26.png",
 					"images/tutorial/7.png",
 					"images/tutorial/17.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/news/active.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css"
