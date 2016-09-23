@@ -192,7 +192,7 @@
 					//最新版本号
 					var newVerAndroid = dataVersion.Android.version;
 					//是否强制升级
-					var isForceUpdate = dataVersion.Android;
+					var isForceUpdate = dataVersion.Android.isForceUpdate;
 					if(mui.isnull(newVerAndroid)||!(wgtVer&&newVerAndroid&&(wgtVer!=newVerAndroid))){  //没有最新版本
 						_callback();
 						if (mui.cacheUser.isLogin()){
@@ -210,11 +210,27 @@
 					var wgtVerSubSmallAndroid=Number(AndroidEditionWgt[1]+"."+AndroidEditionWgt[2]);
 					if(newSubAndroid > wgtVerSubAndroid){//检测升级版本是否大版本还是小版本				
 							//弹出系统提示对话框
-							plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+							console.log(isForceUpdate);
+							if(isForceUpdate==false){
+									plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+										if(e.index==0){
+											downWgt(function(){
+												if (mui.cacheUser.isLogin()){
+													mui.openWindow("tzdr/quotation/quotationMain.html");
+												}
+											});	// 下载升级包
+										}else{
+											if (mui.cacheUser.isLogin()){
+												mui.openWindow("tzdr/quotation/quotationMain.html");
+											}
+										}
+								}, "软件升级", ["升级","稍后再说"] );	
+							}else{
+								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
 								var _download_url = dataVersion.Android.bigUrl;
 									plus.runtime.openURL(_download_url);
-							}, "软件升级", "立即下载" );
-							
+								}, "软件升级", "立即下载" );
+							}
 						return;
 					}else{
 						if(newSubAndroid<wgtVerSubAndroid){
@@ -223,19 +239,27 @@
 							if(newSubSmallAndroid > wgtVerSubSmallAndroid){
 							_callback();
 							//弹出版本升级提示信息对话框
-							plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
-								if(e.index==0){
-									downWgt(function(){
+							if(isForceUpdate==false){
+									plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+									if(e.index==0){
+										downWgt(function(){
+											if (mui.cacheUser.isLogin()){
+												mui.openWindow("tzdr/quotation/quotationMain.html");
+											}
+										});	// 下载升级包
+									}else{
 										if (mui.cacheUser.isLogin()){
 											mui.openWindow("tzdr/quotation/quotationMain.html");
 										}
-									});	// 下载升级包
-								}else{
-									if (mui.cacheUser.isLogin()){
-										mui.openWindow("tzdr/quotation/quotationMain.html");
 									}
-								}
-							}, "软件升级", ["升级","稍后再说"] );					
+								}, "软件升级", ["升级","稍后再说"] );	
+							}else{
+								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+								var _download_url = dataVersion.Android.bigUrl;
+									plus.runtime.openURL(_download_url);
+								}, "软件升级", "立即下载" );
+							}
+											
 						}
 					}	
 				}
@@ -243,7 +267,7 @@
 					//最新版本号
 					var newVeriOS = dataVersion.iOS.version;
 					//是否强制升级
-					var isForceUpdate = false;
+					var isForceUpdate = dataVersion.iOS.isForceUpdate;
 					if(mui.isnull(newVeriOS)||!(wgtVer&&newVeriOS&&(wgtVer!=newVeriOS))){  //没有最新版本
 						_callback();
 						if (mui.cacheUser.isLogin()){
@@ -255,17 +279,33 @@
 					var iOSEditionNew = newVeriOS.split(".");
 					var iOSEditionWgt = wgtVer.split(".");
 					var newSubiOS = iOSEditionNew[0];
-//					console.log(iOSEditionNew);
 					//应用的版本号
 					var wgtVerSubiOS = iOSEditionWgt[0];
 					var newSubSmalliOS=Number(iOSEditionNew[1]+"."+iOSEditionNew[2]);
 					var wgtVerSubSmalliOS=Number(iOSEditionWgt[1]+"."+iOSEditionWgt[2]);
 					if(newSubiOS > wgtVerSubiOS){//检测升级版本是否大版本还是小版本				
 							//弹出系统提示对话框
-							plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+							if(isForceUpdate==false){
+								plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+									if(e.index==0){
+										downWgt(function(){
+											if (mui.cacheUser.isLogin()){
+												mui.openWindow("tzdr/quotation/quotationMain.html");
+											}
+										});	// 下载升级包
+									}else{
+										if (mui.cacheUser.isLogin()){
+											mui.openWindow("tzdr/quotation/quotationMain.html");
+										}
+									}
+								}, "软件升级", ["升级","稍后再说"] );	
+							}else{
+								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
 								var _download_url = dataVersion.iOS.bigUrl;
 									plus.runtime.openURL(_download_url);
-							}, "软件升级", "立即下载" );
+								}, "软件升级", "立即下载" );
+							}
+							
 						return;
 					}else{
 						if(newSubiOS<wgtVerSubiOS){
@@ -274,19 +314,27 @@
 							if(newSubSmalliOS > wgtVerSubSmalliOS){
 							_callback();
 							//弹出版本升级提示信息对话框
-							plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
-								if(e.index==0){
-									downWgt(function(){
+							if(isForceUpdate==false){
+								plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+									if(e.index==0){
+										downWgt(function(){
+											if (mui.cacheUser.isLogin()){
+												mui.openWindow("tzdr/quotation/quotationMain.html");
+											}
+										});	// 下载升级包
+									}else{
 										if (mui.cacheUser.isLogin()){
 											mui.openWindow("tzdr/quotation/quotationMain.html");
 										}
-									});	// 下载升级包
-								}else{
-									if (mui.cacheUser.isLogin()){
-										mui.openWindow("tzdr/quotation/quotationMain.html");
 									}
-								}
-							}, "软件升级", ["升级","稍后再说"] );					
+								}, "软件升级", ["升级","稍后再说"] );	
+							}else{
+								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+								var _download_url = dataVersion.iOS.bigUrl;
+									plus.runtime.openURL(_download_url);
+								}, "软件升级", "立即下载" );
+							}
+											
 						}
 					}	
 				}
@@ -330,7 +378,7 @@
 <div class="mui-content main_page" id = "main_status">
 	<img src="images/icons/LOGO.png" />
 	<div class="main_link">
-		<a href="javascript:void(0);" id="login" class="main_login">登录</a>
+		<a href="javascript:void(0);" id="login" class="main_login">登录12</a>
 		<a href="javascript:void(0);" id="regist" class="main_regist">注册</a>
 		<a href="javascript:void(0);" id="visit" class="main_other">先随便逛逛 ></a>
 	</div>
