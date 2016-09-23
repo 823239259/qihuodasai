@@ -23,7 +23,6 @@ import com.tzdr.domain.cms.entity.user.User;
  * <p>User: Lin Feng
  * <p>Version: 1.0
  */
-
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired

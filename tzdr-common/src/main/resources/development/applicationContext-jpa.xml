@@ -22,11 +22,22 @@
 		repository-impl-postfix="Impl" transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"
 		factory-class="com.tzdr.common.dao.EntityRepositoryFactoryBean" />
-	
+	<!-- 配置多数据源 -->
+	<bean id = "dynamicDataSource" class = "com.tzdr.cpp.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<!-- 指定lookupKey和与之对应的数据源 -->
+				<entry key="dataSource" value-ref="dataSource"></entry>  
+				<entry key="dataSource2" value-ref="dataSource2"></entry>  
+			</map>
+		</property>
+		 <!-- 这里可以指定默认的数据源 -->
+		<property name="defaultTargetDataSource"  ref="dataSource"></property>
+	</bean>
 	<!-- Jpa Entity Manager 配置 -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dynamicDataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 		<property name="packagesToScan" value="com.tzdr.domain,com.tzdr.olog.db.domain" />
 		<property name="persistenceProvider">
