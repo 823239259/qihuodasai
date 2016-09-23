@@ -172,7 +172,7 @@ public class LoginAndRegistController {
 		wUser.setLastLoginTime(Dates.getCurrentLongDate());
 		String ip = IpUtils.getIpAddr(request);
 		wUser.setLastLoginIp(ip);
-		wUser.setRegCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
+		//wUser.setRegCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
 		try {
 			synchronized (lock) {
 				wUserService.saveWUser(wUser);

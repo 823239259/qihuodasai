@@ -801,23 +801,26 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			Double endAmlount = simpleFtseUserTrade.getEndAmount().doubleValue();
 			Double tradeFeeTotalDouble = 0.00;
 			BigDecimal tradeFeeTotal = simpleFtseUserTrade.getTranFeesTotal();
-			if(tradeFeeTotal != null){
-				tradeFeeTotalDouble = tradeFeeTotal.doubleValue();
-			}
-			if(tranProfitLoss < 0){
-				if(endAmlount < 0){
-					endAmlount = absTranProfitLoss;
-				}else{
-					endAmlount = (appendBond + bond - tradeFeeTotalDouble);
+			Integer tradeLever = simpleFtseUserTrade.getTranActualLever();
+			if(tradeLever != null && tradeLever > 0){
+				if(tradeFeeTotal != null){
+					tradeFeeTotalDouble = tradeFeeTotal.doubleValue();
 				}
+				if(tranProfitLoss < 0){
+					if(endAmlount < 0){
+						endAmlount = absTranProfitLoss;
+					}else{
+						endAmlount = (appendBond + bond - tradeFeeTotalDouble);
+					}
+				}
+				Double countOperateMoney = wuser.getCountOperateMoney();
+				if(countOperateMoney == null){
+					countOperateMoney = 0.00;
+				}
+				Double new_CountOperateMoney = countOperateMoney+endAmlount;
+				BigDecimal bd = new BigDecimal(new_CountOperateMoney); 
+				wuser.setCountOperateMoney(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 			}
-			Double countOperateMoney = wuser.getCountOperateMoney();
-			if(countOperateMoney == null){
-				countOperateMoney = 0.00;
-			}
-			Double new_CountOperateMoney = countOperateMoney+endAmlount;
-			BigDecimal bd = new BigDecimal(new_CountOperateMoney); 
-			wuser.setCountOperateMoney(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}

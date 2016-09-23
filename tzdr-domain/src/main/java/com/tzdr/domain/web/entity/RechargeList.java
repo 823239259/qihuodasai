@@ -52,9 +52,20 @@ public class RechargeList   extends BaseEntity {
 	 * 来源：1:维胜 2：配股宝
 	 */
 	private Integer source=1;
+	private Integer isRecharge;
 	
 	
 	
+	
+
+	public Integer getIsRecharge() {
+		return isRecharge;
+	}
+
+	public void setIsRecharge(Integer isRecharge) {
+		this.isRecharge = isRecharge;
+	}
+
 	@Column(name="account", length=32)
 	public String getAccount() {
 		return account;
