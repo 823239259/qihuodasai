@@ -343,6 +343,7 @@ p{
 }
 .operateLogin label,input{
 	display: inline-block;
+	text-align: left;
 }
 .mui-input-group .mui-input-row{
 	height: 50px;
@@ -351,16 +352,23 @@ p{
 	color:#FFFFFF;
 	height: 50px;
 	line-height: 28px;
-	width: 100px;
+	width: 120px;
 	font-size: 14px;
 }
 .operateLogin input{
-	color:#656565;
+	color:#A9A9A9;
 	height: 50px;
 	line-height: 30px;
 	width: 110%;
+	text-align: left;
 }
-
+.mui-input-row select{
+	height: 50px;
+	line-height: 50px;
+	background-color: #2B2B2B;
+	color:#A9A9A9;
+	text-align: center;
+}
 .operateLogin button {
 	background-color: #fcc900;
 	border:none;
@@ -435,9 +443,6 @@ p{
 	height:26px;
 	background-color: #16a951;
 }
-/*.liContent span {
-	padding:0px 0px 15px 0px;
-}*/
 .dateTimeL{
 		width: 115px !important;
 }
@@ -570,6 +575,10 @@ input{
 	font-size: 14px
 }
 #tutorial{
-	color:#FFFFFF;
-	line-height: 43px;
+	vertical-align: middle;
+}
+#tutorial img{
+	width: 24px;
+	height: auto;
+	margin-top: 10px;
 }

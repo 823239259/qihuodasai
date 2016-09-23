@@ -23,6 +23,7 @@
 		var balance=null;
 		var drawHandleFee=null;
 		var SetDrawPwd=false;
+		var freeCashMoney = null;
 		mui.plusReady(function(){
 			  
     		//初始化监听头部和底部事件
@@ -60,14 +61,13 @@
     				return;
     			}
     		});
-    		
-    		
     		//去后台接口校验是否实名认证
 			mui.app_request("/user/getbalancerate",{
 				"businessType":4 
 			},function(result){
 				balance=document.getElementById("balance");
 				drawHandleFee=document.getElementById("drawHandleFee");
+				freeCashMoney = document.getElementById("freeCashMoney");
 				//是否实名
 				if(result.data.isCertification){
 					Certification=true;
@@ -82,6 +82,11 @@
 					drawHandleFee.innerHTML=result.data.drawHandleFee;
 				}else{
 					drawHandleFee.innerHTML="0.00";
+				}
+				if(!mui.isnull(result.data.operateMoney)){
+					freeCashMoney.innerHTML=result.data.operateMoney;
+				}else{
+					freeCashMoney.innerHTML="0.00";
 				}
 				//是否设置了提现密码
 				if(result.data.isSetDrawPwd){
@@ -102,6 +107,30 @@
 		
 		function drawMoney(){
 			var drawmoney=document.getElementById("drawmoney").value;
+			if(mui.isnull(drawmoney)){
+				document.getElementById("drawmoney").value="";
+				mui.toast("不能输入非法字符");
+				return;
+			}
+			if(drawmoney > parseFloat($("#balance").text())){
+				mui.toast("账户余额不足");
+				return;
+			}
+			mui.app_request("user/withdraw/drawFee",{
+				"money":drawmoney
+			},function(result){
+				var message = result.message;
+				$("#drawHandleFee").text(message);
+				if(!isNaN(message)){
+					console.log("45");
+					$("#draw_time").text(drawmoney - message);
+				}
+				return;
+			},function(result){
+				mui.toast(result.message);
+				return;
+			}) 
+			/*var drawmoney=document.getElementById("drawmoney").value;
 			var balance=document.getElementById("balance").innerHTML;
 			var drawHandleFee=document.getElementById("drawHandleFee");
 			
@@ -121,22 +150,15 @@
 				document.getElementById("draw_time").innerHTML="0";
 				return;
 			}
-			
-			
 			var draw_time= balance - drawmoney ;
-			
 			var iscould= draw_time >= 0 ? true : false;
 			if(iscould){
-				if(drawmoney>=5000){
-					drawHandleFee.innerHTML="0.00";
-				}
-				
+				drawHandleFee.innerHTML=tzdr.moneyUtils.decimal(drawmoney*0.01,2);
 				document.getElementById("draw_time").innerHTML=tzdr.moneyUtils.decimal(drawmoney-drawHandleFee.innerHTML,2);
-				
 			}else{
 				mui.toast("余额不足，请充值！");
 				return;
-			}
+			}*/
 			
 		};
 		
@@ -269,7 +291,6 @@
 				
 			})
 			
-			
 		};
 		
 	</script>
@@ -303,6 +324,9 @@
 				<label>账户余额</label>
 				<span><i id="balance"></i>元</span>
 			</li>
+		</ul>	
+		<p id="freeMoney"><span>累计免提现手续费金额为：</span><span class="freeCashMoneyColor"><i id="freeCashMoney">0.00</i>元</span></p>	
+		<ul class="mui-table-view aw_withlist">	
 			<li class="mui-table-view-cell">
 				<label>提现金额</label>
 				<span>元</span>
@@ -316,8 +340,9 @@
 				<label>实际到账</label>
 				<span><i id="draw_time"></i>元</span>
 			</li>
-		</ul>			
-		<ul class="mui-table-view aw_withpassword">
+		<!--</ul>-->
+		
+		<!--<ul class="mui-table-view aw_withpassword">-->
 			<li class="mui-table-view-cell">		 		
 				<!--<a class="mui-navigate-right" href="javascript:void(0);">-->
 					<div class="mui-input-row mui-password">
@@ -329,6 +354,10 @@
 					<b class="aw_withpasslink" id="drawPage"></b>-->
 				<!--</a>-->
 			</li>
+			<!--<li class="mui-table-view-cell">		 		
+				<label>免费提现金额</label>
+					<span><i >123</i>元</span>
+			</li>-->
 			<!--<li class="mui-table-view-cell" id="changePwd">		 		
 				<a class="mui-navigate-right" href="javascript:void(0);">
 					<label>修改提现密码</label>
@@ -337,15 +366,28 @@
 				</a>
 			</li>-->
 		</ul>
+		<!--<input type="text" oninput="insertContent()" id="content1" />
+		<span id="content"></span>-->
 		<a id="modifyPassword">设置/修改提现密码</a>
 		<div class="ac_btn">
 			<button id="drawmoneysub" type="button" class="mui-btn mui-btn-block lg-btnlogin">确认提现</button>								
-		</div>			
+		</div>	
+		
 		<div class="mui-content-padded">
 			<h5>温馨提示：</h5>
-			<p>1、提现金额在5000元以下，将收取银行手续费5元；5000元以上，不收取手续费。</p>
-			<p>2、目前每个用户每天只能提现5笔。</p>
+			<p>1、到账时间：工作日09：00——16:30申请，24小时内到账，最快5分钟到账。其余时间申请，将在下一个工作日到账。</p>
+			<p>2、提现手续费 ：</p>
+			<p class="bottomTip">1%（适用于充值后，未实际操盘用户）。</p>
+			<p class="bottomTip">0元（适用于操盘用户提现）。</p>
 		</div>
 	</div>
+	<script>
+		
+//		function insertContent(){
+//			
+//			var s=document.getElementById("content1").value;
+//			document.getElementById("content").innerText=s;
+//		}
+	</script>
 </body>
 </html>
