@@ -305,7 +305,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
 .ap_main .ap_choosetitle {padding: 0 10px; font-size: 17px; height: 20px; line-height: 20px; color: #333; margin: 10px 0; overflow: hidden;}
-.ap_main .ap_choosetitle b { font-weight: normal; font-size: 14px; float: left;height: 20px; line-height: 20px;}
+.ap_main .ap_choosetitle b { font-weight: normal; font-size: 13px; float: left;height: 20px; line-height: 20px;}
 .ap_main .ap_choosetitle span { vertical-align: middle; float: left; height: 20px; line-height: 20px;}
 .ap_main .mui-grid-9 { background: none;}
 .ap_main .mui-grid-9 .mui-table-view-cell { padding: 15px 0; border:1px solid #989898; background: #fff; width: 23%; margin: 0 1% 15px; border-radius: 5px;}

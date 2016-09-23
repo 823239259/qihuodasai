@@ -27,17 +27,17 @@
 		<form  class="mui-input-group blackBg">
 			<div class="mui-input-row">
 				<label>选择操盘账号</label>
-				<select class="accountSelect">
+				<select class="accountSelect mui-btn mui-btn-block">
 					<option class="mui-selected" id="checkContent" value="test1">请选择操盘账号</option>
 				</select>
 			</div>
 			<div class="mui-input-row" id="userAcount">
 				<label>操盘账号</label>
-				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您操盘账号" >
+				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您的操盘账号" >
 			</div>
 			<div class="mui-input-row mui-password">
 				<label>登录密码</label>
-				<input id="password" type="password" class="mui-input-password" placeholder="请输入您账号密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+				<input id="password" type="password" class="mui-input-password" placeholder="请输入您的账号密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 			</div>	
 		</form>
 		<div class="mui-content-padded">
@@ -52,7 +52,8 @@
 		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 				
 				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
-			</div>
+		
+		</div>
 	</div>
 		<script type="text/javascript">
 			mui.init();
@@ -78,7 +79,6 @@
 					$("#checkContent").text("其它");
 				}else{
 					mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
-					console.log(JSON.stringify(result));
 					var data=result.data;
 					var Len=data.length;
 					for(var i=0;i<=Len;i++){
@@ -94,7 +94,7 @@
 					};
 					
 				},function(result){
-					console.log(JSON.stringify(result));
+//					console.log(JSON.stringify(result));
 				});
 				}
 				
@@ -102,14 +102,12 @@
 					
 				}else{
 					$("#account").attr("disabled","disabled");
-//					$("#password").attr("readonly","readonly");
 					$("#userAcount").css("display","none");
 				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
 					if(val=="test"){
 						$("#account").removeAttr("disabled");
-//						$("#password").removeAttr("readonly");
 						$("#account").val("");
 						$("#password").val("");
 						$("#userAcount").css("display","block");
@@ -119,11 +117,11 @@
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
 								$("#account").val(val);
+							;
 								$("#password").val(user[i].tranPassword);
 							}
 						}
 						$("#account").attr("disabled","disabled");
-//						$("#password").attr("readonly","readonly");
 						$("#userAcount").css("display","none");
 					}
 				})

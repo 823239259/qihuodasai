@@ -359,8 +359,9 @@ p{
 	color:#A9A9A9;
 	height: 50px;
 	line-height: 30px;
-	width: 110%;
+	width: 59% !important;
 	text-align: left;
+	border:1px solid red;
 }
 .mui-input-row select{
 	height: 50px;
@@ -587,4 +588,7 @@ input{
 	width: 24px;
 	height: auto;
 	margin-top: 10px;
+}
+.accountSelect{
+	width: 60% !important;
 }
