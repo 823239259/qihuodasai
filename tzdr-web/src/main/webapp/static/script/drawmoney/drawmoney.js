@@ -214,7 +214,7 @@ $(document).ready(function(){
 					data:{
 						money : _money
 					},
-					success:function(result){
+					success:function(result){	
 						var message = result.message;
 						if(result.success){
 							$("#handle-fee").text(message);
