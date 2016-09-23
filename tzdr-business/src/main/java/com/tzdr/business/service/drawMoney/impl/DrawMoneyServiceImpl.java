@@ -679,7 +679,7 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 		Double dmoney = Double.valueOf(money);
 		// 提现手续费
 		Double fee = this.drawFee(user.getId(), dmoney);
-		String handleFeeStr = fee == null || (fee+dmoney) > user.getAvlBal() ? "0.00" : String.valueOf(fee);//CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
+		String handleFeeStr = (fee == null || dmoney > user.getAvlBal()) ? "0.00" : String.valueOf(fee);//CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
 		if(handleFeeStr.equals("0.00")){
 			return null;
 		}
