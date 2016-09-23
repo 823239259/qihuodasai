@@ -57,7 +57,8 @@ $(document).ready(function() {
 function checkNotice() {
 	var noticeid = getCookie("noticeid");
 	var loaclNoticeid = $("#noticeid").val();
-	if(noticeid === loaclNoticeid) {
+	$(".notice-fixed").hide();
+	if(noticeid == loaclNoticeid) {
 		$(".site-notice").remove();
 	} else {
 		$(".notice-fixed").fadeIn("slow");
@@ -65,11 +66,17 @@ function checkNotice() {
 }
  // 关闭公告
 function closeNotice() {
-	$(".site-notice").remove();
 	// cookie记录公告已删除
-	addCookie("noticeid", $("#noticeid").val());
+	setCookie("noticeid", $("#noticeid").val());
+	$(".site-notice").remove();
 }
-
+function setCookie(name, value) {
+	var Days = 30;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days*24*60*60*1000);
+	document.cookie = name + "=" + escape(value) + ";path=/;expires="
+			+ exp.toGMTString();
+}
 function addCookie(objName, objValue){
 	if(objValue==""){
 		var Num="";

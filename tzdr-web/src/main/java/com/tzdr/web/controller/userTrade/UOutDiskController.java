@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hundsun.t2sdk.common.util.CollectionUtils;
 import com.hundsun.t2sdk.common.util.UUID;
@@ -81,7 +82,7 @@ public class UOutDiskController {
 	 * @return
 	 */
 	@RequestMapping(value = "/pay")
-	public String pay(ModelMap modelMap, BigDecimal traderBondAttr, HttpServletRequest request) {
+	public String pay(HttpServletResponse response,ModelMap modelMap, BigDecimal traderBondAttr, HttpServletRequest request,RedirectAttributes attr) {
 		Object object = request.getSession().getAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION);
 		UserSessionBean userSessionBean = (UserSessionBean) object;
 		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();
@@ -123,7 +124,9 @@ public class UOutDiskController {
 			modelMap.put("payable", payable);
 			// 代金券
 			modelMap.put("voucher", voucher);
-			request.getSession(false).setAttribute("tokenTzdr", UUID.randomUUID());
+			Object uuid = UUID.randomUUID();
+			request.getSession(false).setAttribute("tokenTzdr", uuid);
+			CookiesUtil.addCookie(response, "tokenTzdr", String.valueOf(uuid), 600);
 			return ViewConstants.OutDiskJsp.PAY;
 		}
 	}
@@ -177,31 +180,22 @@ public class UOutDiskController {
 		CookiesUtil.delCookies("lever", response);
 		CookiesUtil.delCookies("payurl", response);
 		CookiesUtil.delCookies("vocherid", response);
+		CookiesUtil.delCookies("tokenTzdr", response);
 		log.info("清除支付cookie数据成功");
 	}
-	/**
-	 * 支付成功页面
-	 * 
-	 * @param modelMap
-	 * @param traderBondAttr
-	 * @param tokenTzdr
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
+	
 	@RequestMapping(value = "/paySuccessful")
-	public String paySuccessful(ModelMap modelMap, BigDecimal traderBondAttr, String tokenTzdr, String voucherId,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	public String paySuccessful(ModelMap modelMap, BigDecimal inputTraderBond, String tokenTzdr, String voucherId,
+			HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception {
+		BigDecimal traderBondAttr = inputTraderBond;
 		if (traderBondAttr == null) {
-			this.pay(modelMap, traderBondAttr, request);
+			this.pay(response,modelMap, traderBondAttr, request,attr);
 			return ViewConstants.OutDiskJsp.PAY;
 		}
 		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();
 		List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBondAttr);
 		if (CollectionUtils.isEmpty(outDiskParametersList)) {
-			this.pay(modelMap, traderBondAttr, request);
+			this.pay(response,modelMap, traderBondAttr, request,attr);
 			return ViewConstants.OutDiskJsp.PAY;
 		} else {
 			OutDiskParameters outDiskParameters = outDiskParametersList.get(0);
@@ -212,12 +206,12 @@ public class UOutDiskController {
 				UserSessionBean userSessionBean = (UserSessionBean) object;
 				uid = userSessionBean.getId();
 			} else {
-				this.pay(modelMap, traderBondAttr, request);
+				this.pay(response,modelMap, traderBondAttr, request,attr);
 				return ViewConstants.OutDiskJsp.PAY;
 			}
 
 			if (uid == null) {
-				this.pay(modelMap, traderBondAttr, request);
+				this.pay(response,modelMap, traderBondAttr, request,attr);
 				return ViewConstants.OutDiskJsp.PAY;
 			}
 
@@ -305,7 +299,7 @@ public class UOutDiskController {
 					}
 				}
 			}
-			this.pay(modelMap, traderBondAttr, request);
+			this.pay(response,modelMap, traderBondAttr, request,attr);
 			return ViewConstants.OutDiskJsp.PAY;
 		}
 	}

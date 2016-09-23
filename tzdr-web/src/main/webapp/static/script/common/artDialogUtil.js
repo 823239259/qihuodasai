@@ -82,6 +82,13 @@ function  showMsgDialog(title,content,time)
 	$(".aui_outer .aui_close").click(function(){
 		$(".aui_outer").removeAttr("style");
 	});
+    $(".aui_outer").css("position","fixed");
+    $(".aui_outer button").click(function(){
+        $(".aui_outer").removeAttr("style");
+    });
+    $(".aui_outer .aui_close").click(function(){
+        $(".aui_outer").removeAttr("style");
+    });
 }
 function showMsgDialogRestPassWordLoadLoginUrl(title,content,time){
 	var dialog = art.dialog({
