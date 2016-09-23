@@ -28,7 +28,7 @@
 			<div class="mui-input-row">
 				<label>选择操盘账号</label>
 				<select class="accountSelect">
-					<option class="mui-selected" id="checkContent">请选择操盘账号</option>
+					<option class="mui-selected" id="checkContent" value="test1">请选择操盘账号</option>
 				</select>
 			</div>
 			<div class="mui-input-row" id="userAcount">
@@ -81,7 +81,6 @@
 					console.log(JSON.stringify(result));
 					var data=result.data;
 					var Len=data.length;
-					console.log(Len);
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
 							$(".accountSelect").append("<option value='test'>其它</option>");
@@ -103,17 +102,19 @@
 					
 				}else{
 					$("#account").attr("disabled","disabled");
-					$("#password").attr("readonly","readonly");
+//					$("#password").attr("readonly","readonly");
 					$("#userAcount").css("display","none");
 				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
 					if(val=="test"){
 						$("#account").removeAttr("disabled");
-						$("#password").removeAttr("readonly");
+//						$("#password").removeAttr("readonly");
 						$("#account").val("");
 						$("#password").val("");
 						$("#userAcount").css("display","block");
+					}else if(val=="test1"){
+						$("#password").val("");
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
@@ -122,7 +123,7 @@
 							}
 						}
 						$("#account").attr("disabled","disabled");
-						$("#password").attr("readonly","readonly");
+//						$("#password").attr("readonly","readonly");
 						$("#userAcount").css("display","none");
 					}
 				})
