@@ -71,7 +71,7 @@
 			 <div class="tabcon">
 				 <div class="subtab">
 					<form id="goNetbank" action="" method="get" target="_blank"  >
-					<div class="uc_olmoney" style="padding-bottom: 0;">
+					<div class="uc_olmoney">
 						<!-- <h3 class="uc_pbtitle">填写充值金额</h3> -->
 						<ul class="uc_pblist">
 							<li><label>账户余额：</label><span><i>
@@ -113,7 +113,7 @@
 			</div> --%>
 			<div class="subtab">
 				<form id="weixinbank" action="" method="post" target="_blank">
-					<div class="uc_olmoney">
+					<div class="uc_olmoney" style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
 						<ul class="uc_pblist">
 							<li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
 							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
@@ -122,9 +122,12 @@
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
 						</ul>
 					</div>
-					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;">
-						<img src="${ctx}/static/images/weixin.png" style="float: left;">
-						<div style="float: left;">
+					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;margin-top: 40px;">
+						<p style="float: left; width: 210px; color:#333;text-align: center;">
+							<img src="${ctx}/static/images/weixinpay.png"></br>
+							<span style="display: block; margin-top: 10px;">手机微信扫一扫，安全，快捷到账！</span>
+						</p>
+						<div style="float: left;margin-left: 30px;">
 							<h3>温馨提示：</h3>
 							<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
 						</div>
