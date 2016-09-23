@@ -8,7 +8,7 @@
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "2.0.3",/*应用版本名称*/
-		"code": "20160918"
+		"code": "20160922"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -1000,7 +1000,8 @@
 					"js/common.config.js",
 					"js/jquery-1.11.3.js",
 					"js/jquery.base64.js",
-					"js/util.js"
+					"js/util.js",
+					"images/newUser.png"
 				],
 				"refer": [
 					"home.html",
