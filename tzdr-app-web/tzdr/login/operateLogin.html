@@ -27,7 +27,7 @@
 			<div class="mui-input-row">
 				<label>选择操盘账号</label>
 				<select class="accountSelect">
-					<option class="mui-selected">请选择操盘账号</option>
+					<option class="mui-selected" id="checkContent">请选择操盘账号</option>
 				</select>
 			</div>
 			<div class="mui-input-row" id="userAcount">
@@ -71,15 +71,19 @@
 				 * 选择账号
 				 */
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
+//				console.log(user_mobile)
 				var user=[];
-				mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
+				if(user_mobile==null){
+					$("#checkContent").text("其它");
+				}else{
+					mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
 					console.log(JSON.stringify(result));
 					var data=result.data;
 					var Len=data.length;
 					console.log(Len);
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
-							$(".accountSelect").append("<option value='test'>其他</option>");
+							$(".accountSelect").append("<option value='test'>其它</option>");
 						}else{
 							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
 							var acount={};
@@ -92,6 +96,8 @@
 				},function(result){
 					console.log(JSON.stringify(result));
 				});
+				}
+				
 				if(user_mobile==null || user_mobile==undefined || user_mobile==""){
 					
 				}else{
@@ -119,7 +125,11 @@
 						$("#userAcount").css("display","none");
 					}
 				})
-				$("#account").val(endLoginAccount == null?"":endLoginAccount);
+				var accountEnd = endLoginAccount == null?"":endLoginAccount;
+				if(accountEnd != ""){
+					$("#userAcount").show();
+				}
+				$("#account").val(accountEnd);
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
 				/**
 				 * 登录超时处理 
