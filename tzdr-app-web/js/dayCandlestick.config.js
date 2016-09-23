@@ -18,7 +18,7 @@
         			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
 		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [parameters[i].DateTimeStamp,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
+		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
         	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);

@@ -63,12 +63,15 @@ mui.plusReady(function(){
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
+	            console.log("56");
 			}else if(historyParam.Parameters[0].HisQuoteType==1){
 				handleTime(historyParam);
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
+	            
 			}else if(historyParam.Parameters[0].HisQuoteType==1440){
+				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
 			}

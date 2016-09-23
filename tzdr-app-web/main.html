@@ -179,17 +179,20 @@
 			dataVersion={"Android":{
 				version:"2.0.2",
 				bigUrl:"http://api.vs.com/upload/H50967E1D_.apk",
-				littleUrl:"http://api.vs.com/upload/H50967E1D.wgt"},
+				littleUrl:"http://api.vs.com/upload/H50967E1D.wgt",
+				isForceUpdate:false//不强制升级
+				},
 				"iOS":{
 				version:"2.0.1",
 				bigUrl:"https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8",
+				isForceUpdate:true,
 				}
 			}
 			if(plus.os.name=="Android"){
 					//最新版本号
 					var newVerAndroid = dataVersion.Android.version;
 					//是否强制升级
-					var isForceUpdate = false;
+					var isForceUpdate = dataVersion.Android;
 					if(mui.isnull(newVerAndroid)||!(wgtVer&&newVerAndroid&&(wgtVer!=newVerAndroid))){  //没有最新版本
 						_callback();
 						if (mui.cacheUser.isLogin()){
@@ -211,6 +214,7 @@
 								var _download_url = dataVersion.Android.bigUrl;
 									plus.runtime.openURL(_download_url);
 							}, "软件升级", "立即下载" );
+							
 						return;
 					}else{
 						if(newSubAndroid<wgtVerSubAndroid){

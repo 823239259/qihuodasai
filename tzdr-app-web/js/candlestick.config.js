@@ -21,8 +21,8 @@
         			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
 		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
-		            console.log(parameters[i].DateTimeStamp);
-		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
+//		            console.log(parameters[i].DateTimeStamp);
+		            var sgData = [str2,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
         	for(var i=0;i<rawData.length-1;i++){
