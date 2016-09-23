@@ -125,4 +125,14 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+    
+    <!--  多数据源拦截配置-->
+    <bean id = "dataSourceAspect" class = "com.tzdr.cpp.DataSourceAspect"/>
+    <aop:config>
+		<aop:aspect ref="dataSourceAspect">
+			<!-- 拦截所有service方法 -->
+			<aop:pointcut id="dataSourcePointcut" expression="execution(* com.tzdr.business.service.*.*(..))"/>
+			<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
+		</aop:aspect>
+	</aop:config>
 </beans>
