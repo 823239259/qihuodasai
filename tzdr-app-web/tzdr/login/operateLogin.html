@@ -150,32 +150,32 @@
 				var account = null;
 				var pwd = null;
 				document.getElementById("regLogin").addEventListener("tap",function(){
-					var url = "";
-					var urlId = "";
-					switch(commdityNo){
-						//A50
-						case  "CN":
-								url = "../future/cn.html";
-								urlId = "cn";
-							break;
-						//恒指
-						case  "HSI":
-								url = "../future/hsi.html";
-								urlId = "hsi";
-							break;
-						//原油
-						case  "CL":
-								url = "../future/cl.html";
-								urlId = "cl";
-							break;
-						default:
-								url = "../future/cp.html";
-								urlId = "cp";
-							break;
-					}
+//					var url = "";
+//					var urlId = "";
+//					switch(commdityNo){
+//						//A50
+//						case  "CN":
+//								url = "../future/cn.html";
+//								urlId = "cn";
+//							break;
+//						//恒指
+//						case  "HSI":
+//								url = "../future/hsi.html";
+//								urlId = "hsi";
+//							break;
+//						//原油
+//						case  "CL":
+//								url = "../future/cl.html";
+//								urlId = "cl";
+//							break;
+//						default:
+//								url = "../future/cp.html";
+//								urlId = "cp";
+//							break;
+//					}
 					mui.openWindow({
-									url:url,
-									id:urlId
+									url:"../future/cp.html",
+									id:"cp"
 								});
 				});
 				document.getElementById("forgetPassword").addEventListener("tap",function(){

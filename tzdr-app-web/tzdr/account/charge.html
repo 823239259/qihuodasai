@@ -44,11 +44,13 @@
 		<div class="mui-content ac_charge">
 			<div id="slider" class="mui-slider">
 				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item mui-active" id="onlinePay">在线网银</a>
+					<a class="mui-control-item mui-active" id="onlinePay" href="#item1mobile">在线网银</a>
 					<!--<a class="mui-control-item" id="alipayApp">支付宝充值</a>-->
-					<a class="mui-control-item" id="bankPay" >银行转账</a>
+					<a class="mui-control-item" id="weixinPay" href="#item2mobile" >微信支付</a>
+					<a class="mui-control-item" id="bankPay" href="#item3mobile">银行转账</a>
+					
 				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
 				<div class="mui-slider-group" id="itembox">
 					<div id="item1mobile" class="mui-slider-item mui-control-content ">
 						<div id="" class="mui-scroll-wrapper ac_online">
@@ -140,6 +142,38 @@
 							</div>
 						</div>
 					</div>-->
+					<div id="item2mobile" class="mui-slider-item mui-control-content ">
+						<div id="" class="mui-scroll-wrapper ac_online">
+							<div class="mui-scroll">
+								<ul id="list" class="mui-table-view mui-table-view-chevron">
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right" id="bindAlipay">
+										<label>绑定支付宝账号</label>
+										<b><span id="alipay_account">待绑定</span></b>
+									</a>
+								</li>
+							</ul>
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										<label>收款人支付宝账户</label>
+										<span>zhitoubao@126.com</span>
+									</li>
+									<li class="mui-table-view-cell">
+										<label>收款人账户名称</label>
+										<span>上海信闳投资管理有限公司</span>
+									</li>
+								</ul>
+								<div class="ac_btn">
+									<a href="javascript:void(0);" id="openappliy" class="mui-btn mui-btn-block lg-btnlogin">打开支付宝</a>
+								</div>
+								<div class="mui-content-padded">
+									<h5>温馨提示：</h5>
+									<p>1、若在该页面打开支付宝失败，您可以手动启动支付宝APP或者登录支付宝官网，选择转账到支付宝账户，手工输入信闳投资的收款支付宝账户，最终完成转账。</p>
+									<p>2、最快5分钟内到账，最晚下一个工作日09:15前到账。</p>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div id="item3mobile" class="mui-slider-item mui-control-content ac_bank">
 						<div id="" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
@@ -322,12 +356,15 @@
 //				document.getElementById("alipayApp").addEventListener("tap", function() {
 //					document.getElementById("alipayApp").href = "#item6mobile";
 //				});
-				document.getElementById("bankPay").addEventListener("tap", function() {
-					document.getElementById("bankPay").href = "#item3mobile";
-				});
-				document.getElementById("onlinePay").addEventListener("tap", function() {
-					document.getElementById("onlinePay").href = "#item1mobile";
-				});
+//				document.getElementById("bankPay").addEventListener("tap", function() {
+//					document.getElementById("bankPay").href = "#item3mobile";
+//				});
+//				document.getElementById("onlinePay").addEventListener("tap", function() {
+//					document.getElementById("onlinePay").href = "#item1mobile";
+//				});
+//				document.getElementById("weixinPay").addEventListener("tap", function() {
+//					document.getElementById("weixinPay").href = "#item2mobile";
+//				});
 				//添加充值金额文本框监听
 				document.getElementById("rechargeMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空

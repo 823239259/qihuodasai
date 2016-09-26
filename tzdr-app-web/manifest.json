@@ -812,7 +812,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/login/login.html"
+				],
 				"priority": 0
 			},
 			"tzdr/future/futurePaySuc.html": {
@@ -1086,7 +1088,8 @@
 					"tzdr/future/cn.html",
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/agree/tradingMarket.html",
-					"tzdr/future/hsi.html"
+					"tzdr/future/hsi.html",
+					"tzdr/future/cp.html"
 				],
 				"priority": 0
 			},
