@@ -54,17 +54,24 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
-
-//          console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
+//			console.log(JSON.stringify(historyParam.Parameters));
 			if(historyParam.Parameters[0].HisQuoteType==0){
 				handleTime(historyParam);
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
-	            processingCandlestickVolumeData(historyParam)
+	            processingCandlestickVolumeData(historyParam);
+	            console.log("56");
+			}else if(historyParam.Parameters[0].HisQuoteType==1){
+				handleTime(historyParam);
+				processingData(historyParam);
+	            handleVolumeChartData(historyParam);
+	            processingCandlestickVolumeData(historyParam);
+	            
 			}else if(historyParam.Parameters[0].HisQuoteType==1440){
+				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
 			}

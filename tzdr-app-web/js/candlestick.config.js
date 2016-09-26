@@ -10,7 +10,7 @@
     }
     function processingData(jsonData){
     		var parameters = jsonData.Parameters;
-    		console.log(JSON.stringify(jsonData));
+//  		console.log(JSON.stringify(jsonData));
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=rawData.length;
@@ -21,7 +21,8 @@
         			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
 		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [str2,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
+//		            console.log(parameters[i].DateTimeStamp);
+		            var sgData = [str2,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
         	for(var i=0;i<rawData.length-1;i++){
@@ -30,6 +31,7 @@
         		}
         	}
         	var newData=rawData.slice(-60);
+//      	console.log(newData);
         		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
@@ -155,26 +157,25 @@
         	}
         	CandlestickVolumeData.time=volumeTime.slice(-60);
         	CandlestickVolumeData.volume=volumeV.slice(-60);
-//      	console.log(CandlestickVolumeData.time);
-        	var option= CandlestickVolumeChartSetoption(CandlestickVolumeData);
+        	var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+        	CandlestickVolumeChart.group="group2";
         	if(firstTimeNum==0){
 		  			
 		  	}else{
-		  		CandlestickVolumeChart.setOption(option);
+		  		CandlestickVolumeChart.setOption(option1);
 		  	};
-		  	CandlestickVolumeChart.group="group2";
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(CandlestickVolumeChart != null){
 						setTimeout(function(){
 						 	CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option);
+							CandlestickVolumeChart.setOption(option1);
 		        			CandlestickVolumeChart.resize();	
 		        			firstTimeNum++;
 		        		},10);
 			    }
 		});
     };
-    function CandlestickVolumeChartSetoption(data){
+    function CandlestickVolumeChartSetoption1(data){
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
@@ -191,7 +192,7 @@
                },
 	          },
 	          legend: {
-	              data:['最新成交价']
+	              data:['']
 	          },
 	            toolbox: {
 	                show: false,
@@ -217,19 +218,19 @@
 			 yAxis: [
 			            {
 	                type : 'value',
-//	              name : '成交量(万)',
+	              name : '成交量(万)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
 		              },
 		              scale:true,
 	              axisLabel: {
-//	                  formatter: function (a) {
-//                      a = +a;
-//                      return isFinite(a)
-//                          ? echarts.format.addCommas(+a / 10000)
-//                          : '';
-//                  }
+	                  formatter: function (a) {
+	                      a = +a;
+	                      return isFinite(a)
+	                          ? echarts.format.addCommas(+a / 10000)
+	                          : '';
+	                  }
 	              },
 	                splitLine: {
 	                    show: true,
@@ -243,26 +244,6 @@
 	              {
 	                  name: '成交量',
 	                  type: 'bar',
-	//                 markLine: {
-	//		                data: [
-	//		                    {type: 'average', name: '平均值'},
-	//		                    [{
-	//		                        symbol: 'none',
-	//		                        x: '90%',
-	//		                        yAxis: 'max'
-	//		                    }, {
-	//		                        symbol: 'circle',
-	//		                        label: {
-	//		                            normal: {
-	//		                                position: 'start',
-	//		                                formatter: '最大值'
-	//		                            }
-	//		                        },
-	//		                        type: 'max',
-	//		                        name: '最高点'
-	//		                    }]
-	//		                ]
-	//		            },
 	                  data:CandlestickVolumeChartData.volume
 	              }
 	          ]

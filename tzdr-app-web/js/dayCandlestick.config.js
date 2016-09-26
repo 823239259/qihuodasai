@@ -18,7 +18,7 @@
         			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
 		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [parameters[i].DateTimeStamp,parseFloat(openPrice).toFixed(doSize),parseFloat(closePrice).toFixed(doSize),parseFloat(chaPrice).toFixed(doSize),"",parseFloat(parameters[i].LowPrice).toFixed(doSize),parseFloat(parameters[i].HighPrice).toFixed(doSize),"","","-"];
+		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
         	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
@@ -70,11 +70,12 @@
 		               x: 43,
 		               y:20,
 		               x2:20,
-		               y2:20
+		               y2:5
 		           },
 		    xAxis: {
 		        type: 'category',
 		        data: dates,
+		        show:false,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 		    },
 		    yAxis: {
@@ -169,7 +170,7 @@
 	             animation: false,
 				 grid: {
 	               x: 40,
-	               y:20,
+	               y:30,
 	               x2:20,
 	               y2:20
 	           },
@@ -187,20 +188,20 @@
 			 yAxis: [
 			            {
 	                type : 'value',
-	//              name : '成交量(万)',
+	              name : '成交量(万)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
 		              },
 		              scale:true,
-	//              axisLabel: {
-	//                  formatter: function (a) {
-	//                      a = +a;
-	//                      return isFinite(a)
-	//                          ? echarts.format.addCommas(+a / 1000)
-	//                          : '';
-	//                  }
-	//              },
+	              axisLabel: {
+	                  formatter: function (a) {
+	                      a = +a;
+	                      return isFinite(a)
+	                          ? echarts.format.addCommas(+a / 10000)
+	                          : '';
+	                  }
+	              },
 	                splitLine: {
 	                    show: true,
 	                    lineStyle: {
@@ -213,26 +214,6 @@
 	              {
 	                  name: '成交量',
 	                  type: 'bar',
-	//                 markLine: {
-	//		                data: [
-	//		                    {type: 'average', name: '平均值'},
-	//		                    [{
-	//		                        symbol: 'none',
-	//		                        x: '90%',
-	//		                        yAxis: 'max'
-	//		                    }, {
-	//		                        symbol: 'circle',
-	//		                        label: {
-	//		                            normal: {
-	//		                                position: 'start',
-	//		                                formatter: '最大值'
-	//		                            }
-	//		                        },
-	//		                        type: 'max',
-	//		                        name: '最高点'
-	//		                    }]
-	//		                ]
-	//		            },
 	                  data:dayCandlestickVolumeData.volume
 	              }
 	          ]

@@ -476,7 +476,7 @@
 					"images/bank/ccb.png",
 					"images/bank/psbc.png",
 					"images/bank/cmb.png",
-					"images/bank/abc.png",
+					"images/bank/spdb.png",
 					"images/bank/cmbc.png"
 				],
 				"refer": [
@@ -1039,7 +1039,8 @@
 					"js/common.config.js",
 					"js/chart.config.js",
 					"js/timechart.config.js",
-					"js/candlestick.config.js"
+					"js/candlestick.config.js",
+					"js/dayCandlestick.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
