@@ -211,6 +211,9 @@ p{
 .ProductInformationLeft p{
 	font-size: 14px;
 }
+.ProductInformationLeft select{
+	
+}
 .ProductInformationRight{
 	overflow: hidden;
 }
