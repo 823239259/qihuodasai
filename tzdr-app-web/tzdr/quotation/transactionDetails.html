@@ -19,13 +19,13 @@
 		</header>
 		<div class="mui-content">
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
+					<a class="mui-control-item " id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">K线</a>
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
-					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
+					<a class="mui-control-item mui-active" id="TradingCenter"  >交易中心</a>
 					</div>
-					<div style="width: 100%;" id="tradeContentId">
-						<div class="mui-control-content mui-active" id="TimeChart1">
+				<div style="width: 100%;" id="tradeContentId">
+						<div class="mui-control-content" id="TimeChart1">
 								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
 								</div>
 								<div id="timeChart" style="width:100%;height:250px;"></div>
@@ -43,7 +43,7 @@
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:250px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content" id="trade">
+						<div class="mui-control-content mui-active" id="trade">
 							<div class="Assets">
 								<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 								<p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -112,7 +112,7 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 			<div class="buttomFix">
 				<div class="buttomFixLeft mui-col-xs-6">
 					<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
