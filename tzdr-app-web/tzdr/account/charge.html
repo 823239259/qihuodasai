@@ -487,14 +487,25 @@
 				}
 			}
 
+			/*我要充值--选择银行*/
+			$(function(){
+				var bank_icon = $("#item3mobile .ac_banklist");
+				bank_icon.click(function(){
+					var this_ = $(this).index();
+					$('input:radio[name="back_icon"]').eq(this_ -1).prop("checked",true);
+				});
+			});
+			
 			function banksPay() {
-				var abbreviation = document.getElementById("abbreviation").value;
+				//var abbreviation = document.getElementById("abbreviation").value;
 				var bank_money = document.getElementById("bank_money").value;
 				var serialnum = document.getElementById("serialnum").value;
-				if(abbreviation == -1) {
+				var abbreviation=$('input:radio[name="back_icon"]:checked').val();
+				/*alert(abbreviation);*/
+				/*if(abbreviation == -1) {
 					mui.toast("请选择您转账的银行");
 					return;
-				}
+				}*/
 				if(mui.isnull(bank_money)) {
 					mui.toast("转账的金额不能为空且不能输入非法字符！");
 					return;
