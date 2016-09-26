@@ -260,7 +260,8 @@
 					"images/1.0.png",
 					"images/2.png",
 					"images/3.png",
-					"images/0.png"
+					"images/0.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/account/account.html",
