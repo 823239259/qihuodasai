@@ -38,7 +38,7 @@
 		</a>
 	</nav>
 	<div class="mui-content">
-		<div id="fisrtLlist"><span id="fisrtLlistSpan">合约名称</span><span>最新价</span><span>成交量</span><span>涨跌幅</span></div>
+		<div id="fisrtLlist"><span>合约名称</span><span>最新价</span><span>成交量</span><span>涨跌幅</span></div>
 		<div class="productList">
 			<a class='openPage'>
 			<div class="productContentLeft" class="mui-col-xs-3">
@@ -217,7 +217,7 @@
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
 //					         	console.log(JSON.stringify(MoreData));
-//					        	insertData1(MoreData);
+					        	insertData1(MoreData);
 					        
 					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data).Parameters;

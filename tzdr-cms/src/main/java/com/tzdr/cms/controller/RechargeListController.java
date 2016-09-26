@@ -484,6 +484,7 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 			rechargeList.setSysType(sysType);
 			rechargeList.setNo(no);
 			rechargeList.setType("5");
+			rechargeList.setIsRecharge(1);
 			this.rechargeListService.save(rechargeList);
 			// 状态
 			rechargeList.setStatus(new Integer(status));

@@ -150,6 +150,16 @@ public class DrawList extends BaseCrudEntity {
 	//初审人
 	private String firstAuditUser;
 	private Long firstAuditTime;
+	private Double operateMoney;
+	
+	public Double getOperateMoney() {
+		return operateMoney;
+	}
+
+	public void setOperateMoney(Double operateMoney) {
+		this.operateMoney = operateMoney;
+	}
+
 	public Long getFirstAuditTime() {
 		return firstAuditTime;
 	}

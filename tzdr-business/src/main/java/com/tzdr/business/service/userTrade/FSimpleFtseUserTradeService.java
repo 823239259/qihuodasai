@@ -26,7 +26,7 @@ import com.tzdr.domain.web.entity.future.FSimpleCoupon;
  * @version 2.0
  * 2015年9月16日下午14:33:13
  */
-public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUserTrade> {
+public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUserTrade> { 
 	
 	/**
 	 * 
@@ -198,4 +198,8 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	 * @return
 	 */
 	public List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime);
+	
+	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid);
+	
+	
 }

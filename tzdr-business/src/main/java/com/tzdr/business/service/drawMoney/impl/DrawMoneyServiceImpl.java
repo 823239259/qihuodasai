@@ -1,5 +1,6 @@
 package com.tzdr.business.service.drawMoney.impl;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,10 +46,12 @@ import com.tzdr.common.utils.BigDecimalUtils;
 import com.tzdr.common.utils.DateUtils;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.StringCodeUtils;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.dao.withdrawal.WithdrawalDao;
+import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.pgb.entity.PGBPaymentSupportBank;
 import com.tzdr.domain.vo.UserTradeCmsVo;
 import com.tzdr.domain.web.entity.DrawList;
@@ -466,6 +469,9 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 					double funds = wuser.getFund();
 					double frz = BigDecimalUtils.sub(frzbal, drawList.getMoney());
 					double userfunds = BigDecimalUtils.sub(funds, drawList.getMoney());
+					Double countOperateMoney = wuser.getCountOperateMoney();
+					Double countNoOperateMoney = drawList.getOperateMoney();
+					wuser.setCountOperateMoney((countOperateMoney == null ? 0.00 : countOperateMoney) + (countNoOperateMoney == null ? 0.00 : countNoOperateMoney));
 					wuser.setFund(userfunds);// 总资金加回去
 					wuser.setFrzBal(frz);// 冻结金额减少
 					// wuser.setAvlBal(BigDecimalUtils.add(wuser.getAvlBal(),drawList.getMoney()));//账号余额加入
@@ -617,6 +623,9 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			double funds = wuser.getFund();
 			double frz = BigDecimalUtils.sub(frzbal, drawList.getMoney());
 			double userfunds = BigDecimalUtils.sub(funds, drawList.getMoney());
+			Double countOperateMoney = wuser.getCountOperateMoney();
+			Double countNoOperateMoney = drawList.getOperateMoney();
+			wuser.setCountOperateMoney((countOperateMoney == null ? 0.00 : countOperateMoney) + (countNoOperateMoney == null ? 0.00 : countNoOperateMoney));
 			wuser.setFund(userfunds);// 总资金加回去
 			wuser.setFrzBal(frz);// 冻结金额减少
 			wuser.setAvlBal(BigDecimalUtils.add(wuser.getAvlBal(), drawList.getMoney()));// 账号余额加入
@@ -666,10 +675,15 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			maxAuditMoney = linedata.getMinmoney();
 			auditMoneyRang = maxAuditMoney + "--" + linedata.getMaxmoney();
 		}
-
+		// 提现金额
+		Double dmoney = Double.valueOf(money);
 		// 提现手续费
-		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
-		// 币币支付手续费另算
+		Double fee = this.drawFee(user.getId(), dmoney);
+		String handleFeeStr = fee == null || (dmoney) > user.getAvlBal() ? "0.00" : String.valueOf(fee);//CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
+		if(handleFeeStr.equals("0.00")){
+			return null;
+		}
+		/*// 币币支付手续费另算
 		if (withdrawSetting == Constant.PaymentChannel.BB_PAY) {
 			handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,
 					DataDicKeyConstants.BB_FEE);
@@ -678,10 +692,8 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 		if (withdrawSetting == Constant.PaymentChannel.EASE_PAY) {
 			handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE,
 					DataDicKeyConstants.PAYEASE_FEE);
-		}
+		}*/
 		Double handleFee = 0.00;
-		// 提现金额
-		Double dmoney = Double.valueOf(money);
 		if (!StringUtil.isBlank(handleFeeStr)) {
 			handleFee = Double.valueOf(handleFeeStr);
 		}
@@ -724,6 +736,18 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			drawList.setIsAudit(1);
 			drawList.setRemark("调用提现接口数据插入");
 		}
+		Double operateMoney = user.getCountOperateMoney();
+		operateMoney = operateMoney == null ? 0: operateMoney;
+		Double chaMoney = BigDecimalUtils.sub(operateMoney,dmoney);
+		if(chaMoney > 0){
+			user.setCountOperateMoney(chaMoney);
+			drawList.setOperateMoney(dmoney);
+		}else{
+			user.setCountOperateMoney(0.00);
+		}
+		if(operateMoney > 0 && chaMoney <= 0){
+			drawList.setOperateMoney(operateMoney);
+		}
 		getEntityDao().save(drawList);
 		// 更新user的冻结金额
 		Double frzBal = user.getFrzBal() == null ? 0 : user.getFrzBal();// 冻结金额
@@ -744,15 +768,18 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 		fund.setFreeze(newfrzbal);// 冻结金额
 		fund.setAmount(avlBal);
 		fund.setPayStatus((short) 1);
+		fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss") + "提现" + drawList.getMoney()
+			+ "元；提现手续费" + handleFee + "元；" + "实际到账金额" + BigDecimalUtils.subRound(drawList.getMoney(), handleFee)
+			+ "元");
 		// 根据是否收取手续费 记录相应备注
-		if (BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+		/*if (BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
 			fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss") + "提现" + drawList.getMoney()
 					+ "元；提现手续费" + handleFee + "元；" + "实际到账金额" + BigDecimalUtils.subRound(drawList.getMoney(), handleFee)
 					+ "元");
 		} else {
 			fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss") + "提现" + drawList.getMoney()
 					+ "元；提现手续费0元；实际到账金额" + drawList.getMoney() + "元");
-		}
+		}*/
 		fund.setAddtime(new Date().getTime() / 1000);
 		fund.setUptime(new Date().getTime() / 1000);
 		userFundService.save(fund);
@@ -994,5 +1021,27 @@ public class DrawMoneyServiceImpl extends BaseServiceImpl<DrawList, WithdrawalDa
 			}
 		}
 		return false;
+	}
+	@Override
+	public Double drawFee(String userid,Double money) {
+		WUser user =  getUser(userid);
+		if(user == null){
+			return null;
+		}
+		Double operateMoney = user.getCountOperateMoney();
+		operateMoney =  operateMoney == null ? 0.00 : operateMoney;
+		List<DataMap> dataMap = dataMapService.findByTypeKey("withdrawScale");
+		Double scal = 0.00;
+		if(dataMap != null && dataMap.size() > 0){
+			scal = Double.parseDouble(dataMap.get(0).getValueName());
+		}
+		Double chaMoney = operateMoney - money;//计算提现后剩余提现额度
+		//结果大于0 ，则表示剩余提现免额充足，不需要收取手续费,则设置计算提现手续费的基础金额为0 
+		if(chaMoney > 0){
+			chaMoney = 0.00;
+		}
+		Double feeMoney = Math.abs(chaMoney) * scal;
+		BigDecimal bd = new BigDecimal(feeMoney); 
+		return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 }

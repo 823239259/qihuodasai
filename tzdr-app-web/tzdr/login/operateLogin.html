@@ -26,17 +26,17 @@
 		<form  class="mui-input-group blackBg">
 			<div class="mui-input-row">
 				<label>选择操盘账号</label>
-				<select class="accountSelect">
-					<option class="mui-selected">请选择操盘账号</option>
+				<select class="accountSelect mui-btn mui-btn-block">
+					<option class="mui-selected" id="checkContent" value="test1">请选择操盘账号</option>
 				</select>
 			</div>
 			<div class="mui-input-row" id="userAcount">
 				<label>操盘账号</label>
-				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您操盘账号" >
+				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您的操盘账号" >
 			</div>
 			<div class="mui-input-row mui-password">
 				<label>登录密码</label>
-				<input id="password" type="password" class="mui-input-password" placeholder="请输入您账号密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+				<input id="password" type="password" class="mui-input-password" placeholder="请输入您的账号密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 			</div>	
 		</form>
 		<div class="mui-content-padded">
@@ -51,7 +51,8 @@
 		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 				
 				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
-			</div>
+		
+		</div>
 	</div>
 		<script type="text/javascript">
 			mui.init();
@@ -71,15 +72,17 @@
 				 * 选择账号
 				 */
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
+//				console.log(user_mobile)
 				var user=[];
-				mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
-					console.log(JSON.stringify(result));
+				if(user_mobile==null){
+					$("#checkContent").text("其它");
+				}else{
+					mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
 					var data=result.data;
 					var Len=data.length;
-					console.log(Len);
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
-							$(".accountSelect").append("<option value='test'>其他</option>");
+							$(".accountSelect").append("<option value='test'>其它</option>");
 						}else{
 							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
 							var acount={};
@@ -90,8 +93,10 @@
 					};
 					
 				},function(result){
-					console.log(JSON.stringify(result));
+//					console.log(JSON.stringify(result));
 				});
+				}
+				
 				if(user_mobile==null || user_mobile==undefined || user_mobile==""){
 					
 				}else{
@@ -103,14 +108,17 @@
 					var val=$(".accountSelect").val();
 					if(val=="test"){
 						$("#account").removeAttr("disabled");
-						$("#password").removeAttr("readonly");
 						$("#account").val("");
+						$("#password").val("");
+						$("#userAcount").css("display","block");
+					}else if(val=="test1"){
 						$("#password").val("");
 						$("#userAcount").css("display","block");
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
 								$("#account").val(val);
+							;
 								$("#password").val(user[i].tranPassword);
 							}
 						}
@@ -119,7 +127,11 @@
 						$("#userAcount").css("display","none");
 					}
 				})
-				$("#account").val(endLoginAccount == null?"":endLoginAccount);
+				var accountEnd = endLoginAccount == null?"":endLoginAccount;
+				if(accountEnd != ""){
+					$("#userAcount").show();
+				}
+				$("#account").val(accountEnd);
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
 				/**
 				 * 登录超时处理 

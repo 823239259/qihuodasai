@@ -65,12 +65,12 @@
 				<li><a href="javascript:void(0);" class="on">网银充值</a></li> 
 				<!-- <li><a href="javascript:void(0);">支付宝充值</a></li> -->
 				<li><a href="javascript:void(0);">银行转账</a></li>
-				<li><a href="javascript:void(0);">充值记录</a></li>
+				<li style="float:right;"><a href="javascript:void(0);">充值记录</a></li>
 			</ul>
 			 <div class="tabcon">
 				 <div class="subtab">
 					<form id="goNetbank" action="" method="get" target="_blank"  >
-					<div class="uc_olmoney">
+					<div class="uc_olmoney" style="padding-bottom: 0;">
 						<!-- <h3 class="uc_pbtitle">填写充值金额</h3> -->
 						<ul class="uc_pblist">
 							<li><label>账户余额：</label><span><i>
@@ -79,10 +79,11 @@
 							<li><label>充值金额：</label>
 							<input type = "hidden" id = "isFlag" name = "isFlag" value ="${isFlag }" />
 							<input type = "hidden" id = "isFlagMoney" name = "isFlagMoney" value ="${money }" />
-							<input type="hidden" value="7" name = "gopayWay" id= "gopayWay"/><!-- onKeyUp="javascript:clearNoNumber(event,this)" -->
-							<input type="text" value="${money}" name="gopaymoney" id="gopaymoney"    class="uc_p_ip3" ><span>元</span></li>
+							<input type="hidden" value="7" name = "gopayWay" id= "gopayWay"/><!--  -->
+							<input type="text" value="${money}" name="gopaymoney" id="gopaymoney" onKeyUp="javascript:clearNoNumber(event,this)"   class="uc_p_ip3" ><span>元</span></li>
 						</ul><!--  -->
 						<div class="uc_paybtn uc_olbtn"><a id = "payButton" href="javascript:void(0);" onclick="doGopay();">立即充值</a></div>
+						<div id = "fatip" style="margin-left: 65px;font-size: 14px; color: #fc3;">注意：选择确认，自动付款并提交操盘申请。</div>
 					</div>
 					
 					<div class="uc_olpromt">
@@ -121,14 +122,6 @@
 									<span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
 								</li>
 							</ol>
-							<%-- <ol class="first">
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>3100 1518 0000 5003 1146</i></span>
-									<span>户名：<i>上海信闳投资管理有限公司</i></span>
-									<span>开户行：<i>中国建设银行上海黄浦支行</i></span>
-								</li>
-							</ol> --%>
 							<ol>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
 								<li class="uc_b_l_info">
@@ -137,14 +130,6 @@
 									<span>开户行：<i>中国工商银行府河音乐花园支行</i></span>
 								</li>
 							</ol>
-							<%-- <ol>
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_03.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>0335 7100 0400 11335</i></span>
-									<span>户名：<i>上海信闳投资管理有限公司 </i></span>
-									<span>开户行：<i>中国农业银行上海西藏南路支行 </i></span>
-								</li>
-							</ol> --%>
 							<ol>
 								<li class="uc_b_l_bank" ><img src="${ctx}/static/images/banks/bank_10.jpg"></li>
 								<li class="uc_b_l_info">
@@ -158,9 +143,7 @@
 				<div class="uc_floatlayer">
 					<div class="uc_bc_option uc_b_bank" style="display:none;">
 						<a data-id="cmb" href="javascript:void(0)">中国招商银行</a>
-						<<!-- a data-id="ccb" href="javascript:void(0)">中国建设银行</a> -->
 						<a data-id="icbc" href="javascript:void(0)">中国工商银行</a>
-						<!-- <a data-id="abc" href="javascript:void(0)">中国农业银行</a> -->
 						<a data-id="boc" href="javascript:void(0)">中国银行</a>
 					</div>
 				</div>

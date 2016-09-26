@@ -7,9 +7,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
-	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台【官网】</title>
-	<meta name="keywords" content="维胜,期货,国际期货,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,无息配资,都城投资,投资达人,A50交易,多空多头空头,投机套保套利,外盘期货公司,国际期货开户,国际期货公司,外盘期货交易模拟软件"/>
+	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台_外盘期货投资开户交易软件公司_恒指原油黄金实时行情动态资讯</title>
+	<meta name="keywords" content="维胜,期货,国际期货,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,无息配资,都城投资,投资达人,A50交易,多空多头空头,投机套保套利,外盘期货公司,国际期货开户,国际期货公司,外盘期货交易模拟软件,外盘期货投资开户交易软件公司,恒指原油黄金实时行情动态资讯"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+	<meta name="sogou_site_verification" content="rM6RBuyJcq"/>
+	<meta name="360-site-verification" content="130a887517d7b56c6f630e2188d9d027" />
 	<%
 		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
 		String imgPreURL = ConfUtil.getContext("banner.url");
@@ -267,6 +269,36 @@
             </div>
         </div>
     </div>
+    <div class="w_center_upgrade" style="display: none;">
+    	<div class="w_center_upgrade_center">
+    		<div class="w_center_upgrade_title">
+    			<p class="w_upgrade_title">显示出错了！</p>
+    			<p class="w_upgrade_js">您正在使用的浏览器版本过低。这意味着浏览器未升级前你无法观看实时行情！推荐使用以下浏览器的最新版本：</p>
+    			<ul class="ul">
+    				<li><a href="http://sw.bos.baidu.com/sw-search-sp/software/a7958cfcdbd6e/ChromeStandalone_53.0.2785.116_Setup.exe"><span class="Chrome"></span>谷歌浏览器</a></li>
+    				<li><a href="http://download.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe"><span class="Firefox"></span>火狐浏览器</a></li>
+    				<li><a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2015_08_31_13/bind2/12966/Safari_5.34.57.2_12966_BDdl.exe"><span class="Safari"></span>Safari浏览器</a></li>
+    				<li><a href="http://down.360safe.com/se/360se8.1.1.226.exe"><span class="sll"></span>360浏览器</a></li>
+    				<li><a href="http://sw.bos.baidu.com/sw-search-sp/software/8666749b3f7a7/IE10-Windows6.1-zh-cn.exe"><span class="IE"></span>IE浏览器</a></li>
+    			</ul>
+    			<div class="w_upgrade_xz">
+    				<p class="xz_title">您可以一边升级浏览器版本，一边扫码下载维胜金融APP或客户端，随心，随时，随地进行交易</p>
+    				<ul>
+    					<li><a class="pc" href="http://socket.vs.com/download/%e7%bb%b4%e8%83%9c%e4%ba%a4%e6%98%93%e6%a0%87%e5%87%86%e7%89%88v1.0.zip"></a></li>
+    					<li class="xz_title">PC标准版下载</li>
+    				</ul>
+    				<ul>
+    					<li class="ios"></li>
+    					<li class="xz_title">iOS下载</li>
+    				</ul>
+    				<ul>
+    					<li class="android"></li>
+    					<li class="xz_title">Android下载</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>
+    </div>
     <div class="w-qihuo">
         <div class="w_center_border"></div>
         <div class="w-qihuo-title">
@@ -394,4 +426,47 @@
 <%@ include file="/WEB-INF/views/common/count.jsp"%>
 </body>
 <script type="text/javascript" src = "static/script/homepage/homepage.trade.js"></script> 
+<script>
+$(function(){
+    /*Query 从 1.9 版开始，移除了 .browser和.browser.version ， 取而代之的是 $.support 方法*/
+    var explorer = navigator.userAgent ;
+    var brow=$.browser;
+    if (explorer.indexOf("MSIE") >= 0) {
+        if(brow.version < 10.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if (explorer.indexOf("Firefox") >= 0) {
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Chrome") >= 0){
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Opera") >= 0){
+        if(brow.version < 11.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Safari") >= 0){
+        if(brow.version < 6.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    /* else if(explorer.indexOf("Netscape")>= 0) {
+        if(brow.version < 35.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    } */
+});
+</script>
 </html>

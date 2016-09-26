@@ -8,7 +8,7 @@
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "2.0.3",/*应用版本名称*/
-		"code": "20160909"
+		"code": "20160922"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -101,7 +101,7 @@
 		},
 		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57d267f167e58e673c000d39","channelid_android":"android"}}},
+		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57b2d65067e58e601d00258a","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -278,8 +278,7 @@
 					"tzdr/scheme.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/quotation/transactionDetails.html",
-					"tzdr/quotation/activity.html",
-					"tzdr/news/active.html"
+					"tzdr/quotation/activity.html"
 				],
 				"priority": 0
 			},
@@ -372,9 +371,7 @@
 					"css/mui.min.css",
 					"manifest.json"
 				],
-				"refer": [
-					"tzdr/quotation/quotationMain.html"
-				],
+				"refer": [],
 				"priority": 0
 			},
 			"tzdr/future/list.html": {
@@ -1014,8 +1011,7 @@
 					"tzdr/account/account.html",
 					"tzdr/scheme.html",
 					"tzdr/account/accountno.html",
-					"tzdr/future/listrg.html",
-					"tzdr/quotation/tutorial.html"
+					"tzdr/future/listrg.html"
 				],
 				"priority": 0
 			},
@@ -1215,49 +1211,6 @@
 					"images/bannerActivity.png",
 					"images/activeTitle.png",
 					"images/backgound1.jpg"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"tzdr/quotation/tutorial.html": {
-				"resources": [
-					"images/tutorial/27.png",
-					"images/tutorial/3.png",
-					"images/tutorial/4(1).png",
-					"css/noviceIntroduction.css",
-					"images/tutorial/18.png",
-					"images/tutorial/30.png",
-					"images/tutorial/24.png",
-					"images/tutorial/12.png",
-					"images/tutorial/25.png",
-					"images/tutorial/11.png",
-					"images/tutorial/2.png",
-					"images/tutorial/6.png",
-					"images/tutorial/29.png",
-					"images/tutorial/23.png",
-					"images/tutorial/32.png",
-					"images/tutorial/13.png",
-					"images/tutorial/19.png",
-					"images/tutorial/31.png",
-					"images/tutorial/28.png",
-					"images/tutorial/14.png",
-					"images/tutorial/22.png",
-					"images/tutorial/20.png",
-					"images/tutorial/21.png",
-					"images/tutorial/8.png",
-					"images/tutorial/16.png",
-					"images/tutorial/10.png",
-					"images/tutorial/5.png",
-					"images/tutorial/9.png",
-					"images/tutorial/1.png",
-					"images/tutorial/15.png",
-					"images/tutorial/4.png",
-					"images/tutorial/26.png",
-					"images/tutorial/7.png",
-					"images/tutorial/17.png",
-					"js/mui.min.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

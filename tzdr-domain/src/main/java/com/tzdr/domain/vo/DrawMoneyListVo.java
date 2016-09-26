@@ -91,6 +91,8 @@ public class DrawMoneyListVo implements Serializable {
 	@AllowExcel(name = "申请提现时间")
 	private String exportAddtime;
 
+	@AllowExcel(name = "提现手续费")
+	private double fee;
 	/**
 	 * 提现成功时间
 	 */
@@ -150,6 +152,18 @@ public class DrawMoneyListVo implements Serializable {
 	private Integer source = 1;
 	@AllowExcel(name = "来源网站")
 	private String sourceStr;
+	/**
+	 * 实际到账金额
+	 */
+	private double actualMoney;
+	
+	public double getActualMoney() {
+		return actualMoney;
+	}
+
+	public void setActualMoney(double actualMoney) {
+		this.actualMoney = actualMoney;
+	}
 
 	public Integer getSource() {
 		return source;
@@ -396,6 +410,14 @@ public class DrawMoneyListVo implements Serializable {
 
 	public void setAcc_address(String acc_address) {
 		this.acc_address = acc_address;
+	}
+
+	public double getFee() {
+		return fee;
+	}
+
+	public void setFee(double fee) {
+		this.fee = fee;
 	}
 
 

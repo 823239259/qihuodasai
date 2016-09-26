@@ -38,7 +38,7 @@
 		}
     </style>
 </head>
-<script type="text/javascript" src="${ctx}/static/script/Util.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/Utils.js?v=${v}"></script>
 
 <script type="text/javascript">
 var time = 5; 
@@ -57,7 +57,8 @@ intervalTime =  setInterval(function(){
 						if(result.success){
 								$("input[name = 'inputTraderBond']").val(getCookie("bond"));
 								$("input[name = 'inputTranLever']").val(getCookie("lever"));
-								$("input[name = 'tokenTzdr']").val(result.message);
+								$("input[name = 'voucherId']").val(getCookie("vocherid"));
+								$("input[name = 'tokenTzdr']").val(getCookie("tokenTzdr"));
 								$("#payableForm").attr("action","${ctx}/" + payUrl);
 								$.ajax({
 									url:"${ctx}/userOutDisk/clearPayCookie",
@@ -91,10 +92,10 @@ intervalTime =  setInterval(function(){
 		
 	</div>
 	<form action="${ctx}/user/account" style = "display: none;" id="payableForm" method="post">
-		<input type="hidden" name="inputTraderBond" value="0" />
+		<input type="hidden" name="inputTraderBond"  value="0" />
 		<input type="hidden" name="inputTranLever" value="0" />
 		<input type="hidden" name="tokenTzdr" value="0" />
-		<input type="hidden" name="voucherId" value="" />
+		<input type="hidden" name="voucherId" value="d" />
 		<input type="submit"/>
 	</form>
 </div>

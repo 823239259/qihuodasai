@@ -2,6 +2,7 @@ package com.tzdr.business.service.userTrade.impl;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -792,10 +793,38 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			if (dataMapService.activityExpired()) {
 				this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(), wuser.getMobile(), wellGoldA50.getId());
 			}
+			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue() * simpleFtseUserTrade.getEndParities().doubleValue();
+			Double absTranProfitLoss = Math.abs(tranProfitLoss);
+			Double bond = simpleFtseUserTrade.getTraderBond().doubleValue();
+			BigDecimal appendBondBig = simpleFtseUserTrade.getAppendTraderBond();
+			Double appendBond = appendBondBig == null ? 0.00:appendBondBig.doubleValue() ;
+			Double endAmlount = simpleFtseUserTrade.getEndAmount().doubleValue();
+			Double tradeFeeTotalDouble = 0.00;
+			BigDecimal tradeFeeTotal = simpleFtseUserTrade.getTranFeesTotal();
+			Integer tradeLever = simpleFtseUserTrade.getTranActualLever();
+			if(tradeLever != null && tradeLever > 0){
+				if(tradeFeeTotal != null){
+					tradeFeeTotalDouble = tradeFeeTotal.doubleValue();
+				}
+				if(tranProfitLoss < 0){
+					if(endAmlount < 0){
+						endAmlount = absTranProfitLoss;
+					}else{
+						endAmlount = (appendBond + bond - tradeFeeTotalDouble);
+					}
+				}
+				Double countOperateMoney = wuser.getCountOperateMoney();
+				if(countOperateMoney == null){
+					countOperateMoney = 0.00;
+				}
+				Double new_CountOperateMoney = countOperateMoney+endAmlount;
+				BigDecimal bd = new BigDecimal(new_CountOperateMoney); 
+				wuser.setCountOperateMoney(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+			}
+			wUserService.update(wuser);
 			return new JsonResult(true, "方案结算成功！");
 		}
 	}
-
 	public void validationIsTradeSubsidy(String uid, String mobile, String id) {
 		List<ActivityReward> activityRewards = activityRewardService.doGetByUid(uid, "001");
 		if (activityRewards != null && activityRewards.size() > 0) {
@@ -1122,4 +1151,15 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		}
 		return "";
 	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid) {
+		if(!StringUtils.isEmpty(uid)){
+			return	this.getEntityDao().findByUidAndStateType(uid);
+		}
+		return null;
+	}
+	
+	
 }

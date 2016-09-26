@@ -81,14 +81,15 @@
      <form style = "display: none;" action="${ctx}/pay/payinfo" id = "toPayInfoForm" method = "get">
     	<input type="hidden" value = "0" name = "balance"/>
     	<input type="hidden" value = "1" name = "isFlag"/>
-    	<input type="hidden" name="inputTraderBond" value="${inputTraderBond}" />
-		<input type="hidden" name="inputTranLever" value="${inputTranLever}" />
+    	<input type="hidden" name="inputTraderBond" value="${traderBond}" />
+		<input type="hidden" name="inputTranLever" value="0" />
+		<input type="hidden" id = "inputVocherId" name ="inputVocherId" value = "">
 		<input type="hidden" name="payUrl" value = "userOutDisk/paySuccessful"/>
 		<input type="submit" id = "toPayInfoSubmit"/>
     </form>
 	<div class="capital">
 		<form action="${ctx}/userOutDisk/paySuccessful" id="payableForm" method="post">
-			<input type="hidden" name="traderBondAttr" value="${traderBond}" />
+			<input type="hidden" name=inputTraderBond value="${traderBond}" />
 			<input type="hidden" name="tokenTzdr" value="${tokenTzdr}" />
 			<input type="hidden" id="voucherId" name="voucherId" value="" />
 			<div class="cp_ctn">

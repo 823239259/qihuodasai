@@ -56,7 +56,7 @@
 			</ul>
 			<ul>
 				<li class="app"></li>
-				<li>APP下载</li>
+				<li>APP下载 <span style="font-size: 14px;"> (iOS&Android)</span></li>
 			</ul>
 			<ul>
 				<li class="furx">客服热线</li>
@@ -70,11 +70,11 @@
 			</ul>
 		</div>
 	</div>
-	<div class="information-footer"><p>Copyright &copy: 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</p></div>
+	<div class="information-footer"><p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</p></div>
 	<div id="kefu">
 		<span class="close"></span>
 		<p><span class="ry"></span>维胜资讯欢迎您！如果您有跟期货相关的问题，我们可以在线为您解答。</p>
-		<div class="lx"><input type="text" placeholder="您可以在这里直接与我们联系！"><span>发送</span></div>
+		<div class="lx"><input type="text" placeholder="您可以在这里直接与我们联系！"><span><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&amp;aty=0&amp;a=0&amp;curl=&amp;ty=1" target="_blank" style="color: #dcefff;text-decoration: none;">发送</a></span></div>
 	</div>
 </body>
 <script>

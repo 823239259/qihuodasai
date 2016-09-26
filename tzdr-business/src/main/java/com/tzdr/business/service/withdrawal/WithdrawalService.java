@@ -22,6 +22,7 @@ import com.tzdr.business.cms.service.auth.AuthService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.drawMoney.DrawMoneyService;
 import com.tzdr.business.service.drawMoneyData.DrawMoneyDataService;
+import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.dao.support.SearchFilter;
 import com.tzdr.common.domain.PageInfo;
@@ -42,6 +43,7 @@ import com.tzdr.domain.vo.DrawMoneyListVoNew;
 import com.tzdr.domain.vo.PayeaseTreatDrawListVo;
 import com.tzdr.domain.web.entity.DrawList;
 import com.tzdr.domain.web.entity.DrawMoneyData;
+import com.tzdr.domain.web.entity.WUser;
 
 /**
  * 提现记录
@@ -65,6 +67,8 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 	@Autowired
 	private DataMapService dataMapService;
 
+	@Autowired
+	private WUserService userService;
 	public PageInfo<Object> queryListNew(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(), easyUiPage.getPage());
 
@@ -78,7 +82,7 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 	public PageInfo<Object> queryList(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(), easyUiPage.getPage());
 
-		String sql = " SELECT dl.source source,first_audit_time firstAuditTime,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit,dl.first_audit_user firstAuditUser,dl.uid, dl.id, us.mobile, dl.bank, dl.card,dl.acc_address, dl.`status`, dl.money,dl.addtime, dl.oktime, uv.tname, us.avl_bal balance, dl.update_time auditTime,dl.update_user auditUser FROM  w_draw_list dl, w_user us, w_user_verified uv WHERE us.id = dl.uid AND uv.uid = us.id";
+		String sql = " SELECT dl.source source,first_audit_time firstAuditTime,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit,dl.first_audit_user firstAuditUser,dl.uid, dl.id, us.mobile, dl.bank, dl.card,dl.acc_address, dl.`status`, dl.money,dl.addtime, dl.oktime, uv.tname, us.avl_bal balance, dl.update_time auditTime,dl.update_user auditUser,dl.fee fee,(dl.money-dl.fee) as actualMoney FROM  w_draw_list dl, w_user us, w_user_verified uv WHERE us.id = dl.uid AND uv.uid = us.id";
 		// params 查询参数 依次 存入
 		MultiListParam multilistParam = new MultiListParam(easyUiPage, searchParams, null, sql);
 		multilistParam.setSort("addtime");
@@ -205,7 +209,6 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 		drawList.setUpdateUser(authService.getCurrentUser().getRealname());
 		drawList.setUpdateTime(Dates.getCurrentLongDate());
 		drawList.setUpdateUserId(authService.getCurrentUser().getId());
-		
 		super.update(drawList);
 		DataMap dataMap = dataMapService.getWithDrawMoney();
 		logger.info("线下划账审核通过，系统操作员【" + authService.getCurrentUser().getRealname() + "】," + "提现审核配置金额【"

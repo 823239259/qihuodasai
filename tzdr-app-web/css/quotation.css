@@ -367,8 +367,9 @@ p{
 	color:#A9A9A9;
 	height: 50px;
 	line-height: 30px;
-	width: 110%;
+	width: 59% !important;
 	text-align: left;
+	border:1px solid red;
 }
 .mui-input-row select{
 	height: 50px;
@@ -487,8 +488,8 @@ input{
 }
 #fisrtLlist{
 	width: 100%;
+	padding: 0px 2%;
 	height: 40px;
-	padding:0px 2%;
 	line-height: 40px;
 	color: #FFFFFF;
 	position: fixed;
@@ -502,8 +503,10 @@ input{
 	width: 25%;
 	text-align: center;
 }
-#fisrtLlistSpan{
-	text-align: left!important;
+#fisrtLlist span:nth-child(1){
+	display: inline-block;
+	width: 25%;
+	text-align: left;
 }
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
 	border-radius: 0px;
@@ -593,4 +596,7 @@ input{
 	width: 24px;
 	height: auto;
 	margin-top: 10px;
+}
+.accountSelect{
+	width: 60% !important;
 }
