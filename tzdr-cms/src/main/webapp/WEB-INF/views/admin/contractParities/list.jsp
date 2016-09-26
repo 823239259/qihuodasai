@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 <script type="text/javascript">
 var setParameterType = 0;
+var setType=0;
 function pass(type) {
 	setParameterType = type;
 	if(type==1){
@@ -60,25 +61,51 @@ function passClose() {
 	$("#passWin").window('close');
 };
 
-function openVariety(type){
-	
-	
-	if(type==1){//添加
+function openVariety(typ){
+	setType=typ;
+	$("#addTime").text("");
+	if(typ==1){//添加
 		 var userIndex=$("#userIndex").val("");
 		var commodityNo=$("#commodityNo").val("");
 		var commodityName=$("#commodityName").val("");
 		var exchangeNo=$("#exchangeNo").val("");
 		var exchangeName=$("#exchangeName").val("");
-		//var timeBucket=$("input[name='timeBucket']").val("");
-		//var timeBucket1=$("input[name='timeBucket']").val("");
+		var timeBucket=$("input[name='timeBucket']").val("");
 		var contractSize=$("#contractSize").val("");
 		var miniTikeSize=$("#miniTikeSize").val("");
 		var dotSize=$("#dotSize").val(""); 
 		$("#passVariety").show;
 		$("#passVariety").window('open');
 	}else{//修改
+		
 		 var rows = $("#ed").datagrid('getSelections');
 		if (Check.validateSelectItems($("#ed"),1)) { 
+			$("#addTime").text("");
+			$("#userIndex").val(rows[0].index);
+			$("#commodityNo").val(rows[0].commodityNo);
+			$("#commodityName").val(rows[0].commodityName);
+			$("#exchangeNo").val(rows[0].exchangeNo);
+			$("#exchangeName").val(rows[0].exchangeName);
+			$("#mainContract").val(rows[0].mainContract);
+			var arr=new Array();
+			var time=rows[0].timeBucket;
+			arr=time.split(",");
+			var size = arr.length - 1;
+			for(var i=0;i < size;i++)
+			{
+				if(i % 2 == 0){
+					var j = i;
+					var time1 = j;
+					var time2 = j+1;
+					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/></div>");
+					$("#"+time1+"").val(arr[j]);
+					$("#"+time2+"").val(arr[i + 1]);
+				}
+			}
+			$("#contractSize").val(rows[0].contractSize);
+		    $("#miniTikeSize").val(rows[0].miniTikeSize);
+			$("#typess").val(rows[0].currencyNo);
+			$("#dotSize").val(rows[0].dotSize);
 			$("#passVariety").show;
 			$("#passVariety").window('open');
 	}
@@ -90,27 +117,92 @@ function removeTime(d){
 	a.remove();
 };
 function addTime(){
-	$("#addTime").append("<div><input style='width:70px'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' name='timeBucket1' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
+	$("#addTime").append("<div><input style='width:70px'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
 };
-function varietySubmit(type){
-	var userIndex=$("#userIndex").val();
+function varietySubmit(){
+	var index=$("#userIndex").val();
 	var commodityNo=$("#commodityNo").val();
 	var commodityName=$("#commodityName").val();
 	var exchangeNo=$("#exchangeNo").val();
 	var exchangeName=$("#exchangeName").val();
+	var mainContract=$("#mainContract").val();
 	var timeBucket=$("input[name='timeBucket']");
-	var timeBucket1=$("input[name='timeBucket']");
 	var contractSize=$("#contractSize").val();
 	var miniTikeSize=$("#miniTikeSize").val();
+	var typess=$("#typess").val();
 	var dotSize=$("#dotSize").val();
+	var vartimeBucket;
 	
-	if(type==1){
+	$.each( timeBucket, function(i, n){
+		var obj={"DateFlag":"0","IsDST":"N","TimeBucketBeginTime":timeBucket[i].value,"TradingState":"3","TradingTimeBucketID":i};
+		
+		if(i>=1||i<=n-1){
+			vartimeBucket +=",";
+		}
+		vartimeBucket +=JSON.stringify(obj);
+		
+		});
+	
+	var b="["+vartimeBucket+"]";
+	
+	var b=b.replace('undefined','');
+	var parameters={"index":index,"commodityNo":commodityNo,"commodityName":commodityName,"exchangeNo":exchangeNo,
+			"commodityName":commodityName,"timeBucket":b,"contractSize":contractSize,"miniTikeSize":miniTikeSize,
+			"dotSize":dotSize,"currencyNo":typess,"mainContract":mainContract,"exchangeName":exchangeName};
+	if ($("#passVariety").form("validate")) {  
+	if(setType==1){
 		//添加
-		timeBucket
-	}else{
+		$.post(Check.rootPath() + "/admin/commodity/add",
+				parameters,
+				function(data){
+					if (data.success) {
+						Check.messageBox("提示","成功");
+						$("#ed").datagrid('reload');
+						$("#passVariety").show;
+						$("#passVariety").window('close');
+					} else {
+						Check.messageBox("提示",data.message,"error");
+					}
+		});
+	}
+	  if(setType==2){
 		//修改
+		var rows = $("#ed").datagrid('getSelections');
+		if (Check.validateSelectItems($("#ed"),1)) {
+			
+			$.post(Check.rootPath() + "/admin/commodity/update",
+					parameters,
+					function(data){
+						if (data.success) {
+							Check.messageBox("提示","成功");
+							$("#ed").datagrid('reload');
+							$("#passVariety").show;
+							$("#passVariety").window('close');
+						} else {
+							Check.messageBox("提示",data.message,"error");
+						}
+			});
+		}
+	
+		
+	}  
 	}
 };
+
+$(document).ready(function(){
+	$.post(Check.rootPath() + "/cpp/find",
+			
+			function(data){
+				if (data.success) {
+				var typess=$("#typess")
+				
+					for(var i=0;i<data.obj.length;i++){
+					    typess.append("<option value="+data.obj[i].currencyNo+">"+data.obj[i].currencyName+"</option>")
+					}
+				
+				}
+	});
+	});
 </script>
 </head>
 <body>
@@ -153,7 +245,7 @@ function varietySubmit(type){
    				</table>
 			</div>
 			<div title="行情主力合约维护" data-options="tools:'#p-tools'" style="padding:20px;">
-			    <div id="auditMains" style="padding: 5px; height: auto">
+			    <div id="auditMain" style="padding: 5px; height: auto">
 					<div style="margin-bottom: 5px">
 					 <shiro:hasPermission name="sys:settingParams:contractParities:create">  
 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="openVariety(1)">新增</a>
@@ -168,7 +260,7 @@ function varietySubmit(type){
 					</div> 
 				</div>
 				<table id="ed" class="easyui-datagrid"  pagination="true" 
-		            toolbar="#auditMain" url="${ctx}/admin/contractParities/getDatas"
+		            toolbar="#auditMain"  url="${ctx}/admin/commodity/find"
 		             rownumbers="true" fitColumns="true" singleSelect="true" 
 		             data-options="checkOnSelect:true,toolbar:'#auditMain',
 						frozenColumns:[[
@@ -179,14 +271,15 @@ function varietySubmit(type){
 						}">
 			        <thead>
 			            <tr>
-			            	<th field="id" hidden="true"></th>
+			            	<th field="index" width="100">序号</th>
 							<th field="commodityNo" width="100" sortable="true">品种代码</th>
 							<th field="commodityName" width="100">品种名称</th>
+							<th field="exchangeNo" width="120">交易所代码</th>
 							<th field="exchangeName" width="120">交易所名称</th>
 							<th field="timeBucket" width="120">交易时间段</th>
 							<th field="contractSize" width="120">合约乘数</th>
-							<th field="miniTikeSize" width="120">最小变动单位</th>
 							<th field="dotSize" width="120">小数位数</th>
+							<th field="miniTikeSize" width="120">最小变动单位</th> 
 							<th field="currencyNo" width="120">币种</th>
 							<th field="mainContract" width="120" >主力合约</th>
 			            </tr>
@@ -224,7 +317,7 @@ function varietySubmit(type){
         </form>
 	</div>
 	<div id="passVariety" class="easyui-window" title="编辑"
-        data-options="iconCls:'icon-save',closed:true">
+        data-options="iconCls:'icon-save',closed:true" style="width:360px">
           <form id="varietyForm">
         <table border="0" style="font-size:12px;" class="conn"  width="100%" height="320px" cellpadding="0" cellspacing="0">
              <tr>
@@ -235,7 +328,7 @@ function varietySubmit(type){
                 <td><span ></span></td>
             </tr>
             <tr>
-                <td class="label right">合约代码:</td>
+                <td class="label right">品种代码:</td>
                 <td>
                    <input id="commodityNo" name="commodityNo" class="easyui-validatebox"  data-options="required:true"/>
                 <td><span ></span></td>
@@ -246,7 +339,13 @@ function varietySubmit(type){
                    <input id="commodityName" name="commodityName" class="easyui-validatebox"  data-options="required:true"/>
                 <td><span ></span></td>
             </tr>  
-      
+       </tr>  
+               <tr>
+                <td class="label right">合约代码:</td>
+                <td>
+                   <input id="mainContract" name="mainContract" class="easyui-validatebox"  data-options="required:true"/>
+                <td><span ></span></td>
+            </tr>  
                <tr>
                 <td class="label right">交易所代码:</td>
                 <td>
@@ -261,9 +360,10 @@ function varietySubmit(type){
             </tr>  
                <tr>
                 <td class="label right">交易时间段:</td>
-                <td id="addTime">
-                   <input style="width:70px"  name="timeBucket" class="easyui-timespinner"  data-options="required:true"/>- <input style="width:70px" name="timeBucket1" class="easyui-timespinner"  data-options="required:true"/>
-                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addTime()"/>
+                <td id="add">
+                	<label id = "addTime"></label>
+                  <!--  <input style="width:70px" id = "time1"  name="timeBucket" class="easyui-timespinner"  data-options="required:true"/>- <input style="width:70px" name="timeBucket" id = "time2" class="easyui-timespinner"  data-options="required:true"/> -->
+             	 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addTime()"></a> 
                 <td><span ></span></td>
             </tr>  
                <tr>
@@ -285,8 +385,18 @@ function varietySubmit(type){
                 <td><span ></span></td>
             </tr>  
             <tr>
+                <td class="label right">币种:</td>
+                <td>
+                  <select name="typess" id="typess" style="width:150px">
+				                 	
+									
+				                 </select>
+
+                <td><span ></span></td>
+            </tr>  
+            <tr>
                 <td align="center" colspan="3">
-	               <a id="btn" href="javascript:void(0);" onclick="" class="easyui-linkbutton">提交</a>
+	               <a id="btn" href="javascript:void(0);" onclick="varietySubmit()" class="easyui-linkbutton">提交</a>
 	               <a id="btn" href="javascript:void(0);" onclick="" class="easyui-linkbutton">取消</a>
                </td>
             </tr>

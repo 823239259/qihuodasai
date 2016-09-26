@@ -23,13 +23,13 @@ public class CppController{
 	@ResponseBody
 	public JsonResult find(HttpServletRequest request){
 		EasyUiPageInfo easyUiPage = new EasyUiPageInfo();
-		easyUiPage.setRows(10);
+		easyUiPage.setRows(100);
 		easyUiPage.setPage(1);
 		Map<String , Object> searchParams = new HashMap<>();
 		JsonResult result = new JsonResult(true);
 		PageInfo<Object> cppList =  cppService.find(easyUiPage , searchParams);
-		result.appendData("data", cppList);
-	    System.out.println(cppList.getTotalCount());
+		
+		result.setObj(cppList.getPageResults());
 		return result;
 	}
 }
