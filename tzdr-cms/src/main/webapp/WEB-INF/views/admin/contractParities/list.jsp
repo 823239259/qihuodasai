@@ -190,7 +190,7 @@ function varietySubmit(){
 };
 
 $(document).ready(function(){
-	$.post(Check.rootPath() + "/cpp/find",
+	$.post(Check.rootPath() + "admin/currency/find",
 			
 			function(data){
 				if (data.success) {

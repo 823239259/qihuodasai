@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import com.tzdr.common.domain.BaseEntityCpp;
 @Entity
 @Table(name = "a_currency_list")
-public class Cpp extends BaseEntityCpp{
+public class Currency extends BaseEntityCpp{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
