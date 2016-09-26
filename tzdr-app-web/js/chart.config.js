@@ -13,6 +13,12 @@
     var dayCandlestickVolumeChart=null;
     var echarts;
     loadK();
+    var DateTimeStampSubscript;
+	var LastPriceSubscript;
+	var OpenPriceSubscript;
+	var LowPriceSubscript;
+	var HighPriceSubscript;
+	var VolumeSubscript;
     //生成一个K线图容器
     function loadK(){
         // 使用

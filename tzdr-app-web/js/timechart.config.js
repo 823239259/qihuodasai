@@ -15,16 +15,16 @@
     var timePrice=[];
      var timeLabel=[];
     function handleTime(json){
-        var Len=json.Parameters.length;
+        var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
-       	var Parameters=json.Parameters;
+       	var Parameters=json.Parameters.Data;
        	var leng=timePrice.length;
         for(var i=0;i<Len;i++){
-        	var time2=Parameters[i].DateTimeStamp.split(" ");
+        	var time2=Parameters[i][DateTimeStampSubscript].split(" ");
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
-        	timeData.prices[TimeLength+i]=Parameters[i].LastPrice;	
+        	timeData.prices[TimeLength+i]=Parameters[i][LastPriceSubscript];	
         }
 		for(var i=0;i<timeData.timeLabel.length-1;i++){
 			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
@@ -132,15 +132,15 @@
         return option
     }
     function handleVolumeChartData(json){
-        var Len=json.Parameters.length;
-        var Parameters=json.Parameters;
+    	 var Parameters=json.Parameters.Data;
+        var Len=Parameters.length;
         var VolumeLength=volumeChartData.time.length;
         for(var i=0;i<Len;i++){
-        	var time2=Parameters[i].DateTimeStamp.split(" ");
+        	var time2=Parameters[i][DateTimeStampSubscript].split(" ");
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];
             volumeChartData.time[VolumeLength+i]=str2;
-            volumeChartData.volume[VolumeLength+i]=Parameters[i].Volume;
+            volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         };
         var TimeLength= volumeChartData.time.length;
 		for(var i=0;i<volumeChartData.time.length-1;i++){

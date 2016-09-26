@@ -7,18 +7,15 @@
     	volume:dayCandlestickVolumeChartVolume
     }
     function processingDayCandlestickData(jsonData){
-    		var parameters = jsonData.Parameters;
+    		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=dayCandlestickChartData.length;
         	for(var i=0;i<Len;i++){
-//      		var time2=parameters[i].DateTimeStamp.split(" ");
-//		        	var str1=time2[1].split(":");
-//		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
-		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
+        			var openPrice = parameters[i][OpenPriceSubscript];
+		            var closePrice = parameters[i][LastPriceSubscript];
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
+		            var sgData = [parameters[i][DateTimeStampSubscript],openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
         	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
@@ -120,15 +117,14 @@
     };
     var  dayCandlestickVolumeNum=0;
     function processingDayCandlestickVolumeData(data){
-    		var parameters = data.Parameters;
+    		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=dayCandlestickVolumeData.time.length;
         	for(var i=0;i<Len;i++){
-        			dayCandlestickVolumeData.time[lent+i]=parameters[i].DateTimeStamp;
-        			dayCandlestickVolumeData.volume[lent+i]=parameters[i].Volume;
+        			dayCandlestickVolumeData.time[lent+i]=parameters[i][DateTimeStampSubscript];
+        			dayCandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
        		};
-			console.log(JSON.stringify(dayCandlestickVolumeData));
         	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 		  	dayCandlestickVolumeChart.group="group3";
 		  	if(dayCandlestickVolumeNum !=0){
@@ -188,7 +184,7 @@
 			 yAxis: [
 			            {
 	                type : 'value',
-	              name : '成交量(万)',
+	              name : '成交量(千)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
@@ -198,7 +194,7 @@
 	                  formatter: function (a) {
 	                      a = +a;
 	                      return isFinite(a)
-	                          ? echarts.format.addCommas(+a / 10000)
+	                          ? echarts.format.addCommas(+a / 1000)
 	                          : '';
 	                  }
 	              },

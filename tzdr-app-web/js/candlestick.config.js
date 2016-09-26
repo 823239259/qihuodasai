@@ -9,20 +9,18 @@
     	volume:CandlestickVolumeChartVolume
     }
     function processingData(jsonData){
-    		var parameters = jsonData.Parameters;
-//  		console.log(JSON.stringify(jsonData));
+    		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=rawData.length;
         	for(var i=0;i<Len;i++){
-        		var time2=parameters[i].DateTimeStamp.split(" ");
+        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
-		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
+        			var openPrice = parameters[i][OpenPriceSubscript];
+		            var closePrice = parameters[i][LastPriceSubscript];
 		            var chaPrice = closePrice - openPrice;
-//		            console.log(parameters[i].DateTimeStamp);
-		            var sgData = [str2,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
+		            var sgData = [str2,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
         	for(var i=0;i<rawData.length-1;i++){
@@ -31,7 +29,6 @@
         		}
         	}
         	var newData=rawData.slice(-60);
-//      	console.log(newData);
         		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
@@ -138,16 +135,16 @@
      var volumeTime=[];
     var volumeV=[];
     function processingCandlestickVolumeData(data){
-    		var parameters = data.Parameters;
+    		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=volumeV.length;
         	for(var i=0;i<Len;i++){
-        		var time2=parameters[i].DateTimeStamp.split(" ");
+        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
         			volumeTime[lent+i]=str2;
-        			volumeV[lent+i]=parameters[i].Volume;
+        			volumeV[lent+i]=parameters[i][VolumeSubscript];
        		};
         	for(var i=0;i<volumeTime.length-1;i++){
         		if(volumeTime[i]==volumeTime[i+1]){

@@ -8,6 +8,7 @@ function setMarketCommdityLastPrice(key,value){
 }
 var reconnect=null;
 var marketSocket = null;
+var firstTimeLength=1;
 mui.plusReady(function(){
     	var Transfer=plus.webview.currentWebview();
 		var CommodityNo=document.getElementById("CommodityNo");
@@ -57,20 +58,24 @@ mui.plusReady(function(){
 			if(historyParam.Parameters==null){
 				return
 			};
-			console.log(JSON.stringify(historyParam.Parameters));
-			if(historyParam.Parameters[0].HisQuoteType==0){
+			if(firstTimeLength==1){
+				getSubscript(historyParam.Parameters.ColumNames);
+				firstTimeLength=2;
+			}else{
+				
+			}
+			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters[0].HisQuoteType==1){
+			}else if(historyParam.Parameters.HisQuoteType==1){
 				handleTime(historyParam);
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 	            
-			}else if(historyParam.Parameters[0].HisQuoteType==1440){
-				console.log(JSON.stringify(historyParam));
+			}else if(historyParam.Parameters.HisQuoteType==1440){
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
 			}
@@ -257,4 +262,20 @@ mui.plusReady(function(){
 function masendMessage(method,parameters){
 	 marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 }
- 
+function getSubscript(data){
+	for(var i=0;i<=data.length-1;i++){
+		if(data[i]=="DateTimeStamp"){
+			DateTimeStampSubscript=i;
+		}else if(data[i]=="LastPrice"){
+			LastPriceSubscript=i;
+		}else if(data[i]=="OpenPrice"){
+			OpenPriceSubscript=i;
+		}else if(data[i]=="LowPrice"){
+			LowPriceSubscript=i
+		}else if(data[i]=="HighPrice"){
+			HighPriceSubscript=i
+		}else if(data[i]=="Volume"){
+			VolumeSubscript=i;
+		}
+	}
+}
