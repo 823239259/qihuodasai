@@ -77,11 +77,10 @@
 	</bean>
 	<!--  多数据源拦截配置-->
     <bean id = "dataSourceAspect" class="com.tzdr.cpp.DataSourceAspect"/>
-    <bean id = "cppService" class="com.tzdr.business.service.cpp.imp.CppTestService"></bean>
 	 <aop:config>
 		<aop:aspect id = "aspect" ref="dataSourceAspect">
-			<!-- 拦截所有service方法 -->
-			<aop:pointcut id="dataSourcePointcut" expression="execution(* com.tzdr.business.cms..*(..))"/>
+			<!-- 拦截所有调用dktai_cpp的数据库访问方法 -->
+			<aop:pointcut id="dataSourcePointcut" expression="execution(* com.tzdr.business.cms.cpp..*(..))"/>
 			<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
 		</aop:aspect>
 	</aop:config>
