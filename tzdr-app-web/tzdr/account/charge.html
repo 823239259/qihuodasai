@@ -148,14 +148,14 @@
 								<ul id="list" class="mui-table-view mui-table-view-chevron">
 								<li class="mui-table-view-cell">
 									<a class="mui-navigate-right" id="bindAlipay">
-										<label>绑定支付宝账号</label>
+										<label>绑定微信账号</label>
 										<b><span id="alipay_account">待绑定</span></b>
 									</a>
 								</li>
 							</ul>
 								<ul class="mui-table-view">
 									<li class="mui-table-view-cell">
-										<label>收款人支付宝账户</label>
+										<label>收款人微信账户</label>
 										<span>zhitoubao@126.com</span>
 									</li>
 									<li class="mui-table-view-cell">
@@ -168,7 +168,7 @@
 								</div>
 								<div class="mui-content-padded">
 									<h5>温馨提示：</h5>
-									<p>1、若在该页面打开支付宝失败，您可以手动启动支付宝APP或者登录支付宝官网，选择转账到支付宝账户，手工输入信闳投资的收款支付宝账户，最终完成转账。</p>
+									<p>1、若在该页面打开微信失败，您可以手动启动微信APP或者登录微信官网，选择转账到支付宝账户，手工输入信闳投资的收款微信账户，最终完成转账。</p>
 									<p>2、最快5分钟内到账，最晚下一个工作日09:15前到账。</p>
 								</div>
 							</div>
@@ -341,7 +341,6 @@
 					function(result) {
 						var balance = result.data.balance;
 						document.getElementById("balanceSpan").innerHTML = balance + '元';
-						console.log(JSON.stringify(wv));
 		              	var vText = wv.money;//这样就能接收到上个页面传过来的值了
 //		              	var backPage=wv.backPage;
 //		              	plus.storage.setItem("backPage",backPage);
@@ -470,7 +469,54 @@
 				mui.openWindow("alipy://");
     			
     		});*/
+				//获取微信账号
+				getalipayAcount();
 
+				document.getElementById("bindAlipay").addEventListener("tap", function() {
+					var alipay_account = document.getElementById("alipay_account");
+					mui.prompt("请输入要绑定的微信账号", "微信账号", "绑定提示", ['取消', '绑定'], function(e) {
+						if(e.index == 0) {
+							return;
+						}
+						if(mui.isnull(e.value)) {
+							mui.toast("微信账号不能为空");
+							return;
+						}
+						mui.app_request('/user/pay/wx/bind/account', {
+							"alipayAcount": e.value
+						}, function(result) {
+							if(result.success==true){
+								mui.toast("绑定成功！");
+								alipay_account.innerHTML = e.value;
+							}else{
+								if(result.message == 2) {
+								mui.toast("支付宝账号已经存在！");
+									return;
+								} else if(result.message == 3) {
+									mui.toast("支付宝账号不能为空！");
+									return;
+								} else {
+									mui.toast("系统繁忙，请稍后再试！");
+									return;
+								}
+							}
+							
+							return;
+						}, function(result) {
+							if(result.code == 2) {
+								mui.toast("支付宝账号已经存在！");
+								return;
+							} else if(result.code == 3) {
+								mui.toast("支付宝账号不能为空！");
+								return;
+							} else {
+								mui.toast("系统繁忙，请稍后再试！");
+								return;
+							}
+						})
+					});
+
+				});
 				document.getElementById("openbankPay").addEventListener("tap", function() {
 					banksPay();
 				});
@@ -558,6 +604,22 @@
 					return;
 				})
 			};*/
+			
+			
+			function getalipayAcount() {
+				mui.app_request("/user/pay/getalipayacount", {}, function(result) {
+					if(mui.isnull(result.data.alipayAcount)) {
+						document.getElementById("alipay_account").innerHTML = "待绑定";
+						return;
+					}
+					document.getElementById("alipay_account").innerHTML = result.data.alipayAcount;
+					return;
+				}, function(result) {
+
+					document.getElementById("alipay_account").innerHTML = "待绑定";
+					return;
+				})
+			};
 			(function($) {
 				$('.mui-scroll-wrapper').scroll({
 					indicators: true //是否显示滚动条
