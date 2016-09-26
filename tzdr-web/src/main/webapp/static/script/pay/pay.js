@@ -483,10 +483,6 @@ function doTransmany(){
 		showMsgDialog("提示","请选择银行");
 		return ;
 	}
-	if(serialnum==""){
-		showMsgDialog("提示","请输入流水号");
-		return ;
-	}
 	if(!isMoney(money)){
 		showMsgDialog("提示","充值金额填写错误");
 		return ;
@@ -497,6 +493,10 @@ function doTransmany(){
 	}
 	if(parseFloat(money)>6000000){
 		showMsgDialog("提示","充值金额不能大于600万");
+		return ;
+	}
+	if(serialnum==""){
+		showMsgDialog("提示","请输入流水号");
 		return ;
 	}
 	 $.post(basepath+"/pay/doAlipayOrTansaccount",{"bankname":bankname,"alimoney":money,"serialnum":serialnum,"type":"trans"},function(data){  
