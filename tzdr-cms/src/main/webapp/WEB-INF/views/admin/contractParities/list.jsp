@@ -97,7 +97,7 @@ function openVariety(typ){
 					var j = i;
 					var time1 = j;
 					var time2 = j+1;
-					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/></div>");
+					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
 					$("#"+time1+"").val(arr[j]);
 					$("#"+time2+"").val(arr[i + 1]);
 				}
@@ -388,10 +388,7 @@ $(document).ready(function(){
                 <td class="label right">币种:</td>
                 <td>
                   <select name="typess" id="typess" style="width:150px">
-				                 	
-									
 				                 </select>
-
                 <td><span ></span></td>
             </tr>  
             <tr>
