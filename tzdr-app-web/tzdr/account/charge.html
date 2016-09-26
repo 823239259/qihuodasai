@@ -179,35 +179,42 @@
 							<div class="mui-scroll">
 								<p class="ac_bankpromt">向维胜转账后，请录入流水单号，方便及时核实到账</p>
 								<div class="ac_banklist" style="margin-top: 20px">
+									<input type="radio" name="back_icon" value="cmb" checked>
 									<img src="../../images/bank1.png" / style="margin-top: 20px;">
 									<p>账号：1289 0715 5110 501<br>户名：成都盈透科技有限公司<br>开户行：招商银行股份有限公司成都天府大道支行</p>
 								</div>
-
 								<div class="ac_banklist">
+									<input type="radio" name="back_icon" value="icbc">
 									<img src="../../images/bank_02.gif" />
-									<p>账号：9558 8344 0200 0949 840<br>户名：成都盈透科技有限公司<br>开户行：中国工商银行府河音乐花园支行</p>
+									<p>账号：4402 9391 1910 0042 543<br>户名：成都盈透科技有限公司<br>开户行：中国工商银行府河音乐花园支行</p>
 								</div>
 								<div class="ac_banklist">
+									<input type="radio" name="back_icon" value="boc">
 									<img src="../../images/bank_04.gif" />
 									<p>账号：1158 4367 7712<br>户名：成都盈透科技有限公司<br>开户行：中国银行天府新区华阳支行</p>
-
+								</div>
+								<div class="ac_banklist">
+									<input type="radio" name="back_icon" value="ccb">
+									<img src="../../images/bank_01.gif" />
+									<p>账号：5105 0140 6137 0000 0421<br>户名：成都盈透科技有限公司<br>开户行：中国建设银行成都世纪城新会展支行</p>
+								</div>
+								<div class="ac_banklist">
+									<input type="radio" name="back_icon" value="abc">
+									<img src="../../images/bank_03.gif" />
+									<p>账号：2280 8201 0400 05595<br>户名：成都盈透科技有限公司<br>开户行：中国农业银行成都新希望国际支行</p>
 								</div>
 								<ul class="mui-table-view">
-									<li class="mui-table-view-cell">
+									<!--<li class="mui-table-view-cell">
 										<label>转入银行</label>
 										<select class="mui-btn mui-btn-block" id="abbreviation">
 											<option value="-1">请选择您的转账银行</option>
 											<option value="cmb">招商银行</option>
-
 											<option value="icbc">中国工商银行</option>
-
 											<option value="boc">中国银行</option>
-											<!--<option value="ccb">中国建设银行</option>
-											<option value="icbc">中国工商银行</option>
+											<option value="ccb">中国建设银行</option>
 											<option value="abc">中国农业银行</option>
-											<option value="boc">中国银行</option>-->
 										</select>
-									</li>
+									</li>-->
 									<li class="mui-table-view-cell">
 										<label>转账金额</label>
 										<input type="number" class="mui-input-clear" placeholder="" data-input-clear="5" id="bank_money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
