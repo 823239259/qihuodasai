@@ -62,6 +62,8 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
+
+
               handleTime(historyParam);
             processingData(historyParam);
             handleVolumeChartData(historyParam);

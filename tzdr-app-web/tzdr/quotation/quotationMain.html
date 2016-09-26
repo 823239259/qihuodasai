@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-left" id="tutorial">新手指南</a>
+			<a class="mui-left" id="tutorial"><img src="../../images/newUser.png"></a>
 		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
 		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
 		</header>
@@ -216,7 +216,7 @@
 					    }else if(method == "OnRspSubscribe"){
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
-					         	console.log(JSON.stringify(MoreData));
+//					         	console.log(JSON.stringify(MoreData));
 					        	insertData1(MoreData);
 					        
 					    }else if(method == "OnRtnQuote"){
@@ -318,6 +318,12 @@
 				plus.webview.getWebviewById("quotationMain").reload();
 			}
 			});
+			document.getElementById("tutorial").addEventListener("tap",function(){
+				mui.openWindow({
+					url:"tutorial.html",
+					id:"tutorial",
+				});
+			})
 		</script>
 	</body>
 </html>

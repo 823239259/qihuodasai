@@ -55,7 +55,7 @@
 				<!--<div class="mui-indicator mui-active"></div>
 				<div class="mui-indicator"></div>
 				<div class="mui-indicator"></div>
-				<div class="mui-indicator"></div>--> 
+				<div class="mui-indicator"></div>-->
 			</div>
 		</div>
 		<div class="futureTitle">国际期货推荐</div>
@@ -95,9 +95,9 @@
 			</li>
 			
 		</ul>
-		<!--<button class="mui-btn" id="mybtnCheshi">点击</button>-->
 	</div>
 </body>
+<script src="js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" charset="utf-8">	
 	
 		mui.init({
@@ -121,8 +121,8 @@
 				mui.openWindow("tzdr/future/hsi.html","hsi"); 
 			});
 			document.getElementById("cp").addEventListener("tap",function(){
-//				mui.openWindow("tzdr/future/cp.html","cp"); 
-				mui.openWindow("tzdr/quotation/activity.html","activity"); 
+				mui.openWindow("tzdr/future/cp.html","cp"); 
+//				mui.openWindow("tzdr/quotation/activity.html","activity"); 
 			});
 //			document.getElementById("lhsi").addEventListener("tap",function(){
 //				mui.openWindow("tzdr/future/lhsi.html","lhsi");  
@@ -133,6 +133,7 @@
 			 * banner 至少6张最好  
 			 */
 			//获取banner图片
+			var imgId=[];
 			mui.app_request('banner/list',{},
 				function(result){
 					var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
@@ -140,6 +141,7 @@
 						var  banner_content='';
 						var indicator_content='';
 						for (var i=0;i<bannerLen;i++){ 
+							
 							if (i==0){
 								banner_content +=addBanner(result.data.bannerList[bannerLen-1],true);
 								indicator_content+='<div class="mui-indicator mui-active"></div>';
@@ -161,12 +163,14 @@
 					}
 					var slider = mui("#slider");  
 					slider.slider({interval: 3000});
+					
 				},
 				function(){
 					
 				}
 			);
 			//新增banner 显示
+			var timeNum=0;
 			function addBanner(banner,firstend){
 				var _html='';
 				if (firstend){
@@ -175,16 +179,32 @@
 				else{ 
 					 _html='<div class="mui-slider-item">';
 				}
-				_html +='<a href="javascript:void(0);" id="'+banner.newId+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title=""/>';
+				_html +='<a class="id" href="javascript:void(0);" id="'+banner.newId+'" data-id="'+timeNum+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title=""/>';
 				_html +='</a></div>';
+				imgId.push(banner.newId);
+				timeNum++;
 				return _html;
 			}
-			
 			//监听banner点击事件
+			var clickNum=0;
 		mui("#bannerloop").on('tap','a',function(){		 
 			//获取id
 			var nid = this.getAttribute("id");
-	    	mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
+			if(clickNum<=imgId.length-1){
+				var clickId = $(this).attr('data-id');
+				nid=imgId[clickId];
+				clickNum++;
+			}
+			var str="http";
+			console.log(nid);
+			if(nid == "" || nid == null || nid.length == 0 ){
+			}else if(nid.indexOf(str)==-1){
+				mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
+			}else{
+				mui.openWindow({url:"tzdr/news/active.html",id:"active",extras:{nid:nid}});
+			}
+//			mui.openWindow({url:"tzdr/quotation/activity.html",id:"activity"});
+////	    	mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
 		});
 		
 			//获取新闻列表信息
