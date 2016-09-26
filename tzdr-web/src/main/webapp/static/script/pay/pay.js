@@ -468,8 +468,15 @@ function doPayment(){
 }
 
 //银行转账
+$(function(){
+	var bankname=$('#uc_bank_radio ol');
+	bankname.click(function(){
+		var this_ = $(this).index();
+		$('#uc_bank_radio input:radio[name="back_icon"]').eq(this_).prop("checked",true);
+	});
+});
 function doTransmany(){
-	var bankname=$('.uc_b_selbank').attr("data-id");
+	var bankname=$('#uc_bank_radio input:radio[name="back_icon"]:checked').val();
 	var money=$("#transmoney").val();
 	var serialnum=$("#serialnum").val();
 	if(bankname==""||bankname==undefined){
