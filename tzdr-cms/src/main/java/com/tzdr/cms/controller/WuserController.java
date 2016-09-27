@@ -130,7 +130,7 @@ public class WuserController extends BaseCmsController<WUser> {
 			DataGridVo<WuserListVo> grid = new DataGridVo<WuserListVo>();
 			PageInfo<WuserListVo> dataPage = new PageInfo<WuserListVo>(request);
 			ConnditionVo connVo = new ConnditionVo(request);
-			if(connVo.isExcel()){
+			if (connVo.isExcel()) {
 				dataPage.setCurrentPage(1);
 				dataPage.setCountOfCurrentPage(TypeConvert.EXCEL_PAGE_SIZE);
 			}

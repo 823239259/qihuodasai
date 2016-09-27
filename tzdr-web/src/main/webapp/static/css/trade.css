@@ -771,7 +771,7 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
 .cp_ovlist li.big p { height:85px; line-height:20px; width:473px; padding:5px;text-align: left; font-size:12px;}
 .cp_ovpayrule li { width:482px;  }
 .cp_ovpayrule li p { height:110px; line-height:66px;}
-.cp_ovpayrule li p.big {height:110px;  width:472px; padding:0 5px; line-height:22px; font-size:12px; text-align: left;}
+.cp_ovpayrule li p.big {height:110px;  width:472px; padding:0 5px; line-height:21px; font-size:12px; text-align: left;}
 .cp_ovpayrule li p.big i { font-size:14px;}
 .cpp_ovlist li p { height:38px; line-height:38px;}
 .cpp_ovlist li.big p { height:28px; text-align: center; line-height:28px; } 
