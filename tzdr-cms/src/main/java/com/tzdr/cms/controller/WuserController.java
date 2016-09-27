@@ -135,14 +135,14 @@ public class WuserController extends BaseCmsController<WUser> {
 				dataPage.setCountOfCurrentPage(TypeConvert.EXCEL_PAGE_SIZE);
 			}
 			dataPage = this.wuserService.queryDataPageWuserListVo(dataPage, connVo);
-			if(connVo.isExcel(dataPage.getPageResults(),resp,"所有用户列表.xls")){
-				WebUtil.printText(JSON.toJSONString(grid), resp);
-			}
-			if (dataPage.getPageResults() != null) {
-				for (WuserListVo wu : dataPage.getPageResults()) {
-					grid.add(wu);
+			if(connVo.isNotExcel(dataPage.getPageResults(), resp,"所有用戶列表.xls")){
+				if (dataPage.getPageResults() != null) {
+					for (WuserListVo wu : dataPage.getPageResults()) {
+						grid.add(wu);
+					}
+					grid.setTotal(dataPage.getTotalCount());
 				}
-				grid.setTotal(dataPage.getTotalCount());
+			
 			}
 			WebUtil.printText(JSON.toJSONString(grid), resp);
 		} catch (Exception e) {

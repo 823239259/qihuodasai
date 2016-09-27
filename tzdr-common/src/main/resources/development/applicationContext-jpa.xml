@@ -82,6 +82,7 @@
 			<!-- 拦截所有调用dktai_cpp的数据库访问方法 -->
 			<aop:pointcut id="dataSourcePointcut" expression="execution(* com.tzdr.business.cms.cpp..*(..))"/>
 			<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
+			<aop:after pointcut-ref="dataSourcePointcut" method="resolveDefaultDataSource"/>
 		</aop:aspect>
 	</aop:config>
 	<!-- 支持annotation声明事务 -->
