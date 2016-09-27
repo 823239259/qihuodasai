@@ -53,6 +53,8 @@ public class DrawList extends BaseCrudEntity {
 	 * 提现手续费
 	 */
 	private double fee;
+	
+	
 	/**
 	 * 提现人 姓名
 	 */
@@ -248,6 +250,7 @@ public class DrawList extends BaseCrudEntity {
 	public void setFee(double fee) {
 		this.fee = fee;
 	}
+
 
 	@Column(name="name", nullable=false, length=100)
 	public String getName() {
