@@ -21,6 +21,8 @@
 					{field:'bank',title:'提现银行',width:200,sortable:true},
 					{field:'card',title:'银行卡号',width:200,sortable:true},
 					{field:'money',title:'提现金额',width:200,sortable:true},
+					{field:'fee',title:'手续费',width:200,sortable:true},
+					{field:'avlAmount',title:'实际到账金额',width:200,sortable:true},
 					{field:'addtime',title:'提现时间',width:150,sortable:true,formatter: function(value,row,index){
 						if (validateIsNull(value)){
 							return;
@@ -65,16 +67,16 @@ $(document).ready(function(){
 	    		initData.dataGridId="failData";
 	    		gridParams.toolbar='#failtb';
 	    		gridParams.queryParams={search_EQ_status:4};
-	    		gridParams.columns[0][8].hidden=true;
-	    		gridParams.columns[0][9].hidden=true;
+	    		gridParams.columns[0][8].hidden=false;
+	    		gridParams.columns[0][9].hidden=false;
 	    		$("#"+initData.dataGridId).datagrid(gridParams);
 	    	}
 	    	if (title == '提现处理中审核'){
 	    		initData.dataGridId="processingData";
 	    		gridParams.toolbar='#processingtb';
 	    		gridParams.queryParams={search_EQ_status:21,search_LTE_addtime:parseInt(new Date().getTime()/1000)-43200};
-	    		gridParams.columns[0][8].hidden=true;
-	    		gridParams.columns[0][9].hidden=true;
+	    		gridParams.columns[0][8].hidden=false;
+	    		gridParams.columns[0][9].hidden=false;
 	    		$("#"+initData.dataGridId).datagrid(gridParams);
 	    	}
 	    	
@@ -82,7 +84,7 @@ $(document).ready(function(){
 	    		initData.dataGridId="successData";
 	    		gridParams.toolbar='#successtb';
 	    		gridParams.queryParams={search_EQ_status:31};
-	    		gridParams.columns[0][8].hidden=true;
+	    		gridParams.columns[0][8].hidden=false;
 	    		gridParams.columns[0][9].hidden=false;
 	    		$("#"+initData.dataGridId).datagrid(gridParams);
 	    		
