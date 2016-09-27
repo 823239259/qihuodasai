@@ -314,13 +314,11 @@ function doGopay(){
 		$("#gopaymoney").focus();
 		return ;
 	}
-	
 	if(!isMoney(money)){
 		showMsgDialog("提示","充值金额填写错误");
 		$("#gopaymoney").focus();
 		return ;
 	}
-	
 	if(parseFloat(money)<1){
 		showMsgDialog("提示","充值金额必须大于等于1元");
 		$("#gopaymoney").focus();
@@ -479,10 +477,6 @@ function doTransmany(){
 	var bankname=$('#uc_bank_radio input:radio[name="back_icon"]:checked').val();
 	var money=$("#transmoney").val();
 	var serialnum=$("#serialnum").val();
-	if(bankname==""||bankname==undefined){
-		showMsgDialog("提示","请选择银行");
-		return ;
-	}
 	if(!isMoney(money)){
 		showMsgDialog("提示","充值金额填写错误");
 		return ;
@@ -493,6 +487,10 @@ function doTransmany(){
 	}
 	if(parseFloat(money)>6000000){
 		showMsgDialog("提示","充值金额不能大于600万");
+		return ;
+	}
+	if(bankname==""||bankname==undefined){
+		showMsgDialog("提示","请选择银行");
 		return ;
 	}
 	if(serialnum==""){
