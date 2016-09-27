@@ -599,9 +599,12 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
     z-index: 999;
 }
 #weiPayCode{
-	width: 60%;
+	width: 100%;
+	padding-left: 15px;
 }
 #weiPayCode img{
-	width: 100%;
+	display: block;
+	width: 30%;
 	height: auto;
+	margin: auto;
 }
