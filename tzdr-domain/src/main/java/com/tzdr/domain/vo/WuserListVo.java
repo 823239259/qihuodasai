@@ -94,21 +94,31 @@ public class WuserListVo implements Serializable {
 	@SqlColumn
 	private String alipayAccount;
 	
-	@AllowExcel(name = "注册时间")
+	
 	@SqlColumn
 	private BigInteger ctime;//注册时间
 	
 	
-	@AllowExcel(name = "最后登陆时间")
+
 	@SqlColumn
 	private BigInteger lastLoginTime;//最后登陆时间
 	
 	/**
 	 * 来源网站
 	 */
-	@AllowExcel(name = "来源网站")
+	
 	@SqlColumn
 	private Integer source;
+	
+	@AllowExcel(name = "注册时间")
+	private String ctimeStr;
+		
+	@AllowExcel(name = "最后登陆时间")
+	private String lastLoginTimeStr;
+		
+	@AllowExcel(name = "来源网站")
+	private String sourceName;
+		
 	@AllowExcel(name = "渠道来源")
 	@SqlColumn
 	private String channel;
@@ -117,11 +127,6 @@ public class WuserListVo implements Serializable {
 	private String keyword;
 
 
-	private String ctimeStr;
-	
-	private String lastLoginTimeStr;
-	
-	private String sourceName;
 	
 
 	
@@ -300,23 +305,6 @@ public class WuserListVo implements Serializable {
 		this.source = source;
 	}
 
-	public String getChannel() {
-		return channel;
-	}
-
-	public void setChannel(String channel) {
-		this.channel = channel;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	
 
 	
 	public String getCtimeStr() {
@@ -370,6 +358,25 @@ public class WuserListVo implements Serializable {
 		this.sourceName = sourceName;
 	}
 
+
+	
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	
 
 
 }
