@@ -263,18 +263,25 @@
 				$("#alertMainContent").html("<p>开户姓名："+username+"</p><p>开户银行："+bankNameName+"</p><p>开户地址："+showCityPicker+detailedAddress+"</p><p>银行卡号："+card+"</p>")
 				
 			},500);
+			var cityList=showCityPicker.split(" ");
+			var city=cityList[0];
+			var detailCity=cityList[1]
+			
 			//添加银行卡
 			$("#confirmBtn").click(function(){
-				sendCardMessage(bank_list,card)
+				sendCardMessage(bank_list,card,city,detailCity,detailedAddress)
 			});
 			$("#cancelBtn").click(function(){
 				$("#alertDiv").css("display","none");
 			})
 		};
 		
-		function sendCardMessage(bank_list,card){
+		function sendCardMessage(bank_list,card,city,detailCity){
 			mui.app_request("/user/withdraw/add_bank",{
 				"bank":bank_list,
+				"prov":city,
+				"city":detailCity,
+				"address":detailedAddress,
 				"card":card
 			},function(result){
 				mui.toast("添加成功！");
