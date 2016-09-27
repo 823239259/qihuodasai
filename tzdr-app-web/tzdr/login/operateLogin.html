@@ -72,8 +72,6 @@
 				 * 选择账号
 				 */
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
-				var dd=plus.storage.getItem("aa")
-				console.log(JSON.stringify(dd));
 				var user=[];
 				if(user_mobile==null){
 					$("#checkContent").text("其它");
@@ -219,17 +217,25 @@
 								var code = parameters.Code;
 								var loginMessage = parameters.Message;
 								if (code == 0) {
-									backReload();
-									localStorage.setItem("account",account);
-									localStorage.setItem("password",pwd);
-									localStorage.setItem("endLoginAccount",account);
-									localStorage.setItem("endLoginPassword",pwd);
-									plus.nativeUI.closeWaiting();
-									mui.toast("登录成功");
-									islogin = true;
+										localStorage.setItem("account",account);
+										localStorage.setItem("password",pwd);
+										localStorage.setItem("endLoginAccount",account);
+										localStorage.setItem("endLoginPassword",pwd);
 									if (Transfer.backpageID){
+										backReload();
+										plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										islogin = true;
 				      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
 				      					return;
+		      						}else{
+		      							plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										islogin = true;
+		      							mui.openWindow({
+		      								url:"../quotation/quotationMain.html",
+		      								id:"quotationMain"
+		      							})
 		      						}
 								} else {
 									alertProtype(loginMessage,"提示",Btn.confirmed());
@@ -256,7 +262,7 @@
 						id:"tradingMarket"
 					})
 				});
-				$("#account")
+//				$("#account")
 			});
 			
 		</script>
