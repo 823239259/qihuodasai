@@ -130,6 +130,10 @@ public class WuserController extends BaseCmsController<WUser> {
 			DataGridVo<WuserListVo> grid = new DataGridVo<WuserListVo>();
 			PageInfo<WuserListVo> dataPage = new PageInfo<WuserListVo>(request);
 			ConnditionVo connVo = new ConnditionVo(request);
+			if (connVo.isExcel()) {
+				dataPage.setCurrentPage(1);
+				dataPage.setCountOfCurrentPage(TypeConvert.EXCEL_PAGE_SIZE);
+			}
 			dataPage = this.wuserService.queryDataPageWuserListVo(dataPage, connVo);
 			if(connVo.isExcel(dataPage.getPageResults(),resp,"所有用户列表.xls")){
 				WebUtil.printText(JSON.toJSONString(grid), resp);
