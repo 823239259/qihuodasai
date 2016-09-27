@@ -3,6 +3,8 @@ package com.tzdr.cpp;
 import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DataSourceAspect {
+	   private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
 			/**
 	       * 拦截目标方法，获取由@DataSource指定的数据源标识，设置到线程存储中以便切换数据源
 	       * 
@@ -40,18 +43,26 @@ public class DataSourceAspect {
                    // 默认使用类型注解
                    if (clazz.isAnnotationPresent(DataSource.class)) {
                        DataSource source = clazz.getAnnotation(DataSource.class);
-                       System.out.println(source.value()+"类注解");
                        DynamicDataSourceHolder.setDataSource(source.value());
                    }
                    // 方法注解可以覆盖类型注解
                    Method m = clazz.getMethod(method.getName(), types);
                    if (m != null && m.isAnnotationPresent(DataSource.class)) {
                        DataSource source = m.getAnnotation(DataSource.class);
-                       System.out.println(source.value()+"方法");
                        DynamicDataSourceHolder.setDataSource(source.value());
                    }
               } catch (Exception e) {
-                  System.out.println(clazz + ":" + e.getMessage());
+            	  logger.info(clazz + ":" + e.getMessage());
                }
+           }
+           /**
+            * 当执行CPP下CRUD完成时，设置为默认数据源（如果不指定，虽然在jpa中配置了默认数据源，在数据源切换时会出现切换失效）
+            */
+           public void resolveDefaultDataSource(){
+        	   try {
+				DynamicDataSourceHolder.setDataSource("dataSource");
+			} catch (Exception e) {
+				logger.info("设置默认数据源异常：" + e);
+			}
            }
 }
