@@ -150,16 +150,9 @@
 									<li class="mui-table-view-cell">
 										<a class="mui-navigate-right" id="bindAlipay">
 											<label>绑定微信账号</label>
-											<b><span id="alipay_account">待绑定</span></b>
+											<b><span id="wx_account">待绑定</span></b>
 										</a>
 									</li> 
-								</ul>
-								<ul class="mui-table-view" id = "wx_list">
-									<li class="mui-table-view-cell">
-										<label>充值金额</label>
-										<span>元</span>
-										<input type="tel" id="rechargeMoney" class="mui-input-clear" placeholder="输入金额" data-input-clear="5">
-									</li>
 								</ul>
 								<ul class="mui-table-view">
 									<li class="mui-table-view-cell">
@@ -289,20 +282,15 @@
 					 	mui.back();
 					 }
 				});
-				$.ajax({
-					url:"/user/pay/check/wx/account",
-					type:"get",
-					success:function(result){
-						var succ = result.success;
-						if(succ){
-							$("#list").hide();
-						}else{
-							$("#wx_list").hide();
+				mui.app_request('/user/pay/check/wx/account', {
+						}, function(result) {
+							if(result.success==true){
+								$("#wx_account").text(result.message);
+							}
+							return;
+						}, function(result) {
 							mui.toast(result.message);
-						}
-					}
-				});
-				
+						});
 			//var thisURL = document.URL;
 			//alert(thisURL);
 			  /*document.getElementById("openappliy").addEventListener("tap", function() {
@@ -495,7 +483,7 @@
 				//getalipayAcount();
 
 				document.getElementById("bindAlipay").addEventListener("tap", function() {
-					var alipay_account = document.getElementById("alipay_account");
+					var alipay_account = document.getElementById("wx_account");
 					mui.prompt("请输入要绑定的微信账号", "微信账号", "绑定提示", ['取消', '绑定'], function(e) {
 						if(e.index == 0) {
 							return;
@@ -508,6 +496,7 @@
 							"account": e.value
 						}, function(result) {
 							if(result.success==true){
+								console.log(JSON.stringify(result));
 								mui.toast("绑定成功！");
 								alipay_account.innerHTML = e.value;
 							}else{
