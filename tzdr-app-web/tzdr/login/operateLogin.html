@@ -181,7 +181,12 @@
 					mui.callService();
 				});
 				document.getElementById("backClose").addEventListener("tap",function(){
-					backReload(); 
+					if (Transfer.backpageID){
+						backReload();
+					}else{
+						mui.back();
+					}
+					
 				});
 				$("#operateLogin").click(function(){
 					if(username == null){
