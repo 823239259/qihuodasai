@@ -203,6 +203,11 @@ $(document).ready(function(){
 				}
 	});
 	});
+	
+	function closeVariety(){
+		$("#passVariety").show;
+		$("#passVariety").window('close');
+	}
 </script>
 </head>
 <body>
@@ -394,7 +399,7 @@ $(document).ready(function(){
             <tr>
                 <td align="center" colspan="3">
 	               <a id="btn" href="javascript:void(0);" onclick="varietySubmit()" class="easyui-linkbutton">提交</a>
-	               <a id="btn" href="javascript:void(0);" onclick="" class="easyui-linkbutton">取消</a>
+	               <a id="btn" href="javascript:void(0);" onclick="closeVariety()" class="easyui-linkbutton">取消</a>
                </td>
             </tr>
         </table>

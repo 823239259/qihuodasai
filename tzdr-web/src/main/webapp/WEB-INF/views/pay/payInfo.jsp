@@ -136,9 +136,25 @@
 			</div>
 			<div class="subtab">
 					<div class="uc_bank">
-						<p class="uc_b_title">您可以通过网上银行或银行柜台向维胜转账（手续费最多一笔50元）</p>
-						<ul class="uc_b_list">
-							<ol class="first">
+						<p class="uc_b_title">温馨提示：如您已开通网银，请尽量选择网银充值，如您是柜台转账请尽量选择相同银行转账，这样可以快速及时到账！</p>
+						<ul class="uc_b_money">
+						<!-- <li>
+							<label>转账银行</label>
+							<input type="text" disabled="true" class="uc_b_selbank">
+							<a href="javascript:void(0)" class="uc_i_ipdown uc_b_ipbank"></a>
+						</li> -->
+							<li>
+								<label>转账金额</label>
+								<input type="text" id="transmoney" name="transmoney" onKeyUp="javascript:clearNoNumber(event,this)">
+							</li>
+							<li>
+								<label>流水号</label>
+								<input type="text" id="serialnum" name="serialnum">
+							</li>
+						</ul>
+						<ul class="uc_b_list" id="uc_bank_radio">
+							<ol class="first" style="width: 590px;">
+								<li><input type="radio" name="back_icon" value="cmb" style="margin-top: 40px;"></li>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_19.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>账号：<i>1289 0715 5110 501</i></span>
@@ -146,7 +162,8 @@
 									<span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
 								</li>
 							</ol>
-							<ol>
+							<ol style="width: 590px;">
+								<li><input type="radio" name="back_icon" value="icbc" style="margin-top: 40px;"></li>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>4402 9391 1910 0042 543</i></span>
@@ -154,7 +171,8 @@
 									<span>开户行：<i>中国工商银行府河音乐花园支行</i></span>
 								</li>
 							</ol>
-							<ol>
+							<ol style="width: 590px;">
+								<li><input type="radio" name="back_icon" value="boc" style="margin-top: 40px;"></li>
 								<li class="uc_b_l_bank" ><img src="${ctx}/static/images/banks/bank_10.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>1158 4367 7712</i></span>
@@ -162,7 +180,8 @@
 									<span>开户行：<i>中国银行天府新区华阳支行</i></span>
 								</li>
 							</ol>
-							<ol class="first">
+							<ol class="first" style="width: 590px;">
+								<li><input type="radio" name="back_icon" value="ccb" style="margin-top: 40px;"></li>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>5105 0140 6137 0000 0421</i></span>
@@ -170,7 +189,8 @@
 									<span>开户行：<i>中国建设银行成都世纪城新会展支行</i></span>
 								</li>
 							</ol>
-							<ol>
+							<ol style="width: 590px;">
+								<li><input type="radio" name="back_icon" value="abc" style="margin-top: 40px;"></li>
 								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_03.jpg"></li>
 								<li class="uc_b_l_info">
 									<span>帐号：<i>2280 8201 0400 0559 5</i></span>
@@ -189,21 +209,6 @@
 						<a data-id="abc" href="javascript:void(0)">中国农业银行</a>
 					</div>
 				</div>
-				<ul class="uc_b_money">
-					<li>
-						<label>转账银行</label>
-						<input type="text" disabled="true" class="uc_b_selbank">
-						<a href="javascript:void(0)" class="uc_i_ipdown uc_b_ipbank"></a>
-					</li>
-					<li>
-						<label>转账金额</label>
-						<input type="text" id="transmoney" name="transmoney" onKeyUp="javascript:clearNoNumber(event,this)">
-					</li>
-					<li>
-						<label>流水号</label>
-						<input type="text" id="serialnum" name="serialnum">
-					</li>
-				</ul>
 				<div class="uc_paybtn uc_b_btn">
 					<a href="javascript:void(0)" onclick="doTransmany();">提交</a>
 				</div>

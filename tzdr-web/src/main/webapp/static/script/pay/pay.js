@@ -468,16 +468,19 @@ function doPayment(){
 }
 
 //银行转账
+$(function(){
+	var bankname=$('#uc_bank_radio ol');
+	bankname.click(function(){
+		var this_ = $(this).index();
+		$('#uc_bank_radio input:radio[name="back_icon"]').eq(this_).prop("checked",true);
+	});
+});
 function doTransmany(){
-	var bankname=$('.uc_b_selbank').attr("data-id");
+	var bankname=$('#uc_bank_radio input:radio[name="back_icon"]:checked').val();
 	var money=$("#transmoney").val();
 	var serialnum=$("#serialnum").val();
 	if(bankname==""||bankname==undefined){
 		showMsgDialog("提示","请选择银行");
-		return ;
-	}
-	if(serialnum==""){
-		showMsgDialog("提示","请输入流水号");
 		return ;
 	}
 	if(!isMoney(money)){
@@ -490,6 +493,10 @@ function doTransmany(){
 	}
 	if(parseFloat(money)>6000000){
 		showMsgDialog("提示","充值金额不能大于600万");
+		return ;
+	}
+	if(serialnum==""){
+		showMsgDialog("提示","请输入流水号");
 		return ;
 	}
 	 $.post(basepath+"/pay/doAlipayOrTansaccount",{"bankname":bankname,"alimoney":money,"serialnum":serialnum,"type":"trans"},function(data){  
