@@ -26,9 +26,12 @@
 <style>
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 	.uc_bank {width: auto; padding: 0 20px 0 20px;}
-	.uc_b_money , .uc_b_list {width: auto;}
-	.uc_b_list ol {width: 734px;}
-	.uc_b_l_info{padding-left: 30px; width: 485px; height: 48px; padding-top: 26px; padding-bottom: 26px;}
+	.uc_b_money {width: auto; margin: 20px 0;}
+	.uc_b_list {float:left; width: 693px; position: relative; left: 20px;}
+	.uc_b_list ol {width: 700px; padding: 0; height: 70px;}
+	.uc_b_l_info{padding-left: 10px; width: 475px; height: 48px; padding-top: 10px; padding-bottom: 10px;}
+	.uc_b_money li label {width: 70px; }
+	.uc_b_l_bank {height: 50px;padding: 10px 10px 0 10px;}
 </style>
 </head>
 <body>
@@ -147,53 +150,58 @@
 								<input type="text" id="transmoney" name="transmoney" onKeyUp="javascript:clearNoNumber(event,this)">
 							</li>
 						</ul>
-						<ul class="uc_b_list" id="uc_bank_radio">
-							<ol class="first">
-								<li><input type="radio" name="back_icon" value="cmb" style="margin-top: 40px;"></li>
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_19.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>账号：<i>1289 0715 5110 501</i></span>
-									<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
-									<!-- <span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span> -->
-								</li>
-							</ol>
-							<ol>
-								<li><input type="radio" name="back_icon" value="icbc" style="margin-top: 40px;"></li>
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>4402 9391 1910 0042 543</i></span>
-									<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>中国工商银行府河音乐花园支行</i></span>
-									<!-- <span>开户行：<i>中国工商银行府河音乐花园支行</i></span> -->
-								</li>
-							</ol>
-							<ol>
-								<li><input type="radio" name="back_icon" value="boc" style="margin-top: 40px;"></li>
-								<li class="uc_b_l_bank" ><img src="${ctx}/static/images/banks/bank_10.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>1158 4367 7712</i></span>
-									<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>中国银行天府新区华阳支行</i></span>
-									<!-- <span>开户行：<i>中国银行天府新区华阳支行</i></span> -->
-								</li>
-							</ol>
-							<ol class="first">
-								<li><input type="radio" name="back_icon" value="ccb" style="margin-top: 40px;"></li>
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>5105 0140 6137 0000 0421</i></span>
-									<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>中国建设银行成都世纪城新会展支行</i></span>
-									<!-- <span>开户行：<i>中国建设银行成都世纪城新会展支行</i></span> -->
-								</li>
-							</ol>
-							<ol>
-								<li><input type="radio" name="back_icon" value="abc" style="margin-top: 40px;"></li>
-								<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_03.jpg"></li>
-								<li class="uc_b_l_info">
-									<span>帐号：<i>2280 8201 0400 0559 5</i></span>
-									<span>户名：<i>成都盈透科技有限公司	 </i>	开户行：<i>中国农业银行成都新希望国际支行</i></span>
-									<!-- <span>开户行：<i>中国农业银行成都新希望国际支行</i></span> -->
-								</li>
-							</ol>
-						</ul>
+						<div style="height: 400px;">
+							<ul class="uc_b_money" style="float: left; width: 70px; margin-top: 30px; ">
+								<li><label>转账到</label></li>
+							</ul>
+							<ul class="uc_b_list" id="uc_bank_radio">
+								<ol class="first">
+									<li><input type="radio" name="back_icon" value="cmb" style="margin-top: 29px;"></li>
+									<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_19.jpg"></li>
+									<li class="uc_b_l_info">
+										<span>账号：<i>1289 0715 5110 501</i></span>
+										<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>招商银行股份有限公司成都天府大道支行</i></span>
+										<!-- <span>开户行：<i>招商银行股份有限公司成都天府大道支行</i></span> -->
+									</li>
+								</ol>
+								<ol>
+									<li><input type="radio" name="back_icon" value="icbc" style="margin-top: 29px;"></li>
+									<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_01.jpg"></li>
+									<li class="uc_b_l_info">
+										<span>帐号：<i>4402 9391 1910 0042 543</i></span>
+										<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>中国工商银行府河音乐花园支行</i></span>
+										<!-- <span>开户行：<i>中国工商银行府河音乐花园支行</i></span> -->
+									</li>
+								</ol>
+								<ol>
+									<li><input type="radio" name="back_icon" value="boc" style="margin-top: 29px;"></li>
+									<li class="uc_b_l_bank" ><img src="${ctx}/static/images/banks/bank_10.jpg"></li>
+									<li class="uc_b_l_info">
+										<span>帐号：<i>1158 4367 7712</i></span>
+										<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>中国银行天府新区华阳支行</i></span>
+										<!-- <span>开户行：<i>中国银行天府新区华阳支行</i></span> -->
+									</li>
+								</ol>
+								<ol class="first">
+									<li><input type="radio" name="back_icon" value="ccb" style="margin-top: 29px;"></li>
+									<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_04.jpg"></li>
+									<li class="uc_b_l_info">
+										<span>帐号：<i>5105 0140 6137 0000 0421</i></span>
+										<span>户名：<i>成都盈透科技有限公司	</i>	开户行：<i>中国建设银行成都世纪城新会展支行</i></span>
+										<!-- <span>开户行：<i>中国建设银行成都世纪城新会展支行</i></span> -->
+									</li>
+								</ol>
+								<ol>
+									<li><input type="radio" name="back_icon" value="abc" style="margin-top: 29px;"></li>
+									<li class="uc_b_l_bank"><img src="${ctx}/static/images/banks/bank_03.jpg"></li>
+									<li class="uc_b_l_info">
+										<span>帐号：<i>2280 8201 0400 0559 5</i></span>
+										<span>户名：<i>成都盈透科技有限公司	 </i>	开户行：<i>中国农业银行成都新希望国际支行</i></span>
+										<!-- <span>开户行：<i>中国农业银行成都新希望国际支行</i></span> -->
+									</li>
+								</ol>
+							</ul>
+						</div>
 						<ul class="uc_b_money">
 							<li>
 								<label>流水号</label>
@@ -210,7 +218,7 @@
 						<a data-id="abc" href="javascript:void(0)">中国农业银行</a>
 					</div>
 				</div>
-				<div class="uc_paybtn uc_b_btn">
+				<div class="uc_paybtn uc_b_btn" style="margin-left: 90px;">
 					<a href="javascript:void(0)" onclick="doTransmany();">提交</a>
 				</div>
 					<div class="uc_b_promt"><i>注意事项</i></div>

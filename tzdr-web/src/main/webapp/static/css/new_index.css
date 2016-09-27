@@ -105,3 +105,20 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 /* weixin */
 .follow .erweima .erweima-wxtk {position: absolute;top: -153px;left: -39px; height: 150px;}
 .follow .erweima .erweima-wxtk img {height: 150px;}
+
+/* 登录 sign */
+#signin_box {width: 320px; height: 300px; position: fixed; top: 50%; left: 50%;}
+#signin_box .center {width: 260px; margin: 0 auto;}
+#signin_box .mode {margin-top: 20px;}
+#signin_box .mode a {margin-right:20px; font-size: 16px; color: #000;}
+#signin_box .mode a.on{color:#fc3; border-left: 1px solid #ccc; padding-left: 20px;}
+#signin_box .mode a:hover{color:#fc3;}
+#signin_box .sigin_ipctn input {width: 248px;height: 32px; line-height: 32px\9; vertical-align: middle; border: 1px solid #999; border-radius: 3px; font-size: 12px; padding-left: 10px; outline: none; color: #333; margin-bottom: 16px;}
+#signin_box .warning{height: 20px; margin-bottom: 4px; line-height: 20px; line-height: 20px\9;}
+#signin_box .sigin_link a {color: #000;}
+#signin_box .sigin_link a:hover {color: #fc3;}
+#signin_box .center button {width: 248px;height: 32px; line-height: 32px\9; vertical-align: middle; border: 1px solid #999; border-radius: 3px; font-size: 12px; padding-left: 10px; outline: none; color: #333; margin-bottom: 16px;}
+
+
+
+
