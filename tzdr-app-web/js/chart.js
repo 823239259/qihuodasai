@@ -14,8 +14,8 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-		$("#tradeTitle").text(Transfer.name[0]);
-		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
+		$("#tradeTitle").append("<option value='"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
+//		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
     	setTimeout(function(){
 					muiSpinner[0].style.display="none";
@@ -45,6 +45,7 @@ mui.plusReady(function(){
 		    var exchangeNo = $("#exchangeNo").val();
 		    var commodityNo = $("#commodeityNo").val();
 		    var contractNo = $("#contractNo").val();
+		    //masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
@@ -57,7 +58,7 @@ mui.plusReady(function(){
 			if(historyParam.Parameters==null){
 				return
 			};
-			console.log(JSON.stringify(historyParam.Parameters));
+//			console.log(JSON.stringify(historyParam.Parameters));
 			if(historyParam.Parameters[0].HisQuoteType==0){
 				handleTime(historyParam);
 				processingData(historyParam);
@@ -102,13 +103,31 @@ mui.plusReady(function(){
 					$("#contractSize").val(comm.ContractSize);
 				} 
 				setMarketCommdity(newCommdityNo+newContractNo,comm);
+				if(Transfer.name[2]==commoditys[i].CommodityNo){
+			
+	 			}else{
+	 				$("#tradeTitle").append("<option value="+commoditys[i].CommodityNo+commoditys[i].MainContract+">"+commoditys[i].CommodityName+commoditys[i].CommodityNo+commoditys[i].MainContract+"</option>")
+	 			}
+				
 				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 			}
         }
     };
     marketSocket.onerror = function(evt){
     };
- 	
+    //插入下拉菜单数据
+ 	function updateData(data){
+ 		var upData=data;
+ 		console.log(JSON.stringify(upData));
+ 		for(var i=0;i<=upData.length-1;i++){
+ 			if(Transfer.name[2]==upData[i].CommodityNo){
+ 				
+ 			}else{
+ 				
+ 			}
+ 		}
+ 		
+ 	}
     /**
 	 * 更新行情数据 
 	 * @param {Object} param

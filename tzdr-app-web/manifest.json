@@ -476,9 +476,7 @@
 					"js/jquery-1.11.3.js",
 					"images/bank/ccb.png",
 					"images/bank/psbc.png",
-					"images/bank/cmb.png",
-					"images/bank/spdb.png",
-					"images/bank/cmbc.png"
+					"images/bank/cmb.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -1039,9 +1037,10 @@
 					"js/reconnecting-websocket.js",
 					"js/common.config.js",
 					"js/chart.config.js",
-					"js/timechart.config.js",
+					"js/dayCandlestick.config.js",
 					"js/candlestick.config.js",
-					"js/dayCandlestick.config.js"
+					"js/timechart.config.js",
+					"images/0.0.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1184,21 +1183,7 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"css/mui.poppicker.css",
-					"css/mui.picker.min.css",
-					"css/app.css",
-					"js/mui.picker.min.js",
-					"js/mui.poppicker.js",
-					"js/city.data.js",
-					"images/bank/citic.png",
-					"images/bank/gdb.png",
-					"images/bank/abc.png",
-					"images/bank/cmb.png",
-					"images/bank/cmbc.png",
-					"images/bank/spdb.png",
-					"js/jquery-1.11.3.js",
-					"images/bank/boc.png"
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

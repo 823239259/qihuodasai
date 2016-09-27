@@ -204,22 +204,35 @@ p{
 	overflow: hidden;
 	padding:0px 15px;
 	width: 50%;
+	height: 65px;
 }
 .ProductInformationLeft{
-	padding:10px 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 0px;
+	/*padding:10px 15px;*/
 }
 .ProductInformationLeft p{
 	font-size: 14px;
 }
 .ProductInformationLeft select{
-	
+	background-color: #2B2B2B;
+	color:#FFFFFF;
+	font-size: 14px;
+	margin-bottom: 0px;
+	padding: 10px 0px !important;
 }
+/*#searchIcon{
+	position: absolute;
+	top: 10%;
+	color:red;
+	font-size: 30px;
+}*/
 .ProductInformationRight{
 	overflow: hidden;
 }
 .ProductInformationRight p{
 	font-size: 12px;
-	line-height: ;
 }
 .grayFont{
 	color:#999999 !important;
