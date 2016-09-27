@@ -639,7 +639,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 	public PageInfo<RechargeBankListVo> queryNetBankListRecharge(PageInfo<RechargeBankListVo> page){
 		String sql = " SELECT w.id,(SELECT u.mobile FROM w_user u WHERE u.id=w.uid)mobile,"
 				+ " (SELECT v.tname FROM w_user_verified v WHERE v.uid=w.uid)tname"
-				+ " ,w.trade_no,w.trade_account,w.money,w.actual_money,w.`status`"
+				+ " ,w.trade_no,w.trade_account,w.money,w.actual_money,w.`status`,w.no"
 				+ " ,w.uptime,w.addtime,w.source FROM w_recharge_list w "
 				+ " WHERE w.type='2' "
 				+ createAuditRuleSql()

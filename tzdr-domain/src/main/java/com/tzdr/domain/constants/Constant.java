@@ -113,6 +113,10 @@ public interface Constant {
 		 * 易支付
 		 */
 		public static final int EASE_PAY=3;
+		/**
+		 * 国付宝
+		 */
+		public static final int GO_PAY = 7;
 	}
 	
 	

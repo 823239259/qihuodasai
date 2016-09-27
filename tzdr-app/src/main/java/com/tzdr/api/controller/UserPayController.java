@@ -158,11 +158,11 @@ public class UserPayController {
 	 * 验证用户是否绑定微信号
 	 * @return
 	 */
-	@RequestMapping(value = "/check/wx/account",method = RequestMethod.GET)
+	@RequestMapping(value = "/check/wx/account",method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult checkedWxAccount(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();
-		UserVerified userVerified = userVerifiedService.get(uid);
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
 		ApiResult resultJson = new ApiResult(false);
 		if(userVerified != null){
 			String wxAccount = userVerified.getWxAccount();

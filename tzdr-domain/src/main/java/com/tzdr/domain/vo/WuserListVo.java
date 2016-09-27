@@ -23,55 +23,86 @@ public class WuserListVo implements Serializable {
 	private static final long serialVersionUID = 5413198153714337951L;
 	@SqlColumn
 	private String id;
-	
-	@SqlColumn
-	private String tname;
-	@AllowExcel(name = "用户昵称")
-	@SqlColumn
-	private String uname;//用户昵称
-	@AllowExcel(name = "邮箱")
-	@SqlColumn
-	private String email;//邮箱
 	@AllowExcel(name = "手机号")
 	@SqlColumn
 	private String mobile;//手机号
-	@AllowExcel(name = "注册时间")
+	@AllowExcel(name = "用户姓名")
 	@SqlColumn
-	private BigInteger ctime;//注册时间
+	private String tname;
+	@SqlColumn
+	private String uname;//用户昵称
+	
 	/**
 	 * 用户类型
 	 */
 	@AllowExcel(name = "用户类型")
 	@SqlColumn
 	private String userType;
-	@AllowExcel(name = "身份证号")
-	@SqlColumn
-	private String idcard;//身份证号
-	@AllowExcel(name = "最后登陆时间")
-	@SqlColumn
-	private BigInteger lastLoginTime;//最后登陆时间
-	/**
-	 * 账户余额
-	 */
-	@AllowExcel(name = "账户余额")
-	@SqlColumn
-	private Double avlBal;
+
 	/**
 	 * 配资保证金
 	 */
-	@AllowExcel(name = "配资保证金")
+	@AllowExcel(name = "配资金额")
 	@SqlColumn
 	private Double allocationMoney;
+	
+
+	/**
+	 * 账户余额
+	 */
+	@AllowExcel(name = "账号余额")
+	@SqlColumn
+	private Double avlBal;
+	
 	//冻结金额
 	@AllowExcel(name = "冻结金额")
 	@SqlColumn
 	private Double frzBal;
+	
+	@AllowExcel(name = "总充值金额")
+	@SqlColumn
+	private Double totalCharge;//总充值金额
+	@AllowExcel(name = "总申请操盘金额")
+	@SqlColumn
+	private BigDecimal totalOperate;//总申请操盘金额
+	@AllowExcel(name = "恒指操盘手数")
+	@SqlColumn
+	private BigDecimal htranActualLever;//恒指操盘手数
+	@AllowExcel(name = "原油操盘手数")
+	@SqlColumn
+	private BigDecimal ytranActualLever;//原油操盘手数
+	@AllowExcel(name = "富时A50操盘手数")
+	@SqlColumn
+	private BigDecimal atranActualLever;//富时A50操盘手数
+	@AllowExcel(name = "国际综合操盘手数")
+	@SqlColumn
+	private BigDecimal interActualLever;//国际综合操盘手数
+	@AllowExcel(name = "累计提现金额")
+	@SqlColumn
+	private Double withDrawMoney;//申请提现金额
+	
+	@AllowExcel(name = "身份证号")
+	@SqlColumn
+	private String idcard;//身份证号
+	@AllowExcel(name = "邮箱")
+	@SqlColumn
+	private String email;//邮箱
 	/**
 	 * 支付宝帐号
 	 */
 	@AllowExcel(name = "支付宝帐号")
 	@SqlColumn
 	private String alipayAccount;
+	
+	@AllowExcel(name = "注册时间")
+	@SqlColumn
+	private BigInteger ctime;//注册时间
+	
+	
+	@AllowExcel(name = "最后登陆时间")
+	@SqlColumn
+	private BigInteger lastLoginTime;//最后登陆时间
+	
 	/**
 	 * 来源网站
 	 */
@@ -92,27 +123,7 @@ public class WuserListVo implements Serializable {
 	
 	private String sourceName;
 	
-	@AllowExcel(name = "总充值金额")
-	@SqlColumn
-	private Double totalCharge;//总充值金额
-	@AllowExcel(name = "总申请操盘金额")
-	@SqlColumn
-	private BigDecimal totalOperate;//总申请操盘金额
-	@AllowExcel(name = "恒指操盘手数")
-	@SqlColumn
-	private BigDecimal htranActualLever;//恒指操盘手数
-	@AllowExcel(name = "原油操盘手数")
-	@SqlColumn
-	private BigDecimal ytranActualLever;//原油操盘手数
-	@AllowExcel(name = "富时A50操盘手数")
-	@SqlColumn
-	private BigDecimal atranActualLever;//富时A50操盘手数
-	@AllowExcel(name = "国际综合操盘手数")
-	@SqlColumn
-	private BigDecimal interActualLever;//国际综合操盘手数
-	@AllowExcel(name = "申请提现金额")
-	@SqlColumn
-	private Double withDrawMoney;//申请提现金额
+
 	
 	public String getId() {
 		return id;
@@ -122,6 +133,14 @@ public class WuserListVo implements Serializable {
 		this.id = id;
 	}
 
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
 	public String getTname() {
 		return tname == null ? this.uname:tname;
 	}
@@ -138,29 +157,6 @@ public class WuserListVo implements Serializable {
 		this.uname = uname;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public BigInteger getCtime() {
-		return ctime;
-	}
-
-	public void setCtime(BigInteger ctime) {
-		this.ctime = ctime;
-	}
 
 	public String getUserType() {
 		return CacheManager.getDataMapByKey("userType",this.userType);
@@ -170,29 +166,6 @@ public class WuserListVo implements Serializable {
 		this.userType = userType;
 	}
 
-	public String getIdcard() {
-		return idcard;
-	}
-
-	public void setIdcard(String idcard) {
-		this.idcard = idcard;
-	}
-
-	public BigInteger getLastLoginTime() {
-		return lastLoginTime;
-	}
-
-	public void setLastLoginTime(BigInteger lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
-
-	public Double getAvlBal() {
-		return avlBal;
-	}
-
-	public void setAvlBal(Double avlBal) {
-		this.avlBal = avlBal;
-	}
 
 	public Double getAllocationMoney() {
 		return allocationMoney;
@@ -202,6 +175,15 @@ public class WuserListVo implements Serializable {
 		this.allocationMoney = allocationMoney;
 	}
 
+
+	public Double getAvlBal() {
+		return avlBal;
+	}
+
+	public void setAvlBal(Double avlBal) {
+		this.avlBal = avlBal;
+	}
+	
 	public Double getFrzBal() {
 		return frzBal;
 	}
@@ -209,6 +191,81 @@ public class WuserListVo implements Serializable {
 	public void setFrzBal(Double frzBal) {
 		this.frzBal = frzBal;
 	}
+
+	
+	
+	
+	public Double getTotalCharge() {
+		return totalCharge;
+	}
+
+	public void setTotalCharge(Double totalCharge) {
+		this.totalCharge = totalCharge;
+	}
+
+	public BigDecimal getTotalOperate() {
+		return totalOperate;
+	}
+
+	public void setTotalOperate(BigDecimal totalOperate) {
+		this.totalOperate = totalOperate;
+	}
+
+	public BigDecimal getHtranActualLever() {
+		return htranActualLever;
+	}
+
+	public void setHtranActualLever(BigDecimal htranActualLever) {
+		this.htranActualLever = htranActualLever;
+	}
+
+	public BigDecimal getYtranActualLever() {
+		return ytranActualLever;
+	}
+
+	public void setYtranActualLever(BigDecimal ytranActualLever) {
+		this.ytranActualLever = ytranActualLever;
+	}
+
+	public BigDecimal getAtranActualLever() {
+		return atranActualLever;
+	}
+
+	public void setAtranActualLever(BigDecimal atranActualLever) {
+		this.atranActualLever = atranActualLever;
+	}
+
+	public BigDecimal getInterActualLever() {
+		return interActualLever;
+	}
+
+	public void setInterActualLever(BigDecimal interActualLever) {
+		this.interActualLever = interActualLever;
+	}
+
+	public Double getWithDrawMoney() {
+		return withDrawMoney;
+	}
+
+	public void setWithDrawMoney(Double withDrawMoney) {
+		this.withDrawMoney = withDrawMoney;
+	}
+	
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	public String getAlipayAccount() {
 		return alipayAccount;
@@ -218,6 +275,23 @@ public class WuserListVo implements Serializable {
 		this.alipayAccount = alipayAccount;
 	}
 
+	public BigInteger getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(BigInteger ctime) {
+		this.ctime = ctime;
+	}
+	
+
+	public BigInteger getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(BigInteger lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	
 	public Integer getSource() {
 		return source;
 	}
@@ -294,63 +368,6 @@ public class WuserListVo implements Serializable {
 
 	public void setSourceName(String sourceName) {
 		this.sourceName = sourceName;
-	}
-
-	public Double getTotalCharge() {
-		return totalCharge;
-	}
-
-	public void setTotalCharge(Double totalCharge) {
-		this.totalCharge = totalCharge;
-	}
-
-	public BigDecimal getTotalOperate() {
-		return totalOperate;
-	}
-
-	public void setTotalOperate(BigDecimal totalOperate) {
-		this.totalOperate = totalOperate;
-		
-	}
-
-	public BigDecimal getHtranActualLever() {
-		return htranActualLever;
-	}
-
-	public void setHtranActualLever(BigDecimal htranActualLever) {
-		this.htranActualLever = htranActualLever;
-	}
-
-	public BigDecimal getYtranActualLever() {
-		return ytranActualLever;
-	}
-
-	public void setYtranActualLever(BigDecimal ytranActualLever) {
-		this.ytranActualLever = ytranActualLever;
-	}
-
-	public BigDecimal getAtranActualLever() {
-		return atranActualLever;
-	}
-
-	public void setAtranActualLever(BigDecimal atranActualLever) {
-		this.atranActualLever = atranActualLever;
-	}
-
-	public BigDecimal getInterActualLever() {
-		return interActualLever;
-	}
-
-	public void setInterActualLever(BigDecimal interActualLever) {
-		this.interActualLever = interActualLever;
-	}
-
-	public Double getWithDrawMoney() {
-		return withDrawMoney;
-	}
-
-	public void setWithDrawMoney(Double withDrawMoney) {
-		this.withDrawMoney = withDrawMoney;
 	}
 
 
