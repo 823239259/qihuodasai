@@ -31,6 +31,8 @@ public class CurrencyController {
 		//获取模糊搜索参数
 		Map<String, Object> searchParams = EasyuiUtil.getParametersStartingWith(request,EasyuiUtil.SEARCH_PREFIX);
 	
+		
+		
 		PageInfo<Object> pageInfo =  currencyService.find(easyUiPage , searchParams);
 		JsonResult jsonResult =new JsonResult(true);
 		jsonResult.setObj(pageInfo.getPageResults());
