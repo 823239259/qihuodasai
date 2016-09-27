@@ -154,7 +154,25 @@ public class UserPayController {
 		
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"Successful binding");
 	}
-	
+	/**
+	 * 验证用户是否绑定微信号
+	 * @return
+	 */
+	@RequestMapping(value = "/check/wx/account",method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResult checkedWxAccount(HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		UserVerified userVerified = userVerifiedService.get(uid);
+		ApiResult resultJson = new ApiResult(false);
+		if(userVerified != null){
+			String wxAccount = userVerified.getWxAccount();
+			if(wxAccount != null && wxAccount.length() > 0){
+				resultJson.setSuccess(true);
+				resultJson.setMessage(wxAccount);
+			}
+		}
+		return resultJson;
+	}
 	/**
 	 * 绑定微信账号
 	 * @param request
@@ -162,10 +180,10 @@ public class UserPayController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/wx/bind/account",method = RequestMethod.POST)
-	public JsonResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
+	public ApiResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
-		JsonResult resultJson = new JsonResult(false);
+		ApiResult resultJson = new ApiResult(false);
 		if (StringUtil.isNotBlank(account)) {
 			UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
 			if (ObjectUtil.equals(null, userVerified)) {
