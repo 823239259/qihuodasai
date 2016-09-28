@@ -51,7 +51,7 @@ public class RechargeAdditionalService extends BaseServiceImpl<RechargeAdditiona
 	public PageInfo<Object> queryDatas(EasyUiPageInfo easyUiPage,
 			Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(),easyUiPage.getPage());
-		String sql = "SELECT rl.source,rl.type, ra.id, ra.recharge_id rechargeId, ra.bank_card bankCard, ra.mobile, rl.trade_account tradeAccount, rl.money, rl.trade_no tradeNo, rl.account alipayNo, rl.`status`, uv.tname username, ra.create_time createTime, ra.create_user createUser FROM w_recharge_additional ra, w_recharge_list rl, w_user_verified uv WHERE rl.id = ra.recharge_id AND uv.uid = ra.uid ";
+		String sql = "SELECT rl.source,rl.type, ra.id, ra.recharge_id rechargeId, ra.bank_card bankCard, ra.mobile, rl.trade_account tradeAccount, rl.money, rl.trade_no tradeNo, if(trade_account = 'alipay',rl.account,'')  alipayNo,if(trade_account = 'wechat',rl.account,'')  wechatNo, rl.`status`, uv.tname username, ra.create_time createTime, ra.create_user createUser FROM w_recharge_additional ra, w_recharge_list rl, w_user_verified uv WHERE rl.id = ra.recharge_id AND uv.uid = ra.uid ";
 		MultiListParam multilistParam = new MultiListParam(easyUiPage,
 				searchParams,null, sql);
 		pageInfo = multiListPageQuery(multilistParam, RechargeAdditionalVo.class);

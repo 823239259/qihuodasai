@@ -486,7 +486,7 @@ public class UserWithDrawController {
 		DrawList drawList = null;
 		try {
 			drawList = drawMoneyService.insertDraw(Constant.Source.TZDR, user, String.valueOf(money), card,
-					paymentSupportBank, ip, orderId, withdrawSetting, drawBank.getAccountAddress());
+					paymentSupportBank, ip, orderId, withdrawSetting, drawBank.getProvinceCity());
 			flag = true;
 		} catch (Exception exception) {
 			logger.error("API接口-插入取款数据失败" + exception.getMessage());

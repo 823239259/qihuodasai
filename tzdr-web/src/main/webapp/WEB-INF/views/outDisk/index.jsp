@@ -66,7 +66,7 @@
                     <span><i>免费</i></span>
                 </li>
             </ul>
-            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易15种期货产品)<c style="font-size: 14px; color: #666;"><!-- （注意：请不要在交易时间外持单，以免被系统强制平仓） --></c></i></h2>
+            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易15种期货产品)<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</c></i></h2>
             <table border="0" cellspacing="0" cellpadding="0" class="cpx_ru_list">
                 <thead>
                     <td width="11%">期货产品</td>

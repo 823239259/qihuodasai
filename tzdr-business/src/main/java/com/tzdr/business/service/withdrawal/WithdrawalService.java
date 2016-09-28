@@ -72,7 +72,7 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 	public PageInfo<Object> queryListNew(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(easyUiPage.getRows(), easyUiPage.getPage());
 
-		String sql = " SELECT first_audit_time firstAuditTime,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit,dl.first_audit_user firstAuditUser, dl.uid, dl.id, us.mobile, dl.bank, dl.card, dl.`status`, dl.money, dl.addtime, dl.oktime, uv.tname, us.avl_bal balance, dl.update_time auditTime, dl.update_user auditUser,dl.source source FROM w_draw_list dl, w_user us, w_user_verified uv WHERE us.id = dl.uid AND uv.uid = us.id  ";
+		String sql = " SELECT first_audit_time firstAuditTime,dl.payment_channel paymentChannel,dl.below_line belowLine,dl.is_audit isAudit,dl.first_audit_user firstAuditUser, dl.uid, dl.id, us.mobile, dl.bank, dl.card, dl.`status`, dl.money,dl.fee,IF(dl.`status` = 31,dl.money-dl.fee,0) as avlAmount, dl.addtime, dl.oktime, uv.tname, us.avl_bal balance, dl.update_time auditTime, dl.update_user auditUser,dl.source source FROM w_draw_list dl, w_user us, w_user_verified uv WHERE us.id = dl.uid AND uv.uid = us.id  ";
 		// params 查询参数 依次 存入
 		MultiListParam multilistParam = new MultiListParam(easyUiPage, searchParams, null, sql);
 		pageInfo = multiListPageQuery(multilistParam, DrawMoneyListVoNew.class);

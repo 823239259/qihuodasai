@@ -140,6 +140,7 @@
 	                        <option value="1">联动优势</option>
 	                        <option value="2">币币支付</option>
 	                        <option value="3">易支付</option>
+	                        <option value="7">国付宝</option>
 	                    </select>
 	                </td>
 	                <td class="label right">来源网站:</td>

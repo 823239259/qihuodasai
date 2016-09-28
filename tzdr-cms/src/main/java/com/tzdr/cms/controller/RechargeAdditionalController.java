@@ -121,7 +121,17 @@ public class RechargeAdditionalController  extends BaseCmsController<RechargeAdd
 		if (StringUtil.equals("3",additionalVo.getType())){
 			additionalVo.setTradeAccount("alipay");
 			additionalVo.setBankCard("");
+			additionalVo.setWechatNo("");
 			if (StringUtil.isBlank(additionalVo.getAlipayNo())
+					|| StringUtil.isBlank(additionalVo.getMobile())
+					|| additionalVo.getMoney()<=0){
+				return new JsonResult(false,"支付宝充值，数据填写有误！");
+			}
+		}else if(StringUtil.equals("9", additionalVo.getType())){
+			additionalVo.setBankCard("");
+			additionalVo.setAlipayNo(additionalVo.getWechatNo());
+			additionalVo.setTradeAccount("wechat");
+			if (StringUtil.isBlank(additionalVo.getWechatNo())
 					|| StringUtil.isBlank(additionalVo.getMobile())
 					|| additionalVo.getMoney()<=0){
 				return new JsonResult(false,"支付宝充值，数据填写有误！");
@@ -130,6 +140,7 @@ public class RechargeAdditionalController  extends BaseCmsController<RechargeAdd
 		else
 		{
 			additionalVo.setAlipayNo("");
+			additionalVo.setWechatNo("");
 			if (StringUtil.isBlank(additionalVo.getBankCard())
 					|| StringUtil.isBlank(additionalVo.getTradeAccount())
 					|| StringUtil.isBlank(additionalVo.getMobile())
@@ -160,7 +171,17 @@ public class RechargeAdditionalController  extends BaseCmsController<RechargeAdd
 		if (StringUtil.equals("3",additionalVo.getType())){
 			additionalVo.setTradeAccount("alipay");
 			additionalVo.setBankCard("");
+			additionalVo.setWechatNo("");
 			if (StringUtil.isBlank(additionalVo.getAlipayNo())
+					|| StringUtil.isBlank(additionalVo.getMobile())
+					|| additionalVo.getMoney()<=0){
+				return new JsonResult(false,"支付宝充值，数据填写有误！");
+			}
+		}else if(StringUtil.equals("9", additionalVo.getType())){
+			additionalVo.setBankCard("");
+			additionalVo.setAlipayNo(additionalVo.getWechatNo());
+			additionalVo.setTradeAccount("wechat");
+			if (StringUtil.isBlank(additionalVo.getWechatNo())
 					|| StringUtil.isBlank(additionalVo.getMobile())
 					|| additionalVo.getMoney()<=0){
 				return new JsonResult(false,"支付宝充值，数据填写有误！");
@@ -169,6 +190,7 @@ public class RechargeAdditionalController  extends BaseCmsController<RechargeAdd
 		else
 		{
 			additionalVo.setAlipayNo("");
+			additionalVo.setWechatNo("");
 			if (StringUtil.isBlank(additionalVo.getBankCard())
 					|| StringUtil.isBlank(additionalVo.getTradeAccount())
 					|| StringUtil.isBlank(additionalVo.getMobile())

@@ -30,10 +30,17 @@
 								    		<c:when test="${additionalVo.type==3}">
 								    			<option  value="3" selected="selected">支付宝充值</option>
 								    			<option  value="4">银行转账充值</option>
+								    			<option  value="9">微信充值</option>
+								    		</c:when>
+								    		<c:when test="${additionalVo.type==9 }">
+								    			<option  value="9" selected="selected">微信充值</option>
+								    			<option  value="3" >支付宝充值</option>
+								    			<option  value="4">银行转账充值</option>
 								    		</c:when>
 								    		<c:otherwise>
 								    		   	<option  value="3">支付宝充值</option>
 								    			<option  value="4"  selected="selected">银行转账充值</option>
+								    			<option  value="9">微信充值</option>
 								    		</c:otherwise>
 								    	</c:choose>
 									</select>
@@ -51,6 +58,12 @@
 							<td>支付宝帐号:</td>
 							<td>
 								<input class="easyui-validatebox" value="${additionalVo.alipayNo}" id="alipayNo" name="alipayNo" data-options="required:true">
+							</td>
+						</tr>
+						<tr id="trwechatNo">
+							<td>微信帐号:</td>
+							<td>
+								<input class="easyui-validatebox" value="${additionalVo.alipayNo}" id="wechatNo" name="wechatNo" data-options="required:true">
 							</td>
 						</tr>
 						<tr id="trtradeAccount">

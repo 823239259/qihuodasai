@@ -314,13 +314,11 @@ function doGopay(){
 		$("#gopaymoney").focus();
 		return ;
 	}
-	
 	if(!isMoney(money)){
 		showMsgDialog("提示","充值金额填写错误");
 		$("#gopaymoney").focus();
 		return ;
 	}
-	
 	if(parseFloat(money)<1){
 		showMsgDialog("提示","充值金额必须大于等于1元");
 		$("#gopaymoney").focus();
@@ -337,6 +335,50 @@ function doGopay(){
 	document.forms["goNetbank"].action=basepath+"pay/goPayView";
 	document.forms["goNetbank"].submit();
 }
+
+/*微信支付*/
+$(function(){
+	var userAccount =  $("#userAccount").text();
+	if(userAccount != undefined && userAccount != "" && userAccount.length > 0){
+		$("#weixin_bind").hide();
+		$("#weixin_update").show();
+	}else{
+		$("#weixin_bind").show();
+		$("#weixin_update").hide();
+	}
+	/*绑定微信号*/
+	$(".weixin_bind").click(function(){
+		var weixin = $("#weixin").val();
+		if(weixin==""){
+			showMsgDialog("提示","请填写微信账号");
+			$("#weiixn").focus();
+			return ;
+		}
+		/*var reg=/^[a-zA-Z\d_]{5,}$/;    
+		if(reg.test(weiixn)){
+			showMsgDialog("提示","微信号格式有误");
+			$("#weiixn").focus();
+			return ;
+		}*/
+		$.post(basepath+"/pay/wx/bind/account",{"account":weixin},function(data){  
+			if(data.success){
+				showMsgDialog("提示","绑定成功！");
+				$("#weixin_bind").hide();
+				$("#weixin_update").show();
+				$("#userAccount").text(weixin);
+			}else{
+				showMsgDialog("提示",data.message);
+			}
+		},"json"); 
+	});
+	/*修改微信号*/
+	$("#weixinbank .weixin_update").click(function(){
+		$("#weixin_bind").show();
+		$("#weixin_update").hide();
+		$("#weixin").val($("#userAccount").text());
+	});
+});
+
 /**
  * 支付宝充值
  */
@@ -424,18 +466,17 @@ function doPayment(){
 }
 
 //银行转账
+$(function(){
+	var bankname=$('#uc_bank_radio ol');
+	bankname.click(function(){
+		var this_ = $(this).index();
+		$('#uc_bank_radio input:radio[name="back_icon"]').eq(this_).prop("checked",true);
+	});
+});
 function doTransmany(){
-	var bankname=$('.uc_b_selbank').attr("data-id");
+	var bankname=$('#uc_bank_radio input:radio[name="back_icon"]:checked').val();
 	var money=$("#transmoney").val();
 	var serialnum=$("#serialnum").val();
-	if(bankname==""||bankname==undefined){
-		showMsgDialog("提示","请选择银行");
-		return ;
-	}
-	if(serialnum==""){
-		showMsgDialog("提示","请输入流水号");
-		return ;
-	}
 	if(!isMoney(money)){
 		showMsgDialog("提示","充值金额填写错误");
 		return ;
@@ -446,6 +487,14 @@ function doTransmany(){
 	}
 	if(parseFloat(money)>6000000){
 		showMsgDialog("提示","充值金额不能大于600万");
+		return ;
+	}
+	if(bankname==""||bankname==undefined){
+		showMsgDialog("提示","请选择银行");
+		return ;
+	}
+	if(serialnum==""){
+		showMsgDialog("提示","请输入流水号");
 		return ;
 	}
 	 $.post(basepath+"/pay/doAlipayOrTansaccount",{"bankname":bankname,"alimoney":money,"serialnum":serialnum,"type":"trans"},function(data){  
