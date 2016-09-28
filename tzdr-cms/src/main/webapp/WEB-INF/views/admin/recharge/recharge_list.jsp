@@ -336,7 +336,7 @@
             <tr>
                 <td align="center" colspan="2">
                 <a id="btn" href="#" onclick="confirmWechatPay()" class="easyui-linkbutton">提交</a>
-               <a id="btn" href="#" onclick="bankWechatClose()" class="easyui-linkbutton">取消</a>
+               <a id="btn" href="#" onclick="wechatPayClose()" class="easyui-linkbutton">取消</a>
                </td>
             </tr>
         </table>
