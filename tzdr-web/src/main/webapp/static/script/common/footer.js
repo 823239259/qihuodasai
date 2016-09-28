@@ -109,3 +109,80 @@ function scrollTop() {
 /* function scrollBottom() {
 	$('html,body').animate({scrollTop: $(document).height()}, 800);
 } */
+
+/*弹出层登录*/
+$(function() {
+	$("#signin").click(function() {
+		$("#signin_box").css("display","block");
+		$("#div_Mask").show();
+		var popupHeight = $(".tck01").height();   
+		var popupWidth = $(".tck01").width();    
+		$(".tck01").css({     
+		 "margin-left": -popupHeight/2,   
+		 "margin-top": -popupWidth/2   
+		});
+	});
+});
+
+/*登录*/
+//手机号码规则
+var mobileForm = /^(((13[0-9])|(14[7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
+var initLoginNameText = "请输入手机号码";
+var loginValid = false;
+
+//登录操作
+$("#login_box").click(function(){
+	var $this = $(this);
+	$this.text("正在登录");
+	$this.attr("disabled","disabled");
+	var loginName = $.trim($("#signin_username").val());
+	var password = $.trim($("#signin_password").val());
+	if(loginName == null || loginName.length <= 0 || loginName == initLoginNameText){
+		$this.text("立即登录");
+		$this.removeAttr("disabled");
+		$("#signin_box .warning").html("请输入手机号码");
+		$("#signin_username").focus();
+		return;
+	}else if(!loginName.match(mobileForm)){
+		$this.text("立即登录");
+		$this.removeAttr("disabled");
+		$("#signin_box .warning").html("您输入的手机号有误");
+		$("#signin_username").focus();
+		return;
+	}else if(password == null || password.length <= 0){
+		$this.text("立即登录");
+		$this.removeAttr("disabled");
+		$("#signin_box .warning").html("请输入密码");
+		$("#signin_password").focus();
+		return;
+	}
+	else if(password.length < 6 || password.length > 20){		
+		$this.text("立即登录");
+		$this.removeAttr("disabled");
+		$("#signin_box .warning").html("请输入6~16位密码");
+		$("#signin_password").focus();
+		return;
+	}
+	
+	loginValid = true;
+	$("#signin_box .warning").html("");
+	$this.text("立即登录");
+	$this.removeAttr("disabled");
+	
+	$.post(basepath+"login",{loginName:loginName,password:password,ajax:1},function(data){ //登录
+		if(data.success){
+			if(data.message!="" && data.message!=null){
+				if(data.message=="密码是否正确"){
+					alert("登录成功");
+				}else{
+					$("#signin_box .warning").html("密码错误");
+					$this.text("立即登录");
+					$("#signin_password").focus();
+				}
+			}
+		}else{
+			$this.attr("status",true);
+			$this.text("立即登录");
+		}
+	},"json");
+});
