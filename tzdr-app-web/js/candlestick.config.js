@@ -134,17 +134,28 @@
     var firstTimeNum=0;
      var volumeTime=[];
     var volumeV=[];
+//  var volumeTimeH=[];
+//  var volumeVH=[];
     function processingCandlestickVolumeData(data){
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=volumeV.length;
+//  	    var lengt=volumeTimeH.length;
         	for(var i=0;i<Len;i++){
-        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
+        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
+//      		if(Number(parameters[i][OpenPriceSubscript])>Number(parameters[i][LastPriceSubscript])){
         			volumeTime[lent+i]=str2;
         			volumeV[lent+i]=parameters[i][VolumeSubscript];
+//      		}else{
+//      			volumeTimeH[lengt+i]=str2;
+//      			volumeVH[lengt+i]=parameters[i][VolumeSubscript];
+//      		}
+        		
+        			
+        			
        		};
         	for(var i=0;i<volumeTime.length-1;i++){
         		if(volumeTime[i]==volumeTime[i+1]){
@@ -242,7 +253,12 @@
 	                  name: '成交量',
 	                  type: 'bar',
 	                  data:CandlestickVolumeChartData.volume
-	              }
+	              },
+//	              {
+//	                  name: '成交量',
+//	                  type: 'bar',
+//	                  data:volumeVH
+//	              }
 	          ]
 	      };
         return option

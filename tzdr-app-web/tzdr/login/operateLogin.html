@@ -50,7 +50,7 @@
 		</div>-->
 		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 				
-				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
+				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked" style="width: 28px !important; margin-top: 2px;">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
 		
 		</div>
 	</div>
@@ -112,7 +112,7 @@
 						$("#userAcount").css("display","block");
 					}else if(val=="test1"){
 						$("#password").val("");
-						$("#userAcount").css("display","block");
+						$("#userAcount").css("display","none");
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
@@ -121,7 +121,7 @@
 								$("#password").val(user[i].tranPassword);
 							}
 						}
-						$("#account").attr("disabled","disabled");
+						$("#account").attr("disabled","disabled").css("display","none");
 //						$("#password").attr("readonly","readonly");
 						$("#userAcount").css("display","none");
 					}
