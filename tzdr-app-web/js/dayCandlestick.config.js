@@ -18,6 +18,7 @@
 		            var sgData = [parameters[i][DateTimeStampSubscript],openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
+       		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
         	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
 		  	dayCandlestickChartDiv.group="group3";
 		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
@@ -125,6 +126,8 @@
         			dayCandlestickVolumeData.time[lent+i]=parameters[i][DateTimeStampSubscript];
         			dayCandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
        		};
+       		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
+       		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
         	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 		  	dayCandlestickVolumeChart.group="group3";
 		  	if(dayCandlestickVolumeNum !=0){
