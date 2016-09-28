@@ -114,6 +114,12 @@ function loadSocket(){
 				} else if (method == "OnRspQryHold") {
 					var positionParam = parameters; 
 					appendPostionAndUpdate(positionParam);
+					var commdityNo  = positionParam.CommodityNo;
+					var contractNo =positionParam.ContractNo;
+					var comm = marketCommdity[commdityNo+contractNo];
+					if(comm != undefined){
+						subscribeHold(comm.ExchangeNo,commdityNo,contractNo);
+					}
 					//报单录入请求回复
 				} else if (method == "OnRspOrderInsert") {
 					var insertOrderParam = parameters;
@@ -174,9 +180,12 @@ function loadSocket(){
 		alertProtype("自动登录异常，是否重新登录","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
 	}*/
 }
+function subscribeHold(exchageNo,commodityNo,contractNo){
+	masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+}
 /**
  * 请求数据-初始化dom 
- */
+ */ 
 function initDom(){ 
 	//Trade.doAccount(username); 
 	if(getHoldIndex == 0){
