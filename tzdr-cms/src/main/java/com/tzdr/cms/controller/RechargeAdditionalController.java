@@ -178,9 +178,9 @@ public class RechargeAdditionalController  extends BaseCmsController<RechargeAdd
 				return new JsonResult(false,"支付宝充值，数据填写有误！");
 			}
 		}else if(StringUtil.equals("9", additionalVo.getType())){
-			additionalVo.setTradeAccount("");
 			additionalVo.setBankCard("");
-			additionalVo.setWechatNo("wechat");
+			additionalVo.setAlipayNo(additionalVo.getWechatNo());
+			additionalVo.setTradeAccount("wechat");
 			if (StringUtil.isBlank(additionalVo.getWechatNo())
 					|| StringUtil.isBlank(additionalVo.getMobile())
 					|| additionalVo.getMoney()<=0){

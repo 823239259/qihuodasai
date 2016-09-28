@@ -28,7 +28,7 @@
 	<script src="${ctx }/static/script/esl.js?v=${v}"></script>
     <script src="${ctx }/static/script/slide-box.js?v=${v}"></script>
     <link href="${ctx}/static/css/gybf.css" rel="stylesheet" type="text/css">
-    <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?version=20150724"></script>
+    <%-- <script type='text/javascript' src="${ctx}/static/script/securityInfo/securityInfo.js?version=20150724"></script> --%>
 </head>
 <body>
 <!-- header -->

@@ -155,6 +155,7 @@
                 <th field="id" data-options="checkbox:true"></th>
 				<th field="mobileNo" width="150">手机号 </th>
 				<th field="tname" width="150">用户姓名</th>
+				<th field="account" width="150">微信号</th>
 				<th field="tradeNo" width="150">流水号</th>
 				<th field="tradeAccountBank" width="150">收款银行</th>
 				<th field="money" width="150">充值表单金额</th>
@@ -303,7 +304,7 @@
             <tr>
                 <td align="center" colspan="2">
                 <a id="btn" href="#" onclick="confirmNetBankPay()" class="easyui-linkbutton">提交</a>
-               <a id="btn" href="#" onclick="bankNetPayClose()" class="easyui-linkbutton">取消</a>
+               <a id="btn" href="#" onclick="netBankPayClose()" class="easyui-linkbutton">取消</a>
                </td>
             </tr>
         </table>

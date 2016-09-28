@@ -22,11 +22,22 @@
 		repository-impl-postfix="Impl" transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"
 		factory-class="com.tzdr.common.dao.EntityRepositoryFactoryBean" />
-
+<!-- 配置多数据源 -->
+	<bean id = "dynamicDataSource" class = "com.tzdr.cpp.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<!-- 指定lookupKey和与之对应的数据源 -->
+				<entry key="dataSource" value-ref="dataSource"></entry>  
+				<entry key="dataSource2" value-ref="dataSource2"></entry>  
+			</map>
+		</property>
+		 <!-- 这里可以指定默认的数据源 -->
+		 <property name="defaultTargetDataSource"  ref="dataSource"></property>
+	</bean>
 	<!-- Jpa Entity Manager 配置 -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dynamicDataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 		<property name="packagesToScan" value="com.tzdr.domain,com.tzdr.olog.db.domain" />
 		<property name="persistenceProvider">
@@ -64,6 +75,16 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	<!--  多数据源拦截配置-->
+    <bean id = "dataSourceAspect" class="com.tzdr.cpp.DataSourceAspect"/>
+	 <aop:config>
+		<aop:aspect id = "aspect" ref="dataSourceAspect">
+			<!-- 拦截所有调用dktai_cpp的数据库访问方法 -->
+			<aop:pointcut id="dataSourcePointcut" expression="execution(* com.tzdr.business.cms.cpp..*(..))"/>
+			<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
+			<aop:after pointcut-ref="dataSourcePointcut" method="resolveDefaultDataSource"/>
+		</aop:aspect>
+	</aop:config>
 	<!-- 支持annotation声明事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
