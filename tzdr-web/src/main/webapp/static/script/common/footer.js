@@ -125,7 +125,7 @@ $(function() {
 });
 function closeDiv() {
 	$("#signin_box").css("display","none");
-	$("##div_Mask").css("display","none");
+	$("#div_Mask").css("display","none");
 }
 /*登录*/
 //手机号码规则
@@ -176,7 +176,7 @@ $("#login_box").click(function(){
 		if(data.success){
 			alert("登录成功");
 			$("#signin_box").css("display","none");
-			$("##div_Mask").css("display","none");
+			$("#div_Mask").css("display","none");
 		}else{
 			$("#signin_box .warning").html("账号和密码错误");
 			$this.text("立即登录");
