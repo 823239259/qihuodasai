@@ -165,7 +165,7 @@
 	    function sendMessage(method,parameters){
 	    	socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 	    }
-	    var url = "ws://quote.vs.com:9002";
+	    var url = "ws://192.168.0.213:9002";
 	    var socket = new WebSocket(url);
 	    var currenExchangeNo = "";
 	    var currenCommodityNo = "";
