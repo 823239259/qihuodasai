@@ -174,7 +174,7 @@
 	              {
 	                  type : 'category',
 	                  position:'bottom',
-	                 boundaryGap: false,
+	                 boundaryGap: true,
 	                  axisTick: {onGap:false},
 	                  splitLine: {show:false},
 	                   axisLine: { lineStyle: { color: '#8392A5' } },

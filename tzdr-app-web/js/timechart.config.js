@@ -74,7 +74,7 @@
 					show:false,
 			        data: data1.timeLabel,
 			        axisLine: { lineStyle: { color: '#8392A5' } },
-			        boundaryGap: false
+			        boundaryGap: true
 			}],	
            yAxis:  [
                {
@@ -188,7 +188,7 @@
               {
                   type : 'category',
                   position:'bottom',
-                 boundaryGap: false,
+                 boundaryGap: true,
                   axisTick: {onGap:false},
                   splitLine: {show:false},
                    axisLine: { lineStyle: { color: '#8392A5' } },
