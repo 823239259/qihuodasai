@@ -123,7 +123,10 @@ $(function() {
 		});
 	});
 });
-
+function closeDiv() {
+	$("#signin_box").css("display","none");
+	$("##div_Mask").css("display","none");
+}
 /*登录*/
 //手机号码规则
 var mobileForm = /^(((13[0-9])|(14[7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
@@ -171,6 +174,15 @@ $("#login_box").click(function(){
 	
 	$.post(basepath+"login",{loginName:loginName,password:password,ajax:1},function(data){ //登录
 		if(data.success){
+			alert("登录成功");
+			$("#signin_box").css("display","none");
+			$("##div_Mask").css("display","none");
+		}else{
+			$("#signin_box .warning").html("账号和密码错误");
+			$this.text("立即登录");
+			$("#signin_password").focus();
+		}
+		/*if(data.success){
 			if(data.message!="" && data.message!=null){
 				if(data.message=="密码是否正确"){
 					alert("登录成功");
@@ -183,6 +195,6 @@ $("#login_box").click(function(){
 		}else{
 			$this.attr("status",true);
 			$this.text("立即登录");
-		}
+		}*/
 	},"json");
 });

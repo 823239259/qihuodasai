@@ -17,7 +17,7 @@
        		}else{
        	%>
        	<ul>
-       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
+       		<li class="sign"><a href="javascript:void(0)" id="signin">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
             <li><a href="${ctx}/help?tab=rule&leftMenu=1" target="_blank">新手指南</a></li>
         </ul>
@@ -65,4 +65,26 @@
         </div>
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>   
     </div>
+</div>
+<!-- 弹出层登录 -->
+<div class="tck01" id="signin_box" style="display: none;">
+	<div class="navtitle">
+		<span class="nava">注册登录！</span><a class="close" onclick="javascript:closeDiv('signin_box')"></a>
+	</div>
+	<div class="center">
+		<form id="signin_boxForm" name="signin_boxForm" onsubmit="return signin_boxForm();" method="post" target="signin_boxFrame">
+			<input type="hidden" name="execution" value="e3s1" id="">
+			<p class="mode"><a href="${ctx}/signin">手机快速注册</a><a href="javascript:void(0)" class="on">账号登录</a></p>
+			<p class="warning"></p>
+			<p class="sigin_ipctn">
+				<input type="tel" id="signin_username" name="username" value="" placeholder="请输入手机号码">
+				<input type="password" id="signin_password" name="password" value="" placeholder="请输入登录密码">
+			</p>
+			<div class="sigin_link">
+				<input type="checkbox" name="" id="" checked="checked" style="margin-right: 10px;"/>两周内自动登录
+			    <a href="http://localhost:8088/tzdr-web/forgetpw" style="float: right;">忘记密码?</a>
+		    </div>
+ 			<button id="login_box" type="button">立即登录</button>
+		</form>
+	</div>
 </div>
