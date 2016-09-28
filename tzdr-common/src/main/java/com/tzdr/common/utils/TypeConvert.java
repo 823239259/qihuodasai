@@ -1474,6 +1474,11 @@ public class TypeConvert {
 	public final static String SYS_TYPE_ALIBABA_ACCOUNTS_NAME="支付宝 ";
 	
 	/**
+	 * 微信（取 名称
+	 */
+	public final static String SYS_TYPE_WECHAT_ACCOUNTS_NAME="微信 ";
+	
+	/**
 	 * 银行转账 （取 名称
 	 */
 	public final static String SYS_TYPE_BANK_ACCOUNTS_NAME="银行转账 ";

@@ -798,11 +798,11 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 	public PageInfo<WuserListVo> queryDataPageWuserListVo(PageInfo<WuserListVo> page, ConnditionVo connVo) {
 
 		StringBuffer sqlBuf = new StringBuffer(
-				" SELECT w.id,v.tname,w.uname,w.email,w.mobile,w.ctime,w.user_type userType"
-						+ " ,v.idcard,w.last_login_time lastLoginTime,w.avl_bal avlBal,"
-						+ " (SELECT SUM(t.money)FROM w_user_trade t WHERE t.uid=w.id AND t.`status`=1) allocationMoney"
-						+ " , w.frz_bal frzBal,v.alipay_account alipayAccount,w.source,w.channel,w.keyword, "
-						+ "(SELECT SUM(l.actual_money) FROM w_recharge_list l WHERE l.uid=w.id AND l.type>=2 AND (l.type<=4 OR l.is_recharge=1) ) totalCharge,"
+				" SELECT w.id,w.mobile,v.tname,w.uname,w.user_type userType,"
+						+ " (SELECT SUM(t.money)FROM w_user_trade t WHERE t.uid=w.id AND t.`status`=1) allocationMoney,"
+						+ "w.avl_bal avlBal,"
+						+ "w.frz_bal frzBal,"
+						+ "(SELECT SUM(l.actual_money) FROM w_recharge_list l WHERE l.uid=w.id AND l.type>=2 AND (l.type<=4 or l.is_recharge=1) ) totalCharge,"
 						+ "(SELECT convert(SUM(f.trader_bond + f.append_trader_bond),decimal) FROM f_simple_ftse_user_trade f WHERE f.uid=w.id AND (f.state_type <> 1 OR f.state_type <> 5)) totalOperate,"
 						+ "(SELECT SUM(f.tran_actual_lever) FROM f_simple_ftse_user_trade f WHERE f.uid=w.id  AND business_type = 7  AND (f.state_type <> 1 OR f.state_type <> 5)) htranActualLever,"
 						+ "(SELECT SUM(f.tran_actual_lever) FROM f_simple_ftse_user_trade f WHERE f.uid=w.id AND  business_type = 6 AND  (f.state_type <> 1 OR f.state_type <> 5) ) ytranActualLever,"
@@ -810,7 +810,8 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
 						+ "(SELECT SUM(f.small_crude_oil_market_lever+f.ame_copper_market_lever+f.ame_silver_market_lever+f.ag_tran_actual_lever+f.crude_tran_actual_lever+f.daxtran_actual_lever+f.hsi_tran_actual_lever+f.h_stock_market_lever"
                         +"+f.lhsi_tran_actual_lever+f.mbtran_actual_lever+f.mdtran_actual_lever+f.mntran_actual_lever+f.nikkei_tran_actual_lever+f.tran_actual_lever+f.xhstock_market_lever) "
                         +"FROM f_simple_ftse_user_trade f WHERE f.uid=w.id AND business_type = 8 AND (f.state_type <> 1 OR f.state_type <> 5)) interActualLever,"
-						+ "(select SUM(d.money) from w_draw_list d where d.uid=w.id and d.`status`=31) withDrawMoney"
+						+ "(select SUM(d.money) from w_draw_list d where d.uid=w.id and d.`status`=31) withDrawMoney,v.idcard,w.email,"
+						+ "v.alipay_account alipayAccount,w.ctime,w.last_login_time lastLoginTime,w.source,w.channel,w.keyword "
 						+ " FROM w_user w LEFT JOIN w_user_verified v ON w.id=v.uid WHERE 1=1 ");
 		List<Object> params = new ArrayList<Object>();
 		if (connVo != null) {

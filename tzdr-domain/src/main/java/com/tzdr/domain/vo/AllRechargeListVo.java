@@ -419,15 +419,17 @@ private static final long serialVersionUID = 6997408108243390441L;
 		Integer tempChannel = this.getPaymentChannel();
 		if (ObjectUtil.equals(null, tempChannel)){
 			return "";
-		}
+		}else
 		if (Constant.PaymentChannel.BB_PAY==tempChannel){
 			return "币币支付";
-		}
+		}else
 		if (Constant.PaymentChannel.UM_PAY==tempChannel){
 			return "联动优势";
-		}
+		}else
 		if (Constant.PaymentChannel.EASE_PAY==tempChannel){
 			return "易支付";
+		}else if(Constant.PaymentChannel.GO_PAY == tempChannel){
+			return "国付宝";
 		}
 		return "";
 	}

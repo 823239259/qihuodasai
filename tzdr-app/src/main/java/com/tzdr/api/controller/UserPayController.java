@@ -3,6 +3,7 @@ package com.tzdr.api.controller;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,7 @@ import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.request.BankTransferRequest;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
+import com.tzdr.business.api.service.ApiRechargeService;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
@@ -44,8 +48,12 @@ import com.tzdr.common.api.payease.PayEase;
 import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.utils.IpUtils;
+import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.common.web.support.JsonResult;
+import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
+import com.tzdr.domain.vo.AutoWechatRequestVo;
+import com.tzdr.domain.web.entity.RechargeList;
 import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
 
@@ -87,7 +95,8 @@ public class UserPayController {
 	
 	@Autowired
 	private PaymentSupportBankService paymentSupportBankService;
-	
+	@Autowired
+	private ApiRechargeService  apiRechargeService;
 	
 	/**
 	* @Title: getAlipayAcount    
@@ -145,12 +154,56 @@ public class UserPayController {
 		
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"Successful binding");
 	}
-	
-	
+	/**
+	 * 验证用户是否绑定微信号
+	 * @return
+	 */
+	@RequestMapping(value = "/check/wx/account",method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult checkedWxAccount(HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		ApiResult resultJson = new ApiResult(false);
+		if(userVerified != null){
+			String wxAccount = userVerified.getWxAccount();
+			if(wxAccount != null && wxAccount.length() > 0){
+				resultJson.setSuccess(true);
+				resultJson.setMessage(wxAccount);
+			}
+		}
+		return resultJson;
+	}
+	/**
+	 * 绑定微信账号
+	 * @param request
+	 * @return 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/wx/bind/account",method = RequestMethod.POST)
+	public ApiResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user = this.payService.getUser(uid);
+		ApiResult resultJson = new ApiResult(false);
+		if (StringUtil.isNotBlank(account)) {
+			UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
+			if (ObjectUtil.equals(null, userVerified)) {
+				UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+				// 绑定微信账号
+				uv.setWxAccount(account);
+				userVerifiedService.update(uv);
+				resultJson.setSuccess(true);
+			} else {
+				resultJson.setMessage("微信账号已存在");
+			}
+		} else {
+			resultJson.setMessage("微信账号不能为空");
+		}
+		return resultJson;
+	}
 	/**
 	 * 银行转账接口
 	 * @param bankTransferRequest
-	 * @return
+	 * @return 
 	 */
 	@RequestMapping(value = "/bank_transfer",method=RequestMethod.POST)
 	@ResponseBody
@@ -319,5 +372,59 @@ public class UserPayController {
 	   payEaseParams = this.payService.PayEasePay(user, PayEaseUtil.tzdrAppPay(payEaseParams),Constant.Source.TZDR,Constant.SystemFlag.TZDR_APP);
 	   System.out.println(JSONObject.toJSONString(payEaseParams));
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",payEaseParams);
+	}
+	/**
+	 * 微信 自动充值接口 
+	 * @param autoAliPayRequest
+	 * @return
+	 */
+	@RequestMapping(value = "/auto_wechat",method=RequestMethod.POST)
+	@ResponseBody
+	public synchronized ApiResult autoAlipay(@RequestBody AutoWechatRequestVo autoAliPayRequest){
+		if (autoAliPayRequest.isInvalid()){
+			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
+		}
+		logger.info("微信自动充值推送信息" + autoAliPayRequest.toString());
+		List<RechargeList> rechargeLists  = apiRechargeService.queryByTradeNo(autoAliPayRequest.getSerialNo());
+		if (!CollectionUtils.isEmpty(rechargeLists)){
+			return new ApiResult(false, ResultStatusConstant.AutoAlipay.SERIAL_NO_EXIST,"the.serialNo.has.been.processed.");
+		}
+		RechargeList  rechargeList = new RechargeList();
+		rechargeList.setSource(autoAliPayRequest.getSource());
+		rechargeList.setAccount(autoAliPayRequest.getAccount());
+		rechargeList.setMoney(autoAliPayRequest.getMoney());
+		rechargeList.setActualMoney(autoAliPayRequest.getMoney());
+		rechargeList.setTradeNo(autoAliPayRequest.getSerialNo());
+		rechargeList.setTradeAccount(DataConstant.WECHAT);
+		rechargeList.setType(DataConstant.WECHAT_TYPE);
+		rechargeList.setRemark(autoAliPayRequest.getTradeTime().concat(MessageUtils.message("auto.alipay.remark",autoAliPayRequest.getMoney())));
+		// 如果真实姓名不为空  同时校验微信 和真实姓名
+		List<ApiUserVo> apiUsers =  apiUserService.findByAlipay(autoAliPayRequest.getAccount());
+		if (apiUsers.size()==DataConstant.ONE){
+			ApiUserVo apiUserVo = apiUsers.get(DataConstant.ZERO);
+			// 用户已经实名认证，但是账户姓名与认证实名不一致  则失败
+			if (StringUtil.isNotBlank(apiUserVo.getTname())
+						&& !StringUtil.equals(apiUserVo.getTname(),autoAliPayRequest.getRealName())){
+				rechargeList.setUid(autoAliPayRequest.getRealName());
+				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+			}else
+			{
+				rechargeList.setUid(apiUserVo.getUid());
+				rechargeList.setStatus(DataConstant.RECHARGE_LIST_PAYS_STATUS_SUCCESS);
+			}
+		}
+		else
+		{
+			// 如果用户信息不存在直接将用户真实姓名保存在uid 字段当中
+			rechargeList.setUid(autoAliPayRequest.getRealName());
+			rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+		}
+		apiRechargeService.autoWechat(rechargeList);
+		logger.info(rechargeList.getRemark()
+				.concat(";weichatAccount:"+autoAliPayRequest.getAccount())
+				.concat("serialNo:"+autoAliPayRequest.getSerialNo())
+				.concat("realName:"+autoAliPayRequest.getRealName())
+				.concat("status:"+rechargeList.getStatusvalue()));
+		return new ApiResult(true, ResultStatusConstant.SUCCESS,"auto.alipay.success.");
 	}
 }

@@ -6,7 +6,7 @@
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
@@ -22,12 +22,23 @@
 		repository-impl-postfix="Impl" transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"
 		factory-class="com.tzdr.common.dao.EntityRepositoryFactoryBean" />
-
+	<!-- 配置多数据源 -->
+	<bean id = "dynamicDataSource" class = "com.tzdr.cpp.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<!-- 指定lookupKey和与之对应的数据源 -->
+				<entry key="dataSource" value-ref="dataSource"></entry>  
+				<entry key="dataSource2" value-ref="dataSource2"></entry>  
+			</map>
+		</property>
+		 <!-- 这里可以指定默认的数据源 -->
+		 <property name="defaultTargetDataSource"  ref="dataSource"></property>
+	</bean>
 	<!-- Jpa Entity Manager 配置 -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="dataSource" ref="dynamicDataSource" />
+		<!-- <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" /> -->
 		<property name="packagesToScan" value="com.tzdr.domain,com.tzdr.olog.db.domain" />
 		<property name="persistenceProvider">
 			<bean class="org.hibernate.jpa.HibernatePersistenceProvider" />
@@ -50,27 +61,36 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="hibernateJpaVendorAdapter"
+	<!-- <bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform">
 			<bean factory-method="getDialect" class="com.tzdr.common.dao.support.Hibernates">
 				<constructor-arg ref="dataSource" />
 			</bean>
 		</property>
-	</bean>
-
+	</bean> -->
+	
 	<!-- AOP 声明式事务配置 -->
 	<!-- 事务管理器配置, Jpa单数据源事务 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	<!--  多数据源拦截配置-->
+    <bean id = "dataSourceAspect" class="com.tzdr.cpp.DataSourceAspect"/>
+	 <aop:config>
+		<aop:aspect id = "aspect" ref="dataSourceAspect">
+			<!-- 拦截所有调用dktai_cpp的数据库访问方法 -->
+			<aop:pointcut id="dataSourcePointcut" expression="execution(* com.tzdr.business.cms.cpp..*(..))"/>
+			<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
+			<aop:after pointcut-ref="dataSourcePointcut" method="resolveDefaultDataSource"/>
+		</aop:aspect>
+	</aop:config>
 	<!-- 支持annotation声明事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
-	
 <!-- 启动对@AspectJ（面向切面）注解的支持 --> 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
+	
 	<!--事务管理器配置
 	<tx:advice id="advice" transaction-manager="transactionManager">
 		<tx:attributes>

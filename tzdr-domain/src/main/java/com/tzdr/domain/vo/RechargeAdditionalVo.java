@@ -41,6 +41,10 @@ public class RechargeAdditionalVo implements Serializable {
 	 * 支付宝账号
 	 */
 	private String  alipayNo;
+	/**
+	 * 微信账号
+	 */
+	private String wechatNo;
 	
 	/**
 	 * 银行卡号
@@ -303,6 +307,16 @@ public class RechargeAdditionalVo implements Serializable {
 
 	public void setShowSource(String showSource) {
 		this.showSource = showSource;
+	}
+
+
+	public String getWechatNo() {
+		return wechatNo;
+	}
+
+
+	public void setWechatNo(String wechatNo) {
+		this.wechatNo = wechatNo;
 	}
 	
 	

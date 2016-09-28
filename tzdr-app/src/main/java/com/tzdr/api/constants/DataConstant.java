@@ -252,7 +252,10 @@ public interface DataConstant {
 	 * 支付宝充值类型
 	 */
 	public static final String ALIPAY_TYPE = "3";// 支付宝
-	
+	/**
+	 * 微信充值类型
+	 */
+	public static final String WECHAT_TYPE = "9";// 微信
 
 	/**
 	 * 银行转账
@@ -263,6 +266,10 @@ public interface DataConstant {
 	 * 支付宝充值
 	 */
 	public static final String ALIPAY = "alipay";// 支付宝
+	/**
+	 * 微信充值
+	 */
+	public static final String WECHAT = "wechat";// 微信
 	
 	/**
 	 * 是否开启当前时段配资最大金额

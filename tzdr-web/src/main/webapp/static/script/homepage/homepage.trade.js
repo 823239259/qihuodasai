@@ -165,7 +165,7 @@
 	    function sendMessage(method,parameters){
 	    	socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 	    }
-	    var url = "ws://socket.vs.com:9002";
+	    var url = "ws://quote.vs.com:9002";
 	    var socket = new WebSocket(url);
 	    var currenExchangeNo = "";
 	    var currenCommodityNo = "";
@@ -334,18 +334,18 @@
 					 }
 		    	   }
 		    	}else if(method = "OnRspQryHistory"){
-	    		    var historys = jsonData.Parameters;
+	    		    var historys = jsonData.Parameters.Data;
 	    		    if(historys == null)return;
 	    		    var rawDataLength = rawData.length - 1;
 	    		    for(var i = 0 ; i < historys.length;i++){
 	    		    	var item =  historys[i];
-	    		    	var dataTime =item.DateTimeStamp;
+	    		    	var dataTime =item[0];
 	    		    	var j  = 0;
 	    		    	j = rawDataLength + i;
-	 					var openPrice = item.OpenPrice;
-	 					var closePrice = item.LastPrice;
+	 					var openPrice = item[2];
+	 					var closePrice = item[1];
 	 					var chaPrice = closePrice - openPrice;
-	 					var sgData = [dataTime,openPrice,closePrice,chaPrice,"",item.LowPrice,item.HighPrice,"","","-"];
+	 					var sgData = [dataTime,openPrice,closePrice,chaPrice,"",item[3],item[4],"","","-"];
 	 					rawData[j] = sgData;
 	    		    }
 	    		  //追加到容器中

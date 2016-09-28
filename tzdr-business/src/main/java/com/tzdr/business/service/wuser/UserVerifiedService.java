@@ -20,5 +20,9 @@ public interface UserVerifiedService  extends BaseService<UserVerified>{
 	public UserVerified queryUserVerifiedByUi(String uid);
 	
 	UserVerified queryUserVerifiedByAliAccount(String aliAccount);
-
+	/**
+	 * 微信账号查询
+	 * @return
+	 */
+	UserVerified queryUserVerifiedByWechatAccount(String wechatAccount);
 }

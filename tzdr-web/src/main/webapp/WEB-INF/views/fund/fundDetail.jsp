@@ -106,9 +106,9 @@
 								</div>
 								<div class="uc_fssearch">
 									<em>收支类型：</em> <input type="text" class="uc_fs_ip"
-										id="fundtype" name="fundtype" value="全部明细"> <a
+										id="fundtype" name="fundtype" value="全部明细" style="width: 118px;"> <a
 										href="javascript:void(0)" id="alltype"
-										class="uc_fssdown uc_fsiptype"></a> <em>时间：</em> <input
+										class="uc_fssdown uc_fsiptype" style="margin-top: 1px;"></a> <em>时间：</em> <input
 										type="text" name="allstarttime" readonly="readonly"
 										onclick="WdatePicker();" id="allstarttime" class="uc_fsiptime">
 									<i>—</i> <input type="text" name="allendtime" id="allendtime"

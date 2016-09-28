@@ -24,7 +24,11 @@ public enum Channel {
 	/**
 	 * 微信扫码支付
 	 */
-	WX_PUB_QR(8,"wx_pub_qr","微信扫码支付");
+	WX_PUB_QR(8,"wx_pub_qr","微信扫码支付"),
+	/**
+	 * 微信扫码支付
+	 */
+	WX(9,"wx","微信支付");
 	private Integer channel;
 	private String channelCode;
 

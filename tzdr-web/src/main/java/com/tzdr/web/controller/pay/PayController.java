@@ -494,7 +494,6 @@ public class PayController {
 					String paytype = Constants.PayType.TRANSBANK;
 					payService.insertEntity(Constant.Source.TZDR, user, bankname, status, alipayaccount, alimoney, ip,
 							paytype, serialnum);
-
 				} else {
 					jsonResult.setMessage("金额不能小于1元");
 				}
@@ -511,7 +510,37 @@ public class PayController {
 		}
 		return jsonResult;
 	}
-
+	/**
+	 * 绑定微信账号
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/wx/bind/account",method = RequestMethod.POST)
+	public JsonResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
+		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+				.getAttribute(Constants.TZDR_USER_SESSION);
+		WUser user = this.payService.getUser(userSessionBean.getId());
+		JsonResult resultJson = new JsonResult(false);
+		if (StringUtil.isNotBlank(account)) {
+			synchronized (lock) { 
+				UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
+				if (ObjectUtil.equals(null, userVerified)) {
+					UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+					// 绑定微信账号
+					uv.setWxAccount(account);
+					userVerifiedService.update(uv);
+					resultJson.setSuccess(true);
+				} else {
+					resultJson.setMessage("微信账号已存在");
+				}
+			}
+		} else {
+			resultJson.setMessage("微信账号不能为空");
+		}
+		return resultJson;
+	}
+	
 	/**
 	 * 查询用户支付宝账号
 	 * 
