@@ -63,7 +63,7 @@
 						<tr id="trwechatNo">
 							<td>微信帐号:</td>
 							<td>
-								<input class="easyui-validatebox" value="${additionalVo.wechatNo}" id="wechatNo" name="wechatNo" data-options="required:true">
+								<input class="easyui-validatebox" value="${additionalVo.alipayNo}" id="wechatNo" name="wechatNo" data-options="required:true">
 							</td>
 						</tr>
 						<tr id="trtradeAccount">

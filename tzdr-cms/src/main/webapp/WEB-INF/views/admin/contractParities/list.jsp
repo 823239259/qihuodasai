@@ -190,8 +190,7 @@ function varietySubmit(){
 };
 
 $(document).ready(function(){
-	$.post(Check.rootPath() + "admin/currency/find",
-			
+	$.post(Check.rootPath() + "/admin/currency/find",
 			function(data){
 				if (data.success) {
 				var typess=$("#typess")

@@ -32,6 +32,7 @@ public class CurrencyServiceImpl  extends BaseServiceImpl<Currency, CurrencyDao>
 		MultiListParam multilistParam = new MultiListParam(easyUiPageInfo, searchParams, params, buffer.toString());
 		pageInfo = multiListPageQuery(multilistParam, Currency.class);
 		
+		
 		return pageInfo;
 	}
 
