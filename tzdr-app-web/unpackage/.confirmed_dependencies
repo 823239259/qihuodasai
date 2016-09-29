@@ -71,7 +71,8 @@
 			"images/1.0.png",
 			"images/2.png",
 			"images/3.png",
-			"images/0.png"
+			"images/0.png",
+			"js/jquery-1.11.3.js"
 		],
 		"refer": [
 			"list.html",
@@ -939,7 +940,8 @@
 			"js/common.config.js",
 			"js/jquery-1.11.3.js",
 			"js/jquery.base64.js",
-			"js/util.js"
+			"js/util.js",
+			"images/newUser.png"
 		],
 		"refer": [
 			"home.html",
@@ -971,7 +973,11 @@
 			"js/trade.js",
 			"js/reconnecting-websocket.min.js",
 			"js/reconnecting-websocket.js",
-			"js/common.config.js"
+			"js/common.config.js",
+			"js/chart.config.js",
+			"js/timechart.config.js",
+			"js/candlestick.config.js",
+			"js/dayCandlestick.config.js"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
@@ -1014,7 +1020,8 @@
 			"tzdr/future/cn.html",
 			"tzdr/quotation/transactionDetails.html",
 			"tzdr/agree/tradingMarket.html",
-			"tzdr/future/hsi.html"
+			"tzdr/future/hsi.html",
+			"tzdr/future/cp.html"
 		]
 	},
 	"tzdr/agree/cpru.html": {

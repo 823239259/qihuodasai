@@ -150,7 +150,7 @@
 								<input type="text" id="transmoney" name="transmoney" onKeyUp="javascript:clearNoNumber(event,this)">
 							</li>
 						</ul>
-						<div style="height: 400px;">
+						<div style="height: 360px;">
 							<ul class="uc_b_money" style="float: left; width: 70px; margin-top: 30px; ">
 								<li><label>转账到</label></li>
 							</ul>
@@ -204,7 +204,7 @@
 						</div>
 						<ul class="uc_b_money">
 							<li>
-								<label>流水号</label>
+								<label>转账流水</label>
 								<input type="text" id="serialnum" name="serialnum">
 							</li>
 						</ul>

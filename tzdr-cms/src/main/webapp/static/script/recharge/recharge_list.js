@@ -46,11 +46,11 @@ function confirmNetBankPay() {
 		$.messager.confirm('提示', '输入金额与用户提交金额不相等，请确认充值金额是否正确?', function(r){
     		if (r){
     			$.post(Check.rootPath() + "/admin/recharge/updateRechargeState" 
-    					,{"id":id, "stateValue":"21","tradeNo":$("#netBankTradeNoId").val(),"bankname":$("#netBankId").combobox("getValue"),"actualMoney":rechargeAmount} ,function(data){
+    					,{"id":id, "stateValue":"21","tradeNo":$("#netBankTradeNoId").val(),"actualMoney":rechargeAmount} ,function(data){
     				if (data == "success") {
     					Check.messageBox("提示","更新成功");
     					$("#dg003").datagrid('reload');
-    					bankPayClose();
+    					netBankPayClose();
     				}
     				else {
     					Check.messageBox("提示",data,"error");
@@ -424,11 +424,11 @@ function confirmWechatPay() {
 		$.messager.confirm('提示', '输入金额与用户提交金额不相等，请确认充值金额是否正确?', function(r){
     		if (r){
     			$.post(Check.rootPath() + "/admin/recharge/updateRechargeState" 
-    					,{"id":id, "stateValue":"21","tradeNo":$("#wechatTradeNoId").val(),"bankname":$("#wechatId").combobox("getValue"),"actualMoney":rechargeAmount} ,function(data){
+    					,{"id":id, "stateValue":"21","tradeNo":$("#wechatTradeNoId").val(),"rechargeType":"wechat","actualMoney":rechargeAmount} ,function(data){
     				if (data == "success") {
     					Check.messageBox("提示","更新成功");
     					$("#dg004").datagrid('reload');
-    					bankPayClose();
+    					wechatPayClose();
     				}
     				else {
     					Check.messageBox("提示",data,"error");
@@ -439,7 +439,7 @@ function confirmWechatPay() {
 	}
 	else {
 		$.post(Check.rootPath() + "/admin/recharge/updateRechargeState" 
-				,{"id":id, "stateValue":"21","tradeNo":$("#wechatTradeNoId").val(),"actualMoney":rechargeAmount} ,function(data){
+				,{"id":id, "stateValue":"21","tradeNo":$("#wechatTradeNoId").val(),"rechargeType":"wechat","actualMoney":rechargeAmount} ,function(data){
 			if (data == "success") {
 				Check.messageBox("提示","更新成功");
 				$("#dg004").datagrid('reload');

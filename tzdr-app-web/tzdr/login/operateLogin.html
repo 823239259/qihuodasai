@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -28,7 +27,7 @@
 			<div class="mui-input-row">
 				<label>选择操盘账号</label>
 				<select class="accountSelect mui-btn mui-btn-block">
-					<option class="mui-selected" id="checkContent" value="test1">请选择操盘账号</option>
+					<option class="mui-selected" id="checkContent" value="test1-vs">请选择操盘账号</option>
 				</select>
 			</div>
 			<div class="mui-input-row" id="userAcount">
@@ -51,7 +50,7 @@
 		</div>-->
 		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 				
-				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
+				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked" style="width: 28px !important; margin-top: 2px;">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
 		
 		</div>
 	</div>
@@ -73,7 +72,6 @@
 				 * 选择账号
 				 */
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
-//				console.log(user_mobile)
 				var user=[];
 				if(user_mobile==null){
 					$("#checkContent").text("其它");
@@ -83,7 +81,7 @@
 					var Len=data.length;
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
-							$(".accountSelect").append("<option value='test'>其它</option>");
+							$(".accountSelect").append("<option value='test-vs'>其它</option>");
 						}else{
 							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
 							var acount={};
@@ -101,27 +99,25 @@
 				if(user_mobile==null || user_mobile==undefined || user_mobile==""){
 					
 				}else{
-					$("#account").attr("disabled","disabled");
+//					$("#password").attr("readonly","readonly");
 					$("#userAcount").css("display","none");
 				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
-					if(val=="test"){
-						$("#account").removeAttr("disabled");
+					if(val=="test-vs"){
 						$("#account").val("");
 						$("#password").val("");
 						$("#userAcount").css("display","block");
-					}else if(val=="test1"){
+					}else if(val=="test1-vs"){
 						$("#password").val("");
+						$("#userAcount").css("display","none"); 
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
 								$("#account").val(val);
-							;
 								$("#password").val(user[i].tranPassword);
 							}
 						}
-						$("#account").attr("disabled","disabled");
 						$("#userAcount").css("display","none");
 					}
 				})
@@ -148,39 +144,44 @@
 				var account = null;
 				var pwd = null;
 				document.getElementById("regLogin").addEventListener("tap",function(){
-					var url = "";
-					var urlId = "";
-					switch(commdityNo){
-						//A50
-						case  "CN":
-								url = "../future/cn.html";
-								urlId = "cn";
-							break;
-						//恒指
-						case  "HSI":
-								url = "../future/hsi.html";
-								urlId = "hsi";
-							break;
-						//原油
-						case  "CL":
-								url = "../future/cl.html";
-								urlId = "cl";
-							break;
-						default:
-								url = "../future/cp.html";
-								urlId = "cp";
-							break;
-					}
+//					var url = "";
+//					var urlId = "";
+//					switch(commdityNo){
+//						//A50
+//						case  "CN":
+//								url = "../future/cn.html";
+//								urlId = "cn";
+//							break;
+//						//恒指
+//						case  "HSI":
+//								url = "../future/hsi.html";
+//								urlId = "hsi";
+//							break;
+//						//原油
+//						case  "CL":
+//								url = "../future/cl.html";
+//								urlId = "cl";
+//							break;
+//						default:
+//								url = "../future/cp.html";
+//								urlId = "cp";
+//							break;
+//					}
 					mui.openWindow({
-									url:url,
-									id:urlId
+									url:"../future/cp.html",
+									id:"cp"
 								});
 				});
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
 				});
 				document.getElementById("backClose").addEventListener("tap",function(){
-					backReload(); 
+					if (Transfer.backpageID){
+						backReload();
+					}else{
+						mui.back();
+					}
+					
 				});
 				$("#operateLogin").click(function(){
 					if(username == null){
@@ -216,17 +217,25 @@
 								var code = parameters.Code;
 								var loginMessage = parameters.Message;
 								if (code == 0) {
-									backReload();
-									localStorage.setItem("account",account);
-									localStorage.setItem("password",pwd);
-									localStorage.setItem("endLoginAccount",account);
-									localStorage.setItem("endLoginPassword",pwd);
-									plus.nativeUI.closeWaiting();
-									mui.toast("登录成功");
-									islogin = true;
+										localStorage.setItem("account",account);
+										localStorage.setItem("password",pwd);
+										localStorage.setItem("endLoginAccount",account);
+										localStorage.setItem("endLoginPassword",pwd);
 									if (Transfer.backpageID){
+										backReload();
+										plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										islogin = true;
 				      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
 				      					return;
+		      						}else{
+		      							plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										islogin = true;
+		      							mui.openWindow({
+		      								url:"../quotation/quotationMain.html",
+		      								id:"quotationMain"
+		      							})
 		      						}
 								} else {
 									alertProtype(loginMessage,"提示",Btn.confirmed());
@@ -253,7 +262,7 @@
 						id:"tradingMarket"
 					})
 				});
-				$("#account")
+//				$("#account")
 			});
 			
 		</script>

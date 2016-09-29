@@ -134,7 +134,7 @@ public class RechargeAdditionalController  extends BaseCmsController<RechargeAdd
 			if (StringUtil.isBlank(additionalVo.getWechatNo())
 					|| StringUtil.isBlank(additionalVo.getMobile())
 					|| additionalVo.getMoney()<=0){
-				return new JsonResult(false,"支付宝充值，数据填写有误！");
+				return new JsonResult(false,"微信充值充值，数据填写有误！");
 			}
 		}
 		else

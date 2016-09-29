@@ -4,31 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>绑定银行卡</title>
+    <link rel="stylesheet" href="../../css/app.css" />
     <link rel="stylesheet" href="../../css/mui.min.css" />
     <link rel="stylesheet" href="../../css/own.css" />
+    <link rel="stylesheet" href="../../css/mui.picker.min.css" />
+    <link rel="stylesheet" href="../../css/mui.poppicker.css" />
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<style>
+		input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+			margin-bottom: 0px;
+		}
+		#detailedAddress{
+			width: 75%;
+		}
+		#alertDiv{
+			width: 100%;
+			/*height: 500px;*/
+			background-color: rgba(0, 0, 0, 0.6);
+			position: fixed;
+			top:0px;
+			left: 0px;
+			display: none;
+		}
+		#alertDiv #alertDivContent{
+			background-color: #FFFFFF;
+			width: 300px;
+			height: 240px;
+			position: absolute;
+		}
+		#alertDiv #alertDivContent h3{
+			line-height: 40px;
+			font-size: 18px;
+			color:#FFFFFF;
+			text-align: center;
+			margin-top: -0px;
+			font-weight: normal;
+			background-color:#2B2B2B;
+		}
+		#alertDiv #alertDivContent #alertMainContent{
+			width: 92%;
+			padding:5px 4%;
+		}
+		#alertDiv #alertDivContent button{
+			width: 44%;
+			margin-left: 4%;
+		}
+	</style>
 	<script>
-		mui.init({
-//		    subpages:[{
-//		      url:'../commonback.html',
-//		      id:'common.html',
-//		      styles:{
-//		        top:'0px',//mui标题栏默认高度为45px；
-//		      }
-//		    }]
-		  }); 
+		mui.init({}); 
 		  var a_id=null;
+		  var bankList=null;
 		mui.plusReady(function(){
-			
 			tzdr.init.initHearListener();
-  			//tzdr.init.initButtomListener();
-  			    
-    		
+			$("#alertDiv").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
+			var leftWidth=window.innerWidth/2-150;
+			$("#alertDivContent").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});
     		document.getElementById("add_bank").addEventListener("tap",function(){
-    			document.getElementById("confirm_quit").innerText="确认添加";
-    			mui('#quitaccc').popover('show');         
-    			  
+//  			document.getElementById("confirm_quit").innerText="确认添加";
+//  			mui('#quitaccc').popover('show');         
+    			  add_bank();
     		});
     		
     		mui.app_request("/user/getbalancerate",{
@@ -83,12 +119,11 @@
     				return;
     			}
     		});
-    		
-    		
     		//获取系统中支持提现的银行列表
     		mui.app_request('user/withdraw/support_banks',{},function(result){
     					
     					if(!mui.isnull(result.data)){
+    						bankList=result.data;
     						mui.each(result.data,function(i){
     							//设置参数
     							add_bank_list(result.data[i]);
@@ -103,10 +138,6 @@
     				return;
     			}
     		});
-    		
-
-    		
-    		
     		// 监听确定事件
 	    	mui('body').on('tap', '.mui-popover-action li>a', function() {
 				var a = this,
@@ -124,7 +155,7 @@
 					if(!mui.isnull(a_id)&&"确认删除"==texts){
 						deletebank(a_id);
 					}else if("确认添加"==texts){
-						add_bank();  
+//						add_bank();  
 					}
 					
 				}
@@ -132,10 +163,6 @@
 				mui('#' + parent.id).popover('toggle');   
 				
 			});
-    		
-    		
-
-    		
 		});
 		
 		
@@ -163,7 +190,6 @@
 			var span=document.createElement("span");
 			span.setAttribute("class","mui-icon mui-icon-checkmarkempty");
 			li.appendChild(span);
-			  
 			mui.app_request("user/withdraw/set_default_bank",{
 				"bankId":id
 			},function(result){
@@ -196,12 +222,13 @@
 				return;
 			})
 		};
-		
-		
+		var bankNameName;
 		function add_bank(){
 			var username=document.getElementById("user_name").value;
 			var bank_list=document.getElementById("bank_list").value;
 			var card=document.getElementById("card").value;
+			var showCityPicker=document.getElementById("showCityPicker").value;
+			var detailedAddress=document.getElementById("detailedAddress").value;
 			if(mui.isnull(username)){
 				mui.toast("请先实名认证！");
 				mui.openWindow("verified.html");
@@ -211,15 +238,50 @@
 				mui.toast("请选择开户银行！");
 				return;
 			}
+			if(showCityPicker=="请选择省市"){
+				mui.toast("请选择省市！");
+				return;
+			}
+			if(detailedAddress=="" || detailedAddress==null || detailedAddress==undefined){
+				mui.toast("请输入详细地址！");
+				return;
+			}
 			if(mui.isnull(card)||!card.match(/^[0-9]*$/)){
 				mui.toast("银行卡号不能为空且不能输入非法字符！");
 				return;
 			}
 			
+			mui.each(bankList,function(i){
+				if(bankList[i].abbreviation==bank_list){
+					bankNameName=bankList[i].bankName;
+				}
+			});
+			//弹出确认框
+			var content="开户姓名："+username+"  开户银行："+bankNameName+"  开户地址："+showCityPicker+detailedAddress+"  银行卡号："+card;
+			setTimeout(function(){
+				$("#alertDiv").css("display","block");
+				$("#alertMainContent").html("<p>开户姓名："+username+"</p><p>开户银行："+bankNameName+"</p><p>开户地址："+showCityPicker+detailedAddress+"</p><p>银行卡号："+card+"</p>")
+				
+			},500);
+			var cityList=showCityPicker.split(" ");
+			var city=cityList[0];
+			var detailCity=cityList[1]
 			
 			//添加银行卡
+			$("#confirmBtn").click(function(){
+				sendCardMessage(bank_list,card,city,detailCity,detailedAddress)
+			});
+			$("#cancelBtn").click(function(){
+				$("#alertDiv").css("display","none");
+			})
+		};
+		
+		function sendCardMessage(bank_list,card,city,detailCity){
 			mui.app_request("/user/withdraw/add_bank",{
 				"bank":bank_list,
+				"prov":city,
+				"city":detailCity,
+				"address":detailedAddress,
 				"card":card
 			},function(result){
 				mui.toast("添加成功！");
@@ -245,10 +307,7 @@
 					return;
 				}
 			});
-			
-			
-		};
-		
+		}
 		
 		function add_bank_list(bank){
 			var bank_list=document.getElementById("bank_list");
@@ -261,7 +320,6 @@
 		
 		
 		function addBankList(bank){
-				
 				var ac_bank=document.getElementById("aw_bank");  
 				var bank_num=document.createElement("li");
     			bank_num.setAttribute('class','mui-table-view-cell');
@@ -297,7 +355,6 @@
     			
     			
 		}
-		
 	</script>
 
 </head>
@@ -344,6 +401,16 @@
 				</select>
 			</li>
 			<li class="mui-table-view-cell">
+				<label>开户地址</label>
+				<input id='showCityPicker'  type='button' class="mui-input-clear" value="请选择省市">
+				<!--<label></label>
+				<input type="text" placeholder="请输入详细地址" id="detailedAddress"/>-->
+			</li>
+			<li class="mui-table-view-cell">
+				<label>详细地址</label>
+				<input id="detailedAddress" type="text" class="mui-input-clear" >
+			</li>
+			<li class="mui-table-view-cell">
 				<label>银行卡号</label>
 				<input id="card" type="tel" class="mui-input-clear" placeholder="" data-input-clear="5" maxlength="19">
 			</li>
@@ -365,7 +432,42 @@
 				</li>
 			</ul>
 		</div>
-		
+		<div id="alertDiv">
+			<div id="alertDivContent">
+				<h3>确认银行卡</h3>
+				<div id="alertMainContent">
+					<p><span>234</span><span>23</span></p>
+					<p><span>234</span><span>23</span></p>
+					<p><span>234</span><span>23</span></p>
+					<p><span>234</span><span>23</span></p>
+				</div>
+				<button class="mui-btn" id="confirmBtn">确认</button ><button class="mui-btn" id="cancelBtn">取消</button>
+			</div>
+		</div>
 	</div>
+	<script src="../../js/mui.picker.min.js"></script>
+	<script src="../../js/mui.poppicker.js"></script>
+	<script src="../../js/city.data.js"></script>
+	<script>
+		(function($, doc) {
+				$.init();
+				$.ready(function() {
+					//级联示例
+					var cityPicker = new $.PopPicker({
+						layer: 2
+					});
+					cityPicker.setData(cityData);
+					var showCityPickerButton = doc.getElementById('showCityPicker');
+//					var cityResult = doc.getElementById('cityResult');
+					showCityPickerButton.addEventListener('tap', function(event) {
+						cityPicker.show(function(items) {
+							showCityPickerButton.value = items[0].text + " " + items[1].text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+					});
+			})(mui, document);
+	</script>
 </body>
 </html>

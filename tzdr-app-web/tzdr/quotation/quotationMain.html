@@ -212,7 +212,7 @@
 					           socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 					        }
 					        //插入主力合约
-					        AddTo()
+					        AddTo();
 					    }else if(method == "OnRspSubscribe"){
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
@@ -317,13 +317,14 @@
 			function referPage(){
 				plus.webview.getWebviewById("quotationMain").reload();
 			}
-			});
 			document.getElementById("tutorial").addEventListener("tap",function(){
 				mui.openWindow({
 					url:"tutorial.html",
 					id:"tutorial",
 				});
 			})
+			});
+			
 		</script>
 	</body>
 </html>
