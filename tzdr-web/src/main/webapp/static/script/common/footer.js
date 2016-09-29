@@ -109,7 +109,6 @@ function scrollTop() {
 /* function scrollBottom() {
 	$('html,body').animate({scrollTop: $(document).height()}, 800);
 } */
-
 /*弹出层登录*/
 $(function() {
 	$("#signin").click(function() {
@@ -171,8 +170,9 @@ $("#login_box").click(function(){
 	$("#signin_box .warning").html("");
 	$this.text("立即登录");
 	$this.removeAttr("disabled");
-	
-	$.post(basepath+"login",{loginName:loginName,password:password,ajax:1},function(data){ //登录
+	//basepath+"login"
+	$.post("http://localhost:8088/cas/login",{username:loginName,password:password,ajax:1},function(data){ //登录
+		alert(data);
 		if(data.success){
 			alert("登录成功");
 			$("#signin_box").css("display","none");
@@ -198,3 +198,4 @@ $("#login_box").click(function(){
 		}*/
 	},"json");
 });
+

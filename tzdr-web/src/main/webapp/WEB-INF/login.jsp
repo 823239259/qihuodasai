@@ -92,7 +92,6 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="views/common/personfooter.jsp"%>
 	<%@ include file="views/common/dsp.jsp"%>
 </body>
 </html>
