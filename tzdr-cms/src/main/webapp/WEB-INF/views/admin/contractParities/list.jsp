@@ -60,7 +60,7 @@ function passClose() {
 	$("#passWin").show();
 	$("#passWin").window('close');
 };
-
+var appendIndex = 0 ;
 function openVariety(typ){
 	setType=typ;
 	$("#addTime").text("");
@@ -97,9 +97,10 @@ function openVariety(typ){
 					var j = i;
 					var time1 = j;
 					var time2 = j+1;
-					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
+					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a><input type='checkbox' name='delflag"+i+"'/></div>");
 					$("#"+time1+"").val(arr[j]);
 					$("#"+time2+"").val(arr[i + 1]);
+					appendIndex = i;
 				}
 			}
 			$("#contractSize").val(rows[0].contractSize);
@@ -115,9 +116,11 @@ function openVariety(typ){
 function removeTime(d){
 	var a=$(d).parent();
 	a.remove();
+	appendIndex = appendIndex - 2;
 };
 function addTime(){
-	$("#addTime").append("<div><input style='width:70px'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
+	appendIndex = appendIndex + 2;
+	$("#addTime").append("<div><input style='width:70px'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a><input type='checkbox' name='delflag"+appendIndex+"'/></div>");
 };
 function varietySubmit(){
 	var index=$("#userIndex").val();
@@ -132,9 +135,26 @@ function varietySubmit(){
 	var typess=$("#typess").val();
 	var dotSize=$("#dotSize").val();
 	var vartimeBucket;
-	
+	var deteFlag = 0;
+	var timeBucketLength = timeBucket.length;
 	$.each( timeBucket, function(i, n){
-		var obj={"DateFlag":"0","IsDST":"N","TimeBucketBeginTime":timeBucket[i].value,"TradingState":"3","TradingTimeBucketID":i};
+		if(i % 2 == 0){
+			var flag = $("input[name = 'delflag"+i+"']").is(':checked');
+			if(!flag){
+				deteFlag = 1;
+			}
+		}
+		var tradingState = 3;
+		if(i == (timeBucketLength-1)){
+			tradingState = 5;
+		}else{
+			if(i % 2 == 0){
+				tradingState = 3;
+			}else{
+				tradingState = 4;
+			}
+		}
+		var obj={"DateFlag":""+deteFlag+"","IsDST":"N","TimeBucketBeginTime":timeBucket[i].value,"TradingState":""+tradingState+"","TradingTimeBucketID":i};
 		
 		if(i>=1||i<=n-1){
 			vartimeBucket +=",";
