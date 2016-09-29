@@ -1,0 +1,33 @@
+.quotation_title {height: 60px; line-height: 60px; background: #333; border-bottom: 1px solid #1a1a1a;}
+.quotation_title img {margin-top: 10px; margin-left: 10px; float: left;}
+.quotation_title .quotation_anniu {float: right;}
+.quotation_title .quotation_anniu input {margin-right: 10px; outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px; width: 130px; background: #1a1a1a; color: #666;}
+.quotation_title .quotation_anniu button a{border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; display: block; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
+.quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
+.quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
+.quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
+
+.quotation_center {width: 100%; height: 860px;}
+ #left {float: left; width: 205px; height: 860px; background-color: green;}
+#content {/* background-color: orange; */  margin-left: 205px;height: 860px;/*==µÈÓÚ×ó±ßÀ¸¿í¶È==*/}
+.quotation_center .center_futures {height: 48px; line-height: 48px; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a; background: #333;}
+.quotation_center .center_futures input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 30px; width: 195px; background: #1a1a1a; color: #666; margin-top: 10px; margin-left: 10px}
+#left .futuresList {height: 810px; background: #eee;}
+#left .futuresList ul{background: #333; width: 205px; height: 80px; border-bottom: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
+#left .futuresList ul.on {background: #1a1a1a;}
+#left .futuresList ul li{float: left;}
+#content .quotation_echarts {width: 100%; height: 583px;  background-color: #ddd;}
+#content .quotation_transaction {border-top: 5px solid #1a1a1a;}
+#content .quotation_transaction .quotation_type{float:left; width: 345px; height: 272px; border-right: 1px solid #1a1a1a;}
+#content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #aaa;}
+
+@media screen and (max-width: 1366px) {
+	.quotation_title {width: 1349px;}
+	.quotation_center {width: 1349px;}
+	#content .quotation_echarts {
+		width: 1144px;
+	}
+	#content .quotation_transaction .quotation_detailed {
+		width: 798px;
+	}
+}
