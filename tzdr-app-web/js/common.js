@@ -79,6 +79,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+//				console.log(JSON.stringify(errorThrown));
 				 //plus.nativeUI.closeWaiting();
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
@@ -263,7 +264,7 @@ var tzdr = {
 		//接口域名地址
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
 		api_domain:"http://test.api.vs.com/",
-//		api_domain:"http://api.vs.com/",
+//		api_domain:"http://api.vs.com/",''
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token

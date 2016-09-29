@@ -107,7 +107,7 @@
 				function(result){
 					dataVersion=result.data;
 //					console.log(JSON.stringify(result.data));
-					updateApk1(_callback,data);
+					updateApk1(_callback);
 //					//最新版本号
 //					var newVer = result.data.version;
 //					//是否强制升级
@@ -179,8 +179,7 @@
 				}
     		);
 }
-	function updateApk1(_callback,data){
-		dataVersion=data;
+	function updateApk1(_callback){
 				//http://api.vs.com/upload/H50967E1D_.apk
 		var nowDate = new Date();
 		var Android = dataVersion.Android;
