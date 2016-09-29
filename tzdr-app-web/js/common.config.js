@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var marketSocketUrl = "";
 var marketUserName = "";
