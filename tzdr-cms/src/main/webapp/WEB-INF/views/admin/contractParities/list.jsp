@@ -97,10 +97,10 @@ function openVariety(typ){
 					var j = i;
 					var time1 = j;
 					var time2 = j+1;
-					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a><input type='checkbox' name='delflag"+i+"'/></div>");
+					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><input type='checkbox' name='delflag"+time1+"'/> - <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a><input type='checkbox' name='delflag"+time2+"'/></div>");
 					$("#"+time1+"").val(arr[j]);
 					$("#"+time2+"").val(arr[i + 1]);
-					appendIndex = i;
+					appendIndex = time2;
 				}
 			}
 			$("#contractSize").val(rows[0].contractSize);
@@ -135,14 +135,12 @@ function varietySubmit(){
 	var typess=$("#typess").val();
 	var dotSize=$("#dotSize").val();
 	var vartimeBucket;
-	var deteFlag = 0;
 	var timeBucketLength = timeBucket.length;
 	$.each( timeBucket, function(i, n){
-		if(i % 2 == 0){
-			var flag = $("input[name = 'delflag"+i+"']").is(':checked');
-			if(!flag){
-				deteFlag = 1;
-			}
+		var deteFlag = 0;
+		var flag = $("input[name = 'delflag"+i+"']").is(':checked');
+		if(!flag){
+			deteFlag = 1;
 		}
 		var tradingState = 3;
 		if(i == (timeBucketLength-1)){
