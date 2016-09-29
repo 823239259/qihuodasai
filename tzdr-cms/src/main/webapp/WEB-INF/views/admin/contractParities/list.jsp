@@ -63,17 +63,17 @@ function passClose() {
 function creationOption(delflag,flag){
 	var option = "<select id = 'delflag"+flag+"'>";
 	if(delflag == 0){
-		option+="<option value = '0'>前一天</option>";
-		option+="<option value = '1'>今天</option>";
-		option+="<option value = '2' >明天</option>";
+		option+="<option value = '0'>上日</option>";
+		option+="<option value = '1'>当日</option>";
+		option+="<option value = '2' >次日</option>";
 	}else if(delflag == 1){
-		option+="<option value = '1'>今天</option>";
-		option+="<option value = '0'>前一天</option>";
-		option+="<option value = '2' >明天</option>";
+		option+="<option value = '1'>当日</option>";
+		option+="<option value = '0'>上日</option>";
+		option+="<option value = '2' >次日</option>";
 	}else{
-		option+="<option value = '2' >明天</option>";
-		option+="<option value = '0'>前一天</option>";
-		option+="<option value = '1'>今天</option>";
+		option+="<option value = '2' >次日</option>";
+		option+="<option value = '0'>上日</option>";
+		option+="<option value = '1'>当日</option>";
 	}
 	option+="</select>";
 	return option;
