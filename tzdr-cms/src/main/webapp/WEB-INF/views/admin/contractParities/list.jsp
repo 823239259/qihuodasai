@@ -147,8 +147,8 @@ function addTime(){
 	var time1 = appendIndex;
 	var time2 = time1 + 1;
 	appendIndex = appendIndex + 2;
-	var selectHtml = creationOption(delflagArr[time1]);
-	var selectHtml1 = creationOption(delflagArr[time2]);
+	var selectHtml = creationOption(-1,time1);
+	var selectHtml1 = creationOption(-1,time2);
 	$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml+" - <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml1+"<a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
 };
 function varietySubmit(){
