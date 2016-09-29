@@ -12,10 +12,11 @@
     		if(parameters == null)return;
     	    var lent=dayCandlestickChartData.length;
         	for(var i=0;i<Len;i++){
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
         			var openPrice = parameters[i][OpenPriceSubscript];
 		            var closePrice = parameters[i][LastPriceSubscript];
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [parameters[i][DateTimeStampSubscript],openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
+		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
        		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
