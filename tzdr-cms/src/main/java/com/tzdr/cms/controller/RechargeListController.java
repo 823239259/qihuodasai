@@ -294,6 +294,7 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 			rechargeList.setStatus(new Integer(stateValue));
 			rechargeList.setOktime(TypeConvert.dbDefaultDate());
 			rechargeList.setReAccountId(u.getId().toString());
+			rechargeList.setActualMoney(0.00);
 			this.rechargeListService.update(rechargeList);
 			WebUtil.printText("success", resp);
 		} catch (WuserDoesNotExistException e) {
