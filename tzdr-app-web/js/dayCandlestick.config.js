@@ -123,7 +123,8 @@
     		if(parameters == null)return;
     	    var lent=dayCandlestickVolumeData.time.length;
         	for(var i=0;i<Len;i++){
-        			dayCandlestickVolumeData.time[lent+i]=parameters[i][DateTimeStampSubscript];
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			dayCandlestickVolumeData.time[lent+i]=timeStr;
         			dayCandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
        		};
        		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
@@ -148,6 +149,7 @@
     	 var  dayCandlestickVolumeData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
+	      	 color: ['#EDF274'],
 	          tooltip: {
 	              trigger: 'axis',
 	              axisPointer : {

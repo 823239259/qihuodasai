@@ -106,6 +106,7 @@
 			mui.app_request('/getVersion',{force:true},
 				function(result){
 					dataVersion=result.data;
+					console.log(JSON.stringify(result.data));
 					updateApk1(_callback);
 //					//最新版本号
 //					var newVer = result.data.version;
