@@ -811,7 +811,7 @@ public class WUserServiceImpl extends BaseServiceImpl<WUser, WUserDao> implement
                         +"+f.lhsi_tran_actual_lever+f.mbtran_actual_lever+f.mdtran_actual_lever+f.mntran_actual_lever+f.nikkei_tran_actual_lever+f.tran_actual_lever+f.xhstock_market_lever) "
                         +"FROM f_simple_ftse_user_trade f WHERE f.uid=w.id AND business_type = 8 AND (f.state_type <> 1 OR f.state_type <> 5)) interActualLever,"
 						+ "(select SUM(d.money) from w_draw_list d where d.uid=w.id and d.`status`=31) withDrawMoney,v.idcard,w.email,"
-						+ "v.alipay_account alipayAccount,w.ctime,w.last_login_time lastLoginTime,w.source,w.channel,w.keyword "
+						+ "v.alipay_account alipayAccount,v.wx_account wechatAccount,w.ctime,w.last_login_time lastLoginTime,w.source,w.channel,w.keyword "
 						+ " FROM w_user w LEFT JOIN w_user_verified v ON w.id=v.uid WHERE 1=1 ");
 		List<Object> params = new ArrayList<Object>();
 		if (connVo != null) {

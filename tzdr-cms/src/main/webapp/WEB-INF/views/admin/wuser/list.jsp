@@ -40,6 +40,7 @@
 				<th field="idcard" width="150">身份证号</th>
 				<th field="email" width="150">邮箱 </th>
 				<th field="alipayAccount" width="150">支付宝帐号</th>
+				<th field="wechatAccount" width="150">微信帐号</th>
 				<th field="ctimeStr" width="150">注册时间 </th>
 				<th field="lastLoginTimeStr" width="150">最后登陆时间</th>
 				<th field="sourceName" width="120">来源网站</th>

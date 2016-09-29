@@ -93,6 +93,12 @@ public class WuserListVo implements Serializable {
 	@AllowExcel(name = "支付宝帐号")
 	@SqlColumn
 	private String alipayAccount;
+	/**
+	 * 支付宝帐号
+	 */
+	@AllowExcel(name = "微信帐号")
+	@SqlColumn
+	private String wechatAccount;
 	
 	
 	@SqlColumn
@@ -374,6 +380,14 @@ public class WuserListVo implements Serializable {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getWechatAccount() {
+		return wechatAccount;
+	}
+
+	public void setWechatAccount(String wechatAccount) {
+		this.wechatAccount = wechatAccount;
 	}
 
 	
