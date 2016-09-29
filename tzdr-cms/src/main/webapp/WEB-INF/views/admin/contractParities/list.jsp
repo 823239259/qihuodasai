@@ -112,7 +112,6 @@ function openVariety(typ){
 			var delflag = rows[0].delflag;
 			arr=time.split(",");
 			delflagArr = delflag.split(",");
-			console.log(delflagArr);
 			var size = arr.length - 1;
 			for(var i=0;i < size;i++)
 			{
@@ -144,7 +143,7 @@ function removeTime(d){
 	appendIndex = appendIndex - 2;
 };
 function addTime(){
-	var time1 = appendIndex;
+	var time1 = appendIndex+1;
 	var time2 = time1 + 1;
 	appendIndex = appendIndex + 2;
 	var selectHtml = creationOption(-1,time1);
