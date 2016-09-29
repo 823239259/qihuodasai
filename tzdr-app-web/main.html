@@ -106,7 +106,8 @@
 			mui.app_request('/getVersion',{force:true},
 				function(result){
 					dataVersion=result.data;
-					updateApk1(_callback);
+//					console.log(JSON.stringify(result.data));
+					updateApk1(_callback,data);
 //					//最新版本号
 //					var newVer = result.data.version;
 //					//是否强制升级
@@ -178,22 +179,8 @@
 				}
     		);
 }
-	function updateApk1(_callback){
-		dataVersion={"Android":{
-						version:"2.0.2",
-						bigUrl:"",
-						littleUrl:"http://api.vs.com/upload/H50967E1D.wgt",
-						date:"2016/8/9 09:00:00",
-						isForceUpdate:false//不强制升级
-						},
-						"iOS":{
-						version:"2.0.3",
-						littleUrl:"http://api.vs.com/upload/H50967E1D.wgt",
-						bigUrl:"https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8",
-						isForceUpdate:true,
-						date:"2016/6/3 2:20:00"
-						}
-			};
+	function updateApk1(_callback,data){
+		dataVersion=data;
 				//http://api.vs.com/upload/H50967E1D_.apk
 		var nowDate = new Date();
 		var Android = dataVersion.Android;

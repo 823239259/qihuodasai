@@ -187,6 +187,7 @@
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
+	      	 color: ['#EDF274'],
 	          tooltip: {
 	              trigger: 'axis',
 	              axisPointer : {
