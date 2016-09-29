@@ -60,10 +60,10 @@
 						<form id="quickPayForm" action="${ctx}/pay/quickPayment"
 							method="post" target="_blank">
 							<!-- 我要提款 -->
-							<div class="uc_wd">
+							<div class="uc_wd" style="width: 700px; margin-left: 104px;">
 								<c:choose>
 									<c:when test="${ empty requestScope.userverified.idcard}">
-										<div class="uc_wdtitle">
+										<div class="uc_wdtitle" style="margin-left: 62px;">
 											<i id="warnidcard"> 首次提现，请先实名认证，请前往 <a
 												href="${ctx}/securityInfo/secInfo" class="a1"> 安全信息</a>
 											</i>
@@ -177,7 +177,7 @@
 								<div class="uc_paybtn uc_wdbtn">
 									<a href="javascript:void(0)" onclick="drawmoney();">下一步</a>
 								</div>
-								<div class="uc_paypromt">
+								<div class="uc_paypromt" style="left: -86px;">
 									<ul>
 										<li class="first" style="border-right: 1px solid #e9e9e9;">
 											<h4>最快<i>10分钟</i>到账</h4>
