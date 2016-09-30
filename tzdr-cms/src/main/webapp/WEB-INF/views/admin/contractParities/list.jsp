@@ -60,7 +60,6 @@ function passClose() {
 	$("#passWin").show();
 	$("#passWin").window('close');
 };
-var appendIndex = 0 ;
 function creationOption(delflag,flag){
 	var option = "<select id = 'delflag"+flag+"'>";
 	if(delflag == 0){
@@ -81,7 +80,6 @@ function creationOption(delflag,flag){
 }
 var appendIndex = 0 ;
 var delfalgKey = new Array();
-
 function openVariety(typ){
 	setType=typ;
 	$("#addTime").text("");
@@ -126,7 +124,6 @@ function openVariety(typ){
 					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml+" - <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml1+"<a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
 					$("#"+time1+"").val(arr[j]);
 					$("#"+time2+"").val(arr[i + 1]);
-					appendIndex = i;
 					appendIndex = time2;
 				}
 			}
@@ -145,7 +142,7 @@ function removeTime(d){
 	a.remove();
 	appendIndex = appendIndex - 2;
 };
-function addTime()
+function addTime(){
 	var time1 = appendIndex+1;
 	var time2 = time1 + 1;
 	appendIndex = appendIndex + 2;
@@ -167,16 +164,8 @@ function varietySubmit(){
 	var dotSize=$("#dotSize").val();
 	var delflag = $("#delflag").val();
 	var vartimeBucket;
-	var deteFlag = 0;
-
 	var timeBucketLength = timeBucket.length;
 	$.each( timeBucket, function(i, n){
-		if(i % 2 == 0){
-			var flag = $("input[name = 'delflag"+i+"']").is(':checked');
-			if(!flag){
-				deteFlag = 1;
-			}
-		}
 		var deteFlag = $("#delflag"+i+"").val();
 		var tradingState = 3;
 		if(i == (timeBucketLength-1)){
