@@ -159,6 +159,7 @@
 				<th field="tradeNo" width="150">流水号</th>
 				<th field="tradeAccountBank" width="150">收款银行</th>
 				<th field="money" width="150">充值表单金额</th>
+				<th field="actualMoney" width="150">实际到账金额 </th>
 				<th field="addtimeStr" width="150">提交时间</th>
 				<th field="statusStr" width="150">充值状态 </th>
 				<th field="uptimeStr" width="150">充值时间</th>
