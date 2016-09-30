@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctx }/static/script/common/login.js"></script>
 <div class="top-title">
     <div class="topctn">
         <div class="top_tel"><!--<i></i>-->全国客服热线：<span>400</span>-<span>852</span>-<span>8008</span></div>
@@ -82,7 +83,7 @@
 			</p>
 			<div class="sigin_link">
 				<input type="checkbox" name="" id="" checked="checked" style="margin-right: 10px;"/>两周内自动登录
-			    <a href="http://localhost:8088/tzdr-web/forgetpw" style="float: right;">忘记密码?</a>
+			    <a href="${ctx }/forgetpw" style="float: right;">忘记密码?</a>
 		    </div>
  			<button id="login_box" type="button">立即登录</button>
 		</form>
