@@ -7,7 +7,6 @@
     var searchUrl = location.search;
     var params = searchUrl.substr(searchUrl.indexOf("?") + 1);
     if (params) {  //取参数信息
-        //from参数必须在推广链接最后http://localhost:8080/peigubao/signin?p=100089&from=http://localhost:8080/peigubao/help?status=3
         var fromstr;
         var strs;
         if (params.indexOf("from=") != -1) {

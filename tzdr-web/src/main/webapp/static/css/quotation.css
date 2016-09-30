@@ -18,9 +18,9 @@
 #left .futuresList ul li{float: left;}
 #content .quotation_echarts {width: 100%; height: 583px;  background-color: #ddd;}
 #content .quotation_transaction {border-top: 5px solid #1a1a1a;}
-#content .quotation_transaction .quotation_type{float:left; width: 345px; height: 272px; border-right: 1px solid #1a1a1a;}
-#content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #aaa;}
-
+#content .quotation_transaction .quotation_type{float:left; width: 345px; height: 272px; border-right: 1px solid #1a1a1a; background: #333333;}
+#content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #333;}
+/* 最小屏 1366 */
 @media screen and (max-width: 1366px) {
 	.quotation_title {width: 1349px;}
 	.quotation_center {width: 1349px;}
@@ -31,3 +31,35 @@
 		width: 798px;
 	}
 }
+/* 买入卖出 */
+#content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 35px; line-height: 35px; margin: 0 auto;}
+#content .quotation_transaction .quotation_type .quotation_p label {float: left; font-size: 14px; color: #999;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr {float: left; margin-left: 23px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr select{margin-top: 5px; outline: none; background: #1a1a1a; color: #ccc; width: 200px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr select option{}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr input[type="radio"] {margin-right:10px;}
+#content .quotation_transaction .quotation_type .money_sj {background: #1a1a1a; color: #ccc; width: 198px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px}
+#content .quotation_transaction .quotation_type .money_sjsl input{outline: none; background: #1a1a1a; color: #ccc; width: 198px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px;}
+#content .quotation_transaction .quotation_type .money_sjsl span {}
+#content .quotation_transaction .quotation_type .money_sjsl {position: relative;}
+#content .quotation_transaction .quotation_type .money_sjsl .add{position: absolute; color:#ccc; right:0; border-left: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .money_sjsl .del{position: absolute; color: #ccc; left: 0; border-right: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr ul {float: left; width: 95px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .mairu {border-radius: 4px; background: #ff4040; text-align: center; color: #fff;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .maichu {border-radius: 4px; background: #29a629; text-align: center; color: #fff;}
+/* 持仓 */
+.quotation_detailed ul li {float: left;}
+.quotation_detailed .quotation_detailed_lis a {padding: 0 20px; color: #999; text-decoration: none;}
+.quotation_detailed .quotation_detailed_lis a:hover {color: ffb319; cursor: pointer;}
+.quotation_detailed .quotation_detailed_lis a.on{color: ffb319;}
+.quotation_detailed .quotation_detailed_lis {border: 1px solid #1a1a1a; font-size: 14px; color: #4c4c4c; padding: 7px 0;}
+.quotation_detailed .quotation_detailed_title .tab_lis{font-size: 12px; color: #999; height: 35px; line-height: 35px;}
+.quotation_detailed .quotation_detailed_title .tab_content {font-size: 12px; color: #ccc; height: 35px; line-height: 35px;} 
+.quotation_detailed .quotation_detailed_title li {width: 70px;}
+.quotation_detailed .quotation_detailed_title {height: 176px; overflow-y: scroll;}
+.quotation_detailed .quotation_detailed_qx {height: 60px;  line-height: 60px; border-top: 1px solid #1a1a1a;}
+.quotation_detailed_qx {color: #999; font-size: 14px;}
+.quotation_detailed_qx label span{color: #ccc;}
+.quotation_detailed_qx label{margin-right: 30px;}
+.quotation_detailed_qx a{width: 90px; height: 30px; line-height: 30px; display: inline-block; background: #ffb319; text-align: center; text-decoration: none; color: #333; border-radius: 4px;}
+
