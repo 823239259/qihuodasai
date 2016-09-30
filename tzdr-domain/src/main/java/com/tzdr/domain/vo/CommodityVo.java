@@ -24,10 +24,23 @@ public class CommodityVo implements Serializable{
 	private String mainContract;
 	private Double depositRatio;
 	private Double tradeFee;
+	private String delflag;
 	
 	
 
 	
+
+	public String getDelflag() {
+		return delflag;
+	}
+
+	public void setDelflag(String delflag) {
+		this.delflag = delflag;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public byte getIndex() {
 		return index;

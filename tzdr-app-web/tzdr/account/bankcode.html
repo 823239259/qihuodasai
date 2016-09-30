@@ -17,7 +17,7 @@
 			margin-bottom: 0px;
 		}
 		#detailedAddress{
-			width: 75%;
+			width: 72%;
 		}
 		#alertDiv{
 			width: 100%;
@@ -84,8 +84,6 @@
     		},function(result){
     			return;
     		});
-    		
-    		
     		//获取已绑定银行卡列表
     		mui.app_request('user/withdraw/bank_list',{},function(result){
     			if(!mui.isnull(result.data)){
@@ -161,8 +159,13 @@
 				}
 				//关闭actionsheet
 				mui('#' + parent.id).popover('toggle');   
-				
 			});
+			document.getElementById("confirmBtns").addEventListener("tap",function(){
+				sendCardMessage(bank_list,card,city,detailCity,detailedAddress);
+			});
+			document.getElementById("cancelBtn").addEventListener("tap",function(){
+				$("#alertDiv").css("display","none");
+			})
 		});
 		
 		
@@ -223,12 +226,17 @@
 			})
 		};
 		var bankNameName;
+		var bank_list;
+		var card;
+		var city;
+		var detailCity;
+		var detailedAddress;
 		function add_bank(){
 			var username=document.getElementById("user_name").value;
-			var bank_list=document.getElementById("bank_list").value;
-			var card=document.getElementById("card").value;
+			bank_list=document.getElementById("bank_list").value;
+			card=document.getElementById("card").value;
 			var showCityPicker=document.getElementById("showCityPicker").value;
-			var detailedAddress=document.getElementById("detailedAddress").value;
+			detailedAddress=document.getElementById("detailedAddress").value;
 			if(mui.isnull(username)){
 				mui.toast("请先实名认证！");
 				mui.openWindow("verified.html");
@@ -264,17 +272,15 @@
 				
 			},500);
 			var cityList=showCityPicker.split(" ");
-			var city=cityList[0];
-			var detailCity=cityList[1]
-			
-			//添加银行卡
-			$("#confirmBtn").click(function(){
-				sendCardMessage(bank_list,card,city,detailCity,detailedAddress)
-			});
-			$("#cancelBtn").click(function(){
-				$("#alertDiv").css("display","none");
-			})
+			city=cityList[0];
+			detailCity=cityList[1]
 		};
+		/*//添加银行卡
+		$("#confirmBtn").click(function(){
+			alert(bank_list);
+			
+		});*/
+		
 		
 		function sendCardMessage(bank_list,card,city,detailCity){
 			mui.app_request("/user/withdraw/add_bank",{
@@ -308,7 +314,7 @@
 				}
 			});
 		}
-		
+		/**/
 		function add_bank_list(bank){
 			var bank_list=document.getElementById("bank_list");
 			var bank_num=document.createElement("option");
@@ -408,11 +414,11 @@
 			</li>
 			<li class="mui-table-view-cell">
 				<label>详细地址</label>
-				<input id="detailedAddress" type="text" class="mui-input-clear" >
+				<input id="detailedAddress" type="text" class="mui-input-clear" placeholder="输入详细地址" >
 			</li>
 			<li class="mui-table-view-cell">
 				<label>银行卡号</label>
-				<input id="card" type="tel" class="mui-input-clear" placeholder="" data-input-clear="5" maxlength="19">
+				<input id="card" type="tel" class="mui-input-clear" placeholder="输入银行卡号" data-input-clear="5" maxlength="19">
 			</li>
 		</ul>
 		<div class="ac_btn">
@@ -441,7 +447,7 @@
 					<p><span>234</span><span>23</span></p>
 					<p><span>234</span><span>23</span></p>
 				</div>
-				<button class="mui-btn" id="confirmBtn">确认</button ><button class="mui-btn" id="cancelBtn">取消</button>
+				<button class="mui-btn" id="confirmBtns">确认</button ><button class="mui-btn" id="cancelBtn">取消</button>
 			</div>
 		</div>
 	</div>

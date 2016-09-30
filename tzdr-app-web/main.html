@@ -105,9 +105,14 @@
 			//获取最新版本信息
 			mui.app_request('/getVersion',{force:true},
 				function(result){
-					dataVersion=result.data;
-//					console.log(JSON.stringify(result.data));
-					updateApk1(_callback,data);
+					dataVersion=result.data.version;
+					if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
+						return;
+					}
+					
+					dataVersion = JSON.parse(dataVersion);
+					
+					updateApk1(_callback);
 //					//最新版本号
 //					var newVer = result.data.version;
 //					//是否强制升级
@@ -179,8 +184,7 @@
 				}
     		);
 }
-	function updateApk1(_callback,data){
-		dataVersion=data;
+	function updateApk1(_callback){
 				//http://api.vs.com/upload/H50967E1D_.apk
 		var nowDate = new Date();
 		var Android = dataVersion.Android;

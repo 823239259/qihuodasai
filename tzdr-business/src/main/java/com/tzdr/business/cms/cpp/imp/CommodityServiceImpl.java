@@ -49,13 +49,14 @@ private CommodityDao commodityDao;
 				JSONArray jsonArray = JSONArray.parseArray(s);
 				int size = jsonArray.size();
 				String time="";
+				String delflag = "";
 				for(int i = 0 ; i < size ; i++){
 					JSONObject jsonObj = jsonArray.getJSONObject(i);
 					time += jsonObj.getString("TimeBucketBeginTime") + ",";
+					delflag+=jsonObj.getString("DateFlag") + ",";
 				}
 				temp.setTimeBucket(time);
-					
-			       
+				temp.setDelflag(delflag);
 				}
 		}
 		return pageInfo;

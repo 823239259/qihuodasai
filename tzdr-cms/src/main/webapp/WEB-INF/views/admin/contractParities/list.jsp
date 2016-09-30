@@ -61,6 +61,27 @@ function passClose() {
 	$("#passWin").window('close');
 };
 var appendIndex = 0 ;
+function creationOption(delflag,flag){
+	var option = "<select id = 'delflag"+flag+"'>";
+	if(delflag == 0){
+		option+="<option value = '0'>上日</option>";
+		option+="<option value = '1'>当日</option>";
+		option+="<option value = '2' >次日</option>";
+	}else if(delflag == 1){
+		option+="<option value = '1'>当日</option>";
+		option+="<option value = '0'>上日</option>";
+		option+="<option value = '2' >次日</option>";
+	}else{
+		option+="<option value = '2' >次日</option>";
+		option+="<option value = '0'>上日</option>";
+		option+="<option value = '1'>当日</option>";
+	}
+	option+="</select>";
+	return option;
+}
+var appendIndex = 0 ;
+var delfalgKey = new Array();
+
 function openVariety(typ){
 	setType=typ;
 	$("#addTime").text("");
@@ -88,8 +109,11 @@ function openVariety(typ){
 			$("#exchangeName").val(rows[0].exchangeName);
 			$("#mainContract").val(rows[0].mainContract);
 			var arr=new Array();
+			var delflagArr = new Array();
 			var time=rows[0].timeBucket;
+			var delflag = rows[0].delflag;
 			arr=time.split(",");
+			delflagArr = delflag.split(",");
 			var size = arr.length - 1;
 			for(var i=0;i < size;i++)
 			{
@@ -97,10 +121,13 @@ function openVariety(typ){
 					var j = i;
 					var time1 = j;
 					var time2 = j+1;
-					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a><input type='checkbox' name='delflag"+i+"'/></div>");
+					var selectHtml = creationOption(delflagArr[time1],time1);
+					var selectHtml1 = creationOption(delflagArr[time2],time2);
+					$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml+" - <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml1+"<a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
 					$("#"+time1+"").val(arr[j]);
 					$("#"+time2+"").val(arr[i + 1]);
 					appendIndex = i;
+					appendIndex = time2;
 				}
 			}
 			$("#contractSize").val(rows[0].contractSize);
@@ -118,9 +145,13 @@ function removeTime(d){
 	a.remove();
 	appendIndex = appendIndex - 2;
 };
-function addTime(){
+function addTime()
+	var time1 = appendIndex+1;
+	var time2 = time1 + 1;
 	appendIndex = appendIndex + 2;
-	$("#addTime").append("<div><input style='width:70px'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>- <input style='width:70px' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a><input type='checkbox' name='delflag"+appendIndex+"'/></div>");
+	var selectHtml = creationOption(-1,time1);
+	var selectHtml1 = creationOption(-1,time2);
+	$("#addTime").append("<div><input style='width:70px' id = '"+time1+"'  name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml+" - <input style='width:70px' id = '"+time2+"' name='timeBucket' class='easyui-timespinner'  data-options='required:true'/>"+selectHtml1+"<a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-remove' plain='true' onclick='removeTime(this)'>删除</a></div>");
 };
 function varietySubmit(){
 	var index=$("#userIndex").val();
@@ -134,8 +165,10 @@ function varietySubmit(){
 	var miniTikeSize=$("#miniTikeSize").val();
 	var typess=$("#typess").val();
 	var dotSize=$("#dotSize").val();
+	var delflag = $("#delflag").val();
 	var vartimeBucket;
 	var deteFlag = 0;
+
 	var timeBucketLength = timeBucket.length;
 	$.each( timeBucket, function(i, n){
 		if(i % 2 == 0){
@@ -144,6 +177,7 @@ function varietySubmit(){
 				deteFlag = 1;
 			}
 		}
+		var deteFlag = $("#delflag"+i+"").val();
 		var tradingState = 3;
 		if(i == (timeBucketLength-1)){
 			tradingState = 5;
@@ -306,6 +340,7 @@ $(document).ready(function(){
 							<th field="miniTikeSize" width="120">最小变动单位</th> 
 							<th field="currencyNo" width="120">币种</th>
 							<th field="mainContract" width="120" >主力合约</th>
+							<th field="delflag" width="120"></th>
 			            </tr>
 			        </thead>
    				</table>
@@ -341,7 +376,7 @@ $(document).ready(function(){
         </form>
 	</div>
 	<div id="passVariety" class="easyui-window" title="编辑"
-        data-options="iconCls:'icon-save',closed:true" style="width:360px">
+        data-options="iconCls:'icon-save',closed:true" style="width:450px">
           <form id="varietyForm">
         <table border="0" style="font-size:12px;" class="conn"  width="100%" height="320px" cellpadding="0" cellspacing="0">
              <tr>
@@ -387,7 +422,7 @@ $(document).ready(function(){
                 <td id="add">
                 	<label id = "addTime"></label>
                   <!--  <input style="width:70px" id = "time1"  name="timeBucket" class="easyui-timespinner"  data-options="required:true"/>- <input style="width:70px" name="timeBucket" id = "time2" class="easyui-timespinner"  data-options="required:true"/> -->
-             	 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addTime()"></a> 
+             	 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addTime()"></a>
                 <td><span ></span></td>
             </tr>  
                <tr>

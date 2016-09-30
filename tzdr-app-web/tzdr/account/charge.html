@@ -46,10 +46,10 @@
 		<div class="mui-content ac_charge">
 			<div id="slider" class="mui-slider">
 				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item mui-active" id="onlinePay" href="#item1mobile">在线网银</a>
+					<a class="mui-control-item mui-active" id="onlinePay" >在线网银</a>
 					<!--<a class="mui-control-item" id="alipayApp">支付宝充值</a>-->
-					<a class="mui-control-item" id="weixinPay" href="#item2mobile" >微信支付</a>
-					<a class="mui-control-item" id="bankPay" href="#item3mobile">银行转账</a>
+					<a class="mui-control-item" id="weixinPay"  >微信支付</a>
+					<a class="mui-control-item" id="bankPay"  >银行转账</a>
 					
 				</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
@@ -169,7 +169,7 @@
 									<a href="javascript:void(0);" id="openappliy" class="mui-btn mui-btn-block lg-btnlogin">打开支付宝</a>
 								</div>-->
 								<div id="weiPayCode">
-									<p>长按二维码，进行付款</p>
+									<p>点击二维码，截图到本地，打开微信扫一扫，识别二维码，进行付款</p>
 									<img src="../../images/weixinpay.png" id="weixinPayCode">
 								</div>
 								<div class="mui-content-padded">
@@ -185,36 +185,36 @@
 					</div>
 					<div id="item3mobile" class="mui-slider-item mui-control-content ac_bank">
 						<div id="" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
+							<div class="mui-scroll" id="ac_bank_list">
 								<p class="ac_bankpromt">向维胜转账后，请录入流水单号，方便及时核实到账</p>
 								<ul class="mui-table-view">
 									<li class="mui-table-view-cell">
-										<label>转账金额</label>
-										<input type="number" class="mui-input-clear" placeholder="" data-input-clear="5" id="bank_money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+										<label style="width: 80px!important">转账金额</label>
+										<input type="tel" class="mui-input-clear" placeholder="请输入转账金额" data-input-clear="5" id="bank_money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 									</li>
 								</ul>
 								<div style="padding: 5px 15px;">转账到：</div>
-								<div class="ac_banklist">
+								<div class="ac_banklist ac_bank_list">
 									<input type="radio" name="back_icon" value="cmb" checked>
 									<img src="../../images/bank1.png" / style="margin-top: 20px;">
 									<p>账号：1289 0715 5110 501<br>户名：成都盈透科技有限公司<br>开户行：招商银行股份有限公司成都天府大道支行</p>
 								</div>
-								<div class="ac_banklist">
+								<div class="ac_banklist ac_bank_list">
 									<input type="radio" name="back_icon" value="icbc">
 									<img src="../../images/bank_02.gif" />
 									<p>账号：4402 9391 1910 0042 543<br>户名：成都盈透科技有限公司<br>开户行：中国工商银行府河音乐花园支行</p>
 								</div>
-								<div class="ac_banklist">
+								<div class="ac_banklist ac_bank_list">
 									<input type="radio" name="back_icon" value="boc">
 									<img src="../../images/bank_04.gif" />
 									<p>账号：1158 4367 7712<br>户名：成都盈透科技有限公司<br>开户行：中国银行天府新区华阳支行</p>
 								</div>
-								<div class="ac_banklist">
+								<div class="ac_banklist ac_bank_list">
 									<input type="radio" name="back_icon" value="ccb">
 									<img src="../../images/bank_01.gif" />
 									<p>账号：5105 0140 6137 0000 0421<br>户名：成都盈透科技有限公司<br>开户行：中国建设银行成都世纪城新会展支行</p>
 								</div>
-								<div class="ac_banklist">
+								<div class="ac_banklist ac_bank_list">
 									<input type="radio" name="back_icon" value="abc">
 									<img src="../../images/bank_03.gif" />
 									<p>账号：2280 8201 0400 05595<br>户名：成都盈透科技有限公司<br>开户行：中国农业银行成都新希望国际支行</p>
@@ -233,14 +233,9 @@
 									</li>-->
 									<li class="mui-table-view-cell">
 										<label>转账流水</label>
-										<input type="text" class="mui-input-clear" placeholder="" data-input-clear="5" id="serialnum" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+										<input type="tel" class="mui-input-clear" placeholder="请输入转账流水" data-input-clear="5" id="serialnum" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 									</li>
 								</ul>
-								
-								<!--<div class="ac_banklist">
-									<img src="../../images/bank_03.gif" />
-									<p>账号：0335 7100 0400 11335<br>户名：上海信闳投资管理有限公司<br>开户行：中国农业银行上海西藏南路支行</p>
-								</div>-->
 								<div class="ac_btn">
 									<button id="openbankPay" class="mui-btn mui-btn-block lg-btnlogin" type="button">确认提交</button>
 								</div>
@@ -301,6 +296,20 @@
 			$("#weixinpayBack img").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});
 				document.getElementById("weixinPayCode").addEventListener("tap",function(){
 					$("#weixinpayBack").css("display","block");
+//					var imgSrc=$("#weixinpayBack img")[0].src
+//					alert(imgSrc);
+//					plus.nativeUI.showWaiting("下载图片..."); 
+//					plus.downloader.createDownload("http://www.vs.com/topic/images/vs-app-3.png", {filename:"_downloads/"}, function(d,status){
+//						plus.nativeUI.closeWaiting();
+//						if (status == 200) { 
+//								mui.toast("下载成功")// 安装wgt包
+//						}else{
+//							// 弹出系统提示对话框
+//							plus.nativeUI.alert( "下载升级包失败！如多次失败请到官网下载最新APP。", function(){
+//							
+//							}, "软件升级", "确定" );
+//						}
+//					}).start();
 			});
 			document.getElementById("weixinpayBack").addEventListener("tap",function(){
 				$("#weixinpayBack").css("display","none");
@@ -398,15 +407,15 @@
 //				document.getElementById("alipayApp").addEventListener("tap", function() {
 //					document.getElementById("alipayApp").href = "#item6mobile";
 //				});
-//				document.getElementById("bankPay").addEventListener("tap", function() {
-//					document.getElementById("bankPay").href = "#item3mobile";
-//				});
-//				document.getElementById("onlinePay").addEventListener("tap", function() {
-//					document.getElementById("onlinePay").href = "#item1mobile";
-//				});
-//				document.getElementById("weixinPay").addEventListener("tap", function() {
-//					document.getElementById("weixinPay").href = "#item2mobile";
-//				});
+				document.getElementById("bankPay").addEventListener("tap", function() {
+					document.getElementById("bankPay").href = "#item3mobile";
+				});
+				document.getElementById("onlinePay").addEventListener("tap", function() {
+					document.getElementById("onlinePay").href = "#item1mobile";
+				});
+				document.getElementById("weixinPay").addEventListener("tap", function() {
+					document.getElementById("weixinPay").href = "#item2mobile";
+				});
 				//添加充值金额文本框监听
 				document.getElementById("rechargeMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
@@ -507,7 +516,7 @@
     		});*/
 				//获取微信账号
 				//getalipayAcount();
-
+//				alert("")
 				document.getElementById("bindAlipay").addEventListener("tap", function() {
 					var alipay_account = document.getElementById("wx_account");
 					mui.prompt("请输入要绑定的微信账号", "微信账号", "绑定提示", ['取消', '绑定'], function(e) {
@@ -521,13 +530,13 @@
 						mui.app_request('/user/pay/wx/bind/account', {
 							"account": e.value
 						}, function(result) {
+							console.log(JSON.stringify(result));
 							if(result.success==true){
-//								console.log(JSON.stringify(result));
 								mui.toast("绑定成功！");
 								alipay_account.innerHTML = e.value;
 							}else{
 								if(result.message == 2) {
-								mui.toast("微信账号已经存在！");
+									mui.toast("微信账号已经存在！");
 									return;
 								} else if(result.message == 3) {
 									mui.toast("微信账号不能为空！");
@@ -541,13 +550,13 @@
 							return;
 						}, function(result) {
 							if(result.code == 2) {
-								mui.toast("支付宝账号已经存在！");
+								mui.toast("微信账号已经存在！");
 								return;
 							} else if(result.code == 3) {
-								mui.toast("支付宝账号不能为空！");
+								mui.toast("微信账号不能为空！");
 								return;
 							} else {
-								mui.toast("系统繁忙，请稍后再试！");
+								mui.toast("微信账号已经存在！");
 								return;
 							}
 						})
@@ -572,10 +581,10 @@
 
 			/*我要充值--选择银行*/
 			$(function(){
-				var bank_icon = $("#item3mobile .ac_banklist");
+				var bank_icon = $("#ac_bank_list .ac_bank_list");
 				bank_icon.click(function(){
 					var this_ = $(this).index();
-					$('input:radio[name="back_icon"]').eq(this_ -1).prop("checked",true);
+					$('#ac_bank_list input:radio[name="back_icon"]').eq(this_-3).prop("checked",true);
 				});
 			});
 			
@@ -663,21 +672,21 @@
 				});
 				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
 			})(mui);
-			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
-			  //注意slideNumber是从0开始的；
-				//alert(event.detail.slideNumber );
-			if(event.detail.slideNumber==0){
-				$("#item6mobile").addClass("mui-active");
-				$("#item3mobile").removeClass("mui-active");
-				$("#itembox").css({"-webkit-transform": "translate3d(0px, 0px, 0px) translateZ(0px)", "-webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)","transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
-					$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"});
-			}else if(event.detail.slideNumber==1){
-				$("#sliderProgressBar").css({"transform":"translate3d(100%, 0px, 0px) translateZ(0px)"})
-				$("#item3mobile").addClass("mui-active");
-				$("#item6mobile").removeClass("mui-active");
-				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
-		}
-			});
+//			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+//			  //注意slideNumber是从0开始的；
+//				//alert(event.detail.slideNumber );
+//			if(event.detail.slideNumber==0){
+//				$("#item6mobile").addClass("mui-active");
+//				$("#item3mobile").removeClass("mui-active");
+//				$("#itembox").css({"-webkit-transform": "translate3d(0px, 0px, 0px) translateZ(0px)", "-webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)","transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
+//					$("#sliderProgressBar").css({"transform":"translate3d(0px, 0px, 0px) translateZ(0px)"});
+//			}else if(event.detail.slideNumber==1){
+//				$("#sliderProgressBar").css({"transform":"translate3d(100%, 0px, 0px) translateZ(0px)"})
+//				$("#item3mobile").addClass("mui-active");
+//				$("#item6mobile").removeClass("mui-active");
+//				$("#itembox").css({"-webkit-transform": "translate3d(-100%, 0px, 0px) translateZ(0px)"," -webkit-transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)", "transition": "0ms cubic-bezier(0.165, 0.84, 0.44, 1)"});
+//		}
+//			});
 		</script> 
 	</body>
 
