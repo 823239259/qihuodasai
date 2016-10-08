@@ -203,3 +203,125 @@ function islogin(){
 		}
 	},"json");
 }
+
+function skbt(luckNum){
+	$(".luckNum").html(luckNum);
+	$("#skbt").css("display","block");
+	$("#div_Mask").show();
+	var windowWidth = document.documentElement.clientWidth;   
+	var windowHeight = document.documentElement.clientHeight;   
+	var popupHeight = $(".tck01").height();   
+	var popupWidth = $(".tck01").width();    
+	$(".tck01").css({     
+	 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+	 "left": (windowWidth-popupWidth)/2   
+	});  
+		
+}
+function sk_bt(subsidyMoney){
+	$(".subsidyMoney").html(subsidyMoney);
+	$("#sk_bt").css("display","block");
+	$("#div_Mask").show();
+	var windowWidth = document.documentElement.clientWidth;   
+	var windowHeight = document.documentElement.clientHeight;   
+	var popupHeight = $(".tck01").height();   
+	var popupWidth = $(".tck01").width();    
+	$(".tck01").css({     
+	 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+	 "left": (windowWidth-popupWidth)/2   
+	});  
+		
+}
+function skmsbt(luckNum,subsidyMoney){
+	$(".luckNum").html(luckNum);
+	$(".subsidyMoney").html(subsidyMoney);
+	$("#skmsbt").css("display","block");
+	$("#div_Mask").show();
+	var windowWidth = document.documentElement.clientWidth;   
+	var windowHeight = document.documentElement.clientHeight;   
+	var popupHeight = $(".tck01").height();   
+	var popupWidth = $(".tck01").width();    
+	$(".tck01").css({     
+	 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+	 "left": (windowWidth-popupWidth)/2   
+	});  
+}
+
+$(function(){
+    /*Query 从 1.9 版开始，移除了 .browser和.browser.version ， 取而代之的是 $.support 方法*/
+    var explorer = navigator.userAgent ;
+    var brow=$.browser;
+    if (explorer.indexOf("MSIE") >= 0) {
+        if(brow.version < 10.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if (explorer.indexOf("Firefox") >= 0) {
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Chrome") >= 0){
+        if(brow.version < 4.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Opera") >= 0){
+        if(brow.version < 11.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    else if(explorer.indexOf("Safari") >= 0){
+        if(brow.version < 6.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    }
+    /* else if(explorer.indexOf("Netscape")>= 0) {
+        if(brow.version < 35.0){
+            $(".w_center").hide();
+            $(".w_center_upgrade").show();
+        }
+    } */
+});
+
+$(function(){
+	$.post(basepath+"/extendsion/sign/validationTip",function(data){
+		if(data.success){
+			if(data.data.islogin){
+				var luckNum = data.data.luckNum;
+				var subsidyMoney = data.data.subsidyMoney;
+				if(data.data.lucktip == 1 && data.data.subsidytip == 1){
+					skmsbt(luckNum,subsidyMoney);
+					return;
+				}else if(data.data.lucktip == 1  && data.data.subsidytip == 0){
+					skbt(luckNum);
+					return;
+				}else if(data.data.subsidytip == 1 && data.data.lucktip == 0){
+					sk_bt(subsidyMoney);
+					return;
+				}
+			}else{
+				
+			}
+		}else{
+			showMsgDialog("提示","系统繁忙，请稍候重试......");
+		}
+	},"json");
+});
+
+window.onload=function(){
+	$(function(){
+		$(".bannerList1").each(function(){
+		   var $this =	$(this);
+		   var href =  $this.attr("href");
+		   if(href.indexOf("sign/luck/view") > 0){
+			   $this.attr("target","_self");
+		   }
+		});
+	});
+}

@@ -1,6 +1,7 @@
 package com.tzdr.domain.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -70,6 +71,18 @@ public class DrawMoneyListVoNew implements Serializable{
 	  */
 	 @AllowExcel(name="提现金额")
 	 private double money;
+	 
+	 /**
+	  * 手续费
+	  */
+	 @AllowExcel(name="手续费")
+	 private double fee;
+	 
+	 /**
+	  * 实际到账金额
+	  */
+	 @AllowExcel(name="实际到账金额")
+	 private double avlAmount;
 	 
 	 /**
 	  * 用户平台余额
@@ -233,6 +246,25 @@ public class DrawMoneyListVoNew implements Serializable{
 
 	public void setMoney(double money) {
 		this.money = money;
+	}
+
+	
+	
+	public double getFee() {
+		return fee;
+	}
+
+	public void setFee(double fee) {
+		this.fee = fee;
+	}
+
+	public double getAvlAmount() {
+		BigDecimal   b   =   new   BigDecimal(avlAmount);  
+		return  b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+
+	public void setAvlAmount(double avlAmount) {
+		this.avlAmount = avlAmount;
 	}
 
 	public String getCard() {

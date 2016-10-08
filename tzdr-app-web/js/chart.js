@@ -6,8 +6,20 @@ var marketCommdityLastPrice = {};
 function setMarketCommdityLastPrice(key,value){
 	marketCommdityLastPrice[key] = value;
 }
+var marketNotSubCommdity = {};
+function setMarketNotSubCommdity(key,value){
+	marketNotSubCommdity[key] = value;
+}
+var marketSubCommdity = {};
+function setMarketSubCommdity(key,value){
+	marketSubCommdity[key]=value;
+}
 var reconnect=null;
 var marketSocket = null;
+var firstTimeLength=1;
+function subscribeHold(exchageNo,commodityNo,contractNo){
+		masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+}
 mui.plusReady(function(){
     	var Transfer=plus.webview.currentWebview();
 		var CommodityNo=document.getElementById("CommodityNo");
@@ -55,6 +67,7 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
+//          console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
@@ -102,19 +115,25 @@ mui.plusReady(function(){
 				if (valiationIsPresent(newCommdityNo, newContractNo)) {
 					$("#contractSize").val(comm.ContractSize);
 				} 
-				setMarketCommdity(newCommdityNo+newContractNo,comm);
-				if(Transfer.name[2]==commoditys[i].CommodityNo){
-			
-	 			}else{
-	 				$("#tradeTitle").append("<option value="+commoditys[i].CommodityNo+commoditys[i].MainContract+">"+commoditys[i].CommodityName+commoditys[i].CommodityNo+commoditys[i].MainContract+"</option>")
-	 			}
-				
+				var commdityAndContract = newCommdityNo+newContractNo;
+				setMarketCommdity(commdityAndContract,comm);
+				//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
+				var comContract = marketNotSubCommdity[commdityAndContract];
+				if(comContract != undefined){ 
+					console.log(marketSubCommdity[commdityAndContract]);
+					if(marketSubCommdity[commdityAndContract] == undefined){
+						console.log("订阅"); 
+						subscribeHold(newExchangeNo,commdityNo,contractNo);
+						setMarketSubCommdity(commdityAndContract,commdityAndContract);
+					}
+				}
 				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 			}
         }
     };
     marketSocket.onerror = function(evt){
     };
+<<<<<<< HEAD
     //插入下拉菜单数据
  	function updateData(data){
  		var upData=data;
@@ -128,6 +147,8 @@ mui.plusReady(function(){
  		}
  		
  	}
+=======
+>>>>>>> refs/heads/master
     /**
 	 * 更新行情数据 
 	 * @param {Object} param

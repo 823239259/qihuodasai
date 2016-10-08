@@ -74,7 +74,11 @@
 	<div id="kefu">
 		<span class="close"></span>
 		<p><span class="ry"></span>维胜资讯欢迎您！如果您有跟期货相关的问题，我们可以在线为您解答。</p>
+
+		<div class="lx"><input type="text" placeholder="您可以在这里直接与我们联系！"><span><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&amp;aty=0&amp;a=0&amp;curl=&amp;ty=1" target="_blank" style="color: #dcefff; text-decoration: none;">发送</a></span></div>
+
 		<div class="lx"><input type="text" placeholder="您可以在这里直接与我们联系！"><span><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&amp;aty=0&amp;a=0&amp;curl=&amp;ty=1" target="_blank" style="color: #dcefff;text-decoration: none;">发送</a></span></div>
+
 	</div>
 </body>
 <script>

@@ -130,12 +130,19 @@ public class WuserController extends BaseCmsController<WUser> {
 			DataGridVo<WuserListVo> grid = new DataGridVo<WuserListVo>();
 			PageInfo<WuserListVo> dataPage = new PageInfo<WuserListVo>(request);
 			ConnditionVo connVo = new ConnditionVo(request);
+			if (connVo.isExcel()) {
+				dataPage.setCurrentPage(1);
+				dataPage.setCountOfCurrentPage(TypeConvert.EXCEL_PAGE_SIZE);
+			}
 			dataPage = this.wuserService.queryDataPageWuserListVo(dataPage, connVo);
-			if (dataPage.getPageResults() != null) {
-				for (WuserListVo wu : dataPage.getPageResults()) {
-					grid.add(wu);
+			if(connVo.isNotExcel(dataPage.getPageResults(), resp,"所有用戶列表.xls")){
+				if (dataPage.getPageResults() != null) {
+					for (WuserListVo wu : dataPage.getPageResults()) {
+						grid.add(wu);
+					}
+					grid.setTotal(dataPage.getTotalCount());
 				}
-				grid.setTotal(dataPage.getTotalCount());
+			
 			}
 			WebUtil.printText(JSON.toJSONString(grid), resp);
 		} catch (Exception e) {

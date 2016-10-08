@@ -59,7 +59,7 @@
 						<input type="text" class="uc_m_ip messageTypeValue" disabled="true" value="">
 					</c:otherwise>
 				</c:choose>
-				<a href="javascript:void(0);" class="uc_m_down"></a>
+				<a href="javascript:void(0);" class="uc_m_down" style="height: 31px;"></a>
 			</div>
 			<div class="uc_m_fill content">
 				<p>内容：</p>

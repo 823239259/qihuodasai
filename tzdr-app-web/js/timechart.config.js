@@ -74,7 +74,7 @@
 					show:false,
 			        data: data1.timeLabel,
 			        axisLine: { lineStyle: { color: '#8392A5' } },
-			        boundaryGap: false
+			        boundaryGap: true
 			}],	
            yAxis:  [
                {
@@ -159,6 +159,7 @@
         var  dataVolume=volumeChartData;
       var  option = {
       	backgroundColor: '#2B2B2B',
+      	 color: ['#EDF274'],
           tooltip: {
               trigger: 'axis',
               axisPointer : {
@@ -188,7 +189,7 @@
               {
                   type : 'category',
                   position:'bottom',
-                 boundaryGap: false,
+                 boundaryGap: true,
                   axisTick: {onGap:false},
                   splitLine: {show:false},
                    axisLine: { lineStyle: { color: '#8392A5' } },

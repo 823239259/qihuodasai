@@ -294,6 +294,7 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 			rechargeList.setStatus(new Integer(stateValue));
 			rechargeList.setOktime(TypeConvert.dbDefaultDate());
 			rechargeList.setReAccountId(u.getId().toString());
+			rechargeList.setActualMoney(0.00);
 			this.rechargeListService.update(rechargeList);
 			WebUtil.printText("success", resp);
 		} catch (WuserDoesNotExistException e) {
@@ -395,8 +396,45 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 				opVo.add(currentAvlVal != null ? currentAvlVal.toString() : "");
 				log.info(TypeConvert.printPaymentOperationLog(opVo));
 
-			} else {
+			} else if(rechargeType != null && rechargeType.equals("wechat")){
+				Double oldAvlVal = 0D;
+				String wuserId = rechargeList.getUid();
+				String account = "";
+				if (wuserId != null) {
+					WUser oldWuser = this.wuserService.get(wuserId);
+					if (oldWuser != null) {
+						oldAvlVal = oldWuser.getAvlBal();
+						account = oldWuser.getMobile();
+					}
+				}
+				// 状态
+				rechargeList.setOktime(TypeConvert.dbDefaultDate());
+				rechargeList.setStatus(new Integer(stateValue));
+				rechargeList.setRemark(remark == null ? "" : remark);
+				rechargeList.setReAccountId(user.getId() + "");
+				this.rechargeListService.addUpdateRechargeList(rechargeList, TypeConvert.USER_FUND_C_TYPE_RECHARGE,
+						TypeConvert.payRemark("微信转账", rechargeList.getActualMoney()));
 
+				// Log 信息
+				OperationLogVo opVo = new OperationLogVo();
+				User currentUser = this.authService.getCurrentUser();
+				if (currentUser != null) {
+					opVo.setOperationPeople(currentUser.getUsername());
+				}
+				opVo.setAccount(account);
+				opVo.setTitle(TypeConvert.SYS_TYPE_WECHAT_ACCOUNTS_NAME);
+				opVo.add(oldAvlVal != null ? oldAvlVal.toString() : "");
+				opVo.add(rechargeList.getActualMoney() != null ? rechargeList.getActualMoney().toString() : "");
+				Double currentAvlVal = 0D;
+				if (wuserId != null) {
+					WUser wuser = this.wuserService.get(wuserId);
+					if (wuser != null) {
+						currentAvlVal = wuser.getAvlBal();
+					}
+				}
+				opVo.add(currentAvlVal != null ? currentAvlVal.toString() : "");
+				log.info(TypeConvert.printPaymentOperationLog(opVo));
+			}else {
 				Double oldAvlVal = 0D;
 				String wuserId = rechargeList.getUid();
 				String account = "";

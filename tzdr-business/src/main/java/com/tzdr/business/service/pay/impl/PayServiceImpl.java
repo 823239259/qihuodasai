@@ -457,7 +457,7 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 		charge.setAccount(bankCard);
 		charge.setMoney(money);
 		charge.setSource(source);
-		charge.setPaymentChannel(payWayChannl.getChannel());
+		charge.setPaymentChannel(Constant.PaymentChannel.GO_PAY);
 		charge.setTradeAccount(payWayChannl.getChannelNote());
 		charge.setAddtime(new Date().getTime()/1000);
 		charge.setAddip(ip);

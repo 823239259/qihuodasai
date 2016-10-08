@@ -505,7 +505,7 @@ public class UserFTradeController {
 		} else {
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);
 		}
-			
+		messagePromptService.sendMessage(PromptTypes.isFutures, wuser.getMobile());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"handle.Successful",fSimpleFtseUserTrade);		
 	}
 }

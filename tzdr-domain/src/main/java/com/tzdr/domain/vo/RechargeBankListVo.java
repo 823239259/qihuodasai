@@ -62,7 +62,8 @@ public class RechargeBankListVo implements Serializable {
 	private String statusStr;
 	
 	private String account;
-	
+	@SqlColumn
+	private String no;
 	/**
 	 * 充值来源
 	 */
@@ -105,6 +106,14 @@ public class RechargeBankListVo implements Serializable {
 			this.statusStr = CacheManager.getDataMapByKey("paystatus",this.status + "");
 		}
 		return statusStr;
+	}
+
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
 	}
 
 	public void setStatusStr(String statusStr) {

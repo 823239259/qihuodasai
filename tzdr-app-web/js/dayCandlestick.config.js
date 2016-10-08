@@ -12,15 +12,17 @@
     		if(parameters == null)return;
     	    var lent=dayCandlestickChartData.length;
         	for(var i=0;i<Len;i++){
-//      		var time2=parameters[i].DateTimeStamp.split(" ");
-//		        	var str1=time2[1].split(":");
-//		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = parseFloat(parameters[i].OpenPrice).toFixed(doSize);
-		            var closePrice = parseFloat(parameters[i].LastPrice).toFixed(doSize);
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			var openPrice = parameters[i][OpenPriceSubscript];
+		            var closePrice = parameters[i][LastPriceSubscript];
 		            var chaPrice = closePrice - openPrice;
-		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
+//<<<<<<< HEAD
+//		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
+//=======
+		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
+       		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
         	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
 		  	dayCandlestickChartDiv.group="group3";
 		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
@@ -125,10 +127,19 @@
     		if(parameters == null)return;
     	    var lent=dayCandlestickVolumeData.time.length;
         	for(var i=0;i<Len;i++){
-        			dayCandlestickVolumeData.time[lent+i]=parameters[i].DateTimeStamp;
-        			dayCandlestickVolumeData.volume[lent+i]=parameters[i].Volume;
+//<<<<<<< HEAD
+//      			dayCandlestickVolumeData.time[lent+i]=parameters[i].DateTimeStamp;
+//      			dayCandlestickVolumeData.volume[lent+i]=parameters[i].Volume;
+//=======
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			dayCandlestickVolumeData.time[lent+i]=timeStr;
+        			dayCandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
        		};
-			console.log(JSON.stringify(dayCandlestickVolumeData));
+//<<<<<<< HEAD
+//			console.log(JSON.stringify(dayCandlestickVolumeData));
+//=======
+       		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
+       		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
         	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 		  	dayCandlestickVolumeChart.group="group3";
 		  	if(dayCandlestickVolumeNum !=0){
@@ -149,6 +160,7 @@
     	 var  dayCandlestickVolumeData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
+	      	 color: ['#EDF274'],
 	          tooltip: {
 	              trigger: 'axis',
 	              axisPointer : {
@@ -178,7 +190,7 @@
 	              {
 	                  type : 'category',
 	                  position:'bottom',
-	                 boundaryGap: false,
+	                 boundaryGap: true,
 	                  axisTick: {onGap:false},
 	                  splitLine: {show:false},
 	                   axisLine: { lineStyle: { color: '#8392A5' } },

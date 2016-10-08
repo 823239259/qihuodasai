@@ -66,7 +66,7 @@ function loadDom(method){
 	}
 }
 function loadSocket(){ 
-	if(socket != null){
+	if(socket != null){ 
 		socket.onopen = function() {
 			isConnection = true;
 			if(username != null) 
@@ -78,7 +78,7 @@ function loadSocket(){
 				alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
 				//alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
 			}
-		}
+		} 
 		socket.onmessage = function(evt) {
 			var dataString = evt.data;
 			var data = JSON.parse(dataString);
@@ -111,14 +111,20 @@ function loadSocket(){
 				} else if (method == "OnRspQryTrade") {
 					appendTradeSuccess(parameters);
 					//查询持仓信息回复
-				} else if (method == "OnRspQryHold") {
+				} else if (method == "OnRspQryHold") {  
 					var positionParam = parameters; 
 					appendPostionAndUpdate(positionParam);
 					var commdityNo  = positionParam.CommodityNo;
 					var contractNo =positionParam.ContractNo;
-					var comm = marketCommdity[commdityNo+contractNo];
+					var commdityAndcontract = commdityNo+contractNo;
+					var comm = marketCommdity[commdityAndcontract];
 					if(comm != undefined){
-						subscribeHold(comm.ExchangeNo,commdityNo,contractNo);
+						if(marketSubCommdity[commdityAndcontract] == undefined){
+							subscribeHold(comm.ExchangeNo,commdityNo,contractNo); 
+							setMarketSubCommdity(commdityAndcontract,commdityAndcontract);
+						} 
+					}else{
+						setMarketNotSubCommdity(commdityAndcontract,commdityAndcontract);
 					}
 					//报单录入请求回复
 				} else if (method == "OnRspOrderInsert") {
@@ -179,9 +185,6 @@ function loadSocket(){
 		clearLogin();
 		alertProtype("自动登录异常，是否重新登录","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
 	}*/
-}
-function subscribeHold(exchageNo,commodityNo,contractNo){
-	masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
 /**
  * 请求数据-初始化dom 
