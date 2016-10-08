@@ -37,6 +37,7 @@
             <li><a id="guojiyuanyou" href="${ctx}/crudeoil/index">国际原油</a></li>
             <li><a id="fushia50" href="${ctx}/ftse/index">富时A50</a></li>
             <li><a id="guojizonghe" href="${ctx}/outDisk/index">国际综合</a></li>
+            <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li>
             <%
         	if(request.getSession().getAttribute("userName") !=null){
         	%>
