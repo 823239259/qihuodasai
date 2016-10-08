@@ -45,7 +45,7 @@ mui.plusReady(function(){
     		clearInterval(setIntvalTime);
     	if(reconnect != false){
     		if(username==null){
-    			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
+//  			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
     		}
     	}
     };
@@ -54,6 +54,7 @@ mui.plusReady(function(){
         var jsonData = JSON.parse(data);
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
+        	alert("5656565");
 		    var date=new Date();
 		    var exchangeNo = $("#exchangeNo").val();
 		    var commodityNo = $("#commodeityNo").val();
@@ -232,12 +233,16 @@ mui.plusReady(function(){
     $("#tradeTitle").change(function(){
     	var commoditysDataP=commoditysData.Parameters;
     	var valSelect=$("#tradeTitle").val();
-    	
-    	for(var i=0;i<commoditysData.length;i++){
-    		if(commoditysDataP.CommodityNo==valSelect){
-    			
-    		}
-    	}
+    	masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+    	marketSocket.close();
+    	marketSocket = new WebSocket(url);
+//  	 masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
+//		marketSocket.close();
+//  	for(var i=0;i<commoditysData.length;i++){
+//  		if(commoditysDataP.CommodityNo==valSelect){
+//  			
+//  		}
+//  	}
     	
     })
     function insertDATA(DATA){
