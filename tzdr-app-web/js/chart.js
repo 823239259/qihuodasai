@@ -235,20 +235,43 @@ mui.plusReady(function(){
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
     var doSize=$("#doSize").val();
+    
     $("#tradeTitle").change(function(){
     	var commoditysDataP=commoditysData.Parameters;
     	var valSelect=$("#tradeTitle").val();
-    	console.log(JSON.stringify(commoditysData))
+    	console.log(JSON.stringify(commoditysData));
+    	var exchangeNo= $("#exchangeNo").val();
+    	var commodityNo= $("#commodeityNo").val();
+    	var contractNo=  $("#contractNo").val();
+    	masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
     	for(var i=0;i<commoditysData.length;i++){
     		if(commoditysData[i].CommodityNo==valSelect){
     			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);
 				    $("#commodeityNo").val(commoditysData[i].CommodityNo);
 				   $("#contractNo").val(commoditysData[i].MainContract);
+				   $("#CommodityName").val(commoditysData[i].CommodityName);
     		}
     	}
+    	clearInterval(setIntvalTime);
+    	var CommodityNo=document.getElementById("CommodityNo");
+		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+		mainTitleFirst.innerHTML= $("#CommodityName").val();
+		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
+   		rawData=[];
+   		dayCandlestickChartData=[];
+   		dayCandlestickVolumeData.time=[];
+   		dayCandlestickVolumeData.volume=[];
+   		timeData.timeLabel=[];
+   		timeData.prices=[];
+   		volumeChartData.time=[];
+   		volumeChartData.volume=[];
+   		CandlestickVolumeData.time=[];
+   		CandlestickVolumeData.volume=[];
+    	console.log("更新后的"+timeData.timeLabel.length);
     	sendHistoryMessage();
     	
     })
+    
     function insertDATA(DATA){
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
