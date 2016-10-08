@@ -219,7 +219,7 @@
 				    <a href="javascript:void(0);">资金明细</a>
 			    </div>
 			    <div class="quotation_detailed_conent" style="position: relative;">
-			        <div class="quotation_detailed_title">
+			        <div class="quotation_detailed_title" id = "hold_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml" style="width: 100px;">合约代码</li>
 			        		<li>持仓数量</li>
@@ -307,7 +307,7 @@
 			        		<li><a href="javascript:void(0);">反手</a></li>
 			        	</ul>
 			        </div>
-			        <div class="quotation_detailed_title" style="display: none;">
+			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml">合约代码</li>
 			        		<li>买卖</li>
@@ -339,7 +339,7 @@
 			        		<li><a href="javascript:void(0);">全撤</a></li>
 			        	</ul>
 			        </div>
-			        <div class="quotation_detailed_title" style="display: none;">
+			        <div class="quotation_detailed_title" style="display: none;" id = "des_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml">合约代码</li>
 			        		<li>合约名称</li>
@@ -360,7 +360,7 @@
 			        		<li><a href="javascript:void(0);">撤单</a></li>
 			        	</ul>
 			        </div>
-			        <div class="quotation_detailed_title" style="display: none;">
+			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml">合约代码</li>
 			        		<li>买卖</li>
@@ -384,7 +384,7 @@
 			        		<li></li>
 			        	</ul>
 			        </div>
-			        <div class="quotation_detailed_title" style="display: none;">
+			        <div class="quotation_detailed_title" style="display: none;" id = "account_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml">币种</li>
 			        		<li>今权益</li>
