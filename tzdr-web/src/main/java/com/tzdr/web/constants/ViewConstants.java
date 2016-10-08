@@ -754,5 +754,10 @@ public class ViewConstants {
 		 */
 		public static final String LIST = "/views/coupon/fsimple_coupon_list";
     }
-    
+    public static class QuoteTradeJsp{
+    	/**
+    	 * 交易行情
+    	 */
+    	public static final String View = "/views/qutrade/quoteTrade";
+    }
 }
