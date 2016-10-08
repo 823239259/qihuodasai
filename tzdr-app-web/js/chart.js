@@ -234,8 +234,6 @@ mui.plusReady(function(){
     var buyPricesNumber=document.getElementById("buyPricesNumber");
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
-    var doSize=$("#doSize").val();
-    
     $("#tradeTitle").change(function(){
     	var commoditysDataP=commoditysData.Parameters;
     	var valSelect=$("#tradeTitle").val();
@@ -250,6 +248,9 @@ mui.plusReady(function(){
 				    $("#commodeityNo").val(commoditysData[i].CommodityNo);
 				   $("#contractNo").val(commoditysData[i].MainContract);
 				   $("#CommodityName").val(commoditysData[i].CommodityName);
+				   $("#doSize").val(commoditysData[i].DotSize);
+				   $("#contractSize").val(commoditysData[i].ContractSize);
+				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize)
     		}
     	}
     	clearInterval(setIntvalTime);
@@ -271,8 +272,9 @@ mui.plusReady(function(){
     	sendHistoryMessage();
     	
     })
-    
+   
     function insertDATA(DATA){
+    	 var doSize=$("#doSize").val();
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
     	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
