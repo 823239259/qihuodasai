@@ -71,19 +71,19 @@ mui.plusReady(function(){
 			if(historyParam.Parameters==null){
 				return
 			};
-//			console.log(JSON.stringify(historyParam.Parameters));
-			if(historyParam.Parameters[0].HisQuoteType==0){
+//			console.log(JSON.stringify(historyParam));
+			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters[0].HisQuoteType==1){
+			}else if(historyParam.Parameters.HisQuoteType==1){
 				handleTime(historyParam);
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 	            
-			}else if(historyParam.Parameters[0].HisQuoteType==1440){
+			}else if(historyParam.Parameters.HisQuoteType==1440){
 				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
@@ -106,6 +106,8 @@ mui.plusReady(function(){
         	var commoditys = jsonData.Parameters;
 			if(commoditys == null)return;
 			var size = commoditys.length;
+			var tradeTitleHtml=document.getElementById("tradeTitle");
+			console.log(JSON.stringify(commoditys));
 			for(var i = 0 ; i < size ; i++){
 				var comm = commoditys[i];
 				var newCommdityNo = comm.CommodityNo;
@@ -128,27 +130,16 @@ mui.plusReady(function(){
 					}
 				}
 				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
+				if(Transfer.name[2]==newCommdityNo){
+   					
+	   			}else{
+	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+	   			}
 			}
         }
     };
     marketSocket.onerror = function(evt){
     };
-<<<<<<< HEAD
-    //插入下拉菜单数据
- 	function updateData(data){
- 		var upData=data;
- 		console.log(JSON.stringify(upData));
- 		for(var i=0;i<=upData.length-1;i++){
- 			if(Transfer.name[2]==upData[i].CommodityNo){
- 				
- 			}else{
- 				
- 			}
- 		}
- 		
- 	}
-=======
->>>>>>> refs/heads/master
     /**
 	 * 更新行情数据 
 	 * @param {Object} param
