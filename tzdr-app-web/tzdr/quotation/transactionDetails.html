@@ -10,6 +10,15 @@
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
 		<script src="../../js/esl.js"></script>
+		<style>
+			#tradeTitle:after{
+				content: "#";
+				display: block;
+				width: 100px;
+				height: 100px;
+				border:1px solid #000000;
+			}
+		</style>
 	</head>
 	<body style="background-color: #2B2B2B"> 
 		<header class="mui-bar mui-bar-nav"> 
@@ -51,9 +60,9 @@
 							<div class="ProductInformation">
 								<div class="ProductInformationLeft">
 									<p class="whiteFont" >
-										<select class="mui-btn mui-btn-block" id = "tradeTitle" >
-											<!--<option class="mui-selected"  value="test1">富时A501608</option>-->
-											
+										<!--<span class="mui-icon mui-icon-search"></span>-->
+										<select  id = "tradeTitle">
+												
 										</select>
 										<!--<span class="mui-icon mui-icon-search" id="searchIcon"></span>-->
 									</p>

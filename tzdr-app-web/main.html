@@ -109,10 +109,8 @@
 					dataVersion=result.data.version;
 					if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
 						return;
-					}
-					
+				}
 					dataVersion = JSON.parse(dataVersion);
-					
 					updateApk1(_callback);
 //					//最新版本号
 //					var newVer = result.data.version;

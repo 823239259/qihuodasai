@@ -71,6 +71,12 @@ mui.plusReady(function(){
 			if(historyParam.Parameters==null){
 				return
 			};
+			if(firstTimeLength==1){
+				getSubscript(historyParam.Parameters.ColumNames);
+				firstTimeLength=2;
+			}else{
+				
+			}
 //			console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
@@ -288,4 +294,20 @@ mui.plusReady(function(){
 function masendMessage(method,parameters){
 	 marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 }
- 
+ function getSubscript(data){
+	for(var i=0;i<=data.length-1;i++){
+		if(data[i]=="DateTimeStamp"){
+			DateTimeStampSubscript=i;
+		}else if(data[i]=="LastPrice"){
+			LastPriceSubscript=i;
+		}else if(data[i]=="OpenPrice"){
+			OpenPriceSubscript=i;
+		}else if(data[i]=="LowPrice"){
+			LowPriceSubscript=i
+		}else if(data[i]=="HighPrice"){
+			HighPriceSubscript=i
+		}else if(data[i]=="Volume"){
+			VolumeSubscript=i;
+		}
+	}
+}

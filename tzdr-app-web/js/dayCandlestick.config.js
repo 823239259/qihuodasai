@@ -7,7 +7,7 @@
     	volume:dayCandlestickVolumeChartVolume
     }
     function processingDayCandlestickData(jsonData){
-    		var parameters = jsonData.Parameters;
+    		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=dayCandlestickChartData.length;
@@ -16,9 +16,6 @@
         			var openPrice = parameters[i][OpenPriceSubscript];
 		            var closePrice = parameters[i][LastPriceSubscript];
 		            var chaPrice = closePrice - openPrice;
-//<<<<<<< HEAD
-//		            var sgData = [parameters[i].DateTimeStamp,openPrice,closePrice,chaPrice,"",parameters[i].LowPrice,parameters[i].HighPrice,"","","-"];
-//=======
 		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
@@ -122,22 +119,15 @@
     };
     var  dayCandlestickVolumeNum=0;
     function processingDayCandlestickVolumeData(data){
-    		var parameters = data.Parameters;
+    		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=dayCandlestickVolumeData.time.length;
         	for(var i=0;i<Len;i++){
-//<<<<<<< HEAD
-//      			dayCandlestickVolumeData.time[lent+i]=parameters[i].DateTimeStamp;
-//      			dayCandlestickVolumeData.volume[lent+i]=parameters[i].Volume;
-//=======
         		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
         			dayCandlestickVolumeData.time[lent+i]=timeStr;
         			dayCandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
        		};
-//<<<<<<< HEAD
-//			console.log(JSON.stringify(dayCandlestickVolumeData));
-//=======
        		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
        		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
         	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
@@ -200,7 +190,7 @@
 			 yAxis: [
 			            {
 	                type : 'value',
-	              name : '成交量(万)',
+	              name : '成交量(千)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
@@ -210,7 +200,7 @@
 	                  formatter: function (a) {
 	                      a = +a;
 	                      return isFinite(a)
-	                          ? echarts.format.addCommas(+a / 10000)
+	                          ? echarts.format.addCommas(+a / 1000)
 	                          : '';
 	                  }
 	              },
