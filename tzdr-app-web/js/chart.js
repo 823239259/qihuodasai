@@ -26,7 +26,7 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-		$("#tradeTitle").append("<option value='"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
+		$("#contentList").append("<li class='"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</li>");
 //		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
     	setTimeout(function(){
@@ -112,7 +112,7 @@ mui.plusReady(function(){
         	var commoditys = jsonData.Parameters;
 			if(commoditys == null)return;
 			var size = commoditys.length;
-			var tradeTitleHtml=document.getElementById("tradeTitle");
+			var tradeTitleHtml=document.getElementById("contentList");
 			console.log(JSON.stringify(commoditys));
 			for(var i = 0 ; i < size ; i++){
 				var comm = commoditys[i];
@@ -139,7 +139,9 @@ mui.plusReady(function(){
 				if(Transfer.name[2]==newCommdityNo){
    					
 	   			}else{
-	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+	   				
+	   				tradeTitleHtml.innerHTML+="<li class="+newCommdityNo+">"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</li>"
+//	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}
 			}
         }
