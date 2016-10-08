@@ -51,17 +51,13 @@
 							<div class="ProductInformation">
 								<div class="ProductInformationLeft">
 									<p class="whiteFont" >
-										<p id = "tradeTitle" ><span id="titleValue"></span><span class="mui-icon mui-icon-search" id="searchIcon"></span></p>
+										<!--<p id = "tradeTitle" ><span id="titleValue"></span><span class="mui-icon mui-icon-search" id="searchIcon"></span></p>
 											<ul id="contentList">
-												<!--<li>345</li>
-												<li>345</li>
-												<li>345</li>
-												<li>345</li>
-												<li>345</li>-->
-											</ul>
-										<!--<select  id = "tradeTitle" >
 												
-										</select>-->
+											</ul>-->
+										<select  id = "tradeTitle" >
+												
+										</select>
 										<!--<span class="mui-icon mui-icon-search" id="searchIcon"></span>-->
 									</p>
 									<!--<p class="grayFont" id = "tradeContractTitle">CNQ16</p>-->
@@ -194,13 +190,26 @@
 					}
 					i++; 
 				});
-				document.getElementById("searchIcon").addEventListener("tap",function(){
+				/*document.getElementById("searchIcon").addEventListener("tap",function(){
 					$("#contentList").css("display","block");
 				})
-//				$("#contentListBg").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
-//				var leftWidth=window.innerWidth/2-150;
-//				$("#contentListBg").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});
+				document.getElementById("titleValue").addEventListener("tap",function(){
+					$("#contentList").css("display","block");
+				})
+				document.getElementById("contentList").addEventListener("tap",function(){
+					str= $(this).index();
+			         console.log(str) ;
+				})
+				 $('#contentList li').on('click',function(){
+			        str= $(this).index();
+			         console.log(str) ;
+			 
+			    })
+				$("#contentListBg").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
+				var leftWidth=window.innerWidth/2-150;
+				$("#contentListBg").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});
 			});
+			*/
 		</script>
 		<script>
 			var tranferParam = null ;

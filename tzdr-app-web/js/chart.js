@@ -17,6 +17,7 @@ function setMarketSubCommdity(key,value){
 var reconnect=null;
 var marketSocket = null;
 var firstTimeLength=1;
+var commoditysData;
 function subscribeHold(exchageNo,commodityNo,contractNo){
 		masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
@@ -26,7 +27,7 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-		$("#contentList").append("<li class='"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</li>");
+		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
 //		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
     	setTimeout(function(){
@@ -74,10 +75,7 @@ mui.plusReady(function(){
 			if(firstTimeLength==1){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;
-			}else{
-				
 			}
-//			console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
 				processingData(historyParam);
@@ -88,7 +86,6 @@ mui.plusReady(function(){
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
-	            
 			}else if(historyParam.Parameters.HisQuoteType==1440){
 				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
@@ -109,10 +106,11 @@ mui.plusReady(function(){
 			updateFloatProfit(subscribeParam);
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
         }else if(method == "OnRspQryCommodity"){
+        	commoditysData=jsonData.Parameters;
         	var commoditys = jsonData.Parameters;
 			if(commoditys == null)return;
 			var size = commoditys.length;
-			var tradeTitleHtml=document.getElementById("contentList");
+			var tradeTitleHtml=document.getElementById("tradeTitle");
 			console.log(JSON.stringify(commoditys));
 			for(var i = 0 ; i < size ; i++){
 				var comm = commoditys[i];
@@ -140,7 +138,7 @@ mui.plusReady(function(){
    					
 	   			}else{
 	   				
-	   				tradeTitleHtml.innerHTML+="<li class="+newCommdityNo+">"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</li>"
+	   				tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+">"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 //	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}
 			}
@@ -231,6 +229,17 @@ mui.plusReady(function(){
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
     var doSize=$("#doSize").val();
+    $("#tradeTitle").change(function(){
+    	var commoditysDataP=commoditysData.Parameters;
+    	var valSelect=$("#tradeTitle").val();
+    	
+    	for(var i=0;i<commoditysData.length;i++){
+    		if(commoditysDataP.CommodityNo==valSelect){
+    			
+    		}
+    	}
+    	
+    })
     function insertDATA(DATA){
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
