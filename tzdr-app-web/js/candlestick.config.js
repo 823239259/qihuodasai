@@ -2,11 +2,11 @@
     var rawData = [];
     var CandlestickChartOption=null;
     var CandlestickVolumeChartOption=null;
-    var CandlestickVolumeChartTime=[];
-    var CandlestickVolumeChartVolume=[];
+//  var CandlestickVolumeChartTime=[];
+//  var CandlestickVolumeChartVolume=[];
     var CandlestickVolumeData={
-    	time:CandlestickVolumeChartTime,
-    	volume:CandlestickVolumeChartVolume
+    	time:[],
+    	volume:[]
     }
     function processingData(jsonData){
     		var parameters = jsonData.Parameters.Data;
@@ -165,6 +165,9 @@
         	}
         	CandlestickVolumeData.time=volumeTime.slice(-60);
         	CandlestickVolumeData.volume=volumeV.slice(-60);
+//      	console.log("最大值"+Math.max.apply(null, CandlestickVolumeData.volume));//最大值
+//			console.log("最小值"+Math.min.apply(null, CandlestickVolumeData.volume));//最小值
+//			console.log("最后一条数据"+CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]);
         	var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
         	CandlestickVolumeChart.group="group2";
         	if(firstTimeNum==0){

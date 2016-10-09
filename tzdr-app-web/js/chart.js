@@ -234,6 +234,10 @@ mui.plusReady(function(){
     var buyPricesNumber=document.getElementById("buyPricesNumber");
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
+    /*
+     * 切换合约
+     * */
+    
     $("#tradeTitle").change(function(){
     	var commoditysDataP=commoditysData.Parameters;
     	var valSelect=$("#tradeTitle").val();
@@ -260,14 +264,24 @@ mui.plusReady(function(){
 		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
    		rawData=[];
    		dayCandlestickChartData=[];
-   		dayCandlestickVolumeData.time=[];
-   		dayCandlestickVolumeData.volume=[];
    		timeData.timeLabel=[];
    		timeData.prices=[];
    		volumeChartData.time=[];
    		volumeChartData.volume=[];
-   		CandlestickVolumeData.time=[];
-   		CandlestickVolumeData.volume=[];
+   		volumeTime=[];
+   		volumeV=[];
+// 		 CandlestickVolumeChartTime=[];
+// 		 CandlestickVolumeChartVolume=[];
+   		 CandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    };
+		    
+   		  dayCandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    };
+//		    processingDayCandlestickVolumeData(null);
     	console.log("更新后的"+timeData.timeLabel.length);
     	sendHistoryMessage();
     	

@@ -1,10 +1,10 @@
     var dayCandlestickChartDivNum=0;
     var dayCandlestickChartData = [];
-    var dayCandlestickVolumeChartTime=[];
-    var dayCandlestickVolumeChartVolume=[];
+//  var dayCandlestickVolumeChartTime=[];
+//  var dayCandlestickVolumeChartVolume=[];
     var dayCandlestickVolumeData={
-    	time:dayCandlestickVolumeChartTime,
-    	volume:dayCandlestickVolumeChartVolume
+    	time:[],
+    	volume:[]
     }
     function processingDayCandlestickData(jsonData){
     		var parameters = jsonData.Parameters.Data;
