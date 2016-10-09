@@ -12,17 +12,30 @@
 <link href="${ctx }/static/css/quotation.css?v=${v}" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quotation.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/jquery-1.8.3.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/jquery.base64.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/util.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.config.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.send.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.connection.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.util.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.js?v=${v}"></script>
+<%-- <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.reconnect.js?v=${v}"></script> --%>
 </head>
 <body>
 <!-- top -->
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
-	<div class="quotation_anniu">
+	<div class="quotation_anniu" id = "show_login">
 		<input type="text" name="quotation_account" id="quotation_account" placeholder="输入交易账号"/>
 		<input type="text" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
-		<button><a href="#">登录</a></button>
+		<button><a href="#" id = "trade_login">登录</a></button>
 		<button><a href="#">开户</a></button>
 		<a href="#" class="backPassword">找回密码</a>
+	</div>
+	<div class="quotation_anniu" id = "show_user_info">
+		欢迎你:<b>李四</b>
+		<button id = "trade_loginOut">退出登录</button>
 	</div>
 </div>
 <!-- center -->
@@ -414,11 +427,11 @@
 			        </div>
 			    </div>
 				<div class="quotation_detailed_qx">
-					<label>账户资产：<span>00.0</span></label>
-					<label>交易保障金：<span>00.0</span></label>
-					<label>账户余额：<span>00.0</span></label>
-					<label>持仓盈亏：<span>00.0</span></label>
-					<label>交易盈亏：<span>00.0</span></label>
+					<label>账户资产：<span id = "todayBalance">00.0</span></label>
+					<label>交易保障金：<span id = "deposit">00.0</span></label>
+					<label>账户余额：<span id = "todayCanUse">00.0</span></label>
+					<label>持仓盈亏：<span id = "floatingProfit">00.0</span></label>
+					<label>交易盈亏：<span id = "closeProfit">00.0</span></label>
 					<a href="javascript:void(0);">追加保证金</a>
 				</div>
 			</div>
