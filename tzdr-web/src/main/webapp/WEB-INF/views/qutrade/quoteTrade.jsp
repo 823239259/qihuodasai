@@ -21,6 +21,40 @@
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.util.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.js?v=${v}"></script>
 <%-- <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.reconnect.js?v=${v}"></script> --%>
+
+<script type="text/javascript" src="${ctx}/static/script/qutrade/d3.min.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/qutrade/react.min.js"></script>
+<script type="text/javascript">
+	!function(e) {
+	    if ("object" == typeof exports && "undefined" != typeof module) module.exports = e(require("react")); else if (
+	            "function" == typeof define && define.amd) define([ "react" ], e); else {
+	        var f;
+	        f = "undefined" != typeof window ? window :"undefined" != typeof global ? global :"undefined" != typeof self ? self :this,
+	                f.ReactDOM = e(f.React);
+	    }
+	}(function(e) {
+	    return e.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+	});
+</script>
+<link rel="stylesheet" href="${ctx }/static/css/introjs.min.css">
+<style>
+	.dropdown,.dropup{position:relative}
+	.dropdown-menu{position:absolute;z-index:1000;display:none;}
+	.dropdown-menu>li>a{display:block;white-space:nowrap}
+	.open>.dropdown-menu{display:block;background: #fff;}
+	.dropdown-header{display:block;}
+	.indicators {display: none;}
+	.btn-default {color: #333; background-color: #fff; border-color: #ccc;}
+	.btn {display: inline-block;height: 34px; width: 100px; margin-bottom: 0; font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;
+	    cursor: pointer;background-image: none;border: 1px solid transparent; border-radius: 4px;white-space: nowrap;vertical-align: middle;
+	    -webkit-user-select: none;-moz-user-select: none; -ms-user-select: none; user-select: none;
+	    -ms-touch-action: manipulation; touch-action: manipulation;}
+	.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid\9; border-right: 4px solid transparent; border-left: 4px solid transparent; background: #fff;}
+	.open>.dropdown-menu li {list-style-type: none; width: 88px; height: 30px; line-height: 30px; padding-left: 10px;}
+	.open>.dropdown-menu li:hover {background-color: #f5f5f5;}
+	.open>.dropdown-menu li a {color: #333; text-decoration: none;}
+	.open>.dropdown-menu li.dropdown-header {display: none;}
+</style>
 </head>
 <body>
 <!-- top -->
@@ -43,7 +77,7 @@
     <div id="left">
     	<p class="center_futures"><input type="text" name="quotation_futures" id="quotation_futures" placeholder="期货搜索"/></p>
 		<div class="futuresList">
-			<ul class="on">
+			<ul class="on left_xiangmu" data="CL&amp;1611&amp;NYMEX">
 		        <li class="futures_name">
 		        	<span class="futures_mz">恒指期货</span>
 		        	<span class="futures_bm">CL1611</span>
@@ -167,7 +201,13 @@
     				</ul>
     			</div>
     		</div>
-    		<div id="content2">插件</div>
+    		<div id="content2">
+    			<div class="carbon" style="position: relative; width: 100%; height: 500px;">
+			        <div id="app">
+			            <!-- http://localhost:8088/tzdr-web/static/ico/MSFT_full.json -->
+			        </div>
+    			</div>
+    		</div>
     	</div>
     	<div class="quotation_transaction">
     		<div class="quotation_type">
@@ -439,4 +479,5 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script>
 </html>
