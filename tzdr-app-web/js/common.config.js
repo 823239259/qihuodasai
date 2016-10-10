@@ -8,6 +8,7 @@ var marketPassword = "";
  */
 var TradeConfig = {
 	TradeSocketUrl:"ws://socket.vs.com:6060"
+//	TradeSocketUrl:"ws://192.168.0.213:6060"
 }
 /**
  * 测试交易配置

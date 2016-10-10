@@ -105,7 +105,7 @@ mui.plusReady(function(){
 			if(commoditys == null)return;
 			var size = commoditys.length;
 			var tradeTitleHtml=document.getElementById("tradeTitle");
-			console.log(JSON.stringify(commoditys));
+			console.log(size);
 			for(var i = 0 ; i < size ; i++){
 				var comm = commoditys[i];
 				var newCommdityNo = comm.CommodityNo;

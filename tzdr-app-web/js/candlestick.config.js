@@ -31,7 +31,6 @@
         		}
         	}
         	newData=rawData.slice(-60);
-        		myChart.resize();
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
