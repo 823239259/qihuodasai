@@ -92,7 +92,7 @@ mui.plusReady(function(){
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
-			console.log(newCommdityNo)
+//			console.log(newCommdityNo)
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
 				insertDATA(quoteParam);
