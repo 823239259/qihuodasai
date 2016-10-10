@@ -15,6 +15,8 @@ function setMarketSubCommdity(key,value){
 	marketSubCommdity[key]=value;
 }
 var reconnect=null;
+
+    var commodityNoList="";
 var marketSocket = null;
 var firstTimeLength=1;
 var commoditysData;
@@ -90,6 +92,7 @@ mui.plusReady(function(){
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
+			console.log(newCommdityNo)
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
 				insertDATA(quoteParam);
@@ -105,7 +108,6 @@ mui.plusReady(function(){
 			if(commoditys == null)return;
 			var size = commoditys.length;
 			var tradeTitleHtml=document.getElementById("tradeTitle");
-			console.log(size);
 			for(var i = 0 ; i < size ; i++){
 				var comm = commoditys[i];
 				var newCommdityNo = comm.CommodityNo;
@@ -120,10 +122,10 @@ mui.plusReady(function(){
 				//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
 				var comContract = marketNotSubCommdity[commdityAndContract];
 				if(comContract != undefined){ 
-					console.log(marketSubCommdity[commdityAndContract]);
+//					console.log(marketSubCommdity[commdityAndContract]);
 					if(marketSubCommdity[commdityAndContract] == undefined){
-						console.log("订阅"); 
-						subscribeHold(newExchangeNo,commdityNo,contractNo);
+						console.log()
+						subscribeHold(newExchangeNo,newCommdityNo,newContractNo);
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
@@ -136,6 +138,9 @@ mui.plusReady(function(){
 //	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}
 			}
+        }else if(method == "OnRspUnSubscribe"){
+        	var quoteParam = jsonData;
+        	console.log(JSON.stringify(quoteParam));
         }
     };
     marketSocket.onerror = function(evt){
@@ -172,6 +177,7 @@ mui.plusReady(function(){
 		var newContractNo = param.ContractNo;
 		var comm = marketCommdity[newCommdityNo+newContractNo];
 		if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
+//			console.log("45");
 			$("#buyBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,0)).toFixed(doSize));
 			$("#sellBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,1)).toFixed(doSize));
 		}
@@ -180,6 +186,7 @@ mui.plusReady(function(){
 	 * 更新浮动盈亏 
 	 */
 	function updateFloatProfit(param) {
+//		console.log("更新")
 		var isFlag = false; 
 		var newContract = param.CommodityNo+param.ContractNo;
 		for (var i = 0; i < positionsIndex; i++) {
@@ -204,6 +211,7 @@ mui.plusReady(function(){
 			var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($thisAvgPrice.text()) , comm.ContractSize,comm.MiniTikeSize,parseInt($thisHoldNum.text()),drection);
 			var floatProfit = floatP +":"+ comm.CurrencyNo;
 			$thisFloat.val(floatProfit); 
+//			console.log(floatProfit);
 			if(parseFloat(floatP) < 0 ){
 				$thisFloat.css("color","green");
 			}else if(parseFloat(floatP) > 0){
@@ -237,7 +245,6 @@ mui.plusReady(function(){
     /*
      * 切换合约
      * */
-    
     $("#tradeTitle").change(function(){
     	var commoditysDataP=commoditysData.Parameters;
     	var valSelect=$("#tradeTitle").val();
@@ -245,7 +252,21 @@ mui.plusReady(function(){
     	var exchangeNo= $("#exchangeNo").val();
     	var commodityNo= $("#commodeityNo").val();
     	var contractNo=  $("#contractNo").val();
-    	masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+    	var allMess=commodityNo+contractNo
+    	if(commodityNoList.indexOf(allMess) < 0){
+    		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+    	}else{
+    		
+    	}
+//  	for(var j=0;j<commodityNoList.length;i++){
+//  		if(commodityNoList[j] == allMess){
+//  			console.log(j+"长度"+commodityNoList.length);
+//	    		break;
+//	    	}else{
+//	    		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+//	    	}
+//	    	
+//  	}
     	for(var i=0;i<commoditysData.length;i++){
     		if(commoditysData[i].CommodityNo==valSelect){
     			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);
@@ -275,12 +296,10 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    };
-//		    console.log("k线图的数据归0"+JSON.stringify(CandlestickVolumeData));
    		  dayCandlestickVolumeData={
 		    	time:[],
 		    	volume:[]
 		    };
-//  	console.log("更新后的"+timeData.timeLabel.length);
     	sendHistoryMessage();
     	
     })

@@ -237,6 +237,7 @@ function appendPosition(data){
 		floatP = doGetFloatingProfit(parseFloat(lastPrice),price,comm.ContractSize,comm.MiniTikeSize,holdNum,drection);
 		floatingProft = floatP +":"+  comm.CurrencyNo; 
 	}
+	commodityNoList+=contractCode;
 	var cls = 'position-index'+positionsIndex;
 	var html = '<li data-tion-position = '+contractCode+' data-index = '+positionsIndex+' contract-code-position = '+contractCode+'   class = "'+cls+' PositionLi myLi"  >'
 				+ '<a class="mui-navigate-right" >'
@@ -320,10 +321,12 @@ function updatePositionDom(positonParam){
 		var floatingProft = 0.00; 
 		var floatP = 0.00;
 		if(comm != undefined){
+			console.log("持仓");
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,comm.ContractSize,comm.MiniTikeSize,holdNum,drection);
 			floatingProft = floatP +":"+  comm.CurrencyNo;
 		} 
 		$floatingProft.val(floatingProft);
+		console.log(floatingProft);
 		if(floatP < 0 ){
 			$floatingProft.css("color","green");
 		}else if(floatP > 0){

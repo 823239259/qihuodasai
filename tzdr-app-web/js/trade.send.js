@@ -186,7 +186,7 @@ function doGetMarketPrice(price,miniTikeSize,drection){
  * 计算浮动盈亏
  * @param {Object} lastPrice 最新价
  * @param {Object} tradeAvgPrice 均价
- * @param {Object} contractSize 没手乘数
+ * @param {Object} contractSize 每手乘数
  * @param {Object} miniTikeSize 
  * @param {Object} orderNum 持仓手数
 */
