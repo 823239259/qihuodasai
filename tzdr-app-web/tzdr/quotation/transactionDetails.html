@@ -24,34 +24,46 @@
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
-					<div style="width: 100%;" id="tradeContentId">
-						<div class="mui-control-content mui-active" id="TimeChart1">
+				<div style="width: 100%;" id="tradeContentId">
+						<div class="mui-control-content  mui-active" id="TimeChart1">
 								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
 								</div>
-								<div id="timeChart" style="width:100%;height:250px;"></div>
+								<div id="timeChart" style="width:100%;height:130px;"></div>
 								<div id="volumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="CandlestickChart">
+						<div class="mui-control-content " id="CandlestickChart" style="opacity: 0;">
 								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
 								</div>
-								<div   id="CandlestickChartDiv" style="width:100%;height:250px;"></div>
+								<div   id="CandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="dayCandlestickChart">
+						<div class="mui-control-content " id="dayCandlestickChart" style="opacity: 0;">
 								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
 								</div>
-								<div   id="dayCandlestickChartDiv" style="width:100%;height:250px;"></div>
+								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content" id="trade">
+						<div class="mui-control-content " id="trade">
 							<div class="Assets">
 								<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 								<p><span>总资产</span><span>保证金</span><span>余额</span></p>
 							</div>
 							<div class="ProductInformation">
 								<div class="ProductInformationLeft">
-									<p class="whiteFont" id = "tradeTitle">富时A501608</p>
-									<p class="grayFont" id = "tradeContractTitle">CNQ16</p>
+									<p class="whiteFont" >
+										<!--<p id = "tradeTitle" ><span id="titleValue"></span><span class="mui-icon mui-icon-search" id="searchIcon"></span></p>
+											<ul id="contentList">
+												
+											</ul>-->
+											<div id="bb">
+												<select class="mui-btn mui-btn-block" id = "tradeTitle" >
+													<!--<option>1243</option>-->
+												</select>
+											</div>
+										
+										<span class="mui-icon mui-icon-search" id="searchIcon"></span>
+									</p>
+									<!--<p class="grayFont" id = "tradeContractTitle">CNQ16</p>-->
 								</div>
 								<div class="ProductInformationRight">
 									<p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
@@ -112,7 +124,7 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 			<div class="buttomFix">
 				<div class="buttomFixLeft mui-col-xs-6">
 					<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
@@ -131,13 +143,14 @@
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
 				<div style="display: none;">
-				<input type="text"  id = "lastPriceNone" />
+				<!--<input type="text"  id = "lastPriceNone" />-->
 				<input type="text"  id = "exchangeNo"/> 
 				<input type="text"  id = "commodeityNo"/>
 				<input type="text"  id = "contractNo"/>
 				<input type="text"  id = "contractSize" />
 				<input type="text"  id= "miniTikeSize"/>
 				<input type="text"  id = "doSize"/>
+				<input type="text" id="CommodityName" />
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/common.config.js" ></script>
@@ -151,7 +164,6 @@
 		<script src="../../js/dayCandlestick.config.js"></script>
 		<script src="../../js/chart.js"></script>
 		<script type="text/javascript" src="../../js/trade.js" ></script>
-		
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){  
@@ -170,6 +182,11 @@
 				document.getElementById("Time").addEventListener("tap",function(){
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 				});
+				document.getElementById("trade").addEventListener("tap",function(){
+					$("#CandlestickChart").css("opacity","0");
+    				$("#TimeChart1").css("opacity","0");
+    					$("#dayCandlestickChart").css("opacity","0");
+				})
 				var candlestickChartItem = document.getElementById('CandlestickChart');
 				init(Transfer.name);
 				cachTranFers(Transfer.name);
@@ -182,7 +199,26 @@
 					}
 					i++; 
 				});
+				/*document.getElementById("searchIcon").addEventListener("tap",function(){
+					$("#contentList").css("display","block");
+				})
+				document.getElementById("titleValue").addEventListener("tap",function(){
+					$("#contentList").css("display","block");
+				})
+				document.getElementById("contentList").addEventListener("tap",function(){
+					str= $(this).index();
+			         console.log(str) ;
+				})
+				 $('#contentList li').on('click',function(){
+			        str= $(this).index();
+			         console.log(str) ;
+			 
+			    })
+				$("#contentListBg").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
+				var leftWidth=window.innerWidth/2-150;
+				$("#contentListBg").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});*/
 			});
+			
 		</script>
 		<script>
 			var tranferParam = null ;
@@ -203,7 +239,7 @@
 				$("#contractNo").val(param[1]);
 				$("#contractSize").val(param[5]);
 				$("#lastPrice").text(param[7]);
-				$("#lastPriceNone").val(param[7]);
+//				$("#lastPriceNone").val(param[7]);
 				$("#miniTikeSize").val(param[6]);
 				$("#doSize").val(param[4]);
 			}

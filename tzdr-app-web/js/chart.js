@@ -17,6 +17,8 @@ function setMarketSubCommdity(key,value){
 var reconnect=null;
 var marketSocket = null;
 var firstTimeLength=1;
+var commoditysData;
+var OnRspQryCommodityDateL=1;
 function subscribeHold(exchageNo,commodityNo,contractNo){
 		masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
@@ -26,8 +28,8 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-		$("#tradeTitle").text(Transfer.name[0]);
-		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
+		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
+//		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
     	setTimeout(function(){
 					muiSpinner[0].style.display="none";
@@ -53,16 +55,7 @@ mui.plusReady(function(){
         var jsonData = JSON.parse(data);
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
-		    var date=new Date();
-		    var exchangeNo = $("#exchangeNo").val();
-		    var commodityNo = $("#commodeityNo").val();
-		    var contractNo = $("#contractNo").val();
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
-		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-	        setIntvalTime = setInterval(function(){
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
-	        },3000);
+        	sendHistoryMessage();
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
@@ -73,8 +66,6 @@ mui.plusReady(function(){
 			if(firstTimeLength==1){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;
-			}else{
-				
 			}
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
@@ -86,8 +77,8 @@ mui.plusReady(function(){
 				processingData(historyParam);
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
-	            
 			}else if(historyParam.Parameters.HisQuoteType==1440){
+//				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
 			}
@@ -106,9 +97,15 @@ mui.plusReady(function(){
 			updateFloatProfit(subscribeParam);
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
         }else if(method == "OnRspQryCommodity"){
+        	if(OnRspQryCommodityDateL==1){
+        		commoditysData=jsonData.Parameters;
+        	}
+        	
         	var commoditys = jsonData.Parameters;
 			if(commoditys == null)return;
 			var size = commoditys.length;
+			var tradeTitleHtml=document.getElementById("tradeTitle");
+			console.log(JSON.stringify(commoditys));
 			for(var i = 0 ; i < size ; i++){
 				var comm = commoditys[i];
 				var newCommdityNo = comm.CommodityNo;
@@ -131,11 +128,30 @@ mui.plusReady(function(){
 					}
 				}
 				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
+				if(Transfer.name[2]==newCommdityNo){
+   					
+	   			}else{
+	   				
+	   				tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+">"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+//	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+	   			}
 			}
         }
     };
     marketSocket.onerror = function(evt){
     };
+    function sendHistoryMessage(){
+    		 var exchangeNo = $("#exchangeNo").val();
+		    var commodityNo = $("#commodeityNo").val();
+		    var contractNo = $("#contractNo").val();
+		    //masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
+		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+	        setIntvalTime = setInterval(function(){
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
+	        },3000);
+    }
     /**
 	 * 更新行情数据 
 	 * @param {Object} param
@@ -218,8 +234,59 @@ mui.plusReady(function(){
     var buyPricesNumber=document.getElementById("buyPricesNumber");
     var sellPrices=document.getElementById("sellPrices");
     var sellPricesNumber=document.getElementById("sellPricesNumber");
-    var doSize=$("#doSize").val();
+    /*
+     * 切换合约
+     * */
+    
+    $("#tradeTitle").change(function(){
+    	var commoditysDataP=commoditysData.Parameters;
+    	var valSelect=$("#tradeTitle").val();
+    	console.log(JSON.stringify(commoditysData));
+    	var exchangeNo= $("#exchangeNo").val();
+    	var commodityNo= $("#commodeityNo").val();
+    	var contractNo=  $("#contractNo").val();
+    	masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+    	for(var i=0;i<commoditysData.length;i++){
+    		if(commoditysData[i].CommodityNo==valSelect){
+    			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);
+				    $("#commodeityNo").val(commoditysData[i].CommodityNo);
+				   $("#contractNo").val(commoditysData[i].MainContract);
+				   $("#CommodityName").val(commoditysData[i].CommodityName);
+				   $("#doSize").val(commoditysData[i].DotSize);
+				   $("#contractSize").val(commoditysData[i].ContractSize);
+				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize)
+    		}
+    	}
+    	clearInterval(setIntvalTime);
+    	var CommodityNo=document.getElementById("CommodityNo");
+		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+		mainTitleFirst.innerHTML= $("#CommodityName").val();
+		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
+   		rawData=[];
+   		dayCandlestickChartData=[];
+   		timeData.timeLabel=[];
+   		timeData.prices=[];
+   		volumeChartData.time=[];
+   		volumeChartData.volume=[];
+   		volumeTime=[];
+   		volumeV=[];
+   		newData=[];
+   		 CandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    };
+//		    console.log("k线图的数据归0"+JSON.stringify(CandlestickVolumeData));
+   		  dayCandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    };
+//  	console.log("更新后的"+timeData.timeLabel.length);
+    	sendHistoryMessage();
+    	
+    })
+   
     function insertDATA(DATA){
+    	 var doSize=$("#doSize").val();
     	buyPrices.innerHTML=DATA.Parameters.AskPrice1.toFixed(doSize);
     	buyPricesNumber.innerHTML=DATA.Parameters.AskQty1;
     	sellPrices.innerHTML=DATA.Parameters.BidPrice1.toFixed(doSize);
@@ -284,7 +351,7 @@ mui.plusReady(function(){
 function masendMessage(method,parameters){
 	 marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 }
-function getSubscript(data){
+ function getSubscript(data){
 	for(var i=0;i<=data.length-1;i++){
 		if(data[i]=="DateTimeStamp"){
 			DateTimeStampSubscript=i;

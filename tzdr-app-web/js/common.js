@@ -263,6 +263,7 @@ var tzdr = {
 	constants:{
 		//接口域名地址
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
+
 //		api_domain:"http://test.api.vs.com/",
 		api_domain:"http://api.vs.com/",
 		//图片地址

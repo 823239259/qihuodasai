@@ -1,42 +1,56 @@
     var dayCandlestickChartDivNum=0;
     var dayCandlestickChartData = [];
-    var dayCandlestickVolumeChartTime=[];
-    var dayCandlestickVolumeChartVolume=[];
+//  var dayCandlestickVolumeChartTime=[];
+//  var dayCandlestickVolumeChartVolume=[];
     var dayCandlestickVolumeData={
-    	time:dayCandlestickVolumeChartTime,
-    	volume:dayCandlestickVolumeChartVolume
+    	time:[],
+    	volume:[]
     }
     function processingDayCandlestickData(jsonData){
+    		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=dayCandlestickChartData.length;
         	for(var i=0;i<Len;i++){
         		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-        			var openPrice = parameters[i][OpenPriceSubscript];
-		            var closePrice = parameters[i][LastPriceSubscript];
-		            var chaPrice = closePrice - openPrice;
-		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
+		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
        		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
-        	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
+//      	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
 		  	dayCandlestickChartDiv.group="group3";
-		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+		  	
+    }
+    document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+    				$("#CandlestickChart").css("opacity","0");
+    				$("#TimeChart1").css("opacity","0");
 				 if(dayCandlestickChartDiv != null){
 				 	setTimeout(function(){
 				 		muiSpinner[2].style.display="none";
 				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
+					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
+					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 						setTimeout(function(){
 						 	dayCandlestickChartDiv.resize();	
-							dayCandlestickChartDiv.setOption(Option);
+							dayCandlestickChartDiv.setOption(option1);
 		        			dayCandlestickChartDiv.resize();	
 		        			dayCandlestickChartDivNum++;
+		        			dayCandlestickVolumeChart.resize();	
+							dayCandlestickVolumeChart.setOption(option2);
+		        			dayCandlestickVolumeChart.resize();	
+		        			dayCandlestickVolumeNum=1;
 		        		},10);
+		        		setTimeout(function(){
+		        		$("#dayCandlestickChart").css("opacity","1");
+		        		},100);
 			    }
 		});
-    }
+    
     //设置数据参数（为画图做准备）
     function dayCandlestickChartSetOption(newData){
         var dates = dayCandlestickChartData.map(function (item) {
@@ -130,22 +144,26 @@
        		};
        		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
        		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
-        	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+//      	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 		  	dayCandlestickVolumeChart.group="group3";
 		  	if(dayCandlestickVolumeNum !=0){
-				dayCandlestickVolumeChart.setOption(option);
+		  		var option3 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+				dayCandlestickVolumeChart.setOption(option3);
 			}
-		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
-				 if(dayCandlestickVolumeChart != null){
-						setTimeout(function(){
-						 	dayCandlestickVolumeChart.resize();	
-							dayCandlestickVolumeChart.setOption(option);
-		        			dayCandlestickVolumeChart.resize();	
-		        			dayCandlestickVolumeNum=1;
-		        		},10);
-			    }
-		});
+		  	
     };
+//  document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+//				 if(dayCandlestickVolumeChart != null){
+//				 		var option1 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+//						setTimeout(function(){
+//						 	dayCandlestickVolumeChart.resize();	
+//							dayCandlestickVolumeChart.setOption(option1);
+//		        			dayCandlestickVolumeChart.resize();	
+//		        			dayCandlestickVolumeNum=1;
+//		        		},10);
+//			    }
+//		});
+    
     function CandlestickVolumeChartSetoption(data){
     	 var  dayCandlestickVolumeData=data;
 	      var  option = {

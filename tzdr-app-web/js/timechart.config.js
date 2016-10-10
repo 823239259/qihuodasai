@@ -13,9 +13,10 @@
         "volume":volumeChartPrices
     };
     var timePrice=[];
-     var timeLabel=[];
     function handleTime(json){
+    	var dosizeL=$("#doSize").val();
         var Len=json.Parameters.Data.length;
+//      	console.log("原来的长度"+Len)
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
        	var leng=timePrice.length;
@@ -24,7 +25,7 @@
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
-        	timeData.prices[TimeLength+i]=Parameters[i][LastPriceSubscript];	
+        	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
         }
 		for(var i=0;i<timeData.timeLabel.length-1;i++){
 			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
@@ -34,12 +35,37 @@
 				
 			}
 		}
-        var option = setOption1();
+//		console.log("现在"+timeData.timeLabel.length);
+      
         if(timeChart != null){
+        	var option = setOption1();
             timeChart.setOption(option);
+            timeChart.resize();
             timeChart.group="group1";
         }
+
     }
+    document.getElementById("Time").addEventListener("tap",function(){
+    	$("#CandlestickChart").css("opacity","0");
+    	$("#dayCandlestickChart").css("opacity","0");
+				 if(timeChart != null){
+				 	var option2=setOption1();
+				 	 var option1 =volumeChartSetOption(volumeChartData);
+						setTimeout(function(){
+							$("#timeChart").css("width","100%");
+						 	timeChart.resize();	
+							timeChart.setOption(option2);
+		        			timeChart.resize();	
+		        			volumeChart.resize();	
+							volumeChart.setOption(option1);
+		        			volumeChart.resize();
+		        		},10);
+		        		setTimeout(function(){
+		        			$("#TimeChart1").css("opacity","1");
+		        		},11);
+			    }
+	});
+    
     function setOption1(){
         var  data1=timeData;
        var  option = {
@@ -152,6 +178,7 @@
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
             volumeChart.setOption(option);
+            volumeChart.resize();
            	volumeChart.group="group1";
         }
     }
