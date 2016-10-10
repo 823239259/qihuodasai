@@ -20,7 +20,7 @@ var endLoginPassword = getCookie("trade_endLoginPassword");
  */
 var connectionStatus = false;
 /**
- * 是否登陆成功 ,true -成功，false -失败
+ * 是否登陆成功 ,true -登录，false -未登录
  */
 var isLogin = false;
 /**
@@ -67,7 +67,8 @@ function loginOut(account,password){
 	$("#show_user_info").hide();
 	socket = null;
 	setIsLogin(false);
-	initTrade();
+	
+	/*initTrade();*/
 }
 /**
  * 缓存本地登录

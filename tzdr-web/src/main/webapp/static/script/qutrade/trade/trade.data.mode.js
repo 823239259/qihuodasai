@@ -4,7 +4,7 @@
  */
 function createPostionsParam(param) {
 	this.contratCode = param.ContractCode;
-	this.drection = analysisPositionDrection(param.Drection);
+	this.drection = analysisBusinessDirection(param.Drection);
 	this.holdNum = param.HoldNum;
 	this.openAvgPrice = param.OpenAvgPrice;
 	this.floatingProfit = param.FloatingProfit;
@@ -23,7 +23,7 @@ function createDesignatesParam(param) {
 		cdNum = orderNum - tradeNum;
 	}
 	this.contratCode = param.ContractCode;
-	this.drection = analysisDrection(param.Drection);
+	this.drection = analysisBusinessDirection(param.Drection);
 	this.orderPrice = param.OrderPrice;
 	this.orderNum = param.OrderNum;
 	this.cdNum = cdNum;

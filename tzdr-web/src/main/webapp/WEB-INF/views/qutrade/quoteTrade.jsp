@@ -17,8 +17,9 @@
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/util.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.config.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.send.js?v=${v}"></script>
-<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.connection.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.util.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.data.mode.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.connection.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.js?v=${v}"></script>
 <%-- <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.reconnect.js?v=${v}"></script> --%>
 
@@ -224,8 +225,8 @@
 				<div class="quotation_p">
 					<label>下单方式</label>
 					<div class="quotation_type_fr">
-						<label class="xdfs_sj"><input type="radio" name="mode_order" id="marketPrice" checked="checked"/>市价</label>
-						<label class="xdfs_xj"><input type="radio" name="mode_order" id="fixedPrice" style="margin-left:50px;"/>限价</label>
+						<label class="xdfs_sj"><input type="radio" value = "1" name="mode_order" id="marketPrice" checked="checked"/>市价</label>
+						<label class="xdfs_xj"><input type="radio" value = "0" name="mode_order" id="fixedPrice" style="margin-left:50px;"/>限价</label>
 					</div>
 				</div>
 				<div class="quotation_p">
@@ -252,11 +253,11 @@
 				<div class="quotation_p" style="margin-top: 10px;">
 					<label style="width: 56px;">&nbsp;</label>
 					<div class="quotation_type_fr">
-						<ul class="mairu">
+						<ul class="mairu trade_buy" data-tion-buy = "0">
 							<li style="border-bottom: 1px solid #ff8c8c;">买入</li>
 							<li>1025.2</li>
 						</ul>
-						<ul class="maichu" style="margin-left: 8px;">
+						<ul class="maichu trade_buy" data-tion-buy = "1" style="margin-left: 8px;">
 							<li style="border-bottom: 1px solid #83d983">卖出</li>
 							<li>1025.2</li>
 						</ul>
@@ -282,82 +283,10 @@
 			        		<li>交易所</li>
 			        		<li>币种</li>
 			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml" style="width: 100px;">富时A501610</li>
-			        		<li>24234</li>
-			        		<li>32</li>
-			        		<li>1313.32</li>
-			        		<li>322323</li>
-			        		<li>纽约交易所</li>
-			        		<li>USA</li>
-			        	</ul>
 			        	<ul class="caozuo">
-			        		<li><a href="javascript:void(0);">全部平仓</a></li>
-			        		<li><a href="javascript:void(0);">平仓</a></li>
-			        		<li><a href="javascript:void(0);">反手</a></li>
+			        		<li><a href="javascript:void(0);"  id = "allSelling">全部平仓</a></li>
+			        		<li><a href="javascript:void(0);"  id = "selling">平仓</a></li>
+			        		<li><a href="javascript:void(0);"  id = "backhand">反手</a></li>
 			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
@@ -374,23 +303,6 @@
 			        		<li>撤单时间</li>
 			        		<li>订单号</li>
 			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml">富时A50</li>
-			        		<li>2</li>
-			        		<li>982424.23</li>
-			        		<li>23</li>
-			        		<li>982424.23</li>
-			        		<li>已完成</li>
-			        		<li>09:23:43</li>
-			        		<li>982424.23</li>
-			        		<li>3</li>
-			        		<li>09:23:43</li>
-			        		<li>3232131231</li>
-			        	</ul>
-			        	<ul class="caozuo">
-			        		<li><a href="javascript:void(0);">撤单</a></li>
-			        		<li><a href="javascript:void(0);">全撤</a></li>
-			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "des_title">
 			        	<ul class="tab_lis">
@@ -401,16 +313,10 @@
 			        		<li>委托量</li>
 			        		<li>挂单量</li>
 			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml">合约代码</li>
-			        		<li>合约名称</li>
-			        		<li>买卖</li>
-			        		<li>委托价</li>
-			        		<li>委托量</li>
-			        		<li>挂单量</li>
-			        	</ul>
 			        	<ul class="caozuo">
-			        		<li><a href="javascript:void(0);">撤单</a></li>
+			        		<li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>
+			        		<li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>
+			        		<li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>
 			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
@@ -425,17 +331,7 @@
 			        		<li>成交时间</li>
 			        		<li>交易所</li>
 			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml">富时A50</li>
-			        		<li>2</li>
-			        		<li>982424.23</li>
-			        		<li>23</li>
-			        		<li></li>
-			        		<li></li>
-			        		<li></li>
-			        		<li>09:23:43</li>
-			        		<li></li>
-			        	</ul>
+			        	
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "account_title">
 			        	<ul class="tab_lis">
@@ -445,24 +341,11 @@
 			        		<li>保证金</li>
 			        		<li>今日浮盈</li>
 			        		<li>维持保证金</li>
-			        		<li>做收益</li>
+			        		<li>昨权益</li>
 			        		<li>昨结存</li>
 			        		<li>今结存</li>
 			        		<li>冻结资金</li>
 			        		<li>盈利率</li>
-			        	</ul>
-			        	<ul class="tab_content">
-			        		<li class="ml">USD</li>
-			        		<li>20554.54</li>
-			        		<li>20554.54</li>
-			        		<li>20554.54</li>
-			        		<li>10</li>
-			        		<li>22333</li>
-			        		<li>33333</li>
-			        		<li>33333</li>
-			        		<li>33333</li>
-			        		<li>0.0</li>
-			        		<li>5%</li>
 			        	</ul>
 			        </div>
 			    </div>
@@ -477,6 +360,15 @@
 			</div>
     	</div>	
     </div>
+</div>
+<div style = "display: none;" id = "trade_data">
+	<input type="hidden" id = "lastPrice"/>
+	<input type="hidden" id = "contractSize"/>
+	<input type="hidden" id = "miniTikeSize"/>
+	<input type="hidden"  id = "exchangeNo"/> 
+	<input type="hidden"  id = "commodeityNo"/>
+	<input type="hidden"  id = "contractNo"/>
+	<input type="hidden"  id = "doSize"/>
 </div>
 </body>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script>
