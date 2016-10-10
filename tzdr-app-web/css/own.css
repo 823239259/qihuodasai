@@ -127,7 +127,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ac_bank .mui-table-view-cell { padding: 5px 15px;}
 .ac_bank .mui-table-view-cell input.mui-input-clear,.ac_bank .mui-table-view-cell select { float: left; width: 50%; vertical-align: middle; padding: 0; margin: 0; font-size: 14px; height: 40px; line-height: 40px; border: 0; text-align: left; margin-left: 10px; }
 .ac_bank .mui-table-view-cell select  {position: inherit; top: 20px; right: 0; margin-left: 5px;}
-.ac_banklist { display: block; padding: 0 15px; overflow: hidden; background: #fff; margin-bottom: 20px; }
+.ac_banklist { display: block; padding: 0 15px; overflow: hidden; background: #fff; margin-bottom: 20px; position:relative;}
 .ac_bankpromt { padding: 0 15px; font-size: 14px; color: #f90;}
 .mui-slider .mui-slider-group .mui-slider-item .ac_banklist img { display: block; float: left; width: 60px; margin: 10px 0;}
 .ac_banklist p { display: block; float: left; width: 72%; font-size: 14px; text-align: left; margin: 10px 0 10px 10px;}
@@ -582,6 +582,21 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	margin: 0px 0px 0px 80px;
 	/*width: 100%;
 	padding-left: 100px;*/
+}
+.tips{
+	font-size: 12px;
+}
+#trade_account{
+	position: relative;
+}
+#immediately{
+	position: absolute;
+	top:30%;
+	right: 5%;
+	background-color: #FFCC33;
+	border: 1px solid #333333;
+    color: #333333;
+    z-index: 999;
 }
 #weiPayCode{
 	width: 100%;

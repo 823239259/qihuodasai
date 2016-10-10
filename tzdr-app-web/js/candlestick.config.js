@@ -34,7 +34,7 @@
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
-		  		console.log("45")
+//		  		console.log("45")
 		  		CandlestickChartOption = setOption(newData);
 		  		myChart.setOption(CandlestickChartOption);
 		  	};

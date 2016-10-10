@@ -62,6 +62,15 @@
 		<div class="futureTitle">国际期货推荐</div>
 		<ul id="list" class="mui-table-view mui-table-view-chevron main_list">
 			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
+					<img src="images/icon4.png" />
+					<h2>一个账号可交易15个品种</h2>
+					<p>交易手续费：<i id="cp_tranfee">49元/手</i>起</p>
+					<p class="buttomP"><label>交易时间：</label><span>09:05-23:55</span></p>
+					
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cn">
 						<img src="images/icon1.png" />
 						<h2>A股行情风向标</h2>
@@ -85,15 +94,7 @@
 					<p class="buttomP"><label>交易时间：</label><span>09:05-23:55</span></p>
 				</a>
 			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
-					<img src="images/icon4.png" />
-					<h2>一个账号可交易15个品种</h2>
-					<p>交易手续费：<i id="cl_tranfee">49元/手</i>起</p>
-					<p class="buttomP"><label>交易时间：</label><span>09:05-23:55</span></p>
-					
-				</a>
-			</li>
+			
 			
 		</ul>
 	</div>
@@ -197,7 +198,6 @@
 				clickNum++;
 			}
 			var str="http";
-			console.log(nid);
 			if(nid == "" || nid == null || nid.length == 0 ){
 			}else if(nid.indexOf(str)==-1){
 				mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
@@ -313,7 +313,6 @@
 					}
 					if(!mui.isnull(result.data.tradeList)){
 						mui.each(result.data.tradeList,function(i,item){
-							  
 							switch (item.type){
 								case 0:
 									document.getElementById("cn_tranfee").innerHTML=item.tradeFees+"元/手";
