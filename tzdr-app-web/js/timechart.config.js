@@ -14,7 +14,7 @@
     };
     var timePrice=[];
     function handleTime(json){
-    
+    	var dosizeL=$("#doSize").val();
         var Len=json.Parameters.Data.length;
 //      	console.log("原来的长度"+Len)
         var TimeLength=timeData.timeLabel.length;
@@ -25,7 +25,7 @@
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
-        	timeData.prices[TimeLength+i]=Parameters[i][LastPriceSubscript];	
+        	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
         }
 		for(var i=0;i<timeData.timeLabel.length-1;i++){
 			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){

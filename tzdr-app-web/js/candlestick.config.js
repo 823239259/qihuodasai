@@ -10,6 +10,7 @@
     }
     var newData=[];
     function processingData(jsonData){
+    	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
@@ -18,10 +19,10 @@
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = parameters[i][OpenPriceSubscript];
-		            var closePrice = parameters[i][LastPriceSubscript];
-		            var chaPrice = closePrice - openPrice;
-		            var sgData = [str2,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
+		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
         	for(var i=0;i<rawData.length-1;i++){

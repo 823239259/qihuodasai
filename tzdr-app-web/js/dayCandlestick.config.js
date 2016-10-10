@@ -7,16 +7,17 @@
     	volume:[]
     }
     function processingDayCandlestickData(jsonData){
+    		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=dayCandlestickChartData.length;
         	for(var i=0;i<Len;i++){
         		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-        			var openPrice = parameters[i][OpenPriceSubscript];
-		            var closePrice = parameters[i][LastPriceSubscript];
-		            var chaPrice = closePrice - openPrice;
-		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
+		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
        		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
