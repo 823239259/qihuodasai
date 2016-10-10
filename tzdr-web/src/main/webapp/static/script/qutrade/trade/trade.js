@@ -113,10 +113,12 @@ function handleData(evt){
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
 			appendPostionAndUpdate(tradeParam);
+			alert("交易成功");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
 			var accountParam = parameters;
 			updateBalance(accountParam)
+			updateFundsDetails(accountParam);
 		} else if (method = "OnError") {
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
@@ -133,13 +135,16 @@ var loadCachDeposit = {};
 var loadCachCanuse = {};
 var loadCurrencyRate = {};
 var loadCachAccountNo = {};
+var localCacheCurrencyAndRate = {};
 function updateBalance(parama){
+	var currencyNo = parama.CurrencyNo;
 	var accountNo = parama.AccountNo;
 	var cachBanlace = loadCachBanlance[accountNo];
 	var banlance = parama.TodayBalance;
 	var deposit = parama.Deposit;
 	var canuse = parama.TodayCanUse;
 	var currency = parama.CurrencyRate; 
+	localCacheCurrencyAndRate[currencyNo]  = currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
 	loadCachCanuse[accountNo] = canuse;
@@ -184,18 +189,18 @@ var localCacheFundDetail = {};
  */
 function addFundsDetails(param){
 	var currencyNo = param.CurrencyNo;
-	var todayBalance = param.TodayBalance;
-	var todayCanUse = param.TodayCanUse;
-	var deposit = param.Deposit;
-	//TODO 需要自己算浮动盈亏
-	var floatingProfit = 0.00;
-	var keepDepositf = param.KeepDeposit;
-	var oldBalance = param.OldBalance;
-	var oldAmount = param.OldAmount;
-	var todayAmount = param.TodayAmount;
-	var frozenMoney = param.FrozenMoney;
+	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
+	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	var deposit = parseFloat(param.Deposit).toFixed(2);
+	var floatingProfit = parseFloat(param.FloatingProfit).toFixed(2);
+	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
+	var oldBalance = parseFloat(param.OldBalance).toFixed(2);
+	var oldAmount = parseFloat(param.OldAmount).toFixed(2);
+	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
+	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
 	var profitRate = "";
-	var html = '<ul class="tab_content '+currencyNo+'" data-tion-fund = "'+currencyNo+'">'+
+	var cls = "currencyNo"+currencyNo;
+	var html = '<ul class="tab_content '+cls+'" data-tion-fund = "'+currencyNo+'">'+
 				'	<li class="ml detail_currency">'+currencyNo+'</li>'+
 				'	<li class = "detail_todayBalance">'+todayBalance+'</li>'+
 				'	<li class = "detail_todayCanUse">'+todayCanUse+'</li>'+
@@ -217,25 +222,20 @@ function addFundsDetails(param){
  * @param param
  */
 function updateFundsDetails(param){
-	var currencyNo = param.CurrencyNo;
-	var todayBalance = param.TodayBalance;
-	var todayCanUse = param.TodayCanUse;
-	var deposit = param.Deposit;
-	//TODO 需要自己算浮动盈亏
-	var floatingProfit = 0.00;
-	var keepDepositf = param.KeepDeposit;
-	var oldBalance = param.OldBalance;
-	var oldAmount = param.OldAmount;
-	var todayAmount = param.TodayAmount;
-	var frozenMoney = param.FrozenMoney;
+	var currencyNo = param.AccountNo;
+	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
+	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	var deposit = parseFloat(param.Deposit).toFixed(2);
+	var floatingProfit = parseFloat(param.floatingProfit).toFixed(2);
+	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
+	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
+	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
 	var profitRate = "";
 	var $detailTodayBalance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayBalance']");
 	var $detailTodayCanUse = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayCanUse']");
 	var $detailDeposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_deposit']");
 	var $detailFloatingProfit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
 	var $detailKeepDeposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_keepDepositf']");
-	var $detailOldBalance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_oldBalance']");
-	var $detailOldAmount = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_oldAmount']");
 	var $detailTodayAmount = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayAmount']");
 	var $detailFrozenMoney = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_frozenMoney']");
 	var $detailProfitRate = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_profitRate']");
@@ -244,12 +244,9 @@ function updateFundsDetails(param){
 	$detailDeposit.text(deposit);
 	$detailFloatingProfit.text(floatingProfit);
 	$detailKeepDeposit.text(keepDepositf);
-	$detailOldBalance.text(oldBalance);
-	$detailOldAmount.text(oldAmount);
 	$detailTodayAmount.text(todayAmount);
 	$detailFrozenMoney.text(frozenMoney);
 	$detailProfitRate.text(profitRate);
-	
 }
 var orderIndex = 0;
 /**
@@ -257,9 +254,10 @@ var orderIndex = 0;
  * @param {Object} param 委托信息的json对象
  */
 function appendOrder(param){
+	console.log(param);
 	var contractCode = param.ContractCode;
-	var drectionText = analysisBusinessDirection(param.drection);
-	var orderPrice = param.orderPrice;
+	var drectionText = analysisBusinessDirection(param.Drection);
+	var orderPrice = param.OrderPrice;
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
 	var orderNum = param.OrderNum;
@@ -302,6 +300,10 @@ function updateOrder(param){
  */
 var localCacheDesignate = {};
 /**
+ * 缓存挂单列表信息的品种+合约
+ */
+var localCachedesignateContractCode = {};
+/**
  * 挂单的索引
  */
 var designateIndex = 0;
@@ -317,18 +319,20 @@ function appendDesignates(param){
    var contractCode = param.ContractCode;
    var contractNo = param.ContractNo;
    var commodityNo = param.CommodityNo;
-   var drectionText = analysisBusinessDirection(param.Drection);
+   var drection = param.Drection;
+   var drectionText = analysisBusinessDirection(drection);
    var orderPrice = param.OrderPrice;
    var orderNum = param.OrderNum;
    var tradeNum = param.TradeNum;
    var orderSysId = param.OrderSysID;
    var exchangeNo = param.ExchangeNo;
    var orderId = param.OrderID;
+   var triggerPrice = param.TriggerPrice;
    var cls = "des-index"+designateIndex;
    var html = '<ul class="tab_content '+cls+'" data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
 				'	<li class = "des1">'+contractCode+'</li>'+
-				'	<li class = "des2">'+drectionText+'</li>'+
+				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
 				'	<li class = "des3">'+orderPrice+'</li>'+
 				'	<li class = "des4">'+orderNum+'</li>'+
 				'	<li class = "des5">'+(orderNum - tradeNum)+'</li>'+
@@ -337,9 +341,11 @@ function appendDesignates(param){
 				'	<li class = "des8"  style = "display:none;">'+commodityNo+'</li>'+
 				'	<li class = "des9"  style = "display:none;">'+contractNo+'</li>'+
 				'	<li class = "des10" style = "display:none;">'+orderId+'</li>'+
+				'	<li class = "des11" style = "display:none;">'+triggerPrice+'</li>'+
 				'</ul>';
    $("#des_title .tab_lis").after(html);
    localCacheDesignate[contractCode] = createDesignatesParam(param);
+   localCachedesignateContractCode[designateIndex] = contractCode;
    addDesignateBindClick(cls);
    updateDesignateIndex();
 };
@@ -424,6 +430,10 @@ function appendPostionAndUpdate(param){
  */
 var localCachePostion = {};
 /**
+ * 缓存持仓列表品种+合约
+ */
+var localCachePositionContractCode = {};
+/**
  * 全局的保存当前选中持仓的信息
  */
 var selectPostion = {};
@@ -445,11 +455,29 @@ function addPostion(param){
 		var floatingProfit = param.FloatingProfit;
 		var exchangeNo = param.ExchangeNo;
 		var currencyNo = param.CurrencyNo;
+		var commodityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var openAvgPrice = param.OpenAvgPrice;
 		if(holdNum == undefined){
 			holdNum = param.TradeNum;
 		}
+		if(openAvgPrice == undefined){
+			openAvgPrice = param.TradePrice;
+		}
 		if(holdAvgPrice == undefined){
-			holdAvgPrice = param.TradePrice;
+			holdAvgPrice = openAvgPrice;
+		}
+		var floatP = 0.00;
+		var contractAndCommodity = commodityNo+contractNo;
+		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
+		if(localCommodity != undefined){
+			var lastPrice = getLocalCacheQuote(contractAndCommodity);
+			var contractSize = localCommodity.ContractSize;
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			currencyNo = localCommodity.CurrencyNo;
+			exchangeNo = localCommodity.ExchangeNo;
+			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			floatingProfit = floatP +":"+ currencyNo; 
 		}
 		var cls = "postion-index"+postionIndex;
 		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
@@ -460,10 +488,15 @@ function addPostion(param){
 					'	<li  class = "position4">'+floatingProfit+'</li>'+
 					'	<li  class = "position5">'+exchangeNo+'</li>'+
 					'	<li  class = "position6">'+currencyNo+'</li>'+
+					'	<li  class = "position7"  style = "display:none;">'+commodityNo+'</li>'+
+					'	<li  class = "position8"  style = "display:none;">'+contractNo+'</li>'+
+					'	<li  class = "position9"  style = "display:none;">'+openAvgPrice+'</li>'+
+					'	<li  class = "position10"  style = "display:none;">'+floatP+'</li>'+
 					'</ul>';
 		$("#hold_title .tab_lis").after(html);
 		//存储数据
 		localCachePostion[contractCode] = createPostionsParam(param);
+		localCachePositionContractCode[postionIndex] = contractCode;
 		addPositionBindClick(cls);
 		updatePositionIndex();
 	}
@@ -477,35 +510,45 @@ function updatePostion(param){
 	var holdNum = parseInt(param.HoldNum);
 	var drection = param.Drection;
 	var holdAvgPrice = param.HoldAvgPrice;
-	var floatingProfit = param.FloatingProfit;
 	var exchangeNo = param.ExchangeNo;
 	var currencyNo = param.CurrencyNo;
+	var openAvgPrice = param.OpenAvgPrice;
 	if(isNaN(holdNum)){
 		holdNum = parseInt(param.TradeNum);
 	}
-	if(holdAvgPrice == undefined){
-		holdAvgPrice = param.TradePrice;
+	if(openAvgPrice == undefined){
+		openAvgPrice = param.TradePrice;
 	}
 	var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
 	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
-	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
+	var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
+	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position10']");
 	var $floatingProfit = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position4']");
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($holdAvgPrice.text()) *  oldHoldNum;
-	var price = parseFloat(holdAvgPrice) * holdNum;
+	var oldPrice = parseFloat($openAvgPrice.text()) *  oldHoldNum;
+	var price = parseFloat(openAvgPrice) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
 		price = price + oldPrice;
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum);
-		$holdAvgPrice.text(openAvgPrice);
-		//TODO 计算浮动盈利 ,这里需要行情数据，最新价格，ContractSize,MiniTikeSize
+		$openAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
-		
 		var floatingProft = 0.00; 
 		var floatP = 0.00;
-		$floatingProfit.val(floatingProft);
+		var contractAndCommodity = commdityNo+contractNo;
+		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
+		if(localCommodity != undefined){
+			var lastPrice = getLocalCacheQuote(contractAndCommodity);
+			var contractSize = localCommodity.ContractSize;
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			var currencyNo = localCommodity.CurrencyNo;
+			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			floatingProft = floatP +":"+ currencyNo; 
+		}
+		$floatingProfit.text(floatingProft);
+		$floatP.text(floatP);
 		if(floatP < 0 ){
 			$floatingProfit.css("color","green");
 		}else if(floatP > 0){
@@ -773,12 +816,75 @@ function deleteDesignatesContractCode(param){
 	}
 }
 $(function(){
-	$(".mairu").click(function(){
+	$(".trade_buy").click(function(){
 		if(isLogin){
-			
+			doInsertOrder($(this));
 		}else{
 			alert("未登录");
 		}
+	});
+	$("#allSelling").click(function(){
+		if(isLogin){
+			doInsertAllSellingOrder();
+		}else{
+			alert("未登录");
+		}
+	});
+	$("#selling").click(function(){
+		if(isLogin){
+			doInsertSellingOrder();
+		}else{
+			alert("未登录");
+		}
+	});
+	$("#backhand").click(function(){
+		if(isLogin){
+			doInsertBackhandOrder();
+		}else{
+			alert("未登录");
+		}
+	});
+	$("#allDesOrder").click(function(){
+		if(isLogin){
+			doInsertAllCancleOrder();
+		}else{
+			alert("未登录");
+		}
+	});
+	$("#desOrder").click(function(){
+		if(isLogin){
+			doInsertCancleOrder();
+		}else{
+			alert("未登录");
+		}
+	});
+	$("#updateDesOrder option").click(function(){
+		if(isLogin){
+			doInsertChangeSingleOrder();
+		}else{
+			alert("未登录");
+		}
+	});
+	$("#select_commodity").click(function(){
+		var contractCode = $(this).val();
+		var localCommodity = localCacheCommodity[contractCode];
+		var localQoute = localCacheQuote[contractCode];
+		$("#trade_data #lastPrice").val(localQoute.LastPrice);
+		$("#trade_data #miniTikeSize").val(localCommodity.MiniTikeSize);
+		$("#trade_data #contractSize").val(localCommodity.ContractSize);
+		$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
+		$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
+		$("#trade_data #contractNo").val(localCommodity.MainContract);
+		$("#trade_data #doSize").val(localCommodity.DotSize);
+		 var left_xiangmu   = $(".futuresList .left_xiangmu");
+		left_xiangmu.each(function(){
+			 left_xiangmu.removeClass('on');
+		 });
+		var obj = $("ul[data-tion-com='"+contractCode+"']");
+		obj.addClass('on');
+		obj.click();
+		setLocalCacheSelect(contractCode);
+		clearRightData();
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
@@ -809,10 +915,240 @@ function doInsertOrder(param){
 	var priceType = $("input[type='radio']:checked").val();
 	var tradeDrection = param.attr("data-tion-buy");
 	var orderPrice = 0.00;
+	console.log(lastPrice);
+	console.log(miniTikeSize);
+	console.log(tradeDrection);
 	if(priceType == 1){
 		orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection);
+	}else{
+		orderPrice = $("#money_number").val();
+	}
+	console.log(orderPrice);
+	if(validationInputPrice(orderPrice)){
+		alert("交易价格错误");
+		return ;
+	}
+	var exchanageNo = $("#exchangeNo").val();
+	var commodeityNo = $("#commodeityNo").val();
+	var contractNo = $("#contractNo").val();
+	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
+}
+/**
+ * 全部平仓操作
+ */
+function doInsertAllSellingOrder(){
+	for(var i = 0 ; i < postionIndex;i++){
+		var contractCode = localCachePositionContractCode[i];
+		if(contractCode == undefined){
+			continue;
+		}
+		var tradeParam = doGetSellingBasicParam(contractCode);
+		var param = new Array();
+		param[0] = tradeParam;
+		closing(param);
+	}
+	alert("平仓处理成功");
+}
+/**
+ * 平仓操作
+ */
+function doInsertSellingOrder(){
+	var contractCode = selectPostion["contractCode"];
+	var postionIndex = selectPostion["postionIndex"];
+	if(contractCode == undefined){
+		alert("未选择平仓信息");
+		return;
+	}
+	var tradeParam = doGetSellingBasicParam(contractCode);
+	var param = new Array();
+	param[0] = tradeParam;
+	closing(param);
+	alert("平仓处理成功");
+}
+/**
+ * 反手操作
+ */
+function doInsertBackhandOrder(){
+	var contractCode = selectPostion["contractCode"];
+	var postionIndex = selectPostion["postionIndex"];
+	if(contractCode == undefined){
+		alert("未选择反手信息");
+		return;
+	}
+	var tradeParam = doGetSellingBasicParam(contractCode);
+	var exchangeNo = tradeParam.ExchangeNo;
+	var commodityNo = tradeParam.CommodityNo;
+	var contractNo = tradeParam.ContractNo;
+	var orderNum = tradeParam.OrderNum * 2;
+	var tradeDrection = tradeParam.Drection;
+	var contractCode = commodityNo + contractNo;
+	var orderPrice = tradeParam.LimitPrice;
+	Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
+}
+/**
+ * 全部撤单操作
+ */
+function doInsertAllCancleOrder(){
+	for(var i = 0 ; i < designateIndex ; i++){
+		var contractCode = localCachedesignateContractCode[i];
+		if(contractCode == undefined || $(".data-index-des"+i+"").html() == undefined){
+			continue;
+		}
+		var tradeParam = doGetCancleOrderBasicParam(contractCode);
+		var param = new Array();
+		param[0] = tradeParam
+		cancleOrder(param);
+	}
+	alert("撤单成功");
+}
+/**
+ * 撤单操作
+ */
+function doInsertCancleOrder(){
+	var contractCode = selectDesgnate["contraction"];
+	var designateIndex = selectDesgnate["designateIndex"];
+	if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
+		return;
+	}
+	var tradeParam = doGetCancleOrderBasicParam(contractCode);
+	var param = new Array();
+	param[0] = tradeParam
+	cancleOrder(param);
+	alert("平仓处理成功");
+}
+/**
+ * 改单操作
+ */
+function doInsertChangeSingleOrder(){
+	var contractCode = selectDesgnate["contraction"];
+	var designateIndex = selectDesgnate["designateIndex"];
+	if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
+		return;
+	}
+	var tradeParam = doGetModifyOrderBasicParam(contractCode);
+	//TODO 页面需要有个改单操作的输入框，获取输入框的值复制到对象中，就是改单后的价格和数量
+	var orderPrice = 0.00;
+	if(validationInputPrice(orderPrice)){
+		alert("改单价格错误");
+		return;
+	}
+	var orderNum = 0;
+	if(validationInputPrice(orderNum)){
+		alert("改单数量错误");
+		return;
+	}
+	tradeParam.orderPrice = orderPrice;
+	tradeParam.orderNum = orderNum;
+	var param = new Array();
+	param[0]=tradeParam;
+	modifyOrder(param);
+	alert("改单成功");
+}
+/**
+ * 获取平仓的基本信息
+ * @param obj
+ */
+function doGetSellingBasicParam(obj){
+	var contract = obj;
+	var $contractCode  = contract;
+	var $drection =  $("ul[data-tion-position='"+contract+"'] li[class = 'position2']").attr("data-drection");
+	var $holdNum =  $("ul[data-tion-position='"+contract+"'] li[class = 'position1']").text();
+	var $openAvgPrice =  $("ul[data-tion-position='"+contract+"'] li[class = 'position9']").text();
+	var $floatingProfit =  $("ul[data-tion-position='"+contract+"'] li[class = 'position4']").text();
+	var $commodityNo =  $("ul[data-tion-position='"+contract+"'] li[class = 'position7']").text();
+	var $contractNo =  $("ul[data-tion-position='"+contract+"'] li[class = 'position8']").text();
+	var $exchangeNo =  $("ul[data-tion-position='"+contract+"'] li[class = 'position5']").text();
+	var drection = 0;
+	if($drection == 0){
+		drection = 1;	
+	}
+	var contractCode = $commodityNo + $contractNo;
+	var localCommodity = getLocalCacheCommodity(contractCode);
+	var localQuote = getLocalCacheQuote(contractCode);
+	var miniTikeSize = 0.00;
+	var lastPrice = 0.00;
+	if(localCommodity != undefined && localQuote != undefined){
+		miniTikeSize = localCommodity.MiniTikeSize;
+		lastPrice = localQuote.LastPrice;
+	}
+	if(validationInputPrice(lastPrice)){
+		alert("最新价格错误");
+		return;
+	}
+	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+	console.log(limitPirce);
+	if(validationInputPrice(limitPirce)){
+		alert("平仓价格错误");
+	}
+	var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
+	return sellingParam;
+}
+/**
+ * 获取撤单的基本信息
+ * @param obj
+ */
+function doGetCancleOrderBasicParam(obj){
+		var contract = obj;
+		var $contractCode  = contract;
+		var $drection =  $("ul[data-tion-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
+		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
+		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
+		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
+		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig6']").text();
+		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig8']").text();
+		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig9']").text();
+		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig7']").text();
+		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
+		var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
+	return cancleOrderParam;
+}
+/**
+ * 获取改单的基本信息
+ * @param obj
+ */
+function doGetModifyOrderBasicParam(obj){
+		var contract = obj;
+		var $contractCode  = contract;
+		var $drection =  $("ul[data-tion-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
+		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
+		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
+		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
+		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig6']").text();
+		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig8']").text();
+		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig9']").text();
+		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig7']").text();
+		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
+		var $triggerPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des11']").text();
+		var modifyOrderParam = createModifyOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice),$triggerPrice);
+	return modifyOrderParam;
+}
+/**
+ * 计算列表的浮动盈亏
+ */
+function sumListfloatingProfit(){
+	for (var i = 0; i < postionIndex; i++) {
+		var obj = $(".postion-index"+i+"");
+		if(obj.html() == undefined){
+			continue;
+		}
+		var currencyNo =  $("ul[data-index-position='"+i+"'] li[class = 'position6']").text();
+		var float =  $("ul[data-index-position='"+i+"'] li[class = 'position10']").text();
+		var currencyObj = $(".currencyNo"+currencyNo+"");
+		if(currencyObj.html() == undefined){
+			continue;
+		}
+		var floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+		var floatingProfitText = floatingProfitDom.text();
+		if(isNaN(floatingProfitText)){
+			floatingProfitText = 0.00;
+		}
+		if(isNaN(float)){
+			float = 0.00;
+		}
+		floatingProfitDom.text(parseFloat(parseFloat(floatingProfitText)+parseFloat(float)).toFixed(2));
 	}
 }
+
 /**
  * 输入价格或数量验证 
  */

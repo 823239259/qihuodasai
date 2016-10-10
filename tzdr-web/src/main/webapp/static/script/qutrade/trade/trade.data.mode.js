@@ -76,3 +76,27 @@ function createCancleOrderParam(orderSysId, orderId, exchangeNo, commodityNo, co
 	this.orderPrice = orderPrice;
 	return this;
 }
+/**
+ * 创建改单数据 
+ * @param {Object} orderSysId
+ * @param {Object} orderId
+ * @param {Object} exchangeNo
+ * @param {Object} commodityNo
+ * @param {Object} contractNo
+ * @param {Object} orderNum
+ * @param {Object} drection
+ * @param {Object} orderPrice
+ * @param {Object} triggerPrice
+ */
+function createModifyOrderParam(orderSysId, orderId, exchangeNo, commodityNo, contractNo, orderNum, drection, orderPrice ,triggerPrice) {
+	this.orderSysId = orderSysId;
+	this.orderId = orderId;
+	this.exchangeNo = exchangeNo;
+	this.commodityNo = commodityNo;
+	this.contractNo = contractNo;
+	this.orderNum = orderNum;
+	this.drection = drection;
+	this.orderPrice = orderPrice;
+	this.triggerPrice = TriggerPrice;
+	return this;
+}

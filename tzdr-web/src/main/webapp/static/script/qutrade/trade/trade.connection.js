@@ -109,7 +109,7 @@ function tradeLoginOut(account){
  * 交易初始化加载
  */
 function initLoad() {
-	if (socket == null) return;
+	if (socket == null) return false;
 	socket.onopen = function() {
 		Trade.doLogin(username , password);
 		changeConnectionStatus();
@@ -120,6 +120,7 @@ function initLoad() {
 	socket.onclose = function() {
 //		reconnect();
 	}
+	return true;
 }
 
 /**
@@ -134,6 +135,13 @@ function initTradeConnect(){
 	 * 交易数据初始化加载 --> trade.connection
 	 */
 	initLoad();
+	/*var loadTradeInterVal = setInterval(function(){
+		var result = 
+		if(result){
+			clearInterval(loadTradeInterVal);
+		}
+	}, 500);*/
+	
 }
 function initTrade(){
 	/**

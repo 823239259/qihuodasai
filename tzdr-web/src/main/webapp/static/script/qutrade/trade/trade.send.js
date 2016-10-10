@@ -32,6 +32,10 @@ var TradeUrl = {
 	 */
 	CancelOrderUrl:"CancelOrder",
 	/**
+	 * 改单url
+	 */
+	ModifyOrderUrl:"ModifyOrder",
+	/**
 	 * 错误通知
 	 */
 	OnError : "OnError"
@@ -102,6 +106,7 @@ var Trade = {
 							+' "LimitPrice":'+ limitPrice +','
 							+' "TriggerPrice":'+ triggerPrice +','
 							+' "OrderRef":"'+ orderRef +'"}';
+				console.log(limitPrice);
 				Trade.doSendMessage(TradeUrl.InsertOrderUrl,param);
 			},
 			/**
@@ -125,6 +130,30 @@ var Trade = {
 							+' "Drection":'+drection+','
 							+' "OrderPrice":'+orderPrice+'}';
 				Trade.doSendMessage(TradeUrl.CancelOrderUrl,param);
+			},
+			/**
+			 * 改单请求
+			 * @param {Object} orderSysId 系统编号
+			 * @param {Object} orderId 订单号
+			 * @param {Object} exchangeNo 交易所代码
+			 * @param {Object} commodityNo 品种代码
+			 * @param {Object} contractNo 合约代码
+			 * @param {Object} orderNum 订单数量
+			 * @param {Object} drection 买卖方向（0：买，1：卖）
+			 * @param {Object} orderPrice 订单价格
+			 * @param {Object} triggerPrice 触发价格
+			 */
+			doModifyOrder:function(orderSysId,orderId,exchangeNo,commodityNo,contractNo,orderNum,drection,orderPrice,triggerPrice){
+				var param = '{"OrderSysID":"'+orderSysId+'",'
+								+' "OrderID":"'+orderId+'",'
+								+' "ExchangeNo":"'+exchangeNo+'",'
+								+' "CommodityNo":"'+commodityNo+'",'
+								+' "ContractNo":"'+contractNo+'",'
+								+' "OrderNum":'+orderNum+','
+								+' "Drection":'+drection+','
+								+' "OrderPrice":'+orderPrice+','
+								+' "TriggerPrice":'+triggerPrice+'}';
+				Trade.doSendMessage(TradeUrl.ModifyOrderUrl,param);
 			},
 			/**
 			 * 发送交易请求

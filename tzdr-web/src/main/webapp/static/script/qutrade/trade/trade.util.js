@@ -53,7 +53,7 @@ function doGetOrderRef() {
  * @param {Object} param 需要平仓的合约list
  */
 function closing(param){
-	var paramLength = param;
+	var paramLength = param.length;
 	for(var i = 0; i < paramLength; i++) {
 		var closing = param[i];
 		Trade.doInsertOrder(closing.ExchangeNo,
@@ -84,6 +84,26 @@ function cancleOrder(param) {
 			cancle.orderNum,
 			cancle.drection,
 			cancle.orderPrice);
+	}
+}
+/**
+ * 改单处理 
+ * @param {Object} param 需要撤单的list
+ */
+function modifyOrder(param) {
+	var modifyParam = param;
+	for(var i = 0; i < modifyParam.length; i++) {
+		var cancle = modifyParam[i];
+		Trade.doModifyOrder(
+					cancle.orderSysId,
+					cancle.orderId,
+					cancle.exchangeNo,
+					cancle.commodityNo,
+					cancle.contractNo,
+					cancle.orderNum,
+					cancle.drection,
+					cancle.orderPrice,
+					cancle.triggerPrice);
 	}
 }
 var kong = "<span style='color:green;'>空</span>";
