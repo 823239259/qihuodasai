@@ -22,22 +22,34 @@
        		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
 //      	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
 		  	dayCandlestickChartDiv.group="group3";
-		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+		  	
+    }
+    document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+    				$("#CandlestickChart").css("opacity","0");
+    				$("#TimeChart1").css("opacity","0");
 				 if(dayCandlestickChartDiv != null){
 				 	setTimeout(function(){
 				 		muiSpinner[2].style.display="none";
 				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
+					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
+					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 						setTimeout(function(){
-							var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
 						 	dayCandlestickChartDiv.resize();	
 							dayCandlestickChartDiv.setOption(option1);
 		        			dayCandlestickChartDiv.resize();	
 		        			dayCandlestickChartDivNum++;
+		        			dayCandlestickVolumeChart.resize();	
+							dayCandlestickVolumeChart.setOption(option2);
+		        			dayCandlestickVolumeChart.resize();	
+		        			dayCandlestickVolumeNum=1;
 		        		},10);
+		        		setTimeout(function(){
+		        		$("#dayCandlestickChart").css("opacity","1");
+		        		},100);
 			    }
 		});
-    }
+    
     //设置数据参数（为画图做准备）
     function dayCandlestickChartSetOption(newData){
         var dates = dayCandlestickChartData.map(function (item) {
@@ -137,18 +149,20 @@
 		  		var option3 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 				dayCandlestickVolumeChart.setOption(option3);
 			}
-		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
-				 if(dayCandlestickVolumeChart != null){
-						setTimeout(function(){
-							var option1 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
-						 	dayCandlestickVolumeChart.resize();	
-							dayCandlestickVolumeChart.setOption(option1);
-		        			dayCandlestickVolumeChart.resize();	
-		        			dayCandlestickVolumeNum=1;
-		        		},10);
-			    }
-		});
+		  	
     };
+//  document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+//				 if(dayCandlestickVolumeChart != null){
+//				 		var option1 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+//						setTimeout(function(){
+//						 	dayCandlestickVolumeChart.resize();	
+//							dayCandlestickVolumeChart.setOption(option1);
+//		        			dayCandlestickVolumeChart.resize();	
+//		        			dayCandlestickVolumeNum=1;
+//		        		},10);
+//			    }
+//		});
+    
     function CandlestickVolumeChartSetoption(data){
     	 var  dayCandlestickVolumeData=data;
 	      var  option = {

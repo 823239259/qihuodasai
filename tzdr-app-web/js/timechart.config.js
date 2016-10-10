@@ -36,13 +36,36 @@
 			}
 		}
 //		console.log("现在"+timeData.timeLabel.length);
-        var option = setOption1();
+      
         if(timeChart != null){
+        	var option = setOption1();
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
         }
+
     }
+    document.getElementById("Time").addEventListener("tap",function(){
+    	$("#CandlestickChart").css("opacity","0");
+    	$("#dayCandlestickChart").css("opacity","0");
+				 if(timeChart != null){
+				 	var option2=setOption1();
+				 	 var option1 =volumeChartSetOption(volumeChartData);
+						setTimeout(function(){
+							$("#timeChart").css("width","100%");
+						 	timeChart.resize();	
+							timeChart.setOption(option2);
+		        			timeChart.resize();	
+		        			volumeChart.resize();	
+							volumeChart.setOption(option1);
+		        			volumeChart.resize();
+		        		},10);
+		        		setTimeout(function(){
+		        			$("#TimeChart1").css("opacity","1");
+		        		},11);
+			    }
+	});
+    
     function setOption1(){
         var  data1=timeData;
        var  option = {
