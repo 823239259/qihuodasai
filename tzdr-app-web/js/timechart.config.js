@@ -13,11 +13,10 @@
         "volume":volumeChartPrices
     };
     var timePrice=[];
-     var timeLabel=[];
     function handleTime(json){
     
         var Len=json.Parameters.Data.length;
-        	console.log("原来的长度"+Len)
+//      	console.log("原来的长度"+Len)
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
        	var leng=timePrice.length;
@@ -36,7 +35,7 @@
 				
 			}
 		}
-		console.log("现在"+timeData.timeLabel.length);
+//		console.log("现在"+timeData.timeLabel.length);
         var option = setOption1();
         if(timeChart != null){
             timeChart.setOption(option);

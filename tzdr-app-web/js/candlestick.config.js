@@ -8,6 +8,7 @@
     	time:[],
     	volume:[]
     }
+    var newData=[];
     function processingData(jsonData){
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
@@ -28,23 +29,26 @@
         			rawData.splice(i,1);
         		}
         	}
-        	var newData=rawData.slice(-60);
-        		CandlestickChartOption = setOption(newData);
+        	newData=rawData.slice(-60);
+        		
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
+		  		CandlestickChartOption = setOption(newData);
 		  		myChart.setOption(CandlestickChartOption);
 		  	};
 		  	myChart.group="group2";
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){
+		  		
 				 if(myChart != null){
 				 	setTimeout(function(){
 				 		muiSpinner[1].style.display="none";
 				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 						setTimeout(function(){
+							var option = setOption(newData);
 						 	myChart.resize();	
-							myChart.setOption(CandlestickChartOption);
+							myChart.setOption(option);
 		        			myChart.resize();	
 		        			firstTimeNumber++;
 		        		},10);
@@ -146,16 +150,8 @@
         			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-//      		if(Number(parameters[i][OpenPriceSubscript])>Number(parameters[i][LastPriceSubscript])){
         			volumeTime[lent+i]=str2;
         			volumeV[lent+i]=parameters[i][VolumeSubscript];
-//      		}else{
-//      			volumeTimeH[lengt+i]=str2;
-//      			volumeVH[lengt+i]=parameters[i][VolumeSubscript];
-//      		}
-        		
-        			
-        			
        		};
         	for(var i=0;i<volumeTime.length-1;i++){
         		if(volumeTime[i]==volumeTime[i+1]){
@@ -168,18 +164,20 @@
 //      	console.log("最大值"+Math.max.apply(null, CandlestickVolumeData.volume));//最大值
 //			console.log("最小值"+Math.min.apply(null, CandlestickVolumeData.volume));//最小值
 //			console.log("最后一条数据"+CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]);
-        	var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+// 			console.log("k线图的数据"+JSON.stringify(CandlestickVolumeData));
         	CandlestickVolumeChart.group="group2";
         	if(firstTimeNum==0){
 		  			
 		  	}else{
+		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 		  		CandlestickVolumeChart.setOption(option1);
 		  	};
 		  	document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(CandlestickVolumeChart != null){
 						setTimeout(function(){
+							var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 						 	CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option1);
+							CandlestickVolumeChart.setOption(option2);
 		        			CandlestickVolumeChart.resize();	
 		        			firstTimeNum++;
 		        		},10);

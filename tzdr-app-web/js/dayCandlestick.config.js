@@ -20,7 +20,7 @@
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
        		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
-        	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
+//      	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
 		  	dayCandlestickChartDiv.group="group3";
 		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
 				 if(dayCandlestickChartDiv != null){
@@ -29,8 +29,9 @@
 				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 						setTimeout(function(){
+							var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
 						 	dayCandlestickChartDiv.resize();	
-							dayCandlestickChartDiv.setOption(Option);
+							dayCandlestickChartDiv.setOption(option1);
 		        			dayCandlestickChartDiv.resize();	
 		        			dayCandlestickChartDivNum++;
 		        		},10);
@@ -130,16 +131,18 @@
        		};
        		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
        		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
-        	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+//      	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 		  	dayCandlestickVolumeChart.group="group3";
 		  	if(dayCandlestickVolumeNum !=0){
-				dayCandlestickVolumeChart.setOption(option);
+		  		var option3 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+				dayCandlestickVolumeChart.setOption(option3);
 			}
 		  	document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
 				 if(dayCandlestickVolumeChart != null){
 						setTimeout(function(){
+							var option1 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 						 	dayCandlestickVolumeChart.resize();	
-							dayCandlestickVolumeChart.setOption(option);
+							dayCandlestickVolumeChart.setOption(option1);
 		        			dayCandlestickVolumeChart.resize();	
 		        			dayCandlestickVolumeNum=1;
 		        		},10);

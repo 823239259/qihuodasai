@@ -78,7 +78,7 @@ mui.plusReady(function(){
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==1440){
-				console.log(JSON.stringify(historyParam));
+//				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
 			}
@@ -270,19 +270,17 @@ mui.plusReady(function(){
    		volumeChartData.volume=[];
    		volumeTime=[];
    		volumeV=[];
-// 		 CandlestickVolumeChartTime=[];
-// 		 CandlestickVolumeChartVolume=[];
+   		newData=[];
    		 CandlestickVolumeData={
 		    	time:[],
 		    	volume:[]
 		    };
-		    
+//		    console.log("k线图的数据归0"+JSON.stringify(CandlestickVolumeData));
    		  dayCandlestickVolumeData={
 		    	time:[],
 		    	volume:[]
 		    };
-//		    processingDayCandlestickVolumeData(null);
-    	console.log("更新后的"+timeData.timeLabel.length);
+//  	console.log("更新后的"+timeData.timeLabel.length);
     	sendHistoryMessage();
     	
     })

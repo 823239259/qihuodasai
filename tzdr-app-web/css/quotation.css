@@ -202,11 +202,15 @@ p{
 .ProductInformationLeft,.ProductInformationRight{
 	float: left;
 	overflow: hidden;
-	padding:0px 15px;
-	width: 50%;
+	padding:0px 8px;
+	/*width: 50%;*/
 	height: 65px;
 }
+.ProductInformationRight{
+	width: 48%;
+}
 .ProductInformationLeft{
+	width: 52%;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-right: 0px;
@@ -218,11 +222,21 @@ p{
 }
 
 .ProductInformationLeft #tradeTitle{
-	background-color: #2B2B2B;
+	position: absolute;
+	top:12px;
+	/*left:-2px;*/
+	z-index: 888;
+	background-color: rgba(0, 0, 0, 0);
 	color:#FFFFFF;
 	font-size: 14px;
 	margin-bottom: 0px;
 	padding: 10px 0px !important;
+}
+#searchIcon{
+	margin-top: 12px;
+	display: inline-block;
+	width: 100%;
+	text-align: right;
 }
 #tradeTitle #titleValue{
 	display: inline-block;
@@ -261,13 +275,13 @@ p{
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #000000;
 }
-/*.ProductInformationLeft select{
-	background-color: #2B2B2B;
+.ProductInformationLeft select{
+	background-color: rgba(0, 0, 0, 0);
 	color:#FFFFFF;
 	font-size: 14px;
 	margin-bottom: 0px;
 	padding: 10px 0px !important;
-}*/
+}
 /*#searchIcon{
 	position: absolute;
 	top: 10%;
