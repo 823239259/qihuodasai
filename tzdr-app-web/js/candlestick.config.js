@@ -2,15 +2,13 @@
     var rawData = [];
     var CandlestickChartOption=null;
     var CandlestickVolumeChartOption=null;
-//  var CandlestickVolumeChartTime=[];
-//  var CandlestickVolumeChartVolume=[];
+    var CandlestickVolumeChartTime=[];
+    var CandlestickVolumeChartVolume=[];
     var CandlestickVolumeData={
-    	time:[],
-    	volume:[]
+    	time:CandlestickVolumeChartTime,
+    	volume:CandlestickVolumeChartVolume
     }
-    var newData=[];
     function processingData(jsonData){
-    	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
@@ -19,10 +17,10 @@
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
-		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
-		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
+        			var openPrice = parameters[i][OpenPriceSubscript];
+		            var closePrice = parameters[i][LastPriceSubscript];
+		            var chaPrice = closePrice - openPrice;
+		            var sgData = [str2,openPrice,closePrice,chaPrice,"",parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript],"","","-"];
 			         rawData[lent+i] = sgData; 
        		};
         	for(var i=0;i<rawData.length-1;i++){
@@ -30,43 +28,29 @@
         			rawData.splice(i,1);
         		}
         	}
-        	newData=rawData.slice(-60);
-        		myChart.resize();
+        	var newData=rawData.slice(-60);
+        		CandlestickChartOption = setOption(newData);
         	if(firstTimeNumber==0){
 		  			
 		  	}else{
-//		  		console.log("45")
-		  		CandlestickChartOption = setOption(newData);
 		  		myChart.setOption(CandlestickChartOption);
 		  	};
 		  	myChart.group="group2";
-		  	
-    }
-    document.getElementById("Candlestick").addEventListener("tap",function(){
-    			$("#dayCandlestickChart").css("opacity","0");
-    				$("#TimeChart1").css("opacity","0");
+		  	document.getElementById("Candlestick").addEventListener("tap",function(){
 				 if(myChart != null){
 				 	setTimeout(function(){
 				 		muiSpinner[1].style.display="none";
 				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 						setTimeout(function(){
-							myChart.resize();
-							myChart.setOption(option);
+						 	myChart.resize();	
+							myChart.setOption(CandlestickChartOption);
 		        			myChart.resize();	
-		        			CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option2);
-		        			CandlestickVolumeChart.resize();	
 		        			firstTimeNumber++;
-		        			firstTimeNum++;
 		        		},10);
-		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
-		        		},100);
-			    } 
+			    }
 		});
+    }
     //设置数据参数（为画图做准备）
     function setOption(rawData){
         var dates = rawData.map(function (item) {
@@ -162,8 +146,16 @@
         			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
+//      		if(Number(parameters[i][OpenPriceSubscript])>Number(parameters[i][LastPriceSubscript])){
         			volumeTime[lent+i]=str2;
         			volumeV[lent+i]=parameters[i][VolumeSubscript];
+//      		}else{
+//      			volumeTimeH[lengt+i]=str2;
+//      			volumeVH[lengt+i]=parameters[i][VolumeSubscript];
+//      		}
+        		
+        			
+        			
        		};
         	for(var i=0;i<volumeTime.length-1;i++){
         		if(volumeTime[i]==volumeTime[i+1]){
@@ -173,29 +165,24 @@
         	}
         	CandlestickVolumeData.time=volumeTime.slice(-60);
         	CandlestickVolumeData.volume=volumeV.slice(-60);
+        	var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
         	CandlestickVolumeChart.group="group2";
         	if(firstTimeNum==0){
 		  			
 		  	}else{
-		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-		  		CandlestickVolumeChart.resize();	
 		  		CandlestickVolumeChart.setOption(option1);
-		  		CandlestickVolumeChart.resize();	
 		  	};
-		  	
+		  	document.getElementById("Candlestick").addEventListener("tap",function(){
+				 if(CandlestickVolumeChart != null){
+						setTimeout(function(){
+						 	CandlestickVolumeChart.resize();	
+							CandlestickVolumeChart.setOption(option1);
+		        			CandlestickVolumeChart.resize();	
+		        			firstTimeNum++;
+		        		},10);
+			    }
+		});
     };
-//  document.getElementById("Candlestick").addEventListener("tap",function(){
-//				 if(CandlestickVolumeChart != null){
-//				 	var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-//						setTimeout(function(){
-//						 	CandlestickVolumeChart.resize();	
-//							CandlestickVolumeChart.setOption(option2);
-//		        			CandlestickVolumeChart.resize();	
-//		        			firstTimeNum++;
-//		        		},10);
-//			    }
-//		});
-    
     function CandlestickVolumeChartSetoption1(data){
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {

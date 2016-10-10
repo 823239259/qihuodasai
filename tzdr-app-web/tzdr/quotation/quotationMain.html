@@ -212,7 +212,7 @@
 					           socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 					        }
 					        //插入主力合约
-					        AddTo()
+					        AddTo();
 					    }else if(method == "OnRspSubscribe"){
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
@@ -277,7 +277,7 @@
 			                    ChangeRate[i].innerText = MoreData.ChangeRate.toFixed(2) + "%";
 			                    ChangeRate[i].className = "greenBg ChangeRate";
 			                }
-//			                else if(Number(MoreData.Parameters.ChangeRate) = 0){
+//			                 else if(Number(MoreData.Parameters.ChangeRate) = 0){
 //			                	 ChangeRate[i].innerText = MoreData.Parameters.ChangeRate.toFixed(2) + "%";
 //			                    ChangeRate[i].className = " ChangeRate";
 //			                }
