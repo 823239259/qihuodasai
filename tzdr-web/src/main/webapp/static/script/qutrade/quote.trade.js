@@ -81,5 +81,11 @@ $(function() {
 				$("#money_number").val(1);
 			}
 		});
-		
+		/*交易ul li  odd even odd  li:nth-of-type(even)*/
+		$(".quotation_detailed .quotation_detailed_title .tab_content:even").addClass("even");
+		$(".quotation_detailed .quotation_detailed_title .tab_content").click(function() {
+			var _this = $(this);
+			$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
+			_this.addClass("on");
+		});
 });

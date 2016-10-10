@@ -87,33 +87,6 @@
 		        <li class="futures_number">1213</li>
 		        <li class="scal" style="color: #30bf30;">-0.01%</li>
     		</ul>
-    		<ul>
-		        <li class="futures_name">
-		        	<span class="futures_mz">恒指期货</span>
-		        	<span class="futures_bm">CL1611</span>
-		        </li>
-		        <li class="qlast" style="color: #ff4040;">+0.002</li>
-		        <li class="futures_number">1213</li>
-		        <li class="scal" style="color: #ff4040;">+0.01%</li>
-    		</ul>
-    		<ul>
-		        <li class="futures_name">
-		        	<span class="futures_mz">恒指期货</span>
-		        	<span class="futures_bm">CL1611</span>
-		        </li>
-		        <li class="qlast" style="color: #30bf30;">-0.002</li>
-		        <li class="futures_number">1213</li>
-		        <li class="scal" style="color: #30bf30;">-0.01%</li>
-    		</ul>
-    		<ul>
-		        <li class="futures_name">
-		        	<span class="futures_mz">恒指期货</span>
-		        	<span class="futures_bm">CL1611</span>
-		        </li>
-		        <li class="qlast" style="color: #30bf30;">-0.002</li>
-		        <li class="futures_number">1213</li>
-		        <li class="scal" style="color: #30bf30;">-0.01%</li>
-    		</ul>
 		</div>
     </div>
     <div id="content">
@@ -203,7 +176,7 @@
     			</div>
     		</div>
     		<div id="content2">
-    			<div class="carbon" style="position: relative; width: 100%; height: 500px;">
+    			<div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
 			        <div id="app">
 			            <!-- http://localhost:8088/tzdr-web/static/ico/MSFT_full.json -->
 			        </div>
@@ -283,6 +256,24 @@
 			        		<li>交易所</li>
 			        		<li>币种</li>
 			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml" style="width: 100px;">富时A501610</li>
+			        		<li>24234</li>
+			        		<li>32</li>
+			        		<li>1313.32</li>
+			        		<li>322323</li>
+			        		<li>纽约交易所</li>
+			        		<li>USA</li>
+			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml" style="width: 100px;">富时A501610</li>
+			        		<li>24234</li>
+			        		<li>32</li>
+			        		<li>1313.32</li>
+			        		<li>322323</li>
+			        		<li>纽约交易所</li>
+			        		<li>USA</li>
+			        	</ul>
 			        	<ul class="caozuo">
 			        		<li><a href="javascript:void(0);"  id = "allSelling">全部平仓</a></li>
 			        		<li><a href="javascript:void(0);"  id = "selling">平仓</a></li>
@@ -303,9 +294,51 @@
 			        		<li>撤单时间</li>
 			        		<li>订单号</li>
 			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml">富时A50</li>
+			        		<li>2</li>
+			        		<li>982424.23</li>
+			        		<li>23</li>
+			        		<li>982424.23</li>
+			        		<li>已完成</li>
+			        		<li>09:23:43</li>
+			        		<li>982424.23</li>
+			        		<li>3</li>
+			        		<li>09:23:43</li>
+			        		<li>3232131231</li>
+			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml">富时A50</li>
+			        		<li>2</li>
+			        		<li>982424.23</li>
+			        		<li>23</li>
+			        		<li>982424.23</li>
+			        		<li>已完成</li>
+			        		<li>09:23:43</li>
+			        		<li>982424.23</li>
+			        		<li>3</li>
+			        		<li>09:23:43</li>
+			        		<li>3232131231</li>
+			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "des_title">
 			        	<ul class="tab_lis">
+			        		<li class="ml">合约代码</li>
+			        		<li>合约名称</li>
+			        		<li>买卖</li>
+			        		<li>委托价</li>
+			        		<li>委托量</li>
+			        		<li>挂单量</li>
+			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml">合约代码</li>
+			        		<li>合约名称</li>
+			        		<li>买卖</li>
+			        		<li>委托价</li>
+			        		<li>委托量</li>
+			        		<li>挂单量</li>
+			        	</ul>
+			        	<ul class="tab_content">
 			        		<li class="ml">合约代码</li>
 			        		<li>合约名称</li>
 			        		<li>买卖</li>
@@ -331,7 +364,28 @@
 			        		<li>成交时间</li>
 			        		<li>交易所</li>
 			        	</ul>
-			        	
+			        	<ul class="tab_content">
+			        		<li class="ml">富时A50</li>
+			        		<li>2</li>
+			        		<li>982424.23</li>
+			        		<li>23</li>
+			        		<li></li>
+			        		<li></li>
+			        		<li></li>
+			        		<li>09:23:43</li>
+			        		<li></li>
+			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml">富时A50</li>
+			        		<li>2</li>
+			        		<li>982424.23</li>
+			        		<li>23</li>
+			        		<li></li>
+			        		<li></li>
+			        		<li></li>
+			        		<li>09:23:43</li>
+			        		<li></li>
+			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "account_title">
 			        	<ul class="tab_lis">
@@ -346,6 +400,32 @@
 			        		<li>今结存</li>
 			        		<li>冻结资金</li>
 			        		<li>盈利率</li>
+			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml">USD</li>
+			        		<li>20554.54</li>
+			        		<li>20554.54</li>
+			        		<li>20554.54</li>
+			        		<li>10</li>
+			        		<li>22333</li>
+			        		<li>33333</li>
+			        		<li>33333</li>
+			        		<li>33333</li>
+			        		<li>0.0</li>
+			        		<li>5%</li>
+			        	</ul>
+			        	<ul class="tab_content">
+			        		<li class="ml">USD</li>
+			        		<li>20554.54</li>
+			        		<li>20554.54</li>
+			        		<li>20554.54</li>
+			        		<li>10</li>
+			        		<li>22333</li>
+			        		<li>33333</li>
+			        		<li>33333</li>
+			        		<li>33333</li>
+			        		<li>0.0</li>
+			        		<li>5%</li>
 			        	</ul>
 			        </div>
 			    </div>
