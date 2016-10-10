@@ -88,4 +88,25 @@ $(function() {
 			$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
 			_this.addClass("on");
 		});
+		/* 弹出层 开始 */
+		$(function() {
+			$("#trade_login").click(function() {
+				weidenglu();
+			});
+			
+			
+		});
+		function weidenglu(){
+			$("#weidenglu").css("display","block");
+			$("#div_Mask").show();
+			var windowWidth = document.documentElement.clientWidth;   
+			var windowHeight = document.documentElement.clientHeight;   
+			var popupHeight = $(".tck01").height();   
+			var popupWidth = $(".tck01").width();    
+			$(".tck01").css({     
+			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+			 "left": (windowWidth-popupWidth)/2   
+			});  	
+		}
+		/* 弹出层结束 */
 });

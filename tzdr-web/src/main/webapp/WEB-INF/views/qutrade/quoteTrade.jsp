@@ -9,6 +9,9 @@
 <meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>交易行情 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
+<!-- 弹出层 -->
+<link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">
+<!-- 弹出层 -->
 <link href="${ctx }/static/css/quotation.css?v=${v}" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quotation.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
@@ -22,7 +25,7 @@
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.connection.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.js?v=${v}"></script>
 <%-- <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.reconnect.js?v=${v}"></script> --%>
-
+<!-- 插件 -->
 <script type="text/javascript" src="${ctx}/static/script/qutrade/d3.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/react.min.js"></script>
 <script type="text/javascript">
@@ -38,26 +41,25 @@
 	});
 </script>
 <link rel="stylesheet" href="${ctx }/static/css/introjs.min.css">
-<style>
-	.dropdown,.dropup{position:relative}
-	.dropdown-menu{position:absolute;z-index:1000;display:none;}
-	.dropdown-menu>li>a{display:block;white-space:nowrap}
-	.open>.dropdown-menu{display:block;background: #fff;}
-	.dropdown-header{display:block;}
-	.indicators {display: none;}
-	.btn-default {color: #333; background-color: #fff; border-color: #ccc;}
-	.btn {display: inline-block;height: 34px; width: 100px; margin-bottom: 0; font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;
-	    cursor: pointer;background-image: none;border: 1px solid transparent; border-radius: 4px;white-space: nowrap;vertical-align: middle;
-	    -webkit-user-select: none;-moz-user-select: none; -ms-user-select: none; user-select: none;
-	    -ms-touch-action: manipulation; touch-action: manipulation;}
-	.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid\9; border-right: 4px solid transparent; border-left: 4px solid transparent; background: #fff;}
-	.open>.dropdown-menu li {list-style-type: none; width: 88px; height: 30px; line-height: 30px; padding-left: 10px;}
-	.open>.dropdown-menu li:hover {background-color: #f5f5f5;}
-	.open>.dropdown-menu li a {color: #333; text-decoration: none;}
-	.open>.dropdown-menu li.dropdown-header {display: none;}
-</style>
+<!-- 插件 -->
 </head>
 <body>
+<!-- 弹出层 -->
+<div id="div_Mask"  style="display:none;"></div>
+<div class="div_loading">
+	<div class="tck01" id="weidenglu" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示</a><a class="close" onclick="javascript:closeDiv('weidenglu')"></a>
+		</div>
+		<div class="smain">
+			<div>对不起了啦~你还未进行登录，请先进行登录后再购买合约吧。</div>
+		</div>
+		<div class="anniu">
+	 		<a href="javascript:void(0)" onclick="javascript:closeDiv('weidenglu')">登录</a>
+	 		<a onclick="javascript:closeDiv('weidenglu')">取消</a>
+	 	</div>
+	</div>
+</div>
 <!-- top -->
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
