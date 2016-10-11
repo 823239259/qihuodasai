@@ -215,6 +215,7 @@
 							var parameters = data.Parameters;
 							if (method == "OnRspLogin") {
 								var code = parameters.Code;
+//								alert(JSON.stringify(parameters));
 								var loginMessage = parameters.Message;
 								if (code == 0) {
 										localStorage.setItem("account",account);
@@ -222,6 +223,7 @@
 										localStorage.setItem("endLoginAccount",account);
 										localStorage.setItem("endLoginPassword",pwd);
 									if (Transfer.backpageID){
+//										alert("登录成功")
 										backReload();
 										plus.nativeUI.closeWaiting();
 										mui.toast("登录成功");

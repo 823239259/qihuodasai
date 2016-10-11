@@ -209,10 +209,13 @@ function clearLogin(){
  * 连接交易
  */
 var socket = null;
+
 var username = localStorage.getItem("account");
 var password = localStorage.getItem("password");
 var endLoginAccount = localStorage.getItem("endLoginAccount");
 var endLoginPassword = localStorage.getItem("endLoginPassword");
 if(username != null){
 	socket = new WebSocket(TradeUrl.SocketUrl);
+//	alert(socket);
 }
+//alert(socket+"546");
