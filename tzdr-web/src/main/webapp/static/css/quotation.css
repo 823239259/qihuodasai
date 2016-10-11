@@ -115,6 +115,10 @@
 .quotation_detailed .quotation_detailed_title .caozuo a{font-size: 14px; text-decoration: none; height: 28px; line-height: 28px; background: #1a1a1a; color: #ccc; display: block; border: 1px solid #1a1a1a; border-radius: 4px; text-align: center;}
 .quotation_detailed .quotation_detailed_title .caozuo a:hover {background: #000;}
 
+#qiehuan {font-size: 14px; color: #999; position: absolute; right: 0; height: 34px; line-height: 34px;}
+#qiehuan ul li {float: left; margin: 0 10px;}
+#qiehuan ul li:hover {color: #ffb319; cursor: pointer;}
+
 /* 插件行情 */
 .dropdown,.dropup{position:relative}
 .dropdown-menu{position:absolute;z-index:1000;display:none;}
@@ -134,6 +138,13 @@
 .open>.dropdown-menu li.dropdown-header {display: none;}
 
 /* 弹出层  */
-
+.tck01 {width: 360px; position: fixed;}
+.tck01 .smain {padding: 15px 0px 15px 10px;}
+.tck01 .navtitle .close {margin-right: 10px;}
+.tck01 .anniu a {margin-left: 0; width: 140px; height: 40px; line-height: 40px; display: inline-block; text-align: center; text-decoration: none; cursor: pointer;}
+.tck01 .anniu .sure {background: #ffb319; color: #333; font-size: 16px; border-radius: 4px; margin-left: 12px;}
+.tck01 .anniu .sure:hover {background: #ff9f19;}
+.tck01 .anniu .cancel {background: #ccc; color: #333; font-size: 16px; border-radius: 4px; margin-left: 55px;}
+.tck01 .anniu .cancel:hover {background: #b3b3b3;}
 
 

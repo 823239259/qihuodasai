@@ -88,14 +88,16 @@ $(function() {
 			$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
 			_this.addClass("on");
 		});
-		/* 弹出层 开始 */
+/* 弹出层 开始 */
 		$(function() {
 			$("#trade_login").click(function() {
 				weidenglu();
+				//mairu();
+				//revoke();
+				//maichu();
 			});
-			
-			
 		});
+		/*是否登录*/
 		function weidenglu(){
 			$("#weidenglu").css("display","block");
 			$("#div_Mask").show();
@@ -106,7 +108,51 @@ $(function() {
 			$(".tck01").css({     
 			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
 			 "left": (windowWidth-popupWidth)/2   
-			});  	
+			});
 		}
-		/* 弹出层结束 */
+		/*买入*/
+		function mairu(){
+			$("#mairu").css("display","block");
+			$("#div_Mask").show();
+			var windowWidth = document.documentElement.clientWidth;   
+			var windowHeight = document.documentElement.clientHeight;   
+			var popupHeight = $(".tck01").height();   
+			var popupWidth = $(".tck01").width();    
+			$(".tck01").css({     
+			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+			 "left": (windowWidth-popupWidth)/2   
+			});
+		}
+		/*卖出*/
+		function maichu(){
+			$("#maichu").css("display","block");
+			$("#div_Mask").show();
+			var windowWidth = document.documentElement.clientWidth;   
+			var windowHeight = document.documentElement.clientHeight;   
+			var popupHeight = $(".tck01").height();   
+			var popupWidth = $(".tck01").width();    
+			$(".tck01").css({     
+			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+			 "left": (windowWidth-popupWidth)/2   
+			});
+		}
+		/*撤单*/
+		function revoke(){
+			$("#revoke").css("display","block");
+			$("#div_Mask").show();
+			var windowWidth = document.documentElement.clientWidth;   
+			var windowHeight = document.documentElement.clientHeight;   
+			var popupHeight = $(".tck01").height();   
+			var popupWidth = $(".tck01").width();    
+			$(".tck01").css({     
+			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+			 "left": (windowWidth-popupWidth)/2   
+			});
+		}
+		/*隐藏*/
+		$(".close").click(function() {
+			$(".tck01").css("display","none");
+			$("#div_Mask").css("display","none");
+		})
+/* 弹出层结束 */
 });

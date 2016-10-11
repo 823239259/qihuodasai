@@ -55,14 +55,60 @@
 <div class="div_loading">
 	<div class="tck01" id="weidenglu" style="display: none;">
 		<div class="navtitle">
-			<a class="nava">提示</a><a class="close" onclick="javascript:closeDiv('weidenglu')"></a>
+			<a class="nava">提示</a><a class="close"></a>
 		</div>
 		<div class="smain">
 			<div>对不起了啦~你还未进行登录，请先进行登录后再购买合约吧。</div>
 		</div>
 		<div class="anniu">
-	 		<a href="javascript:void(0)" onclick="javascript:closeDiv('weidenglu')">登录</a>
-	 		<a onclick="javascript:closeDiv('weidenglu')">取消</a>
+	 		<a class="sure" href="javascript:void(0)">登录</a>
+	 		<a class="cancel close">取消</a>
+	 	</div>
+	</div>
+	<div class="tck01" id="mairu" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div>
+				<p>合约信息：国际原油 CL1611</p>
+				<p>委托价格：2998.79</p>
+				<p>委托数量：1</p>
+				<p>支付金额：2998.79</p>
+			</div>
+		</div>
+		<div class="anniu">
+	 		<a class="sure" href="javascript:void(0)">确认支付</a>
+	 		<a class="cancel close">取消支付</a>
+	 	</div>
+	</div>
+	<div class="tck01" id="maichu" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div>
+				<p>合约信息：国际原油 CL1611</p>
+				<p>委托价格：2998.79</p>
+				<p>委托数量：1</p>
+				<p>支付金额：2998.79</p>
+			</div>
+		</div>
+		<div class="anniu">
+	 		<a class="sure" href="javascript:void(0)">确认卖出</a>
+	 		<a class="cancel close">取消卖出</a>
+	 	</div>
+	</div>
+	<div class="tck01" id="revoke" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div>你确定对当前合约进行撤单操作？</div>
+		</div>
+		<div class="anniu">
+	 		<a class="sure" href="javascript:void(0)">是</a>
+	 		<a class="cancel close">否</a>
 	 	</div>
 	</div>
 </div>
