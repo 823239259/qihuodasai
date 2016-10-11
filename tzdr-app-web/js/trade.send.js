@@ -192,7 +192,7 @@ function doGetMarketPrice(price,miniTikeSize,drection){
 */
 function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum,drection){
 	var price = 0.00;
-	if(drection == 0){
+	if(drection == 0){ 
 		price = lastPrice - tradeAvgPrice;
 	}else if(drection == 1){
 		price = tradeAvgPrice - lastPrice;

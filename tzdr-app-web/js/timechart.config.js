@@ -20,7 +20,7 @@
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
        	var leng=timePrice.length;
-        for(var i=0;i<Len;i++){
+        for(var i=0;i<Len;i++){ 
         	var time2=Parameters[i][DateTimeStampSubscript].split(" ");
         	var str1=time2[1].split(":");
         	var str2=str1[0]+":"+str1[1];

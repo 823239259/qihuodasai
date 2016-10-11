@@ -19,7 +19,7 @@ var reconnect=null;
     var commodityNoList="";
 var marketSocket = null;
 var firstTimeLength=1;
-var commoditysData;
+var commoditysData; 
 var OnRspQryCommodityDateL=1;
 function subscribeHold(exchageNo,commodityNo,contractNo){
 		masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');

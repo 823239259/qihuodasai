@@ -12,7 +12,7 @@ var TradeConfig = {
 }
 /**
  * 测试交易配置
- */
+ */ 
 var TradeConfigTest = {
 	TradeSocketUrl:"ws://192.168.0.213:6060"
 }

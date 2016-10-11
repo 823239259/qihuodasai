@@ -78,7 +78,7 @@ function loadSocket(){
 				alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
 				//alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
 			}
-		} 
+		}  
 		socket.onmessage = function(evt) {
 			var dataString = evt.data;
 			var data = JSON.parse(dataString);

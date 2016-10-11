@@ -5,7 +5,7 @@
     var dayCandlestickVolumeData={
     	time:[],
     	volume:[]
-    }
+    }  
     function processingDayCandlestickData(jsonData){
     		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;

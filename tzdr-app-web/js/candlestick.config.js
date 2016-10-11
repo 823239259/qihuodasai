@@ -8,7 +8,7 @@
     	time:[],
     	volume:[]
     }
-    var newData=[];
+    var newData=[]; 
     function processingData(jsonData){
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;

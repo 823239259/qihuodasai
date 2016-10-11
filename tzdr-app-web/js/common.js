@@ -270,7 +270,7 @@ var tzdr = {
 		base_images_url:'http://manage.vs.com/',
 		//token
 		user_token:'user_token',
-		//密钥
+		//密钥 
 		user_secret:'user_secret',
 		//用户手机号
 		user_mobile:'user_mobile',
