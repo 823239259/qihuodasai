@@ -30,7 +30,7 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
+//		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
 //		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
     	setTimeout(function(){
@@ -129,14 +129,14 @@ mui.plusReady(function(){
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
+				
 				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 				if(Transfer.name[2]==newCommdityNo){
-   					
+   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}else{
-	   				
-	   				tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+">"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
-//	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}
+	   			
 			}
         }else if(method == "OnRspUnSubscribe"){
         	var quoteParam = jsonData;
