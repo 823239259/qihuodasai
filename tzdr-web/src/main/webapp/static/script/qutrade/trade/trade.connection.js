@@ -2,19 +2,19 @@ var socket = null;
 /**
  * 用户名
  */
-var username = getCookie("trade_account");
+var username = getTradeCookie("trade_account");
 /**
  * 密码
  */
-var password = getCookie("trade_password");
+var password = getTradeCookie("trade_password");
 /**
  * 缓存的用户名
  */
-var endLoginAccount = getCookie("trade_endLoginAccount");
+var endLoginAccount = getTradeCookie("trade_endLoginAccount");
 /**
  * 缓存的密码
  */
-var endLoginPassword = getCookie("trade_endLoginPassword");
+var endLoginPassword = getTradeCookie("trade_endLoginPassword");
 /**
  * 交易是否连接成功,true-成功，false-失败
  */
@@ -59,15 +59,14 @@ function tradeConnectionClose(){
  * 本地退出登录
  */
 function loginOut(account,password){
-	delCookie("trade_account");
-	delCookie("trade_password");
+	delTradeCookie("trade_account");
+	delTradeCookie("trade_password");
 	username = null;
 	password = null;
 	$("#show_login").show();
 	$("#show_user_info").hide();
 	socket = null;
 	setIsLogin(false);
-	
 	/*initTrade();*/
 }
 /**
@@ -76,10 +75,10 @@ function loginOut(account,password){
  * @param {Object} password 登录密码
  */
 function loginCache(account,password){
-	setCookie("trade_account",account,"s600");
-	setCookie("trade_password",password,"s600");
-	setCookie("trade_endLoginAccount",account,"s600");
-	setCookie("trade_endLoginPassword",password,"s600");
+	setTradeCookie("trade_account",account);
+	setTradeCookie("trade_password",password);
+	setTradeCookie("trade_endLoginAccount",account);
+	setTradeCookie("trade_endLoginPassword",password);
 }
 /**
  * 交易登录
@@ -111,6 +110,7 @@ function tradeLoginOut(account){
 function initLoad() {
 	if (socket == null) return false;
 	socket.onopen = function() {
+		layer.closeAll();
 		Trade.doLogin(username , password);
 		changeConnectionStatus();
 	}
@@ -118,7 +118,11 @@ function initLoad() {
 		handleData(evt);
 	}
 	socket.onclose = function() {
-//		reconnect();
+		socket = null;
+		//更新交易连接状态
+		changeConnectionStatus();
+		//交易连接断开重连
+		reconnect();
 	}
 	return true;
 }
@@ -127,6 +131,7 @@ function initLoad() {
  * 初始化交易
  */
 function initTradeConnect(){
+	layer.msg('正在连接交易服务器...', {icon: 16});
 	/**
 	 * 交易连接 -->trade.connection
 	 */
@@ -146,4 +151,14 @@ function initTrade(){
 	 * 交易登录（初始化） -->trade.connection
 	 */
 	tradeLogin();
+}
+/**
+ * 重新连接交易服务器
+ */
+function reconnect(){
+	layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	clearTradListData();
+	if(socket == null){
+		initTrade();
+	}
 }

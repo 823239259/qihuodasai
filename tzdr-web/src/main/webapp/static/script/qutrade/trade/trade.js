@@ -107,15 +107,21 @@ function handleData(evt){
 			} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
 				updateDesignatesDom(orderParam);
 			}
-			if(orderStatusWeHooks == 5 || orderStatusWeHooks == 6){
-				tip("交易失败("+orderParam.ContractCode+","+orderParam.StatusMsg+")");
+			var orderId = orderParam.OrderID;
+			var cacaleOrderId = selectDesgnate["orderId"];
+			var contractCode = selectDesgnate["contraction"];
+			if(orderStatusWeHooks == 4){
+				tip("撤单成功:合约【"+contractCode+"】,订单号【"+orderId+"】");
+			}
+			if(orderStatusWeHooks == 5){
+				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
 			}
 			//订单成交通知
 		} else if (method == "OnRtnOrderTraded") {
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
 			appendPostionAndUpdate(tradeParam);
-			tip("交易成功：合约["+tradeParam.ContractCode+"],交易手数:["+tradeParam.TradeNum+"],交易价格:["+tradeParam.TradePrice+"]");
+			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
 			var accountParam = parameters;
@@ -215,7 +221,7 @@ function addFundsDetails(param){
 				'	<li class = "detail_todayAmount">'+todayAmount+'</li>'+
 				'	<li class = "detail_frozenMoney">'+frozenMoney+'</li>'+
 				'	<li class = "detail_profitRate">'+profitRate+'</li>'+
-				'	<li class = "detail_currencyRate">'+currencyRate+'</li>'+
+				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
 				'</ul>';
 	$("#account_title .tab_lis").after(html);
 	localCacheFundDetail[currencyNo]=param;
@@ -271,6 +277,7 @@ function appendOrder(param){
 	var triggerPrice = param.TriggerPrice;
 	var tradePrice = param.TradePrice;
 	var orderId = param.OrderID;
+	var insertDateTime = param.InsertDateTime;
 	var cls = "order-index" + orderIndex;
 	var html = '<ul class="tab_content '+cls+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
 				'	<li class="ml order0">'+contractCode+'</li>'+
@@ -281,7 +288,7 @@ function appendOrder(param){
 				'	<li class = "order5">'+ordreStatusText+'</li>'+
 				'	<li class = "order6">'+tradePrice+'</li>'+
 				'	<li class = "order7">'+tradeNum+'</li>'+
-				'	<li class = "order8">""</li>'+
+				'	<li class = "order8">'+insertDateTime+'</li>'+
 				'	<li class = "order9">'+orderId+'</li>'+
 				'</ul>';
 	$("#order_title .tab_lis").after(html);
@@ -335,7 +342,7 @@ function appendDesignates(param){
    var orderId = param.OrderID;
    var triggerPrice = param.TriggerPrice;
    var cls = "des-index"+designateIndex;
-   var html = '<ul class="tab_content '+cls+'" data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
+   var html = '<ul class="tab_content '+cls+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
 				'	<li class = "des1">'+contractCode+'</li>'+
 				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -411,9 +418,9 @@ function appendTradeSuccess(param){
 				'	<li class = "trade2">'+tradePrice+'</li>'+
 				'	<li class = "trade3">'+tradeNum+'</li>'+
 				'	<li class = "trade4">'+currencyNo+'</li>'+
-				'	<li class = "trade5" style="width: 150px;">'+tradeNo+'</li>'+
+				'	<li class = "trade5">'+tradeNo+'</li>'+
 				'	<li class = "trade6">'+orderId+'</li>'+
-				'	<li class = "trade7" style="width: 130px;">'+tradeTime+'</li>'+
+				'	<li class = "trade7">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_title .tab_lis").after(html);
@@ -484,8 +491,12 @@ function addPostion(param){
 			currencyNo = localCommodity.CurrencyNo;
 			exchangeNo = localCommodity.ExchangeNo;
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			if(isNaN(floatP)){
+				floatP = 0.00;
+			}
 			floatingProfit = floatP +":"+ currencyNo; 
 		}
+		
 		var cls = "postion-index"+postionIndex;
 		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 100px;">'+contractCode+'</li>'+
@@ -554,9 +565,9 @@ function updatePostion(param){
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
 			floatingProft = floatP +":"+ currencyNo; 
 		}
-		$floatingProfit.css("width","160px");
 		$floatingProfit.text(floatingProft);
 		$floatP.text(floatP);
+		$floatingProfit.css("width","160px");
 		if(floatP < 0 ){
 			$floatingProfit.css("color","green");
 		}else if(floatP > 0){
@@ -742,8 +753,10 @@ function addDesignateBindClick(cls){
 			selectDesgnate["designateIndex"] = $this.attr("data-index-des");
 			var orderPrice = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des3']").text();
 			var orderNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des4']").text();
+			var orderId = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des10']");
 			selectDesgnate["orderPrice"] = orderPrice;
 			selectDesgnate["orderNum"] = orderNum;
+			selectDesgnate["orderId"] = orderId;
 		});
 	});
 }
@@ -829,123 +842,8 @@ function deleteDesignatesContractCode(param){
 	}
 }
 $(function(){
-	$(".trade_buy").click(function(){
-		if(isLogin){
-			var $this = $(this);
-			var lastPrice = $("#lastPrice").val();
-			var miniTikeSize = $("#miniTikeSize").val();
-			var orderNum = $("#entrust_number").val();
-			var priceType = $("input[type='radio']:checked").val();
-			var tradeDrection = $this.attr("data-tion-buy");
-			var orderPrice = 0.00;
-			if(priceType == 1){
-				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection);
-			}else{
-				orderPrice = $("#money_number").val();
-			}
-			var commodityNo = $("#commodeityNo").val();
-			var contractNo = $("#contractNo").val();
-			var tipContent = "确认提交订单:品种合约["+commodityNo+contractNo+"],价格:["+orderPrice+"],手数:["+orderNum+"]";
-			layer.confirm(tipContent+"?", {
-			  btn: ['确认','取消'] //按钮
-			}, function(){
-				doInsertOrder(orderNum,tradeDrection,orderPrice);
-			}, function(){
-				cancleCallBack();
-			});
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
-	$("#allSelling").click(function(){
-		if(isLogin){
-			var tipContent = "确认全部平仓";
-			tipConfirm(tipContent,doInsertAllSellingOrder,cancleCallBack);
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
-	$("#selling").click(function(){
-		if(isLogin){
-			var contractCode = selectPostion["contractCode"];
-			var tipContent = "确认平仓合约["+contractCode+"]";
-			tipConfirm(tipContent,doInsertSellingOrder,ca);
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
-	$("#backhand").click(function(){
-		if(isLogin){
-			var contractCode = selectPostion["contractCode"];
-			var tipContent = "确认反手操作合约"+contractCode+""; 
-			tipConfirm(tipContent,doInsertBackhandOrder,cancleCallBack);
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
-	$("#allDesOrder").click(function(){
-		if(isLogin){
-			var tipContent = "确认全部撤单合约"; 
-			tipConfirm(tipContent,doInsertAllCancleOrder,cancleCallBack);
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
-	$("#desOrder").click(function(){
-		if(isLogin){
-			var contractCode = selectDesgnate["contraction"];
-			var tipContent = "确认撤单合约"+contractCode+""; 
-			tipConfirm(tipContent,doInsertCancleOrder,cancleCallBack);
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
-	$("#updateDesOrder").click(function(){
-		if(isLogin){
-			var contractCode = selectDesgnate["contraction"];
-			var orderPrice = selectDesgnate["orderPrice"];
-			var orderNum = selectDesgnate["orderNum"];
-			if(orderPrice == undefined){
-				orderPrice = "";
-			}
-			if(orderNum == undefined){
-				orderNum = 0;
-			}
-			layer.open({
-				  type: 1,
-				  title:"改单",
-				  area: ['100px', '200px'],
-				  skin: 'layui-layer-rim', //加上边框
-				  area: ['420px', '240px'], //宽高
-				  content: '<div  style = "background:#F2F2F2;padding:50px 50px 50px 50px">'+
-							'	<p>委托价格：<input style="background:#FFFFFF;border:1px solid  #ABABAB" type="text" value = "'+orderPrice+'"  id="update_des_price"/></p>'+
-							'	<p style = "padding-top:10px;">委托数量：<input  style="background:#FFFFFF;border:1px solid  #ABABAB" type="number" value = "'+orderNum+'"  id="update_des_number"/></p>'+
-							'</div>',
-					 btn: ['确认改单', '关闭'], //
-					 yes: function(){
-						 var price = $("#update_des_price").val();
-						 var number = $("#update_des_number").val();
-						 if(price <= 0){
-							 layer.tips("价格输入错误", '#update_des_price');
-							 return;
-						 }
-						 if(number <= 0){
-							 layer.tips("数量输入错误", '#update_des_number');
-							 return;
-						 }
-						 var tipContent = "确认改单合约"+contractCode+""; 
-						 tipConfirm(tipContent,doInsertChangeSingleOrder,cancleCallBack());
-					 },
-					 btn2: function(){
-						 layer.closeAll();
-					 }
-				});
-			//$("#change").show();
-			//
-		}else{
-			tip("未登录,请先登录");
-		}
-	});
+	//$("#").val("${ctx}/userftse/trade_list");
+	bindOpertion();
 	$("#select_commodity").click(function(){
 		var contractCode = $(this).val();
 		var localCommodity = localCacheCommodity[contractCode];
@@ -985,6 +883,141 @@ $(function(){
 		tradeLoginOut(username);
 	});
 });
+/**
+ * 绑定交易操作事件
+ */
+function bindOpertion(){
+	$(".trade_buy").bind("click",function(){
+		if(isLogin){
+			var $this = $(this);
+			var lastPrice = $("#lastPrice").val();
+			var miniTikeSize = $("#miniTikeSize").val();
+			var orderNum = $("#entrust_number").val();
+			var priceType = $("input[type='radio']:checked").val();
+			var tradeDrection = $this.attr("data-tion-buy");
+			var orderPrice = 0.00;
+			if(priceType == 1){
+				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection);
+			}else{
+				orderPrice = $("#money_number").val();
+			}
+			var commodityNo = $("#commodeityNo").val();
+			var contractNo = $("#contractNo").val();
+			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】";
+			layer.confirm(tipContent+"?", {
+			  btn: ['确认','取消'] //按钮
+			}, function(){
+				doInsertOrder(orderNum,tradeDrection,orderPrice);
+			}, function(){
+				cancleCallBack();
+			});
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#allSelling").bind("click",function(){
+		if(isLogin){
+			var tipContent = "确认全部平仓";
+			tipConfirm(tipContent,doInsertAllSellingOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	
+	$("#selling").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectPostion["contractCode"];
+			if(contractCode == undefined){
+				tip("请选择一项需要平仓的数据");
+			}
+			var tipContent = "确认平仓合约【"+contractCode+"】";
+			tipConfirm(tipContent,doInsertSellingOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#backhand").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectPostion["contractCode"];
+			if(contractCode == undefined){
+				tip("请选择一项需要反手的数据");
+			}
+			var tipContent = "确认反手操作合约【"+contractCode+"】"; 
+			tipConfirm(tipContent,doInsertBackhandOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#allDesOrder").bind("click",function(){
+		if(isLogin){
+			var tipContent = "确认全部撤单合约"; 
+			tipConfirm(tipContent,doInsertAllCancleOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#desOrder").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectDesgnate["contraction"];
+			if(contractCode == undefined){
+				tip("请选择一项需要撤单的数据");
+			}
+			var tipContent = "确认撤单合约【"+contractCode+"】"; 
+			tipConfirm(tipContent,doInsertCancleOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#updateDesOrder").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectDesgnate["contraction"];
+			if(contractCode == undefined){
+				tip("请选择一项需要改单的数据");
+			}
+			var orderPrice = selectDesgnate["orderPrice"];
+			var orderNum = selectDesgnate["orderNum"];
+			if(orderPrice == undefined){
+				orderPrice = "";
+			}
+			if(orderNum == undefined){
+				orderNum = 0;
+			}
+			layer.open({
+				  type: 1,
+				  title:"改单",
+				  area: ['100px', '200px'],
+				  skin: 'layui-layer-rim', //加上边框
+				  area: ['420px', '240px'], //宽高
+				  content: '<div  style = "background:#F2F2F2;padding:50px 50px 50px 50px">'+
+							'	<p>委托价格：<input style="background:#FFFFFF;border:1px solid  #ABABAB" type="text" value = "'+orderPrice+'"  id="update_des_price"/></p>'+
+							'	<p style = "padding-top:10px;">委托数量：<input  style="background:#FFFFFF;border:1px solid  #ABABAB" type="number" value = "'+orderNum+'"  id="update_des_number"/></p>'+
+							'</div>',
+					 btn: ['确认改单', '关闭'], //
+					 yes: function(){
+						 var price = $("#update_des_price").val();
+						 var number = $("#update_des_number").val();
+						 if(price <= 0){
+							 layer.tips("价格输入错误", '#update_des_price');
+							 return;
+						 }
+						 if(number <= 0){
+							 layer.tips("数量输入错误", '#update_des_number');
+							 return;
+						 }
+						 var tipContent = "确认改单合约【"+contractCode+"】"; 
+						 tipConfirm(tipContent,doInsertChangeSingleOrder,cancleCallBack());
+					 },
+					 btn2: function(){
+						 layer.closeAll();
+					 }
+				});
+			//$("#change").show();
+			//
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+}
 /**
  * 下单
  */
@@ -1034,8 +1067,6 @@ function doInsertSellingOrder(){
 		tip("未选择平仓信息");
 		return;
 	}
-	var tipContent = "确认平仓合约"+contractCode+"";
-	if(!tipConfirm(tipContent)){return;}
 	var tradeParam = doGetSellingBasicParam(contractCode);
 	var param = new Array();
 	param[0] = tradeParam;
@@ -1172,10 +1203,10 @@ function doGetCancleOrderBasicParam(obj){
 		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
 		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
 		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
-		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig6']").text();
-		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig8']").text();
-		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig9']").text();
-		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'desig7']").text();
+		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'des6']").text();
+		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des8']").text();
+		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des9']").text();
+		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des7']").text();
 		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
 		var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
 	return cancleOrderParam;
@@ -1223,9 +1254,20 @@ function sumListfloatingProfit(){
 		price = price + float * detailCurrencyRateText;
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
 	}
-	
 }
-
+/**
+ * 清除交易列表的数据并生成操作按钮
+ */
+function clearTradListData(){
+	$("#account_title").html("");
+	$("#order_title").html("");
+	$("#des_title").html("");
+	$("#trade_title").html("");
+	$("#hold_title").html("");
+	generateHoldHandleDom();
+	generateDesHandleDom();
+	bindOpertion();
+}
 /**
  * 输入价格或数量验证 
  */

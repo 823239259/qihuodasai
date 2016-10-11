@@ -51,7 +51,9 @@ function generateRealTimeQuote(obj){
 		var html = '<ul class="';
 					if(i == 0){
 						html+=' on ';
-						setLocalCacheSelect(commodityNo+mainContract);
+						var contractCode  = commodityNo+mainContract;
+						setLocalCacheSelect(contractCode);
+						$("#commodity_title").text(commodityName+"  "+contractCode);
 					}
 					html+= '  left_xiangmu '+cls+'" data-tion-com = "'+(commodityNo+mainContract)+'" data="'+commodityNo+'&amp;'+mainContract+'&amp;'+exchangeNo+'">'+
 					'	<li class="futures_name">'+
@@ -337,10 +339,9 @@ function updateFloatingfit(param){
 	var miniTikeSize = localCommodity.MiniTikeSize;
 	var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($openAvgPrice) , contractSize,miniTikeSize,parseInt($holdNum),drection);
 	var floatProfit = floatP +":"+ localCommodity.CurrencyNo;
-	$float.css("width","160px");
 	$float.text(floatProfit);
 	$floatP.text(floatP);
-	
+	$float.css("width","160px");
 	if(parseFloat(floatP) < 0 ){
 		$float.css("color","green");
 	}else if(parseFloat(floatP) > 0){

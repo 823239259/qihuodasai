@@ -22,17 +22,17 @@ function isEmpty(str) {
  * @param {Object} name
  * @param {Object} time
  */
-function setCookie(key, name , time) {
+function setTradeCookie(key, name) {
 	var Days = 30;
 	var exp = new Date();
 	exp.setTime(exp.getTime() + Days*24*60*60*1000);
-	document.cookie = key + "="+ escape (name) + ";expires=" + exp.toGMTString();
+	document.cookie = key + "="+ escape (name) + ";expires=";
 }
 /**
  * 获取cookie
  * @param {Object} key
  */
-function getCookie(key){
+function getTradeCookie(key){
 	var arr,reg=new RegExp("(^| )"+key+"=([^;]*)(;|$)");
 	if(arr=document.cookie.match(reg))
 		return unescape(arr[2]);
@@ -43,10 +43,10 @@ function getCookie(key){
  * 删除cookie
  * @param {Object} key
  */
-function delCookie(key){
+function delTradeCookie(key){
 	var exp = new Date();
 	exp.setTime(exp.getTime() - 1);
-	var cval=getCookie(key);
+	var cval=getTradeCookie(key);
 	if(cval!=null)
 		document.cookie= key + "="+cval+";expires="+exp.toGMTString();
 }
