@@ -97,6 +97,6 @@ function createModifyOrderParam(orderSysId, orderId, exchangeNo, commodityNo, co
 	this.orderNum = orderNum;
 	this.drection = drection;
 	this.orderPrice = orderPrice;
-	this.triggerPrice = TriggerPrice;
+	this.triggerPrice = triggerPrice;
 	return this;
 }

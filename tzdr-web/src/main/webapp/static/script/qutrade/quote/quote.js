@@ -56,7 +56,7 @@ function generateRealTimeQuote(obj){
 					html+= '  left_xiangmu '+cls+'" data-tion-com = "'+(commodityNo+mainContract)+'" data="'+commodityNo+'&amp;'+mainContract+'&amp;'+exchangeNo+'">'+
 					'	<li class="futures_name">'+
 					'    	<span class="futures_mz">'+commodityName+'</span>'+
-					'    	<span class="futures_bm">'+mainContract+'</span>'+
+					'    	<span class="futures_bm">'+commodityNo+mainContract+'</span>'+
 					'    </li>'+
 					'    <li class="qlast" style="color: #30bf30;"></li>'+
 					'    <li class="futures_number"></li>'+
@@ -125,6 +125,8 @@ function quotePush(obj){
 	updateRight(param);
 	//初始化设置最新价格
 	setTradeLastPrice(param);
+	//设置买卖的浮动价格
+	setBuyAndSellFloatPrice(param);
 }
 /**
  * 订阅行情
@@ -151,7 +153,7 @@ function loadSelectData(param){
 		var commodityNo = data.CommodityNo;
 		var mainContract = data.MainContract;
 		var contractCode = commodityNo+mainContract;
-		var html = "<option value='"+contractCode+"'>"+commodityName+"</option>";
+		var html = "<option value='"+contractCode+"'>"+commodityName+"     "+commodityNo+mainContract+"</option>";
 		$("#select_commodity").append(html);
 	}
 }
@@ -180,6 +182,10 @@ function setTradeInitData(param){
 	}
 }
 /**
+ * 委托价格输入框的设置次数
+ */
+var moneyNumberIndex = 0 ;
+/**
  * 设置最新价格
  * @param price
  */
@@ -189,9 +195,34 @@ function setTradeLastPrice(param){
 	var newContractNo = param.ContractNo; 
 	var contractCode = newCommdityNo+newContractNo;
 	if(selectContractCode == contractCode){
-		$("#trade_data #lastPrice").val(parseFloat(param.LastPrice).toFixed(2));
+		var lastPrice = parseFloat(param.LastPrice).toFixed(2);
+		if(isNaN(lastPrice)){return;}
+		$("#trade_data #lastPrice").val(lastPrice);
+		if(getMoneyNumberIndex() == 0){
+			$("#money_number").val(lastPrice);
+			setMoneyNumberIndex(1);
+		}
 	}
 }
+/**
+ * 设置买卖的浮动价格
+ * @param
+ */
+function setBuyAndSellFloatPrice(param){
+	var newCommdityNo = param.CommodityNo;
+	var newContractNo = param.ContractNo; 
+	var contractCode = newCommdityNo+newContractNo;
+	var localCommodity = localCacheCommodity[contractCode];
+	if(localCommodity != undefined){
+		var selectContractCode = $("#select_commodity").val();
+		if(selectContractCode == contractCode){
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			var lastPrice = param.LastPrice;
+			$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+			$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+		}
+	}
+};
 /**
  * 行情列表绑定点击事件
  * @param cls
@@ -209,6 +240,8 @@ function addQuoteListBindClick(cls){
 		 setSelectOption(contractCode);
 		 setLocalCacheSelect(contractCode);
 		 clearRightData();
+		 setMoneyNumberIndex(0);
+		 
 	});
 }
 /**
@@ -218,15 +251,20 @@ function addQuoteListBindClick(cls){
 function setSelectOption(contractCode){
 	$("#select_commodity").val(contractCode);
 	var localCommodity = localCacheCommodity[contractCode];
-	console.log(localCommodity);
 	var localQoute = localCacheQuote[contractCode];
-	$("#trade_data #lastPrice").val(localQoute.LastPrice);
-	$("#trade_data #miniTikeSize").val(localCommodity.MiniTikeSize);
+	var miniTikeSize = localCommodity.MiniTikeSize;
+	var lastPrice = localQoute.LastPrice;
+	$("#trade_data #lastPrice").val(lastPrice);
+	$("#trade_data #miniTikeSize").val(miniTikeSize);
 	$("#trade_data #contractSize").val(localCommodity.ContractSize);
 	$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
 	$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
 	$("#trade_data #contractNo").val(localCommodity.MainContract);
 	$("#trade_data #doSize").val(localCommodity.DotSize);
+	$("#money_number").val(localQoute.LastPrice);
+	$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
+	$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+	$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
 }
 /**
  * 更新行情列表索引
@@ -324,6 +362,18 @@ function getLocalCacheSelect(){
 	return localCacheSelect;
 }
 /**
+ * 设置当前设置委托初始化价格的次数
+ */
+function setMoneyNumberIndex(count){
+	moneyNumberIndex = count;
+}
+/**
+ * 获取当前设置委托初始化价格的次数
+ */
+function getMoneyNumberIndex(){
+	return moneyNumberIndex;
+}
+/**
  * 更新右边数据
  * @param param
  */
@@ -337,6 +387,7 @@ function updateRight(param){
 	if(localCommodity != undefined){
 		doSize = localCommodity.DotSize;
 	}
+	//
 	//最新价
 	$("#right_lastPrice_0").text(parseFloat(param.LastPrice).toFixed(doSize));
 	//昨结

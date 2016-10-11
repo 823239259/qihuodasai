@@ -17,6 +17,9 @@
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/jquery-1.8.3.js?v=${v}"></script>
 
+<script type='text/javascript' src="${ctx}/static/script/layer/layer.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/layer/skin/layer.css/layer.js?v=${v}"></script>
+
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.config.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.send.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.connection.js?v=${v}"></script>
@@ -296,11 +299,11 @@
 					<div class="quotation_type_fr">
 						<ul class="mairu trade_buy" data-tion-buy = "0">
 							<li style="border-bottom: 1px solid #ff8c8c;">买入</li>
-							<li>1025.2</li>
+							<li id = "float_buy">0.00</li>
 						</ul>
 						<ul class="maichu trade_buy" data-tion-buy = "1" style="margin-left: 8px;">
 							<li style="border-bottom: 1px solid #83d983">卖出</li>
-							<li>1025.2</li>
+							<li id = "float_sell">0.00</li>
 						</ul>
 					</div>
 				</div>

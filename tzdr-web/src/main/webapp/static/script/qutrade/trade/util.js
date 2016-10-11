@@ -59,3 +59,32 @@ function isJson(obj){
 	var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length; 
 	return isjson;
 }
+/**
+ * 提示询问层
+ * @param tipContent
+ */
+function tipConfirm(tipContent,successCallBack,cancleCallBack){
+	//询问框
+	layer.confirm(tipContent+"?", {
+	  btn: ['确认','取消'] //按钮
+	}, function(){
+		successCallBack();
+	}, function(){
+		cancleCallBack();
+	});
+}
+function cancleCallBack(){}
+/**
+ * 弹出层
+ * @param tipContent
+ */
+function tipAlert(tipContent){
+	layer.alert(tipContent);
+}
+/**
+ * 提示层
+ * @param tioContent
+ */
+function tip(tipContent){
+	layer.msg(tipContent);
+}

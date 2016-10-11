@@ -106,7 +106,6 @@ var Trade = {
 							+' "LimitPrice":'+ limitPrice +','
 							+' "TriggerPrice":'+ triggerPrice +','
 							+' "OrderRef":"'+ orderRef +'"}';
-				console.log(limitPrice);
 				Trade.doSendMessage(TradeUrl.InsertOrderUrl,param);
 			},
 			/**

@@ -135,12 +135,6 @@ function initTradeConnect(){
 	 * 交易数据初始化加载 --> trade.connection
 	 */
 	initLoad();
-	/*var loadTradeInterVal = setInterval(function(){
-		var result = 
-		if(result){
-			clearInterval(loadTradeInterVal);
-		}
-	}, 500);*/
 	
 }
 function initTrade(){
