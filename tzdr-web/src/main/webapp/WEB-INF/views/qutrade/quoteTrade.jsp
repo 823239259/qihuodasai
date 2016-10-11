@@ -225,6 +225,16 @@
 			        <div id="app">
 			            <!-- http://localhost:8088/tzdr-web/static/ico/MSFT_full.json -->
 			        </div>
+			        <div id="qiehuan">
+			        	<ul>
+			        		<li id="carbon_time">分时</li>
+			        		<li id="carbon_oneMinute">1分</li>
+			        		<li id="carbon_fiveMinute">5分</li>
+			        		<li id="carbon_fifteenMinute">15分</li>
+			        		<li id="carbon_halfhourMinute">30分</li>
+			        		<li id="carbon_oneDay">日K</li>
+			        	</ul>
+			        </div>
     			</div>
     		</div>
     	</div>
