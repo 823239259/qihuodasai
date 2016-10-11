@@ -120,6 +120,8 @@
 #qiehuan {font-size: 14px; color: #999; position: absolute; right: 0; height: 34px; line-height: 34px;}
 #qiehuan ul li {float: left; margin: 0 10px;}
 #qiehuan ul li:hover {color: #ffb319; cursor: pointer;}
+#change input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 10px; width: 195px; color: #666; margin-top: 10px; margin-left: 10px;}
+
 
 /* 插件行情 */
 .dropdown,.dropup{position:relative}
@@ -137,7 +139,7 @@
 .open>.dropdown-menu li {list-style-type: none; width: 88px; height: 30px; line-height: 30px; padding-left: 10px;}
 .open>.dropdown-menu li:hover {background-color: #f5f5f5;}
 .open>.dropdown-menu li a {color: #333; text-decoration: none;}
-.open>.dropdown-menu li.dropdown-header {display: none;}
+.open>.dropdown-menu li.dropdown-header {display: none;} 
 
 /* 弹出层  */
 .tck01 {width: 360px; position: fixed;}

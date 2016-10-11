@@ -92,52 +92,65 @@ $(function() {
 		function weidenglu(){
 			$("#weidenglu").css("display","block");
 			$("#div_Mask").show();
-			var windowWidth = document.documentElement.clientWidth;   
-			var windowHeight = document.documentElement.clientHeight;   
-			var popupHeight = $(".tck01").height();   
-			var popupWidth = $(".tck01").width();    
-			$(".tck01").css({     
-			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-			 "left": (windowWidth-popupWidth)/2   
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
 			});
 		}
 		/*买入*/
 		function mairu(){
 			$("#mairu").css("display","block");
 			$("#div_Mask").show();
-			var windowWidth = document.documentElement.clientWidth;   
-			var windowHeight = document.documentElement.clientHeight;   
-			var popupHeight = $(".tck01").height();   
-			var popupWidth = $(".tck01").width();    
-			$(".tck01").css({     
-			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-			 "left": (windowWidth-popupWidth)/2   
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
 			});
 		}
 		/*卖出*/
 		function maichu(){
 			$("#maichu").css("display","block");
 			$("#div_Mask").show();
-			var windowWidth = document.documentElement.clientWidth;   
-			var windowHeight = document.documentElement.clientHeight;   
-			var popupHeight = $(".tck01").height();   
-			var popupWidth = $(".tck01").width();    
-			$(".tck01").css({     
-			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-			 "left": (windowWidth-popupWidth)/2   
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
 			});
 		}
 		/*撤单*/
 		function revoke(){
-			$("#revoke").css("display","block");
+			$("#change").css("display","block");
 			$("#div_Mask").show();
-			var windowWidth = document.documentElement.clientWidth;   
-			var windowHeight = document.documentElement.clientHeight;   
-			var popupHeight = $(".tck01").height();   
-			var popupWidth = $(".tck01").width();    
-			$(".tck01").css({     
-			 "top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
-			 "left": (windowWidth-popupWidth)/2   
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+		}
+		/*改单*/
+		function change(){
+			$("#change").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
 			});
 		}
 		/*隐藏*/

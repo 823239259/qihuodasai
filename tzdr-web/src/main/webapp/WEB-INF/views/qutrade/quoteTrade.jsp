@@ -111,6 +111,21 @@
 	 		<a class="cancel close">否</a>
 	 	</div>
 	</div>
+	<div class="tck01" id="change" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">提示</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div>
+				<p>修改委托价格：<input type="text" name="" id=""/></p>
+				<p>修改委托数量：<input type="text" name="" id=""/></p>
+			</div>
+		</div>
+		<div class="anniu">
+	 		<a class="sure" href="javascript:void(0)">确认改单</a>
+	 		<a class="cancel close">取消改单</a>
+	 	</div>
+	</div>
 </div>
 <!-- top -->
 <div class="quotation_title">
