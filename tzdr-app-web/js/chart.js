@@ -2,7 +2,7 @@ var marketCommdity = {};
 function setMarketCommdity (key,value){
 	marketCommdity[key] = value;
 }
-var marketCommdityLastPrice = {};
+var marketCommdityLastPrice = {}; 
 function setMarketCommdityLastPrice(key,value){
 	marketCommdityLastPrice[key] = value;
 }
