@@ -88,15 +88,6 @@ $(function() {
 			$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
 			_this.addClass("on");
 		});
-/* 弹出层 开始 */
-		$(function() {
-			$("#trade_login").click(function() {
-				weidenglu();
-				//mairu();
-				//revoke();
-				//maichu();
-			});
-		});
 		/*是否登录*/
 		function weidenglu(){
 			$("#weidenglu").css("display","block");
