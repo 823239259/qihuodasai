@@ -411,9 +411,9 @@ function appendTradeSuccess(param){
 				'	<li class = "trade2">'+tradePrice+'</li>'+
 				'	<li class = "trade3">'+tradeNum+'</li>'+
 				'	<li class = "trade4">'+currencyNo+'</li>'+
-				'	<li class = "trade5">'+tradeNo+'</li>'+
+				'	<li class = "trade5" style="width: 150px;">'+tradeNo+'</li>'+
 				'	<li class = "trade6">'+orderId+'</li>'+
-				'	<li class = "trade7">'+tradeTime+'</li>'+
+				'	<li class = "trade7" style="width: 130px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_title .tab_lis").after(html);
@@ -554,6 +554,7 @@ function updatePostion(param){
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
 			floatingProft = floatP +":"+ currencyNo; 
 		}
+		$floatingProfit.css("width","160px");
 		$floatingProfit.text(floatingProft);
 		$floatP.text(floatP);
 		if(floatP < 0 ){

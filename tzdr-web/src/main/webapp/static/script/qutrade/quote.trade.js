@@ -82,12 +82,14 @@ $(function() {
 			}
 		});
 		/*交易ul li  odd even odd  li:nth-of-type(even)*/
-		$(".quotation_detailed .quotation_detailed_title .tab_content:even").addClass("even");
-		$(".quotation_detailed .quotation_detailed_title .tab_content").click(function() {
-			var _this = $(this);
-			$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
-			_this.addClass("on");
-		});
+		$(document).ready(function() {
+			$(".quotation_detailed .quotation_detailed_title .tab_content:even").addClass("even");
+			$(".quotation_detailed .quotation_detailed_title .tab_content").click(function() {
+				var _this = $(this);
+				$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
+				_this.addClass("on");
+			});
+		}); 
 		/*是否登录*/
 		function weidenglu(){
 			$("#weidenglu").css("display","block");

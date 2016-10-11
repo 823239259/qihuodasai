@@ -337,8 +337,10 @@ function updateFloatingfit(param){
 	var miniTikeSize = localCommodity.MiniTikeSize;
 	var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($openAvgPrice) , contractSize,miniTikeSize,parseInt($holdNum),drection);
 	var floatProfit = floatP +":"+ localCommodity.CurrencyNo;
+	$float.css("width","160px");
 	$float.text(floatProfit);
 	$floatP.text(floatP);
+	
 	if(parseFloat(floatP) < 0 ){
 		$float.css("color","green");
 	}else if(parseFloat(floatP) > 0){

@@ -100,10 +100,9 @@
 .quotation_detailed .quotation_detailed_title .tab_content.even{background: #404040;} 
 .quotation_detailed .quotation_detailed_title .tab_content:hover {background: #4d4d4d; cursor: pointer;}
 .quotation_detailed .quotation_detailed_title .tab_content.on{background: #4d4d4d;} 
-.quotation_detailed .quotation_detailed_title li {width: 70px;}
+.quotation_detailed .quotation_detailed_title li {width: 70px; height: 30px;  line-height: 30px;}
 .quotation_detailed .quotation_detailed_title .ml {padding-left:20px;}
 .quotation_detailed .quotation_detailed_title {height: 116px; overflow-y: scroll;}
-.quotation_detailed .quotation_detailed_title {}
 .quotation_detailed .quotation_detailed_qx {margin-top: 60px; height: 60px;  line-height: 60px; border-top: 1px solid #1a1a1a;}
 .quotation_detailed_qx {color: #999; font-size: 14px;}
 .quotation_detailed_qx label span{color: #ccc;}

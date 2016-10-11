@@ -323,7 +323,7 @@
 			        		<li>持仓数量</li>
 			        		<li>买卖</li>
 			        		<li>持仓均价</li>
-			        		<li>浮动盈利</li>
+			        		<li style="width: 160px;">浮动盈利</li>
 			        		<li>交易所</li>
 			        		<li>币种</li>
 			        	</ul>
@@ -369,9 +369,9 @@
 			        		<li>成交均价</li>
 			        		<li>成交量</li>
 			        		<li>币种</li>
-			        		<li>成交编号</li>
+			        		<li style="width: 150px;">成交编号</li>
 			        		<li>订单号</li>
-			        		<li>成交时间</li>
+			        		<li style="width: 130px;">成交时间</li>
 			        		<li>交易所</li>
 			        	</ul>
 			        </div>
