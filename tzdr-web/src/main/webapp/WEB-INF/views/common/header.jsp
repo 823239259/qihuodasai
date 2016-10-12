@@ -18,7 +18,7 @@
        		}else{
        	%>
        	<ul>
-       		<li class="sign"><a href="javascript:void(0)" id="signin">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
+       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
             <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
             <li><a href="${ctx}/help?tab=rule&leftMenu=1" target="_blank">新手指南</a></li>
         </ul>
@@ -69,7 +69,7 @@
     </div>
 </div>
 <!-- 弹出层登录 -->
-<div class="tck01" id="signin_box" style="display: none;">
+<%-- <div class="tck01" id="signin_box" style="display: none;">
 	<div class="navtitle">
 		<span class="nava">注册登录！</span><a class="close" onclick="javascript:closeDiv('signin_box')"></a>
 	</div>
@@ -89,4 +89,4 @@
  			<button id="login_box" type="button">立即登录</button>
 		</form>
 	</div>
-</div>
+</div> --%>
