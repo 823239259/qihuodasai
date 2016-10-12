@@ -287,14 +287,14 @@ function appendOrder(param){
 	var cls = "order-index" + orderIndex;
 	var html = '<ul class="tab_content '+cls+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
 				'	<li class="ml order0">'+contractCode+'</li>'+
-				'	<li class = "order1">'+drectionText+'</li>'+
+				'	<li class = "order1" style="width: 50px;">'+drectionText+'</li>'+
 				'	<li class = "order2">'+orderPrice+'</li>'+
-				'	<li class = "order3">'+orderNum+'</li>'+
+				'	<li class = "order3" style="width: 50px;">'+orderNum+'</li>'+
 				'	<li class = "order4">'+triggerPrice+'</li>'+
 				'	<li class = "order5">'+ordreStatusText+'</li>'+
-				'	<li class = "order6">'+tradePrice+'</li>'+
-				'	<li class = "order7">'+tradeNum+'</li>'+
-				'	<li class = "order8">'+insertDateTime+'</li>'+
+				'	<li class = "order6" style="width: 150px;">'+tradePrice+'</li>'+
+				'	<li class = "order7" style="width: 50px;">'+tradeNum+'</li>'+
+				'	<li class = "order8" style="width: 120px;">'+insertDateTime+'</li>'+
 				'	<li class = "order9">'+orderId+'</li>'+
 				'</ul>';
 	$("#order_title .tab_lis").after(html);
@@ -352,7 +352,7 @@ function appendDesignates(param){
 				'	<li class="ml des0">'+contractCode+'</li>'+
 				'	<li class = "des1">'+contractCode+'</li>'+
 				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
-				'	<li class = "des3">'+orderPrice+'</li>'+
+				'	<li class = "des3" style="width: 120px;">'+orderPrice+'</li>'+
 				'	<li class = "des4">'+orderNum+'</li>'+
 				'	<li class = "des5">'+(orderNum - tradeNum)+'</li>'+
 				'	<li class = "des6"  style = "display:none;">'+orderSysId+'</li>'+
@@ -422,13 +422,13 @@ function appendTradeSuccess(param){
 	var cls = 'trade-index'+tradesIndex;
 	var html = '<ul class="tab_content '+cls+'"  data-index-trade = "'+tradesIndex+'" data-tion-trade = "'+contractCode+'">'+
 				'	<li class="ml trade0">'+contractCode+'</li>'+
-				'	<li class = "trade1">'+drectionText+'</li>'+
-				'	<li class = "trade2">'+tradePrice+'</li>'+
-				'	<li class = "trade3">'+tradeNum+'</li>'+
+				'	<li class = "trade1" style="width: 30px;">'+drectionText+'</li>'+
+				'	<li class = "trade2" style="width: 120px;">'+tradePrice+'</li>'+
+				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
 				'	<li class = "trade4">'+currencyNo+'</li>'+
-				'	<li class = "trade5">'+tradeNo+'</li>'+
+				'	<li class = "trade5" style="width: 150px;">'+tradeNo+'</li>'+
 				'	<li class = "trade6">'+orderId+'</li>'+
-				'	<li class = "trade7">'+tradeTime+'</li>'+
+				'	<li class = "trade7" style="width: 120px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_title .tab_lis").after(html);
@@ -507,10 +507,10 @@ function addPostion(param){
 		
 		var cls = "postion-index"+postionIndex;
 		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
-					'	<li class="position0 ml" style="width: 100px;">'+contractCode+'</li>'+
-					'	<li  class = "position1">'+holdNum+'</li>'+
-					'	<li  class = "position2" data-drection = "'+drection+'">'+drectionText+'</li>'+
-					'	<li  class = "position3">'+holdAvgPrice+'</li>'+
+					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
+					'	<li  class = "position1" style="width: 50px;">'+holdNum+'</li>'+
+					'	<li  class = "position2" style="width: 30px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
+					'	<li  class = "position3" style="width: 120px;">'+holdAvgPrice+'</li>'+
 					'	<li  class = "position4">'+floatingProfit+'</li>'+
 					'	<li  class = "position5">'+exchangeNo+'</li>'+
 					'	<li  class = "position6">'+currencyNo+'</li>'+

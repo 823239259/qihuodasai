@@ -64,13 +64,13 @@
 
 /* 最小屏 1366 */
 @media screen and (max-width: 1366px) {
-	.quotation_title {width: 1349px;}
-	.quotation_center {width: 1349px;}
+	.quotation_title {width: 1366px;}
+	.quotation_center {width: 1366px;}
 	#content .quotation_echarts {
-		width: 1144px;
+		/* width: 1144px; */
 	}
 	#content .quotation_transaction .quotation_detailed {
-		width: 798px;
+		/* width: 798px; */
 	}
 }
 /* 买入卖出 */
@@ -116,7 +116,7 @@
 .quotation_detailed .quotation_detailed_qx {margin-top: 60px; height: 60px;  line-height: 60px; border-top: 1px solid #1a1a1a;}
 .quotation_detailed_qx {color: #999; font-size: 14px;}
 .quotation_detailed_qx label span{color: #ccc;}
-.quotation_detailed_qx label{margin-right: 30px;}
+.quotation_detailed_qx label{}
 .quotation_detailed_qx a{width: 90px; height: 30px; line-height: 30px; display: inline-block; background: #ffb319; text-align: center; text-decoration: none; color: #333; border-radius: 4px;}
 .quotation_detailed_qx a:hover {background: #ff9f19;}
 .quotation_detailed .quotation_detailed_title .caozuo {position: absolute; bottom: -45px; left: 14px;}

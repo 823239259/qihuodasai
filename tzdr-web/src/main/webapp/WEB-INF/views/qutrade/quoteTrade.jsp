@@ -325,10 +325,10 @@
 			    <div class="quotation_detailed_conent" style="position: relative;">
 			        <div class="quotation_detailed_title" id = "hold_title">
 			        	<ul class="tab_lis">
-			        		<li class="ml" style="width: 100px;">合约代码</li>
-			        		<li>持仓数量</li>
-			        		<li>买卖</li>
-			        		<li>持仓均价</li>
+			        		<li class="ml" style="width: 80px;">合约代码</li>
+			        		<li style="width: 50px;">持仓数量</li>
+			        		<li style="width: 30px;padding-left:10px">买卖</li>
+			        		<li style="width: 120px;">持仓均价</li>
 			        		<li style="width: 160px;">浮动盈利</li>
 			        		<li>交易所</li>
 			        		<li>币种</li>
@@ -342,14 +342,14 @@
 			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml">合约代码</li>
-			        		<li>买卖</li>
+			        		<li style="width: 50px;">买卖</li>
 			        		<li>委托价</li>
-			        		<li>委托量</li>
+			        		<li style="width: 50px;">委托量</li>
 			        		<li>触发价</li>
 			        		<li>委托状态</li>
-			        		<li>成交均价</li>
-			        		<li>成交量</li>
-			        		<li>撤单时间</li>
+			        		<li style="width: 150px;">成交均价</li>
+			        		<li style="width: 50px;">成交量</li>
+			        		<li style="width: 120px;">撤单时间</li>
 			        		<li>订单号</li>
 			        	</ul>
 			        </div>
@@ -358,7 +358,7 @@
 			        		<li class="ml">合约代码</li>
 			        		<li>合约名称</li>
 			        		<li>买卖</li>
-			        		<li>委托价</li>
+			        		<li style="width: 120px;">委托价</li>
 			        		<li>委托量</li>
 			        		<li>挂单量</li>
 			        	</ul>
@@ -371,13 +371,13 @@
 			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml">合约代码</li>
-			        		<li>买卖</li>
-			        		<li>成交均价</li>
-			        		<li>成交量</li>
+			        		<li style="width: 30px;">买卖</li>
+			        		<li style="width: 120px;">成交均价</li>
+			        		<li style="width: 50px;">成交量</li>
 			        		<li>币种</li>
 			        		<li style="width: 150px;">成交编号</li>
 			        		<li>订单号</li>
-			        		<li style="width: 130px;">成交时间</li>
+			        		<li style="width: 120px;">成交时间</li>
 			        		<li>交易所</li>
 			        	</ul>
 			        </div>
