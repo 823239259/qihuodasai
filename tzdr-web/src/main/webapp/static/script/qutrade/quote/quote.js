@@ -420,6 +420,7 @@ function updateRight(param){
 	if(localCommodity != undefined){
 		doSize = localCommodity.DotSize;
 	}
+	var preSettlePrice = param.PreSettlePrice;
 	//
 	//最新价
 	$("#right_lastPrice_0").text(parseFloat(param.LastPrice).toFixed(doSize));
@@ -449,26 +450,86 @@ function updateRight(param){
 	//总量
 	$("#right_zd_3").text(parseFloat(param.LowPrice).toFixed(doSize));
 	//卖五-卖一
-	$("#right_sell_0").text(parseFloat(param.AskPrice5).toFixed(doSize));
+	var askPrice5 = param.AskPrice5;
+	if(askPrice5 > preSettlePrice){
+		$("#right_sell_0").css("color","red");
+	}else{
+		$("#right_sell_0").css("color","green");
+	}
+	$("#right_sell_0").text(parseFloat(askPrice5).toFixed(doSize));
 	$("#right_sell_1").text(parseFloat(param.AskQty5).toFixed(doSize));
-	$("#right_sell_2").text(parseFloat(param.AskPrice4).toFixed(doSize));
+	var askPrice4 = param.AskPrice4;
+	if(askPrice4 > preSettlePrice){
+		$("#right_sell_2").css("color","red");
+	}else{
+		$("#right_sell_2").css("color","green");
+	}
+	$("#right_sell_2").text(parseFloat(askPrice4).toFixed(doSize));
 	$("#right_sell_3").text(parseFloat(param.AskQty4).toFixed(doSize));
-	$("#right_sell_4").text(parseFloat(param.AskPrice3).toFixed(doSize));
+	var askPrice3 = param.AskPrice3;
+	if(askPrice3 > preSettlePrice){
+		$("#right_sell_4").css("color","red");
+	}else{
+		$("#right_sell_4").css("color","green");
+	}
+	$("#right_sell_4").text(parseFloat(askPrice3).toFixed(doSize));
 	$("#right_sell_5").text(parseFloat(param.AskQty3).toFixed(doSize));
-	$("#right_sell_6").text(parseFloat(param.AskPrice2).toFixed(doSize));
+	var  askPrice2 = param.AskPrice2;
+	if(askPrice2 > preSettlePrice){
+		$("#right_sell_6").css("color","red");
+	}else{
+		$("#right_sell_6").css("color","green");
+	}
+	$("#right_sell_6").text(parseFloat(askPrice2).toFixed(doSize));
 	$("#right_sell_7").text(parseFloat(param.AskQty2).toFixed(doSize));
-	$("#right_sell_8").text(parseFloat(param.AskPrice1).toFixed(doSize));
+	var  askPrice1 = param.AskPrice1;
+	if(askPrice1 > preSettlePrice){
+		$("#right_sell_8").css("color","red");
+	}else{
+		$("#right_sell_8").css("color","green");
+	}
+	$("#right_sell_8").text(parseFloat(askPrice1).toFixed(doSize));
 	$("#right_sell_9").text(parseFloat(param.AskQty1).toFixed(doSize));
 	//买五-买一
-	$("#right_buy_0").text(parseFloat(param.BidPrice5).toFixed(doSize));
+	var  bidPrice5 = param.BidPrice5;
+	if(bidPrice5 > preSettlePrice){
+		$("#right_buy_0").css("color","red");
+	}else{
+		$("#right_buy_0").css("color","green");
+	}
+	$("#right_buy_0").text(parseFloat(bidPrice5).toFixed(doSize));
 	$("#right_buy_1").text(parseFloat(param.BidQty5).toFixed(doSize));
-	$("#right_buy_2").text(parseFloat(param.BidPrice4).toFixed(doSize));
+	var  bidPrice4 = param.BidPrice4;
+	if(bidPrice4 > preSettlePrice){
+		$("#right_buy_2").css("color","red");
+	}else{
+		$("#right_buy_2").css("color","green");
+	}
+	$("#right_buy_2").text(parseFloat(bidPrice4).toFixed(doSize));
 	$("#right_buy_3").text(parseFloat(param.BidQty4).toFixed(doSize));
-	$("#right_buy_4").text(parseFloat(param.BidPrice3).toFixed(doSize));
+	var  bidPrice3 = param.BidPrice3;
+	if(bidPrice3 > preSettlePrice){
+		$("#right_buy_4").css("color","red");
+	}else{
+		$("#right_buy_4").css("color","green");
+	}
+	$("#right_buy_4").text(parseFloat(bidPrice3).toFixed(doSize));
 	$("#right_buy_5").text(parseFloat(param.BidQty3).toFixed(doSize));
-	$("#right_buy_6").text(parseFloat(param.BidPrice2).toFixed(doSize));
+	var  bidPrice2 = param.BidPrice2;
+	if(bidPrice2 > preSettlePrice){
+		$("#right_buy_6").css("color","red");
+	}else{
+		$("#right_buy_6").css("color","green");
+	}
+	$("#right_buy_6").text(parseFloat(bidPrice2).toFixed(doSize));
 	$("#right_buy_7").text(parseFloat(param.BidQty2).toFixed(doSize));
-	$("#right_buy_8").text(parseFloat(param.BidPrice1).toFixed(doSize));
+	var  bidPrice1 = param.BidPrice1;
+	if(bidPrice1 > preSettlePrice){
+		$("#right_buy_8").css("color","red");
+	}else{
+		$("#right_buy_8").css("color","green");
+	}
+	$("#right_buy_8").text(parseFloat(bidPrice1).toFixed(doSize));
 	$("#right_buy_9").text(parseFloat(param.BidQty1).toFixed(doSize));
 }
 function clearRightData(){
