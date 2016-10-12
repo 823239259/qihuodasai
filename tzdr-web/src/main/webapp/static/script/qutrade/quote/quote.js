@@ -100,6 +100,7 @@ function searchQuote(){
 			dom.css("display","block");
 		}else{
 			dom.css("display","none");
+			$("#gdt").css("background","#333");
 		}
 	}
 }
