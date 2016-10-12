@@ -96,7 +96,7 @@ function searchQuote(){
 		var mainContract = data.MainContract;
 		var contractCode  = commodityNo+mainContract;
 		var dom = $("ul[data-tion-com='"+contractCode+"']");
-		if(commodityName.indexOf(inputValue) != -1 || contractCode.indexOf(inputValue) != -1){
+		if((commodityName.toLowerCase()).indexOf(inputValue.toLowerCase()) != -1 || (contractCode.toLowerCase()).indexOf(inputValue.toLowerCase()) != -1){
 			dom.css("display","block");
 		}else{
 			dom.css("display","none");
