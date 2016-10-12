@@ -512,22 +512,22 @@ function updateRight(param){
 	$("#right_sell_8").text(parseFloat(askPrice1).toFixed(doSize));
 	$("#right_sell_9").text(param.AskQty1);
 	//买五-买一
-	var  bidPrice5 = param.BidPrice5;
-	if(bidPrice5 > preSettlePrice){
+	var  bidPrice1 = param.BidPrice1;
+	if(bidPrice1 > preSettlePrice){
 		$("#right_buy_0").css("color","#ff5500");
 	}else if(bidPrice5 < preSettlePrice){
 		$("#right_buy_0").css("color","#0bffa4");
 	}
-	$("#right_buy_0").text(parseFloat(bidPrice5).toFixed(doSize));
-	$("#right_buy_1").text(param.BidQty5);
-	var  bidPrice4 = param.BidPrice4;
-	if(bidPrice4 > preSettlePrice){
+	$("#right_buy_0").text(parseFloat(bidPrice1).toFixed(doSize));
+	$("#right_buy_1").text(param.BidQty1);
+	var  bidPrice2 = param.BidPrice2;
+	if(bidPrice2 > preSettlePrice){
 		$("#right_buy_2").css("color","#ff5500");
-	}else if(bidPrice4 < preSettlePrice){
+	}else if(bidPrice2 < preSettlePrice){
 		$("#right_buy_2").css("color","#0bffa4");
 	}
-	$("#right_buy_2").text(parseFloat(bidPrice4).toFixed(doSize));
-	$("#right_buy_3").text(param.BidQty4);
+	$("#right_buy_2").text(parseFloat(bidPrice2).toFixed(doSize));
+	$("#right_buy_3").text(param.BidQty2);
 	var  bidPrice3 = param.BidPrice3;
 	if(bidPrice3 > preSettlePrice){
 		$("#right_buy_4").css("color","#ff5500");
@@ -536,22 +536,22 @@ function updateRight(param){
 	}
 	$("#right_buy_4").text(parseFloat(bidPrice3).toFixed(doSize));
 	$("#right_buy_5").text(param.BidQty3);
-	var  bidPrice2 = param.BidPrice2;
-	if(bidPrice2 > preSettlePrice){
+	var  bidPrice4 = param.BidPrice4;
+	if(bidPrice4 > preSettlePrice){
 		$("#right_buy_6").css("color","#ff5500");
-	}else if(bidPrice2 < preSettlePrice){
+	}else if(bidPrice4 < preSettlePrice){
 		$("#right_buy_6").css("color","#0bffa4");
 	}
-	$("#right_buy_6").text(parseFloat(bidPrice2).toFixed(doSize));
-	$("#right_buy_7").text(param.BidQty2);
-	var  bidPrice1 = param.BidPrice1;
-	if(bidPrice1 > preSettlePrice){
+	$("#right_buy_6").text(parseFloat(bidPrice4).toFixed(doSize));
+	$("#right_buy_7").text(param.BidQty4);
+	var  bidPrice5 = param.BidPrice1;
+	if(bidPrice5 > preSettlePrice){
 		$("#right_buy_8").css("color","#ff5500");
-	}else if(bidPrice1 < preSettlePrice){
+	}else if(bidPrice5 < preSettlePrice){
 		$("#right_buy_8").css("color","#0bffa4");
 	}
-	$("#right_buy_8").text(parseFloat(bidPrice1).toFixed(doSize));
-	$("#right_buy_9").text(param.BidQty1);
+	$("#right_buy_8").text(parseFloat(bidPrice5).toFixed(doSize));
+	$("#right_buy_9").text(param.BidQty5);
 }
 /**
  * 清除右边数据内容
