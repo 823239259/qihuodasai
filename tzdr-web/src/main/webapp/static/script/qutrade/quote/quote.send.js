@@ -103,5 +103,14 @@ var Quote = {
 		 */
 		doQryHistory:function(exchangeNo,commodityNo,contractNo,hisQuoteType,beginTime,endTime,count){
 			Quote.doSendMessage(QuoteUrl.QryHistoryUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":"'+hisQuoteType+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'","Count":"'+count+'"}');
+		},
+		/**
+		 * 查询初始化历史数据请求
+		 * @param exchangeNo
+		 * @param commodityNo
+		 * @param contractNo
+		 */
+		doQryFirstHistory:function(exchangeNo,commodityNo,contractNo){
+			Quote.doSendMessage(QuoteUrl.QryHistoryUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		}
 }

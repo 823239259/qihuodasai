@@ -7,6 +7,10 @@ initQuote();
  */
 var localCacheCommodity = {};
 /**
+ * 保存全局缓存品种到数据
+ */
+var localCacheCommodityArray = new Array();
+/**
  * 全局缓存实时行情的最新数据
  */
 var localCacheQuote = {}
@@ -73,6 +77,31 @@ function generateRealTimeQuote(obj){
 	setLocalCacheCommodity(param);
 	loadSelectData(param);
 	setTradeInitData(param);
+}
+/**
+ * 行情搜索
+ */
+function searchQuote(){
+	var length = localCacheCommodityArray.length;
+	var inputValue = $("#quotation_futures").val();
+	console.log(inputValue.length);
+	if(inputValue.length == 0){
+		$(".left_xiangmu").css("display","block");
+		return;
+	}
+	for (var i = 0; i < length; i++) {
+		var data = localCacheCommodityArray[i];
+		var commodityName = data.CommodityName;
+		var commodityNo = data.CommodityNo;
+		var mainContract = data.MainContract;
+		var contractCode  = commodityNo+mainContract;
+		var dom = $("ul[data-tion-com='"+contractCode+"']");
+		if(commodityName.indexOf(inputValue) != -1 || contractCode.indexOf(inputValue) != -1){
+			dom.css("display","block");
+		}else{
+			dom.css("display","none");
+		}
+	}
 }
 /**
  * 更新左边实时行情列表
@@ -304,6 +333,7 @@ function setLocalCacheCommodity(param){
 		var contractNo = data.MainContract;
 		var contractCode = commodityNo + contractNo;
 		localCacheCommodity[contractCode] = data;
+		localCacheCommodityArray[i] = data;
 	}
 }
 /**
@@ -480,4 +510,34 @@ function clearRightData(){
 	$("#right_buy_7").text(0.00);
 	$("#right_buy_8").text(0.00);
 	$("#right_buy_9").text(0.00);
+}
+/**
+ * 行情加载历史数据
+ * @param currenExchangeNo
+ * @param currenCommodityNo
+ * @param currenContractNo
+ */
+function loadHistory(currenExchangeNo, currenCommodityNo, currenContractNo){
+	Quote.doQryFirstHistory(currenExchangeNo, currenCommodityNo, currenContractNo);
+}
+/**
+ * 定时查询增量数据
+ */
+function openSetInterval(currenCommodityNo, currenContractNo, currenExchangeNo, hisQuoteType, beginTime, endTime, count){
+	cc = setInterval(function(){
+		loadAddData(currenCommodityNo, currenContractNo, currenExchangeNo, hisQuoteType, beginTime, endTime, count)
+    },10000);
+}
+/**
+ * 查询增量数据
+ * @param currenCommodityNo
+ * @param currenContractNo
+ * @param currenExchangeNo
+ * @param hisQuoteType
+ * @param beginTime
+ * @param endTime
+ * @param count
+ */
+function loadAddData(currenCommodityNo, currenContractNo, currenExchangeNo, hisQuoteType, beginTime, endTime, count){
+	Quote.doQryHistory(currenExchangeNo, currenCommodityNo, currenContractNo, hisQuoteType, beginTime, endTime, count);
 }
