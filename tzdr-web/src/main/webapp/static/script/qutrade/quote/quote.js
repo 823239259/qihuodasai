@@ -429,21 +429,41 @@ function updateRight(param){
 	//涨跌
 	$("#right_zd_1").text(parseFloat(param.ChangeValue).toFixed(doSize));
 	//今开
-	$("#right_jk_1").text(parseFloat(param.OpenPrice).toFixed(doSize));
+	var openPrice = param.OpenPrice;
+	if(openPrice > preSettlePrice){
+		$("#right_jk_1").css("color","#ff5500");
+	}else if(openPrice < preSettlePrice){
+		$("#right_jk_1").css("color","#FFFFFF");
+	}
+	$("#right_jk_1").text(parseFloat(openPrice).toFixed(doSize));
 	//幅度
 	var changeRate = parseFloat(param.ChangeRate).toFixed(doSize);
-	var color = " #ff5500";
+	var color = "#ff5500";
 	var bs = "↑";
 	var jj = "+";
-	if(param.ChangeRate < 0){
+	var rate = param.ChangeRate;
+	if(rate < 0){
 		 bs = "↓";
 		 jj = "";
 		 color = "#0bffa4";
+	 }else if(rate == 0){
+		 color = "#FFFFFF";
 	 }
+	$("#right_lastPrice_0").css("color",color);
+	$("#right_zj_0").css("color",color);
 	$("#right_zd_1").css("color",color);
-	$("#right_fd_2").text(jj+changeRate);
+	$("#right_zd_1").css("color",color);
+	$("#right_zl_3").css("color",color);
+	$("#right_zd_3").css("color",color);
 	$("#right_fd_2").css("color",color);
+	$("#right_fd_2").text(jj+changeRate);
 	//最高
+	var highPrice = param.HighPrice;
+	if(highPrice > openPrice){
+		$("#right_zg_2").css("color","#ff5500");
+	}else if(highPrice < openPrice){
+		$("#right_zg_2").css("color","#FFFFFF");
+	}
 	$("#right_zg_2").text(parseFloat(param.HighPrice).toFixed(doSize));
 	//总量
 	$("#right_zl_3").text(parseFloat(param.TotalVolume).toFixed(doSize));
@@ -452,86 +472,89 @@ function updateRight(param){
 	//卖五-卖一
 	var askPrice5 = param.AskPrice5;
 	if(askPrice5 > preSettlePrice){
-		$("#right_sell_0").css("color","red");
-	}else{
-		$("#right_sell_0").css("color","green");
+		$("#right_sell_0").css("color","#ff5500");
+	}else if(askPrice5 < preSettlePrice){
+		$("#right_sell_0").css("color","#0bffa4");
 	}
 	$("#right_sell_0").text(parseFloat(askPrice5).toFixed(doSize));
-	$("#right_sell_1").text(parseFloat(param.AskQty5).toFixed(doSize));
+	$("#right_sell_1").text(param.AskQty5);
 	var askPrice4 = param.AskPrice4;
 	if(askPrice4 > preSettlePrice){
-		$("#right_sell_2").css("color","red");
-	}else{
-		$("#right_sell_2").css("color","green");
+		$("#right_sell_2").css("color","#ff5500");
+	}else if(askPrice4 < preSettlePrice){
+		$("#right_sell_2").css("color","#0bffa4");
 	}
 	$("#right_sell_2").text(parseFloat(askPrice4).toFixed(doSize));
-	$("#right_sell_3").text(parseFloat(param.AskQty4).toFixed(doSize));
+	$("#right_sell_3").text(param.AskQty4);
 	var askPrice3 = param.AskPrice3;
 	if(askPrice3 > preSettlePrice){
-		$("#right_sell_4").css("color","red");
-	}else{
-		$("#right_sell_4").css("color","green");
+		$("#right_sell_4").css("color","#ff5500");
+	}else if(askPrice3 < preSettlePrice){
+		$("#right_sell_4").css("color","#0bffa4");
 	}
 	$("#right_sell_4").text(parseFloat(askPrice3).toFixed(doSize));
-	$("#right_sell_5").text(parseFloat(param.AskQty3).toFixed(doSize));
+	$("#right_sell_5").text(param.AskQty3);
 	var  askPrice2 = param.AskPrice2;
 	if(askPrice2 > preSettlePrice){
-		$("#right_sell_6").css("color","red");
-	}else{
-		$("#right_sell_6").css("color","green");
+		$("#right_sell_6").css("color","#ff5500");
+	}else if(askPrice2 < preSettlePrice){
+		$("#right_sell_6").css("color","#0bffa4");
 	}
 	$("#right_sell_6").text(parseFloat(askPrice2).toFixed(doSize));
-	$("#right_sell_7").text(parseFloat(param.AskQty2).toFixed(doSize));
+	$("#right_sell_7").text(param.AskQty2);
 	var  askPrice1 = param.AskPrice1;
 	if(askPrice1 > preSettlePrice){
-		$("#right_sell_8").css("color","red");
-	}else{
-		$("#right_sell_8").css("color","green");
+		$("#right_sell_8").css("color","#ff5500");
+	}else if(askPrice1 < preSettlePrice){
+		$("#right_sell_8").css("color","#0bffa4");
 	}
 	$("#right_sell_8").text(parseFloat(askPrice1).toFixed(doSize));
-	$("#right_sell_9").text(parseFloat(param.AskQty1).toFixed(doSize));
+	$("#right_sell_9").text(param.AskQty1);
 	//买五-买一
 	var  bidPrice5 = param.BidPrice5;
 	if(bidPrice5 > preSettlePrice){
-		$("#right_buy_0").css("color","red");
-	}else{
-		$("#right_buy_0").css("color","green");
+		$("#right_buy_0").css("color","#ff5500");
+	}else if(bidPrice5 < preSettlePrice){
+		$("#right_buy_0").css("color","#0bffa4");
 	}
 	$("#right_buy_0").text(parseFloat(bidPrice5).toFixed(doSize));
-	$("#right_buy_1").text(parseFloat(param.BidQty5).toFixed(doSize));
+	$("#right_buy_1").text(param.BidQty5);
 	var  bidPrice4 = param.BidPrice4;
 	if(bidPrice4 > preSettlePrice){
-		$("#right_buy_2").css("color","red");
-	}else{
-		$("#right_buy_2").css("color","green");
+		$("#right_buy_2").css("color","#ff5500");
+	}else if(bidPrice4 < preSettlePrice){
+		$("#right_buy_2").css("color","#0bffa4");
 	}
 	$("#right_buy_2").text(parseFloat(bidPrice4).toFixed(doSize));
-	$("#right_buy_3").text(parseFloat(param.BidQty4).toFixed(doSize));
+	$("#right_buy_3").text(param.BidQty4);
 	var  bidPrice3 = param.BidPrice3;
 	if(bidPrice3 > preSettlePrice){
-		$("#right_buy_4").css("color","red");
-	}else{
-		$("#right_buy_4").css("color","green");
+		$("#right_buy_4").css("color","#ff5500");
+	}else if(bidPrice3 < preSettlePrice){
+		$("#right_buy_4").css("color","#0bffa4");
 	}
 	$("#right_buy_4").text(parseFloat(bidPrice3).toFixed(doSize));
-	$("#right_buy_5").text(parseFloat(param.BidQty3).toFixed(doSize));
+	$("#right_buy_5").text(param.BidQty3);
 	var  bidPrice2 = param.BidPrice2;
 	if(bidPrice2 > preSettlePrice){
-		$("#right_buy_6").css("color","red");
-	}else{
-		$("#right_buy_6").css("color","green");
+		$("#right_buy_6").css("color","#ff5500");
+	}else if(bidPrice2 < preSettlePrice){
+		$("#right_buy_6").css("color","#0bffa4");
 	}
 	$("#right_buy_6").text(parseFloat(bidPrice2).toFixed(doSize));
-	$("#right_buy_7").text(parseFloat(param.BidQty2).toFixed(doSize));
+	$("#right_buy_7").text(param.BidQty2);
 	var  bidPrice1 = param.BidPrice1;
 	if(bidPrice1 > preSettlePrice){
-		$("#right_buy_8").css("color","red");
-	}else{
-		$("#right_buy_8").css("color","green");
+		$("#right_buy_8").css("color","#ff5500");
+	}else if(bidPrice1 < preSettlePrice){
+		$("#right_buy_8").css("color","#0bffa4");
 	}
 	$("#right_buy_8").text(parseFloat(bidPrice1).toFixed(doSize));
-	$("#right_buy_9").text(parseFloat(param.BidQty1).toFixed(doSize));
+	$("#right_buy_9").text(param.BidQty1);
 }
+/**
+ * 清除右边数据内容
+ */
 function clearRightData(){
 	//最新价
 	$("#right_lastPrice_0").text(0.00);
@@ -571,34 +594,4 @@ function clearRightData(){
 	$("#right_buy_7").text(0.00);
 	$("#right_buy_8").text(0.00);
 	$("#right_buy_9").text(0.00);
-}
-/**
- * 行情加载历史数据
- * @param currenExchangeNo
- * @param currenCommodityNo
- * @param currenContractNo
- */
-function loadHistory(currenExchangeNo, currenCommodityNo, currenContractNo){
-	Quote.doQryFirstHistory(currenExchangeNo, currenCommodityNo, currenContractNo);
-}
-/**
- * 定时查询增量数据
- */
-function openSetInterval(currenCommodityNo, currenContractNo, currenExchangeNo, hisQuoteType, beginTime, endTime, count){
-	cc = setInterval(function(){
-		loadAddData(currenCommodityNo, currenContractNo, currenExchangeNo, hisQuoteType, beginTime, endTime, count)
-    },10000);
-}
-/**
- * 查询增量数据
- * @param currenCommodityNo
- * @param currenContractNo
- * @param currenExchangeNo
- * @param hisQuoteType
- * @param beginTime
- * @param endTime
- * @param count
- */
-function loadAddData(currenCommodityNo, currenContractNo, currenExchangeNo, hisQuoteType, beginTime, endTime, count){
-	Quote.doQryHistory(currenExchangeNo, currenCommodityNo, currenContractNo, hisQuoteType, beginTime, endTime, count);
 }
