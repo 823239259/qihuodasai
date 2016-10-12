@@ -508,12 +508,12 @@ function addPostion(param){
 		var cls = "postion-index"+postionIndex;
 		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
-					'	<li  class = "position1" style="width: 50px;">'+holdNum+'</li>'+
-					'	<li  class = "position2" style="width: 30px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
-					'	<li  class = "position3" style="width: 120px;">'+holdAvgPrice+'</li>'+
-					'	<li  class = "position4">'+floatingProfit+'</li>'+
-					'	<li  class = "position5">'+exchangeNo+'</li>'+
-					'	<li  class = "position6">'+currencyNo+'</li>'+
+					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
+					'	<li  class = "position2" style="width: 80px; data-drection = "'+drection+'">'+drectionText+'</li>'+
+					'	<li  class = "position3" style="width: 80px;">'+holdAvgPrice+'</li>'+
+					'	<li  class = "position4" style="width: 160px;">'+floatingProfit+'</li>'+
+					'	<li  class = "position5"  style="width: 80px;">'+exchangeNo+'</li>'+
+					'	<li  class = "position6"  style="width: 80px;">'+currencyNo+'</li>'+
 					'	<li  class = "position7"  style = "display:none;">'+commodityNo+'</li>'+
 					'	<li  class = "position8"  style = "display:none;">'+contractNo+'</li>'+
 					'	<li  class = "position9"  style = "display:none;">'+openAvgPrice+'</li>'+

@@ -326,12 +326,12 @@
 			        <div class="quotation_detailed_title" id = "hold_title">
 			        	<ul class="tab_lis">
 			        		<li class="ml" style="width: 80px;">合约代码</li>
-			        		<li style="width: 50px;">持仓数量</li>
-			        		<li style="width: 30px;padding-left:10px">买卖</li>
-			        		<li style="width: 120px;">持仓均价</li>
+			        		<li style="width: 80px;">持仓数量</li>
+			        		<li style="width: 80px">买卖</li>
+			        		<li style="width: 80px;">持仓均价</li>
 			        		<li style="width: 160px;">浮动盈利</li>
-			        		<li>交易所</li>
-			        		<li>币种</li>
+			        		<li  style="width: 80px;">交易所</li>
+			        		<li  style="width: 80px;">币种</li>
 			        	</ul>
 			        	<ul class="caozuo">
 			        		<li><a href="javascript:void(0);"  id = "allSelling">全部平仓</a></li>
