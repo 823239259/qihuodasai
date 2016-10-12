@@ -176,4 +176,23 @@ $(function() {
 		$(function(){
 			$("#gdt").panel({iWheelStep:32});
 		});
+		/*商品隐藏显示*/
+		$("#content .stretch").click(function(){
+		    $("#content .stretch").css("display","none");
+		    $("#content .stretch1").css("display","block");
+		    $("#content").animate({marginLeft:'205px'});
+		});
+		$("#content .stretch1").click(function(){
+		    $("#content .stretch1").css("display","none");
+		    $("#content .stretch").css("display","block");
+		    $("#content").animate({marginLeft:'0px'});
+		});
+		$("#quotation_account").click(function() {
+			
+			
+		})
+		
+		
+		
+		
 });

@@ -136,10 +136,13 @@
 	<a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
 	<div class="quotation_anniu" id = "show_login">
 		<input type="text" name="quotation_account" id="quotation_account" placeholder="输入交易账号"/>
-		<input type="text" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
+		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
 		<button><a href="#" id = "trade_login">登录</a></button>
 		<button><a href="${ctx }/outDisk/index"  target="_blank">开户</a></button>
 		<a href="#" class="backPassword">找回密码</a>
+		<div>
+			
+		</div>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info">
 		欢迎你:<b id = "top_username"></b>
@@ -420,18 +423,4 @@
 </div>
 </body>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#content .stretch").click(function(){
-	    $("#content .stretch").css("display","none");
-	    $("#content .stretch1").css("display","block");
-	    $("#content").animate({marginLeft:'205px'});
-	});
-	$("#content .stretch1").click(function(){
-	    $("#content .stretch1").css("display","none");
-	    $("#content .stretch").css("display","block");
-	    $("#content").animate({marginLeft:'0px'});
-	});
-});
-</script>
 </html>
