@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>银行转账</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <link rel="stylesheet" href="../../css/recharge.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <style>
+	    	/*.titleList{
+	    		font-size: 16px;;
+	    		line-height: 40px;
+	    		color:#000000;
+	    	}*/
+		    .mui-input-group .mui-input-row{
+				height: 100px;
+			}
+			.bankList  .mui-input-row img{
+				width: 60px;
+				margin-top: 20px;
+			}
+			.mui-input-group .mui-input-row label{
+				width: 85%;
+				padding-right: 0px;
+			}
+			.mui-input-group .mui-input-row label span{
+				padding-left: 5px;
+				padding-top: 8px;
+				display: inline-block;
+				line-height: 20px;
+				height: 100px;
+				width: 71%;
+				font-size: 13px;;
+			}
+	    </style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">银行转账</h1>		
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+			<p class="ac_bankpromt">向维胜转账后，请录入流水单号，方便及时核实到账</p>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<label style="width: 80px!important">转账金额</label>
+					<input type="tel" class="mui-input-clear" placeholder="请输入转账金额" data-input-clear="5" id="bank_money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+				</li>
+			</ul>
+			<div style="padding: 5px 15px;">转账到：</div>
+			<form class="mui-input-group bankList">
+				<div class="mui-input-row mui-radio ">
+					<label>
+						<img src="../../images/bank1.png" />
+						<span>账号：1289 0715 5110 501<br>户名：成都盈透科技有限公司<br>开户行：招商银行股份有限公司成都天府大道支行</span></label>
+					<input name="choiceBank" type="radio" checked value="1">
+				</div>
+				<div class="mui-input-row mui-radio bankListContent" >
+					<label>
+						<img src="../../images/bank_02.gif" />
+						<span>账号：4402 9391 1910 0042 543<br>户名：成都盈透科技有限公司<br>开户行：中国工商银行府河音乐花园支行</span>
+					</label>
+					<input name="choiceBank" type="radio" value="2">
+				</div>
+				<div class="mui-input-row mui-radio bankListContent" id"weixinPay">
+					<label>
+						<img src="../../images/bank_04.gif" />
+						<span>账号：1158 4367 7712<br>户名：成都盈透科技有限公司<br>开户行：中国银行天府新区华阳支行</span>
+					</label>
+					<input name="choiceBank" type="radio" value="3">
+				</div>
+				<div class="mui-input-row mui-radio bankListContent">
+					<label>
+						<img src="../../images/bank_01.gif" />
+						<span>账号：5105 0140 6137 0000 0421<br>户名：成都盈透科技有限公司<br>开户行：中国建设银行成都世纪城新会展支行</span>
+					</label>
+					<input name="choiceBank" type="radio"value="4">
+				</div>
+				<div class="mui-input-row mui-radio bankListContent">
+					<label>
+						<img src="../../images/bank_03.gif" />
+						<span>账号：2280 8201 0400 05595<br>户名：成都盈透科技有限公司<br>开户行：中国农业银行成都新希望国际支行</span>
+					</label>
+					<input name="choiceBank" type="radio"value="4">
+				</div>
+			</form>
+			<div id="buttomDiv">
+				<span>支付：<i id="paymentMoney">1234</i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
+			</div>
+		</div>
+	</body>
+</html>
