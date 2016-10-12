@@ -38,9 +38,10 @@ function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,o
  * 计算开仓均价 
  * @param {Object} price
  * @param {Object} num
+ * @param {Object} dosize
  */
-function doGetOpenAvgPrice(price,num){
-	return Math.round(parseFloat(price / num).toFixed(2));
+function doGetOpenAvgPrice(price,num,dosize){
+	return parseFloat(price / num).toFixed(dosize);
 }
 /**
  * 生成报单引用 
