@@ -256,12 +256,12 @@
 			        </div>
 			        <div id="qiehuan">
 				        <ul>
-				            <li class="carbon_time" data="0">分时</li>
-				            <li class="carbon_time" data="1">1分</li>
-				            <li class="carbon_time" data="5">5分</li>
-				            <li class="carbon_time" data="15">15分</li>
-				            <li class="carbon_time" data="30">30分</li>
 				            <li class="carbon_time" data="1440">日K</li>
+				            <li class="carbon_time" data="30">30分</li>
+				            <li class="carbon_time" data="15">15分</li>
+				            <li class="carbon_time" data="5">5分</li>
+				            <li class="carbon_time" data="1">1分</li>
+				            <li class="carbon_time" data="0">分时</li>
 				        </ul>
     				</div>
     			</div>
