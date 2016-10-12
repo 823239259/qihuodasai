@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>我要充值</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <link rel="stylesheet" href="../../css/recharge.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">微信支付</h1>		
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+			<p>第一步：核实收款方信息</p>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<label>收款人微信账户</label>
+					<span>1369866402@1369866402</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<label>收款人账户名称</label>
+					<span>成都盈透科技有限公司</span>
+				</li>
+			</ul>
+			<p>第二步：微信扫一扫，进行支付</p>
+			<div id="weiPayCode">
+				<p>点击二维码，截图到本地，打开微信扫一扫，识别二维码，进行付款！</p>
+				<img src="../../images/weixinpay.png" id="weixinPayCode">
+			</div>
+			<p>第二步：确认交易单号</p>
+			<div>
+				<label>交易单号</label>
+				<input  type="number" placeholder="请输入交易单号" />
+			</div>
+			<div class="mui-content-padded">
+				<h5>温馨提示：</h5>
+				<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</p>
+				<p>2、充值前请注意您的银行卡充值限制，以免造成不便；</p>
+				<p>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</p>
+				<p>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</p>
+				<p>5、如果充值遇到任何问题，请联系客服：400-852-8008；</p>
+			</div>
+			<div id="weixinpayBack">
+				<img src="../../images/weixinpay.png">
+			</div>
+		</div>
+		
+	</body>
+</html>

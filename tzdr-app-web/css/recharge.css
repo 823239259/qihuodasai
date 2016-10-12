@@ -53,3 +53,18 @@ i{
 	margin-left:35%;
 	width: 30%;
 }
+#weixinpayBack{
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	top:0px;
+	left: 0px;
+	z-index: 999;
+	display: none;
+}
+#weixinpayBack img{
+	width: 80%;
+	display: block;
+	height: auto;
+	position: absolute;
+}
