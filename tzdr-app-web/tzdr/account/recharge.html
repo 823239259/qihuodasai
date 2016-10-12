@@ -47,6 +47,7 @@
 		<script>
 			mui.init();
 			mui.plusReady(function(){
+					tzdr.init.initHearListener();
 					document.getElementById("recharge-btn").addEventListener("tap",function(){
 						checkMoney()
 					})
@@ -68,6 +69,10 @@
 					mui.toast("充值金额不能为空");
 					return;  
 				}
+				mui.openWindow({
+					url:"choicePayment.html",
+					id:"choicePayment.html",
+				})
 			}
 		</script>
 	</body>

@@ -1,4 +1,4 @@
-var model = "live";
+var model = "dev";
 var tradeSocketUrl = "";
 var marketSocketUrl = "";
 var marketUserName = "";
@@ -14,8 +14,8 @@ var TradeConfig = {
  * 测试交易配置
  */ 
 var TradeConfigTest = {
-//	TradeSocketUrl:"ws://192.168.0.213:6060"
-	TradeSocketUrl:"ws://192.168.2.123:6060"
+	TradeSocketUrl:"ws://192.168.0.213:6060"
+//	TradeSocketUrl:"ws://192.168.2.123:6060"
 	
 }
 /**

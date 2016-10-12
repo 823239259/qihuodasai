@@ -27,3 +27,29 @@ i{
 	padding:0px 2%;
 	text-align: right;
 }
+.chargeList input{
+	margin-top: -5px;;
+}
+.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
+	color:#FFCC33;
+}
+#paymentMoney{
+	color:#FFCC33;
+	font-size: 20px;
+	font-weight: 300;
+}
+#buttomDiv{
+	background-color: #FFFFFF;
+	position: fixed;
+	bottom: 0px;
+	line-height: 60px;
+	height: 60px;
+	width: 100%;
+	padding:0px 4%;
+	border-top:1px solid #E4E4E4;
+}
+#buttomDiv button{
+	margin-top: 10px;
+	margin-left:35%;
+	width: 30%;
+}

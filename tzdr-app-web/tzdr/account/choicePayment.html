@@ -18,9 +18,34 @@
 			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 		</header>
 		<div class="mui-content">
-			<ul>
-				<li></li>
-			</ul>
+			<form class="mui-input-group chargeList">
+				<div class="mui-input-row mui-radio ">
+					<label>京东支付</label>
+					<input name="choiceBank" type="radio" checked value="1">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label>网银支付</label>
+					<input name="choiceBank" type="radio" value="2">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label>微信支付</label>
+					<input name="choiceBank" type="radio" value="3">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label>银行转账</label>
+					<input name="choiceBank" type="radio"value="4">
+				</div>
+			</form>
+			<div id="buttomDiv">
+				<span>支付：<i id="paymentMoney">1234</i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
+			</div>
 		</div>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+				tzdr.init.initHearListener();
+			})
+		</script>
 	</body>
 </html>
