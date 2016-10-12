@@ -1,0 +1,29 @@
+ul{
+	list-style-type: none;
+	padding:0px;
+	background-color: #FFFFFF;
+}
+.rechageList li{
+	width: 100%;
+	padding:0px 2%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom:1px solid #E4E4E4;
+}
+
+.rechageList li input{
+	display: inline-block;
+	width: 72%;
+	border: none;
+}
+i{
+	font-style: normal;
+}
+.yellowFont{
+	color:#FFCC33;
+}
+.textAlignRightP{
+	width: 100%;
+	padding:0px 2%;
+	text-align: right;
+}
