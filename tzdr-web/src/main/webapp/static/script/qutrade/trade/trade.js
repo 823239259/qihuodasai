@@ -230,6 +230,7 @@ function addFundsDetails(param){
 				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
 				'</ul>';
 	$("#account_title .tab_lis").after(html);
+	tabOn();
 	localCacheFundDetail[currencyNo]=param;
 	addFundDetailBindClick(currencyNo);
 } 
@@ -298,6 +299,7 @@ function appendOrder(param){
 				'	<li class = "order9">'+orderId+'</li>'+
 				'</ul>';
 	$("#order_title .tab_lis").after(html);
+	tabOn();
 	addOrderBindClick(cls);
 	updateOrderIndex();
 };
@@ -363,6 +365,7 @@ function appendDesignates(param){
 				'	<li class = "des11" style = "display:none;">'+triggerPrice+'</li>'+
 				'</ul>';
    $("#des_title .tab_lis").after(html);
+   tabOn();
    localCacheDesignate[contractCode] = createDesignatesParam(param);
    localCachedesignateContractCode[designateIndex] = contractCode;
    addDesignateBindClick(cls);
@@ -426,12 +429,13 @@ function appendTradeSuccess(param){
 				'	<li class = "trade2" style="width: 120px;">'+tradePrice+'</li>'+
 				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
 				'	<li class = "trade4">'+currencyNo+'</li>'+
-				'	<li class = "trade5" style="width: 150px;">'+tradeNo+'</li>'+
+				'	<li class = "trade5" style="width: 50px;">'+tradeNo+'</li>'+
 				'	<li class = "trade6">'+orderId+'</li>'+
-				'	<li class = "trade7" style="width: 120px;">'+tradeTime+'</li>'+
+				'	<li class = "trade7">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_title .tab_lis").after(html);
+	tabOn();
 	addTradeSuccessBindClick(cls);
 	updateTradesIndex();
 };
@@ -508,18 +512,19 @@ function addPostion(param){
 		var cls = "postion-index"+postionIndex;
 		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
-					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
-					'	<li  class = "position2" style="width: 80px;" data-drection = "'+drection+'">'+drectionText+'</li>'+
-					'	<li  class = "position3" style="width: 80px;">'+holdAvgPrice+'</li>'+
-					'	<li  class = "position4" style="width: 160px;">'+floatingProfit+'</li>'+
-					'	<li  class = "position5"  style="width: 80px;">'+exchangeNo+'</li>'+
-					'	<li  class = "position6"  style="width: 80px;">'+currencyNo+'</li>'+
+					'	<li  class = "position1" style="width: 50px;">'+holdNum+'</li>'+
+					'	<li  class = "position2" style="width: 30px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
+					'	<li  class = "position3" style="width: 120px;">'+holdAvgPrice+'</li>'+
+					'	<li  class = "position4">'+floatingProfit+'</li>'+
+					'	<li  class = "position5">'+exchangeNo+'</li>'+
+					'	<li  class = "position6">'+currencyNo+'</li>'+
 					'	<li  class = "position7"  style = "display:none;">'+commodityNo+'</li>'+
 					'	<li  class = "position8"  style = "display:none;">'+contractNo+'</li>'+
 					'	<li  class = "position9"  style = "display:none;">'+openAvgPrice+'</li>'+
 					'	<li  class = "position10"  style = "display:none;">'+floatP+'</li>'+
 					'</ul>';
 		$("#hold_title .tab_lis").after(html);
+		tabOn();
 		//存储数据
 		localCachePostion[contractCode] = createPostionsParam(param);
 		localCachePositionContractCode[postionIndex] = contractCode;
@@ -557,6 +562,8 @@ function updatePostion(param){
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
 		price = price + oldPrice;
+		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum);
+		$openAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 
@@ -564,12 +571,6 @@ function updatePostion(param){
 		var contractAndCommodity = commdityNo+contractNo;
 		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
 		if(localCommodity != undefined){
-			var dotSize = localCommodity.DotSize;
-			if(isNaN(dotSize)){
-				dotSize = 0;
-			}
-			var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,dotSize);
-			$openAvgPrice.text(openAvgPrice);
 			var lastPrice = getLocalCacheQuote(contractAndCommodity);
 			var contractSize = localCommodity.ContractSize;
 			var miniTikeSize = localCommodity.MiniTikeSize;
@@ -1298,4 +1299,14 @@ function validationInputPrice(obj){
 	}else{
 		return false;
 	}
+}
+
+function tabOn() {
+	/*交易ul li  odd even odd  li:nth-of-type(even)*/
+	//$(".quotation_detailed .quotation_detailed_title .tab_content:even").addClass("even");
+	$(".quotation_detailed .quotation_detailed_title .tab_content").click(function() {
+		var _this = $(this);
+		$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
+		_this.addClass("on");
+	});
 }
