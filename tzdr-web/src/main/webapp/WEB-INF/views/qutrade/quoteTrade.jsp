@@ -244,15 +244,15 @@
 			            <!-- http://localhost:8088/tzdr-web/static/ico/MSFT_full.json -->
 			        </div>
 			        <div id="qiehuan">
-			        	<ul>
-			        		<li id="carbon_time">分时</li>
-			        		<li id="carbon_oneMinute">1分</li>
-			        		<li id="carbon_fiveMinute">5分</li>
-			        		<li id="carbon_fifteenMinute">15分</li>
-			        		<li id="carbon_halfhourMinute">30分</li>
-			        		<li id="carbon_oneDay">日K</li>
-			        	</ul>
-			        </div>
+				        <ul>
+				            <li class="carbon_time" data="0">分时</li>
+				            <li class="carbon_time" data="1">1分</li>
+				            <li class="carbon_time" data="5">5分</li>
+				            <li class="carbon_time" data="15">15分</li>
+				            <li class="carbon_time" data="30">30分</li>
+				            <li class="carbon_time" data="1440">日K</li>
+				        </ul>
+    				</div>
     			</div>
     		</div>
     	</div>
