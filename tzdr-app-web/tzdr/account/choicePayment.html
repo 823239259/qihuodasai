@@ -27,7 +27,7 @@
 					<label>网银支付</label>
 					<input name="choiceBank" type="radio" value="2">
 				</div>
-				<div class="mui-input-row mui-radio">
+				<div class="mui-input-row mui-radio" id"weixinPay">
 					<label>微信支付</label>
 					<input name="choiceBank" type="radio" value="3">
 				</div>
@@ -45,7 +45,20 @@
 			mui.init();
 			mui.plusReady(function(){
 				tzdr.init.initHearListener();
-			})
+				document.getElementById("recharge-btn").addEventListener("tap",function(){
+					immediatePayment();
+				})
+			});
+			function immediatePayment(){
+				var val =  $('.chargeList input[name="choiceBank"]:checked ').val();
+				console.log(val);
+				if(val==2){
+					mui.openWindow({
+						url:"weixinPay.html",
+						id:"weixinPay.html"
+					})
+				}
+			}
 		</script>
 	</body>
 </html>
