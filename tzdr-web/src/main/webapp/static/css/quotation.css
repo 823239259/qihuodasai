@@ -1,11 +1,15 @@
 .quotation_title {height: 60px; line-height: 60px; background: #333; border-bottom: 1px solid #1a1a1a;}
 .quotation_title img {margin-top: 10px; margin-left: 10px; float: left;}
-.quotation_title .quotation_anniu {float: right;}
+.quotation_title .quotation_anniu {float: right; position: relative;}
 .quotation_title .quotation_anniu input {margin-right: 10px; outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px; width: 130px; background: #1a1a1a; color: #666;}
 .quotation_title .quotation_anniu button a{border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; display: block; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
 .quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
 .quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
+/* 登录更多账号  */
+#more_account {position: absolute; width:130px; background: #ffffff; z-index: 9; top: 43px; border-radius: 4px;}
+#more_account p {height: 26px; line-height: 26px; border-radius: 4px; padding-left: 11px;}
+#more_account p:hover {background: #ccc; cursor: pointer;}
 /* 滚动条 */
 #gdt{height: 810px;}
 .zUIpanelScrollBox,.zUIpanelScrollBar{width:10px; top:4px; right:2px; border-radius:5px; }
