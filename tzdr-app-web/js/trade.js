@@ -41,6 +41,7 @@ var getSuccessIndex = 0;
 var cancleOrderId = null;
 //交易是否连接成功
 var isConnection = false;
+var isLoginOut = false;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 loadSocket();
@@ -75,7 +76,9 @@ function loadSocket(){
 		socket.onclose = function() { 
 			if(!loginOutFlag){ 
 				clearLogin();
-				alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
+				if(isLoginOut){
+					alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
+				}
 				//alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
 			}
 		}  
@@ -92,6 +95,7 @@ function loadSocket(){
 					if (code == 0) {
 						initDom();
 					} else {
+						isLoginOut = true;
 						clearLogin();
 						alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
 					}
@@ -329,7 +333,7 @@ function updatePositionDom(positonParam){
 			floatingProft = floatP +":"+  comm.CurrencyNo;
 		} 
 		$floatingProft.val(floatingProft);
-		console.log(floatingProft);
+//		console.log(floatingProft);
 		if(floatP < 0 ){
 			$floatingProft.css("color","green");
 		}else if(floatP > 0){
