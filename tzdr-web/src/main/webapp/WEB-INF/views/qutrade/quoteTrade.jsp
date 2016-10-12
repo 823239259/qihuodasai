@@ -138,11 +138,11 @@
 		<input type="text" name="quotation_account" id="quotation_account" placeholder="输入交易账号"/>
 		<input type="text" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
 		<button><a href="#" id = "trade_login">登录</a></button>
-		<button><a href="#">开户</a></button>
+		<button><a href="${ctx }/outDisk/index"  target="_blank">开户</a></button>
 		<a href="#" class="backPassword">找回密码</a>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info">
-		欢迎你:<b>李四</b>
+		欢迎你:<b id = "top_username"></b>
 		<button id = "trade_loginOut">退出登录</button>
 	</div>
 </div>
@@ -162,7 +162,7 @@
     	<div class="quotation_echarts">
     		<div id="right">
     			<p class="right_title"><p>
-  			    <p class="right_lis" id = "commodity_title">富时A50  CL1611</p>
+  			    <p class="right_lis" id = "commodity_title"></p>
     			<div class="right_tab">
     				<ul>
 	    				<li class="right_tab_zxj" >最新价</li>
@@ -403,7 +403,7 @@
 					<label>账户余额：<span id = "todayCanUse">00.0</span></label>
 					<label>持仓盈亏：<span id = "floatingProfit">00.0</span></label>
 					<label>交易盈亏：<span id = "closeProfit">00.0</span></label>
-					<a href="javascript:void(0);">追加保证金</a>
+					<a href="${ctx }/toUserftseTradeListSSO" target="_blank">追加保证金</a>
 				</div>
 			</div>
     	</div>	

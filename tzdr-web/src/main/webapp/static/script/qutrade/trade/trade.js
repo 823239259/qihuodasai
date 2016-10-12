@@ -60,6 +60,7 @@ function handleData(evt){
 				LoginForwardInitLoadData();
 				$("#show_login").hide();
 				$("#show_user_info").show();
+				$("#top_username").text(username);
 				setIsLogin(true);
 			} else {
 				//登录失败清理数据
