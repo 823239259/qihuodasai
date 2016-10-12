@@ -895,6 +895,13 @@ $(function(){
 	$("#trade_loginOut").click(function(){
 		tradeLoginOut(username);
 	});
+	$.ajax({
+		url:basePath+"/user/operateLogin",
+		type:"get",
+		success:function(result){
+			console.log(result);
+		}
+	});
 });
 /**
  * 绑定交易操作事件

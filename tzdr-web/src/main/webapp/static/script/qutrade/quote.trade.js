@@ -60,8 +60,18 @@ $(function() {
 			if(num <=2){
 				$("#money_number").val(1);
 			}else{
-				num--;
-				$("#money_number").val(num);
+				var contractCode  =  $("#select_commodity").val();
+				var loca = localCacheCommodity[contractCode];
+				var addNum = 1;
+				var doSize = 0;
+				if(loca != undefined){
+					addNum = loca.ContractSize;
+					doSize = loca.DotSize;
+				}
+				for(var i  = 0 ; i < addNum ; i ++){
+					num--;
+				}
+				$("#money_number").val(parseFloat(num).toFixed(doSize));
 			}
 		});
 		/* 增加金额 */
@@ -70,8 +80,18 @@ $(function() {
 			if(num >999999999){
 				alert("已达到最大金额限度！");
 			}else{
-				num++;
-				$("#money_number").val(num);
+				var contractCode  =  $("#select_commodity").val();
+				var loca = localCacheCommodity[contractCode];
+				var addNum = 1;
+				var doSize = 0;
+				if(loca != undefined){
+					doSize = loca.DotSize;
+					addNum = parseFloat(loca.ContractSize).toFixed(doSize);
+				}
+				for(var i  = 0 ; i < addNum ; i ++){
+					num++;
+				}
+				$("#money_number").val(parseFloat(num).toFixed(doSize));
 			}
 		});
 		/* 光标离开输入框时 */
