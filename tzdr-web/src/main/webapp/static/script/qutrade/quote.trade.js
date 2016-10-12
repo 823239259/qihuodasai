@@ -161,4 +161,8 @@ $(function() {
 			$("#div_Mask").css("display","none");
 		})
 /* 弹出层结束 */
+		/*滚动条*/
+		$(function(){
+			$("#gdt").panel({iWheelStep:32});
+		});
 });

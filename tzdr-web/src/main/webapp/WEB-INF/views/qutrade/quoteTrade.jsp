@@ -34,6 +34,7 @@
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.connection.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.js?v=${v}"></script>
 <%-- <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.reconnect.js?v=${v}"></script> --%>
+<script type="text/javascript" src="${ctx}/static/script/qutrade/zUI.js"></script>
 <!-- 插件 -->
 <script type="text/javascript" src="${ctx}/static/script/qutrade/d3.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/react.min.js"></script>
@@ -149,10 +150,15 @@
 <div class="quotation_center">
     <div id="left">
     	<p class="center_futures"><input type="text" oninput="searchQuote()" name="quotation_futures" id="quotation_futures" placeholder="期货搜索"/></p>
-		<div class="futuresList">
+		<div id="gdt">
+			<div class="futuresList">
+			
+			</div>
 		</div>
     </div>
-    <div id="content">
+    <div id="content" style="">
+    	<img class="stretch" alt="" src="${ctx}/static/images/stretch.png">
+    	<img class="stretch1" alt="" src="${ctx}/static/images/stretch.png" style="display: nonel">
     	<div class="quotation_echarts">
     		<div id="right">
     			<p class="right_title"><p>
@@ -414,4 +420,18 @@
 </div>
 </body>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#content .stretch").click(function(){
+	    $("#content .stretch").css("display","none");
+	    $("#content .stretch1").css("display","block");
+	    $("#content").animate({marginLeft:'205px'});
+	});
+	$("#content .stretch1").click(function(){
+	    $("#content .stretch1").css("display","none");
+	    $("#content .stretch").css("display","block");
+	    $("#content").animate({marginLeft:'0px'});
+	});
+});
+</script>
 </html>

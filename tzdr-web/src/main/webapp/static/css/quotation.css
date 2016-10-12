@@ -6,13 +6,23 @@
 .quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
 .quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
-
+/* 滚动条 */
+#gdt{height: 810px;}
+.zUIpanelScrollBox,.zUIpanelScrollBar{width:10px; top:4px; right:2px; border-radius:5px; }
+.zUIpanelScrollBox{background:black;opacity:0.1;filter:alpha(opacity=10);}
+.zUIpanelScrollBar{background:#0d0d0d;filter:alpha(opacity=80);}
+.test{width:800px;border:1px solid red;margin:0 auto;padding:20px;}
+.clear{zoom:1;}
+.clear:after{content:"";display:block;clear:both;}
+/* 滚动条 */
 .quotation_center {width: 100%; height: 860px;}
- #left {float: left; width: 205px; height: 860px; background-color: green;}
-#content {/* background-color: orange; */  margin-left: 205px;height: 860px;/*==等于左边栏宽度==*/}
+ #left {float: left; width: 205px; height: 860px;}
+#content {position: relative; margin-left: 205px;height: 860px;/*==等于左边栏宽度==*/ border-left: 5px solid #1a1a1a;}
+#content .stretch, #content .stretch1 {position: absolute; z-index: 9; top: 430px; left: -5px;}
+#content .stretch:hover ,#content .stretch1:hover {cursor: pointer;}
 .quotation_center .center_futures {height: 48px; line-height: 48px; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a; background: #333;}
 .quotation_center .center_futures input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 30px; width: 195px; background: #1a1a1a; color: #666; margin-top: 10px; margin-left: 10px}
-#left .futuresList {height: 810px; background: #eee;}
+#gdt {height: 810px; background: #eee; overflow: hidden;}
 #left .futuresList ul{background: #333; width: 205px; height: 80px; border-bottom: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
 #left .futuresList ul:hover {cursor: pointer;}
 #left .futuresList ul.on {background: #1a1a1a;}
@@ -27,7 +37,7 @@
 #left .futuresList ul.on .futures_number {color: #ccc;}
 
 #content .quotation_echarts {width: 100%; height: 583px;  background-color: #303030;}
-#content .quotation_transaction {border-top: 5px solid #1a1a1a;}
+#content .quotation_transaction {border-top: 5px solid #1a1a1a; position: absolute; width: 100%;}
 #content .quotation_transaction .quotation_type{float:left; width: 345px; height: 272px; border-right: 1px solid #1a1a1a; background: #333333;}
 #content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #333;}
 #right{float: right; width: 319px; height: 583px; background-color: #333; border-left: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
@@ -41,8 +51,8 @@
 #right .right_tab ul .right_tab_zj {color: #999; width: 50px; margin-left: 18px;}
 #right .right_tab ul .right_tab_zjl {color: #ccc; width: 70px; text-align: right; margin-right: 10px;}
 #right .right_tab ul .right_tab1_left {color: #999; width: 50px; margin-left: 10px;}
-#right .tab1 ul .right_tab1_left {color: #30bf30;}
-#right .tab2 ul .right_tab1_left {color: #ff4040;}
+#right .tab1 ul .right_tab1_left {color: #999;}
+#right .tab2 ul .right_tab1_left {color: #999;}
 #right .right_tab ul .right_tab1_center {width: 210px; color: #ccc; text-align: center;}
 #right .right_tab ul .right_tab1_right {color: #999; width: 38px; text-align: right; margin-right: 10px;}
 
