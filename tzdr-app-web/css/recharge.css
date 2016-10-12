@@ -68,3 +68,31 @@ i{
 	height: auto;
 	position: absolute;
 }
+#weiPayCode{
+	width: 100%;
+	padding:0px 15px;
+}
+#weiPayCode div{
+	height: 130px;
+	float: left;
+}
+ #weiPayCode div:nth-child(2){
+ 	padding:30px 0px;
+ }
+.numberCode{
+	width: 96%;
+	margin-left: 2%;
+	border:1px solid #E4E4E4;
+	background: #FFFFFF; 
+}
+.numberCode label{
+	display: inline-block;
+	width: 23%;
+	text-align: center;
+}
+.numberCode input{
+	display: inline-block;
+	width: 75%;
+	border:none;
+	margin: 0px;
+}
