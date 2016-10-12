@@ -312,8 +312,6 @@ function updatePositionDom(positonParam){
 		holdNum = holdNum + orderNum;
 		price = price + oldPrice;
 		drectionText = analysisPositionDrection(drection);
-		var openAvgPrice = doGetOpenAvgPrice(price,holdNum);
-		$thisPrcie.text(openAvgPrice);
 		var commdityNo = holdParam.CommodityNo;
 		var contractNo = holdParam.ContractNo;
 		var comm = marketCommdity[commdityNo+contractNo];
@@ -321,7 +319,12 @@ function updatePositionDom(positonParam){
 		var floatingProft = 0.00; 
 		var floatP = 0.00;
 		if(comm != undefined){
-			console.log("持仓");
+			var doSize = comm.DotSize;
+			if(isNaN(doSize)){
+				doSize = 0;
+			}
+			var openAvgPrice = doGetOpenAvgPrice(price,holdNum,doSize);
+			$thisPrcie.text(openAvgPrice);
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,comm.ContractSize,comm.MiniTikeSize,holdNum,drection);
 			floatingProft = floatP +":"+  comm.CurrencyNo;
 		} 
@@ -789,6 +792,6 @@ function deleteDesignatesContractCode(param){
  * @param {Object} price
  * @param {Object} num
  */
-function doGetOpenAvgPrice(price,num){
-	return Math.round(parseFloat(price / num).toFixed(2));
+function doGetOpenAvgPrice(price,num,doSize){
+	return parseFloat(price / num).toFixed(doSize);
 }
