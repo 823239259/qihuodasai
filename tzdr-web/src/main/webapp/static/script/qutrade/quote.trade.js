@@ -166,6 +166,20 @@ $(function() {
 				marginLeft: -(popupWidth)
 			});
 		}
+		/*找回密码*/
+		$(".backPassword").click(function() {
+			$("#back_passwork").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+		});
+		
 		/*隐藏*/
 		$(".close").click(function() {
 			$(".tck01").css("display","none");
