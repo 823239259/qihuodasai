@@ -63,6 +63,7 @@ function handleData(evt){
 				$("#top_username").text(username);
 				setIsLogin(true);
 			} else {
+				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
 			}
@@ -905,7 +906,23 @@ $(function(){
 	$("#quotation_account").mouseout(function(){
 		$("#more_account").css("display","none");
 	});
-	//$("#").val("${ctx}/userftse/trade_list");
+	$(".backPassword").click(function(){
+		layer.open({
+			  type: 1,
+			  title:"忘记密码",
+			  skin: 'layui-layer-rim', //加上边框
+			  area: ['300px', '160px'], //宽高
+			  content: $("#back_passwork").html(),
+			  btn:['没有账号?立即申请','关闭'],
+			  yes:function(){
+				  window.open(basepath+"/outDisk/index");
+				  layer.closeAll();
+			  },
+			  btn2: function(){
+					 layer.closeAll();
+				 }
+			});
+	});
 	bindOpertion();
 	$("#select_commodity").click(function(){
 		var contractCode = $(this).val();

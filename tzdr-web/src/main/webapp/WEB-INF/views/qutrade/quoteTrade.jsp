@@ -132,14 +132,10 @@
 	 	</div>
 	</div>
 	<div class="tck01" id="back_passwork" style="display: none;">
-		<div class="navtitle">
-			<a class="nava">忘记密码</a><a class="close"></a>
-		</div>
 		<div class="smain">
 			<div>
 				<p>如您忘记密码请及时与我们的取得联系。</p>
 				<p>联系电话：<span style="color:#fc3;">400-852-8008！</span></p>
-				<p>没有账号，<a href="${ctx }/outDisk/index" style="color:#fc3;text-decoration: none;float: right;" target="_blank">立即申请！</a></p>
 			</div>
 		</div>
 		<div class="anniu">
