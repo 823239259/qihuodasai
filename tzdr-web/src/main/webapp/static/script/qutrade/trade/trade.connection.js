@@ -28,6 +28,10 @@ var isLogin = false;
  */
 var loginFail = false;
 /**
+ * 是否在另一处登录
+ */
+var anotherPlace = false;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -127,10 +131,16 @@ function initLoad() {
 		socket = null;
 		//更新交易连接状态
 		changeConnectionStatus();
-		//不是手动登出，则重连交易服务器
-		if(!loginFail){
-			//交易连接断开重连
-			reconnect();
+		if(anotherPlace){
+			tipAlert("你的账号已在另一处登录,如不是本人操作,请联系客服");
+			clearLocalCacheData();
+			loginOut();
+		}else{
+			//不是手动登出，则重连交易服务器
+			if(!loginFail){
+				//交易连接断开重连
+				reconnect();
+			}
 		}
 	}
 	return true;

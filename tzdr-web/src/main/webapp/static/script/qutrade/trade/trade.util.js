@@ -110,7 +110,7 @@ function modifyOrder(param) {
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 /**
- * 解析买卖方向
+ * 解析多空方向
  * @param direction 0-买，1-卖
  */
 function analysisBusinessDirection(direction){
@@ -119,6 +119,19 @@ function analysisBusinessDirection(direction){
 		directionText = duo;
 	}else if(direction == 1){
 		directionText = kong;
+	}
+	return directionText;
+}
+/**
+ * 解析多空方向
+ * @param direction 0-买，1-卖
+ */
+function analysisBusinessBuySell(direction){
+	var directionText = "";
+	if(direction == 0){
+		directionText = "买";
+	}else if(direction == 1){
+		directionText = "卖";
 	}
 	return directionText;
 }
