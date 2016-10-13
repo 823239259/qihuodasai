@@ -171,19 +171,35 @@ function updateBalance(parama){
 	var $banlance = 0.00;
 	var $deposit = 0.00
 	var $canuse = 0.00
-	$(function(){
-		for(var i = 0 ; i < uehIndex; i++){
-			var ac = loadCachAccountNo[i]; 
-			$banlance = $banlance + loadCachBanlance[ac] * loadCurrencyRate[ac];
-			$deposit = $deposit + loadCachDeposit[ac] * loadCurrencyRate[ac];
-			$canuse = $canuse + loadCachCanuse[ac]  * loadCurrencyRate[ac];
-		}
-		$("#todayBalance").text(parseFloat($banlance).toFixed(2));
-		$("#deposit").text(parseFloat($deposit).toFixed(2));
-		$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
-		$("#floatingProfit").text(parseFloat(parama.floatingProfit).toFixed(2));
-		$("#closeProfit").text(parseFloat(param.CloseProfit).toFixed(2));
-	});
+	for(var i = 0 ; i < uehIndex; i++){
+		var ac = loadCachAccountNo[i]; 
+		$banlance = $banlance + loadCachBanlance[ac] * loadCurrencyRate[ac];
+		$deposit = $deposit + loadCachDeposit[ac] * loadCurrencyRate[ac];
+		$canuse = $canuse + loadCachCanuse[ac]  * loadCurrencyRate[ac];
+	}
+	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
+	$("#deposit").text(parseFloat($deposit).toFixed(2));
+	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
+	var float = parseFloat(parama.floatingProfit).toFixed(2) ;
+	var color = "#FFFFFF";
+	if(isNaN(float)){
+		float = 0;
+	}
+	if(float < 0){
+		color = "#0bffa4";
+	}else if(float > 0){
+		color = "#ff5500";
+	}
+	$("#floatingProfit").text(float);
+	$("#floatingProfit").css("color",color);
+	var closeProfit = parseFloat(parama.CloseProfit).toFixed(2);
+	if(closeProfit < 0){
+		color = "#0bffa4";
+	}else if(closeProfit > 0){
+		color = "#ff5500";
+	}
+	$("#closeProfit").text(closeProfit);
+	$("#closeProfit").css("color",color);
 };
 /**
  * 增加或更新资金明细
