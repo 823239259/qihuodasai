@@ -53,6 +53,7 @@ function handleData(evt){
 	linearlyLoadData(method);
 	if (parameters != null) {
 		if (method == "OnRspLogin") {
+			$("#trade_login").text("登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			//登录成功加载
@@ -66,7 +67,7 @@ function handleData(evt){
 				loginFail = false;
 				anotherPlace = false;
 			} else {
-				loginFail = true;
+				loginFail = 1;
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
@@ -1051,6 +1052,10 @@ $(function(){
 			layer.tips("请输入交易密码", "#quotation_password",{tips:3});
 			return;
 		}
+		if($("#trade_login").text() == "登录中"){
+			return;
+		}
+		$("#trade_login").text("登录中");
 		tradeLogin();
 	});
 	$("#trade_loginOut").click(function(){

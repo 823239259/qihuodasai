@@ -132,15 +132,15 @@ function initLoad() {
 		socket = null;
 		//更新交易连接状态
 		changeConnectionStatus();
-		if(anotherPlace){
-			tipAlert("你的账号已在另一处登录,如不是本人操作,请联系客服");
-			clearLocalCacheData();
-			loginOut();
+		//不是手动登出，则重连交易服务器
+		if(!loginFail){
+			//交易连接断开重连
+			reconnect();
 		}else{
-			//不是手动登出，则重连交易服务器
-			if(!loginFail){
-				//交易连接断开重连
-				reconnect();
+			if(anotherPlace && loginFail){
+				tipAlert("你的账号已在另一处登录,如不是本人操作,请联系客服");
+				clearLocalCacheData();
+				loginOut();
 			}
 		}
 	}
