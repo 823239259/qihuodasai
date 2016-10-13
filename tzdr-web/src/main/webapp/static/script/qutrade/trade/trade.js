@@ -887,14 +887,17 @@ $(function(){
 		type:"get",
 		success:function(result){
 			if(result){
-				var data = result.data.data;
-				var dataLength = data.length;
-				for(var i = 0  ; i < dataLength ; i ++){
-					var _data = data[i];
-					var cls = "selectAccount"+i;
-					var  html = '<p class = "'+cls+'">'+_data.tranAccount+'</p>';
-					$("#more_account").append(html);
-					addBindsss(cls);
+				var _data = result.data;
+				if(_data != undefined){
+					var data = _data.data;
+					var dataLength = data.length;
+					for(var i = 0  ; i < dataLength ; i ++){
+						var _data = data[i];
+						var cls = "selectAccount"+i;
+						var  html = '<p class = "'+cls+'">'+_data.tranAccount+'</p>';
+						$("#more_account").append(html);
+						addBindsss(cls);
+					}
 				}
 			}
 		}
