@@ -224,9 +224,9 @@
 	mui.app_filePath=function(file_url){
 		
 		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
-		
+		console.log("1"+plus.io.convertLocalFileSystemURL('_www/'+file_url))
+		console.log("2"+plus.io.convertAbsoluteFileSystem(path));
 		var filePath = plus.io.convertAbsoluteFileSystem(path);
-		
 		return filePath;
 	}
 	
@@ -381,7 +381,6 @@ var tzdr = {
     		}
 		},
 		initButtomListener:function(home){
-			alert("测试");
 				document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");
@@ -399,11 +398,9 @@ var tzdr = {
 					    if(s){
 							mui.app_refresh('scheme');
 						}
-					    alert("测试+scheme");
 						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
 						return;
 					}
-						alert("测试+listrg");
 					mui.openWindow({url:mui.app_filePath("tzdr/future/listrg.html"),id:"noscheme"});
 					
 				});
@@ -412,7 +409,6 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('home');  
 					}
-						alert("测试+home");
 					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
 				});
 			
@@ -421,7 +417,6 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('quotationMain');  
 					}
-					alert("测试+quotationMain");
 					mui.openWindow({url:mui.app_filePath("tzdr/quotation/quotationMain.html"),id:"quotationMain"});
 				});
 			
