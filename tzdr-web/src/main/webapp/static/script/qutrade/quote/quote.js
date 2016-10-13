@@ -441,7 +441,7 @@ function updateRight(param){
 	if(openPrice > preSettlePrice){
 		$("#right_jk_1").css("color","#ff5500");
 	}else if(openPrice < preSettlePrice){
-		$("#right_jk_1").css("color","#FFFFFF");
+		$("#right_jk_1").css("color","#0bffa4");
 	}
 	$("#right_jk_1").text(parseFloat(openPrice).toFixed(doSize));
 	//幅度
@@ -458,10 +458,10 @@ function updateRight(param){
 		 color = "#FFFFFF";
 	 }
 	$("#right_lastPrice_0").css("color",color);
-	$("#right_zj_0").css("color",color);
+	//$("#right_zj_0").css("color",color);
 	$("#right_zd_1").css("color",color);
-	$("#right_zd_1").css("color",color);
-	$("#right_zl_3").css("color",color);
+	//$("#right_zd_1").css("color",color);
+	//$("#right_zl_3").css("color",color);
 	$("#right_zd_3").css("color",color);
 	$("#right_fd_2").css("color",color);
 	$("#right_fd_2").text(jj+changeRate+"%");
@@ -474,8 +474,8 @@ function updateRight(param){
 	}
 	$("#right_zg_2").text(parseFloat(param.HighPrice).toFixed(doSize));
 	//总量
-	$("#right_zl_3").text(parseFloat(param.TotalVolume).toFixed(doSize));
-	//总量
+	$("#right_zl_3").text(parseFloat(param.TotalVolume).toFixed(0));
+	//最低价
 	$("#right_zd_3").text(parseFloat(param.LowPrice).toFixed(doSize));
 	//卖五-卖一
 	var askPrice5 = param.AskPrice5;
@@ -522,7 +522,7 @@ function updateRight(param){
 	var  bidPrice1 = param.BidPrice1;
 	if(bidPrice1 > preSettlePrice){
 		$("#right_buy_0").css("color","#ff5500");
-	}else if(bidPrice5 < preSettlePrice){
+	}else if(bidPrice1 < preSettlePrice){
 		$("#right_buy_0").css("color","#0bffa4");
 	}
 	$("#right_buy_0").text(parseFloat(bidPrice1).toFixed(doSize));

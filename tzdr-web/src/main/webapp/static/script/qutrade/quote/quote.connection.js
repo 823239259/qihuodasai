@@ -33,7 +33,8 @@ function initQuoteLoad(){
 		quoteHandleData(evt);
 	}
 	quoteSocket.onclose = function() {
-		
+		quoteSocket = null;
+		initQuote();
 	}
 	return true;
 }
