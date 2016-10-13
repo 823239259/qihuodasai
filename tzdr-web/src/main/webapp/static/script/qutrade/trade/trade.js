@@ -1295,7 +1295,7 @@ function doInsertBackhandOrder(){
 function doInsertAllCancleOrder(){
 	for(var i = 0 ; i < designateIndex ; i++){
 		var contractCode = localCachedesignateContractCode[i];
-		if(contractCode == undefined || $(".data-index-des"+i+"").html() == undefined){
+		if(contractCode == undefined || $(".des-index"+i+"").html() == undefined){
 			continue;
 		}
 		var tradeParam = doGetCancleOrderBasicParam(contractCode);
