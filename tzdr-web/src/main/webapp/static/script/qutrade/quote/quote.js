@@ -248,6 +248,9 @@ function setTradeLastPrice(param){
  * @param
  */
 function setBuyAndSellFloatPrice(param){
+	var priceType = $("input[type='radio']:checked").val();
+	//如果限价就不需要修改
+	if(priceType == 0)return;
 	var newCommdityNo = param.CommodityNo;
 	var newContractNo = param.ContractNo; 
 	var contractCode = newCommdityNo+newContractNo;

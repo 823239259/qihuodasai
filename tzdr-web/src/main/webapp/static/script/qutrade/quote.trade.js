@@ -65,13 +65,15 @@ $(function() {
 				var addNum = 1;
 				var doSize = 0;
 				if(loca != undefined){
-					addNum = loca.ContractSize;
+					addNum = loca.MiniTikeSize;
 					doSize = loca.DotSize;
 				}
 				for(var i  = 0 ; i < addNum ; i ++){
 					num--;
 				}
 				$("#money_number").val(parseFloat(num).toFixed(doSize));
+				$("#float_buy").val(parseFloat(num).toFixed(doSize));
+				$("#float_sell").val(parseFloat(num).toFixed(doSize));
 			}
 		});
 		/* 增加金额 */
@@ -86,12 +88,14 @@ $(function() {
 				var doSize = 0;
 				if(loca != undefined){
 					doSize = loca.DotSize;
-					addNum = parseFloat(loca.ContractSize).toFixed(doSize);
+					addNum = parseFloat(loca.MiniTikeSize).toFixed(doSize);
 				}
 				for(var i  = 0 ; i < addNum ; i ++){
 					num++;
 				}
 				$("#money_number").val(parseFloat(num).toFixed(doSize));
+				$("#float_buy").val(parseFloat(num).toFixed(doSize));
+				$("#float_sell").val(parseFloat(num).toFixed(doSize));
 			}
 		});
 		/* 光标离开输入框时 */
