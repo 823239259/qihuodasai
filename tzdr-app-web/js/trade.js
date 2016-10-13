@@ -177,10 +177,18 @@ function loadSocket(){
 				} else if (method == "OnRtnMoney") {
 					var accountParam = parameters;
 					updateBalance(accountParam)
-			}else if(method = "OnError"){
-				var code = parameters.Code;
-				var loginMessage = parameters.Message;
-				alertProtype(loginMessage,"提示",Btn.confirmed());
+			}else if(method == "OnError"){
+//				if(isLoginOut){
+					var code = parameters.Code;
+					var loginMessage = parameters.Message;
+					alertProtype(loginMessage,"提示",Btn.confirmed());
+//				}
+				
+			}else if(method =="OnRspLogout"){
+					var code = parameters.Code;
+					var loginMessage = parameters.Message;
+						$("#switchAccount").text("登录账户");
+					alertProtype(loginMessage,"提示",Btn.confirmed());
 			}
 		}
 	}
