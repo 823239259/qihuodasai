@@ -158,6 +158,7 @@
 	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
 		当前账户:<b id = "top_username"></b>
 		<button id = "trade_loginOut">退出登录</button>
+		<button><a href="${ctx }/outDisk/index"  target="_blank">立即开户</a></button>
 	</div>
 </div>
 <!-- center -->
@@ -436,7 +437,7 @@
 					<label>交易保障金：<span id = "deposit">00.0</span></label>
 					<label>账户余额：<span id = "todayCanUse">00.0</span></label>
 					<label>持仓盈亏：<span id = "floatingProfit">00.0</span></label>
-					<label>交易盈亏：<span id = "closeProfit">00.0</span></label>
+					<label>交易盈亏：<span id = "closeProfit">00.0</span></label>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="${ctx }/toUserftseTradeListSSO" target="_blank">追加保证金</a>
 				</div>
 			</div>

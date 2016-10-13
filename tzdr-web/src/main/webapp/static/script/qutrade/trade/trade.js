@@ -296,7 +296,12 @@ var orderIndex = 0;
 function appendOrder(param){
 	var contractCode = param.ContractCode;
 	var drectionText = analysisBusinessDirection(param.Drection);
+	var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
 	var orderPrice = param.OrderPrice;
+	if(localCommodity != undefined){
+		var doSize = localCommodity.DotSize;
+		orderPrice = parseFloat(orderPrice).toFixed(doSize);
+	}
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
 	var orderNum = param.OrderNum;
@@ -1060,6 +1065,10 @@ $(function(){
 		orderIndex=0;
 		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
 	});
+	$('#money_number').bind('input propertychange', function() {  
+	    $('#float_buy').text($(this).val());  
+	    $('#float_sell').text($(this).val());  
+	});  
 });
 /**
  * 绑定交易操作事件

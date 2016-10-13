@@ -68,9 +68,7 @@ $(function() {
 					addNum = loca.MiniTikeSize;
 					doSize = loca.DotSize;
 				}
-				for(var i  = 0 ; i < addNum ; i ++){
-					num--;
-				}
+				num = num - addNum;
 				$("#money_number").val(parseFloat(num).toFixed(doSize));
 				$("#float_buy").val(parseFloat(num).toFixed(doSize));
 				$("#float_sell").val(parseFloat(num).toFixed(doSize));
@@ -88,14 +86,11 @@ $(function() {
 				var doSize = 0;
 				if(loca != undefined){
 					doSize = loca.DotSize;
-					addNum = parseFloat(loca.MiniTikeSize).toFixed(doSize);
+					addNum = parseFloat(loca.MiniTikeSize);
 				}
-				for(var i  = 0 ; i < addNum ; i ++){
-					num++;
-				}
-				$("#money_number").val(parseFloat(num).toFixed(doSize));
-				$("#float_buy").val(parseFloat(num).toFixed(doSize));
-				$("#float_sell").val(parseFloat(num).toFixed(doSize));
+				$("#money_number").val(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
+				$("#float_buy").val(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
+				$("#float_sell").val(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
 			}
 		});
 		/* 光标离开输入框时 */
