@@ -126,8 +126,11 @@ function initLoad() {
 		socket = null;
 		//更新交易连接状态
 		changeConnectionStatus();
-		//交易连接断开重连
-		reconnect();
+		//不是手动登出，则重连交易服务器
+		if(!loginFail){
+			//交易连接断开重连
+			reconnect();
+		}
 	}
 	return true;
 }
@@ -161,9 +164,7 @@ function initTrade(){
  * 重新连接交易服务器
  */
 function reconnect(){
-	if(!loginFail){
-		layer.msg('交易连接断开,正在重新连接...', {icon: 16});
-	}
+	layer.msg('交易连接断开,正在重新连接...', {icon: 16});
 	clearTradListData();
 	if(socket == null){
 		initTrade();
