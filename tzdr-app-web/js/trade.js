@@ -491,11 +491,18 @@ function appendOrder(data){
 	var orderStatus = orderParam.OrderStatus;
 	var orderNum = orderParam.OrderNum;
 	var tradeNum = orderParam.TradeNum;
+	var orderPrice = orderParam.OrderPrice;
 	var cdNum = 0;
 	var drectionText = analysisDrection(drection);
 	var orderStatusText = analysisOrderStatus(orderStatus);
 	if(orderStatus == 4){
 		cdNum = orderNum - tradeNum;
+	}
+	var commdityNo = orderParam.CommodityNo;
+	var contractNo = orderParam.ContractNo;
+	var comm = marketCommdity[commdityNo+contractNo];
+	if(comm != undefined){
+		orderPrice = parseFloat(orderPrice).toFixed(comm.DotSize);
 	}
 	var orderId = orderParam.OrderID;
 	var cls = 'entrust'+entrustsIndex;
@@ -505,7 +512,7 @@ function appendOrder(data){
 				+'			<span class = "order0">'+orderParam.ContractCode+'</span>'
 				+'			<span class = "order1">'+orderStatusText+'</span>'
 				+'			<span class = "order2">'+drectionText+'</span>'
-				+'			<span class = "order3">'+orderParam.OrderPrice+'</span>'
+				+'			<span class = "order3">'+orderPrice+'</span>'
 				+'			<span class = "order4">'+orderNum+'</span>'
 				+'			<span class = "order5">'+tradeNum+'</span>'
 				+'			<span class = "order6">'+cdNum+'</span>'
