@@ -79,6 +79,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+//				console.log(JSON.stringify(errorThrown));
 				 //plus.nativeUI.closeWaiting();
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
@@ -262,12 +263,14 @@ var tzdr = {
 	constants:{
 		//接口域名地址
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
+
+//		api_domain:"http://test.api.vs.com/",
 		api_domain:"http://api.vs.com/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token
 		user_token:'user_token',
-		//密钥
+		//密钥 
 		user_secret:'user_secret',
 		//用户手机号
 		user_mobile:'user_mobile',
@@ -378,7 +381,7 @@ var tzdr = {
     		}
 		},
 		initButtomListener:function(home){
-			
+			alert("测试");
 				document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");
@@ -396,9 +399,11 @@ var tzdr = {
 					    if(s){
 							mui.app_refresh('scheme');
 						}
+					    alert("测试+scheme");
 						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
 						return;
 					}
+						alert("测试+listrg");
 					mui.openWindow({url:mui.app_filePath("tzdr/future/listrg.html"),id:"noscheme"});
 					
 				});
@@ -407,6 +412,7 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('home');  
 					}
+						alert("测试+home");
 					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
 				});
 			
@@ -415,6 +421,7 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('quotationMain');  
 					}
+					alert("测试+quotationMain");
 					mui.openWindow({url:mui.app_filePath("tzdr/quotation/quotationMain.html"),id:"quotationMain"});
 				});
 			
@@ -568,7 +575,7 @@ tzdr.kuaiqiangshou=function(obj){
 					//打开app stroe 下载 ipa
 					document.getElementById("ios_info").style.display="block";
 					document.getElementById("ios_down").style.display="none";
-					plus.runtime.openURL("itms-services://?action=download-manifest&amp;url=https://update.tzdr.com/Future/download/ios_tzdr_app/kqs.plist");  
+					plus.runtime.openURL("itms-services://?action=download-manifest&amp;url=https://update.vs.com/Future/download/ios_vs_app/kqs.plist");  
 					return;
 				}  
 				else if(has_android){
@@ -584,7 +591,7 @@ tzdr.kuaiqiangshou=function(obj){
 //						plus.webview.currentWebview().reload("true");
 //					}
 					//下载 apk  
-					plus.runtime.openURL("http://update.tzdr.com/Future/download/android_tzdr_app/kuaiqiangshou.apk");
+					plus.runtime.openURL("http://update.vs.com/Future/download/android_vs_app/kuaiqiangshou.apk");
 					return;
 				
 			}
