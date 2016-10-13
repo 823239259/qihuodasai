@@ -155,8 +155,8 @@
 		<div id="more_account" style="display: none;">
 		</div>
 	</div>
-	<div class="quotation_anniu" id = "show_user_info">
-		欢迎你:<b id = "top_username"></b>
+	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
+		当前账户:<b id = "top_username"></b>
 		<button id = "trade_loginOut">退出登录</button>
 	</div>
 </div>
@@ -339,19 +339,19 @@
 			    <div class="quotation_detailed_conent" style="position: relative;">
 			        <div class="quotation_detailed_title" id = "hold_title">
 			        	<div class="gdt1">
-			        		<div>
+			        		<div id = "hold_gdt1">
 				        		<ul class="tab_lis">
 					        		<li class="ml" style="width: 80px;">合约代码</li>
 					        		<li style="width: 80px;">持仓数量</li>
 					        		<li style="width: 80px">买卖</li>
-					        		<li style="width: 80px;">持仓均价</li>
+					        		<li style="width: 100px;">持仓均价</li>
 					        		<li style="width: 160px;">浮动盈利</li>
 					        		<li  style="width: 80px;">交易所</li>
 					        		<li  style="width: 80px;">币种</li>
 				        		</ul>
 			        		</div>
 			        	</div>
-			        	<ul class="caozuo">
+			        	<ul class="caozuo"  style = "display:none">
 			        		<li><a href="javascript:void(0);"  id = "allSelling">全部平仓</a></li>
 			        		<li><a href="javascript:void(0);"  id = "selling">平仓</a></li>
 			        		<li><a href="javascript:void(0);"  id = "backhand">反手</a></li>
@@ -359,7 +359,7 @@
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
 			        	<div class="gdt1">
-			        		<div>	
+			        		<div id = "order_gdt1">	
 					        	<ul class="tab_lis">
 					        		<li class="ml">合约代码</li>
 					        		<li style="width: 50px;">买卖</li>
@@ -377,7 +377,7 @@
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "des_title">
 			        	<div class="gdt1">
-			        		<div>
+			        		<div id = "des_gdt1">
 					        	<ul class="tab_lis">
 					        		<li class="ml">合约代码</li>
 					        		<li>合约名称</li>
@@ -388,7 +388,7 @@
 					        	</ul>
 				        	</div>
 				        </div>	
-			        	<ul class="caozuo">
+			        	<ul class="caozuo" style = "display:none">
 			        		<li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>
 			        		<li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>
 			        		<li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>
@@ -396,7 +396,7 @@
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
 			        	<div class="gdt1">
-			        		<div style="width: 850px;">
+			        		<div style="width: 850px;" id = "trade_gdt1">
 					        	<ul class="tab_lis">
 					        		<li class="ml">合约代码</li>
 					        		<li style="width: 30px;">买卖</li>
@@ -413,7 +413,7 @@
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "account_title">
 			        	<div class="gdt1">
-			        		<div>
+			        		<div id = "account_gdt1">
 					        	<ul class="tab_lis">
 					        		<li class="ml">币种</li>
 					        		<li>今权益</li>

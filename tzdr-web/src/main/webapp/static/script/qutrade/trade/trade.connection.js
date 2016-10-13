@@ -71,6 +71,7 @@ function loginOut(account,password){
 	$("#show_user_info").hide();
 	socket = null;
 	setIsLogin(false);
+	clearTradListData();
 	/*initTrade();*/
 }
 /**
@@ -165,7 +166,6 @@ function initTrade(){
  */
 function reconnect(){
 	layer.msg('交易连接断开,正在重新连接...', {icon: 16});
-	clearTradListData();
 	if(socket == null){
 		initTrade();
 	}

@@ -60,6 +60,7 @@ function handleData(evt){
 				LoginForwardInitLoadData();
 				$("#show_login").hide();
 				$("#show_user_info").show();
+				$(".caozuo").show();
 				$("#top_username").text(username);
 				setIsLogin(true);
 				loginFail = false;
@@ -248,7 +249,7 @@ function addFundsDetails(param){
 				'	<li class = "detail_profitRate">'+profitRate+'</li>'+
 				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
 				'</ul>';
-	$("#account_title .tab_lis").after(html);
+	$("#account_title .tab_lis").append(html);
 	tabOn();
 	localCacheFundDetail[currencyNo]=param;
 	addFundDetailBindClick(currencyNo);
@@ -317,7 +318,7 @@ function appendOrder(param){
 				'	<li class = "order8" style="width: 120px;">'+insertDateTime+'</li>'+
 				'	<li class = "order9">'+orderId+'</li>'+
 				'</ul>';
-	$("#order_title .tab_lis").after(html);
+	$("#order_gdt1").append(html);
 	tabOn();
 	addOrderBindClick(cls);
 	updateOrderIndex();
@@ -383,7 +384,7 @@ function appendDesignates(param){
 				'	<li class = "des10" style = "display:none;">'+orderId+'</li>'+
 				'	<li class = "des11" style = "display:none;">'+triggerPrice+'</li>'+
 				'</ul>';
-   $("#des_title .tab_lis").after(html);
+   $("#des_gdt1").append(html);
    tabOn();
    localCacheDesignate[contractCode] = createDesignatesParam(param);
    localCachedesignateContractCode[designateIndex] = contractCode;
@@ -453,7 +454,7 @@ function appendTradeSuccess(param){
 				'	<li class = "trade7"  style="width: 150px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
-	$("#trade_title .tab_lis").after(html);
+	$("#trade_gdt1").append(html);
 	tabOn();
 	addTradeSuccessBindClick(cls);
 	updateTradesIndex();
@@ -531,18 +532,18 @@ function addPostion(param){
 		var cls = "postion-index"+postionIndex;
 		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
-					'	<li  class = "position1" style="width: 50px;">'+holdNum+'</li>'+
-					'	<li  class = "position2" style="width: 30px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
-					'	<li  class = "position3" style="width: 120px;">'+holdAvgPrice+'</li>'+
-					'	<li  class = "position4">'+floatingProfit+'</li>'+
-					'	<li  class = "position5">'+exchangeNo+'</li>'+
-					'	<li  class = "position6">'+currencyNo+'</li>'+
+					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
+					'	<li  class = "position2" style="width: 80px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
+					'	<li  class = "position3" style="width: 80px;">'+holdAvgPrice+'</li>'+
+					'	<li  class = "position4"  style="width: 160px;">'+floatingProfit+'</li>'+
+					'	<li  class = "position5"  style="width: 80px;">'+exchangeNo+'</li>'+
+					'	<li  class = "position6"  style="width: 80px;">'+currencyNo+'</li>'+
 					'	<li  class = "position7"  style = "display:none;">'+commodityNo+'</li>'+
 					'	<li  class = "position8"  style = "display:none;">'+contractNo+'</li>'+
 					'	<li  class = "position9"  style = "display:none;">'+openAvgPrice+'</li>'+
 					'	<li  class = "position10"  style = "display:none;">'+floatP+'</li>'+
 					'</ul>';
-		$("#hold_title .tab_lis").after(html);
+		$("#hold_gdt1").append(html);
 		tabOn();
 		//存储数据
 		localCachePostion[contractCode] = createPostionsParam(param);
@@ -595,6 +596,9 @@ function updatePostion(param){
 			var miniTikeSize = localCommodity.MiniTikeSize;
 			var currencyNo = localCommodity.CurrencyNo;
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			if(isNaN(floatP)){
+				floatP = 0.00;
+			}
 			floatingProft = floatP +":"+ currencyNo; 
 		}
 		$floatingProfit.text(floatingProft);
@@ -669,15 +673,15 @@ function validationFundDetailsIsExsit(param){
  */
 function generatePostionTitle(){
 	var html = '<ul class="tab_lis">'+
-				'	<li class="ml" style="width: 100px;">合约代码</li>'+
-				'	<li>持仓数量</li>'+
-				'	<li>买卖</li>'+
-				'	<li>持仓均价</li>'+
-				'	<li>浮动盈利</li>'+
-				'	<li>交易所</li>'+
-				'	<li>币种</li>'+
+				'	<li class="ml" style="width: 80px;">合约代码</li>'+
+				'	<li style="width: 80px;">持仓数量</li>'+
+				'	<li style="width: 80px;">买卖</li>'+
+				'	<li style="width: 100px;">持仓均价</li>'+
+				'	<li style="width: 160px;">浮动盈利</li>'+
+				'	<li style="width: 80px;">交易所</li>'+
+				'	<li style="width: 80px;">币种</li>'+
 				'</ul>';
-	$("#hold_title").html(html);
+	$("#hold_gdt1").html(html);
 }
 /**
  * 生成委托信息表头
@@ -685,17 +689,17 @@ function generatePostionTitle(){
 function generateOrderTitle(){
 	var html = '<ul class="tab_lis">'+
 				'	<li class="ml">合约代码</li>'+
-				'	<li>买卖</li>'+
-				'	<li>委托价</li>'+
-				'	<li>委托量</li>'+
+				'	<li  style = "width:50px;">买卖</li>'+
+				'	<li >委托价</li>'+
+				'	<li style = "width:50px;">委托量</li>'+
 				'	<li>触发价</li>'+
-				'	<li>委托状态</li>'+
-				'	<li>成交均价</li>'+
-				'	<li>成交量</li>'+
-				'	<li>撤单时间</li>'+
+				'	<li >委托状态</li>'+
+				'	<li style = "width:150px;" >成交均价</li>'+
+				'	<li style = "width:50px;"  >成交量</li>'+
+				'	<li style = "width:120px;">撤单时间</li>'+
 				'	<li>订单号</li>'+
 				'</ul>';
-	$("#order_title").html(html);
+	$("#order_gdt1").html(html);
 }
 /**
  * 生成挂单信息表头
@@ -705,11 +709,11 @@ function generateDesignateTitle(){
 				'	<li class="ml">合约代码</li>'+
 				'	<li>合约名称</li>'+
 				'	<li>买卖</li>'+
-				'	<li>委托价</li>'+
+				'	<li  style="width: 120px;">委托价</li>'+
 				'	<li>委托量</li>'+
 				'	<li>挂单量</li>'+
 				'</ul>';
-	$("#des_title").html(html);
+	$("#des_gdt1").html(html);
 }
 /**
  * 生成成交记录表头
@@ -717,22 +721,22 @@ function generateDesignateTitle(){
 function generateTradeSuccessTitle(){
 	var html = '<ul class="tab_lis">'+
 				'	<li class="ml">合约代码</li>'+
-				'	<li>买卖</li>'+
-				'	<li>成交均价</li>'+
-				'	<li>成交量</li>'+
-				'	<li>币种</li>'+
-				'	<li>成交编号</li>'+
-				'	<li>订单号</li>'+
-				'	<li>成交时间</li>'+
+				'	<li  style="width: 30px;">买卖</li>'+
+				'	<li  style="width: 120px;">成交均价</li>'+
+				'	<li  style="width: 50px;">成交量</li>'+
+				'	<li  style="width: 70px;">币种</li>'+
+				'	<li  style="width: 170px;">成交编号</li>'+
+				'	<li  style="width: 100px;">订单号</li>'+
+				'	<li  style="width: 150px;">成交时间</li>'+
 				'	<li>交易所</li>'+
 				'</ul>';
-	$("#trade_title").append(html);
+	$("#trade_gdt1").append(html);
 }
 /**
  * 生成持仓操作节点
  */
 function generateHoldHandleDom(){
-	var html =  '<ul class="caozuo">'+
+	var html =  '<ul class="caozuo" style = "display:none;">'+
 			    '	<li><a href="javascript:void(0);" id = "allSelling">全部平仓</a></li>'+
 				'	<li><a href="javascript:void(0);" id = "selling">平仓</a></li>'+
 				'	<li><a href="javascript:void(0);" id = "backhand">反手</a></li>'+
@@ -743,7 +747,7 @@ function generateHoldHandleDom(){
  * 生成挂单操作节点
  */
 function generateDesHandleDom(){
-	var html =  '<ul class="caozuo">'+
+	var html =  '<ul class="caozuo"  style = "display:none;">'+
 				'	<li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>'+	
 				'	<li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>'+
 				'	<li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>'+
@@ -865,6 +869,25 @@ function deletePositionsContractCode(param){
 	}
 }
 /**
+ * 初始化全局缓存持仓合约的对象数组
+ */
+function deleteAllPositionsLocalCache(){
+	localCachePostion = {};
+}
+/**
+ * 初始化缓存持仓列表品种+合约
+ */
+function deleteAllPositionContractCode(){
+	localCachePositionContractCode = {};
+}
+/**
+ * 清除选中的持仓合约
+ */
+function deleteSelectPostion(){
+	selectPostion = {};
+}
+
+/**
  * 移除全局缓存挂单的品种合约
  * @param {Object} param
  */
@@ -872,6 +895,24 @@ function deleteDesignatesContractCode(param){
 	if(!delete localCacheDesignate[param]){
 		localCacheDesignate[param] = null;
 	}
+}
+/**
+ * 初始化全局缓存挂单合约的对象数组
+ */
+function deleteAllDesgnatesLocalCache(){
+	localCacheDesignate = {};
+}
+/**
+ * 初始化缓存挂单列表信息的品种+合约
+ */
+function deleteAllDesgnatesContractCode(){
+	localCachedesignateContractCode = {};
+}
+/**
+ * 清除选中的持仓合约
+ */
+function deleteSelectDesgnate(){
+	selectDesgnate = {};
 }
 function addBindsss(cls){
 	$("."+cls+"").bind("click",function(){
@@ -977,7 +1018,28 @@ $(function(){
 	});
 	$("#trade_loginOut").click(function(){
 		loginFail = true;
-		tipConfirm("确认退出当前登录吗?", tradeLoginOut, cancleCallBack);
+		holdFirstLoadDataIndex = 0;
+		accountFirstLoadDataIndex = 0;
+		orderFirsetLoadDataIndex = 0;
+		tradeFirsetLoadDataIndex = 0;
+		deleteAllDesgnatesLocalCache();
+		deleteAllDesgnatesContractCode();
+		deleteSelectDesgnate();
+		deleteAllPositionsLocalCache();
+		deleteAllPositionContractCode();
+		deleteSelectPostion();
+		postionIndex = 0;
+		designateIndex = 0;
+		localCacheFundDetail = {};
+		uehIndex = 0;
+		loadCachBanlance = {};
+		loadCachDeposit = {};
+		loadCachCanuse = {};
+		loadCurrencyRate = {};
+		loadCachAccountNo = {};
+		localCacheCurrencyAndRate = {};
+		orderIndex=0;
+		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
 	});
 });
 /**
@@ -1365,16 +1427,22 @@ function sumListfloatingProfit(){
  * 清除交易列表的数据并生成操作按钮
  */
 function clearTradListData(){
-	$("#account_title").html("");
-	$("#order_title").html("");
-	$("#des_title").html("");
-	$("#trade_title").html("");
-	$("#hold_title").html("");
+	$("#account_gdt1").html("");
+	$("#order_gdt1").html("");
+	$("#des_gdt1").html("");
+	$("#trade_gdt1").html("");
+	$("#hold_gdt1").html("");
 	$("#todayBalance").html(0.00);
 	$("#deposit").html(0.00);
 	$("#todayCanUse").html(0.00);
 	$("#floatingProfit").html(0.00);
 	$("#closeProfit").html(0.00);
+	$(".caozuo").html("");
+	generatePostionTitle();
+	generateDesignateTitle();
+	generateHoldHandleDom();
+	generateOrderTitle();
+	generateTradeSuccessTitle();
 	generateHoldHandleDom();
 	generateDesHandleDom();
 	bindOpertion();
