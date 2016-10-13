@@ -60,8 +60,8 @@ function handleData(evt){
 				LoginForwardInitLoadData();
 				$("#show_login").hide();
 				$("#show_user_info").show();
-				$(".caozuo").show();
 				$("#top_username").text(username);
+				$(".caozuo").show();
 				setIsLogin(true);
 				loginFail = false;
 			} else {
@@ -733,13 +733,32 @@ function generateTradeSuccessTitle(){
 	$("#trade_gdt1").append(html);
 }
 /**
+ * 生成资金明细表头
+ */
+function generateAccountTitle(){
+	var html = '<ul class="tab_lis">'+
+				'	<li class="ml">币种</li>'+
+				'	<li>今权益</li>'+
+				'	<li>今可用</li>'+
+				'	<li>保证金</li>'+
+				'	<li>今日浮盈</li>'+
+				'	<li>维持保证金</li>'+
+				'	<li>昨权益</li>'+
+				'	<li>昨结存</li>'+
+				'	<li>今结存</li>'+
+				'	<li>冻结资金</li>'+
+				'	<li>盈利率</li>'+
+				'</ul>';
+	$("#account_gdt1").append(html);
+}
+/**
  * 生成持仓操作节点
  */
 function generateHoldHandleDom(){
 	var html =  '<ul class="caozuo" style = "display:none;">'+
-			    '	<li><a href="javascript:void(0);" id = "allSelling">全部平仓</a></li>'+
-				'	<li><a href="javascript:void(0);" id = "selling">平仓</a></li>'+
-				'	<li><a href="javascript:void(0);" id = "backhand">反手</a></li>'+
+			    '	<li><a href="javascript:void(0);" id = "allPosition">全部平仓</a></li>'+
+				'	<li><a href="javascript:void(0);" id = "aPosition">平仓</a></li>'+
+				'	<li><a href="javascript:void(0);" id = "positionBckhand">反手</a></li>'+
 			    '</ul>';
 	$("#hold_title").append(html);
 }
@@ -1074,8 +1093,12 @@ function bindOpertion(){
 			tip("未登录,请先登录");
 		}
 	});
-	$("#allSelling").bind("click",function(){
+	$("#allPosition").bind("click",function(){
 		if(isLogin){
+			if(postionIndex == 0){
+				tip("没有需要平仓的数据");
+				return;
+			}
 			var tipContent = "确认全部平仓";
 			tipConfirm(tipContent,doInsertAllSellingOrder,cancleCallBack);
 		}else{
@@ -1083,7 +1106,7 @@ function bindOpertion(){
 		}
 	});
 	
-	$("#selling").bind("click",function(){
+	$("#aPosition").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
 			if(contractCode == undefined){
@@ -1096,7 +1119,7 @@ function bindOpertion(){
 			tip("未登录,请先登录");
 		}
 	});
-	$("#backhand").bind("click",function(){
+	$("#positionBckhand").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
 			if(contractCode == undefined){
@@ -1111,6 +1134,10 @@ function bindOpertion(){
 	});
 	$("#allDesOrder").bind("click",function(){
 		if(isLogin){
+			if(designateIndex == 0){
+				tip("没有需要撤单的数据");
+				return;
+			}
 			var tipContent = "确认全部撤单合约"; 
 			tipConfirm(tipContent,doInsertAllCancleOrder,cancleCallBack);
 		}else{
@@ -1437,15 +1464,12 @@ function clearTradListData(){
 	$("#todayCanUse").html(0.00);
 	$("#floatingProfit").html(0.00);
 	$("#closeProfit").html(0.00);
-	$(".caozuo").html("");
+	$(".caozuo").hide();
 	generatePostionTitle();
 	generateDesignateTitle();
-	generateHoldHandleDom();
+	generateAccountTitle();
 	generateOrderTitle();
 	generateTradeSuccessTitle();
-	generateHoldHandleDom();
-	generateDesHandleDom();
-	bindOpertion();
 }
 /**
  * 输入价格或数量验证 

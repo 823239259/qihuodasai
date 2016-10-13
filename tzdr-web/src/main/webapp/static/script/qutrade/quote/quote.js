@@ -436,7 +436,7 @@ function updateRight(param){
 	//最新价
 	$("#right_lastPrice_0").text(parseFloat(param.LastPrice).toFixed(doSize));
 	//昨结
-	$("#right_zj_0").text(parseFloat(param.PreSettlePrice).toFixed(doSize));
+	$("#right_zj_0").text(parseFloat(preSettlePrice).toFixed(doSize));
 	//涨跌
 	$("#right_zd_1").text(parseFloat(param.ChangeValue).toFixed(doSize));
 	//今开
@@ -470,16 +470,23 @@ function updateRight(param){
 	$("#right_fd_2").text(jj+changeRate+"%");
 	//最高
 	var highPrice = param.HighPrice;
-	if(highPrice > openPrice){
+	if(highPrice > preSettlePrice){
 		$("#right_zg_2").css("color","#ff5500");
-	}else if(highPrice < openPrice){
+	}else if(highPrice < preSettlePrice){
 		$("#right_zg_2").css("color","#FFFFFF");
 	}
 	$("#right_zg_2").text(parseFloat(param.HighPrice).toFixed(doSize));
 	//总量
 	$("#right_zl_3").text(parseFloat(param.TotalVolume).toFixed(0));
 	//最低价
-	$("#right_zd_3").text(parseFloat(param.LowPrice).toFixed(doSize));
+	var lowPrice = param.LowPrice;
+	if(lowPrice > preSettlePrice){
+		$("#right_zd_3").css("color","#ff5500");
+	}else if(lowPrice < preSettlePrice){
+		$("#right_zd_3").css("color","#FFFFFF");
+	}
+	$("#right_zd_3").text(parseFloat(lowPrice).toFixed(doSize));
+	
 	//卖五-卖一
 	var askPrice5 = param.AskPrice5;
 	if(askPrice5 > preSettlePrice){

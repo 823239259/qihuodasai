@@ -352,9 +352,9 @@
 			        		</div>
 			        	</div>
 			        	<ul class="caozuo"  style = "display:none">
-			        		<li><a href="javascript:void(0);"  id = "allSelling">全部平仓</a></li>
-			        		<li><a href="javascript:void(0);"  id = "selling">平仓</a></li>
-			        		<li><a href="javascript:void(0);"  id = "backhand">反手</a></li>
+			        		<li><a href="javascript:void(0);"  id = "allPosition">全部平仓</a></li>
+			        		<li><a href="javascript:void(0);"  id = "aPosition">平仓</a></li>
+			        		<li><a href="javascript:void(0);"  id = "positionBckhand">反手</a></li>
 			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
