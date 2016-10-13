@@ -80,6 +80,7 @@
 			mui.plusReady(function(){
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
+				paymentMoney.innerText=wv.money;
 				
 				var leftWidth=window.innerWidth/2-145;
 				$("#weixinpayBack").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});

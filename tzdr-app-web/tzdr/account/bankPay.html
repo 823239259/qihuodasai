@@ -102,6 +102,7 @@
 			mui.plusReady(function(){
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
+				paymentMoney.innerText=wv.money;
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					banksPay();
 				});

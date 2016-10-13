@@ -56,12 +56,13 @@
   			document.getElementById("chargeto").addEventListener("tap",function(){
   				var money = document.getElementById("traderBond").innerHTML;
   				mui.openWindow({
-				    url:'../account/charge.html',
-				    id:'charge.html',
+				    url:'../account/recharge.html',
+				    id:'recharge.html',
 				    extras:{
 				        money : money,
 				        backPage:win.pageNumber,
-				        backId:"pay.html"
+				        backId:"pay.html",
+				        type:1
 				    }
 				},back);
   			});

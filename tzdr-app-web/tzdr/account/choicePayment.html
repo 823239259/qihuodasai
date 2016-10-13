@@ -45,22 +45,32 @@
 			mui.init();
 			mui.plusReady(function(){
 				tzdr.init.initHearListener();
+				var wv = plus.webview.currentWebview();
+				paymentMoney.innerText=wv.money;
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
-					immediatePayment();
+					immediatePayment(wv);
 				})
 			});
-			function immediatePayment(){
+			function immediatePayment(wv){
 				var val =  $('.chargeList input[name="choiceBank"]:checked ').val();
 				console.log(val);
 				if(val==3){
 					mui.openWindow({
 						url:"weixinPay.html",
-						id:"weixinPay.html"
+						id:"weixinPay.html",
+						extras:{
+						  	money : wv.money,
+					        backId:wv.backId
+						}
 					})
 				}else if(val==4){
 					mui.openWindow({
 						url:"bankPay.html",
-						id:"bankPay.html"
+						id:"bankPay.html",
+						extras:{
+						  	money : wv.money,
+					        backId:wv.backId
+						}
 					})
 				}
 			}

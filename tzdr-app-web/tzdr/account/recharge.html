@@ -48,9 +48,33 @@
 			mui.init();
 			mui.plusReady(function(){
 					tzdr.init.initHearListener();
+					var wv = plus.webview.currentWebview();
+					var money1;
+					if(wv.money!=null || wv.money !=undefined){
+						wv.money=wv.money.split("元");
+						money1=wv.money[0];
+						$("#inputMoney").val(wv.money[0]);
+					}
+					//添加充值金额文本框监听
+				document.getElementById("inputMoney").addEventListener('input', function() {
+					if(this.value && !Number(this.value)) { //非数字赋值空
+						var _length = this.value.length;
+						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+						return;
+					} else {
+						var _length = this.value.length;
+						var _index = this.value.lastIndexOf('.');
+						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
+						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+						return;
+					}
+				});
+					
 					document.getElementById("recharge-btn").addEventListener("tap",function(){
-						checkMoney()
-					})
+						
+						checkMoney(money1,wv)
+					});
+					
 			})
 			/*
 			 * 修改充值后的余额
@@ -63,19 +87,22 @@
 			/*
 			 * 立即充值
 			 * */
-			function checkMoney(){
+			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
 					return;  
+				}
+				if(money1>money){
+					mui.toast("充值金额不能小于充值金额");
+					return; 
 				}
 				mui.openWindow({
 					url:"choicePayment.html",
 					id:"choicePayment.html",
 					extras:{
 						  money : money,
-					        backPage:win.pageNumber,
-					        backId:"pay.html"
+					      backId:wv.backId
 					}
 				})
 			}

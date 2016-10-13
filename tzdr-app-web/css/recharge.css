@@ -50,7 +50,8 @@ i{
 }
 #buttomDiv button{
 	margin-top: 10px;
-	margin-left:25%;
+	position: absolute;
+	right: 20px;
 	width: 40%;
 	border-radius: 3px;
 }
