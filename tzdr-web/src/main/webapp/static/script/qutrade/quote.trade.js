@@ -208,6 +208,11 @@ $(function() {
 		    $("#content .stretch").css("display","block");
 		    $("#content").animate({marginLeft:'0px'});
 		});
+		$(".carbon_time").click(function() {
+			var _this =$(this);
+			$(".carbon_time").css("color","#999");
+			_this.css("color","#ffb319");
+		});
 });
 /*渐变涨*/
 function rise(cls){

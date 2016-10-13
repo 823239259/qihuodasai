@@ -29,7 +29,7 @@
 .quotation_center .center_futures {height: 48px; line-height: 48px; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a; background: #333;}
 .quotation_center .center_futures input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 30px; width: 195px; background: #1a1a1a; color: #666; margin-top: 10px; margin-left: 10px}
 #gdt {height: 810px; background: #eee; overflow: hidden;}
-#left .futuresList ul{background: #333; width: 205px; height: 80px; border-bottom: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
+#left .futuresList ul{background: #333; width: 205px; height: 81px; border-bottom: 1px solid #1a1a1a; /* border-top: 1px solid #4d4d4d; */}
 #left .futuresList ul:hover {cursor: pointer;}
 #left .futuresList ul.on {background: #1a1a1a;}
 #left .futuresList ul.rise {background:url("../images/commodity_rise.gif");}
@@ -46,7 +46,7 @@
 
 #content .quotation_echarts {width: 100%; height: 583px;  background-color: #303030;}
 #content .quotation_transaction {border-top: 5px solid #1a1a1a; position: absolute; width: 100%;}
-#content .quotation_transaction .quotation_type{float:left; width: 345px; height: 272px; border-right: 1px solid #1a1a1a; background: #333333;}
+#content .quotation_transaction .quotation_type{float:left; width: 346px; height: 272px; border-right: 1px solid #1a1a1a; background: #333333;}
 #content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #333;}
 #right{float: right; width: 319px; height: 583px; background-color: #333; border-left: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
 #content2 {margin-right: 320px; height: 583px;}

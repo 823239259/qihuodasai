@@ -270,7 +270,7 @@
 				            <li class="carbon_time" data="15">15分</li>
 				            <li class="carbon_time" data="5">5分</li>
 				            <li class="carbon_time" data="1">1分</li>
-				            <li class="carbon_time" data="0">分时</li>
+				            <li class="carbon_time" data="0" style="color: #ffb319;">分时</li>
 				        </ul>
     				</div>
     			</div>
@@ -396,7 +396,7 @@
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
 			        	<div class="gdt1">
-			        		<div>
+			        		<div style="width: 850px;">
 					        	<ul class="tab_lis">
 					        		<li class="ml">合约代码</li>
 					        		<li style="width: 30px;">买卖</li>
@@ -432,7 +432,7 @@
 			        </div>
 			    </div>
 				<div class="quotation_detailed_qx">
-					<label>账户资产：<span id = "todayBalance">00.0</span></label>
+					<label style="margin-left: 10px;">账户资产：<span id = "todayBalance">00.0</span></label>
 					<label>交易保障金：<span id = "deposit">00.0</span></label>
 					<label>账户余额：<span id = "todayCanUse">00.0</span></label>
 					<label>持仓盈亏：<span id = "floatingProfit">00.0</span></label>
