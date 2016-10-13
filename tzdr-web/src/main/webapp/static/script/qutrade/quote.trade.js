@@ -167,7 +167,7 @@ $(function() {
 			});
 		}
 		/*找回密码*/
-		$(".backPassword").click(function() {
+		/*$(".backPassword").click(function() {
 			$("#back_passwork").css("display","block");
 			$("#div_Mask").show();
 			var popupHeight = $(".tck01").outerHeight()/2;
@@ -178,7 +178,7 @@ $(function() {
 				marginTop: -(popupHeight+15),
 				marginLeft: -(popupWidth)
 			});
-		});
+		});*/
 		
 		/*隐藏*/
 		$(".close").click(function() {
