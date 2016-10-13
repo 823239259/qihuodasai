@@ -13,12 +13,13 @@
 <link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">
 <!-- 弹出层 -->
 <link href="${ctx }/static/css/quotation.css?v=${v}" rel="stylesheet" type="text/css" />
+<script type='text/javascript' src="${ctx}/static/script/layer/skin/layer.css?v=${v}"  rel="stylesheet" type="text/css"></script> 
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quotation.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/jquery-1.8.3.js?v=${v}"></script>
 
 <script type='text/javascript' src="${ctx}/static/script/layer/layer.js?v=${v}"></script>
-<script type='text/javascript' src="${ctx}/static/script/layer/skin/layer.css/layer.js?v=${v}"></script>
+
 
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.config.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.send.js?v=${v}"></script>
@@ -135,15 +136,12 @@
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
 	<div class="quotation_anniu" id = "show_login">
-		<input type="text" name="quotation_account" id="quotation_account" placeholder="输入交易账号"/>
+		<input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
 		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
 		<button><a href="#" id = "trade_login">登录</a></button>
 		<button><a href="${ctx }/outDisk/index"  target="_blank">开户</a></button>
 		<a href="#" class="backPassword">找回密码</a>
-		<div id="more_account" style="display: none;">
-			<p>123456789</p>
-			<p>123456789</p>
-			<p>123456789</p>
+		<div id="more_account" style="display: block;">
 		</div>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info">

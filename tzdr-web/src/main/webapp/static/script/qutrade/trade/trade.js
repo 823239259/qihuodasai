@@ -854,7 +854,41 @@ function deleteDesignatesContractCode(param){
 		localCacheDesignate[param] = null;
 	}
 }
+function addBindsss(cls){
+	$("."+cls+"").bind("click",function(){
+		var $this = $(this);
+		var text = $this.text();
+		$("#quotation_account").val(text);
+		$("#more_account").css("display","none");
+	});
+}
 $(function(){
+	$.ajax({
+		url:basepath+"/user/operateLogin",
+		type:"get",
+		success:function(result){
+			if(result){
+				var data = result.data.data;
+				var dataLength = data.length;
+				for(var i = 0  ; i < dataLength ; i ++){
+					var _data = data[i];
+					var cls = "selectAccount"+i;
+					var  html = '<p class = "'+cls+'">'+_data.tranAccount+'</p>';
+					$("#more_account").append(html);
+					addBindsss(cls);
+				}
+			}
+		}
+	});
+	$("#quotation_account").mouseover(function(){
+		$("#more_account").css("display","block");
+	});
+	$("#more_account").mouseover(function(){
+		$("#more_account").css("display","block");
+	});
+	$("#quotation_account").mouseout(function(){
+		$("#more_account").css("display","none");
+	});
 	//$("#").val("${ctx}/userftse/trade_list");
 	bindOpertion();
 	$("#select_commodity").click(function(){
@@ -894,13 +928,6 @@ $(function(){
 	});
 	$("#trade_loginOut").click(function(){
 		tradeLoginOut(username);
-	});
-	$.ajax({
-		url:basePath+"/user/operateLogin",
-		type:"get",
-		success:function(result){
-			console.log(result);
-		}
 	});
 });
 /**
