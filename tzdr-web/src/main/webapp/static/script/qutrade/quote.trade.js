@@ -187,12 +187,27 @@ $(function() {
 		    $("#content .stretch").css("display","block");
 		    $("#content").animate({marginLeft:'0px'});
 		});
-		$("#quotation_account").click(function() {
-			
-			
-		})
 		
-		
-		
-		
+		/*渐变涨*/
+		function rise(cls){
+			$("."+cls+"").addClass("rise");
+		    $("."+cls+"").animate({
+		        opacity: '0'
+		    },500);
+		    setTimeout(function() {
+		        $("."+cls+"").animate({ opacity: '1' },0);
+		        $("."+cls+"").removeClass("rise");
+		    },500);
+		}
+		/*渐变跌*/
+		function fall(cls){
+			$("."+cls+"").addClass("fall");
+		    $("."+cls+"").animate({
+		        opacity: '0'
+		    },500);
+		    setTimeout(function() {
+		        $("."+cls+"").animate({ opacity: '1' },0);
+		        $("."+cls+"").removeClass("fall");
+		    },500);
+		}
 });
