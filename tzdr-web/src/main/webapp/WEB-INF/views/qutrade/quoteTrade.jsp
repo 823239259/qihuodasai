@@ -443,6 +443,8 @@
     	</div>	
     </div>
 </div>
+<!-- footer -->
+<p id="footer">Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</p>
 <div style = "display: none;" id = "trade_data">
 	<input type="text" id = "lastPrice"/>
 	<input type="text" id = "contractSize"/>

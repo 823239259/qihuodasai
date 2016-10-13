@@ -11,7 +11,7 @@
 #more_account p {height: 26px; line-height: 26px; border-radius: 4px; padding-left: 11px;}
 #more_account p:hover {background: #ccc; cursor: pointer;}
 /* 滚动条 */
-#gdt{height: 810px;}
+#gdt{height: 687px;}
 .zUIpanelScrollBox,.zUIpanelScrollBar{width:10px; top:4px; right:2px; border-radius:5px; }
 .zUIpanelScrollBox{background:black;opacity:0.1;filter:alpha(opacity=10);}
 .zUIpanelScrollBar{background:#0d0d0d;filter:alpha(opacity=80);}
@@ -21,14 +21,14 @@
 
 .gdt1, .gdt2, .gdt3, .gdt4, .gdt5 {height: 120px; overflow: hidden;}
 /* 滚动条 */
-.quotation_center {width: 100%; height: 860px;}
- #left {float: left; width: 205px; height: 860px;}
-#content {position: relative; margin-left: 205px;height: 860px;/*==等于左边栏宽度==*/ border-left: 5px solid #1a1a1a;}
+.quotation_center {width: 100%; height: 737px;}
+#left {float: left; width: 205px; height: 737px;}
+#content {position: relative; margin-left: 205px;height: 737px;/*==等于左边栏宽度==*/ border-left: 5px solid #1a1a1a;}
 #content .stretch, #content .stretch1 {position: absolute; z-index: 9; top: 430px; left: -5px;}
 #content .stretch:hover ,#content .stretch1:hover {cursor: pointer;}
 .quotation_center .center_futures {height: 48px; line-height: 48px; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a; background: #333;}
 .quotation_center .center_futures input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 30px; width: 195px; background: #1a1a1a; color: #666; margin-top: 10px; margin-left: 10px}
-#gdt {height: 810px; background: #eee; overflow: hidden;}
+#gdt {background: #eee; overflow: hidden;}
 #left .futuresList ul{background: #333; width: 205px; height: 81px; border-bottom: 1px solid #1a1a1a; /* border-top: 1px solid #4d4d4d; */}
 #left .futuresList ul:hover {cursor: pointer;}
 #left .futuresList ul.on {background: #1a1a1a;}
@@ -44,14 +44,14 @@
 #left .futuresList ul.on .futures_mz {color: #ccc;}
 #left .futuresList ul.on .futures_number {color: #ccc;}
 
-#content .quotation_echarts {width: 100%; height: 583px;  background-color: #303030;}
+#content .quotation_echarts {width: 100%; height: 460px;  background-color: #303030;}
 #content .quotation_transaction {border-top: 5px solid #1a1a1a; position: absolute; width: 100%;}
 #content .quotation_transaction .quotation_type{float:left; width: 346px; height: 272px; border-right: 1px solid #1a1a1a; background: #333333;}
 #content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #333;}
-#right{float: right; width: 319px; height: 583px; background-color: #333; border-left: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
-#content2 {margin-right: 320px; height: 583px;}
+#right{float: right; width: 319px; height: 459px; background-color: #333; border-left: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
+#content2 {margin-right: 320px; height: 460px;}
 #right .right_title {height: 48px; line-height: 48px;border-bottom: 1px solid #1a1a1a; background: #333;}
-#right .right_lis {font-size: 16px; text-align: center; color: #ccc; height: 28px; background: #404040; line-height: 28px;}
+#right .right_lis {font-size: 16px; text-align: center; color: #ccc; height: 48px; background: #404040; line-height: 48px; border-bottom: 1px solid #1a1a1a;}
 #right .right_tab ul {display: inline-block; width: 100%;height: 28px; line-height: 28px;}
 #right .right_tab ul li {float:left; font-size: 14px; }
 #right .right_tab ul .right_tab_zxj {color: #999; width: 50px; margin-left: 10px;}
@@ -63,13 +63,7 @@
 #right .tab2 ul .right_tab1_left {color: #999;}
 #right .right_tab ul .right_tab1_center {width: 210px; color: #ccc; text-align: center;}
 #right .right_tab ul .right_tab1_right {color: #999; width: 38px; text-align: right; margin-right: 10px;}
-
-
-
-
-
-
-
+#footer {background: #333; text-align: center;width: 100%; font-size: 14px; color: #666; border-top: 1px solid #1a1a1a; height: 37px; line-height: 37px;}
 /* 最小屏 1366 */
 @media screen and (max-width: 1366px) {
 	.quotation_title {width: 1366px;}

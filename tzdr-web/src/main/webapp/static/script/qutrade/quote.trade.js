@@ -213,6 +213,34 @@ $(function() {
 			$(".carbon_time").css("color","#999");
 			_this.css("color","#ffb319");
 		});
+		/*底部自适应高度*/
+		var windowHeight = document.body.scrollHeight;
+		var height = windowHeight-799;
+		if(windowHeight >836){
+			$("#footer").css({
+				height: height+"px",
+				lineHeight: height+"px"
+			});
+		}
+		/*window.onresize = function () {
+			var windowHeight = document.body.scrollHeight;
+	 		if(windowHeight >836){
+				$("#footer").css({
+					height: height+"px",
+					lineHeight: height+"px"
+				});
+			}
+		};*/
+		$(window).resize(function(){
+	        var windowHeight = $("body").height();
+	        var height = windowHeight-799;
+			if(windowHeight >836){
+				$("#footer").css({
+					height: height+"px",
+					lineHeight: height+"px"
+				});
+			}
+	    });
 });
 /*渐变涨*/
 function rise(cls){
