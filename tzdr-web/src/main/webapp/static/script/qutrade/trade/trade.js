@@ -323,7 +323,7 @@ function appendOrder(param){
 	var orderId = param.OrderID;
 	var insertDateTime = param.InsertDateTime;
 	var cls = "order-index" + orderIndex;
-	var html = '<ul class="tab_content '+cls+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
+	var html = '<ul class="tab_content '+cls+'" data-order-order = "'+orderId+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
 				'	<li class="ml order0">'+contractCode+'</li>'+
 				'	<li class = "order1" style="width: 50px;">'+drectionText+'</li>'+
 				'	<li class = "order2">'+orderPrice+'</li>'+
@@ -346,8 +346,9 @@ function appendOrder(param){
  */
 function updateOrder(param){
 	var contractCode = param.ContractCode;
-	var $orderStatus = $("ul[data-tion-order='"+contractCode+"'] li[class = 'order5']");
-	var $tradeNum = $("ul[data-tion-order= '"+contractCode+"'] li[class = 'order7']");
+	var orderId = param.OrderID;
+	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
+	var $tradeNum = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order7']");
 	var orderStatus = param.OrderStatus;
 	var tradeNum = param.TradeNum;
 	$orderStatus.text(analysisOrderStatus(orderStatus));
