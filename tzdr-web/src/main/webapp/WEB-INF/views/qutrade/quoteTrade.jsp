@@ -338,15 +338,19 @@
 			    </div>
 			    <div class="quotation_detailed_conent" style="position: relative;">
 			        <div class="quotation_detailed_title" id = "hold_title">
-			        	<ul class="tab_lis">
-			        		<li class="ml" style="width: 80px;">合约代码</li>
-			        		<li style="width: 80px;">持仓数量</li>
-			        		<li style="width: 80px">买卖</li>
-			        		<li style="width: 80px;">持仓均价</li>
-			        		<li style="width: 160px;">浮动盈利</li>
-			        		<li  style="width: 80px;">交易所</li>
-			        		<li  style="width: 80px;">币种</li>
-			        	</ul>
+			        	<div class="gdt1">
+			        		<div>
+				        		<ul class="tab_lis">
+					        		<li class="ml" style="width: 80px;">合约代码</li>
+					        		<li style="width: 80px;">持仓数量</li>
+					        		<li style="width: 80px">买卖</li>
+					        		<li style="width: 80px;">持仓均价</li>
+					        		<li style="width: 160px;">浮动盈利</li>
+					        		<li  style="width: 80px;">交易所</li>
+					        		<li  style="width: 80px;">币种</li>
+				        		</ul>
+			        		</div>
+			        	</div>
 			        	<ul class="caozuo">
 			        		<li><a href="javascript:void(0);"  id = "allSelling">全部平仓</a></li>
 			        		<li><a href="javascript:void(0);"  id = "selling">平仓</a></li>
@@ -354,28 +358,36 @@
 			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
-			        	<ul class="tab_lis">
-			        		<li class="ml">合约代码</li>
-			        		<li style="width: 50px;">买卖</li>
-			        		<li>委托价</li>
-			        		<li style="width: 50px;">委托量</li>
-			        		<li>触发价</li>
-			        		<li>委托状态</li>
-			        		<li style="width: 150px;">成交均价</li>
-			        		<li style="width: 50px;">成交量</li>
-			        		<li style="width: 120px;">撤单时间</li>
-			        		<li>订单号</li>
-			        	</ul>
+			        	<div class="gdt1">
+			        		<div>	
+					        	<ul class="tab_lis">
+					        		<li class="ml">合约代码</li>
+					        		<li style="width: 50px;">买卖</li>
+					        		<li>委托价</li>
+					        		<li style="width: 50px;">委托量</li>
+					        		<li>触发价</li>
+					        		<li>委托状态</li>
+					        		<li style="width: 150px;">成交均价</li>
+					        		<li style="width: 50px;">成交量</li>
+					        		<li style="width: 120px;">撤单时间</li>
+					        		<li>订单号</li>
+					        	</ul>
+				        	</div>
+			        	</div>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "des_title">
-			        	<ul class="tab_lis">
-			        		<li class="ml">合约代码</li>
-			        		<li>合约名称</li>
-			        		<li>买卖</li>
-			        		<li style="width: 120px;">委托价</li>
-			        		<li>委托量</li>
-			        		<li>挂单量</li>
-			        	</ul>
+			        	<div class="gdt1">
+			        		<div>
+					        	<ul class="tab_lis">
+					        		<li class="ml">合约代码</li>
+					        		<li>合约名称</li>
+					        		<li>买卖</li>
+					        		<li style="width: 120px;">委托价</li>
+					        		<li>委托量</li>
+					        		<li>挂单量</li>
+					        	</ul>
+				        	</div>
+				        </div>	
 			        	<ul class="caozuo">
 			        		<li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>
 			        		<li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>
@@ -383,32 +395,40 @@
 			        	</ul>
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
-			        	<ul class="tab_lis">
-			        		<li class="ml">合约代码</li>
-			        		<li style="width: 30px;">买卖</li>
-			        		<li style="width: 120px;">成交均价</li>
-			        		<li style="width: 50px;">成交量</li>
-			        		<li style="width: 70px;">币种</li>
-			        		<li style="width: 170px;">成交编号</li>
-			        		<li style="width: 100px;">订单号</li>
-			        		<li style="width: 150px;">成交时间</li>
-			        		<li>交易所</li>
-			        	</ul>
+			        	<div class="gdt1">
+			        		<div>
+					        	<ul class="tab_lis">
+					        		<li class="ml">合约代码</li>
+					        		<li style="width: 30px;">买卖</li>
+					        		<li style="width: 120px;">成交均价</li>
+					        		<li style="width: 50px;">成交量</li>
+					        		<li style="width: 70px;">币种</li>
+					        		<li style="width: 170px;">成交编号</li>
+					        		<li style="width: 100px;">订单号</li>
+					        		<li style="width: 150px;">成交时间</li>
+					        		<li>交易所</li>
+					        	</ul>
+				        	</div>
+				        </div>	
 			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "account_title">
-			        	<ul class="tab_lis">
-			        		<li class="ml">币种</li>
-			        		<li>今权益</li>
-			        		<li>今可用</li>
-			        		<li>保证金</li>
-			        		<li>今日浮盈</li>
-			        		<li>维持保证金</li>
-			        		<li>昨权益</li>
-			        		<li>昨结存</li>
-			        		<li>今结存</li>
-			        		<li>冻结资金</li>
-			        		<li>盈利率</li>
-			        	</ul>
+			        	<div class="gdt1">
+			        		<div>
+					        	<ul class="tab_lis">
+					        		<li class="ml">币种</li>
+					        		<li>今权益</li>
+					        		<li>今可用</li>
+					        		<li>保证金</li>
+					        		<li>今日浮盈</li>
+					        		<li>维持保证金</li>
+					        		<li>昨权益</li>
+					        		<li>昨结存</li>
+					        		<li>今结存</li>
+					        		<li>冻结资金</li>
+					        		<li>盈利率</li>
+					        	</ul>
+				        	</div>
+				        </div>	
 			        </div>
 			    </div>
 				<div class="quotation_detailed_qx">
