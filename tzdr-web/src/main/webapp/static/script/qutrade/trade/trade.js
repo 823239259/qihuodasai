@@ -143,7 +143,13 @@ function handleData(evt){
 			var loginMessage = parameters.Message;
 			tip(loginMessage);
 		}else if(method == "OnRspLogout"){
-			anotherPlace = true;
+			var code = parameters.Code;
+			var loginMessage = parameters.Message;
+			if(code == 1){
+				anotherPlace = true;
+			}else if(code == 0){
+				loginFail = true;
+			}
 		}
 	}
 }
@@ -1468,7 +1474,6 @@ function clearTradListData(){
  * 清理全局缓存数据
  */
 function clearLocalCacheData(){
-	loginFail = true;
 	holdFirstLoadDataIndex = 0;
 	accountFirstLoadDataIndex = 0;
 	orderFirsetLoadDataIndex = 0;

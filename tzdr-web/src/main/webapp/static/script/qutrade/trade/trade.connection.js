@@ -76,6 +76,7 @@ function loginOut(account,password){
 	socket = null;
 	setIsLogin(false);
 	clearTradListData();
+	clearLocalCacheData();
 	/*initTrade();*/
 }
 /**
