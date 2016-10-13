@@ -150,7 +150,7 @@
 		<input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
 		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
 		<button><a href="#" id = "trade_login">登录</a></button>
-		<button><a href="${ctx }/outDisk/index"  target="_blank">开户</a></button>
+		<button><a href="${ctx }/outDisk/index"  target="_blank">立即开户</a></button>
 		<a href="javascript:void(0);" class="backPassword">找回密码</a>
 		<div id="more_account" style="display: none;">
 		</div>
