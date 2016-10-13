@@ -59,7 +59,7 @@ function generateRealTimeQuote(obj){
 						setLocalCacheSelect(contractCode);
 						$("#commodity_title").text(commodityName+"  "+contractCode);
 					}
-					html+= '  left_xiangmu '+cls+'" data-tion-com = "'+(commodityNo+mainContract)+'" data="'+commodityNo+'&amp;'+mainContract+'&amp;'+exchangeNo+'">'+
+					html+= '  left_xiangmu '+cls+'" data-index-com = "'+quoteIndex+'" data-tion-com = "'+(commodityNo+mainContract)+'" data="'+commodityNo+'&amp;'+mainContract+'&amp;'+exchangeNo+'">'+
 					'	<li class="futures_name">'+
 					'    	<span class="futures_mz">'+commodityName+'</span>'+
 					'    	<span class="futures_bm">'+commodityNo+mainContract+'</span>'+
@@ -118,7 +118,7 @@ function updateRealTimeQuote(param){
 	}
 	var doSize = localCommodity.DotSize;
 	var lastPrice = parseFloat(param.LastPrice).toFixed(doSize);
-	var changeRate = parseFloat(param.ChangeRate).toFixed(doSize);
+	var changeRate = parseFloat(param.ChangeRate).toFixed(2);
 	var qChangeValue = parseFloat(param.ChangeValue).toFixed(doSize);
 	var color = " #ff5500";
 	var bs = "↑";
@@ -128,16 +128,23 @@ function updateRealTimeQuote(param){
 		 jj = "";
 		 color = "#0bffa4";
 	 }
+	var oldObj = $("ul[data-tion-com='"+contractCode+"']");
 	var qlast = $("ul[data-tion-com='"+contractCode+"'] li[class = 'qlast']");
 	var futuresNumber = $("ul[data-tion-com='"+contractCode+"'] li[class = 'futures_number']");
 	var scal = $("ul[data-tion-com='"+contractCode+"'] li[class = 'scal']");
+	var oldLastPrice = parseFloat(qlast.text()).toFixed(doSize);
 	qlast.text(lastPrice+" "+bs);
 	futuresNumber.text(jj + qChangeValue);
 	scal.text(jj + changeRate + "%");
 	qlast.css("color",color);
 	futuresNumber.css("color",color);
 	scal.css("color",color);
-	
+	var cls = "quote-index"+oldObj.attr("data-index-com");
+	if(lastPrice > oldLastPrice){
+		rise(cls);
+	}else if(lastPrice < oldLastPrice){
+		fall(cls);
+	}
 }
 /**
  * 行情推送处理
@@ -260,6 +267,7 @@ function setBuyAndSellFloatPrice(param){
  * @param cls
  * @returns
  */
+var leftSelectQuoteObj = 0;
 function addQuoteListBindClick(cls){
 	$("."+cls+"").bind("click",function(){
 		 var obj = $(this);
@@ -273,7 +281,6 @@ function addQuoteListBindClick(cls){
 		 setLocalCacheSelect(contractCode);
 		 clearRightData();
 		 setMoneyNumberIndex(0);
-		 
 	});
 }
 /**
@@ -438,7 +445,7 @@ function updateRight(param){
 	}
 	$("#right_jk_1").text(parseFloat(openPrice).toFixed(doSize));
 	//幅度
-	var changeRate = parseFloat(param.ChangeRate).toFixed(doSize);
+	var changeRate = parseFloat(param.ChangeRate).toFixed(2);
 	var color = "#ff5500";
 	var bs = "↑";
 	var jj = "+";
@@ -457,7 +464,7 @@ function updateRight(param){
 	$("#right_zl_3").css("color",color);
 	$("#right_zd_3").css("color",color);
 	$("#right_fd_2").css("color",color);
-	$("#right_fd_2").text(jj+changeRate);
+	$("#right_fd_2").text(jj+changeRate+"%");
 	//最高
 	var highPrice = param.HighPrice;
 	if(highPrice > openPrice){
