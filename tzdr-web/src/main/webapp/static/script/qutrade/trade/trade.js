@@ -961,7 +961,15 @@ $(function(){
 	$("#show_user_info").hide();
 	$("#trade_login").click(function(){
 		username = $("#quotation_account").val();
+		if(username == undefined || username.length == 0){
+			layer.tips("请输入交易账号", "#quotation_account",{tips:3});
+			return;
+		}
 		password = $.base64.encode($("#quotation_password").val());
+		if(password == undefined || password.length == 0){
+			layer.tips("请输入交易密码", "#quotation_password",{tips:3});
+			return;
+		}
 		tradeLogin();
 	});
 	$("#trade_loginOut").click(function(){
@@ -1359,6 +1367,11 @@ function clearTradListData(){
 	$("#des_title").html("");
 	$("#trade_title").html("");
 	$("#hold_title").html("");
+	$("#todayBalance").html(0.00);
+	$("#deposit").html(0.00);
+	$("#todayCanUse").html(0.00);
+	$("#floatingProfit").html(0.00);
+	$("#closeProfit").html(0.00);
 	generateHoldHandleDom();
 	generateDesHandleDom();
 	bindOpertion();
