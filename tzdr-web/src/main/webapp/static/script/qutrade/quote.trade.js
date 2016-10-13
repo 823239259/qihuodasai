@@ -70,8 +70,8 @@ $(function() {
 				}
 				num = num - addNum;
 				$("#money_number").val(parseFloat(num).toFixed(doSize));
-				$("#float_buy").val(parseFloat(num).toFixed(doSize));
-				$("#float_sell").val(parseFloat(num).toFixed(doSize));
+				$("#float_buy").text(parseFloat(num).toFixed(doSize));
+				$("#float_sell").text(parseFloat(num).toFixed(doSize));
 			}
 		});
 		/* 增加金额 */
@@ -89,8 +89,8 @@ $(function() {
 					addNum = parseFloat(loca.MiniTikeSize);
 				}
 				$("#money_number").val(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
-				$("#float_buy").val(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
-				$("#float_sell").val(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
+				$("#float_buy").text(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
+				$("#float_sell").text(parseFloat(parseFloat(num) + addNum*1).toFixed(doSize));
 			}
 		});
 		/* 光标离开输入框时 */
