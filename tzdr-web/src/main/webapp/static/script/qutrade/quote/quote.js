@@ -544,7 +544,7 @@ function updateRight(param){
 	}
 	$("#right_buy_6").text(parseFloat(bidPrice4).toFixed(doSize));
 	$("#right_buy_7").text(param.BidQty4);
-	var  bidPrice5 = param.BidPrice1;
+	var  bidPrice5 = param.BidPrice5;
 	if(bidPrice5 > preSettlePrice){
 		$("#right_buy_8").css("color","#ff5500");
 	}else if(bidPrice5 < preSettlePrice){
