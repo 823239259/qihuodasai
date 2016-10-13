@@ -64,6 +64,7 @@ function handleData(evt){
 				$(".caozuo").show();
 				setIsLogin(true);
 				loginFail = false;
+				anotherPlace = false;
 			} else {
 				loginFail = true;
 				tipAlert(loginMessage);
@@ -137,9 +138,12 @@ function handleData(evt){
 			var accountParam = parameters;
 			updateBalance(accountParam)
 			updateFundsDetails(accountParam);
-		} else if (method = "OnError") {
+		} else if (method == "OnError") {
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
+			tip(loginMessage);
+		}else if(method == "OnRspLogout"){
+			anotherPlace = true;
 		}
 	}
 }
@@ -295,8 +299,15 @@ var orderIndex = 0;
  */
 function appendOrder(param){
 	var contractCode = param.ContractCode;
-	var drectionText = analysisBusinessDirection(param.Drection);
+	var drectionText = analysisBusinessBuySell(param.Drection);
+	var contractNo = param.ContractNo;
+	var commodityNo = param.CommodityNo;
+	var localCommodity  = getLocalCacheCommodity(commodityNo+contractNo);
 	var orderPrice = param.OrderPrice;
+	if(localCommodity != undefined){
+		var doSize = localCommodity.DotSize;
+		orderPrice = parseFloat(orderPrice).toFixed(doSize);
+	}
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
 	var orderNum = param.OrderNum;
@@ -361,7 +372,7 @@ function appendDesignates(param){
    var contractNo = param.ContractNo;
    var commodityNo = param.CommodityNo;
    var drection = param.Drection;
-   var drectionText = analysisBusinessDirection(drection);
+   var drectionText = analysisBusinessBuySell(drection);
    var orderPrice = param.OrderPrice;
    var orderNum = param.OrderNum;
    var tradeNum = param.TradeNum;
@@ -399,7 +410,7 @@ function updateDesignatesDom(param){
 	var contractCode = param.ContractCode;
 	var orderId = param.OrderID;
 	var drection = param.Drection;
-	var drectionText = analysisBusinessDirection(drection);
+	var drectionText = analysisBusinessBuySell(drection);
 	var orderNum = parseInt(param.OrderNum);
 	var tradeNum = parseInt(param.TradeNum);
 	var orderPrice = param.OrderPrice;
@@ -432,7 +443,7 @@ var tradesIndex = 0;
  */
 function appendTradeSuccess(param){
 	var drection = param.Drection;
-	var drectionText = analysisBusinessDirection(drection);
+	var drectionText = analysisBusinessBuySell(drection);
 	var orderId = param.OrderID;
 	var contractCode = param.ContractCode;
 	var tradePrice = param.TradePrice;
@@ -450,8 +461,8 @@ function appendTradeSuccess(param){
 				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
 				'	<li class = "trade4"  style="width: 70px;">'+currencyNo+'</li>'+
 				'	<li class = "trade5" style="width: 170px;">'+tradeNo+'</li>'+
-				'	<li class = "trade6"  style="width: 100px;">'+orderId+'</li>'+
-				'	<li class = "trade7"  style="width: 150px;">'+tradeTime+'</li>'+
+				'	<li class = "trade6"  style="width: 80px;">'+orderId+'</li>'+
+				'	<li class = "trade7"  style="width: 120px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_gdt1").append(html);
@@ -1036,30 +1047,12 @@ $(function(){
 		tradeLogin();
 	});
 	$("#trade_loginOut").click(function(){
-		loginFail = true;
-		holdFirstLoadDataIndex = 0;
-		accountFirstLoadDataIndex = 0;
-		orderFirsetLoadDataIndex = 0;
-		tradeFirsetLoadDataIndex = 0;
-		deleteAllDesgnatesLocalCache();
-		deleteAllDesgnatesContractCode();
-		deleteSelectDesgnate();
-		deleteAllPositionsLocalCache();
-		deleteAllPositionContractCode();
-		deleteSelectPostion();
-		postionIndex = 0;
-		designateIndex = 0;
-		localCacheFundDetail = {};
-		uehIndex = 0;
-		loadCachBanlance = {};
-		loadCachDeposit = {};
-		loadCachCanuse = {};
-		loadCurrencyRate = {};
-		loadCachAccountNo = {};
-		localCacheCurrencyAndRate = {};
-		orderIndex=0;
 		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
 	});
+	$('#money_number').bind('input propertychange', function() {  
+	    $('#float_buy').text($(this).val());  
+	    $('#float_sell').text($(this).val());  
+	});  
 });
 /**
  * 绑定交易操作事件
@@ -1470,6 +1463,33 @@ function clearTradListData(){
 	generateAccountTitle();
 	generateOrderTitle();
 	generateTradeSuccessTitle();
+}
+/**
+ * 清理全局缓存数据
+ */
+function clearLocalCacheData(){
+	loginFail = true;
+	holdFirstLoadDataIndex = 0;
+	accountFirstLoadDataIndex = 0;
+	orderFirsetLoadDataIndex = 0;
+	tradeFirsetLoadDataIndex = 0;
+	deleteAllDesgnatesLocalCache();
+	deleteAllDesgnatesContractCode();
+	deleteSelectDesgnate();
+	deleteAllPositionsLocalCache();
+	deleteAllPositionContractCode();
+	deleteSelectPostion();
+	postionIndex = 0;
+	designateIndex = 0;
+	localCacheFundDetail = {};
+	uehIndex = 0;
+	loadCachBanlance = {};
+	loadCachDeposit = {};
+	loadCachCanuse = {};
+	loadCurrencyRate = {};
+	loadCachAccountNo = {};
+	localCacheCurrencyAndRate = {};
+	orderIndex=0;
 }
 /**
  * 输入价格或数量验证 
