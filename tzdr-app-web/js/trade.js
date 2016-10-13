@@ -190,6 +190,7 @@ function loadSocket(){
 						var loginMessage = parameters.Message;
 							$("#switchAccount").text("登录账户");
 						alertProtype(loginMessage,"提示",Btn.confirmed());
+						plus.webview.getWebviewById("transactionDetails").reload();
 					}
 			}
 		}
