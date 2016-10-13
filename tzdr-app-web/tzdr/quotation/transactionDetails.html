@@ -247,6 +247,7 @@
 				tranferParam = param;
 			}
 			var loginOutFlag = false;
+			var loginOutTip=false;
 			$(function(){ 
 				$('#password').bind('input propertychange', function() {
 				  	var orderPrice = $("#orderPrice").val();
@@ -385,6 +386,7 @@
 			}
 			function openLogin(){ 
 				loginOutFlag = true;
+				loginOutTip=true;
 				mui.openWindow({
 					url:"../login/operateLogin.html",
 					id : "operateLogin",

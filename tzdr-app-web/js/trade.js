@@ -186,9 +186,11 @@ function loadSocket(){
 				
 			}else if(method =="OnRspLogout"){
 					var code = parameters.Code;
-					var loginMessage = parameters.Message;
-						$("#switchAccount").text("登录账户");
-					alertProtype(loginMessage,"提示",Btn.confirmed());
+					if(!loginOutTip){
+						var loginMessage = parameters.Message;
+							$("#switchAccount").text("登录账户");
+						alertProtype(loginMessage,"提示",Btn.confirmed());
+					}
 			}
 		}
 	}
