@@ -33,7 +33,7 @@
         <div class="navlogo"><a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
-            <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li>
+            <%-- <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li> --%>
             <li><a id="hengzhiqidai" href="${ctx}/hsi/index">恒指期货</a></li>
             <li><a id="guojiyuanyou" href="${ctx}/crudeoil/index">国际原油</a></li>
             <li><a id="fushia50" href="${ctx}/ftse/index">富时A50</a></li>
