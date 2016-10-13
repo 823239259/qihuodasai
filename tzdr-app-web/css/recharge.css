@@ -88,11 +88,22 @@ i{
 .numberCode label{
 	display: inline-block;
 	width: 23%;
+	margin-right: 5px;
 	text-align: center;
 }
 .numberCode input{
 	display: inline-block;
-	width: 75%;
+	width: 74%;
 	border:none;
+	margin: 0px;
+}
+.listMoney{
+	width: 100%;
+}
+.listMoney label{
+	width: 30%;
+}
+.listMoney input{
+	width: 69%;
 	margin: 0px;
 }

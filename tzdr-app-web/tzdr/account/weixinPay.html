@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	    <title>我要充值</title>
+	    <title>微信支付</title>
 	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
 	    <script type="text/javascript" src="../../js/common.js"></script>
 	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
@@ -66,7 +66,7 @@
 					<p>5、如果充值遇到任何问题，请联系客服：400-852-8008；</p>
 				</div>
 				<div id="weixinpayBack">
-					<img src="../../images/weixinpay.png">
+					<img src="../../images/weixinpay.png" id="bigImg">
 				</div>
 			</div>
 			<div id="buttomDiv">
@@ -74,5 +74,20 @@
 				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
 			</div>
 		</div>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+				tzdr.init.initHearListener();
+				var leftWidth=window.innerWidth/2-145;
+				$("#weixinpayBack").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
+				$("#weixinpayBack img").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});
+					document.getElementById("weixinPayCode").addEventListener("tap",function(){
+						$("#weixinpayBack").css("display","block");
+				});
+				document.getElementById("weixinpayBack").addEventListener("tap",function(){
+				$("#weixinpayBack").css("display","none");
+				})
+			})
+		</script>
 	</body>
 </html>
