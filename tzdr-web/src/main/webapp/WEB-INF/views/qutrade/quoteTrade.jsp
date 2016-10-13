@@ -405,8 +405,8 @@
 					        		<li style="width: 50px;">成交量</li>
 					        		<li style="width: 70px;">币种</li>
 					        		<li style="width: 170px;">成交编号</li>
-					        		<li style="width: 100px;">订单号</li>
-					        		<li style="width: 150px;">成交时间</li>
+					        		<li style="width: 80px;">订单号</li>
+					        		<li style="width: 120px;">成交时间</li>
 					        		<li>交易所</li>
 					        	</ul>
 				        	</div>

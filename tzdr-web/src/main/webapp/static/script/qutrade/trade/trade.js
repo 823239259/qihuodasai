@@ -461,8 +461,8 @@ function appendTradeSuccess(param){
 				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
 				'	<li class = "trade4"  style="width: 70px;">'+currencyNo+'</li>'+
 				'	<li class = "trade5" style="width: 170px;">'+tradeNo+'</li>'+
-				'	<li class = "trade6"  style="width: 100px;">'+orderId+'</li>'+
-				'	<li class = "trade7"  style="width: 150px;">'+tradeTime+'</li>'+
+				'	<li class = "trade6"  style="width: 80px;">'+orderId+'</li>'+
+				'	<li class = "trade7"  style="width: 120px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_gdt1").append(html);
