@@ -194,9 +194,9 @@ $(function() {
 		$(function(){
 			$("#gdt").panel({iWheelStep:32});
 		});
-		/*$(function(){
-			$("#hold_title").panel({iWheelStep:32});
-		});*/
+		$(function(){
+			$(".gdt1").panel({iWheelStep:32});
+		});
 		/*商品隐藏显示*/
 		$("#content .stretch").click(function(){
 		    $("#content .stretch").css("display","none");
