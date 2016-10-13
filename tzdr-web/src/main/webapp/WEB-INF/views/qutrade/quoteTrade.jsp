@@ -175,7 +175,7 @@
     	<img class="stretch1" alt="" src="${ctx}/static/images/stretch.png" style="display: nonel">
     	<div class="quotation_echarts">
     		<div id="right">
-    			<p class="right_title"><p>
+    			<!-- <p class="right_title"><p> -->
   			    <p class="right_lis" id = "commodity_title"></p>
     			<div class="right_tab">
     				<ul>
@@ -269,8 +269,8 @@
 				            <li class="carbon_time" data="30">30分</li>
 				            <li class="carbon_time" data="15">15分</li>
 				            <li class="carbon_time" data="5">5分</li>
-				            <li class="carbon_time" data="1">1分</li>
-				            <li class="carbon_time" data="0" style="color: #ffb319;">分时</li>
+				            <li class="carbon_time" data="1" style="color: #ffb319;">1分</li>
+				            <!-- <li class="carbon_time" data="0">分时</li> -->
 				        </ul>
     				</div>
     			</div>
@@ -433,7 +433,7 @@
 			    </div>
 				<div class="quotation_detailed_qx">
 					<label style="margin-left: 10px;">账户资产：<span id = "todayBalance">00.0</span></label>
-					<label>交易保障金：<span id = "deposit">00.0</span></label>
+					<label>交易保证金：<span id = "deposit">00.0</span></label>
 					<label>账户余额：<span id = "todayCanUse">00.0</span></label>
 					<label>持仓盈亏：<span id = "floatingProfit">00.0</span></label>
 					<label>交易盈亏：<span id = "closeProfit">00.0</span></label>
