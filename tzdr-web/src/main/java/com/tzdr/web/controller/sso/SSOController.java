@@ -267,5 +267,14 @@ public class SSOController {
 	public String toLuckDraw(HttpServletRequest request, HttpServletResponse response){
 		return "redirect:/extendsion/sign/luck/view";
 	}
-	
+	/**
+	 * 操盘记录
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/toUserftseTradeListSSO")
+	public String toUserftseTradeListSSO(HttpServletRequest request, HttpServletResponse response){
+		return "redirect:/userftse/trade_list";
+	}
 }

@@ -26,6 +26,7 @@ import com.tzdr.business.service.drawMoney.UserBankService;
 import com.tzdr.business.service.future.FutureAccountService;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
+import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.utils.BigDecimalUtils;
@@ -34,6 +35,7 @@ import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.vo.UserTradeArrearageVo;
 import com.tzdr.domain.vo.UserTradeVo;
 import com.tzdr.domain.vo.future.FutureAccountVo;
+import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.UserBank;
 import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
@@ -71,7 +73,8 @@ public class AccountController {
 	
 	@Autowired
 	private FutureAccountService futureAccountService;
-	
+	@Autowired
+	private FSimpleFtseUserTradeService fSimpleFtseUserTradeService;
 
 	private static Object lock = new Object();
 	
@@ -347,7 +350,19 @@ public class AccountController {
 		}
 		return jsonResult;
 	}
-	
+	//用户操盘中账户
+	@RequestMapping(value = "/operateLogin",method=RequestMethod.GET)
+	@ResponseBody 
+	public JsonResult operateLogin(HttpServletRequest request,HttpServletResponse httpServletResponse){
+		UserSessionBean userSessionBean = (UserSessionBean)request.getSession().getAttribute(Constants.TZDR_USER_SESSION);  //获取用户账户信息
+		WUser wUser=wUserService.getUser(userSessionBean.getId());
+		JsonResult apiResult=new JsonResult();
+		if(wUser!=null){
+			List<FSimpleFtseUserTrade> list=fSimpleFtseUserTradeService.findByUidAndStateType(wUser.getId());
+			apiResult.appendData("data", list);
+		}
+		return apiResult;
+	}
 	/**
 	 * 检测内转金额
 	 * @param money

@@ -1,0 +1,164 @@
+.quotation_title {height: 60px; line-height: 60px; background: #333; border-bottom: 1px solid #1a1a1a;}
+.quotation_title img {margin-top: 10px; margin-left: 10px; float: left;}
+.quotation_title .quotation_anniu {float: right; position: relative;}
+.quotation_title .quotation_anniu input {margin-right: 10px; outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px; width: 130px; background: #1a1a1a; color: #666;}
+.quotation_title .quotation_anniu button a{border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; display: block; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
+.quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
+.quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
+.quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
+/* 登录更多账号  */
+#more_account {position: absolute; width:130px; background: #ffffff; z-index: 9; top: 43px; border-radius: 4px;}
+#more_account p {height: 26px; line-height: 26px; border-radius: 4px; padding-left: 11px;}
+#more_account p:hover {background: #ccc; cursor: pointer;}
+/* 滚动条 */
+#gdt{height: 687px;}
+.zUIpanelScrollBox,.zUIpanelScrollBar{width:10px; top:4px; right:2px; border-radius:5px; }
+.zUIpanelScrollBox{background:black;opacity:0.1;filter:alpha(opacity=10);}
+.zUIpanelScrollBar{background:#0d0d0d;filter:alpha(opacity=80);}
+.test{width:800px;border:1px solid red;margin:0 auto;padding:20px;}
+.clear{zoom:1;}
+.clear:after{content:"";display:block;clear:both;}
+
+.gdt1, .gdt2, .gdt3, .gdt4, .gdt5 {height: 120px; overflow: hidden;}
+/* 滚动条 */
+.quotation_center {width: 100%; height: 737px;}
+#left {float: left; width: 205px; height: 737px;}
+#content {position: relative; margin-left: 205px;height: 737px;/*==等于左边栏宽度==*/ border-left: 5px solid #1a1a1a;}
+#content .stretch, #content .stretch1 {position: absolute; z-index: 9; top: 430px; left: -5px;}
+#content .stretch:hover ,#content .stretch1:hover {cursor: pointer;}
+.quotation_center .center_futures {height: 48px; line-height: 48px; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a; background: #333;}
+.quotation_center .center_futures input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 30px; width: 195px; background: #1a1a1a; color: #666; margin-top: 10px; margin-left: 10px}
+#gdt {background: #eee; overflow: hidden;}
+#left .futuresList ul{background: #333; width: 205px; height: 81px; border-bottom: 1px solid #1a1a1a; /* border-top: 1px solid #4d4d4d; */}
+#left .futuresList ul:hover {cursor: pointer;}
+#left .futuresList ul.on {background: #1a1a1a;}
+#left .futuresList ul.rise {background:url("../images/commodity_rise.gif");}
+#left .futuresList ul.fall {background:url("../images/commodity_fall.gif");}
+#left .futuresList ul li{float: left; width: 92px; line-height: 41px; height: 41px; font-size: 14px;}
+#left .futuresList .futures_name {padding-left: 10px; color: #999; line-height: normal;}
+#left .futuresList .futures_bm {font-size: 12px; color: #666;}
+#left .futuresList .futures_mz {margin-top: 5px;margin-top: 2px; display: inline-block;}
+#left .futuresList .qlast {padding-right: 10px; text-align: right;}
+#left .futuresList .futures_number {padding-left: 10px; color: #999;}
+#left .futuresList .scal {padding-right: 10px; text-align: right;}
+#left .futuresList ul.on .futures_mz {color: #ccc;}
+#left .futuresList ul.on .futures_number {color: #ccc;}
+
+#content .quotation_echarts {width: 100%; height: 460px;  background-color: #303030;}
+#content .quotation_transaction {border-top: 5px solid #1a1a1a; position: absolute; width: 100%;}
+#content .quotation_transaction .quotation_type{float:left; width: 346px; height: 272px; border-right: 1px solid #1a1a1a; background: #333333;}
+#content .quotation_transaction .quotation_detailed{height: 272px; margin-left: 346px; background-color: #333;}
+#right{float: right; width: 319px; height: 459px; background-color: #333; border-left: 1px solid #1a1a1a; border-top: 1px solid #4d4d4d;}
+#content2 {margin-right: 320px; height: 460px;}
+#right .right_title {height: 48px; line-height: 48px;border-bottom: 1px solid #1a1a1a; background: #333;}
+#right .right_lis {font-size: 16px; text-align: center; color: #ccc; height: 48px; background: #404040; line-height: 48px; border-bottom: 1px solid #1a1a1a;}
+#right .right_tab ul {display: inline-block; width: 100%;height: 28px; line-height: 28px;}
+#right .right_tab ul li {float:left; font-size: 14px; }
+#right .right_tab ul .right_tab_zxj {color: #999; width: 50px; margin-left: 10px;}
+#right .right_tab ul .right_tab_zxjq {width: 100px; margin-left: 10px; color: #ccc;}
+#right .right_tab ul .right_tab_zj {color: #999; width: 50px; margin-left: 18px;}
+#right .right_tab ul .right_tab_zjl {color: #ccc; width: 70px; text-align: right; margin-right: 10px;}
+#right .right_tab ul .right_tab1_left {color: #999; width: 50px; margin-left: 10px;}
+#right .tab1 ul .right_tab1_left {color: #999;}
+#right .tab2 ul .right_tab1_left {color: #999;}
+#right .right_tab ul .right_tab1_center {width: 210px; color: #ccc; text-align: center;}
+#right .right_tab ul .right_tab1_right {color: #999; width: 38px; text-align: right; margin-right: 10px;}
+#footer {background: #333; text-align: center;width: 100%; font-size: 14px; color: #666; border-top: 1px solid #1a1a1a; height: 37px; line-height: 37px;}
+/* 最小屏 1366 */
+@media screen and (max-width: 1366px) {
+	.quotation_title {width: 1366px;}
+	.quotation_center {width: 1366px;}
+	#content .quotation_echarts {
+		/* width: 1144px; */
+	}
+	#content .quotation_transaction .quotation_detailed {
+		/* width: 798px; */
+	}
+}
+/* 买入卖出 */
+#content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 35px; line-height: 35px; margin: 0 auto;}
+#content .quotation_transaction .quotation_type .quotation_p label {float: left; font-size: 14px; color: #999;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr {float: left; margin-left: 23px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr label:hover {cursor: pointer;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr select{margin-top: 5px; outline: none; background: #1a1a1a; color: #ccc; width: 200px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr select option{}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr input[type="radio"] {margin-right:10px;}
+#content .quotation_transaction .quotation_type .money_sj {background: #1a1a1a; color: #ccc; width: 198px; height: 26px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 26px; margin-top: 5px;}
+#content .quotation_transaction .quotation_type .money_js {position: relative;}
+#content .quotation_transaction .quotation_type .money_js .del{position: absolute; color: #ccc; left: 0; border-right: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .del:hover {cursor: pointer;}
+#content .quotation_transaction .quotation_type .add:hover {cursor: pointer;}
+#content .quotation_transaction .quotation_type .money_js .add {position: absolute; color: #ccc; right: 0; border-left: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .money_js input {margin-top: 5px;outline: none; background: #1a1a1a; color: #ccc; width: 198px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px;}
+#content .quotation_transaction .quotation_type .money_sjsl input{outline: none; background: #1a1a1a; color: #ccc; width: 198px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px;}
+#content .quotation_transaction .quotation_type .money_sjsl span {}
+#content .quotation_transaction .quotation_type .money_sjsl {position: relative;}
+#content .quotation_transaction .quotation_type .money_sjsl .add{position: absolute; color:#ccc; right:0; border-left: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .money_sjsl .del{position: absolute; color: #ccc; left: 0; border-right: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr ul {float: left; width: 95px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .mairu {border-radius: 4px; background: #ff4040; text-align: center; color: #fff;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .maichu {border-radius: 4px; background: #30bf30; text-align: center; color: #fff;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr ul li {height: 25px; line-height: 25px;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .mairu:hover {cursor: pointer; background: #e65639;}
+#content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .maichu:hover {cursor: pointer; background: #29a629;}
+/* 持仓 */
+.quotation_detailed ul li {float: left;}
+.quotation_detailed .quotation_detailed_lis a {padding: 0 20px; color: #999; text-decoration: none;}
+.quotation_detailed .quotation_detailed_lis a:hover {color: ffb319; cursor: pointer;}
+.quotation_detailed .quotation_detailed_lis a.on{color: ffb319;}
+.quotation_detailed .quotation_detailed_lis {border-bottom: 1px solid #1a1a1a; font-size: 14px; color: #4c4c4c; padding: 7px 0;}
+.quotation_detailed .quotation_detailed_title .tab_lis{font-size: 12px; color: #999; height: 30px; line-height: 30px;}
+.quotation_detailed .quotation_detailed_title .tab_content {font-size: 12px; color: #ccc; height: 30px; line-height: 30px;} 
+.quotation_detailed .quotation_detailed_title .tab_content.even{background: #404040;} 
+.quotation_detailed .quotation_detailed_title .tab_content:hover {background: #4d4d4d; cursor: pointer;}
+.quotation_detailed .quotation_detailed_title .tab_content.on{background: #4d4d4d;} 
+.quotation_detailed .quotation_detailed_title li {width: 70px; height: 30px;  line-height: 30px;}
+.quotation_detailed .quotation_detailed_title .ml {padding-left:20px;}
+/* .quotation_detailed .quotation_detailed_title {height: 116px; overflow-y: scroll;} */
+.quotation_detailed .quotation_detailed_qx {margin-top: 60px; height: 60px;  line-height: 60px; border-top: 1px solid #1a1a1a;}
+.quotation_detailed_qx {color: #999; font-size: 14px;}
+.quotation_detailed_qx label span{color: #ccc;}
+.quotation_detailed_qx label{}
+.quotation_detailed_qx a{width: 90px; height: 30px; line-height: 30px; display: inline-block; background: #ffb319; text-align: center; text-decoration: none; color: #333; border-radius: 4px;}
+.quotation_detailed_qx a:hover {background: #ff9f19;}
+.quotation_detailed .quotation_detailed_title .caozuo {position: absolute; bottom: -45px; left: 14px;}
+.quotation_detailed .quotation_detailed_title .caozuo li {margin: 0 5px;}
+.quotation_detailed .quotation_detailed_title .caozuo a{font-size: 14px; text-decoration: none; height: 28px; line-height: 28px; background: #1a1a1a; color: #ccc; display: block; border: 1px solid #1a1a1a; border-radius: 4px; text-align: center;}
+.quotation_detailed .quotation_detailed_title .caozuo a:hover {background: #000;}
+#show_user_info {color: #ffb319;}
+#show_user_info button {margin-left: 10px; border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
+#show_user_info button:hover{background: #ff9f19; border: 1px solid #ff9f19; cursor: pointer;}
+#qiehuan {font-size: 14px; color: #999; position: absolute; right: 0; height: 48px; line-height: 48px; border-bottom: 1px solid #1a1a1a; background: #333333; width: 100%;}
+#qiehuan ul li {float: right; margin: 0 10px;}
+#qiehuan ul li:hover {color: #ffb319; cursor: pointer;}
+#change input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 10px; width: 195px; color: #666; margin-top: 10px; margin-left: 10px;}
+
+
+/* 插件行情 */
+.dropdown,.dropup{position:relative}
+.dropdown-menu{position:absolute;z-index:1000;display:none;}
+.dropdown-menu>li>a{display:block;white-space:nowrap}
+.open>.dropdown-menu{display:block;background: #fff;}
+.dropdown-header{display:block;}
+.indicators {display: none;}
+.btn-default {color: #333; background-color: #fff; border-color: #ccc;}
+.btn {display: inline-block;height: 34px; width: 100px; margin-bottom: 0; font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;
+    cursor: pointer;background-image: none;border: 1px solid transparent; border-radius: 4px;white-space: nowrap;vertical-align: middle;
+    -webkit-user-select: none;-moz-user-select: none; -ms-user-select: none; user-select: none;
+    -ms-touch-action: manipulation; touch-action: manipulation;}
+.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid\9; border-right: 4px solid transparent; border-left: 4px solid transparent; background: #fff;}
+.open>.dropdown-menu li {list-style-type: none; width: 88px; height: 30px; line-height: 30px; padding-left: 10px;}
+.open>.dropdown-menu li:hover {background-color: #f5f5f5;}
+.open>.dropdown-menu li a {color: #333; text-decoration: none;}
+.open>.dropdown-menu li.dropdown-header {display: none;} 
+
+/* 弹出层  */
+.tck01 {width: 360px; position: fixed;}
+.tck01 .smain {padding: 15px 0px 15px 10px;}
+.tck01 .navtitle .close {margin-right: 10px;}
+.tck01 .anniu a {margin-left: 0; width: 140px; height: 40px; line-height: 40px; display: inline-block; text-align: center; text-decoration: none; cursor: pointer;}
+.tck01 .anniu .sure {background: #ffb319; color: #333; font-size: 16px; border-radius: 4px; margin-left: 12px;}
+.tck01 .anniu .sure:hover {background: #ff9f19;}
+.tck01 .anniu .cancel {background: #ccc; color: #333; font-size: 16px; border-radius: 4px; margin-left: 55px;}
+.tck01 .anniu .cancel:hover {background: #b3b3b3;}
+.smain > div {padding: 10px 18px; line-height: 22px; line-height: 22px/9; }

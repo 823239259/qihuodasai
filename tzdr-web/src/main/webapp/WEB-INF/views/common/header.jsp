@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctx }/static/script/common/login.js"></script>
 <div class="top-title">
     <div class="topctn">
         <div class="top_tel"><!--<i></i>-->全国客服热线：<span>400</span>-<span>852</span>-<span>8008</span></div>
@@ -32,6 +33,7 @@
         <div class="navlogo"><a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a></div>
         <ul class="navlist">
             <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
+            <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li>
             <li><a id="hengzhiqidai" href="${ctx}/hsi/index">恒指期货</a></li>
             <li><a id="guojiyuanyou" href="${ctx}/crudeoil/index">国际原油</a></li>
             <li><a id="fushia50" href="${ctx}/ftse/index">富时A50</a></li>
@@ -66,3 +68,25 @@
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>   
     </div>
 </div>
+<!-- 弹出层登录 -->
+<%-- <div class="tck01" id="signin_box" style="display: none;">
+	<div class="navtitle">
+		<span class="nava">注册登录！</span><a class="close" onclick="javascript:closeDiv('signin_box')"></a>
+	</div>
+	<div class="center">
+		<form id="signin_boxForm" name="signin_boxForm" onsubmit="return signin_boxForm();" method="post" target="signin_boxFrame">
+			<input type="hidden" name="execution" value="e3s1" id="">
+			<p class="mode"><a href="${ctx}/signin">手机快速注册</a><a href="javascript:void(0)" class="on">账号登录</a></p>
+			<p class="warning"></p>
+			<p class="sigin_ipctn">
+				<input type="tel" id="signin_username" name="username" value="" placeholder="请输入手机号码">
+				<input type="password" id="signin_password" name="password" value="" placeholder="请输入登录密码">
+			</p>
+			<div class="sigin_link">
+				<input type="checkbox" name="" id="" checked="checked" style="margin-right: 10px;"/>两周内自动登录
+			    <a href="${ctx }/forgetpw" style="float: right;">忘记密码?</a>
+		    </div>
+ 			<button id="login_box" type="button">立即登录</button>
+		</form>
+	</div>
+</div> --%>
