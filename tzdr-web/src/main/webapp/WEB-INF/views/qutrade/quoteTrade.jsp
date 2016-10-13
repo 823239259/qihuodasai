@@ -388,10 +388,10 @@
 			        		<li style="width: 30px;">买卖</li>
 			        		<li style="width: 120px;">成交均价</li>
 			        		<li style="width: 50px;">成交量</li>
-			        		<li>币种</li>
-			        		<li style="width: 150px;">成交编号</li>
-			        		<li>订单号</li>
-			        		<li style="width: 120px;">成交时间</li>
+			        		<li style="width: 70px;">币种</li>
+			        		<li style="width: 170px;">成交编号</li>
+			        		<li style="width: 100px;">订单号</li>
+			        		<li style="width: 150px;">成交时间</li>
 			        		<li>交易所</li>
 			        	</ul>
 			        </div>
@@ -434,4 +434,6 @@
 </div>
 </body>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script>
+<script type="text/javascript">
+</script>
 </html>
