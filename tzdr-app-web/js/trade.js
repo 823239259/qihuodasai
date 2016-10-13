@@ -326,7 +326,7 @@ function updatePositionDom(positonParam){
 			floatingProft = floatP +":"+  comm.CurrencyNo;
 		} 
 		$floatingProft.val(floatingProft);
-		console.log(floatingProft);
+//		console.log(floatingProft);
 		if(floatP < 0 ){
 			$floatingProft.css("color","green");
 		}else if(floatP > 0){
