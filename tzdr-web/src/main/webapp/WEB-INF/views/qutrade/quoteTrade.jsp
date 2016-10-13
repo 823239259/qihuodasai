@@ -141,7 +141,7 @@
 		<button><a href="#" id = "trade_login">登录</a></button>
 		<button><a href="${ctx }/outDisk/index"  target="_blank">开户</a></button>
 		<a href="#" class="backPassword">找回密码</a>
-		<div id="more_account" style="display: block;">
+		<div id="more_account" style="display: none;">
 		</div>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info">
