@@ -128,7 +128,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ac_bank .mui-table-view-cell input.mui-input-clear,.ac_bank .mui-table-view-cell select { float: left; width: 50%; vertical-align: middle; padding: 0; margin: 0; font-size: 14px; height: 40px; line-height: 40px; border: 0; text-align: left; margin-left: 10px; }
 .ac_bank .mui-table-view-cell select  {position: inherit; top: 20px; right: 0; margin-left: 5px;}
 .ac_banklist { display: block; padding: 0 15px; overflow: hidden; background: #fff; margin-bottom: 20px; position:relative;}
-.ac_bankpromt { padding: 0 15px; font-size: 14px; color: #f90;}
+.ac_bankpromt { padding: 3px 15px; font-size: 14px; color: #666666;background-color: #FFFFFF;}
 .mui-slider .mui-slider-group .mui-slider-item .ac_banklist img { display: block; float: left; width: 60px; margin: 10px 0;}
 .ac_banklist p { display: block; float: left; width: 72%; font-size: 14px; text-align: left; margin: 10px 0 10px 10px;}
 .aw_withlist .mui-table-view-cell { padding: 5px 15px;}

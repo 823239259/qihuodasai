@@ -50,8 +50,9 @@ i{
 }
 #buttomDiv button{
 	margin-top: 10px;
-	margin-left:35%;
-	width: 30%;
+	margin-left:25%;
+	width: 40%;
+	border-radius: 3px;
 }
 #weixinpayBack{
 	width: 100%;
@@ -71,13 +72,15 @@ i{
 #weiPayCode{
 	width: 100%;
 	padding:0px 15px;
+	height: 210px;
+	background-color: #FFFFFF;
+	text-align: center;
 }
-#weiPayCode div{
-	height: 130px;
-	float: left;
+#weiPayCode img{
+	margin-top: 12px;
 }
  #weiPayCode div:nth-child(2){
- 	padding:30px 0px;
+ 	padding:10px 10% 10px;
  }
 .numberCode{
 	width: 96%;
