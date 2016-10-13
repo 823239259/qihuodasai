@@ -24,6 +24,10 @@ var connectionStatus = false;
  */
 var isLogin = false;
 /**
+ * 登录时，登录失败
+ */
+var loginFail = false;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -100,9 +104,10 @@ function tradeLogin(){
  * 交易登录退出
  * @param account
  */
-function tradeLoginOut(account){
+function tradeLoginOut(){
 	Trade.doLoginOut(username);
 	loginOut();
+	layer.closeAll();
 }
 /**
  * 交易初始化加载
@@ -156,7 +161,9 @@ function initTrade(){
  * 重新连接交易服务器
  */
 function reconnect(){
-	layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	if(!loginFail){
+		layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	}
 	clearTradListData();
 	if(socket == null){
 		initTrade();

@@ -62,7 +62,9 @@ function handleData(evt){
 				$("#show_user_info").show();
 				$("#top_username").text(username);
 				setIsLogin(true);
+				loginFail = false;
 			} else {
+				loginFail = true;
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
@@ -906,6 +908,9 @@ $(function(){
 	$("#quotation_account").mouseout(function(){
 		$("#more_account").css("display","none");
 	});
+	$("#quotation_account").blur(function(){
+		$("#more_account").css("display","none");
+	});
 	$(".backPassword").click(function(){
 		layer.open({
 			  type: 1,
@@ -960,7 +965,8 @@ $(function(){
 		tradeLogin();
 	});
 	$("#trade_loginOut").click(function(){
-		tradeLoginOut(username);
+		loginFail = true;
+		tipConfirm("确认退出当前登录吗?", tradeLoginOut, cancleCallBack);
 	});
 });
 /**
