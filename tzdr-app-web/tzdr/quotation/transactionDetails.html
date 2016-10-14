@@ -21,41 +21,30 @@
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
-					<a class="mui-control-item " id="FiveTest" href="#CandlestickChart">5分</a>
-					<a class="mui-control-item " id="TenTest" href="#CandlestickChart">15分</a>
+					<a class="mui-control-item " id="Candlestick" href="#FiveCandlestickChart">5分</a>
+					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
+					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
 				<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content  mui-active" id="TimeChart1">
-								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
+								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>
 								<div id="timeChart" style="width:100%;height:130px;"></div>
 								<div id="volumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="CandlestickChart" style="opacity: 0;">
-		 						<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
+		 						<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>
 								<div   id="CandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="dayCandlestickChart" style="opacity: 0;">
-								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
+								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="FiveTestCandlestickChart" style="opacity: 1;">
-								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
-								<div   id="FiveTestCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="FiveTestCandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="TenTestCandlestickChart" style="opacity: 1;">
-								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
-								<div   id="TenTestCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="TenTestCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="trade">
 							<div class="Assets">
@@ -113,7 +102,7 @@
 				<div>
 					<div id="item1" class="mui-control-content mui-active" >
 							<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
-								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
+								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
 							</ul>
 						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
@@ -157,6 +146,7 @@
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
 				<div style="display: none;">
+				<!--<input type="text"  id = "lastPriceNone" />-->
 				<input type="text"  id = "exchangeNo"/> 
 				<input type="text"  id = "commodeityNo"/>
 				<input type="text"  id = "contractNo"/>
@@ -175,7 +165,6 @@
 		<script src="../../js/timechart.config.js"></script>
 		<script src="../../js/candlestick.config.js"></script>
 		<script src="../../js/dayCandlestick.config.js"></script>
-		<script src="../../js/FiveTestCandlestickChart.js"></script>
 		<script src="../../js/chart.js"></script>
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
@@ -213,6 +202,24 @@
 					}
 					i++; 
 				});
+				/*document.getElementById("searchIcon").addEventListener("tap",function(){
+					$("#contentList").css("display","block");
+				})
+				document.getElementById("titleValue").addEventListener("tap",function(){
+					$("#contentList").css("display","block");
+				})
+				document.getElementById("contentList").addEventListener("tap",function(){
+					str= $(this).index();
+			         console.log(str) ;
+				})
+				 $('#contentList li').on('click',function(){
+			        str= $(this).index();
+			         console.log(str) ;
+			 
+			    })
+				$("#contentListBg").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
+				var leftWidth=window.innerWidth/2-150;
+				$("#contentListBg").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});*/
 			});
 			
 		</script>
@@ -221,6 +228,9 @@
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
+//			$(function(){
+//				plus.nativeUI.showWaiting( "正在加载内容" );
+//			})
 			function setTimeOutInsertOrder(){
 				tradeSetTimeOut = setTimeout(function(){
 								plus.nativeUI.closeWaiting(); 
@@ -232,6 +242,7 @@
 				$("#contractNo").val(param[1]);
 				$("#contractSize").val(param[5]);
 				$("#lastPrice").text(param[7]);
+//				$("#lastPriceNone").val(param[7]);
 				$("#miniTikeSize").val(param[6]);
 				$("#doSize").val(param[4]);
 			}
@@ -239,7 +250,6 @@
 				tranferParam = param;
 			}
 			var loginOutFlag = false;
-			var loginOutTip=false;
 			$(function(){ 
 				$('#password').bind('input propertychange', function() {
 				  	var orderPrice = $("#orderPrice").val();
@@ -378,7 +388,6 @@
 			}
 			function openLogin(){ 
 				loginOutFlag = true;
-				loginOutTip=true;
 				mui.openWindow({
 					url:"../login/operateLogin.html",
 					id : "operateLogin",

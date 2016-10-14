@@ -23,6 +23,7 @@
 	var FiveTestCandlestickVolumeChart=null;
 	var TenTestCandlestickChartDiv=null;
 	var TenTestCandlestickVolumeChart=null;
+	var setIntvalTimeAll=null;
     //生成一个K线图容器
     function loadK(){
         // 使用
@@ -44,19 +45,25 @@
                      ec.connect("group2");
                      ec.connect("group3");
                       ec.connect("group4");
-//                     ec.connect("group5");
-                      
                      dayCandlestickChartDiv=ec.init(document.getElementById("dayCandlestickChartDiv"));
                      dayCandlestickVolumeChart=ec.init(document.getElementById("dayCandlestickVolumeChart"));
                      FiveTestCandlestickVolumeChart=ec.init(document.getElementById("FiveTestCandlestickVolumeChart"));
                      FiveTestCandlestickChartDiv=ec.init(document.getElementById("FiveTestCandlestickChartDiv"));
                    	TenTestCandlestickVolumeChart=ec.init(document.getElementById("TenTestCandlestickVolumeChart"));
                    	TenTestCandlestickChartDiv=ec.init(document.getElementById("TenTestCandlestickChartDiv"));
-               		 ec.connect([TenTestCandlestickVolumeChart, TenTestCandlestickChartDiv]);
-               		  ec.connect([FiveTestCandlestickVolumeChart, FiveTestCandlestickChartDiv]);
-//						TenTestCandlestickVolumeChart.connect(TenTestCandlestickChartDiv);
-//						FiveTestCandlestickVolumeChart.connect(FiveTestCandlestickChartDiv);
                 }
         );
 		
+    };
+    function sendHistoryMessageProtype(num){
+    		console.log(num);
+    		 var exchangeNo = $("#exchangeNo").val();
+		    var commodityNo = $("#commodeityNo").val();
+		    var contractNo = $("#contractNo").val();
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
+		  masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+	        setIntvalTimeAll = setInterval(function(){
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
+	        },3000);
     }

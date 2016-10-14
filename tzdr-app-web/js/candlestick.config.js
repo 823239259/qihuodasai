@@ -28,41 +28,59 @@
         			rawData.splice(i,1);
         		}
         	}
-        	newData=rawData.slice(-60);
-        	if(firstTimeNumber==0){
-		  			
-		  	}else{
+        		newData=rawData.slice(-60);
 		  		CandlestickChartOption = setOption(newData);
 		  		myChart.setOption(CandlestickChartOption);
-		  	};
-		  	myChart.group="group2";
+		  		myChart.group="group2";
 		  	
     }
-    document.getElementById("Candlestick").addEventListener("tap",function(){
-    			$("#dayCandlestickChart").css("opacity","0");
-    			$("#TimeChart1").css("opacity","0");
-				 if(myChart != null){
-//				 	setTimeout(function(){
-//				 		muiSpinner[1].style.display="none";
-//				 	},100)
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-						setTimeout(function(){
-							myChart.resize();
-							myChart.setOption(option);
-		        			myChart.resize();	
-		        			CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option2);
-		        			CandlestickVolumeChart.resize();	
-		        			firstTimeNumber++;
-		        			firstTimeNum++;
-		        		},10);
-		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
-		        		},100);
-			    } 
+    	document.getElementById("Candlestick").addEventListener("tap",function(){
+    			var num=1;
+    			sendHistoryMessageProtype(num);
+    			test(num);
 		});
+		document.getElementById("FiveTest").addEventListener("tap",function(){
+    			var num=5;
+    			test(num);
+		});
+		document.getElementById("TenTest").addEventListener("tap",function(){
+    			var num=15;
+    			test(num);
+		});
+		document.getElementById("TreeTest").addEventListener("tap",function(){
+    			var num=30;
+    			test(num);
+		});
+		function test(num){
+			$("#dayCandlestickChart").css("opacity","0");
+    		$("#TimeChart1").css("opacity","0");
+    		clearInterval(setIntvalTimeAll);
+    		sendHistoryMessageProtype(num);
+			rawData=[];
+			newData=[];
+			CandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    }
+			 if(myChart != null){
+				document.getElementsByClassName("buttomFix")[0].style.display="block";
+					var option = setOption(newData);
+					 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+					setTimeout(function(){
+						myChart.resize();
+						myChart.setOption(option);
+	        			myChart.resize();	
+	        			CandlestickVolumeChart.resize();	
+						CandlestickVolumeChart.setOption(option2);
+	        			CandlestickVolumeChart.resize();	
+	        		},100);
+	        		setTimeout(function(){
+	        			$("#CandlestickChart").css("opacity","1");
+	        		},100);
+		    } 
+		}
+		
+		
     //设置数据参数（为画图做准备）
     function setOption(rawData){
         var dates = rawData.map(function (item) {
@@ -151,7 +169,6 @@
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=volumeV.length;
-//  	    var lengt=volumeTimeH.length;
         	for(var i=0;i<Len;i++){
         			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
@@ -254,98 +271,3 @@
 	      };
         return option
     }
-    
-var TenCandlestickData=[];
- function processingTenTestData(jsonData){
-    		var dosizeL=$("#doSize").val();
-    		var parameters = jsonData.Parameters.Data;
-    		var Len=parameters.length;
-    		if(parameters == null)return;
-    	    var lent=TenCandlestickData.length;
-        	for(var i=0;i<Len;i++){
-        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
-		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
-        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
-		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
-		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
-			         TenCandlestickData[lent+i] = sgData; 
-       		};
-        	for(var i=0;i<TenCandlestickData.length-1;i++){
-        		if(TenCandlestickData[i][0]==TenCandlestickData[i+1][0]){
-        			TenCandlestickData.splice(i,1);
-        		}
-        	}
-////      	newData=rawData.slice(-60);
-//      	if(firstTimeNumber==0){
-//		  			
-//		  	}else{
-		  		CandlestickChartOption = setOption(TenCandlestickData);
-		  		TenTestCandlestickChartDiv.setOption(CandlestickChartOption);
-//		  	};
-//		  	TenTestCandlestickChartDiv.group="group5";
-		  	
-    }
- var TenTestVolumeData={
- 	time:[],
- 	volume:[]
- }
- 	  function processingTenTestVolumeData(data){
-    		var parameters = data.Parameters.Data;
-    		var Len=parameters.length;
-    		if(parameters == null)return;
-    	    var lent=TenTestVolumeData.time.length;
-//  	    var lengt=volumeTimeH.length;
-        	for(var i=0;i<Len;i++){
-        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
-		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
-        			TenTestVolumeData.time[lent+i]=str2;
-        			TenTestVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
-       		};
-        	for(var i=0;i<TenTestVolumeData.time.length-1;i++){
-        		if(TenTestVolumeData.time[i]==TenTestVolumeData.time[i+1]){
-        			TenTestVolumeData.time.splice(i,1);
-        			TenTestVolumeData.volume.splice(i,1);
-        		}
-        	}
-        	TenTestVolumeData.time=TenTestVolumeData.time.slice(-60);
-        	TenTestVolumeData.volume=TenTestVolumeData.volume.slice(-60);
-//      	CandlestickVolumeChart.group="group5";
-        	if(firstTimeNum==0){
-		  			
-		  	}else{
-		  		var option1= CandlestickVolumeChartSetoption1(TenTestVolumeData);
-		  		TenTestCandlestickVolumeChart.resize();	
-		  		TenTestCandlestickVolumeChart.setOption(option1);
-		  		TenTestCandlestickVolumeChart.resize();	
-		  	};
-		  	
-		  	
-    };
-	 document.getElementById("TenTest").addEventListener("tap",function(){
-    			$("#dayCandlestickChart").css("opacity","0");
-    			$("#TimeChart1").css("opacity","0");
-				 if(TenTestCandlestickChartDiv != null){
-//				 	setTimeout(function(){
-//				 		muiSpinner[1].style.display="none";
-//				 	},100)
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOption(TenCandlestickData);
-						 var option2=CandlestickVolumeChartSetoption1(TenTestVolumeData);
-						setTimeout(function(){
-							TenTestCandlestickChartDiv.resize();
-							TenTestCandlestickChartDiv.setOption(option);
-		        			TenTestCandlestickChartDiv.resize();	
-		        			TenTestCandlestickVolumeChart.resize();	
-							TenTestCandlestickVolumeChart.setOption(option2);
-		        			TenTestCandlestickVolumeChart.resize();	
-		        			firstTimeNumber++;
-		        			firstTimeNum++;
-		        		},10);
-		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
-		        		},100);
-			    } 
-		});

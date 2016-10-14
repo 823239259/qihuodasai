@@ -1,7 +1,5 @@
     var dayCandlestickChartDivNum=0;
     var dayCandlestickChartData = [];
-//  var dayCandlestickVolumeChartTime=[];
-//  var dayCandlestickVolumeChartVolume=[];
     var dayCandlestickVolumeData={
     	time:[],
     	volume:[]

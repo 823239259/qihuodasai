@@ -979,7 +979,9 @@
 					"css/mui.min.css",
 					"main.html"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/quotation/quotationMain.html"
+				],
 				"priority": 0
 			},
 			"tzdr/account/openUrlPay.html": {
