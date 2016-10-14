@@ -591,6 +591,7 @@ function updatePostion(param){
 	}
 	var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
 	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
+	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
 	var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
 	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position10']");
 	var $floatingProfit = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position4']");
@@ -603,6 +604,7 @@ function updatePostion(param){
 		price = price + oldPrice;
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum);
 		$openAvgPrice.text(openAvgPrice);
+		$holdAvgPrice.text(holdAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 
@@ -1126,7 +1128,8 @@ function bindOpertion(){
 	$("#aPosition").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
-			if(contractCode == undefined){
+			var postionIndex = selectPostion["postionIndex"];
+			if(contractCode == undefined || $(".postion-index"+postionIndex+"").html() == undefined){
 				tip("请选择一项需要平仓的数据");
 				return;
 			}
@@ -1139,7 +1142,8 @@ function bindOpertion(){
 	$("#positionBckhand").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
-			if(contractCode == undefined){
+			var postionIndex = selectPostion["postionIndex"];
+			if(contractCode == undefined  || $(".postion-index"+postionIndex+"").html() == undefined){
 				tip("请选择一项需要反手的数据");
 				return;
 			}
@@ -1176,7 +1180,8 @@ function bindOpertion(){
 	$("#desOrder").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectDesgnate["contraction"];
-			if(contractCode == undefined){
+			var designateIndex = selectDesgnate["designateIndex"];
+			if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
 				tip("请选择一项需要撤单的数据");
 				return;
 			}
@@ -1189,7 +1194,8 @@ function bindOpertion(){
 	$("#updateDesOrder").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectDesgnate["contraction"];
-			if(contractCode == undefined){
+			var designateIndex = selectDesgnate["designateIndex"];
+			if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
 				tip("请选择一项需要改单的数据");
 				return;
 			}
