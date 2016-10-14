@@ -25,9 +25,9 @@ function quoteConfigNewinstanceTest(){
  */
 function initQuoteConfig(){
 	var configObject = null;
-	if(model == "dev"){
+	if(model == "live"){
 		configObject = quoteConfigNewinstance();
-	}else if(model == "live"){
+	}else if(model == "dev"){
 		configObject = quoteConfigNewinstanceTest();
 	}
 	setQuoteWebSoketUrl(configObject);

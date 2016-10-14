@@ -25,9 +25,9 @@ function tradeConfigNewinstanceTest(){
  */
 function initTradeConfig(){
 	var configObject = null;
-	if(model == "dev"){
+	if(model == "live"){
 		configObject = tradeConfigNewinstance();
-	}else if(model == "live"){
+	}else if(model == "dev"){
 		configObject = tradeConfigNewinstanceTest();
 	}
 	setTradeWebSoketUrl(configObject);
