@@ -1,7 +1,7 @@
 /**
  * 生成环境：live,测试环境:dev
  */
-var model = "live";
+var model = "dev";
 /**
  * websocket地址
  */
