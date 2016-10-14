@@ -119,10 +119,10 @@ function tradeLoginOut(){
  * 交易初始化加载
  */
 function initLoad() {
-	if (socket == null) return false;
 	socket.onopen = function() {
 		layer.closeAll();
 		Trade.doLogin(username , password);
+		//更新交易连接状态
 		changeConnectionStatus();
 	}
 	socket.onmessage = function(evt) {
@@ -144,22 +144,30 @@ function initLoad() {
 			}
 		}
 	}
-	return true;
 }
 
 /**
  * 初始化交易
  */
 function initTradeConnect(){
-	layer.msg('正在连接交易服务器...', {icon: 16});
+	
 	/**
 	 * 交易连接 -->trade.connection
 	 */
 	tradeConnection();
 	/**
-	 * 交易数据初始化加载 --> trade.connection
+	 * 交易数据初始化加载 --> trade.connections
 	 */
 	initLoad();
+	var tradeInterval = setInterval(function(){
+			layer.msg('正在连接交易服务器...', {icon: 16});
+			if(connectionStatus){
+				layer.msg('交易服务器连接成功', {icon: 4});
+				clearInterval(tradeInterval);
+			}
+		}
+	, 2000);
+	
 	
 }
 function initTrade(){

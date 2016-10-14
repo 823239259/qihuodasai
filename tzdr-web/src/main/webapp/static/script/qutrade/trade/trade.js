@@ -147,10 +147,9 @@ function handleData(evt){
 			$("#trade_login").text("登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
+			loginFail = true;
 			if(code == 1){
 				anotherPlace = true;
-			}else if(code == 0){
-				loginFail = true;
 			}
 		}
 	}

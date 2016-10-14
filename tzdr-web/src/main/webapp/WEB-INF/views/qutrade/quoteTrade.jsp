@@ -13,7 +13,7 @@
 <link href="${ctx}/static/css/gybf.css?v=${v}" rel="stylesheet" type="text/css">
 <!-- 弹出层 -->
 <link href="${ctx }/static/css/quotation.css?v=${v}" rel="stylesheet" type="text/css" />
-<script type='text/javascript' src="${ctx}/static/script/layer/skin/layer.css?v=${v}"  rel="stylesheet" type="text/css"></script> 
+<link  href="${ctx}/static/script/layer/skin/layer.css?v=${v}"  rel="stylesheet" type="text/css"></link> 
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quotation.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/jquery-1.8.3.js?v=${v}"></script>
