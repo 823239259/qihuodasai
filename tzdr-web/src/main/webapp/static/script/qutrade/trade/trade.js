@@ -744,10 +744,10 @@ function generateOrderTitle(){
 	var html = '<ul class="tab_lis">'+
 				'	<li class="ml">合约代码</li>'+
 				'	<li  style = "width:50px;">买卖</li>'+
-				'	<li >委托价</li>'+
-				'	<li style = "width:50px;">委托量</li>'+
-				'	<li>触发价</li>'+
-				'	<li >委托状态</li>'+
+				'	<li  style="width: 50px;">委托价</li>'+
+				'	<li style = "width:70px;">委托量</li>'+
+				'	<li style="width: 70px;">订单类型</li>'+
+				'	<li  style="width: 70px;">委托状态</li>'+
 				'	<li style = "width:150px;" >成交均价</li>'+
 				'	<li style = "width:50px;"  >成交量</li>'+
 				'	<li style = "width:120px;">撤单时间</li>'+
