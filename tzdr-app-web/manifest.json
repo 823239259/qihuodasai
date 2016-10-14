@@ -99,7 +99,7 @@
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
 			"waiting": true
 		},
-		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57a2a12867e58ecf320036b2","channelid_android":"android"}}},
 			"apple": {
@@ -330,7 +330,8 @@
 					"tzdr/login/login.html",
 					"tzdr/account/updatePW.html",
 					"tzdr/scheme.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -731,7 +732,8 @@
 				"refer": [
 					"tzdr/future/futurePaySuc.html",
 					"tzdr/account/charge.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -1045,7 +1047,8 @@
 					"js/chart.config.js",
 					"js/timechart.config.js",
 					"js/candlestick.config.js",
-					"js/dayCandlestick.config.js"
+					"js/dayCandlestick.config.js",
+					"js/FiveTestCandlestickChart.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1249,7 +1252,8 @@
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",
-					"tzdr/account/bankPay.html"
+					"tzdr/account/bankPay.html",
+					"tzdr/account/gopay.html"
 				],
 				"priority": 0
 			},

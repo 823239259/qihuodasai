@@ -21,27 +21,41 @@
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
+					<a class="mui-control-item " id="FiveTest" href="#CandlestickChart">5分</a>
+					<a class="mui-control-item " id="TenTest" href="#CandlestickChart">15分</a>
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
 				<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content  mui-active" id="TimeChart1">
-								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>
+								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>-->
 								<div id="timeChart" style="width:100%;height:130px;"></div>
 								<div id="volumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="CandlestickChart" style="opacity: 0;">
-		 						<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>
+		 						<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>-->
 								<div   id="CandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="dayCandlestickChart" style="opacity: 0;">
-								<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>
+								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>-->
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						</div>
+						<div class="mui-control-content " id="FiveTestCandlestickChart" style="opacity: 1;">
+								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>-->
+								<div   id="FiveTestCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="FiveTestCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						</div>
+						<div class="mui-control-content " id="TenTestCandlestickChart" style="opacity: 1;">
+								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
+								</div>-->
+								<div   id="TenTestCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="TenTestCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="trade">
 							<div class="Assets">
@@ -143,7 +157,6 @@
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
 				<div style="display: none;">
-				<!--<input type="text"  id = "lastPriceNone" />-->
 				<input type="text"  id = "exchangeNo"/> 
 				<input type="text"  id = "commodeityNo"/>
 				<input type="text"  id = "contractNo"/>
@@ -162,6 +175,7 @@
 		<script src="../../js/timechart.config.js"></script>
 		<script src="../../js/candlestick.config.js"></script>
 		<script src="../../js/dayCandlestick.config.js"></script>
+		<script src="../../js/FiveTestCandlestickChart.js"></script>
 		<script src="../../js/chart.js"></script>
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">

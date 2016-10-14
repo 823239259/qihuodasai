@@ -30,12 +30,10 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-//		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
-//		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
-    	setTimeout(function(){
-					muiSpinner[0].style.display="none";
-			},200);
+//  	setTimeout(function(){
+//					muiSpinner[0].style.display="none";
+//			},200);
 	var url = MarketUrl.SocketUrl;
 	marketSocket = new WebSocket(url);
     var setIntvalTime = null;
@@ -61,7 +59,7 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
-//          console.log(JSON.stringify(historyParam));
+            console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
@@ -80,9 +78,16 @@ mui.plusReady(function(){
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==1440){
-//				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
+			}else if(historyParam.Parameters.HisQuoteType==5){
+				processingFiveCandlestickChart(historyParam);
+				processingFiveVolumeChart(historyParam)
+			}else if(historyParam.Parameters.HisQuoteType==15){
+				 processingTenTestData(historyParam);
+				 processingTenTestVolumeData(historyParam)
+			}else if(historyParam.Parameters.HisQuoteType==30){
+				
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
@@ -149,12 +154,15 @@ mui.plusReady(function(){
     		 var exchangeNo = $("#exchangeNo").val();
 		    var commodityNo = $("#commodeityNo").val();
 		    var contractNo = $("#contractNo").val();
-		    //masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
-		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":5}');
+		  	 masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":15}');
+		  masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
 	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
+	             masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":5}');
+	      	             masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":15}');
 	        },3000);
     }
     /**

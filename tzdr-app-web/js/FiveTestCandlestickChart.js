@@ -1,61 +1,107 @@
-    var dayCandlestickChartDivNum=0;
-    var dayCandlestickChartData = [];
-//  var dayCandlestickVolumeChartTime=[];
-//  var dayCandlestickVolumeChartVolume=[];
-    var dayCandlestickVolumeData={
-    	time:[],
-    	volume:[]
-    }  
-    function processingDayCandlestickData(jsonData){
-    		var dosizeL=$("#doSize").val();
-    		var parameters = jsonData.Parameters.Data;
+	var FiveCandlestickData=[];
+	var firstFiveCandlestickTimeNumber=0;
+	var firstFiveVolumeTimeNumber=0;
+	var FiveVolumeData={
+		time:[],
+		volume:[]
+	}
+	function processingFiveCandlestickChart(data){
+			var dosizeL=$("#doSize").val();
+    		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
+    		console.log(Len+"aa");
     		if(parameters == null)return;
-    	    var lent=dayCandlestickChartData.length;
+    	    var lent=FiveCandlestickData.length;
         	for(var i=0;i<Len;i++){
-        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
+		        	var str1=time2[1].split(":");
+		        	var str2=str1[0]+":"+str1[1]
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
 		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
-		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
-			         dayCandlestickChartData[lent+i] = sgData; 
+		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
+			         FiveCandlestickData[lent+i] = sgData; 
        		};
-       		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
-		  	dayCandlestickChartDiv.group="group3";
-		  	
-    }
-    document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
-    				$("#CandlestickChart").css("opacity","0");
-    				$("#TimeChart1").css("opacity","0");
-				 if(dayCandlestickChartDiv != null){
+        	for(var i=0;i<FiveCandlestickData.length-1;i++){
+        		if(FiveCandlestickData[i][0]==FiveCandlestickData[i+1][0]){
+        			FiveCandlestickData.splice(i,1);
+        		}
+        	}
+        	console.log(FiveCandlestickData.length+"aa");
+        	FiveCandlestickData=FiveCandlestickData.splice(-60);
+        		
+        	if(firstFiveCandlestickTimeNumber==0){
+		  			
+		  	}else{
+		  		var option = setOptionFiveVolume(FiveCandlestickData);
+		  		FiveTestCandlestickChartDiv.setOption(option);
+		  	};
+		  FiveTestCandlestickChartDiv.group="group4";
+	};
+	document.getElementById("FiveTest").addEventListener("tap",function(){
+		$("#dayCandlestickChart").css("opacity","0");
+    	$("#TimeChart1").css("opacity","0");
+    	 if(FiveTestCandlestickChartDiv != null){
 //				 	setTimeout(function(){
-//				 		muiSpinner[2].style.display="none";
+//				 		muiSpinner[1].style.display="none";
 //				 	},100)
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
-					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
-						setTimeout(function(){
-						 	dayCandlestickChartDiv.resize();	
-							dayCandlestickChartDiv.setOption(option1);
-		        			dayCandlestickChartDiv.resize();	
-		        			dayCandlestickChartDivNum++;
-		        			dayCandlestickVolumeChart.resize();	
-							dayCandlestickVolumeChart.setOption(option2);
-		        			dayCandlestickVolumeChart.resize();	
-		        			dayCandlestickVolumeNum=1;
-		        		},10);
-		        		setTimeout(function(){
-		        		$("#dayCandlestickChart").css("opacity","1");
-		        		},100);
-			    }
-		});
-    
-    //设置数据参数（为画图做准备）
-    function dayCandlestickChartSetOption(newData){
-        var dates = dayCandlestickChartData.map(function (item) {
+			document.getElementsByClassName("buttomFix")[0].style.display="block";
+				var option = setOptionFiveVolume(FiveCandlestickData);
+				var option2=CandlestickFiveVolumeChartSetoption(CandlestickVolumeData);
+				setTimeout(function(){
+					FiveTestCandlestickChartDiv.resize();
+					FiveTestCandlestickChartDiv.setOption(option);
+        			FiveTestCandlestickChartDiv.resize();	
+        			CandlestickVolumeChart.resize();	
+					CandlestickVolumeChart.setOption(option2);
+        			CandlestickVolumeChart.resize();	
+        			firstFiveCandlestickTimeNumber++;
+        			firstFiveVolumeTimeNumber++;
+        		},10);
+        		setTimeout(function(){
+        			$("#FiveTestCandlestickChart").css("opacity","1");
+        		},100);
+	    } 
+	});
+	function processingFiveVolumeChart(data){
+		var parameters = data.Parameters.Data;
+		var Len=parameters.length;
+		if(parameters == null)return;
+		var lent=FiveVolumeData.volume.length;
+		console.log(Len+"voo");
+    	for(var i=0;i<Len;i++){
+    			var time2=parameters[i][DateTimeStampSubscript].split(" ");
+	        	var str1=time2[1].split(":");
+	        	var str2=str1[0]+":"+str1[1]
+    			FiveVolumeData.time[lent+i]=str2;
+    			FiveVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
+   		};
+    	for(var i=0;i<FiveVolumeData.time.length-1;i++){
+    		if(FiveVolumeData.time[i]==FiveVolumeData.time[i+1]){
+    			FiveVolumeData.time.splice(i,1);
+    			FiveVolumeData.volume.splice(i,1);
+    		}
+    	}
+    	FiveVolumeData.time=FiveVolumeData.time.slice(-60);
+    	FiveVolumeData.volume=FiveVolumeData.volume.slice(-60);
+console.log(FiveVolumeData.time.length+"voo");
+    	
+    	if(firstFiveVolumeTimeNumber==0){
+	  			
+	  	}else{
+	  		var option1= CandlestickFiveVolumeChartSetoption(FiveVolumeData);
+	  		FiveTestCandlestickVolumeChart.resize();	
+	  		FiveTestCandlestickVolumeChart.setOption(option1);
+	  		FiveTestCandlestickVolumeChart.resize();	
+	  	};
+	  	CandlestickVolumeChart.group="group4";
+	};
+	 //设置数据参数（为画图做准备）
+    function setOptionFiveVolume(rawData){
+        var dates = rawData.map(function (item) {
             return item[0];
         });
-        var data = dayCandlestickChartData.map(function (item) {
+        var data = rawData.map(function (item) {
             return [+item[1], +item[2], +item[5], +item[6]];
         });
         var option = {
@@ -130,29 +176,8 @@
 		}
         return option;
     };
-    var  dayCandlestickVolumeNum=0;
-    function processingDayCandlestickVolumeData(data){
-    		var parameters = data.Parameters.Data;
-    		var Len=parameters.length;
-    		if(parameters == null)return;
-    	    var lent=dayCandlestickVolumeData.time.length;
-        	for(var i=0;i<Len;i++){
-        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-        			dayCandlestickVolumeData.time[lent+i]=timeStr;
-        			dayCandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
-       		};
-       		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
-       		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
-//      	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
-		  	dayCandlestickVolumeChart.group="group3";
-		  	if(dayCandlestickVolumeNum !=0){
-		  		var option3 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
-				dayCandlestickVolumeChart.setOption(option3);
-			}
-		  	
-    };
-    function CandlestickVolumeChartSetoption(data){
-    	 var  dayCandlestickVolumeData=data;
+      function CandlestickFiveVolumeChartSetoption(data){
+    	 var  CandlestickVolumeChartData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
 	      	 color: ['#EDF274'],
@@ -169,7 +194,7 @@
                },
 	          },
 	          legend: {
-	              data:['最新成交价']
+	              data:['']
 	          },
 	            toolbox: {
 	                show: false,
@@ -189,13 +214,13 @@
 	                  axisTick: {onGap:false},
 	                  splitLine: {show:false},
 	                   axisLine: { lineStyle: { color: '#8392A5' } },
-	                  data : dayCandlestickVolumeData.time
+	                  data : CandlestickVolumeChartData.time
 	              }
 	          ],
 			 yAxis: [
 			            {
 	                type : 'value',
-	              name : '成交量(千)',
+	              name : '成交量(万)',
 	                 axisLine: { lineStyle: { color: '#8392A5' } },
 		              axisTick:{
 		               	show:false,
@@ -205,7 +230,7 @@
 	                  formatter: function (a) {
 	                      a = +a;
 	                      return isFinite(a)
-	                          ? echarts.format.addCommas(+a / 1000)
+	                          ? echarts.format.addCommas(+a / 10000)
 	                          : '';
 	                  }
 	              },
@@ -221,8 +246,8 @@
 	              {
 	                  name: '成交量',
 	                  type: 'bar',
-	                  data:dayCandlestickVolumeData.volume
-	              }
+	                  data:CandlestickVolumeChartData.volume
+	              },
 	          ]
 	      };
         return option
