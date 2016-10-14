@@ -115,6 +115,8 @@ function handleData(evt){
 				updateDesignatesDom(orderParam);
 			}
 			var orderId = orderParam.OrderID;
+			var cacaleOrderId = selectDesgnate["orderId"];
+			var contractCode = selectDesgnate["contraction"];
 			if(orderStatusWeHooks == 4){
 				tip("撤单成功:合约【"+orderParam.ContractCode+"】,订单号【"+orderId+"】");
 			}
@@ -1241,10 +1243,13 @@ function doInsertOrder(orderNum,tradeDrection,orderPrice){
 function doInsertAllSellingOrder(){
 	for(var i = 0 ; i < postionIndex;i++){
 		var contractCode = localCachePositionContractCode[i];
-		if(contractCode == undefined){
+		if(contractCode == undefined || $(".postion-index"+i+"").html() == undefined){
 			continue;
 		}
 		var tradeParam = doGetSellingBasicParam(contractCode);
+		if(!tradeParam){
+			continue;
+		}
 		var param = new Array();
 		param[0] = tradeParam;
 		closing(param);
@@ -1262,6 +1267,9 @@ function doInsertSellingOrder(){
 		return;
 	}
 	var tradeParam = doGetSellingBasicParam(contractCode);
+	if(!tradeParam){
+		return;
+	}
 	var param = new Array();
 	param[0] = tradeParam;
 	closing(param);
@@ -1381,12 +1389,13 @@ function doGetSellingBasicParam(obj){
 	}
 	if(validationInputPrice(lastPrice)){
 		tip("最新价格错误");
-		return;
+		return false;
 	}
 	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection);
 	console.log(limitPirce);
 	if(validationInputPrice(limitPirce)){
 		tip("平仓价格错误");
+		return false;
 	}
 	var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
 	return sellingParam;
