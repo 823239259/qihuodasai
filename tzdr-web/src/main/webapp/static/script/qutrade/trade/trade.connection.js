@@ -32,6 +32,10 @@ var loginFail = false;
  */
 var anotherPlace = false;
 /**
+ * 连接交易服务器的计时Id
+ */
+var tradeIntervalId = null;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -129,11 +133,12 @@ function initLoad() {
 		handleData(evt);
 	}
 	socket.onclose = function() {
+		clearInterval(tradeIntervalId);
 		socket = null;
 		//更新交易连接状态
 		changeConnectionStatus();
 		//不是手动登出，则重连交易服务器
-		if(!loginFail){
+		if(loginFail == false){
 			//交易连接断开重连
 			reconnect();
 		}else{
@@ -159,11 +164,11 @@ function initTradeConnect(){
 	 * 交易数据初始化加载 --> trade.connections
 	 */
 	initLoad();
-	var tradeInterval = setInterval(function(){
+	tradeIntervalId = setInterval(function(){
 			layer.msg('正在连接交易服务器...', {icon: 16});
 			if(connectionStatus){
 				layer.msg('交易服务器连接成功', {icon: 4});
-				clearInterval(tradeInterval);
+				clearInterval(tradeIntervalId);
 			}
 		}
 	, 2000);

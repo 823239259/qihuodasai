@@ -67,7 +67,7 @@ function handleData(evt){
 				loginFail = false;
 				anotherPlace = false;
 			} else {
-				loginFail = 1;
+				loginFail = -2;
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
@@ -1104,6 +1104,18 @@ function bindOpertion(){
 				tip("没有需要平仓的数据");
 				return;
 			}
+			var positionFlag = false;
+			for(var i = 0 ; i < postionIndex;i++){
+				if( $(".postion-index"+i+"").html() == undefined){
+					continue;
+				}else{
+					positionFlag = true;
+				}
+			}
+			if(!positionFlag){
+				tip("没有需要平仓的数据");
+				return;
+			}
 			var tipContent = "确认全部平仓";
 			tipConfirm(tipContent,doInsertAllSellingOrder,cancleCallBack);
 		}else{
@@ -1140,6 +1152,18 @@ function bindOpertion(){
 	$("#allDesOrder").bind("click",function(){
 		if(isLogin){
 			if(designateIndex == 0){
+				tip("没有需要撤单的数据");
+				return;
+			}
+			var designateFlag = false;
+			for(var i = 0 ; i < designateIndex ; i++){
+				if($(".des-index"+i+"").html() == undefined){
+					continue;
+				}else{
+					designateFlag = true;
+				}
+			}
+			if(!designateFlag){
 				tip("没有需要撤单的数据");
 				return;
 			}
