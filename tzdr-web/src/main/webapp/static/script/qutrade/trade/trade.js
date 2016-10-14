@@ -100,6 +100,9 @@ function handleData(evt){
 			if (inserOrderStatus < 3) {
 				appendDesignates(insertOrderParam);
 			}
+			if(inserOrderStatus == 5){
+				tip("交易失败:合约【"+insertOrderParam.ContractCode+"】,原因【"+insertOrderParam.StatusMsg+"】");
+			}
 			//订单状态通知
 		} else if (method == "OnRtnOrderState") {
 			var orderParam = parameters;
@@ -165,6 +168,8 @@ var loadCachCanuse = {};
 var loadCurrencyRate = {};
 var loadCachAccountNo = {};
 var localCacheCurrencyAndRate = {};
+var loadCachFloatingProfit = {};
+var loadCachCloseProfit = {};
 function updateBalance(parama){
 	var currencyNo = parama.CurrencyNo;
 	var accountNo = parama.AccountNo;
@@ -173,10 +178,14 @@ function updateBalance(parama){
 	var deposit = parama.Deposit;
 	var canuse = parama.TodayCanUse;
 	var currency = parama.CurrencyRate; 
+	var closeProfit = parama.CloseProfit;
+	var floatingProfit = parama.FloatingProfit;
 	localCacheCurrencyAndRate[currencyNo]  = currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
 	loadCachCanuse[accountNo] = canuse;
+	loadCachFloatingProfit[accountNo] = floatingProfit;
+	loadCachCloseProfit[accountNo] = closeProfit;
 	if(currency != undefined)
 		loadCurrencyRate[accountNo] = currency;
 	if(cachBanlace == undefined || cachBanlace.length <= 0){
@@ -186,34 +195,39 @@ function updateBalance(parama){
 	var $banlance = 0.00;
 	var $deposit = 0.00
 	var $canuse = 0.00
+	var $floatFit = 0.00;
+	var $clostFit = 0.00;
 	for(var i = 0 ; i < uehIndex; i++){
 		var ac = loadCachAccountNo[i]; 
-		$banlance = $banlance + loadCachBanlance[ac] * loadCurrencyRate[ac];
-		$deposit = $deposit + loadCachDeposit[ac] * loadCurrencyRate[ac];
-		$canuse = $canuse + loadCachCanuse[ac]  * loadCurrencyRate[ac];
+		var cr = loadCurrencyRate[ac];
+		$banlance = $banlance + loadCachBanlance[ac] * cr;
+		$deposit = $deposit + loadCachDeposit[ac] * cr;
+		$canuse = $canuse + loadCachCanuse[ac]  * cr;
+		$clostFit = $clostFit + loadCachCloseProfit[ac]  * cr;
+		$floatFit = $floatFit + loadCachFloatingProfit[ac] * cr;
 	}
 	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
-	var float = parseFloat(parama.floatingProfit).toFixed(2) ;
+	var $float = parseFloat($floatFit).toFixed(2) ;
 	var color = "#FFFFFF";
-	if(isNaN(float)){
-		float = 0;
+	if(isNaN($float)){
+		$float = 0;
 	}
-	if(float < 0){
+	if($float < 0){
 		color = "#0bffa4";
-	}else if(float > 0){
+	}else if($float > 0){
 		color = "#ff5500";
 	}
-	$("#floatingProfit").text(float);
+	$("#floatingProfit").text($float);
 	$("#floatingProfit").css("color",color);
-	var closeProfit = parseFloat(parama.CloseProfit).toFixed(2);
-	if(closeProfit < 0){
+	var $closeProfit = parseFloat($clostFit).toFixed(2);
+	if($closeProfit < 0){
 		color = "#0bffa4";
-	}else if(closeProfit > 0){
+	}else if($clostFit > 0){
 		color = "#ff5500";
 	}
-	$("#closeProfit").text(closeProfit);
+	$("#closeProfit").text($closeProfit);
 	$("#closeProfit").css("color",color);
 };
 /**
@@ -227,7 +241,14 @@ function addAndUpdateFundsDetails(param){
 		updateFundsDetails(param);
 	}
 }
+/**
+ * 全局缓存资金资金明细的列表信息
+ */
 var localCacheFundDetail = {};
+/**
+ * 资金明细的索引
+ */
+var fundsDetailsIndex = 0;
 /**
  * 增加资金明细
  * @param param
@@ -246,7 +267,8 @@ function addFundsDetails(param){
 	var currencyRate = param.CurrencyRate;
 	var profitRate = "";
 	var cls = "currencyNo"+currencyNo;
-	var html = '<ul class="tab_content '+cls+'" data-tion-fund = "'+currencyNo+'">'+
+	var funds_cls = "funds-index"+fundsDetailsIndex;
+	var html = '<ul class="tab_content '+cls+' '+funds_cls+'" data-tion-fund = "'+currencyNo+'">'+
 				'	<li class="ml detail_currency">'+currencyNo+'</li>'+
 				'	<li class = "detail_todayBalance">'+todayBalance+'</li>'+
 				'	<li class = "detail_todayCanUse">'+todayCanUse+'</li>'+
@@ -264,6 +286,7 @@ function addFundsDetails(param){
 	tabOn();
 	localCacheFundDetail[currencyNo]=param;
 	addFundDetailBindClick(currencyNo);
+	updateFundsDetailsIndex();
 } 
 /**
  * 更新资金明细
@@ -884,6 +907,12 @@ function updateTradesIndex(){
 	tradesIndex++;
 }
 /**
+ * 更新资金列表索引
+ */
+function updateFundsDetailsIndex(){
+	fundsDetailsIndex++;
+}
+/**
  * 删除持仓中的元素节点 
  * @param {Object} 删除节点
  */
@@ -1013,8 +1042,8 @@ $(function(){
 			});
 	});
 	bindOpertion();
-	$("#select_commodity").click(function(){
-		var contractCode = $(this).val();
+	function selectCommodity(param){
+		var contractCode = param;
 		var localCommodity = localCacheCommodity[contractCode];
 		var localQoute = localCacheQuote[contractCode];
 		var miniTikeSize = localCommodity.MiniTikeSize;
@@ -1040,6 +1069,10 @@ $(function(){
 		obj.click();
 		setLocalCacheSelect(contractCode);
 		clearRightData();
+	}
+	$("#select_commodity").change(function(){
+		var contractCode = $("#select_commodity").val();
+		selectCommodity(contractCode);
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
@@ -1088,7 +1121,7 @@ function bindOpertion(){
 			}
 			var commodityNo = $("#commodeityNo").val();
 			var contractNo = $("#contractNo").val();
-			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】";
+			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】,买卖方向:【"+analysisBusinessBuySell(tradeDrection)+"】";
 			layer.confirm(tipContent+"?", {
 			  btn: ['确认','取消'] //按钮
 			}, function(){
@@ -1215,7 +1248,7 @@ function bindOpertion(){
 				  area: ['420px', '240px'], //宽高
 				  content: '<div  style = "background:#F2F2F2;padding:50px 50px 50px 50px">'+
 							'	<p>委托价格：<input style="background:#FFFFFF;border:1px solid  #ABABAB" type="text" value = "'+orderPrice+'"  id="update_des_price"/></p>'+
-							'	<p style = "padding-top:10px;">委托数量：<input  style="background:#FFFFFF;border:1px solid  #ABABAB" type="number" value = "'+orderNum+'"  id="update_des_number"/></p>'+
+							'	<p style = "padding-top:10px;">委托数量：<input  style="background:#FFFFFF;border:1px solid  #ABABAB" type="number" value = "'+orderNum+'"   id="update_des_number"/></p>'+
 							'</div>',
 					 btn: ['确认改单', '关闭'], //
 					 yes: function(){
@@ -1230,7 +1263,7 @@ function bindOpertion(){
 							 return;
 						 }
 						 var tipContent = "确认改单合约【"+contractCode+"】"; 
-						 tipConfirm(tipContent,doInsertChangeSingleOrder,cancleCallBack());
+						 tipConfirm(tipContent,doInsertChangeSingleOrder,cancleCallBack);
 					 },
 					 btn2: function(){
 						 layer.closeAll();
@@ -1493,6 +1526,26 @@ function sumListfloatingProfit(){
 	}
 }
 /**
+ * 更新持仓总盈亏
+ */
+function updateHoldProfit(){
+	var price = 0.00;
+	for (var i = 0; i < fundsDetailsIndex; i++) {
+		if($(".funds-index"+i).html() != undefined){
+			var floatingProfit = $("#floatingProfit");
+			var floating = $(".funds-index"+i+" li[class = 'detail_floatingProfit']").text();
+			var currencyRate = $(".funds-index"+i+" li[class = 'detail_currencyRate']").text();
+			var total = floating*currencyRate;
+			if(isNaN(total)){
+				total = 0;
+			}
+			price = price + total;
+		}
+		floatingProfit.text(parseFloat(price).toFixed(2));
+	}
+	
+}
+/**
  * 清除交易列表的数据并生成操作按钮
  */
 function clearTradListData(){
@@ -1538,6 +1591,9 @@ function clearLocalCacheData(){
 	loadCachAccountNo = {};
 	localCacheCurrencyAndRate = {};
 	orderIndex=0;
+	fundsDetailsIndex = 0;
+	var loadCachFloatingProfit = {};
+	var loadCachCloseProfit = {};
 }
 /**
  * 输入价格或数量验证 

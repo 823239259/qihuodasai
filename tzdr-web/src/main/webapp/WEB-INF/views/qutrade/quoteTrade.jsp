@@ -164,7 +164,7 @@
 <!-- center -->
 <div class="quotation_center">
     <div id="left">
-    	<p class="center_futures"><input type="text" oninput="searchQuote()" name="quotation_futures" id="quotation_futures" placeholder="期货搜索"/></p>
+    	<p class="center_futures"><input type="text" oninput="searchQuote()" name="quotation_futures" id="quotation_futures" placeholder="合约搜索"/></p>
 		<div id="gdt">
 			<div class="futuresList">
 			

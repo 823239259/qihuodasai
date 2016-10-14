@@ -160,6 +160,8 @@ function quotePush(obj){
 	updateFloatingfit(param);
 	//更新资金明细中的浮动盈亏
 	sumListfloatingProfit();
+	//更新持仓浮动盈亏总和
+	updateHoldProfit();
 	//更新右边边行情
 	updateRight(param);
 	//初始化设置最新价格
@@ -192,7 +194,8 @@ function loadSelectData(param){
 		var commodityNo = data.CommodityNo;
 		var mainContract = data.MainContract;
 		var contractCode = commodityNo+mainContract;
-		var html = "<option value='"+contractCode+"'>"+commodityName+"     "+commodityNo+mainContract+"</option>";
+		var cls = "select_option"+i;
+		var html = "<option class = '"+cls+"' value='"+contractCode+"'>"+commodityName+"     "+commodityNo+mainContract+"</option>";
 		$("#select_commodity").append(html);
 	}
 }
