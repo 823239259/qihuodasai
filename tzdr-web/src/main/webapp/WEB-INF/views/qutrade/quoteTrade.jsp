@@ -384,14 +384,14 @@
 					        		<li class="ml">合约代码</li>
 					        		<li style="width: 50px;">买卖</li>
 					        		<li  style="width: 50px;">委托价</li>
-					        		<li style="width: 70px;">委托量</li>
+					        		<li style="width: 50px;">委托量</li>
 					        		<li style="width: 70px;">订单类型</li>
 					        		<li style="width: 70px;">委托状态</li>
 					        		<li style="width: 70px;">成交均价</li>
 					        		<li style="width: 50px;">成交量</li>
 					        		<li style="width: 120px;">委托时间</li>
-					        		<li  style="width: 100px;">订单号</li>
-					        		<li>反馈信息</li>
+					        		<li style="width: 80px;">订单号</li>
+					        		<li style="width: 80px;">反馈信息</li>
 					        	</ul>
 				        	</div>
 			        	</div>
@@ -409,7 +409,7 @@
 					        		<li style="width: 250px;">成交编号</li>
 					        		<li style="width: 80px;">订单号</li>
 					        		<li style="width: 120px;">成交时间</li>
-					        		<li>交易所</li>
+					        		<li style="width: 40px;">交易所</li>
 					        	</ul>
 				        	</div>
 				        </div>	

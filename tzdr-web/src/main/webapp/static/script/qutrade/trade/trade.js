@@ -356,15 +356,15 @@ function appendOrder(param){
 	var html = '<ul class="tab_content '+cls+'" data-order-order = "'+orderId+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
 				'	<li class="ml order0">'+contractCode+'</li>'+
 				'	<li class = "order1" style="width: 50px;">'+drectionText+'</li>'+
-				'	<li class = "order2">'+orderPrice+'</li>'+
+				'	<li class = "order2" style="width: 50px;">'+orderPrice+'</li>'+
 				'	<li class = "order3" style="width: 50px;">'+orderNum+'</li>'+
-				'	<li class = "order4">'+analysisOrderPriceType(priceType)+'</li>'+
-				'	<li class = "order5">'+ordreStatusText+'</li>'+
+				'	<li class = "order4" style="width: 70px;">'+analysisOrderPriceType(priceType)+'</li>'+
+				'	<li class = "order5" style="width: 70px;">'+ordreStatusText+'</li>'+
 				'	<li class = "order6" style="width: 70px;">'+tradePrice+'</li>'+
 				'	<li class = "order7" style="width: 50px;">'+tradeNum+'</li>'+
 				'	<li class = "order8" style="width: 120px;">'+insertDateTime+'</li>'+
 				'	<li class = "order9"  style="width: 100px;">'+orderId+'</li>'+
-				'	<li class = "order10">'+statusMsg+'</li>'+
+				'	<li class = "order10" style="width: 80px;">'+statusMsg+'</li>'+
 				'</ul>';
 	$("#order_gdt1").append(html);
 	tabOn();
@@ -504,7 +504,7 @@ function appendTradeSuccess(param){
 				'	<li class = "trade5" style="width: 250px;">'+tradeNo+'</li>'+
 				'	<li class = "trade6"  style="width: 80px;">'+orderId+'</li>'+
 				'	<li class = "trade7"  style="width: 120px;">'+tradeTime+'</li>'+
-				'	<li class = "trade8">'+exchangeNo+'</li>'+
+				'	<li class = "trade8" style="width: 40px;">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_gdt1").append(html);
 	tabOn();
@@ -748,10 +748,11 @@ function generateOrderTitle(){
 				'	<li style = "width:70px;">委托量</li>'+
 				'	<li style="width: 70px;">订单类型</li>'+
 				'	<li  style="width: 70px;">委托状态</li>'+
-				'	<li style = "width:150px;" >成交均价</li>'+
+				'	<li style = "width:70px;" >成交均价</li>'+
 				'	<li style = "width:50px;"  >成交量</li>'+
 				'	<li style = "width:120px;">撤单时间</li>'+
-				'	<li>订单号</li>'+
+				'	<li style = "width:80px;">订单号</li>'+
+				'   <li style="width: 80px;">反馈信息</li>'+
 				'</ul>';
 	$("#order_gdt1").html(html);
 }
@@ -775,14 +776,14 @@ function generateDesignateTitle(){
 function generateTradeSuccessTitle(){
 	var html = '<ul class="tab_lis">'+
 				'	<li class="ml">合约代码</li>'+
-				'	<li  style="width: 30px;">买卖</li>'+
-				'	<li  style="width: 120px;">成交均价</li>'+
+				'	<li  style="width: 40px;">买卖</li>'+
+				'	<li  style="width: 70px;">成交均价</li>'+
 				'	<li  style="width: 50px;">成交量</li>'+
-				'	<li  style="width: 70px;">币种</li>'+
-				'	<li  style="width: 170px;">成交编号</li>'+
-				'	<li  style="width: 100px;">订单号</li>'+
-				'	<li  style="width: 150px;">成交时间</li>'+
-				'	<li>交易所</li>'+
+				/*'	<li  style="width: 70px;">币种</li>'+*/
+				'	<li  style="width: 250px;">成交编号</li>'+
+				'	<li  style="width: 80px;">订单号</li>'+
+				'	<li  style="width: 120px;">成交时间</li>'+
+				'	<li  style="width: 40px;">交易所</li>'+
 				'</ul>';
 	$("#trade_gdt1").append(html);
 }
