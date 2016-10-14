@@ -115,6 +115,8 @@ function handleData(evt){
 				updateDesignatesDom(orderParam);
 			}
 			var orderId = orderParam.OrderID;
+			var cacaleOrderId = selectDesgnate["orderId"];
+			var contractCode = selectDesgnate["contraction"];
 			if(orderStatusWeHooks == 4){
 				tip("撤单成功:合约【"+orderParam.ContractCode+"】,订单号【"+orderId+"】");
 			}
