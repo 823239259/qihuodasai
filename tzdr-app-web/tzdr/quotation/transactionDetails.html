@@ -213,24 +213,6 @@
 					}
 					i++; 
 				});
-				/*document.getElementById("searchIcon").addEventListener("tap",function(){
-					$("#contentList").css("display","block");
-				})
-				document.getElementById("titleValue").addEventListener("tap",function(){
-					$("#contentList").css("display","block");
-				})
-				document.getElementById("contentList").addEventListener("tap",function(){
-					str= $(this).index();
-			         console.log(str) ;
-				})
-				 $('#contentList li').on('click',function(){
-			        str= $(this).index();
-			         console.log(str) ;
-			 
-			    })
-				$("#contentListBg").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
-				var leftWidth=window.innerWidth/2-150;
-				$("#contentListBg").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});*/
 			});
 			
 		</script>
@@ -239,9 +221,6 @@
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
-//			$(function(){
-//				plus.nativeUI.showWaiting( "正在加载内容" );
-//			})
 			function setTimeOutInsertOrder(){
 				tradeSetTimeOut = setTimeout(function(){
 								plus.nativeUI.closeWaiting(); 
@@ -253,7 +232,6 @@
 				$("#contractNo").val(param[1]);
 				$("#contractSize").val(param[5]);
 				$("#lastPrice").text(param[7]);
-//				$("#lastPriceNone").val(param[7]);
 				$("#miniTikeSize").val(param[6]);
 				$("#doSize").val(param[4]);
 			}

@@ -88,6 +88,7 @@ function loadSocket(){
 			var method = data.Method;
 			loadDom(method);
 			var parameters = data.Parameters;
+//			console.log(JSON.stringify(parameters));
 			if (parameters != null) {
 				if (method == "OnRspLogin") {
 					var code = parameters.Code;
@@ -187,10 +188,10 @@ function loadSocket(){
 			}else if(method =="OnRspLogout"){
 					var code = parameters.Code;
 					if(!loginOutTip){
-						var loginMessage = parameters.Message;
-							$("#switchAccount").text("登录账户");
-						alertProtype(loginMessage,"提示",Btn.confirmed());
-						plus.webview.getWebviewById("transactionDetails").reload();
+						var content="您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008";
+						$("#switchAccount").text("登录账户");
+						var Array=["确认","重新登录"];
+						alertProtype(content,"提示",Array,openLogin,cancelTest);
 					}
 			}
 		}
@@ -201,6 +202,14 @@ function loadSocket(){
 		alertProtype("自动登录异常，是否重新登录","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
 	}*/
 }
+	/*刷新当前页面
+	 */
+	function cancelTest(){
+		plus.webview.getWebviewById("transactionDetails").reload();
+	};
+
+
+
 /**
  * 请求数据-初始化dom 
  */ 
