@@ -28,7 +28,21 @@ i{
 	text-align: right;
 }
 .chargeList input{
-	margin-top: -5px;;
+	margin-top: 10px;;
+}
+.chargeList .mui-input-row{
+	height: 80px;
+	line-height: 80px;
+}
+.chargeList .mui-input-row label{
+	width: 50%;
+	vertical-align: middle;
+}
+.chargeList .mui-input-row label i{
+	margin-left: 5px;
+}
+.chargeList .mui-input-row label img{
+	vertical-align: middle;
 }
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
 	color:#FFCC33;
