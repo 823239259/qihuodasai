@@ -1,7 +1,7 @@
 /**
  * 生成环境：live,测试环境:dev
  */
-var model = "dev";
+var model = "live";
 /**
  * websocket地址
  */
@@ -10,7 +10,7 @@ var tradeWebsocketUrl = null;
  * 定义生产环境
  */
 function tradeConfigNewinstance(){
-	this.url = "ws://192.168.0.213:6060";
+	this.url = "ws://socket.vs.com:6060";
 	return this;
 }
 /**
