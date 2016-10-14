@@ -115,10 +115,8 @@ function handleData(evt){
 				updateDesignatesDom(orderParam);
 			}
 			var orderId = orderParam.OrderID;
-			var cacaleOrderId = selectDesgnate["orderId"];
-			var contractCode = selectDesgnate["contraction"];
-			if(orderStatusWeHooks == 4  && cacaleOrderId==orderId){
-				tip("撤单成功:合约【"+contractCode+"】,订单号【"+orderId+"】");
+			if(orderStatusWeHooks == 4){
+				tip("撤单成功:合约【"+orderParam.ContractCode+"】,订单号【"+orderId+"】");
 			}
 			if(orderStatusWeHooks == 5){
 				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
@@ -144,6 +142,7 @@ function handleData(evt){
 			var loginMessage = parameters.Message;
 			tip(loginMessage);
 		}else if(method == "OnRspLogout"){
+			$("#trade_login").text("登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			if(code == 1){
