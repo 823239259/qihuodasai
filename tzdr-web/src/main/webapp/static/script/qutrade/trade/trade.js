@@ -255,6 +255,9 @@ var fundsDetailsIndex = 0;
  */
 function addFundsDetails(param){
 	var currencyNo = param.CurrencyNo;
+	if(currencyNo == "HKD"){
+		currencyNo = "HKD-HKFE";
+	}
 	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
 	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
 	var deposit = parseFloat(param.Deposit).toFixed(2);
@@ -1512,8 +1515,8 @@ function doGetModifyOrderBasicParam(obj){
  * 计算列表的浮动盈亏
  */
 function sumListfloatingProfit(){
-	var price  = 0;
 	for (var i = 0; i < postionIndex; i++) {
+		var price  = 0;
 		var obj = $(".postion-index"+i+"");
 		if(obj.html() == undefined){
 			continue;
@@ -1528,7 +1531,7 @@ function sumListfloatingProfit(){
 		var  detailCurrencyRateDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_currencyRate']");
 		var floatingProfitText = floatingProfitDom.text();
 		var detailCurrencyRateText = parseFloat(detailCurrencyRateDom.text()).toFixed(3);
-		price = price + float * detailCurrencyRateText;
+		price = price + float * 1;
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
 	}
 }
