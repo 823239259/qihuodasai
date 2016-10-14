@@ -224,9 +224,9 @@
 	mui.app_filePath=function(file_url){
 		
 		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
-		
+		console.log("1"+plus.io.convertLocalFileSystemURL('_www/'+file_url))
+		console.log("2"+plus.io.convertAbsoluteFileSystem(path));
 		var filePath = plus.io.convertAbsoluteFileSystem(path);
-		
 		return filePath;
 	}
 	
@@ -381,7 +381,6 @@ var tzdr = {
     		}
 		},
 		initButtomListener:function(home){
-			
 				document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");

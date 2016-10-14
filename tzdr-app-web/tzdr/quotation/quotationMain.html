@@ -157,10 +157,11 @@
 		<script type="text/javascript">
 		//初始化导航栏
 			tzdr.init.initHearListener();
-  			tzdr.init.initButtomListener(true);
+  			
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
+				tzdr.init.initButtomListener(true);
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){

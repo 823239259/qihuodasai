@@ -41,6 +41,7 @@ var getSuccessIndex = 0;
 var cancleOrderId = null;
 //交易是否连接成功
 var isConnection = false;
+var isLoginOut = false;
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 loadSocket();
@@ -75,7 +76,9 @@ function loadSocket(){
 		socket.onclose = function() { 
 			if(!loginOutFlag){ 
 				clearLogin();
-				alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
+				if(isLoginOut){
+					alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
+				}
 				//alertProtype("网络连接不稳定,点击确定重新连接","提示",Btn.confirmed(),null,referPage);
 			}
 		}  
@@ -92,6 +95,7 @@ function loadSocket(){
 					if (code == 0) {
 						initDom();
 					} else {
+						isLoginOut = true;
 						clearLogin();
 						alertProtype("自动登录异常，请重新登录","提示",Btn.confirmed(),null,openLogin());
 					}
@@ -173,10 +177,21 @@ function loadSocket(){
 				} else if (method == "OnRtnMoney") {
 					var accountParam = parameters;
 					updateBalance(accountParam)
-			}else if(method = "OnError"){
-				var code = parameters.Code;
-				var loginMessage = parameters.Message;
-				alertProtype(loginMessage,"提示",Btn.confirmed());
+			}else if(method == "OnError"){
+//				if(isLoginOut){
+					var code = parameters.Code;
+					var loginMessage = parameters.Message;
+					alertProtype(loginMessage,"提示",Btn.confirmed());
+//				}
+				
+			}else if(method =="OnRspLogout"){
+					var code = parameters.Code;
+					if(!loginOutTip){
+						var loginMessage = parameters.Message;
+							$("#switchAccount").text("登录账户");
+						alertProtype(loginMessage,"提示",Btn.confirmed());
+						plus.webview.getWebviewById("transactionDetails").reload();
+					}
 			}
 		}
 	}
@@ -312,8 +327,6 @@ function updatePositionDom(positonParam){
 		holdNum = holdNum + orderNum;
 		price = price + oldPrice;
 		drectionText = analysisPositionDrection(drection);
-		var openAvgPrice = doGetOpenAvgPrice(price,holdNum);
-		$thisPrcie.text(openAvgPrice);
 		var commdityNo = holdParam.CommodityNo;
 		var contractNo = holdParam.ContractNo;
 		var comm = marketCommdity[commdityNo+contractNo];
@@ -321,7 +334,12 @@ function updatePositionDom(positonParam){
 		var floatingProft = 0.00; 
 		var floatP = 0.00;
 		if(comm != undefined){
-			console.log("持仓");
+			var doSize = comm.DotSize;
+			if(isNaN(doSize)){
+				doSize = 0;
+			}
+			var openAvgPrice = doGetOpenAvgPrice(price,holdNum,doSize);
+			$thisPrcie.text(openAvgPrice);
 			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,comm.ContractSize,comm.MiniTikeSize,holdNum,drection);
 			floatingProft = floatP +":"+  comm.CurrencyNo;
 		} 
@@ -473,11 +491,18 @@ function appendOrder(data){
 	var orderStatus = orderParam.OrderStatus;
 	var orderNum = orderParam.OrderNum;
 	var tradeNum = orderParam.TradeNum;
+	var orderPrice = orderParam.OrderPrice;
 	var cdNum = 0;
 	var drectionText = analysisDrection(drection);
 	var orderStatusText = analysisOrderStatus(orderStatus);
 	if(orderStatus == 4){
 		cdNum = orderNum - tradeNum;
+	}
+	var commdityNo = orderParam.CommodityNo;
+	var contractNo = orderParam.ContractNo;
+	var comm = marketCommdity[commdityNo+contractNo];
+	if(comm != undefined){
+		orderPrice = parseFloat(orderPrice).toFixed(comm.DotSize);
 	}
 	var orderId = orderParam.OrderID;
 	var cls = 'entrust'+entrustsIndex;
@@ -487,7 +512,7 @@ function appendOrder(data){
 				+'			<span class = "order0">'+orderParam.ContractCode+'</span>'
 				+'			<span class = "order1">'+orderStatusText+'</span>'
 				+'			<span class = "order2">'+drectionText+'</span>'
-				+'			<span class = "order3">'+orderParam.OrderPrice+'</span>'
+				+'			<span class = "order3">'+orderPrice+'</span>'
 				+'			<span class = "order4">'+orderNum+'</span>'
 				+'			<span class = "order5">'+tradeNum+'</span>'
 				+'			<span class = "order6">'+cdNum+'</span>'
@@ -789,6 +814,6 @@ function deleteDesignatesContractCode(param){
  * @param {Object} price
  * @param {Object} num
  */
-function doGetOpenAvgPrice(price,num){
-	return Math.round(parseFloat(price / num).toFixed(2));
+function doGetOpenAvgPrice(price,num,doSize){
+	return parseFloat(price / num).toFixed(doSize);
 }
