@@ -158,3 +158,18 @@ function analysisOrderStatus(orderStatus){
 	}
 	return orderStatusText;
 }
+/**
+ * 解析订单类型
+ * @param priceType
+ */
+function analysisOrderPriceType(priceType){
+	var priceTypeText = "";
+	if(priceType == 0){
+		priceTypeText = "限价";
+	}else if(priceType == 1){
+		priceTypeText = "市价";
+	}else if(priceType == 2){
+		priceTypeText = "止损";
+	}
+	return priceTypeText;
+}

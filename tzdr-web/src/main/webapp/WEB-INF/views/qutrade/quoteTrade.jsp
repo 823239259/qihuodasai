@@ -332,8 +332,8 @@
     		<div class="quotation_detailed">
 			    <div class="quotation_detailed_lis">
 			    	<a href="javascript:void(0);" class="on">持仓</a>|
+			    	<a href="javascript:void(0);">挂单</a>|
 				    <a href="javascript:void(0);">委托</a>|
-				    <a href="javascript:void(0);">挂单</a>|
 				    <a href="javascript:void(0);">成交记录</a>|
 				    <a href="javascript:void(0);">资金明细</a>
 			    </div>
@@ -358,24 +358,6 @@
 			        		<li><a href="javascript:void(0);"  id = "positionBckhand">反手</a></li>
 			        	</ul>
 			        </div>
-			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
-			        	<div class="gdt1">
-			        		<div id = "order_gdt1">	
-					        	<ul class="tab_lis">
-					        		<li class="ml">合约代码</li>
-					        		<li style="width: 50px;">买卖</li>
-					        		<li>委托价</li>
-					        		<li style="width: 50px;">委托量</li>
-					        		<li>触发价</li>
-					        		<li>委托状态</li>
-					        		<li style="width: 150px;">成交均价</li>
-					        		<li style="width: 50px;">成交量</li>
-					        		<li style="width: 120px;">撤单时间</li>
-					        		<li>订单号</li>
-					        	</ul>
-				        	</div>
-			        	</div>
-			        </div>
 			        <div class="quotation_detailed_title" style="display: none;" id = "des_title">
 			        	<div class="gdt1">
 			        		<div id = "des_gdt1">
@@ -395,16 +377,36 @@
 			        		<li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>
 			        	</ul>
 			        </div>
+			        <div class="quotation_detailed_title" style="display: none;" id = "order_title">
+			        	<div class="gdt1">
+			        		<div id = "order_gdt1">	
+					        	<ul class="tab_lis">
+					        		<li class="ml">合约代码</li>
+					        		<li style="width: 50px;">买卖</li>
+					        		<li>委托价</li>
+					        		<li style="width: 50px;">委托量</li>
+					        		<li>订单类型</li>
+					        		<li>委托状态</li>
+					        		<li style="width: 70px;">成交均价</li>
+					        		<li style="width: 50px;">成交量</li>
+					        		<li style="width: 120px;">委托时间</li>
+					        		<li  style="width: 100px;">订单号</li>
+					        		<li>反馈信息</li>
+					        	</ul>
+				        	</div>
+			        	</div>
+			        </div>
+			     
 			        <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
 			        	<div class="gdt1">
 			        		<div style="width: 850px;" id = "trade_gdt1">
 					        	<ul class="tab_lis">
 					        		<li class="ml">合约代码</li>
-					        		<li style="width: 30px;">买卖</li>
-					        		<li style="width: 120px;">成交均价</li>
+					        		<li style="width: 40px;">买卖</li>
+					        		<li style="width: 70px;">成交均价</li>
 					        		<li style="width: 50px;">成交量</li>
-					        		<li style="width: 70px;">币种</li>
-					        		<li style="width: 170px;">成交编号</li>
+					        		<!-- <li style="width: 70px;">币种</li> -->
+					        		<li style="width: 250px;">成交编号</li>
 					        		<li style="width: 80px;">订单号</li>
 					        		<li style="width: 120px;">成交时间</li>
 					        		<li>交易所</li>

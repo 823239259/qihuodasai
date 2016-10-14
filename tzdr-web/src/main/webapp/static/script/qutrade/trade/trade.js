@@ -209,7 +209,7 @@ function updateBalance(parama){
 	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
-	var $float = parseFloat($floatFit).toFixed(2) ;
+	/*var $float = parseFloat($floatFit).toFixed(2) ;
 	var color = "#FFFFFF";
 	if(isNaN($float)){
 		$float = 0;
@@ -220,7 +220,7 @@ function updateBalance(parama){
 		color = "#ff5500";
 	}
 	$("#floatingProfit").text($float);
-	$("#floatingProfit").css("color",color);
+	$("#floatingProfit").css("color",color);*/
 	var $closeProfit = parseFloat($clostFit).toFixed(2);
 	if($closeProfit < 0){
 		color = "#0bffa4";
@@ -343,8 +343,11 @@ function appendOrder(param){
 	var orderNum = param.OrderNum;
 	var tradeNum = param.TradeNum;
 	var triggerPrice = param.TriggerPrice;
+	var priceType = param.OrderPriceType;
+	console.log(priceType);
 	var tradePrice = param.TradePrice;
 	var orderId = param.OrderID;
+	var statusMsg = param.StatusMsg;
 	var insertDateTime = param.InsertDateTime;
 	var cls = "order-index" + orderIndex;
 	var html = '<ul class="tab_content '+cls+'" data-order-order = "'+orderId+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
@@ -352,12 +355,13 @@ function appendOrder(param){
 				'	<li class = "order1" style="width: 50px;">'+drectionText+'</li>'+
 				'	<li class = "order2">'+orderPrice+'</li>'+
 				'	<li class = "order3" style="width: 50px;">'+orderNum+'</li>'+
-				'	<li class = "order4">'+triggerPrice+'</li>'+
+				'	<li class = "order4">'+analysisOrderPriceType(priceType)+'</li>'+
 				'	<li class = "order5">'+ordreStatusText+'</li>'+
-				'	<li class = "order6" style="width: 150px;">'+tradePrice+'</li>'+
+				'	<li class = "order6" style="width: 70px;">'+tradePrice+'</li>'+
 				'	<li class = "order7" style="width: 50px;">'+tradeNum+'</li>'+
 				'	<li class = "order8" style="width: 120px;">'+insertDateTime+'</li>'+
-				'	<li class = "order9">'+orderId+'</li>'+
+				'	<li class = "order9"  style="width: 100px;">'+orderId+'</li>'+
+				'	<li class = "order10">'+statusMsg+'</li>'+
 				'</ul>';
 	$("#order_gdt1").append(html);
 	tabOn();
@@ -371,12 +375,15 @@ function appendOrder(param){
 function updateOrder(param){
 	var contractCode = param.ContractCode;
 	var orderId = param.OrderID;
+	var statusMsg = param.StatusMsg;
 	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
 	var $tradeNum = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order7']");
+	var $statusMsg = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order10']");
 	var orderStatus = param.OrderStatus;
 	var tradeNum = param.TradeNum;
 	$orderStatus.text(analysisOrderStatus(orderStatus));
 	$tradeNum.text(tradeNum);	
+	$statusMsg.text(statusMsg);
 };
 /**
  * 缓存挂单的列表信息
@@ -487,11 +494,11 @@ function appendTradeSuccess(param){
 	var cls = 'trade-index'+tradesIndex;
 	var html = '<ul class="tab_content '+cls+'"  data-index-trade = "'+tradesIndex+'" data-tion-trade = "'+contractCode+'">'+
 				'	<li class="ml trade0">'+contractCode+'</li>'+
-				'	<li class = "trade1" style="width: 30px;">'+drectionText+'</li>'+
-				'	<li class = "trade2" style="width: 120px;">'+tradePrice+'</li>'+
+				'	<li class = "trade1" style="width: 40px;">'+drectionText+'</li>'+
+				'	<li class = "trade2" style="width: 70px;">'+tradePrice+'</li>'+
 				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
-				'	<li class = "trade4"  style="width: 70px;">'+currencyNo+'</li>'+
-				'	<li class = "trade5" style="width: 170px;">'+tradeNo+'</li>'+
+				/*'	<li class = "trade4"  style="width: 70px;">'+currencyNo+'</li>'+*/
+				'	<li class = "trade5" style="width: 250px;">'+tradeNo+'</li>'+
 				'	<li class = "trade6"  style="width: 80px;">'+orderId+'</li>'+
 				'	<li class = "trade7"  style="width: 120px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8">'+exchangeNo+'</li>'+
@@ -1536,14 +1543,20 @@ function updateHoldProfit(){
 			var floating = $(".funds-index"+i+" li[class = 'detail_floatingProfit']").text();
 			var currencyRate = $(".funds-index"+i+" li[class = 'detail_currencyRate']").text();
 			var total = floating*currencyRate;
-			if(isNaN(total)){
+			/*if(isNaN(total)){
 				total = 0;
-			}
+			}*/
 			price = price + total;
+			if(price < 0){
+				floatingProfit.css("color","#0bffa4");
+			}else if(price > 0){
+				floatingProfit.css("color","#ff5500");
+			}else if(price == 0){
+				floatingProfit.css("color","#FFFFFF");
+			}
+			floatingProfit.text(parseFloat(price).toFixed(2));
 		}
-		floatingProfit.text(parseFloat(price).toFixed(2));
 	}
-	
 }
 /**
  * 清除交易列表的数据并生成操作按钮
