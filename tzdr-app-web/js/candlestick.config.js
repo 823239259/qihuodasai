@@ -7,6 +7,13 @@
     	volume:[]
     }
     var newData=[]; 
+     var timeOout=null;
+    var timeOutOpacity=null;
+    var firstTimeNum=0;
+     var volumeTime=[];
+    var volumeV=[];
+    var timeOutTime=null;
+    var timeOutTimeVolume=null;
     function processingData(jsonData){
     		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
@@ -34,14 +41,46 @@
 		  		myChart.group="group2";
 		  	
     }
+   
+    function processingCandlestickVolumeData(data){
+    		var parameters = data.Parameters.Data;
+    		var Len=parameters.length;
+    		if(parameters == null)return;
+    	    var lent=volumeV.length;
+        	for(var i=0;i<Len;i++){
+        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
+		        	var str1=time2[1].split(":");
+		        	var str2=str1[0]+":"+str1[1]
+        			volumeTime[lent+i]=str2;
+        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+       		};
+        	for(var i=0;i<volumeTime.length-1;i++){
+        		if(volumeTime[i]==volumeTime[i+1]){
+        			volumeTime.splice(i,1);
+        			volumeV.splice(i,1);
+        		}
+        	}
+        	CandlestickVolumeData.time=volumeTime.slice(-60);
+        	CandlestickVolumeData.volume=volumeV.slice(-60);
+        	CandlestickVolumeChart.group="group2";
+		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+		  		CandlestickVolumeChart.resize();	
+		  		CandlestickVolumeChart.setOption(option1);
+		  		CandlestickVolumeChart.resize();	
+		  	
+    };
+    	document.getElementById("Time").addEventListener("tap",function(){
+    			var num=1;
+    			timechartTest(num);
+    	})
     	document.getElementById("Candlestick").addEventListener("tap",function(){
     			var num=1;
-    			sendHistoryMessageProtype(num);
     			test(num);
 		});
 		document.getElementById("FiveTest").addEventListener("tap",function(){
     			var num=5;
     			test(num);
+    			
 		});
 		document.getElementById("TenTest").addEventListener("tap",function(){
     			var num=15;
@@ -49,12 +88,15 @@
 		});
 		document.getElementById("TreeTest").addEventListener("tap",function(){
     			var num=30;
+    			$("#CandlestickChart").css("opacity","0");
     			test(num);
 		});
 		function test(num){
 			$("#dayCandlestickChart").css("opacity","0");
     		$("#TimeChart1").css("opacity","0");
     		clearInterval(setIntvalTimeAll);
+    		clearTimeout(timeOout);
+    		clearTimeout(timeOutOpacity);
     		sendHistoryMessageProtype(num);
 			rawData=[];
 			newData=[];
@@ -62,11 +104,14 @@
 		    	time:[],
 		    	volume:[]
 		    }
+			volumeTime=[];
+   			volumeV=[];
 			 if(myChart != null){
 				document.getElementsByClassName("buttomFix")[0].style.display="block";
 					var option = setOption(newData);
+					console.log(JSON.stringify(CandlestickVolumeData));
 					 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-					setTimeout(function(){
+					timeOout=setTimeout(function(){
 						myChart.resize();
 						myChart.setOption(option);
 	        			myChart.resize();	
@@ -74,12 +119,45 @@
 						CandlestickVolumeChart.setOption(option2);
 	        			CandlestickVolumeChart.resize();	
 	        		},100);
-	        		setTimeout(function(){
+	        		timeOutOpacity=setTimeout(function(){
 	        			$("#CandlestickChart").css("opacity","1");
 	        		},100);
 		    } 
 		}
-		
+		function timechartTest(num){
+			  timeData={
+		        "time":[],
+		        "prices":[],
+		        "timeLabel":[]
+		    };
+		    volumeChartData={
+		        "time":[],
+		        "volume":[]
+		    };
+		     $("#CandlestickChart").css("opacity","0");
+    		$("#dayCandlestickChart").css("opacity","0");
+		    clearInterval(setIntvalTimeAll);
+		    clearTimeout(timeOutTime);
+		    clearTimeout(timeOutTimeVolume);
+    		sendHistoryMessageProtype(num);
+				 if(timeChart != null){
+				 	var option2=setOption1(timeData);
+				 	 var option1 =volumeChartSetOption(volumeChartData);
+						timeOutTime=setTimeout(function(){
+							$("#timeChart").css("width","100%");
+						 	timeChart.resize();	
+							timeChart.setOption(option2);
+		        			timeChart.resize();	
+		        			volumeChart.resize();	
+							volumeChart.setOption(option1);
+		        			volumeChart.resize();
+		        		},10);
+		        		timeOutTimeVolume=setTimeout(function(){
+		        			$("#TimeChart1").css("opacity","1");
+		        		},11);
+			    }
+		    
+		}
 		
     //设置数据参数（为画图做准备）
     function setOption(rawData){
@@ -160,40 +238,6 @@
 		    ]
 		}
         return option;
-    };
-    var firstTimeNum=0;
-     var volumeTime=[];
-    var volumeV=[];
-    function processingCandlestickVolumeData(data){
-    		var parameters = data.Parameters.Data;
-    		var Len=parameters.length;
-    		if(parameters == null)return;
-    	    var lent=volumeV.length;
-        	for(var i=0;i<Len;i++){
-        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
-		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
-        			volumeTime[lent+i]=str2;
-        			volumeV[lent+i]=parameters[i][VolumeSubscript];
-       		};
-        	for(var i=0;i<volumeTime.length-1;i++){
-        		if(volumeTime[i]==volumeTime[i+1]){
-        			volumeTime.splice(i,1);
-        			volumeV.splice(i,1);
-        		}
-        	}
-        	CandlestickVolumeData.time=volumeTime.slice(-60);
-        	CandlestickVolumeData.volume=volumeV.slice(-60);
-        	CandlestickVolumeChart.group="group2";
-        	if(firstTimeNum==0){
-		  			
-		  	}else{
-		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-		  		CandlestickVolumeChart.resize();	
-		  		CandlestickVolumeChart.setOption(option1);
-		  		CandlestickVolumeChart.resize();	
-		  	};
-		  	
     };
     function CandlestickVolumeChartSetoption1(data){
     	 var  CandlestickVolumeChartData=data;

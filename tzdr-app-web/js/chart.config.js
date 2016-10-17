@@ -44,13 +44,13 @@
                    	 ec.connect("group1");
                      ec.connect("group2");
                      ec.connect("group3");
-                      ec.connect("group4");
+//                    ec.connect("group4");
                      dayCandlestickChartDiv=ec.init(document.getElementById("dayCandlestickChartDiv"));
                      dayCandlestickVolumeChart=ec.init(document.getElementById("dayCandlestickVolumeChart"));
-                     FiveTestCandlestickVolumeChart=ec.init(document.getElementById("FiveTestCandlestickVolumeChart"));
-                     FiveTestCandlestickChartDiv=ec.init(document.getElementById("FiveTestCandlestickChartDiv"));
-                   	TenTestCandlestickVolumeChart=ec.init(document.getElementById("TenTestCandlestickVolumeChart"));
-                   	TenTestCandlestickChartDiv=ec.init(document.getElementById("TenTestCandlestickChartDiv"));
+//                   FiveTestCandlestickVolumeChart=ec.init(document.getElementById("FiveTestCandlestickVolumeChart"));
+//                   FiveTestCandlestickChartDiv=ec.init(document.getElementById("FiveTestCandlestickChartDiv"));
+//                 	TenTestCandlestickVolumeChart=ec.init(document.getElementById("TenTestCandlestickVolumeChart"));
+//                 	TenTestCandlestickChartDiv=ec.init(document.getElementById("TenTestCandlestickChartDiv"));
                 }
         );
 		

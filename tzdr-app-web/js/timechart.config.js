@@ -1,16 +1,16 @@
-    var time=[];
-    var prices=[];
-    var timeLabel=[]
+//  var time=[];
+//  var prices=[];
+//  var timeLabel=[]
     var timeData={
-        "time":time,
-        "prices":prices,
-        "timeLabel":timeLabel
+        "time":[],
+        "prices":[],
+        "timeLabel":[]
     };
-    var volumeChartTime=[];
-    var volumeChartPrices=[];
+//  var volumeChartTime=[];
+//  var volumeChartPrices=[];
     var volumeChartData={
-        "time":volumeChartTime,
-        "volume":volumeChartPrices
+        "time":[],
+        "volume":[]
     };
     var timePrice=[];
     function handleTime(json){
@@ -35,7 +35,7 @@
 			}
 		}
         if(timeChart != null){
-        	var option = setOption1();
+        	var option = setOption1(timeData);
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
@@ -46,7 +46,7 @@
     	$("#CandlestickChart").css("opacity","0");
     	$("#dayCandlestickChart").css("opacity","0");
 				 if(timeChart != null){
-				 	var option2=setOption1();
+				 	var option2=setOption1(timeData);
 				 	 var option1 =volumeChartSetOption(volumeChartData);
 						setTimeout(function(){
 							$("#timeChart").css("width","100%");
@@ -63,7 +63,7 @@
 			    }
 	});
     
-    function setOption1(){
+    function setOption1(timeData){
         var  data1=timeData;
        var  option = {
        	backgroundColor: 'rgba(43, 43, 43, 0)',
@@ -180,7 +180,7 @@
         }
     }
     function volumeChartSetOption(data) {
-        var  dataVolume=volumeChartData;
+        var  dataVolume=data;
       var  option = {
       	backgroundColor: '#2B2B2B',
       	 color: ['#EDF274'],
