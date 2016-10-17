@@ -21,7 +21,6 @@ var marketSocket = null;
 var firstTimeLength=1;
 var commoditysData; 
 var OnRspQryCommodityDateL=1;
-
 function subscribeHold(exchageNo,commodityNo,contractNo){
 		masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
@@ -31,6 +30,8 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+//		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
+//		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
 	var url = MarketUrl.SocketUrl;
 	marketSocket = new WebSocket(url);
@@ -53,16 +54,14 @@ mui.plusReady(function(){
         var jsonData = JSON.parse(data);
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
-        	var num=1
-        	sendHistoryMessage(num);
+        	sendHistoryMessage();
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
-            console.log(JSON.stringify(historyParam));
+//          console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
-			console.log(JSON.stringify(historyParam));
 			if(firstTimeLength==1){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;
@@ -78,17 +77,9 @@ mui.plusReady(function(){
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==1440){
+//				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==5){
-//				handleVolumeChartData(historyParam);
-//	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==15){
-//				 handleVolumeChartData(historyParam);
-//	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==30){
-//				handleVolumeChartData(historyParam);
-//	            processingCandlestickVolumeData(historyParam);
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
@@ -135,6 +126,8 @@ mui.plusReady(function(){
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
+				
+				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 				if(Transfer.name[2]==newCommdityNo){
    					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}else{
@@ -149,19 +142,17 @@ mui.plusReady(function(){
     };
     marketSocket.onerror = function(evt){
     };
-    function sendHistoryMessage(num){
+    function sendHistoryMessage(){
     		 var exchangeNo = $("#exchangeNo").val();
 		    var commodityNo = $("#commodeityNo").val();
 		    var contractNo = $("#contractNo").val();
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
-		     masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
-		  masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
+		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
 	        },3000);
     }
-    
     /**
 	 * 更新行情数据 
 	 * @param {Object} param
@@ -216,7 +207,6 @@ mui.plusReady(function(){
 			var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($thisAvgPrice.text()) , comm.ContractSize,comm.MiniTikeSize,parseInt($thisHoldNum.text()),drection);
 			var floatProfit = floatP +":"+ comm.CurrencyNo;
 			$thisFloat.val(floatProfit); 
-//			console.log(floatProfit);
 			if(parseFloat(floatP) < 0 ){
 				$thisFloat.css("color","green");
 			}else if(parseFloat(floatP) > 0){
@@ -263,15 +253,6 @@ mui.plusReady(function(){
     	}else{
     		
     	}
-//  	for(var j=0;j<commodityNoList.length;i++){
-//  		if(commodityNoList[j] == allMess){
-//  			console.log(j+"长度"+commodityNoList.length);
-//	    		break;
-//	    	}else{
-//	    		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-//	    	}
-//	    	
-//  	}
     	for(var i=0;i<commoditysData.length;i++){
     		if(commoditysData[i].CommodityNo==valSelect){
     			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);

@@ -21,9 +21,9 @@
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
-					<!--<a class="mui-control-item " id="FiveTest"  href="#FivedayCandlestickChart">5分</a>
-					<a class="mui-control-item " id="TenTest" href="#TendayCandlestickChart">15分</a>
-					<a class="mui-control-item " id="TreeTest" href="#ThreedayCandlestickChart">30分</a>-->
+					<a class="mui-control-item " id="Five" href="#CandlestickChart">5分</a>
+					<a class="mui-control-item " id="Ten" href="#CandlestickChart">15分</a>
+					<a class="mui-control-item " id="Three" href="#CandlestickChart">30分</a>
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
@@ -40,17 +40,17 @@
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="FivedayCandlestickChart" style="opacity: 0;">
-								<div   id="FivedayCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="FivedayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						<div class="mui-control-content " id="fiveCandlestickChart" style="opacity: 0;">
+								<div   id="fiveCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="fiveCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="TendayCandlestickChart" style="opacity: 0;">
-								<div   id="TendayCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="TendayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						<div class="mui-control-content " id="TenCandlestickChart" style="opacity: 0;">
+								<div   id="TenCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="TenCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="ThreedayCandlestickChart" style="opacity: 0;">
-								<div   id="ThreedayCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="ThreedayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						<div class="mui-control-content " id="threeCandlestickChart" style="opacity: 0;">
+								<div   id="threeCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="threeCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="trade">
 							<div class="Assets">
@@ -108,7 +108,7 @@
 				<div>
 					<div id="item1" class="mui-control-content mui-active" >
 							<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
-								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>开仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
+								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
 							</ul>
 						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
@@ -256,6 +256,7 @@
 				tranferParam = param;
 			}
 			var loginOutFlag = false;
+			var loginOutTip=false;
 			$(function(){ 
 				$('#password').bind('input propertychange', function() {
 				  	var orderPrice = $("#orderPrice").val();
@@ -394,6 +395,7 @@
 			}
 			function openLogin(){ 
 				loginOutFlag = true;
+				loginOutTip=true;
 				mui.openWindow({
 					url:"../login/operateLogin.html",
 					id : "operateLogin",

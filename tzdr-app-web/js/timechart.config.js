@@ -1,11 +1,16 @@
+    var time=[];
+    var prices=[];
+    var timeLabel=[]
     var timeData={
-        "time":[],
-        "prices":[],
-        "timeLabel":[]
+        "time":time,
+        "prices":prices,
+        "timeLabel":timeLabel
     };
+    var volumeChartTime=[];
+    var volumeChartPrices=[];
     var volumeChartData={
-        "time":[],
-        "volume":[]
+        "time":volumeChartTime,
+        "volume":volumeChartPrices
     };
     var timePrice=[];
     function handleTime(json){
@@ -30,7 +35,7 @@
 			}
 		}
         if(timeChart != null){
-        	var option = setOption1(timeData);
+        	var option = setOption1();
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
@@ -41,9 +46,10 @@
     	$("#CandlestickChart").css("opacity","0");
     	$("#dayCandlestickChart").css("opacity","0");
 				 if(timeChart != null){
-				 	var option2=setOption1(timeData);
+				 	var option2=setOption1();
 				 	 var option1 =volumeChartSetOption(volumeChartData);
 						setTimeout(function(){
+							$("#timeChart").css("width","100%");
 						 	timeChart.resize();	
 							timeChart.setOption(option2);
 		        			timeChart.resize();	
@@ -57,7 +63,7 @@
 			    }
 	});
     
-    function setOption1(timeData){
+    function setOption1(){
         var  data1=timeData;
        var  option = {
        	backgroundColor: 'rgba(43, 43, 43, 0)',
@@ -174,7 +180,7 @@
         }
     }
     function volumeChartSetOption(data) {
-        var  dataVolume=data;
+        var  dataVolume=volumeChartData;
       var  option = {
       	backgroundColor: '#2B2B2B',
       	 color: ['#EDF274'],
@@ -243,6 +249,26 @@
               {
                   name: '成交量',
                   type: 'bar',
+//                 markLine: {
+//		                data: [
+//		                    {type: 'average', name: '平均值'},
+//		                    [{
+//		                        symbol: 'none',
+//		                        x: '90%',
+//		                        yAxis: 'max'
+//		                    }, {
+//		                        symbol: 'circle',
+//		                        label: {
+//		                            normal: {
+//		                                position: 'start',
+//		                                formatter: '最大值'
+//		                            }
+//		                        },
+//		                        type: 'max',
+//		                        name: '最高点'
+//		                    }]
+//		                ]
+//		            },
                   data:dataVolume.volume
               }
           ]
