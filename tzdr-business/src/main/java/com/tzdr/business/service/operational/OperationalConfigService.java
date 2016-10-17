@@ -306,4 +306,13 @@ public class OperationalConfigService  extends BaseServiceImpl<OperationalConfig
 	public List<OperationalConfig> findData(int type,List<String> names ) {
 		return this.getEntityDao().findByIsEnableTrueAndDeletedFalseAndTypeAndNameNotIn(type, names);
 	}
+	/**
+	 * 查询栏目
+	 * @param type
+	 * @param name
+	 * @return
+	 */
+	public List<OperationalConfig> findDataOrderByNameAndType(int type){
+		return this.getEntityDao().findDataOrderByNameAndType(type);
+	}
 }

@@ -2,6 +2,7 @@ package com.tzdr.api.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,10 @@ import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.pay.gopay.DateUtil;
 import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
 import com.tzdr.business.pay.gopay.model.GoPayRequestModel;
+import com.tzdr.business.pay.pingpp.config.Config;
 import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
+import com.tzdr.business.pay.pingpp.model.PingPPModel;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
@@ -333,6 +336,77 @@ public class UserPayController {
 		return resultJson;
 	}
 	/**
+	 * ping++京东手机网页支付
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/jdpay_wap",method = RequestMethod.GET)
+	@ResponseBody
+	public String pingplusplusJdPayWap(HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user = this.payService.getUser(uid);
+		String paymoney=request.getParameter("money");
+		String payWay = request.getParameter("payWay");
+		if(paymoney != null && Double.parseDouble(paymoney) > 0){
+			Channel payWayChannl = null;
+			if(payWay == null){
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
+			}else{
+				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
+				if(payWayChannl == null){
+					payWayChannl = Channel.JD_WAP;
+				}
+			}
+			int status = 0;
+			String paytype = "10" ;
+			int source = 1;
+			String ip = IpUtils.getIpAddr(request);
+			String orderNo = ChargeExample.randomNo();
+			String charage = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
+			if(charage.equals("1")){
+				PingPPModel pingPPModel = new PingPPModel();
+				pingPPModel.setAmount(Double.valueOf(paymoney));
+				pingPPModel.setBody(Config.BODY);
+				pingPPModel.setChannel(payWayChannl.getChannelCode());
+				pingPPModel.setClient_ip(ip);
+				pingPPModel.setCurrency("cny");
+				pingPPModel.setOrder_no(orderNo);
+				pingPPModel.setSubject(Config.SUBJECT);
+				return ChargeExample.createCharge(pingPPModel).toString();
+			}
+		}
+		return null;
+	}
+	/**
+	 * 微信转账确认充值
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "wechat_transfer",method =RequestMethod.GET)
+	@ResponseBody
+	public ApiResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user = this.payService.getUser(uid);
+		ApiResult resultJson = new ApiResult(true);
+		if(user == null){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("用户信息不存在");
+			return resultJson;
+		}
+		RechargeList  rechargeList = new RechargeList();
+		rechargeList.setAccount(transactionNo);
+		rechargeList.setAddtime(new Date().getTime());
+		rechargeList.setUid(uid);
+		rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+		rechargeList.setActualMoney(money);
+		rechargeList.setMoney(money);
+		rechargeList.setTradeAccount(DataConstant.WECHAT);
+		rechargeList.setType(DataConstant.WECHAT_TYPE);
+		rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+		apiRechargeService.autoWechat(rechargeList);
+		return resultJson;
+	}
+	/**
 	* @Title: ebankrecharge    
 	* @Description: 网页充值接口 
 	* @param money   充值金额
@@ -370,7 +444,6 @@ public class UserPayController {
 		
 	   PayEaseParams  payEaseParams = new PayEaseParams(PayEase.WAP_PAY_PMODE, money, ip,DataConstant.PayStatus.NO_PROCESSING,"");
 	   payEaseParams = this.payService.PayEasePay(user, PayEaseUtil.tzdrAppPay(payEaseParams),Constant.Source.TZDR,Constant.SystemFlag.TZDR_APP);
-	   System.out.println(JSONObject.toJSONString(payEaseParams));
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",payEaseParams);
 	}
 	/**
