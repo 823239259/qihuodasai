@@ -19,11 +19,12 @@
 	var LowPriceSubscript;
 	var HighPriceSubscript;
 	var VolumeSubscript;
-	var FiveTestCandlestickChartDiv=null;
-	var FiveTestCandlestickVolumeChart=null;
-	var TenTestCandlestickChartDiv=null;
-	var TenTestCandlestickVolumeChart=null;
+	var fiveCandlestickChartDiv=null;
+	var fiveCandlestickVolumeChart=null;
+	var TenCandlestickChartDiv=null;
+	var TenCandlestickVolumeChart=null;
 	var setIntvalTimeAll=null;
+	var threeCandlestickChartDiv=null;
     //生成一个K线图容器
     function loadK(){
         // 使用
@@ -44,13 +45,17 @@
                    	 ec.connect("group1");
                      ec.connect("group2");
                      ec.connect("group3");
-//                    ec.connect("group4");
                      dayCandlestickChartDiv=ec.init(document.getElementById("dayCandlestickChartDiv"));
                      dayCandlestickVolumeChart=ec.init(document.getElementById("dayCandlestickVolumeChart"));
-//                   FiveTestCandlestickVolumeChart=ec.init(document.getElementById("FiveTestCandlestickVolumeChart"));
-//                   FiveTestCandlestickChartDiv=ec.init(document.getElementById("FiveTestCandlestickChartDiv"));
-//                 	TenTestCandlestickVolumeChart=ec.init(document.getElementById("TenTestCandlestickVolumeChart"));
-//                 	TenTestCandlestickChartDiv=ec.init(document.getElementById("TenTestCandlestickChartDiv"));
+                     fiveCandlestickChartDiv=ec.init(document.getElementById("fiveCandlestickChartDiv"))
+                     fiveCandlestickVolumeChart=ec.init(document.getElementById("fiveCandlestickVolumeChart"));
+                     ec.connect("group4");
+                     TenCandlestickChartDiv=ec.init(document.getElementById("TenCandlestickChartDiv"));
+                     TenCandlestickVolumeChart=ec.init(document.getElementById("TenCandlestickVolumeChart"));
+                     ec.connect("group5");
+                     threeCandlestickChartDiv=ec.init(document.getElementById("threeCandlestickChartDiv"));
+                     threeCandlestickVolumeChart=ec.init(document.getElementById("threeCandlestickVolumeChart"));
+                       ec.connect("group6");
                 }
         );
 		

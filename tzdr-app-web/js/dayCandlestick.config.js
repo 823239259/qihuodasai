@@ -26,9 +26,6 @@
     				$("#CandlestickChart").css("opacity","0");
     				$("#TimeChart1").css("opacity","0");
 				 if(dayCandlestickChartDiv != null){
-				 	setTimeout(function(){
-				 		muiSpinner[2].style.display="none";
-				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
 					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);

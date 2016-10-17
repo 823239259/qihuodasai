@@ -1,17 +1,15 @@
-    var rawData = [];
-    var CandlestickChartOption=null;
-    var CandlestickVolumeChartOption=null;
-    var CandlestickVolumeData={
+    var rawDataFive = [];
+    var CandlestickVolumeDataFive={
     	time:[],
     	volume:[]
     }
-    var newData=[]; 
-    function processingData(jsonData){
+    var newDataFive=[]; 
+    function processingDataFive(jsonData){
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
-    	    var lent=rawData.length;
+    	    var lent=rawDataFive.length;
         	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
@@ -20,41 +18,41 @@
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
 		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
 		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
-			         rawData[lent+i] = sgData; 
+			         rawDataFive[lent+i] = sgData; 
        		};
-        	for(var i=0;i<rawData.length-1;i++){
-        		if(rawData[i][0]==rawData[i+1][0]){
-        			rawData.splice(i,1);
+        	for(var i=0;i<rawDataFive.length-1;i++){
+        		if(rawDataFive[i][0]==rawDataFive[i+1][0]){
+        			rawDataFive.splice(i,1);
         		}
         	}
-        	newData=rawData.slice(-60);
-		  		CandlestickChartOption = setOption(newData);
-		  		myChart.setOption(CandlestickChartOption);
-		  	myChart.group="group2";
+        	newDataFive=rawDataFive.slice(-60);
+		  		CandlestickChartOption = setOptionFive(newDataFive);
+		  		fiveCandlestickChartDiv.setOption(CandlestickChartOption);
+		  		fiveCandlestickChartDiv.group="group4";
 		  	
     }
-    document.getElementById("Candlestick").addEventListener("tap",function(){
+    document.getElementById("Five").addEventListener("tap",function(){
     			$("#dayCandlestickChart").css("opacity","0");
     				$("#TimeChart1").css("opacity","0");
-				 if(myChart != null){
+				 if(fiveCandlestickChartDiv != null){
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+						var option = setOptionFive(newDataFive);
+						 var option2=CandlestickVolumeChartSetoptionFive(CandlestickVolumeData);
 						setTimeout(function(){
-							myChart.resize();
-							myChart.setOption(option);
-		        			myChart.resize();	
-		        			CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option2);
-		        			CandlestickVolumeChart.resize();	
+							fiveCandlestickChartDiv.resize();
+							fiveCandlestickChartDiv.setOption(option);
+		        			fiveCandlestickChartDiv.resize();	
+		        			fiveCandlestickVolumeChart.resize();	
+							fiveCandlestickVolumeChart.setOption(option2);
+		        			fiveCandlestickVolumeChart.resize();	
 		        		},10);
 		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
+		        			$("#fiveCandlestickChart").css("opacity","1");
 		        		},100);
 			    } 
 		});
     //设置数据参数（为画图做准备）
-    function setOption(rawData){
+    function setOptionFive(rawData){
         var dates = rawData.map(function (item) {
             return item[0];
         });
@@ -133,40 +131,34 @@
 		}
         return option;
     };
-    var firstTimeNum=0;
-     var volumeTime=[];
-    var volumeV=[];
-//  var volumeTimeH=[];
-//  var volumeVH=[];
-    function processingCandlestickVolumeData(data){
+    function processingCandlestickVolumeDataFive(data){
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
-    	    var lent=volumeV.length;
-//  	    var lengt=volumeTimeH.length;
+    	    var lent=CandlestickVolumeDataFive.time;
         	for(var i=0;i<Len;i++){
         			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			volumeTime[lent+i]=str2;
-        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+        			CandlestickVolumeDataFive.time[lent+i]=str2;
+        			CandlestickVolumeDataFive.volume[lent+i]=parameters[i][VolumeSubscript];
        		};
-        	for(var i=0;i<volumeTime.length-1;i++){
-        		if(volumeTime[i]==volumeTime[i+1]){
-        			volumeTime.splice(i,1);
-        			volumeV.splice(i,1);
+        	for(var i=0;i<CandlestickVolumeDataFive.time.length-1;i++){
+        		if(CandlestickVolumeDataFive.time[i]==CandlestickVolumeDataFive.time[i+1]){
+        			CandlestickVolumeDataFive.time.splice(i,1);
+        			CandlestickVolumeDataFive.volume.splice(i,1);
         		}
         	}
-        	CandlestickVolumeData.time=volumeTime.slice(-60);
-        	CandlestickVolumeData.volume=volumeV.slice(-60);
-        	CandlestickVolumeChart.group="group2";
-		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-		  		CandlestickVolumeChart.resize();	
-		  		CandlestickVolumeChart.setOption(option1);
-		  		CandlestickVolumeChart.resize();	
+        	CandlestickVolumeDataFive.time=CandlestickVolumeDataFive.time.slice(-60);
+        	CandlestickVolumeDataFive.volume=CandlestickVolumeDataFive.volume.slice(-60);
+        	fiveCandlestickVolumeChart.group="group4";
+		  		var option1= CandlestickVolumeChartSetoptionFive(CandlestickVolumeData);
+		  		fiveCandlestickVolumeChart.resize();	
+		  		fiveCandlestickVolumeChart.setOption(option1);
+		  		fiveCandlestickVolumeChart.resize();	
 		  	
     };
-    function CandlestickVolumeChartSetoption1(data){
+    function CandlestickVolumeChartSetoptionFive(data){
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
@@ -238,11 +230,6 @@
 	                  type: 'bar',
 	                  data:CandlestickVolumeChartData.volume
 	              },
-//	              {
-//	                  name: '成交量',
-//	                  type: 'bar',
-//	                  data:volumeVH
-//	              }
 	          ]
 	      };
         return option

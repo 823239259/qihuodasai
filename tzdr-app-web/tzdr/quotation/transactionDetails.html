@@ -21,10 +21,10 @@
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
-					<a class="mui-control-item " id="Five" href="#CandlestickChart">5分</a>
-					<a class="mui-control-item " id="Ten" href="#CandlestickChart">15分</a>
-					<a class="mui-control-item " id="Three" href="#CandlestickChart">30分</a>
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
+					<a class="mui-control-item " id="Five" href="#fiveCandlestickChart">5分</a>
+					<a class="mui-control-item " id="Ten" href="#TenCandlestickChart">15分</a>
+					<a class="mui-control-item " id="Three" href="#threeCandlestickChart">30分</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
 				<div style="width: 100%;" id="tradeContentId">
@@ -60,19 +60,12 @@
 							<div class="ProductInformation">
 								<div class="ProductInformationLeft">
 									<p class="whiteFont" >
-										<!--<p id = "tradeTitle" ><span id="titleValue"></span><span class="mui-icon mui-icon-search" id="searchIcon"></span></p>
-											<ul id="contentList">
-												
-											</ul>-->
 											<div id="bb">
 												<select class="mui-btn mui-btn-block" id = "tradeTitle" >
-													<!--<option>1243</option>-->
 												</select>
 											</div>
-										
 										<span class="mui-icon mui-icon-search" id="searchIcon"></span>
 									</p>
-									<!--<p class="grayFont" id = "tradeContractTitle">CNQ16</p>-->
 								</div>
 								<div class="ProductInformationRight">
 									<p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
@@ -91,8 +84,6 @@
 									<input type="radio" class="radioChoice mui-radio" value="0" name="prices">
 								</div>
 								</div> 
-								
-								<!--<span><input type="radio" checked name="prices" value="1" class="radioChoice mui-radio"><label>快手板</label></span><span><input type="radio" class="radioChoice mui-radio" value="0" name="prices"><label>限价板</label></span>-->
 								<div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
 								<div class="buyBtn">
 								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
@@ -127,7 +118,6 @@
 					<div id="item4" class="mui-control-content" >
 							<ul  id="Deal" class="listStyle" style="height: 180px;">
 								<li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
-								<!--<li style="width: 600px;"><a class="mui-navigate-right" ><p><span>美原油09</span><span>买</span><span>1</span><span>2</span><span>2016.08.08 18:03:11</span></p></a></li>-->
 							</ul>
 					</div>
 					</div>
@@ -152,7 +142,6 @@
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
 				<div style="display: none;">
-				<!--<input type="text"  id = "lastPriceNone" />-->
 				<input type="text"  id = "exchangeNo"/> 
 				<input type="text"  id = "commodeityNo"/>
 				<input type="text"  id = "contractNo"/>
@@ -171,6 +160,9 @@
 		<script src="../../js/timechart.config.js"></script>
 		<script src="../../js/candlestick.config.js"></script>
 		<script src="../../js/dayCandlestick.config.js"></script>
+		<script src="../../js/fiveChart.config.js"></script>
+		<script src="../../js/tenChart.config.js"></script>
+		<script src="../../js/threeChart.config.js"></script>
 		<script src="../../js/chart.js"></script>
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
