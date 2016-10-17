@@ -64,6 +64,7 @@ mui.plusReady(function(){
 			if(historyParam.Parameters==null){
 				return
 			};
+			console.log(JSON.stringify(historyParam));
 			if(firstTimeLength==1){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;

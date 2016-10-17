@@ -78,19 +78,57 @@
     			test(num);
 		});
 		document.getElementById("FiveTest").addEventListener("tap",function(){
-    			var num=5;
-    			test(num);
-    			
-		});
-		document.getElementById("TenTest").addEventListener("tap",function(){
-    			var num=15;
-    			test(num);
-		});
-		document.getElementById("TreeTest").addEventListener("tap",function(){
-    			var num=30;
-    			$("#CandlestickChart").css("opacity","0");
-    			test(num);
-		});
+			var num=5;
+    		test(num);
+		})
+//		$("#Candlestick").click(function(){
+//			if($("#Time").hasClass("mui-active")==true){
+//				$("#Time").removeClass("mui-active");
+//				$("#TimeChart1").removeClass("mui-active");
+//			}else if($("FiveTest").hasClass("mui-active")==true){
+//				$("#Candlestick").removeClass("mui-active");
+//			}else if($("#TenTest").hasClass("mui-active")==true){
+//				$("#TenTest").removeClass("mui-active");
+//			}else if($("#TreeTest").hasClass("mui-active")==true){
+//					$("#TreeTest").removeClass("mui-active");
+//			}else if($("#TreeTest").hasClass("mui-active")==true){
+//				$("#dayCandlestickBtn").removeClass("mui-active");
+//				$("#dayCandlestickChart").removeClass("mui-active");
+//			}
+//			$("#Candlestick").addClass("mui-active");
+//			$("#CandlestickChart").addClass("mui-active");
+//			var num=1;
+//  		test(num);
+//		})
+//		$("#FiveTest").click(function(){
+//			alert("5");
+//			if($("#Time").hasClass("mui-active")==true){
+//				$("#Time").removeClass("mui-active");
+//				$("#TimeChart1").removeClass("mui-active");
+//			}else if($("#Candlestick").hasClass("mui-active")==true){
+//				$("#Candlestick").removeClass("mui-active");
+//			}else if($("#TenTest").hasClass("mui-active")==true){
+//				$("#TenTest").removeClass("mui-active");
+//			}else if($("#TreeTest").hasClass("mui-active")==true){
+//					$("#TreeTest").removeClass("mui-active");
+//			}else if($("#TreeTest").hasClass("mui-active")==true){
+//				$("#dayCandlestickBtn").removeClass("mui-active");
+//				$("#dayCandlestickChart").removeClass("mui-active");
+//			}
+//			$("#FiveTest").addClass("mui-active");
+//			$("#CandlestickChart").addClass("mui-active");
+//			var num=5;
+//  		test(num);
+//		})
+//		document.getElementById("TenTest").addEventListener("tap",function(){
+//  			var num=15;
+//  			test(num);
+//		});
+//		document.getElementById("TreeTest").addEventListener("tap",function(){
+//  			var num=30;
+//  			$("#CandlestickChart").css("opacity","0");
+//  			test(num);
+//		});
 		function test(num){
 			$("#dayCandlestickChart").css("opacity","0");
     		$("#TimeChart1").css("opacity","0");
