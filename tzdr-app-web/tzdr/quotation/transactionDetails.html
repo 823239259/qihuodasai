@@ -21,33 +21,36 @@
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
-					<a class="mui-control-item " id="FiveTest"  href="#CandlestickChart">5分</a>
-					<a class="mui-control-item " id="TenTest" href="#CandlestickChart">15分</a>
-					<a class="mui-control-item " id="TreeTest" href="#CandlestickChart">30分</a>
+					<!--<a class="mui-control-item " id="FiveTest"  href="#FivedayCandlestickChart">5分</a>
+					<a class="mui-control-item " id="TenTest" href="#TendayCandlestickChart">15分</a>
+					<a class="mui-control-item " id="TreeTest" href="#ThreedayCandlestickChart">30分</a>-->
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
 					<a class="mui-control-item" id="TradingCenter"  >交易中心</a>
 					</div>
 				<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content  mui-active" id="TimeChart1">
-								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
 								<div id="timeChart" style="width:100%;height:130px;"></div>
 								<div id="volumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="CandlestickChart" style="opacity: 0;">
-		 						<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
 								<div   id="CandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="dayCandlestickChart" style="opacity: 0;">
-								<!--<div class="mui-spinner" style="position: absolute;top:110px;left: 45%;">
-								</div>-->
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="aa">
-							234234
+						<div class="mui-control-content " id="FivedayCandlestickChart" style="opacity: 0;">
+								<div   id="FivedayCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="FivedayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						</div>
+						<div class="mui-control-content " id="TendayCandlestickChart" style="opacity: 0;">
+								<div   id="TendayCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="TendayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
+						</div>
+						<div class="mui-control-content " id="ThreedayCandlestickChart" style="opacity: 0;">
+								<div   id="ThreedayCandlestickChartDiv" style="width:100%;height:130px;"></div>
+								<div id="ThreedayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
 						<div class="mui-control-content " id="trade">
 							<div class="Assets">

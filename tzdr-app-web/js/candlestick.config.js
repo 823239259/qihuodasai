@@ -69,133 +69,6 @@
 		  		CandlestickVolumeChart.resize();	
 		  	
     };
-    	document.getElementById("Time").addEventListener("tap",function(){
-    			var num=1;
-    			timechartTest(num);
-    	})
-    	document.getElementById("Candlestick").addEventListener("tap",function(){
-    			var num=1;
-    			test(num);
-		});
-		document.getElementById("FiveTest").addEventListener("tap",function(){
-			var num=5;
-    		test(num);
-		})
-//		$("#Candlestick").click(function(){
-//			if($("#Time").hasClass("mui-active")==true){
-//				$("#Time").removeClass("mui-active");
-//				$("#TimeChart1").removeClass("mui-active");
-//			}else if($("FiveTest").hasClass("mui-active")==true){
-//				$("#Candlestick").removeClass("mui-active");
-//			}else if($("#TenTest").hasClass("mui-active")==true){
-//				$("#TenTest").removeClass("mui-active");
-//			}else if($("#TreeTest").hasClass("mui-active")==true){
-//					$("#TreeTest").removeClass("mui-active");
-//			}else if($("#TreeTest").hasClass("mui-active")==true){
-//				$("#dayCandlestickBtn").removeClass("mui-active");
-//				$("#dayCandlestickChart").removeClass("mui-active");
-//			}
-//			$("#Candlestick").addClass("mui-active");
-//			$("#CandlestickChart").addClass("mui-active");
-//			var num=1;
-//  		test(num);
-//		})
-//		$("#FiveTest").click(function(){
-//			alert("5");
-//			if($("#Time").hasClass("mui-active")==true){
-//				$("#Time").removeClass("mui-active");
-//				$("#TimeChart1").removeClass("mui-active");
-//			}else if($("#Candlestick").hasClass("mui-active")==true){
-//				$("#Candlestick").removeClass("mui-active");
-//			}else if($("#TenTest").hasClass("mui-active")==true){
-//				$("#TenTest").removeClass("mui-active");
-//			}else if($("#TreeTest").hasClass("mui-active")==true){
-//					$("#TreeTest").removeClass("mui-active");
-//			}else if($("#TreeTest").hasClass("mui-active")==true){
-//				$("#dayCandlestickBtn").removeClass("mui-active");
-//				$("#dayCandlestickChart").removeClass("mui-active");
-//			}
-//			$("#FiveTest").addClass("mui-active");
-//			$("#CandlestickChart").addClass("mui-active");
-//			var num=5;
-//  		test(num);
-//		})
-//		document.getElementById("TenTest").addEventListener("tap",function(){
-//  			var num=15;
-//  			test(num);
-//		});
-//		document.getElementById("TreeTest").addEventListener("tap",function(){
-//  			var num=30;
-//  			$("#CandlestickChart").css("opacity","0");
-//  			test(num);
-//		});
-		function test(num){
-			$("#dayCandlestickChart").css("opacity","0");
-    		$("#TimeChart1").css("opacity","0");
-    		clearInterval(setIntvalTimeAll);
-    		clearTimeout(timeOout);
-    		clearTimeout(timeOutOpacity);
-    		sendHistoryMessageProtype(num);
-			rawData=[];
-			newData=[];
-			CandlestickVolumeData={
-		    	time:[],
-		    	volume:[]
-		    }
-			volumeTime=[];
-   			volumeV=[];
-			 if(myChart != null){
-				document.getElementsByClassName("buttomFix")[0].style.display="block";
-					var option = setOption(newData);
-					console.log(JSON.stringify(CandlestickVolumeData));
-					 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-					timeOout=setTimeout(function(){
-						myChart.resize();
-						myChart.setOption(option);
-	        			myChart.resize();	
-	        			CandlestickVolumeChart.resize();	
-						CandlestickVolumeChart.setOption(option2);
-	        			CandlestickVolumeChart.resize();	
-	        		},100);
-	        		timeOutOpacity=setTimeout(function(){
-	        			$("#CandlestickChart").css("opacity","1");
-	        		},100);
-		    } 
-		}
-		function timechartTest(num){
-			  timeData={
-		        "time":[],
-		        "prices":[],
-		        "timeLabel":[]
-		    };
-		    volumeChartData={
-		        "time":[],
-		        "volume":[]
-		    };
-		     $("#CandlestickChart").css("opacity","0");
-    		$("#dayCandlestickChart").css("opacity","0");
-		    clearInterval(setIntvalTimeAll);
-		    clearTimeout(timeOutTime);
-		    clearTimeout(timeOutTimeVolume);
-    		sendHistoryMessageProtype(num);
-				 if(timeChart != null){
-				 	var option2=setOption1(timeData);
-				 	 var option1 =volumeChartSetOption(volumeChartData);
-						timeOutTime=setTimeout(function(){
-							$("#timeChart").css("width","100%");
-						 	timeChart.resize();	
-							timeChart.setOption(option2);
-		        			timeChart.resize();	
-		        			volumeChart.resize();	
-							volumeChart.setOption(option1);
-		        			volumeChart.resize();
-		        		},10);
-		        		timeOutTimeVolume=setTimeout(function(){
-		        			$("#TimeChart1").css("opacity","1");
-		        		},11);
-			    }
-		    
-		}
 		
     //设置数据参数（为画图做准备）
     function setOption(rawData){
@@ -353,3 +226,24 @@
 	      };
         return option
     }
+	document.getElementById("Candlestick").addEventListener("tap",function(){
+    				$("#dayCandlestickChart").css("opacity","0");
+    				$("#TimeChart1").css("opacity","0");
+    				if(myChart != null){
+						document.getElementsByClassName("buttomFix")[0].style.display="block";
+						var option = setOption(newData);
+						console.log(JSON.stringify(CandlestickVolumeData));
+						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+						setTimeout(function(){
+							myChart.resize();
+							myChart.setOption(option);
+		        			myChart.resize();	
+		        			CandlestickVolumeChart.resize();	
+							CandlestickVolumeChart.setOption(option2);
+		        			CandlestickVolumeChart.resize();	
+		        		},100);
+		        		setTimeout(function(){
+		        			$("#CandlestickChart").css("opacity","1");
+		        		},100);
+				    } 
+		});

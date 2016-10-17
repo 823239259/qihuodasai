@@ -32,9 +32,6 @@ mui.plusReady(function(){
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
 		init(Transfer.name);
-//  	setTimeout(function(){
-//					muiSpinner[0].style.display="none";
-//			},200);
 	var url = MarketUrl.SocketUrl;
 	marketSocket = new WebSocket(url);
     var setIntvalTime = null;
@@ -61,6 +58,7 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
+            console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
@@ -83,14 +81,14 @@ mui.plusReady(function(){
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==5){
-				handleVolumeChartData(historyParam);
-	            processingCandlestickVolumeData(historyParam);
+//				handleVolumeChartData(historyParam);
+//	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==15){
-				 handleVolumeChartData(historyParam);
-	            processingCandlestickVolumeData(historyParam);
+//				 handleVolumeChartData(historyParam);
+//	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==30){
-				handleVolumeChartData(historyParam);
-	            processingCandlestickVolumeData(historyParam);
+//				handleVolumeChartData(historyParam);
+//	            processingCandlestickVolumeData(historyParam);
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
