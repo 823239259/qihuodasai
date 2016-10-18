@@ -106,6 +106,14 @@
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					banksPay();
 				});
+				$(window).resize(function() {
+					if(i % 2 == 0){  
+						 $("#buttomDiv").css("display","none");
+					}else{
+						$("#buttomDiv").css("display","block");
+					}
+					i++; 
+				});
 				function banksPay() {
 				var paymentMoney = document.getElementById("paymentMoney").innerText;
 				var serialnum = document.getElementById("serialnum").value;

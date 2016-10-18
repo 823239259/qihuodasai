@@ -56,7 +56,7 @@
 				<p class="titleList">第三步：确认交易单号</p>
 				<div class="numberCode" style="font-size: 13px;">
 					<label>交易单号</label>
-					<input  id = "chargeNum" type="number" placeholder="请输入交易单号" style="font-size: 13px;"/>
+					<input  id = "chargeNum" type="number" placeholder="请输入交易单号" style="font-size: 13px;" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
 				</div>
 				<div class="mui-content-padded" style="font-size: 13px;">
 					<h5>温馨提示：</h5>
@@ -81,6 +81,14 @@
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
 				paymentMoney.innerText=wv.money;
+				$(window).resize(function() {
+					if(i % 2 == 0){  
+						 $("#buttomDiv").css("display","none");
+					}else{
+						$("#buttomDiv").css("display","block");
+					}
+					i++; 
+				});
 				
 				var leftWidth=window.innerWidth/2-145;
 				$("#weixinpayBack").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});

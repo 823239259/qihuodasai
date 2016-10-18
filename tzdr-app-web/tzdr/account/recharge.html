@@ -21,11 +21,11 @@
 			<ul class="rechageList">
 				<li>
 					<label>账户余额：</label>
-					<span class="yellowFont"><i id="accountBalance">20</i>元</span>
+					<span class="yellowFont"><i id="accountBalance">0</i>元</span>
 				</li>
 				<li>
 					<label>充值金额：</label>
-					<input type="number" placeholder="请输入充值金额"  oninput="changeAllBalance()" id="inputMoney"/>
+					<input type="number" placeholder="请输入充值金额"   class="mui-input" oninput="changeAllBalance()" id="inputMoney"/>
 				</li>
 			</ul>
 			<div class="ac_btn">
@@ -39,11 +39,11 @@
 					tzdr.init.initHearListener();
 					var wv = plus.webview.currentWebview();
 					var money1;
-					if(wv.money!=null || wv.money !=undefined){
-						wv.money=wv.money.split("元");
-						money1=wv.money[0];
-						$("#inputMoney").val(wv.money[0]);
-					}
+					vText=wv.money;
+//					if(wv.money!=null || wv.money !=undefined){
+//						
+//						changeAllBalance()
+//					}
 					//添加充值金额文本框监听
 				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
@@ -71,6 +71,13 @@
       					var accountBalance=document.getElementById("accountBalance");
       					if(!mui.isnull(result.data.balance)){
       						accountBalance.innerHTML=result.data.balance;
+			              var vTextlength = vText.length;
+			              var cb = vText.substring(0,vTextlength - 1);
+			              var chargeBalance = cb.replace(",","");
+			              var chargeAmount = chargeBalance - result.data.balance; 
+			              document.getElementById("inputMoney").value = chargeAmount;
+      						changeAllBalance();
+      						
       					}else{
       						accountBalance.innerHTML="0.00元";
       					}
