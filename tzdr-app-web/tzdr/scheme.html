@@ -145,8 +145,7 @@
   				listrg:"future/listrg.html",
   				quotationMain:"quotation/quotationMain.html",
   			}
-			
-			tzdr.init.initButtomListener(true,data); 
+			initBottom(dataUrl);
 			// ------------------------------------获取用户合买方案列表---------------------------------------------
 	    	mui.app_request('/user/ftogether_trade/list',{},
 						function(result){

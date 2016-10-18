@@ -375,7 +375,7 @@ var tzdr = {
     			});
     		}
 		},
-		initButtomListener:function(home,data){
+		initButtomListener:function(home){
 				document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");
@@ -587,4 +587,43 @@ tzdr.kuaiqiangshou=function(obj){
 			}
 		});
 }
-
+function initBottom(data){
+	document.getElementById("account").addEventListener("tap",function(){
+						if (mui.cacheUser.isLogin()){
+							var a=plus.webview.getWebviewById("account");
+							if(a){
+								mui.app_refresh('account');
+							}
+							mui.openWindow({url:data.account,id:'account'}); 
+							return;
+						}
+						mui.openWindow({url:data.accountno,id:"accountno"});
+				});
+				document.getElementById("scheme").addEventListener("tap",function(){
+					if (mui.cacheUser.isLogin()){
+						var s=plus.webview.getWebviewById("scheme");
+					    if(s){
+							mui.app_refresh('scheme');
+						}
+						mui.openWindow({url:data.scheme,id:"scheme"}); 
+						return;
+					}
+					mui.openWindow({url:data.listrg,id:"noscheme"});
+					
+				});
+				document.getElementById("product").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("home");
+					if(p){
+						mui.app_refresh('home');  
+					}
+					mui.openWindow({url:data.home,id:"home"});
+				});
+			
+				document.getElementById("quotationMain").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("quotationMain");
+					if(p){
+						mui.app_refresh('quotationMain');  
+					}
+					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
+				});
+	}

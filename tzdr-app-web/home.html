@@ -114,7 +114,7 @@
   				listrg:"tzdr/future/listrg.html",
   				quotationMain:"tzdr/quotation/quotationMain.html",
   			}
-  			tzdr.init.initButtomListener(true,dataUrl);
+  			initBottom(dataUrl);
 			document.getElementById("toNews").addEventListener("tap",function(){
 			    document.getElementById("newsimg").setAttribute("src","images/news.png"); 
 				mui.openWindow("tzdr/news/newslist.html");

@@ -31,7 +31,7 @@
   				listrg:"listrg.html",
   				quotationMain:"../quotation/quotationMain.html",
   			}
-			tzdr.init.initButtomListener(true,dataUrl);
+			initBottom(dataUrl);
 			//加载方案信息
 			mui.app_request("/user/ftrade/list",{},function(result){
 				if(!mui.isnull(result.data)){

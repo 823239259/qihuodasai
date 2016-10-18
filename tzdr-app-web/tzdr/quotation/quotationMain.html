@@ -169,7 +169,7 @@
 	  				listrg:"../future/listrg.html",
 	  				quotationMain:"quotationMain.html",
 	  			}
-				tzdr.init.initButtomListener(true);
+				initBottom(dataUrl);
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
