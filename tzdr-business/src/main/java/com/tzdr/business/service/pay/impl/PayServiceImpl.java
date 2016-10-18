@@ -581,4 +581,8 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 		
 		this.getEntityDao().save(charge);
 	}
+	@Override
+	public RechargeList findByTradeNo(String tradeNo) {
+		return getEntityDao().findByTradeNo(tradeNo);
+	}
 }

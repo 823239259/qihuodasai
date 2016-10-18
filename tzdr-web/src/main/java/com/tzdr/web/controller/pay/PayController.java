@@ -2,6 +2,7 @@ package com.tzdr.web.controller.pay;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -636,12 +637,13 @@ public class PayController {
 
 		return ViewConstants.PayViewJsp.BIBI_PAY_MAIN_VIEW;
 	}
+	private static Object lock_wechat_transfer = new Object();
 	/**
 	 * 微信转账确认充值
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.GET)
+	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.POST)
 	@ResponseBody
 	public JsonResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
@@ -656,24 +658,25 @@ public class PayController {
 		}
 		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
 		if(userVerified != null){
-			String wxAccount = userVerified.getWxAccount();
-			if(wxAccount != null ){
-				RechargeList rechargeList  = new RechargeList();
-				rechargeList.setAccount(wxAccount);
-				rechargeList.setAddtime(new Date().getTime());
-				rechargeList.setUid(uid);
-				rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-				rechargeList.setActualMoney(money);
-				rechargeList.setMoney(money);
-				rechargeList.setTradeAccount("wechat");
-				rechargeList.setType(Constants.PayType.WECHAT_TYPE);
-				rechargeList.setStatus(Constants.PayStatus.NO_PROCESSING);
-				rechargeList.setTradeNo(transactionNo);
-				payService.autoWechat(rechargeList);
-			}else{
-				resultJson.setSuccess(false);
-				resultJson.setMessage("请先绑定微信账号");
-			}
+				synchronized (lock_wechat_transfer) {
+					RechargeList rechargeLists = payService.findByTradeNo(transactionNo);
+					if(rechargeLists != null){
+						resultJson.setMessage("提交失败,重复的订单号");
+						resultJson.setSuccess(false);
+					}
+					RechargeList rechargeList  = new RechargeList();
+					rechargeList.setAccount("");
+					rechargeList.setAddtime(new Date().getTime());
+					rechargeList.setUid(uid);
+					rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+					rechargeList.setActualMoney(money);
+					rechargeList.setMoney(money);
+					rechargeList.setTradeAccount("wechat");
+					rechargeList.setType(Constants.PayType.WECHAT_TYPE);
+					rechargeList.setStatus(Constants.PayStatus.NO_PROCESSING);
+					rechargeList.setTradeNo(transactionNo);
+					payService.autoWechat(rechargeList);
+				}
 		}
 		return resultJson;
 	}

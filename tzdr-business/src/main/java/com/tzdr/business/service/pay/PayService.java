@@ -195,4 +195,10 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @param charge
 	 */
 	public void  autoWechat(RechargeList charge);
+	/**
+	 * 根据第三方流水号查询
+	 * @param tradeNo
+	 * @return
+	 */
+	public RechargeList findByTradeNo(String tradeNo);
 }

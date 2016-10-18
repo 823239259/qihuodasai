@@ -1516,8 +1516,8 @@ function doGetModifyOrderBasicParam(obj){
  * 计算列表的浮动盈亏
  */
 function sumListfloatingProfit(){
+	var price  = 0;
 	for (var i = 0; i < postionIndex; i++) {
-		var price  = 0;
 		var obj = $(".postion-index"+i+"");
 		if(obj.html() == undefined){
 			continue;

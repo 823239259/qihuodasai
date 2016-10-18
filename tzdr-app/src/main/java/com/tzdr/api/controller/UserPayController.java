@@ -387,12 +387,13 @@ public class UserPayController {
 		}
 		return null;
 	}
+	private static Object lock = new Object();
 	/**
 	 * 微信转账确认充值
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.GET)
+	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.POST)
 	@ResponseBody
 	public ApiResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
@@ -405,23 +406,26 @@ public class UserPayController {
 		}
 		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
 		if(userVerified != null){
-			String wxAccount = userVerified.getWxAccount();
-			if(wxAccount != null ){
-				RechargeList  rechargeList = new RechargeList();
-				rechargeList.setAccount(wxAccount);
-				rechargeList.setAddtime(new Date().getTime());
-				rechargeList.setUid(uid);
-				rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-				rechargeList.setActualMoney(money);
-				rechargeList.setMoney(money);
-				rechargeList.setTradeAccount(DataConstant.WECHAT);
-				rechargeList.setType(DataConstant.WECHAT_TYPE);
-				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
-				rechargeList.setTradeNo(transactionNo);
-				apiRechargeService.autoWechat(rechargeList);
-			}
+				synchronized (lock) {
+					List<RechargeList>	rechargeLists = apiRechargeService.queryByTradeNo(transactionNo);
+					if(rechargeLists != null && rechargeLists.size() > 0){
+						resultJson.setMessage("提交失败,重复的订单号");
+						resultJson.setSuccess(false);
+					}
+					RechargeList  rechargeList = new RechargeList();
+					rechargeList.setAccount("");
+					rechargeList.setAddtime(new Date().getTime());
+					rechargeList.setUid(uid);
+					rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+					rechargeList.setActualMoney(money);
+					rechargeList.setMoney(money);
+					rechargeList.setTradeAccount(DataConstant.WECHAT);
+					rechargeList.setType(DataConstant.WECHAT_TYPE);
+					rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+					rechargeList.setTradeNo(transactionNo);
+					apiRechargeService.autoWechat(rechargeList);
+				}
 		}
-		
 		return resultJson;
 	}
 	/**
