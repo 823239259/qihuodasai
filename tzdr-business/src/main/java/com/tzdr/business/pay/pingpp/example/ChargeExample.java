@@ -42,6 +42,9 @@ public class ChargeExample {
         }else if(channel.equals(Channel.WX_PUB_QR.getChannelCode())){
         	extra.put("limit_pay","no_credit");//设置表示微信扫码支付不能使用信用卡支付
         	extra.put("product_id", "12345678");
+        }else if(channel.equals(Channel.JD_WAP.getChannelCode())){
+        	extra.put("success_url", Config.JD_WAP_SUCCESS_URL);
+        	extra.put("fail_url", Config.JD_WAP_FAIL_URL);
         }
         chargeMap.put("extra", extra);
         try {

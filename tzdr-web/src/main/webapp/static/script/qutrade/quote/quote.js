@@ -476,7 +476,7 @@ function updateRight(param){
 	if(highPrice > preSettlePrice){
 		$("#right_zg_2").css("color","#ff5500");
 	}else if(highPrice < preSettlePrice){
-		$("#right_zg_2").css("color","#FFFFFF");
+		$("#right_zg_2").css("color","#0bffa4");
 	}
 	$("#right_zg_2").text(parseFloat(param.HighPrice).toFixed(doSize));
 	//总量
@@ -486,7 +486,7 @@ function updateRight(param){
 	if(lowPrice > preSettlePrice){
 		$("#right_zd_3").css("color","#ff5500");
 	}else if(lowPrice < preSettlePrice){
-		$("#right_zd_3").css("color","#FFFFFF");
+		$("#right_zd_3").css("color","#0bffa4");
 	}
 	$("#right_zd_3").text(parseFloat(lowPrice).toFixed(doSize));
 	

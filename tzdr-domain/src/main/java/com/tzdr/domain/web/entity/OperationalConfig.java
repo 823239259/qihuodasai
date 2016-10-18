@@ -100,6 +100,7 @@ public class OperationalConfig extends BaseCrudEntity {
 	private OperationalConfig parentConfig;
 
 
+
 	public Integer getType() {
 		return type;
 	}

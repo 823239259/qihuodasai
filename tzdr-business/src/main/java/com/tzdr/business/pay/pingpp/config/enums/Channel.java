@@ -28,7 +28,11 @@ public enum Channel {
 	/**
 	 * 微信扫码支付
 	 */
-	WX(9,"wx","微信支付");
+	WX(9,"wx","微信支付"),
+	/**
+	 * 京东手机网页支付
+	 */
+	JD_WAP(10,"jdpay_wap","京东手机网页支付");
 	private Integer channel;
 	private String channelCode;
 
