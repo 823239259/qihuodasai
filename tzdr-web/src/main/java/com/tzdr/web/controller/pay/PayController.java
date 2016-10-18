@@ -1,6 +1,7 @@
 package com.tzdr.web.controller.pay;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -634,5 +635,46 @@ public class PayController {
 		request.setAttribute("encryptkey", bibiParams.get("encryptkey"));
 
 		return ViewConstants.PayViewJsp.BIBI_PAY_MAIN_VIEW;
+	}
+	/**
+	 * 微信转账确认充值
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.GET)
+	@ResponseBody
+	public JsonResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
+		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+				.getAttribute(Constants.TZDR_USER_SESSION);
+		JsonResult resultJson = new JsonResult(true);
+		String uid = userSessionBean.getId();
+		WUser user = wUserService.getUser(uid);
+		if(user == null){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("用户信息不存在");
+			return resultJson;
+		}
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		if(userVerified != null){
+			String wxAccount = userVerified.getWxAccount();
+			if(wxAccount != null ){
+				RechargeList rechargeList  = new RechargeList();
+				rechargeList.setAccount(wxAccount);
+				rechargeList.setAddtime(new Date().getTime());
+				rechargeList.setUid(uid);
+				rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+				rechargeList.setActualMoney(money);
+				rechargeList.setMoney(money);
+				rechargeList.setTradeAccount("wechat");
+				rechargeList.setType(Constants.PayType.WECHAT_TYPE);
+				rechargeList.setStatus(Constants.PayStatus.NO_PROCESSING);
+				rechargeList.setTradeNo(transactionNo);
+				payService.autoWechat(rechargeList);
+			}else{
+				resultJson.setSuccess(false);
+				resultJson.setMessage("请先绑定微信账号");
+			}
+		}
+		return resultJson;
 	}
 }

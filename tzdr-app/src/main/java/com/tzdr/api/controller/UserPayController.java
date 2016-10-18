@@ -262,7 +262,17 @@ public class UserPayController {
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();
 			String charage = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
-			System.out.println(charage);
+			if(charage.equals("1")){
+				PingPPModel pingPPModel = new PingPPModel();
+				pingPPModel.setAmount(Double.valueOf(paymoney));
+				pingPPModel.setBody(Config.BODY);
+				pingPPModel.setChannel(payWayChannl.getChannelCode());
+				pingPPModel.setClient_ip(ip);
+				pingPPModel.setCurrency("cny");
+				pingPPModel.setOrder_no(orderNo);
+				pingPPModel.setSubject(Config.SUBJECT);
+				return ChargeExample.createCharge(pingPPModel).toString();
+			}
 			return charage;
 		}
 		return null;
@@ -382,7 +392,7 @@ public class UserPayController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "wechat_transfer",method =RequestMethod.GET)
+	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.GET)
 	@ResponseBody
 	public ApiResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
@@ -393,17 +403,25 @@ public class UserPayController {
 			resultJson.setMessage("用户信息不存在");
 			return resultJson;
 		}
-		RechargeList  rechargeList = new RechargeList();
-		rechargeList.setAccount(transactionNo);
-		rechargeList.setAddtime(new Date().getTime());
-		rechargeList.setUid(uid);
-		rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-		rechargeList.setActualMoney(money);
-		rechargeList.setMoney(money);
-		rechargeList.setTradeAccount(DataConstant.WECHAT);
-		rechargeList.setType(DataConstant.WECHAT_TYPE);
-		rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
-		apiRechargeService.autoWechat(rechargeList);
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		if(userVerified != null){
+			String wxAccount = userVerified.getWxAccount();
+			if(wxAccount != null ){
+				RechargeList  rechargeList = new RechargeList();
+				rechargeList.setAccount(wxAccount);
+				rechargeList.setAddtime(new Date().getTime());
+				rechargeList.setUid(uid);
+				rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+				rechargeList.setActualMoney(money);
+				rechargeList.setMoney(money);
+				rechargeList.setTradeAccount(DataConstant.WECHAT);
+				rechargeList.setType(DataConstant.WECHAT_TYPE);
+				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+				rechargeList.setTradeNo(transactionNo);
+				apiRechargeService.autoWechat(rechargeList);
+			}
+		}
+		
 		return resultJson;
 	}
 	/**

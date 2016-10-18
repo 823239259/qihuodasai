@@ -221,6 +221,7 @@ function updateBalance(parama){
 	}
 	$("#floatingProfit").text($float);
 	$("#floatingProfit").css("color",color);*/
+	var color = "#FFFFFF";
 	var $closeProfit = parseFloat($clostFit).toFixed(2);
 	if($closeProfit < 0){
 		color = "#0bffa4";
