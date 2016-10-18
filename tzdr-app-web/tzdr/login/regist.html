@@ -64,6 +64,9 @@
     			mui.toast("手机号码不正确");
     			return;
     		}   
+    		var paramUrl={
+				url:"login.html"
+			}
     		mui.app_request('sms',{ 
       			 'mobile':mobile,
 			     'type':1  
@@ -88,7 +91,7 @@
       				return;
       			}
       			
-      		});
+      		},paramUrl);
     	}  
     	function registUser(){
     		var mobile=document.getElementById("account").value;
@@ -129,7 +132,9 @@
 				mui.toast("两次输入的密码不一致！");
 				return;
 			}
-			
+			var paramUrl={
+				url:"login.html"
+			}
 			mui.app_request('/regist',{ 
       			 'mobile':mobile,
 			    'code':code,
@@ -166,7 +171,7 @@
       				return;
       			}
       		
-      		});
+      		},paramUrl);
 			
 			
     	};

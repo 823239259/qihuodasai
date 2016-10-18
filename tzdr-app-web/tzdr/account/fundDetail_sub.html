@@ -23,7 +23,9 @@
 		  var list_num=0;  
 		  mui.plusReady(function(){   
 		  	//初始化监听头部和底部事件
-  			
+  			var paramUrl={
+				url:"../login/login.html"
+			}
 			
 		  	//获取资金明细信息
 		  	mui.app_request("/user/fund/list",{},function(result){
@@ -52,7 +54,7 @@
 		  	},function(result){
 		  		mui.toast(result.message);
 		  		return;
-		  	});
+		  	},paramUrl);
 
 			
 		  });

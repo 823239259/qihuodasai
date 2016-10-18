@@ -13,7 +13,9 @@
 		var paramListAll=null;
 		mui.plusReady(function(){
 			//初始化监听头部和底部事件
-  			
+  			var paramUrl={
+				url:"../login/login.html"
+			}
   			//获取富时A50数据
   			mui.app_request("/ftrade/params",{
   				"businessType":0
@@ -65,7 +67,7 @@
   			},function(result){
   				mui.toast(result.message);
   				return;
-  			})
+  			},paramUrl)
 //			document.getElementById("backPage").addEventListener("tap",function(){
 //				mui.openWindow({
 //					url:"../../home.html",

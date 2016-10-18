@@ -97,6 +97,9 @@
 					document.getElementById('end_btn').removeAttribute('disabled'); 
 					return;
 				}
+				var paramUrl={
+						url:"tzdr/login/login.html"
+					}
 				mui.app_request('/user/ftrade/endtrade',
 					{
 						"id":_trade_id,"cId":_coupon_option_value,"businessType":_businessType
@@ -129,7 +132,7 @@
 							mui.toast("系统繁忙，请稍后再试！");
 							return;
 						}
-					}
+					},paramUrl
 				);
 			}, "终结方案", ["取消","确定"] );
 		});

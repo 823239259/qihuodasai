@@ -55,7 +55,9 @@
 		  });
 		  //获取原验证码
 		  function getoldCode(){
-		  	
+		  	var paramUrl={
+					url:"../login/login.html"
+				}
 		  	mui.app_request("user/security/send_sms",{
 		  		"mobile":user_mobile,
 				"type":1
@@ -76,12 +78,16 @@
 		  			mui.toast("操作过于频繁，请稍后再试！");
 		  			return;
 		  		}
-		  	})
+		  	},paramUrl)
 		  };
 		  //获取新验证码
 		  function getnewCode(){
 			var oldPhone=document.getElementById("oldPhone").value;
 		  	var newPhone=document.getElementById("newPhone").value;
+		  	var paramUrl={
+					url:"../login/login.html"
+				}
+		  	
 		  	if(mui.isnull(newPhone)||!tzdr.validate_mobile(newPhone)){
 		  		mui.toast("新手机号码不正确");
 		  		return;
@@ -111,7 +117,7 @@
 		  			mui.toast("操作过于频繁，请稍后再试！");
 		  			return;
 		  		}	  		
-		  	})
+		  	},paramUrl)
 		  };
 		  
 		  
@@ -145,6 +151,9 @@
 		  	var oldCode=document.getElementById("oldpassword").value;
 		  	var newCode=document.getElementById("newpassword").value;
 		  	var newPhone=document.getElementById("newPhone").value;
+		  	var paramUrl={
+					url:"../login/login.html"
+				}
 		  	if(mui.isnull(newPhone)||!tzdr.validate_mobile(newPhone)){
 		  		mui.toast("新手机号码不正确");
 		  		return;
@@ -202,7 +211,7 @@
 		  			mui.toast("新手机号码格式错误！");
 		  			return;
 		  		}
-		  	})
+		  	},paramUrl)
 		  	
 		  };
 		  

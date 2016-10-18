@@ -33,6 +33,9 @@
   			}
 			initBottom(dataUrl);
 			//加载方案信息
+			var paramUrl={
+				url:"../login/login.html"
+			}
 			mui.app_request("/user/ftrade/list",{},function(result){
 				if(!mui.isnull(result.data)){
 					ftrade_list=result.data.tradeList;
@@ -85,7 +88,7 @@
 			},function(result){
 				mui.toast(result.message);
 				return;
-			});
+			},paramUrl);
 			
 
 		});

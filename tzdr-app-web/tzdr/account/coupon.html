@@ -39,6 +39,9 @@
 		  
 		  
 		  function useCoupons(id){
+		  	var paramUrl={
+				url:"../login/login.html"
+			}
 		  	mui.app_request("/user/coupon/employ",{
 		  		"id":id
 		  	},function(result){
@@ -66,12 +69,14 @@
 		  			return;
 		  		}
 		  		
-		  	})
+		  	},paramUrl)
 		  };
 		  
 		    
 		  function	getCoupons(){
-		  	 
+		  	 	var paramUrl={
+					url:"../login/login.html"
+				}
 		  	mui.app_request("/user/coupon/list",{},function(result){
 		  		if(!mui.isnull(result.data.couponList)){ 
 		  			c_list=result.data.couponList;
@@ -100,7 +105,7 @@
 		  	},function(result){
 		  		mui.toast(result.message);
 		  		return;
-		  	}); 
+		  	},paramUrl); 
 		  };
 		  
 		  	

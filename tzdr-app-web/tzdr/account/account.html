@@ -28,7 +28,9 @@
       			user_mobile=plus.storage.getItem("user_mobile");
       		//对登录状态判断
       		if(mui.cacheUser.isLogin()){ 
-      			
+      			var paramUrl={
+					url:"tzdr/login/login.html"
+				}
       			//获取用户信息 
       			mui.app_request('/user/getbalancerate',{
       				"businessType":4 
@@ -54,7 +56,7 @@
       					return;
       				},function(result){
       					return;
-      			});
+      			},paramUrl);
       		}else{
       			title_name.innerHTML="请您先登录";
       			title_balance.innerHTML="0.00元";

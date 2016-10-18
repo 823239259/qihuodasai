@@ -115,6 +115,9 @@
   				quotationMain:"tzdr/quotation/quotationMain.html",
   			}
   			initBottom(dataUrl);
+  			var paramUrl={
+				url:"tzdr/login/login.html"
+			}
 			document.getElementById("toNews").addEventListener("tap",function(){
 			    document.getElementById("newsimg").setAttribute("src","images/news.png"); 
 				mui.openWindow("tzdr/news/newslist.html");
@@ -176,7 +179,7 @@
 				},
 				function(){
 					
-				}
+				},paramUrl
 			);
 			//新增banner 显示
 			var timeNum=0;
@@ -291,7 +294,7 @@
 						},
 						function(){
 							
-						}
+						},paramUrl
 				);
 			}
 			
@@ -341,7 +344,7 @@
 				},function(result){
 					mui.toast("系统繁忙，请刷新再试！");
 					return;
-				});
+				},paramUrl);
 			}
 			
 			// 关闭活动图片

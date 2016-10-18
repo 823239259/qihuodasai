@@ -25,7 +25,9 @@
     			this.setAttribute('disabled','disabled')  //禁用按钮
     			append_fund();
     		});
-    		
+    		var paramUrl={
+				url:"../login/login.html"
+			}
     		//获取账户余额
     		mui.app_request("/user/getbalancerate",{
     			 "businessType":1
@@ -41,7 +43,7 @@
     		},function(result){
     			mui.toast(result.message);
     			return;
-    		})
+    		},paramUrl)
     		
     	});
     	//追加保证金
@@ -70,6 +72,9 @@
 					document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用 
 					return ;
 				}
+				var paramUrl={
+						url:"../login/login.html"
+					}
 				mui.app_request("/user/ftrade/addbond",{
 	    			"id":win.did,
 					"addBond":app_fund
@@ -99,7 +104,7 @@
 						mui.toast("系统繁忙，请稍后再试！");
 						return;
 					}
-	    		})
+	    		},paramUrl)
 			}, "追加资金", ["取消","确定"] );
     	}
     	

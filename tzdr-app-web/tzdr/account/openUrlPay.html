@@ -18,6 +18,9 @@
 		<script type="text/javascript">
 		mui.init()
 			mui.plusReady(function() {
+				var paramUrl={
+					url:"../login/login.html"
+				}
 				var h= plus.webview.getWebviewById("pay"); 
 				mui.app_request('/user/pay/pingplusplus', {
 						"money": h.money,
@@ -36,7 +39,7 @@
 								// 微信公众账号支付取消支付
 							}
 							});
-						}
+						},paramUrl
 					);				
 			});
 		</script>

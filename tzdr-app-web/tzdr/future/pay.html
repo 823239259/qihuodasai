@@ -15,6 +15,9 @@
     		win=plus.webview.currentWebview();
     		//初始化监听头部和底部事件
   			//获取支付申请数据
+  			var paramUrl={
+				url:"../login/login.html"
+			}
   			mui.app_request("/user/ftrade/apply",{
   				"traderBond":win.traderBond,
 			    "tranLever":win.trade_leve,
@@ -45,7 +48,7 @@
   					return;
   				}
   				
-  			})
+  			},paramUrl)
   			
   			//头部设置
   			titleset();
@@ -213,7 +216,9 @@
     		if(mui.isnull(vid)){
     			vid=0;
     		} 
-
+			var paramUrl={
+				url:"../login/login.html"
+			}
     		mui.app_request("/user/ftrade/handle",{
     			"vid":vid,
 				"traderBond":win.traderBond,
@@ -246,7 +251,7 @@
     				return;
     			}
     			
-    		})
+    		},paramUrl)
     	}
     		
     </script>

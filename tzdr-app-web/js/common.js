@@ -39,7 +39,7 @@
 	
 	
 	// 需要认证用户身份的请求调用接口
-	mui.app_request= function (func_url,params,onSuccess,onError){
+	mui.app_request= function (func_url,params,onSuccess,onError,paramUrl){
 		if(mui.checkNetwork()==false){ 
 			mui.toast("当前网络不给力，请稍后再试"); 
 			return;
@@ -49,7 +49,6 @@
 		var onError = arguments[3]?arguments[3]:function(){};
 		var func_url = tzdr.constants.api_domain + func_url;
 		//http://api.dktai.com/+
-		
 		mui.ajax(func_url,{  
 			headers:{
 				'token':mui.cacheUser.get(tzdr.constants.user_token),
@@ -69,11 +68,13 @@
 			    else
 			    {
 			    	if (data.code==-1){
-						mui.cacheUser.clearCachePages(true); 
-						mui.cacheUser.clear();
-			    		mui.toast("认证失败，请重新登录！");    
-			    		mui.openWindow(mui.app_filePath("tzdr/login/login.html"),"login");
-						return;
+			    		if(paramUrl != undefined || paramUrl !=null || paramUrl !=""){
+			    			mui.cacheUser.clearCachePages(true); 
+							mui.cacheUser.clear();
+				    		mui.toast("认证失败，请重新登录！");    
+				    		mui.openWindow({url: params.url,id:"login"});
+							return;
+			    		}
 			    	}
 			    	onError(data);
 			    }

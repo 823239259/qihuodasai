@@ -46,6 +46,9 @@
 		  	var code=document.getElementById("password").value;
 		  	var password=document.getElementById("password_confirm").value;
 		  	var password2=document.getElementById("email").value;
+		  	var paramUrl={
+						url:"../login/login.html"
+					}
 		  	if(mui.isnull(code)){
 		  		mui.toast("验证码不能为空");
 		  		return;
@@ -87,7 +90,7 @@
 		  			mui.toast("验证码错误或失效");
 		  			return;
 		  		}
-		  	})
+		  	},paramUrl)
 		  	
 		  	
 		  };
@@ -96,6 +99,9 @@
 		  //获取短信验证码
 		  function getCode(){
 		  	var mobile=document.getElementById("mobile").innerHTML;
+		  	var paramUrl={
+						url:"../login/login.html"
+					}
 		 	if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("手机号码不正确");
     			return;
@@ -124,7 +130,7 @@
 		 			mui.toast("系统繁忙，请稍候再试！");	
 		 			return;
 		 		}
-		 	})
+		 	},paramUrl)
 		 	
 		  };
     </script>

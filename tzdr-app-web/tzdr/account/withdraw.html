@@ -42,6 +42,9 @@
     			drawmoneySubmit();
     		});
     		//获取默认绑定的银行卡信息
+    		var paramUrl={
+						url:"../login/login.html"
+					}
     		mui.app_request("user/withdraw/bank_list",{},
     		function(result){
     			if(!mui.isnull(result.data)){
@@ -60,7 +63,7 @@
     				mui.toast("获取失败");
     				return;
     			}
-    		});
+    		},paramUrl);
     		//去后台接口校验是否实名认证
 			mui.app_request("/user/getbalancerate",{
 				"businessType":4 
@@ -107,6 +110,9 @@
 		
 		function drawMoney(){
 			var drawmoney=document.getElementById("drawmoney").value;
+			var paramUrl={
+						url:"../login/login.html"
+					}
 			if(mui.isnull(drawmoney)){
 				document.getElementById("drawmoney").value="";
 				mui.toast("不能输入非法字符");
@@ -129,7 +135,7 @@
 			},function(result){
 				mui.toast(result.message);
 				return;
-			}) 
+			},paramUrl) 
 			/*var drawmoney=document.getElementById("drawmoney").value;
 			var balance=document.getElementById("balance").innerHTML;
 			var drawHandleFee=document.getElementById("drawHandleFee");
@@ -211,6 +217,9 @@
 			var drawpassword=document.getElementById("drawpassword").value;
 			var drawmoney=document.getElementById("drawmoney").value;
 			var defult=document.getElementById("defult").style.display;
+			var paramUrl={
+						url:"../login/login.html"
+					}
 			if(bank_info=="none"&&defult=="block"){
 				mui.toast("请绑定银行卡");
 				return;
@@ -287,7 +296,7 @@
 					return;
 				}
 				
-			})
+			},paramUrl)
 			
 		};
 		

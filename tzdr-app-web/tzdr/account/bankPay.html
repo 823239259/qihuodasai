@@ -114,6 +114,9 @@
 					mui.toast("请输入转账流水单号");
 					return;
 				}
+				var paramUrl={
+					url:"../login/login.html"
+				}
 				mui.app_request('/user/pay/bank_transfer', {
 					"abbreviation": abbreviation,
 					"serialnum": serialnum,
@@ -136,7 +139,7 @@
 						mui.toast("系统繁忙，请稍后再试！");
 						return;
 					}
-				})
+				},paramUrl)
 			}
 			});
 		</script>
