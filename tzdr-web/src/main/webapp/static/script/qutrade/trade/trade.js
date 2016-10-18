@@ -210,7 +210,6 @@ function updateBalance(parama){
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
 	/*var $float = parseFloat($floatFit).toFixed(2) ;
-	var color = "#FFFFFF";
 	if(isNaN($float)){
 		$float = 0;
 	}
