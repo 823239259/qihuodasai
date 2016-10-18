@@ -10,6 +10,7 @@
 	    <link rel="stylesheet" href="../../css/own.css" />
 	    <link rel="stylesheet" href="../../css/recharge.css" />
 	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <script type="text/javascript" src="../../js/pingpp.js" ></script>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
@@ -82,9 +83,37 @@
 				}else if(val==2){
 					bank(wv);
 				}else if(val==1){
-					
+					jdWayPay(wv);
 				}
 			};
+			/**
+			 * 
+			 * @param {Object} money 支付金额
+			 */
+			function jdWayPay(wv){
+				var money = wv.money;
+				alert(money); 
+				//充值"操作"
+				mui.app_request('/user/pay/jdpay_wap', {
+					"money": money,
+					"payWay":10
+				}, function(result) {
+					var _data = result.data.data;
+					var charge = JSON.parse(_data); 
+					pingpp.createPayment(charge, function(result, err) {
+						if(result == "success") {
+							// 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+						} else if(result == "fail") {
+							// charge 不正确或者微信公众账号支付失败时会在此处返回
+						} else if(result == "cancel") {
+							// 微信公众账号支付取消支付
+						}
+						});
+					return;
+				}, function(result) {  
+					mui.toast(result.message);				
+				});
+			}
 			//网银充值“立即充值”操作
 			function bank(wv){
 				var money = wv.money;
