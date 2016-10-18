@@ -350,13 +350,14 @@ public class UserPayController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/jdpay_wap",method = RequestMethod.GET)
+	@RequestMapping(value = "/jdpay_wap",method = RequestMethod.POST)
 	@ResponseBody
-	public String pingplusplusJdPayWap(HttpServletRequest request){
+	public JsonResult pingplusplusJdPayWap(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
 		String paymoney=request.getParameter("money");
 		String payWay = request.getParameter("payWay");
+		JsonResult resultJson = new JsonResult(false);
 		if(paymoney != null && Double.parseDouble(paymoney) > 0){
 			Channel payWayChannl = null;
 			if(payWay == null){
@@ -382,10 +383,15 @@ public class UserPayController {
 				pingPPModel.setCurrency("cny");
 				pingPPModel.setOrder_no(orderNo);
 				pingPPModel.setSubject(Config.SUBJECT);
-				return ChargeExample.createCharge(pingPPModel).toString();
+				String chargeData = ChargeExample.createCharge(pingPPModel).toString();
+				resultJson.setSuccess(true);
+				logger.info(chargeData);
+				resultJson.appendData("data", chargeData);
+			}else{
+				resultJson.setMessage("支付错误,请确认支付信息");
 			}
 		}
-		return null;
+		return resultJson;
 	}
 	private static Object lock = new Object();
 	/**

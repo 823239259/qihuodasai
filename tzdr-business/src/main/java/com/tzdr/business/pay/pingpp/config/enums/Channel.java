@@ -32,7 +32,7 @@ public enum Channel {
 	/**
 	 * 京东手机网页支付
 	 */
-	JD_WAP(10,"JD","京东手机网页支付");
+	JD_WAP(10,"jdpay_wap","京东手机网页支付");
 	private Integer channel;
 	private String channelCode;
 
