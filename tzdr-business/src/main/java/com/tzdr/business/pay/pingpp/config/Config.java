@@ -32,7 +32,7 @@ public class Config {
 	/**
 	 * 京东手机网页支付成功跳转页面
 	 */
-	public static String JD_WAP_SUCCESS_URL = "http://www.vs.com/user/account";
+	public static String JD_WAP_SUCCESS_URL = "http://www.vs.com/paySucApp";
 	/**
 	 * 京东手机网页支付失败跳转页面
 	 */

@@ -240,12 +240,13 @@ public class UserPayController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/pingplusplus",method = RequestMethod.POST)
-	public String pingplusplus(HttpServletRequest request){
-		if(true)return "";
+	public ApiResult pingplusplus(HttpServletRequest request){
+		if(true)return null;
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
 		String paymoney=request.getParameter("money");
 		String payWay = request.getParameter("payWay");
+		ApiResult resultJson = new ApiResult(false);
 		if(paymoney != null && Double.parseDouble(paymoney) > 0){
 			Channel payWayChannl = null;
 			if(payWay == null){
@@ -271,11 +272,11 @@ public class UserPayController {
 				pingPPModel.setCurrency("cny");
 				pingPPModel.setOrder_no(orderNo);
 				pingPPModel.setSubject(Config.SUBJECT);
-				return ChargeExample.createCharge(pingPPModel).toString();
+				resultJson.setSuccess(true);
+				resultJson.setData(ChargeExample.createCharge(pingPPModel).toString());
 			}
-			return charage;
 		}
-		return null;
+		return resultJson;
 	}
 	/**
 	 * 国付宝充值
@@ -352,12 +353,12 @@ public class UserPayController {
 	 */
 	@RequestMapping(value = "/jdpay_wap",method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult pingplusplusJdPayWap(HttpServletRequest request){
+	public ApiResult pingplusplusJdPayWap(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
 		String paymoney=request.getParameter("money");
 		String payWay = request.getParameter("payWay");
-		JsonResult resultJson = new JsonResult(false);
+		ApiResult resultJson = new ApiResult(false);
 		if(paymoney != null && Double.parseDouble(paymoney) > 0){
 			Channel payWayChannl = null;
 			if(payWay == null){
@@ -385,8 +386,8 @@ public class UserPayController {
 				pingPPModel.setSubject(Config.SUBJECT);
 				String chargeData = ChargeExample.createCharge(pingPPModel).toString();
 				resultJson.setSuccess(true);
+				resultJson.setData(chargeData);
 				logger.info(chargeData);
-				resultJson.appendData("data", chargeData);
 			}else{
 				resultJson.setMessage("支付错误,请确认支付信息");
 			}

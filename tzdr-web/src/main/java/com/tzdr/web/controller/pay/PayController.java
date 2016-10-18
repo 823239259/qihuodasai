@@ -270,12 +270,13 @@ public class PayController {
 	 * @return
 	 */
 	@RequestMapping(value = "/pingplusplus", method = RequestMethod.POST)
-	public String pingplusplus(HttpServletRequest request) {
-		if(true)return "";
+	public JsonResult pingplusplus(HttpServletRequest request) {
+		if(true)return null;
 		//System.out.println("执行中。。。");
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		WUser user = this.payService.getUser(userSessionBean.getId());
+		JsonResult resultJson = new JsonResult(false);
 		String paymoney = request.getParameter("money");
 		String payWay = request.getParameter("payWay");
 		if (paymoney != null && Double.parseDouble(paymoney) > 0) {
@@ -304,11 +305,10 @@ public class PayController {
 				pingPPModel.setCurrency("cny");
 				pingPPModel.setOrder_no(orderNo);
 				pingPPModel.setSubject(Config.SUBJECT);
-				request.setAttribute("charge", ChargeExample.createCharge(pingPPModel).toString());
+				resultJson.appendData("data", ChargeExample.createCharge(pingPPModel).toString());
 			}
-			return "/views/pay/pingppPay";
 		}
-		return null;
+		return resultJson;
 	}
 	
 	/**
