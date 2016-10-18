@@ -98,7 +98,7 @@
 					"money": money,
 					"payWay":10
 				}, function(result) {
-					var _data = result.data.data;
+					var _data = result.data.data; 
 					var charge = JSON.parse(_data); 
 					pingpp.createPayment(charge, function(result, err) {
 						if(result == "success") {
