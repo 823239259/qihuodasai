@@ -106,7 +106,15 @@
 		});
 			mui.plusReady(function(){ 
   			tzdr.init.initHearListener();
-  			tzdr.init.initButtomListener(true);
+  			var dataUrl={
+  				home:"home.html",
+  				account:"tzdr/account/account.html",
+  				accountno:"tzdr/account/accountno.html",
+  				scheme:"tzdr/scheme.html",
+  				listrg:"tzdr/future/listrg.html",
+  				quotationMain:"tzdr/quotation/quotationMain.html",
+  			}
+  			tzdr.init.initButtomListener(true,dataUrl);
 			document.getElementById("toNews").addEventListener("tap",function(){
 			    document.getElementById("newsimg").setAttribute("src","images/news.png"); 
 				mui.openWindow("tzdr/news/newslist.html");

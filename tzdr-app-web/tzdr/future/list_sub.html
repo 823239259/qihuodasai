@@ -23,7 +23,15 @@
 		var ftrade_list=null;
 		var ftrade_list_num=0;
 		mui.plusReady(function(){
-			tzdr.init.initButtomListener();
+			var dataUrl={
+  				home:"../../home.html",
+  				account:"../account/account.html",
+  				accountno:"../account/accountno.html",
+  				scheme:"../scheme.html",
+  				listrg:"listrg.html",
+  				quotationMain:"../quotation/quotationMain.html",
+  			}
+			tzdr.init.initButtomListener(true,dataUrl);
 			//加载方案信息
 			mui.app_request("/user/ftrade/list",{},function(result){
 				if(!mui.isnull(result.data)){

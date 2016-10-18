@@ -220,8 +220,8 @@
 	 * @param {Object} file_url 文件及文件所在位置    如：tzdr/login/login.html
 	 */
 	mui.app_filePath=function(file_url){
-		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
-		var filePath = plus.io.convertAbsoluteFileSystem(path);
+//		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
+//		var filePath = plus.io.convertAbsoluteFileSystem(path);
 		return filePath;
 	}
 	
@@ -375,17 +375,17 @@ var tzdr = {
     			});
     		}
 		},
-		initButtomListener:function(home){
+		initButtomListener:function(home,data){
 				document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");
 							if(a){
 								mui.app_refresh('account');
 							}
-							mui.openWindow({url:mui.app_filePath("tzdr/account/account.html"),id:'account'}); 
+							mui.openWindow({url:data.account,id:'account'}); 
 							return;
 						}
-						mui.openWindow(mui.app_filePath("tzdr/account/accountno.html"),"accountno");
+						mui.openWindow({url:data.accountno,id:"accountno"});
 				});
 				document.getElementById("scheme").addEventListener("tap",function(){
 					if (mui.cacheUser.isLogin()){
@@ -393,10 +393,10 @@ var tzdr = {
 					    if(s){
 							mui.app_refresh('scheme');
 						}
-						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
+						mui.openWindow({url:data.scheme,id:"scheme"}); 
 						return;
 					}
-					mui.openWindow({url:mui.app_filePath("tzdr/future/listrg.html"),id:"noscheme"});
+					mui.openWindow({url:data.listrg,id:"noscheme"});
 					
 				});
 				document.getElementById("product").addEventListener("tap",function(){
@@ -404,7 +404,7 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('home');  
 					}
-					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
+					mui.openWindow({url:data.home,id:"home"});
 				});
 			
 				document.getElementById("quotationMain").addEventListener("tap",function(){
@@ -412,7 +412,7 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('quotationMain');  
 					}
-					mui.openWindow({url:mui.app_filePath("tzdr/quotation/quotationMain.html"),id:"quotationMain"});
+					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
 				});
 			
 		}

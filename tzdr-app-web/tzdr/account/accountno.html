@@ -16,7 +16,16 @@
     	mui.init();    	
     	mui.plusReady(function(){
     		//初始化监听头部和底部事件
-  			tzdr.init.initButtomListener();
+    		var dataUrl={
+  				home:"../../home.html",
+  				account:"account.html",
+  				accountno:"tzdr/account/accountno.html",
+  				scheme:"../scheme.html",
+  				listrg:"../future/listrg.html",
+  				quotationMain:"../quotation/quotationMain.html",
+  			}
+    		
+  			tzdr.init.initButtomListener(true,dataUrl);
   			
   			document.getElementById("regist").addEventListener("tap",function(){
 				mui.openWindow("../login/regist.html");

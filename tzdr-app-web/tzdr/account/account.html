@@ -59,12 +59,19 @@
       			title_name.innerHTML="请您先登录";
       			title_balance.innerHTML="0.00元";
       		}
-      		
+      		var dataUrl={
+  				home:"../../home.html",
+  				account:"account.html",
+  				accountno:"tzdr/account/accountno.html",
+  				scheme:"../scheme.html",
+  				listrg:"../future/listrg.html",
+  				quotationMain:"../quotation/quotationMain.html",
+  			}
       		
       		
 			//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-  			tzdr.init.initButtomListener();
+  			tzdr.init.initButtomListener(true,dataUrl);
   			
   			
     		document.getElementById("charge").addEventListener("tap",function(){
