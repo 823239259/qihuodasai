@@ -220,7 +220,6 @@
 	 * @param {Object} file_url 文件及文件所在位置    如：tzdr/login/login.html
 	 */
 	mui.app_filePath=function(file_url){
-		
 		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
 		var filePath = plus.io.convertAbsoluteFileSystem(path);
 		return filePath;

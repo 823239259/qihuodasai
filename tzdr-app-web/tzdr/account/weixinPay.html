@@ -97,7 +97,6 @@
 				function weixinPay(){
 					var chargeNum=$("#chargeNum").val();
 					var paymentMoney=$("#paymentMoney").text();
-					
 					if(mui.isnull(chargeNum)) {
 						mui.toast("请输入交易单号");
 						return;
@@ -106,9 +105,9 @@
 						"money": paymentMoney ,
 						"transactionNo":chargeNum
 					},function(result){
-						console.log(JSON.stringify(result));
+						mui.toast("提交成功");
 					},function(result){
-						console.log(JSON.stringify(result));
+						mui.toast(result.message);
 					})
 				}
 			})
