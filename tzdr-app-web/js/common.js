@@ -79,8 +79,6 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
-//				console.log(JSON.stringify(errorThrown));
-				 //plus.nativeUI.closeWaiting();
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -224,9 +222,7 @@
 	mui.app_filePath=function(file_url){
 		
 		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
-//		console.log("1"+plus.io.convertLocalFileSystemURL('_www/'+file_url))
-//		console.log("2"+plus.io.convertAbsoluteFileSystem(path));
-		var filePath = plus.io.convertAbsoluteFileSystem("_www/"+file_url);
+		var filePath = plus.io.convertAbsoluteFileSystem(path);
 		return filePath;
 	}
 	

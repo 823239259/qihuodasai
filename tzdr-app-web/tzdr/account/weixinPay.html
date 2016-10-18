@@ -71,7 +71,7 @@
 				</div>
 			</div>
 			<div id="buttomDiv">
-				<span>支付：<i id="paymentMoney">1234</i></span>
+				<span>支付：<i id="paymentMoney"></i></span>
 				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
 			</div>
 		</div>
@@ -97,14 +97,18 @@
 				function weixinPay(){
 					var chargeNum=$("#chargeNum").val();
 					var paymentMoney=$("#paymentMoney").text();
-					if(mui.isnull(serialnum)) {
+					
+					if(mui.isnull(chargeNum)) {
 						mui.toast("请输入交易单号");
 						return;
 					}
-					mui.app_request("",{},function(result){
-						
+					mui.app_request("/user/pay/wechat_transfer",{
+						"money": paymentMoney ,
+						"transactionNo":chargeNum
 					},function(result){
-						
+						console.log(JSON.stringify(result));
+					},function(result){
+						console.log(JSON.stringify(result));
 					})
 				}
 			})

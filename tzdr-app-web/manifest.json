@@ -480,7 +480,8 @@
 					"images/bank/psbc.png",
 					"images/bank/cmb.png",
 					"images/bank/spdb.png",
-					"images/bank/cmbc.png"
+					"images/bank/cmbc.png",
+					"images/bank/ceb.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -1050,7 +1051,10 @@
 					"js/timechart.config.js",
 					"js/candlestick.config.js",
 					"js/dayCandlestick.config.js",
-					"js/FiveTestCandlestickChart.js"
+					"js/FiveTestCandlestickChart.js",
+					"js/fiveChart.config.js",
+					"js/tenChart.config.js",
+					"js/threeChart.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1250,7 +1254,11 @@
 					"js/jquery-1.11.3.js",
 					"css/recharge.css",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"images/recharge/Transfer.png",
+					"images/recharge/bankP.png",
+					"images/recharge/jingdong.png",
+					"images/recharge/wei.png"
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",
