@@ -62,6 +62,9 @@
 						checkMoney(money1,wv)
 					});
 				//获取用户余额
+				var paramUrl={
+					url:"../login/login.html"
+				}
       			mui.app_request('/user/getbalancerate',{
       				"businessType":4 
       			},function(result){
@@ -74,7 +77,7 @@
       					return;
       				},function(result){
       					return;
-      			});
+      			},paramUrl);
 					
 			
 			})

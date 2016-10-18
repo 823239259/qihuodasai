@@ -93,6 +93,9 @@
 			function jdWayPay(wv){
 				var money = wv.money;
 				//充值"操作"
+				var paramUrl={
+					url:"../login/login.html"
+				}
 				mui.app_request('/user/pay/jdpay_wap', {
 					"money": money,
 					"payWay":10
@@ -110,12 +113,15 @@
 					return;
 				}, function(result) {  
 					mui.toast(result.message);				
-				});
+				},paramUrl);
 			}
 			//网银充值“立即充值”操作
 			function bank(wv){
 				var money = wv.money;
 				//充值"操作"
+				var paramUrl={
+					url:"../login/login.html"
+				}
 				mui.app_request('/user/pay/gopay', {
 					"goPaymoney": money,
 					"gopayWay":7
@@ -142,7 +148,7 @@
 						mui.toast("系统繁忙，请稍后再试！");
 						return;
 					}
-				});
+				},paramUrl);
 			}
 		</script>
 	</body>
