@@ -127,7 +127,13 @@
 							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li>
 							<li><label>收款人微信账号：</label><span>1369866402@1369866402</span></li>
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
+							<li><label>支付金额</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3"></li>
+							<li><label>交易单号</label><input type="text" name="billing" value = "" id="billing" class="uc_p_ip3"></li>
+							<input type="hidden" name="default_value" value = "600" id="default_value">
 						</ul>
+						<div class="uc_paybtn uc_b_btn" style="margin-left: 165px;">
+							<a href="javascript:void(0)" class="pay_confirm">确认充值</a>
+						</div>
 					</div>
 					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;margin-top: 40px;">
 						<p style="float: left; width: 210px; color:#333;text-align: center;">

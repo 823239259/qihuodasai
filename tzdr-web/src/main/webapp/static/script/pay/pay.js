@@ -377,6 +377,53 @@ $(function(){
 		$("#weixin_update").hide();
 		$("#weixin").val($("#userAccount").text());
 	});
+	
+	var default_value = $("#default_value").val();
+	var pay_money = $("#pay_money").val(default_value);
+	$(".pay_confirm").click(function() {
+		var pay_money = $("#pay_money").val();
+		var userAccount = $("#userAccount").html();
+		var billing = $("#billing").val();
+		var default_value = $("#default_value").val();
+		if(userAccount == "") {
+			showMsgDialog("提示","请填写微信账号！");
+			return ;
+		}
+		if(pay_money=="" || isNaN(pay_money)) {
+			showMsgDialog("提示","请输入正确的充值金额！");
+			return ;
+		}
+		if(pay_money < default_value) {
+			showMsgDialog("提示","输入金额必须大于支付金额！");
+			return ;
+		}
+		if(billing == "") {
+			showMsgDialog("提示","请输入正确的充值单号！");
+			return ;
+		}
+	});
+	
+	/*当光标移开   输入金额为空时*/
+	$("#pay_money").blur(function() {
+		var new_money = $("#pay_money").val();
+		if(new_money == "") {
+			$("#pay_money").val(default_value);
+		}
+	});
+	/*当退格  输入金额为空时*/
+	/*$(document).keyup(function(event){ 
+		var pay_money = $("#pay_money").val();
+	    //获取当前按键的键值 
+	    //jQuery的event对象上有一个which的属性可以获得键盘按键的键值 
+		var keycode = event.which; 
+	    //处理回车的情况 
+	    if(keycode==8){ 
+	    	if(pay_money == "") {
+				$("#pay_money").val(default_value);
+			}
+	    }
+	 });  */
+
 });
 
 /**
