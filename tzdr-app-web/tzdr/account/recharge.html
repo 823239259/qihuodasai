@@ -40,8 +40,6 @@
 					var wv = plus.webview.currentWebview();
 					var money1;
 					vText=wv.money;
-					
-					
 					//添加充值金额文本框监听
 				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
@@ -95,16 +93,24 @@
       					var accountBalance=document.getElementById("accountBalance");
       					if(!mui.isnull(result.data.balance)){
       							accountBalance.innerHTML=result.data.balance;
-      						if(vText != null){
-      							var vTextlength = vText.length;
-				              var cb = vText.substring(0,vTextlength - 1);
-				              var chargeBalance = cb.replace(",","");
-				              var chargeAmount = chargeBalance - result.data.balance; 
-				              document.getElementById("inputMoney").value = chargeAmount;
-	      						changeAllBalance();
-      						}
+      							changeAllBalance();
+      							if(vText != null){
+									var vTextlength = vText.length;
+					              var cb = vText.substring(0,vTextlength - 1);
+					              var chargeBalance = cb.replace(",","");
+					              var chargeAmount = chargeBalance - result.data.balance; 
+					              document.getElementById("inputMoney").value = chargeAmount;
+								}
       					}else{
       						accountBalance.innerHTML="0.00";
+      						if(vText != null){
+									var vTextlength = vText.length;
+					              var cb = vText.substring(0,vTextlength - 1);
+					              var chargeBalance = cb.replace(",","");
+					              var chargeAmount = chargeBalance - result.data.balance; 
+					              document.getElementById("inputMoney").value = chargeAmount;
+								}
+      						changeAllBalance();
       					}
       					return;
       				},function(result){
