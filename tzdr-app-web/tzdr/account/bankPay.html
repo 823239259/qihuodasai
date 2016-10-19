@@ -106,7 +106,9 @@
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					banksPay();
 				});
+				var i = 0 ;
 				$(window).resize(function() {
+					console.log(i);
 					if(i % 2 == 0){  
 						 $("#buttomDiv").css("display","none");
 					}else{
