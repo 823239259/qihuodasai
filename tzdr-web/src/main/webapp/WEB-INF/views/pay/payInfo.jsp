@@ -128,7 +128,7 @@
 							<li><label style="color: #000; font-size: 17px;">第一步：</label><span style="color: #000;">核实收款方信息，输入支付金额！</span></li>
 							<li><label>收款人微信账号：</label><span>1369866402@1369866402</span></li>
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
-							<li><label>支付金额：</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3"></li>
+							<li><label>支付金额：</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3" onkeyup="javascript:clearNoNumber(event,this)"></li>
 							<li style="margin-top: 30px;"><label style="color: #000; font-size: 17px;">第二步：</label><span style="color: #000;">手机微信扫一扫，安全、快速到账！</span></li>
 							<li style="height: 130px;"><label>&nbsp;</label><span><img src="${ctx}/static/images/weixinpay.png"></span></li>
 							<li style="margin-top: 30px;"><label style="color: #000; font-size: 17px;">第三步：</label><span style="color: #000;">输入交易单号，确认交易。</span></li>
