@@ -125,13 +125,13 @@
 							<%-- <li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
 							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
 							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li> --%>
-							<li><label style="color: #000; font-size: 17px;">第一步：</label><span style="color: #000;">核实收款方信息，输入支付金额！</span></li>
-							<li><label>收款人微信账号：</label><span>1369866402@1369866402</span></li>
-							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
+							<li><label style="color: #fc3; font-size: 17px;">第一步：</label><span style="color: #fc3; font-size: 16px;">核实收款方信息，输入支付金额！</span></li>
+							<li><label>微信账号：</label><span>1369866402@1369866402</span></li>
+							<li><label>账号名称：</label><span>成都盈透科技有限公司</span></li>
 							<li><label>支付金额：</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3" onkeyup="javascript:clearNoNumber(event,this)"></li>
-							<li style="margin-top: 30px;"><label style="color: #000; font-size: 17px;">第二步：</label><span style="color: #000;">手机微信扫一扫，安全、快速到账！</span></li>
+							<li style="margin-top: 30px;"><label style="color: #fc3; font-size: 17px;">第二步：</label><span style="color: #fc3; font-size: 16px;">手机微信扫一扫，安全、快速到账！</span></li>
 							<li style="height: 130px;"><label>&nbsp;</label><span><img src="${ctx}/static/images/weixinpay.png"></span></li>
-							<li style="margin-top: 30px;"><label style="color: #000; font-size: 17px;">第三步：</label><span style="color: #000;">输入交易单号，确认交易。</span></li>
+							<li style="margin-top: 30px;"><label style="color: #fc3; font-size: 17px;">第三步：</label><span style="color: #fc3; font-size: 16px;">输入交易单号，确认交易。</span></li>
 							<li><label>交易单号：</label><input type="text" name="billing" value = "" id="billing" class="uc_p_ip3"></li>
 							<input type="hidden" name="default_value" value = "${money }" id="default_value">
 						</ul>
