@@ -37,11 +37,11 @@
 				<p class="titleList">第一步：核实收款方信息</p>
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">
-						<label>收款人微信账户</label>
+						<label>微信账户：</label>
 						<span>1369866402@1369866402</span>
 					</li>
 					<li class="mui-table-view-cell">
-						<label>收款人账户名称</label>
+						<label>账户名称：</label>
 						<span>成都盈透科技有限公司</span>
 					</li>
 				</ul>
@@ -53,10 +53,10 @@
 					</div>
 					
 				</div>
-				<p class="titleList">第三步：确认交易单号</p>
+				<p class="titleList">第三步：输入交易单号，确认充值</p>
 				<div class="numberCode" style="font-size: 13px;">
 					<label>交易单号</label>
-					<input  id = "chargeNum" type="number" placeholder="请输入交易单号" style="font-size: 13px;" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+					<input  id = "chargeNum" type="number"  class="mui-input-clear" placeholder="请输入交易单号" style="font-size: 13px;" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
 				</div>
 				<div class="mui-content-padded" style="font-size: 13px;">
 					<h5>温馨提示：</h5>
@@ -118,6 +118,7 @@
 						"transactionNo":chargeNum
 					},function(result){
 						mui.toast("提交成功");
+						mui.app_refresh("weixinPay.html");
 					},function(result){
 						mui.toast(result.message);
 					},paramUrl)

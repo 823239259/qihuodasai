@@ -37,7 +37,7 @@
 				 if(fiveCandlestickChartDiv != null){
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 						var option = setOptionFive(newDataFive);
-						 var option2=CandlestickVolumeChartSetoptionFive(CandlestickVolumeData);
+						 var option2=CandlestickVolumeChartSetoptionFive(CandlestickVolumeDataFive);
 						setTimeout(function(){
 							fiveCandlestickChartDiv.resize();
 							fiveCandlestickChartDiv.setOption(option);
@@ -140,8 +140,8 @@
         			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			CandlestickVolumeDataFive.time[lent+i]=str2;
-        			CandlestickVolumeDataFive.volume[lent+i]=parameters[i][VolumeSubscript];
+        			CandlestickVolumeDataFive.time.push(str2);
+        			CandlestickVolumeDataFive.volume.push(parameters[i][VolumeSubscript])
        		};
         	for(var i=0;i<CandlestickVolumeDataFive.time.length-1;i++){
         		if(CandlestickVolumeDataFive.time[i]==CandlestickVolumeDataFive.time[i+1]){
@@ -152,7 +152,7 @@
         	CandlestickVolumeDataFive.time=CandlestickVolumeDataFive.time.slice(-60);
         	CandlestickVolumeDataFive.volume=CandlestickVolumeDataFive.volume.slice(-60);
         	fiveCandlestickVolumeChart.group="group4";
-		  		var option1= CandlestickVolumeChartSetoptionFive(CandlestickVolumeData);
+		  		var option1= CandlestickVolumeChartSetoptionFive(CandlestickVolumeDataFive);
 		  		fiveCandlestickVolumeChart.resize();	
 		  		fiveCandlestickVolumeChart.setOption(option1);
 		  		fiveCandlestickVolumeChart.resize();	
