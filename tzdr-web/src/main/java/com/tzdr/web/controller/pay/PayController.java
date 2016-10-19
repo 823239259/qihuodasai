@@ -669,7 +669,7 @@ public class PayController {
 					rechargeList.setAddtime(new Date().getTime());
 					rechargeList.setUid(uid);
 					rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-					rechargeList.setActualMoney(money);
+					/*rechargeList.setActualMoney(money);*/
 					rechargeList.setMoney(money);
 					rechargeList.setTradeAccount("wechat");
 					rechargeList.setType(Constants.PayType.WECHAT_TYPE);
