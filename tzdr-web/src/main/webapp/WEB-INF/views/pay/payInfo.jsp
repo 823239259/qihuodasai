@@ -122,13 +122,17 @@
 				<form id="weixinbank" action="" method="post" target="_blank">
 					<div class="uc_olmoney" style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
 						<ul class="uc_pblist">
-							<li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
+							<%-- <li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
 							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
-							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li>
+							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li> --%>
+							<li><label style="color: #000; font-size: 17px;">第一步：</label><span style="color: #000;">核实收款方信息，输入支付金额！</span></li>
 							<li><label>收款人微信账号：</label><span>1369866402@1369866402</span></li>
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
-							<li><label>支付金额</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3"></li>
-							<li><label>交易单号</label><input type="text" name="billing" value = "" id="billing" class="uc_p_ip3"></li>
+							<li><label>支付金额：</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3"></li>
+							<li style="margin-top: 30px;"><label style="color: #000; font-size: 17px;">第二步：</label><span style="color: #000;">手机微信扫一扫，安全、快速到账！</span></li>
+							<li style="height: 130px;"><label>&nbsp;</label><span><img src="${ctx}/static/images/weixinpay.png"></span></li>
+							<li style="margin-top: 30px;"><label style="color: #000; font-size: 17px;">第三步：</label><span style="color: #000;">输入交易单号，确认交易。</span></li>
+							<li><label>交易单号：</label><input type="text" name="billing" value = "" id="billing" class="uc_p_ip3"></li>
 							<input type="hidden" name="default_value" value = "${money }" id="default_value">
 						</ul>
 						<div class="uc_paybtn uc_b_btn" style="margin-left: 165px;">
@@ -136,10 +140,10 @@
 						</div>
 					</div>
 					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;margin-top: 40px;">
-						<p style="float: left; width: 210px; color:#333;text-align: center;">
+						<%-- <p style="float: left; width: 210px; color:#333;text-align: center;">
 							<img src="${ctx}/static/images/weixinpay.png"></br>
 							<span style="display: block; margin-top: 10px;">手机微信扫一扫，安全，快捷到账！</span>
-						</p>
+						</p> --%>
 						<div style="float: left;margin-left: 30px;">
 							<h3>温馨提示：</h3>
 							<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
