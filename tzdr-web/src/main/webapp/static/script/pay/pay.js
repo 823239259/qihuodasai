@@ -378,22 +378,34 @@ $(function(){
 		$("#weixin").val($("#userAccount").text());
 	});
 	
+	/*当光标移开   输入金额为空时*/
+	/*$("#pay_money").blur(function() {
+		var new_money = $("#pay_money").val();
+		if(new_money == "") {
+			$("#pay_money").val(default_value);
+		}
+		if((/^(\+|-)?\d+$/.test(new_money)) && new_money>0){
+			showMsgDialog("提示","充值金额不能为负！");
+			return ;
+		}
+	});*/
+	
 	var default_value = $("#default_value").val();
 	var pay_money = $("#pay_money").val(default_value);
 	$(".pay_confirm").click(function() {
 		var pay_money = $("#pay_money").val();
-		var userAccount = $("#userAccount").html();
+		//var userAccount = $("#userAccount").html();
 		var billing = $("#billing").val();
 		var default_value = $("#default_value").val();
-		if(userAccount == "") {
+		/*if(userAccount == "") {
 			showMsgDialog("提示","请填写微信账号！");
 			return ;
-		}
+		}*/
 		if(pay_money=="" || isNaN(pay_money)) {
 			showMsgDialog("提示","请输入正确的充值金额！");
 			return ;
 		}
-		if(pay_money == 0){
+		if(pay_money <= 0){
 			showMsgDialog("提示","充值金额不能小于等于0");
 			return ;
 		}
@@ -415,6 +427,8 @@ $(function(){
 			success:function(result){
 				if(result.success){
 					showMsgDialog("提示","提交成功！");
+					$("#pay_money").val("");
+					$("#billing").val("");
 					return ;
 				}else{
 					showMsgDialog("提示",result.message);
@@ -422,14 +436,6 @@ $(function(){
 				}
 			}
 		});
-	});
-	
-	/*当光标移开   输入金额为空时*/
-	$("#pay_money").blur(function() {
-		var new_money = $("#pay_money").val();
-		if(new_money == "") {
-			$("#pay_money").val(default_value);
-		}
 	});
 	/*当退格  输入金额为空时*/
 	/*$(document).keyup(function(event){ 
