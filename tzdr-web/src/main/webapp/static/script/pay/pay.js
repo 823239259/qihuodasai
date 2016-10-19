@@ -393,6 +393,10 @@ $(function(){
 			showMsgDialog("提示","请输入正确的充值金额！");
 			return ;
 		}
+		if(pay_money == 0){
+			showMsgDialog("提示","充值金额不能小于等于0");
+			return ;
+		}
 		if(pay_money < default_value) {
 			showMsgDialog("提示","输入金额必须大于支付金额！");
 			return ;
@@ -401,6 +405,23 @@ $(function(){
 			showMsgDialog("提示","请输入正确的充值单号！");
 			return ;
 		}
+		$.ajax({
+			url:basepath + "/pay/wechat_transfer",
+			type:"post",
+			data:{
+				money:pay_money,
+				transactionNo:billing
+			},
+			success:function(result){
+				if(result.success){
+					showMsgDialog("提示","提交成功！");
+					return ;
+				}else{
+					showMsgDialog("提示",result.message);
+					return ;
+				}
+			}
+		});
 	});
 	
 	/*当光标移开   输入金额为空时*/

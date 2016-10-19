@@ -229,10 +229,18 @@ public class SignInController {
 		securityCodeService.saveSecurityCode(securityCode, mobile); // 保存验证码信息
 
 		Map<String, String> smsParams = new HashMap<String, String>(); // 创建短信动态参数集合
-		smsParams.put("module", "注册");
-		smsParams.put("code", randomCode);
-		if (!SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile,
-				"ihuyi.verification.signin.code.template", smsParams)) { // 判断短信发送是否成功
+		String templateKey = "ihuyi.verification.signin.code.template";
+		int channel = dataMapService.getSmsContentRegister();
+		if(channel == 3){
+			templateKey = "tzdr.alidayu.signin.code.template";
+			smsParams.put("typeName", "注册");
+			smsParams.put("code", randomCode);
+		}else{
+			smsParams.put("module", "注册");
+			smsParams.put("code", randomCode);
+		}
+		if (!SMSSender.getInstance().sendByTemplate(channel, mobile,
+				templateKey, smsParams)) { // 判断短信发送是否成功
 			jsonResult.setMessage("sendMobileCodeFail");
 			return jsonResult;
 		}

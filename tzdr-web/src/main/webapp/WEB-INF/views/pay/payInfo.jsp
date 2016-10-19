@@ -129,7 +129,7 @@
 							<li><label>收款人账号名称：</label><span>成都盈透科技有限公司</span></li>
 							<li><label>支付金额</label><input type="text" name="money" value = "" id="pay_money" class="uc_p_ip3"></li>
 							<li><label>交易单号</label><input type="text" name="billing" value = "" id="billing" class="uc_p_ip3"></li>
-							<input type="hidden" name="default_value" value = "600" id="default_value">
+							<input type="hidden" name="default_value" value = "${money }" id="default_value">
 						</ul>
 						<div class="uc_paybtn uc_b_btn" style="margin-left: 165px;">
 							<a href="javascript:void(0)" class="pay_confirm">确认充值</a>
