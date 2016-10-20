@@ -145,7 +145,10 @@
 					"money": rechargeMon
 				}, function(result) {
 					mui.toast("提交成功，我们会尽快核实处理！");
-					mui.app_refresh("bankPay.html");
+					mui.app_refresh("recharge.html");
+					setTimeout(function(){
+						mui.openWindow({url:"account.html",id:"account"});
+					},800);
 					return;
 				}, function(result) {
 					if(result.code == 2) {
