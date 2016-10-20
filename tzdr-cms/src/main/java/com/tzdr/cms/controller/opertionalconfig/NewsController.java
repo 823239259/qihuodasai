@@ -90,4 +90,16 @@ public class NewsController extends BaseCmsController<OperationalConfig>{
 		operationalConfigService.setTop(idArray, isTop);
 		return new JsonResult(MessageUtils.message("update.success"));
 	}
+	/**
+	 * 获取栏目
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/doGetProgram",method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResult doGetProgram(HttpServletRequest request,@RequestParam("type")int type){
+		JsonResult resultJson = new JsonResult(true);
+		resultJson.appendData("data", operationalConfigService.findDataOrderByNameAndType(type));
+		return resultJson;
+	}
 }

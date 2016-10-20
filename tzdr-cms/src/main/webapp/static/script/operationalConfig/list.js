@@ -116,7 +116,7 @@ $(document).ready(function(){
 			}
 	    }
 	})
-	
+	loadProgram();
 });
 	
 /**
@@ -180,7 +180,7 @@ var opConfig={
 					search_LIKE_name : $('#name_tzdrApp').val(),
 					search_EQ_deleted:false,
 					search_EQ_type:type
-				});
+				})
 			}else{
 				$('#edatagrid').datagrid('load',{
 					search_LIKE_name : $('#name').val(),
@@ -188,11 +188,70 @@ var opConfig={
 					search_EQ_type:type
 				});
 			}
-
-
+		},
+		serach:function(){
+				var dateTimeIndex = $("#releaseTime").val();
+				var dataTime = new Date();
+				var isDataTime = false;
+				if(dateTimeIndex.length > 0){
+					if(dateTimeIndex == 0){
+						dataTime = new Date(dataTime.getTime() - 1*24*60*60*1000);
+						isDataTime = true;
+					}else if(dateTimeIndex == 1){
+						dataTime = new Date(dataTime.getTime() - 3*24*60*60*1000);
+						isDataTime = true;
+					}else if(dateTimeIndex == 2){
+						dataTime = new Date(dataTime.getTime() - 7*24*60*60*1000);
+						isDataTime = true;
+					}else if(dateTimeIndex == 3){
+						dataTime.setMonth(dataTime.getMonth() - 1);
+						isDataTime = true;
+					}else if(dateTimeIndex == 4){
+						dataTime.setMonth(dataTime.getMonth() - 12);
+						isDataTime = true;
+					}
+				}
+				var date = "";
+				if(isDataTime == true){
+					date = dataTime.getFullYear()+"-"+(dataTime.getMonth()+1)+"-"+dataTime.getDate()+" 00:00:00";
+				}
+				var i = 0 ;
+				var param = {}
+				param = {"search_LIKE_name":$('#name').val(),"search_EQ_deleted":false,"search_EQ_type":3};
+				var isRelease = $("#isRelease").val();
+				if(isRelease.length > 0){
+					param["search_EQ_isRelease"] = isRelease;
+				}
+				if(date.length > 0){
+					param["search_datetime_GT_releaseTime"]=date;
+				}
+				var program = $("#program_name").val();
+				if(program.length > 0 && program != "请选择"){
+					param["search_EQ_parentConfig.id"] = program;
+				}
+				console.log(param);
+				$('#edatagrid').datagrid('load',param);
 		}
 }
-
+/**
+ * 获取栏目列表
+ */
+function loadProgram(){
+	$.ajax({
+		url:basepath + "admin/config/news/doGetProgram?type=2",
+		type:"get",
+		success:function(result){
+			var data = result.data.data;
+			var length = data.length;
+			var html = "<option valule = ''>请选择</option>";
+			for(var i = 0 ; i < length ; i++){
+				var config = data[i];
+				html+="<option value = "+config.id+">"+config.name+"</option>";
+			}
+			$("#program_name").html(html);
+		}
+	});
+}
 /**
  * 刷新网站banner缓存数据
  */

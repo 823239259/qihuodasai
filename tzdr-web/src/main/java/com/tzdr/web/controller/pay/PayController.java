@@ -1,6 +1,8 @@
 package com.tzdr.web.controller.pay;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -268,12 +270,13 @@ public class PayController {
 	 * @return
 	 */
 	@RequestMapping(value = "/pingplusplus", method = RequestMethod.POST)
-	public String pingplusplus(HttpServletRequest request) {
-		if(true)return "";
+	public JsonResult pingplusplus(HttpServletRequest request) {
+		if(true)return null;
 		//System.out.println("执行中。。。");
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		WUser user = this.payService.getUser(userSessionBean.getId());
+		JsonResult resultJson = new JsonResult(false);
 		String paymoney = request.getParameter("money");
 		String payWay = request.getParameter("payWay");
 		if (paymoney != null && Double.parseDouble(paymoney) > 0) {
@@ -302,11 +305,10 @@ public class PayController {
 				pingPPModel.setCurrency("cny");
 				pingPPModel.setOrder_no(orderNo);
 				pingPPModel.setSubject(Config.SUBJECT);
-				request.setAttribute("charge", ChargeExample.createCharge(pingPPModel).toString());
+				resultJson.appendData("data", ChargeExample.createCharge(pingPPModel).toString());
 			}
-			return "/views/pay/pingppPay";
 		}
-		return null;
+		return resultJson;
 	}
 	
 	/**
@@ -634,5 +636,48 @@ public class PayController {
 		request.setAttribute("encryptkey", bibiParams.get("encryptkey"));
 
 		return ViewConstants.PayViewJsp.BIBI_PAY_MAIN_VIEW;
+	}
+	private static Object lock_wechat_transfer = new Object();
+	/**
+	 * 微信转账确认充值
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/wechat_transfer",method =RequestMethod.POST)
+	@ResponseBody
+	public JsonResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
+		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
+				.getAttribute(Constants.TZDR_USER_SESSION);
+		JsonResult resultJson = new JsonResult(true);
+		String uid = userSessionBean.getId();
+		WUser user = wUserService.getUser(uid);
+		if(user == null){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("用户信息不存在");
+			return resultJson;
+		}
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		if(userVerified != null){
+				synchronized (lock_wechat_transfer) {
+					RechargeList rechargeLists = payService.findByTradeNo(transactionNo);
+					if(rechargeLists != null){
+						resultJson.setMessage("提交失败,重复的订单号");
+						resultJson.setSuccess(false);
+					}
+					RechargeList rechargeList  = new RechargeList();
+					rechargeList.setAccount("");
+					rechargeList.setAddtime(new Date().getTime());
+					rechargeList.setUid(uid);
+					rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+					/*rechargeList.setActualMoney(money);*/
+					rechargeList.setMoney(money);
+					rechargeList.setTradeAccount("wechat");
+					rechargeList.setType(Constants.PayType.WECHAT_TYPE);
+					rechargeList.setStatus(Constants.PayStatus.NO_PROCESSING);
+					rechargeList.setTradeNo(transactionNo);
+					payService.autoWechat(rechargeList);
+				}
+		}
+		return resultJson;
 	}
 }

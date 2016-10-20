@@ -112,11 +112,36 @@
 					<tr>
 						<td class="label right">
 							<span>名称：</span>
+							<input class="easyui-validatebox" id="name">
+							&nbsp;&nbsp;
+						</td>
+						<td class="label right">
+							<span>发布状态：</span>
+							<select id = "isRelease">
+								<option value = "">全部</option>
+								<option value = "1">已发布</option>
+								<option value = "0">未发布</option>
+							</select>
+						</td>
+						<td class="label right">
+							<span>发布时间：</span>
+							<select id = "releaseTime">
+								<option value = "">全部</option>
+								<option value = "0">一天内</option>
+								<option value = "1">三天内</option>
+								<option value = "2">一周内</option>	
+								<option value = "3">一月内</option>
+								<option value = "4">一年内</option>		
+							</select>
+						</td>
+						<td class="label right">
+							<span>栏目：</span>
+							<select id = "program_name">
+							</select>
 						</td>
 						<td>
-						<input class="easyui-validatebox" id="name">
-						&nbsp;&nbsp;
-						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="opConfig.doSearch(3)">查询</a>
+						
+						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="opConfig.serach()">查询</a>
 						</td>
 					</tr>
 				</table>				
