@@ -37,9 +37,9 @@
 <%-- <script type='text/javascript' src="${ctx}/static/script/qutrade/trade/trade.reconnect.js?v=${v}"></script> --%>
 <script type="text/javascript" src="${ctx}/static/script/qutrade/zUI.js"></script>
 <!-- 插件 -->
-<script type="text/javascript" src="${ctx}/static/script/qutrade/d3.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/qutrade/react.min.js"></script>
-<script type="text/javascript">
+<%-- <script type="text/javascript" src="${ctx}/static/script/qutrade/d3.min.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/qutrade/react.min.js"></script> --%>
+<!-- <script type="text/javascript">
 	!function(e) {
 	    if ("object" == typeof exports && "undefined" != typeof module) module.exports = e(require("react")); else if (
 	            "function" == typeof define && define.amd) define([ "react" ], e); else {
@@ -50,9 +50,15 @@
 	}(function(e) {
 	    return e.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 	});
-</script>
-<link rel="stylesheet" href="${ctx }/static/css/introjs.min.css">
+</script> -->
+<%-- <link rel="stylesheet" href="${ctx }/static/css/introjs.min.css"> --%>
 <!-- 插件 -->
+<script type="text/javascript" src="${ctx}/static/script/qutrade/highstock.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/qutrade/exporting.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/qutrade/technical-indicators.src.js"></script>
+<style>
+	.highcharts-input-group, .highcharts-legend, .highcharts-range-selector-buttons, .highcharts-button {display: none;}
+</style>
 </head>
 <body>
 <!-- 弹出层 -->
@@ -260,9 +266,21 @@
     			</div>
     		</div>
     		<div id="content2">
-    			<div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
+    			<div id="qiehuan">
+			        <ul>
+			        	<li class="carbon_time" data="0" style="color: #ffb319;">分时</li>
+			        	<li class="carbon_time" data="1">1分</li>
+			        	<li class="carbon_time" data="5">5分</li>
+			        	<li class="carbon_time" data="15">15分</li>
+			        	<li class="carbon_time" data="30">30分</li>
+			            <li class="carbon_time" data="1440">日K</li>
+			        </ul>
+    			</div>
+    			<div id="container" style="min-width: 500px; height: 460px; margin: 0 auto"></div>
+    			
+    			<!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
 			        <div id="app">
-			            <!-- http://localhost:8088/tzdr-web/static/ico/MSFT_full.json -->
+			            http://localhost:8088/tzdr-web/static/ico/MSFT_full.json
 			        </div>
 			        <div id="qiehuan">
 				        <ul>
@@ -271,10 +289,11 @@
 				            <li class="carbon_time" data="15">15分</li>
 				            <li class="carbon_time" data="5">5分</li>
 				            <li class="carbon_time" data="1" style="color: #ffb319;">1分</li>
-				            <!-- <li class="carbon_time" data="0">分时</li> -->
+				            <li class="carbon_time" data="0">分时</li>
 				        </ul>
     				</div>
-    			</div>
+    			</div> -->
+    			
     		</div>
     	</div>
     	<div class="quotation_transaction">
@@ -458,7 +477,5 @@
 	<input type="text"  id = "doSize"/>
 </div>
 </body>
-<script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script>
-<script type="text/javascript">
-</script>
+<%-- <script type="text/javascript" src="${ctx}/static/script/qutrade/bundle.min.js"></script> --%>
 </html>
