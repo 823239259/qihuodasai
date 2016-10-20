@@ -123,7 +123,7 @@
 					i++; 
 				});
 				function banksPay() {
-				var paymentMoney = document.getElementById("paymentMoney").innerText;
+				var rechargeMon=$("#rechargeMon").val();
 				var serialnum = document.getElementById("serialnum").value;
 				var abbreviation=$('input:radio[name="choiceBank"]:checked').val();
 				if(mui.isnull(serialnum)) {
@@ -136,7 +136,7 @@
 				mui.app_request('/user/pay/bank_transfer', {
 					"abbreviation": abbreviation,
 					"serialnum": serialnum,
-					"money": paymentMoney
+					"money": rechargeMon
 				}, function(result) {
 					mui.toast("提交成功，我们会尽快核实处理！");
 					mui.app_refresh("bankPay.html");

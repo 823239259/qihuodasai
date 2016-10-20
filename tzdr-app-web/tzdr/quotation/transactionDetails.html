@@ -20,12 +20,12 @@
 		<div class="mui-content">
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
-					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">分K</a>
+					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">1分</a>
 					<a class="mui-control-item " id="Five" href="#fiveCandlestickChart">5分</a>
 					<a class="mui-control-item " id="Ten" href="#TenCandlestickChart">15分</a>
 					<a class="mui-control-item " id="Three" href="#threeCandlestickChart">30分</a>
 					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
-					<a class="mui-control-item" id="TradingCenter" style="width: 4px;">交易中心</a>
+					<a class="mui-control-item" id="TradingCenter" style="width: 5px;">交易中心</a>
 					</div>
 				<div style="width: 100%;" id="tradeContentId">
 						<div class="mui-control-content  mui-active" id="TimeChart1">
@@ -135,7 +135,7 @@
 					<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
 				</div>
 				<div class="BuyDiv">
-				<div class="BuyContentLeft"><label>手数:</label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
+					<div class="BuyContentLeft"><label>手数:</label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
 				</div>
 				<div class="buyBtn">
 					<button type="button" class="mui-btn mui-col-xs-5 marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
