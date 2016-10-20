@@ -966,7 +966,8 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"tzdr/account/charge.html"
+					"tzdr/account/charge.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -1259,7 +1260,8 @@
 					"images/recharge/Transfer.png",
 					"images/recharge/bankP.png",
 					"images/recharge/jingdong.png",
-					"images/recharge/wei.png"
+					"images/recharge/wei.png",
+					"js/pingpp.js"
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",
