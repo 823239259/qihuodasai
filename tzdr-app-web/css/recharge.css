@@ -30,7 +30,7 @@ i{
 	text-align: right;
 }
 .chargeList input{
-	margin-top: -4px;;
+	margin-top: -4px;
 }
 .chargeList .mui-input-row{
 	height: 50px;
@@ -51,10 +51,10 @@ i{
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
 	color:#FFCC33;
 }
-#paymentMoney{
+.moneyIcont,#paymentMoney{
 	color:#FFCC33;
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: 600;
 }
 #buttomDiv{
 	background-color: #FFFFFF;
