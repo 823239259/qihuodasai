@@ -339,6 +339,21 @@
     </div>
 </div>
 </div>
+<div style="display:none;">
+	<a href="http://www.vs.com/" >都城投资</a><a href="http://www.vs.com/" >投资达人</a>
+	<a href="http://www.vs.com/" >外盘期货公司</a><a href="http://www.vs.com/" >国际期货开户</a>
+	<a href="http://www.vs.com/" >国际期货公司</a><a href="http://www.vs.com/" >外盘期货交易模拟软件</a>
+	<a href="http://www.vs.com/" >外盘期货</a><a href="http://www.vs.com/" >期货</a>
+	<a href="http://www.vs.com/" >期货交易</a><a href="http://www.vs.com/" >股指期货</a>
+	<a href="http://www.vs.com/" >成都期货</a><a href="http://www.vs.com/" >维胜</a>
+	<a href="http://www.vs.com/" >直达期货</a><a href="http://www.vs.com/" >横华期货</a>
+	<a href="http://www.vs.com/" >高盛期货</a><a href="http://www.vs.com/" >期权</a>
+	<a href="http://www.vs.com/" >恒指期货</a><a href="http://www.vs.com/" >富时a50</a>
+	<a href="http://www.vs.com/" >国际原油</a><a href="http://www.vs.com/" >外盘期货行情</a>
+	<a href="http://www.vs.com/" >黄金行情</a><a href="http://www.vs.com/" >期货行情</a>
+	<a href="http://www.vs.com/" >股票资讯</a><a href="http://www.vs.com/" >期货开户</a>
+	<a href="http://www.vs.com/" >期货模拟</a><a href="http://www.vs.com/" >期货开户云</a>
+</div>
 <input type= "hidden" id = "dqCommodNo"/>
 <!-- footer -->
 <%@include file="../common/footer.jsp"%>

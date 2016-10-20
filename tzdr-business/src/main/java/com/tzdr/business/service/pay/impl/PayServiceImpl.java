@@ -26,6 +26,7 @@ import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.config.enums.TradeStatus;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.pay.UserFundService;
+import com.tzdr.business.service.recharge.RechargeListService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.bbpay.Bibipay;
@@ -45,6 +46,7 @@ import com.tzdr.common.utils.BigDecimalUtils;
 import com.tzdr.common.utils.DateUtils;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.StringCodeUtils;
+import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.dao.pay.PayDao;
 import com.tzdr.domain.web.entity.RechargeList;
@@ -75,6 +77,8 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 	private WUserService wUserService;
 	@Autowired
 	private UserFundService userFundService;
+	@Autowired
+	private RechargeListService rechargeListService;
 	
 	@Override
 	public UserVerified findByUserId(String userId) {
@@ -553,5 +557,32 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 			}
 		}
 		return userId;
+	}
+	/**
+	 * 微信自动充值  保存记录
+	 * @param charge
+	 */
+	public void  autoWechat(RechargeList charge){
+		//生成订单号
+		String 	orderId=this.getRandomStr(20);
+		charge.setAddtime(Dates.getCurrentLongDate());
+		charge.setNo(orderId);
+		//匹配成功 直接充值
+		if (charge.getStatus()==TypeConvert.RECHARGE_LIST_PAYS_STATUS_SUCCESS){
+			charge.setOktime(Dates.getCurrentLongDate());
+			
+			this.getEntityDao().save(charge);
+			this.rechargeListService.addUpdateRechargeList(charge,
+					TypeConvert.USER_FUND_C_TYPE_RECHARGE,
+					TypeConvert.payRemark(TypeConvert.SYS_TYPE_WECHAT_ACCOUNTS_NAME, charge.getActualMoney()));
+			return ;
+			
+		}
+		
+		this.getEntityDao().save(charge);
+	}
+	@Override
+	public RechargeList findByTradeNo(String tradeNo) {
+		return getEntityDao().findByTradeNo(tradeNo);
 	}
 }

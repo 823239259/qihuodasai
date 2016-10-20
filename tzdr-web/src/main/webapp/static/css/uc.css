@@ -67,8 +67,8 @@ ul,li,ol,i,em { list-style: none; font-style: normal;}
 .uc_paymoney {  width: 726px; height: auto; margin: 20px; padding:0 10px 40px; border: 1px solid #eff2f7; }
 .uc_pblist { width: 100%; height:auto; padding: 10px 0 0;}
 .uc_pblist li,.uc_b_money li { display: block; width: 100%; height: 35px; font-size: 0;  margin-bottom: 12px; position: relative;}
-.uc_pblist li label,.uc_b_money li label { display: inline-block; width: 145px; text-align: right; font-size: 15px; color: #666; vertical-align: middle; margin-right: 20px;}
-.uc_pblist li span { display: inline-block; width: auto; height: 35px; line-height: 35px; vertical-align: middle; font-size: 15px; color: #666; font-family: "宋体";}
+.uc_pblist li label,.uc_b_money li label { display: inline-block; width: 145px; text-align: right; font-size: 14px; color: #666; vertical-align: middle; margin-right: 20px;}
+.uc_pblist li span { display: inline-block; width: auto; height: 35px; line-height: 35px; vertical-align: middle; font-size: 14px; color: #666; font-family: "宋体";}
 .uc_pblist li span i { font-size: 24px; font-family: "微软雅黑"; color: #fc3; padding-right: 10px; line-height: 12px;}
 .uc_pblist li input,.uc_b_money li input { height: 33px; line-height: 33px\9; *line-height:33px; border: 1px solid #e5e5e5; border-top: 1px solid #d3d3d3; font-size: 15px; padding: 0 10px; outline: none; vertical-align: middle; margin-right: 10px; font-size:16px; font-family: "Arial"; color: #333; *line-height: 33px; background: none; }
 .uc_pblist li input:focus { border: 1px solid #0090c6;}

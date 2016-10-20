@@ -190,4 +190,15 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @return
 	 */
 	public Double  getUserDayCharges(String uid,String vmid);
+	/**
+	 * 微信充值  保存记录
+	 * @param charge
+	 */
+	public void  autoWechat(RechargeList charge);
+	/**
+	 * 根据第三方流水号查询
+	 * @param tradeNo
+	 * @return
+	 */
+	public RechargeList findByTradeNo(String tradeNo);
 }
