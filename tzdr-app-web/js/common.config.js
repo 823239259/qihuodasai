@@ -7,7 +7,7 @@ var marketPassword = "";
  * 交易配置配置
  */
 var TradeConfig = {
-	TradeSocketUrl:"ws://socket.vs.com:6060"
+	TradeSocketUrl:"ws://trade.vs.com:6060"
 
 }
 /**
