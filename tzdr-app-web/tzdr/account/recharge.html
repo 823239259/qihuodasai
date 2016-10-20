@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>我要充值</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <link rel="stylesheet" href="../../css/recharge.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">我要充值</h1>		
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+			<ul class="rechageList">
+				<li>
+					<label>账户余额：</label>
+					<span class="yellowFont"><i id="accountBalance">0</i>元</span>
+				</li>
+				<li>
+					<label>充值金额：</label>
+					<input type="text" placeholder="请输入充值金额"   class="mui-input" oninput="changeAllBalance()" id="inputMoney"/>
+				</li>
+			</ul>
+			<div class="ac_btn">
+				<button type="button" id="recharge-btn" class="mui-btn mui-btn-block lg-btnlogin">立即充值</button>
+			</div>
+			<p class="textAlignRightP">充值后的余额：<span class="yellowFont"><i id="allBalance">0</i>元</span></p>
+		</div>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+					tzdr.init.initHearListener();
+					var wv = plus.webview.currentWebview();
+					var money1;
+					vText=wv.money;
+					//添加充值金额文本框监听
+				document.getElementById("inputMoney").addEventListener('input', function() {
+					if(this.value && !Number(this.value)) { //非数字赋值空
+						var _length = this.value.length;
+						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+						return;
+					} else {
+						var _length = this.value.length;
+						var _index = this.value.lastIndexOf('.');
+						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
+						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+						return;
+					}
+				});
+				//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
+				function moneyHandle(_value, _obj) {
+					if(_value && !Number(_value)) { //非数字赋值空
+						var _length = _value.length;
+						moneyHandle(_value.substr(0, _length - 1), _obj);
+					} else {
+						_obj.value = _value
+						return;
+					}
+				}
+				
+					document.getElementById("recharge-btn").addEventListener("tap",function(){
+						checkMoney(money1,wv)
+					});
+					
+				document.getElementById("inputMoney").addEventListener('input', function() {
+					if(this.value && !Number(this.value)) { //非数字赋值空
+						var _length = this.value.length;
+						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+						return;
+					} else {
+						var _length = this.value.length;
+						var _index = this.value.lastIndexOf('.');
+						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
+						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+						return;
+					}
+				});	
+					
+				//获取用户余额
+				var paramUrl={
+					url:"../login/login.html"
+				}
+      			mui.app_request('/user/getbalancerate',{
+      				"businessType":4 
+      			},function(result){
+      					var accountBalance=document.getElementById("accountBalance");
+      					if(!mui.isnull(result.data.balance)){
+      							accountBalance.innerHTML=result.data.balance;
+      							changeAllBalance();
+      							if(vText != null){
+									var vTextlength = vText.length;
+					              var cb = vText.substring(0,vTextlength - 1);
+					              var chargeBalance = cb.replace(",","");
+					              var chargeAmount = chargeBalance - result.data.balance; 
+					              document.getElementById("inputMoney").value = chargeAmount;
+								}
+      					}else{
+      						accountBalance.innerHTML="0.00";
+      						if(vText != null){
+									var vTextlength = vText.length;
+					              var cb = vText.substring(0,vTextlength - 1);
+					              var chargeBalance = cb.replace(",","");
+					              var chargeAmount = chargeBalance - result.data.balance; 
+					              document.getElementById("inputMoney").value = chargeAmount;
+								}
+      						changeAllBalance();
+      					}
+      					return;
+      				},function(result){
+      					return;
+      			},paramUrl);
+					
+			
+			})
+			/*
+			 * 修改充值后的余额
+			 * */
+			function changeAllBalance(){
+				var accountBalance=Number($("#accountBalance").text());
+				var inputMoney=Number($("#inputMoney").val());
+				$("#allBalance").text(accountBalance+inputMoney);
+			}
+			/*
+			 * 立即充值
+			 * */
+			function checkMoney(money1,wv){
+				var money=Number($("#inputMoney").val());
+				if(mui.isnull(money)) {
+					mui.toast("充值金额不能为空");
+					return;  
+				}
+				if(money1>money){
+					mui.toast("充值金额不能小于充值金额");
+					return; 
+				}
+				mui.openWindow({
+					url:"choicePayment.html",
+					id:"choicePayment.html",
+					extras:{
+						  money : money,
+					      backId:wv.backId
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

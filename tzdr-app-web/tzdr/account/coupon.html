@@ -31,7 +31,6 @@
 		  mui.plusReady(function(){
 		  	//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-  			//tzdr.init.initButtomListener();
   				
 		  	//获取优惠券信息
 		  	getCoupons();
@@ -40,6 +39,9 @@
 		  
 		  
 		  function useCoupons(id){
+		  	var paramUrl={
+				url:"../login/login.html"
+			}
 		  	mui.app_request("/user/coupon/employ",{
 		  		"id":id
 		  	},function(result){
@@ -67,12 +69,14 @@
 		  			return;
 		  		}
 		  		
-		  	})
+		  	},paramUrl)
 		  };
 		  
 		    
 		  function	getCoupons(){
-		  	 
+		  	 	var paramUrl={
+					url:"../login/login.html"
+				}
 		  	mui.app_request("/user/coupon/list",{},function(result){
 		  		if(!mui.isnull(result.data.couponList)){ 
 		  			c_list=result.data.couponList;
@@ -101,7 +105,7 @@
 		  	},function(result){
 		  		mui.toast(result.message);
 		  		return;
-		  	}); 
+		  	},paramUrl); 
 		  };
 		  
 		  	

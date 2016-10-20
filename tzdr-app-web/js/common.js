@@ -39,7 +39,7 @@
 	
 	
 	// 需要认证用户身份的请求调用接口
-	mui.app_request= function (func_url,params,onSuccess,onError){
+	mui.app_request= function (func_url,params,onSuccess,onError,paramUrl){
 		if(mui.checkNetwork()==false){ 
 			mui.toast("当前网络不给力，请稍后再试"); 
 			return;
@@ -49,7 +49,6 @@
 		var onError = arguments[3]?arguments[3]:function(){};
 		var func_url = tzdr.constants.api_domain + func_url;
 		//http://api.dktai.com/+
-		
 		mui.ajax(func_url,{  
 			headers:{
 				'token':mui.cacheUser.get(tzdr.constants.user_token),
@@ -69,18 +68,18 @@
 			    else
 			    {
 			    	if (data.code==-1){
-						mui.cacheUser.clearCachePages(true); 
-						mui.cacheUser.clear();
-			    		mui.toast("认证失败，请重新登录！");    
-			    		mui.openWindow(mui.app_filePath("tzdr/login/login.html"),"login");
-						return;
+			    		if(paramUrl != undefined || paramUrl !=null || paramUrl !=""){
+			    			mui.cacheUser.clearCachePages(true); 
+							mui.cacheUser.clear();
+				    		mui.toast("认证失败，请重新登录！");    
+				    		mui.openWindow({url: params.url,id:"login"});
+							return;
+			    		}
 			    	}
 			    	onError(data);
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
-//				console.log(JSON.stringify(errorThrown));
-				 //plus.nativeUI.closeWaiting();
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -222,11 +221,8 @@
 	 * @param {Object} file_url 文件及文件所在位置    如：tzdr/login/login.html
 	 */
 	mui.app_filePath=function(file_url){
-		
-		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
-		console.log("1"+plus.io.convertLocalFileSystemURL('_www/'+file_url))
-		console.log("2"+plus.io.convertAbsoluteFileSystem(path));
-		var filePath = plus.io.convertAbsoluteFileSystem(path);
+//		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
+//		var filePath = plus.io.convertAbsoluteFileSystem(path);
 		return filePath;
 	}
 	
@@ -264,8 +260,8 @@ var tzdr = {
 		//接口域名地址
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
 
-//		api_domain:"http://test.api.vs.com/",
-		api_domain:"http://api.vs.com/",
+		api_domain:"http://test.api.vs.com/",
+//		api_domain:"http://api.vs.com/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token
@@ -387,10 +383,10 @@ var tzdr = {
 							if(a){
 								mui.app_refresh('account');
 							}
-							mui.openWindow({url:mui.app_filePath("tzdr/account/account.html"),id:'account'}); 
+							mui.openWindow({url:data.account,id:'account'}); 
 							return;
 						}
-						mui.openWindow(mui.app_filePath("tzdr/account/accountno.html"),"accountno");
+						mui.openWindow({url:data.accountno,id:"accountno"});
 				});
 				document.getElementById("scheme").addEventListener("tap",function(){
 					if (mui.cacheUser.isLogin()){
@@ -398,10 +394,10 @@ var tzdr = {
 					    if(s){
 							mui.app_refresh('scheme');
 						}
-						mui.openWindow({url:mui.app_filePath("tzdr/scheme.html"),id:"scheme"}); 
+						mui.openWindow({url:data.scheme,id:"scheme"}); 
 						return;
 					}
-					mui.openWindow({url:mui.app_filePath("tzdr/future/listrg.html"),id:"noscheme"});
+					mui.openWindow({url:data.listrg,id:"noscheme"});
 					
 				});
 				document.getElementById("product").addEventListener("tap",function(){
@@ -409,7 +405,7 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('home');  
 					}
-					mui.openWindow({url:mui.app_filePath("home.html"),id:"home"});
+					mui.openWindow({url:data.home,id:"home"});
 				});
 			
 				document.getElementById("quotationMain").addEventListener("tap",function(){
@@ -417,7 +413,7 @@ var tzdr = {
 					if(p){
 						mui.app_refresh('quotationMain');  
 					}
-					mui.openWindow({url:mui.app_filePath("tzdr/quotation/quotationMain.html"),id:"quotationMain"});
+					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
 				});
 			
 		}
@@ -592,4 +588,43 @@ tzdr.kuaiqiangshou=function(obj){
 			}
 		});
 }
-
+function initBottom(data){
+	document.getElementById("account").addEventListener("tap",function(){
+						if (mui.cacheUser.isLogin()){
+							var a=plus.webview.getWebviewById("account");
+							if(a){
+								mui.app_refresh('account');
+							}
+							mui.openWindow({url:data.account,id:'account'}); 
+							return;
+						}
+						mui.openWindow({url:data.accountno,id:"accountno"});
+				});
+				document.getElementById("scheme").addEventListener("tap",function(){
+					if (mui.cacheUser.isLogin()){
+						var s=plus.webview.getWebviewById("scheme");
+					    if(s){
+							mui.app_refresh('scheme');
+						}
+						mui.openWindow({url:data.scheme,id:"scheme"}); 
+						return;
+					}
+					mui.openWindow({url:data.listrg,id:"noscheme"});
+					
+				});
+				document.getElementById("product").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("home");
+					if(p){
+						mui.app_refresh('home');  
+					}
+					mui.openWindow({url:data.home,id:"home"});
+				});
+			
+				document.getElementById("quotationMain").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("quotationMain");
+					if(p){
+						mui.app_refresh('quotationMain');  
+					}
+					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
+				});
+	}

@@ -13,8 +13,9 @@
 		var paramListAll=null;
 		mui.plusReady(function(){
 			//初始化监听头部和底部事件
-  			//tzdr.init.initButtomListener();
-  			
+  			var paramUrl={
+				url:"../login/login.html"
+			}
   			//获取恒指期货数据
   			mui.app_request("/ftrade/params",{
   				"businessType":9
@@ -67,7 +68,7 @@
   			},function(result){
   				mui.toast(result.message);
   				return;
-  			})
+  			},paramUrl)
   			
   			document.getElementById("back").addEventListener("tap",function(){
     			mui.back();

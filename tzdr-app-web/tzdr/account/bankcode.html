@@ -66,7 +66,9 @@
 //  			mui('#quitaccc').popover('show');         
     			  add_bank();
     		});
-    		
+    		var paramUrl={
+				url:"../login/login.html"
+			}
     		mui.app_request("/user/getbalancerate",{
     			"businessType":4 
     		},function(result){
@@ -83,7 +85,7 @@
     			return;
     		},function(result){
     			return;
-    		});
+    		},paramUrl);
     		//获取已绑定银行卡列表
     		mui.app_request('user/withdraw/bank_list',{},function(result){
     			if(!mui.isnull(result.data)){
@@ -116,7 +118,7 @@
     				mui.toast("用户信息不存在！");
     				return;
     			}
-    		});
+    		},paramUrl);
     		//获取系统中支持提现的银行列表
     		mui.app_request('user/withdraw/support_banks',{},function(result){
     					
@@ -135,7 +137,7 @@
     				mui.toast("获取失败");
     				return;
     			}
-    		});
+    		},paramUrl);
     		// 监听确定事件
 	    	mui('body').on('tap', '.mui-popover-action li>a', function() {
 				var a = this,
@@ -170,6 +172,9 @@
 		
 		
 		function changebank(li){
+			var paramUrl={
+				url:"../login/login.html"
+			}
 			var ul=li.parentNode;
 			var spans=ul.getElementsByClassName("mui-icon mui-icon-checkmarkempty");
 			if(spans.length>0){
@@ -181,8 +186,6 @@
 				if(i==0){
 					id=objs[i].getAttribute("id");
 				}
-				
-				
 			 	if(i==objs.length-1){
 			 		var className=objs[i].getAttribute("class");
 			 		if(className=="mui-icon mui-icon-checkmarkempty"){
@@ -207,13 +210,15 @@
 					mui.toast("银行卡不存在");
 					return;
 				}
-			})
+			},paramUrl)
 		};
 		
 		
 		
 		function deletebank(id){
-			
+			var paramUrl={
+				url:"../login/login.html"
+			}
 			mui.app_request("/user/withdraw/del_bank",{
 				"bankId":id
 			},function(result){
@@ -223,7 +228,7 @@
 			},function(result){
 				mui.toast(result.message);
 				return;
-			})
+			},paramUrl)
 		};
 		var bankNameName;
 		var bank_list;
@@ -283,6 +288,9 @@
 		
 		
 		function sendCardMessage(bank_list,card,city,detailCity){
+			var paramUrl={
+				url:"../login/login.html"
+			}
 			mui.app_request("/user/withdraw/add_bank",{
 				"bank":bank_list,
 				"prov":city,
@@ -312,7 +320,7 @@
 					mui.toast("系统繁忙，请稍后再试！");
 					return;
 				}
-			});
+			},paramUrl);
 		}
 		/**/
 		function add_bank_list(bank){
