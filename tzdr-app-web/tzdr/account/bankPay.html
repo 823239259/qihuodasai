@@ -47,6 +47,12 @@
 		</header>
 		<div class="mui-content">
 			<p class="ac_bankpromt">温馨提示：如您已开通网银，请尽量选择在线充值，如您是到柜台转账请尽量选择相同银行转账，这样可以快速及时到账！！</p>
+			<div class="mui-input-group">
+				<div class="mui-input-row" style="height: 50px;line-height: 50px; position: relative;">
+					<label style="width: 38%;line-height: 50px;">转账金额:<i class="yellowFont" style="position: absolute;right:63%;">￥</i></label>
+					<input type="text" id="rechargeMon"  style="width: 62%;line-height: 45px;margin-top: 3px;text-align: left;color:#FFCC33" placeholder="请输入转账金额" />
+				</div>
+			</div>
 			<div style="padding:5px 0px 0px 15px; line-height: 30px;">转账到：</div>
 			<div style="margin-top: -15px;">
 				<form class="mui-input-group bankList">
@@ -93,8 +99,8 @@
 				</li>
 			</ul>
 			<div id="buttomDiv">
-				<span>支付：<i id="paymentMoney"></i><i class="yellowFont">元</i></span>
-				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
+				<span>支付：<i class="yellowFont">￥</i><i id="paymentMoney"></i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即转账</button>
 			</div>
 		</div>
 		<script>
@@ -102,7 +108,8 @@
 			mui.plusReady(function(){
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
-				paymentMoney.innerText=wv.money;
+				paymentMoney.innerText=wv.money.toFixed(2);
+				$("#rechargeMon").val(wv.money);
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					banksPay();
 				});
@@ -150,6 +157,43 @@
 					}
 				},paramUrl)
 			}
+				document.getElementById("rechargeMon").addEventListener('input', function() {
+					if(this.value && !Number(this.value)) { //非数字赋值空
+						var _length = this.value.length;
+						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+						changeAllBalance();
+						return;
+					} else {
+						var _length = this.value.length;
+						var _index = this.value.lastIndexOf('.');
+						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
+						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+						changeAllBalance();
+						return;
+					}
+					
+				});
+				//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
+				function moneyHandle(_value, _obj) {
+					if(_value && !Number(_value)) { //非数字赋值空
+						var _length = _value.length;
+						moneyHandle(_value.substr(0, _length - 1), _obj);
+					} else {
+						_obj.value = _value
+						return;
+					}
+				};
+				function changeAllBalance(){
+					var rechargeMon=$("#rechargeMon").val();
+					if(rechargeMon>=wv.money){
+						 document.getElementById("paymentMoney").innerText=rechargeMon;
+					}else {
+						mui.toast("输入金额必须大于当前金额");
+						document.getElementById("paymentMoney").innerText=wv.money;
+						
+					}
+					
+				}
 			});
 		</script>
 	</body>
