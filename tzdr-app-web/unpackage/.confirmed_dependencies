@@ -722,7 +722,8 @@
 			"tzdr/login/login.html",
 			"tzdr/future/listrg.html",
 			"tzdr/future/paysuc.html",
-			"tzdr/account/charge.html"
+			"tzdr/account/charge.html",
+			"tzdr/account/recharge.html"
 		],
 		"priority": 0
 	},
@@ -982,7 +983,10 @@
 			"js/candlestick.config.js",
 			"js/timechart.config.js",
 			"images/0.0.png",
-			"js/FiveTestCandlestickChart.js"
+			"js/FiveTestCandlestickChart.js",
+			"js/tenChart.config.js",
+			"js/fiveChart.config.js",
+			"js/threeChart.config.js"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
@@ -1113,7 +1117,12 @@
 	"tzdr/account/recharge.html": {
 		"resources": [
 			"css/recharge.css",
-			"js/jquery-1.11.3.js"
+			"js/jquery-1.11.3.js",
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		],
 		"refer": [
 			"tzdr/account/choicePayment.html"
@@ -1132,7 +1141,11 @@
 			"js/jquery-1.11.3.js",
 			"css/recharge.css",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"images/recharge/Transfer.png",
+			"images/recharge/bankP.png",
+			"js/pingpp.js",
+			"images/recharge/wei.png"
 		]
 	},
 	"tzdr/account/weixinPay.html": {
@@ -1146,7 +1159,14 @@
 			"images/bank_01.gif",
 			"images/bank_04.gif",
 			"images/bank_03.gif",
-			"images/bank_02.gif"
+			"images/bank_02.gif",
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"css/recharge.css",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
 		]
 	}
 }
