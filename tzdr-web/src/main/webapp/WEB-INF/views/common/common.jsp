@@ -23,6 +23,7 @@
 	long vtime = new Date().getTime();
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
+<c:set var="uid" value="<%=userId%>"></c:set>
 <c:set var="v" value="<%= vtime %>"></c:set>
 <c:set var="sfb" value="<%=stockForumBasePath%>"></c:set>
 <c:set var="iosf" value="<%=isOpanStockForum%>"></c:set>
@@ -45,6 +46,7 @@ _atrk_opts = { atrk_acct:"lhQPn1QolK10WR", domain:"vs.com",dynamic: true};
 <!-- <!— End Alexa Certify Javascript —> -->
 <script type="text/javascript">
 	var basepath='${ctx}'+"/";
+	var uid = '${uid}';
 	var isLoginSSO=Boolean("${sessionScope.tzdrUser}");
 	var sc_width = $(window).height() ;
 	function loadjscssfile(filename,filetype){

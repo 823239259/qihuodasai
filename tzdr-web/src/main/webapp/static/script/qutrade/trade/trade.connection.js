@@ -143,7 +143,7 @@ function initLoad() {
 			reconnect();
 		}else{
 			if(anotherPlace && loginFail){
-				tipAlert("你的账号已在另一处登录,如不是本人操作,请联系客服");
+				tipAlert("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008");
 				clearLocalCacheData();
 				loginOut();
 			}
