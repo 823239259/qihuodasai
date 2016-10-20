@@ -105,8 +105,11 @@ public class SmsController {
 			smsChannel = ((DataConstant.SEND_SMS_TYPE_REGIST == type) ? dataMapService.getSmsContentRegister() : dataMapService.getSmsContentOthers());
 			
 			template = smsChannel == 3 ? "tzdr.alidayu.signin.code.template" : "ihuyi.verification.signin.code.template";
-			
-			smsParams.put("module",DataConstant.SEND_SMS_TYPE_REGIST_MODULE);
+			if(smsChannel == 3){
+				smsParams.put("typeName",DataConstant.SEND_SMS_TYPE_REGIST_MODULE);
+			}else{
+				smsParams.put("module",DataConstant.SEND_SMS_TYPE_REGIST_MODULE);
+			}
 			DataConstant.SMS_LIMIT_MAPS.put(mobile,sendTimes+DataConstant.ONE);
 		}
 		
@@ -117,7 +120,11 @@ public class SmsController {
 			}	
 			// 获取短信通道
 			smsChannel = ((DataConstant.SEND_SMS_TYPE_REGIST == type) ? dataMapService.getSmsContentRegister() : dataMapService.getSmsContentOthers());
-			smsParams.put("module", DataConstant.SEND_SMS_TYPE_FORGET_PWD_MODULE);
+			if(smsChannel == 3){
+				smsParams.put("typeName",DataConstant.SEND_SMS_TYPE_REGIST_MODULE);
+			}else{
+				smsParams.put("module", DataConstant.SEND_SMS_TYPE_FORGET_PWD_MODULE);
+			}
 		}
 		
 		if (CollectionUtils.isEmpty(smsParams)){
