@@ -38,8 +38,8 @@
 			mui.plusReady(function(){
 					tzdr.init.initHearListener();
 					var wv = plus.webview.currentWebview();
-					var money1;
 					vText=wv.money;
+					var moneyAll=0;
 					//添加充值金额文本框监听
 				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
@@ -69,7 +69,7 @@
 				}
 				
 					document.getElementById("recharge-btn").addEventListener("tap",function(){
-						checkMoney(money1,wv)
+						checkMoney(moneyAll,wv)
 					});
 					
 				//获取用户余额
@@ -88,6 +88,7 @@
 					              var cb = vText.substring(0,vTextlength - 1);
 					              var chargeBalance = cb.replace(",","");
 					              var chargeAmount = chargeBalance - result.data.balance; 
+					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
 								}
       					}else{
@@ -97,6 +98,7 @@
 					              var cb = vText.substring(0,vTextlength - 1);
 					              var chargeBalance = cb.replace(",","");
 					              var chargeAmount = chargeBalance - result.data.balance; 
+					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
 								}
       						changeAllBalance();
@@ -125,8 +127,8 @@
 					mui.toast("充值金额不能为空");
 					return;  
 				}
-				if(money1>money){
-					mui.toast("充值金额不能小于充值金额");
+				if(money1 > money){
+					mui.toast("充值金额不低于"+money1+"元");
 					return; 
 				}
 				mui.openWindow({
