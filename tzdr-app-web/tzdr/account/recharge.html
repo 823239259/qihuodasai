@@ -25,7 +25,7 @@
 				</li>
 				<li>
 					<label>充值金额：</label>
-					<input type="text" placeholder="请输入充值金额"   class="mui-input" oninput="changeAllBalance()" id="inputMoney"/>
+					<input type="text" placeholder="请输入充值金额"   class="mui-input"  id="inputMoney"/>
 				</li>
 			</ul>
 			<div class="ac_btn">
@@ -45,14 +45,17 @@
 					if(this.value && !Number(this.value)) { //非数字赋值空
 						var _length = this.value.length;
 						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+						changeAllBalance();
 						return;
 					} else {
 						var _length = this.value.length;
 						var _index = this.value.lastIndexOf('.');
 						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
 						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+						changeAllBalance();
 						return;
 					}
+					
 				});
 				//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
 				function moneyHandle(_value, _obj) {
@@ -68,20 +71,6 @@
 					document.getElementById("recharge-btn").addEventListener("tap",function(){
 						checkMoney(money1,wv)
 					});
-					
-				document.getElementById("inputMoney").addEventListener('input', function() {
-					if(this.value && !Number(this.value)) { //非数字赋值空
-						var _length = this.value.length;
-						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
-						return;
-					} else {
-						var _length = this.value.length;
-						var _index = this.value.lastIndexOf('.');
-						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
-						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
-						return;
-					}
-				});	
 					
 				//获取用户余额
 				var paramUrl={

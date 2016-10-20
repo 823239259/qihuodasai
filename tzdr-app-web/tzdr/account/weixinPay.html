@@ -71,8 +71,8 @@
 				</div>
 			</div>
 			<div id="buttomDiv">
-				<span>支付：<i id="paymentMoney"></i><i class="yellowFont">元</i></span>
-				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
+				<span>支付：<i class="yellowFont">￥</i><i id="paymentMoney"></i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即充值</button>
 			</div>
 		</div>
 		<script>
@@ -80,7 +80,7 @@
 			mui.plusReady(function(){
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
-				paymentMoney.innerText=wv.money;
+				paymentMoney.innerText=wv.money.toFixed(2);
 				var i=0;
 				$(window).resize(function() {
 					if(i % 2 == 0){  
@@ -110,7 +110,7 @@
 						url:"../login/login.html"
 					}
 					if(mui.isnull(chargeNum)) {
-						mui.toast("请输入交易单号");
+						mui.toast("交易单号不能为空，且不能含有字符");
 						return;
 					}
 					mui.app_request("/user/pay/wechat_transfer",{
