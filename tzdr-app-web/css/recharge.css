@@ -30,11 +30,11 @@ i{
 	text-align: right;
 }
 .chargeList input{
-	margin-top: 10px;;
+	margin-top: -4px;;
 }
 .chargeList .mui-input-row{
-	height: 80px;
-	line-height: 80px;
+	height: 50px;
+	line-height: 50px;
 }
 .chargeList .mui-input-row label{
 	width: 50%;
@@ -44,6 +44,8 @@ i{
 	margin-left: 5px;
 }
 .chargeList .mui-input-row label img{
+	width: 30px;
+	height: auto;
 	vertical-align: middle;
 }
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{

@@ -29,7 +29,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
-			<h1 class="mui-title">微信支付</h1>		
+			<h1 class="mui-title">微信转账</h1>		
 			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 		</header>
 		<div class="mui-content weixinPayPage">
@@ -90,10 +90,10 @@
 					}
 					i++; 
 				});
-				
-				var leftWidth=window.innerWidth/2-145;
 				$("#weixinpayBack").css({"height":window.innerHeight+"px","background-color":"rgba(0, 0, 0, 0.2)"});
+				var leftWidth=window.innerWidth/2-window.innerWidth*0.4;
 				$("#weixinpayBack img").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});
+				
 					document.getElementById("weixinPayCode").addEventListener("tap",function(){
 						$("#weixinpayBack").css("display","block");
 				});
