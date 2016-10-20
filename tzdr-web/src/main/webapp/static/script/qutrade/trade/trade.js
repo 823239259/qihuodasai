@@ -1002,7 +1002,10 @@ function addBindsss(cls){
 		$("#more_account").css("display","none");
 	});
 }
-$(function(){
+/**
+ * 加载用户的账户信息
+ */
+function loadOperateLogin(){
 	$.ajax({
 		url:basepath+"/user/operateLogin",
 		type:"get",
@@ -1023,6 +1026,11 @@ $(function(){
 			}
 		}
 	});
+}
+$(function(){
+	if(uid != undefined && uid.length > 0 ){
+		loadOperateLogin();
+	}
 	$("#quotation_account").mouseover(function(){
 		$("#more_account").css("display","block");
 	});
@@ -1080,6 +1088,7 @@ $(function(){
 		obj.click();
 		setLocalCacheSelect(contractCode);
 		clearRightData();
+		updateRight(localQoute);
 	}
 	$("#select_commodity").change(function(){
 		var contractCode = $("#select_commodity").val();

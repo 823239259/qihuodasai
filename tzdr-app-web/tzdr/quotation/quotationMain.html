@@ -161,7 +161,15 @@
 			mui.init();
 			mui.plusReady(function(){
 				//链接socket;
-				tzdr.init.initButtomListener(true);
+				var dataUrl={
+	  				home:"../../home.html",
+	  				account:"../account/account.html",
+	  				accountno:"../account/accountno.html",
+	  				scheme:"../scheme.html",
+	  				listrg:"../future/listrg.html",
+	  				quotationMain:"quotationMain.html",
+	  			}
+				initBottom(dataUrl);
 				var url = marketSocketUrl;
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){

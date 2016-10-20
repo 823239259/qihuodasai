@@ -32,6 +32,9 @@
 			if (mui.isnull(nid)){
 				return;
 			}
+			var paramUrl={
+				url:"../login/login.html"
+			}
 			// 请求获取详情信息
 			mui.app_request('news/detail',
 			{nid:nid},
@@ -39,9 +42,10 @@
 				document.getElementById('newstitle').innerHTML=result.data.title;
 				document.getElementById('issueDate').innerHTML=result.data.issueDate;
 				document.getElementById('content').innerHTML=result.data.content;
+				console.log(content);
 			},function(error){
 				
-			});
+			},paramUrl);
 		}); 
 		
 			

@@ -19,7 +19,6 @@
 	        <div class="app_img3">
 	        <a href="javascript:void(0);" id="partake"><img src="images/app_an.png" width="150px"></a>	        	
 	    </div>
-	        
 	</div>
 </div>	-->
 <!--弹出广告 end-->
@@ -106,7 +105,18 @@
 		});
 			mui.plusReady(function(){ 
   			tzdr.init.initHearListener();
-  			tzdr.init.initButtomListener(true);
+  			var dataUrl={
+  				home:"home.html",
+  				account:"tzdr/account/account.html",
+  				accountno:"tzdr/account/accountno.html",
+  				scheme:"tzdr/scheme.html",
+  				listrg:"tzdr/future/listrg.html",
+  				quotationMain:"tzdr/quotation/quotationMain.html",
+  			}
+  			initBottom(dataUrl);
+  			var paramUrl={
+				url:"tzdr/login/login.html"
+			}
 			document.getElementById("toNews").addEventListener("tap",function(){
 			    document.getElementById("newsimg").setAttribute("src","images/news.png"); 
 				mui.openWindow("tzdr/news/newslist.html");
@@ -123,7 +133,7 @@
 			});
 			document.getElementById("cp").addEventListener("tap",function(){
 				mui.openWindow("tzdr/future/cp.html","cp"); 
-//				mui.openWindow("tzdr/account/payment.html","payment"); 
+//				mui.openWindow("tzdr/account/recharge.html","recharge.html"); 
 			});
 //			document.getElementById("lhsi").addEventListener("tap",function(){
 //				mui.openWindow("tzdr/future/lhsi.html","lhsi");  
@@ -168,7 +178,7 @@
 				},
 				function(){
 					
-				}
+				},paramUrl
 			);
 			//新增banner 显示
 			var timeNum=0;
@@ -283,7 +293,7 @@
 						},
 						function(){
 							
-						}
+						},paramUrl
 				);
 			}
 			
@@ -333,7 +343,7 @@
 				},function(result){
 					mui.toast("系统繁忙，请刷新再试！");
 					return;
-				});
+				},paramUrl);
 			}
 			
 			// 关闭活动图片

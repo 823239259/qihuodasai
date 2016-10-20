@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.1.0",/*应用版本名称*/
-		"code": "20160929"
+		"name": "2.1.2",/*应用版本名称*/
+		"code": "20161020"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -21,8 +21,9 @@
 		"url": "http://www.dcloud.io"
 	},
 	"permissions": {
-
-
+		"Push": {
+			"description": "管理推送消息插件"
+		},
 		"Cache": {
 			"description": "管理应用缓存"
 		},
@@ -92,16 +93,16 @@
 		"Camera": {},
 		"Gallery": {},
 		"Barcode": {},
-		"Geolocation": {},"Messaging":{},"Statistic":{}
+		"Geolocation": {},"Messaging":{},"Statistic":{},"Push":{}
 	},
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
 			"waiting": true
 		},
-		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57a2a12867e58ecf320036b2","channelid_android":"android"}}},
+		"distribute": {"plugins":{"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57a2a12867e58ecf320036b2","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -117,7 +118,7 @@
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
 				"minSdkVersion":19,
 				"schemes":["test"],
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
 			},
 			"orientation": [
 				"portrait-primary"
@@ -279,7 +280,8 @@
 					"tzdr/scheme.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/quotation/transactionDetails.html",
-					"tzdr/quotation/activity.html"
+					"tzdr/quotation/activity.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -329,7 +331,8 @@
 					"tzdr/login/login.html",
 					"tzdr/account/updatePW.html",
 					"tzdr/scheme.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -478,7 +481,8 @@
 					"images/bank/psbc.png",
 					"images/bank/cmb.png",
 					"images/bank/spdb.png",
-					"images/bank/cmbc.png"
+					"images/bank/cmbc.png",
+					"images/bank/ceb.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -730,7 +734,8 @@
 				"refer": [
 					"tzdr/future/futurePaySuc.html",
 					"tzdr/account/charge.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -800,7 +805,8 @@
 					"tzdr/login/regist.html",
 					"tzdr/login/login.html",
 					"tzdr/future/listrg.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"home.html"
 				],
 				"priority": 0
 			},
@@ -960,7 +966,8 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"tzdr/account/charge.html"
+					"tzdr/account/charge.html",
+					"tzdr/account/recharge.html"
 				],
 				"priority": 0
 			},
@@ -975,7 +982,9 @@
 					"css/mui.min.css",
 					"main.html"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/quotation/quotationMain.html"
+				],
 				"priority": 0
 			},
 			"tzdr/account/openUrlPay.html": {
@@ -1043,7 +1052,11 @@
 					"js/chart.config.js",
 					"js/timechart.config.js",
 					"js/candlestick.config.js",
-					"js/dayCandlestick.config.js"
+					"js/dayCandlestick.config.js",
+					"js/FiveTestCandlestickChart.js",
+					"js/fiveChart.config.js",
+					"js/tenChart.config.js",
+					"js/threeChart.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1216,6 +1229,75 @@
 					"images/bannerActivity.png",
 					"images/activeTitle.png",
 					"images/backgound1.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/recharge.html": {
+				"resources": [
+					"css/recharge.css",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/choicePayment.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/choicePayment.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/recharge/Transfer.png",
+					"images/recharge/bankP.png",
+					"images/recharge/jingdong.png",
+					"images/recharge/wei.png",
+					"js/pingpp.js"
+				],
+				"refer": [
+					"tzdr/account/weixinPay.html",
+					"tzdr/account/bankPay.html",
+					"tzdr/account/gopay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/weixinPay.html": {
+				"resources": [
+					"images/weixinpay.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/bankPay.html": {
+				"resources": [
+					"images/bank1.png",
+					"images/bank_01.gif",
+					"images/bank_04.gif",
+					"images/bank_03.gif",
+					"images/bank_02.gif",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
