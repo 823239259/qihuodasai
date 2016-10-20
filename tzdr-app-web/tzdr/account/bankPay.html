@@ -60,35 +60,35 @@
 						<label>
 							<img src="../../images/bank1.png" />
 							<span>账号：1289 0715 5110 501<br>户名：成都盈透科技有限公司<br>开户行：招商银行股份有限公司成都天府大道支行</span></label>
-						<input name="choiceBank" type="radio" checked value="cmb">
+						<input name="choiceBank" type="radio" checked value="cmb" class="choiceBankIcon">
 					</div>
 					<div class="mui-input-row mui-radio bankListContent" >
 						<label>
 							<img src="../../images/bank_02.gif" />
 							<span>账号：4402 9391 1910 0042 543<br>户名：成都盈透科技有限公司<br>开户行：中国工商银行府河音乐花园支行</span>
 						</label>
-						<input name="choiceBank" type="radio" value="icbc">
+						<input name="choiceBank" type="radio" value="icbc" class="choiceBankIcon">
 					</div>
 					<div class="mui-input-row mui-radio bankListContent" id"weixinPay">
 						<label>
 							<img src="../../images/bank_04.gif" />
 							<span>账号：1158 4367 7712<br>户名：成都盈透科技有限公司<br>开户行：中国银行天府新区华阳支行</span>
 						</label>
-						<input name="choiceBank" type="radio" value="boc">
+						<input name="choiceBank" type="radio" value="boc" class="choiceBankIcon">
 					</div>
 					<div class="mui-input-row mui-radio bankListContent">
 						<label>
 							<img src="../../images/bank_01.gif" />
 							<span>账号：5105 0140 6137 0000 0421<br>户名：成都盈透科技有限公司<br>开户行：中国建设银行成都世纪城新会展支行</span>
 						</label>
-						<input name="choiceBank" type="radio" value="ccb">
+						<input name="choiceBank" type="radio" value="ccb" class="choiceBankIcon">
 					</div>
 					<div class="mui-input-row mui-radio bankListContent">
 						<label>
 							<img src="../../images/bank_03.gif" />
 							<span>账号：2280 8201 0400 05595<br>户名：成都盈透科技有限公司<br>开户行：中国农业银行成都新希望国际支行</span>
 						</label>
-						<input name="choiceBank" type="radio" value="abc">
+						<input name="choiceBank" type="radio" value="abc" class="choiceBankIcon">
 					</div>
 				</form>
 			</div>
@@ -128,6 +128,10 @@
 				var abbreviation=$('input:radio[name="choiceBank"]:checked').val();
 				if(mui.isnull(serialnum)) {
 					mui.toast("请输入转账流水单号");
+					return;
+				}
+				if(rechargeMon < wv.money){
+					mui.toast("充值金额不低于"+wv.money+"元");
 					return;
 				}
 				var paramUrl={
@@ -186,10 +190,10 @@
 				function changeAllBalance(){
 					var rechargeMon=$("#rechargeMon").val();
 					if(rechargeMon>=wv.money){
-						 document.getElementById("paymentMoney").innerText=rechargeMon;
+						 document.getElementById("paymentMoney").innerText=rechargeMon.toFixed(2);
 					}else {
 						mui.toast("输入金额必须大于当前金额");
-						document.getElementById("paymentMoney").innerText=wv.money;
+						document.getElementById("paymentMoney").innerText=wv.money.toFixed(2);
 						
 					}
 					

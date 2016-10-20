@@ -13,7 +13,7 @@ ul{
 
 .rechageList li input{
 	display: inline-block;
-	width: 72%;
+	width: 70%;
 	border: none;
 	margin: 0px;
 	color:#FFCC33;
@@ -126,4 +126,7 @@ i{
 .listMoney input{
 	width: 69%;
 	margin: 0px;
+}
+.choiceBankIcon{
+	margin-top: 30px;
 }
