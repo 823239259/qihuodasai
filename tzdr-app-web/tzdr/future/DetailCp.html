@@ -16,8 +16,9 @@
     		win=plus.webview.currentWebview();
     		//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-  			//tzdr.init.initButtomListener();
-    		
+    		var paramUrl={
+				url:"../login/login.html"
+			}
     		//获取当前方案信息   方案ID: win.did
     		mui.app_request("/user/ftrade/details",{
     			"id":win.did
@@ -37,7 +38,7 @@
     		},function(result){
     			mui.toast(result.message);
     			return;
-    		});
+    		},paramUrl);
     		
     	
 
@@ -87,7 +88,7 @@
 					document.getElementById("endtolist").removeAttribute("disabled");
 					mui.toast("系统繁忙，请稍后再试！");
 					return;
-				});
+				},paramUrl);
     		});
     		
     		document.getElementById("immediately").addEventListener("tap",function(){

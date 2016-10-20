@@ -1,0 +1,129 @@
+ul{
+	list-style-type: none;
+	padding:0px;
+	background-color: #FFFFFF;
+}
+.rechageList li{
+	width: 100%;
+	padding:0px 2%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom:1px solid #E4E4E4;
+}
+
+.rechageList li input{
+	display: inline-block;
+	width: 72%;
+	border: none;
+	margin: 0px;
+	color:#FFCC33;
+}
+i{
+	font-style: normal;
+}
+.yellowFont{
+	color:#FFCC33;
+}
+.textAlignRightP{
+	width: 100%;
+	padding:0px 2%;
+	text-align: right;
+}
+.chargeList input{
+	margin-top: 10px;;
+}
+.chargeList .mui-input-row{
+	height: 80px;
+	line-height: 80px;
+}
+.chargeList .mui-input-row label{
+	width: 50%;
+	vertical-align: middle;
+}
+.chargeList .mui-input-row label i{
+	margin-left: 5px;
+}
+.chargeList .mui-input-row label img{
+	vertical-align: middle;
+}
+.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
+	color:#FFCC33;
+}
+#paymentMoney{
+	color:#FFCC33;
+	font-size: 20px;
+	font-weight: 300;
+}
+#buttomDiv{
+	background-color: #FFFFFF;
+	position: fixed;
+	bottom: 0px;
+	line-height: 60px;
+	height: 60px;
+	width: 100%;
+	padding:0px 4%;
+	border-top:1px solid #E4E4E4;
+}
+#buttomDiv button{
+	margin-top: 10px;
+	position: absolute;
+	right: 20px;
+	width: 40%;
+	border-radius: 3px;
+}
+#weixinpayBack{
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	top:0px;
+	left: 0px;
+	z-index: 999;
+	display: none;
+}
+#weixinpayBack img{
+	width: 80%;
+	display: block;
+	height: auto;
+	position: absolute;
+}
+#weiPayCode{
+	width: 100%;
+	padding:0px 15px;
+	height: 210px;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+#weiPayCode img{
+	margin-top: 12px;
+}
+ #weiPayCode div:nth-child(2){
+ 	padding:10px 10% 10px;
+ }
+.numberCode{
+	width: 96%;
+	margin-left: 2%;
+	border:1px solid #E4E4E4;
+	background: #FFFFFF; 
+}
+.numberCode label{
+	display: inline-block;
+	width: 23%;
+	margin-right: 5px;
+	text-align: center;
+}
+.numberCode input{
+	display: inline-block;
+	width: 74%;
+	border:none;
+	margin: 0px;
+}
+.listMoney{
+	width: 100%;
+}
+.listMoney label{
+	width: 30%;
+}
+.listMoney input{
+	width: 69%;
+	margin: 0px;
+}

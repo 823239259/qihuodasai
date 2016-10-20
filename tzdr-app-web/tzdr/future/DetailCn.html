@@ -16,8 +16,10 @@
     		win=plus.webview.currentWebview();
     		//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-  			//tzdr.init.initButtomListener();
     		//获取当前方案信息   方案ID: win.did
+    		var paramUrl={
+				url:"../login/login.html"
+			}
     		mui.app_request("/user/ftrade/details",{
     			"id":win.did
     		},function(result){
@@ -35,7 +37,7 @@
     		},function(result){
     			mui.toast(result.message);
     			return;
-    		});
+    		},paramUrl);
     		document.getElementById("tran_info").addEventListener("tap",function(){
   				mui.openWindow("../agree/a50ru.html");
   			});

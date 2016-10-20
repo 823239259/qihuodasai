@@ -14,9 +14,10 @@
     	mui.plusReady(function(){
     		win=plus.webview.currentWebview();
     		//初始化监听头部和底部事件
-  			//tzdr.init.initButtomListener();
-  			
   			//获取支付申请数据
+  			var paramUrl={
+				url:"../login/login.html"
+			}
   			mui.app_request("/user/ftrade/apply",{
   				"traderBond":win.traderBond,
 			    "tranLever":win.trade_leve,
@@ -47,7 +48,7 @@
   					return;
   				}
   				
-  			})
+  			},paramUrl)
   			
   			//头部设置
   			titleset();
@@ -56,12 +57,13 @@
   			document.getElementById("chargeto").addEventListener("tap",function(){
   				var money = document.getElementById("traderBond").innerHTML;
   				mui.openWindow({
-				    url:'../account/charge.html',
-				    id:'charge.html',
+				    url:'../account/recharge.html',
+				    id:'recharge.html',
 				    extras:{
 				        money : money,
 				        backPage:win.pageNumber,
-				        backId:"pay.html"
+				        backId:"pay.html",
+				        type:1
 				    }
 				},back);
   			});
@@ -214,7 +216,9 @@
     		if(mui.isnull(vid)){
     			vid=0;
     		} 
-
+			var paramUrl={
+				url:"../login/login.html"
+			}
     		mui.app_request("/user/ftrade/handle",{
     			"vid":vid,
 				"traderBond":win.traderBond,
@@ -247,7 +251,7 @@
     				return;
     			}
     			
-    		})
+    		},paramUrl)
     	}
     		
     </script>

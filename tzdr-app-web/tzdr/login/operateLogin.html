@@ -76,6 +76,9 @@
 				if(user_mobile==null){
 					$("#checkContent").text("其它");
 				}else{
+					var paramUrl={
+						url:"login.html"
+					}
 					mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
 					var data=result.data;
 					var Len=data.length;
@@ -93,7 +96,7 @@
 					
 				},function(result){
 //					console.log(JSON.stringify(result));
-				});
+				},paramUrl);
 				}
 				
 				if(user_mobile==null || user_mobile==undefined || user_mobile==""){

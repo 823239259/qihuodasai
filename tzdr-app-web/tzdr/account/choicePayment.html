@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>选择支付方式</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <link rel="stylesheet" href="../../css/recharge.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <script type="text/javascript" src="../../js/pingpp.js" ></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">选择支付方式</h1>		
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group chargeList">
+				<!--<div class="mui-input-row mui-radio ">
+					<label><img src="../../images/recharge/jingdong.png"><i>京东支付</i></label>
+					<input name="choiceBank" type="radio" checked value="1">
+				</div>-->
+				<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/bankP.png"><i>网银支付</i></label>
+					<input name="choiceBank" type="radio" value="2" checked="checked">
+				</div>
+				<div class="mui-input-row mui-radio" id"weixinPay">
+					<label><img src="../../images/recharge/wei.png"><i>微信支付</i></label>
+					<input name="choiceBank" type="radio" value="3">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Transfer.png"><i>银行转账</i></label>
+					<input name="choiceBank" type="radio"value="4">
+				</div>
+			</form>
+			<div id="buttomDiv">
+				<span>支付：<i id="paymentMoney"></i><i class="yellowFont">元</i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
+			</div>
+		</div>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+				tzdr.init.initHearListener();
+				var wv = plus.webview.currentWebview();
+				paymentMoney.innerText=wv.money;
+				document.getElementById("recharge-btn").addEventListener("tap",function(){
+					immediatePayment(wv);
+				});
+//				document.getElementById("back").addEventListener("tap",function(){
+//					 var backId = wv.backId;
+//					 var backIdObj = plus.webview.getWebviewById(backId);
+//					 if(backIdObj != null){
+//					 	backIdObj.reload();
+//					 	mui.back();
+//					 }
+//				});
+			});
+			function immediatePayment(wv){
+				var val =  $('.chargeList input[name="choiceBank"]:checked ').val();
+				if(val==3){
+					mui.openWindow({
+						url:"weixinPay.html",
+						id:"weixinPay.html",
+						extras:{
+						  	money : wv.money,
+					        backId:wv.backId
+						}
+					})
+				}else if(val==4){
+					mui.openWindow({
+						url:"bankPay.html",
+						id:"bankPay.html",
+						extras:{
+						  	money : wv.money,
+					        backId:wv.backId
+						}
+					})
+				}else if(val==2){
+					bank(wv);
+				}else if(val==1){
+					jdWayPay(wv);
+				}
+			};
+			/**
+			 * 
+			 * @param {Object} money 支付金额
+			 */
+			function jdWayPay(wv){
+				var money = wv.money;
+				//充值"操作"
+				var paramUrl={
+					url:"../login/login.html"
+				}
+				mui.app_request('/user/pay/jdpay_wap', {
+					"money": money,
+					"payWay":10
+				}, function(result) {
+					var charge = JSON.parse(result.data); 
+					pingpp.createPayment(charge, function(result, err) {
+						if(result == "success") {
+							// 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+						} else if(result == "fail") {
+							// charge 不正确或者微信公众账号支付失败时会在此处返回
+						} else if(result == "cancel") {
+							// 微信公众账号支付取消支付
+						}
+						});
+					return;
+				}, function(result) {  
+					mui.toast(result.message);				
+				},paramUrl);
+			}
+			//网银充值“立即充值”操作
+			function bank(wv){
+				var money = wv.money;
+				//充值"操作"
+				var paramUrl={
+					url:"../login/login.html"
+				}
+				mui.app_request('/user/pay/gopay', {
+					"goPaymoney": money,
+					"gopayWay":7
+				}, function(result) {
+					var data = result.data;
+					plus.nativeUI.showWaiting( "正在跳转..." );
+					setTimeout(function(){
+						plus.nativeUI.closeWaiting();
+					},2000);
+					var w = plus.webview.create("gopay.html","gopay",{top:"45px"},{data:result});
+					w.show();
+					return;
+				}, function(result) {
+					if(result.code == 2) {
+						mui.toast("充值金额不能为空！");
+						return;
+					} else if(result.code == 3) {
+						mui.toast("充值金额必须大于或等于1、小于或等于5000000！");
+						return;
+					} else if(result.code == 4) {
+						mui.toast("在线网银每天限额10万元，超额部分请选择其他方式充值！");
+						return;
+					} else {
+						mui.toast("系统繁忙，请稍后再试！");
+						return;
+					}
+				},paramUrl);
+			}
+		</script>
+	</body>
+</html>

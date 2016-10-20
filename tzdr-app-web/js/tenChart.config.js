@@ -1,17 +1,15 @@
-    var rawData = [];
-    var CandlestickChartOption=null;
-    var CandlestickVolumeChartOption=null;
-    var CandlestickVolumeData={
+    var rawDataTen = [];
+    var CandlestickVolumeDataTen ={
     	time:[],
     	volume:[]
     }
-    var newData=[]; 
-    function processingData(jsonData){
+    var newDataTen =[]; 
+    function processingDataTen(jsonData){
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
-    	    var lent=rawData.length;
+    	    var lent=rawDataTen.length;
         	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
@@ -20,41 +18,41 @@
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
 		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
 		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
-			         rawData[lent+i] = sgData; 
+			         rawDataTen [lent+i] = sgData; 
        		};
-        	for(var i=0;i<rawData.length-1;i++){
-        		if(rawData[i][0]==rawData[i+1][0]){
-        			rawData.splice(i,1);
+        	for(var i=0;i<rawDataTen .length-1;i++){
+        		if(rawDataTen [i][0]==rawDataTen [i+1][0]){
+        			rawDataTen .splice(i,1);
         		}
         	}
-        	newData=rawData.slice(-60);
-		  		CandlestickChartOption = setOption(newData);
-		  		myChart.setOption(CandlestickChartOption);
-		  	myChart.group="group2";
+        	newDataTen =rawDataTen .slice(-60);
+		  		var CandlestickChartOption = setOptionTen(newDataTen);
+		  		TenCandlestickChartDiv.setOption(CandlestickChartOption);
+		  		TenCandlestickChartDiv.group="group5";
 		  	
     }
-    document.getElementById("Candlestick").addEventListener("tap",function(){
+    document.getElementById("Ten").addEventListener("tap",function(){
     			$("#dayCandlestickChart").css("opacity","0");
     				$("#TimeChart1").css("opacity","0");
-				 if(myChart != null){
+				 if(TenCandlestickChartDiv != null){
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+						var option = setOptionTen(newDataTen);
+						 var option2=CandlestickVolumeChartSetoptionTen(CandlestickVolumeDataTen);
 						setTimeout(function(){
-							myChart.resize();
-							myChart.setOption(option);
-		        			myChart.resize();	
-		        			CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option2);
-		        			CandlestickVolumeChart.resize();	
+							TenCandlestickChartDiv.resize();
+							TenCandlestickChartDiv.setOption(option);
+		        			TenCandlestickChartDiv.resize();	
+		        			TenCandlestickVolumeChart.resize();	
+							TenCandlestickVolumeChart.setOption(option2);
+		        			TenCandlestickVolumeChart.resize();	
 		        		},10);
 		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
+		        			$("#TenCandlestickChart").css("opacity","1");
 		        		},100);
 			    } 
 		});
     //设置数据参数（为画图做准备）
-    function setOption(rawData){
+    function setOptionTen(rawData){
         var dates = rawData.map(function (item) {
             return item[0];
         });
@@ -133,40 +131,36 @@
 		}
         return option;
     };
-    var firstTimeNum=0;
-     var volumeTime=[];
-    var volumeV=[];
-//  var volumeTimeH=[];
-//  var volumeVH=[];
-    function processingCandlestickVolumeData(data){
+    var tenCandlestickVolumeTime=[];
+    var tenCandlestickVolumeVolume=[];
+    function processingCandlestickVolumeDataTen(data){
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
-    	    var lent=volumeV.length;
-//  	    var lengt=volumeTimeH.length;
+    	    var lent=tenCandlestickVolumeTime;
         	for(var i=0;i<Len;i++){
         			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
-        			volumeTime[lent+i]=str2;
-        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+		        	var str2=str1[0]+":"+str1[1];
+        			tenCandlestickVolumeTime.push(str2);
+        			tenCandlestickVolumeVolume.push(parameters[i][VolumeSubscript]);
        		};
-        	for(var i=0;i<volumeTime.length-1;i++){
-        		if(volumeTime[i]==volumeTime[i+1]){
-        			volumeTime.splice(i,1);
-        			volumeV.splice(i,1);
+        	for(var i=0;i<tenCandlestickVolumeTime.length-1;i++){
+        		if(tenCandlestickVolumeTime[i]==tenCandlestickVolumeTime[i+1]){
+        			tenCandlestickVolumeTime.splice(i,1);
+        			tenCandlestickVolumeVolume.splice(i,1);
         		}
         	}
-        	CandlestickVolumeData.time=volumeTime.slice(-60);
-        	CandlestickVolumeData.volume=volumeV.slice(-60);
-        	CandlestickVolumeChart.group="group2";
-		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-		  		CandlestickVolumeChart.resize();	
-		  		CandlestickVolumeChart.setOption(option1);
-		  		CandlestickVolumeChart.resize();	
+        	CandlestickVolumeDataTen.time=tenCandlestickVolumeTime.slice(-60);
+        	CandlestickVolumeDataTen.volume=tenCandlestickVolumeVolume.slice(-60);
+        	TenCandlestickVolumeChart.group="group5";
+		  		var option1= CandlestickVolumeChartSetoptionTen(CandlestickVolumeDataTen);
+		  		TenCandlestickVolumeChart.resize();	
+		  		TenCandlestickVolumeChart.setOption(option1);
+		  		TenCandlestickVolumeChart.resize();	
 		  	
     };
-    function CandlestickVolumeChartSetoption1(data){
+    function CandlestickVolumeChartSetoptionTen(data){
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {
 	      	backgroundColor: '#2B2B2B',
@@ -238,11 +232,6 @@
 	                  type: 'bar',
 	                  data:CandlestickVolumeChartData.volume
 	              },
-//	              {
-//	                  name: '成交量',
-//	                  type: 'bar',
-//	                  data:volumeVH
-//	              }
 	          ]
 	      };
         return option
