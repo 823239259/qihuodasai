@@ -230,7 +230,7 @@
 		<dependency>
 			<groupId>taobao.sms</groupId>
 			<artifactId>taobao-sms</artifactId>
-			<version>0.1</version>
+			<version>1.0</version>
 			<scope>system</scope>
 			<systemPath>
 			${project.basedir}/lib/taobao-sms-sdk.jar
