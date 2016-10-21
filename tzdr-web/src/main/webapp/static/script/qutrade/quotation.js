@@ -31,9 +31,9 @@ $(function() {
                 }
             }
             //console.log(currenCommodityNo,currenContractNo,currenExchangeNo,hisQuoteType);
-            masendMessage('QryHistory','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'","Count":60,"HisQuoteType":'+hisQuoteType+'}');
+            masendMessage('QryHistory','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'","Count":400,"HisQuoteType":'+hisQuoteType+'}');
             cc = setInterval(function(){
-                masendMessage('QryHistory','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'","Count":60,"HisQuoteType":'+hisQuoteType+'}');
+                masendMessage('QryHistory','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'","Count":400,"HisQuoteType":'+hisQuoteType+'}');
             },60000);
         }
         var data = evt.data;
@@ -67,7 +67,7 @@ $(function() {
             if(type ==0){
                 chechData(data);
             }else if(type ==1 || type== 5 || type == 15 || type == 30 || type == 1440){
-                chechDataK(data);
+                chechDataK(data,type);
             }
         }else if(method == "OnRtnQuote"){
 
@@ -96,7 +96,7 @@ $(function() {
                 }
             }
         }
-        function chechDataK(data){
+        function chechDataK(data,type){
             var dataC=[];
             var volume=[];
             var dataall=data.Data;
@@ -184,8 +184,20 @@ $(function() {
                     crosshairs: true,
                     shared: true
                 },
-                rangeSelector : {
-                    selected : 1
+                rangeSelector: {
+                    // 缩放选择按钮，是一个数组。
+                    // 其中type可以是： 'millisecond', 'second', 'minute', 'day', 'week', 'month', 'ytd' (year to date), 'year' 和 'all'。
+                    // 其中count是指多少个单位type。
+                    // 其中text是配置显示在按钮上的文字
+                    buttons: [{
+                        type: 'minute',
+                        count: 60*type,
+                        text: '分钟'
+                    }],
+                    // 默认选择域：0（缩放按钮中的第一个）、1（缩放按钮中的第二个）……
+                    selected: 0,
+                    // 是否允许input标签选框
+                    inputEnabled: false
                 },
                 /* legend: {
                     enabled: true,
@@ -226,14 +238,14 @@ $(function() {
                     type: 'trendline',
                     algorithm: 'MACD'
                 }, {
-                    name : 'Signal line',
+                    name : 'DEA',
                     linkedTo: 'primary',
                     yAxis: 2,
                     showInLegend: true,
                     type: 'trendline',
                     algorithm: 'signalLine'
                 }, {
-                    name: 'Histogram',
+                    name: 'DIF',
                     linkedTo: 'primary',
                     yAxis: 2,
                     showInLegend: true,
@@ -372,14 +384,14 @@ $(function() {
                     type: 'trendline',
                     algorithm: 'MACD'
                 }, {
-                    name : 'Signal line',
+                    name : 'DEA',
                     linkedTo: 'primary',
                     yAxis: 2,
                     showInLegend: true,
                     type: 'trendline',
                     algorithm: 'signalLine'
                 }, {
-                    name: 'Histogram',
+                    name: 'DIF',
                     linkedTo: 'primary',
                     yAxis: 2,
                     showInLegend: true,

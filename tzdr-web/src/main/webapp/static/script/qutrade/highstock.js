@@ -2168,7 +2168,7 @@
                 backgroundColor: z("#f7f7f7").setOpacity(.85).get(),
                 borderWidth: 1,
                 headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>',
-                pointFormat: '<span style="color:{point.color}">●</span> {series.name}: <b>{point.y}</b><br/>',
+                pointFormat: '{series.name}: <b>{point.y}</b><br/>',
                 shadow: !0,
                 style: {
                     color: "#333333",
@@ -5888,7 +5888,7 @@
                 enabled: !0
             },
             tooltip: {
-                headerFormat: '<span style="color:{point.color}">●</span> <span style="font-size: 0.85em"> {series.name}</span><br/>',
+                headerFormat: '<span style="font-size: 0.85em"> {series.name}</span><br/>',
                 pointFormat: "x: <b>{point.x}</b><br/>y: <b>{point.y}</b><br/>"
             }
         }, {
