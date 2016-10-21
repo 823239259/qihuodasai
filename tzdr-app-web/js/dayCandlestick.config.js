@@ -1,7 +1,5 @@
     var dayCandlestickChartDivNum=0;
     var dayCandlestickChartData = [];
-//  var dayCandlestickVolumeChartTime=[];
-//  var dayCandlestickVolumeChartVolume=[];
     var dayCandlestickVolumeData={
     	time:[],
     	volume:[]
@@ -21,7 +19,6 @@
 			         dayCandlestickChartData[lent+i] = sgData; 
        		};
        		dayCandlestickChartData=dayCandlestickChartData.splice(-60);
-//      	var Option = dayCandlestickChartSetOption(dayCandlestickChartData);
 		  	dayCandlestickChartDiv.group="group3";
 		  	
     }
@@ -29,9 +26,6 @@
     				$("#CandlestickChart").css("opacity","0");
     				$("#TimeChart1").css("opacity","0");
 				 if(dayCandlestickChartDiv != null){
-				 	setTimeout(function(){
-				 		muiSpinner[2].style.display="none";
-				 	},100)
 					document.getElementsByClassName("buttomFix")[0].style.display="block";
 					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
 					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
@@ -39,11 +33,9 @@
 						 	dayCandlestickChartDiv.resize();	
 							dayCandlestickChartDiv.setOption(option1);
 		        			dayCandlestickChartDiv.resize();	
-		        			dayCandlestickChartDivNum++;
 		        			dayCandlestickVolumeChart.resize();	
 							dayCandlestickVolumeChart.setOption(option2);
 		        			dayCandlestickVolumeChart.resize();	
-		        			dayCandlestickVolumeNum=1;
 		        		},10);
 		        		setTimeout(function(){
 		        		$("#dayCandlestickChart").css("opacity","1");
@@ -144,7 +136,6 @@
        		};
        		dayCandlestickVolumeData.time=dayCandlestickVolumeData.time.splice(-60);
        		dayCandlestickVolumeData.volume=dayCandlestickVolumeData.volume.splice(-60);
-//      	var option= CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
 		  	dayCandlestickVolumeChart.group="group3";
 		  	if(dayCandlestickVolumeNum !=0){
 		  		var option3 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
@@ -152,18 +143,6 @@
 			}
 		  	
     };
-//  document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
-//				 if(dayCandlestickVolumeChart != null){
-//				 		var option1 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
-//						setTimeout(function(){
-//						 	dayCandlestickVolumeChart.resize();	
-//							dayCandlestickVolumeChart.setOption(option1);
-//		        			dayCandlestickVolumeChart.resize();	
-//		        			dayCandlestickVolumeNum=1;
-//		        		},10);
-//			    }
-//		});
-    
     function CandlestickVolumeChartSetoption(data){
     	 var  dayCandlestickVolumeData=data;
 	      var  option = {

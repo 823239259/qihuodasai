@@ -30,12 +30,7 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-//		$("#tradeTitle").append("<option value='"+Transfer.name[2]+"'>"+Transfer.name[0]+Transfer.name[2]+Transfer.name[1]+"</option>");
-//		$("#tradeContractTitle").text(Transfer.name[2]+Transfer.name[1]);
 		init(Transfer.name);
-    	setTimeout(function(){
-					muiSpinner[0].style.display="none";
-			},200);
 	var url = MarketUrl.SocketUrl;
 	marketSocket = new WebSocket(url);
     var setIntvalTime = null;
@@ -61,7 +56,6 @@ mui.plusReady(function(){
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
-//          console.log(JSON.stringify(historyParam));
 			if(historyParam.Parameters==null){
 				return
 			};
@@ -80,9 +74,17 @@ mui.plusReady(function(){
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==1440){
-//				console.log(JSON.stringify(historyParam));
 				processingDayCandlestickData(historyParam)
 				processingDayCandlestickVolumeData(historyParam);
+			}else if(historyParam.Parameters.HisQuoteType==5){
+				processingCandlestickVolumeDataFive(historyParam);
+				processingDataFive(historyParam);
+			}else if(historyParam.Parameters.HisQuoteType==15){
+				processingCandlestickVolumeDataTen(historyParam);
+				processingDataTen(historyParam);
+			}else if(historyParam.Parameters.HisQuoteType==30){
+				processingCandlestickVolumeDataThree(historyParam);
+				processingDataThree(historyParam);
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
@@ -103,7 +105,6 @@ mui.plusReady(function(){
         	if(OnRspQryCommodityDateL==1){
         		commoditysData=jsonData.Parameters;
         	}
-        	
         	var commoditys = jsonData.Parameters;
 			if(commoditys == null)return;
 			var size = commoditys.length;
@@ -122,15 +123,12 @@ mui.plusReady(function(){
 				//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
 				var comContract = marketNotSubCommdity[commdityAndContract];
 				if(comContract != undefined){ 
-//					console.log(marketSubCommdity[commdityAndContract]);
 					if(marketSubCommdity[commdityAndContract] == undefined){
 						console.log()
 						subscribeHold(newExchangeNo,newCommdityNo,newContractNo);
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
-				
-				//masendMessage('Subscribe','{"ExchangeNo":"'+newExchangeNo+'","CommodityNo":"'+newCommdityNo+'","ContractNo":"'+newContractNo+'"}');
 				if(Transfer.name[2]==newCommdityNo){
    					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
 	   			}else{
@@ -149,12 +147,17 @@ mui.plusReady(function(){
     		 var exchangeNo = $("#exchangeNo").val();
 		    var commodityNo = $("#commodeityNo").val();
 		    var contractNo = $("#contractNo").val();
-		    //masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":5}');
+		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":15}');
+		     masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":30}');
 		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 	        setIntvalTime = setInterval(function(){
 	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
+	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":5}');
+	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":15}');
+	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":30}');
 	        },3000);
     }
     /**
@@ -177,7 +180,6 @@ mui.plusReady(function(){
 		var newContractNo = param.ContractNo;
 		var comm = marketCommdity[newCommdityNo+newContractNo];
 		if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
-//			console.log("45");
 			$("#buyBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,0)).toFixed(doSize));
 			$("#sellBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,1)).toFixed(doSize));
 		}
@@ -211,7 +213,6 @@ mui.plusReady(function(){
 			var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($thisAvgPrice.text()) , comm.ContractSize,comm.MiniTikeSize,parseInt($thisHoldNum.text()),drection);
 			var floatProfit = floatP +":"+ comm.CurrencyNo;
 			$thisFloat.val(floatProfit); 
-//			console.log(floatProfit);
 			if(parseFloat(floatP) < 0 ){
 				$thisFloat.css("color","green");
 			}else if(parseFloat(floatP) > 0){
@@ -258,15 +259,6 @@ mui.plusReady(function(){
     	}else{
     		
     	}
-//  	for(var j=0;j<commodityNoList.length;i++){
-//  		if(commodityNoList[j] == allMess){
-//  			console.log(j+"长度"+commodityNoList.length);
-//	    		break;
-//	    	}else{
-//	    		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-//	    	}
-//	    	
-//  	}
     	for(var i=0;i<commoditysData.length;i++){
     		if(commoditysData[i].CommodityNo==valSelect){
     			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);

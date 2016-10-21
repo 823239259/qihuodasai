@@ -38,6 +38,9 @@
     	function getCode(){
     		var mobile=document.getElementById("account_phone").value;
     		//这里要对手机号码进行格式校验
+    		var paramUrl={
+				url:"../login/login.html"
+			}
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("手机号码不正确");
     			return;
@@ -67,7 +70,7 @@
       				mui.toast("系统繁忙，请稍后再试！");
       				return;
       			}
-      		});
+      		},paramUrl);
     	}
     	
     	
@@ -76,7 +79,9 @@
 			var code=document.getElementById("password").value;
 			var password=document.getElementById("password_confirm").value;//新密码
 			var password2=document.getElementById("email").value;//确认密码
-			
+			var paramUrl={
+				url:"../login/login.html"
+			}
 			//这里要对手机号码进行格式校验
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("手机号码不正确");
@@ -143,7 +148,7 @@
       				return;
       			}
       			
-      		});
+      		},paramUrl);
 			
     	};
     	

@@ -25,6 +25,9 @@
     		//初始化监听头部和底部事件
   		//	tzdr.init. ();
   			//获取综合操盘数据
+  			var paramUrl={
+				url:"../login/login.html"
+			}
   			mui.app_request("/ftrade/params",{
   				"businessType":8
   			},function(result){
@@ -81,7 +84,7 @@
   				console.log(JSON.stringify(result))
   				mui.toast(result.message);
   				return;
-  			})
+  			},paramUrl)
 // 			document.getElementById("backPage").addEventListener("tap",function(){
 //				mui.openWindow({
 //					url:"../../home.html",

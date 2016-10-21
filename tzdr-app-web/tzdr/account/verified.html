@@ -25,11 +25,13 @@
 			
 			//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-  			//tzdr.init.initButtomListener();
 		});
 	       function	openVerified(){
 	       	var username=document.getElementById("username").value;
 	       	var card=document.getElementById("card").value;
+	       	var paramUrl={
+				url:"../login/login.html"
+			}
 	       	if(mui.isnull(username)){
 	       		mui.toast("真实姓名不能为空！");
 	       		return;
@@ -79,7 +81,7 @@
 	       			mui.toast("系统繁忙，请稍后再试！");
 	       			return;
 	       		}
-	       	})
+	       	},paramUrl)
 	       	
 	       	
 	       };

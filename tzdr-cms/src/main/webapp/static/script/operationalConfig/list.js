@@ -44,7 +44,16 @@
 						}
 						return "未置顶";
 					}},
-					{field:'defineReleaseTime',title:'发布时间',width:180,sortable:true,hidden:true},
+					{field:'releaseTime',title:'发布时间',width:180,sortable:true,hidden:true,formatter:function(value,row,index){
+						 var date = new Date(value*1000);
+						 var  Y = date.getFullYear() + '-';
+						 var  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+						 var  D = date.getDate() + ' ';
+						 var  h = date.getHours() + ':';
+						 var  m = date.getMinutes() + ':';
+						 var  s = date.getSeconds(); 
+						 return Y+M+D+h+m+s;
+					}},
 					{field:'createUser',title:'创建人',width:100,sortable:true},
 				    {field:'createTime',title:'创建时间',width:180,sortable:true,formatter: function(value,row,index){
 						return getFormatDateByLong(value,'yyyy-MM-dd hh:mm:ss');

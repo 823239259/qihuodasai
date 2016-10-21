@@ -137,7 +137,18 @@
 		mui.plusReady(function(){  
 			//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-			tzdr.init.initButtomListener(); 
+			var dataUrl={
+  				home:"../home.html",
+  				account:"account/account.html",
+  				accountno:"account/accountno.html",
+  				scheme:"scheme.html",
+  				listrg:"future/listrg.html",
+  				quotationMain:"quotation/quotationMain.html",
+  			}
+			initBottom(dataUrl);
+			var paramUrl={
+				url:"login/login.html"
+			}
 			// ------------------------------------获取用户合买方案列表---------------------------------------------
 	    	mui.app_request('/user/ftogether_trade/list',{},
 						function(result){
@@ -270,7 +281,7 @@
 	      			},
 	      			function(result){ 
 	      			
-	      			}
+	      			},paramUrl
 	      	);
 	      	
 	      	//监听合买记录列表点击事件

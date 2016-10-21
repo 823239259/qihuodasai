@@ -283,9 +283,9 @@ function addQuoteListBindClick(cls){
 		 });
 		 obj.addClass('on');
 		 var contractCode = obj.attr("data-tion-com");
-		 setSelectOption(contractCode);
 		 setLocalCacheSelect(contractCode);
 		 clearRightData();
+		 setSelectOption(contractCode);
 		 setMoneyNumberIndex(0);
 	});
 }
@@ -310,6 +310,7 @@ function setSelectOption(contractCode){
 	$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
 	$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
 	$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+	updateRight(localQoute);
 }
 /**
  * 更新行情列表索引

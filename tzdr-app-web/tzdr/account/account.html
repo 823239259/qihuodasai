@@ -18,7 +18,6 @@
       	var user_mobile=null;
       	var Certification=null;
       	mui.plusReady(function(){
-      		
       		win=plus.webview.currentWebview();
       		
 			//判断token和密钥是否存在,存在则获取用户信息
@@ -28,7 +27,9 @@
       			user_mobile=plus.storage.getItem("user_mobile");
       		//对登录状态判断
       		if(mui.cacheUser.isLogin()){ 
-      			
+      			var paramUrl={
+					url:"../login/login.html"
+				}
       			//获取用户信息 
       			mui.app_request('/user/getbalancerate',{
       				"businessType":4 
@@ -54,23 +55,28 @@
       					return;
       				},function(result){
       					return;
-      			});
+      			},paramUrl);
       		}else{
       			title_name.innerHTML="请您先登录";
       			title_balance.innerHTML="0.00元";
       		}
-      		
+      		var dataUrl={
+  				home:"../../home.html",
+  				account:"account.html",
+  				accountno:"tzdr/account/accountno.html",
+  				scheme:"../scheme.html",
+  				listrg:"../future/listrg.html",
+  				quotationMain:"../quotation/quotationMain.html",
+  			}
       		
       		
 			//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-  			tzdr.init.initButtomListener();
-  			
-  			
+  			initBottom(dataUrl);
     		document.getElementById("charge").addEventListener("tap",function(){
     			mui.openWindow({
-    				url:"charge.html",
-    				id:"charge.html",
+    				url:"recharge.html",
+    				id:"recharge.html",
     				extras:{
     					 backId:"account"
     				}

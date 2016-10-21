@@ -20,7 +20,15 @@
 				mui.openWindow("../login/login.html");
 			});
 			//初始化监听底部事件
-			tzdr.init.initButtomListener();
+			var dataUrl={
+  				home:"../../home.html",
+  				account:"../account/account.html",
+  				accountno:"../account/accountno.html",
+  				scheme:"../scheme.html",
+  				listrg:"listrg.html",
+  				quotationMain:"../quotation/quotationMain.html",
+  			}
+		initBottom(dataUrl);
 			document.getElementById("telBtn").addEventListener("tap",function(){
     			mui.callService();
     		});

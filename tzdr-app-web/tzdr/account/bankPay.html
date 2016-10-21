@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>银行转账</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <link rel="stylesheet" href="../../css/recharge.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <style>
+	    	.ac_bankpromt{
+	    		margin-top:10px;
+	    	}
+		    .mui-input-group .mui-input-row{
+				height: 120px;
+			}
+			.bankList  .mui-input-row img{
+				width: 55px;
+			/*	margin-top: 22px;*/
+				vertical-align: middle;
+			}
+			.mui-input-group .mui-input-row label{
+				width: 85%;
+				padding-right: 0px;
+			}
+			.mui-input-group .mui-input-row label span{
+				vertical-align: middle;
+				padding-left: 5px;
+				padding-top: 8px;
+				display: inline-block;
+				line-height: 20px;
+				height: 115px;
+				width: 72%;
+				font-size: 13px;;
+			}
+			 .mui-input-group .mui-input-row input{
+			 	margin-top: ;
+			 }
+	    </style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">银行转账</h1>		
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+			<p class="ac_bankpromt">温馨提示：如您已开通网银，请尽量选择在线充值，如您是到柜台转账请尽量选择相同银行转账，这样可以快速及时到账！！</p>
+			<div class="mui-input-group" style="display: none;">
+				<div class="mui-input-row" style="height: 50px;line-height: 50px; position: relative;">
+					<label style="width: 38%;line-height: 50px;">转账金额:<i class="yellowFont" style="position: absolute;right:63%;">￥</i></label>
+					<input type="text" id="rechargeMon"  style="width: 62%;line-height: 45px;margin-top: 3px;text-align: left;color:#FFCC33" placeholder="请输入转账金额" />
+				</div>
+			</div>
+			<div style="padding:5px 0px 0px 15px; line-height: 30px;">转账到：</div>
+			<div style="margin-top: -15px;">
+				<form class="mui-input-group bankList">
+					<div class="mui-input-row mui-radio ">
+						<label>
+							<img src="../../images/bank1.png" />
+							<span>账号：1289 0715 5110 501<br>户名：成都盈透科技有限公司<br>开户行：招商银行股份有限公司成都天府大道支行</span></label>
+						<input name="choiceBank" type="radio" checked value="cmb" class="choiceBankIcon">
+					</div>
+					<div class="mui-input-row mui-radio bankListContent" >
+						<label>
+							<img src="../../images/bank_02.gif" />
+							<span>账号：4402 9391 1910 0042 543<br>户名：成都盈透科技有限公司<br>开户行：中国工商银行府河音乐花园支行</span>
+						</label>
+						<input name="choiceBank" type="radio" value="icbc" class="choiceBankIcon">
+					</div>
+					<div class="mui-input-row mui-radio bankListContent" id"weixinPay">
+						<label>
+							<img src="../../images/bank_04.gif" />
+							<span>账号：1158 4367 7712<br>户名：成都盈透科技有限公司<br>开户行：中国银行天府新区华阳支行</span>
+						</label>
+						<input name="choiceBank" type="radio" value="boc" class="choiceBankIcon">
+					</div>
+					<div class="mui-input-row mui-radio bankListContent">
+						<label>
+							<img src="../../images/bank_01.gif" />
+							<span>账号：5105 0140 6137 0000 0421<br>户名：成都盈透科技有限公司<br>开户行：中国建设银行成都世纪城新会展支行</span>
+						</label>
+						<input name="choiceBank" type="radio" value="ccb" class="choiceBankIcon">
+					</div>
+					<div class="mui-input-row mui-radio bankListContent">
+						<label>
+							<img src="../../images/bank_03.gif" />
+							<span>账号：2280 8201 0400 05595<br>户名：成都盈透科技有限公司<br>开户行：中国农业银行成都新希望国际支行</span>
+						</label>
+						<input name="choiceBank" type="radio" value="abc" class="choiceBankIcon">
+					</div>
+				</form>
+			</div>
+			<ul class="mui-table-view listMoney" style="margin: 20px 0px;">
+				<li class="mui-table-view-cell">
+					<label>转账流水：</label>
+					<input type="tel" class="mui-input-clear" placeholder="请输入转账流水" data-input-clear="5" id="serialnum" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+				</li>
+			</ul>
+			<div id="buttomDiv">
+				<span>支付：<i class="yellowFont">￥</i><i id="paymentMoney"></i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即转账</button>
+			</div>
+		</div>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+				tzdr.init.initHearListener();
+				var wv = plus.webview.currentWebview();
+				paymentMoney.innerText=wv.money.toFixed(2);
+				$("#rechargeMon").val(wv.money);
+				document.getElementById("recharge-btn").addEventListener("tap",function(){
+					banksPay();
+				});
+				var i = 0 ;
+				$(window).resize(function() {
+					if(i % 2 == 0){  
+						 $("#buttomDiv").css("display","none");
+					}else{
+						$("#buttomDiv").css("display","block");
+					}
+					i++; 
+				});
+				function banksPay() {
+				var rechargeMon=$("#rechargeMon").val();
+				var serialnum = document.getElementById("serialnum").value;
+				var abbreviation=$('input:radio[name="choiceBank"]:checked').val();
+				if(mui.isnull(serialnum)) {
+					mui.toast("请输入转账流水单号");
+					return;
+				}
+				if(rechargeMon < wv.money){
+					mui.toast("充值金额不低于"+wv.money+"元");
+					return;
+				}
+				var paramUrl={
+					url:"../login/login.html"
+				}
+				mui.app_request('/user/pay/bank_transfer', {
+					"abbreviation": abbreviation,
+					"serialnum": serialnum,
+					"money": rechargeMon
+				}, function(result) {
+					mui.toast("提交成功，我们会尽快核实处理！");
+					mui.app_refresh("recharge.html");
+					setTimeout(function(){
+						mui.openWindow({url:"account.html",id:"account"});
+					},800);
+					return;
+				}, function(result) {
+					if(result.code == 2) {
+						mui.toast("提交失败，参数有误！");
+						return;
+					} else if(result.code == 3) {
+						mui.toast("用户信息不存在！");
+						return;
+					} else if(result.code == 4) {
+						mui.toast("充值金额不能小于1元！");
+						return;
+					} else {
+						mui.toast("系统繁忙，请稍后再试！");
+						return;
+					}
+				},paramUrl)
+			}
+				document.getElementById("rechargeMon").addEventListener('input', function() {
+					if(this.value && !Number(this.value)) { //非数字赋值空
+						var _length = this.value.length;
+						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+						changeAllBalance();
+						return;
+					} else {
+						var _length = this.value.length;
+						var _index = this.value.lastIndexOf('.');
+						var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
+						this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+						changeAllBalance();
+						return;
+					}
+					
+				});
+				//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
+				function moneyHandle(_value, _obj) {
+					if(_value && !Number(_value)) { //非数字赋值空
+						var _length = _value.length;
+						moneyHandle(_value.substr(0, _length - 1), _obj);
+					} else {
+						_obj.value = _value
+						return;
+					}
+				};
+				function changeAllBalance(){
+					var rechargeMon=$("#rechargeMon").val();
+					if(rechargeMon>=wv.money){
+						 document.getElementById("paymentMoney").innerText=rechargeMon.toFixed(2);
+					}else {
+						mui.toast("输入金额必须大于当前金额");
+						document.getElementById("paymentMoney").innerText=wv.money.toFixed(2);
+						
+					}
+					
+				}
+			});
+		</script>
+	</body>
+</html>
