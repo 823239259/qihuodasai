@@ -1,1 +1,43 @@
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('6 5="b",7=3;2 d(){1.4="9://l.g.n:e";f 1}2 c(){1.4="9://h.i.0.j:e";f 1}2 k(){6 a=3;"m"==5?a=d():"b"==5&&(a=c());8(a)}2 8(a){3!=a&&(1.7=a.4)};',24,24,'|this|function|null|url|model|var|tradeWebsocketUrl|setTradeWebSoketUrl|ws||dev|tradeConfigNewinstanceTest|tradeConfigNewinstance|6060|return|vs|192|168|213|initTradeConfig|socket|live|com'.split('|'),0,{}))
+/**
+ * 生成环境：live,测试环境:dev
+ */
+var model = "dev";
+/**
+ * websocket地址
+ */
+var tradeWebsocketUrl = null;
+/**
+ * 定义生产环境
+ */
+function tradeConfigNewinstance(){
+	this.url = "ws://socket.vs.com:6060";
+	return this;
+}
+/**
+ * 定义测试环境服务器
+ */
+function tradeConfigNewinstanceTest(){
+	this.url = "ws://192.168.0.213:6060";
+	return this;
+}
+/**
+ * 加载服务器地址
+ */
+function initTradeConfig(){
+	var configObject = null;
+	if(model == "live"){
+		configObject = tradeConfigNewinstance();
+	}else if(model == "dev"){
+		configObject = tradeConfigNewinstanceTest();
+	}
+	setTradeWebSoketUrl(configObject);
+}
+/**
+ * 设置交易地址
+ * @param obj
+ */
+function setTradeWebSoketUrl(obj){
+	if(obj != null){
+		this.tradeWebsocketUrl = obj.url;
+	}
+}

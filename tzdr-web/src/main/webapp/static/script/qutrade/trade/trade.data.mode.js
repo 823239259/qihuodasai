@@ -1,1 +1,102 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 s(a){1.l=a.j;1.5=i(a.6);1.A=a.z;1.u=a.O;1.M=a.D;2 1}3 B(a){C c=a.7,d=a.N,b=0;4==a.r&&(b=c-d);1.l=a.j;1.5=i(a.6);1.9=a.t;1.8=a.7;1.v=b;1.w=a.x;2 1}3 y(a,c,d,b,e,f,g,h,k){1.E=a;1.F=c;1.G=d;1.7=b;1.6=e;1.H=f;1.I=g;1.J=h;1.K=k;2 1}3 L(a,c,d,b,e,f,g,h){1.m=a;1.n=c;1.o=d;1.p=b;1.q=e;1.8=f;1.5=g;1.9=h;2 1}3 P(a,c,d,b,e,f,g,h,k){1.m=a;1.n=c;1.o=d;1.p=b;1.q=e;1.8=f;1.5=g;1.9=h;1.Q=k;2 1};',53,53,'|this|return|function||drection|Drection|OrderNum|orderNum|orderPrice|||||||||analysisBusinessDirection|ContractCode||contratCode|orderSysId|orderId|exchangeNo|commodityNo|contractNo|OrderStatus|createPostionsParam|OrderPrice|openAvgPrice|cdNum|insertDateTime|InsertDateTime|createSellingParam|HoldNum|holdNum|createDesignatesParam|var|FloatingProfit|ExchangeNo|CommodityNo|ContractNo|PriceType|LimitPrice|TriggerPrice|OrderRef|createCancleOrderParam|floatingProfit|TradeNum|OpenAvgPrice|createModifyOrderParam|triggerPrice'.split('|'),0,{}))
+/**
+ * 创建持仓数据模型
+ * @param {Object} param
+ */
+function createPostionsParam(param) {
+	this.contratCode = param.ContractCode;
+	this.drection = analysisBusinessDirection(param.Drection);
+	this.holdNum = param.HoldNum;
+	this.openAvgPrice = param.OpenAvgPrice;
+	this.floatingProfit = param.FloatingProfit;
+	return this;
+}
+/**
+ * 创建挂单数据模型
+ * @param {Object} param
+ */
+function createDesignatesParam(param) {
+	var orderStatus = param.OrderStatus;
+	var orderNum = param.OrderNum;
+	var tradeNum = param.TradeNum;
+	var cdNum = 0;
+	if (orderStatus == 4) {
+		cdNum = orderNum - tradeNum;
+	}
+	this.contratCode = param.ContractCode;
+	this.drection = analysisBusinessDirection(param.Drection);
+	this.orderPrice = param.OrderPrice;
+	this.orderNum = param.OrderNum;
+	this.cdNum = cdNum;
+	this.insertDateTime = param.InsertDateTime;
+	return this;
+}
+/**
+ * 创建交易数据 
+ * @param {Object} ExchangeNo
+ * @param {Object} CommodityNo
+ * @param {Object} ContractNo
+ * @param {Object} OrderNum
+ * @param {Object} Drection
+ * @param {Object} PriceType
+ * @param {Object} LimitPrice
+ * @param {Object} TriggerPrice
+ * @param {Object} OrderRef
+ */
+function createSellingParam(ExchangeNo, CommodityNo, ContractNo, OrderNum, Drection, PriceType, LimitPrice, TriggerPrice, OrderRef) {
+	this.ExchangeNo = ExchangeNo;
+	this.CommodityNo = CommodityNo;
+	this.ContractNo = ContractNo;
+	this.OrderNum = OrderNum;
+	this.Drection = Drection;
+	this.PriceType = PriceType;
+	this.LimitPrice = LimitPrice;
+	this.TriggerPrice = TriggerPrice;
+	this.OrderRef = OrderRef;
+	return this;
+}
+/**
+ * 创建撤单数据 
+ * @param {Object} orderSysId
+ * @param {Object} orderId
+ * @param {Object} exchangeNo
+ * @param {Object} commodityNo
+ * @param {Object} contractNo
+ * @param {Object} orderNum
+ * @param {Object} drection
+ * @param {Object} orderPrice
+ */
+function createCancleOrderParam(orderSysId, orderId, exchangeNo, commodityNo, contractNo, orderNum, drection, orderPrice) {
+	this.orderSysId = orderSysId;
+	this.orderId = orderId;
+	this.exchangeNo = exchangeNo;
+	this.commodityNo = commodityNo;
+	this.contractNo = contractNo;
+	this.orderNum = orderNum;
+	this.drection = drection;
+	this.orderPrice = orderPrice;
+	return this;
+}
+/**
+ * 创建改单数据 
+ * @param {Object} orderSysId
+ * @param {Object} orderId
+ * @param {Object} exchangeNo
+ * @param {Object} commodityNo
+ * @param {Object} contractNo
+ * @param {Object} orderNum
+ * @param {Object} drection
+ * @param {Object} orderPrice
+ * @param {Object} triggerPrice
+ */
+function createModifyOrderParam(orderSysId, orderId, exchangeNo, commodityNo, contractNo, orderNum, drection, orderPrice ,triggerPrice) {
+	this.orderSysId = orderSysId;
+	this.orderId = orderId;
+	this.exchangeNo = exchangeNo;
+	this.commodityNo = commodityNo;
+	this.contractNo = contractNo;
+	this.orderNum = orderNum;
+	this.drection = drection;
+	this.orderPrice = orderPrice;
+	this.triggerPrice = triggerPrice;
+	return this;
+}

@@ -1,1 +1,1643 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('9k();j 2Q=0,3d=0,3c=0,3b=0;8 4y(){0==2Q&&(21.9j(1w),2Q++)}8 4D(a){"5I"==a?0==3c&&(21.9a(1w),3c++):"5Z"==a?0==3b&&(21.99(1w),3b++):"6F"==a&&0==3d&&(21.98(1w),3d++)}8 96(a){a=95.94(a.9);j b=a.93;a=a.92;4D(b);z(25!=a)z("90"==b)$("#2y").o("\\N\\O"),b=a.4S,a=a.5j,0==b?(4y(),$("#5m").3z(),$("#5C").3P(),$("#8Z").o(1w),$(".37").3P(),8Y(!0),69=4a=!1):(4a=-2,8X(a),8W());J z("8V"==b)48(a),4O(a);J z("5Z"==b)b=a.2x,3p(a),3>b&&35(a);J z("6F"==b)3F(a);J z("5I"==b)3L(a);J z("8U"==b)3p(a),b=a.2x,3>b&&35(a),5==b&&y("\\B\\V\\6z\\6A:\\L\\K\\H"+a.15+"\\F,\\4u\\4v\\H"+a.32+"\\F");J z("8R"==b){4G(a);j b=a.2x,c=a.15;3==b||4==b||5==b?3X(c):0==b?35(a):1!=b&&2!=b||54(a);j d=a.2e,e=P.5F,c=P.1W;4==b&&y("\\18\\G\\U\\19:\\L\\K\\H"+a.15+"\\F,\\2u\\G\\2a\\H"+d+"\\F");5==b&&y("\\B\\V\\6z\\6A:\\L\\K\\H"+a.15+"\\F,\\4u\\4v\\H"+a.32+"\\F");3V&&e==d&&y("\\1t\\G\\U\\19:\\L\\K\\H"+c+"\\F,\\1r\\1i\\W\\H"+a.2U+"\\F,\\1r\\1i\\1a\\H"+a.2t+"\\F")}J"8Q"==b?(3F(a),3L(a),y("\\B\\V\\U\\19\\3x\\L\\K\\H"+a.15+"\\F,\\B\\V\\1O\\X:\\H"+a.1B+"\\F,\\B\\V\\W\\1l:\\H"+a.2s+"\\F")):"8P"==b?(48(a),3R(a)):"8O"==b?(a=a.5j,y(a)):"8N"==b&&($("#2y").o("\\N\\O"),b=a.4S,4a=!0,1==b&&(69=!0))}j 2r=0,2o={},2z={},2I={},2H={},2G={},3g={},5O={},3h={};8 48(a){j b=a.5X,c=2o[b],d=a.3i,e=a.3j,f=a.3t,g=a.3v,h=a.8M,l=a.3D;3g[a.1P]=g;2o[b]=d;2z[b]=e;2I[b]=f;5O[b]=l;3h[b]=h;w 0!=g&&(2H[b]=g);z(w 0==c||0>=c.29)2G[2r]=b,2r++;1y(e=a=d=c=b=0;e<2r;e++)f=2G[e],g=2H[f],b+=2o[f]*g,c+=2z[f]*g,d+=2I[f]*g,a+=3h[f]*g;$("#4x").o(C(b).I(2));$("#4E").o(C(c).I(2));$("#4F").o(C(d).I(2));b="#2E";c=C(a).I(2);0>c?b="#4H":0<a&&(b="#4K");$("#3Z").o(c);$("#3Z").11("1H",b)}8 4O(a){4Y(a)?4Z(a):3R(a)}j 2B={},2n=0;8 4Z(a){j b=a.1P;"56"==b&&(b="56-8K");j c=C(a.3i).I(2),d=C(a.3t).I(2),e=C(a.3j).I(2),f=C(a.3D).I(2),g=C(a.5a).I(2),h=C(a.8J).I(2),l=C(a.8F).I(2),m=C(a.5i).I(2),r=C(a.5l).I(2),c=\'<i 7="1G 5E\'+b+" "+("38-E"+2n)+\'" 9-u-16 = "\'+b+\'">\\t<6 7="1e 8E">\'+b+\'</6>\\t<6 7 = "65">\'+c+\'</6>\\t<6 7 = "66">\'+d+\'</6>\\t<6 7 = "67">\'+e+\'</6>\\t<6 7 = "3H">\'+f+\'</6>\\t<6 7 = "6a">\'+g+\'</6>\\t<6 7 = "8D">\'+h+\'</6>\\t<6 7 = "8A">\'+l+\'</6>\\t<6 7 = "6j">\'+m+\'</6>\\t<6 7 = "6k">\'+r+\'</6>\\t<6 7 = "6l"></6>\\t<6 7 = "36" s="Q:S;">\'+a.3v+"</6></i>";$("#8z .24").1d(c);26();2B[b]=a;4i(b);4k()}8 3R(a){j b=a.5X,c=C(a.3i).I(2),d=C(a.3t).I(2),e=C(a.3j).I(2);C(a.3e).I(2);j f=C(a.5a).I(2),g=C(a.5i).I(2),h=C(a.5l).I(2);a=a.3v;j l=$("i[9-u-16=\'"+b+"\'] 6[7 = \'65\']"),m=$("i[9-u-16=\'"+b+"\'] 6[7 = \'66\']"),r=$("i[9-u-16=\'"+b+"\'] 6[7 = \'67\']"),n=$("i[9-u-16=\'"+b+"\'] 6[7 = \'6a\']"),k=$("i[9-u-16=\'"+b+"\'] 6[7 = \'6j\']"),p=$("i[9-u-16=\'"+b+"\'] 6[7 = \'6k\']"),q=$("i[9-u-16=\'"+b+"\'] 6[7 = \'6l\']"),b=$("i[9-u-16=\'"+b+"\'] 6[7 = \'36\']");l.o(c);m.o(d);r.o(e);n.o(f);k.o(g);p.o(h);q.o("");b.o(a)}j 2k=0;8 3p(a){j b=a.15,c=2j(a.1K),d=2L(a.1U+a.2i),e=a.2U;w 0!=d&&(d=d.4I,e=C(e).I(d));j d=4J(a.2x),f=a.2t,g=a.1B,h=a.8y;4M.4N(h);j l=a.2s,m=a.2e,r=a.32,n=a.8x;a="1j-E"+2k;b=\'<i 7="1G \'+a+\'" 9-1j-1j = "\'+m+\'" 9-E-1j = "\'+2k+\'" 9-u-1j = "\'+b+\'">\\t<6 7="1e 8w">\'+b+\'</6>\\t<6 7 = "8v" s="v: 13;">\'+c+\'</6>\\t<6 7 = "8u" s="v: 13;">\'+e+\'</6>\\t<6 7 = "8t" s="v: 13;">\'+f+\'</6>\\t<6 7 = "8s" s="v: 1m;">\'+8r(h)+\'</6>\\t<6 7 = "5b" s="v: 1m;">\'+d+\'</6>\\t<6 7 = "8q" s="v: 1m;">\'+l+\'</6>\\t<6 7 = "5d" s="v: 13;">\'+g+\'</6>\\t<6 7 = "8p" s="v: 28;">\'+n+\'</6>\\t<6 7 = "8o"  s="v: 45;">\'+m+\'</6>\\t<6 7 = "5k" s="v: T;">\'+r+"</6></i>";$("#49").1d(b);26();5n(a);5q()}8 4G(a){j b=a.2e,c=a.32,d=$("i[9-1j-1j=\'"+b+"\'] 6[7 = \'5b\']"),e=$("i[9-u-1j= \'"+b+"\'] 6[7 = \'5d\']"),b=$("i[9-u-1j= \'"+b+"\'] 6[7 = \'5k\']"),f=a.1B;d.o(4J(a.2x));e.o(f);b.o(c)}j 2b={},2X={},Y=0,P={};8 35(a){j b=a.15,c=a.2i,d=a.1U,e=a.1K,f=2j(e),g=a.2t,h="x-E"+Y,c=\'<i 7="1G \'+h+\'"  9-E-x = "\'+Y+\'" 9-u-x= "\'+b+\'">\\t<6 7="1e 8i">\'+b+\'</6>\\t<6 7 = "8d">\'+b+\'</6>\\t<6 7 = "3k" 9-1n = "\'+e+\'">\'+f+\'</6>\\t<6 7 = "2p" s="v: 28;">\'+a.2U+\'</6>\\t<6 7 = "2h">\'+g+\'</6>\\t<6 7 = "2N">\'+(g-a.1B)+\'</6>\\t<6 7 = "3w"  s = "Q:S;">\'+a.8a+\'</6>\\t<6 7 = "3y"  s = "Q:S;">\'+a.1V+\'</6>\\t<6 7 = "3B"  s = "Q:S;">\'+d+\'</6>\\t<6 7 = "3C"  s = "Q:S;">\'+c+\'</6>\\t<6 7 = "2A" s = "Q:S;">\'+a.2e+\'</6>\\t<6 7 = "6f" s = "Q:S;">\'+a.89+"</6></i>";$("#3G").1d(c);26();2b[b]=6J(a);2X[Y]=b;6m(h);6n()}8 54(a){j b=a.15,c=2j(a.1K),d=2d(a.2t),e=2d(a.1B);a=a.2U;j f=$("i[9-u-x=\'"+b+"\'] 6[7 = \'2N\']"),g=$("i[9-u-x=\'"+b+"\'] 6[7 = \'2p\']"),h=$("i[9-u-x=\'"+b+"\'] 6[7 = \'2h\']"),e=d-e;0==e?(3X(b),6y(b)):0!=e&&(f.o(e),h.o(d),g.o(a),b=2b[b],b.81=e,b.1n=c)}j 2R=0;8 3F(a){j b=2j(a.1K),c=a.2e,d=a.15,e=a.2s,f=a.1B,g=a.80,c=a.2e,h="3T-E"+2R;a=\'<i 7="1G \'+h+\'"  9-E-3T = "\'+2R+\'" 9-u-3T = "\'+d+\'">\\t<6 7="1e 7X">\'+d+\'</6>\\t<6 7 = "7W" s="v: 2V;">\'+b+\'</6>\\t<6 7 = "7T" s="v: 1m;">\'+e+\'</6>\\t<6 7 = "7S" s="v: 13;">\'+f+\'</6>\\t<6 7 = "7R" s="v: 4j;">\'+g+\'</6>\\t<6 7 = "7Q"  s="v: T;">\'+c+\'</6>\\t<6 7 = "7O"  s="v: 28;">\'+a.7N+\'</6>\\t<6 7 = "7M" s="v: 2V;">\'+a.1V+"</6></i>";$("#43").1d(a);26();4p(h);4q()}8 3L(a){4r(a)?4s(a):4t(a)}j 1F={},39={},1h={},12=0;8 4s(a){z(7L(a)){j b=a.15,c=a.4z,d=a.1K,e=4A(d),f=a.4B,g=a.3D,h=a.1V,l=a.1P,m=a.1U,r=a.2i,n=a.4C;w 0==c&&(c=a.1B);w 0==n&&(n=a.2s);w 0==f&&(f=n);j k=0,p=m+r,q=2L(p);w 0!=q&&(g=4c(p),k=q.4d,p=q.2D,l=q.1P,h=q.1V,k=4e(C(g),n,k,p,c,d),2F(k)&&(k=0),g=k+":"+l);q="20-E"+12;c=\'<i 7="1G \'+q+\'" 9-E-M = "\'+12+\'" 9-u-M = "\'+b+\'" 1s = "\'+b+\'"> \\t<6 7="7I 1e" s="v: T;">\'+b+\'</6>\\t<6  7 = "3l" s="v: T;">\'+c+\'</6>\\t<6  7 = "3m" s="v: T;3n-7H:4Q" 9-1n = "\'+d+\'">\'+e+\'</6>\\t<6  7 = "4R" s="v: T;">\'+f+\'</6>\\t<6  7 = "3o"  s="v: 2J;">\'+g+\'</6>\\t<6  7 = "4T"  s="v: T;">\'+h+\'</6>\\t<6  7 = "4U"  s="v: T;">\'+l+\'</6>\\t<6  7 = "4V"  s = "Q:S;">\'+m+\'</6>\\t<6  7 = "4W"  s = "Q:S;">\'+r+\'</6>\\t<6  7 = "3q"  s = "Q:S;">\'+n+\'</6>\\t<6  7 = "3r"  s = "Q:S;">\'+k+"</6></i>";$("#3s").1d(c);26();1F[b]=7G(a);39[12]=b;51(q);52()}}8 4t(a){j b=a.15,c=2d(a.4z),d=a.1K,e=a.4B,f=a.1P,g=a.4C;2F(c)&&(c=2d(a.1B));w 0==g&&(g=a.2s);j h=$("i[9-u-M=\'"+b+"\'] 6[7 = \'3l\']"),l=$("i[9-u-M=\'"+b+"\'] 6[7 = \'3m\']"),f=$("i[9-u-M=\'"+b+"\'] 6[7 = \'4R\']"),m=$("i[9-u-M=\'"+b+"\'] 6[7 = \'3q\']"),r=$("i[9-u-M=\'"+b+"\'] 6[7 = \'3r\']"),n=$("i[9-u-M=\'"+b+"\'] 6[7 = \'3o\']"),k=2d(h.o()),p=2d(l.1g("9-1n")),q=C(m.o())*k,g=C(g)*c;p==d?(k+=c,g=7F(g+q,k),m.o(g),f.o(e),e=f=0,m=a.1U+a.2i,a=2L(m),w 0!=a&&(e=4c(m),m=a.4d,p=a.2D,f=a.1P,e=4e(C(e),g,m,p,c,d),2F(e)&&(e=0),f=e+":"+f),n.o(f),r.o(e),n.11("v","2J"),0>e?n.11("1H","7B"):0<e?n.11("1H","7A"):n.11("1H","7z")):(k-=c,0==k?(58(b),59(b)):0>k&&0==p?d=1:0>k&&1==p?d=0:0<k&&0==p?d=0:0<k&&1==p&&(d=1));0!=k&&(c=4A(d),h.o(2O.2P(k)),l.D(c),l.1g("9-1n",d),b=1F[b],b.7y=k,b.1n=c)}8 4r(a){a=1F[a.15];1J w 0==a||"5f"==a||25==a?!0:!1}8 4Y(a){a=2B[a.1P];1J w 0==a||"5f"==a||25==a?!0:!1}8 5g(){$("#3s").D(\'<i 7="24">\\t<6 7="1e" s="v: T;">\\L\\K\\2S\\22</6>\\t<6 s="v: T;">\\3E\\17\\X\\1a</6>\\t<6 s="v: T;">\\27\\2v</6>\\t<6 s="v: 45;">\\3E\\17\\3I\\W</6>\\t<6 s="v: 2J;">\\5o\\7w\\3J\\5r</6>\\t<6 s="v: T;">\\B\\V\\5s</6>\\t<6 s="v: T;">\\5t\\5u</6></i>\')}8 5v(){$("#49").D(\'<i 7="24">\\t<6 7="1e">\\L\\K\\2S\\22</6>\\t<6  s = "v:13;">\\27\\2v</6>\\t<6  s="v: 13;">\\1r\\1i\\W</6>\\t<6 s = "v:1m;">\\1r\\1i\\1a</6>\\t<6 s="v: 1m;">\\2u\\G\\7u\\7t</6>\\t<6  s="v: 1m;">\\1r\\1i\\7s\\7r</6>\\t<6 s = "v:1m;" >\\U\\B\\3I\\W</6>\\t<6 s = "v:13;"  >\\U\\B\\1a</6>\\t<6 s = "v:28;">\\18\\G\\5A\\5B</6>\\t<6 s = "v:T;">\\2u\\G\\2a</6>   <6 s="v: T;">\\2w\\7q\\3M\\3N</6></i>\')}8 5G(){$("#3G").D(\'<i 7="24">\\t<6 7="1e">\\L\\K\\2S\\22</6>\\t<6>\\L\\K\\7n\\7m</6>\\t<6>\\27\\2v</6>\\t<6  s="v: 28;">\\1r\\1i\\W</6>\\t<6>\\1r\\1i\\1a</6>\\t<6>\\7l\\G\\1a</6></i>\')}8 5K(){$("#43").1d(\'<i 7="24">\\t<6 7="1e">\\L\\K\\2S\\22</6>\\t<6  s="v: 2V;">\\27\\2v</6>\\t<6  s="v: 1m;">\\U\\B\\3I\\W</6>\\t<6  s="v: 13;">\\U\\B\\1a</6>\\t<6  s="v: 4j;">\\U\\B\\7h\\2a</6>\\t<6  s="v: T;">\\2u\\G\\2a</6>\\t<6  s="v: 28;">\\U\\B\\5A\\5B</6>\\t<6  s="v: 2V;">\\B\\V\\5s</6></i>\')}8 5M(){$("#5N").1d(\'<i 7="24">\\t<6 7="1e">\\5t\\5u</6>\\t<6>\\2Z\\5P\\5Q</6>\\t<6>\\2Z\\7g\\7f</6>\\t<6>\\5T\\5U\\3Q</6>\\t<6>\\2Z\\7b\\5o\\3J</6>\\t<6>\\79\\3E\\5T\\5U\\3Q</6>\\t<6>\\5Y\\5P\\5Q</6>\\t<6>\\5Y\\3S\\60</6>\\t<6>\\2Z\\3S\\60</6>\\t<6>\\78\\3S\\73\\3Q</6>\\t<6>\\3J\\5r\\72</6></i>\')}8 71(){$("#6Y").1d(\'<i 7="37" s = "Q:S;">\\t<6><a 23="1S:w(0);" 1s = "68">\\34\\3Y\\1p\\17</a></6>\\t<6><a 23="1S:w(0);" 1s = "6c">\\1p\\17</a></6>\\t<6><a 23="1S:w(0);" 1s = "6d">\\2w\\1O</a></6></i>\')}8 6V(){$("#6U").1d(\'<i 7="37"  s = "Q:S;">\\t<6><a 23="1S:w(0);" 1s = "6g">\\34\\18</a></6>\\t<6><a 23="1S:w(0);" 1s = "6h">\\18\\G</a></6>\\t<6><a 23="1S:w(0);" 1s = "6i">\\1t\\G</a></6></i>\')}8 51(a){$("."+a+"").Z("R",8(){j a=$(1b);1h.2g=a.1g("9-u-M");1h.12=a.1g("9-E-M")})}8 5n(a){$(8(){$("."+a+"").Z("R",8(){$(1b)})})}8 6m(a){$(8(){$("."+a+"").Z("R",8(){j a=$(1b),c=a.1g("9-u-x");P.1W=c;P.Y=a.1g("9-E-x");j a=$("i[9-u-x=\'"+c+"\'] 6[7 = \'2p\']").o(),d=$("i[9-u-x=\'"+c+"\'] 6[7 = \'2h\']").o(),c=$("i[9-u-x=\'"+c+"\'] 6[7 = \'2A\']").o();P.46=a;P.47=d;P.5F=c})})}8 4p(a){$(8(){$("."+a+"").Z("R",8(){$(1b)})})}8 4i(a){$(8(){$("."+a+"").Z("R",8(){$(1b)})})}8 52(){12++}8 5q(){2k++}8 6n(){Y++}8 4q(){2R++}8 4k(){2n++}8 58(a){$(8(){$("i[9-u-M=\'"+a+"\']").6p()})}8 3X(a){$("i[9-u-x=\'"+a+"\']").6p()}8 59(a){6q 1F[a]||(1F[a]=25)}8 6r(){1F={}}8 6s(){39={}}8 6t(){1h={}}8 6y(a){6q 2b[a]||(2b[a]=25)}8 6u(){2b={}}8 6v(){2X={}}8 6w(){P={}}8 6x(a){$("."+a+"").Z("R",8(){j a=$(1b).o();$("#2c").A(a);$("#1E").11("Q","S")})}8 6B(){$.6T({6R:6E+"/6Q/6P",1T:"6O",6K:8(a){z(a){j b=a.9;z(w 0!=b){a=b.9;1y(j c=a.29,d=0;d<c;d++){j b=a[d],e="82"+d,b=\'<p 7 = "\'+e+\'">\'+b.6L+"</p>";$("#1E").1d(b);6x(e)}}}}})}$(8(){8 a(a){j c=6M[a],d=6N[a],e=c.2D,f=d.44;$("#1R #4b").A(f);$("#1R #6D").A(e);$("#1R #6S").A(c.4d);$("#1R #6C").A(c.1V);$("#1R #41").A(c.1U);$("#1R #40").A(c.6W);$("#1R #6X").A(c.4I);$("#3U").A(d.44);$("#6Z").o(c.70+"  "+a);$("#64").o(31(f,e,0));$("#62").o(31(f,e,1));74(0);j g=$(".75 .76");g.77(8(){g.61("30")});c=$("i[9-u-7a=\'"+a+"\']");c.5W("30");c.R();7c(a);7d();7e(d)}w 0!=5S&&0<5S.29&&6B();$("#2c").5R(8(){$("#1E").11("Q","5L")});$("#1E").5R(8(){$("#1E").11("Q","5L")});$("#2c").7i(8(){$("#1E").11("Q","S")});$("#2c").7j(8(){$("#1E").11("Q","S")});$(".7k").R(8(){14.3O({1T:1,5H:"\\7o\\7p\\5D\\22",5z:"5y-14-5x",3K:["7v","2J"],5p:$("#7x").D(),3A:["\\2q\\2f\\55\\2a?\\7C\\7D\\7E\\10","\\50\\4P"],4L:8(){7J.3O(6E+"/7K/E");14.2C()},4n:8(){14.2C()}})});4m();$("#4l").7P(8(){j b=$("#4l").A();a(b)});$("#5m").3P();$("#5C").3z();$("#2y").R(8(){1w=$("#2c").A();w 0==1w||0==1w.29?14.1Y("\\10\\2m\\2l\\B\\V\\55\\2a","#2c",{1Y:3}):(3W=$.7U.7V($("#6I").A()),w 0==3W||0==3W.29?14.1Y("\\10\\2m\\2l\\B\\V\\5D\\22","#6I",{1Y:3}):"\\N\\O\\6H"!=$("#2y").o()&&($("#2y").o("\\N\\O\\6H"),7Y()))});$("#7Z").R(8(){1I("\\1c\\1f\\83\\84\\85\\86\\N\\O\\87",88,1u)});$("#3U").Z("2W 8b",8(){$("#64").o($(1b).A());$("#62").o($(1b).A())})});8 4m(){$(".8c").Z("R",8(){z(1N){j a=$(1b),b=$("#4b").A(),c=$("#6D").A(),d=$("#8e").A(),e=$("2W[1T=\'8f\']:8g").A(),f=a.1g("9-u-8h"),g=0,g=1==e?31(b,c,f):$("#3U").A(),a=$("#41").A(),b=$("#40").A(),a="\\1c\\1f\\1C\\B\\2u\\G:\\L\\K\\H"+a+b+"\\F,\\W\\1l:\\H"+g+"\\F,\\1O\\X:\\H"+d+"\\F,\\27\\2v\\8j\\8k:\\H"+2j(f)+"\\F";14.8l(a+"?",{3A:["\\1c\\1f","\\8m\\8n"]},8(){2K(d,f,g)},8(){1u()})}J y("\\1k\\N\\O,\\10\\1L\\N\\O")});$("#68").Z("R",8(){z(1N)z(0==12)y("\\2q\\2f\\1A\\1z\\1p\\17\\1D\\X\\1x");J{1y(j a=!1,b=0;b<12;b++)w 0!=$(".20-E"+b+"").D()&&(a=!0);a?1I("\\1c\\1f\\34\\3Y\\1p\\17",4X,1u):y("\\2q\\2f\\1A\\1z\\1p\\17\\1D\\X\\1x")}J y("\\1k\\N\\O,\\10\\1L\\N\\O")});$("#6c").Z("R",8(){z(1N){j a=1h.2g,b=1h.12;w 0==a||w 0==$(".20-E"+b+"").D()?y("\\10\\1Z\\1X\\2M\\2T\\1A\\1z\\1p\\17\\1D\\X\\1x"):1I("\\1c\\1f\\1p\\17\\L\\K\\H"+a+"\\F",6e,1u)}J y("\\1k\\N\\O,\\10\\1L\\N\\O")});$("#6d").Z("R",8(){z(1N){j a=1h.2g,b=1h.12;w 0==a||w 0==$(".20-E"+b+"").D()?y("\\10\\1Z\\1X\\2M\\2T\\1A\\1z\\2w\\1O\\1D\\X\\1x"):1I("\\1c\\1f\\2w\\1O\\8B\\8C\\L\\K\\H"+a+"\\F",6b,1u)}J y("\\1k\\N\\O,\\10\\1L\\N\\O")});$("#6g").Z("R",8(){z(1N)z(0==Y)y("\\2q\\2f\\1A\\1z\\18\\G\\1D\\X\\1x");J{1y(j a=!1,b=0;b<Y;b++)w 0!=$(".x-E"+b+"").D()&&(a=!0);a?1I("\\1c\\1f\\34\\3Y\\18\\G\\L\\K",63,1u):y("\\2q\\2f\\1A\\1z\\18\\G\\1D\\X\\1x")}J y("\\1k\\N\\O,\\10\\1L\\N\\O")});$("#6h").Z("R",8(){z(1N){j a=P.1W,b=P.Y;w 0==a||w 0==$(".x-E"+b+"").D()?y("\\10\\1Z\\1X\\2M\\2T\\1A\\1z\\18\\G\\1D\\X\\1x"):1I("\\1c\\1f\\18\\G\\L\\K\\H"+a+"\\F",5e,1u)}J y("\\1k\\N\\O,\\10\\1L\\N\\O")});$("#6i").Z("R",8(){z(1N){j a=P.1W,b=P.Y;z(w 0==a||w 0==$(".x-E"+b+"").D())y("\\10\\1Z\\1X\\2M\\2T\\1A\\1z\\1t\\G\\1D\\X\\1x");J{j b=P.46,c=P.47;w 0==b&&(b="");w 0==c&&(c=0);14.3O({1T:1,5H:"\\1t\\G",3K:["45","8G"],5z:"5y-14-5x",3K:["8H","8I"],5p:\'<5c  s = "3f:#8L;3n:13 13 13 13">\\t<p>\\1r\\1i\\W\\1l\\3x<2W s="3f:#2E;4f:5h 57  #53" 1T="o" 4w = "\'+b+\'"  1s="2Y"/></p>\\t<p s = "3n-8S:4Q;">\\1r\\1i\\X\\1a\\3x<2W  s="3f:#2E;4f:5h 57  #53" 1T="8T" 4w = "\'+c+\'"   1s="33"/></p></5c>\',3A:["\\1c\\1f\\1t\\G","\\50\\4P"],4L:8(){j b=$("#2Y").A(),c=$("#33").A();0>=b?14.1Y("\\W\\1l\\2m\\2l\\1q\\1o","#2Y"):0>=c?14.1Y("\\X\\1a\\2m\\2l\\1q\\1o","#33"):1I("\\1c\\1f\\1t\\G\\L\\K\\H"+a+"\\F",4g,1u)},4n:8(){14.2C()}})}}J y("\\1k\\N\\O,\\10\\1L\\N\\O")})}8 2K(a,b,c){j d=$("#4b").A();z(1v(d))y("\\5J\\6G\\W\\1l\\1q\\1o");J z(2F(a)||1v(a))y("\\91\\27\\1O\\X\\2m\\2l\\1q\\1o");J z(1v(c))y("\\B\\V\\W\\1l\\1q\\1o");J{j d=$("#6C").A(),e=$("#41").A(),f=$("#40").A();21.2K(d,e,f,a,b,0,c,0,3u());y("\\L\\K\\H"+e+f+"\\F\\1C\\B\\U\\19,\\1Q\\1M\\B\\V")}}8 4X(){1y(j a=0;a<12;a++){j b=39[a];z(w 0!=b&&w 0!=$(".20-E"+a+"").D()&&(b=3a(b))){j c=[];c[0]=b;4o(c)}}y("\\1C\\B\\U\\19,\\1Q\\1M\\B\\V")}8 6e(){j a=1h.2g;z(w 0==a)y("\\1k\\1Z\\1X\\1p\\17\\3M\\3N");J z(a=3a(a)){j b=[];b[0]=a;4o(b);y("\\1C\\B\\U\\19,\\1Q\\1M\\B\\V")}}8 6b(){j a=1h.2g;z(w 0==a)y("\\1k\\1Z\\1X\\2w\\1O\\3M\\3N");J{j b=3a(a),c=b.1V,d=b.1U,e=b.2i,f=2*b.2t,g=b.1K,a=d+e;21.2K(c,d,e,f,g,0,b.97,0,3u());y("\\L\\K\\H"+a+"\\F\\1C\\B\\U\\19,\\1Q\\1M\\B\\V")}}8 63(){1y(j a=0;a<Y;a++){j b=2X[a];z(w 0!=b&&w 0!=$(".x-E"+a+"").D()){j b=42(b),c=[];c[0]=b;6o(c)}}y("\\1C\\B\\U\\19,\\1Q\\1M\\18\\G")}8 5e(){j a=P.1W,b=P.Y;z(w 0!=a&&w 0!=$(".x-E"+b+"").D()){j b=42(a),c=[];c[0]=b;6o(c);y("\\L\\K\\H"+a+"\\F\\1C\\B\\U\\19,\\1Q\\1M\\18\\G")}}j 3V=!1;8 4g(){j a=P.1W,b=P.Y;z(w 0!=a&&w 0!=$(".x-E"+b+"").D()){j c=$("#2Y").A(),d=$("#33").A();1v(c)?y("\\1t\\G\\W\\1l\\1q\\1o"):1v(d)?y("\\1t\\G\\X\\1a\\1q\\1o"):(b=5V(a),b.46=c,b.47=d,c=[],c[0]=b,9b(c),14.2C(),3V=!0,y("\\L\\K\\H"+a+"\\F\\1C\\B\\U\\19,\\1Q\\1M\\B\\V"))}}8 3a(a){j b=$("i[9-u-M=\'"+a+"\'] 6[7 = \'3m\']").1g("9-1n"),c=$("i[9-u-M=\'"+a+"\'] 6[7 = \'3l\']").o();$("i[9-u-M=\'"+a+"\'] 6[7 = \'3q\']").o();$("i[9-u-M=\'"+a+"\'] 6[7 = \'3o\']").o();j d=$("i[9-u-M=\'"+a+"\'] 6[7 = \'4V\']").o(),e=$("i[9-u-M=\'"+a+"\'] 6[7 = \'4W\']").o();a=$("i[9-u-M=\'"+a+"\'] 6[7 = \'4T\']").o();j f=0;0==b&&(f=1);j g=d+e,b=2L(g),g=4c(g),h=0,l=0;w 0!=b&&w 0!=g&&(h=b.2D,l=g.44);z(1v(l))1J y("\\5J\\6G\\W\\1l\\1q\\1o"),!1;b=31(l,h,f);4M.4N(b);1J 1v(b)?(y("\\1p\\17\\W\\1l\\1q\\1o"),!1):9c(a,d,e,c,f,0,2O.2P(b),0,3u())}8 42(a){j b=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3k\']").1g("9-1n"),c=$("i[9-u-x=\'"+a+"\'] 6[7 = \'2p\']").o(),d=$("i[9-u-x=\'"+a+"\'] 6[7 = \'2h\']").o();$("i[9-u-x=\'"+a+"\'] 6[7 = \'2N\']").o();j e=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3w\']").o(),f=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3B\']").o(),g=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3C\']").o(),h=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3y\']").o();a=$("i[9-u-x=\'"+a+"\'] 6[7 = \'2A\']").o();1J 9d(e,a,h,f,g,d,b,2O.2P(c))}8 5V(a){j b=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3k\']").1g("9-1n"),c=$("i[9-u-x=\'"+a+"\'] 6[7 = \'2p\']").o(),d=$("i[9-u-x=\'"+a+"\'] 6[7 = \'2h\']").o();$("i[9-u-x=\'"+a+"\'] 6[7 = \'2N\']").o();j e=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3w\']").o(),f=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3B\']").o(),g=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3C\']").o(),h=$("i[9-u-x=\'"+a+"\'] 6[7 = \'3y\']").o(),l=$("i[9-u-x=\'"+a+"\'] 6[7 = \'2A\']").o();a=$("i[9-u-x=\'"+a+"\'] 6[7 = \'6f\']").o();1J 9e(e,l,h,f,g,d,b,2O.2P(c),a)}8 9f(){1y(j a=0,b=0;b<12;b++)z(w 0!=$(".20-E"+b+"").D()){j c=$("i[9-E-M=\'"+b+"\'] 6[7 = \'4U\']").o(),d=$("i[9-E-M=\'"+b+"\'] 6[7 = \'3r\']").o();z(w 0!=$(".5E"+c+"").D()){j e=$("i[9-u-16=\'"+c+"\'] 6[7 = \'3H\']"),c=$("i[9-u-16=\'"+c+"\'] 6[7 = \'36\']");e.o();C(c.o()).I(3);a+=1*d;e.o(C(a).I(2))}}}8 9g(){1y(j a=0,b=0;b<2n;b++)z(w 0!=$(".38-E"+b).D()){j c=$("#3e"),d=$(".38-E"+b+" 6[7 = \'3H\']").o(),e=$(".38-E"+b+" 6[7 = \'36\']").o(),a=a+d*e;0>a?c.11("1H","#4H"):0<a?c.11("1H","#4K"):0==a&&c.11("1H","#2E");c.o(C(a).I(2))}}8 9h(){$("#5N").D("");$("#49").D("");$("#3G").D("");$("#43").D("");$("#3s").D("");$("#4x").D(0);$("#4E").D(0);$("#4F").D(0);$("#3e").D(0);$("#3Z").D(0);$(".37").3z();5g();5G();5M();5v();5K()}8 9i(){3b=3c=3d=2Q=0;6u();6v();6w();6r();6s();6t();Y=12=0;2B={};2r=0;2o={};2z={};2I={};2H={};2G={};3g={};2n=2k=0}8 1v(a){1J w 0==a||25==a||0==a.29||0>=C(a)?!0:!1}8 26(){$(".4h .5w .1G").R(8(){j a=$(1b);$(".4h .5w .1G").61("30");a.5W("30")})};',62,579,'||||||li|class|function|data|||||||||ul|var|||||text||||style||tion|width|void|des|tip|if|val|u4ea4|parseFloat|html|index|u3011|u5355|u3010|toFixed|else|u7ea6|u5408|position|u767b|u5f55|selectDesgnate|display|click|none|80px|u6210|u6613|u4ef7|u6570|designateIndex|bind|u8bf7|css|postionIndex|50px|layer|ContractCode|fund|u4ed3|u64a4|u529f|u91cf|this|u786e|append|ml|u8ba4|attr|selectPostion|u6258|order|u672a|u683c|70px|drection|u8bef|u5e73|u9519|u59d4|id|u6539|cancleCallBack|validationInputPrice|username|u636e|for|u8981|u9700|TradeNum|u63d0|u7684|more_account|localCachePostion|tab_content|color|tipConfirm|return|Drection|u5148|u5f85|isLogin|u624b|CurrencyNo|u7b49|trade_data|javascript|type|CommodityNo|ExchangeNo|contraction|u62e9|tips|u9009|postion|Trade|u7801|href|tab_lis|null|tabOn|u4e70|120px|length|u53f7|localCacheDesignate|quotation_account|parseInt|OrderID|u6709|contractCode|des4|ContractNo|analysisBusinessBuySell|orderIndex|u5165|u8f93|fundsDetailsIndex|loadCachBanlance|des3|u6ca1|uehIndex|TradePrice|OrderNum|u8ba2|u5356|u53cd|OrderStatus|trade_login|loadCachDeposit|des10|localCacheFundDetail|closeAll|MiniTikeSize|FFFFFF|isNaN|loadCachAccountNo|loadCurrencyRate|loadCachCanuse|160px|doInsertOrder|getLocalCacheCommodity|u4e00|des5|Math|abs|holdFirstLoadDataIndex|tradesIndex|u4ee3|u9879|OrderPrice|40px|input|localCachedesignateContractCode|update_des_price|u4eca|on|doGetMarketPrice|StatusMsg|update_des_number|u5168|appendDesignates|detail_currencyRate|caozuo|funds|localCachePositionContractCode|doGetSellingBasicParam|tradeFirsetLoadDataIndex|orderFirsetLoadDataIndex|accountFirstLoadDataIndex|floatingProfit|background|localCacheCurrencyAndRate|loadCachCloseProfit|TodayBalance|Deposit|des2|position1|position2|padding|position4|appendOrder|position9|position10|hold_gdt1|TodayCanUse|doGetOrderRef|CurrencyRate|des6|uff1a|des7|hide|btn|des8|des9|FloatingProfit|u6301|appendTradeSuccess|des_gdt1|detail_floatingProfit|u5747|u76c8|area|appendPostionAndUpdate|u4fe1|u606f|open|show|u91d1|updateFundsDetails|u7ed3|trade|money_number|isChangeOrder|password|delDesignatesDom|u90e8|closeProfit|contractNo|commodeityNo|doGetCancleOrderBasicParam|trade_gdt1|LastPrice|100px|orderPrice|orderNum|updateBalance|order_gdt1|loginFail|lastPrice|getLocalCacheQuote|ContractSize|doGetFloatingProfit|border|doInsertChangeSingleOrder|quotation_detailed|addFundDetailBindClick|250px|updateFundsDetailsIndex|select_commodity|bindOpertion|btn2|closing|addTradeSuccessBindClick|updateTradesIndex|validationPostionIsExsit|addPostion|updatePostion|u539f|u56e0|value|todayBalance|LoginForwardInitLoadData|HoldNum|analysisBusinessDirection|HoldAvgPrice|OpenAvgPrice|linearlyLoadData|deposit|todayCanUse|updateOrder|0bffa4|DotSize|analysisOrderStatus|ff5500|yes|console|log|addAndUpdateFundsDetails|u95ed|10px|position3|Code|position5|position6|position7|position8|doInsertAllSellingOrder|validationFundDetailsIsExsit|addFundsDetails|u5173|addPositionBindClick|updatePositionIndex|ABABAB|updateDesignatesDom|u8d26|HKD|solid|delPositionDom|deletePositionsContractCode|KeepDeposit|order5|div|order7|doInsertCancleOrder|undefined|generatePostionTitle|1px|TodayAmount|Message|order10|FrozenMoney|show_login|addOrderBindClick|u6d6e|content|updateOrderIndex|u5229|u6240|u5e01|u79cd|generateOrderTitle|quotation_detailed_title|rim|layui|skin|u65f6|u95f4|show_user_info|u5bc6|currencyNo|orderId|generateDesignateTitle|title|OnRspQryHold|u6700|generateTradeSuccessTitle|block|generateAccountTitle|account_gdt1|loadCachFloatingProfit|u6743|u76ca|mouseover|uid|u4fdd|u8bc1|doGetModifyOrderBasicParam|addClass|AccountNo|u6628|OnRspQryOrder|u5b58|removeClass|float_sell|doInsertAllCancleOrder|float_buy|detail_todayBalance|detail_todayCanUse|detail_deposit|allPosition|anotherPlace|detail_keepDepositf|doInsertBackhandOrder|aPosition|positionBckhand|doInsertSellingOrder|des11|allDesOrder|desOrder|updateDesOrder|detail_todayAmount|detail_frozenMoney|detail_profitRate|addDesignateBindClick|updateDesignateIndex|cancleOrder|remove|delete|deleteAllPositionsLocalCache|deleteAllPositionContractCode|deleteSelectPostion|deleteAllDesgnatesLocalCache|deleteAllDesgnatesContractCode|deleteSelectDesgnate|addBindsss|deleteDesignatesContractCode|u5931|u8d25|loadOperateLogin|exchangeNo|miniTikeSize|basepath|OnRspQryTrade|u65b0|u4e2d|quotation_password|createDesignatesParam|success|tranAccount|localCacheCommodity|localCacheQuote|get|operateLogin|user|url|contractSize|ajax|des_title|generateDesHandleDom|MainContract|doSize|hold_title|commodity_title|CommodityName|generateHoldHandleDom|u7387|u8d44|setMoneyNumberIndex|futuresList|left_xiangmu|each|u51bb|u7ef4|com|u65e5|setLocalCacheSelect|clearRightData|updateRight|u7528|u53ef|u7f16|mouseout|blur|backPassword|u6302|u79f0|u540d|u5fd8|u8bb0|u9988|u6001|u72b6|u578b|u7c7b|300px|u52a8|back_passwork|holdNum|white|red|green|u7acb|u5373|u7533|doGetOpenAvgPrice|createPostionsParam|left|position0|window|outDisk|isJson|trade8|TradeDateTime|trade7|change|trade6|trade5|trade3|trade2|base64|encode|trade1|trade0|tradeLogin|trade_loginOut|TradeNo|cdNum|selectAccount|u9000|u51fa|u5f53|u524d|u5417|tradeLoginOut|TriggerPrice|OrderSysID|propertychange|trade_buy|des1|entrust_number|radio|checked|buy|des0|u65b9|u5411|confirm|u53d6|u6d88|order9|order8|order6|analysisOrderPriceType|order4|order3|order2|order1|order0|InsertDateTime|OrderPriceType|account_title|detail_oldAmount|u64cd|u4f5c|detail_oldBalance|detail_currency|OldAmount|200px|420px|240px|OldBalance|HKFE|F2F2F2|CloseProfit|OnRspLogout|OnError|OnRtnMoney|OnRtnOrderTraded|OnRtnOrderState|top|number|OnRspOrderInsert|OnRspQryAccount|loginOut|tipAlert|setIsLogin|top_username|OnRspLogin|u8d2d|Parameters|Method|parse|JSON|handleData|LimitPrice|doAccount|doTrade|doOrder|modifyOrder|createSellingParam|createCancleOrderParam|createModifyOrderParam|sumListfloatingProfit|updateHoldProfit|clearTradListData|clearLocalCacheData|doHold|initTrade'.split('|'),0,{}))
+/**
+ * 初始化交易
+ */
+initTrade();
+//持仓发送请求次数记录
+var holdFirstLoadDataIndex = 0;
+//个人账户信息发送请求次数纪录
+var accountFirstLoadDataIndex = 0;
+//委托发送请求次数记录
+var orderFirsetLoadDataIndex = 0;
+//成功记录发送请求次数记录
+var tradeFirsetLoadDataIndex = 0;
+/**
+ * 用户登陆成功加载数据
+ */
+function LoginForwardInitLoadData() {
+	if (holdFirstLoadDataIndex == 0) {
+		Trade.doHold(username);
+		holdFirstLoadDataIndex++;
+	}
+}
+/**
+ * 线性加载数据
+ * @param {Object} method 返回的数据标识
+ */
+function linearlyLoadData(method) {
+	if (method == "OnRspQryHold") {
+		if (orderFirsetLoadDataIndex == 0) {
+			Trade.doOrder(username);
+			orderFirsetLoadDataIndex++;
+		}
+	} else if (method == "OnRspQryOrder") {
+		if (tradeFirsetLoadDataIndex == 0) {
+			Trade.doTrade(username);
+			tradeFirsetLoadDataIndex++;
+		}
+	} else if (method == "OnRspQryTrade") {
+		if (accountFirstLoadDataIndex == 0) {
+			Trade.doAccount(username);
+			accountFirstLoadDataIndex++;
+		}
+	}
+}
+/**
+ * 处理返回数据
+ * @param {Object} EVT
+ */
+function handleData(evt){
+	var dataString = evt.data;
+	var data = JSON.parse(dataString);
+	var method = data.Method;
+	var parameters = data.Parameters;
+	linearlyLoadData(method);
+	if (parameters != null) {
+		if (method == "OnRspLogin") {
+			$("#trade_login").text("登录");
+			var code = parameters.Code;
+			var loginMessage = parameters.Message;
+			//登录成功加载
+			if (code == 0) {
+				LoginForwardInitLoadData();
+				$("#show_login").hide();
+				$("#show_user_info").show();
+				$("#top_username").text(username);
+				$(".caozuo").show();
+				setIsLogin(true);
+				loginFail = false;
+				anotherPlace = false;
+			} else {
+				loginFail = -2;
+				tipAlert(loginMessage);
+				//登录失败清理数据
+				loginOut();
+			}
+			//查询个人账户信息回复
+		} else if (method == "OnRspQryAccount") {
+			var accountParam = parameters;
+			updateBalance(accountParam);
+			addAndUpdateFundsDetails(accountParam);
+			//查询订单信息回复
+		} else if (method == "OnRspQryOrder") {
+			var orderStatus = parameters.OrderStatus;
+			var orderParam = parameters;
+			appendOrder(orderParam);
+			if (orderStatus < 3) {
+				appendDesignates(orderParam);
+			}
+			//查询成交记录回复
+		} else if (method == "OnRspQryTrade") {
+			appendTradeSuccess(parameters);
+			//查询持仓信息回复
+		} else if (method == "OnRspQryHold") {
+			var positionParam = parameters;
+			appendPostionAndUpdate(positionParam);
+			//报单录入请求回复
+		} else if (method == "OnRspOrderInsert") {
+			var insertOrderParam = parameters;
+			appendOrder(insertOrderParam);
+			var inserOrderStatus = insertOrderParam.OrderStatus;
+			if (inserOrderStatus < 3) {
+				appendDesignates(insertOrderParam);
+			}
+			if(inserOrderStatus == 5){
+				tip("交易失败:合约【"+insertOrderParam.ContractCode+"】,原因【"+insertOrderParam.StatusMsg+"】");
+			}
+			//订单状态通知
+		} else if (method == "OnRtnOrderState") {
+			var orderParam = parameters;
+			updateOrder(orderParam);
+			var orderStatusWeHooks = orderParam.OrderStatus;
+			//当订单状态改变
+			var contractCode = orderParam.ContractCode;
+			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
+				delDesignatesDom(contractCode);
+			} else if (orderStatusWeHooks == 0) {
+				appendDesignates(orderParam);
+			} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
+				updateDesignatesDom(orderParam);
+			}
+			var orderId = orderParam.OrderID;
+			var cacaleOrderId = selectDesgnate["orderId"];
+			var contractCode = selectDesgnate["contraction"];
+			if(orderStatusWeHooks == 4){
+				tip("撤单成功:合约【"+orderParam.ContractCode+"】,订单号【"+orderId+"】");
+			}
+			if(orderStatusWeHooks == 5){
+				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
+			}
+			if(isChangeOrder && cacaleOrderId==orderId){
+				var orderPrice = orderParam.OrderPrice;
+				var orderNum = orderParam.OrderNum;
+				tip("改单成功:合约【"+contractCode+"】,委托价【"+orderPrice+"】,委托量【"+orderNum+"】");
+			}
+			//订单成交通知
+		} else if (method == "OnRtnOrderTraded") {
+			var tradeParam = parameters;
+			appendTradeSuccess(tradeParam);
+			appendPostionAndUpdate(tradeParam);
+			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
+			//资金变化通知
+		} else if (method == "OnRtnMoney") {
+			var accountParam = parameters;
+			updateBalance(accountParam)
+			updateFundsDetails(accountParam);
+		} else if (method == "OnError") {
+			var code = parameters.Code;
+			var loginMessage = parameters.Message;
+			tip(loginMessage);
+		}else if(method == "OnRspLogout"){
+			$("#trade_login").text("登录");
+			var code = parameters.Code;
+			var loginMessage = parameters.Message;
+			loginFail = true;
+			if(code == 1){
+				anotherPlace = true;
+			}
+		}
+	}
+}
+/**
+ * 修改用户账户信息
+ * @param {Object} parama 用户信息的json对象
+ */
+var uehIndex = 0;
+var loadCachBanlance = {};
+var loadCachDeposit = {};
+var loadCachCanuse = {};
+var loadCurrencyRate = {};
+var loadCachAccountNo = {};
+var localCacheCurrencyAndRate = {};
+var loadCachFloatingProfit = {};
+var loadCachCloseProfit = {};
+function updateBalance(parama){
+	var currencyNo = parama.CurrencyNo;
+	var accountNo = parama.AccountNo;
+	var cachBanlace = loadCachBanlance[accountNo];
+	var banlance = parama.TodayBalance;
+	var deposit = parama.Deposit;
+	var canuse = parama.TodayCanUse;
+	var currency = parama.CurrencyRate; 
+	var closeProfit = parama.CloseProfit;
+	var floatingProfit = parama.FloatingProfit;
+	localCacheCurrencyAndRate[currencyNo]  = currency;
+	loadCachBanlance[accountNo] = banlance;
+	loadCachDeposit[accountNo] = deposit;
+	loadCachCanuse[accountNo] = canuse;
+	loadCachFloatingProfit[accountNo] = floatingProfit;
+	loadCachCloseProfit[accountNo] = closeProfit;
+	if(currency != undefined)
+		loadCurrencyRate[accountNo] = currency;
+	if(cachBanlace == undefined || cachBanlace.length <= 0){
+		loadCachAccountNo[uehIndex] = accountNo;
+		uehIndex++;
+	}
+	var $banlance = 0.00;
+	var $deposit = 0.00
+	var $canuse = 0.00
+	var $floatFit = 0.00;
+	var $clostFit = 0.00;
+	for(var i = 0 ; i < uehIndex; i++){
+		var ac = loadCachAccountNo[i]; 
+		var cr = loadCurrencyRate[ac];
+		$banlance = $banlance + loadCachBanlance[ac] * cr;
+		$deposit = $deposit + loadCachDeposit[ac] * cr;
+		$canuse = $canuse + loadCachCanuse[ac]  * cr;
+		$clostFit = $clostFit + loadCachCloseProfit[ac]  * cr;
+		$floatFit = $floatFit + loadCachFloatingProfit[ac] * cr;
+	}
+	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
+	$("#deposit").text(parseFloat($deposit).toFixed(2));
+	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
+	/*var $float = parseFloat($floatFit).toFixed(2) ;
+	if(isNaN($float)){
+		$float = 0;
+	}
+	if($float < 0){
+		color = "#0bffa4";
+	}else if($float > 0){
+		color = "#ff5500";
+	}
+	$("#floatingProfit").text($float);
+	$("#floatingProfit").css("color",color);*/
+	var color = "#FFFFFF";
+	var $closeProfit = parseFloat($clostFit).toFixed(2);
+	if($closeProfit < 0){
+		color = "#0bffa4";
+	}else if($clostFit > 0){
+		color = "#ff5500";
+	}
+	$("#closeProfit").text($closeProfit);
+	$("#closeProfit").css("color",color);
+};
+/**
+ * 增加或更新资金明细
+ * @param param
+ */
+function addAndUpdateFundsDetails(param){
+	if(validationFundDetailsIsExsit(param)){
+		addFundsDetails(param);
+	}else{
+		updateFundsDetails(param);
+	}
+}
+/**
+ * 全局缓存资金资金明细的列表信息
+ */
+var localCacheFundDetail = {};
+/**
+ * 资金明细的索引
+ */
+var fundsDetailsIndex = 0;
+/**
+ * 增加资金明细
+ * @param param
+ */
+function addFundsDetails(param){
+	var currencyNo = param.CurrencyNo;
+	if(currencyNo == "HKD"){
+		currencyNo = "HKD-HKFE";
+	}
+	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
+	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	var deposit = parseFloat(param.Deposit).toFixed(2);
+	var floatingProfit = parseFloat(param.FloatingProfit).toFixed(2);
+	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
+	var oldBalance = parseFloat(param.OldBalance).toFixed(2);
+	var oldAmount = parseFloat(param.OldAmount).toFixed(2);
+	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
+	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
+	var currencyRate = param.CurrencyRate;
+	var profitRate = "";
+	var cls = "currencyNo"+currencyNo;
+	var funds_cls = "funds-index"+fundsDetailsIndex;
+	var html = '<ul class="tab_content '+cls+' '+funds_cls+'" data-tion-fund = "'+currencyNo+'">'+
+				'	<li class="ml detail_currency">'+currencyNo+'</li>'+
+				'	<li class = "detail_todayBalance">'+todayBalance+'</li>'+
+				'	<li class = "detail_todayCanUse">'+todayCanUse+'</li>'+
+				'	<li class = "detail_deposit">'+deposit+'</li>'+
+				'	<li class = "detail_floatingProfit">'+floatingProfit+'</li>'+
+				'	<li class = "detail_keepDepositf">'+keepDepositf+'</li>'+
+				'	<li class = "detail_oldBalance">'+oldBalance+'</li>'+
+				'	<li class = "detail_oldAmount">'+oldAmount+'</li>'+
+				'	<li class = "detail_todayAmount">'+todayAmount+'</li>'+
+				'	<li class = "detail_frozenMoney">'+frozenMoney+'</li>'+
+				'	<li class = "detail_profitRate">'+profitRate+'</li>'+
+				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
+				'</ul>';
+	$("#account_title .tab_lis").append(html);
+	tabOn();
+	localCacheFundDetail[currencyNo]=param;
+	addFundDetailBindClick(currencyNo);
+	updateFundsDetailsIndex();
+} 
+/**
+ * 更新资金明细
+ * @param param
+ */
+function updateFundsDetails(param){
+	var currencyNo = param.AccountNo;
+	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
+	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	var deposit = parseFloat(param.Deposit).toFixed(2);
+	var floatingProfit = parseFloat(param.floatingProfit).toFixed(2);
+	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
+	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
+	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
+	var currencyRate = param.CurrencyRate;
+	var profitRate = "";
+	var $detailTodayBalance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayBalance']");
+	var $detailTodayCanUse = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayCanUse']");
+	var $detailDeposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_deposit']");
+	//var $detailFloatingProfit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+	var $detailKeepDeposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_keepDepositf']");
+	var $detailTodayAmount = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayAmount']");
+	var $detailFrozenMoney = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_frozenMoney']");
+	var $detailProfitRate = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_profitRate']");
+	var $detailCurrencyRate = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_currencyRate']");
+	$detailTodayBalance.text(todayBalance);
+	$detailTodayCanUse.text(todayCanUse);
+	$detailDeposit.text(deposit);
+	//$detailFloatingProfit.text(floatingProfit);
+	$detailKeepDeposit.text(keepDepositf);
+	$detailTodayAmount.text(todayAmount);
+	$detailFrozenMoney.text(frozenMoney);
+	$detailProfitRate.text(profitRate);
+	$detailCurrencyRate.text(currencyRate);
+}
+var orderIndex = 0;
+/**
+ * 添加用户委托信息
+ * @param {Object} param 委托信息的json对象
+ */
+function appendOrder(param){
+	var contractCode = param.ContractCode;
+	var drectionText = analysisBusinessBuySell(param.Drection);
+	var contractNo = param.ContractNo;
+	var commodityNo = param.CommodityNo;
+	var localCommodity  = getLocalCacheCommodity(commodityNo+contractNo);
+	var orderPrice = param.OrderPrice;
+	if(localCommodity != undefined){
+		var doSize = localCommodity.DotSize;
+		orderPrice = parseFloat(orderPrice).toFixed(doSize);
+	}
+	var orderStatus = param.OrderStatus;
+	var ordreStatusText = analysisOrderStatus(orderStatus);
+	var orderNum = param.OrderNum;
+	var tradeNum = param.TradeNum;
+	var triggerPrice = param.TriggerPrice;
+	var priceType = param.OrderPriceType;
+	console.log(priceType);
+	var tradePrice = param.TradePrice;
+	var orderId = param.OrderID;
+	var statusMsg = param.StatusMsg;
+	var insertDateTime = param.InsertDateTime;
+	var cls = "order-index" + orderIndex;
+	var html = '<ul class="tab_content '+cls+'" data-order-order = "'+orderId+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'+
+				'	<li class="ml order0">'+contractCode+'</li>'+
+				'	<li class = "order1" style="width: 50px;">'+drectionText+'</li>'+
+				'	<li class = "order2" style="width: 50px;">'+orderPrice+'</li>'+
+				'	<li class = "order3" style="width: 50px;">'+orderNum+'</li>'+
+				'	<li class = "order4" style="width: 70px;">'+analysisOrderPriceType(priceType)+'</li>'+
+				'	<li class = "order5" style="width: 70px;">'+ordreStatusText+'</li>'+
+				'	<li class = "order6" style="width: 70px;">'+tradePrice+'</li>'+
+				'	<li class = "order7" style="width: 50px;">'+tradeNum+'</li>'+
+				'	<li class = "order8" style="width: 120px;">'+insertDateTime+'</li>'+
+				'	<li class = "order9"  style="width: 100px;">'+orderId+'</li>'+
+				'	<li class = "order10" style="width: 80px;">'+statusMsg+'</li>'+
+				'</ul>';
+	$("#order_gdt1").append(html);
+	tabOn();
+	addOrderBindClick(cls);
+	updateOrderIndex();
+};
+/**
+ * 修改用户委托信息
+ * @param {Object} param
+ */
+function updateOrder(param){
+	var contractCode = param.ContractCode;
+	var orderId = param.OrderID;
+	var statusMsg = param.StatusMsg;
+	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
+	var $tradeNum = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order7']");
+	var $statusMsg = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order10']");
+	var orderStatus = param.OrderStatus;
+	var tradeNum = param.TradeNum;
+	$orderStatus.text(analysisOrderStatus(orderStatus));
+	$tradeNum.text(tradeNum);	
+	$statusMsg.text(statusMsg);
+};
+/**
+ * 缓存挂单的列表信息
+ */
+var localCacheDesignate = {};
+/**
+ * 缓存挂单列表信息的品种+合约
+ */
+var localCachedesignateContractCode = {};
+/**
+ * 挂单的索引
+ */
+var designateIndex = 0;
+/**
+ * 全局的保存当前选中挂单的信息
+ */
+var selectDesgnate = {};
+/**
+ * 添加用户挂单信息
+ * @param {Object} param 用户挂单信息的json对象
+ */
+function appendDesignates(param){
+   var contractCode = param.ContractCode;
+   var contractNo = param.ContractNo;
+   var commodityNo = param.CommodityNo;
+   var drection = param.Drection;
+   var drectionText = analysisBusinessBuySell(drection);
+   var orderPrice = param.OrderPrice;
+   var orderNum = param.OrderNum;
+   var tradeNum = param.TradeNum;
+   var orderSysId = param.OrderSysID;
+   var exchangeNo = param.ExchangeNo;
+   var orderId = param.OrderID;
+   var triggerPrice = param.TriggerPrice;
+   var cls = "des-index"+designateIndex;
+   var html = '<ul class="tab_content '+cls+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
+				'	<li class="ml des0">'+contractCode+'</li>'+
+				'	<li class = "des1">'+contractCode+'</li>'+
+				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
+				'	<li class = "des3" style="width: 120px;">'+orderPrice+'</li>'+
+				'	<li class = "des4">'+orderNum+'</li>'+
+				'	<li class = "des5">'+(orderNum - tradeNum)+'</li>'+
+				'	<li class = "des6"  style = "display:none;">'+orderSysId+'</li>'+
+				'	<li class = "des7"  style = "display:none;">'+exchangeNo+'</li>'+
+				'	<li class = "des8"  style = "display:none;">'+commodityNo+'</li>'+
+				'	<li class = "des9"  style = "display:none;">'+contractNo+'</li>'+
+				'	<li class = "des10" style = "display:none;">'+orderId+'</li>'+
+				'	<li class = "des11" style = "display:none;">'+triggerPrice+'</li>'+
+				'</ul>';
+   $("#des_gdt1").append(html);
+   tabOn();
+   localCacheDesignate[contractCode] = createDesignatesParam(param);
+   localCachedesignateContractCode[designateIndex] = contractCode;
+   addDesignateBindClick(cls);
+   updateDesignateIndex();
+};
+/**
+ * 修改挂单中的订单信息
+ * @param {Object} param
+ */
+function updateDesignatesDom(param){
+	var contractCode = param.ContractCode;
+	var orderId = param.OrderID;
+	var drection = param.Drection;
+	var drectionText = analysisBusinessBuySell(drection);
+	var orderNum = parseInt(param.OrderNum);
+	var tradeNum = parseInt(param.TradeNum);
+	var orderPrice = param.OrderPrice;
+	var orderStatus = param.OrderStatus;
+	var $gdNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des5']");
+	var $orderPrice = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des3']");
+	var $orderNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des4']");
+	var holdNum = orderNum - tradeNum;
+	if(holdNum == 0){
+		//当挂单为0时，清理dom节点和存储数据
+		delDesignatesDom(contractCode);
+		deleteDesignatesContractCode(contractCode);
+	}else if(holdNum != 0){
+		$gdNum.text(holdNum);
+		$orderNum.text(orderNum);
+		$orderPrice.text(orderPrice);
+		//更新储存数据
+		var desiContract = localCacheDesignate[contractCode];
+		desiContract.cdNum = holdNum;
+		desiContract.drection = drectionText;
+	}
+};
+/**
+ * 成交记录索引
+ */
+var tradesIndex = 0;
+/**
+ * 添加用户成交记录信息
+ * @param {Object} param
+ */
+function appendTradeSuccess(param){
+	var drection = param.Drection;
+	var drectionText = analysisBusinessBuySell(drection);
+	var orderId = param.OrderID;
+	var contractCode = param.ContractCode;
+	var tradePrice = param.TradePrice;
+	var tradeNum = param.TradeNum;
+	var currencyNo = param.CurrencyNo;
+	var tradeNo = param.TradeNo;
+	var orderId = param.OrderID;
+	var tradeTime = param.TradeDateTime;
+	var exchangeNo = param.ExchangeNo;
+	var cls = 'trade-index'+tradesIndex;
+	var html = '<ul class="tab_content '+cls+'"  data-index-trade = "'+tradesIndex+'" data-tion-trade = "'+contractCode+'">'+
+				'	<li class="ml trade0">'+contractCode+'</li>'+
+				'	<li class = "trade1" style="width: 40px;">'+drectionText+'</li>'+
+				'	<li class = "trade2" style="width: 70px;">'+tradePrice+'</li>'+
+				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
+				/*'	<li class = "trade4"  style="width: 70px;">'+currencyNo+'</li>'+*/
+				'	<li class = "trade5" style="width: 250px;">'+tradeNo+'</li>'+
+				'	<li class = "trade6"  style="width: 80px;">'+orderId+'</li>'+
+				'	<li class = "trade7"  style="width: 120px;">'+tradeTime+'</li>'+
+				'	<li class = "trade8" style="width: 40px;">'+exchangeNo+'</li>'+
+				'</ul>';
+	$("#trade_gdt1").append(html);
+	tabOn();
+	addTradeSuccessBindClick(cls);
+	updateTradesIndex();
+};
+/**
+ * 添加或修改用户持仓信息
+ * @param {Object} param 用户持仓信息
+ */
+function appendPostionAndUpdate(param){
+	//验证持仓信息是否在列表中存在
+	if(validationPostionIsExsit(param)){
+		addPostion(param);
+	}else{
+		updatePostion(param);
+	}
+};
+/**
+ * 缓存持仓的列表信息
+ */
+var localCachePostion = {};
+/**
+ * 缓存持仓列表品种+合约
+ */
+var localCachePositionContractCode = {};
+/**
+ * 全局的保存当前选中持仓的信息
+ */
+var selectPostion = {};
+/**
+ * 持仓信息的索引
+ */
+var postionIndex = 0;
+/**
+ * 增加持仓信息
+ * @param param
+ */
+function addPostion(param){
+	if(isJson(param)){
+		var contractCode = param.ContractCode;
+		var holdNum = param.HoldNum;
+		var drection = param.Drection;
+		var drectionText = analysisBusinessDirection(drection);
+		var holdAvgPrice = param.HoldAvgPrice;
+		var floatingProfit = param.FloatingProfit;
+		var exchangeNo = param.ExchangeNo;
+		var currencyNo = param.CurrencyNo;
+		var commodityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var openAvgPrice = param.OpenAvgPrice;
+		if(holdNum == undefined){
+			holdNum = param.TradeNum;
+		}
+		if(openAvgPrice == undefined){
+			openAvgPrice = param.TradePrice;
+		}
+		if(holdAvgPrice == undefined){
+			holdAvgPrice = openAvgPrice;
+		}
+		var floatP = 0.00;
+		var contractAndCommodity = commodityNo+contractNo;
+		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
+		if(localCommodity != undefined){
+			var lastPrice = getLocalCacheQuote(contractAndCommodity);
+			var contractSize = localCommodity.ContractSize;
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			currencyNo = localCommodity.CurrencyNo;
+			exchangeNo = localCommodity.ExchangeNo;
+			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			if(isNaN(floatP)){
+				floatP = 0.00;
+			}
+			floatingProfit = floatP +":"+ currencyNo; 
+		}
+		
+		var cls = "postion-index"+postionIndex;
+		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
+					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
+					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
+					'	<li  class = "position2" style="width: 80px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
+					'	<li  class = "position3" style="width: 80px;">'+holdAvgPrice+'</li>'+
+					'	<li  class = "position4"  style="width: 160px;">'+floatingProfit+'</li>'+
+					'	<li  class = "position5"  style="width: 80px;">'+exchangeNo+'</li>'+
+					'	<li  class = "position6"  style="width: 80px;">'+currencyNo+'</li>'+
+					'	<li  class = "position7"  style = "display:none;">'+commodityNo+'</li>'+
+					'	<li  class = "position8"  style = "display:none;">'+contractNo+'</li>'+
+					'	<li  class = "position9"  style = "display:none;">'+openAvgPrice+'</li>'+
+					'	<li  class = "position10"  style = "display:none;">'+floatP+'</li>'+
+					'</ul>';
+		$("#hold_gdt1").append(html);
+		tabOn();
+		//存储数据
+		localCachePostion[contractCode] = createPostionsParam(param);
+		localCachePositionContractCode[postionIndex] = contractCode;
+		addPositionBindClick(cls);
+		updatePositionIndex();
+	}
+}
+/**
+ * 更新持仓信息
+ * @param param
+ */
+function updatePostion(param){
+	var contractCode = param.ContractCode;
+	var holdNum = parseInt(param.HoldNum);
+	var drection = param.Drection;
+	var holdAvgPrice = param.HoldAvgPrice;
+	var exchangeNo = param.ExchangeNo;
+	var currencyNo = param.CurrencyNo;
+	var openAvgPrice = param.OpenAvgPrice;
+	if(isNaN(holdNum)){
+		holdNum = parseInt(param.TradeNum);
+	}
+	if(openAvgPrice == undefined){
+		openAvgPrice = param.TradePrice;
+	}
+	var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
+	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
+	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
+	var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
+	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position10']");
+	var $floatingProfit = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position4']");
+	var oldHoldNum = parseInt($holdNum.text());
+	var oldDrection = parseInt($drection.attr("data-drection"));
+	var oldPrice = parseFloat($openAvgPrice.text()) *  oldHoldNum;
+	var price = parseFloat(openAvgPrice) * holdNum;
+	if(oldDrection == drection){
+		oldHoldNum = oldHoldNum + holdNum;
+		price = price + oldPrice;
+		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum);
+		$openAvgPrice.text(openAvgPrice);
+		$holdAvgPrice.text(holdAvgPrice);
+		var commdityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var floatingProft = 0.00; 
+		var floatP = 0.00;
+		var contractAndCommodity = commdityNo+contractNo;
+		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
+		if(localCommodity != undefined){
+			var lastPrice = getLocalCacheQuote(contractAndCommodity);
+			var contractSize = localCommodity.ContractSize;
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			var currencyNo = localCommodity.CurrencyNo;
+			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			if(isNaN(floatP)){
+				floatP = 0.00;
+			}
+			floatingProft = floatP +":"+ currencyNo; 
+		}
+		$floatingProfit.text(floatingProft);
+		$floatP.text(floatP);
+		$floatingProfit.css("width","160px");
+		if(floatP < 0 ){
+			$floatingProfit.css("color","green");
+		}else if(floatP > 0){
+			$floatingProfit.css("color","red");
+		}else{
+			$floatingProfit.css("color","white");
+		}
+	}else{
+		oldHoldNum = oldHoldNum - holdNum;
+		//当持仓为空时，清理dom节点和存储数据
+		if(oldHoldNum == 0){	
+			delPositionDom(contractCode);
+			deletePositionsContractCode(contractCode);
+		//当drection为0时，上一次更新数据为’多‘，holdNum 小于0时表示这次这次更新数据买卖方向变为’空‘
+		}else if(oldHoldNum < 0 && oldDrection == 0){
+			drectionText = kong;
+			drection = 1;
+		//当drection为1时，上一次数据更新为’空‘，holdNum小于0时表示这次更新数据买卖方向变为’多‘
+		}else if(oldHoldNum < 0 && oldDrection == 1){
+			drectionText = duo;
+			drection = 0;
+		}else if(oldHoldNum > 0 && oldDrection == 0){
+			drectionText =duo;
+			drection = 0;
+		}else if(oldHoldNum > 0 && oldDrection == 1){
+			drectionText = kong;
+			drection = 1;
+		}
+	}
+	if(oldHoldNum != 0){
+		var drectionText = analysisBusinessDirection(drection);
+		$holdNum.text(Math.abs(oldHoldNum));
+		$drection.html(drectionText);
+		$drection.attr("data-drection",drection);
+		//更新储存数据
+		var postContract = localCachePostion[contractCode];
+		postContract.holdNum = oldHoldNum;
+		postContract.drection = drectionText;
+	}
+}
+/**
+ * 验证持仓信息是否存在 
+ */
+function validationPostionIsExsit(param){
+	var contractCode = param.ContractCode;
+	var positionParam = localCachePostion[contractCode];
+	if(positionParam == undefined || positionParam == "undefined" || positionParam == null){
+		return true;
+	}else{
+		return false;
+	}
+}
+/**
+ * 验证资金明细是否存在 
+ */
+function validationFundDetailsIsExsit(param){
+	var currencyNo = param.CurrencyNo;
+	var fundDetails = localCacheFundDetail[currencyNo];
+	if(fundDetails == undefined || fundDetails == "undefined" || fundDetails == null){
+		return true;
+	}else{
+		return false;
+	}
+}
+/**
+ * 生成持仓信息表头
+ */
+function generatePostionTitle(){
+	var html = '<ul class="tab_lis">'+
+				'	<li class="ml" style="width: 80px;">合约代码</li>'+
+				'	<li style="width: 80px;">持仓数量</li>'+
+				'	<li style="width: 80px;">买卖</li>'+
+				'	<li style="width: 100px;">持仓均价</li>'+
+				'	<li style="width: 160px;">浮动盈利</li>'+
+				'	<li style="width: 80px;">交易所</li>'+
+				'	<li style="width: 80px;">币种</li>'+
+				'</ul>';
+	$("#hold_gdt1").html(html);
+}
+/**
+ * 生成委托信息表头
+ */
+function generateOrderTitle(){
+	var html = '<ul class="tab_lis">'+
+				'	<li class="ml">合约代码</li>'+
+				'	<li  style = "width:50px;">买卖</li>'+
+				'	<li  style="width: 50px;">委托价</li>'+
+				'	<li style = "width:70px;">委托量</li>'+
+				'	<li style="width: 70px;">订单类型</li>'+
+				'	<li  style="width: 70px;">委托状态</li>'+
+				'	<li style = "width:70px;" >成交均价</li>'+
+				'	<li style = "width:50px;"  >成交量</li>'+
+				'	<li style = "width:120px;">撤单时间</li>'+
+				'	<li style = "width:80px;">订单号</li>'+
+				'   <li style="width: 80px;">反馈信息</li>'+
+				'</ul>';
+	$("#order_gdt1").html(html);
+}
+/**
+ * 生成挂单信息表头
+ */
+function generateDesignateTitle(){
+	var html = '<ul class="tab_lis">'+
+				'	<li class="ml">合约代码</li>'+
+				'	<li>合约名称</li>'+
+				'	<li>买卖</li>'+
+				'	<li  style="width: 120px;">委托价</li>'+
+				'	<li>委托量</li>'+
+				'	<li>挂单量</li>'+
+				'</ul>';
+	$("#des_gdt1").html(html);
+}
+/**
+ * 生成成交记录表头
+ */
+function generateTradeSuccessTitle(){
+	var html = '<ul class="tab_lis">'+
+				'	<li class="ml">合约代码</li>'+
+				'	<li  style="width: 40px;">买卖</li>'+
+				'	<li  style="width: 70px;">成交均价</li>'+
+				'	<li  style="width: 50px;">成交量</li>'+
+				/*'	<li  style="width: 70px;">币种</li>'+*/
+				'	<li  style="width: 250px;">成交编号</li>'+
+				'	<li  style="width: 80px;">订单号</li>'+
+				'	<li  style="width: 120px;">成交时间</li>'+
+				'	<li  style="width: 40px;">交易所</li>'+
+				'</ul>';
+	$("#trade_gdt1").append(html);
+}
+/**
+ * 生成资金明细表头
+ */
+function generateAccountTitle(){
+	var html = '<ul class="tab_lis">'+
+				'	<li class="ml">币种</li>'+
+				'	<li>今权益</li>'+
+				'	<li>今可用</li>'+
+				'	<li>保证金</li>'+
+				'	<li>今日浮盈</li>'+
+				'	<li>维持保证金</li>'+
+				'	<li>昨权益</li>'+
+				'	<li>昨结存</li>'+
+				'	<li>今结存</li>'+
+				'	<li>冻结资金</li>'+
+				'	<li>盈利率</li>'+
+				'</ul>';
+	$("#account_gdt1").append(html);
+}
+/**
+ * 生成持仓操作节点
+ */
+function generateHoldHandleDom(){
+	var html =  '<ul class="caozuo" style = "display:none;">'+
+			    '	<li><a href="javascript:void(0);" id = "allPosition">全部平仓</a></li>'+
+				'	<li><a href="javascript:void(0);" id = "aPosition">平仓</a></li>'+
+				'	<li><a href="javascript:void(0);" id = "positionBckhand">反手</a></li>'+
+			    '</ul>';
+	$("#hold_title").append(html);
+}
+/**
+ * 生成挂单操作节点
+ */
+function generateDesHandleDom(){
+	var html =  '<ul class="caozuo"  style = "display:none;">'+
+				'	<li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>'+	
+				'	<li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>'+
+				'	<li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>'+
+				'</ul>';
+	$("#des_title").append(html);
+}
+/**
+ * 绑定持仓列表的点击事件
+ * @param str
+ */
+function addPositionBindClick(cls){
+	$("."+cls+"").bind("click",function(){
+		var $this = $(this);
+		selectPostion["contractCode"] = $this.attr("data-tion-position");
+		selectPostion["postionIndex"] = $this.attr("data-index-position");
+	});
+}
+/**
+ * 绑定委托点击事件
+ * @param {Object} cls
+ */
+function addOrderBindClick(cls){
+	$(function(){
+		$("."+cls+"").bind("click",function(){
+			var $this = $(this);
+		});
+	});
+}
+/**
+ * 绑定挂单点击事件
+ * @param {Object} cls
+ */
+function addDesignateBindClick(cls){
+	$(function(){
+		$("."+cls+"").bind("click",function(){
+			var $this = $(this);
+			var contractCode = $this.attr("data-tion-des");
+			selectDesgnate["contraction"] = contractCode;
+			selectDesgnate["designateIndex"] = $this.attr("data-index-des");
+			var orderPrice = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des3']").text();
+			var orderNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des4']").text();
+			var orderId = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des10']").text();
+			selectDesgnate["orderPrice"] = orderPrice;
+			selectDesgnate["orderNum"] = orderNum;
+			selectDesgnate["orderId"] = orderId;
+		});
+	});
+}
+/**
+ * 绑定交易成功点击事件
+ * @param cls
+ */
+function addTradeSuccessBindClick(cls){
+	$(function(){
+		$("."+cls+"").bind("click",function(){
+			var $this = $(this);
+		});
+	});
+}
+/**
+ * 绑定资金明细点击事件
+ * @param cls
+ */
+function addFundDetailBindClick(cls){
+	$(function(){
+		$("."+cls+"").bind("click",function(){
+			var $this = $(this);
+		});
+	});
+}
+/**
+ * 更新持仓索引
+ */
+function updatePositionIndex(){
+	postionIndex++;
+}
+/**
+ * 更新委托索引
+ */
+function updateOrderIndex(){
+	orderIndex++;
+}
+/**
+ * 更新挂单索引
+ */
+function updateDesignateIndex(){
+	designateIndex++;
+}
+/**
+ * 更新成交记录索引
+ * @returns
+ */
+function updateTradesIndex(){
+	tradesIndex++;
+}
+/**
+ * 更新资金列表索引
+ */
+function updateFundsDetailsIndex(){
+	fundsDetailsIndex++;
+}
+/**
+ * 删除持仓中的元素节点 
+ * @param {Object} 删除节点
+ */
+function delPositionDom(contractCode){
+	$(function(){
+		$("ul[data-tion-position='"+contractCode+"']").remove();
+	});
+}
+/**
+ * 删除挂单中的元素节点 
+ * @param {Object} orderId
+ */
+function delDesignatesDom(contractCode){
+	$("ul[data-tion-des='"+contractCode+"']").remove();
+}
+/**
+ * 移除全局缓存持仓的品种合约
+ * @param {Object} param
+ */
+function deletePositionsContractCode(param){
+	if(!delete localCachePostion[param]){
+		localCachePostion[param] = null;
+	}
+}
+/**
+ * 初始化全局缓存持仓合约的对象数组
+ */
+function deleteAllPositionsLocalCache(){
+	localCachePostion = {};
+}
+/**
+ * 初始化缓存持仓列表品种+合约
+ */
+function deleteAllPositionContractCode(){
+	localCachePositionContractCode = {};
+}
+/**
+ * 清除选中的持仓合约
+ */
+function deleteSelectPostion(){
+	selectPostion = {};
+}
+
+/**
+ * 移除全局缓存挂单的品种合约
+ * @param {Object} param
+ */
+function deleteDesignatesContractCode(param){
+	if(!delete localCacheDesignate[param]){
+		localCacheDesignate[param] = null;
+	}
+}
+/**
+ * 初始化全局缓存挂单合约的对象数组
+ */
+function deleteAllDesgnatesLocalCache(){
+	localCacheDesignate = {};
+}
+/**
+ * 初始化缓存挂单列表信息的品种+合约
+ */
+function deleteAllDesgnatesContractCode(){
+	localCachedesignateContractCode = {};
+}
+/**
+ * 清除选中的持仓合约
+ */
+function deleteSelectDesgnate(){
+	selectDesgnate = {};
+}
+function addBindsss(cls){
+	$("."+cls+"").bind("click",function(){
+		var $this = $(this);
+		var text = $this.text();
+		$("#quotation_account").val(text);
+		$("#more_account").css("display","none");
+	});
+}
+/**
+ * 加载用户的账户信息
+ */
+function loadOperateLogin(){
+	$.ajax({
+		url:basepath+"/user/operateLogin",
+		type:"get",
+		success:function(result){
+			if(result){
+				var _data = result.data;
+				if(_data != undefined){
+					var data = _data.data;
+					var dataLength = data.length;
+					for(var i = 0  ; i < dataLength ; i ++){
+						var _data = data[i];
+						var cls = "selectAccount"+i;
+						var  html = '<p class = "'+cls+'">'+_data.tranAccount+'</p>';
+						$("#more_account").append(html);
+						addBindsss(cls);
+					}
+				}
+			}
+		}
+	});
+}
+$(function(){
+	if(uid != undefined && uid.length > 0 ){
+		loadOperateLogin();
+	}
+	$("#quotation_account").mouseover(function(){
+		$("#more_account").css("display","block");
+	});
+	$("#more_account").mouseover(function(){
+		$("#more_account").css("display","block");
+	});
+	$("#quotation_account").mouseout(function(){
+		$("#more_account").css("display","none");
+	});
+	$("#quotation_account").blur(function(){
+		$("#more_account").css("display","none");
+	});
+	$(".backPassword").click(function(){
+		layer.open({
+			  type: 1,
+			  title:"忘记密码",
+			  skin: 'layui-layer-rim', //加上边框
+			  area: ['300px', '160px'], //宽高
+			  content: $("#back_passwork").html(),
+			  btn:['没有账号?立即申请','关闭'],
+			  yes:function(){
+				  window.open(basepath+"/outDisk/index");
+				  layer.closeAll();
+			  },
+			  btn2: function(){
+					 layer.closeAll();
+				 }
+			});
+	});
+	bindOpertion();
+	function selectCommodity(param){
+		var contractCode = param;
+		var localCommodity = localCacheCommodity[contractCode];
+		var localQoute = localCacheQuote[contractCode];
+		var miniTikeSize = localCommodity.MiniTikeSize;
+		var lastPrice = localQoute.LastPrice;
+		$("#trade_data #lastPrice").val(lastPrice);
+		$("#trade_data #miniTikeSize").val(miniTikeSize);
+		$("#trade_data #contractSize").val(localCommodity.ContractSize);
+		$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
+		$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
+		$("#trade_data #contractNo").val(localCommodity.MainContract);
+		$("#trade_data #doSize").val(localCommodity.DotSize);
+		$("#money_number").val(localQoute.LastPrice);
+		$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
+		$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+		$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+		setMoneyNumberIndex(0);
+		 var left_xiangmu   = $(".futuresList .left_xiangmu");
+		left_xiangmu.each(function(){
+			 left_xiangmu.removeClass('on');
+		 });
+		var obj = $("ul[data-tion-com='"+contractCode+"']");
+		obj.addClass('on');
+		obj.click();
+		setLocalCacheSelect(contractCode);
+		clearRightData();
+		updateRight(localQoute);
+	}
+	$("#select_commodity").change(function(){
+		var contractCode = $("#select_commodity").val();
+		selectCommodity(contractCode);
+	});
+	$("#show_login").show();
+	$("#show_user_info").hide();
+	$("#trade_login").click(function(){
+		username = $("#quotation_account").val();
+		if(username == undefined || username.length == 0){
+			layer.tips("请输入交易账号", "#quotation_account",{tips:3});
+			return;
+		}
+		password = $.base64.encode($("#quotation_password").val());
+		if(password == undefined || password.length == 0){
+			layer.tips("请输入交易密码", "#quotation_password",{tips:3});
+			return;
+		}
+		if($("#trade_login").text() == "登录中"){
+			return;
+		}
+		$("#trade_login").text("登录中");
+		tradeLogin();
+	});
+	$("#trade_loginOut").click(function(){
+		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
+	});
+	$('#money_number').bind('input propertychange', function() {  
+	    $('#float_buy').text($(this).val());  
+	    $('#float_sell').text($(this).val());  
+	});  
+});
+/**
+ * 绑定交易操作事件
+ */
+function bindOpertion(){
+	$(".trade_buy").bind("click",function(){
+		if(isLogin){
+			var $this = $(this);
+			var lastPrice = $("#lastPrice").val();
+			var miniTikeSize = $("#miniTikeSize").val();
+			var orderNum = $("#entrust_number").val();
+			var priceType = $("input[type='radio']:checked").val();
+			var tradeDrection = $this.attr("data-tion-buy");
+			var orderPrice = 0.00;
+			if(priceType == 1){
+				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection);
+			}else{
+				orderPrice = $("#money_number").val();
+			}
+			var commodityNo = $("#commodeityNo").val();
+			var contractNo = $("#contractNo").val();
+			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】,买卖方向:【"+analysisBusinessBuySell(tradeDrection)+"】";
+			layer.confirm(tipContent+"?", {
+			  btn: ['确认','取消'] //按钮
+			}, function(){
+				doInsertOrder(orderNum,tradeDrection,orderPrice);
+			}, function(){
+				cancleCallBack();
+			});
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#allPosition").bind("click",function(){
+		if(isLogin){
+			if(postionIndex == 0){
+				tip("没有需要平仓的数据");
+				return;
+			}
+			var positionFlag = false;
+			for(var i = 0 ; i < postionIndex;i++){
+				if( $(".postion-index"+i+"").html() == undefined){
+					continue;
+				}else{
+					positionFlag = true;
+				}
+			}
+			if(!positionFlag){
+				tip("没有需要平仓的数据");
+				return;
+			}
+			var tipContent = "确认全部平仓";
+			tipConfirm(tipContent,doInsertAllSellingOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	
+	$("#aPosition").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectPostion["contractCode"];
+			var postionIndex = selectPostion["postionIndex"];
+			if(contractCode == undefined || $(".postion-index"+postionIndex+"").html() == undefined){
+				tip("请选择一项需要平仓的数据");
+				return;
+			}
+			var tipContent = "确认平仓合约【"+contractCode+"】";
+			tipConfirm(tipContent,doInsertSellingOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#positionBckhand").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectPostion["contractCode"];
+			var postionIndex = selectPostion["postionIndex"];
+			if(contractCode == undefined  || $(".postion-index"+postionIndex+"").html() == undefined){
+				tip("请选择一项需要反手的数据");
+				return;
+			}
+			var tipContent = "确认反手操作合约【"+contractCode+"】"; 
+			tipConfirm(tipContent,doInsertBackhandOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#allDesOrder").bind("click",function(){
+		if(isLogin){
+			if(designateIndex == 0){
+				tip("没有需要撤单的数据");
+				return;
+			}
+			var designateFlag = false;
+			for(var i = 0 ; i < designateIndex ; i++){
+				if($(".des-index"+i+"").html() == undefined){
+					continue;
+				}else{
+					designateFlag = true;
+				}
+			}
+			if(!designateFlag){
+				tip("没有需要撤单的数据");
+				return;
+			}
+			var tipContent = "确认全部撤单合约"; 
+			tipConfirm(tipContent,doInsertAllCancleOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#desOrder").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectDesgnate["contraction"];
+			var designateIndex = selectDesgnate["designateIndex"];
+			if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
+				tip("请选择一项需要撤单的数据");
+				return;
+			}
+			var tipContent = "确认撤单合约【"+contractCode+"】"; 
+			tipConfirm(tipContent,doInsertCancleOrder,cancleCallBack);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	$("#updateDesOrder").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectDesgnate["contraction"];
+			var designateIndex = selectDesgnate["designateIndex"];
+			if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
+				tip("请选择一项需要改单的数据");
+				return;
+			}
+			var orderPrice = selectDesgnate["orderPrice"];
+			var orderNum = selectDesgnate["orderNum"];
+			if(orderPrice == undefined){
+				orderPrice = "";
+			}
+			if(orderNum == undefined){
+				orderNum = 0;
+			}
+			layer.open({
+				  type: 1,
+				  title:"改单",
+				  area: ['100px', '200px'],
+				  skin: 'layui-layer-rim', //加上边框
+				  area: ['420px', '240px'], //宽高
+				  content: '<div  style = "background:#F2F2F2;padding:50px 50px 50px 50px">'+
+							'	<p>委托价格：<input style="background:#FFFFFF;border:1px solid  #ABABAB" type="text" value = "'+orderPrice+'"  id="update_des_price"/></p>'+
+							'	<p style = "padding-top:10px;">委托数量：<input  style="background:#FFFFFF;border:1px solid  #ABABAB" type="number" value = "'+orderNum+'"   id="update_des_number"/></p>'+
+							'</div>',
+					 btn: ['确认改单', '关闭'], //
+					 yes: function(){
+						 var price = $("#update_des_price").val();
+						 var number = $("#update_des_number").val();
+						 if(price <= 0){
+							 layer.tips("价格输入错误", '#update_des_price');
+							 return;
+						 }
+						 if(number <= 0){
+							 layer.tips("数量输入错误", '#update_des_number');
+							 return;
+						 }
+						 var tipContent = "确认改单合约【"+contractCode+"】"; 
+						 tipConfirm(tipContent,doInsertChangeSingleOrder,cancleCallBack);
+					 },
+					 btn2: function(){
+						 layer.closeAll();
+					 }
+				});
+			//$("#change").show();
+			//
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+}
+/**
+ * 下单
+ */
+function doInsertOrder(orderNum,tradeDrection,orderPrice){
+	var lastPrice = $("#lastPrice").val();
+	if(validationInputPrice(lastPrice)){
+		tip("最新价格错误");
+		return;
+	}
+	if(isNaN(orderNum) || validationInputPrice(orderNum)){
+		tip("购买手数输入错误");
+		return;
+	}
+	if(validationInputPrice(orderPrice)){
+		tip("交易价格错误");
+		return ;
+	}
+	var exchanageNo = $("#exchangeNo").val();
+	var commodeityNo = $("#commodeityNo").val();
+	var contractNo = $("#contractNo").val();
+	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
+	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
+}
+/**
+ * 全部平仓操作
+ */
+function doInsertAllSellingOrder(){
+	for(var i = 0 ; i < postionIndex;i++){
+		var contractCode = localCachePositionContractCode[i];
+		if(contractCode == undefined || $(".postion-index"+i+"").html() == undefined){
+			continue;
+		}
+		var tradeParam = doGetSellingBasicParam(contractCode);
+		if(!tradeParam){
+			continue;
+		}
+		var param = new Array();
+		param[0] = tradeParam;
+		closing(param);
+	}
+	tip("提交成功,等待交易");
+}
+/**
+ * 平仓操作
+ */
+function doInsertSellingOrder(){
+	var contractCode = selectPostion["contractCode"];
+	var postionIndex = selectPostion["postionIndex"];
+	if(contractCode == undefined){
+		tip("未选择平仓信息");
+		return;
+	}
+	var tradeParam = doGetSellingBasicParam(contractCode);
+	if(!tradeParam){
+		return;
+	}
+	var param = new Array();
+	param[0] = tradeParam;
+	closing(param);
+	tip("提交成功,等待交易");
+}
+/**
+ * 反手操作
+ */
+function doInsertBackhandOrder(){
+	var contractCode = selectPostion["contractCode"];
+	var postionIndex = selectPostion["postionIndex"];
+	if(contractCode == undefined){
+		tip("未选择反手信息");
+		return;
+	}
+	var tradeParam = doGetSellingBasicParam(contractCode);
+	var exchangeNo = tradeParam.ExchangeNo;
+	var commodityNo = tradeParam.CommodityNo;
+	var contractNo = tradeParam.ContractNo;
+	var orderNum = tradeParam.OrderNum * 2;
+	var tradeDrection = tradeParam.Drection;
+	var contractCode = commodityNo + contractNo;
+	var orderPrice = tradeParam.LimitPrice;
+	Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
+	tip("合约【"+contractCode+"】提交成功,等待交易");
+}
+/**
+ * 全部撤单操作
+ */
+function doInsertAllCancleOrder(){
+	for(var i = 0 ; i < designateIndex ; i++){
+		var contractCode = localCachedesignateContractCode[i];
+		if(contractCode == undefined || $(".des-index"+i+"").html() == undefined){
+			continue;
+		}
+		var tradeParam = doGetCancleOrderBasicParam(contractCode);
+		var param = new Array();
+		param[0] = tradeParam
+		cancleOrder(param);
+	}
+	tip("提交成功,等待撤单");
+}
+/**
+ * 撤单操作
+ */
+function doInsertCancleOrder(){
+	var contractCode = selectDesgnate["contraction"];
+	var designateIndex = selectDesgnate["designateIndex"];
+	if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
+		return;
+	}
+	var tradeParam = doGetCancleOrderBasicParam(contractCode);
+	var param = new Array();
+	param[0] = tradeParam
+	cancleOrder(param);
+	tip("合约【"+contractCode+"】提交成功,等待撤单");
+}
+/**
+ * 改单操作
+ */
+/**
+ * 是否是改单操作
+ */
+var isChangeOrder = false;
+function doInsertChangeSingleOrder(){
+	var contractCode = selectDesgnate["contraction"];
+	var designateIndex = selectDesgnate["designateIndex"];
+	if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
+		return;
+	}
+	 var orderPrice = $("#update_des_price").val();
+	 var orderNum = $("#update_des_number").val();
+	if(validationInputPrice(orderPrice)){
+		tip("改单价格错误");
+		return;
+	}
+	if(validationInputPrice(orderNum)){
+		tip("改单数量错误");
+		return;
+	}
+	var tradeParam = doGetModifyOrderBasicParam(contractCode);
+	tradeParam.orderPrice = orderPrice;
+	tradeParam.orderNum = orderNum;
+	var param = new Array();
+	param[0]=tradeParam;
+	modifyOrder(param);
+	layer.closeAll();
+	isChangeOrder = true
+	tip("合约【"+contractCode+"】提交成功,等待交易");
+}
+/**
+ * 获取平仓的基本信息
+ * @param obj
+ */
+function doGetSellingBasicParam(obj){
+	var contract = obj;
+	var $contractCode  = contract;
+	var $drection =  $("ul[data-tion-position='"+contract+"'] li[class = 'position2']").attr("data-drection");
+	var $holdNum =  $("ul[data-tion-position='"+contract+"'] li[class = 'position1']").text();
+	var $openAvgPrice =  $("ul[data-tion-position='"+contract+"'] li[class = 'position9']").text();
+	var $floatingProfit =  $("ul[data-tion-position='"+contract+"'] li[class = 'position4']").text();
+	var $commodityNo =  $("ul[data-tion-position='"+contract+"'] li[class = 'position7']").text();
+	var $contractNo =  $("ul[data-tion-position='"+contract+"'] li[class = 'position8']").text();
+	var $exchangeNo =  $("ul[data-tion-position='"+contract+"'] li[class = 'position5']").text();
+	var drection = 0;
+	if($drection == 0){
+		drection = 1;	
+	}
+	var contractCode = $commodityNo + $contractNo;
+	var localCommodity = getLocalCacheCommodity(contractCode);
+	var localQuote = getLocalCacheQuote(contractCode);
+	var miniTikeSize = 0.00;
+	var lastPrice = 0.00;
+	if(localCommodity != undefined && localQuote != undefined){
+		miniTikeSize = localCommodity.MiniTikeSize;
+		lastPrice = localQuote.LastPrice;
+	}
+	if(validationInputPrice(lastPrice)){
+		tip("最新价格错误");
+		return false;
+	}
+	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+	console.log(limitPirce);
+	if(validationInputPrice(limitPirce)){
+		tip("平仓价格错误");
+		return false;
+	}
+	var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
+	return sellingParam;
+}
+/**
+ * 获取撤单的基本信息
+ * @param obj
+ */
+function doGetCancleOrderBasicParam(obj){
+		var contract = obj;
+		var $contractCode  = contract;
+		var $drection =  $("ul[data-tion-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
+		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
+		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
+		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
+		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'des6']").text();
+		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des8']").text();
+		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des9']").text();
+		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des7']").text();
+		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
+		var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
+	return cancleOrderParam;
+}
+/**
+ * 获取改单的基本信息
+ * @param obj
+ */
+function doGetModifyOrderBasicParam(obj){
+		var contract = obj;
+		var $contractCode  = contract;
+		var $drection =  $("ul[data-tion-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
+		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
+		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
+		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
+		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'des6']").text();
+		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des8']").text();
+		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des9']").text();
+		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des7']").text();
+		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
+		var $triggerPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des11']").text();
+		var modifyOrderParam = createModifyOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice),$triggerPrice);
+	return modifyOrderParam;
+}
+/**
+ * 计算列表的浮动盈亏
+ */
+function sumListfloatingProfit(){
+	var price  = 0;
+	for (var i = 0; i < postionIndex; i++) {
+		var obj = $(".postion-index"+i+"");
+		if(obj.html() == undefined){
+			continue;
+		}
+		var currencyNo =  $("ul[data-index-position='"+i+"'] li[class = 'position6']").text();
+		var float =  $("ul[data-index-position='"+i+"'] li[class = 'position10']").text();
+		var currencyObj = $(".currencyNo"+currencyNo+"");
+		if(currencyObj.html() == undefined){
+			continue;
+		}
+		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+		var  detailCurrencyRateDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_currencyRate']");
+		var floatingProfitText = floatingProfitDom.text();
+		var detailCurrencyRateText = parseFloat(detailCurrencyRateDom.text()).toFixed(3);
+		price = price + float * 1;
+		floatingProfitDom.text(parseFloat(price).toFixed(2));
+	}
+}
+/**
+ * 更新持仓总盈亏
+ */
+function updateHoldProfit(){
+	var price = 0.00;
+	for (var i = 0; i < fundsDetailsIndex; i++) {
+		if($(".funds-index"+i).html() != undefined){
+			var floatingProfit = $("#floatingProfit");
+			var floating = $(".funds-index"+i+" li[class = 'detail_floatingProfit']").text();
+			var currencyRate = $(".funds-index"+i+" li[class = 'detail_currencyRate']").text();
+			var total = floating*currencyRate;
+			/*if(isNaN(total)){
+				total = 0;
+			}*/
+			price = price + total;
+			if(price < 0){
+				floatingProfit.css("color","#0bffa4");
+			}else if(price > 0){
+				floatingProfit.css("color","#ff5500");
+			}else if(price == 0){
+				floatingProfit.css("color","#FFFFFF");
+			}
+			floatingProfit.text(parseFloat(price).toFixed(2));
+		}
+	}
+}
+/**
+ * 清除交易列表的数据并生成操作按钮
+ */
+function clearTradListData(){
+	$("#account_gdt1").html("");
+	$("#order_gdt1").html("");
+	$("#des_gdt1").html("");
+	$("#trade_gdt1").html("");
+	$("#hold_gdt1").html("");
+	$("#todayBalance").html(0.00);
+	$("#deposit").html(0.00);
+	$("#todayCanUse").html(0.00);
+	$("#floatingProfit").html(0.00);
+	$("#closeProfit").html(0.00);
+	$(".caozuo").hide();
+	generatePostionTitle();
+	generateDesignateTitle();
+	generateAccountTitle();
+	generateOrderTitle();
+	generateTradeSuccessTitle();
+}
+/**
+ * 清理全局缓存数据
+ */
+function clearLocalCacheData(){
+	holdFirstLoadDataIndex = 0;
+	accountFirstLoadDataIndex = 0;
+	orderFirsetLoadDataIndex = 0;
+	tradeFirsetLoadDataIndex = 0;
+	deleteAllDesgnatesLocalCache();
+	deleteAllDesgnatesContractCode();
+	deleteSelectDesgnate();
+	deleteAllPositionsLocalCache();
+	deleteAllPositionContractCode();
+	deleteSelectPostion();
+	postionIndex = 0;
+	designateIndex = 0;
+	localCacheFundDetail = {};
+	uehIndex = 0;
+	loadCachBanlance = {};
+	loadCachDeposit = {};
+	loadCachCanuse = {};
+	loadCurrencyRate = {};
+	loadCachAccountNo = {};
+	localCacheCurrencyAndRate = {};
+	orderIndex=0;
+	fundsDetailsIndex = 0;
+	var loadCachFloatingProfit = {};
+	var loadCachCloseProfit = {};
+}
+/**
+ * 输入价格或数量验证 
+ */
+function validationInputPrice(obj){
+	if(obj == undefined || obj == null || obj.length == 0 || parseFloat(obj) <= 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function tabOn() {
+	/*交易ul li  odd even odd  li:nth-of-type(even)*/
+	//$(".quotation_detailed .quotation_detailed_title .tab_content:even").addClass("even");
+	$(".quotation_detailed .quotation_detailed_title .tab_content").click(function() {
+		var _this = $(this);
+		$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
+		_this.addClass("on");
+	});
+}

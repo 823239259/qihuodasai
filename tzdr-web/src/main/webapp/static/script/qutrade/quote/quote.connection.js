@@ -1,1 +1,63 @@
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('n 2=4,6="i",7="e",9=!1;3 g(){9=4==2?!1:!0}3 8(){2=q d(f)}3 b(){h(4==2)c!1;2.j=3(){k.l(6,7)};2.m=3(a){o(a)};2.p=3(){2=4;5()};c!0}3 5(){r();8();b()};',28,28,'||quoteSocket|function|null|initQuote|quote_username|quote_password|quoteConnection|quoteConnectStatus||initQuoteLoad|return|WebSocket|a123456|quoteWebsocketUrl|changeQuoteConnectionStatus|if|13677622344|onopen|Quote|doLogin|onmessage|var|quoteHandleData|onclose|new|initQuoteConfig'.split('|'),0,{}))
+var quoteSocket = null;
+var quote_username = "13677622344";
+var quote_password = "a123456";
+/**
+ * 行情是否连接成功,true-成功，false-失败
+ */
+var quoteConnectStatus = false;
+/**
+ * 更新连接状态
+ */
+function changeQuoteConnectionStatus(){
+	if(quoteSocket == null){
+		quoteConnectStatus = false;
+	}else{
+		quoteConnectStatus = true;
+	}
+}
+/**
+ * 连接行情服务器
+ */
+function quoteConnection(){
+	quoteSocket = new WebSocket(quoteWebsocketUrl);
+}
+/**
+ * 行情初始化加载
+ */
+function initQuoteLoad(){
+	if(quoteSocket == null)return false;
+	quoteSocket.onopen = function(){
+		Quote.doLogin(quote_username, quote_password);
+	}
+	quoteSocket.onmessage = function(evt) {
+		quoteHandleData(evt);
+	}
+	quoteSocket.onclose = function() {
+		quoteSocket = null;
+		initQuote();
+	}
+	return true;
+}
+/**
+ * 初始化行情
+ */
+function initQuote(){
+	/**
+	 * 行情配置加载 -- > quote.config
+	 */
+	initQuoteConfig();
+	/**
+	 * 行情连接  --> quote.connection
+	 */
+	quoteConnection();
+	/**
+	 * 行情数据加载
+	 */
+	initQuoteLoad();
+	/*var quoteInterval = setInterval(function(){
+		var result = initQuoteLoad();
+		if(result){
+			clearInterval(quoteInterval);
+		}
+	}, 500);*/
+}

@@ -1,1 +1,116 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('y 3={l:"F",h:"B",8:"q",j:"A",k:"E",9:"o",7:"u"},0={1:2(a,b){G.H(\'{"n":"\'+a+\'","m":\'+b+"}")},p:2(a,b){0.1(3.l,\'{"i":"\'+a+\'","r":"\'+b+\'"}\')},s:2(a){0.1(3.h,\'{"i":"\'+a+\'"}\')},t:2(a){0.1(3.8,\'{"4":"\'+a+\'"}\')},v:2(){0.1(3.8,w)},x:2(a,b){0.1(3.j,\'{"4":"\'+a+\'","5":"\'+b+\'"}\')},z:2(a,b,c){0.1(3.k,\'{"4":"\'+a+\'","5":"\'+b+\'","6":"\'+c+\'"}\')},C:2(a,b,c){0.1(3.9,\'{"4":"\'+a+\'","5":"\'+b+\'","6":"\'+c+\'"}\')},D:2(a,b,c,d,e,f,g){0.1(3.7,\'{"4":"\'+a+\'","5":"\'+b+\'","6":"\'+c+\'","I":"\'+d+\'","J":"\'+e+\'","K":"\'+f+\'","L":"\'+g+\'"}\')},M:2(a,b,c){0.1(3.7,\'{"4":"\'+a+\'","5":"\'+b+\'","6":"\'+c+\'"}\')}};',49,49,'Quote|doSendMessage|function|QuoteUrl|ExchangeNo|CommodityNo|ContractNo|QryHistoryUrl|QryCommodityUrl|UnSubscribeUrl||||||||LogoutUrl|UserName|QryContractUrl|SubscribeUrl|LoginUrl|Parameters|Method|UnSubscribe|doLogin|QryCommodity|PassWord|doLoginOut|doQryCommodity|QryHistory|doAllQryCommodity|null|doQryContract|var|doSubscribe|QryContract|Logout|doUnSubscribe|doQryHistory|Subscribe|Login|quoteSocket|send|HisQuoteType|BeginTime|EndTime|Count|doQryFirstHistory'.split('|'),0,{}))
+var QuoteUrl = {
+	/**
+	 * 登录URL
+	 */
+	LoginUrl : "Login",
+	/**
+	 * 登出URL
+	 */
+	LogoutUrl : "Logout",
+	/**
+	 * 查询品种URL
+	 */
+	QryCommodityUrl : "QryCommodity",
+	/**
+	 * 查询合约URL
+	 */
+	QryContractUrl : "QryContract",
+	/**
+	 * 订阅URL
+	 */
+	SubscribeUrl : "Subscribe",
+	/**
+	 * 取消订阅URL
+	 */
+	UnSubscribeUrl : "UnSubscribe",
+	/**
+	 * 查询历史数据URL
+	 */
+	QryHistoryUrl : "QryHistory"
+}
+var Quote = {
+		/**
+		 * 发送请求
+		 * @param method
+		 * @param parameters
+		 */
+		doSendMessage:function(method,parameters){
+			quoteSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+		},
+		/**
+		 * 登录请求
+		 * @param username
+		 * @param password
+		 */
+		doLogin:function(username,password){
+			Quote.doSendMessage(QuoteUrl.LoginUrl, '{"UserName":"'+username+'","PassWord":"'+password+'"}');
+		},
+		/**
+		 * 登录请求
+		 * @param username
+		 */
+		doLoginOut:function(username){
+			Quote.doSendMessage(QuoteUrl.LogoutUrl, '{"UserName":"'+username+'"}');
+		},
+		/**
+		 * 查询品种请求
+		 * @param exchangeNo
+		 */
+		doQryCommodity:function(exchangeNo){
+			Quote.doSendMessage(QuoteUrl.QryCommodityUrl, '{"ExchangeNo":"'+exchangeNo+'"}');
+		},
+		/**
+		 * 查询所有品种
+		 */
+		doAllQryCommodity:function(){
+			Quote.doSendMessage(QuoteUrl.QryCommodityUrl, null);
+		},
+		/**
+		 * 查询合约请求
+		 * @param exchangeNo
+		 * @param commodityNo
+		 */
+		doQryContract:function(exchangeNo,commodityNo){
+			Quote.doSendMessage(QuoteUrl.QryContractUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'"}');
+		},
+		/**
+		 * 订阅请求
+		 * @param exchangeNo
+		 * @param commodityNo
+		 * @param contractNo
+		 */
+		doSubscribe:function(exchangeNo,commodityNo,contractNo){
+			Quote.doSendMessage(QuoteUrl.SubscribeUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		},
+		/**
+		 * 取消订阅请求
+		 * @param exchangeNo
+		 * @param commodityNo
+		 * @param contractNo
+		 */
+		doUnSubscribe:function(exchangeNo,commodityNo,contractNo){
+			Quote.doSendMessage(QuoteUrl.UnSubscribeUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		},
+		/**
+		 * 查询历史请求
+		 * @param exchangeNo
+		 * @param commodityNo
+		 * @param contractNo
+		 * @param hisQuoteType
+		 * @param beginTime
+		 * @param endTime
+		 * @param count
+		 */
+		doQryHistory:function(exchangeNo,commodityNo,contractNo,hisQuoteType,beginTime,endTime,count){
+			Quote.doSendMessage(QuoteUrl.QryHistoryUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":"'+hisQuoteType+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'","Count":"'+count+'"}');
+		},
+		/**
+		 * 查询初始化历史数据请求
+		 * @param exchangeNo
+		 * @param commodityNo
+		 * @param contractNo
+		 */
+		doQryFirstHistory:function(exchangeNo,commodityNo,contractNo){
+			Quote.doSendMessage(QuoteUrl.QryHistoryUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		}
+}
