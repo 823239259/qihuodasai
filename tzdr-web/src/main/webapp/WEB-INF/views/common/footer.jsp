@@ -47,7 +47,7 @@
         		<li><a target="_blank" href="http://www.58che.com/2600/">沃尔沃S80</a></li>
         		<li><a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a></li>
         		<li><a target="_blank" href="http://xm.fbw315.com/">厦门装修网</a></li>
-        		<li><a target="_blank" href="www.kancai.com">苏州立信会计</a></li>
+        		<li><a target="_blank" href="http://www.kancai.com">苏州立信会计</a></li>
         	</ul>
             <ul>
                 <li>相关网站：</li>
