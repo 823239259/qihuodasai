@@ -345,6 +345,14 @@ $(function() {
                 rangeSelector : {
                     selected : 1
                 },
+                rangeSelector: {
+                    buttons: [{
+                        type: 'minute',
+                        count: 120,
+                        text: '分钟'
+                    }],
+                    selected: 0,
+                },
                 /* legend: {
                     enabled: true,
                     layout: 'vertical',
