@@ -156,15 +156,15 @@
 		<input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
 		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
 		<button><a href="#" id = "trade_login">登录</a></button>
-		<button><a href="${ctx }/outDisk/index"  target="_blank">立即开户</a></button>
+		<button><a href="${ctx }/outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
 		<a href="javascript:void(0);" class="backPassword">找回密码</a>
 		<div id="more_account" style="display: none;">
 		</div>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
 		当前账户:<b id = "top_username"></b>
-		<button id = "trade_loginOut">退出登录</button>
-		<button><a href="${ctx }/outDisk/index"  target="_blank">立即开户</a></button>
+		<button id = "trade_loginOut" style="width: 80px;">退出登录</button>
+		<button style="width: 80px;"><a href="${ctx }/outDisk/index"  target="_blank" style="display: inline;">立即开户</a></button>
 	</div>
 </div>
 <!-- center -->
@@ -276,7 +276,7 @@
 			            <li class="carbon_time" data="1440">日K</li>
 			        </ul>
     			</div>
-    			<div id="container" style="min-width: 500px; height: 460px; margin: 0 auto"></div>
+    			<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>
     			
     			<!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
 			        <div id="app">

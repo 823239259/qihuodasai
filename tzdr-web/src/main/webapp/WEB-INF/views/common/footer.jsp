@@ -40,7 +40,15 @@
 </div>
 <div class="copybox">
     <div class="copybox_content">
-        <div class="cp_link">
+        <div class="cp_link" style="padding-top: 30px;">
+        	<ul class="copy_yqlj">
+        		<li style="font-size: 14px;">友情链接：</li>
+        		<li><a target="_blank" href="http://www.boxz.com/">盒子比价网</a></li>
+        		<li><a target="_blank" href="http://www.58che.com/2600/">沃尔沃S80</a></li>
+        		<li><a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a></li>
+        		<li><a target="_blank" href="http://xm.fbw315.com/">厦门装修网</a></li>
+        		<li><a target="_blank" href="http://www.kancai.com">苏州立信会计</a></li>
+        	</ul>
             <ul>
                 <li>相关网站：</li>
                 <li>证监会</li>

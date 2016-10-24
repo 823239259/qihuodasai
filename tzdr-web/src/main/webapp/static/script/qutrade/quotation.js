@@ -100,9 +100,12 @@ $(function() {
             var dataC=[];
             var volume=[];
             var dataall=data.Data;
+            console.log(dataall);
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
-                timestamp = timestamp+"000";
+                var exs = 3600*8;
+                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
+                timestamp = zhi+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
@@ -127,7 +130,7 @@ $(function() {
                     dataC.splice(i,1);
                 }
             }
-
+            console.log(dataC);
             $('#container').highcharts('StockChart', {
                 chart: {
                     backgroundColor:'#333333'
@@ -182,7 +185,8 @@ $(function() {
                 }],
                 tooltip: {
                     crosshairs: true,
-                    shared: true
+                    shared: true,
+                    "z-index": "2"
                 },
                 rangeSelector: {
                     // 缩放选择按钮，是一个数组。
@@ -214,7 +218,7 @@ $(function() {
                     }
                 }, */
                 series : [{
-                    name: '分时线',
+                    name: 'K线',
                     type : 'line', /*candlestick line*/
                     id: 'primary',
                     data : dataC/*,
@@ -255,12 +259,15 @@ $(function() {
             $(".highcharts-series-0").hide();
         }
         function chechData(data){
+        	console.log(data);
             var dataC=[];
             var volume=[];
             var dataall=data.Data;
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
-                timestamp = timestamp+"000";
+                var exs = 3600*8;
+                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
+                timestamp = zhi+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
@@ -340,7 +347,10 @@ $(function() {
                 }],
                 tooltip: {
                     crosshairs: true,
-                    shared: true
+                    shared: true,
+                    style:{
+                        index: 2
+                    }
                 },
                 rangeSelector : {
                     selected : 1
