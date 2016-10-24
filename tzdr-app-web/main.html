@@ -17,7 +17,7 @@
     	}
     </style>
     <script> 
-    
+  
     function showWindow(){
     	
 			 	mui.openWindow({
@@ -81,7 +81,7 @@
 			setstatus();
 			 if(plus.storage.getItem("guide")==null){
 				 plus.storage.setItem("guide","12");
-				 plus.storage.setItem("apk","57a2a12867e58ecf320036b2");
+				 plus.storage.setItem("apk","57e87c26e0f55a1329001876");
 				 setTimeout(showWindow,1);		
 			 	}else{
             		var statusR =  document.getElementById("main_status");
@@ -149,6 +149,7 @@
 			mui.app_request('/getVersion',{force:true},
 				function(result){
 					dataVersion=result.data.version;
+					
 					if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
 						return;
 					}
