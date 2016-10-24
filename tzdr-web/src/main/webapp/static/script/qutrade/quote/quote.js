@@ -156,6 +156,10 @@ function quotePush(obj){
 	updateRealTimeQuote(param);
 	//添加行情到全局缓存
 	setLocalCacheQuote(param);
+	//根据行情更新持仓列表
+	updatePositionByQuote(param);
+	//根据行情更新挂单列表 
+	updateDesignateByQuote(param);
 	//更新浮动盈亏
 	updateFloatingfit(param);
 	//更新资金明细中的浮动盈亏

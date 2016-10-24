@@ -101,7 +101,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .gonggao-title-bj {background: #333; border-bottom: 1px solid #1a1a1a;}
 .notice-title-bj {width: 1000px; margin: 0 auto; height: 40px; line-height: 40px; position: relative;}
 .site-notice .nr {border-top: 1px solid #4d4d4d; background: #333; padding: 20px 0;}
-
+.copy_yqlj {width: 100%; display: inline-block; margin-bottom: 10px;}
+.copy_yqlj li a {font-size: 14px;}
 /* weixin */
 .follow .erweima .erweima-wxtk {position: absolute;top: -153px;left: -39px; height: 150px;}
 .follow .erweima .erweima-wxtk img {height: 150px;}
