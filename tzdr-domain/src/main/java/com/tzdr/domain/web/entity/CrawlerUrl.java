@@ -1,4 +1,4 @@
-package com.tzdr.domain.web.entity.crawler;
+package com.tzdr.domain.web.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,6 +17,10 @@ public class CrawlerUrl extends BaseEntity{
 	 */
 	private String urlUrl;
 	/**
+	 * 状态（0-未执行，1-已执行）
+	 */
+	private String status;
+	/**
 	 * 请求备注
 	 */
 	private String urlRemarks;
@@ -25,13 +29,21 @@ public class CrawlerUrl extends BaseEntity{
 	 */
 	private String urlMethod;
 	/**
+	 * 任务执行规则
+	 */
+	private String  execRule;
+	/**
+	 * 上一次开启时间（任务开启）
+	 */
+	private Long lastOpentime;
+	/**
 	 * 请求创建时间
 	 */
-	private String urlCreatetime;
+	private Long urlCreatetime;
 	/**
 	 * 请求修改时间
 	 */
-	private String urlUpdatetime;
+	private Long urlUpdatetime;
 
 	public String getUrlTitle() {
 		return urlTitle;
@@ -57,16 +69,40 @@ public class CrawlerUrl extends BaseEntity{
 	public void setUrlMethod(String urlMethod) {
 		this.urlMethod = urlMethod;
 	}
-	public String getUrlCreatetime() {
+	public Long getUrlCreatetime() {
 		return urlCreatetime;
 	}
-	public void setUrlCreatetime(String urlCreatetime) {
+	public void setUrlCreatetime(Long urlCreatetime) {
 		this.urlCreatetime = urlCreatetime;
 	}
-	public String getUrlUpdatetime() {
+	public Long getUrlUpdatetime() {
 		return urlUpdatetime;
 	}
-	public void setUrlUpdatetime(String urlUpdatetime) {
+	public void setUrlUpdatetime(Long urlUpdatetime) {
 		this.urlUpdatetime = urlUpdatetime;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getExecRule() {
+		return execRule;
+	}
+	public void setExecRule(String execRule) {
+		this.execRule = execRule;
+	}
+	public Long getLastOpentime() {
+		return lastOpentime;
+	}
+	public void setLastOpentime(Long lastOpentime) {
+		this.lastOpentime = lastOpentime;
+	}
+	public CrawlerUrl() {
+		super();
+	}
+	
 }
