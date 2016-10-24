@@ -7,8 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
-	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台_外盘期货投资开户交易软件公司_恒指原油黄金实时行情动态资讯</title>
-	<meta name="keywords" content="维胜,期货,国际期货,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,无息配资,都城投资,投资达人,A50交易,多空多头空头,投机套保套利,外盘期货公司,国际期货开户,国际期货公司,外盘期货交易模拟软件,外盘期货投资开户交易软件公司,恒指原油黄金实时行情动态资讯"/>
+	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台|外盘期货|恒指期货|国际原油|富时A50|成都期货_期货开户_期货交易_期货行情</title>
+	<meta name="keywords" content="维胜,期货,国际期货,期货开户,期货交易,期货行情,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,都城投资,投资达人,A50交易,外盘期货公司,期货开户,国际期货开户,国际期货公司,外盘期货开户, 期货怎么买,如何炒股指期货, 股票跟期货的区别, 如何买期货"/>
 	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 	<meta name="sogou_site_verification" content="rM6RBuyJcq"/>
 	<meta name="360-site-verification" content="130a887517d7b56c6f630e2188d9d027" />
@@ -237,7 +237,7 @@
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
-                <h4><i>${showmap.hsi[0].valueData }</i>元/双边</h4>
+                <h4><i>${showmap.hsi[0].valueData }</i>元/单边</h4>
                 <ul>
                     <li>• 监管严格，市场成熟</li>
                     <li>• 履约保证，更安全透明</li>
@@ -252,7 +252,7 @@
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【国际原油】</h3>
-                <h4><i>${showmap.fco[0].valueData }</i>元/双边</h4>
+                <h4><i>${showmap.fco[0].valueData }</i>元/单边</h4>
                 <ul>
                     <li>• 轻原油，更优质</li>
                     <li>• 国际市场，更透明</li>
@@ -267,7 +267,7 @@
             </div>
             <div class="w-guopjiqihuo" style="border-right: 10px solid #292929;">
                 <h3>【富时A50】</h3>
-                <h4><i>${showmap.ffa50[0].valueData }</i>元/双边</h4>
+                <h4><i>${showmap.ffa50[0].valueData }</i>元/单边</h4>
                 <ul>
                     <li>• A股大盘，趋势投资</li>
                     <li>• 超低门槛，短线灵活</li>
