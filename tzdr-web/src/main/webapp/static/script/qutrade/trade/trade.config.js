@@ -17,7 +17,8 @@ function tradeConfigNewinstance(){
  * 定义测试环境服务器
  */
 function tradeConfigNewinstanceTest(){
-	this.url = "ws://192.168.0.213:6060";
+	//this.url = "ws://192.168.0.213:6060";
+	this.url = "ws://139.224.24.206:6066";
 	return this;
 }
 /**

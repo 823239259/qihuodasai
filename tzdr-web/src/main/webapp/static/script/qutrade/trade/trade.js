@@ -347,7 +347,6 @@ function appendOrder(param){
 	var tradeNum = param.TradeNum;
 	var triggerPrice = param.TriggerPrice;
 	var priceType = param.OrderPriceType;
-	console.log(priceType);
 	var tradePrice = param.TradePrice;
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
@@ -697,6 +696,53 @@ function updatePostion(param){
 		postContract.holdNum = oldHoldNum;
 		postContract.drection = drectionText;
 	}
+}
+/**
+ * 根据行情更新持仓列表
+ * @param param
+ */
+function updatePositionByQuote(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var currencyNo = param.CurrencyNo;
+	var exchangeNo = param.ExchangeNo;
+	var contractCode = commodityNo + contractNo;
+	var positionDom = $("ul[data-tion-position='"+contractCode+"']");
+	if(positionDom.html() == undefined){
+		return;
+	}
+	var localCommodity = getLocalCacheCommodity(contractCode);
+	if(localCommodity != undefined){
+		currencyNo = localCommodity.CurrencyNo;
+	}
+	var $exchangeNo = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position5']");
+	var $currencyNo = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position6']");
+	var $commodityNo = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position7']");
+	var $contractNo = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position8']");
+	$exchangeNo.text(exchangeNo);
+	$currencyNo.text(currencyNo);
+	$commodityNo.text(commodityNo);
+	$contractNo.text(contractNo);
+}
+/**
+ * 根据行情更新挂单列表
+ * @param param
+ */
+function updateDesignateByQuote(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var exchangeNo = param.ExchangeNo;
+	var contractCode = commodityNo + contractNo;
+	var designateDom = $("ul[data-tion-des='"+contractCode+"']");
+	if(designateDom.html() == undefined){
+		return;
+	}
+	var $exchangeNo = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des7']");
+	var $commodityNo = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des8']");
+	var $contractNo = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des9']");
+	$commodityNo.text(commodityNo);
+	$contractNo.text(contractNo);
+	$exchangeNo.text(exchangeNo);
 }
 /**
  * 验证持仓信息是否存在 
