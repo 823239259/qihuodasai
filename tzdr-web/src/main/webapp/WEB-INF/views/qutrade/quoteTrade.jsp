@@ -163,8 +163,8 @@
 	</div>
 	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
 		当前账户:<b id = "top_username"></b>
-		<button id = "trade_loginOut">退出登录</button>
-		<button><a href="${ctx }/outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
+		<button id = "trade_loginOut" style="width: 80px;">退出登录</button>
+		<button style="width: 80px;"><a href="${ctx }/outDisk/index"  target="_blank" style="display: inline;">立即开户</a></button>
 	</div>
 </div>
 <!-- center -->
