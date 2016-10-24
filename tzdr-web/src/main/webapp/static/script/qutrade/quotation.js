@@ -348,7 +348,9 @@ $(function() {
                 tooltip: {
                     crosshairs: true,
                     shared: true,
-                    "z-index": "2"
+                    style:{
+                        index: 2
+                    }
                 },
                 rangeSelector : {
                     selected : 1

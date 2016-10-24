@@ -276,7 +276,7 @@
 			            <li class="carbon_time" data="1440">日K</li>
 			        </ul>
     			</div>
-    			<div id="container" style="min-width: 500px; height: 460px; margin: 0 auto"></div>
+    			<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>
     			
     			<!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
 			        <div id="app">
