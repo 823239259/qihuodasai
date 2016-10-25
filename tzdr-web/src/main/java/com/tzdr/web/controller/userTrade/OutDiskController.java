@@ -100,6 +100,7 @@ public class OutDiskController {
 			resultData.put("aCopperActualLever", outDiskParameters.getaCopperActualLever());
 			resultData.put("aSilverActualLever", outDiskParameters.getaSilverActualLever());
 			resultData.put("smaActualLever", outDiskParameters.getSmaActualLever());
+			resultData.put("daxtranMinActualLever", outDiskParameters.getDaxtranMinActualLever());
 			result = new JsonResult(true, "处理成功！");
 			result.setObj(resultData);
 		}

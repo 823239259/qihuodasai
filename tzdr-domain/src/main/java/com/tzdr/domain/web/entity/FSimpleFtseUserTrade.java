@@ -147,7 +147,10 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 小原油交易手续费
 	 */
 	private  BigDecimal smallCTranFees;
-
+	/**
+	 * 迷你德国DAX指数交易手续费
+	 */
+	private BigDecimal daxMinTranFees;
 	/**
 	 * 申请时间
 	 */
@@ -251,7 +254,10 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 小原油交易手数
 	 */
 	private Integer smallCrudeOilMarketLever;
-
+	/**
+	 * 迷你德国DAX指数交易手数
+	 */
+	private Integer daxtranMinActualLever;
 
 	/**
 	 * 交易手续费总额
@@ -840,6 +846,20 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	}
 	public void setSmallCTranFees(BigDecimal smallCTranFees) {
 		this.smallCTranFees = smallCTranFees;
+	}
+
+
+	public BigDecimal getDaxMinTranFees() {
+		return daxMinTranFees;
+	}
+	public void setDaxMinTranFees(BigDecimal daxMinTranFees) {
+		this.daxMinTranFees = daxMinTranFees;
+	}
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
 

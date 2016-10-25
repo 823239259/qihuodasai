@@ -191,7 +191,11 @@ public class FSimpleFtseManageVo implements Serializable {
 	 */
 	@AllowExcel(name = "小原油交易手数")
 	private Integer smallCrudeOilMarketLever;
-	
+	/**
+	 * 小原油交易手数
+	 */
+	@AllowExcel(name = "迷你德国DAX指数")
+	private Integer daxtranMinActualLever;
 	/**
 	 * 交易手续费总额
 	 */
@@ -805,6 +809,14 @@ public class FSimpleFtseManageVo implements Serializable {
 
 	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
 		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
+	}
+
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
 }

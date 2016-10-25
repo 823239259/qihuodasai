@@ -41,6 +41,7 @@ function pass(type,tabs) {
 			$("#aCopperActualLever").val("");
 			$("#aSilverActualLever").val("");
 			$("#smaActualLever").val("");
+			$("#daxtranMinActualLever").val("");
 			$("#passWin").window({title:'添加'});
 		} else if(type==2){
 			
@@ -70,6 +71,7 @@ function pass(type,tabs) {
 				$("#aCopperActualLever").val(rows[0].aCopperActualLever);
 				$("#aSilverActualLever").val(rows[0].aSilverActualLever);
 				$("#smaActualLever").val(rows[0].smaActualLever);
+				$("#daxtranMinActualLever").val(rows[0].daxtranMinActualLever);
 				$("#passWin").window({title:'修改'});
 		
 			}else{
@@ -132,6 +134,7 @@ function passSave() {
 			var xhIndexActualLever=$("#xhIndexActualLever").val();
 			var aCopperActualLever=$("#aCopperActualLever").val();
 			var aSilverActualLever=$("#aSilverActualLever").val();
+			var daxtranMinActualLever = $("#daxtranMinActualLever").val();
 			var smaActualLever=$("#smaActualLever").val();
 		
 		
@@ -141,7 +144,7 @@ function passSave() {
 						"htranActualLever":HTranActualLever,"ytranActualLever":YTranActualLever,"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
 						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever,"hIndexActualLever":hIndexActualLever,"xhIndexActualLever":xhIndexActualLever,
-						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever};
+						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever,"daxtranMinActualLever":daxtranMinActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/create",
 						parameters,
 						function(data){
@@ -159,8 +162,8 @@ function passSave() {
 						"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
 						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever,"hIndexActualLever":hIndexActualLever,"xhIndexActualLever":xhIndexActualLever,
-						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever};
-				$.post(Check.rootPath() + "/admin/OutDiskParameters/update",
+						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever,"daxtranMinActualLever":daxtranMinActualLever};
+				$.post(Check.rootPath() + "/admin/OutDiskParameters/outUpdate",
 						parameters,
 						function(data){
 							if (data.success) {
@@ -262,6 +265,8 @@ function tradeToS(value,row,index){
 		return '美白银';
 	}else if(value==20){
 		return '小原油';
+	}else if(value == 21){
+		return '迷你德国DAX指数';
 	}
 	
 	// 9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225、14.小恒指、15.美黄金
@@ -341,6 +346,7 @@ $(document).ready(function(){
 							<th field="aCopperActualLever" width="150" hidden="true">美铜交易手数</th>
 							<th field="aSilverActualLever" width="150" hidden="true">美白银交易手数</th>
 							<th field="smaActualLever" width="150" hidden="true">小原油交易手数</th>
+							<th field="daxtranMinActualLever" width="150" hidden="true">迷你德国DAX指数</th>
 							<th field="updateTime" width="150" formatter="DateToS">更新时间</th>
 							<th field="updateUser" width="150">操作人</th>
 			            </tr>
@@ -498,7 +504,10 @@ $(document).ready(function(){
                 <td>
                    <input id="smaActualLever" name="smaActualLever" class="easyui-validatebox"  data-options="required:true"/>
                 </td>
-               
+               <td class="label right">迷你德国DAX指数交易手数:</td>
+                <td>
+                   <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
             </tr>
             <tr>
                 <td align="center" colspan="5">
@@ -536,6 +545,7 @@ $(document).ready(function(){
 				    <option value="18">美铜</option>
 				    <option value="19">美白银</option>
 				    <option value="20">小原油</option>
+				    <option value="21">迷你德国DAX指数</option>
 				</select>
                 </td>
                 <td><span ></span></td>

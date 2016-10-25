@@ -120,7 +120,8 @@
 								小H股指数<i><fmt:formatNumber value="${outDiskPrice[11].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
 								美铜<i><fmt:formatNumber value="${outDiskPrice[12].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
 								美白银<i><fmt:formatNumber value="${outDiskPrice[13].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								小原油<i><fmt:formatNumber value="${outDiskPrice[14].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
+								小原油<i><fmt:formatNumber value="${outDiskPrice[14].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								迷你德国DAX指数<i><fmt:formatNumber value="${outDiskPrice[15].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
 							</p>
 						</li>
 						<li>
@@ -141,7 +142,7 @@
 							<i>(${outDiskPrice[7].mainContract})</i>、小恒指<i>(${outDiskPrice[8].mainContract})</i>、美黄金
 							<i>(${outDiskPrice[9].mainContract})</i>、H股指数<i>(${outDiskPrice[10].mainContract})</i>
 							、小H股指数<i>(${outDiskPrice[11].mainContract})</i>、美铜<i>(${outDiskPrice[12].mainContract})</i>
-							、美白银<i>(${outDiskPrice[13].mainContract})</i>、小原油<i>(${outDiskPrice[14].mainContract})</i>
+							、美白银<i>(${outDiskPrice[13].mainContract})</i>、小原油<i>(${outDiskPrice[14].mainContract})</i>、迷你德国DAX指数<i>(${outDiskPrice[15].mainContract})</i>
 							</p>
 						</li>
 						<li>							

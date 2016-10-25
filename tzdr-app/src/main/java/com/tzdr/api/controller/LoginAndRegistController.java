@@ -28,6 +28,7 @@ import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.api.service.ApiTradeService;
 import com.tzdr.business.api.service.ApiUserService;
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.feededuction.FeeDuductionService;
 import com.tzdr.business.service.future.FSimpleCouponService;
 import com.tzdr.business.service.generalize.GeneralizeChannelService;
@@ -82,6 +83,8 @@ public class LoginAndRegistController {
 	
 	@Autowired
 	private FSimpleFtseUserTradeService fSimpleFtseUserTradeService;
+	@Autowired
+	private MessagePromptService messagePromptService;
 
 	private static Object lock = new Object();
 	
@@ -146,16 +149,19 @@ public class LoginAndRegistController {
 		wUser.setCtime((new Date().getTime()/1000));
 		wUser.setRegIp(IpUtils.getIpAddr(request));
 		GeneralizeChannel generalizeChannel = getChannel(channel);
+		String channelName = "";
+		String channelKeyWords = "";
 		if (generalizeChannel != null) {
-			String channelName = generalizeChannel.getTypeThreeTitle();
+			channelName = generalizeChannel.getTypeThreeTitle();
 			if (channelName == null || channelName.length() <= 0) {
 				channelName = generalizeChannel.getTypeTwoTitle();
 				if (channelName == null || channelName.length() <= 0) {
 					channelName = generalizeChannel.getTypeOneTitle();
 				}
 			}
+			channelKeyWords = generalizeChannel.getUrlKey();
 			wUser.setChannel(channelName); // 设置渠道
-			wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
+			wUser.setKeyword(channelKeyWords);// 设置关键字
 		}else{
 			wUser.setChannel(channel);
 		}
@@ -212,6 +218,7 @@ public class LoginAndRegistController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		messagePromptService.registNotice(mobile, "APP", channelName, channelKeyWords);
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	

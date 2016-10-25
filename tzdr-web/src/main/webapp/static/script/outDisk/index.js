@@ -44,6 +44,7 @@ function getData(){
 			$("#aCopperActualLever").html(result.obj.aCopperActualLever);
 			$("#aSilverActualLever").html(result.obj.aSilverActualLever);
 			$("#smaActualLever").html(result.obj.smaActualLever);
+			$("#daxtranMinActualLever").html(result.obj.daxtranMinActualLever);
 		} else {
 			showMsgDialog("提示",result.message);
 		}

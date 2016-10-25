@@ -76,6 +76,7 @@ public class OutDiskParametersService extends BaseServiceImpl<OutDiskParameters,
 		odp.setaCopperActualLever(o.getaCopperActualLever());
 		odp.setaSilverActualLever(o.getaSilverActualLever());
 		odp.setSmaActualLever(o.getSmaActualLever());
+		odp.setDaxtranMinActualLever(o.getDaxtranMinActualLever());
 		setOperateLog(odp,"修改国际综合参数设置","edit");
 		super.update(odp);
 	}

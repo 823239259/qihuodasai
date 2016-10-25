@@ -133,7 +133,10 @@ public class OutDiskParameters extends BaseCrudEntity{
 	 */
 	
 	private Integer smaActualLever;
-	
+	/**
+	 * 迷你德国DAX指数交易手数
+	 */
+	private Integer daxtranMinActualLever;
 	public BigDecimal getTraderBond() {
 		return traderBond;
 	}
@@ -290,6 +293,14 @@ public class OutDiskParameters extends BaseCrudEntity{
 	
 	public void setSmaActualLever(Integer smaActualLever) {
 		this.smaActualLever = smaActualLever;
+	}
+	@Column(name="daxtranMinActualLever")
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
 	

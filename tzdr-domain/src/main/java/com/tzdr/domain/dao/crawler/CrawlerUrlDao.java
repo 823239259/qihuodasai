@@ -1,5 +1,7 @@
 package com.tzdr.domain.dao.crawler;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.tzdr.common.dao.BaseJpaDao;
 import com.tzdr.domain.web.entity.CrawlerUrl;
 /**
@@ -8,5 +10,6 @@ import com.tzdr.domain.web.entity.CrawlerUrl;
  *
  */
 public interface CrawlerUrlDao extends BaseJpaDao<CrawlerUrl, String>{
-
+	@Query("from CrawlerUrl where id = ?1")
+	public CrawlerUrl doGetDataById(String id);
 }

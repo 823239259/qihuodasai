@@ -1,5 +1,9 @@
 package com.tzdr.cms.controller.crawler;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.service.crawler.CrawlerUrlParamService;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
@@ -20,13 +26,17 @@ import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.EasyuiUtil;
 import com.tzdr.common.web.support.EasyUiPageData;
 import com.tzdr.common.web.support.EasyUiPageInfo;
+import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.web.entity.CrawlerUrl;
+import com.tzdr.domain.web.entity.CrawlerUrlParam;
 
 @Controller
 @RequestMapping(value = "/admin/crawler/url")
 public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	@Autowired
 	private CrawlerUrlService crawlerService;
+	@Autowired
+	private CrawlerUrlParamService crawlerUrlParamService;
 	@RequestMapping(value = "/list",method=RequestMethod.GET)
 	public String list(){
 		return ViewConstants.CrawlerView.LIST_VIEW;
@@ -42,6 +52,78 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 		Map<String, Object> searchParams = EasyuiUtil.getParametersStartingWith(request,EasyuiUtil.SEARCH_PREFIX);
 		PageInfo<Object> pageInfo = crawlerService.doGetCrawlerUrlList(easyUiPage,searchParams);
 		return new EasyUiPageData<Object>(pageInfo);
+	}
+	/**
+	 * 新增数据
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/save",method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult doSave(HttpServletRequest request){
+		String id = request.getParameter("id");
+		String urlTitle = request.getParameter("urlTitle");
+		String urlUrl = request.getParameter("urlUrl");
+		String urlMethod = request.getParameter("urlMethod");
+		String execRule = request.getParameter("execRule");
+		String key =  request.getParameter("key");
+		String value = request.getParameter("value");
+		String urlRemarks = request.getParameter("urlRemarks");
+		Long time = new Date().getTime()/1000;
+		CrawlerUrl crawlerUrl = new CrawlerUrl();
+		crawlerUrl.setExecRule(execRule);
+		crawlerUrl.setStatus("0");
+		crawlerUrl.setUrlMethod(urlMethod);
+		crawlerUrl.setUrlRemarks(urlRemarks);
+		crawlerUrl.setUrlTitle(urlTitle);
+		crawlerUrl.setUrlCreatetime(time);
+		crawlerUrl.setUrlUpdatetime(time);
+		crawlerUrl.setLastOpentime(time);
+		crawlerUrl.setUrlUrl(urlUrl);
+		crawlerUrl.setId(id);
+		crawlerUrl.setDeleted(false);
+		String[] keysArray = key.split(",");
+		String[] valuesArray = value.split(",");
+		int length = keysArray.length;
+		List<CrawlerUrlParam> crawlerUrlParams = new ArrayList<>();
+		for(int i = 0 ; i < length ; i ++ ){
+			CrawlerUrlParam crawlerUrlParam = new CrawlerUrlParam();
+			crawlerUrlParam.setUrlParamKey(keysArray[i]);
+			crawlerUrlParam.setUrlParamValue(valuesArray[i]);
+			crawlerUrlParam.setDeleted(false);
+			crawlerUrlParam.setUrlParamCreatetime(time);
+			crawlerUrlParam.setUrlParamUpdatetime(time);
+			crawlerUrlParams.add(crawlerUrlParam);
+		}
+		crawlerService.doSave(crawlerUrl, crawlerUrlParams);
+		JsonResult resultJson = new JsonResult(true);
+		return resultJson;
+	}
+	/**
+	 * 根据id获取当个数据
+	 * @return
+	 */
+	@RequestMapping(value = "/doGetDataById",method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResult doGetDataById(HttpServletRequest request,@RequestParam("id") String id){
+		CrawlerUrl crawlerUrl = crawlerService.doGetDataById(id);
+		List<CrawlerUrlParam> crawlerUrlParams = crawlerUrlParamService.doGetawlerUrlParamByUrlId(id);
+		JsonResult resultJson = new JsonResult(true);
+		resultJson.appendData("data", crawlerUrl);
+		resultJson.appendData("param", crawlerUrlParams);
+		return resultJson;
+	}
+	/**
+	 * 删除数据
+	 * @param request
+	 * @param urlId
+	 * @return
+	 */
+	@RequestMapping(value = "/doDeleteByUrlId",method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult doDeleteUrlAndParam(HttpServletRequest request,@RequestParam("urlId")String urlId){
+			crawlerService.doDeleteByUrlId(urlId);
+		return new JsonResult(true);
 	}
 	@Override
 	public BaseService<CrawlerUrl> getBaseService() {

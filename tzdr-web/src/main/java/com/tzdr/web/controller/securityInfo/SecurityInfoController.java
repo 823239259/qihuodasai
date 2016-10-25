@@ -158,9 +158,9 @@ public class SecurityInfoController{
 			}
 		}else{
 			if(userverified!=null){
-			userverified.setStatus(Constants.Idcard.NOPASS);//验证失败
-			securityInfoService.update(userverified);
-			jsonResult.setMessage("maxnum");
+				userverified.setStatus(Constants.Idcard.NOPASS);//验证失败
+				securityInfoService.update(userverified);
+				jsonResult.setMessage("maxnum");
 			}
 		}
 		return jsonResult;

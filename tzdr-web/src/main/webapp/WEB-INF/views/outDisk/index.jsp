@@ -194,10 +194,10 @@
                 
                  <tr>
                     <td>迷你德国DAX指数</td>
-                    <td>${outDiskPrice[14].mainContract}</td>
-                    <td>${outDiskPrice[14].tradTime}</td>
-                    <td>只交小原油时，初始最大可持仓<i id='smaActualLever'>${outDiskParameters[0].smaActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[14].price}</i>元/手</td>
+                    <td>${outDiskPrice[15].mainContract}</td>
+                    <td>${outDiskPrice[15].tradTime}</td>
+                    <td>只交迷你德国DAX指数时，初始最大可持仓<i id='daxtranMinActualLever'>${outDiskParameters[0].daxtranMinActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[15].price}</i>元/手</td>
                 </tr>
                 
                 <tr>

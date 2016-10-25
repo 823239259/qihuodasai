@@ -262,6 +262,7 @@ public class UOutDiskController {
 					st.setAmeCTranFees(outDiskPrice.get(12).getPrice());//美铜
 					st.setAmeSTranFees(outDiskPrice.get(13).getPrice());//美白银
 					st.setSmallCTranFees(outDiskPrice.get(14).getPrice());//小原油
+					st.setDaxMinTranFees(outDiskPrice.get(15).getPrice());
 					
 					// 审核中
 					st.setStateType(1);

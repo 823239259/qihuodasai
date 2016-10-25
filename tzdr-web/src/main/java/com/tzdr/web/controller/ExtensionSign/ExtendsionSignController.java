@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.extension.ActivityRewardService;
 import com.tzdr.business.service.generalize.GeneralizeChannelService;
@@ -61,6 +62,8 @@ public class ExtendsionSignController {
 	private ActivityRewardService activityRewardService;
 	@Autowired
 	private DataMapService dataMapService;
+	@Autowired
+	private MessagePromptService messagePromptService;
 	@RequestMapping(value = "/testJob")
 	@ResponseBody
 	public JsonResult testJob(){
@@ -79,10 +82,7 @@ public class ExtendsionSignController {
 		cal.add(Calendar.DATE, 0);
 		return cal.getTime().getTime();
 	}
-	public static void main(String[] args) {
-		System.out.println(getStartTime());
-		System.out.println(getEndTime());
-	}
+
 	/**
 	 * 上线推广注册页面
 	 * 
@@ -180,16 +180,20 @@ public class ExtendsionSignController {
 			wUser.setCtime((new Date().getTime() / 1000));
 			wUser.setRegIp(IpUtils.getIpAddr(request));
 			GeneralizeChannel generalizeChannel = getChannel(channelCode);
+			String channelKeyWorks = "";
+			String channelName = "";
 			if (generalizeChannel != null) {
-				String channelName = generalizeChannel.getTypeThreeTitle();
+				channelName = generalizeChannel.getTypeThreeTitle();
 				if (channelName == null || channelName.length() <= 0) {
 					channelName = generalizeChannel.getTypeTwoTitle();
 					if (channelName == null || channelName.length() <= 0) {
 						channelName = generalizeChannel.getTypeOneTitle();
 					}
 				}
+				channelKeyWorks = generalizeChannel.getUrlKey();
 				wUser.setChannel(channelName); // 设置渠道
-				wUser.setKeyword(generalizeChannel.getUrlKey());// 设置关键字
+				wUser.setKeyword(channelKeyWorks);// 设置关键字
+				
 			}
 			if (!StringUtil.isBlank(parentGeneralizeId)) {
 				WUser generalizeWuser = null;
@@ -248,7 +252,8 @@ public class ExtendsionSignController {
 			String randomCode = RandomCodeUtil.randStr(6);   //生成6为验证码
 			smsParams.put("code", randomCode);
             SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile, "ihuyi.verification.signin.success.template", smsParams);
-			jsonResult.setData(data);
+            messagePromptService.registNotice(mobile, "web", channelName, channelKeyWorks);
+            jsonResult.setData(data);
 		}
 		return jsonResult;
 	}
