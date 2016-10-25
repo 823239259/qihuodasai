@@ -664,6 +664,13 @@ var tab="<%=tab%>";
 			  	<td>1个指数点（10港元）</td>
 			  	<td class="sp">T+1时段的可委托价格区间为 期货合约在T时段最后成交价 的5%</td>
 			  </tr>
+			  <tr>
+			  	<td>迷你德国DAX指数</td>
+			  	<td>香港交易所</td>
+			  	<td>H股指数</td>
+			  	<td>1个指数点（10港元）</td>
+			  	<td class="sp">T+1时段的可委托价格区间为 期货合约在T时段最后成交价 的5%</td>
+			  </tr>
 			</tbody>
 			</table>
 			<h2 style="margin-top: 15px;">操盘流程：</h2>
