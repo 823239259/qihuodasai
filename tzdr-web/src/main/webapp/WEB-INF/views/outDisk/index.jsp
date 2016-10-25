@@ -193,7 +193,7 @@
                 </tr>
                 
                  <tr>
-                    <td>迷你德国DAX指数</td>
+                    <td style="line-height: normal;">迷你德国DAX指数</td>
                     <td>${outDiskPrice[15].mainContract}</td>
                     <td>${outDiskPrice[15].tradTime}</td>
                     <td>只交迷你德国DAX指数时，初始最大可持仓<i id='daxtranMinActualLever'>${outDiskParameters[0].daxtranMinActualLever}</i>手</td>
