@@ -129,6 +129,7 @@ function handleData(evt){
 			if(isChangeOrder && cacaleOrderId==orderId){
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
+				isChangeOrder = false;
 				tip("改单成功:合约【"+contractCode+"】,委托价【"+orderPrice+"】,委托量【"+orderNum+"】");
 			}
 			//订单成交通知
