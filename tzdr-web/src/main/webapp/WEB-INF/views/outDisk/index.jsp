@@ -192,6 +192,14 @@
                     <td><i>${outDiskPrice[14].price}</i>元/手</td>
                 </tr>
                 
+                 <tr>
+                    <td>迷你德国DAX指数</td>
+                    <td>${outDiskPrice[14].mainContract}</td>
+                    <td>${outDiskPrice[14].tradTime}</td>
+                    <td>只交小原油时，初始最大可持仓<i id='smaActualLever'>${outDiskParameters[0].smaActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[14].price}</i>元/手</td>
+                </tr>
+                
                 <tr>
                 	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">${transTime}</i>六个时段所有品种只能平仓，不能开仓。</td>
                 </tr>
