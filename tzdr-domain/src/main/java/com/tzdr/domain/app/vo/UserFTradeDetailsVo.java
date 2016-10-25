@@ -171,7 +171,11 @@ public class UserFTradeDetailsVo implements Serializable {
 	 */
 	@SqlColumn(name="ag_tran_actual_lever")
 	private Integer agTranActualLever;
-	
+	/**
+	 * 迷你德国DAX指数
+	 */
+	@SqlColumn(name = "daxtran_min_actual_lever")
+	private Integer daxtranMinActualLever;
 	
 	/**
 	 * 结算金额
@@ -195,6 +199,14 @@ public class UserFTradeDetailsVo implements Serializable {
 	 * 交易品种集合
 	 */
 	private List<OutDiskVo> outDiskVoList = new ArrayList<OutDiskVo>();
+
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
+	}
 
 	public String getId() {
 		return id;
