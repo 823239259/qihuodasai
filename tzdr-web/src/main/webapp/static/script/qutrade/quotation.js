@@ -100,7 +100,7 @@ $(function() {
             var dataC=[];
             var volume=[];
             var dataall=data.Data;
-            console.log(dataall);
+            //console.log(dataall);
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
                 var exs = 3600*8;
@@ -130,7 +130,7 @@ $(function() {
                     dataC.splice(i,1);
                 }
             }
-            console.log(dataC);
+            //console.log(dataC);
             $('#container').highcharts('StockChart', {
                 chart: {
                     backgroundColor:'#333333'
