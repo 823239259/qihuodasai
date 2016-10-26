@@ -175,12 +175,19 @@ function updateBalance(parama){
 	var currencyNo = parama.CurrencyNo;
 	var accountNo = parama.AccountNo;
 	var cachBanlace = loadCachBanlance[accountNo];
-	var banlance = parama.TodayBalance;
 	var deposit = parama.Deposit;
-	var canuse = parama.TodayCanUse;
 	var currency = parama.CurrencyRate; 
 	var closeProfit = parama.CloseProfit;
-	var floatingProfit = parama.FloatingProfit;
+	var floatingProfit = parama.floatingProfit;
+	if(floatingProfit == undefined ){
+		floatingProfit = parama.FloatingProfit
+	}
+	var frozenMoney =parama.FrozenMoney;
+	var todayAmount = parama.TodayAmount;
+	var unExpiredProfit = parama.UnExpiredProfit;
+	var unAccountProfit = parama.UnAccountProfit;
+	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
+	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
 	localCacheCurrencyAndRate[currencyNo]  = currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
@@ -210,17 +217,6 @@ function updateBalance(parama){
 	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
-	/*var $float = parseFloat($floatFit).toFixed(2) ;
-	if(isNaN($float)){
-		$float = 0;
-	}
-	if($float < 0){
-		color = "#0bffa4";
-	}else if($float > 0){
-		color = "#ff5500";
-	}
-	$("#floatingProfit").text($float);
-	$("#floatingProfit").css("color",color);*/
 	var color = "#FFFFFF";
 	var $closeProfit = parseFloat($clostFit).toFixed(2);
 	if($closeProfit < 0){
@@ -257,14 +253,12 @@ var fundsDetailsIndex = 0;
 function addFundsDetails(param){
 	var currencyNo = param.CurrencyNo;
 	var acccoutNo = param.AccountNo;
-	if(currencyNo == "HKD"){
+/*	if(currencyNo == "HKD"){
 		currencyNo = "HKD-HKFE";
-	}
-	//var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
-	//var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	}*/
 	var deposit = parseFloat(param.Deposit).toFixed(2);
 	var floatingProfit = parseFloat(param.FloatingProfit).toFixed(2);
-	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
+	var keepDepositf = parseFloat(param.Deposit).toFixed(2);
 	var oldBalance = parseFloat(param.OldBalance).toFixed(2);
 	var oldAmount = parseFloat(param.OldAmount).toFixed(2);
 	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
@@ -272,8 +266,8 @@ function addFundsDetails(param){
 	var currencyRate = param.CurrencyRate;
 	var unExpiredProfit = parseFloat(param.UnExpiredProfit).toFixed(2);
 	var unAccountProfit = parseFloat(param.UnAccountProfit).toFixed(2);
-	var todayBalance = parseFloat(todayAmount+unExpiredProfit+unAccountProfit+floatingProfit).toFixed(2);
-	var todayCanUse = parseFloat(todayBalance-keepDepositf-frozenMoney).toFixed(2);
+	var todayBalance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);
+	var todayCanUse =  parseFloat(todayBalance-keepDepositf-frozenMoney).toFixed(2);
 	var profitRate = "";
 	var cls = "currencyNo"+currencyNo;
 	var funds_cls = "funds-index"+fundsDetailsIndex;
@@ -303,46 +297,35 @@ function addFundsDetails(param){
  */
 function updateFundsDetails(param){
 	var accountNo = param.AccountNo;
-	//var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
-	//var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
 	var deposit = parseFloat(param.Deposit).toFixed(2);
-	var floatingProfit = parseFloat(param.floatingProfit).toFixed(2);
-	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
-	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
+	var keepDepositf = parseFloat(param.Deposit).toFixed(2);
+	var todayAmount = param.TodayAmount;
 	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
 	var floatingProfit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_floatingProfit']").text();
 	if(isNaN(floatingProfit)){
 		floatingProfit = 0;
 	}
-	console.log(accountNo);
-	var unExpiredProfit = parseFloat(param.UnExpiredProfit).toFixed(2);
-	var unAccountProfit = parseFloat(param.UnAccountProfit).toFixed(2);
-	console.log(todayAmount);
-	console.log(unExpiredProfit);
-	console.log(unAccountProfit);
-	console.log(floatingProfit);
-	var todayBalance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);
-	var todayCanUse =  parseFloat(todayBalance-Number(keepDepositf)-Number(frozenMoney)).toFixed(2);
-	var currencyRate = param.CurrencyRate;
+	var unExpiredProfit =param.UnExpiredProfit;
+	var unAccountProfit =param.UnAccountProfit;
+	var todayBalance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);
+	var todayCanUse =  parseFloat(todayBalance-keepDepositf-frozenMoney).toFixed(2);
 	var profitRate = "";
 	var $detailTodayBalance = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_todayBalance']");
 	var $detailTodayCanUse = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_todayCanUse']");
 	var $detailDeposit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_deposit']");
-	//var $detailFloatingProfit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_floatingProfit']");
 	var $detailKeepDeposit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_keepDepositf']");
 	var $detailTodayAmount = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_todayAmount']");
 	var $detailFrozenMoney = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_frozenMoney']");
 	var $detailProfitRate = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_profitRate']");
 	var $detailCurrencyRate = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_currencyRate']");
+	var currencyRate = $detailCurrencyRate.text();
 	$detailTodayBalance.text(todayBalance);
 	$detailTodayCanUse.text(todayCanUse);
 	$detailDeposit.text(deposit);
-	//$detailFloatingProfit.text(floatingProfit);
 	$detailKeepDeposit.text(keepDepositf);
-	$detailTodayAmount.text(todayAmount);
+	$detailTodayAmount.text(parseFloat(todayAmount).toFixed(2));
 	$detailFrozenMoney.text(frozenMoney);
 	$detailProfitRate.text(profitRate);
-	$detailCurrencyRate.text(currencyRate);
 }
 var orderIndex = 0;
 /**

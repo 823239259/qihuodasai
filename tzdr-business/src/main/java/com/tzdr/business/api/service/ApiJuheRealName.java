@@ -84,7 +84,7 @@ public class ApiJuheRealName {
      * @param idCard
      * @return
      */
-    public static boolean  validationIdCard(String realName,String idCard){
+    public static boolean  validationIdCard(String idCard,String realName){
     	Map<String, Object> params = setValidationDataMap(realName, idCard);
     	try {
 			String result = ApiJuheRealName.net(url, params, "GET");
