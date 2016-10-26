@@ -294,7 +294,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	 */
 	public List<FTradeParamsVo> queryFtradeParams(){
 		StringBuffer sql = new StringBuffer(" SELECT atran_actual_lever tran_lever, htran_actual_lever, ytran_actual_lever, mntran_actual_lever, mbtran_actual_lever, daxtran_actual_lever, nikkei_tran_actual_lever, mdtran_actual_lever, hstran_actual_lever, agtran_actual_lever,"
-				+ "h_index_actual_lever,xh_index_actual_lever,a_copper_actual_lever,a_silver_actual_lever,sma_actual_lever,line_loss, trader_bond, trader_total FROM w_out_disk_parameters ORDER BY trader_bond ASC ");
+				+ "h_index_actual_lever,xh_index_actual_lever,a_copper_actual_lever,a_silver_actual_lever,sma_actual_lever,daxtran_min_actual_lever,line_loss, trader_bond, trader_total FROM w_out_disk_parameters ORDER BY trader_bond ASC ");
 		List<FTradeParamsVo> ftradeParamsVos = this.getEntityDao().queryListBySql(sql.toString(), FTradeParamsVo.class, null);
 		return ftradeParamsVos;
 	}

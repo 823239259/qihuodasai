@@ -147,7 +147,12 @@ public class FTradeParamsVo implements Serializable {
 		@SqlColumn(name="sma_actual_lever")
 		private Integer smaActualLever;
 		
-		
+		/**
+		 * 迷你德国DAX指数
+		 * @return
+		 */
+		@SqlColumn(name="daxtran_min_actual_lever")
+		private Integer daxtranMinActualLever;
 		
 		public BigDecimal getTranFees() {
 			return tranFees;
@@ -307,6 +312,14 @@ public class FTradeParamsVo implements Serializable {
 
 		public void setSmaActualLever(Integer smaActualLever) {
 			this.smaActualLever = smaActualLever;
+		}
+
+		public Integer getDaxtranMinActualLever() {
+			return daxtranMinActualLever;
+		}
+
+		public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+			this.daxtranMinActualLever = daxtranMinActualLever;
 		}
 		
 		

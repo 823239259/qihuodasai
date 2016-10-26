@@ -110,6 +110,10 @@ public class FTradeApplyVo implements Serializable {
          * 小原油交易手数
          */
         private Integer smallCrudeOilMarketLever;
+        /**
+         * 迷你德国DAX指数交易手数
+         */
+        private Integer daxtranMinActualLever;
 		public BigDecimal getTraderTotal() {
 			return traderTotal;
 		}
@@ -267,6 +271,14 @@ public class FTradeApplyVo implements Serializable {
 			this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
 		}
 
+		public Integer getDaxtranMinActualLever() {
+			return daxtranMinActualLever;
+		}
+
+		public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+			this.daxtranMinActualLever = daxtranMinActualLever;
+		}
+
 		public FTradeApplyVo(FSimpleConfig fSimpleConfig,BigDecimal payable,Double balance) {
 			this.tranLever = NumberUtils.toInt(fSimpleConfig.getTranLever());
 			this.traderTotal=fSimpleConfig.getTraderMoney();
@@ -295,6 +307,7 @@ public class FTradeApplyVo implements Serializable {
 			this.lineLoss=outDiskParameters.getLineLoss();
 			this.payable=payable;
 			this.balance=balance;
+			this.daxtranMinActualLever = outDiskParameters.getDaxtranMinActualLever();
 		}
 		
 		
