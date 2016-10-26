@@ -15,6 +15,7 @@ public class HttpUrl {
 			String urlName = url + "?" + param;
 			URL realUrl;
 			try {
+				System.out.println(urlName);
 				realUrl = new URL(urlName);
 				// 打开和URL之间的连接
 				URLConnection connection = realUrl.openConnection();

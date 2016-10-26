@@ -129,7 +129,7 @@ public class MessagePromptService {
 			public void run() {
 				List<DataMap> dataMapList = dataMapService.findByTypeKey("registNoticeEmail");
 				EmailUtils emailUtils = EmailUtils.getInstance();
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				for (DataMap dataMap2 : dataMapList) {
 					List<String> list = new ArrayList<>();
 					list.add(dataMap2.getTypeName());

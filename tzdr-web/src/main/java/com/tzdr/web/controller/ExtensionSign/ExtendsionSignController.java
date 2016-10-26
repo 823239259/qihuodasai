@@ -134,7 +134,25 @@ public class ExtendsionSignController {
 	 * @return
 	 */
 	@RequestMapping(value = "/invitation",method = RequestMethod.GET)
-	public String invitationView(){
+	public String invitationView(ModelMap modelMap, HttpServletRequest request,
+			@RequestParam(value = "channelCode", required = false) String channelCode,
+			@RequestParam(value = "activity", required = false) String activity){
+			if(dataMapService.activityExpired()){
+				GeneralizeVisit generalizeVisit = new GeneralizeVisit();
+				String ip = IpUtils.getIpAddr(request);
+				generalizeVisit.setClieantIp(ip);
+				generalizeVisit.setCreatedate(new Date().getTime() / 1000);
+				generalizeVisit.setDeleted(false);
+				//generalizeVisit.setCity(IpAddressUtils.getAffiliationCity(ip, "utf-8"));
+				generalizeVisit.setGeneralizeId(null);
+				generalizeVisit.setParam(channelCode);
+				generalizeVisit.setUrl(request.getRequestURL().toString() + "?" + request.getQueryString());
+				generalizeVisit.setActivity(ExtensionConstants.ACTIVITY_TYPE);
+				generalizeService.saveGeneralizeVisit(generalizeVisit);
+				modelMap.put("channelCode", channelCode);
+				List<DataMap> dataMaps = dataMapService.findByTypeKey("websiteRecord");
+				modelMap.put("footNote", dataMaps != null && dataMaps.size() >0 ?dataMaps.get(0).getValueName():"");
+			}
 		return ViewConstants.SignInViewJsp.INVAION_VIEW;
 	}
 	private Object lock = new Object();
