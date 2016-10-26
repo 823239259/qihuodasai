@@ -68,6 +68,7 @@
 @media screen and (max-width: 1366px) {
 	.quotation_title {width: 1366px;}
 	.quotation_center {width: 1366px;}
+	#footer {width: 1366px;}
 	#content .quotation_echarts {
 		/* width: 1144px; */
 	}
