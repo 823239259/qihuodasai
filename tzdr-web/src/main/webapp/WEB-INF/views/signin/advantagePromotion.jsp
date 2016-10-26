@@ -21,13 +21,6 @@
 <script type="text/javascript">
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
-<style>
-	.rg_l_error { display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ; position: relative;left: 0px;top: 0;text-align: left;margin-left: 30px;}
-	.rg_l_promt {display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ;position: relative;left: 0px;top: 0;text-align: left;margin-left: 30px;}
-	.rg_agree {margin-left: 23px; font-size: 12px; color: #fff8bb; height: 16px; line-height: 16px;}
-	.rg_agree input {position: relative; top: 3px;}
-	.rg_btn a {height: 34px; line-height: 34px; margin-left: 20px; margin-top: 20px; width: 220px;}
-</style>
 </head>
 <body>
 <input type="hidden" id="backData" value="${backData}"/>
@@ -81,7 +74,7 @@
 		            </li>
 		            <li style="position: relative;">   
 		                <input type="text" id="code" name="code" maxlength="6" placeholder="请输入手机验证码">
-		                <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn">获取验证码</a><i style="height: 34px; width: 2px; background: #fc3; display: inline-block; position: absolute; right: 117px;"></i>
+		                <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn">获取验证码</a><i style="height: 34px; width: 2px; background: #fff8bb; display: inline-block; position: absolute; right: 117px;"></i>
 		                <span class="rg_l_promt" style="display: none">请先获取验证码！</span>
 		                <p style="display: none;" class="rg_l_error">输入验证码有误！</p>
 		            </li>
