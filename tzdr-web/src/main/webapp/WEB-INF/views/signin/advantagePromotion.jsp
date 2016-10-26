@@ -21,13 +21,6 @@
 <script type="text/javascript">
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
-<style>
-	.rg_l_error { display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ; position: relative;left: 0px;top: 0;text-align: left;margin-left: 30px;}
-	.rg_l_promt {display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ;position: relative;left: 0px;top: 0;text-align: left;margin-left: 30px;}
-	.rg_agree {margin-left: 23px; font-size: 12px; color: #fff8bb; height: 16px; line-height: 16px;}
-	.rg_agree input {position: relative; top: 3px;}
-	.rg_btn a {height: 34px; line-height: 34px; margin-left: 20px; margin-top: 20px; width: 220px;}
-</style>
 </head>
 <body>
 <input type="hidden" id="backData" value="${backData}"/>
