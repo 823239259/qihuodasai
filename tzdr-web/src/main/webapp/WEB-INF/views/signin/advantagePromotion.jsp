@@ -81,7 +81,7 @@
 		            </li>
 		            <li style="position: relative;">   
 		                <input type="text" id="code" name="code" maxlength="6" placeholder="请输入手机验证码">
-		                <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn">获取验证码</a><i style="height: 34px; width: 2px; background: #fc3; display: inline-block; position: absolute; right: 117px;"></i>
+		                <a href="javascript:void(0);" status="true" id="openYZMBox" name="openYZMBox" class="rg_l_codebtn">获取验证码</a><i style="height: 34px; width: 2px; background: #fff8bb; display: inline-block; position: absolute; right: 117px;"></i>
 		                <span class="rg_l_promt" style="display: none">请先获取验证码！</span>
 		                <p style="display: none;" class="rg_l_error">输入验证码有误！</p>
 		            </li>
