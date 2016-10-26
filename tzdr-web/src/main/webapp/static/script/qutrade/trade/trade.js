@@ -253,9 +253,9 @@ var fundsDetailsIndex = 0;
 function addFundsDetails(param){
 	var currencyNo = param.CurrencyNo;
 	var acccoutNo = param.AccountNo;
-	if(currencyNo == "HKD"){
+/*	if(currencyNo == "HKD"){
 		currencyNo = "HKD-HKFE";
-	}
+	}*/
 	var deposit = parseFloat(param.Deposit).toFixed(2);
 	var floatingProfit = parseFloat(param.FloatingProfit).toFixed(2);
 	var keepDepositf = parseFloat(param.Deposit).toFixed(2);
