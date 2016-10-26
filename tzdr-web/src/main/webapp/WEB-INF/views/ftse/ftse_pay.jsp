@@ -116,7 +116,7 @@
 						</li>
 						<li>
 							<h3>交易手续费(￥)</h3>
-							<p><i><fmt:formatNumber value="${inputTranFees}" pattern="#,###"></fmt:formatNumber></i>元/手</p>
+							<p><i><fmt:formatNumber type="number" maxFractionDigits="2" value="${inputTranFees}" pattern="#,###"></fmt:formatNumber></i>元/手</p>
 						</li>
 						<li>
 							<h3>账户管理费(￥)</h3>
