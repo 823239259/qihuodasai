@@ -4,29 +4,53 @@ import java.util.TimerTask;
 
 public class WallstreetcnTask extends TimerTask{
 	private Wallstreetn wallstreetn;
-	
 	public Wallstreetn getWallstreetn() {
 		return wallstreetn;
 	}
 	public void setWallstreetn(Wallstreetn wallstreetn) {
 		this.wallstreetn = wallstreetn;
 	}
+	
+	public WallstreetcnTask(Wallstreetn wallstreetn) {
+		this.wallstreetn = wallstreetn;
+	}
+	
+	
+	public WallstreetcnTask() {
+	}
 	@Override
 	public void run() {
-		WallstreetcnHandle.getWallstreetcn(wallstreetn);
+		WallstreetcnHandle handle = new WallstreetcnHandle();
+		handle.getWallstreetcn(getWallstreetn());
 	}
 	/**
 	 * 开启执行
 	 * @return
 	 */
 	public boolean start(){
-		WallstreetcnTask wallstreetcnTask = new WallstreetcnTask();
-		Wallstreetn wallstreetn = wallstreetcnTask.getWallstreetn();
-		String url = String.valueOf(WallstreetcnTimer.getMap().get(wallstreetn.getUrl()));
-		if(url == null){
-			WallstreetcnTimer.getTimer().schedule(wallstreetcnTask, 1000,Long.parseLong(wallstreetn.getRule()));
-			WallstreetcnTimer.addTimer(url,wallstreetcnTask);
+		WallstreetcnTimer wallstreetcnTimer = WallstreetcnTimer.getInstance();
+		String url = String.valueOf(wallstreetcnTimer.getMap().get(wallstreetn.getUrl()));
+		if(url == null || url.equals("null")){
+			wallstreetcnTimer.getTimer().schedule(this, 1000,Long.parseLong(wallstreetn.getRule()));
+			wallstreetcnTimer.addTimer(wallstreetn.getUrl(),this);
 		}
 		return true;
+	}
+	public static void main(String[] args) {
+		Wallstreetn wallstreetn = new Wallstreetn();
+		wallstreetn.setMethod("GET");
+		wallstreetn.setParam("status=published&order=-created_at&page=1&channelId=4&extractImg=0&extractText=0");
+		wallstreetn.setRule("5000");
+		wallstreetn.setUrl("https://api.wallstreetcn.com/v2/livenews");
+		WallstreetcnTask wallstreetcnTask = new WallstreetcnTask();
+		wallstreetcnTask.setWallstreetn(wallstreetn);
+		wallstreetcnTask.start();
+		try {
+			Thread.sleep(10000);
+			WallstreetcnTimer.getInstance().stop(wallstreetn.getUrl());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

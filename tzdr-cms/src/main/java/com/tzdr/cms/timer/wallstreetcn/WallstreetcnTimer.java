@@ -9,34 +9,63 @@ public class WallstreetcnTimer{
 	/**
 	 * 正在执行的定时任务
 	 */
-	private static Map<String, TimerTask> map = new HashMap<>();
-	private static Timer timer = new Timer();
-	
-	public static Map<String, TimerTask> getMap() {
+	private  Map<String, TimerTask> map = new HashMap<>();
+	private  Timer timer = new Timer();
+	private static WallstreetcnTimer wallstreetcnTimer = null;
+	/**
+	 * 获取对象
+	 * @return
+	 */
+	public static WallstreetcnTimer getInstance() {
+		if(wallstreetcnTimer == null){
+			synchronized(Timer.class){
+				if(wallstreetcnTimer == null){
+					wallstreetcnTimer = new WallstreetcnTimer();
+				}
+			}
+		}
+		return wallstreetcnTimer;
+	}
+	public Map<String, TimerTask> getMap() {
 		return map;
 	}
-	public static void setMap(Map<String, TimerTask> map) {
-		WallstreetcnTimer.map = map;
+
+
+	public void setMap(Map<String, TimerTask> map) {
+		this.map = map;
 	}
-	public static Timer getTimer() {
+
+
+	public Timer getTimer() {
 		return timer;
 	}
-	public static void setTimer(Timer timer) {
-		WallstreetcnTimer.timer = timer;
+
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
 	}
+
+
 	/**
 	 * 停止指定任务
 	 * @param key
 	 * @return
 	 */
-	public static boolean stop(String key){
+	public  void stop(String key){
 		map.get(key).cancel();
-		return true; 
+		timer.purge();
+		removeTimer(key);
 	}
 	/**
 	 * 将任务加入到任务列表中
 	 */
-	public static void addTimer(String key,WallstreetcnTask value){
+	public  void addTimer(String key,WallstreetcnTask value){
 		map.put(key, value);
+	}
+	/**
+	 * 将任务从任务列表移除
+	 */
+	public  void removeTimer(String key){
+		map.remove(key);
 	}
 }
