@@ -69,9 +69,9 @@ public class SecurityInfoServiceImpl  extends BaseServiceImpl<UserVerified,Secur
 				 channel =  dataMap.getValueName();
 			 }
 			 if(channel.equals("0")){
-				 flag=IdentityCard.getInstance().idSimpleCheckByJson(cardNo, name);
+				 flag = IdentityCard.getInstance().idSimpleCheckByJson(cardNo, name);
 			 }else if(channel.equals("1")){
-				 juheValidationCard(cardNo, name);
+				 flag = juheValidationCard(cardNo, name);
 			 }
 		} catch (AxisFault e) {
 			log.error("身份验证错误"+e.getMessage());
