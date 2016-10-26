@@ -212,7 +212,7 @@ public class SignInController {
 	public JsonResult sendMobileMessage(String mobile, String yzmCode, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
-		/*ConcurrentHashMap<String, SendCodeMaxCountBean> sendSMSCodeMaxCountMap = SendCodeMaxCount.sendSMSCodeMaxCountMap;
+		ConcurrentHashMap<String, SendCodeMaxCountBean> sendSMSCodeMaxCountMap = SendCodeMaxCount.sendSMSCodeMaxCountMap;
 		SendCodeMaxCountBean sendSMSCodeMaxCountData = !sendSMSCodeMaxCountMap.containsKey(mobile) ? null
 				: sendSMSCodeMaxCountMap.get(mobile);
 		if (sendSMSCodeMaxCountData != null
@@ -222,7 +222,7 @@ public class SignInController {
 			return jsonResult;
 		} else {
 			SendCodeMaxCount.addSendSMSCodeMaxCountMap(mobile, request, response);
-		}*/
+		}
 
 		String randomCode = RandomCodeUtil.randStr(6); // 生成6为验证码
 
