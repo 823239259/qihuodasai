@@ -129,8 +129,16 @@ public class ExtendsionSignController {
 	public String invitationCode(){
 		return ViewConstants.SignInViewJsp.TXTENDSION_INVATION_CODE;
 	}
+	/**
+	 * 新的推广注册页面(2016-11-03)
+	 * @return
+	 */
+	@RequestMapping(value = "/invitation",method = RequestMethod.GET)
+	public String invitationView(){
+		return ViewConstants.SignInViewJsp.INVAION_VIEW;
+	}
 	private Object lock = new Object();
-
+	
 	/**
 	 * 注册
 	 * 
