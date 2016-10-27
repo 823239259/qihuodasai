@@ -377,7 +377,7 @@ function updateFloatingfit(param){
 	var $holdNum = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position1']").text();
 	var drection = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position2']").attr("data-drection");
 	//判断该行情对应是否在列表中
-	if($openAvgPrice == undefined){
+	if($openAvgPrice == undefined || $openAvgPrice.length <= 0){
 		return;
 	}
 	var localCommodity = localCacheCommodity[contractCode];

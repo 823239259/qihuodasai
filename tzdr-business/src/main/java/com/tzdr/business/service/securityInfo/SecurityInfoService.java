@@ -27,6 +27,13 @@ public interface SecurityInfoService {
 	 */
 	public boolean vilidateCard(String cardNo,String name);
 	
+	/**
+	 * 聚合数据实名认证
+	 * @param cardNo
+	 * @param name
+	 * @return
+	 */
+	public boolean juheValidationCard(String cardNo,String name);
 	
 	/**
 	 * 发送短信

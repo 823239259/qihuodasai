@@ -106,21 +106,22 @@
 						<li class="big">
 							<h3>交易手续费(￥)</h3>
 							<p>
-								富时A50<i><fmt:formatNumber value="${outDiskPrice[0].price}" pattern="#,###"></fmt:formatNumber></i>元/手、
-								恒指期货<i><fmt:formatNumber value="${outDiskPrice[2].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								国际原油<i><fmt:formatNumber value="${outDiskPrice[1].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								迷你道琼<i><fmt:formatNumber value="${outDiskPrice[3].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								迷你纳斯达克<i><fmt:formatNumber value="${outDiskPrice[4].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								迷你普尔<i><fmt:formatNumber value="${outDiskPrice[5].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								德国DAX<i><fmt:formatNumber value="${outDiskPrice[6].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								日经225<i><fmt:formatNumber value="${outDiskPrice[7].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								小恒指<i><fmt:formatNumber value="${outDiskPrice[8].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								美黄金<i><fmt:formatNumber value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								H股指数<i><fmt:formatNumber value="${outDiskPrice[10].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								小H股指数<i><fmt:formatNumber value="${outDiskPrice[11].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								美铜<i><fmt:formatNumber value="${outDiskPrice[12].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								美白银<i><fmt:formatNumber value="${outDiskPrice[13].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
-								小原油<i><fmt:formatNumber value="${outDiskPrice[14].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
+								富时A50<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[0].price}" pattern="#,###"></fmt:formatNumber></i>元/手、
+								恒指期货<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[2].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								国际原油<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[1].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								迷你道琼<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[3].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								迷你纳斯达克<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[4].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								迷你普尔<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[5].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								德国DAX<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[6].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								日经225<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[7].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								小恒指<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[8].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								美黄金<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[9].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								H股指数<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[10].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								小H股指数<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[11].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								美铜<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[12].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								美白银<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[13].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								小原油<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[14].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手、
+								迷你德国DAX指数<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${outDiskPrice[15].price}" pattern="#,###"></fmt:formatNumber></i></i>元/手
 							</p>
 						</li>
 						<li>
@@ -141,7 +142,7 @@
 							<i>(${outDiskPrice[7].mainContract})</i>、小恒指<i>(${outDiskPrice[8].mainContract})</i>、美黄金
 							<i>(${outDiskPrice[9].mainContract})</i>、H股指数<i>(${outDiskPrice[10].mainContract})</i>
 							、小H股指数<i>(${outDiskPrice[11].mainContract})</i>、美铜<i>(${outDiskPrice[12].mainContract})</i>
-							、美白银<i>(${outDiskPrice[13].mainContract})</i>、小原油<i>(${outDiskPrice[14].mainContract})</i>
+							、美白银<i>(${outDiskPrice[13].mainContract})</i>、小原油<i>(${outDiskPrice[14].mainContract})</i>、迷你德国DAX指数<i>(${outDiskPrice[15].mainContract})</i>
 							</p>
 						</li>
 						<li>							

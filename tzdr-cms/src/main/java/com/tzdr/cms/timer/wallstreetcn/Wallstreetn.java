@@ -1,0 +1,33 @@
+package com.tzdr.cms.timer.wallstreetcn;
+
+public class Wallstreetn {
+	private String url;
+	private String param;
+	private String method;
+	private String rule;
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
+	}
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	public String getRule() {
+		return rule;
+	}
+	public void setRule(String rule) {
+		this.rule = rule;
+	}
+	
+}

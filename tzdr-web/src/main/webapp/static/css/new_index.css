@@ -57,8 +57,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .h_partner .h_img a{float: left;}
 .h_partner .h_img a:hover { cursor: default;}
 /*copyright*/
-.copyright {width: 100%; height: 205px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
-.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 205px; border-bottom: 1px solid #1a1a1a;}
+.copyright {width: 100%; height: 260px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
+.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 260px; border-bottom: 1px solid #1a1a1a;}
 .copyright_link, .copyright_interaction, .copyright_contact {float: left;margin-top: 30px;}
 .copyright_link ul {margin-top: 10px; width: 510px; height: 40px; line-height: 40px;}
 .copyright_link ul li {float: left; margin-right: 20px; font-size: 14px; color: #666666;}
@@ -76,6 +76,11 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .copyright_contact {margin-left: 40px; float: right;}
 .copyright_contact h3 {height: 40px; line-height: 40px; margin: 10px 0; color: #999999; font-weight: normal; font-size: 14px;}
 .copyright_contact p {color: #666666; font-size: 12px; margin-top: 5px;}
+.copyright .enterprise_link {}
+.copyright .enterprise_link ul {width: 50%; float: left; margin-top: 10px;}
+.copyright .enterprise_link ul li{float: left; font-size: 14px; color: #666; margin-right: 12px;}
+.copyright .enterprise_link ul li a {font-size: 14px; color: #666; text-decoration: none;}
+.copyright .enterprise_link ul li a:hover {color: #ffcc33; text-decoration: underline;}
 /*copybox*/
 .copybox {width: 100%; height: 121px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
 .copybox_content {width: 1000px; margin: 0 auto;background-color: #333333; height: 120px; border-top: 1px solid #4d4d4d; padding: 0 5px; position: relative; top: -1px;}

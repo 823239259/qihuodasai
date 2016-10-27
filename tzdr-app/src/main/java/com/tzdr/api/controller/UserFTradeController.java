@@ -491,7 +491,8 @@ public class UserFTradeController {
 		fSimpleFtseUserTrade.setxHSTranFees(outDiskPrice.get(11).getPrice());
 		fSimpleFtseUserTrade.setAmeCTranFees(outDiskPrice.get(12).getPrice());
 		fSimpleFtseUserTrade.setAmeSTranFees(outDiskPrice.get(13).getPrice());
-		fSimpleFtseUserTrade.setSmallCTranFees(outDiskPrice.get(14).getPrice()); 
+		fSimpleFtseUserTrade.setSmallCTranFees(outDiskPrice.get(14).getPrice());
+		fSimpleFtseUserTrade.setDaxMinTranFees(outDiskPrice.get(15).getPrice());
 		//审核中
 		fSimpleFtseUserTrade.setStateType(1);
 		fSimpleFtseUserTrade.setBusinessType(businessType); 

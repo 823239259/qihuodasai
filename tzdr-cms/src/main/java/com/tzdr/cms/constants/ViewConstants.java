@@ -1077,4 +1077,7 @@ public class ViewConstants {
 	public static class MonthTrade{
 		public static String LIST_VIEW="/views/admin/monthTradeParams/list";
 	}
+	public static class CrawlerView{
+		public static String LIST_VIEW = "/views/admin/crawler/list";
+	}
 }

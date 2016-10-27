@@ -14,6 +14,10 @@ import com.tzdr.common.utils.Dates;
  * 
  * @author wucholiang 2015年9月17日 上午11:23:50
  */
+/**
+ * @author username
+ *
+ */
 public class FSimpleFtseVo implements Serializable {
 
 	private static final long serialVersionUID = -6469817179539585309L;
@@ -195,7 +199,10 @@ public class FSimpleFtseVo implements Serializable {
 	 * 小原油交易手数
 	 */
 	private Integer smallCrudeOilMarketLever;
-
+	/**
+	 * 迷你德国DAX指数
+	 */
+	private Integer daxtranMinActualLever;
 	/**
 	 * 交易手续费总额
 	 */
@@ -703,6 +710,14 @@ public class FSimpleFtseVo implements Serializable {
 
 	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
 		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
+	}
+
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
 }

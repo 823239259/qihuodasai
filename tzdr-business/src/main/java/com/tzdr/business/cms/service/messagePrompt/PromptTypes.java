@@ -51,4 +51,8 @@ public class PromptTypes {
 	 * 提现复审
 	 */
 	public static final String isReview = "isReview";
+	/**
+	 * 注册成功通知
+	 */
+	public static final String registrationNotice = "registrationNotice";
 }

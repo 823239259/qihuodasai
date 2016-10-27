@@ -19,11 +19,11 @@
 		<div class="iphone-lis">App专属特权-手机端交易，双边手续费每手最高减10元！</div>
 		<p class="iphone-lis-tltle">活动期间，使用手机App进行操盘交易，可享受APP交易专属手续费优惠！<p>
 		<h3><span>1</span>国际原油</h3>
-		<p class="iphone-lis-img"><span class="fl">PC：89元/双边</span><span class="fr">App：79元/双边</span></p>
+		<p class="iphone-lis-img"><span class="fl">PC：44.5元/单边</span><span class="fr">App：39.5元/单边</span></p>
 		<h3><span>2</span>恒指期货</h3>
-		<p class="iphone-lis-img"><span class="fl">PC：69元/双边</span><span class="fr">App：66元/双边</span></p>
+		<p class="iphone-lis-img"><span class="fl">PC：34.5元/单边</span><span class="fr">App：33元/单边</span></p>
 		<h3><span>3</span>富时A50</h3>
-		<p class="iphone-lis-img"><span class="fl">PC：49元/双边</span><span class="fr">App：46元/双边</span></p>
+		<p class="iphone-lis-img"><span class="fl">PC：24.5元/单边</span><span class="fr">App：23元/单边</span></p>
 	</div>
 	<div class="iphone-shuomiong">
 		<div class="fl">

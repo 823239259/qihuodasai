@@ -197,6 +197,11 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	@SqlColumn(name="small_crude_oil_market_lever")
 	private Integer smaActualLever = new Integer(0);
 	/**
+	 * 迷你德国DAX指数交易手数
+	 */
+	@SqlColumn(name="daxtran_min_actual_lever")
+	private Integer daxtranMinActualLever = new Integer(0);
+	/**
 	 * 交易手续费总额
 	 */
 	@SqlColumn(name="tran_fees_total")
@@ -618,6 +623,12 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	}
 	public void setSmaActualLever(Integer smaActualLever) {
 		this.smaActualLever = smaActualLever;
+	}
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
 

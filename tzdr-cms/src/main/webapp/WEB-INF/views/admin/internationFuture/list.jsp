@@ -591,6 +591,13 @@ function timeConvert(value,rowData,rowIndex) {
                 </td>
                 <td><span style="color: red;">不能输入负数</span></td>
 			</tr>
+			 <tr style="display: none;" id="daxMinTradeNumTR">
+                <td class="label right">迷你德国DAX指数:</td>
+                <td>
+                   <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options=""/>
+                </td>
+                <td><span style="color: red;">不能输入负数</span></td>
+			</tr>
             <tr>
                 <td align="center" colspan="3">
                 <a id="btn" href="javascript:void(0);" onclick="inputSave()" class="easyui-linkbutton">提交</a>
@@ -655,13 +662,13 @@ function timeConvert(value,rowData,rowIndex) {
         			<td class="label center">美铜</td>
         			<td class="label center">美白银</td>
         			<td class="label center">小原油</td>
-        			
+        			<td class="label center">迷你德国DAX指数</td>
         		</tr>
         		<tr>
         			<td align="center" id='acCount'></td>
 	               	<td align="center" id='asCount'></td>
 	               	<td align="center" id='scCount'></td>
-	               
+	                <td align="center" id='daxMinCount'></td>
         		</tr>
         	</table>
         </form>

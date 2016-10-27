@@ -107,17 +107,17 @@ function handleData(evt){
 		} else if (method == "OnRtnOrderState") {
 			var orderParam = parameters;
 			updateOrder(orderParam);
+			var orderId = orderParam.OrderID;
 			var orderStatusWeHooks = orderParam.OrderStatus;
 			//当订单状态改变
 			var contractCode = orderParam.ContractCode;
 			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
-				delDesignatesDom(contractCode);
+				delDesignatesDom(orderId);
 			} else if (orderStatusWeHooks == 0) {
 				appendDesignates(orderParam);
 			} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
 				updateDesignatesDom(orderParam);
 			}
-			var orderId = orderParam.OrderID;
 			var cacaleOrderId = selectDesgnate["orderId"];
 			var contractCode = selectDesgnate["contraction"];
 			if(orderStatusWeHooks == 4){
@@ -129,6 +129,7 @@ function handleData(evt){
 			if(isChangeOrder && cacaleOrderId==orderId){
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
+				isChangeOrder = false;
 				tip("改单成功:合约【"+contractCode+"】,委托价【"+orderPrice+"】,委托量【"+orderNum+"】");
 			}
 			//订单成交通知
@@ -174,12 +175,19 @@ function updateBalance(parama){
 	var currencyNo = parama.CurrencyNo;
 	var accountNo = parama.AccountNo;
 	var cachBanlace = loadCachBanlance[accountNo];
-	var banlance = parama.TodayBalance;
 	var deposit = parama.Deposit;
-	var canuse = parama.TodayCanUse;
 	var currency = parama.CurrencyRate; 
 	var closeProfit = parama.CloseProfit;
-	var floatingProfit = parama.FloatingProfit;
+	var floatingProfit = parama.floatingProfit;
+	if(floatingProfit == undefined ){
+		floatingProfit = parama.FloatingProfit
+	}
+	var frozenMoney =parama.FrozenMoney;
+	var todayAmount = parama.TodayAmount;
+	var unExpiredProfit = parama.UnExpiredProfit;
+	var unAccountProfit = parama.UnAccountProfit;
+	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
+	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
 	localCacheCurrencyAndRate[currencyNo]  = currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
@@ -209,17 +217,6 @@ function updateBalance(parama){
 	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
-	/*var $float = parseFloat($floatFit).toFixed(2) ;
-	if(isNaN($float)){
-		$float = 0;
-	}
-	if($float < 0){
-		color = "#0bffa4";
-	}else if($float > 0){
-		color = "#ff5500";
-	}
-	$("#floatingProfit").text($float);
-	$("#floatingProfit").css("color",color);*/
 	var color = "#FFFFFF";
 	var $closeProfit = parseFloat($clostFit).toFixed(2);
 	if($closeProfit < 0){
@@ -255,23 +252,26 @@ var fundsDetailsIndex = 0;
  */
 function addFundsDetails(param){
 	var currencyNo = param.CurrencyNo;
-	if(currencyNo == "HKD"){
+	var acccoutNo = param.AccountNo;
+/*	if(currencyNo == "HKD"){
 		currencyNo = "HKD-HKFE";
-	}
-	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
-	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	}*/
 	var deposit = parseFloat(param.Deposit).toFixed(2);
 	var floatingProfit = parseFloat(param.FloatingProfit).toFixed(2);
-	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
+	var keepDepositf = parseFloat(param.Deposit).toFixed(2);
 	var oldBalance = parseFloat(param.OldBalance).toFixed(2);
 	var oldAmount = parseFloat(param.OldAmount).toFixed(2);
 	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
 	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
 	var currencyRate = param.CurrencyRate;
+	var unExpiredProfit = parseFloat(param.UnExpiredProfit).toFixed(2);
+	var unAccountProfit = parseFloat(param.UnAccountProfit).toFixed(2);
+	var todayBalance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);
+	var todayCanUse =  parseFloat(todayBalance-keepDepositf-frozenMoney).toFixed(2);
 	var profitRate = "";
 	var cls = "currencyNo"+currencyNo;
 	var funds_cls = "funds-index"+fundsDetailsIndex;
-	var html = '<ul class="tab_content '+cls+' '+funds_cls+'" data-tion-fund = "'+currencyNo+'">'+
+	var html = '<ul class="tab_content '+cls+' '+funds_cls+'" data-tion-fund = "'+currencyNo+'" data-tion-account = "'+acccoutNo+'">'+
 				'	<li class="ml detail_currency">'+currencyNo+'</li>'+
 				'	<li class = "detail_todayBalance">'+todayBalance+'</li>'+
 				'	<li class = "detail_todayCanUse">'+todayCanUse+'</li>'+
@@ -296,34 +296,36 @@ function addFundsDetails(param){
  * @param param
  */
 function updateFundsDetails(param){
-	var currencyNo = param.AccountNo;
-	var todayBalance = parseFloat(param.TodayBalance).toFixed(2);
-	var todayCanUse = parseFloat(param.TodayCanUse).toFixed(2);
+	var accountNo = param.AccountNo;
 	var deposit = parseFloat(param.Deposit).toFixed(2);
-	var floatingProfit = parseFloat(param.floatingProfit).toFixed(2);
-	var keepDepositf = parseFloat(param.KeepDeposit).toFixed(2);
-	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
+	var keepDepositf = parseFloat(param.Deposit).toFixed(2);
+	var todayAmount = param.TodayAmount;
 	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
-	var currencyRate = param.CurrencyRate;
+	var floatingProfit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_floatingProfit']").text();
+	if(isNaN(floatingProfit)){
+		floatingProfit = 0;
+	}
+	var unExpiredProfit =param.UnExpiredProfit;
+	var unAccountProfit =param.UnAccountProfit;
+	var todayBalance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);
+	var todayCanUse =  parseFloat(todayBalance-keepDepositf-frozenMoney).toFixed(2);
 	var profitRate = "";
-	var $detailTodayBalance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayBalance']");
-	var $detailTodayCanUse = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayCanUse']");
-	var $detailDeposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_deposit']");
-	//var $detailFloatingProfit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
-	var $detailKeepDeposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_keepDepositf']");
-	var $detailTodayAmount = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayAmount']");
-	var $detailFrozenMoney = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_frozenMoney']");
-	var $detailProfitRate = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_profitRate']");
-	var $detailCurrencyRate = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_currencyRate']");
+	var $detailTodayBalance = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_todayBalance']");
+	var $detailTodayCanUse = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_todayCanUse']");
+	var $detailDeposit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_deposit']");
+	var $detailKeepDeposit = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_keepDepositf']");
+	var $detailTodayAmount = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_todayAmount']");
+	var $detailFrozenMoney = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_frozenMoney']");
+	var $detailProfitRate = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_profitRate']");
+	var $detailCurrencyRate = $("ul[data-tion-account='"+accountNo+"'] li[class = 'detail_currencyRate']");
+	var currencyRate = $detailCurrencyRate.text();
 	$detailTodayBalance.text(todayBalance);
 	$detailTodayCanUse.text(todayCanUse);
 	$detailDeposit.text(deposit);
-	//$detailFloatingProfit.text(floatingProfit);
 	$detailKeepDeposit.text(keepDepositf);
-	$detailTodayAmount.text(todayAmount);
+	$detailTodayAmount.text(parseFloat(todayAmount).toFixed(2));
 	$detailFrozenMoney.text(frozenMoney);
 	$detailProfitRate.text(profitRate);
-	$detailCurrencyRate.text(currencyRate);
 }
 var orderIndex = 0;
 /**
@@ -421,7 +423,7 @@ function appendDesignates(param){
    var orderId = param.OrderID;
    var triggerPrice = param.TriggerPrice;
    var cls = "des-index"+designateIndex;
-   var html = '<ul class="tab_content '+cls+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
+   var html = '<ul class="tab_content '+cls+'" data-order-des = "'+orderId+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
 				'	<li class = "des1">'+contractCode+'</li>'+
 				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -438,7 +440,7 @@ function appendDesignates(param){
    $("#des_gdt1").append(html);
    tabOn();
    localCacheDesignate[contractCode] = createDesignatesParam(param);
-   localCachedesignateContractCode[designateIndex] = contractCode;
+   localCachedesignateContractCode[designateIndex] = orderId;
    addDesignateBindClick(cls);
    updateDesignateIndex();
 };
@@ -455,9 +457,9 @@ function updateDesignatesDom(param){
 	var tradeNum = parseInt(param.TradeNum);
 	var orderPrice = param.OrderPrice;
 	var orderStatus = param.OrderStatus;
-	var $gdNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des5']");
-	var $orderPrice = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des3']");
-	var $orderNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des4']");
+	var $gdNum = $("ul[data-order-des='"+orderId+"'] li[class = 'des5']");
+	var $orderPrice = $("ul[data-order-des='"+orderId+"'] li[class = 'des3']");
+	var $orderNum = $("ul[data-order-des='"+orderId+"'] li[class = 'des4']");
 	var holdNum = orderNum - tradeNum;
 	if(holdNum == 0){
 		//当挂单为0时，清理dom节点和存储数据
@@ -904,12 +906,12 @@ function addDesignateBindClick(cls){
 	$(function(){
 		$("."+cls+"").bind("click",function(){
 			var $this = $(this);
-			var contractCode = $this.attr("data-tion-des");
-			selectDesgnate["contraction"] = contractCode;
+			var orderId = $this.attr("data-order-des");
+			selectDesgnate["contraction"] = $this.attr("data-tion-des");
 			selectDesgnate["designateIndex"] = $this.attr("data-index-des");
-			var orderPrice = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des3']").text();
-			var orderNum = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des4']").text();
-			var orderId = $("ul[data-tion-des='"+contractCode+"'] li[class = 'des10']").text();
+			var orderPrice = $("ul[data-order-des='"+orderId+"'] li[class = 'des3']").text();
+			var orderNum = $("ul[data-order-des='"+orderId+"'] li[class = 'des4']").text();
+			var orderId = $("ul[data-order-des='"+orderId+"'] li[class = 'des10']").text();
 			selectDesgnate["orderPrice"] = orderPrice;
 			selectDesgnate["orderNum"] = orderNum;
 			selectDesgnate["orderId"] = orderId;
@@ -982,8 +984,8 @@ function delPositionDom(contractCode){
  * 删除挂单中的元素节点 
  * @param {Object} orderId
  */
-function delDesignatesDom(contractCode){
-	$("ul[data-tion-des='"+contractCode+"']").remove();
+function delDesignatesDom(orderId){
+	$("ul[data-order-des='"+orderId+"']").remove();
 }
 /**
  * 移除全局缓存持仓的品种合约
@@ -1444,12 +1446,13 @@ function doInsertAllCancleOrder(){
  * 撤单操作
  */
 function doInsertCancleOrder(){
+	var orderId = selectDesgnate["orderId"];
 	var contractCode = selectDesgnate["contraction"];
 	var designateIndex = selectDesgnate["designateIndex"];
 	if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
 		return;
 	}
-	var tradeParam = doGetCancleOrderBasicParam(contractCode);
+	var tradeParam = doGetCancleOrderBasicParam(orderId);
 	var param = new Array();
 	param[0] = tradeParam
 	cancleOrder(param);
@@ -1463,6 +1466,7 @@ function doInsertCancleOrder(){
  */
 var isChangeOrder = false;
 function doInsertChangeSingleOrder(){
+	var orderId = selectDesgnate["orderId"];
 	var contractCode = selectDesgnate["contraction"];
 	var designateIndex = selectDesgnate["designateIndex"];
 	if(contractCode == undefined || $(".des-index"+designateIndex+"").html() == undefined){
@@ -1478,7 +1482,7 @@ function doInsertChangeSingleOrder(){
 		tip("改单数量错误");
 		return;
 	}
-	var tradeParam = doGetModifyOrderBasicParam(contractCode);
+	var tradeParam = doGetModifyOrderBasicParam(orderId);
 	tradeParam.orderPrice = orderPrice;
 	tradeParam.orderNum = orderNum;
 	var param = new Array();
@@ -1534,16 +1538,16 @@ function doGetSellingBasicParam(obj){
  */
 function doGetCancleOrderBasicParam(obj){
 		var contract = obj;
-		var $contractCode  = contract;
-		var $drection =  $("ul[data-tion-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
-		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
-		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
-		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
-		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'des6']").text();
-		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des8']").text();
-		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des9']").text();
-		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des7']").text();
-		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
+		var $orderId  = contract;
+		var $drection =  $("ul[data-order-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
+		var $orderPrice =  $("ul[data-order-des='"+contract+"'] li[class = 'des3']").text();
+		var $orderNum =  $("ul[data-order-des='"+contract+"'] li[class = 'des4']").text();
+		var $cdNum =  $("ul[data-order-des='"+contract+"'] li[class = 'des5']").text();
+		var $OrderSysID =  $("ul[data-order-des='"+contract+"'] li[class = 'des6']").text();
+		var $commodityNo =  $("ul[data-order-des='"+contract+"'] li[class = 'des8']").text();
+		var $contractNo =  $("ul[data-order-des='"+contract+"'] li[class = 'des9']").text();
+		var $exchangeNo =  $("ul[data-order-des='"+contract+"'] li[class = 'des7']").text();
+		var $orderId =  $("ul[data-order-des='"+contract+"'] li[class = 'des10']").text();
 		var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
 	return cancleOrderParam;
 }
@@ -1554,16 +1558,16 @@ function doGetCancleOrderBasicParam(obj){
 function doGetModifyOrderBasicParam(obj){
 		var contract = obj;
 		var $contractCode  = contract;
-		var $drection =  $("ul[data-tion-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
-		var $orderPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des3']").text();
-		var $orderNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des4']").text();
-		var $cdNum =  $("ul[data-tion-des='"+contract+"'] li[class = 'des5']").text();
-		var $OrderSysID =  $("ul[data-tion-des='"+contract+"'] li[class = 'des6']").text();
-		var $commodityNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des8']").text();
-		var $contractNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des9']").text();
-		var $exchangeNo =  $("ul[data-tion-des='"+contract+"'] li[class = 'des7']").text();
-		var $orderId =  $("ul[data-tion-des='"+contract+"'] li[class = 'des10']").text();
-		var $triggerPrice =  $("ul[data-tion-des='"+contract+"'] li[class = 'des11']").text();
+		var $drection =  $("ul[data-order-des='"+contract+"'] li[class = 'des2']").attr("data-drection");
+		var $orderPrice =  $("ul[data-order-des='"+contract+"'] li[class = 'des3']").text();
+		var $orderNum =  $("ul[data-order-des='"+contract+"'] li[class = 'des4']").text();
+		var $cdNum =  $("ul[data-order-des='"+contract+"'] li[class = 'des5']").text();
+		var $OrderSysID =  $("ul[data-order-des='"+contract+"'] li[class = 'des6']").text();
+		var $commodityNo =  $("ul[data-order-des='"+contract+"'] li[class = 'des8']").text();
+		var $contractNo =  $("ul[data-order-des='"+contract+"'] li[class = 'des9']").text();
+		var $exchangeNo =  $("ul[data-order-des='"+contract+"'] li[class = 'des7']").text();
+		var $orderId =  $("ul[data-order-des='"+contract+"'] li[class = 'des10']").text();
+		var $triggerPrice =  $("ul[data-order-des='"+contract+"'] li[class = 'des11']").text();
 		var modifyOrderParam = createModifyOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice),$triggerPrice);
 	return modifyOrderParam;
 }

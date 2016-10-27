@@ -100,7 +100,7 @@ $(function() {
             var dataC=[];
             var volume=[];
             var dataall=data.Data;
-            console.log(dataall);
+            //console.log(dataall);
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
                 var exs = 3600*8;
@@ -130,7 +130,7 @@ $(function() {
                     dataC.splice(i,1);
                 }
             }
-            console.log(dataC);
+            //console.log(dataC);
             $('#container').highcharts('StockChart', {
                 chart: {
                     backgroundColor:'#333333'
@@ -185,8 +185,7 @@ $(function() {
                 }],
                 tooltip: {
                     crosshairs: true,
-                    shared: true,
-                    "z-index": "2"
+                    shared: true
                 },
                 rangeSelector: {
                     // 缩放选择按钮，是一个数组。
@@ -204,31 +203,31 @@ $(function() {
                     inputEnabled: false
                 },
                 /* legend: {
-                    enabled: true,
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                plotOptions: {
-                    series: {
-                        marker: {
-                            enabled: false
-                        }
-                    }
-                }, */
+                 enabled: true,
+                 layout: 'vertical',
+                 align: 'right',
+                 verticalAlign: 'middle',
+                 borderWidth: 0
+                 },
+                 plotOptions: {
+                 series: {
+                 marker: {
+                 enabled: false
+                 }
+                 }
+                 }, */
                 series : [{
                     name: 'K线',
                     type : 'line', /*candlestick line*/
                     id: 'primary',
                     data : dataC/*,
-                    visible: false*/
+                     visible: false*/
                 },{
                     name: '',
                     type : 'candlestick',
                     id: 'primary',
                     data : dataC/*,
-                    visible: false*/
+                     visible: false*/
                 },{
                     type: 'column',
                     name: '成交量',
@@ -259,7 +258,6 @@ $(function() {
             $(".highcharts-series-0").hide();
         }
         function chechData(data){
-        	console.log(data);
             var dataC=[];
             var volume=[];
             var dataall=data.Data;
@@ -274,8 +272,7 @@ $(function() {
                     dataall[i][2],
                     dataall[i][4],
                     dataall[i][3],
-                    dataall[i][1],
-                    dataall[i][7]
+                    dataall[i][1]
                 ]);
                 volume.push([
                     timestamp,
@@ -294,6 +291,7 @@ $(function() {
             }
 
             $('#container').highcharts('StockChart', {
+
                 chart: {
                     backgroundColor:'#333333'
                 },
@@ -347,13 +345,7 @@ $(function() {
                 }],
                 tooltip: {
                     crosshairs: true,
-                    shared: true,
-                    style:{
-                        index: 2
-                    }
-                },
-                rangeSelector : {
-                    selected : 1
+                    shared: true
                 },
                 rangeSelector: {
                     buttons: [{
@@ -361,34 +353,34 @@ $(function() {
                         count: 120,
                         text: '分钟'
                     }],
-                    selected: 0,
+                    selected: 0
                 },
                 /* legend: {
-                    enabled: true,
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                plotOptions: {
-                    series: {
-                        marker: {
-                            enabled: false
-                        }
-                    }
-                }, */
+                 enabled: true,
+                 layout: 'vertical',
+                 align: 'right',
+                 verticalAlign: 'middle',
+                 borderWidth: 0
+                 },
+                 plotOptions: {
+                 series: {
+                 marker: {
+                 enabled: false
+                 }
+                 }
+                 }, */
                 series : [{
                     name: '分时线',
                     type : 'line', /*candlestick line*/
                     id: 'primary',
                     data : dataC/*,
-                    visible: false*/
+                     visible: false*/
                 },{
                     name: '',
                     type : 'candlestick',
                     id: 'primary',
                     data : dataC/*,
-                    visible: false*/
+                     visible: false*/
                 },{
                     type: 'column',
                     name: '成交量',

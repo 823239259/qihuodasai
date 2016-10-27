@@ -158,7 +158,7 @@
 						<span>
 							<i id="tranFees_id">
 	                			<fmt:formatNumber value="${fSimpleConfigList[0].tranFees}" pattern="#,###"></fmt:formatNumber>
-							</i>元/手，每手交易开仓和平仓的手续费。
+							</i>元/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费。
 						</span>
 					</div>
 				</div>

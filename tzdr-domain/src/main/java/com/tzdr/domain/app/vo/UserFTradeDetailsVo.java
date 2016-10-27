@@ -171,7 +171,43 @@ public class UserFTradeDetailsVo implements Serializable {
 	 */
 	@SqlColumn(name="ag_tran_actual_lever")
 	private Integer agTranActualLever;
+	/**
+	 * H股指数交易手数
+	 */
+	@SqlColumn(name = "h_index_actual_lever")
+	private Integer hIndexActualLever;
+	/**
+	 * 
+	 * 小H股指数交易手数
+	 */
+	@SqlColumn(name = "xh_index_actual_lever")
+	private Integer xhIndexActualLever;
+
+	/**
+	 * 
+	 * 美铜交易手数
+	 */
+	@SqlColumn(name = "a_copper_actual_lever")
+	private Integer aCopperActualLever;
 	
+	/**
+	 * 
+	 * 美白银交易手数
+	 */
+	@SqlColumn(name = "a_silver_actual_lever")
+	private Integer aSilverActualLever;
+	
+	/**
+	 * 
+	 * 小原油交易手数
+	 */
+	@SqlColumn(name = "sma_actual_lever")
+	private Integer smaActualLever;
+	/**
+	 * 迷你德国DAX指数
+	 */
+	@SqlColumn(name = "daxtran_min_actual_lever")
+	private Integer daxtranMinActualLever;
 	
 	/**
 	 * 结算金额
@@ -195,6 +231,14 @@ public class UserFTradeDetailsVo implements Serializable {
 	 * 交易品种集合
 	 */
 	private List<OutDiskVo> outDiskVoList = new ArrayList<OutDiskVo>();
+
+	public Integer getDaxtranMinActualLever() {
+		return daxtranMinActualLever;
+	}
+
+	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
+		this.daxtranMinActualLever = daxtranMinActualLever;
+	}
 
 	public String getId() {
 		return id;
@@ -426,6 +470,46 @@ public class UserFTradeDetailsVo implements Serializable {
 
 	public void setAgTranActualLever(Integer agTranActualLever) {
 		this.agTranActualLever = agTranActualLever;
+	}
+
+	public Integer gethIndexActualLever() {
+		return hIndexActualLever;
+	}
+
+	public void sethIndexActualLever(Integer hIndexActualLever) {
+		this.hIndexActualLever = hIndexActualLever;
+	}
+
+	public Integer getXhIndexActualLever() {
+		return xhIndexActualLever;
+	}
+
+	public void setXhIndexActualLever(Integer xhIndexActualLever) {
+		this.xhIndexActualLever = xhIndexActualLever;
+	}
+
+	public Integer getaCopperActualLever() {
+		return aCopperActualLever;
+	}
+
+	public void setaCopperActualLever(Integer aCopperActualLever) {
+		this.aCopperActualLever = aCopperActualLever;
+	}
+
+	public Integer getaSilverActualLever() {
+		return aSilverActualLever;
+	}
+
+	public void setaSilverActualLever(Integer aSilverActualLever) {
+		this.aSilverActualLever = aSilverActualLever;
+	}
+
+	public Integer getSmaActualLever() {
+		return smaActualLever;
+	}
+
+	public void setSmaActualLever(Integer smaActualLever) {
+		this.smaActualLever = smaActualLever;
 	}
 	
 	

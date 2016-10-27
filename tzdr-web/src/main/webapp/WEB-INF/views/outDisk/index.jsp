@@ -34,7 +34,7 @@
     </div>
     <div class="capital_ctn cpx_ctn">
         <div class="cpx_main">
-            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘15种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
+            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘16种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
             <ul class="cplx_mianlist">
             <c:forEach items="${outDiskParameters}" var="outDiskParameters" varStatus="status">
               		<c:choose>
@@ -66,14 +66,20 @@
                     <span><i>免费</i></span>
                 </li>
             </ul>
-            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易15种期货产品)<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</c></i></h2>
+            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易16种期货产品)<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</c></i></h2>
             <table border="0" cellspacing="0" cellpadding="0" class="cpx_ru_list">
                 <thead>
                     <td width="11%">期货产品</td>
                     <td width="11%">主力合约</td>
                     <td width="33%">维胜交易时间段</td>
                     <td wdith="32%">初始可持仓手数</td>
-                    <td width="13%">交易手续费(￥)</td>
+                    <td width="13%" style="position: relative;">交易手续费(￥)
+                    	<a id="suyr" style="position: relative; top: 4px;" href="javascript:void(0);"><img src="${ctx}/static/images/cx/icon_07.png"></a>
+                    	<p id="suts" style="display: none; position: absolute; top: -21px; font-size: 13px; line-height: 23px; width: 234px; border: 1px solid #fc3; right: -7px; background: #fff;">
+                    		<span>买入、卖出一手时各收取该数额（人民币）的交易手续费</span>
+                    		<img style="float: right; right: 15px; position: absolute; top: 23px;" src="${ctx}/static/images/cx/icon_08.png">
+                    	</p>
+                    </td>
                 </thead>
                 <tr>
                     <td>富时A50</td>
@@ -192,6 +198,14 @@
                     <td><i>${outDiskPrice[14].price}</i>元/手</td>
                 </tr>
                 
+                 <tr>
+                    <td style="line-height: normal;">迷你德国DAX指数</td>
+                    <td>${outDiskPrice[15].mainContract}</td>
+                    <td>${outDiskPrice[15].tradTime}</td>
+                    <td>只交迷你德国DAX指数时，初始最大可持仓<i id='daxtranMinActualLever'>${outDiskParameters[0].daxtranMinActualLever}</i>手</td>
+                    <td><i>${outDiskPrice[15].price}</i>元/手</td>
+                </tr>
+                
                 <tr>
                 	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">${transTime}</i>六个时段所有品种只能平仓，不能开仓。</td>
                 </tr>
@@ -223,6 +237,12 @@ var _orderno='${tzdrUser.id}';
 var b=location.href,c=d.referrer,f,s,g=d.cookie,h=g.match(/(^|;)\s*ipycookie=([^;]*)/),i=g.match(/(^|;)\s*ipysession=([^;]*)/);if (w.parent!=w){f=b;b=c;c=f;};u='//stats.ipinyou.com/cvt?a='+e('BJ._F.3ag4T-uuz-3qugl7_8Ab6_')+'&c='+e(h?h[2]:'')+'&s='+e(i?i[2].match(/jump\%3D(\d+)/)[1]:'')+'&u='+e(b)+'&r='+e(c)+'&rd='+(new Date()).getTime()+'&OrderNo='+e(_orderno)+'&e=';
 function _(){if(!d.body){setTimeout(_(),100);}else{s= d.createElement('script');s.src = u;d.body.insertBefore(s,d.body.firstChild);}}_();
 }(window,document,encodeURIComponent);
+
+$("#suyr").mouseover( function() {
+	$("#suts").show();
+}).mouseout( function(){
+	$("#suts").hide();
+});
 </script>
 
 </body>

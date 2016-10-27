@@ -2031,13 +2031,13 @@
         }
         var z = a.color, E = a.each, H = a.getTZOffset, v = a.merge, n = a.pick, k = a.win;
         a.defaultOptions = {
-        		colors: "#7cb5ec #0cf49b #6ba583 #b52cc5 #64ae0b #ff6600 #e4d354 #2b908f #f45b5b #91e8e1".split(" "),
+            colors: "#7cb5ec #0cf49b #6ba583 #b52cc5 #64ae0b #ff6600 #e4d354 #2b908f #f45b5b #91e8e1".split(" "),
             symbols: [ "circle", "diamond", "square", "triangle", "triangle-down" ],
             lang: {
                 loading: "Loading...",
                 months: "January February March April May June July August September October November December".split(" "),
                 shortMonths: "1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月".split(" "),
-                weekdays: "周一 周二  周三 周四 周五 周六 周天".split(" "),
+                weekdays: "周天 周一 周二  周三 周四 周五 周六".split(" "),
                 decimalPoint: ".",
                 numericSymbols: "kMGTPE".split(""),
                 resetZoom: "Reset zoom",

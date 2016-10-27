@@ -2,6 +2,7 @@ package com.tzdr.web.controller.signin;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.wuser.WUserService;
@@ -38,6 +40,7 @@ import com.tzdr.common.utils.RandomCodeUtil;
 import com.tzdr.common.utils.StringCodeUtils;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.constants.Constant;
+import com.tzdr.domain.web.entity.GeneralizeChannel;
 import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.web.constants.Constants;
@@ -74,6 +77,8 @@ public class SignInController {
 	@Autowired
 	private DataMapService dataMapService;
 
+	@Autowired
+	private MessagePromptService messagePromptService;
 	private static Object lock = new Object();
 
 	/**
@@ -377,6 +382,7 @@ public class SignInController {
 		jsonResult.setData(data);
 		// 用户注册成功之后给用户手机发送短信
 		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		messagePromptService.registNotice(mobile, "web", "", "");
 		return jsonResult;
 	}
 
@@ -422,7 +428,6 @@ public class SignInController {
 		}
 		return generalizeId;
 	}
-
 	/**
 	 * @Description: 获取推广渠道
 	 * @Title: getChannel

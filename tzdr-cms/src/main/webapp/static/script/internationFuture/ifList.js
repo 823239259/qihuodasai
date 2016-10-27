@@ -108,6 +108,7 @@ function input() {
 			$("#acTradeNumTR").show();
 			$("#asTradeNumTR").show();
 			$("#scTradeNumTR").show();
+			$("#daxMinTradeNumTR").show();
 			$("#inputWin").css("height","457px");
 		
 		}else
@@ -128,6 +129,7 @@ function input() {
 			$("#acTradeNumTR").hide();
 			$("#asTradeNumTR").hide();
 			$("#scTradeNumTR").hide();
+			$("#daxMinTradeNumTR").hide();
 			$("#inputWin").css("height","250px");
 
 		}
@@ -153,6 +155,7 @@ function input() {
 			$("#AmeCopperMarketLever").val("");
 			$("#AmeSilverMarketLever").val("");
 			$("#smallCrudeOilMarketLever").val("");
+			$("#daxtranMinActualLever").val("");
 			$("#inputWin").show();
 			$("#inputWin").window('open');
 		}
@@ -183,6 +186,7 @@ function inputSave() {
 		var AmeCopperMarketLever=$("#AmeCopperMarketLever").val();
 		var AmeSilverMarketLever=$("#AmeSilverMarketLever").val();
 		var smallCrudeOilMarketLever=$("#smallCrudeOilMarketLever").val();
+		var daxtranMinActualLever = $("#daxtranMinActualLever").val();
 		if (!profit) {
 			Check.messageBox("提示","请输入对应交易盈亏！");
 			return ;
@@ -194,7 +198,7 @@ function inputSave() {
 					|| !mdtranActualLever || !mbtranActualLever || !daxtranActualLever
 					|| !nikkeiTranActualLever || !mntranActualLever
 					|| !lhsiTranActualLever || !agTranActualLever||!heStockMarketLever||!xhStockMarketLever
-					||!AmeCopperMarketLever||!AmeSilverMarketLever||!smallCrudeOilMarketLever) {
+					||!AmeCopperMarketLever||!AmeSilverMarketLever||!smallCrudeOilMarketLever || !daxtranMinActualLever) {
 
 				Check.messageBox("提示","请输入对应交易手数！");
 				return ;
@@ -203,7 +207,7 @@ function inputSave() {
 					|| mdtranActualLever<0 || mbtranActualLever < 0 || daxtranActualLever < 0
 					|| nikkeiTranActualLever < 0 || mntranActualLever < 0
 					|| lhsiTranActualLever < 0 || agTranActualLever < 0||heStockMarketLever<0||xhStockMarketLever<0
-					||AmeCopperMarketLever<0||AmeSilverMarketLever<0||smallCrudeOilMarketLever<0) {
+					||AmeCopperMarketLever<0||AmeSilverMarketLever<0||smallCrudeOilMarketLever<0 || daxtranMinActualLever < 0) {
 
 				Check.messageBox("提示","输入的数据有误,交易手数不能输入负数！");
 				return;
@@ -224,7 +228,7 @@ function inputSave() {
 				"daxtranActualLever":daxtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 				"mntranActualLever":mntranActualLever,"lhsiTranActualLever":lhsiTranActualLever,
 				"agTranActualLever":agTranActualLever,"heStockMarketLever":heStockMarketLever,"xhStockMarketLever":xhStockMarketLever,
-				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,"smallCrudeOilMarketLever":smallCrudeOilMarketLever} ,
+				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,"smallCrudeOilMarketLever":smallCrudeOilMarketLever,"daxtranMinActualLever":daxtranMinActualLever} ,
 				function(data){
 					eyWindow.closeProgress();
 					if (data.success) {
@@ -257,6 +261,7 @@ function inputClose() {
 	$("#AmeCopperMarketLever").val("");
 	$("#AmeSilverMarketLever").val("");
 	$("#smallCrudeOilMarketLever").val("");
+	$("#daxtranMinActualLever").val("");
 	$("#inputWin").show();
 	$("#inputWin").window('close');
 };
@@ -352,6 +357,7 @@ function tradeCount() {
 		$('#acCount').html(filterNull(rows[0].ameCopperMarketLever));
 		$('#asCount').html(filterNull(rows[0].ameSilverMarketLever));
 		$('#scCount').html(filterNull(rows[0].smallCrudeOilMarketLever));
+		$("#daxMinCount").html(filterNull(rows[0].daxtranMinActualLever));
 		/*$('#a50Count').html(rows[0].tranActualLever);
 		$('#hsiCount').html(rows[0].hsiTranActualLever);
 		$('#crudeCount').html(rows[0].crudeTranActualLever);

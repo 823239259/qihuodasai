@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tzdr.business.api.service.ApiJuheRealName;
 import com.tzdr.business.cms.service.user.PasswordService;
 import com.tzdr.business.service.api.yjfinance.IdentityCard;
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.thread.SMSPgbSenderThread;
 import com.tzdr.business.service.thread.SMSSenderThread;
@@ -25,6 +27,7 @@ import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.utils.EmailUtils;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.dao.securityInfo.SecurityInfoDao;
+import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
 
@@ -52,18 +55,35 @@ public class SecurityInfoServiceImpl  extends BaseServiceImpl<UserVerified,Secur
 	
 	@Autowired
 	private UserInfoService userInfoService;
+	@Autowired
+	private DataMapService dataMapService;
 	
 	@Override
 	public boolean vilidateCard(String cardNo, String name) {
 		boolean flag=false;
 		try {
-			 flag=IdentityCard.getInstance().idSimpleCheckByJson(cardNo, name);
+			 String channel = "0";
+			 List<DataMap> dataMaps = dataMapService.findByTypeKey("realNameUseChannel");
+			 if(dataMaps.size() > 0){
+				 DataMap dataMap = dataMaps.get(0);
+				 channel =  dataMap.getValueName();
+			 }
+			 if(channel.equals("0")){
+				 flag = IdentityCard.getInstance().idSimpleCheckByJson(cardNo, name);
+			 }else if(channel.equals("1")){
+				 flag = juheValidationCard(cardNo, name);
+			 }
 		} catch (AxisFault e) {
 			log.error("身份验证错误"+e.getMessage());
 		} catch (MalformedURLException e) {
 			log.error("身份验证错误"+e.getMessage());
 		}
 		return flag;
+	}
+	
+	@Override
+	public boolean juheValidationCard(String cardNo, String name) {
+		return ApiJuheRealName.validationIdCard(cardNo, name);
 	}
 
 	/**
