@@ -63,13 +63,13 @@
 	        </ul>
 			<ul style="line-height: 25px;">
 				<li style="width: 70px; text-align: right; height: 50px;">维胜资讯：</li>
-				<li><a href=" http://www.vs.com/a/news/commodity/" target="_blank">商品市场</a></li>
-				<li><a href=" http://www.vs.com/a/view/stock/" target="_blank">证券市场</a></li>
-				<li><a href=" http://www.vs.com/a/news/exchange/" target="_blank">外汇市场</a></li>
-				<li><a href=" http://www.vs.com/a/news/whole/" target="_blank">宏观经济</a></li>
-				<li><a href=" http://www.vs.com/a/view/cnstock/" target="_blank">中国股市</a></li>
-				<li><a href=" http://www.vs.com/a/view/usstock/" target="_blank">欧美股市</a></li>
-				<li><a href=" http://www.vs.com/a/view/international/" target="_blank">国际商品</a></li>
+				<li><a href="http://www.vs.net/a/news/commodity/" target="_blank">商品市场</a></li>
+				<li><a href="http://www.vs.net/a/view/stock/" target="_blank">证券市场</a></li>
+				<li><a href="http://www.vs.net/a/news/exchange/" target="_blank">外汇市场</a></li>
+				<li><a href="http://www.vs.net/a/news/whole/" target="_blank">宏观经济</a></li>
+				<li><a href="http://www.vs.net/a/view/cnstock/" target="_blank">中国股市</a></li>
+				<li><a href="http://www.vs.net/a/view/usstock/" target="_blank">欧美股市</a></li>
+				<li><a href="http://www.vs.net/a/view/international/" target="_blank">国际商品</a></li>
 			</ul>
 		</div>
     </div>
