@@ -57,8 +57,8 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .h_partner .h_img a{float: left;}
 .h_partner .h_img a:hover { cursor: default;}
 /*copyright*/
-.copyright {width: 100%; height: 340px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
-.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 340px; border-bottom: 1px solid #1a1a1a;}
+.copyright {width: 100%; height: 300px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
+.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 300px; border-bottom: 1px solid #1a1a1a;}
 .copyright_link, .copyright_interaction, .copyright_contact {float: left;margin-top: 30px;}
 .copyright_link ul {margin-top: 10px; width: 510px; height: 40px; line-height: 40px;}
 .copyright_link ul li {float: left; margin-right: 20px; font-size: 14px; color: #666666;}
@@ -76,20 +76,20 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .copyright_contact {margin-left: 111px; float: right;}
 .copyright_contact h3 {height: 40px; line-height: 40px; margin: 10px 0; color: #999999; font-weight: normal; font-size: 14px;}
 .copyright_contact p {color: #666666; font-size: 14px; margin-top: 5px; margin-bottom: 10px;}
-.copyright .enterprise_link {height: 183px; width: 640px;}
-.copyright .enterprise_link ul {width: 100%; float: left; margin-bottom: 25px;}
+.copyright .enterprise_link {height: 183px; width: 640px; margin-top: -5px;}
+.copyright .enterprise_link ul {width: 100%; float: left; margin-bottom: 10px;}
 .copyright .enterprise_link ul li{float: left; font-size: 14px; color: #666; margin-right: 20px;}
 .copyright .enterprise_link ul li a {font-size: 14px; color: #666; text-decoration: none;}
 .copyright .enterprise_link ul li a:hover {color: #ffcc33; text-decoration: underline;}
 /*copybox*/
-.copybox {width: 100%; height: 121px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
-.copybox_content {width: 1000px; margin: 0 auto;background-color: #333333; height: 120px; border-top: 1px solid #4d4d4d; padding: 0 5px; position: relative; top: -1px;}
+.copybox {width: 100%; height: 130px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
+.copybox_content {width: 1000px; margin: 0 auto;background-color: #333333; height: 130px; border-top: 1px solid #4d4d4d; padding: 0 5px; position: relative; top: -1px;}
 .cp_link {width: 670px; padding-top: 40px; height: 80px; float: left;}
 .cp_link p {color: #666; font-size: 12px; margin-top: 20px; height: 25px; line-height: 25px;}
 .cp_link ul li {float: left; color: #666; font-size: 12px; margin-right: 10px;}
 .cp_link ul li a{float: left; color: #666; text-decoration: none;}
 .cp_link ul li a:hover {color: #ffcc33; text-decoration: underline;}
-.cp_cppic {padding-top: 40px; height: 80px; float: right;}
+.cp_cppic {padding-top: 48px; height: 80px; float: right;}
 .cp_cppic img {margin-left: 10px;}
 .notice-fixed {z-index: 999;position: fixed;width: 100%;height: auto;margin: 0 auto;left: 0;right: 0;bottom: 0;min-width: 1000px;}
 .notice-style {width: 1000px; height:auto; margin: 0 auto;}
@@ -107,7 +107,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .notice-title-bj {width: 1000px; margin: 0 auto; height: 40px; line-height: 40px; position: relative;}
 .site-notice .nr {border-top: 1px solid #4d4d4d; background: #333; padding: 20px 0;}
 .copy_yqlj {width: 100%; display: inline-block; margin-bottom: 10px;}
-.copy_yqlj li a {font-size: 14px;}
+.copy_yqlj li a {font-size: 12px;}
 /* weixin */
 .follow .erweima .erweima-wxtk {position: absolute;top: -153px;left: -39px; height: 150px;}
 .follow .erweima .erweima-wxtk img {height: 150px;}
