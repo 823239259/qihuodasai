@@ -73,7 +73,13 @@
                     <td width="11%">主力合约</td>
                     <td width="33%">维胜交易时间段</td>
                     <td wdith="32%">初始可持仓手数</td>
-                    <td width="13%">交易手续费(￥)</td>
+                    <td width="13%" style="position: relative;">交易手续费(￥)
+                    	<a id="suyr" style="position: relative; top: 4px;" href="javascript:void(0);"><img src="${ctx}/static/images/cx/icon_07.png"></a>
+                    	<p id="suts" style="display: none; position: absolute; top: -21px; font-size: 13px; line-height: 23px; width: 234px; border: 1px solid #fc3; right: -7px; background: #fff;">
+                    		<span>只交易该品种时，初始最大可持仓手数</span>
+                    		<img style="float: right; right: 15px; position: absolute; top: 23px;" src="${ctx}/static/images/cx/icon_08.png">
+                    	</p>
+                    </td>
                 </thead>
                 <tr>
                     <td>富时A50</td>
@@ -231,6 +237,12 @@ var _orderno='${tzdrUser.id}';
 var b=location.href,c=d.referrer,f,s,g=d.cookie,h=g.match(/(^|;)\s*ipycookie=([^;]*)/),i=g.match(/(^|;)\s*ipysession=([^;]*)/);if (w.parent!=w){f=b;b=c;c=f;};u='//stats.ipinyou.com/cvt?a='+e('BJ._F.3ag4T-uuz-3qugl7_8Ab6_')+'&c='+e(h?h[2]:'')+'&s='+e(i?i[2].match(/jump\%3D(\d+)/)[1]:'')+'&u='+e(b)+'&r='+e(c)+'&rd='+(new Date()).getTime()+'&OrderNo='+e(_orderno)+'&e=';
 function _(){if(!d.body){setTimeout(_(),100);}else{s= d.createElement('script');s.src = u;d.body.insertBefore(s,d.body.firstChild);}}_();
 }(window,document,encodeURIComponent);
+
+$("#suyr").mouseover( function() {
+	$("#suts").show();
+}).mouseout( function(){
+	$("#suts").hide();
+});
 </script>
 
 </body>
