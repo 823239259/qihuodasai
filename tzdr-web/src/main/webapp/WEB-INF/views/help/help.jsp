@@ -179,7 +179,7 @@ var tab="<%=tab%>";
             <h1>港股黑名单</h1>
             <p>1，在黑名单中的港股，因流动性差，易造成穿仓，根据操盘协议不能买入；</p>
             <p>2，黑名单每月更新一次，每月第1个交易日公示黑名单。从公布日起5个交易日后（包括公布日），若客户仍然持有黑名单里的股票，将被强平。</p>
-       		<p><a href="http://update.tzdr.com/Future/download/hk/港股黑名单.xlsx" style="font-size: 14px;color: #3dbff6; font-weight: bold; margin-left: 20px;">点击下载港股黑名单.xlsx</a></p>
+       		<p><a href="http://update.vs.com/Future/download/hk/港股黑名单.xlsx" style="font-size: 14px;color: #3dbff6; font-weight: bold; margin-left: 20px;">点击下载港股黑名单.xlsx</a></p>
        		<p>3，若客户所购股票因包括但不限于异常波动、上市公司涉嫌违规需要进行调查以及突发性事件或不可抗力等原因导致该股票进入黑名单的，客户必须继续持有该股票，操盘期限自动延期，客户应继续按协议约定支付应付的通道使用费和账户管理费等相应款项，否则视为客户已自欠付款项之日起放弃方案中股票的持有权利。</p>
 			<p style="margin-left:20px;">同时因违反欠费约定，客户应及时将账户内其他股票平仓，否则维胜有权依据协议约定将交易账户的全部股票变现为货币资金并办理客户操盘账户内资产的清算手续，并按照协议约定顺序清偿相关债务，客户所欠的债务全部清偿完毕，剩余部分返还至客户指定账户内。</p>
 			<p style="margin-left:20px;">客户也可选择全额购回该进入黑名单的股票，购回次日起无需支付通道使用费和账户管理费。自该股票可交易之日起五个交易日内客户需卖出该股票并通知维胜进行清算，按可交易的实际交易日以原方案扣除账户管理费后的剩余部分返还至客户指定账户内。</p>
@@ -1128,11 +1128,11 @@ var tab="<%=tab%>";
                 <img src="${ctx}/static/images/help/softcode.png">
                 <p style="margin-bottom:40px; text-indent:0;">2，iPhone手机暂不支持，iOS APP即将推出。</p>
                 <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">Win XP用户安装时需注意：</h6>   
-                <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/Microsoft.NET.exe">.NET Framework 4.0</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”，然后启动软件。</p>  
+                <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.vs.com/Future/download/Microsoft.NET.exe">.NET Framework 4.0</a>”；<br>2，再下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”，然后启动软件。</p>  
                 <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">win 7用户安装时需注意</h6>  
-                <p style="margin-bottom:40px; text-indent:0;">1，下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”；<br>2，若软件提示“此安装程序需要.NET Framework 4.0”，再下载并安装“<a href="http://update.tzdr.com/Future/download/Microsoft.NET.exe">.NET Framework 4.0</a>”，再安装“快抢手快速下单软件”，然后启动软件。</p>
+                <p style="margin-bottom:40px; text-indent:0;">1，下载并安装“<a href="http://update.vs.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”；<br>2，若软件提示“此安装程序需要.NET Framework 4.0”，再下载并安装“<a href="http://update.tzdr.com/Future/download/Microsoft.NET.exe">.NET Framework 4.0</a>”，再安装“快抢手快速下单软件”，然后启动软件。</p>
                 <h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">Win 8/8.1、Win 10用户安装时需注意</h6>      
-                <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.tzdr.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”，安装时有风险预警，请继续选择安装；<br>2，更改软件以兼容模式运行，如下图，更改后再启动软件；：<br><img src="${ctx}/static/images/help/jr_01.gif" style="height:407px;margin-right: 20px;"><img src="${ctx}/static/images/help/jr_02.gif" style="width:320px;"><br>3，请务必更改兼容性！否则启动软件后，登录界面没有交易和行情服务器选择，无法登录软件。</p>            
+                <p style="margin-bottom:40px; text-indent:0;">1，先下载并安装“<a href="http://update.vs.com/Future/download/快抢手快速下单软件V2.0.3.msi">快抢手快速下单软件</a>”，安装时有风险预警，请继续选择安装；<br>2，更改软件以兼容模式运行，如下图，更改后再启动软件；：<br><img src="${ctx}/static/images/help/jr_01.gif" style="height:407px;margin-right: 20px;"><img src="${ctx}/static/images/help/jr_02.gif" style="width:320px;"><br>3，请务必更改兼容性！否则启动软件后，登录界面没有交易和行情服务器选择，无法登录软件。</p>            
             	<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px;">若程序仍无法运行，请致电客服400-852-8008。</h6>
             	<h6 style="font-weight:bold;color:#fc3; margin-bottom:10px; margin-top:40px;">快抢手快速下单软件使用基本说明：</h6>
             </div>        
@@ -1145,7 +1145,7 @@ var tab="<%=tab%>";
         </div>        
         <div class="hp_mainbar hp_mbox9" style="display:none;">
             <h1 style="border-bottom:1px solid #d1d1d1;">先融期货-鑫管家博易大师</h1>
-            <a href="http://update.tzdr.com/Future/download/boyidashi.exe"><img src="${ctx}/static/images/help/byds.gif" style="display:block; margin:30px auto 10px;" width="216" height="66"></a>
+            <a href="http://update.vs.com/Future/download/boyidashi.exe"><img src="${ctx}/static/images/help/byds.gif" style="display:block; margin:30px auto 10px;" width="216" height="66"></a>
             <h1>博易大师说明</h1>
             <h3 style="line-height:24px; margin:10px 0 15px; color:#333;">1，启动博易大师软件，弹出登录界面，填写一个公用的软件登录账号和密码。登录账号：10018019，登录密码：210926。</h3>
             <img src="${ctx}/static/images/help/by_01.jpg" width="606">
