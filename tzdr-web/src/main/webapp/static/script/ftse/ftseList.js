@@ -97,10 +97,6 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '<h3>迷你德国DAX指数</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+(daxtranMinActualLever == undefined ? 0 : daxtranMinActualLever)+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3></h3>';
-		tradeDev+= '<p></p>';
-		tradeDev+= '</li>';
 		tradeDev+= '</ul>';
 		$("#window_detail_endInfoFtse_trade").html(tradeDev);
 		var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;

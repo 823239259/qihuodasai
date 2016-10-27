@@ -63,7 +63,7 @@
 		       	<li><a href=" http://www.vs.com/" target="_blank">外盘期货行情</a></li>
 	        </ul>
 			<ul style="line-height: 25px;">
-				<li style="width: 70px; text-align: right; height: 50px;">资讯：</li>
+				<li style="width: 70px; text-align: right; height: 50px;">维胜资讯：</li>
 				<li><a href=" http://www.vs.com/a/news/commodity/" target="_blank">商品市场</a></li>
 				<li><a href=" http://www.vs.com/a/view/stock/" target="_blank">证券市场</a></li>
 				<li><a href=" http://www.vs.com/a/news/exchange/" target="_blank">外汇市场</a></li>

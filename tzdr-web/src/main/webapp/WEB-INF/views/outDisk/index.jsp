@@ -34,7 +34,7 @@
     </div>
     <div class="capital_ctn cpx_ctn">
         <div class="cpx_main">
-            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘15种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
+            <h2 class="cpx_title cpx_t_icon1"><b>操盘保证金：</b><i>(可操盘16种期货产品，操盘保证金越多，可持仓手数越多)</i></h2>
             <ul class="cplx_mianlist">
             <c:forEach items="${outDiskParameters}" var="outDiskParameters" varStatus="status">
               		<c:choose>
@@ -66,7 +66,7 @@
                     <span><i>免费</i></span>
                 </li>
             </ul>
-            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易15种期货产品)<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</c></i></h2>
+            <h2 class="cpx_title cpx_t_icon3"><b>交易规则：</b><i>(一个账号可同时交易16种期货产品)<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</c></i></h2>
             <table border="0" cellspacing="0" cellpadding="0" class="cpx_ru_list">
                 <thead>
                     <td width="11%">期货产品</td>
@@ -76,7 +76,7 @@
                     <td width="13%" style="position: relative;">交易手续费(￥)
                     	<a id="suyr" style="position: relative; top: 4px;" href="javascript:void(0);"><img src="${ctx}/static/images/cx/icon_07.png"></a>
                     	<p id="suts" style="display: none; position: absolute; top: -21px; font-size: 13px; line-height: 23px; width: 234px; border: 1px solid #fc3; right: -7px; background: #fff;">
-                    		<span>只交易该品种时，初始最大可持仓手数</span>
+                    		<span>买入、卖出一手时各收取该数额（人民币）的交易手续费</span>
                     		<img style="float: right; right: 15px; position: absolute; top: 23px;" src="${ctx}/static/images/cx/icon_08.png">
                     	</p>
                     </td>

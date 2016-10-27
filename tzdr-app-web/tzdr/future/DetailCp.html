@@ -288,6 +288,14 @@
     				}
     				p.innerHTML=aglever+"手";
     				break;
+    			case 21:
+    				h5.innerHTML="迷你德国DAX指数";
+    				var aglever = details.agTranActualLever;
+    				if(mui.isnull(aglever)){
+    					aglever = 0;
+    				}
+    				p.innerHTML=aglever+"手";
+    				break;	
     			default:
     				break;
     		}
@@ -347,6 +355,9 @@
 					break;
 				case 20:
 					b.innerHTML="小原油"+outDiskList.mainContract;
+					break;
+				case 21:
+					b.innerHTML="迷你德国DAX指数"+outDiskList.mainContract;
 					break;
     			default:
     				break;
