@@ -17,6 +17,8 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"  onclick="save()">新增</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true"   onclick="update()" >修改</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deletes()">删除</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"  onclick="start()">执行</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"  onclick="stop()">停止</a>
 		</div>
 		<table id="dg"  class="easyui-datagrid"  width="100%" style="height:auto;" 
 			url="${ctx }/admin/crawler/url/listData"
@@ -77,14 +79,18 @@
 		function deletes(){
 			var rows = $("#dg").datagrid("getSelections");
 			if (Check.validateSelectItems($("#dg"),1)) {
-				$.ajax({
-					url:"${ctx }/admin/crawler/url/doDeleteByUrlId",
-					type:"post",
-					data:{
-						urlId:rows[0].id
-					},
-					success:function(result){
-						$('#dg').datagrid('reload');
+				$.messager.confirm('提示', '你确定要删除该数据吗吗?', function(r){
+				if(r){
+						$.ajax({
+							url:"${ctx }/admin/crawler/url/doDeleteByUrlId",
+							type:"post",
+							data:{
+								urlId:rows[0].id
+							},
+							success:function(result){
+								$('#dg').datagrid('reload');
+							}
+						});
 					}
 				});
 			}
@@ -130,6 +136,64 @@
 				$('#add').dialog('open');
 			}
 		}
+		function start(){
+			var rows = $("#dg").datagrid("getSelections");
+			if (Check.validateSelectItems($("#dg"),1)) {
+				$.messager.confirm('提示', '你确定要启动此任务吗?', function(r){
+					if (r){
+						var win = $.messager.progress({
+							title:'启动进度',
+							msg:'正在启动...'
+						});
+						$.ajax({
+							url:"${ctx }/admin/crawler/url/startCrawler",
+							type:"POST",
+							data:{
+								id:rows[0].id
+							},
+							success:function(result){
+								$.messager.progress('close');
+								if(result.success){
+									 $.messager.alert('提示','任务已执行','info');
+									 $('#dg').datagrid('reload');
+								}else{
+									$.messager.alert('提示',''+result.message+'','error');
+								}
+							}
+						});
+					}
+				});
+			}
+		}
+		function stop(){
+			var rows = $("#dg").datagrid("getSelections");
+			if (Check.validateSelectItems($("#dg"),1)) {
+				$.messager.confirm('提示', '你确定要停止此任务吗?', function(r){
+					if (r){
+						var win = $.messager.progress({
+							title:'停止进度',
+							msg:'正在停止...'
+						});
+						$.ajax({
+							url:"${ctx }/admin/crawler/url/stopCrawler",
+							type:"POST",
+							data:{
+								id:rows[0].id
+							},
+							success:function(result){
+								$.messager.progress('close');
+								if(result.success){
+									 $.messager.alert('提示','任务已停止','info');
+									 $('#dg').datagrid('reload');
+								}else{
+									$.messager.alert('提示',''+result.message+'','error');
+								}
+							}
+						});
+					}
+				});
+			}
+		}
 		$("#save").click(function(){
 			var urlTitle = $("#urlTitle").val();
 			var urlUrl = $("#urlUrl").val();
@@ -168,6 +232,7 @@
 			});
 		});
 		function clearData(){
+			 $("#urlId").val("");
 			 $("#urlTitle").val("");
 			 $("#urlUrl").val("");
 			 $("#urlRemarks").val("");

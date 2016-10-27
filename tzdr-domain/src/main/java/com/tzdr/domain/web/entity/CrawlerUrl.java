@@ -44,7 +44,14 @@ public class CrawlerUrl extends BaseEntity{
 	 * 请求修改时间
 	 */
 	private Long urlUpdatetime;
-
+	/**
+	 * 最新一条数据的id
+	 */
+	private String lastWallstreetnId;
+	/**
+	 * 第三方最新一条数据的时间
+	 */
+	private String lastWallstreetnTime;
 	public String getUrlTitle() {
 		return urlTitle;
 	}
@@ -100,6 +107,13 @@ public class CrawlerUrl extends BaseEntity{
 	}
 	public void setLastOpentime(Long lastOpentime) {
 		this.lastOpentime = lastOpentime;
+	}
+	
+	public String getLastWallstreetnId() {
+		return lastWallstreetnId;
+	}
+	public void setLastWallstreetnId(String lastWallstreetnId) {
+		this.lastWallstreetnId = lastWallstreetnId;
 	}
 	public CrawlerUrl() {
 		super();

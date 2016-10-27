@@ -34,6 +34,11 @@ public class CrawlerWallstreetnLiveContent extends BaseEntity{
 	 * 修改时间
 	 */
 	private Long liveContentUpdatetime;
+	/**
+	 * 
+	 * @return
+	 */
+	private String text;
 	public String getLiveId() {
 		return liveId;
 	}
@@ -70,8 +75,16 @@ public class CrawlerWallstreetnLiveContent extends BaseEntity{
 	public void setLiveContentUpdatetime(Long liveContentUpdatetime) {
 		this.liveContentUpdatetime = liveContentUpdatetime;
 	}
+	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	public CrawlerWallstreetnLiveContent(String liveId, String liveContentHtml, String liveContentText,
-			String liveContentImage, Long liveContentCreatetime, Long liveContentUpdatetime) {
+			String liveContentImage, Long liveContentCreatetime, Long liveContentUpdatetime, String text) {
 		super();
 		this.liveId = liveId;
 		this.liveContentHtml = liveContentHtml;
@@ -79,6 +92,7 @@ public class CrawlerWallstreetnLiveContent extends BaseEntity{
 		this.liveContentImage = liveContentImage;
 		this.liveContentCreatetime = liveContentCreatetime;
 		this.liveContentUpdatetime = liveContentUpdatetime;
+		this.text = text;
 	}
 	public CrawlerWallstreetnLiveContent() {
 		super();
