@@ -26,6 +26,7 @@ public class CrawlerWallstreetnLive extends BaseEntity{
 	 * 修改时间
 	 */
 	private Long liveUpdatetime;
+
 	public String getLiveTitle() {
 		return liveTitle;
 	}
@@ -50,17 +51,15 @@ public class CrawlerWallstreetnLive extends BaseEntity{
 	public void setLiveUpdatetime(Long liveUpdatetime) {
 		this.liveUpdatetime = liveUpdatetime;
 	}
-	public CrawlerWallstreetnLive(String liveTitle, String liveWallstreetnId, Long liveCreatetime,
-			Long liveUpdatetime) {
-		super();
+	
+	
+	public CrawlerWallstreetnLive(String liveTitle, String liveWallstreetnId, Long liveCreatetime, Long liveUpdatetime) {
 		this.liveTitle = liveTitle;
 		this.liveWallstreetnId = liveWallstreetnId;
 		this.liveCreatetime = liveCreatetime;
 		this.liveUpdatetime = liveUpdatetime;
 	}
 	public CrawlerWallstreetnLive() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

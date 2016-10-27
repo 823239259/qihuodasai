@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.business.service.crawler.CrawlerUrlParamService;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
+import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
+import com.tzdr.cms.timer.wallstreetcn.WallstreetcnHandle;
 import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTask;
+import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTimer;
 import com.tzdr.cms.timer.wallstreetcn.Wallstreetn;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
@@ -38,6 +41,8 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	private CrawlerUrlService crawlerService;
 	@Autowired
 	private CrawlerUrlParamService crawlerUrlParamService;
+	@Autowired 
+	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
 	@RequestMapping(value = "/list",method=RequestMethod.GET)
 	public String list(){
 		return ViewConstants.CrawlerView.LIST_VIEW;
@@ -126,6 +131,12 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 			crawlerService.doDeleteByUrlId(urlId);
 		return new JsonResult(true);
 	}
+	/**
+	 * 开启任务
+	 * @param request
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/startCrawler",method = RequestMethod.GET)
 	@ResponseBody
 	public JsonResult startCrawler(HttpServletRequest request,@RequestParam("id") String id){
@@ -139,7 +150,8 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 			StringBuffer buffer = new StringBuffer();
 			int size = crawlerUrlParams.size();
 			for (int i = 0; i < size; i++) {
-				buffer.append(crawlerUrlParams.get(i).getUrlParamValue());
+				CrawlerUrlParam crawlerUrlParam = crawlerUrlParams.get(i);
+				buffer.append(crawlerUrlParam.getUrlParamKey()+"="+crawlerUrlParam.getUrlParamValue());
 				if(i != size-1){
 					buffer.append("&");
 				}
@@ -149,10 +161,37 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 			wallstreetn.setParam(buffer.toString());
 			wallstreetn.setRule(crawlerUrl.getExecRule());
 			wallstreetn.setUrl(crawlerUrl.getUrlUrl());
+			crawlerUrl.setStatus("1");//设置该url执行状态
+			crawlerService.update(crawlerUrl);
 			WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
+			WallstreetcnHandle handle = new WallstreetcnHandle();
+			WallstreetcnHandle.setCrawlerUrl(crawlerUrl);
+			handle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
+			handle.setCrawlerUrlService(crawlerService);
+			task.setWallstreetcnHandle(handle);
 			task.start();
 		}
-		
+		return resultJson;
+	}
+	/**
+	 * 停止任务
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/stopCrawler",method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResult stopCrawler(HttpServletRequest request,@RequestParam("id") String id){
+		JsonResult resultJson = new JsonResult(true);
+		CrawlerUrl crawlerUrl = crawlerService.get(id);
+		if(crawlerUrl == null){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("url不存在");
+		}else{
+			WallstreetcnTimer.stop(crawlerUrl.getUrlUrl());
+			crawlerUrl.setStatus("0");//设置该url停止状态
+			crawlerService.update(crawlerUrl);
+		}
 		return resultJson;
 	}
 	@Override

@@ -11,36 +11,119 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.service.crawler.CrawlerUrlService;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.cms.utils.HttpUrl;
+import com.tzdr.domain.web.entity.CrawlerUrl;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLiveContent;
 
 public class WallstreetcnHandle {
 	private static Logger logger = LoggerFactory.getLogger(WallstreetcnHandle.class);
 	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
+	private CrawlerUrlService crawlerUrlService;
+	
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	/**
-	 * 保存上一次拉取的数据第一条的id
+	 * 当前请求的url的对象
 	 */
-	private static String lastWalklstreetId = "0";
+	private static  CrawlerUrl crawlerUrl;
 	/**
 	 * Unicode 转成中文
 	 * @param utfString
 	 * @return
 	 */
 	public static String convert(String utfString){  
-	    StringBuilder sb = new StringBuilder();  
-	    int i = -1;  
-	    int pos = 0;  
-	    while((i=utfString.indexOf("\\u", pos)) != -1){  
-	        sb.append(utfString.substring(pos, i));  
-	        if(i+5 < utfString.length()){  
-	            pos = i+6;  
-	            sb.append((char)Integer.parseInt(utfString.substring(i+2, i+6), 16));  
-	        }  
-	    }  
-	    return sb.toString();  
+		 char aChar;      
+		   
+	     int len = utfString.length();      
+	   
+	    StringBuffer outBuffer = new StringBuffer(len);      
+	   
+	    for (int x = 0; x < len;) {      
+	   
+	     aChar = utfString.charAt(x++);      
+	   
+	     if (aChar == '\\') {      
+	   
+	      aChar = utfString.charAt(x++);      
+	   
+	      if (aChar == 'u') {      
+	   
+	       // Read the xxxx      
+	   
+	       int value = 0;      
+	   
+	       for (int i = 0; i < 4; i++) {      
+	   
+	        aChar = utfString.charAt(x++);      
+	   
+	        switch (aChar) {      
+	   
+	        case '0':      
+	   
+	        case '1':      
+	   
+	        case '2':      
+	   
+	        case '3':      
+	   
+	       case '4':      
+	   
+	        case '5':      
+	   
+	         case '6':      
+	          case '7':      
+	          case '8':      
+	          case '9':      
+	           value = (value << 4) + aChar - '0';      
+	           break;      
+	          case 'a':      
+	          case 'b':      
+	          case 'c':      
+	          case 'd':      
+	          case 'e':      
+	          case 'f':      
+	           value = (value << 4) + 10 + aChar - 'a';      
+	          break;      
+	          case 'A':      
+	          case 'B':      
+	          case 'C':      
+	          case 'D':      
+	          case 'E':      
+	          case 'F':      
+	           value = (value << 4) + 10 + aChar - 'A';      
+	           break;      
+	          default:      
+	           throw new IllegalArgumentException(      
+	             "Malformed   \\uxxxx   encoding.");      
+	          }      
+	   
+	        }      
+	         outBuffer.append((char) value);      
+	        } else {      
+	         if (aChar == 't')      
+	          aChar = '\t';      
+	         else if (aChar == 'r')      
+	          aChar = '\r';      
+	   
+	         else if (aChar == 'n')      
+	   
+	          aChar = '\n';      
+	   
+	         else if (aChar == 'f')      
+	   
+	          aChar = '\f';      
+	   
+	         outBuffer.append(aChar);      
+	        }      
+	       } else     
+	   
+	       outBuffer.append(aChar);      
+	   
+	      }      
+	   
+	      return outBuffer.toString();      
 	} 
 	/**
 	 * 获取实时行情数据
@@ -65,30 +148,36 @@ public class WallstreetcnHandle {
 	 * 处理请求返回数据
 	 * @param stringJson
 	 */
-	public  void handleData(String stringJson){
+	public synchronized void handleData(String param){
+		String stringJson = param.replace("\\", "");
 		List<CrawlerWallstreetnLive> wallstreetnLives = new ArrayList<>();
 		List<CrawlerWallstreetnLiveContent> contents = new ArrayList<>();
+		logger.info("请求成功:"+stringJson);
 		try {
 			JSONObject resultData = JSONObject.parseObject(stringJson);
-			JSONArray resultArray = resultData.getJSONArray("result");
+			JSONArray resultArray = resultData.getJSONArray("results");
 			int size = resultArray.size();
 			Long time = todayTime() / 1000;
 			Long dateTime = new Date().getTime();
 			for (int i = 0; i < size; i++) {
 				JSONObject jsonObject = resultArray.getJSONObject(i);
 				Long wallstreeTime = jsonObject.getLong("createdAt");
+				//如果返回树的创建时间不是当前时间则不需要做存储
 				if(wallstreeTime < time){
 					break;
 				}
-				CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
 				String wallId = jsonObject.getString("id");
-				live.setLiveWallstreetnId(wallId);
-				if(wallId.equals(lastWalklstreetId)){
+				//如果返回数据的id和数据库保存的最新一条数据库的id匹配则：此次请求的数据为重复数据，不需要做存储
+				if(wallId.equals(crawlerUrl.getLastWallstreetnId())){
 					break;
 				}
 				if(i == 0){
-					setLastWalklstreetId(wallId);
+					//更新最新数据第一条数据的id
+					crawlerUrl.setLastWallstreetnId(wallId);
+					crawlerUrlService.update(crawlerUrl);
 				}
+				CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
+				live.setLiveWallstreetnId(wallId);
 				live.setLiveTitle(jsonObject.getString("title"));
 				live.setLiveCreatetime(dateTime);
 				live.setLiveUpdatetime(dateTime);
@@ -98,12 +187,14 @@ public class WallstreetcnHandle {
 				content.setLiveContentHtml(jsonObject.getString("contentHtml"));
 				content.setLiveContentText(jsonObject.getString("contentText"));
 				content.setLiveContentImage(jsonObject.getJSONObject("text").getString("contentExtra"));
+				content.setText(stringJson);
 				wallstreetnLives.add(live);
 				contents.add(content);
 			}
+			logger.info("共获取:"+size);
 			crawlerWallstreetnLiveService.doSavesBatch(wallstreetnLives, contents);
 		} catch (Exception e) {
-			logger.info("请求数据异常");
+			logger.info("请求数据异常" + e);
 		}
 	}
 	
@@ -113,14 +204,20 @@ public class WallstreetcnHandle {
 	public void setCrawlerWallstreetnLiveService(CrawlerWallstreetnLiveService crawlerWallstreetnLiveService) {
 		this.crawlerWallstreetnLiveService = crawlerWallstreetnLiveService;
 	}
-	public static String getLastWalklstreetId() {
-		return lastWalklstreetId;
+	
+	public CrawlerUrlService getCrawlerUrlService() {
+		return crawlerUrlService;
 	}
-	public static void setLastWalklstreetId(String lastWalklstreetId) {
-		if(WallstreetcnHandle.lastWalklstreetId.equals(lastWalklstreetId)){
-			return;
-		}
-		WallstreetcnHandle.lastWalklstreetId = lastWalklstreetId;
+	public void setCrawlerUrlService(CrawlerUrlService crawlerUrlService) {
+		this.crawlerUrlService = crawlerUrlService;
+	}
+	
+	
+	public static CrawlerUrl getCrawlerUrl() {
+		return crawlerUrl;
+	}
+	public static void setCrawlerUrl(CrawlerUrl crawlerUrl) {
+		WallstreetcnHandle.crawlerUrl = crawlerUrl;
 	}
 	public static Long todayTime(){
 		Long dateTime = new Date().getTime();
