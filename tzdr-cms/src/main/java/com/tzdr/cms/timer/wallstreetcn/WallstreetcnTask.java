@@ -2,8 +2,10 @@ package com.tzdr.cms.timer.wallstreetcn;
 
 import java.util.TimerTask;
 
+
 public class WallstreetcnTask extends TimerTask{
 	private Wallstreetn wallstreetn;
+	private WallstreetcnHandle wallstreetcnHandle;
 	public Wallstreetn getWallstreetn() {
 		return wallstreetn;
 	}
@@ -16,12 +18,17 @@ public class WallstreetcnTask extends TimerTask{
 	}
 	
 	
+	public WallstreetcnHandle getWallstreetcnHandle() {
+		return wallstreetcnHandle;
+	}
+	public void setWallstreetcnHandle(WallstreetcnHandle wallstreetcnHandle) {
+		this.wallstreetcnHandle = wallstreetcnHandle;
+	}
 	public WallstreetcnTask() {
 	}
 	@Override
 	public void run() {
-		WallstreetcnHandle handle = new WallstreetcnHandle();
-		handle.getWallstreetcn(getWallstreetn());
+		wallstreetcnHandle.getWallstreetcn(getWallstreetn());
 	}
 	/**
 	 * 开启执行
@@ -39,7 +46,7 @@ public class WallstreetcnTask extends TimerTask{
 	public static void main(String[] args) {
 		Wallstreetn wallstreetn = new Wallstreetn();
 		wallstreetn.setMethod("GET");
-		wallstreetn.setParam("status=published&order=-created_at&page=1&channelId=4&extractImg=0&extractText=0");
+		wallstreetn.setParam("status=published&order=-created_at&page=1&channelId=4&extractImg=0&extractText=0&limit=2");
 		wallstreetn.setRule("5000");
 		wallstreetn.setUrl("https://api.wallstreetcn.com/v2/livenews");
 		WallstreetcnTask wallstreetcnTask = new WallstreetcnTask();
