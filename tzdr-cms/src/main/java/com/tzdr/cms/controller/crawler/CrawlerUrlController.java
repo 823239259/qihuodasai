@@ -2,7 +2,6 @@ package com.tzdr.cms.controller.crawler;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +20,8 @@ import com.tzdr.business.service.crawler.CrawlerUrlParamService;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
+import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTask;
+import com.tzdr.cms.timer.wallstreetcn.Wallstreetn;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.EasyuiUtil;
@@ -124,6 +125,35 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	public JsonResult doDeleteUrlAndParam(HttpServletRequest request,@RequestParam("urlId")String urlId){
 			crawlerService.doDeleteByUrlId(urlId);
 		return new JsonResult(true);
+	}
+	@RequestMapping(value = "/startCrawler",method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResult startCrawler(HttpServletRequest request,@RequestParam("id") String id){
+		JsonResult resultJson = new JsonResult(true);
+		CrawlerUrl crawlerUrl = crawlerService.get(id);
+		if(crawlerUrl == null){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("url不存在");
+		}else{
+			List<CrawlerUrlParam> crawlerUrlParams = crawlerUrlParamService.doGetawlerUrlParamByUrlId(id);
+			StringBuffer buffer = new StringBuffer();
+			int size = crawlerUrlParams.size();
+			for (int i = 0; i < size; i++) {
+				buffer.append(crawlerUrlParams.get(i).getUrlParamValue());
+				if(i != size-1){
+					buffer.append("&");
+				}
+			}
+			Wallstreetn wallstreetn = new Wallstreetn();
+			wallstreetn.setMethod(crawlerUrl.getUrlMethod());
+			wallstreetn.setParam(buffer.toString());
+			wallstreetn.setRule(crawlerUrl.getExecRule());
+			wallstreetn.setUrl(crawlerUrl.getUrlUrl());
+			WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
+			task.start();
+		}
+		
+		return resultJson;
 	}
 	@Override
 	public BaseService<CrawlerUrl> getBaseService() {

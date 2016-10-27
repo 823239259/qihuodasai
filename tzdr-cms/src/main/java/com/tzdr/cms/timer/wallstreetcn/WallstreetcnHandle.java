@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -19,9 +18,12 @@ import com.tzdr.domain.web.entity.CrawlerWallstreetnLiveContent;
 
 public class WallstreetcnHandle {
 	private static Logger logger = LoggerFactory.getLogger(WallstreetcnHandle.class);
-	@Autowired
 	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	/**
+	 * 保存上一次拉取的数据第一条的id
+	 */
+	private static String lastWalklstreetId = "0";
 	/**
 	 * Unicode 转成中文
 	 * @param utfString
@@ -59,6 +61,10 @@ public class WallstreetcnHandle {
 			throw new RuntimeException("请求方式错误");
 		}
 	}
+	/**
+	 * 处理请求返回数据
+	 * @param stringJson
+	 */
 	public  void handleData(String stringJson){
 		List<CrawlerWallstreetnLive> wallstreetnLives = new ArrayList<>();
 		List<CrawlerWallstreetnLiveContent> contents = new ArrayList<>();
@@ -66,14 +72,23 @@ public class WallstreetcnHandle {
 			JSONObject resultData = JSONObject.parseObject(stringJson);
 			JSONArray resultArray = resultData.getJSONArray("result");
 			int size = resultArray.size();
-			Long time = todayTime();
+			Long time = todayTime() / 1000;
 			Long dateTime = new Date().getTime();
 			for (int i = 0; i < size; i++) {
 				JSONObject jsonObject = resultArray.getJSONObject(i);
 				Long wallstreeTime = jsonObject.getLong("createdAt");
-				if(wallstreeTime < time){break;}
+				if(wallstreeTime < time){
+					break;
+				}
 				CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
-				live.setLiveWallstreetnId(jsonObject.getString("id"));
+				String wallId = jsonObject.getString("id");
+				live.setLiveWallstreetnId(wallId);
+				if(wallId.equals(lastWalklstreetId)){
+					break;
+				}
+				if(i == 0){
+					setLastWalklstreetId(wallId);
+				}
 				live.setLiveTitle(jsonObject.getString("title"));
 				live.setLiveCreatetime(dateTime);
 				live.setLiveUpdatetime(dateTime);
@@ -91,6 +106,22 @@ public class WallstreetcnHandle {
 			logger.info("请求数据异常");
 		}
 	}
+	
+	public CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {
+		return crawlerWallstreetnLiveService;
+	}
+	public void setCrawlerWallstreetnLiveService(CrawlerWallstreetnLiveService crawlerWallstreetnLiveService) {
+		this.crawlerWallstreetnLiveService = crawlerWallstreetnLiveService;
+	}
+	public static String getLastWalklstreetId() {
+		return lastWalklstreetId;
+	}
+	public static void setLastWalklstreetId(String lastWalklstreetId) {
+		if(WallstreetcnHandle.lastWalklstreetId.equals(lastWalklstreetId)){
+			return;
+		}
+		WallstreetcnHandle.lastWalklstreetId = lastWalklstreetId;
+	}
 	public static Long todayTime(){
 		Long dateTime = new Date().getTime();
 		String date = df.format(dateTime);
@@ -99,9 +130,6 @@ public class WallstreetcnHandle {
 		} catch (ParseException e) {
 			return dateTime;
 		}
-	}
-	public static void main(String[] args) {
-		System.out.println(WallstreetcnHandle.todayTime());
 	}
 	public static String httpGetWalls(Wallstreetn wallstreetn){
 		return HttpUrl.httpGet(wallstreetn.getUrl(), wallstreetn.getParam());
