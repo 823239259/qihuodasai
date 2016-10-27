@@ -102,6 +102,7 @@ public class ResourceService  extends BaseServiceImpl<Resource, ResourceDao>  {
         Set<String> userPermissions = userAuthService.findStringPermissions(user);
 
         Iterator<Resource> iter = resources.iterator();
+        
         while (iter.hasNext()) {
             if (!hasPermission(iter.next(), userPermissions)) {
                 iter.remove();
