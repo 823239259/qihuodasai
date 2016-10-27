@@ -75,7 +75,7 @@
                     <td wdith="32%">初始可持仓手数</td>
                     <td width="13%" style="position: relative;">交易手续费(￥)
                     	<a id="suyr" style="position: relative; top: 4px;" href="javascript:void(0);"><img src="${ctx}/static/images/cx/icon_07.png"></a>
-                    	<p id="suts" style="display: none; position: absolute; top: -21px; font-size: 13px; line-height: 23px; width: 234px; border: 1px solid #fc3; right: -7px; background: #fff;">
+                    	<p id="suts" style="display: none; position: absolute; top: -21px; font-size: 13px; line-height: 23px; width: 340px; border: 1px solid #fc3; right: -7px; background: #fff;">
                     		<span>买入、卖出一手时各收取该数额（人民币）的交易手续费</span>
                     		<img style="float: right; right: 15px; position: absolute; top: 23px;" src="${ctx}/static/images/cx/icon_08.png">
                     	</p>
