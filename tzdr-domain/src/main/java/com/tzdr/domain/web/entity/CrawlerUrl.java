@@ -48,6 +48,10 @@ public class CrawlerUrl extends BaseEntity{
 	 * 最新一条数据的id
 	 */
 	private String lastWallstreetnId;
+	/**
+	 * 第三方最新一条数据的时间
+	 */
+	private String lastWallstreetnTime;
 	public String getUrlTitle() {
 		return urlTitle;
 	}

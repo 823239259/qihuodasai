@@ -19,6 +19,10 @@ public class CrawlerWallstreetnLive extends BaseEntity{
 	 */
 	private String liveWallstreetnId;
 	/**
+	 * 数据类型（1-全球，2-A股，4-美股）
+	 */
+	private String liveType;
+	/**
 	 * 创建时间
 	 */
 	private Long liveCreatetime;
@@ -51,11 +55,18 @@ public class CrawlerWallstreetnLive extends BaseEntity{
 	public void setLiveUpdatetime(Long liveUpdatetime) {
 		this.liveUpdatetime = liveUpdatetime;
 	}
-	
-	
-	public CrawlerWallstreetnLive(String liveTitle, String liveWallstreetnId, Long liveCreatetime, Long liveUpdatetime) {
+	public String getLiveType() {
+		return liveType;
+	}
+	public void setLiveType(String liveType) {
+		this.liveType = liveType;
+	}
+	public CrawlerWallstreetnLive(String liveTitle, String liveWallstreetnId, String liveType, Long liveCreatetime,
+			Long liveUpdatetime) {
+		super();
 		this.liveTitle = liveTitle;
 		this.liveWallstreetnId = liveWallstreetnId;
+		this.liveType = liveType;
 		this.liveCreatetime = liveCreatetime;
 		this.liveUpdatetime = liveUpdatetime;
 	}

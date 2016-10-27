@@ -5,7 +5,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WallstreetcnTimer{
+	private static Logger logger = LoggerFactory.getLogger(WallstreetcnTimer.class);
 	/**
 	 * 正在执行的定时任务
 	 */
@@ -45,7 +49,6 @@ public class WallstreetcnTimer{
 		WallstreetcnTimer.timer = timer;
 	}
 
-
 	/**
 	 * 停止指定任务
 	 * @param key
@@ -55,12 +58,14 @@ public class WallstreetcnTimer{
 		map.get(key).cancel();
 		timer.purge();
 		removeTimer(key);
+		logger.info("任务停止：" + key);
 	}
 	/**
 	 * 将任务加入到任务列表中
 	 */
 	public  void addTimer(String key,WallstreetcnTask value){
 		map.put(key, value);
+		logger.info("任务加入:" + key);
 	}
 	/**
 	 * 将任务从任务列表移除

@@ -22,7 +22,6 @@ public class WallstreetcnHandle {
 	private static Logger logger = LoggerFactory.getLogger(WallstreetcnHandle.class);
 	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
 	private CrawlerUrlService crawlerUrlService;
-	
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	/**
 	 * 当前请求的url的对象
@@ -177,8 +176,10 @@ public class WallstreetcnHandle {
 					crawlerUrlService.update(crawlerUrl);
 				}
 				CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
+				String[] channelSet = jsonObject.getString("channelSet").split(",");
 				live.setLiveWallstreetnId(wallId);
 				live.setLiveTitle(jsonObject.getString("title"));
+				live.setLiveType(channelSet[0]);
 				live.setLiveCreatetime(dateTime);
 				live.setLiveUpdatetime(dateTime);
 				CrawlerWallstreetnLiveContent content = new CrawlerWallstreetnLiveContent();

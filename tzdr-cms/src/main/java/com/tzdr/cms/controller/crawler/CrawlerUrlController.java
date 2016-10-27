@@ -137,7 +137,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/startCrawler",method = RequestMethod.GET)
+	@RequestMapping(value = "/startCrawler",method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult startCrawler(HttpServletRequest request,@RequestParam("id") String id){
 		JsonResult resultJson = new JsonResult(true);
@@ -146,30 +146,35 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 			resultJson.setSuccess(false);
 			resultJson.setMessage("url不存在");
 		}else{
-			List<CrawlerUrlParam> crawlerUrlParams = crawlerUrlParamService.doGetawlerUrlParamByUrlId(id);
-			StringBuffer buffer = new StringBuffer();
-			int size = crawlerUrlParams.size();
-			for (int i = 0; i < size; i++) {
-				CrawlerUrlParam crawlerUrlParam = crawlerUrlParams.get(i);
-				buffer.append(crawlerUrlParam.getUrlParamKey()+"="+crawlerUrlParam.getUrlParamValue());
-				if(i != size-1){
-					buffer.append("&");
+			if(crawlerUrl.getStatus().equals("1")){
+				resultJson.setSuccess(false);
+				resultJson.setMessage("任务正在执行,请勿重复开启");
+			}else{
+				List<CrawlerUrlParam> crawlerUrlParams = crawlerUrlParamService.doGetawlerUrlParamByUrlId(id);
+				StringBuffer buffer = new StringBuffer();
+				int size = crawlerUrlParams.size();
+				for (int i = 0; i < size; i++) {
+					CrawlerUrlParam crawlerUrlParam = crawlerUrlParams.get(i);
+					buffer.append(crawlerUrlParam.getUrlParamKey()+"="+crawlerUrlParam.getUrlParamValue());
+					if(i != size-1){
+						buffer.append("&");
+					}
 				}
+				Wallstreetn wallstreetn = new Wallstreetn();
+				wallstreetn.setMethod(crawlerUrl.getUrlMethod());
+				wallstreetn.setParam(buffer.toString());
+				wallstreetn.setRule(crawlerUrl.getExecRule());
+				wallstreetn.setUrl(crawlerUrl.getUrlUrl());
+				crawlerUrl.setStatus("1");//设置该url执行状态
+				crawlerService.update(crawlerUrl);
+				WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
+				WallstreetcnHandle handle = new WallstreetcnHandle();
+				WallstreetcnHandle.setCrawlerUrl(crawlerUrl);
+				handle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
+				handle.setCrawlerUrlService(crawlerService);
+				task.setWallstreetcnHandle(handle);
+				task.start();
 			}
-			Wallstreetn wallstreetn = new Wallstreetn();
-			wallstreetn.setMethod(crawlerUrl.getUrlMethod());
-			wallstreetn.setParam(buffer.toString());
-			wallstreetn.setRule(crawlerUrl.getExecRule());
-			wallstreetn.setUrl(crawlerUrl.getUrlUrl());
-			crawlerUrl.setStatus("1");//设置该url执行状态
-			crawlerService.update(crawlerUrl);
-			WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
-			WallstreetcnHandle handle = new WallstreetcnHandle();
-			WallstreetcnHandle.setCrawlerUrl(crawlerUrl);
-			handle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
-			handle.setCrawlerUrlService(crawlerService);
-			task.setWallstreetcnHandle(handle);
-			task.start();
 		}
 		return resultJson;
 	}
@@ -179,7 +184,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/stopCrawler",method = RequestMethod.GET)
+	@RequestMapping(value = "/stopCrawler",method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult stopCrawler(HttpServletRequest request,@RequestParam("id") String id){
 		JsonResult resultJson = new JsonResult(true);
@@ -188,9 +193,14 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 			resultJson.setSuccess(false);
 			resultJson.setMessage("url不存在");
 		}else{
-			WallstreetcnTimer.stop(crawlerUrl.getUrlUrl());
-			crawlerUrl.setStatus("0");//设置该url停止状态
-			crawlerService.update(crawlerUrl);
+			if(crawlerUrl.getStatus().equals("0")){
+				resultJson.setSuccess(false);
+				resultJson.setMessage("任务未执行,请勿操作停止任务!");
+			}else{
+				WallstreetcnTimer.stop(crawlerUrl.getUrlUrl());
+				crawlerUrl.setStatus("0");//设置该url停止状态
+				crawlerService.update(crawlerUrl);
+			}
 		}
 		return resultJson;
 	}
