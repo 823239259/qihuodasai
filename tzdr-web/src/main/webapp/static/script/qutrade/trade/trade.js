@@ -289,7 +289,7 @@ function addFundsDetails(param){
 				'	<li class = "detail_profitRate">'+profitRate+'</li>'+
 				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
 				'</ul>';
-	$("#account_title .tab_lis").append(html);
+	$("#account_gdt1").append(html);
 	tabOn();
 	localCacheFundDetail[currencyNo]=param;
 	addFundDetailBindClick(currencyNo);
