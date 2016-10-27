@@ -22,6 +22,7 @@
 	</div>
 </div>	-->
 <!--弹出广告 end-->
+
 	<header class="mui-bar mui-bar-nav own-topbg"> 
 		<a href="javascript:void(0);" id="toNews"><img src="images/news.png" id="newsimg"></a>
 		<h1 id="nav-title" class="mui-title">操盘申请</h1>
@@ -62,8 +63,8 @@
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
 					<img src="images/icon4.png" />
-					<h2>一个账号可交易15个品种</h2>
-					<p>交易手续费：<i id="cp_tranfee">49元/手</i>起</p>
+					<h2>一个账号可交易16个品种</h2>
+					<p>交易手续费：<i id="cp_tranfee">24.5元/单边</i>起</p>
 					<p class="buttomP"><label>交易时间：</label><span>09:05-23:55</span></p>
 					
 				</a>
@@ -72,7 +73,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cn">
 						<img src="images/icon1.png" />
 						<h2>A股行情风向标</h2>
-						<p>交易手续费：<i id="cn_tranfee">0元/手</i></p>
+						<p>交易手续费：<i id="cn_tranfee">0元/单边</i></p>
 						<p class="buttomP"><label>交易时间：</label><span>9:05-16:30,17:20-23:55</span></p>	
 				</a>
 			</li>
@@ -80,7 +81,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0);" id="hsi">
 					<img src="images/icon2.png" />
 					<h2>港版IF 全网最低手续费</h2>
-					<p>交易手续费：<i id="hsi_tranfee">0元/手</i></p>
+					<p>交易手续费：<i id="hsi_tranfee">0元/单边</i></p>
 					<p class="buttomP"><label>交易时间：</label><span>09:20-11:55,13:05-16:25,17:20-23:40</span></p>	
 				</a>
 			</li>
@@ -88,7 +89,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0);" id="cl">
 						<img src="images/icon3.png" />
 					<h2>全天候交易 夜盘行情更好</h2>
-					<p>交易手续费：<i id="cl_tranfee">0元/手</i></p>
+					<p>交易手续费：<i id="cl_tranfee">0元/单边</i></p>
 					<p class="buttomP"><label>交易时间：</label><span>09:05-23:55</span></p>
 				</a>
 			</li>
@@ -324,16 +325,16 @@
 						mui.each(result.data.tradeList,function(i,item){
 							switch (item.type){
 								case 0:
-									document.getElementById("cn_tranfee").innerHTML=item.tradeFees+"元/手";
+									document.getElementById("cn_tranfee").innerHTML=item.tradeFees+"元/单边";
 									break;
 								case 6:
-									document.getElementById("cl_tranfee").innerHTML=item.tradeFees+"元/手";
+									document.getElementById("cl_tranfee").innerHTML=item.tradeFees+"元/单边";
 									break;
 								case 7:
-									document.getElementById("hsi_tranfee").innerHTML=item.tradeFees+"元/手";
+									document.getElementById("hsi_tranfee").innerHTML=item.tradeFees+"元/单边";
 									break;
 								case 9:
-									document.getElementById("lhsi_tranfee").innerHTML=item.tradeFees+"元/手";
+									document.getElementById("lhsi_tranfee").innerHTML=item.tradeFees+"元/单边";
 								break;
 								default:
 									break;

@@ -247,6 +247,10 @@ var localCacheFundDetail = {};
  */
 var fundsDetailsIndex = 0;
 /**
+ * 全局保存币种
+ */
+var localCurrencyNo = [];
+/**
  * 增加资金明细
  * @param param
  */
@@ -289,6 +293,7 @@ function addFundsDetails(param){
 	tabOn();
 	localCacheFundDetail[currencyNo]=param;
 	addFundDetailBindClick(currencyNo);
+	localCurrencyNo[fundsDetailsIndex] = currencyNo;
 	updateFundsDetailsIndex();
 } 
 /**
@@ -581,9 +586,9 @@ function addPostion(param){
 			}
 			floatingProfit = floatP +":"+ currencyNo; 
 		}
-		
+		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
-		var html = '<ul class="tab_content '+cls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
+		var html = '<ul class="tab_content '+cls+' '+currcls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
 					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
 					'	<li  class = "position2" style="width: 80px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -1575,23 +1580,22 @@ function doGetModifyOrderBasicParam(obj){
  * 计算列表的浮动盈亏
  */
 function sumListfloatingProfit(){
-	var price  = 0;
-	for (var i = 0; i < postionIndex; i++) {
-		var obj = $(".postion-index"+i+"");
-		if(obj.html() == undefined){
+	var currencySize = localCurrencyNo.length;
+	for(var i = 0 ; i < currencySize ; i++){
+		var currencyNo = localCurrencyNo[i];
+		if(currencyNo == undefined || currencyNo.length <= 0){
 			continue;
 		}
-		var currencyNo =  $("ul[data-index-position='"+i+"'] li[class = 'position6']").text();
-		var float =  $("ul[data-index-position='"+i+"'] li[class = 'position10']").text();
-		var currencyObj = $(".currencyNo"+currencyNo+"");
-		if(currencyObj.html() == undefined){
-			continue;
+		var postionDom = $(".position-currency"+currencyNo);
+		if(postionDom.html() == undefined || postionDom.length <= 0){
+			continue
 		}
+		var price  = 0;
+		$.each(postionDom,function(i,item){
+			var $this = $(this);
+			price = price + Number($this.find("li[class = 'position10']").text());
+		});
 		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
-		var  detailCurrencyRateDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_currencyRate']");
-		var floatingProfitText = floatingProfitDom.text();
-		var detailCurrencyRateText = parseFloat(detailCurrencyRateDom.text()).toFixed(3);
-		price = price + float * 1;
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
 	}
 }
@@ -1668,8 +1672,9 @@ function clearLocalCacheData(){
 	localCacheCurrencyAndRate = {};
 	orderIndex=0;
 	fundsDetailsIndex = 0;
-	var loadCachFloatingProfit = {};
-	var loadCachCloseProfit = {};
+	loadCachFloatingProfit = {};
+	loadCachCloseProfit = {};
+	localCurrencyNo = {};
 }
 /**
  * 输入价格或数量验证 
