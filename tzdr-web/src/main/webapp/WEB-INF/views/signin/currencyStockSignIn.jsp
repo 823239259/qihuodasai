@@ -93,7 +93,7 @@
 	<div class="tp_main9"><img src="${ctx}/static/images/currencyStockSignIn/img_27.jpg" alt="资金安全 放心交易"></div>
 	<div class="tp_main9"><img src="${ctx}/static/images/currencyStockSignIn/img_28.jpg" alt="行业标杆 最具信赖的互联网机构"></div>
 	<div class="tp_main9"><img src="${ctx}/static/images/currencyStockSignIn/img_29.jpg" alt="协议安全 电子数据保全安全可靠">></div>
-<div class="tp_foot">Copyright © 2016 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
+<div class="tp_foot">Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</div>
 <!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
 <span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <script type="text/javascript">

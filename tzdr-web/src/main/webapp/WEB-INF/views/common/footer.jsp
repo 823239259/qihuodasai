@@ -1,10 +1,10 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
-<div style="background: #333;height: 327px;" id="ungundontiao">
+<div style="background: #333;height: 338px;" id="ungundontiao">
 <div class="copyright">
     <div class="copyright_content">
-    	<div style="width: 100%; height: 160px;">
+    	<div style="width: 100%; height: 156px;">
 	        <div class="copyright_link">
 	            <ul class="link">
 	                <li><a href="${ctx }/news/newsdata?colname=ff8080814e956d02014e95788e300001" target="_blank">维胜动态</a></li>
@@ -35,7 +35,6 @@
 	            <h3>交流互动</h3>
 	            <p>期货操盘QQ群：</p>
 	            <p><a target="_blank" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&aty=0&a=0&curl=&ty=1">4008528008</a></p>
-	            <p>国际期货</p>
 	        </div>
         </div>
         <div class="enterprise_link">

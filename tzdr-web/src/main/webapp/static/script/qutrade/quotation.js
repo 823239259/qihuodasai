@@ -109,11 +109,10 @@ $(function() {
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
-                    dataall[i][2],
-                    dataall[i][4],
-                    dataall[i][3],
-                    dataall[i][1],
-                    dataall[i][7]
+                    parseFloat(dataall[i][2].toFixed(4)),
+                    parseFloat(dataall[i][4].toFixed(4)),
+                    parseFloat(dataall[i][3].toFixed(4)),
+                    parseFloat(dataall[i][1].toFixed(4))
                 ]);
                 volume.push([
                     timestamp,
@@ -269,10 +268,10 @@ $(function() {
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
-                    dataall[i][2],
-                    dataall[i][4],
-                    dataall[i][3],
-                    dataall[i][1]
+                    parseFloat(dataall[i][2].toFixed(4)),
+                    parseFloat(dataall[i][4].toFixed(4)),
+                    parseFloat(dataall[i][3].toFixed(4)),
+                    parseFloat(dataall[i][1].toFixed(4))
                 ]);
                 volume.push([
                     timestamp,

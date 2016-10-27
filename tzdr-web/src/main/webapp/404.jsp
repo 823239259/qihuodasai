@@ -150,7 +150,7 @@
              <a href="${link.linkUrl}" target="_blank">${link.name}</a>
            </c:forEach>
         </div>
-        <p>Copyright©2015 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</p>
+        <p>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</p>
     </div>
       <div class="cp_img" style="text-align:center;">
     	<a href="http://webscan.360.cn/index/checkwebsite/url/www.vs.com"  target="_blank" >
