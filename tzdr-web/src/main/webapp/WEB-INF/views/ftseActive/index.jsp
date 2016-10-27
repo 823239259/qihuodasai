@@ -252,7 +252,7 @@
 		          </tr>
 		          <tr>
 		            <td class="first">交易软件</td>
-		            <td class="font"><a href="http://update.tzdr.com/Future/download/foreigntrade.exe" style="color:#3d9fe1; padding-right:20px;">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=0" target="_blank"  style="color:#3d9fe1; padding-right:20px;">查看交易说明</a></td>
+		            <td class="font"><a href="http://update.vs.com/Future/download/foreigntrade.exe" style="color:#3d9fe1; padding-right:20px;">交易软件下载</a><a href="${ctx}/help?tab=rule&leftMenu=0" target="_blank"  style="color:#3d9fe1; padding-right:20px;">查看交易说明</a></td>
 		          </tr>
 		        </table>
 		

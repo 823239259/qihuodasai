@@ -39,7 +39,7 @@ $(document).ready(function(){
 			<div class="cp_paybtn">
 				<div class="cp_pb_font"></div>
 				
-				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="http://update.tzdr.com/Future/download/boyidashi.exe">下载交易软件</a></div>
+				<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="http://update.vs.com/Future/download/boyidashi.exe">下载交易软件</a></div>
 				<c:if test="${businessType==20}">
 					<div class="uc_paybtn cp_btnsuc" style="float:left;"><a href="${ctx}/help?tab=rule&leftMenu=2">查看交易说明</a></div>
 				</c:if>
