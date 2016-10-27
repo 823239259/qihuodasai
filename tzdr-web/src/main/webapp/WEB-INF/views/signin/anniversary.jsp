@@ -89,7 +89,7 @@
 	<div class="tp_main3"><img src="${ctx}/static/images/anniversarySigin/img_17.jpg" ></div>
 	<div class="tp_main4">
 		<img src="${ctx}/static/images/anniversarySigin/img_18.jpg" />
-		<a href="http://zhibo.tzdr.com"><img src="${ctx}/static/images/anniversarySigin/button.jpg" class="button"/></a>
+		<a href="http://zhibo.vs.com"><img src="${ctx}/static/images/anniversarySigin/button.jpg" class="button"/></a>
 	</div>
 	<div class="tp_main2"><img src="${ctx}/static/images/anniversarySigin/img_19.jpg" alt="体验五星服务"></div>
 	<div class="tp_main2"><img src="${ctx}/static/images/anniversarySigin/img_20.jpg" alt="光速开户、结算,任何疑难问题均有专属顾问解答"></div>
@@ -99,7 +99,7 @@
 	<div class="tp_main6"><img src="${ctx}/static/images/anniversarySigin/img_24.jpg" ></div>
 	<div class="tp_main6"><img src="${ctx}/static/images/anniversarySigin/img_25.jpg" ></div>
 	<div class="tp_main6_l"><img src="${ctx}/static/images/anniversarySigin/img_26.jpg" ></div>
-<div class="tp_foot">Copyright © 2016 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
+<div class="tp_foot">Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</div>
 <!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
 <span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <script type="text/javascript">

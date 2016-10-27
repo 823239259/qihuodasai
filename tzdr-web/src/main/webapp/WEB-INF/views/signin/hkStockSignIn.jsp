@@ -85,7 +85,7 @@
 <div class="tp_main2" style="background:#fafafa;"><img src="${ctx}/static/images/hkStockSignIn/img_15.jpg" ></div>
 <div class="tp_main2" style="background:#fafafa;"><img src="${ctx}/static/images/hkStockSignIn/img_16.jpg" ></div>
 <div class="tp_main3" style="background:#fafafa;"><img src="${ctx}/static/images/hkStockSignIn/img_17.jpg" ></div>
-<div class="tp_foot">Copyright © 2015 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
+<div class="tp_foot">Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</div>
 <!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
 <span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <script type="text/javascript">
