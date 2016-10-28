@@ -137,6 +137,7 @@ function handleData(evt){
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
 			appendPostionAndUpdate(tradeParam);
+			updateOrderUpdatePosition(tradeParam);
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
@@ -712,6 +713,16 @@ function updatePostion(param){
 		postContract.holdNum = oldHoldNum;
 		postContract.drection = drectionText;
 	}
+}
+/**
+ * 改单成功更新持仓信息
+ */
+function updateOrderUpdatePosition(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode = commodityNo+contractNo;
+	var $holdPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
+	$holdPrice.text(param.TradePrice);
 }
 /**
  * 根据行情更新持仓列表
