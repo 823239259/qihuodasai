@@ -367,6 +367,10 @@ function getLocalCacheCommodity(obj){
  * @param param
  */
 function updateFloatingfit(param){
+	var html =  $("#hold_gdt1").html();
+	if(html.length == 0){
+		$("#floatingProfit").text(0.00);
+	}
 	var lastPrice = param.LastPrice;
 	var newCommdityNo = param.CommodityNo;
 	var newContractNo = param.ContractNo;
