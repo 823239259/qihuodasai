@@ -2031,7 +2031,7 @@
         }
         var z = a.color, E = a.each, H = a.getTZOffset, v = a.merge, n = a.pick, k = a.win;
         a.defaultOptions = {
-            colors: "#7cb5ec #0cf49b #6ba583 #b52cc5 #64ae0b #ff6600 #e4d354 #2b908f #f45b5b #91e8e1".split(" "),
+            colors: "#7cb5ec #6ba583 #6ba583 #b52cc5 #64ae0b #ff6600 #e4d354 #2b908f #f45b5b #91e8e1".split(" "),
             symbols: [ "circle", "diamond", "square", "triangle", "triangle-down" ],
             lang: {
                 loading: "Loading...",
