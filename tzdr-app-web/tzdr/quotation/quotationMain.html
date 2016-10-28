@@ -332,6 +332,12 @@
 					id:"tutorial",
 				});
 			})
+			setstatus();
+			function setstatus(){
+			if(plus.navigator.isFullscreen()){
+				plus.navigator.setFullscreen(false);
+			}
+		};
 			});
 			
 		</script>

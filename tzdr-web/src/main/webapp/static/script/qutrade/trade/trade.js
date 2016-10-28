@@ -386,13 +386,16 @@ function updateOrder(param){
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
 	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
-	var $tradeNum = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order7']");
-	var $statusMsg = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order10']");
+	var $orderPrice = $("ul[data-order-order='"+orderId+"'] li[class = 'order6']");
+	var $tradeNum = $("ul[data-order-order= '"+orderId+"'] li[class = 'order7']");
+	var $statusMsg = $("ul[data-order-order= '"+orderId+"'] li[class = 'order10']");
 	var orderStatus = param.OrderStatus;
 	var tradeNum = param.TradeNum;
+	var orderPrice = param.TradePrice;
 	$orderStatus.text(analysisOrderStatus(orderStatus));
 	$tradeNum.text(tradeNum);	
 	$statusMsg.text(statusMsg);
+	$orderPrice.text(orderPrice);
 };
 /**
  * 缓存挂单的列表信息
@@ -585,6 +588,12 @@ function addPostion(param){
 				floatP = 0.00;
 			}
 			floatingProfit = floatP +":"+ currencyNo; 
+		}
+		if(floatingProfit == undefined){
+			floatingProfit = 0;
+		}
+		if(currencyNo == undefined){
+			currencyNo = "";
 		}
 		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
