@@ -134,15 +134,15 @@ public class WallstreetcnHandle {
 		if(lastWallstreetnTime == null){
 			lastWallstreetnTime = String.valueOf(todayTime() / 1000);
 		}
-		wallstreetn.setParam(wallstreetn.getParam()+"&"+Long.parseLong(lastWallstreetnTime));
+		String param = wallstreetn.getParam() + "&min_update="+Long.parseLong(lastWallstreetnTime);
 		if(method != null && method.length() > 0){
 			if(method.equals("GET")){
-				result = WallstreetcnHandle.httpGetWalls(wallstreetn);
+				result = WallstreetcnHandle.httpGetWalls(wallstreetn.getUrl(),param);
 			}else if(method.equals("POST")){
-				result = WallstreetcnHandle.httpPostWalls(wallstreetn);
+				result = WallstreetcnHandle.httpPostWalls(wallstreetn.getUrl(),param);
 			}
-			String stringJson = convert(result);
-			handleData(stringJson);
+			//String stringJson = convert(result);
+			handleData(result);
 		}else{
 			throw new RuntimeException("请求方式错误");
 		}
@@ -152,7 +152,7 @@ public class WallstreetcnHandle {
 	 * @param stringJson
 	 */
 	public synchronized void handleData(String param){
-		String stringJson = param.replace("\\", "");
+		String stringJson = param;
 		List<CrawlerWallstreetnLive> wallstreetnLives = new ArrayList<>();
 		List<CrawlerWallstreetnLiveContent> contents = new ArrayList<>();
 		logger.info("请求成功:"+stringJson);
@@ -184,7 +184,7 @@ public class WallstreetcnHandle {
 			logger.info("共获取:"+size);
 			crawlerWallstreetnLiveService.doSavesBatch(wallstreetnLives, contents);
 		} catch (Exception e) {
-			logger.info("请求数据异常" + e);
+			logger.info("请求数据异常" + e.getMessage());
 		}
 	}
 	/**
@@ -273,10 +273,10 @@ public class WallstreetcnHandle {
 			return dateTime;
 		}
 	}
-	public static String httpGetWalls(Wallstreetn wallstreetn){
-		return HttpUrl.httpGet(wallstreetn.getUrl(), wallstreetn.getParam());
+	public static String httpGetWalls(String url, String param){
+		return HttpUrl.httpGet(url, param);
 	}
-	public static String httpPostWalls(Wallstreetn wallstreetn){
-		return HttpUrl.httpPost(wallstreetn.getUrl(), wallstreetn.getParam());
+	public static String httpPostWalls(String url, String param){
+		return HttpUrl.httpPost(url, param);
 	}
 }
