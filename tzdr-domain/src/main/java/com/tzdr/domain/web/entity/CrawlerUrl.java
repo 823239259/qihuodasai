@@ -52,6 +52,10 @@ public class CrawlerUrl extends BaseEntity{
 	 * 第三方最新一条数据的时间
 	 */
 	private String lastWallstreetnTime;
+	/**
+	 * 开始截取数据的时间
+	 */
+	private String startTime;
 	public String getUrlTitle() {
 		return urlTitle;
 	}
@@ -114,6 +118,20 @@ public class CrawlerUrl extends BaseEntity{
 	}
 	public void setLastWallstreetnId(String lastWallstreetnId) {
 		this.lastWallstreetnId = lastWallstreetnId;
+	}
+	
+	public String getLastWallstreetnTime() {
+		return lastWallstreetnTime;
+	}
+	public void setLastWallstreetnTime(String lastWallstreetnTime) {
+		this.lastWallstreetnTime = lastWallstreetnTime;
+	}
+	
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 	public CrawlerUrl() {
 		super();

@@ -28,6 +28,10 @@ public class WallstreetcnHandle {
 	 */
 	private static  CrawlerUrl crawlerUrl;
 	/**
+	 * 保存最新增量开始时间
+	 */
+	private Long lastWallstreetnTime;
+	/**
 	 * Unicode 转成中文
 	 * @param utfString
 	 * @return
@@ -156,41 +160,25 @@ public class WallstreetcnHandle {
 			JSONObject resultData = JSONObject.parseObject(stringJson);
 			JSONArray resultArray = resultData.getJSONArray("results");
 			int size = resultArray.size();
-			Long time = todayTime() / 1000;
 			Long dateTime = new Date().getTime();
 			for (int i = 0; i < size; i++) {
 				JSONObject jsonObject = resultArray.getJSONObject(i);
-				Long wallstreeTime = jsonObject.getLong("createdAt");
-				//如果返回树的创建时间不是当前时间则不需要做存储
-				if(wallstreeTime < time){
-					break;
-				}
-				String wallId = jsonObject.getString("id");
-				//如果返回数据的id和数据库保存的最新一条数据库的id匹配则：此次请求的数据为重复数据，不需要做存储
-				if(wallId.equals(crawlerUrl.getLastWallstreetnId())){
-					break;
-				}
-				if(i == 0){
-					//更新最新数据第一条数据的id
-					crawlerUrl.setLastWallstreetnId(wallId);
-					crawlerUrlService.update(crawlerUrl);
-				}
-				CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
-				String[] channelSet = jsonObject.getString("channelSet").split(",");
-				live.setLiveWallstreetnId(wallId);
-				live.setLiveTitle(jsonObject.getString("title"));
-				live.setLiveType(channelSet[0]);
+				CrawlerWallstreetnLive live = setCrawlerWallstreetnLive(jsonObject);
+				CrawlerWallstreetnLiveContent content = setCrawlerWllStreetnLiveContent(jsonObject);
 				live.setLiveCreatetime(dateTime);
 				live.setLiveUpdatetime(dateTime);
-				CrawlerWallstreetnLiveContent content = new CrawlerWallstreetnLiveContent();
 				content.setLiveContentCreatetime(dateTime);
 				content.setLiveContentUpdatetime(dateTime);
-				content.setLiveContentHtml(jsonObject.getString("contentHtml"));
-				content.setLiveContentText(jsonObject.getString("contentText"));
-				content.setLiveContentImage(jsonObject.getJSONObject("text").getString("contentExtra"));
-				content.setText(stringJson);
 				wallstreetnLives.add(live);
 				contents.add(content);
+			}
+			if(size > 0){
+				JSONObject jsonObject = resultArray.getJSONObject(0);
+				String wallId = jsonObject.getString("id");
+				//更新最新数据第一条数据的id
+				crawlerUrl.setLastWallstreetnId(wallId);
+				crawlerUrlService.update(crawlerUrl);
+			
 			}
 			logger.info("共获取:"+size);
 			crawlerWallstreetnLiveService.doSavesBatch(wallstreetnLives, contents);
@@ -198,7 +186,61 @@ public class WallstreetcnHandle {
 			logger.info("请求数据异常" + e);
 		}
 	}
-	
+	/**
+	 * 设置保存的列表信息
+	 * @return
+	 */
+	public CrawlerWallstreetnLive setCrawlerWallstreetnLive(JSONObject jsonObject){
+		CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
+		live.setLiveWallstreetnId(jsonObject.getString("id"));
+		live.setLiveTitle(jsonObject.getString("title"));
+		live.setLiveType("");
+		live.setChannelSet(jsonObject.getString("channelSet"));
+		live.setCodeType(jsonObject.getString("codeType"));
+		live.setCommentStatus(jsonObject.getString("commentStatus"));
+		live.setCreatedAt(jsonObject.getLong("createAt"));
+		live.setUpdatedAt(jsonObject.getLong("updateAt"));
+		live.setImportance(jsonObject.getString("importance"));
+		live.setPublished("0");
+		live.setStar(jsonObject.getString("start"));
+		live.setType(jsonObject.getString("type"));
+		return live;
+	}
+	/**
+	 * 设置保存的内容信息
+	 * @return
+	 */
+	public CrawlerWallstreetnLiveContent setCrawlerWllStreetnLiveContent(JSONObject jsonObject){
+		CrawlerWallstreetnLiveContent content = new CrawlerWallstreetnLiveContent();
+		content.setLiveContentHtml(jsonObject.getString("contentHtml"));
+		content.setLiveContentText(jsonObject.getString("contentText"));
+		JSONObject textJson = jsonObject.getJSONObject("text");
+		content.setContentExtra(textJson.getString("contentExtra"));
+		content.setContentFollowup(textJson.getString("contentFollowup"));
+		content.setContentAnalysis(textJson.getString("contentAnalysis"));
+		content.setMoreText(jsonObject.getString("moreText"));
+		content.setMoreImgs(jsonObject.getString("moreImgs"));
+		content.setImageUrls(jsonObject.getString("imageUrls"));
+		content.setNodeColor(jsonObject.getString("node_color"));
+		content.setNodeFormat(jsonObject.getString("node_format"));
+		content.setCommentCount(jsonObject.getString("commentCount"));
+		content.setContentAnalysis(jsonObject.getString("contentAnalysis"));
+		content.setContentExtra(jsonObject.getString("contentExtra"));
+		content.setContentFollowup(jsonObject.getString("contentFollowup"));
+		content.setData(jsonObject.getString("data"));
+		content.setDetailPost(jsonObject.getString("detailPost"));
+		content.setHasMore(jsonObject.getString("hasMore"));
+		content.setImage(jsonObject.getString("image"));
+		content.setImageCount(jsonObject.getString("imageCount"));
+		content.setShareCount(jsonObject.getString("shareCount"));
+		content.setSourceName(jsonObject.getString("sourceName"));
+		content.setSourceUrl(jsonObject.getString("sourceUrl"));
+		content.setUserId(jsonObject.getString("userId"));
+		content.setVideo(jsonObject.getString("video"));
+		content.setVideoCount(jsonObject.getString("videoCount"));
+		content.setCategorySet(jsonObject.getString("categorySet"));
+		return content;
+	}
 	public CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {
 		return crawlerWallstreetnLiveService;
 	}
@@ -219,6 +261,13 @@ public class WallstreetcnHandle {
 	}
 	public static void setCrawlerUrl(CrawlerUrl crawlerUrl) {
 		WallstreetcnHandle.crawlerUrl = crawlerUrl;
+	}
+	
+	public Long getLastWallstreetnTime() {
+		return lastWallstreetnTime;
+	}
+	public void setLastWallstreetnTime(Long lastWallstreetnTime) {
+		this.lastWallstreetnTime = lastWallstreetnTime;
 	}
 	public static Long todayTime(){
 		Long dateTime = new Date().getTime();
