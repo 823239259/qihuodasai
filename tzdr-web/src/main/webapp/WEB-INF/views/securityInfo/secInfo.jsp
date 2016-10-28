@@ -445,6 +445,14 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+$(".tck01 .close").click(function(){
+	$(".tck01").hide();
+});
+$(".tck01 .btn-h02").click(function(){
+	$(".tck01").hide();
+});
+</script>
 <%@include file="../common/footer.jsp"%>
 <%@ include file="../common/dsp.jsp"%>
 </body>

@@ -292,6 +292,26 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    };
+		     rawDataTen = [];
+		     CandlestickVolumeDataTen ={
+		    	time:[],
+		    	volume:[]
+		    }
+		     newDataTen =[];
+		     tenCandlestickVolumeTime=[];
+		     tenCandlestickVolumeVolume=[];
+		     rawDataThree = [];
+		     CandlestickVolumeDataThree ={
+		    	time:[],
+		    	volume:[]
+		    };
+		    newDataThree =[]; 
+		    rawDataFive = [];
+		    CandlestickVolumeDataFive={
+		    	time:[],
+		    	volume:[]
+		    }
+		    newDataFive=[]; 
     	sendHistoryMessage();
     	
     })
