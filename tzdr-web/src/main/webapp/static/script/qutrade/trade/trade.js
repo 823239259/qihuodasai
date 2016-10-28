@@ -651,14 +651,14 @@ function updatePostion(param){
 	var $floatingProfit = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position4']");
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($openAvgPrice.text()) *  oldHoldNum;
-	var price = parseFloat(openAvgPrice) * holdNum;
+	var oldPrice = parseFloat($openAvgPrice.text()).toFixed(2) *  oldHoldNum;
+	var price = parseFloat(openAvgPrice).toFixed(2) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
-		price = price + oldPrice;
-		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum);
+		price = parseFloat(price + oldPrice).toFixed(2);
+		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,2);
 		$openAvgPrice.text(openAvgPrice);
-		$holdAvgPrice.text(holdAvgPrice);
+		$holdAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 
@@ -720,14 +720,31 @@ function updatePostion(param){
 	}
 }
 /**
- * 改单成功更新持仓信息
+ * 交易成功更新持仓信息
  */
 function updateOrderUpdatePosition(param){
-	var commodityNo = param.CommodityNo;
+	/*var commodityNo = param.CommodityNo;
 	var contractNo = param.ContractNo;
 	var contractCode = commodityNo+contractNo;
+	var tradeNum = param.TradeNum;
+	var tradePrice = param.TradePrice;
+	var drection = param.Drection;
 	var $holdPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
-	$holdPrice.text(param.TradePrice);
+	if($holdPrice.html() == undefined)return;
+	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
+	var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
+	var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
+	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
+	var oldHoldNum = parseInt($holdNum.text());
+	var price = parseFloat($openAvgPrice.text()).toFixed(2);
+	var oldDrection = $drection.attr("data-drection");
+	if(oldDrection != drection){
+		oldHoldNum = oldHoldNum + tradeNum;
+		var totalPrice = price * oldHoldNum - (tradePrice*tradeNum);
+		var openAvgPrice = doGetOpenAvgPrice(totalPrice,Math.abs(oldHoldNum-tradeNum),2);
+		$openAvgPrice.text(openAvgPrice);
+		$holdAvgPrice.text(openAvgPrice);
+	}*/
 }
 /**
  * 根据行情更新持仓列表
@@ -782,7 +799,7 @@ function updateDesignateByQuote(param){
 function validationPostionIsExsit(param){
 	var contractCode = param.ContractCode;
 	var positionParam = localCachePostion[contractCode];
-	if(positionParam == undefined || positionParam == "undefined" || positionParam == null){
+	if(positionParam == undefined || positionParam == "undefined" || positionParam == null || $("ul[data-tion-position='"+contractCode+"']").html == undefined){
 		return true;
 	}else{
 		return false;
