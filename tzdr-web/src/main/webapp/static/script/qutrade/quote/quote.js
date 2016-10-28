@@ -166,6 +166,8 @@ function quotePush(obj){
 	sumListfloatingProfit();
 	//更新持仓浮动盈亏总和
 	updateHoldProfit();
+	//更新账户资产
+	updateAccountBalance();
 	//更新右边边行情
 	updateRight(param);
 	//初始化设置最新价格
@@ -367,10 +369,6 @@ function getLocalCacheCommodity(obj){
  * @param param
  */
 function updateFloatingfit(param){
-	var html =  $("#hold_gdt1").html();
-	if(html.length == 0){
-		$("#floatingProfit").text(0.00);
-	}
 	var lastPrice = param.LastPrice;
 	var newCommdityNo = param.CommodityNo;
 	var newContractNo = param.ContractNo;

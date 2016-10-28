@@ -172,6 +172,8 @@ var loadCachAccountNo = {};
 var localCacheCurrencyAndRate = {};
 var loadCachFloatingProfit = {};
 var loadCachCloseProfit = {};
+var loadCachTodayBanlance = 0;
+var loadCachTodayCanuse = 0;
 function updateBalance(parama){
 	var currencyNo = parama.CurrencyNo;
 	var accountNo = parama.AccountNo;
@@ -179,15 +181,16 @@ function updateBalance(parama){
 	var deposit = parama.Deposit;
 	var currency = parama.CurrencyRate; 
 	var closeProfit = parama.CloseProfit;
-	var floatingProfit = parama.floatingProfit;
+	/*var floatingProfit = parama.floatingProfit;
 	if(floatingProfit == undefined ){
 		floatingProfit = parama.FloatingProfit
-	}
+	}*/
 	var frozenMoney =parama.FrozenMoney;
 	var todayAmount = parama.TodayAmount;
 	var unExpiredProfit = parama.UnExpiredProfit;
 	var unAccountProfit = parama.UnAccountProfit;
-	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
+	var floatingProfit = $("#floatingProfit").val();
+	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
 	localCacheCurrencyAndRate[currencyNo]  = currency;
 	loadCachBanlance[accountNo] = banlance;
@@ -215,6 +218,8 @@ function updateBalance(parama){
 		$clostFit = $clostFit + loadCachCloseProfit[ac]  * cr;
 		$floatFit = $floatFit + loadCachFloatingProfit[ac] * cr;
 	}
+	loadCachTodayBanlance = $banlance;
+	loadCachTodayCanuse = $canuse;
 	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
@@ -598,7 +603,7 @@ function addPostion(param){
 		}
 		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
-		var html = '<ul class="tab_content '+cls+' '+currcls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
+		var html = '<ul class="tab_content '+cls+' '+currcls+' tab_position" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
 					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
 					'	<li  class = "position2" style="width: 80px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -1606,6 +1611,12 @@ function sumListfloatingProfit(){
 		if(currencyNo == undefined || currencyNo.length <= 0){
 			continue;
 		}
+		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+		var p =  $(".tab_position");
+		if(p.length == 0){
+			floatingProfitDom.text(0.00);
+			continue ;
+		}
 		var postionDom = $(".position-currency"+currencyNo);
 		if(postionDom.html() == undefined || postionDom.length <= 0){
 			continue
@@ -1615,7 +1626,6 @@ function sumListfloatingProfit(){
 			var $this = $(this);
 			price = price + Number($this.find("li[class = 'position10']").text());
 		});
-		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
 	}
 }
@@ -1644,6 +1654,16 @@ function updateHoldProfit(){
 			floatingProfit.text(parseFloat(price).toFixed(2));
 		}
 	}
+}
+/**
+ * 更新账户资产
+ */
+function updateAccountBalance(){
+	var floatingProfit = $("#floatingProfit").text();
+	var todayBalance = $("#todayBalance");
+	var todayCanUse = $("#todayCanUse");
+	todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
+	todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
 }
 /**
  * 清除交易列表的数据并生成操作按钮
@@ -1695,6 +1715,8 @@ function clearLocalCacheData(){
 	loadCachFloatingProfit = {};
 	loadCachCloseProfit = {};
 	localCurrencyNo = {};
+	loadCachTodayBanlance = 0;
+	loadCachTodayCanuse = 0;
 }
 /**
  * 输入价格或数量验证 
