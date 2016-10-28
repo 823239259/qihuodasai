@@ -517,6 +517,7 @@ p{
 	margin: auto;
 	width: 80%;
 	height:26px;
+	border-radius: 2px;
 	background-color: #e9392a;
 }
 .greenFont{
@@ -526,6 +527,7 @@ p{
 	margin: auto;
 	width: 80%;
 	height:26px;
+	border-radius: 2px;
 	background-color: #16a951;
 }
 .dateTimeL{
