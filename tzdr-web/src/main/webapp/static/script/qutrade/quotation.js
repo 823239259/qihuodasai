@@ -215,21 +215,32 @@ $(function() {
                  }
                  }
                  }, */
+                plotOptions: {
+                    candlestick: {
+                        color: '#30bf30',
+                        upColor: '#ff4040',
+                        lineColor: '#30bf30',
+                        upLineColor: '#ff4040'
+                    }
+                },
                 series : [{
                     name: 'K线',
                     type : 'line', /*candlestick line*/
                     id: 'primary',
+                    animation: false,
                     data : dataC/*,
                      visible: false*/
                 },{
                     name: '',
                     type : 'candlestick',
                     id: 'primary',
+                    animation: false,
                     data : dataC/*,
                      visible: false*/
                 },{
                     type: 'column',
                     name: '成交量',
+                    animation: false,
                     data: volume,
                     yAxis: 1
                 },{
@@ -238,6 +249,7 @@ $(function() {
                     yAxis: 2,
                     showInLegend: true,
                     type: 'trendline',
+                    animation: false,
                     algorithm: 'MACD'
                 }, {
                     name : 'DEA',
@@ -245,12 +257,14 @@ $(function() {
                     yAxis: 2,
                     showInLegend: true,
                     type: 'trendline',
+                    animation: false,
                     algorithm: 'signalLine'
                 }, {
                     name: 'DIF',
                     linkedTo: 'primary',
                     yAxis: 2,
                     showInLegend: true,
+                    animation: false,
                     type: 'histogram'
                 }]
             });
@@ -372,17 +386,20 @@ $(function() {
                     name: '分时线',
                     type : 'line', /*candlestick line*/
                     id: 'primary',
+                    animation: false,
                     data : dataC/*,
                      visible: false*/
                 },{
                     name: '',
                     type : 'candlestick',
                     id: 'primary',
+                    animation: false,
                     data : dataC/*,
                      visible: false*/
                 },{
                     type: 'column',
                     name: '成交量',
+                    animation: false,
                     data: volume,
                     yAxis: 1
                 },{
@@ -391,6 +408,7 @@ $(function() {
                     yAxis: 2,
                     showInLegend: true,
                     type: 'trendline',
+                    animation: false,
                     algorithm: 'MACD'
                 }, {
                     name : 'DEA',
@@ -398,12 +416,14 @@ $(function() {
                     yAxis: 2,
                     showInLegend: true,
                     type: 'trendline',
+                    animation: false,
                     algorithm: 'signalLine'
                 }, {
                     name: 'DIF',
                     linkedTo: 'primary',
                     yAxis: 2,
                     showInLegend: true,
+                    animation: false,
                     type: 'histogram'
                 }]
             });

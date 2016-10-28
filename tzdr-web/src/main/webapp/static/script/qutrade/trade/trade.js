@@ -1143,7 +1143,7 @@ $(function(){
 			  type: 1,
 			  title:"忘记密码",
 			  skin: 'layui-layer-rim', //加上边框
-			  area: ['300px', '160px'], //宽高
+			  area: ['330px', '160px'], //宽高
 			  content: $("#back_passwork").html(),
 			  btn:['没有账号?立即申请','关闭'],
 			  yes:function(){
