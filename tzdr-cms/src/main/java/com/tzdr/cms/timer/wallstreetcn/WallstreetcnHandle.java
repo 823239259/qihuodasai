@@ -26,11 +26,7 @@ public class WallstreetcnHandle {
 	/**
 	 * 当前请求的url的对象
 	 */
-	private static  CrawlerUrl crawlerUrl;
-	/**
-	 * 保存最新增量开始时间
-	 */
-	private Long lastWallstreetnTime;
+	private   CrawlerUrl crawlerUrl;
 	/**
 	 * Unicode 转成中文
 	 * @param utfString
@@ -125,7 +121,6 @@ public class WallstreetcnHandle {
 	       outBuffer.append(aChar);      
 	   
 	      }      
-	   
 	      return outBuffer.toString();      
 	} 
 	/**
@@ -135,6 +130,11 @@ public class WallstreetcnHandle {
 	public  void getWallstreetcn(Wallstreetn wallstreetn){
 		String method = wallstreetn.getMethod();
 		String result = "";
+		String lastWallstreetnTime = crawlerUrl.getLastWallstreetnTime();
+		if(lastWallstreetnTime == null){
+			lastWallstreetnTime = String.valueOf(todayTime() / 1000);
+		}
+		wallstreetn.setParam(wallstreetn.getParam()+"&"+Long.parseLong(lastWallstreetnTime));
 		if(method != null && method.length() > 0){
 			if(method.equals("GET")){
 				result = WallstreetcnHandle.httpGetWalls(wallstreetn);
@@ -169,6 +169,7 @@ public class WallstreetcnHandle {
 				live.setLiveUpdatetime(dateTime);
 				content.setLiveContentCreatetime(dateTime);
 				content.setLiveContentUpdatetime(dateTime);
+				content.setText(stringJson);
 				wallstreetnLives.add(live);
 				contents.add(content);
 			}
@@ -177,8 +178,8 @@ public class WallstreetcnHandle {
 				String wallId = jsonObject.getString("id");
 				//更新最新数据第一条数据的id
 				crawlerUrl.setLastWallstreetnId(wallId);
+				crawlerUrl.setLastWallstreetnTime(jsonObject.getString("createAt"));
 				crawlerUrlService.update(crawlerUrl);
-			
 			}
 			logger.info("共获取:"+size);
 			crawlerWallstreetnLiveService.doSavesBatch(wallstreetnLives, contents);
@@ -256,19 +257,13 @@ public class WallstreetcnHandle {
 	}
 	
 	
-	public static CrawlerUrl getCrawlerUrl() {
+	public  CrawlerUrl getCrawlerUrl() {
 		return crawlerUrl;
 	}
-	public static void setCrawlerUrl(CrawlerUrl crawlerUrl) {
-		WallstreetcnHandle.crawlerUrl = crawlerUrl;
+	public  void setCrawlerUrl(CrawlerUrl crawlerUrl) {
+		this.crawlerUrl = crawlerUrl;
 	}
 	
-	public Long getLastWallstreetnTime() {
-		return lastWallstreetnTime;
-	}
-	public void setLastWallstreetnTime(Long lastWallstreetnTime) {
-		this.lastWallstreetnTime = lastWallstreetnTime;
-	}
 	public static Long todayTime(){
 		Long dateTime = new Date().getTime();
 		String date = df.format(dateTime);

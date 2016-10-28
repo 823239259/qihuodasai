@@ -169,7 +169,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				crawlerService.update(crawlerUrl);
 				WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
 				WallstreetcnHandle handle = new WallstreetcnHandle();
-				WallstreetcnHandle.setCrawlerUrl(crawlerUrl);
+				handle.setCrawlerUrl(crawlerUrl);
 				handle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
 				handle.setCrawlerUrlService(crawlerService);
 				task.setWallstreetcnHandle(handle);
