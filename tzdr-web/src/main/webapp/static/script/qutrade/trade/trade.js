@@ -137,6 +137,7 @@ function handleData(evt){
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
 			appendPostionAndUpdate(tradeParam);
+			updateOrderUpdatePosition(tradeParam);
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
@@ -171,6 +172,8 @@ var loadCachAccountNo = {};
 var localCacheCurrencyAndRate = {};
 var loadCachFloatingProfit = {};
 var loadCachCloseProfit = {};
+var loadCachTodayBanlance = 0;
+var loadCachTodayCanuse = 0;
 function updateBalance(parama){
 	var currencyNo = parama.CurrencyNo;
 	var accountNo = parama.AccountNo;
@@ -178,15 +181,16 @@ function updateBalance(parama){
 	var deposit = parama.Deposit;
 	var currency = parama.CurrencyRate; 
 	var closeProfit = parama.CloseProfit;
-	var floatingProfit = parama.floatingProfit;
+	/*var floatingProfit = parama.floatingProfit;
 	if(floatingProfit == undefined ){
 		floatingProfit = parama.FloatingProfit
-	}
+	}*/
 	var frozenMoney =parama.FrozenMoney;
 	var todayAmount = parama.TodayAmount;
 	var unExpiredProfit = parama.UnExpiredProfit;
 	var unAccountProfit = parama.UnAccountProfit;
-	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
+	var floatingProfit = $("#floatingProfit").val();
+	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
 	localCacheCurrencyAndRate[currencyNo]  = currency;
 	loadCachBanlance[accountNo] = banlance;
@@ -214,6 +218,8 @@ function updateBalance(parama){
 		$clostFit = $clostFit + loadCachCloseProfit[ac]  * cr;
 		$floatFit = $floatFit + loadCachFloatingProfit[ac] * cr;
 	}
+	loadCachTodayBanlance = $banlance;
+	loadCachTodayCanuse = $canuse;
 	$("#todayBalance").text(parseFloat($banlance).toFixed(2));
 	$("#deposit").text(parseFloat($deposit).toFixed(2));
 	$("#todayCanUse").text(parseFloat($canuse).toFixed(2));
@@ -386,13 +392,16 @@ function updateOrder(param){
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
 	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
-	var $tradeNum = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order7']");
-	var $statusMsg = $("ul[data-tion-order= '"+orderId+"'] li[class = 'order10']");
+	var $orderPrice = $("ul[data-order-order='"+orderId+"'] li[class = 'order6']");
+	var $tradeNum = $("ul[data-order-order= '"+orderId+"'] li[class = 'order7']");
+	var $statusMsg = $("ul[data-order-order= '"+orderId+"'] li[class = 'order10']");
 	var orderStatus = param.OrderStatus;
 	var tradeNum = param.TradeNum;
+	var orderPrice = param.TradePrice;
 	$orderStatus.text(analysisOrderStatus(orderStatus));
 	$tradeNum.text(tradeNum);	
 	$statusMsg.text(statusMsg);
+	$orderPrice.text(orderPrice);
 };
 /**
  * 缓存挂单的列表信息
@@ -586,9 +595,15 @@ function addPostion(param){
 			}
 			floatingProfit = floatP +":"+ currencyNo; 
 		}
+		if(floatingProfit == undefined){
+			floatingProfit = 0;
+		}
+		if(currencyNo == undefined){
+			currencyNo = "";
+		}
 		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
-		var html = '<ul class="tab_content '+cls+' '+currcls+'" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
+		var html = '<ul class="tab_content '+cls+' '+currcls+' tab_position" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
 					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
 					'	<li  class = "position2" style="width: 80px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -703,6 +718,16 @@ function updatePostion(param){
 		postContract.holdNum = oldHoldNum;
 		postContract.drection = drectionText;
 	}
+}
+/**
+ * 改单成功更新持仓信息
+ */
+function updateOrderUpdatePosition(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode = commodityNo+contractNo;
+	var $holdPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
+	$holdPrice.text(param.TradePrice);
 }
 /**
  * 根据行情更新持仓列表
@@ -1586,6 +1611,12 @@ function sumListfloatingProfit(){
 		if(currencyNo == undefined || currencyNo.length <= 0){
 			continue;
 		}
+		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+		var p =  $(".tab_position");
+		if(p.length == 0){
+			floatingProfitDom.text(0.00);
+			continue ;
+		}
 		var postionDom = $(".position-currency"+currencyNo);
 		if(postionDom.html() == undefined || postionDom.length <= 0){
 			continue
@@ -1595,7 +1626,6 @@ function sumListfloatingProfit(){
 			var $this = $(this);
 			price = price + Number($this.find("li[class = 'position10']").text());
 		});
-		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
 	}
 }
@@ -1624,6 +1654,16 @@ function updateHoldProfit(){
 			floatingProfit.text(parseFloat(price).toFixed(2));
 		}
 	}
+}
+/**
+ * 更新账户资产
+ */
+function updateAccountBalance(){
+	var floatingProfit = $("#floatingProfit").text();
+	var todayBalance = $("#todayBalance");
+	var todayCanUse = $("#todayCanUse");
+	todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
+	todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
 }
 /**
  * 清除交易列表的数据并生成操作按钮
@@ -1675,6 +1715,8 @@ function clearLocalCacheData(){
 	loadCachFloatingProfit = {};
 	loadCachCloseProfit = {};
 	localCurrencyNo = {};
+	loadCachTodayBanlance = 0;
+	loadCachTodayCanuse = 0;
 }
 /**
  * 输入价格或数量验证 

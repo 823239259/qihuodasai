@@ -158,7 +158,9 @@
 		//初始化导航栏
 			tzdr.init.initHearListener();
   			
-			mui.init();
+			mui.init({
+				statusBarBackground: '#2B2B2B',
+			});
 			mui.plusReady(function(){
 				//链接socket;
 				var dataUrl={
@@ -332,6 +334,12 @@
 					id:"tutorial",
 				});
 			})
+			setstatus();
+			function setstatus(){
+			if(plus.navigator.isFullscreen()){
+				plus.navigator.setFullscreen(false);
+			}
+		};
 			});
 			
 		</script>

@@ -166,6 +166,8 @@ function quotePush(obj){
 	sumListfloatingProfit();
 	//更新持仓浮动盈亏总和
 	updateHoldProfit();
+	//更新账户资产
+	updateAccountBalance();
 	//更新右边边行情
 	updateRight(param);
 	//初始化设置最新价格
