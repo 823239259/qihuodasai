@@ -388,17 +388,9 @@ function updateFloatingfit(param){
 	}
 	var contractSize = localCommodity.ContractSize;
 	var miniTikeSize = localCommodity.MiniTikeSize;
-	/*console.log("lastPrice"+lastPrice);
-	console.log($openAvgPrice);
-	console.log(contractSize);
-	console.log(miniTikeSize);
-	console.log($holdNum);
-	*/
 	var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($openAvgPrice) , contractSize,miniTikeSize,parseInt($holdNum),drection);
 	var floatProfit = floatP +":"+ localCommodity.CurrencyNo;
 	$float.text(floatProfit);
-	/*console.log(floatProfit);
-	console.log("----");*/
 	$floatP.text(floatP);
 	$float.css("width","160px");
 	if(parseFloat(floatP) < 0 ){
