@@ -2,8 +2,12 @@ package com.tzdr.cms.timer.wallstreetcn;
 
 import java.util.TimerTask;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class WallstreetcnTask extends TimerTask{
+	private Logger logger = LoggerFactory.getLogger(WallstreetcnTask.class);
 	private Wallstreetn wallstreetn;
 	private WallstreetcnHandle wallstreetcnHandle;
 	public Wallstreetn getWallstreetn() {
@@ -36,10 +40,11 @@ public class WallstreetcnTask extends TimerTask{
 	 */
 	public boolean start(){
 		WallstreetcnTimer wallstreetcnTimer = WallstreetcnTimer.getInstance();
-		String url = String.valueOf(wallstreetcnTimer.getMap().get(wallstreetn.getUrl()));
+		String url = String.valueOf(wallstreetcnTimer.getMap().get(wallstreetn.getId()));
 		if(url == null || url.equals("null")){
 			wallstreetcnTimer.getTimer().schedule(this, 1000,Long.parseLong(wallstreetn.getRule()));
-			wallstreetcnTimer.addTimer(wallstreetn.getUrl(),this);
+			wallstreetcnTimer.addTimer(wallstreetn.getId(),this);
+			logger.info("任务加入"+wallstreetn.getUrl()+wallstreetn.getParam());
 		}
 		return true;
 	}

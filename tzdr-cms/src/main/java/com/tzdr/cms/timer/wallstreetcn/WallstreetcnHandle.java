@@ -20,8 +20,8 @@ import com.tzdr.domain.web.entity.CrawlerWallstreetnLiveContent;
 
 public class WallstreetcnHandle {
 	private static Logger logger = LoggerFactory.getLogger(WallstreetcnHandle.class);
-	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
-	private CrawlerUrlService crawlerUrlService;
+	private static CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
+	private static CrawlerUrlService crawlerUrlService;
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	/**
 	 * 当前请求的url的对象
@@ -177,13 +177,15 @@ public class WallstreetcnHandle {
 				JSONObject jsonObject = resultArray.getJSONObject(0);
 				String wallId = jsonObject.getString("id");
 				//更新最新数据第一条数据的id
+				crawlerUrl = crawlerUrlService.get(crawlerUrl.getId());
 				crawlerUrl.setLastWallstreetnId(wallId);
-				crawlerUrl.setLastWallstreetnTime(jsonObject.getString("createAt"));
+				crawlerUrl.setLastWallstreetnTime(jsonObject.getString("createdAt"));
 				crawlerUrlService.update(crawlerUrl);
 			}
 			logger.info("共获取:"+size);
 			crawlerWallstreetnLiveService.doSavesBatch(wallstreetnLives, contents);
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.info("请求数据异常" + e.getMessage());
 		}
 	}
@@ -199,8 +201,8 @@ public class WallstreetcnHandle {
 		live.setChannelSet(jsonObject.getString("channelSet"));
 		live.setCodeType(jsonObject.getString("codeType"));
 		live.setCommentStatus(jsonObject.getString("commentStatus"));
-		live.setCreatedAt(jsonObject.getLong("createAt"));
-		live.setUpdatedAt(jsonObject.getLong("updateAt"));
+		live.setCreatedAt(jsonObject.getLong("createdAt"));
+		live.setUpdatedAt(jsonObject.getLong("updatedAt"));
 		live.setImportance(jsonObject.getString("importance"));
 		live.setPublished("0");
 		live.setStar(jsonObject.getString("start"));
@@ -242,18 +244,22 @@ public class WallstreetcnHandle {
 		content.setCategorySet(jsonObject.getString("categorySet"));
 		return content;
 	}
-	public CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {
+	public static CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {
 		return crawlerWallstreetnLiveService;
 	}
-	public void setCrawlerWallstreetnLiveService(CrawlerWallstreetnLiveService crawlerWallstreetnLiveService) {
-		this.crawlerWallstreetnLiveService = crawlerWallstreetnLiveService;
+	public static void setCrawlerWallstreetnLiveService(CrawlerWallstreetnLiveService crawlerWallstreetnLiveService) {
+		if(WallstreetcnHandle.crawlerWallstreetnLiveService == null){
+			WallstreetcnHandle.crawlerWallstreetnLiveService = crawlerWallstreetnLiveService;
+		}
 	}
 	
-	public CrawlerUrlService getCrawlerUrlService() {
+	public static CrawlerUrlService getCrawlerUrlService() {
 		return crawlerUrlService;
 	}
-	public void setCrawlerUrlService(CrawlerUrlService crawlerUrlService) {
-		this.crawlerUrlService = crawlerUrlService;
+	public static void setCrawlerUrlService(CrawlerUrlService crawlerUrlService) {
+		if(WallstreetcnHandle.crawlerUrlService == null){
+			WallstreetcnHandle.crawlerUrlService = crawlerUrlService;
+		}
 	}
 	
 	

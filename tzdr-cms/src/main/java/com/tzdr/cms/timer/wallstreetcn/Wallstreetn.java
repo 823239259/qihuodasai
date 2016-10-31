@@ -1,10 +1,18 @@
 package com.tzdr.cms.timer.wallstreetcn;
 
 public class Wallstreetn {
+	private String id;
 	private String url;
 	private String param;
 	private String method;
 	private String rule;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getUrl() {
 		return url;
 	}

@@ -161,6 +161,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 					}
 				}
 				Wallstreetn wallstreetn = new Wallstreetn();
+				wallstreetn.setId(crawlerUrl.getId());
 				wallstreetn.setMethod(crawlerUrl.getUrlMethod());
 				wallstreetn.setParam(buffer.toString());
 				wallstreetn.setRule(crawlerUrl.getExecRule());
@@ -170,8 +171,8 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
 				WallstreetcnHandle handle = new WallstreetcnHandle();
 				handle.setCrawlerUrl(crawlerUrl);
-				handle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
-				handle.setCrawlerUrlService(crawlerService);
+				WallstreetcnHandle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
+				WallstreetcnHandle.setCrawlerUrlService(crawlerService);
 				task.setWallstreetcnHandle(handle);
 				task.start();
 			}
@@ -197,7 +198,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				resultJson.setSuccess(false);
 				resultJson.setMessage("任务未执行,请勿操作停止任务!");
 			}else{
-				WallstreetcnTimer.stop(crawlerUrl.getUrlUrl());
+				WallstreetcnTimer.stop(crawlerUrl.getId());
 				crawlerUrl.setStatus("0");//设置该url停止状态
 				crawlerService.update(crawlerUrl);
 			}
