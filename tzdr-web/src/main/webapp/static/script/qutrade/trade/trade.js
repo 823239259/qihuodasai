@@ -27,8 +27,8 @@ var tradeSuccessLoadFlag = false;
  * 合约交易成功查询持仓信息
  */
 function tradeSuccessLoadHoldData(){
-	Trade.doHold(username);
 	tradeSuccessLoadFlag = true;
+	Trade.doHold(username);
 	
 }
 /**
@@ -405,6 +405,8 @@ function updateOrder(param){
 	var contractCode = param.ContractCode;
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
+	var $desgPrice = $("ul[data-order-order='"+orderId+"'] li[class = 'order2']");
+	var $desgNumber = $("ul[data-order-order='"+orderId+"'] li[class = 'order3']");
 	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
 	var $orderPrice = $("ul[data-order-order='"+orderId+"'] li[class = 'order6']");
 	var $tradeNum = $("ul[data-order-order= '"+orderId+"'] li[class = 'order7']");
@@ -416,6 +418,8 @@ function updateOrder(param){
 	$tradeNum.text(tradeNum);	
 	$statusMsg.text(statusMsg);
 	$orderPrice.text(orderPrice);
+	$desgPrice.text(param.OrderPrice);
+	$desgNumber.text(param.OrderNum);
 };
 /**
  * 缓存挂单的列表信息
@@ -782,7 +786,7 @@ function updateOrderUpdatePosition(param){
 			for(var i = 0 ; i < length ; i++){
 				var data = cache[i];
 				holdNum = holdNum + data.HoldNum;
-				price = price + data.HoldAvgPrice;
+				price = price + data.HoldAvgPrice * data.HoldNum;
 			}
 			var localCommodity = getLocalCacheCommodity(contractCode);
 			var doSize = 2;
