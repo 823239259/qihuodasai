@@ -57,7 +57,7 @@ public class CrawlerServiceImp extends BaseServiceImpl<CrawlerUrl, CrawlerUrlDao
 		if(urlId != null && urlId.length() > 0)
 			 url = this.getEntityDao().get(urlId);
 		if(url == null){
-			this.save(crawlerUrl);
+			getEntityDao().save(crawlerUrl);
 			urlId = crawlerUrl.getId();
 		}else{
 			crawlerUrl.setUrlCreatetime(url.getUrlCreatetime());

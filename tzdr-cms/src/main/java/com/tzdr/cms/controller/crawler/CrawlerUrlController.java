@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.service.crawler.CrawlerCalendarService;
 import com.tzdr.business.service.crawler.CrawlerUrlParamService;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
-import com.tzdr.cms.timer.wallstreetcn.WallstreetcnHandle;
-import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTask;
+import com.tzdr.cms.timer.wallstreetcn.BaseGetWallstreetcn;
+import com.tzdr.cms.timer.wallstreetcn.BaseWallstreetcnHandle;
+import com.tzdr.cms.timer.wallstreetcn.BaseWallstreetnTask;
 import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTimer;
 import com.tzdr.cms.timer.wallstreetcn.Wallstreetn;
 import com.tzdr.common.baseservice.BaseService;
@@ -43,6 +45,8 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	private CrawlerUrlParamService crawlerUrlParamService;
 	@Autowired 
 	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
+	@Autowired
+	private CrawlerCalendarService crawlerCalendarService;
 	@RequestMapping(value = "/list",method=RequestMethod.GET)
 	public String list(){
 		return ViewConstants.CrawlerView.LIST_VIEW;
@@ -166,15 +170,23 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				wallstreetn.setParam(buffer.toString());
 				wallstreetn.setRule(crawlerUrl.getExecRule());
 				wallstreetn.setUrl(crawlerUrl.getUrlUrl());
+				wallstreetn.setType(crawlerUrl.getType());
 				crawlerUrl.setStatus("1");//设置该url执行状态
-				crawlerService.update(crawlerUrl);
-				WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
-				WallstreetcnHandle handle = new WallstreetcnHandle();
+				BaseWallstreetnTask task = BaseGetWallstreetcn.get(wallstreetn.getType());
+				if(task == null){
+					resultJson.setSuccess(false);
+					resultJson.setMessage("type类型错误");
+					return resultJson;
+				}
+				task.setWallstreetn(wallstreetn);
+				BaseWallstreetcnHandle handle = task.getBaseWallstreetcnHandle();
 				handle.setCrawlerUrl(crawlerUrl);
-				WallstreetcnHandle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
-				WallstreetcnHandle.setCrawlerUrlService(crawlerService);
-				task.setWallstreetcnHandle(handle);
-				task.start();
+				BaseWallstreetcnHandle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
+				BaseWallstreetcnHandle.setCrawlerUrlService(crawlerService);
+				BaseWallstreetcnHandle.setCrawlerCalendarService(crawlerCalendarService);
+				task.setBaseWallstreetcnHandle(handle);
+				WallstreetcnTimer.start(task);
+				crawlerService.update(crawlerUrl);
 			}
 		}
 		return resultJson;

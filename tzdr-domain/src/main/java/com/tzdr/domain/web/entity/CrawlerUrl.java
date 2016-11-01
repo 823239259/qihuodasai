@@ -56,6 +56,17 @@ public class CrawlerUrl extends BaseEntity{
 	 * 开始截取数据的时间
 	 */
 	private String startTime;
+	/**
+	 * 获取数据类型（0-实时，1-日历）
+	 */
+	private String type;
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getUrlTitle() {
 		return urlTitle;
 	}

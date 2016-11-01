@@ -6,7 +6,14 @@ public class Wallstreetn {
 	private String param;
 	private String method;
 	private String rule;
+	private String type;
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getId() {
 		return id;
 	}
