@@ -1,3 +1,4 @@
+*{margin: 0; padding: 0; list-style-type: none;}
 /* Î¬Ê¤×ÊÑ¶ */
 .information-img {width: 100%; position: relative; height: 360px; background: url("../images/information-top.png") center center;}
 .information-content {width: 100%; position: relative; height: 360px; background: #dcefff;}
