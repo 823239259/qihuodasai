@@ -57,6 +57,10 @@ function linearlyLoadData(method) {
  * 处理返回数据
  * @param {Object} EVT
  */
+/**
+ * 保存已下单的数据
+ */
+var resultInsertOrderId = {};
 function handleData(evt){
 	var dataString = evt.data;
 	var data = JSON.parse(dataString);
@@ -115,6 +119,7 @@ function handleData(evt){
 			if(inserOrderStatus == 5){
 				tip("交易失败:合约【"+insertOrderParam.ContractCode+"】,原因【"+insertOrderParam.StatusMsg+"】");
 			}
+			resultInsertOrderId[insertOrderParam.OrderID] = insertOrderParam.OrderID;
 			//订单状态通知
 		} else if (method == "OnRtnOrderState") {
 			var orderParam = parameters;
@@ -138,10 +143,10 @@ function handleData(evt){
 			if(orderStatusWeHooks == 5){
 				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
 			}
-			if(isChangeOrder && cacaleOrderId==orderId){
+			if(isUpdateOrder && cacaleOrderId==orderId){
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
-				isChangeOrder = false;
+				isUpdateOrder = false;
 				tip("改单成功:合约【"+contractCode+"】,委托价【"+orderPrice+"】,委托量【"+orderNum+"】");
 			}
 			//订单成交通知
@@ -149,7 +154,12 @@ function handleData(evt){
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
 			appendPostionAndUpdate(tradeParam);
-			tradeSuccessLoadHoldData();
+			var orderId = tradeParam.OrderID;
+			var locaOrderId = resultInsertOrderId[orderId];
+			if(isBuy && locaOrderId == locaOrderId){
+				tradeSuccessLoadHoldData();
+				resultInsertOrderId[orderId] = null;
+			}
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
@@ -1275,6 +1285,15 @@ $(function(){
 /**
  * 绑定交易操作事件
  */
+/**
+ * 标识是否是改单操作
+ * 
+ */
+var isUpdateOrder = false;
+/**
+ * 是否是下单操作
+ */
+var isBuy = false;
 function bindOpertion(){
 	$(".trade_buy").bind("click",function(){
 		if(isLogin){
@@ -1469,6 +1488,7 @@ function doInsertOrder(orderNum,tradeDrection,orderPrice){
 	var contractNo = $("#contractNo").val();
 	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
 	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
+	isBuy = true;
 }
 /**
  * 全部平仓操作
@@ -1528,6 +1548,7 @@ function doInsertBackhandOrder(){
 	var orderPrice = tradeParam.LimitPrice;
 	Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
 	tip("合约【"+contractCode+"】提交成功,等待交易");
+	isBuy = true;
 }
 /**
  * 全部撤单操作
@@ -1564,10 +1585,7 @@ function doInsertCancleOrder(){
 /**
  * 改单操作
  */
-/**
- * 是否是改单操作
- */
-var isChangeOrder = false;
+
 function doInsertChangeSingleOrder(){
 	var orderId = selectDesgnate["orderId"];
 	var contractCode = selectDesgnate["contraction"];
@@ -1592,8 +1610,8 @@ function doInsertChangeSingleOrder(){
 	param[0]=tradeParam;
 	modifyOrder(param);
 	layer.closeAll();
-	isChangeOrder = true
 	tip("合约【"+contractCode+"】提交成功,等待交易");
+	isUpdateOrder = true;
 }
 /**
  * 获取平仓的基本信息
@@ -1792,6 +1810,9 @@ function clearLocalCacheData(){
 	loadCachTodayCanuse = 0;
 	tradeSuccessLoadFlag = false;
 	localCachePositionRecentData={};
+	resultInsertOrderId={};
+	isUpdateOrder = false;
+	isBuy = false;
 }
 /**
  * 输入价格或数量验证 
