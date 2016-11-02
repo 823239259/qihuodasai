@@ -159,6 +159,7 @@ function handleData(evt){
 			if(isBuy && locaOrderId == locaOrderId){
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null;
+				isBuy = false;
 			}
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
