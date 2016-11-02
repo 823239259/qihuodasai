@@ -180,7 +180,7 @@ function handleData(evt){
 			var loginMessage = parameters.Message;
 			tip(loginMessage);
 		}else if(method == "OnRspLogout"){
-			//$("#trade_login").text("登录");
+			$("#switchAccount").text("登录账户");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			loginFail = true;
