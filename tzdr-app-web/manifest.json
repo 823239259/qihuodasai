@@ -1058,7 +1058,11 @@
 					"js/FiveTestCandlestickChart.js",
 					"js/fiveChart.config.js",
 					"js/tenChart.config.js",
-					"js/threeChart.config.js"
+					"js/threeChart.config.js",
+					"js/trade.util.js",
+					"js/trade.connection.js",
+					"js/trade.data.mode.js",
+					"js/trade.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
