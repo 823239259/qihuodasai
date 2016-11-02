@@ -985,7 +985,8 @@
 					"js/common.js"
 				],
 				"refer": [
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
@@ -1100,7 +1101,9 @@
 					"js/jquery.base64.js",
 					"css/quotation.css",
 					"js/trade.send.js",
-					"js/common.config.js"
+					"js/common.config.js",
+					"js/trade.config.js",
+					"js/trade.connection.js"
 				],
 				"refer": [
 					"tzdr/future/cl.html",
