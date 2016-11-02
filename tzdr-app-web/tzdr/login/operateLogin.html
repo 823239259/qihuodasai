@@ -9,8 +9,12 @@
 		 <script type="text/javascript" src="../../js/common.config.js" ></script>
 		 <script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
 		 <script type="text/javascript" src="../../js/jquery.base64.js" ></script>
-		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
-		 <script type="text/javascript" src="../../js/util.js" ></script>
+		<script type="text/javascript" src="../../js/new/trade.config.js" ></script>
+		<script type="text/javascript" src="../../js/new/util.js" ></script>
+		 <script type="text/javascript" src="../../js/new/trade.connection.js" ></script>
+		 <script type="text/javascript" src="../../js/new/trade.send.js" ></script>
+		<!-- <script type="text/javascript" src="../../js/trade.send.js" ></script>
+		 <script type="text/javascript" src="../../js/util.js" ></script>-->
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 	</head>
@@ -55,6 +59,7 @@
 		</div>
 	</div>
 		<script type="text/javascript">
+		    initTradeConfig();
 			mui.init();
 			mui.plusReady(function(){
 				var islogin = false;
@@ -207,7 +212,7 @@
 						  };
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
-						var loginSocket = new WebSocket(TradeUrl.SocketUrl);
+						var loginSocket = new WebSocket(tradeWebsocketUrl);
 						loginSocket.onopen = function(){
 							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}}');
 						}
@@ -221,10 +226,10 @@
 //								alert(JSON.stringify(parameters));
 								var loginMessage = parameters.Message;
 								if (code == 0) {
-										localStorage.setItem("account",account);
-										localStorage.setItem("password",pwd);
-										localStorage.setItem("endLoginAccount",account);
-				 						localStorage.setItem("endLoginPassword",pwd);
+										localStorage.setItem("trade_account",account);
+										localStorage.setItem("trade_password",pwd); 
+										localStorage.setItem("trade_endLoginAccount",account);
+				 						localStorage.setItem("trade_endLoginPassword",pwd);
 									if (Transfer.backpageID){
 //										alert("登录成功")
 										backReload();
@@ -234,7 +239,7 @@
 				      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
 				      					return;
 		      						}else{
-		      							plus.nativeUI.closeWaiting();
+		      							plus.nativeUI.closeWaiting(); 
 										mui.toast("登录成功");
 										islogin = true;
 		      							mui.openWindow({
