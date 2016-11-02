@@ -131,7 +131,7 @@
 					<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
 				</div>
 				<div class="buttomFixRight mui-col-xs-6">
-					<p id="freshPrices">0.00</p>
+					<p id="freshPrices">0.00</p> 
 					<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
 				</div>
 				<div class="BuyDiv">
@@ -149,18 +149,22 @@
 				<input type="text"  id= "miniTikeSize"/>
 				<input type="text"  id = "doSize"/>
 				<input type="text" id="CommodityName" />
+				持仓盈亏:<input type="text" value = "0.00" id = "floatingProfit">
 			</div>
 		</div>
-		<script type="text/javascript" src="../../js/common.config.js" ></script>
+		<script type="text/javascript" src="../../js/common.config.js" ></script> 
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
-		<script type="text/javascript" src="../../js/trade.data.model.js" ></script>
-		<script type="text/javascript" src="../../js/trade.send.js" ></script>
 		<script type="text/javascript" src="../../js/util.js" ></script>
+		<script type="text/javascript" src="../../js/trade.util.js" ></script>
+		<script type="text/javascript" src="../../js/trade.data.mode.js" ></script>
+		<script type="text/javascript" src="../../js/trade.config.js" ></script>
+		<script type="text/javascript" src="../../js/trade.connection.js" ></script>
+		<script type="text/javascript" src="../../js/trade.send.js" ></script>
 		<script src="../../js/chart.config.js"></script>
 		<script src="../../js/timechart.config.js"></script>
 		<script src="../../js/candlestick.config.js"></script>
 		<script src="../../js/dayCandlestick.config.js"></script>
-		<script src="../../js/fiveChart.config.js"></script>
+		<script src="../../js/fiveChart.config.js"></script> 
 		<script src="../../js/tenChart.config.js"></script>
 		<script src="../../js/threeChart.config.js"></script>
 		<script src="../../js/chart.js"></script>
@@ -219,7 +223,6 @@
 				var leftWidth=window.innerWidth/2-150;
 				$("#contentListBg").css({"top":window.innerHeight/2-120+"px","left":leftWidth+"px"});*/
 			});
-			
 		</script>
 		<script>
 			var tranferParam = null ;
@@ -255,13 +258,6 @@
 				  	$("#buyBtn_P").val(orderPrice);
 				  	$("#sellBtn_P").val(orderPrice);
 				});
-				$("#switchAccount").click(function(){
-					if(username != null){
-						alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
-					}else{
-						openLogin();
-					}
-				});
 				$("input[type='radio']").click(function(){
 					var type = $("input[type = 'radio']:checked").val();
 					var orderPrice = $("#orderPrice");
@@ -285,119 +281,7 @@
 				if(username == null){
 					$("#switchAccount").text("登录账号");
 				}
-				//提交订单
-				$(".buy").click(function(){
-					if(vadationIsLogin()){
-						var orderNumber = $("#orderNumber").val();
-						if(orderNumber <= 0){
-							mui.toast("请输入正确的手数");
-							return;
-						}
-						if(orderNumber > 200){
-							mui.toast("最多只能输入200手");
-							return;
-						}
-						var priceType = $("input[type='radio']:checked").val();
-						var orderPrice = $("#orderPrice").val();
-						var tradeDrection = $(this).attr("data-tion-buy"); 
-						if(priceType == 0){
-							if(orderPrice <= 0 || orderPrice.length <= 0){
-								mui.toast("请输入正确的价格");
-								return;
-							}
-						}else if(priceType == 1){
-							orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),tradeDrection);
-						}
-						var commodeityNo = $("#commodeityNo").val();
-						var contractNo = $("#contractNo").val();
-						var content = "确定提交订单："+commodeityNo+contractNo+",价格("+orderPrice+"),手数("+orderNumber+")";
-						alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$(this));
-					}
-				});
-				$("#allOpen").click(function(){
-					var allOpen = $(".PositionLi");
-					if(allOpen.length <= 1){
-						mui.toast("没有持仓合约");
-						return;
-					}
-					if(vadationIsLogin()){
-						var content = "合约是否全部平仓?";
-						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertAllSellingOrder);
-					}
-				});
-				$("#Open").click(function(){
-					if(positionWholeContract == null){
-						mui.toast("请选择需要平仓的合约");
-						return;
-					}
-					if(vadationIsLogin()){
-						var content = "当前合约是否平仓?";
-						alertProtype(content,"确认下单吗?",Btn.confirmedAndCancle(),doInsertSellingOrder);
-					}
-				});
-				$("#kilAnorder").click(function(){
-					if(designateWholeContracts == null){
-						mui.toast("请选择需要撤单的订单");
-						return;
-					}
-					if(vadationIsLogin()){
-						var content = "您是否真的要进行撤单操作?";
-						alertProtype(content,"确认撤单?",Btn.confirmedAndCancle(),doInsertCancleOrder);
-					}
-				});
-				$(".marketBuy").click(function(){
-					if(vadationIsLogin()){
-						var $this = $(this);
-						var lastPrice = $("#freshPrices").text();
-						if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)){
-							alertProtype("交易错误","提示",Btn.confirmed());
-							return;
-						}
-						var commodityNo = $("#commodeityNo").val();
-						var contractNo = $("#contractNo").val();
-						var orderNum = $("#orderNum").val();
-						var miniTikeSize = $("#miniTikeSize").val();
-						var orderNum = $("#orderNum").val();
-						if(orderNum <= 0 ){
-							mui.toast("请输入正确的手数"); 
-							return;
-						}
-						if(orderNum > 200){
-							mui.toast("最多只能输入200手"); 
-							return;
-						}
-						var drection = $this.attr("data-tion-buy");
-						var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
-						var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";
-						var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),buy,null,$this);
-					}
-				});
 			});
-			function switchAccount(){
-				clearLogin();
-				$("#switchAccount").text("登录账户");
-				openLogin();
-			}
-			function vadationIsLogin(){
-				if(username == null){
-						alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin,alertCallBack);
-						return false;
-				}
-				return true;
-			}
-			function openLogin(){ 
-				loginOutFlag = true;
-				loginOutTip=true;
-				mui.openWindow({
-					url:"../login/operateLogin.html",
-					id : "operateLogin",
-					 extras:{
-								commdityNo:$("#commodeityNo").val(),
-								name : tranferParam,
-								backpageID:"transactionDetails"
-							}
-				});
-			};
 			function alertCallBack(){
 				if($("#TradingCenter").hasClass("mui-active")==true){
 					$("#TradingCenter").removeClass(" mui-active");
@@ -422,191 +306,8 @@
 						$("#Three").addClass(" mui-active");
 					}
 				}else{
-//					console.log("错误")
 				}
 			}
-			/**
-			 * 下单操作 
-			 */
-			function doInsertOrder(param){
-				if(validationLastPrice()){
-					alertProtype("交易错误","提示",Btn.confirmed());
-					return;
-				}
-				var $this = param;
-				var tradeDrection = $this.attr("data-tion-buy");
-				var orderNumber = $("#orderNumber").val();
-				var orderPrice = $("#orderPrice").val();
-				var priceType = $("input[type='radio']:checked").val();
-				
-				if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
-					alertProtype("手数输入错误数量","提示",Btn.confirmed());
-					return;
-				}
-				if(priceType == 1){
-					orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),tradeDrection);
-				}
-				if(orderPrice == null || isNaN(orderNumber) || orderPrice <= 0 || orderPrice.length <= 0 ){
-					alertProtype("价格输入错误","提示",Btn.confirmed());
-					return;
-				}
-				var exchanageNo = $("#exchangeNo").val();
-				var commodeityNo = $("#commodeityNo").val();
-				var contractNo = $("#contractNo").val();
-				Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,orderPrice,0,doGetOrderRef());
-				plus.nativeUI.showWaiting();
-				setTimeOutInsertOrder(); 
-			}
-			/**
-			 * 全部平仓操作 
-			 */
-			function doInsertAllSellingOrder(){
-				for (var i = 0 ; i < positionsIndex ; i++) {
-					var contractParam = new Array();
-					//验证该平仓数据是否存在列表中
-					if($(".position-index"+i+"").html() == undefined){
-						continue;
-					}
-					var contract = positionContractCode[i];
-					contractParam[0] = contract;
-					var tradeParam = doGetTradeBasicParam(contractParam);
-					selling(tradeParam);
-				}
-				plus.nativeUI.showWaiting();
-				setTimeOutInsertOrder();
-				positionWholeContract = null;
-				positionWholeIndex = 0;
-			}
-			/**
-			 * 平仓操作 
-			 */
-			function doInsertSellingOrder(){
-				var positonDom = $(".position-index"+positionWholeIndex+"");
-				//验证该平仓数据是否存在列表中
-				if(positonDom.html() == undefined){
-					alertProtype("交易错误","提示",Btn.confirmed());
-					return;
-				}
-				var contractParam = new Array();
-				contractParam[0] = positionWholeContract;
-				var tradeParam = doGetTradeBasicParam(contractParam);
-				selling(tradeParam);
-				positionWholeContract = null;
-				positionWholeIndex = 0;
-				plus.nativeUI.showWaiting();
-				setTimeOutInsertOrder();
-			}
-			/**
-			 * 撤单确认操作 
-			 */
-			function doInsertCancleOrder(){
-				var lengthIndex= designatesOrderId.length;
-				var contractParam = new Array();
-				for(var i = 0 ; i < lengthIndex ; i++){
-					var orderId = designatesOrderId[i];
-					var designateDom  = $("li[data-tion-designates='"+orderId+"']");
-					if(designateDom.html() == undefined){
-						return;
-					}
-					contractParam[0] = orderId;
-					cancleOrderId = orderId;
-				}
-				var cancleParam = doGetCancelOrderBasicParam(contractParam);
-				cancleOrder(cancleParam);
-				designateWholeContracts = null;
-				designateWholeIndex = 0;
-				plus.nativeUI.showWaiting();
-				setTimeOutInsertOrder();
-			}
-			/**
-			 * 获取平仓的基本信息 
-			 * @param {Object} param
-			 */
-			function doGetTradeBasicParam(param){
-				var tradeParam = new Array();
-				var length = param.length;
-				for(var i = 0 ; i < length ; i++){
-					var contract = param[i];
-					var $contractCode  = $("li[contract-code-position='"+contract+"'] span[class = 'position0']").text();
-					var $drection =  $("li[contract-code-position='"+contract+"'] span[class = 'position1']").attr("data-drection");
-					var $holdNum =  $("li[contract-code-position='"+contract+"'] span[class = 'position2']").text();
-					var $openAvgPrice =  $("li[contract-code-position='"+contract+"'] span[class = 'position3']").text();
-					var $floatingProfit =  $("li[contract-code-position='"+contract+"'] span[class = 'position4']").text();
-					var $commodityNo =  $("li[contract-code-position='"+contract+"'] span[class = 'position5']").text();
-					var $contractNo =  $("li[contract-code-position='"+contract+"'] span[class = 'position6']").text();
-					var $exchangeNo =  $("li[contract-code-position='"+contract+"'] span[class = 'position7']").text();
-					var drection = 0;
-					if($drection == 0){
-						drection = 1;	
-					}
-					if(validationLastPrice()){
-						alertProtype("金额错误","提示",Btn.confirmed());
-						return;
-					} 
-					var lastPrice = marketCommdityLastPrice[$commodityNo+$contractNo];
-					var comm = marketCommdity[$commodityNo+$contractNo];
-					if(comm == undefined)continue;
-					var limitPirce = doGetMarketPrice(lastPrice,comm.MiniTikeSize,drection);
-					var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
-					tradeParam[i] = sellingParam;
-				}
-				return tradeParam;
-			}
-			function doGetCancelOrderBasicParam(param){
-				var cancleParam = new Array();
-				var length = param.length;		
-				for(var i = 0 ; i < length ; i++){
-					var contract = param[i];
-					var $contractCode  = $("li[data-tion-designates='"+contract+"'] span[class = 'desig0']").text();
-					var $drection =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig1']").attr("data-drection");
-					var $orderPrice =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig2']").text();
-					var $orderNum =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig3']").text();
-					var $cdNum =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig4']").text();
-					var $InsertDateTime =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig5']").text();
-					var $OrderSysID =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig6']").text();
-					var $commodityNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig7']").text();
-					var $contractNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig8']").text();
-					var $exchangeNo =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig9']").text();
-					var $orderId =  $("li[data-tion-designates='"+contract+"'] span[class = 'desig10']").text();
-					var cancleOrderParam = createCancleOrderParam($OrderSysID,$orderId,$exchangeNo,$commodityNo,$contractNo,$orderNum,$drection,Math.abs($orderPrice));
-					cancleParam[i] = cancleOrderParam; 
-				}
-				return cancleParam;
-			}
-	function buy(param){
-		var $this = param;
-		var lastPrice = $("#freshPrices").text();
-		if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)){
-			alertProtype("交易错误","提示",Btn.confirmed());
-			return;
-		}
-		var exchangeNo = $("#exchangeNo").val();
-		var commodityNo = $("#commodeityNo").val();
-		var contractNo = $("#contractNo").val();
-		var contractSize = $("#contractSize").val();
-		var miniTikeSize = $("#miniTikeSize").val();
-		var orderNum = $("#orderNum").val();
-		var drection = $this.attr("data-tion-buy");
-		var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
-		var priceType = 0;
-		var tradeParam = createSellingParam(exchangeNo,commodityNo,contractNo,orderNum,drection,priceType,limitPrice,0,doGetOrderRef());
-		var param = new Array();
-		param[0] = tradeParam;
-		selling(param);
-	}
-
-			/**
-			 * 验证最新价格 
-			 */
-			function validationLastPrice(){
-				var lastPrice = $("#lastPrice").text();
-				if(lastPrice == undefined || lastPrice == null || lastPrice.length == 0 || parseFloat(lastPrice) <= 0){
-					return true;
-				}else{
-					return false;
-				}
-			}
-		
 	</script>
 
 	</body>

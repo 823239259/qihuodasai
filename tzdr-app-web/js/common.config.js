@@ -1,4 +1,4 @@
-var model = "live";
+var model = "dev";
 var tradeSocketUrl = "";
 var marketSocketUrl = "";
 var marketUserName = "";
@@ -8,7 +8,6 @@ var marketPassword = "";
  */
 var TradeConfig = {
 	TradeSocketUrl:"ws://trade.vs.com:6060"
-
 }
 /**
  * 测试交易配置
@@ -16,8 +15,8 @@ var TradeConfig = {
 var TradeConfigTest = {
 //	TradeSocketUrl:"ws://139.224.24.206:6066"
 //	TradeSocketUrl:"ws://192.168.2.123:6060"
-	TradeSocketUrl:"ws://192.168.0.213:6060"
-
+//	TradeSocketUrl:"ws://192.168.0.213:6060"
+	TradeSocketUrl:"ws://139.224.24.206:6066"
 	
 }
 /**

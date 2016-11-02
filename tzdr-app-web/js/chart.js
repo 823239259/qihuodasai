@@ -2,9 +2,15 @@ var marketCommdity = {};
 function setMarketCommdity (key,value){
 	marketCommdity[key] = value;
 }
+function getMarketCommdity(key){
+	return marketCommdity[key];
+}
 var marketCommdityLastPrice = {}; 
 function setMarketCommdityLastPrice(key,value){
 	marketCommdityLastPrice[key] = value;
+}
+function getMarketCommdityLastPrice(key){
+	return marketCommdityLastPrice[key];
 }
 var marketNotSubCommdity = {};
 function setMarketNotSubCommdity(key,value){
@@ -14,9 +20,26 @@ var marketSubCommdity = {};
 function setMarketSubCommdity(key,value){
 	marketSubCommdity[key]=value;
 }
+var localCacheQuote = {};
+/**
+ * 添加最新一条行情行情到全局缓存
+ * @param {Object} param
+ */
+function setLocalCacheQuote(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode = commodityNo + contractNo;
+	localCacheQuote[contractCode] = param;
+}
+/**
+ * 获取缓存的行情数据
+ * @param {Object} key
+ */
+function getLocalCacheQuote(key){
+	return localCacheQuote[key];
+}
 var reconnect=null;
-
-    var commodityNoList="";
+var commodityNoList="";
 var marketSocket = null;
 var firstTimeLength=1;
 var commoditysData; 
@@ -31,12 +54,11 @@ mui.plusReady(function(){
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
 		init(Transfer.name);
-	var url = MarketUrl.SocketUrl;
-	marketSocket = new WebSocket(url);
-    var setIntvalTime = null;
+	marketSocket = new WebSocket(marketSocketUrl);
+    var setIntvalTime = null; 
     var marketLoadParam = {}
 	marketSocket.onopen = function(evt){
-       masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
+      masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
     };
     marketSocket.onclose = function(evt){
     	if(setIntvalTime != null)
@@ -94,13 +116,18 @@ mui.plusReady(function(){
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
-//			console.log(newCommdityNo)
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
 				insertDATA(quoteParam);
 			}
+			updateDesignateByQuote(subscribeParam);
 			updateFloatProfit(subscribeParam);
+			//计算浮动盈亏总和
+			sumListfloatingProfit();
+			//更新账户资产
+			updateAccountBalance();
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
+			setLocalCacheQuote(subscribeParam);
         }else if(method == "OnRspQryCommodity"){
         	if(OnRspQryCommodityDateL==1){
         		commoditysData=jsonData.Parameters;
@@ -124,7 +151,6 @@ mui.plusReady(function(){
 				var comContract = marketNotSubCommdity[commdityAndContract];
 				if(comContract != undefined){ 
 					if(marketSubCommdity[commdityAndContract] == undefined){
-						console.log()
 						subscribeHold(newExchangeNo,newCommdityNo,newContractNo);
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
@@ -188,31 +214,32 @@ mui.plusReady(function(){
 	 * 更新浮动盈亏 
 	 */
 	function updateFloatProfit(param) {
-//		console.log("更新")
 		var isFlag = false; 
 		var newContract = param.CommodityNo+param.ContractNo;
-		for (var i = 0; i < positionsIndex; i++) {
-			if(newContract == positionContractCode[i]){
+		for (var i = 0; i < postionIndex; i++) { 
+			if(newContract == localCachePositionContractCode[i]){
 				isFlag =  true;
 				break;
-			}
-		}
+			} 
+		} 
 		if(isFlag){
 			var lastPrice = param.LastPrice;
 			var comm = marketCommdity[newContract];
 			if(comm == undefined)return;
-			var $thisFloat = $("#floatValue"+newContract);//$("li[contract-code-position = " + newContract + "] span[class = 'position4 dateTimeL']");
-			var $thisAvgPrice = $("li[contract-code-position = " + newContract + "] span[class = 'position3']");
-			var $thisHoldNum = $("li[contract-code-position = " + newContract + "] span[class = 'position2']");
-			var $thisDrection = $("li[contract-code-position = " + newContract + "] span[class = 'position1']");
+			var $thisFloat = $("#floatValue"+newContract);
+			var $thisAvgPrice = $("li[data-tion-position = " + newContract + "] span[class = 'position3']");
+			var $thisHoldNum = $("li[data-tion-position = " + newContract + "] span[class = 'position2']");
+			var $thisDrection = $("li[data-tion-position = " + newContract + "] span[class = 'position1']");
+			var $thisFloatP = $("li[data-tion-position = " + newContract + "] span[class = 'position8']");
 			var drection = $thisDrection.attr("data-drection");
-			//验证该平仓数据是否存在列表中
+			//验证该平仓数据是否存在列表中  
 			if ($thisAvgPrice.text() == undefined) { 
 				return;
 			}
 			var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($thisAvgPrice.text()) , comm.ContractSize,comm.MiniTikeSize,parseInt($thisHoldNum.text()),drection);
 			var floatProfit = floatP +":"+ comm.CurrencyNo;
 			$thisFloat.val(floatProfit); 
+			$thisFloatP.text(floatP); 
 			if(parseFloat(floatP) < 0 ){
 				$thisFloat.css("color","green");
 			}else if(parseFloat(floatP) > 0){
