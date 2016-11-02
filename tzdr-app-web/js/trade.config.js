@@ -1,7 +1,7 @@
 /**
  * websocket地址
  */
-var tradeWebsocketUrl = null;
+var tradeWebsocketUrl = null; 
 function tradeConfigInstance(){
 	this.url = tradeSocketUrl;
 	return this;
