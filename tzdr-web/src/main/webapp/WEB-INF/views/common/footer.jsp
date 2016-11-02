@@ -47,7 +47,7 @@
 			</ul>
         </div>
         <div class="copyright_contact">
-            <h3>资讯电话</h3>
+            <h3>咨询电话</h3>
             <p style="font-size: 30px; color: #999; margin-top: 20px;"><span>400</span>-<span>852</span>-<span>8008</span></p>
             <p>工作日：8:30 - 24:00</p>
             <p>周末：09:00 - 17:00</p>
