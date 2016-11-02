@@ -164,7 +164,6 @@ mui.plusReady(function(){
 			}
         }else if(method == "OnRspUnSubscribe"){
         	var quoteParam = jsonData;
-        	console.log(JSON.stringify(quoteParam));
         }
     };
     marketSocket.onerror = function(evt){
@@ -276,15 +275,13 @@ mui.plusReady(function(){
     $("#tradeTitle").change(function(){
     	var commoditysDataP=commoditysData.Parameters;
     	var valSelect=$("#tradeTitle").val();
-    	console.log(JSON.stringify(commoditysData));
     	var exchangeNo= $("#exchangeNo").val();
     	var commodityNo= $("#commodeityNo").val();
     	var contractNo=  $("#contractNo").val();
-    	var allMess=commodityNo+contractNo
-    	if(commodityNoList.indexOf(allMess) < 0){
+    	var allMess=commodityNo+contractNo;
+    	var positionDom = $("li[data-tion-position = '"+allMess+"']");
+    	if(positionDom.html() == undefined){ 
     		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-    	}else{
-    		
     	}
     	for(var i=0;i<commoditysData.length;i++){
     		if(commoditysData[i].CommodityNo==valSelect){
