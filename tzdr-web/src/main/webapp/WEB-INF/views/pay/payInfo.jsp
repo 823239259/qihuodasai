@@ -121,6 +121,7 @@
 			<div class="subtab">
 				<form id="weixinbank" action="" method="post" target="_blank">
 					<div class="uc_olmoney" style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
+						<p style="color: #fc3;font-size: 14px;">温馨提示：如您已开通网银，请尽量选择网银充值，如您柜台转账请尽量选择相同银行转账，这样可以快速及时到账！</p>
 						<ul class="uc_pblist">
 							<%-- <li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
 							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>

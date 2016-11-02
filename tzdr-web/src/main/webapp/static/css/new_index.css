@@ -57,10 +57,10 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .h_partner .h_img a{float: left;}
 .h_partner .h_img a:hover { cursor: default;}
 /*copyright*/
-.copyright {width: 100%; height: 300px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
-.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 300px; border-bottom: 1px solid #1a1a1a;}
+.copyright {width: 100%; height: 265px; background-color: #333333; border-bottom: 1px solid #1a1a1a; margin: 0 auto;}
+.copyright_content {width: 1000px; margin: 0 auto; background-color: #333333; padding: 0 5px;height: 265px; border-bottom: 1px solid #1a1a1a;}
 .copyright_link, .copyright_interaction, .copyright_contact {float: left;margin-top: 30px;}
-.copyright_link ul {margin-top: 10px; width: 510px; height: 40px; line-height: 40px;}
+.copyright_link ul {margin-top: 10px; width: 660px; height: 20px; line-height: 20px;}
 .copyright_link ul li {float: left; margin-right: 20px; font-size: 14px; color: #666666;}
 .copyright_link ul li a {font-size: 14px; color: #999; text-decoration: none;}
 .copyright_link ul li a:hover {color: #ffcc33; text-decoration: underline;}
@@ -74,12 +74,18 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 .copyright_interaction p a:hover {text-decoration: underline; color: #ffcc33;}
 .copyright_interaction {float: right;}
 .copyright_contact {margin-left: 111px; float: right;}
-.copyright_contact h3 {height: 40px; line-height: 40px; margin: 10px 0; color: #999999; font-weight: normal; font-size: 14px;}
+.copyright_contact h3 {margin-top: 13px; color: #999; font-weight: normal; font-size: 14px;}
 .copyright_contact p {color: #666666; font-size: 14px; margin-top: 5px; margin-bottom: 10px;}
 .copyright .enterprise_link {height: 183px; width: 640px; margin-top: -5px;}
+.copyright_contact .follow li{float: left; margin-right: 11px;}    
+.copyright_contact .follow {height: 40px; line-height: 40px; color: #666;}
+.copyright_contact .follow .weibo{background: url("../images/image/weibo.png") no-repeat; width: 40px; height: 40px; display: block;}
+.copyright_contact .follow .weibo:hover {background: url("../images/image/weibo-on.png");}
+.copyright_contact .follow .weixin{background: url("../images/image/weixin.png") no-repeat; width: 40px; height: 40px; display: block;}
+.copyright_contact .follow .weixin:hover {background: url("../images/image/weixin-on.png");}
 .copyright .enterprise_link ul {width: 100%; float: left; margin-bottom: 10px;}
-.copyright .enterprise_link ul li{float: left; font-size: 14px; color: #666; margin-right: 20px;}
-.copyright .enterprise_link ul li a {font-size: 14px; color: #666; text-decoration: none;}
+.copyright .enterprise_link ul li{float: left; font-size: 14px; color: #999; margin-right: 20px;}
+.copyright .enterprise_link ul li a {font-size: 14px; color: #999; text-decoration: none;}
 .copyright .enterprise_link ul li a:hover {color: #ffcc33; text-decoration: underline;}
 /*copybox*/
 .copybox {width: 100%; height: 130px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}

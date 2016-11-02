@@ -7,9 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=1010">
-	<title>维胜金融-中国领先的国际期货及衍生品互联网交易平台|外盘期货|恒指期货|国际原油|富时A50|成都期货_期货开户_期货交易_期货行情</title>
-	<meta name="keywords" content="维胜,期货,国际期货,期货开户,期货交易,期货行情,富时A50,国际原油,恒指期货,金勺子,高盛期货,直达期货,横华期货,成都期货,都城投资,投资达人,A50交易,外盘期货公司,期货开户,国际期货开户,国际期货公司,外盘期货开户, 期货怎么买,如何炒股指期货, 股票跟期货的区别, 如何买期货"/>
-	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+	<title>国际期货开户_成都期货入门_期货公司排名_期货交易时间_外盘期货是什么_什么是期货交易规则_维胜金融-中国领先的国际期货及衍生品互联网交易平台 </title>
+	<meta name="keywords" content="期货入门,期货开户,期货模拟交易,期货交易,成都期货,外盘期货,国际期货开户,期货公司排名,期货交易规则,期货交易时间,外盘期货是什么,什么是期货交易,期货怎么炒"/>
+	<meta name="description" content="维胜金融致力于成为中国领先的国际期货及衍生品互联网交易平台,提供期货模拟交易、期货入门、国际期货开户、成都期货、外盘期货、期货公司排名、恒指期货、国际原油、富时A50等期货入门服务,分享期货交易时间、期货是什么、期货怎么炒及什么是期货交易规则,维胜金融期货开户操盘快捷方便，交易费用全网最低。"/>
 	<meta name="sogou_site_verification" content="rM6RBuyJcq"/>
 	<meta name="360-site-verification" content="130a887517d7b56c6f630e2188d9d027" />
 	<%

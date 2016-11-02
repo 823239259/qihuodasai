@@ -4,41 +4,15 @@
 <div style="background: #333;height: 338px;" id="ungundontiao">
 <div class="copyright">
     <div class="copyright_content">
-    	<div style="width: 100%; height: 156px;">
-	        <div class="copyright_link">
-	            <ul class="link">
-	                <li><a href="${ctx }/news/newsdata?colname=ff8080814e956d02014e95788e300001" target="_blank">维胜动态</a></li>
-	                <li><a href="${ctx }/about" target="_blank">公司简介</a></li>
-	                <li><a href="${ctx }/news/newsdata?colname=ff8080814f73cadc014f73cf0f6b0001" target="_blank">市场热点</a></li>
-	                <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
-	                <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
-	            </ul>
-	            <ul class="follow">
-	                <li>关注我们：</li>
-	                <li><a href="http://weibo.com/weishengjinrong" target="_blank" class="weibo"></a></li>
-	                <li class="erweima" style="position: relative; margin-right: 20px;">
-	                	<a href="javascript: void(0);" target="_blank" class="weixin">
-	                		<div class="erweima-wxtk" style="display: none;">
-			                	<img src="${ctx}/static/images/common-new/erweima.png">
-			            	</div>
-	                	</a>
-	                </li>
-	            </ul>
-	        </div>
-	        <div class="copyright_contact">
-	            <h3>客服热线</h3>
-	            <p><span>400</span>-<span>852</span>-<span>8008</span></p>
-	            <p>工作日：8:30 - 24:00</p>
-	            <p>周末：09:00 - 17:00</p>
-	        </div>
-	        <div class="copyright_interaction">
-	            <h3>交流互动</h3>
-	            <p>期货操盘QQ群：</p>
-	            <p><a target="_blank" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008528008&aty=0&a=0&curl=&ty=1">4008528008</a></p>
-	        </div>
-        </div>
-        <div class="enterprise_link">
-        	<ul>
+        <div class="copyright_link">
+            <ul class="link">
+                <li><a href="${ctx }/news/newsdata?colname=ff8080814e956d02014e95788e300001" target="_blank">维胜动态</a></li>
+                <li><a href="${ctx }/about" target="_blank">公司简介</a></li>
+                <li><a href="${ctx }/news/newsdata?colname=ff8080814f73cadc014f73cf0f6b0001" target="_blank">市场热点</a></li>
+                <li><a href="${ctx }/contact" target="_blank">联系我们</a></li>
+                <li><a href="${ctx }/help?tab=newbie&leftMenu=1" target="_blank">帮助中心</a></li>
+            </ul>
+            <ul>
 	           	<li>公司品牌：</li>
 	           	<li><a href=" http://www.vs.com/" target="_blank">维胜</a> </li>
 	           	<li><a href=" http://www.vs.com/" target="_blank">国际期货公司</a></li>
@@ -71,7 +45,24 @@
 				<li><a href="http://www.vs.com/a/view/usstock/" target="_blank">欧美股市</a></li>
 				<li><a href="http://www.vs.com/a/view/international/" target="_blank">国际商品</a></li>
 			</ul>
-		</div>
+        </div>
+        <div class="copyright_contact">
+            <h3>资讯电话</h3>
+            <p style="font-size: 30px; color: #999; margin-top: 20px;"><span>400</span>-<span>852</span>-<span>8008</span></p>
+            <p>工作日：8:30 - 24:00</p>
+            <p>周末：09:00 - 17:00</p>
+            <ul class="follow">
+                <li>关注我们：</li>
+                <li><a href="http://weibo.com/weishengjinrong" target="_blank" class="weibo"></a></li>
+                <li class="erweima" style="position: relative; margin-right: 20px;">
+                	<a href="javascript: void(0);" target="_blank" class="weixin">
+                		<div class="erweima-wxtk" style="display: none;">
+		                	<img src="${ctx}/static/images/common-new/erweima.png">
+		            	</div>
+                	</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 <div class="copybox">
@@ -100,9 +91,8 @@
             <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
         </div>
         <div class="cp_cppic">
-            <img src="${ctx}/static/images/image/shiming.png">
-            <img src="${ctx}/static/images/image/anquan.png">
-            <img src="${ctx}/static/images/image/chengxing.png">
+            <a target="_blank" href="http://webscan.360.cn/index/checkwebsite?url=www.vs.com"><img src="${ctx}/static/images/image/anquan.png"></a>
+            <a target="_blank" href="http://www.shuidixy.com/company/professionalInfo?s=94424583567954757334740627845150"><img style="opacity: 0.6;" src="${ctx}/static/images/image/small.png"></a>
         </div>
     </div>
 </div>
