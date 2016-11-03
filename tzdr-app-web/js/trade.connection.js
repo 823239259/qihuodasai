@@ -77,6 +77,7 @@ function loginOut(){
 	password = null;
 	socket = null;
 	setIsLogin(false);
+	clearTradListData();
 	/*clearTradListData();
 	clearLocalCacheData();*/
 }
