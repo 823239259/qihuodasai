@@ -376,8 +376,8 @@ p{
 	border:none;
 }
 #topMenu{
-	position: relative;
-	top: -2px;;
+	position: fixed;
+	top: 46px;;
 	background-color: #2B2B2B;
 	border-top: 1px solid #454545;
 	z-index: 999;

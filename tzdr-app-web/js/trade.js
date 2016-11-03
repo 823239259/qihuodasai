@@ -403,6 +403,9 @@ function appendOrder(param){
 	if(insertDateTime == undefined || insertDateTime.length == 1){
 		insertDateTime = "-"; 
 	}
+	if(insertDateTime=="" || insertDateTime.length==0 ){
+		insertDateTime=0;
+	}
 	var cls = "order-index" + orderIndex;
 	var clsen = 'entrust'+orderIndex; 
 	var html = '<li   class = "'+cls+' '+clsen+' EntrustOreder  myLi "" data-order-order = "'+orderId+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'
@@ -421,6 +424,10 @@ function appendOrder(param){
 				+'</li>';
 	$("#Entrust").append(html);
 	//tabOn();
+	if(insertDateTime=="" || insertDateTime.length==0 ){
+		document.getElementsByClassName("order7")[orderIndex].style.opacity=0;
+		
+	}
 	addOrderBindClick(cls);
 	updateOrderIndex();
 };
