@@ -6,15 +6,15 @@ import javax.persistence.Table;
 import com.tzdr.common.domain.BaseEntity;
 
 /**
- * 财经日历实体
+ * 财经日历实体历史数据实体
  * @author username
  *
  */
 @Entity
-@Table(name = "crawler_calendar")
-public class CrawlerCalendar extends BaseEntity{
-	private static final long serialVersionUID = -2026377655478102162L;
-	
+@Table(name = "crawler_calendar_history")
+public class CrawlerCalendarHistory extends BaseEntity{
+
+	private static final long serialVersionUID = -29398450382820226L;
 	private String calendarId;
 	private String eventRowId;
 	private Long timestamp;

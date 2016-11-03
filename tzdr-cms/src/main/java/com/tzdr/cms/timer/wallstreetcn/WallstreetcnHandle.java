@@ -9,13 +9,15 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
+import com.tzdr.common.utils.SpringUtils;
 import com.tzdr.domain.web.entity.CrawlerUrl;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLiveContent;
 
 public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 	private static Logger logger = LoggerFactory.getLogger(WallstreetcnHandle.class);
-	
+	private static CrawlerWallstreetnLiveService crawlerWallstreetnLiveService = SpringUtils.getBean(CrawlerWallstreetnLiveService.class);
 	/**
 	 * 获取实时行情数据
 	 * @return
@@ -57,6 +59,8 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 				wallstreetnLives.add(live);
 				contents.add(content);
 			}
+			logger.info("共获取:"+size);
+			getCrawlerWallstreetnLiveService().doSavesBatch(wallstreetnLives, contents);
 			if(size > 0){
 				JSONObject jsonObject = resultArray.getJSONObject(0);
 				String wallId = jsonObject.getString("id");
@@ -67,8 +71,6 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 				crawlerUrl.setLastWallstreetnTime(jsonObject.getString("createdAt"));
 				getCrawlerUrlService().update(getCrawlerUrl());
 			}
-			logger.info("共获取:"+size);
-			getCrawlerWallstreetnLiveService().doSavesBatch(wallstreetnLives, contents);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("数据处理失败:" + e.getMessage());
@@ -128,5 +130,13 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 		content.setVideoCount(jsonObject.getString("videoCount"));
 		content.setCategorySet(jsonObject.getString("categorySet"));
 		return content;
+	}
+	public static CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {
+		return crawlerWallstreetnLiveService;
+	}
+	public static void setCrawlerWallstreetnLiveService(CrawlerWallstreetnLiveService crawlerWallstreetnLiveService) {
+		if(WallstreetcnHandle.crawlerWallstreetnLiveService == null){
+			WallstreetcnHandle.crawlerWallstreetnLiveService = crawlerWallstreetnLiveService;
+		}
 	}
 }

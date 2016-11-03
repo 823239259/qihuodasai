@@ -181,9 +181,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				task.setWallstreetn(wallstreetn);
 				BaseWallstreetcnHandle handle = task.getBaseWallstreetcnHandle();
 				handle.setCrawlerUrl(crawlerUrl);
-				BaseWallstreetcnHandle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
-				BaseWallstreetcnHandle.setCrawlerUrlService(crawlerService);
-				BaseWallstreetcnHandle.setCrawlerCalendarService(crawlerCalendarService);
+				handle.setCrawlerUrlParams(crawlerUrlParams);
 				task.setBaseWallstreetcnHandle(handle);
 				WallstreetcnTimer.start(task);
 				crawlerService.update(crawlerUrl);
@@ -222,5 +220,4 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

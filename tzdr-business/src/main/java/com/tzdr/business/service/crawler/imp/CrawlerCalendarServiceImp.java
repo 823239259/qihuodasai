@@ -1,6 +1,7 @@
 package com.tzdr.business.service.crawler.imp;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tzdr.business.service.crawler.CrawlerCalendarService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.utils.DateUtils;
 import com.tzdr.domain.dao.crawler.CrawlerCalendarDao;
 import com.tzdr.domain.web.entity.CrawlerCalendar;
 
@@ -71,5 +73,14 @@ public class CrawlerCalendarServiceImp  extends BaseServiceImpl<CrawlerCalendar,
 			}
 		}
 		logger.info("增加成功:{}条,更新成功:{}条",saveSize,updateSize);
+	}
+	@Override
+	public void backUpHistory() {
+		Date date = new Date();
+		//获取上周星期天的时间
+		Date lastWeekDate = DateUtils.addDates(date, -1);
+		//获取上周的上周星期天的时间
+		Date lastAndLastWeebDate = DateUtils.addDates(date, -8);
+		
 	}
 }

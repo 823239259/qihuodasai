@@ -1,27 +1,26 @@
 package com.tzdr.cms.timer.wallstreetcn;
 
-
-
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-
-import com.tzdr.business.service.crawler.CrawlerCalendarService;
+import java.util.GregorianCalendar;
+import java.util.List;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
-import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.cms.utils.HttpUrl;
 import com.tzdr.domain.web.entity.CrawlerUrl;
+import com.tzdr.domain.web.entity.CrawlerUrlParam;
 
 public abstract class BaseWallstreetcnHandle {
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final SimpleDateFormat yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd");
 	private static CrawlerUrlService crawlerUrlService;
-	private static CrawlerCalendarService crawlerCalendarService;
-	private static CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
+	
 	/**
 	 * 当前请求的url的对象
 	 */
 	private  CrawlerUrl crawlerUrl;
+	private  List<CrawlerUrlParam> crawlerUrlParams;
 	public CrawlerUrlService getCrawlerUrlService() {
 		return crawlerUrlService;
 	}
@@ -36,24 +35,19 @@ public abstract class BaseWallstreetcnHandle {
 	public void setCrawlerUrl(CrawlerUrl crawlerUrl) {
 		this.crawlerUrl = crawlerUrl;
 	}
-	public static CrawlerCalendarService getCrawlerCalendarService() {
-		return crawlerCalendarService;
+	
+	public List<CrawlerUrlParam> getCrawlerUrlParams() {
+		return crawlerUrlParams;
 	}
-	public static void setCrawlerCalendarService(CrawlerCalendarService crawlerCalendarService) {
-		if(BaseWallstreetcnHandle.crawlerCalendarService == null){
-			BaseWallstreetcnHandle.crawlerCalendarService = crawlerCalendarService;
-		}
-	}
-	public static CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {
-		return crawlerWallstreetnLiveService;
-	}
-	public static void setCrawlerWallstreetnLiveService(CrawlerWallstreetnLiveService crawlerWallstreetnLiveService) {
-		if(BaseWallstreetcnHandle.crawlerWallstreetnLiveService == null){
-			BaseWallstreetcnHandle.crawlerWallstreetnLiveService = crawlerWallstreetnLiveService;
-		}
+	public void setCrawlerUrlParams(List<CrawlerUrlParam> crawlerUrlParams) {
+		this.crawlerUrlParams = crawlerUrlParams;
 	}
 	public static SimpleDateFormat getDf() {
 		return df;
+	}
+	
+	public static SimpleDateFormat getYyyyMmDd() {
+		return yyyy_MM_dd;
 	}
 	public static String doSend(String url ,String method ,String param){
 		String result = "";

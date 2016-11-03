@@ -18,4 +18,8 @@ public interface CrawlerCalendarService extends BaseService<CrawlerCalendar>{
 	 * @param array
 	 */
 	public void  doSaveCrawlerCalendarList(List<CrawlerCalendar> calendars);
+	/**
+	 * 备份保存历史数据
+	 */
+	public void backUpHistory();
 }
