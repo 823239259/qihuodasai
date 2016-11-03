@@ -178,6 +178,9 @@ p{
 	height:40px;
 	padding:4px 0px;
 	border-bottom: 1px solid #454545;
+	position: fixed;
+	top:86px;
+	z-index: 998;
 }
 .Assets p span{
 	font-size: 12px;
