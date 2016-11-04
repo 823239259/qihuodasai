@@ -17,7 +17,7 @@
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		    <a class="whiteFont" id="switchAccount">切换账号</a>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content" style="padding-top: 82px;">
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" id="topMenu">
 					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
 					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">1分</a>
@@ -52,8 +52,8 @@
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="trade">
-							<div class="Assets">
+						<div class="mui-control-content " id="trade" style="padding-top: 40px; padding-bottom: 20px;;">
+							<div class="Assets" style="background-color: #2B2B2B;">
 								<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 								<p><span>总资产</span><span>保证金</span><span>余额</span></p>
 							</div>
@@ -98,25 +98,26 @@
 							</div>
 				<div>
 					<div id="item1" class="mui-control-content mui-active" >
-							<ul id="positionList" class="listStyle" style="height: 180px; width: 100%;" >
+							<ul id="positionList" class="listStyle" style="height: 165px; width: 100%;" >
 								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
 							</ul>
 						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
 					</div>
 					<div id="item2" class="mui-control-content">
-							<ul  id="postersOrder" class="listStyle" style="height: 180px; width: 100%;" >
+							<ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
 								<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
 							</ul>
 							<button type="button" class="mui-btn mui-col-xs-10 focusButton" id="kilAnorder">撤单</button>
 					</div>
 					<div id="item3" class="mui-control-content" style="width: 100%;">
-							<ul  id="Entrust" class="listStyle" style="height: 180px;" >
+							<ul  id="Entrust" class="listStyle" style="height: 165px;" >
 								<li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
+								
 							</ul>
 					</div>
 					<div id="item4" class="mui-control-content" >
-							<ul  id="Deal" class="listStyle" style="height: 180px;">
+							<ul  id="Deal" class="listStyle" style="height: 165px;">
 								<li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
 							</ul>
 					</div>
