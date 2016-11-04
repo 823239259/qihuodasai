@@ -158,10 +158,12 @@
 		//初始化导航栏
 			tzdr.init.initHearListener();
   			
-			mui.init({
-				statusBarBackground: '#2B2B2B',
-			});
+//			mui.init({
+//				statusBarBackground: '#2B2B2B',
+//				statusBarColor:"#ffffff"
+//			});
 			mui.plusReady(function(){
+				 plus.navigator.setStatusBarBackground("#2B2B2B");
 				//链接socket;
 				var dataUrl={
 	  				home:"../../home.html",
