@@ -90,7 +90,7 @@ ul,li,ol,i,em { font-style: normal; list-style: none;}
 /*copybox*/
 .copybox {width: 100%; height: 130px; background-color: #333333; margin: 0 auto; border-top: 1px solid #4d4d4d;}
 .copybox_content {width: 1000px; margin: 0 auto;background-color: #333333; height: 130px; border-top: 1px solid #4d4d4d; padding: 0 5px; position: relative; top: -1px;}
-.cp_link {width: 670px; padding-top: 40px; height: 80px; float: left;}
+.cp_link {width: 790px; padding-top: 40px; height: 80px; float: left;}
 .cp_link p {color: #666; font-size: 12px; margin-top: 20px; height: 25px; line-height: 25px;}
 .cp_link ul li {float: left; color: #666; font-size: 12px; margin-right: 10px;}
 .cp_link ul li a{float: left; color: #666; text-decoration: none;}

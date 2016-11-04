@@ -1,0 +1,16 @@
+@charset "utf-8";
+*{margin: 0;padding: 0; font-family: "微软雅黑"}
+.singlesDay .singlesDay_title {background: url(../images/singlesDay_1.png) no-repeat center; width: 100%; height: 418px;}
+.singlesDay .content {background: #f2c261;}
+.singlesDay .center{width: 1000px; margin: 0  auto; text-align: center; border-bottom: 2px dashed #e7722b; padding-bottom: 20px;}
+.singlesDay .center .p1 {color: #e55c17; font-size: 28px; font-weight: bolder; height: 50px; line-height: 50px;}
+.singlesDay .center .p2 {font-weight: bolder; background: url(../images/singlesDay_2.png) no-repeat center; width: 1000px; height: 50px; line-height: 50px; color: #fff; font-size: 20px;}
+.singlesDay .center .p3 {font-weight: bolder; background: url(../images/singlesDay_3.png) no-repeat center; width: 1000px; height: 50px; line-height: 50px; color: #e55c17; font-size: 20px;}
+.singlesDay .center .p4 {font-weight: bolder; background: url(../images/singlesDay_5.png) no-repeat center; width: 1000px; height: 50px; line-height: 50px; color: #e55c17; font-size: 20px;}
+.singlesDay .center p {padding: 20px 0; }
+.singlesDay .center_two {width: 560px; margin: 0  auto; padding: 40px 0;}
+.singlesDay .center_two span {color: #f2c261; text-align: center; font-weight: bolder; margin-right: 10px; background: url(../images/singlesDay_6.png); width: 20px; height: 20px; display: inline-block;}
+.singlesDay .center_two p {padding: 10px 0; color: #e55c17; font-size: 16px;}
+.singlesDay .center_two .p1 {font-size: 20px;}
+.singlesDay .footer {background: #e59e39; height: 60px; line-height: 60px; text-align: center; color: #fff; font-size: 14px; border-top: 20px solid #f2ac49;}
+
