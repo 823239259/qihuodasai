@@ -39,7 +39,7 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 	   logger.info("新增"+saveSize+"条");
 	}
 	@Override
-	public void getCrawler() {
-		
+	public List<CrawlerWallstreetnLive> getCrawler() {
+		return  getEntityDao().getAll();
 	}
 }

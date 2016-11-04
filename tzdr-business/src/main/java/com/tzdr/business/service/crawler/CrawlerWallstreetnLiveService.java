@@ -8,5 +8,5 @@ import com.tzdr.domain.web.entity.CrawlerWallstreetnLiveContent;
 
 public interface CrawlerWallstreetnLiveService extends BaseService<CrawlerWallstreetnLive>{
 	public void doSavesBatch(List<CrawlerWallstreetnLive> crawlerWallstreetnLives,List<CrawlerWallstreetnLiveContent> contents);
-	public void getCrawler();
+	public  List<CrawlerWallstreetnLive> getCrawler();
 }

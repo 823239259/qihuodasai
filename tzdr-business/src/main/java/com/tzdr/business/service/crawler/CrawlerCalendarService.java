@@ -30,4 +30,9 @@ public interface CrawlerCalendarService extends BaseService<CrawlerCalendar>{
 	 * @param entities
 	 */
 	public void deleteBatch(List<CrawlerCalendar> entities);
+	/**
+	 * 获取日历数据
+	 * @param channelSet
+	 */
+	public List<CrawlerCalendar> doGetCrwlerCalendar();
 }

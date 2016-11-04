@@ -79,4 +79,8 @@ public class CrawlerCalendarServiceImp  extends BaseServiceImpl<CrawlerCalendar,
 	public void deleteBatch(List<CrawlerCalendar> entities) {
 		getEntityDao().deleteInBatch(entities);
 	}
+	@Override
+	public List<CrawlerCalendar> doGetCrwlerCalendar() {
+		return getEntityDao().getAll();
+	}
 }
