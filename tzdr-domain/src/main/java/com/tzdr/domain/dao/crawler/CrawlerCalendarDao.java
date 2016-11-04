@@ -10,4 +10,7 @@ import com.tzdr.domain.web.entity.CrawlerCalendar;
 public interface CrawlerCalendarDao extends BaseJpaDao<CrawlerCalendar, String>{
 	@Query("from CrawlerCalendar where calendarId = ?1")
 	public List<CrawlerCalendar> findByCalendar(String calendarId);
+	
+	@Query("from CrawlerCalendar where createTime BETWEEN ?1 and ?2")
+	public List<CrawlerCalendar> findByCalendarCreateBetween(Long startTime,Long endTime);
 }

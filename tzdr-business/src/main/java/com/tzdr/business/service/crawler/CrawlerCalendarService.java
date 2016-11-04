@@ -19,7 +19,15 @@ public interface CrawlerCalendarService extends BaseService<CrawlerCalendar>{
 	 */
 	public void  doSaveCrawlerCalendarList(List<CrawlerCalendar> calendars);
 	/**
-	 * 备份保存历史数据
+	 * 根据数据创建时间查询数据
+	 * @param startTime
+	 * @param endTime
+	 * @return
 	 */
-	public void backUpHistory();
+	public List<CrawlerCalendar> findByCreateTimeBetween(Long startTime,Long endTime);
+	/**
+	 * 批量删除数据
+	 * @param entities
+	 */
+	public void deleteBatch(List<CrawlerCalendar> entities);
 }

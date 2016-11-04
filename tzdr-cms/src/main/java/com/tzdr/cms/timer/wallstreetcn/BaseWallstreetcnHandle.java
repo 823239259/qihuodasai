@@ -2,19 +2,18 @@ package com.tzdr.cms.timer.wallstreetcn;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
 import com.tzdr.cms.utils.HttpUrl;
+import com.tzdr.common.utils.SpringUtils;
 import com.tzdr.domain.web.entity.CrawlerUrl;
 import com.tzdr.domain.web.entity.CrawlerUrlParam;
 
 public abstract class BaseWallstreetcnHandle {
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd");
-	private static CrawlerUrlService crawlerUrlService;
+	private static CrawlerUrlService crawlerUrlService = SpringUtils.getBean(CrawlerUrlService.class);
 	
 	/**
 	 * 当前请求的url的对象

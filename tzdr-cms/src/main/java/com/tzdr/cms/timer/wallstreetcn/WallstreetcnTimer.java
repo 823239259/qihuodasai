@@ -36,8 +36,9 @@ public class WallstreetcnTimer{
 			wallstreetcnTimer.getTimer().schedule(baseWallstreetnTask, 1000,Long.parseLong(wallstreetn.getRule()));
 			wallstreetcnTimer.addTimer(wallstreetn.getId(),baseWallstreetnTask);
 			logger.info("任务加入"+wallstreetn.getUrl()+wallstreetn.getParam());
+			return true;
 		}
-		return true;
+		return false;
 	}
 	/**
 	 * 停止指定任务
