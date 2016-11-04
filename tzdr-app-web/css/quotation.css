@@ -178,6 +178,9 @@ p{
 	height:40px;
 	padding:4px 0px;
 	border-bottom: 1px solid #454545;
+	position: fixed;
+	top:86px;
+	z-index: 998;
 }
 .Assets p span{
 	font-size: 12px;
@@ -376,8 +379,8 @@ p{
 	border:none;
 }
 #topMenu{
-	position: relative;
-	top: -2px;;
+	position: fixed;
+	top: 46px;;
 	background-color: #2B2B2B;
 	border-top: 1px solid #454545;
 	z-index: 999;
@@ -462,11 +465,12 @@ p{
 	border:1px solid red;
 }
 .mui-input-row select{
-	height: 50px;
-	line-height: 50px;
+	height: 49px;
+	line-height: 49px;
 	background-color: #2B2B2B;
 	color:#A9A9A9;
 	text-align: center;
+	margin-top: 1px;;
 }
 .operateLogin button {
 	background-color: #fcc900;

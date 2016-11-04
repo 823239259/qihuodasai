@@ -180,7 +180,7 @@ function handleData(evt){
 			var loginMessage = parameters.Message;
 			tip(loginMessage);
 		}else if(method == "OnRspLogout"){
-			//$("#trade_login").text("登录");
+			$("#switchAccount").text("登录账户");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			loginFail = true;
@@ -403,6 +403,9 @@ function appendOrder(param){
 	if(insertDateTime == undefined || insertDateTime.length == 1){
 		insertDateTime = "-"; 
 	}
+	if(insertDateTime=="" || insertDateTime.length==0 ){
+		insertDateTime=0;
+	}
 	var cls = "order-index" + orderIndex;
 	var clsen = 'entrust'+orderIndex; 
 	var html = '<li   class = "'+cls+' '+clsen+' EntrustOreder  myLi "" data-order-order = "'+orderId+'" data-index-order = "'+orderIndex+'" data-tion-order = "'+contractCode+'">'
@@ -421,6 +424,10 @@ function appendOrder(param){
 				+'</li>';
 	$("#Entrust").append(html);
 	//tabOn();
+	if(insertDateTime=="" || insertDateTime.length==0 ){
+		document.getElementsByClassName("order7")[orderIndex].style.opacity=0;
+		
+	}
 	addOrderBindClick(cls);
 	updateOrderIndex();
 };
@@ -1762,11 +1769,13 @@ function updateHoldProfit(){
  * 更新账户资产 
  */
 function updateAccountBalance(){
-	var floatingProfit = $("#floatingProfit").val();
-	var todayBalance = $("#todayBalance");
-	var todayCanUse = $("#todayCanUse");
-	todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
-	todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
+	if(isLogin){ 
+		var floatingProfit = $("#floatingProfit").val();
+		var todayBalance = $("#todayBalance");
+		var todayCanUse = $("#todayCanUse");
+		todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
+		todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
+	}
 }
 /**
  * 清除交易列表的数据并生成操作按钮
@@ -1888,6 +1897,19 @@ function setTimeOutInsertOrder(){
 	tradeSetTimeOut = setTimeout(function(){
 					plus.nativeUI.closeWaiting(); 
 				},10000);
+}
+/**
+ * 清理数据列表
+ */
+function clearTradListData(){
+	$("#account_gdt1").html("");
+	$("#Entrust").html("");
+	$("#postersOrder").html("");
+	$("#positionList").html("");
+	$("#Deal").html("");
+	$("#todayBalance").text("0.00");
+	$("#deposit").text("0.00");
+	$("#todayCanUse").text("0.00");
 }
 function tabOn() {
 	/*交易ul li  odd even odd  li:nth-of-type(even)*/
