@@ -96,17 +96,17 @@ mui.plusReady(function(){
 	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==1440){
-				processingDayCandlestickData(historyParam)
-				processingDayCandlestickVolumeData(historyParam);
+//				processingDayCandlestickData(historyParam)
+//				processingDayCandlestickVolumeData(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==5){
-				processingCandlestickVolumeDataFive(historyParam);
-				processingDataFive(historyParam);
+//				processingCandlestickVolumeDataFive(historyParam);
+//				processingDataFive(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==15){
-				processingCandlestickVolumeDataTen(historyParam);
-				processingDataTen(historyParam);
+//				processingCandlestickVolumeDataTen(historyParam);
+//				processingDataTen(historyParam);
 			}else if(historyParam.Parameters.HisQuoteType==30){
-				processingCandlestickVolumeDataThree(historyParam);
-				processingDataThree(historyParam);
+//				processingCandlestickVolumeDataThree(historyParam);
+//				processingDataThree(historyParam);
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
