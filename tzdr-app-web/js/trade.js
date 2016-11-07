@@ -1410,6 +1410,8 @@ function bindOpertion(){
 			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
 			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";
 			var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),marketBuy,null,$this);
+		}else{
+			tip("未登录,请先登录");
 		}
 	})
 	$("#updateDesOrder").bind("click",function(){
