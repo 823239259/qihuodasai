@@ -80,6 +80,7 @@ function handleData(evt){
 				anotherPlace = false;
 			} else {
 				loginFail = -2;
+				alertProtype(loginMessage,"登录提示",Btn.confirmed());
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
@@ -1410,6 +1411,8 @@ function bindOpertion(){
 			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
 			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";
 			var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),marketBuy,null,$this);
+		}else{
+			tip("未登录,请先登录");
 		}
 	})
 	$("#updateDesOrder").bind("click",function(){

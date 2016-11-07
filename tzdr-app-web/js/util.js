@@ -79,7 +79,7 @@ function cancleCallBack(){}
  * @param tipContent
  */
 function tipAlert(tipContent){
-	layer.alert(tipContent);
+	//layer.alert(tipContent);
 }
 /**
  * 提示层
