@@ -1,17 +1,4 @@
-/**
- * 发送socket请求
- * @param {Object} method 方法名
- * @param {Object} parameters 参数
- */
-function sendMessage(method,parameters){
-	    	socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-}
 var TradeUrl = {
-	/**
-	 * soketurl
-	 */
-	SocketUrl:tradeSocketUrl,
-	
 	/**
 	 * 登录url
 	 */
@@ -45,6 +32,10 @@ var TradeUrl = {
 	 */
 	CancelOrderUrl:"CancelOrder",
 	/**
+	 * 改单url
+	 */
+	ModifyOrderUrl:"ModifyOrder",
+	/**
 	 * 错误通知
 	 */
 	OnError : "OnError"
@@ -56,42 +47,42 @@ var Trade = {
 			 * @param {Object} password 密码
 			 */
 			doLogin:function(username,password){
-				sendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'"}');
+				Trade.doSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'"}');
 			},
 			/**
 			 * 登出
 			 * @param {Object} username
 			 */
 			doLoginOut:function(username){
-				sendMessage(TradeUrl.LoginOut,'{"ClientNo":"'+username+'"}');
+				Trade.doSendMessage(TradeUrl.LoginOut,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 获取个人账户信息
 			 * @param {Object} username 用户账户
 			 */
 			doAccount:function(username){
-				sendMessage(TradeUrl.QryAccountUrl,'{"ClientNo":"'+username+'"}');
+				Trade.doSendMessage(TradeUrl.QryAccountUrl,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 获取订单信息
 			 * @param {Object} username 用户账户
 			 */
 			doOrder:function(username){
-				sendMessage(TradeUrl.QryOrderUrl,'{"ClientNo":"'+username+'"}');
+				Trade.doSendMessage(TradeUrl.QryOrderUrl,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 查询成交记录信息
 			 * @param {Object} username 用户账户
 			 */
 			doTrade:function(username){
-				sendMessage(TradeUrl.QryTradeUrl,'{"ClientNo":"'+username+'"}')
+				Trade.doSendMessage(TradeUrl.QryTradeUrl,'{"ClientNo":"'+username+'"}')
 			},
 			/**
 			 * 查询持仓信息
 			 * @param {Object} username 用户账户
 			 */
 			doHold:function(username){
-				sendMessage(TradeUrl.QryHoldUrl,'{"ClientNo":"'+username+'"}');
+				Trade.doSendMessage(TradeUrl.QryHoldUrl,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 报单录入请求
@@ -115,7 +106,7 @@ var Trade = {
 							+' "LimitPrice":'+ limitPrice +','
 							+' "TriggerPrice":'+ triggerPrice +','
 							+' "OrderRef":"'+ orderRef +'"}';
-				sendMessage(TradeUrl.InsertOrderUrl,param);
+				Trade.doSendMessage(TradeUrl.InsertOrderUrl,param);
 			},
 			/**
 			 * 撤单请求
@@ -137,85 +128,38 @@ var Trade = {
 							+' "OrderNum":'+orderNum+','
 							+' "Drection":'+drection+','
 							+' "OrderPrice":'+orderPrice+'}';
-				sendMessage(TradeUrl.CancelOrderUrl,param);
+				Trade.doSendMessage(TradeUrl.CancelOrderUrl,param);
+			},
+			/**
+			 * 改单请求
+			 * @param {Object} orderSysId 系统编号
+			 * @param {Object} orderId 订单号
+			 * @param {Object} exchangeNo 交易所代码
+			 * @param {Object} commodityNo 品种代码
+			 * @param {Object} contractNo 合约代码
+			 * @param {Object} orderNum 订单数量
+			 * @param {Object} drection 买卖方向（0：买，1：卖）
+			 * @param {Object} orderPrice 订单价格
+			 * @param {Object} triggerPrice 触发价格
+			 */
+			doModifyOrder:function(orderSysId,orderId,exchangeNo,commodityNo,contractNo,orderNum,drection,orderPrice,triggerPrice){
+				var param = '{"OrderSysID":"'+orderSysId+'",'
+								+' "OrderID":"'+orderId+'",'
+								+' "ExchangeNo":"'+exchangeNo+'",'
+								+' "CommodityNo":"'+commodityNo+'",'
+								+' "ContractNo":"'+contractNo+'",'
+								+' "OrderNum":'+orderNum+','
+								+' "Drection":'+drection+','
+								+' "OrderPrice":'+orderPrice+','
+								+' "TriggerPrice":'+triggerPrice+'}';
+				Trade.doSendMessage(TradeUrl.ModifyOrderUrl,param);
+			},
+			/**
+			 * 发送交易请求
+			 * @param {Object} method
+			 * @param {Object} parameters
+			 */
+			doSendMessage:function(method,parameters){
+				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 			}
 		}
-var MarketUrl = {
-			SocketUrl:marketSocketUrl,
-			/**
-			 * 登录url
-			 */
-			Login:"Login",
-			/**
-			 * 品种url
-			 */
-			QryCommodityUrl:"QryCommodity",
-			/**
-			 * 合约url
-			 */
-			QryContractUrl:"QryContract",
-			/**
-			 * 订阅url
-			 */
-			SubscribeUrl:"Subscribe",
-			/**
-			 * 历史url
-			 */
-			QryHistoryUrl:"QryHistory"
-}
-/**
- * 获取市场价格
- * @param {Object} price 最新价格
- * @param {Object} miniTikeSize 最小变动单位
- * @param {Object} drection 买卖方向(0-买，1-卖)
- */
-function doGetMarketPrice(price,miniTikeSize,drection){
-	var base = 20;
-	var priceRange = parseFloat(miniTikeSize) * base;
-	price =  parseFloat(price);
-	var newPrice = 0.00;
-	if(drection == 0){
-		newPrice = price + priceRange;
-	}else if(drection == 1){
-		newPrice = price - priceRange;
-	}
-	return parseFloat(newPrice).toFixed(2);
-}
-/**
- * 
- * 计算浮动盈亏
- * @param {Object} lastPrice 最新价
- * @param {Object} tradeAvgPrice 均价
- * @param {Object} contractSize 每手乘数
- * @param {Object} miniTikeSize 
- * @param {Object} orderNum 持仓手数
-*/
-function doGetFloatingProfit(lastPrice,tradeAvgPrice,contractSize,miniTikeSize,orderNum,drection){
-	var price = 0.00;
-	if(drection == 0){ 
-		price = lastPrice - tradeAvgPrice;
-	}else if(drection == 1){
-		price = tradeAvgPrice - lastPrice;
-	}
-	return parseFloat((price * contractSize) * orderNum / miniTikeSize).toFixed(2);
-}
-function clearLogin(){
-	localStorage.removeItem("account");
-	localStorage.removeItem("password");
-	username = null;
-	password = null;
-}
-/**
- * 连接交易
- */
-var socket = null;
-
-var username = localStorage.getItem("account");
-var password = localStorage.getItem("password");
-var endLoginAccount = localStorage.getItem("endLoginAccount");
-var endLoginPassword = localStorage.getItem("endLoginPassword");
-if(username != null){
-	socket = new WebSocket(TradeUrl.SocketUrl);
-//	alert(socket);
-}
-//alert(socket+"546");

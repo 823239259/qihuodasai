@@ -257,6 +257,7 @@ function setTradeLastPrice(param){
  * @param
  */
 function setBuyAndSellFloatPrice(param){
+	return;
 	var priceType = $("input[type='radio']:checked").val();
 	//如果限价就不需要修改
 	if(priceType == 0)return;
@@ -314,8 +315,14 @@ function setSelectOption(contractCode){
 	$("#trade_data #doSize").val(localCommodity.DotSize);
 	$("#money_number").val(localQoute.LastPrice);
 	$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
-	$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-	$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+	var val = $('input:radio:checked').val();
+	if(val == 0){
+		var money = $("#money_number").val();
+		$("#float_buy").text(money);
+		$("#float_sell").text(money);
+	}
+	//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+	//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
 	updateRight(localQoute);
 }
 /**

@@ -9,48 +9,85 @@ function getUrlParam(name) {
 	return null; //返回参数值
 }
 /**
- * 生成报单引用 
+ * 判空 
+ * @param {Object} str
+ * @return {Boolean} 如果为空返回true,否则false
  */
-function doGetOrderRef() {
-	return new Date().getTime();
+function isEmpty(str) {
+	return str == null || str == undefined || str.length == 0 || str.length == "undefined" ? true : false;
 }
 /**
- * 平仓处理 
- * @param {Object} param
+ *  设置cookie
+ * @param {Object} key
+ * @param {Object} name
+ * @param {Object} time
  */
-function selling(param) {
-	var sellingParam = param;
-	for(var i = 0; i < sellingParam.length; i++) {
-		var sellings = sellingParam[i];
-		Trade.doInsertOrder(sellings.ExchangeNo,
-							sellings.CommodityNo,
-							sellings.ContractNo,
-							sellings.OrderNum,
-							sellings.Drection,
-							sellings.PriceType,
-							sellings.LimitPrice,
-							sellings.TriggerPrice,
-							sellings.OrderRef);
-
-	}
+function setTradeCookie(key, name) {
+	var Days = 30;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days*24*60*60*1000);
+	document.cookie = key + "="+ escape (name) + ";expires=";
 }
 /**
- * 撤单处理 
- * @param {Object} param
+ * 获取cookie
+ * @param {Object} key
  */
-function cancleOrder(param) {
-	var cancleParam = param;
-	for(var i = 0; i < cancleParam.length; i++) {
-		var cancle = cancleParam[i];
-		Trade.doCancelOrder(cancle.orderSysId,
-			cancle.orderId,
-			cancle.exchangeNo,
-			cancle.commodityNo,
-			cancle.contractNo,
-			cancle.orderNum,
-			cancle.drection,
-			cancle.orderPrice);
-	}
+function getTradeCookie(key){
+	var arr,reg=new RegExp("(^| )"+key+"=([^;]*)(;|$)");
+	if(arr=document.cookie.match(reg))
+		return unescape(arr[2]);
+	else
+		return null;
+}
+/**
+ * 删除cookie
+ * @param {Object} key
+ */
+function delTradeCookie(key){
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval=getTradeCookie(key);
+	if(cval!=null)
+		document.cookie= key + "="+cval+";expires="+exp.toGMTString();
+}
+/**
+ * 验证是否是JSON对象
+ * @param obj
+ * @returns {Boolean}
+ */
+function isJson(obj){
+	var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length; 
+	return isjson;
+}
+/**
+ * 提示询问层
+ * @param tipContent
+ */
+function tipConfirm(tipContent,successCallBack,cancleCallBack){
+	//询问框
+	layer.confirm(tipContent+"?", {
+	  btn: ['确认','取消'] //按钮
+	}, function(){
+		successCallBack();
+	}, function(){
+		cancleCallBack();
+	});
+}
+function cancleCallBack(){}
+/**
+ * 弹出层
+ * @param tipContent
+ */
+function tipAlert(tipContent){
+	//layer.alert(tipContent);
+}
+/**
+ * 提示层
+ * @param tioContent
+ */
+function tip(tipContent){
+	mui.toast(tipContent);
+	/*layer.msg(tipContent);*/
 }
 var Btn = {
 		confirmed: function() {

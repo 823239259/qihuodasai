@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.1.3",/*应用版本名称*/
-		"code": "20161027"
+		"name": "2.1.5",/*应用版本名称*/
+		"code": "20161104"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -109,6 +109,8 @@
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"UIReserveStatusbarOffset":true,//使用沉浸式状态栏
+				"UIStatusBarStyle":"UIStatusBarStyleBlackOpaque",//黑色不透明状态栏，白色文字  UIStatusBarStyleDefault 默认风格（白色状态栏上有黑色文字）  UIStatusBarStyleBlackTranslucent 黑色透明状态栏，白色文字
 				"frameworks": []
 			},
 			"google": {
@@ -916,7 +918,8 @@
 					"images/2.0.png",
 					"images/1.png",
 					"images/3.png",
-					"images/0.png"
+					"images/0.png",
+					"images/status_01.png"
 				],
 				"refer": [
 					"tzdr/buy/buy.html",
@@ -925,7 +928,8 @@
 					"tzdr/future/DetailCn.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/future/DetailHsi.html",
-					"tzdr/future/DetailCp.html"
+					"tzdr/future/DetailCp.html",
+					"tzdr/future/DetailCl.html"
 				],
 				"priority": 0
 			},
@@ -985,7 +989,8 @@
 					"js/common.js"
 				],
 				"refer": [
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
@@ -1058,7 +1063,11 @@
 					"js/FiveTestCandlestickChart.js",
 					"js/fiveChart.config.js",
 					"js/tenChart.config.js",
-					"js/threeChart.config.js"
+					"js/threeChart.config.js",
+					"js/trade.util.js",
+					"js/trade.connection.js",
+					"js/trade.data.mode.js",
+					"js/trade.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1096,7 +1105,9 @@
 					"js/jquery.base64.js",
 					"css/quotation.css",
 					"js/trade.send.js",
-					"js/common.config.js"
+					"js/common.config.js",
+					"js/trade.config.js",
+					"js/trade.connection.js"
 				],
 				"refer": [
 					"tzdr/future/cl.html",

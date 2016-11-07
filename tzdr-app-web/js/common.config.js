@@ -7,17 +7,17 @@ var marketPassword = "";
  * 交易配置配置
  */
 var TradeConfig = {
-	TradeSocketUrl:"ws://trade.vs.com:6060"
-
+//	TradeSocketUrl:"ws://trade.vs.com:6060"
+	TradeSocketUrl:"ws://139.196.228.143:6066"
 }
 /**
  * 测试交易配置
  */ 
 var TradeConfigTest = {
-//	TradeSocketUrl:"ws://139.224.24.206:6066"
+//	TradeSocketUrl:"ws://139.196.228.143:6066"
 //	TradeSocketUrl:"ws://192.168.2.123:6060"
-	TradeSocketUrl:"ws://192.168.0.213:6060"
-
+//	TradeSocketUrl:"ws://192.168.0.213:6060"
+	TradeSocketUrl:"ws://139.224.24.206:6066"
 	
 }
 /**

@@ -293,7 +293,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .dt_grid ul.mui-table-view { margin-top: 0;}
 .dt_grid .dt_num { border-bottom:1px solid #E0E0E0; padding: 0 10px 15px; }
 .dt_grid .mui-grid-9 { background: #fff; border-top: 1px solid #E0E0E0;border-left: 1px solid #E0E0E0;}
-.dt_grid .mui-grid-9 h5 { background: #e5f9ff; margin: 0; color: #333; height: 40px; line-height: 40px; border-bottom: 1px solid #E0E0E0;}
+.dt_grid .mui-grid-9 h5 { width:25%;background: #e5f9ff; margin: 0; color: #333; display: table-cell;height: 60px; text-align:center;vertical-align: middle; border-bottom: 1px solid #E0E0E0;}
 .dt_grid .mui-grid-9 p { height: 40px; line-height: 40px; color: #4c4c4c;}
 .dt_grid .mui-grid-view.mui-grid-9 .mui-table-view-cell { padding: 0; border-right:1px solid #e0e0e0; border-bottom: 1px solid #E0E0E0; }
 .dt_grid ul.mui-table-view:before {background-color: #fff; }

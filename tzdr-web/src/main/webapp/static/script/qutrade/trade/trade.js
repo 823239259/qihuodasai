@@ -27,8 +27,8 @@ var tradeSuccessLoadFlag = false;
  * 合约交易成功查询持仓信息
  */
 function tradeSuccessLoadHoldData(){
-	Trade.doHold(username);
 	tradeSuccessLoadFlag = true;
+	Trade.doHold(username);
 	
 }
 /**
@@ -57,6 +57,10 @@ function linearlyLoadData(method) {
  * 处理返回数据
  * @param {Object} EVT
  */
+/**
+ * 保存已下单的数据
+ */
+var resultInsertOrderId = {};
 function handleData(evt){
 	var dataString = evt.data;
 	var data = JSON.parse(dataString);
@@ -115,6 +119,7 @@ function handleData(evt){
 			if(inserOrderStatus == 5){
 				tip("交易失败:合约【"+insertOrderParam.ContractCode+"】,原因【"+insertOrderParam.StatusMsg+"】");
 			}
+			resultInsertOrderId[insertOrderParam.OrderID] = insertOrderParam.OrderID;
 			//订单状态通知
 		} else if (method == "OnRtnOrderState") {
 			var orderParam = parameters;
@@ -138,10 +143,10 @@ function handleData(evt){
 			if(orderStatusWeHooks == 5){
 				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
 			}
-			if(isChangeOrder && cacaleOrderId==orderId){
+			if(isUpdateOrder && cacaleOrderId==orderId){
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
-				isChangeOrder = false;
+				isUpdateOrder = false;
 				tip("改单成功:合约【"+contractCode+"】,委托价【"+orderPrice+"】,委托量【"+orderNum+"】");
 			}
 			//订单成交通知
@@ -149,7 +154,13 @@ function handleData(evt){
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
 			appendPostionAndUpdate(tradeParam);
-			tradeSuccessLoadHoldData();
+			var orderId = tradeParam.OrderID;
+			var locaOrderId = resultInsertOrderId[orderId];
+			if(isBuy && locaOrderId == locaOrderId){
+				tradeSuccessLoadHoldData();
+				resultInsertOrderId[orderId] = null;
+				isBuy = false;
+			}
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
@@ -405,6 +416,8 @@ function updateOrder(param){
 	var contractCode = param.ContractCode;
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
+	var $desgPrice = $("ul[data-order-order='"+orderId+"'] li[class = 'order2']");
+	var $desgNumber = $("ul[data-order-order='"+orderId+"'] li[class = 'order3']");
 	var $orderStatus = $("ul[data-order-order='"+orderId+"'] li[class = 'order5']");
 	var $orderPrice = $("ul[data-order-order='"+orderId+"'] li[class = 'order6']");
 	var $tradeNum = $("ul[data-order-order= '"+orderId+"'] li[class = 'order7']");
@@ -416,6 +429,8 @@ function updateOrder(param){
 	$tradeNum.text(tradeNum);	
 	$statusMsg.text(statusMsg);
 	$orderPrice.text(orderPrice);
+	$desgPrice.text(param.OrderPrice);
+	$desgNumber.text(param.OrderNum);
 };
 /**
  * 缓存挂单的列表信息
@@ -782,7 +797,7 @@ function updateOrderUpdatePosition(param){
 			for(var i = 0 ; i < length ; i++){
 				var data = cache[i];
 				holdNum = holdNum + data.HoldNum;
-				price = price + data.HoldAvgPrice;
+				price = price + data.HoldAvgPrice * data.HoldNum;
 			}
 			var localCommodity = getLocalCacheCommodity(contractCode);
 			var doSize = 2;
@@ -892,12 +907,12 @@ function generateOrderTitle(){
 				'	<li class="ml">合约代码</li>'+
 				'	<li  style = "width:50px;">买卖</li>'+
 				'	<li  style="width: 50px;">委托价</li>'+
-				'	<li style = "width:70px;">委托量</li>'+
+				'	<li style = "width:50px;">委托量</li>'+
 				'	<li style="width: 70px;">订单类型</li>'+
 				'	<li  style="width: 70px;">委托状态</li>'+
 				'	<li style = "width:70px;" >成交均价</li>'+
 				'	<li style = "width:50px;"  >成交量</li>'+
-				'	<li style = "width:120px;">撤单时间</li>'+
+				'	<li style = "width:120px;">委托时间</li>'+
 				'	<li style = "width:80px;">订单号</li>'+
 				'   <li style="width: 80px;">反馈信息</li>'+
 				'</ul>';
@@ -1223,8 +1238,14 @@ $(function(){
 		$("#trade_data #doSize").val(localCommodity.DotSize);
 		$("#money_number").val(localQoute.LastPrice);
 		$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
-		$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-		$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+		var val = $('input:radio:checked').val();
+		if(val == 0){
+			var money = $("#money_number").val();
+			$("#float_buy").text(money);
+			$("#float_sell").text(money);
+		}
+		//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+		//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
 		setMoneyNumberIndex(0);
 		 var left_xiangmu   = $(".futuresList .left_xiangmu");
 		left_xiangmu.each(function(){
@@ -1260,6 +1281,8 @@ $(function(){
 		$("#trade_login").text("登录中");
 		tradeLogin();
 	});
+	$("#float_buy").text("市价");
+	$("#float_sell").text("市价");
 	$("#trade_loginOut").click(function(){
 		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
 	});
@@ -1267,10 +1290,31 @@ $(function(){
 	    $('#float_buy').text($(this).val());  
 	    $('#float_sell').text($(this).val());  
 	});  
+	$("input[type = 'radio']").bind("click",function(){
+		var $this = $(this);
+		var val = $this.val();
+		var money = $("#money_number").val();
+		if(val == 1){
+			$("#float_buy").text("市价");
+			$("#float_sell").text("市价");
+		}else if(val == 0){
+			$("#float_buy").text(money);
+			$("#float_sell").text(money);
+		}
+	});
 });
 /**
  * 绑定交易操作事件
  */
+/**
+ * 标识是否是改单操作
+ * 
+ */
+var isUpdateOrder = false;
+/**
+ * 是否是下单操作
+ */
+var isBuy = false;
 function bindOpertion(){
 	$(".trade_buy").bind("click",function(){
 		if(isLogin){
@@ -1465,6 +1509,7 @@ function doInsertOrder(orderNum,tradeDrection,orderPrice){
 	var contractNo = $("#contractNo").val();
 	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
 	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
+	isBuy = true;
 }
 /**
  * 全部平仓操作
@@ -1524,6 +1569,7 @@ function doInsertBackhandOrder(){
 	var orderPrice = tradeParam.LimitPrice;
 	Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
 	tip("合约【"+contractCode+"】提交成功,等待交易");
+	isBuy = true;
 }
 /**
  * 全部撤单操作
@@ -1560,10 +1606,7 @@ function doInsertCancleOrder(){
 /**
  * 改单操作
  */
-/**
- * 是否是改单操作
- */
-var isChangeOrder = false;
+
 function doInsertChangeSingleOrder(){
 	var orderId = selectDesgnate["orderId"];
 	var contractCode = selectDesgnate["contraction"];
@@ -1588,8 +1631,8 @@ function doInsertChangeSingleOrder(){
 	param[0]=tradeParam;
 	modifyOrder(param);
 	layer.closeAll();
-	isChangeOrder = true
 	tip("合约【"+contractCode+"】提交成功,等待交易");
+	isUpdateOrder = true;
 }
 /**
  * 获取平仓的基本信息
@@ -1788,6 +1831,9 @@ function clearLocalCacheData(){
 	loadCachTodayCanuse = 0;
 	tradeSuccessLoadFlag = false;
 	localCachePositionRecentData={};
+	resultInsertOrderId={};
+	isUpdateOrder = false;
+	isBuy = false;
 }
 /**
  * 输入价格或数量验证 
