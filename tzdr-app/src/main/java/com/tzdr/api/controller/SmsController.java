@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jodd.util.ObjectUtil;
+import jodd.util.StringUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
+import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.cms.service.user.PasswordService;
@@ -144,5 +147,42 @@ public class SmsController {
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"send.success.");
 	}
-	
+	/**
+	 * 短信验证码验证
+	 * @param request
+	 * @param mobile
+	 * @param code
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/validate/sms",method = RequestMethod.POST)
+	public ApiResult validateSms(HttpServletRequest request,@RequestParam String mobile,String code){
+		ApiResult apiResult = new ApiResult();
+		if (StringUtil.isBlank(mobile)
+				|| StringUtil.isBlank(code)){
+			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
+		}
+		
+		
+		if (!RequestUtils.isMobileNum(mobile)){
+			return new ApiResult(false,ResultStatusConstant.FAIL,"mobile.parrten.error.");
+		}
+		
+		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
+		if (!ObjectUtil.equals(null, appUserVo)){
+			return new ApiResult(false,ResultStatusConstant.Regist.MOBILE_EXIST,"mobile.exist.");
+		}
+		
+		SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile);  //获取验证码信息
+		if (ObjectUtil.equals(null,securityCode) 
+				|| !StringUtil.equals(code, securityCode.getSecurityCode())){
+			return new ApiResult(false,ResultStatusConstant.Regist.ERROR_CODE,"error.code.");
+		}
+		
+		if((Dates.getCurrentLongDate()-securityCode.getCreatedate()) > DataConstant.VALIDATE_CODE_INVALID_TIME){ 
+			//判断验证码是否失效
+			return new ApiResult(false,ResultStatusConstant.Regist.INVALID_CODE,"invalid.code.");
+		}
+		return apiResult;
+	}
 }
