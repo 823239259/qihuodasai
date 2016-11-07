@@ -261,6 +261,7 @@
 	    				};
 			    	$(".openPage").click(function(){
 			            var _this = $(this);
+			            _this.css("background-color","#FFFAC5")
 			            var index=_this.index();
 			            var data=ManufacturingData(index);
 			            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
