@@ -80,6 +80,7 @@ function handleData(evt){
 				anotherPlace = false;
 			} else {
 				loginFail = -2;
+				alertProtype(loginMessage,"登录提示",Btn.confirmed());
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
