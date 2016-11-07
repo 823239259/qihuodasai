@@ -561,8 +561,6 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	padding-right: 15px;
 	vertical-align: middle;
 	margin: 0px;
-	/*position: relative;
-	top:2%;*/
 }
 #freeMoney span{
 	display: inline-block;
@@ -580,8 +578,6 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 }
 .bottomTip{
 	margin: 0px 0px 0px 80px;
-	/*width: 100%;
-	padding-left: 100px;*/
 }
 .tips{
 	font-size: 12px;
@@ -598,13 +594,6 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
     color: #333333;
     z-index: 999;
 }
-/*#weiPayCode{
-	width: 100%;
-	padding-left: 15px;
+.order_tips,.carefulIcon{
+	color:#ffdd33;
 }
-#weiPayCode img{
-	display: block;
-	width: 30%;
-	height: auto;
-	margin: auto;
-}*/

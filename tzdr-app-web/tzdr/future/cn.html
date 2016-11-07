@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<link rel="stylesheet" href="../../css/recharge.css" />
 	<script>
 		mui.init();
 		var paramListAll=null;
@@ -111,6 +112,7 @@
 			document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
+			document.getElementById("paymentMoney").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
 			if(mui.isnull(ParamsList.manageFee)){
 				document.getElementById("manageFee").innerHTML="免费";
 			}else{
@@ -172,16 +174,6 @@
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
 <div class="mui-content ap_main">
-	<ul class="mui-table-view ap_time">
-		<li class="mui-table-view-cell">
-			<label>投资标的：</label>
-			<span>新华富时A50指数当期主力合约<i id="mainContract">CL1603</i></span>
-		</li>			
-		<li class="mui-table-view-cell">
-			<label>交易时间：</label>
-			<span>9:05-16:30,17:20-23:55<p class="tips">（注意：请不要在交易时间外持单，以免被系统强制平仓）</p></span>
-		</li>
-	</ul>	
 	<h5 class="ap_choosetitle"><span>选择手数：</span><b>可持仓的最大手数</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9" id="trade_num">
 		
@@ -210,10 +202,22 @@
 			<span><i id="tranFees">58</i>元/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费。</span>
 		</li>
 	</ul>
-	<div class="ac_btn">
-		<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="openPay">提交操盘申请</button>								
+	<ul class="mui-table-view ap_time">
+		<li class="mui-table-view-cell">
+			<label>投资标的：</label>
+			<span>新华富时A50指数当期主力合约<i id="mainContract">CL1603</i></span>
+		</li>			
+		<li class="mui-table-view-cell">
+			<label>交易时间：</label>
+			<span>9:05-16:30,17:20-23:55<p class="tips">（注意：请不要在交易时间外持单，以免被系统强制平仓）</p></span>
+		</li>
+	</ul>
+	<div id="buttomDiv">
+		<span>总计：<i class="yellowFont">¥</i><i id="paymentMoney"></i></span>
+		<button type="button" id="openPay" class="mui-btn  lg-btnlogin">提交操盘申请</button>
 	</div>
 	<div class="mui-content-padded">
+		<span class="mui-icon mui-icon mui-icon-info carefulIcon"></span><span class="order_tips">注意：</span>
 		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="cn_info">《富时A50操盘合作协议》</a><br><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008</a></i></p>
 	</div>			
 </div>
