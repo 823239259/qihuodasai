@@ -74,7 +74,7 @@ mui.plusReady(function(){
         var jsonData = JSON.parse(data);
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
-        	sendHistoryMessage();
+        	sendHistoryMessage(0);
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
@@ -85,28 +85,17 @@ mui.plusReady(function(){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;
 			}
+		console.log(JSON.stringify(jsonData));
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
+				handleVolumeChartData(historyParam);
+//				processingData(historyParam);
+//	            processingCandlestickVolumeData(historyParam);
+			}else{
+//				handleTime(historyParam);
+// 				handleVolumeChartData(historyParam);
 				processingData(historyParam);
-	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==1){
-				handleTime(historyParam);
-				processingData(historyParam);
-	            handleVolumeChartData(historyParam);
-	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==1440){
-//				processingDayCandlestickData(historyParam)
-//				processingDayCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==5){
-//				processingCandlestickVolumeDataFive(historyParam);
-//				processingDataFive(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==15){
-//				processingCandlestickVolumeDataTen(historyParam);
-//				processingDataTen(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==30){
-//				processingCandlestickVolumeDataThree(historyParam);
-//				processingDataThree(historyParam);
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
@@ -168,22 +157,23 @@ mui.plusReady(function(){
     };
     marketSocket.onerror = function(evt){
     };
-    function sendHistoryMessage(){
-    		 var exchangeNo = $("#exchangeNo").val();
-		    var commodityNo = $("#commodeityNo").val();
-		    var contractNo = $("#contractNo").val();
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":5}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":15}');
-		     masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":30}');
-		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-	        setIntvalTime = setInterval(function(){
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":5}');
-	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":15}');
-	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":30}');
-	        },3000);
+    function sendHistoryMessage(num){
+    	console.log(num);
+        var exchangeNo = $("#exchangeNo").val();
+        var commodityNo = $("#commodeityNo").val();
+        var contractNo = $("#contractNo").val();
+//      masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+        masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
+//		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":5}');
+//		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":15}');
+//		     masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":30}');
+        masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+        setIntvalTime = setInterval(function(){
+            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
+//	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":5}');
+//	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":15}');
+//	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":30}');
+        },3000);
     }
     /**
 	 * 更新行情数据 
@@ -384,6 +374,94 @@ mui.plusReady(function(){
 				 rose.className = "greenFont";
 			}
 		}
+    	function drawChart(val){
+    		 rawData = [];
+		     CandlestickChartOption=null;
+		    CandlestickVolumeChartOption=null;
+		    CandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    }
+		     newData=[]; 
+    		clearInterval(setIntvalTime);
+				sendHistoryMessage(val);
+				var option = setOption(newData);
+						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+						setTimeout(function(){
+							myChart.resize();
+							myChart.setOption(option);
+		        			myChart.resize();	
+		        			CandlestickVolumeChart.resize();	
+							CandlestickVolumeChart.setOption(option2);
+		        			CandlestickVolumeChart.resize();	
+		        		},10);
+		        		setTimeout(function(){
+		        			$("#CandlestickChart").css("opacity","1");
+		        		},100);
+    	}
+    /*
+		 获取K线类型**/
+		$("#selectType").change(function(){
+			$("#CandlestickChart").removeClass("displayStyle").addClass("mui-active");
+    		$("#trade").removeClass("mui-active").addClass("displayStyle");
+    		$("#TimeChart1").removeClass("mui-active").addClass("displayStyle");
+    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+			var val=$("#selectType").val();
+			if(val==1){
+				drawChart(val)
+			}else if(val==5){
+				drawChart(val)
+			}else if(val==15){
+				drawChart(val)
+			}else if(val==30){
+				drawChart(val)
+			}else if(val==1440){
+				drawChart(val)
+			}
+		})
+    	document.getElementById("timeChartMenu").addEventListener("tap",function(){
+    		 time=[];
+		    prices=[];
+		    timeLabel=[]
+		     timeData={
+		        "time":time,
+		        "prices":prices,
+		        "timeLabel":timeLabel
+		    };
+		     volumeChartTime=[];
+		     volumeChartPrices=[];
+		    volumeChartData={
+		        "time":volumeChartTime,
+		        "volume":volumeChartPrices
+		    };
+		    var timePrice=[];
+    		var val=$("#timeChartMenu").val();
+    		clearInterval(setIntvalTime);
+    		sendHistoryMessage(val);
+    		$("#CandlestickChart").removeClass("mui-active").addClass("displayStyle");
+    		$("#trade").removeClass("mui-active").addClass("displayStyle");
+    		$("#TimeChart1").removeClass("displayStyle").addClass("mui-active");
+    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+    		var option2=setOption1();
+		 	 var option1 =volumeChartSetOption(volumeChartData);
+				setTimeout(function(){
+					$("#timeChart").css("width","100%");
+				 	timeChart.resize();	
+					timeChart.setOption(option2);
+        			timeChart.resize();	
+        			volumeChart.resize();	
+					volumeChart.setOption(option1);
+        			volumeChart.resize();
+        		},10);
+        		setTimeout(function(){
+        			$("#TimeChart1").css("opacity","1");
+        		},11);
+    	});
+    	document.getElementById("tradeMenu").addEventListener("tap",function(){
+    		$("#trade").removeClass("displayStyle").addClass("mui-active");
+    		$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
+    		
+    	})
 	document.getElementById("backClose").addEventListener("tap",function(){
 		var re = plus.webview.getWebviewById("quotationMain");
 		if(re != null || re != undefined){
