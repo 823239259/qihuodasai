@@ -85,7 +85,6 @@ mui.plusReady(function(){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;
 			}
-		console.log(JSON.stringify(jsonData));
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
 				handleVolumeChartData(historyParam);
@@ -458,8 +457,10 @@ mui.plusReady(function(){
         		},11);
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
-    		$("#trade").removeClass("displayStyle").addClass("mui-active");
-    		$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
+    		if(vadationIsLogin()){
+				$("#trade").removeClass("displayStyle").addClass("mui-active");
+    			$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
+			}
     		
     	})
 	document.getElementById("backClose").addEventListener("tap",function(){

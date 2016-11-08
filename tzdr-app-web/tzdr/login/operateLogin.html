@@ -26,36 +26,34 @@
 		<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
 		<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
 	</header>
-	<div class="mui-content operateLogin">
-		<form  class="mui-input-group blackBg" id="formDiv">
-			<div class="mui-input-row">
-				<label>选择操盘账号</label>
+	<div class="mui-content" class="operateLogin">
+		<div id="posiitionCover"></div>
+		<div id="inputList">
+			<div id="accountType" class="commStyle">
+				<label>账号类型：</label>
 				<select class="accountSelect mui-btn mui-btn-block">
-					<option class="mui-selected" id="checkContent" value="test1-vs">请选择操盘账号</option>
+					<option class="mui-selected" id="checkContent" value="test1-vs">模拟账号</option>
+					<option class="mui-selected"  value="test2-vs">实盘账号</option>
 				</select>
+				<img src="../../images/down.png">
 			</div>
-			<div class="mui-input-row" id="userAcount">
-				<label>操盘账号</label>
-				<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入您的操盘账号" >
+			<div class="commStyle">
+				<label>登录账号：</label>
+				<input type="text"  placeholder="请输入您的账号" id='account'/>
+				<img src="../../images/close.png" id="accountClear">
 			</div>
-			<div class="mui-input-row mui-password">
-				<label>登录密码</label>
-				<input id="password" type="password" class="mui-input-password" placeholder="请输入您的账号密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
-			</div>	
-		</form>
-		<div class="mui-content-padded">
+			<div class="commStyle">
+				<label>登录密码：</label>
+				<input type="text"  placeholder="请输入您的密码" id="password"/>
+				<img src="../../images/close.png" id="passwordClear">
+			</div>
+		</div>
+		<div class="mui-content-padded " style="margin-top: 20px;">
 			<button  class="mui-btn mui-btn-block" id="operateLogin">登录交易</button>
 			<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>
-			<!--<div class="link-area"><!--<a  href="javascript:void(0)">开通外盘期货账户</a>
-			</div>-->
 		</div>
-		<!--<div class="mui-content-padded">
-			<p class="RegistrationTips"><input name="checkbox" value="Item 1" type="checkbox" checked id="loginCheckbox">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
-		</div>-->
 		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
-				
 				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked" style="width: 28px !important; margin-top: 2px;">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
-		
 		</div>
 	</div>
 		<script type="text/javascript">
@@ -73,6 +71,11 @@
 						num=0;
 					}
 				});
+				/*绑定事件
+				 */
+				$("#accountClear").click(function(){
+					
+				})
 				/*
 				 * 选择账号
 				 */
@@ -89,9 +92,9 @@
 					var Len=data.length;
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
-							$(".accountSelect").append("<option value='test-vs'>其它</option>");
+//							$(".accountSelect").append("<option value='test-vs'>其它</option>");
 						}else{
-							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
+//							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
 							var acount={};
 							acount.tranAccount=data[i].tranAccount;
 							acount.tranPassword=data[i].tranPassword;
@@ -108,22 +111,22 @@
 					
 				}else{
 //					$("#password").attr("readonly","readonly");
-					$("#userAcount").css("display","none");
+//					$("#userAcount").css("display","none");
 				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
 					if(val=="test-vs"){
-						$("#account").val("");
-						$("#password").val("");
-						$("#userAcount").css("display","block");
+//						$("#account").val("");
+//						$("#password").val("");
+//						$("#userAcount").css("display","block");
 					}else if(val=="test1-vs"){
-						$("#password").val("");
-						$("#userAcount").css("display","none"); 
+//						$("#password").val("");
+//						$("#userAcount").css("display","none"); 
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
-								$("#account").val(val);
-								$("#password").val(user[i].tranPassword);
+//								$("#account").val(val);
+//								$("#password").val(user[i].tranPassword);
 							}
 						}
 						$("#userAcount").css("display","none");

@@ -986,7 +986,11 @@
       "js/FiveTestCandlestickChart.js",
       "js/tenChart.config.js",
       "js/fiveChart.config.js",
-      "js/threeChart.config.js"
+      "js/threeChart.config.js",
+      "js/trade.util.js",
+      "js/trade.connection.js",
+      "js/trade.data.mode.js",
+      "js/trade.config.js"
     ],
     "refer": [
       "tzdr/quotation/trade.html",
@@ -1022,14 +1026,20 @@
       "js/jquery.base64.js",
       "css/quotation.css",
       "js/trade.send.js",
-      "js/common.config.js"
+      "js/common.config.js",
+      "js/trade.config.js",
+      "js/trade.connection.js",
+      "images/close.png",
+      "images/down.jpg",
+      "images/down.png"
     ],
     "refer": [
       "tzdr/future/cl.html",
       "tzdr/future/cn.html",
       "tzdr/quotation/transactionDetails.html",
       "tzdr/agree/tradingMarket.html",
-      "tzdr/future/hsi.html"
+      "tzdr/future/hsi.html",
+      "tzdr/quotation/quotationMain.html"
     ]
   },
   "tzdr/agree/cpru.html": {
@@ -1112,7 +1122,8 @@
       "images/bannerActivity.png",
       "images/activeTitle.png",
       "images/backgound1.jpg"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/account/recharge.html": {
     "resources": [
@@ -1158,7 +1169,8 @@
       "css/recharge.css",
       "fonts/mui.ttf",
       "css/mui.min.css"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/account/bankPay.html": {
     "resources": [
@@ -1174,6 +1186,7 @@
       "css/recharge.css",
       "css/mui.min.css",
       "fonts/mui.ttf"
-    ]
+    ],
+    "refer": []
   }
 }

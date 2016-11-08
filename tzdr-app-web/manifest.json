@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "tzdr/login/operateLogin.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -109,7 +109,7 @@
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"UIReserveStatusbarOffset":true,//使用沉浸式状态栏
+				"UIReserveStatusbarOffset":false,//使用沉浸式状态栏
 				"UIStatusBarStyle":"UIStatusBarStyleBlackOpaque",//黑色不透明状态栏，白色文字  UIStatusBarStyleDefault 默认风格（白色状态栏上有黑色文字）  UIStatusBarStyleBlackTranslucent 黑色透明状态栏，白色文字
 				"frameworks": []
 			},
@@ -1111,7 +1111,10 @@
 					"js/trade.send.js",
 					"js/common.config.js",
 					"js/trade.config.js",
-					"js/trade.connection.js"
+					"js/trade.connection.js",
+					"images/close.png",
+					"images/down.jpg",
+					"images/down.png"
 				],
 				"refer": [
 					"tzdr/future/cl.html",
@@ -1119,7 +1122,8 @@
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/agree/tradingMarket.html",
 					"tzdr/future/hsi.html",
-					"tzdr/future/cp.html"
+					"tzdr/future/cp.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
