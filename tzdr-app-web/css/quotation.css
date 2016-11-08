@@ -490,7 +490,7 @@ p{
 	margin-top: 1px;;
 }
 .mui-content-padded{
-	margin: 20px 0px 10px ;
+	margin: 20px 0px 0px ;
 	/*width: 100%;*/
 }
 #operateLogin,#regLogin{
@@ -696,6 +696,7 @@ input{
 	border-radius: 50%;
 	display: inline-block;
 	vertical-align: middle;
+	margin-right: 5px;
 }
 #checkBox i{
 	display: inline-block;
