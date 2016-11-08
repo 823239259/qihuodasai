@@ -109,7 +109,7 @@
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"UIReserveStatusbarOffset":true,//使用沉浸式状态栏
+				"UIReserveStatusbarOffset":false,//使用沉浸式状态栏
 				"UIStatusBarStyle":"UIStatusBarStyleBlackOpaque",//黑色不透明状态栏，白色文字  UIStatusBarStyleDefault 默认风格（白色状态栏上有黑色文字）  UIStatusBarStyleBlackTranslucent 黑色透明状态栏，白色文字
 				"frameworks": []
 			},
