@@ -442,53 +442,35 @@ p{
 	width: 100%;;
 	z-index: 999;
 }
-#inputList{
+/*#inputList{
 	width: 100%;
 	padding:0px 20px;
-}
-.commStyle {
+}*/
+/*.commStyle {
 	width: 100%;
 	height: 40px;
 	margin-top: 10px;
 	position: relative;
 	border-bottom:1px solid #454545;
-}
+}*/
  .commStyle label{
- 	height: 39px;
- 	line-height: 39px;
- 	font-size: 14px;
  	color:#ffffff;
  }
  .commStyle input{
- 	height: 39px;
- 	line-height: 39px;
  	text-align: left;
- 	width: 66%;
- 	padding-left: 10px;
  	color:#666666;
  	background-color: #2b2b2b;
- 	border:none;
- 	font-size: 12px;
- 	position: relative;
- 	top:-1px;
+	border:none;
  }
  .commStyle input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
  	margin: 0px;;
  }
  .commStyle select{
  	display: inline-block;
- 	height: 39px;
- 	line-height: 39px;
- 	width: 73%;
  	color:#fcc900;
  	background-color: #2b2b2b;
- 	font-size: 12px;
  }
 .commStyle img{
-  	position: absolute;
-  	width: 15px;
-  	right: 0px;
-  	top:8px;
   	height: auto;
 }
  .commStyle .mui-btn-block{
@@ -507,12 +489,14 @@ p{
 	text-align: center;
 	margin-top: 1px;;
 }
+.mui-content-padded{
+	margin: 20px 0px 10px ;
+	/*width: 100%;*/
+}
 #operateLogin,#regLogin{
-	height:40px ;
-	line-height: 40px;
 	padding:0px;
 	border:none;
-	font-size: 16px;
+	width: 100%;
 }
 #operateLogin{
 	background-color: #cccccc;
@@ -692,41 +676,34 @@ input{
 	width: 100%;
 	text-align: center;
 }
-#loginIform{
-	width: 100%;
-	text-align: center;
-	height: 40px;
-	margin: 0px;
-}
 .mui-checkbox input[type=checkbox], .mui-radio input[type=radio]{
 	right: 45%;
 }
-
-
 .mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
 	left:13.5%;
 }
-@media only screen and (min-device-width : 320px ) {
-	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:8%;
-	}
-}
-@media only screen and (min-device-width : 375px ) {
-	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:15%;
-	}
-}
-@media only screen and (min-device-width : 414px ) {
-	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:13.5%;
-	}
-}
+
 #loginAgree{
 	width: 100%;
-	/*padding-left:40px;*/
-	text-align: center;
-	height: 40px!important;
-	line-height: 40px !important;
+	text-align: left;
+	
+}
+#loginAgree span{
+	vertical-align: middle;
+}
+#checkBox{
+	border:1px solid #FFFFFF;
+	border-radius: 50%;
+	display: inline-block;
+	vertical-align: middle;
+}
+#checkBox i{
+	display: inline-block;
+	background-color: #fcc900;
+	border-radius: 50%;
+	margin-left:1.5px;
+	margin-top:1.5px;
+	
 }
 #forgetPassword{
 	position: absolute;

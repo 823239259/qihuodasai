@@ -44,37 +44,122 @@
 			</div>
 			<div class="commStyle">
 				<label>登录密码：</label>
-				<input type="text"  placeholder="请输入您的密码" id="password"/>
+				<input type="password"  placeholder="请输入您的密码" id="password"/>
 				<img src="../../images/close.png" id="passwordClear">
 			</div>
+			<div class="mui-content-padded" style="margin-top: 20px;">
+				<button  class="mui-btn mui-btn-block" id="operateLogin">登录交易</button>
+				<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>
+			</div>
+			<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
+				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>阅读并接受</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
+			</div>
 		</div>
-		<div class="mui-content-padded " style="margin-top: 20px;">
-			<button  class="mui-btn mui-btn-block" id="operateLogin">登录交易</button>
-			<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>
-		</div>
-		<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
-				<p id="loginAgree"><input name="checkbox" type="checkbox"  id="checkBox"  value="1" checked="checked" style="width: 28px !important; margin-top: 2px;">阅读并接受<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
-		</div>
+		
+		
 	</div>
 		<script type="text/javascript">
 		    initTradeConfig();
 			mui.init();
 			mui.plusReady(function(){
+				loadCss()
+				function loadCss(){
+					var Proportion=1;
+					var resolutionWidth=plus.screen.resolutionWidth;
+					Proportion=resolutionWidth/320;
+					console.log(Proportion)
+					$("#inputList").css({
+						"width": "100%",
+						"padding":"0px "+Proportion*20+"px",
+					});
+					$(".commStyle").css({
+						"width": "100%",
+						"height": Proportion*40+"px",
+						"margin-top": Proportion*10+"px",
+						"position": "relative",
+						"border-bottom":"1px solid #454545"
+					});
+					$(".commStyle label").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"font-size": Proportion*14+"px"
+					});
+					$(".commStyle input").css({
+						"height": Proportion*39+"px",
+ 						"line-height": Proportion*39+"px",
+ 						"width": 200*Proportion+"px",
+					 	"padding-left": Proportion*10+"px",
+					 	"font-size": Proportion*12+"px",
+					 	"position": "relative",
+					 	"top":Proportion*-1.1+"px"
+					});
+					$(" .commStyle select").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"width": 199*Proportion+"px",
+					 	"font-size": Proportion*12+"px",
+					});
+					$(".commStyle img").css({
+						"position": "absolute",
+					  	"width": Proportion*15+"px",
+					  	"right": "2px",
+					  	"top":Proportion*16+"px",
+					});
+					$("#operateLogin").css({
+						"height":Proportion*40+"px",
+					 	"line-height": Proportion*40+"px",
+					 	"font-size": Proportion*16+"px",
+						
+					});
+					$("#regLogin").css({
+						"height":Proportion*40+"px",
+					 	"line-height": Proportion*40+"px",
+					 	"font-size": Proportion*16+"px",
+						
+					});
+					$("#loginAgree").css({
+						"height": Proportion*20+"px",
+						"line-height": Proportion*20+"px",
+						"margin-top":Proportion*15+"px",
+					});
+					
+					$("#checkBox").css({
+						"width":Proportion*18+"px",
+						"height":Proportion*18+"px",
+					});
+					$("#checkBox i").css({
+						"width":Proportion*14+"px",
+						"height":Proportion*14+"px",
+					})
+				}
+//				alert(plus.screen.resolutionWidth);
+				
 				var islogin = false;
 				var num=0
+				$("#checkBox i").val(1);
 				$("#checkBox").click(function(){
+					alert($("#checkBox i").val())
 					if(num==0){
-						$("#checkBox").val(2);
+						$("#checkBox i").val(2);
+						$("#checkBox i").css({
+							"background-color":"rgba(0, 0, 0, 0)" ,
+						})
 						num=1
 					}else{
-						$("#checkBox").val(1);
+						$("#checkBox i").val(1);
 						num=0;
+						$("#checkBox i").css({
+							"background-color":"#fcc900" ,
+						})
 					}
 				});
 				/*绑定事件
 				 */
 				$("#accountClear").click(function(){
-					
+					$("#account").val("");
+				});
+				$("#passwordClear").click(function(){
+					$("#password").val("");
 				})
 				/*
 				 * 选择账号
@@ -207,7 +292,7 @@
 			    			mui.toast("请输入密码");
 			    			return;
 						}
-						if($("#checkBox").val()==1){
+						if($("#checkBox i").val()==1){
 						        
 						}else{
 						     mui.toast("您还未勾选协议"); 
