@@ -1238,8 +1238,14 @@ $(function(){
 		$("#trade_data #doSize").val(localCommodity.DotSize);
 		$("#money_number").val(localQoute.LastPrice);
 		$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
-		$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-		$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+		var val = $('input:radio:checked').val();
+		if(val == 0){
+			var money = $("#money_number").val();
+			$("#float_buy").text(money);
+			$("#float_sell").text(money);
+		}
+		//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+		//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
 		setMoneyNumberIndex(0);
 		 var left_xiangmu   = $(".futuresList .left_xiangmu");
 		left_xiangmu.each(function(){
@@ -1275,6 +1281,8 @@ $(function(){
 		$("#trade_login").text("登录中");
 		tradeLogin();
 	});
+	$("#float_buy").text("市价");
+	$("#float_sell").text("市价");
 	$("#trade_loginOut").click(function(){
 		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
 	});
@@ -1282,6 +1290,18 @@ $(function(){
 	    $('#float_buy').text($(this).val());  
 	    $('#float_sell').text($(this).val());  
 	});  
+	$("input[type = 'radio']").bind("click",function(){
+		var $this = $(this);
+		var val = $this.val();
+		var money = $("#money_number").val();
+		if(val == 1){
+			$("#float_buy").text("市价");
+			$("#float_sell").text("市价");
+		}else if(val == 0){
+			$("#float_buy").text(money);
+			$("#float_sell").text(money);
+		}
+	});
 });
 /**
  * 绑定交易操作事件

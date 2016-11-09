@@ -155,7 +155,11 @@
       "js/mui.min.js",
       "fonts/mui.ttf",
       "css/mui.min.css",
-      "manifest.json"
+      "manifest.json",
+      "images/close.png",
+      "images/LOGO.png",
+      "images/login.png",
+      "js/jquery-1.11.3.js"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -163,7 +167,10 @@
       "tzdr/future/list.html",
       "home.html",
       "tzdr/login/login.html",
-      "tzdr/future/listrg.html"
+      "tzdr/future/listrg.html",
+      "tzdr/login/confirmPassword.html",
+      "tzdr/login/retrievePassword.html",
+      "tzdr/login/retrievePasswordComfirm.html"
     ]
   },
   "tzdr/news/newslist.html": {
@@ -1188,5 +1195,38 @@
       "fonts/mui.ttf"
     ],
     "refer": []
+  },
+  "tzdr/login/confirmPassword.html": {
+    "resources": [
+      "images/close.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "tzdr/login/retrievePassword.html": {
+    "resources": [
+      "images/close.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "tzdr/login/retrievePasswordComfirm.html": {
+    "resources": [
+      "images/close.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
   }
 }

@@ -125,7 +125,7 @@ function tradeLoginOut(){
 function initLoad() {
 	socket.onopen = function() {
 		layer.closeAll();
-		Trade.doLogin(username , password);
+		Trade.doLogin(username , password,tradeWebSocketIsMock);
 		//更新交易连接状态
 		changeConnectionStatus();
 	}
