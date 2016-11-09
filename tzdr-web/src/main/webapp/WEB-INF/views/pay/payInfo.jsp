@@ -89,14 +89,17 @@
 							<input type = "hidden" id = "isFlagMoney" name = "isFlagMoney" value ="${money }" />
 							<input type="hidden" value="7" name = "gopayWay" id= "gopayWay"/><!--  -->
 							<input type="text" value="${money}" name="gopaymoney" id="gopaymoney" onKeyUp="javascript:clearNoNumber(event,this)"   class="uc_p_ip3" ><span>元</span></li>
-						</ul><!--  -->
+						</ul>
 						<div class="uc_paybtn uc_olbtn"><a id = "payButton" href="javascript:void(0);" onclick="doGopay();">立即充值</a></div>
 						<div id = "fatip" style="margin-left: 65px;font-size: 14px; color: #fc3;">注意：选择确认，自动付款并提交操盘申请。</div>
 					</div>
-					
-					<div class="uc_olpromt">
-						<h3>温馨提示：</h3>
-						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
+					<div class="uc_b_promt" style="margin-left: 20px;"><i>注意事项</i></div>
+					<p class="uc_b_promtfont" style="margin-left: 20px;">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
+					<div class="uc_banktime">
+						<h3>到账时间:<i>如需马上到账或长时间未到账，可拨打客服电话：400-852-8008</i></h3>
+						<p><i></i>工作日17:30前转账的在资金到账后半小时内完成维胜网充值</p>
+						<p><i></i>工作日17:30以后转账的在第二个工作日早上09:15前完成维胜网充值</p>
+						<p><i></i>非工作日转账的将在下一个工作日早上09:15前完成维胜网充值</p>
 					</div>
 				</form>
 			</div> 
@@ -141,13 +144,13 @@
 						</div>
 					</div>
 					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;margin-top: 40px;">
-						<%-- <p style="float: left; width: 210px; color:#333;text-align: center;">
-							<img src="${ctx}/static/images/weixinpay.png"></br>
-							<span style="display: block; margin-top: 10px;">手机微信扫一扫，安全，快捷到账！</span>
-						</p> --%>
-						<div style="float: left;margin-left: 30px;">
-							<h3>温馨提示：</h3>
-							<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
+						<div class="uc_b_promt"><i>注意事项</i></div>
+						<p class="uc_b_promtfont">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
+						<div class="uc_banktime">
+							<h3>到账时间:<i>如需马上到账或长时间未到账，可拨打客服电话：400-852-8008</i></h3>
+							<p><i></i>工作日17:30前转账的在资金到账后半小时内完成维胜网充值</p>
+							<p><i></i>工作日17:30以后转账的在第二个工作日早上09:15前完成维胜网充值</p>
+							<p><i></i>非工作日转账的将在下一个工作日早上09:15前完成维胜网充值</p>
 						</div>
 					</div>
 				</form>
