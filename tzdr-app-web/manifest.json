@@ -386,7 +386,11 @@
 					"js/jquery-1.11.3.js",
 					"images/LOGO.png"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/login/confirmPassword.html",
+					"tzdr/login/retrievePassword.html",
+					"tzdr/login/retrievePasswordComfirm.html"
+				],
 				"priority": 0
 			},
 			"tzdr/future/list.html": {
@@ -1326,6 +1330,45 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/login/confirmPassword.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/login/retrievePassword.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/login/retrievePasswordComfirm.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
