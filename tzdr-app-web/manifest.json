@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "tzdr/login/regist.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -234,7 +234,8 @@
 					"home.html",
 					"tzdr/login/regist.html",
 					"tzdr/login/password.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/retrievePassword.html"
 				],
 				"priority": 0
 			},
@@ -387,7 +388,8 @@
 				"refer": [
 					"tzdr/login/confirmPassword.html",
 					"tzdr/login/retrievePassword.html",
-					"tzdr/login/retrievePasswordComfirm.html"
+					"tzdr/login/retrievePasswordComfirm.html",
+					"tzdr/agree/tzdr.html"
 				],
 				"priority": 0
 			},
@@ -1005,7 +1007,8 @@
 				],
 				"refer": [
 					"tzdr/quotation/quotationMain.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/login/regist.html"
 				],
 				"priority": 0
 			},
@@ -1344,7 +1347,10 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/login/login.html",
+					"tzdr/quotation/quotationMain.html"
+				],
 				"priority": 0
 			},
 			"tzdr/login/retrievePassword.html": {
@@ -1357,7 +1363,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/login/retrievePasswordComfirm.html"
+				],
 				"priority": 0
 			},
 			"tzdr/login/retrievePasswordComfirm.html": {
@@ -1370,7 +1378,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/login/login.html"
+				],
 				"priority": 0
 			}
 		},
