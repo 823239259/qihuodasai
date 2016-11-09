@@ -155,24 +155,20 @@ public class SmsController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/validate/sms",method = RequestMethod.POST)
-	public ApiResult validateSms(HttpServletRequest request,@RequestParam String mobile,String code){
+	@RequestMapping(value = "/validate/sms",method = RequestMethod.GET)
+	public ApiResult validateSms(HttpServletRequest request,@RequestParam("mobile") String mobile,@RequestParam("code")String code){
 		ApiResult apiResult = new ApiResult();
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(code)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
 		}
-		
-		
 		if (!RequestUtils.isMobileNum(mobile)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"mobile.parrten.error.");
 		}
-		
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		if (!ObjectUtil.equals(null, appUserVo)){
 			return new ApiResult(false,ResultStatusConstant.Regist.MOBILE_EXIST,"mobile.exist.");
 		}
-		
 		SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile);  //获取验证码信息
 		if (ObjectUtil.equals(null,securityCode) 
 				|| !StringUtil.equals(code, securityCode.getSecurityCode())){
@@ -183,6 +179,7 @@ public class SmsController {
 			//判断验证码是否失效
 			return new ApiResult(false,ResultStatusConstant.Regist.INVALID_CODE,"invalid.code.");
 		}
+		apiResult.setSuccess(true);
 		return apiResult;
 	}
 }

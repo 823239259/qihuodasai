@@ -50,6 +50,11 @@
 	                <td>
 	                <input id="recharge_type" type="text" name="mobile" />
 	                </td>
+	                <td class="label right">审核人:</td>
+	                <td>
+	                    <input id = "combobox" class="easyui-combobox" 
+							name="sysuserId"/>
+	                </td>
 	                <td class="label right">调账类型:</td>
 	                <td>
 	                    <select class="easyui-combobox" name="type">
