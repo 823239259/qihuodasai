@@ -102,15 +102,13 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"58202ff62ae85b2c16000347","channelid_android":"android"}}},
+		"distribute": {"plugins":{"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57e87c26e0f55a1329001876","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"UIReserveStatusbarOffset":false,//使用沉浸式状态栏
-				"UIStatusBarStyle":"UIStatusBarStyleBlackOpaque",//黑色不透明状态栏，白色文字  UIStatusBarStyleDefault 默认风格（白色状态栏上有黑色文字）  UIStatusBarStyleBlackTranslucent 黑色透明状态栏，白色文字
 				"frameworks": []
 			},
 			"google": {
@@ -918,8 +916,7 @@
 					"images/2.0.png",
 					"images/1.png",
 					"images/3.png",
-					"images/0.png",
-					"images/status_01.png"
+					"images/0.png"
 				],
 				"refer": [
 					"tzdr/buy/buy.html",
@@ -928,8 +925,7 @@
 					"tzdr/future/DetailCn.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/future/DetailHsi.html",
-					"tzdr/future/DetailCp.html",
-					"tzdr/future/DetailCl.html"
+					"tzdr/future/DetailCp.html"
 				],
 				"priority": 0
 			},
@@ -984,13 +980,10 @@
 					"images/guide3.png",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"main.html",
-					"css/own.css",
-					"js/common.js"
+					"main.html"
 				],
 				"refer": [
-					"tzdr/quotation/quotationMain.html",
-					"tzdr/login/login.html"
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
@@ -1063,11 +1056,7 @@
 					"js/FiveTestCandlestickChart.js",
 					"js/fiveChart.config.js",
 					"js/tenChart.config.js",
-					"js/threeChart.config.js",
-					"js/trade.util.js",
-					"js/trade.connection.js",
-					"js/trade.data.mode.js",
-					"js/trade.config.js"
+					"js/threeChart.config.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1105,9 +1094,7 @@
 					"js/jquery.base64.js",
 					"css/quotation.css",
 					"js/trade.send.js",
-					"js/common.config.js",
-					"js/trade.config.js",
-					"js/trade.connection.js"
+					"js/common.config.js"
 				],
 				"refer": [
 					"tzdr/future/cl.html",
