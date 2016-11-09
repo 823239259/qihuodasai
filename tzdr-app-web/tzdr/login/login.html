@@ -8,78 +8,163 @@
     <link rel="stylesheet" href="../../css/own.css" />
     <script type="text/javascript" src="../../js/mui.min.js"></script>  
     <script type="text/javascript" src="../../js/common.js"></script>
+    <script src="../../js/jquery-1.11.3.js"></script>
     <style>
-	.area {
-		margin: 20px auto 0px auto;
+    body{
+    	background-image: url("../../images/resigter.png");
+    	background-size: cover;
+    }
+	.mui-bar{
+		background-color: rgba(0,0,0,0);
+		color:#FFFFFF;
 	}
-	.mui-input-group {
-		margin-top: 10px;
+	#back{
+		color:#FFFFFF;
 	}
-	.mui-input-group:first-child {
-		margin-top: 25px;
+	.mui-title{
+		color:#FFFFFF!important;
 	}
-	.mui-input-group label {
-		width: 22%;
+	#nav-title, .top-tel{
+		color:#FFFFFF
 	}
-	.mui-input-row label~input,
-	.mui-input-row label~select,
-	.mui-input-row label~textarea {
-		width: 65%; height: 45px;
+	.mui-bar-nav{
+		-webkit-box-shadow:none;
+		box-shadow:none;
 	}
-	.mui-checkbox input[type=checkbox],
-	.mui-radio input[type=radio] {
-		top: 6px;
+	.commStyle label{
+	 	color:#ffffff;
+	 }
+	 .commStyle input{
+	 	text-align: left;
+	 	color:#cccccc;
+	 	background-color: rgba(0,0,0,0);
+		border:none;
+	 }
+	 .commStyle .mui-btn-block{
+		 	padding:0px 0px 0px 0px;
+		 	margin-bottom: 0px;
+		 	border:none
+		 }
+	.commStyle span,a{
+		 	display: inline-block;
+		 	color:#FFFFFF
+		 }
+		 #operateLogin{
+		background-color: #cccccc;
 	}
-	.mui-content-padded {
-		margin-top: 25px;
+	.mui-content-padded{
+		margin: 0px;;
 	}
-	.mui-btn {
-		padding: 10px;
-	}
-	.link-area {
-		display: block;
-		margin-top: 25px;
-		text-align: center;
-	}
-	.spliter {
-		color: #bbb;
-		padding: 0px 8px;
-	}
-	.oauth-area {
-		position: absolute;
-		bottom: 20px;
-		left: 0px;
-		text-align: center;
-		width: 100%;
-		padding: 0px;
+	.mui-input-group, .mui-content-padded{
 		margin: 0px;
 	}
-	.oauth-area .oauth-btn {
-		display: inline-block;
-		width: 50px;
-		height: 50px;
-		background-size: 30px 30px;
-		background-position: center center;
-		background-repeat: no-repeat;
-		margin: 0px 20px;
-		/*-webkit-filter: grayscale(100%); */
-		
-		border: solid 1px #ddd;
-		border-radius: 25px;
-	}
-	.oauth-area .oauth-btn:active {
-		border: solid 1px #aaa;
-	}
-	</style>
+		</style>
 	<script>
 	var win= null;
 		mui.init();
+		
 		mui.plusReady(function(){
+			loadCss();
+			function loadCss(){
+					var Proportion=1;
+					var resolutionWidth=plus.screen.resolutionWidth;
+					Proportion=resolutionWidth/320;
+					console.log(Proportion);
+					$("#logo").css({
+						"padding-top":Proportion*40+"px"
+					})
+					$("#logo img").css({
+						"width":Proportion*60+"px",
+						"height":"auto",
+						"display":"block",
+						"margin":"auto"
+					})
+					$("#inputList").css({
+						"width": "100%",
+						"padding":Proportion*40+"px "+Proportion*20+"px",
+					
+					});
+					$(".commStyle").css({
+						"width": "100%",
+						"height": Proportion*40+"px",
+						"line-height":Proportion*40+"px",
+						"margin-top": Proportion*10+"px",
+						"color":"#ffffff",
+						"font-size": Proportion*14+"px",
+						"position": "relative",
+						"border-bottom":"1px solid #999999"
+					});
+					$(".commStyle label").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"font-size": Proportion*14+"px"
+					});
+					$(".commStyle span").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"font-size": Proportion*14+"px",
+//					 	"width":"100%",
+					});
+					$("#forgetPasswordDiv").css({
+						"width":"100%",
+						"text-align":"right"
+					})
+					$("#resigterDiv").css({
+						"width":"100%",
+						"text-align":"center",
+						"border-bottom":"none"
+					})
+					$(".commStyle a").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"font-size": Proportion*14+"px",
+					});
+					$(".commStyle input").css({
+						"height": Proportion*39+"px",
+ 						"line-height": Proportion*39+"px",
+ 						"width": 200*Proportion+"px",
+					 	"padding-left": Proportion*10+"px",
+					 	"font-size": Proportion*12+"px",
+					 	"position": "relative",
+					 	"top":Proportion*-1.1+"px"
+					});
+					$(" .commStyle select").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"width": 199*Proportion+"px",
+					 	"font-size": Proportion*12+"px",
+					});
+					$(".commStyle img").css({
+						"position": "absolute",
+					  	"width": Proportion*15+"px",
+					  	"right": "2px",
+					  	"top":Proportion*16+"px",
+					});
+					$("#operateLogin").css({
+						"height":Proportion*40+"px",
+					 	"line-height": Proportion*40+"px",
+					 	"font-size": Proportion*16+"px",
+					 	"padding":"0px",
+					 	"color":"#2b2b2b",
+					 	"border":"none"
+					 	
+					});
+					$("#forgetPasswordDiv").css({
+						"border-bottom":"none"
+					})
+				}
 			if (mui.cacheUser.isLogin()){
 				mui.openWindow("../quotation/quotationMain.html");
 			}
 			win=plus.webview.currentWebview();
-			 
+			 /*绑定事件
+				 */
+				$("#accountClear").click(function(){
+					$("#account").val("");
+				});
+				$("#passwordClear").click(function(){
+					$("#password").val("");
+				})
 			// 清除缓存页面
 			//mui.cacheUser.clearCachePages();
 			
@@ -97,7 +182,7 @@
 			document.getElementById("forgetPassword").addEventListener("tap",function(){
 				mui.openWindow("password.html");
 			});
-			document.getElementById("login").addEventListener("tap",function(){
+			document.getElementById("operateLogin").addEventListener("tap",function(){
 				userLogin();
 			});
 		});
@@ -165,13 +250,39 @@
 	</script>
 </head>
 <body class="ui-page-login">	
-	<header class="mui-bar mui-bar-nav own-topbg">
+	<header class="mui-bar mui-bar-nav topMenu">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
 		<h1 class="mui-title">用户登录</h1>		
 		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 	</header>
-	<div class="mui-content">
-		<form id='login-form' class="mui-input-group">
+	<div class="mui-content ">
+		<div id="logo">
+			<img src="../../images/LOGO.png" >
+		</div>
+		
+		<div id="inputList">
+			<div class="commStyle">
+				<label>手机：</label>
+				<input type="text"  placeholder="请输入您的账号" id='account'/>
+				<img src="../../images/close.png" id="accountClear">
+			</div>
+			<div class="commStyle">
+				<label>密码：</label>
+				<input type="password"  placeholder="请输入您的密码" id="password"/>
+				<img src="../../images/close.png" id="passwordClear">
+			</div>
+			<div class="commStyle"  id="forgetPasswordDiv">
+				<span id="forgetPassword">忘记密码</span>
+			</div>
+			<div class="mui-content-padded">
+				<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
+				<!--<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>-->
+			</div>
+			<div class="commStyle"  id="resigterDiv">
+				<a id='reg' href="javascript:void(0)">注册账号</a>
+			</div>
+		</div>
+		<!--<form id='login-form' class="mui-input-group">
 			<div class="mui-input-row">
 				<label>手机号码</label>
 				<input id='account' type="tel" class="mui-input-clear mui-input" placeholder="请输入账号" autocomplete="off"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
@@ -180,14 +291,18 @@
 				<label>登录密码</label>
 				<input id="password" type="password" class="mui-input-password" placeholder="请输入密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
 			</div>	
-		</form>
-		<div class="mui-content-padded">
+		</form>-->
+		<!--<div class="mui-content-padded">
 			<button id='login' class="mui-btn mui-btn-block lg-btnlogin">立即登录</button>
 			<div class="link-area"><a id='reg' href="javascript:void(0)">注册账号</a><a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
 			</div>
-		</div>
-		<div class="mui-content-padded oauth-area">
-		</div>
+		</div>-->
+		<!--<div class="mui-content-padded oauth-area">
+		</div>-->
 	</div>
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		
+	</script>
 </body>
 </html>
