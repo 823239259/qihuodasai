@@ -1774,7 +1774,7 @@ function sumListfloatingProfit(){
 		if(postionDom.html() == undefined || postionDom.length <= 0){
 			continue
 		}
-		var price  = 0;
+		var price  = 0.00;
 		$.each(postionDom,function(i,item){
 			var $this = $(this);
 			price = price + Number($this.find("li[class = 'position10']").text());
@@ -1827,11 +1827,11 @@ function clearTradListData(){
 	$("#des_gdt1").html("");
 	$("#trade_gdt1").html("");
 	$("#hold_gdt1").html("");
-	$("#todayBalance").html(0.00);
-	$("#deposit").html(0.00);
-	$("#todayCanUse").html(0.00);
-	$("#floatingProfit").html(0.00);
-	$("#closeProfit").html(0.00);
+	$("#todayBalance").html("0.00");
+	$("#deposit").html("0.00");
+	$("#todayCanUse").html("0.00");
+	$("#floatingProfit").html("0.00");
+	$("#closeProfit").html("0.00");
 	$(".caozuo").hide();
 	generatePostionTitle();
 	generateDesignateTitle();
