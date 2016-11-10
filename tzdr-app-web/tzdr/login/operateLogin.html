@@ -32,8 +32,8 @@
 			<div id="accountType" class="commStyle">
 				<label>账号类型：</label>
 				<select class="accountSelect mui-btn mui-btn-block">
-					<option class="mui-selected" id="checkContent" value="test1-vs">模拟账号</option>
-					<option class="mui-selected"  value="test2-vs">实盘账号</option>
+					<option class="mui-selected" id="checkContent" value="1">模拟账号</option>
+					<option class="mui-selected"  value="0">实盘账号</option>
 				</select>
 				<img src="../../images/down.png">
 			</div>
@@ -67,7 +67,6 @@
 					var Proportion=1;
 					var resolutionWidth=plus.screen.resolutionWidth;
 					Proportion=resolutionWidth/320;
-					console.log(Proportion)
 					$("#inputList").css({
 						"width": "100%",
 						"padding":"0px "+Proportion*20+"px",
@@ -132,7 +131,6 @@
 						"height":Proportion*14+"px",
 					})
 				}
-//				alert(plus.screen.resolutionWidth);
 				
 				var islogin = false;
 				var num=0
@@ -167,7 +165,6 @@
 				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
 				var user=[];
 				if(user_mobile==null){
-//					$("#checkContent").text("其它");
 				}else{
 					var paramUrl={
 						url:"login.html"
@@ -177,9 +174,7 @@
 					var Len=data.length;
 					for(var i=0;i<=Len;i++){
 						if(i==Len){
-//							$(".accountSelect").append("<option value='test-vs'>其它</option>");
 						}else{
-//							$(".accountSelect").append("<option value="+data[i].tranAccount+">"+data[i].tranAccount+"</option>");
 							var acount={};
 							acount.tranAccount=data[i].tranAccount;
 							acount.tranPassword=data[i].tranPassword;
@@ -188,30 +183,20 @@
 					};
 					
 				},function(result){
-//					console.log(JSON.stringify(result));
 				},paramUrl);
 				}
 				
 				if(user_mobile==null || user_mobile==undefined || user_mobile==""){
 					
 				}else{
-//					$("#password").attr("readonly","readonly");
-//					$("#userAcount").css("display","none");
 				}
 				$(".accountSelect").change(function(){
 					var val=$(".accountSelect").val();
 					if(val=="test-vs"){
-//						$("#account").val("");
-//						$("#password").val("");
-//						$("#userAcount").css("display","block");
 					}else if(val=="test1-vs"){
-//						$("#password").val("");
-//						$("#userAcount").css("display","none"); 
 					}else{
 						for(var i=0;i<user.length;i++){
 							if(val==user[i].tranAccount){
-//								$("#account").val(val);
-//								$("#password").val(user[i].tranPassword);
 							}
 						}
 						$("#userAcount").css("display","none");
@@ -223,6 +208,26 @@
 				}
 				$("#account").val(accountEnd);
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
+				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null){
+					$(".accountSelect").val(tradeWebSocketIsMock);
+				}else{
+					$(".accountSelect").val(0);
+					tradeWebSocketIsMock = 0; 
+				}
+				setTradeConfig(tradeWebSocketIsMock); 
+				$(".accountSelect").change(function(){
+					var $this = $(this);
+					var val = $this.val(); 
+					setTradeConfig(val);
+				});
+				/**
+				 * 根据账号类型设置交易配置
+				 * @param {Object} val
+				 */
+				function setTradeConfig(val){
+					setTradeWebSocketIsMock(val);
+					setTradeWebSocketUrlConfig();
+				}
 				/**
 				 * 登录超时处理 
 				 */
@@ -240,29 +245,6 @@
 				var account = null;
 				var pwd = null;
 				document.getElementById("regLogin").addEventListener("tap",function(){
-//					var url = "";
-//					var urlId = "";
-//					switch(commdityNo){
-//						//A50
-//						case  "CN":
-//								url = "../future/cn.html";
-//								urlId = "cn";
-//							break;
-//						//恒指
-//						case  "HSI":
-//								url = "../future/hsi.html";
-//								urlId = "hsi";
-//							break;
-//						//原油
-//						case  "CL":
-//								url = "../future/cl.html";
-//								urlId = "cl";
-//							break;
-//						default:
-//								url = "../future/cp.html";
-//								urlId = "cp";
-//							break;
-//					}
 					mui.openWindow({
 									url:"../future/cp.html",
 									id:"cp"
@@ -300,9 +282,9 @@
 						  };
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
-						var loginSocket = new WebSocket(tradeWebsocketUrl);
+						var loginSocket = new WebSocket(tradeSocketUrl);
 						loginSocket.onopen = function(){
-							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'"}}');
+							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+'}}');
 						}
 						loginSocket.onmessage = function(evt){
 							var dataString = evt.data;
@@ -311,7 +293,6 @@
 							var parameters = data.Parameters;
 							if (method == "OnRspLogin") {
 								var code = parameters.Code;
-//								alert(JSON.stringify(parameters));
 								var loginMessage = parameters.Message;
 								if (code == 0) {
 										localStorage.setItem("trade_account",account);
@@ -319,16 +300,17 @@
 										localStorage.setItem("trade_endLoginAccount",account);
 				 						localStorage.setItem("trade_endLoginPassword",pwd);
 									if (Transfer.backpageID){
-//										alert("登录成功")
 										backReload();
 										plus.nativeUI.closeWaiting();
 										mui.toast("登录成功");
+										localStorage.setItem("isMock",tradeWebSocketIsMock);
 										islogin = true;
 				      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
 				      					return;
 		      						}else{
 		      							plus.nativeUI.closeWaiting(); 
 										mui.toast("登录成功");
+										localStorage.setItem("isMock",tradeWebSocketIsMock);
 										islogin = true;
 		      							mui.openWindow({
 		      								url:"../quotation/quotationMain.html",
@@ -360,7 +342,6 @@
 						id:"tradingMarket"
 					})
 				});
-//				$("#account")
 			});
 			
 		</script>

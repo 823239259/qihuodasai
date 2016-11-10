@@ -1,7 +1,13 @@
 /**
  * 初始化交易
  */
-initTrade();
+alert(tradeWebSocketIsMock);
+if(tradeWebSocketIsMock == undefined || tradeWebSocketIsMock == null){
+	// alertProtype("登录错误,请重新登录","登录提示",Btn.confirmed());
+}else{ 
+	
+	initTrade();
+}
 //持仓发送请求次数记录
 var holdFirstLoadDataIndex = 0;
 //个人账户信息发送请求次数纪录
