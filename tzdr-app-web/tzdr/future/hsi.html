@@ -9,10 +9,93 @@
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
 	<link rel="stylesheet" href="../../css/recharge.css" />
+	<script src="../../js/jquery-1.11.3.js"></script>
 	<script>
 		mui.init();
 		var paramListAll=null;
 		mui.plusReady(function(){
+			
+				loadCss();
+    		function loadCss(){
+    			var Proportion=1;
+				var resolutionWidth=plus.screen.resolutionWidth;
+				Proportion=resolutionWidth/320;
+				console.log(Proportion);
+				$(".ap_choosetitle").css({
+					"height": Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px",
+					"margin":"0px"
+				});
+				$(".ap_main .ap_choosetitle span").css({
+					"height": Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+				});
+				$(".ap_main .ap_choosetitle b").css({
+					"height": Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+				});
+				$(".sc_listsc").css({
+					"margin-top":Proportion*5+"px",
+					"padding":"0px "+Proportion*5+"px",
+				});
+				$(".mui-table-view-cell").css({
+					"padding":Proportion*8+"px 0px",
+//					"height":Proportion*29+"px ",
+//					"line-height":Proportion*29+"px ",
+					"font-size": Proportion*12+"px ",
+				});
+				$(".mui-table-view-cell div").css({
+					"float":"left"
+				});
+				$(".mui-table-view-cell div:nth-child(1)").css({
+					"width":Proportion*95+"px ",
+				});
+				$(".mui-table-view-cell div:nth-child(2").css({
+					"width":Proportion*210+"px ",
+				});
+				$(".AgreementList ").css({
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px",
+					"height":Proportion*80+"px",
+					"padding-buttom":"10px"
+				});
+				$(".AgreementList p").css({
+					"height":Proportion*40+"px!important",
+					"line-height":Proportion*40+"px!important",
+					"font-size": Proportion*12+"px !important",
+				});
+				$(".AgreementList  i").css({
+					"display":"inline-block",
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px",
+					"padding-buttom":"10px"
+				});
+				$("#buttomDiv").css({
+					"line-height":Proportion*50+"px",
+					"height":Proportion*50+"px",
+				})
+				$("#buttomDiv button").css({
+					"line-height":Proportion*50+"px",
+					"height":Proportion*50+"px",
+				});
+				$(".fontBlack").css({
+					"color":"#2b2b2b",
+					"font-size": Proportion*12+"px",
+				});
+				$(".grayFontDiv").css({
+					"color":"#666666",
+					"font-size": Proportion*12+"px",
+					"margin-left":Proportion*10+"px",
+				});
+				$(".sc_listscStyle div:nth-child(1)").css({
+						"width":Proportion*65+"px ",
+				});
+				$(".sc_listscStyle div:nth-child(2)").css({
+						"width":Proportion*240+"px ",
+				})
+			}
+			
 			//初始化监听头部和底部事件
   			var paramUrl={
 				url:"../login/login.html"
@@ -216,28 +299,32 @@
 			<span id="manageFee">免费</span>
 		</li>
 		<li class="mui-table-view-cell">
-			<label>交易手续费(¥)：</label>
-			<span><i id="tranFees">58</i>元/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费。</span>
+			<div><label>交易手续费(¥)：</label></div>
+			
+		</li>
+		<li class="mui-table-view-cell">
+			<div><label>交易手续费(¥)：</label></div>
+			<div><span class="fontBlack"><i id="tranFees">58</i>元/单边</span><span class="grayFontDiv">买入、卖出一手时各收取该数额（人民币）的交易手续费。</span></div>
 		</li>
 	</ul>
-	<ul class="mui-table-view ap_time">
+	<ul class="mui-table-view sc_listsc sc_listscStyle">
 		<li class="mui-table-view-cell">
 			<label>投资标的：</label>
 			<span>香港恒生指数当期主力合约<i id="mainContract">CL1603</i></span>
-		</li>			
+		</li>	
 		<li class="mui-table-view-cell">
-			<label>交易时间：</label>
-			<span>09:20-11:55,13:05-16:25,17:20-23:40<p class="tips">（注意：请不要在交易时间外持单，以免被系统强制平仓）</p></span>
+			<div><label>交易时间：</label></div>
+			<div><span class="fontBlack">09:20-11:55,13:05-16:25,17:20-23:40</span><span class="grayFontDiv">（注意：请不要在交易时间外持单，以免被系统强制平仓）</span></div>
 		</li>
 	</ul>	
 	<div id="buttomDiv">
 		<span>总计：<i class="yellowFont">¥</i><i id="paymentMoney"></i></span>
 		<button type="button" id="openPay" class="mui-btn  lg-btnlogin">提交操盘申请</button>
 	</div>	
-	<div class="mui-content-padded">
-		<span class="mui-icon mui-icon mui-icon-info carefulIcon"></span><span class="order_tips">注意：</span>
-		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="hsi_info">《恒指期货操盘合作协议》</a><br><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008</a></i></p>
-	</div>	
+	<div class="mui-content-padded AgreementList" style="padding: 0px 5px;margin: 5px 0px 0px;">
+		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="hsi_info">《恒指期货操盘合作协议》</a></p>
+		<p><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008</a></i></p>
+	</div>
 </div>
 </body>
 </html>

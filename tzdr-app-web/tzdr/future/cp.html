@@ -9,12 +9,81 @@
     <script type="text/javascript" src="../../js/mui.min.js"></script> 
     <script type="text/javascript" src="../../js/common.js"></script>
     <link rel="stylesheet" href="../../css/recharge.css" />
+    <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init();
     	var paramListAll=null;
     	var contractListAll=null;
     	var init_params=null;
+    	
+				
     	mui.plusReady(function(){
+    		loadCss();
+    		function loadCss(){
+    			var Proportion=1;
+				var resolutionWidth=plus.screen.resolutionWidth;
+				Proportion=resolutionWidth/320;
+				console.log(Proportion);
+				$(".ap_choosetitle").css({
+					"height": Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px",
+					"margin":"0px"
+				});
+				$(".ap_main .ap_choosetitle span").css({
+					"height": Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+				});
+				$(".ap_main .ap_choosetitle b").css({
+					"height": Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+				});
+				$(".sc_listsc").css({
+					"margin-top":Proportion*5+"px",
+					"padding":"0px "+Proportion*5+"px",
+				});
+				$(".mui-table-view-cell").css({
+					"padding":Proportion*8+"px 0px",
+//					"height":Proportion*29+"px ",
+//					"line-height":Proportion*29+"px ",
+					"font-size": Proportion*12+"px ",
+				});
+				$(".ap_main .acp_font table tr td").css({
+					"font-size": Proportion*10+"px",
+					"height":Proportion*30+"px",
+					"line-height":Proportion*30+"px",
+					"padding-left":Proportion*5+"px",
+				})
+				$(".ap_main .acp_font table thead td ").css({
+					"font-size": Proportion*12+"px",
+				});
+				$(".AgreementList ").css({
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px",
+					"height":Proportion*80+"px",
+					"padding-buttom":"10px"
+				});
+				$(".AgreementList p").css({
+					"height":Proportion*40+"px!important",
+					"line-height":Proportion*40+"px!important",
+					"font-size": Proportion*12+"px !important",
+				});
+				$(".AgreementList  i").css({
+					"display":"inline-block",
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px",
+					"padding-buttom":"10px"
+				});
+				$("#buttomDiv").css({
+					"line-height":Proportion*50+"px",
+					"height":Proportion*50+"px",
+				})
+				$("#buttomDiv button").css({
+					"line-height":Proportion*50+"px",
+					"height":Proportion*50+"px",
+				})
+				
+    		}
     		//初始化监听头部和底部事件
   		//	tzdr.init. ();
   			//获取综合操盘数据
@@ -126,7 +195,7 @@
     	function createtranLevers(ParamsList){
 			var trade_num=document.getElementById("bond_num");
 			var li=document.createElement("li");
-			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3");
+			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 bottonList");
 			li.innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
 			trade_num.appendChild(li);
 		};
@@ -358,14 +427,14 @@
 			<span id="lineLoss">10,450美元</span>
 		</li>
 	</ul>
-	<h5 class="ap_choosetitle" ><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></h5>
+	<p id="tradeingVariety"><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></p>
 	<p class="tips" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
 			<thead>
-				<td width="100px">期货产品</td>
+				<td width="120px">期货产品</td>
 				<td width="100px">主力合约</td>
-				<td width="150px">维胜交易时间段</td>
+				<td width="280px">维胜交易时间段</td>
 				<td width="120px">交易手续费</td>
 				<td width="350px">初始可持仓手数</td>
 			</thead>
@@ -434,17 +503,13 @@
 			<span id="manageFee">免费</span>
 		</li>
 	</ul>
-	<!--<div class="ac_btn">
-		<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="openPay">提交操盘申请</button>								
-	</div>	-->
 	<div id="buttomDiv">
 		<span>总计：<i class="yellowFont">¥</i><i id="paymentMoney"></i></span>
 		<button type="button" id="openPay" class="mui-btn  lg-btnlogin">提交操盘申请</button>
 	</div>
-	<div class="mui-content-padded">
-		<span class="mui-icon mui-icon mui-icon-info carefulIcon"></span><span class="order_tips">注意：</span>
-		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="cp_info">《国际期货综合操盘合作协议》</a><br><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008
-</a></i></p>
+	<div class="mui-content-padded AgreementList" style="padding: 0px 5px;margin: 5px 0px 0px;">
+		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="cp_info">《国际期货综合操盘合作协议》</a></p>
+		<p><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008</a></i></p>
 	</div>	
 </div>
 </body>

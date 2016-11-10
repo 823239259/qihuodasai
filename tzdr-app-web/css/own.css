@@ -1,7 +1,10 @@
-.own-topbg { background-color: #FFCC33; z-index: 10;color:#333333;}
+.own-topbg { background-color: #2B2B2B; z-index: 10;color:#ffffff;}
 .own-topbg a img {width: 38px; margin-top: 5px;}
-.mui-title { font-size: 18px;}
-.top-tel { display: block; width: auto; height: 44px; line-height: 44px; font-size: 14px; color: #fff; float: right;}
+.mui-title { font-size: 18px; color:#FFFFFF!important;}
+#back{
+		color:#FFFFFF;
+	}
+.top-tel { display: block; width: auto; height: 44px; line-height: 44px; font-size: 14px; color: #fff!important; float: right;}
 .mui-iframe-wrapper { height: 45px; overflow: hidden;}
 .own-mainlist { padding-bottom:46px;}
 .main_list{
@@ -41,15 +44,9 @@
 	
 }
 /***首页的 操盘页面的标题****/
-#nav-title,.top-tel{
+#nav-title,.Three{
 	color:#333333;
 }
-.mui-title{
-	color:#333333!important;
-	}
-	#back{
-		color:#333333;
-	}
 	#openHome{
 		color:#333333;background-color: #FFCC33;border:1px solid #333333;
 		text-decoration: none;
@@ -300,25 +297,38 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .dt_grid ul.mui-table-view:after { background-color: #fff;}
 .sc_listdeta .dt_font { color: #333; padding: 0 10px; font-size: 12px; margin-top: 10px;}
 /*方案申请*/
-.ap_main .mui-table-view-cell { padding: 11px 10px;}
+/*.ap_main .mui-table-view-cell { padding: 11px 10px;}*/
 .ap_main .ap_time label { vertical-align: middle; display: block; float: left;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
-.ap_main .ap_choosetitle {padding: 0 10px; font-size: 17px; height: 20px; line-height: 20px; color: #333; margin: 10px 0; overflow: hidden;}
-.ap_main .ap_choosetitle b { font-weight: normal; font-size: 13px; float: left;height: 20px; line-height: 20px;}
-.ap_main .ap_choosetitle span { vertical-align: middle; float: left; height: 20px; line-height: 20px;}
-.ap_main .mui-grid-9 { background: none;}
-.ap_main .mui-grid-9 .mui-table-view-cell { padding: 15px 0; border:1px solid #989898; background: #fff; width: 23%; margin: 0 1% 15px; border-radius: 5px;}
-.ap_main .mui-grid-9 .on { color: #333333; border:1px solid #333333;background-color: #FFCC33;}
-.ap_main .sc_listsc li span { color: #FFCC33 ; }
+.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;}
+#tradeingVariety{ padding:0px 5px;color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;margin: 5px 0px 0px;line-height: 30px; height: 30px;}
+#tradeingVariety b{ font-weight: normal; font-size: 12px;color:#666666};
+#tradeingVariety span{vertical-align: middle; color:#2b2b2b}
+.ap_main .ap_choosetitle b { font-weight: normal; font-size: 12px; float: left;}
+.ap_main .ap_choosetitle span { vertical-align: middle; float: left; }
+.ap_main .mui-grid-9 { background-color: #FFFFFF; border: none;}
+.ap_main .mui-grid-9 .mui-table-view-cell { text-align: center;border:1px solid #2b2b2b; background: #fff;color:#2b2b2b; width: 23%; margin: 0 1% 15px; border-radius: 5px;font-size:12px;padding:12px 5px;background-image: url(../images/gou.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;;}
+.ap_main .mui-grid-9 .on { color: #333333; border:1px solid #333333;background-color: #FFCC33;background-image: url(../images/gouOn.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;}
+.ap_main .sc_listsc li span { color: #2b2b2b ; }
+.ap_main .sc_listsc li label { color: #666666 ; }
+.ap_main .sc_listsc li{border-bottom: 1px solid #f3f3f3;}
 .ap_main .sc_listsc li span i { font-style: normal;}
 .ap_main .ac_btn button { padding: 8px 0; background: #FFCC33; border:1px solid #333333; color: #333333; }
 .ap_main .ap_font { padding: 0 10px; position: relative; height: 300px;}
 .ap_main .acp_font { padding: 0 10px; overflow-x: scroll; overflow-y: hidden; margin-bottom: 20px;}
-.ap_main .acp_font table { border-top: 1px solid #e0e0e0; border-left:1px solid #E0E0E0; background:#fff; width: 820px;}
-.ap_main .acp_font table td {border-right: 1px solid #E0E0E0; border-bottom: 1px solid #E0E0E0; padding: 10px 0; text-align: center; font-size: 16px;}
-.ap_main .acp_font table thead td { background: #e5f9ff;}
-.ap_main .mui-content-padded p { line-height: 32px;}
+.ap_main .acp_font table {  background:#fff; width: 820px;}
+.AgreementList{
+	background-color: #FFFFFF;
+}
+.AgreementList p{
+	border-bottom: 1px solid #f2f2f2;
+	margin: 0px;;
+}
+.ap_main .acp_font table  tr{  padding:0px 10px;}
+.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 12px;height: 30px;line-height: 30px;}
+.ap_main .acp_font table thead td { background: #f2f2f2;color:#2B2B2B}
+.ap_main .mui-content-padded p { line-height: 40px;}
 /*支付页*/
 .pay_btn { background: #FFCC33; border: 1px solid #333333; color: #333333; padding: 8px 0;}
 .pay_btn:hover { background: #ffdd33; border: 1px solid #333333; }
@@ -580,7 +590,12 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	margin: 0px 0px 0px 80px;
 }
 .tips{
-	font-size: 12px;
+	font-size: 10px;
+	color:#999999;
+	background-color: #FFFFFF;
+	line-height: 30px;;
+	height: 30px;
+	margin: 0px;;
 }
 #trade_account{
 	position: relative;
@@ -597,3 +612,8 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .order_tips,.carefulIcon{
 	color:#ffdd33;
 }
+.mui-bar-nav{
+			-webkit-box-shadow:none;
+			box-shadow:none;
+			border-bottom: 1px solid #454545;
+		}

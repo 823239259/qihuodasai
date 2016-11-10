@@ -588,7 +588,10 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/recharge.css"
+					"css/recharge.css",
+					"images/gouOn.png",
+					"images/gou.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/future/list.html",
@@ -652,7 +655,10 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/recharge.css"
+					"css/recharge.css",
+					"js/jquery-1.11.3.js",
+					"images/gouOn.png",
+					"images/gou.png"
 				],
 				"refer": [
 					"tzdr/future/pay.html",
@@ -669,7 +675,10 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/recharge.css"
+					"css/recharge.css",
+					"images/gouOn.png",
+					"images/gou.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/future/pay.html",
@@ -730,7 +739,10 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"css/recharge.css"
+					"css/recharge.css",
+					"js/jquery-1.11.3.js",
+					"images/gou.png",
+					"images/gouOn.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
