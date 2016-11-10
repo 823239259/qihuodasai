@@ -1021,7 +1021,9 @@
 			"js/trade.util.js",
 			"js/trade.connection.js",
 			"js/trade.data.mode.js",
-			"js/trade.config.js"
+			"js/trade.config.js",
+			"images/tradeOrderBg.png",
+			"images/down.png"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",

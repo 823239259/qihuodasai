@@ -49,13 +49,13 @@ p{
 	background-color: #2B2B2B;
 		width: 100%;;
 }
-#buttomFix{
+.buttomFix{
 	height: 192px;
 	width: 100%;
+	height: auto;
 	background-color: #2B2B2B;
 	overflow: hidden;
-	/*position: fixed;
-	bottom: 0px;*/
+	border-top: 1px solid #454545;
 }
 .buttomFixLeft,.buttomFixRight{
 	background-color: #2B2B2B;
@@ -72,7 +72,7 @@ p{
 	margin-bottom: 0px;
 }
 .buttomFixLeft p{
-	color:# 999999;
+	color:#999999;
 	height: 30px;
 	line-height: 30px;
 	padding: 0px 15px;
@@ -156,22 +156,26 @@ p{
 	margin-left: 5px;
 }
 #marketBuy{
-	margin-right: 5px;;
+	position: absolute;
+	left:0px;
 	background-color:#e9392a;
 	height: 40px;
 	line-height: 28px;
-	position: fixed;
-	bottom: 3%;
-	left:6%;
+	border: none;
+	color:#FFFFFF;
+	padding:0px;
+		width: 50%;
 }
 #marketSell{
-	margin-left: 5px;
+	position: absolute;
+	right:0px;
 	background-color:#16a951;
 	height: 40px;
 	line-height: 28px;
-	position: fixed;
-	bottom: 3%;
-	right:6%;
+	border: none;
+	width: 50%;
+	padding:0px;
+	color:#FFFFFF;
 }
 .Assets{
 	width: 100%;
@@ -729,3 +733,58 @@ input{
 			box-shadow:none;
 			border-bottom: 1px solid #454545;
 		}
+#numberInput{
+	width: 100%;
+	position: relative;
+	clear: both;
+}
+#numberInput input{
+	border: 1px solid #454545;
+	background-color: #1f1f1f;
+	color:#FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+}
+#numberInput label{
+	color:#999999;
+	border-radius: 85px;
+	position: absolute;
+}
+#buttonDivList{
+	width: 100%;
+	position: relative;
+}
+#headerMenu{
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	top:46px;
+}
+#headerMenu button{
+	border: none;
+	padding:0px;
+	background-color: #2B2B2B;
+	text-align: center;
+	/*border-radius: 50%;*/
+}
+#tradeMenu{
+	background-image: url(../images/tradeOrderBg.png);
+	background-size: cover;
+	position: relative;
+	left:0px;
+	
+}
+#timeChartMenu{
+	border:none;
+	text-align: center;
+	background-color: #2B2B2B;
+	color:#fcc900;
+}
+#selectType{
+	background-color: #2B2B2B;
+	color:#FFFFFF;
+	text-align: right;
+	background-image: url(../images/down.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+}

@@ -17,11 +17,12 @@
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		    <a class="whiteFont" id="switchAccount">切换账号</a>
 		</header>
-		<div class="mui-content" style="padding-top: 82px;">
+		<div class="mui-content" style="padding-top: 86px;" >
 				<div id="headerMenu">
+					<button id="tradeMenu">交易中心</button>
 					<button id="timeChartMenu" value="0">分时</button>
 					<button>
-						<select id="selectType">
+						<select id="selectType" style="text-align: center;">
 							<option value="1">1分</option>
 							<option value="5">5分</option>
 							<option value="15">15分</option>
@@ -29,17 +30,17 @@
 							<option value="1440">日K</option>
 						</select>
 					</button>
-					<button id="tradeMenu">交易中心</button>
+					
 				</div>
 				<div id="headerContent">
 					<div id="chartAllDiv" class="mui-active">
 						<div class="chartDivContent mui-active" id="TimeChart1">
-							<div id="timeChart" style="width:100%;height:130px;"></div>
-							<div id="volumeChart" style="width:100%;height:130px;"></div>
+							<div id="timeChart" style="width:100%;"></div>
+							<div id="volumeChart" style="width:100%;"></div>
 						</div>
 						<div class="chartDivContent displayStyle" id="CandlestickChart" style="opacity: 0;">
-							<div   id="CandlestickChartDiv" style="width:100%;height:130px;"></div>
-							<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
+							<div   id="CandlestickChartDiv" style="width:100%;"></div>
+							<div id="CandlestickVolumeChart" style="width:100%;"></div>
 						</div>
 						<div class="buttomFix">
 							<div class="buttomFixLeft mui-col-xs-6">
@@ -52,11 +53,17 @@
 								<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
 							</div>
 							<div class="BuyDiv">
-								<div class="BuyContentLeft"><label>手数:</label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"></div><div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>
+								<div id="numberInput">
+									<label>手数:</label>
+									<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
+									<label>（价格：市价）</label>
+								</div>
+								<!--<div class=""><label></label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"><label>（价格：市价）</label></div>
+									<div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>-->
 							</div>
-							<div class="buyBtn">
-								<button type="button" class="mui-btn mui-col-xs-5 marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
-								<button type="button" class="mui-btn mui-col-xs-5 marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
+							<div class="buttonDivList">
+								<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
+								<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 							</div>
 							<div style="display: none;">
 								<input type="text"  id = "exchangeNo"/> 
@@ -249,7 +256,70 @@
 				</div>
 			</div>-->
 		</div>
-			
+			<script>
+				mui.plusReady(function(){
+					loadCss();
+    			function loadCss(){
+		    			var Proportion=1;
+						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=resolutionWidth/320;
+						console.log(Proportion);
+						$("#numberInput").css({
+							"padding":Proportion*10+"px",
+							"font-size":Proportion*12+"px",
+						});
+						$("#numberInput input").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"padding":"0px "+Proportion*85+"px 0px "+Proportion*45+"px "
+						});
+						$("#numberInput label").css({
+							"top":Proportion*25+"px",
+						});
+						$("#numberInput label:nth-child(1)").css({
+							"left":Proportion*10+5+"px",
+						});
+						$("#numberInput label:nth-child(3)").css({
+							"right":Proportion*10+5+"px",
+						});
+						$("#marketBuy,#marketSell").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"font-size":Proportion*16+"px",
+							
+						});
+						$("#headerMenu").css({
+							"padding":Proportion*5+"px "+Proportion*10+"px "
+						})
+						$("#headerMenu button").css({
+							"height":Proportion*30+"px",
+							"line-height":Proportion*30+"px",
+							"font-size":Proportion*14+"px",
+							"width":Proportion*75+"px",
+						});
+						$("#timeChartMenu").css({
+							"margin":"0px "+Proportion*33+"px",
+							
+						});
+						$("#selectType").css({
+							"height":Proportion*30+"px",
+							"line-height":Proportion*30+"px",
+							"font-size":Proportion*14+"px",
+							"width":Proportion*75+"px",
+							"padding":"0px 0px 0px "+ Proportion*25+"px",
+							"background-size":Proportion*14+"px",
+						});
+						$("#timeChart,#CandlestickChartDiv").css({
+							"width":"100%",
+							"height":Proportion*116+"px",
+						});
+						$("#volumeChart,#CandlestickVolumeChart").css({
+							"width":"100%",
+							"height":Proportion*107+"px",
+						});
+					}
+				})
+			</script>
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
 		<script type="text/javascript" src="../../js/util.js" ></script>
@@ -270,6 +340,7 @@
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){  
+					
 				var Transfer=plus.webview.currentWebview();
 				var CommodityNo=document.getElementById("CommodityNo");
 				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
@@ -390,7 +461,15 @@
 				}
 			}
 	</script>
-
+	<script>
+	var Proportion= 1.125
+	$("#selectType").css({
+							"height":Proportion*30+"px",
+							"line-height":Proportion*30+"px",
+							"font-size":Proportion*14+"px",
+							"width":Proportion*75+"px",
+						});
+	</script>
 	</body>
 
 </html>

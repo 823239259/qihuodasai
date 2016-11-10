@@ -289,7 +289,6 @@ mui.plusReady(function(){
 		mainTitleFirst.innerHTML= $("#CommodityName").val();
 		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
    		rawData=[];
-   		dayCandlestickChartData=[];
    		timeData.timeLabel=[];
    		timeData.prices=[];
    		volumeChartData.time=[];
@@ -301,31 +300,8 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    };
-   		  dayCandlestickVolumeData={
-		    	time:[],
-		    	volume:[]
-		    };
-		     rawDataTen = [];
-		     CandlestickVolumeDataTen ={
-		    	time:[],
-		    	volume:[]
-		    }
-		     newDataTen =[];
-		     tenCandlestickVolumeTime=[];
-		     tenCandlestickVolumeVolume=[];
-		     rawDataThree = [];
-		     CandlestickVolumeDataThree ={
-		    	time:[],
-		    	volume:[]
-		    };
-		    newDataThree =[]; 
-		    rawDataFive = [];
-		    CandlestickVolumeDataFive={
-		    	time:[],
-		    	volume:[]
-		    }
-		    newDataFive=[]; 
-    	sendHistoryMessage();
+//		var num=1;
+    	sendHistoryMessage(0);
     	
     })
    
@@ -419,6 +395,7 @@ mui.plusReady(function(){
 			}
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
+    		$("#TimeChart1").css("opacity","0");
     		 time=[];
 		    prices=[];
 		    timeLabel=[]
@@ -444,7 +421,6 @@ mui.plusReady(function(){
     		var option2=setOption1();
 		 	 var option1 =volumeChartSetOption(volumeChartData);
 				setTimeout(function(){
-					$("#timeChart").css("width","100%");
 				 	timeChart.resize();	
 					timeChart.setOption(option2);
         			timeChart.resize();	
