@@ -62,3 +62,11 @@ function setTradeWebSoketUrl(){
 function setTradeWebSocketIsMock(ismock){
 	tradeWebSocketIsMock = ismock;
 }
+/**
+ * 根据交易模式设置交易配置信息
+ * @param ismock
+ */
+function setTradeConfig(ismock){
+	setTradeWebSocketIsMock(ismock);
+	setTradeWebSoketUrl();
+}

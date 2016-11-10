@@ -149,23 +149,23 @@
 	</div>
 	<div class="" id="signLogin" style="display:none;">
 		<p class="p1">
-			<span class="signLogin_span">实盘登陆</span>
-			<span class="signLogin_span on">模拟盘登录</span>
+			<span class="signLogin_span on" data-tion = "0">实盘登陆</span>
+			<span class="signLogin_span" data-tion = "1">模拟盘登录</span>
 			<i>|</i>
 			<a class="signLogin_close" href="javascript:void(0);">✖</a>
 		</p>
 		<div class="signLogin_mode">
-			<div class="signLogin_all signLogin_firm">
+			<div class="signLogin_all signLogin_firm"  style="display: block;">
 				<p class="p2"><input type="text" name="firm_name" id="firm_name" placeholder="输入实盘账号"></p>
 				<p class="p2"><input type="password" name="firm_password" id="firm_password" placeholder="输入实盘密码"></p>
-				<p class="p3"><a href="">忘记密码？</a>（请联系客服400-852-8008）</p>
-				<p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="" class="no">立即开户</a></span></p>
+				<p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+				<p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="${ctx }/outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
 			</div>
-			<div class="signLogin_all signLogin_simulation" style="display: block;">
+			<div class="signLogin_all signLogin_simulation">
 				<p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
 				<p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
-				<p class="p3"><a href="">忘记密码？</a>（请联系客服400-852-8008）</p>
-				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="" class="no">立即开户</a></span></p>
+				<p class="p3"><a href="javascript:void(0)"  class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="${ctx }/outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
 			</div>
 		</div>	
 	</div>
@@ -174,8 +174,8 @@
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
 	<div class="quotation_anniu" id = "show_login">
-		<input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
-		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
+		<!-- <input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
+		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
 		<button><a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
 		<button><a href="${ctx }/outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
 		<a href="javascript:void(0);" class="backPassword">找回密码</a>

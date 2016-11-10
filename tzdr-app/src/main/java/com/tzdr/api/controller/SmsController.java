@@ -155,7 +155,7 @@ public class SmsController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/validate/sms",method = RequestMethod.GET)
+	@RequestMapping(value = "/validate/sms",method = RequestMethod.POST)
 	public ApiResult validateSms(HttpServletRequest request,@RequestParam("mobile") String mobile,@RequestParam("code")String code){
 		ApiResult apiResult = new ApiResult();
 		if (StringUtil.isBlank(mobile)

@@ -70,6 +70,8 @@ function handleData(evt){
 	if (parameters != null) {
 		if (method == "OnRspLogin") {
 			$("#trade_login").text("登录");
+			$("#firm_btn").text("立即登录");
+			$("#simulation_btn").text("立即登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			//登录成功加载
@@ -79,6 +81,7 @@ function handleData(evt){
 				$("#show_user_info").show();
 				$("#top_username").text(username);
 				$(".caozuo").show();
+				$(".signLogin_close").click();
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
@@ -173,6 +176,8 @@ function handleData(evt){
 			tip(loginMessage);
 		}else if(method == "OnRspLogout"){
 			$("#trade_login").text("登录");
+			$("#firm_btn").text("立即登录");
+			$("#simulation_btn").text("立即登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			loginFail = true;
@@ -1190,6 +1195,16 @@ function loadOperateLogin(){
 	});
 }
 $(function(){
+	var mock = getTradeCookie("isMock");
+	if(mock == null){
+		mock = 0;
+	}
+	setTradeConfig(mock);
+	$(".signLogin_span").bind("click",function(){
+		var $this = $(this);
+		var ismock = $this.attr("data-tion");
+		setTradeConfig(ismock);
+	});
 	if(uid != undefined && uid.length > 0 ){
 		loadOperateLogin();
 	}
@@ -1264,21 +1279,42 @@ $(function(){
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
-	$("#trade_login").click(function(){
-		username = $("#quotation_account").val();
-		if(username == undefined || username.length == 0){
-			layer.tips("请输入交易账号", "#quotation_account",{tips:3});
-			return;
+	$("#firm_btn").click(function(){
+		if(tradeWebSocketIsMock == 0){
+			username = $("#firm_name").val();
+			if(username == undefined || username.length == 0){
+				layer.tips("请输入交易账号", "#firm_name",{tips:3});
+				return;
+			}
+			password = $.base64.encode($("#firm_password").val());
+			if(password == undefined || password.length == 0){
+				layer.tips("请输入交易密码", "#firm_password",{tips:3});
+				return;
+			}
+			if($("#firm_btn").text() == "登录中"){
+				return;
+			}
+			$("#firm_btn").text("登录中");
 		}
-		password = $.base64.encode($("#quotation_password").val());
-		if(password == undefined || password.length == 0){
-			layer.tips("请输入交易密码", "#quotation_password",{tips:3});
-			return;
+		tradeLogin();
+	});
+	$("#simulation_btn").click(function(){
+		if(tradeWebSocketIsMock == 1){
+			username = $("#simulation_mame").val();
+			if(username == undefined || username.length == 0){
+				layer.tips("请输入模拟交易账号", "#simulation_mame",{tips:3});
+				return;
+			}
+			password = $.base64.encode($("#simulation_password").val());
+			if(password == undefined || password.length == 0){
+				layer.tips("请输入模拟交易密码", "#simulation_password",{tips:3});
+				return;
+			}
+			if($("#simulation_btn").text() == "登录中"){
+				return;
+			}
+			$("#simulation_btn").text("登录中");
 		}
-		if($("#trade_login").text() == "登录中"){
-			return;
-		}
-		$("#trade_login").text("登录中");
 		tradeLogin();
 	});
 	$("#float_buy").text("市价");
