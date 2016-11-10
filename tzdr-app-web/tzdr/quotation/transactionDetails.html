@@ -434,41 +434,7 @@
 					$("#switchAccount").text("登录账号");
 				}
 			});
-			function alertCallBack(){
-				if($("#TradingCenter").hasClass("mui-active")==true){
-					$("#TradingCenter").removeClass(" mui-active");
-					$("#trade").removeClass(" mui-active");
-					if($("#CandlestickChart").hasClass("mui-active")==true){
-						$("#Candlestick").addClass(" mui-active");
-						$("#CandlestickChart").addClass(" mui-active");
-					}else if($("#TimeChart1").hasClass("mui-active")==true){
-						$("#TimeChart1").addClass(" mui-active");
-						$("#Time").addClass(" mui-active");
-					}else if($("#dayCandlestickChart").hasClass("mui-active")==true){
-						$("#dayCandlestickChart").addClass(" mui-active");
-						$("#dayCandlestickBtn").addClass(" mui-active");
-					}else if($("#fiveCandlestickChart").hasClass("mui-active")==true){
-						$("#fiveCandlestickChart").addClass(" mui-active");
-						$("#Five").addClass(" mui-active");
-					}else if($("#TenCandlestickChart").hasClass("mui-active")==true){
-						$("#TenCandlestickChart").addClass(" mui-active");
-						$("#Ten").addClass(" mui-active");
-					}else if($("#threeCandlestickChart").hasClass("mui-active")==true){
-						$("#threeCandlestickChart").addClass(" mui-active");
-						$("#Three").addClass(" mui-active");
-					}
-				}else{
-				}
-			}
-	</script>
-	<script>
-	var Proportion= 1.125
-	$("#selectType").css({
-							"height":Proportion*30+"px",
-							"line-height":Proportion*30+"px",
-							"font-size":Proportion*14+"px",
-							"width":Proportion*75+"px",
-						});
+			
 	</script>
 	</body>
 

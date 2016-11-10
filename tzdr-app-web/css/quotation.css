@@ -539,6 +539,7 @@ p{
 	height: 50px;
 	padding:0px 2%;
 	border-bottom:1px solid #454545;
+	position: relative;
 }
 .productContentLeft{
 	height:50px;
@@ -548,6 +549,9 @@ p{
 	font-size: 12px;
 	line-height: 14px;
 	color:#999999;
+	position: absolute;
+	top:0px;
+	left:2%;
 }
 .CommodityNoName{
 	color:#999999!important;
@@ -558,6 +562,9 @@ p{
 	padding:9px 0px 13px;
 	text-align: center;
 	line-height: 26px;
+	position: absolute;
+	top:0px;
+	right:2%;
 }
 .productContentRight span{
 	display: inline-block;

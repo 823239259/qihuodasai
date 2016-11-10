@@ -1859,7 +1859,7 @@ function validationInputPrice(obj){
  */
 function vadationIsLogin(){
 	if(username == null){
-		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin,alertCallBack);
+		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
 		return false;
 	}
 	return true;
