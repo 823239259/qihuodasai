@@ -17,6 +17,22 @@
 		 <script type="text/javascript" src="../../js/util.js" ></script>-->
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
+		<style>
+			#guidance{
+				width: 100%;
+				position: fixed;
+				z-index: 998;
+				background-size: cover;
+				display: none;
+			}
+			.bottom,.top{
+				width: 100%;
+				position: fixed;
+				z-index: 999;
+				background-size: cover;
+				display: none;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -27,7 +43,7 @@
 		<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
 	</header>
 	<div class="mui-content" class="operateLogin">
-		<div id="posiitionCover"></div>
+		<!--<div id="posiitionCover"></div>-->
 		<div id="inputList">
 			<div id="accountType" class="commStyle">
 				<label>账号类型：</label>
@@ -55,7 +71,8 @@
 				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>阅读并接受</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
 			</div>
 		</div>
-		
+		<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+		<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>
 		
 	</div>
 		<script type="text/javascript">
@@ -63,6 +80,7 @@
 			mui.init();
 			mui.plusReady(function(){
 				loadCss()
+				var Proportion=1;
 				function loadCss(){
 					var Proportion=1;
 					var resolutionWidth=plus.screen.resolutionWidth;
@@ -129,8 +147,99 @@
 					$("#checkBox i").css({
 						"width":Proportion*14+"px",
 						"height":Proportion*14+"px",
+					});
+					$("#closeTrade").css({
+						"width":Proportion*17+"px",
+						"hegiht":"auto",
+						"position":"absolute",
+						"top":Proportion*32+"px",
+						"right":Proportion*10+"px",
+					});
+					$("#closeTrade1").css({
+						"width":Proportion*17+"px",
+						"hegiht":"auto",
+						"position":"absolute",
+						"top":Proportion*32+"px",
+						"right":Proportion*10+"px",
+					});
+				}
+				/*加载新手指南*/
+				if(plus.storage.getItem("QuotationGuidanceLogin")==null){
+					plus.storage.setItem("QuotationGuidanceLogin","1");
+					bindGuidance();
+					console.log(plus.storage.getItem("QuotationGuidance"));
+				}
+				function bindGuidance(){
+					loadCss();
+					var Proportion=1;
+					var height=window.innerHeight;
+						$("#guidance").css({
+							"height":height+"px",
+							"background-image": "url(../../images/quotationLogin.png)",
+							"top":"0px",
+							"display":"block"
+						});
+						$(".top,.bottom").css({
+							"display":"none"
+						});
+						var numL=0;
+					$("#closeTrade").click(function(){
+						$("#guidance").css({
+							"display":"none"
+						});
+						$(".top,.bottom").css({
+			    			"display":"none",
+			    		});
+			    		numL++;
+			    		
+					});
+					$("#closeTrade1").click(function(){
+						console.log("54");
+						$(".top,.bottom").css({
+							"display":"none"
+						});
+					});
+					var num=0;
+					$("#guidance").click(function(){
+//							$("#closeTrade").css({
+//							})
+//						}else if(num==1){
+							if(numL==1){
+							}else{
+							$(".top").css({
+									"width":"100%",
+									"display":"block",
+									"height":height*0.57-Proportion*40+"px",
+									"background-color":"rgba(0,0,0,0.8)",
+									"z-index":"999",
+									"top":"0px"
+								});
+								$("#guidance").css({
+									"display":"none"
+								});
+								$(".bottom").css({
+									"width":"100%",
+									"display":"block",
+									"height":height*0.41+"px",
+									"background-image": "url(../../images/quotationLogin1.png)",
+									"background-size":"cover",
+									"z-index":"999",
+									"bottom":"0px"
+								});
+								return
+							}
+//						}
+						num++;
+					});
+					$(".bottom,.top").click(function(){
+						$(".bottom,.top").css({
+							"display":"none"
+						})
 					})
 				}
+				
+				
+				
 				
 				var islogin = false;
 				var num=0
@@ -245,6 +354,9 @@
 				var account = null;
 				var pwd = null;
 				document.getElementById("regLogin").addEventListener("tap",function(){
+					$(".top,.bottom").css({
+			    			"display":"none",
+			    		});
 					mui.openWindow({
 									url:"../future/cp.html",
 									id:"cp"

@@ -1052,7 +1052,12 @@
 					"js/jquery-1.11.3.js",
 					"js/jquery.base64.js",
 					"js/util.js",
-					"images/newUser.png"
+					"images/newUser.png",
+					"images/quotation.png",
+					"images/quotationColse.png",
+					"images/quotation0.png",
+					"images/quotation1.png",
+					"images/quotation4.png"
 				],
 				"refer": [
 					"home.html",
@@ -1100,7 +1105,17 @@
 					"js/trade.data.mode.js",
 					"js/trade.config.js",
 					"images/tradeOrderBg.png",
-					"images/down.png"
+					"images/down.png",
+					"images/quotationColse.png",
+					"images/quotation.png",
+					"images/quotation4.png",
+					"images/quotation1.png",
+					"images/quotation0.png",
+					"images/tradeGudice1.png",
+					"images/tradeGudice2.png",
+					"images/tradeGudice3.png",
+					"images/tradeGudice4.png",
+					"images/tradeGudice5.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1143,7 +1158,10 @@
 					"js/trade.connection.js",
 					"images/close.png",
 					"images/down.jpg",
-					"images/down.png"
+					"images/down.png",
+					"images/quotationColse.png",
+					"images/quotationLogin.png",
+					"images/quotationLogin1.png"
 				],
 				"refer": [
 					"tzdr/future/cl.html",

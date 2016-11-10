@@ -10,6 +10,23 @@
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
 		<script src="../../js/esl.js"></script>
+		<style>
+			#guidance{
+				width: 100%;
+				position: fixed;
+				z-index: 998;
+				background-size: cover;
+				background-position: top;
+				display: none;
+			}
+			.bottom,.top{
+				width: 100%;
+				position: fixed;
+				z-index: 999;
+				background-size: cover;
+				display: none;
+			}
+		</style>
 	</head>
 	<body style="background-color: #2B2B2B"> 
 		<header class="mui-bar mui-bar-nav"> 
@@ -149,116 +166,14 @@
 					    </div>
 					</div>
 				</div>
-				<!--<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" id="topMenu">
-					<a class="mui-control-item mui-active" id="Time" href="#TimeChart1">分时</a>
-					<a class="mui-control-item " id="Candlestick" href="#CandlestickChart">1分</a>
-					<a class="mui-control-item " id="Five" href="#fiveCandlestickChart">5分</a>
-					<a class="mui-control-item " id="Ten" href="#TenCandlestickChart">15分</a>
-					<a class="mui-control-item " id="Three" href="#threeCandlestickChart">30分</a>
-					<a class="mui-control-item " id="dayCandlestickBtn" href="#dayCandlestickChart">日K</a>
-					<a class="mui-control-item" id="TradingCenter" style="width: 5px;">交易中心</a>
-				</div>-->
-				<!--<div style="width: 100%;" id="tradeContentId">
-						<div class="mui-control-content  mui-active" id="TimeChart1">
-								<div id="timeChart" style="width:100%;height:130px;"></div>
-								<div id="volumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="CandlestickChart" style="opacity: 0;">
-								<div   id="CandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="CandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="fiveCandlestickChart" style="opacity: 0;">
-								<div   id="fiveCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="fiveCandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="TenCandlestickChart" style="opacity: 0;">
-								<div   id="TenCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="TenCandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="threeCandlestickChart" style="opacity: 0;">
-								<div   id="threeCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="threeCandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="dayCandlestickChart" style="opacity: 0;">
-								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
-								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
-						</div>
-						<div class="mui-control-content " id="trade" style="padding-top: 40px; padding-bottom: 20px;;">
-							<div class="Assets" style="background-color: #2B2B2B;">
-								<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
-								<p><span>总资产</span><span>保证金</span><span>余额</span></p>
-							</div>
-							<div class="ProductInformation">
-								<div class="ProductInformationLeft">
-									<p class="whiteFont" >
-											<div id="bb">
-												<select class="mui-btn mui-btn-block" id = "tradeTitle" >
-												</select>
-											</div>
-										<span class="mui-icon mui-icon-search" id="searchIcon"></span>
-									</p>
-								</div>
-								<div class="ProductInformationRight">
-									<p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
-									<p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
-									<p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
-								</div>
-							</div>
-							<form id="buyFuture">
-								<div class="butomBoreder">
-									<div class="mui-input-row mui-radio radioDiv mui-left">
-									<label>市价</label>
-									<input type="radio" checked name="prices" value="1" class="radioChoice mui-radio">
-								</div>
-								<div class="mui-input-row mui-radio radioDiv mui-left">
-									<label>限价</label>
-									<input type="radio" class="radioChoice mui-radio" value="0" name="prices">
-								</div>
-								</div> 
-								<div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
-								<div class="buyBtn">
-								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
-								<button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
-								</div>
-							</form>
-							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-								<a class="mui-control-item mui-active" href="#item1" id = "holdCC">持仓</a>
-								<a class="mui-control-item" href="#item2" id = "desgnateGD">挂单</a>
-								<a class="mui-control-item" href="#item3" id = "tradeWT">委托</a>
-								<a class="mui-control-item" href="#item4" id = "successCJ">成交</a>
-							</div>
-				<div>
-					<div id="item1" class="mui-control-content mui-active" >
-							<ul id="positionList" class="listStyle" style="height: 165px; width: 100%;" >
-								<li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
-							</ul>
-						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
-						<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-					</div>
-					<div id="item2" class="mui-control-content">
-							<ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
-								<li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
-							</ul>
-							<button type="button" class="mui-btn mui-col-xs-10 focusButton" id="kilAnorder">撤单</button>
-					</div>
-					<div id="item3" class="mui-control-content" style="width: 100%;">
-							<ul  id="Entrust" class="listStyle" style="height: 165px;" >
-								<li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
-								
-							</ul>
-					</div>
-					<div id="item4" class="mui-control-content" >
-							<ul  id="Deal" class="listStyle" style="height: 165px;">
-								<li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
-							</ul>
-					</div>
-					</div>
-				</div>
-			</div>-->
-		</div>
+				<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+				<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>
+				<div id="littleDiv"></div>
+			</div>
 			<script>
 				mui.plusReady(function(){
 					loadCss();
+					var Proportion=1;
     			function loadCss(){
 		    			var Proportion=1;
 						var resolutionWidth=plus.screen.resolutionWidth;
@@ -317,7 +232,174 @@
 							"width":"100%",
 							"height":Proportion*107+"px",
 						});
+						$("#closeTrade").css({
+							"width":Proportion*17+"px",
+							"hegiht":"auto",
+							"position":"absolute",
+							"top":Proportion*11+"px",
+							"left":Proportion*10+"px",
+						});
+						$("#closeTrade1").css({
+							"width":Proportion*17+"px",
+							"hegiht":"auto",
+							"position":"absolute",
+							"top":Proportion*11+"px",
+							"right":Proportion*10+"px",
+						});
 					}
+    			
+    				/*
+					 增加新手引导的样式
+					 */
+					/*
+					 增加新手引导的样式
+					 */
+					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
+						plus.storage.setItem("QuotationGuidanceTrade","1");
+						bindGuidance();
+						console.log(plus.storage.getItem("QuotationGuidance"));
+					}
+					function bindGuidance(){
+					var Proportion=1;
+					var height=window.innerHeight;
+						$(".top").css({
+							"width":"100%",
+							"display":"block",
+							"height":Proportion*42+46+"px",
+							"background-color":"rgba(0,0,0,0.8)",
+							"z-index":"998",
+							"top":"0px"
+						});
+						$("#guidance").css({
+							"display":"none"
+						});
+						$(".bottom").css({
+							"width":"100%",
+							"display":"block",
+							"height":height*0.41+"px",
+							"background-image": "url(../../images/tradeGudice1.png)",
+							"background-size":"cover",
+							"z-index":"998",
+							"bottom":"0px"
+						});
+					
+					
+					
+//						$("#guidance").css({
+//							"height":height+"px",
+//							"background-image": "url(../../images/quotation.png)",
+//							"top":"0px",
+//							"display":"block"
+//						});
+						$(".top,.bottom").css({
+							"display":"block"
+						});
+						
+						var numL=0;
+					$("#closeTrade").click(function(){
+						$("#guidance").css({
+							"display":"none"
+						});
+						$(".top,.bottom").css({
+			    			"display":"none",
+			    		});
+			    		numL++;
+			    		
+					});
+					$("#closeTrade1").click(function(){
+						$(".top,.bottom").css({
+							"display":"none"
+						});
+					});
+					var num=0;
+					$("#littleDiv").click(function(){
+						$(".bottom,.top").css({
+							"display":"none",
+						});
+						$("#littleDiv").css({
+							"display":"none",
+						});
+						$("#guidance").css({
+							"height":height+"px",
+							"background-image": "url(../../images/tradeGudice3.png)",
+							"top":"0px",
+							"display":"block"
+						});
+					});
+					$("#guidance").click(function(){
+						if(num==1){
+							$("#guidance").css({
+								"height":height-Proportion*60+"px",
+								"background-image": "url(../../images/tradeGudice4.png)",
+								"background-size":"cover",
+								"background-repeat":"no-repeat",
+								
+							});
+						}else if(num==2){
+							$("#guidance").css({
+								"height":height+"px",
+								"background-image": "url(../../images/tradeGudice5.png)",
+								"background-size":"cover",
+								"background-repeat":"no-repeat",
+								
+							});
+						}else if(num==3){
+							$("#guidance").css({
+								"display":"none",
+								
+							});
+						}
+						num++;
+					})
+					$(".bottom,.top").click(function(){
+						if(num==0){
+							$(".top").css({
+								"width":"100%",
+								"display":"block",
+								"height":"46px",
+								"background-color":"rgba(0,0,0,0.8)",
+								"top":"0px"
+							});
+							$(".bottom").css({
+								"width":"100%",
+								"display":"block",
+								"height":height*0.85-2*Proportion+"px",
+								"background-image": "url(../../images/tradeGudice2.png)",
+								"background-size":"cover",
+								"bottom":"0px"
+							});
+//							$("#closeTrade1").css({
+//								"top":15+"px",
+//							})
+							$("#littleDiv").css({
+								"position":"absolute",
+								"top":"46px",
+								"left":"0px",
+								"width":Proportion*120+"px",
+								"height":Proportion*42+"px",
+								"background-color":"rgba(0,0,0,0.8)",
+								"z-index":"999",
+							});
+						}else if(num==1){
+							$(".bottom,.top").css({
+							"display":"none",
+							});
+							$("#littleDiv").css({
+								"display":"none",
+							});
+							$("#guidance").css({
+								"height":height+"px",
+								"background-image": "url(../../images/tradeGudice3.png)",
+								"top":"0px",
+								"display":"block"
+							});
+						}
+						
+						num++;
+					});
+				
+				}
+					
 				})
 			</script>
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 
@@ -341,26 +423,14 @@
 			mui.init();
 			mui.plusReady(function(){  
 					
+					
+					
+					
 				var Transfer=plus.webview.currentWebview();
 				var CommodityNo=document.getElementById("CommodityNo");
 				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 				mainTitleFirst.innerHTML=Transfer.name[0];
 				CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-//				document.getElementById("TradingCenter").addEventListener("tap",function(){
-//					if(vadationIsLogin()){
-//						document.getElementsByClassName("buttomFix")[0].style.display="none";
-//						document.getElementById("tradeContentId").style.display = "block";
-//						$("#TradingCenter").prop("href","#trade");
-//					}
-//				});
-//				document.getElementById("Time").addEventListener("tap",function(){
-//					document.getElementsByClassName("buttomFix")[0].style.display="block";
-//				});
-//				document.getElementById("trade").addEventListener("tap",function(){
-//					$("#CandlestickChart").css("opacity","0");
-//  				$("#TimeChart1").css("opacity","0");
-//  					$("#dayCandlestickChart").css("opacity","0");
-//				})
 				var candlestickChartItem = document.getElementById('CandlestickChart');
 				init(Transfer.name);
 				cachTranFers(Transfer.name);

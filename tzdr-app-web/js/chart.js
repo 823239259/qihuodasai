@@ -451,6 +451,7 @@ mui.plusReady(function(){
 			Trade.doLoginOut(username);
 			socket.close();
 			loginOutFlag = true;
+			loginFail = true;
 		};
 		mui.back();
 	});

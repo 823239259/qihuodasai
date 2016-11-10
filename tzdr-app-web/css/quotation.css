@@ -438,25 +438,6 @@ p{
 	border:none;
 	width: 100%;
 }
-#posiitionCover{
-	position: fixed;
-	top:46px;
-	height: 5px;
-	background: #2B2B2B;
-	width: 100%;;
-	z-index: 999;
-}
-/*#inputList{
-	width: 100%;
-	padding:0px 20px;
-}*/
-/*.commStyle {
-	width: 100%;
-	height: 40px;
-	margin-top: 10px;
-	position: relative;
-	border-bottom:1px solid #454545;
-}*/
  .commStyle label{
  	color:#ffffff;
  }

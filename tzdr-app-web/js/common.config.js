@@ -59,11 +59,12 @@ function loadConfig(){
 	marketSocketUrl = marketSocketConfig.MarketSocketUrl;
 	marketUserName = marketSocketConfig.username;
 	marketPassword = marketSocketConfig.password;
+	setTradeWebSocketUrlConfig();
 }
 function setTradeWebSocketUrlConfig(){
 	if(tradeWebSocketIsMock == 0){ 
 		tradeSocketUrl = tradeWebSocketConfig.TradeSocketUrl;
-	}else{
+	}else if(tradeWebSocketIsMock == 1){
 		tradeSocketUrl = tradeWebSocketConfig.TradeSocketModelUrl;
 	}
 }

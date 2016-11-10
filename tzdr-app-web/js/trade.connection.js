@@ -55,8 +55,8 @@ function changeConnectionStatus(){
 /**
  * 交易连接
  */
-function tradeConnection(){
-	socket = new WebSocket(tradeWebsocketUrl);
+function tradeConnection(){ 
+	socket = new WebSocket(tradeWebsocketUrl);  
 }
 /**
  * 交易连接断开的处理
@@ -120,9 +120,8 @@ function tradeLoginOut(){
  * 交易初始化加载
  */
 function initLoad() {
-	socket.onopen = function() {
-		/*layer.closeAll();*/
-		alert(tradeWebSocketIsMock); 
+	socket.onopen = function() { 
+		/*layer.closeAll();*/ 
 		Trade.doLogin(username , password,tradeWebSocketIsMock); 
 		//更新交易连接状态
 		changeConnectionStatus();
@@ -184,7 +183,7 @@ function initTrade(){
  * 重新连接交易服务器
  */
 function reconnect(){
-	layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
 	if(socket == null){
 		initTrade();
 	}
