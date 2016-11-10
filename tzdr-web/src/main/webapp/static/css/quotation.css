@@ -117,11 +117,11 @@
 .quotation_detailed .quotation_detailed_title li {width: 70px; height: 30px;  line-height: 30px;}
 .quotation_detailed .quotation_detailed_title .ml {padding-left:20px;}
 /* .quotation_detailed .quotation_detailed_title {height: 116px; overflow-y: scroll;} */
-.quotation_detailed .quotation_detailed_qx {margin-top: 60px; height: 60px;  line-height: 60px; border-top: 1px solid #1a1a1a;}
+.quotation_detailed .quotation_detailed_qx {margin-top: 60px; height: 60px; border-top: 1px solid #1a1a1a;}
 .quotation_detailed_qx {color: #999; font-size: 14px;}
 .quotation_detailed_qx label span{color: #ccc;}
-.quotation_detailed_qx label{margin-left: 10px;}
-.quotation_detailed_qx a{width: 90px; height: 30px; line-height: 30px; display: inline-block; background: #ffb319; text-align: center; text-decoration: none; color: #333; border-radius: 4px;}
+.quotation_detailed_qx label{margin-left: 10px; width: 125px; display: inline-block; line-height: 22px; padding: 6px 0;}
+.quotation_detailed_qx a{position: relative; top: -10px; width: 90px; height: 30px; line-height: 30px; display: inline-block; background: #ffb319; text-align: center; text-decoration: none; color: #333; border-radius: 4px;}
 .quotation_detailed_qx a:hover {background: #ff9f19;}
 .quotation_detailed .quotation_detailed_title .caozuo {position: absolute; bottom: -45px; left: 14px;}
 .quotation_detailed .quotation_detailed_title .caozuo li {margin: 0 5px;}
