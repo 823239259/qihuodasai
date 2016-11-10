@@ -72,6 +72,11 @@ function handleData(evt){
 			$("#trade_login").text("登录");
 			$("#firm_btn").text("立即登录");
 			$("#simulation_btn").text("立即登录");
+			if(tradeWebSocketIsMock == 0){
+				$("#ismockReak").text("实盘账户:");
+			}else if(tradeWebSocketIsMock == 1){
+				$("#ismockReak").text("模拟账户:");
+			}
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			//登录成功加载
