@@ -50,20 +50,28 @@
 		<script>
 			mui.init();
 			mui.plusReady(function(){
+				loadCss();
+					function loadCss(){
+						var Proportion=1;
+						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=resolutionWidth/320;
+						$("#buttomDiv").css({
+							"line-height":Proportion*50+"px",
+							"height":Proportion*50+"px",
+						})
+						$("#buttomDiv button").css({
+							"line-height":Proportion*50+"px",
+							"height":Proportion*50+"px",
+						})
+					}
+				
+				
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
 				paymentMoney.innerText=wv.money.toFixed(2);
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					immediatePayment(wv);
 				});
-//				document.getElementById("back").addEventListener("tap",function(){
-//					 var backId = wv.backId;
-//					 var backIdObj = plus.webview.getWebviewById(backId);
-//					 if(backIdObj != null){
-//					 	backIdObj.reload();
-//					 	mui.back();
-//					 }
-//				});
 			});
 			function immediatePayment(wv){
 				var val =  $('.chargeList input[name="choiceBank"]:checked ').val();

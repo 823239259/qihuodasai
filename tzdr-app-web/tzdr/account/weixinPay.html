@@ -78,6 +78,21 @@
 		<script>
 			mui.init();
 			mui.plusReady(function(){
+				
+				loadCss();
+					function loadCss(){
+						var Proportion=1;
+						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=resolutionWidth/320;
+						$("#buttomDiv").css({
+							"line-height":Proportion*50+"px",
+							"height":Proportion*50+"px",
+						})
+						$("#buttomDiv button").css({
+							"line-height":Proportion*50+"px",
+							"height":Proportion*50+"px",
+						})
+					}
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
 				paymentMoney.innerText=wv.money.toFixed(2);
