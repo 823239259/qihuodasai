@@ -389,7 +389,8 @@
 					"tzdr/login/confirmPassword.html",
 					"tzdr/login/retrievePassword.html",
 					"tzdr/login/retrievePasswordComfirm.html",
-					"tzdr/agree/tzdr.html"
+					"tzdr/agree/tzdr.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
