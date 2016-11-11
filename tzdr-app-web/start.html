@@ -10,26 +10,32 @@
 	    <link rel="stylesheet" type="text/css" href="css/own.css"/>
 	    <script src="js/jquery-1.11.3.js"></script>
 	    <style>
-	    	body{
-	    		;
-	    		background-repeat:no-repeat;
-	  			background-size: cover;
-	    	}
+	    	/*body{
+	    		padding:0px;
+	    		margin: 0px;
+	    		background-image: url(images/startPage.png) ;
+	    		background-repeat: no-repeat;
+	    		background-size: 100% 100%;
+	    	}*/
 	    </style>
 	</head>
-	<body>
+	<body style="background-color: #fcca00;">
+		<img src="images/startPage.png" style="width: 100%;">
 		<script>
-			mui.plusReady(function(){
-				//状态栏设置
-				setTimeout(function(){
-					$("body").css({
+		$("img").css({
 						"width":window.innerWidth+"px ",
-						"height":window.innerHeight+"px",
-						"background": "url('images/startPage.png') 100% 100% no-repeat",
+						"height":window.innerHeight-40+"px",
 					
-				})
-				},100)
-				
+				});
+			mui.plusReady(function(){
+//				$("img").css({
+//						"width":window.innerWidth+"px ",
+//						"height":window.innerHeight+"px",
+//					
+//				});
+				//状态栏设置
+				//Android双击home键退出应用
+    		var first = null;
 				setstatus();
 				function setstatus(){
 					if(plus.navigator.isFullscreen()){
@@ -48,12 +54,12 @@
 					})
 				},1500);
 			 	}else{
-			 		setTimeout(function(){
-						mui.openWindow({
-							id:"tzdr/quotation/quotationMain.html",
-							url:"tzdr/quotation/quotationMain.html"
-						})
-					},1500)
+//			 		setTimeout(function(){
+//						mui.openWindow({
+//							id:"tzdr/quotation/quotationMain.html",
+//							url:"tzdr/quotation/quotationMain.html"
+//						})
+//					},1500)
 	            };
 	            //Android双击home键退出应用
 				mui.back = function(){

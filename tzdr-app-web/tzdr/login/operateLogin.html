@@ -172,6 +172,7 @@
 				function bindGuidance(){
 					loadCss();
 					var Proportion=1;
+					var width=plus.screen.resolutionWidth;
 					var height=window.innerHeight;
 						$("#guidance").css({
 							"height":height+"px",
@@ -201,9 +202,6 @@
 					});
 					var num=0;
 					$("#guidance").click(function(){
-//							$("#closeTrade").css({
-//							})
-//						}else if(num==1){
 							if(numL==1){
 							}else{
 							$(".top").css({
@@ -226,6 +224,28 @@
 									"z-index":"999",
 									"bottom":"0px"
 								});
+								if(width==320){
+									$(".top").css({
+										"height":height*0.47+"px",
+									});
+									$(".bottom").css({
+										"height":height*0.46+"px",
+									})
+								}else if(width==375){
+									$(".top").css({
+										"height":height*0.45+"px",
+									});
+									$(".bottom").css({
+										"height":height*0.48+"px",
+									})
+								}else if(width==414){
+									$(".top").css({
+										"height":height*0.48+"px",
+									});
+									$(".bottom").css({
+										"height":height*0.45+"px",
+									})
+								}
 								return
 							}
 //						}

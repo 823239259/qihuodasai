@@ -26,6 +26,9 @@
 				background-size: cover;
 				display: none;
 			}
+			/*.buttomFix{
+				position: fixed;
+			}*/
 		</style>
 	</head>
 	<body style="background-color: #2B2B2B"> 
@@ -35,10 +38,10 @@
 		    <a class="whiteFont" id="switchAccount">切换账号</a>
 		</header>
 		<div class="mui-content" style="padding-top: 86px;" >
-				<div id="headerMenu">
+				<div id="headerMenu" style="background-color: #2B2B2B;">
 					<button id="tradeMenu">交易中心</button>
 					<button id="timeChartMenu" value="0">分时</button>
-					<button>
+					<button id="selectButon">
 						<select id="selectType" style="text-align: center;">
 							<option value="1">1分</option>
 							<option value="5">5分</option>
@@ -178,7 +181,8 @@
 		    			var Proportion=1;
 						var resolutionWidth=plus.screen.resolutionWidth;
 						Proportion=resolutionWidth/320;
-						console.log(Proportion);
+						var width=resolutionWidth;
+						alert(width);
 						$("#numberInput").css({
 							"padding":Proportion*10+"px",
 							"font-size":Proportion*12+"px",
@@ -201,10 +205,15 @@
 							"height":Proportion*50+"px",
 							"line-height":Proportion*50+"px",
 							"font-size":Proportion*16+"px",
-							
 						});
 						$("#headerMenu").css({
-							"padding":Proportion*5+"px "+Proportion*10+"px "
+							"padding":Proportion*5+"px "+Proportion*10+"px ",
+							"background-color":"#2B2B2B",
+							"width":"100%",
+							"height":Proportion*35+"px",
+							"position":"fixed",
+							"top":"46px",
+							"z-index":"990"
 						})
 						$("#headerMenu button").css({
 							"height":Proportion*30+"px",
@@ -212,10 +221,14 @@
 							"font-size":Proportion*14+"px",
 							"width":Proportion*75+"px",
 						});
-						$("#timeChartMenu").css({
-							"margin":"0px "+Proportion*33+"px",
-							
-						});
+						$("#tradeMenu").css({
+							"position":"absolute",
+							"left":Proportion*10+"px "
+						})
+						$("#selectButon").css({
+							"position":"absolute",
+							"right":Proportion*10+"px "
+						})
 						$("#selectType").css({
 							"height":Proportion*30+"px",
 							"line-height":Proportion*30+"px",
@@ -226,11 +239,11 @@
 						});
 						$("#timeChart,#CandlestickChartDiv").css({
 							"width":"100%",
-							"height":Proportion*116+"px",
+							"height":Proportion*163+"px",
 						});
 						$("#volumeChart,#CandlestickVolumeChart").css({
 							"width":"100%",
-							"height":Proportion*107+"px",
+							"height":Proportion*145+"px",
 						});
 						$("#closeTrade").css({
 							"width":Proportion*17+"px",
@@ -246,7 +259,34 @@
 							"top":Proportion*11+"px",
 							"right":Proportion*10+"px",
 						});
-					}
+						if(width==320){
+							$("#timeChart,#CandlestickChartDiv").css({
+								"width":"100%",
+								"height":Proportion*150+"px",
+							});
+							$("#volumeChart,#CandlestickVolumeChart").css({
+								"width":"100%",
+								"height":Proportion*118+"px",
+							});
+						}else if(width==375){
+							$("#timeChart,#CandlestickChartDiv").css({
+								"width":"100%",
+								"height":Proportion*165+"px",
+							});
+							$("#volumeChart,#CandlestickVolumeChart").css({
+								"width":"100%",
+								"height":Proportion*128+"px",
+							});
+						}else if(width==414){
+							$("#timeChart,#CandlestickChartDiv").css({
+								"width":"100%",
+								"height":Proportion*175+"px",
+							});
+							$("#volumeChart,#CandlestickVolumeChart").css({
+								"width":"100%",
+								"height":Proportion*135+"px",
+							});
+						}
     			
     				/*
 					 增加新手引导的样式
@@ -254,11 +294,10 @@
 					/*
 					 增加新手引导的样式
 					 */
-//					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
-//						plus.storage.setItem("QuotationGuidanceTrade","1");
-//						bindGuidance();
-//						console.log(plus.storage.getItem("QuotationGuidance"));
-//					}
+					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
+						plus.storage.setItem("QuotationGuidanceTrade","1");
+						bindGuidance();
+					}
 					bindGuidance();
 					function bindGuidance(){
 					var Proportion=1;
@@ -272,7 +311,9 @@
 							"top":"0px"
 						});
 						$("#guidance").css({
-							"display":"none"
+							"display":"none",
+							"position":"fixed",
+							"z-index":"999",
 						});
 						$(".bottom").css({
 							"width":"100%",
@@ -295,7 +336,6 @@
 			    			"display":"none",
 			    		});
 			    		numL++;
-			    		
 					});
 					$("#closeTrade1").click(function(){
 						$(".top,.bottom").css({
@@ -345,10 +385,6 @@
 								"background-repeat":"no-repeat",
 								
 							});
-							console.log("4544545")
-//							$("#closeTrade").css({
-//								"left":Proportion*100+"px",
-//							});
 							
 						}else if(num==4){
 							if(numL!=4)
@@ -379,19 +415,15 @@
 								"background-size":"cover",
 								"bottom":"0px"
 							});
-//							$("#closeTrade1").css({
-//								"top":15+"px",
-//							})
 							$("#littleDiv").css({
-								"position":"absolute",
+								"position":"fixed",
 								"top":"46px",
 								"left":"0px",
 								"width":Proportion*120+"px",
-								"height":Proportion*42+"px",
+								"height":Proportion*70+"px",
 								"background-color":"rgba(0,0,0,0.8)",
 								"z-index":"999",
 							});
-							
 						}
 						}else if(num==1){
 							if(numL==1){
@@ -415,7 +447,7 @@
 					});
 				
 				}
-					
+				}	
 				})
 			</script>
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 
