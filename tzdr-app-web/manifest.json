@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "start.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -1015,7 +1015,12 @@
 					"css/mui.min.css",
 					"main.html",
 					"css/own.css",
-					"js/common.js"
+					"js/common.js",
+					"images/startG3.png",
+					"images/startG2.png",
+					"images/startG4.png",
+					"images/startG1.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/quotation/quotationMain.html",
@@ -1453,6 +1458,21 @@
 					"images/tutorial/17.png"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"start.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"images/startPage.png",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/quotation/quotationMain.html",
+					"guide.html"
+				],
 				"priority": 0
 			}
 		},

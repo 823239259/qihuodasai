@@ -254,11 +254,12 @@
 					/*
 					 增加新手引导的样式
 					 */
-					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
-						plus.storage.setItem("QuotationGuidanceTrade","1");
-						bindGuidance();
-						console.log(plus.storage.getItem("QuotationGuidance"));
-					}
+//					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
+//						plus.storage.setItem("QuotationGuidanceTrade","1");
+//						bindGuidance();
+//						console.log(plus.storage.getItem("QuotationGuidance"));
+//					}
+					bindGuidance();
 					function bindGuidance(){
 					var Proportion=1;
 					var height=window.innerHeight;
@@ -282,19 +283,9 @@
 							"z-index":"998",
 							"bottom":"0px"
 						});
-					
-					
-					
-//						$("#guidance").css({
-//							"height":height+"px",
-//							"background-image": "url(../../images/quotation.png)",
-//							"top":"0px",
-//							"display":"block"
-//						});
 						$(".top,.bottom").css({
 							"display":"block"
 						});
-						
 						var numL=0;
 					$("#closeTrade").click(function(){
 						$("#guidance").css({
@@ -310,6 +301,13 @@
 						$(".top,.bottom").css({
 							"display":"none"
 						});
+						$("#guidance").css({
+							"display":"none"
+						});
+						$("#littleDiv").css({
+							"display":"none",
+						});
+						numL++;
 					});
 					var num=0;
 					$("#littleDiv").click(function(){
@@ -327,15 +325,19 @@
 						});
 					});
 					$("#guidance").click(function(){
-						if(num==1){
+						if(num==2){
+							if(numL!=2)
 							$("#guidance").css({
 								"height":height-Proportion*60+"px",
 								"background-image": "url(../../images/tradeGudice4.png)",
 								"background-size":"cover",
 								"background-repeat":"no-repeat",
-								
 							});
-						}else if(num==2){
+							$("#closeTrade").css({
+								"left":Proportion*325+"px",
+							});
+						}else if(num==3){
+							if(numL!=3)
 							$("#guidance").css({
 								"height":height+"px",
 								"background-image": "url(../../images/tradeGudice5.png)",
@@ -343,7 +345,13 @@
 								"background-repeat":"no-repeat",
 								
 							});
-						}else if(num==3){
+							console.log("4544545")
+//							$("#closeTrade").css({
+//								"left":Proportion*100+"px",
+//							});
+							
+						}else if(num==4){
+							if(numL!=4)
 							$("#guidance").css({
 								"display":"none",
 								
@@ -353,6 +361,9 @@
 					})
 					$(".bottom,.top").click(function(){
 						if(num==0){
+							if(numL==1){
+
+							}else{
 							$(".top").css({
 								"width":"100%",
 								"display":"block",
@@ -380,19 +391,24 @@
 								"background-color":"rgba(0,0,0,0.8)",
 								"z-index":"999",
 							});
+							
+						}
 						}else if(num==1){
-							$(".bottom,.top").css({
-							"display":"none",
-							});
-							$("#littleDiv").css({
+							if(numL==1){
+							}else{
+								$(".bottom,.top").css({
 								"display":"none",
-							});
-							$("#guidance").css({
-								"height":height+"px",
-								"background-image": "url(../../images/tradeGudice3.png)",
-								"top":"0px",
-								"display":"block"
-							});
+								});
+								$("#littleDiv").css({
+									"display":"none",
+								});
+								$("#guidance").css({
+									"height":height+"px",
+									"background-image": "url(../../images/tradeGudice3.png)",
+									"top":"0px",
+									"display":"block"
+								});
+							}
 						}
 						
 						num++;
