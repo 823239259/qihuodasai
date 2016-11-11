@@ -147,6 +147,17 @@
 	 		
 	 	</div>
 	</div>
+	<div class="tck01" id="open_account" style="display: none;">
+		<div class="smain">
+			<div>
+				<p>模拟账户申请功能正在研发中，</p>
+				<p>联系客服：<span style="color:#fc3;">400-852-8008</span>，为您手动开通</p>
+			</div>
+		</div>
+		<div class="anniu">
+	 		
+	 	</div>
+	</div>
 	<div class="" id="signLogin" style="display:none;">
 		<p class="p1">
 			<span class="signLogin_span on" data-tion = "0">实盘登陆</span>
@@ -165,7 +176,7 @@
 				<p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
 				<p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
 				<p class="p3"><a href="javascript:void(0)"  class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
-				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="${ctx }/outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
+				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span></p>
 			</div>
 		</div>	
 	</div>

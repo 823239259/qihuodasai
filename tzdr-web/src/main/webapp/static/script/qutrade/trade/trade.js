@@ -1242,6 +1242,21 @@ $(function(){
 				 }
 			});
 	});
+	
+	$(".open_account").click(function(){
+		layer.open({
+			  type: 1,
+			  title:"忘记密码",
+			  skin: 'layui-layer-rim', //加上边框
+			  area: ['360px', '170px'], //宽高
+			  content: $("#open_account").html(),
+			  btn:['关闭'],
+			  btn2: function(){
+					 layer.closeAll();
+				 }
+			});
+	});
+	
 	bindOpertion();
 	function selectCommodity(param){
 		var contractCode = param;
