@@ -93,6 +93,7 @@ function loginOut(account,password){
  * @param {Object} password 登录密码
  */
 function loginCache(account,password){
+	setTradeCookie("isMock",tradeWebSocketIsMock);
 	setTradeCookie("trade_account",account);
 	setTradeCookie("trade_password",password);
 	setTradeCookie("trade_endLoginAccount",account);

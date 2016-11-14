@@ -3,6 +3,7 @@ package com.tzdr.api.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,15 @@ import com.tzdr.business.service.socketconfig.SocketConfigService;
 import com.tzdr.domain.web.entity.SocketConfig;
 
 @Controller
-@RequestMapping(value = "/socket/config")
+@RequestMapping("/socket/config")
 public class SocketConfigController {
 	@Autowired
 	private SocketConfigService socketConfigService;
+	@RequestMapping(value = "/getVersions")
 	@ResponseBody
-	@RequestMapping(value = "/getVersion",method = RequestMethod.GET)
-	public ApiResult getVersion(HttpServletRequest request,@RequestParam("appVersion") String appVersion){
-		ApiResult result = new ApiResult();
+	public ApiResult getVersion(HttpServletRequest request,HttpServletResponse response){
+		String appVersion = request.getParameter("appVersions");
+		ApiResult result = new ApiResult(false);
 		List<SocketConfig> configs = socketConfigService.findSocketConfigByAppVersion(appVersion);
 		if(configs != null && configs.size() > 0){
 			result.setSuccess(true);

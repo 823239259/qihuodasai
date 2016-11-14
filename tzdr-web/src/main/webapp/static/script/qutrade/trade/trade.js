@@ -1340,6 +1340,7 @@ function getVersion(){
 				tradeWebsocketUrl = data.socketUrl;
 				tradeWebSocketVersion = data.socketVersion;
 				tradeWebSocketModelUrl = data.socketModelUrl;
+				isGetVersion = true;
 			}
 		}
 	});
