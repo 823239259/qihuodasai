@@ -62,9 +62,9 @@
 					"padding-buttom":"10px"
 				});
 				$(".AgreementList p").css({
-					"height":Proportion*40+"px!important",
-					"line-height":Proportion*40+"px!important",
-					"font-size": Proportion*12+"px !important",
+					"height":Proportion*40+"px",
+					"line-height":Proportion*40+"px",
+					"font-size": Proportion*12+"px ",
 				});
 				$(".AgreementList  i").css({
 					"display":"inline-block",
@@ -183,11 +183,11 @@
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
 			document.getElementById("paymentMoney").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
-			if(mui.isnull(ParamsList.manageFee)){
-				document.getElementById("manageFee").innerHTML="免费";
-			}else{
-				document.getElementById("manageFee").innerHTML=ParamsList.manageFee+"元";
-			}
+//			if(mui.isnull(ParamsList.manageFee)){
+//				document.getElementById("manageFee").innerHTML="免费";
+//			}else{
+//				document.getElementById("manageFee").innerHTML=ParamsList.manageFee+"元";
+//			}
 		};
     	
     	function createtranLevers(ParamsList){
@@ -408,7 +408,7 @@
 	</header>
 <div class="mui-content ap_main">
 	<h5 class="ap_choosetitle"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
-	<ul class="mui-table-view mui-grid-view mui-grid-9" id="bond_num">
+	<ul class="mui-table-view mui-grid-view mui-grid-9 borderClass" id="bond_num" style="border-bottom: 1px solid #E4E4E4;">
 		
 	</ul>
 	<ul class="mui-table-view sc_listsc">
@@ -425,8 +425,8 @@
 			<span id="lineLoss">10,450美元</span>
 		</li>
 	</ul>
-	<p id="tradeingVariety"><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></p>
-	<p class="tips" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
+	<p id="tradeingVariety" style="border-top: 1px solid #E4E4E4;"><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></p>
+	<p class="tips borderClass" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
 			<thead>
@@ -495,17 +495,17 @@
 		</table>
 	</div>
 	
-	<ul class="mui-table-view sc_listsc">
+	<!--<ul class="mui-table-view sc_listsc">
 		<li class="mui-table-view-cell">
 			<label>账户管理费(¥)：</label>
 			<span id="manageFee">免费</span>
 		</li>
-	</ul>
+	</ul>-->
 	<div id="buttomDiv">
 		<span>总计：<i class="yellowFont">¥</i><i id="paymentMoney"></i></span>
 		<button type="button" id="openPay" class="mui-btn  lg-btnlogin">提交操盘申请</button>
 	</div>
-	<div class="mui-content-padded AgreementList" style="padding: 0px 5px;margin: 5px 0px 0px;">
+	<div class="AgreementList" style="margin-top: -15px;">
 		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="cp_info">《国际期货综合操盘合作协议》</a></p>
 		<p><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008</a></i></p>
 	</div>	

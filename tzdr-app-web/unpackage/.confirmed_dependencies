@@ -976,7 +976,11 @@
 			"js/jquery-1.11.3.js",
 			"js/jquery.base64.js",
 			"js/util.js",
-			"images/newUser.png"
+			"images/newUser.png",
+			"images/quotation0.png",
+			"images/quotation.png",
+			"images/quotationColse.png",
+			"images/quotation4.png"
 		],
 		"refer": [
 			"home.html",
@@ -1263,6 +1267,19 @@
 		],
 		"refer": [
 			"tzdr/login/login.html"
+		]
+	},
+	"start.html": {
+		"resources": [
+			"css/own.css",
+			"js/common.js",
+			"images/startPage.png",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"tzdr/quotation/quotationMain.html"
 		]
 	}
 }

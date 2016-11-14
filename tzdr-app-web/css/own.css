@@ -16,15 +16,15 @@
 	line-height: 30px;
 	font-size: 12px;
 	background-color: #2B2B2B;
-	color:#cccccc;
-	padding-left: 15px;
+	color:#fcc900;
+	text-align: center;
 }
 .main_list .mui-table-view-cell { min-height: 92px;overflow: hidden;height: auto;position: relative; color:#999999;}
-.main_list .mui-table-view-cell img { width: 70px; height:70px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
-.main_list .mui-table-view-cell h2 {width: 70%; height: 30px; line-height: 30px; text-align: left; font-size: 14px; margin-left: 75px; color: #FFCC33;font-weight: normal;}
-.main_list .mui-table-view-cell p { color:#999999; line-height: 30px; margin-left: 75px; font-size: 12px;white-space: normal;color:#999999;}
+.main_list .mui-table-view-cell img { width: 40px; height:40px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
+.main_list .mui-table-view-cell h2 {width: 90%;  text-align: left; font-size: 14px; margin-left: 50px; color: #FFCC33;font-weight: normal;}
+.main_list .mui-table-view-cell p { color:#999999; line-height: 20px; margin-left: 50px; font-size: 12px;white-space: normal;color:#999999;}
 .main_list .mui-table-view-cell p i { color: #2b2b2b; font-style: normal; }
-.main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:75px;margin-top: 10px; border-top:1px solid #e6e6e6;}
+.main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:50px;margin-top: 10px; border-top:1px solid #e6e6e6;}
 .main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;padding-right: 0px;margin-right: -50px;}
 .mui-table-view-cell:after{
 	content:none;
@@ -298,6 +298,9 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .sc_listdeta .dt_font { color: #333; padding: 0 10px; font-size: 12px; margin-top: 10px;}
 /*方案申请*/
 /*.ap_main .mui-table-view-cell { padding: 11px 10px;}*/
+.borderClass{
+	border-bottom: 1px solid #E4E4E4;
+}
 .ap_main .ap_time label { vertical-align: middle; display: block; float: left;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
@@ -320,15 +323,24 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ap_main .acp_font table {  background:#fff; width: 820px;}
 .AgreementList{
 	background-color: #FFFFFF;
+	height: auto;
+	border-bottom: 1px solid #E4E4E4;
+	border-top:1px solid #E4E4E4;
+	padding: 0px 5px;margin: 5px 0px 5px;
+}
+.AgreementList a{
+	color:#fcc900;
 }
 .AgreementList p{
 	border-bottom: 1px solid #f2f2f2;
-	margin: 0px;;
+	margin: 0px;height: auto;
+	height: 40px;
+	/*line-height: 40px;*/
 }
 .ap_main .acp_font table  tr{  padding:0px 10px;}
 .ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 12px;height: 30px;line-height: 30px;}
 .ap_main .acp_font table thead td { background: #f2f2f2;color:#2B2B2B}
-.ap_main .mui-content-padded p { line-height: 40px;}
+/*.ap_main .mui-content-padded p { line-height: 40px;}*/
 /*支付页*/
 .pay_btn { background: #FFCC33; border: 1px solid #333333; color: #333333; padding: 8px 0;}
 .pay_btn:hover { background: #ffdd33; border: 1px solid #333333; }

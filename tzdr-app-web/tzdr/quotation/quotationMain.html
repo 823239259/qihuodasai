@@ -166,118 +166,218 @@
 				</div>
 			</div>
 		</div>
-		<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-		<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>
+		<!--<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>-->
+		<div class="top"></div><div class="bottom"></div>
+		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
 	<script src="../../js/util.js"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript">
 		//初始化导航栏
-		
 			tzdr.init.initHearListener();
-		
-			
 			mui.plusReady(function(){
+				var width=plus.screen.resolutionWidth;
 				function loadCss(){
 					var resolutionWidth=plus.screen.resolutionWidth;
 					Proportion=resolutionWidth/320;
 					$("#closeTrade").css({
 						"width":Proportion*17+"px",
 						"hegiht":"auto",
-						"position":"absolute",
-						"top":Proportion*32+"px",
-						"right":Proportion*10+"px",
-					});
-					$("#closeTrade1").css({
-						"width":Proportion*17+"px",
-						"hegiht":"auto",
-						"position":"absolute",
-						"top":Proportion*32+"px",
-						"right":Proportion*10+"px",
+						"display":"block",
+						"margin":Proportion*8+"px"
 					});
 				}
-				/*绑定事件*/
-					/*
-					 增加新手引导的样式
-					 */
+				/*
+				 增加新手引导的样式
+				 */
 				if(plus.storage.getItem("QuotationGuidance")==null){
 					plus.storage.setItem("QuotationGuidance","1");
 					bindGuidance();
-					console.log(plus.storage.getItem("QuotationGuidance"));
 				}
+				bindGuidance();
 				function bindGuidance(){
 					loadCss();
 					var Proportion=1;
 					var height=window.innerHeight;
-						$("#guidance").css({
+						$(".top").css({
 							"height":height+"px",
 							"background-image": "url(../../images/quotation.png)",
 							"top":"0px",
-							"display":"block"
+							"display":"block",
+							"position":"fixed",
+							"top":"0px",
+							"right":"0px",
+							"z-index":"990"
 						});
-						$(".top,.bottom").css({
-							"display":"none"
+						$("#closeDiv").css({
+							"width":Proportion*40+"px",
+							"height":Proportion*40+"px",
+							"position":"fixed",
+							"top":Proportion*20+"px",
+							"right":Proportion*10+"px",
+							"border":"1px solid red",
+							"z-index":"991",
+							"vertical-align":"middle"
 						});
-						var numL=0;
-					$("#closeTrade").click(function(){
-						$("#guidance").css({
-							"display":"none"
-						});
-						$(".top,.bottom").css({
-			    			"display":"none",
-			    		});
-			    		numL++;
-			    		
-					});
-					$("#closeTrade1").click(function(){
-						console.log("54");
-						$(".top,.bottom").css({
-							"display":"none"
-						});
-					});
-					var num=0;
-					$("#guidance").click(function(){
-						$("#guidance").css({
-							"background-image": "url(../../images/quotation"+num+".png)",
-						});
-						if(num==0){
-							$("#closeTrade").css({
-								"left":Proportion*10+"px",
-							})
-						}else if(num==1){
-							if(numL==1){
-								
-							}else{
+						var clickNum=0;
+						$("#closeDiv").click(function(){
 							$(".top").css({
-									"width":"100%",
-									"display":"block",
-									"height":height*0.5-40+"px",
-									"background-color":"rgba(0,0,0,0.8)",
-									"z-index":"999",
-									"top":"0px"
+								"display": "none",
+							});
+							$("#closeDiv").css({
+								"display": "none",
+							});
+						})
+						$(".top").click(function(){
+							if(clickNum==0){
+								$(".top").css({
+									"background-image": "url(../../images/quotation0.png)",
 								});
-								$("#guidance").css({
-									"display":"none"
+								$("#closeDiv").css({
+									"left":Proportion*10+"px",
+								});
+							}else if(clickNum==1){
+								$(".top").css({
+									"height":height*0.435+"px",
+									"background-color":"rgba(0,0,0,0.8)",
 								});
 								$(".bottom").css({
 									"width":"100%",
-									"display":"block",
-									"height":height*0.5+"px",
+									"position":"fixed",
+									"bottom":"0px",
+									"height":height*0.475+"px",
 									"background-image": "url(../../images/quotation4.png)",
-									"background-size":"cover",
-									"z-index":"999",
-									"bottom":"0px"
+									"z-index":"991",
+								})
+								$("#closeDiv").css({
+									"left":Proportion*10+"px",
 								});
-								return
 							}
-						}
-						num++;
-					});
-					$(".bottom,.top").click(function(){
-						$(".bottom,.top").css({
-							"display":"none"
+							clickNum++;
 						})
-					})
+//					$("#closeTrade").click(function(){
+//						$("#guidance").css({
+//							"display":"none"
+//						});
+//						$(".top,.bottom").css({
+//			    			"display":"none",
+//			    		});
+//			    		numL++;
+//			    		
+//					});
+//					$("#closeTrade1").click(function(){
+//						console.log("54");
+//						$(".top,.bottom").css({
+//							"display":"none"
+//						});
+//					});
+//					var num=0;
+//					$("#guidance").click(function(){
+//						$("#guidance").css({
+//							"background-image": "url(../../images/quotation"+num+".png)",
+//						});
+//						if(num==0){
+//							$("#closeTrade").css({
+//								"left":Proportion*10+"px",
+//							})
+//						}else if(num==1){
+//							if(numL==1){
+//								
+//							}else{
+//							$(".top").css({
+//									"width":"100%",
+//									"display":"block",
+//									"height":height*0.5-40+"px",
+//									"background-color":"rgba(0,0,0,0.8)",
+//									"z-index":"999",
+//									"top":"0px"
+//								});
+//								$("#guidance").css({
+//									"display":"none"
+//								});
+//								$(".bottom").css({
+//									"width":"100%",
+//									"display":"block",
+//									"height":height*0.5+"px",
+//									"background-image": "url(../../images/quotation4.png)",
+//									"background-size":"cover",
+//									"z-index":"999",
+//									"bottom":"0px"
+//								});
+//								if(width==320){
+//										$(".top").css({
+//										"width":"100%",
+//										"display":"block",
+//										"height":height*0.435+"px",
+//										"background-color":"rgba(0,0,0,0.8)",
+//										"z-index":"999",
+//											"top":"0px"
+//										});
+//										$("#guidance").css({
+//											"display":"none"
+//										});
+//										$(".bottom").css({
+//											"width":"100%",
+//											"display":"block",
+//											"height":height*0.475+"px",
+//											"background-image": "url(../../images/quotation4.png)",
+//											"background-size":"cover",
+//											"z-index":"999",
+//											"bottom":"0px"
+//										});
+//								}else if(width==375){
+//										$(".top").css({
+//										"width":"100%",
+//										"display":"block",
+//										"height":height*0.43+"px",
+//										"background-color":"rgba(0,0,0,0.8)",
+//										"z-index":"999",
+//											"top":"0px"
+//										});
+//										$("#guidance").css({
+//											"display":"none"
+//										});
+//										$(".bottom").css({
+//											"width":"100%",
+//											"display":"block",
+//											"height":height*0.49+"px",
+//											"background-image": "url(../../images/quotation4.png)",
+//											"background-size":"cover",
+//											"z-index":"999",
+//											"bottom":"0px"
+//										});
+//								}else if(width==414){
+//									$(".top").css({
+//										"width":"100%",
+//										"display":"block",
+//										"height":height*0.455+"px",
+//										"background-color":"rgba(0,0,0,0.8)",
+//										"z-index":"999",
+//											"top":"0px"
+//										});
+//										$("#guidance").css({
+//											"display":"none"
+//										});
+//										$(".bottom").css({
+//											"width":"100%",
+//											"display":"block",
+//											"height":height*0.47+"px",
+//											"background-image": "url(../../images/quotation4.png)",
+//											"background-size":"cover",
+//											"z-index":"999",
+//											"bottom":"0px"
+//										});
+//								}
+//								return
+//							}
+//						}
+//						num++;
+//					});
+//					$(".bottom,.top").click(function(){
+//						$(".bottom,.top").css({
+//							"display":"none"
+//						})
+//					})
 				}
 				
 				

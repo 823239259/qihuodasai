@@ -182,7 +182,6 @@
 						var resolutionWidth=plus.screen.resolutionWidth;
 						Proportion=resolutionWidth/320;
 						var width=resolutionWidth;
-						alert(width);
 						$("#numberInput").css({
 							"padding":Proportion*10+"px",
 							"font-size":Proportion*12+"px",
@@ -259,38 +258,44 @@
 							"top":Proportion*11+"px",
 							"right":Proportion*10+"px",
 						});
-						if(width==320){
+						var screen=plus.screen.resolutionHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
 								"width":"100%",
-								"height":Proportion*150+"px",
+								"height":135*screen/568+"px",
 							});
 							$("#volumeChart,#CandlestickVolumeChart").css({
 								"width":"100%",
-								"height":Proportion*118+"px",
+								"height":110*screen/568+"px",
 							});
-						}else if(width==375){
-							$("#timeChart,#CandlestickChartDiv").css({
-								"width":"100%",
-								"height":Proportion*165+"px",
-							});
-							$("#volumeChart,#CandlestickVolumeChart").css({
-								"width":"100%",
-								"height":Proportion*128+"px",
-							});
-						}else if(width==414){
-							$("#timeChart,#CandlestickChartDiv").css({
-								"width":"100%",
-								"height":Proportion*175+"px",
-							});
-							$("#volumeChart,#CandlestickVolumeChart").css({
-								"width":"100%",
-								"height":Proportion*135+"px",
-							});
-						}
-    			
-    				/*
-					 增加新手引导的样式
-					 */
+						
+//						if(width==320){
+//							$("#timeChart,#CandlestickChartDiv").css({
+//								"width":"100%",
+//								"height":Proportion*140+"px",
+//							});
+//							$("#volumeChart,#CandlestickVolumeChart").css({
+//								"width":"100%",
+//								"height":Proportion*110+"px",
+//							});
+//						}else if(width==375){
+//							$("#timeChart,#CandlestickChartDiv").css({
+//								"width":"100%",
+//								"height":Proportion*165+"px",
+//							});
+//							$("#volumeChart,#CandlestickVolumeChart").css({
+//								"width":"100%",
+//								"height":Proportion*128+"px",
+//							});
+//						}else if(width==414){
+//							$("#timeChart,#CandlestickChartDiv").css({
+//								"width":"100%",
+//								"height":Proportion*175+"px",
+//							});
+//							$("#volumeChart,#CandlestickVolumeChart").css({
+//								"width":"100%",
+//								"height":Proportion*135+"px",
+//							});
+//						}
 					/*
 					 增加新手引导的样式
 					 */
@@ -368,7 +373,7 @@
 						if(num==2){
 							if(numL!=2)
 							$("#guidance").css({
-								"height":height-Proportion*60+"px",
+								"height":height-Proportion*55+"px",
 								"background-image": "url(../../images/tradeGudice4.png)",
 								"background-size":"cover",
 								"background-repeat":"no-repeat",
