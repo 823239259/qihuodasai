@@ -80,6 +80,7 @@
 	}
    </style>
     <script>
+    
     	mui.init();
     	mui.plusReady(function(){
     		loadCss();
@@ -141,8 +142,9 @@
 						"height": Proportion*39+"px",
  						"line-height": Proportion*39+"px",
  						"width": 200*Proportion+"px",
-					 	"padding-left": Proportion*10+"px",
-					 	"font-size": Proportion*12+"px",
+//					 	"margin-left": Proportion*5+"px",
+					 	"padding":"0px",
+					 	"font-size": Proportion*14+"px",
 					 	"position": "relative",
 					 	"top":Proportion*-1.1+"px"
 					});
@@ -179,8 +181,8 @@
 					$("#checkBox i").css({
 						"width":Proportion*14+"px",
 						"height":Proportion*14+"px",
-						"margin-top":Proportion*1.2+"px",
-						"margin-left":Proportion*1.5+"px"
+						"margin":Proportion*1.2+"px",
+//						"margin-left":Proportion*1.5+"px"
 					});
 					$("#codeInput").css({
 						"padding-left":55*Proportion+"px",
@@ -253,7 +255,7 @@
     		var mobile=document.getElementById("account").value;
     		//这里要对手机号码进行格式校验
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
-    			mui.toast("手机号码不正确");
+    			mui.toast("请输入正确的手机号");
     			return;
     		}   
     		var paramUrl={
@@ -290,7 +292,7 @@
 			var code=document.getElementById("codeInput").value;
 			//这里要对手机号码进行格式校验
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
-    			mui.toast("手机号码不正确");
+    			mui.toast("请输入正确的手机号");
     			return;
     		}
 			if(mui.isnull(code)){
@@ -344,12 +346,26 @@
       		},paramUrl);
     	};
  	});
+ 	/*按钮变色*/
+			function checkValue(){
+				var account=$("#account").val();
+				var codeInput=$("#codeInput").val();
+				if(account.length>0 && codeInput.length>0){
+					$("#operateLogin").css({
+						"background-color":"#fcc900"
+					});
+				}else{
+					$("#operateLogin").css({
+						"background-color":"#cccccc"
+					});
+				}
+			}
     </script>
 </head>
 <body style="background-color: #2B2B2B">	
 	<header class="mui-bar mui-bar-nav own-topbg">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
-		<h1 class="mui-title">新用户注册</h1>		
+		<h1 class="mui-title">注册</h1>		
 		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 	</header>
 	<div class="mui-content">
@@ -359,11 +375,11 @@
 		<div id="inputList">
 			<div class="commStyle">
 				<label>手机：</label>
-				<input type="text"  placeholder="请输入您的账号" id='account'/>
+				<input type="text"  placeholder="请输入您的账号" id='account' oninput="checkValue()" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 				<img src="../../images/close.png" id="accountClear">
 			</div>
 			<div class="commStyle">
-				<input type="text"  placeholder="请输入您的验证码" id="codeInput"/>
+				<input type="number"  placeholder="请输入您的验证码" id="codeInput" oninput="checkValue()" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
 				<button type="button" id="code">发送验证码</button>
 			</div>
 			<div  id="loginIform">

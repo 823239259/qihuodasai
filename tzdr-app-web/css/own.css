@@ -304,7 +304,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ap_main .ap_time label { vertical-align: middle; display: block; float: left;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
-.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;}
+.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF; padding-left: 5px;;}
 #tradeingVariety{ padding:0px 5px;color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;margin: 5px 0px 0px;line-height: 30px; height: 30px;}
 #tradeingVariety b{ font-weight: normal; font-size: 12px;color:#666666};
 #tradeingVariety span{vertical-align: middle; color:#2b2b2b}
