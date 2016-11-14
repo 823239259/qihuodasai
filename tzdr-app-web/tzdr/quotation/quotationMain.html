@@ -176,6 +176,7 @@
 			tzdr.init.initHearListener();
 			mui.plusReady(function(){
 				var width=plus.screen.resolutionWidth;
+				loadCss();
 				function loadCss(){
 					var resolutionWidth=plus.screen.resolutionWidth;
 					Proportion=resolutionWidth/320;
@@ -183,8 +184,11 @@
 						"width":Proportion*17+"px",
 						"hegiht":"auto",
 						"display":"block",
-						"margin":Proportion*8+"px"
+						"margin":Proportion*8+"px",
 					});
+					$("#closeDiv").css({
+						"display":"none",
+					})
 				}
 				/*
 				 增加新手引导的样式

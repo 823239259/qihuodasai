@@ -161,17 +161,10 @@ mui.plusReady(function(){
         var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
-//      masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
         masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
-//		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":5}');
-//		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":15}');
-//		     masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":30}');
         masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
         setIntvalTime = setInterval(function(){
             masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
-//	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":5}');
-//	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":15}');
-//	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":30}');
         },3000);
     }
     /**
@@ -350,6 +343,7 @@ mui.plusReady(function(){
 			}
 		}
     	function drawChart(val){
+    		console.log(val);
     		 rawData = [];
 		     CandlestickChartOption=null;
 		    CandlestickVolumeChartOption=null;
@@ -358,7 +352,7 @@ mui.plusReady(function(){
 		    	volume:[]
 		    }
 		     newData=[]; 
-    		clearInterval(setIntvalTime);
+    			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
 				var option = setOption(newData);
 						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
@@ -376,12 +370,13 @@ mui.plusReady(function(){
     	}
     /*
 		 获取K线类型**/
-		$("#selectType").change(function(){
+		$("#list_type ul li").click(function(){
 			$("#CandlestickChart").removeClass("displayStyle").addClass("mui-active");
     		$("#trade").removeClass("mui-active").addClass("displayStyle");
     		$("#TimeChart1").removeClass("mui-active").addClass("displayStyle");
     		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
-			var val=$("#selectType").val();
+			$("#selectButon").text($(this).text())
+			var val=$(this).val();
 			if(val==1){
 				drawChart(val)
 			}else if(val==5){
@@ -393,6 +388,14 @@ mui.plusReady(function(){
 			}else if(val==1440){
 				drawChart(val)
 			}
+			$("#list_type ").css({
+				"display":"none"
+			})
+		});
+		$("#selectButon").click(function(){
+			$("#list_type ").css({
+				"display":"block"
+			})
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
     		$("#TimeChart1").css("opacity","0");

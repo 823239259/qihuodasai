@@ -39,15 +39,15 @@
 					<button id="tradeMenu">交易中心</button>
 					<button id="timeChartMenu" value="0">分时</button>
 					<button id="selectButon">
-						<select id="selectType" style="text-align: center;">
+						1分
+						<!--<select id="selectType" style="text-align: center;">
 							<option value="1">1分</option>
 							<option value="5">5分</option>
 							<option value="15">15分</option>
 							<option value="30">30分</option>
 							<option value="1440">日K</option>
-						</select>
+						</select>-->
 					</button>
-					
 				</div>
 				<div id="headerContent">
 					<div id="chartAllDiv" class="mui-active">
@@ -171,8 +171,123 @@
 				<div class="top"></div><div class="bottom"></div>
 				<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 				<div id="littleDiv"></div>
+				<div id="list_type" style="margin: 0px; padding: 0px;">
+					<ul style="list-style-type: none;margin: 0px;padding: 0px;">
+						<li value="1">1分</li>
+						<li value="5">5分</li>
+						<li value="15">15分</li>
+						<li value="30">30分</li>
+						<li value="1440">日K</li>
+					</ul>
+				</div>
 			</div>
 			<script>
+			loadCss();
+					var Proportion=1;
+    			function loadCss(){
+		    			var Proportion=1;
+//						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=320/320;
+						var width=320;
+						$("#numberInput").css({
+							"padding":Proportion*10+"px",
+							"font-size":Proportion*12+"px",
+						});
+						$("#numberInput input").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"padding":"0px "+Proportion*85+"px 0px "+Proportion*45+"px "
+						});
+						$("#numberInput label").css({
+							"top":Proportion*25+"px",
+						});
+						$("#numberInput label:nth-child(1)").css({
+							"left":Proportion*10+5+"px",
+						});
+						$("#numberInput label:nth-child(3)").css({
+							"right":Proportion*10+5+"px",
+						});
+						$("#marketBuy,#marketSell").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"font-size":Proportion*16+"px",
+						});
+						$("#headerMenu").css({
+							"padding":Proportion*5+"px "+Proportion*10+"px ",
+							"background-color":"#2B2B2B",
+							"width":"100%",
+							"height":Proportion*35+"px",
+							"position":"fixed",
+							"top":"46px",
+							"z-index":"990"
+						})
+						$("#headerMenu button").css({
+							"height":Proportion*30+"px",
+							"line-height":Proportion*30+"px",
+							"font-size":Proportion*14+"px",
+							"width":Proportion*75+"px",
+						});
+						$("#tradeMenu").css({
+							"position":"absolute",
+							"left":Proportion*10+"px "
+						})
+						$("#selectButon").css({
+							"position":"absolute",
+							"right":Proportion*10+"px ",
+							"color":"#ffffff",
+							"text-align":"center",
+							"border":"1px solid red"
+						})
+						$("#list_type").css({
+							"text-align":"center",
+							"height":"auto",
+							"position":"absolute",
+							"width":Proportion*75+"px",
+							"top":Proportion*30+46+"px",
+							"right":Proportion*10+"px ",
+							"border":"1px solid green",
+							"color":"#999999",
+						})
+						$("#list_type li").css({
+							"width":Proportion*75+"px",
+							"hegiht":Proportion*40+"px",
+							"font-size":Proportion*12+"px",
+						});
+//						$("#selectType").css({
+//							"height":Proportion*30+"px",
+//							"line-height":Proportion*30+"px",
+//							"font-size":Proportion*14+"px",
+//							"width":Proportion*75+"px",
+//							"padding":"0px 0px 0px "+ Proportion*25+"px",
+//							"background-size":Proportion*14+"px",
+//						});
+						$("#timeChart,#CandlestickChartDiv").css({
+							"width":"100%",
+							"height":Proportion*163+"px",
+						});
+						$("#volumeChart,#CandlestickVolumeChart").css({
+							"width":"100%",
+							"height":Proportion*145+"px",
+						});
+						$("#closeTrade").css({
+							"width":Proportion*17+"px",
+							"hegiht":"auto",
+							"display":"block",
+							"margin":Proportion*8+"px"
+						});
+						$("#closeDiv").css({
+							"display":"none",
+						})
+						var screen=568;
+							$("#timeChart,#CandlestickChartDiv").css({
+								"width":"100%",
+								"height":135*screen/568+"px",
+							});
+							$("#volumeChart,#CandlestickVolumeChart").css({
+								"width":"100%",
+								"height":110*screen/568+"px",
+							});
+					}
 				mui.plusReady(function(){
 					loadCss();
 					var Proportion=1;
@@ -225,16 +340,43 @@
 						})
 						$("#selectButon").css({
 							"position":"absolute",
-							"right":Proportion*10+"px "
+							"right":Proportion*10+"px ",
+							"color":"#ffffff",
+							"text-align":"center",
+							"border":"1px solid red"
 						})
-						$("#selectType").css({
-							"height":Proportion*30+"px",
-							"line-height":Proportion*30+"px",
-							"font-size":Proportion*14+"px",
+						$("#list_type").css({
+							"text-align":"center",
+							"height":"auto",
+							"position":"absolute",
 							"width":Proportion*75+"px",
-							"padding":"0px 0px 0px "+ Proportion*25+"px",
-							"background-size":Proportion*14+"px",
+							"top":Proportion*30+46+"px",
+							"right":Proportion*10+"px ",
+//							"border":"1px solid green",
+							"color":"#999999",
+							"background-color":"#2b2b2b",
+							"z-index":"999",
+							"border":"1px solid #454545",
+							"display":"none"
+						})
+						$("#list_type li").css({
+							"width":Proportion*75+"px",
+							"hegiht":Proportion*40+"px",
+							"font-size":Proportion*12+"px",
+							"line-height":Proportion*40+"px",
+							"border-bottom":"1px solid #454545",
 						});
+						$("#list_type li:nth-last-child(1)").css({
+							"border-bottom":"none",
+						});
+//						$("#selectType").css({
+//							"height":Proportion*30+"px",
+//							"line-height":Proportion*30+"px",
+//							"font-size":Proportion*14+"px",
+//							"width":Proportion*75+"px",
+//							"padding":"0px 0px 0px "+ Proportion*25+"px",
+//							"background-size":Proportion*14+"px",
+//						});
 						$("#timeChart,#CandlestickChartDiv").css({
 							"width":"100%",
 							"height":Proportion*163+"px",
@@ -249,6 +391,9 @@
 							"display":"block",
 							"margin":Proportion*8+"px"
 						});
+						$("#closeDiv").css({
+							"display":"none",
+						})
 						var screen=plus.screen.resolutionHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
 								"width":"100%",
@@ -266,7 +411,7 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
-					bindGuidance();
+//					bindGuidance();
 					function bindGuidance(){
 					var Proportion=1;
 					var height=window.innerHeight;
@@ -380,6 +525,7 @@
 			    		});
 					});
 				}
+				
 			});
 			</script>
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 

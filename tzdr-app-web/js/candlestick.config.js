@@ -50,26 +50,6 @@
 		  	myChart.group="group2";
 		  	
     }
-//  document.getElementById("Candlestick").addEventListener("tap",function(){
-//  			$("#dayCandlestickChart").css("opacity","0");
-//  				$("#TimeChart1").css("opacity","0");
-//				 if(myChart != null){
-//					document.getElementsByClassName("buttomFix")[0].style.display="block";
-//						var option = setOption(newData);
-//						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-//						setTimeout(function(){
-//							myChart.resize();
-//							myChart.setOption(option);
-//		        			myChart.resize();	
-//		        			CandlestickVolumeChart.resize();	
-//							CandlestickVolumeChart.setOption(option2);
-//		        			CandlestickVolumeChart.resize();	
-//		        		},10);
-//		        		setTimeout(function(){
-//		        			$("#CandlestickChart").css("opacity","1");
-//		        		},100);
-//			    } 
-//		});
     //设置数据参数（为画图做准备）
     function setOption(rawData){
         var dates = rawData.map(function (item) {
@@ -154,8 +134,6 @@
     var firstTimeNum=0;
      var volumeTime=[];
     var volumeV=[];
-//  var volumeTimeH=[];
-//  var volumeVH=[];
     function processingCandlestickVolumeData(data){
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
@@ -270,11 +248,6 @@
 	                  type: 'bar',
 	                  data:CandlestickVolumeChartData.volume
 	              },
-//	              {
-//	                  name: '成交量',
-//	                  type: 'bar',
-//	                  data:volumeVH
-//	              }
 	          ]
 	      };
         return option
