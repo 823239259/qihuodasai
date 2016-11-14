@@ -374,6 +374,8 @@
 						var balance = result.data.balance;
 						document.getElementById("balanceSpan").innerHTML = balance + '元';
 		              	var vText = wv.money;//这样就能接收到上个页面传过来的值了
+//		              	var backPage=wv.backPage;
+//		              	plus.storage.setItem("backPage",backPage);
 		             	if(vText != null){
 			              var balance = parseFloat(document.getElementById("balanceSpan").innerHTML).toFixed(2);
 			              var vTextlength = vText.length;

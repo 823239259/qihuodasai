@@ -289,6 +289,17 @@
                         plus.navigator.setFullscreen(true);
                     }
                    plus.navigator.closeSplashscreen();
+//                if(plus.storage.getItem("guide")==null){
+
+//            	}else{
+//            		alert(plus.storage.getItem("guide"));
+//            	};
+//            	document.getElementById("skip").addEventListener("tap",function(event){
+//                  			mui.openWindow({
+//                  				 url: 'main.html',
+//                     				 id: 'main.html1'
+//                  			});
+//                  		},false)
 					document.getElementById("close").addEventListener('tap', function(event) {
 					                    //打开关于页面
 					                    mui.openWindow({
@@ -296,6 +307,14 @@
 					                        id: 'main.html'
 					                    });
 					                }, false);
+//               document.getElementById("skip").addEventListener('tap', function(event) {
+//                  //打开关于页面
+//                  alert("123")
+//                  mui.openWindow({
+//                      url: 'main.html',
+//                      id: 'main.html1'
+//                  });
+//              }, true);
                 });
                  //立即体验按钮点击事件
                 
