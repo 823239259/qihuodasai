@@ -290,6 +290,14 @@
     	function registUser(){
     		var mobile=document.getElementById("account").value;
 			var code=document.getElementById("codeInput").value;
+//			mui.openWindow({
+//				    url:'confirmPassword.html',
+//				    id:'confirmPassword.html',
+//				    extras:{
+//				        mobile : mobile,
+//				       
+//				    }
+//				});
 			//这里要对手机号码进行格式校验
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("请输入正确的手机号");
