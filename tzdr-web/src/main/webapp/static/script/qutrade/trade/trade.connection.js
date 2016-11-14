@@ -36,6 +36,10 @@ var anotherPlace = false;
  */
 var tradeIntervalId = null;
 /**
+ * 连接地址
+ */
+var socketUrl = null;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -56,7 +60,7 @@ function changeConnectionStatus(){
  * 交易连接
  */
 function tradeConnection(){
-	socket = new WebSocket(tradeWebsocketUrl);
+	socket = new WebSocket(socketUrl);
 }
 /**
  * 交易连接断开的处理
@@ -120,12 +124,24 @@ function tradeLoginOut(){
 	layer.closeAll();
 }
 /**
+ * 根据交易模式设置交易配置信息
+ * @param ismock
+ */
+function setTradeConfig(ismock){
+	setTradeWebSocketIsMock(ismock);
+	if(tradeWebSocketIsMock == 0){
+		socketUrl = tradeWebsocketUrl;
+	}else if(tradeWebSocketIsMock == 1){
+		socketUrl = tradeWebSocketModelUrl;
+	}
+}
+/**
  * 交易初始化加载
  */
 function initLoad() {
 	socket.onopen = function() {
 		layer.closeAll();
-		Trade.doLogin(username , password,tradeWebSocketIsMock);
+		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion);
 		//更新交易连接状态
 		changeConnectionStatus();
 	}
@@ -176,10 +192,6 @@ function initTradeConnect(){
 	
 }
 function initTrade(){
-	/**
-	 * 初始化交易配置 --> trade.config
-	 */
-	initTradeConfig();
 	/**
 	 * 交易登录（初始化） -->trade.connection
 	 */

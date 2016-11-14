@@ -72,6 +72,7 @@ public class SocketConfigContoller extends BaseCmsController<SocketConfig>{
 		config.setIsModel(socketConfig.getIsModel());
 		config.setSocketUrl(socketConfig.getSocketUrl());
 		config.setSocketVersion(socketConfig.getSocketVersion());
+		config.setSocketModelUrl(socketConfig.getSocketModelUrl());
 		socketConfigService.update(config);
 		return new JsonResult(true);
 	}

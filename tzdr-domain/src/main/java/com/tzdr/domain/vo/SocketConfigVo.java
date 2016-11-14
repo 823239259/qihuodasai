@@ -14,6 +14,10 @@ public class SocketConfigVo implements Serializable{
 	 */
 	private String socketUrl;
 	/**
+	 * socket模拟地址
+	 */
+	private String socketModelUrl;
+	/**
 	 * socket版本号
 	 */
 	private String socketVersion;
@@ -72,4 +76,11 @@ public class SocketConfigVo implements Serializable{
 	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
+	public String getSocketModelUrl() {
+		return socketModelUrl;
+	}
+	public void setSocketModelUrl(String socketModelUrl) {
+		this.socketModelUrl = socketModelUrl;
+	}
+	
 }

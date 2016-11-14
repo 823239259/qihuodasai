@@ -18,6 +18,10 @@ public class SocketConfig extends BaseEntity{
 	 */
 	private String socketUrl;
 	/**
+	 * socket测试地址
+	 */
+	private String socketModelUrl;
+	/**
 	 * socket版本号
 	 */
 	private String socketVersion;
@@ -69,5 +73,12 @@ public class SocketConfig extends BaseEntity{
 	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
+	public String getSocketModelUrl() {
+		return socketModelUrl;
+	}
+	public void setSocketModelUrl(String socketModelUrl) {
+		this.socketModelUrl = socketModelUrl;
+	}
+	
 	
 }

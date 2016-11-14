@@ -1,7 +1,3 @@
-/**
- * 初始化交易
- */
-initTrade();
 //持仓发送请求次数记录
 var holdFirstLoadDataIndex = 0;
 //个人账户信息发送请求次数纪录
@@ -1199,12 +1195,17 @@ function loadOperateLogin(){
 		}
 	});
 }
+/**
+ * 版本是否获取成功
+ */
+var isGetVersion = false;
 $(function(){
-	var mock = getTradeCookie("isMock");
-	if(mock == null){
-		mock = 0;
-	}
-	setTradeConfig(mock);
+	/**
+	 * 初始化交易配置 --> trade.config
+	 */
+	initTradeConfig();
+	getVersion();
+	validateIsGetVersion();
 	$(".signLogin_span").bind("click",function(){
 		var $this = $(this);
 		var ismock = $this.attr("data-tion");
@@ -1256,43 +1257,7 @@ $(function(){
 				 }
 			});
 	});
-	
 	bindOpertion();
-	function selectCommodity(param){
-		var contractCode = param;
-		var localCommodity = localCacheCommodity[contractCode];
-		var localQoute = localCacheQuote[contractCode];
-		var miniTikeSize = localCommodity.MiniTikeSize;
-		var lastPrice = localQoute.LastPrice;
-		$("#trade_data #lastPrice").val(lastPrice);
-		$("#trade_data #miniTikeSize").val(miniTikeSize);
-		$("#trade_data #contractSize").val(localCommodity.ContractSize);
-		$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
-		$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
-		$("#trade_data #contractNo").val(localCommodity.MainContract);
-		$("#trade_data #doSize").val(localCommodity.DotSize);
-		$("#money_number").val(localQoute.LastPrice);
-		$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
-		var val = $('input:radio:checked').val();
-		if(val == 0){
-			var money = $("#money_number").val();
-			$("#float_buy").text(money);
-			$("#float_sell").text(money);
-		}
-		//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-		//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
-		setMoneyNumberIndex(0);
-		 var left_xiangmu   = $(".futuresList .left_xiangmu");
-		left_xiangmu.each(function(){
-			 left_xiangmu.removeClass('on');
-		 });
-		var obj = $("ul[data-tion-com='"+contractCode+"']");
-		obj.addClass('on');
-		obj.click();
-		setLocalCacheSelect(contractCode);
-		clearRightData();
-		updateRight(localQoute);
-	}
 	$("#select_commodity").change(function(){
 		var contractCode = $("#select_commodity").val();
 		selectCommodity(contractCode);
@@ -1359,6 +1324,90 @@ $(function(){
 		}
 	});
 });
+/**
+ * 获取交易版本
+ */
+function getVersion(){
+	$.ajax({
+		url:basepath+"/socket/config/getVersion",
+		type:"get",
+		data:{
+			appVersion:tradeWebCmsVersion
+		},
+		success:function(result){
+			if(result.success){
+				var data = result.data.data;
+				tradeWebsocketUrl = data.socketUrl;
+				tradeWebSocketVersion = data.socketVersion;
+				tradeWebSocketModelUrl = data.socketModelUrl;
+			}
+		}
+	});
+}
+/**
+ * 验证socket版本是否获取成功
+ */
+function validateIsGetVersion(){
+	var i = 0;
+	var initIsGetVersion = setInterval(function(){
+		i++;
+		if(!isGetVersion){
+			if(i > 50){
+				isGetVersion = true;
+			}
+		}
+		if(isGetVersion){
+			initSocketTrade();
+			clearInterval(initIsGetVersion);
+		}
+	}, 200);
+}
+function initSocketTrade(){
+	var mock = getTradeCookie("isMock");
+	if(mock == null){
+		mock = 0;
+	}
+	setTradeConfig(mock);
+	/**
+	 * 初始化交易
+	 */
+	initTrade();
+}
+function selectCommodity(param){
+	var contractCode = param;
+	var localCommodity = localCacheCommodity[contractCode];
+	var localQoute = localCacheQuote[contractCode];
+	var miniTikeSize = localCommodity.MiniTikeSize;
+	var lastPrice = localQoute.LastPrice;
+	$("#trade_data #lastPrice").val(lastPrice);
+	$("#trade_data #miniTikeSize").val(miniTikeSize);
+	$("#trade_data #contractSize").val(localCommodity.ContractSize);
+	$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
+	$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
+	$("#trade_data #contractNo").val(localCommodity.MainContract);
+	$("#trade_data #doSize").val(localCommodity.DotSize);
+	$("#money_number").val(localQoute.LastPrice);
+	$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
+	var val = $('input:radio:checked').val();
+	if(val == 0){
+		var money = $("#money_number").val();
+		$("#float_buy").text(money);
+		$("#float_sell").text(money);
+	}
+	//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
+	//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+	setMoneyNumberIndex(0);
+	 var left_xiangmu   = $(".futuresList .left_xiangmu");
+	left_xiangmu.each(function(){
+		 left_xiangmu.removeClass('on');
+	 });
+	var obj = $("ul[data-tion-com='"+contractCode+"']");
+	obj.addClass('on');
+	obj.click();
+	setLocalCacheSelect(contractCode);
+	clearRightData();
+	updateRight(localQoute);
+}
 /**
  * 绑定交易操作事件
  */
@@ -1890,6 +1939,7 @@ function clearLocalCacheData(){
 	resultInsertOrderId={};
 	isUpdateOrder = false;
 	isBuy = false;
+	isGetVersion = false;
 }
 /**
  * 输入价格或数量验证 

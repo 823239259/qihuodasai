@@ -31,6 +31,7 @@
 				<th data-options="field:'id',width:80,checkbox:true"></th>
 				<th data-options="field:'appVersion',width:100">app版本号</th>
 				<th data-options="field:'socketUrl',width:100,align:'right'">socket地址</th>
+				<th data-options="field:'socketModelUrl',width:100,align:'right'">socket模拟地址</th>
 				<th data-options="field:'socketVersion',width:100,align:'right'">socket版本号</th>
 				<th data-options="field:'isModel',width:80,formatter:ismodel">模式</th>
 			</tr>
@@ -49,6 +50,10 @@
 			<tr>
 				<td>socket地址:</td>
 				<td><input class="easyui-textbox" name = "socketUrl" style="width:200px;height:32px"></td>
+			</tr>
+			<tr>
+				<td>socket模拟地址:</td>
+				<td><input class="easyui-textbox" name = "socketModelUrl" style="width:200px;height:32px"></td>
 			</tr>
 			<tr>
 				<td>socket版本号:</td>
@@ -88,6 +93,7 @@
 		var socketUrl = $("input[name = 'socketUrl']").val();
 		var socketVersion = $("input[name = 'socketVersion']").val();
 		var isModel = $("input[name = 'isModel']").val();
+		var socketModelUrl = $("input[name = 'socketModelUrl']").val();
 		$.ajax({
 			url:"${ctx}/admin/socket/config/save",
 			type:"post",
@@ -95,7 +101,8 @@
 				appVersion:appversion,
 				socketUrl:socketUrl,
 				socketVersion:socketVersion,
-				isModel:isModel
+				isModel:isModel,
+				socketModelUrl:socketModelUrl
 			},
 			success:function(result){
 				if(result.success){
@@ -111,6 +118,7 @@
 		var socketVersion = $("input[name = 'socketVersion']").val();
 		var isModel = $("input[name = 'isModel']").val();
 		var id = $("input[name = 'socketId']").val();
+		var socketModelUrl = $("input[name = 'socketModelUrl']").val();
 		$.ajax({
 			url:"${ctx}/admin/socket/config/socketUpdate",
 			type:"post",
@@ -119,7 +127,8 @@
 				socketUrl:socketUrl,
 				socketVersion:socketVersion,
 				isModel:isModel,
-				id:id
+				id:id,
+				socketModelUrl:socketModelUrl
 			},
 			success:function(result){
 				if(result.success){
@@ -149,7 +158,7 @@
 					$("input[name = 'appVersion']").val(data.appVersion);
 					$("input[name = 'socketUrl']").val(data.socketUrl);
 					$("input[name = 'socketVersion']").val(data.socketVersion);
-					$("input[name = 'isModel']").val(data.isModel);
+					$("input[name = 'socketModelUrl']").val(data.socketModelUrl);
 				}
 			});
 			$('#add').dialog('open');
@@ -179,6 +188,7 @@
 		$("input[name = 'appVersion']").val('');
 		$("input[name = 'socketUrl']").val('');
 		$("input[name = 'socketVersion']").val('');
+		$("input[name = 'socketModelUrl']").val('');
 	}
 </script>
 </html>

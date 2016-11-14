@@ -31,7 +31,8 @@ public class ScoketConfigServiceImp extends BaseServiceImpl<SocketConfig, Socket
 		sql.append("		c.app_version as appVersion,\n");
 		sql.append("		c.socket_url as socketUrl,\n");
 		sql.append("		c.socket_version as socketVersion,\n");
-		sql.append("		c.is_model as isModel\n");
+		sql.append("		c.is_model as isModel\n,");
+		sql.append("		c.socket_model_url as socketModelUrl\n");
 		sql.append("  FROM socket_config c\n");
 		
 		List<Object> params = Lists.newArrayList();
