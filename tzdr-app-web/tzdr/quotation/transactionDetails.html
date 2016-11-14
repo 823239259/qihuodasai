@@ -28,7 +28,7 @@
 					<a class="mui-control-item" id="TradingCenter" style="width: 5px;">交易中心</a>
 					</div>
 				<div style="width: 100%;" id="tradeContentId">
-						<div class="mui-control-content  mui-active" id="TimeChart1">
+						<div class="mui-control-content" id="TimeChart1">
 								<div id="timeChart" style="width:100%;height:130px;"></div>
 								<div id="volumeChart" style="width:100%;height:130px;"></div>
 						</div>
@@ -52,7 +52,7 @@
 								<div   id="dayCandlestickChartDiv" style="width:100%;height:130px;"></div>
 								<div id="dayCandlestickVolumeChart" style="width:100%;height:130px;"></div>
 						</div>
-						<div class="mui-control-content " id="trade" style="padding-top: 40px; padding-bottom: 20px;;">
+						<div class="mui-control-content   mui-active" id="trade" style="padding-top: 40px; padding-bottom: 20px;;">
 							<div class="Assets" style="background-color: #2B2B2B;">
 								<p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 								<p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -77,11 +77,11 @@
 								<div class="butomBoreder">
 									<div class="mui-input-row mui-radio radioDiv mui-left">
 									<label>市价</label>
-									<input type="radio" checked name="prices" value="1" class="radioChoice mui-radio">
+									<input type="radio" id= "sj" checked name="prices" value="1" class="radioChoice mui-radio">
 								</div>
 								<div class="mui-input-row mui-radio radioDiv mui-left">
 									<label>限价</label>
-									<input type="radio" class="radioChoice mui-radio" value="0" name="prices">
+									<input type="radio" id = "xj" class="radioChoice mui-radio" value="0" name="prices">
 								</div>
 								</div> 
 								<div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>

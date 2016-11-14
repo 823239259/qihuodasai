@@ -299,7 +299,13 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML= $("#CommodityName").val();
 		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
-   		rawData=[];
+		$("#xj").removeAttr("checked");
+		$("#sj").prop("checked",true);
+		$("#orderPrice").val("");
+		$("#orderPrice").attr("placeholder","市价");
+//		$("input[type=radio][name=prices][value=0]").attr("checked",true); 
+//		$("input[type = 'radio']:checked").val(0);
+   		rawData=[]; 
    		dayCandlestickChartData=[];
    		timeData.timeLabel=[];
    		timeData.prices=[];
