@@ -1027,7 +1027,13 @@
 			"js/trade.data.mode.js",
 			"js/trade.config.js",
 			"images/tradeOrderBg.png",
-			"images/down.png"
+			"images/down.png",
+			"images/tradeGudice1.png",
+			"images/quotationColse.png",
+			"images/tradeGudice2.png",
+			"images/tradeGudice3.png",
+			"images/tradeGudice4.png",
+			"images/tradeGudice5.png"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
@@ -1068,7 +1074,10 @@
 			"js/trade.connection.js",
 			"images/close.png",
 			"images/down.jpg",
-			"images/down.png"
+			"images/down.png",
+			"images/quotationColse.png",
+			"images/quotationLogin.png",
+			"images/quotationLogin1.png"
 		],
 		"refer": [
 			"tzdr/future/cl.html",

@@ -73,6 +73,157 @@
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
 		<script type="text/javascript">
+		
+		loadCss()
+				var Proportion=1;
+				function loadCss(){
+					var Proportion=375/320;
+//					var resolutionWidth=plus.screen.resolutionWidth;
+//					Proportion=resolutionWidth/320;
+					$("#inputList").css({
+						"width": "100%",
+						"padding":"0px "+Proportion*20+"px",
+					});
+					$(".commStyle").css({
+						"width": "100%",
+						"height": Proportion*40+"px",
+						"margin-top": Proportion*10+"px",
+						"position": "relative",
+						"border-bottom":"1px solid #454545"
+					});
+					$(".commStyle label").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"font-size": Proportion*14+"px"
+					});
+					$(".commStyle input").css({
+						"height": Proportion*39+"px",
+ 						"line-height": Proportion*39+"px",
+ 						"width": 200*Proportion+"px",
+					 	"padding-left": Proportion*10+"px",
+					 	"font-size": Proportion*12+"px",
+					 	"position": "relative",
+					 	"top":Proportion*-1.1+"px"
+					});
+					$(" .commStyle select").css({
+						"height": Proportion*39+"px",
+					 	"line-height": Proportion*39+"px",
+					 	"width": 199*Proportion+"px",
+					 	"font-size": Proportion*12+"px",
+					});
+					$(".commStyle img").css({
+						"position": "absolute",
+					  	"width": Proportion*15+"px",
+					  	"right": "2px",
+					  	"top":Proportion*16+"px",
+					});
+					$("#operateLogin").css({
+						"height":Proportion*40+"px",
+					 	"line-height": Proportion*40+"px",
+					 	"font-size": Proportion*16+"px",
+						
+					});
+					$("#regLogin").css({
+						"height":Proportion*40+"px",
+					 	"line-height": Proportion*40+"px",
+					 	"font-size": Proportion*16+"px",
+					});
+					$("#loginAgree").css({
+						"height": Proportion*20+"px",
+						"line-height": Proportion*20+"px",
+						"margin-top":Proportion*1+"px",
+					});
+					$("#checkBox").css({
+						"width":Proportion*18+"px",
+						"height":Proportion*18+"px",
+					});
+					$("#checkBox i").css({
+						"width":Proportion*14+"px",
+						"height":Proportion*14+"px",
+						"margin":Proportion*1.2+"px",
+					});
+					$("#closeTrade").css({
+						"width":Proportion*17+"px",
+						"hegiht":"auto",
+						"display":"block",
+						"margin":Proportion*8+"px"
+					});
+				}
+				/*加载新手指南*/
+				bindGuidance();
+				function bindGuidance(){
+					loadCss();
+					var Proportion=1;
+					var width=375;
+					var height=window.innerHeight;
+					var screen=667;
+						$(".top").css({
+							"height":height+"px",
+							"background-image": "url(../../images/quotationLogin.png)",
+							"top":"0px",
+							"display":"block",
+							"position":"fixed",
+							"top":"0px",
+							"right":"0px",
+							"z-index":"998"
+						});
+						$("#closeDiv").css({
+							"width":Proportion*40+"px",
+							"height":Proportion*40+"px",
+							"position":"fixed",
+							"top":Proportion*20+"px",
+							"right":Proportion*10+"px",
+							"z-index":"999",
+							"vertical-align":"middle"
+						});
+						$("#closeDiv").click(function(){
+							$(".top,#closeDiv,.bottom").css({
+								"display": "none",
+							});
+						});
+						var clickNum=0;
+						$(".top").click(function(){
+							if(clickNum==0){
+								var x=30*Proportion;
+								var y=25*Proportion;
+								if(width==320){
+									 x=0;
+									y=45;
+								}else if(width==375){
+									 x=30;
+									y=30;
+								}
+								
+								$(".top").css({
+									"height":screen/2-x+"px",
+									"background-color":"rgba(0,0,0,0.8)",
+									"background-image":"none",
+								});
+								$(".bottom").css({
+									"width":"100%",
+									"position":"fixed",
+									"display":"block",
+									"bottom":"0px",
+									"left":"0px",
+									"height":screen/2-y+"px",
+									"background-image": "url(../../images/quotationLogin1.png)",
+									"z-index":"991",
+								})
+							}else{
+								$(".top,#closeDiv,.bottom").css({
+									"display": "none",
+								});
+							};
+							clickNum++;
+						});
+						$(".bottom").click(function(){
+								$(".top,#closeDiv,.bottom").css({
+									"display": "none",
+								});
+						})
+				};
+		
+		
 		    initTradeConfig();
 			mui.init();
 			mui.plusReady(function(){
@@ -190,8 +341,17 @@
 						var clickNum=0;
 						$(".top").click(function(){
 							if(clickNum==0){
+								var x=0;
+								var y=450;
+								if(width==320){
+									 x=0;
+									y=45;
+								}else if(width==375){
+									 x=30;
+									y=30;
+								}
 								$(".top").css({
-									"height":height/2+"px",
+									"height":height/2-x+"px",
 									"background-color":"rgba(0,0,0,0.8)",
 									"background-image":"none",
 								});
@@ -201,7 +361,7 @@
 									"display":"block",
 									"bottom":"0px",
 									"left":"0px",
-									"height":height/2-45+"px",
+									"height":height/2-y+"px",
 									"background-image": "url(../../images/quotationLogin1.png)",
 									"z-index":"991",
 								})
