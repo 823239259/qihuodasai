@@ -29,8 +29,8 @@
 <script src="${ctx}/static/script/common/jquery.pagination.js?v=${v}" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseIndex.js?v=${v}"></script>
-<title>富时A50-维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
-<meta name="keywords" content="维胜，国际期货，富时A50，期货，配资，期货配资，期货开户，外盘，期货公司，期货平台，炒期货，模拟盘"/>
+<title>富时A50|维胜金融-致力于外盘期货开户|A50|A50开户|A50交易|A50交易时间|A50行情</title>
+<meta name="keywords" content="富时A50,维胜,A50,A50开户,A50交易,A50交易时间,A50行情,期货,外盘期货开户,期货开户,期货交易,配资,期货配资"/>
 <meta name="description" content="富时A50-新华富时中国A50指数包含了中国A股市场市值最大的50家公司，是最能代表中国A股市场的指数。具有技术门槛低、T+1保险、各种套利方式的特色，是期货品种中套利机会不错的产品。"/>
 </head>
 <body>
