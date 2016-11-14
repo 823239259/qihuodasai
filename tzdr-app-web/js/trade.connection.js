@@ -236,7 +236,7 @@ function validateIsGetVersion(){
 	var i = 0;
 	var initIsGetVersion = setInterval(function(){
 		i++;
-		console.log(i);
+//		console.log(i);
 		if(isGetVersion == false){
 			if(i > 50){ 
 				isGetVersion = true;

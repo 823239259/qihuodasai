@@ -26,9 +26,6 @@
 				background-size: cover;
 				display: none;
 			}
-			/*.buttomFix{
-				position: fixed;
-			}*/
 		</style>
 	</head>
 	<body style="background-color: #2B2B2B"> 
@@ -169,8 +166,10 @@
 					    </div>
 					</div>
 				</div>
-				<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-				<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>
+				<!--<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+				<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>-->
+				<div class="top"></div><div class="bottom"></div>
+				<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 				<div id="littleDiv"></div>
 			</div>
 			<script>
@@ -247,16 +246,8 @@
 						$("#closeTrade").css({
 							"width":Proportion*17+"px",
 							"hegiht":"auto",
-							"position":"absolute",
-							"top":Proportion*11+"px",
-							"left":Proportion*10+"px",
-						});
-						$("#closeTrade1").css({
-							"width":Proportion*17+"px",
-							"hegiht":"auto",
-							"position":"absolute",
-							"top":Proportion*11+"px",
-							"right":Proportion*10+"px",
+							"display":"block",
+							"margin":Proportion*8+"px"
 						});
 						var screen=plus.screen.resolutionHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
@@ -267,35 +258,7 @@
 								"width":"100%",
 								"height":110*screen/568+"px",
 							});
-						
-//						if(width==320){
-//							$("#timeChart,#CandlestickChartDiv").css({
-//								"width":"100%",
-//								"height":Proportion*140+"px",
-//							});
-//							$("#volumeChart,#CandlestickVolumeChart").css({
-//								"width":"100%",
-//								"height":Proportion*110+"px",
-//							});
-//						}else if(width==375){
-//							$("#timeChart,#CandlestickChartDiv").css({
-//								"width":"100%",
-//								"height":Proportion*165+"px",
-//							});
-//							$("#volumeChart,#CandlestickVolumeChart").css({
-//								"width":"100%",
-//								"height":Proportion*128+"px",
-//							});
-//						}else if(width==414){
-//							$("#timeChart,#CandlestickChartDiv").css({
-//								"width":"100%",
-//								"height":Proportion*175+"px",
-//							});
-//							$("#volumeChart,#CandlestickVolumeChart").css({
-//								"width":"100%",
-//								"height":Proportion*135+"px",
-//							});
-//						}
+					}
 					/*
 					 增加新手引导的样式
 					 */
@@ -308,152 +271,116 @@
 					var Proportion=1;
 					var height=window.innerHeight;
 						$(".top").css({
-							"width":"100%",
-							"display":"block",
 							"height":Proportion*42+46+"px",
 							"background-color":"rgba(0,0,0,0.8)",
-							"z-index":"998",
-							"top":"0px"
-						});
-						$("#guidance").css({
-							"display":"none",
+							"top":"0px",
+							"display":"block",
 							"position":"fixed",
-							"z-index":"999",
+							"top":"0px",
+							"right":"0px",
+							"z-index":"990",
+							"border":"1px solid red"
+						});
+						$("#closeDiv").css({
+							"width":Proportion*40+"px",
+							"height":Proportion*40+"px",
+							"position":"fixed",
+							"top":Proportion*4+"px",
+							"right":Proportion*10+"px",
+							"z-index":"991",
+							"vertical-align":"middle"
 						});
 						$(".bottom").css({
 							"width":"100%",
+							"position":"fixed",
 							"display":"block",
-							"height":height*0.41+"px",
+							"bottom":"0px",
+							"left":"0px",
+							"height":$(".buttomFix").height()+57+"px",
 							"background-image": "url(../../images/tradeGudice1.png)",
-							"background-size":"cover",
-							"z-index":"998",
-							"bottom":"0px"
+							"z-index":"991",
+							"border":"1px solid red"
 						});
-						$(".top,.bottom").css({
-							"display":"block"
-						});
-						var numL=0;
-					$("#closeTrade").click(function(){
-						$("#guidance").css({
-							"display":"none"
-						});
-						$(".top,.bottom").css({
-			    			"display":"none",
-			    		});
-			    		numL++;
-					});
-					$("#closeTrade1").click(function(){
-						$(".top,.bottom").css({
-							"display":"none"
-						});
-						$("#guidance").css({
-							"display":"none"
-						});
-						$("#littleDiv").css({
-							"display":"none",
-						});
-						numL++;
-					});
-					var num=0;
-					$("#littleDiv").click(function(){
-						$(".bottom,.top").css({
-							"display":"none",
-						});
-						$("#littleDiv").css({
-							"display":"none",
-						});
-						$("#guidance").css({
-							"height":height+"px",
-							"background-image": "url(../../images/tradeGudice3.png)",
-							"top":"0px",
-							"display":"block"
-						});
-					});
-					$("#guidance").click(function(){
-						if(num==2){
-							if(numL!=2)
-							$("#guidance").css({
-								"height":height-Proportion*55+"px",
-								"background-image": "url(../../images/tradeGudice4.png)",
-								"background-size":"cover",
-								"background-repeat":"no-repeat",
-							});
-							$("#closeTrade").css({
-								"left":Proportion*325+"px",
-							});
-						}else if(num==3){
-							if(numL!=3)
-							$("#guidance").css({
-								"height":height+"px",
-								"background-image": "url(../../images/tradeGudice5.png)",
-								"background-size":"cover",
-								"background-repeat":"no-repeat",
-								
-							});
-							
-						}else if(num==4){
-							if(numL!=4)
-							$("#guidance").css({
-								"display":"none",
-								
-							});
-						}
-						num++;
-					})
-					$(".bottom,.top").click(function(){
-						if(num==0){
-							if(numL==1){
-
-							}else{
-							$(".top").css({
-								"width":"100%",
-								"display":"block",
-								"height":"46px",
-								"background-color":"rgba(0,0,0,0.8)",
-								"top":"0px"
-							});
-							$(".bottom").css({
-								"width":"100%",
-								"display":"block",
-								"height":height*0.85-2*Proportion+"px",
-								"background-image": "url(../../images/tradeGudice2.png)",
-								"background-size":"cover",
-								"bottom":"0px"
-							});
-							$("#littleDiv").css({
-								"position":"fixed",
-								"top":"46px",
-								"left":"0px",
-								"width":Proportion*120+"px",
-								"height":Proportion*70+"px",
-								"background-color":"rgba(0,0,0,0.8)",
-								"z-index":"999",
-							});
-						}
-						}else if(num==1){
-							if(numL==1){
-							}else{
-								$(".bottom,.top").css({
-								"display":"none",
+						var clickNum=0;
+						$(".bottom,.top").click(function(){
+							if(clickNum==0){
+								$(".bottom").css({
+									"height":height-(Proportion*42+46)+"px",
+									"background-image": "url(../../images/tradeGudice2.png)",
+								});
+								$(".top").css({
+									"height":Proportion*46+"px",
+								});
+								$("#littleDiv").css({
+									"position":"fixed",
+									"top":"46px",
+									"left":"0px",
+									"width":Proportion*120+"px",
+									"height":Proportion*50+"px",
+									"background-color":"rgba(0,0,0,0.8)",
+									"z-index":"992",
+								});
+							}else if(clickNum==1){
+								$(".top").css({
+									"display":"none",
+								});
+								$("#closeDiv").css({
+									"left":Proportion*10+"px",
+								});
+								$(".bottom").css({
+									"bottom":"0px",
+									"left":"0px",
+									"height":height+"px",
+									"background-image": "url(../../images/tradeGudice3.png)",
 								});
 								$("#littleDiv").css({
 									"display":"none",
 								});
-								$("#guidance").css({
+							}else if(clickNum==2){
+								$("#closeDiv").css({
+									"left":Proportion*310+"px",
+								});
+								$(".bottom").css({
+									"bottom":Proportion*53+"px",
+									"left":"0px",
+									"height":height-Proportion*50+"px",
+									"background-image": "url(../../images/tradeGudice4.png)",
+								});
+							}else if(clickNum==3){
+								$(".bottom").css({
+									"bottom":"0px",
+									"left":"0px",
 									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice3.png)",
-									"top":"0px",
-									"display":"block"
+									"background-image": "url(../../images/tradeGudice5.png)",
+								});
+							}else{
+								$(".bottom").css({
+									"display":"none",
+								});
+								$("#closeDiv").css({
+									"display":"none",
 								});
 							}
-						}
-						
-						num++;
+							clickNum++;
+							
+						});
+						$("#closeDiv").click(function(){
+							$(".top,.bottom,#littleDiv,#closeDiv").css({
+			    				"display":"none",
+			    			});
+						});
+						$("#littleDiv").click(function(){
+							$(".top,.bottom,#littleDiv,#closeDiv").css({
+			    				"display":"none",
+			    			});
+						})
+					$("#closeTrade").click(function(){
+						$(".top,.bottom,#littleDiv,#closeDiv").css({
+			    			"display":"none",
+			    		});
 					});
-				
 				}
-				}	
-				})
+			});
 			</script>
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
@@ -466,19 +393,11 @@
 		<script src="../../js/chart.config.js"></script>
 		<script src="../../js/timechart.config.js"></script>
 		<script src="../../js/candlestick.config.js"></script>
-		<!--<script src="../../js/dayCandlestick.config.js"></script>
-		<script src="../../js/fiveChart.config.js"></script> 
-		<script src="../../js/tenChart.config.js"></script>
-		<script src="../../js/threeChart.config.js"></script>-->
 		<script src="../../js/chart.js"></script>
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){  
-					
-					
-					
-					
 				var Transfer=plus.webview.currentWebview();
 				var CommodityNo=document.getElementById("CommodityNo");
 				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];

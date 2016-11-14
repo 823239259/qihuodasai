@@ -13,8 +13,6 @@
 		<script type="text/javascript" src="../../js/util.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.connection.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
-		<!-- <script type="text/javascript" src="../../js/trade.send.js" ></script>
-		 <script type="text/javascript" src="../../js/util.js" ></script>-->
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<style>
@@ -71,9 +69,8 @@
 				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>阅读并接受</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
 			</div>
 		</div>
-		<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-		<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>
-		
+		<div class="top"></div><div class="bottom"></div>
+		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
 		<script type="text/javascript">
 		    initTradeConfig();
@@ -137,9 +134,7 @@
 						"height": Proportion*20+"px",
 						"line-height": Proportion*20+"px",
 						"margin-top":Proportion*1+"px",
-					
 					});
-					
 					$("#checkBox").css({
 						"width":Proportion*18+"px",
 						"height":Proportion*18+"px",
@@ -147,20 +142,13 @@
 					$("#checkBox i").css({
 						"width":Proportion*14+"px",
 						"height":Proportion*14+"px",
+						"margin":Proportion*1.2+"px",
 					});
 					$("#closeTrade").css({
 						"width":Proportion*17+"px",
 						"hegiht":"auto",
-						"position":"absolute",
-						"top":Proportion*32+"px",
-						"right":Proportion*10+"px",
-					});
-					$("#closeTrade1").css({
-						"width":Proportion*17+"px",
-						"hegiht":"auto",
-						"position":"absolute",
-						"top":Proportion*32+"px",
-						"right":Proportion*10+"px",
+						"display":"block",
+						"margin":Proportion*8+"px"
 					});
 				}
 				/*加载新手指南*/
@@ -169,99 +157,71 @@
 					bindGuidance();
 					console.log(plus.storage.getItem("QuotationGuidance"));
 				}
+				bindGuidance();
 				function bindGuidance(){
 					loadCss();
 					var Proportion=1;
 					var width=plus.screen.resolutionWidth;
 					var height=window.innerHeight;
-						$("#guidance").css({
+						$(".top").css({
 							"height":height+"px",
 							"background-image": "url(../../images/quotationLogin.png)",
 							"top":"0px",
-							"display":"block"
+							"display":"block",
+							"position":"fixed",
+							"top":"0px",
+							"right":"0px",
+							"z-index":"998"
 						});
-						$(".top,.bottom").css({
-							"display":"none"
+						$("#closeDiv").css({
+							"width":Proportion*40+"px",
+							"height":Proportion*40+"px",
+							"position":"fixed",
+							"top":Proportion*20+"px",
+							"right":Proportion*10+"px",
+							"z-index":"999",
+							"vertical-align":"middle"
 						});
-						var numL=0;
-					$("#closeTrade").click(function(){
-						$("#guidance").css({
-							"display":"none"
+						$("#closeDiv").click(function(){
+							$(".top,#closeDiv,.bottom").css({
+								"display": "none",
+							});
 						});
-						$(".top,.bottom").css({
-			    			"display":"none",
-			    		});
-			    		numL++;
-			    		
-					});
-					$("#closeTrade1").click(function(){
-						console.log("54");
-						$(".top,.bottom").css({
-							"display":"none"
-						});
-					});
-					var num=0;
-					$("#guidance").click(function(){
-							if(numL==1){
-							}else{
-							$(".top").css({
-									"width":"100%",
-									"display":"block",
-									"height":height*0.57-Proportion*40+"px",
+						var clickNum=0;
+						$(".top").click(function(){
+							if(clickNum==0){
+								$(".top").css({
+									"height":height/2+"px",
 									"background-color":"rgba(0,0,0,0.8)",
-									"z-index":"999",
-									"top":"0px"
-								});
-								$("#guidance").css({
-									"display":"none"
+									"background-image":"none",
 								});
 								$(".bottom").css({
 									"width":"100%",
+									"position":"fixed",
 									"display":"block",
-									"height":height*0.41+"px",
+									"bottom":"0px",
+									"left":"0px",
+									"height":height/2-45+"px",
 									"background-image": "url(../../images/quotationLogin1.png)",
-									"background-size":"cover",
-									"z-index":"999",
-									"bottom":"0px"
+									"z-index":"991",
+								})
+							}else{
+								$(".top,#closeDiv,.bottom").css({
+									"display": "none",
 								});
-								if(width==320){
-									$(".top").css({
-										"height":height*0.47+"px",
-									});
-									$(".bottom").css({
-										"height":height*0.46+"px",
-									})
-								}else if(width==375){
-									$(".top").css({
-										"height":height*0.45+"px",
-									});
-									$(".bottom").css({
-										"height":height*0.48+"px",
-									})
-								}else if(width==414){
-									$(".top").css({
-										"height":height*0.48+"px",
-									});
-									$(".bottom").css({
-										"height":height*0.45+"px",
-									})
-								}
-								return
-							}
-//						}
-						num++;
-					});
-					$(".bottom,.top").click(function(){
-						$(".bottom,.top").css({
-							"display":"none"
+							};
+							clickNum++;
+						});
+						$(".bottom").click(function(){
+								$(".top,#closeDiv,.bottom").css({
+									"display": "none",
+								});
 						})
-					})
-				}
+				};
 				var islogin = false;
 				var num=0
 				$("#checkBox i").val(1);
 				$("#checkBox").click(function(){
-					alert($("#checkBox i").val())
 					if(num==0){
 						$("#checkBox i").val(2);
 						$("#checkBox i").css({
