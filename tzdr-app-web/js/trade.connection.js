@@ -209,21 +209,25 @@ function reconnect(){
  * 获取版本信息
  */
 function getVersion(){ 
-	mui.app_request("/socket/config/getVersion",
-		{"appVersion":appVersion},
-		function(result){
-			console.log(JSON.stringify(result));
-			if(result.success){
+	$.ajax({ 
+		url:tzdr.constants.api_domain+"/socket/config/getVersions",
+		type:"get", 
+		data:{
+			appVersions:appVersion
+		},
+		timeout:5000,
+		success:function(result){
+			if(result.success){ 
 				var data = result.data;
 				tradeWebsocketUrl = data.socketUrl;
 				tradeWebSocketVersion = data.socketVersion;
 				tradeWebsocketModelUrl = data.socketModelUrl;
+				isGetVersion = true; 
 			}
-		},
-		function(result){
-			
+		} ,
+		error:function(result){
 		}
-		)
+	});  
 }
 /**
  * 验证socket版本是否获取成功
@@ -232,12 +236,13 @@ function validateIsGetVersion(){
 	var i = 0;
 	var initIsGetVersion = setInterval(function(){
 		i++;
-		if(!isGetVersion){
-			if(i > 50){
+		console.log(i);
+		if(isGetVersion == false){
+			if(i > 50){ 
 				isGetVersion = true;
 			}
 		}
-		if(isGetVersion){
+		if(isGetVersion == true){
 			initSocketTrade();
 			clearInterval(initIsGetVersion);
 		}

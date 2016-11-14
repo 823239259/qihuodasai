@@ -330,23 +330,23 @@
 				var accountEnd = endLoginAccount == null?"":endLoginAccount;
 				if(accountEnd != ""){
 					$("#userAcount").show();
-				}
+				}   
 				$("#account").val(accountEnd);
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
 				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null){
 					$(".accountSelect").val(tradeWebSocketIsMock);
-				}else{
+				}else{ 
 					$(".accountSelect").val(0);
 					tradeWebSocketIsMock = 0; 
-				}
-				getVersion();
+				}    
+				getVersion();   
 				setTradeConfig(tradeWebSocketIsMock); 
 				$(".accountSelect").change(function(){
 					var $this = $(this);
 					var val = $this.val(); 
 					setTradeConfig(val);
-				});
-				
+				}); 
+				  
 				/**
 				 * 登录超时处理 
 				 */
