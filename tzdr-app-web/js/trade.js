@@ -1,11 +1,3 @@
-/**
- * 初始化交易
- */
-if(tradeWebSocketIsMock == undefined || tradeWebSocketIsMock == null){
-	// alertProtype("登录错误,请重新登录","登录提示",Btn.confirmed());
-}else{ 
-	initTrade(); 
-}
 //持仓发送请求次数记录
 var holdFirstLoadDataIndex = 0;
 //个人账户信息发送请求次数纪录
@@ -1223,11 +1215,32 @@ function loadOperateLogin(){
 	});
 }
 $(function(){
+	/**
+	 * 初始化交易配置 --> trade.config
+	 */
+	initTradeConfig();
+	validateIsGetVersion();
+	getVersion();
 	if(username == null){
 		$("#switchAccount").text("登录账号");
 	}
 	bindOpertion();
-	function selectCommodity(param){
+	$("#switchAccount").click(function(){  
+		if(isLogin){
+			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
+		}else{ 
+			openLogin();
+		} 
+	});
+}); 
+function initSocketTrade(){
+	setTradeConfig(tradeWebSocketIsMock);
+	/**
+	 * 初始化交易
+	 */
+	initTrade();
+}
+function selectCommodity(param){
 		var contractCode = param;
 		var localCommodity = localCacheCommodity[contractCode];
 		var localQoute = localCacheQuote[contractCode];
@@ -1256,14 +1269,6 @@ $(function(){
 		clearRightData();
 		updateRight(localQoute);
 	}
-	$("#switchAccount").click(function(){  
-		if(isLogin){
-			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
-		}else{ 
-			openLogin();
-		}
-	});
-}); 
 /**
  * 绑定交易操作事件
  */
@@ -1841,6 +1846,7 @@ function clearLocalCacheData(){
 	resultInsertOrderId={};
 	isUpdateOrder = false;
 	isBuy = false;
+	isGetVersion = false;
 }
 /**
  * 输入价格或数量验证 

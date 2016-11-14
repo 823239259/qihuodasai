@@ -1,5 +1,9 @@
 var socket = null;
 /**
+ * 交易地址
+ */
+var socketUrl = null;
+/**
  * 用户名
  */
 var username =localStorage.getItem("trade_account");
@@ -36,6 +40,10 @@ var anotherPlace = false;
  */
 var tradeIntervalId = null;
 /**
+ * 版本是否获取成功
+ */
+var isGetVersion = false;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -55,8 +63,8 @@ function changeConnectionStatus(){
 /**
  * 交易连接
  */
-function tradeConnection(){ 
-	socket = new WebSocket(tradeWebsocketUrl);  
+function tradeConnection(){  
+	socket = new WebSocket(socketUrl);  
 }
 /**
  * 交易连接断开的处理
@@ -117,6 +125,18 @@ function tradeLoginOut(){
 	loginOut();
 }
 /**
+ * 根据交易模式设置交易配置信息
+ * @param ismock
+ */
+function setTradeConfig(ismock){
+	setTradeWebSocketIsMock(ismock);
+	if(tradeWebSocketIsMock == 0){
+		socketUrl = tradeWebsocketUrl;
+	}else if(tradeWebSocketIsMock == 1){
+		socketUrl = tradeWebsocketModelUrl;
+	}
+}
+/**
  * 交易初始化加载
  */
 function initLoad() {
@@ -171,10 +191,6 @@ function initTradeConnect(){
 }
 function initTrade(){
 	/**
-	 * 初始化交易配置 --> trade.config
-	 */
-	initTradeConfig();
-	/**
 	 * 交易登录（初始化） -->trade.connection
 	 */
 	tradeLogin();
@@ -187,4 +203,43 @@ function reconnect(){
 	if(socket == null){
 		initTrade();
 	}
+}
+
+/**
+ * 获取版本信息
+ */
+function getVersion(){ 
+	mui.app_request("/socket/config/getVersion",
+		{"appVersion":appVersion},
+		function(result){
+			console.log(JSON.stringify(result));
+			if(result.success){
+				var data = result.data;
+				tradeWebsocketUrl = data.socketUrl;
+				tradeWebSocketVersion = data.socketVersion;
+				tradeWebsocketModelUrl = data.socketModelUrl;
+			}
+		},
+		function(result){
+			
+		}
+		)
+}
+/**
+ * 验证socket版本是否获取成功
+ */
+function validateIsGetVersion(){
+	var i = 0;
+	var initIsGetVersion = setInterval(function(){
+		i++;
+		if(!isGetVersion){
+			if(i > 50){
+				isGetVersion = true;
+			}
+		}
+		if(isGetVersion){
+			initSocketTrade();
+			clearInterval(initIsGetVersion);
+		}
+	}, 200);
 }

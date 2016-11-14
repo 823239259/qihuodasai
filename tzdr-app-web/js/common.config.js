@@ -1,5 +1,8 @@
 var model = "dev";
 var tradeSocketUrl = "";
+var tradeSocketModelUrl = "";
+var tradeSocketVersion = "";
+var tradeAppVersion = "";
 var marketSocketUrl = "";
 var marketUserName = "";
 var marketPassword = "";
@@ -22,12 +25,16 @@ var tradeWebSocketIsMock = localStorage.getItem("isMock");
 function tradeConfig(){
 	this.TradeSocketUrl = "ws://139.196.228.143:6066";//ws://trade.vs.com:6060
 	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
+	this.tradeSocketVersion = "";
+	this.tradeAppVersion = "1.1.1";
 	return this;
 }
 
 function TradeConfigTest(){ 
 	this.TradeSocketUrl = "ws://139.224.24.206:6066";//"ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
+	this.tradeSocketVersion = "";
+	this.tradeAppVersion = "1.1.1";
 	return this; 
 }
 
@@ -62,15 +69,8 @@ function loadConfig(){
 	setTradeWebSocketUrlConfig();
 }
 function setTradeWebSocketUrlConfig(){
-	if(tradeWebSocketIsMock == 0){ 
-		tradeSocketUrl = tradeWebSocketConfig.TradeSocketUrl;
-	}else if(tradeWebSocketIsMock == 1){
-		tradeSocketUrl = tradeWebSocketConfig.TradeSocketModelUrl;
-	}
-}
-/**
- * 设置交易模式  isMock:0-实盘，1-模拟盘
- */
-function setTradeWebSocketIsMock(isMock){
-	tradeWebSocketIsMock = isMock;
+	tradeSocketUrl = tradeWebSocketConfig.TradeSocketUrl;
+	tradeSocketModelUrl = tradeWebSocketConfig.TradeSocketModelUrl;
+	tradeSocketVersion = tradeWebSocketConfig.tradeSocketVersion;
+	tradeAppVersion = tradeWebSocketConfig.tradeAppVersion;
 }

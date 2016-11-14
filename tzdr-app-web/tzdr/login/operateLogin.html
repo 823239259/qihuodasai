@@ -257,10 +257,6 @@
 						})
 					})
 				}
-				
-				
-				
-				
 				var islogin = false;
 				var num=0
 				$("#checkBox i").val(1);
@@ -343,20 +339,14 @@
 					$(".accountSelect").val(0);
 					tradeWebSocketIsMock = 0; 
 				}
+				getVersion();
 				setTradeConfig(tradeWebSocketIsMock); 
 				$(".accountSelect").change(function(){
 					var $this = $(this);
 					var val = $this.val(); 
 					setTradeConfig(val);
 				});
-				/**
-				 * 根据账号类型设置交易配置
-				 * @param {Object} val
-				 */
-				function setTradeConfig(val){
-					setTradeWebSocketIsMock(val);
-					setTradeWebSocketUrlConfig();
-				}
+				
 				/**
 				 * 登录超时处理 
 				 */
@@ -399,7 +389,7 @@
 						pwd=$.base64.encode(document.getElementById("password").value);
 						if(mui.isnull(account)){
 			    			mui.toast("请输入账号");
-			    			return;
+			    			return; 
 							};
 			
 						if(mui.isnull(pwd)){
@@ -414,9 +404,9 @@
 						  };
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
-						var loginSocket = new WebSocket(tradeSocketUrl);
+						var loginSocket = new WebSocket(socketUrl);
 						loginSocket.onopen = function(){
-							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+'}}');
+							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+',"Version":"'+tradeWebSocketVersion+'"}}');
 						}
 						loginSocket.onmessage = function(evt){
 							var dataString = evt.data;
