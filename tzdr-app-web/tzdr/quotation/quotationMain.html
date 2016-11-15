@@ -197,8 +197,6 @@
 					plus.storage.setItem("QuotationGuidance","1");
 					bindGuidance();
 				}
-//				bindGuidance();
-				
 				function bindGuidance(){
 					loadCss();
 					var Proportion=1;
@@ -466,10 +464,25 @@
 			})
 			setstatus();
 			function setstatus(){
-			if(plus.navigator.isFullscreen()){
-				plus.navigator.setFullscreen(false);
-			}
-		};
+				if(plus.navigator.isFullscreen()){
+					plus.navigator.setFullscreen(false);
+				}
+			};
+			var first=null;
+			//Android双击home键退出应用
+				mui.back = function(){
+	               if(!first) {
+						first = new Date().getTime(); 
+						mui.toast('再按一次退出维胜');
+						setTimeout(function() {
+						first = null;
+						}, 1000);
+						}else{
+							if (new Date().getTime() - first < 1000) {   
+								plus.runtime.quit();  
+							} 
+						}
+		        	};
 			});
 			
 		</script>
