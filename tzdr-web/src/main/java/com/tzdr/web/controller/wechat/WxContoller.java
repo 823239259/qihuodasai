@@ -1,4 +1,4 @@
-package com.tzdr.web.controller;
+package com.tzdr.web.controller.wechat;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -17,7 +17,6 @@ public class WxContoller{
 	@ResponseBody
 	public void wx(HttpServletRequest reqest,HttpServletResponse response){
 		try {
-			reqest.setCharacterEncoding("utf-8"); 
 			WeChatSupport chatSupport = new WeChatSupport(reqest);
 			String result = chatSupport.execute();
 			response.setHeader("content-type", "text/html;charset=gbk");// 浏览器编码
