@@ -1,0 +1,629 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>交易</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/quotation.css" />
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
+		<script src="../../js/esl.js"></script>
+		<style>
+			#guidance{
+				width: 100%;
+				position: fixed;
+				z-index: 998;
+				background-size: cover;
+				background-position: top;
+				display: none;
+			}
+			.bottom,.top{
+				width: 100%;
+				position: fixed;
+				z-index: 999;
+				background-size: cover;
+				display: none;
+			}
+		</style>
+	</head>
+	<body style="background-color: #2B2B2B"> 
+		<header class="mui-bar mui-bar-nav"> 
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "backClose"></a>
+		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
+		    <a class="whiteFont" id="switchAccount">切换账号</a>
+		</header>
+		<div class="mui-content" style="padding-top: 86px;" >
+				<div id="headerMenu" style="background-color: #2B2B2B;">
+					<button id="tradeMenu">交易中心</button>
+					<button id="timeChartMenu" value="0">分时</button>
+					<button id="selectButon">
+						1分
+						<!--<select id="selectType" style="text-align: center;">
+							<option value="1">1分</option>
+							<option value="5">5分</option>
+							<option value="15">15分</option>
+							<option value="30">30分</option>
+							<option value="1440">日K</option>
+						</select>-->
+					</button>
+				</div>
+				<div id="headerContent">
+					<div id="chartAllDiv" class="mui-active">
+						<div class="chartDivContent mui-active" id="TimeChart1">
+							<div id="timeChart" style="width:100%;"></div>
+							<div id="volumeChart" style="width:100%;"></div>
+						</div>
+						<div class="chartDivContent displayStyle" id="CandlestickChart" style="opacity: 0;">
+							<div   id="CandlestickChartDiv" style="width:100%;"></div>
+							<div id="CandlestickVolumeChart" style="width:100%;"></div>
+						</div>
+						<div class="buttomFix">
+							<div class="buttomFixLeft mui-col-xs-6">
+								<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
+								<p>买<span id="sellPrices" class="PricesLeft">-</span ><span id="sellPricesNumber" class="PricesRight">-</span></p>
+								<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
+							</div>
+							<div class="buttomFixRight mui-col-xs-6">
+								<p id="freshPrices">0.00</p> 
+								<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
+							</div>
+							<div class="BuyDiv">
+								<div id="numberInput">
+									<label>手数:</label>
+									<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
+									<label>（价格：市价）</label>
+								</div>
+								<!--<div class=""><label></label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"><label>（价格：市价）</label></div>
+									<div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>-->
+							</div>
+							<div class="buttonDivList">
+								<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
+								<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
+							</div>
+							<div style="display: none;">
+								<input type="text"  id = "exchangeNo"/> 
+								<input type="text"  id = "commodeityNo"/>
+								<input type="text"  id = "contractNo"/>
+								<input type="text"  id = "contractSize" />
+								<input type="text"  id= "miniTikeSize"/>
+								<input type="text"  id = "doSize"/>
+								<input type="text" id="CommodityName" />
+								持仓盈亏:<input type="text" value = "0.00" id = "floatingProfit">
+							</div>
+						</div>
+					</div>
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class="displayStyle">
+					    <div class="Assets" style="background-color: #2B2B2B;">
+					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
+					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
+					    </div>
+					    <div class="ProductInformation">
+					        <div class="ProductInformationLeft">
+					            <p class="whiteFont" >
+					            <div id="bb">
+					                <select class="mui-btn mui-btn-block" id = "tradeTitle" >
+					                </select>
+					            </div>
+					            <span class="mui-icon mui-icon-search" id="searchIcon"></span>
+					            </p>
+					        </div>
+					        <div class="ProductInformationRight">
+					            <p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
+					            <p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
+					            <p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
+					        </div>
+					    </div>
+					    <form id="buyFuture">
+					        <div class="butomBoreder">
+					            <div class="mui-input-row mui-radio radioDiv mui-left">
+					                <label>市价</label>
+					                <input type="radio" checked name="prices" value="1" class="radioChoice mui-radio">
+					            </div>
+					            <div class="mui-input-row mui-radio radioDiv mui-left">
+					                <label>限价</label>
+					                <input type="radio" class="radioChoice mui-radio" value="0" name="prices">
+					            </div>
+					        </div>
+					        <div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
+					        <div class="buyBtn">
+					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
+					        </div>
+					    </form>
+					    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					        <a class="mui-control-item mui-active" href="#item1" id = "holdCC">持仓</a>
+					        <a class="mui-control-item" href="#item2" id = "desgnateGD">挂单</a>
+					        <a class="mui-control-item" href="#item3" id = "tradeWT">委托</a>
+					        <a class="mui-control-item" href="#item4" id = "successCJ">成交</a>
+					    </div>
+					    <div>
+					        <div id="item1" class="mui-control-content mui-active" >
+					            <ul id="positionList" class="listStyle" style="height: 165px; width: 100%;" >
+					                <li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
+					            </ul>
+					            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
+					            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
+					        </div>
+					        <div id="item2" class="mui-control-content">
+					            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
+					                <li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
+					            </ul>
+					            <button type="button" class="mui-btn mui-col-xs-10 focusButton" id="kilAnorder">撤单</button>
+					        </div>
+					        <div id="item3" class="mui-control-content" style="width: 100%;">
+					            <ul  id="Entrust" class="listStyle" style="height: 165px;" >
+					                <li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
+					
+					            </ul>
+					        </div>
+					        <div id="item4" class="mui-control-content" >
+					            <ul  id="Deal" class="listStyle" style="height: 165px;">
+					                <li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
+					            </ul>
+					        </div>
+					    </div>
+					</div>
+				</div>
+				<!--<div id="guidance"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+				<div class="top"><img src="../../images/quotationColse.png" id="closeTrade1"></div><div class="bottom"></div>-->
+				<div class="top"></div><div class="bottom"></div>
+				<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+				<div id="littleDiv"></div>
+				<div id="list_type" style="margin: 0px; padding: 0px;">
+					<ul style="list-style-type: none;margin: 0px;padding: 0px;">
+						<li value="1">1分</li>
+						<li value="5">5分</li>
+						<li value="15">15分</li>
+						<li value="30">30分</li>
+						<li value="1440">日K</li>
+					</ul>
+				</div>
+			</div>
+			<script>
+			loadCss();
+					var Proportion=1;
+    			function loadCss(){
+		    			var Proportion=1;
+//						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=320/320;
+						var width=320;
+						$("#numberInput").css({
+							"padding":Proportion*10+"px",
+							"font-size":Proportion*12+"px",
+						});
+						$("#numberInput input").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"padding":"0px "+Proportion*85+"px 0px "+Proportion*45+"px "
+						});
+						$("#numberInput label").css({
+							"top":Proportion*25+"px",
+						});
+						$("#numberInput label:nth-child(1)").css({
+							"left":Proportion*10+5+"px",
+						});
+						$("#numberInput label:nth-child(3)").css({
+							"right":Proportion*10+5+"px",
+						});
+						$("#marketBuy,#marketSell").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"font-size":Proportion*16+"px",
+						});
+						$("#headerMenu").css({
+							"padding":Proportion*5+"px "+Proportion*10+"px ",
+							"background-color":"#2B2B2B",
+							"width":"100%",
+							"height":Proportion*35+"px",
+							"position":"fixed",
+							"top":"46px",
+							"z-index":"990"
+						})
+						$("#headerMenu button").css({
+							"height":Proportion*30+"px",
+							"line-height":Proportion*30+"px",
+							"font-size":Proportion*14+"px",
+							"width":Proportion*75+"px",
+						});
+						$("#tradeMenu").css({
+							"position":"absolute",
+							"left":Proportion*10+"px "
+						})
+						$("#selectButon").css({
+							"position":"absolute",
+							"right":Proportion*10+"px ",
+							"color":"#ffffff",
+							"text-align":"center",
+							"border":"1px solid red"
+						})
+						$("#list_type").css({
+							"text-align":"center",
+							"height":"auto",
+							"position":"absolute",
+							"width":Proportion*75+"px",
+							"top":Proportion*30+46+"px",
+							"right":Proportion*10+"px ",
+							"border":"1px solid green",
+							"color":"#999999",
+						})
+						$("#list_type li").css({
+							"width":Proportion*75+"px",
+							"hegiht":Proportion*40+"px",
+							"font-size":Proportion*12+"px",
+						});
+//						$("#selectType").css({
+//							"height":Proportion*30+"px",
+//							"line-height":Proportion*30+"px",
+//							"font-size":Proportion*14+"px",
+//							"width":Proportion*75+"px",
+//							"padding":"0px 0px 0px "+ Proportion*25+"px",
+//							"background-size":Proportion*14+"px",
+//						});
+						$("#timeChart,#CandlestickChartDiv").css({
+							"width":"100%",
+							"height":Proportion*163+"px",
+						});
+						$("#volumeChart,#CandlestickVolumeChart").css({
+							"width":"100%",
+							"height":Proportion*145+"px",
+						});
+						$("#closeTrade").css({
+							"width":Proportion*17+"px",
+							"hegiht":"auto",
+							"display":"block",
+							"margin":Proportion*8+"px"
+						});
+						$("#closeDiv").css({
+							"display":"none",
+						})
+						var screen=568;
+							$("#timeChart,#CandlestickChartDiv").css({
+								"width":"100%",
+								"height":135*screen/568+"px",
+							});
+							$("#volumeChart,#CandlestickVolumeChart").css({
+								"width":"100%",
+								"height":110*screen/568+"px",
+							});
+					}
+				mui.plusReady(function(){
+					loadCss();
+					var Proportion=1;
+    			function loadCss(){
+		    			var Proportion=1;
+						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=resolutionWidth/320;
+						var width=resolutionWidth;
+						$("#numberInput").css({
+							"padding":Proportion*10+"px",
+							"font-size":Proportion*12+"px",
+						});
+						$("#numberInput input").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"padding":"0px "+Proportion*85+"px 0px "+Proportion*45+"px "
+						});
+						$("#numberInput label").css({
+							"top":Proportion*25+"px",
+						});
+						$("#numberInput label:nth-child(1)").css({
+							"left":Proportion*10+5+"px",
+						});
+						$("#numberInput label:nth-child(3)").css({
+							"right":Proportion*10+5+"px",
+						});
+						$("#marketBuy,#marketSell").css({
+							"height":Proportion*50+"px",
+							"line-height":Proportion*50+"px",
+							"font-size":Proportion*16+"px",
+						});
+						$("#headerMenu").css({
+							"padding":Proportion*5+"px "+Proportion*10+"px ",
+							"background-color":"#2B2B2B",
+							"width":"100%",
+							"height":Proportion*35+"px",
+							"position":"fixed",
+							"top":"46px",
+							"z-index":"990"
+						})
+						$("#headerMenu button").css({
+							"height":Proportion*30+"px",
+							"line-height":Proportion*30+"px",
+							"font-size":Proportion*14+"px",
+							"width":Proportion*75+"px",
+						});
+						$("#tradeMenu").css({
+							"position":"absolute",
+							"left":Proportion*10+"px "
+						})
+						$("#selectButon").css({
+							"position":"absolute",
+							"right":Proportion*10+"px ",
+							"color":"#ffffff",
+							"text-align":"center",
+							"border":"1px solid red"
+						})
+						$("#list_type").css({
+							"text-align":"center",
+							"height":"auto",
+							"position":"absolute",
+							"width":Proportion*75+"px",
+							"top":Proportion*30+46+"px",
+							"right":Proportion*10+"px ",
+//							"border":"1px solid green",
+							"color":"#999999",
+							"background-color":"#2b2b2b",
+							"z-index":"999",
+							"border":"1px solid #454545",
+							"display":"none"
+						})
+						$("#list_type li").css({
+							"width":Proportion*75+"px",
+							"hegiht":Proportion*40+"px",
+							"font-size":Proportion*12+"px",
+							"line-height":Proportion*40+"px",
+							"border-bottom":"1px solid #454545",
+						});
+						$("#list_type li:nth-last-child(1)").css({
+							"border-bottom":"none",
+						});
+//						$("#selectType").css({
+//							"height":Proportion*30+"px",
+//							"line-height":Proportion*30+"px",
+//							"font-size":Proportion*14+"px",
+//							"width":Proportion*75+"px",
+//							"padding":"0px 0px 0px "+ Proportion*25+"px",
+//							"background-size":Proportion*14+"px",
+//						});
+						$("#timeChart,#CandlestickChartDiv").css({
+							"width":"100%",
+							"height":Proportion*163+"px",
+						});
+						$("#volumeChart,#CandlestickVolumeChart").css({
+							"width":"100%",
+							"height":Proportion*145+"px",
+						});
+						$("#closeTrade").css({
+							"width":Proportion*17+"px",
+							"hegiht":"auto",
+							"display":"block",
+							"margin":Proportion*8+"px"
+						});
+						$("#closeDiv").css({
+							"display":"none",
+						})
+						var screen=plus.screen.resolutionHeight;
+							$("#timeChart,#CandlestickChartDiv").css({
+								"width":"100%",
+								"height":135*screen/568+"px",
+							});
+							$("#volumeChart,#CandlestickVolumeChart").css({
+								"width":"100%",
+								"height":110*screen/568+"px",
+							});
+					}
+					/*
+					 增加新手引导的样式
+					 */
+					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
+						plus.storage.setItem("QuotationGuidanceTrade","1");
+						bindGuidance();
+					}
+//					bindGuidance();
+					function bindGuidance(){
+					var Proportion=1;
+					var height=window.innerHeight;
+						$(".top").css({
+							"height":Proportion*42+46+"px",
+							"background-color":"rgba(0,0,0,0.8)",
+							"top":"0px",
+							"display":"block",
+							"position":"fixed",
+							"top":"0px",
+							"right":"0px",
+							"z-index":"990",
+							"border":"1px solid red"
+						});
+						$("#closeDiv").css({
+							"width":Proportion*40+"px",
+							"height":Proportion*40+"px",
+							"position":"fixed",
+							"top":Proportion*4+"px",
+							"right":Proportion*10+"px",
+							"z-index":"991",
+							"vertical-align":"middle"
+						});
+						$(".bottom").css({
+							"width":"100%",
+							"position":"fixed",
+							"display":"block",
+							"bottom":"0px",
+							"left":"0px",
+							"height":$(".buttomFix").height()+57+"px",
+							"background-image": "url(../../images/tradeGudice1.png)",
+							"z-index":"991",
+							"border":"1px solid red"
+						});
+						var clickNum=0;
+						$(".bottom,.top").click(function(){
+							if(clickNum==0){
+								$(".bottom").css({
+									"height":height-(Proportion*42+46)+"px",
+									"background-image": "url(../../images/tradeGudice2.png)",
+								});
+								$(".top").css({
+									"height":Proportion*46+"px",
+								});
+								$("#littleDiv").css({
+									"position":"fixed",
+									"top":"46px",
+									"left":"0px",
+									"width":Proportion*120+"px",
+									"height":Proportion*50+"px",
+									"background-color":"rgba(0,0,0,0.8)",
+									"z-index":"992",
+								});
+							}else if(clickNum==1){
+								$(".top").css({
+									"display":"none",
+								});
+								$("#closeDiv").css({
+									"left":Proportion*10+"px",
+								});
+								$(".bottom").css({
+									"bottom":"0px",
+									"left":"0px",
+									"height":height+"px",
+									"background-image": "url(../../images/tradeGudice3.png)",
+								});
+								$("#littleDiv").css({
+									"display":"none",
+								});
+							}else if(clickNum==2){
+								$("#closeDiv").css({
+									"left":Proportion*310+"px",
+								});
+								$(".bottom").css({
+									"bottom":Proportion*53+"px",
+									"left":"0px",
+									"height":height-Proportion*50+"px",
+									"background-image": "url(../../images/tradeGudice4.png)",
+								});
+							}else if(clickNum==3){
+								$(".bottom").css({
+									"bottom":"0px",
+									"left":"0px",
+									"height":height+"px",
+									"background-image": "url(../../images/tradeGudice5.png)",
+								});
+							}else{
+								$(".bottom").css({
+									"display":"none",
+								});
+								$("#closeDiv").css({
+									"display":"none",
+								});
+							}
+							clickNum++;
+							
+						});
+						$("#closeDiv").click(function(){
+							$(".top,.bottom,#littleDiv,#closeDiv").css({
+			    				"display":"none",
+			    			});
+						});
+						$("#littleDiv").click(function(){
+							$(".top,.bottom,#littleDiv,#closeDiv").css({
+			    				"display":"none",
+			    			});
+						})
+					$("#closeTrade").click(function(){
+						$(".top,.bottom,#littleDiv,#closeDiv").css({
+			    			"display":"none",
+			    		});
+					});
+				}
+				
+			});
+			</script>
+		<script type="text/javascript" src="../../js/common.config.js" ></script> 
+		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
+		<script type="text/javascript" src="../../js/util.js" ></script>
+		<script type="text/javascript" src="../../js/trade.util.js" ></script>
+		<script type="text/javascript" src="../../js/trade.data.mode.js" ></script>
+		<script type="text/javascript" src="../../js/trade.config.js" ></script>
+		<script type="text/javascript" src="../../js/trade.connection.js" ></script>
+		<script type="text/javascript" src="../../js/trade.send.js" ></script>
+		<script src="../../js/chart.config.js"></script>
+		<script src="../../js/timechart.config.js"></script>
+		<script src="../../js/candlestick.config.js"></script>
+		<script src="../../js/chart.js"></script>
+		<script type="text/javascript" src="../../js/trade.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){  
+				var Transfer=plus.webview.currentWebview();
+				var CommodityNo=document.getElementById("CommodityNo");
+				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+				mainTitleFirst.innerHTML=Transfer.name[0];
+				CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+				var candlestickChartItem = document.getElementById('CandlestickChart');
+				init(Transfer.name);
+				cachTranFers(Transfer.name);
+				var i = 0 ;
+				$(window).resize(function() {
+					if(i % 2 == 0){  
+						 $(".focusButton").css("display","none");
+					}else{
+						$(".focusButton").css("display","block");
+					}
+					i++; 
+				});
+			});
+		</script>
+		<script>
+		
+			var tranferParam = null ;
+			/**
+			 * 获取行情请求的数据-并初始化页面 
+			 */
+//			$(function(){
+//				plus.nativeUI.showWaiting( "正在加载内容" );
+//			})
+			function setTimeOutInsertOrder(){
+				tradeSetTimeOut = setTimeout(function(){
+								plus.nativeUI.closeWaiting(); 
+							},10000);
+			}
+			function init(param){
+				$("#exchangeNo").val(param[3]);
+				$("#commodeityNo").val(param[2]);
+				$("#contractNo").val(param[1]);
+				$("#contractSize").val(param[5]);
+				$("#lastPrice").text(param[7]);
+//				$("#lastPriceNone").val(param[7]);
+				$("#miniTikeSize").val(param[6]);
+				$("#doSize").val(param[4]);
+			}
+			function cachTranFers(param){
+				tranferParam = param;
+			}
+			var loginOutFlag = false;
+			var loginOutTip=false;
+			$(function(){ 
+				$('#password').bind('input propertychange', function() {
+				  	var orderPrice = $("#orderPrice").val();
+				  	$("#buyBtn_P").val(orderPrice);
+				  	$("#sellBtn_P").val(orderPrice);
+				});
+				$("input[type='radio']").click(function(){
+					var type = $("input[type = 'radio']:checked").val();
+					var orderPrice = $("#orderPrice");
+					var lastPrice = $("#lastPrice").text();
+					var miniTikeSize = $("#miniTikeSize").val();
+					var doSize = $("#doSize").val();
+					if(type == 1){  
+						$("#buyBtn_P").text(parseFloat(doGetMarketPrice(lastPrice,miniTikeSize,0)).toFixed(doSize));
+						$("#sellBtn_P").text(parseFloat(doGetMarketPrice(lastPrice,miniTikeSize,1)).toFixed(doSize));
+						orderPrice.prop("placeholder","市价");
+						orderPrice.prop("value",""); 
+						orderPrice.prop("disabled",true);
+					}else{
+						orderPrice.prop("disabled",false);
+						orderPrice.prop("value",lastPrice); 
+						$("#buyBtn_P").text(lastPrice);
+						$("#sellBtn_P").text(lastPrice);
+						orderPrice.prop("placeholder","");
+					}
+				});
+				if(username == null){
+					$("#switchAccount").text("登录账号");
+				}
+			});
+			
+	</script>
+	</body>
+
+</html>
