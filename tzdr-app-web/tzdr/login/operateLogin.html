@@ -15,33 +15,14 @@
 		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
-		<style>
-			#guidance{
-				width: 100%;
-				position: fixed;
-				z-index: 998;
-				background-size: cover;
-				display: none;
-			}
-			.bottom,.top{
-				width: 100%;
-				position: fixed;
-				z-index: 999;
-				background-size: cover;
-				display: none;
-			}
-		</style>
 	</head>
-
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ></a>
 		<h1 class="mui-title">操盘登录</h1>
 		<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
-		<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
 	</header>
-	<div class="mui-content" class="operateLogin" style="opacity: 0;">
-		<!--<div id="posiitionCover"></div>-->
+	<div class="mui-content" class="operateLogin">
 		<div id="inputList">
 			<div id="accountType" class="commStyle">
 				<label>账号类型：</label>
@@ -71,121 +52,37 @@
 		</div>
 		<div class="top"></div><div class="bottom"></div>
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+		<div id="username_list">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
 	</div>
 		<script type="text/javascript">
 		    initTradeConfig();
 			mui.init();
+				var width=window.innerWidth;
+					$(".commStyle input,.commStyle select").css({
+						"width":width-115+"px"
+					});
 			mui.plusReady(function(){
-				loadCss()
-				var Proportion=1;
-				function loadCss(){
-					var Proportion=1;
-					var resolutionWidth=plus.screen.resolutionWidth;
-					Proportion=resolutionWidth/320;
-					$("#inputList").css({
-						"width": "100%",
-						"padding":"0px "+Proportion*20+"px",
-					});
-					$(".commStyle").css({
-						"width": "100%",
-						"height": Proportion*40+"px",
-						"margin-top": Proportion*10+"px",
-						"position": "relative",
-						"border-bottom":"1px solid #454545"
-					});
-					$(".commStyle label").css({
-						"height": Proportion*39+"px",
-					 	"line-height": Proportion*39+"px",
-					 	"font-size": Proportion*14+"px"
-					});
-					$(".commStyle input").css({
-						"height": Proportion*39+"px",
- 						"line-height": Proportion*39+"px",
- 						"width": 200*Proportion+"px",
-					 	"padding-left": Proportion*10+"px",
-					 	"font-size": Proportion*12+"px",
-					 	"position": "relative",
-					 	"top":Proportion*-1.1+"px"
-					});
-					$(" .commStyle select").css({
-						"height": Proportion*39+"px",
-					 	"line-height": Proportion*39+"px",
-					 	"width": 199*Proportion+"px",
-					 	"font-size": Proportion*12+"px",
-					});
-					$(".commStyle img").css({
-						"position": "absolute",
-					  	"width": Proportion*15+"px",
-					  	"right": "2px",
-					  	"top":Proportion*16+"px",
-					});
-					$("#operateLogin").css({
-						"height":Proportion*40+"px",
-					 	"line-height": Proportion*40+"px",
-					 	"font-size": Proportion*16+"px",
-						
-					});
-					$("#regLogin").css({
-						"height":Proportion*40+"px",
-					 	"line-height": Proportion*40+"px",
-					 	"font-size": Proportion*16+"px",
-					});
-					$("#loginAgree").css({
-						"height": Proportion*20+"px",
-						"line-height": Proportion*20+"px",
-						"margin-top":Proportion*1+"px",
-					});
-					$("#checkBox").css({
-						"width":Proportion*18+"px",
-						"height":Proportion*18+"px",
-					});
-					$("#checkBox i").css({
-						"width":Proportion*14+"px",
-						"height":Proportion*14+"px",
-						"margin":Proportion*1.15+"px",
-					});
-					$("#closeTrade").css({
-						"width":Proportion*17+"px",
-						"hegiht":"auto",
-						"display":"block",
-						"margin":Proportion*8+"px"
-					});
-					$("#closeDiv").css({
-						"display":"none",
-					});
-					$(".mui-content").css({
-								"opacity":"1"
-					});
-				}
 				/*加载新手指南*/
 				if(plus.storage.getItem("QuotationGuidanceLogin")==null){
 					plus.storage.setItem("QuotationGuidanceLogin","1");
 					bindGuidance();
 				}
 				function bindGuidance(){
-					loadCss();
-					var Proportion=1;
-					var width=plus.screen.resolutionWidth;
 					var height=window.innerHeight;
-					var screen=plus.screen.resolutionHeight;
 						$(".top").css({
 							"height":height+"px",
 							"background-image": "url(../../images/quotationLogin.png)",
-							"top":"0px",
 							"display":"block",
-							"position":"fixed",
-							"top":"0px",
-							"right":"0px",
-							"z-index":"998"
 						});
 						$("#closeDiv").css({
-							"width":Proportion*40+"px",
-							"height":Proportion*40+"px",
-							"position":"fixed",
-							"top":Proportion*20+"px",
-							"right":Proportion*10+"px",
-							"z-index":"999",
-							"vertical-align":"middle"
+							"display":"block"
 						});
 						$("#closeDiv").click(function(){
 							$(".top,#closeDiv,.bottom").css({
@@ -195,30 +92,18 @@
 						var clickNum=0;
 						$(".top").click(function(){
 							if(clickNum==0){
-								var y=25*Proportion;
-								if(width==320){
-									y=25;
-								}else if(width==375){
-//									 x=40;
-									y=10;
-								}else if(width==414){
-									y=15;
-								}
 								$(".top").css({
-									"height":$(".commStyle").height()*3+20+46+80*Proportion+y+"px",
+									"height":263+"px",
 									"background-color":"rgba(0,0,0,0.8)",
 									"background-image":"none",
 									"top":"0px"
 								});
 								$(".bottom").css({
-									"width":"100%",
-									"position":"fixed",
 									"display":"block",
 									"bottom":"0px",
 									"left":"0px",
-									"height":screen/2-y+"px",
+									"height":height-263-40+"px",
 									"background-image": "url(../../images/quotationLogin1.png)",
-									"z-index":"991",
 								})
 							}else{
 								$(".top,#closeDiv,.bottom").css({

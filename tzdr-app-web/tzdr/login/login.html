@@ -9,150 +9,20 @@
     <script type="text/javascript" src="../../js/mui.min.js"></script>  
     <script type="text/javascript" src="../../js/common.js"></script>
     <script src="../../js/jquery-1.11.3.js"></script>
+    <link rel="stylesheet" href="../../css/quotation.css" />
     <style>
     body{
     	background-image: url("../../images/resigter.png");
     	background-size: cover;
     }
-	.mui-bar{
-		background-color: rgba(0,0,0,0);
-		color:#FFFFFF;
-	}
-	#back{
-		color:#FFFFFF;
-	}
-	.mui-title{
-		color:#FFFFFF!important;
-	}
-	#nav-title, .top-tel{
-		color:#FFFFFF
-	}
-	.mui-bar-nav{
-		-webkit-box-shadow:none;
-		box-shadow:none;
-	}
-	.commStyle label{
-	 	color:#ffffff;
-	 }
-	 .commStyle input{
-	 	text-align: left;
-	 	color:#cccccc;
-	 	background-color: rgba(0,0,0,0);
-		border:none;
-	 }
-	 .commStyle .mui-btn-block{
-		 	padding:0px 0px 0px 0px;
-		 	margin-bottom: 0px;
-		 	border:none
-		 }
-	.commStyle span,a{
-		 	display: inline-block;
-		 	color:#FFFFFF
-		 }
-		 #operateLogin{
-		background-color: #cccccc;
-	}
-	.mui-content-padded{
-		margin: 0px;;
-	}
-	.mui-input-group, .mui-content-padded{
-		margin: 0px;
-	}
+    .mui-content{
+   	 	background-color: rgba(0,0,0,0);
+   	 }
 		</style>
 	<script>
 	var win= null;
 		mui.init();
-		
 		mui.plusReady(function(){
-			loadCss();
-			function loadCss(){
-					var Proportion=1;
-					var resolutionWidth=plus.screen.resolutionWidth;
-					Proportion=resolutionWidth/320;
-					console.log(Proportion);
-					$("#logo").css({
-						"padding-top":Proportion*40+"px"
-					})
-					$("#logo img").css({
-						"width":Proportion*60+"px",
-						"height":"auto",
-						"display":"block",
-						"margin":"auto"
-					})
-					$("#inputList").css({
-						"width": "100%",
-						"padding":Proportion*40+"px "+Proportion*20+"px",
-					
-					});
-					$(".commStyle").css({
-						"width": "100%",
-						"height": Proportion*40+"px",
-						"line-height":Proportion*40+"px",
-						"margin-top": Proportion*10+"px",
-						"color":"#ffffff",
-						"font-size": Proportion*14+"px",
-						"position": "relative",
-						"border-bottom":"1px solid #999999"
-					});
-					$(".commStyle label").css({
-						"height": Proportion*39+"px",
-					 	"line-height": Proportion*39+"px",
-					 	"font-size": Proportion*14+"px"
-					});
-					$(".commStyle span").css({
-						"height": Proportion*39+"px",
-					 	"line-height": Proportion*39+"px",
-					 	"font-size": Proportion*14+"px",
-//					 	"width":"100%",
-					});
-					$("#forgetPasswordDiv").css({
-						"width":"100%",
-						"text-align":"right"
-					})
-					$("#resigterDiv").css({
-						"width":"100%",
-						"text-align":"center",
-						"border-bottom":"none"
-					})
-					$(".commStyle a").css({
-						"height": Proportion*39+"px",
-					 	"line-height": Proportion*39+"px",
-					 	"font-size": Proportion*14+"px",
-					});
-					$(".commStyle input").css({
-						"height": Proportion*39+"px",
- 						"line-height": Proportion*39+"px",
- 						"width": 200*Proportion+"px",
-					 	"padding-left": Proportion*10+"px",
-					 	"font-size": Proportion*14+"px",
-					 	"position": "relative",
-					 	"top":Proportion*-1.1+"px"
-					});
-					$(" .commStyle select").css({
-						"height": Proportion*39+"px",
-					 	"line-height": Proportion*39+"px",
-					 	"width": 199*Proportion+"px",
-					 	"font-size": Proportion*12+"px",
-					});
-					$(".commStyle img").css({
-						"position": "absolute",
-					  	"width": Proportion*15+"px",
-					  	"right": "2px",
-					  	"top":Proportion*16+"px",
-					});
-					$("#operateLogin").css({
-						"height":Proportion*40+"px",
-					 	"line-height": Proportion*40+"px",
-					 	"font-size": Proportion*16+"px",
-					 	"padding":"0px",
-					 	"color":"#2b2b2b",
-					 	"border":"none"
-					 	
-					});
-					$("#forgetPasswordDiv").css({
-						"border-bottom":"none"
-					})
-				}
 			if (mui.cacheUser.isLogin()){
 				mui.openWindow("../quotation/quotationMain.html");
 			}
@@ -272,7 +142,7 @@
 		<h1 class="mui-title">登录</h1>		
 		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 	</header>
-	<div class="mui-content " style="opacity: 0;">
+	<div class="mui-content ">
 		<div id="logo">
 			<img src="../../images/LOGO.png" >
 		</div>
@@ -293,7 +163,6 @@
 			</div>
 			<div class="mui-content-padded">
 				<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
-				<!--<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>-->
 			</div>
 			<div class="commStyle"  id="resigterDiv">
 				<a id='reg' href="javascript:void(0)">注册账号</a>
