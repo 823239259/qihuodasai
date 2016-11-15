@@ -67,7 +67,7 @@ public class WeChatQrcodeUtil {
 	}
 	private static JSONObject getParam(String param,QrcodeType qrcodeType,Long time){
 		JSONObject sceneIdJson = new JSONObject();
-		sceneIdJson.put("scene_id", param);
+		sceneIdJson.put("scene_id", "13551178956");
 		JSONObject sceneJson = new JSONObject();
 		sceneJson.put("scene", sceneIdJson);
 		JSONObject paramJson   = new JSONObject();
