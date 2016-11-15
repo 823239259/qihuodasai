@@ -870,6 +870,13 @@ input{
 	z-index: 999;
 	border:1px solid #454545;
 	display: none;
+	padding:0px;
+	margin: 0px;;
+}
+#list_type ul{
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
 }
 #list_type li{
 	width: 75px;;
@@ -877,6 +884,35 @@ input{
 	font-size:12px;
 	line-height: 40px;
 	border-bottom:1px solid #454545 ;
+}
+#username_list{
+	text-align: center;
+	height: auto;
+	position: absolute;
+	top:143px;
+	right: 20px;;
+	color:#999999;
+	background-color: #2B2B2B;
+	z-index: 999;
+	border:1px solid #454545;
+	display: none;
+	padding:0px;
+	margin: 0px;;
+}
+#username_list ul{
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+#username_list ul li{
+	width: 75px;;
+	height:40px;
+	font-size:12px;
+	line-height: 40px;
+	border-bottom:1px solid #454545 ;
+}
+#username_list li:nth-last-child(1){
+	border-bottom: none;
 }
 #list_type li:nth-last-child(1){
 	border-bottom: none;
@@ -910,6 +946,7 @@ input{
 	padding-bottom: 0px;
 	text-align: left;
 	border: none;
+	color:#666666;
 	background-color: rgba(0,0,0,0);
 }
 .commStyle select{
@@ -992,4 +1029,7 @@ input{
 	padding-top: 10px;
 	vertical-align: middle;
 	margin-bottom: -13px;;
-}			
+}	
+#passwordClear,#accountClear{
+	display: none;
+}		

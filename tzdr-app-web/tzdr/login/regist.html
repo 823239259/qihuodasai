@@ -18,6 +18,13 @@
    	 .mui-content,input{
    	 	background-color: rgba(0,0,0,0);
    	 }
+   	 .mui-bar{
+   	 	background-color: rgba(0,0,0,0);
+   	 	border-bottom: none;
+   	 }
+   	 .commStyle{
+   	 	border-bottom: 1px solid #999999;
+   	 }
    </style>
     <script>
     	mui.init();
@@ -117,14 +124,6 @@
     	function registUser(){
     		var mobile=document.getElementById("account").value;
 			var code=document.getElementById("codeInput").value;
-//			mui.openWindow({
-//				    url:'confirmPassword.html',
-//				    id:'confirmPassword.html',
-//				    extras:{
-//				        mobile : mobile,
-//				       
-//				    }
-//				});
 			//这里要对手机号码进行格式校验
     		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
     			mui.toast("请输入正确的手机号");
@@ -192,6 +191,26 @@
 				}else{
 					$("#operateLogin").css({
 						"background-color":"#cccccc"
+					});
+				}
+				if(account=="" || account==null || account.length==0) {
+					$("#accountClear").css({
+						"display": "none"
+					});
+				}
+				if(codeInput=="" || codeInput==null || codeInput.length==0){
+					$("#passwordClear").css({
+					"display":"none"
+					});
+				};
+				if(account.length>0){
+					$("#accountClear").css({
+						"display":"block"
+					});
+				}
+				if(codeInput.length>0){
+					$("#passwordClear").css({
+						"display":"block"
 					});
 				}
 			}

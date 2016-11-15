@@ -152,8 +152,8 @@
 				<div class="top"></div><div class="bottom"></div>
 				<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 				<div id="littleDiv"></div>
-				<div id="list_type" style="margin: 0px; padding: 0px;">
-					<ul style="list-style-type: none;margin: 0px;padding: 0px;">
+				<div id="list_type" >
+					<ul>
 						<li value="1">1分</li>
 						<li value="5">5分</li>
 						<li value="15">15分</li>
@@ -164,8 +164,8 @@
 			</div>
 			<script>
 				mui.plusReady(function(){
-					loadCss();
-					var Proportion=1;
+				loadCss();
+				var Proportion=1;
     			function loadCss(){
 		    			var Proportion=1;
 						var screen=plus.screen.resolutionHeight;
@@ -185,7 +185,6 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
-					bindGuidance();
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;

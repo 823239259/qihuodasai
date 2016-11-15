@@ -228,7 +228,8 @@
 					"images/login.png",
 					"images/close.png",
 					"images/LOGO.png",
-					"images/resigter.png"
+					"images/resigter.png",
+					"css/quotation.css"
 				],
 				"refer": [
 					"home.html",
@@ -383,7 +384,8 @@
 					"images/close.png",
 					"images/login.png",
 					"js/jquery-1.11.3.js",
-					"images/LOGO.png"
+					"images/LOGO.png",
+					"css/quotation.css"
 				],
 				"refer": [
 					"tzdr/login/confirmPassword.html",
@@ -1385,7 +1387,8 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/quotation.css"
 				],
 				"refer": [
 					"tzdr/login/login.html",
@@ -1401,7 +1404,8 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/quotation.css"
 				],
 				"refer": [
 					"tzdr/login/retrievePasswordComfirm.html"

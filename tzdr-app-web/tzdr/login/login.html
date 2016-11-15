@@ -18,6 +18,13 @@
     .mui-content{
    	 	background-color: rgba(0,0,0,0);
    	 }
+   	  .mui-bar{
+   	 	background-color: rgba(0,0,0,0);
+   	 	border-bottom: none;
+   	 }
+   	 .commStyle{
+   	 	border-bottom: 1px solid #999999;
+   	 }
 		</style>
 	<script>
 	var win= null;
@@ -131,6 +138,26 @@
 				}else{
 					$("#operateLogin").css({
 						"background-color":"#cccccc"
+					});
+				}
+				if(account=="" || account==null || account.length==0) {
+					$("#accountClear").css({
+						"display": "none"
+					});
+				}
+				if(password=="" || password==null || password.length==0){
+					$("#passwordClear").css({
+					"display":"none"
+					});
+				};
+				if(account.length>0){
+					$("#accountClear").css({
+						"display":"block"
+					});
+				}
+				if(password.length>0){
+					$("#passwordClear").css({
+						"display":"block"
 					});
 				}
 			}
