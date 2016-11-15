@@ -407,6 +407,11 @@ mui.plusReady(function(){
 			$("#timeChartMenu").css({
 				"color":"#FFFFFF",
 			})
+		});
+		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
+			$("#list_type ").css({
+				"display":"none"
+			})
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
     		$("#TimeChart1").css("opacity","0");
