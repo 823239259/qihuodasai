@@ -171,7 +171,6 @@
 					bindGuidance();
 				}
 				function bindGuidance(){
-					var Proportion=1;
 					var height=window.innerHeight;
 						$(".top").css({
 							"height":height+"px",
@@ -210,19 +209,20 @@
 									"background-image": "url(../../images/quotation0.png)",
 								});
 								$("#closeDiv").css({
-									"left":Proportion*10+"px",
+									"left":10+"px",
 								});
 							}else if(clickNum==1){
 								$(".top").css({
-									"height":height/2-47+"px",
+									"height":239+"px",
 									"background-color":"rgba(0,0,0,0.8)",
 									"background-image":"none",
 								});
+								
 								$(".bottom").css({
 									"display":"block",
 									"bottom":"0px",
 									"left":"0px",
-									"height":height/2+3+"px",
+									"height":height-239-50+"px",
 									"background-image": "url(../../images/quotation4.png)",
 								})
 							}else{
