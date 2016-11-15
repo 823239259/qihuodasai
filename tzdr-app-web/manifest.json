@@ -709,7 +709,8 @@
 					"tzdr/commonback.html"
 				],
 				"refer": [
-					"tzdr/future/list.html"
+					"tzdr/future/list.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
