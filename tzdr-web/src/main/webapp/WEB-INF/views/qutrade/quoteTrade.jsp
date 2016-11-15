@@ -160,7 +160,7 @@
 	</div>
 	<div class="" id="signLogin" style="display:none;">
 		<p class="p1">
-			<span class="signLogin_span on" data-tion = "0">实盘登陆</span>
+			<span class="signLogin_span on" data-tion = "0">实盘登录</span>
 			<span class="signLogin_span" data-tion = "1">模拟盘登录</span>
 			<i>|</i>
 			<a class="signLogin_close" href="javascript:void(0);">✖</a>
