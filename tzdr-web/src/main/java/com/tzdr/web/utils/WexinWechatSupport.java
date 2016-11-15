@@ -130,4 +130,28 @@ public class WexinWechatSupport extends WechatSupport{
 		
 	}
 
+	@Override
+	protected void onShortVideo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void kfCreateSession() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void kfCloseSession() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void kfSwitchSession() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
