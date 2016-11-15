@@ -91,7 +91,7 @@
 		                    	<c:if test="${!empty fSimpleConfigList}">
 		                    		<li class="on">
 			                        	<input type="hidden" class="defaultVal" value="${fSimpleConfigList[0].traderBond}" />
-			                            <p><i><fmt:formatNumber value="${fSimpleConfigList[0].traderBond/fSimpleConfigList[0].tranLever}" pattern="#,###"></fmt:formatNumber></i>元</p>
+			                            <p>￥<i><fmt:formatNumber value="${fSimpleConfigList[0].traderBond/fSimpleConfigList[0].tranLever}" pattern="#,###"></fmt:formatNumber></i></p>
 			                            <span>操盘保证金额</span>
 			                        </li>
 		                    	</c:if>
@@ -110,9 +110,9 @@
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
 		                <span>
-		                	<i id="totalTraderBond_id">
+		                	￥<i id="totalTraderBond_id">
 	                			<fmt:formatNumber value="${fSimpleConfigList[0].traderBond}" pattern="#,###"></fmt:formatNumber>
-		                	</i>元
+		                	</i>
 		                </span>
 		            </div>
 					<div class="cp_sdfont">
@@ -156,9 +156,9 @@
 					<div class="cp_sdfont">
 						<label>交易手续费(¥)：</label> 
 						<span>
-							<i id="tranFees_id">
+							￥<i id="tranFees_id">
 	                			<fmt:formatNumber value="${fSimpleConfigList[0].tranFees}" pattern="#,###"></fmt:formatNumber>
-							</i>元/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费。
+							</i>/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费。
 						</span>
 					</div>
 				</div>

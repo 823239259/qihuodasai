@@ -107,7 +107,7 @@
 						</li>
 						<li>
 							<h3>交易手续费(￥)</h3>
-							<p><i><fmt:formatNumber type="number" maxFractionDigits="2" value="${inputTranFees}" pattern="#,###"></fmt:formatNumber></i>元/手</p>
+							<p>￥<i><fmt:formatNumber type="number" maxFractionDigits="2" value="${inputTranFees}" pattern="#,###"></fmt:formatNumber></i>/手</p>
 						</li>
 						<li>
 							<h3>账户管理费(￥)</h3>
@@ -135,7 +135,7 @@
 						<ul class="cp_paylist cp_paymoneylist">
 							<li>
 								<h3>操盘保证金(￥)</h3>
-								<p><i>${traderBond}</i>元</p>
+								<p>￥<i>${traderBond}</i></p>
 							</li>
 							<li>
 								<h3>账户管理费(￥)</h3>
@@ -146,7 +146,7 @@
 						<ul class="cp_paylist cp_paymoneyinfo">
 							<li>
 								<h3>应付金额(￥)</h3>
-								<p><i>￥${payable}</i>元</p>
+								<p>￥<i>￥${payable}</i></p>
 							</li>
 						</ul>
 					</div>

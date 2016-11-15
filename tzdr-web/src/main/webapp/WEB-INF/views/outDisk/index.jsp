@@ -39,10 +39,10 @@
             <c:forEach items="${outDiskParameters}" var="outDiskParameters" varStatus="status">
               		<c:choose>
               			<c:when test="${status.first==true}">
-              				<li class="on" data='${outDiskParameters.traderBond}'><fmt:formatNumber value="${outDiskParameters.traderBond}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元</li>
+              				<li class="on" data='${outDiskParameters.traderBond}'>￥<fmt:formatNumber value="${outDiskParameters.traderBond}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber></li>
                 		</c:when>
                 			<c:otherwise>
-                			<li class data='${outDiskParameters.traderBond}'><fmt:formatNumber value="${outDiskParameters.traderBond}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元</li>
+                			<li class data='${outDiskParameters.traderBond}'>￥<fmt:formatNumber value="${outDiskParameters.traderBond}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber></li>
                			</c:otherwise>
                		</c:choose>
             </c:forEach>
@@ -51,7 +51,7 @@
             <ul class="cpx_m_rule">
                 <li>
                     <h3>操盘保证金(￥)</h3>
-                    <span><i id='traderBond'><fmt:formatNumber value="${outDiskParameters[0].traderBond}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber></i>元</span>
+                    <span>￥<i id='traderBond'><fmt:formatNumber value="${outDiskParameters[0].traderBond}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber></i></span>
                 </li>
                 <li>
                     <h3>总操盘资金($)</h3>
@@ -86,28 +86,28 @@
                     <td>${outDiskPrice[0].mainContract}</td>
                     <td>${outDiskPrice[0].tradTime}</td>
                     <td>只交易富时A50时，初始最大可持仓<i id='ATranActualLever'>${outDiskParameters[0].atranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[0].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[0].price}</i>/手</td>
                 </tr>
                 <tr>
                     <td>恒指期货</td>
                     <td>${outDiskPrice[2].mainContract}</td>
                     <td>${outDiskPrice[2].tradTime}</td>
                     <td>只交易恒指期货时，初始最大可持仓<i id='HTranActualLever'>${outDiskParameters[0].htranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[2].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[2].price}</i>/手</td>
                 </tr>
                 <tr>
                     <td>国际原油</td>
                     <td>${outDiskPrice[1].mainContract}</td>
                     <td>${outDiskPrice[1].tradTime}</td>
                     <td>只交易国际原油时，初始最大可持仓<i id='YTranActualLever'>${outDiskParameters[0].ytranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[1].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[1].price}</i>/手</td>
                 </tr>
                 <tr>
                     <td>迷你道琼</td>
                     <td>${outDiskPrice[3].mainContract}</td>
                     <td>${outDiskPrice[3].tradTime}</td>
                     <td>只交易迷你道琼时，初始最大可持仓<i id='mdtranActualLever'>${outDiskParameters[0].mdtranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[3].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[3].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -115,7 +115,7 @@
                     <td>${outDiskPrice[4].mainContract}</td>
                     <td>${outDiskPrice[4].tradTime}</td>
                     <td>只交易迷你纳斯达克时，初始最大可持仓<i id='mntranActualLever'>${outDiskParameters[0].mntranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[4].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[4].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -123,7 +123,7 @@
                     <td>${outDiskPrice[5].mainContract}</td>
                     <td>${outDiskPrice[5].tradTime}</td>
                     <td>只交易迷你标准普尔时，初始最大可持仓<i id='mbtranActualLever'>${outDiskParameters[0].mbtranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[5].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[5].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -131,7 +131,7 @@
                     <td>${outDiskPrice[6].mainContract}</td>
                     <td>${outDiskPrice[6].tradTime}</td>
                     <td>只交易德国DAX时，初始最大可持仓<i id='daxtranActualLever'>${outDiskParameters[0].daxtranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[6].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[6].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -139,7 +139,7 @@
                     <td>${outDiskPrice[7].mainContract}</td>
                     <td>${outDiskPrice[7].tradTime}</td>
                     <td>只交易日经225时，初始最大可持仓<i id='nikkeiTranActualLever'>${outDiskParameters[0].nikkeiTranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[7].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[7].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -147,7 +147,7 @@
                     <td>${outDiskPrice[8].mainContract}</td>
                     <td>${outDiskPrice[8].tradTime}</td>
                     <td>只交易小恒指时，初始最大可持仓<i id='hstranActualLever'>${outDiskParameters[0].hstranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[8].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[8].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -155,7 +155,7 @@
                     <td>${outDiskPrice[9].mainContract}</td>
                     <td>${outDiskPrice[9].tradTime}</td>
                     <td>只交易美黄金时，初始最大可持仓<i id='agtranActualLever'>${outDiskParameters[0].agtranActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[9].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[9].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -163,7 +163,7 @@
                     <td>${outDiskPrice[10].mainContract}</td>
                     <td>${outDiskPrice[10].tradTime}</td>
                     <td>只交易H股指数时，初始最大可持仓<i id='hIndexActualLever'>${outDiskParameters[0].hIndexActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[10].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[10].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -171,7 +171,7 @@
                     <td>${outDiskPrice[11].mainContract}</td>
                     <td>${outDiskPrice[11].tradTime}</td>
                     <td>只交易小H股指数时，初始最大可持仓<i id='xhIndexActualLever'>${outDiskParameters[0].xhIndexActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[11].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[11].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -179,7 +179,7 @@
                     <td>${outDiskPrice[12].mainContract}</td>
                     <td>${outDiskPrice[12].tradTime}</td>
                     <td>只交易美铜时，初始最大可持仓<i id='aCopperActualLever'>${outDiskParameters[0].aCopperActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[12].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[12].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -187,7 +187,7 @@
                     <td>${outDiskPrice[13].mainContract}</td>
                     <td>${outDiskPrice[13].tradTime}</td>
                     <td>只交美白银时，初始最大可持仓<i id='aSilverActualLever'>${outDiskParameters[0].aSilverActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[13].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[13].price}</i>/手</td>
                 </tr>
                 
                 <tr>
@@ -195,7 +195,7 @@
                     <td>${outDiskPrice[14].mainContract}</td>
                     <td>${outDiskPrice[14].tradTime}</td>
                     <td>只交小原油时，初始最大可持仓<i id='smaActualLever'>${outDiskParameters[0].smaActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[14].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[14].price}</i>/手</td>
                 </tr>
                 
                  <tr>
@@ -203,7 +203,7 @@
                     <td>${outDiskPrice[15].mainContract}</td>
                     <td>${outDiskPrice[15].tradTime}</td>
                     <td>只交迷你德国DAX指数时，初始最大可持仓<i id='daxtranMinActualLever'>${outDiskParameters[0].daxtranMinActualLever}</i>手</td>
-                    <td><i>${outDiskPrice[15].price}</i>元/手</td>
+                    <td>￥<i>${outDiskPrice[15].price}</i>/手</td>
                 </tr>
                 
                 <tr>

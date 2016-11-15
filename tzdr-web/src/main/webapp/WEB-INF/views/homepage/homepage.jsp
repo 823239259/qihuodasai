@@ -237,7 +237,7 @@
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【恒指期货】</h3>
-                <h4><i>${showmap.hsi[0].valueData }</i>元/单边</h4>
+                <h4>￥<i>${showmap.hsi[0].valueData }</i>/单边</h4>
                 <ul>
                     <li>• 监管严格，市场成熟</li>
                     <li>• 履约保证，更安全透明</li>
@@ -252,7 +252,7 @@
             </div>
             <div class="w-guopjiqihuo">
                 <h3>【国际原油】</h3>
-                <h4><i>${showmap.fco[0].valueData }</i>元/单边</h4>
+                <h4>￥<i>${showmap.fco[0].valueData }</i>/单边</h4>
                 <ul>
                     <li>• 轻原油，更优质</li>
                     <li>• 国际市场，更透明</li>
@@ -267,7 +267,7 @@
             </div>
             <div class="w-guopjiqihuo" style="border-right: 10px solid #292929;">
                 <h3>【富时A50】</h3>
-                <h4><i>${showmap.ffa50[0].valueData }</i>元/单边</h4>
+                <h4>￥<i>${showmap.ffa50[0].valueData }</i>/单边</h4>
                 <ul>
                     <li>• A股大盘，趋势投资</li>
                     <li>• 超低门槛，短线灵活</li>
