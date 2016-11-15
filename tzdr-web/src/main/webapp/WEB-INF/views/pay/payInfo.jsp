@@ -143,7 +143,7 @@
 							<a href="javascript:void(0)" class="pay_confirm">确认充值</a>
 						</div>
 					</div>
-					<div class="uc_olpromt" style="width: 746px; height: 190px;margin: 0 30px;margin-top: 40px;">
+					<div class="uc_olpromt" style="width: 746px; height: 230px; margin: 0 30px;margin-top: 40px;">
 						<div class="uc_b_promt"><i>注意事项</i></div>
 						<p class="uc_b_promtfont">转账成功后，请务必在上方填写 <i>转账银行</i>、<i>转账金额</i>、<i>转账流水号</i>，以便我们及时帮您处理</p>
 						<div class="uc_banktime">
