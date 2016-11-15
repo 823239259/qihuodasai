@@ -400,10 +400,22 @@ mui.plusReady(function(){
 		$("#selectButon").click(function(){
 			$("#list_type ").css({
 				"display":"block"
+			});
+			$("#selectButon").css({
+				"color":"#fcc900",
+			});
+			$("#timeChartMenu").css({
+				"color":"#FFFFFF",
 			})
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
     		$("#TimeChart1").css("opacity","0");
+    		$("#selectButon").css({
+				"color":"#FFFFFF",
+			});
+			$("#timeChartMenu").css({
+				"color":"#fcc900",
+			});
     		 time=[];
 		    prices=[];
 		    timeLabel=[]
@@ -445,7 +457,12 @@ mui.plusReady(function(){
 				$("#trade").removeClass("displayStyle").addClass("mui-active");
     			$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
 			}
-    		
+    		$("#selectButon").css({
+				"color":"#FFFFFF",
+			});
+			$("#timeChartMenu").css({
+				"color":"#FFFFFF",
+			})
     	})
 	document.getElementById("backClose").addEventListener("tap",function(){
 		var re = plus.webview.getWebviewById("quotationMain");

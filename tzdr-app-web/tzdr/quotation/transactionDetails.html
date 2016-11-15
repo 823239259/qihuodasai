@@ -34,7 +34,7 @@
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 		    <a class="whiteFont" id="switchAccount">切换账号</a>
 		</header>
-		<div class="mui-content" style="padding-top: 86px;" >
+		<div class="mui-content" style="padding-top: 86px;opacity: 0;" >
 				<div id="headerMenu" style="background-color: #2B2B2B;">
 					<button id="tradeMenu">交易中心</button>
 					<button id="timeChartMenu" value="0">分时</button>
@@ -128,8 +128,8 @@
 					        </div>
 					        <div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
 					        <div class="buyBtn">
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p>买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p id"switchSell" >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
 					        </div>
 					    </form>
 					    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -298,6 +298,10 @@
 								"width":"100%",
 								"height":110*screen/568+"px",
 							});
+							
+							$(".mui-content").css({
+								"opacity":"1"
+							});
 					}
 					/*
 					 增加新手引导的样式
@@ -306,6 +310,7 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+					
 //					bindGuidance();
 					function bindGuidance(){
 					var Proportion=1;
@@ -378,8 +383,12 @@
 								$("#closeDiv").css({
 									"left":Proportion*310+"px",
 								});
+								var s=Proportion*55;
+								if(width==414){
+									s=Proportion*75;
+								}
 								$(".bottom").css({
-									"bottom":Proportion*53+"px",
+									"bottom":s+"px",
 									"left":"0px",
 									"height":height-Proportion*50+"px",
 									"background-image": "url(../../images/tradeGudice4.png)",
@@ -454,6 +463,12 @@
 					}
 					i++; 
 				});
+				if(localStorage.getItem("isMock")==1){
+					$("#marketBuy").text("模拟买入");
+					$("#switchBuy").text("模拟买");
+					$("#marketSell ").text("模拟卖出");
+					$("#switchSell").text("模拟卖");
+				}
 			});
 		</script>
 		<script>

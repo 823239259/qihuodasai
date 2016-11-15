@@ -40,7 +40,7 @@
 		<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
 		<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
 	</header>
-	<div class="mui-content" class="operateLogin">
+	<div class="mui-content" class="operateLogin" style="opacity: 0;">
 		<!--<div id="posiitionCover"></div>-->
 		<div id="inputList">
 			<div id="accountType" class="commStyle">
@@ -53,12 +53,12 @@
 			</div>
 			<div class="commStyle">
 				<label>登录账号：</label>
-				<input type="text"  placeholder="请输入您的账号" id='account'/>
+				<input type="text"  placeholder="请输入您的账号" id='account' oninput="checkValue()"/>
 				<img src="../../images/close.png" id="accountClear">
 			</div>
 			<div class="commStyle">
 				<label>登录密码：</label>
-				<input type="password"  placeholder="请输入您的密码" id="password"/>
+				<input type="password"  placeholder="请输入您的密码" id="password" oninput="checkValue()"/>
 				<img src="../../images/close.png" id="passwordClear">
 			</div>
 			<div class="mui-content-padded" style="margin-top: 20px;">
@@ -73,7 +73,6 @@
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
 		<script type="text/javascript">
-		
 		    initTradeConfig();
 			mui.init();
 			mui.plusReady(function(){
@@ -143,7 +142,7 @@
 					$("#checkBox i").css({
 						"width":Proportion*14+"px",
 						"height":Proportion*14+"px",
-						"margin":Proportion*1.2+"px",
+						"margin":Proportion*1.15+"px",
 					});
 					$("#closeTrade").css({
 						"width":Proportion*17+"px",
@@ -153,7 +152,10 @@
 					});
 					$("#closeDiv").css({
 						"display":"none",
-					})
+					});
+					$(".mui-content").css({
+								"opacity":"1"
+					});
 				}
 				/*加载新手指南*/
 				if(plus.storage.getItem("QuotationGuidanceLogin")==null){
@@ -193,20 +195,17 @@
 						var clickNum=0;
 						$(".top").click(function(){
 							if(clickNum==0){
-								var x=30*Proportion;
 								var y=25*Proportion;
 								if(width==320){
-									 x=0;
-									y=45;
+									y=25;
 								}else if(width==375){
-									 x=40;
+//									 x=40;
 									y=10;
 								}else if(width==414){
-									 x=45;
-									y=5;
+									y=15;
 								}
 								$(".top").css({
-									"height":(screen/2-x)+"px",
+									"height":$(".commStyle").height()*3+20+46+80*Proportion+y+"px",
 									"background-color":"rgba(0,0,0,0.8)",
 									"background-image":"none",
 									"top":"0px"
@@ -256,9 +255,11 @@
 				 */
 				$("#accountClear").click(function(){
 					$("#account").val("");
+					checkValue()
 				});
 				$("#passwordClear").click(function(){
 					$("#password").val("");
+					checkValue()
 				})
 				/*
 				 * 选择账号
@@ -308,6 +309,11 @@
 					$("#userAcount").show();
 				}   
 				$("#account").val(accountEnd);
+				if($("#account").val()!="" || $("#account").val()!=null){
+					$("#operateLogin").css({
+						"background-color":"#fcc900"
+					});
+				}
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
 				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null){
 					$(".accountSelect").val(tradeWebSocketIsMock);
@@ -441,7 +447,20 @@
 					})
 				});
 			});
-			
+			/*按钮变色*/
+			function checkValue(){
+				var account=$("#account").val();
+				var password=$("#password").val();
+				if(password.length>0 && password.length>0){
+					$("#operateLogin").css({
+						"background-color":"#fcc900"
+					});
+				}else{
+					$("#operateLogin").css({
+						"background-color":"#cccccc"
+					});
+				}
+			}
 		</script>
 	</body>
 

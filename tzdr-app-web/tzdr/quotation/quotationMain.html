@@ -197,11 +197,13 @@
 					plus.storage.setItem("QuotationGuidance","1");
 					bindGuidance();
 				}
+//				bindGuidance();
+				
 				function bindGuidance(){
 					loadCss();
 					var Proportion=1;
 					var height=window.innerHeight;
-					var screen=plus.screen.resolutionHeight;
+//					var screen=plus.screen.resolutionHeight;
 						$(".top").css({
 							"height":height+"px",
 							"background-image": "url(../../images/quotation.png)",
@@ -253,8 +255,15 @@
 									"left":Proportion*10+"px",
 								});
 							}else if(clickNum==1){
+								var s=$(".openPage").height();
+									var bottom=height-50*5-46-40-10;
+									if(width==375){
+										bottom=bottom+16;
+									}else if(width==414){
+										bottom=bottom+45;
+									}
 								$(".top").css({
-									"height":height/2-45+"px",
+									"height":bottom+"px",
 									"background-color":"rgba(0,0,0,0.8)",
 									"background-image":"none",
 								});
@@ -264,7 +273,7 @@
 									"display":"block",
 									"bottom":"0px",
 									"left":"0px",
-									"height":height/2-5+"px",
+									"height":height-bottom-45+"px",
 									"background-image": "url(../../images/quotation4.png)",
 									"z-index":"991",
 								})
@@ -281,133 +290,7 @@
 							}
 							clickNum++;
 						})
-//					$("#closeTrade").click(function(){
-//						$("#guidance").css({
-//							"display":"none"
-//						});
-//						$(".top,.bottom").css({
-//			    			"display":"none",
-//			    		});
-//			    		numL++;
-//			    		
-//					});
-//					$("#closeTrade1").click(function(){
-//						console.log("54");
-//						$(".top,.bottom").css({
-//							"display":"none"
-//						});
-//					});
-//					var num=0;
-//					$("#guidance").click(function(){
-//						$("#guidance").css({
-//							"background-image": "url(../../images/quotation"+num+".png)",
-//						});
-//						if(num==0){
-//							$("#closeTrade").css({
-//								"left":Proportion*10+"px",
-//							})
-//						}else if(num==1){
-//							if(numL==1){
-//								
-//							}else{
-//							$(".top").css({
-//									"width":"100%",
-//									"display":"block",
-//									"height":height*0.5-40+"px",
-//									"background-color":"rgba(0,0,0,0.8)",
-//									"z-index":"999",
-//									"top":"0px"
-//								});
-//								$("#guidance").css({
-//									"display":"none"
-//								});
-//								$(".bottom").css({
-//									"width":"100%",
-//									"display":"block",
-//									"height":height*0.5+"px",
-//									"background-image": "url(../../images/quotation4.png)",
-//									"background-size":"cover",
-//									"z-index":"999",
-//									"bottom":"0px"
-//								});
-//								if(width==320){
-//										$(".top").css({
-//										"width":"100%",
-//										"display":"block",
-//										"height":height*0.435+"px",
-//										"background-color":"rgba(0,0,0,0.8)",
-//										"z-index":"999",
-//											"top":"0px"
-//										});
-//										$("#guidance").css({
-//											"display":"none"
-//										});
-//										$(".bottom").css({
-//											"width":"100%",
-//											"display":"block",
-//											"height":height*0.475+"px",
-//											"background-image": "url(../../images/quotation4.png)",
-//											"background-size":"cover",
-//											"z-index":"999",
-//											"bottom":"0px"
-//										});
-//								}else if(width==375){
-//										$(".top").css({
-//										"width":"100%",
-//										"display":"block",
-//										"height":height*0.43+"px",
-//										"background-color":"rgba(0,0,0,0.8)",
-//										"z-index":"999",
-//											"top":"0px"
-//										});
-//										$("#guidance").css({
-//											"display":"none"
-//										});
-//										$(".bottom").css({
-//											"width":"100%",
-//											"display":"block",
-//											"height":height*0.49+"px",
-//											"background-image": "url(../../images/quotation4.png)",
-//											"background-size":"cover",
-//											"z-index":"999",
-//											"bottom":"0px"
-//										});
-//								}else if(width==414){
-//									$(".top").css({
-//										"width":"100%",
-//										"display":"block",
-//										"height":height*0.455+"px",
-//										"background-color":"rgba(0,0,0,0.8)",
-//										"z-index":"999",
-//											"top":"0px"
-//										});
-//										$("#guidance").css({
-//											"display":"none"
-//										});
-//										$(".bottom").css({
-//											"width":"100%",
-//											"display":"block",
-//											"height":height*0.47+"px",
-//											"background-image": "url(../../images/quotation4.png)",
-//											"background-size":"cover",
-//											"z-index":"999",
-//											"bottom":"0px"
-//										});
-//								}
-//								return
-//							}
-//						}
-//						num++;
-//					});
-//					$(".bottom,.top").click(function(){
-//						$(".bottom,.top").css({
-//							"display":"none"
-//						})
-//					})
-				}
-				
-				
-				
+						}
 				//链接socket;
 				var dataUrl={
 	  				home:"../../home.html",
