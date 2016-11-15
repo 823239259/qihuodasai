@@ -21,7 +21,7 @@
 }
 .main_list .mui-table-view-cell { min-height: 92px;overflow: hidden;height: auto;position: relative; color:#999999;}
 .main_list .mui-table-view-cell img { width: 40px; height:40px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
-.main_list .mui-table-view-cell h2 {width: 90%;  text-align: left; font-size: 14px; margin-left: 50px; color: #FFCC33;font-weight: normal;}
+.main_list .mui-table-view-cell h2 {width: 90%;  text-align: left; font-size: 14px; margin-left: 50px; color: #333333;font-weight: normal;}
 .main_list .mui-table-view-cell p { color:#999999; line-height: 20px; margin-left: 50px; font-size: 12px;white-space: normal;color:#999999;}
 .main_list .mui-table-view-cell p i { color: #2b2b2b; font-style: normal; }
 .main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:50px;margin-top: 10px; border-top:1px solid #e6e6e6;}

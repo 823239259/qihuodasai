@@ -95,7 +95,9 @@
 						"width":Proportion*240+"px ",
 				})
 			}
-			
+			$(".mui-content").css({
+					"opacity":"1"
+				})
 			//初始化监听头部和底部事件
   			var paramUrl={
 				url:"../login/login.html"
@@ -256,7 +258,7 @@
 		<h1 id="nav-title" class="mui-title">富时A50</h1>
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
-<div class="mui-content ap_main">
+<div class="mui-content ap_main" style="opacity: 0;">
 	<h5 class="ap_choosetitle"><span>选择手数：</span><b>可持仓的最大手数</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9" id="trade_num"style="border-bottom: 1px solid #E4E4E4;">
 		
@@ -292,7 +294,7 @@
 		</li>			
 		<li class="mui-table-view-cell">
 			<div><label>交易时间：</label></div>
-			<div><span class="fontBlack">9:05-16:30,17:20-23:55</span><span class="grayFontDiv">（注意：请不要在交易时间外持单，以免被系统强制平仓）</span></div>
+			<div><span class="fontBlack">9:05-16:30,17:05-23:55</span><span class="grayFontDiv">（注意：请不要在交易时间外持单，以免被系统强制平仓）</span></div>
 		</li>
 	</ul>
 	<div id="buttomDiv">

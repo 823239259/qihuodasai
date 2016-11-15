@@ -95,7 +95,9 @@
 						"width":Proportion*240+"px ",
 				})
 			}
-			
+			$(".mui-content").css({
+					"opacity":"1"
+				})
 			//初始化监听头部和底部事件
   			var paramUrl={
 				url:"../login/login.html"
@@ -274,7 +276,7 @@
 			<span class="mui-tab-label" >账户</span>
 		</a>
 	</nav>-->
-<div class="mui-content ap_main">
+<div class="mui-content ap_main" style="opacity: 0;">
 	<h5 class="ap_choosetitle"><span>选择手数：</span><b>可持仓的最大手数</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9" id="trade_num" style="border-bottom: 1px solid #E4E4E4;">
 		

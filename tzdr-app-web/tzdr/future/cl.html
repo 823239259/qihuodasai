@@ -27,7 +27,6 @@
     			var Proportion=1;
 				var resolutionWidth=plus.screen.resolutionWidth;
 				Proportion=resolutionWidth/320;
-				console.log(Proportion);
 				$(".ap_choosetitle").css({
 					"height": Proportion*40+"px",
 					"line-height":Proportion*40+"px",
@@ -99,7 +98,13 @@
 				$(".sc_listscStyle div:nth-child(2)").css({
 						"width":Proportion*240+"px ",
 				})
-			}
+			};
+//			setTimeout(function(){
+//				
+//			},3000)
+				$(".mui-content").css({
+					"opacity":"1"
+				})
 			//初始化监听头部和底部事件
   			//获取国际原油数据
   			var paramUrl={
@@ -260,7 +265,7 @@
 		<h1 id="nav-title" class="mui-title">国际原油</h1>
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
-<div class="mui-content ap_main">
+<div class="mui-content ap_main" style="opacity: 0;">
 	<h5 class="ap_choosetitle"><span>选择手数：</span><b>可持仓的最大手数</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9" id="trade_num" style="border-bottom: 1px solid #E4E4E4;">
 		
