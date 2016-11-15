@@ -304,16 +304,21 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ap_main .ap_time label { vertical-align: middle; display: block; float: left;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
-.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF; padding-left: 5px;;}
+.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF; padding-left: 5px;height: 40px;line-height: 40px;font-size: 12px;}
 #tradeingVariety{ padding:0px 5px;color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;margin: 5px 0px 0px;line-height: 30px; height: 30px;}
 #tradeingVariety b{ font-weight: normal; font-size: 12px;color:#666666};
 #tradeingVariety span{vertical-align: middle; color:#2b2b2b}
-.ap_main .ap_choosetitle b { font-weight: normal; font-size: 12px; float: left;}
-.ap_main .ap_choosetitle span { vertical-align: middle; float: left; }
+.ap_main .ap_choosetitle b { font-weight: normal; font-size: 12px; float: left;line-height: 40px;height: 40px;}
+.ap_main .ap_choosetitle span { vertical-align: middle; float: left; line-height: 40px;height: 40px;}
 .ap_main .mui-grid-9 { background-color: #FFFFFF; border: none;}
 .ap_main .mui-grid-9 .mui-table-view-cell { text-align: center;border:1px solid #2b2b2b; background: #fff;color:#2b2b2b; width: 23%; margin: 0 1% 15px; border-radius: 5px;font-size:12px;padding:12px 5px;background-image: url(../images/gou.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;;}
 .ap_main .mui-grid-9 .on { color: #333333; border:1px solid #333333;background-color: #FFCC33;background-image: url(../images/gouOn.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;}
 .ap_main .sc_listsc li span { color: #2b2b2b ; }
+ .ap_main .mui-table-view-cell{padding: 8px 0px;font-size: 12px;;}
+  .ap_main .mui-table-view-cell div{
+  	float: left;
+  }
+ 
 .ap_main .sc_listsc li label { color: #666666 ; }
 .ap_main .sc_listsc li{border-bottom: 1px solid #f3f3f3;}
 .ap_main .sc_listsc li span i { font-style: normal;}
@@ -327,6 +332,10 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	border-bottom: 1px solid #E4E4E4;
 	border-top:1px solid #E4E4E4;
 	padding: 0px 5px;margin: 5px 0px 5px;
+	line-height: 40px;
+	font-size: 12px;;
+	height: 80px;
+	padding-bottom: 10px;
 }
 .AgreementList a{
 	color:#fcc900;
@@ -335,7 +344,24 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	border-bottom: 1px solid #f2f2f2;
 	margin: 0px;height: auto;
 	height: 40px;
-	/*line-height: 40px;*/
+	line-height: 40px;
+	font-size: 12px;;
+}
+.AgreementList  i{
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;;
+	padding-bottom: 10px;
+}
+.fontBlack{
+	color:#2B2B2B;
+	font-size: 12px;;
+}
+.grayFontDiv{
+	color:#999999;
+	font-size: 12px;
+	margin-left:10px; ;
 }
 .ap_main .acp_font table  tr{  padding:0px 10px;}
 .ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 12px;height: 30px;line-height: 30px;}
@@ -629,3 +655,13 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 			box-shadow:none;
 			border-bottom: 1px solid #454545;
 		}
+#buttomDiv{
+	line-height: 50px;;
+	height: 50px;
+}	
+#buttomDiv button{
+	line-height: 50px;;
+	height: 50px;
+}
+
+

@@ -23,28 +23,9 @@
     			var Proportion=1;
 				var resolutionWidth=plus.screen.resolutionWidth;
 				Proportion=resolutionWidth/320;
-				console.log(Proportion);
-				$(".ap_choosetitle").css({
-					"height": Proportion*40+"px",
-					"line-height":Proportion*40+"px",
-					"font-size": Proportion*12+"px",
-					"margin":"0px"
-				});
-				$(".ap_main .ap_choosetitle span").css({
-					"height": Proportion*40+"px",
-					"line-height":Proportion*40+"px",
-				});
-				$(".ap_main .ap_choosetitle b").css({
-					"height": Proportion*40+"px",
-					"line-height":Proportion*40+"px",
-				});
 				$(".sc_listsc").css({
 					"margin-top":Proportion*5+"px",
 					"padding":"0px "+Proportion*5+"px",
-				});
-				$(".mui-table-view-cell").css({
-					"padding":Proportion*8+"px 0px",
-					"font-size": Proportion*12+"px ",
 				});
 				$(".ap_main .acp_font table tr td").css({
 					"font-size": Proportion*10+"px",
@@ -55,36 +36,8 @@
 				$(".ap_main .acp_font table thead td ").css({
 					"font-size": Proportion*12+"px",
 				});
-				$(".AgreementList ").css({
-					"line-height":Proportion*40+"px",
-					"font-size": Proportion*12+"px",
-					"height":Proportion*80+"px",
-					"padding-buttom":"10px"
-				});
-				$(".AgreementList p").css({
-					"height":Proportion*40+"px",
-					"line-height":Proportion*40+"px",
-					"font-size": Proportion*12+"px ",
-				});
-				$(".AgreementList  i").css({
-					"display":"inline-block",
-					"line-height":Proportion*40+"px",
-					"font-size": Proportion*12+"px",
-					"padding-buttom":"10px"
-				});
-				$("#buttomDiv").css({
-					"line-height":Proportion*50+"px",
-					"height":Proportion*50+"px",
-				})
-				$("#buttomDiv button").css({
-					"line-height":Proportion*50+"px",
-					"height":Proportion*50+"px",
-				})
 				
     		}
-    		$(".mui-content").css({
-					"opacity":"1"
-				})
     		//初始化监听头部和底部事件
   		//	tzdr.init. ();
   			//获取综合操盘数据
@@ -409,7 +362,7 @@
 		<h1 class="mui-title">综合操盘</h1>		
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
-<div class="mui-content ap_main" style="opacity: 0;">
+<div class="mui-content ap_main" >
 	<h5 class="ap_choosetitle"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
 	<ul class="mui-table-view mui-grid-view mui-grid-9 borderClass" id="bond_num" style="border-bottom: 1px solid #E4E4E4;">
 		
