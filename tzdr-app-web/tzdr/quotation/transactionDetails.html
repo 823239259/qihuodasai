@@ -128,8 +128,8 @@
 					        </div>
 					        <div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
 					        <div class="buyBtn">
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买</p><p id = "buyBtn_P" class = "buyBtnPrices">0.00</p></button>
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p id"switchSell" >卖</p><p id = "sellBtn_P" class = "buyBtnPrices">0.00</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买入</p><p id = "buyBtn_P" class = "buyBtnPrices">市价</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p id"switchSell" >卖出</p><p id = "sellBtn_P" class = "buyBtnPrices">市价</p></button>
 					        </div>
 					    </form>
 					    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
@@ -310,7 +310,6 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
-					bindGuidance();
 					function bindGuidance(){
 					var Proportion=1;
 					var height=window.innerHeight;
@@ -465,9 +464,9 @@
 				});
 				if(localStorage.getItem("isMock")==1){
 					$("#marketBuy").text("模拟买入");
-					$("#switchBuy").text("模拟买");
+					$("#switchBuy").text("模拟买入");
 					$("#marketSell ").text("模拟卖出");
-					$("#switchSell").text("模拟卖");
+					$("#switchSell").text("模拟卖出");
 				}
 			});
 		</script>

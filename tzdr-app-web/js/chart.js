@@ -186,10 +186,10 @@ mui.plusReady(function(){
 		var newCommdityNo = param.CommodityNo;
 		var newContractNo = param.ContractNo;
 		var comm = marketCommdity[newCommdityNo+newContractNo];
-		if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
+		/*if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
 			$("#buyBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,0)).toFixed(doSize));
 			$("#sellBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,1)).toFixed(doSize));
-		}
+		}*/
 	}
     /**
 	 * 更新浮动盈亏 
