@@ -46,9 +46,4 @@ public class WallstreetcnStartupListener implements ApplicationListener<ContextR
 			
         }
 	}
-	public static void main(String[] args) {
-		String s = "jQuery21304571285746704439_1478166257312(1245)";
-		s.startsWith("jQuery");
-		s =  s.substring(s.indexOf("(")+1, s.length() - 1);
-	}
 }
