@@ -474,7 +474,7 @@ function appendDesignates(param){
    var orderId = param.OrderID;
    var triggerPrice = param.TriggerPrice;
    var cls = "des-index"+designateIndex;
-   var html = '<ul class="tab_content '+cls+'" data-order-des = "'+orderId+' tab_des"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
+   var html = '<ul class="tab_content '+cls+' tab_des" data-order-des = "'+orderId+'"   data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
 				'	<li class = "des1">'+contractCode+'</li>'+
 				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -1103,7 +1103,7 @@ function updateFundsDetailsIndex(){
 function delPositionDom(contractCode){
 	$(function(){
 		$("ul[data-tion-position='"+contractCode+"']").remove();
-		if($(".tab_position").html() == undefined){
+		if($(".tab_position").length == 0){
 			$(".hold_NoRecord").css("display","block");
 		}
 	});
@@ -1114,7 +1114,7 @@ function delPositionDom(contractCode){
  */
 function delDesignatesDom(orderId){
 	$("ul[data-order-des='"+orderId+"']").remove();
-	if($(".tab_des").html() == undefined){
+	if($(".tab_des").length == 0){
 		$(".des_NoRecord").css("display","block");
 	}
 }
