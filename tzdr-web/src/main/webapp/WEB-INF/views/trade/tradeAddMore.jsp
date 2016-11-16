@@ -31,7 +31,7 @@ function tradeContract(){
 <body>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 
 <div class="capital">
 	<form method="POST" id="sub"   action="${ctx}/trade/moretrade/${groupId}">
@@ -222,7 +222,7 @@ function tradeContract(){
     </form>
  </div>
 
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

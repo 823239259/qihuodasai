@@ -135,7 +135,7 @@ function setNeedMoney(){
 </div>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	<!-- 最大操盘配额限制弹框 -->
     <div class="fl_mnpromt" style="display: none;">
 	        <p><span>为保障更多用户获得操盘，每位用户每天只能新增<i>${limitTradeNum}</i>个操盘方案</span><br>本时段最大操盘配额限<i>500,000</i>元</p>
@@ -255,7 +255,7 @@ function setNeedMoney(){
 <script type="text/javascript">
 	
 </script>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

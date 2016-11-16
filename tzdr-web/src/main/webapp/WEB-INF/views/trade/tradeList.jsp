@@ -28,7 +28,7 @@
 <body>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	<div class="uc">
 		<!--个人中心导航 -->
 		<%@ include file="../common/leftnav.jsp"%>
@@ -108,7 +108,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

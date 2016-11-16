@@ -26,7 +26,7 @@
 <body>
 
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	
 <!-- 浮动框 -->
 <div class="floatlayer">
@@ -620,7 +620,7 @@
 </div>
 
 
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

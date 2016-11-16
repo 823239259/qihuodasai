@@ -35,7 +35,7 @@ $(document).ready(function() {
 </head>
 <body>
 <!-- 顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 <div class="map_link">
     <a href="http://www.vs.com/" target="_blank">首页</a>
     <i>></i>
@@ -107,7 +107,7 @@ $(document).ready(function() {
 </div>
 
 
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 

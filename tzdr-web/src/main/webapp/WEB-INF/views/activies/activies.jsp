@@ -50,7 +50,7 @@ function toQuestion(){
 </script>
 </head>
 <body>
-<%@ include file="../common/personheader.jsp"%>
+ 
 <div class="main">
     <div class="banner1"></div>
     <div class="banner2"></div>
@@ -323,7 +323,7 @@ function toQuestion(){
 
 
 <!-- 公司简介 -->
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

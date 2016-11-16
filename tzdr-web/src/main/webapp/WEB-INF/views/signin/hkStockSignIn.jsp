@@ -20,7 +20,7 @@
 	</script>
 </head>
 <body>
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 <input type="hidden" id="backData" value="${backData}"/>
 <input type="hidden" id="source" value="${source}"/>
 

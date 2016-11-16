@@ -65,7 +65,7 @@ function setNeedMoney(){
 <body>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 
 	<div class="capital">
 	
@@ -161,7 +161,7 @@ function setNeedMoney(){
 <script type="text/javascript">
 	
 </script>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

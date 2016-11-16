@@ -21,7 +21,6 @@
 	
 </head>
 <body>
-<%@ include file="../common/homeheader.jsp"%>
 <div class="question">
     <div class="qbanner1"></div>
     <div class="qbanner2"></div>
@@ -39,7 +38,7 @@
 
 
 <!-- 公司简介 -->
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

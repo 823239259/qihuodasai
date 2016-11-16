@@ -40,7 +40,6 @@ $(document).ready(function(){
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
 	<div class="step">
 	  <div class="step_line"></div>
 	  <ul>
@@ -70,7 +69,6 @@ $(document).ready(function(){
 			</div>		
 		</div>
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
 	<%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){

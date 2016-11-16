@@ -8,7 +8,7 @@
 </head>
 <body>
 <!--顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 
 <div class="tp_main"><img src="${ctx}/static/images/anniversary/pic_01.jpg" ></div>
 <div class="tp_main"><img src="${ctx}/static/images/anniversary/pic_02.jpg"></div>

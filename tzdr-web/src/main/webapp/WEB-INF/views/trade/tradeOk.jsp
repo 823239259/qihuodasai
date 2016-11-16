@@ -20,7 +20,7 @@
 <body>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 
 	<div class="capital">
 	
@@ -102,7 +102,7 @@
 		</c:if>
 	</div>
 </div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

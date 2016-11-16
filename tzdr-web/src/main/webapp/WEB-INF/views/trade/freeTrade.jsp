@@ -13,7 +13,7 @@
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	
 	<!-- 免息操盘 -->
 	<form method="POST" id="bespokeTradeForm" name="bespokeTradeForm" action="${ctx}/toBespokeTrade">
@@ -148,6 +148,6 @@
 			</div>
 		 </c:forEach>
 	</form>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 </body>
 </html>

@@ -23,7 +23,7 @@
 <body>
 
 <!--顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 <!-- 浮动框 -->
 <div class="floatlayer">
 	
@@ -294,7 +294,7 @@
    <form id="showContract" name="showContract" action="" method="post" target="_blank"/>
 </div>
 
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

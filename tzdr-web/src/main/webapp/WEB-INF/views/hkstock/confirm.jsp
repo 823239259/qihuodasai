@@ -84,7 +84,7 @@ $(document).ready(function() {
 			onclick="javascript:closeDiv('idcardDiv')">取&nbsp;消</a>
 	</div>
 </div>
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 <div class="capital">
 
 <!--隐藏域-->
@@ -165,7 +165,7 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 </body>
 </html>
 

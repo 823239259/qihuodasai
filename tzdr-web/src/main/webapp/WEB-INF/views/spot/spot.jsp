@@ -67,7 +67,7 @@ ul,li,ol,em,i { list-style: none; font-style: normal;}
 </style>
 </head>
 <body>
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 <div class="sp_banner">
 	<img src="${ctx }/static/images/spot/banner.jpg" alt="低门槛,高回报,原油,黑色金子">
 	<c:choose>
@@ -283,7 +283,7 @@ ul,li,ol,em,i { list-style: none; font-style: normal;}
 		</li>
 	</ul>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <!-- <span style="display:none"><script src='http://w.cnzz.com/q_stat.php?id=1256807294&l=3' language='JavaScript'></script></span> -->
 <span style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1259839078&web_id=1259839078" language="JavaScript"></script></span>
 <script type="text/javascript" src="${ctx }/static/script/spot/spot-booking.js"></script>

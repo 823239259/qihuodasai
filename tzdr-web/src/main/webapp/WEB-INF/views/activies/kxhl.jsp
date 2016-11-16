@@ -12,7 +12,7 @@
 </head>
 <body>
 <!--顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 <input type="hidden" id="activityTimeStart" value="${activityTimeStart}">
 <input type="hidden" id="activityTimeEnd" value="${activityTimeEnd}">
 <div class="tp_main"><img src="${ctx}/static/images/kxhl/pic_01.jpg" alt="新年high翻天" ></div>
