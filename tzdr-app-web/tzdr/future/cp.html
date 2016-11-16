@@ -82,10 +82,9 @@
   							}
   						});
   						this.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 on");
-  						var bonds_num=parseFloat(tzdr.moneyUtils.reverseMoney(this.innerHTML));  
+  						var bonds_num=parseFloat(tzdr.moneyUtils.reverseMoney(tzdr.moneyUtils.removeY(this.innerHTML)));  
   						//切换详细数据
   						mui.each(paramListAll,function(i,item){ 
-  							
   							if(!mui.isnull(bonds_num)&&bonds_num==item.traderBond){
   								
   								init_params=item;
@@ -134,8 +133,7 @@
     	
     	
     	function setParams(ParamsList){
-    		
-			document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
+			document.getElementById("traderBond").innerHTML="¥"+tzdr.moneyUtils.formatCurrency(ParamsList.traderBond);
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
 			document.getElementById("paymentMoney").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
@@ -150,7 +148,7 @@
 			var trade_num=document.getElementById("bond_num");
 			var li=document.createElement("li");
 			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 bottonList");
-			li.innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
+			li.innerHTML="¥"+tzdr.moneyUtils.formatCurrency(ParamsList.traderBond);
 			trade_num.appendChild(li);
 		};
 		function openPays(){
@@ -370,7 +368,7 @@
 	<ul class="mui-table-view sc_listsc">
 		<li class="mui-table-view-cell">
 			<label>操盘保证金(¥)：</label>
-			<span id="traderBond">27,750元</span>
+			<span id="traderBond">¥27,750</span>
 		</li>	
 		<li class="mui-table-view-cell">
 			<label>总操盘资金($)：</label>

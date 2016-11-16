@@ -472,6 +472,9 @@ var tzdr = {
 		 */
 		reverseMoney:function(s){
 			return parseFloat(s.replace(/,/g,''));
+		},
+		removeY:function(s){
+			return s.substring(1);
 		}
 	}
 }
