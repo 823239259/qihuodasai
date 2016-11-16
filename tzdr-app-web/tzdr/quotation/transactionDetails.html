@@ -369,8 +369,8 @@
 					var miniTikeSize = $("#miniTikeSize").val();
 					var doSize = $("#doSize").val();
 					if(type == 1){  
-						$("#buyBtn_P").text(parseFloat(doGetMarketPrice(lastPrice,miniTikeSize,0)).toFixed(doSize));
-						$("#sellBtn_P").text(parseFloat(doGetMarketPrice(lastPrice,miniTikeSize,1)).toFixed(doSize));
+						$("#buyBtn_P").text("市价");
+						$("#sellBtn_P").text("市价");
 						orderPrice.prop("placeholder","市价");
 						orderPrice.prop("value",""); 
 						orderPrice.prop("disabled",true);
