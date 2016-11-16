@@ -381,6 +381,7 @@ function updateFloatingfit(param){
 	var newContractNo = param.ContractNo;
 	var contractCode = newCommdityNo + newContractNo;
 	var $float = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position4']");
+	var $holdAvgPrice = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position3']").text();
 	var $openAvgPrice = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position9']").text();
 	var $floatP = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position10']");
 	var $holdNum = $("ul[data-tion-position = '"+contractCode+"'] li[class = 'position1']").text();
@@ -395,7 +396,7 @@ function updateFloatingfit(param){
 	}
 	var contractSize = localCommodity.ContractSize;
 	var miniTikeSize = localCommodity.MiniTikeSize;
-	var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($openAvgPrice) , contractSize,miniTikeSize,parseInt($holdNum),drection);
+	var floatP = doGetFloatingProfit(parseFloat(lastPrice), parseFloat($holdAvgPrice) , contractSize,miniTikeSize,parseInt($holdNum),drection);
 	var floatProfit = floatP +":"+ localCommodity.CurrencyNo;
 	$float.text(floatProfit);
 	$floatP.text(floatP);
