@@ -44,7 +44,7 @@
 			</div>
 			<div class="mui-content-padded" style="margin-top: 20px;">
 				<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
-				<button id='regLogin' class="mui-btn mui-btn-block">实盘开户</button>
+				<button id='regLogin' class="mui-btn mui-btn-block">实盘开户申请</button>
 			</div>
 			<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>阅读并接受</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
@@ -221,12 +221,12 @@
 							  });
 							  $("#regLogin").unbind("tap",loginCheckBind);
 								$("#regLogin").bind("tap",loginCheck);
-								$("#regLogin").text("实盘开户")
+								$("#regLogin").text("实盘开户申请")
 						}else{
 							$("#account").unbind("focus");
 							$("#regLogin").unbind("tap",loginCheck);
 							$("#regLogin").bind("tap",loginCheckBind);
-							$("#regLogin").text("模拟开户")
+							$("#regLogin").text("模拟开户申请")
 						}
 				}); 
 				  $("#account").bind("focus",function(){
