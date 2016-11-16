@@ -10,9 +10,24 @@
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
-    		if(parameters == null)return;
+    		if(jsonData == null)return;
     	    var lent=rawData.length;
-        	for(var i=0;i<Len;i++){
+    	    if(jsonData.Parameters.HisQuoteType==1440){
+    	    	for(var i=0;i<Len;i++){
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
+		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
+			         rawData[lent+i] = sgData; 
+	       		};
+	        	for(var i=0;i<rawData.length-1;i++){
+	        		if(rawData[i][0]==rawData[i+1][0]){
+	        			rawData.splice(i,1);
+	        		}
+	        	}
+    	    }else{
+    	    	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
@@ -21,38 +36,20 @@
 		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
 		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
 			         rawData[lent+i] = sgData; 
-       		};
-        	for(var i=0;i<rawData.length-1;i++){
-        		if(rawData[i][0]==rawData[i+1][0]){
-        			rawData.splice(i,1);
-        		}
-        	}
+	       		};
+	        	for(var i=0;i<rawData.length-1;i++){
+	        		if(rawData[i][0]==rawData[i+1][0]){
+	        			rawData.splice(i,1);
+	        		}
+	        	}
+    	    }
+        	
         	newData=rawData.slice(-60);
 		  		CandlestickChartOption = setOption(newData);
 		  		myChart.setOption(CandlestickChartOption);
 		  	myChart.group="group2";
 		  	
     }
-    document.getElementById("Candlestick").addEventListener("tap",function(){
-    			$("#dayCandlestickChart").css("opacity","0");
-    				$("#TimeChart1").css("opacity","0");
-				 if(myChart != null){
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-						setTimeout(function(){
-							myChart.resize();
-							myChart.setOption(option);
-		        			myChart.resize();	
-		        			CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option2);
-		        			CandlestickVolumeChart.resize();	
-		        		},10);
-		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
-		        		},100);
-			    } 
-		});
     //设置数据参数（为画图做准备）
     function setOption(rawData){
         var dates = rawData.map(function (item) {
@@ -75,6 +72,7 @@
 		            }
              	  },
 		         formatter: function (params) {
+		         	console.log(JSON.stringify(params))
 		            var res = "时间:"+params[0].name;
 		            res += '<br/>  开盘 : ' + params[0].value[0] + '<br/>  最高 : ' + params[0].value[3];
 		            res += '<br/>  收盘 : ' + params[0].value[1] + '<br/>  最低 : ' + params[0].value[2];
@@ -136,27 +134,39 @@
     var firstTimeNum=0;
      var volumeTime=[];
     var volumeV=[];
-//  var volumeTimeH=[];
-//  var volumeVH=[];
     function processingCandlestickVolumeData(data){
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=volumeV.length;
 //  	    var lengt=volumeTimeH.length;
-        	for(var i=0;i<Len;i++){
-        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
-		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
-        			volumeTime[lent+i]=str2;
-        			volumeV[lent+i]=parameters[i][VolumeSubscript];
-       		};
-        	for(var i=0;i<volumeTime.length-1;i++){
-        		if(volumeTime[i]==volumeTime[i+1]){
-        			volumeTime.splice(i,1);
-        			volumeV.splice(i,1);
-        		}
-        	}
+ 			if(data.Parameters.HisQuoteType==1440){
+	        	for(var i=0;i<Len;i++){
+	        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+	        			volumeTime[lent+i]=timeStr;
+	        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+	       		};
+	        	for(var i=0;i<volumeTime.length-1;i++){
+	        		if(volumeTime[i]==volumeTime[i+1]){
+	        			volumeTime.splice(i,1);
+	        			volumeV.splice(i,1);
+	        		}
+	        	}
+       		 }else{
+       		 	for(var i=0;i<Len;i++){
+	        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
+			        	var str1=time2[1].split(":");
+			        	var str2=str1[0]+":"+str1[1]
+	        			volumeTime[lent+i]=str2;
+	        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+	       		};
+	        	for(var i=0;i<volumeTime.length-1;i++){
+	        		if(volumeTime[i]==volumeTime[i+1]){
+	        			volumeTime.splice(i,1);
+	        			volumeV.splice(i,1);
+	        		}
+	        	}
+       		 }
         	CandlestickVolumeData.time=volumeTime.slice(-60);
         	CandlestickVolumeData.volume=volumeV.slice(-60);
         	CandlestickVolumeChart.group="group2";
@@ -238,11 +248,6 @@
 	                  type: 'bar',
 	                  data:CandlestickVolumeChartData.volume
 	              },
-//	              {
-//	                  name: '成交量',
-//	                  type: 'bar',
-//	                  data:volumeVH
-//	              }
 	          ]
 	      };
         return option

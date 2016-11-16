@@ -45,9 +45,9 @@ var Trade = {
 			 * 登录
 			 * @param {Object} username 用户账户
 			 * @param {Object} password 密码
-			 */
-			doLogin:function(username,password){
-				Trade.doSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'"}');
+			 */ 
+			doLogin:function(username,password,isMock,version){
+				Trade.doSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'","IsMock":'+isMock+',"Version":"'+version+'"}');
 			},
 			/**
 			 * 登出

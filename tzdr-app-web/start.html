@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>启动页</title>
+	    <script src="js/mui.min.js"></script>
+	    <script src="js/common.js"></script>
+	    <link href="css/mui.min.css" rel="stylesheet"/>
+	    <link rel="stylesheet" type="text/css" href="css/own.css"/>
+	    <script src="js/jquery-1.11.3.js"></script>
+	    <style>
+	    	/*body{
+	    		padding:0px;
+	    		margin: 0px;
+	    		background-image: url(images/startPage.png) ;
+	    		background-repeat: no-repeat;
+	    		background-size: 100% 100%;
+	    	}*/
+	    </style>
+	</head>
+	<body style="background-color: #fcca00;">
+		<img src="images/startPage.png" style="width: 100%;">
+		<script>
+		$("img").css({
+						"width":window.innerWidth+"px ",
+						"height":window.innerHeight-40+"px",
+					
+				});
+			mui.plusReady(function(){
+//				$("img").css({
+//						"width":window.innerWidth+"px ",
+//						"height":window.innerHeight+"px",
+//					
+//				});
+				//状态栏设置
+				//Android双击home键退出应用
+    		var first = null;
+				setstatus();
+				function setstatus(){
+					if(plus.navigator.isFullscreen()){
+						plus.navigator.setFullscreen(false);
+					}
+				};
+				
+				//状态栏设置
+			 if(plus.storage.getItem("guide")==null){
+				 plus.storage.setItem("guide","12");
+				 plus.storage.setItem("apk","58202ff62ae85b2c16000347");
+					setTimeout(function(){
+						mui.openWindow({
+							url:"guide.html",
+							id:"guide.html"
+						})
+					},1500);
+			 	}else{
+			 		setTimeout(function(){
+						mui.openWindow({
+							id:"tzdr/quotation/quotationMain.html",
+							url:"tzdr/quotation/quotationMain.html"
+						})
+					},1500)
+	            };
+	            //Android双击home键退出应用
+				mui.back = function(){
+	               if(!first) {
+						first = new Date().getTime(); 
+						mui.toast('再按一次退出维胜');
+						setTimeout(function() {
+						first = null;
+						}, 1000);
+						}else{
+							if (new Date().getTime() - first < 1000) {   
+								plus.runtime.quit();  
+							} 
+						}
+		        	};
+					
+					// 获取本地应用资源版本号
+					plus.runtime.getProperty(plus.runtime.appid,function(inf){
+						wgtVer=inf.version;
+						//检查更新版本 
+						checkUpdate(function(){});
+					});
+					var dataVersion;
+					// 检测更新
+				function checkUpdate(_callback){
+					//获取最新版本信息
+						var paramUrl={
+							url:"tzdr/login/login.html"
+						}
+						mui.app_request('/getVersion',{force:true},
+							function(result){
+								dataVersion=result.data.version;
+								
+								if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
+									return;
+								}
+								dataVersion = JSON.parse(dataVersion);
+								updateApk1(_callback);
+							},function(result){
+								_callback();
+								if(mui.cacheUser.isLogin()){
+									mui.openWindow("tzdr/quotation/quotationMain.html");
+								}
+								return; 
+							},paramUrl
+			    		);
+					}
+				function updateApk1(_callback){
+				//http://api.vs.com/upload/H50967E1D_.apk
+				var nowDate = new Date();
+				var Android = dataVersion.Android;
+				var iOS = dataVersion.iOS;
+				var upDateAndroid = new Date(Android.date);
+				var upDateiOS = new Date(iOS.date);
+				if(plus.os.name == "Android"){
+					if(Android.version > wgtVer){
+						if(nowDate >= upDateAndroid){
+							if(Android.isForceUpdate == true){
+								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+									if(Android.bigUrl == null || Android.bigUrl == "" || Android.bigUrl == undefined || Android.bigUrl.length == 0){
+										downWgt(function(){
+										if (mui.cacheUser.isLogin()){
+											mui.openWindow("tzdr/quotation/quotationMain.html");
+										}
+										});	// 下载升级包
+									}else{
+										var _download_url = Android.bigUrl;
+											plus.runtime.openURL(_download_url);
+									}
+								
+								}, "软件升级", "立即下载" );
+							}else{
+								plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+									if(e.index==0){
+										if(Android.bigUrl=="" || Android.bigUrl.length==0 || Android.bigUrl==null){
+											downWgt(function(){
+												if (mui.cacheUser.isLogin()){
+													mui.openWindow("tzdr/quotation/quotationMain.html");
+												}
+											});	// 下载升级包
+										}else{
+											var _download_url = Android.bigUrl;
+											plus.runtime.openURL(_download_url);
+										}
+										
+									}else{
+										if (mui.cacheUser.isLogin()){
+											mui.openWindow("tzdr/quotation/quotationMain.html");
+										}
+									}
+								}, "软件升级", ["升级","稍后再说"] );	
+							}
+						}
+					}
+				}else if(plus.os.name == "iOS"){
+					if(iOS.version > wgtVer){
+						if(nowDate >= upDateiOS){
+							if(iOS.isForceUpdate == true){
+								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
+									if(iOS.bigUrl == null || iOS.bigUrl == "" || iOS.bigUrl == undefined || iOS.bigUrl.length == 0){
+										downWgt(function(){
+										if (mui.cacheUser.isLogin()){
+											mui.openWindow("tzdr/quotation/quotationMain.html");
+										}
+										});	// 下载升级包
+									}else{
+										var _download_url = iOS.bigUrl;
+											plus.runtime.openURL(_download_url);
+									}
+								
+								}, "软件升级", "立即下载" );
+							}else{
+								plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
+									if(e.index==0){
+										if(iOS.bigUrl=="" || iOS.bigUrl.length==0 || iOS.bigUrl==null){
+											downWgt(function(){
+												if (mui.cacheUser.isLogin()){
+													mui.openWindow("tzdr/quotation/quotationMain.html");
+												}
+											});	// 下载升级包
+										}else{
+											var _download_url = iOS.bigUrl;
+											plus.runtime.openURL(_download_url);
+										}
+										
+									}else{
+										if (mui.cacheUser.isLogin()){
+											mui.openWindow("tzdr/quotation/quotationMain.html");
+										}
+									}
+								}, "软件升级", ["升级","稍后再说"] );	
+							}
+						}else{
+							
+						}
+					}
+				}
+			};
+			
+				// 下载wgt文件
+				function downWgt(_callback,data){
+					plus.nativeUI.showWaiting("下载升级包..."); 
+					plus.downloader.createDownload(dataVersion.Android.littleUrl, {filename:"_doc/update/"}, function(d,status){
+						plus.nativeUI.closeWaiting();
+						if (status == 200) { 
+							installWgt(d.filename,_callback);	// 安装wgt包
+						}else{
+							// 弹出系统提示对话框
+							plus.nativeUI.alert( "下载升级包失败！如多次失败请到官网下载最新APP。", function(){
+								_callback();
+							}, "软件升级", "确定" );
+						}
+					}).start();
+				}
+				
+				// 更新应用资源
+				function installWgt(path,_callback){
+					plus.nativeUI.showWaiting("软件升级..."); 
+					plus.runtime.install(path,{force:true},function(){
+						plus.nativeUI.closeWaiting();
+						plus.runtime.restart();
+					},function(e){
+						plus.nativeUI.closeWaiting();
+						// 弹出系统提示对话框
+						plus.nativeUI.alert( "应用升级失败！如多次失败请到官网下载最新APP。", function(){
+							_callback();
+						}, "软件升级", "确定" );
+					});
+				}
+				
+				
+			})
+		</script>
+	</body>
+</html>

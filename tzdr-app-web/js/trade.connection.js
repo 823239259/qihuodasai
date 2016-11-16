@@ -1,5 +1,9 @@
 var socket = null;
 /**
+ * 交易地址
+ */
+var socketUrl = null;
+/**
  * 用户名
  */
 var username =localStorage.getItem("trade_account");
@@ -36,6 +40,10 @@ var anotherPlace = false;
  */
 var tradeIntervalId = null;
 /**
+ * 版本是否获取成功
+ */
+var isGetVersion = false;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -55,8 +63,8 @@ function changeConnectionStatus(){
 /**
  * 交易连接
  */
-function tradeConnection(){
-	socket = new WebSocket(tradeWebsocketUrl);
+function tradeConnection(){  
+	socket = new WebSocket(socketUrl);  
 }
 /**
  * 交易连接断开的处理
@@ -117,12 +125,24 @@ function tradeLoginOut(){
 	loginOut();
 }
 /**
+ * 根据交易模式设置交易配置信息
+ * @param ismock
+ */
+function setTradeConfig(ismock){
+	setTradeWebSocketIsMock(ismock);
+	if(tradeWebSocketIsMock == 0){
+		socketUrl = tradeWebsocketUrl;
+	}else if(tradeWebSocketIsMock == 1){
+		socketUrl = tradeWebsocketModelUrl;
+	}
+}
+/**
  * 交易初始化加载
  */
 function initLoad() {
-	socket.onopen = function() {
-		/*layer.closeAll();*/
-		Trade.doLogin(username , password);
+	socket.onopen = function() { 
+		/*layer.closeAll();*/ 
+		Trade.doLogin(username , password,tradeWebSocketIsMock); 
 		//更新交易连接状态
 		changeConnectionStatus();
 	}
@@ -171,10 +191,6 @@ function initTradeConnect(){
 }
 function initTrade(){
 	/**
-	 * 初始化交易配置 --> trade.config
-	 */
-	initTradeConfig();
-	/**
 	 * 交易登录（初始化） -->trade.connection
 	 */
 	tradeLogin();
@@ -183,8 +199,52 @@ function initTrade(){
  * 重新连接交易服务器
  */
 function reconnect(){
-	layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
 	if(socket == null){
 		initTrade();
 	}
+}
+
+/**
+ * 获取版本信息
+ */
+function getVersion(){ 
+	$.ajax({ 
+		url:tzdr.constants.api_domain+"/socket/config/getVersions",
+		type:"get", 
+		data:{
+			appVersions:appVersion
+		},
+		timeout:5000,
+		success:function(result){
+			if(result.success){ 
+				var data = result.data;
+				tradeWebsocketUrl = data.socketUrl;
+				tradeWebSocketVersion = data.socketVersion;
+				tradeWebsocketModelUrl = data.socketModelUrl;
+				isGetVersion = true; 
+			}
+		} ,
+		error:function(result){
+		}
+	});  
+}
+/**
+ * 验证socket版本是否获取成功
+ */
+function validateIsGetVersion(){
+	var i = 0;
+	var initIsGetVersion = setInterval(function(){
+		i++;
+//		console.log(i);
+		if(isGetVersion == false){
+			if(i > 50){ 
+				isGetVersion = true;
+			}
+		}
+		if(isGetVersion == true){
+			initSocketTrade();
+			clearInterval(initIsGetVersion);
+		}
+	}, 200);
 }

@@ -31,26 +31,26 @@
 		  		threeCandlestickChartDiv.group="group6";
 		  	
     }
-    document.getElementById("Three").addEventListener("tap",function(){
-    			$("#dayCandlestickChart").css("opacity","0");
-    				$("#TimeChart1").css("opacity","0");
-				 if(threeCandlestickChartDiv != null){
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-						var option = setOptionThree(newDataThree);
-						 var option2=CandlestickVolumeChartSetoptionThree(CandlestickVolumeDataThree);
-						setTimeout(function(){
-							threeCandlestickChartDiv.resize();
-							threeCandlestickChartDiv.setOption(option);
-		        			threeCandlestickChartDiv.resize();	
-		        			threeCandlestickVolumeChart.resize();	
-							threeCandlestickVolumeChart.setOption(option2);
-		        			threeCandlestickVolumeChart.resize();	
-		        		},10);
-		        		setTimeout(function(){
-		        			$("#threeCandlestickChart").css("opacity","1");
-		        		},100);
-			    } 
-		});
+//  document.getElementById("Three").addEventListener("tap",function(){
+//  			$("#dayCandlestickChart").css("opacity","0");
+//  				$("#TimeChart1").css("opacity","0");
+//				 if(threeCandlestickChartDiv != null){
+//					document.getElementsByClassName("buttomFix")[0].style.display="block";
+//						var option = setOptionThree(newDataThree);
+//						 var option2=CandlestickVolumeChartSetoptionThree(CandlestickVolumeDataThree);
+//						setTimeout(function(){
+//							threeCandlestickChartDiv.resize();
+//							threeCandlestickChartDiv.setOption(option);
+//		        			threeCandlestickChartDiv.resize();	
+//		        			threeCandlestickVolumeChart.resize();	
+//							threeCandlestickVolumeChart.setOption(option2);
+//		        			threeCandlestickVolumeChart.resize();	
+//		        		},10);
+//		        		setTimeout(function(){
+//		        			$("#threeCandlestickChart").css("opacity","1");
+//		        		},100);
+//			    } 
+//		});
     //设置数据参数（为画图做准备）
     function setOptionThree(rawData){
         var dates = rawData.map(function (item) {

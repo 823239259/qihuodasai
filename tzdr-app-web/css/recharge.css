@@ -60,18 +60,27 @@ i{
 	background-color: #FFFFFF;
 	position: fixed;
 	bottom: 0px;
-	line-height: 60px;
-	height: 60px;
 	width: 100%;
-	padding:0px 4%;
-	border-top:1px solid #E4E4E4;
+/*	padding:0px 4%;*/
+	border-top:1px solid #606060;
+}
+#buttomDiv span{
+	display: inline-block;
+	background-color: #2B2B2B;
+	width: 50%;
+	color:#FFFFFF;
+	text-align: center;
+	
 }
 #buttomDiv button{
-	margin-top: 10px;
+	display: inline-block;
 	position: absolute;
-	right: 20px;
-	width: 33%;
-	border-radius: 3px;
+	right: 0px;
+	width: 50%;
+	padding:0px;
+	border: none;
+	background-color: #fcc900;
+	color:#2b2b2b;
 }
 #weixinpayBack{
 	width: 100%;
@@ -132,3 +141,8 @@ i{
 .choiceBankIcon{
 	margin-top: 30px;
 }
+.mui-bar-nav{
+			-webkit-box-shadow:none;
+			box-shadow:none;
+			border-bottom: 1px solid #454545;
+		}

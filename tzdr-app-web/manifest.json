@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "start.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -224,13 +224,19 @@
 					"css/style.css",
 					"js/app.js",
 					"js/mui.enterfocus.js",
-					"js/jquery-1.11.3.js"
+					"js/jquery-1.11.3.js",
+					"images/login.png",
+					"images/close.png",
+					"images/LOGO.png",
+					"images/resigter.png",
+					"css/quotation.css"
 				],
 				"refer": [
 					"home.html",
 					"tzdr/login/regist.html",
 					"tzdr/login/password.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/retrievePassword.html"
 				],
 				"priority": 0
 			},
@@ -375,9 +381,19 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"manifest.json",
-					"js/jquery-1.11.3.js"
+					"images/close.png",
+					"images/login.png",
+					"js/jquery-1.11.3.js",
+					"images/LOGO.png",
+					"css/quotation.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/login/confirmPassword.html",
+					"tzdr/login/retrievePassword.html",
+					"tzdr/login/retrievePasswordComfirm.html",
+					"tzdr/agree/tzdr.html",
+					"tzdr/login/login.html"
+				],
 				"priority": 0
 			},
 			"tzdr/future/list.html": {
@@ -574,7 +590,11 @@
 					"css/mui.min.css",
 					"js/common.js",
 					"js/mui.min.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/recharge.css",
+					"images/gouOn.png",
+					"images/gou.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/future/list.html",
@@ -637,7 +657,11 @@
 					"css/mui.min.css",
 					"js/common.js",
 					"js/mui.min.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/recharge.css",
+					"js/jquery-1.11.3.js",
+					"images/gouOn.png",
+					"images/gou.png"
 				],
 				"refer": [
 					"tzdr/future/pay.html",
@@ -653,7 +677,11 @@
 					"css/mui.min.css",
 					"js/common.js",
 					"js/mui.min.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/recharge.css",
+					"images/gouOn.png",
+					"images/gou.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/future/pay.html",
@@ -683,7 +711,8 @@
 					"tzdr/commonback.html"
 				],
 				"refer": [
-					"tzdr/future/list.html"
+					"tzdr/future/list.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
@@ -713,7 +742,11 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/recharge.css",
+					"js/jquery-1.11.3.js",
+					"images/gou.png",
+					"images/gouOn.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -986,11 +1019,17 @@
 					"css/mui.min.css",
 					"main.html",
 					"css/own.css",
-					"js/common.js"
+					"js/common.js",
+					"images/startG3.png",
+					"images/startG2.png",
+					"images/startG4.png",
+					"images/startG1.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/quotation/quotationMain.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/login/regist.html"
 				],
 				"priority": 0
 			},
@@ -1022,7 +1061,12 @@
 					"js/jquery-1.11.3.js",
 					"js/jquery.base64.js",
 					"js/util.js",
-					"images/newUser.png"
+					"images/newUser.png",
+					"images/quotation.png",
+					"images/quotationColse.png",
+					"images/quotation0.png",
+					"images/quotation1.png",
+					"images/quotation4.png"
 				],
 				"refer": [
 					"home.html",
@@ -1030,7 +1074,8 @@
 					"tzdr/account/account.html",
 					"tzdr/scheme.html",
 					"tzdr/account/accountno.html",
-					"tzdr/future/listrg.html"
+					"tzdr/future/listrg.html",
+					"tzdr/quotation/tutorial.html"
 				],
 				"priority": 0
 			},
@@ -1067,7 +1112,19 @@
 					"js/trade.util.js",
 					"js/trade.connection.js",
 					"js/trade.data.mode.js",
-					"js/trade.config.js"
+					"js/trade.config.js",
+					"images/tradeOrderBg.png",
+					"images/down.png",
+					"images/quotationColse.png",
+					"images/quotation.png",
+					"images/quotation4.png",
+					"images/quotation1.png",
+					"images/quotation0.png",
+					"images/tradeGudice1.png",
+					"images/tradeGudice2.png",
+					"images/tradeGudice3.png",
+					"images/tradeGudice4.png",
+					"images/tradeGudice5.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1107,7 +1164,13 @@
 					"js/trade.send.js",
 					"js/common.config.js",
 					"js/trade.config.js",
-					"js/trade.connection.js"
+					"js/trade.connection.js",
+					"images/close.png",
+					"images/down.jpg",
+					"images/down.png",
+					"images/quotationColse.png",
+					"images/quotationLogin.png",
+					"images/quotationLogin1.png"
 				],
 				"refer": [
 					"tzdr/future/cl.html",
@@ -1115,7 +1178,8 @@
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/agree/tradingMarket.html",
 					"tzdr/future/hsi.html",
-					"tzdr/future/cp.html"
+					"tzdr/future/cp.html",
+					"tzdr/quotation/quotationMain.html"
 				],
 				"priority": 0
 			},
@@ -1313,6 +1377,108 @@
 					"css/mui.min.css"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"tzdr/login/confirmPassword.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css"
+				],
+				"refer": [
+					"tzdr/login/login.html",
+					"tzdr/quotation/quotationMain.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/retrievePassword.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css"
+				],
+				"refer": [
+					"tzdr/login/retrievePasswordComfirm.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/retrievePasswordComfirm.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/quotation/tutorial.html": {
+				"resources": [
+					"images/tutorial/27.png",
+					"images/tutorial/3.png",
+					"images/tutorial/4(1).png",
+					"css/noviceIntroduction.css",
+					"images/tutorial/18.png",
+					"images/tutorial/30.png",
+					"images/tutorial/24.png",
+					"images/tutorial/12.png",
+					"images/tutorial/25.png",
+					"images/tutorial/11.png",
+					"images/tutorial/2.png",
+					"images/tutorial/6.png",
+					"images/tutorial/29.png",
+					"images/tutorial/23.png",
+					"images/tutorial/32.png",
+					"images/tutorial/13.png",
+					"images/tutorial/19.png",
+					"images/tutorial/31.png",
+					"images/tutorial/28.png",
+					"images/tutorial/14.png",
+					"images/tutorial/22.png",
+					"images/tutorial/8.jpg",
+					"images/tutorial/20.png",
+					"images/tutorial/21.png",
+					"images/tutorial/16.png",
+					"images/tutorial/10.png",
+					"images/tutorial/7.jpg",
+					"images/tutorial/5.png",
+					"images/tutorial/9.png",
+					"images/tutorial/1.png",
+					"images/tutorial/15.png",
+					"images/tutorial/26.png",
+					"images/tutorial/17.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"start.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"images/startPage.png",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/quotation/quotationMain.html",
+					"guide.html"
+				],
 				"priority": 0
 			}
 		},
