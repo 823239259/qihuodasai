@@ -453,7 +453,7 @@ p{
  .commStyle select{
  	display: inline-block;
  	color:#fcc900;
- 	background-color: #2b2b2b;
+ /*	background-color: #2b2b2b;*/
  }
 .commStyle img{
   	height: auto;
@@ -1033,3 +1033,13 @@ input{
 #passwordClear,#accountClear{
 	display: none;
 }	
+#selectBg{
+	position: absolute;
+	right: 5px;;
+	z-index: 1;;
+}
+.accountSelect{
+	position: relative;
+	z-index: 10;
+	background-color: rgba(0,0,0,0);
+}

@@ -182,26 +182,14 @@
 						});
 						var clickNum=0;
 						$("#closeDiv").click(function(){
-							$(".top").css({
-								"display": "none",
-							});
-							$("#closeDiv").css({
-								"display": "none",
-							});
-							$(".bottom").css({
-								"display": "none",
-							})
+							$(".top,.bottom,#closeDiv").css({
+					    			"display":"none",
+					    		});
 						})
 						$(".bottom").click(function(){
-							$("#closeDiv").css({
-								"display": "none",
-							});
-							$(".top").css({
-								"display": "none",
-							});
-							$(".bottom").css({
-								"display": "none",
-							});
+							$(".top,.bottom,#closeDiv").css({
+					    			"display":"none",
+					    	});
 						})
 						$(".top").click(function(){
 							if(clickNum==0){
@@ -226,15 +214,9 @@
 									"background-image": "url(../../images/quotation4.png)",
 								})
 							}else{
-								$(".top").css({
-								"display": "none",
-								});
-								$("#closeDiv").css({
-									"display": "none",
-								});
-								$(".bottom").css({
-									"display":"none",
-								})
+								$(".top,.bottom,#closeDiv").css({
+					    			"display":"none",
+					    		});
 							}
 							clickNum++;
 						})
