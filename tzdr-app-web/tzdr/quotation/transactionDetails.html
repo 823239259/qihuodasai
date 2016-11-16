@@ -351,12 +351,20 @@
 				$("#miniTikeSize").val(param[6]);
 				$("#doSize").val(param[4]);
 			}
-			function cachTranFers(param){
+			function cachTranFers(param){ 
 				tranferParam = param;
 			}
 			var loginOutFlag = false;
 			var loginOutTip=false;
 			$(function(){ 
+				$("#orderPrice").bind("input",function(){
+					var orderPrice = $(this).val(); 
+					if(orderPrice == undefined || orderPrice.length == 0){
+						orderPrice = 0;
+					}
+					$("#buyBtn_P").text(orderPrice);
+					$("#sellBtn_P").text(orderPrice);
+				});
 				$('#password').bind('input propertychange', function() {
 				  	var orderPrice = $("#orderPrice").val();
 				  	$("#buyBtn_P").val(orderPrice);

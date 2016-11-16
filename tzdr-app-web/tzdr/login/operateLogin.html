@@ -43,8 +43,8 @@
 				<img src="../../images/close.png" id="passwordClear">
 			</div>
 			<div class="mui-content-padded" style="margin-top: 20px;">
-				<button  class="mui-btn mui-btn-block" id="operateLogin">登录交易</button>
-				<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>
+				<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
+				<button id='regLogin' class="mui-btn mui-btn-block">实盘开户</button>
 			</div>
 			<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>阅读并接受</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
@@ -213,13 +213,28 @@
 					var $this = $(this);
 					var val = $this.val(); 
 					setTradeConfig(val);
+						if(val==0){
+							 $("#account").bind("focus",function(){
+							  	$("#username_list").css({
+							  		"display":"block"
+							  	})
+							  });
+							  $("#regLogin").unbind("tap",loginCheckBind);
+								$("#regLogin").bind("tap",loginCheck);
+								$("#regLogin").text("实盘开户")
+						}else{
+							$("#account").unbind("focus");
+							$("#regLogin").unbind("tap",loginCheck);
+							$("#regLogin").bind("tap",loginCheckBind);
+							$("#regLogin").text("模拟开户")
+						}
 				}); 
-				  document.getElementById("account").addEventListener("focus",function(){
+				  $("#account").bind("focus",function(){
 				  	$("#username_list").css({
 				  		"display":"block"
 				  	})
 				  });
-				   document.getElementById("account").addEventListener("blur",function(){
+				   $("#account").bind("blur",function(){
 				  	$("#username_list").css({
 				  		"display":"none"
 				  	})
@@ -250,15 +265,20 @@
 				var commdityNo = Transfer.commdityNo;
 				var account = null;
 				var pwd = null;
-				document.getElementById("regLogin").addEventListener("tap",function(){
+				$("#regLogin").bind("tap",loginCheck);
+				function loginCheck(){
 					$(".top,.bottom").css({
 			    			"display":"none",
 			    		});
 					mui.openWindow({
-									url:"../future/cp.html",
-									id:"cp"
-								});
-				});
+							url:"../future/cp.html",
+							id:"cp"
+						});
+				}
+				function loginCheckBind(){
+					mui.confirm("暂时未开通模拟盘账号申请功能，请拨打客服热线400-825-800，为您手动开通","提示",["确认"],function(e){
+					})
+				}
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
 				});
