@@ -153,7 +153,7 @@
 				<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 				<div id="littleDiv"></div>
 				<div id="list_type" >
-					<ul>
+					<ul >
 						<li value="1">1分</li>
 						<li value="5">5分</li>
 						<li value="15">15分</li>
@@ -185,11 +185,12 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+					bindGuidance();
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
 						$(".top").css({
-							"height":"83px",
+							"height":"96px",
 							"background-color":"rgba(0,0,0,0.8)",
 							"display":"block",
 						});
@@ -200,7 +201,7 @@
 						});
 						$(".bottom").css({
 							"display":"block",
-							"height":$(".buttomFix").height()+57+"px",
+							"height":$(".buttomFix").height()+87+"px",
 							"background-image": "url(../../images/tradeGudice1.png)",
 							"z-index":"991",
 						});
@@ -208,7 +209,7 @@
 						$(".bottom,.top").click(function(){
 							if(clickNum==0){
 								$(".bottom").css({
-									"height":height-80+"px",
+									"height":height-86+"px",
 									"bottom":"0px",
 									"background-image": "url(../../images/tradeGudice2.png)",
 								});

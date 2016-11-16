@@ -285,6 +285,8 @@ mui.plusReady(function(){
 		$("#sj").prop("checked",true);
 		$("#orderPrice").val("");
 		$("#orderPrice").attr("placeholder","市价");
+		$("#buyBtn_P").text("市价");
+		$("#sellBtn_P").text("市价");
    		rawData=[]; 
    		dayCandlestickChartData=[];
    		timeData.timeLabel=[];
@@ -375,7 +377,7 @@ mui.plusReady(function(){
     	}
     /*
 		 获取K线类型**/
-		$("#list_type ul li").click(function(){
+		$("#list_type ul li").on("tap",function(){
 			$("#CandlestickChart").removeClass("displayStyle").addClass("mui-active");
     		$("#trade").removeClass("mui-active").addClass("displayStyle");
     		$("#TimeChart1").removeClass("mui-active").addClass("displayStyle");
