@@ -74,6 +74,7 @@
 			mui.plusReady(function(){
 				/*加载新手指南*/
 				if(plus.storage.getItem("QuotationGuidanceLogin")==null){
+					bindGuidance()
 					plus.storage.setItem("QuotationGuidanceLogin","1");
 				}
 				function bindGuidance(){
