@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>tzdr</name>
-	<modules> 
+	<modules>  
 		<module>tzdr-common</module>
 		<module>tzdr-domain</module>
 		<module>tzdr-business</module>

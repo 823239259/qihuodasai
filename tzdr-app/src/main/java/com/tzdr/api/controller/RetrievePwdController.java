@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.api.constants.DataConstant;
@@ -62,37 +63,48 @@ public class RetrievePwdController {
 		
 		String mobile=requestObj.getMobile();
 		String password=requestObj.getPassword();		
-		String code=requestObj.getCode();
 		
-		if (StringUtil.isBlank(password) || StringUtil.isBlank(mobile) || StringUtil.isBlank(code)){
+		if (StringUtil.isBlank(password) || StringUtil.isBlank(mobile)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.error.");
-
 		}
-		
 		if (!PasswordUtils.validatePwd(password)){
 			return new ApiResult(false,ResultStatusConstant.ForgetPwd.PASSWORD_PATTERN_ERROR,"password.pattern.error.");
 		}
-		
 		WUser wUser = wUserService.getWUserByMobile(mobile);
 		if (ObjectUtil.equals(null,wUser)){
 			return new ApiResult(false,ResultStatusConstant.ForgetPwd.USER_INFO_NOT_EXIST,"user.info.not.exist.");
 		}	
 		
-		
+		wUser.setPassword(passwordService.encryptPassword(password, wUser.getLoginSalt()));
+		wUserService.updateUser(wUser);
+		AuthUtils.clearCacheUser(wUser.getId());
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"forget.password.update.success.");
+	}
+	/**
+	 * 手机验证码验证
+	 * @param request
+	 * @param mobile
+	 * @param code
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/reset_validation/code")
+	public ApiResult resetValidationCode(HttpServletRequest request,@RequestParam("mobile")String mobile,@RequestParam("code") String code){
+		ApiResult result = new ApiResult();
+		WUser wUser = wUserService.getWUserByMobile(mobile);
+		if (ObjectUtil.equals(null,wUser)){
+			return new ApiResult(false,ResultStatusConstant.ForgetPwd.USER_INFO_NOT_EXIST,"user.info.not.exist.");
+		}	
 		SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile);  //获取验证码信息
 		if (ObjectUtil.equals(null,securityCode) 
 				|| !StringUtil.equals(code, securityCode.getSecurityCode())){
 			return new ApiResult(false,ResultStatusConstant.ForgetPwd.ERROR_CODE,"error.code.");
 		}
-		
 		if((Dates.getCurrentLongDate()-securityCode.getCreatedate()) > DataConstant.VALIDATE_CODE_INVALID_TIME){ 
 			//判断验证码是否失效
 			return new ApiResult(false,ResultStatusConstant.ForgetPwd.INVALID_CODE,"invalid.code.");
 		}		
-		
-		wUser.setPassword(passwordService.encryptPassword(password, wUser.getLoginSalt()));
-		wUserService.updateUser(wUser);
-		AuthUtils.clearCacheUser(wUser.getId());
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"forget.password.update.success.");
+		result.setSuccess(true);
+		return result;
 	}
 }

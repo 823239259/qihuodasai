@@ -55,12 +55,12 @@
 		</a>
 		<p>
 			全国客服热线<span>400</span>-<span>852</span>-<span>8008</span>
-			<span class="denglu"><span>已有账号?</span><a href="${ctx}/user/account">立即登录</a></span>
+			<%-- <span class="denglu"><span>已有账号?</span><a href="${ctx}/user/account">立即登录</a></span> --%>
 		</p>
 	</div>
 </div>
 <div class="ks_zuce">
-	<div class="ks_zuce_content">
+	<%-- <div class="ks_zuce_content">
 		<div class="rg_ctn">
 			<p class="tt"></p>  
 			<input type = "hidden" value="${channelCode}" id = "channelCode"/>
@@ -93,7 +93,7 @@
         		<div class="rg_btn"><a status="true" id="signin" name="signin" href="javascript:void(0);">立即注册</a></div>
         	</form>
     	</div>
-    	<%-- cas ajax登录 --%>
+    	cas ajax登录
 	    <div style="display: none;">
 	    	<form id="loginForm" action="${casServerLoginUrl}" onsubmit="return loginValidate();" method="post" target="ssoLoginFrame">
 		    	<input type="hidden" name="isajax" value="true" />
@@ -105,7 +105,7 @@
 				<input type="hidden" name="password" id="loginPassword">
 	    	</form>
 	    </div>	
-	</div>
+	</div> --%>
 </div>
 <div class="ks_center">
 	<p class="ks_ld"><img src="${ctx}/static/images/login/ld-title.png"></p>

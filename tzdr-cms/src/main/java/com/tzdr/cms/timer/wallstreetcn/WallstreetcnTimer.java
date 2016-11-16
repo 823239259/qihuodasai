@@ -3,8 +3,6 @@ package com.tzdr.cms.timer.wallstreetcn;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
-import java.util.TimerTask;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +11,7 @@ public class WallstreetcnTimer{
 	/**
 	 * 正在执行的定时任务
 	 */
-	private static Map<String, TimerTask> map = new HashMap<>();
+	private static Map<String, BaseWallstreetnTask> map = new HashMap<>();
 	private static Timer timer = new Timer();
 	private static WallstreetcnTimer wallstreetcnTimer = null;
 	/**
@@ -30,25 +28,18 @@ public class WallstreetcnTimer{
 		}
 		return wallstreetcnTimer;
 	}
-	public  Map<String, TimerTask> getMap() {
-		return map;
+	public static boolean start(BaseWallstreetnTask baseWallstreetnTask){
+		WallstreetcnTimer wallstreetcnTimer = WallstreetcnTimer.getInstance();
+		Wallstreetn wallstreetn = baseWallstreetnTask.getWallstreetn();
+		String url = String.valueOf(wallstreetcnTimer.getMap().get(wallstreetn.getId()));
+		if(url == null || url.equals("null")){
+			wallstreetcnTimer.getTimer().schedule(baseWallstreetnTask, 1000,Long.parseLong(wallstreetn.getRule()));
+			wallstreetcnTimer.addTimer(wallstreetn.getId(),baseWallstreetnTask);
+			logger.info("任务加入"+wallstreetn.getUrl()+wallstreetn.getParam());
+			return true;
+		}
+		return false;
 	}
-
-
-	public  void setMap(Map<String, TimerTask> map) {
-		WallstreetcnTimer.map = map;
-	}
-
-
-	public  Timer getTimer() {
-		return timer;
-	}
-
-
-	public  void setTimer(Timer timer) {
-		WallstreetcnTimer.timer = timer;
-	}
-
 	/**
 	 * 停止指定任务
 	 * @param key
@@ -63,7 +54,7 @@ public class WallstreetcnTimer{
 	/**
 	 * 将任务加入到任务列表中
 	 */
-	public  void addTimer(String key,WallstreetcnTask value){
+	public  void addTimer(String key,BaseWallstreetnTask value){
 		map.put(key, value);
 		logger.info("任务加入:" + key);
 	}
@@ -72,5 +63,24 @@ public class WallstreetcnTimer{
 	 */
 	public static void removeTimer(String key){
 		map.remove(key);
+	}
+	
+	
+	public  Map<String, BaseWallstreetnTask> getMap() {
+		return map;
+	}
+
+
+	public  void setMap(Map<String, BaseWallstreetnTask> map) {
+		WallstreetcnTimer.map = map;
+	}
+
+	public  Timer getTimer() {
+		return timer;
+	}
+
+
+	public  void setTimer(Timer timer) {
+		WallstreetcnTimer.timer = timer;
 	}
 }

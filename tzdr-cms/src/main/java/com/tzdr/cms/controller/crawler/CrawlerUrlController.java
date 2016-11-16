@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,16 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.business.service.crawler.CrawlerUrlParamService;
 import com.tzdr.business.service.crawler.CrawlerUrlService;
-import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
-import com.tzdr.cms.timer.wallstreetcn.WallstreetcnHandle;
-import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTask;
+import com.tzdr.cms.timer.wallstreetcn.WallstreetcnEntry;
 import com.tzdr.cms.timer.wallstreetcn.WallstreetcnTimer;
-import com.tzdr.cms.timer.wallstreetcn.Wallstreetn;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.EasyuiUtil;
@@ -41,8 +35,6 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 	private CrawlerUrlService crawlerService;
 	@Autowired
 	private CrawlerUrlParamService crawlerUrlParamService;
-	@Autowired 
-	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
 	@RequestMapping(value = "/list",method=RequestMethod.GET)
 	public String list(){
 		return ViewConstants.CrawlerView.LIST_VIEW;
@@ -151,29 +143,9 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				resultJson.setMessage("任务正在执行,请勿重复开启");
 			}else{
 				List<CrawlerUrlParam> crawlerUrlParams = crawlerUrlParamService.doGetawlerUrlParamByUrlId(id);
-				StringBuffer buffer = new StringBuffer();
-				int size = crawlerUrlParams.size();
-				for (int i = 0; i < size; i++) {
-					CrawlerUrlParam crawlerUrlParam = crawlerUrlParams.get(i);
-					buffer.append(crawlerUrlParam.getUrlParamKey()+"="+crawlerUrlParam.getUrlParamValue());
-					if(i != size-1){
-						buffer.append("&");
-					}
-				}
-				Wallstreetn wallstreetn = new Wallstreetn();
-				wallstreetn.setMethod(crawlerUrl.getUrlMethod());
-				wallstreetn.setParam(buffer.toString());
-				wallstreetn.setRule(crawlerUrl.getExecRule());
-				wallstreetn.setUrl(crawlerUrl.getUrlUrl());
-				crawlerUrl.setStatus("1");//设置该url执行状态
+				WallstreetcnEntry entry = new WallstreetcnEntry();
+				entry.exected(crawlerUrl, crawlerUrlParams);
 				crawlerService.update(crawlerUrl);
-				WallstreetcnTask task = new WallstreetcnTask(wallstreetn);
-				WallstreetcnHandle handle = new WallstreetcnHandle();
-				WallstreetcnHandle.setCrawlerUrl(crawlerUrl);
-				handle.setCrawlerWallstreetnLiveService(crawlerWallstreetnLiveService);
-				handle.setCrawlerUrlService(crawlerService);
-				task.setWallstreetcnHandle(handle);
-				task.start();
 			}
 		}
 		return resultJson;
@@ -197,7 +169,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 				resultJson.setSuccess(false);
 				resultJson.setMessage("任务未执行,请勿操作停止任务!");
 			}else{
-				WallstreetcnTimer.stop(crawlerUrl.getUrlUrl());
+				WallstreetcnTimer.stop(crawlerUrl.getId());
 				crawlerUrl.setStatus("0");//设置该url停止状态
 				crawlerService.update(crawlerUrl);
 			}
@@ -209,5 +181,4 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

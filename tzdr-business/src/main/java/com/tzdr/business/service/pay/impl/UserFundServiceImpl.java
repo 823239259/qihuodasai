@@ -718,7 +718,7 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 		List<Object> params = new ArrayList<Object>();
 		StringBuffer sqlBuf = new StringBuffer(
 				  "  SELECT w.id,v.tname,u.mobile,w.uid,w.`no`,w.type,w.money,w.amount,"
-				+" w.freeze,w.lid,w.trx_id trxId,w.rid,w.ruid,w.addtime,w.uptime,w.remark,s.realname"
+				+" w.freeze,w.lid,w.trx_id trxId,w.rid,w.ruid,w.addtime,w.uptime,w.remark,IF(w.sys_user_id = '-','系统',s.realname) realname"
 				+" FROM w_user_fund w  LEFT JOIN sys_user s on w.sys_user_id=s.id   LEFT JOIN w_user u ON w.uid = u.id LEFT JOIN w_user_verified v ON w.uid=v.uid" 
 				+" WHERE  1=1 AND(w.type = 3 OR w.type = 4)");
 		if (conn != null) {
@@ -733,6 +733,11 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 				sqlBuf.append(" AND w.type = ?");
 				params.add(type);
 			}
+			String sysUserId = TypeConvert.objToStrIsNotNull(conn.getValue("sysuserId"));
+			if (sysUserId != null && TypeConvert.isDigital(sysUserId)) {
+				sqlBuf.append(" AND w.sys_user_id = ?");
+				params.add(sysUserId);
+			}
 			String uptimeStr_start = TypeConvert.objToStrIsNotNull(conn.getValue("uptimeStr_start"));
 			String uptimeStr_end = TypeConvert.objToStrIsNotNull(conn.getValue("uptimeStr_end"));
 			if (TypeConvert.objToStrIsNotNull(uptimeStr_start) != null 
@@ -741,7 +746,6 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 				params.add(TypeConvert.strToDatetime1000Long(uptimeStr_start));
 				params.add(TypeConvert.strToDatetime1000Long(uptimeStr_end));
 			}
-			
 		}
 		
 		sqlBuf.append(" ORDER BY w.uptime DESC ");

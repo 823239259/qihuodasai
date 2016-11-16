@@ -1080,4 +1080,7 @@ public class ViewConstants {
 	public static class CrawlerView{
 		public static String LIST_VIEW = "/views/admin/crawler/list";
 	}
+	public static class SocketConfig{
+		public static String LIST_LIVE = "/views/admin/socketconfig/list";
+	}
 }

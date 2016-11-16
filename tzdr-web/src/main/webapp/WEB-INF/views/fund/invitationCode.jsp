@@ -9,6 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="baidu-site-verification" content="19aaf89cfc08519ae9fee304f1fcca71"/>
 <title>我的邀请码 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
 <link href="${ctx}/static/css/public.css" rel="stylesheet"
@@ -99,7 +100,7 @@
             });
             setTimeout(function() {
                 $copy.find('.pop').fadeOut();
-            }, 3000);
+            }, 3000);	
         })
 	});
 </script>
@@ -135,16 +136,56 @@
 							<p class="my_jieshao">以下网址是 您对外界进行推广的地址，您可以通过朋友、QQ、微信、博客进行推广，所有通过该地址访问过来的人，注册就都属于您的用户，而当这些用户在本站股票操盘时，您就可以赚取佣金了。</p>
 							<p class="fzwz">
 								<input type="text" class="wangzhi" value="http//www.vs.com">
-            					<a href="javascript:" class="anniucopy">复制链接地址</a>
+            					<a href="javascript:" id = "anniucopy" class="anniucopy">复制链接地址</a>
             				</p>
 							<textarea maxlength="3000"></textarea>
-							<p><span class="fenxiang">分享到: </span>
+							<%-- <p><span class="fenxiang">分享到: </span>
                     			<a href="#" onclick="shareToSinaWB(event)" title="分享到新浪微博"><img alt="" src="${ctx}/static/images/uc/fenxiang_sina.jpg"></a>
                     			<a href="#" onclick="shareToQQwb(event)" title="分享到腾讯微博"><img alt="" src="${ctx}/static/images/uc/fenxiang_tengxun.jpg"></a>
                     			<a href="#"  title="分享到微信"><img alt="" src="${ctx}/static/images/uc/fenxiang_weixin.jpg"></a>
                     			<a href="#" onclick="shareQQ(event)"  title="分享到QQ好友"><img alt="" src="${ctx}/static/images/uc/fenxiang_qq.jpg"></a>
                     			<a href="#" onclick="shareToQzone(event)" title="分享到QQ空间"><img alt="" src="${ctx}/static/images/uc/fenxiang_zone.jpg"></a>
-                    		</p>
+                    		</p> --%>
+                    		
+                    		<div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '自定义分享内容',	
+			bdDesc : '自定义分享摘要',	
+			bdUrl : 'http://www.vs.com', 	
+			bdPic : 'http://www.vs.com/static/images/common-new/new_logo.png'
+		},
+		share : [{
+			"bdSize" : 16
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf',"weixin"]
+		}]
+	};
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 						</div>
 					</div>
 					<div class="subtab">

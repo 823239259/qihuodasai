@@ -293,7 +293,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 		synchronized (lock) {
 			
 			UserFund userFund = new UserFund();
-			
+			userFund.setSysUserId("103");
 			userFund.setUid(rechargeList.getUid());
 			userFund.setMoney(rechargeList.getActualMoney());
 			userFund.setAddtime(TypeConvert.dbDefaultDate());
@@ -386,7 +386,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 		synchronized (lock) {
 			
 			UserFund userFund = new UserFund();
-			
+			userFund.setSysUserId("103");
 			userFund.setUid(rechargeList.getUid());
 			userFund.setMoney(rechargeList.getActualMoney());
 			userFund.setAddtime(TypeConvert.dbDefaultDate());
@@ -475,7 +475,7 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 		synchronized (lock) {
 			
 			UserFund userFund = new UserFund();
-			
+			userFund.setSysUserId("103");
 			userFund.setUid(rechargeList.getUid());
 			userFund.setMoney(rechargeList.getActualMoney());
 			userFund.setAddtime(TypeConvert.dbDefaultDate());

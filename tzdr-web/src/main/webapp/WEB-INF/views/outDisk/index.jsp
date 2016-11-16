@@ -13,9 +13,9 @@
 
 <script type="text/javascript" src="${ctx}/static/script/outDisk/index.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/ftse/ftseCommon.js?v=${v}"></script>
-<title>国际综合 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
-<meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
-<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+<title>国际综合|维胜金融-致力于外盘期货开户|A50|恒指|原油|德指|小恒指|美黄金|美白银|小原油</title>
+<meta name="keywords" content="国际综合,维胜,外盘期货开户,A50,恒指,原油,德指,小恒指,美黄金,美白银,小原油,期货开户,期货交易,配资,期货配资"/>
+<meta name="description" content="国际综合-可同时操盘15种国际期货的当期主力合约，分别为：富时A50、恒指期货、国际原油、迷你纳指、迷你道指、迷你标普、德国DAX、日经225、小恒指、美黄金、美精铜、小原油、美白银、H股指数、小H股指数、迷你德国DAX指数。"/>
 <style>
 	#guojizonghe {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
 </style>

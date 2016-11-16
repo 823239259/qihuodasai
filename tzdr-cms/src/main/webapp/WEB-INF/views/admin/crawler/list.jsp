@@ -52,6 +52,18 @@
 				<tr>
 					<td><b>执行规则:</b><input type="text" value = "" name = "execRule" id = "execRule"/></td>
 				</tr>
+				<tr>
+					<td><b>请求数据类型:</b>
+							<select id = "type">
+								<option value = "0">
+										实时
+								</option>
+								<option value = "1">
+										日历
+								</option>
+							</select>
+						</td>
+				</tr>
 				<tr><td><b>请求方式:</b>
 						<select id = "urlMethod">
 							<option value = "GET">
@@ -125,6 +137,7 @@
 						$("#execRule").val(data.execRule);
 						$("#urlMethod").val(data.urlMethod);
 						$("#urlRemarks").val(data.urlRemarks);
+						$("#type").val(data.type);
 						var paramLength = param.length;
 						console.log(paramLength);
 						for(var i = 0 ; i < paramLength ; i++){
@@ -201,6 +214,7 @@
 			var execRule = $("#execRule").val();
 			var urlMethod = $("#urlMethod").val();
 			var id = $("#urlId").val();
+			var type = $("#type").val();
 			var urlKey = $("input[name = 'urlParamkey']");
 			var urlValue = $("input[name = 'urlParamvalue']");
 			var keyArray = new Array();
@@ -224,7 +238,8 @@
 					execRule:execRule,
 					key:keys,
 					value:values,
-					urlRemarks:urlRemarks
+					urlRemarks:urlRemarks,
+					type:type
 				},success:function(result){
 					$('#add').dialog('close');
 					 $('#dg').datagrid('reload');

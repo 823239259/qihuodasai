@@ -11,7 +11,6 @@
 	<context:component-scan base-package="com.tzdr.cms.controller,com.tzdr.common.web,com.tzdr.cms.hkstock.controller,com.tzdr.cms.peigubao.controller" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-
 	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
 
