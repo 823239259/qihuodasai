@@ -27,8 +27,8 @@
 			<div id="accountType" class="commStyle">
 				<label>账号类型：</label>
 				<select class="accountSelect mui-btn mui-btn-block">
-					<option class="mui-selected" id="checkContent" value="1">模拟账号</option>
 					<option class="mui-selected"  value="0">实盘账号</option>
+					<option class="mui-selected" id="checkContent" value="1">模拟账号</option>
 				</select>
 				<img src="../../images/down.png" id="selectBg">
 			</div>
@@ -66,7 +66,7 @@
 			mui.init();
 				var width=window.innerWidth;
 					$(".commStyle input,.commStyle select").css({
-						"width":width-115+"px",
+						"width":width-120+"px",
 					});
 					$("#username_list li").css({
 						"width":width-115+"px"
@@ -75,7 +75,6 @@
 				/*加载新手指南*/
 				if(plus.storage.getItem("QuotationGuidanceLogin")==null){
 					plus.storage.setItem("QuotationGuidanceLogin","1");
-					bindGuidance();
 				}
 				function bindGuidance(){
 					var height=window.innerHeight;

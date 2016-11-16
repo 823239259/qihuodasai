@@ -219,7 +219,7 @@
 					    		});
 							}
 							clickNum++;
-						})
+						});
 						}
 				//链接socket;
 				var dataUrl={
@@ -319,9 +319,9 @@
 //  				$(".productList").css("height",48*product.CommodityName.length+"px");
     				
 			    	$(".openPage").click(function(){
-			    		$(".top,.bottom").css({
-			    				"display":"none",
-			    		});
+			    		$(".top,.bottom,#closeDiv").css({
+	    					"display":"none",
+	    				});
 			            var _this = $(this);
 			            _this.css("background-color","#1f1f1f")
 			            var index=_this.index();

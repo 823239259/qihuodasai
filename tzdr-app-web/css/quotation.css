@@ -183,7 +183,7 @@ p{
 	padding:4px 0px;
 	border-bottom: 1px solid #454545;
 	position: fixed;
-	top:86px;
+	top:90px;
 	z-index: 998;
 }
 .Assets p span{
@@ -745,25 +745,20 @@ input{
 	width: 100%;
 	position: relative;
 }
-#headerMenu{
-	width: 100%;
-	text-align: center;
-	position: fixed;
-	top:46px;
-}
-#headerMenu button{
+/*#headerMenu button{
 	border: none;
 	padding:0px;
 	background-color: #2B2B2B;
 	text-align: center;
-	/*border-radius: 50%;*/
-}
+	height: 40px;
+	line-height: 40px;
+	/*border-radius: 50%;
+}*/
 #tradeMenu{
-	background-image: url(../images/tradeOrderBg.png);
-	background-size: cover;
-	position: relative;
-	left:0px;
-	
+	background: url(../images/tradeOrderBg.png) no-repeat center;
+	background-size: 75px;
+	position: absolute;
+	left:10px;
 }
 #timeChartMenu{
 	border:none;
@@ -838,19 +833,22 @@ input{
 	width: 100%;
 	position: fixed;
 	top:46px;
-	height: 35px;
+	height: 45px;
 	z-index: 990;
+	text-align: center;
+	position: fixed;
+	top:46px;
 }
 #headerMenu button{
-	height: 30px;
-	line-height: 30px;
+	height: 40px;
+	line-height: 40px;
 	font-size: 14px;
 	width: 75px;
-	
-}
-#tradeMenu{
-	position: absolute;
-	left:10px;
+	border: none;
+	padding:0px;
+	background-color: #2B2B2B;
+	text-align: center;
+	/*border-radius: 50%;*/
 }
 #selectButon{
 	position: absolute;
