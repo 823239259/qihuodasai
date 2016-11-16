@@ -14,7 +14,7 @@
 	width: 100%;
 	height: 30px;
 	line-height: 30px;
-	font-size: 12px;
+	font-size: 14px;
 	background-color: #2B2B2B;
 	color:#fcc900;
 	text-align: center;
@@ -22,7 +22,7 @@
 .main_list .mui-table-view-cell { min-height: 92px;overflow: hidden;height: auto;position: relative; color:#999999;}
 .main_list .mui-table-view-cell img { width: 40px; height:40px; position: absolute;vertical-align: middle;display: block;margin-top: auto;margin-bottom: auto;}
 .main_list .mui-table-view-cell h2 {width: 90%;  text-align: left; font-size: 14px; margin-left: 50px; color: #333333;font-weight: normal;}
-.main_list .mui-table-view-cell p { color:#999999; line-height: 20px; margin-left: 50px; font-size: 12px;white-space: normal;color:#999999;}
+.main_list .mui-table-view-cell p { color:#999999; line-height: 20px; margin-left: 50px; font-size: 14px;white-space: normal;color:#999999;}
 .main_list .mui-table-view-cell p i { color: #2b2b2b; font-style: normal; }
 .main_list .mui-table-view-cell .buttomP{width: 100%;margin-left: 0px;padding-left:50px;margin-top: 10px; border-top:1px solid #e6e6e6;}
 .main_list .mui-table-view-cell>a:not(.mui-btn) { min-height: 92px;padding-right: 0px;margin-right: -50px;}
@@ -84,7 +84,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .mui-content-padded p { text-align: left;}
 /*启动页*/
 .main_page img { width: 150px; margin: 0 auto; display: block; position: absolute; left: 50%; margin-left: -75px; top: 10%; }
-.main_page p { font-size: 12px; color: #333333; position: absolute; left: 0;text-align: center; width: 100%; bottom: 3%;}
+.main_page p { font-size: 14px; color: #333333; position: absolute; left: 0;text-align: center; width: 100%; bottom: 3%;}
 .main_link { width: 100%; position: absolute; left: 0; text-align: center; bottom: 25%;}
 .main_link a { display: inline-block;}
 .main_link a.main_login { width: 100px; height: 40px; border-radius: 20px; border:1px solid #333333; color: #333333; text-align: center; line-height: 40px; text-decoration: none; margin: 0 15px;}
@@ -172,9 +172,9 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .af_list li { overflow: hidden;}
 .af_list li p { display: block; float: left; }
 .af_list li p.af_time { width: 36%; color: #333; font-size: 17px; }
-.af_list li p.af_time b { display: block; font-weight: normal; font-size: 12px;}
+.af_list li p.af_time b { display: block; font-weight: normal; font-size: 14px;}
 .af_list li p.af_date { width:64% ; color: #333; font-size: 17px;}
-.af_list li p.af_date b { display: block; font-weight: normal; text-align: left; font-size: 12px; color: #666; width: 100%;}
+.af_list li p.af_date b { display: block; font-weight: normal; text-align: left; font-size: 14px; color: #666; width: 100%;}
 .ac_coupon .mui-table-view { background: none;}
 .ac_coupon .mui-table-view .mui-table-view-cell { border-top: 1px solid #dbdbdb; border-bottom: 1px solid #DBDBDB; background: #fff; margin-bottom: 15px; padding: 0;}
 .ac_coupon .mui-table-view .mui-table-view-cell h3 { font-size: 19px; font-weight: normal; padding: 10px 15px; border-bottom: 1px solid #DBDBDB; margin: 0;}
@@ -189,7 +189,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ac_coupon .acp_info p { width: 64%; float: right; font-size: 13px;}
 .ac_coupon .acp_info h4 { font-weight: normal;}
 .ac_coupon .acp_info h4 span { font-size: 20px; color: #ff6419; }
-.ac_coupon .acp_info h4 b { font-size: 12px; color: #FF6419; vertical-align: bottom;}
+.ac_coupon .acp_info h4 b { font-size: 14px; color: #FF6419; vertical-align: bottom;}
 .ac_coupon .apc_no h3 b { color: #626262; float: right; font-weight: normal; font-size: 17px; margin-top: 4px;}
 .ac_coupon .apc_no .acp_info h4 b  { color: #d4d4d4;}
 .ac_coupon .apc_no .acp_info h4 span { color: #d4d4d4;}
@@ -206,7 +206,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .newslist .mui-table-view-cell a.nl_read em { color: #999999;}
 .news_info { color: #000;}
 .news_info h3 { text-align: center; font-size: 16px; font-weight:normal; height: 22px; line-height: 22px; width: 100%; overflow: hidden;}
-.news_info h4 { text-align: center; font-size: 12px; color: #8d8d8d; font-weight: normal; margin-bottom: 10px;}
+.news_info h4 { text-align: center; font-size: 14px; color: #8d8d8d; font-weight: normal; margin-bottom: 10px;}
 .news_info h5 { font-size: 14px; text-align: left; color: #000; line-height: 20px;}
 .news_info p { text-indent: 2em; color: #000;}
 /*方案*/
@@ -295,7 +295,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .dt_grid .mui-grid-view.mui-grid-9 .mui-table-view-cell { padding: 0; border-right:1px solid #e0e0e0; border-bottom: 1px solid #E0E0E0; }
 .dt_grid ul.mui-table-view:before {background-color: #fff; }
 .dt_grid ul.mui-table-view:after { background-color: #fff;}
-.sc_listdeta .dt_font { color: #333; padding: 0 10px; font-size: 12px; margin-top: 10px;}
+.sc_listdeta .dt_font { color: #333; padding: 0 10px; font-size: 14px; margin-top: 10px;}
 /*方案申请*/
 /*.ap_main .mui-table-view-cell { padding: 11px 10px;}*/
 .borderClass{
@@ -304,17 +304,17 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ap_main .ap_time label { vertical-align: middle; display: block; float: left;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
-.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF; padding-left: 5px;height: 40px;line-height: 40px;font-size: 12px;}
+.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF; padding-left: 5px;height: 40px;line-height: 40px;font-size: 14px;}
 #tradeingVariety{ padding:0px 5px;color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;margin: 5px 0px 0px;line-height: 30px; height: 30px;}
-#tradeingVariety b{ font-weight: normal; font-size: 12px;color:#666666};
+#tradeingVariety b{ font-weight: normal; font-size: 14px;color:#666666};
 #tradeingVariety span{vertical-align: middle; color:#2b2b2b}
-.ap_main .ap_choosetitle b { font-weight: normal; font-size: 12px; float: left;line-height: 40px;height: 40px;}
+.ap_main .ap_choosetitle b { font-weight: normal; font-size: 14px; float: left;line-height: 40px;height: 40px;}
 .ap_main .ap_choosetitle span { vertical-align: middle; float: left; line-height: 40px;height: 40px;}
 .ap_main .mui-grid-9 { background-color: #FFFFFF; border: none;}
 .ap_main .mui-grid-9 .mui-table-view-cell { text-align: center;border:1px solid #2b2b2b; background: #fff;color:#2b2b2b; width: 23%; margin: 0 1% 15px; border-radius: 5px;font-size:12px;padding:12px 5px;background-image: url(../images/gou.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;;}
 .ap_main .mui-grid-9 .on { color: #333333; border:1px solid #333333;background-color: #FFCC33;background-image: url(../images/gouOn.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;}
 .ap_main .sc_listsc li span { color: #2b2b2b ; }
- .ap_main .mui-table-view-cell{padding: 8px 0px;font-size: 12px;;}
+ .ap_main .mui-table-view-cell{padding: 8px 0px;font-size: 14px;;}
   .ap_main .mui-table-view-cell div{
   	float: left;
   }
@@ -333,7 +333,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	border-top:1px solid #E4E4E4;
 	padding: 0px 5px;margin: 5px 0px 5px;
 	line-height: 40px;
-	font-size: 12px;;
+	font-size: 14px;;
 	height: 80px;
 	padding-bottom: 10px;
 }
@@ -345,26 +345,26 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	margin: 0px;height: auto;
 	height: 40px;
 	line-height: 40px;
-	font-size: 12px;;
+	font-size: 14px;;
 }
 .AgreementList  i{
 	display: inline-block;
 	height: 40px;
 	line-height: 40px;
-	font-size: 12px;;
+	font-size: 14px;;
 	padding-bottom: 10px;
 }
 .fontBlack{
 	color:#2B2B2B;
-	font-size: 12px;;
+	font-size: 14px;;
 }
 .grayFontDiv{
 	color:#999999;
-	font-size: 12px;
+	font-size: 14px;
 	margin-left:10px; ;
 }
 .ap_main .acp_font table  tr{  padding:0px 10px;}
-.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 12px;height: 30px;line-height: 30px;}
+.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 14px;height: 30px;line-height: 30px;}
 .ap_main .acp_font table thead td { background: #f2f2f2;color:#2B2B2B}
 /*.ap_main .mui-content-padded p { line-height: 40px;}*/
 /*支付页*/
@@ -437,7 +437,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .buy_list li .bl_qu { float: right; overflow: hidden;}
 .buy_list li .bl_qu p { color: #88888d; width: 110px;}
 .buy_list li .bl_qu p:first-child { margin-bottom: 10px;}
-.buy_list li .bl_qu p i { display: inline-block; font-size: 12px; font-style: normal; padding: 0 5px 0 15px; border-radius: 2px; text-align: center; margin-right: 5px;}
+.buy_list li .bl_qu p i { display: inline-block; font-size: 14px; font-style: normal; padding: 0 5px 0 15px; border-radius: 2px; text-align: center; margin-right: 5px;}
 .buy_list li p i { border: 1px solid #10aeff; color: #10aeff;}
 .buy_list li p.bl_qu_up i {background:url(../images/buy_up.png) no-repeat 5px center;color: #e73027; border: 1px solid #e73027;}
 .buy_list li p.bl_qu_down i {background:url(../images/buy_down.png) no-repeat 5px center;color: #38be4e; border: 1px solid #38be4e;}
@@ -521,7 +521,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .bd_mapbox #countDown i { display: inline-block; font-size: 17px; font-style: normal; font-weight: bold; margin: 0 5px; }
 .bd_linebox { position: relative; margin: 0 auto;}
 .bd_linebox p { position: absolute; width: 100%; text-align: center; top: 30px; left: 0px; }
-.bd_linebox span { display: block; position: absolute; left: 10px; z-index: 5; font-size: 12px;  }
+.bd_linebox span { display: block; position: absolute; left: 10px; z-index: 5; font-size: 14px;  }
 .mui-numbox { width: 160px;}
 .sc_buy .mui-table-view li .sc_data { width: 55%;}
 .sc_buy .mui-table-view li .sc_money { width: 45%;}

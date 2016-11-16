@@ -25,10 +25,6 @@
 		</header>
 		<div class="mui-content">
 			<form class="mui-input-group chargeList">
-				<!--<div class="mui-input-row mui-radio ">
-					<label><img src="../../images/recharge/jingdong.png"><i>京东支付</i></label>
-					<input name="choiceBank" type="radio" checked value="1">
-				</div>-->
 				<div class="mui-input-row mui-radio">
 					<label><img src="../../images/recharge/bankP.png"><i>网银支付</i></label>
 					<input name="choiceBank" type="radio" value="2" checked="checked">
@@ -49,22 +45,11 @@
 		</div>
 		<script>
 			mui.init();
+			var width=window.innerWidth;
+				$(".chargeList .mui-input-row label").css({
+					"width":+width-10+"px",
+				})
 			mui.plusReady(function(){
-				loadCss();
-					function loadCss(){
-						var Proportion=1;
-						var resolutionWidth=plus.screen.resolutionWidth;
-						Proportion=resolutionWidth/320;
-						$("#buttomDiv").css({
-							"line-height":Proportion*50+"px",
-							"height":Proportion*50+"px",
-						})
-						$("#buttomDiv button").css({
-							"line-height":Proportion*50+"px",
-							"height":Proportion*50+"px",
-						})
-					}
-				
 				
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
