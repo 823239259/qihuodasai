@@ -177,7 +177,7 @@
 						$("#username_list li").css({
 							"width":width-115+"px"
 						});
-						$("#username_list ul li").click(function(){
+						$("#username_list ul li").on("tap",function(){
 							var index=$(this).index();
 								$("#account").val(user[index].tranAccount);
 								$("#password").val(user[index].tranPassword);
