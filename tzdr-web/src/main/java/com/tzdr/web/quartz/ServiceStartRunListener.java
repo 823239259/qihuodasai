@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
-import com.tzdr.common.utils.WeChatQrcodeUtil;
+import com.tzdr.common.utils.WeChatUtil;
 @Service
 public class ServiceStartRunListener  implements ApplicationListener<ContextRefreshedEvent>{
 	private Logger logger = Logger.getLogger(ServiceStartRunListener.class);
@@ -32,7 +32,7 @@ public class ServiceStartRunListener  implements ApplicationListener<ContextRefr
 		}
 	}
 	public void WechatConfig(){
-		WeChatQrcodeUtil.setAPPID(props.getProperty("wechat.appid"));
-		WeChatQrcodeUtil.setSECRET(props.getProperty("wechat.appsecret"));
+		WeChatUtil.setAPPID(props.getProperty("wechat.appid"));
+		WeChatUtil.setSECRET(props.getProperty("wechat.appsecret"));
 	}
 }

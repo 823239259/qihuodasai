@@ -8,18 +8,36 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.sword.wechat4j.WechatSupport;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.service.wechat.WechatUserService;
+import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.utils.WeChatUtil;
+import com.tzdr.domain.web.entity.WUser;
+import com.tzdr.domain.web.entity.WechatUser;
 import com.tzdr.web.utils.HttpRequest;
 public class WeChatSupport extends WechatSupport{
-
+	@Autowired
+	private WUserService wUserService;
+	@Autowired 
+	private WechatUserService wechatUserService;
 	public WeChatSupport(HttpServletRequest request) {
 		super(request);
 	}
+	
+	
+	public WeChatSupport(HttpServletRequest request, WUserService wUserService, WechatUserService wechatUserService) {
+		super(request);
+		this.wUserService = wUserService;
+		this.wechatUserService = wechatUserService;
+	}
+
 
 	@Override
 	protected void click() {
@@ -99,8 +117,7 @@ public class WeChatSupport extends WechatSupport{
 
 	@Override
 	protected void scan() {
-		// TODO Auto-generated method stub
-		
+		responseText("维胜金融欢迎您！");
 	}
 
 	@Override
@@ -117,8 +134,57 @@ public class WeChatSupport extends WechatSupport{
 
 	@Override
 	protected void subscribe() {
-		// TODO Auto-generated method stub
-		
+		String eventKey = this.wechatRequest.getEventKey();
+		String openId = this.wechatRequest.getFromUserName();
+		String result = WeChatUtil.getWechatUser(openId);
+		JSONObject resultJson = JSONObject.parseObject(result);
+		System.out.println(resultJson);
+		boolean flag = true;
+		try {
+			int eventKeyLength = eventKey.length();
+			WechatUser wechatUser = null;
+			List<WechatUser> wechatUsers = wechatUserService.doGetWechatUserByOpenId(openId);
+			if(wechatUsers.size() > 0){
+				wechatUser = wechatUsers.get(0);
+				flag = false;
+			}else{
+				wechatUser = new WechatUser();
+			}
+			String userId = wechatUser.getUserId();
+			if(userId == null ||  userId.equals("-")){
+				WUser wUser = null;
+				if(eventKeyLength > 0){
+					String[] ser = eventKey.split("_");
+					if(ser.length > 1){
+						wUser = wUserService.findByGeneralizeId(ser[1]);
+						userId = wUser.getId();
+					}else{
+						userId = "-";
+					}
+				}else{
+					userId = "-";
+				}
+			}
+			wechatUser.setUserId(userId);
+			wechatUser.setWechatCity(resultJson.getString("city"));
+			wechatUser.setWechatCountry(resultJson.getString("country"));
+			wechatUser.setWechatGroupid(resultJson.getString("groupid"));
+			wechatUser.setWechatHeadimgurl(resultJson.getString("headimgurl"));
+			wechatUser.setWechatLanguage(resultJson.getString("language"));
+			wechatUser.setWechatNickName(resultJson.getString("nickname"));
+			wechatUser.setWechatOpenId(openId);
+			wechatUser.setWechatProvince(resultJson.getString("province"));
+			wechatUser.setWechatSex(resultJson.getString("sex"));
+			wechatUser.setWechatSubscribe("1");
+			if(flag){
+				wechatUserService.save(wechatUser);
+			}else{
+				wechatUserService.update(wechatUser);
+			}
+			responseText("感谢你关注维胜金融！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -129,8 +195,13 @@ public class WeChatSupport extends WechatSupport{
 
 	@Override
 	protected void unSubscribe() {
-		// TODO Auto-generated method stub
-		
+		String openId = this.wechatRequest.getFromUserName();
+		List<WechatUser> wechatUsers = wechatUserService.doGetWechatUserByOpenId(openId);
+		if(wechatUsers.size() > 0){
+			WechatUser user = wechatUsers.get(0);
+			user.setWechatSubscribe("0");
+			wechatUserService.update(user);
+		}
 	}
 
 	@Override
