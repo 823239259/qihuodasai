@@ -189,7 +189,7 @@
 		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
 		<button><a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
 		<button><a href="${ctx }/outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
-		<a href="javascript:void(0);" class="backPassword">找回密码</a>
+		<!-- <a href="javascript:void(0);" class="backPassword">找回密码</a> -->
 		<div id="more_account" style="display: none;">
 		</div>
 	</div>
@@ -401,6 +401,7 @@
 					        		<li  style="width: 80px;">交易所</li>
 					        		<li  style="width: 80px;">币种</li>
 				        		</ul>
+				        		<p class="hold_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 			        		</div>
 			        	</div>
 			        	<ul class="caozuo"  style = "display:none">
@@ -420,6 +421,7 @@
 					        		<li>委托量</li>
 					        		<li>挂单量</li>
 					        	</ul>
+					        	<p class="des_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 				        </div>	
 			        	<ul class="caozuo" style = "display:none">
@@ -444,6 +446,7 @@
 					        		<li style="width: 80px;">订单号</li>
 					        		<li style="width: 80px;">反馈信息</li>
 					        	</ul>
+					        	<p class="order_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 			        	</div>
 			        </div>
@@ -462,6 +465,7 @@
 					        		<li style="width: 120px;">成交时间</li>
 					        		<li style="width: 40px;">交易所</li>
 					        	</ul>
+					        	<p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 				        </div>	
 			        </div>
@@ -481,6 +485,7 @@
 					        		<li>冻结资金</li>
 					        		<li>盈利率</li>
 					        	</ul>
+					        	<p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 				        </div>	
 			        </div>
