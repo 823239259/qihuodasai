@@ -17,28 +17,22 @@
 			
 			loadCss();
     		function loadCss(){
-    			var Proportion=1;
-				var resolutionWidth=plus.screen.resolutionWidth;
-				Proportion=resolutionWidth/320;
-				console.log(Proportion);
+    			var width=window.innerWidth;
 				$(".sc_listsc").css({
-					"margin-top":Proportion*5+"px",
-					"padding":"0px "+Proportion*5+"px",
-				});
-				$(".mui-table-view-cell div").css({
-					"float":"left"
+					"margin-top":"5px",
+					"padding":"0px 5px",
 				});
 				$(".mui-table-view-cell div:nth-child(1)").css({
-					"width":Proportion*105+"px ",
+					"width":"100px ",
 				});
 				$(".mui-table-view-cell div:nth-child(2)").css({
-					"width":Proportion*200+"px ",
+					"width":width-110+"px ",
 				});
 				$(".sc_listscStyle div:nth-child(1)").css({
-						"width":Proportion*80+"px ",
+						"width":"75px ",
 				});
 				$(".sc_listscStyle div:nth-child(2)").css({
-						"width":Proportion*225+"px ",
+						"width":width-90+"px ",
 				})
 			}
 			//初始化监听头部和底部事件

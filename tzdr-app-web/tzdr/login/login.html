@@ -52,7 +52,8 @@
 			//清除遗留数据
 			clearinfo();
 			document.getElementById("back").addEventListener("tap",function(){
-    			history.back();
+				mui.app_back("accountno",true)
+//  			history.back();
     		});
     		document.getElementById("telBtn").addEventListener("tap",function(){
     			mui.callService();

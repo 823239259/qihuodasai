@@ -472,10 +472,7 @@ mui.plusReady(function(){
 			})
     	})
 	document.getElementById("backClose").addEventListener("tap",function(){
-		var re = plus.webview.getWebviewById("quotationMain");
-		if(re != null || re != undefined){
-			re.reload(); 
-		}
+		mui.app_back("quotationMain",true)
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 		marketSocket.close();
 		reconnect=false;
@@ -485,7 +482,6 @@ mui.plusReady(function(){
 			loginOutFlag = true;
 			loginFail = true;
 		};
-		mui.back();
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();

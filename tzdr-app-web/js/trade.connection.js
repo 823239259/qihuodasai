@@ -81,6 +81,7 @@ function tradeConnectionClose(){
 function loginOut(){ 
 	localStorage.removeItem("trade_account");
 	localStorage.removeItem("trade_password");
+	localStorage.removeItem("isMock");
 	username = null;
 	password = null;
 	socket = null;
