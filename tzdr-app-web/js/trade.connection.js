@@ -141,7 +141,8 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	socket.onopen = function() { 
+	plus.nativeUI.showWaiting("正在连接交易服务器...");
+	socket.onopen = function() {   
 		/*layer.closeAll();*/ 
 		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
 		//更新交易连接状态
@@ -149,7 +150,7 @@ function initLoad() {
 	}
 	socket.onmessage = function(evt) {
 		handleData(evt);
-	}
+	} 
 	socket.onclose = function() {
 		clearInterval(tradeIntervalId);
 		socket = null;
