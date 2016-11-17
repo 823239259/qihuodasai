@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var tradeSocketModelUrl = "";
 var tradeSocketVersion = "";
@@ -25,6 +25,8 @@ var tradeWebSocketIsMock = localStorage.getItem("isMock");
 function tradeConfig(){
 	this.TradeSocketUrl = "ws://139.196.228.143:6066";//ws://trade.vs.com:6060
 	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
+//	this.TradeSocketUrl = "ws://139.224.24.206:6066";//"ws://139.196.228.143:6066
+//	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
 	this.tradeSocketVersion = "";
 	this.tradeAppVersion = "1.1.1";
 	return this;
@@ -60,7 +62,7 @@ function loadConfig(){
 		tradeWebSocketConfig = TradeConfigTest();
 		marketSocketConfig = MarketConfigTest();
 	}else if(model == "live"){
-		tradeWebSocketConfig = TradeConfig();
+		tradeWebSocketConfig = tradeConfig(); 
 		marketSocketConfig = MarketConfig();
 	}
 	marketSocketUrl = marketSocketConfig.MarketSocketUrl;
