@@ -47,7 +47,6 @@
   			mui.app_request("/ftrade/params",{
   				"businessType":8
   			},function(result){
-  				console.log(JSON.stringify(result));
   				if(!mui.isnull(result.data)){
   					paramListAll=result.data.paramList;
   					mui.each(paramListAll,function(i,item){
@@ -97,7 +96,6 @@
   				});
   				}
   			},function(result){
-  				console.log(JSON.stringify(result))
   				mui.toast(result.message);
   				return;
   			},paramUrl)

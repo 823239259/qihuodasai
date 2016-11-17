@@ -157,7 +157,6 @@ mui.plusReady(function(){
     marketSocket.onerror = function(evt){
     };
     function sendHistoryMessage(num){
-    	console.log(num);
         var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
@@ -350,7 +349,6 @@ mui.plusReady(function(){
 			}
 		}
     	function drawChart(val){
-    		console.log(val);
     		 rawData = [];
 		     CandlestickChartOption=null;
 		    CandlestickVolumeChartOption=null;
@@ -472,10 +470,7 @@ mui.plusReady(function(){
 			})
     	})
 	document.getElementById("backClose").addEventListener("tap",function(){
-		var re = plus.webview.getWebviewById("quotationMain");
-		if(re != null || re != undefined){
-			re.reload(); 
-		}
+		mui.app_back("quotationMain",true)
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 		marketSocket.close();
 		reconnect=false;
@@ -485,7 +480,6 @@ mui.plusReady(function(){
 			loginOutFlag = true;
 			loginFail = true;
 		};
-		mui.back();
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();

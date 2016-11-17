@@ -193,13 +193,11 @@
     	
     	function settran_actual_lever(details){
     		var tal_ul=document.getElementById("tranActualLever_grid").getElementsByTagName("ul")[0];
-//				console.log(JSON.stringify(details));
     		mui.each(details.outDiskVoList,function(i,item){
     			var li=document.createElement("li");
     			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3");
     			var h5=document.createElement("h5");
     			var p=document.createElement("p");
-    			console.log(JSON.stringify(details));
     			switch (item.tradeType){
     			case 0:
     				h5.innerHTML="富时A50";
