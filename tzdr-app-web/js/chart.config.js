@@ -55,7 +55,6 @@
 		
     };
     function sendHistoryMessageProtype(num){
-    		console.log(num);
     		 var exchangeNo = $("#exchangeNo").val();
 		    var commodityNo = $("#commodeityNo").val();
 		    var contractNo = $("#contractNo").val();

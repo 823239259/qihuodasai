@@ -286,7 +286,6 @@
 					    }else if(method == "OnRspSubscribe"){
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
-//					         	console.log(JSON.stringify(MoreData));
 					        	insertData1(MoreData);
 					        
 					    }else if(method == "OnRtnQuote"){

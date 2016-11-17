@@ -157,7 +157,6 @@ mui.plusReady(function(){
     marketSocket.onerror = function(evt){
     };
     function sendHistoryMessage(num){
-    	console.log(num);
         var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
@@ -350,7 +349,6 @@ mui.plusReady(function(){
 			}
 		}
     	function drawChart(val){
-    		console.log(val);
     		 rawData = [];
 		     CandlestickChartOption=null;
 		    CandlestickVolumeChartOption=null;

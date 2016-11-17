@@ -80,7 +80,6 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
-				console.log("再试")
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
