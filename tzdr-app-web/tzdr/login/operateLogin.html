@@ -54,10 +54,6 @@
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 		<div id="username_list">
 			<ul>
-				<!--<li>rt</li>
-				<li>rt</li>
-				<li>rt</li>
-				<li>rt</li>-->
 			</ul>
 		</div>
 	</div>
@@ -346,6 +342,8 @@
 		      							})
 		      						}
 								} else {
+									var selectVal=$(".accountSelect").find("option:selected").text();
+									$(".accountSelect").find("option[text='"+selectVal+"']").attr("selected",true);
 									alertProtype(loginMessage,"提示",Btn.confirmed());
 									plus.nativeUI.closeWaiting();
 								}
