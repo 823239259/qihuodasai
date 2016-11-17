@@ -30,6 +30,17 @@
 	var win= null;
 		mui.init();
 		mui.plusReady(function(){
+			mui.back=function(){
+				if (mui.cacheUser.isLogin()){
+							var a=plus.webview.getWebviewById("account");
+							if(a){
+								mui.app_refresh('account');
+							}
+							mui.openWindow({url:"../account/account.html",id:'account'}); 
+							return;
+						}
+						mui.openWindow({url:"../account/accountno.html",id:"accountno"});
+			}
 			if (mui.cacheUser.isLogin()){
 				mui.openWindow("../quotation/quotationMain.html");
 			}
@@ -52,7 +63,16 @@
 			//清除遗留数据
 			clearinfo();
 			document.getElementById("back").addEventListener("tap",function(){
-				mui.app_back("accountno",true)
+				if (mui.cacheUser.isLogin()){
+							var a=plus.webview.getWebviewById("account");
+							if(a){
+								mui.app_refresh('account');
+							}
+							mui.openWindow({url:"../account/account.html",id:'account'}); 
+							return;
+						}
+						mui.openWindow({url:"../account/accountno.html",id:"accountno"});
+//				mui.app_back("accountno",true)
 //  			history.back();
     		});
     		document.getElementById("telBtn").addEventListener("tap",function(){

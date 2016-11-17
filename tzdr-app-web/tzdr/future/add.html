@@ -36,9 +36,9 @@
     				document.getElementById("balance").innerHTML=result.data.balance+"元";
     				document.getElementById('rate').innerHTML=result.data.rate;
     			}else{
-    				mui.toast("用户余额不存在，请重新登录！");
-    				mui.cacheUser.clear();
-    				mui.openWindow("../login/login.html");
+    				mui.toast("用户余额不足，请去充值");
+//  				mui.cacheUser.clear();
+    				mui.openWindow("../account/recharge.html");
     			}
     		},function(result){
     			mui.toast(result.message);
@@ -161,7 +161,7 @@
 		<li class="mui-table-view-cell">
 			<a class="mui-navigate-right" href="javascript:void(0);" id="charge">
 				<label>账户余额：</label>
-				<span class="add_color" id="balance">1002.34元</span>
+				<span class="add_color" id="balance">0.00元</span>
 				<b>去充值</b>
 			</a>
 		</li>			

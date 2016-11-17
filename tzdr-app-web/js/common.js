@@ -80,6 +80,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+				console.log("再试")
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -129,7 +130,7 @@
       			mui.each(cachepages,function(index,item){
 	      			//alert(item.getURL());
 	      			// 不是当前页和首页的都可以删除
-	      			if (item.getURL().indexOf('main.html')<0){
+	      			if (item.getURL().indexOf('start.html')<0){
 	      				plus.webview.close(item);
 	      			}
       			});
@@ -195,7 +196,7 @@
 				if(!mui.isnull(pageId)){
 					var _page = plus.webview.getWebviewById(pageId);
 					if(_page){
-						_page.reload(isRefresh);	
+						_page.reload(isRefresh);
 					}
 				}
 				return true;
