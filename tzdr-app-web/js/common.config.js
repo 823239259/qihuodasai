@@ -23,20 +23,20 @@ var tradeWebSocketIsMock = localStorage.getItem("isMock");
  */
 
 function tradeConfig(){
-	this.TradeSocketUrl = "ws://139.196.228.143:6066";//ws://trade.vs.com:6060
+	this.TradeSocketUrl = "ws://139.224.24.206:6066";//ws://trade.vs.com:6060
 	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
 //	this.TradeSocketUrl = "ws://139.224.24.206:6066";//"ws://139.196.228.143:6066
 //	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
-	this.tradeSocketVersion = "";
-	this.tradeAppVersion = "1.1.1";
+	this.tradeSocketVersion = "2.0.0";
+	this.tradeAppVersion = "2.0.0";
 	return this;
 }
 
 function TradeConfigTest(){ 
 	this.TradeSocketUrl = "ws://139.224.24.206:6066";//"ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
-	this.tradeSocketVersion = "";
-	this.tradeAppVersion = "1.1.1";
+	this.tradeSocketVersion = "2.0.0";
+	this.tradeAppVersion = "2.0.0";
 	return this; 
 }
 

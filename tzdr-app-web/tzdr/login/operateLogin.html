@@ -13,12 +13,13 @@
 		<script type="text/javascript" src="../../js/util.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.connection.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
+		 <link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ></a>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ><i>返回</i></a>
 		<h1 class="mui-title">操盘登录</h1>
 		<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
 	</header>
@@ -179,7 +180,8 @@
 								$("#password").val(user[index].tranPassword);
 								$("#username_list").css({
 									"display":"none"
-								})
+								});
+								checkValue();
 						});
 					},function(result){
 					},paramUrl);
@@ -208,6 +210,7 @@
 					var $this = $(this);
 					var val = $this.val(); 
 					setTradeConfig(val);
+					checkValue();
 						if(val==0){
 							 $("#account").bind("focus",function(){
 							  	$("#username_list").css({
@@ -348,8 +351,6 @@
 		      							})
 		      						}
 								} else {
-									var selectVal=$(".accountSelect").find("option:selected").text();
-									$(".accountSelect").find("option[text='"+selectVal+"']").attr("selected",true);
 									alertProtype(loginMessage,"提示",Btn.confirmed());
 									plus.nativeUI.closeWaiting();
 								}
@@ -359,7 +360,6 @@
 							if(loginSetTimeOut != null){ 
 								clearTimeout(loginSetTimeOut);
 							}
-							plus.webview.getWebviewById("operateLogin").reload();
 						}
 					}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
@@ -374,6 +374,7 @@
 						id:"tradingMarket"
 					})
 				});
+			checkValue();
 			});
 			/*按钮变色*/
 			function checkValue(){
