@@ -263,7 +263,7 @@
                     </div>
                 </div>         
                 <!-- 第五张 -->
-                <div class="mui-slider-item">
+                <div class="mui-slider-item" id="test">
                     <div class="item-logo">
                         <img src="images/startG1.png" style="width: 100%;height: 100%;">
                         <!--<div id="closeGuide">
@@ -294,9 +294,44 @@
                 		"left":Proportion*129+"px",
                 		"font-size":Proportion*16+"px",
                 	})
-                	
-                	
-                	
+                	var endPos;
+                	var isScrolling;
+                	document.getElementById("test").addEventListener("touchstart",function(event){
+                		var touch = event.targetTouches[0];     //touches数组对象获得屏幕上所有的touch，取第一个touch
+				            startPos = {x:touch.pageX,y:touch.pageY,time:+new Date};    //取第一个touch的坐标值
+				            isScrolling = 0;   //这个参数判断是垂直滚动还是水平滚动
+				            console.log(JSON.stringify(startPos));
+//				            this.addEventListener('touchmove',this,false);
+//				            this.addEventListener('touchend',this,false);
+                	})
+                	document.getElementById("test").addEventListener("touchmove",function(event){
+                		if(event.targetTouches.length > 1 || event.scale && event.scale !== 1) return;
+				            var touch = event.targetTouches[0];
+				            endPos = {x:touch.pageX - startPos.x,y:touch.pageY - startPos.y};
+				            isScrolling = Math.abs(endPos.x) < Math.abs(endPos.y) ? 1:0;    //isScrolling为1时，表示纵向滑动，0为横向滑动
+				            if(isScrolling === 0){
+				                event.preventDefault();      //阻止触摸事件的默认行为，即阻止滚屏
+				            }
+                	});
+                	document.getElementById("test").addEventListener("touchend",function(){
+                		 var duration = +new Date - startPos.time;    //滑动的持续时间
+				            if(isScrolling === 0){    //当为水平滚动时
+				                if(Number(duration) > 10){     
+				                    //判断是左移还是右移，当偏移量大于10时执行
+				                    if(endPos.x > 200){
+				                        mui.openWindow({
+					                			url:"tzdr/quotation/quotationMain.html",
+					                			id:"quotationMain"
+					                		})
+				                    }else if(endPos.x < -200){
+				                       mui.openWindow({
+				                			url:"tzdr/quotation/quotationMain.html",
+				                			id:"quotationMain"
+				                		})
+				                    }
+				                }
+				            }
+                	})
                     if (mui.os.ios) {
                         plus.navigator.setFullscreen(true);
                     }
