@@ -32,7 +32,6 @@
 	
 </head>
 <body>
-<%@ include file="../common/homeheader.jsp"%>
 <form  id="questionFrom" name="questionFrom" method="post" action="${ctx}/telphone">
 <input hidden="id" id="id" name="id">
 <div class="question">
@@ -225,7 +224,7 @@
 </form>
 
 <!-- 公司简介 -->
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

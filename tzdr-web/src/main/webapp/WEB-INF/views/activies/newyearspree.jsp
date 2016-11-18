@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 
 <div class="tp_main1"><img src="${ctx}/static/images/newyearspree/img_01.jpg" ></div>
 <div class="tp_main1"><img src="${ctx}/static/images/newyearspree/img_02.jpg" ></div>

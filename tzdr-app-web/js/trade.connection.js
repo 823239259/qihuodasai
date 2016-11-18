@@ -81,6 +81,7 @@ function tradeConnectionClose(){
 function loginOut(){ 
 	localStorage.removeItem("trade_account");
 	localStorage.removeItem("trade_password");
+	localStorage.removeItem("isMock");
 	username = null;
 	password = null;
 	socket = null;
@@ -140,15 +141,16 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	socket.onopen = function() { 
+	plus.nativeUI.showWaiting("正在连接交易服务器...");
+	socket.onopen = function() {   
 		/*layer.closeAll();*/ 
-		Trade.doLogin(username , password,tradeWebSocketIsMock); 
+		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
 		//更新交易连接状态
 		changeConnectionStatus();
 	}
 	socket.onmessage = function(evt) {
 		handleData(evt);
-	}
+	} 
 	socket.onclose = function() {
 		clearInterval(tradeIntervalId);
 		socket = null;
@@ -223,7 +225,7 @@ function getVersion(){
 				tradeWebSocketVersion = data.socketVersion;
 				tradeWebsocketModelUrl = data.socketModelUrl;
 				isGetVersion = true; 
-			}
+			} 
 		} ,
 		error:function(result){
 		}

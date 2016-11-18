@@ -165,6 +165,19 @@ $(function() {
 				marginLeft: -(popupWidth)
 			});
 		}
+		
+		function sign(){
+			$("#sign_login").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $(".tck01").outerHeight()/2;
+			var popupWidth = $(".tck01").outerWidth()/2;    
+			$(".tck01").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+		}
 		/*找回密码*/
 		/*$(".backPassword").click(function() {
 			$("#back_passwork").css("display","block");
@@ -178,12 +191,32 @@ $(function() {
 				marginLeft: -(popupWidth)
 			});
 		});*/
-		
+		$("#sign_login").click(function() {
+			$("#signLogin").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $("#signLogin").outerHeight()/2;
+			var popupWidth = $("#signLogin").outerWidth()/2;    
+			$("#signLogin").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+		});
+		$(".signLogin_close").click(function() {
+			$("#div_Mask").css("display","none");
+			$("#signLogin").css("display","none");
+		})
 		/*隐藏*/
 		$(".close").click(function() {
 			$(".tck01").css("display","none");
 			$("#div_Mask").css("display","none");
 		})
+		$("#signLogin .signLogin_span").click(function(){
+	        var _this = $(this);
+	        $("#signLogin .signLogin_span").removeClass("on").eq(_this.index()).addClass("on");
+	        $("#signLogin .signLogin_mode .signLogin_all").hide().eq(_this.index()).show();
+        });
 /* 弹出层结束 */
 		/*滚动条*/
 		$(function(){

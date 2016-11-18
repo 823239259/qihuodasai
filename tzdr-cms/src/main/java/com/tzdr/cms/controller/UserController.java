@@ -1,4 +1,5 @@
 package com.tzdr.cms.controller;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -125,7 +126,14 @@ public class UserController  extends BaseCmsController<User>
 		userService.resetPassword(idSet,MessageUtils.message("user.default.password",new Object()));
 		return new JsonResult(MessageUtils.message("user.reset.password.success"));
 	}
-	
+	@RequestMapping(value = "/get",method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResult get(HttpServletRequest request,User user){
+		JsonResult jsonResult = new JsonResult(true);
+		List<User> users = userService.getAll();
+		jsonResult.appendData("data", users);
+		return jsonResult;
+	}
 	
 	/**
 	 * 测试代码：含参数的搜索  search_EQ_name

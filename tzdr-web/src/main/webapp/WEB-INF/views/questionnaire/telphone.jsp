@@ -36,7 +36,6 @@ $(document).ready(function(){
 	
 </head>
 <body>
-<%@ include file="../common/homeheader.jsp"%>
 <form action="${ctx}/sendAccount" id="" method="post">
 <input type="hidden" name="id" id="id" value="${entity.id}">
 <div class="question">
@@ -73,7 +72,7 @@ $(document).ready(function(){
 
 
 <!-- 公司简介 -->
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

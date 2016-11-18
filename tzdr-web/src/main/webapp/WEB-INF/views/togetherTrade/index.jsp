@@ -13,7 +13,7 @@
 </head>
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 <!-- 浮动层 -->
 <div class="floatlayer" style="display:none;"></div>
 <!-- 隐藏域值：最大总操盘金额、最小总操盘金额-->
@@ -167,7 +167,7 @@
     <div class="buy_agree"><input type="checkbox" checked="checked" id="agree"><em>我已阅读并同意</em><a href="javascript:lookContract();">《股票合买操盘合作协议》</a></div>
     </form>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 </body>
 <script type="text/javascript">
 function lookContract(){

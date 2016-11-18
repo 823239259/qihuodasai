@@ -2,7 +2,9 @@ package com.tzdr.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +59,28 @@ public class DateUtils {
 		}
 		return date;
 	}
-	
-	
+	// 获得当前日期与本周日相差的天数  
+	public static int getMondayPlus(Date gmtCreate) {  
+	    Calendar cd = Calendar.getInstance();  
+	    cd.setTime(gmtCreate);  
+	    int dayOfWeek = cd.get(Calendar.DAY_OF_WEEK) - 1; 
+	    if (dayOfWeek == 1) {  
+	        return 0;  
+	    } else {  
+	        return 1 - dayOfWeek;  
+	    }  
+	}  
+	/**
+	 * 按照num加减来计算相应的时间
+	 * @param gmtCreate
+	 * @param num
+	 * @return
+	 */
+	public static Date addDates(Date gmtCreate,Integer num) {  
+	    int mondayPlus = getMondayPlus(gmtCreate);  
+	    GregorianCalendar currentDate = new GregorianCalendar();  
+	    currentDate.add(GregorianCalendar.DATE, mondayPlus + num);  
+	    Date monday = currentDate.getTime();  
+	    return monday;  
+	}
 }

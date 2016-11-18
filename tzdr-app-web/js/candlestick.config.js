@@ -72,7 +72,6 @@
 		            }
              	  },
 		         formatter: function (params) {
-		         	console.log(JSON.stringify(params))
 		            var res = "时间:"+params[0].name;
 		            res += '<br/>  开盘 : ' + params[0].value[0] + '<br/>  最高 : ' + params[0].value[3];
 		            res += '<br/>  收盘 : ' + params[0].value[1] + '<br/>  最低 : ' + params[0].value[2];

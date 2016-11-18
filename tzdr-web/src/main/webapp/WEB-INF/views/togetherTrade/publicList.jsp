@@ -14,7 +14,7 @@
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 
 	<!-- 浮动层 -->
 	<div class="floatlayer" style="display: none;"></div>
@@ -99,6 +99,6 @@
 		<div id="Pagination" style="margin: 20px 0;"></div>
 	</div>
 	<!-- 底部 -->
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 </body>
 </html>

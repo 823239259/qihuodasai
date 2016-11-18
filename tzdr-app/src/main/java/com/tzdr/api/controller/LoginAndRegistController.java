@@ -88,7 +88,6 @@ public class LoginAndRegistController {
 
 	private static Object lock = new Object();
 	
-	
 	/**
 	 * 系统注册接口
 	 * @param requestObj
@@ -105,7 +104,6 @@ public class LoginAndRegistController {
 		String parentGeneralizeId=requestObj.getParentGeneralizeId();
 	    String channel = requestObj.getChannel();
 		if (StringUtil.isBlank(mobile)
-				|| StringUtil.isBlank(code)
 				|| StringUtil.isBlank(password)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
 		}
@@ -121,17 +119,6 @@ public class LoginAndRegistController {
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		if (!ObjectUtil.equals(null, appUserVo)){
 			return new ApiResult(false,ResultStatusConstant.Regist.MOBILE_EXIST,"mobile.exist.");
-		}
-		
-		SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile);  //获取验证码信息
-		if (ObjectUtil.equals(null,securityCode) 
-				|| !StringUtil.equals(code, securityCode.getSecurityCode())){
-			return new ApiResult(false,ResultStatusConstant.Regist.ERROR_CODE,"error.code.");
-		}
-		
-		if((Dates.getCurrentLongDate()-securityCode.getCreatedate()) > DataConstant.VALIDATE_CODE_INVALID_TIME){ 
-			//判断验证码是否失效
-			return new ApiResult(false,ResultStatusConstant.Regist.INVALID_CODE,"invalid.code.");
 		}
 		
 		if(StringUtil.isNotBlank(parentGeneralizeId) 

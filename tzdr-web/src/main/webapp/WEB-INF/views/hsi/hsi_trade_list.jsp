@@ -194,7 +194,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 	</div>
     
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	<div class="uc">
 		<!--个人中心导航 -->
 		<%@ include file="../common/leftnav.jsp"%>
@@ -239,7 +239,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		<div class="fl_mask" style="display:none; z-index:20;"></div>
 
 	</div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 </html>

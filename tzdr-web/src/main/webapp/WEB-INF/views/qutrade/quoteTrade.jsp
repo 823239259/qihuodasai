@@ -14,12 +14,11 @@
 <!-- 弹出层 -->
 <link href="${ctx }/static/css/quotation.css?v=${v}" rel="stylesheet" type="text/css" />
 <link  href="${ctx}/static/script/layer/skin/layer.css?v=${v}"  rel="stylesheet" type="text/css"></link> 
-<script type='text/javascript' src="${ctx}/static/script/qutrade/quotation.js?v=${v}"></script>
-<script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/jquery-1.8.3.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/quote.trade.js?v=${v}"></script>
+<script type='text/javascript' src="${ctx}/static/script/qutrade/quotation.js?v=${v}"></script>
 
 <script type='text/javascript' src="${ctx}/static/script/layer/layer.js?v=${v}"></script>
-
 
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.config.js?v=${v}"></script>
 <script type='text/javascript' src="${ctx}/static/script/qutrade/quote/quote.send.js?v=${v}"></script>
@@ -148,21 +147,54 @@
 	 		
 	 	</div>
 	</div>
+	<div class="tck01" id="open_account" style="display: none;">
+		<div class="smain">
+			<div>
+				<p>模拟账户申请功能正在研发中，</p>
+				<p>联系客服：<span style="color:#fc3;">400-852-8008</span>，为您手动开通</p>
+			</div>
+		</div>
+		<div class="anniu">
+	 		
+	 	</div>
+	</div>
+	<div class="" id="signLogin" style="display:none;">
+		<p class="p1">
+			<span class="signLogin_span on" data-tion = "0">实盘登录</span>
+			<span class="signLogin_span" data-tion = "1">模拟盘登录</span>
+			<i>|</i>
+			<a class="signLogin_close" href="javascript:void(0);">✖</a>
+		</p>
+		<div class="signLogin_mode">
+			<div class="signLogin_all signLogin_firm"  style="display: block;">
+				<p class="p2"><input type="text" name="firm_name" id="firm_name" placeholder="输入实盘账号"></p>
+				<p class="p2"><input type="password" name="firm_password" id="firm_password" placeholder="输入实盘密码"></p>
+				<p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+				<p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="${ctx }/outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
+			</div>
+			<div class="signLogin_all signLogin_simulation">
+				<p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
+				<p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
+				<p class="p3"><a href="javascript:void(0)"  class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span></p>
+			</div>
+		</div>	
+	</div>
 </div>
 <!-- top -->
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
 	<div class="quotation_anniu" id = "show_login">
-		<input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
-		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/>
-		<button><a href="#" id = "trade_login">登录</a></button>
+		<!-- <input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
+		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
+		<button><a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
 		<button><a href="${ctx }/outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
-		<a href="javascript:void(0);" class="backPassword">找回密码</a>
+		<!-- <a href="javascript:void(0);" class="backPassword">找回密码</a> -->
 		<div id="more_account" style="display: none;">
 		</div>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
-		当前账户:<b id = "top_username"></b>
+		<b id = "ismockReak"></b><b id = "top_username"></b>
 		<button id = "trade_loginOut" style="width: 80px;">退出登录</button>
 		<button style="width: 80px;"><a href="${ctx }/outDisk/index"  target="_blank" style="display: inline;">立即开户</a></button>
 	</div>
@@ -369,6 +401,7 @@
 					        		<li  style="width: 80px;">交易所</li>
 					        		<li  style="width: 80px;">币种</li>
 				        		</ul>
+				        		<p class="hold_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 			        		</div>
 			        	</div>
 			        	<ul class="caozuo"  style = "display:none">
@@ -388,6 +421,7 @@
 					        		<li>委托量</li>
 					        		<li>挂单量</li>
 					        	</ul>
+					        	<p class="des_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 				        </div>	
 			        	<ul class="caozuo" style = "display:none">
@@ -412,6 +446,7 @@
 					        		<li style="width: 80px;">订单号</li>
 					        		<li style="width: 80px;">反馈信息</li>
 					        	</ul>
+					        	<p class="order_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 			        	</div>
 			        </div>
@@ -430,6 +465,7 @@
 					        		<li style="width: 120px;">成交时间</li>
 					        		<li style="width: 40px;">交易所</li>
 					        	</ul>
+					        	<p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 				        </div>	
 			        </div>
@@ -449,16 +485,17 @@
 					        		<li>冻结资金</li>
 					        		<li>盈利率</li>
 					        	</ul>
+					        	<p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
 				        	</div>
 				        </div>	
 			        </div>
 			    </div>
 				<div class="quotation_detailed_qx">
-					<label style="margin-left: 10px;">账户资产：<span id = "todayBalance">00.0</span></label>
-					<label>交易保证金：<span id = "deposit">00.0</span></label>
-					<label>账户余额：<span id = "todayCanUse">00.0</span></label>
-					<label>持仓盈亏：<span id = "floatingProfit">00.0</span></label>
-					<label>交易盈亏：<span id = "closeProfit">00.0</span></label>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label style="margin-left: 10px;">账户资产：</br><span id = "todayBalance">00.0</span></label>
+					<label>交易保证金：</br><span id = "deposit">00.0</span></label>
+					<label>账户余额：</br><span id = "todayCanUse">00.0</span></label>
+					<label>持仓盈亏：</br><span id = "floatingProfit">00.0</span></label>
+					<label>交易盈亏：</br><span id = "closeProfit">00.0</span></label>
 					<a href="${ctx }/toUserftseTradeListSSO" target="_blank">追加保证金</a>
 				</div>
 			</div>

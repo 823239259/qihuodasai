@@ -187,7 +187,7 @@ p{
 	z-index: 998;
 }
 .Assets p span{
-	font-size: 12px;
+	font-size: 14px;
 	display: inline-block;
 	width: 33.33%;
 	text-align: center;
@@ -300,7 +300,7 @@ p{
 	overflow: hidden;
 }
 .ProductInformationRight p{
-	font-size: 12px;
+	font-size: 14px;
 }
 .grayFont{
 	color:#999999 !important;
@@ -324,7 +324,7 @@ p{
 	width: 50%;
 	height:40px;
 	line-height: 40px;
-	font-size: 12px;
+	font-size: 14px;
 	border-bottom: 1px solid #454545;
 	padding:0px 15px;
 	
@@ -363,7 +363,6 @@ p{
 	line-height: 40px;
 	color:#CCCCCC;
 	font-size: 12px;
-	
 }
 .listStyle li a span{
 	text-align: center;
@@ -530,7 +529,7 @@ p{
 	width: 25%;
 	text-align: left;
 	padding:9px 0px 13px;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 14px;
 	color:#999999;
 	position: absolute;
@@ -806,7 +805,7 @@ input{
 }
 #numberInput{
 	padding:10px ;
-	font-size: 12px;
+	font-size: 14px;
 }
 #numberInput input{
 	height: 50px;
@@ -1040,4 +1039,9 @@ input{
 	position: relative;
 	z-index: 10;
 	background-color: rgba(0,0,0,0);
+}
+#backClose i{
+	font-style: normal;
+	    font-size: 14px;
+    vertical-align: 2px;
 }

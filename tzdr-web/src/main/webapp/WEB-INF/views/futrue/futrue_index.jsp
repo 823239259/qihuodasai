@@ -175,7 +175,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	<div class="floatlayer">
 		<div class="fl_mask" style="display: none;"></div>
 		<!-- 限制股弹出框 -->
@@ -357,7 +357,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</form>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 	<%@ include file="../common/dsp.jsp"%>
 	<script>
 !function(w,d,e){

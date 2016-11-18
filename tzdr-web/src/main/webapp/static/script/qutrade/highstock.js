@@ -2037,7 +2037,7 @@
                 loading: "Loading...",
                 months: "January February March April May June July August September October November December".split(" "),
                 shortMonths: "1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月".split(" "),
-                weekdays: "周天 周一 周二  周三 周四 周五 周六".split(" "),
+                weekdays: "周日 周一 周二 周三 周四 周五 周六".split(" "),
                 decimalPoint: ".",
                 numericSymbols: "kMGTPE".split(""),
                 resetZoom: "Reset zoom",

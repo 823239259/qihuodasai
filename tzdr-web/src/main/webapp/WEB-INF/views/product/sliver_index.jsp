@@ -35,7 +35,7 @@
 </head>
 <body>
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	<input type="hidden" id="inputTraderBaseBond" name="inputTraderBaseBond" value="${fSimpleProductConfig.traderBond}"/>
 	<input type="hidden" id="inputTraderBaseMoney" name="inputTraderBaseMoney" value="${fSimpleProductConfig.traderMoney}"/>
 	<input type="hidden" id="inputTraderBaseLineLoss" name="inputTraderBaseLineLoss" value="${fSimpleProductConfig.lineLoss}"/>
@@ -239,7 +239,7 @@
 		
 		</div>
 	</form>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 	<%@ include file="../common/dsp.jsp"%>
 	<script>
 !function(w,d,e){

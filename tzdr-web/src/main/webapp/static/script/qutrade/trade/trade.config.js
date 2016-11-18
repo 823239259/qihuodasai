@@ -7,9 +7,21 @@ var model = "dev";
  */
 var tradeWebsocketUrl = null;
 /**
+ * 模拟socket地址
+ */
+var tradeWebSocketModelUrl = null;
+/**
  * websocket模式,0-实盘，1-模拟盘
  */
 var tradeWebSocketIsMock = 0;
+/**
+ * websocket交易版本
+ */
+var tradeWebSocketVersion = null;
+/**
+ * webcms后台配置版本
+ */
+var tradeWebCmsVersion = null;
 /**
  * 全局使用的交易配置对象
  */
@@ -20,6 +32,8 @@ var tradeWebSocket = null;
 function tradeConfigNewinstance(){
 	this.url = "ws://socket.vs.com:6060";
 	this.isMockUrl = "ws://139.224.24.206:6066";
+	this.version = "";
+	this.webVersion = "1.1.1";
 	return this;
 }
 /**
@@ -29,6 +43,8 @@ function tradeConfigNewinstanceTest(){
 	//this.url = "ws://192.168.0.213:6060";
 	this.url = "ws://139.224.24.206:6066";
 	this.isMockUrl = "ws://139.224.24.206:6066";
+	this.version = "";
+	this.webVersion = "1.1.1";
 	return this;
 }
 /**
@@ -48,11 +64,10 @@ function initTradeConfig(){
  */
 function setTradeWebSoketUrl(){
 	if(tradeWebSocket != null){
-		if(tradeWebSocketIsMock == 0){
-			this.tradeWebsocketUrl = tradeWebSocket.url;
-		}else if(tradeWebSocketIsMock == 1){
-			this.tradeWebsocketUrl = tradeWebSocket.isMockUrl;
-		}
+		tradeWebsocketUrl = tradeWebSocket.url;
+		tradeWebSocketModelUrl = tradeWebSocket.isMockUrl;
+		tradeWebSocketVersion = tradeWebSocket.version;
+		tradeWebCmsVersion = tradeWebSocket.webVersion;
 	}
 }
 /**

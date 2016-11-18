@@ -507,6 +507,7 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 				fund.setAddtime(new Date().getTime()/1000);
 				fund.setUptime(new Date().getTime()/1000);
 				fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss")+"充值"+money+"元");
+				fund.setSysUserId("-");
 				userFundService.arrearsProcess(fund);
 				logger.info("交易完成：订单号{}",orderNo);
 			}
@@ -552,6 +553,7 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 				fund.setAddtime(new Date().getTime()/1000);
 				fund.setUptime(new Date().getTime()/1000);
 				fund.setRemark(DateUtils.dateTimeToString(new Date(), "yyyy-MM-dd HH:mm:ss")+"充值"+money+"元");
+				fund.setSysUserId("-");
 				userFundService.arrearsProcess(fund);
 				logger.info("交易完成：订单号{}",orderNo);
 			}
