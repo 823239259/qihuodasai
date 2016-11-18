@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tzdr.business.service.crawler.CrawlerCalendarService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.utils.Page;
 import com.tzdr.domain.dao.crawler.CrawlerCalendarDao;
 import com.tzdr.domain.web.entity.CrawlerCalendar;
 
@@ -80,7 +81,7 @@ public class CrawlerCalendarServiceImp  extends BaseServiceImpl<CrawlerCalendar,
 		getEntityDao().deleteInBatch(entities);
 	}
 	@Override
-	public List<CrawlerCalendar> doGetCrwlerCalendar() {
-		return getEntityDao().getAll();
+	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page) {
+		return getEntityDao().findByCalerdarPage(page.getPageIndex(), page.getSize());
 	}
 }

@@ -69,7 +69,8 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 				crawlerUrl = getCrawlerUrlService().get(crawlerUrl.getId());
 				crawlerUrl.setLastWallstreetnId(wallId);
 				crawlerUrl.setLastWallstreetnTime(jsonObject.getString("createdAt"));
-				getCrawlerUrlService().update(getCrawlerUrl());
+				getCrawlerUrlService().update(crawlerUrl);
+				setCrawlerUrl(crawlerUrl);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +92,7 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 		live.setCreatedAt(jsonObject.getLong("createdAt"));
 		live.setUpdatedAt(jsonObject.getLong("updatedAt"));
 		live.setImportance(jsonObject.getString("importance"));
-		live.setPublished("0");
+		live.setPublished(jsonObject.getString("published"));
 		live.setStar(jsonObject.getString("start"));
 		live.setType(jsonObject.getString("type"));
 		return live;
@@ -129,6 +130,7 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 		content.setVideo(jsonObject.getString("video"));
 		content.setVideoCount(jsonObject.getString("videoCount"));
 		content.setCategorySet(jsonObject.getString("categorySet"));
+		content.setLiveId(jsonObject.getString("id"));
 		return content;
 	}
 	public static CrawlerWallstreetnLiveService getCrawlerWallstreetnLiveService() {

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveContentService;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.utils.Page;
 import com.tzdr.domain.dao.crawler.CrawlerWallstreetnLiveDao;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLiveContent;
@@ -39,7 +40,7 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 	   logger.info("新增"+saveSize+"条");
 	}
 	@Override
-	public List<CrawlerWallstreetnLive> getCrawler() {
-		return  getEntityDao().getAll();
+	public List<CrawlerWallstreetnLive> getCrawler(Page page) {
+		return  getEntityDao().findByCrawlerPage(page.getPageIndex(), page.getSize());
 	}
 }
