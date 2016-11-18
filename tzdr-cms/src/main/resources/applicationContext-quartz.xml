@@ -35,7 +35,7 @@
 				<ref bean="payeaseWithDrawalTrigger"/>	
 				<ref bean="monthTradeTrigger"/>	
 				<ref bean="activityLossFreeTrigger" />
-				<!-- <ref bean="crawlerCalendarBackUpTrigger"/> -->
+				<ref bean="crawlerCalendarBackUpTrigger"/>
 			</list>
 		</property>
 		<!--  quartz配置文件路径, 指向cluster配置 -->
@@ -318,12 +318,12 @@
 		<property name="jobClass" value="com.tzdr.cms.quartz.LossFreeRebatesJob" />
 	</bean>
 	<!-- 第三方数据（华尔街见闻-日历）备份 每周星期一早上9点执行-->
-	<!-- <bean id="crawlerCalendarBackUpTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+	<bean id="crawlerCalendarBackUpTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
 		<property name="jobDetail" ref="crawlerCalendarBackUpFree" />
 		<property name="cronExpression" value="0 0 9 ? * MON" />
 	</bean>
 	<bean id="crawlerCalendarBackUpFree" class="org.springframework.scheduling.quartz.JobDetailFactoryBean" >
 		<property name="durability" value="false"/>
 		<property name="jobClass" value="com.tzdr.cms.quartz.WallStreetcnBackHistoryJob" />
-	</bean> -->
+	</bean>
 </beans>

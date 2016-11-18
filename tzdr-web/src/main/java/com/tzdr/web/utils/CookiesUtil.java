@@ -57,4 +57,17 @@ public class CookiesUtil {
 		cookie.setPath("/");
 		response.addCookie(cookie);
 	}
+	/**
+	 * 增加cookie
+	 * @param response
+	 * @param name
+	 * @param value
+	 * @param domain
+	 */
+	public static void addCookie(HttpServletResponse response,String name,String value,String domain){
+		 Cookie cookie = new Cookie(name,value);
+	     cookie.setPath("/");
+	     cookie.setDomain(domain);
+	     response.addCookie(cookie);
+	}
 }
