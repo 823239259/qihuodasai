@@ -81,6 +81,7 @@ function handleData(evt){
 				//登录失败清理数据
 				loginOut();
 			}
+			plus.nativeUI.closeWaiting();
 			//查询个人账户信息回复
 		} else if (method == "OnRspQryAccount") {
 			var accountParam = parameters;
@@ -669,7 +670,7 @@ function addPostion(param){
 				+ '			<span class = "position0">'+contractCode+'</span>'
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
-				+ '			<span class = "position3">'+openAvgPrice+'</span>'
+				+ '			<span class = "position3">'+holdAvgPrice+'</span>'
 				+ '			<span class = "position4 dateTimeL"><input readonly = "readonly" type="text" value = "'+floatingProfit+'" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;background-color:transparent;font-size:12px;width:160px;" id = "floatValue'+contractCode+'" /></span>'
 				+ '			<span class = "position5" style = "display:none">'+commodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+contractNo+'</span>'
@@ -709,12 +710,12 @@ function updatePostion(param){
 	}
 	var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
 	var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
-	var $openAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
+	var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
 	var $floatP = $("li[data-tion-position='"+contractCode+"'] span[class = 'position8']");
 	var $floatingProfit =$("#floatValue"+contractCode);
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($openAvgPrice.text()).toFixed(2) *  oldHoldNum;
+	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(2) *  oldHoldNum;
 	var price = parseFloat(openAvgPrice).toFixed(2) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
@@ -725,7 +726,7 @@ function updatePostion(param){
 			doSize = localCommodity.DotSize;
 		}
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
-		$openAvgPrice.text(openAvgPrice);
+		$holdAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 

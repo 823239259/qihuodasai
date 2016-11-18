@@ -13,12 +13,13 @@
 		<script type="text/javascript" src="../../js/util.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.connection.js" ></script>
 		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
+		 <link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ></a>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ><i>返回</i></a>
 		<h1 class="mui-title">操盘登录</h1>
 		<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
 	</header>
@@ -28,7 +29,7 @@
 				<label>账号类型：</label>
 				<select class="accountSelect mui-btn mui-btn-block">
 					<option class="mui-selected"  value="0">实盘账号</option>
-					<option class="mui-selected" id="checkContent" value="1">模拟账号</option>
+					<option class="mui-selected" id="checkContent" value="1">模拟盘账号</option>
 				</select>
 				<img src="../../images/down.png" id="selectBg">
 			</div>
@@ -54,10 +55,6 @@
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 		<div id="username_list">
 			<ul>
-				<!--<li>rt</li>
-				<li>rt</li>
-				<li>rt</li>
-				<li>rt</li>-->
 			</ul>
 		</div>
 	</div>
@@ -163,7 +160,6 @@
 						mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
 						var data=result.data;
 						var Len=data.length;
-						console.log(JSON.stringify(data));
 						for(var i=0;i<=Len;i++){
 							if(i==Len){
 								
@@ -184,7 +180,8 @@
 								$("#password").val(user[index].tranPassword);
 								$("#username_list").css({
 									"display":"none"
-								})
+								});
+								checkValue();
 						});
 					},function(result){
 					},paramUrl);
@@ -213,6 +210,7 @@
 					var $this = $(this);
 					var val = $this.val(); 
 					setTradeConfig(val);
+					checkValue();
 						if(val==0){
 							 $("#account").bind("focus",function(){
 							  	$("#username_list").css({
@@ -226,7 +224,7 @@
 							$("#account").unbind("focus");
 							$("#regLogin").unbind("tap",loginCheck);
 							$("#regLogin").bind("tap",loginCheckBind);
-							$("#regLogin").text("模拟开户申请")
+							$("#regLogin").text("模拟盘开户申请")
 						}
 				}); 
 				  $("#account").bind("focus",function(){
@@ -276,8 +274,15 @@
 						});
 				}
 				function loginCheckBind(){
-					mui.confirm("暂时未开通模拟盘账号申请功能，请拨打客服热线400-825-800，为您手动开通","提示",["确认"],function(e){
-					})
+					plus.nativeUI.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。",function(e){
+							if(e.index==1){
+								plus.device.dial("4008528008",false);
+							}
+						},
+						"400-852-8008",["取消","呼叫"]);
+					
+//					mui.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。","提示",["确认"],function(e){
+//					})
 				}
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.callService();
@@ -355,7 +360,6 @@
 							if(loginSetTimeOut != null){ 
 								clearTimeout(loginSetTimeOut);
 							}
-							plus.webview.getWebviewById("operateLogin").reload();
 						}
 					}else{
 						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
@@ -370,6 +374,7 @@
 						id:"tradingMarket"
 					})
 				});
+			checkValue();
 			});
 			/*按钮变色*/
 			function checkValue(){

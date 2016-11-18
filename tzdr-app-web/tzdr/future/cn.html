@@ -17,28 +17,22 @@
 			
 			loadCss();
     		function loadCss(){
-    			var Proportion=1;
-				var resolutionWidth=plus.screen.resolutionWidth;
-				Proportion=resolutionWidth/320;
-				console.log(Proportion);
+    			var width=window.innerWidth;
 				$(".sc_listsc").css({
-					"margin-top":Proportion*5+"px",
-					"padding":"0px "+Proportion*5+"px",
-				});
-				$(".mui-table-view-cell div").css({
-					"float":"left"
+					"margin-top":"5px",
+					"padding":"0px 5px",
 				});
 				$(".mui-table-view-cell div:nth-child(1)").css({
-					"width":Proportion*95+"px ",
+					"width":"100px ",
 				});
 				$(".mui-table-view-cell div:nth-child(2)").css({
-					"width":Proportion*210+"px ",
+					"width":width-110+"px ",
 				});
 				$(".sc_listscStyle div:nth-child(1)").css({
-						"width":Proportion*65+"px ",
+						"width":"75px ",
 				});
 				$(".sc_listscStyle div:nth-child(2)").css({
-						"width":Proportion*240+"px ",
+						"width":width-90+"px ",
 				})
 			}
 			//初始化监听头部和底部事件
@@ -232,8 +226,8 @@
 	</ul>
 	<ul class="mui-table-view sc_listsc sc_listscStyle">
 		<li class="mui-table-view-cell">
-			<label>投资标的：</label>
-			<span>新华富时A50指数当期主力合约<i id="mainContract">CL1603</i></span>
+			<div><label>投资标的：</label></div>
+			<div><span>新华富时A50指数当期主力合约<i id="mainContract">CL1603</i></span></div>
 		</li>			
 		<li class="mui-table-view-cell">
 			<div><label>交易时间：</label></div>
