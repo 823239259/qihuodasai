@@ -170,7 +170,8 @@ function confirmBankPay() {
 function bankPayClose() {
 	$("#bankPay").window('close');
 };
-$.getJSON(Check.rootPath()+'/admin/user/get',function(json){
+
+$.getJSON(Check.rootPath() +'/admin/user/get',function(json){
 	$('#combobox').combobox({         
             data:json.data.data, //此为重点
             valueField:'id',

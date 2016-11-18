@@ -64,7 +64,7 @@ $(document).ready(function(){
 <body>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	
 	<!-- 最大操盘额限制弹框 -->
 	<c:if test="${isOpen eq 1 and loginStatus eq 1}">
@@ -372,7 +372,7 @@ $(document).ready(function(){
     </div>
     </form>
  </div>
-	<%@ include file="../common/personfooter.jsp"%>
+	<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){

@@ -1,7 +1,3 @@
-/**
- * 初始化交易
- */
-initTrade();
 //持仓发送请求次数记录
 var holdFirstLoadDataIndex = 0;
 //个人账户信息发送请求次数纪录
@@ -85,6 +81,7 @@ function handleData(evt){
 				//登录失败清理数据
 				loginOut();
 			}
+			plus.nativeUI.closeWaiting();
 			//查询个人账户信息回复
 		} else if (method == "OnRspQryAccount") {
 			var accountParam = parameters;
@@ -673,7 +670,7 @@ function addPostion(param){
 				+ '			<span class = "position0">'+contractCode+'</span>'
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
-				+ '			<span class = "position3">'+openAvgPrice+'</span>'
+				+ '			<span class = "position3">'+holdAvgPrice+'</span>'
 				+ '			<span class = "position4 dateTimeL"><input readonly = "readonly" type="text" value = "'+floatingProfit+'" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;background-color:transparent;font-size:12px;width:160px;" id = "floatValue'+contractCode+'" /></span>'
 				+ '			<span class = "position5" style = "display:none">'+commodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+contractNo+'</span>'
@@ -713,12 +710,12 @@ function updatePostion(param){
 	}
 	var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
 	var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
-	var $openAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
+	var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
 	var $floatP = $("li[data-tion-position='"+contractCode+"'] span[class = 'position8']");
 	var $floatingProfit =$("#floatValue"+contractCode);
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($openAvgPrice.text()).toFixed(2) *  oldHoldNum;
+	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(2) *  oldHoldNum;
 	var price = parseFloat(openAvgPrice).toFixed(2) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
@@ -729,7 +726,7 @@ function updatePostion(param){
 			doSize = localCommodity.DotSize;
 		}
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
-		$openAvgPrice.text(openAvgPrice);
+		$holdAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 
@@ -1219,11 +1216,32 @@ function loadOperateLogin(){
 	});
 }
 $(function(){
+	/**
+	 * 初始化交易配置 --> trade.config
+	 */
+	initTradeConfig();
+	validateIsGetVersion();
+	getVersion();
 	if(username == null){
 		$("#switchAccount").text("登录账号");
 	}
 	bindOpertion();
-	function selectCommodity(param){
+	$("#switchAccount").click(function(){  
+		if(isLogin){
+			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
+		}else{ 
+			openLogin();
+		} 
+	});
+}); 
+function initSocketTrade(){
+	setTradeConfig(tradeWebSocketIsMock);
+	/**
+	 * 初始化交易
+	 */
+	initTrade();
+}
+function selectCommodity(param){
 		var contractCode = param;
 		var localCommodity = localCacheCommodity[contractCode];
 		var localQoute = localCacheQuote[contractCode];
@@ -1252,14 +1270,6 @@ $(function(){
 		clearRightData();
 		updateRight(localQoute);
 	}
-	$("#switchAccount").click(function(){  
-		if(isLogin){
-			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
-		}else{ 
-			openLogin();
-		}
-	});
-}); 
 /**
  * 绑定交易操作事件
  */
@@ -1837,6 +1847,7 @@ function clearLocalCacheData(){
 	resultInsertOrderId={};
 	isUpdateOrder = false;
 	isBuy = false;
+	isGetVersion = false;
 }
 /**
  * 输入价格或数量验证 
@@ -1853,7 +1864,7 @@ function validationInputPrice(obj){
  */
 function vadationIsLogin(){
 	if(username == null){
-		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin,alertCallBack);
+		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
 		return false;
 	}
 	return true;

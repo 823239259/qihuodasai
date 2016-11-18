@@ -129,7 +129,7 @@
       			mui.each(cachepages,function(index,item){
 	      			//alert(item.getURL());
 	      			// 不是当前页和首页的都可以删除
-	      			if (item.getURL().indexOf('main.html')<0){
+	      			if (item.getURL().indexOf('start.html')<0){
 	      				plus.webview.close(item);
 	      			}
       			});
@@ -195,7 +195,7 @@
 				if(!mui.isnull(pageId)){
 					var _page = plus.webview.getWebviewById(pageId);
 					if(_page){
-						_page.reload(isRefresh);	
+						_page.reload(isRefresh);
 					}
 				}
 				return true;
@@ -259,7 +259,6 @@ var tzdr = {
 	constants:{
 		//接口域名地址
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
-
 //		api_domain:"http://test.api.vs.com/",
 		api_domain:"http://api.vs.com/",
 		//图片地址

@@ -332,6 +332,7 @@ function addFundsDetails(param){
 	addFundDetailBindClick(currencyNo);
 	localCurrencyNo[fundsDetailsIndex] = currencyNo;
 	updateFundsDetailsIndex();
+	$(".account_NoRecord").css("display","none");
 } 
 /**
  * 更新资金明细
@@ -413,6 +414,7 @@ function appendOrder(param){
 	tabOn();
 	addOrderBindClick(cls);
 	updateOrderIndex();
+	$(".order_NoRecord").css("display","none");
 };
 /**
  * 修改用户委托信息
@@ -472,7 +474,7 @@ function appendDesignates(param){
    var orderId = param.OrderID;
    var triggerPrice = param.TriggerPrice;
    var cls = "des-index"+designateIndex;
-   var html = '<ul class="tab_content '+cls+'" data-order-des = "'+orderId+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
+   var html = '<ul class="tab_content '+cls+' tab_des" data-order-des = "'+orderId+'"   data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
 				'	<li class = "des1">'+contractCode+'</li>'+
 				'	<li class = "des2" data-drection = "'+drection+'">'+drectionText+'</li>'+
@@ -492,6 +494,7 @@ function appendDesignates(param){
    localCachedesignateContractCode[designateIndex] = orderId;
    addDesignateBindClick(cls);
    updateDesignateIndex();
+   $(".des_NoRecord").css("display","none");
 };
 /**
  * 修改挂单中的订单信息
@@ -560,6 +563,7 @@ function appendTradeSuccess(param){
 	tabOn();
 	addTradeSuccessBindClick(cls);
 	updateTradesIndex();
+	$(".trade_NoRecord").css("display","none");
 };
 /**
  * 添加或修改用户持仓信息
@@ -666,6 +670,7 @@ function addPostion(param){
 		localCachePositionContractCode[postionIndex] = contractCode;
 		addPositionBindClick(cls);
 		updatePositionIndex();
+		$(".hold_NoRecord").css("display","none");
 	}
 }
 /**
@@ -902,7 +907,7 @@ function generatePostionTitle(){
 				'	<li style="width: 160px;">浮动盈利</li>'+
 				'	<li style="width: 80px;">交易所</li>'+
 				'	<li style="width: 80px;">币种</li>'+
-				'</ul>';
+				'</ul><p class="hold_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#hold_gdt1").html(html);
 }
 /**
@@ -921,7 +926,7 @@ function generateOrderTitle(){
 				'	<li style = "width:120px;">委托时间</li>'+
 				'	<li style = "width:80px;">订单号</li>'+
 				'   <li style="width: 80px;">反馈信息</li>'+
-				'</ul>';
+				'</ul><p class="order_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#order_gdt1").html(html);
 }
 /**
@@ -935,7 +940,7 @@ function generateDesignateTitle(){
 				'	<li  style="width: 120px;">委托价</li>'+
 				'	<li>委托量</li>'+
 				'	<li>挂单量</li>'+
-				'</ul>';
+				'</ul><p class="des_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#des_gdt1").html(html);
 }
 /**
@@ -952,7 +957,7 @@ function generateTradeSuccessTitle(){
 				'	<li  style="width: 80px;">订单号</li>'+
 				'	<li  style="width: 120px;">成交时间</li>'+
 				'	<li  style="width: 40px;">交易所</li>'+
-				'</ul>';
+				'</ul><p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#trade_gdt1").append(html);
 }
 /**
@@ -971,7 +976,7 @@ function generateAccountTitle(){
 				'	<li>今结存</li>'+
 				'	<li>冻结资金</li>'+
 				'	<li>盈利率</li>'+
-				'</ul>';
+				'</ul><p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#account_gdt1").append(html);
 }
 /**
@@ -1098,6 +1103,9 @@ function updateFundsDetailsIndex(){
 function delPositionDom(contractCode){
 	$(function(){
 		$("ul[data-tion-position='"+contractCode+"']").remove();
+		if($(".tab_position").length == 0){
+			$(".hold_NoRecord").css("display","block");
+		}
 	});
 }
 /**
@@ -1106,6 +1114,9 @@ function delPositionDom(contractCode){
  */
 function delDesignatesDom(orderId){
 	$("ul[data-order-des='"+orderId+"']").remove();
+	if($(".tab_des").length == 0){
+		$(".des_NoRecord").css("display","block");
+	}
 }
 /**
  * 移除全局缓存持仓的品种合约
@@ -1613,7 +1624,8 @@ function doInsertOrder(orderNum,tradeDrection,orderPrice){
 	var exchanageNo = $("#exchangeNo").val();
 	var commodeityNo = $("#commodeityNo").val();
 	var contractNo = $("#contractNo").val();
-	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
+	var priceType = $("input[type='radio']:checked").val();
+	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,priceType,orderPrice,0,doGetOrderRef());
 	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
 	isBuy = true;
 }

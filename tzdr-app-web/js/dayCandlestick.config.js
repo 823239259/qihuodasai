@@ -22,26 +22,26 @@
 		  	dayCandlestickChartDiv.group="group3";
 		  	
     }
-    document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
-    				$("#CandlestickChart").css("opacity","0");
-    				$("#TimeChart1").css("opacity","0");
-				 if(dayCandlestickChartDiv != null){
-					document.getElementsByClassName("buttomFix")[0].style.display="block";
-					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
-					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
-						setTimeout(function(){
-						 	dayCandlestickChartDiv.resize();	
-							dayCandlestickChartDiv.setOption(option1);
-		        			dayCandlestickChartDiv.resize();	
-		        			dayCandlestickVolumeChart.resize();	
-							dayCandlestickVolumeChart.setOption(option2);
-		        			dayCandlestickVolumeChart.resize();	
-		        		},10);
-		        		setTimeout(function(){
-		        		$("#dayCandlestickChart").css("opacity","1");
-		        		},100);
-			    }
-		});
+//  document.getElementById("dayCandlestickBtn").addEventListener("tap",function(){
+//  				$("#CandlestickChart").css("opacity","0");
+//  				$("#TimeChart1").css("opacity","0");
+//				 if(dayCandlestickChartDiv != null){
+//					document.getElementsByClassName("buttomFix")[0].style.display="block";
+//					var option1 = dayCandlestickChartSetOption(dayCandlestickChartData);
+//					var option2 = CandlestickVolumeChartSetoption(dayCandlestickVolumeData);
+//						setTimeout(function(){
+//						 	dayCandlestickChartDiv.resize();	
+//							dayCandlestickChartDiv.setOption(option1);
+//		        			dayCandlestickChartDiv.resize();	
+//		        			dayCandlestickVolumeChart.resize();	
+//							dayCandlestickVolumeChart.setOption(option2);
+//		        			dayCandlestickVolumeChart.resize();	
+//		        		},10);
+//		        		setTimeout(function(){
+//		        		$("#dayCandlestickChart").css("opacity","1");
+//		        		},100);
+//			    }
+//		});
     
     //设置数据参数（为画图做准备）
     function dayCandlestickChartSetOption(newData){

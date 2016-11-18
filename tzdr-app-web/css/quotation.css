@@ -49,13 +49,13 @@ p{
 	background-color: #2B2B2B;
 		width: 100%;;
 }
-#buttomFix{
+.buttomFix{
 	height: 192px;
 	width: 100%;
+	height: 215px;
 	background-color: #2B2B2B;
 	overflow: hidden;
-	/*position: fixed;
-	bottom: 0px;*/
+	border-top: 1px solid #454545;
 }
 .buttomFixLeft,.buttomFixRight{
 	background-color: #2B2B2B;
@@ -72,7 +72,7 @@ p{
 	margin-bottom: 0px;
 }
 .buttomFixLeft p{
-	color:# 999999;
+	color:#999999;
 	height: 30px;
 	line-height: 30px;
 	padding: 0px 15px;
@@ -156,22 +156,26 @@ p{
 	margin-left: 5px;
 }
 #marketBuy{
-	margin-right: 5px;;
+	position: absolute;
+	left:0px;
 	background-color:#e9392a;
 	height: 40px;
 	line-height: 28px;
-	position: fixed;
-	bottom: 3%;
-	left:6%;
+	border: none;
+	color:#FFFFFF;
+	padding:0px;
+		width: 50%;
 }
 #marketSell{
-	margin-left: 5px;
+	position: absolute;
+	right:0px;
 	background-color:#16a951;
 	height: 40px;
 	line-height: 28px;
-	position: fixed;
-	bottom: 3%;
-	right:6%;
+	border: none;
+	width: 50%;
+	padding:0px;
+	color:#FFFFFF;
 }
 .Assets{
 	width: 100%;
@@ -179,11 +183,11 @@ p{
 	padding:4px 0px;
 	border-bottom: 1px solid #454545;
 	position: fixed;
-	top:86px;
+	top:90px;
 	z-index: 998;
 }
 .Assets p span{
-	font-size: 12px;
+	font-size: 14px;
 	display: inline-block;
 	width: 33.33%;
 	text-align: center;
@@ -296,7 +300,7 @@ p{
 	overflow: hidden;
 }
 .ProductInformationRight p{
-	font-size: 12px;
+	font-size: 14px;
 }
 .grayFont{
 	color:#999999 !important;
@@ -320,7 +324,7 @@ p{
 	width: 50%;
 	height:40px;
 	line-height: 40px;
-	font-size: 12px;
+	font-size: 14px;
 	border-bottom: 1px solid #454545;
 	padding:0px 15px;
 	
@@ -359,7 +363,6 @@ p{
 	line-height: 40px;
 	color:#CCCCCC;
 	font-size: 12px;
-	
 }
 .listStyle li a span{
 	text-align: center;
@@ -432,38 +435,36 @@ p{
 .operateLogin{
 	background-color: #2B2B2B;
 	border:none;
+	width: 100%;
 }
+ .commStyle label{
+ 	color:#ffffff;
+ }
+ /*.commStyle input{
+ 	text-align: left;
+ 	color:#666666;
+ 	background-color: #2b2b2b;
+	border:none;
+ }*/
+ .commStyle input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+ 	margin: 0px;;
+ }
+ .commStyle select{
+ 	display: inline-block;
+ 	color:#fcc900;
+ /*	background-color: #2b2b2b;*/
+ }
+.commStyle img{
+  	height: auto;
+}
+ .commStyle .mui-btn-block{
+ 	padding:0px 0px 0px 10px;
+ 	margin-bottom: 0px;;
+ }
 .blackBg{
 	background-color: #2B2B2B;
 }
-.operateLogin label,input{
-	display: inline-block;
-	text-align: left;
-}
-.mui-input-group .mui-input-row{
-	height: 50px;
-}
-#formDiv {
-	position: relative;
-	top: -2px;;
-	z-index: 999;
-	border-top:1px solid #454545
-}
-.operateLogin label{
-	color:#FFFFFF;
-	height: 50px;
-	line-height: 28px;
-	width: 120px;
-	font-size: 14px;
-}
-.operateLogin input{
-	color:#A9A9A9;
-	height: 50px;
-	line-height: 30px;
-	width: 59% !important;
-	text-align: left;
-	border:1px solid red;
-}
+
 .mui-input-row select{
 	height: 49px;
 	line-height: 49px;
@@ -472,17 +473,35 @@ p{
 	text-align: center;
 	margin-top: 1px;;
 }
-.operateLogin button {
+.mui-content-padded{
+	margin: 20px 0px 0px ;
+	/*width: 100%;*/
+}
+#operateLogin,#regLogin{
+	padding:0px;
+	border:none;
+	width: 100%;
+	height: 40px;;
+	line-height: 40px;
+	font-size: 16px;
+}
+#operateLogin{
+	background-color: #cccccc;
+}
+#regLogin{
+	background-color: #fcc900;
+}
+/*.operateLogin button {
 	background-color: #fcc900;
 	border:none;
 	height: 45px;
 	line-height: 15px;
 	margin-top: 15px;
-}
+}*/
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
-	border-radius: none !important;
-	border-top-left-radius:none !important;
-	border-top-right-radius:none !important;
+	border-radius: 0px;
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
 }
 .muiLine{
 	width: 100%;
@@ -503,15 +522,19 @@ p{
 	height: 50px;
 	padding:0px 2%;
 	border-bottom:1px solid #454545;
+	position: relative;
 }
 .productContentLeft{
 	height:50px;
 	width: 25%;
 	text-align: left;
 	padding:9px 0px 13px;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 14px;
 	color:#999999;
+	position: absolute;
+	top:0px;
+	left:2%;
 }
 .CommodityNoName{
 	color:#999999!important;
@@ -522,6 +545,9 @@ p{
 	padding:9px 0px 13px;
 	text-align: center;
 	line-height: 26px;
+	position: absolute;
+	top:0px;
+	right:2%;
 }
 .productContentRight span{
 	display: inline-block;
@@ -644,41 +670,35 @@ input{
 	width: 100%;
 	text-align: center;
 }
-#loginIform{
-	width: 100%;
-	text-align: center;
-	height: 40px;
-	margin: 0px;
-}
 .mui-checkbox input[type=checkbox], .mui-radio input[type=radio]{
 	right: 45%;
 }
-
-
 .mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
 	left:13.5%;
 }
-@media only screen and (min-device-width : 320px ) {
-	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:8%;
-	}
-}
-@media only screen and (min-device-width : 375px ) {
-	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:15%;
-	}
-}
-@media only screen and (min-device-width : 414px ) {
-	.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
-		left:13.5%;
-	}
-}
+
 #loginAgree{
 	width: 100%;
-	/*padding-left:40px;*/
-	text-align: center;
-	height: 40px!important;
-	line-height: 40px !important;
+	text-align: left;
+	height: 20px;
+	line-height: 20px;
+	margin-top: 1px;;
+}
+#loginAgree span{
+	vertical-align: middle;
+}
+#checkBox{
+	border:1px solid #FFFFFF;
+	border-radius: 50%;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+#checkBox i{
+	display: inline-block;
+	background-color: #fcc900;
+	border-radius: 50%;
+	
 }
 #forgetPassword{
 	position: absolute;
@@ -695,6 +715,333 @@ input{
 	height: auto;
 	margin-top: 10px;
 }
+.displayStyle{
+	display: none;
+}
+.mui-bar-nav{
+			-webkit-box-shadow:none;
+			box-shadow:none;
+			border-bottom: 1px solid #454545;
+		}
+#numberInput{
+	width: 100%;
+	position: relative;
+	clear: both;
+}
+#numberInput input{
+	border: 1px solid #454545;
+	background-color: #1f1f1f;
+	color:#FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+}
+#numberInput label{
+	color:#999999;
+	border-radius: 85px;
+	position: absolute;
+}
+#buttonDivList{
+	width: 100%;
+	position: relative;
+}
+/*#headerMenu button{
+	border: none;
+	padding:0px;
+	background-color: #2B2B2B;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	/*border-radius: 50%;
+}*/
+#tradeMenu{
+	background: url(../images/tradeOrderBg.png) no-repeat center;
+	background-size: 75px;
+	position: absolute;
+	left:10px;
+}
+#timeChartMenu{
+	border:none;
+	text-align: center;
+	background-color: #2B2B2B;
+	color:#fcc900;
+}
+#selectType{
+	background-color: #2B2B2B;
+	color:#FFFFFF;
+	text-align: right;
+	background-image: url(../images/down.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+#closeTrade{
+	width: 17px;
+	height: auto;
+	display: block;
+	margin: 8px;
+}
+.top{
+	/*background-image: url(../images/quotation.png);*/
+	top:0px;
+	position: fixed;
+	right: 0px;;
+	z-index:990;
+}
+.bottom,.top{
+	width: 100%;
+	position: fixed;
+	z-index: 990;
+	background-size: cover;
+	display: none;
+}
+#closeDiv{
+	display: none;
+	width:40px;
+	height:40px ;
+	position: fixed;
+	top:20px;
+	right:10px;
+	z-index: 992;
+	vertical-align: middle;
+}
+#numberInput{
+	padding:10px ;
+	font-size: 14px;
+}
+#numberInput input{
+	height: 50px;
+	line-height: 50px;
+	padding: 0px 85px 0px 45px;
+}
+#numberInput label{
+	top:25px;
+}
+#numberInput label:nth-child(1){
+	left:15px;
+}
+#numberInput label:nth-child(3){
+	right:15px;
+}
+#marketBuy,#marketSell{
+	height:50px ;
+	line-height: 50px;
+	font-size: 16px;;
+}	
+#headerMenu{
+	padding:5px 10px;
+	background-color: #2B2B2B;
+	width: 100%;
+	position: fixed;
+	top:46px;
+	height: 45px;
+	z-index: 990;
+	text-align: center;
+	position: fixed;
+	top:46px;
+}
+#headerMenu button{
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	width: 75px;
+	border: none;
+	padding:0px;
+	background-color: #2B2B2B;
+	text-align: center;
+	/*border-radius: 50%;*/
+}
+#selectButon{
+	position: absolute;
+	right: 10px;
+	color:#FFFFFF;
+	text-align: center;
+}
+#list_type{
+	text-align: center;
+	height: auto;
+	position: absolute;
+	width: 75px;
+	top:86px;
+	right: 10px;;
+	color:#999999;
+	background-color: #2B2B2B;
+	z-index: 999;
+	border:1px solid #454545;
+	display: none;
+	padding:0px;
+	margin: 0px;;
+}
+#list_type ul{
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+#list_type li{
+	width: 75px;;
+	height:40px;
+	font-size:12px;
+	line-height: 40px;
+	border-bottom:1px solid #454545 ;
+}
+#username_list{
+	text-align: center;
+	height: auto;
+	position: absolute;
+	top:143px;
+	right: 20px;;
+	color:#999999;
+	background-color: #2B2B2B;
+	z-index: 999;
+	border:1px solid #454545;
+	display: none;
+	padding:0px;
+	margin: 0px;;
+}
+#username_list ul{
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+#username_list ul li{
+	width: 75px;;
+	height:40px;
+	font-size:12px;
+	line-height: 40px;
+	border-bottom:1px solid #454545 ;
+}
+#username_list li:nth-last-child(1){
+	border-bottom: none;
+}
+#list_type li:nth-last-child(1){
+	border-bottom: none;
+}
+#inputList{
+	width: 100%;
+	padding: 0px 20px;
+}
+.commStyle{
+	width: 100%;
+	height:40px;
+	margin-top: 10px;
+	position: relative;
+	border-bottom: 1px solid#454545;
+}	
+.commStyle label{
+	height: 39px;
+	line-height: 39px;
+	font-size: 14px;
+	
+}				
+.commStyle input{
+	height: 40px;;
+	line-height: 40px;
+	width:76.8% ;
+	padding-left: 10px;
+	font-size:14px;
+	position: relative;
+	bottom: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align: left;
+	border: none;
+	color:#666666;
+	background-color: rgba(0,0,0,0);
+}
+.commStyle select{
+	height: 39px;;
+	line-height: 39px;
+	width:76.8% ;
+	font-size: 14px;
+}				
+.commStyle img{
+	position: absolute;
+	width: 15px;
+	right: 5px;
+	top:16px;
+}			
+#checkBox{
+	width: 18px;
+	height: 18px;
+}
+#checkBox i{
+	width: 14px;;
+	height: 14px;
+	margin: 1px;;
+}	
+#code{
+	background-color: rgba(255, 255, 255, 0.6);
+	border:none;
+	color:#FFFFFF;
+	position: absolute;
+	width: 75px;
+	height: 30px;
+	padding:0px 5px;
+	bottom: 5px;
+	right: 5px;
+}
+#callService{
+	position: absolute;
+	bottom: 0px;
+	border-top: 1px solid #454545;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	margin: 0px;
+}
+#logo{
+	padding-top:40px;
+	margin-bottom: 30%;
+}
+#logo img{
+	width: 60px;
+	height: auto;
+	display: block;
+	margin: auto;
+}
+#inputList{
+	width: 100%;
+	padding:0px 20px;
+}
+#forgetPasswordDiv{
+	width: 100%%;
+	text-align: right;
+	border: none;
+	margin-bottom: -13px;;
+}			
+#resigterDiv{
+	width: 100%;
+	text-align: center;
+	border-bottom: none;
+	border-bottom: none;
+}					
+.commStyle a{
+	height: 39px;
+	line-height: 39px;;
+	font-size:14px ;
+	color:#FFFFFF;
+}					
+#loginIform{
+	width: 100%;
+	height: 40px;
+	padding-top: 10px;
+	vertical-align: middle;
+	margin-bottom: -13px;;
+}	
+#passwordClear,#accountClear{
+	display: none;
+}	
+#selectBg{
+	position: absolute;
+	right: 5px;;
+	z-index: 1;;
+}
 .accountSelect{
-	width: 60% !important;
+	position: relative;
+	z-index: 10;
+	background-color: rgba(0,0,0,0);
+}
+#backClose i{
+	font-style: normal;
+	    font-size: 14px;
+    vertical-align: 2px;
 }

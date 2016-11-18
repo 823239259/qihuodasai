@@ -47,7 +47,7 @@ $(document).ready(function() {
 
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 	<form action="${ctx}/userCommodity/pay" id="settingForm" method="post">
 	<input type="hidden" id="traderBondAttr" name="traderBondAttr" value="${comprehensiveCommodityParameter[0].traderBond}" >
     
@@ -820,7 +820,7 @@ $(document).ready(function() {
     </div>
     </form>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 <script>
 !function(w,d,e){

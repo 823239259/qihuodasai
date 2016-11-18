@@ -74,7 +74,7 @@ mui.plusReady(function(){
         var jsonData = JSON.parse(data);
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
-        	sendHistoryMessage();
+        	sendHistoryMessage(0);
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
@@ -87,26 +87,14 @@ mui.plusReady(function(){
 			}
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
+				handleVolumeChartData(historyParam);
+//				processingData(historyParam);
+//	            processingCandlestickVolumeData(historyParam);
+			}else{
+//				handleTime(historyParam);
+// 				handleVolumeChartData(historyParam);
 				processingData(historyParam);
-	            handleVolumeChartData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==1){
-				handleTime(historyParam);
-				processingData(historyParam);
-	            handleVolumeChartData(historyParam);
-	            processingCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==1440){
-				processingDayCandlestickData(historyParam)
-				processingDayCandlestickVolumeData(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==5){
-				processingCandlestickVolumeDataFive(historyParam);
-				processingDataFive(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==15){
-				processingCandlestickVolumeDataTen(historyParam);
-				processingDataTen(historyParam);
-			}else if(historyParam.Parameters.HisQuoteType==30){
-				processingCandlestickVolumeDataThree(historyParam);
-				processingDataThree(historyParam);
 			}
         }else if(method == "OnRtnQuote"){
         	var quoteParam = jsonData;
@@ -168,22 +156,15 @@ mui.plusReady(function(){
     };
     marketSocket.onerror = function(evt){
     };
-    function sendHistoryMessage(){
-    		 var exchangeNo = $("#exchangeNo").val();
-		    var commodityNo = $("#commodeityNo").val();
-		    var contractNo = $("#contractNo").val();
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":1440}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":5}');
-		    masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":15}');
-		     masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":30}');
-		    masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-	        setIntvalTime = setInterval(function(){
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":1}');
-	            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":5}');
-	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":15}');
-	       		masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":30}');
-	        },3000);
+    function sendHistoryMessage(num){
+        var exchangeNo = $("#exchangeNo").val();
+        var commodityNo = $("#commodeityNo").val();
+        var contractNo = $("#contractNo").val();
+        masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
+        masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+        setIntvalTime = setInterval(function(){
+            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
+        },3000);
     }
     /**
 	 * 更新行情数据 
@@ -204,10 +185,10 @@ mui.plusReady(function(){
 		var newCommdityNo = param.CommodityNo;
 		var newContractNo = param.ContractNo;
 		var comm = marketCommdity[newCommdityNo+newContractNo];
-		if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
+		/*if(comm != undefined && $("input[type = 'radio']:checked").val() == 1){ 
 			$("#buyBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,0)).toFixed(doSize));
 			$("#sellBtn_P").text(parseFloat(doGetMarketPrice(param.LastPrice,comm.MiniTikeSize,1)).toFixed(doSize));
-		}
+		}*/
 	}
     /**
 	 * 更新浮动盈亏 
@@ -299,7 +280,13 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML= $("#CommodityName").val();
 		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
-   		rawData=[];
+		$("#xj").removeAttr("checked");
+		$("#sj").prop("checked",true);
+		$("#orderPrice").val("");
+		$("#orderPrice").attr("placeholder","市价");
+		$("#buyBtn_P").text("市价");
+		$("#sellBtn_P").text("市价");
+   		rawData=[]; 
    		dayCandlestickChartData=[];
    		timeData.timeLabel=[];
    		timeData.prices=[];
@@ -312,31 +299,8 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    };
-   		  dayCandlestickVolumeData={
-		    	time:[],
-		    	volume:[]
-		    };
-		     rawDataTen = [];
-		     CandlestickVolumeDataTen ={
-		    	time:[],
-		    	volume:[]
-		    }
-		     newDataTen =[];
-		     tenCandlestickVolumeTime=[];
-		     tenCandlestickVolumeVolume=[];
-		     rawDataThree = [];
-		     CandlestickVolumeDataThree ={
-		    	time:[],
-		    	volume:[]
-		    };
-		    newDataThree =[]; 
-		    rawDataFive = [];
-		    CandlestickVolumeDataFive={
-		    	time:[],
-		    	volume:[]
-		    }
-		    newDataFive=[]; 
-    	sendHistoryMessage();
+//		var num=1;
+    	sendHistoryMessage(0);
     	
     })
    
@@ -384,11 +348,129 @@ mui.plusReady(function(){
 				 rose.className = "greenFont";
 			}
 		}
+    	function drawChart(val){
+    		 rawData = [];
+		     CandlestickChartOption=null;
+		    CandlestickVolumeChartOption=null;
+		    CandlestickVolumeData={
+		    	time:[],
+		    	volume:[]
+		    }
+		     newData=[]; 
+    			clearInterval(setIntvalTime);
+				sendHistoryMessage(val);
+				var option = setOption(newData);
+						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+						setTimeout(function(){
+							myChart.resize();
+							myChart.setOption(option);
+		        			myChart.resize();	
+		        			CandlestickVolumeChart.resize();	
+							CandlestickVolumeChart.setOption(option2);
+		        			CandlestickVolumeChart.resize();	
+		        		},10);
+		        		setTimeout(function(){
+		        			$("#CandlestickChart").css("opacity","1");
+		        		},100);
+    	}
+    /*
+		 获取K线类型**/
+		$("#list_type ul li").on("tap",function(){
+			$("#CandlestickChart").removeClass("displayStyle").addClass("mui-active");
+    		$("#trade").removeClass("mui-active").addClass("displayStyle");
+    		$("#TimeChart1").removeClass("mui-active").addClass("displayStyle");
+    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+			$("#selectButon").text($(this).text())
+			var val=$(this).val();
+			if(val==1){
+				drawChart(val)
+			}else if(val==5){
+				drawChart(val)
+			}else if(val==15){
+				drawChart(val)
+			}else if(val==30){
+				drawChart(val)
+			}else if(val==1440){
+				drawChart(val)
+			}
+			$("#list_type ").css({
+				"display":"none"
+			})
+		});
+		$("#selectButon").click(function(){
+			$("#list_type ").css({
+				"display":"block"
+			});
+			$("#selectButon").css({
+				"color":"#fcc900",
+			});
+			$("#timeChartMenu").css({
+				"color":"#FFFFFF",
+			})
+		});
+		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
+			$("#list_type ").css({
+				"display":"none"
+			})
+		})
+    	document.getElementById("timeChartMenu").addEventListener("tap",function(){
+    		$("#TimeChart1").css("opacity","0");
+    		$("#selectButon").css({
+				"color":"#FFFFFF",
+			});
+			$("#timeChartMenu").css({
+				"color":"#fcc900",
+			});
+    		 time=[];
+		    prices=[];
+		    timeLabel=[]
+		     timeData={
+		        "time":time,
+		        "prices":prices,
+		        "timeLabel":timeLabel
+		    };
+		     volumeChartTime=[];
+		     volumeChartPrices=[];
+		    volumeChartData={
+		        "time":volumeChartTime,
+		        "volume":volumeChartPrices
+		    };
+		    var timePrice=[];
+    		var val=$("#timeChartMenu").val();
+    		clearInterval(setIntvalTime);
+    		sendHistoryMessage(val);
+    		$("#CandlestickChart").removeClass("mui-active").addClass("displayStyle");
+    		$("#trade").removeClass("mui-active").addClass("displayStyle");
+    		$("#TimeChart1").removeClass("displayStyle").addClass("mui-active");
+    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+    		var option2=setOption1();
+		 	 var option1 =volumeChartSetOption(volumeChartData);
+				setTimeout(function(){
+				 	timeChart.resize();	
+					timeChart.setOption(option2);
+        			timeChart.resize();	
+        			volumeChart.resize();	
+					volumeChart.setOption(option1);
+        			volumeChart.resize();
+        		},10);
+        		setTimeout(function(){
+        			$("#TimeChart1").css("opacity","1");
+        		},11);
+    	});
+    	document.getElementById("tradeMenu").addEventListener("tap",function(){
+    		if(vadationIsLogin()){
+				$("#trade").removeClass("displayStyle").addClass("mui-active");
+    			$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
+			}
+    		$("#selectButon").css({
+				"color":"#FFFFFF",
+			});
+			$("#timeChartMenu").css({
+				"color":"#FFFFFF",
+			})
+    	})
 	document.getElementById("backClose").addEventListener("tap",function(){
-		var re = plus.webview.getWebviewById("quotationMain");
-		if(re != null || re != undefined){
-			re.reload(); 
-		}
+		mui.app_back("quotationMain",true)
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 		marketSocket.close();
 		reconnect=false;
@@ -396,8 +478,8 @@ mui.plusReady(function(){
 			Trade.doLoginOut(username);
 			socket.close();
 			loginOutFlag = true;
+			loginFail = true;
 		};
-		mui.back();
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();

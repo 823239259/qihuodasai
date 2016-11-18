@@ -37,7 +37,6 @@ $(document).ready(function() {
 	
 </head>
 <body>
-<%@ include file="../common/homeheader.jsp"%>
 <div class="question">
 <form action="">
 	<input type="hidden" name="loginName" id="loginName" value="${usename}"/>
@@ -73,7 +72,7 @@ $(document).ready(function() {
     </form>
 </div>
 <!-- 公司简介 -->
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 <script>

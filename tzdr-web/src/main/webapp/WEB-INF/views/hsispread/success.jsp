@@ -18,7 +18,7 @@
 </head>
  
 <body>
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 
 <div class="suc_main">
     <div class="suc_mainfont">恭喜您注册成功</div>

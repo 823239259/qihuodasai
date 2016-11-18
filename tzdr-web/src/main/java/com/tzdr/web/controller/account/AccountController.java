@@ -1,5 +1,6 @@
 package com.tzdr.web.controller.account;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +12,10 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jodd.util.Base64;
 import jodd.util.StringUtil;
 
+import org.apache.geronimo.mail.util.Base64Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -375,5 +378,26 @@ public class AccountController {
               return true;
         }
 		return false;
+	}
+	@RequestMapping(value = "/redirectVsNet")
+	public String redirectVsNet(HttpServletRequest request){
+		UserSessionBean userSessionBean = (UserSessionBean)request.getSession().getAttribute(Constants.TZDR_USER_SESSION);  //获取用户账户信息
+		StringBuffer url = new StringBuffer();
+		url.append("http://127.0.0.1:8020/test.www.vs.net/index.html");
+		byte[] b = null;  
+        String s = null; 
+        try {  
+        	if(userSessionBean != null){
+        		String mobile = userSessionBean.getMobile();
+        		b = mobile.getBytes("utf-8");  
+    		   if (b != null) {  
+    				s = Base64.encodeToString(b);
+    				url.append("?o="+s+"");
+    		   }
+        	}
+        } catch (UnsupportedEncodingException e) {  
+            e.printStackTrace();  
+        } 
+		return "redirect:"+url.toString()+"";
 	}
 }

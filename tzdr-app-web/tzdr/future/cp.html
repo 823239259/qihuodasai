@@ -8,20 +8,36 @@
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js"></script> 
     <script type="text/javascript" src="../../js/common.js"></script>
-    <style>
-    	#openPay{
-    		position: fixed;
-    		width: 90%;
-    		bottom:0.5%;
-    		left:5%;
-    	}
-    </style>
+    <link rel="stylesheet" href="../../css/recharge.css" />
+    <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init();
     	var paramListAll=null;
     	var contractListAll=null;
     	var init_params=null;
+    	
+				
     	mui.plusReady(function(){
+    		loadCss();
+    		function loadCss(){
+    			var Proportion=1;
+				var resolutionWidth=plus.screen.resolutionWidth;
+				Proportion=resolutionWidth/320;
+				$(".sc_listsc").css({
+					"margin-top":Proportion*5+"px",
+					"padding":"0px "+Proportion*5+"px",
+				});
+				$(".ap_main .acp_font table tr td").css({
+					"font-size": Proportion*10+"px",
+					"height":Proportion*30+"px",
+					"line-height":Proportion*30+"px",
+					"padding-left":Proportion*5+"px",
+				})
+				$(".ap_main .acp_font table thead td ").css({
+					"font-size": Proportion*12+"px",
+				});
+				
+    		}
     		//初始化监听头部和底部事件
   		//	tzdr.init. ();
   			//获取综合操盘数据
@@ -31,7 +47,6 @@
   			mui.app_request("/ftrade/params",{
   				"businessType":8
   			},function(result){
-  				console.log(JSON.stringify(result));
   				if(!mui.isnull(result.data)){
   					paramListAll=result.data.paramList;
   					mui.each(paramListAll,function(i,item){
@@ -81,7 +96,6 @@
   				});
   				}
   			},function(result){
-  				console.log(JSON.stringify(result))
   				mui.toast(result.message);
   				return;
   			},paramUrl)
@@ -122,17 +136,18 @@
 			document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
-			if(mui.isnull(ParamsList.manageFee)){
-				document.getElementById("manageFee").innerHTML="免费";
-			}else{
-				document.getElementById("manageFee").innerHTML=ParamsList.manageFee+"元";
-			}
+			document.getElementById("paymentMoney").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
+//			if(mui.isnull(ParamsList.manageFee)){
+//				document.getElementById("manageFee").innerHTML="免费";
+//			}else{
+//				document.getElementById("manageFee").innerHTML=ParamsList.manageFee+"元";
+//			}
 		};
     	
     	function createtranLevers(ParamsList){
 			var trade_num=document.getElementById("bond_num");
 			var li=document.createElement("li");
-			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3");
+			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 bottonList");
 			li.innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
 			trade_num.appendChild(li);
 		};
@@ -345,9 +360,9 @@
 		<h1 class="mui-title">综合操盘</h1>		
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
-<div class="mui-content ap_main">
+<div class="mui-content ap_main" >
 	<h5 class="ap_choosetitle"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
-	<ul class="mui-table-view mui-grid-view mui-grid-9" id="bond_num">
+	<ul class="mui-table-view mui-grid-view mui-grid-9 borderClass" id="bond_num" style="border-bottom: 1px solid #E4E4E4;">
 		
 	</ul>
 	<ul class="mui-table-view sc_listsc">
@@ -364,14 +379,14 @@
 			<span id="lineLoss">10,450美元</span>
 		</li>
 	</ul>
-	<h5 class="ap_choosetitle" ><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></h5>
-	<p class="tips" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
+	<p id="tradeingVariety" style="border-top: 1px solid #E4E4E4;"><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></p>
+	<p class="tips borderClass" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
 			<thead>
-				<td width="100px">期货产品</td>
+				<td width="120px">期货产品</td>
 				<td width="100px">主力合约</td>
-				<td width="150px">维胜交易时间段</td>
+				<td width="280px">维胜交易时间段</td>
 				<td width="120px">交易手续费</td>
 				<td width="350px">初始可持仓手数</td>
 			</thead>
@@ -434,18 +449,19 @@
 		</table>
 	</div>
 	
-	<ul class="mui-table-view sc_listsc">
+	<!--<ul class="mui-table-view sc_listsc">
 		<li class="mui-table-view-cell">
 			<label>账户管理费(¥)：</label>
 			<span id="manageFee">免费</span>
 		</li>
-	</ul>
-	<div class="ac_btn">
-		<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="openPay">提交操盘申请</button>								
-	</div>	
-	<div class="mui-content-padded">
-		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="cp_info">《国际期货综合操盘合作协议》</a><br><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008
-</a></i></p>
+	</ul>-->
+	<div id="buttomDiv">
+		<span>总计：<i class="yellowFont">¥</i><i id="paymentMoney"></i></span>
+		<button type="button" id="openPay" class="mui-btn  lg-btnlogin">提交操盘申请</button>
+	</div>
+	<div class="AgreementList" style="margin-top: -15px;">
+		<p>提交申请表示阅读并同意<a href="javascript:void(0);" id="cp_info">《国际期货综合操盘合作协议》</a></p>
+		<p><i id="telservice">新手可向客服索取模拟操盘账号：<a href="#">400-852-8008</a></i></p>
 	</div>	
 </div>
 </body>

@@ -36,6 +36,22 @@
 		<script>
 			mui.init();
 			mui.plusReady(function(){
+					loadCss();
+					function loadCss(){
+						var Proportion=1;
+						var resolutionWidth=plus.screen.resolutionWidth;
+						Proportion=resolutionWidth/320;
+						$("#buttomDiv").css({
+							"line-height":Proportion*50+"px",
+							"height":Proportion*50+"px",
+						})
+						$("#buttomDiv button").css({
+							"line-height":Proportion*50+"px",
+							"height":Proportion*50+"px",
+						})
+					}
+				
+				
 					tzdr.init.initHearListener();
 					var wv = plus.webview.currentWebview();
 					vText=wv.money;
@@ -90,6 +106,7 @@
 					              var chargeAmount = chargeBalance - result.data.balance; 
 					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
+					              changeAllBalance();
 								}
       					}else{
       						accountBalance.innerHTML="0.00";

@@ -25,10 +25,6 @@
 		</header>
 		<div class="mui-content">
 			<form class="mui-input-group chargeList">
-				<!--<div class="mui-input-row mui-radio ">
-					<label><img src="../../images/recharge/jingdong.png"><i>京东支付</i></label>
-					<input name="choiceBank" type="radio" checked value="1">
-				</div>-->
 				<div class="mui-input-row mui-radio">
 					<label><img src="../../images/recharge/bankP.png"><i>网银支付</i></label>
 					<input name="choiceBank" type="radio" value="2" checked="checked">
@@ -43,27 +39,24 @@
 				</div>
 			</form>
 			<div id="buttomDiv">
-				<span>支付：<i class="yellowFont moneyIcont" >￥</i><i id="paymentMoney"></i></span>
+				<span>支付：<i class="yellowFont moneyIcont" >¥</i><i id="paymentMoney"></i></span>
 				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
 			</div>
 		</div>
 		<script>
 			mui.init();
+			var width=window.innerWidth;
+				$(".chargeList .mui-input-row label").css({
+					"width":+width-10+"px",
+				})
 			mui.plusReady(function(){
+				
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
 				paymentMoney.innerText=wv.money.toFixed(2);
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					immediatePayment(wv);
 				});
-//				document.getElementById("back").addEventListener("tap",function(){
-//					 var backId = wv.backId;
-//					 var backIdObj = plus.webview.getWebviewById(backId);
-//					 if(backIdObj != null){
-//					 	backIdObj.reload();
-//					 	mui.back();
-//					 }
-//				});
 			});
 			function immediatePayment(wv){
 				var val =  $('.chargeList input[name="choiceBank"]:checked ').val();

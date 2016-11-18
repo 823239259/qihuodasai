@@ -15,7 +15,7 @@
 <body>
 
 	<!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 <!-- 浮动层 -->
 <div class="capital">
 <!-- 隐藏域值：最大总操盘金额、最小总操盘金额、最大使用天数、最小使用天数-->
@@ -181,7 +181,7 @@
        </form>
     </div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 </body>
 </html>
 

@@ -18,7 +18,7 @@
 
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 <div class="bd_info">
     <h2><em>股票合买方案：${trade.groupId}</em><em>总操盘资金：<fmt:formatNumber value="${trade.totalOperateMoney}"  type="number" maxFractionDigits="2"  ></fmt:formatNumber>元</em><a href="${ctx}/together/list"><< 返回列表</a></h2>
     <div class="bd_i_ctn">
@@ -252,7 +252,7 @@
         </ul>
     </div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 </body>
 <script type="text/javascript">
 function lookContract(){

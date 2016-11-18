@@ -24,7 +24,7 @@ $(document).ready(function(){
 </head>
 <body>
 <!-- 顶部 -->
-<%@ include file="../common/personheader.jsp"%>
+<!-- DINGBU -->
 <div class="main">
     <div class="uc_sp_info">
         <div class="uc_sp_list">
@@ -77,7 +77,7 @@ $(document).ready(function(){
 </div>
 
 
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 <%@ include file="../common/dsp.jsp"%>
 </body>
 

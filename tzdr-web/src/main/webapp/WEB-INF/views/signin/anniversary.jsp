@@ -21,7 +21,6 @@
 
 </head>
 <body>
-<%@ include file="../common/personheader.jsp"%>
 <input type="hidden" id="backData" value="${backData}"/>
 <input type="hidden" id="source" value="${source}"/>
 

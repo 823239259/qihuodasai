@@ -21,7 +21,7 @@ $(document).ready(function(e) {
 
 <body>
 <!--顶部 -->
-	<%@ include file="../common/personheader.jsp"%>
+	<!-- DINGBU -->
 <div class="buy_success">
 	<div class="bs_ctn">
 		<h3><img src="${ctx}/static/images/together/icon_04.jpg"/>恭喜您发起成功！请等待合买满标......</h3>
@@ -31,6 +31,6 @@ $(document).ready(function(e) {
 		<P class="pA">您现在可以进入：<a href="${ctx}/help?tab=software&leftMenu=1">交易软件下载</a><a href="${ctx}/together/detail/${groupId}">合买详情页</a><a href="${ctx}/usertogether/detail/${groupId}">方案详情页</a></P>
 	</div>
 </div>
-<%@ include file="../common/personfooter.jsp"%>
+<!-- DINGBU -->
 </body>
 </html>
