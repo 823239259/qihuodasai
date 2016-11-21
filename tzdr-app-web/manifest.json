@@ -327,7 +327,9 @@
 					"images/2.png",
 					"images/1.png",
 					"js/jquery-1.11.3.js",
-					"images/weixinIcon.png"
+					"images/weixinIcon.png",
+					"images/close.png",
+					"images/close1.png"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
@@ -841,7 +843,8 @@
 					"images/3.0.png",
 					"images/0.png",
 					"images/2.png",
-					"images/1.png"
+					"images/1.png",
+					"images/weixinIcon.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
