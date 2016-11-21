@@ -273,6 +273,21 @@
  <a class="btn-h01" id="doupdatepwd">提&nbsp;交</a><a class="btn-h02" onclick="javascript:closeDiv('updatepwddiv')">取&nbsp;消</a>
 </div>
 </div>
+
+
+<!--关注微信-->
+<div class="tck01" id="weChatAttention" style="display:none;" >
+	<div class="navtitle">
+		<a class="nava" >微信关注</a><a class="close" onclick="javascript:closeDiv('weChatAttention')"></a>
+	</div>
+	<div class="smain" style="text-align: center; padding-right: 20px;">
+		<img id="weChatAttention_code" src="" style="width: 200px; height: 200px;" alt=""/>
+	</div>
+ 	<div class="anniu">
+ 		<a style="float: right; margin-right: 30px;" class="btn-h02" onclick="javascript:closeDiv('weChatAttention')">取&nbsp;消</a>
+	</div>
+</div>
+
 <!--006-->
 <div class="tck01" id="cardInfofile" style="display:none;" >
 <div class="navtitle"><a class="nava" >身份证信息上传</a><a class="close" onclick="javascript:closeDiv('cardInfofile')"></a></div>
@@ -438,6 +453,33 @@
   </div>
   <div class="color999 font14 mgt10">
     <p>绑定银行卡后，充值提现更方便</p>
+  </div>
+</div>
+<div class="ulmain">
+  <div class="pmain">
+      <img src="${ctx }/static/images/wx.png" width="60" height="55">
+      <p><a class="font15 ftwtb">微信关注</a></p>
+           <c:choose> 
+			<c:when test="${not empty requestScope.bank}">
+			 <p><a class="colorred font14 ">${requestScope.bank }</a>
+			 <!-- <a class="color34b3e0 font14 mglt20" href="javascript:bandcard()" >修改</a> -->
+			 </p>
+			</c:when>
+			<c:otherwise>
+			<c:if test="${requestScope.userverified.wxAccount == null }">
+				<p>
+					<a class="colorred font14 ">未关注</a>
+		        	<a class="color34b3e0 font14 mglt20" href="javascript:weChatAttention()" >立即关注</a>
+		      	</p>
+			</c:if>
+			  <c:if test="${requestScope.userverified.wxAccount != null }">
+			  	<p><a class="colorred font14 ">已关注</a></p>
+			  </c:if>
+			</c:otherwise>
+		</c:choose>
+  </div>
+  <div class="color999 font14 mgt10">
+    <p>绑定微信可以一键登录</p>
   </div>
 </div>
 </div>
