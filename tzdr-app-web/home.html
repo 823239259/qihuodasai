@@ -325,16 +325,16 @@
 						mui.each(result.data.tradeList,function(i,item){
 							switch (item.type){
 								case 0:
-									document.getElementById("cn_tranfee").innerHTML=item.tradeFees+"元/单边";
+									document.getElementById("cn_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
 									break;
 								case 6:
-									document.getElementById("cl_tranfee").innerHTML=item.tradeFees+"元/单边";
+									document.getElementById("cl_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
 									break;
 								case 7:
-									document.getElementById("hsi_tranfee").innerHTML=item.tradeFees+"元/单边";
+									document.getElementById("hsi_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
 									break;
 								case 9:
-									document.getElementById("lhsi_tranfee").innerHTML=item.tradeFees+"元/单边";
+									document.getElementById("lhsi_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
 								break;
 								default:
 									break;

@@ -96,6 +96,10 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .mui-content .ac_money h3 { width: 90%;margin: 0 auto; padding: 0 5%; text-align: center; color: #FFCC33; font-size: 18px; font-weight: normal; height: 20px; line-height: 20px;}
 .mui-content .ac_money p { width: 90%; margin: 0 auto; padding: 0 5%; text-align: center; color: #888; font-size: 14px;}
 .ac_list { margin: 20px 0 0; }
+.ac_list img{
+	width: 24px;
+	height: 24px;
+}
 .ac_list li i  { font-style: normal; vertical-align: 5px; padding-left: 5px; font-weight: normal; }
 .ac_list li b { position: absolute; font-weight: normal; right: 40px; top: 15px; color: #888; }
 .ac_listbtn { margin-top: 25px; color: #888; margin-bottom: 25px;}
