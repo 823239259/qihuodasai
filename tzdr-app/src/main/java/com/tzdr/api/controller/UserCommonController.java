@@ -28,6 +28,7 @@ import com.tzdr.api.util.AuthUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.togetherFuture.FTogetherTradeService;
 import com.tzdr.business.service.userTrade.FSimpleParitiesService;
 import com.tzdr.business.service.wuser.WUserService;
@@ -35,6 +36,7 @@ import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.FSimpleParities;
+import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
 
 /**  
@@ -67,7 +69,8 @@ public class UserCommonController {
 	
 	@Autowired
 	private FTogetherTradeService  fTogetherTradeService;
-	
+	@Autowired
+	private SecurityInfoService securityInfoService;
 	
 	/**
 	* @Title: getbalancerate    
@@ -93,6 +96,12 @@ public class UserCommonController {
 		dataMap.put("username", wuser.getUserVerified().getTname());   //用户实名
 		dataMap.put("isCertification",RequestUtils.isCertification(wuser));
 		dataMap.put("operateMoney", wuser.getCountOperateMoney());
+		UserVerified userVerified = securityInfoService.findByUserId(wuser.getId());
+		String wxAccount = null;
+		if(userVerified != null){
+			wxAccount = userVerified.getWxAccount();	
+		}
+		dataMap.put("wxAccount",wxAccount);
 		//校验用户是否满足期货合买活动要求
 		if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
 			dataMap.put("isFtogetherActivityUser",fTogetherTradeService.checkActivityTime() && fTogetherTradeService.checkIsNewUser(uid));   // 是否满足活动免费要求

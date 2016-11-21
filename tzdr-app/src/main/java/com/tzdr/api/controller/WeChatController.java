@@ -25,7 +25,7 @@ public class WeChatController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/getWechatQrcodeTicket",method = RequestMethod.GET)
+	@RequestMapping(value = "/getWechatQrcodeTicket",method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult getWechatQrcodeTicket(HttpServletRequest request){
 		JsonResult jsonResult = new JsonResult();

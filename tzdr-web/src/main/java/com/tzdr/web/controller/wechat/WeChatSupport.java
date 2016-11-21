@@ -12,30 +12,32 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.sword.wechat4j.WechatSupport;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.wechat.WechatUserService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.utils.WeChatUtil;
+import com.tzdr.domain.cms.entity.user.User;
+import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.WechatUser;
 import com.tzdr.web.utils.HttpRequest;
 public class WeChatSupport extends WechatSupport{
-	@Autowired
 	private WUserService wUserService;
-	@Autowired 
 	private WechatUserService wechatUserService;
+	private SecurityInfoService securityInfoService;
 	public WeChatSupport(HttpServletRequest request) {
 		super(request);
 	}
 	
 	
-	public WeChatSupport(HttpServletRequest request, WUserService wUserService, WechatUserService wechatUserService) {
+	public WeChatSupport(HttpServletRequest request, WUserService wUserService, WechatUserService wechatUserService,SecurityInfoService securityInfoService) {
 		super(request);
 		this.wUserService = wUserService;
 		this.wechatUserService = wechatUserService;
+		this.securityInfoService = securityInfoService;
 	}
 
 
@@ -138,7 +140,6 @@ public class WeChatSupport extends WechatSupport{
 		String openId = this.wechatRequest.getFromUserName();
 		String result = WeChatUtil.getWechatUser(openId);
 		JSONObject resultJson = JSONObject.parseObject(result);
-		System.out.println(resultJson);
 		boolean flag = true;
 		try {
 			int eventKeyLength = eventKey.length();
@@ -181,6 +182,11 @@ public class WeChatSupport extends WechatSupport{
 			}else{
 				wechatUserService.update(wechatUser);
 			}
+			if(userId != null && !userId.equals("-")){
+				UserVerified userVerified = securityInfoService.findByUserId(userId);
+				userVerified.setWxAccount(wechatUser.getWechatNickName());
+				securityInfoService.update(userVerified);
+			}
 			responseText("感谢你关注维胜金融！");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,9 +204,17 @@ public class WeChatSupport extends WechatSupport{
 		String openId = this.wechatRequest.getFromUserName();
 		List<WechatUser> wechatUsers = wechatUserService.doGetWechatUserByOpenId(openId);
 		if(wechatUsers.size() > 0){
-			WechatUser user = wechatUsers.get(0);
-			user.setWechatSubscribe("0");
-			wechatUserService.update(user);
+			WechatUser userWechat = wechatUsers.get(0);
+			userWechat.setWechatSubscribe("0");
+			wechatUserService.update(userWechat);
+			String userId = userWechat.getUserId();
+			if(userId != null && !userId.equals("-")){
+				UserVerified userVerified = securityInfoService.findByUserId(userId);
+				if(userVerified != null){
+					userVerified.setWxAccount(null);
+					securityInfoService.update(userVerified);
+				}
+			}
 		}
 	}
 

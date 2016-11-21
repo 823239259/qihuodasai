@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.sword.lang.StreamUtils;
 
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.wechat.WechatUserService;
 import com.tzdr.business.service.wuser.WUserService;
 
@@ -22,11 +23,13 @@ public class WxContoller{
 	private WUserService wUserService;
 	@Autowired 
 	private WechatUserService wechatUserService;
+	@Autowired
+	private SecurityInfoService securityInfoService;
 	@RequestMapping(value = "/vswx",produces="text/plain")
 	@ResponseBody
 	public void wx(HttpServletRequest reqest,HttpServletResponse response){
 		try {
-			WeChatSupport chatSupport = new WeChatSupport(reqest , wUserService , wechatUserService);
+			WeChatSupport chatSupport = new WeChatSupport(reqest , wUserService , wechatUserService,securityInfoService);
 			String result = chatSupport.execute();
 			response.setHeader("content-type", "text/html;charset=gbk");// 浏览器编码
 			response.getOutputStream().write(result.getBytes("gbk"));
