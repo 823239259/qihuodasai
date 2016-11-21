@@ -299,7 +299,10 @@
 					           socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 					        }
 					        //插入主力合约
-					        AddTo()
+					        AddTo();
+					        $(".productList").css({
+					        	"height":size*50+"px"
+					        });
 					    }else if(method == "OnRspSubscribe"){
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
@@ -329,8 +332,6 @@
                     " </div> " +
                     "<div class='productContentRight' class='mui-col-xs-9'> " +
                     "<span class='reenFont QLastPrice'>-</span> <span class='LastVolume'>-</span> <span class='ChangeRate'><p>-</p></span> </div></div>"
-						
-						
     				};
     				//生成页面传递的数据
 //  				$(".productList").css("height",48*product.CommodityName.length+"px");
@@ -354,6 +355,9 @@
 						});
 			      });
 				};
+//				$(".productList").css({
+//					"height":product.CommodityName.length*80+"px"
+//				})
 				//插入行情的方法
 			 function insertData1(MoreData) {
 			        var productName = document.getElementsByClassName("productName");
