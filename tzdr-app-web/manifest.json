@@ -289,7 +289,8 @@
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/quotation/activity.html",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"tzdr/news/active.html"
 				],
 				"priority": 0
 			},
@@ -1515,6 +1516,17 @@
 					"fonts/mui.ttf",
 					"js/jquery-1.11.3.js",
 					"images/0.0.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/news/active.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
