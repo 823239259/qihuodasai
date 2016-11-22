@@ -44,6 +44,6 @@
 			</ul>
 		</div>
 	</div>
-	<div class="iphone-footer"><p>以上活动最终解释权归维胜网所有，客服咨询：400-852-8008</p></div>
+	<div class="iphone-footer"><p>以上活动最终解释权归成都盈透科技有限公司所有，客服咨询：400-852-8008</p></div>
 </body>
 </html>
