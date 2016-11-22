@@ -122,10 +122,10 @@
     			mui.openWindow("telphone.html",'telphone');
     		});
     		document.getElementById("weixin").addEventListener("tap",function(){
-//  			if($("#weixin b").text()=="已关注"){
-//  				mui.toast("你已关注过啦~");
-//  				return;
-//  			}
+    			if($("#weixin b").text()=="已关注"){
+    				mui.toast("你已关注过啦~");
+    				return;
+    			}
     			$("#weixinCodeImage").css({"display":"block"});
     			chechCode();
 //  			mui.openWindow({
