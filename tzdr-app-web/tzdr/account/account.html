@@ -57,7 +57,7 @@
       					if(result.data.wxAccount==null){
       						$("#weixin b").text("未关注");
       					}else{
-      						$("#weixin b").text("已关注")
+      						$("#weixin b").text("已关注").css({"color":"green"});
       					}
       					return;
       				},function(result){
@@ -228,7 +228,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0)" id="telPhone"><img src="../../images/ac_05.png"><i>账户绑定</i><b>修改</b></a>
 			</li>
 			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="weixin"><img src="../../images/weixinIcon.png"><i>微信绑定</i><b>已关注</b></a>
+				<a class="mui-navigate-right" href="javascript:void(0)" id="weixin"><img src="../../images/weixinIcon.png"><i>微信绑定</i><b>未关注</b></a>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0)" id="updatepw"><img src="../../images/ac_06.png"><i>登录密码</i><b>修改</b></a>
@@ -266,8 +266,8 @@
 		<div id="box">
 			<p>微信绑定<img src="../../images/close1.png" id="close"></p>
 			<div id="weixinContent">  
-				<img src="" id="weixinCodeImg">
-				<span>点击二维码，截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+				<img src="../../images/close.png" id="weixinCodeImg">
+				<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
 			</div>
 		</div>
 	</div>

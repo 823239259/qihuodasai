@@ -33,8 +33,10 @@
 					"line-height":Proportion*30+"px",
 					"padding-left":Proportion*5+"px",
 				})
-				$(".ap_main .acp_font table thead td ").css({
+				$("#theadTr td ").css({
 					"font-size": Proportion*12+"px",
+					"line-height":"15px",
+					"padding":"7.5px 0px"
 				});
 				
     		}
@@ -381,11 +383,11 @@
 	<p class="tips borderClass" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
-			<thead>
+			<thead id="theadTr">
 				<td width="120px">期货产品</td>
 				<td width="100px">主力合约</td>
 				<td width="280px">维胜交易时间段</td>
-				<td width="120px">交易手续费</td>
+				<td width="120px">交易手续费<br><i style="font-size: 10px;">结算时统一扣除</i></td>
 				<td width="350px">初始可持仓手数</td>
 			</thead>
 			<!--<tr>

@@ -368,7 +368,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	margin-left:10px; ;
 }
 .ap_main .acp_font table  tr{  padding:0px 10px;}
-.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 14px;height: 30px;line-height: 30px;}
+.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 14px;height: 30px;line-height: 15px; padding:7.5px 0px; }
 .ap_main .acp_font table thead td { background: #f2f2f2;color:#2B2B2B}
 /*.ap_main .mui-content-padded p { line-height: 40px;}*/
 /*支付页*/
@@ -694,7 +694,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 #weixinContent{
 	width: 100%;
 	height: auto;
-	padding:20px 10%;
+	padding:0px 10% 20px;
 }
 #weixinContent span{
 	font-size: 12px;;
@@ -704,5 +704,5 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 }
 #weixinCodeImg{
 	width: 100%;
-	height: 190px;
+	height: auto;
 }
