@@ -1186,7 +1186,7 @@ function addBindsss(cls){
  */
 function loadOperateLogin(){
 	$.ajax({
-		url:basepath+"/user/operateLogin",
+		url:"..../../user/operateLogin",
 		type:"get",
 		success:function(result){
 			if(result){
@@ -1210,18 +1210,20 @@ function loadOperateLogin(){
  * 版本是否获取成功
  */
 var isGetVersion = false;
+var uid = undefined;
 $(function(){
 	/**
 	 * 初始化交易配置 --> trade.config
 	 */
 	initTradeConfig();
-	getVersion();
+	//getVersion();
 	validateIsGetVersion();
 	$(".signLogin_span").bind("click",function(){
 		var $this = $(this);
 		var ismock = $this.attr("data-tion");
 		setTradeConfig(ismock);
 	});
+	
 	if(uid != undefined && uid.length > 0 ){
 		loadOperateLogin();
 	}
@@ -1246,7 +1248,7 @@ $(function(){
 			  content: $("#back_passwork").html(),
 			  btn:['没有账号?立即申请','关闭'],
 			  yes:function(){
-				  window.open(basepath+"/outDisk/index");
+				  window.open("../../outDisk/index");
 				  layer.closeAll();
 			  },
 			  btn2: function(){
@@ -1340,7 +1342,7 @@ $(function(){
  */
 function getVersion(){
 	$.ajax({
-		url:basepath+"/socket/config/getVersion",
+		url:"../../socket/config/getVersion",
 		type:"get",
 		data:{
 			appVersion:tradeWebCmsVersion
