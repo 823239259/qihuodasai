@@ -31,7 +31,7 @@
 		}else if(url.indexOf("sogou") >= 0 ) {
 			$(".channelRoute").html("<img src='${ctx}/static/images/login/sogou.png'>");
 		}else {
-			alert("没有");
+			$(".channelRoute").html("<img src='${ctx}/static/images/login/ld-Android.png'>");
 		}
 	})
 </script>
