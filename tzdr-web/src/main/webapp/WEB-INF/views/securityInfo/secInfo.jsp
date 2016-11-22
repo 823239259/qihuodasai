@@ -456,32 +456,21 @@
   </div>
 </div>
 <div class="ulmain">
-  <div class="pmain">
-      <img src="${ctx }/static/images/wx.png" width="60" height="55">
-      <p><a class="font15 ftwtb">微信关注</a></p>
-           <c:choose> 
-			<c:when test="${not empty requestScope.bank}">
-			 <p><a class="colorred font14 ">${requestScope.bank }</a>
-			 <!-- <a class="color34b3e0 font14 mglt20" href="javascript:bandcard()" >修改</a> -->
-			 </p>
-			</c:when>
-			<c:otherwise>
-			<c:if test="${requestScope.userverified.wxAccount == null }">
-				<p>
-					<a class="colorred font14 ">未关注</a>
-		        	<a class="color34b3e0 font14 mglt20" href="javascript:weChatAttention()" >立即关注</a>
-		      	</p>
-			</c:if>
-			  <c:if test="${requestScope.userverified.wxAccount != null }">
-			  	<p><a class="colorred font14 ">已关注</a></p>
-			  </c:if>
-			</c:otherwise>
-		</c:choose>
-  </div>
-  <div class="color999 font14 mgt10">
-    <p>绑定微信可以一键登录</p>
-  </div>
+	<div class="pmain">
+		<img src="${ctx }/static/images/wx.png" width="60" height="55">
+		<p><a class="font15 ftwtb">微信关注</a></p>
+		<c:if test="${requestScope.userverified.wxAccount == null }">
+			<p><a class="colorred font14 ">未关注</a><a class="color34b3e0 font14 mglt20" href="javascript:weChatAttention()" >立即关注</a></p>
+		</c:if>
+		<c:if test="${requestScope.userverified.wxAccount != null }">
+			<p><a class="colorred font14 ">已关注</a></p>
+		</c:if>
+	</div>
+  	<div class="color999 font14 mgt10">
+    	<p>绑定微信可以一键登录</p>
+  	</div>
 </div>
+
 </div>
 </div>
 </div>
