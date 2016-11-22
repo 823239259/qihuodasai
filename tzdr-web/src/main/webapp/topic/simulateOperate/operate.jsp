@@ -14,7 +14,7 @@
     <meta name="keywords" content="股指期货模拟交易软件,黄金期货模拟软件,股指期货模拟大赛,期货模拟比赛,南华期货模拟软件,国际期货开户">
     <meta name="description" content="维胜金融国际期货模拟盘-致力于外盘期货模拟软件开发、期货模拟比赛，为用户提供股指期货模拟交易软件,黄金期货模拟软件,股指期货模拟大赛,期货模拟比赛,南华期货模拟软件,国际期货开户等服务">
     <style>
-    	a:hover {text-decoration: none;}
+    	.operate a:hover {text-decoration: none;}
     </style>
 </head>
 <body>
