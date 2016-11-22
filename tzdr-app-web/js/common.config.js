@@ -1,4 +1,4 @@
-var model = "live";
+var model = "dev";
 var tradeSocketUrl = "";
 var tradeSocketModelUrl = "";
 var tradeSocketVersion = "";
@@ -33,8 +33,10 @@ function tradeConfig(){
 }
 
 function TradeConfigTest(){ 
-	this.TradeSocketUrl = "ws://139.224.24.206:6066";//"ws://139.196.228.143:6066
-	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
+//	this.TradeSocketUrl = "ws://139.224.24.206:6066";//"ws://139.196.228.143:6066
+//	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
+	this.TradeSocketUrl = "ws://139.224.24.206:6067";//"ws://139.196.228.143:6066
+	this.TradeSocketModelUrl = "ws://139.224.24.206:6067";
 	this.tradeSocketVersion = "2.0.0";
 	this.tradeAppVersion = "2.0.0";
 	return this; 
