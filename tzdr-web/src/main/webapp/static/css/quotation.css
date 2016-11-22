@@ -6,7 +6,7 @@
 .quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
 .quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
-/* µÇÂ¼¸ü¶àÕËºÅ  */
+/* µÇÂ¼¸ü¶àÕËºÅ  */ 
 #more_account {position: absolute; width:130px; background: #ffffff; z-index: 9; top: 43px; border-radius: 4px;}
 #more_account p {height: 26px; line-height: 26px; border-radius: 4px; padding-left: 11px;}
 #more_account p:hover {background: #ccc; cursor: pointer;}
