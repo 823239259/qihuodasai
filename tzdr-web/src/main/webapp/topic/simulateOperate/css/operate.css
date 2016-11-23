@@ -4,7 +4,7 @@ ul li {list-style-type: none;}
 a {text-decoration: none;}
 .operate {background: #ffea80;}
 .operate .operate_center {width: 1000px; margin: 0 auto; position: relative;}
-.operate .operate_center .caopan {position: fixed; left: 0; background: url("../images/operate_2.png") no-repeat; width: 185px; height: 170px; display: inline-block; line-height: 170px; text-align: center; color: #fff; font-size: 28px;}
+.operate .operate_center .caopan {position: fixed; left: 0; top: 50%; background: url("../images/operate_2.png") no-repeat; width: 185px; height: 170px; display: inline-block; line-height: 170px; text-align: center; color: #fff; font-size: 28px;}
 .operate .operate_center .caopan:hover {background: url("../images/operate_12_on.png");}
 .operate .top {background: #333;height: 60px; line-height: 60px;}
 .operate .top p {width: 1000px; margin: 0 auto; height: 60px;}

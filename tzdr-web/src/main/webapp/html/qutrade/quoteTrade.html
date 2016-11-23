@@ -497,21 +497,4 @@
 </div>
 </body>
 <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
-<script>
-$(function() {
-	var url = document.referrer;
-	if(url.indexOf("simulateOperate/operate") >= 0 ){
-		$("#signLogin").css("display","block");
-		$("#div_Mask").show();
-		var popupHeight = $("#signLogin").outerHeight()/2;
-		var popupWidth = $("#signLogin").outerWidth()/2;    
-		$("#signLogin").css({
-			top:"50%",
-			left:"50%",
-			marginTop: -(popupHeight+15),
-			marginLeft: -(popupWidth)
-		});
-	}
-})
-</script>
 </html>
