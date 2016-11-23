@@ -401,12 +401,12 @@ mui.plusReady(function(){
 			$("#list_type ").css({
 				"display":"block"
 			});
-			$("#selectButon").css({
-				"color":"#fcc900",
-			});
-			$("#timeChartMenu").css({
-				"color":"#FFFFFF",
-			})
+//			$("#selectButon").css({
+//				"color":"#fcc900",
+//			});
+//			$("#timeChartMenu").css({
+//				"color":"#FFFFFF",
+//			})
 		});
 		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
 			$("#list_type ").css({

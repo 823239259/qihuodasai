@@ -55,15 +55,15 @@ p{
 	height: 215px;
 	background-color: #2B2B2B;
 	overflow: hidden;
-	border-top: 1px solid #454545;
+	border-top: 1px solid #121212;
 }
 .buttomFixLeft,.buttomFixRight{
 	background-color: #2B2B2B;
 	float: left;
 }
 .buttomFixRight{
-	border-bottom: 1px solid #454545;
-		border-left: 1px solid #454545;
+	border-bottom: 1px solid #121212;
+		border-left: 1px solid #121212;
 	height: 90px;
 }
 .buttomFixRight p{
@@ -76,7 +76,7 @@ p{
 	height: 30px;
 	line-height: 30px;
 	padding: 0px 15px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	margin-bottom: 0px;
 	width: 100%;
 }
@@ -100,16 +100,6 @@ p{
 #domnRange{
 	color:#e9392a;
 }
-#BuyContent{
-	color:#cccccc;
-	height: 30px;
-	line-height: 30px;
-	padding: 0px 15px;
-	border-bottom: 1px solid #454545;
-	margin-bottom: 0px;
-	width: 100%;
-	background-color:#2B2B2B;
-}
 .BuyDiv{
 	clear: all;
 	borer:1px solid red;
@@ -122,7 +112,7 @@ p{
 	height: 42px;
 	line-height: 42px;
 	padding: 0px 15px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	margin-bottom: 0px;
 	font-size: 14px;
 }
@@ -181,7 +171,7 @@ p{
 	width: 100%;
 	height:40px;
 	padding:4px 0px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	position: fixed;
 	top:90px;
 	z-index: 998;
@@ -203,47 +193,53 @@ p{
 }
 .ProductInformation{
 	overflow: hidden;
-	padding:3px 0px;
 	color:#FFFFFF;
-	border-bottom: 1px solid #454545;
+	height: 73px;
+	border-bottom: 1px solid #121212;
 }
 .ProductInformationLeft,.ProductInformationRight{
 	float: left;
 	overflow: hidden;
-	padding:0px 8px;
-	/*width: 50%;*/
-	height: 65px;
+	/*padding:0px 8px;*/
+	height: 73px;
 }
 .ProductInformationRight{
-	width: 48%;
+	width: 47%;
+	padding: 5px 10px 3px;
 }
+ .ProductInformationRight p{
+ 	line-height: 22px;
+ }
 .ProductInformationLeft{ 
-	width: 52%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-right: 0px;
+	width: 53%;
+	padding: 0px;
 	position: relative;
-	/*padding:10px 15px;*/
+	/*padding:0px 10px;*/
+	border-right: 1px solid #121212;
 }
-.ProductInformationLeft p{
-	font-size: 14px;
-}
-
 .ProductInformationLeft #tradeTitle{
 	position: absolute;
 	top:12px;
-	/*left:-2px;*/
+	height: 50px;
 	z-index: 888;
 	background-color: rgba(0, 0, 0, 0);
 	color:#FFFFFF;
 	font-size: 14px;
-	margin-bottom: 0px;
-	padding: 10px 0px !important;
+	padding: 0px 0px 10px 10px !important;
+	margin: 0px;;
+}
+#MainContract{
+	position: absolute;
+	bottom:10px;
+	color:#999999;
+	font-size: 14px;
+	left: 15px;;
 }
 #searchIcon{
-	margin-top: 12px;
+	margin-top: 27px;
 	display: inline-block;
 	width: 100%;
+	padding-right: 1px;
 	text-align: right;
 }
 #tradeTitle #titleValue{
@@ -283,13 +279,13 @@ p{
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #000000;
 }
-.ProductInformationLeft select{
+/*.ProductInformationLeft select{
 	background-color: rgba(0, 0, 0, 0);
 	color:#FFFFFF;
 	font-size: 14px;
 	margin-bottom: 0px;
 	padding: 10px 0px !important;
-}
+}*/
 /*#searchIcon{
 	position: absolute;
 	top: 10%;
@@ -314,7 +310,7 @@ p{
 
 }
 #buyFuture{
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 }
 #buyFuture label{
 	color:#FFFFFF;
@@ -325,7 +321,7 @@ p{
 	height:40px;
 	line-height: 40px;
 	font-size: 14px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	padding:0px 15px;
 	
 }
@@ -374,6 +370,7 @@ p{
 }
 #trade{
 	background-color: #2B2B2B;
+	/*display: block;*/
 }
 .mui-navigate-right:after, .mui-push-right:after{
 	content:"";
@@ -729,7 +726,7 @@ input{
 	clear: both;
 }
 #numberInput input{
-	border: 1px solid #454545;
+	border: 1px solid #121212;
 	background-color: #1f1f1f;
 	color:#FFFFFF;
 	text-align: center;
@@ -744,20 +741,6 @@ input{
 	width: 100%;
 	position: relative;
 }
-/*#timeChartMenu{
-	border:none;
-	text-align: center;
-	background-color: #2B2B2B;
-	color:#fcc900;
-}*/
-/*#selectType{
-	background-color: #2B2B2B;
-	color:#FFFFFF;
-	text-align: right;
-	background-image: url(../images/down.png);
-	background-repeat: no-repeat;
-	background-position: center right;
-}*/
 #closeTrade{
 	width: 17px;
 	height: auto;
@@ -765,7 +748,6 @@ input{
 	margin: 8px;
 }
 .top{
-	/*background-image: url(../images/quotation.png);*/
 	top:0px;
 	position: fixed;
 	right: 0px;;
@@ -812,7 +794,6 @@ input{
 	font-size: 16px;;
 }	
 #headerMenu{
-	padding:5px 10px;
 	background-color: #2B2B2B;
 	width: 100%;
 	position: fixed;
@@ -823,37 +804,49 @@ input{
 	position: fixed;
 	top:46px;
 }
-#headerMenu button{
-	height: 40px;
-	line-height: 40px;
-	font-size: 14px;
-	width: 75px;
-	border: none;
-	padding:0px;
+#headerMenu table{
+	width: 100%;
+	height: 16px;
+	line-height: 16px;
+	color:#cccccc;
 	background-color: #2B2B2B;
-	text-align: center;
-	/*border-radius: 50%;*/
 }
-/*#selectButon{
-	position: absolute;
-	right: 10px;
-	color:#FFFFFF;
-	text-align: center;
-}*/
+#headerMenu table td{
+	padding:12px 0.125%;
+	border-bottom: 1px solid #121212;
+	border-left: 1px solid #121212;
+	border-right: 1px solid #121212;
+	width: 25%;
+	font-size:14px;;
+}
+#selectButon{
+	background:url(../images/buttomSantjiao.png) no-repeat;
+	background-size: 6px 6px;
+	background-position: 80% 21px ;
+}
 #list_type{
 	text-align: center;
 	height: auto;
 	position: absolute;
-	width: 75px;
-	top:86px;
-	right: 10px;;
+	width: 25%;
+	top:96px;
+	right: 0px;;
 	color:#999999;
 	background-color: #2B2B2B;
 	z-index: 999;
-	border:1px solid #454545;
 	display: none;
 	padding:0px;
 	margin: 0px;;
+}
+#sanjiao{
+	position: absolute;
+	top:-8px;
+	display: inline-block;
+	height: 8px;
+	width: 100%;
+	left: 0px;
+	background: url(../images/graySanjiao.png) no-repeat bottom center;
+	background-size: 15px 8px;
 }
 #list_type ul{
 	padding: 0px;
@@ -861,7 +854,7 @@ input{
 	list-style-type: none;
 }
 #list_type li{
-	width: 75px;;
+	width: 100%;;
 	height:40px;
 	font-size:12px;
 	line-height: 40px;
@@ -894,9 +887,6 @@ input{
 	border-bottom:1px solid #454545 ;
 }
 #username_list li:nth-last-child(1){
-	border-bottom: none;
-}
-#list_type li:nth-last-child(1){
 	border-bottom: none;
 }
 #inputList{
@@ -1029,4 +1019,11 @@ input{
 	font-style: normal;
 	    font-size: 14px;
     vertical-align: 2px;
+}
+#headerMenu .mui-active{
+	background-color: #121212;
+	color:#fcc900;
+}
+.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{
+	/*font-family: "微软雅黑";*/
 }
