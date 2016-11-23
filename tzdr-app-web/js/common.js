@@ -41,6 +41,7 @@
 	// 需要认证用户身份的请求调用接口
 	mui.app_request= function (func_url,params,onSuccess,onError,paramUrl){
 		if(mui.checkNetwork()==false){ 
+			console.log("当前网络不给力");
 			mui.toast("当前网络不给力，请稍后再试"); 
 			return;
 		}
@@ -80,6 +81,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+				console.log(JSON.stringify(errorThrown));
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -258,9 +260,9 @@ var tzdr = {
 	// 系统常量
 	constants:{
 		//接口域名地址
-//		api_domain:"http://192.168.2.174:8080/tzdr-app/",
+		api_domain:"http://192.168.2.174:8080/tzdr-app/",
 //		api_domain:"http://test.api.vs.com/",
-		api_domain:"http://api.vs.com/",
+//		api_domain:"http://api.vs.com/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token
@@ -472,6 +474,9 @@ var tzdr = {
 		 */
 		reverseMoney:function(s){
 			return parseFloat(s.replace(/,/g,''));
+		},
+		removeY:function(s){
+			return s.substring(1);
 		}
 	}
 }

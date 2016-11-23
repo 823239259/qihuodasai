@@ -11,12 +11,24 @@
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
+		<style>
+			/*@keyframes move {
+	            0% {transform:rotate(0deg);}
+	            100% {transform:rotate(-360deg);}
+	        }*/
+        .rotateClass {
+        	-webkit-transform: rotate(1000deg);
+        	-webkit-transition: all linear 3s;
+            /*animation: move 3s linear infinite;*/
+        }
+
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-left" id="tutorial"><img src="../../images/newUser.png"></a>
 		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
-		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
+		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" ></a>
 		</header>
 	<nav class="navlist">
 		<a class="navon" href="javascript:void(0);" id="quotationMain">
@@ -157,7 +169,9 @@
 	<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript">
 		
-				
+				$(function(){
+					$("#refresh").addClass("rotateClass");
+				})
 		
 		//初始化导航栏
 			tzdr.init.initHearListener();
@@ -166,6 +180,9 @@
 				/*
 				 增加新手引导的样式
 				 */
+					
+//				$("#refresh").animate({ width: "300px"}, 1000, );
+//				 document.getElementById("refresh").webkitTransform ="rotate(720deg)"
 				if(plus.storage.getItem("QuotationGuidance")==null){
 					plus.storage.setItem("QuotationGuidance","1");
 					bindGuidance();
@@ -290,6 +307,7 @@
 							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
 					         //更新行情的数据
 					        	insertData1(MoreData);
+					        	$("#refresh").removeClass("rotateClass");
 					        
 					    }else if(method == "OnRtnQuote"){
 					         var MoreData=JSON.parse(evt.data).Parameters;

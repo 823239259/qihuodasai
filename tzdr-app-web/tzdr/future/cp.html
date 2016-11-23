@@ -33,8 +33,10 @@
 					"line-height":Proportion*30+"px",
 					"padding-left":Proportion*5+"px",
 				})
-				$(".ap_main .acp_font table thead td ").css({
+				$("#theadTr td ").css({
 					"font-size": Proportion*12+"px",
+					"line-height":"15px",
+					"padding":"7.5px 0px"
 				});
 				
     		}
@@ -81,10 +83,9 @@
   							}
   						});
   						this.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 on");
-  						var bonds_num=parseFloat(tzdr.moneyUtils.reverseMoney(this.innerHTML));  
+  						var bonds_num=parseFloat(tzdr.moneyUtils.reverseMoney(tzdr.moneyUtils.removeY(this.innerHTML)));  
   						//切换详细数据
   						mui.each(paramListAll,function(i,item){ 
-  							
   							if(!mui.isnull(bonds_num)&&bonds_num==item.traderBond){
   								
   								init_params=item;
@@ -132,8 +133,7 @@
     	
     	
     	function setParams(ParamsList){
-    		
-			document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
+			document.getElementById("traderBond").innerHTML="¥"+tzdr.moneyUtils.formatCurrency(ParamsList.traderBond);
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
 			document.getElementById("paymentMoney").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
@@ -148,13 +148,12 @@
 			var trade_num=document.getElementById("bond_num");
 			var li=document.createElement("li");
 			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 bottonList");
-			li.innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
+			li.innerHTML="¥"+tzdr.moneyUtils.formatCurrency(ParamsList.traderBond);
 			trade_num.appendChild(li);
 		};
 		function openPays(){
 			var traderBond=document.getElementById("traderBond").innerHTML;
-			traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
-			
+			traderBond=tzdr.moneyUtils.reverseMoney(tzdr.moneyUtils.removeY(traderBond));
 			if(mui.isnull(traderBond)){
 				mui.toast("请选择保证金！");
 				return;
@@ -192,7 +191,7 @@
 			var td_4=document.createElement("td");
 			var td_5=document.createElement("td");
 			td_2.innerHTML=contractList.mainContract;
-			td_4.innerHTML=contractList.price+"元/手";
+			td_4.innerHTML="¥"+contractList.price+"/手";
 			var tradeTime = contractList.tradTime;
 			switch (contractList.tradeType){
 				case 0:
@@ -368,7 +367,7 @@
 	<ul class="mui-table-view sc_listsc">
 		<li class="mui-table-view-cell">
 			<label>操盘保证金(¥)：</label>
-			<span id="traderBond">27,750元</span>
+			<span id="traderBond">¥27,750</span>
 		</li>	
 		<li class="mui-table-view-cell">
 			<label>总操盘资金($)：</label>
@@ -383,11 +382,11 @@
 	<p class="tips borderClass" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
 	<div class="acp_font">
 		<table border="0" cellpadding="0" cellspacing="0" id="table_list">
-			<thead>
+			<thead id="theadTr">
 				<td width="120px">期货产品</td>
 				<td width="100px">主力合约</td>
 				<td width="280px">维胜交易时间段</td>
-				<td width="120px">交易手续费</td>
+				<td width="120px">交易手续费<br><i style="font-size: 10px;">结算时统一扣除</i></td>
 				<td width="350px">初始可持仓手数</td>
 			</thead>
 			<!--<tr>
