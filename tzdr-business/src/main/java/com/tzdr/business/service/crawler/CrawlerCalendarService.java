@@ -4,6 +4,7 @@ package com.tzdr.business.service.crawler;
 import java.util.List;
 
 import com.tzdr.common.baseservice.BaseService;
+import com.tzdr.common.utils.Page;
 import com.tzdr.domain.web.entity.CrawlerCalendar;
 
 public interface CrawlerCalendarService extends BaseService<CrawlerCalendar>{
@@ -34,5 +35,5 @@ public interface CrawlerCalendarService extends BaseService<CrawlerCalendar>{
 	 * 获取日历数据
 	 * @param channelSet
 	 */
-	public List<CrawlerCalendar> doGetCrwlerCalendar();
+	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page);
 }

@@ -195,7 +195,7 @@ li,ul { list-style:none;margin:0px; padding:0px; border:0px;}
 .ks_center .ks_sshq {font-size: 16px; color: #999; text-align: center; line-height: 30px;}
 .ks_center .ks_sshq span{font-size: 24px; color: #000; padding-bottom: 10px; display: inline-block;}
 .ks_center .ks_lxfs {height: 220px; padding-top: 34px; border-top: 1px solid #5ca1e6; margin-top: 100px;}
-.ks_center .ks_lxfs ul {float: left; margin-left: 60px; text-align: center;}
+.ks_center .ks_lxfs ul {float: left; margin-left: 130px; text-align: center;}
 .ks_center .ks_lxfs .call {text-align: left; color: #999;}
 .ks_center .ks_lxfs .call li{margin-bottom: 4px;}
 .ks_center .ks_lxfs ul img {height: 146px; width: 146px;}

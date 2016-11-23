@@ -1,0 +1,50 @@
+@charset "utf-8";
+* {margin: 0; padding: 0; font-family: "微软雅黑";}
+ul li {list-style-type: none;}
+a {text-decoration: none;}
+.operate {background: #ffea80;}
+.operate .operate_center {width: 1000px; margin: 0 auto; position: relative;}
+.operate .operate_center .caopan {position: fixed; left: 0; top: 50%; background: url("../images/operate_2.png") no-repeat; width: 185px; height: 170px; display: inline-block; line-height: 170px; text-align: center; color: #fff; font-size: 28px;}
+.operate .operate_center .caopan:hover {background: url("../images/operate_12_on.png");}
+.operate .top {background: #333;height: 60px; line-height: 60px;}
+.operate .top p {width: 1000px; margin: 0 auto; height: 60px;}
+.operate .top p span {font-size: 14px; color: #ffcc33; float: right;}
+.title {background: url("../images/operate_1.png") no-repeat center; height: 400px;}
+.operate_rule {margin-top: 50px; height: 431px; background: #fff;}
+.operate_lis {font-size: 20px; color: #ffd966; background: url("../images/operate_3.png") no-repeat; width: 1000px; height: 40px; line-height: 40px;}
+.operate_lis span {padding-left: 40px;}
+.operate_rule .operate_ul {margin-top: 40px; height: 220px;}
+.operate_rule .operate_ul .ul1 {background: url("../images/operate_4.png") no-repeat; width: 220px; height: 220px; float: left; margin-left: 75px; text-align: center;}
+.operate_rule .operate_ul .ul2 {background: url("../images/operate_5.png") no-repeat; width: 50px; height: 40px; float: left; margin-top: 60px;}
+.operate_rule .operate_ul .li1 {font-size: 20px; color: #f75a52; margin-bottom: 10px; margin-top: 40px;}
+.operate_rule .operate_ul .li2 {font-size: 14px; color: #f75a52; margin-bottom: 5px;}
+.operate_rule .operate_ul li {padding-right: 60px;}
+.operate_rule .p1 {border-top: 1px solid #ffea80; padding-left: 40px; padding-top: 10px; margin-bottom: 10px;}
+.operate_rule .p1 p {color: #f75a52; font-size: 16px; line-height: 30px;}
+.operate_reward {background: #fff; height: 350px;}
+.operate_reward .operate_ul2 {padding: 0 40px;}
+.operate_reward .operate_ul2 ul {background: url("../images/operate_7.png") no-repeat; width: 360px; height: 180px; float: left; margin: 40px 50px; text-align: center;}
+.operate_reward .operate_ul2 ul li.li1 {color: #ffd966 ;font-size: 36px; padding-top: 32px;}
+.operate_reward .operate_ul2 ul li.li2 {color: #ffd966 ;font-size: 28px; padding-top: 22px;}
+.operate_explain {background: #fff; height: 987px;}
+.operate_explain .operate_ul3 {padding: 0 40px; height: 325px; border-bottom: 1px solid #ffea80;}
+.operate_explain .p2 {color: #f75a52; font-size: 16px; padding: 20px 0;}
+.operate_explain .p2 span {display: inline-block; background: url("../images/operate_11.png") no-repeat; width: 20px; height: 20px; color: #ffd966; text-align: center; padding-right: 10px;}
+.operate_explain .operate_ul3 ul li {color: #f75a52; float: left; width: 300px; text-align: center; height: 40px; line-height: 40px; border-bottom: 1px solid #f75a52;}
+.operate_explain .operate_ul3 ul li.li3 {width: 318px;}
+.operate_explain .operate_ul3 ul li.ye {background: #f75a52; color: #fff; border-bottom: none;}
+.operate_explain .operate_ul3 ul li.money {background: #f75a52; color: #fff; width: 299px; border-left: 1px solid #fff; border-right: 1px solid #fff; border-bottom: none;}
+.operate_explain .operate_ul3 ul li.dkj {background: #f75a52; color: #fff; border-bottom: none;}
+.operate_explain .operate_ul4 {padding: 0 40px; height: 228px; border-bottom: 1px solid #ffea80;}
+.operate_explain .operate_ul4 p {color: #f75a52; font-size: 14px; line-height: 24px; padding-left: 30px;}
+.operate_explain .operate_ul4 p span {float: left;}
+.operate_explain .operate_ul4 .p2 {font-size: 16px; padding-left: 0;}
+.cp {text-align: center;}
+.cp label {background: url("../images/operate_8.png") no-repeat; width: 289px; height: 60px; display: inline-block;}
+.cp a {color: #fff; font-size: 20px; background: url("../images/operate_13.png") no-repeat; width: 210px; height: 60px; line-height: 60px; display: inline-block; text-align: center;}
+.cp a:hover {background: url("../images/operate_13_on.png");}
+.operate_download {background: #fff; height: 365px;}
+.operate_download ul {float: left; padding: 40px 80px; text-align: center;}
+.operate_download ul li {margin-bottom: 5px;}
+.operate_download .operate_ul5 {width: 640px; margin: 0 auto;}
+.operate_footer {text-align: center; height: 60px; line-height: 60px; font-size: 14px; color: #ffd966; background: #333;}

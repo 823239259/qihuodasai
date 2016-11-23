@@ -24,7 +24,7 @@ public class WallstreetcnStartupListener implements ApplicationListener<ContextR
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		if (event.getApplicationContext().getParent() == null) {
-				/*CrawlerUrlService crawlerUrlService = SpringUtils.getBean(CrawlerUrlService.class);
+				CrawlerUrlService crawlerUrlService = SpringUtils.getBean(CrawlerUrlService.class);
 				CrawlerUrlParamService crawlerUrlParamService = SpringUtils.getBean(CrawlerUrlParamService.class);
 				List<CrawlerUrl> crawlerUrls = crawlerUrlService.getAll();
 				for (CrawlerUrl crawlerUrl : crawlerUrls) {
@@ -42,7 +42,7 @@ public class WallstreetcnStartupListener implements ApplicationListener<ContextR
 						}
 						
 					}
-				}*/
+				}
 			
         }
 	}

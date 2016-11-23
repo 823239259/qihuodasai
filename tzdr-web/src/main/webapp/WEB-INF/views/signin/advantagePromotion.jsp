@@ -21,6 +21,20 @@
 <script type="text/javascript">
 	var casServerLoginUrl="${casServerLoginUrl}";
 </script>
+<script>
+	$(function() {
+		var url = document.referrer;
+		if(url.indexOf("baidu") >= 0 ){
+			$(".channelRoute").html("<img src='${ctx}/static/images/login/baidu.png'>");
+		}else if(url.indexOf("360") >= 0 ) {
+			$(".channelRoute").html("<img src='${ctx}/static/images/login/360.png'>");
+		}else if(url.indexOf("sogou") >= 0 ) {
+			$(".channelRoute").html("<img src='${ctx}/static/images/login/sogou.png'>");
+		}else {
+			$(".channelRoute").html("<img src='${ctx}/static/images/login/ld-Android.png'>");
+		}
+	})
+</script>
 </head>
 <body>
 <input type="hidden" id="backData" value="${backData}"/>
@@ -122,14 +136,14 @@
 	</div>
 	<p class="ks_sshq" style="margin-top: 30px;"><span>实时行情</span><br>各种类交易终端行情超低延迟，<br>领跑同行；</p>
 	<div class="ks_lxfs">
-		<ul style="margin-left: 110px;">
-			<li><img src="${ctx}/static/images/login/ld-Android.png"></li>
-			<li class="xz">Android下载</li>
+		<ul style="margin-left: 140px;">
+			<li class="channelRoute"><img src="${ctx}/static/images/login/ld-Ios.png"></li>
+			<li class="xz">APP下载</li>
 		</ul>
-		<ul>
+		<%-- <ul>
 			<li><img src="${ctx}/static/images/login/ld-Ios.png"></li>
 			<li class="xz">iOS下载</li>
-		</ul>
+		</ul> --%>
 		<ul>
 			<li><img src="${ctx}/static/images/login/ld-gzh.png"></li>
 			<li class="xz">关注微信公众号</li>

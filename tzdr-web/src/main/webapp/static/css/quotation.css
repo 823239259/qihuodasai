@@ -52,7 +52,7 @@
 #content2 {margin-right: 320px; height: 460px;}
 #right .right_title {height: 48px; line-height: 48px;border-bottom: 1px solid #1a1a1a; background: #333;}
 #right .right_lis {font-size: 16px; text-align: center; color: #ccc; height: 48px; background: #404040; line-height: 48px; position: relative; z-index: 1; top: -1px;}
-#right .right_tab ul {display: inline-block; width: 100%;height: 28px; line-height: 28px;}
+#right .right_tab ul {display: inline-block; width: 100%;height: 24px; line-height: 24px;}
 #right .right_tab ul li {float:left; font-size: 14px; }
 #right .right_tab ul .right_tab_zxj {color: #999; width: 50px; margin-left: 10px;}
 #right .right_tab ul .right_tab_zxjq {width: 90px; margin-left: 10px; color: #ccc;}
@@ -66,16 +66,16 @@
 #footer {background: #333; text-align: center;width: 100%; font-size: 14px; color: #666; border-top: 1px solid #1a1a1a; height: 37px; line-height: 37px;}
 /* 最小屏 1366 */
 @media screen and (max-width: 1366px) {
-	.quotation_title {width: 1366px;}
-	.quotation_center {width: 1366px;}
-	#footer {width: 1366px;}
-	#content .quotation_echarts {
-		/* width: 1144px; */
-	}
-	#content .quotation_transaction .quotation_detailed {
-		/* width: 798px; */
-	}
-	.chart-component .gcrow {width: 841px;}
+    .quotation_title {width: 1366px;}
+    .quotation_center {width: 1366px;}
+    #footer {width: 1366px;}
+    #content .quotation_echarts {
+        /* width: 1144px; */
+    }
+    #content .quotation_transaction .quotation_detailed {
+        /* width: 798px; */
+    }
+    .chart-component .gcrow {width: 841px;}
 }
 /* 买入卖出 */
 #content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 35px; line-height: 35px; margin: 0 auto;}
@@ -87,11 +87,11 @@
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr input[type="radio"] {margin-right:10px;}
 #content .quotation_transaction .quotation_type .money_sj {background: #1a1a1a; color: #ccc; width: 198px; height: 26px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 26px; margin-top: 5px;}
 #content .quotation_transaction .quotation_type .money_js {position: relative;}
-#content .quotation_transaction .quotation_type .money_js .del{position: absolute; color: #ccc; left: 0; border-right: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .money_js .del{position: absolute; color: #ccc; left: 0; border-right: 1px solid #4d4d4d; line-height: 26px; top: 5px; padding: 0 15px;}
 #content .quotation_transaction .quotation_type .del:hover {cursor: pointer;}
 #content .quotation_transaction .quotation_type .add:hover {cursor: pointer;}
-#content .quotation_transaction .quotation_type .money_js .add {position: absolute; color: #ccc; right: 0; border-left: 1px solid #4d4d4d; line-height: 28px; top: 5px; padding: 0 15px;}
-#content .quotation_transaction .quotation_type .money_js input {margin-top: 5px;outline: none; background: #1a1a1a; color: #ccc; width: 198px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px;}
+#content .quotation_transaction .quotation_type .money_js .add {position: absolute; color: #ccc; right: 0; border-left: 1px solid #4d4d4d; line-height: 26px; top: 5px; padding: 0 15px;}
+#content .quotation_transaction .quotation_type .money_js input {margin-top: 5px;outline: none; background: #1a1a1a; color: #ccc; width: 198px; height: 26px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px;}
 #content .quotation_transaction .quotation_type .money_sjsl input{outline: none; background: #1a1a1a; color: #ccc; width: 198px; height: 28px; border: 1px solid #4d4d4d; border-radius: 4px; text-align: center; line-height: 28px;}
 #content .quotation_transaction .quotation_type .money_sjsl span {}
 #content .quotation_transaction .quotation_type .money_sjsl {position: relative;}
@@ -106,14 +106,14 @@
 /* 持仓 */
 .quotation_detailed ul li {float: left;}
 .quotation_detailed .quotation_detailed_lis a {padding: 0 20px; color: #999; text-decoration: none;}
-.quotation_detailed .quotation_detailed_lis a:hover {color: ffb319; cursor: pointer;}
-.quotation_detailed .quotation_detailed_lis a.on{color: ffb319;}
+.quotation_detailed .quotation_detailed_lis a:hover {color: #ffb319; cursor: pointer;}
+.quotation_detailed .quotation_detailed_lis a.on{color: #ffb319;}
 .quotation_detailed .quotation_detailed_lis {border-bottom: 1px solid #1a1a1a; font-size: 14px; color: #4c4c4c; padding: 7px 0;}
 .quotation_detailed .quotation_detailed_title .tab_lis{font-size: 12px; color: #999; height: 30px; line-height: 30px;}
-.quotation_detailed .quotation_detailed_title .tab_content {font-size: 12px; color: #ccc; height: 30px; line-height: 30px;} 
-.quotation_detailed .quotation_detailed_title .tab_content.even{background: #404040;} 
+.quotation_detailed .quotation_detailed_title .tab_content {font-size: 12px; color: #ccc; height: 30px; line-height: 30px;}
+.quotation_detailed .quotation_detailed_title .tab_content.even{background: #404040;}
 .quotation_detailed .quotation_detailed_title .tab_content:hover {background: #4d4d4d; cursor: pointer;}
-.quotation_detailed .quotation_detailed_title .tab_content.on{background: #4d4d4d;} 
+.quotation_detailed .quotation_detailed_title .tab_content.on{background: #4d4d4d;}
 .quotation_detailed .quotation_detailed_title li {width: 70px; height: 30px;  line-height: 30px;}
 .quotation_detailed .quotation_detailed_title .ml {padding-left:20px;}
 /* .quotation_detailed .quotation_detailed_title {height: 116px; overflow-y: scroll;} */
@@ -149,11 +149,11 @@
     cursor: pointer;background-image: none;border: 1px solid transparent; border-radius: 4px;white-space: nowrap;vertical-align: middle;
     -webkit-user-select: none;-moz-user-select: none; -ms-user-select: none; user-select: none;
     -ms-touch-action: manipulation; touch-action: manipulation; margin-left: 1px; outline: none;}
-.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid\9; border-right: 4px solid transparent; border-left: 4px solid transparent;/*  background: #fff; */}
+.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-right: 4px solid transparent; border-left: 4px solid transparent;/*  background: #fff; */}
 .open>.dropdown-menu li {list-style-type: none; width: 90px; height: 30px; line-height: 30px; padding-left: 10px;}
 .open>.dropdown-menu li:hover {background-color: #666;}
 .open>.dropdown-menu li a {color: #999; text-decoration: none;}
-.open>.dropdown-menu li.dropdown-header {display: none;} 
+.open>.dropdown-menu li.dropdown-header {display: none;}
 
 /* 弹出层  */
 .tck01 {width: 360px; position: fixed;}
@@ -164,7 +164,7 @@
 .tck01 .anniu .sure:hover {background: #ff9f19;}
 .tck01 .anniu .cancel {background: #ccc; color: #333; font-size: 16px; border-radius: 4px; margin-left: 55px;}
 .tck01 .anniu .cancel:hover {background: #b3b3b3;}
-.smain > div {padding: 10px 18px; line-height: 22px; line-height: 22px/9; }
+.smain > div {padding: 10px 18px; line-height: 22px; line-height: 22px\9; }
 
 /* 登录弹出层 */
 #signLogin {width: 360px; height: 430px; background: #fff; z-index: 1000; position: fixed; border-radius: 4px;}
