@@ -76,6 +76,7 @@ function handleData(evt){
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			//登录成功加载
+			
 			if (code == 0) {
 				LoginForwardInitLoadData();
 				$("#show_login").hide();
@@ -1223,7 +1224,6 @@ $(function(){
 		var ismock = $this.attr("data-tion");
 		setTradeConfig(ismock);
 	});
-	
 	if(uid != undefined && uid.length > 0 ){
 		loadOperateLogin();
 	}
