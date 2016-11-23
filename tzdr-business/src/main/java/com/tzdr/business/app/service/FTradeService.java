@@ -156,7 +156,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		sql.append(" ,f.tran_password,f.end_time,f.tran_profit_loss,f.end_parities ");
 		sql.append(" ,f.tran_fees_total,f.tran_actual_lever,f.crude_tran_actual_lever,f.mdtran_actual_lever ");
 		sql.append(" ,f.hsi_tran_actual_lever,f.mntran_actual_lever,f.mbtran_actual_lever,f.ag_tran_actual_lever,f.lhsi_tran_actual_lever ");
-		sql.append(" ,f.daxtran_actual_lever,f.nikkei_tran_actual_lever,f.daxtran_min_actual_lever ");
+		sql.append(" ,f.daxtran_actual_lever,f.nikkei_tran_actual_lever,f.daxtran_min_actual_lever,f.xhstock_market_lever,f.ame_copper_market_lever,f.ame_silver_market_lever,f.small_crude_oil_market_lever,f.h_stock_market_lever ");
 		sql.append(" ,f.end_amount,f.state_type,f.business_type ");
 		sql.append(" FROM f_simple_ftse_user_trade f ");
 		sql.append(" WHERE f.id=? AND f.uid=? ");
