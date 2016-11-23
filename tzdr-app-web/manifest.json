@@ -1187,7 +1187,8 @@
 					"images/down.png",
 					"images/quotationColse.png",
 					"images/quotationLogin.png",
-					"images/quotationLogin1.png"
+					"images/quotationLogin1.png",
+					"css/own.css"
 				],
 				"refer": [
 					"tzdr/future/cl.html",
