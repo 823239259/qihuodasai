@@ -879,7 +879,8 @@
 				"refer": [
 					"tzdr/future/DetailCn.html",
 					"home.html",
-					"tzdr/future/DetailLhsi.html"
+					"tzdr/future/DetailLhsi.html",
+					"tzdr/future/DetailCp.html"
 				],
 				"priority": 0
 			},
@@ -1019,7 +1020,8 @@
 				],
 				"refer": [
 					"tzdr/account/charge.html",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"tzdr/future/futurePaySuc.html"
 				],
 				"priority": 0
 			},
