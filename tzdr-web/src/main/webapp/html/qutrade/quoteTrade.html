@@ -308,23 +308,6 @@
 			        </ul>
     			</div>
     			<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>
-    			
-    			<!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
-			        <div id="app">
-			            http://localhost:8088/tzdr-web/static/ico/MSFT_full.json
-			        </div>
-			        <div id="qiehuan">
-				        <ul>
-				            <li class="carbon_time" data="1440">日K</li>
-				            <li class="carbon_time" data="30">30分</li>
-				            <li class="carbon_time" data="15">15分</li>
-				            <li class="carbon_time" data="5">5分</li>
-				            <li class="carbon_time" data="1" style="color: #ffb319;">1分</li>
-				            <li class="carbon_time" data="0">分时</li>
-				        </ul>
-    				</div>
-    			</div> -->
-    			
     		</div>
     	</div>
     	<div class="quotation_transaction">
@@ -514,4 +497,21 @@
 </div>
 </body>
 <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
+<script>
+$(function() {
+	var url = document.referrer;
+	if(url.indexOf("simulateOperate/operate") >= 0 ){
+		$("#signLogin").css("display","block");
+		$("#div_Mask").show();
+		var popupHeight = $("#signLogin").outerHeight()/2;
+		var popupWidth = $("#signLogin").outerWidth()/2;    
+		$("#signLogin").css({
+			top:"50%",
+			left:"50%",
+			marginTop: -(popupHeight+15),
+			marginLeft: -(popupWidth)
+		});
+	}
+})
+</script>
 </html>

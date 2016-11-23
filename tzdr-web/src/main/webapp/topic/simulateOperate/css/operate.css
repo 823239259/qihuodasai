@@ -33,7 +33,7 @@ a {text-decoration: none;}
 .operate_explain .operate_ul3 ul li {color: #f75a52; float: left; width: 300px; text-align: center; height: 40px; line-height: 40px; border-bottom: 1px solid #f75a52;}
 .operate_explain .operate_ul3 ul li.li3 {width: 318px;}
 .operate_explain .operate_ul3 ul li.ye {background: #f75a52; color: #fff; border-bottom: none;}
-.operate_explain .operate_ul3 ul li.money {background: #f75a52; color: #fff; border-left: 1px solid #fff; border-right: 1px solid #fff; border-bottom: none;}
+.operate_explain .operate_ul3 ul li.money {background: #f75a52; color: #fff; width: 299px; border-left: 1px solid #fff; border-right: 1px solid #fff; border-bottom: none;}
 .operate_explain .operate_ul3 ul li.dkj {background: #f75a52; color: #fff; border-bottom: none;}
 .operate_explain .operate_ul4 {padding: 0 40px; height: 228px; border-bottom: 1px solid #ffea80;}
 .operate_explain .operate_ul4 p {color: #f75a52; font-size: 14px; line-height: 24px; padding-left: 30px;}

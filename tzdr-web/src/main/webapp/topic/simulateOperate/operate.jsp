@@ -26,7 +26,7 @@
         </div> -->
         <div class="title"></div>
         <div class="operate_center">
-            <a class="caopan" href="operate.html">立即操盘</a>
+            <a class="caopan" href="${ctx }/html/qutrade/quoteTrade.html">立即操盘</a>
             <div class="operate_rule">
                 <p class="operate_lis"><span>赛事规则</span></p>
                 <div class="operate_ul">

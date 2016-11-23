@@ -52,7 +52,7 @@
 #content2 {margin-right: 320px; height: 460px;}
 #right .right_title {height: 48px; line-height: 48px;border-bottom: 1px solid #1a1a1a; background: #333;}
 #right .right_lis {font-size: 16px; text-align: center; color: #ccc; height: 48px; background: #404040; line-height: 48px; position: relative; z-index: 1; top: -1px;}
-#right .right_tab ul {display: inline-block; width: 100%;height: 28px; line-height: 28px;}
+#right .right_tab ul {display: inline-block; width: 100%;height: 24px; line-height: 24px;}
 #right .right_tab ul li {float:left; font-size: 14px; }
 #right .right_tab ul .right_tab_zxj {color: #999; width: 50px; margin-left: 10px;}
 #right .right_tab ul .right_tab_zxjq {width: 90px; margin-left: 10px; color: #ccc;}
