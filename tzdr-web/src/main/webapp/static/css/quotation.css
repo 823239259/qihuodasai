@@ -185,3 +185,12 @@
 #signLogin .signLogin_mode .signLogin_all .p4 span.on:hover {background: #ff9f19; cursor: pointer;}
 #signLogin .signLogin_mode .signLogin_all .p4 a.no:hover {background: #d9d9d9; text-decoration: none; cursor: pointer;}
 
+/* ÅÌ¿Úµ¯³ö²ã */
+#handicapDetails {width: 600px;}
+#handicapDetails .hkDetails {display: inline-block;}
+#handicapDetails .hkDetails ul {width: 235px; float :left; border-bottom: 1px solid #ccc; height: 30px; line-height: 30px; margin: 0 20px;}
+#handicapDetails .hkDetails ul li {float :left;}
+#handicapDetails .hkDetails ul li.fr {float :right;}
+
+
+

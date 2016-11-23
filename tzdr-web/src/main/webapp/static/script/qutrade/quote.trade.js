@@ -237,6 +237,19 @@ $(function() {
 	        $("#signLogin .signLogin_span").css("color","#333").eq(_this.index()).css("color","#ffb319");
 	        $("#signLogin .signLogin_mode .signLogin_all").hide().eq(_this.index()).show();
         });
+		/*盘口*/
+		$("#handicap").click(function(){
+			$("#handicapDetails").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $("#handicapDetails").outerHeight()/2;
+			var popupWidth = $("#handicapDetails").outerWidth()/2;    
+			$("#handicapDetails").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+		});
 /* 弹出层结束 */
 		/*滚动条*/
 		$(function(){
