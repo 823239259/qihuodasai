@@ -237,7 +237,9 @@
 					"tzdr/login/password.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/login/retrievePassword.html",
-					"tzdr/future/add.html"
+					"tzdr/future/add.html",
+					"tzdr/account/accountno.html",
+					"tzdr/account/account.html"
 				],
 				"priority": 0
 			},
@@ -348,7 +350,8 @@
 					"tzdr/account/recharge.html",
 					"tzdr/future/listrg.html",
 					"tzdr/account/bindingList.html",
-					"tzdr/account/bindWeixin.html"
+					"tzdr/account/bindWeixin.html",
+					"tzdr/account/accountno.html"
 				],
 				"priority": 0
 			},
@@ -876,7 +879,8 @@
 				"refer": [
 					"tzdr/future/DetailCn.html",
 					"home.html",
-					"tzdr/future/DetailLhsi.html"
+					"tzdr/future/DetailLhsi.html",
+					"tzdr/future/DetailCp.html"
 				],
 				"priority": 0
 			},
@@ -1011,11 +1015,13 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"tzdr/future/futurePaySuc.html"
 				],
 				"priority": 0
 			},

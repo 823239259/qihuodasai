@@ -41,6 +41,7 @@
 	// 需要认证用户身份的请求调用接口
 	mui.app_request= function (func_url,params,onSuccess,onError,paramUrl){
 		if(mui.checkNetwork()==false){ 
+			console.log("当前网络不给力");
 			mui.toast("当前网络不给力，请稍后再试"); 
 			return;
 		}
@@ -80,6 +81,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+				console.log(JSON.stringify(errorThrown));
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;

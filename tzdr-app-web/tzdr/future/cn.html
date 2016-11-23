@@ -157,7 +157,7 @@
 						trade_leve=item.innerHTML;
 					}
 				});
-			traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
+			traderBond=tzdr.moneyUtils.reverseMoney(tzdr.moneyUtils.removeY(traderBond))
 			trade_leve=tzdr.moneyUtils.reverseMoney(trade_leve);
 			if(mui.isnull(traderBond)||mui.isnull(trade_leve)){
 				mui.toast("系统繁忙，请刷新再试！");
