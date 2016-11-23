@@ -35,7 +35,6 @@
       			mui.app_request('/user/getbalancerate',{
       				"businessType":4 
       			},function(result){
-      					console.log(JSON.stringify(result));
       					if(!mui.isnull(result.data.username)){
       						title_name.innerHTML="欢迎您，"+result.data.username+":";
       					}else if(!mui.isnull(user_mobile)){
@@ -158,7 +157,8 @@
 					mui.cacheUser.clear();
     				// 清除缓存页面    
 					//mui.cacheUser.clearCachePages();
-	    			mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"account"}});  
+					mui.openWindow({url:"../account/accountno.html",id:"accountno"});
+//	    			mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"account"}});  
 				}
 				//关闭actionsheet
 				mui('#' + parent.id).popover('toggle');   
