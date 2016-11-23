@@ -132,7 +132,7 @@
 		};
 		
 		function setParams(ParamsList){
-			document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
+			document.getElementById("traderBond").innerHTML="¥"+tzdr.moneyUtils.formatCurrency(ParamsList.traderBond);
 			document.getElementById("traderTotal").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal)+"美元";
 			document.getElementById("lineLoss").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.lineLoss)+"美元";
 			document.getElementById("paymentMoney").innerHTML=tzdr.moneyUtils.formatCurrency(ParamsList.traderBond)+"元";
@@ -158,7 +158,7 @@
 						trade_leve=item.innerHTML;
 					}
 				});
-			traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
+			traderBond=tzdr.moneyUtils.reverseMoney(tzdr.moneyUtils.removeY(traderBond))
 			trade_leve=tzdr.moneyUtils.reverseMoney(trade_leve);
 			if(mui.isnull(traderBond)||mui.isnull(trade_leve)){
 				mui.toast("系统繁忙，请刷新再试！");
@@ -220,7 +220,7 @@
 	<ul class="mui-table-view sc_listsc">
 		<li class="mui-table-view-cell">
 			<label>操盘保证金(¥)：</label>
-			<span id="traderBond">27,750元</span>
+			<span id="traderBond">¥27,750</span>
 		</li>	
 		<li class="mui-table-view-cell">
 			<label>总操盘资金($)：</label>
@@ -238,7 +238,7 @@
 		</li>
 		<li class="mui-table-view-cell">
 			<div><label>交易手续费(¥)：</label></div>
-			<div><span class="fontBlack"><i id="tranFees">58</i>元/单边</span><span class="grayFontDiv">买入、卖出一手时各收取该数额（人民币）的交易手续费。</span></div>
+			<div><span class="fontBlack">¥<i id="tranFees">58</i>/单边</span><span class="grayFontDiv">买入、卖出一手时各收取该数额（人民币）的交易手续费，结算时统一扣除</span></div>
 		</li>
 	</ul>
 	<ul class="mui-table-view sc_listsc sc_listscStyle">

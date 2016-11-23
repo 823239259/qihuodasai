@@ -8,10 +8,12 @@
     <script type="text/javascript" src="../../js/common.js"></script>
     <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" href="../../css/own.css" />
+    <script src="../../js/jquery-1.11.3.js"></script>
     <script type="text/javascript" charset="UTF-8">
       	mui.init({
 
 		  });
+		 
       	var win=null;
       	var title_name=null;
       	var title_balance=null;
@@ -19,7 +21,6 @@
       	var Certification=null;
       	mui.plusReady(function(){
       		win=plus.webview.currentWebview();
-      		
 			//判断token和密钥是否存在,存在则获取用户信息
 				title_name=document.getElementById("title_name");
       			title_balance=document.getElementById("title_balance");
@@ -51,6 +52,11 @@
       					}else{
       						Certification.innerText="未认证";
       						Certification.style.color = '#888888';
+      					}
+      					if(result.data.wxAccount==null){
+      						$("#weixin b").text("未关注");
+      					}else{
+      						$("#weixin b").text("已关注").css({"color":"green"});
       					}
       					return;
       				},function(result){
@@ -114,7 +120,22 @@
     			mui.app_refresh("telphone");
     			mui.openWindow("telphone.html",'telphone');
     		});
-    		
+    		document.getElementById("weixin").addEventListener("tap",function(){
+    			if($("#weixin b").text()=="已关注"){
+    				mui.toast("你已关注过啦~");
+    				return;
+    			}
+    			$("#weixinCodeImage").css({"display":"block"});
+    			chechCode();
+//  			mui.openWindow({
+//					url:"bindWeixin.html",
+//					id:"bindWeixin"
+//				});
+    		});
+    		document.getElementById("weixinCodeImage").addEventListener("tap",function(){
+    			mui.app_refresh("account");
+    			$("#weixinCodeImage").css({"display":"none"});
+    		})
     		document.getElementById("updatepw").addEventListener("tap",function(){
     			mui.app_refresh("updatePW");
     			mui.openWindow("updatePW.html","updatePW");
@@ -136,12 +157,23 @@
 					mui.cacheUser.clear();
     				// 清除缓存页面    
 					//mui.cacheUser.clearCachePages();
-	    			mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"account"}});  
+					mui.openWindow({url:"../account/accountno.html",id:"accountno"});
+//	    			mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"account"}});  
 				}
 				//关闭actionsheet
 				mui('#' + parent.id).popover('toggle');   
 				//alert(a.id);  
 			});
+			function chechCode(){
+				mui.app_request("/wechat/getWechatQrcodeTicket",{},function(res){
+					if(res.success){
+						document.getElementById("weixinCodeImg").src=res.data.url+"?ticket="+res.data.ticket;
+					}else{
+						mui.toast("重新加载")
+					}
+				},function(res){
+				})
+			}
       	});
       	
     </script>
@@ -193,7 +225,10 @@
 				<a class="mui-navigate-right" href="javascript:void(0)" id="user_verified"><img src="../../images/ac_04.png"><i>实名认证</i><b><span id="Certification">未认证</span><b></a>
 			</li>
 			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="telPhone"><img src="../../images/ac_05.png"><i>手机绑定</i><b>修改</b></a>
+				<a class="mui-navigate-right" href="javascript:void(0)" id="telPhone"><img src="../../images/ac_05.png"><i>账户绑定</i><b>修改</b></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="weixin"><img src="../../images/weixinIcon.png"><i>微信绑定</i><b>未关注</b></a>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0)" id="updatepw"><img src="../../images/ac_06.png"><i>登录密码</i><b>修改</b></a>
@@ -227,9 +262,28 @@
 		</div>
 		
 	</div>	
-	<!--<div class="main_nolg">		
-		<button class="mui-btn mui-btn-block sc_listbtn" type="button">立即登录</button>		
-		<button type="button" class="mui-btn mui-btn-block lg-btnlogin">新用户注册</button>
-	</div>-->
+	<div id="weixinCodeImage">
+		<div id="box">
+			<p>微信绑定<img src="../../images/close1.png" id="close"></p>
+			<div id="weixinContent">  
+				<img src="../../images/close.png" id="weixinCodeImg">
+				<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		mui.plusReady(function(){
+			 $("#weixinCodeImage").css({
+			  	"height":window.innerHeight+"px",
+			  	"position":"fixed",
+			  	"top":"0px",
+			  	"z-index":"999",
+			  	"padding-top":"25%"
+			  });
+			  $("#box").css({
+			  	"margin":"auto",
+			  });
+		})
+	</script>
 </body>
 </html>
