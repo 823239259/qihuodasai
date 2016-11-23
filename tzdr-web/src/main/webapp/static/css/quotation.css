@@ -2,9 +2,9 @@
 .quotation_title img {margin-top: 10px; margin-left: 10px; float: left;}
 .quotation_title .quotation_anniu {float: right; position: relative;}
 .quotation_title .quotation_anniu input {margin-right: 10px; outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px; width: 130px; background: #1a1a1a; color: #666;}
-.quotation_title .quotation_anniu button a{border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; display: block; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
-.quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
-.quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
+.quotation_title .quotation_anniu button a{text-decoration: none; color: #ff5500; height: 28px; line-height: 28px; line-height: 28px\9;}
+.quotation_title .quotation_anniu button a:hover {text-decoration: underline;}
+.quotation_title .quotation_anniu button {background: #333; margin-right: 10px; color: #ccc;}
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
 /* µÇÂ¼¸ü¶àÕËºÅ  */ 
 #more_account {position: absolute; width:130px; background: #ffffff; z-index: 9; top: 43px; border-radius: 4px;}
@@ -52,7 +52,7 @@
 #content2 {margin-right: 320px; height: 460px;}
 #right .right_title {height: 48px; line-height: 48px;border-bottom: 1px solid #1a1a1a; background: #333;}
 #right .right_lis {font-size: 16px; text-align: center; color: #ccc; height: 48px; background: #404040; line-height: 48px; position: relative; z-index: 1; top: -1px;}
-#right .right_tab ul {display: inline-block; width: 100%;height: 28px; line-height: 28px;}
+#right .right_tab ul {display: inline-block; width: 100%;height: 25px; line-height: 25px;}
 #right .right_tab ul li {float:left; font-size: 14px; }
 #right .right_tab ul .right_tab_zxj {color: #999; width: 50px; margin-left: 10px;}
 #right .right_tab ul .right_tab_zxjq {width: 90px; margin-left: 10px; color: #ccc;}
@@ -184,4 +184,13 @@
 #signLogin .signLogin_mode .signLogin_all .p4 a.no {background: #e6e6e6; height: 40px; line-height: 40px; display: inline-block; width: 100%; color: #333;}
 #signLogin .signLogin_mode .signLogin_all .p4 span.on:hover {background: #ff9f19; cursor: pointer;}
 #signLogin .signLogin_mode .signLogin_all .p4 a.no:hover {background: #d9d9d9; text-decoration: none; cursor: pointer;}
+
+/* ÅÌ¿Úµ¯³ö²ã */
+#handicapDetails {width: 600px;}
+#handicapDetails .hkDetails {display: inline-block;}
+#handicapDetails .hkDetails ul {width: 235px; float :left; border-bottom: 1px solid #ccc; height: 30px; line-height: 30px; margin: 0 20px;}
+#handicapDetails .hkDetails ul li {float :left;}
+#handicapDetails .hkDetails ul li.fr {float :right;}
+
+
 

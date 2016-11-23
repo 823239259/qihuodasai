@@ -162,7 +162,7 @@
 			<span class="signLogin_span on" data-tion = "0">实盘登录</span>
 			<span class="signLogin_span" data-tion = "1">模拟盘登录</span>
 			<i>|</i>
-			<a class="signLogin_close" href="javascript:void(0);">?</a>
+			<a class="signLogin_close" href="javascript:void(0);">✖</a>
 		</p>
 		<div class="signLogin_mode">
 			<div class="signLogin_all signLogin_firm"  style="display: block;">
@@ -179,6 +179,83 @@
 			</div>
 		</div>	
 	</div>
+	<div class="tck01" id="handicapDetails" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">盘口信息</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div class="hkDetails">
+				<ul>
+					<li>卖价</li>
+					<li class="fr">12312</li>
+				</ul>
+				<ul>
+					<li>卖量</li>
+					<li class="fr">12345</li>
+				</ul>
+				<ul>
+					<li>买价</li>
+					<li class="fr">011212</li>
+				</ul>
+				<ul>
+					<li>买量</li>
+					<li class="fr">515445</li>
+				</ul>
+				<ul>
+					<li>最新</li>
+					<li class="fr">425456</li>
+				</ul>
+				<ul>
+					<li>涨跌</li>
+					<li class="fr"></li>
+				</ul>
+				<ul>
+					<li>开盘</li>
+					<li class="fr">12312</li>
+				</ul>
+				<ul>
+					<li>成交量</li>
+					<li class="fr">12345</li>
+				</ul>
+				<ul>
+					<li>最高</li>
+					<li class="fr">011212</li>
+				</ul>
+				<ul>
+					<li>成交额</li>
+					<li class="fr">515445</li>
+				</ul>
+				<ul>
+					<li>最低</li>
+					<li class="fr">425456</li>
+				</ul>
+				<ul>
+					<li>均价</li>
+					<li class="fr"></li>
+				</ul>
+				<ul>
+					<li>昨收</li>
+					<li class="fr">12312</li>
+				</ul>
+				<ul>
+					<li>昨结</li>
+					<li class="fr">12345</li>
+				</ul>
+				<ul>
+					<li>涨停</li>
+					<li class="fr">011212</li>
+				</ul>
+				<ul>
+					<li>涨跌</li>
+					<li class="fr">515445</li>
+				</ul>
+				<ul>
+					<li>结算</li>
+					<li class="fr">425456</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- top -->
 <div class="quotation_title">
@@ -186,7 +263,7 @@
 	<div class="quotation_anniu" id = "show_login">
 		<!-- <input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
 		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
-		<button><a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
+		<button>你好，请先<a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
 		<button><a href="../../outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
 		<!-- <a href="javascript:void(0);" class="backPassword">找回密码</a> -->
 		<div id="more_account" style="display: none;">
@@ -305,6 +382,7 @@
 			        	<li class="carbon_time" data="15">15分</li>
 			        	<li class="carbon_time" data="30">30分</li>
 			            <li class="carbon_time" data="1440">日K</li>
+			            <span id="handicap">盘口</span>
 			        </ul>
     			</div>
     			<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>
@@ -514,4 +592,21 @@
 </div>
 </body>
 <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
+<script>
+$(function() {
+	var url = document.referrer;
+	if(url.indexOf("simulateOperate/operate") >= 0 ){
+		$("#signLogin").css("display","block");
+		$("#div_Mask").show();
+		var popupHeight = $("#signLogin").outerHeight()/2;
+		var popupWidth = $("#signLogin").outerWidth()/2;    
+		$("#signLogin").css({
+			top:"50%",
+			left:"50%",
+			marginTop: -(popupHeight+15),
+			marginLeft: -(popupWidth)
+		});
+	}
+})
+</script>
 </html>
