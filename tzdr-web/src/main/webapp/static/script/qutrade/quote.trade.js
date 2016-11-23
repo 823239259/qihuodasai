@@ -15,6 +15,7 @@ $(function() {
 		$(".signLogin_simulation").css("display","block");
 		$("#signLogin .p1 span.signLogin_span").css("color","#ffb319");
 		$("#signLogin .p1 span.on").css("color","#333");
+		tradeWebSocketIsMock = 1;
 	}
 })
 
