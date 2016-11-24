@@ -8,7 +8,7 @@ var orderFirsetLoadDataIndex = 0;
 var tradeFirsetLoadDataIndex = 0;
 /**
  * 用户登陆成功加载数据
- */
+ */ 
 function LoginForwardInitLoadData() {
 	if (holdFirstLoadDataIndex == 0) {
 		Trade.doHold(username);
@@ -23,7 +23,7 @@ var tradeSuccessLoadFlag = false;
  * 合约交易成功查询持仓信息
  */
 function tradeSuccessLoadHoldData(){
-	tradeSuccessLoadFlag = true;
+	//tradeSuccessLoadFlag = true;
 	Trade.doHold(username);
 	
 }
@@ -159,14 +159,21 @@ function handleData(evt){
 		} else if (method == "OnRtnOrderTraded") {
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
-			appendPostionAndUpdate(tradeParam);
+			appendPostionAndUpdate(tradeParam); 
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			if(isBuy && locaOrderId == locaOrderId){  
+			$("#positionList").html("");  
+			loadPositionTitle(); 
+			localCachePositionRecentData = {}; 
+			localCachePostion = {};
+			tradeSuccessLoadHoldData();
+			/*if(isBuy && orderId == locaOrderId){   
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null; 
-				isBuy = false;
-			}
+				localCachePositionRecentData = {}; 
+				localCachePostion = {};
+			    
+			}*/
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知 
 		} else if (method == "OnRtnMoney") {
@@ -190,6 +197,7 @@ function handleData(evt){
 		if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
 			tradeSuccessLoadFlag = false;
+			isBuy = false;
 			localCachePositionRecentData = {};
 		}
 	}
@@ -483,13 +491,18 @@ function appendDesignates(param){
    var orderId = param.OrderID;
    var triggerPrice = param.TriggerPrice;
    var insertDateTime = param.InsertDateTime;
+   var localCommodity = getMarketCommdity(commodityNo+contractNo);
+   var dotSize = 2;
+   if(localCommodity != undefined){
+   		dotSize = localCommodity.DotSize;
+   }
    var cls = "des-index"+designateIndex;
    var html =   '<li    class = "'+cls+' Guadan  myLi" " data-order-des = "'+orderId+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'
-				+'	<a class="mui-navigate-right" >'
+				+'	<a class="mui-navigate-right" >' 
 				+'		'
 				+'			<span class = "desig0">'+contractCode+'</span>'
 				+'			<span class = "desig1" data-drection = '+drection+'>'+drectionText+'</span>'
-				+'			<span class = "desig2">'+orderPrice+'</span>'
+				+'			<span class = "desig2">'+parseFloat(orderPrice).toFixed(dotSize)+'</span>'
 				+'			<span class = "desig3">'+orderNum+'</span>' 
 				+'			<span class = "desig4">'+(orderNum - tradeNum)+'</span>'
 				+'			<span class = "desig5 dateTimeL">'+insertDateTime+'</span>'
@@ -586,11 +599,12 @@ function appendPostionAndUpdate(param){
 	if(validationPostionIsExsit(param)){
 		addPostion(param);
 	}else{
-		if(tradeSuccessLoadFlag){
+		updatePostion(param);
+		/*if(tradeSuccessLoadFlag){
 			loadCachecentPositionData(param);
 		}else{
-			updatePostion(param);
-		}
+			
+		}*/
 	}
 };
 /**
@@ -725,6 +739,7 @@ function updatePostion(param){
 		if(localCommodity != undefined){ 
 			doSize = localCommodity.DotSize;
 		}
+		console.log(price+"    "+oldHoldNum);  
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
 		$holdAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
@@ -790,7 +805,7 @@ function updatePostion(param){
  * 缓存最新持仓信息
  * @param param
  */
-function loadCachecentPositionData(param){
+function loadCachecentPositionData(param){ 
 	var commodityNo = param.CommodityNo;
 	var contractNo =param.ContractNo;
 	var contractCode = commodityNo+contractNo;
@@ -830,6 +845,7 @@ function updateOrderUpdatePosition(param){
 			}
 			var holdAvgPrice = doGetOpenAvgPrice(price, holdNum, doSize);
 			var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
+			var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
 			$openAvgPrice.text(holdAvgPrice);
 		}
 	});
@@ -1189,6 +1205,13 @@ function addBindsss(cls){
 		$("#quotation_account").val(text);
 		$("#more_account").css("display","none");
 	});
+}
+/**
+ * 加载持仓的标题
+ */
+function loadPositionTitle(){
+	var html = '<a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a>';
+	$(".PositionLi").html(html);
 }
 /**
  * 加载用户的账户信息
@@ -1870,6 +1893,7 @@ function clearLocalCacheData(){
 	isUpdateOrder = false;
 	isBuy = false;
 	isGetVersion = false;
+	buyOrderPrice=0.00;
 }
 /**
  * 输入价格或数量验证 
