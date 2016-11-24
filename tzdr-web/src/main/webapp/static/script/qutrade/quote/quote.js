@@ -436,6 +436,19 @@ function getMoneyNumberIndex(){
 	return moneyNumberIndex;
 }
 /**
+ * 设置盘口信息
+ */
+function setHandicap(param){
+	//卖家
+	var askQty1 = param.AskQty1;
+	var bidPrice1 = param.BidPrice1;
+	var lastPrice = param.LastPrice;
+	var openPrice = param.OpenPrice;
+	var highPrice = param.HighPrice;
+	var lowPrice = param.LowPrice;
+	
+}
+/**
  * 更新右边数据
  * @param param
  */
