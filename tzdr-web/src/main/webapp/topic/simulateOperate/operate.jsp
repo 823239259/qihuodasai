@@ -6,13 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1000">
-    <meta name="keywords" content="盈透科技有限公司"/>
-    <meta name="description" content="盈透科技有限公司"/>
     <link rel="shortcut icon" href="images/icon.png">
     <link rel="stylesheet" href="css/operate.css">
-    <title>股指期货模拟交易软件|黄金期货模拟软件|股指期货模拟大赛|期货模拟比赛|南华期货模拟软件|国际期货开户|维胜金融国际期货模拟盘-财富由此开始</title>
-    <meta name="keywords" content="股指期货模拟交易软件,黄金期货模拟软件,股指期货模拟大赛,期货模拟比赛,南华期货模拟软件,国际期货开户">
-    <meta name="description" content="维胜金融国际期货模拟盘-致力于外盘期货模拟软件开发、期货模拟比赛，为用户提供股指期货模拟交易软件,黄金期货模拟软件,股指期货模拟大赛,期货模拟比赛,南华期货模拟软件,国际期货开户等服务">
+    <title>模拟盘操盘 </title>
     <style>
     	.operate a:hover {text-decoration: none;}
     </style>

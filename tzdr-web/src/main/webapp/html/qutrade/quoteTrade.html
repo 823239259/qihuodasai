@@ -7,11 +7,11 @@
 <title>行情交易 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link rel="stylesheet" href="../../static/css/new_index.css">
 <link href="../../static/css/trade.css" rel="stylesheet" type="text/css" />
-<!-- 弹出层 -->
+<!-- 弹出层 --> 
 <link href="../../static/css/gybf.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="../../static/ico/icon.png">
 <!-- 弹出层 -->
-<link href="../../static/css/quotation.css" rel="stylesheet" type="text/css" />
+<link href="../../static/css/quotation.css?v=2016-11-11" rel="stylesheet" type="text/css" />
 <link  href="../../static/script/layer/skin/layer.css"  rel="stylesheet" type="text/css"></link> 
 <script type='text/javascript' src="../../static/script/jquery-1.8.3.js"></script>
 <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
@@ -179,6 +179,83 @@
 			</div>
 		</div>	
 	</div>
+	<div class="tck01" id="handicapDetails" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">盘口信息</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div class="hkDetails">
+				<ul>
+					<li>卖价</li>
+					<li class="fr" id = "pkmj_sell">0</li>
+				</ul>
+				<ul>
+					<li>卖量</li>
+					<li class="fr" id = "pkml_sell">0</li>
+				</ul>
+				<ul>
+					<li>买价</li>
+					<li class="fr" id = "pkmj_buy">0</li>
+				</ul>
+				<ul>
+					<li>买量</li>
+					<li class="fr" id = "pkml_buy">0</li>
+				</ul>
+				<ul>
+					<li>最新</li>
+					<li class="fr" id = "pklastparice">0</li>
+				</ul>
+				<ul>
+					<li>涨跌</li>
+					<li class="fr" id = "pkzd">0/0</li>
+				</ul>
+				<ul>
+					<li>开盘</li>
+					<li class="fr" id = "pkopenprice">0</li>
+				</ul>
+				<ul>
+					<li>成交量</li>
+					<li class="fr" id = "pktrademl">0</li>
+				</ul>
+				<ul>
+					<li>最高</li>
+					<li class="fr" id = "pkhightprice">0</li>
+				</ul>
+				<ul>
+					<li>持仓量</li>
+					<li class="fr" id = "pkccml">0</li>
+				</ul>
+				<ul>
+					<li>最低</li>
+					<li class="fr" id = "pklowprice">0</li>
+				</ul>
+				<!-- <ul>
+					<li>均价</li>
+					<li class="fr"></li>
+				</ul> -->
+				<!-- <ul>
+					<li>昨收</li>
+					<li class="fr">12312</li>
+				</ul> -->
+				<ul>
+					<li>昨结</li>
+					<li class="fr" id = "pkzj">0</li>
+				</ul>
+				<!-- <ul>
+					<li>涨停</li>
+					<li class="fr">011212</li>
+				</ul> -->
+				<!-- <ul>
+					<li>涨跌</li>
+					<li class="fr">515445</li>
+				</ul> -->
+				<ul>
+					<li>结算</li>
+					<li class="fr" id = "pkjs">0</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- top -->
 <div class="quotation_title">
@@ -186,7 +263,7 @@
 	<div class="quotation_anniu" id = "show_login">
 		<!-- <input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
 		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
-		<button><a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
+		<button>你好，请先<a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
 		<button><a href="../../outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
 		<!-- <a href="javascript:void(0);" class="backPassword">找回密码</a> -->
 		<div id="more_account" style="display: none;">
@@ -305,9 +382,27 @@
 			        	<li class="carbon_time" data="15">15分</li>
 			        	<li class="carbon_time" data="30">30分</li>
 			            <li class="carbon_time" data="1440">日K</li>
+			            <span id="handicap">盘口</span>
 			        </ul>
     			</div>
     			<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>
+    			
+    			<!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
+			        <div id="app">
+			            http://localhost:8088/tzdr-web/static/ico/MSFT_full.json
+			        </div>
+			        <div id="qiehuan">
+				        <ul>
+				            <li class="carbon_time" data="1440">日K</li>
+				            <li class="carbon_time" data="30">30分</li>
+				            <li class="carbon_time" data="15">15分</li>
+				            <li class="carbon_time" data="5">5分</li>
+				            <li class="carbon_time" data="1" style="color: #ffb319;">1分</li>
+				            <li class="carbon_time" data="0">分时</li>
+				        </ul>
+    				</div>
+    			</div> -->
+    			
     		</div>
     	</div>
     	<div class="quotation_transaction">
@@ -327,14 +422,14 @@
 						<label class="xdfs_xj"><input type="radio" value = "0" name="mode_order" id="fixedPrice" style="margin-left:50px;"/>限价</label>
 					</div>
 				</div>
-				<div class="quotation_p">
+				<div class="quotation_p" style="height: 38px;">
 					<label>委托价格</label>
 					<div class="quotation_type_fr">
 						<p class="money_sj">市价</p>
 						<p class="money_js" style="display: none;">
 							<span class="del">-</span>
 							<span class="add">+</span>
-							<input type="text" name="" id="money_number" style="" value="0">
+							<input type="text" name="" id="money_number" style="" value="102.5">
 						</p>
 					</div>
 				</div>
@@ -497,4 +592,21 @@
 </div>
 </body>
 <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
+<script>
+$(function() {
+	var url = document.referrer;
+	if(url.indexOf("simulateOperate/operate") >= 0 ){
+		$("#signLogin").css("display","block");
+		$("#div_Mask").show();
+		var popupHeight = $("#signLogin").outerHeight()/2;
+		var popupWidth = $("#signLogin").outerWidth()/2;    
+		$("#signLogin").css({
+			top:"50%",
+			left:"50%",
+			marginTop: -(popupHeight+15),
+			marginLeft: -(popupWidth)
+		});
+	}
+})
+</script>
 </html>
