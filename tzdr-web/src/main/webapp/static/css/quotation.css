@@ -78,7 +78,7 @@
     .chart-component .gcrow {width: 841px;}
 }
 /* ÂòÈëÂô³ö */
-#content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 35px; line-height: 35px; margin: 0 auto;}
+#content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 36px; line-height: 35px; margin: 0 auto;}
 #content .quotation_transaction .quotation_type .quotation_p label {float: left; font-size: 14px; color: #999;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr {float: left; margin-left: 23px;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr label:hover {cursor: pointer;}
