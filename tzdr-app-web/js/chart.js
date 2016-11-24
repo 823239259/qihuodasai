@@ -428,9 +428,6 @@ mui.plusReady(function(){
     		var val=$("#timeChartMenu").val();
     		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
-    		$("#CandlestickChart").removeClass("mui-active")
-    		$("#trade").removeClass("mui-active").
-    		$("#TimeChart1").addClass("mui-active");
     		var option2=setOption1();
 		 	 var option1 =volumeChartSetOption(volumeChartData);
 				setTimeout(function(){
@@ -447,31 +444,18 @@ mui.plusReady(function(){
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
     		if(vadationIsLogin()){
-				$("#trade").addClass("mui-active");
+    			$("#headerMenu table td").removeClass("mui-active");
     			$("#chartAllDiv").removeClass("mui-active");
+    			$("#tradeMenu").addClass("mui-active");
+    			$("#trade").addClass("mui-active");
 			}
     	})
-    	function hasCommonClassName(){
-    		for(var i=0;i<$(".bottomDivList").length;i++){
-    			if($(".bottomDivList").eq(i).hasClass("mui-active")){
-    				console.log(i);
-    				$(".bottomDivList").eq(i).removeClass("mui-active");
-    			}
-    			return
-    		}
-    		for(var i=0;i<$("headerMenu table tr td").length;i++){
-    			if($("headerMenu table tr td").eq(i).hasClass("mui-active")){
-    				$("headerMenu table tr td").eq(i).removeClass("mui-active");
-    			}
-    			return
-    		}
-    		
-    	}
     	document.getElementById("HandicapButton").addEventListener("tap",function(){
-    		hasCommonClassName();
+    		$("#headerMenu table td").removeClass("mui-active");
+    		$("#chartAllDiv").removeClass("mui-active");
     		$("#HandicapButton").addClass("mui-active");
-    		$(".bottomDivList").eq(1).addClass("mui-active");
-    	})
+    		$("#Handicap").addClass("mui-active");
+    	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
