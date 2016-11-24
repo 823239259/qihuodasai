@@ -261,18 +261,16 @@
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="../../static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
 	<div class="quotation_anniu" id = "show_login">
-		<!-- <input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
-		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
-		<button>你好，请先<a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
+		<button>你好，请先<a href="#" id="sign_login">登录</a></button>
 		<button><a href="../../outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
-		<!-- <a href="javascript:void(0);" class="backPassword">找回密码</a> -->
-		<div id="more_account" style="display: none;">
-		</div>
+		<div id="more_account" style="display: none;"></div>
 	</div>
-	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
-		<b id = "ismockReak"></b><b id = "top_username"></b>
-		<button id = "trade_loginOut" style="width: 80px;">退出登录</button>
-		<button style="width: 80px;"><a href="../../outDisk/index"  target="_blank" style="display: inline;">立即开户</a></button>
+	<div class="quotation_anniu" id = "show_user_info"  style = "/* display:none */">
+		你好<span id = "ismockReak"></span><span id = "top_username"></span>
+		<ul class="show_user_ul">
+			<li><a href="">帮助</a></li>
+			<li><a id = "trade_loginOut" style="width: 80px;">退出</a></li>
+		</ul>
 	</div>
 </div>
 <!-- center -->
@@ -422,7 +420,7 @@
 						<label class="xdfs_xj"><input type="radio" value = "0" name="mode_order" id="fixedPrice" style="margin-left:50px;"/>限价</label>
 					</div>
 				</div>
-				<div class="quotation_p">
+				<div class="quotation_p" style="height: 38px;">
 					<label>委托价格</label>
 					<div class="quotation_type_fr">
 						<p class="money_sj">市价</p>

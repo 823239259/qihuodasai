@@ -78,7 +78,7 @@
     .chart-component .gcrow {width: 841px;}
 }
 /* ÂòÈëÂô³ö */
-#content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 35px; line-height: 35px; margin: 0 auto;}
+#content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 36px; line-height: 35px; margin: 0 auto;}
 #content .quotation_transaction .quotation_type .quotation_p label {float: left; font-size: 14px; color: #999;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr {float: left; margin-left: 23px;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr label:hover {cursor: pointer;}
@@ -127,7 +127,8 @@
 .quotation_detailed .quotation_detailed_title .caozuo li {margin: 0 5px;}
 .quotation_detailed .quotation_detailed_title .caozuo a{font-size: 14px; text-decoration: none; height: 28px; line-height: 28px; background: #1a1a1a; color: #ccc; display: block; border: 1px solid #1a1a1a; border-radius: 4px; text-align: center;}
 .quotation_detailed .quotation_detailed_title .caozuo a:hover {background: #000;}
-#show_user_info {color: #ffb319;}
+#show_user_info {position:relative;}
+#show_user_info .show_user_ul {float: right; position: absolute;}
 #show_user_info button {margin-left: 10px; border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
 #show_user_info button:hover{background: #ff9f19; border: 1px solid #ff9f19; cursor: pointer;}
 #qiehuan {font-size: 14px; color: #999; position: absolute; right: 0; height: 48px; line-height: 48px; border-bottom: 1px solid #1a1a1a; background: #333333; width: 100%;}
