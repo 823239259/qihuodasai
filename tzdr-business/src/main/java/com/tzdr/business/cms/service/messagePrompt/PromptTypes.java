@@ -55,4 +55,8 @@ public class PromptTypes {
 	 * 注册成功通知
 	 */
 	public static final String registrationNotice = "registrationNotice";
+	/**
+	 * 微信充值审核
+	 */
+	public static final String isWechatTransfer = "isWechatTransfer";
 }

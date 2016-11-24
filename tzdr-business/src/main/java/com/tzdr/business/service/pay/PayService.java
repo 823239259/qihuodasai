@@ -1,5 +1,6 @@
 package com.tzdr.business.service.pay;
 
+import java.util.List;
 import java.util.Map;
 
 import com.tzdr.business.pay.pingpp.config.enums.Channel;
@@ -201,4 +202,10 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @return
 	 */
 	public RechargeList findByTradeNo(String tradeNo);
+	/**
+	 * 根据第三方流水号查询
+	 * @param tradeNo
+	 * @return
+	 */
+	public List<RechargeList> findByTradeNoList(String tradeNo);
 }

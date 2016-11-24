@@ -1,6 +1,10 @@
 package com.tzdr.domain.dao.pay;
 
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+
 import com.tzdr.common.dao.BaseJpaDao;
 import com.tzdr.domain.web.entity.RechargeList;
 
@@ -43,4 +47,14 @@ public interface PayDao extends BaseJpaDao<RechargeList, String> {
 	 * @author zhangjun
 	 */
 	RechargeList findByNo(String orderId);
+	
+	/**
+	 * 根据交易号获取充值记录表数据
+	 * @param tradeNo
+	 * @return
+	 * @date 2015年1月4日
+	 * @author zhangjun
+	 */
+	@Query("from RechargeList where tradeNo = ?1")
+	List<RechargeList> findByTradeNoList(String tradeNo);
 }

@@ -85,6 +85,12 @@ public class MessagePromptService {
 					url = "http://manage.vs.com/admin/withdrawAudit/list";
 					typeKey = "reviewEmail";
 					emailTemplet = "messagePrompt";
+				}else if(submitType.equalsIgnoreCase(PromptTypes.isWechatTransfer)){
+					fristParam = "微信充值";
+					twoParam = "微信充值审核";
+					url = "http://manage.vs.com/admin/rechargeReview/list";
+					typeKey = "fundEmail";
+					emailTemplet = "messagePrompt";
 				}
 				if (typeKey != null && typeKey.length() > 0) {
 					List<DataMap> dataMapList = dataMapService.findByTypeKey(typeKey);
