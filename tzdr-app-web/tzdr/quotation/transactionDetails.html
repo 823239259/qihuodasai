@@ -15,6 +15,37 @@
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
 			}
+			#popover{
+				min-width: 282px;
+				height: 250px ;
+				top:50% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			@media (min-width: 400px){
+				#popover{
+					width: 80%;
+					margin-left: -40%;
+				}
+			}
+			
+			.mui-popover .mui-popover-arrow{
+				display: none !important;
+			}
+			.mui-input-row label{
+				width: 45%;
+				padding:11px 0px 11px 15px;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+				width: 55%;;
+			}
+			#add,#clsoeAdd{
+				width: 40%;
+				display: inline-block;
+				margin: 30px 2% 0px 2%;
+			}
 		</style>
 	</head>
 	<body style="background-color: #2B2B2B"> 
@@ -28,16 +59,16 @@
 					<table cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
-								<td id="tradeMenu">交易中心</td>
+								<td id="tradeMenu" class="mui-active">交易中心</td>
 								<td id="HandicapButton">盘口</td>
-								<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
+								<td  id="timeChartMenu" value="0" >分时</td>
 								<td id="selectButon">K线</td>
 							</tr>
 						</thead>
 					</table>
 				</div>
 				<div id="headerContent">
-					<div id="chartAllDiv" class="mui-active bottomDivList">
+					<div id="chartAllDiv" class="bottomDivList">
 						<div class="chartDivContent mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;"></div>
 							<div id="volumeChart" style="width:100%;"></div>
@@ -161,7 +192,7 @@
 							</tr>
 						</table>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList mui-active">
 					    <div class="Assets" style="background-color: #2B2B2B;">
 					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -215,12 +246,13 @@
 					            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
 					                <li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
 					            </ul>
-					            <button type="button" class="mui-btn mui-col-xs-10 focusButton" id="kilAnorder">撤单</button>
+					             <button type="button" class="mui-btn focusButton" id="fullWithdrawal">全撤</button>
+					            <button type="button" class="mui-btn focusButton " id="kilAnorder">撤单</button>
+					           <button type="button" class="mui-btn focusButton" id="changeSingle">改单</button>
 					        </div>
 					        <div id="item3" class="mui-control-content" style="width: 100%;">
 					            <ul  id="Entrust" class="listStyle" style="height: 165px;" >
 					                <li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
-					
 					            </ul>
 					        </div>
 					        <div id="item4" class="mui-control-content" >
@@ -245,10 +277,37 @@
 					</ul>
 				</div>
 			</div>
+			<div id="popover" class="mui-popover" id="inputDiv">
+				<div class="mui-popover-arrow"></div>
+				<div class="mui-content-padded">
+				<h4 id="title" style="text-align: center;margin-top: 20px;">改单</h4>
+					<form class="mui-input-group" style="margin-top: 30px;">
+						<div class="mui-input-row">
+							<label>委托价格：</label>
+							<input type="text" class="mui-input-clear" id="col1" placeholder="请输入">
+						</div>
+						<div class="mui-input-row">
+							<label>委托数量：</label>
+							<input type="text" class="mui-input-clear" id="col2" placeholder="请输入">
+						</div>
+					</form>
+					<div id="add_div" class="operate mui-hidden">
+						<button type="button" class="mui-btn mui-btn-blue" id="add">确定</button>
+						<button type="button" class="mui-btn mui-btn-blue" id="clsoeAdd">取消</button>
+					</div>
+					<div id="edit_div" class="operate mui-hidden">
+						<button type="button" class="mui-btn mui-btn-blue" id="update" style="margin-right: 30px;">修改</button>
+						<button type="button" class="mui-btn mui-btn-red" id="del">删除</button>
+					</div>
+				</div>
+			</div>
 			<script>
 				mui.plusReady(function(){
 				loadCss();
 				var Proportion=1;
+//				document.getElementById("holdCC").addEventListener("tap",function(){
+//					document.getElementById("holdCC").href="#item1"
+//				})
     			function loadCss(){
 		    			var Proportion=1;
 						var screen=plus.screen.resolutionHeight;
@@ -409,6 +468,44 @@
 					$("#marketSell ").text("模拟卖出");
 					$("#switchSell").text("模拟卖出");
 				}
+					var col1 = document.getElementById("col1");
+					var col2 = document.getElementById("col2");
+					var network = false;
+					var add_div = document.getElementById("add_div");
+					var edit_div = document.getElementById("edit_div");
+				document.getElementById("fullWithdrawal").addEventListener("tap",function(){
+						//清空数据
+						col1.value = "";
+						col2.value = "";
+						add_div.classList.remove("mui-hidden");
+						if(!edit_div.classList.contains("mui-hidden")){
+							edit_div.classList.add("mui-hidden");
+						}
+						mui("#popover").popover("toggle");
+				})
+				document.getElementById("add").addEventListener('tap', function() {
+					var check = true;
+					mui(".mui-input-group input").each(function () {
+						if(!this.value||trim(this.value)==""){
+							var label = this.previousElementSibling;
+							mui.alert(label.innerText+"不允许为空");
+							check = false;
+							return false;
+						}
+					});
+					if(check){
+						var newRef = ref.push({
+							"col1": col1.value,
+							"col2": col2.value,
+						});
+						add_div.classList.add("mui-hidden");
+						//关闭modal
+						mui("#popover").popover("toggle");
+						mui.toast("添加成功~");
+						//刷新界面
+					}
+				
+				});
 			});
 		</script>
 		<script>

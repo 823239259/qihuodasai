@@ -386,25 +386,49 @@ p{
 	z-index: 999;
 }
 #kilAnorder{
-	width: 70%;
+	bottom: 1%;
+	right: 25%;
+	border-top:none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
+}
+.focusButton{
+	height: 40px;
+	line-height: 40px;
+	padding: 0px;
+	width: 25%;
+	color:#2b2b2b;
 	background-color: #cccccc;
 	display: block;
+	position: fixed;
 	border:none;
-	position: fixed;
+	color:#2b2b2b;
+	font-size: 16px;;
+}
+#fullWithdrawal{
 	bottom: 1%;
-	left: 15%;
+	right: 50%;
+	border-top:none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
 }
-#allOpen,#Open{
-	background-color:#cccccc;
-	position: fixed;
+#changeSingle{
+	bottom: 1%;
+	right: 0px;
 }
+
 #allOpen{
 	bottom: 1%;
-	left: 5%;
+	right: 25%;
+	border-top:none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
 }
 #Open{
 	bottom: 1%;
-	right: 5%;
+	right: 0px;
 }
 #positionList,#postersOrder{
 	width: 100%;
@@ -1090,3 +1114,11 @@ input{
 .chartDivContent{
 	display: none;
 }
+#segmentedControl .mui-control-item{
+	width: 25%;
+	margin: 0px;;
+}
+#segmentedControl .mui-active{
+	width: 100%;
+}
+

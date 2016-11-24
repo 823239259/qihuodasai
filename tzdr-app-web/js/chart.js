@@ -401,6 +401,13 @@ mui.plusReady(function(){
 			$("#list_type ").css({
 				"display":"block"
 			});
+			$("#headerMenu table td").removeClass("mui-active");
+    		$("#selectButon").addClass("mui-active");
+    		$("#chartAllDiv").addClass("mui-active");
+    		$("#Handicap").removeClass("mui-active");
+    		$("#TimeChart1").removeClass("mui-active");
+    		$("#CandlestickChart").addClass("mui-active");
+    		$("#trade").removeClass("mui-active");
 		});
 		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
 			$("#list_type ").css({
@@ -408,8 +415,13 @@ mui.plusReady(function(){
 			})
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
-    		$("#TimeChart1").css("opacity","0");
-    		$("#timeChartMenu").addClass("mui-active")
+    		$("#headerMenu table td").removeClass("mui-active");
+    		$("#TimeChart1").css("opacity","0").addClass("mui-active");
+    		$("#timeChartMenu").addClass("mui-active");
+    		$("#chartAllDiv").addClass("mui-active");
+    		$("#Handicap").removeClass("mui-active");
+    		$("#CandlestickChart").removeClass("mui-active");
+    		$("#trade").removeClass("mui-active");
     		time=[];
 		    prices=[];
 		    timeLabel=[]
@@ -448,13 +460,15 @@ mui.plusReady(function(){
     			$("#chartAllDiv").removeClass("mui-active");
     			$("#tradeMenu").addClass("mui-active");
     			$("#trade").addClass("mui-active");
+    			$("#Handicap").removeClass("mui-active");
 			}
-    	})
+    	});
     	document.getElementById("HandicapButton").addEventListener("tap",function(){
     		$("#headerMenu table td").removeClass("mui-active");
     		$("#chartAllDiv").removeClass("mui-active");
     		$("#HandicapButton").addClass("mui-active");
     		$("#Handicap").addClass("mui-active");
+    		$("#trade").removeClass("mui-active");
     	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)
