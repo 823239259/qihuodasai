@@ -172,7 +172,7 @@ public class WeChatSupport extends WechatSupport{
 			wechatUser.setWechatGroupid(resultJson.getString("groupid"));
 			wechatUser.setWechatHeadimgurl(resultJson.getString("headimgurl"));
 			wechatUser.setWechatLanguage(resultJson.getString("language"));
-			wechatUser.setWechatNickName(resultJson.getString("nickname"));
+			wechatUser.setWechatNickName(WeChatUtil.filterEmoji(resultJson.getString("nickname")));
 			wechatUser.setWechatOpenId(openId);
 			wechatUser.setWechatProvince(resultJson.getString("province"));
 			wechatUser.setWechatSex(resultJson.getString("sex"));
