@@ -1233,6 +1233,7 @@ $(function(){
 			switchAccount();
 		} 
 	});
+	
 }); 
 function initSocketTrade(){
 	setTradeConfig(tradeWebSocketIsMock);
