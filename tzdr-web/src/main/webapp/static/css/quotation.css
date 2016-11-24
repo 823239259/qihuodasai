@@ -1,8 +1,8 @@
 .quotation_title {height: 60px; line-height: 60px; background: #333; border-bottom: 1px solid #1a1a1a;}
-.quotation_title img {margin-top: 10px; margin-left: 10px; float: left;}
+.quotation_title img {margin-top: 10px; margin-left: 10px;}
 .quotation_title .quotation_anniu {float: right; position: relative;}
 .quotation_title .quotation_anniu input {margin-right: 10px; outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px; width: 130px; background: #1a1a1a; color: #666;}
-.quotation_title .quotation_anniu button a{text-decoration: none; color: #ff5500; height: 28px; line-height: 28px; line-height: 28px\9;}
+.quotation_title .quotation_anniu button a{text-decoration: none; color: #ffb319; height: 28px; line-height: 28px; line-height: 28px\9;}
 .quotation_title .quotation_anniu button a:hover {text-decoration: underline;}
 .quotation_title .quotation_anniu button {background: #333; margin-right: 10px; color: #ccc;}
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
@@ -127,8 +127,13 @@
 .quotation_detailed .quotation_detailed_title .caozuo li {margin: 0 5px;}
 .quotation_detailed .quotation_detailed_title .caozuo a{font-size: 14px; text-decoration: none; height: 28px; line-height: 28px; background: #1a1a1a; color: #ccc; display: block; border: 1px solid #1a1a1a; border-radius: 4px; text-align: center;}
 .quotation_detailed .quotation_detailed_title .caozuo a:hover {background: #000;}
-#show_user_info {position:relative;}
-#show_user_info .show_user_ul {float: right; position: absolute;}
+#show_user_info {position:relative; color: #ccc;}
+#show_user_info .show_user_ul {float: right; position: absolute; top: 50px; right: 15px; width: 100px; z-index: 9;}
+#show_user_info .show_user_ul li {padding: 0;height: 28px; line-height: 28px;}
+#show_user_info .show_user_ul li a {color: #666; width: 100px; display: inline-block; background: #1a1a1a; height: 28px; line-height: 28px; text-align: center;}
+#show_user_info .show_user_ul li a:hover {cursor: pointer; color: #ffb319; text-decoration: none;}
+#show_user_info .quotation_xl:hover {cursor: pointer;}
+#top_username {color: #ffb319;}
 #show_user_info button {margin-left: 10px; border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
 #show_user_info button:hover{background: #ff9f19; border: 1px solid #ff9f19; cursor: pointer;}
 #qiehuan {font-size: 14px; color: #999; position: absolute; right: 0; height: 48px; line-height: 48px; border-bottom: 1px solid #1a1a1a; background: #333333; width: 100%;}
@@ -136,7 +141,6 @@
 #qiehuan ul li {float: left; margin: 0 10px;}
 #qiehuan ul li:hover {color: #ffb319; cursor: pointer;}
 #change input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 10px; width: 195px; color: #666; margin-top: 10px; margin-left: 10px;}
-
 
 /* ²å¼þÐÐÇé */
 .dropdown,.dropup{position:relative}

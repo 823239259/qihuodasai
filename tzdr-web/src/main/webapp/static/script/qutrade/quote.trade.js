@@ -18,6 +18,34 @@ $(function() {
 	}
 })
 
+$(document).ready(
+	function () {
+	    $("#show_user_info .quotation_xl").click(function (e) {
+	        $("#show_user_info .show_user_ul").toggle();
+	        /*阻止冒泡事件*/
+	        e = window.event || e;
+	        if (e.stopPropagation) {
+	            e.stopPropagation();
+	        } else {
+	            e.cancelBubble = true;
+	        }
+	    });
+	    $("#show_user_info .show_user_ul li").click(function (e) {
+	        $("#show_user_info .show_user_ul").hide();
+	        /*阻止冒泡事件*/
+	        /*e = window.event || e;
+	        if (e.stopPropagation) {
+	            e.stopPropagation();
+	        } else {
+	            e.cancelBubble = true;
+	        }*/
+	    });
+	    $(document).click(function () {
+	        $("#show_user_info .show_user_ul").hide();
+	    });
+	}
+);
+
 $(function() {
 		// 持仓 委托 挂单 tab 切换
 		$(".quotation_detailed_lis a").click(function() {
