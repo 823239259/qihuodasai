@@ -1443,14 +1443,19 @@ function bindOpertion(){
 			var orderNum = $("#entrust_number").val();
 			var priceType = $("input[type='radio']:checked").val();
 			var tradeDrection = $this.attr("data-tion-buy");
+			var commodityNo = $("#commodeityNo").val();
+			var contractNo = $("#contractNo").val();
+			var localCommodity = getLocalCacheCommodity(commodityNo+contractNo);
+			var dotSize = 2;
+			if(localCommodity != undefined){
+				dotSize = localCommodity.DotSize;
+			}
 			var orderPrice = 0.00;
 			if(priceType == 1){
-				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection);
+				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection,dotSize);
 			}else{
 				orderPrice = $("#money_number").val();
 			}
-			var commodityNo = $("#commodeityNo").val();
-			var contractNo = $("#contractNo").val();
 			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】,买卖方向:【"+analysisBusinessBuySell(tradeDrection)+"】";
 			layer.confirm(tipContent+"?", {
 			  btn: ['确认','取消'] //按钮
@@ -1777,15 +1782,17 @@ function doGetSellingBasicParam(obj){
 	var localQuote = getLocalCacheQuote(contractCode);
 	var miniTikeSize = 0.00;
 	var lastPrice = 0.00;
+	var dotSize = 2;
 	if(localCommodity != undefined && localQuote != undefined){
 		miniTikeSize = localCommodity.MiniTikeSize;
 		lastPrice = localQuote.LastPrice;
+		dotSize = localCommodity.DotSize;
 	}
 	if(validationInputPrice(lastPrice)){
 		tip("最新价格错误");
 		return false;
 	}
-	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 	console.log(limitPirce);
 	if(validationInputPrice(limitPirce)){
 		tip("平仓价格错误");

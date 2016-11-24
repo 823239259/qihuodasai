@@ -243,7 +243,12 @@ function setTradeLastPrice(param){
 	var newContractNo = param.ContractNo; 
 	var contractCode = newCommdityNo+newContractNo;
 	if(selectContractCode == contractCode){
-		var lastPrice = parseFloat(param.LastPrice).toFixed(2);
+		var localCommodity = getLocalCacheCommodity(contractCode);
+		var dotSize = 2;
+		if(localCommodity != undefined){
+			dotSize = localCommodity.DotSize;
+		}
+		var lastPrice = parseFloat(param.LastPrice).toFixed(dotSize);
 		if(isNaN(lastPrice)){return;}
 		$("#trade_data #lastPrice").val(lastPrice);
 		if(getMoneyNumberIndex() == 0){
@@ -269,9 +274,10 @@ function setBuyAndSellFloatPrice(param){
 		var selectContractCode = $("#select_commodity").val();
 		if(selectContractCode == contractCode){
 			var miniTikeSize = localCommodity.MiniTikeSize;
+			var dotSize = localCommodity.DotSize;
 			var lastPrice = param.LastPrice;
-			$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-			$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+			$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0,dotSize));
+			$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1,dotSize));
 		}
 	}
 };
