@@ -17,7 +17,7 @@
 <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
 <script type='text/javascript' src="../../static/script/common/discussStock.js"></script>
 
-<script type='text/javascript' src="../../static/script/qutrade/quote.trade.js"></script>
+<script type='text/javascript' src="../../static/script/qutrade/quote.trade.js?v=2016-11-11"></script>
 <script type='text/javascript' src="../../static/script/qutrade/quotation.js"></script>
 <script type='text/javascript' src="../../static/script/layer/layer.js"></script>
 <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js"></script>
@@ -31,7 +31,7 @@
 <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js"></script>
 <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js"></script>
 <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js"></script>
-<script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
+<script type='text/javascript' src="../../static/script/qutrade/trade/trade.js?v=2016-11-11"></script>
 <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
 <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
 <!-- 插件 -->
@@ -591,21 +591,4 @@
 </div>
 </body>
 <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
-<script>
-$(function() {
-	var url = document.referrer;
-	if(url.indexOf("simulateOperate/operate") >= 0 ){
-		$("#signLogin").css("display","block");
-		$("#div_Mask").show();
-		var popupHeight = $("#signLogin").outerHeight()/2;
-		var popupWidth = $("#signLogin").outerWidth()/2;    
-		$("#signLogin").css({
-			top:"50%",
-			left:"50%",
-			marginTop: -(popupHeight+15),
-			marginLeft: -(popupWidth)
-		});
-	}
-})
-</script>
 </html>

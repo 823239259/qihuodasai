@@ -1277,6 +1277,7 @@ $(function(){
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
+	
 	$("#firm_btn").click(function(){
 		if(tradeWebSocketIsMock == 0){
 			username = $("#firm_name").val();
@@ -1297,6 +1298,9 @@ $(function(){
 		tradeLogin();
 	});
 	$("#simulation_btn").click(function(){
+		if(tradeWebSocketIsMock == 0){
+			tradeWebSocketIsMock=1
+		}
 		if(tradeWebSocketIsMock == 1){
 			username = $("#simulation_mame").val();
 			if(username == undefined || username.length == 0){

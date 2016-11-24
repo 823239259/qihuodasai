@@ -1,5 +1,4 @@
 $(function() {
-	
 	var url = document.referrer;
 	if(url.indexOf("simulateOperate/operate") >= 0 ){
 		if(username == null && password == null){
