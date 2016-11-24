@@ -1230,7 +1230,7 @@ $(function(){
 		if(isLogin){
 			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
 		}else{ 
-			openLogin();
+			switchAccount();
 		} 
 	});
 }); 
