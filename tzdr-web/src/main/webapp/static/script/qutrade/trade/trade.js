@@ -1422,6 +1422,7 @@ function selectCommodity(param){
 	setLocalCacheSelect(contractCode);
 	clearRightData();
 	updateRight(localQoute);
+	clearHandicapData();
 }
 /**
  * 绑定交易操作事件
