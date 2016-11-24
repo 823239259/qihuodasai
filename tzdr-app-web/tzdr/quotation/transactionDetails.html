@@ -29,7 +29,7 @@
 						<thead>
 							<tr>
 								<td id="tradeMenu">交易中心</td>
-								<td>盘口</td>
+								<td id="HandicapButton">盘口</td>
 								<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
 								<td id="selectButon">K线</td>
 							</tr>
@@ -37,12 +37,12 @@
 					</table>
 				</div>
 				<div id="headerContent">
-					<div id="chartAllDiv" class="mui-active displayStyle">
+					<div id="chartAllDiv" class="mui-active bottomDivList">
 						<div class="chartDivContent mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;"></div>
 							<div id="volumeChart" style="width:100%;"></div>
 						</div>
-						<div class="chartDivContent displayStyle" id="CandlestickChart" style="opacity: 0;">
+						<div class="chartDivContent" id="CandlestickChart" style="opacity: 0;">
 							<div   id="CandlestickChartDiv" style="width:100%;"></div>
 							<div id="CandlestickVolumeChart" style="width:100%;"></div>
 						</div>
@@ -81,7 +81,87 @@
 							</div>
 						</div>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class="">
+					<div id="Handicap" class="bottomDivList">
+						<table cellpadding="0" cellspacing="0" id="table_title">
+							<thead>
+								<tr>
+									<td>卖五档</td>
+									<td>买五档</td>
+								</tr>
+							</thead>
+						</table>
+						<table cellpadding="0" cellspacing="0" id="table_Content">
+							<tr>
+								<td>卖一</td>
+								<td class="redFont">12112.12</td>
+								<td>20</td>
+								<td>买一</td>
+								<td>买一</td>
+								<td>买一</td>
+							</tr>
+							<tr>
+								<td>卖一</td>
+								<td>12112.12</td>
+								<td>20</td>
+								<td>买一</td>
+								<td>买一</td>
+								<td>买一</td>
+							</tr>
+							<tr>
+								<td>卖一</td>
+								<td>12112.12</td>
+								<td>20</td>
+								<td>买一</td>
+								<td>买一</td>
+								<td>买一</td>
+							</tr>
+						</table>
+						<table cellpadding="0" cellspacing="0" id="HandicapTable">
+							<tr>
+								<td>卖价</td>
+								<td>68.12</td>
+								<td>卖量</td>
+								<td>21313</td>
+							</tr>
+							<tr>
+								<td>买价</td>
+								<td>68.12</td>
+								<td>买量</td>
+								<td>21313</td>
+							</tr>
+							<tr>
+								<td>最新 </td>
+								<td>68.12</td>
+								<td>涨跌</td>
+								<td>21313</td>
+							</tr>
+							<tr>
+								<td>开盘 </td>
+								<td>68.12</td>
+								<td>成交量 </td>
+								<td>21313</td>
+							</tr>
+							<tr>
+								<td>最高 </td>
+								<td>68.12</td>
+								<td>持仓量  </td>
+								<td>21313</td>
+							</tr>
+							<tr>
+								<td>最低 </td>
+								<td>68.12</td>
+								<td>昨结  </td>
+								<td>21313</td>
+							</tr>
+							<tr>
+								<td>结算 </td>
+								<td>68.12</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
 					    <div class="Assets" style="background-color: #2B2B2B;">
 					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>

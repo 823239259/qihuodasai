@@ -376,10 +376,10 @@ mui.plusReady(function(){
     /*
 		 获取K线类型**/
 		$("#list_type ul li").on("tap",function(){
-			$("#CandlestickChart").removeClass("displayStyle").addClass("mui-active");
-    		$("#trade").removeClass("mui-active").addClass("displayStyle");
-    		$("#TimeChart1").removeClass("mui-active").addClass("displayStyle");
-    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+			$("#CandlestickChart").addClass("mui-active");
+    		$("#trade").removeClass("mui-active")
+    		$("#TimeChart1").removeClass("mui-active")
+    		$("#chartAllDiv").addClass("mui-active");
 			$("#selectButon").text($(this).text())
 			var val=$(this).val();
 			if(val==1){
@@ -401,12 +401,6 @@ mui.plusReady(function(){
 			$("#list_type ").css({
 				"display":"block"
 			});
-//			$("#selectButon").css({
-//				"color":"#fcc900",
-//			});
-//			$("#timeChartMenu").css({
-//				"color":"#FFFFFF",
-//			})
 		});
 		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
 			$("#list_type ").css({
@@ -415,13 +409,8 @@ mui.plusReady(function(){
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
     		$("#TimeChart1").css("opacity","0");
-    		$("#selectButon").css({
-				"color":"#FFFFFF",
-			});
-			$("#timeChartMenu").css({
-				"color":"#fcc900",
-			});
-    		 time=[];
+    		$("#timeChartMenu").addClass("mui-active")
+    		time=[];
 		    prices=[];
 		    timeLabel=[]
 		     timeData={
@@ -439,10 +428,9 @@ mui.plusReady(function(){
     		var val=$("#timeChartMenu").val();
     		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
-    		$("#CandlestickChart").removeClass("mui-active").addClass("displayStyle");
-    		$("#trade").removeClass("mui-active").addClass("displayStyle");
-    		$("#TimeChart1").removeClass("displayStyle").addClass("mui-active");
-    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+    		$("#CandlestickChart").removeClass("mui-active")
+    		$("#trade").removeClass("mui-active").
+    		$("#TimeChart1").addClass("mui-active");
     		var option2=setOption1();
 		 	 var option1 =volumeChartSetOption(volumeChartData);
 				setTimeout(function(){
@@ -459,15 +447,30 @@ mui.plusReady(function(){
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
     		if(vadationIsLogin()){
-				$("#trade").removeClass("displayStyle").addClass("mui-active");
-    			$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
+				$("#trade").addClass("mui-active");
+    			$("#chartAllDiv").removeClass("mui-active");
 			}
-    		$("#selectButon").css({
-				"color":"#FFFFFF",
-			});
-			$("#timeChartMenu").css({
-				"color":"#FFFFFF",
-			})
+    	})
+    	function hasCommonClassName(){
+    		for(var i=0;i<$(".bottomDivList").length;i++){
+    			if($(".bottomDivList").eq(i).hasClass("mui-active")){
+    				console.log(i);
+    				$(".bottomDivList").eq(i).removeClass("mui-active");
+    			}
+    			return
+    		}
+    		for(var i=0;i<$("headerMenu table tr td").length;i++){
+    			if($("headerMenu table tr td").eq(i).hasClass("mui-active")){
+    				$("headerMenu table tr td").eq(i).removeClass("mui-active");
+    			}
+    			return
+    		}
+    		
+    	}
+    	document.getElementById("HandicapButton").addEventListener("tap",function(){
+    		hasCommonClassName();
+    		$("#HandicapButton").addClass("mui-active");
+    		$(".bottomDivList").eq(1).addClass("mui-active");
     	})
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)

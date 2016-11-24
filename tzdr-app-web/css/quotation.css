@@ -712,9 +712,6 @@ input{
 	height: auto;
 	margin-top: 10px;
 }
-.displayStyle{
-	display: none;
-}
 .mui-bar-nav{
 			-webkit-box-shadow:none;
 			box-shadow:none;
@@ -1024,6 +1021,72 @@ input{
 	background-color: #121212;
 	color:#fcc900;
 }
-.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{
-	/*font-family: "微软雅黑";*/
+#Handicap #table_title {
+	width: 100%;
+	height: 30px;
+	/*border-bottom: 1px solid #121212;*/
+}
+#Handicap #table_title thead tr td{
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	text-align: center;
+}
+#table_Content{
+	width: 100%;
+	border:1px solid #121212;
+}
+#table_Content tr{
+	width: 100%;
+	line-height: 25px;;
+	height: 25px;
+	font-size: 14px;;
+}
+#table_Content tr td:nth-child(1),#table_Content tr td:nth-child(4){
+	width: 14% !important;
+	color:#cccccc;
+	padding-left: 2%;
+}
+#table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5){
+	width: 21%;
+}
+#table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6){
+	width: 15%;
+	color:#cccccc;
+}
+#table_Content tr td:nth-child(3){
+	border-right: 1px solid #121212;
+}
+#HandicapTable{
+	width: 100%;
+	margin-top: 20px;
+}
+#HandicapTable tr{
+	width: 100%;
+	border-top:1px solid #121212;
+	border-bottom: 1px solid #121212;
+	font-size: 14px;
+		height: 30px;
+	line-height: 30px;
+}
+#HandicapTable tr td:nth-child(1),#HandicapTable tr td:nth-child(3){
+	width: 14% !important;
+	color:#cccccc;
+	padding-left: 2%;
+}
+#HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(4){
+	width: 36%;
+}
+#HandicapTable tr td:nth-child(2){
+	border-right: 1px solid #121212;
+}
+.bottomDivList{
+	display: none;
+}
+#headerContent .mui-active{
+	display: block!important;
+}
+.chartDivContent{
+	display: none;
 }
