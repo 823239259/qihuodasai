@@ -161,16 +161,11 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam);
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			localCachePositionRecentData = {}; 
-			localCachePostion = {};
-			tradeSuccessLoadHoldData();
-			$("#hold_gdt1").html("");
-			generatePostionTitle();
-			/*if(isBuy && locaOrderId == locaOrderId){
+			if(isBuy && locaOrderId == locaOrderId){
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null;
 				isBuy = false;
-			}*/
+			}
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
