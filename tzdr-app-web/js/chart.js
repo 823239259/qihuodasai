@@ -54,6 +54,7 @@ mui.plusReady(function(){
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
 		init(Transfer.name);
+		$("#MainContract").text(Transfer.name[2]+Transfer.name[1])
 	marketSocket = new WebSocket(marketSocketUrl);
     var setIntvalTime = null; 
     var marketLoadParam = {}
@@ -144,9 +145,9 @@ mui.plusReady(function(){
 					}
 				}
 				if(Transfer.name[2]==newCommdityNo){
-   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+"</option>"
 	   			}else{
-	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>"
 	   			}
 	   			
 			}
@@ -280,6 +281,7 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML= $("#CommodityName").val();
 		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
+		$("#MainContract").text($("#commodeityNo").val()+$("#contractNo").val());
 		$("#xj").removeAttr("checked");
 		$("#sj").prop("checked",true);
 		$("#orderPrice").val("");

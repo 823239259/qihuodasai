@@ -17,13 +17,12 @@
 			}
 			#popover{
 				min-width: 282px;
-				height: 250px ;
+				height: 190px ;
 				top:50% !important;
-				margin-top: -150px;
+				margin-top: -120px;
 				left: 50% !important;
 				margin-left: -141px;
 			}
-			
 			@media (min-width: 400px){
 				#popover{
 					width: 80%;
@@ -37,14 +36,32 @@
 			.mui-input-row label{
 				width: 45%;
 				padding:11px 0px 11px 15px;
+				height: 40px;
+				font-size: 14px;;
 			}
 			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
-				width: 55%;;
+				width: 55%;
+				height: 40px;
+				font-size: 14px;;
 			}
 			#add,#clsoeAdd{
-				width: 40%;
+				width: 45%;
+				margin-top: 10px;
 				display: inline-block;
-				margin: 30px 2% 0px 2%;
+				border: none;
+				height: 40px;
+				padding: 0px;
+				line-height: 40px;
+			}
+			#add{
+				background-color: #fcc900;
+				color:#2b2b2b;
+				margin-left: 10px;
+				margin-right: 5px;
+			}
+			#clsoeAdd{
+				background-color: #cccccc;
+				color:#2b2b2b;
 			}
 		</style>
 	</head>
@@ -200,9 +217,8 @@
 					    <div class="ProductInformation">
 					        <div class="ProductInformationLeft">
 					                <select class="mui-btn mui-btn-block" id = "tradeTitle" >
-					                	<option>456456</option>
 					                </select>
-					                <span id="MainContract">67868</span>
+					                <span id="MainContract"></span>
 					            <span class="mui-icon mui-icon-search" id="searchIcon"></span>
 					        </div>
 					        <div class="ProductInformationRight">
@@ -280,8 +296,8 @@
 			<div id="popover" class="mui-popover" id="inputDiv">
 				<div class="mui-popover-arrow"></div>
 				<div class="mui-content-padded">
-				<h4 id="title" style="text-align: center;margin-top: 20px;">改单</h4>
-					<form class="mui-input-group" style="margin-top: 30px;">
+				<h4 id="title" style="text-align: center;margin-top: 10px;">改单</h4>
+					<form class="mui-input-group" style="margin-top: 10px;">
 						<div class="mui-input-row">
 							<label>委托价格：</label>
 							<input type="text" class="mui-input-clear" id="col1" placeholder="请输入">
@@ -294,10 +310,6 @@
 					<div id="add_div" class="operate mui-hidden">
 						<button type="button" class="mui-btn mui-btn-blue" id="add">确定</button>
 						<button type="button" class="mui-btn mui-btn-blue" id="clsoeAdd">取消</button>
-					</div>
-					<div id="edit_div" class="operate mui-hidden">
-						<button type="button" class="mui-btn mui-btn-blue" id="update" style="margin-right: 30px;">修改</button>
-						<button type="button" class="mui-btn mui-btn-red" id="del">删除</button>
 					</div>
 				</div>
 			</div>
@@ -472,15 +484,17 @@
 					var col2 = document.getElementById("col2");
 					var network = false;
 					var add_div = document.getElementById("add_div");
-					var edit_div = document.getElementById("edit_div");
 				document.getElementById("fullWithdrawal").addEventListener("tap",function(){
 						//清空数据
 						col1.value = "";
 						col2.value = "";
 						add_div.classList.remove("mui-hidden");
-						if(!edit_div.classList.contains("mui-hidden")){
-							edit_div.classList.add("mui-hidden");
-						}
+						mui("#popover").popover("toggle");
+				})
+				function trim(str){ //删除左右两端的空格
+			　　     return str.replace(/(^\s*)|(\s*$)/g, "");
+			　　 }
+				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
 				})
 				document.getElementById("add").addEventListener('tap', function() {
@@ -494,10 +508,6 @@
 						}
 					});
 					if(check){
-						var newRef = ref.push({
-							"col1": col1.value,
-							"col2": col2.value,
-						});
 						add_div.classList.add("mui-hidden");
 						//关闭modal
 						mui("#popover").popover("toggle");
