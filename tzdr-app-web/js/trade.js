@@ -24,6 +24,10 @@ var tradeSuccessLoadFlag = false;
  */
 function tradeSuccessLoadHoldData(){
 	//tradeSuccessLoadFlag = true;
+	$("#positionList").html("");  
+	loadPositionTitle(); 
+	localCachePositionRecentData = {}; 
+	localCachePostion = {};
 	Trade.doHold(username);
 	
 }
@@ -57,6 +61,7 @@ function linearlyLoadData(method) {
  * 保存已下单的数据
  */
 var resultInsertOrderId = {};
+var  referCount = 0;
 function handleData(evt){
 	var dataString = evt.data;
 	var data = JSON.parse(dataString);
@@ -162,11 +167,10 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam); 
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			$("#positionList").html("");  
-			loadPositionTitle(); 
-			localCachePositionRecentData = {}; 
-			localCachePostion = {};
-			tradeSuccessLoadHoldData();
+			if(referCount == 0){
+				tradeSuccessLoadHoldData();
+			}
+			referCount++;
 			/*if(isBuy && orderId == locaOrderId){   
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null; 
@@ -194,11 +198,15 @@ function handleData(evt){
 			}
 		}
 	}else{ 
-		if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
+		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
 			tradeSuccessLoadFlag = false;
 			isBuy = false;
 			localCachePositionRecentData = {};
+		}*/
+		referCount--;
+		if(referCount > 0){ 
+			tradeSuccessLoadHoldData();
 		}
 	}
 }
@@ -1210,8 +1218,8 @@ function addBindsss(cls){
  * 加载持仓的标题
  */
 function loadPositionTitle(){
-	var html = '<a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a>';
-	$(".PositionLi").html(html);
+	var html = ' <li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>';
+	$("#positionList").html(html);
 }
 /**
  * 加载用户的账户信息
