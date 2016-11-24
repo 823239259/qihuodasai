@@ -458,6 +458,11 @@ function setHandicap(param){
 	//结算价
 	var settlePrice = param.SettlePrice;
 	//卖量
+	var totalAskQty = param.TotalAskQty;
+	//买量
+	var totalBidQty = param.TotalBidQty;
+	//
+	
 	
 }
 /**
