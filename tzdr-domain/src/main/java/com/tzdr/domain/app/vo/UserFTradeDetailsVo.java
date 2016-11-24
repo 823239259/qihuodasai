@@ -174,35 +174,35 @@ public class UserFTradeDetailsVo implements Serializable {
 	/**
 	 * H股指数交易手数
 	 */
-	@SqlColumn(name = "h_index_actual_lever")
+	@SqlColumn(name = "h_stock_market_lever")
 	private Integer hIndexActualLever;
 	/**
 	 * 
 	 * 小H股指数交易手数
 	 */
-	@SqlColumn(name = "xh_index_actual_lever")
-	private Integer xhIndexActualLever;
+	@SqlColumn(name = "xhstock_market_lever")
+	private Integer xHStockMarketLever;
 
 	/**
 	 * 
 	 * 美铜交易手数
 	 */
-	@SqlColumn(name = "a_copper_actual_lever")
-	private Integer aCopperActualLever;
+	@SqlColumn(name = "ame_copper_market_lever")
+	private Integer ameCopperMarketLever;
 	
 	/**
 	 * 
 	 * 美白银交易手数
 	 */
-	@SqlColumn(name = "a_silver_actual_lever")
+	@SqlColumn(name = "ame_silver_market_lever")
 	private Integer aSilverActualLever;
 	
 	/**
 	 * 
 	 * 小原油交易手数
 	 */
-	@SqlColumn(name = "sma_actual_lever")
-	private Integer smaActualLever;
+	@SqlColumn(name = "small_crude_oil_market_lever")
+	private Integer smallCrudeOilMarketLever;
 	/**
 	 * 迷你德国DAX指数
 	 */
@@ -480,21 +480,6 @@ public class UserFTradeDetailsVo implements Serializable {
 		this.hIndexActualLever = hIndexActualLever;
 	}
 
-	public Integer getXhIndexActualLever() {
-		return xhIndexActualLever;
-	}
-
-	public void setXhIndexActualLever(Integer xhIndexActualLever) {
-		this.xhIndexActualLever = xhIndexActualLever;
-	}
-
-	public Integer getaCopperActualLever() {
-		return aCopperActualLever;
-	}
-
-	public void setaCopperActualLever(Integer aCopperActualLever) {
-		this.aCopperActualLever = aCopperActualLever;
-	}
 
 	public Integer getaSilverActualLever() {
 		return aSilverActualLever;
@@ -504,12 +489,30 @@ public class UserFTradeDetailsVo implements Serializable {
 		this.aSilverActualLever = aSilverActualLever;
 	}
 
-	public Integer getSmaActualLever() {
-		return smaActualLever;
+	public Integer getxHStockMarketLever() {
+		return xHStockMarketLever;
 	}
 
-	public void setSmaActualLever(Integer smaActualLever) {
-		this.smaActualLever = smaActualLever;
+	public void setxHStockMarketLever(Integer xHStockMarketLever) {
+		this.xHStockMarketLever = xHStockMarketLever;
+	}
+
+	
+
+	public Integer getAmeCopperMarketLever() {
+		return ameCopperMarketLever;
+	}
+
+	public void setAmeCopperMarketLever(Integer ameCopperMarketLever) {
+		this.ameCopperMarketLever = ameCopperMarketLever;
+	}
+
+	public Integer getSmallCrudeOilMarketLever() {
+		return smallCrudeOilMarketLever;
+	}
+
+	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
+		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
 	}
 	
 	
