@@ -439,13 +439,25 @@ function getMoneyNumberIndex(){
  * 设置盘口信息
  */
 function setHandicap(param){
-	//卖家
+	//卖价
 	var askQty1 = param.AskQty1;
+	//买价
 	var bidPrice1 = param.BidPrice1;
+	//最新价
 	var lastPrice = param.LastPrice;
+	//开仓价
 	var openPrice = param.OpenPrice;
+	//最高价
 	var highPrice = param.HighPrice;
+	//最低价
 	var lowPrice = param.LowPrice;
+	//昨收
+	var preClosingPrice = param.PreClosingPrice;
+	//涨停价
+	var limitUpPrice = param.LimitUpPrice;
+	//结算价
+	var settlePrice = param.SettlePrice;
+	//卖量
 	
 }
 /**
