@@ -1230,7 +1230,8 @@ $(function(){
 		if(isLogin){
 			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
 		}else{ 
-			switchAccount();
+			loginOut();
+			openLogin();
 		} 
 	});
 	
@@ -1248,6 +1249,7 @@ function selectCommodity(param){
 		var localQoute = localCacheQuote[contractCode];
 		var miniTikeSize = localCommodity.MiniTikeSize;
 		var lastPrice = localQoute.LastPrice;
+		var dotSize = localCommodity.DotSize;
 		$("#trade_data #lastPrice").val(lastPrice);
 		$("#trade_data #miniTikeSize").val(miniTikeSize);
 		$("#trade_data #contractSize").val(localCommodity.ContractSize);
@@ -1257,8 +1259,8 @@ function selectCommodity(param){
 		$("#trade_data #doSize").val(localCommodity.DotSize);
 		$("#money_number").val(localQoute.LastPrice);
 		$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
-		$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-		$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
+		$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0,dotSize));
+		$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1,dotSize));
 		setMoneyNumberIndex(0);
 		 var left_xiangmu   = $(".futuresList .left_xiangmu");
 		left_xiangmu.each(function(){
@@ -1279,6 +1281,7 @@ function selectCommodity(param){
  * 
  */
 var isUpdateOrder = false;
+var buyOrderPrice = 0.00;
 function bindOpertion(){
 	$(".buy").bind("click",function(){
 		if(isLogin){
@@ -1301,16 +1304,22 @@ function bindOpertion(){
 			var tradeDrection = $this.attr("data-tion-buy"); 
 			var lastPrice = $("#lastPrice").text();
 			var miniTikeSize = $("#miniTikeSize").val();
+			var commodityNo = $("#commodeityNo").val();
+			var contractNo = $("#contractNo").val();
+			var dotSize = 2;
+			var localCommodity = getMarketCommdity(commodityNo+contractNo);
+			if(localCommodity != undefined){
+				dotSize = localCommodity.DotSize;
+			}
 			if(priceType == 0){
 				if(orderPrice <= 0 || orderPrice.length <= 0){
 					mui.toast("请输入正确的价格");
 					return;
 				}
 			}else if(priceType == 1){ 
-				orderPrice = doGetMarketPrice(lastPrice,miniTikeSize,tradeDrection);
+				orderPrice = doGetMarketPrice(lastPrice,miniTikeSize,tradeDrection,dotSize);
 			}
-			var commodityNo = $("#commodeityNo").val();
-			var contractNo = $("#contractNo").val();
+			buyOrderPrice = orderPrice;
 			var content = "确定提交订单："+commodityNo+contractNo+",价格("+orderPrice+"),手数("+orderNum+")?";
 			alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$this);
 		}else{
@@ -1419,7 +1428,13 @@ function bindOpertion(){
 				return;
 			}
 			var drection = $this.attr("data-tion-buy");
-			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+			var localCommodity = getMarketCommdity(commodityNo+contractNo);
+			var dotSize = 2;
+			if(localCommodity != undefined){
+				dotSize = localCommodity.DotSize;
+			}
+			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
+			buyOrderPrice = limitPrice;
 			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";
 			var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),marketBuy,null,$this);
 		}else{
@@ -1493,23 +1508,22 @@ function doInsertOrder(param){
 	var $this = param;
 	var tradeDrection = $this.attr("data-tion-buy");
 	var orderNumber = $("#orderNumber").val();
-	var orderPrice = $("#orderPrice").val();
-	var priceType = $("input[type='radio']:checked").val();
+	//var priceType = $("input[type='radio']:checked").val();
 	if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
 		alertProtype("手数输入错误数量","提示",Btn.confirmed());
 		return;
 	}
-	if(priceType == 1){
+	/*if(priceType == 1){
 		orderPrice = doGetMarketPrice($("#lastPrice").text(),$("#miniTikeSize").val(),tradeDrection);
-	}
-	if(orderPrice == null || isNaN(orderNumber) || orderPrice <= 0 || orderPrice.length <= 0 ){
+	}*/
+	if(buyOrderPrice == null || isNaN(buyOrderPrice) || buyOrderPrice <= 0 || buyOrderPrice.length <= 0 ){
 		alertProtype("价格输入错误","提示",Btn.confirmed());
 		return;
 	}
 	var exchanageNo = $("#exchangeNo").val();
 	var commodeityNo = $("#commodeityNo").val();
 	var contractNo = $("#contractNo").val();
-	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,orderPrice,0,doGetOrderRef());
+	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,buyOrderPrice,0,doGetOrderRef());
 	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
 	isBuy = true;
 }
@@ -1657,16 +1671,18 @@ function doGetSellingBasicParam(obj){
 	var localQuote = getLocalCacheQuote(contractCode);
 	var miniTikeSize = 0.00;
 	var lastPrice = 0.00;
+	var dotSize = 2;
 	if(localCommodity != undefined && localQuote != undefined){
 		miniTikeSize = localCommodity.MiniTikeSize;
 		lastPrice = localQuote.LastPrice;
-	}
+		dotSize = localCommodity.DotSize;
+	} 
 	if(validationInputPrice(lastPrice)){ 
 		tip("最新价格错误");
 		return false;
 	}
-	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection);
-	if(validationInputPrice(limitPirce)){
+	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
+	if(validationInputPrice(limitPirce)){ 
 		tip("平仓价格错误");
 		return false;
 	}
@@ -1730,9 +1746,14 @@ function marketBuy(param){
 		var miniTikeSize = $("#miniTikeSize").val();
 		var orderNum = $("#orderNum").val();
 		var drection = $this.attr("data-tion-buy");
-		var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+		//var localCommodity = getMarketCommdity(commodityNo+contractNo);
+		/*var dotSize = 2;
+		if(localCommodity != undefined){
+			dotSize = localCommodity.DotSize;
+		}*/
+		//var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 		var priceType = 0;
-		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,0,limitPrice,0,doGetOrderRef());
+		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,0,buyOrderPrice,0,doGetOrderRef());
 		tip("合约【"+commodityNo+contractNo+"】提交成功,等待交易");
 	}
 /**
