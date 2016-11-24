@@ -296,6 +296,7 @@ function addQuoteListBindClick(cls){
 		 clearRightData();
 		 setSelectOption(contractCode);
 		 setMoneyNumberIndex(0);
+		 clearHandicapData();
 	});
 }
 /**
@@ -578,6 +579,25 @@ function setHandicap(param){
 	$("#pkccml").css("color","#000000");
 	$("#pkzj").text(parseFloat(preSettlePrice).toFixed(dotSize));
 	$("#pkccml").css("color","#000000");
+}
+/**
+ * 清理盘口数据
+ */
+function clearHandicapData(){
+	$("#pkzd").text(0);
+	$("#pktrademl").text(0);
+	$("#pkccml").text(0);
+	$("#pkzj").text(0);
+	$("#pkmj_sell").text(0);
+	$("#pkmj_buy").text(0);
+	$("#pklastparice").text(0);
+	$("#pkopenprice").text(0);
+	$("#pkhightprice").text(0);
+	$("#pklowprice").text(0);
+	$("#pkjs").text(0);
+	$("#pkml_sell").text(0);
+	$("#pkml_buy").text(0);
+	$(".fr").css("color","#000000");
 }
 /**
  * 更新右边数据
