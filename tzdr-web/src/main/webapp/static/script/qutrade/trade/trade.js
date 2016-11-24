@@ -24,6 +24,10 @@ var tradeSuccessLoadFlag = false;
  */
 function tradeSuccessLoadHoldData(){
 	//tradeSuccessLoadFlag = true;
+	localCachePositionRecentData = {}; 
+	localCachePostion = {};
+	$("#hold_gdt1").html("");
+	generatePostionTitle();
 	Trade.doHold(username);
 	
 }
@@ -57,6 +61,7 @@ function linearlyLoadData(method) {
  * 保存已下单的数据
  */
 var resultInsertOrderId = {};
+var referCount = 0 ;
 function handleData(evt){
 	var dataString = evt.data;
 	var data = JSON.parse(dataString);
@@ -76,7 +81,6 @@ function handleData(evt){
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			//登录成功加载
-			
 			if (code == 0) {
 				LoginForwardInitLoadData();
 				$("#show_login").hide();
@@ -161,11 +165,11 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam);
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			localCachePositionRecentData = {}; 
-			localCachePostion = {};
-			tradeSuccessLoadHoldData();
-			$("#hold_gdt1").html("");
-			generatePostionTitle();
+			referCount++;
+			if(referCount == 0){
+				tradeSuccessLoadHoldData();
+			}
+			referCount++;
 			/*if(isBuy && locaOrderId == locaOrderId){
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null;
@@ -193,11 +197,15 @@ function handleData(evt){
 			}
 		}
 	}else{
-		if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
+		referCount--;
+		if(referCount > 0){
+			tradeSuccessLoadHoldData();
+		}
+		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
 			tradeSuccessLoadFlag = false;
 			localCachePositionRecentData = {};
-		}
+		}*/
 	}
 }
 /**
