@@ -98,6 +98,7 @@ function handleData(evt){
 				//登录失败清理数据
 				loginOut();
 			}
+			clearInterval(tradeIntervalId);
 			//查询个人账户信息回复
 		} else if (method == "OnRspQryAccount") {
 			var accountParam = parameters;

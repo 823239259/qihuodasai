@@ -145,7 +145,6 @@ function initLoad() {
 		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion);
 		//更新交易连接状态
 		changeConnectionStatus();
-		clearInterval(tradeIntervalId);
 	}
 	socket.onmessage = function(evt) {
 		handleData(evt);

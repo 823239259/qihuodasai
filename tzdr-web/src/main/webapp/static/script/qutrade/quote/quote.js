@@ -577,7 +577,7 @@ function setHandicap(param){
 	}else{
 		color = "#000000";
 	}
-	$("#pkzd").text(parseFloat(changeValue).toFixed(dotSize)+"/"+parseFloat(changeRate).toFixed(dotSize));
+	$("#pkzd").text(parseFloat(changeValue).toFixed(dotSize)+"/"+parseFloat(changeRate).toFixed(2)+"%");
 	$("#pkzd").css("color",color);
 	$("#pktrademl").text(totalVolume);
 	$("#pktrademl").css("color","#000000");
