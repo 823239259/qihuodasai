@@ -27,16 +27,17 @@ public class WxContoller{
 	private SecurityInfoService securityInfoService;
 	@RequestMapping(value = "/vswx",produces="text/plain")
 	@ResponseBody
-	public void wx(HttpServletRequest reqest,HttpServletResponse response){
-		try {
+	public String wx(HttpServletRequest reqest,HttpServletResponse response){
+		/*try {*/
 			WeChatSupport chatSupport = new WeChatSupport(reqest , wUserService , wechatUserService,securityInfoService);
 			String result = chatSupport.execute();
-			response.setHeader("content-type", "text/html;charset=gbk");// 浏览器编码
-			response.getOutputStream().write(result.getBytes("gbk"));
-		} catch (UnsupportedEncodingException e) {
+			/*response.setHeader("content-type", "text/html;charset=gbk");// 浏览器编码
+			response.getOutputStream().write(result.getBytes("gbk"));*/
+			return result;
+		/*} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

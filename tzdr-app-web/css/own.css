@@ -96,6 +96,10 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .mui-content .ac_money h3 { width: 90%;margin: 0 auto; padding: 0 5%; text-align: center; color: #FFCC33; font-size: 18px; font-weight: normal; height: 20px; line-height: 20px;}
 .mui-content .ac_money p { width: 90%; margin: 0 auto; padding: 0 5%; text-align: center; color: #888; font-size: 14px;}
 .ac_list { margin: 20px 0 0; }
+.ac_list img{
+	width: 24px;
+	height: 24px;
+}
 .ac_list li i  { font-style: normal; vertical-align: 5px; padding-left: 5px; font-weight: normal; }
 .ac_list li b { position: absolute; font-weight: normal; right: 40px; top: 15px; color: #888; }
 .ac_listbtn { margin-top: 25px; color: #888; margin-bottom: 25px;}
@@ -364,7 +368,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	margin-left:10px; ;
 }
 .ap_main .acp_font table  tr{  padding:0px 10px;}
-.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 14px;height: 30px;line-height: 30px;}
+.ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 14px;height: 30px;line-height: 15px; padding:7.5px 0px; }
 .ap_main .acp_font table thead td { background: #f2f2f2;color:#2B2B2B}
 /*.ap_main .mui-content-padded p { line-height: 40px;}*/
 /*支付页*/
@@ -663,5 +667,42 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	line-height: 50px;;
 	height: 50px;
 }
-
-
+#weixinCodeImage{
+	background-color: rgba(51, 51, 51, 0.5);
+	width: 100%;
+	text-align: center;
+	display: none;
+}
+#box{
+	background-color: #FFFFFF;
+	width: 95%;
+	text-align: center;
+}
+#box p{
+	color:#2b2b2b;
+	font-size: 16px;
+	position: relative;
+	height: 40px;line-height: 40px;
+	border-bottom: 1px solid #e5e5e5;
+}
+#close{
+	position: absolute;
+	right:10px;
+	width: 18px;
+	top:11px;
+}
+#weixinContent{
+	width: 100%;
+	height: auto;
+	padding:0px 10% 20px;
+}
+#weixinContent span{
+	font-size: 12px;;
+	text-align: left;
+	line-height: 25px;
+	color:#666666;
+}
+#weixinCodeImg{
+	width: 100%;
+	height: auto;
+}

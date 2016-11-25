@@ -137,8 +137,8 @@
 	<p class="ks_sshq" style="margin-top: 30px;"><span>实时行情</span><br>各种类交易终端行情超低延迟，<br>领跑同行；</p>
 	<div class="ks_lxfs">
 		<ul style="margin-left: 140px;">
-			<li class="channelRoute">1</li>
-			<li class="xz">Android下载</li>
+			<li class="channelRoute"><img src="${ctx}/static/images/login/ld-Ios.png"></li>
+			<li class="xz">APP下载</li>
 		</ul>
 		<%-- <ul>
 			<li><img src="${ctx}/static/images/login/ld-Ios.png"></li>

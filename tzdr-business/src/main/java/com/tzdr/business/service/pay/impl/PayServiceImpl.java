@@ -587,4 +587,8 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 	public RechargeList findByTradeNo(String tradeNo) {
 		return getEntityDao().findByTradeNo(tradeNo);
 	}
+	@Override
+	public List<RechargeList> findByTradeNoList(String tradeNo) {
+		return getEntityDao().findByTradeNoList(tradeNo);
+	}
 }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js"></script> 
     <script type="text/javascript" src="../../js/common.js"></script>
+    <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init(); 
     	var win=null;
@@ -23,6 +24,7 @@
 			    "tranLever":0,
 				"businessType":win.businessType
   			},function(result){
+  				console.log(JSON.stringify(result));
   				if(!mui.isnull(result.data)){
   					//读取详细数据
   					setconfirmInfo(result.data.confirmInfo);
@@ -41,6 +43,7 @@
   				//比较余额是否充足
 	  			compares();
   			},function(result){
+  				console.log(JSON.stringify(result));
   				if(result.code==2){
   					mui.toast("申请失败");
   					return;
@@ -304,13 +307,13 @@
     			tradelever_info.appendChild(b);
     		}
     	}
-    	
-    	
+//  	var traderBond=document.getElementById("traderBond").innerHTML;
+//  	traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
+//			console.log(traderBond);
     	function payMoney(){
     		var options=document.getElementById("voucher");
     		var traderBond=document.getElementById("traderBond").innerHTML;
     		traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
-			
     		if(mui.isnull(traderBond)){
     			mui.toast("请选择保证金！");
     			return;
@@ -323,6 +326,9 @@
 			var paramUrl={
 				url:"../login/login.html"
 			}
+			console.log("traderBond" +win.traderBond);
+			console.log("vid   "+vid);
+			console.log("businessType   "+win.businessType);
     		mui.app_request("/user/ftrade/handle",{
     			"vid":vid,
 				"traderBond":win.traderBond,

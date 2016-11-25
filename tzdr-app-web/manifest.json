@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.2.0",/*应用版本名称*/
-		"code": "20161118"
+		"name": "2.2.1",/*应用版本名称*/
+		"code": "20161124"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -237,7 +237,9 @@
 					"tzdr/login/password.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/login/retrievePassword.html",
-					"tzdr/future/add.html"
+					"tzdr/future/add.html",
+					"tzdr/account/accountno.html",
+					"tzdr/account/account.html"
 				],
 				"priority": 0
 			},
@@ -289,7 +291,8 @@
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/quotation/activity.html",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"tzdr/news/active.html"
 				],
 				"priority": 0
 			},
@@ -325,7 +328,11 @@
 					"images/3.0.png",
 					"images/0.png",
 					"images/2.png",
-					"images/1.png"
+					"images/1.png",
+					"js/jquery-1.11.3.js",
+					"images/weixinIcon.png",
+					"images/close.png",
+					"images/close1.png"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
@@ -341,7 +348,10 @@
 					"tzdr/scheme.html",
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/account/recharge.html",
-					"tzdr/future/listrg.html"
+					"tzdr/future/listrg.html",
+					"tzdr/account/bindingList.html",
+					"tzdr/account/bindWeixin.html",
+					"tzdr/account/accountno.html"
 				],
 				"priority": 0
 			},
@@ -837,7 +847,8 @@
 					"images/3.0.png",
 					"images/0.png",
 					"images/2.png",
-					"images/1.png"
+					"images/1.png",
+					"images/weixinIcon.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
@@ -868,7 +879,8 @@
 				"refer": [
 					"tzdr/future/DetailCn.html",
 					"home.html",
-					"tzdr/future/DetailLhsi.html"
+					"tzdr/future/DetailLhsi.html",
+					"tzdr/future/DetailCp.html"
 				],
 				"priority": 0
 			},
@@ -1003,11 +1015,13 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"tzdr/future/futurePaySuc.html"
 				],
 				"priority": 0
 			},
@@ -1173,7 +1187,8 @@
 					"images/down.png",
 					"images/quotationColse.png",
 					"images/quotationLogin.png",
-					"images/quotationLogin1.png"
+					"images/quotationLogin1.png",
+					"css/own.css"
 				],
 				"refer": [
 					"tzdr/future/cl.html",
@@ -1482,6 +1497,45 @@
 					"tzdr/quotation/quotationMain.html",
 					"guide.html"
 				],
+				"priority": 0
+			},
+			"tzdr/account/bindingList.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/ac_05.png",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/bindWeixin.html",
+					"tzdr/account/telphone.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/bindWeixin.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/jquery-1.11.3.js",
+					"images/0.0.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/news/active.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

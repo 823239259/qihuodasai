@@ -11,13 +11,13 @@
 <link href="../../static/css/gybf.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="../../static/ico/icon.png">
 <!-- 弹出层 -->
-<link href="../../static/css/quotation.css" rel="stylesheet" type="text/css" />
+<link href="../../static/css/quotation.css?v=2016-11-11" rel="stylesheet" type="text/css" />
 <link  href="../../static/script/layer/skin/layer.css"  rel="stylesheet" type="text/css"></link> 
 <script type='text/javascript' src="../../static/script/jquery-1.8.3.js"></script>
 <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
 <script type='text/javascript' src="../../static/script/common/discussStock.js"></script>
 
-<script type='text/javascript' src="../../static/script/qutrade/quote.trade.js"></script>
+<script type='text/javascript' src="../../static/script/qutrade/quote.trade.js?v=2016-11-11"></script>
 <script type='text/javascript' src="../../static/script/qutrade/quotation.js"></script>
 <script type='text/javascript' src="../../static/script/layer/layer.js"></script>
 <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js"></script>
@@ -31,7 +31,7 @@
 <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js"></script>
 <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js"></script>
 <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js"></script>
-<script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
+<script type='text/javascript' src="../../static/script/qutrade/trade/trade.js?v=2016-11-11"></script>
 <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
 <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
 <!-- 插件 -->
@@ -178,6 +178,83 @@
 				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span></p>
 			</div>
 		</div>	
+	</div>
+	<div class="tck01" id="handicapDetails" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">盘口信息</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div class="hkDetails">
+				<ul>
+					<li>卖价</li>
+					<li class="fr" id = "pkmj_sell">0</li>
+				</ul>
+				<ul>
+					<li>卖量</li>
+					<li class="fr" id = "pkml_sell">0</li>
+				</ul>
+				<ul>
+					<li>买价</li>
+					<li class="fr" id = "pkmj_buy">0</li>
+				</ul>
+				<ul>
+					<li>买量</li>
+					<li class="fr" id = "pkml_buy">0</li>
+				</ul>
+				<ul>
+					<li>最新</li>
+					<li class="fr" id = "pklastparice">0</li>
+				</ul>
+				<ul>
+					<li>涨跌</li>
+					<li class="fr" id = "pkzd">0/0</li>
+				</ul>
+				<ul>
+					<li>开盘</li>
+					<li class="fr" id = "pkopenprice">0</li>
+				</ul>
+				<ul>
+					<li>成交量</li>
+					<li class="fr" id = "pktrademl">0</li>
+				</ul>
+				<ul>
+					<li>最高</li>
+					<li class="fr" id = "pkhightprice">0</li>
+				</ul>
+				<ul>
+					<li>持仓量</li>
+					<li class="fr" id = "pkccml">0</li>
+				</ul>
+				<ul>
+					<li>最低</li>
+					<li class="fr" id = "pklowprice">0</li>
+				</ul>
+				<!-- <ul>
+					<li>均价</li>
+					<li class="fr"></li>
+				</ul> -->
+				<!-- <ul>
+					<li>昨收</li>
+					<li class="fr">12312</li>
+				</ul> -->
+				<ul>
+					<li>昨结</li>
+					<li class="fr" id = "pkzj">0</li>
+				</ul>
+				<!-- <ul>
+					<li>涨停</li>
+					<li class="fr">011212</li>
+				</ul> -->
+				<!-- <ul>
+					<li>涨跌</li>
+					<li class="fr">515445</li>
+				</ul> -->
+				<ul>
+					<li>结算</li>
+					<li class="fr" id = "pkjs">0</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 	<div class="tck01" id="handicapDetails" style="display: none;">
 		<div class="navtitle">
