@@ -24,13 +24,10 @@ var tradeSuccessLoadFlag = false;
  */
 function tradeSuccessLoadHoldData(){
 	//tradeSuccessLoadFlag = true;
-<<<<<<< HEAD
-=======
 	localCachePositionRecentData = {}; 
 	localCachePostion = {};
 	$("#hold_gdt1").html("");
 	generatePostionTitle();
->>>>>>> refs/remotes/origin/branch/20161124web
 	Trade.doHold(username);
 	
 }

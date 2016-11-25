@@ -158,11 +158,7 @@
 						<span>
 							￥<i id="tranFees_id">
 	                			<fmt:formatNumber value="${fSimpleConfigList[0].tranFees}" pattern="#,###"></fmt:formatNumber>
-<<<<<<< HEAD
 							</i>/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费，结算时统一扣除。
-=======
-							</i>/单边，买入、卖出一手时各收取该数额（人民币）的交易手续费,结算时统一扣除。
->>>>>>> refs/remotes/origin/branch/20161124web
 						</span>
 					</div>
 				</div>

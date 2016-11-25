@@ -146,11 +146,7 @@
 						<ul class="cp_paylist cp_paymoneyinfo">
 							<li>
 								<h3>应付金额(￥)</h3>
-<<<<<<< HEAD
 								<p><i>￥${payable}</i>元</p>
-=======
-								<p><i>${payable}</i>元</p>
->>>>>>> refs/remotes/origin/branch/20161124web
 							</li>
 						</ul>
 					</div>
