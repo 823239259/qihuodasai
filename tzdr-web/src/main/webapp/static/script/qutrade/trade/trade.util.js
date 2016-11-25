@@ -4,7 +4,7 @@
  * @param {Object} miniTikeSize 最小变动单位
  * @param {Object} drection 买卖方向(0-买，1-卖)
  */
-function doGetMarketPrice(price,miniTikeSize,drection){
+function doGetMarketPrice(price,miniTikeSize,drection,dotSize){
 	var base = 20;
 	var priceRange = parseFloat(miniTikeSize) * base;
 	price =  parseFloat(price);
@@ -14,7 +14,7 @@ function doGetMarketPrice(price,miniTikeSize,drection){
 	}else if(drection == 1){
 		newPrice = price - priceRange;
 	}
-	return parseFloat(newPrice).toFixed(2);
+	return parseFloat(newPrice).toFixed(dotSize);
 }
 /**
  * 计算浮动盈亏

@@ -418,6 +418,7 @@ public class UserPayController {
 					if(rechargeLists != null && rechargeLists.size() > 0){
 						resultJson.setMessage("提交失败,重复的订单号");
 						resultJson.setSuccess(false);
+						return resultJson;
 					}
 					RechargeList  rechargeList = new RechargeList();
 					rechargeList.setAccount("");
@@ -431,6 +432,12 @@ public class UserPayController {
 					rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
 					rechargeList.setTradeNo(transactionNo);
 					apiRechargeService.autoWechat(rechargeList);
+				}
+				// TODO 充值银行审核，给工作人员发送Email
+				try {
+					messagePromptService.sendMessage(PromptTypes.isWechatTransfer, user.getMobile());
+				} catch (Exception e) {
+					logger.info("发送邮件失败", e);
 				}
 		}
 		return resultJson;

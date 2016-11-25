@@ -659,10 +659,11 @@ public class PayController {
 		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
 		if(userVerified != null){
 				synchronized (lock_wechat_transfer) {
-					RechargeList rechargeLists = payService.findByTradeNo(transactionNo);
-					if(rechargeLists != null){
+					List<RechargeList> rechargeLists = payService.findByTradeNoList(transactionNo);
+					if(rechargeLists != null && rechargeLists.size() > 0){
 						resultJson.setMessage("提交失败,重复的订单号");
 						resultJson.setSuccess(false);
+						return resultJson;
 					}
 					RechargeList rechargeList  = new RechargeList();
 					rechargeList.setAccount("");
@@ -677,7 +678,14 @@ public class PayController {
 					rechargeList.setTradeNo(transactionNo);
 					payService.autoWechat(rechargeList);
 				}
+				// TODO 充值银行审核，给工作人员发送Email
+				try {
+					messagePromptService.sendMessage(PromptTypes.isWechatTransfer, userSessionBean.getMobile());
+				} catch (Exception e) {
+					logger.info("发送邮件失败", e);
+				}
 		}
+		
 		return resultJson;
 	}
 }

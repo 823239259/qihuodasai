@@ -1,4 +1,27 @@
 $(function() {
+	var url = document.referrer;
+	if(url.indexOf("simulateOperate/operate") >= 0 ){
+		if(username == null && password == null){
+			$("#signLogin").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $("#signLogin").outerHeight()/2;
+			var popupWidth = $("#signLogin").outerWidth()/2;    
+			$("#signLogin").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+			$(".signLogin_firm").css("display","none");
+			$(".signLogin_simulation").css("display","block");
+			$("#signLogin .p1 span.signLogin_span").css("color","#ffb319");
+			$("#signLogin .p1 span.on").css("color","#333");
+			tradeWebSocketIsMock = 1;
+		}
+	}
+})
+
+$(function() {
 		// 持仓 委托 挂单 tab 切换
 		$(".quotation_detailed_lis a").click(function() {
 			var index = $(this);
@@ -191,6 +214,7 @@ $(function() {
 				marginLeft: -(popupWidth)
 			});
 		});*/
+		
 		$("#sign_login").click(function() {
 			$("#signLogin").css("display","block");
 			$("#div_Mask").show();
@@ -212,9 +236,10 @@ $(function() {
 			$(".tck01").css("display","none");
 			$("#div_Mask").css("display","none");
 		})
+		
 		$("#signLogin .signLogin_span").click(function(){
 	        var _this = $(this);
-	        $("#signLogin .signLogin_span").removeClass("on").eq(_this.index()).addClass("on");
+	        $("#signLogin .signLogin_span").css("color","#333").eq(_this.index()).css("color","#ffb319");
 	        $("#signLogin .signLogin_mode .signLogin_all").hide().eq(_this.index()).show();
         });
 /* 弹出层结束 */

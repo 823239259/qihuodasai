@@ -67,6 +67,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 		String key =  request.getParameter("key");
 		String value = request.getParameter("value");
 		String urlRemarks = request.getParameter("urlRemarks");
+		String type =  request.getParameter("type");
 		Long time = new Date().getTime()/1000;
 		CrawlerUrl crawlerUrl = new CrawlerUrl();
 		crawlerUrl.setExecRule(execRule);
@@ -80,6 +81,7 @@ public class CrawlerUrlController extends BaseCmsController<CrawlerUrl>{
 		crawlerUrl.setUrlUrl(urlUrl);
 		crawlerUrl.setId(id);
 		crawlerUrl.setDeleted(false);
+		crawlerUrl.setType(type);
 		String[] keysArray = key.split(",");
 		String[] valuesArray = value.split(",");
 		int length = keysArray.length;

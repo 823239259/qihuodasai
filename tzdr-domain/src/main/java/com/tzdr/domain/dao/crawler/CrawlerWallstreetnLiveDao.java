@@ -15,4 +15,12 @@ public interface CrawlerWallstreetnLiveDao extends BaseJpaDao<CrawlerWallstreetn
 
 	@Query(value = "from CrawlerWallstreetnLive where liveWallstreetnId = ?1")
 	public List<CrawlerWallstreetnLive> findByCrawlerId(String id);
+	/**
+	 * 新闻数据分页
+	 * @param startIndex
+	 * @param size
+	 * @return
+	 */
+	@Query(value = "select *  from crawler_wallstreetn_live  where published = 1 LIMIT ?1 , ?2", nativeQuery = true)
+	public List<CrawlerWallstreetnLive> findByCrawlerPage(int startIndex , int size);
 }

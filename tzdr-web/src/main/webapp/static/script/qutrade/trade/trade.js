@@ -23,7 +23,11 @@ var tradeSuccessLoadFlag = false;
  * 合约交易成功查询持仓信息
  */
 function tradeSuccessLoadHoldData(){
-	tradeSuccessLoadFlag = true;
+	//tradeSuccessLoadFlag = true;
+	localCachePositionRecentData = {}; 
+	localCachePostion = {};
+	$("#hold_gdt1").html("");
+	generatePostionTitle();
 	Trade.doHold(username);
 	
 }
@@ -57,6 +61,7 @@ function linearlyLoadData(method) {
  * 保存已下单的数据
  */
 var resultInsertOrderId = {};
+var referCount = 0 ;
 function handleData(evt){
 	var dataString = evt.data;
 	var data = JSON.parse(dataString);
@@ -160,11 +165,16 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam);
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			if(isBuy && locaOrderId == locaOrderId){
+			referCount++;
+			if(referCount == 0){
+				tradeSuccessLoadHoldData();
+			}
+			referCount++;
+			/*if(isBuy && locaOrderId == locaOrderId){
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null;
 				isBuy = false;
-			}
+			}*/
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
@@ -187,11 +197,15 @@ function handleData(evt){
 			}
 		}
 	}else{
-		if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
+		referCount--;
+		if(referCount > 0){
+			tradeSuccessLoadHoldData();
+		}
+		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
 			tradeSuccessLoadFlag = false;
 			localCachePositionRecentData = {};
-		}
+		}*/
 	}
 }
 /**
@@ -1186,7 +1200,7 @@ function addBindsss(cls){
  */
 function loadOperateLogin(){
 	$.ajax({
-		url:basepath+"/user/operateLogin",
+		url:"..../../user/operateLogin",
 		type:"get",
 		success:function(result){
 			if(result){
@@ -1210,12 +1224,13 @@ function loadOperateLogin(){
  * 版本是否获取成功
  */
 var isGetVersion = false;
+var uid = undefined;
 $(function(){
 	/**
 	 * 初始化交易配置 --> trade.config
 	 */
 	initTradeConfig();
-	getVersion();
+	//getVersion();
 	validateIsGetVersion();
 	$(".signLogin_span").bind("click",function(){
 		var $this = $(this);
@@ -1246,7 +1261,7 @@ $(function(){
 			  content: $("#back_passwork").html(),
 			  btn:['没有账号?立即申请','关闭'],
 			  yes:function(){
-				  window.open(basepath+"/outDisk/index");
+				  window.open("../../outDisk/index");
 				  layer.closeAll();
 			  },
 			  btn2: function(){
@@ -1275,6 +1290,7 @@ $(function(){
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
+	
 	$("#firm_btn").click(function(){
 		if(tradeWebSocketIsMock == 0){
 			username = $("#firm_name").val();
@@ -1295,6 +1311,9 @@ $(function(){
 		tradeLogin();
 	});
 	$("#simulation_btn").click(function(){
+		if(tradeWebSocketIsMock == 0){
+			tradeWebSocketIsMock=1
+		}
 		if(tradeWebSocketIsMock == 1){
 			username = $("#simulation_mame").val();
 			if(username == undefined || username.length == 0){
@@ -1340,7 +1359,7 @@ $(function(){
  */
 function getVersion(){
 	$.ajax({
-		url:basepath+"/socket/config/getVersion",
+		url:"../../socket/config/getVersion",
 		type:"get",
 		data:{
 			appVersion:tradeWebCmsVersion
@@ -1441,14 +1460,19 @@ function bindOpertion(){
 			var orderNum = $("#entrust_number").val();
 			var priceType = $("input[type='radio']:checked").val();
 			var tradeDrection = $this.attr("data-tion-buy");
+			var commodityNo = $("#commodeityNo").val();
+			var contractNo = $("#contractNo").val();
+			var localCommodity = getLocalCacheCommodity(commodityNo+contractNo);
+			var dotSize = 2;
+			if(localCommodity != undefined){
+				dotSize = localCommodity.DotSize;
+			}
 			var orderPrice = 0.00;
 			if(priceType == 1){
-				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection);
+				orderPrice = doGetMarketPrice(lastPrice, miniTikeSize, tradeDrection,dotSize);
 			}else{
 				orderPrice = $("#money_number").val();
 			}
-			var commodityNo = $("#commodeityNo").val();
-			var contractNo = $("#contractNo").val();
 			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】,买卖方向:【"+analysisBusinessBuySell(tradeDrection)+"】";
 			layer.confirm(tipContent+"?", {
 			  btn: ['确认','取消'] //按钮
@@ -1775,15 +1799,17 @@ function doGetSellingBasicParam(obj){
 	var localQuote = getLocalCacheQuote(contractCode);
 	var miniTikeSize = 0.00;
 	var lastPrice = 0.00;
+	var dotSize = 2;
 	if(localCommodity != undefined && localQuote != undefined){
 		miniTikeSize = localCommodity.MiniTikeSize;
 		lastPrice = localQuote.LastPrice;
+		dotSize = localCommodity.DotSize;
 	}
 	if(validationInputPrice(lastPrice)){
 		tip("最新价格错误");
 		return false;
 	}
-	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection);
+	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 	console.log(limitPirce);
 	if(validationInputPrice(limitPirce)){
 		tip("平仓价格错误");

@@ -1217,3 +1217,20 @@ function showfilename(fileurl,id){
 	var name=filename.substring(filename.length-8,filename.length);
 	$("#"+id).html(name);
 }
+
+function weChatAttention() {
+	$("#div_Mask").css("display","block");
+	$("#weChatAttention").css("display","block");
+	$.get(basepath+"wechat/getWechatQrcodeTicket",function(data){
+		if(data.success){
+			var newUrl = data.data.url+'?ticket='+data.data.ticket;
+			$('#weChatAttention_code').attr("src",newUrl);
+			$("#weChatAttention .close").click(function(){
+				window.location.href=basepath+"securityInfo/secInfo";
+			});
+			$("#weChatAttention .anniu a").click(function(){
+				window.location.href=basepath+"securityInfo/secInfo";
+			});
+		}
+	},"json"); 
+}

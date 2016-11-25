@@ -157,7 +157,7 @@ function initLoad() {
 		//更新交易连接状态
 		changeConnectionStatus();
 		//不是手动登出，则重连交易服务器
-		if(loginFail == false){
+		if(loginFail == false){ 
 			//交易连接断开重连
 			reconnect();
 		}else{

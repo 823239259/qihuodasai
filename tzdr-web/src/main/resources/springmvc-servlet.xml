@@ -164,6 +164,7 @@
 			<mvc:mapping path="/userhkstock/**"/>
 			<mvc:mapping path="/usertogether/**"/>
 			<mvc:mapping path="/sifactivites/getkxhlPrize"/>
+			<mvc:mapping path="/wechat/*"/>
 			<!-- <mvc:mapping path="/future/**"/> -->
 			<!-- 拦截器顺序：preHandle >> postHandle >> afterCompletion -->
 			<bean class="com.tzdr.web.support.SessionInterceptor"></bean>
