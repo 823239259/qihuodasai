@@ -63,13 +63,21 @@
 				background-color: #cccccc;
 				color:#2b2b2b;
 			}
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+				height: 60px;
+				width: 30%;
+			}
 		</style>
 	</head>
 	<body style="background-color: #2B2B2B"> 
 		<header class="mui-bar mui-bar-nav"> 
 		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
-		    <a class="whiteFont" id="switchAccount">切换账号</a>
+		     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 25px;"></a>
+		   	<a id="muneBox" href="#topPopover"><a class="whiteFont" id="switchMnue"></a></a>
 		</header>
 		<div class="mui-content" style="padding-top: 86px;" >
 				<div id="headerMenu" style="background-color: #2B2B2B;">
@@ -329,13 +337,29 @@
 					</div>
 				</div>
 			</div>
+			<!--<div id="dropMune" >
+					<span id="sanjiao"></span>
+					<ul >
+						<li id="switchAccount">切换账号</li>
+					</ul>
+				</div>-->
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a id="switchAccount">切换账号</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
 			<script>
 				mui.plusReady(function(){
 				loadCss();
 				var Proportion=1;
-//				document.getElementById("holdCC").addEventListener("tap",function(){
-//					document.getElementById("holdCC").href="#item1"
-//				})
     			function loadCss(){
 		    			var Proportion=1;
 						var screen=plus.screen.resolutionHeight;
@@ -473,6 +497,9 @@
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){  
+				$(function(){
+					$("#refresh").addClass("rotateClass");
+				})
 				var Transfer=plus.webview.currentWebview();
 				var CommodityNo=document.getElementById("CommodityNo");
 				var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
@@ -507,6 +534,7 @@
 						add_div.classList.remove("mui-hidden");
 						mui("#popover").popover("toggle");
 				})
+				mui('.mui-scroll-wrapper').scroll();
 				function trim(str){ //删除左右两端的空格
 			　　     return str.replace(/(^\s*)|(\s*$)/g, "");
 			　　 }
@@ -532,6 +560,21 @@
 					}
 				
 				});
+//				var clickNun=0;
+//				document.getElementById("muneBox").addEventListener("tap",function(){
+//					if(clickNun%2==0){
+//						$("#dropMune").css({"display":"block"});
+//					}else{
+//						$("#dropMune").css({"display":"none"});
+//					}
+//					clickNun++;
+//				});
+//				$("#dropMune li").on("tap",function(){
+//					setTimeout(function(){
+//						$("#dropMune").css({"display":"none"});
+//					},100);
+//					
+//				})
 			});
 		</script>
 		<script>

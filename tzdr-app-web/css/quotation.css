@@ -652,13 +652,24 @@ input{
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
 	color:#FFCC33;
 }
-#switchAccount{
-	position: absolute;
+#switchMnue{
+	width: 18px;
 	display: inline-block;
-	right: 10px;
-	height: 43px;
-	line-height: 43px;
+	height: 17px;
+	position: absolute;
+	right: 15px;
+	line-height: 17px;
 	font-size: 14px;
+	margin-top: 13px;
+	background: url(../images/menu.png) no-repeat center center;
+	background-size: 1000% 100%;
+}
+#muneBox{
+	display: inline-block;
+	width: 40px;
+	height: 43px;
+	position: absolute;
+	right: 5px;
 }
 #refresh{
 	color:#FFFFFF;
@@ -881,6 +892,20 @@ input{
 	font-size:12px;
 	line-height: 40px;
 	border-bottom:1px solid #454545 ;
+}
+#dropMune{
+	text-align: center;
+	height: auto;
+	position: absolute;
+	width: 25%;
+	top:46px;
+	right: 0px;;
+	color:#999999;
+	background-color: #2B2B2B;
+	z-index: 999;
+	display: none;
+	padding:0px;
+	margin: 0px;
 }
 #username_list{
 	text-align: center;

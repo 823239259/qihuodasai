@@ -119,6 +119,7 @@ mui.plusReady(function(){
 			updateAccountBalance();
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
 			setLocalCacheQuote(subscribeParam);
+			$("#refresh").removeClass("rotateClass");
         }else if(method == "OnRspQryCommodity"){
         	if(OnRspQryCommodityDateL==1){
         		commoditysData=jsonData.Parameters;
@@ -778,6 +779,9 @@ mui.plusReady(function(){
 			loginOutFlag = true;
 			loginFail = true;
 		};
+	});
+	document.getElementById("refresh").addEventListener("tap",function(){
+		reconnectPage()
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();
