@@ -112,15 +112,6 @@
 								<p id="freshPrices">0.00</p> 
 								<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
 							</div>
-							<div class="BuyDiv">
-								<div id="numberInput">
-									<label>手数:</label>
-									<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
-									<label>（价格：市价）</label>
-								</div>
-								<!--<div class=""><label></label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"><label>（价格：市价）</label></div>
-									<div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>-->
-							</div>
 							<div style="display: none;">
 								<input type="text"  id = "exchangeNo"/> 
 								<input type="text"  id = "commodeityNo"/>
@@ -185,7 +176,7 @@
 							</tr>
 						</table>
 						<table cellpadding="0" cellspacing="0" id="HandicapTable">
-							<tr>
+							<!--<tr>
 								<td>卖价</td>
 								<td id = "pkmj_sell">0</td>
 								<td>卖量</td>
@@ -196,7 +187,7 @@
 								<td id = "pkmj_buy">0</td>
 								<td>买量</td>
 								<td id =  "pkml_buy">0</td>
-							</tr>
+							</tr>-->
 							<tr>
 								<td>最新 </td>
 								<td id = "pklastparice">0</td>
@@ -313,10 +304,18 @@
 					</ul>
 				</div>
 			</div>
-			<div class="buttonDivList">
-				<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
-				<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
+			<div class="BuyDiv">
+				<div id="numberInput">
+					<label>手数:</label>
+					<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
+					<label>（价格：市价）</label>
+				</div>
+				<div class="buttonDivList">
+					<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
+					<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
+				</div>
 			</div>
+			
 			<div id="popover" class="mui-popover" id="inputDiv">
 				<div class="mui-popover-arrow"></div>
 				<div class="mui-content-padded">

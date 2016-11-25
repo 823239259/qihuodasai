@@ -298,8 +298,8 @@ mui.plusReady(function(){
 			color = "#FFFFFF";
 		}
 		
-		$("#pkmj_sell").text(parseFloat(askPrice).toFixed(dotSize));
-		$("#pkmj_sell").css("color",color);
+//		$("#pkmj_sell").text(parseFloat(askPrice).toFixed(dotSize));
+//		$("#pkmj_sell").css("color",color);
 		if(bidPrice1 > preSettlePrice){
 			color = "#ff5500";
 		}else if (bidPrice1 < preSettlePrice){
@@ -307,8 +307,8 @@ mui.plusReady(function(){
 		}else{
 			color = "#FFFFFF";
 		}
-		$("#pkmj_buy").text(parseFloat(bidPrice1).toFixed(dotSize));
-		$("#pkmj_buy").css("color",color);
+//		$("#pkmj_buy").text(parseFloat(bidPrice1).toFixed(dotSize));
+//		$("#pkmj_buy").css("color",color);
 		if(lastPrice > preSettlePrice){
 			color = "#ff5500";
 		}else if (lastPrice < preSettlePrice){
@@ -361,8 +361,8 @@ mui.plusReady(function(){
 		}else{
 			color = "#FFFFFF";
 		}
-		$("#pkml_sell").text(totalAskQty);
-		$("#pkml_sell").css("color",color);
+//		$("#pkml_sell").text(totalAskQty);
+//		$("#pkml_sell").css("color",color);
 		if(totalBidQty > preSettlePrice){
 			color = "#ff5500";
 		}else if (totalBidQty < preSettlePrice){
@@ -370,8 +370,8 @@ mui.plusReady(function(){
 		}else{
 			color = "#FFFFFF";
 		}
-		$("#pkml_buy").text(totalBidQty);
-		$("#pkml_buy").css("color",color);
+//		$("#pkml_buy").text(totalBidQty);
+//		$("#pkml_buy").css("color",color);
 		if(changeValue > 0){
 			color = "#ff5500";
 		}else if (changeValue < 0){
@@ -716,7 +716,7 @@ mui.plusReady(function(){
     		$("#Handicap").removeClass("mui-active");
     		$("#CandlestickChart").removeClass("mui-active");
     		$("#trade").removeClass("mui-active");
-    		$(".buttonDivList").css({"display":"block"})
+    		$(".BuyDiv").css({"display":"block"})
     		time=[];
 		    prices=[];
 		    timeLabel=[]
@@ -756,7 +756,7 @@ mui.plusReady(function(){
     			$("#tradeMenu").addClass("mui-active");
     			$("#trade").addClass("mui-active");
     			$("#Handicap").removeClass("mui-active");
-    			$(".buttonDivList").css({"display":"none"});
+    			$(".BuyDiv").css({"display":"none"});
 			}
     	});
     	
@@ -766,7 +766,7 @@ mui.plusReady(function(){
     		$("#HandicapButton").addClass("mui-active");
     		$("#Handicap").addClass("mui-active");
     		$("#trade").removeClass("mui-active");
-    		$(".buttonDivList").css({"display":"block"})
+    		$(".BuyDiv").css({"display":"block"})
     	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)

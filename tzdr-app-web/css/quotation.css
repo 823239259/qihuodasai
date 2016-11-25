@@ -100,11 +100,7 @@ p{
 #domnRange{
 	color:#e9392a;
 }
-.BuyDiv{
-	clear: all;
-	borer:1px solid red;
-	background-color:#2B2B2B;
-}
+
 .BuyContentLeft{
 	width: 50%;
 	display: inline-block;
@@ -731,10 +727,19 @@ input{
 			box-shadow:none;
 			border-bottom: 1px solid #454545;
 		}
+.BuyDiv{
+	clear: all;
+	width: 100%;
+	background-color:#2B2B2B;
+	position: fixed;
+	bottom: 0px;
+}
 #numberInput{
 	width: 100%;
 	position: relative;
 	clear: both;
+	padding:10px ;
+	font-size: 14px;
 }
 #numberInput input{
 	border: 1px solid #121212;
@@ -742,16 +747,24 @@ input{
 	color:#FFFFFF;
 	text-align: center;
 	vertical-align: middle;
+	height: 50px;
+	line-height: 50px;
+	padding: 0px 85px 0px 45px;
 }
 #numberInput label{
 	color:#999999;
 	border-radius: 85px;
 	position: absolute;
+	top:25px;
+}
+#numberInput label:nth-child(1){
+	left:15px;
+}
+#numberInput label:nth-child(3){
+	right:15px;
 }
 .buttonDivList{
 	width: 100%;
-	position: fixed;
-	bottom: 0px;
 	overflow: hidden;
 }
 #marketBuy,#marketSell{
@@ -807,25 +820,6 @@ input{
 	z-index: 992;
 	vertical-align: middle;
 }
-#numberInput{
-	padding:10px ;
-	font-size: 14px;
-}
-#numberInput input{
-	height: 50px;
-	line-height: 50px;
-	padding: 0px 85px 0px 45px;
-}
-#numberInput label{
-	top:25px;
-}
-#numberInput label:nth-child(1){
-	left:15px;
-}
-#numberInput label:nth-child(3){
-	right:15px;
-}
-	
 #headerMenu{
 	background-color: #2B2B2B;
 	width: 100%;
@@ -1074,6 +1068,7 @@ input{
 #Handicap #table_title {
 	width: 100%;
 	height: 30px;
+	color:#cccccc;
 	/*border-bottom: 1px solid #121212;*/
 }
 #Handicap #table_title thead tr td{
