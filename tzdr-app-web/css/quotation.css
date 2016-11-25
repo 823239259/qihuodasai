@@ -145,28 +145,7 @@ p{
 	background-color:#16a951;
 	margin-left: 5px;
 }
-#marketBuy{
-	position: absolute;
-	left:0px;
-	background-color:#e9392a;
-	height: 40px;
-	line-height: 28px;
-	border: none;
-	color:#FFFFFF;
-	padding:0px;
-		width: 50%;
-}
-#marketSell{
-	position: absolute;
-	right:0px;
-	background-color:#16a951;
-	height: 40px;
-	line-height: 28px;
-	border: none;
-	width: 50%;
-	padding:0px;
-	color:#FFFFFF;
-}
+
 .Assets{
 	width: 100%;
 	height:40px;
@@ -758,9 +737,35 @@ input{
 	border-radius: 85px;
 	position: absolute;
 }
-#buttonDivList{
+.buttonDivList{
 	width: 100%;
-	position: relative;
+	position: fixed;
+	bottom: 0px;
+	overflow: hidden;
+}
+#marketBuy,#marketSell{
+	height:50px ;
+	line-height: 50px;
+	font-size: 16px;;
+}
+#marketBuy{
+	float: left;
+	background-color:#e9392a;
+	height: 50px;
+	line-height: 50px;
+	border: none;
+	color:#FFFFFF;
+	padding:0px;
+		width: 50%;
+}
+#marketSell{
+	background-color:#16a951;
+	height: 50px;
+	line-height: 50px;
+	border: none;
+	width: 50%;
+	padding:0px;
+	color:#FFFFFF;
 }
 #closeTrade{
 	width: 17px;
@@ -809,11 +814,7 @@ input{
 #numberInput label:nth-child(3){
 	right:15px;
 }
-#marketBuy,#marketSell{
-	height:50px ;
-	line-height: 50px;
-	font-size: 16px;;
-}	
+	
 #headerMenu{
 	background-color: #2B2B2B;
 	width: 100%;

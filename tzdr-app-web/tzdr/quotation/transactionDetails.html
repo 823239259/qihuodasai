@@ -76,16 +76,16 @@
 					<table cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
-								<td id="tradeMenu" class="mui-active">交易中心</td>
+								<td id="tradeMenu" >交易中心</td>
 								<td id="HandicapButton">盘口</td>
-								<td  id="timeChartMenu" value="0" >分时</td>
+								<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
 								<td id="selectButon">K线</td>
 							</tr>
 						</thead>
 					</table>
 				</div>
 				<div id="headerContent">
-					<div id="chartAllDiv" class="bottomDivList">
+					<div id="chartAllDiv" class="bottomDivList mui-active">
 						<div class="chartDivContent mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;"></div>
 							<div id="volumeChart" style="width:100%;"></div>
@@ -94,7 +94,7 @@
 							<div   id="CandlestickChartDiv" style="width:100%;"></div>
 							<div id="CandlestickVolumeChart" style="width:100%;"></div>
 						</div>
-						<div class="buttomFix" style="position: fixed;bottom: 0px;">
+						<div class="buttomFix" style="position: fixed;bottom: 0px;height:211px ;">
 							<div class="buttomFixLeft mui-col-xs-6">
 								<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
 								<p>买<span id="sellPrices" class="PricesLeft">-</span ><span id="sellPricesNumber" class="PricesRight">-</span></p>
@@ -112,10 +112,6 @@
 								</div>
 								<!--<div class=""><label></label><input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number"><label>（价格：市价）</label></div>
 									<div class="BuyContentLeft"><label>价格:</label><input placeholder="市价" disabled="disabled"></div>-->
-							</div>
-							<div class="buttonDivList">
-								<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
-								<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 							</div>
 							<div style="display: none;">
 								<input type="text"  id = "exchangeNo"/> 
@@ -209,7 +205,7 @@
 							</tr>
 						</table>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList mui-active">
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
 					    <div class="Assets" style="background-color: #2B2B2B;">
 					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -292,6 +288,10 @@
 						<li value="1440">日K</li>
 					</ul>
 				</div>
+			</div>
+			<div class="buttonDivList">
+				<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
+				<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 			</div>
 			<div id="popover" class="mui-popover" id="inputDiv">
 				<div class="mui-popover-arrow"></div>

@@ -424,6 +424,7 @@ mui.plusReady(function(){
     		$("#Handicap").removeClass("mui-active");
     		$("#CandlestickChart").removeClass("mui-active");
     		$("#trade").removeClass("mui-active");
+    		$(".buttonDivList").css({"display":"block"})
     		time=[];
 		    prices=[];
 		    timeLabel=[]
@@ -463,14 +464,17 @@ mui.plusReady(function(){
     			$("#tradeMenu").addClass("mui-active");
     			$("#trade").addClass("mui-active");
     			$("#Handicap").removeClass("mui-active");
+    			$(".buttonDivList").css({"display":"none"});
 			}
     	});
+    	
     	document.getElementById("HandicapButton").addEventListener("tap",function(){
     		$("#headerMenu table td").removeClass("mui-active");
     		$("#chartAllDiv").removeClass("mui-active");
     		$("#HandicapButton").addClass("mui-active");
     		$("#Handicap").addClass("mui-active");
     		$("#trade").removeClass("mui-active");
+    		$(".buttonDivList").css({"display":"block"})
     	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)
