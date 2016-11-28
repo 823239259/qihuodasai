@@ -687,7 +687,15 @@ mui.plusReady(function(){
 				"display":"none"
 			})
 		});
+	var selectButonNum=0;
 		$("#selectButon").click(function(){
+			if(selectButonNum==0){
+				$("#CandlestickChart").addClass("mui-active");
+	    		$("#trade").removeClass("mui-active")
+	    		$("#TimeChart1").removeClass("mui-active")
+	    		$("#chartAllDiv").addClass("mui-active");
+				drawChart(1);
+			}
 			$("#list_type ").css({
 				"display":"block"
 			});
