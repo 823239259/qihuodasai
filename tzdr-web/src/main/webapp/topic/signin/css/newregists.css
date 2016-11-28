@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+body,p,a,span,font,input {margin:0; padding:0; border:0; font-family:"微软雅黑";}
+li,ul { list-style:none;margin:0; padding:0; border:0;}
+/* 推广注册 */
+.ks_header {height: 60px;line-height: 60px; background: #333; text-align: right; color: #999; font-size: 14px; }
+.ks_header .ks_content {width: 1000px; margin: 0 auto; height: 60px;}
+.ks_header .logo {float: left; margin-top: 10px;}
+.ks_header .denglu {float: right;}
+.ks_header .denglu a {color: #fc3; color: #fc3; text-decoration: none;}
+.ks_header .denglu a:hover {text-decoration:underline}
+.ks_zuce {width: 100%; position: relative; height: 360px; background: url("../images/ks_banner2.png") center center;}
+.ks_zuce .ks_zuce_content {width: 1000px; margin: 0 auto; height: 360px; }
+.ks_zuce .rg_ctn {float: right;width: 260px; height: 340px; margin-top: 10px; background: #333; border-radius: 4px;}
+.ks_zuce .rg_ctn .tt {background: #424242; height: 20px; border-radius: 4px;}
+.ks_zuce .rg_ctn .form {padding-top: 20px; height: 300px; margin-top: -10px; background-color: #333;}
+.ks_zuce .rg_list li {list-style-type:none; text-align: center;height: 54px;}
+.ks_zuce .rg_list li  input {width: 202px; padding: 9px;background-color: #fff8bb;border-radius: 4px;color: #333;font-size: 12px;outline: none;}
+.ks_zuce .rg_l_codebtn {position: absolute; width: 90px; text-align: center; font-size: 12px; background: #fc3; height: 34px; line-height: 34px; border-radius: 4px; right: 29px;color: #333;text-decoration: none;}
+::-webkit-input-placeholder { /* WebKit browsers */ color: #333;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #333;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #333;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */ color: #333;}
+.ks_footer {height: 60px; line-height: 60px; color: #666; background: #333; font-size: 12px;}
+.ks_footer p{width: 1000px; margin: 0 auto;}
+.ks_footer img {float: right; margin-top: 12px; margin-right: 15px;}
+/* 成功 */
+/*  ks_center*/
+.ks_center {width: 1000px; margin: 0 auto;}
+.ks_center .ks_ld {margin-top: 48px;}
+.ks_center .ks_all .ks_fl {float: left; height: 613px; width: 241px; text-align: right; padding-right: 20px;}
+.ks_center .ks_all .ks_fc {float: left; height: 613px; width: 478px;}
+.ks_center .ks_all .ks_fr {float: left; height: 613px; width: 241px; text-align: left; padding-left: 20px;}
+.ks_center .ks_all {font-size: 16px; color: #999; height: 613px; }
+.ks_center .ks_all span {font-size: 24px; color: #000; padding-bottom: 10px; display: inline-block;}
+.ks_center .ks_all p {line-height: 30px;}
+.ks_center .ks_sshq {font-size: 16px; color: #999; text-align: center; line-height: 30px;}
+.ks_center .ks_sshq span{font-size: 24px; color: #000; padding-bottom: 10px; display: inline-block;}
+.ks_center .ks_lxfs {height: 220px; padding-top: 34px; border-top: 1px solid #5ca1e6; margin-top: 100px;}
+.ks_center .ks_lxfs ul {float: left; margin-left: 130px; text-align: center;}
+.ks_center .ks_lxfs .call {text-align: left; color: #999;}
+.ks_center .ks_lxfs .call li{margin-bottom: 4px;}
+.ks_center .ks_lxfs ul img {height: 146px; width: 146px;}
+.ks_center .ks_lxfs .xz {font-size: 16px; color: #333;}
+.footer {font-size: 12px; color: #333; height: 60px; line-height: 60px; text-align: center; background: #ffdd6e;}
+.rg_l_error { display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ; position: relative;left: 0px;top: 0;text-align: left;margin-left: 30px;}
+.rg_l_promt {display: block;width: 220px;height: 20px;line-height: 20px;background: none; font-size: 12px;color: #fff;border: none;line-height: 20px;padding: 0 ;position: relative;left: 0px;top: 0;text-align: left;margin-left: 30px;}
+.rg_agree {margin-left: 23px; font-size: 12px; color: #fff8bb; height: 16px; line-height: 16px;}
+.rg_agree input {position: relative; top: 3px;}
+.rg_btn a {height: 34px; line-height: 34px; margin-left: 20px; margin-top: 20px; width: 220px;}
