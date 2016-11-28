@@ -89,11 +89,7 @@ mui.plusReady(function(){
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
 				handleVolumeChartData(historyParam);
-//				processingData(historyParam);
-//	            processingCandlestickVolumeData(historyParam);
 			}else{
-//				handleTime(historyParam);
-// 				handleVolumeChartData(historyParam);
 				processingData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}
@@ -434,7 +430,7 @@ mui.plusReady(function(){
 		$("#buy_0").text(bidPrice1);
 		$("#buy_1").text(bidQty1);
 		$("#buy_0").css("color",color);
-		$("#buy_1").css("color",color);
+//		$("#buy_1").css("color",color);
 		if(bidPrice2 > preSettlePrice){
 			color = "#ff5500";
 		}else if(bidPrice2 < preSettlePrice){
@@ -445,7 +441,7 @@ mui.plusReady(function(){
 		$("#buy_2").text(bidPrice2);
 		$("#buy_3").text(bidQty2);
 		$("#buy_2").css("color",color);
-		$("#buy_3").css("color",color);
+//		$("#buy_3").css("color",color);
 		if(bidPrice3 > preSettlePrice){
 			color = "#ff5500";
 		}else if(bidPrice3 < preSettlePrice){
@@ -456,7 +452,7 @@ mui.plusReady(function(){
 		$("#buy_4").text(bidPrice3);
 		$("#buy_5").text(bidQty3);
 		$("#buy_4").css("color",color);
-		$("#buy_5").css("color",color);
+//		$("#buy_5").css("color",color);
 		if(bidPrice4 > preSettlePrice){
 			color = "#ff5500";
 		}else if(bidPrice4 < preSettlePrice){
@@ -467,7 +463,7 @@ mui.plusReady(function(){
 		$("#buy_6").text(bidPrice4);
 		$("#buy_7").text(bidQty4);
 		$("#buy_6").css("color",color);
-		$("#buy_7").css("color",color);
+//		$("#buy_7").css("color",color);
 		if(bidPrice5 > preSettlePrice){
 			color = "#ff5500";
 		}else if(bidPrice5 < preSettlePrice){
@@ -478,7 +474,7 @@ mui.plusReady(function(){
 		$("#buy_8").text(bidPrice5);
 		$("#buy_9").text(bidQty5);
 		$("#buy_8").css("color",color);
-		$("#buy_9").css("color",color);
+//		$("#buy_9").css("color",color);
 		if(askPrice1 > preSettlePrice){
 			color = "#ff5500";
 		}else if(askPrice1 < preSettlePrice){
@@ -489,7 +485,7 @@ mui.plusReady(function(){
 		$("#sell_0").text(askPrice1);
 		$("#sell_1").text(askQty1);
 		$("#sell_0").css("color",color);
-		$("#sell_1").css("color",color);
+//		$("#sell_1").css("color",color);
 		if(askPrice2 > preSettlePrice){
 			color = "#ff5500";
 		}else if(askPrice2 < preSettlePrice){
@@ -500,7 +496,7 @@ mui.plusReady(function(){
 		$("#sell_2").text(askPrice2);
 		$("#sell_3").text(askQty2);
 		$("#sell_2").css("color",color);
-		$("#sell_3").css("color",color);
+//		$("#sell_3").css("color",color);
 		if(askPrice3 > preSettlePrice){
 			color = "#ff5500";
 		}else if(askPrice3 < preSettlePrice){
@@ -511,7 +507,7 @@ mui.plusReady(function(){
 		$("#sell_4").text(askPrice3);
 		$("#sell_5").text(askQty3);
 		$("#sell_4").css("color",color);
-		$("#sell_5").css("color",color);
+//		$("#sell_5").css("color",color);
 		if(askPrice4 > preSettlePrice){
 			color = "#ff5500";
 		}else if(askPrice4 < preSettlePrice){
@@ -522,7 +518,7 @@ mui.plusReady(function(){
 		$("#sell_6").text(askPrice4);
 		$("#sell_7").text(askQty4);
 		$("#sell_6").css("color",color);
-		$("#sell_7").css("color",color);
+//		$("#sell_7").css("color",color);
 		if(askPrice5 > preSettlePrice){
 			color = "#ff5500";
 		}else if(askPrice5 < preSettlePrice){
@@ -533,7 +529,7 @@ mui.plusReady(function(){
 		$("#sell_8").text(askPrice5);
 		$("#sell_9").text(askQty5);
 		$("#sell_8").css("color",color);
-		$("#sell_9").css("color",color);
+//		$("#sell_9").css("color",color);
 	}
     var changeValue=document.getElementById("changeValue");
     var rose=document.getElementById("rose");
