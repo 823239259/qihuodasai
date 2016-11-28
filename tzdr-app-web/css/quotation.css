@@ -1070,6 +1070,7 @@ input{
 }
 #table_Content{
 	width: 100%;
+	color:#CCCCCC;
 	border:1px solid #121212;
 }
 #table_Content tr{
@@ -1079,23 +1080,24 @@ input{
 	font-size: 14px;;
 }
 #table_Content tr td:nth-child(1),#table_Content tr td:nth-child(4){
-	width: 14% !important;
-	color:#cccccc;
+	width: 16% !important;
 	padding-left: 2%;
 }
 #table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5){
 	width: 21%;
 }
 #table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6){
-	width: 15%;
+	width: 13%;
 	color:#cccccc;
 }
 #table_Content tr td:nth-child(3){
 	border-right: 1px solid #121212;
+	
 }
 #HandicapTable{
 	width: 100%;
 	margin-top: 20px;
+	color:#cccccc;
 }
 #HandicapTable tr{
 	width: 100%;
@@ -1106,12 +1108,11 @@ input{
 	line-height: 30px;
 }
 #HandicapTable tr td:nth-child(1),#HandicapTable tr td:nth-child(3){
-	width: 14% !important;
-	color:#cccccc;
+	width: 16% !important;
 	padding-left: 2%;
 }
 #HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(4){
-	width: 36%;
+	width: 34%;
 }
 #HandicapTable tr td:nth-child(2){
 	border-right: 1px solid #121212;
