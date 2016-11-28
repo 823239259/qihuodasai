@@ -474,9 +474,9 @@ function setHandicap(param){
 	//结算价
 	var settlePrice = param.SettlePrice;
 	//卖量
-	var totalAskQty = param.TotalAskQty;
+	var totalAskQty = param.AskQty1;
 	//买量
-	var totalBidQty = param.TotalBidQty;
+	var totalBidQty = param.BidQty1;
 	//涨幅
 	var changeRate = param.ChangeRate;
 	//涨跌值
@@ -560,7 +560,7 @@ function setHandicap(param){
 		color = "#000000";
 	}
 	$("#pkml_sell").text(totalAskQty);
-	$("#pkml_sell").css("color",color);
+	$("#pkml_sell").css("color","#000000");
 	if(totalBidQty > preSettlePrice){
 		color = "#ff5500";
 	}else if (totalBidQty < preSettlePrice){
@@ -569,7 +569,7 @@ function setHandicap(param){
 		color = "#000000";
 	}
 	$("#pkml_buy").text(totalBidQty);
-	$("#pkml_buy").css("color",color);
+	$("#pkml_buy").css("color","#000000");
 	if(changeValue > 0){
 		color = "#ff5500";
 	}else if (changeValue < 0){
