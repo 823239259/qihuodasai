@@ -175,11 +175,16 @@
 		
 		//初始化导航栏
 			tzdr.init.initHearListener();
-			mui.plusReady(function(){ 
+			mui.plusReady(function(){
 				var width=plus.screen.resolutionWidth;
-				if(!mui.cacheUser.isLogin()){
-					alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-				}
+				setTimeout(function(){ 
+					if(localStorage.getItem("tipLogin") == null){
+						if(!mui.cacheUser.isLogin()){
+							localStorage.setItem("tipLogin","1");
+							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+						}
+					}
+				},30000);
 				function openLogin(){ 
 					mui.openWindow("../login/login.html","login");
 				}
