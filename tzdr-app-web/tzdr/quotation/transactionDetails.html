@@ -281,7 +281,7 @@
 					            <ul  id="Entrust" class="listStyle" style="height: 165px;" >
 					                <li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
 					            </ul>
-					        </div>
+					        </div> 
 					        <div id="item4" class="mui-control-content" >
 					            <ul  id="Deal" class="listStyle" style="height: 165px;">
 					                <li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
@@ -522,17 +522,18 @@
 					$("#marketSell ").text("模拟卖出");
 					$("#switchSell").text("模拟卖出");
 				}
-					var col1 = document.getElementById("col1");
+				var network = false;
+				/*	var col1 = document.getElementById("col1");
 					var col2 = document.getElementById("col2");
 					var network = false;
 					var add_div = document.getElementById("add_div");
-				document.getElementById("fullWithdrawal").addEventListener("tap",function(){
+				document.getElementById("changeSingle").addEventListener("tap",function(){
 						//清空数据
 						col1.value = "";
 						col2.value = "";
 						add_div.classList.remove("mui-hidden");
 						mui("#popover").popover("toggle");
-				})
+				})*/
 				mui('.mui-scroll-wrapper').scroll();
 				function trim(str){ //删除左右两端的空格
 			　　     return str.replace(/(^\s*)|(\s*$)/g, "");
@@ -540,7 +541,7 @@
 				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
 				})
-				document.getElementById("add").addEventListener('tap', function() {
+				/*document.getElementById("add").addEventListener('tap', function() {
 					var check = true;
 					mui(".mui-input-group input").each(function () {
 						if(!this.value||trim(this.value)==""){
@@ -548,7 +549,7 @@
 							mui.alert(label.innerText+"不允许为空");
 							check = false;
 							return false;
-						}
+						} 
 					});
 					if(check){
 						add_div.classList.add("mui-hidden");
@@ -558,7 +559,7 @@
 						//刷新界面
 					}
 				
-				});
+				});*/
 //				var clickNun=0;
 //				document.getElementById("muneBox").addEventListener("tap",function(){
 //					if(clickNun%2==0){
