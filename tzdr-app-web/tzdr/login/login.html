@@ -85,7 +85,11 @@
 			document.getElementById("operateLogin").addEventListener("tap",function(){
 				userLogin();
 			});
-		});
+			document.getElementById("back").addEventListener("tap",function(){
+				plus.nativeUI.closeWaiting();
+				mui.app_back("quotationMain",true);
+			});
+	}); 
 		function clearinfo(){
 			document.getElementById("account").value="";
 			document.getElementById("password").value="";

@@ -168,7 +168,6 @@
 	<script src="../../js/util.js"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript">
-		
 				$(function(){
 					$("#refresh").addClass("rotateClass");
 				})
@@ -178,16 +177,13 @@
 			mui.plusReady(function(){
 				var width=plus.screen.resolutionWidth;
 				setTimeout(function(){ 
-					if(localStorage.getItem("tipLogin") == null){
-						if(!mui.cacheUser.isLogin()){
-							localStorage.setItem("tipLogin","1");
-							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-						}
+					if(!mui.cacheUser.isLogin()){
+						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
 					}
 				},30000);
 				function openLogin(){ 
 					mui.openWindow("../login/login.html","login");
-				}
+				} 
 				function openHome(){
 					mui.openWindow("../../home.html","home");
 				}
