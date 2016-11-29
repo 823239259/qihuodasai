@@ -198,4 +198,4 @@
 #handicapDetails .hkDetails ul li.fr {float :right;}
 #handicapDetails .smain > div {padding: 0;}
 #handicapDetails .smain {padding: 0; margin-top: 20px;}
-
+#handicap:hover {cursor: pointer; color: #ffb319;}
