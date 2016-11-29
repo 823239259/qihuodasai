@@ -1786,8 +1786,10 @@ function sumListfloatingProfit(){
 	$.each(positionDom, function(i,item) {
 		var $this = $(this);
 		var $floatP =$this.find("span[class = 'position8']");
-	    var $accountNo = $this.find("span[class = 'position10']");
-	    var currencyRate = loadCachCurrecyRate[$accountNo.text()];
+	    var $contractCode = $this.find("span[class = 'position0']");
+	    var localCommodity = getMarketCommdity($contractCode.text());
+	    var currencyNo = localCommodity.CurrencyNo;
+	    var currencyRate = localCacheCurrencyAndRate[currencyNo];
 		price = price + Number($floatP.text() * currencyRate);
 	});
 	if(isNaN(price)){ 
@@ -1806,9 +1808,9 @@ function updateHoldProfit(){
 			var floating = $(".funds-index"+i+" li[class = 'detail_floatingProfit']").text();
 			var currencyRate = $(".funds-index"+i+" li[class = 'detail_currencyRate']").text();
 			var total = floating*currencyRate;
-			/*if(isNaN(total)){
+			if(isNaN(total)){ 
 				total = 0;
-			}*/
+			}
 			price = price + total;
 			if(price < 0){
 				floatingProfit.css("color","#0bffa4");
@@ -1828,7 +1830,7 @@ function updateAccountBalance(){
 	if(isLogin){ 
 		var floatingProfit = $("#floatingProfit").val();
 		var todayBalance = $("#todayBalance");
-		var todayCanUse = $("#todayCanUse");
+		var todayCanUse = $("#todayCanUse"); 
 		todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
 		todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
 	}
