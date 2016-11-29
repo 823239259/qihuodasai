@@ -29,6 +29,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .fl_navtitle h3.on {color: #fc3; border-bottom: 1px solid #fc3;}
 #window_detail_tab table tr td {border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
 .window_detail_share span:hover {color: #fc3; cursor: pointer;}
+#window_detail_title td {border-top: 1px solid #e6e6e6;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -94,7 +95,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 						</tr>
 					</tbody>
 				</table>
-				<p class="window_detail_share" style="font-size: 14px; padding: 20px 0;">分享到：<span>微信朋友圈</span><span>新浪微博</span><span>QQ好友</span></p>
+				<p class="window_detail_share" style="font-size: 14px; padding: 20px 0;">分享到：<span><img alt="" src="${ctx}/static/images/detail_weixin.jpg">微信</span><span><img alt="" src="${ctx}/static/images/detail_weibo.jpg">新浪微博</span><span><img alt="" src="${ctx}/static/images/detail_qq.png">QQ好友</span></p>
 			</div>	
 		</div>
 	</div>
