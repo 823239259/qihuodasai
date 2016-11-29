@@ -2,6 +2,9 @@
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
 		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever,daxtranMinActualLever) {
+	$(".fl_navtitle h3").removeClass("on").eq(0).addClass("on");
+	$("#window_detail_tab .window_detail_lis").hide().eq(0).show();
+	
 	$("#window_detail_endInfoFtse").find("p").html("");
 	var i = 0;
 	$("#window_detail_endInfoFtse").find("p").each(function(){
@@ -24,6 +27,10 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(endAmount))+'元');
 		}
 	});
+	var window_detail_details_fee ="<p>1000.00元=800.00元+300.00元+100.00元 - 200.00元</p>" +
+    "<p>（结算金额=操盘保证金+追加保证金+交易盈亏-交易手续费）</p>" +
+    "<p>注意：交易手续费=合约手续费×手数</p>";
+	$("#window_detail_details_fee").html(window_detail_details_fee);
 	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
     $(".sif_money").css({
         top:"50%",
@@ -32,8 +39,8 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
     })
 	$("#window_detail_endInfoFtse_trade").html('');
 	if(businessType == 8){
-		var tradeDev = '<ul>';
-		tradeDev+= '<li style="width:186px;">';
+		var tradeDev = '<p style="text-align: center; font-size: 20px; padding-top: 20px;">交易手数</p>';
+		tradeDev+= '<ul><li style="width:186px;">';
 		tradeDev+= '<h3>A50交易手数</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+tranActualLever+'手</p>';
 		tradeDev+= '</li>';
@@ -106,6 +113,24 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 
 	    })
 	}
+	var window_detail_title ="";
+    window_detail_title = '<tr><td>'+"1"+'</td>' +
+    '<td>'+"中国香港富时A50"+'</td>' +
+    '<td>'+"201314"+'</td>' +
+    '<td>'+"4800.00"+'</td>' +
+    '<td>'+"14800.00"+'</td>' +
+    '<td>'+"买"+'</td>' +
+    '<td>'+"14800.00"+'</td>' +
+    '<td>'+"市价"+'</td>' +
+    '<td>'+"2016-11-21"+'</td><tr>';
+    
+	$("#window_detail_title").after(window_detail_title);
+	
+	$(".fl_navtitle h3").click(function() {
+		var _this = $(this);
+		$(".fl_navtitle h3").removeClass("on").eq(_this.index()).addClass("on");
+		$("#window_detail_tab .window_detail_lis").hide().eq(_this.index()).show();
+	});
 };
 
 //交易帐号明细窗口
