@@ -1800,7 +1800,7 @@ function sumListfloatingProfit(){
 /**
  * 更新持仓总盈亏
  */
-function updateHoldProfit(){
+function updateHoldProfit(){ 
 	var price = 0.00;
 	for (var i = 0; i < fundsDetailsIndex; i++) {
 		if($(".funds-index"+i).html() != undefined){
