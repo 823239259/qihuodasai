@@ -41,6 +41,18 @@ public class CrawlerController {
 		return result;
 	}
 	/**
+	 * 获取实时新闻数据
+	 * @param crawlerWallstreetnLive
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getCrawlerByChannel",method = RequestMethod.GET)
+	public JsonResult getCrawlerByChannel(CrawlerWallstreetnLive crawlerWallstreetnLive,HttpServletRequest request,@RequestParam("channelset")String channelset){
+		JsonResult result = new JsonResult(true);
+		result.appendData("data", crawlerWallstreetnLiveService.getCrawler(new Page(request),channelset));
+		return result;
+	}
+	/**
 	 * 获取日历
 	 * @return
 	 */
@@ -51,6 +63,21 @@ public class CrawlerController {
 		result.setSuccess(true);
 		result.appendData("data",crawlerCalendarService.doGetCrwlerCalendar(new Page(request)));
 		return result;
+	}
+	/**
+	 * 获取日历数据
+	 * @param request
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getCrawlerCalendarByTime",method = RequestMethod.GET)
+	public JsonResult getCrawlerCalendarByTime(HttpServletRequest request,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime){
+		JsonResult resultJson = new JsonResult();
+		resultJson.setSuccess(true);
+		resultJson.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime(new Page(request), startTime, endTime));
+		return resultJson;
 	}
 	/**
 	 * 实时数据内容
