@@ -1357,7 +1357,7 @@ function bindOpertion(){
 				orderPrice = doGetMarketPrice(lastPrice,miniTikeSize,tradeDrection,dotSize);
 			}
 			buyOrderPrice = orderPrice;
-			var content = "确定提交订单："+commodityNo+contractNo+",价格("+orderPrice+"),手数("+orderNum+")?";
+			var content = "确定提交订单："+commodityNo+contractNo+",价格("+orderPrice+"),手数("+orderNum+"),方向("+analysisBusinessDirection(tradeDrection)+")?";
 			alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$this);
 		}else{
 			tip("未登录,请先登录");
@@ -1467,12 +1467,12 @@ function bindOpertion(){
 			var drection = $this.attr("data-tion-buy");
 			var localCommodity = getMarketCommdity(commodityNo+contractNo);
 			var dotSize = 2;
-			if(localCommodity != undefined){
+			if(localCommodity != undefined){ 
 				dotSize = localCommodity.DotSize;
 			}
 			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 			buyOrderPrice = limitPrice;
-			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+")";
+			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+"),方向("+analysisBusinessDirection(drection)+"";
 			var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),marketBuy,null,$this);
 		}else{
 			tip("未登录,请先登录");
