@@ -1,0 +1,35 @@
+@charset "utf-8";
+* {margin: 0; padding: 0; font-family: "微软雅黑";}
+ul li {list-style-type: none;}
+a {text-decoration: none;}
+.mn_extension {background: #f2eac2;}
+.mn_extension .mn_top {background: #333;}
+.mn_extension .mn_top p {width: 1000px; margin: 0 auto; height: 60px; line-height: 60px;}
+.mn_extension .mn_top p span {float: right; font-size: 14px; color: #fc3;}
+.mn_extension .mn_top .title{background: url("../images/mn_title.png") no-repeat center; height: 360px;}
+.mn_content {width: 1000px; margin: 0 auto;}
+.mn_content .mn_rule {margin-top: 40px; background: #fff6e5; padding: 20px; text-align: center;}
+.mn_content .mn_img {margin-bottom: 15px; background: url("../images/mn_lis_1.png") no-repeat; width: 960px; height: 30px; line-height: 30px; font-size: 20px; color: #fff;}
+.mn_content .p1 {font-size: 16px; color: #333; line-height: 28px;}
+.mn_content .mn_time {padding: 10px 20px; background: #fff6e5; margin-top: 20px;}
+.mn_content .mn_img2 {text-align: center; height: 50px; line-height: 50px; position: relative;}
+.mn_content .mn_img2 .mn_img_fl {position: absolute; left: 0; float: left; background: url("../images/mn_lis_2.png") no-repeat; width: 180px; text-align: left;}
+.mn_content .mn_img2 .mn_img_fl .span1 {display: inline-block; text-align: center; font-size: 24px; color: #fff6e5; width: 50px;}
+.mn_content .mn_img2 .mn_img_fl .span2 {width: 130px; text-align: center; display: inline-block; font-size: 20px; color: #e56045; float: right;}
+.mn_content .mn_reward {padding: 10px 20px 20px 20px; background: #fff6e5; margin-top: 20px; text-align: center;}
+.mn_content .mn_reward .span3 {color: #e56045;}
+.mn_content .mn_finerules {padding: 10px 20px 20px 20px; background: #fff6e5; margin-top: 20px;}
+.mn_content .mn_mode {padding: 10px 20px; background: #fff6e5; margin-top: 20px; text-align: center; display: inline-block;}
+.mn_content .mn_mode .mode_fl {float: left; text-align: left;}
+.mn_content .mn_mode .mode_fl .p1 {color: #000;  line-height: 42px;}
+.mn_content .mn_mode .mode_fl .span4 {font-size: 16px; color: #fff; background: #e56045; padding: 0 12px; border-radius: 4px;}
+.mn_content .mn_mode .mode_fr {float: right; line-height: 86px; color: #e53917;}
+.mn_content .mn_mode .mode_fr .span4 {display: inline-block; width: 86px; height: 86px; background: url("../images/mn_btn2_on.png") no-repeat; float: right; margin-left: 10px;}
+.mn_content .mn_mode .mode_fr .span4:hover {background: url("../images/mn_btn2.png"); cursor: pointer;}
+.mn_content .mn_operate {padding: 10px 20px; background: #fff6e5; margin-top: 20px; text-align: center; display: inline-block; margin-bottom: 40px;}
+.mn_content .mn_operate .operate_fr {float: right; margin-top: 50px; line-height: 90px; color: #e53917;}
+.mn_content .mn_operate .operate_fr a {margin-left: 10px; width: 90px; height: 90px; display: inline-block; background: url("../images/mn_btn.png") no-repeat; color: #fff; font-size: 20px; float: right;}
+.mn_content .mn_operate .operate_fr a:hover {background: url("../images/mn_btn_on.png");}
+.mn_content .mn_operate .operate_fr a span {line-height: 25px; display: inline-block; margin-top: 17px;}
+.mn_content .mn_operate .operate_fl {float: left; margin-left: 130px;  margin-top: 20px; color: #333; font-size: 14px;}
+.mn_footer {color: #ffd24c; font-size: 14px; height: 80px; line-height: 80px; text-align: center; background: #e56045; border-top: 10px solid #ffd24c;}

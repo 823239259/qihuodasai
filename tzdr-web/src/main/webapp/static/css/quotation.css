@@ -1,12 +1,12 @@
 .quotation_title {height: 60px; line-height: 60px; background: #333; border-bottom: 1px solid #1a1a1a;}
-.quotation_title img {margin-top: 10px; margin-left: 10px; float: left;}
+.quotation_title img {margin-top: 10px; margin-left: 10px;}
 .quotation_title .quotation_anniu {float: right; position: relative;}
 .quotation_title .quotation_anniu input {margin-right: 10px; outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px; width: 130px; background: #1a1a1a; color: #666;}
-.quotation_title .quotation_anniu button a{border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; display: block; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
-.quotation_title .quotation_anniu button a:hover {background: #ff9f19; border: 1px solid #ff9f19;}
-.quotation_title .quotation_anniu button {background: #333; margin-right: 10px; }
+.quotation_title .quotation_anniu button a{text-decoration: none; color: #ffb319; height: 28px; line-height: 28px; line-height: 28px\9;}
+.quotation_title .quotation_anniu button a:hover {text-decoration: underline;}
+.quotation_title .quotation_anniu button {background: #333; margin-right: 10px; color: #ccc;}
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
-/* 登录更多账号  */
+/* 登录更多账号  */ 
 #more_account {position: absolute; width:130px; background: #ffffff; z-index: 9; top: 43px; border-radius: 4px;}
 #more_account p {height: 26px; line-height: 26px; border-radius: 4px; padding-left: 11px;}
 #more_account p:hover {background: #ccc; cursor: pointer;}
@@ -127,7 +127,13 @@
 .quotation_detailed .quotation_detailed_title .caozuo li {margin: 0 5px;}
 .quotation_detailed .quotation_detailed_title .caozuo a{font-size: 14px; text-decoration: none; height: 28px; line-height: 28px; background: #1a1a1a; color: #ccc; display: block; border: 1px solid #1a1a1a; border-radius: 4px; text-align: center;}
 .quotation_detailed .quotation_detailed_title .caozuo a:hover {background: #000;}
-#show_user_info {color: #ffb319;}
+#show_user_info {position:relative; color: #ccc;}
+#show_user_info .show_user_ul {float: right; position: absolute; top: 50px; right: 15px; width: 100px; z-index: 9;}
+#show_user_info .show_user_ul li {padding: 0;height: 28px; line-height: 28px;}
+#show_user_info .show_user_ul li a {color: #666; width: 100px; display: inline-block; background: #1a1a1a; height: 28px; line-height: 28px; text-align: center;}
+#show_user_info .show_user_ul li a:hover {cursor: pointer; color: #ffb319; text-decoration: none;}
+#show_user_info .quotation_xl:hover {cursor: pointer;}
+#top_username {color: #ffb319;}
 #show_user_info button {margin-left: 10px; border: 1px solid #ffb319; border-radius: 4px; text-decoration: none; background: #ffb319; color: #333; height: 28px; line-height: 28px; line-height: 28px\9; width: 60px; text-align: center;}
 #show_user_info button:hover{background: #ff9f19; border: 1px solid #ff9f19; cursor: pointer;}
 #qiehuan {font-size: 14px; color: #999; position: absolute; right: 0; height: 48px; line-height: 48px; border-bottom: 1px solid #1a1a1a; background: #333333; width: 100%;}
@@ -135,7 +141,6 @@
 #qiehuan ul li {float: left; margin: 0 10px;}
 #qiehuan ul li:hover {color: #ffb319; cursor: pointer;}
 #change input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 10px; width: 195px; color: #666; margin-top: 10px; margin-left: 10px;}
-
 
 /* 插件行情 */
 .dropdown,.dropup{position:relative}
@@ -185,3 +190,12 @@
 #signLogin .signLogin_mode .signLogin_all .p4 span.on:hover {background: #ff9f19; cursor: pointer;}
 #signLogin .signLogin_mode .signLogin_all .p4 a.no:hover {background: #d9d9d9; text-decoration: none; cursor: pointer;}
 
+/* 盘口弹出层 */
+#handicapDetails {width: 600px;}
+#handicapDetails .hkDetails {display: inline-block; border-top: 1px solid #e7e7e7; border-left: 1px solid #e7e7e7;}
+#handicapDetails .hkDetails ul {width: 218px; float :left; border-right: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7; height: 40px; line-height: 40px; padding: 0 40px;}
+#handicapDetails .hkDetails ul li {float :left;}
+#handicapDetails .hkDetails ul li.fr {float :right;}
+#handicapDetails .smain > div {padding: 0;}
+#handicapDetails .smain {padding: 0; margin-top: 20px;}
+#handicap:hover {cursor: pointer; color: #ffb319;}

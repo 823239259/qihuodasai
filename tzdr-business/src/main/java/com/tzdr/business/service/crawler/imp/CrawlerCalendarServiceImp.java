@@ -1,6 +1,9 @@
 package com.tzdr.business.service.crawler.imp;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -83,5 +86,18 @@ public class CrawlerCalendarServiceImp  extends BaseServiceImpl<CrawlerCalendar,
 	@Override
 	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page) {
 		return getEntityDao().findByCalerdarPage(page.getPageIndex(), page.getSize());
+	}
+	@Override
+	public List<CrawlerCalendar> doGetCrwlerCalendarByTime(Page page, String startTime, String endTime) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date startDate;
+		try {
+			startDate = df.parse(startTime);
+			Date endDate = df.parse(endTime);
+			return getEntityDao().findByCalerdarPageByTime(page.getPageIndex(), page.getSize(), startDate.getTime()/1000, endDate.getTime()/1000);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

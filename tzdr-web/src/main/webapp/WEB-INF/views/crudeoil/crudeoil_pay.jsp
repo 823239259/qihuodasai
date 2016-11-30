@@ -153,7 +153,7 @@
 						<ul class="cp_paylist cp_paymoneyinfo">
 							<li>
 								<h3>应付金额(￥)</h3>
-								<p><i>${payable}</i>元</p>
+								<p><i>￥${payable}</i>元</p>
 							</li>
 						</ul>
 					</div>

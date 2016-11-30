@@ -183,10 +183,6 @@ function initTradeConnect(){
 	initLoad();
 	tradeIntervalId = setInterval(function(){
 			layer.msg('正在连接交易服务器...', {icon: 16});
-			if(connectionStatus){
-				layer.msg('交易服务器连接成功', {icon: 4});
-				clearInterval(tradeIntervalId);
-			}
 		}
 	, 2000);
 	

@@ -125,6 +125,7 @@
 		<!--设置跨域拦截器-->  
 		<mvc:interceptor>
              <mvc:mapping path="/login/user/getAccount" />
+             <mvc:mapping path="/crawler/**" />
             <bean class="com.tzdr.web.interceptor.CrossDoainInterceptor"></bean>
 		</mvc:interceptor>
 		<mvc:interceptor>

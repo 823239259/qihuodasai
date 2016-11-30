@@ -91,12 +91,14 @@ function handleData(evt){
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
+				layer.msg('交易服务器连接成功', {icon: 4});
 			} else {
 				loginFail = -2;
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
 			}
+			clearInterval(tradeIntervalId);
 			//查询个人账户信息回复
 		} else if (method == "OnRspQryAccount") {
 			var accountParam = parameters;
@@ -1438,6 +1440,7 @@ function selectCommodity(param){
 	setLocalCacheSelect(contractCode);
 	clearRightData();
 	updateRight(localQoute);
+	clearHandicapData();
 }
 /**
  * 绑定交易操作事件

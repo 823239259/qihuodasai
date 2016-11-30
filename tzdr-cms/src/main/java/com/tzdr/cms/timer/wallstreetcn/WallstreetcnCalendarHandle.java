@@ -44,7 +44,7 @@ public class WallstreetcnCalendarHandle extends BaseWallstreetcnHandle{
 		if(param != null && param.length() > 0){
 			param += "&";
 		}
-		param += startKey+"="+start+"&"+endKey+"="+end;
+		param = startKey+"="+start+"&"+endKey+"="+end;
 		String result = doSend(url, method, param);
 		handLeData(result);
 	}
