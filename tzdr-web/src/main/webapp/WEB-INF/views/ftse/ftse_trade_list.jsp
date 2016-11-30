@@ -22,6 +22,14 @@ table.data_web td a { padding:0 5px; color:#f80; }
 #window_detail_accountInfo table { padding:5px 0 5px 30px;}
 #window_detail_accountInfo table tr td { height:24px; line-height:24px;}
 #nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+#window_detail_details_fee p {font-size: 16px; line-height: 30px; color: #666;}
+#window_detail_tab .window_detail_lis {display: none;}
+.fl_navtitle h3 {border-bottom: 1px solid #eff2f7;}
+.fl_navtitle h3:hover {cursor: pointer;}
+.fl_navtitle h3.on {color: #fc3; border-bottom: 1px solid #fc3;}
+#window_detail_tab table tr td {border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
+.window_detail_share span:hover {color: #fc3; cursor: pointer;}
+#window_detail_title td {border-top: 1px solid #e6e6e6;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -33,36 +41,62 @@ table.data_web td a { padding:0 5px; color:#f80; }
 	<!-- 账单明细 -->
 	<div class="sif_money sif_money_div ftse_money" id="detailInfoFtse" style="display:none;">
 		<div class="fl_navtitle">
-			<h3>账单明细</h3>
+			<h3 class="on">结算明细</h3><h3>历史成交明细</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#detailInfoFtse')" class="close"></a>
 		</div>
-		<ul id="window_detail_endInfoFtse">
-			<li>
-				<h3>操盘保证金</h3>
-				<p></p>
-			</li>
-			<li>
-				<h3>补充保证金</h3>
-				<p></p>
-			</li>
-			<li style="width:235px;">
-				<h3>交易盈亏</h3>
-				<p></p>
-			</li>
-			<li style="width:125px;">
-				<h3>汇率<em>(美元：人民币)</em></h3>
-				<p></p>
-			</li>
-			<li>
-				<h3>交易手续费</h3>
-				<p></p>
-			</li>			
-			<li>
-				<h3>结算金额</h3>
-				<p></p>
-			</li>
-		</ul>
-		<div id="window_detail_endInfoFtse_trade">
+		<div id="window_detail_tab">
+			<div class="window_detail_lis" style="display: block;">
+				<p style="text-align: center; font-size: 20px; padding-top: 20px;">结算明细</p>
+				<ul id="window_detail_endInfoFtse">
+					<li>
+						<h3>操盘保证金</h3>
+						<p></p>
+					</li>
+					<li>
+						<h3>补充保证金</h3>
+						<p></p>
+					</li>
+					<li style="width:235px;">
+						<h3>交易盈亏</h3>
+						<p></p>
+					</li>
+					<li style="width:125px;">
+						<h3>汇率<em>(美元：人民币)</em></h3>
+						<p></p>
+					</li>
+					<li>
+						<h3>交易手续费</h3>
+						<p></p>
+					</li>			
+					<li>
+						<h3>结算金额</h3>
+						<p></p>
+					</li>
+				</ul>
+				<div id="window_detail_details_fee">
+				</div>	
+				<div id="window_detail_endInfoFtse_trade">
+				</div>
+			</div>
+			<div class="window_detail_lis">
+				<p style="text-align: center; font-size: 20px; padding: 20px 0;">历史成交明细</p>
+				<table border="0" cellspacing="0" cellpadding="0" style="font-size: 14px; color: #666;">
+					<tbody>
+						<tr id="window_detail_title" style="color: #333;">
+							<td style="width: 40px;">序号</td>
+							<td style="width: 100px;">合约名称</td>
+							<td style="width: 115px;">交易盈亏交易手数</td>
+							<td style="width: 100px;">交易手续费</td>
+							<td style="width: 100px;">成交价</td>
+							<td style="width: 40px;">买卖</td>
+							<td style="width: 110px;">买入/卖出</td>
+							<td style="width: 70px;">订单类型</td>
+							<td style="width: 80px;">结算时间</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="window_detail_share" style="font-size: 14px; padding: 20px 0;">分享到：<span><img alt="" src="${ctx}/static/images/detail_weixin.jpg">微信</span><span><img alt="" src="${ctx}/static/images/detail_weibo.jpg">新浪微博</span><span><img alt="" src="${ctx}/static/images/detail_qq.png">QQ好友</span></p>
+			</div>	
 		</div>
 	</div>
 	<!-- 交易账号 -->
