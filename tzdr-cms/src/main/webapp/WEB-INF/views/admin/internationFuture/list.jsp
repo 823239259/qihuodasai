@@ -13,6 +13,7 @@
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/my97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/common/ajaxfileupload.js?v=${v}"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 <script type="text/javascript">
 function timeConvert(value,rowData,rowIndex) {
@@ -450,8 +451,28 @@ function timeConvert(value,rowData,rowIndex) {
         </table>
         </form>
 	</div>
+	<div class = "easyui-window" id = "inputFlag"  title="录入结果" style="width:800px;height:500px;display:none;border:none; overflow:scroll;top:4%"
+        data-options="iconCls:'icon-save',modal:true,closed:true">
+        		<table  id="mainTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
+        			 	<tr>
+        			 		<td>手机号码</td>
+        			 		<td><input id="input_mobile" name="mobile"  class="easyui-textbox" disabled="disabled" /></td>
+        			 		<td>操盘账号</td>
+        			 		<td><input id="input_account" name="account"  class="easyui-textbox" disabled="disabled" /></td>
+        			 	</tr>
+        			 	<tr>
+        			 		<td>操盘保证金</td>
+        			 		<td><input id="input_traderBond" name="traderBond"  class="easyui-textbox" disabled="disabled" /></td>
+        			 		<td>交易盈亏</td>
+        			 		<td><input id="input_tranProfitLoss" name="tranProfitLoss"  class="easyui-textbox"/></td>
+        			 	</tr>
+        			 	<tr>
+        			 		<td><input type = "file" id = "input_file"/><button  onclick="importExcl()" id = "input_import">导入明细</button></td>
+        			 	</tr>
+        		</table>
+        </div>
 	<!-- window 结算录入信息弹框 -->
-	<div id="inputWin" class="easyui-window" title="录入结果" 
+	<!-- <div id="inputWin" class="easyui-window" title="录入结果" 
 		style="width:450px;height:250px;display:none;border:none; overflow:scroll;top:4%"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         <form id="inputForm">
@@ -606,7 +627,7 @@ function timeConvert(value,rowData,rowIndex) {
             </tr>
         </table>
         </form>
-	</div>
+	</div> -->
 	<!-- window 交易手数弹框 -->
 	<div id="tradeCountWin" class="easyui-window" title="交易手数" 
 		style="width:600px;height:350px;display:none;border:none; overflow: hidden;top:4%" 

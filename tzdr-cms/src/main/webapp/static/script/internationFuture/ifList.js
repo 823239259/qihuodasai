@@ -86,7 +86,35 @@ function passClose() {
 /**
  * 录入
  */
-function input() {
+
+function input(){
+	var rows = $("#hasAuditData").datagrid('getSelections');
+	if (Check.validateSelectItems($("#hasAuditData"),1)) {
+		$("#inputFlag").show();
+		$("#inputFlag").window('open');
+		$("#input_mobile").val(rows[0].mobile);
+		$("#input_account").val(rows[0].tranAccount);
+		$("#input_traderBond").val(rows[0].traderBond);
+	}
+}
+function importExcl(){
+	$.ajaxFileUpload({  
+        url : '/admin/internation/future/importExclDetail',  
+        secureuri : false,//安全协议  
+        fileElementId:'input_file',//id  
+        type : 'POST',  
+        dataType : 'json',  
+        async : false,  
+        error : function(data,status,e) {  
+            alert('Operate Failed!');  
+        },  
+        success : function(json) {  
+            alert("上传成功");
+        }  
+    });  
+}
+
+/*function input() {
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
 		
@@ -161,7 +189,7 @@ function input() {
 		}
 	}
 };
-
+*/
 /**
  * 录入提交
  */

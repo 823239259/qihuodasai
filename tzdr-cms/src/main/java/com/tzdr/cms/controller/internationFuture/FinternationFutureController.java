@@ -1,6 +1,12 @@
 package com.tzdr.cms.controller.internationFuture;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.FinternationFutureAppendLevelMoneyService;
@@ -25,10 +32,13 @@ import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.ConnditionVo;
 import com.tzdr.common.utils.EasyuiUtil;
+import com.tzdr.common.utils.FileProcessed;
+import com.tzdr.common.utils.ReadExclPOI;
 import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.common.web.support.EasyUiPageData;
 import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.JsonResult;
+import com.tzdr.domain.vo.TradeExclDetailVo;
 import com.tzdr.domain.vo.ftse.FSimpleFtseVo;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 
@@ -274,5 +284,48 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			result.setMessage("操作失败");
 		}
 		return result;
+	}
+	/**
+	 * 读取excl的资金明细
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "/importExclDetail",method = RequestMethod.GET)
+	public JsonResult importExclDetail(HttpServletRequest request,@RequestParam MultipartFile[] multipartFile){
+		
+		boolean flag = true;
+		JsonResult resultJson = new JsonResult();
+		if(multipartFile[0].getSize() > Integer.MAX_VALUE){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("文件长度过大");
+			return resultJson;
+		}
+		List<TradeExclDetailVo> detailVos = new ArrayList<>();
+		try {
+			InputStream inputStream = multipartFile[0].getInputStream();
+			UUID uuid = UUID.randomUUID();
+			String randomUuid = uuid.toString();
+			FileProcessed fileProcessed = new FileProcessed();
+			String filePath = "C:\\+"+randomUuid+".xlsx";
+			fileProcessed.uploadFile(filePath, inputStream);
+			ReadExclPOI readExclPOI = new ReadExclPOI();
+			detailVos = (List<TradeExclDetailVo>)readExclPOI.readExcl2007(filePath, TradeExclDetailVo.class);
+			System.out.println(detailVos);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		resultJson.setSuccess(flag);
+		resultJson.appendData("data",detailVos);
+		return resultJson;
 	}
 }
