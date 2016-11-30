@@ -176,11 +176,17 @@
 			tzdr.init.initHearListener();
 			mui.plusReady(function(){
 				var width=plus.screen.resolutionWidth;
-				setTimeout(function(){ 
-					if(!mui.cacheUser.isLogin()){
-						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-					}
-				},30000);
+				var time = 30000;
+				if(localStorage.getItem("tipLogin") == 1){
+					alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+				}else{
+					setTimeout(function(){ 
+						if(!mui.cacheUser.isLogin()){
+							localStorage.setItem("tipLogin",1);
+							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+						}
+					},30000);
+				}
 				function openLogin(){ 
 					mui.openWindow("../login/login.html","login");
 				} 
