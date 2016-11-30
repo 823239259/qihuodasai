@@ -1788,9 +1788,11 @@ function sumListfloatingProfit(){
 		var $floatP =$this.find("span[class = 'position8']");
 	    var $contractCode = $this.find("span[class = 'position0']");
 	    var localCommodity = getMarketCommdity($contractCode.text());
-	    var currencyNo = localCommodity.CurrencyNo;
-	    var currencyRate = localCacheCurrencyAndRate[currencyNo];
-		price = price + Number($floatP.text() * currencyRate);
+	    if(localCommodity != undefined){
+	    	var currencyNo = localCommodity.CurrencyNo;
+	    	var currencyRate = localCacheCurrencyAndRate[currencyNo];
+			price = price + Number($floatP.text() * currencyRate);
+	    }
 	});
 	if(isNaN(price)){ 
 		return;
