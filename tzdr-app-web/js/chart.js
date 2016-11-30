@@ -706,6 +706,7 @@ mui.plusReady(function(){
     		$("#TimeChart1").removeClass("mui-active");
     		$("#CandlestickChart").addClass("mui-active");
     		$("#trade").removeClass("mui-active");
+    		$(".BuyDiv").css({"display":"block"});
 		});
 		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
 			$("#list_type ").css({
