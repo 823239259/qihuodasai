@@ -49,15 +49,18 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 			Long dateTime = new Date().getTime();
 			for (int i = 0; i < size; i++) {
 				JSONObject jsonObject = resultArray.getJSONObject(i);
-				CrawlerWallstreetnLive live = setCrawlerWallstreetnLive(jsonObject);
-				CrawlerWallstreetnLiveContent content = setCrawlerWllStreetnLiveContent(jsonObject);
-				live.setLiveCreatetime(dateTime);
-				live.setLiveUpdatetime(dateTime);
-				content.setLiveContentCreatetime(dateTime);
-				content.setLiveContentUpdatetime(dateTime);
-				content.setText(stringJson);
-				wallstreetnLives.add(live);
-				contents.add(content);
+				String[] channelSets = jsonObject.getString("channelSet").split(",");
+				for(int j = 0 ; j < channelSets.length ; j++){
+					CrawlerWallstreetnLive live = setCrawlerWallstreetnLive(jsonObject,channelSets[j]);
+					CrawlerWallstreetnLiveContent content = setCrawlerWllStreetnLiveContent(jsonObject);
+					live.setLiveCreatetime(dateTime);
+					live.setLiveUpdatetime(dateTime);
+					content.setLiveContentCreatetime(dateTime);
+					content.setLiveContentUpdatetime(dateTime);
+					content.setText(stringJson);
+					wallstreetnLives.add(live);
+					contents.add(content);
+				}
 			}
 			logger.info("共获取:"+size);
 			getCrawlerWallstreetnLiveService().doSavesBatch(wallstreetnLives, contents);
@@ -81,19 +84,19 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 	 * 设置保存的列表信息
 	 * @return
 	 */
-	public CrawlerWallstreetnLive setCrawlerWallstreetnLive(JSONObject jsonObject){
+	public CrawlerWallstreetnLive setCrawlerWallstreetnLive(JSONObject jsonObject,String channelSet){
 		CrawlerWallstreetnLive live = new CrawlerWallstreetnLive();
 		live.setLiveWallstreetnId(jsonObject.getString("id"));
 		live.setLiveTitle(jsonObject.getString("title"));
 		live.setLiveType("");
-		live.setChannelSet(jsonObject.getString("channelSet"));
+		live.setChannelSet(channelSet);
 		live.setCodeType(jsonObject.getString("codeType"));
 		live.setCommentStatus(jsonObject.getString("commentStatus"));
 		live.setCreatedAt(jsonObject.getLong("createdAt"));
 		live.setUpdatedAt(jsonObject.getLong("updatedAt"));
 		live.setImportance(jsonObject.getString("importance"));
-		live.setPublished(jsonObject.getString("published"));
-		live.setStar(jsonObject.getString("start"));
+		live.setPublished("1");
+		live.setStar(jsonObject.getString("star"));
 		live.setType(jsonObject.getString("type"));
 		return live;
 	}

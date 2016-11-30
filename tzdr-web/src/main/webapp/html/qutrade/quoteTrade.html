@@ -256,23 +256,102 @@
 			</div>
 		</div>
 	</div>
+	<div class="tck01" id="handicapDetails" style="display: none;">
+		<div class="navtitle">
+			<a class="nava">盘口信息</a><a class="close"></a>
+		</div>
+		<div class="smain">
+			<div class="hkDetails">
+				<ul>
+					<li>卖价</li>
+					<li class="fr" id = "pkmj_sell">0</li>
+				</ul>
+				<ul>
+					<li>卖量</li>
+					<li class="fr" id = "pkml_sell">0</li>
+				</ul>
+				<ul>
+					<li>买价</li>
+					<li class="fr" id = "pkmj_buy">0</li>
+				</ul>
+				<ul>
+					<li>买量</li>
+					<li class="fr" id = "pkml_buy">0</li>
+				</ul>
+				<ul>
+					<li>最新</li>
+					<li class="fr" id = "pklastparice">0</li>
+				</ul>
+				<ul>
+					<li>涨跌</li>
+					<li class="fr" id = "pkzd">0/0</li>
+				</ul>
+				<ul>
+					<li>开盘</li>
+					<li class="fr" id = "pkopenprice">0</li>
+				</ul>
+				<ul>
+					<li>成交量</li>
+					<li class="fr" id = "pktrademl">0</li>
+				</ul>
+				<ul>
+					<li>最高</li>
+					<li class="fr" id = "pkhightprice">0</li>
+				</ul>
+				<ul>
+					<li>持仓量</li>
+					<li class="fr" id = "pkccml">0</li>
+				</ul>
+				<ul>
+					<li>最低</li>
+					<li class="fr" id = "pklowprice">0</li>
+				</ul>
+				<!-- <ul>
+					<li>均价</li>
+					<li class="fr"></li>
+				</ul> -->
+				<!-- <ul>
+					<li>昨收</li>
+					<li class="fr">12312</li>
+				</ul> -->
+				<ul>
+					<li>昨结</li>
+					<li class="fr" id = "pkzj">0</li>
+				</ul>
+				<!-- <ul>
+					<li>涨停</li>
+					<li class="fr">011212</li>
+				</ul> -->
+				<!-- <ul>
+					<li>涨跌</li>
+					<li class="fr">515445</li>
+				</ul> -->
+				<ul>
+					<li>结算</li>
+					<li class="fr" id = "pkjs">0</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- top -->
 <div class="quotation_title">
 	<a href="http://www.vs.com"><img src="../../static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
 	<div class="quotation_anniu" id = "show_login">
-		<!-- <input type="text" name="quotation_account"  id="quotation_account" placeholder="输入交易账号"/>
-		<input type="password" name="quotation_password" id="quotation_password" placeholder="输入交易密码"/> -->
-		<button><a href="#" id="sign_login">登录</a></button><!-- id = "trade_login" -->
+		<button>你好，请先<a href="#" id="sign_login">登录</a></button>
 		<button><a href="../../outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></button>
-		<!-- <a href="javascript:void(0);" class="backPassword">找回密码</a> -->
-		<div id="more_account" style="display: none;">
-		</div>
+		<div id="more_account" style="display: none;"></div>
 	</div>
 	<div class="quotation_anniu" id = "show_user_info"  style = "display:none">
-		<b id = "ismockReak"></b><b id = "top_username"></b>
-		<button id = "trade_loginOut" style="width: 80px;">退出登录</button>
-		<button style="width: 80px;"><a href="../../outDisk/index"  target="_blank" style="display: inline;">立即开户</a></button>
+		你好，<!-- <span id = "ismockReak"></span> -->
+		<label class="quotation_xl"><span id = "top_username"></span>
+			<img src="../../static/images/xl.png" style="padding: 0px 15px 0px 0; position: relative; top: 4px;">
+		</label>
+		<ul class="show_user_ul" style="display:none">
+			<li><a target="_blank" href="http://www.vs.com/help?tab=rule&leftMenu=1">帮助中心</a></li>
+			<li><a id = "trade_loginOut">退出</a></li>
+			<li style="height: 0"><img src="../../static/images/xl1.png" style="position: absolute; right: 0; top: -15px;"></li>
+		</ul>
 	</div>
 </div>
 <!-- center -->
@@ -382,6 +461,7 @@
 			        	<li class="carbon_time" data="15">15分</li>
 			        	<li class="carbon_time" data="30">30分</li>
 			            <li class="carbon_time" data="1440">日K</li>
+			            <span id="handicap">盘口</span>
 			        </ul>
     			</div>
     			<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>
@@ -572,7 +652,7 @@
 					<label>账户余额：</br><span id = "todayCanUse">00.0</span></label>
 					<label>持仓盈亏：</br><span id = "floatingProfit">00.0</span></label>
 					<label>交易盈亏：</br><span id = "closeProfit">00.0</span></label>
-					<a href="${ctx }/toUserftseTradeListSSO" target="_blank">追加保证金</a>
+					<a href="../../toUserftseTradeListSSO" target="_blank">追加保证金</a>
 				</div>
 			</div>
     	</div>	
@@ -591,4 +671,21 @@
 </div>
 </body>
 <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
+<script>
+$(function() {
+	var url = document.referrer;
+	if(url.indexOf("simulateOperate/operate") >= 0 ){
+		$("#signLogin").css("display","block");
+		$("#div_Mask").show();
+		var popupHeight = $("#signLogin").outerHeight()/2;
+		var popupWidth = $("#signLogin").outerWidth()/2;    
+		$("#signLogin").css({
+			top:"50%",
+			left:"50%",
+			marginTop: -(popupHeight+15),
+			marginLeft: -(popupWidth)
+		});
+	}
+})
+</script>
 </html>

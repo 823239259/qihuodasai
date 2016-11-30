@@ -16,4 +16,14 @@ public interface CrawlerCalendarDao extends BaseJpaDao<CrawlerCalendar, String>{
 	
 	@Query(value = "select * from  crawler_calendar  LIMIT ?1 , ?2" ,nativeQuery = true )
 	public List<CrawlerCalendar> findByCalerdarPage(Integer startIndex,Integer size);
+	/**
+	 * 查询日历根据时间
+	 * @param startIndex
+	 * @param size
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	@Query(value = "select * from  crawler_calendar where timestamp BETWEEN ?3 and ?4  LIMIT ?1 , ?2" ,nativeQuery = true )
+	public List<CrawlerCalendar> findByCalerdarPageByTime(Integer startIndex,Integer size,Long startTime , Long endTime);
 }

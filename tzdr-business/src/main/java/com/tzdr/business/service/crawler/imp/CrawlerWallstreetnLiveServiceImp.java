@@ -43,4 +43,8 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 	public List<CrawlerWallstreetnLive> getCrawler(Page page) {
 		return  getEntityDao().findByCrawlerPage(page.getPageIndex(), page.getSize());
 	}
+	@Override
+	public List<CrawlerWallstreetnLive> getCrawler(Page page, String channelset) {
+		return  getEntityDao().findByCrawlerPageByChannel(page.getPageIndex(), page.getSize(),channelset);
+	}
 }
