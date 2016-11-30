@@ -15,6 +15,7 @@
     var timePrice=[];
     function handleTime(json){
     	var dosizeL=$("#doSize").val();
+//  	console.log(JSON.stringify(json));
         var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;

@@ -54,6 +54,7 @@ mui.plusReady(function(){
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
 		init(Transfer.name);
+		$("#MainContract").text(Transfer.name[2]+Transfer.name[1])
 	marketSocket = new WebSocket(marketSocketUrl);
     var setIntvalTime = null; 
     var marketLoadParam = {}
@@ -88,11 +89,7 @@ mui.plusReady(function(){
 			if(historyParam.Parameters.HisQuoteType==0){
 				handleTime(historyParam);
 				handleVolumeChartData(historyParam);
-//				processingData(historyParam);
-//	            processingCandlestickVolumeData(historyParam);
 			}else{
-//				handleTime(historyParam);
-// 				handleVolumeChartData(historyParam);
 				processingData(historyParam);
 	            processingCandlestickVolumeData(historyParam);
 			}
@@ -107,7 +104,9 @@ mui.plusReady(function(){
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
 				insertDATA(quoteParam);
-			}
+				setFiveMarket(subscribeParam);
+				setHandicap(subscribeParam);
+			} 
 			updateDesignateByQuote(subscribeParam);
 			updateFloatProfit(subscribeParam);
 			//计算浮动盈亏总和
@@ -116,6 +115,7 @@ mui.plusReady(function(){
 			updateAccountBalance();
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
 			setLocalCacheQuote(subscribeParam);
+			$("#refresh").removeClass("rotateClass");
         }else if(method == "OnRspQryCommodity"){
         	if(OnRspQryCommodityDateL==1){
         		commoditysData=jsonData.Parameters;
@@ -144,9 +144,9 @@ mui.plusReady(function(){
 					}
 				}
 				if(Transfer.name[2]==newCommdityNo){
-   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+"</option>"
 	   			}else{
-	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+comm.CommodityNo+comm.MainContract+"</option>"
+	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>"
 	   			}
 	   			
 			}
@@ -242,8 +242,297 @@ mui.plusReady(function(){
 			return false;
 		}
 	}
+	/**
+	 * 更新盘口信息
+	 * @param {Object} param
+	 */
+	function setHandicap(param){
+		//卖价
+		var askPrice = param.AskPrice1;
+		//买价
+		var bidPrice1 = param.BidPrice1;
+		//最新价
+		var lastPrice = param.LastPrice;
+		//开仓价
+		var openPrice = param.OpenPrice;
+		//最高价
+		var highPrice = param.HighPrice;
+		//最低价
+		var lowPrice = param.LowPrice;
+		//昨收
+		var preClosingPrice = param.PreClosingPrice;
+		//结算价
+		var settlePrice = param.SettlePrice;
+		//卖量
+		var totalAskQty = param.TotalAskQty;
+		//买量
+		var totalBidQty = param.TotalBidQty;
+		//涨幅
+		var changeRate = param.ChangeRate;
+		//涨跌值
+		var changeValue = param.ChangeValue;
+		//当日成交量
+		var totalVolume = param.TotalVolume;
+		//持仓量
+		var position = param.Position;
+		//昨结
+		var preSettlePrice = param.PreSettlePrice;
+		var commodityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var contractCode =commodityNo+contractNo ;
+		var localCommodity = getMarketCommdity(contractCode);
+		var dotSize = 0;
+		if(localCommodity != undefined){
+			dotSize = localCommodity.DotSize;
+		}
+		var color = "#FFFFFF";
+		if(askPrice > preSettlePrice){
+			color = "#ff5500";
+		}else if (askPrice < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		
+//		$("#pkmj_sell").text(parseFloat(askPrice).toFixed(dotSize));
+//		$("#pkmj_sell").css("color",color);
+		if(bidPrice1 > preSettlePrice){
+			color = "#ff5500";
+		}else if (bidPrice1 < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+//		$("#pkmj_buy").text(parseFloat(bidPrice1).toFixed(dotSize));
+//		$("#pkmj_buy").css("color",color);
+		if(lastPrice > preSettlePrice){
+			color = "#ff5500";
+		}else if (lastPrice < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#pklastparice").text(parseFloat(lastPrice).toFixed(dotSize));
+		$("#pklastparice").css("color",color);
+		if(openPrice > preSettlePrice){
+			color = "#ff5500";
+		}else if (openPrice < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#pkopenprice").text(parseFloat(openPrice).toFixed(dotSize));
+		$("#pkopenprice").css("color",color);
+		if(highPrice > preSettlePrice){
+			color = "#ff5500";
+		}else if (highPrice < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#pkhightprice").text(parseFloat(highPrice).toFixed(dotSize));
+		$("#pkhightprice").css("color",color);
+		if(lowPrice > preSettlePrice){
+			color = "#ff5500";
+		}else if (lowPrice < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#pklowprice").text(parseFloat(lowPrice).toFixed(dotSize));
+		$("#pklowprice").css("color",color);
+		if(settlePrice > preSettlePrice){
+			color = "#ff5500";
+		}else if (settlePrice < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#pkjs").text(parseFloat(settlePrice).toFixed(dotSize));
+		$("#pkjs").css("color",color);
+		if(totalAskQty > preSettlePrice){
+			color = "#ff5500";
+		}else if (totalAskQty < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+//		$("#pkml_sell").text(totalAskQty);
+//		$("#pkml_sell").css("color",color);
+		if(totalBidQty > preSettlePrice){
+			color = "#ff5500";
+		}else if (totalBidQty < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+//		$("#pkml_buy").text(totalBidQty);
+//		$("#pkml_buy").css("color",color);
+		if(changeValue > 0){
+			color = "#ff5500";
+		}else if (changeValue < 0){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#pkzd").text(parseFloat(changeValue).toFixed(dotSize)+"/"+parseFloat(changeRate).toFixed(2)+"%");
+		$("#pkzd").css("color",color);
+		$("#pktrademl").text(totalVolume);
+		$("#pktrademl").css("color","#FFFFFF");
+		$("#pkccml").text(position);
+		$("#pkccml").css("color","#FFFFFF");
+		$("#pkzj").text(parseFloat(preSettlePrice).toFixed(dotSize));
+		$("#pkzj").css("color","#FFFFFF");
+		$("#pkccml").css("color","#FFFFFF");
+	}
+	/**
+	 * 设置五档行情
+	 */
+	function setFiveMarket(param){
+		var commodityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var contractCode =commodityNo+contractNo ;
+		var localCommodity = getMarketCommdity(contractCode);
+		var dotSize = 0;
+		if(localCommodity != undefined){
+			dotSize = localCommodity.DotSize;
+		}
+		//昨日结算价
+		var preSettlePrice = parseFloat(param.PreSettlePrice).toFixed(dotSize);
+		var bidPrice1 = parseFloat(param.BidPrice1).toFixed(dotSize);
+		var bidPrice2 = parseFloat(param.BidPrice2).toFixed(dotSize);
+		var bidPrice3 = parseFloat(param.BidPrice3).toFixed(dotSize);
+		var bidPrice4 = parseFloat(param.BidPrice4).toFixed(dotSize);
+		var bidPrice5 = parseFloat(param.BidPrice5).toFixed(dotSize);
+		var bidQty1   = param.BidQty1;
+		var bidQty2   = param.BidQty2;
+		var bidQty3   = param.BidQty3;
+		var bidQty4   = param.BidQty4;
+		var bidQty5   = param.BidQty5; 
+		var askPrice1 = parseFloat(param.AskPrice1).toFixed(dotSize);
+		var askPrice2 = parseFloat(param.AskPrice2).toFixed(dotSize);
+		var askPrice3 = parseFloat(param.AskPrice3).toFixed(dotSize);
+		var askPrice4 = parseFloat(param.AskPrice4).toFixed(dotSize);
+		var askPrice5 = parseFloat(param.AskPrice5).toFixed(dotSize);
+		var askQty1	  = param.AskQty1;
+		var askQty2	  = param.AskQty2;
+		var askQty3	  = param.AskQty3;
+		var askQty4	  = param.AskQty4;
+		var askQty5	  = param.AskQty5;
+		var color = "#FFFFFF";
+		if(bidPrice1 > preSettlePrice){
+			color = "#ff5500";
+		}else if(bidPrice1 < preSettlePrice){
+			color = "#0bffa4"
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#buy_0").text(bidPrice1);
+		$("#buy_1").text(bidQty1);
+		$("#buy_0").css("color",color);
+//		$("#buy_1").css("color",color);
+		if(bidPrice2 > preSettlePrice){
+			color = "#ff5500";
+		}else if(bidPrice2 < preSettlePrice){
+			color = "#0bffa4"
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#buy_2").text(bidPrice2);
+		$("#buy_3").text(bidQty2);
+		$("#buy_2").css("color",color);
+//		$("#buy_3").css("color",color);
+		if(bidPrice3 > preSettlePrice){
+			color = "#ff5500";
+		}else if(bidPrice3 < preSettlePrice){
+			color = "#0bffa4"
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#buy_4").text(bidPrice3);
+		$("#buy_5").text(bidQty3);
+		$("#buy_4").css("color",color);
+//		$("#buy_5").css("color",color);
+		if(bidPrice4 > preSettlePrice){
+			color = "#ff5500";
+		}else if(bidPrice4 < preSettlePrice){
+			color = "#0bffa4"
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#buy_6").text(bidPrice4);
+		$("#buy_7").text(bidQty4);
+		$("#buy_6").css("color",color);
+//		$("#buy_7").css("color",color);
+		if(bidPrice5 > preSettlePrice){
+			color = "#ff5500";
+		}else if(bidPrice5 < preSettlePrice){
+			color = "#0bffa4"
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#buy_8").text(bidPrice5);
+		$("#buy_9").text(bidQty5);
+		$("#buy_8").css("color",color);
+//		$("#buy_9").css("color",color);
+		if(askPrice1 > preSettlePrice){
+			color = "#ff5500";
+		}else if(askPrice1 < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#sell_0").text(askPrice1);
+		$("#sell_1").text(askQty1);
+		$("#sell_0").css("color",color);
+//		$("#sell_1").css("color",color);
+		if(askPrice2 > preSettlePrice){
+			color = "#ff5500";
+		}else if(askPrice2 < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#sell_2").text(askPrice2);
+		$("#sell_3").text(askQty2);
+		$("#sell_2").css("color",color);
+//		$("#sell_3").css("color",color);
+		if(askPrice3 > preSettlePrice){
+			color = "#ff5500";
+		}else if(askPrice3 < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#sell_4").text(askPrice3);
+		$("#sell_5").text(askQty3);
+		$("#sell_4").css("color",color);
+//		$("#sell_5").css("color",color);
+		if(askPrice4 > preSettlePrice){
+			color = "#ff5500";
+		}else if(askPrice4 < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#sell_6").text(askPrice4);
+		$("#sell_7").text(askQty4);
+		$("#sell_6").css("color",color);
+//		$("#sell_7").css("color",color);
+		if(askPrice5 > preSettlePrice){
+			color = "#ff5500";
+		}else if(askPrice5 < preSettlePrice){
+			color = "#0bffa4";
+		}else{
+			color = "#FFFFFF";
+		}
+		$("#sell_8").text(askPrice5);
+		$("#sell_9").text(askQty5);
+		$("#sell_8").css("color",color);
+//		$("#sell_9").css("color",color);
+	}
     var changeValue=document.getElementById("changeValue");
-     var rose=document.getElementById("rose");
+    var rose=document.getElementById("rose");
     var freshPrices=document.getElementById("freshPrices");
     var volumePricesNumber=document.getElementById("volumePricesNumber");
     var buyPrices=document.getElementById("buyPrices");
@@ -280,6 +569,7 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML= $("#CommodityName").val();
 		CommodityNo.innerHTML=$("#commodeityNo").val()+$("#contractNo").val();
+		$("#MainContract").text($("#commodeityNo").val()+$("#contractNo").val());
 		$("#xj").removeAttr("checked");
 		$("#sj").prop("checked",true);
 		$("#orderPrice").val("");
@@ -376,10 +666,10 @@ mui.plusReady(function(){
     /*
 		 获取K线类型**/
 		$("#list_type ul li").on("tap",function(){
-			$("#CandlestickChart").removeClass("displayStyle").addClass("mui-active");
-    		$("#trade").removeClass("mui-active").addClass("displayStyle");
-    		$("#TimeChart1").removeClass("mui-active").addClass("displayStyle");
-    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
+			$("#CandlestickChart").addClass("mui-active");
+    		$("#trade").removeClass("mui-active")
+    		$("#TimeChart1").removeClass("mui-active")
+    		$("#chartAllDiv").addClass("mui-active");
 			$("#selectButon").text($(this).text())
 			var val=$(this).val();
 			if(val==1){
@@ -397,16 +687,26 @@ mui.plusReady(function(){
 				"display":"none"
 			})
 		});
+	var selectButonNum=0;
 		$("#selectButon").click(function(){
+			if(selectButonNum==0){
+				$("#CandlestickChart").addClass("mui-active");
+	    		$("#trade").removeClass("mui-active")
+	    		$("#TimeChart1").removeClass("mui-active")
+	    		$("#chartAllDiv").addClass("mui-active");
+				drawChart(1);
+			}
 			$("#list_type ").css({
 				"display":"block"
 			});
-			$("#selectButon").css({
-				"color":"#fcc900",
-			});
-			$("#timeChartMenu").css({
-				"color":"#FFFFFF",
-			})
+			$("#headerMenu table td").removeClass("mui-active");
+    		$("#selectButon").addClass("mui-active");
+    		$("#chartAllDiv").addClass("mui-active");
+    		$("#Handicap").removeClass("mui-active");
+    		$("#TimeChart1").removeClass("mui-active");
+    		$("#CandlestickChart").addClass("mui-active");
+    		$("#trade").removeClass("mui-active");
+    		$(".BuyDiv").css({"display":"block"});
 		});
 		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
 			$("#list_type ").css({
@@ -414,14 +714,15 @@ mui.plusReady(function(){
 			})
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
-    		$("#TimeChart1").css("opacity","0");
-    		$("#selectButon").css({
-				"color":"#FFFFFF",
-			});
-			$("#timeChartMenu").css({
-				"color":"#fcc900",
-			});
-    		 time=[];
+    		$("#headerMenu table td").removeClass("mui-active");
+    		$("#TimeChart1").css("opacity","0").addClass("mui-active");
+    		$("#timeChartMenu").addClass("mui-active");
+    		$("#chartAllDiv").addClass("mui-active");
+    		$("#Handicap").removeClass("mui-active");
+    		$("#CandlestickChart").removeClass("mui-active");
+    		$("#trade").removeClass("mui-active");
+    		$(".BuyDiv").css({"display":"block"})
+    		time=[];
 		    prices=[];
 		    timeLabel=[]
 		     timeData={
@@ -439,10 +740,6 @@ mui.plusReady(function(){
     		var val=$("#timeChartMenu").val();
     		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
-    		$("#CandlestickChart").removeClass("mui-active").addClass("displayStyle");
-    		$("#trade").removeClass("mui-active").addClass("displayStyle");
-    		$("#TimeChart1").removeClass("displayStyle").addClass("mui-active");
-    		$("#chartAllDiv").removeClass("displayStyle").addClass("mui-active");
     		var option2=setOption1();
 		 	 var option1 =volumeChartSetOption(volumeChartData);
 				setTimeout(function(){
@@ -459,16 +756,23 @@ mui.plusReady(function(){
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
     		if(vadationIsLogin()){
-				$("#trade").removeClass("displayStyle").addClass("mui-active");
-    			$("#chartAllDiv").removeClass("mui-active").addClass("displayStyle");
+    			$("#headerMenu table td").removeClass("mui-active");
+    			$("#chartAllDiv").removeClass("mui-active");
+    			$("#tradeMenu").addClass("mui-active");
+    			$("#trade").addClass("mui-active");
+    			$("#Handicap").removeClass("mui-active");
+    			$(".BuyDiv").css({"display":"none"});
 			}
-    		$("#selectButon").css({
-				"color":"#FFFFFF",
-			});
-			$("#timeChartMenu").css({
-				"color":"#FFFFFF",
-			})
-    	})
+    	});
+    	
+    	document.getElementById("HandicapButton").addEventListener("tap",function(){
+    		$("#headerMenu table td").removeClass("mui-active");
+    		$("#chartAllDiv").removeClass("mui-active");
+    		$("#HandicapButton").addClass("mui-active");
+    		$("#Handicap").addClass("mui-active");
+    		$("#trade").removeClass("mui-active");
+    		$(".BuyDiv").css({"display":"block"})
+    	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
@@ -480,6 +784,9 @@ mui.plusReady(function(){
 			loginOutFlag = true;
 			loginFail = true;
 		};
+	});
+	document.getElementById("refresh").addEventListener("tap",function(){
+		reconnectPage()
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();
