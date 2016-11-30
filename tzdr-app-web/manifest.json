@@ -1497,7 +1497,8 @@
 				],
 				"refer": [
 					"tzdr/quotation/quotationMain.html",
-					"guide.html"
+					"guide.html",
+					"tzdr/future/historyDetail.html"
 				],
 				"priority": 0
 			},
@@ -1535,6 +1536,19 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/future/historyDetail.html": {
+				"resources": [
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
 					"css/mui.min.css"
 				],
 				"refer": [],
