@@ -415,7 +415,7 @@ public class SecurityInfoController{
 		userverified.setEmailActivecode(randomStr);
 		userverified.setValidateEmailTime(codestart);
 		String email=userSessionBean.getEmail();
-		boolean flag=securityInfoService.sendEmail(userverified.getTname(),email, randomStr, "投资达人");
+		boolean flag=securityInfoService.sendEmail(userverified.getTname(),email, randomStr, "维胜金融");
 		if(flag){
 			jsonResult.setMessage("success");
 		}
