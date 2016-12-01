@@ -129,37 +129,36 @@ function bindEndOfFtse(cls){
 				id:fastId
 			},
 			success:function(result){
-				var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
-											'<td style="width: 40px;">序号</td>'+
-											'<td style="width: 120px;">合约名称</td>'+
-											'<td style="width: 60px;">交易盈亏</td>'+
-											'<td style="width: 60px;">交易手数</td>'+
-											'<td style="width: 60px;">手续费</td>'+
-											'<td style="width: 60px;">成交价</td>'+
-											'<td style="width: 40px;">买卖</td>'+
-											'<td style="width: 80px;">买入/卖出</td>'+
-											'<td style="width: 60px;">订单类型</td>'+
-											'<td style="width: 100px;">结算时间</td>'+
-										'</tr>';
-				var data = result.data.data;
-				for(var i = 0 ; i < data.length;i++){
-					var _data = data[i];
-				    window_detail_title += '<tr><td>'+i+'</td>' +
-				    '<td>'+_data.commodityNo+_data.contractNo+'</td>' +
-				    '<td>'+_data.flat+'</td>' +
-				    '<td>'+_data.tradeNum+'</td>' +
-				    '<td>'+_data.free+'</td>' +
-				    '<td>'+_data.tradePrice+'</td>' +
-				    '<td>'+_data.drection+'</td>' +
-				    '<td>'+_data.orderPrice+'</td>' +
-				    '<td>'+_data.orderType+'</td>' +
-				    '<td>'+_data.marketDate+'</td><tr>';
+				if(result.success){
+					$("#tradeDetail").html("");
+					var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
+					'<td style="width: 40px;">序号</td>'+
+					'<td style="width: 120px;">合约名称</td>'+
+					'<td style="width: 60px;">交易盈亏</td>'+
+					'<td style="width: 60px;">交易手数</td>'+
+					'<td style="width: 60px;">手续费</td>'+
+					'<td style="width: 60px;">成交价</td>'+
+					'<td style="width: 40px;">买卖</td>'+
+					'<td style="width: 80px;">买入/卖出</td>'+
+					'<td style="width: 60px;">订单类型</td>'+
+					'<td style="width: 100px;">结算时间</td>'+
+				'</tr>';
+					var data = result.data.data;
+					for(var i = 0 ; i < data.length;i++){
+						var _data = data[i];
+						window_detail_title += '<tr><td>'+i+'</td>' +
+						'<td>'+_data.commodityNo+_data.contractNo+'</td>' +
+						'<td>'+_data.flat+'</td>' +
+						'<td>'+_data.tradeNum+'</td>' +
+						'<td>'+_data.free+'</td>' +
+						'<td>'+_data.tradePrice+'</td>' +
+						'<td>'+_data.drection+'</td>' +
+						'<td>'+_data.orderPrice+'</td>' +
+						'<td>'+_data.orderType+'</td>' +
+						'<td>'+_data.marketDate+'</td><tr>';
+					}
+					$("#tradeDetail").html(window_detail_title);
 				}
-				$("#tradeDetail").after(window_detail_title);
-				/*$("#tradeDetail").css({
-				    "height": "500px",
-			        "overflow": "hidden"
-	            });*/
 			}
 		});
 	});
