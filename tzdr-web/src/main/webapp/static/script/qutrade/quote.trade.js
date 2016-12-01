@@ -21,6 +21,35 @@ $(function() {
 	}
 })
 
+$(document).ready(
+	function () {
+	    $("#show_user_info .quotation_xl").click(function (e) {
+	        $("#show_user_info .show_user_ul").toggle();
+	        /*阻止冒泡事件*/
+	        e = window.event || e;
+	        if (e.stopPropagation) {
+	            e.stopPropagation();
+	        } else {
+	            e.cancelBubble = true;
+	        }
+	    });
+	    $("#show_user_info .show_user_ul li").click(function (e) {
+	        $("#show_user_info .show_user_ul").hide();
+	        /*阻止冒泡事件*/
+	        /*e = window.event || e;
+	        if (e.stopPropagation) {
+	            e.stopPropagation();
+	        } else {
+	            e.cancelBubble = true;
+	        }*/
+	    });
+	    $(document).click(function () {
+	        $("#show_user_info .show_user_ul").hide();
+	    });
+	}
+);
+		
+
 $(function() {
 		// 持仓 委托 挂单 tab 切换
 		$(".quotation_detailed_lis a").click(function() {
@@ -242,6 +271,19 @@ $(function() {
 	        $("#signLogin .signLogin_span").css("color","#333").eq(_this.index()).css("color","#ffb319");
 	        $("#signLogin .signLogin_mode .signLogin_all").hide().eq(_this.index()).show();
         });
+		/*盘口*/
+		$("#handicap").click(function(){
+			$("#handicapDetails").css("display","block");
+			$("#div_Mask").show();
+			var popupHeight = $("#handicapDetails").outerHeight()/2;
+			var popupWidth = $("#handicapDetails").outerWidth()/2;    
+			$("#handicapDetails").css({
+				top:"50%",
+				left:"50%",
+				marginTop: -(popupHeight+15),
+				marginLeft: -(popupWidth)
+			});
+		});
 /* 弹出层结束 */
 		/*滚动条*/
 		$(function(){

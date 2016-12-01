@@ -174,6 +174,8 @@ function quotePush(obj){
 	setTradeLastPrice(param);
 	//设置买卖的浮动价格
 	setBuyAndSellFloatPrice(param);
+	//设置盘口
+	setHandicap(param);
 }
 /**
  * 订阅行情
@@ -300,6 +302,7 @@ function addQuoteListBindClick(cls){
 		 clearRightData();
 		 setSelectOption(contractCode);
 		 setMoneyNumberIndex(0);
+		 clearHandicapData();
 	});
 }
 /**
@@ -440,6 +443,167 @@ function setMoneyNumberIndex(count){
  */
 function getMoneyNumberIndex(){
 	return moneyNumberIndex;
+}
+/**
+ * 设置盘口信息
+ */
+function setHandicap(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode =commodityNo+contractNo ;
+	if(contractCode != getLocalCacheSelect())return;
+	var localCommodity = getLocalCacheCommodity(contractCode);
+	var dotSize = 0;
+	if(localCommodity != undefined){
+		dotSize = localCommodity.DotSize;
+	}
+	//卖价
+	var askPrice = param.AskPrice1;
+	//买价
+	var bidPrice1 = param.BidPrice1;
+	//最新价
+	var lastPrice = param.LastPrice;
+	//开仓价
+	var openPrice = param.OpenPrice;
+	//最高价
+	var highPrice = param.HighPrice;
+	//最低价
+	var lowPrice = param.LowPrice;
+	//昨收
+	var preClosingPrice = param.PreClosingPrice;
+	//结算价
+	var settlePrice = param.SettlePrice;
+	//卖量
+	var totalAskQty = param.AskQty1;
+	//买量
+	var totalBidQty = param.BidQty1;
+	//涨幅
+	var changeRate = param.ChangeRate;
+	//涨跌值
+	var changeValue = param.ChangeValue;
+	//当日成交量
+	var totalVolume = param.TotalVolume;
+	//持仓量
+	var position = param.Position;
+	//昨结
+	var preSettlePrice = param.PreSettlePrice;
+	var color = "#FFFFFF";
+	if(askPrice > preSettlePrice){
+		color = "#ff5500";
+	}else if (askPrice < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#FFFFFF";
+	}
+	
+	$("#pkmj_sell").text(parseFloat(askPrice).toFixed(dotSize));
+	$("#pkmj_sell").css("color",color);
+	if(bidPrice1 > preSettlePrice){
+		color = "#ff5500";
+	}else if (bidPrice1 < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#FFFFFF";
+	}
+	$("#pkmj_buy").text(parseFloat(bidPrice1).toFixed(dotSize));
+	$("#pkmj_buy").css("color",color);
+	if(lastPrice > preSettlePrice){
+		color = "#ff5500";
+	}else if (lastPrice < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pklastparice").text(parseFloat(lastPrice).toFixed(dotSize));
+	$("#pklastparice").css("color",color);
+	if(openPrice > preSettlePrice){
+		color = "#ff5500";
+	}else if (openPrice < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pkopenprice").text(parseFloat(openPrice).toFixed(dotSize));
+	$("#pkopenprice").css("color",color);
+	if(highPrice > preSettlePrice){
+		color = "#ff5500";
+	}else if (highPrice < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pkhightprice").text(parseFloat(highPrice).toFixed(dotSize));
+	$("#pkhightprice").css("color",color);
+	if(lowPrice > preSettlePrice){
+		color = "#ff5500";
+	}else if (lowPrice < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pklowprice").text(parseFloat(lowPrice).toFixed(dotSize));
+	$("#pklowprice").css("color",color);
+	if(settlePrice > preSettlePrice){
+		color = "#ff5500";
+	}else if (settlePrice < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pkjs").text(parseFloat(settlePrice).toFixed(dotSize));
+	$("#pkjs").css("color",color);
+	if(totalAskQty > preSettlePrice){
+		color = "#ff5500";
+	}else if (totalAskQty < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pkml_sell").text(totalAskQty);
+	$("#pkml_sell").css("color","#000000");
+	if(totalBidQty > preSettlePrice){
+		color = "#ff5500";
+	}else if (totalBidQty < preSettlePrice){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pkml_buy").text(totalBidQty);
+	$("#pkml_buy").css("color","#000000");
+	if(changeValue > 0){
+		color = "#ff5500";
+	}else if (changeValue < 0){
+		color = "#0bffa4";
+	}else{
+		color = "#000000";
+	}
+	$("#pkzd").text(parseFloat(changeValue).toFixed(dotSize)+"/"+parseFloat(changeRate).toFixed(2)+"%");
+	$("#pkzd").css("color",color);
+	$("#pktrademl").text(totalVolume);
+	$("#pktrademl").css("color","#000000");
+	$("#pkccml").text(position);
+	$("#pkccml").css("color","#000000");
+	$("#pkzj").text(parseFloat(preSettlePrice).toFixed(dotSize));
+	$("#pkccml").css("color","#000000");
+}
+/**
+ * 清理盘口数据
+ */
+function clearHandicapData(){
+	$("#pkzd").text(0);
+	$("#pktrademl").text(0);
+	$("#pkccml").text(0);
+	$("#pkzj").text(0);
+	$("#pkmj_sell").text(0);
+	$("#pkmj_buy").text(0);
+	$("#pklastparice").text(0);
+	$("#pkopenprice").text(0);
+	$("#pkhightprice").text(0);
+	$("#pklowprice").text(0);
+	$("#pkjs").text(0);
+	$("#pkml_sell").text(0);
+	$("#pkml_buy").text(0);
+	$(".fr").css("color","#000000");
 }
 /**
  * 更新右边数据

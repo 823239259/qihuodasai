@@ -35,5 +35,13 @@ public interface CrawlerCalendarService extends BaseService<CrawlerCalendar>{
 	 * 获取日历数据
 	 * @param channelSet
 	 */
-	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page);
+	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page,String type,String startTime,String endTime);
+	/**
+	 * 根据时间查询日历
+	 * @param page
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<CrawlerCalendar> doGetCrwlerCalendarByTime(String startTime,String endTime);
 }

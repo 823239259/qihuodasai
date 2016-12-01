@@ -75,11 +75,6 @@
         		<li><a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a></li>
         		<li><a target="_blank" href="http://xm.fbw315.com/">厦门装修网</a></li>
         		<li><a target="_blank" href="http://www.kancai.com">苏州立信会计</a></li>
-        		<li><a target="_blank" href="http://hao.rising.cn">瑞星安全导航</a></li>
-        		<li><a target="_blank" href="http://www.114.com.cn">114导航</a></li>
-        		<li><a target="_blank" href="https://123.sogou.com">搜狗导航</a></li>
-        		<li><a target="_blank" href="http://hao.360.cn">360导航</a></li>
-        		<li><a target="_blank" href="http://se.360.cn/">360安全浏览器</a></li>
         	</ul>
             <ul>
                 <li>相关网站：</li>
