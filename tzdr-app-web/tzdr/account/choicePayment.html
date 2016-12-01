@@ -29,6 +29,10 @@
 					<label><img src="../../images/recharge/bankP.png"><i>网银支付</i></label>
 					<input name="choiceBank" type="radio" value="2" checked="checked">
 				</div>
+				<!--<div class="mui-input-row mui-radio" id"weixinPay">
+					<label><img src="../../images/recharge/wei.png"><i>微信转账</i></label>
+					<input name="choiceBank" type="radio" value="3">
+				</div>-->
 				<div class="mui-input-row mui-radio">
 					<label><img src="../../images/recharge/Transfer.png"><i>银行转账</i></label>
 					<input name="choiceBank" type="radio"value="4">
@@ -45,22 +49,15 @@
 				$(".chargeList .mui-input-row label").css({
 					"width":+width-10+"px",
 				})
-				function getUrlParam (name) {
-				     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-				     var r = window.location.search.substr(1).match(reg);
-				     if (r!= null) {
-				        return unescape(r[2]);
-				     }else{
-				        return null;
-				     }
-				} 
 			mui.plusReady(function(){
+				
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
-				paymentMoney.innerText=wv.money.toFixed(2)
+				paymentMoney.innerText=wv.money.toFixed(2);
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					immediatePayment(wv);
 				});
+			});
 			function immediatePayment(wv){
 				var val =  $('.chargeList input[name="choiceBank"]:checked ').val();
 				if(val==3){
@@ -151,7 +148,6 @@
 					}
 				},paramUrl);
 			}
-			});
 		</script>
 	</body>
 </html>

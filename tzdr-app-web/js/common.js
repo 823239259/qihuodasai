@@ -140,7 +140,7 @@
       		mui.each(cachepages,function(index,item){
       			//alert(item.getURL());
       			// 不是当前页和首页的都可以删除
-      			if (item.getURL() != curr.getURL() && item.getURL().indexOf('main.html')<0){
+      			if (item.getURL() != curr.getURL() && item.getURL().indexOf('start.html')<0){
       				plus.webview.close(item);
       			}
       		});
