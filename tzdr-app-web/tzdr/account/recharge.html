@@ -140,6 +140,7 @@
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
+				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
 					return;  
@@ -148,11 +149,16 @@
 					mui.toast("充值金额不低于"+money1+"元");
 					return; 
 				}
+				if(money > money2){
+					mui.toast("充值金额不高于"+money2+"元");
+					return; 
+				}
+				mui.app_refresh("choicePayment.html");
 				mui.openWindow({
 					url:"choicePayment.html",
 					id:"choicePayment.html",
 					extras:{
-						  money : money,
+						  money:money,
 					      backId:wv.backId
 					}
 				})
