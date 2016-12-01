@@ -204,8 +204,8 @@ function handleData(evt){
 			isBuy = false;
 			localCachePositionRecentData = {};
 		}*/
-		referCount--;
 		if(referCount > 0){ 
+			referCount--;
 			tradeSuccessLoadHoldData();
 		}
 	}
