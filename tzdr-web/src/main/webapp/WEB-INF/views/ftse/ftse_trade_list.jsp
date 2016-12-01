@@ -82,18 +82,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			<div class="window_detail_lis">
 				<p style="text-align: center; font-size: 20px; padding: 20px 0;">历史成交明细</p>
 				<table border="0" cellspacing="0" cellpadding="0" style="font-size: 14px; color: #666;">
-					<tbody>
-						<tr id="window_detail_title" style="color: #333;">
-							<td style="width: 40px;">序号</td>
-							<td style="width: 100px;">合约名称</td>
-							<td style="width: 115px;">交易盈亏交易手数</td>
-							<td style="width: 100px;">交易手续费</td>
-							<td style="width: 100px;">成交价</td>
-							<td style="width: 40px;">买卖</td>
-							<td style="width: 110px;">买入/卖出</td>
-							<td style="width: 70px;">订单类型</td>
-							<td style="width: 80px;">结算时间</td>
-						</tr>
+					<tbody id = "tradeDetail">
 					</tbody>
 				</table>
 				<p class="window_detail_share sns-share" style="font-size: 14px; padding: 20px 0;">

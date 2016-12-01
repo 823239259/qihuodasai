@@ -15,7 +15,7 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(appendTraderBond))+'元');
 		}
 		else if (i == 3) {
-			$(this).html($.formatMoney(Number(tranProfitLoss))+'美元');//（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）
+			$(this).html($.formatMoney(Number(tranProfitLoss)*parities,2)+'元');//（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）
 		}
 		else if (i == 4){
 			$(this).html('1:'+Number(parities).toFixed(6));
@@ -27,7 +27,7 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(endAmount))+'元');
 		}
 	});
-	var window_detail_details_fee ="<p>1000.00元=800.00元+300.00元+100.00元 - 200.00元</p>" +
+	var window_detail_details_fee ="<p>"+endAmount+"元="+traderBond+"元+"+appendTraderBond+"元+"+$.formatMoney(Number(tranProfitLoss)*parities,2)+"元 - "+tranCommission+"元</p>" +
     "<p>（结算金额=操盘保证金+追加保证金+交易盈亏-交易手续费）</p>" +
     "<p>注意：交易手续费=合约手续费×手数</p>";
 	$("#window_detail_details_fee").html(window_detail_details_fee);
@@ -113,26 +113,53 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 
 	    })
 	}
-	var window_detail_title ="";
-    window_detail_title = '<tr><td>'+"1"+'</td>' +
-    '<td>'+"中国香港富时A50"+'</td>' +
-    '<td>'+"201314"+'</td>' +
-    '<td>'+"4800.00"+'</td>' +
-    '<td>'+"14800.00"+'</td>' +
-    '<td>'+"买"+'</td>' +
-    '<td>'+"14800.00"+'</td>' +
-    '<td>'+"市价"+'</td>' +
-    '<td>'+"2016-11-21"+'</td><tr>';
-    
-	$("#window_detail_title").after(window_detail_title);
-	
 	$(".fl_navtitle h3").click(function() {
 		var _this = $(this);
 		$(".fl_navtitle h3").removeClass("on").eq(_this.index()).addClass("on");
 		$("#window_detail_tab .window_detail_lis").hide().eq(_this.index()).show();
 	});
 };
-
+function bindEndOfFtse(cls){
+	$("."+cls).bind("click",function(){
+		var fastId = $(this).attr("data-fastId");
+		$.ajax({
+			url:basepath+"/userftse/getFstTradeDetail",
+			type:"get",
+			data:{
+				id:fastId
+			},
+			success:function(result){
+				var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
+											'<td style="width: 40px;">序号</td>'+
+											'<td style="width: 120px;">合约名称</td>'+
+											'<td style="width: 60px;">交易盈亏</td>'+
+											'<td style="width: 60px;">交易手数</td>'+
+											'<td style="width: 60px;">手续费</td>'+
+											'<td style="width: 60px;">成交价</td>'+
+											'<td style="width: 40px;">买卖</td>'+
+											'<td style="width: 80px;">买入/卖出</td>'+
+											'<td style="width: 60px;">订单类型</td>'+
+											'<td style="width: 100px;">结算时间</td>'+
+										'</tr>';
+				var data = result.data.data;
+				for(var i = 0 ; i < data.length;i++){
+					var _data = data[i];
+				    window_detail_title += '<tr><td>'+i+'</td>' +
+				    '<td>'+_data.commodityNo+_data.contractNo+'</td>' +
+				    '<td>'+_data.flat+'</td>' +
+				    '<td>'+_data.tradeNum+'</td>' +
+				    '<td>'+_data.free+'</td>' +
+				    '<td>'+_data.tradePrice+'</td>' +
+				    '<td>'+_data.drection+'</td>' +
+				    '<td>'+_data.orderPrice+'</td>' +
+				    '<td>'+_data.orderType+'</td>' +
+				    '<td>'+_data.marketDate+'</td><tr>';
+				}
+				$("#tradeDetail").after(window_detail_title);
+			}
+		});
+	});
+}
 //交易帐号明细窗口
 function settingAccountInfoFtse(tranAccount,tranPassword,businessType) {
 	
@@ -248,8 +275,8 @@ function getFtseDataList(index,type,
             		html = html + "</td>";
             	}else if(n.stateType == 6){
             		html = html + "<td>" + $.formatMoney(Number(n.endAmount)) + "元</td>";
-            		html = html + "<td><a href='javascript:void(0);' onclick=\"openWindow('#detailInfoFtse',settingEndInfoFtse(" +
-	            	n.traderBond + "," 
+            		html = html + "<td><a href='javascript:void(0);' class = 'dataFastId' data-fastId="+n.id+"  onclick=\"openWindow('#detailInfoFtse',settingEndInfoFtse(" +
+            		n.traderBond + "," 
 	            	+ n.appendTraderBond + ","
 	            	+ n.tranProfitLoss + ","
 	            	+n.endParities+","
@@ -264,6 +291,7 @@ function getFtseDataList(index,type,
             	html += "</tr>";
             }); 
             $(tbody).html(html);
+            bindEndOfFtse("dataFastId");
            //分页-只初始化一次   
             if($("#"+pagediv).html()== ''){ 
     		   $("#"+pagediv).pagination(total, {   

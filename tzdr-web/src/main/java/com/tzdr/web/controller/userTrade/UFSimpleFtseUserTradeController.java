@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,6 +30,7 @@ import com.tzdr.business.cms.service.user.UserService;
 import com.tzdr.business.service.contract.ContractParitiesService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.tradecalendar.TradeDayService;
 import com.tzdr.business.service.userTrade.FSimpleConfigService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
@@ -43,6 +45,7 @@ import com.tzdr.domain.web.entity.ContractParities;
 import com.tzdr.domain.web.entity.FSimpleConfig;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.FSimpleParities;
+import com.tzdr.domain.web.entity.TradeDetail;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 import com.tzdr.web.constants.Constants;
@@ -92,6 +95,9 @@ public class UFSimpleFtseUserTradeController {
 
 	@Autowired
 	private MessagePromptService messagePromptService;
+	
+	@Autowired
+	private TradeDetailService tradeDetailService;
 
 	/**
 	 * 汇率类型
@@ -518,7 +524,25 @@ public class UFSimpleFtseUserTradeController {
 		}
 		return pageInfo;
 	}
-
+	/**
+	 * 獲取交易明細
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getFstTradeDetail",method = RequestMethod.GET)
+	public JsonResult getFstTradeDetail(HttpServletRequest request,@RequestParam("id")String id){
+		JsonResult resultJson = new JsonResult();
+		try {
+			resultJson.setSuccess(true);
+			List<TradeDetail> details = tradeDetailService.doGetByFtseId(id);
+			resultJson.appendData("data", details);
+		} catch (Exception e) {
+			resultJson.setSuccess(false);
+		}
+		return resultJson;
+	}
 	/**
 	 * 获取需要追加保证金信息
 	 * 
