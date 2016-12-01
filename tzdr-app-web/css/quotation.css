@@ -1133,4 +1133,10 @@ input{
 #segmentedControl .mui-active{
 	width: 100%;
 }
-
+#buyFuture .butomBoreder .mui-input-row{
+	margin-top: 2px;
+}
+#buyFuture .butomBoreder .mui-input-row label{
+	width: 100%;
+	height: 35px;
+}
