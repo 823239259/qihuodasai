@@ -167,7 +167,6 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam);
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			referCount++;
 			if(referCount == 0){
 				tradeSuccessLoadHoldData();
 			}
@@ -199,8 +198,8 @@ function handleData(evt){
 			}
 		}
 	}else{
-		referCount--;
 		if(referCount > 0){
+			referCount--;
 			tradeSuccessLoadHoldData();
 		}
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
