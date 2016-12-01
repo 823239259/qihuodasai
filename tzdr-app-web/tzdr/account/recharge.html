@@ -29,7 +29,7 @@
 				</li>
 			</ul>
 			<div class="ac_btn">
-				<a href="#" id="test"><button type="button" id="recharge-btn" class="mui-btn mui-btn-block lg-btnlogin">立即充值</button></a>
+				<button type="button" id="recharge-btn" class="mui-btn mui-btn-block lg-btnlogin">立即充值</button>
 			</div>
 			<p class="textAlignRightP">充值后的余额：<span class="yellowFont"><i id="allBalance">0</i>元</span></p>
 		</div>
@@ -37,6 +37,7 @@
 			mui.init();
 			mui.plusReady(function(){
 					loadCss();
+					plus.webview.close("choicePayment.html");
 					function loadCss(){
 						var Proportion=1;
 						var resolutionWidth=plus.screen.resolutionWidth;
@@ -83,30 +84,9 @@
 						return;
 					}
 				}
+				
 					document.getElementById("recharge-btn").addEventListener("tap",function(){
-						var money=Number($("#inputMoney").val());
-						var money2=9999999;
-						if(mui.isnull(money)) {
-							mui.toast("充值金额不能为空");
-							return;  
-						}
-						if(moneyAll > money){
-							mui.toast("充值金额不低于"+moneyAll+"元");
-							return; 
-						}
-						if(money > money2){
-							mui.toast("充值金额不高于"+money2+"元");
-							return; 
-						}
-						mui.cacheUser.clearCachePages();
-						mui.openWindow({
-								url:"choicePayment.html",
-								id:"choicePayment",
-								extras:{
-									  money:money,
-								      backId:wv.backId
-								}
-							})
+						checkMoney(moneyAll,wv)
 					});
 					
 				//获取用户余额
@@ -161,7 +141,6 @@
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
-				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
 					return;  
@@ -170,23 +149,14 @@
 					mui.toast("充值金额不低于"+money1+"元");
 					return; 
 				}
-				if(money > money2){
-					mui.toast("充值金额不高于"+money2+"元");
-					return; 
-				}
-//					var re = plus.webview.getWebviewById("choicePayment");
-//				if(re != null || re != undefined){
-//						re.reload(); 
-//					}
-//				document.getElementById("test").href = "choicePayment.html?targetId="+money+"";
-//				mui.openWindow({
-//					url:"choicePayment.html",
-//					id:"choicePayment",
-//					extras:{
-//						  money:money,
-//					      backId:wv.backId
-//					}
-//				})
+				mui.openWindow({
+					url:"choicePayment.html",
+					id:"choicePayment.html",
+					extras:{
+						  money : money,
+					      backId:wv.backId
+					}
+				})
 			}
 		</script>
 	</body>

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import jodd.util.Base64;
 import jodd.util.StringUtil;
 
-import org.apache.geronimo.mail.util.Base64Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -380,10 +379,10 @@ public class AccountController {
 		return false;
 	}
 	@RequestMapping(value = "/redirectVsNet")
-	public String redirectVsNet(HttpServletRequest request){
+	public String redirectVsNet(HttpServletRequest request,HttpServletResponse response){
 		UserSessionBean userSessionBean = (UserSessionBean)request.getSession().getAttribute(Constants.TZDR_USER_SESSION);  //获取用户账户信息
 		StringBuffer url = new StringBuffer();
-		url.append("http://127.0.0.1:8020/test.www.vs.net/index.html");
+		url.append(request.getParameter("url"));
 		byte[] b = null;  
         String s = null; 
         try {  
@@ -395,6 +394,7 @@ public class AccountController {
     				url.append("?o="+s+"");
     		   }
         	}
+        	
         } catch (UnsupportedEncodingException e) {  
             e.printStackTrace();  
         } 
