@@ -1338,10 +1338,11 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"tzdr/account/choicePayment.html"
 				],
 				"refer": [
-					"tzdr/account/choicePayment.html"
+					"tzdr/account/bankPay.html"
 				],
 				"priority": 0
 			},
@@ -1358,7 +1359,8 @@
 					"images/recharge/bankP.png",
 					"images/recharge/jingdong.png",
 					"images/recharge/wei.png",
-					"js/pingpp.js"
+					"js/pingpp.js",
+					"tzdr/account/recharge.html"
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",
@@ -1396,7 +1398,10 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/account/account.html",
+					"home.html"
+				],
 				"priority": 0
 			},
 			"tzdr/login/confirmPassword.html": {
