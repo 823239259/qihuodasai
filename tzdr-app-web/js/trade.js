@@ -1510,7 +1510,7 @@ function bindOpertion(){
 $("#add").bind("click",function(){
 	var contractCode = selectDesgnate["contraction"];
 	var tipContent = "确认改单合约【"+contractCode+"】"; 
-	alertProtype(tipContent,"确认撤单?",Btn.confirmedAndCancle(),doInsertChangeSingleOrder,cancleCallBack);
+	alertProtype(tipContent,"确认改单?",Btn.confirmedAndCancle(),doInsertChangeSingleOrder,cancleCallBack);
 	var add_div = $("#add_div");
 	add_div.addClass("mui-hidden");
 	mui("#popover").popover("toggle");
