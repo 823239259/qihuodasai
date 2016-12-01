@@ -156,6 +156,10 @@ function bindEndOfFtse(cls){
 				    '<td>'+_data.marketDate+'</td><tr>';
 				}
 				$("#tradeDetail").after(window_detail_title);
+				/*$("#tradeDetail").css({
+				    "height": "500px",
+			        "overflow": "hidden"
+	            });*/
 			}
 		});
 	});

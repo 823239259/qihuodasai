@@ -81,10 +81,13 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			</div>
 			<div class="window_detail_lis">
 				<p style="text-align: center; font-size: 20px; padding: 20px 0;">历史成交明细</p>
-				<table border="0" cellspacing="0" cellpadding="0" style="font-size: 14px; color: #666;">
-					<tbody id = "tradeDetail">
-					</tbody>
-				</table>
+				<div style="height: 535px; overflow-y: scroll;">
+					<table style="height: 500px; overflow: hidden; font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
+						<tbody id = "tradeDetail">
+						
+						</tbody>
+					</table>
+				</div>	
 				<p class="window_detail_share sns-share" style="font-size: 14px; padding: 20px 0;">
 				分享到：<span><img alt="" src="${ctx}/static/images/detail_weixin.jpg">朋友圈</span>
 				<span><img alt="" src="${ctx}/static/images/detail_weibo.jpg">新浪微博</span>
