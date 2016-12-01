@@ -22,6 +22,13 @@ function setMarketSubCommdity(key,value){
 }
 var localCacheQuote = {};
 /**
+ * 行情品种查询是否成功
+ */
+var queryCommodityIsFlag = false;
+function getQueryCommodityIsFlag(){
+	return queryCommodityIsFlag;
+}
+/**
  * 添加最新一条行情行情到全局缓存
  * @param {Object} param
  */
@@ -150,6 +157,7 @@ mui.plusReady(function(){
 	   			}
 	   			
 			}
+			queryCommodityIsFlag = true;
         }else if(method == "OnRspUnSubscribe"){
         	var quoteParam = jsonData;
         }

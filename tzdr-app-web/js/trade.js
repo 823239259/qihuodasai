@@ -1253,16 +1253,22 @@ function loadOperateLogin(){
 	});
 }
 $(function(){
-	/**
-	 * 初始化交易配置 --> trade.config
-	 */
-	initTradeConfig();
-	validateIsGetVersion();
-	getVersion();
-	if(username == null){
-		$("#switchAccount").text("登录账号");
-	}
-	bindOpertion();
+	var validateQueryCommodity = setInterval(function(){
+			if(getQueryCommodityIsFlag()){ 
+				/**
+				 * 初始化交易配置 --> trade.config
+				 */
+				initTradeConfig();
+				validateIsGetVersion();
+				getVersion();
+				if(username == null){
+					$("#switchAccount").text("登录账号");
+				}
+				bindOpertion();
+				clearInterval(validateQueryCommodity);
+			}
+		},500);
+	
 	$("#switchAccount").click(function(){  
 		if(isLogin){
 			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
