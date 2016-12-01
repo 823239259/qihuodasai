@@ -157,7 +157,7 @@ public class SecurityInfoServiceImpl  extends BaseServiceImpl<UserVerified,Secur
 			if (StringUtils.equals(module,"配股宝")){
 				EmailUtils.getInstance().sendMailTemp(email,"配股宝邮箱验证码",null,"pgb-secemail",null, pramas,null);
 			}else{
-				EmailUtils.getInstance().sendMailTemp(email,"投资达人邮箱验证码",null,"secemail",null, pramas,null);
+				EmailUtils.getInstance().sendMailTemp(email,"维胜金融邮箱验证码",null,"secemail",null, pramas,null);
 			}
 			//EmailUtils.getInstance().sendMailTemp(email, "邮箱验证码",pramas);
 			flag=true;

@@ -84,17 +84,27 @@ public class CrawlerCalendarServiceImp  extends BaseServiceImpl<CrawlerCalendar,
 		getEntityDao().deleteInBatch(entities);
 	}
 	@Override
-	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page) {
-		return getEntityDao().findByCalerdarPage(page.getPageIndex(), page.getSize());
-	}
-	@Override
-	public List<CrawlerCalendar> doGetCrwlerCalendarByTime(Page page, String startTime, String endTime) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	public List<CrawlerCalendar> doGetCrwlerCalendar(Page page,String type,String startTime,String endTime) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate;
 		try {
 			startDate = df.parse(startTime);
 			Date endDate = df.parse(endTime);
-			return getEntityDao().findByCalerdarPageByTime(page.getPageIndex(), page.getSize(), startDate.getTime()/1000, endDate.getTime()/1000);
+			return getEntityDao().findByCalerdarPage(page.getPageIndex(), page.getSize(),type,startDate.getTime()/1000,endDate.getTime()/1000);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		return null;
+	}
+	@Override
+	public List<CrawlerCalendar> doGetCrwlerCalendarByTime( String startTime, String endTime) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate;
+		try {
+			startDate = df.parse(startTime);
+			Date endDate = df.parse(endTime);
+			return getEntityDao().findByCalerdarPageByTime( startDate.getTime()/1000, endDate.getTime()/1000);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
