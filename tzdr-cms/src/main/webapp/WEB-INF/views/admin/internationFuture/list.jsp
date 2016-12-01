@@ -359,6 +359,7 @@ function timeConvert(value,rowData,rowIndex) {
 						<shiro:hasPermission name="sys:riskmanager:internationFuture:view">
 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="tradeCount()">交易手数</a>
 						</shiro:hasPermission>
+						<a  href= "${ctx }/admin/internation/future/downLoadTempleExcl" class="easyui-linkbutton"  iconCls="icon-excel" plain="true">下载模板</a>
 					</div>
 				</div>
 				<div>
@@ -451,25 +452,118 @@ function timeConvert(value,rowData,rowIndex) {
         </table>
         </form>
 	</div>
-	<div class = "easyui-window" id = "inputFlag"  title="录入结果" style="width:800px;height:500px;display:none;border:none; overflow:scroll;top:4%"
+	<div class = "easyui-window" id = "inputWin"  title="录入结果" style="width:800px;height:500px;display:none;border:none; overflow:scroll;top:4%"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         		<table  id="mainTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
         			 	<tr>
         			 		<td>手机号码</td>
-        			 		<td><input id="input_mobile" name="mobile"  class="easyui-textbox" disabled="disabled" /></td>
+        			 		<td><input id="mobile" name="mobile"  class="easyui-textbox" disabled="disabled" /></td>
         			 		<td>操盘账号</td>
-        			 		<td><input id="input_account" name="account"  class="easyui-textbox" disabled="disabled" /></td>
+        			 		<td><input id="Account" name="Account"  class="easyui-textbox" disabled="disabled" /></td>
         			 	</tr>
         			 	<tr>
         			 		<td>操盘保证金</td>
-        			 		<td><input id="input_traderBond" name="traderBond"  class="easyui-textbox" disabled="disabled" /></td>
+        			 		<td><input id="traderBond" name="traderBond"  class="easyui-textbox" disabled="disabled" /></td>
         			 		<td>交易盈亏</td>
-        			 		<td><input id="input_tranProfitLoss" name="tranProfitLoss"  class="easyui-textbox"/></td>
+        			 		<td><input id="tranProfitLoss" name="tranProfitLoss"  class="easyui-textbox" data-options="required:true" /></td>
         			 	</tr>
         			 	<tr>
-        			 		<td><input type = "file" id = "input_file"/><button  onclick="importExcl()" id = "input_import">导入明细</button></td>
+        			 		<td><input type = "file" id = "input_file" name = "input_file"/><button  onclick="importExcl()" id = "input_import">导入明细</button></td>
         			 	</tr>
         		</table>
+        		<table  id="freeTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
+        			<tr id="hsiTradeNumTR">
+	        			<td class="label right">交易手数:</td>
+			                <td>
+			                <input id="tranActualLever" name="tranActualLever"  class="easyui-validatebox" data-options="required:true" />
+		                </td>
+		                <td class="label right">恒指交易:</td>
+		                <td>
+		                    <input id="hsiTranActualLever" name="hsiTranActualLever"  class="easyui-validatebox" data-options="required:true" />
+		                </td>
+			       </tr> 
+			           <tr id="mdTradeNumTR">
+			           
+			           		<td class="label right">迷你道指交易:</td>
+			                <td>
+			                   <input id="mdtranActualLever" name="mdtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			                <td class="label right">迷你纳指交易:</td>
+			                <td>
+			                   <input id="mntranActualLever" name="mntranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			            </tr>
+			           	<tr id="mbTradeNumTR">
+			           		<td class="label right">原油交易:</td>
+				            <td>
+				                <input id="crudeTranActualLever" name="crudeTranActualLever"  class="easyui-validatebox" data-options="required:true" />
+				            </td>
+			                <td class="label right">迷你标普交易:</td>
+			                <td>
+			                   <input id="mbtranActualLever" name="mbtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			            </tr>
+			            <tr id="nikkeiTradeNumTR">
+			            	<td class="label right">德国DAX交易:</td>
+			                <td>
+			                   <input id="daxtranActualLever" name="daxtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			                <td class="label right">日经225交易:</td>
+			                <td>
+			                   <input id="nikkeiTranActualLever" name="nikkeiTranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+						</tr>
+			            <tr id="agTradeNumTR">
+			             	<td class="label right">小恒指交易:</td>
+			                <td>
+			                   <input id="lhsiTranActualLever" name="lhsiTranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			                <td class="label right">美黄金交易:</td>
+			                <td>
+			                   <input id="agTranActualLever" name="agTranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+						</tr>
+				         <tr id="xHsTradeNumTR">
+				        	 <td class="label right">H股指交易:</td>
+			                <td>
+			                   <input id="heStockMarketLever" name="heStockMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			                <td class="label right">小H股指交易:</td>
+			                <td>
+			                   <input id="xhStockMarketLever" name="xhStockMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+						</tr>
+						   <tr  id="asTradeNumTR">
+						    <td class="label right">美铜交易:</td>
+			                <td>
+			                   <input id="AmeCopperMarketLever" name="AmeCopperMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			                <td class="label right">美白银交易:</td>
+			                <td>
+			                   <input id="AmeSilverMarketLever" name="AmeSilverMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+						</tr>
+						 <tr id="daxMinTradeNumTR">
+						 	<td class="label right">小原油交易:</td>
+			                <td>
+			                   <input id="smallCrudeOilMarketLever" name="smallCrudeOilMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+			                <td class="label right">迷你德国DAX指数:</td>
+			                <td>
+			                   <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                </td>
+						</tr>
+						  <tr>
+			                <td align="center" colspan="3">
+			                <a id="btn" href="javascript:void(0);" onclick="inputSave()" class="easyui-linkbutton">提交</a>
+			               <a id="btn" href="javascript:void(0);" onclick="inputClose()" class="easyui-linkbutton">取消</a>
+              			 </td>
+            </tr>
+        		</table>
+        		
+        		<table id = "tradeDetail" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
+        		</table>
+        		
         </div>
 	<!-- window 结算录入信息弹框 -->
 	<!-- <div id="inputWin" class="easyui-window" title="录入结果" 

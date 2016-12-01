@@ -90,30 +90,114 @@ function passClose() {
 function input(){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
-		$("#inputFlag").show();
-		$("#inputFlag").window('open');
-		$("#input_mobile").val(rows[0].mobile);
-		$("#input_account").val(rows[0].tranAccount);
-		$("#input_traderBond").val(rows[0].traderBond);
+		if(rows[0].stateType == "已结算"){
+			Check.messageBox("提示","已结算的用户不能再次录入！");
+			return;
+		}
+		var id = rows[0].id;
+		$.ajax({
+			url:basepath+"/admin/internation/future/getFtse",
+			type:"get",
+			data:{
+				id:id
+			},
+			success:function(result){
+				var data = result.data.fste;
+				var tradeDetail = result.data.tradeDetail;
+				handleData(data,tradeDetail);
+			}
+		});
+		$("#inputWin").show();
+		$("#inputWin").window('open');
+		$("#mobile").val(rows[0].mobile);
+		$("#Account").val(rows[0].tranAccount);
+		$("#traderBond").val(rows[0].traderBond);
+		$("#tradeDetail").html("");
 	}
 }
+var localDataLever = null;
 function importExcl(){
-	$.ajaxFileUpload({  
-        url : '/admin/internation/future/importExclDetail',  
-        secureuri : false,//安全协议  
-        fileElementId:'input_file',//id  
-        type : 'POST',  
-        dataType : 'json',  
-        async : false,  
-        error : function(data,status,e) {  
-            alert('Operate Failed!');  
-        },  
-        success : function(json) {  
-            alert("上传成功");
-        }  
-    });  
+	$(function(){
+		$.ajaxFileUpload({  
+	        url : basepath+'/admin/internation/future/importExclDetail',  
+	        secureuri : false,//安全协议  
+	        fileElementId:'input_file',//id  
+	        type : 'POST',  
+	        dataType : 'json',  
+	        async : false,  
+	        error : function(data,status,e) {  
+	            alert('导入失败!');  
+	        },  
+	        success : function(result) {  
+	            if(result.success){
+	            	handleData(result.data.dataLever,result.data.data);
+	            }else{
+	            	Check.messageBox("提示",data.message);
+	            }
+	        }  
+	    });  
+	})
 }
+function handleData(fast,tradeDetail){
+		var html = "<tr>"+
+			"<td>序号</td>"+
+			"<td>合约名称</td>"+
+			"<td>交易手数</td>"+
+			"<td>交易手续费</td>"+
+			"<td>成交价</td>"+
+			"<td>买卖</td>"+
+			"<td>委托价</td>"+
+			"<td>订单类型</td>"+
+			"<td>平盈</td>"+
+			"<td>下单人</td>"+
+			"<td>下单时间</td>" +
+			"</tr>";
+		var data = tradeDetail;
+		var length = data.length;
+		for(var i = 1 ;i  < length ; i++){
+		var _data = data[i];
+		var marketTime = "";
+		if(_data.marketTime==undefined||_data.marketTime==null||_data.marketTime=="null"){
+			marketTime = "";
+		}else{
+			marketTime = _data.marketTime;
+		}
+		html += "<tr>" +
+			"<td>"+i+"</td>" +
+			"<td>"+_data.commodityNo+_data.contractNo+"</td>" +
+			"<td>"+_data.tradeNum+"</td>" +
+			"<td>"+_data.free+"</td>" +
+			"<td>"+_data.tradePrice+"</td>" +
+			"<td>"+_data.drection+"</td>" +
+			"<td>"+_data.orderPrice+"</td>" +
+			"<td>"+_data.orderType+"</td>" +
+			"<td>"+_data.flat+"</td>" +
+			"<td>"+_data.orderUser+"</td>" +
+			"<td>"+_data.marketDate+" "+marketTime+"</td>" +
+			"</tr>";
+		}
+		var dataLever = fast;
+		localDataLever = JSON.stringify(data);
+		$("#tranProfitLoss").val(dataLever.tranProfitLoss==undefined?"":dataLever.tranProfitLoss);
+		$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+		$("#hsiTranActualLever").val(dataLever.hsiTranActualLever==undefined?0:dataLever.hsiTranActualLever);
+		$("#mdtranActualLever").val(dataLever.mdtranActualLever==undefined?0:dataLever.mdtranActualLever);
+		$("#mntranActualLever").val(dataLever.mntranActualLever==undefined?0:dataLever.mntranActualLever);
+		$("#crudeTranActualLever").val(dataLever.crudeTranActualLever==undefined?0:dataLever.crudeTranActualLever);
+		$("#mbtranActualLever").val(dataLever.mbtranActualLever==undefined?0:dataLever.mbtranActualLever);
+		$("#daxtranActualLever").val(dataLever.daxtranActualLever==undefined?0:dataLever.daxtranActualLever);
+		$("#nikkeiTranActualLever").val(dataLever.nikkeiTranActualLever==undefined?0:dataLever.nikkeiTranActualLever);
+		$("#lhsiTranActualLever").val(dataLever.lhsiTranActualLever==undefined?0:dataLever.lhsiTranActualLever);
+		$("#agTranActualLever").val(dataLever.agTranActualLever==undefined?0:dataLever.agTranActualLever);
+		$("#heStockMarketLever").val(dataLever.heStockMarketLever==undefined?0:dataLever.heStockMarketLever);
+		$("#xhStockMarketLever").val(dataLever.xhStockMarketLever==undefined?0:dataLever.xhStockMarketLever);
+		$("#AmeCopperMarketLever").val(dataLever.AmeCopperMarketLever==undefined?0:dataLever.AmeCopperMarketLever);
+		$("#AmeSilverMarketLever").val(dataLever.AmeSilverMarketLever==undefined?0:dataLever.AmeSilverMarketLever);
+		$("#smallCrudeOilMarketLever").val(dataLever.smallCrudeOilMarketLever==undefined?0:dataLever.smallCrudeOilMarketLever);
+		$("#daxtranMinActualLever").val(dataLever.daxtranMinActualLever==undefined?0:dataLever.daxtranMinActualLever);
+		$("#tradeDetail").html(html);
 
+}
 /*function input() {
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
@@ -256,7 +340,10 @@ function inputSave() {
 				"daxtranActualLever":daxtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 				"mntranActualLever":mntranActualLever,"lhsiTranActualLever":lhsiTranActualLever,
 				"agTranActualLever":agTranActualLever,"heStockMarketLever":heStockMarketLever,"xhStockMarketLever":xhStockMarketLever,
-				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,"smallCrudeOilMarketLever":smallCrudeOilMarketLever,"daxtranMinActualLever":daxtranMinActualLever} ,
+				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,
+				"smallCrudeOilMarketLever":smallCrudeOilMarketLever,"daxtranMinActualLever":daxtranMinActualLever,
+				"tradeDetail":localDataLever
+				} ,
 				function(data){
 					eyWindow.closeProgress();
 					if (data.success) {
