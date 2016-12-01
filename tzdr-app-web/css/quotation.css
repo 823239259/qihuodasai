@@ -55,15 +55,15 @@ p{
 	height: 215px;
 	background-color: #2B2B2B;
 	overflow: hidden;
-	border-top: 1px solid #454545;
+	border-top: 1px solid #121212;
 }
 .buttomFixLeft,.buttomFixRight{
 	background-color: #2B2B2B;
 	float: left;
 }
 .buttomFixRight{
-	border-bottom: 1px solid #454545;
-		border-left: 1px solid #454545;
+	border-bottom: 1px solid #121212;
+		border-left: 1px solid #121212;
 	height: 90px;
 }
 .buttomFixRight p{
@@ -76,7 +76,7 @@ p{
 	height: 30px;
 	line-height: 30px;
 	padding: 0px 15px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	margin-bottom: 0px;
 	width: 100%;
 }
@@ -100,21 +100,7 @@ p{
 #domnRange{
 	color:#e9392a;
 }
-#BuyContent{
-	color:#cccccc;
-	height: 30px;
-	line-height: 30px;
-	padding: 0px 15px;
-	border-bottom: 1px solid #454545;
-	margin-bottom: 0px;
-	width: 100%;
-	background-color:#2B2B2B;
-}
-.BuyDiv{
-	clear: all;
-	borer:1px solid red;
-	background-color:#2B2B2B;
-}
+
 .BuyContentLeft{
 	width: 50%;
 	display: inline-block;
@@ -122,7 +108,7 @@ p{
 	height: 42px;
 	line-height: 42px;
 	padding: 0px 15px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	margin-bottom: 0px;
 	font-size: 14px;
 }
@@ -155,33 +141,12 @@ p{
 	background-color:#16a951;
 	margin-left: 5px;
 }
-#marketBuy{
-	position: absolute;
-	left:0px;
-	background-color:#e9392a;
-	height: 40px;
-	line-height: 28px;
-	border: none;
-	color:#FFFFFF;
-	padding:0px;
-		width: 50%;
-}
-#marketSell{
-	position: absolute;
-	right:0px;
-	background-color:#16a951;
-	height: 40px;
-	line-height: 28px;
-	border: none;
-	width: 50%;
-	padding:0px;
-	color:#FFFFFF;
-}
+
 .Assets{
 	width: 100%;
 	height:40px;
 	padding:4px 0px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	position: fixed;
 	top:90px;
 	z-index: 998;
@@ -203,47 +168,53 @@ p{
 }
 .ProductInformation{
 	overflow: hidden;
-	padding:3px 0px;
 	color:#FFFFFF;
-	border-bottom: 1px solid #454545;
+	height: 73px;
+	border-bottom: 1px solid #121212;
 }
 .ProductInformationLeft,.ProductInformationRight{
 	float: left;
 	overflow: hidden;
-	padding:0px 8px;
-	/*width: 50%;*/
-	height: 65px;
+	/*padding:0px 8px;*/
+	height: 73px;
 }
 .ProductInformationRight{
-	width: 48%;
+	width: 47%;
+	padding: 5px 10px 3px;
 }
+ .ProductInformationRight p{
+ 	line-height: 22px;
+ }
 .ProductInformationLeft{ 
-	width: 52%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-right: 0px;
+	width: 53%;
+	padding: 0px;
 	position: relative;
-	/*padding:10px 15px;*/
+	/*padding:0px 10px;*/
+	border-right: 1px solid #121212;
 }
-.ProductInformationLeft p{
-	font-size: 14px;
-}
-
 .ProductInformationLeft #tradeTitle{
 	position: absolute;
 	top:12px;
-	/*left:-2px;*/
+	height: 50px;
 	z-index: 888;
 	background-color: rgba(0, 0, 0, 0);
 	color:#FFFFFF;
 	font-size: 14px;
-	margin-bottom: 0px;
-	padding: 10px 0px !important;
+	padding: 0px 0px 10px 10px !important;
+	margin: 0px;;
+}
+#MainContract{
+	position: absolute;
+	bottom:10px;
+	color:#999999;
+	font-size: 14px;
+	left: 15px;;
 }
 #searchIcon{
-	margin-top: 12px;
+	margin-top: 27px;
 	display: inline-block;
 	width: 100%;
+	padding-right: 1px;
 	text-align: right;
 }
 #tradeTitle #titleValue{
@@ -283,13 +254,13 @@ p{
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #000000;
 }
-.ProductInformationLeft select{
+/*.ProductInformationLeft select{
 	background-color: rgba(0, 0, 0, 0);
 	color:#FFFFFF;
 	font-size: 14px;
 	margin-bottom: 0px;
 	padding: 10px 0px !important;
-}
+}*/
 /*#searchIcon{
 	position: absolute;
 	top: 10%;
@@ -314,7 +285,7 @@ p{
 
 }
 #buyFuture{
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 }
 #buyFuture label{
 	color:#FFFFFF;
@@ -325,7 +296,7 @@ p{
 	height:40px;
 	line-height: 40px;
 	font-size: 14px;
-	border-bottom: 1px solid #454545;
+	border-bottom: 1px solid #121212;
 	padding:0px 15px;
 	
 }
@@ -374,6 +345,7 @@ p{
 }
 #trade{
 	background-color: #2B2B2B;
+	/*display: block;*/
 }
 .mui-navigate-right:after, .mui-push-right:after{
 	content:"";
@@ -389,25 +361,49 @@ p{
 	z-index: 999;
 }
 #kilAnorder{
-	width: 70%;
+	bottom: 1%;
+	right: 25%;
+	border-top:none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
+}
+.focusButton{
+	height: 40px;
+	line-height: 40px;
+	padding: 0px;
+	width: 25%;
+	color:#2b2b2b;
 	background-color: #cccccc;
 	display: block;
+	position: fixed;
 	border:none;
-	position: fixed;
+	color:#2b2b2b;
+	font-size: 16px;;
+}
+#fullWithdrawal{
 	bottom: 1%;
-	left: 15%;
+	right: 50%;
+	border-top:none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
 }
-#allOpen,#Open{
-	background-color:#cccccc;
-	position: fixed;
+#changeSingle{
+	bottom: 1%;
+	right: 0px;
 }
+
 #allOpen{
 	bottom: 1%;
-	left: 5%;
+	right: 25%;
+	border-top:none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
 }
 #Open{
 	bottom: 1%;
-	right: 5%;
+	right: 0px;
 }
 #positionList,#postersOrder{
 	width: 100%;
@@ -652,13 +648,14 @@ input{
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
 	color:#FFCC33;
 }
-#switchAccount{
-	position: absolute;
+#muneBox{
 	display: inline-block;
-	right: 10px;
+	width: 40px;
 	height: 43px;
-	line-height: 43px;
-	font-size: 14px;
+	position: absolute;
+	right: 5px;
+	background: url(../images/menu.png) no-repeat center center;
+	background-size: 18px 18px;
 }
 #refresh{
 	color:#FFFFFF;
@@ -715,63 +712,74 @@ input{
 	height: auto;
 	margin-top: 10px;
 }
-.displayStyle{
-	display: none;
-}
 .mui-bar-nav{
 			-webkit-box-shadow:none;
 			box-shadow:none;
 			border-bottom: 1px solid #454545;
 		}
+.BuyDiv{
+	clear: all;
+	width: 100%;
+	background-color:#2B2B2B;
+	position: fixed;
+	bottom: 0px;
+}
 #numberInput{
 	width: 100%;
 	position: relative;
 	clear: both;
+	padding:10px ;
+	font-size: 14px;
 }
 #numberInput input{
-	border: 1px solid #454545;
+	border: 1px solid #121212;
 	background-color: #1f1f1f;
 	color:#FFFFFF;
 	text-align: center;
 	vertical-align: middle;
+	height: 50px;
+	line-height: 50px;
+	padding: 0px 85px 0px 45px;
 }
 #numberInput label{
 	color:#999999;
 	border-radius: 85px;
 	position: absolute;
+	top:25px;
 }
-#buttonDivList{
+#numberInput label:nth-child(1){
+	left:15px;
+}
+#numberInput label:nth-child(3){
+	right:15px;
+}
+.buttonDivList{
 	width: 100%;
-	position: relative;
+	overflow: hidden;
 }
-/*#headerMenu button{
+#marketBuy,#marketSell{
+	height:50px ;
+	line-height: 50px;
+	font-size: 16px;;
+}
+#marketBuy{
+	float: left;
+	background-color:#e9392a;
+	height: 50px;
+	line-height: 50px;
 	border: none;
-	padding:0px;
-	background-color: #2B2B2B;
-	text-align: center;
-	height: 40px;
-	line-height: 40px;
-	/*border-radius: 50%;
-}*/
-#tradeMenu{
-	background: url(../images/tradeOrderBg.png) no-repeat center;
-	background-size: 75px;
-	position: absolute;
-	left:10px;
-}
-#timeChartMenu{
-	border:none;
-	text-align: center;
-	background-color: #2B2B2B;
-	color:#fcc900;
-}
-#selectType{
-	background-color: #2B2B2B;
 	color:#FFFFFF;
-	text-align: right;
-	background-image: url(../images/down.png);
-	background-repeat: no-repeat;
-	background-position: center right;
+	padding:0px;
+		width: 50%;
+}
+#marketSell{
+	background-color:#16a951;
+	height: 50px;
+	line-height: 50px;
+	border: none;
+	width: 50%;
+	padding:0px;
+	color:#FFFFFF;
 }
 #closeTrade{
 	width: 17px;
@@ -780,7 +788,6 @@ input{
 	margin: 8px;
 }
 .top{
-	/*background-image: url(../images/quotation.png);*/
 	top:0px;
 	position: fixed;
 	right: 0px;;
@@ -803,31 +810,7 @@ input{
 	z-index: 992;
 	vertical-align: middle;
 }
-#numberInput{
-	padding:10px ;
-	font-size: 14px;
-}
-#numberInput input{
-	height: 50px;
-	line-height: 50px;
-	padding: 0px 85px 0px 45px;
-}
-#numberInput label{
-	top:25px;
-}
-#numberInput label:nth-child(1){
-	left:15px;
-}
-#numberInput label:nth-child(3){
-	right:15px;
-}
-#marketBuy,#marketSell{
-	height:50px ;
-	line-height: 50px;
-	font-size: 16px;;
-}	
 #headerMenu{
-	padding:5px 10px;
 	background-color: #2B2B2B;
 	width: 100%;
 	position: fixed;
@@ -838,37 +821,49 @@ input{
 	position: fixed;
 	top:46px;
 }
-#headerMenu button{
-	height: 40px;
-	line-height: 40px;
-	font-size: 14px;
-	width: 75px;
-	border: none;
-	padding:0px;
+#headerMenu table{
+	width: 100%;
+	height: 16px;
+	line-height: 16px;
+	color:#cccccc;
 	background-color: #2B2B2B;
-	text-align: center;
-	/*border-radius: 50%;*/
+}
+#headerMenu table td{
+	padding:12px 0.125%;
+	border-bottom: 1px solid #121212;
+	border-left: 1px solid #121212;
+	border-right: 1px solid #121212;
+	width: 25%;
+	font-size:14px;;
 }
 #selectButon{
-	position: absolute;
-	right: 10px;
-	color:#FFFFFF;
-	text-align: center;
+	background:url(../images/buttomSantjiao.png) no-repeat;
+	background-size: 6px 6px;
+	background-position: 80% 21px ;
 }
 #list_type{
 	text-align: center;
 	height: auto;
 	position: absolute;
-	width: 75px;
-	top:86px;
-	right: 10px;;
+	width: 25%;
+	top:96px;
+	right: 0px;;
 	color:#999999;
 	background-color: #2B2B2B;
 	z-index: 999;
-	border:1px solid #454545;
 	display: none;
 	padding:0px;
 	margin: 0px;;
+}
+#sanjiao{
+	position: absolute;
+	top:-8px;
+	display: inline-block;
+	height: 8px;
+	width: 100%;
+	left: 0px;
+	background: url(../images/graySanjiao.png) no-repeat bottom center;
+	background-size: 15px 8px;
 }
 #list_type ul{
 	padding: 0px;
@@ -876,11 +871,25 @@ input{
 	list-style-type: none;
 }
 #list_type li{
-	width: 75px;;
+	width: 100%;;
 	height:40px;
 	font-size:12px;
 	line-height: 40px;
 	border-bottom:1px solid #454545 ;
+}
+#dropMune{
+	text-align: center;
+	height: auto;
+	position: absolute;
+	width: 25%;
+	top:46px;
+	right: 0px;;
+	color:#999999;
+	background-color: #2B2B2B;
+	z-index: 999;
+	display: none;
+	padding:0px;
+	margin: 0px;
 }
 #username_list{
 	text-align: center;
@@ -909,9 +918,6 @@ input{
 	border-bottom:1px solid #454545 ;
 }
 #username_list li:nth-last-child(1){
-	border-bottom: none;
-}
-#list_type li:nth-last-child(1){
 	border-bottom: none;
 }
 #inputList{
@@ -1045,3 +1051,86 @@ input{
 	    font-size: 14px;
     vertical-align: 2px;
 }
+#headerMenu .mui-active{
+	background-color: #121212;
+	color:#fcc900;
+}
+#Handicap #table_title {
+	width: 100%;
+	height: 30px;
+	color:#cccccc;
+	/*border-bottom: 1px solid #121212;*/
+}
+#Handicap #table_title thead tr td{
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	text-align: center;
+}
+#table_Content{
+	width: 100%;
+	color:#CCCCCC;
+	border:1px solid #121212;
+}
+#table_Content tr{
+	width: 100%;
+	line-height: 25px;;
+	height: 25px;
+	font-size: 14px;;
+}
+#table_Content tr td:nth-child(1),#table_Content tr td:nth-child(4){
+	width: 16% !important;
+	padding-left: 2%;
+}
+#table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5){
+	width: 21%;
+}
+#table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6){
+	width: 13%;
+	color:#cccccc;
+}
+#table_Content tr td:nth-child(3){
+	border-right: 1px solid #121212;
+	
+}
+#HandicapTable{
+	width: 100%;
+	margin-top: 20px;
+	color:#cccccc;
+}
+#HandicapTable tr{
+	width: 100%;
+	border-top:1px solid #121212;
+	border-bottom: 1px solid #121212;
+	font-size: 14px;
+		height: 30px;
+	line-height: 30px;
+}
+#HandicapTable tr td:nth-child(1),#HandicapTable tr td:nth-child(3){
+	width: 16% !important;
+	padding-left: 2%;
+}
+#HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(4){
+	width: 34%;
+}
+#HandicapTable tr td:nth-child(2){
+	border-right: 1px solid #121212;
+}
+.bottomDivList{
+	display: none;
+}
+#headerContent .mui-active{
+	display: block!important;
+}
+.chartDivContent{
+	display: none;
+}
+#segmentedControl .mui-control-item{
+	width: 25%;
+	margin: 0px;;
+}
+#segmentedControl .mui-active{
+	width: 100%;
+}
+

@@ -1139,7 +1139,11 @@
 					"images/tradeGudice2.png",
 					"images/tradeGudice3.png",
 					"images/tradeGudice4.png",
-					"images/tradeGudice5.png"
+					"images/tradeGudice5.png",
+					"images/buttomSantjiao.png",
+					"images/graySanjiao.jpg",
+					"images/graySanjiao.png",
+					"images/menu.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
