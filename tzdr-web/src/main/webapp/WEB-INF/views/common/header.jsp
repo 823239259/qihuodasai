@@ -60,7 +60,7 @@
     	<div class="fl_sv_code">
         	<a href="javascript:void(0)" target="_blank">
         		<div class="fl_sv_codetk" style="display: none;">
-        			<img src="${ctx}/static/images/common-new/appxiazai-app.png">
+        			<img src="${ctx}/static/images/common-new/ld-Android.png">
         		</div>
         	</a>
         </div>

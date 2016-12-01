@@ -26,10 +26,10 @@
 /* ÐÂÊÖ¸£Àû */
 .xsfl-title {width: 100%;position: relative;height: 360px;background: url("../images/login/noviceWelfare-title.png") center center;}
 .xsfl-bottom {width: 1000px;position: relative;height: 81px;background: url("../images/login/noviceWelfare-bottom.png"); margin: 0 auto; text-align: center;line-height: 72px;font-size: 16px; color: #fff;}
-.xsfl-content {width: 1000px;position: relative;height: 260px; border-bottom: 1px solid #1358ae; margin: 0 auto;}
-.xsfl-fs {float: right; margin-top: 50px;}
+.xsfl-content {width: 1000px;position: relative;height: 300px; border-bottom: 1px solid #1358ae; margin: 0 auto;}
+.xsfl-fs {float: left; margin-top: 105px; position: absolute; right: 0;}
 .xsfl-xx {float: left;}
-.xsfl-xx-title {margin-top: 50px; color: #1358ae; font-size: 16px;}
+.xsfl-xx-title {margin-top: 50px; color: #1358ae; font-size: 14px;}
 .xsfl-xx-js {color: #1358ae; font-size: 14px; margin-top: 5px;}
 .xsfl-footer {margin-top: 73px; color: #849ecc; font-size: 14px; background: #1358ae; height: 60px; line-height: 60px; text-align: center;}
 
