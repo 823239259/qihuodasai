@@ -231,130 +231,147 @@
 		<h1 class="mui-title">恒指期货</h1>		
 		<a href="javascript:void(0);" class="top-tel" id="tran_info">操盘细则</a>
 	</header>
-	<!--<nav class="navlist">
-		<a href="javascript:void(0);" id="product">
-			<span class="mui-icon mui-icon-list"></span>
-			<span class="mui-tab-label">产品</span>
-		</a>
-		<a class="navon" href="javascript:void(0);"  id="scheme">
-			<span class="mui-icon mui-icon-compose"></span>
-			<span class="mui-tab-label">方案</span>
-		</a>
-		<a    id="account" href="javascript:void(0);">
-			<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
-	</nav>-->
-<div class="mui-content sc_listdeta">	
-	<ul class="mui-table-view sc_listtime">
-		<li class="mui-table-view-cell">
-			<label>投资标的：</label>
-			<p>香港恒生指数期货当期主力合约<i id="mainContract">HSIXXXX</i></p>
-		</li>			
-		<li class="mui-table-view-cell">
-			<label>交易时间：</label>
-			<span>09:20-11:55-13:05-16:25-17:20-23:40</span>
-		</li>
-	</ul>	
-	<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
-	<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
-	<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
-	<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
-	<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
-		<li class="mui-table-view-cell">
-			<label>操盘账户：</label>
-			<span id="trade_account">1000000</span>
-			<!--<a href="javascript:void(0);" id="copyaccount">点击复制<img src="../../images/list_01.png"></a>-->
-		</li>	
-		<li class="mui-table-view-cell">
-			<label>操盘密码：</label>
-			<span id="trade_password">1000000</span>
-			<!--<a href="javascript:void(0);" id="copypw">点击复制<img src="../../images/list_01.png"></a>-->
-		</li>
-		<button class="mui-btn" id="immediately">立即操盘</button>
-	</ul>
-	<!--<div class="ac_btn" id="todownload">
-		<button id="download_bun" class="mui-btn mui-btn-block sc_listbtn" type="button">打开交易软件</button>								
-	</div>		-->	
-	<div class="dl_main">
-		<div class="mui-content-padded">
-			<div id="ios_down" style="display: none;"><h4>请点击下载按钮，选择“安装”，然后按Home键到桌面查看安装进度。</h4></div>
-			<div id="ios_info" style="display: none;">
-			<h4>① 需要先安装交易软件快抢手，第一次安装后，需要到桌面手动启动1次快抢手</h4>
-			<h4>② 手动启动快枪手时，会提示“未授信任的企业级开发者”，iOS8及之前版本请选择“信任”，<a href="set.html">iOS9版本请查看设置方法>></a></h4>
-			<h4>③  <a href="use.html">查看交易软件快抢手的使用教程>></a></h4></div>
-			<div id="android_info" style="display: none;"><h4><a href="use.html">查看交易软件快抢手的使用教程>></a></h4></div>
-		</div>
-	</div>
-	<ul class="mui-table-view sc_listsc">
-		<li class="mui-table-view-cell">
-			<label>方案申请时间：</label>
-			<span id="app_time">2016-01-29 14:49</span>
-		</li>			
-		<li class="mui-table-view-cell">
-			<label>最大持仓手数：</label>
-			<span id="tranLever">4手</span>
-		</li>	
-		<li class="mui-table-view-cell">
-			<label>操盘保证金(¥)：</label>
-			<span id="traderBond">27,750元</span>
-		</li>	
-		<li class="mui-table-view-cell">
-			<label>追加保证金(¥)：</label>
-			<span id="appendTraderBond">0元</span>
-			<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
-		</li>	
-		<li class="mui-table-view-cell">
-			<label>总操盘资金($)：</label>
-			<span id="traderTotal">10,750美元</span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>亏损平仓线($)：</label>
-			<span id="lineLoss">10,450美元</span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>账户管理费(¥)：</label>
-			<span id="feeManage">免费</span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>交易手续费(¥)：</label>
-			<span><i id="tranFees">58</i>元/单边</span>
-		</li>
-	</ul>	
-	<div id="end_info" style="display: none;">
-	<ul class="mui-table-view dt_money">
-		<li class="mui-table-view-cell">
-			<label>方案结算时间：</label>
-			<span id="end_time">2016-02-08 16:10</span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>交易盈亏($)：</label>
-			<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>美元结算汇率：</label>
-			<span id="endParities">1美元 = 6.5327人民币</span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>交易手数：</label>
-			<span id="tranActualLever">0手</span>
-		</li>
-		<li class="mui-table-view-cell">
-			<label>交易手续费(¥)：</label>
-			<span id="tranFeesTotal">3,334元</span>
-		</li>
-	</ul>	
-	<ul class="mui-table-view sc_listsc">
-		<li class="mui-table-view-cell">
-			<label>结算金额(¥)：</label>
-			<span id="endAmount">8,355.24元</span>
-		</li>
-	</ul>
-	<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
-	</div>
-	<div class="ac_btn">
-		<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
-	</div>	
+<div class="mui-content sc_listdeta" id="listDetails">
+				<div  class="mui-slider-indicator mui-segmented-control">
+					<a class="mui-control-item mui-active" href="#item1">结算明细</a>
+					<a class="mui-control-item" href="#item2">历史成交明细</a>
+				</div>
+			<div id="item1" class="mui-control-content mui-active">
+				<ul class="mui-table-view sc_listtime">
+					<li class="mui-table-view-cell">
+						<label>投资标的：</label>
+						<p>香港恒生指数期货当期主力合约<i id="mainContract">HSIXXXX</i></p>
+					</li>			
+					<li class="mui-table-view-cell">
+						<label>交易时间：</label>
+						<span>09:20-11:55-13:05-16:25-17:20-23:40</span>
+					</li>
+				</ul>
+					<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
+				<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
+				<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
+				<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
+				<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
+					<li class="mui-table-view-cell">
+						<label>操盘账户：</label>
+						<span id="trade_account">1000000</span>
+					</li>	
+					<li class="mui-table-view-cell">
+						<label>操盘密码：</label>
+						<span id="trade_password">1000000</span>
+					</li>
+					<button class="mui-btn" id="immediately">立即操盘</button>
+				</ul>
+				<div class="dl_main">
+					<div class="mui-content-padded">
+						<div id="ios_down" style="display: none;"><h4>请点击下载按钮，选择“安装”，然后按Home键到桌面查看安装进度。</h4></div>
+						<div id="ios_info" style="display: none;">
+						<h4>① 需要先安装交易软件快抢手，第一次安装后，需要到桌面手动启动1次快抢手</h4>
+						<h4>② 手动启动快枪手时，会提示“未授信任的企业级开发者”，iOS8及之前版本请选择“信任”，<a href="set.html">iOS9版本请查看设置方法>></a></h4>
+						<h4>③  <a href="use.html">查看交易软件快抢手的使用教程>></a></h4></div>
+						<div id="android_info" style="display: none;"><h4><a href="use.html">查看交易软件快抢手的使用教程>></a></h4></div>
+					</div>
+				</div>
+				<ul class="mui-table-view sc_listsc">
+					<li class="mui-table-view-cell">
+						<label>方案申请时间：</label>
+						<span id="app_time">2016-01-29 14:49</span>
+					</li>			
+					<li class="mui-table-view-cell">
+						<label>最大持仓手数：</label>
+						<span id="tranLever">4手</span>
+					</li>	
+					<li class="mui-table-view-cell">
+						<label>操盘保证金(¥)：</label>
+						<span id="traderBond">27,750元</span>
+					</li>	
+					<li class="mui-table-view-cell">
+						<label>追加保证金(¥)：</label>
+						<span id="appendTraderBond">0元</span>
+						<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
+					</li>	
+					<li class="mui-table-view-cell">
+						<label>总操盘资金($)：</label>
+						<span id="traderTotal">10,750美元</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>亏损平仓线($)：</label>
+						<span id="lineLoss">10,450美元</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>账户管理费(¥)：</label>
+						<span id="feeManage">免费</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>交易手续费(¥)：</label>
+						<span><i id="tranFees">58</i>元/单边</span>
+					</li>
+				</ul>	
+				<div id="end_info" style="display: none;">
+				<ul class="mui-table-view dt_money">
+					<li class="mui-table-view-cell">
+						<label>方案结算时间：</label>
+						<span id="end_time">2016-02-08 16:10</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>交易盈亏($)：</label>
+						<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>美元结算汇率：</label>
+						<span id="endParities">1美元 = 6.5327人民币</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>交易手数：</label>
+						<span id="tranActualLever">0手</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>交易手续费(¥)：</label>
+						<span id="tranFeesTotal">3,334元</span>
+					</li>
+				</ul>	
+				<ul class="mui-table-view sc_listsc">
+					<li class="mui-table-view-cell">
+						<label>结算金额(¥)：</label>
+						<span id="endAmount">8,355.24元</span>
+					</li>
+				</ul>
+				<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
+				</div>
+				<div class="ac_btn">
+					<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
+				</div>	
+			</div>
+			<div id="item2" class="mui-control-content">
+				<table id="historyDetailsTable">
+					<thead>
+						<tr>
+							<td>序号</td>
+							<td>合约名称</td>
+							<td>交易盈亏</td>
+							<td>交易手数</td>
+							<td>交易手续费</td>
+							<td>成交价</td>
+							<td>买卖</td>
+							<td>买入/卖出价格</td>
+							<td>结算时间</td>
+						</tr>
+					</thead>
+					<tr>
+						<td>序号</td>
+						<td>合约名称</td>
+						<td>交易盈亏</td>
+						<td>交易手数</td>
+						<td>交易手续费</td>
+						<td>成交价</td>
+						<td>买卖</td>
+						<td>买入/卖出价格</td>
+						<td>结算时间</td>
+					</tr>
+				</table>
+			</div>
+	
+
 </div>
 </body>
 </html>
