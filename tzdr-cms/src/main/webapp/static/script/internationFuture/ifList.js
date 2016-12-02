@@ -381,6 +381,28 @@ function inputClose() {
 	$("#inputWin").window('close');
 };
 
+
+function closeTradeCount(){
+	$("#tradeCountWin").show();
+	$("#tradeCountWin").window('close');
+}
+
+function tradeOpenEnd(){
+	var rows = $("#hasAuditData").datagrid('getSelections');
+	if (Check.validateSelectItems($("#hasAuditData"),1)) {
+		if(rows[0].stateType == "已结算"){
+			Check.messageBox("提示","该用户已结算！");
+		}else{
+			if(rows[0].endAmount==null){
+				Check.messageBox("提示","请录入结果后结算！");
+			}else{
+				tradeCount();
+				$("#btn_end").show();
+			}
+		}
+	}
+	
+}
 /**
  * 结算处理
  */
@@ -405,6 +427,7 @@ function end() {
 								$("#edatagrid").datagrid('reload');
 								$("#hasAuditData").datagrid('reload');
 								inputClose();
+								closeTradeCount();
 							} else {
 								Check.messageBox("提示",data.message,"error");
 							}
@@ -483,6 +506,7 @@ function tradeCount() {
 		$('#nikkeiCount').html(rows[0].nikkeiTranActualLever);*/
 		$("#tradeCountWin").show();
 		$('#tradeCountWin').window('open');
+		$("#btn_end").hide();
 	}
 }
 /**

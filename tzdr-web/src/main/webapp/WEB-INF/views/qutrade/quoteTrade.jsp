@@ -60,6 +60,9 @@
 </style>
 </head>
 <body>
+<script type="text/javascript">
+	location.href = basepath+"html/qutrade/quoteTrade.html"
+</script>
 <!-- 弹出层 -->
 <div id="div_Mask"  style="display:none;"></div>
 <div class="div_loading">

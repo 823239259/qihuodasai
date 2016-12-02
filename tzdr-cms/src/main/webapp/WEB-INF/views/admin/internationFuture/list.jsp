@@ -351,7 +351,7 @@ function timeConvert(value,rowData,rowIndex) {
 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="input()">录入结果</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="sys:riskmanager:internationFuture:end">  
-							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="end()">结算</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="tradeOpenEnd()">结算</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="sys:riskmanager:internationFuture:export">  
 							<a  href="javascript:void(0)" onclick="$.easyui.exportExcel('hasAuditData','queryForm3')" iconCls="icon-excel" plain="true" class="easyui-linkbutton" >导出</a>
@@ -724,7 +724,7 @@ function timeConvert(value,rowData,rowIndex) {
 	</div> -->
 	<!-- window 交易手数弹框 -->
 	<div id="tradeCountWin" class="easyui-window" title="交易手数" 
-		style="width:600px;height:350px;display:none;border:none; overflow: hidden;top:4%" 
+		style="width:700px;height:400px;display:none;border:none; overflow: hidden;top:4%" 
         data-options="iconCls:'icon-search',modal:true,closed:true">
        <!--  hello ,this is window. -->
        <form id="tradeCountForm">
@@ -785,7 +785,12 @@ function timeConvert(value,rowData,rowIndex) {
 	               	<td align="center" id='scCount'></td>
 	                <td align="center" id='daxMinCount'></td>
         		</tr>
+	               
         	</table>
+        	 	<div style = "margin-left: 50%;margin-top: 10px;">
+        	 		<a id="btn_end"  href="javascript:void(0);"  onclick="end()" class="easyui-linkbutton">结算</a>
+        	 		<a   href="javascript:void(0);"  onclick="closeTradeCount()" class="easyui-linkbutton">取消</a>
+        	 	</div>
         </form>
     </div>
 	</shiro:hasPermission>
