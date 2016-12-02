@@ -1253,16 +1253,22 @@ function loadOperateLogin(){
 	});
 }
 $(function(){
-	/**
-	 * 初始化交易配置 --> trade.config
-	 */
-	initTradeConfig();
-	validateIsGetVersion();
-	getVersion();
-	if(username == null){
-		$("#switchAccount").text("登录账号");
-	}
-	bindOpertion();
+	var validateQueryCommodity = setInterval(function(){
+			if(getQueryCommodityIsFlag()){ 
+				/**
+				 * 初始化交易配置 --> trade.config
+				 */
+				initTradeConfig();
+				validateIsGetVersion();
+				getVersion();
+				if(username == null){
+					$("#switchAccount").text("登录账号");
+				}
+				bindOpertion();
+				clearInterval(validateQueryCommodity);
+			}
+		},500);
+	
 	$("#switchAccount").click(function(){  
 		if(isLogin){
 			alertProtype("是否切换当前账号","提示",Btn.confirmedAndCancle(),switchAccount,null,null);
@@ -1510,7 +1516,7 @@ function bindOpertion(){
 $("#add").bind("click",function(){
 	var contractCode = selectDesgnate["contraction"];
 	var tipContent = "确认改单合约【"+contractCode+"】"; 
-	alertProtype(tipContent,"确认撤单?",Btn.confirmedAndCancle(),doInsertChangeSingleOrder,cancleCallBack);
+	alertProtype(tipContent,"确认改单?",Btn.confirmedAndCancle(),doInsertChangeSingleOrder,cancleCallBack);
 	var add_div = $("#add_div");
 	add_div.addClass("mui-hidden");
 	mui("#popover").popover("toggle");

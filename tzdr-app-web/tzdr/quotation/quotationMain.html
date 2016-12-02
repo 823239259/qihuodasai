@@ -181,7 +181,7 @@
 				if(localStorage.getItem("tipLogin") == 1){
 					alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
 				}else{
-					setTimeout(function(){ 
+					validationLoginTip = setTimeout(function(){ 
 						if(!mui.cacheUser.isLogin()){
 							localStorage.setItem("tipLogin",1);
 							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);

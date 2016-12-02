@@ -50,6 +50,7 @@
 					"width":+width-10+"px",
 				})
 			mui.plusReady(function(){
+					plus.webview.close("bankPay.html");
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
 				paymentMoney.innerText=wv.money.toFixed(2);
