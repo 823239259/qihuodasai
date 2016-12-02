@@ -45,8 +45,10 @@
     	    }
         	
         	newData=rawData.slice(-60);
-		  		CandlestickChartOption = setOption(newData);
-		  		myChart.setOption(CandlestickChartOption);
+	  		CandlestickChartOption = setOption(newData);
+	  		myChart.setOption(CandlestickChartOption);
+	  		myChart.resize();
+	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	
     }

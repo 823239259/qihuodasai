@@ -71,7 +71,7 @@
 			<ul class="uc_paynav">
 				<li><a href="javascript:void(0);" class="on">网银充值</a></li> 
 				<!-- <li><a href="javascript:void(0);">支付宝充值</a></li> -->
-				<li><a href="javascript:void(0);">微信充值</a></li>
+				<!-- <li><a href="javascript:void(0);">微信充值</a></li> -->
 				<li><a href="javascript:void(0);">银行转账</a></li>
 				<li style="float:right;"><a href="javascript:void(0);">充值记录</a></li>
 			</ul>
@@ -118,14 +118,14 @@
 					</div>
 				</form>
 			</div> --%>
-			<div class="subtab">
+			<%-- <div class="subtab">
 				<form id="weixinbank" action="" method="post" target="_blank">
 					<div class="uc_olmoney" style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
 						<p style="color: #fc3;font-size: 14px;">温馨提示：如您已开通网银，请尽量选择网银充值，如您是柜台转账请尽量选择相同银行转账，这样可以快速及时到账！</p>
 						<ul class="uc_pblist">
-							<%-- <li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
+							<li><label style="text-align: left; font-size: 16px; margin-left: 25px;"><img src="${ctx}/static/images/weixin.png" style="position: relative; top: 5px; margin-right: 5px;">微信支付</label></li>
 							<li id="weixin_bind"><label>微信账号：</label><input type="text" name="weixn" value = "" id="weixin" class="uc_p_ip3"><span class="weixin_bind">立即绑定</span></li>
-							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li> --%>
+							<li id="weixin_update"><label>微信账号：</label><span style="width: 192px;" id = "userAccount">${userverified.wxAccount }</span><span class="weixin_update">修改绑定</span></li>
 							<li><label style="color: #fc3; font-size: 17px;">第一步：</label><span style="color: #fc3; font-size: 16px;">核实收款方信息，输入支付金额！</span></li>
 							<li><label>微信账号：</label><span>1369866402@1369866402</span></li>
 							<li><label>账号名称：</label><span>成都盈透科技有限公司</span></li>
@@ -151,7 +151,7 @@
 						</div>
 					</div>
 				</form>
-			</div>
+			</div> --%>
 			<div class="subtab">
 					<div class="uc_bank">
 						<p class="uc_b_title">温馨提示：如您已开通网银，请尽量选择网银充值，如您是柜台转账请尽量选择相同银行转账，这样可以快速及时到账！</p>

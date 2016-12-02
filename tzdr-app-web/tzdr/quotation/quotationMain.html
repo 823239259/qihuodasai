@@ -168,7 +168,6 @@
 	<script src="../../js/util.js"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript">
-		
 				$(function(){
 					$("#refresh").addClass("rotateClass");
 				})
@@ -176,7 +175,25 @@
 		//初始化导航栏
 			tzdr.init.initHearListener();
 			mui.plusReady(function(){
+				var validationLoginTip = null;
 				var width=plus.screen.resolutionWidth;
+				var time = 30000;
+				if(localStorage.getItem("tipLogin") == 1){
+					alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+				}else{
+					validationLoginTip = setTimeout(function(){ 
+						if(!mui.cacheUser.isLogin()){
+							localStorage.setItem("tipLogin",1);
+							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+						}
+					},30000);
+				}
+				function openLogin(){ 
+					mui.openWindow("../login/login.html","login");
+				} 
+				function openHome(){
+					mui.openWindow("../../home.html","home");
+				}
 				/*
 				 增加新手引导的样式
 				 */
@@ -391,14 +408,23 @@
 			document.getElementById("product").addEventListener("tap",function(){
 				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 				socket.close();
+				if(validationLoginTip != null){
+					clearTimeout(validationLoginTip);
+				}
 			});
 			document.getElementById("scheme").addEventListener("tap",function(){
 				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-					socket.close();
+				socket.close();
+				if(validationLoginTip != null){
+					clearTimeout(validationLoginTip);
+				}
 			});
 			document.getElementById("account").addEventListener("tap",function(){
 				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-					socket.close();
+				socket.close();
+				if(validationLoginTip != null){
+					clearTimeout(validationLoginTip);
+				}
 			});
 			document.getElementById("refresh").addEventListener("tap",function(){
 				var re = plus.webview.getWebviewById("quotationMain");

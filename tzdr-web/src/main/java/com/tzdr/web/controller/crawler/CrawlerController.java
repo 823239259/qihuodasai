@@ -58,10 +58,10 @@ public class CrawlerController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCrawlerCalendar",method = RequestMethod.GET)
-	public JsonResult getCrawlerCalendar(HttpServletRequest request){
+	public JsonResult getCrawlerCalendar(HttpServletRequest request,@RequestParam("type")String type,@RequestParam("startTime")String startTime,@RequestParam("endTime")String endTime){
 		JsonResult result = new JsonResult();
 		result.setSuccess(true);
-		result.appendData("data",crawlerCalendarService.doGetCrwlerCalendar(new Page(request)));
+		result.appendData("data",crawlerCalendarService.doGetCrwlerCalendar(new Page(request),type,startTime,endTime));
 		return result;
 	}
 	/**
@@ -76,7 +76,7 @@ public class CrawlerController {
 	public JsonResult getCrawlerCalendarByTime(HttpServletRequest request,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime){
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);
-		resultJson.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime(new Page(request), startTime, endTime));
+		resultJson.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime( startTime, endTime));
 		return resultJson;
 	}
 	/**

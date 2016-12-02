@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tzdr.api.support.ApiResult;
 import com.tzdr.business.service.crawler.CrawlerCalendarService;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveContentService;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
@@ -36,9 +35,9 @@ public class CrawlerController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCrawler",method = RequestMethod.GET)
-	public ApiResult getCrawler(CrawlerWallstreetnLive crawlerWallstreetnLive,HttpServletRequest request){
-		ApiResult result = new ApiResult(true);
-		result.setData(crawlerWallstreetnLiveService.getCrawler(new Page(request)));
+	public JsonResult getCrawler(CrawlerWallstreetnLive crawlerWallstreetnLive,HttpServletRequest request){
+		JsonResult result = new JsonResult(true);
+		result.appendData("data", crawlerWallstreetnLiveService.getCrawler(new Page(request)));
 		return result;
 	}
 	/**
@@ -59,10 +58,10 @@ public class CrawlerController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCrawlerCalendar",method = RequestMethod.GET)
-	public ApiResult getCrawlerCalendar(HttpServletRequest request){
-		ApiResult result = new ApiResult();
+	public JsonResult getCrawlerCalendar(HttpServletRequest request,@RequestParam("type")String type,@RequestParam("startTime")String startTime,@RequestParam("endTime")String endTime){
+		JsonResult result = new JsonResult();
 		result.setSuccess(true);
-		result.setData(crawlerCalendarService.doGetCrwlerCalendar(new Page(request)));
+		result.appendData("data",crawlerCalendarService.doGetCrwlerCalendar(new Page(request),type,startTime,endTime));
 		return result;
 	}
 	/**
@@ -77,7 +76,7 @@ public class CrawlerController {
 	public JsonResult getCrawlerCalendarByTime(HttpServletRequest request,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime){
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);
-		resultJson.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime(new Page(request), startTime, endTime));
+		resultJson.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime( startTime, endTime));
 		return resultJson;
 	}
 	/**
@@ -87,9 +86,9 @@ public class CrawlerController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCrawlerLiveContent",method = RequestMethod.GET)
-	public ApiResult getCrawlerLiveContent(HttpServletRequest request,@RequestParam("liveId")String liveId){
-		ApiResult result = new ApiResult(true);
-		result.setData(crawlerWallstreetnLiveContentService.doGetCrawlerLiveContent(liveId));
+	public JsonResult getCrawlerLiveContent(HttpServletRequest request,@RequestParam("liveId")String liveId){
+		JsonResult result = new JsonResult(true);
+		result.appendData("data",crawlerWallstreetnLiveContentService.doGetCrawlerLiveContent(liveId));
 		return result;
 	}
 }
