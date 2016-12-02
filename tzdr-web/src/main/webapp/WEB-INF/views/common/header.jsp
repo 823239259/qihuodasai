@@ -33,11 +33,14 @@
         <ul class="navlist">
             <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
             <%-- <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li> --%>
-            <li><a id="hengzhiqidai" href="${ctx}/hsi/index">恒指期货</a></li>
-            <li><a id="guojiyuanyou" href="${ctx}/crudeoil/index">国际原油</a></li>
-            <li><a id="fushia50" href="${ctx}/ftse/index">富时A50</a></li>
-            <li><a id="guojizonghe" href="${ctx}/outDisk/index">国际综合</a></li>
-            <%
+            <li><a target="_blank" href="http://test.www.vs.com/html/qutrade/quoteTrade.html">行情交易</a></li>
+            <li><a id="guojiqihuo" href="${ctx}/hsi/index">国际期货</a></li>
+ 			<li><a href="http://test.www.vs.net/a/about/" title="" >下载中心</a></li>
+ 			<li><a href="http://test.www.vs.net/a/zimeiti/" title="" >7X24直播</a></li>
+ 			<li><a href="http://test.www.vs.net/a/rili/" title="" >财经日历</a></li>
+            <li><a href="http://test.www.vs.net/a/xuetang/" title="" >期货学堂</a></li>
+            <li><a href="http://test.www.vs.net/a/news/" title="" >全球资讯</a></li>
+            <%-- <%
         	if(request.getSession().getAttribute("userName") !=null){
         	%>
            	<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mc">我的账户</a></li>
@@ -47,7 +50,7 @@
            	<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mcnot">我的账户</a></li>
         	<%
        		}
-        	%>
+        	%> --%>
         </ul>
     </div>
 </div>

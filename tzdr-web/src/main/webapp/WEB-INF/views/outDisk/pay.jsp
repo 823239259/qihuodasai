@@ -9,7 +9,7 @@
 <style type="text/css">
  .font_size_15 {font-size: 15px; color: #f60; }
  .font_size_22 {font-size: 22px; color: #f60; }  
- #guojizonghe {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}                     
+ #guojiqihuo {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}                     
 </style>
 <%-- <link href="${ctx}/static/css/common.css?v=${v}" rel="stylesheet" type="text/css" /> --%>
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
