@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
@@ -79,6 +80,9 @@ public class SignInController {
 
 	@Autowired
 	private MessagePromptService messagePromptService;
+	
+	@Autowired
+	private MockTradeAccountService mockTradeAccountService;
 	private static Object lock = new Object();
 
 	/**
@@ -383,9 +387,16 @@ public class SignInController {
 		// 用户注册成功之后给用户手机发送短信
 		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
 		messagePromptService.registNotice(mobile, "web", "", "");
+		try {
+			boolean b = mockTradeAccountService.openMockAccount(mobile, password);
+			if(!b){
+				jsonResult.setMessage("模拟盘账号开通失败,可能已存在相同的账号信息!");
+			}
+		} catch (Exception e) {
+			jsonResult.setMessage("模拟盘账号开通失败");
+		}
 		return jsonResult;
 	}
-
 	/**
 	 * @Description: 访问注册成功页面
 	 * @Title: toSignInSucess
