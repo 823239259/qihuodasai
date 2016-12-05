@@ -13,7 +13,7 @@ import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
  */
 public interface CrawlerWallstreetnLiveDao extends BaseJpaDao<CrawlerWallstreetnLive, String>{
 
-	@Query(value = "from CrawlerWallstreetnLive where liveWallstreetnId = ?1")
+	@Query(value = "from CrawlerWallstreetnLive where liveWallstreetnId = ?1  order by created_at desc")
 	public List<CrawlerWallstreetnLive> findByCrawlerId(String id);
 	/**
 	 * 新闻数据
@@ -21,7 +21,7 @@ public interface CrawlerWallstreetnLiveDao extends BaseJpaDao<CrawlerWallstreetn
 	 * @param size
 	 * @return
 	 */
-	@Query(value = "select *  from crawler_wallstreetn_live  where published = 1  LIMIT ?1 , ?2", nativeQuery = true)
+	@Query(value = "select *  from crawler_wallstreetn_live  where published = 1 order by created_at desc LIMIT ?1 , ?2", nativeQuery = true)
 	public List<CrawlerWallstreetnLive> findByCrawlerPage(int startIndex , int size);
 	/**
 	 * 新闻数据,根据类型获取
@@ -29,6 +29,6 @@ public interface CrawlerWallstreetnLiveDao extends BaseJpaDao<CrawlerWallstreetn
 	 * @param size
 	 * @return
 	 */
-	@Query(value = "select *  from crawler_wallstreetn_live  where published = 1 and channel_set = ?3  LIMIT ?1 , ?2", nativeQuery = true)
+	@Query(value = "select *  from crawler_wallstreetn_live  where published = 1 and channel_set = ?3  order by created_at desc LIMIT ?1 , ?2", nativeQuery = true)
 	public List<CrawlerWallstreetnLive> findByCrawlerPageByChannel(int startIndex , int size,String channelset);
 }

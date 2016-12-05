@@ -90,7 +90,7 @@ public class CrawlerCalendarServiceImp  extends BaseServiceImpl<CrawlerCalendar,
 		try {
 			startDate = df.parse(startTime);
 			Date endDate = df.parse(endTime);
-			return getEntityDao().findByCalerdarPage(page.getPageIndex(), page.getSize(),type,startDate.getTime()/1000,endDate.getTime()/1000);
+			return getEntityDao().findByCalerdarPage(page.getStartIndex(), page.getSize(),type,startDate.getTime()/1000,endDate.getTime()/1000);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

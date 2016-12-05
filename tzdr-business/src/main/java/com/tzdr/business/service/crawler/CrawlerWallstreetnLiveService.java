@@ -1,6 +1,7 @@
 package com.tzdr.business.service.crawler;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.utils.Page;
@@ -22,4 +23,11 @@ public interface CrawlerWallstreetnLiveService extends BaseService<CrawlerWallst
 	 * @return
 	 */
 	public  List<CrawlerWallstreetnLive> getCrawler(Page page,String channelset);
+	/**
+	 * 获取实时新闻列表（包含内容）
+	 * @param page
+	 * @param channelset
+	 * @return
+	 */
+	public List<Map<String, Object>> getCrawlerLiveContent(Page page,String channelset);
 }

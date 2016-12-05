@@ -2,8 +2,6 @@ package com.tzdr.web.controller.crawler;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +19,6 @@ import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
 @Controller
 @RequestMapping(value = "/crawler")
 public class CrawlerController {
-	private Logger logger = LoggerFactory.getLogger(CrawlerController.class);
 	@Autowired
 	private CrawlerWallstreetnLiveService crawlerWallstreetnLiveService;
 	@Autowired
@@ -29,7 +26,7 @@ public class CrawlerController {
 	@Autowired
 	private CrawlerWallstreetnLiveContentService crawlerWallstreetnLiveContentService;
 	/**
-	 * 获取实时新闻数据
+	 * 获取实时新闻数据列表
 	 * @param crawlerWallstreetnLive
 	 * @return
 	 */
@@ -37,23 +34,50 @@ public class CrawlerController {
 	@RequestMapping(value = "/getCrawler",method = RequestMethod.GET)
 	public JsonResult getCrawler(CrawlerWallstreetnLive crawlerWallstreetnLive,HttpServletRequest request){
 		JsonResult result = new JsonResult(true);
-		result.appendData("data", crawlerWallstreetnLiveService.getCrawler(new Page(request)));
+		try {
+			result.appendData("data", crawlerWallstreetnLiveService.getCrawler(new Page(request)));
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMessage("数据获取失败");
+		}
 		return result;
 	}
 	/**
-	 * 获取实时新闻数据
+	 * 获取实时新闻数据列表
 	 * @param crawlerWallstreetnLive
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCrawlerByChannel",method = RequestMethod.GET)
-	public JsonResult getCrawlerByChannel(CrawlerWallstreetnLive crawlerWallstreetnLive,HttpServletRequest request,@RequestParam("channelset")String channelset){
+	public JsonResult getCrawlerByChannel(HttpServletRequest request,@RequestParam("channelset")String channelset){
 		JsonResult result = new JsonResult(true);
-		result.appendData("data", crawlerWallstreetnLiveService.getCrawler(new Page(request),channelset));
+		try {
+			result.appendData("data", crawlerWallstreetnLiveService.getCrawler(new Page(request),channelset));
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMessage("数据获取失败");
+		}
 		return result;
 	}
 	/**
-	 * 获取日历
+	 * 实时数据列表和数据内容
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getCrawlerByChannelLiveContent",method = RequestMethod.GET)
+	public JsonResult getCrawlerByChannelLiveContent(HttpServletRequest request,@RequestParam("channelset")String channelset){
+		JsonResult result = new JsonResult(true);
+		try {
+			result.appendData("data", crawlerWallstreetnLiveService.getCrawlerLiveContent(new Page(request),channelset));
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMessage("数据获取失败");
+		}
+		return result;
+	}
+	/**
+	 * 获取日历列表
 	 * @return
 	 */
 	@ResponseBody
@@ -61,11 +85,16 @@ public class CrawlerController {
 	public JsonResult getCrawlerCalendar(HttpServletRequest request,@RequestParam("type")String type,@RequestParam("startTime")String startTime,@RequestParam("endTime")String endTime){
 		JsonResult result = new JsonResult();
 		result.setSuccess(true);
-		result.appendData("data",crawlerCalendarService.doGetCrwlerCalendar(new Page(request),type,startTime,endTime));
+		try {
+			result.appendData("data",crawlerCalendarService.doGetCrwlerCalendar(new Page(request),type,startTime,endTime));
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMessage("数据获取失败");
+		}
 		return result;
 	}
 	/**
-	 * 获取日历数据
+	 * 获取日历数据列表根据时间获取
 	 * @param request
 	 * @param startTime
 	 * @param endTime
@@ -74,10 +103,15 @@ public class CrawlerController {
 	@ResponseBody
 	@RequestMapping(value = "/getCrawlerCalendarByTime",method = RequestMethod.GET)
 	public JsonResult getCrawlerCalendarByTime(HttpServletRequest request,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime){
-		JsonResult resultJson = new JsonResult();
-		resultJson.setSuccess(true);
-		resultJson.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime( startTime, endTime));
-		return resultJson;
+		JsonResult result = new JsonResult();
+		result.setSuccess(true);
+		try {
+			result.appendData("data",crawlerCalendarService.doGetCrwlerCalendarByTime( startTime, endTime));
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMessage("数据获取失败");
+		}
+		return result;
 	}
 	/**
 	 * 实时数据内容
@@ -88,7 +122,12 @@ public class CrawlerController {
 	@RequestMapping(value = "/getCrawlerLiveContent",method = RequestMethod.GET)
 	public JsonResult getCrawlerLiveContent(HttpServletRequest request,@RequestParam("liveId")String liveId){
 		JsonResult result = new JsonResult(true);
-		result.appendData("data",crawlerWallstreetnLiveContentService.doGetCrawlerLiveContent(liveId));
+		try {
+			result.appendData("data",crawlerWallstreetnLiveContentService.doGetCrawlerLiveContent(liveId));
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMessage("数据获取失败");
+		}
 		return result;
 	}
 }
