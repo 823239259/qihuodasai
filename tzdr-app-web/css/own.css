@@ -706,15 +706,47 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	width: 100%;
 	height: auto;
 }
-#listDetails #item1,#item2{width: 100%;height: 400px;}
+#listDetails #item1,#item2{width: 100%;}
 #listDetails .mui-segmented-control .mui-control-item.mui-active{background-color: #1f1f1f;color:#fcc900}
 #listDetails .mui-segmented-control{border-bottom: 1px solid #121212; border-top: none; border-radius: 0px;border-left: none; border-right: none;}
 #listDetails .mui-segmented-control .mui-control-item{border: none;background-color: #2b2b2b;color:#cccccc;font-size: 14px;;height: 40px;line-height: 40px;}
-#historyDetailsTable{width: 600px;height: auto;}
-#historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 30px;line-height: 30px;}
-#historyDetailsTable  tr td{width: 100px;font-size: 12px;color:#666666;}
-#historyDetailsTable tr td:nth-child(1){width: 50px;padding-left: 8px;}
+#item2{
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+#item1{
+	width: 100%;
+	height: auto;
+}
+#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 600px;}
+#historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 35px;line-height: 35px;}
+#historyDetailsTable  tr td{width: 100px;font-size: 14px;color:#666666;}
+#historyDetailsTable tr td:nth-child(1){width:60px;padding-left: 8px;}
 #historyDetailsTable  tr td:nth-last-child(1){padding-right: 8px;}
 #historyDetailsTable  tr td:nth-child(8){width: 150px;}
-#historyDetailsTable thead tr{height: 30px;line-height: 30px;text-align: left;color:#2b2b2b;font-size: 12px;}
-#historyDetailsTable thead tr td{color:#2b2b2b;font-size: 12px;}
+#historyDetailsTable  tr td:nth-child(5){width: 150px;}
+#historyDetailsTable thead tr{height: 30px;line-height: 30px;text-align: left;color:#2b2b2b;font-size: 14px;}
+#historyDetailsTable thead tr td{color:#2b2b2b;font-size: 14px;}
+#listDetails ul li label{
+	color:#666666;
+	font-size: 14px;
+}
+#listDetails ul li p,#listDetails ul li span{color:#2b2b2b;font-size: 14px;}
+#shareDiv{
+	width: 100%;
+	height: 40px;
+	position: fixed;
+	bottom: 0px;
+	background-color: #2b2b2b;
+	z-index: 999;
+}
+#shareDiv button {
+	width: 25%;
+	padding: 0px;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	position: absolute;
+	right: 0px;
+}

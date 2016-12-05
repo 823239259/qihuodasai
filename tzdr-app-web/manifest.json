@@ -1090,7 +1090,8 @@
 					"tzdr/scheme.html",
 					"tzdr/account/accountno.html",
 					"tzdr/future/listrg.html",
-					"tzdr/quotation/tutorial.html"
+					"tzdr/quotation/tutorial.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
