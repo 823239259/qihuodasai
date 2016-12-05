@@ -308,10 +308,11 @@ $(function () {
                         var qAskPrice1 =  (parseFloat(_data.AskPrice1)).toFixed(size);
                         var bs = "/templets/style/html/images/image/greenArrow.png";
                         var jj = "+";
-                        var color = " #ff5500";
+                        var color = " #ff4040";
                         if(_data.ChangeRate < 0){
                             jj = "";
                             $(".Arrow").eq(i).attr("src",bs);
+                            color="#30bf30";
                         }
                         $(".left_x"+i+"").attr("data",""+_data.CommodityNo+"&"+_data.ContractNo+"&"+_data.ExchangeNo);
                         $(".left_x"+i+" .right").text(_data_.cname);
