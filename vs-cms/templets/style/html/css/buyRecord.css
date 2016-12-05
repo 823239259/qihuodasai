@@ -1,0 +1,19 @@
+.buyRecord_record {border-top: 10px solid #f2f2f2; background: #fff; padding: 0 20px; border-bottom: 1px solid #e8e8e8;}
+.buyRecord_record .buyRecord_title {font-size: 16px; color: #333;}
+.buyRecord_record ul {display: inline-block; height: 40px; line-height: 40px; padding: 0 10px;}
+.buyRecord_record .coupon_lis {font-size: 14px; color: #666; border-top: 1px solid #e8e8e8;}
+.buyRecord_record ul li {float: left;}
+.buyRecord_record .buyRecord_varieties {width: 80px;}
+.buyRecord_record .buyRecord_number {width: 80px;}
+.buyRecord_record .buyRecord_start_time {width: 150px;}
+.buyRecord_record .buyRecord_end_time {width: 85px;}
+.buyRecord_record .buyRecord_state {width: 80px;}
+.buyRecord_record .buyRecord_allMoney {width: 100px;}
+.buyRecord_record .buyRecord_loss {width: 90px;}
+.buyRecord_record .buyRecord_Bond {width: 90px;}
+.buyRecord_record .buyRecord_supplement {width: 90px;}
+.buyRecord_record .buyRecord_settlement {width: 90px;}
+.buyRecord_record .buyRecord_operation {width: 35px;}
+.buyRecord_record .buyRecord_operation .buyRecord_detailed {color: #19b2ff;}
+
+

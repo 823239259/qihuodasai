@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="{dede:field name='keywords'/}" />
+    <meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+    <title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+    <link rel="shortcut icon" href="../../favicon.ico" />
+    <link rel="stylesheet" href="/templets/style/html/css/stockQuotes.css">
+    <script type="text/javascript" src="/templets/style/js/jquery.min.js"></script>
+    <script src="/templets/style/html/js/stockQuotes.js"></script>
+</head>
+<body>
+{dede:include filename="head.htm"/}
+<!--content-->
+<div id="stockQuotes">
+    <div class="stockQuotes_left">
+        <p class="calendar"><span>股市学堂</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="stockQuotes_center">
+            {dede:arclist row=5 titlelen=20 noflag='h' infolen='10' }
+            <div class="stockQuotes_title">
+                <span class="img_left"></span>
+                <span class="img_name">11</span>
+                <label class="title">
+                    <p class="p1">[field:title/]</p>
+                    <p class="p2">[field:info/]...</p>
+                    <p class="p3"><span class="lis">01</span><a href="">深度探讨技术指标“均线”的使用方法</a><span class="time">[field:pubdate function="MyDate('Y-m-d',@me)"/]</span></p>
+                    <p class="p3"><span class="lis">02</span><a href="">股票技术分析-趋势线</a><span class="time">[field:pubdate function="MyDate('Y-m-d',@me)"/]</span></p>
+                    <p class="p3"><span class="lis">03</span><a href="">常见K线形态的买入点和卖出点</a><span class="time">[field:pubdate function="MyDate('Y-m-d',@me)"/]</span></p>
+                </label>
+            </div>
+            {/dede:arclist}
+        </div>
+    </div>
+    <div class="stockQuotes_right">
+        <p class="calendar"><span>7*2直播</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""><a class="more" href=""><img src="/templets/style/html/images/image/circular.png" alt=""></a></p>
+        {dede:arclist row=5 titlelen=20 flag='c' noflag='h' infolen='6'}
+        <div class="right_center">
+            <span>[field:pubdate function="MyDate('H:i',@me)"/]</span>
+            <p><a href="[field:arcurl/]" title="[field:fulltitle/]" target="_blank">[field:title/]</a></p>
+        </div>
+        {/dede:arclist}
+    </div>
+</div>
+{dede:include filename="footer.htm"/}
+</body>
+</html>

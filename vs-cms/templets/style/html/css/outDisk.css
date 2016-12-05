@@ -1,0 +1,43 @@
+#headerBottom #nav #Triangle {left: 274px;}
+body {background: #f2f2f2;}
+#ftse {width: 1280px; margin:  0 auto;}
+#ftse .ftse_one{width: 1280px; height: 150px; background: url(../image/downloadCenter_15.png) no-repeat center; margin-top: 20px;}
+#futures_tab {width: 1280px; height: 60px; line-height: 60px; background: #fff; margin: 10px auto 0; border-bottom: 2px solid #ccc;}
+#futures_tab ul li {float: left;}
+#futures_tab ul li a {border-left: 1px solid #f2f2f2; font-size: 20px; color: #333; width: 120px; height: 60px; text-align: center; display: inline-block;border-bottom: 2px solid #ccc;}
+#futures_tab ul li a.on {border-bottom: 2px solid #ffb319; color: #ffb319;}
+#futures_tab ul li a:hover{border-bottom: 2px solid #ffb319; color: #ffb319;}
+#futures_title .calendar { background: #fff; margin-top: 10px; border-bottom: 2px solid #ffb725; vertical-align: middle; position: relative; height: 40px; line-height: 40px;}
+#futures_title .calendar span {margin-left: 10px; color: #333; font-size: 20px;}
+#futures_title .calendar img {position: absolute; left: 0; top: 11px;}
+#futures_title .calendar label{float: right; font-size: 14px; color: #333;}
+#futures_title .calendar label a {margin-left: 20px; font-size: 14px; color: #333; margin-right: 10px;}
+#futures_title .calendar label a:hover {color: #19b2ff;}
+#futures_title .center_left {height: 144px;}
+#futures_title .center_left ul {text-align: center; font-size: 14px; float: left; width: 120px; height: 60px; border: 1px solid #000; border-radius: 4px; background: #fff; margin: 15px; padding: 20px 0;}
+#futures_title .center_left ul:hover {cursor: pointer;}
+#futures_title .center_left ul.on {background: #ffb319;}
+#futures_title .center_left .number {font-size: 24px;}
+#futures_title .center_left .su {font-size: 12px;}
+#futures_title .center_left img {position: relative; left: 50px; top: 10px;}
+#futures_title .center_one {background: #fff; color: #333;}
+#futures_title .center_one .crudeoil_title{padding-top: 10px; margin-left: 15px;}
+#futures_title .center_two {background: #fff;margin-top: 10px;}
+#futures_title .center_two  p{width: 1250px; padding-left: 15px; height: 40px; line-height: 40px; border-bottom: 1px solid #e6e6e6;}
+#futures_title .center_two  p span {width: 312px; display: inline-block;}
+#futures_title .center_two .crudeoil_title {height: 64px; line-height: 64px; color: #ffb319; font-size: 28px;}
+#futures_title .center_two .crudeoil_title i {font-style:normal; font-size: 14px;}
+#futures_title .center_there {background: #fff; margin-top: 10px; padding-bottom: 10px; font-size: 14px;}
+#futures_title .center_there i {color: #ffb319; font-style: normal;}
+#futures_title .center_there p {width: 1250px; margin-left: 15px; height: 40px; line-height: 40px; border-bottom: 1px solid #e6e6e6; border-top: 1px solid #e6e6e6; margin-top: -1px;}
+#futures_title .center_there .there_1 {width: 140px; display: inline-block;}
+#futures_title .center_there .there_2 {width: 140px; display: inline-block;}
+#futures_title .center_there .there_3 {width: 450px; display: inline-block;}
+#futures_title .center_there .there_4 {width: 350px; display: inline-block;}
+#futures_title .center_there .there_5 {width: 100px; display: inline-block;}
+#futures_title .center_there  .p3 {border: none; text-align: center; margin-left: 0;}
+#futures_title .center_footer {margin-bottom: 20px; border-bottom: 2px solid #ccc; text-align:  center; font-size: 14px; color: #333; background: #fff; position: relative; top: -4px; padding: 45px 0 25px 0;}
+#futures_title .center_footer a{color: #19b2ff;}
+#futures_title .center_footer span {width: 280px; display: inline-block; background-color: #ffb319; border-radius: 4px; height: 40px; line-height: 40px;}
+#futures_title .center_footer span:hover {cursor: pointer; background-color: #f3aa19;}
+#futures_title .center_footer p{padding: 10px 0;}

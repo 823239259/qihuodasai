@@ -1,0 +1,49 @@
+body {background: #f2f2f2;}
+#personalCenter {width: 1280px; margin: 0 auto;}
+.uc_centerLeft {float: left; width: 1280px; background: #fcfcfc; border-bottom: 2px solid #ccc; margin: 20px 10px 20px 0;}
+.calendar {background: #fff; border-bottom: 2px solid #ffb725; vertical-align: middle; position: relative; height: 40px; line-height: 40px;}
+.calendar span {margin-left: 10px; font-size: 16px;}
+.calendar .icon {position: absolute; left: 0; top: 10px;}
+.uc_centerLeft ul a {width: 100%; color: #666; font-size: 14px; height: 40px; line-height: 40px; border-bottom: 1px solid #f2f2f2; display: inline-block;}
+.uc_centerLeft ul li.title {font-size: 16px; color: #333; height: 50px; line-height: 50px;}
+.uc_centerLeft ul li.on a {color: #ffb319;}
+.uc_centerLeft ul li .name {width: 80px; display: inline-block; text-align: center;}
+.uc_centerLeft .uc_icon {width: 20px; height: 20px; display: inline-block; position: relative; top: 4px; margin-left: 10px; margin-right: 50px;}
+.uc_centerLeft .account_icon {background: url("../image/account_icon_on.png") no-repeat;}
+.uc_centerLeft ul li:hover .account_icon {background: url("../image/account_icon.png");}
+.uc_centerLeft .purchase_icon {background: url("../image/purchase_icon_on.png") no-repeat; }
+.uc_centerLeft ul li:hover .purchase_icon {background: url("../image/purchase_icon.png");}
+.uc_centerLeft .news_icon {background: url("../image/news_icon_on.png") no-repeat;}
+.uc_centerLeft ul li:hover .news_icon {background: url("../image/news_icon.png");}
+.uc_centerLeft .collection_icon {background: url("../image/collection_icon_on.png") no-repeat;}
+.uc_centerLeft ul li:hover .collection_icon {background: url("../image/collection_icon.png");}
+.uc_centerLeft ul li a:hover {cursor: pointer; color: #ffb319;}
+.uc_centerLeft ul li.on .account_icon {background: url("../image/account_icon.png");}
+.uc_centerLeft ul li.on .purchase_icon {background: url("../image/purchase_icon.png");}
+.uc_centerLeft ul li.on .news_icon {background: url("../image/news_icon.png");}
+.uc_centerLeft ul li.on .collection_icon {background: url("../image/collection_icon.png");}
+.uc_centerRight {float: right; width: 1030px; border-left: 10px solid #f2f2f2;}
+.uc_centerRight .p1 {border-bottom: 2px solid #ccc; height: 40px;line-height: 40px; background: #fff;}
+.uc_centerRight .title_on .title {width: 120px; text-align: center; display: inline-block;border-right: 1px solid #f2f2f2; border-bottom: 2px solid #ccc; float: left; color: #333;}
+.uc_centerRight .title_on .title:hover {color: #ffb319; border-bottom: 2px solid #ffb319;}
+.uc_centerRight .title_on .drawmoney_record {color: #19b2ff;}
+.uc_centerRight .title_on .on {color: #ffb319; border-bottom: 2px solid #ffb319;}
+/*翻页*/
+#page {padding: 20px; background: #fff; text-align: right;}
+/*下拉列表*/
+.demo{border: 1px solid #e8e8e8; overflow: hidden;}
+.box{padding: 0 10px; width: 130px; height: 38px; line-height: 38px; color: #666;}
+.box:hover {background: #34b3e0; color: #fff; cursor: pointer;}
+.box.on {background: #34b3e0; color: #fff; cursor: pointer;}
+.zUIpanelScrollBox,.zUIpanelScrollBar{ width:10px; top:4px; right:2px; border-radius:5px; }
+.zUIpanelScrollBox{ background:black;opacity:0.1; filter:alpha(opacity=10); z-index: 999;}
+.zUIpanelScrollBar{background:#000;opacity:0.8; filter:alpha(opacity=80); z-index: 999}
+
+
+
+
+
+
+
+
+

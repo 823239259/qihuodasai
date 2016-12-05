@@ -1,0 +1,27 @@
+.fundDetail {}
+.fundDetail .uc_fundDetail {background: #fff; border-top: 10px solid #f2f2f2; display: inline-block; width: 970px; height: 100px; padding: 0 30px;}
+.fundDetail .uc_fundDetail .uc_fundDetail_left {float: left; font-size: 16px; color: #333;}
+.fundDetail .uc_fundDetail .uc_fundDetail_left p{margin-top: 20px;}
+.fundDetail .uc_fundDetail .uc_fundDetail_left p span {color: #ffb319;}
+.fundDetail .uc_fundDetail .uc_fundDetail_right {float: right; height: 100px; line-height: 100px;}
+.fundDetail .uc_fundDetail .uc_fundDetail_right p {height: 100px; line-height: 100px;}
+.fundDetail .uc_fundDetail .uc_fundDetail_right .fundDetail_select {margin-left: 10px; width: 90px; height: 30px; line-height: 30px; text-align: center; display: inline-block; background: #ffb319; border-radius: 4px;}
+.fundDetail .uc_fundDetail .uc_fundDetail_right .fundDetail_select:hover {cursor: pointer;}
+.fundDetail .uc_fundDetail .uc_fundDetail_right input[type="text"] {width: 100px; height: 38px; border: 1px solid #e6e6e6; border-radius: 4px; text-align: center; font-size: 14px; color: #999;}
+.fundDetail .fundDetail_record {margin-top: -4px; border-top: 10px solid #f2f2f2; background: #fff; padding: 0 20px; border-bottom: 1px solid #e8e8e8;}
+.fundDetail .fundDetail_record ul {display: inline-block; height: 40px; line-height: 40px; padding: 0 10px;}
+.fundDetail .fundDetail_record ul li {float: left;}
+.fundDetail .fundDetail_record .fundDetail_title {font-size: 16px; color: #333;}
+.fundDetail .fundDetail_record .fundDetail_lis {font-size: 14px; color: #666; border-top: 1px solid #e8e8e8;}
+.fundDetail_time {width: 220px;}
+.fundDetail_type {width: 170px;}
+.fundDetail_income {width: 170px;}
+.fundDetail_expenditure {width: 170px;}
+.fundDetail_balance {width: 180px;}
+.fundDetail_detailed {width: 60px;}
+.fundDetail_detailed a {color: #19b2ff;}
+/*模拟下拉列表*/
+.simulation_spinner {position: relative; top: 30px;}
+.fundDetail .uc_fundDetail .uc_fundDetail_right .simulation_spinner .spinner_val {margin-right: 10px; position: relative; top: -30px; display: inline-block; width: 140px; height: 38px; line-height: 38px;  border: 1px solid #e6e6e6; border-radius: 4px; text-align: left; font-size: 14px; color: #999; padding-left: 10px;}
+.simulation_spinner .spinner_more {position: absolute; left: 0; top: 0; height: 150px; background: #fff; width: 150px; }
+/**/
