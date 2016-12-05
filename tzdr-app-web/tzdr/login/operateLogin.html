@@ -200,12 +200,11 @@
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
 				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null){
 					$(".accountSelect").val(tradeWebSocketIsMock);
-				}else{ 
+				}else{   
 					$(".accountSelect").val(0);
 					tradeWebSocketIsMock = 0; 
-				}    
-				getVersion();   
-				setTradeConfig(tradeWebSocketIsMock); 
+				}   
+				getVersion();    
 				$(".accountSelect").change(function(){
 					var $this = $(this);
 					var val = $this.val(); 
@@ -312,7 +311,8 @@
 						}else{
 						     mui.toast("您还未勾选协议"); 
 						   return;
-						  };
+						 }; 
+						setTradeConfig(tradeWebSocketIsMock);
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
 						var loginSocket = new WebSocket(socketUrl);
