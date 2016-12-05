@@ -35,11 +35,11 @@
             <%-- <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li> --%>
             <li><a target="_blank" href="${ctx}/html/qutrade/quoteTrade.html">行情交易</a></li>
             <li><a id="guojiqihuo" href="${ctx}/hsi/index">国际期货</a></li>
- 			<li><a href="http://cms.vs.com/vsnews/about/" title="" >下载中心</a></li>
- 			<li><a href="http://cms.vs.com/vsnews/zimeiti/" title="" >7X24直播</a></li>
- 			<li><a href="http://cms.vs.com/vsnews/rili/" title="" >财经日历</a></li>
-            <li><a href="http://cms.vs.com/vsnews/xuetang/" title="" >期货学堂</a></li>
-            <li><a href="http://cms.vs.com/vsnews/news/" title="" >全球资讯</a></li>
+ 			<li><a href="http://www.vs.com/vsnews/about/" title="" >下载中心</a></li>
+ 			<li><a href="http://www.vs.com/vsnews/zimeiti/" title="" >7X24直播</a></li>
+ 			<li><a href="http://www.vs.com/vsnews/rili/" title="" >财经日历</a></li>
+            <li><a href="http://www.vs.com/vsnews/xuetang/" title="" >期货学堂</a></li>
+            <li><a href="http://www.vs.com/vsnews/news/" title="" >全球资讯</a></li>
             <%-- <%
         	if(request.getSession().getAttribute("userName") !=null){
         	%>
