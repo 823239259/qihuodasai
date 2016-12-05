@@ -26,6 +26,7 @@
     			"id":win.did
     		},function(result){
     			if(!mui.isnull(result.data.details)){
+    				queryDetails(result.data.details.id);
     				tranlever=result.data.details.tranLever;
     				//获取详细数据
     				setDetails(result.data.details);
@@ -39,7 +40,34 @@
     			mui.toast(result.message);
     			return;
     		},paramUrl);
+    		function queryDetails(id){
+    			mui.app_request("/user/ftrade/getFstTradeDetail",{id:id},function(res){
+    				console.log(JSON.stringify(res));
+    				if(!mui.isnull(res.data)){
+    					insertDateils(res.data);
+    				}
+    				
+	    		},function(res){
+	    			console.log(JSON.stringify(res));
+	    		});
+    		}
     		
+    		function insertDateils(data){
+    			for(var i=0;i<data.length;i++){
+    				$("#historyDetailsTable").append("<tr>"+
+	    			"<td>"+i+"</td>"+
+	    			"<td>"+data[i].commodityNo+"</td>"+
+	    			"<td>"+data[i].flat+"</td>"+
+	    			"<td>"+data[i].tradeNum+"</td>"+
+	    			"<td>"+data[i].free+"</td>"+
+	    			"<td>"+data[i].drection+"</td>"+
+	    			"<td>"+data[i].tradePrice+"</td>"+
+	    			"<td>"+data[i].orderPrice+"</td>"+
+	    			"<td>"+data[i].marketDate+"</td>"+
+	    			"</tr>");
+    			}
+    			
+    		}    		
     		
     		document.getElementById("tran_info").addEventListener("tap",function(){
   				mui.openWindow("../agree/hsiru.html");
@@ -329,29 +357,18 @@
 		<div id="item2" class="mui-control-content">
 			<table id="historyDetailsTable">
 				<thead>
-					<tr>
-						<td>序号</td>
-						<td>合约名称</td>
-						<td>交易盈亏</td>
-						<td>交易手数</td>
-						<td>交易手续费</td>
-						<td>成交价</td>
-						<td>买卖</td>
-						<td>买入/卖出价格</td>
-						<td>结算时间</td>
-					</tr>
+						<tr>
+							<td width="50px">序号</td>
+							<td width="80px">合约名称</td>
+							<td width="80px">交易盈亏</td>
+							<td width="80px">交易手数</td>
+							<td width="80px">交易手续费</td>
+							<td width="80px">成交价</td>
+							<td width="60px">买卖</td>
+							<td width="110px">买入/卖出价格</td>
+							<td width="200px">结算时间</td>
+						</tr>
 				</thead>
-				<tr>
-					<td>序号</td>
-					<td>合约名称</td>
-					<td>交易盈亏</td>
-					<td>交易手数</td>
-					<td>交易手续费</td>
-					<td>成交价</td>
-					<td>买卖</td>
-					<td>买入/卖出价格</td>
-					<td>结算时间</td>
-				</tr>
 			</table>
 		</div>
 		<div id="shareDiv">

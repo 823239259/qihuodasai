@@ -585,7 +585,8 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/account/account.html",

@@ -719,13 +719,11 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	width: 100%;
 	height: auto;
 }
-#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 600px;}
-#historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 35px;line-height: 35px;}
-#historyDetailsTable  tr td{width: 100px;font-size: 14px;color:#666666;}
-#historyDetailsTable tr td:nth-child(1){width:60px;padding-left: 8px;}
+#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 820px;}
+#historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 40px;line-height: 40px;}
+#historyDetailsTable  tr td{font-size: 14px;color:#666666;}
+#historyDetailsTable tr td:nth-child(1){padding-left: 8px;}
 #historyDetailsTable  tr td:nth-last-child(1){padding-right: 8px;}
-#historyDetailsTable  tr td:nth-child(8){width: 150px;}
-#historyDetailsTable  tr td:nth-child(5){width: 150px;}
 #historyDetailsTable thead tr{height: 30px;line-height: 30px;text-align: left;color:#2b2b2b;font-size: 14px;}
 #historyDetailsTable thead tr td{color:#2b2b2b;font-size: 14px;}
 #listDetails ul li label{

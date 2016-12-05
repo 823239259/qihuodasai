@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+    <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init();
     	var win=null;
@@ -25,7 +26,7 @@
     		},function(result){
     			console.log(JSON.stringify(result))
     			if(!mui.isnull(result.data.details)){
-    				
+    				queryDetails(result.data.details.id);
     				//获取详细数据
     				setDetails(result.data.details);
     				
@@ -40,7 +41,34 @@
     			mui.toast(result.message);
     			return;
     		},paramUrl);
+    		function queryDetails(id){
+    			mui.app_request("/user/ftrade/getFstTradeDetail",{id:id},function(res){
+    				console.log(JSON.stringify(res));
+    				if(!mui.isnull(res.data)){
+    					insertDateils(res.data);
+    				}
+    				
+	    		},function(res){
+	    			console.log(JSON.stringify(res));
+	    		});
+    		}
     		
+    		function insertDateils(data){
+    			for(var i=0;i<data.length;i++){
+    				$("#historyDetailsTable").append("<tr>"+
+	    			"<td>"+i+"</td>"+
+	    			"<td>"+data[i].commodityNo+"</td>"+
+	    			"<td>"+data[i].flat+"</td>"+
+	    			"<td>"+data[i].tradeNum+"</td>"+
+	    			"<td>"+data[i].free+"</td>"+
+	    			"<td>"+data[i].drection+"</td>"+
+	    			"<td>"+data[i].tradePrice+"</td>"+
+	    			"<td>"+data[i].orderPrice+"</td>"+
+	    			"<td>"+data[i].marketDate+"</td>"+
+	    			"</tr>");
+    			}
+    			
+    		}
     	
 
     		
@@ -199,7 +227,6 @@
     			li.setAttribute("class","mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3");
     			var h5=document.createElement("h5");
     			var p=document.createElement("p");
-    			console.log(JSON.stringify(details));
     			switch (item.tradeType){
     			case 0:
     				h5.innerHTML="富时A50";
@@ -492,28 +519,17 @@
 				<table id="historyDetailsTable">
 					<thead>
 						<tr>
-							<td >序号</td>
-							<td>合约名称</td>
-							<td>交易盈亏</td>
-							<td>交易手数</td>
-							<td>交易手续费</td>
-							<td>成交价</td>
-							<td>买卖</td>
-							<td>买入/卖出价格</td>
-							<td>结算时间</td>
+							<td width="50px">序号</td>
+							<td width="80px">合约名称</td>
+							<td width="80px">交易盈亏</td>
+							<td width="80px">交易手数</td>
+							<td width="80px">交易手续费</td>
+							<td width="80px">成交价</td>
+							<td width="60px">买卖</td>
+							<td width="110px">买入/卖出价格</td>
+							<td width="200px">结算时间</td>
 						</tr>
 					</thead>
-					<tr>
-						<td>序号</td>
-						<td>合约名称</td>
-						<td>交易盈亏</td>
-						<td>交易手数</td>
-						<td>交易手续费</td>
-						<td>成交价</td>
-						<td>买卖</td>
-						<td>买入/卖出价格</td>
-						<td>结算时间</td>
-					</tr>
 				</table>
 			</div>
 		<div id="shareDiv">
