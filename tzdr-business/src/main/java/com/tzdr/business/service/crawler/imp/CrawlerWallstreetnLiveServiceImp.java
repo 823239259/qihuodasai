@@ -63,6 +63,7 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 				+ " l.published = 1 "
 				+ " and l.channel_set = '"+channelset+"' "
 				+ " and c.live_id=l.live_wallstreetn_id "
+				+ " GROUP BY l.channel_set,l.live_wallstreetn_id "
 				+ " order by created_at desc  LIMIT "+page.getStartIndex()+" , "+page.getSize()+"");
 		
 		return getEntityDao().queryMapBySql(buffer.toString(), null);
