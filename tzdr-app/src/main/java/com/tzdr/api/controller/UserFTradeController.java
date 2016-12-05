@@ -145,7 +145,7 @@ public class UserFTradeController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getFstTradeDetail",method = RequestMethod.GET)
+	@RequestMapping(value = "/getFstTradeDetail",method = RequestMethod.POST)
 	public ApiResult getTradeDetail(HttpServletRequest request,@RequestParam("id")String id){
 		ApiResult apiResult = new ApiResult();
 		try {
