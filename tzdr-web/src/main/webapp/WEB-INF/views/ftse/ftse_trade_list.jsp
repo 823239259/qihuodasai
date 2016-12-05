@@ -31,6 +31,12 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .window_detail_share span:hover {color: #fc3; cursor: pointer;}
 .window_detail_share span img {position: relative; top: 9px; margin-left: 15px; margin-right: 5px;}
 #window_detail_title td {border-top: 1px solid #e6e6e6;}
+.sif_money {padding: 0px 10px;}
+.sif_money ul {margin: 10px auto;}
+.sif_money ul li h3 {height: 32px; line-height: 32px;}
+.sif_money ul li p {height: 32px; line-height: 32px;}
+
+
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -47,7 +53,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		</div>
 		<div id="window_detail_tab">
 			<div class="window_detail_lis" style="display: block;">
-				<p style="text-align: center; font-size: 20px; padding-top: 20px;">结算明细</p>
+				<p style="text-align: center; font-size: 20px; padding-top: 10px;">结算明细</p>
 				<ul id="window_detail_endInfoFtse">
 					<li>
 						<h3>操盘保证金</h3>
@@ -80,9 +86,9 @@ table.data_web td a { padding:0 5px; color:#f80; }
 				</div>
 			</div>
 			<div class="window_detail_lis">
-				<p style="text-align: center; font-size: 20px; padding: 20px 0;">历史成交明细</p>
-				<div style="height: 535px; overflow-y: scroll;">
-					<table style="height: 500px; overflow: hidden; font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
+				<p style="text-align: center; font-size: 20px; padding: 10px 0;">历史成交明细</p>
+				<div style="height: 498px; overflow-y: scroll;">
+					<table style="font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
 						<tbody id = "tradeDetail">
 						
 						</tbody>

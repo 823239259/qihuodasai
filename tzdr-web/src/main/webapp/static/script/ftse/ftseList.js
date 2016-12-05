@@ -117,6 +117,12 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		var _this = $(this);
 		$(".fl_navtitle h3").removeClass("on").eq(_this.index()).addClass("on");
 		$("#window_detail_tab .window_detail_lis").hide().eq(_this.index()).show();
+		var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+	    $(".sif_money").css({
+	        top:"50%",
+	        marginTop: -detailInfoFtseHeight
+
+	    })
 	});
 };
 function bindEndOfFtse(cls){
