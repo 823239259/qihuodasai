@@ -4,6 +4,7 @@
 var url=window.location.href;
 var param = initLoadParam("o");
 var check = initLoadParam("check");
+ var funUrl="http://www.vs.com/";
 $(document).ready(function () {
         //$("#login").on("click",function(){
         //    $("#loginDivContent").css("display","block");
@@ -17,7 +18,7 @@ $(document).ready(function () {
             if(urls.length > 0){
                 loginUrl = urls[0];
             }
-            location.href ="http://test.www.vs.com/user/redirectVsNet?url="+loginUrl;
+            location.href =funUrl+"user/redirectVsNet?url="+loginUrl;
         });
      window.onload = loadUserInfo;
 });
@@ -28,14 +29,14 @@ function initLoadParam(name){
 }
 function loadUserInfo(){
     if(check == undefined || check == null){
-        location.href = "http://test.www.vs.com/login/user/redirect/account?url="+url;
+        location.href = funUrl+"login/user/redirect/account?url="+url;
         return ;
     }
     var mobile = null;
     if(param != null){
         $.ajax({
             type:"get",
-            url:"http://test.www.vs.com/login/user/getAccount",
+            url:funUrl+"login/user/getAccount",
             data:{
                 mobile:param
             },
@@ -48,7 +49,7 @@ function loadUserInfo(){
                         console.log(mobile);
                         mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
                         $("#login").html("欢迎您，<span>"+mobile+"</span>");
-                        $("#registerALL").html("<a href='javascript:void(0)' id='signOut'>退出</a>");
+                        $("#registerALL").html("<a href='"+funUrl+"logout' id='signOut'>退出</a>");
                         $("#personalCenter").html("我的账户");
                     }
                 }
@@ -75,7 +76,6 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 }
 function queryData(url,params,success,error){
-    var funUrl="http://www.vs.com/";
     url=funUrl+url;
     var success = arguments[2]?arguments[2]:function(){};
     var error = arguments[3]?arguments[3]:function(){};
