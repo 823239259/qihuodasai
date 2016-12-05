@@ -48,7 +48,7 @@ function loadUserInfo(){
                     if(mobile != null){
                         console.log(mobile);
                         mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-                        $("#login").html("欢迎您，<span>"+mobile+"</span>");
+                        $("#login").html("欢迎您，<a href='http://www.vs.com:80/user/account'><span>"+mobile+"</span></a>"); 
                         $("#registerALL").html("<a href='"+funUrl+"logout' id='signOut'>退出</a>");
                         $("#personalCenter").html("我的账户");
                     }
