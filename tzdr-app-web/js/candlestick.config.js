@@ -119,6 +119,14 @@
 		            type: 'candlestick',
 		            name: '',
 		            data: data,
+		              markLine: {
+                		symbol: ['none', 'none'],
+                		clickable:false,
+		                data: [
+			                 {name: '标线2起点', value: 10385, xAxis: "17:00", yAxis: 10385},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+		       				 {name: '标线2终点', xAxis: "17:50", yAxis: 10385}
+		                ]
+               		 },
 		            itemStyle: {
 		                normal: {
 		                    color: '#FD1050',
