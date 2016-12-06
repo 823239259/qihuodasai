@@ -58,16 +58,17 @@
     		
     		function insertDateils(data){
     			for(var i=0;i<data.length;i++){
+    				var _data = data[i];
     				$("#historyDetailsTable").append("<tr>"+
 	    			"<td>"+i+"</td>"+
-	    			"<td>"+data[i].commodityNo+"</td>"+
-	    			"<td>"+data[i].flat+"</td>"+
-	    			"<td>"+data[i].tradeNum+"</td>"+
-	    			"<td>"+data[i].free+"</td>"+
-	    			"<td>"+data[i].drection+"</td>"+
-	    			"<td>"+data[i].tradePrice+"</td>"+
-	    			"<td>"+data[i].orderPrice+"</td>"+
-	    			"<td>"+data[i].marketDate+"</td>"+
+	    			"<td>"+_data.commodityNo+_data.contractNo+"</td>"+
+	    			"<td>"+_data.flat+"</td>"+
+	    			"<td>"+_data.tradeNum+"</td>"+
+	    			"<td>"+_data.free+"</td>"+
+	    			"<td>"+_data.drection+"</td>"+
+	    			"<td>"+_data.tradePrice+"</td>"+
+	    			"<td>"+_data.orderPrice+"</td>"+
+	    			"<td>"+_data.marketDate+"</td>"+
 	    			"</tr>");
     			}
     			
