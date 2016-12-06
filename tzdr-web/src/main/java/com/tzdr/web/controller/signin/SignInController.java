@@ -290,7 +290,7 @@ public class SignInController {
 	 */
 	@RequestMapping(value = "/signin_operation")
 	@ResponseBody
-	public JsonResult signInOperation(Integer source, String mobile, String code, String password,
+	public JsonResult signInOperation(Integer source, final String mobile, String code, final String password,
 			String parentGeneralizeId, String yzmCode, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
@@ -384,14 +384,16 @@ public class SignInController {
 		}
 		data.put("from", from);
 		jsonResult.setData(data);
-		// 用户注册成功之后给用户手机发送短信
-		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-		messagePromptService.registNotice(mobile, "web", "", "");
 		try {
-			boolean b = mockTradeAccountService.openMockAccount(mobile, password);
-			if(!b){
-				jsonResult.setMessage("模拟盘账号开通失败,可能已存在相同的账号信息!");
-			}
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					// 用户注册成功之后给用户手机发送短信
+					SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+					mockTradeAccountService.openMockAccount(mobile, password);
+					messagePromptService.registNotice(mobile, "web", "", "");
+				}
+			});
 		} catch (Exception e) {
 			jsonResult.setMessage("模拟盘账号开通失败");
 		}

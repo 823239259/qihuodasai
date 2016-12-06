@@ -156,6 +156,8 @@ public class LoginAndRegistController {
 		}else{
 			wUser.setChannel(channel);
 		}
+		final String emailChannelName = channelName;
+		final String emailChannelKeyWords = channelKeyWords;
 		/*//设置渠道
 		wUser.setChannel(channel);  
 		//推广人编号
@@ -209,13 +211,13 @@ public class LoginAndRegistController {
 				@Override
 				public void run() {
 					SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-					boolean b = mockTradeAccountService.openMockAccount(mobile, password);
+					mockTradeAccountService.openMockAccount(mobile, password);
+					messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
 				}
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		messagePromptService.registNotice(mobile, "APP", channelName, channelKeyWords);
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	
