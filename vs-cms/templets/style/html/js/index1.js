@@ -5,7 +5,7 @@ var url=window.location.href;
 var urlHost = url;
 var param = initLoadParam("o");
 var check = initLoadParam("check");
- var funUrl="http://192.168.2.174/tzdr-web/";
+ var funUrl="http://www.vs.com/";
 $(document).ready(function () {
         //$("#login").on("click",function(){
         //    $("#loginDivContent").css("display","block");
