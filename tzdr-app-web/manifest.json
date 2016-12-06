@@ -1201,7 +1201,8 @@
 					"tzdr/agree/tradingMarket.html",
 					"tzdr/future/hsi.html",
 					"tzdr/future/cp.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/retrievePassword.html"
 				],
 				"priority": 0
 			},
