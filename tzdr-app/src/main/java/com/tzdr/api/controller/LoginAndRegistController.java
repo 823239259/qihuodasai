@@ -214,7 +214,7 @@ public class LoginAndRegistController {
 					mockTradeAccountService.openMockAccount(mobile, password);
 					messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
 				}
-			});
+			}).start();;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

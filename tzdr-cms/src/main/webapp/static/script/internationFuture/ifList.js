@@ -96,7 +96,7 @@ function input(){
 		}
 		var id = rows[0].id;
 		$.ajax({
-			url:basepath+"/admin/internation/future/getFtse",
+			url:Check.rootPath() +"/admin/internation/future/getFtse",
 			type:"get",
 			data:{
 				id:id
@@ -119,7 +119,7 @@ var localDataLever = null;
 function importExcl(){
 	$(function(){
 		$.ajaxFileUpload({  
-	        url : basepath+'/admin/internation/future/importExclDetail',  
+	        url : Check.rootPath() + '/admin/internation/future/importExclDetail',  
 	        secureuri : false,//安全协议  
 	        fileElementId:'input_file',//id  
 	        type : 'POST',  
