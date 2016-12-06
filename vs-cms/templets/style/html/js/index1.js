@@ -38,7 +38,8 @@ function loadUserInfo(){
             type:"get",
             url:funUrl+"login/user/getAccount?check="+check,
             data:{
-                mobile:param
+                mobile:param,
+                check:check
             },
             dataType:'json',//服务器返回json格式数据
             success:function(result){
