@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.user.PasswordService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
@@ -53,6 +54,9 @@ public class ForgetController{
 	
 	@Autowired
 	private DataMapService dataMapService;
+	
+	@Autowired
+	private MockTradeAccountService mockTradeAccountService;
 	
 	/**
 	* @Description: TODO(访问找回密码相关页面)
@@ -165,7 +169,7 @@ public class ForgetController{
 	 */
 	@RequestMapping( value = "/update_password")
 	@ResponseBody
-	public JsonResult updatePassword(String mobile,String token,String password,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+	public JsonResult updatePassword(final String mobile,String token,final String password,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
 		JsonResult  jsonResult = new JsonResult(true);
 		WUser wUser = wUserService.getWUserByMobile(mobile);
 		if(wUser == null || StringUtil.isBlank(token) || !token.equals(Md5Utils.hash(wUser.getId()+mobile))){  //判断token是否是当前修改的帐号
@@ -174,6 +178,12 @@ public class ForgetController{
 		}
 		wUser.setPassword(passwordService.encryptPassword(password, wUser.getLoginSalt()));
 		wUserService.updateUser(wUser);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				mockTradeAccountService.openMockAccount(mobile, password);
+			}
+		}).start();
 		return jsonResult;
 	}
 }

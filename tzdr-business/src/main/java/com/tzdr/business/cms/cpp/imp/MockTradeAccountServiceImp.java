@@ -25,8 +25,8 @@ public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount
 	public boolean openMockAccount(String username,String password){
 		boolean flag = false;
 		List<MockTradeAccount> accounts = getEntityDao().doGetMockTradeAccountByUsername(username);
+		List<Object[]> objects = new ArrayList<>();
 		if(accounts == null || accounts.size() == 0){
-			List<Object[]> objects = new ArrayList<>();
 			Object[] objects2 = new Object[]{username,password};
 			objects.add(objects2);
 			try {
@@ -36,6 +36,10 @@ public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}else{
+			Object[] objects2 = new Object[]{password,username};
+			objects.add(objects2);
+			nativeUpdate("update mock_trade_account set Password = ? where Username = ?", objects);
 		}
 		return flag;
 	}
