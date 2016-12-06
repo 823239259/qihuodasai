@@ -48,11 +48,11 @@ function loadUserInfo(){
                     if(mobile != null){
                         console.log(mobile);
                         mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-                        $("#login").html("欢迎您，<a href='"+funUrl+"/user/account' id = 'logout'><span>"+mobile+"</span></a>"); 
-                        $("#registerALL").html("<a href='"+funUrl+"logout' id='signOut'>退出</a>");
+                        $("#login").html("欢迎您，<a href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>"); 
+                        $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
                         $("#personalCenter").html("我的账户");
-                        $("#logout").bind("click",function(){
-                        	location.href = funUrl+"login/user/logout?url"+urlHost;
+                        $("#signOut").bind("click",function(){
+                        	location.href = funUrl+"login/user/logout?url="+urlHost;
                         });
                     }
                 }
