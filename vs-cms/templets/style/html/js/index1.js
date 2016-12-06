@@ -2,9 +2,10 @@
  * Created by 丽丽 on 2016/10/21.
  */
 var url=window.location.href;
+var urlHost = url;
 var param = initLoadParam("o");
 var check = initLoadParam("check");
- var funUrl="http://www.vs.com/";
+ var funUrl="http://192.168.2.174/tzdr-web/";
 $(document).ready(function () {
         //$("#login").on("click",function(){
         //    $("#loginDivContent").css("display","block");
@@ -12,13 +13,12 @@ $(document).ready(function () {
         //$("#close").on("click",function(){
         //    $("#loginDivContent").css("display","none");
         //});
+         var urls = url.split("?");
+	     if(urls.length > 0){
+	         urlHost = urls[0];
+	     }
         $("#login").bind("click",function(){
-            var urls = url.split("?");
-            var loginUrl = url;
-            if(urls.length > 0){
-                loginUrl = urls[0];
-            }
-            location.href =funUrl+"user/redirectVsNet?url="+loginUrl;
+            location.href =funUrl+"user/redirectVsNet?url="+urlHost;
         });
      window.onload = loadUserInfo;
 });
@@ -36,7 +36,7 @@ function loadUserInfo(){
     if(param != null){
         $.ajax({
             type:"get",
-            url:funUrl+"login/user/getAccount",
+            url:funUrl+"login/user/getAccount?check="+check,
             data:{
                 mobile:param
             },
@@ -48,9 +48,12 @@ function loadUserInfo(){
                     if(mobile != null){
                         console.log(mobile);
                         mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-                        $("#login").html("欢迎您，<a href='http://www.vs.com:80/user/account'><span>"+mobile+"</span></a>"); 
+                        $("#login").html("欢迎您，<a href='"+funUrl+"/user/account' id = 'logout'><span>"+mobile+"</span></a>"); 
                         $("#registerALL").html("<a href='"+funUrl+"logout' id='signOut'>退出</a>");
                         $("#personalCenter").html("我的账户");
+                        $("#logout").bind("click",function(){
+                        	location.href = funUrl+"login/user/logout?url"+urlHost;
+                        });
                     }
                 }
             }
