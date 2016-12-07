@@ -107,6 +107,8 @@ mui.plusReady(function(){
 			var newCommdityNo = subscribeParam.CommodityNo;
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
+			lightChartData(quoteParam);
+			console.log(JSON.stringify(quoteParam));
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
@@ -715,6 +717,8 @@ mui.plusReady(function(){
     		$("#CandlestickChart").addClass("mui-active");
     		$("#trade").removeClass("mui-active");
     		$(".BuyDiv").css({"display":"block"});
+    		$("#lightDiagram").removeClass("mui-active");
+    		$("#lightChartDiv").removeClass("mui-active");
 		});
 		document.getElementsByClassName("mui-content")[0].addEventListener("tap",function(){
 			$("#list_type ").css({
@@ -729,7 +733,9 @@ mui.plusReady(function(){
     		$("#Handicap").removeClass("mui-active");
     		$("#CandlestickChart").removeClass("mui-active");
     		$("#trade").removeClass("mui-active");
-    		$(".BuyDiv").css({"display":"block"})
+    		$(".BuyDiv").css({"display":"block"});
+    		$("#lightDiagram").removeClass("mui-active");
+    		$("#lightChartDiv").removeClass("mui-active");
     		time=[];
 		    prices=[];
 		    timeLabel=[]
@@ -770,6 +776,8 @@ mui.plusReady(function(){
     			$("#trade").addClass("mui-active");
     			$("#Handicap").removeClass("mui-active");
     			$(".BuyDiv").css({"display":"none"});
+    			$("#lightDiagram").removeClass("mui-active");
+    		$("#lightChartDiv").removeClass("mui-active");
 			}
     	});
     	
@@ -779,7 +787,27 @@ mui.plusReady(function(){
     		$("#HandicapButton").addClass("mui-active");
     		$("#Handicap").addClass("mui-active");
     		$("#trade").removeClass("mui-active");
+    		$("#lightDiagram").removeClass("mui-active");
+    		$("#lightChartDiv").removeClass("mui-active");
     		$(".BuyDiv").css({"display":"block"})
+    	});
+    	document.getElementById("lightDiagram").addEventListener("tap",function(){
+    		$("#headerMenu table td").removeClass("mui-active");
+    		$("#TimeChart1").css("opacity","0").removeClass("mui-active");
+    		$("#timeChartMenu").removeClass("mui-active");
+    		$("#chartAllDiv").removeClass("mui-active");
+    		$("#Handicap").removeClass("mui-active");
+    		$("#CandlestickChart").removeClass("mui-active");
+    		$("#trade").removeClass("mui-active");
+//  		$(".BuyDiv").css({"display":"block"});
+    		$("#lightDiagram").addClass("mui-active");
+    		$("#lightChartDiv").addClass("mui-active");
+    		var option = lightChartDealData(lightChartTime);
+            lightChart.setOption(option);
+            lightChart.resize();
+//          setTimeout(function(){
+//  			$("#lightChart").css("opacity","1");
+//  		},100);
     	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)
