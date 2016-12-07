@@ -90,6 +90,49 @@ function passClose() {
 function input(){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
+		if (rows[0].businessType == "国际综合"){
+			
+			$("#a50td").html("A50交易手数:");
+			$(".hsiTradeNumTR").show();
+			$("#crudeTradeNumTR").show();
+			
+			$("#mdTradeNumTR").show();
+			$("#mnTradeNumTR").show();
+			$("#mbTradeNumTR").show();
+			$("#daxTradeNumTR").show();
+			$("#nikkeiTradeNumTR").show();
+			$("#lhsiTradeNumTR").show();
+			$("#agTradeNumTR").show();
+			$("#hsTradeNumTR").show();
+			$("#xHsTradeNumTR").show();
+			$("#acTradeNumTR").show();
+			$("#asTradeNumTR").show();
+			$("#scTradeNumTR").show();
+			$("#daxMinTradeNumTR").show();
+			$("#inputWin").css("height","457px");
+		
+		}else
+		{
+			$("#a50td").html("交易手数:");
+			$(".hsiTradeNumTR").hide();
+			$("#crudeTradeNumTR").hide();
+			
+			$("#mdTradeNumTR").hide();
+			$("#mnTradeNumTR").hide();
+			$("#mbTradeNumTR").hide();
+			$("#daxTradeNumTR").hide();
+			$("#nikkeiTradeNumTR").hide();
+			$("#lhsiTradeNumTR").hide();
+			$("#agTradeNumTR").hide();
+			$("#hsTradeNumTR").hide();
+			$("#xHsTradeNumTR").hide();
+			$("#acTradeNumTR").hide();
+			$("#asTradeNumTR").hide();
+			$("#scTradeNumTR").hide();
+			$("#daxMinTradeNumTR").hide();
+			$("#inputWin").css("height","250px");
+
+		}
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
 			return;
@@ -104,7 +147,9 @@ function input(){
 			success:function(result){
 				var data = result.data.fste;
 				var tradeDetail = result.data.tradeDetail;
-				handleData(data,tradeDetail);
+				var html = appendTradeDetailHtml(tradeDetail, 0);
+				$("#tradeDetail").html(html);
+				handleData(data,tradeDetail,0);
 			}
 		});
 		$("#inputWin").show();
@@ -130,7 +175,9 @@ function importExcl(){
 	        },  
 	        success : function(result) {  
 	            if(result.success){
-	            	handleData(result.data.dataLever,result.data.data);
+	            	var html = appendTradeDetailHtml(result.data.data, 1);
+	            	$("#tradeDetail").html(html);
+	            	handleData(result.data.dataLever,result.data.data,1);
 	            }else{
 	            	Check.messageBox("提示",data.message);
 	            }
@@ -138,8 +185,8 @@ function importExcl(){
 	    });  
 	})
 }
-function handleData(fast,tradeDetail){
-		var html = "<tr>"+
+function appendTradeDetailHtml(tradeDetail,index){
+			var html = "<tr>"+
 			"<td>序号</td>"+
 			"<td>合约名称</td>"+
 			"<td>交易手数</td>"+
@@ -154,30 +201,33 @@ function handleData(fast,tradeDetail){
 			"</tr>";
 		var data = tradeDetail;
 		var length = data.length;
-		for(var i = 1 ;i  < length ; i++){
-		var _data = data[i];
-		var marketTime = "";
-		if(_data.marketTime==undefined||_data.marketTime==null||_data.marketTime=="null"){
-			marketTime = "";
-		}else{
-			marketTime = _data.marketTime;
+		for(var i = index ;i  < length ; i++){
+			var _data = data[i];
+			var marketTime = "";
+			if(_data.marketTime==undefined||_data.marketTime==null||_data.marketTime=="null"){
+				marketTime = "";
+			}else{
+				marketTime = _data.marketTime;
+			}
+			html += "<tr>" +
+				"<td>"+i+"</td>" +
+				"<td>"+_data.commodityNo+_data.contractNo+"</td>" +
+				"<td>"+_data.tradeNum+"</td>" +
+				"<td>"+_data.free+"</td>" +
+				"<td>"+_data.tradePrice+"</td>" +
+				"<td>"+_data.drection+"</td>" +
+				"<td>"+_data.orderPrice+"</td>" +
+				"<td>"+_data.orderType+"</td>" +
+				"<td>"+_data.flat+"</td>" +
+				"<td>"+_data.orderUser+"</td>" +
+				"<td>"+_data.marketDate+" "+marketTime+"</td>" +
+				"</tr>";
 		}
-		html += "<tr>" +
-			"<td>"+i+"</td>" +
-			"<td>"+_data.commodityNo+_data.contractNo+"</td>" +
-			"<td>"+_data.tradeNum+"</td>" +
-			"<td>"+_data.free+"</td>" +
-			"<td>"+_data.tradePrice+"</td>" +
-			"<td>"+_data.drection+"</td>" +
-			"<td>"+_data.orderPrice+"</td>" +
-			"<td>"+_data.orderType+"</td>" +
-			"<td>"+_data.flat+"</td>" +
-			"<td>"+_data.orderUser+"</td>" +
-			"<td>"+_data.marketDate+" "+marketTime+"</td>" +
-			"</tr>";
-		}
-		var dataLever = fast;
 		localDataLever = JSON.stringify(data);
+		return html;
+}
+function handleData(fast,index){
+		var dataLever = fast;
 		$("#tranProfitLoss").val(dataLever.tranProfitLoss==undefined?"":dataLever.tranProfitLoss);
 		$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
 		$("#hsiTranActualLever").val(dataLever.hsiTranActualLever==undefined?0:dataLever.hsiTranActualLever);
@@ -195,7 +245,7 @@ function handleData(fast,tradeDetail){
 		$("#AmeSilverMarketLever").val(dataLever.AmeSilverMarketLever==undefined?0:dataLever.AmeSilverMarketLever);
 		$("#smallCrudeOilMarketLever").val(dataLever.smallCrudeOilMarketLever==undefined?0:dataLever.smallCrudeOilMarketLever);
 		$("#daxtranMinActualLever").val(dataLever.daxtranMinActualLever==undefined?0:dataLever.daxtranMinActualLever);
-		$("#tradeDetail").html(html);
+		
 
 }
 /*function input() {
@@ -397,6 +447,20 @@ function tradeOpenEnd(){
 				Check.messageBox("提示","请录入结果后结算！");
 			}else{
 				tradeCount();
+				var id = rows[0].id;
+				$.ajax({
+					url:Check.rootPath() +"/admin/internation/future/getFtse",
+					type:"get",
+					data:{
+						id:id
+					},
+					success:function(result){
+						var data = result.data.fste;
+						var tradeDetail = result.data.tradeDetail;
+						var html = appendTradeDetailHtml(tradeDetail, 0);
+						$("#end_tradeDetail").html(html);
+					}
+				});
 				$("#btn_end").show();
 			}
 		}
@@ -504,6 +568,20 @@ function tradeCount() {
 		$('#mbCount').html(rows[0].mbtranActualLever);
 		$('#daxCount').html(rows[0].daxtranActualLever);
 		$('#nikkeiCount').html(rows[0].nikkeiTranActualLever);*/
+		var id = rows[0].id;
+		$.ajax({
+			url:Check.rootPath() +"/admin/internation/future/getFtse",
+			type:"get",
+			data:{
+				id:id
+			},
+			success:function(result){
+				var data = result.data.fste;
+				var tradeDetail = result.data.tradeDetail;
+				var html = appendTradeDetailHtml(tradeDetail, 0);
+				$("#end_tradeDetail").html(html);
+			}
+		});
 		$("#tradeCountWin").show();
 		$('#tradeCountWin').window('open');
 		$("#btn_end").hide();

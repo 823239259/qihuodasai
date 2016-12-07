@@ -472,14 +472,14 @@ function timeConvert(value,rowData,rowIndex) {
         			 	</tr>
         		</table>
         		<table  id="freeTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
-        			<tr id="hsiTradeNumTR">
-	        			<td class="label right">交易手数:</td>
+        			<tr>
+	        			<td class="label right"  id="a50td">交易手数:</td>
 			                <td>
 			                <input id="tranActualLever" name="tranActualLever"  class="easyui-validatebox" data-options="required:true" />
 		                </td>
-		                <td class="label right">恒指交易:</td>
+		                <td class="label right hsiTradeNumTR" >恒指交易:</td>
 		                <td>
-		                    <input id="hsiTranActualLever" name="hsiTranActualLever"  class="easyui-validatebox" data-options="required:true" />
+		                    <input id="hsiTranActualLever" name="hsiTranActualLever"  class="easyui-validatebox hsiTradeNumTR" data-options="required:true" />
 		                </td>
 			       </tr> 
 			           <tr id="mdTradeNumTR">
@@ -724,8 +724,8 @@ function timeConvert(value,rowData,rowIndex) {
 	</div> -->
 	<!-- window 交易手数弹框 -->
 	<div id="tradeCountWin" class="easyui-window" title="交易手数" 
-		style="width:700px;height:400px;display:none;border:none; overflow: hidden;top:4%" 
-        data-options="iconCls:'icon-search',modal:true,closed:true">
+		style="width:800px;height:500px;display:none;border:none; overflow:scroll;top:4%"
+        data-options="iconCls:'icon-save',modal:true,closed:true">
        <!--  hello ,this is window. -->
        <form id="tradeCountForm">
         	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
@@ -785,8 +785,9 @@ function timeConvert(value,rowData,rowIndex) {
 	               	<td align="center" id='scCount'></td>
 	                <td align="center" id='daxMinCount'></td>
         		</tr>
-	               
+	              
         	</table>
+        	<table id="end_tradeDetail"  border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0"></table>
         	 	<div style = "margin-left: 50%;margin-top: 10px;">
         	 		<a id="btn_end"  href="javascript:void(0);"  onclick="end()" class="easyui-linkbutton">结算</a>
         	 		<a   href="javascript:void(0);"  onclick="closeTradeCount()" class="easyui-linkbutton">取消</a>
