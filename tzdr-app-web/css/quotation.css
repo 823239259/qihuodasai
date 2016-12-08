@@ -100,18 +100,6 @@ p{
 #domnRange{
 	color:#e9392a;
 }
-
-.BuyContentLeft{
-	width: 50%;
-	display: inline-block;
-	color:#cccccc;
-	height: 42px;
-	line-height: 42px;
-	padding: 0px 15px;
-	border-bottom: 1px solid #121212;
-	margin-bottom: 0px;
-	font-size: 14px;
-}
 .BuyContentLeft input{
 	background-color:#2B2B2B;
 	border:none;
@@ -313,7 +301,7 @@ p{
 		vertical-align: middle;
 		display: inline-block;
 		background: url(../images/inputRadioBg.png) no-repeat;
-		background-size: 70% auto;
+		background-size: 68% auto;
 }
 #buyFuture table td:nth-child(1) span{
 	background: url(../images/inputRadioBgC.png) no-repeat;
