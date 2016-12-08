@@ -1146,7 +1146,10 @@
 					"images/graySanjiao.jpg",
 					"images/graySanjiao.png",
 					"images/menu.png",
-					"js/lightChart.config.js"
+					"js/lightChart.config.js",
+					"images/inputRadioBgC.png",
+					"images/inputRadioBg.jpg",
+					"images/inputRadioBg.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",

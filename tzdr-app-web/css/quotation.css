@@ -179,14 +179,14 @@ p{
 	height: 73px;
 }
 .ProductInformationRight{
-	width: 47%;
+	width: 50%;
 	padding: 5px 10px 3px;
 }
  .ProductInformationRight p{
  	line-height: 22px;
  }
 .ProductInformationLeft{ 
-	width: 53%;
+	width: 50%;
 	padding: 0px;
 	position: relative;
 	/*padding:0px 10px;*/
@@ -296,17 +296,28 @@ p{
 	height:40px;
 	line-height: 40px;
 	font-size: 14px;
-	border-bottom: 1px solid #121212;
 	padding:0px 15px;
-	
 }
 #buyFuture .radioChoice{
-	width: 25px;
-	height:25px;
-	display: table-cell;
+	width: 20px;
+	height:20px;
+	display: block;
 	vertical-align: middle;
-	color:#FFFFFF;
-	margin-right: 15px;
+	margin-left: -12px;
+	opacity: 0;
+	color:#CCCCCC;
+}
+#buyFuture table td span{
+		width: 20px;
+		height:20px;
+		vertical-align: middle;
+		display: inline-block;
+		background: url(../images/inputRadioBg.png) no-repeat;
+		background-size: 70% auto;
+}
+#buyFuture table td:nth-child(1) span{
+	background: url(../images/inputRadioBgC.png) no-repeat;
+	background-size: 70% auto;
 }
 .buyBtnPrices{
 	border-top: 1px solid #FFFFFF;
@@ -1146,6 +1157,17 @@ input{
 }
 #radioDiv td{
 	width: 50%;
+	padding:0px 10px;
 	height: 40px;
 }
-/*#radioDiv td*/
+#radioDiv tr{
+	border-bottom: 1px solid #121212;
+}
+#radioDiv td label{
+	margin-left: 8px;
+	color:#cccccc;
+}
+#radioDiv td input[name='prices']{
+	border: 1px solid #1f1f1f;
+	background-color: #1f1f1f;
+}

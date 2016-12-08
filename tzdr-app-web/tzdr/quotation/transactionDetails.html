@@ -104,7 +104,7 @@
 					</table>
 				</div>
 				<div id="headerContent">
-					<div id="chartAllDiv" class="bottomDivList mui-active">
+					<div id="chartAllDiv" class="bottomDivList ">
 						<div class="chartDivContent mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;"></div>
 							<div id="volumeChart" style="width:100%;"></div>
@@ -222,7 +222,7 @@
 							</tr>
 						</table>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList mui-active">
 					    <div class="Assets" style="background-color: #2B2B2B;">
 					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -242,15 +242,15 @@
 					    </div>
 					    <form id="buyFuture">
 					        <div class="butomBoreder">
-					        	<table border="1px solid #121212" cellpadding="0" cellspacing="0" id="radioDiv">
+					        	<table  cellpadding="0" cellspacing="0" id="radioDiv">
 					        		<tr>
 					        			<td>
-					        				<label>市价</label>
-					                		<input type="radio" id="sj" checked name="prices" value="1" class="radioChoice">
+					                		<span><input type="radio" id="sj" checked name="prices" value="1" class="radioChoice"></span>
+					                		<label>市价</label>
 					        			</td>
 					        			<td >
-					        				 <label>限价</label>
-					                		<input type="radio"  id="xj" class="radioChoice" value="0" name="prices">
+					                		<span><input type="radio"  id="xj" class="radioChoice" value="0" name="prices"></span>
+					                		<label>限价</label>
 					        			</td>
 					        		</tr>
 					        	</table>
@@ -640,6 +640,12 @@
 				});
 				$("input[type='radio']").click(function(){
 					var type = $("input[type = 'radio']:checked").val();
+					$("#buyFuture table td span").css("background","url('../../images/inputRadioBg.png') no-repeat")
+					if(type==1){
+						$("#buyFuture table td:nth-child(1) span").css("background","url('../../images/inputRadioBgC.png') no-repeat")
+					}else{
+						$("#buyFuture table td:nth-child(2) span").css("background","url('../../images/inputRadioBgC.png') no-repeat")
+					}
 					var orderPrice = $("#orderPrice");
 					var lastPrice = $("#lastPrice").text();
 					var miniTikeSize = $("#miniTikeSize").val();
