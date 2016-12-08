@@ -35,6 +35,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .sif_money ul {margin: 10px auto;}
 .sif_money ul li h3 {height: 32px; line-height: 32px;}
 .sif_money ul li p {height: 32px; line-height: 32px;}
+#window_detail_tab table tr td {height: 40px; line-height: 40px; padding: 0px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -85,10 +86,31 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			</div>
 			<div class="window_detail_lis">
 				<p style="text-align: center; font-size: 20px; padding: 10px 0;">历史成交明细</p>
-				<div style="height: 535px; overflow-y: scroll;">
-					<table style="height: 500px; overflow: hidden; font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
+				<div id="window_detail_scroll" style="padding-bottom: 20px;">
+					<table style="/* height: 500px; overflow: hidden; */ font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
 						<tbody id = "tradeDetail">
-						
+							<!-- <tr id="window_detail_title" style="color: #333;">
+								<td style="width: 40px;">序号</td>
+								<td style="width: 120px;">合约名称</td>
+								<td style="width: 120px;">交易盈亏交易手数</td>
+								<td style="width: 90px;">交易手续费</td>
+								<td style="width: 80px;">成交价</td>
+								<td style="width: 40px;">买卖</td>
+								<td style="width: 70px;">买入/卖出</td>
+								<td style="width: 70px;">订单类型</td>
+								<td style="width: 100px;">结算时间</td>
+							</tr>
+							<tr style="height: 40px;">
+								<td >序号</td>
+								<td >合约名称</td>
+								<td >交易盈亏交易手数</td>
+								<td >交易手续费</td>
+								<td >成交价</td>
+								<td >买卖</td>
+								<td >买入/卖出</td>
+								<td >订单类型</td>
+								<td >结算时间</td>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>	

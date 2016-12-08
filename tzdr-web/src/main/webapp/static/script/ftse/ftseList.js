@@ -146,13 +146,13 @@ function bindEndOfFtse(cls){
 					var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
 					'<td style="width: 40px;">序号</td>'+
 					'<td style="width: 120px;">合约名称</td>'+
-					'<td style="width: 60px;">交易盈亏</td>'+
-					'<td style="width: 60px;">交易手数</td>'+
-					'<td style="width: 60px;">手续费</td>'+
+					'<td style="width: 120px;">交易盈亏</td>'+
+					'<td style="width: 90px;">交易手数</td>'+
+					'<td style="width: 80px;">手续费</td>'+
 					'<td style="width: 60px;">成交价</td>'+
 					'<td style="width: 40px;">买卖</td>'+
-					'<td style="width: 80px;">买入/卖出</td>'+
-					'<td style="width: 60px;">订单类型</td>'+
+					'<td style="width: 70px;">买入/卖出</td>'+
+					'<td style="width: 70px;">订单类型</td>'+
 					'<td style="width: 100px;">结算时间</td>'+
 				'</tr>';
 					var data = result.data.data;
@@ -168,6 +168,17 @@ function bindEndOfFtse(cls){
 						'<td>'+_data.orderPrice+'</td>' +
 						'<td>'+_data.orderType+'</td>' +
 						'<td>'+_data.marketDate+'</td><tr>';
+					}
+					if(data.length>11){
+						$("#window_detail_scroll").css({
+					        height: "450px",
+					        overflowY: "scroll"
+					    });
+					}else {
+						$("#window_detail_scroll").css({
+					        height: "none",
+					        overflowY: "inherit"
+					    });
 					}
 					$("#tradeDetail").html(window_detail_title);
 				}
