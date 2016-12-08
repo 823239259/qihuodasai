@@ -15,7 +15,7 @@ function lightChartData(json){
 //		}
 		lightChartTime.time=lightChartTime.time.slice(-100);
 		lightChartTime.price=lightChartTime.price.slice(-100);
-		console.log(JSON.stringify(lightChartTime));
+//		console.log(JSON.stringify(lightChartTime));
         if(lightChart != null){
         	var option = lightChartDealData();
             lightChart.setOption(option);

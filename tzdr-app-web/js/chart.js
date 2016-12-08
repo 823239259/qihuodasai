@@ -108,7 +108,7 @@ mui.plusReady(function(){
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
 			lightChartData(quoteParam);
-			console.log(JSON.stringify(quoteParam));
+//			console.log(JSON.stringify(quoteParam));
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
@@ -680,6 +680,7 @@ mui.plusReady(function(){
     		$("#trade").removeClass("mui-active")
     		$("#TimeChart1").removeClass("mui-active")
     		$("#chartAllDiv").addClass("mui-active");
+    		$("#lightChartDiv").removeClass("mui-active");
 			$("#selectButon").text($(this).text())
 			var val=$(this).val();
 			if(val==1){
@@ -789,25 +790,22 @@ mui.plusReady(function(){
     		$("#trade").removeClass("mui-active");
     		$("#lightDiagram").removeClass("mui-active");
     		$("#lightChartDiv").removeClass("mui-active");
-    		$(".BuyDiv").css({"display":"block"})
+    		$(".BuyDiv").css({"display":"block"});
+    		$("#lightChartDiv").removeClass("mui-active");
     	});
     	document.getElementById("lightDiagram").addEventListener("tap",function(){
     		$("#headerMenu table td").removeClass("mui-active");
-    		$("#TimeChart1").css("opacity","0").removeClass("mui-active");
-    		$("#timeChartMenu").removeClass("mui-active");
-    		$("#chartAllDiv").removeClass("mui-active");
-    		$("#Handicap").removeClass("mui-active");
-    		$("#CandlestickChart").removeClass("mui-active");
-    		$("#trade").removeClass("mui-active");
-//  		$(".BuyDiv").css({"display":"block"});
     		$("#lightDiagram").addClass("mui-active");
+    		$("#chartAllDiv").addClass("mui-active");
     		$("#lightChartDiv").addClass("mui-active");
+			$("#trade").removeClass("mui-active");
+			$("#Handicap").removeClass("mui-active");
+			$("#TimeChart1").removeClass("mui-active");
+			$("#CandlestickChart").removeClass("mui-active");
+    		$(".BuyDiv").css({"display":"block"});
     		var option = lightChartDealData(lightChartTime);
             lightChart.setOption(option);
             lightChart.resize();
-//          setTimeout(function(){
-//  			$("#lightChart").css("opacity","1");
-//  		},100);
     	});
 	document.getElementById("backClose").addEventListener("tap",function(){
 		mui.app_back("quotationMain",true)
