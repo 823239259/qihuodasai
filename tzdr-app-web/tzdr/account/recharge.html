@@ -58,7 +58,7 @@
 					vText=wv.money;
 					var moneyAll=0;
 					//添加充值金额文本框监听
-				/*document.getElementById("inputMoney").addEventListener('input', function() {
+				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
 						var _length = this.value.length;
 						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
@@ -73,7 +73,7 @@
 						return;
 					}
 					
-				});*/
+				});
 				//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
 				function moneyHandle(_value, _obj) {
 					if(_value && !Number(_value)) { //非数字赋值空
@@ -141,12 +141,17 @@
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
+				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
 					return;  
 				}
 				if(money1 > money){
 					mui.toast("充值金额不低于"+money1+"元");
+					return; 
+				}
+				if(money2 < money){
+					mui.toast("充值金额不高于"+money2+"元");
 					return; 
 				}
 				mui.openWindow({
