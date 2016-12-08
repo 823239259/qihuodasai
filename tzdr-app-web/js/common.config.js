@@ -21,7 +21,6 @@ var tradeWebSocketIsMock = localStorage.getItem("isMock");
 /**
  * 交易配置配置
  */
-
 function tradeConfig(){
 	this.TradeSocketUrl = "ws://139.224.24.206:6066";//ws://trade.vs.com:6060
 	this.TradeSocketModelUrl = "ws://139.224.24.206:6066";
