@@ -719,7 +719,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	width: 100%;
 	height: auto;
 }
-#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 900px;}
+#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 1200px;}
 #historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 40px;line-height: 40px}
 #historyDetailsTable  tr td{font-size: 14px;color:#666666;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;text-align: left;}
 #historyDetailsTable tr td:nth-child(1){padding-left: 8px;}

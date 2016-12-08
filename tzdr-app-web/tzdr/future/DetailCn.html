@@ -57,21 +57,25 @@
     		}
     		
     		function insertDateils(data){
-    			for(var i=0;i<data.length;i++){
-    				var _data = data[i];
-    				$("#historyDetailsTable").append("<tr>"+
-	    			"<td>"+i+"</td>"+
-	    			"<td>"+_data.commodityNo+_data.contractNo+"</td>"+
-	    			"<td>"+_data.flat+"</td>"+
-	    			"<td>"+_data.tradeNum+"</td>"+
-	    			"<td>"+_data.free+"</td>"+
-	    			"<td>"+_data.tradePrice+"</td>"+
-	    			"<td>"+_data.drection.trim()+"</td>"+
-	    			"<td>"+_data.orderPrice+"</td>"+
-	    			"<td>"+_data.marketDate+"</td>"+
-	    			"</tr>");
-    			}
-    			
+	    		for(var i=0;i<data.length;i++){
+	    				var _data = data[i];
+	    				$("#historyDetailsTable").append("<tr>"+
+    						"<td>"+i+"</td>" +
+		    				"<td>"+_data.tradeDate+"</td>" +
+							"<td>"+_data.username+"</td>" +
+							"<td>"+_data.userNo+"</td>" +
+							"<td>"+_data.currencyNo+"</td>" +
+							"<td>"+_data.exchangeNo+"</td>" +
+							"<td>"+_data.commodityNo+"</td>" +
+							"<td>"+_data.buyNum+_data.sellNum+"</td>" +
+							"<td>"+_data.tradePrice+"</td>" +
+							"<td>"+_data.free+"</td>" +
+							"<td>"+_data.orderType+"</td>" +
+							"<td>"+_data.orderUserno+"</td>" +
+							"<td>"+_data.orderUsername+"</td>" +
+							"<td>"+_data.tradeType+"</td>" +
+		    			"</tr>");
+	    			}
     		}  		
     		
     		
@@ -399,14 +403,19 @@
 				<thead>
 					<tr>
 						<td width="50px">序号</td>
-						<td width="80px">合约名称</td>
-						<td width="80px">交易盈亏</td>
-						<td width="80px">交易手数</td>
-						<td width="80px">交易手续费</td>
-						<td width="80px">成交价</td>
-						<td width="60px">买卖</td>
-						<td width="110px">买入/卖出价格</td>
-						<td width="200px">结算时间</td>
+						<td width="200px">成交日期</td>
+						<td width="100px">客户名称</td>
+						<td width="100px">客户号</td>
+						<td width="100px">币种</td>
+						<td width="100px">交易所</td>
+						<td width="80px">品种</td>
+						<td width="100px">交易手数</td>
+						<td width="100px">成交价</td>
+						<td width="80px">手续费</td>
+						<td width="100px">下单类型</td>
+						<td width="100px">下单人编号</td>
+						<td width="100px">下单人姓名</td>
+						<td width="100px">成交类型</td>
 					</tr>
 				</thead>
 			</table>
