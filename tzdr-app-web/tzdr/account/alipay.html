@@ -20,14 +20,13 @@
 								{"money":money,
 								 "payWay":4
 							},function(result){
-								console.log(JSON.stringify(result));
 								if(result.success){ 
 									var charge = JSON.parse(result.data);
 									var payResult =charge.data.pay;
 									$("#dxtxForm").html(payResult);
 									$("#alipaysubmit").submit();
-									plus.nativeUI.closeWaiting();
 								}   
+								plus.nativeUI.closeWaiting();
 							},function(result){
 								mui.toast("连接充值失败,请重试!")
 								plus.nativeUI.closeWaiting();
