@@ -65,8 +65,8 @@
 	    			"<td>"+_data.flat+"</td>"+
 	    			"<td>"+_data.tradeNum+"</td>"+
 	    			"<td>"+_data.free+"</td>"+
-	    			"<td>"+_data.drection+"</td>"+
 	    			"<td>"+_data.tradePrice+"</td>"+
+	    			"<td>"+_data.drection+"</td>"+
 	    			"<td>"+_data.orderPrice+"</td>"+
 	    			"<td>"+_data.marketDate+"</td>"+
 	    			"</tr>");
@@ -134,6 +134,7 @@
 	    		if(endNum==6){
 	    			$("#historyButton").removeClass("mui-active");
 	    			$("#detailButton").removeClass("mui-active");
+	    			mui.toast("暂时无法看到数据");
 	    			return
 	    		}
 	    		$("#historyButton").attr("href","#item2");
