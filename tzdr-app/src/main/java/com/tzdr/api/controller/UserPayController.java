@@ -2,6 +2,7 @@ package com.tzdr.api.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +36,8 @@ import com.tzdr.business.api.service.ApiRechargeService;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
+import com.tzdr.business.pay.dxtx.DxtxConfig;
+import com.tzdr.business.pay.dxtx.DxtxPayModel;
 import com.tzdr.business.pay.gopay.DateUtil;
 import com.tzdr.business.pay.gopay.handle.GoPayTradeData;
 import com.tzdr.business.pay.gopay.model.GoPayRequestModel;
@@ -51,6 +54,7 @@ import com.tzdr.common.api.payease.PayEase;
 import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.utils.IpUtils;
+import com.tzdr.common.utils.Md5Utils;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.api.vo.ApiUserVo;
@@ -344,6 +348,76 @@ public class UserPayController {
 		ApiResult resultJson = new ApiResult();
 		resultJson.setSuccess(flag);
 		resultJson.setData(message);
+		return resultJson;
+	}
+	/**
+	 * 盾行天下-支付宝支付
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/dxtx/alipay",method = RequestMethod.POST)
+	public ApiResult dxtxAlipay(HttpServletRequest request,@RequestParam("payModelId")Integer payModelId,@RequestParam("money")String paymoney,@RequestParam("payWay")String payWay){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user = this.payService.getUser(uid);
+		ApiResult resultJson = new ApiResult(false);
+		if(paymoney != null && Double.parseDouble(paymoney) > 0){
+			Channel payWayChannl = null;
+			if(payWay == null){
+				resultJson.setMessage("支付错误");
+				resultJson.setSuccess(false);
+				return resultJson;
+			}else{
+				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
+				if(payWayChannl == null){
+					resultJson.setMessage("支付错误");
+					resultJson.setSuccess(false);
+					return resultJson;
+				}
+			}
+			int status = 0;
+			String paytype = "3" ;
+			if(payModelId == 3){
+				paytype = "1";
+			}
+			int source = 1;
+			String ip = IpUtils.getIpAddr(request);
+			String orderNo = ChargeExample.randomNo();
+			String charage = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
+			if(charage.equals("1")){
+				DxtxPayModel dxtxPayModel = new DxtxPayModel();
+				dxtxPayModel.setaAppkey(DxtxConfig.getAppKey());
+				dxtxPayModel.setoAddress(DxtxConfig.getNotifyingUrl());
+				dxtxPayModel.setoBizcode(orderNo);
+				dxtxPayModel.setoGoodsId(DxtxConfig.getGoodsId());
+				dxtxPayModel.setoGoodsName("维胜金融充值");
+				dxtxPayModel.setoPaymodeId(payModelId);
+				dxtxPayModel.setoPrice(new BigDecimal(Double.parseDouble(paymoney)).doubleValue());
+				dxtxPayModel.setoPrivateinfo(null);
+				dxtxPayModel.setoShowaddress(DxtxConfig.getSyncnotifyingUrl());
+				dxtxPayModel.setoTermKey(Md5Utils.hash(ip));
+				String toJsonParam = null;
+				try {
+					toJsonParam = URLEncoder.encode(dxtxPayModel.toJSON(), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String result = null;
+				if(payModelId == 1){
+					result = dxtxPayModel.getPayForm(toJsonParam);
+				}else{
+					result = dxtxPayModel.toJSON();
+				}
+				if(result==null){
+					resultJson.setSuccess(false);
+				}else{
+					resultJson.setSuccess(true);
+					resultJson.setData(result);
+				}
+				System.out.println(result);
+			}
+		}
 		return resultJson;
 	}
 	/**
