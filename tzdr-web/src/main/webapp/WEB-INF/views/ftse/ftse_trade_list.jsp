@@ -35,8 +35,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .sif_money ul {margin: 10px auto;}
 .sif_money ul li h3 {height: 32px; line-height: 32px;}
 .sif_money ul li p {height: 32px; line-height: 32px;}
-
-
+#window_detail_tab table tr td {height: 40px; line-height: 40px; padding: 0px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -87,16 +86,77 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			</div>
 			<div class="window_detail_lis">
 				<p style="text-align: center; font-size: 20px; padding: 10px 0;">历史成交明细</p>
-				<div style="height: 498px; overflow-y: scroll;">
-					<table style="font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
+				<div id="window_detail_scroll" style="padding-bottom: 20px;">
+					<table style="/* height: 500px; overflow: hidden; */ font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
 						<tbody id = "tradeDetail">
-						
+							<!-- <tr id="window_detail_title" style="color: #333;">
+								<td style="width: 40px;">序号</td>
+								<td style="width: 120px;">合约名称</td>
+								<td style="width: 120px;">交易盈亏交易手数</td>
+								<td style="width: 90px;">交易手续费</td>
+								<td style="width: 80px;">成交价</td>
+								<td style="width: 40px;">买卖</td>
+								<td style="width: 70px;">买入/卖出</td>
+								<td style="width: 70px;">订单类型</td>
+								<td style="width: 100px;">结算时间</td>
+							</tr>
+							<tr style="height: 40px;">
+								<td >序号</td>
+								<td >合约名称</td>
+								<td >交易盈亏交易手数</td>
+								<td >交易手续费</td>
+								<td >成交价</td>
+								<td >买卖</td>
+								<td >买入/卖出</td>
+								<td >订单类型</td>
+								<td >结算时间</td>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>	
-				
-				</div>
-
+				<%-- <p class="window_detail_share sns-share" style="font-size: 14px; padding: 20px 0;">
+				分享到：<span><img alt="" src="${ctx}/static/images/detail_weixin.jpg">朋友圈</span>
+				<span><img alt="" src="${ctx}/static/images/detail_weibo.jpg">新浪微博</span>
+				<span><img alt="" src="${ctx}/static/images/detail_qq.png">QQ好友</span></p> --%>
+				<div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '自定义分享内容',	
+			bdDesc : '自定义分享摘要',	
+			bdUrl : 'http://www.vs.com', 	
+			bdPic : 'http://www.vs.com/static/images/common-new/new_logo.png'
+		},
+		share : [{
+			"bdSize" : 16
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf',"weixin"]
+		}]
+	};
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 			</div>	
 		</div>
 	</div>
