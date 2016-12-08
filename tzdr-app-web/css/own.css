@@ -649,7 +649,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	background-color: #FFCC33;
 	border: 1px solid #333333;
     color: #333333;
-    z-index: 999;
+    z-index: 1;
 }
 .order_tips,.carefulIcon{
 	color:#ffdd33;
