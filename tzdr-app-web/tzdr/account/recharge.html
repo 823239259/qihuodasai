@@ -56,9 +56,9 @@
 					tzdr.init.initHearListener();
 					var wv = plus.webview.currentWebview();
 					vText=wv.money;
-					var moneyAll=0;
+					var moneyAll=1;
 					//添加充值金额文本框监听
-				/*document.getElementById("inputMoney").addEventListener('input', function() {
+				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
 						var _length = this.value.length;
 						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
@@ -73,7 +73,7 @@
 						return;
 					}
 					
-				});*/
+				});
 				//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
 				function moneyHandle(_value, _obj) {
 					if(_value && !Number(_value)) { //非数字赋值空
@@ -101,22 +101,16 @@
       							accountBalance.innerHTML=result.data.balance;
       							changeAllBalance();
       							if(vText != null){
-									var vTextlength = vText.length;
-					              var cb = vText.substring(0,vTextlength - 1);
-					              var chargeBalance = cb.replace(",","");
-					              var chargeAmount = chargeBalance - result.data.balance; 
-					             // moneyAll=chargeAmount;
+					              var chargeAmount = tzdr.moneyUtils.reverseMoney(vText) - result.data.balance; 
+					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
 					              changeAllBalance();
 								}
       					}else{
       						accountBalance.innerHTML="0.00";
       						if(vText != null){
-									var vTextlength = vText.length;
-					              var cb = vText.substring(0,vTextlength - 1);
-					              var chargeBalance = cb.replace(",","");
-					              var chargeAmount = chargeBalance - result.data.balance; 
-					              //moneyAll=chargeAmount;
+					              var chargeAmount = tzdr.moneyUtils.reverseMoney(vText) - result.data.balance; 
+					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
 								}
       						changeAllBalance();
@@ -141,6 +135,7 @@
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
+				console.log(money1);
 				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
