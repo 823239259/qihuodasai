@@ -377,6 +377,9 @@ public class UserPayController {
 			}
 			int status = 0;
 			String paytype = "3" ;
+			if(payModelId == 3){
+				paytype = "1";
+			}
 			int source = 1;
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();

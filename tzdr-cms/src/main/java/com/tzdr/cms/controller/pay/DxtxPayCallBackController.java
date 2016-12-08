@@ -53,8 +53,11 @@ public class DxtxPayCallBackController {
 			String remark = "";
 			Integer status = 0;
 			Channel channel = Channel.ALIPAY_WAP;
-			if(dxtxPayResultModel.getTradeType().equals("2")){
+			String tradeType = dxtxPayResultModel.getTradeType();
+			if(tradeType.equals("2")){
 				channel = Channel.WX;
+			}else if(tradeType.equals("3")){
+				channel = Channel.QUICK;
 			}
 			if(dxtxPayResultModel.getTradeStatus().equals("TRADE_SUCCESS")){
 				remark = ""+channel.getChannelNote()+"充值"+tranAmt+"元";

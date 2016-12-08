@@ -91,8 +91,8 @@ function input(){
 	localDataLever = null;
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
-		if (rows[0].businessType == "国际综合"){
-			
+		var bussinessType = rows[0].businessType;
+		if (bussinessType == "国际综合"){
 			$("#a50td").html("A50交易手数:");
 			$(".hsiTradeNumTR").show();
 			$("#crudeTradeNumTR").show();
@@ -218,6 +218,7 @@ function appendTradeDetailHtml(tradeDetail,index){
 			}else{
 				marketTime = _data.marketTime;
 			}
+			var  number = parseInt(_data.buyNum)+parseInt(_data.sellNum);
 			html += "<tr>" +
 				"<td>"+i+"</td>" +
 				"<td>"+_data.tradeDate+"</td>" +
@@ -226,7 +227,7 @@ function appendTradeDetailHtml(tradeDetail,index){
 				"<td>"+_data.currencyNo+"</td>" +
 				"<td>"+_data.exchangeNo+"</td>" +
 				"<td>"+_data.commodityNo+"</td>" +
-				"<td>"+_data.buyNum+_data.sellNum+"</td>" +
+				"<td>"+number+"</td>" +
 				"<td>"+_data.tradePrice+"</td>" +
 				"<td>"+_data.free+"</td>" +
 				"<td>"+_data.orderType+"</td>" +
@@ -234,6 +235,7 @@ function appendTradeDetailHtml(tradeDetail,index){
 				"<td>"+_data.orderUsername+"</td>" +
 				"<td>"+_data.tradeType+"</td>" +
 				"</tr>";
+			
 		}
 		return html;
 }

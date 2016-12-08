@@ -164,7 +164,7 @@ function bindEndOfFtse(cls){
 						"<td>"+_data.currencyNo+"</td>" +
 						"<td>"+_data.exchangeNo+"</td>" +
 						"<td>"+_data.commodityNo+"</td>" +
-						"<td>"+_data.buyNum+_data.sellNum+"</td>" +
+						"<td>"+(parseInt(_data.buyNum)+parseInt(_data.sellNum))+"</td>" +
 						"<td>"+_data.tradePrice+"</td>" +
 						"<td>"+_data.free+"</td>" +
 						"<td>"+_data.orderType+"</td>" +
