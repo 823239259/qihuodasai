@@ -48,8 +48,8 @@
 				if(sharehrefDes&&sharehrefDes.value!=""){
 					msg.content=sharehrefDes.value;
 				}
-				msg.thumbs=["http://192.168.0.44:8080/huodong/image/logo.png"];
-				msg.pictures=["http://192.168.0.44:8080/huodong/image/logo.png"];
+				msg.thumbs=["_www/logo.png"];
+				msg.pictures=["_www/logo.png"];
 			}else{
 				if(pic&&pic.realUrl){
 					msg.pictures=[pic.realUrl];
