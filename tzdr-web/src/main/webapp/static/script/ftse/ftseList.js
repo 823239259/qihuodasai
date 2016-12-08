@@ -2,6 +2,12 @@
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
 		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever,daxtranMinActualLever) {
+	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+    $(".sif_money").css({
+        top:"50%",
+        marginTop: -detailInfoFtseHeight
+
+    })
 	$(".fl_navtitle h3").removeClass("on").eq(0).addClass("on");
 	$("#window_detail_tab .window_detail_lis").hide().eq(0).show();
 	
@@ -41,43 +47,43 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 	if(businessType == 8){
 		var tradeDev = '<p style="text-align: center; font-size: 20px; padding-top: 20px;">交易手数</p>';
 		tradeDev+= '<ul><li style="width:200px;">';
-		tradeDev+= '<h3>A50交易手数</h3>';
+		tradeDev+= '<h3>富时A50</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+tranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>期指期货交易手</h3>';
+		tradeDev+= '<h3>期指期货</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+hsiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>国际原油交易手数</h3>';
+		tradeDev+= '<h3>国际原油</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+crudeTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>迷你道指交易手数</h3>';
+		tradeDev+= '<h3>迷你道指</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+mdtranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:195px;">';
-		tradeDev+= '<h3>迷你纳指交易手数</h3>';
+		tradeDev+= '<h3>迷你纳指</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+mntranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>迷你标普交易手数</h3>';
+		tradeDev+= '<h3>迷你标普</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+mbtranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>德国DAX交易手数</h3>';
+		tradeDev+= '<h3>德国DAX</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+daxtranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>日经225交易手数</h3>';
+		tradeDev+= '<h3>日经225</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+nikkeiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>小恒指交易手数</h3>';
+		tradeDev+= '<h3>小恒指</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+lhsiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:195px;">';
-		tradeDev+= '<h3>美黄金交易手数</h3>';
+		tradeDev+= '<h3>美黄金</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
@@ -188,6 +194,17 @@ function bindEndOfFtse(cls){
 						"<td>"+_data.orderUsername+"</td>" +
 						"<td>"+_data.tradeType+"</td>" +
 						"</tr>";
+					}
+					if(data.length>5){
+						$("#window_detail_scroll").css({
+					        height: "479px",
+					        overflowY: "scroll"
+					    })
+					}else {
+						$("#window_detail_scroll").css({
+					        height: "auto",
+					        overflowY: "inherit"
+					    })
 					}
 					$("#tradeDetail").html(window_detail_title);
 				}
