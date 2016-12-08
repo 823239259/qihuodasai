@@ -104,7 +104,7 @@
 					</table>
 				</div>
 				<div id="headerContent">
-					<div id="chartAllDiv" class="bottomDivList ">
+					<div id="chartAllDiv" class="bottomDivList  mui-active">
 						<div class="chartDivContent mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;"></div>
 							<div id="volumeChart" style="width:100%;"></div>
@@ -222,7 +222,7 @@
 							</tr>
 						</table>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList mui-active">
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
 					    <div class="Assets" style="background-color: #2B2B2B;">
 					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -255,22 +255,23 @@
 					        		</tr>
 					        		<tr>
 					        			<td>
-					        				<label>价格:</label>
-					        				<input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft">
+					        				<label class="labelTitle">手数:</label>
+					        				<input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number">
 					        			</td>
 					        			<td>
-					        				<label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number">
+					        				<label class="labelTitle">价格:</label>
+					        				<input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价">
 					        			</td>
+
 					        		</tr>
 					        	</table>
 					        </div>
-					        <div class="BuyContentLeft"></div>
 					        <div class="buyBtn">
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买入</p><p id = "buyBtn_P" class = "buyBtnPrices">市价</p></button>
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p id="switchSell" >卖出</p><p id = "sellBtn_P" class = "buyBtnPrices">市价</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-6 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买入</p><p id = "buyBtn_P" class = "buyBtnPrices">市价</p></button>
+					            <button type="button" class="mui-btn mui-col-xs-6 buy " id = "sell" data-tion-buy = "1"><p id="switchSell" >卖出</p><p id = "sellBtn_P" class = "buyBtnPrices">市价</p></button>
 					        </div>
 					    </form>
-					    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 					        <a class="mui-control-item mui-active" href="#item1" id = "holdCC">持仓</a>
 					        <a class="mui-control-item" href="#item2" id = "desgnateGD">挂单</a>
 					        <a class="mui-control-item" href="#item3" id = "tradeWT">委托</a>
@@ -351,12 +352,6 @@
 					</div>
 				</div>
 			</div>
-			<!--<div id="dropMune" >
-					<span id="sanjiao"></span>
-					<ul >
-						<li id="switchAccount">切换账号</li>
-					</ul>
-				</div>-->
 		<div id="topPopover" class="mui-popover">
 			<div class="mui-popover-arrow"></div>
 			<div class="mui-scroll-wrapper">
@@ -560,40 +555,6 @@
 				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
 				})
-				/*document.getElementById("add").addEventListener('tap', function() {
-					var check = true;
-					mui(".mui-input-group input").each(function () {
-						if(!this.value||trim(this.value)==""){
-							var label = this.previousElementSibling;
-							mui.alert(label.innerText+"不允许为空");
-							check = false;
-							return false;
-						} 
-					});
-					if(check){
-						add_div.classList.add("mui-hidden");
-						//关闭modal
-						mui("#popover").popover("toggle");
-						mui.toast("添加成功~");
-						//刷新界面
-					}
-				
-				});*/
-//				var clickNun=0;
-//				document.getElementById("muneBox").addEventListener("tap",function(){
-//					if(clickNun%2==0){
-//						$("#dropMune").css({"display":"block"});
-//					}else{
-//						$("#dropMune").css({"display":"none"});
-//					}
-//					clickNun++;
-//				});
-//				$("#dropMune li").on("tap",function(){
-//					setTimeout(function(){
-//						$("#dropMune").css({"display":"none"});
-//					},100);
-//					
-//				})
 			});
 		</script>
 		<script>
@@ -602,9 +563,6 @@
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
-//			$(function(){
-//				plus.nativeUI.showWaiting( "正在加载内容" );
-//			})
 			function setTimeOutInsertOrder(){
 				tradeSetTimeOut = setTimeout(function(){
 								plus.nativeUI.closeWaiting(); 
@@ -616,7 +574,6 @@
 				$("#contractNo").val(param[1]);
 				$("#contractSize").val(param[5]);
 				$("#lastPrice").text(param[7]);
-//				$("#lastPriceNone").val(param[7]);
 				$("#miniTikeSize").val(param[6]);
 				$("#doSize").val(param[4]);
 			}

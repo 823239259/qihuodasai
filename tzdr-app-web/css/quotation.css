@@ -100,34 +100,24 @@ p{
 #domnRange{
 	color:#e9392a;
 }
-.BuyContentLeft input{
-	background-color:#2B2B2B;
-	border:none;
-	width:73%;
-	height: 38px;
-	color:#cccccc;
-	font-size: 14px;
-	text-align: center;
-}
 .buyBtn{
 	clear: all;
 	background-color: #2B2B2B;
-	/*height:60px;*/
-	height: 70px;
-	padding: 13px 10px;
+	height: auto;
+	border-bottom: 1px solid #121212;
 	text-align: center;
+	overflow: h;
 }
 .buyBtn button{
 	border:none;
 	color:white;
+	float: left;
 }
 #buy{
 	background-color:#e9392a;
-	margin-right: 5px;;
 }
 #sell{
 	background-color:#16a951;
-	margin-left: 5px;
 }
 
 .Assets{
@@ -272,41 +262,6 @@ p{
 	float: right;
 
 }
-#buyFuture{
-	border-bottom: 1px solid #121212;
-}
-#buyFuture label{
-	color:#FFFFFF;
-}
-#buyFuture span{
-	display: inline-block;
-	width: 50%;
-	height:40px;
-	line-height: 40px;
-	font-size: 14px;
-	padding:0px 15px;
-}
-#buyFuture .radioChoice{
-	width: 20px;
-	height:20px;
-	display: block;
-	vertical-align: middle;
-	margin-left: -12px;
-	opacity: 0;
-	color:#CCCCCC;
-}
-#buyFuture table td span{
-		width: 20px;
-		height:20px;
-		vertical-align: middle;
-		display: inline-block;
-		background: url(../images/inputRadioBg.png) no-repeat;
-		background-size: 68% auto;
-}
-#buyFuture table td:nth-child(1) span{
-	background: url(../images/inputRadioBgC.png) no-repeat;
-	background-size: 70% auto;
-}
 .buyBtnPrices{
 	border-top: 1px solid #FFFFFF;
 }
@@ -316,6 +271,7 @@ p{
 	width: 100%;
 	overflow-x: scroll;
 	padding: 0px;
+	margin: 0px;
 }
 #item2,#item1,#item3,#item4{
 	text-align: center;
@@ -323,15 +279,18 @@ p{
 .listStyle li{
 	height:40px;
 	text-align: left;
-	border-bottom: 1px solid  #454545;
+	border-bottom: 1px solid  #121212;
 	line-height: 40px;
 } 
+.fisrtLi{
+	color:#cccccc;
+}
 .listStyle li  a{
 	height:40px;
 	width: 100%;
 	display: inline-block;
 	line-height: 40px;
-	color:#CCCCCC;
+	color:#666666;
 	font-size: 12px;
 }
 .listStyle li a span{
@@ -339,7 +298,7 @@ p{
 	display: inline-block;
 	width: 70px;
 	height:40px;
-	color:#CCCCCC;
+	color:#666666;
 
 }
 #trade{
@@ -631,18 +590,7 @@ input{
 	border-radius: 0px;
 }
 .toggleClassBack{
-	background-color: #454545;
-}
-.mui-radio{
-	display: inline-block;
-	width: 49%;	
-	font-size: 12px;
-}
-.butomBoreder{
-	border-bottom: 1px solid #454545;
-}
-.mui-table-view-cell:after{
-	content:none;
+	background-color: #1f1f1f;
 }
 .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
 	color:#FFCC33;
@@ -1128,18 +1076,19 @@ input{
 }
 #segmentedControl .mui-control-item{
 	width: 25%;
-	margin: 0px;;
+	margin: 0px;
+	color:#cccccc;
 }
 #segmentedControl .mui-active{
 	width: 100%;
 }
-#buyFuture .butomBoreder .mui-input-row{
+/*#buyFuture .butomBoreder .mui-input-row{
 	margin-top: 2px;
-}
-#buyFuture .butomBoreder .mui-input-row label{
+}*/
+/*#buyFuture .butomBoreder .mui-input-row label{
 	width: 100%;
 	height: 35px;
-}
+}*/
 #radioDiv{
 	width: 100%;
 }
@@ -1154,8 +1103,47 @@ input{
 #radioDiv td label{
 	margin-left: 8px;
 	color:#cccccc;
+	font-size: 14px;
 }
-#radioDiv td input[name='prices']{
-	border: 1px solid #1f1f1f;
+#buyFuture .radioChoice{
+	width: 20px;
+	height:20px;
+	display: block;
+	vertical-align: middle;
+	opacity: 0;
+	color:#CCCCCC;
+}
+#buyFuture #radioDiv td span{
+		width: 20px;
+		height:20px;
+		vertical-align: middle;
+		display: inline-block;
+		background: url(../images/inputRadioBg.png) no-repeat;
+		background-size: 100% auto;
+}
+#buyFuture #radioDiv td:nth-child(1) span{
+	background: url(../images/inputRadioBgC.png) no-repeat;
+	background-size: 100% auto;
+}
+#buyFuture #radioDiv tr td:nth-child(2){
+	position: relative;
+	height: 60px;
+}
+#buyFuture #radioDiv tr td:nth-child(1){
+	position: relative;
+	height: 60px;
+}
+#buyFuture #radioDiv tr:nth-child(2) input{
+	width: 100%;
+	height: 40px;
 	background-color: #1f1f1f;
+	border: 1px solid #121212;
+	padding-left: 38px;
+	color:#FFFFFF;
+}
+.labelTitle{
+	position: absolute;
+	color:#999999;
+	top:20px;
+	left: 5px;
 }
