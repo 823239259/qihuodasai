@@ -242,14 +242,26 @@
 					    </div>
 					    <form id="buyFuture">
 					        <div class="butomBoreder">
-					            <div class="mui-input-row mui-radio radioDiv mui-left">
+					        	<table border="1px solid #121212" cellpadding="0" cellspacing="0" id="radioDiv">
+					        		<tr>
+					        			<td>
+					        				<label>市价</label>
+					                		<input type="radio" id="sj" checked name="prices" value="1" class="radioChoice">
+					        			</td>
+					        			<td >
+					        				 <label>限价</label>
+					                		<input type="radio"  id="xj" class="radioChoice" value="0" name="prices">
+					        			</td>
+					        		</tr>
+					        	</table>
+					            <!--<div class="mui-input-row mui-radio radioDiv mui-left">
 					                <label>市价</label>
 					                <input type="radio" id="sj" checked name="prices" value="1" class="radioChoice mui-radio">
 					            </div>
 					            <div class="mui-input-row mui-radio radioDiv mui-left">
 					                <label>限价</label>
 					                <input type="radio"  id="xj" class="radioChoice mui-radio" value="0" name="prices">
-					            </div>
+					            </div>-->
 					        </div>
 					        <div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
 					        <div class="buyBtn">
