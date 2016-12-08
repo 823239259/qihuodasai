@@ -36,6 +36,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .sif_money ul li h3 {height: 32px; line-height: 32px;}
 .sif_money ul li p {height: 32px; line-height: 32px;}
 #window_detail_tab table tr td {height: 40px; line-height: 40px; padding: 0px;}
+.ftse_money {width: 1000px; margin-left: -500px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -45,7 +46,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 </head>
 <body>
 	<!-- 账单明细 -->
-	<div class="sif_money sif_money_div ftse_money"  id="detailInfoFtse" style="display:none;width:1000px;">
+	<div class="sif_money sif_money_div ftse_money"  id="detailInfoFtse" style="display:none;">
 		<div class="fl_navtitle">
 			<h3 class="on">结算明细</h3><h3>历史成交明细</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#detailInfoFtse')" class="close"></a>
