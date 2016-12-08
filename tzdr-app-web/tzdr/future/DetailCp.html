@@ -61,16 +61,13 @@
 	    			"<td>"+_data.tradeNum+"</td>"+
 	    			"<td>"+_data.free+"</td>"+
 	    			"<td>"+_data.tradePrice+"</td>"+
-	    			"<td>"+_data.drection+"</td>"+
+	    			"<td>"+_data.drection.trim()+"</td>"+
 	    			"<td>"+_data.orderPrice+"</td>"+
 	    			"<td>"+_data.marketDate+"</td>"+
 	    			"</tr>");
     			}
     			
     		}
-    	
-
-    		
 //  		document.getElementById("copyaccount").addEventListener("tap",function(){
 //  			var t_text=document.getElementById("trade_account").innerHTML;
 ////  			copytoClip(t_text);
@@ -91,7 +88,7 @@
     				url:"add.html",
     				id:"add.html",
     				extras:{
-    					did:win.did,businessPageId:'DetailCp.html'  
+    					did:win.did,businessPageId:'future/DetailCp.html'  
     				}
     			});
     		});
@@ -109,7 +106,7 @@
 	    				url:"end.html",
 	    				id:"end.html",
 	    				extras:{
-	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:8,businessPageId:'DetailCp.html'
+	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:8,businessPageId:'future/DetailCp.html'
 	    				}
 	    			});
 				},function(result){
@@ -441,7 +438,7 @@
 			<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
 			<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
 		</div>
-	<div id="item1" class="mui-control-content">
+	<div id="item1" class="mui-control-content  mui-active">
 		<ul class="mui-table-view sc_listtime">
 			<li class="mui-table-view-cell">
 				<label>投资标的：</label>
@@ -529,7 +526,7 @@
 			<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
 		</div>
 	</div>
-	<div id="item2" class="mui-control-content  mui-active">
+	<div id="item2" class="mui-control-content ">
 				<table id="historyDetailsTable">
 					<thead>
 						<tr>
@@ -679,10 +676,11 @@ function shareHref(){
 	var shareBts=[];
 	// 更新分享列表
 	var ss=shares['weixin'];
-	ss=shares['qq'];
-	ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
 	ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),
 	shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));
+	ss=shares['qq'];
+	ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
+	
 	// 弹出分享列表
 	shareBts.length>0?plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
 		(e.index>0)&&shareAction(shareBts[e.index-1],true);

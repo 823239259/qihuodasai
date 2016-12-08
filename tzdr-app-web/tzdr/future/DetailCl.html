@@ -61,12 +61,12 @@
     				var _data = data[i];
     				$("#historyDetailsTable").append("<tr>"+
 	    			"<td>"+i+"</td>"+
-	    			"<td>"+_data.commodityNo+_data.contractNo+"</td>"+
+	    			"<td>"+_data.commodityNo+_data.contractNo.trim()+"</td>"+
 	    			"<td>"+_data.flat+"</td>"+
 	    			"<td>"+_data.tradeNum+"</td>"+
 	    			"<td>"+_data.free+"</td>"+
 	    			"<td>"+_data.tradePrice+"</td>"+
-	    			"<td>"+_data.drection+"</td>"+
+	    			"<td>"+_data.drection.trim()+"</td>"+
 	    			"<td>"+_data.orderPrice+"</td>"+
 	    			"<td>"+_data.marketDate+"</td>"+
 	    			"</tr>");
@@ -93,7 +93,7 @@
     				url:"add.html",
     				id:"add.html",
     				extras:{
-    					did:win.did,businessPageId:'DetailCl.html'  
+    					did:win.did,businessPageId:'future/DetailCl.html'  
     				}
     			});
     		});
@@ -111,7 +111,7 @@
 	    				url:"end.html",
 	    				id:"end.html",
 	    				extras:{
-	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:6,businessPageId:'DetailCl.html' 
+	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:6,businessPageId:'future/DetailCl.html' 
 	    				}
 	    			});
 				},function(result){

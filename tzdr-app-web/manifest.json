@@ -93,7 +93,10 @@
 		"Camera": {},
 		"Gallery": {},
 		"Barcode": {},
-		"Geolocation": {},"Messaging":{},"Statistic":{},"Push":{},"Share":{}
+		"Geolocation": {},"Messaging":{},"Statistic":{},"Push":{},"Share":{},
+		"Share":{
+			"description": "管理分享插件"
+		}
 	},
 	"plus": {
 		"splashscreen": {

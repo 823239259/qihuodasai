@@ -194,6 +194,7 @@
 			beforeback:function(){
 				if(!mui.isnull(pageId)){
 					var _page = plus.webview.getWebviewById(pageId);
+					console.log(_page);
 					if(_page){
 						_page.reload(isRefresh);
 					}
@@ -257,7 +258,7 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		//api_domain:"http://api.vs.com/",
+//		api_domain:"http://api.vs.com/",
 		api_domain:"http://test.api.vs.com/",
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
 		//图片地址
@@ -642,3 +643,6 @@ function initBottom(data){
 					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
 				});
 	}
+String.prototype.trim = function() {
+  return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
