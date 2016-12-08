@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="HandheldFriendly" content="true"/>
+	<meta name="MobileOptimized" content="320"/>
     <title>国际综合 - 方案详情</title>
     <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+    <script src="../../js/common1.js"></script>
     <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init();
@@ -138,6 +141,11 @@
 	    		}
 	    		$("#historyButton").attr("href","#item2");
 	    		
+	    	});
+	    	document.getElementById("sharePay").addEventListener("tap",function(){
+	    		if(endNum==6){
+	    			shareHref();
+	    		}
 	    	})
 
     		function setDetails(details){
@@ -194,6 +202,7 @@
     				document.getElementById("historyButton").href="#item2";
     				$("#historyButton").removeClass("mui-active");
     				$("#detailButton").text("结算明细");
+    				$("#sharePay").css("background-color","#FFDD33");
     				endNum=6;
     				/*document.getElementById("todownload").style.display="none";*/
     				//设置结算信息
@@ -438,254 +447,122 @@
 			<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
 			<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
 		</div>
-	<div id="item1" class="mui-control-content  mui-active">
-		<ul class="mui-table-view sc_listtime">
-			<li class="mui-table-view-cell">
-				<label>投资标的：</label>
-				<p id="trade_type"></p>
-			</li>			
-			<li class="mui-table-view-cell">
-				<label>交易时间：</label>
-				<span>09:05-23:55 不同期货不同交易时间段</span>
-			</li>
-		</ul>		
-		<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
-		<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
-		<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
-		<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
-		<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
-			<li class="mui-table-view-cell">
-				<label>操盘账户：</label>
-				<span id="trade_account">1000000</span>
-			</li>		
-			<li class="mui-table-view-cell">
-				<label>操盘密码：</label>
-				<span id="trade_password">1000000</span>
-			</li>
-			<button class="mui-btn" id="immediately">立即操盘</button>
-		</ul>
-		<ul class="mui-table-view sc_listsc">
-			<li class="mui-table-view-cell">
-				<label>方案申请时间：</label>
-				<span id="app_time">2016-01-29 14:49</span>
-			</li>			
-			<li class="mui-table-view-cell">
-				<label>最大持仓手数：</label>
-				<span id="tranLever">4手</span>
-			</li>	
-			<li class="mui-table-view-cell">
-				<label>操盘保证金(¥)：</label>
-				<span id="traderBond">27,750元</span>
-			</li>	
-			<li class="mui-table-view-cell">
-				<label>追加保证金(¥)：</label>
-				<span id="appendTraderBond">0元</span>
-				<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
-			</li>	
-			<li class="mui-table-view-cell">
-				<label>总操盘资金($)：</label>
-				<span id="traderTotal">10,750美元</span>
-			</li>
-			<li class="mui-table-view-cell">
-				<label>亏损平仓线($)：</label>
-				<span id="lineLoss">10,450美元</span>
-			</li>
-			<li class="mui-table-view-cell">
-				<label>账户管理费(¥)：</label>
-				<span id="feeManage">免费</span>
-			</li>
-		</ul>		
-		<div id="end_info" style="display: none;">
-			<ul class="mui-table-view dt_money">
+		<div id="item1" class="mui-control-content  mui-active">
+			<ul class="mui-table-view sc_listtime">
 				<li class="mui-table-view-cell">
-					<label>方案结算时间：</label>
-					<span id="end_time">2016-02-08 16:10</span>
-				</li>
+					<label>投资标的：</label>
+					<p id="trade_type"></p>
+				</li>			
 				<li class="mui-table-view-cell">
-					<label>交易盈亏($)：</label>
-					<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
+					<label>交易时间：</label>
+					<span>09:05-23:55 不同期货不同交易时间段</span>
 				</li>
+			</ul>		
+			<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
+			<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
+			<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
+			<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
+			<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
 				<li class="mui-table-view-cell">
-					<label>美元结算汇率：</label>
-					<span id="endParities">1美元 = 6.5327人民币</span>
+					<label>操盘账户：</label>
+					<span id="trade_account">1000000</span>
+				</li>		
+				<li class="mui-table-view-cell">
+					<label>操盘密码：</label>
+					<span id="trade_password">1000000</span>
 				</li>
-			</ul>	
-			<div class="dt_grid" id="tranActualLever_grid">
-				<ul class="mui-table-view mui-grid-view mui-grid-9">
-				</ul>
-			</div>	
+				<button class="mui-btn" id="immediately">立即操盘</button>
+			</ul>
 			<ul class="mui-table-view sc_listsc">
 				<li class="mui-table-view-cell">
-					<label>结算金额(¥)：</label>
-					<span id="endAmount">8,355.24元</span>
+					<label>方案申请时间：</label>
+					<span id="app_time">2016-01-29 14:49</span>
+				</li>			
+				<li class="mui-table-view-cell">
+					<label>最大持仓手数：</label>
+					<span id="tranLever">4手</span>
+				</li>	
+				<li class="mui-table-view-cell">
+					<label>操盘保证金(¥)：</label>
+					<span id="traderBond">27,750元</span>
+				</li>	
+				<li class="mui-table-view-cell">
+					<label>追加保证金(¥)：</label>
+					<span id="appendTraderBond">0元</span>
+					<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
+				</li>	
+				<li class="mui-table-view-cell">
+					<label>总操盘资金($)：</label>
+					<span id="traderTotal">10,750美元</span>
 				</li>
-			</ul>
-			<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
-		</div>
-		<div class="ac_btn">
-			<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
-		</div>
-	</div>
-	<div id="item2" class="mui-control-content ">
-				<table id="historyDetailsTable">
-					<thead>
-						<tr>
-							<td width="50px">序号</td>
-							<td width="120px">合约名称</td>
-							<td width="80px">交易盈亏</td>
-							<td width="80px">交易手数</td>
-							<td width="80px">交易手续费</td>
-							<td width="80px">成交价</td>
-							<td width="60px">买卖</td>
-							<td width="110px">买入/卖出价格</td>
-							<td width="200px">结算时间</td>
-						</tr>
-					</thead>
-				</table>
+				<li class="mui-table-view-cell">
+					<label>亏损平仓线($)：</label>
+					<span id="lineLoss">10,450美元</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<label>账户管理费(¥)：</label>
+					<span id="feeManage">免费</span>
+				</li>
+			</ul>		
+			<div id="end_info" style="display: none;">
+				<ul class="mui-table-view dt_money">
+					<li class="mui-table-view-cell">
+						<label>方案结算时间：</label>
+						<span id="end_time">2016-02-08 16:10</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>交易盈亏($)：</label>
+						<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>美元结算汇率：</label>
+						<span id="endParities">1美元 = 6.5327人民币</span>
+					</li>
+				</ul>	
+				<div class="dt_grid" id="tranActualLever_grid">
+					<ul class="mui-table-view mui-grid-view mui-grid-9">
+					</ul>
+				</div>	
+				<ul class="mui-table-view sc_listsc">
+					<li class="mui-table-view-cell">
+						<label>结算金额(¥)：</label>
+						<span id="endAmount">8,355.24元</span>
+					</li>
+				</ul>
+				<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
 			</div>
-		<div id="shareDiv">
-			<input id="sharehref" class="sharehref" type="hidden" value="http://www.dcloud.io/" placeholder="请输入要分享的链接地址"/>
-			<input id="sharehrefTitle" class="sharehref" type="hidden" value="DCloud HBuilder-做最好的HTML5开发工具" placeholder="请输入要分享的链接标题"/>
-			<input id="sharehrefDes" class="sharehref" type="hidden" value="我正在使用HBuilder+HTML5开发移动应用，赶紧跟我一起来体验！" placeholder="请输入要分享的链接描述"/>
-			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin" onclick="shareHref()">分享</button>
+			<div class="ac_btn">
+				<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
+			</div>
+				
 		</div>
+		<div id="item2" class="mui-control-content ">
+					<table id="historyDetailsTable">
+						<thead>
+							<tr>
+								<td width="50px">序号</td>
+								<td width="120px">合约名称</td>
+								<td width="80px">交易盈亏</td>
+								<td width="80px">交易手数</td>
+								<td width="80px">交易手续费</td>
+								<td width="80px">成交价</td>
+								<td width="60px">买卖</td>
+								<td width="110px">买入/卖出价格</td>
+								<td width="200px">结算时间</td>
+							</tr>
+						</thead>
+					</table>
+		</div>
+		<div id="shareDiv">
+			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin">分享</button>
+		</div>
+		<input id="sharecontent" type="hidden" value=""></input>
+		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
+		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
+		<div id="output" ></div>
 	</div>
-	<script>
-var shares=null;
-var Intent=null,File=null,Uri=null,main=null;
-// H5 plus事件处理
-function plusReady(){
-	updateSerivces();
-	if(plus.os.name=="Android"){
-		main = plus.android.runtimeMainActivity();
-		Intent = plus.android.importClass("android.content.Intent");
-		File = plus.android.importClass("java.io.File");
-		Uri = plus.android.importClass("android.net.Uri");
-	}
-}
-if(window.plus){
-	plusReady();
-}else{
-	document.addEventListener("plusready",plusReady,false);
-}
-/**
- * 更新分享服务
- */
-function updateSerivces(){
-	plus.share.getServices( function(s){
-		shares={};
-		for(var i in s){
-			var t=s[i];
-			shares[t.id]=t;
-			console.log(JSON.stringify(t));
-		}
-	}, function(e){
-//		outSet( "获取分享服务列表失败："+e.message );
-	} );
-}
-/**
- * 调用系统分享
- * 调用
- */
-function shareSystem() {
-	if(plus.os.name!=="Android"){
-		plus.nativeUI.alert("此平台暂不支持系统分享功能!");
-		return;
-	}
-	var intent=new Intent(Intent.ACTION_SEND);
-	var p = "";
-	if(pic&&pic.realUrl){
-		p = pic.realUrl;
-		if(p.substr(0,7)==="file://"){
-			p=p.substr(7);
-		}else if(p.sub(0)!=="/"){
-			p=plus.io.convertLocalFileSystemURL(p);
-		}
-	}
-	var f = new File(p);
-	var uri = Uri.fromFile(f);
-	if(f.exists()&&f.isFile()){
-		console.log("image/*");
-		intent.setType("image/*");
-		intent.putExtra(Intent.EXTRA_STREAM,uri);
-	}else{
-		console.log("text/plain");
-		intent.setType("text/plain");
-	}
-	intent.putExtra(Intent.EXTRA_SUBJECT,"HBuilder");
-	intent.putExtra(Intent.EXTRA_TEXT,sharecontent.value);
-	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	main.startActivity(Intent.createChooser(intent,"系统分享"));
-}
-/**
-   * 分享操作
-   * @param {JSON} sb 分享操作对象s.s为分享通道对象(plus.share.ShareService)
-   * @param {Boolean} bh 是否分享链接
-   */
-function shareAction(sb,bh) {
-	outSet( "分享操作：" );
-	if(!sb||!sb.s){
-		outLine( "无效的分享服务！" );
-		return;
-	}
-	console.log(JSON.stringify(sharecontent.value));
-	var msg={content:sharecontent.value,extra:{scene:sb.x}};
-	if(bh){
-		msg.href=sharehref.value;
-		if(sharehrefTitle&&sharehrefTitle.value!=""){
-			msg.title=sharehrefTitle.value;
-		}
-		if(sharehrefDes&&sharehrefDes.value!=""){
-			msg.content=sharehrefDes.value;
-		}
-		msg.thumbs=["_www/logo.png"];
-		msg.pictures=["_www/logo.png"];
-	}else{
-		if(pic&&pic.realUrl){
-			msg.pictures=[pic.realUrl];
-		}
-	}
-	// 发送分享
-	if ( sb.s.authenticated ) {
-		outLine( "---已授权---" );
-		shareMessage(msg,sb.s);
-	} else {
-		outLine( "---未授权---" );
-		sb.s.authorize( function(){
-				shareMessage(msg,sb.s);
-			},function(e){
-			outLine( "认证授权失败："+e.code+" - "+e.message );
-		});
-	}
-}
-/**
-   * 发送分享消息
-   * @param {JSON} msg
-   * @param {plus.share.ShareService} s
-   */
-function shareMessage(msg,s){
-	outLine(JSON.stringify(msg));
-	s.send( msg, function(){
-		outLine( "分享到\""+s.description+"\"成功！ " );
-	}, function(e){
-		outLine( "分享到\""+s.description+"\"失败: "+JSON.stringify(e) );
-	} );
-}
-// 分析链接
-function shareHref(){
-	var shareBts=[];
-	// 更新分享列表
-	var ss=shares['weixin'];
-	ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),
-	shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));
-	ss=shares['qq'];
-	ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
-	
-	// 弹出分享列表
-	shareBts.length>0?plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
-		(e.index>0)&&shareAction(shareBts[e.index-1],true);
-	}):plus.nativeUI.alert('当前环境无法支持分享链接操作!');
-}
-	</script>
+	<script src="../../js/share.js"></script>
+	<script src="../../js/immersed.js"></script>
 </body>
 </html>

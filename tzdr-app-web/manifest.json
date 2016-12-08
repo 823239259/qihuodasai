@@ -558,7 +558,10 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"images/list_01.png",
-					"js/jquery-1.11.3.js"
+					"js/jquery-1.11.3.js",
+					"js/common1.js",
+					"js/share.js",
+					"js/immersed.js"
 				],
 				"refer": [
 					"tzdr/future/add.html",
@@ -590,7 +593,10 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"images/list_01.png",
-					"js/jquery-1.11.3.js"
+					"js/jquery-1.11.3.js",
+					"js/immersed.js",
+					"js/common1.js",
+					"js/share.js"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -1510,7 +1516,8 @@
 				"refer": [
 					"tzdr/quotation/quotationMain.html",
 					"guide.html",
-					"tzdr/future/historyDetail.html"
+					"tzdr/future/historyDetail.html",
+					"share.html"
 				],
 				"priority": 0
 			},
@@ -1562,6 +1569,13 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share.html": {
+				"resources": [
+					"js/immersed.js"
 				],
 				"refer": [],
 				"priority": 0
