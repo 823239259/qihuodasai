@@ -353,13 +353,18 @@ p{
 
 #allOpen{
 	bottom: 1%;
-	right: 25%;
+	right: 50%;
 	border-top:none;
 	border-left: none;
 	border-bottom: none;
 	border-right: 1px solid #1f1f1f!important;
 }
 #Open{
+	bottom: 1%;
+	right: 25%;
+	border-right: 1px solid #1f1f1f !important;
+}
+#stopLoss{
 	bottom: 1%;
 	right: 0px;
 }
@@ -1125,13 +1130,14 @@ input{
 	background: url(../images/inputRadioBgC.png) no-repeat;
 	background-size: 100% auto;
 }
+#buyFuture #radioDiv tr:nth-child(2){
+		height: 60px;
+}
 #buyFuture #radioDiv tr td:nth-child(2){
 	position: relative;
-	height: 60px;
 }
 #buyFuture #radioDiv tr td:nth-child(1){
 	position: relative;
-	height: 60px;
 }
 #buyFuture #radioDiv tr:nth-child(2) input{
 	width: 100%;

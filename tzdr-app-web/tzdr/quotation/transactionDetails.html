@@ -15,23 +15,20 @@
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
 			}
-			#popover{
+			#popover,#popoverLoss{
 				min-width: 282px;
 				height: 190px ;
 				top:50% !important;
 				margin-top: -120px;
 				left: 50% !important;
 				margin-left: -141px;
+				background-color: #2b2b2b;
 			}
 			@media (min-width: 400px){
 				#popover{
 					width: 80%;
 					margin-left: -40%;
 				}
-			}
-			
-			#popover .mui-popover .mui-popover-arrow{
-				display: none !important;
 			}
 			.mui-input-row label{
 				width: 45%;
@@ -42,7 +39,8 @@
 			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
 				width: 55%;
 				height: 40px;
-				font-size: 14px;;
+				font-size: 14px;
+				background-color: #2b2b2b;
 			}
 			#add,#clsoeAdd{
 				width: 45%;
@@ -63,7 +61,7 @@
 				background-color: #cccccc;
 				color:#2b2b2b;
 			}
-			#topPopover {
+			#topPopover{
 				position: fixed;
 				top: 16px;
 				right: 6px;
@@ -284,6 +282,7 @@
 					            </ul>
 					            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 					            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
+					             <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss">止损止盈</button>
 					        </div>
 					        <div id="item2" class="mui-control-content">
 					            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
@@ -333,7 +332,6 @@
 			</div>
 			
 			<div id="popover" class="mui-popover" id="inputDiv">
-				<div class="mui-popover-arrow"></div>
 				<div class="mui-content-padded">
 				<h4 id="title" style="text-align: center;margin-top: 10px;">改单</h4>
 					<form class="mui-input-group" style="margin-top: 10px;">
@@ -352,19 +350,32 @@
 					</div>
 				</div>
 			</div>
-		<div id="topPopover" class="mui-popover">
-			<div class="mui-popover-arrow"></div>
-			<div class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a id="switchAccount">切换账号</a>
-						</li>
-					</ul>
+			<div id="topPopover" class="mui-popover">
+				<div class="mui-popover-arrow"></div>
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a id="switchAccount">切换账号</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-
-		</div>
+			<div id="popoverLoss" class="mui-popover">
+			    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+			        <a class="mui-control-item mui-active" href="#stopTitle" >止损</a>
+			        <a class="mui-control-item" href="#lossTitle" >止盈</a>
+			    </div>
+			    <div>
+			    	<div id="stopTitle">
+			    		
+			    	</div>
+			    	<div id="lossTitle">
+			    		
+			    	</div>
+			    </div>
+			</div>
 			<script>
 				mui.plusReady(function(){
 				loadCss();
@@ -537,24 +548,13 @@
 					$("#switchSell").text("模拟卖出");
 				}
 				var network = false;
-				/*	var col1 = document.getElementById("col1");
-					var col2 = document.getElementById("col2");
-					var network = false;
-					var add_div = document.getElementById("add_div");
-				document.getElementById("changeSingle").addEventListener("tap",function(){
-						//清空数据
-						col1.value = "";
-						col2.value = "";
-						add_div.classList.remove("mui-hidden");
-						mui("#popover").popover("toggle");
-				})*/
 				mui('.mui-scroll-wrapper').scroll();
-				function trim(str){ //删除左右两端的空格
-			　　     return str.replace(/(^\s*)|(\s*$)/g, "");
-			　　 }
 				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
-				})
+				});
+				document.getElementById("stopLoss").addEventListener("tap",function(){
+						mui("#popoverLoss").popover("toggle");
+				});
 			});
 		</script>
 		<script>
