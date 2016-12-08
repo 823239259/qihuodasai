@@ -131,19 +131,19 @@
     		})
     		var endNum=0;
 	    	document.getElementById("historyButton").addEventListener("tap",function(){
-	    		if(endNum==6){
-	    			$("#historyButton").removeClass("mui-active");
-	    			$("#detailButton").removeClass("mui-active");
-	    			mui.toast("暂时无法看到数据");
+	    		if(endNum!=6){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("暂时无法看到数据");
+
+	    			},10)
 	    			return
 	    		}
 	    		$("#historyButton").attr("href","#item2");
+	    		
 	    	})
-    		
 
-    	
-    	
-    	
     	function setDetails(details){
     		document.getElementById("trade_account").innerHTML=details.tranAccount;
     		document.getElementById("trade_password").innerHTML=details.tranPassword;
