@@ -3,6 +3,8 @@ package com.tzdr.cms.timer.wallstreetcn;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
+import java.util.TimerTask;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +48,10 @@ public class WallstreetcnTimer{
 	 * @return
 	 */
 	public static void stop(String key){
-		map.get(key).cancel();
+		TimerTask timerTask = map.get(key);
+		if(timerTask != null){
+			timerTask.cancel();
+		}
 		timer.purge();
 		removeTimer(key);
 		logger.info("任务停止：" + key);

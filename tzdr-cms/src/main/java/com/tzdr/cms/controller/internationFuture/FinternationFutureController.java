@@ -49,6 +49,7 @@ import com.tzdr.common.web.support.EasyUiPageData;
 import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.vo.TradeExclDetailVo;
+import com.tzdr.domain.vo.TradeExclDetailVos;
 import com.tzdr.domain.vo.ftse.FSimpleFtseVo;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.TradeDetail;
@@ -240,7 +241,9 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			}
 			jsonResult = this.simpleFtseUserTradeService.inputResult(hsi);
 			String tradeDetail = request.getParameter("tradeDetail");
-			tradeDetailService.doSaveTradeExclDetail(tradeDetail,hsi.getId());
+			if(tradeDetail != null){
+				tradeDetailService.doSaveTradeExclDetail(tradeDetail,hsi.getId());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("恒生指数录入交易信息异常：",e);
@@ -335,7 +338,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			resultJson.setMessage("文件长度过大");
 			return resultJson;
 		}
-		List<TradeExclDetailVo> detailVos = new ArrayList<>();
+		List<TradeExclDetailVos> detailVos = new ArrayList<>();
 		Map<String, Double> map = new HashMap<String,Double>();
 		try {
 			InputStream inputStream = multipartFile.getInputStream();
@@ -345,19 +348,21 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			String filePath = "D:\\"+randomUuid+".xlsx";
 			fileProcessed.uploadFile(filePath, inputStream);
 			ReadExclPOI readExclPOI = new ReadExclPOI();
-			detailVos = (List<TradeExclDetailVo>)readExclPOI.readExcl2007(filePath, TradeExclDetailVo.class);
+			detailVos = (List<TradeExclDetailVos>)readExclPOI.readExcl2007(filePath, TradeExclDetailVos.class);
 			File file = new File(filePath);
 			file.delete();
 			for (int i = 1; i < detailVos.size(); i++) {
-				TradeExclDetailVo detailVo = detailVos.get(i);
-				String contractNo = detailVo.getContractNo();
-				String tradeNum = detailVo.getTradeNum();
-				Double lever = 0.0;
-				Double number = 0.0;
-				if(tradeNum == null){
+				TradeExclDetailVos detailVo = detailVos.get(i);
+				String contractNo = detailVo.getCommodityNo();
+				if(contractNo == null || contractNo.equalsIgnoreCase("null")){
 					continue;
 				}
-				Double tradeNumbDob = Double.parseDouble(tradeNum);
+				String buyNum = detailVo.getBuyNum();
+				String sellNum = detailVo.getSellNum();
+				Double tradeNum = Double.parseDouble(buyNum == null ? "0" : buyNum)+Double.parseDouble(sellNum == null ? "0" : sellNum);
+				Double lever = 0.0;
+				Double number = 0.0;
+				Double tradeNumbDob = tradeNum;
 				if(contractNo.startsWith("CL")){
 					lever = map.get("crudeTranActualLever");
 					if(lever != null){

@@ -21,32 +21,37 @@ public class WallstreetcnCalendarHandle extends BaseWallstreetcnHandle{
 	private static String startKey  = "start";
 	private static String endKey = "end";
 	public void getWallstreetcnCalendar(Wallstreetn wallstreetn){
-		String url = wallstreetn.getUrl();
-		String method = wallstreetn.getMethod();
-		String param = wallstreetn.getParam();
-		int size  = getCrawlerUrlParams().size();
-		Date date  = new Date();
-		String start = getYyyyMmDd().format(DateUtils.addDates(date, 0));
-		String end = getYyyyMmDd().format(DateUtils.addDates(date, 15));
-		String key = "";
-		String value = "";
-		for (int i = 0; i < size; i++) {
-		   CrawlerUrlParam crawlerUrlParam = getCrawlerUrlParams().get(i);
-		   key = crawlerUrlParam.getUrlParamKey();
-		   value = crawlerUrlParam.getUrlParamValue();
-		   if(key.equals(startKey)){
-			   start = value;
-		   }
-		   if(key.equals(endKey)){
-			   end = value;
-		   }
+		try {
+			String url = wallstreetn.getUrl();
+			String method = wallstreetn.getMethod();
+			String param = wallstreetn.getParam();
+			int size  = getCrawlerUrlParams().size();
+			Date date  = new Date();
+			String start = getYyyyMmDd().format(DateUtils.addDates(date, 0));
+			String end = getYyyyMmDd().format(DateUtils.addDates(date, 15));
+			String key = "";
+			String value = "";
+			for (int i = 0; i < size; i++) {
+			   CrawlerUrlParam crawlerUrlParam = getCrawlerUrlParams().get(i);
+			   key = crawlerUrlParam.getUrlParamKey();
+			   value = crawlerUrlParam.getUrlParamValue();
+			   if(key.equals(startKey)){
+				   start = value;
+			   }
+			   if(key.equals(endKey)){
+				   end = value;
+			   }
+			}
+			if(param != null && param.length() > 0){
+				param += "&";
+			}
+			param = startKey+"="+start+"&"+endKey+"="+end;
+			String result = doSend(url, method, param);
+			handLeData(result);
+		} catch (Exception e) {
+			logger.info("日历任务执行异常:"+e.getMessage());
 		}
-		if(param != null && param.length() > 0){
-			param += "&";
-		}
-		param = startKey+"="+start+"&"+endKey+"="+end;
-		String result = doSend(url, method, param);
-		handLeData(result);
+		
 	}
 	public synchronized void handLeData(String param){
 		String stringJson = param;

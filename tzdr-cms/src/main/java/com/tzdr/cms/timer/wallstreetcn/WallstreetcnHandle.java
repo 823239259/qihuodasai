@@ -23,15 +23,19 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 	 * @return
 	 */
 	public  void getWallstreetcn(Wallstreetn wallstreetn){
-		String url = wallstreetn.getUrl();
-		String method = wallstreetn.getMethod();
-		String lastWallstreetnTime = getCrawlerUrl().getLastWallstreetnTime();
-		if(lastWallstreetnTime == null){
-			lastWallstreetnTime = String.valueOf(todayTime() / 1000);
+		try {
+			String url = wallstreetn.getUrl();
+			String method = wallstreetn.getMethod();
+			String lastWallstreetnTime = getCrawlerUrl().getLastWallstreetnTime();
+			if(lastWallstreetnTime == null){
+				lastWallstreetnTime = String.valueOf(todayTime() / 1000);
+			}
+			String param = wallstreetn.getParam() + "&min_update="+Long.parseLong(lastWallstreetnTime);
+			String result =  doSend(url, method, param);
+			handleData(result);
+		} catch (Exception e) {
+			logger.info("行情任务执行异常:"+e.getMessage());
 		}
-		String param = wallstreetn.getParam() + "&min_update="+Long.parseLong(lastWallstreetnTime);
-		String result =  doSend(url, method, param);
-		handleData(result);
 	}
 	/**
 	 * 处理请求返回数据

@@ -1,15 +1,14 @@
-package com.tzdr.domain.web.entity;
+package com.tzdr.domain.vo;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
-import com.tzdr.common.domain.BaseEntity;
+import com.tzdr.common.utils.ReadExclPOI;
 
-@Entity
-@Table(name = "w_trade_detail")
-public class TradeDetail extends BaseEntity{
-
-	private static final long serialVersionUID = 2953235263723340197L;
+@SuppressWarnings("serial")
+public class TradeExclDetailVos implements Serializable{
 	private String tradeDate;
 	private String username;
 	private String userNo;
@@ -24,28 +23,6 @@ public class TradeDetail extends BaseEntity{
 	private String orderUserno;
 	private String orderUsername;
 	private String tradeType;
-	private Long createTime;
-	private Long updateTime;
-	private String fastId;
-	
-	public String getFastId() {
-		return fastId;
-	}
-	public void setFastId(String fastId) {
-		this.fastId = fastId;
-	}
-	public Long getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Long createTime) {
-		this.createTime = createTime;
-	}
-	public Long getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Long updateTime) {
-		this.updateTime = updateTime;
-	}
 	public String getTradeDate() {
 		return tradeDate;
 	}
@@ -131,13 +108,11 @@ public class TradeDetail extends BaseEntity{
 		this.tradeType = tradeType;
 	}
 	
-	 public TradeDetail() {
-		// TODO Auto-generated constructor stub
+	public TradeExclDetailVos() {
 	}
-	public TradeDetail(String tradeDate, String username, String userNo, String currencyNo, String exchangeNo,
+	public TradeExclDetailVos(String tradeDate, String username, String userNo, String currencyNo, String exchangeNo,
 			String commodityNo, String buyNum, String sellNum, String tradePrice, String free, String orderType,
-			String orderUserno, String orderUsername, String tradeType, Long createTime, Long updateTime,String fastId) {
-		super();
+			String orderUserno, String orderUsername, String tradeType) {
 		this.tradeDate = tradeDate;
 		this.username = username;
 		this.userNo = userNo;
@@ -152,11 +127,38 @@ public class TradeDetail extends BaseEntity{
 		this.orderUserno = orderUserno;
 		this.orderUsername = orderUsername;
 		this.tradeType = tradeType;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-		this.fastId = fastId;
 	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "TradeExclDetailVos [tradeDate=" + tradeDate + ", username=" + username + ", userNo=" + userNo
+				+ ", currencyNo=" + currencyNo + ", exchangeNo=" + exchangeNo + ", commodityNo=" + commodityNo
+				+ ", buyNum=" + buyNum + ", sellNum=" + sellNum + ", tradePrice=" + tradePrice + ", free=" + free
+				+ ", orderType=" + orderType + ", orderUserno=" + orderUserno + ", orderUsername=" + orderUsername
+				+ ", tradeType=" + tradeType + "]";
+	}
+	public static void main(String[] args) {
+		ReadExclPOI readExclPOI = new ReadExclPOI();
+		try {
+			List<TradeExclDetailVos> detailVos = (List<TradeExclDetailVos>)readExclPOI.readExcl2007("C:\\Users\\username\\Desktop\\成交单管理2016-12-02.xlsx", TradeExclDetailVos.class);
+			for (int i = 0; i < detailVos.size(); i++) {
+				System.out.println(detailVos.get(i).toString());
+			}
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

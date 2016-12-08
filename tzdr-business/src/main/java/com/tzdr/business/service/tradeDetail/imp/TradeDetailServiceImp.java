@@ -28,20 +28,27 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		for(int i = 1 ; i < size ; i++){
 			TradeDetail detail = new TradeDetail();
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			String tradeDate = jsonObject.getString("tradeDate");
+			if(tradeDate == null || tradeDate.equals("null") || tradeDate.length() == 0){
+				continue;
+			}
+			detail.setBuyNum(jsonObject.getString("buyNum"));
 			detail.setCommodityNo(jsonObject.getString("commodityNo"));
-			detail.setContractNo(jsonObject.getString("contractNo"));
-			detail.setDrection(jsonObject.getString("drection"));
-			detail.setFlat(jsonObject.getString("flat"));
+			detail.setCurrencyNo(jsonObject.getString("currencyNo"));
+			detail.setExchangeNo(jsonObject.getString("exchangeNo"));
 			detail.setFree(jsonObject.getString("free"));
-			detail.setMarketDate(jsonObject.getString("marketDate")+jsonObject.getString("marketTime"));
-			detail.setOrderPrice(jsonObject.getString("orderPrice"));
 			detail.setOrderType(jsonObject.getString("orderType"));
-			detail.setOrderUser(jsonObject.getString("orderUser"));
-			detail.setTradeNum(jsonObject.getString("tradeNum"));
+			detail.setOrderUsername(jsonObject.getString("orderUsername"));
+			detail.setOrderUserno(jsonObject.getString("orderUserno"));
+			detail.setSellNum(jsonObject.getString("sellNum"));
+			detail.setTradeDate(jsonObject.getString("tradeDate"));
 			detail.setTradePrice(jsonObject.getString("tradePrice"));
-			detail.setFastId(fastId);
-			detail.setCreateTime(time);
+			detail.setTradeType(jsonObject.getString("tradeType"));
 			detail.setUpdateTime(time);
+			detail.setCreateTime(time);
+			detail.setUsername(jsonObject.getString("username"));
+			detail.setUserNo(jsonObject.getString("userNo"));
+			detail.setFastId(fastId);
 			details.add(detail);
 		}
 		getEntityDao().saves(details);

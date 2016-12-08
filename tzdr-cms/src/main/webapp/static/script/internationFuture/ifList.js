@@ -88,6 +88,7 @@ function passClose() {
  */
 
 function input(){
+	localDataLever = null;
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
 		if (rows[0].businessType == "国际综合"){
@@ -175,9 +176,11 @@ function importExcl(){
 	        },  
 	        success : function(result) {  
 	            if(result.success){
-	            	var html = appendTradeDetailHtml(result.data.data, 1);
+	            	var data = result.data.data;
+	            	var html = appendTradeDetailHtml(data, 1);
 	            	$("#tradeDetail").html(html);
-	            	handleData(result.data.dataLever,result.data.data,1);
+	            	handleData(result.data.dataLever,data,1);
+	            	localDataLever = JSON.stringify(data);
 	            }else{
 	            	Check.messageBox("提示",data.message);
 	            }
@@ -188,21 +191,27 @@ function importExcl(){
 function appendTradeDetailHtml(tradeDetail,index){
 			var html = "<tr>"+
 			"<td>序号</td>"+
-			"<td>合约名称</td>"+
+			"<td>成交日期</td>"+
+			"<td>客户名称</td>"+
+			"<td>客户号</td>"+
+			"<td>币种</td>"+
+			"<td>交易所</td>"+
+			"<td>品种</td>"+
 			"<td>交易手数</td>"+
-			"<td>交易手续费</td>"+
 			"<td>成交价</td>"+
-			"<td>买卖</td>"+
-			"<td>委托价</td>"+
-			"<td>订单类型</td>"+
-			"<td>平盈</td>"+
-			"<td>下单人</td>"+
-			"<td>下单时间</td>" +
+			"<td>手续费</td>"+
+			"<td>下单类型</td>"+
+			"<td>下单人编号</td>" +
+			"<td>下单人姓名</td>" +
+			"<td>成交类型</td>" +
 			"</tr>";
 		var data = tradeDetail;
 		var length = data.length;
 		for(var i = index ;i  < length ; i++){
 			var _data = data[i];
+			if(_data.tradeDate == null || _data.tradeDate == "null" || _data.tradeDate.length == 0){
+				continue;
+			}
 			var marketTime = "";
 			if(_data.marketTime==undefined||_data.marketTime==null||_data.marketTime=="null"){
 				marketTime = "";
@@ -211,19 +220,21 @@ function appendTradeDetailHtml(tradeDetail,index){
 			}
 			html += "<tr>" +
 				"<td>"+i+"</td>" +
-				"<td>"+_data.commodityNo+_data.contractNo+"</td>" +
-				"<td>"+_data.tradeNum+"</td>" +
-				"<td>"+_data.free+"</td>" +
+				"<td>"+_data.tradeDate+"</td>" +
+				"<td>"+_data.username+"</td>" +
+				"<td>"+_data.userNo+"</td>" +
+				"<td>"+_data.currencyNo+"</td>" +
+				"<td>"+_data.exchangeNo+"</td>" +
+				"<td>"+_data.commodityNo+"</td>" +
+				"<td>"+_data.buyNum+_data.sellNum+"</td>" +
 				"<td>"+_data.tradePrice+"</td>" +
-				"<td>"+_data.drection+"</td>" +
-				"<td>"+_data.orderPrice+"</td>" +
+				"<td>"+_data.free+"</td>" +
 				"<td>"+_data.orderType+"</td>" +
-				"<td>"+_data.flat+"</td>" +
-				"<td>"+_data.orderUser+"</td>" +
-				"<td>"+_data.marketDate+" "+marketTime+"</td>" +
+				"<td>"+_data.orderUserno+"</td>" +
+				"<td>"+_data.orderUsername+"</td>" +
+				"<td>"+_data.tradeType+"</td>" +
 				"</tr>";
 		}
-		localDataLever = JSON.stringify(data);
 		return html;
 }
 function handleData(fast,index){

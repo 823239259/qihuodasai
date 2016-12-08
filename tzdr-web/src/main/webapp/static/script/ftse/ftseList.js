@@ -138,30 +138,40 @@ function bindEndOfFtse(cls){
 				if(result.success){
 					$("#tradeDetail").html("");
 					var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
-					'<td style="width: 40px;">序号</td>'+
-					'<td style="width: 120px;">合约名称</td>'+
-					'<td style="width: 60px;">交易盈亏</td>'+
-					'<td style="width: 60px;">交易手数</td>'+
-					'<td style="width: 60px;">手续费</td>'+
+					'<td style="width: 60px;">序号</td>'+
+					'<td style="width: 200px;">成交日期</td>'+
+					'<td style="width: 100px;">客户名称</td>'+
+					'<td style="width: 80px;">客户号</td>'+
+					'<td style="width: 100px;">币种</td>'+
+					'<td style="width: 60px;">交易所</td>'+
+					'<td style="width: 90px;">品种</td>'+
+					'<td style="width: 80px;">交易手数</td>'+
 					'<td style="width: 60px;">成交价</td>'+
-					'<td style="width: 40px;">买卖</td>'+
-					'<td style="width: 80px;">买入/卖出</td>'+
-					'<td style="width: 60px;">订单类型</td>'+
-					'<td style="width: 100px;">结算时间</td>'+
+					'<td style="width: 100px;">手续费</td>'+
+					'<td style="width: 100px;">下单类型</td>'+
+					'<td style="width: 100px;">下单人编号</td>'+
+					'<td style="width: 120px;">下单人姓名</td>'+
+					'<td style="width: 100px;">成交类型</td>'+
 				'</tr>';
 					var data = result.data.data;
 					for(var i = 0 ; i < data.length;i++){
 						var _data = data[i];
-						window_detail_title += '<tr><td>'+i+'</td>' +
-						'<td>'+_data.commodityNo+_data.contractNo+'</td>' +
-						'<td>'+_data.flat+'</td>' +
-						'<td>'+_data.tradeNum+'</td>' +
-						'<td>'+_data.free+'</td>' +
-						'<td>'+_data.tradePrice+'</td>' +
-						'<td>'+_data.drection+'</td>' +
-						'<td>'+_data.orderPrice+'</td>' +
-						'<td>'+_data.orderType+'</td>' +
-						'<td>'+_data.marketDate+'</td><tr>';
+						window_detail_title += "<tr>" +
+						"<td>"+(i+1)+"</td>" +
+						"<td>"+_data.tradeDate+"</td>" +
+						"<td>"+_data.username+"</td>" +
+						"<td>"+_data.userNo+"</td>" +
+						"<td>"+_data.currencyNo+"</td>" +
+						"<td>"+_data.exchangeNo+"</td>" +
+						"<td>"+_data.commodityNo+"</td>" +
+						"<td>"+_data.buyNum+_data.sellNum+"</td>" +
+						"<td>"+_data.tradePrice+"</td>" +
+						"<td>"+_data.free+"</td>" +
+						"<td>"+_data.orderType+"</td>" +
+						"<td>"+_data.orderUserno+"</td>" +
+						"<td>"+_data.orderUsername+"</td>" +
+						"<td>"+_data.tradeType+"</td>" +
+						"</tr>";
 					}
 					$("#tradeDetail").html(window_detail_title);
 				}

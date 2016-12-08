@@ -687,11 +687,11 @@ public class HomePageController {
 		return newsdata;
 	}
 	/**
-	 * 手机APP支付成功跳转页面
+	 * 支付成功跳转页面
 	 * @return
 	 */
 	@RequestMapping(value = "/paySucApp")
 	public String paySucApp(){
-		return "/views/pay/paysuc";
+		return "/views/pay/paySuccessApp";
 	}
 }

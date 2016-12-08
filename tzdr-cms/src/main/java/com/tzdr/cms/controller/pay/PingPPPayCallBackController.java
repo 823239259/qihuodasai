@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
+import com.tzdr.business.pay.pingpp.config.enums.TradeStatus;
 import com.tzdr.business.pay.pingpp.example.BackExample;
 import com.tzdr.business.pay.pingpp.example.WebhooksVerifyExample;
 import com.tzdr.business.service.pay.PayService;
@@ -74,7 +75,7 @@ public class PingPPPayCallBackController extends BaseCmsController<RechargeList>
 						logger.info("amount===>" + amount);
 						logger.info("channel====>" + channel);
 						Double money = amount / 100;
-						String userId = payService.doUpdatePingPPPaySuccessRecharge(orderNo, channel,money , transactionNo, timePaid,"支付宝充值"+money+"元");
+						String userId = payService.doUpdatePingPPPaySuccessRecharge(orderNo, channel,money , transactionNo, timePaid,TradeStatus.SUCCESS.getCode(),"支付宝充值"+money+"元");
 						try {
 							if(userId != null){
 								WUser user =  wUserService.getUser(userId);

@@ -46,7 +46,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 </head>
 <body>
 	<!-- 账单明细 -->
-	<div class="sif_money sif_money_div ftse_money" id="detailInfoFtse" style="display:none;">
+	<div class="sif_money sif_money_div ftse_money"  id="detailInfoFtse" style="display:none;width:1000px;">
 		<div class="fl_navtitle">
 			<h3 class="on">结算明细</h3><h3>历史成交明细</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#detailInfoFtse')" class="close"></a>
@@ -145,7 +145,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		</div>
 	</div>
 	<!-- 终止操盘 -->
-	<div class="fl_box fl_uc_trade sif_money_div" id="applyEndTrade" name="applyEndTrade"  style="display:none;">
+	<div class="fl_box fl_uc_trade sif_money_div"  id="applyEndTrade" name="applyEndTrade"  style="display:none;">
 		<div class="fl_navtitle">
 			<h3>终止操盘</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#applyEndTrade')" class="close"></a>
