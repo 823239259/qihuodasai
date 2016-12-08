@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{dede:global.cfg_webname/}</title>
+    <meta name="viewport" content="width=1280">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="description" content="{dede:global.cfg_description/}" />
+    <meta name="keywords" content="{dede:global.cfg_keywords/}" />
+    <link rel="shortcut icon" href="../../favicon.ico" />
+    <script src="/templets/style/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/templets/style/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/templets/style/html/css/vsViewpoint.css">
+    <script type="text/javascript" src="/templets/style/html/js/vsViewpoint.js"></script>
+    <script>
+        $(function(){
+            $(".vsViewpoint_left .tab li").on("click",function(){
+                var _this = $(this);
+                $(".vsViewpoint_left .tab a").removeClass("on").eq(_this.index()).addClass("on");
+                $(".vsViewpoint_left .tab_all .tab_lis").hide().eq(_this.index()).show();
+            });
+            $(".vsViewpoint_right .tab li").on("click",function(){
+                var _this = $(this);
+                $(".vsViewpoint_right .tab a").removeClass("on").eq(_this.index()).addClass("on");
+                $(".vsViewpoint_right .tab_all .tab_lis").hide().eq(_this.index()).show();
+            });
+            $("#nav ul li a").eq(6).css("color","#ffb319");
+            $("#nav ul li .Triangle").eq(6).css("display","block");
+        });
+    </script>
+</head>
+<body>
+<!--header-->
+{dede:include filename="head.htm"/}
+<!--content-->
+<div id="vsViewpoint" style="">
+    <div class="vsViewpoint_left">
+        <p class="calendar"><span>{dede:type}[field:typename /]{/dede:type}</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="tab_all">
+            <div class="tab_lis" style="display: block; padding-bottom: 20px;" id="on">
+                {dede:list pagesize='10' titlelen=50}
+                <div class="tab_center">
+                    <a href="[field:arcurl/]"  target="_blank" title="[field:fulltitle/]"><img src="[field:litpic/]" alt="[field:fulltitle/]" width="240px" height="160px"/></a>
+                    <div class="tab_content">
+                        <p class="p1"><a href="[field:arcurl/]"  target="_blank" title="[field:fulltitle/]">[field:title/]</a></p>
+                        <p class="p2">文 /<span class="name">[field:writer/]</span>[field:pubdate function="MyDate('Y-m-d H:i',@me)"/]</p>
+                        <p class="xq">[field:description/]...</p>
+                    </div>
+                </div>
+                {/dede:list}
+                <div class="page">
+                    {dede:pagelist listitem="pre,next,pageno" listsize="5"/}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="vsViewpoint_right">
+        <p class="calendar"><span>排行榜</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="tab">
+            <ul>
+                <li><a href="javascript:void(0);" class="on">总排行榜<i></i></a></li>
+                <li><a href="javascript:void(0);">月排行榜<i style="left: 26px;"></i></a></li>
+                <li><a href="javascript:void(0);">周排行榜<i style="left: 26px;"></i></a></li>
+            </ul>
+        </div>
+        <div class="tab_all">
+            <div class="tab_lis" style="display: block;">
+                {dede:arclist row=5 sort='hot' subday='3000' titlelen=34}
+                <div class="tab_center">
+                    <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>
+                </div>
+                {/dede:arclist}
+            </div>
+            <div class="tab_lis">
+                {dede:arclist row=5 sort='hot' subday='30' titlelen=34}
+                <div class="tab_center">
+                    <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>
+                </div>
+                {/dede:arclist}
+            </div>
+            <div class="tab_lis">
+                {dede:arclist row=5 sort='hot' subday='7' titlelen=34}
+                <div class="tab_center">
+                    <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>
+                </div>
+                {/dede:arclist}
+            </div>
+        </div>
+        <p class="calendar"><span>关注我们</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="guanzhu">
+            <p>
+                <span>关注维胜官方微信</span></br>
+                <img src="/templets/style/html/images/image/vsViewpoint_4.png" alt="">
+            </p>
+            <p style="float: right;">
+                <span>关注维胜新浪微博</span></br>
+                <img src="/templets/style/html/images/image/vsViewpoint_5.png" alt="">
+            </p>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+<!--footer-->
+{dede:include filename="footer.htm"/}
+</body>
+</html>
+
+
+
+
+
+

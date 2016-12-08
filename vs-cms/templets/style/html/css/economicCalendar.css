@@ -1,0 +1,76 @@
+#headerBottom #nav #Triangle {left: 388px;}
+body{background: #f2f2f2;}
+#economicCalendar {width: 1280px; margin: 0 auto; height: 980px; padding-bottom: 36px;}
+#economicCalendar .economicCalendar_left {float: left; width: 908px; margin-top: 10px;}
+#economicCalendar .time li {float: left; width: 128px;}
+#economicCalendar .time li a {font-size: 14px; color: #333;}
+#economicCalendar .time li a.on {color: #19b2ff;}
+#economicCalendar .time li a:hover {color: #19b2ff;}
+#economicCalendar .calendar {background: #fff; margin-top: 10px;border-bottom: 2px solid #ffb725; vertical-align: middle; position: relative; height: 40px; line-height: 40px;}
+#economicCalendar .calendar span {margin-left: 10px; font-size: 16px;}
+#economicCalendar .calendar .icon {position: absolute; left: 0; top: 10px;}
+#economicCalendar .calendar .more {float: right; margin-right: 10px;}
+#economicCalendar .time {background: #fff; height: 40px; line-height: 40px;}
+#economicCalendar .country {background: #fff; height: 120px; margin-top: 10px; font-size: 12px;}
+#economicCalendar .country .checkboxALL {float: left; width: 130px; margin: 15px 0; height: 30px; line-height: 30px;}
+#economicCalendar .country .checkboxALL label:hover {cursor: pointer;}
+#economicCalendar .country .checkboxALL input {margin : 0 10px; position: relative; top: 2px;}
+#economicCalendar .country .checkbox {float: left; width: 770px;}
+#economicCalendar .country .checkbox label:hover {cursor: pointer;}
+#economicCalendar .country .checkbox span {display: inline-block; width: 180px; float: left; height: 30px; line-height: 30px; margin: 15px 0;}
+#economicCalendar .country .checkbox span img {position: relative; top: 5px; margin-right: 10px;}
+#economicCalendar .country .checkbox span input {margin-right: 10px; position: relative; top: 2px;}
+/*资讯日历*/
+#economicCalendar .economicCalendar_content {}
+#economicCalendar .economicCalendar_content .calendar_time {font-size:14px; background: #fff; height: 40px; line-height: 40px; margin-top: 10px; border-bottom: 1px solid #e6e6e6;}
+#economicCalendar .economicCalendar_content .calendar_time label {margin-left: 10px; border-radius: 4px; border: 1px solid #e5e5e5; width: 60px; display: inline-table; height: 22px; line-height: 22px;}
+#economicCalendar .economicCalendar_content .calendar_time #yesterday {height: 22px; line-height: 22px; display: inline-table; width: 29px; border-right: 1px solid #e5e5e5; text-align: center;}
+#economicCalendar .economicCalendar_content .calendar_time #tomorrow {height: 22px; line-height: 22px; display: inline-table; text-align: center; width: 30px;}
+#economicCalendar .economicCalendar_content .calendar_time #today {margin-left: 10px; color: #999;}
+#yesterday:hover,#tomorrow:hover{cursor: pointer;}
+#economicCalendar .economicCalendar_content ul li {float: left;}
+#economicCalendar .economicCalendar_content .calendar_time_title {font-size: 16px; background: #fff; height: 40px; line-height: 40px; padding: 0 10px; border-bottom: 1px solid #e5e5e5;}
+#economicCalendar .economicCalendar_content .data {width: 100px;}
+#economicCalendar .economicCalendar_content .importance {width: 100px;}
+#economicCalendar .economicCalendar_content .countries {width: 100px;}
+#economicCalendar .economicCalendar_content .incident {width: 270px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis}
+#economicCalendar .economicCalendar_content .newValue {width: 110px;}
+#economicCalendar .economicCalendar_content .expect {width: 100px;}
+#economicCalendar .economicCalendar_content .formerValue {width: 100px;}
+#economicCalendar .economicCalendar_content .calendar_time_tab {font-size: 14px; padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
+#economicCalendar .economicCalendar_content .calendar_time_tab ul {height: 40px; line-height: 40px;}
+/*财经大事预览*/
+#economicCalendar .economicCalendar_preview {}
+#economicCalendar .economicCalendar_preview ul li {float: left;}
+#economicCalendar .economicCalendar_preview .calendar_time_title {font-size: 16px; background: #fff; height: 40px; line-height: 40px; padding: 0 10px; border-bottom: 1px solid #e5e5e5;}
+#economicCalendar .economicCalendar_preview .data {width: 100px;}
+#economicCalendar .economicCalendar_preview .importance {width: 100px;}
+#economicCalendar .economicCalendar_preview .countries {width: 100px;}
+#economicCalendar .economicCalendar_preview .incident {width: 270px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#economicCalendar .economicCalendar_preview .detailed {width: 520px; overflow: hidden;  white-space: nowrap;text-overflow: ellipsis;}
+#economicCalendar .economicCalendar_preview .newValue {width: 110px;}
+#economicCalendar .economicCalendar_preview .expect {width: 100px;}
+#economicCalendar .economicCalendar_preview .formerValue {width: 100px;}
+#economicCalendar .economicCalendar_preview .calendar_time_tab {font-size: 14px;padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
+#economicCalendar .economicCalendar_preview .calendar_time_tab ul {height: 40px; line-height: 40px;}
+/*假期预告*/
+#economicCalendar .economicCalendar_trailer ul li {float: left;}
+#economicCalendar .economicCalendar_trailer .calendar_time_title {font-size: 16px; background: #fff; height: 40px; line-height: 40px; padding: 0 10px; border-bottom: 1px solid #e5e5e5;}
+#economicCalendar .economicCalendar_trailer .data {width: 120px;}
+#economicCalendar .economicCalendar_trailer .countries {width: 120px;}
+#economicCalendar .economicCalendar_trailer .address {width: 110px;}
+#economicCalendar .economicCalendar_trailer .detailed {width: 520px; overflow: hidden;  white-space: nowrap;text-overflow: ellipsis;}
+#economicCalendar .no {background: #fff; height: 40px; line-height: 40px; padding: 0 10px;}
+#economicCalendar .economicCalendar_trailer .calendar_time_tab {font-size: 14px;padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
+#economicCalendar .economicCalendar_trailer .calendar_time_tab ul {height: 40px; line-height: 40px;}
+/*right 行情*/
+#economicCalendar .economicCalendar_right {margin-top: 10px; float: left; width: 362px;margin-left: 10px; color: #666; font-size: 14px;}
+#economicCalendar .economicCalendar_right .economicCalendarQuotation {background: #fff; }
+#economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_title {padding: 0 10px; margin-top: -1px; border-top: 1px solid #dadada; border-bottom: 1px solid #dadada;  height: 60px; line-height: 60px;}
+#economicCalendar .economicCalendar_right .economicCalendarQuotation .on {background: #f2f2f2;}
+#economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_title:hover {cursor: pointer;}
+#economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title a:hover {color: #ffb319;}
+#economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_chart {height: 180px;}
+/*视点*/
+#economicCalendar .economicCalendar_right .economicCalendarViewpoint {background: #fff;}
+#economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title {font-size: 14px;padding: 0 10px; margin-top: -1px; border-top: 1px solid #dadada; border-bottom: 1px solid #dadada;  height: 60px; line-height: 60px;}

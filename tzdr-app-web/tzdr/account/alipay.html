@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付宝支付</title>
+		<link rel="stylesheet" href="../../css/own.css" />
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
+	</head>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting( "正在跳转..." );
+				var ws = plus.webview.currentWebview();
+				var data =ws.data;
+				console.log(data)
+				var money = data.money;
+				var type = data.type;
+				var payWay = 0;
+				var payModelId = 0;
+				if(type == 5){
+					type = 4;
+					payModelId = 1;
+				}else if(type == 6){
+					type = 9;
+					payModelId = 2;
+				}else{
+					type = -99;
+				}
+				if(type != -99){
+					mui.app_request('/user/pay/dxtx/alipay',
+									{"money":money,
+									 "payWay":4,
+									 "payModelId":payModelId
+								},function(result){
+									if(result.success){ 
+										var charge = JSON.parse(result.data);
+										var payResult =charge.data.pay;
+										$("#dxtxForm").html(payResult);
+										$("#alipaysubmit").submit();
+									}   
+									plus.nativeUI.closeWaiting();
+								},function(result){
+									mui.toast("连接充值失败,请重试!")
+									plus.nativeUI.closeWaiting();
+								}
+					)
+				}else{
+					mui.toast("支付渠道异常,请重试!");
+				}
+			});
+		</script>
+	<body>
+			<div id = "dxtxForm" style="display: none;"></div>
+	</body>
+</html>

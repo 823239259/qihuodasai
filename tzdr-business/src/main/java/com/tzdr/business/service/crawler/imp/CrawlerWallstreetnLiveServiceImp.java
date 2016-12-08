@@ -1,6 +1,7 @@
 package com.tzdr.business.service.crawler.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +42,30 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 	}
 	@Override
 	public List<CrawlerWallstreetnLive> getCrawler(Page page) {
-		return  getEntityDao().findByCrawlerPage(page.getPageIndex(), page.getSize());
+		return  getEntityDao().findByCrawlerPage(page.getStartIndex(), page.getSize());
 	}
 	@Override
 	public List<CrawlerWallstreetnLive> getCrawler(Page page, String channelset) {
-		return  getEntityDao().findByCrawlerPageByChannel(page.getPageIndex(), page.getSize(),channelset);
+		return  getEntityDao().findByCrawlerPageByChannel(page.getStartIndex(), page.getSize(),channelset);
+	}
+	@Override
+	public List<Map<String, Object>> getCrawlerLiveContent(Page page, String channelset) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("select l.id,l.published,l.live_title as liveTitle,"
+				+ "l.live_wallstreetn_id as liveWallstreetnId,l.live_type as liveType,"
+				+ "l.live_createtime as liveCreatetime,l.live_updatetime as liveUpdatetime,"
+				+ "l.channel_set as channelSet,l.type,l.code_type as codeType,"
+				+ "l.importance,l.created_at as createdAt,l.updated_at updatedAt,"
+				+ "l.comment_status as commentStatus,l.star,"
+				+ "c.live_content_html as liveContent,c.detail_post as detailPost,c.more_imgs as moreImages  "
+				+ " from crawler_wallstreetn_live l ,crawler_wallstreetn_live_content c "
+				+ " where "
+				+ " l.published = 1 "
+				+ " and l.channel_set = '"+channelset+"' "
+				+ " and c.live_id=l.live_wallstreetn_id "
+				+ " GROUP BY l.channel_set,l.live_wallstreetn_id "
+				+ " order by created_at desc  LIMIT "+page.getStartIndex()+" , "+page.getSize()+"");
+		
+		return getEntityDao().queryMapBySql(buffer.toString(), null);
 	}
 }

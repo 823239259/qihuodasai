@@ -1,0 +1,18 @@
+#personalCenter .security {background: #fff; border-top: 10px solid #f2f2f2;}
+#personalCenter .security ul li div {float: left;}
+#personalCenter .security ul li {height: 120px; width: 1030px; border-bottom: 1px solid #f2f2f2;}
+#personalCenter .security ul li .img_icon {height: 120px; width: 145px;}
+#personalCenter .security ul li .img_icon img {margin-left: 38px; margin-top: 36px;}
+#personalCenter .security ul li .name {height: 66px; width: 580px; padding: 27px 0;}
+#personalCenter .security ul li .operation {height: 120px; width: 280px; line-height: 120px;}
+#personalCenter .security ul li .name .span1 {font-size: 20px; color: #333; font-weight: bolder;}
+#personalCenter .security ul li .name .span2 {font-size: 16px; color: #333; margin: 0 10px;}
+#personalCenter .security ul li .name .span3 a {font-size: 16px; color: #19b2ff; margin: 0 10px; width: 48px;}
+#personalCenter .security ul li .name .span4 {font-size: 14px; color: #999;}
+#personalCenter .security ul li .name p{padding: 6px 0; text-align: left;}
+#personalCenter .security ul li .operation span {width: 90px; height: 30px; line-height: 30px; display: inline-block; text-align: center; font-size: 16px; color: #333; background: #ffb319; border-radius: 4px;}
+#personalCenter .security ul li .operation span:hover {cursor: pointer;background: #F0A619;}
+
+
+
+

@@ -26,6 +26,14 @@
 		<div class="mui-content">
 			<form class="mui-input-group chargeList">
 				<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Transfer.png"><i>支付宝</i></label>
+					<input name="choiceBank" type="radio"value="5">
+				</div>
+				<!--<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Transfer.png"><i>微信</i></label>
+					<input name="choiceBank" type="radio"value="6">
+				</div>-->
+				<div class="mui-input-row mui-radio">
 					<label><img src="../../images/recharge/bankP.png"><i>网银支付</i></label>
 					<input name="choiceBank" type="radio" value="2" checked="checked">
 				</div>
@@ -77,13 +85,35 @@
 						  	money : wv.money,
 					        backId:wv.backId
 						}
-					})
+					})  
 				}else if(val==2){
 					bank(wv);
 				}else if(val==1){
 					jdWayPay(wv);
+				}else if(val == 5){  
+					alipay(wv);
+				}else if(val == 6){
+					wechatPay(wv);
 				}
 			};
+			function wechatPay(wv){
+				plus.nativeUI.showWaiting( "正在跳转..." );
+				var money = wv.money;
+				var data = {"money":money,type:6}
+				var w = plus.webview.create("alipay.html","aliay",{top:"45px"},{data:data});
+				w.show();
+			}
+			/**
+			 * 支付宝支付
+			 * @param {Object} wv
+			 */
+			function alipay(wv){
+				plus.nativeUI.showWaiting( "正在跳转..." );
+				var money = wv.money;
+				var data = {"money":money,type:5}
+				var w = plus.webview.create("alipay.html","aliay",{top:"45px"},{data:data});
+				w.show();
+			}
 			/**
 			 * 
 			 * @param {Object} money 支付金额

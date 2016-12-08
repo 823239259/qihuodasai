@@ -8,6 +8,7 @@ public class Page implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer pageIndex;
 	private Integer size;
+	private Integer startIndex;
 	private Integer total;
 	
 	public Integer getPageIndex() {
@@ -28,6 +29,13 @@ public class Page implements Serializable{
 	public void setTotal(Integer total) {
 		this.total = total;
 	}
+	
+	public Integer getStartIndex() {
+		return startIndex;
+	}
+	public void setStartIndex(Integer startIndex) {
+		this.startIndex = startIndex;
+	}
 	public Page(HttpServletRequest request){
 		String startIndex = request.getParameter("pageIndex");
 		String size = request.getParameter("size");
@@ -37,8 +45,11 @@ public class Page implements Serializable{
 		if(size == null){
 			size = "20";
 		}
-		this.pageIndex = Integer.parseInt(startIndex);
-		this.size = Integer.parseInt(size);
+		Integer pageIndex = Integer.parseInt(startIndex);
+		Integer pageSize = Integer.parseInt(size);
+		this.pageIndex = pageIndex;
+		this.size = pageSize;
+		this.startIndex = pageIndex * pageSize;
 	}
 	public Page(){}
 }

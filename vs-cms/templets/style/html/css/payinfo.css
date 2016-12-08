@@ -1,0 +1,67 @@
+.payinfo_top {background: #fff; padding: 20px 0;}
+.payinfo_top .name {width: 80px; height: 46px; line-height: 46px; display: inline-block; font-size: 16px; color: #333; margin-left: 30px;}
+.payinfo_top .money {font-size: 24px; color: #ffb319;}
+.payinfo_top .money i {font-style: normal; font-size: 16px;}
+.payinfo_top input {width: 190px; height: 38px; line-height: 38px; border: 1px solid #e6e6e6; border-radius: 4px; outline: none; padding-left: 10px;}
+.payinfo_top .money_all {font-size: 16px; color: #666;}
+.payinfo_top .money_all .surplus_money {color: #ffb319;}
+.payinfo_top .span1 {position: relative; left: -25px; color: #666;}
+.payinfo_content {border-top: 10px solid #f2f2f2; padding: 30px 0; background: #fff;}
+.payinfo_content label {width: 80px; height: 46px; line-height: 46px; display: inline-block; font-size: 16px; color: #333; margin-left: 30px;}
+.payinfo_content .tab_title span {position: relative; width: 200px; height: 50px; line-height: 50px; display: inline-block; font-size: 16px; color: #333; text-align: center; border: 1px solid #ccc; border-radius: 4px; margin-right: 20px;}
+.payinfo_content .tab_title span:hover {cursor: pointer;}
+.payinfo_content .tab_title span.on {border: 1px solid #ffb319;}
+.payinfo_content .tab_title span i {background: url("../image/payinfo.png") no-repeat; width: 20px; height: 20px; position: absolute; bottom: -1px; right: -1px;}
+.payinfo_content .tab_title span.on i {background: url("../image/payinfo_on.png");}
+.payinfo_content .tab_lis .tab_center {display: none;}
+.payinfo_content .reminder {color: #666; font-size: 14px; padding: 30px;}
+.payinfo_content .reminder p {margin: 5px 0;}
+.payinfo_content .reminder .reminder_p1 {font-size: 20px; color: #333; margin-bottom: 10px;}
+.payinfo_tab .payinfo_tab_lis {display: none; background: #fff; border-top: 10px solid #f2f2f2;}
+.uc_centerRight .p1 .title:hover {cursor: pointer;}
+/*网银充值*/
+.payinfo_content .tab_lis .pay {margin-top: 40px; width: 202px; height: 40px; line-height: 40px; text-align: center; display: inline-block; background: #ffb319; font-size: 16px; color: #333; border-radius: 4px;}
+.payinfo_content .tab_lis .pay:hover {cursor: pointer; background: #F2A719;}
+/*微信充值*/
+.payinfo_content .weChat1 {border-bottom: 1px solid #f2f2f2; padding: 30px; font-size: 16px; color: #333;}
+.payinfo_content .weChat1 p {margin: 10px 0;}
+.payinfo_content .weChat1 .wx {font-size: 20px; font-weight: bolder;}
+.payinfo_content .weChat2 {padding: 0 30px; height: 226px; border-bottom: 1px solid #f2f2f2;}
+.payinfo_content .weChat2 .reminder {float: left;}
+.payinfo_content .weChat2 .reminder {float: left;}
+.payinfo_content .weChat2 .ss {float: left; margin-top: 40px; font-size: 12px; color: #999;}
+.payinfo_content .orderNumber {margin: 30px 0; color: #333; font-size: 16px;}
+.payinfo_content .orderNumber input {width: 190px; height: 38px; line-height: 38px; border: 1px solid #e6e6e6; border-radius: 4px; outline: none; padding-left: 10px;}
+.payinfo_content .pay_wx {width: 202px; height: 40px; line-height: 40px; text-align: center; display: inline-block; background: #ffb319; font-size: 16px; color: #333; border-radius: 4px;}
+.payinfo_content .pay_wx:hover {cursor: pointer; background: #F2A719;}
+/*银行转账*/
+.payinfo_content .turn_back {}
+.payinfo_content .turn_back label {float: left; text-align: right; font-weight: bolder; font-size: 20px; margin-top: 20px;}
+.payinfo_content .turn_back .choice_back {float: left;}
+.payinfo_content .turn_back .choice_back img {float: left; margin: 8px 20px 0 30px;}
+.payinfo_content .turn_back .choice_back p {font-size: 14px; color: #666; float: left; line-height: 22px; margin-top: 4px; border-left: 1px solid #ccc; padding-left: 30px;}
+.payinfo_content .turn_back .choice_back .back_all {border: 1px solid #ccc; border-radius: 4px; height: 50px; margin: 20px 0; width: 800px; position: relative;}
+.payinfo_content .turn_back .choice_back .back_all i {background: url("../image/payinfo.png") no-repeat; width: 20px; height: 20px; position: absolute; bottom: -1px; right: -1px;}
+.payinfo_content .turn_back .choice_back .on {border: 1px solid #ffb319;}
+.payinfo_content .turn_back .choice_back .on i {background: url("../image/payinfo_on.png");}
+.payinfo_content .turn_back .choice_back .back_all:hover {cursor: pointer;}
+.payinfo_content .lsh {clear: both; padding-top: 20px;}
+.payinfo_content .lsh input {width: 190px; height: 38px; line-height: 38px; border: 1px solid #e6e6e6; border-radius: 4px; outline: none; padding-left: 10px;}
+.payinfo_content .back_pay {padding-bottom: 20px;}
+.payinfo_content .back_pay .back_all_pay{margin-top: 40px; width: 202px; height: 40px; line-height: 40px; text-align: center; display: inline-block; background: #ffb319; font-size: 16px; color: #333; border-radius: 4px;}
+/*充值记录*/
+.pay_record {}
+.pay_record ul {display: inline-block; height: 40px; line-height: 40px; padding: 0 10px;}
+.pay_record ul li {float: left;}
+.pay_record .payinfo_title {font-size: 16px; color: #333;}
+.pay_record .record_lis {font-size: 14px; color: #666; border-top: 1px solid #e8e8e8;}
+.pay_record .payinfo_time {width: 220px;}
+.pay_record .payinfo_number {width: 250px;}
+.pay_record .payinfo_mode {width: 130px;}
+.pay_record .payinfo_filed_money {width: 130px;}
+.pay_record .payinfo_money {width: 160px;}
+.pay_record .payinfo_state {width: 80px;}
+.pay_record .state_success {color: #19b2ff;}
+.pay_record .state_error {color: #333;}
+
+
