@@ -160,20 +160,20 @@ function bindEndOfFtse(cls){
 				if(result.success){
 					$("#tradeDetail").html("");
 					var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
-					'<td style="width: 60px;">序号</td>'+
-					'<td style="width: 200px;">成交日期</td>'+
-					'<td style="width: 100px;">客户名称</td>'+
-					'<td style="width: 80px;">客户号</td>'+
-					'<td style="width: 100px;">币种</td>'+
+					'<td style="width: 40px;">序号</td>'+
+					'<td style="width: 170px;">成交日期</td>'+
+					'<td style="width: 70px;">客户名称</td>'+
+					'<td style="width: 70px;">客户号</td>'+
+					'<td style="width: 70px;">币种</td>'+
 					'<td style="width: 60px;">交易所</td>'+
 					'<td style="width: 90px;">品种</td>'+
 					'<td style="width: 80px;">交易手数</td>'+
-					'<td style="width: 60px;">成交价</td>'+
-					'<td style="width: 100px;">手续费</td>'+
-					'<td style="width: 100px;">下单类型</td>'+
-					'<td style="width: 100px;">下单人编号</td>'+
-					'<td style="width: 120px;">下单人姓名</td>'+
-					'<td style="width: 100px;">成交类型</td>'+
+					'<td style="width: 70px;">成交价</td>'+
+					'<td style="width: 60px;">手续费</td>'+
+					'<td style="width: 70px;">下单类型</td>'+
+					'<td style="width: 90px;">下单人编号</td>'+
+					'<td style="width: 90px;">下单人姓名</td>'+
+					'<td style="width: 75px;">成交类型</td>'+
 				'</tr>';
 					var data = result.data.data;
 					for(var i = 0 ; i < data.length;i++){
