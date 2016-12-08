@@ -241,7 +241,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			}
 			jsonResult = this.simpleFtseUserTradeService.inputResult(hsi);
 			String tradeDetail = request.getParameter("tradeDetail");
-			if(tradeDetail != null){
+			if(tradeDetail != null && tradeDetail.length() > 0){
 				tradeDetailService.doSaveTradeExclDetail(tradeDetail,hsi.getId());
 			}
 		} catch (Exception e) {
@@ -340,8 +340,9 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		}
 		List<TradeExclDetailVos> detailVos = new ArrayList<>();
 		Map<String, Double> map = new HashMap<String,Double>();
+		InputStream inputStream = null;
 		try {
-			InputStream inputStream = multipartFile.getInputStream();
+			inputStream = multipartFile.getInputStream();
 			UUID uuid = UUID.randomUUID();
 			String randomUuid = uuid.toString();
 			FileProcessed fileProcessed = new FileProcessed();
@@ -503,6 +504,14 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally{
+			if(inputStream != null){
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		resultJson.setSuccess(flag);
 		resultJson.appendData("data",detailVos);
