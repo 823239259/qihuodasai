@@ -59,7 +59,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 						<h3>操盘保证金</h3>
 						<p></p>
 					</li>
-					<li>
+					<li style="width:113px;">
 						<h3>补充保证金</h3>
 						<p></p>
 					</li>
@@ -67,15 +67,15 @@ table.data_web td a { padding:0 5px; color:#f80; }
 						<h3>交易盈亏</h3>
 						<p></p>
 					</li>
-					<li style="width:125px;">
+					<li style="width:200px;">
 						<h3>汇率<em>(美元：人民币)</em></h3>
 						<p></p>
 					</li>
-					<li>
+					<li style="width:150px;">
 						<h3>交易手续费</h3>
 						<p></p>
 					</li>			
-					<li>
+					<li style="width:200px;">
 						<h3>结算金额</h3>
 						<p></p>
 					</li>
@@ -119,7 +119,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 				分享到：<span><img alt="" src="${ctx}/static/images/detail_weixin.jpg">朋友圈</span>
 				<span><img alt="" src="${ctx}/static/images/detail_weibo.jpg">新浪微博</span>
 				<span><img alt="" src="${ctx}/static/images/detail_qq.png">QQ好友</span></p> --%>
-				<div class="bdsharebuttonbox" data-tag="share_1">
+				<!-- <div class="bdsharebuttonbox" data-tag="share_1">
 	<a class="bds_mshare" data-cmd="mshare"></a>
 	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
 	<a class="bds_tsina" data-cmd="tsina"></a>
@@ -127,9 +127,9 @@ table.data_web td a { padding:0 5px; color:#f80; }
 	<a class="bds_renren" data-cmd="renren"></a>
 	<a class="bds_tqq" data-cmd="tqq"></a>
 	<a class="bds_more" data-cmd="more">更多</a>
-	<a class="bds_count" data-cmd="count"></a>
+	<a class="bds_count" data-cmd="count"></a> -->
 </div>
-<script>
+<!-- <script>
 	window._bd_share_config = {
 		common : {
 			bdText : '自定义分享内容',	
@@ -157,7 +157,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		}]
 	};
 	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
+</script> -->
 			</div>	
 		</div>
 	</div>
