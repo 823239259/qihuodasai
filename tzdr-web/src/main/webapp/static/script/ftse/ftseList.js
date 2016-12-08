@@ -2,6 +2,12 @@
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
 		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever,daxtranMinActualLever) {
+	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+    $(".sif_money").css({
+        top:"50%",
+        marginTop: -detailInfoFtseHeight
+
+    })
 	$(".fl_navtitle h3").removeClass("on").eq(0).addClass("on");
 	$("#window_detail_tab .window_detail_lis").hide().eq(0).show();
 	
@@ -27,7 +33,7 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(endAmount))+'元');
 		}
 	});
-	var window_detail_details_fee ="<p>"+endAmount+"元="+traderBond+"元+"+appendTraderBond+"元+（"+$.formatMoney(Number(tranProfitLoss)*parities,2)+"元) - "+tranCommission+"元</p>" +
+	var window_detail_details_fee ="<p>"+endAmount+"元="+traderBond+"元+"+appendTraderBond+"元+（"+$.formatMoney(Number(tranProfitLoss)*parities,2)+"）元 - "+tranCommission+"元</p>" +
     "<p>（结算金额=操盘保证金+追加保证金+交易盈亏-交易手续费）</p>" +
     "<p>注意：交易手续费=合约手续费×手数</p>";
 	$("#window_detail_details_fee").html(window_detail_details_fee);
