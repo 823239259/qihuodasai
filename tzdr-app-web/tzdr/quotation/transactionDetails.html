@@ -15,13 +15,22 @@
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
 			}
-			#popover,#popoverLoss{
+			#popover{
 				min-width: 282px;
 				height: 190px ;
 				top:50% !important;
 				margin-top: -120px;
 				left: 50% !important;
 				margin-left: -141px;
+				background-color: #2b2b2b;
+			}
+			#popoverLoss{
+				min-width: 90%;
+				height: 200px ;
+				top:50% !important;
+				margin-top: -100px;
+				left: 5% !important;
+	/*			margin-left: -10%;*/
 				background-color: #2b2b2b;
 			}
 			@media (min-width: 400px){
@@ -102,7 +111,7 @@
 					</table>
 				</div>
 				<div id="headerContent">
-					<div id="chartAllDiv" class="bottomDivList  mui-active">
+					<div id="chartAllDiv" class="bottomDivList ">
 						<div class="chartDivContent mui-active" id="TimeChart1">
 							<div id="timeChart" style="width:100%;"></div>
 							<div id="volumeChart" style="width:100%;"></div>
@@ -220,7 +229,7 @@
 							</tr>
 						</table>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
+					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList mui-active">
 					    <div class="Assets" style="background-color: #2B2B2B;">
 					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -319,7 +328,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="BuyDiv">
+			<!--<div class="BuyDiv">
 				<div id="numberInput">
 					<label>手数:</label>
 					<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
@@ -329,8 +338,7 @@
 					<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
 					<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
 				</div>
-			</div>
-			
+			</div>-->
 			<div id="popover" class="mui-popover" id="inputDiv">
 				<div class="mui-content-padded">
 				<h4 id="title" style="text-align: center;margin-top: 10px;">改单</h4>
@@ -363,38 +371,35 @@
 				</div>
 			</div>
 			<div id="popoverLoss" class="mui-popover">
-			    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+			    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 			        <a class="mui-control-item mui-active" href="#stopTitle" >止损</a>
 			        <a class="mui-control-item" href="#lossTitle" >止盈</a>
 			    </div>
 			    <div>
-			    	<div id="stopTitle">
+			    	<div id="stopTitle" class="mui-control-content mui-active">
 			    		<table>
 			    			<tr>
-			    				<td>合约</td>
-			    				<td>富时A50</td>
-			    				<td>多头</td>
-			    				<td>最新：</td>
-			    				<td> 69.65</td>
+			    				<td class="oddTd">合约</td>
+			    				<td class="evenTd ">富时A50</td>
+			    				<td class="oddTd borderLeft">多头</td>
+			    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
 			    			</tr>
 			    			<tr>
-			    				<td>合约</td>
-			    				<td>富时A50</td>
-			    				<td>多头</td>
-			    				<td>最新：</td>
-			    				<td> 69.65</td>
+			    				<td class="oddTd">合约</td>
+			    				<td class="evenTd ">富时A50</td>
+			    				<td class="oddTd borderLeft">多头</td>
+			    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
 			    			</tr>
 			    			
 			    			<tr>
-			    				<td>合约</td>
-			    				<td>富时A50</td>
-			    				<td>多头</td>
-			    				<td>最新：</td>
-			    				<td> 69.65</td>
+			    				<td class="oddTd">合约</td>
+			    				<td class="evenTd ">富时A50</td>
+			    				<td class="oddTd borderLeft">多头</td>
+			    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
 			    			</tr>
 			    		</table>
 			    	</div>
-			    	<div id="lossTitle">
+			    	<div id="lossTitle" class="mui-control-content">
 			    		
 			    	</div>
 			    </div>
