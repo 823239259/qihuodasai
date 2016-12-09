@@ -194,7 +194,6 @@
 			beforeback:function(){
 				if(!mui.isnull(pageId)){
 					var _page = plus.webview.getWebviewById(pageId);
-					console.log(_page);
 					if(_page){
 						_page.reload(isRefresh);
 					}
