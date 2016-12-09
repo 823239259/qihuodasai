@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import com.tzdr.cpp.DataSource;
 
 @Entity
-@DataSource("dataSouce2")
 @Table(name = "mock_trade_money_account")
 public class MockTradeMoneyAccount implements Serializable{
 	private static final long serialVersionUID = -981212837386219580L;

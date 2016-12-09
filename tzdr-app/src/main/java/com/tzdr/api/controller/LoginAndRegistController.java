@@ -208,7 +208,7 @@ public class LoginAndRegistController {
 		// 用户注册成功之后给用户手机发送短信
 		try {
 			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-			mockTradeAccountService.openMockAccount(mobile, password);
+			/*mockTradeAccountService.openMockAccount(mobile, password);*/
 			messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -283,10 +283,10 @@ public class ExtendsionSignController {
 			smsParams.put("code", randomCode);
             SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile, "ihuyi.verification.signin.success.template", smsParams);
             messagePromptService.registNotice(mobile, "web", channelName, channelKeyWorks);
-            try {
+           /* try {
             	mockTradeAccountService.openMockAccount(userName, password);
 			} catch (Exception e) {
-			}
+			}*/
             jsonResult.setData(data);
 		}
 		return jsonResult;

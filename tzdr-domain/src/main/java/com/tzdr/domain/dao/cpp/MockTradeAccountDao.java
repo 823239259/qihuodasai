@@ -3,12 +3,13 @@ package com.tzdr.domain.dao.cpp;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import com.tzdr.common.dao.BaseJpaDao;
 import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
 
-public interface MockTradeAccountDao extends BaseJpaDao<MockTradeAccount, String>{
+public interface MockTradeAccountDao extends BaseJpaDao<MockTradeAccount, String>,JpaSpecificationExecutor<MockTradeAccount>{
 	/**
 	 * 
 	 * @param username

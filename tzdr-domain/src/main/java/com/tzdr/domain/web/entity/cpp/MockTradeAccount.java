@@ -8,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.tzdr.cpp.DataSource;
 @Entity
-@DataSource("dataSouce2")
 @Table(name = "mock_trade_account")
 public class MockTradeAccount implements Serializable{
 
