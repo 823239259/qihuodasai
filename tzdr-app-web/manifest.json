@@ -577,7 +577,11 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/common1.js",
+					"js/share.js",
+					"js/immersed.js",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/future/end.html",
@@ -647,7 +651,11 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/common1.js",
+					"js/jquery-1.11.3.js",
+					"js/share.js",
+					"js/immersed.js"
 				],
 				"refer": [
 					"tzdr/future/end.html",
