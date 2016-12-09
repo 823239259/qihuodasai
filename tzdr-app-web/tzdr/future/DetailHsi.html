@@ -228,7 +228,7 @@
     		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
     		console.log(details.tranProfitLoss*details.endParities);
     		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
-    		$("#sharehref").val("http://192.168.0.44:8080/huodong/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
+    		$("#sharehref").val("http://cms.vs.com/uploads/topic/share/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
     		if (details.tranProfitLoss<0){
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
     		}
