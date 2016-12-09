@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.api.constants.BusinessTypeEnum;
@@ -33,10 +33,10 @@ import com.tzdr.business.cms.service.messagePrompt.PromptTypes;
 import com.tzdr.business.service.OutDisk.OutDiskParametersService;
 import com.tzdr.business.service.OutDisk.OutDiskPriceService;
 import com.tzdr.business.service.future.FSimpleCouponService;
+import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FSimpleConfigService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
-import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.app.vo.FTradeApplyVo;
 import com.tzdr.domain.app.vo.UserFTradeDetailsVo;
 import com.tzdr.domain.app.vo.UserFTradeVo;
@@ -44,6 +44,7 @@ import com.tzdr.domain.web.entity.FSimpleConfig;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.OutDiskParameters;
 import com.tzdr.domain.web.entity.OutDiskPrice;
+import com.tzdr.domain.web.entity.TradeDetail;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 
@@ -89,6 +90,9 @@ public class UserFTradeController {
 	
 	@Autowired
 	private FSimpleFtseUserTradeService fSimpleFtseUserTradeService;
+	
+	@Autowired
+	private TradeDetailService tradeDetailService;
 	
 	/**
 	* @Title: list    
@@ -136,7 +140,23 @@ public class UserFTradeController {
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,null,dataMap);
 	}
-	
+	/**
+	 * 获取交易明细
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getFstTradeDetail",method = RequestMethod.POST)
+	public ApiResult getTradeDetail(HttpServletRequest request,@RequestParam("id")String id){
+		ApiResult apiResult = new ApiResult();
+		try {
+			apiResult.setSuccess(true);
+			List<TradeDetail> details = tradeDetailService.doGetByFtseId(id);
+			apiResult.setData(details);
+		} catch (Exception e) {
+			apiResult.setSuccess(false);
+		}
+		return apiResult;
+	}
 	/**
 	* @Title: details    
 	* @Description: 追加保证金

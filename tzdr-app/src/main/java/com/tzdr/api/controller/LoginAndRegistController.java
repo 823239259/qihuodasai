@@ -28,6 +28,7 @@ import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.api.service.ApiTradeService;
 import com.tzdr.business.api.service.ApiUserService;
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.feededuction.FeeDuductionService;
 import com.tzdr.business.service.future.FSimpleCouponService;
@@ -85,6 +86,9 @@ public class LoginAndRegistController {
 	private FSimpleFtseUserTradeService fSimpleFtseUserTradeService;
 	@Autowired
 	private MessagePromptService messagePromptService;
+	
+	@Autowired
+	private MockTradeAccountService mockTradeAccountService;
 
 	private static Object lock = new Object();
 	
@@ -98,9 +102,9 @@ public class LoginAndRegistController {
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
-		String mobile=requestObj.getMobile();
+		final String mobile=requestObj.getMobile();
 		String code=requestObj.getCode();
-		String password=requestObj.getPassword();
+		final String password=requestObj.getPassword();
 		String parentGeneralizeId=requestObj.getParentGeneralizeId();
 	    String channel = requestObj.getChannel();
 		if (StringUtil.isBlank(mobile)
@@ -152,6 +156,8 @@ public class LoginAndRegistController {
 		}else{
 			wUser.setChannel(channel);
 		}
+		final String emailChannelName = channelName;
+		final String emailChannelKeyWords = channelKeyWords;
 		/*//设置渠道
 		wUser.setChannel(channel);  
 		//推广人编号
@@ -201,11 +207,17 @@ public class LoginAndRegistController {
 		DataConstant.CACHE_USER_MAP.put(appToken,new CacheUser(wUser,secretKey));
 		// 用户注册成功之后给用户手机发送短信
 		try {
-			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+					mockTradeAccountService.openMockAccount(mobile, password);
+					messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
+				}
+			}).start();;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		messagePromptService.registNotice(mobile, "APP", channelName, channelKeyWords);
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"regist.success.",jsonObject);
 	}
 	

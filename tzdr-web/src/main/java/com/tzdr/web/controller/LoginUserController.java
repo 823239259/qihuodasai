@@ -3,15 +3,19 @@ package com.tzdr.web.controller;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.utils.ConfUtil;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.web.constants.Constants;
@@ -31,10 +35,16 @@ public class LoginUserController {
 	 */
 	@RequestMapping(value = "/getAccount",method = RequestMethod.GET)
 	@ResponseBody
-	public JsonResult getAccount(HttpServletRequest request,@RequestParam("mobile")String mobile){
-		JsonResult result = new JsonResult(true);
-		WUser user = wUserService.getWUserByMobile(Base64.decodeToString(mobile));
-		result.appendData("data", user);
+	public JsonResult getAccount(HttpServletRequest request,@RequestParam("mobile")String mobile,@RequestParam("check")String check){
+		JsonResult result = new JsonResult(false);
+		if(check != null){
+			//check为0表示登录
+			if(check.equals("0")){
+				WUser user = wUserService.getWUserByMobile(Base64.decodeToString(mobile));
+				result.appendData("data", user);
+				result.setSuccess(true);
+			}
+		}
 		return result;
 	}
 	/**
@@ -67,4 +77,22 @@ public class LoginUserController {
 		}
 			return "redirect:"+url.toString()+"";
 	}
+	/**
+	* @Description: TODO(注销操作)
+	* @Title: logout
+	* @param modelMap
+	* @param request
+	* @param response
+	* @return String    返回类型
+	 */
+	@RequestMapping("/logout")
+	public String  logout(@RequestParam(value = "url",required = false)String url,HttpServletRequest request,HttpServletResponse response){
+		request.getSession().invalidate();
+		if(url == null){
+			url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+		}
+		String casServerUrl = ConfUtil.getContext("SSO.casServerUrl");
+		/*String callbackUrl = ConfUtil.getContext("SSO.stock.logout.callback.url");*/
+		return "redirect:" + casServerUrl + "logout?service=" + url;
+	} 
 }

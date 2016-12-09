@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
@@ -79,6 +80,9 @@ public class SignInController {
 
 	@Autowired
 	private MessagePromptService messagePromptService;
+	
+	@Autowired
+	private MockTradeAccountService mockTradeAccountService;
 	private static Object lock = new Object();
 
 	/**
@@ -212,7 +216,7 @@ public class SignInController {
 	public JsonResult sendMobileMessage(String mobile, String yzmCode, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
-		ConcurrentHashMap<String, SendCodeMaxCountBean> sendSMSCodeMaxCountMap = SendCodeMaxCount.sendSMSCodeMaxCountMap;
+		/*ConcurrentHashMap<String, SendCodeMaxCountBean> sendSMSCodeMaxCountMap = SendCodeMaxCount.sendSMSCodeMaxCountMap;
 		SendCodeMaxCountBean sendSMSCodeMaxCountData = !sendSMSCodeMaxCountMap.containsKey(mobile) ? null
 				: sendSMSCodeMaxCountMap.get(mobile);
 		if (sendSMSCodeMaxCountData != null
@@ -222,7 +226,7 @@ public class SignInController {
 			return jsonResult;
 		} else {
 			SendCodeMaxCount.addSendSMSCodeMaxCountMap(mobile, request, response);
-		}
+		}*/
 
 		String randomCode = RandomCodeUtil.randStr(6); // 生成6为验证码
 
@@ -286,7 +290,7 @@ public class SignInController {
 	 */
 	@RequestMapping(value = "/signin_operation")
 	@ResponseBody
-	public JsonResult signInOperation(Integer source, String mobile, String code, String password,
+	public JsonResult signInOperation(Integer source, final String mobile, String code, final String password,
 			String parentGeneralizeId, String yzmCode, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
@@ -380,12 +384,21 @@ public class SignInController {
 		}
 		data.put("from", from);
 		jsonResult.setData(data);
-		// 用户注册成功之后给用户手机发送短信
-		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-		messagePromptService.registNotice(mobile, "web", "", "");
+		try {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					// 用户注册成功之后给用户手机发送短信
+					SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+					mockTradeAccountService.openMockAccount(mobile, password);
+					messagePromptService.registNotice(mobile, "web", "", "");
+				}
+			}).start();
+		} catch (Exception e) {
+			jsonResult.setMessage("模拟盘账号开通失败");
+		}
 		return jsonResult;
 	}
-
 	/**
 	 * @Description: 访问注册成功页面
 	 * @Title: toSignInSucess
