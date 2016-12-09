@@ -34,7 +34,7 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		}
 	});
 	var window_detail_details_fee ="<p>"+endAmount+"元="+traderBond+"元+"+appendTraderBond+"元+（"+$.formatMoney(Number(tranProfitLoss)*parities,2)+"元） - "+tranCommission+"元</p>" +
-    "<p>（结算金额=操盘保证金+补充追加保证金+交易盈亏-交易手续费）</p>" +
+    "<p>（结算金额=操盘保证金+补充保证金+交易盈亏-交易手续费）</p>" +
     "<p>注意：交易手续费=合约手续费×手数</p>";
 	$("#window_detail_details_fee").html(window_detail_details_fee);
 	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
