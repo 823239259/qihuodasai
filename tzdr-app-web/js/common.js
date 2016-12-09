@@ -264,10 +264,10 @@ var tzdr = {
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//交易地址
-//		TradeSocketUrl:"ws://139.224.24.206:6066",
-//		TradeSocketModelUrl : "ws://139.224.24.206:6066",
-		TradeSocketUrl:"ws://139.224.24.206:6067",
-		TradeSocketModelUrl : "ws://139.224.24.206:6067",
+		TradeSocketUrl:"ws://139.224.24.206:6066",
+		TradeSocketModelUrl : "ws://139.224.24.206:6066",
+//		TradeSocketUrl:"ws://139.224.24.206:6067",
+//		TradeSocketModelUrl : "ws://139.224.24.206:6067",
 		//交易版本
 		tradeSocketVersion: "2.0.0",
 		tradeAppVersion: "2.0.0",
