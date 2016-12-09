@@ -385,22 +385,60 @@
 			    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
 			    			</tr>
 			    			<tr>
-			    				<td class="oddTd">合约</td>
-			    				<td class="evenTd ">富时A50</td>
-			    				<td class="oddTd borderLeft">多头</td>
-			    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
+			    				<td class="oddTd">方式</td>
+			    				<td  colspan="3">
+			    					<input type="text" value="止损价" id="stopChoicePrices"  readonly="readonly">
+			    					<input type="text" value="789" id="stopChoicePrices1"  readonly="readonly">
+			    					<span id="Increase">00</span>
+			    				</td>
+			    				<ul id="pricesChoice">
+			    					<div class="mui-popover-arrow"></div>
+			    					<li>动态价</li>
+			    				</ul>
 			    			</tr>
-			    			
+			    			<tr>
+			    				<td class="oddTd">手数</td>
+			    				<td class="evenTd "><input type="text" value="止损价" id="stopNumber" class="stopCommStyle"></td>
+			    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：<input type="text" value="市价" readonly="readonly" id="stopLossPriceInput"></td>
+			    				<ul id="stopLossPrices1">
+			    					<div class="mui-popover-arrow"></div>
+			    					<li>对手价</li>
+			    				</ul>
+			    			</tr>
+			    			<tr>
+			    				<td colspan="2" id="closeStopTable">关闭</td>
+			    				<td colspan="2" id="insertStopData" style="border-right: none;">添加</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+			    	<div id="lossTitle" class="mui-control-content">
+			    		<table>
 			    			<tr>
 			    				<td class="oddTd">合约</td>
 			    				<td class="evenTd ">富时A50</td>
 			    				<td class="oddTd borderLeft">多头</td>
 			    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
 			    			</tr>
+			    			<tr>
+			    				<td class="oddTd">止盈价</td>
+			    				<td  colspan="3">
+			    					<input type="text" value="止损价" id="lossChoicePrices"  readonly="readonly">
+			    					<span id="Increase1">00</span>
+			    				</td>
+			    			</tr>
+			    			<tr>
+			    				<td class="oddTd">手数</td>
+			    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
+			    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：<input type="text" value="市价" readonly="readonly" id="lossStopPriceInput"></td>
+			    				<ul id="stopLossPrices2">
+			    					<li>动态价</li>
+			    				</ul>
+			    			</tr>
+			    			<tr>
+			    				<td colspan="2" id="closeLossTable">关闭</td>
+			    				<td colspan="2" id="insertLossData" style="border-right: none;">添加</td>
+			    			</tr>
 			    		</table>
-			    	</div>
-			    	<div id="lossTitle" class="mui-control-content">
-			    		
 			    	</div>
 			    </div>
 			</div>
@@ -582,6 +620,16 @@
 				});
 				document.getElementById("stopLoss").addEventListener("tap",function(){
 						mui("#popoverLoss").popover("toggle");
+				});
+				document.getElementById("stopChoicePrices").addEventListener("tap",function(){
+					$("#pricesChoice").css("display","block");
+				});
+				$("#pricesChoice").on("tap","li",function(){
+					var text=$(this).text();
+					var val=$("#stopChoicePrices").val();
+					$(this).text(val);
+					$("#stopChoicePrices").val(text);
+					$("#pricesChoice").css("display","none");
 				});
 			});
 		</script>

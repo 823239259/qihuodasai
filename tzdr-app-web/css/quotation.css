@@ -1153,24 +1153,35 @@ input{
 	top:20px;
 	left: 5px;
 }
-#stopTitle{
+#stopTitle,,#lossTitle{
 	width: 100%;
 	height: auto;
 }
-#stopTitle table{
+#stopTitle table,#lossTitle table{
 	width: 100%;
+	background-color: #383838;
 }
-#stopTitle tr{
+#stopTitle tr,#lossTitle tr{
 	border-bottom: 1px solid #121212;
 	width: 100%;
 }
-#stopTitle tr td{
+#stopTitle tr td,#lossTitle tr td{
 	height: 40px;
 	padding: 0px 8px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 14px;
+
+}
+#stopTitle tr td input,#lossTitle tr input{
+	height: 30px;
+	border:1px solid #121212;
+	background-color: #1F1F1F;
+	color:#cccccc;
+	font-size: 14px;	
+	position: relative;
+	display: inline-block;
 }
 .oddTd{
 	width: 16.3%;
@@ -1186,4 +1197,82 @@ input{
 }
 .evenPrice{
 	font-style: normal;
+}
+#stopChoicePrices,#lossChoicePrices{
+	width: 36%;
+	position: relative;
+	padding: 4px;
+	background: url(../images/graySanjiaoBg.png) no-repeat;
+	background-size: 8% auto;
+	background-position: 93% 14px;
+}
+#stopChoicePrices1{
+	margin-left: 2%;
+	width: 36%;
+	position: relative;
+	padding: 4px;
+}
+ul{
+	list-style-type: none;
+}
+#pricesChoice{
+	width: 28%;
+	position: absolute;
+	top:85px;
+	color: #CCCCCC;
+	color:#999999;
+	background-color: #454545;
+	z-index: 999;
+	display: none;
+	left: 19.6%;
+	padding:0px;
+	margin: 0px;
+}
+#pricesChoice .mui-popover-arrow:after{
+	width: 20px;
+	height: 20px;
+	background-color: #454545;
+}
+#pricesChoice li{
+	width: 100%;
+	text-align: center;
+	height: 30px;
+	font-size: 14px;
+	line-height: 30px;
+	border-bottom: 1px solid #121212;
+}
+#Increase,#Increase1{
+	margin-left: 8px;
+	font-size: 14px;
+	color:#999999;
+}
+#stopLossPriceInput,#lossStopPriceInput{
+	width: 40%;
+	background: url(../images/graySanjiaoBg.png) no-repeat;
+	background-size: 13% auto;
+	background-position: 93% 14px;
+	margin-left: 1%;
+	position: relative;
+}
+
+#stopLossPrices1,#stopLossPrices2{
+	width: 32%;
+	right: 8px;
+	top:100px;
+	background-color: #454545;
+	height: auto;
+	margin: 0px;
+	padding: 0px;
+	display: none;
+}
+#stopLossPrices1 .mui-popover-arrow:after,#stopLossPrices2 .mui-popover-arrow:after{
+	width: 20px;
+	height: 20px;
+	background-color: #454545;
+}
+#closeStopTable,#insertStopData,#closeLossTable,#insertLossData{
+	border-right: 1px solid #121212;
+	text-align: center;
+	color: #CCCCCC;
+	font-size: 16px;
 }
