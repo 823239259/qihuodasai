@@ -431,7 +431,8 @@
 			    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
 			    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：<input type="text" value="市价" readonly="readonly" id="lossStopPriceInput"></td>
 			    				<ul id="stopLossPrices2">
-			    					<li>动态价</li>
+			    					<div class="mui-popover-arrow"></div>
+			    					<li>对手价</li>
 			    				</ul>
 			    			</tr>
 			    			<tr>
@@ -631,6 +632,33 @@
 					$("#stopChoicePrices").val(text);
 					$("#pricesChoice").css("display","none");
 				});
+				document.getElementById("stopLossPriceInput").addEventListener("tap",function(){
+					$("#stopLossPrices1").css("display","block");
+				})
+				$("#stopLossPrices1").on("tap","li",function(){
+					var text=$(this).text();
+					var val=$("#stopLossPriceInput").val();
+					$(this).text(val);
+					$("#stopLossPriceInput").val(text);
+					$("#stopLossPrices1").css("display","none");
+				});
+				document.getElementById("lossStopPriceInput").addEventListener("tap",function(){
+					$("#stopLossPrices2").css("display","block");
+				})
+				$("#stopLossPrices2").on("tap","li",function(){
+					var text=$(this).text();
+					var val=$("#lossStopPriceInput").val();
+					$(this).text(val);
+					$("#lossStopPriceInput").val(text);
+					$("#stopLossPrices2").css("display","none");
+				});
+				document.getElementById("closeLossTable").addEventListener("tap",function(){
+					mui("#popoverLoss").popover("toggle");
+				});
+				document.getElementById("closeStopTable").addEventListener("tap",function(){
+					mui("#popoverLoss").popover("toggle");
+				});
+				
 			});
 		</script>
 		<script>

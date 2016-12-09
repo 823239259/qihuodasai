@@ -1167,12 +1167,11 @@ input{
 }
 #stopTitle tr td,#lossTitle tr td{
 	height: 40px;
-	padding: 0px 8px;
+	padding: 0px 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 14px;
-
 }
 #stopTitle tr td input,#lossTitle tr input{
 	height: 30px;
@@ -1186,10 +1185,12 @@ input{
 .oddTd{
 	width: 16.3%;
 	color:#999999;
+	text-align: center;
 	border-right: 1px solid #121212;
 }
 .evenTd{
 	width: 33%;
+	text-align: center;
 	color:#cccccc;
 }
 .borderLeft{
@@ -1205,6 +1206,10 @@ input{
 	background: url(../images/graySanjiaoBg.png) no-repeat;
 	background-size: 8% auto;
 	background-position: 93% 14px;
+}
+#lossChoicePrices{
+	width: 36%;
+	padding: 4px;
 }
 #stopChoicePrices1{
 	margin-left: 2%;
@@ -1247,6 +1252,7 @@ ul{
 }
 #stopLossPriceInput,#lossStopPriceInput{
 	width: 40%;
+	padding: 0px 10px 0px 0px;
 	background: url(../images/graySanjiaoBg.png) no-repeat;
 	background-size: 13% auto;
 	background-position: 93% 14px;
@@ -1256,9 +1262,9 @@ ul{
 
 #stopLossPrices1,#stopLossPrices2{
 	position: absolute;
-	width: 22%;
+	width: 18%;
 	right: 8px;
-	top:130px;
+	top:120px;
 	background-color: #454545;
 	height: auto;
 	margin: 0px;
@@ -1268,11 +1274,12 @@ ul{
 	line-height: 30px;
 	text-align: center;
 	font-size: 14px;
-	/*display: none;*/
+	display: none;
 }
 #stopLossPrices1 .mui-popover-arrow:after,#stopLossPrices2 .mui-popover-arrow:after{
 	width: 20px;
 	height: 20px;
+	top:22px;
 	background-color: #454545;
 }
 #closeStopTable,#insertStopData,#closeLossTable,#insertLossData{
