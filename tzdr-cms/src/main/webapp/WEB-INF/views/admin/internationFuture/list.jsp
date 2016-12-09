@@ -464,7 +464,7 @@ function timeConvert(value,rowData,rowIndex) {
         			 	<tr>
         			 		<td>操盘保证金</td>
         			 		<td><input id="traderBond" name="traderBond"  class="easyui-textbox" disabled="disabled" /></td>
-        			 		<td>交易盈亏</td>
+        			 		<td>交易盈亏($)</td>
         			 		<td><input id="tranProfitLoss" name="tranProfitLoss"  class="easyui-textbox" data-options="required:true" /></td>
         			 	</tr>
         			 	<tr>
@@ -472,85 +472,85 @@ function timeConvert(value,rowData,rowIndex) {
         			 	</tr>
         		</table>
         		<table  id="freeTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
-        			<tr id = "tranActualTrm">
+        			<tr>
 	        			<td class="label right"  id="a50td">交易手数:</td>
 			                <td>
 			                <input id="tranActualLever" name="tranActualLever"  class="easyui-validatebox" data-options="required:true" />
 		                </td>
 		                <td class="label right hsiTradeNumTR" >恒指交易:</td>
 		                <td>
-		                    <input id="hsiTranActualLever" name="hsiTranActualLever"  class="easyui-validatebox hsiTradeNumTR" data-options="required:true" />
+		                    <input id="hsiTranActualLever" name="hsiTranActualLever"  class="easyui-validatebox hsiTradeNumTR"   data-options=""/>
 		                </td>
 			       </tr> 
 			           <tr id="mdTradeNumTR">
 			           
 			           		<td class="label right">迷你道指交易:</td>
 			                <td>
-			                   <input id="mdtranActualLever" name="mdtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="mdtranActualLever" name="mdtranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			                <td class="label right">迷你纳指交易:</td>
 			                <td>
-			                   <input id="mntranActualLever" name="mntranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="mntranActualLever" name="mntranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			            </tr>
 			           	<tr id="mbTradeNumTR">
 			           		<td class="label right">原油交易:</td>
 				            <td>
-				                <input id="crudeTranActualLever" name="crudeTranActualLever"  class="easyui-validatebox" data-options="required:true" />
+				                <input id="crudeTranActualLever" name="crudeTranActualLever"  class="easyui-validatebox"  data-options=""/>
 				            </td>
-			                <td class="label right" id = "mnbptitle">迷你标普交易:</td>
+			                <td class="label right">迷你标普交易:</td>
 			                <td>
-			                   <input id="mbtranActualLever" name="mbtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="mbtranActualLever" name="mbtranActualLever" class="easyui-validatebox"   data-options=""/>
 			                </td>
 			            </tr>
 			            <tr id="nikkeiTradeNumTR">
 			            	<td class="label right">德国DAX交易:</td>
 			                <td>
-			                   <input id="daxtranActualLever" name="daxtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="daxtranActualLever" name="daxtranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			                <td class="label right">日经225交易:</td>
 			                <td>
-			                   <input id="nikkeiTranActualLever" name="nikkeiTranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="nikkeiTranActualLever" name="nikkeiTranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
 			            <tr id="agTradeNumTR">
 			             	<td class="label right">小恒指交易:</td>
 			                <td>
-			                   <input id="lhsiTranActualLever" name="lhsiTranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="lhsiTranActualLever" name="lhsiTranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			                <td class="label right">美黄金交易:</td>
 			                <td>
-			                   <input id="agTranActualLever" name="agTranActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="agTranActualLever" name="agTranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
 				         <tr id="xHsTradeNumTR">
 				        	 <td class="label right">H股指交易:</td>
 			                <td>
-			                   <input id="heStockMarketLever" name="heStockMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="heStockMarketLever" name="heStockMarketLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			                <td class="label right">小H股指交易:</td>
 			                <td>
-			                   <input id="xhStockMarketLever" name="xhStockMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="xhStockMarketLever" name="xhStockMarketLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
 						   <tr  id="asTradeNumTR">
 						    <td class="label right">美铜交易:</td>
 			                <td>
-			                   <input id="AmeCopperMarketLever" name="AmeCopperMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="AmeCopperMarketLever" name="AmeCopperMarketLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			                <td class="label right">美白银交易:</td>
 			                <td>
-			                   <input id="AmeSilverMarketLever" name="AmeSilverMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="AmeSilverMarketLever" name="AmeSilverMarketLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
 						 <tr id="daxMinTradeNumTR">
 						 	<td class="label right">小原油交易:</td>
 			                <td>
-			                   <input id="smallCrudeOilMarketLever" name="smallCrudeOilMarketLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="smallCrudeOilMarketLever" name="smallCrudeOilMarketLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 			                <td class="label right">迷你德国DAX指数:</td>
 			                <td>
-			                   <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options="required:true"/>
+			                   <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
 						  <tr>

@@ -86,18 +86,18 @@ function passClose() {
 /**
  * 录入
  */
-
+var bussType = "";
 function input(){
 	localDataLever = null;
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
 		var bussinessType = rows[0].businessType;
+		bussType = bussinessType;
 		if (bussinessType == "国际综合"){
 			$("#a50td").html("A50交易手数:");
 			$(".hsiTradeNumTR").show();
 			$("#crudeTradeNumTR").show();
-			$("#mnbptitle").show();
-			$("#mbtranActualLever").show();
+			
 			$("#mdTradeNumTR").show();
 			$("#mnTradeNumTR").show();
 			$("#mbTradeNumTR").show();
@@ -113,14 +113,12 @@ function input(){
 			$("#daxMinTradeNumTR").show();
 			$("#inputWin").css("height","457px");
 		
-		}else if(bussinessType == "富时A50")
+		}else
 		{
-			$("#a50td").html("富时A50交易");
-			$("#tranActualLever").show();
-			$("#tranActualTrm").show();
-			$("#a50td").show();
+			$("#a50td").html("交易手数:");
 			$(".hsiTradeNumTR").hide();
 			$("#crudeTradeNumTR").hide();
+			
 			$("#mdTradeNumTR").hide();
 			$("#mnTradeNumTR").hide();
 			$("#mbTradeNumTR").hide();
@@ -134,50 +132,8 @@ function input(){
 			$("#asTradeNumTR").hide();
 			$("#scTradeNumTR").hide();
 			$("#daxMinTradeNumTR").hide();
-			$("#inputWin").css("height","250px");
+			$("#inputWin").css("height","400px");
 
-		}else if(bussinessType == "恒生指数"){
-			$("#a50td").hide();
-			$("#tranActualTrm").show();
-			$("#tranActualLever").hide();
-			$(".hsiTradeNumTR").show();
-			$("#crudeTradeNumTR").hide();
-			$("#mdTradeNumTR").hide();
-			$("#mnTradeNumTR").hide();
-			$("#mbTradeNumTR").hide();
-			$("#daxTradeNumTR").hide();
-			$("#nikkeiTradeNumTR").hide();
-			$("#lhsiTradeNumTR").hide();
-			$("#agTradeNumTR").hide();
-			$("#hsTradeNumTR").hide();
-			$("#xHsTradeNumTR").hide();
-			$("#acTradeNumTR").hide();
-			$("#asTradeNumTR").hide();
-			$("#scTradeNumTR").hide();
-			$("#daxMinTradeNumTR").hide();
-			$("#inputWin").css("height","250px");
-		}else if(bussinessType == "国际原油"){
-			$("#tranActualTrm").hide();
-			$("#a50td").hide();
-			$("#mbTradeNumTR").show();
-			$("#mbtranActualLever").hide();
-			$("#mnbptitle").hide()
-			$("#tranActualLever").hide();
-			$(".hsiTradeNumTR").hide();
-			$("#crudeTradeNumTR").hide();
-			$("#mdTradeNumTR").hide();
-			$("#mnTradeNumTR").hide();
-			$("#daxTradeNumTR").hide();
-			$("#nikkeiTradeNumTR").hide();
-			$("#lhsiTradeNumTR").hide();
-			$("#agTradeNumTR").hide();
-			$("#hsTradeNumTR").hide();
-			$("#xHsTradeNumTR").hide();
-			$("#acTradeNumTR").hide();
-			$("#asTradeNumTR").hide();
-			$("#scTradeNumTR").hide();
-			$("#daxMinTradeNumTR").hide();
-			$("#inputWin").css("height","250px");
 		}
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
@@ -286,25 +242,32 @@ function appendTradeDetailHtml(tradeDetail,index){
 }
 function handleData(fast,index){
 		var dataLever = fast;
-		$("#tranProfitLoss").val(dataLever.tranProfitLoss==undefined?"":dataLever.tranProfitLoss);
-		$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
-		$("#hsiTranActualLever").val(dataLever.hsiTranActualLever==undefined?0:dataLever.hsiTranActualLever);
-		$("#mdtranActualLever").val(dataLever.mdtranActualLever==undefined?0:dataLever.mdtranActualLever);
-		$("#mntranActualLever").val(dataLever.mntranActualLever==undefined?0:dataLever.mntranActualLever);
-		$("#crudeTranActualLever").val(dataLever.crudeTranActualLever==undefined?0:dataLever.crudeTranActualLever);
-		$("#mbtranActualLever").val(dataLever.mbtranActualLever==undefined?0:dataLever.mbtranActualLever);
-		$("#daxtranActualLever").val(dataLever.daxtranActualLever==undefined?0:dataLever.daxtranActualLever);
-		$("#nikkeiTranActualLever").val(dataLever.nikkeiTranActualLever==undefined?0:dataLever.nikkeiTranActualLever);
-		$("#lhsiTranActualLever").val(dataLever.lhsiTranActualLever==undefined?0:dataLever.lhsiTranActualLever);
-		$("#agTranActualLever").val(dataLever.agTranActualLever==undefined?0:dataLever.agTranActualLever);
-		$("#heStockMarketLever").val(dataLever.heStockMarketLever==undefined?0:dataLever.heStockMarketLever);
-		$("#xhStockMarketLever").val(dataLever.xhStockMarketLever==undefined?0:dataLever.xhStockMarketLever);
-		$("#AmeCopperMarketLever").val(dataLever.AmeCopperMarketLever==undefined?0:dataLever.AmeCopperMarketLever);
-		$("#AmeSilverMarketLever").val(dataLever.AmeSilverMarketLever==undefined?0:dataLever.AmeSilverMarketLever);
-		$("#smallCrudeOilMarketLever").val(dataLever.smallCrudeOilMarketLever==undefined?0:dataLever.smallCrudeOilMarketLever);
-		$("#daxtranMinActualLever").val(dataLever.daxtranMinActualLever==undefined?0:dataLever.daxtranMinActualLever);
-		
-
+		if(bussType == "国际综合"){
+			$("#tranProfitLoss").val(dataLever.tranProfitLoss==undefined?"":dataLever.tranProfitLoss);
+			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+			$("#hsiTranActualLever").val(dataLever.hsiTranActualLever==undefined?0:dataLever.hsiTranActualLever);
+			$("#mdtranActualLever").val(dataLever.mdtranActualLever==undefined?0:dataLever.mdtranActualLever);
+			$("#mntranActualLever").val(dataLever.mntranActualLever==undefined?0:dataLever.mntranActualLever);
+			$("#crudeTranActualLever").val(dataLever.crudeTranActualLever==undefined?0:dataLever.crudeTranActualLever);
+			$("#mbtranActualLever").val(dataLever.mbtranActualLever==undefined?0:dataLever.mbtranActualLever);
+			$("#daxtranActualLever").val(dataLever.daxtranActualLever==undefined?0:dataLever.daxtranActualLever);
+			$("#nikkeiTranActualLever").val(dataLever.nikkeiTranActualLever==undefined?0:dataLever.nikkeiTranActualLever);
+			$("#lhsiTranActualLever").val(dataLever.lhsiTranActualLever==undefined?0:dataLever.lhsiTranActualLever);
+			$("#agTranActualLever").val(dataLever.agTranActualLever==undefined?0:dataLever.agTranActualLever);
+			$("#heStockMarketLever").val(dataLever.heStockMarketLever==undefined?0:dataLever.heStockMarketLever);
+			$("#xhStockMarketLever").val(dataLever.xhStockMarketLever==undefined?0:dataLever.xhStockMarketLever);
+			$("#AmeCopperMarketLever").val(dataLever.AmeCopperMarketLever==undefined?0:dataLever.AmeCopperMarketLever);
+			$("#AmeSilverMarketLever").val(dataLever.AmeSilverMarketLever==undefined?0:dataLever.AmeSilverMarketLever);
+			$("#smallCrudeOilMarketLever").val(dataLever.smallCrudeOilMarketLever==undefined?0:dataLever.smallCrudeOilMarketLever);
+			$("#daxtranMinActualLever").val(dataLever.daxtranMinActualLever==undefined?0:dataLever.daxtranMinActualLever);
+		}else if(bussType == "富时A50"){
+			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+		}else if(bussType == "国际原油"){
+			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+		}else if(bussType == "恒生指数"){
+			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+		}
+		$("#tranProfitLoss").val(dataLever.tranProfitLoss);
 }
 /*function input() {
 	var rows = $("#hasAuditData").datagrid('getSelections');
