@@ -472,7 +472,7 @@ function timeConvert(value,rowData,rowIndex) {
         			 	</tr>
         		</table>
         		<table  id="freeTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
-        			<tr>
+        			<tr id = "tranActualTrm">
 	        			<td class="label right"  id="a50td">交易手数:</td>
 			                <td>
 			                <input id="tranActualLever" name="tranActualLever"  class="easyui-validatebox" data-options="required:true" />
@@ -498,7 +498,7 @@ function timeConvert(value,rowData,rowIndex) {
 				            <td>
 				                <input id="crudeTranActualLever" name="crudeTranActualLever"  class="easyui-validatebox" data-options="required:true" />
 				            </td>
-			                <td class="label right">迷你标普交易:</td>
+			                <td class="label right" id = "mnbptitle">迷你标普交易:</td>
 			                <td>
 			                   <input id="mbtranActualLever" name="mbtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
 			                </td>

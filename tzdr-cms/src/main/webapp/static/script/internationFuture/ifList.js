@@ -96,7 +96,8 @@ function input(){
 			$("#a50td").html("A50交易手数:");
 			$(".hsiTradeNumTR").show();
 			$("#crudeTradeNumTR").show();
-			
+			$("#mnbptitle").show();
+			$("#mbtranActualLever").show();
 			$("#mdTradeNumTR").show();
 			$("#mnTradeNumTR").show();
 			$("#mbTradeNumTR").show();
@@ -112,12 +113,14 @@ function input(){
 			$("#daxMinTradeNumTR").show();
 			$("#inputWin").css("height","457px");
 		
-		}else
+		}else if(bussinessType == "富时A50")
 		{
-			$("#a50td").html("交易手数:");
+			$("#a50td").html("富时A50交易");
+			$("#tranActualLever").show();
+			$("#tranActualTrm").show();
+			$("#a50td").show();
 			$(".hsiTradeNumTR").hide();
 			$("#crudeTradeNumTR").hide();
-			
 			$("#mdTradeNumTR").hide();
 			$("#mnTradeNumTR").hide();
 			$("#mbTradeNumTR").hide();
@@ -133,6 +136,48 @@ function input(){
 			$("#daxMinTradeNumTR").hide();
 			$("#inputWin").css("height","250px");
 
+		}else if(bussinessType == "恒生指数"){
+			$("#a50td").hide();
+			$("#tranActualTrm").show();
+			$("#tranActualLever").hide();
+			$(".hsiTradeNumTR").show();
+			$("#crudeTradeNumTR").hide();
+			$("#mdTradeNumTR").hide();
+			$("#mnTradeNumTR").hide();
+			$("#mbTradeNumTR").hide();
+			$("#daxTradeNumTR").hide();
+			$("#nikkeiTradeNumTR").hide();
+			$("#lhsiTradeNumTR").hide();
+			$("#agTradeNumTR").hide();
+			$("#hsTradeNumTR").hide();
+			$("#xHsTradeNumTR").hide();
+			$("#acTradeNumTR").hide();
+			$("#asTradeNumTR").hide();
+			$("#scTradeNumTR").hide();
+			$("#daxMinTradeNumTR").hide();
+			$("#inputWin").css("height","250px");
+		}else if(bussinessType == "国际原油"){
+			$("#tranActualTrm").hide();
+			$("#a50td").hide();
+			$("#mbTradeNumTR").show();
+			$("#mbtranActualLever").hide();
+			$("#mnbptitle").hide()
+			$("#tranActualLever").hide();
+			$(".hsiTradeNumTR").hide();
+			$("#crudeTradeNumTR").hide();
+			$("#mdTradeNumTR").hide();
+			$("#mnTradeNumTR").hide();
+			$("#daxTradeNumTR").hide();
+			$("#nikkeiTradeNumTR").hide();
+			$("#lhsiTradeNumTR").hide();
+			$("#agTradeNumTR").hide();
+			$("#hsTradeNumTR").hide();
+			$("#xHsTradeNumTR").hide();
+			$("#acTradeNumTR").hide();
+			$("#asTradeNumTR").hide();
+			$("#scTradeNumTR").hide();
+			$("#daxMinTradeNumTR").hide();
+			$("#inputWin").css("height","250px");
 		}
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
