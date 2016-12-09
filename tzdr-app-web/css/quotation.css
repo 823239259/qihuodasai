@@ -1219,7 +1219,6 @@ ul{
 	width: 28%;
 	position: absolute;
 	top:85px;
-	color: #CCCCCC;
 	color:#999999;
 	background-color: #454545;
 	z-index: 999;
@@ -1256,14 +1255,20 @@ ul{
 }
 
 #stopLossPrices1,#stopLossPrices2{
-	width: 32%;
+	position: absolute;
+	width: 22%;
 	right: 8px;
-	top:100px;
+	top:130px;
 	background-color: #454545;
 	height: auto;
 	margin: 0px;
 	padding: 0px;
-	display: none;
+	color:#999999;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 14px;
+	/*display: none;*/
 }
 #stopLossPrices1 .mui-popover-arrow:after,#stopLossPrices2 .mui-popover-arrow:after{
 	width: 20px;
