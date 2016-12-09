@@ -240,6 +240,7 @@
     		document.getElementById("end_info").style.display="block";
     		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
     		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
+    		$("#sharehref").val("http://192.168.0.44:8080/huodong/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
     		if (details.tranProfitLoss<0){
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
     		}
@@ -251,6 +252,13 @@
     		}else{
     			document.getElementById("endAmount").innerHTML=tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}
+    		var money1=tzdr.moneyUtils.reverseMoney(document.getElementById("traderBond").innerHTML) ;
+    		var money2=tzdr.moneyUtils.reverseMoney(document.getElementById("appendTraderBond").innerHTML);
+    		var money3=parseFloat(details.tranProfitLoss*details.endParities);
+    		var money4=tzdr.moneyUtils.reverseMoney(document.getElementById("tranFeesTotal").innerHTML);
+    		console.log(money1);
+    		var all=money1+money2+money3-money4;
+    		$(".dt_font").text("结算金额(¥"+all+") = 操盘保证金(¥"+money1+") + 追加保证金(¥"+money2+") + 交易盈亏(¥"+money3+") - 交易手续费(¥"+money4+")");
     	};
     	
     	function setOutDisks(outDiskList){

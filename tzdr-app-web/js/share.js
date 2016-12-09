@@ -38,8 +38,8 @@
 			if(!sb||!sb.s){
 				return;
 			}
-		//	console.log(JSON.stringify(sharecontent.value));
 			var msg={content:sharecontent.value,extra:{scene:sb.x}};
+			console.log(JSON.stringify(msg));
 			if(bh){
 				msg.href=sharehref.value;
 				if(sharehrefTitle&&sharehrefTitle.value!=""){

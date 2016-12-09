@@ -31,7 +31,7 @@
     				queryDetails(result.data.details.id);
     				//获取详细数据
     				setDetails(result.data.details);
-    				
+    				console.log(JSON.stringify(result.data.details));
     				//获取主力合约
     				mui.each(result.data.details.outDiskVoList,function(i,item){
     					setOutDisks(item);
@@ -242,20 +242,29 @@
     		document.getElementById("end_info").style.display="block";
     		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
     		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
+    		console.log(tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
+    		$("#sharehref").val("http://192.168.0.44:8080/huodong/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
+    		console.log($("#sharehref").val());
     		if (details.tranProfitLoss<0){
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
+    			
     		}
     		document.getElementById("endParities").innerHTML="1美元 = "+details.endParities+"人民币";
+    		document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
     		//document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
     		if(details.endAmount>=0){
     			document.getElementById("endAmount").innerHTML="+"+tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}else{
     			document.getElementById("endAmount").innerHTML=tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}
-    		
-    	
     		//设置综合各项手数
     		settran_actual_lever(details);
+    		var money1=tzdr.moneyUtils.reverseMoney(document.getElementById("traderBond").innerHTML) ;
+    		var money2=tzdr.moneyUtils.reverseMoney(document.getElementById("appendTraderBond").innerHTML);
+    		var money3=parseFloat(details.tranProfitLoss*details.endParities);
+    		var money4=details.tranFeesTotal;
+    		var all=money1+money2+money3-money4;
+    		$(".dt_font").text("结算金额(¥"+all+") = 操盘保证金(¥"+money1+") + 追加保证金(¥"+money2+") + 交易盈亏(¥"+money3+") - 交易手续费(¥"+money4+")");
     	};
     	
     	
@@ -466,7 +475,8 @@
 			<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
 			<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
 		</div>
-		<div id="item1" class="mui-control-content  mui-active">
+
+<div id="item1" class="mui-control-content  mui-active">
 			<ul class="mui-table-view sc_listtime">
 				<li class="mui-table-view-cell">
 					<label>投资标的：</label>
@@ -547,6 +557,10 @@
 						<label>结算金额(¥)：</label>
 						<span id="endAmount">8,355.24元</span>
 					</li>
+					<li class="mui-table-view-cell">
+						<label>交易手续费(¥)：</label>
+						<span id="tranFeesTotal">3,334元</span>
+					</li>
 				</ul>
 				<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
 			</div>
@@ -581,7 +595,7 @@
 			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin">分享</button>
 		</div>
 		<input id="sharecontent" type="hidden" value=""></input>
-		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehref" class="sharehref" type="hidden"/>
 		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
 		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
 		<div id="output" style="opacity: 0;"></div>
