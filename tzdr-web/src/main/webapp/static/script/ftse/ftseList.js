@@ -51,7 +51,7 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+tranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
-		tradeDev+= '<h3>期指期货</h3>';
+		tradeDev+= '<h3>恒指期货</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+hsiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
