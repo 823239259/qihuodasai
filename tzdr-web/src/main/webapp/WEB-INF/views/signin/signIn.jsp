@@ -100,7 +100,7 @@
                 <p style="display: none;">推广码有误！</p>
             </li>
         </ul>
-        <div class="rg_agree"><input type="checkbox" checked="checked" id="agreement" name="agreement">同意<a href="javascript:showAgreement();">《维胜金融注册协议》</a>并开通模拟盘账户</div>
+        <div class="rg_agree"><input type="checkbox" checked="checked" id="agreement" name="agreement">我已阅读并同意<a href="javascript:showAgreement();">《维胜网站服务协议》</a></div>
         <div class="rg_btn"><a status="true" id="signin" name="signin" href="javascript:void(0);">立即注册</a></div>
         </form>
     </div>
