@@ -38,8 +38,7 @@ public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount
 			}
 		}else{
 			Object[] objects2 = new Object[]{password,username};
-			objects.add(objects2);
-			nativeUpdate("update mock_trade_account set Password = ? where Username = ?", objects);
+			nativeUpdate("update mock_trade_account set Password = ? where Username = ?", objects2);
 		}
 		return flag;
 	}

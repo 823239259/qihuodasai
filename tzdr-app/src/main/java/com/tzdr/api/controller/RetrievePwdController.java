@@ -81,14 +81,11 @@ public class RetrievePwdController {
 		wUser.setPassword(passwordService.encryptPassword(password, wUser.getLoginSalt()));
 		wUserService.updateUser(wUser);
 		AuthUtils.clearCacheUser(wUser.getId());
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				mockTradeAccountService.openMockAccount(mobile, password);
-				
-			}
-		}).start();
+		try {
+			mockTradeAccountService.openMockAccount(mobile, password);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"forget.password.update.success.");
 	}
 	/**

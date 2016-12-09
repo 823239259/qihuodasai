@@ -178,12 +178,7 @@ public class ForgetController{
 		}
 		wUser.setPassword(passwordService.encryptPassword(password, wUser.getLoginSalt()));
 		wUserService.updateUser(wUser);
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				mockTradeAccountService.openMockAccount(mobile, password);
-			}
-		}).start();
+		mockTradeAccountService.openMockAccount(mobile, password);
 		return jsonResult;
 	}
 }

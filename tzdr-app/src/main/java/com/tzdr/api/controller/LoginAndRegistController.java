@@ -207,14 +207,9 @@ public class LoginAndRegistController {
 		DataConstant.CACHE_USER_MAP.put(appToken,new CacheUser(wUser,secretKey));
 		// 用户注册成功之后给用户手机发送短信
 		try {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-					mockTradeAccountService.openMockAccount(mobile, password);
-					messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
-				}
-			}).start();;
+			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+			mockTradeAccountService.openMockAccount(mobile, password);
+			messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -216,7 +216,7 @@ public class SignInController {
 	public JsonResult sendMobileMessage(String mobile, String yzmCode, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
-		/*ConcurrentHashMap<String, SendCodeMaxCountBean> sendSMSCodeMaxCountMap = SendCodeMaxCount.sendSMSCodeMaxCountMap;
+		ConcurrentHashMap<String, SendCodeMaxCountBean> sendSMSCodeMaxCountMap = SendCodeMaxCount.sendSMSCodeMaxCountMap;
 		SendCodeMaxCountBean sendSMSCodeMaxCountData = !sendSMSCodeMaxCountMap.containsKey(mobile) ? null
 				: sendSMSCodeMaxCountMap.get(mobile);
 		if (sendSMSCodeMaxCountData != null
@@ -226,7 +226,7 @@ public class SignInController {
 			return jsonResult;
 		} else {
 			SendCodeMaxCount.addSendSMSCodeMaxCountMap(mobile, request, response);
-		}*/
+		}
 
 		String randomCode = RandomCodeUtil.randStr(6); // 生成6为验证码
 
@@ -384,18 +384,12 @@ public class SignInController {
 		}
 		data.put("from", from);
 		jsonResult.setData(data);
+		// 用户注册成功之后给用户手机发送短信
+		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
+		messagePromptService.registNotice(mobile, "web", "", "");
 		try {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					// 用户注册成功之后给用户手机发送短信
-					SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-					mockTradeAccountService.openMockAccount(mobile, password);
-					messagePromptService.registNotice(mobile, "web", "", "");
-				}
-			}).start();
+			mockTradeAccountService.openMockAccount(mobile, password);
 		} catch (Exception e) {
-			jsonResult.setMessage("模拟盘账号开通失败");
 		}
 		return jsonResult;
 	}
