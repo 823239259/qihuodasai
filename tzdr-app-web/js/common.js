@@ -80,7 +80,6 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
-				console.log(JSON.stringify(errorThrown));
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -195,6 +194,7 @@
 			beforeback:function(){
 				if(!mui.isnull(pageId)){
 					var _page = plus.webview.getWebviewById(pageId);
+					console.log(_page);
 					if(_page){
 						_page.reload(isRefresh);
 					}
@@ -258,10 +258,24 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain:"http://api.vs.com/", 
+		api_domain:"http://test.api.vs.com/",
+		//api_domain:"http://api.vs.com/", 
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
+		//交易地址
+//		TradeSocketUrl:"ws://139.224.24.206:6066",
+//		TradeSocketModelUrl : "ws://139.224.24.206:6066",
+		TradeSocketUrl:"ws://139.224.24.206:6067",
+		TradeSocketModelUrl : "ws://139.224.24.206:6067",
+		//交易版本
+		tradeSocketVersion: "2.0.0",
+		tradeAppVersion: "2.0.0",
+		//行情地址
+		MarketSocketUrl:"ws://quote.vs.com:9002",
+		//登录名字和密码
+		MarketUsername:"13677622344",
+		MarketPassword:"a123456",
 		//token
 		user_token:'user_token',
 		//密钥 
@@ -629,3 +643,6 @@ function initBottom(data){
 					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
 				});
 	}
+String.prototype.trim = function() {
+  return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}

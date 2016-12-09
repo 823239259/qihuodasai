@@ -12,7 +12,6 @@
     	mui.init();
     	var win=null;
     	mui.plusReady(function(){
-    		
     		win=plus.webview.currentWebview();
     		//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
@@ -80,7 +79,7 @@
 					"addBond":app_fund
 	    		},function(result){
 	    			mui.toast("申请成功，系统会尽快处理！");
-	    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用    
+	    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用 
 	    			mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
 	    			return;
 	    		},function(result){

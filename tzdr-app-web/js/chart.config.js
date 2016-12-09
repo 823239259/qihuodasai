@@ -38,18 +38,6 @@
                     CandlestickVolumeChart=ec.init(document.getElementById("CandlestickVolumeChart"));
                    	 ec.connect("group1");
                      ec.connect("group2");
-//                   ec.connect("group3");
-//                   dayCandlestickChartDiv=ec.init(document.getElementById("dayCandlestickChartDiv"));
-//                   dayCandlestickVolumeChart=ec.init(document.getElementById("dayCandlestickVolumeChart"));
-//                   fiveCandlestickChartDiv=ec.init(document.getElementById("fiveCandlestickChartDiv"))
-//                   fiveCandlestickVolumeChart=ec.init(document.getElementById("fiveCandlestickVolumeChart"));
-//                   ec.connect("group4");
-//                   TenCandlestickChartDiv=ec.init(document.getElementById("TenCandlestickChartDiv"));
-//                   TenCandlestickVolumeChart=ec.init(document.getElementById("TenCandlestickVolumeChart"));
-//                   ec.connect("group5");
-//                   threeCandlestickChartDiv=ec.init(document.getElementById("threeCandlestickChartDiv"));
-//                   threeCandlestickVolumeChart=ec.init(document.getElementById("threeCandlestickVolumeChart"));
-//                     ec.connect("group6");
                 }
         );
 		

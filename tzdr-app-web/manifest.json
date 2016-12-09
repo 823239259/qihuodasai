@@ -93,7 +93,10 @@
 		"Camera": {},
 		"Gallery": {},
 		"Barcode": {},
-		"Geolocation": {},"Messaging":{},"Statistic":{},"Push":{}
+		"Geolocation": {},"Messaging":{},"Statistic":{},"Push":{},"Share":{},
+		"Share":{
+			"description": "管理分享插件"
+		}
 	},
 	"plus": {
 		"splashscreen": {
@@ -102,7 +105,11 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+<<<<<<< HEAD
 		"distribute": {"plugins":{"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"58450ed22ae85b44b7001456","channelid_android":"android"}}},
+=======
+		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"}},"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57e87c26e0f55a1329001876","channelid_android":"android"}}},
+>>>>>>> refs/remotes/origin/branch/v20161208app
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -554,7 +561,11 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/jquery-1.11.3.js",
+					"js/common1.js",
+					"js/share.js",
+					"js/immersed.js"
 				],
 				"refer": [
 					"tzdr/future/add.html",
@@ -585,7 +596,11 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/jquery-1.11.3.js",
+					"js/immersed.js",
+					"js/common1.js",
+					"js/share.js"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -1090,7 +1105,8 @@
 					"tzdr/scheme.html",
 					"tzdr/account/accountno.html",
 					"tzdr/future/listrg.html",
-					"tzdr/quotation/tutorial.html"
+					"tzdr/quotation/tutorial.html",
+					"tzdr/login/login.html"
 				],
 				"priority": 0
 			},
@@ -1199,7 +1215,8 @@
 					"tzdr/agree/tradingMarket.html",
 					"tzdr/future/hsi.html",
 					"tzdr/future/cp.html",
-					"tzdr/quotation/quotationMain.html"
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/retrievePassword.html"
 				],
 				"priority": 0
 			},
@@ -1502,7 +1519,9 @@
 				],
 				"refer": [
 					"tzdr/quotation/quotationMain.html",
-					"guide.html"
+					"guide.html",
+					"tzdr/future/historyDetail.html",
+					"share.html"
 				],
 				"priority": 0
 			},
@@ -1541,6 +1560,26 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/future/historyDetail.html": {
+				"resources": [
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share.html": {
+				"resources": [
+					"js/immersed.js"
 				],
 				"refer": [],
 				"priority": 0
