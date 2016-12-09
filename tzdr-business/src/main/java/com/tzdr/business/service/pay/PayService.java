@@ -97,7 +97,7 @@ public interface PayService extends BaseService<RechargeList>{
 	 * @param transactionNo 三方交易流水号
 	 * @param timePaid  支付完成时间
 	 */
-	public String doUpdatePingPPPaySuccessRecharge(String orderNo,String channel,Double amount,String transactionNo,String timePaid,String remark);
+	public String doUpdatePingPPPaySuccessRecharge(String orderNo,String channel,Double amount,String transactionNo,String timePaid,Integer statuss,String remark);
 	/**
 	 * 国付宝充值完成的更新
 	 * @param orderNo

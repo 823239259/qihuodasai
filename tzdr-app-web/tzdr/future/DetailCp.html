@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="HandheldFriendly" content="true"/>
+	<meta name="MobileOptimized" content="320"/>
     <title>国际综合 - 方案详情</title>
     <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+    <script src="../../js/common1.js"></script>
     <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init();
@@ -24,7 +27,6 @@
     		mui.app_request("/user/ftrade/details",{
     			"id":win.did
     		},function(result){
-    			console.log(JSON.stringify(result))
     			if(!mui.isnull(result.data.details)){
     				queryDetails(result.data.details.id);
     				//获取详细数据
@@ -43,35 +45,37 @@
     		},paramUrl);
     		function queryDetails(id){
     			mui.app_request("/user/ftrade/getFstTradeDetail",{id:id},function(res){
-    				console.log(JSON.stringify(res));
+    				//console.log(JSON.stringify(res));
     				if(!mui.isnull(res.data)){
     					insertDateils(res.data);
     				}
     				
 	    		},function(res){
-	    			console.log(JSON.stringify(res));
+	    			//console.log(JSON.stringify(res));
 	    		});
     		}
     		function insertDateils(data){
     			for(var i=0;i<data.length;i++){
     				var _data = data[i];
     				$("#historyDetailsTable").append("<tr>"+
-	    			"<td>"+i+"</td>"+
-	    			"<td>"+_data.commodityNo+_data.contractNo+"</td>"+
-	    			"<td>"+_data.flat+"</td>"+
-	    			"<td>"+_data.tradeNum+"</td>"+
-	    			"<td>"+_data.free+"</td>"+
-	    			"<td>"+_data.drection+"</td>"+
-	    			"<td>"+_data.tradePrice+"</td>"+
-	    			"<td>"+_data.orderPrice+"</td>"+
-	    			"<td>"+_data.marketDate+"</td>"+
+    						"<td>"+i+"</td>" +
+	    				"<td>"+_data.tradeDate+"</td>" +
+						"<td>"+_data.username+"</td>" +
+						"<td>"+_data.userNo+"</td>" +
+						"<td>"+_data.currencyNo+"</td>" +
+						"<td>"+_data.exchangeNo+"</td>" +
+						"<td>"+_data.commodityNo+"</td>" +
+						"<td>"+parseInt(_data.buyNum)+parseInt(_data.sellNum)+"</td>" +
+						"<td>"+_data.tradePrice+"</td>" +
+						"<td>"+_data.free+"</td>" +
+						"<td>"+_data.orderType+"</td>" +
+						"<td>"+_data.orderUserno+"</td>" +
+						"<td>"+_data.orderUsername+"</td>" +
+						"<td>"+_data.tradeType+"</td>" +
 	    			"</tr>");
     			}
     			
     		}
-    	
-
-    		
 //  		document.getElementById("copyaccount").addEventListener("tap",function(){
 //  			var t_text=document.getElementById("trade_account").innerHTML;
 ////  			copytoClip(t_text);
@@ -92,7 +96,7 @@
     				url:"add.html",
     				id:"add.html",
     				extras:{
-    					did:win.did,businessPageId:'DetailCp.html'  
+    					did:win.did,businessPageId:'future/DetailCp.html'  
     				}
     			});
     		});
@@ -110,7 +114,7 @@
 	    				url:"end.html",
 	    				id:"end.html",
 	    				extras:{
-	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:8,businessPageId:'DetailCp.html'
+	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:8,businessPageId:'future/DetailCp.html'
 	    				}
 	    			});
 				},function(result){
@@ -129,10 +133,26 @@
     				 }
     			})
     		});
-    	});
-    	
-    	
-    	
+    		var endNum=0;
+	    	document.getElementById("historyButton").addEventListener("tap",function(){
+	    		if(endNum!=6){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("方案未结算，暂无数据显示...");
+
+	    			},10)
+	    			return
+	    		}
+	    		$("#historyButton").attr("href","#item2");
+	    		
+	    	});
+	    	document.getElementById("sharePay").addEventListener("tap",function(){
+	    		if(endNum==6){
+	    			shareHref();
+	    		}
+	    	})
+
     		function setDetails(details){
     		document.getElementById("trade_account").innerHTML=details.tranAccount;
     		document.getElementById("trade_password").innerHTML=details.tranPassword;
@@ -184,6 +204,11 @@
     				break;
     			case 6:
     				document.getElementById("end").style.display="block";
+    				document.getElementById("historyButton").href="#item2";
+    				$("#historyButton").removeClass("mui-active");
+    				$("#detailButton").text("结算明细");
+    				$("#sharePay").css("background-color","#FFDD33");
+    				endNum=6;
     				/*document.getElementById("todownload").style.display="none";*/
     				//设置结算信息
     				setEnd_info(details);
@@ -412,7 +437,7 @@
 			}
 		}
     	
-    	
+    });	
     	
     </script>
 </head>
@@ -424,117 +449,130 @@
 	</header>
 	<div class="mui-content sc_listdeta" id="listDetails">
 		<div  class="mui-slider-indicator mui-segmented-control">
-			<a class="mui-control-item mui-active" href="#item1">结算明细</a>
-			<a class="mui-control-item" href="#item2">历史成交明细</a>
+			<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
+			<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
 		</div>
-	<div id="item1" class="mui-control-content mui-active">
-		<ul class="mui-table-view sc_listtime">
-			<li class="mui-table-view-cell">
-				<label>投资标的：</label>
-				<p id="trade_type"></p>
-			</li>			
-			<li class="mui-table-view-cell">
-				<label>交易时间：</label>
-				<span>09:05-23:55 不同期货不同交易时间段</span>
-			</li>
-		</ul>		
-		<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
-		<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
-		<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
-		<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
-		<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
-			<li class="mui-table-view-cell">
-				<label>操盘账户：</label>
-				<span id="trade_account">1000000</span>
-			</li>		
-			<li class="mui-table-view-cell">
-				<label>操盘密码：</label>
-				<span id="trade_password">1000000</span>
-			</li>
-			<button class="mui-btn" id="immediately">立即操盘</button>
-		</ul>
-		<ul class="mui-table-view sc_listsc">
-			<li class="mui-table-view-cell">
-				<label>方案申请时间：</label>
-				<span id="app_time">2016-01-29 14:49</span>
-			</li>			
-			<li class="mui-table-view-cell">
-				<label>最大持仓手数：</label>
-				<span id="tranLever">4手</span>
-			</li>	
-			<li class="mui-table-view-cell">
-				<label>操盘保证金(¥)：</label>
-				<span id="traderBond">27,750元</span>
-			</li>	
-			<li class="mui-table-view-cell">
-				<label>追加保证金(¥)：</label>
-				<span id="appendTraderBond">0元</span>
-				<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
-			</li>	
-			<li class="mui-table-view-cell">
-				<label>总操盘资金($)：</label>
-				<span id="traderTotal">10,750美元</span>
-			</li>
-			<li class="mui-table-view-cell">
-				<label>亏损平仓线($)：</label>
-				<span id="lineLoss">10,450美元</span>
-			</li>
-			<li class="mui-table-view-cell">
-				<label>账户管理费(¥)：</label>
-				<span id="feeManage">免费</span>
-			</li>
-		</ul>		
-		<div id="end_info" style="display: block;">
-			<ul class="mui-table-view dt_money">
+		<div id="item1" class="mui-control-content  mui-active">
+			<ul class="mui-table-view sc_listtime">
 				<li class="mui-table-view-cell">
-					<label>方案结算时间：</label>
-					<span id="end_time">2016-02-08 16:10</span>
-				</li>
+					<label>投资标的：</label>
+					<p id="trade_type"></p>
+				</li>			
 				<li class="mui-table-view-cell">
-					<label>交易盈亏($)：</label>
-					<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
+					<label>交易时间：</label>
+					<span>09:05-23:55 不同期货不同交易时间段</span>
 				</li>
+			</ul>		
+			<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
+			<div class="sc_listopen" id="using" style="display: none;">操盘中</div>
+			<div class="sc_liststatus" id="open_fail" style="display: none;">开户失败</div>
+			<div class="sc_liststatus" id="end" style="display: none;">方案已结算</div>
+			<ul class="mui-table-view sc_listac" style="display: none;" id="trade_info">
 				<li class="mui-table-view-cell">
-					<label>美元结算汇率：</label>
-					<span id="endParities">1美元 = 6.5327人民币</span>
+					<label>操盘账户：</label>
+					<span id="trade_account">1000000</span>
+				</li>		
+				<li class="mui-table-view-cell">
+					<label>操盘密码：</label>
+					<span id="trade_password">1000000</span>
 				</li>
-			</ul>	
-			<div class="dt_grid" id="tranActualLever_grid">
-				<ul class="mui-table-view mui-grid-view mui-grid-9">
-				</ul>
-			</div>	
+				<button class="mui-btn" id="immediately">立即操盘</button>
+			</ul>
 			<ul class="mui-table-view sc_listsc">
 				<li class="mui-table-view-cell">
-					<label>结算金额(¥)：</label>
-					<span id="endAmount">8,355.24元</span>
+					<label>方案申请时间：</label>
+					<span id="app_time">2016-01-29 14:49</span>
+				</li>			
+				<li class="mui-table-view-cell">
+					<label>最大持仓手数：</label>
+					<span id="tranLever">4手</span>
+				</li>	
+				<li class="mui-table-view-cell">
+					<label>操盘保证金(¥)：</label>
+					<span id="traderBond">27,750元</span>
+				</li>	
+				<li class="mui-table-view-cell">
+					<label>追加保证金(¥)：</label>
+					<span id="appendTraderBond">0元</span>
+					<a href="javascript:void(0);" id="add_fund" style="display: none;"><span class="mui-icon mui-icon-plusempty"></span>追加资金</a>
+				</li>	
+				<li class="mui-table-view-cell">
+					<label>总操盘资金($)：</label>
+					<span id="traderTotal">10,750美元</span>
 				</li>
-			</ul>
-			<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
-		</div>
-		<div class="ac_btn">
-			<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: block;">申请终结方案</button>								
-		</div>
-	</div>
-	<div id="item2" class="mui-control-content ">
-				<table id="historyDetailsTable">
-					<thead>
-						<tr>
-							<td width="50px">序号</td>
-							<td width="80px">合约名称</td>
-							<td width="80px">交易盈亏</td>
-							<td width="80px">交易手数</td>
-							<td width="80px">交易手续费</td>
-							<td width="80px">成交价</td>
-							<td width="60px">买卖</td>
-							<td width="110px">买入/卖出价格</td>
-							<td width="200px">结算时间</td>
-						</tr>
-					</thead>
-				</table>
+				<li class="mui-table-view-cell">
+					<label>亏损平仓线($)：</label>
+					<span id="lineLoss">10,450美元</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<label>账户管理费(¥)：</label>
+					<span id="feeManage">免费</span>
+				</li>
+			</ul>		
+			<div id="end_info" style="display: none;">
+				<ul class="mui-table-view dt_money">
+					<li class="mui-table-view-cell">
+						<label>方案结算时间：</label>
+						<span id="end_time">2016-02-08 16:10</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>交易盈亏($)：</label>
+						<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>美元结算汇率：</label>
+						<span id="endParities">1美元 = 6.5327人民币</span>
+					</li>
+				</ul>	
+				<div class="dt_grid" id="tranActualLever_grid">
+					<ul class="mui-table-view mui-grid-view mui-grid-9">
+					</ul>
+				</div>	
+				<ul class="mui-table-view sc_listsc">
+					<li class="mui-table-view-cell">
+						<label>结算金额(¥)：</label>
+						<span id="endAmount">8,355.24元</span>
+					</li>
+				</ul>
+				<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
 			</div>
+			<div class="ac_btn">
+				<button id="endtolist" class="mui-btn mui-btn-block sc_listbtn" type="button" style="display: none;">申请终结方案</button>								
+			</div>
+				
+		</div>
+		<div id="item2" class="mui-control-content ">
+					<table id="historyDetailsTable">
+						<thead>
+							<tr>
+								<td width="50px">序号</td>
+								<td width="200px">成交日期</td>
+								<td width="100px">客户名称</td>
+								<td width="100px">客户号</td>
+								<td width="100px">币种</td>
+								<td width="100px">交易所</td>
+								<td width="80px">品种</td>
+								<td width="100px">交易手数</td>
+								<td width="100px">成交价</td>
+								<td width="80px">手续费</td>
+								<td width="100px">下单类型</td>
+								<td width="100px">下单人编号</td>
+								<td width="100px">下单人姓名</td>
+								<td width="100px">成交类型</td>
+							</tr>
+						</thead>
+					</table>
+		</div>
 		<div id="shareDiv">
 			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin">分享</button>
 		</div>
+		<input id="sharecontent" type="hidden" value=""></input>
+		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
+		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
+		<div id="output" style="opacity: 0;"></div>
 	</div>
+	<script src="../../js/share.js"></script>
+	<script src="../../js/immersed.js"></script>
 </body>
 </html>

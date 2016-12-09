@@ -1,0 +1,32 @@
+#stockQuotesDetails { width: 1280px; margin: 0 auto; padding-bottom: 36px;}
+#stockQuotesDetails .stockQuotesDetails_left {float: left; width: 720px; margin-top: 10px; margin-bottom: 20px;}
+#stockQuotesDetails .calendar {background: #fff; margin-top: 10px; border-bottom: 2px solid #ffb725; vertical-align: middle; position: relative; height: 40px; line-height: 40px;}
+#stockQuotesDetails .calendar span {margin-left: 10px; font-size: 16px;}
+#stockQuotesDetails .calendar .icon {position: absolute; left: 0; top: 10px;}
+#stockQuotesDetails .center {border-bottom: 1px solid #e6e6e6;}
+#stockQuotesDetails .center .p1 {font-size: 24px; color: #333; padding: 20px 0; font-weight: bolder;}
+#stockQuotesDetails .center .p2 {font-size: 14px; color: #999; padding: 10px 0; border-bottom: 1px solid #e6e6e6;}
+#stockQuotesDetails .center .p3 {font-size: 16px; color: #666;line-height: 30px; padding: 15px 0; }
+#stockQuotesDetails .center .p4 {font-size: 14px; color: #999; text-align: right; padding: 10px 0;}
+#stockQuotesDetails .center .p4 span {margin-left: 20px;}
+#stockQuotesDetails .center .p4 span:hover {cursor: pointer;}
+#stockQuotesDetails .stockQuotesDetails_right {float: right; width: 360px; margin-top: 10px; margin-bottom: 20px;}
+#stockQuotesDetails .stockQuotesDetails_right .center {padding: 10px 0 10px 10px; height: 100px;}
+#stockQuotesDetails .stockQuotesDetails_right .center img {float: left;}
+#stockQuotesDetails .stockQuotesDetails_right .center p {float: left; width: 180px; height: 100px; margin-left: 20px; line-height: 24px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

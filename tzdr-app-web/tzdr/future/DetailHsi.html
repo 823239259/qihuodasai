@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+    <script src="../../js/common1.js"></script>
+    <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init();
     	var win=null;
@@ -53,21 +55,25 @@
     		}
     		
     		function insertDateils(data){
-    			for(var i=0;i<data.length;i++){
+				for(var i=0;i<data.length;i++){
     				var _data = data[i];
     				$("#historyDetailsTable").append("<tr>"+
-	    			"<td>"+i+"</td>"+
-	    			"<td>"+_data.commodityNo+_data.contractNo+"</td>"+
-	    			"<td>"+_data.flat+"</td>"+
-	    			"<td>"+_data.tradeNum+"</td>"+
-	    			"<td>"+_data.free+"</td>"+
-	    			"<td>"+_data.drection+"</td>"+
-	    			"<td>"+_data.tradePrice+"</td>"+
-	    			"<td>"+_data.orderPrice+"</td>"+
-	    			"<td>"+_data.marketDate+"</td>"+
+    						"<td>"+i+"</td>" +
+	    				"<td>"+_data.tradeDate+"</td>" +
+						"<td>"+_data.username+"</td>" +
+						"<td>"+_data.userNo+"</td>" +
+						"<td>"+_data.currencyNo+"</td>" +
+						"<td>"+_data.exchangeNo+"</td>" +
+						"<td>"+_data.commodityNo+"</td>" +
+						"<td>"+parseInt(_data.buyNum)+parseInt(_data.sellNum)+"</td>" +
+						"<td>"+_data.tradePrice+"</td>" +
+						"<td>"+_data.free+"</td>" +
+						"<td>"+_data.orderType+"</td>" +
+						"<td>"+_data.orderUserno+"</td>" +
+						"<td>"+_data.orderUsername+"</td>" +
+						"<td>"+_data.tradeType+"</td>" +
 	    			"</tr>");
     			}
-    			
     		} 		
     		
     		document.getElementById("tran_info").addEventListener("tap",function(){
@@ -79,11 +85,15 @@
     				url:"add.html",
     				id:"add.html",
     				extras:{
-    					did:win.did,businessPageId:'DetailHsi.html'  
+    					did:win.did,businessPageId:'future/DetailHsi.html'  
     				}
     			});
     		});
-    		
+	    	document.getElementById("sharePay").addEventListener("tap",function(){
+	    		if(endNum==6){
+	    			shareHref();
+	    		}
+	    	})
     		//给申请终结方案添加点击事件
     		document.getElementById("endtolist").addEventListener("tap",function(){
     			document.getElementById("endtolist").setAttribute("disabled",true);
@@ -97,7 +107,7 @@
 	    				url:"end.html",
 	    				id:"end.html",
 	    				extras:{
-	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:7,businessPageId:'DetailHsi.html' 
+	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:7,businessPageId:'future/DetailHsi.html' 
 	    				}
 	    			});
 				},function(result){
@@ -115,8 +125,20 @@
     				 }
     			})
     		})
-    	});
-    	
+    		var endNum=0;
+	    	document.getElementById("historyButton").addEventListener("tap",function(){
+	    		if(endNum!=6){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("方案未结算，暂无数据显示...");
+
+	    			},10)
+	    			return
+	    		}
+	    		$("#historyButton").attr("href","#item2");
+	    		
+	    	})
     	
     	function setDetails(details){
     		document.getElementById("trade_account").innerHTML=details.tranAccount;
@@ -164,6 +186,10 @@
     				break;
     			case 6:
     				document.getElementById("end").style.display="block";
+    				$("#historyButton").removeClass("mui-active");
+    				$("#detailButton").text("结算明细");
+    				$("#detailButton").text("结算明细");
+    				endNum=6;
     				/*document.getElementById("todownload").style.display="none";*/
     				//设置结算信息
     				setEnd_info(details);
@@ -235,7 +261,7 @@
 				mui.toast("复制成功！");
 			}
 		}
-    	
+    	});    	
     </script>
 </head>
 <body>
@@ -246,8 +272,8 @@
 	</header>
 	<div class="mui-content sc_listdeta" id="listDetails">
 		<div  class="mui-slider-indicator mui-segmented-control">
-			<a class="mui-control-item mui-active" href="#item1">结算明细</a>
-			<a class="mui-control-item" href="#item2">历史成交明细</a>
+			<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
+			<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
 		</div>
 		<div id="item1" class="mui-control-content mui-active">
 			<ul class="mui-table-view sc_listtime">
@@ -360,21 +386,34 @@
 				<thead>
 					<tr>
 						<td width="50px">序号</td>
-						<td width="80px">合约名称</td>
-						<td width="80px">交易盈亏</td>
-						<td width="80px">交易手数</td>
-						<td width="80px">交易手续费</td>
-						<td width="80px">成交价</td>
-						<td width="60px">买卖</td>
-						<td width="110px">买入/卖出价格</td>
-						<td width="200px">结算时间</td>
+						<td width="200px">成交日期</td>
+						<td width="100px">客户名称</td>
+						<td width="100px">客户号</td>
+						<td width="100px">币种</td>
+						<td width="100px">交易所</td>
+						<td width="80px">品种</td>
+						<td width="100px">交易手数</td>
+						<td width="100px">成交价</td>
+						<td width="80px">手续费</td>
+						<td width="100px">下单类型</td>
+						<td width="100px">下单人编号</td>
+						<td width="100px">下单人姓名</td>
+						<td width="100px">成交类型</td>
 					</tr>
 				</thead>
 			</table>
 		</div>
 		<div id="shareDiv">
-			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin">分享</button>
+			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin" >分享</button>
 		</div>
+		<input id="sharecontent" type="hidden" value=""></input>
+		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
+		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
+		<div id="output" style="opacity: 0;"></div>
+	</div>
+	<script src="../../js/share.js"></script>
+	<script src="../../js/immersed.js"></script>
 	</div>
 </body>
 </html>

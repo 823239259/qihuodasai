@@ -649,7 +649,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	background-color: #FFCC33;
 	border: 1px solid #333333;
     color: #333333;
-    z-index: 999;
+    z-index: 1;
 }
 .order_tips,.carefulIcon{
 	color:#ffdd33;
@@ -719,9 +719,9 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	width: 100%;
 	height: auto;
 }
-#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 820px;}
-#historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 40px;line-height: 40px;}
-#historyDetailsTable  tr td{font-size: 14px;color:#666666;}
+#historyDetailsTable{height: auto;background-color: #FFFFFF;width: 1200px;}
+#historyDetailsTable  tr{border-bottom: 1px solid #e6e6e6;height: 40px;line-height: 40px}
+#historyDetailsTable  tr td{font-size: 14px;color:#666666;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;text-align: left;}
 #historyDetailsTable tr td:nth-child(1){padding-left: 8px;}
 #historyDetailsTable  tr td:nth-last-child(1){padding-right: 8px;}
 #historyDetailsTable thead tr{height: 30px;line-height: 30px;text-align: left;color:#2b2b2b;font-size: 14px;}
@@ -747,4 +747,5 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	border: none;
 	position: absolute;
 	right: 0px;
+	background-color: #666666;
 }

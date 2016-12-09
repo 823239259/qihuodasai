@@ -476,9 +476,8 @@ public class PayServiceImpl extends BaseServiceImpl<RechargeList,PayDao> impleme
 	}
 
 	@Override
-	public String  doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,String remark) {
+	public String  doUpdatePingPPPaySuccessRecharge(String orderNo,String channel, Double amount, String transactionNo, String timePaid,Integer status,String remark) {
 		RechargeList charge=getEntityDao().findByNo(orderNo);
-		Integer status = TradeStatus.FAIL.getCode();
 		String userId =  null;
 		if(charge!=null && charge.getStatus() != status){
 			userId=charge.getUid();

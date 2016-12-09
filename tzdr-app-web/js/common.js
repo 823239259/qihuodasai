@@ -257,14 +257,16 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		//api_domain:"http://api.vs.com/",
 		api_domain:"http://test.api.vs.com/",
+		//api_domain:"http://api.vs.com/", 
 //		api_domain:"http://192.168.2.174:8080/tzdr-app/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//交易地址
 		TradeSocketUrl:"ws://139.224.24.206:6066",
 		TradeSocketModelUrl : "ws://139.224.24.206:6066",
+//		TradeSocketUrl:"ws://139.224.24.206:6067",
+//		TradeSocketModelUrl : "ws://139.224.24.206:6067",
 		//交易版本
 		tradeSocketVersion: "2.0.0",
 		tradeAppVersion: "2.0.0",
@@ -640,3 +642,6 @@ function initBottom(data){
 					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
 				});
 	}
+String.prototype.trim = function() {
+  return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}

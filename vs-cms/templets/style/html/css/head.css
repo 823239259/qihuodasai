@@ -1,0 +1,165 @@
+
+/***********ͷ��**************/
+#headerTop{
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #1a1a1a;
+}
+#header{
+    height: 40px;
+    line-height: 40px;
+}
+#customerTel{
+    width: 49.5%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    display: inline-block;
+    color:#ffb319;
+}
+#headerTopRight{
+    width: 50%;
+    display: inline-block;
+    text-align: right;
+}
+#headerTopRight span{
+    cursor: pointer;
+    position: relative;
+}
+#headerTopRight span input{
+    background: url("../image/grayBackgroudColor.png");
+    border: 0px;
+    height: 30px;
+    width: 178px;
+    outline: none;
+    display: none;
+    padding:0px 27px 0px 5px;
+}
+#headerTopRight span img{
+    position: absolute;
+    right: 5px;
+    top:1px;
+}
+#headerTopRight a{
+    vertical-align: middle;
+    font-size: 14px;
+    color:#ffffff;
+}
+.verticalLine{
+    margin:0px 5px;
+    color:#ffffff;
+    font-style: normal;
+    font-size: 12px;
+}
+#nav{
+    width: auto;
+}
+/**************������*************************/
+#headerBottom {
+    border-top: 1px solid #4d4d4d;
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+}
+#headerBottom #logo {
+    height: 80px;
+    float: left;
+    width: 140px;
+}
+#headerBottom #logo img {
+    margin-top: 20px;
+}
+#headerBottom #nav {
+    float: right;
+    height: 80px;
+    width: auto;
+    position: relative;
+}
+#headerBottom #nav ul {
+    list-style-type: none;
+    width: auto;
+    height: 80px;
+    font-size: 16px;
+}
+#headerBottom #nav ul a {
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+    color: #ffffff;
+}
+#headerBottom #nav ul li {
+    float: left;
+    margin-left: 50px;
+    line-height: 80px;
+    position: relative;
+}
+.Triangle {
+    position: absolute;
+    top: 17px;
+    height: 0;
+    left: 28px;
+    display: none;
+}
+#loginDivContent {
+    position: fixed;
+    top: 100px;
+    left: 500px;
+    z-index: 999;
+    display: none;
+}
+#loginDivTitle {
+    height: 383px;
+    width: 360px;
+    background-color: #ffffff;
+}
+#loginDivTitle p {
+    width: 300px;
+    padding: 0px 30px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    border-bottom: 1px solid #e6e6e6;
+}
+#loginDivTitle p #close {
+    margin-left: 100px;
+    cursor: pointer;
+}
+#loginDivTitle #informationLogin {
+    width: 300px;
+    padding: 0px 30px;
+}
+#loginDivTitle #informationLogin p {
+    height: 50px;
+    padding: 30px 0px 0px 0px;
+    border-bottom: 1px solid #e6e6e6;
+    color: #999999;
+    font-size: 14px;
+}
+#loginDivTitle #informationLogin p label {
+    margin-top: 46px;
+}
+#loginDivTitle #informationLogin p input {
+    border: none;
+    height: 40px;
+    width: 250px;
+    outline: none;
+    padding-left: 5px;
+}
+#loginDivTitle #informationLogin p #checkBox {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+#loginDivTitle #informationLogin p #ForgetPassword {
+    margin-left: 107px;
+    color: #ffb319;
+}
+#loginDivTitle a {
+    color: #333333;
+}
+#loginDivTitle i {
+    font-style: normal;
+    margin: 0px 10px;
+    color: #e6e6e6;
+}

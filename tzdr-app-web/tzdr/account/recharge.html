@@ -56,7 +56,7 @@
 					tzdr.init.initHearListener();
 					var wv = plus.webview.currentWebview();
 					vText=wv.money;
-					var moneyAll=0;
+					var moneyAll=1;
 					//添加充值金额文本框监听
 				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
@@ -101,10 +101,7 @@
       							accountBalance.innerHTML=result.data.balance;
       							changeAllBalance();
       							if(vText != null){
-									var vTextlength = vText.length;
-					              var cb = vText.substring(0,vTextlength - 1);
-					              var chargeBalance = cb.replace(",","");
-					              var chargeAmount = chargeBalance - result.data.balance; 
+					              var chargeAmount = tzdr.moneyUtils.reverseMoney(vText) - result.data.balance; 
 					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
 					              changeAllBalance();
@@ -112,10 +109,7 @@
       					}else{
       						accountBalance.innerHTML="0.00";
       						if(vText != null){
-									var vTextlength = vText.length;
-					              var cb = vText.substring(0,vTextlength - 1);
-					              var chargeBalance = cb.replace(",","");
-					              var chargeAmount = chargeBalance - result.data.balance; 
+					              var chargeAmount = tzdr.moneyUtils.reverseMoney(vText) - result.data.balance; 
 					              moneyAll=chargeAmount;
 					              document.getElementById("inputMoney").value = chargeAmount;
 								}
@@ -141,12 +135,18 @@
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
+				console.log(money1);
+				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
 					return;  
 				}
 				if(money1 > money){
 					mui.toast("充值金额不低于"+money1+"元");
+					return; 
+				}
+				if(money2 < money){
+					mui.toast("充值金额不高于"+money2+"元");
 					return; 
 				}
 				mui.openWindow({

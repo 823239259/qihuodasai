@@ -1,0 +1,64 @@
+body {background: #f2f2f2;}
+/*资讯日历*/
+#headerBottom #nav #Triangle {left: 508px;}
+#realTimeNews {width: 1280px; margin: 0 auto; padding-bottom: 36px;}
+#realTimeNews .realTimeNews_left .clock_data {float: right; margin-right: 10px;}
+#realTimeNews .realTimeNews_left .clock {position: relative; top: 2px; right: 5px;}
+#realTimeNews .realTimeNews_left {float: left; width: 908px; margin-top: 10px; margin-bottom: 20px;}
+#realTimeNews .realTimeNews_left .news {padding: 0 10px; background: #fff; color: #666; font-size: 14px; display: inline-block; border-bottom: 2px solid #ccc;}
+#realTimeNews .realTimeNews_left .news .icon_time {float: left; color: #fff;padding-left: 4px; background: url("/templets/style/html/images/image/icon-time.png") no-repeat; width: 50px; height: 20px; display: inline-block;}
+#realTimeNews .realTimeNews_left .news .title {float: left; width: 833px; padding-bottom: 10px; line-height: 24px;}
+#realTimeNews .realTimeNews_left .news div {display: inline-block; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
+#realTimeNews .realTimeNews_left .news .operation {float: right;color: #999; font-size: 12px;}
+#realTimeNews .realTimeNews_left .news .operation a {color: #999; font-size: 12px; margin-right: 50px;}
+#realTimeNews .realTimeNews_left .news .more {text-align: center; width: 100%; padding: 40px 0; border-bottom: none;}
+#realTimeNews .realTimeNews_left .news .more a {color: #ffb319; font-size: 16px; border: 1px solid #ffb319;  width: 240px; height: 40px; line-height: 40px; display: inline-block; border-radius: 4px;}
+#realTimeNews .realTimeNews_left .news .more a:hover {background: #ffb319; color: #fff; cursor: pointer;}
+#realTimeNews .calendar {background: #fff; margin-top: 10px; border-bottom: 2px solid #ffb725; vertical-align: middle; position: relative; height: 40px; line-height: 40px;}
+#realTimeNews .calendar span {margin-left: 10px; font-size: 16px;}
+#realTimeNews .calendar .icon {position: absolute; left: 0; top: 10px;}
+#realTimeNews .realTimeNews_right {margin-top: 10px; float: left; width: 362px; margin-left: 10px; color: #666; font-size: 14px;}
+#realTimeNews .calendar .more {float: right; margin-right: 10px;}
+#realTimeNews .realTimeNews_right .economicCalendarQuotation {background: #fff;}
+#realTimeNews .realTimeNews_right .economicCalendarQuotation .quotation_chart {height: 180px;}
+#realTimeNews .realTimeNews_right .economicCalendarQuotation .quotation_title:hover {cursor: pointer;}
+#realTimeNews .realTimeNews_right .economicCalendarQuotation .quotation_title {padding: 0 10px; margin-top: -1px; border-top: 1px solid #dadada; border-bottom: 1px solid #dadada; height: 60px; line-height: 60px;}
+#realTimeNews .realTimeNews_right .economicCalendarQuotation .quotation_title span {width: 82px; display: inline-block;}
+#realTimeNews .realTimeNews_right .economicCalendarQuotation .on {background: #f2f2f2;}
+#realTimeNews .realTimeNews_right .economicCalendarViewpoint .quotation_title {height: 60px; line-height: 60px; margin: -1px auto 0; border-top: 1px solid #dadada;width: 342px;}
+#realTimeNews .realTimeNews_right .economicCalendarViewpoint .quotation_title a:hover{color: #ffb319;}
+#realTimeNews .realTimeNews_right .economicCalendarViewpoint {background: #fff;}
+.calendar-link{
+    display: none;!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
