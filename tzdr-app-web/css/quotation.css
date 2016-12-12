@@ -1199,94 +1199,51 @@ input{
 .evenPrice{
 	font-style: normal;
 }
-#stopChoicePrices,#lossChoicePrices{
-	width: 36%;
-	position: relative;
-	padding: 4px;
-	background: url(../images/graySanjiaoBg.png) no-repeat;
-	background-size: 8% auto;
-	background-position: 93% 14px;
-}
-#lossChoicePrices{
-	width: 36%;
-	padding: 4px;
-}
 #stopChoicePrices1{
 	margin-left: 2%;
 	width: 36%;
 	position: relative;
 	padding: 4px;
 }
-ul{
-	list-style-type: none;
-}
-#pricesChoice{
-	width: 28%;
-	position: absolute;
-	top:85px;
-	color:#999999;
-	background-color: #454545;
-	z-index: 999;
-	display: none;
-	left: 19.6%;
-	padding:0px;
-	margin: 0px;
-}
-#pricesChoice .mui-popover-arrow:after{
-	width: 20px;
-	height: 20px;
-	background-color: #454545;
-}
-#pricesChoice li{
-	width: 100%;
-	text-align: center;
-	height: 30px;
-	font-size: 14px;
-	line-height: 30px;
-	border-bottom: 1px solid #121212;
-}
 #Increase,#Increase1{
 	margin-left: 8px;
 	font-size: 14px;
 	color:#999999;
-}
-#stopLossPriceInput,#lossStopPriceInput{
-	width: 40%;
-	padding: 0px 10px 0px 0px;
-	background: url(../images/graySanjiaoBg.png) no-repeat;
-	background-size: 13% auto;
-	background-position: 93% 14px;
-	margin-left: 1%;
-	position: relative;
-}
-
-#stopLossPrices1,#stopLossPrices2{
-	position: absolute;
-	width: 18%;
-	right: 8px;
-	top:120px;
-	background-color: #454545;
-	height: auto;
-	margin: 0px;
-	padding: 0px;
-	color:#999999;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	font-size: 14px;
-	display: none;
-}
-#stopLossPrices1 .mui-popover-arrow:after,#stopLossPrices2 .mui-popover-arrow:after{
-	width: 20px;
-	height: 20px;
-	top:22px;
-	background-color: #454545;
 }
 #closeStopTable,#insertStopData,#closeLossTable,#insertLossData{
 	border-right: 1px solid #121212;
 	text-align: center;
 	color: #CCCCCC;
 	font-size: 16px;
+}
+#choiceStopPrices,#choiceStopPrices3{
+	width: 38%;
+	display: inline-block;
+	color:#cccccc;
+	padding-left: 5px;
+	display: inline-block;
+	background-size: 8% auto;
+	background-position: 90% 14px;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 5px;
+	
+}
+#choiceStopPrices1,#choiceStopPrices4{
+	width: 45%;
+	display: inline-block;
+	color:#cccccc;
+	padding-left: 5px;
+	display: inline-block;
+	background-size: 8% auto;
+	background-position: 90% 14px;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 5px;
 }
 /*条件单**/
 #segmentedControlCondition{

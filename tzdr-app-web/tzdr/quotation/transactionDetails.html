@@ -299,7 +299,7 @@
 						            </ul>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-						             <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss">止损止盈</button>
+						             <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" ><a href="#popoverLoss">止损止盈</a></button>
 						        </div>
 						        <div id="item2" class="mui-control-content">
 						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
@@ -401,23 +401,22 @@
 				    			<tr>
 				    				<td class="oddTd">方式</td>
 				    				<td  colspan="3">
-				    					<input type="text" value="止损价" id="stopChoicePrices"  readonly="readonly">
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices">
+				    						<option>止损价</option>
+				    						<option>动态价</option>
+				    					</select>
 				    					<input type="text" value="789" id="stopChoicePrices1"  readonly="readonly">
 				    					<span id="Increase">00</span>
 				    				</td>
-				    				<ul id="pricesChoice">
-				    					<div class="mui-popover-arrow"></div>
-				    					<li>动态价</li>
-				    				</ul>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
 				    				<td class="evenTd "><input type="text" value="1" id="stopNumber" class="stopCommStyle"></td>
-				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：<input type="text" value="市价" readonly="readonly" id="stopLossPriceInput"></td>
-				    				<ul id="stopLossPrices1">
-				    					<div class="mui-popover-arrow"></div>
-				    					<li>对手价</li>
-				    				</ul>
+				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices1">
+				    						<option>市价</option>
+				    					</select>
+				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td colspan="2" id="closeStopTable">关闭</td>
@@ -436,7 +435,9 @@
 				    			<tr>
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
-				    					<input type="text" value="止损价" id="lossChoicePrices"  readonly="readonly">
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices">
+				    						<option>止损价</option>
+				    					</select>
 				    					<span id="Increase1">00</span>
 				    				</td>
 				    			</tr>
@@ -444,9 +445,10 @@
 				    				<td class="oddTd">手数</td>
 				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
-				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract">
-				    						<option>富时A50</option>
-				    					</select></td>
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices4">
+				    						<option>市价</option>
+				    					</select>
+				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td colspan="2" id="closeLossTable">关闭</td>
@@ -817,51 +819,21 @@
 				document.getElementById("stopLoss").addEventListener("tap",function(){
 						mui("#popoverLoss").popover("toggle");
 				});
-				document.getElementById("stopChoicePrices").addEventListener("tap",function(){
-					$("#pricesChoice").css("display","block");
-				});
-				$("#pricesChoice").on("tap","li",function(){
-					var text=$(this).text();
-					var val=$("#stopChoicePrices").val();
-					$(this).text(val);
-					$("#stopChoicePrices").val(text);
-					$("#pricesChoice").css("display","none");
-				});
-				document.getElementById("stopLossPriceInput").addEventListener("tap",function(){
-					$("#stopLossPrices1").css("display","block");
-				})
-				$("#stopLossPrices1").on("tap","li",function(){
-					var text=$(this).text();
-					var val=$("#stopLossPriceInput").val();
-					$(this).text(val);
-					$("#stopLossPriceInput").val(text);
-					$("#stopLossPrices1").css("display","none");
-				});
-				document.getElementById("lossStopPriceInput").addEventListener("tap",function(){
-					$("#stopLossPrices2").css("display","block");
-				})
-				$("#stopLossPrices2").on("tap","li",function(){
-					var text=$(this).text();
-					var val=$("#lossStopPriceInput").val();
-					$(this).text(val);
-					$("#lossStopPriceInput").val(text);
-					$("#stopLossPrices2").css("display","none");
-				});
 				document.getElementById("closeLossTable").addEventListener("tap",function(){
 					mui("#popoverLoss").popover("toggle");
 				});
 				document.getElementById("closeStopTable").addEventListener("tap",function(){
 					mui("#popoverLoss").popover("toggle");
 				});
-				document.getElementById("insertCondition").addEventListener("tap",function(){
-					mui("#popoverConditoion").popover("toggle");
-				});
-				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
-					mui("#popoverConditoion").popover("toggle");
-				});
-				document.getElementById("").addEventListener("tap",function(){
-					mui("#popoverConditoion").popover("toggle");
-				});
+//				document.getElementById("insertCondition").addEventListener("tap",function(){
+//					mui("#popoverConditoion").popover("toggle");
+//				});
+//				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
+//					mui("#popoverConditoion").popover("toggle");
+//				});
+//				document.getElementById("").addEventListener("tap",function(){
+//					mui("#popoverConditoion").popover("toggle");
+//				});
 			});
 		</script>
 		<script>
