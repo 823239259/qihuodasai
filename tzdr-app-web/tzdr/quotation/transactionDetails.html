@@ -462,7 +462,7 @@
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
-				    <a class="mui-pull-right" id="insertCondition" href="#popoverConditoion">添加</a>
+				    <a class="mui-pull-right" id="insertCondition">添加</a>
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 999;width: 100%;">
 					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
@@ -545,7 +545,7 @@
 				    			</tr>
 				    			<tr>
 				    				<td >方式</td>
-				    				<td style="border-right: 1px solid #121212;">
+				    				<td class="borderRight">
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
 				    						<option>=+</option>
 				    					</select>
@@ -560,66 +560,80 @@
 				    			</tr>
 				    			<tr>
 				    				<td >操作</td>
-				    				<td style="border-right: 1px solid #121212;">
-				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
+				    				<td class="borderRight">
+				    					<select class="mui-btn mui-btn-block selectComm" id="shopDrection">
 				    						<option>买</option>
 				    						<option>卖</option>
 				    					</select>
-				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelect">
 				    						<option>市价</option>
 				    						<option>限价</option>
 				    					</select>
 				    				</td>
-				    				<td colspan="2">
-				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
-				    						<option>附加</option>
-				    					</select>
-				    					<input type="number " value="89.64"  id="ConditoionPricesInput1" />
-				    				</td>
-				    				
+				    				<td class="borderRight">手数</td>
+				    				<td ><input type="number " value="89.64"  id="ConditoionPricesInput3" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>
-				    				<td>当日有效</td>
-				    			</tr>
-				    			<tr>
-				    				<td colspan="2" id="closeStopTable">关闭</td>
-				    				<td colspan="2" id="insertStopData" style="border-right: none;">添加</td>
+				    				<td colspan="3">当日有效</td>
 				    			</tr>
 				    		</table>
+							<button id="closeConditionTable">关闭</button>
+							<button id="insertConditionTable">添加</button>
 				    	</div>
 				    	<div id="ConditoionTitleTime" class="mui-control-content">
 				    		<table>
-				    			<tr>
-				    				<td class="oddTd">合约</td>
-				    				<td>
-				    					<select class="mui-btn mui-btn-block">
+								<tr>
+				    				<td >合约</td>
+				    				<td >
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract1">
 				    						<option>富时A50</option>
 				    					</select>
 				    				</td>
-				    			</tr>
-				    			<tr>
-				    				<td class="oddTd">价格</td>
-				    				<td  colspan="3">
-				    					<input type="text" value="止损价" id="lossChoicePrices"  readonly="readonly">
-				    					<span id="Increase1">00</span>
-				    				</td>
-				    			</tr>
-				    			<tr>
-				    				<td class="oddTd">操作</td>
-				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
-				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：<input type="text" value="市价" readonly="readonly" id="lossStopPriceInput"></td>
-				    				
-				    			</tr>
-				    			<tr>
-				    				<td>有效</td>
+				    				<td></td>
 				    				<td></td>
 				    			</tr>
 				    			<tr>
-				    				<td colspan="2" id="closeLossTable">关闭</td>
-				    				<td colspan="2" id="insertLossData" style="border-right: none;">添加</td>
+				    				<td >时间</td>
+				    				<td>
+				    					<input type="text" id="insertTimeInput"  value="18:00:00"/>
+				    				</td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+				    			<tr >
+				    				<td>价格</td>
+				    				<td>
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceTimeAdditional">
+				    						<option>附加</option>
+				    					</select>
+				    					<input type="number " value="89.64"  id="ConditoionTimePricesInput" />
+				    				</td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+				    			<tr>
+				    				<td >操作</td>
+				    				<td class="borderRight">
+				    					<select class="mui-btn mui-btn-block selectComm" id="shopDrectionTime">
+				    						<option>买</option>
+				    						<option>卖</option>
+				    					</select>
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelectTime">
+				    						<option>市价</option>
+				    						<option>限价</option>
+				    					</select>
+				    				</td>
+				    				<td class="borderRight">手数</td>
+				    				<td ><input type="number " value="10"  id="ConditoionTimeInput" /></td>
+				    			</tr>
+				    			<tr> 
+				    				<td>有效</td>
+				    				<td colspan="3">当日有效</td>
 				    			</tr>
 				    		</table>
+							<button id="closeConditionTable1">关闭</button>
+							<button id="insertConditionTable1">添加</button>
 				    	</div>
 				    </div>
 				</div>
