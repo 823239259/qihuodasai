@@ -443,11 +443,10 @@
 				    			<tr>
 				    				<td class="oddTd">手数</td>
 				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
-				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：<input type="text" value="市价" readonly="readonly" id="lossStopPriceInput"></td>
-				    				<ul id="stopLossPrices2">
-				    					<div class="mui-popover-arrow"></div>
-				    					<li>对手价</li>
-				    				</ul>
+				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract">
+				    						<option>富时A50</option>
+				    					</select></td>
 				    			</tr>
 				    			<tr>
 				    				<td colspan="2" id="closeLossTable">关闭</td>
@@ -458,7 +457,7 @@
 				    </div>
 				</div>
 			</div>
-			<div id="bg2">
+			<!--<div id="bg2">
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
@@ -637,7 +636,7 @@
 				    	</div>
 				    </div>
 				</div>
-			</div>
+			</div>-->
 		</body>
 			<script>
 				mui.plusReady(function(){
@@ -857,7 +856,12 @@
 				document.getElementById("insertCondition").addEventListener("tap",function(){
 					mui("#popoverConditoion").popover("toggle");
 				});
-				
+				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
+					mui("#popoverConditoion").popover("toggle");
+				});
+				document.getElementById("").addEventListener("tap",function(){
+					mui("#popoverConditoion").popover("toggle");
+				});
 			});
 		</script>
 		<script>
