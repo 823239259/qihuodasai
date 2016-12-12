@@ -1249,7 +1249,7 @@ input{
 #segmentedControlCondition{
 	width: 100%;
 }
-#NoCondition,#alreayCondition{
+#NoCondition,#alreayCondition,#alreayStopTale,#NoStopTale{
 	width:100%;
 	height: auto;
 	overflow-x: scroll; 
