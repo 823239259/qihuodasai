@@ -48,8 +48,8 @@
 				if(sharehrefDes&&sharehrefDes.value!=""){
 					msg.content=sharehrefDes.value;
 				}
-				msg.thumbs=["_www/logo.png"];
-				msg.pictures=["_www/logo.png"];
+				msg.thumbs=["http://cms.vs.com/uploads/topic/share/image/100.png"];
+				msg.pictures=["http://cms.vs.com/uploads/topic/share/image/100.png"];
 			}else{
 				if(pic&&pic.realUrl){
 					msg.pictures=[pic.realUrl];
