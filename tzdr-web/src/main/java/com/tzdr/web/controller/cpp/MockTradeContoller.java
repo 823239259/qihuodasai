@@ -40,10 +40,10 @@ public class MockTradeContoller {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateMock",method = RequestMethod.POST)
-	public JsonResult updateMockTradeAccount(HttpServletRequest request,@RequestParam("password")String password){
+	public JsonResult updateMockTradeAccount(HttpServletRequest request,@RequestParam("password")String password,@RequestParam(value = "username",required = false)String username){
 		UserSessionBean userSessionBean = (UserSessionBean)request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 		JsonResult resultJson = new JsonResult();
-		boolean flag = mockTradeAccountService.updateMockAccount(userSessionBean.getMobile(), password);
+		boolean flag = mockTradeAccountService.updateMockAccount(userSessionBean == null ? username : userSessionBean.getMobile(), password);
 		if(flag){
 			resultJson.setMessage("模拟账号开户成功");
 			resultJson.setSuccess(true);
