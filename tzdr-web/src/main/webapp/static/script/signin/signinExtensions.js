@@ -365,8 +365,7 @@ $(document).ready(function(){
 					}else{
 						var backData=$.trim($("#backData").val());
 						var source = $.trim($("#source").val());
-						
-						
+						openMockTrade(mobile,password);
 						if(backData && source == 3){
 							var form = $("<form action='"+backData+"' method='post'>");
 							form.append("<input type=hidden name=key value='" + data.data.key + "'/>");
@@ -399,6 +398,24 @@ $(document).ready(function(){
 	$("#mobile").focus();
 	
 });
+/**
+ * 模拟盘开户
+ * @param username
+ * @param password
+ */
+function openMockTrade(username,password){
+	$.ajax({
+		url:basepath+"/mock/trade/openMock",
+		type:"post",
+		data:{
+			username:username,
+			password:password
+		},
+		success:function(result){
+			
+		}
+	});
+}
 
 //显示协议
 function showAgreement(){
