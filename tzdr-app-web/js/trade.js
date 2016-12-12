@@ -142,7 +142,7 @@ function handleData(evt){
 			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
 				delDesignatesDom(orderId);
 			} else if (orderStatusWeHooks == 0) {
-				appendDesignates(orderParam);
+				updateDesignatesDom(orderParam);
 			} else if (orderStatusWeHooks == 1 || orderStatusWeHooks == 2) {
 				updateDesignatesDom(orderParam);
 			}
