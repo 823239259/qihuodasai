@@ -352,7 +352,8 @@
 					"tzdr/future/listrg.html",
 					"tzdr/account/bindingList.html",
 					"tzdr/account/bindWeixin.html",
-					"tzdr/account/accountno.html"
+					"tzdr/account/accountno.html",
+					"tzdr/login/retrievePassword.html"
 				],
 				"priority": 0
 			},

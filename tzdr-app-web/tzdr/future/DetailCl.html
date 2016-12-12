@@ -254,13 +254,12 @@
     		}else{
     			document.getElementById("endAmount").innerHTML=tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}
-    		var money1=tzdr.moneyUtils.reverseMoney(document.getElementById("traderBond").innerHTML) ;
-    		var money2=tzdr.moneyUtils.reverseMoney(document.getElementById("appendTraderBond").innerHTML);
-    		var money3=parseFloat(details.tranProfitLoss*details.endParities);
-    		var money4=tzdr.moneyUtils.reverseMoney(document.getElementById("tranFeesTotal").innerHTML);
-    		console.log(money1);
-    		var all=money1+money2+money3-money4;
-    		$(".dt_font").text("结算金额(¥"+all+") = 操盘保证金(¥"+money1+") + 追加保证金(¥"+money2+") + 交易盈亏(¥"+money3+") - 交易手续费(¥"+money4+")");
+    		var money1=tzdr.moneyUtils.reverseMoney(document.getElementById("traderBond").innerHTML).toFixed(2) ;
+    		var money2=tzdr.moneyUtils.reverseMoney(document.getElementById("appendTraderBond").innerHTML).toFixed(2);
+    		var money3=parseFloat(details.tranProfitLoss*details.endParities).toFixed(2);
+    		var money4=tzdr.moneyUtils.reverseMoney(document.getElementById("tranFeesTotal").innerHTML).toFixed(2);
+    		var all=Number(money1)+Number(money2)+Number(money3)-Number(money4);
+    		$(".dt_font").text("结算金额(¥"+all.toFixed(2)+") = 操盘保证金(¥"+money1+") + 追加保证金(¥"+money2+") + 交易盈亏(¥"+money3+") - 交易手续费(¥"+money4+")");
     
     	};
     	
