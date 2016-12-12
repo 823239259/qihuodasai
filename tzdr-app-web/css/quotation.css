@@ -1232,7 +1232,7 @@ input{
 	
 }
 #choiceStopPrices1,#choiceStopPrices4{
-	width: 45%;
+	width: 42%;
 	display: inline-block;
 	color:#cccccc;
 	padding-left: 5px;
@@ -1301,15 +1301,15 @@ input{
 	position: fixed;
 	top:180px;
 }
-#suspendCondition{
+#suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
 }
-#modifyCondition{
+#modifyCondition,#modifyCondition1{
 	right: 25%;
 	border-right: 1px solid #2b2b2b;
 }
-#deleteCondition{
+#deleteCondition,#deleteCondition1{
 	right: 0%;
 }
 #ConditoionTitlePrices table,#ConditoionTitleTime table {
@@ -1489,4 +1489,14 @@ input{
 	font-size: 14px;
 	border:none;
 	border-radius: 3px;
+}
+#insertCondition{
+	width: 40px;
+	display: inline-block;
+	margin-left: 5px;
+	height: 45px;
+	margin-top: 2px;
+	line-height: 45px;
+	background: url(../images/insertIon.png) no-repeat center center;
+	background-size: 50%;
 }
