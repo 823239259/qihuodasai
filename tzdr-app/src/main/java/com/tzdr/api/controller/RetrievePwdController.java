@@ -48,10 +48,6 @@ public class RetrievePwdController {
 	@Autowired
 	private SecurityInfoService securityInfoService;
 
-	@Autowired
-	private MockTradeAccountService mockTradeAccountService;
-	
-	
 
 	/**
 	 * 忘记密码 更新操作
@@ -81,11 +77,6 @@ public class RetrievePwdController {
 		wUser.setPassword(passwordService.encryptPassword(password, wUser.getLoginSalt()));
 		wUserService.updateUser(wUser);
 		AuthUtils.clearCacheUser(wUser.getId());
-		try {
-			mockTradeAccountService.openMockAccount(mobile, password);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"forget.password.update.success.");
 	}
 	/**

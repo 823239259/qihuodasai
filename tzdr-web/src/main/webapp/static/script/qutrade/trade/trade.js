@@ -1231,7 +1231,7 @@ $(function(){
 	 * 初始化交易配置 --> trade.config
 	 */
 	initTradeConfig();
-	//getVersion();
+	getVersion();
 	validateIsGetVersion();
 	$(".signLogin_span").bind("click",function(){
 		var $this = $(this);

@@ -390,6 +390,7 @@ $(document).ready(function(){
 							$("#loginUsername").val(mobile);
 							$("#loginPassword").val(password);
 							$("#loginForm").submit();*/
+							openMockTrade(mobile,password);
 							window.location.href = "/signinsucess";
 							/*
 							//达人论股系统登录
@@ -423,6 +424,24 @@ $(document).ready(function(){
 	$("#mobile").focus();
 	
 });
+/**
+ * 模拟盘开户
+ * @param username
+ * @param password
+ */
+function openMockTrade(username,password){
+	$.ajax({
+		url:basepath+"/mock/trade/openMock",
+		type:"post",
+		data:{
+			username:username,
+			password:password
+		},
+		success:function(result){
+			
+		}
+	});
+}
 
 //显示协议
 function showAgreement(){

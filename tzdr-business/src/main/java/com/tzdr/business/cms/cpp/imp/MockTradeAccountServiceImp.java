@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.config.CppConfig;
 import com.tzdr.cpp.DataSource;
 import com.tzdr.domain.dao.cpp.MockTradeAccountDao;
 import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
@@ -19,23 +20,20 @@ import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
 @Transactional
 @DataSource(value="dataSource2")
 public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount, MockTradeAccountDao> implements MockTradeAccountService {
+	@DataSource(value="dataSource2")
 	public boolean openMockAccount(String username,String password){
 		boolean flag = false;
-		//List<MockTradeAccount> accounts = getEntityDao().doGetMockTradeAccountByUsername(username);
+		List<Object> objectparam = new ArrayList<>();
+		objectparam.add(username);
+		List<MockTradeAccount> mockTradeAccounts =  nativeQuery("select ID as id,Username as username,Password as password from mock_trade_account where Username = ?", objectparam, MockTradeAccount.class);
 		List<Object[]> objects = new ArrayList<>();
-		/*if(accounts == null || accounts.size() == 0){*/
+		if(mockTradeAccounts == null || mockTradeAccounts.size() == 0){
 			Object[] objects2 = new Object[]{username,password};
 			objects.add(objects2);
-			/*try {*/
-				List<Object> objectparam = new ArrayList<>();
-				objectparam.add(username);
-				List<MockTradeAccount> mockTradeAccounts =  nativeQuery("select * from mock_trade_account where Username = ?", objectparam, MockTradeAccount.class);
-				for (int i = 0; i < mockTradeAccounts.size(); i++) {
-					System.out.println(mockTradeAccounts.get(i).getUsername());
-				}
-				/*batchSave("insert into mock_trade_account(Username,Password) value(?,?)", 1, objects);
-				Integer accountId = getEntityDao().doGetMockTradeAccountByUsernameOne(username).getId();*/
-				/*List<Map<String, Object>> maps =  getEntityDao().queryMapBySql("select CurrencyNo from a_currency_list", null);
+			try {
+				batchSave("insert into mock_trade_account(Username,Password) value(?,?)", 1, objects);
+				Integer accountId = getEntityDao().doGetMockTradeAccountByUsernameOne(username).getId();
+				List<Map<String, Object>> maps =  getEntityDao().queryMapBySql("select CurrencyNo from a_currency_list", null);
 				List<Object[]> mockTradeMoneyAccounts = new ArrayList<>();
 				String sql = "insert into mock_trade_money_account(AccountId,TradeAccountUsername,InMoney,TodayCanUse,TodayAmount,CloseProfit,CounterFee,CurrencyNo"
 						+ ",DayCloseProfit,DayFloatingProfit,Deposit,FloatingProfit,FrozenMoney,KeepDeposit,OldBalance,OldAmount,OldCanCashout,OldCanUse,OutMoney"
@@ -53,15 +51,30 @@ public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount
 					};
 						mockTradeMoneyAccounts.add(objectsMockTradeAccount);
 				}
-				batchSave(sql, maps.size(), mockTradeMoneyAccounts);*/
+				batchSave(sql, maps.size(), mockTradeMoneyAccounts);
 				flag = true;
-			/*} catch (SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
-			}*/
-		/*}else{
+			}
+		}else{
 			Object[] objects2 = new Object[]{password,username};
 			nativeUpdate("update mock_trade_account set Password = ? where Username = ?", objects2);
-		}*/
+		}
 		return flag;
+	}
+	/**
+	 * 修改模拟账号
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public boolean updateMockAccount(String username,String password){
+		Object[] objects2 = new Object[]{password,username};
+		int updateIndex = nativeUpdate("update mock_trade_account set Password = ? where Username = ?", objects2);
+		if(updateIndex > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

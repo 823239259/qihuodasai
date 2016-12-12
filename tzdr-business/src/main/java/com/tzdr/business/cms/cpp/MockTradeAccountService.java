@@ -11,4 +11,11 @@ public interface MockTradeAccountService extends BaseService<MockTradeAccount>{
 	 * @return
 	 */
 	public boolean openMockAccount(String username,String password);
+	/**
+	 * 修改模拟账号
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public boolean updateMockAccount(String username,String password);
 }

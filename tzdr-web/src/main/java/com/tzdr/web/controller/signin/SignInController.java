@@ -298,7 +298,7 @@ public class SignInController {
 			jsonResult.setMessage("mobileIsExist");
 			return jsonResult;
 		}
-		SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile); // 获取验证码信息
+		/*SecurityCode securityCode = securityCodeService.getSecurityCodeByMobile(mobile); // 获取验证码信息
 		if (securityCode == null || StringUtil.isBlank(code) || !code.equals(securityCode.getSecurityCode())) { // 判断验证码是否正确
 			jsonResult.setMessage("codeError");
 			return jsonResult;
@@ -309,7 +309,7 @@ public class SignInController {
 				&& wUserService.findByGeneralizeId(parentGeneralizeId) == null) {
 			jsonResult.setMessage("generalizeIdError");
 			return jsonResult;
-		}
+		}*/
 
 		WUser wUser = new WUser(); // 创建注册对象信息
 		wUser.setSource(source);
@@ -387,10 +387,6 @@ public class SignInController {
 		// 用户注册成功之后给用户手机发送短信
 		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
 		messagePromptService.registNotice(mobile, "web", "", "");
-		/*try {
-			mockTradeAccountService.openMockAccount(mobile, password);
-		} catch (Exception e) {
-		}*/
 		return jsonResult;
 	}
 	/**
