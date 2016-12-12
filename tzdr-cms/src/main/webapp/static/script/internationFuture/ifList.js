@@ -133,7 +133,6 @@ function input(){
 			$("#scTradeNumTR").hide();
 			$("#daxMinTradeNumTR").hide();
 			$("#inputWin").css("height","400px");
-
 		}
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
