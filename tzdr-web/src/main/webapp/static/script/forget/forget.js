@@ -159,7 +159,16 @@ $(document).ready(function(){
 			1000)  
 		}  
 	} 
-	
+	function updateMockAccount(password){
+		$.ajax({
+			url:basepath+"/mock/trade/updateMock",
+			type:"post",
+			data:{
+				password:password
+			},
+			success:function(){}
+		});
+	}
 	var yz=false;
 	//验证短信验证码
 	$('#checkPhone').blur(function(){
@@ -364,6 +373,7 @@ $(document).ready(function(){
 						//$.alertTip($("#password"),"密码设置失败 !");
 						showMsgDialog("提示","密码设置失败 !");
 					}else{
+						updateMockAccount(password);
 						//window.location.href=basepath+"forgetpw?step=3";
 						showMsgDialogRestPassWordLoadLoginUrl("提示","恭喜你，密码重置成功 !",3000);
 						//window.location.href=basepath+"/user/account";
