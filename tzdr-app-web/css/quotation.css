@@ -1500,3 +1500,6 @@ input{
 	background: url(../images/insertIon.png) no-repeat center center;
 	background-size: 50%;
 }
+#bg1,#bg,#bg3{
+	background-color: #2b2b2b;
+}
