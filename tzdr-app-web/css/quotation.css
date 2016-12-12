@@ -999,7 +999,7 @@ input{
 	z-index: 10;
 	background-color: rgba(0,0,0,0);
 }
-#backClose i,#backClose1 i,#backClose2 i{
+#backClose i,#stopBack i,#conditionBack i{
 	font-style: normal;
 	    font-size: 14px;
     vertical-align: 2px;
