@@ -24,7 +24,7 @@
 				margin-left: -141px;
 				background-color: #2b2b2b;
 			}
-			#popoverLoss,#popoverConditoion{
+			#popoverLoss{
 				min-width: 90%;
 				height: 200px ;
 				top:50% !important;
@@ -37,6 +37,14 @@
 					width: 80%;
 					margin-left: -40%;
 				}
+			}
+			#popoverConditoion{
+				min-width: 90%;
+				height: 240px ;
+				top:50% !important;
+				margin-top: -120px;
+				left: 5% !important;
+				background-color: #2b2b2b;
 			}
 			.mui-input-row label{
 				width: 45%;
@@ -454,7 +462,7 @@
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
-				    <a class="mui-pull-right" id="insertCondition">添加</a>
+				    <a class="mui-pull-right" id="insertCondition" href="#popoverConditoion">添加</a>
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 999;width: 100%;">
 					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
@@ -518,7 +526,7 @@
 				    </div>
 				</div>
 				<div id="popoverConditoion" class="mui-popover">
-				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+				    <div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#ConditoionTitlePrices" >价格条件</a>
 				        <a class="mui-control-item" href="#ConditoionTitleTime" >时间条件</a>
 				    </div>
@@ -526,33 +534,53 @@
 				    	<div id="ConditoionTitlePrices" class="mui-control-content mui-active">
 				    		<table>
 								<tr>
-				    				<td class="oddTd">合约</td>
-				    				<td>
+				    				<td >合约</td>
+				    				<td >
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract">
 				    						<option>富时A50</option>
 				    					</select>
 				    				</td>
+				    				<td></td>
+				    				<td></td>
 				    			</tr>
 				    			<tr>
-				    				<td class="oddTd">方式</td>
-				    				<td  colspan="3">
-				    					<input type="text" value="止损价" id="stopChoicePrices"  readonly="readonly">
-				    					<input type="text" value="789" id="stopChoicePrices1"  readonly="readonly">
-				    					<span id="Increase">00</span>
+				    				<td >方式</td>
+				    				<td style="border-right: 1px solid #121212;">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
+				    						<option>=+</option>
+				    					</select>
+				    					<input type="number" value="89.64"  id="ConditoionPricesInput"/>
 				    				</td>
-				    				<ul id="pricesChoice">
-				    					<div class="mui-popover-arrow"></div>
-				    					<li>动态价</li>
-				    				</ul>
+				    				<td colspan="2">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
+				    						<option>附加</option>
+				    					</select>
+				    					<input type="number " value="89.64"  id="ConditoionPricesInput1" />
+				    				</td>
 				    			</tr>
 				    			<tr>
-				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="stopNumber" class="stopCommStyle"></td>
-				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：<input type="text" value="市价" readonly="readonly" id="stopLossPriceInput"></td>
-				    				<ul id="stopLossPrices1">
-				    					<div class="mui-popover-arrow"></div>
-				    					<li>对手价</li>
-				    				</ul>
+				    				<td >操作</td>
+				    				<td style="border-right: 1px solid #121212;">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
+				    						<option>买</option>
+				    						<option>卖</option>
+				    					</select>
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
+				    						<option>市价</option>
+				    						<option>限价</option>
+				    					</select>
+				    				</td>
+				    				<td colspan="2">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
+				    						<option>附加</option>
+				    					</select>
+				    					<input type="number " value="89.64"  id="ConditoionPricesInput1" />
+				    				</td>
+				    				
+				    			</tr>
+				    			<tr> 
+				    				<td>有效</td>
+				    				<td>当日有效</td>
 				    			</tr>
 				    			<tr>
 				    				<td colspan="2" id="closeStopTable">关闭</td>
@@ -581,10 +609,7 @@
 				    				<td class="oddTd">操作</td>
 				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：<input type="text" value="市价" readonly="readonly" id="lossStopPriceInput"></td>
-				    				<ul id="stopLossPrices2">
-				    					<div class="mui-popover-arrow"></div>
-				    					<li>对手价</li>
-				    				</ul>
+				    				
 				    			</tr>
 				    			<tr>
 				    				<td>有效</td>
