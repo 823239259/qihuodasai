@@ -999,7 +999,7 @@ input{
 	z-index: 10;
 	background-color: rgba(0,0,0,0);
 }
-#backClose i{
+#backClose i,#backClose1 i,#backClose2 i{
 	font-style: normal;
 	    font-size: 14px;
     vertical-align: 2px;
@@ -1287,4 +1287,97 @@ ul{
 	text-align: center;
 	color: #CCCCCC;
 	font-size: 16px;
+}
+/*条件单**/
+#segmentedControlCondition{
+	width: 100%;
+}
+#NoCondition,#alreayCondition{
+	width:100%;
+	height: auto;
+	overflow-x: scroll; 
+	/*overflow-y: hidden;*/
+}
+.ConditionList{width: 700px;}
+.ConditionList tr td{
+	padding: 0px 10px;
+	width: 60px;
+	color:#CCCCCC;
+	font-size: 14px;
+	height: 40px;
+	line-height: 40px;
+}
+.ConditionList tr{
+		border-bottom: 1px solid #121212;
+}
+.ConditionList tr td:nth-child(1){
+	width: 120px;
+	
+}
+.ConditionList tr td:nth-child(6){
+	width: 100px;
+	
+}
+.ConditionList tr td:nth-child(7){
+	width: 160px;
+	
+}
+.ConditionList thead tr td{
+	color:#666666;
+	height: 30px;
+	line-height: 30px;
+}
+#buttonListTr{
+	position: relative;
+}
+#buttonListTr button{
+	width:25%;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #cccccc;
+	color:#2b2b2b;
+	border-top: none;
+	border-buttom:none;
+/*	border: none;*/
+	position: fixed;
+	top:180px;
+}
+#suspendCondition{
+	right: 50%;
+	border-right: 1px solid #2b2b2b;
+}
+#modifyCondition{
+	right: 25%;
+	border-right: 1px solid #2b2b2b;
+}
+#deleteCondition{
+	right: 0%;
+}
+#ConditoionTitlePrices table{
+	width: 100%;
+	height: auto;
+}
+#ConditoionTitlePrices tr td{
+	height: 40px;
+	padding:0px 8px;
+}
+#ConditoionTitlePrices tr td:nth-child(1),#ConditoionTitlePrices tr td:nth-child(1){
+	width: 20%;
+}
+#ConditoionTitlePrices tr td:nth-child(1),#ConditoionTitlePrices tr td:nth-child(1){
+	width: 20%;
+}
+#selectComm{
+	height: 30px;
+	line-height: 30px;
+	padding:0px;
+	text-align: center;
+	margin: 0px;
+	background: url(../images/graySanjiaoBg.png) no-repeat;
+}
+
+#chioceContract{
+	
 }
