@@ -138,7 +138,7 @@
     		})
     		document.getElementById("updatepw").addEventListener("tap",function(){
     			mui.app_refresh("retrievePassword.html");
-    			mui.openWindow("retrievePassword.html","retrievePassword.html");
+    			mui.openWindow({url:"../login/retrievePassword.html",id:"retrievePassword.html"});
     		});
     	
     		// 监听确定退出事件
