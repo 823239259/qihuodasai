@@ -129,6 +129,8 @@ function handleData(evt){
 			}
 			if(inserOrderStatus == 5){
 				tip("交易失败:合约【"+insertOrderParam.ContractCode+"】,原因【"+insertOrderParam.StatusMsg+"】");
+			}else{
+				tip("提交成功,等待交易");
 			}
 			resultInsertOrderId[insertOrderParam.OrderID] = insertOrderParam.OrderID;
 			//订单状态通知
@@ -1652,7 +1654,7 @@ function doInsertOrder(orderNum,tradeDrection,orderPrice){
 	var contractNo = $("#contractNo").val();
 	var priceType = $("input[type='radio']:checked").val();
 	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,priceType,orderPrice,0,doGetOrderRef());
-	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
+	/*tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");*/
 	isBuy = true;
 }
 /**
@@ -1672,7 +1674,7 @@ function doInsertAllSellingOrder(){
 		param[0] = tradeParam;
 		closing(param);
 	}
-	tip("提交成功,等待交易");
+	/*tip("提交成功,等待交易");*/
 }
 /**
  * 平仓操作
@@ -1691,7 +1693,7 @@ function doInsertSellingOrder(){
 	var param = new Array();
 	param[0] = tradeParam;
 	closing(param);
-	tip("提交成功,等待交易");
+	/*tip("提交成功,等待交易");*/
 }
 /**
  * 反手操作
@@ -1712,7 +1714,7 @@ function doInsertBackhandOrder(){
 	var contractCode = commodityNo + contractNo;
 	var orderPrice = tradeParam.LimitPrice;
 	Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
-	tip("合约【"+contractCode+"】提交成功,等待交易");
+	/*tip("合约【"+contractCode+"】提交成功,等待交易");*/
 	isBuy = true;
 }
 /**
@@ -1729,7 +1731,7 @@ function doInsertAllCancleOrder(){
 		param[0] = tradeParam
 		cancleOrder(param);
 	}
-	tip("提交成功,等待撤单");
+	/*tip("提交成功,等待撤单");*/
 }
 /**
  * 撤单操作
@@ -1745,7 +1747,7 @@ function doInsertCancleOrder(){
 	var param = new Array();
 	param[0] = tradeParam
 	cancleOrder(param);
-	tip("合约【"+contractCode+"】提交成功,等待撤单");
+	/*tip("合约【"+contractCode+"】提交成功,等待撤单");*/
 }
 /**
  * 改单操作
@@ -1775,7 +1777,7 @@ function doInsertChangeSingleOrder(){
 	param[0]=tradeParam;
 	modifyOrder(param);
 	layer.closeAll();
-	tip("合约【"+contractCode+"】提交成功,等待交易");
+	/*tip("合约【"+contractCode+"】提交成功,等待交易");*/
 	isUpdateOrder = true;
 }
 /**
