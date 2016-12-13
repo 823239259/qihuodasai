@@ -36,35 +36,23 @@
 			}
 		}
         if(timeChart != null){
-        	var option = setOption1();
+        	var x=0;
+            if(dataPricesList.length!=0){
+            	for(var i=0;i<dataPricesList.length;i++){
+            		if(dataPricesList[i].id==$("#CommodityNo").text()){
+            			x=dataPricesList[i].prices;
+            		}
+            	}
+            }
+             var option = setOption1(x);
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
+           
         }
 
     }
-//  document.getElementById("Time").addEventListener("tap",function(){
-//  	$("#CandlestickChart").css("opacity","0");
-//  	$("#dayCandlestickChart").css("opacity","0");
-//				 if(timeChart != null){
-//				 	var option2=setOption1();
-//				 	 var option1 =volumeChartSetOption(volumeChartData);
-//						setTimeout(function(){
-//							$("#timeChart").css("width","100%");
-//						 	timeChart.resize();	
-//							timeChart.setOption(option2);
-//		        			timeChart.resize();	
-//		        			volumeChart.resize();	
-//							volumeChart.setOption(option1);
-//		        			volumeChart.resize();
-//		        		},10);
-//		        		setTimeout(function(){
-//		        			$("#TimeChart1").css("opacity","1");
-//		        		},11);
-//			    }
-//	});
-    
-    function setOption1(){
+    function setOption1(x){
         var  data1=timeData;
        var  option = {
        	backgroundColor: 'rgba(43, 43, 43, 0)',
@@ -81,14 +69,13 @@
 		                opacity: 1
 		            }
                },
-//             formatter: function(params) {
-//             	console.log(JSON.stringify(params));
-//             	  var time  = params[0].name;
-//                 var val   = params[0].value;
-//                 var html  = '时间:'+time + '<br/>' +
-//                         '价格: ' + val + '<br/>';
-//                 return html;
-//             },
+               formatter: function(params) {
+               	  var time  = params[0].name;
+                   var val   = params[0].value;
+                   var html  = '时间:'+time + '<br/>' +
+                           '价格: ' + val + '<br/>';
+                   return html;
+               },
            },
            toolbox: {
                show: false,
@@ -128,7 +115,7 @@
            grid: {
                x: 40,
                y:20,
-               x2:20,
+               x2:46,
                y2:5
            },
            series: {
@@ -155,8 +142,8 @@
                 symbol: ['none', 'none'],
                 clickable:false,
                 data: [
-	                 {name: '标线2起点', value: 10385, xAxis: "17:00", yAxis: 10385},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
-        {name: '标线2终点', xAxis: "17:50", yAxis: 10385}
+	                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+        			{name: '标线2终点', xAxis: "2", yAxis: x}
                 ]
                 },
                data:data1.prices
@@ -216,7 +203,7 @@
 			 grid: {
                x: 40,
                y:30,
-               x2:20,
+               x2:46,
                y2:20
            },
           xAxis:[

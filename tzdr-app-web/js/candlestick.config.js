@@ -43,9 +43,16 @@
 	        		}
 	        	}
     	    }
-        	
         	newData=rawData.slice(-60);
-	  		CandlestickChartOption = setOption(newData);
+        	var x=0;
+            if(dataPricesList.length!=0){
+            	for(var i=0;i<dataPricesList.length;i++){
+            		if(dataPricesList[i].id==$("#CommodityNo").text()){
+            			x=dataPricesList[i].prices;
+            		}
+            	}
+            }
+	  		CandlestickChartOption = setOption(newData,x);
 	  		myChart.setOption(CandlestickChartOption);
 	  		myChart.resize();
 	  		CandlestickVolumeChart.resize();	
@@ -53,7 +60,7 @@
 		  	
     }
     //设置数据参数（为画图做准备）
-    function setOption(rawData){
+    function setOption(rawData,x){
         var dates = rawData.map(function (item) {
             return item[0];
         });
@@ -83,7 +90,7 @@
 		    grid: {
 		               x: 43,
 		               y:20,
-		               x2:20,
+		               x2:46,
 		               y2:5
 		           },
 		    xAxis: {
@@ -123,8 +130,8 @@
                 		symbol: ['none', 'none'],
                 		clickable:false,
 		                data: [
-			                 {name: '标线2起点', value: 10385, xAxis: "17:00", yAxis: 10385},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
-		       				 {name: '标线2终点', xAxis: "17:50", yAxis: 10385}
+			                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+		       				 {name: '标线2终点', xAxis: "2", yAxis: x}
 		                ]
                		 },
 		            itemStyle: {
@@ -212,7 +219,7 @@
 				 grid: {
 	               x: 40,
 	               y:30,
-	               x2:20,
+	               x2:46,
 	               y2:20
 	           },
 	          xAxis:[

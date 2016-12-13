@@ -4,30 +4,26 @@ var lightChartTime={
 }
 function lightChartData(json){
     	var dosizeL=$("#doSize").val();
-        var TimeLength=lightChartTime.time.length;
-        lightChartTime.price.push(json.Parameters.LastPrice);
-           lightChartTime.time.push(json.Parameters.DateTimeStamp);
-//		for(var i=0;i<lightChartTime.time.length-1;i++){
-//			if(lightChartTime.time[i]==lightChartTime.time[i+1]){
-//				lightChartTime.time.splice(i,1);
-//				lightChartTime.price.splice(i,1);
-//			}
-//		}
-		lightChartTime.time=lightChartTime.time.slice(-100);
-		lightChartTime.price=lightChartTime.price.slice(-100);
-//		console.log(JSON.stringify(lightChartTime));
-        if(lightChart != null){
-        	var option = lightChartDealData();
-            lightChart.setOption(option);
-            lightChart.resize();
-        }
-
+    	var CommodityNo=$("#CommodityNo").text();
+    	var CommodityNo1=json.Parameters.CommodityNo+json.Parameters.ContractNo;
+    	if(CommodityNo==CommodityNo1){
+	        var TimeLength=lightChartTime.time.length;
+	        lightChartTime.price.push(json.Parameters.LastPrice);
+	           lightChartTime.time.push(json.Parameters.DateTimeStamp);
+			lightChartTime.time=lightChartTime.time.slice(-100);
+			lightChartTime.price=lightChartTime.price.slice(-100);
+	        if(lightChart != null){
+	        	var option = lightChartDealData();
+	            lightChart.setOption(option);
+	            lightChart.resize();
+	        }
+    	}
   }
     function lightChartDealData(){
      var  option = {
        	backgroundColor: 'rgba(43, 43, 43, 0)',
            tooltip : {
-               show: true,
+               show: false,
                transitionDuration:0,
                trigger: 'axis',
                axisPointer : {
@@ -39,14 +35,6 @@ function lightChartData(json){
 		                opacity: 1
 		            }
                },
-//             formatter: function(params) {
-//             	console.log(JSON.stringify(params));
-//             	  var time  = params[0].name;
-//                 var val   = params[0].value;
-//                 var html  = '时间:'+time + '<br/>' +
-//                         '价格: ' + val + '<br/>';
-//                 return html;
-//             },
            },
            toolbox: {
                show: false,

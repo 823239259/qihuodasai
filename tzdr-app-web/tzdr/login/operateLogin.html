@@ -281,15 +281,16 @@
 						});
 				}
 				function loginCheckBind(){
-					plus.nativeUI.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。",function(e){
-							if(e.index==1){
-								plus.device.dial("4008528008",false);
-							}
-						},
-						"400-852-8008",["取消","呼叫"]);
-					
-//					mui.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。","提示",["确认"],function(e){
-//					})
+					mui.openWindow("regist.html");
+//					plus.nativeUI.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。",function(e){
+//							if(e.index==1){
+//								plus.device.dial("4008528008",false);
+//							}
+//						},
+//						"400-852-8008",["取消","呼叫"]);
+//					
+////					mui.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。","提示",["确认"],function(e){
+////					})
 				}
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
 					mui.openWindow("retrievePassword.html");

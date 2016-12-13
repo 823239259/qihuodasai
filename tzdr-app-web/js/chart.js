@@ -108,7 +108,6 @@ mui.plusReady(function(){
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
 			lightChartData(quoteParam);
-//			console.log(JSON.stringify(quoteParam));
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
@@ -601,7 +600,10 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    };
-//		var num=1;
+	 lightChartTime={
+			"time":[],
+			"price":[]
+		}    
     	sendHistoryMessage(0);
     	
     })
@@ -662,7 +664,15 @@ mui.plusReady(function(){
     			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
 				var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData,x);
+		        		var x=0;
+			            if(dataPricesList.length!=0){
+			            	for(var i=0;i<dataPricesList.length;i++){
+			            		if(dataPricesList[i].id==$("#CommodityNo").text()){
+			            			x=dataPricesList[i].prices;
+			            		}
+			            	}
+			            }
 						setTimeout(function(){
 							myChart.resize();
 							myChart.setOption(option);
@@ -757,7 +767,15 @@ mui.plusReady(function(){
     		var val=$("#timeChartMenu").val();
     		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
-    		var option2=setOption1();
+        	var x=0;
+            if(dataPricesList.length!=0){
+            	for(var i=0;i<dataPricesList.length;i++){
+            		if(dataPricesList[i].id==$("#CommodityNo").text()){
+            			x=dataPricesList[i].prices;
+            		}
+            	}
+            }
+    		var option2=setOption1(x);
 		 	 var option1 =volumeChartSetOption(volumeChartData);
 				setTimeout(function(){
 				 	timeChart.resize();	

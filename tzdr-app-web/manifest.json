@@ -1227,7 +1227,8 @@
 					"tzdr/future/hsi.html",
 					"tzdr/future/cp.html",
 					"tzdr/quotation/quotationMain.html",
-					"tzdr/login/retrievePassword.html"
+					"tzdr/login/retrievePassword.html",
+					"tzdr/login/regist.html"
 				],
 				"priority": 0
 			},

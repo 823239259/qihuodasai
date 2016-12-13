@@ -690,6 +690,7 @@ function addPostion(param){
 		if(currencyNo == undefined){
 			currencyNo = "";
 		}
+		dataPricesList.push({"id":contractCode,"prices":holdAvgPrice});
 		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
 		var clspo = 'position-index'+postionIndex; 

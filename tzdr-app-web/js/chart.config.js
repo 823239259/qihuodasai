@@ -19,6 +19,7 @@
 	var VolumeSubscript;
 	var setIntvalTimeAll=null;
 	var lightChart=null;
+	    var dataPricesList=[]
     //生成一个K线图容器
     function loadK(){
         // 使用
