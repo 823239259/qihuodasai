@@ -9,7 +9,7 @@ function lightChartData(json){
     	if(CommodityNo==CommodityNo1){
 	        var TimeLength=lightChartTime.time.length;
 	        lightChartTime.price.push(json.Parameters.LastPrice);
-	           lightChartTime.time.push(json.Parameters.DateTimeStamp);
+	           lightChartTime.time.push((json.Parameters.DateTimeStamp).split(" ")[1]);
 			lightChartTime.time=lightChartTime.time.slice(-100);
 			lightChartTime.price=lightChartTime.price.slice(-100);
 	        if(lightChart != null){
@@ -17,6 +17,7 @@ function lightChartData(json){
 	            lightChart.setOption(option);
 	            lightChart.resize();
 	        }
+//	        console.log(JSON.stringify(lightChartTime))
     	}
   }
     function lightChartDealData(){
@@ -41,11 +42,14 @@ function lightChartData(json){
            },
            animation: false,
 			 xAxis:[{
-					type: 'category',
-					show:false,
-			        data: lightChartTime.time,
-			        axisLine: { lineStyle: { color: '#8392A5' } },
-			        boundaryGap: true
+ 				 type : 'category',
+//                position:'bottom',
+                 boundaryGap: true,
+//                axisTick: {onGap:false},
+//                splitLine: {show:false},
+                 nameTextStyle:"#8392A5",
+                   axisLine: { lineStyle: { color: '#8392A5' } },
+                  data : lightChartTime.time
 			}],	
            yAxis:  [
                {
