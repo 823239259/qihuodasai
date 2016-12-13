@@ -1514,7 +1514,9 @@
 					"images/tutorial/1.png",
 					"images/tutorial/15.png",
 					"images/tutorial/26.png",
-					"images/tutorial/17.png"
+					"images/tutorial/17.png",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

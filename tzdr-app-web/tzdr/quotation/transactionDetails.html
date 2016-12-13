@@ -79,6 +79,7 @@
 			}
 			#topPopover{
 				position: fixed;
+				z-index: 999;
 				top: 16px;
 				right: 6px;
 				height: 150px;
@@ -104,7 +105,7 @@
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
-			<div class="mui-content" style="padding-top: 86px;" >
+			<div class="mui-content" style="padding-top: 40px;position: absolute;top:46px;width: 100%;z-index: 997;" >
 					<div id="headerMenu" style="background-color: #2B2B2B;">
 						<table cellpadding="0" cellspacing="0">
 							<thead>
@@ -366,6 +367,7 @@
 						</div>
 					</div>
 				</div>
+				<!---------------------------------下拉菜单--------------------------->
 				<div id="topPopover" class="mui-popover">
 					<div class="mui-popover-arrow"></div>
 					<div class="mui-scroll-wrapper">
@@ -384,6 +386,7 @@
 						</div>
 					</div>
 				</div>
+<!---------------------------------止损单弹窗--------------------------->
 				<div id="popoverLoss" class="mui-popover">
 				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#stopTitle" >止损</a>
@@ -459,19 +462,20 @@
 				    </div>
 				</div>
 			</div>
+			<!---------------------------------条件单--------------------------->
 			<div id="bg2" style="opacity: 0;">
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack " id= "stopBack"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
 				    <a class="mui-pull-right" id="insertCondition"></a>
 				</header>
-				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 999;width: 100%;">
+				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
 					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#NoCondition" >未触发列表</a>
 				        <a class="mui-control-item" href="#alreayCondition" >已触发列表</a>
 				    </div>
 				    <div class="mui-control-content mui-active" id="NoCondition">
-				    	<table class="ConditionList">
+				    	<table class="ConditionList" id="conditionTable">
 				    		<thead>
 				    			<tr>
 				    				<td>合约名称</td>
@@ -483,7 +487,43 @@
 				    				<td>时间</td>
 				    			</tr>
 				    		</thead>
-							<tr>
+							<tr class="testclick">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick">
 								<td>t6</td>
 								<td>67</td>
 								<td>78</td>
@@ -526,6 +566,7 @@
 				    	</table>
 				    </div>
 				</div>
+<!-----------------------------添加条件单的弹窗---------------------------->				
 				<div id="popoverConditoion" class="mui-popover">
 				    <div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#ConditoionTitlePrices" >价格条件</a>
@@ -548,13 +589,22 @@
 				    				<td >方式</td>
 				    				<td class="borderRight">
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
-				    						<option>=+</option>
+				    						<option>></option>
+				    						<option>>=</option>
+				    						<option><</option>
+				    						<option><=</option>
+				    						<option>=</option>
 				    					</select>
 				    					<input type="number" value="89.64"  id="ConditoionPricesInput"/>
 				    				</td>
 				    				<td colspan="2">
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
 				    						<option>附加</option>
+				    						<option>></option>
+				    						<option>>=</option>
+				    						<option><</option>
+				    						<option><=</option>
+				    						<option>=</option>
 				    					</select>
 				    					<input type="number " value="89.64"  id="ConditoionPricesInput1" />
 				    				</td>
@@ -607,6 +657,10 @@
 				    				<td>
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceTimeAdditional">
 				    						<option>附加</option>
+				    						<option>>=</option>
+				    						<option><</option>
+				    						<option><=</option>
+				    						<option>=</option>
 				    					</select>
 				    					<input type="number " value="89.64"  id="ConditoionTimePricesInput" />
 				    				</td>
@@ -639,30 +693,32 @@
 				    </div>
 				</div>
 			</div>
+<!--------------------------止损单---------------------------------->
 			<div id="bg3" style="opacity: 0;">
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "conditionBack"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
 				</header>
-				<div class="mui-coontent" style="position: absolute;z-index: 999;top: 46px;width: 100%;">
+				<div class="mui-coontent" style="position: absolute;z-index: 997;top: 46px;width: 100%;">
 					<div id="segmentedControlStop" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#NoStopTale" >未触发列表</a>
 				        <a class="mui-control-item" href="#alreayStopTale" >已触发列表</a>
 				    </div>
 				    <div class="mui-control-content mui-active" id="NoStopTale">
-				    	<table class="ConditionList" id"clickTable">
+				    	<table class="ConditionList" id="clickTable">
 				    		<thead>
 				    			<tr>
 				    				<td>合约名称</td>
 				    				<td>状态</td>
-				    				<td>类型</td>
-				    				<td>条件</td>
-				    				<td>下单</td>
+				    				<td>多空</td>
+				    				<td>类别</td>
+				    				<td>手数</td>
+				    				<td>触发条件</td>
+				    				<td>委托价</td>
 				    				<td>有效日期</td>
-				    				<td>时间</td>
 				    			</tr>
 				    		</thead>
-							<tr>
+							<tr class="testclick1">
 								<td>t6</td>
 								<td>67</td>
 								<td>78</td>
@@ -670,76 +726,84 @@
 								<td>ui</td>
 								<td>ui</td>
 								<td>kl</td>
+								<td>kl</td>
 							</tr>
-							<tr id="buttonListTr">
+							<tr class="testclick1"> 
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick1">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick1">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick1">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick1">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick1">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr class="testclick1">
+								<td>t6</td>
+								<td>67</td>
+								<td>78</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>ui</td>
+								<td>kl</td>
+								<td>kl</td>
+							</tr>
+							<tr id="buttonListTr1">
 								<td colspan="7"> 
 									<button id="suspendCondition1">暂停</button>
 									<button id="modifyCondition1">修改</button>
 									<button id="deleteCondition1">删除</button>
 								</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
 							</tr>
 				    	</table>
 				    </div>
@@ -968,33 +1032,47 @@
 					$("#bg1").css("opacity","1");
 					$("#bg2").css("opacity","0");
 					$("#bg3").css("opacity","0");
-					$(".mui-content").eq(0).css("z-index","999");
+					$(".mui-content").eq(0).css("z-index","997");
 				});
 				document.getElementById("conditionBack").addEventListener("tap",function(){
 					$("#bg1").css("opacity","1");
 					$("#bg2").css("opacity","0");
 					$("#bg3").css("opacity","0");
-					$(".mui-content").eq(0).css("z-index","999");
+					$(".mui-content").eq(0).css("z-index","997");
 				});
 				document.getElementById("openStop").addEventListener("tap",function(){
 					$("#bg1").css("opacity","0");
-					$("#bg2").css("opacity","1");
-					$("#bg3").css("opacity","0");
-					$(".mui-content").eq(1).css("z-index","999");
+					$("#bg2").css("opacity","0");
+					$("#bg3").css("opacity","1");
+					$(".mui-content").eq(2).css("z-index","997");
+					mui("#topPopover").popover("toggle");
 				});
 				document.getElementById("openCondition").addEventListener("tap",function(){
 					$("#bg1").css("opacity","0");
-					$("#bg2").css("opacity","0");
-					$("#bg3").css("opacity","1");
-//
-					$(".mui-content").eq(2).css("z-index","999");
+					$("#bg2").css("opacity","1");
+					$("#bg3").css("opacity","0");
+					mui("#topPopover").popover("toggle");
+					$(".mui-content").eq(1).css("z-index","997");
 				});
-				mui('#clickTable').on('tap','tr',function(){
-					console.log('li tap');
-					});
-				$("#clickTable").on("click","tr",function(){
-					console.log("56");
-					alert($(this).index());
+				var num=0;
+				var numCondition=0;
+				$("#conditionTable .testclick").on("tap",function(){
+					var index=$(this).index();
+					if(numCondition<index){
+						index=index-1
+					}
+					numCondition=index;
+					$("#conditionTable .testclick").eq(index).after($("#buttonListTr")).addClass("clickBg").siblings().removeClass("clickBg");;
+					$("#buttonListTr button").css("top",122+(index+1)*41+"px");
+				})
+				$("#clickTable .testclick1").on("tap",function(){
+					var index=$(this).index();
+					if(num<index){
+						index=index-1
+					}
+					num=index;
+					$("#clickTable .testclick1").eq(index).after($("#buttonListTr1")).addClass("clickBg").siblings().removeClass("clickBg");;
+					$("#buttonListTr1 button").css("top",122+(index+1)*41+"px");
 				})
 			});
 		</script>

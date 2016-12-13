@@ -1290,7 +1290,7 @@ input{
 #buttonListTr{
 	position: relative;
 }
-#buttonListTr button{
+#buttonListTr button,#buttonListTr1 button{
 	width:25%;
 	margin: 0px;
 	padding: 0px;
@@ -1302,8 +1302,9 @@ input{
 	border-buttom:none;
 /*	border: none;*/
 	position: fixed;
-	top:180px;
+	top:125px;
 }
+
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
@@ -1406,7 +1407,7 @@ input{
 	text-align: center;
 	background-color: #1F1F1F;
 	vertical-align: middle;
-	color:#CCCCCC;
+	color:red;
 	font-size: 14px;
 }
 #ConditoionPricesInput1,#ConditoionTimePricesInput{
@@ -1505,4 +1506,7 @@ input{
 }
 #bg1,#bg,#bg3{
 	background-color: #2b2b2b;
+}
+.clickBg{
+	background-color: #121212;
 }

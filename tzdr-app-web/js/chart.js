@@ -152,6 +152,8 @@ mui.plusReady(function(){
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
+				$("#chioceContract").append("<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>")
+				$("#chioceContract1").append("<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>")
 				if(Transfer.name[2]==newCommdityNo){
    					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+"</option>"
 	   			}else{
