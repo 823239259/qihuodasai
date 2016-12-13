@@ -989,6 +989,13 @@
 //
 					$(".mui-content").eq(2).css("z-index","999");
 				});
+				mui('#clickTable').on('tap','tr',function(){
+					console.log('li tap');
+					});
+				$("#clickTable").on("click","tr",function(){
+					console.log("56");
+					alert($(this).index());
+				})
 			});
 		</script>
 		<script>
