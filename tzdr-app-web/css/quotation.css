@@ -106,7 +106,7 @@ p{
 	height: auto;
 	border-bottom: 1px solid #121212;
 	text-align: center;
-	overflow: h;
+	/*overflow: hidden;*/
 }
 .buyBtn button{
 	border:none;
@@ -676,6 +676,7 @@ input{
 	background-color:#2B2B2B;
 	position: fixed;
 	bottom: 0px;
+	z-index: 998;
 }
 #numberInput{
 	width: 100%;
@@ -1208,6 +1209,11 @@ input{
 	position: relative;
 	padding: 4px;
 }
+#stopChoicePrices2{
+	width: 36%;
+	position: relative;
+	padding: 4px;
+}
 #Increase,#Increase1{
 	margin-left: 8px;
 	font-size: 14px;
@@ -1286,6 +1292,12 @@ input{
 	color:#666666;
 	height: 30px;
 	line-height: 30px;
+}
+#clickTable tr td:nth-child(7){
+	width: 60px;
+}
+#clickTable tr td:nth-child(8){
+	width: 160px;
 }
 #buttonListTr{
 	position: relative;
