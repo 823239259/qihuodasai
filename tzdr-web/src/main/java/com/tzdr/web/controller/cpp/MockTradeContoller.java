@@ -1,5 +1,7 @@
 package com.tzdr.web.controller.cpp;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tzdr.business.cms.cpp.MockTradeAccountService;
+import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.web.constants.Constants;
@@ -20,6 +23,8 @@ import com.tzdr.web.utils.UserSessionBean;
 public class MockTradeContoller {
 	@Autowired
 	private MockTradeAccountService mockTradeAccountService;
+	@Autowired
+	private WUserService wUserService;
 	@RequestMapping(value = "/openMock")
 	@ResponseBody
 	public JsonResult openMockTradeAccount(HttpServletRequest request,@RequestParam("username")String username,@RequestParam("password")String password){
@@ -52,5 +57,20 @@ public class MockTradeContoller {
 			resultJson.setSuccess(false);
 		}
 		return resultJson;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/getAllUser")
+	public JsonResult getAllUser(HttpServletRequest request){
+		List<WUser> wUsers = wUserService.getAll();
+		JsonResult resultJson = new JsonResult(true);
+		resultJson.appendData("data", wUsers);
+		return resultJson;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/userOpenMock")
+	public JsonResult userOpenMock(HttpServletRequest request,@RequestParam("strs") String str){
+		String[] strs = str.split(",");
+		mockTradeAccountService.userOpenMock(strs);
+		return new JsonResult(true);
 	}
 }

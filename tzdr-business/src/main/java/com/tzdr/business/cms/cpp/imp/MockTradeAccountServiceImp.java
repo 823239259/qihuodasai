@@ -77,4 +77,45 @@ public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount
 			return false;
 		}
 	}
+	
+	@Override
+	public void userOpenMock(String[] strs) {
+		List<Map<String, Object>> maps =  getEntityDao().queryMapBySql("select CurrencyNo from a_currency_list", null);
+		for (int i = 0; i < strs.length; i++) {
+			String str = strs[i];
+			List<Object> objectparam = new ArrayList<>();
+			objectparam.add(str);
+			List<MockTradeAccount> mockTradeAccounts =  nativeQuery("select ID as id,Username as username,Password as password from mock_trade_account where Username = ?", objectparam, MockTradeAccount.class);
+			if(mockTradeAccounts != null && mockTradeAccounts.size() > 0){
+				continue;
+			}
+			List<Object[]> objects = new ArrayList<>();
+			Object[] objects2 = new Object[]{str,str};
+			objects.add(objects2);
+			try {
+				batchSave("insert into mock_trade_account(Username,Password) value(?,?)", 1, objects);
+				Integer accountId = getEntityDao().doGetMockTradeAccountByUsernameOne(str).getId();
+				List<Object[]> mockTradeMoneyAccounts = new ArrayList<>();
+				String sql = "insert into mock_trade_money_account(AccountId,TradeAccountUsername,InMoney,TodayCanUse,TodayAmount,CloseProfit,CounterFee,CurrencyNo"
+						+ ",DayCloseProfit,DayFloatingProfit,Deposit,FloatingProfit,FrozenMoney,KeepDeposit,OldBalance,OldAmount,OldCanCashout,OldCanUse,OutMoney"
+						+ ",Premium,RiskRate,TodayBalance,TodayCanCashout,TotalProfit,UnaccountProfit,UnexpiredProfit) "
+						+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				for (int j = 0; j < maps.size(); j++) {
+					Double money = CppConfig.INIT_MOCK_MONEY;
+					String currencyNo = String.valueOf(maps.get(j).get("CurrencyNo"));
+					if(!currencyNo.equals("USD")){
+						money=0.00;
+					}
+					Object[] objectsMockTradeAccount = new Object[]{
+							accountId,str,money,money,money,0.00,0.00,currencyNo
+							,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+					};
+						mockTradeMoneyAccounts.add(objectsMockTradeAccount);
+				}
+				batchSave(sql, maps.size(), mockTradeMoneyAccounts);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
