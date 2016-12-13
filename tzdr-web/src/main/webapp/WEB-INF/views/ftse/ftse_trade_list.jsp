@@ -22,6 +22,21 @@ table.data_web td a { padding:0 5px; color:#f80; }
 #window_detail_accountInfo table { padding:5px 0 5px 30px;}
 #window_detail_accountInfo table tr td { height:24px; line-height:24px;}
 #nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+#window_detail_details_fee p {font-size: 16px; line-height: 30px; color: #666;}
+#window_detail_tab .window_detail_lis {display: none;}
+.fl_navtitle h3 {border-bottom: 1px solid #eff2f7;}
+.fl_navtitle h3:hover {cursor: pointer;}
+.fl_navtitle h3.on {color: #fc3; border-bottom: 1px solid #fc3;}
+#window_detail_tab table tr td {border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
+.window_detail_share span:hover {color: #fc3; cursor: pointer;}
+.window_detail_share span img {position: relative; top: 9px; margin-left: 15px; margin-right: 5px;}
+#window_detail_title td {border-top: 1px solid #e6e6e6;}
+.sif_money {padding: 0px 10px;}
+.sif_money ul {margin: 10px auto;}
+.sif_money ul li h3 {height: 32px; line-height: 32px;}
+.sif_money ul li p {height: 32px; line-height: 32px;}
+#window_detail_tab table tr td {height: 40px; line-height: 40px; padding: 0px;}
+.ftse_money {width: 1000px; margin-left: -500px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/jquery.pagination.js?v=${v}"></script>
@@ -31,38 +46,119 @@ table.data_web td a { padding:0 5px; color:#f80; }
 </head>
 <body>
 	<!-- 账单明细 -->
-	<div class="sif_money sif_money_div ftse_money" id="detailInfoFtse" style="display:none;">
+	<div class="sif_money sif_money_div ftse_money"  id="detailInfoFtse" style="display:none;">
 		<div class="fl_navtitle">
-			<h3>账单明细</h3>
+			<h3 class="on">结算明细</h3><h3>历史成交明细</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#detailInfoFtse')" class="close"></a>
 		</div>
-		<ul id="window_detail_endInfoFtse">
-			<li>
-				<h3>操盘保证金</h3>
-				<p></p>
-			</li>
-			<li>
-				<h3>补充保证金</h3>
-				<p></p>
-			</li>
-			<li style="width:235px;">
-				<h3>交易盈亏</h3>
-				<p></p>
-			</li>
-			<li style="width:125px;">
-				<h3>汇率<em>(美元：人民币)</em></h3>
-				<p></p>
-			</li>
-			<li>
-				<h3>交易手续费</h3>
-				<p></p>
-			</li>			
-			<li>
-				<h3>结算金额</h3>
-				<p></p>
-			</li>
-		</ul>
-		<div id="window_detail_endInfoFtse_trade">
+		<div id="window_detail_tab">
+			<div class="window_detail_lis" style="display: block;">
+				<p style="text-align: center; font-size: 20px; padding-top: 10px;">结算明细</p>
+				<ul id="window_detail_endInfoFtse">
+					<li>
+						<h3>操盘保证金</h3>
+						<p></p>
+					</li>
+					<li style="width:113px;">
+						<h3>补充保证金</h3>
+						<p></p>
+					</li>
+					<li style="width:235px;">
+						<h3>交易盈亏</h3>
+						<p></p>
+					</li>
+					<li style="width:200px;">
+						<h3>汇率<em>(美元：人民币)</em></h3>
+						<p></p>
+					</li>
+					<li style="width:150px;">
+						<h3>交易手续费</h3>
+						<p></p>
+					</li>			
+					<li style="width:200px;">
+						<h3>结算金额</h3>
+						<p></p>
+					</li>
+				</ul>
+				<div id="window_detail_details_fee">
+				</div>	
+				<div id="window_detail_endInfoFtse_trade">
+				</div>
+			</div>
+			<div class="window_detail_lis">
+				<p style="text-align: center; font-size: 20px; padding: 10px 0;">历史成交明细</p>
+				<div id="window_detail_scroll" style="padding-bottom: 20px;">
+					<table style="/* height: 500px; overflow: hidden; */ font-size: 14px; color: #666;" border="0" cellspacing="0" cellpadding="0">
+						<tbody id = "tradeDetail">
+							<!-- <tr id="window_detail_title" style="color: #333;">
+								<td style="width: 40px;">序号</td>
+								<td style="width: 120px;">合约名称</td>
+								<td style="width: 120px;">交易盈亏交易手数</td>
+								<td style="width: 90px;">交易手续费</td>
+								<td style="width: 80px;">成交价</td>
+								<td style="width: 40px;">买卖</td>
+								<td style="width: 70px;">买入/卖出</td>
+								<td style="width: 70px;">订单类型</td>
+								<td style="width: 100px;">结算时间</td>
+							</tr>
+							<tr style="height: 40px;">
+								<td >序号</td>
+								<td >合约名称</td>
+								<td >交易盈亏交易手数</td>
+								<td >交易手续费</td>
+								<td >成交价</td>
+								<td >买卖</td>
+								<td >买入/卖出</td>
+								<td >订单类型</td>
+								<td >结算时间</td>
+							</tr> -->
+						</tbody>
+					</table>
+				</div>	
+				<%-- <p class="window_detail_share sns-share" style="font-size: 14px; padding: 20px 0;">
+				分享到：<span><img alt="" src="${ctx}/static/images/detail_weixin.jpg">朋友圈</span>
+				<span><img alt="" src="${ctx}/static/images/detail_weibo.jpg">新浪微博</span>
+				<span><img alt="" src="${ctx}/static/images/detail_qq.png">QQ好友</span></p> --%>
+				<!-- <div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a> -->
+</div>
+<!-- <script>
+	window._bd_share_config = {
+		common : {
+			bdText : '自定义分享内容',	
+			bdDesc : '自定义分享摘要',	
+			bdUrl : 'http://www.vs.com', 	
+			bdPic : 'http://www.vs.com/static/images/common-new/new_logo.png'
+		},
+		share : [{
+			"bdSize" : 16
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf',"weixin"]
+		}]
+	};
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script> -->
+			</div>	
 		</div>
 	</div>
 	<!-- 交易账号 -->
@@ -110,7 +206,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 		</div>
 	</div>
 	<!-- 终止操盘 -->
-	<div class="fl_box fl_uc_trade sif_money_div" id="applyEndTrade" name="applyEndTrade"  style="display:none;">
+	<div class="fl_box fl_uc_trade sif_money_div"  id="applyEndTrade" name="applyEndTrade"  style="display:none;">
 		<div class="fl_navtitle">
 			<h3>终止操盘</h3>
 			<a href="javascript:void(0);" onclick="closeWindow('#applyEndTrade')" class="close"></a>

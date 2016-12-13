@@ -2,6 +2,15 @@
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
 		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever,daxtranMinActualLever) {
+	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+    $(".sif_money").css({
+        top:"50%",
+        marginTop: -detailInfoFtseHeight
+
+    })
+	$(".fl_navtitle h3").removeClass("on").eq(0).addClass("on");
+	$("#window_detail_tab .window_detail_lis").hide().eq(0).show();
+	
 	$("#window_detail_endInfoFtse").find("p").html("");
 	var i = 0;
 	$("#window_detail_endInfoFtse").find("p").each(function(){
@@ -12,7 +21,7 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(appendTraderBond))+'元');
 		}
 		else if (i == 3) {
-			$(this).html($.formatMoney(Number(tranProfitLoss))+'美元');//（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）
+			$(this).html($.formatMoney(Number(tranProfitLoss)*parities,2)+'元');//（'+$.formatMoney(Number(tranProfitLoss)*parities,2)+'人民币）
 		}
 		else if (i == 4){
 			$(this).html('1:'+Number(parities).toFixed(6));
@@ -24,6 +33,10 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 			$(this).html($.formatMoney(Number(endAmount))+'元');
 		}
 	});
+	var window_detail_details_fee ="<p>"+endAmount+"元="+traderBond+"元+"+appendTraderBond+"元+（"+$.formatMoney(Number(tranProfitLoss)*parities,2)+"元） - "+tranCommission+"元</p>" +
+    "<p>（结算金额=操盘保证金+补充保证金+交易盈亏-交易手续费）</p>" +
+    "<p>注意：交易手续费=合约手续费×手数</p>";
+	$("#window_detail_details_fee").html(window_detail_details_fee);
 	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
     $(".sif_money").css({
         top:"50%",
@@ -32,70 +45,86 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
     })
 	$("#window_detail_endInfoFtse_trade").html('');
 	if(businessType == 8){
-		var tradeDev = '<ul>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>A50交易手数</h3>';
+		var tradeDev = '<p style="text-align: center; font-size: 20px; padding-top: 20px;">交易手数</p>';
+		tradeDev+= '<ul><li style="width:200px;">';
+		tradeDev+= '<h3>富时A50</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+tranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>期指期货交易手</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>恒指期货</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+hsiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>国际原油交易手数</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>国际原油</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+crudeTranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>迷你道指交易手数</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>迷你道指</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+mdtranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>迷你纳指交易手数</h3>';
+		tradeDev+= '<li style="width:195px;">';
+		tradeDev+= '<h3>迷你纳指</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+mntranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>迷你标普交易手数</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>迷你标普</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+mbtranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>德国DAX交易手数</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>德国DAX</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+daxtranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>日经225交易手数</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>日经225</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+nikkeiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>小恒指交易手数</h3>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>小恒指</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+lhsiTranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
-		tradeDev+= '<h3>美黄金交易手数</h3>';
+		tradeDev+= '<li style="width:195px;">';
+		tradeDev+= '<h3>美黄金</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+agTranActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3>H股指数</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+heIndexActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3>小H股指数</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+xheIndexActualLever+'手</p>';
 		tradeDev+= '</li>'; 
-		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3>美铜</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+ameCopperActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3>美白银</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+ameSilverActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<li style="width:195px;">';
 		tradeDev+= '<h3>小原油</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+smaActualLever+'手</p>';
 		tradeDev+= '</li>';
-		tradeDev+= '<li style="width:186px;">';
+		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3>迷你德国DAX指数</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+(daxtranMinActualLever == undefined ? 0 : daxtranMinActualLever)+'手</p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3></h3>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;"></p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3></h3>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;"></p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3></h3>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;"></p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:195px;">';
+		tradeDev+= '<h3></h3>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;"></p>';
 		tradeDev+= '</li>';
 		tradeDev+= '</ul>';
 		$("#window_detail_endInfoFtse_trade").html(tradeDev);
@@ -106,8 +135,83 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 
 	    })
 	}
-};
+	$(".fl_navtitle h3").click(function() {
+		var _this = $(this);
+		$(".fl_navtitle h3").removeClass("on").eq(_this.index()).addClass("on");
+		$("#window_detail_tab .window_detail_lis").hide().eq(_this.index()).show();
+		var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
+	    $(".sif_money").css({
+	        top:"50%",
+	        marginTop: -detailInfoFtseHeight
 
+	    })
+	});
+};
+function bindEndOfFtse(cls){
+	$("."+cls).bind("click",function(){
+		var fastId = $(this).attr("data-fastId");
+		$.ajax({
+			url:basepath+"/userftse/getFstTradeDetail",
+			type:"get",
+			data:{
+				id:fastId
+			},
+			success:function(result){
+				if(result.success){
+					$("#tradeDetail").html("");
+					var window_detail_title ='<tr id="window_detail_title" style="color: #333;">'+
+					'<td style="width: 40px;">序号</td>'+
+					'<td style="width: 170px;">成交日期</td>'+
+					'<td style="width: 70px;">客户名称</td>'+
+					'<td style="width: 70px;">客户号</td>'+
+					'<td style="width: 70px;">币种</td>'+
+					'<td style="width: 60px;">交易所</td>'+
+					'<td style="width: 90px;">品种</td>'+
+					'<td style="width: 80px;">交易手数</td>'+
+					'<td style="width: 70px;">成交价</td>'+
+					'<td style="width: 60px;">手续费</td>'+
+					'<td style="width: 70px;">下单类型</td>'+
+					'<td style="width: 90px;">下单人编号</td>'+
+					'<td style="width: 90px;">下单人姓名</td>'+
+					'<td style="width: 75px;">成交类型</td>'+
+				'</tr>';
+					var data = result.data.data;
+					for(var i = 0 ; i < data.length;i++){
+						var _data = data[i];
+						window_detail_title += "<tr>" +
+						"<td>"+(i+1)+"</td>" +
+						"<td>"+_data.tradeDate+"</td>" +
+						"<td>"+_data.username+"</td>" +
+						"<td>"+_data.userNo+"</td>" +
+						"<td>"+_data.currencyNo+"</td>" +
+						"<td>"+_data.exchangeNo+"</td>" +
+						"<td>"+_data.commodityNo+"</td>" +
+						"<td>"+(parseInt(_data.buyNum)+parseInt(_data.sellNum))+"</td>" +
+						"<td>"+_data.tradePrice+"</td>" +
+						"<td>"+_data.free+"</td>" +
+						"<td>"+_data.orderType+"</td>" +
+						"<td>"+_data.orderUserno+"</td>" +
+						"<td>"+_data.orderUsername+"</td>" +
+						"<td>"+_data.tradeType+"</td>" +
+						"</tr>";
+					}
+					if(data.length>5){
+						$("#window_detail_scroll").css({
+					        height: "479px",
+					        overflowY: "scroll"
+					    })
+					}else {
+						$("#window_detail_scroll").css({
+					        height: "auto",
+					        overflowY: "inherit"
+					    })
+					}
+					$("#tradeDetail").html(window_detail_title);
+				}
+			}
+		});
+	});
+}
 //交易帐号明细窗口
 function settingAccountInfoFtse(tranAccount,tranPassword,businessType) {
 	
@@ -223,8 +327,8 @@ function getFtseDataList(index,type,
             		html = html + "</td>";
             	}else if(n.stateType == 6){
             		html = html + "<td>" + $.formatMoney(Number(n.endAmount)) + "元</td>";
-            		html = html + "<td><a href='javascript:void(0);' onclick=\"openWindow('#detailInfoFtse',settingEndInfoFtse(" +
-	            	n.traderBond + "," 
+            		html = html + "<td><a href='javascript:void(0);' class = 'dataFastId' data-fastId="+n.id+"  onclick=\"openWindow('#detailInfoFtse',settingEndInfoFtse(" +
+            		n.traderBond + "," 
 	            	+ n.appendTraderBond + ","
 	            	+ n.tranProfitLoss + ","
 	            	+n.endParities+","
@@ -239,6 +343,7 @@ function getFtseDataList(index,type,
             	html += "</tr>";
             }); 
             $(tbody).html(html);
+            bindEndOfFtse("dataFastId");
            //分页-只初始化一次   
             if($("#"+pagediv).html()== ''){ 
     		   $("#"+pagediv).pagination(total, {   

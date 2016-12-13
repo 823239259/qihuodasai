@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.extension.ActivityRewardService;
@@ -64,6 +65,9 @@ public class ExtendsionSignController {
 	private DataMapService dataMapService;
 	@Autowired
 	private MessagePromptService messagePromptService;
+	
+	@Autowired
+	private MockTradeAccountService mockTradeAccountService;
 	@RequestMapping(value = "/testJob")
 	@ResponseBody
 	public JsonResult testJob(){
@@ -279,6 +283,10 @@ public class ExtendsionSignController {
 			smsParams.put("code", randomCode);
             SMSSender.getInstance().sendByTemplate(dataMapService.getSmsContentRegister(), mobile, "ihuyi.verification.signin.success.template", smsParams);
             messagePromptService.registNotice(mobile, "web", channelName, channelKeyWorks);
+           /* try {
+            	mockTradeAccountService.openMockAccount(userName, password);
+			} catch (Exception e) {
+			}*/
             jsonResult.setData(data);
 		}
 		return jsonResult;

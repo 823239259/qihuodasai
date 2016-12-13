@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.2.4",/*应用版本名称*/
-		"code": "20161208"
+		"name": "2.2.5",/*应用版本名称*/
+		"code": "20161212"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -352,7 +352,8 @@
 					"tzdr/future/listrg.html",
 					"tzdr/account/bindingList.html",
 					"tzdr/account/bindWeixin.html",
-					"tzdr/account/accountno.html"
+					"tzdr/account/accountno.html",
+					"tzdr/login/retrievePassword.html"
 				],
 				"priority": 0
 			},
@@ -577,7 +578,11 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/common1.js",
+					"js/share.js",
+					"js/immersed.js",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"tzdr/future/end.html",
@@ -647,7 +652,11 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"images/list_01.png"
+					"images/list_01.png",
+					"js/common1.js",
+					"js/jquery-1.11.3.js",
+					"js/share.js",
+					"js/immersed.js"
 				],
 				"refer": [
 					"tzdr/future/end.html",

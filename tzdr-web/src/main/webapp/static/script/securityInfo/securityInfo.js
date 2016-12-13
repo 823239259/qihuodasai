@@ -312,6 +312,7 @@ $(document).ready(function(){
 					}else if(data.message=="diffagainpwd"){
 						$.alertTip($("#newpwd"),"新密码和确认密码不一致");
 					}else if(data.message=="true"){
+						updateMockAccount(newpwd);
 						alert("密码修改成功");
 						$("#updatepwddiv").css("display","none");
 						$("#div_Mask").css("display","none");
@@ -322,7 +323,6 @@ $(document).ready(function(){
 				}
 			},"json"); 
 	});
-	 
 	  //重新设置取款密码
 	 $("#resetmoneypwdbtn").click(function(){
 		 var pwd=$("#olddrawmoneypwd").val();
@@ -464,7 +464,16 @@ function authcard(){
 	//var url=basepath+"static/toBindingPhone.jsp";
 	//showPageDialog(url,'rrr',677,477);
 }
-
+function updateMockAccount(password){
+	$.ajax({
+		url:basepath+"/mock/trade/updateMock",
+		type:"post",
+		data:{
+			password:password
+		},
+		success:function(){}
+	});
+}
 
 
 

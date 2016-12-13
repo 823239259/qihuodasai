@@ -31,7 +31,7 @@
     				queryDetails(result.data.details.id);
     				//获取详细数据
     				setDetails(result.data.details);
-    				
+    				console.log(JSON.stringify(result.data.details));
     				//获取主力合约
     				mui.each(result.data.details.outDiskVoList,function(i,item){
     					setOutDisks(item);
@@ -58,14 +58,14 @@
     			for(var i=0;i<data.length;i++){
     				var _data = data[i];
     				$("#historyDetailsTable").append("<tr>"+
-    						"<td>"+i+"</td>" +
+    						"<td>"+Number(i+1)+"</td>" +
 	    				"<td>"+_data.tradeDate+"</td>" +
 						"<td>"+_data.username+"</td>" +
 						"<td>"+_data.userNo+"</td>" +
 						"<td>"+_data.currencyNo+"</td>" +
 						"<td>"+_data.exchangeNo+"</td>" +
 						"<td>"+_data.commodityNo+"</td>" +
-						"<td>"+parseInt(_data.buyNum)+parseInt(_data.sellNum)+"</td>" +
+						"<td>"+Number(parseInt(_data.buyNum)+parseInt(_data.sellNum))+"</td>" +
 						"<td>"+_data.tradePrice+"</td>" +
 						"<td>"+_data.free+"</td>" +
 						"<td>"+_data.orderType+"</td>" +
@@ -135,7 +135,24 @@
     		});
     		var endNum=0;
 	    	document.getElementById("historyButton").addEventListener("tap",function(){
-	    		if(endNum!=6){
+	    		if(endNum==1){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("操盘账户正在开户中，还没有数据可显示哦~");
+	    			},10)
+	    			return
+	    		}else if(endNum==6){
+	    			$("#historyButton").attr("href","#item2");
+	    		}else if(endNum==5){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("操盘账户开户失败，无数据显示，去看看其它的吧...");
+
+	    			},10)
+	    			return
+	    		}else{
 	    			setTimeout(function(){
 	    				$("#historyButton").removeClass("mui-active");
 		    			$("#detailButton").addClass("mui-active");
@@ -144,8 +161,6 @@
 	    			},10)
 	    			return
 	    		}
-	    		$("#historyButton").attr("href","#item2");
-	    		
 	    	});
 	    	document.getElementById("sharePay").addEventListener("tap",function(){
 	    		if(endNum==6){
@@ -182,24 +197,23 @@
     			case 1:
     				document.getElementById("opening").style.display="block";
     				/*document.getElementById("todownload").style.display="none";*/
+    				endNum=1;
     				break;
     			case 2:
     				document.getElementById("endtolist").style.display="block";
     				document.getElementById("endtolist").innerHTML="方案终结处理中";
     				document.getElementById("endtolist").setAttribute("disabled",true);
-    				
     				/*document.getElementById("todownload").style.display="none";*/
-    				
     				break;
     			case 3:
     				document.getElementById("endtolist").style.display="block";
     				document.getElementById("endtolist").innerHTML="方案终结处理中";
     				document.getElementById("endtolist").setAttribute("disabled",true);
     				/*document.getElementById("todownload").style.display="none";*/
-    				
     				break;
     			case 5:
     				document.getElementById("open_fail").style.display="block";
+    				endNum=5;
     				/*document.getElementById("todownload").style.display="none";*/
     				break;
     			case 6:
@@ -228,20 +242,29 @@
     		document.getElementById("end_info").style.display="block";
     		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
     		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
+    		console.log(tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
+    		$("#sharehref").val("http://cms.vs.com/uploads/topic/share/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
+    		console.log($("#sharehref").val());
     		if (details.tranProfitLoss<0){
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
+    			
     		}
     		document.getElementById("endParities").innerHTML="1美元 = "+details.endParities+"人民币";
+    		document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
     		//document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
     		if(details.endAmount>=0){
     			document.getElementById("endAmount").innerHTML="+"+tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}else{
     			document.getElementById("endAmount").innerHTML=tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}
-    		
-    	
     		//设置综合各项手数
     		settran_actual_lever(details);
+    		var money1=tzdr.moneyUtils.reverseMoney(document.getElementById("traderBond").innerHTML).toFixed(2) ;
+    		var money2=tzdr.moneyUtils.reverseMoney(document.getElementById("appendTraderBond").innerHTML).toFixed(2);
+    		var money3=parseFloat(details.tranProfitLoss*details.endParities).toFixed(2);
+    		var money4=details.tranFeesTotal.toFixed(2);
+    		var all=Number(money1)+Number(money2)+Number(money3)-Number(money4);
+    		$(".dt_font").text("结算金额(¥"+all.toFixed(2)+") = 操盘保证金(¥"+money1+") + 追加保证金(¥"+money2+") + 交易盈亏(¥"+money3+") - 交易手续费(¥"+money4+")");
     	};
     	
     	
@@ -452,7 +475,8 @@
 			<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
 			<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
 		</div>
-		<div id="item1" class="mui-control-content  mui-active">
+
+<div id="item1" class="mui-control-content  mui-active">
 			<ul class="mui-table-view sc_listtime">
 				<li class="mui-table-view-cell">
 					<label>投资标的：</label>
@@ -533,6 +557,10 @@
 						<label>结算金额(¥)：</label>
 						<span id="endAmount">8,355.24元</span>
 					</li>
+					<li class="mui-table-view-cell">
+						<label>交易手续费(¥)：</label>
+						<span id="tranFeesTotal">3,334元</span>
+					</li>
 				</ul>
 				<p class="dt_font">结算金额(¥) = 操盘保证金(¥) + 追加保证金(¥) + 交易盈亏(¥) - 交易手续费(¥)</p>
 			</div>
@@ -567,7 +595,7 @@
 			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin">分享</button>
 		</div>
 		<input id="sharecontent" type="hidden" value=""></input>
-		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehref" class="sharehref" type="hidden"/>
 		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
 		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
 		<div id="output" style="opacity: 0;"></div>

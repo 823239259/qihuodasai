@@ -60,14 +60,14 @@
 	    		for(var i=0;i<data.length;i++){
 	    				var _data = data[i];
 	    				$("#historyDetailsTable").append("<tr>"+
-    						"<td>"+i+"</td>" +
+    						"<td>"+Number(i+1)+"</td>" +
 		    				"<td>"+_data.tradeDate+"</td>" +
 							"<td>"+_data.username+"</td>" +
 							"<td>"+_data.userNo+"</td>" +
 							"<td>"+_data.currencyNo+"</td>" +
 							"<td>"+_data.exchangeNo+"</td>" +
 							"<td>"+_data.commodityNo+"</td>" +
-							"<td>"+parseInt(_data.buyNum)+parseInt(_data.sellNum)+"</td>" +
+						"<td>"+Number(parseInt(_data.buyNum)+parseInt(_data.sellNum))+"</td>" +
 							"<td>"+_data.tradePrice+"</td>" +
 							"<td>"+_data.free+"</td>" +
 							"<td>"+_data.orderType+"</td>" +
@@ -140,7 +140,24 @@
     		});
     		var endNum=0;
 	    	document.getElementById("historyButton").addEventListener("tap",function(){
-	    		if(endNum!=6){
+	    		if(endNum==1){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("操盘账户正在开户中，还没有数据可显示哦~");
+	    			},10)
+	    			return
+	    		}else if(endNum==6){
+	    			$("#historyButton").attr("href","#item2");
+	    		}else if(endNum==5){
+	    			setTimeout(function(){
+	    				$("#historyButton").removeClass("mui-active");
+		    			$("#detailButton").addClass("mui-active");
+		    			mui.toast("操盘账户开户失败，无数据显示，去看看其它的吧...");
+
+	    			},10)
+	    			return
+	    		}else{
 	    			setTimeout(function(){
 	    				$("#historyButton").removeClass("mui-active");
 		    			$("#detailButton").addClass("mui-active");
@@ -149,8 +166,6 @@
 	    			},10)
 	    			return
 	    		}
-	    		$("#historyButton").attr("href","#item2");
-	    		
 	    	})
     	
     	function setDetails(details){
@@ -177,6 +192,7 @@
     		switch (details.stateType){
     			case 1:
     				document.getElementById("opening").style.display="block";
+    				endNum=1;
     				/*document.getElementById("todownload").style.display="none";*/
     				break;
     			case 2:
@@ -195,13 +211,14 @@
     				break;
     			case 5:
     				document.getElementById("open_fail").style.display="block";
+    				endNum=5;
     				/*document.getElementById("todownload").style.display="none";*/
     				break;
     			case 6:
     				document.getElementById("end").style.display="block";
     				$("#historyButton").removeClass("mui-active");
     				$("#detailButton").text("结算明细");
-    				$("#detailButton").text("结算明细");
+    				$("#sharePay").css("background-color","#FFDD33");
     				endNum=6;
     				/*document.getElementById("todownload").style.display="none";*/
     				//设置结算信息
@@ -223,6 +240,7 @@
     		document.getElementById("end_info").style.display="block";
     		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
     		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
+    		$("#sharehref").val("http://cms.vs.com/uploads/topic/share/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
     		if (details.tranProfitLoss<0){
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
     		}
@@ -234,6 +252,12 @@
     		}else{
     			document.getElementById("endAmount").innerHTML=tzdr.moneyUtils.formatCurrency(details.endAmount)+"元";
     		}
+    		var money1=tzdr.moneyUtils.reverseMoney(document.getElementById("traderBond").innerHTML) ;
+    		var money2=tzdr.moneyUtils.reverseMoney(document.getElementById("appendTraderBond").innerHTML);
+    		var money3=parseFloat(details.tranProfitLoss*details.endParities);
+    		var money4=tzdr.moneyUtils.reverseMoney(document.getElementById("tranFeesTotal").innerHTML);
+    		var all=Number(money1)+Number(money2)+Number(money3)-Number(money4);
+    		$(".dt_font").text("结算金额(¥"+all.toFixed(2)+") = 操盘保证金(¥"+money1.toFixed(2)+") + 追加保证金(¥"+money2.toFixed(2)+") + 交易盈亏(¥"+money3.toFixed(2)+") - 交易手续费(¥"+money4.toFixed(2)+")");
     	};
     	
     	function setOutDisks(outDiskList){

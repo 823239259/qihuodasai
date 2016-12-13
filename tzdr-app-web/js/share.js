@@ -38,8 +38,8 @@
 			if(!sb||!sb.s){
 				return;
 			}
-		//	console.log(JSON.stringify(sharecontent.value));
 			var msg={content:sharecontent.value,extra:{scene:sb.x}};
+			console.log(JSON.stringify(msg));
 			if(bh){
 				msg.href=sharehref.value;
 				if(sharehrefTitle&&sharehrefTitle.value!=""){
@@ -48,8 +48,8 @@
 				if(sharehrefDes&&sharehrefDes.value!=""){
 					msg.content=sharehrefDes.value;
 				}
-				msg.thumbs=["_www/logo.png"];
-				msg.pictures=["_www/logo.png"];
+				msg.thumbs=["http://cms.vs.com/uploads/topic/share/image/100.png"];
+				msg.pictures=["http://cms.vs.com/uploads/topic/share/image/100.png"];
 			}else{
 				if(pic&&pic.realUrl){
 					msg.pictures=[pic.realUrl];
@@ -89,5 +89,5 @@
 			// 弹出分享列表
 			shareBts.length>0?plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
 				(e.index>0)&&shareAction(shareBts[e.index-1],true);
-			}):plus.nativeUI.alert('当前环境无法支持分享链接操作!');
+			}):plus.nativeUI.alert('暂不支持分享功能');
 		}

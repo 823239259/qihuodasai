@@ -18,6 +18,7 @@ import com.tzdr.api.request.RequestObj;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.api.util.PasswordUtils;
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.user.PasswordService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
@@ -47,8 +48,6 @@ public class RetrievePwdController {
 	@Autowired
 	private SecurityInfoService securityInfoService;
 
-	
-	
 
 	/**
 	 * 忘记密码 更新操作
@@ -61,8 +60,8 @@ public class RetrievePwdController {
 	@ResponseBody
 	public ApiResult forgetResetPassword(RequestObj requestObj,HttpServletRequest request){
 		
-		String mobile=requestObj.getMobile();
-		String password=requestObj.getPassword();		
+		final String mobile=requestObj.getMobile();
+		final String password=requestObj.getPassword();		
 		
 		if (StringUtil.isBlank(password) || StringUtil.isBlank(mobile)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.error.");

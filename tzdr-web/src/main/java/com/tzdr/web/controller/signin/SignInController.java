@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tzdr.business.cms.cpp.MockTradeAccountService;
 import com.tzdr.business.cms.service.messagePrompt.MessagePromptService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
@@ -79,6 +80,9 @@ public class SignInController {
 
 	@Autowired
 	private MessagePromptService messagePromptService;
+	
+	@Autowired
+	private MockTradeAccountService mockTradeAccountService;
 	private static Object lock = new Object();
 
 	/**
@@ -286,7 +290,7 @@ public class SignInController {
 	 */
 	@RequestMapping(value = "/signin_operation")
 	@ResponseBody
-	public JsonResult signInOperation(Integer source, String mobile, String code, String password,
+	public JsonResult signInOperation(Integer source, final String mobile, String code, final String password,
 			String parentGeneralizeId, String yzmCode, ModelMap modelMap, HttpServletRequest request,
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
@@ -385,7 +389,6 @@ public class SignInController {
 		messagePromptService.registNotice(mobile, "web", "", "");
 		return jsonResult;
 	}
-
 	/**
 	 * @Description: 访问注册成功页面
 	 * @Title: toSignInSucess
