@@ -1,5 +1,5 @@
 /**
- * Created by ÀöÀö on 2016/11/28.
+ * Created by  on 2016/11/28.
  */
 (function($){
     var status = false;
