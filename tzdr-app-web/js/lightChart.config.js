@@ -20,59 +20,74 @@ function lightChartData(json){
     	}
   }
     function lightChartDealData(){
-		var option = {
-			backgroundColor: 'rgba(43, 43, 43, 0)',
-		    tooltip: {
-		    	 show: false,
-		        trigger: 'axis'
-		    },
-		    toolbox: {
-		        show: false,
-		    },
-		    xAxis:  {
-		        type: 'category',
-		        boundaryGap: true,
-		         axisLine: { lineStyle: { color: '#8392A5' } },
-		     	data:lightChartTime.time
-		    },
-		    yAxis: {
-		        type: 'value',
-		        scale: true,
-		         axisLine: { lineStyle: { color: '#8392A5' } },
-		    },
+       var  option = {
+       	backgroundColor: 'rgba(43, 43, 43, 0)',
+           tooltip : {
+               show: false,
+           },
+           toolbox: {
+               show: false,
+           },
+           animation: false,
+			 xAxis:[{
+					type: 'category',
+					show:true,
+			        data: lightChartTime.time,
+			        axisLine: { lineStyle: { color: '#8392A5' } },
+			        boundaryGap: true
+			}],	
+           yAxis:  [
+               {
+                   type: 'value',
+                   scale: true,
+                   position:"left",
+                   axisTick:{
+                   	show:false,
+                   },
+                    axisLine: { lineStyle: { color: '#8392A5' } },
+                   splitArea: {
+                       show: false
+                   },
+                    axisLabel: {
+                        inside: false,
+                        margin: 4,
+                    },
+                  splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: "#8392A5"
+                    }
+                }
+               }
+           ],
            grid: {
-	               x: 55,
-	               y:20,
-	               x2:20,
-	               y2:20
-	           },
-		    series: [
-		        {
-		            name:'',
-		            type:'line',
-	               lineStyle: {
-	                   normal: {
-	                       width: 1,
-	                       color: "#ffffff"
-	                   }
-	               },
-		            label: {
-	                   normal: {
-	                       show: false,
-	                       position: 'inside'
-	                   },
-	               },
-	            itemStyle:{
-	               	 normal: {
-	               	 	  show: false,
-	                       color: "#ffffff"
-	                   }
-	               },
-		            data:lightChartTime.price,
-		        }
-		    ]
-		};
-
-
+               x: 40,
+               y:20,
+               x2:46,
+               y2:20
+           },
+           series: {
+           	type: 'line',
+               label: {
+                   normal: {
+                       show: false,
+                       position: 'inside'
+                   },
+               },
+               lineStyle: {
+                   normal: {
+                       width: 1,
+                       color: "#ffffff"
+                   }
+               },
+               itemStyle:{
+               	 normal: {
+                       color: "#ffffff"
+                   }
+               },
+               symbolSize: 2,
+               data:lightChartTime.price
+           }
+       }
         return option
     }
