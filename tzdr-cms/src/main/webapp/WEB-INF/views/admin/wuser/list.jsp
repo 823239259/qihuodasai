@@ -15,6 +15,20 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 </head>
 <body>
+<script type="text/javascript">
+/**
+ * 电话号码处理
+ */
+function userMobileHandle(value,rows,index){
+	     var val = value.substring(0,3);
+		 var val1 = value.substring(7,value.length);
+		 var result=val+"****"+val1;
+	 	 //<shiro:hasPermission name="sys:customerService:wuser:usermobileview">
+			result = value;
+		//</shiro:hasPermission>
+		return result;
+}
+</script>
 <shiro:hasPermission name="sys:customerService:wuser:view">
 <!-- toolbar="#toolbar" -->
 	<table id="dg" class="easyui-datagrid" width="100%" style="height:auto;"
@@ -113,7 +127,9 @@
 	            </tr>
 	          </table>
 	        </form>
+	        <shiro:hasPermission name="sys:customerService:wuser:usermobileview">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openMoneyDetail()">查询资金明细</a>
+          	</shiro:hasPermission>
            <%--  <shiro:hasPermission name="sys:customerService:wuser:insteadActivityUser">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="insteadActivityUser()">变为6600活动用户</a>
             </shiro:hasPermission> --%>
