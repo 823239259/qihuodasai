@@ -18,36 +18,26 @@ $(document).ready(function () {
 	         urlHost = urls[0];
 	     }
         $("#login").bind("click",function(){
-            location.href =funUrl+"user/redirectVsNet?url="+urlHost;
+            location.href =funUrl+"user/account";
         });
      window.onload = loadUserInfo;
 });
+
 function initLoadParam(name){
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
     if (r!=null) return unescape(r[2]); return null; //返回参数值
 }
 function loadUserInfo(){
-    if(check == undefined || check == null){
-        location.href = funUrl+"login/user/redirect/account?url="+url;
-        return ;
-    }
-    var mobile = null;
-    if(param != null){
         $.ajax({
             type:"get",
-            url:funUrl+"login/user/getAccount?check="+check,
-            data:{
-                mobile:param,
-                check:check
-            },
+            url:funUrl+"user_login_check",
             dataType:'json',//服务器返回json格式数据
             success:function(result){
-                var data = result.data.data;
+                var data = result.data;
                 if(data != null){
-                    mobile = data.mobile;
+                    var mobile = data.mobile;
                     if(mobile != null){
-                        console.log(mobile);
                         mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
                         $("#login").html("欢迎您，<a href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>"); 
                         $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
@@ -59,7 +49,6 @@ function loadUserInfo(){
                 }
             }
         });
-    }
 }
 function getLocalTime(nS) {
     return  new Date(parseInt(nS) * 1000).Format("yyyy-MM-dd hh:mm:ss");
