@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+    <meta name="description" content="{dede:global.cfg_description/}" />
+    <meta name="keywords" content="{dede:global.cfg_keywords/}" />
+    <link rel="shortcut icon" href="../../favicon.ico" />
+    <link rel="stylesheet" href="/templets/style/html/css/aboutHelp.css">
+    <script type="text/javascript" src="/templets/style/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/templets/style/html/js/operateCourse.js"></script>
+</head>
+<body>
+<!--header-->
+{dede:include filename="head.htm"/}
+<!--content-->
+<div id="aboutHelp">
+    <div style="height: 160px; background: #fff; margin-top: 10px;"></div>
+    <div class="aboutHelpAll">
+    <div class="aboutHelp_left">
+        <p class="calendar"><span><!--{dede:type}[field:typename /]{/dede:type}-->帮助中心</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="list">
+            <ul>
+                <li class="list_lis help_read_lis">
+                        <p class="title" style="display: none;">新手必读</p>
+                        <ul class='list-se' style="display: block;">
+                            <p class="title">新手必读</p>
+                            {dede:arclist titlelen=100 typeid=40 orderby='id' orderway='asc' }
+                                <li class="list_data" data-lis="1" style="right: 0;">
+                                    <p class="">[field:title/]</p>
+                                </li>
+                            {/dede:arclist}
+                        </ul>
+                    </li>
+                    <li class="list_lis">
+                        <p class="title">产品介绍</p>
+                        <ul class='list-se'>
+                            <p class="title">产品介绍</p>
+                            {dede:arclist titlelen=100 typeid=42 orderby='id' orderway='asc' }
+                            <li class="list_data" data-lis="" style="right: 0;">
+                                <p class="">[field:title/]</p>
+                            </li>
+                            {/dede:arclist}
+                        </ul>
+                    </li>
+                    <li class="list_lis">
+                        <p class="title">安全保障</p>
+                        <ul class='list-se'>
+                            <p class="title">安全保障</p>
+                            {dede:arclist titlelen=100 typeid=43 orderby='id' orderway='asc' }
+                            <li class="list_data" data-lis="" style="right: 0;">
+                                <p class="">[field:title/]</p>
+                            </li>
+                            {/dede:arclist}
+                        </ul>
+                    </li>
+                    <li class="list_lis">
+                        <p class="title">常见问题</p>
+                        <ul class='list-se'>
+                            <p class="title">常见问题</p>
+                            {dede:arclist titlelen=100 typeid=41 orderby='id' orderway='asc' }
+                            <li class="list_data" data-lis="" style="right: 0;">
+                                <p class="">[field:title/]</p>
+                            </li>
+                            {/dede:arclist}
+                        </ul>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <div class="aboutHelp_right">
+        <p class="calendar"></p>
+        <!--新手必读  1-7-->
+            {dede:sql sql="SELECT body FROM `dede_addonarticle` where typeid=40"}
+            <div class="tab_lis help_read">
+                <p class="title"></p>
+                <div class="content">
+                    <p class="p1">[field:body/]</p>
+                </div>
+            </div>
+            {/dede:sql}
+        <!--产品介绍  1-16  -->
+        {dede:sql sql="SELECT body FROM `dede_addonarticle` where typeid=42"}
+            <div class="tab_lis help_introduce">
+                <p class="title">什么是富时A50</p>
+                <div class="content">
+                    <p class="p1">新华富时中国A50指数又称新华富时A50指数，是由全球四大指数公司之一的富时指数有限公司，为满足中国国内投资者以及合格境外机构投资者(QFII)需求所推出的实时可交易指数，将通过电子交易平台“SGXQUEST”进行，以美元标价进行交易结算。新华富时中国A50指数包含了中国A股市场市值最大的50家公司，其总市值占A股总市值的33%，是最能代表中国A股市场的指数，许多国际投资者把这一指数看作是衡量中国市场的精确指标。 新华富时A50指数于9月由新华富时指数有限公司编制，该公司为新华财经公司与英国富时公司合资设立，而富时公司是全球四大指数公司之一。</p>
+                    <p class="p4">新加坡交易所中国A50指数标准合约规则</p>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr><td style="width: 228px;">标的指数</td><td style="width: 721px;">FTSE/Xinhua中国A50指数</td></tr>
+                        <tr><td>合约乘数</td><td>1指数点=1美元</td></tr>
+                        <tr><td>交易时间</td><td>T时段： 9：00--15：55，16：40-2:00</td></tr>
+                        <tr><td>涨跌停板与熔断机制</td>
+                            <td>初始停板为±10%。一旦打板，随后的10分钟内将只允许在±10%范围内交易。10分钟结束后，涨跌停板扩大到±15%。如果再次打板，将再有10分钟的冷却期，期间只允许在±15%范围内交易。10分钟冷却期之后当日剩余的交易时间内，取消涨跌停板。</td>
+                        </tr>
+                        <tr><td>最后交易日</td><td>合约到期月份的倒数第2个交易日</td></tr>
+                        <tr><td>最终结算价</td><td>最终结算价将是FTSE/Xinhua中国A50指数的官方收盘价，精确到两位小数点。</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="p4">我司中国A50指数合约规则</p>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr><td style="width: 259px;">手数</td><td style="width: 160px;">1手</td><td style="width: 160px;">4手</td><td style="width: 160px;">8手</td><td style="width: 160px;">16手                         </td></tr>
+                        <tr><td>保证金</td><td>1320元</td><td>1320元</td><td>1320元</td><td>1320元</td></tr>
+                        <tr><td>总操盘资金</td><td>17160元</td><td>17160元</td><td>17160元</td><td>17160元</td></tr>
+                        <tr><td>平仓线</td><td>16236元</td><td>17160元</td><td>17160元</td><td>17160元</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="p5">交易时间：富时A50的具体交易时间段以方案申请页公示为准。</p>
+                    <p class="p5">交易综合费：12美元/双边</p>
+                </div>
+            </div>
+        {/dede:sql}
+        <!--安全保障  1-5  -->
+        {dede:sql sql="SELECT body FROM `dede_addonarticle` where typeid=43"}
+            <div class="tab_lis help_guarantee">
+                <p class="title">安全保障</p>
+                <div class="content">
+                    <p class="p1">[field:body/]</p>
+                </div>
+            </div>
+        {/dede:sql}
+        <!--常见问题  1-6  -->
+        <div class="tab_lis help_guarantee">
+            <p class="title">实名认证常见问题</p>
+            <div class="content">
+                <!--循环开始-->
+                <p class="p2">1、申请方案成功如何查询交易账户和密码？</p>
+                <p class="p3">申请方案成功后，维胜将通过短信进行提醒，收到短信后就可在您的维胜账户查看您的交易账号和密码，首先点击我的账户；然后找到“操盘记录”，查看交易账户和密码。</p>
+                <!--循环结束-->
+                <p class="p2">2、登录交易软件提示账户密码错误怎么办？</p>
+                <p class="p3">首先请注意您密码的大小写更替，如还是不能登录可联系客服更改密码。</p>
+                <p class="p2">3、注册时收不到验证码怎么办？</p>
+                <p class="p3">如果注册时未收到验证码，清理一下您的浏览器缓存即可，或者拨打客服电话400-852-8008。</p>
+                <p class="p2">4、开户证件可以使用军官证、驾驶证等证件吗？</p>
+                <p class="p3">不可以。中华人民共和国居民身份证是自然人投资者参与期货市场的唯一身份证明证件。</p>
+                <p class="p2">5、我的资金安全吗？</p>
+                <p class="p3">我们对客户交易资金的管理完全按照"专户专款专用"的标准模式进行运作，并且以三方监管模式——资金由银行监管，交易由券商监管，风控由维胜监管。交易委托通过易盛极星交易系统或维胜快手交易系统实时进入合作券商在市场上成交，确保交易安全、快捷。</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!--footer-->
+{dede:include filename="footer.htm"/}
+</body>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        $('.list ul li p').clickdown();
+        $('.list-se p[class=title]').clickup();
+        $('.list>ul>li').ad();
+    });
+    $(function(){
+        var lis = $(".aboutHelp_left .help_read_lis ul li");
+        var readLis = $(".aboutHelp_right .help_read .title");
+        for(var i= 0; i<lis.length;i++){
+            readLis.eq(i).html(lis.eq(i).find("p").html())
+            
+        }
+        var list_data =$(".aboutHelp_left .list .list-se li.list_data");
+        list_data.eq(0).find("p").addClass("on");
+        $(".aboutHelp_right .tab_lis").eq(0).show();
+        list_data.each(function(i){
+            $(this).attr('data-lis',i);
+        });
+        list_data.click(function() {
+            var _this = $(this);
+            $(".aboutHelp_left .list_data").find("p").removeClass("on").eq(_this.attr("data-lis")).addClass("on");
+            $(this).find("p").addClass("on");
+            $(".tab_lis").hide().eq(_this.attr("data-lis")).show();
+        });
+    });
+</script>
+</html>
