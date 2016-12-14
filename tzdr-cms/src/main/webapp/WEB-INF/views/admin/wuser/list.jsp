@@ -24,7 +24,7 @@
         <thead>
             <tr>
                 <th field="id" data-options="checkbox:true"></th>
-				<th field="mobile" width="150">手机号 </th>
+				<th field="mobile" width="150" data-options="formatter:userMobileHandle">手机号 </th>
 				<th field="tname" width="150">用户姓名</th>
 				<th field="userType" width="150">用户类型</th>
 				<th field="allocationMoney" width="150">配资金额</th>

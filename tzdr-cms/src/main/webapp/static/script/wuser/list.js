@@ -36,3 +36,12 @@ function insteadActivityUser() {
 		}
 	});
 }
+/**
+ * 电话号码处理
+ */
+function userMobileHandle(value,rows,index){
+	console.log(value);
+	var val = value.substring(0,3);
+	var val1 = value.substring(7,value.length);
+	return val+"****"+val1;
+}
