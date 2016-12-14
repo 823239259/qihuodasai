@@ -17,93 +17,62 @@ function lightChartData(json){
 	            lightChart.setOption(option);
 	            lightChart.resize();
 	        }
-//	        console.log(JSON.stringify(lightChartTime))
     	}
   }
     function lightChartDealData(){
-     var  option = {
-       	backgroundColor: 'rgba(43, 43, 43, 0)',
-           tooltip : {
-               show: false,
-               transitionDuration:0,
-               trigger: 'axis',
-               axisPointer : {
-                   type : 'line',
-                   animation: false,
-		            lineStyle: {
-		                color: '#ffffff',
-		                width: 1,
-		                opacity: 1
-		            }
-               },
-           },
-           toolbox: {
-               show: false,
-           },
-           animation: false,
-			 xAxis:[{
- 				 type : 'category',
-//                position:'bottom',
-                 boundaryGap: true,
-//                axisTick: {onGap:false},
-//                splitLine: {show:false},
-                 nameTextStyle:"#8392A5",
-                   axisLine: { lineStyle: { color: '#8392A5' } },
-                  data : lightChartTime.time
-			}],	
-           yAxis:  [
-               {
-                   type: 'value',
-                   scale: true,
-                   position:"left",
-                   axisTick:{
-                   	show:false,
-                   },
-                    axisLine: { lineStyle: { color: '#8392A5' } },
-                   splitArea: {
-                       show: false
-                   },
-                    axisLabel: {
-                        inside: false,
-                        margin: 4,
-                    },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                        color: "#8392A5"
-                    }
-                }
-               }
-           ],
+		var option = {
+			backgroundColor: 'rgba(43, 43, 43, 0)',
+		    tooltip: {
+		    	 show: false,
+		        trigger: 'axis'
+		    },
+		    toolbox: {
+		        show: false,
+		    },
+		    xAxis:  {
+		        type: 'category',
+		        boundaryGap: true,
+		         axisLine: { lineStyle: { color: '#8392A5' } },
+		     	data:lightChartTime.time
+		    },
+		    yAxis: {
+		        type: 'value',
+		        scale: true,
+		         axisLine: { lineStyle: { color: '#8392A5' } },
+		    },
            grid: {
-               x: 40,
-               y:20,
-               x2:20,
-               y2:5
-           },
-           series: {
-           	type: 'line',
-               label: {
-                   normal: {
-                       show: false,
-                       position: 'inside'
-                   },
-               },
-               lineStyle: {
-                   normal: {
-                       width: 1,
-                       color: "#ffffff"
-                   }
-               },
-               itemStyle:{
-               	 normal: {
-                       color: "#ffffff"
-                   }
-               },
-               symbolSize: 2,
-               data:lightChartTime.price,
-           }
-       }
+	               x: 55,
+	               y:20,
+	               x2:20,
+	               y2:20
+	           },
+		    series: [
+		        {
+		            name:'',
+		            type:'line',
+	               lineStyle: {
+	                   normal: {
+	                       width: 1,
+	                       color: "#ffffff"
+	                   }
+	               },
+		            label: {
+	                   normal: {
+	                       show: false,
+	                       position: 'inside'
+	                   },
+	               },
+	            itemStyle:{
+	               	 normal: {
+	               	 	  show: false,
+	                       color: "#ffffff"
+	                   }
+	               },
+		            data:lightChartTime.price,
+		        }
+		    ]
+		};
+
 
         return option
     }
