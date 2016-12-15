@@ -107,13 +107,13 @@
 	</head>
 	<body style="background-color: #2B2B2B">
 		<div id="bg1" style="opacity: 1;">
-			<header class="mui-bar mui-bar-nav" style="position: absolute;top: 0px;z-index: 999;"> 
+			<header class="mui-bar mui-bar-nav" > 
 			    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 			    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
-			<div class="mui-content" style="position: absolute;width: 100%;z-index: 997;" >
+			<div class="mui-content">
 					<div id="headerMenu" style="background-color: #2B2B2B;">
 						<table cellpadding="0" cellspacing="0">
 							<thead>
@@ -750,6 +750,7 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+					//bindGuidance()
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
@@ -768,7 +769,7 @@
 							"height":$(".buttomFix").height()+87+"px",
 							"background": "url(../../images/tradeGudice1.png) no-repeat",
 							"background-size":"100% 100%",
-							"z-index":"991",
+							"z-index":"999",
 						});
 						var clickNum=0;
 						$(".bottom,.top").click(function(){
