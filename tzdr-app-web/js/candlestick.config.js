@@ -58,7 +58,6 @@
 	  		CandlestickChartOption = setOption(newData,x);
 	  		myChart.setOption(CandlestickChartOption);
 	  		myChart.resize();
-	  		console.log(x);
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	

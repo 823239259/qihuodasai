@@ -671,10 +671,10 @@ mui.plusReady(function(){
 				var option = setOption(newData);
 			            var length=$("#positionList .position3").length;
 			        	var text=$("#CommodityNo").text();
+			        	var x=0;
 			            if(length!=0){
 			            	for(var i=0;i<length;i++){
 			            		var text1=$("#positionList .position0").eq(i).text();
-			            	console.log(text1);
 			            		if(text.indexOf(text1)>=0){
 			            			x=Number($("#positionList .position3").eq(i).text());
 			            		}
@@ -777,6 +777,7 @@ mui.plusReady(function(){
     		sendHistoryMessage(val);
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
+        	var x=0;
             if(length!=0){
             	for(var i=0;i<length;i++){
             		var text1=$("#positionList .position0").eq(i).text();
