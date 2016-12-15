@@ -668,8 +668,8 @@ var tab="<%=tab%>";
 			  	<td>迷你德国DAX指数</td>
 			  	<td>欧洲衍生期货交易所</td>
 			  	<td>德国DAX指数</td>
-			  	<td>1个指数点（5欧元）   无涨跌幅限制</td>
-			  	<td class="sp">T+1时段的可委托价格区间为 期货合约在T时段最后成交价 的5%</td>
+			  	<td>1个指数点（5欧元）   </td>
+			  	<td class="sp">无涨跌幅限制</td>
 			  </tr>
 			</tbody>
 			</table>
