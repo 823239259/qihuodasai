@@ -305,7 +305,7 @@
 						            </ul>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-						             <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
+						             <!--<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>-->
 						        </div>
 						        <div id="item2" class="mui-control-content">
 						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
@@ -381,12 +381,12 @@
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
 								</li>
-								<li class="mui-table-view-cell">
+								<!--<li class="mui-table-view-cell">
 									<a id="openCondition">条件单</a>
 								</li>
 								<li class="mui-table-view-cell">
 									<a id="openStop">止损单</a>
-								</li>
+								</li>-->
 								<li class="mui-table-view-cell">
 								</li>
 							</ul>
@@ -926,7 +926,7 @@
 					$("#bg3").css("opacity","0");
 					$(".mui-content").eq(0).css("z-index","997");
 				});
-				document.getElementById("openStop").addEventListener("tap",function(){
+				/**document.getElementById("openStop").addEventListener("tap",function(){
 					$("#bg1").css("opacity","0");
 					$("#bg2").css("opacity","0");
 					$("#bg3").css("opacity","1");
@@ -939,7 +939,7 @@
 					$("#bg3").css("opacity","0");
 					mui("#topPopover").popover("toggle");
 					$(".mui-content").eq(1).css("z-index","997");
-				});
+				});**/
 				var num=0;
 				var numCondition=0;
 				$("#conditionTable .testclick").on("tap",function(){
