@@ -43,17 +43,28 @@
 	        		}
 	        	}
     	    }
-        	
         	newData=rawData.slice(-60);
-	  		CandlestickChartOption = setOption(newData);
+        	var x=0;
+            var length=$("#positionList .position3").length;
+        	var text=$("#CommodityNo").text();
+            if(length!=0){
+            	for(var i=0;i<length;i++){
+            		var text1=$("#positionList .position0").eq(i).text();
+            		if(text.indexOf(text1)>=0){
+            			x=Number($("#positionList .position3").eq(i).text());
+            		}
+            	}
+            }
+	  		CandlestickChartOption = setOption(newData,x);
 	  		myChart.setOption(CandlestickChartOption);
 	  		myChart.resize();
+	  		console.log(x);
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	
     }
     //设置数据参数（为画图做准备）
-    function setOption(rawData){
+    function setOption(rawData,x){
         var dates = rawData.map(function (item) {
             return item[0];
         });
@@ -83,7 +94,7 @@
 		    grid: {
 		               x: 43,
 		               y:20,
-		               x2:20,
+		               x2:46,
 		               y2:5
 		           },
 		    xAxis: {
@@ -119,6 +130,20 @@
 		            type: 'candlestick',
 		            name: '',
 		            data: data,
+		              markLine: {
+                		symbol: ['none', 'none'],
+                		clickable:false,
+                       lineStyle: {
+		                   normal: {
+		                       width: 1,
+		                       color: "#ffffff"
+		                   }
+		               },
+		                data: [
+			                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+		       				 {name: '标线2终点', xAxis: "2", yAxis: x}
+		                ]
+               		 },
 		            itemStyle: {
 		                normal: {
 		                    color: '#FD1050',
@@ -204,7 +229,7 @@
 				 grid: {
 	               x: 40,
 	               y:30,
-	               x2:20,
+	               x2:46,
 	               y2:20
 	           },
 	          xAxis:[
