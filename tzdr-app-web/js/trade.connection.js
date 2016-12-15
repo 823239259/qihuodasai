@@ -159,7 +159,7 @@ function initLoad() {
 		//不是手动登出，则重连交易服务器
 		if(loginFail == false){ 
 			//交易连接断开重连
-			reconnect();
+			tradeReconnect();
 		}else{
 			if(anotherPlace && loginFail){
 				alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
@@ -169,7 +169,15 @@ function initLoad() {
 		}
 	}
 }
-
+/**
+ * 重新连接交易服务器
+ */
+function tradeReconnect(){
+	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	if(socket == null){
+		initTrade();
+	}
+}
 /**
  * 初始化交易
  */
@@ -197,15 +205,7 @@ function initTrade(){
 	 */
 	tradeLogin();
 }
-/**
- * 重新连接交易服务器
- */
-function reconnect(){
-	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
-	if(socket == null){
-		initTrade();
-	}
-}
+
 
 /**
  * 获取版本信息

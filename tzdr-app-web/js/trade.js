@@ -208,10 +208,10 @@ function handleData(evt){
 		}else if(method == "OnRspInsertStopLoss"){
 			tip("提交成功");
 			
-		}/*else if(method == "OnRspQryStopLoss"){
+		}else if(method == "OnRspQryStopLoss"){
 			var stopLossParam = parameters;
-			  //appendStopLossData(stopLossParam);
-		}*/
+			  appendStopLossData(stopLossParam);
+		}
 	}else{  
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
@@ -246,16 +246,16 @@ function updateBalance(parama){
 	var accountNo = parama.AccountNo;
 	var cachBanlace = loadCachBanlance[accountNo];
 	var deposit = parama.Deposit;
-	var currency = parama.CurrencyRate; 
+	var currency = parama.CurrencyRate;
 	var closeProfit = parama.CloseProfit;
 	var frozenMoney =parama.FrozenMoney;
-	var todayAmount = parama.TodayAmount;
+	var todayAmount = parama.TodayAmount; 
 	var unExpiredProfit = parama.UnExpiredProfit;
 	var unAccountProfit = parama.UnAccountProfit;
 	var floatingProfit = $("#floatingProfit").val();
 	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
-	localCacheCurrencyAndRate[currencyNo]  = currency;
+	localCacheCurrencyAndRate[currencyNo]  = currency == undefined ? localCacheCurrencyAndRate[currencyNo] : currency;
 	loadCachCurrecyRate[accountNo] = currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
@@ -939,7 +939,7 @@ var stoplossIndex = 0;
  * 缓存选中的止损单列
  */
 var selectStopLoss = {};
-/*function appendStopLossData(param){
+function appendStopLossData(param){
 		var contractCode = param.CommodityNo+param.ContractNo;
 		var stopLossNo = param.StopLossNo;
 		var status = param.Status;
@@ -971,7 +971,7 @@ var selectStopLoss = {};
 		$("#clickTableBody").append(html);
 		addStopLossBindClick(cls);
 		stoplossIndex++;
-}*/
+}
 /**
  * 验证持仓信息是否存在 
  */
@@ -1348,22 +1348,29 @@ $(function(){
 			openLogin();
 		} 
 	});
-/*	$("#stopChoicePrices1").bind("input",function(){  
+	$("#stopChoicePrices1").bind("input",function(){  
 		var holdAvgPrice =$("#stopHoldAvgPrice").val();
 		var stopChoicePrices1 = $("#stopChoicePrices1").val();
 		if(stopChoicePrices1 == 0 || stopChoicePrices1.length == 0){ 
 			return;
 		}
-		var choiceStopPrices = $("#choiceStopPrices").val();
+		var stopType = $("#choiceStopPrices").val();
+		var choiceStopPrice1 = $("#stopChoicePrices1").val();
+		var stopDrection = $("#stopBorderLeft").attr("data-tion-drection");
 		var scale = 0.00;
-		if(choiceStopPrices == 0){ 
+		if(stopDrection == 0){
+			
+		}else if(stopDrection == 1){
+			
+		}
+		if(stopType == 0){ 
 			scale = (holdAvgPrice - stopChoicePrices1) / stopChoicePrices1 * 100;
-		}else if(choiceStopPrices == 2){
+		}else if(stopType == 2){
 			var stopEvenPrice = $("#stopEvenPrice").text();
 			scale = stopChoicePrices1 / stopEvenPrice * 100;
 		}
 		$("#Increase").text(parseFloat(scale).toFixed(2)+"%");
-	});*/
+	});
 }); 
 function initSocketTrade(){
 	setTradeConfig(tradeWebSocketIsMock);
@@ -1601,7 +1608,7 @@ function bindOpertion(){
 	/**
 	 * 止损单
 	 */
-	/*$("#insertStopData").bind("click",function(){
+	$("#insertStopData").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
 			if(contractCode == undefined){
@@ -1624,11 +1631,14 @@ function bindOpertion(){
 				tip("请输入手数");
 				return;
 			}
+			var stopLossType = $("#choiceStopPrices").val();
 			var stopLossDiff = 0;
+			var typeText = "限价止损";
 			if(stopLossType == 0){
 				stopLossDiff = lastPrice - stopChoicePrices1;
-			}else if(stopLossType == 1){
+			}else if(stopLossType == 2){
 				stopLossDiff = stopChoicePrices1;
+				typeText = "动态止损";
 			}
 			if(stopLossDiff == 0){
 				alertProtype("止损价差会导致立即触发,请重新设置","提示",Btn.confirmed());
@@ -1641,11 +1651,11 @@ function bindOpertion(){
 			var exchangeNo = localQuote.ExchangeNo;
 			var commodityNo = localQuote.CommodityNo;
 			var contractNo = localQuote.ContractNo;
-			var stopLossType = $("#choiceStopPrices").val();
+			alertProtype("是否添加"+typeText,"提示",Btn.confirmedAndCancle(),doGetInsertStopLoss());
 		}else{
 			tip("未登录,请先登录");
 		}
-	});*/
+	});
 }
 $("#add").bind("click",function(){
 	var contractCode = selectDesgnate["contraction"];
@@ -1658,7 +1668,7 @@ $("#add").bind("click",function(){
 /**
  * 显示止损盈亏的窗口
  */
-/*$("#stopLoss").bind("click",function(){
+$("#stopLoss").bind("click",function(){
 	var contractCode = selectPostion["contractCode"];
 	if(contractCode == undefined){
 		tip("请选择一条信息");
@@ -1675,11 +1685,12 @@ $("#add").bind("click",function(){
 	}
 	$("#stopEvenTd").text($contractCode.text()); 
 	$("#stopBorderLeft").text($drection.text());
+	$("#stopBorderLeft").attr("data-tion-drection",$drection.attr("data-drection"));
 	$("#stopEvenPrice").text(localQuote.LastPrice);
 	$("#stopNumber").val($holdNum.text()); 
 	$("#stopHoldAvgPrice").val($holdAvgPrice.text());
 	mui("#popoverLoss").popover("toggle");
-});*/
+});
 /**
  * 下单
  */
@@ -1728,7 +1739,7 @@ function doInsertAllSellingOrder(){
 		}
 		var param = new Array();
 		param[0] = tradeParam;
-		closing(param); 
+		closing(param);
 	}
 }
 /**
@@ -1828,6 +1839,9 @@ function doInsertChangeSingleOrder(){
 	modifyOrder(param);  
 	isUpdateOrder = true;
 }
+/**
+ * 添加止损操作
+ */
 function doGetInsertStopLoss(){
 	if(isLogin){
 			var contractCode = selectPostion["contractCode"];
@@ -1840,7 +1854,7 @@ function doGetInsertStopLoss(){
 			var stopLossDiff = 0;
 			if(stopLossType == 0){
 				stopLossDiff = lastPrice - stopChoicePrices1;
-			}else if(stopLossType == 1){
+			}else if(stopLossType == 2){
 				stopLossDiff = stopChoicePrices1;
 			}
 			var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
@@ -1977,7 +1991,7 @@ function sumListfloatingProfit(){
 	    var $contractCode = $this.find("span[class = 'position0']");
 	    var localCommodity = getMarketCommdity($contractCode.text());
 	    if(localCommodity != undefined){
-	    	var currencyNo = localCommodity.CurrencyNo;
+	    	var currencyNo = localCommodity.CurrencyNo; 
 	    	var currencyRate = localCacheCurrencyAndRate[currencyNo];
 			price = price + Number($floatP.text() * currencyRate);
 	    }
