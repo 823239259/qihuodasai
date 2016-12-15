@@ -583,6 +583,11 @@ mui.plusReady(function(){
 		$("#MainContract").text($("#commodeityNo").val()+$("#contractNo").val());
 		$("#xj").removeAttr("checked");
 		$("#sj").prop("checked",true);
+		var type = $('input:radio[name="prices"]:checked').val();
+		if(type==1){
+			$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
+						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
+		}
 		$("#orderPrice").val("");
 		$("#orderPrice").attr("placeholder","市价");
 		$("#buyBtn_P").text("市价");

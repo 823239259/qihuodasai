@@ -55,6 +55,7 @@
 	  		CandlestickChartOption = setOption(newData,x);
 	  		myChart.setOption(CandlestickChartOption);
 	  		myChart.resize();
+	  		console.log(x);
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	
@@ -129,6 +130,12 @@
 		              markLine: {
                 		symbol: ['none', 'none'],
                 		clickable:false,
+                       lineStyle: {
+		                   normal: {
+		                       width: 1,
+		                       color: "#ffffff"
+		                   }
+		               },
 		                data: [
 			                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
 		       				 {name: '标线2终点', xAxis: "2", yAxis: x}
