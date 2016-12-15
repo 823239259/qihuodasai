@@ -669,15 +669,18 @@ mui.plusReady(function(){
     			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
 				var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData,x);
-		        		var x=0;
-			            if(dataPricesList.length!=0){
-			            	for(var i=0;i<dataPricesList.length;i++){
-			            		if(dataPricesList[i].id==$("#CommodityNo").text()){
-			            			x=dataPricesList[i].prices;
+			            var length=$("#positionList .position3").length;
+			        	var text=$("#CommodityNo").text();
+			            if(length!=0){
+			            	for(var i=0;i<length;i++){
+			            		var text1=$("#positionList .position0").eq(i).text();
+			            	console.log(text1);
+			            		if(text.indexOf(text1)>=0){
+			            			x=Number($("#positionList .position3").eq(i).text());
 			            		}
 			            	}
 			            }
+			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData,x);
 						setTimeout(function(){
 							myChart.resize();
 							myChart.setOption(option);
@@ -772,11 +775,13 @@ mui.plusReady(function(){
     		var val=$("#timeChartMenu").val();
     		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
-        	var x=0;
-            if(dataPricesList.length!=0){
-            	for(var i=0;i<dataPricesList.length;i++){
-            		if(dataPricesList[i].id==$("#CommodityNo").text()){
-            			x=dataPricesList[i].prices;
+            var length=$("#positionList .position3").length;
+        	var text=$("#CommodityNo").text();
+            if(length!=0){
+            	for(var i=0;i<length;i++){
+            		var text1=$("#positionList .position0").eq(i).text();
+            		if(text.indexOf(text1)>=0){
+            			x=Number($("#positionList .position3").eq(i).text());
             		}
             	}
             }

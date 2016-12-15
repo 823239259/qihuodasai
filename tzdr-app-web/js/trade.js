@@ -413,7 +413,7 @@ function appendOrder(param){
 	var orderPrice = param.OrderPrice;
 	if(localCommodity != undefined){
 		var doSize = localCommodity.DotSize;
-		orderPrice = parseFloat(orderPrice).toFixed(doSize);
+		orderPrice = Number(parseFloat(orderPrice)).toFixed(doSize);
 	}
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
@@ -705,7 +705,6 @@ function addPostion(param){
 		if(currencyNo == undefined){
 			currencyNo = "";
 		}
-		dataPricesList.push({"id":contractCode,"prices":holdAvgPrice});
 		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
 		var clspo = 'position-index'+postionIndex; 

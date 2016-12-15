@@ -299,7 +299,9 @@ p{
 	width: 70px;
 	height:40px;
 	color:#666666;
-
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 #trade{
 	background-color: #2B2B2B;
