@@ -403,20 +403,21 @@
 				    	<div id="stopTitle" class="mui-control-content mui-active">
 				    		<table>
 				    			<tr>
-				    				<td class="oddTd">合约</td>
-				    				<td class="evenTd ">富时A50</td>
-				    				<td class="oddTd borderLeft">多头</td>
-				    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
+				    				<td class="oddTd" id = "stopOddTd">合约</td>
+				    				<td class="evenTd" id = "stopEvenTd">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "stopBorderLeft">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "stopEvenPrice"></i></td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">方式</td>
 				    				<td  colspan="3">
 				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices">
-				    						<option>止损价</option>
-				    						<option>动态价</option>
+				    						<option value="0">止损价</option>
+				    						<option value="2">动态价</option>
 				    					</select>
-				    					<input type="text" value="789" id="stopChoicePrices1"  readonly="readonly">
-				    					<span id="Increase">00</span>
+				    					<input type="hidden" id = "stopHoldAvgPrice" />
+				    					<input type="text" value="0" id="stopChoicePrices1">
+				    					<span id="Increase">0</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
@@ -424,8 +425,8 @@
 				    				<td class="evenTd "><input type="text" value="1" id="stopNumber" class="stopCommStyle"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices1">
-				    						<option>市价</option>
-				    						<option>对手价</option>
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
 				    					</select>
 				    				</td>
 				    			</tr>
@@ -684,21 +685,13 @@
 				    				<td>多空</td>
 				    				<td>类别</td>
 				    				<td>手数</td>
-				    				<td>触发条件</td>
+				    				<td>止损/止盈价</td>
 				    				<td>委托价</td>
-				    				<td>有效日期</td>
+				    				<td>下单日期</td>
 				    			</tr>
 				    		</thead>
-							<tr class="testclick1">
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-								<td>kl</td>
-							</tr>
+				    		<tbody id = "clickTableBody">
+				    		</tbody>
 							<tr id="buttonListTr1">
 								<td colspan="7"> 
 									<button id="suspendCondition1">暂停</button>
@@ -903,9 +896,9 @@
 				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
 				});
-				document.getElementById("stopLoss").addEventListener("tap",function(){
+				/*document.getElementById("stopLoss").addEventListener("tap",function(){
 						mui("#popoverLoss").popover("toggle");
-				});
+				});*/
 				document.getElementById("closeLossTable").addEventListener("tap",function(){
 					mui("#popoverLoss").popover("toggle");
 				});

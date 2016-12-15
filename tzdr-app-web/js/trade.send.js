@@ -38,7 +38,15 @@ var TradeUrl = {
 	/**
 	 * 错误通知
 	 */
-	OnError : "OnError"
+	OnError : "OnError",
+	/**
+	 * 止损单录入url
+	 */
+	InsertStopLoss:"InsertStopLoss",
+	/**
+	 * 获取止损单url
+	 */
+	QryStopLoss:"QryStopLoss"
 }
 var Trade = {
 			/**
@@ -153,6 +161,39 @@ var Trade = {
 								+' "OrderPrice":'+orderPrice+','
 								+' "TriggerPrice":'+triggerPrice+'}';
 				Trade.doSendMessage(TradeUrl.ModifyOrderUrl,param);
+			},
+			/**
+			 * 增加止损单
+			 * @param {Object} exchangeNo
+			 * @param {Object} commodityNo
+			 * @param {Object} contractNo
+			 * @param {Object} num
+			 * @param {Object} stopLossType
+			 * @param {Object} stopLossDiff
+			 * @param {Object} holdAvgPrice
+			 * @param {Object} holdDrection
+			 * @param {Object} orderType
+			 * @param {Object} StopLossPrice
+			 */
+			doInsertStopLoss:function(exchangeNo,commodityNo,contractNo,num,stopLossType,stopLossDiff,holdAvgPrice,holdDrection,orderType,stopLossPrice){
+				var param = '{"ExchangeNo":"'+exchangeNo+'",'
+							' "CommodityNo":"'+commodityNo+'",'
+							' "ContractNo":"'+contractNo+'",'
+							' "Num":'+num+','
+							' "StopLossType":'+stopLossType+','
+							' "StopLossDiff":'+stopLossDiff+','
+							' "HoldAvgPrice":'+holdAvgPrice+','
+							' "HoldDrection":'+holdDrection+','
+							' "OrderType":'+orderType+','
+							' "StopLossPrice":'+stopLossPrice+'}';
+				Trade.doSendMessage(TradeUrl.InsertStopLoss,param);
+			},
+			/**
+			 * 获取止损单请求
+			 * @param {Object} username
+			 */
+			doQryStopLoss:function(username){
+				Trade.doSendMessage(TradeUrl.QryStopLoss,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 发送交易请求
