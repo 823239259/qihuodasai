@@ -1565,7 +1565,7 @@ function bindOpertion(){
 			}
 			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 			buyOrderPrice = limitPrice;
-			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+"),方向("+analysisBusinessBuySell(drection)+"";
+			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+"),方向("+analysisBusinessBuySell(drection)+")";
 			var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),marketBuy,null,$this);
 		}else{
 			tip("未登录,请先登录");
