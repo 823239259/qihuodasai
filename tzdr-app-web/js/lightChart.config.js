@@ -61,7 +61,7 @@ function lightChartData(json){
                }
            ],
            grid: {
-               x: 40,
+               x: 50,
                y:20,
                x2:46,
                y2:20
