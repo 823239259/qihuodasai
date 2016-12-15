@@ -125,7 +125,7 @@
 						</table>
 					</div>
 					<div id="headerContent">
-						<div id="chartAllDiv" class="bottomDivList mui-active ">
+						<div id="chartAllDiv" class="bottomDivList">
 							<div class="chartDivContent mui-active" id="TimeChart1">
 								<div id="timeChart" style="width:100%;"></div>
 								<div id="volumeChart" style="width:100%;"></div>
@@ -243,7 +243,7 @@
 								</tr>
 							</table>
 						</div>
-						<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
+						<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList mui-active">
 						    <div class="Assets" style="background-color: #2B2B2B;">
 						        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 						        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -305,7 +305,7 @@
 						            </ul>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-						             <!--<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>-->
+						             <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
 						        </div>
 						        <div id="item2" class="mui-control-content">
 						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
@@ -381,12 +381,12 @@
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
 								</li>
-								<!--<li class="mui-table-view-cell">
+								<li class="mui-table-view-cell">
 									<a id="openCondition">条件单</a>
 								</li>
 								<li class="mui-table-view-cell">
 									<a id="openStop">止损单</a>
-								</li>-->
+								</li>
 								<li class="mui-table-view-cell">
 								</li>
 							</ul>
@@ -926,7 +926,7 @@
 					$("#bg3").css("opacity","0");
 					$(".mui-content").eq(0).css("z-index","997");
 				});
-				/*document.getElementById("openStop").addEventListener("tap",function(){
+				document.getElementById("openStop").addEventListener("tap",function(){
 					$("#bg1").css("opacity","0");
 					$("#bg2").css("opacity","0");
 					$("#bg3").css("opacity","1");
@@ -939,7 +939,7 @@
 					$("#bg3").css("opacity","0");
 					mui("#topPopover").popover("toggle");
 					$(".mui-content").eq(1).css("z-index","997");
-				});*/
+				});
 				var num=0;
 				var numCondition=0;
 				$("#conditionTable .testclick").on("tap",function(){
@@ -1005,9 +1005,11 @@
 					var type = $("input[type = 'radio']:checked").val();
 					$("#buyFuture table td span").css("background","url('../../images/inputRadioBg.png') no-repeat")
 					if(type==1){
-						$("#buyFuture table td:nth-child(1) span").css("background","url('../../images/inputRadioBgC.png') no-repeat")
+						$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
+						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
 					}else{
-						$("#buyFuture table td:nth-child(2) span").css("background","url('../../images/inputRadioBgC.png') no-repeat")
+						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
+						$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
 					}
 					var orderPrice = $("#orderPrice");
 					var lastPrice = $("#lastPrice").text();
