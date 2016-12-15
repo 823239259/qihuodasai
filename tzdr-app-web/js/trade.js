@@ -53,12 +53,12 @@ function linearlyLoadData(method) {
 			Trade.doAccount(username);
 			accountFirstLoadDataIndex++;
 		}
-	} else if (method == "OnRspQryAccount"){
+	} /*else if (method == "OnRspQryAccount"){
 		if(stopLossLoadDataIndex == 0){
 			Trade.doQryStopLoss(username);
 			stopLossLoadDataIndex++;
 		}
-	}
+	}*/
 }
 /**
  * 处理返回数据
@@ -208,10 +208,10 @@ function handleData(evt){
 		}else if(method == "OnRspInsertStopLoss"){
 			tip("提交成功");
 			
-		}else if(method == "OnRspQryStopLoss"){
+		}/*else if(method == "OnRspQryStopLoss"){
 			var stopLossParam = parameters;
 			  //appendStopLossData(stopLossParam);
-		}
+		}*/
 	}else{  
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
@@ -939,7 +939,7 @@ var stoplossIndex = 0;
  * 缓存选中的止损单列
  */
 var selectStopLoss = {};
-function appendStopLossData(param){
+/*function appendStopLossData(param){
 		var contractCode = param.CommodityNo+param.ContractNo;
 		var stopLossNo = param.StopLossNo;
 		var status = param.Status;
@@ -971,7 +971,7 @@ function appendStopLossData(param){
 		$("#clickTableBody").append(html);
 		addStopLossBindClick(cls);
 		stoplossIndex++;
-}
+}*/
 /**
  * 验证持仓信息是否存在 
  */
@@ -1348,7 +1348,7 @@ $(function(){
 			openLogin();
 		} 
 	});
-	$("#stopChoicePrices1").bind("input",function(){  
+/*	$("#stopChoicePrices1").bind("input",function(){  
 		var holdAvgPrice =$("#stopHoldAvgPrice").val();
 		var stopChoicePrices1 = $("#stopChoicePrices1").val();
 		if(stopChoicePrices1 == 0 || stopChoicePrices1.length == 0){ 
@@ -1363,7 +1363,7 @@ $(function(){
 			scale = stopChoicePrices1 / stopEvenPrice * 100;
 		}
 		$("#Increase").text(parseFloat(scale).toFixed(2)+"%");
-	});
+	});*/
 }); 
 function initSocketTrade(){
 	setTradeConfig(tradeWebSocketIsMock);
@@ -1601,7 +1601,7 @@ function bindOpertion(){
 	/**
 	 * 止损单
 	 */
-	$("#insertStopData").bind("click",function(){
+	/*$("#insertStopData").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
 			if(contractCode == undefined){
@@ -1645,7 +1645,7 @@ function bindOpertion(){
 		}else{
 			tip("未登录,请先登录");
 		}
-	});
+	});*/
 }
 $("#add").bind("click",function(){
 	var contractCode = selectDesgnate["contraction"];
@@ -1658,7 +1658,7 @@ $("#add").bind("click",function(){
 /**
  * 显示止损盈亏的窗口
  */
-$("#stopLoss").bind("click",function(){
+/*$("#stopLoss").bind("click",function(){
 	var contractCode = selectPostion["contractCode"];
 	if(contractCode == undefined){
 		tip("请选择一条信息");
@@ -1679,7 +1679,7 @@ $("#stopLoss").bind("click",function(){
 	$("#stopNumber").val($holdNum.text()); 
 	$("#stopHoldAvgPrice").val($holdAvgPrice.text());
 	mui("#popoverLoss").popover("toggle");
-});
+});*/
 /**
  * 下单
  */
