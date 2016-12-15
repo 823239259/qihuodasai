@@ -353,7 +353,7 @@ p{
 
 #allOpen{
 	bottom: 1%;
-	right: 50%;
+	right: 25%;
 	border-top:none;
 	border-left: none;
 	border-bottom: none;
@@ -361,7 +361,7 @@ p{
 }
 #Open{
 	bottom: 1%;
-	right: 25%;
+	right: 0%;
 	border-right: 1px solid #1f1f1f !important;
 }
 #stopLoss{
