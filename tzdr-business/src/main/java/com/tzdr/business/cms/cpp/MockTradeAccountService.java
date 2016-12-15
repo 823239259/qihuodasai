@@ -18,4 +18,6 @@ public interface MockTradeAccountService extends BaseService<MockTradeAccount>{
 	 * @return
 	 */
 	public boolean updateMockAccount(String username,String password);
+	
+	public void userOpenMock(String[] strs);
 }

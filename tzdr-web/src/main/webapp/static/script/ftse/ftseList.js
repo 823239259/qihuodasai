@@ -164,7 +164,7 @@ function bindEndOfFtse(cls){
 					'<td style="width: 170px;">成交日期</td>'+
 					'<td style="width: 70px;">客户名称</td>'+
 					'<td style="width: 70px;">客户号</td>'+
-					'<td style="width: 70px;">币种</td>'+
+					'<td style="width: 90px;">币种</td>'+
 					'<td style="width: 60px;">交易所</td>'+
 					'<td style="width: 90px;">品种</td>'+
 					'<td style="width: 80px;">交易手数</td>'+

@@ -346,7 +346,9 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			UUID uuid = UUID.randomUUID();
 			String randomUuid = uuid.toString();
 			FileProcessed fileProcessed = new FileProcessed();
-			String filePath = "D:\\"+randomUuid+".xlsx";
+			String ctxPath = request.getSession().getServletContext()  
+	                .getRealPath("/") ;
+	        String filePath = ctxPath + "/template/"+randomUuid+".xlsx";  
 			fileProcessed.uploadFile(filePath, inputStream);
 			ReadExclPOI readExclPOI = new ReadExclPOI();
 			detailVos = (List<TradeExclDetailVos>)readExclPOI.readExcl2007(filePath, TradeExclDetailVos.class);
