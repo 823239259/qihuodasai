@@ -100,3 +100,27 @@ function createModifyOrderParam(orderSysId, orderId, exchangeNo, commodityNo, co
 	this.triggerPrice = triggerPrice;
 	return this;
 }
+/**
+ * 创建止损单数据
+ * @param {Object} exchangeNo
+ * @param {Object} commodityNo
+ * @param {Object} contractNo
+ * @param {Object} num
+ * @param {Object} stopLossType
+ * @param {Object} stopLossDiff
+ * @param {Object} holdAvgPrice
+ * @param {Object} holdDrection
+ * @param {Object} orderType
+ */
+function createInsertStopLossParam(exchangeNo,commodityNo,contractNo,num,stopLossType,stopLossDiff,holdAvgPrice,holdDrection,orderType,stopLossPrice){
+	this.exchangeNo = exchangeNo;
+	this.commodityNo = commodityNo;
+	this.contractNo = contractNo;
+	this.num = num;
+	this.stopLossType = stopLossType;
+	this.stopLossDiff=stopLossDiff;
+	this.holdAvgPrice = holdAvgPrice;
+	this.holdDrection = holdDrection;
+	this.orderType = orderType;
+	this.stopLossPrice = stopLossPrice;
+}
