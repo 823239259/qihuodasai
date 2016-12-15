@@ -107,13 +107,13 @@
 	</head>
 	<body style="background-color: #2B2B2B">
 		<div id="bg1" style="opacity: 1;">
-			<header class="mui-bar mui-bar-nav"> 
+			<header class="mui-bar mui-bar-nav" > 
 			    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 			    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
-			<div class="mui-content" style="padding-top: 40px;position: absolute;top:46px;width: 100%;z-index: 997;" >
+			<div class="mui-content">
 					<div id="headerMenu" style="background-color: #2B2B2B;">
 						<table cellpadding="0" cellspacing="0">
 							<thead>
@@ -246,7 +246,7 @@
 								</tr>
 							</table>
 						</div>
-						<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
+						<div  id="trade" style="padding-bottom: 20px;" class=" bottomDivList">
 						    <div class="Assets" style="background-color: #2B2B2B;">
 						        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 						        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
@@ -474,7 +474,7 @@
 				</div>
 			</div>
 			<!---------------------------------条件单--------------------------->
-			<div id="bg2" style="opacity: 0;">
+			<!-----------------<div id="bg2" style="opacity: 0;">
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack " id= "stopBack"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
@@ -540,9 +540,9 @@
 							</tr>
 				    	</table>
 				    </div>
-				</div>
+				</div>--------------->
 <!-----------------------------添加条件单的弹窗---------------------------->				
-				<div id="popoverConditoion" class="mui-popover">
+				<!--------------------------<div id="popoverConditoion" class="mui-popover">
 				    <div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#ConditoionTitlePrices" >价格条件</a>
 				        <a class="mui-control-item" href="#ConditoionTitleTime" >时间条件</a>
@@ -667,9 +667,9 @@
 				    	</div>
 				    </div>
 				</div>
-			</div>
+			</div>-------------->
 <!--------------------------止损单---------------------------------->
-			<div id="bg3" style="opacity: 0;">
+			<!------<div id="bg3" style="opacity: 0;">
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "conditionBack"><i>返回</i></a>
 				    <h1 class="mui-title">止损单</h1>
@@ -721,7 +721,7 @@
 				    	</table>
 				    </div>
 				</div>
-			</div>
+			</div>--->
 		</body>
 			<script>
 				mui.plusReady(function(){
@@ -750,6 +750,7 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+					//bindGuidance()
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
@@ -768,7 +769,7 @@
 							"height":$(".buttomFix").height()+87+"px",
 							"background": "url(../../images/tradeGudice1.png) no-repeat",
 							"background-size":"100% 100%",
-							"z-index":"991",
+							"z-index":"999",
 						});
 						var clickNum=0;
 						$(".bottom,.top").click(function(){
@@ -908,7 +909,7 @@
 				document.getElementById("closeStopTable").addEventListener("tap",function(){
 					mui("#popoverLoss").popover("toggle");
 				});
-				document.getElementById("insertCondition").addEventListener("tap",function(){
+				/**document.getElementById("insertCondition").addEventListener("tap",function(){
 					mui("#popoverConditoion").popover("toggle");
 				});
 				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
@@ -929,7 +930,7 @@
 					$("#bg3").css("opacity","0");
 					$(".mui-content").eq(0).css("z-index","997");
 				});
-				/**document.getElementById("openStop").addEventListener("tap",function(){
+				document.getElementById("openStop").addEventListener("tap",function(){
 					$("#bg1").css("opacity","0");
 					$("#bg2").css("opacity","0");
 					$("#bg3").css("opacity","1");

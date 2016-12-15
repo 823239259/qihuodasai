@@ -10,8 +10,8 @@ function lightChartData(json){
 	        var TimeLength=lightChartTime.time.length;
 	        lightChartTime.price.push(json.Parameters.LastPrice);
 	           lightChartTime.time.push((json.Parameters.DateTimeStamp).split(" ")[1]);
-			lightChartTime.time=lightChartTime.time.slice(-100);
-			lightChartTime.price=lightChartTime.price.slice(-100);
+			lightChartTime.time=lightChartTime.time.slice(-50);
+			lightChartTime.price=lightChartTime.price.slice(-50);
 	        if(lightChart != null){
 	        	var option = lightChartDealData();
 	            lightChart.setOption(option);
