@@ -210,9 +210,9 @@ function handleData(evt){
 			
 		}else if(method == "OnRspQryStopLoss"){
 			var stopLossParam = parameters;
-			appendStopLossData(stopLossParam);
+			  //appendStopLossData(stopLossParam);
 		}
-	}else{ 
+	}else{  
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
 			tradeSuccessLoadFlag = false;
@@ -222,7 +222,7 @@ function handleData(evt){
 		if(referCount > 0){ 
 			referCount--;
 			tradeSuccessLoadHoldData();
-		}
+		} 
 	}
 }
 /**
@@ -1354,7 +1354,6 @@ $(function(){
 		if(stopChoicePrices1 == 0 || stopChoicePrices1.length == 0){ 
 			return;
 		}
-		var stoprection = $("#stopBorderLeft").attr("data-drection");
 		var choiceStopPrices = $("#choiceStopPrices").val();
 		var scale = 0.00;
 		if(choiceStopPrices == 0){ 
@@ -1676,7 +1675,6 @@ $("#stopLoss").bind("click",function(){
 	}
 	$("#stopEvenTd").text($contractCode.text()); 
 	$("#stopBorderLeft").text($drection.text());
-	$("#stopBorderLeft").attr("data-tion-drection",$drection.attr("data-drection"));
 	$("#stopEvenPrice").text(localQuote.LastPrice);
 	$("#stopNumber").val($holdNum.text()); 
 	$("#stopHoldAvgPrice").val($holdAvgPrice.text());
