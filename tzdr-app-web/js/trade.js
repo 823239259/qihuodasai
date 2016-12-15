@@ -402,7 +402,7 @@ function updateFundsDetails(param){
 var orderIndex = 0;
 /**
  * 添加用户委托信息
- * @param {Object} param 委托信息的json对象
+ * @param {Objfont-size: 14px;ct} param 委托信息的json对象
  */
 function appendOrder(param){
 	var contractCode = param.ContractCode;
@@ -412,8 +412,9 @@ function appendOrder(param){
 	var localCommodity  = getMarketCommdity(commodityNo+contractNo);
 	var orderPrice = param.OrderPrice;
 	if(localCommodity != undefined){
-		var doSize = localCommodity.DotSize;
-		orderPrice = Number(parseFloat(orderPrice)).toFixed(doSize);
+		var doSize = Number(localCommodity.DotSize);
+		var numOrder=Number(parseFloat(orderPrice))
+		orderPrice = numOrder.toFixed(doSize);;
 	}
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
@@ -517,7 +518,7 @@ function appendDesignates(param){
    var localCommodity = getMarketCommdity(commodityNo+contractNo);
    var dotSize = 2;
    if(localCommodity != undefined){
-   		dotSize = localCommodity.DotSize;
+   		dotSize = Number(localCommodity.DotSize);
    }
    var cls = "des-index"+designateIndex;
    var html =   '<li    class = "'+cls+' Guadan  myLi" " data-order-des = "'+orderId+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'
@@ -567,7 +568,7 @@ function updateDesignatesDom(param){
 	var localCommodity = getMarketCommdity(commodityNo+contractNo);
     var dotSize = 2;
     if(localCommodity != undefined){
-    		dotSize = localCommodity.DotSize;
+    		dotSize = Number(localCommodity.DotSize);
     }
 	if(holdNum == 0){
 		//当挂单为0时，清理dom节点和存储数据
@@ -767,7 +768,7 @@ function updatePostion(param){
 		var localCommodity = getMarketCommdity(contractCode);
 		var doSize = 0;
 		if(localCommodity != undefined){ 
-			doSize = localCommodity.DotSize;
+			doSize = Number(localCommodity.DotSize);
 		}
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
 		$holdAvgPrice.text(openAvgPrice);
@@ -870,7 +871,7 @@ function updateOrderUpdatePosition(param){
 			var localCommodity = getMarketCommdity(contractCode);
 			var doSize = 2;
 			if(localCommodity != undefined){
-				doSize = localCommodity.DotSize;
+				doSize = Number(localCommodity.DotSize);
 			}
 			var holdAvgPrice = doGetOpenAvgPrice(price, holdNum, doSize);
 			var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
@@ -1377,14 +1378,14 @@ function selectCommodity(param){
 		var localQoute = localCacheQuote[contractCode];
 		var miniTikeSize = localCommodity.MiniTikeSize;
 		var lastPrice = localQoute.LastPrice;
-		var dotSize = localCommodity.DotSize;
+		var dotSize = Number(localCommodity.DotSize);
 		$("#trade_data #lastPrice").val(lastPrice);
 		$("#trade_data #miniTikeSize").val(miniTikeSize);
 		$("#trade_data #contractSize").val(localCommodity.ContractSize);
 		$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
 		$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
 		$("#trade_data #contractNo").val(localCommodity.MainContract);
-		$("#trade_data #doSize").val(localCommodity.DotSize);
+		$("#trade_data #doSize").val(Number(localCommodity.DotSize));
 		$("#money_number").val(localQoute.LastPrice);
 		$("#commodity_title").text(localCommodity.CommodityName+"  "+contractCode);
 		$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0,dotSize));
@@ -1437,7 +1438,7 @@ function bindOpertion(){
 			var dotSize = 2;
 			var localCommodity = getMarketCommdity(commodityNo+contractNo);
 			if(localCommodity != undefined){
-				dotSize = localCommodity.DotSize;
+				dotSize = Number(localCommodity.DotSize);
 			}
 			if(priceType == 0){
 				if(orderPrice <= 0 || orderPrice.length <= 0){
@@ -1559,7 +1560,7 @@ function bindOpertion(){
 			var localCommodity = getMarketCommdity(commodityNo+contractNo);
 			var dotSize = 2;
 			if(localCommodity != undefined){ 
-				dotSize = localCommodity.DotSize;
+				dotSize = Number(localCommodity.DotSize);
 			}
 			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 			buyOrderPrice = limitPrice;
