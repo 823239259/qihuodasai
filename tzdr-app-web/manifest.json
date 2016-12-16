@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.2.5",/*应用版本名称*/
-		"code": "20161212"
+		"name": "2.2.6",/*应用版本名称*/
+		"code": "20161215"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -1164,7 +1164,13 @@
 					"images/buttomSantjiao.png",
 					"images/graySanjiao.jpg",
 					"images/graySanjiao.png",
-					"images/menu.png"
+					"images/menu.png",
+					"js/lightChart.config.js",
+					"images/inputRadioBgC.png",
+					"images/inputRadioBg.jpg",
+					"images/inputRadioBg.png",
+					"images/graySanjiaoBg.png",
+					"images/insertIon.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1221,7 +1227,8 @@
 					"tzdr/future/hsi.html",
 					"tzdr/future/cp.html",
 					"tzdr/quotation/quotationMain.html",
-					"tzdr/login/retrievePassword.html"
+					"tzdr/login/retrievePassword.html",
+					"tzdr/login/regist.html"
 				],
 				"priority": 0
 			},
@@ -1508,7 +1515,9 @@
 					"images/tutorial/1.png",
 					"images/tutorial/15.png",
 					"images/tutorial/26.png",
-					"images/tutorial/17.png"
+					"images/tutorial/17.png",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -36,35 +36,26 @@
 			}
 		}
         if(timeChart != null){
-        	var option = setOption1();
+        	var x=0;
+            var length=$("#positionList .position3").length;
+        	var text=$("#CommodityNo").text();
+            if(length!=0){
+            	for(var i=0;i<length;i++){
+            		var text1=$("#positionList .position0").eq(i).text();
+            		if(text.indexOf(text1)>=0){
+            			x=Number($("#positionList .position3").eq(i).text());
+            		}
+            	}
+            }
+             var option = setOption1(x);
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
+           
         }
 
     }
-//  document.getElementById("Time").addEventListener("tap",function(){
-//  	$("#CandlestickChart").css("opacity","0");
-//  	$("#dayCandlestickChart").css("opacity","0");
-//				 if(timeChart != null){
-//				 	var option2=setOption1();
-//				 	 var option1 =volumeChartSetOption(volumeChartData);
-//						setTimeout(function(){
-//							$("#timeChart").css("width","100%");
-//						 	timeChart.resize();	
-//							timeChart.setOption(option2);
-//		        			timeChart.resize();	
-//		        			volumeChart.resize();	
-//							volumeChart.setOption(option1);
-//		        			volumeChart.resize();
-//		        		},10);
-//		        		setTimeout(function(){
-//		        			$("#TimeChart1").css("opacity","1");
-//		        		},11);
-//			    }
-//	});
-    
-    function setOption1(){
+    function setOption1(x){
         var  data1=timeData;
        var  option = {
        	backgroundColor: 'rgba(43, 43, 43, 0)',
@@ -127,7 +118,7 @@
            grid: {
                x: 40,
                y:20,
-               x2:20,
+               x2:46,
                y2:5
            },
            series: {
@@ -150,6 +141,20 @@
                    }
                },
                symbolSize: 2,
+                  markLine: {
+                symbol: ['none', 'none'],
+                clickable:false,
+                               lineStyle: {
+                   normal: {
+                       width: 1,
+                       color: "#ffffff"
+                   }
+               },
+                data: [
+	                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+        			{name: '标线2终点', xAxis: "2", yAxis: x}
+                ]
+                },
                data:data1.prices
            }
        }
@@ -207,7 +212,7 @@
 			 grid: {
                x: 40,
                y:30,
-               x2:20,
+               x2:46,
                y2:20
            },
           xAxis:[

@@ -1,12 +1,12 @@
 body {background: #f2f2f2;}
-/*璧勮鏃ュ巻*/
+/*资讯日历*/
 #headerBottom #nav #Triangle {left: 508px;}
 #realTimeNews {width: 1280px; margin: 0 auto; padding-bottom: 36px;}
 #realTimeNews .realTimeNews_left .clock_data {float: right; margin-right: 10px;}
 #realTimeNews .realTimeNews_left .clock {position: relative; top: 2px; right: 5px;}
 #realTimeNews .realTimeNews_left {float: left; width: 908px; margin-top: 10px; margin-bottom: 20px;}
 #realTimeNews .realTimeNews_left .news {padding: 0 10px; background: #fff; color: #666; font-size: 14px; display: inline-block; border-bottom: 2px solid #ccc;}
-#realTimeNews .realTimeNews_left .news .icon_time {float: left; color: #fff;padding-left: 4px; background: url("/templets/style/html/images/image/icon-time.png") no-repeat; width: 50px; height: 20px; display: inline-block;}
+#realTimeNews .realTimeNews_left .news .icon_time {float: left; color: #fff;padding-left: 4px; background: url("/templets/style/html/images/image/icon-time.png") no-repeat; width: 50px; height: 20px; line-height: 20px; display: inline-block;}
 #realTimeNews .realTimeNews_left .news .title {float: left; width: 833px; padding-bottom: 10px; line-height: 24px;}
 #realTimeNews .realTimeNews_left .news div {display: inline-block; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
 #realTimeNews .realTimeNews_left .news .operation {float: right;color: #999; font-size: 12px;}
@@ -31,34 +31,3 @@ body {background: #f2f2f2;}
 .calendar-link{
     display: none;!important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,12 +1,12 @@
 /**
- * Created by ÀöÀö on 2016/11/24.
+ * Created by ï¿½ï¿½ï¿½ï¿½ on 2016/11/24.
  */
 
 $(function(){
     $("#nav ul li a").eq(0).css("color","#ffb319");
     $("#nav ul li .Triangle").eq(0).css("display","block");
 });
-//³õÊ¼»¯¹ö¶¯Ìõ
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 window.onload= function () {
     $("#productList").panel({iWheelStep:32});
     $("#nav>ul>li>a").hover(function() {
@@ -70,7 +70,7 @@ $(document).ready(function(){
     $("#directSeedingList ul").on("click","li", function() {
         $("#directSeedingList ul li ").eq($(this).index()).addClass("directSeedingListAcitve").siblings().removeClass("directSeedingListAcitve");
     });
-    // bannerÇÐ»»
+    // bannerï¿½Ð»ï¿½
     var num = $("#slide-box a").size();
     var i = 0;
     var theInt = null;
@@ -105,13 +105,13 @@ $(document).ready(function(){
 });
 function GetDateStrDate(date) {
     var dd = new Date(date);
-    dd.setDate(dd.getDate()+1);//»ñÈ¡AddDayCountÌìºóµÄÈÕÆÚ
+    dd.setDate(dd.getDate()+1);//ï¿½ï¿½È¡AddDayCountï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     var y = dd.getFullYear();
-    var m = dd.getMonth()+1;//»ñÈ¡µ±Ç°ÔÂ·ÝµÄÈÕÆÚ
+    var m = dd.getMonth()+1;//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Â·Ýµï¿½ï¿½ï¿½ï¿½ï¿½
     var d = dd.getDate();
     return y+"-"+m+"-"+d;
 }
-//»ñÈ¡²Æ¾­ÈÕÀúµÄÊý¾Ý
+//ï¿½ï¿½È¡ï¿½Æ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 $(function(){
     var url="/crawler/getCrawlerCalendar";
     var startDate=new Date().Format("yyyy-MM-dd");
@@ -162,12 +162,12 @@ function insertData(data){
     }
     $(".calendar_time_Content li").css({"font-size":"14px"})
 }
-//»ñÈ¡7*24Ð¡Ê±µÄÊý¾Ý
+//ï¿½ï¿½È¡7*24Ð¡Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
 $(function () {
     var url="/crawler/getCrawlerByChannelLiveContent";
     var params={
         pageIndex:0,
-        size: 11,
+        size: 14,
         channelset:1
     };
     queryData(url,params,insertDataSeeding);
@@ -185,7 +185,7 @@ function insertDataSeeding(dataAll){
     }
     $("#directSeedingList ul li").eq(0).addClass("directSeedingListAcitve");
 }
-//¹«¸æ¹ö¶¯Ð§¹û
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
 $(document).ready(function(){
     $("#h_scroll").scrollQ({"line":2,"scrollNum":2,"scrollTime":2000});
 });

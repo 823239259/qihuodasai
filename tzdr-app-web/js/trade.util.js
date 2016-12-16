@@ -107,6 +107,23 @@ function modifyOrder(param) {
 					cancle.triggerPrice);
 	}
 }
+/**
+ * 止损处理
+ * @param {Object} param
+ */
+function inserStopLoss(param){
+	Trade.doInsertStopLoss(
+						param.exchangeNo,
+						param.commdityNo,
+						param.contractNo,
+						param.num,
+						param.stopLossType,
+						param.stopLossDiff,
+						param.holdAvgPrice,
+						param.holdDrection,
+						param.orderType,
+						param.stopLossPrice);
+}
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 /**
@@ -172,4 +189,51 @@ function analysisOrderPriceType(priceType){
 		priceTypeText = "止损";
 	}
 	return priceTypeText;
+}
+/**
+ * 解析止损单的状态
+ * @param {Object} status
+ */
+function analysisStopLossStatus(status){
+	var lossStatus = "";
+	if(status == 0){
+		lossStatus = "运行中";
+	}else if(status == 1){
+		lossStatus = "暂停";
+	}else if(status == 2){
+		lossStatus = "已触发";
+	}else if(status == 3){
+		lossStatus = "已取消";
+	}else if(status == 4){
+		lossStatus = "插入失败";
+	}else if(status == 5){
+		lossStatus = "触发失败";
+	}
+	return lossStatus;
+}
+/**
+ * 解析止损单类别
+ * @param {Object} param
+ */
+function analysisStopLossType(param){
+	if(lossType == 0){
+		lossType = "限价触发止损";
+	}else if(lossType == 1){
+		lossType = "限价触发止盈";
+	}else if(lossType == 2){
+		lossType = "浮动止损";
+	}
+	return lossType;
+}
+/**
+ * 解析止损单价格类型
+ * @param {Object} orderType
+ */
+function lossOrderType(orderType){
+	if(orderType == 1){
+		orderType = "市价";
+	}else if(orderType == 2){
+		orderType = "对手价";
+	}
+	return orderType;
 }

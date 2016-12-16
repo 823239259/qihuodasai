@@ -25,6 +25,9 @@
 				}else if(type == 6){
 					payWay = 11;
 					payModelId = 3;
+				}else if(type == 8){
+					payWay = 8;
+					payModelId = 6;
 				}else{
 					type = -99;
 				}
@@ -46,6 +49,9 @@
 											dataForm =charge.data.pay;
 											$("#dxtxForm").html(dataForm);
 											$("#alipaysubmit").submit();
+										}else if(payModelId == 6){
+											var charge = JSON.parse(result.data);
+											window.location = charge.data;
 										}
 									}   
 									plus.nativeUI.closeWaiting();

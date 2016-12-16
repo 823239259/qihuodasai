@@ -18,7 +18,7 @@
 	var HighPriceSubscript;
 	var VolumeSubscript;
 	var setIntvalTimeAll=null;
-	
+	var lightChart=null;
     //生成一个K线图容器
     function loadK(){
         // 使用
@@ -35,6 +35,7 @@
                     echarts=ec;
                     timeChart=ec.init(document.getElementById("timeChart"));
                     volumeChart=ec.init(document.getElementById("volumeChart"));
+                    lightChart=ec.init(document.getElementById("lightChart"));
                     CandlestickVolumeChart=ec.init(document.getElementById("CandlestickVolumeChart"));
                    	 ec.connect("group1");
                      ec.connect("group2");
