@@ -1794,7 +1794,7 @@ function bindOpertion(){
 			$("#stopChoicePrices1").val($("#"+stopLossNo+" td[class = 'stoploss5']").text())
 			$("#stopNumber").val($("#"+stopLossNo+" td[class = 'stoploss4']").text());
 			$("#choiceStopPrices1").val($("#"+stopLossNo+" td[class = 'stoploss6']").attr("data-tion-orderType"));
-			mui("#popoverLoss").popover("toggle");
+			mui("#popoverLoss1").popover("toggle");
 		}else{
 			tip("未登录,请先登录");
 		}

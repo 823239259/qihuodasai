@@ -1157,19 +1157,19 @@ input{
 	top:20px;
 	left: 5px;
 }
-#stopTitle,,#lossTitle{
+#stopTitle,#lossTitle,#stopTitle1,#lossTitle1{
 	width: 100%;
 	height: auto;
 }
-#stopTitle table,#lossTitle table{
+#stopTitle table,#lossTitle table,#stopTitle1 table,#lossTitle1 table{
 	width: 100%;
 	background-color: #383838;
 }
-#stopTitle tr,#lossTitle tr{
+#stopTitle tr,#lossTitle tr,#stopTitle1 tr,#lossTitle1 tr{
 	border-bottom: 1px solid #121212;
 	width: 100%;
 }
-#stopTitle tr td,#lossTitle tr td{
+#stopTitle tr td,#lossTitle tr td,#stopTitle1 tr td,#lossTitle1 tr td{
 	height: 40px;
 	padding: 0px 5px;
 	overflow: hidden;
@@ -1177,7 +1177,7 @@ input{
 	white-space: nowrap;
 	font-size: 14px;
 }
-#stopTitle tr td input,#lossTitle tr input{
+#stopTitle tr td input,#lossTitle tr input,#stopTitle1 tr td input,#lossTitle1 tr input{
 	height: 30px;
 	border:1px solid #121212;
 	background-color: #1F1F1F;
@@ -1203,7 +1203,7 @@ input{
 .evenPrice{
 	font-style: normal;
 }
-#stopChoicePrices1{
+#stopChoicePrices1,#stopChoicePrices3{
 	margin-left: 2%;
 	width: 36%;
 	position: relative;
@@ -1219,13 +1219,13 @@ input{
 	font-size: 14px;
 	color:#999999;
 }
-#closeStopTable,#insertStopData,#closeLossTable,#insertLossData{
+#closeStopTable,#insertStopData,#closeLossTable,#insertLossData,#closeStopTable1,#insertStopData1,#closeLossTable1,#insertLossData1{
 	border-right: 1px solid #121212;
 	text-align: center;
 	color: #CCCCCC;
 	font-size: 16px;
 }
-#choiceStopPrices,#choiceStopPrices3{
+#choiceStopPrices,#choiceStopPrices3,#choiceStopPrices2{
 	width: 38%;
 	display: inline-block;
 	color:#cccccc;
@@ -1240,7 +1240,7 @@ input{
 	margin-top: 5px;
 	
 }
-#choiceStopPrices1,#choiceStopPrices4{
+#choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices2,#choiceStopPrices5{
 	width: 42%;
 	display: inline-block;
 	color:#cccccc;
