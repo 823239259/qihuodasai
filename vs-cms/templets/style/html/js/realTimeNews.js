@@ -4,6 +4,10 @@ $(function(){
     $("#clock").html(currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
     var clock = setInterval(function(){
         var currentDate = new Date();//获取当前时间
+        var 
+        if(){
+        	
+        }
         $("#clock").html(currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
     },1000);
     $(".quotation_title").click(function(){

@@ -110,14 +110,20 @@ $(function(){
         var y = dd.getFullYear();
         var m = dd.getMonth()+1;//获取当前月份的日期
         var d = dd.getDate();
-        return y+"年"+m+"月"+d+"日";
+        var i ="",j="";
+        if(m<10){
+            i="0";
+        }
+        if(d<10){
+            j="0";
+        }
+        return y+"年"+i+m+"月"+j+d+"日";
     }
    function updateDate(date){
        var date=new Date(date);
        var y = date.getFullYear();
        var m = date.getMonth()+1;//获取当前月份的日期
        var d = date.getDate();
-       console.log(date);
        return y+"-"+m+"-"+d;
     }
     function GetDateStrDate(date) {
@@ -171,13 +177,20 @@ $(function(){
         var friday = new Date(monday.getTime() + (4 * millisecond));
         var saturday = new Date(monday.getTime() + (5 * millisecond));
         var sunday = new Date(monday.getTime() + (6 * millisecond));//本周日
-        $(".monday").html((monday.getMonth() + 1) + '月' + monday.getDate() + '日');
-        $(".tuesday").html((tuesday.getMonth() + 1) + '月' + tuesday.getDate() + '日');
-        $(".wednesday").html((wednesday.getMonth() + 1) + '月' + wednesday.getDate() + '日');
-        $(".thursday").html((thursday.getMonth() + 1) + '月' + thursday.getDate() + '日');
-        $(".friday").html((friday.getMonth() + 1) + '月' + friday.getDate() + '日');
-        $(".saturday").html((saturday.getMonth() + 1) + '月' + saturday.getDate() + '日');
-        $(".sunday").html((sunday.getMonth() + 1) + '月' + sunday.getDate() + '日');
+        var i ="",j="";
+        if(monday.getMonth()<9){
+            i="0";
+        }
+        if(monday.getDate()<10){
+            j="0";
+        }
+        $(".monday").html(i+(monday.getMonth() + 1) + '/'+ j + monday.getDate());
+        $(".tuesday").html(i+(tuesday.getMonth() + 1) + '/'+ j + tuesday.getDate());
+        $(".wednesday").html(i+(wednesday.getMonth() + 1) + '/'+ j + wednesday.getDate());
+        $(".thursday").html(i+(thursday.getMonth() + 1) + '/'+ j + thursday.getDate());
+        $(".friday").html(i+(friday.getMonth() + 1) + '/'+ j + friday.getDate());
+        $(".saturday").html((saturday.getMonth() + 1) + '/'+ j + saturday.getDate());
+        $(".sunday").html(i+(sunday.getMonth() + 1) + '/'+ j + sunday.getDate());
         if(week==1){
             $(".monday").parent().addClass("on");
         }else if(week==2){
@@ -202,11 +215,9 @@ $(function(){
     $(".time li").click(function () {
         var index=$(this).index();
         $(".time li a").removeClass("on").eq(index).addClass("on");
-        console.log(index);
         var text="2016年"+$(".time li span").eq(index).text();
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
-        console.log("startDate   "+startDate+"endDate         "+endDate);
         var params={
             pageIndex:0,
             startTime:startDate,
@@ -241,7 +252,6 @@ $(function(){
             if(data[i].previous==null || data[i].previous=="null" || data[i].previous==""){
                 data[i].previous="--";
             }
-            console.log(data[i].calendarType);
             if(data[i].calendarType=="FE"){
                 $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
                     "<li class='data'>"+date+"</li>"+
@@ -274,7 +284,6 @@ $(function(){
         var text=$("#today").text();
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
-        console.log("startDate   "+startDate+"endDate         "+endDate);
         var params={
             pageIndex:0,
             startTime:startDate,
@@ -292,11 +301,9 @@ $(function(){
             if(obj[i].checked){
                 s+=obj[i].value+','; //如果选中，将value添加到变量s中
                 valList+=$(".input_check").eq(i+1).text()+",";
-                console.log($(".input_check").eq(i+1).text())
             }
         }
         if(valList.length>0){
-            console.log(valList);
             if(valList.indexOf("全部类别")>=0){
                 insertData(dataAll);
             }else{

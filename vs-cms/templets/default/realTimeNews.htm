@@ -21,7 +21,7 @@
 <!--内容 content-->
 <div id="realTimeNews" style="overflow: hidden">
     <div class="realTimeNews_left">
-        <p class="calendar"><span>7X24直播</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""><span class="clock_data"><img class="clock" src="/templets/style/html/images/image/clock.png" alt=""/><span id="clock"></span></span></p>
+        <p class="calendar"><span>7X24直播</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""><span class="clock_data"><img class="clock" src="/templets/style/html/images/image/clock.png" alt=""/><span id="clock" style="margin-left: 2px;"></span></span></p>
         <div class="news">
             <div id="insertNew">
 
@@ -75,7 +75,7 @@
         <div class="economicCalendarViewpoint">
             {dede:arclist row=5 sort='hot' subday='3000' titlelen=80 typeid=34}
             <p class="quotation_title">
-                ●<a href="[field:arcurl/]" title="[field:fulltitle/]" target="_blank">[field:title/]</a>
+                <span class="viewpoint_dian">●</span><a href="[field:arcurl/]" title="[field:fulltitle/]" target="_blank">[field:title/]</a>
             </p>
             {/dede:arclist}
         </div>
