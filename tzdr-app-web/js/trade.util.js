@@ -114,7 +114,7 @@ function modifyOrder(param) {
 function inserStopLoss(param){
 	Trade.doInsertStopLoss(
 						param.exchangeNo,
-						param.commdityNo,
+						param.commodityNo,
 						param.contractNo,
 						param.num,
 						param.stopLossType,
@@ -123,6 +123,19 @@ function inserStopLoss(param){
 						param.holdDrection,
 						param.orderType,
 						param.stopLossPrice);
+}
+/**
+ * 修改止损单处理
+ * @param {Object} param
+ */
+function doModifyStopLoss(param){
+	Trade.doModifyStopLoss(
+						   param.stopLossNo,
+						   param.modifyFlag,
+						   param.num,
+						   param.stopLossType,
+						   param.orderType,
+						   param.stopLossDiff);
 }
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
@@ -216,14 +229,14 @@ function analysisStopLossStatus(status){
  * @param {Object} param
  */
 function analysisStopLossType(param){
-	if(lossType == 0){
-		lossType = "限价触发止损";
-	}else if(lossType == 1){
-		lossType = "限价触发止盈";
-	}else if(lossType == 2){
-		lossType = "浮动止损";
+	if(param == 0){
+		param = "限价触发止损";
+	}else if(param == 1){
+		param = "限价触发止盈";
+	}else if(param == 2){
+		param = "浮动止损";
 	}
-	return lossType;
+	return param;
 }
 /**
  * 解析止损单价格类型

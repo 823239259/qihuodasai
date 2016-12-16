@@ -46,7 +46,11 @@ var TradeUrl = {
 	/**
 	 * 获取止损单url
 	 */
-	QryStopLoss:"QryStopLoss"
+	QryStopLoss:"QryStopLoss",
+	/**
+	 * 止损单修改
+	 */
+	ModifyStopLoss:"ModifyStopLoss"
 }
 var Trade = {
 			/**
@@ -177,15 +181,15 @@ var Trade = {
 			 */
 			doInsertStopLoss:function(exchangeNo,commodityNo,contractNo,num,stopLossType,stopLossDiff,holdAvgPrice,holdDrection,orderType,stopLossPrice){
 				var param = '{"ExchangeNo":"'+exchangeNo+'",'
-							' "CommodityNo":"'+commodityNo+'",'
-							' "ContractNo":"'+contractNo+'",'
-							' "Num":'+num+','
-							' "StopLossType":'+stopLossType+','
-							' "StopLossDiff":'+stopLossDiff+','
-							' "HoldAvgPrice":'+holdAvgPrice+','
-							' "HoldDrection":'+holdDrection+','
-							' "OrderType":'+orderType+','
-							' "StopLossPrice":'+stopLossPrice+'}';
+							+' "CommodityNo":"'+commodityNo+'",'
+							+' "ContractNo":"'+contractNo+'",'
+							+' "Num":'+num+','
+							+' "StopLossType":'+stopLossType+','
+							+' "StopLossDiff":'+stopLossDiff+','
+							+' "HoldAvgPrice":'+holdAvgPrice+','
+							+' "HoldDrection":'+holdDrection+','
+							+' "OrderType":'+orderType+','
+							+' "StopLossPrice":'+stopLossPrice+'}';
 				Trade.doSendMessage(TradeUrl.InsertStopLoss,param);
 			},
 			/**
@@ -194,6 +198,24 @@ var Trade = {
 			 */
 			doQryStopLoss:function(username){
 				Trade.doSendMessage(TradeUrl.QryStopLoss,'{"ClientNo":"'+username+'"}');
+			},
+			/**
+			 * 修改止损单
+			 * @param {Object} stopLossNo
+			 * @param {Object} modifyFlag
+			 * @param {Object} num
+			 * @param {Object} stopLossType
+			 * @param {Object} orderType
+			 * @param {Object} stopLossDiff
+			 */
+			doModifyStopLoss:function(stopLossNo,modifyFlag,num,stopLossType,orderType,stopLossDiff){
+				var param = '{"StopLossNo":"'+stopLossNo+'",'
+							+' "ModifyFlag":'+modifyFlag+','
+							+' "Num":'+num+','
+							+' "StopLossType":'+stopLossType+','
+							+' "StopLossDiff":'+stopLossDiff+','
+							+' "OrderType":'+orderType+'}';
+				Trade.doSendMessage(TradeUrl.ModifyStopLoss,param);
 			},
 			/**
 			 * 发送交易请求

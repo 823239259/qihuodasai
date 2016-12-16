@@ -123,4 +123,23 @@ function createInsertStopLossParam(exchangeNo,commodityNo,contractNo,num,stopLos
 	this.holdDrection = holdDrection;
 	this.orderType = orderType;
 	this.stopLossPrice = stopLossPrice;
+	return this;
+}
+/**
+ * 创建修改止损单数据
+ * @param {Object} stopLossNo
+ * @param {Object} modifyFlag
+ * @param {Object} num
+ * @param {Object} stopLossType
+ * @param {Object} orderType
+ * @param {Object} stopLossDiff
+ */
+function createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,stopLossDiff){
+	this.stopLossNo = stopLossNo;
+	this.modifyFlag = modifyFlag;
+	this.num = num;
+	this.stopLossType = stopLossType;
+	this.orderType = orderType;
+	this.stopLossDiff = stopLossDiff;
+	return this;
 }
