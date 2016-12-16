@@ -240,7 +240,7 @@ function updateBalance(parama){
 	var floatingProfit = $("#floatingProfit").val();
 	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
-	localCacheCurrencyAndRate[currencyNo]  = currency;
+	localCacheCurrencyAndRate[currencyNo]  = currency == undefined ? localCacheCurrencyAndRate[currencyNo]:currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
 	loadCachCanuse[accountNo] = canuse;
@@ -321,6 +321,8 @@ function addFundsDetails(param){
 	var oldAmount = parseFloat(param.OldAmount).toFixed(2);
 	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
 	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
+	var closeProfit = parseFloat(param.CloseProfit).toFixed(2);
+	var counterFee = parseFloat(param.CounterFee).toFixed(2);
 	var currencyRate = param.CurrencyRate;
 	var unExpiredProfit = parseFloat(param.UnExpiredProfit).toFixed(2);
 	var unAccountProfit = parseFloat(param.UnAccountProfit).toFixed(2);
@@ -342,6 +344,8 @@ function addFundsDetails(param){
 				'	<li class = "detail_frozenMoney">'+frozenMoney+'</li>'+
 				'	<li class = "detail_profitRate">'+profitRate+'</li>'+
 				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
+				'   <li class = "detail_closeProfit"  style="display:none;">'+closeProfit+'</li>'+
+				'   <li class = "detail_counterFee"  style="display:none;">'+counterFee+'</li>'+
 				'</ul>';
 	$("#account_gdt1").append(html);
 	tabOn();
@@ -1872,6 +1876,11 @@ function sumListfloatingProfit(){
 			continue;
 		}
 		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+		var  todayAmount = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayAmount']").text();
+		var  closeProfit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_closeProfit']").text();
+		var  counterFee = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_counterFee']").text();
+		var  deposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_deposit']").text();
+		var  todayBlance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayBalance']");
 		var p =  $(".tab_position");
 		if(p.length == 0){
 			floatingProfitDom.text(0.00);
@@ -1887,6 +1896,8 @@ function sumListfloatingProfit(){
 			price = price + Number($this.find("li[class = 'position10']").text());
 		});
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
+		var balance = Number(todayAmount)+Number(closeProfit)-Number(counterFee)+Number(price);
+		todayBlance.text(parseFloat(balance).toFixed(2));
 	}
 }
 /**
