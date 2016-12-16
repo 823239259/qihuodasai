@@ -290,16 +290,19 @@ p{
 	width: 100%;
 	display: inline-block;
 	line-height: 40px;
-	color:#666666;
+	color:#CCCCCC;
 	font-size: 12px;
+
 }
 .listStyle li a span{
 	text-align: center;
 	display: inline-block;
 	width: 70px;
 	height:40px;
-	color:#666666;
-
+	color:#CCCCCC;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 #trade{
 	background-color: #2B2B2B;
@@ -534,7 +537,7 @@ p{
 	background-color: #16a951;
 }
 .dateTimeL{
-		width: 115px !important;
+		width: 120px !important;
 }
 .dateTimeFloat{
 	width: 160px !important;
@@ -547,22 +550,22 @@ p{
 	width: 465px;
 }
 .Guadan{
-	width:490px ;
+	width:530px ;
 }
 .Guadan  a{
-	width:490px ;
+	width:530px ;
 }
 .EntrustOreder{
-	width: 635px;
+	width: 660px;
 }
 .EntrustOreder a{
-	width: 635px;
+	width: 660px;
 }
 .DealLi{
-	width: 420px;
+	width: 450px;
 }
 .DealLi  a{
-	width:420px ;
+	width:450px ;
 }
 input{
 	text-align: center;
@@ -767,8 +770,6 @@ input{
 #headerMenu{
 	background-color: #2B2B2B;
 	width: 100%;
-	position: fixed;
-	top:46px;
 	height: 45px;
 	z-index: 990;
 	text-align: center;
@@ -799,8 +800,8 @@ input{
 	text-align: center;
 	height: auto;
 	position: absolute;
-	width: 25%;
-	top:50px;
+	width: 20%;
+	top:95px;
 	right: 0px;;
 	color:#999999;
 	background-color: #2B2B2B;

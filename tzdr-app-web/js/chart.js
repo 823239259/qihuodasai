@@ -583,6 +583,11 @@ mui.plusReady(function(){
 		$("#MainContract").text($("#commodeityNo").val()+$("#contractNo").val());
 		$("#xj").removeAttr("checked");
 		$("#sj").prop("checked",true);
+		var type = $('input:radio[name="prices"]:checked').val();
+		if(type==1){
+			$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
+						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
+		}
 		$("#orderPrice").val("");
 		$("#orderPrice").attr("placeholder","市价");
 		$("#buyBtn_P").text("市价");
@@ -664,15 +669,18 @@ mui.plusReady(function(){
     			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
 				var option = setOption(newData);
-						 var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData,x);
-		        		var x=0;
-			            if(dataPricesList.length!=0){
-			            	for(var i=0;i<dataPricesList.length;i++){
-			            		if(dataPricesList[i].id==$("#CommodityNo").text()){
-			            			x=dataPricesList[i].prices;
+			            var length=$("#positionList .position3").length;
+			        	var text=$("#CommodityNo").text();
+			        	var x=0;
+			            if(length!=0){
+			            	for(var i=0;i<length;i++){
+			            		var text1=$("#positionList .position0").eq(i).text();
+			            		if(text.indexOf(text1)>=0){
+			            			x=Number($("#positionList .position3").eq(i).text());
 			            		}
 			            	}
 			            }
+			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData,x);
 						setTimeout(function(){
 							myChart.resize();
 							myChart.setOption(option);
@@ -767,11 +775,14 @@ mui.plusReady(function(){
     		var val=$("#timeChartMenu").val();
     		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
+            var length=$("#positionList .position3").length;
+        	var text=$("#CommodityNo").text();
         	var x=0;
-            if(dataPricesList.length!=0){
-            	for(var i=0;i<dataPricesList.length;i++){
-            		if(dataPricesList[i].id==$("#CommodityNo").text()){
-            			x=dataPricesList[i].prices;
+            if(length!=0){
+            	for(var i=0;i<length;i++){
+            		var text1=$("#positionList .position0").eq(i).text();
+            		if(text.indexOf(text1)>=0){
+            			x=Number($("#positionList .position3").eq(i).text());
             		}
             	}
             }

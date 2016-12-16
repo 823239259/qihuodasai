@@ -22,7 +22,10 @@
 				margin-top: -120px;
 				left: 50% !important;
 				margin-left: -141px;
-				background-color: #2b2b2b;
+			/*	background-color: #2b2b2b;*/
+			}
+			#popover .mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+				background-color: #FFFFFF;
 			}
 			#popoverLoss,#popoverLoss1{
 				min-width: 90%;
@@ -110,7 +113,7 @@
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
-			<div class="mui-content" style="padding-top: 40px;position: absolute;top:46px;width: 100%;z-index: 997;" >
+			<div class="mui-content" style="padding-top: 80px;">
 					<div id="headerMenu" style="background-color: #2B2B2B;">
 						<table cellpadding="0" cellspacing="0">
 							<thead>
@@ -243,12 +246,12 @@
 								</tr>
 							</table>
 						</div>
-						<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
+						<div  id="trade" style="padding-bottom: 20px;padding-top: 46px;" class=" bottomDivList">
 						    <div class="Assets" style="background-color: #2B2B2B;">
 						        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
 						        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
 						    </div>
-						    <div class="ProductInformation">
+						    <div class="ProductInformation" style="">
 						        <div class="ProductInformationLeft">
 						                <select class="mui-btn mui-btn-block" id = "tradeTitle" >
 						                </select>
@@ -305,7 +308,7 @@
 						            </ul>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
 						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-						             <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
+						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
 						        </div>
 						        <div id="item2" class="mui-control-content">
 						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
@@ -797,6 +800,7 @@
 				</div>
 			</div>
 			</div>
+			</div>
 		</body>
 			<script>
 				mui.plusReady(function(){
@@ -825,6 +829,7 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+					//bindGuidance()
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
@@ -843,7 +848,7 @@
 							"height":$(".buttomFix").height()+87+"px",
 							"background": "url(../../images/tradeGudice1.png) no-repeat",
 							"background-size":"100% 100%",
-							"z-index":"991",
+							"z-index":"999",
 						});
 						var clickNum=0;
 						$(".bottom,.top").click(function(){
@@ -939,7 +944,7 @@
 		<script src="../../js/candlestick.config.js"></script>
 		<script src="../../js/lightChart.config.js"></script>
 		<script src="../../js/chart.js"></script>
-		<script type="text/javascript" src="../../js/trade.js" ></script>-->
+		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){  
@@ -988,6 +993,12 @@
 				});
 				document.getElementById("closeStopTable1").addEventListener("tap",function(){
 					mui("#popoverLoss1").popover("toggle");
+				});
+				document.getElementById("closeLossTable").addEventListener("tap",function(){
+					mui("#popoverLoss").popover("toggle");
+				});
+				document.getElementById("closeStopTable").addEventListener("tap",function(){
+					mui("#popoverLoss").popover("toggle");
 				});
 				document.getElementById("insertCondition").addEventListener("tap",function(){
 					mui("#popoverConditoion").popover("toggle");

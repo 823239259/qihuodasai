@@ -45,10 +45,13 @@
     	    }
         	newData=rawData.slice(-60);
         	var x=0;
-            if(dataPricesList.length!=0){
-            	for(var i=0;i<dataPricesList.length;i++){
-            		if(dataPricesList[i].id==$("#CommodityNo").text()){
-            			x=dataPricesList[i].prices;
+            var length=$("#positionList .position3").length;
+        	var text=$("#CommodityNo").text();
+            if(length!=0){
+            	for(var i=0;i<length;i++){
+            		var text1=$("#positionList .position0").eq(i).text();
+            		if(text.indexOf(text1)>=0){
+            			x=Number($("#positionList .position3").eq(i).text());
             		}
             	}
             }
@@ -129,6 +132,12 @@
 		              markLine: {
                 		symbol: ['none', 'none'],
                 		clickable:false,
+                       lineStyle: {
+		                   normal: {
+		                       width: 1,
+		                       color: "#ffffff"
+		                   }
+		               },
 		                data: [
 			                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
 		       				 {name: '标线2终点', xAxis: "2", yAxis: x}
