@@ -15,6 +15,20 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 </head>
 <body>
+<script type="text/javascript">
+/**
+ * 电话号码处理
+ */
+function userMobileHandle(value,rows,index){
+	     var val = value.substring(0,3);
+		 var val1 = value.substring(7,value.length);
+		 var result=val+"****"+val1;
+	 	 //<shiro:hasPermission name="sys:customerService:wuser:usermobileview">
+			result = value;
+		//</shiro:hasPermission>
+		return result;
+}
+</script>
 <shiro:hasPermission name="sys:customerService:wuser:view">
 <!-- toolbar="#toolbar" -->
 	<table id="dg" class="easyui-datagrid" width="100%" style="height:auto;"
@@ -24,7 +38,7 @@
         <thead>
             <tr>
                 <th field="id" data-options="checkbox:true"></th>
-				<th field="mobile" width="150">手机号 </th>
+				<th field="mobile" width="150" data-options="formatter:userMobileHandle">手机号 </th>
 				<th field="tname" width="150">用户姓名</th>
 				<th field="userType" width="150">用户类型</th>
 				<th field="allocationMoney" width="150">配资金额</th>
@@ -117,7 +131,9 @@
            <%--  <shiro:hasPermission name="sys:customerService:wuser:insteadActivityUser">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="insteadActivityUser()">变为6600活动用户</a>
             </shiro:hasPermission> --%>
-           <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-excel" onclick="$.easyui.exportExcel('dg','queryForm')">导出</a>
+            <shiro:hasPermission name="sys:customerService:wuser:exportExcel">
+           			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-excel" onclick="$.easyui.exportExcel('dg','queryForm')">导出</a>
+    		</shiro:hasPermission>
     </div>
     <!-- <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a>

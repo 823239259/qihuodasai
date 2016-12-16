@@ -129,6 +129,8 @@ function handleData(evt){
 			}
 			if(inserOrderStatus == 5){
 				tip("交易失败:合约【"+insertOrderParam.ContractCode+"】,原因【"+insertOrderParam.StatusMsg+"】");
+			}else{
+				tip("提交成功,等待交易");
 			}
 			resultInsertOrderId[insertOrderParam.OrderID] = insertOrderParam.OrderID;
 			//订单状态通知
@@ -238,7 +240,7 @@ function updateBalance(parama){
 	var floatingProfit = $("#floatingProfit").val();
 	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
-	localCacheCurrencyAndRate[currencyNo]  = currency;
+	localCacheCurrencyAndRate[currencyNo]  = currency == undefined ? localCacheCurrencyAndRate[currencyNo]:currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
 	loadCachCanuse[accountNo] = canuse;
@@ -319,6 +321,8 @@ function addFundsDetails(param){
 	var oldAmount = parseFloat(param.OldAmount).toFixed(2);
 	var todayAmount = parseFloat(param.TodayAmount).toFixed(2);
 	var frozenMoney = parseFloat(param.FrozenMoney).toFixed(2);
+	var closeProfit = parseFloat(param.CloseProfit).toFixed(2);
+	var counterFee = parseFloat(param.CounterFee).toFixed(2);
 	var currencyRate = param.CurrencyRate;
 	var unExpiredProfit = parseFloat(param.UnExpiredProfit).toFixed(2);
 	var unAccountProfit = parseFloat(param.UnAccountProfit).toFixed(2);
@@ -340,6 +344,8 @@ function addFundsDetails(param){
 				'	<li class = "detail_frozenMoney">'+frozenMoney+'</li>'+
 				'	<li class = "detail_profitRate">'+profitRate+'</li>'+
 				'	<li class = "detail_currencyRate" style="display:none;">'+currencyRate+'</li>'+
+				'   <li class = "detail_closeProfit"  style="display:none;">'+closeProfit+'</li>'+
+				'   <li class = "detail_counterFee"  style="display:none;">'+counterFee+'</li>'+
 				'</ul>';
 	$("#account_gdt1").append(html);
 	tabOn();
@@ -1652,7 +1658,7 @@ function doInsertOrder(orderNum,tradeDrection,orderPrice){
 	var contractNo = $("#contractNo").val();
 	var priceType = $("input[type='radio']:checked").val();
 	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNum,tradeDrection,priceType,orderPrice,0,doGetOrderRef());
-	tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");
+	/*tip("合约【"+commodeityNo+contractNo+"】提交成功,等待交易");*/
 	isBuy = true;
 }
 /**
@@ -1672,7 +1678,7 @@ function doInsertAllSellingOrder(){
 		param[0] = tradeParam;
 		closing(param);
 	}
-	tip("提交成功,等待交易");
+	/*tip("提交成功,等待交易");*/
 }
 /**
  * 平仓操作
@@ -1691,7 +1697,7 @@ function doInsertSellingOrder(){
 	var param = new Array();
 	param[0] = tradeParam;
 	closing(param);
-	tip("提交成功,等待交易");
+	/*tip("提交成功,等待交易");*/
 }
 /**
  * 反手操作
@@ -1712,7 +1718,7 @@ function doInsertBackhandOrder(){
 	var contractCode = commodityNo + contractNo;
 	var orderPrice = tradeParam.LimitPrice;
 	Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,tradeDrection,0,orderPrice,0,doGetOrderRef());
-	tip("合约【"+contractCode+"】提交成功,等待交易");
+	/*tip("合约【"+contractCode+"】提交成功,等待交易");*/
 	isBuy = true;
 }
 /**
@@ -1729,7 +1735,7 @@ function doInsertAllCancleOrder(){
 		param[0] = tradeParam
 		cancleOrder(param);
 	}
-	tip("提交成功,等待撤单");
+	/*tip("提交成功,等待撤单");*/
 }
 /**
  * 撤单操作
@@ -1745,7 +1751,7 @@ function doInsertCancleOrder(){
 	var param = new Array();
 	param[0] = tradeParam
 	cancleOrder(param);
-	tip("合约【"+contractCode+"】提交成功,等待撤单");
+	/*tip("合约【"+contractCode+"】提交成功,等待撤单");*/
 }
 /**
  * 改单操作
@@ -1775,7 +1781,7 @@ function doInsertChangeSingleOrder(){
 	param[0]=tradeParam;
 	modifyOrder(param);
 	layer.closeAll();
-	tip("合约【"+contractCode+"】提交成功,等待交易");
+	/*tip("合约【"+contractCode+"】提交成功,等待交易");*/
 	isUpdateOrder = true;
 }
 /**
@@ -1870,6 +1876,11 @@ function sumListfloatingProfit(){
 			continue;
 		}
 		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
+		var  todayAmount = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayAmount']").text();
+		var  closeProfit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_closeProfit']").text();
+		var  counterFee = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_counterFee']").text();
+		var  deposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_deposit']").text();
+		var  todayBlance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayBalance']");
 		var p =  $(".tab_position");
 		if(p.length == 0){
 			floatingProfitDom.text(0.00);
@@ -1885,6 +1896,8 @@ function sumListfloatingProfit(){
 			price = price + Number($this.find("li[class = 'position10']").text());
 		});
 		floatingProfitDom.text(parseFloat(price).toFixed(2));
+		var balance = Number(todayAmount)+Number(closeProfit)-Number(counterFee)+Number(price);
+		todayBlance.text(parseFloat(balance).toFixed(2));
 	}
 }
 /**

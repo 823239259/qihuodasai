@@ -404,7 +404,7 @@ public class UserPayController {
 					e.printStackTrace();
 				}
 				String result = null;
-				if(payModelId == 1){
+				if(payModelId == 1 || payModelId == 6){
 					result = dxtxPayModel.getPayForm(toJsonParam);
 				}else{
 					result = dxtxPayModel.toJSON();
