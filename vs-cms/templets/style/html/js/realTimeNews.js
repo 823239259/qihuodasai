@@ -4,11 +4,17 @@ $(function(){
     $("#clock").html(currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
     var clock = setInterval(function(){
         var currentDate = new Date();//获取当前时间
-        var 
-        if(){
-        	
+        var i= "",j="",k="";
+        if(currentDate.getHours()<10){
+            i= "0";
         }
-        $("#clock").html(currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
+        if(currentDate.getMinutes()<10){
+            j= "0";
+        }
+        if(currentDate.getSeconds()<10){
+            k= "0";
+        }
+        $("#clock").html(i+currentDate.getHours()+":"+j+currentDate.getMinutes()+":"+k+currentDate.getSeconds());
     },1000);
     $(".quotation_title").click(function(){
         var _this = $(this);
@@ -41,28 +47,28 @@ $(function(){
         dataALL=data;
         for(var i=0;i<data.length-1;i++){
             if("calendar-link".indexOf(data[i].liveContent) > 0){
-             $(".calendar-link").css("display","none");
+                $(".calendar-link").css("display","none");
             }
             var date=new Date(parseInt(data[i].createdAt) * 1000).Format("hh:mm");
             var date1=new Date(parseInt(data[i].createdAt) * 1000).Format("yyyy-MM-dd");
             var  date2=new Date(parseInt(data[i+1].createdAt) * 1000).Format("yyyy-MM-dd");
             if(date1==date2){
                 $("#insertNew").append(
-                    "<div>"+
-                    "<span class='icon_time'>"+date+"</span>"+
-                    "<label class='title'>"+data[i].liveContent +"<label>"+
-                    "<span class='operation'></span>"+
-                    "</div>");
+                        "<div>"+
+                        "<span class='icon_time'>"+date+"</span>"+
+                        "<label class='title'>"+data[i].liveContent +"<label>"+
+                        "<span class='operation'></span>"+
+                        "</div>");
             }else{
                 $("#insertNew").append( "<div>"+
                     "<label class='title'>"+ date2+"<label>"+
                     "</div>");
                 $("#insertNew").append(
-                    "<div>"+
-                    "<span class='icon_time'>"+date+"</span>"+
-                    "<label class='title'>"+data[i].liveContent +"<label>"+
-                    "<span class='operation'></span>"+
-                    "</div>");
+                        "<div>"+
+                        "<span class='icon_time'>"+date+"</span>"+
+                        "<label class='title'>"+data[i].liveContent +"<label>"+
+                        "<span class='operation'></span>"+
+                        "</div>");
             }
         }
         $(".title").css({" overflow": "hidden","min-height":"24px"});
