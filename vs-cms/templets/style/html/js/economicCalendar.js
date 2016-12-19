@@ -37,53 +37,53 @@ $(function(){
         $("#economicCalendar_trailer_Content").empty();
         for(var i=0;i<dataAll.length;i++){
             //for(var s=0;s<val.length;s++){
-                if(val.indexOf(dataAll[i].country)>=0){
-                    var date= new Date(parseInt(dataAll[i].timestamp) * 1000).Format("hh:mm");
-                    var star;
-                    if(dataAll[i].importance==1){
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-                    }else if(dataAll[i].importance==2){
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-                    }else if(dataAll[i].importance==3){
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
-                    }else{
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
-                    }
-                    if(dataAll[i].actual==null || dataAll[i].actual=="null" || dataAll[i].actual==""){
-                        dataAll[i].actual="--";
-                    }
-                    if(dataAll[i].forecast==null || dataAll[i].forecast=="null" || dataAll[i].forecast==""){
-                        dataAll[i].forecast="--";
-                    }
-                    if(dataAll[i].previous==null || dataAll[i].previous=="null" || dataAll[i].previous==""){
-                        dataAll[i].previous="--";
-                    }
-                    if(dataAll[i].calendarType=="FE"){
-                        $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
-                            "<li class='data'>"+date+"</li>"+
-                            "<li class='importance'>"+star+"</li>"+
-                            " <li class='countries'>"+dataAll[i].country+"</li>"+
-                            "  <li class='detailed'>"+dataAll[i].title+"</li>"+
-                            " </ul>");
-                    }else if(dataAll[i].calendarType=="FD"){
-                        $(" .economicCalendar_content .calendar_time_tab").append("<ul>"+
-                            "<li class='data'>"+date+"</li>"+
-                            "<li class='importance'>"+star+"</li>"+
-                            " <li class='countries'>"+dataAll[i].country+"</li>"+
-                            "  <li class='incident'>"+dataAll[i].title+"</li>"+
-                            " <li class='newValue'>"+dataAll[i].actual+"</li>"+
-                            "<li class='expect'>"+dataAll[i].forecast+"</li>"+
-                            "<li class='formerValue'>"+dataAll[i].previous+"</li>"+
-                            " </ul>");
-                    }else if(dataAll[i].calendarType=="VN"){
-                        $(" .economicCalendar_trailer .calendar_time_tab #economicCalendar_trailer_Content").append("<ul>"+
-                            "<li class='data'>"+date+"</li>"+
-                            "<li class='importance'>"+star+"</li>"+
-                            " <li class='countries'>"+dataAll[i].country+"</li>"+
-                            "  <li class='detailed'>"+dataAll[i].title+"</li>"+
-                            " </ul>");
-                    }
+            if(val.indexOf(dataAll[i].country)>=0){
+                var date= new Date(parseInt(dataAll[i].timestamp) * 1000).Format("hh:mm");
+                var star;
+                if(dataAll[i].importance==1){
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
+                }else if(dataAll[i].importance==2){
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
+                }else if(dataAll[i].importance==3){
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
+                }else{
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
                 }
+                if(dataAll[i].actual==null || dataAll[i].actual=="null" || dataAll[i].actual==""){
+                    dataAll[i].actual="--";
+                }
+                if(dataAll[i].forecast==null || dataAll[i].forecast=="null" || dataAll[i].forecast==""){
+                    dataAll[i].forecast="--";
+                }
+                if(dataAll[i].previous==null || dataAll[i].previous=="null" || dataAll[i].previous==""){
+                    dataAll[i].previous="--";
+                }
+                if(dataAll[i].calendarType=="FE"){
+                    $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+dataAll[i].country+"</li>"+
+                        "  <li class='detailed'>"+dataAll[i].title+"</li>"+
+                        " </ul>");
+                }else if(dataAll[i].calendarType=="FD"){
+                    $(" .economicCalendar_content .calendar_time_tab").append("<ul>"+
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+dataAll[i].country+"</li>"+
+                        "  <li class='incident'>"+dataAll[i].title+"</li>"+
+                        " <li class='newValue'>"+dataAll[i].actual+"</li>"+
+                        "<li class='expect'>"+dataAll[i].forecast+"</li>"+
+                        "<li class='formerValue'>"+dataAll[i].previous+"</li>"+
+                        " </ul>");
+                }else if(dataAll[i].calendarType=="VN"){
+                    $(" .economicCalendar_trailer .calendar_time_tab #economicCalendar_trailer_Content").append("<ul>"+
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+dataAll[i].country+"</li>"+
+                        "  <li class='detailed'>"+dataAll[i].title+"</li>"+
+                        " </ul>");
+                }
+            }
             //}
         }
     }
@@ -119,12 +119,12 @@ $(function(){
         }
         return y+"年"+i+m+"月"+j+d+"日";
     }
-   function updateDate(date){
-       var date=new Date(date);
-       var y = date.getFullYear();
-       var m = date.getMonth()+1;//获取当前月份的日期
-       var d = date.getDate();
-       return y+"-"+m+"-"+d;
+    function updateDate(date){
+        var date=new Date(date);
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;//获取当前月份的日期
+        var d = date.getDate();
+        return y+"-"+m+"-"+d;
     }
     function GetDateStrDate(date) {
         var dd = new Date(date);
@@ -184,13 +184,14 @@ $(function(){
         if(monday.getDate()<10){
             j="0";
         }
-        $(".monday").html(i+(monday.getMonth() + 1) + '/'+ j + monday.getDate());
-        $(".tuesday").html(i+(tuesday.getMonth() + 1) + '/'+ j + tuesday.getDate());
-        $(".wednesday").html(i+(wednesday.getMonth() + 1) + '/'+ j + wednesday.getDate());
-        $(".thursday").html(i+(thursday.getMonth() + 1) + '/'+ j + thursday.getDate());
-        $(".friday").html(i+(friday.getMonth() + 1) + '/'+ j + friday.getDate());
-        $(".saturday").html((saturday.getMonth() + 1) + '/'+ j + saturday.getDate());
-        $(".sunday").html(i+(sunday.getMonth() + 1) + '/'+ j + sunday.getDate());
+        $(".monday").html(i+(monday.getMonth() + 1) + '/'+ j + monday.getDate()).attr("data-date",(monday.getMonth() + 1) + '月' + monday.getDate() + '日');
+        $(".tuesday").html(i+(tuesday.getMonth() + 1) + '/'+ j + tuesday.getDate()).attr("data-date",(tuesday.getMonth() + 1) + '月' + tuesday.getDate() + '日');
+        $(".wednesday").html(i+(wednesday.getMonth() + 1) + '/'+ j + wednesday.getDate()).attr("data-date",(wednesday.getMonth() + 1) + '月' + wednesday.getDate() + '日');
+        $(".thursday").html(i+(thursday.getMonth() + 1) + '/'+ j + thursday.getDate()).attr("data-date",(thursday.getMonth() + 1) + '月' + thursday.getDate() + '日');
+        $(".friday").html(i+(friday.getMonth() + 1) + '/'+ j + friday.getDate()).attr("data-date",(friday.getMonth() + 1) + '月' + friday.getDate() + '日');
+        $(".saturday").html((saturday.getMonth() + 1) + '/'+ j + saturday.getDate()).attr("data-date",(saturday.getMonth() + 1) + '月' + saturday.getDate() + '日');
+        $(".sunday").html(i+(sunday.getMonth() + 1) + '/'+ j + sunday.getDate()).attr("data-date",(sunday.getMonth() + 1) + '月' + sunday.getDate() + '日');
+
         if(week==1){
             $(".monday").parent().addClass("on");
         }else if(week==2){
@@ -213,9 +214,9 @@ $(function(){
     });
     insertDataF();
     $(".time li").click(function () {
-        var index=$(this).index();
-        $(".time li a").removeClass("on").eq(index).addClass("on");
-        var text="2016年"+$(".time li span").eq(index).text();
+        var index=$(this);
+        $(".time li a").removeClass("on").eq(index.index()).addClass("on");
+        var text="2016年"+index.find("span").attr("data-date");
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
         var params={
@@ -277,8 +278,8 @@ $(function(){
                     "  <li class='detailed'>"+data[i].title+"</li>"+
                     " </ul>");
             }
-
         }
+        ys();
     }
     function insertDataF(){
         var text=$("#today").text();
@@ -312,5 +313,18 @@ $(function(){
         }else{
             insertData(dataAll);
         }
-    })
+    });
+    function ys(){
+        var tab =$(".calendar_time_tab ul");
+        var table =$(".economicCalendar_left .economicCalendar_table");
+        table.each(function(){
+            tab.each(function(index){
+                var tab1= tab.eq(index).children(".countries");
+                var tab2= tab.eq(index+1).children(".countries");
+                if(tab1.html() != tab2.html()){
+                    tab2.parent().css("border-top","1px solid #e6e6e6");
+                }
+            });
+        });
+    }
 });
