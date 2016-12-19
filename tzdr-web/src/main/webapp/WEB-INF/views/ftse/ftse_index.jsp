@@ -105,7 +105,7 @@
 						<label>操盘须知：</label> <span style="color:#333; font-size:16px;">新华富时A50指数当期主力合约（${contract}）</span>
 					</div>
 					<div class="cp_sdfont">
-						<label>交易时间：</label> <span><i>9:05-16:30,17:05-23:55<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓） </c></i></span>
+						<label>交易时间：</label> <span><i>9:05-16:30,17:05-02:00<c style="font-size: 14px; color: #666;">（注意：请不要在交易时间外持单，以免被系统强制平仓） </c></i></span>
 					</div>
 					<div class="cp_sdfont">
 		                <label>操盘保证金(¥)：</label>
