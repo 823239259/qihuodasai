@@ -264,8 +264,8 @@ var tzdr = {
 		TradeSocketUrl:"ws://139.224.24.206:6066",
 		TradeSocketModelUrl : "ws://139.224.24.206:6066",
 		//交易版本
-		tradeSocketVersion: "2.0.0",
-		tradeAppVersion: "2.0.0",
+		tradeSocketVersion: "3.0.0",
+		tradeAppVersion: "3.0.0",
 		//行情地址
 		MarketSocketUrl:"ws://quote.vs.com:9002",
 		//登录名字和密码

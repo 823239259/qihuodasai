@@ -1414,9 +1414,19 @@ function addFundDetailBindClick(cls){
  * 绑定止损单列表点击事件
  * @param {Object} cls
  */
+var num=0;
 function addStopLossBindClick(cls){
 	$("."+cls).bind("click",function(){
 		var $this = $(this);
+		var index=$(this).index();
+		if(num<index){
+			index=index-1
+		}
+		num=index;
+		
+		$("#buttonListTr1 button").css("top",122+(index+1)*41+"px");
+		$("#buttonListTr1").css("display","table-row");
+		$("#clickTable .testclick1").eq(index).after($("#buttonListTr1")).addClass("clickBg").siblings().removeClass("clickBg");;
 		selectStopLoss["stopLossNo"]=$this.attr("id");
 		var status = $("#"+selectStopLoss["stopLossNo"]+" td[class = 'stoploss1']").attr("data-tion-status");
 		if(status == 0){
@@ -2224,6 +2234,8 @@ function bindOpertion(){
 				operationText = "删除"; 
 			}else if(operationStopLossType == 2){
 				operationText = "暂停";
+			}else if(operationStopLossType == 3){
+				operationText = "启动";
 			}
 			alertProtype("是否"+operationText+"止损单？","提示",Btn.confirmedAndCancle(),doStopAndDelModifyStopLoss);
 		}else{

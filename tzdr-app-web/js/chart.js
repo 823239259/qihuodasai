@@ -565,14 +565,15 @@ mui.plusReady(function(){
     		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
     	}
     	for(var i=0;i<commoditysData.length;i++){
-    		if(commoditysData[i].CommodityNo==valSelect){
+    		var str=commoditysData[i].CommodityNo+commoditysData[i].MainContract;
+    		if(str==valSelect){
     			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);
 				    $("#commodeityNo").val(commoditysData[i].CommodityNo);
 				   $("#contractNo").val(commoditysData[i].MainContract);
 				   $("#CommodityName").val(commoditysData[i].CommodityName);
 				   $("#doSize").val(commoditysData[i].DotSize);
 				   $("#contractSize").val(commoditysData[i].ContractSize);
-				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize)
+				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize);
     		}
     	}
     	clearInterval(setIntvalTime);

@@ -326,6 +326,7 @@
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
 						var loginSocket = new WebSocket(socketUrl);
+						console.log(socketUrl);
 						loginSocket.onopen = function(){
 							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+',"Version":"'+tradeWebSocketVersion+'"}}');
 						}

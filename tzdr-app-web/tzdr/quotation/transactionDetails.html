@@ -162,7 +162,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="Handicap" class="bottomDivList">
+						<div id="Handicap" class="bottomDivList" style="margin-top: 10px;">
 							<table cellpadding="0" cellspacing="0" id="table_title">
 								<thead>
 									<tr>
@@ -690,7 +690,7 @@
 				    		</thead>
 				    		<tbody id = "clickTableBody">
 				    			<tr id="buttonListTr1">
-								<td colspan="7"> 
+								<td colspan="8"> 
 									<button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
 									<button value="0" id="modifyCondition1">修改</button>
 									<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
@@ -715,6 +715,7 @@
 				    			</tr>
 				    		</thead>
 				    		<tbody id = "over-clickTableBody">
+
 				    		</tbody>
 				    	</table>
 				    </div>
@@ -722,10 +723,10 @@
 				<div id="popoverLoss1" class="mui-popover">
 				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active ustopTitle" href="#stopTitle1"  id= "ustopTitle">止损</a>
-				        <a class="mui-control-item ulossTitle" href="#lossTitle1" id= "ulossTitle">止盈</a>
+				        <a class="mui-control-item ulossTitle mui-active" href="#lossTitle1" id= "ulossTitle">止盈</a>
 				    </div>
 				    <div>
-				    	<div id="stopTitle1" class="mui-control-content mui-active ustopTitle">
+				    	<div id="stopTitle1" class="mui-control-content mui-active  ustopTitle">
 				    		<table>
 				    			<tr>
 				    				<td class="oddTd" id = "stopOddTd1">合约</td>
@@ -761,7 +762,7 @@
 				    			</tr>
 				    		</table>
 				    	</div>
-				    	<div id="lossTitle1" class="mui-control-content ulossTitle">
+				    	<div id="lossTitle1" class="mui-control-content mui-active  ulossTitle">
 				    		<table>
 				    			<tr>
 				    				<td class="oddTd">合约</td>
@@ -976,9 +977,6 @@
 				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
 				});
-				/*document.getElementById("stopLoss").addEventListener("tap",function(){
-						mui("#popoverLoss").popover("toggle");
-				});*/
 				document.getElementById("closeLossTable").addEventListener("tap",function(){
 					mui("#popoverLoss").popover("toggle");
 				});
@@ -1013,11 +1011,14 @@
 					$(".mui-content").eq(0).css("z-index","997");
 				});
 				document.getElementById("openStop").addEventListener("tap",function(){
-					$("#bg1").css("display","none");
-					$("#bg2").css("display","none");
-					$("#bg3").css("display","block");
-					$(".mui-content").eq(2).css("z-index","997");
-					mui("#topPopover").popover("toggle");
+					if(isLogin){
+						$("#bg1").css("display","none");
+						$("#bg2").css("display","none");
+						$("#bg3").css("display","block");
+						$(".mui-content").eq(2).css("z-index","997");
+						mui("#topPopover").popover("toggle");
+					}
+				
 				});
 				document.getElementById("openCondition").addEventListener("tap",function(){
 					$("#bg1").css("display","none");
@@ -1026,9 +1027,9 @@
 					mui("#topPopover").popover("toggle");
 					$(".mui-content").eq(1).css("z-index","997");
 				});
-				var num=0;
+
 				var numCondition=0;
-				$("#conditionTable .testclick").on("tap",function(){
+				$("#conditionTable").on("tap",".testclick",function(){
 					var index=$(this).index();
 					if(numCondition<index){
 						index=index-1
@@ -1037,15 +1038,7 @@
 					$("#conditionTable .testclick").eq(index).after($("#buttonListTr")).addClass("clickBg").siblings().removeClass("clickBg");;
 					$("#buttonListTr button").css("top",122+(index+1)*41+"px");
 				})
-				$("#clickTable .testclick1").on("tap",function(){
-					var index=$(this).index();
-					if(num<index){
-						index=index-1
-					}
-					num=index;
-					$("#clickTable .testclick1").eq(index).after($("#buttonListTr1")).addClass("clickBg").siblings().removeClass("clickBg");;
-					$("#buttonListTr1 button").css("top",122+(index+1)*41+"px");
-				})
+
 			});
 		</script>
 		<script>

@@ -1215,18 +1215,18 @@ input{
 	position: relative;
 	padding: 4px;
 }
-#Increase,#Increase1{
+#Increase,#Increase1,#Increase2,#lossIncrease2{
 	margin-left: 8px;
 	font-size: 14px;
 	color:#999999;
 }
-#closeStopTable,#insertStopData,#closeLossTable,#insertLossData,#closeStopTable1,#insertStopData1,#closeLossTable1,#insertLossData1{
+#closeStopTable,#insertStopData,#closeLossTable,#insertLossData,#closeStopTable1,#insertStopData1,#closeLossTable1,#insertLossData1,#uinsertLossData1{
 	border-right: 1px solid #121212;
 	text-align: center;
 	color: #CCCCCC;
 	font-size: 16px;
 }
-#choiceStopPrices,#choiceStopPrices3,#choiceStopPrices2{
+#choiceStopPrices,#choiceStopPrices3,#uchoiceLossPrices{
 	width: 38%;
 	display: inline-block;
 	color:#cccccc;
@@ -1242,7 +1242,7 @@ input{
 	
 }
 #choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices2,#choiceStopPrices5{
-	width: 42%;
+	width: 38%;
 	display: inline-block;
 	color:#cccccc;
 	padding-left: 5px;
@@ -1265,7 +1265,7 @@ input{
 	overflow-x: scroll; 
 	/*overflow-y: hidden;*/
 }
-.ConditionList{width: 700px;}
+.ConditionList{width: 850px;}
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;
@@ -1285,7 +1285,15 @@ input{
 	width: 100px;
 	
 }
+.ConditionList tr td:nth-child(4){
+	width: 120px;
+	
+}
 .ConditionList tr td:nth-child(7){
+	width: 100px;
+	
+}
+.ConditionList tr td:nth-child(8){
 	width: 160px;
 	
 }
@@ -1294,29 +1302,7 @@ input{
 	height: 30px;
 	line-height: 30px;
 }
-#clickTable tr td:nth-child(7){
-	width: 60px;
-}
-#clickTable tr td:nth-child(8){
-	width: 160px;
-}
-#buttonListTr{
-	position: relative;
-}
-#buttonListTr button,#buttonListTr1 button{
-	width:25%;
-	margin: 0px;
-	padding: 0px;
-	height: 30px;
-	line-height: 30px;
-	background-color: #cccccc;
-	color:#2b2b2b;
-	border-top: none;
-	border-buttom:none;
-/*	border: none;*/
-	position: fixed;
-	top:125px;
-}
+
 
 #suspendCondition,#suspendCondition1{
 	right: 50%;
@@ -1522,4 +1508,26 @@ input{
 }
 .clickBg{
 	background-color: #121212;
+}
+#buttonListTr{
+	position: relative;
+}
+
+#buttonListTr1{
+	width: 100%;
+	display: none;
+}
+#buttonListTr button,#buttonListTr1 button{
+	width:25%;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #cccccc;
+	color:#2b2b2b;
+	border-top: none;
+	border-buttom:none;
+/*	border: none;*/
+	position: fixed;
+	top:125px;
 }
