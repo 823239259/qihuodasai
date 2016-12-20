@@ -997,10 +997,6 @@ var selectStopLoss = {};
  */
 var localCahceStopLossNo = {};
 /**
- * 是否对index-1
- */
-var isTableIndex = false;
-/**
  * 全局保存选中止损单的操作类型 0 - 修改，1-删除 ， 2-暂停
  */
 var operationStopLossType = undefined;
@@ -1088,7 +1084,6 @@ function updateStopLossData(param){
 		var html = $("#"+stopLossNo).html();
 		$("#over-clickTableBody").append("<tr class = 'testclick1' id = '"+stopLossNo+"'>"+html+"</tr>");
 		$("#"+stopLossNo).remove();
-		$("#buttonListTr1").css("display","none");
 		isTableIndex = true;
 	}else{
 		if(status == 0){
@@ -1424,18 +1419,6 @@ var num=0;
 function addStopLossBindClick(cls){
 	$("."+cls).bind("click",function(){
 		var $this = $(this);
-		var index=$this.index();
-		if(num<index){
-			index=index-1
-		}
-		if(isTableIndex){
-			index = index-1;
-			isTableIndex = false; 
-		}
-		num=index;
-		$("#buttonListTr1").css("display","table-row"); 
-		$("#buttonListTr1 button").css("top",122+(index+1)*41+"px");
-		$("."+cls).after($("#buttonListTr1")).addClass("clickBg").siblings().removeClass("clickBg"); 
 		selectStopLoss["stopLossNo"]=$this.attr("id");
 		var status = $("#"+selectStopLoss["stopLossNo"]+" td[class = 'stoploss1']").attr("data-tion-status");
 		if(status == 0){
