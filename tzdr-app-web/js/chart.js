@@ -115,6 +115,7 @@ mui.plusReady(function(){
 				setFiveMarket(subscribeParam);
 				setHandicap(subscribeParam);
 			} 
+			updateStopAndLossLastPrice(subscribeParam);
 			updateDesignateByQuote(subscribeParam);
 			updateFloatProfit(subscribeParam);
 			//计算浮动盈亏总和

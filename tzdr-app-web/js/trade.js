@@ -2487,6 +2487,7 @@ $("#stopLoss").bind("click",function(){
 	$("#stopEvenPrice").text(localQuote.LastPrice);
 	$("#stopNumber").val($holdNum.text());  
 	$("#stopHoldAvgPrice").val($holdAvgPrice.text());
+	$("#stopChoicePrices1").val($holdAvgPrice.text());
 	$("#lossContractCode").text($contractCode.text());
 	$("#lossDrection").text($drection.text());
 	$("#lossDrection").attr("data-tion-drection",$drection.attr("data-drection"));
@@ -3088,6 +3089,27 @@ function updateAccountBalance(){
 		var todayCanUse = $("#todayCanUse"); 
 		todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
 		todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
+	}
+}
+/**
+ * 更新止损止盈最新价格
+ */
+function updateStopAndLossLastPrice(param){
+	if(isLogin){
+		var lastPrice = param.LastPrice;
+		var commodityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var contractCode = commodityNo+contractNo;
+		var ulossContractCode = $("#ulossContractCode").text();
+		var stopEvenTd = $("#stopEvenTd").text();
+		if(contractCode == ulossContractCode){
+			$("#stopEvenPrice1").text(lastPrice);
+			$("#uEvenPrice").text(lastPrice);	
+		}
+		if(contractCode == stopEvenTd){
+			$("#stopEvenPrice").text(lastPrice);
+			$("#lossEventPrice").text(lastPrice); 
+		}
 	}
 }
 /**
