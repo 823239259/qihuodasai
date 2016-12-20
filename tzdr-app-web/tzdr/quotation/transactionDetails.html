@@ -443,24 +443,25 @@
 				    		<table>
 				    			<tr>
 				    				<td class="oddTd">合约</td>
-				    				<td class="evenTd ">富时A50</td>
-				    				<td class="oddTd borderLeft">多头</td>
-				    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
+				    				<td class="evenTd " id = "lossContractCode">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "lossDrection">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "lossEventPrice"></i></td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
-				    					<input type="text" value="789" id="stopChoicePrices2"  readonly="readonly">
-				    					<span id="Increase1">00</span>
-				    				</td>
+				    					<input type="hidden" id = "lossHoldAvgPrice" />
+				    					<input type="text" value="0" style = "width: 40%;" id="lossChoicePrices2">
+				    					<span id="lossIncrease1">0</span>
+				    				</td> 
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
 				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices4">
-				    						<option>市价</option>
-				    						<option>对手价</option>
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
 				    					</select>
 				    				</td>
 				    			</tr>
@@ -472,7 +473,7 @@
 				    	</div>
 				    </div>
 				</div>
-			</div>
+			</div> 
 			<!---------------------------------条件单--------------------------->
 			<div id="bg2" style="display: none;">
 				<header class="mui-bar mui-bar-nav">
@@ -498,6 +499,7 @@
 				    				<td>时间</td>
 				    			</tr>
 				    		</thead>
+							<thody id = "thodyCondition">
 							<tr class="testclick">
 								<td>t6</td>
 								<td>67</td>
@@ -514,6 +516,8 @@
 									<button id="deleteCondition">删除</button>
 								</td>
 							</tr>
+							</thody>
+							
 				    	</table>
 				    </div>
 				    <div class="mui-control-content" id="alreayCondition">
@@ -529,15 +533,10 @@
 				    				<td>时间</td>
 				    			</tr>
 				    		</thead>
-							<tr>
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
+				    		<tbody id = "over-thbodyCondition">
+				    			
+				    		</tbody>
+							
 				    	</table>
 				    </div>
 				</div>
@@ -554,8 +553,7 @@
 				    				<td >合约</td>
 				    				<td >
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract">
-				    						<option>富时A50</option>
-				    					</select>
+				    					</select> 
 				    				</td>
 				    				<td></td>
 				    				<td></td>
@@ -564,40 +562,38 @@
 				    				<td >方式</td>
 				    				<td class="borderRight">
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
-				    						<option>></option>
-				    						<option>>=</option>
-				    						<option><</option>
-				    						<option><=</option>
-				    						<option>=</option>
+				    						<option value = "0">></option>
+				    						<option value = "2">>=</option>
+				    						<option value = "1"><</option>
+				    						<option value = "3"><=</option>
 				    					</select>
-				    					<input type="number" value="89.64"  id="ConditoionPricesInput"/>
+				    					<input type="number" value="0"  id="ConditoionPricesInput"/>
 				    				</td>
 				    				<td colspan="2">
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
-				    						<option>附加</option>
-				    						<option>></option>
-				    						<option>>=</option>
-				    						<option><</option>
-				    						<option><=</option>
-				    						<option>=</option>
+				    						<option value = "-1">附加</option>
+				    						<option value = "0">></option>
+				    						<option value = "2">>=</option>
+				    						<option value = "1"><</option>
+				    						<option value = "3"><=</option>
 				    					</select>
-				    					<input type="number " value="89.64"  id="ConditoionPricesInput1" />
+				    					<input type="number " value="0"  id="ConditoionPricesInput1" />
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td >操作</td>
 				    				<td class="borderRight">
 				    					<select class="mui-btn mui-btn-block selectComm" id="shopDrection">
-				    						<option>买</option>
-				    						<option>卖</option>
+				    						<option value = "0">买</option>
+				    						<option value = "1">卖</option>
 				    					</select>
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelect">
-				    						<option>市价</option>
-				    						<option>限价</option>
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>
-				    				<td ><input type="number " value="89.64"  id="ConditoionPricesInput3" /></td>
+				    				<td ><input type="number " value="0"  id="ConditoionPricesInput3" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>
@@ -613,7 +609,6 @@
 				    				<td >合约</td>
 				    				<td >
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract1">
-				    						<option>富时A50</option>
 				    					</select>
 				    				</td>
 				    				<td></td>
@@ -622,7 +617,7 @@
 				    			<tr>
 				    				<td >时间</td>
 				    				<td>
-				    					<input type="text" id="insertTimeInput"  value="18:00:00"/>
+				    					<input type="text" id="insertTimeInput"  value="0"/>
 				    				</td>
 				    				<td></td>
 				    				<td></td>
@@ -631,13 +626,13 @@
 				    				<td>价格</td>
 				    				<td>
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceTimeAdditional">
-				    						<option>附加</option>
-				    						<option>>=</option>
-				    						<option><</option>
-				    						<option><=</option>
-				    						<option>=</option>
+				    						<option value = "-1">附加</option>
+				    						<option value = "0">></option>
+				    						<option value = "2">>=</option>
+				    						<option value = "1"><</option>
+				    						<option value = "3"><=</option>
 				    					</select>
-				    					<input type="number " value="89.64"  id="ConditoionTimePricesInput" />
+				    					<input type="number " value="0"  id="ConditoionTimePricesInput" />
 				    				</td>
 				    				<td></td>
 				    				<td></td>
@@ -646,16 +641,16 @@
 				    				<td >操作</td>
 				    				<td class="borderRight">
 				    					<select class="mui-btn mui-btn-block selectComm" id="shopDrectionTime">
-				    						<option>买</option>
-				    						<option>卖</option>
+				    						<option value = "0">买</option>
+				    						<option value = "1">卖</option>
 				    					</select>
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelectTime">
-				    						<option>市价</option>
-				    						<option>限价</option>
+				    						<option value = "1">市价</option>
+				    						<option value = "2">限价</option>
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>
-				    				<td ><input type="number " value="10"  id="ConditoionTimeInput" /></td>
+				    				<td ><input type="number " value="0"  id="ConditoionTimeInput" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>
@@ -667,7 +662,7 @@
 				    	</div>
 				    </div>
 				</div>
-			</div>
+			</div> 
 <!--------------------------止损单---------------------------------->
 			<div id="bg3" style="display: none;">
 				<header class="mui-bar mui-bar-nav">
@@ -694,14 +689,15 @@
 				    			</tr>
 				    		</thead>
 				    		<tbody id = "clickTableBody">
-				    		</tbody>
-							<tr id="buttonListTr1">
+				    			<tr id="buttonListTr1">
 								<td colspan="7"> 
 									<button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
 									<button value="0" id="modifyCondition1">修改</button>
 									<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
 								</td>
 							</tr>
+				    		</tbody>
+							
 				    	</table>
 				    </div>
 				    <div class="mui-control-content" id="alreayStopTale">
@@ -725,17 +721,17 @@
 				</div>
 				<div id="popoverLoss1" class="mui-popover">
 				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
-				        <a class="mui-control-item mui-active" href="#stopTitle1" >止损</a>
-				        <a class="mui-control-item" href="#lossTitle1" >止盈</a>
+				        <a class="mui-control-item mui-active ustopTitle" href="#stopTitle1"  id= "ustopTitle">止损</a>
+				        <a class="mui-control-item ulossTitle" href="#lossTitle1" id= "ulossTitle">止盈</a>
 				    </div>
 				    <div>
-				    	<div id="stopTitle1" class="mui-control-content mui-active">
+				    	<div id="stopTitle1" class="mui-control-content mui-active ustopTitle">
 				    		<table>
 				    			<tr>
 				    				<td class="oddTd" id = "stopOddTd1">合约</td>
 				    				<td class="evenTd" id = "stopEvenTd1">富时A50</td>
 				    				<td class="oddTd borderLeft" id = "stopBorderLeft1">多头</td>
-				    				<td class="evenTd">最新：<i class="evenPrice" id = "stopEvenPrice"></i></td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "stopEvenPrice1"></i></td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">方式</td>
@@ -744,16 +740,16 @@
 				    						<option value="0">止损价</option>
 				    						<option value="2">动态价</option>
 				    					</select>
-				    					<input type="hidden" id = "stopHoldAvgPrice" />
+				    					<input type="hidden" id = "stopHoldAvgPrice1" />
 				    					<input type="text" value="0" id="stopChoicePrices3">
-				    					<span id="Increase">0</span>
+				    					<span id="Increase2">0</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="stopNumber" class="stopCommStyle"></td>
+				    				<td class="evenTd "><input type="text" value="1" id="stopNumber1" class="stopCommStyle"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
-				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices2">
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices3">
 				    						<option value = "1">市价</option>
 				    						<option value = "2">对手价</option>
 				    					</select>
@@ -761,38 +757,39 @@
 				    			</tr>
 				    			<tr>
 				    				<td colspan="2" id="closeStopTable1">关闭</td>
-				    				<td colspan="2" id="insertStopData1" style="border-right: none;">添加</td>
+				    				<td colspan="2" id="insertStopData1" style="border-right: none;">修改</td>
 				    			</tr>
 				    		</table>
 				    	</div>
-				    	<div id="lossTitle1" class="mui-control-content">
+				    	<div id="lossTitle1" class="mui-control-content ulossTitle">
 				    		<table>
 				    			<tr>
 				    				<td class="oddTd">合约</td>
-				    				<td class="evenTd ">富时A50</td>
-				    				<td class="oddTd borderLeft">多头</td>
-				    				<td class="evenTd">最新：<i class="evenPrice"></i></td>
+				    				<td class="evenTd " id = "ulossContractCode">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "uDrection">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "uEvenPrice"></i></td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
-				    					<input type="text" value="789" id="stopChoicePrices2"  readonly="readonly">
-				    					<span id="Increase1">00</span>
+				    					<input type="hidden" id = "ulossHoldAvgPrice1" />
+				    					<input type="text" value="0" style="width: 50%;" id="uLossPrice">
+				    					<span id="lossIncrease2">0</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
+				    				<td class="evenTd "><input type="text" value="1" id="ulossNumber" class="stopCommStyle"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
-				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices5">
-				    						<option>市价</option>
-				    						<option>对手价</option>
+				    					<select class="mui-btn mui-btn-block selectComm" id="uchoiceLossPrices">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
 				    					</select>
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td colspan="2" id="closeLossTable1">关闭</td>
-				    				<td colspan="2" id="insertLossData1" style="border-right: none;">添加</td>
+				    				<td colspan="2" id="uinsertLossData1" style="border-right: none;">修改</td>
 				    			</tr>
 				    		</table>
 				    	</div>
@@ -993,12 +990,6 @@
 				});
 				document.getElementById("closeStopTable1").addEventListener("tap",function(){
 					mui("#popoverLoss1").popover("toggle");
-				});
-				document.getElementById("closeLossTable").addEventListener("tap",function(){
-					mui("#popoverLoss").popover("toggle");
-				});
-				document.getElementById("closeStopTable").addEventListener("tap",function(){
-					mui("#popoverLoss").popover("toggle");
 				});
 				document.getElementById("insertCondition").addEventListener("tap",function(){
 					mui("#popoverConditoion").popover("toggle");

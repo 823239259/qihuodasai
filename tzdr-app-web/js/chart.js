@@ -151,12 +151,12 @@ mui.plusReady(function(){
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
-				$("#chioceContract").append("<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>")
-				$("#chioceContract1").append("<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>")
+				$("#chioceContract").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
+				$("#chioceContract1").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
 				if(Transfer.name[2]==newCommdityNo){
-   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+"</option>"
+   					tradeTitleHtml.innerHTML+="<option value="+commdityAndContract+" selected>"+comm.CommodityName+"</option>"
 	   			}else{
-	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>"
+	   				tradeTitleHtml.innerHTML+="<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>"
 	   			}
 	   			
 			}

@@ -134,12 +134,128 @@ function createInsertStopLossParam(exchangeNo,commodityNo,contractNo,num,stopLos
  * @param {Object} orderType
  * @param {Object} stopLossDiff
  */
-function createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,stopLossDiff){
+function createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,stopLossDiff,stopLossPrice){
 	this.stopLossNo = stopLossNo;
 	this.modifyFlag = modifyFlag;
 	this.num = num;
 	this.stopLossType = stopLossType;
 	this.orderType = orderType;
 	this.stopLossDiff = stopLossDiff;
+	this.stopLossPrice = stopLossPrice;
+	return this;
+}
+/**
+ * 创建条件单新增数据
+ * @param {Object} exchangeNo
+ * @param {Object} commodityNo
+ * @param {Object} contractNo
+ * @param {Object} num
+ * @param {Object} conditionType
+ * @param {Object} priceTriggerPonit
+ * @param {Object} compareType
+ * @param {Object} timeTriggerPoint
+ * @param {Object} abBuyPoint
+ * @param {Object} abSellPoint
+ * @param {Object} orderType
+ * @param {Object} drection
+ * @param {Object} stopLossType
+ * @param {Object} stopLossDiff
+ * @param {Object} stopWinDiff
+ * @param {Object} additionFlag
+ * @param {Object} additionType
+ * @param {Object} additionPrice
+ */
+function createInsertCondition(exchangeNo,
+										commodityNo,
+										contractNo,
+										num,
+										conditionType,
+										priceTriggerPonit,
+										compareType,
+										timeTriggerPoint,
+										abBuyPoint,
+										abSellPoint,
+										orderType,
+										drection,
+										stopLossType,
+										stopLossDiff,
+										stopWinDiff,
+										additionFlag,
+										additionType,
+										additionPrice){
+	this.exchangeNo = exchangeNo;
+	this.commodityNo = commodityNo;
+	this.contractNo = contractNo;
+	this.num = num;
+	this.conditionType = conditionType;
+	this.priceTriggerPonit = priceTriggerPonit;
+	this.compareType = compareType;
+	this.timeTriggerPoint = timeTriggerPoint;
+	this.abBuyPoint = abBuyPoint;
+	this.abSellPoint = abSellPoint;
+	this.orderType = orderType;
+	this.drection = drection;
+	this.stopLossType = stopLossType;
+	this.stopLossDiff = stopLossDiff;
+	this.stopWinDiff = stopWinDiff;
+	this.additionFlag = additionFlag;
+	this.additionType = additionType;
+	this.additionPrice = additionPrice;
+	return this;
+}
+/**
+ * 创建修改条件单数据
+ * @param {Object} conditionNo
+ * @param {Object} modifyFlag
+ * @param {Object} num
+ * @param {Object} conditionType
+ * @param {Object} priceTriggerPonit
+ * @param {Object} compareType
+ * @param {Object} timeTriggerPoint
+ * @param {Object} abBuyPoint
+ * @param {Object} abSellPoint
+ * @param {Object} orderType
+ * @param {Object} drection
+ * @param {Object} stopLossType
+ * @param {Object} stopLossDiff
+ * @param {Object} stopWinDiff
+ * @param {Object} additionFlag
+ * @param {Object} additionType
+ * @param {Object} additionPrice
+ */
+function createUpdateConditioin(conditionNo,
+						modifyFlag,
+						num,
+						conditionType,
+						priceTriggerPonit,
+						compareType,
+						timeTriggerPoint,
+						abBuyPoint,
+						abSellPoint,
+						orderType,
+						drection,
+						stopLossType,
+						stopLossDiff,
+						stopWinDiff,
+						additionFlag,
+						additionType,
+						additionPrice){
+	this.conditionNo = conditionNo;
+	this.modifyFlag = modifyFlag;
+	this.num = num;
+	this.conditionType = conditionType;
+	this.priceTriggerPonit = priceTriggerPonit;
+	this.compareType = compareType;
+	this.timeTriggerPoint = timeTriggerPoint;
+	this.abBuyPoint = abBuyPoint;
+	this.abSellPoint = abSellPoint;
+	this.orderType = orderType;
+	this.drection = drection;
+	this.stopLossType = stopLossType;
+	this.stopLossDiff = stopLossDiff;
+	this.stopWinDiff = stopWinDiff;
+	this.additionFlag = additionFlag;
+	this.additionType = additionType;
+	this.additionPrice = additionPrice;
 	return this;
 }
