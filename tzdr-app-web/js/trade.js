@@ -2277,7 +2277,8 @@ function bindOpertion(){
 			$("#stopBorderLeft1").text(drectionText); 
 			$("#stopBorderLeft1").attr("data-tion-drection",drection);
 			$("#stopEvenPrice1").text(stopEvenPrice);
-			$("#stopChoicePrices1").text(holdAvgPrice);
+			
+			$("#stopChoicePrices1").text(stopEvenPrice);
 			$("#choiceStopPrices2").val(lossType);
 			$("#stopChoicePrices3").val(stopChoicePrices1);
 			$("#stopNumber1").val(num); 
@@ -2291,7 +2292,7 @@ function bindOpertion(){
 			$("#uLossPrice").val(stopChoicePrices1);
 			$("#ulossNumber").val(num);
 			$("#uchoiceLossPrices").val(orderType);
-			$("#ulossHoldAvgPrice1").val(holdAvgPrice);
+			$("#ulossHoldAvgPrice1").val(stopEvenPrice);
 			var scale = 0.00; 
 			var chaPrice = stopEvenPrice - stopChoicePrices1;
 			if(lossType == 0){

@@ -252,7 +252,7 @@
 						<div  id="trade" style="padding-bottom: 20px;padding-top: 46px;" class=" bottomDivList">
 						    <div class="Assets" style="background-color: #2B2B2B;">
 						        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
-						        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
+						        <p><span>总资产(USD)</span><span>保证金(USD)</span><span>余额(USD)</span></p>
 						    </div>
 						    <div class="ProductInformation">
 						        <div class="ProductInformationLeft">
@@ -423,7 +423,7 @@
 				    					</select>
 				    					<input type="hidden" id = "stopHoldAvgPrice" />
 				    					<input type="text" value="0" id="stopChoicePrices1">
-				    					<span id="Increase">0</span>
+				    					<span id="Increase">0.00%</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
@@ -455,7 +455,7 @@
 				    				<td  colspan="3">
 				    					<input type="hidden" id = "lossHoldAvgPrice" />
 				    					<input type="text" value="0" style = "width: 40%;" id="lossChoicePrices2">
-				    					<span id="lossIncrease1">0</span>
+				    					<span id="lossIncrease1">0.00%</span>
 				    				</td> 
 				    			</tr>
 				    			<tr>
@@ -682,13 +682,13 @@
 				    		<thead>
 				    			<tr>
 				    				<td>合约名称</td>
-				    				<td>状态</td>
 				    				<td>多空</td>
 				    				<td>类别</td>
 				    				<td>手数</td>
-				    				<td>止损/止盈价</td>
+				    				<td>触发条件</td>
 				    				<td>委托价</td>
-				    				<td>下单日期</td>
+				    				<td>触发时间</td>
+				    				<td>委托结果</td>
 				    			</tr>
 				    		</thead>
 				    		<tbody id = "clickTableBody">
@@ -741,7 +741,7 @@
 				    					</select>
 				    					<input type="hidden" id = "stopHoldAvgPrice1" />
 				    					<input type="text" value="0" id="stopChoicePrices3">
-				    					<span id="Increase2">0</span>
+				    					<span id="Increase2">0.00%</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
@@ -773,7 +773,7 @@
 				    				<td  colspan="3">
 				    					<input type="hidden" id = "ulossHoldAvgPrice1" />
 				    					<input type="text" value="0" style="width: 50%;" id="uLossPrice">
-				    					<span id="lossIncrease2">0</span>
+				    					<span id="lossIncrease2">0.00%</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
@@ -1018,7 +1018,8 @@
 						mui("#topPopover").popover("toggle");
 						$(".mui-content").eq(2).css("z-index","999");
 					}else{
-						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html"})
+//						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}})
+						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
 				});
 				document.getElementById("openCondition").addEventListener("tap",function(){

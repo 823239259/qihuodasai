@@ -1253,7 +1253,7 @@ input{
 	font-size: 14px;
 	text-align: center;
 	vertical-align: middle;
-	margin-top: 5px;
+	/*margin-top: 2px;*/
 }
 /*条件单**/
 #segmentedControlCondition{
@@ -1270,6 +1270,7 @@ input{
 	/*overflow-y: hidden;*/
 }
 .ConditionList{width: 850px;}
+#alreayStopTale table{width: 900px;}
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;
@@ -1289,7 +1290,7 @@ input{
 	width: 100px;
 	
 }
-.ConditionList tr td:nth-child(4){
+.ConditionList tr td:nth-child(5){
 	width: 120px;
 	
 }
