@@ -1248,11 +1248,11 @@ input{
 	overflow-x: scroll; 
 	margin-top: 40px;
 }
-.ConditionList{width: 850px;}
+.ConditionList{width: 900px;}
 /*#alreayStopTale table{width: 900px;}*/
 .ConditionList tr td{
 	padding: 0px 10px;
-	width: 60px;
+	width: 70px;
 	color:#CCCCCC;
 	font-size: 14px;
 	height: 40px;
@@ -1262,23 +1262,11 @@ input{
 		border-bottom: 1px solid #121212;
 }
 .ConditionList tr td:nth-child(1){
-	width: 120px;
-	
-}
-.ConditionList tr td:nth-child(6){
 	width: 100px;
 	
 }
-.ConditionList tr td:nth-child(5){
-	width: 120px;
-	
-}
-.ConditionList tr td:nth-child(7){
-	width: 100px;
-	
-}
-.ConditionList tr td:nth-child(8){
-	width: 160px;
+.ConditionList tr td:nth-child(9){
+	width: 140px;
 	
 }
 .ConditionList thead tr td{
@@ -1287,9 +1275,9 @@ input{
 	line-height: 30px;
 }
 
-#alreayStopTale table tr td:nth-last-child(1){
+/*#alreayStopTale table tr td:nth-last-child(1){
 	width: 120px;
-}
+}*/
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
