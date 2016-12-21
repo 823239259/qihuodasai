@@ -1013,18 +1013,6 @@ input{
 	background-color: #121212;
 	color:#fcc900;
 }
-#Handicap #table_title {
-	width: 100%;
-	height: 30px;
-	color:#cccccc;
-}
-#Handicap #table_title thead tr td{
-	width: 50%;
-	height: 30px;
-	line-height: 25px;;
-	height: 25px;
-	text-align: center;
-}
 #table_Content{
 	width: 100%;
 	color:#CCCCCC;
@@ -1300,7 +1288,9 @@ input{
 	line-height: 30px;
 }
 
-
+#alreayStopTale table tr td:nth-last-child(1){
+	width: 120px;
+}
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
