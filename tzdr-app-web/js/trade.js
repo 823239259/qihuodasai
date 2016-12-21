@@ -1056,6 +1056,7 @@ function appendStopLossData(param){
 					+'	<td class = "stoploss4">'+num+'</td>'
 					+'	<td class = "stoploss5">'+stopLossPrice+'</td>'
 					+'	<td class = "stoploss6" data-tion-orderType = "'+orderType+'">'+orderTypeText+'</td>'
+					+'	<td class = "stoploss7">当日有效</td>'
 					+'	<td class = "stoploss7">'+insertTime+'</td>'
 					+'  <td class = "stoploss8" style = "display:none;">'+stopLossDiff+'</td>'
 					+'</tr>';
