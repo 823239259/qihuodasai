@@ -688,8 +688,8 @@
 				</header>
 				<div class="mui-coontent" style="position: absolute;z-index: 997;top: 46px;width: 100%;">
 					<div id="segmentedControlStop" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
-				        <a class="mui-control-item mui-active" href="#NoStopTale" >未触发列表</a>
-				        <a class="mui-control-item" href="#alreayStopTale" >已触发列表</a>
+				        <a class="mui-control-item mui-active" href="#NoStopTale" id="NoStopListTitle">未触发列表</a>
+				        <a class="mui-control-item" href="#alreayStopTale" id="alreayStopListTitle">已触发列表</a>
 				    </div>
 				    <div class="mui-control-content mui-active" id="NoStopTale">
 				    	<table class="ConditionList" id="clickTable">
@@ -709,9 +709,6 @@
 				    		</tbody>
 							
 				    	</table>
-				    	<button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
-						<button value="0" id="modifyCondition1">修改</button>
-						<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
 				    </div>
 				    <div class="mui-control-content" id="alreayStopTale">
 				    	<table class="ConditionList">
@@ -732,6 +729,9 @@
 				    		</tbody>
 				    	</table>
 				    </div>
+				    <button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
+					<button value="0" id="modifyCondition1">修改</button>
+					<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
 				</div>
 				<div id="popoverLoss1" class="mui-popover">
 				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
@@ -831,6 +831,9 @@
 							$("#lightChart").css({
 								"width":"100%",
 								"height":245*screen/568+"px",
+							});
+							$("#alreayStopTale,#NoStopTale").css({
+								"height":screen-160+"px",
 							})
 						}	
 					/*
@@ -1019,14 +1022,14 @@
 					$("#bg3").css("visibility","none");
 					$("#bg1").css("visibility","block");
 					$("#topPopover").css("display","none");
-					$(".mui-content").eq(0).css("z-index","999");
+					$(".mui-content").eq(0).css("z-index","998");
 				});
 				document.getElementById("conditionBack").addEventListener("tap",function(){
 					$("#bg2").css("display","none");
 					$("#bg3").css("display","none");
 					$("#bg1").css("display","block");
 					$("#topPopover").css("display","none");
-					$(".mui-content").eq(0).css("z-index","999");
+					$(".mui-content").eq(0).css("z-index","998");
 				});
 				document.getElementById("openStop").addEventListener("tap",function(){
 					if(isLogin){
@@ -1034,7 +1037,7 @@
 						$("#bg2").css("display","none");
 						$("#bg3").css("display","block");
 						mui("#topPopover").popover("toggle");
-						$(".mui-content").eq(2).css("z-index","999");
+						$(".mui-content").eq(2).css("z-index","998");
 					}else{
 //						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}})
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
@@ -1045,11 +1048,17 @@
 					$("#bg3").css("display","none");
 					$("#bg2").css("display","block");
 					mui("#topPopover").popover("toggle");
-					$(".mui-content").eq(1).css("z-index","999");
+					$(".mui-content").eq(1).css("z-index","998");
 				});
 				$("#clickTable").on("tap",".testclick1",function(){
-					 $(this).addClass('clickBg');    // 设置被点击元素为红色
-        			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的红色样式
+					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
+        			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
+				})
+				document.getElementById("alreayStopListTitle").addEventListener("tap",function(){
+					$("#suspendCondition1,#modifyCondition1,#deleteCondition1").css("display","none");
+				})
+				document.getElementById("NoStopListTitle").addEventListener("tap",function(){
+					$("#suspendCondition1,#modifyCondition1,#deleteCondition1").css("display","block");
 				})
 			});
 		</script>

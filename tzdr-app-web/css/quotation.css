@@ -1247,7 +1247,6 @@ input{
 	height: auto;
 	overflow-x: scroll; 
 	margin-top: 40px;
-	/*overflow-y: hidden;*/
 }
 .ConditionList{width: 850px;}
 #alreayStopTale table{width: 900px;}
@@ -1301,6 +1300,20 @@ input{
 }
 #deleteCondition,#deleteCondition1{
 	right: 0%;
+}
+#suspendCondition1,#modifyCondition1,#deleteCondition1{
+	width:25%;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #cccccc;
+	color:#2b2b2b;
+	border-top: none;
+	border-buttom:none;
+	position: fixed;
+	bottom: 10px;
+	z-index: 999;
 }
 #ConditoionTitlePrices table,#ConditoionTitleTime table {
 	width: 100%;
@@ -1495,17 +1508,4 @@ input{
 }
 .clickBg{
 	background-color: #121212;
-}
-#suspendCondition1,#modifyCondition1,#deleteCondition1{
-	width:25%;
-	margin: 0px;
-	padding: 0px;
-	height: 30px;
-	line-height: 30px;
-	background-color: #cccccc;
-	color:#2b2b2b;
-	border-top: none;
-	border-buttom:none;
-	position: fixed;
-	bottom: 10px;
 }
