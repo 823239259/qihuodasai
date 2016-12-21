@@ -51,6 +51,16 @@ function setIsLogin(flag){
 	isLogin = flag;
 }
 /**
+ * 验证登录
+ */
+function vadationIsLogin(){
+	if(username == null){
+		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
+		return false;
+	}
+	return true;
+}
+/**
  * 更新连接状态
  */
 function changeConnectionStatus(){

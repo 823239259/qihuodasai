@@ -17,6 +17,16 @@ function doGetMarketPrice(price,miniTikeSize,drection,dotSize){
 	return parseFloat(newPrice).toFixed(dotSize);
 }
 /**
+ * 输入价格或数量验证 
+ */
+function validationInputPrice(obj){
+	if(obj == undefined || obj == null || obj.length == 0 || parseFloat(obj) <= 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+/**
  * 计算浮动盈亏
  * @param {Object} lastPrice 最新价
  * @param {Object} tradeAvgPrice 均价
@@ -282,9 +292,9 @@ function analysisStopLossStatus(status){
  */
 function analysisStopLossType(param){
 	if(param == 0){
-		param = "限价触发止损";
+		param = "限价止损";
 	}else if(param == 1){
-		param = "限价触发止盈";
+		param = "限价止盈";
 	}else if(param == 2){
 		param = "浮动止损";
 	}
