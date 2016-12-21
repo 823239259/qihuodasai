@@ -183,10 +183,10 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam); 
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			if(referCount == 0){
-				tradeSuccessLoadHoldData();
-			}
-			referCount++;
+			/*if(referCount == 0){*/
+			tradeSuccessLoadHoldData();
+			/*}*/
+			/*referCount++;*/
 			/*if(isBuy && orderId == locaOrderId){   
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null; 
@@ -268,10 +268,10 @@ function handleData(evt){
 			isBuy = false;
 			localCachePositionRecentData = {};
 		}*/
-		if(referCount > 0){ 
+		/*if(referCount > 0){ 
 			referCount--;
 			tradeSuccessLoadHoldData();
-		} 
+		} */
 	}
 }
 /**
@@ -2581,7 +2581,7 @@ function doInsertOrder(param){
 	var $this = param;
 	var tradeDrection = $this.attr("data-tion-buy");
 	var orderNumber = $("#orderNumber").val();
-	//var priceType = $("input[type='radio']:checked").val();
+	var priceType = $("input[type='radio']:checked").val();
 	if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
 		alertProtype("手数输入错误数量","提示",Btn.confirmed());
 		return;
@@ -2596,7 +2596,7 @@ function doInsertOrder(param){
 	var exchanageNo = $("#exchangeNo").val();
 	var commodeityNo = $("#commodeityNo").val();
 	var contractNo = $("#contractNo").val();
-	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,buyOrderPrice,0,doGetOrderRef());
+	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,priceType,buyOrderPrice,0,doGetOrderRef());
 	isBuy = true;
 }
 /**
@@ -3097,7 +3097,7 @@ function marketBuy(param){
 		}*/
 		//var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 		var priceType = 0;
-		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,0,buyOrderPrice,0,doGetOrderRef());
+		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,1,buyOrderPrice,0,doGetOrderRef());
 		tip("合约【"+commodityNo+contractNo+"】提交成功,等待交易");
 	}
 /**
