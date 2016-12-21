@@ -2735,9 +2735,9 @@ function doGetInsertStopLoss(){
 			}else if(stopLossType == 2){
 				stopLossDiff = stopChoicePrices1;
 				if(drection == 0){
-					stopChoicePrices1 = Number(stopChoicePrices1) + Number(lastPrice);
+					stopChoicePrices1 = Number(lastPrice) - Number(stopChoicePrices1);
 				}else if(drection == 1){
-					stopChoicePrices1 =  Number(stopChoicePrices1) - Number(lastPrice);
+					stopChoicePrices1 =  Number(stopChoicePrices1) + Number(lastPrice);
 				}
 			}
 			var exchangeNo = localQuote.ExchangeNo;
@@ -2808,9 +2808,9 @@ function doUpdateModifyStopLoss(){
 			}else if(stopLossType == 2){
 				stopLossDiff = stopChoicePrices3;
 				if(drection == 0){
-					stopChoicePrices3 = Number(stopChoicePrices3) + Number(lastPrice);
+					stopChoicePrices3 = Number(lastPrice) - Number(stopChoicePrices3);
 				}else if(drection == 1){
-					stopChoicePrices3 = Number(stopChoicePrices3) - Number(lastPrice);
+					stopChoicePrices3 = Number(stopChoicePrices3) + Number(lastPrice);
 				}
 			} 
 			var tradeParam = createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,parseFloat(Math.abs(stopLossDiff)).toFixed(2),stopChoicePrices3);
