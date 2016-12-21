@@ -172,16 +172,6 @@
 				var validationLoginTip = null;
 				var width=plus.screen.resolutionWidth;
 				var time = 30000;
-				if(localStorage.getItem("tipLogin") == 1){
-					alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-				}else{
-					validationLoginTip = setTimeout(function(){ 
-						if(!mui.cacheUser.isLogin()){
-							localStorage.setItem("tipLogin",1);
-							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-						}
-					},30000);
-				}
 				function openLogin(){ 
 					mui.openWindow("../login/login.html","login");
 				} 
@@ -194,6 +184,18 @@
 				if(plus.storage.getItem("QuotationGuidance")==null){
 					plus.storage.setItem("QuotationGuidance","1");
 					bindGuidance();
+				}
+				if(plus.storage.getItem("QuotationGuidance")!=null){
+					if(localStorage.getItem("tipLogin") == 1){
+						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+					}else{
+						validationLoginTip = setTimeout(function(){ 
+							if(!mui.cacheUser.isLogin()){
+								localStorage.setItem("tipLogin",1);
+								alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+							}
+						},30000);
+					}
 				}
 				function bindGuidance(){
 					var height=window.innerHeight;
