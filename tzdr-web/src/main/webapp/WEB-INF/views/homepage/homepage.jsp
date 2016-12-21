@@ -10,7 +10,7 @@
 	<title>维胜金融-让金融交易更顺畅_致力于国际期货开户_外盘期货入门_期货公司排名_期货交易时间_外盘期货是什么_什么是期货交易规则</title>
 	<meta name="keywords" content="期货入门,期货开户,成都期货,外盘期货,国际期货开户,期货公司排名,期货交易时间,外盘期货是什么,什么是期货交易,期货怎么炒"/>
 	<meta name="description" content="维胜金融是中国领先的国际期货及衍生品互联网交易平台,提供期货入门、期货公司排名、国际期货开户、成都期货、外盘期货、恒指期货、国际原油、富时A50等期货入门服务,分享期货模拟交易、期货交易时间、期货是什么、期货怎么炒及什么是期货交易规则,维胜金融期货开户操盘快捷方便，交易费用全网最低。"/>
-	<meta name="sogou_site_verification" content="rM6RBuyJcq"/>
+	<meta name="sogou_site_verification" content="rM6RBuyJcq"/> 
 	<meta name="360-site-verification" content="130a887517d7b56c6f630e2188d9d027" />
 	<%
 		String casServerLoginUrl=ConfUtil.getContext("SSO.casServer.loginUrl");
