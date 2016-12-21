@@ -1017,7 +1017,6 @@ input{
 	width: 100%;
 	height: 30px;
 	color:#cccccc;
-	/*border-bottom: 1px solid #121212;*/
 }
 #Handicap #table_title thead tr td{
 	width: 50%;
@@ -1036,21 +1035,31 @@ input{
 	line-height: 25px;;
 	height: 25px;
 	font-size: 14px;;
+	border-top:1px solid #121212;
+	border-bottom: 1px solid #121212;
 }
-#table_Content tr td:nth-child(1),#table_Content tr td:nth-child(4){
+#table_Content tr td:nth-child(1),#HandicapTable tr td:nth-child(1){
 	width: 16% !important;
 	padding-left: 2%;
 }
-#table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5){
+#table_Content tr td:nth-child(4){
+	width: 20% !important;
+	padding-left: 2%;
+}
+#HandicapTable tr td:nth-child(4){
+	width: 14% !important;
+	padding-left: 2%;
+	border-left: 1px solid #121212;
+}
+#table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5),#HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(5){
 	width: 21%;
 }
-#table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6){
+#table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6),#HandicapTable tr td:nth-child(3),#HandicapTable tr td:nth-child(6){
 	width: 13%;
 	color:#cccccc;
 }
 #table_Content tr td:nth-child(3){
 	border-right: 1px solid #121212;
-	
 }
 #HandicapTable{
 	width: 100%;
@@ -1064,16 +1073,6 @@ input{
 	font-size: 14px;
 		height: 30px;
 	line-height: 30px;
-}
-#HandicapTable tr td:nth-child(1),#HandicapTable tr td:nth-child(3){
-	width: 16% !important;
-	padding-left: 2%;
-}
-#HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(4){
-	width: 34%;
-}
-#HandicapTable tr td:nth-child(2){
-	border-right: 1px solid #121212;
 }
 .bottomDivList{
 	display: none;
@@ -1092,13 +1091,6 @@ input{
 #segmentedControl .mui-active{
 	width: 100%;
 }
-/*#buyFuture .butomBoreder .mui-input-row{
-	margin-top: 2px;
-}*/
-/*#buyFuture .butomBoreder .mui-input-row label{
-	width: 100%;
-	height: 35px;
-}*/
 #radioDiv{
 	width: 100%;
 }
