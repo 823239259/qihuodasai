@@ -1021,8 +1021,8 @@ input{
 #Handicap #table_title thead tr td{
 	width: 50%;
 	height: 30px;
-	line-height: 30px;
-	font-size: 14px;
+	line-height: 25px;;
+	height: 25px;
 	text-align: center;
 }
 #table_Content{
