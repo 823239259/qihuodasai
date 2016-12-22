@@ -292,11 +292,11 @@ function analysisStopLossStatus(status){
  */
 function analysisStopLossType(param){
 	if(param == 0){
-		param = "限价止损";
+		param = "触发价";
 	}else if(param == 1){
-		param = "限价止盈";
+		param = "触发价";
 	}else if(param == 2){
-		param = "浮动止损";
+		param = "追踪差价";
 	}
 	return param;
 }
