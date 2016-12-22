@@ -2107,12 +2107,12 @@ function bindOpertion(){
 			if(stopLossType == 0){
 				if(stopDrection == 0){
 					if(lastPrice <= stopChoicePrices1){
-						tip("输入价格已不合适宜");
+						tip("输入价格应小于最新价");
 						return;
 					}
 				}else if(stopDrection == 1){
 					if(lastPrice >= stopChoicePrices1){
-						tip("输入价格已不合适宜");
+						tip("输入价格应大于最新价");
 						return;
 					}
 				}
@@ -2121,7 +2121,7 @@ function bindOpertion(){
 				stopLossDiff = stopChoicePrices1;
 				typeText = "动态止损";
 			}
-			if(stopLossDiff <= 0){
+			if(stopLossDiff == 0){
 				alertProtype("止损价差会导致立即触发,请重新设置","提示",Btn.confirmed());
 				return;
 			}
@@ -2165,12 +2165,12 @@ function bindOpertion(){
 				var chaPrice = lastPrice - stopChoicePrices3;
 				if(stopDrection == 0){
 					if(chaPrice <= 0 ){
-						tip("输入价格已不合适宜");
+						tip("输入价格应小于最新价");
 						return;
 					}
 				}else if(stopDrection == 1){
 					if(chaPrice >= 0) {
-						tip("输入价格已不合适宜");
+						tip("输入价格应大于最新价");
 						return;
 					}
 				}
@@ -2219,12 +2219,12 @@ function bindOpertion(){
 			var chaPrice  = lastPrice - lossChoicePrices2;
 			if(lossDrection == 0){
 				if(chaPrice >= 0){
-					tip("输入价格已不合适宜");
+					tip("输入价格应大于最新价");
 					return;
 				}
 			}else if(lossDrection == 1){
 				if(chaPrice <= 0){
-					tip("输入价格已不合适宜");
+					tip("输入价格应小于最新价");
 					return;
 				}
 			}
@@ -2269,12 +2269,12 @@ function bindOpertion(){
 			var chaPrice = lastPrice - stopChoicePrices3;
 			if(stopDrection == 0){
 				if(chaPrice >= 0 ){
-					tip("输入价格已不合适宜");
+					tip("输入价格应大于最新价");
 					return;
 				}
 			}else if(stopDrection == 1){
 				if(chaPrice <= 0) {
-					tip("输入价格已不合适宜");
+					tip("输入价格应小于最新价");
 					return;
 				}
 			}
