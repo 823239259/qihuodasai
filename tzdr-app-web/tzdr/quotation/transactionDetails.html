@@ -437,13 +437,13 @@
 				    						<option value="2">动态价</option>
 				    					</select>
 				    					<input type="hidden" id = "stopHoldAvgPrice" />
-				    					<input type="text" value="0" id="stopChoicePrices1">
+				    					<input type="number" value="0" id="stopChoicePrices1" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
 				    					<span id="Increase">0.00%</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="stopNumber" class="stopCommStyle"></td>
+				    				<td class="evenTd "><input type="number" value="1" id="stopNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices1">
 				    						<option value = "1">市价</option>
@@ -469,13 +469,13 @@
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
 				    					<input type="hidden" id = "lossHoldAvgPrice" />
-				    					<input type="text" value="0" style = "width: 40%;" id="lossChoicePrices2">
+				    					<input type="number" value="0" style = "width: 40%;" id="lossChoicePrices2" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
 				    					<span id="lossIncrease1">0.00%</span>
 				    				</td> 
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="lossNumber" class="stopCommStyle"></td>
+				    				<td class="evenTd "><input type="number" value="1" id="lossNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices4">
 				    						<option value = "1">市价</option>
@@ -764,13 +764,13 @@
 				    						<option value="2">动态价</option>
 				    					</select>
 				    					<input type="hidden" id = "stopHoldAvgPrice1" />
-				    					<input type="text" value="0" id="stopChoicePrices3">
+				    					<input type="number" value="0" id="stopChoicePrices3" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
 				    					<span id="Increase2">0.00%</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="stopNumber1" class="stopCommStyle"></td>
+				    				<td class="evenTd "><input type="number" value="1" id="stopNumber1" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" ></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices3">
 				    						<option value = "1">市价</option>
@@ -796,13 +796,13 @@
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
 				    					<input type="hidden" id = "ulossHoldAvgPrice1" />
-				    					<input type="text" value="0" style="width: 50%;" id="uLossPrice">
+				    					<input type="number" value="0" style="width: 50%;" id="uLossPrice" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
 				    					<span id="lossIncrease2">0.00%</span>
 				    				</td>
 				    			</tr>
 				    			<tr>
 				    				<td class="oddTd">手数</td>
-				    				<td class="evenTd "><input type="text" value="1" id="ulossNumber" class="stopCommStyle"></td>
+				    				<td class="evenTd "><input type="number" value="1" id="ulossNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="uchoiceLossPrices">
 				    						<option value = "1">市价</option>

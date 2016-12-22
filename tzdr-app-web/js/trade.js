@@ -222,10 +222,11 @@ function handleData(evt){
 			}else{
 				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
 				mui("#popoverLoss").popover("toggle");
+				$("#popoverLoss").css("display","none");
+				$(".mui-backdrop").css("display","none");
 				$("#bg1").css("display","none");
 				$("#bg2").css("display","none");
 				$("#bg3").css("display","block");
-				mui("#topPopover").popover("toggle");
 				$(".mui-content").eq(2).css("z-index","998");
 			}
 			tip(message);
@@ -686,11 +687,17 @@ function appendTradeSuccess(param){
 	var drectionText = analysisBusinessBuySell(drection);
 	var orderId = param.OrderID;
 	var contractCode = param.ContractCode;
-	var tradePrice = param.TradePrice;
+	var dotSize = 2;
+	var Dosize=getMarketCommdity(contractCode);
+	if(Dosize != undefined){
+		dotSize = Number(Dosize.DotSize);
+	}
+	var tradePrice = Number(param.TradePrice);
 	var tradeNum = param.TradeNum;
 	var currencyNo = param.CurrencyNo;
 	var tradeNo = param.TradeNo;
 	var orderId = param.OrderID;
+	
 	var tradeTime = param.TradeDateTime;
 	var exchangeNo = param.ExchangeNo;
 	var cls = 'trade-index'+tradesIndex;
@@ -699,7 +706,7 @@ function appendTradeSuccess(param){
 				+'	'
 				+'		<span class = "trade0">'+contractCode+'</span>'
 				+'		<span class = "trade1">'+drectionText+'</span>'
-				+'      <span class = "trade2">'+tradePrice+'</span>'
+				+'      <span class = "trade2">'+tradePrice.toFixed(dotSize)+'</span>'
 				+'		<span class = "trade3">'+tradeNum+'</span>'
 				+'		<span class = "trade4 dateTimeL">'+tradeTime+'</span>'
 				+'	'
@@ -758,13 +765,18 @@ function addPostion(param){
 		var holdNum = param.HoldNum; 
 		var drection = param.Drection;
 		var drectionText = analysisBusinessDirection(drection);
-		var holdAvgPrice = param.HoldAvgPrice;
+		var dotSize = 2;
+		var Dosize=getMarketCommdity(contractCode);
+		if(Dosize != undefined){
+			dotSize = Number(Dosize.DotSize);
+		}
+		var holdAvgPrice = Number(param.HoldAvgPrice);
 		var floatingProfit = param.FloatingProfit;
 		var exchangeNo = param.ExchangeNo;
 		var currencyNo = param.CurrencyNo;
 		var commodityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
-		var openAvgPrice = param.OpenAvgPrice;
+		var openAvgPrice = Number(param.OpenAvgPrice);
 		if(holdNum == undefined){
 			holdNum = param.TradeNum;
 		}
@@ -804,7 +816,7 @@ function addPostion(param){
 				+ '			<span class = "position0">'+contractCode+'</span>'
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
-				+ '			<span class = "position3">'+holdAvgPrice+'</span>'
+				+ '			<span class = "position3">'+holdAvgPrice.toFixed(dotSize)+'</span>'
 				+ '			<span class = "position4 dateTimeL"><input readonly = "readonly" type="text" value = "'+floatingProfit+'" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;background-color:transparent;font-size:12px;width:160px;" id = "floatValue'+contractCode+'" /></span>'
 				+ '			<span class = "position5" style = "display:none">'+commodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+contractNo+'</span>'
@@ -1660,6 +1672,8 @@ $(function(){
 		if(val == 2){
 			$("#stopChoicePrices1").val(0);
 			$("#Increase").val(0);
+		}else if(val == 0){
+			$("#stopChoicePrices1").val($("#stopEvenPrice").text());
 		}
 	});
 	$("#choiceStopPrices2").change(function(){
@@ -1668,6 +1682,8 @@ $(function(){
 		if(val == 2){
 			$("#stopChoicePrices3").val(0);
 			$("#Increase2").val(0);
+		}else if(val == 0){
+			$("#stopChoicePrices3").val($("#stopEvenPrice1").text());
 		}
 	});
 	$("#insertCondition").click(function(){
@@ -2564,6 +2580,7 @@ $("#stopLoss").bind("click",function(){
 		return;
 	}
 	var lastPrice = localQuote.LastPrice;
+	$("#choiceStopPrices").val(0);
 	$("#stopEvenTd").text($contractCode.text()); 
 	$("#stopBorderLeft").text($drection.text());
 	$("#stopBorderLeft").attr("data-tion-drection",$drection.attr("data-drection"));
