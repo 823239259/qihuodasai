@@ -221,6 +221,12 @@ function handleData(evt){
 				message = "添加止损单失败"
 			}else{
 				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
+				mui("#popoverLoss").popover("toggle");
+				$("#bg1").css("display","none");
+				$("#bg2").css("display","none");
+				$("#bg3").css("display","block");
+				mui("#topPopover").popover("toggle");
+				$(".mui-content").eq(2).css("z-index","998");
 			}
 			tip(message);
 			appendStopLossData(stopLossParam);
@@ -250,6 +256,8 @@ function handleData(evt){
 				status = "触发失败"; 
 			}else{
 				status = "更新成功";
+				mui("#popoverLoss1").popover("toggle");
+				
 			}
 			tip(stoplossType+"单【"+stopLossNo+"】,"+status);
 			//查询条件单返回

@@ -1013,54 +1013,30 @@ input{
 	background-color: #121212;
 	color:#fcc900;
 }
-#table_Content{
+#Handicap table{
 	width: 100%;
 	color:#CCCCCC;
 	border:1px solid #121212;
-}
-#table_Content tr{
-	width: 100%;
-	line-height: 25px;;
-	height: 25px;
-	font-size: 14px;;
-	border-top:1px solid #121212;
-	border-bottom: 1px solid #121212;
-}
-#table_Content tr td:nth-child(1),#HandicapTable tr td:nth-child(1){
-	width: 16% !important;
-	padding-left: 2%;
-}
-#table_Content tr td:nth-child(4){
-	width: 20% !important;
-	padding-left: 2%;
-}
-#HandicapTable tr td:nth-child(4){
-	width: 14% !important;
-	padding-left: 2%;
-	border-left: 1px solid #121212;
-}
-#table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5),#HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(5){
-	width: 21%;
-}
-#table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6),#HandicapTable tr td:nth-child(3),#HandicapTable tr td:nth-child(6){
-	width: 13%;
-	color:#cccccc;
-}
-#table_Content tr td:nth-child(3){
-	border-right: 1px solid #121212;
-}
-#HandicapTable{
-	width: 100%;
-	margin-top: 20px;
-	color:#cccccc;
-}
-#HandicapTable tr{
-	width: 100%;
-	border-top:1px solid #121212;
-	border-bottom: 1px solid #121212;
+	margin-top: 15px;
 	font-size: 14px;
-		height: 30px;
-	line-height: 30px;
+	padding: 0px;
+}
+#Handicap table tr{
+	height: 25px;
+	line-height: 25px;
+	border:1px solid #121212;
+}
+#Handicap table tr td{
+	width: 19%;
+	padding-left: 2%;
+	margin: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	
+}
+.paddingLeft{
+	padding-left: 5px !important;
 }
 .bottomDivList{
 	display: none;

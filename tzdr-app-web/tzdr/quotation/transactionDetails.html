@@ -165,18 +165,18 @@
 								</div>
 							</div>
 						</div>
-						<div id="Handicap" class="bottomDivList" style="margin-top: 10px;">
+						<div id="Handicap" class="bottomDivList " style="margin-top: 10px;">
 							<table cellpadding="0" cellspacing="0" id="table_Content">
 								<tr>
-									<td colspan="3" style="text-align: center;">卖五档</td>
-									<td style="padding-left: 2%;">最新</td>
-									<td id = "pklastparice" style="border-right: none;"></td>
+									<td colspan="3" style="text-align: center;" class="borderRight">卖五档</td>
+									<td >最新</td>
+									<td id = "pklastparice"></td>
 									<td ></td>
 								</tr>
 								<tr>
 									<td>卖一</td>
 									<td id = "sell_0">0</td> 
-									<td id = "sell_1">0</td>
+									<td id = "sell_1" class="borderRight">0</td>
 									<td>开盘 </td>
 									<td id = "pkopenprice">0</td>
 									<td></td>
@@ -184,7 +184,7 @@
 								<tr>
 									<td>卖二</td>
 									<td id = "sell_2">0</td>
-									<td id = "sell_3">0</td>
+									<td id = "sell_3" class="borderRight">0</td>
 									<td>最高 </td>
 									<td id = "pkhightprice">0</td>
 									<td></td>
@@ -192,7 +192,7 @@
 								<tr>
 									<td>卖三</td>
 									<td id = "sell_4">0</td>
-									<td id = "sell_5">0</td>
+									<td id = "sell_5" class="borderRight">0</td>
 									<td>最低 </td>
 									<td id  = "pklowprice">0</td>
 									<td></td>
@@ -200,7 +200,7 @@
 								<tr>
 									<td>卖四</td>
 									<td id = "sell_6">0</td>
-									<td id = "sell_7">0</td>
+									<td id = "sell_7" class="borderRight">0</td>
 									<td>结算 </td>
 									<td id = "pkjs">0</td>
 									<td></td>
@@ -208,47 +208,45 @@
 								<tr>
 									<td>卖五</td>
 									<td id = "sell_8">0</td>
-									<td id = "sell_9">0</td>
-									<td></td>
-									<td></td>
+									<td id = "sell_9" class="borderRight">0</td>
+									<td >涨跌</td>
+									<td id = "pkzd" >0</td>
 									<td></td>
 								</tr>
-							</table>
-							<table cellpadding="0" cellspacing="0" id="HandicapTable">
 								<tr>
-									<td colspan="3" style="text-align: center;">买五档</td>
-									<td style="border-left: 1px solid #121212;padding-left: 2%;">涨跌</td>
-									<td id = "pkzd" style="border-right: none;">0</td>
-									<td style="border-left: none;"></td>
-								</tr>
-								<tr>
-									<td>买一</td>
-									<td id = "buy_0">0</td>
-									<td id = "buy_1">0</td>
+									<td colspan="3" style="text-align: center;" class="borderRight">买五档</td>
 									<td>成交量 </td>
 									<td id = "pktrademl">0</td>
 									<td></td>
 								</tr>
 								<tr>
-									<td>买二</td>
-									<td id = "buy_2">0</td>
-									<td id = "buy_3">0</td>
+									<td>买一</td>
+									<td id = "buy_0">0</td>
+									<td id = "buy_1" class="borderRight">0</td>
 									<td>持仓量  </td>
 									<td id = "pkccml">0</td>
 									<td></td>
 								</tr>
 								<tr>
-									<td>买三</td>
-									<td id = "buy_4">0</td>
-									<td id = "buy_5">0</td>
+									<td>买二</td>
+									<td id = "buy_2">0</td>
+									<td id = "buy_3" class="borderRight">0</td>
 									<td>昨结  </td>
 									<td id = "pkzj">0</td>
 									<td></td>
 								</tr>
 								<tr>
+									<td>买三</td>
+									<td id = "buy_4">0</td>
+									<td id = "buy_5" class="borderRight">0</td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
 									<td>买四</td>
 									<td id = "buy_6">0</td>
-									<td id = "buy_7">0</td>
+									<td id = "buy_7" class="borderRight">0</td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -256,12 +254,15 @@
 								<tr>
 									<td>买五</td>
 									<td id = "buy_8">0</td>
-									<td id = "buy_9">0</td>
+									<td id = "buy_9" class="borderRight">0</td>
 									<td></td>
 									<td></td>
 									<td></td>
 								</tr>
 							</table>
+							<!--<table cellpadding="0" cellspacing="0" id="HandicapTable">
+
+							</table>-->
 						</div>
 						<div  id="trade" style="padding-bottom: 20px;padding-top: 46px;" class=" bottomDivList">
 						    <div class="Assets" style="background-color: #2B2B2B;">
@@ -1007,13 +1008,7 @@
 				document.getElementById("closeLossTable").addEventListener("tap",function(){
 					mui("#popoverLoss").popover("toggle");
 				});
-				document.getElementById("closeStopTable").addEventListener("tap",function(){
-					mui("#popoverLoss").popover("toggle");
-				});
 				document.getElementById("closeLossTable1").addEventListener("tap",function(){
-					mui("#popoverLoss1").popover("toggle");
-				});
-				document.getElementById("closeStopTable1").addEventListener("tap",function(){
 					mui("#popoverLoss1").popover("toggle");
 				});
 				document.getElementById("insertCondition").addEventListener("tap",function(){
