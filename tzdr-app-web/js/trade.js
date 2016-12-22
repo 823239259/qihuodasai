@@ -1037,7 +1037,6 @@ function appendStopLossData(param){
 		var num = param.Num;
 		var stopLossType = param.StopLossType;
 		var stopLossTypeText = analysisStopLossType(stopLossType);
-		var stopLossDiff = param.StopLossDiff;
 		var orderType = param.OrderType;
 		var orderTypeText = lossOrderType(orderType);
 		var holdAvgPrice = param.HoldAvgPrice;
@@ -1047,6 +1046,9 @@ function appendStopLossData(param){
 		var dynamicPrice = param.DynamicPrice;
 		var stopLossPrice = param.StopLossPrice;
 		var stopLossDiff = param.StopLossDiff;
+		if(stopLossType == 2){
+			stopLossPrice = stopLossDiff;
+		}
 		var cls = "stoploss"+stoplossIndex;
 		var html =  '<tr class="testclick1 '+cls+'" data-tion-index = "'+stoplossIndex+'" id = "'+stopLossNo+'">'
 				    +'	<td class = "stoploss0">'+contractCode+'</td>'
@@ -1056,7 +1058,7 @@ function appendStopLossData(param){
 					+'	<td class = "stoploss4">'+num+'</td>'
 					+'	<td class = "stoploss5">'+stopLossPrice+'</td>'
 					+'	<td class = "stoploss6" data-tion-orderType = "'+orderType+'">'+orderTypeText+'</td>'
-					+'	<td class = "stoploss7">当日有效</td>'
+					+'	<td class = "stoploss9">当日有效</td>'
 					+'	<td class = "stoploss7">'+insertTime+'</td>'
 					+'  <td class = "stoploss8" style = "display:none;">'+stopLossDiff+'</td>'
 					+'</tr>';
@@ -1092,6 +1094,9 @@ function updateStopLossData(param){
 	var insertTime = param.InsertDateTime;
 	var dynamicPrice = param.DynamicPrice;
 	var stopLossPrice = param.StopLossPrice;
+	if(stopLossType == 2){
+		stopLossPrice = stopLossDiff;
+	}
 	var $status = $("#"+stopLossNo+" td[class = 'stoploss1']");
 	var $holdDrection = $("#"+stopLossNo+" td[class = 'stoploss2']");
 	var $stopLossType = $("#"+stopLossNo+" td[class = 'stoploss3']");
