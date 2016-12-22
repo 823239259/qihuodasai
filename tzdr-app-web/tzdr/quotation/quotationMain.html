@@ -197,7 +197,6 @@
 					plus.storage.setItem("QuotationGuidance","1");
 					bindGuidance();
 				}
-
 				function bindGuidance(){
 					var height=window.innerHeight;
 						$(".top").css({
@@ -218,6 +217,16 @@
 							$(".top,.bottom,#closeDiv").css({
 					    			"display":"none",
 					    	});
+			    		  var data=ManufacturingData(3);
+				            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+				            socket.close();
+				            mui.openWindow({
+								url:"transactionDetails.html",
+								id:"transactionDetails",
+								 extras:{
+									name:data,
+								}
+							});
 						})
 						$(".top").click(function(){
 							if(clickNum==0){
@@ -245,6 +254,17 @@
 								$(".top,.bottom,#closeDiv").css({
 					    			"display":"none",
 					    		});
+					    		  var data=ManufacturingData(3);
+						            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+						            socket.close();
+						            mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails",
+										 extras:{
+											name:data,
+										}
+									});
+					    		
 							}
 							clickNum++;
 						});
