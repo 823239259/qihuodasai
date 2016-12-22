@@ -1300,7 +1300,7 @@ input{
 	border-top: none;
 	border-buttom:none;
 	position: fixed;
-	bottom: 10px;
+	bottom: 60px;
 	z-index: 999;
 }
 #ConditoionTitlePrices table,#ConditoionTitleTime table {
@@ -1496,4 +1496,27 @@ input{
 }
 .clickBg{
 	background-color: #121212;
+}
+#stopTips{
+	width: 100%;
+	padding: 0px 2%;
+	position: fixed;
+	bottom: 10px;
+	height: auto;
+	overflow: hidden;
+	font-size: 14px;
+	color:#CCCCCC;
+}
+#stopTips div{
+	float: left;
+}
+#stopTips div:nth-child(1){
+	width: 12%;
+}
+#stopTips div:nth-child(2){
+	width: 88%;
+}
+#stopTips div p{
+	font-size: 14px;
+	color:#CCCCCC;
 }
