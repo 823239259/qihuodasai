@@ -1229,7 +1229,7 @@ input{
 /*#alreayStopTale table{width: 900px;}*/
 .ConditionList tr td{
 	padding: 0px 10px;
-	width: 70px;
+	width: 60px;
 	color:#CCCCCC;
 	font-size: 14px;
 	height: 40px;
@@ -1244,6 +1244,10 @@ input{
 }
 .ConditionList tr td:nth-child(9){
 	width: 140px;
+	
+}
+.ConditionList tr td:nth-child(6){
+	width: 100px;
 	
 }
 .ConditionList thead tr td{

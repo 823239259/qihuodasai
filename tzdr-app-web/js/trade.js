@@ -1079,7 +1079,7 @@ function appendStopLossData(param){
 					+'	<td class = "stoploss2" data-tion-drection="'+holdDrection+'">'+holdDrectionText+'</td>'
 					+'	<td class = "stoploss3" data-tion-lossType="'+stopLossType+'">'+stopLossTypeText+'</td>'
 					+'	<td class = "stoploss4">'+num+'</td>'
-					+'	<td class = "stoploss5" data-tion-price="'+stopLossPrice+'">'+stopLossPrice+'</td>'
+					+'	<td class = "stoploss5" data-tion-price="'+stopLossPrice+'">'+stopLossPriceText+stopLossPrice+'</td>'
 					+'	<td class = "stoploss6" data-tion-orderType = "'+orderType+'">'+orderTypeText+'</td>'
 					+'	<td class = "stoploss9">当日有效</td>'
 					+'	<td class = "stoploss7">'+insertTime+'</td>'
@@ -1137,7 +1137,7 @@ function updateStopLossData(param){
 	$stopLossType.attr("data-tion-lossType",stopLossType);
 	$num.text(num);
 	$stopLossPrice.attr("data-tion-price",stopLossPrice);
-	$stopLossPrice.text(stopLossPrice);
+	$stopLossPrice.text(stopLossPriceText+stopLossPrice);
 	$orderType.text(orderTypeText);
 	$insertTime.text(insertTime);
 	if(status == 2 || status == 3 || status == 4 || status == 5){
@@ -3135,7 +3135,7 @@ function marketBuy(param){
 		//var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 		var priceType = 0;
 		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,1,buyOrderPrice,0,doGetOrderRef());
-		tip("合约【"+commodityNo+contractNo+"】提交成功,等待交易");
+		/*tip("合约【"+commodityNo+contractNo+"】提交成功,等待交易");*/
 	}
 /**
  * 计算列表的浮动盈亏总和
