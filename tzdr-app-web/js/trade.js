@@ -222,6 +222,7 @@ function handleData(evt){
 			}else{
 				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
 				mui("#popoverLoss").popover("toggle");
+				console.log("565")
 				$("#popoverLoss").css("display","none");
 				$(".mui-backdrop").css("display","none");
 				$("#bg1").css("display","none");
@@ -257,8 +258,8 @@ function handleData(evt){
 				status = "触发失败"; 
 			}else{
 				status = "更新成功";
-				mui("#popoverLoss1").popover("toggle");
-				
+				$("#popoverLoss1").css("display","none");
+				$(".mui-backdrop").css("display","none");
 			}
 			tip(stoplossType+"单【"+stopLossNo+"】,"+status);
 			//查询条件单返回
@@ -1066,7 +1067,9 @@ function appendStopLossData(param){
 		var dynamicPrice = param.DynamicPrice;
 		var stopLossPrice = param.StopLossPrice;
 		var stopLossDiff = param.StopLossDiff;
+		var stopLossPriceText = "触发价:";
 		if(stopLossType == 2){
+			stopLossPriceText="追踪价差:";
 			stopLossPrice = stopLossDiff;
 		}
 		var cls = "stoploss"+stoplossIndex;
@@ -1076,7 +1079,7 @@ function appendStopLossData(param){
 					+'	<td class = "stoploss2" data-tion-drection="'+holdDrection+'">'+holdDrectionText+'</td>'
 					+'	<td class = "stoploss3" data-tion-lossType="'+stopLossType+'">'+stopLossTypeText+'</td>'
 					+'	<td class = "stoploss4">'+num+'</td>'
-					+'	<td class = "stoploss5">'+stopLossPrice+'</td>'
+					+'	<td class = "stoploss5" data-tion-price="'+stopLossPrice+'">'+stopLossPrice+'</td>'
 					+'	<td class = "stoploss6" data-tion-orderType = "'+orderType+'">'+orderTypeText+'</td>'
 					+'	<td class = "stoploss9">当日有效</td>'
 					+'	<td class = "stoploss7">'+insertTime+'</td>'
@@ -1114,7 +1117,9 @@ function updateStopLossData(param){
 	var insertTime = param.InsertDateTime;
 	var dynamicPrice = param.DynamicPrice;
 	var stopLossPrice = param.StopLossPrice;
+	var stopLossPriceText = "触发价:";
 	if(stopLossType == 2){
+		stopLossPriceText = "追踪价差:";
 		stopLossPrice = stopLossDiff;
 	}
 	var $status = $("#"+stopLossNo+" td[class = 'stoploss1']");
@@ -1131,6 +1136,7 @@ function updateStopLossData(param){
 	$stopLossType.text(stopLossTypeText);
 	$stopLossType.attr("data-tion-lossType",stopLossType);
 	$num.text(num);
+	$stopLossPrice.attr("data-tion-price",stopLossPrice);
 	$stopLossPrice.text(stopLossPrice);
 	$orderType.text(orderTypeText);
 	$insertTime.text(insertTime);
@@ -2380,7 +2386,7 @@ function bindOpertion(){
 			var stopDrection = $("#"+stopLossNo+" td[class = 'stoploss2']");
 			var drection = stopDrection.attr("data-tion-drection");
 			var drectionText = stopDrection.text();
-			var stopChoicePrices1 = $("#"+stopLossNo+" td[class = 'stoploss5']").text();
+			var stopChoicePrices1 = $("#"+stopLossNo+" td[class = 'stoploss5']").attr("data-tion-price");
 			var num = $("#"+stopLossNo+" td[class = 'stoploss4']").text();
 			var orderType = $("#"+stopLossNo+" td[class = 'stoploss6']").attr("data-tion-orderType");
 			var stopEvenPrice = localQuote.LastPrice;
@@ -2875,7 +2881,7 @@ function doStopAndDelModifyStopLoss(){
 	var stopLossType = $("#"+stopLossNo+" td[class = 'stoploss3']").attr("data-tion-lossType");
 	var orderType = $("#"+stopLossNo+" td[class = 'stoploss6']").attr("data-tion-orderType");
 	var stopLossDiff = $("#"+stopLossNo+" td[class = 'stoploss8']").text();
-	var stopLossPrice = $("#"+stopLossNo+" td[class = 'stoploss5']").text();
+	var stopLossPrice = $("#"+stopLossNo+" td[class = 'stoploss5']").attr("data-tion-price");
 	if(stopLossDiff == 0){
 		stopLossDiff = lastPrice - stopLossPrice;	
 	}
