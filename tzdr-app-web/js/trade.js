@@ -10,6 +10,8 @@ var tradeFirsetLoadDataIndex = 0;
 var stopLossLoadDataIndex = 0;
 //条件单查询发送请求次数记录
 var conditionLoadDataIndex = 0;
+//存储判断止损止盈提示
+var textList=["止损","止盈"];
 /**
  * 用户登陆成功加载数据
  */ 
@@ -2220,7 +2222,7 @@ function bindOpertion(){
 				alertProtype("止损价差会导致立即触发,请重新设置","提示",Btn.confirmed());
 				return;
 			}
-			alertProtype("是否修改【"+contractCode+"】"+typeText+"止损","提示",Btn.confirmedAndCancle(),doUpdateModifyStopLoss);
+			alertProtype("是否修改【"+contractCode+"】"+typeText,"提示",Btn.confirmedAndCancle(),doUpdateModifyStopLoss);
 		}else{
 			tip("未登录,请先登录");
 		}
@@ -2320,7 +2322,7 @@ function bindOpertion(){
 				alertProtype("止盈价差会导致立即触发,请重新设置","提示",Btn.confirmed());
 				return;
 			}
-			alertProtype("是否修改【"+contractCode+"】止盈","提示",Btn.confirmedAndCancle(),doUpdateModifyLoss);
+			alertProtype("是否修改【"+contractCode+"】止盈单","提示",Btn.confirmedAndCancle(),doUpdateModifyLoss);
 		}else{
 			tip("未登录,请先登录")
 		}
@@ -2337,6 +2339,8 @@ function bindOpertion(){
 			} 
 			var $this = $(this);
 			var modifyFlag = $this.val();
+			var textAll=$("#"+stopLossNo+" td[class = 'stoploss3']").text();
+			var textTip="止损"
 			operationStopLossType = modifyFlag;
 			var operationText = "";
 			if(operationStopLossType == undefined){
@@ -2351,7 +2355,12 @@ function bindOpertion(){
 			}else if(operationStopLossType == 3){
 				operationText = "启动";
 			}
-			alertProtype("是否"+operationText+"止损单？","提示",Btn.confirmedAndCancle(),doStopAndDelModifyStopLoss);
+			for(var i=0;i<textList.length;i++){
+				if(textAll.indexOf(textList[i])>=0){
+					textTip=textList[i];
+				}
+			}
+			alertProtype("是否"+operationText+textTip+"单？","提示",Btn.confirmedAndCancle(),doStopAndDelModifyStopLoss);
 		}else{
 			tip("未登录,请先登录")
 		}
