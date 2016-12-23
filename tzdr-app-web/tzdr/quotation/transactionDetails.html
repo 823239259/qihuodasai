@@ -980,10 +980,16 @@
 				cachTranFers(Transfer.name);
 				var i = 0 ;
 				$(window).resize(function() {
+					console.log("565");
 					if(i % 2 == 0){  
-						 $(".focusButton").css("display","none");
+						$(".focusButton").css("display","none");
 					}else{
 						$(".focusButton").css("display","block");
+						if(localStorage.getItem("isMock")==1){
+//							$("#Open").css("display","none");
+						}else{
+							$("#stopLoss").css("display","none");
+						}
 					}
 					i++; 
 				});

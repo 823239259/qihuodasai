@@ -3250,6 +3250,14 @@ function clearTradListData(){
 	generateOrderTitle();
 	generateTradeSuccessTitle();
 }
+function reconnectInit(){
+	holdFirstLoadDataIndex = 0;
+	accountFirstLoadDataIndex = 0;
+	orderFirsetLoadDataIndex = 0;
+	tradeFirsetLoadDataIndex = 0;
+	stopLossLoadDataIndex = 0;
+    conditionLoadDataIndex = 0;
+}
 /**
  * 清理全局缓存数据
  */

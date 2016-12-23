@@ -97,6 +97,7 @@ function loginOut(){
 	socket = null;
 	setIsLogin(false);
 	clearTradListData();
+	reconnectInit();
 	/*clearTradListData();
 	clearLocalCacheData();*/
 }
