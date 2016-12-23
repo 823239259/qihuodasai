@@ -17,6 +17,16 @@ function doGetMarketPrice(price,miniTikeSize,drection,dotSize){
 	return parseFloat(newPrice).toFixed(dotSize);
 }
 /**
+ * 输入价格或数量验证 
+ */
+function validationInputPrice(obj){
+	if(obj == undefined || obj == null || obj.length == 0 || parseFloat(obj) <= 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+/**
  * 计算浮动盈亏
  * @param {Object} lastPrice 最新价
  * @param {Object} tradeAvgPrice 均价
@@ -114,7 +124,7 @@ function modifyOrder(param) {
 function inserStopLoss(param){
 	Trade.doInsertStopLoss(
 						param.exchangeNo,
-						param.commdityNo,
+						param.commodityNo,
 						param.contractNo,
 						param.num,
 						param.stopLossType,
@@ -123,6 +133,71 @@ function inserStopLoss(param){
 						param.holdDrection,
 						param.orderType,
 						param.stopLossPrice);
+}
+/**
+ * 修改止损单处理
+ * @param {Object} param
+ */
+function doModifyStopLoss(param){
+	Trade.doModifyStopLoss(
+						   param.stopLossNo,
+						   param.modifyFlag,
+						   param.num,
+						   param.stopLossType,
+						   param.orderType,
+						   param.stopLossDiff,
+						   param.stopLossPrice);
+}
+/**
+ * 条件增加单处理
+ * @param {Object} param
+ */
+function insertCondition(param){
+	Trade.doInsertCondition(
+							param.exchangeNo,
+							param.commodityNo,
+							param.contractNo,
+							param.num,
+							param.conditionType,
+							param.priceTriggerPonit,
+							param.compareType,
+							param.timeTriggerPoint,
+							param.abBuyPoint,
+							param.abSellPoint,
+							param.orderType,
+							param.drection,
+							param.stopLossType,
+							param.stopLossDiff,
+							param.stopWinDiff,
+							param.additionFlag,
+							param.additionType,
+							param.additionPrice
+	);
+}
+/**
+ * 条件单修改处理
+ * @param {Object} param
+ */
+function updateCondition(param){
+		Trade.doUpdateModifyCondition(
+									param.conditionNo,
+									param.modifyFlag,
+									param.num,
+									param.conditionType,
+									param.priceTriggerPonit,
+									param.compareType,
+									param.timeTriggerPoint,
+									param.abBuyPoint,
+									param.abSellPoint,
+									param.orderType,
+									param.drection,
+									param.stopLossType,
+									param.stopLossDiff,
+									param.stopWinDiff,
+									param.additionFlag,
+									param.additionType,
+									param.additionPrice
+		);
 }
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
@@ -216,14 +291,14 @@ function analysisStopLossStatus(status){
  * @param {Object} param
  */
 function analysisStopLossType(param){
-	if(lossType == 0){
-		lossType = "限价触发止损";
-	}else if(lossType == 1){
-		lossType = "限价触发止盈";
-	}else if(lossType == 2){
-		lossType = "浮动止损";
+	if(param == 0){
+		param = "限价止损";
+	}else if(param == 1){
+		param = "限价止盈";
+	}else if(param == 2){
+		param = "动态止损";
 	}
-	return lossType;
+	return param;
 }
 /**
  * 解析止损单价格类型
@@ -236,4 +311,54 @@ function lossOrderType(orderType){
 		orderType = "对手价";
 	}
 	return orderType;
+}
+/**
+ * 解析条件单状态
+ * @param {Object} status
+ */
+function analysisConditionStatus(status){
+	if(status == 0){
+		status = "运行中";
+	}else if(status == 1){
+		status = "暂停";
+	}else if(status == 2){
+		status = "已触发";	
+	}else if(status == 3){
+		status = "已取消";
+	}else if(status == 4){
+		status = "插入失败";
+	}else if(status == 5){
+		status = "触发失败";
+	}
+	return status;
+}
+/**
+ * 解析条件单类型
+ * @param {Object} type
+ */
+function analysisConditionType(type){
+	if(type == 0){
+		type = "价格条件";
+	}else if(type == 1){
+		type = "时间条件";
+	}else if(type == 2){
+		type = "（双向价格）AB单 "
+	}
+	return type;
+}
+/**
+ * 解析价格触发方式
+ * @param {Object} compareType
+ */
+function analysisConditionCompareType(compareType){
+	if(compareType == 0){
+		compareType = ">";
+	}else if(compareType == 1){
+		compareType = "<";
+	}else if(compareType == 2){
+		compareType = ">=";
+	}else if(compareType == 3){
+		compareType = "<=";
+	}
+	return compareType;
 }

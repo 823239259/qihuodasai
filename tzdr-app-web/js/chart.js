@@ -115,6 +115,7 @@ mui.plusReady(function(){
 				setFiveMarket(subscribeParam);
 				setHandicap(subscribeParam);
 			} 
+			updateStopAndLossLastPrice(subscribeParam);
 			updateDesignateByQuote(subscribeParam);
 			updateFloatProfit(subscribeParam);
 			//计算浮动盈亏总和
@@ -151,12 +152,12 @@ mui.plusReady(function(){
 						setMarketSubCommdity(commdityAndContract,commdityAndContract);
 					}
 				}
-				$("#chioceContract").append("<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>")
-				$("#chioceContract1").append("<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>")
+				$("#chioceContract").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
+				$("#chioceContract1").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
 				if(Transfer.name[2]==newCommdityNo){
-   					tradeTitleHtml.innerHTML+="<option value="+newCommdityNo+" selected>"+comm.CommodityName+"</option>"
+   					tradeTitleHtml.innerHTML+="<option value="+commdityAndContract+" selected>"+comm.CommodityName+"</option>"
 	   			}else{
-	   				tradeTitleHtml.innerHTML+="<option value='"+newCommdityNo+"'>"+comm.CommodityName+"</option>"
+	   				tradeTitleHtml.innerHTML+="<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>"
 	   			}
 	   			
 			}
@@ -565,14 +566,15 @@ mui.plusReady(function(){
     		masendMessage('UnSubscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
     	}
     	for(var i=0;i<commoditysData.length;i++){
-    		if(commoditysData[i].CommodityNo==valSelect){
+    		var str=commoditysData[i].CommodityNo+commoditysData[i].MainContract;
+    		if(str==valSelect){
     			 	 $("#exchangeNo").val(commoditysData[i].ExchangeNo);
 				    $("#commodeityNo").val(commoditysData[i].CommodityNo);
 				   $("#contractNo").val(commoditysData[i].MainContract);
 				   $("#CommodityName").val(commoditysData[i].CommodityName);
 				   $("#doSize").val(commoditysData[i].DotSize);
 				   $("#contractSize").val(commoditysData[i].ContractSize);
-				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize)
+				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize);
     		}
     	}
     	clearInterval(setIntvalTime);

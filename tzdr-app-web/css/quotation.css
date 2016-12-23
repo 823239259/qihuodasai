@@ -125,9 +125,9 @@ p{
 	height:40px;
 	padding:4px 0px;
 	border-bottom: 1px solid #121212;
-	/*position: fixed;
+	position: fixed;
 	top:90px;
-	z-index: 998;*/
+	z-index: 998;
 }
 .Assets p span{
 	font-size: 14px;
@@ -364,12 +364,13 @@ p{
 }
 #Open{
 	bottom: 1%;
-	right: 0%;
+	right: 0px;
 	border-right: 1px solid #1f1f1f !important;
 }
 #stopLoss{
 	bottom: 1%;
 	right: 0px;
+	display: none;
 }
 #positionList,#postersOrder{
 	width: 100%;
@@ -773,8 +774,8 @@ input{
 	height: 45px;
 	z-index: 990;
 	text-align: center;
-	/*position: fixed;*/
-	/*top:46px;*/
+	position: fixed;
+	top:46px;
 }
 #headerMenu table{
 	width: 100%;
@@ -989,7 +990,7 @@ input{
 	margin-bottom: -13px;;
 }	
 #loginIform #tipsMoni{
-	display: none;
+	/*display: none;*/
 }
 #passwordClear,#accountClear{
 	display: none;
@@ -1013,67 +1014,30 @@ input{
 	background-color: #121212;
 	color:#fcc900;
 }
-#Handicap #table_title {
-	width: 100%;
-	height: 30px;
-	color:#cccccc;
-	/*border-bottom: 1px solid #121212;*/
-}
-#Handicap #table_title thead tr td{
-	width: 50%;
-	height: 30px;
-	line-height: 30px;
-	font-size: 14px;
-	text-align: center;
-}
-#table_Content{
+#Handicap table{
 	width: 100%;
 	color:#CCCCCC;
 	border:1px solid #121212;
+	margin-top: 15px;
+	font-size: 14px;
+	padding: 0px;
 }
-#table_Content tr{
-	width: 100%;
-	line-height: 25px;;
+#Handicap table tr{
 	height: 25px;
-	font-size: 14px;;
+	line-height: 25px;
+	border:1px solid #121212;
 }
-#table_Content tr td:nth-child(1),#table_Content tr td:nth-child(4){
-	width: 16% !important;
+#Handicap table tr td{
+	width: 19%;
 	padding-left: 2%;
-}
-#table_Content tr td:nth-child(2),#table_Content tr td:nth-child(5){
-	width: 21%;
-}
-#table_Content tr td:nth-child(3),#table_Content tr td:nth-child(6){
-	width: 13%;
-	color:#cccccc;
-}
-#table_Content tr td:nth-child(3){
-	border-right: 1px solid #121212;
+	margin: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 	
 }
-#HandicapTable{
-	width: 100%;
-	margin-top: 20px;
-	color:#cccccc;
-}
-#HandicapTable tr{
-	width: 100%;
-	border-top:1px solid #121212;
-	border-bottom: 1px solid #121212;
-	font-size: 14px;
-		height: 30px;
-	line-height: 30px;
-}
-#HandicapTable tr td:nth-child(1),#HandicapTable tr td:nth-child(3){
-	width: 16% !important;
-	padding-left: 2%;
-}
-#HandicapTable tr td:nth-child(2),#HandicapTable tr td:nth-child(4){
-	width: 34%;
-}
-#HandicapTable tr td:nth-child(2){
-	border-right: 1px solid #121212;
+.paddingLeft{
+	padding-left: 5px !important;
 }
 .bottomDivList{
 	display: none;
@@ -1092,13 +1056,6 @@ input{
 #segmentedControl .mui-active{
 	width: 100%;
 }
-/*#buyFuture .butomBoreder .mui-input-row{
-	margin-top: 2px;
-}*/
-/*#buyFuture .butomBoreder .mui-input-row label{
-	width: 100%;
-	height: 35px;
-}*/
 #radioDiv{
 	width: 100%;
 }
@@ -1158,19 +1115,19 @@ input{
 	top:20px;
 	left: 5px;
 }
-#stopTitle,,#lossTitle{
+#stopTitle,#lossTitle,#stopTitle1,#lossTitle1{
 	width: 100%;
 	height: auto;
 }
-#stopTitle table,#lossTitle table{
+#stopTitle table,#lossTitle table,#stopTitle1 table,#lossTitle1 table{
 	width: 100%;
 	background-color: #383838;
 }
-#stopTitle tr,#lossTitle tr{
+#stopTitle tr,#lossTitle tr,#stopTitle1 tr,#lossTitle1 tr{
 	border-bottom: 1px solid #121212;
 	width: 100%;
 }
-#stopTitle tr td,#lossTitle tr td{
+#stopTitle tr td,#lossTitle tr td,#stopTitle1 tr td,#lossTitle1 tr td{
 	height: 40px;
 	padding: 0px 5px;
 	overflow: hidden;
@@ -1178,7 +1135,7 @@ input{
 	white-space: nowrap;
 	font-size: 14px;
 }
-#stopTitle tr td input,#lossTitle tr input{
+#stopTitle tr td input,#lossTitle tr input,#stopTitle1 tr td input,#lossTitle1 tr input{
 	height: 30px;
 	border:1px solid #121212;
 	background-color: #1F1F1F;
@@ -1186,6 +1143,7 @@ input{
 	font-size: 14px;	
 	position: relative;
 	display: inline-block;
+	padding: 0px;
 }
 .oddTd{
 	width: 16.3%;
@@ -1204,9 +1162,9 @@ input{
 .evenPrice{
 	font-style: normal;
 }
-#stopChoicePrices1{
+#stopChoicePrices1,#stopChoicePrices3{
 	margin-left: 2%;
-	width: 36%;
+	width: 27%;
 	position: relative;
 	padding: 4px;
 }
@@ -1215,18 +1173,18 @@ input{
 	position: relative;
 	padding: 4px;
 }
-#Increase,#Increase1{
+#Increase,#Increase1,#Increase2,#lossIncrease2,#lossIncrease1{
 	margin-left: 8px;
 	font-size: 14px;
 	color:#999999;
 }
-#closeStopTable,#insertStopData,#closeLossTable,#insertLossData{
+#closeStopTable,#insertStopData,#closeLossTable,#insertLossData,#closeStopTable1,#insertStopData1,#closeLossTable1,#insertLossData1,#uinsertLossData1{
 	border-right: 1px solid #121212;
 	text-align: center;
 	color: #CCCCCC;
 	font-size: 16px;
 }
-#choiceStopPrices,#choiceStopPrices3{
+#choiceStopPrices,#choiceStopPrices3,#uchoiceLossPrices{
 	width: 38%;
 	display: inline-block;
 	color:#cccccc;
@@ -1241,8 +1199,8 @@ input{
 	margin-top: 5px;
 	
 }
-#choiceStopPrices1,#choiceStopPrices4{
-	width: 42%;
+#choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices2,#choiceStopPrices5{
+	width: 38%;
 	display: inline-block;
 	color:#cccccc;
 	padding-left: 5px;
@@ -1253,19 +1211,23 @@ input{
 	font-size: 14px;
 	text-align: center;
 	vertical-align: middle;
-	margin-top: 5px;
+	/*margin-top: 2px;*/
 }
 /*条件单**/
 #segmentedControlCondition{
 	width: 100%;
 }
+#segmentedControlStop{
+	background-color: #2B2B2B;
+}
 #NoCondition,#alreayCondition,#alreayStopTale,#NoStopTale{
 	width:100%;
 	height: auto;
 	overflow-x: scroll; 
-	/*overflow-y: hidden;*/
+	margin-top: 40px;
 }
-.ConditionList{width: 700px;}
+.ConditionList{width: 900px;}
+/*#alreayStopTale table{width: 900px;}*/
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;
@@ -1278,15 +1240,15 @@ input{
 		border-bottom: 1px solid #121212;
 }
 .ConditionList tr td:nth-child(1){
-	width: 120px;
+	width: 100px;
+	
+}
+.ConditionList tr td:nth-child(9){
+	width: 140px;
 	
 }
 .ConditionList tr td:nth-child(6){
 	width: 100px;
-	
-}
-.ConditionList tr td:nth-child(7){
-	width: 160px;
 	
 }
 .ConditionList thead tr td{
@@ -1294,30 +1256,10 @@ input{
 	height: 30px;
 	line-height: 30px;
 }
-#clickTable tr td:nth-child(7){
-	width: 60px;
-}
-#clickTable tr td:nth-child(8){
-	width: 160px;
-}
-#buttonListTr{
-	position: relative;
-}
-#buttonListTr button,#buttonListTr1 button{
-	width:25%;
-	margin: 0px;
-	padding: 0px;
-	height: 30px;
-	line-height: 30px;
-	background-color: #cccccc;
-	color:#2b2b2b;
-	border-top: none;
-	border-buttom:none;
-/*	border: none;*/
-	position: fixed;
-	top:125px;
-}
 
+/*#alreayStopTale table tr td:nth-last-child(1){
+	width: 120px;
+}*/
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
@@ -1328,6 +1270,20 @@ input{
 }
 #deleteCondition,#deleteCondition1{
 	right: 0%;
+}
+#suspendCondition1,#modifyCondition1,#deleteCondition1{
+	width:25%;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #cccccc;
+	color:#2b2b2b;
+	border-top: none;
+	border-buttom:none;
+	position: fixed;
+	bottom: 60px;
+	z-index: 999;
 }
 #ConditoionTitlePrices table,#ConditoionTitleTime table {
 	width: 100%;
@@ -1522,4 +1478,30 @@ input{
 }
 .clickBg{
 	background-color: #121212;
+}
+#stopTips{
+	width: 100%;
+	padding: 0px 2%;
+	position: fixed;
+	bottom: 10px;
+	height: auto;
+	overflow: hidden;
+	font-size: 14px;
+	color:#FFCC33;;
+}
+#stopTips div{
+	float: left;
+}
+#stopTips div:nth-child(1){
+	width: 12%;
+}
+#stopTips div:nth-child(2){
+	width: 88%;
+}
+#stopTips div p{
+	font-size: 14px;
+	color:#FFCC33;
+}
+#topPopover #openStopButton{
+	display: none;
 }

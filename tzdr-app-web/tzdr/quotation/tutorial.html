@@ -120,7 +120,15 @@
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting( "正在加载..." );
+				var window=plus.webview.create("http://192.168.0.44:8080/tutorial/index.html","index",{top:"45px"});
+				window.show();
+				setTimeout(function(){
+					plus.nativeUI.closeWaiting();
+				},300)
+			})
 		</script>
 	</body>
 

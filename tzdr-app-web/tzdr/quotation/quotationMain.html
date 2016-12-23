@@ -172,15 +172,17 @@
 				var validationLoginTip = null;
 				var width=plus.screen.resolutionWidth;
 				var time = 30000;
-				if(localStorage.getItem("tipLogin") == 1){
-					alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-				}else{
-					validationLoginTip = setTimeout(function(){ 
-						if(!mui.cacheUser.isLogin()){
-							localStorage.setItem("tipLogin",1);
-							alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-						}
-					},30000);
+				if(plus.storage.getItem("QuotationGuidance")!=null){
+					if(localStorage.getItem("tipLogin") == 1){
+						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+					}else{
+						validationLoginTip = setTimeout(function(){ 
+							if(!mui.cacheUser.isLogin()){
+								localStorage.setItem("tipLogin",1);
+								alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+							}
+						},30000);
+					}
 				}
 				function openLogin(){ 
 					mui.openWindow("../login/login.html","login");
@@ -215,6 +217,16 @@
 							$(".top,.bottom,#closeDiv").css({
 					    			"display":"none",
 					    	});
+			    		  var data=ManufacturingData(3);
+				            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+				            socket.close();
+				            mui.openWindow({
+								url:"transactionDetails.html",
+								id:"transactionDetails",
+								 extras:{
+									name:data,
+								}
+							});
 						})
 						$(".top").click(function(){
 							if(clickNum==0){
@@ -242,6 +254,17 @@
 								$(".top,.bottom,#closeDiv").css({
 					    			"display":"none",
 					    		});
+					    		  var data=ManufacturingData(3);
+						            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+						            socket.close();
+						            mui.openWindow({
+										url:"transactionDetails.html",
+										id:"transactionDetails",
+										 extras:{
+											name:data,
+										}
+									});
+					    		
 							}
 							clickNum++;
 						});

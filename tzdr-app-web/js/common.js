@@ -257,20 +257,9 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain:"http://api.vs.com/", 
+		api_domain:"http://test.api.vs.com/", 
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
-		//交易地址
-		TradeSocketUrl:"ws://139.224.24.206:6066",
-		TradeSocketModelUrl : "ws://139.224.24.206:6066",
-		//交易版本
-		tradeSocketVersion: "2.0.0",
-		tradeAppVersion: "2.0.0",
-		//行情地址
-		MarketSocketUrl:"ws://quote.vs.com:9002",
-		//登录名字和密码
-		MarketUsername:"13677622344",
-		MarketPassword:"a123456",
 		//token
 		user_token:'user_token',
 		//密钥 

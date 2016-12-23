@@ -8,6 +8,8 @@ var orderFirsetLoadDataIndex = 0;
 var tradeFirsetLoadDataIndex = 0;
 //止损单查询发送请求次数记录
 var stopLossLoadDataIndex = 0;
+//条件单查询发送请求次数记录
+var conditionLoadDataIndex = 0;
 /**
  * 用户登陆成功加载数据
  */ 
@@ -53,12 +55,17 @@ function linearlyLoadData(method) {
 			Trade.doAccount(username);
 			accountFirstLoadDataIndex++;
 		}
-	} /*else if (method == "OnRspQryAccount"){
+	}else if (method == "OnRspQryAccount"){
 		if(stopLossLoadDataIndex == 0){
 			Trade.doQryStopLoss(username);
 			stopLossLoadDataIndex++;
 		}
-	}*/
+	}else if(method == "OnRspQryStopLoss"){
+		if(conditionLoadDataIndex == 0){
+			Trade.doQryCondition(username);
+			conditionLoadDataIndex++; 
+		}
+	}
 }
 /**
  * 处理返回数据
@@ -159,10 +166,10 @@ function handleData(evt){
 			var contractCode = selectDesgnate["contraction"];
 			if(orderStatusWeHooks == 4){
 				tip("撤单成功:合约【"+orderParam.ContractCode+"】,订单号【"+orderId+"】");
-			}
+			}else
 			if(orderStatusWeHooks == 5){
 				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
-			}
+			}else
 			if(isUpdateOrder && cacaleOrderId==orderId){
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
@@ -176,10 +183,10 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam); 
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			if(referCount == 0){
-				tradeSuccessLoadHoldData();
-			}
-			referCount++;
+			/*if(referCount == 0){*/
+			tradeSuccessLoadHoldData();
+			/*}*/
+			/*referCount++;*/
 			/*if(isBuy && orderId == locaOrderId){   
 				tradeSuccessLoadHoldData();
 				resultInsertOrderId[orderId] = null; 
@@ -188,10 +195,10 @@ function handleData(evt){
 			    
 			}*/
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
-			//资金变化通知 
+			//资金变化通知  
 		} else if (method == "OnRtnMoney") {
 			var accountParam = parameters;
-			updateBalance(accountParam)
+			updateBalance(accountParam) 
 			updateFundsDetails(accountParam);
 		} else if (method == "OnError") {
 			var code = parameters.Code;
@@ -205,13 +212,65 @@ function handleData(evt){
 			if(code == 1){
 				anotherPlace = true;
 			}
+		//录入止损止盈请求返回
 		}else if(method == "OnRspInsertStopLoss"){
-			tip("提交成功");
-			
-		}/*else if(method == "OnRspQryStopLoss"){
 			var stopLossParam = parameters;
-			  //appendStopLossData(stopLossParam);
-		}*/
+			var message = "";
+			var status = stopLossParam.Status;
+			if(status == 4){
+				message = "添加止损单失败"
+			}else{
+				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
+				mui("#popoverLoss").popover("toggle");
+				console.log("565")
+				$("#popoverLoss").css("display","none");
+				$(".mui-backdrop").css("display","none");
+				$("#bg1").css("display","none");
+				$("#bg2").css("display","none");
+				$("#bg3").css("display","block");
+				$(".mui-content").eq(2).css("z-index","998");
+			}
+			tip(message);
+			appendStopLossData(stopLossParam);
+			//查询止损止盈返回
+		}else if(method == "OnRspQryStopLoss"){
+			var stopLossParam = parameters;
+			appendStopLossData(stopLossParam);
+			//止损止盈状态返回
+		}else if(method == "OnRtnStopLossState"){
+			var stopLossParam = parameters;
+			updateStopLossData(stopLossParam);
+			var status = stopLossParam.Status;
+			var stoplossType = stopLossParam.StopLossType;
+			var stopLossNo = stopLossParam.StopLossNo;
+			if(stoplossType == 0 || stoplossType == 2){
+				stoplossType = "止损";
+			}else if(stoplossType == 1){
+				stoplossType = "止盈";
+			}
+			if(status == 2){
+				status = "已触发";
+			}else if(status == 3){
+				status = "已取消";
+			}else if(status == 4){
+				status = "插入失败";
+			}else if(status == 5){
+				status = "触发失败"; 
+			}else{
+				status = "更新成功";
+				$("#popoverLoss1").css("display","none");
+				$(".mui-backdrop").css("display","none");
+			}
+			tip(stoplossType+"单【"+stopLossNo+"】,"+status);
+			//查询条件单返回
+		}else if(method == "OnRspQryCondition"){
+			var conditionParam = parameters;
+			appendCondition(conditionParam);
+			//录入条件单请求返回
+		}else if(method == "OnRspInsertCondition"){
+			var conditionParam = parameters;
+			updateCondition(conditionParam);
+		}
 	}else{  
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
@@ -219,10 +278,10 @@ function handleData(evt){
 			isBuy = false;
 			localCachePositionRecentData = {};
 		}*/
-		if(referCount > 0){ 
+		/*if(referCount > 0){ 
 			referCount--;
 			tradeSuccessLoadHoldData();
-		} 
+		} */
 	}
 }
 /**
@@ -246,16 +305,20 @@ function updateBalance(parama){
 	var accountNo = parama.AccountNo;
 	var cachBanlace = loadCachBanlance[accountNo];
 	var deposit = parama.Deposit;
-	var currency = parama.CurrencyRate; 
+	var currency = parama.CurrencyRate;
 	var closeProfit = parama.CloseProfit;
 	var frozenMoney =parama.FrozenMoney;
-	var todayAmount = parama.TodayAmount;
+	var counterFee = parama.CounterFee;
+	var todayAmount = parama.TodayAmount;   
 	var unExpiredProfit = parama.UnExpiredProfit;
 	var unAccountProfit = parama.UnAccountProfit;
-	var floatingProfit = $("#floatingProfit").val();
-	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
+	if(counterFee == undefined){
+		counterFee = parama.Fee; 
+	}
+	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(0)).toFixed(2);;
+	/*var banlance = parseFloat(Number(todayAmount)+Number(closeProfit)-Number(counterFee)).toFixed(2);*///今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
-	localCacheCurrencyAndRate[currencyNo]  = currency;
+	localCacheCurrencyAndRate[currencyNo]  = currency == undefined ? localCacheCurrencyAndRate[currencyNo] : currency;
 	loadCachCurrecyRate[accountNo] = currency;
 	loadCachBanlance[accountNo] = banlance;
 	loadCachDeposit[accountNo] = deposit;
@@ -427,13 +490,17 @@ function appendOrder(param){
 	var triggerPrice = param.TriggerPrice;
 	var priceType = param.OrderPriceType;
 	var tradePrice = param.TradePrice;
+	var orderPriceText = orderPrice;
+	if(priceType == 1){
+		orderPriceText = "市价";
+	}
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
 	var insertDateTime = param.InsertDateTime;
 	if(insertDateTime == undefined || insertDateTime.length == 1){
 		insertDateTime = "-"; 
 	}
-	if(insertDateTime=="" || insertDateTime.length==0 ){
+	if(insertDateTime=="" || insertDateTime.length==0 ){ 
 		insertDateTime=0;
 	}
 	var cls = "order-index" + orderIndex;
@@ -444,7 +511,7 @@ function appendOrder(param){
 				+'			<span class = "order0">'+contractCode+'</span>'
 				+'			<span class = "order1">'+ordreStatusText+'</span>'
 				+'			<span class = "order2">'+drectionText+'</span>'
-				+'			<span class = "order3">'+orderPrice+'</span>'
+				+'			<span class = "order3" data-priceType = "'+priceType+'">'+orderPriceText+'</span>'
 				+'			<span class = "order4">'+orderNum+'</span>'
 				+'			<span class = "order5">'+tradeNum+'</span>'
 				+'			<span class = "order6">'+cdNum+'</span>'
@@ -466,7 +533,7 @@ function appendOrder(param){
  * @param {Object} param
  */
 function updateOrder(param){
-	var contractCode = param.ContractCode;
+	var contractCode = param.CommodityNo + param.ContractNo;
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
 	var $desgPrice = $("li[data-order-order='"+orderId+"'] span[class = 'order3']");
@@ -476,9 +543,17 @@ function updateOrder(param){
 	var orderStatus = param.OrderStatus;
 	var tradeNum = param.TradeNum;
 	var orderPrice = param.TradePrice;
+	var priceType = $desgPrice.attr("data-priceType");
+	var dotSize = 2;
+	var localCommodit = getMarketCommdity(contractCode);
+	if(localCommodit != undefined){
+		dotSize = localCommodit.DotSize;
+	} 
+	if(priceType == 0){
+		$desgPrice.text(parseFloat(param.OrderPrice).toFixed(dotSize));
+	}
 	$orderStatus.text(analysisOrderStatus(orderStatus));
 	$tradeNum.text(tradeNum);	
-	$desgPrice.text(param.OrderPrice); 
 	$desgNumber.text(param.OrderNum);
 };
 /**
@@ -520,13 +595,19 @@ function appendDesignates(param){
    if(localCommodity != undefined){
    		dotSize = Number(localCommodity.DotSize);
    }
+   var priceType = param.OrderPriceType;
+   orderPrice = parseFloat(orderPrice).toFixed(dotSize);
+   var orderPriceText = orderPrice;
+   if(priceType == 1){
+   		orderPriceText = "市价";
+   }
    var cls = "des-index"+designateIndex;
    var html =   '<li    class = "'+cls+' Guadan  myLi" " data-order-des = "'+orderId+'"  data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'
 				+'	<a class="mui-navigate-right" >' 
 				+'		'
 				+'			<span class = "desig0">'+contractCode+'</span>'
 				+'			<span class = "desig1" data-drection = '+drection+'>'+drectionText+'</span>'
-				+'			<span class = "desig2">'+parseFloat(orderPrice).toFixed(dotSize)+'</span>'
+				+'			<span class = "desig2" data-priceType = "'+priceType+'" data-orderPrice = "'+orderPrice+'">'+orderPriceText+'</span>'
 				+'			<span class = "desig3">'+orderNum+'</span>' 
 				+'			<span class = "desig4">'+(orderNum - tradeNum)+'</span>'
 				+'			<span class = "desig5 dateTimeL">'+insertDateTime+'</span>'
@@ -561,6 +642,12 @@ function updateDesignatesDom(param){
 	var tradeNum = parseInt(param.TradeNum);
 	var orderPrice = param.OrderPrice;
 	var orderStatus = param.OrderStatus;
+	var priceType = param.PriceType;
+    orderPrice = parseFloat(orderPrice).toFixed(dotSize);
+	var orderPriceText = orderPrice;
+    if(priceType == 1){
+   		orderPriceText = "市价";
+    }
 	var $gdNum = $("li[data-order-des='"+orderId+"'] span[class = 'desig4']");
 	var $orderPrice = $("li[data-order-des='"+orderId+"'] span[class = 'desig2']");
 	var $orderNum = $("li[data-order-des='"+orderId+"'] span[class = 'desig3']");
@@ -577,7 +664,11 @@ function updateDesignatesDom(param){
 	}else if(holdNum != 0){ 
 		$gdNum.text(holdNum);
 		$orderNum.text(orderNum);
-		$orderPrice.text(parseFloat(orderPrice).toFixed(dotSize));
+		var priceType = $orderPrice.attr("data-priceType");
+		if(priceType == 1){
+			$orderPrice.text(orderPriceText);
+		} 
+		$orderPrice.attr("data-orderPrice",orderPrice);
 		//更新储存数据
 		var desiContract = localCacheDesignate[contractCode];
 		desiContract.cdNum = holdNum;
@@ -597,11 +688,17 @@ function appendTradeSuccess(param){
 	var drectionText = analysisBusinessBuySell(drection);
 	var orderId = param.OrderID;
 	var contractCode = param.ContractCode;
-	var tradePrice = param.TradePrice;
+	var dotSize = 2;
+	var Dosize=getMarketCommdity(contractCode);
+	if(Dosize != undefined){
+		dotSize = Number(Dosize.DotSize);
+	}
+	var tradePrice = Number(param.TradePrice);
 	var tradeNum = param.TradeNum;
 	var currencyNo = param.CurrencyNo;
 	var tradeNo = param.TradeNo;
 	var orderId = param.OrderID;
+	
 	var tradeTime = param.TradeDateTime;
 	var exchangeNo = param.ExchangeNo;
 	var cls = 'trade-index'+tradesIndex;
@@ -610,7 +707,7 @@ function appendTradeSuccess(param){
 				+'	'
 				+'		<span class = "trade0">'+contractCode+'</span>'
 				+'		<span class = "trade1">'+drectionText+'</span>'
-				+'      <span class = "trade2">'+tradePrice+'</span>'
+				+'      <span class = "trade2">'+tradePrice.toFixed(dotSize)+'</span>'
 				+'		<span class = "trade3">'+tradeNum+'</span>'
 				+'		<span class = "trade4 dateTimeL">'+tradeTime+'</span>'
 				+'	'
@@ -669,13 +766,18 @@ function addPostion(param){
 		var holdNum = param.HoldNum; 
 		var drection = param.Drection;
 		var drectionText = analysisBusinessDirection(drection);
-		var holdAvgPrice = param.HoldAvgPrice;
+		var dotSize = 2;
+		var Dosize=getMarketCommdity(contractCode);
+		if(Dosize != undefined){
+			dotSize = Number(Dosize.DotSize);
+		}
+		var holdAvgPrice = Number(param.HoldAvgPrice);
 		var floatingProfit = param.FloatingProfit;
 		var exchangeNo = param.ExchangeNo;
 		var currencyNo = param.CurrencyNo;
 		var commodityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
-		var openAvgPrice = param.OpenAvgPrice;
+		var openAvgPrice = Number(param.OpenAvgPrice);
 		if(holdNum == undefined){
 			holdNum = param.TradeNum;
 		}
@@ -715,7 +817,7 @@ function addPostion(param){
 				+ '			<span class = "position0">'+contractCode+'</span>'
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
-				+ '			<span class = "position3">'+holdAvgPrice+'</span>'
+				+ '			<span class = "position3">'+holdAvgPrice.toFixed(dotSize)+'</span>'
 				+ '			<span class = "position4 dateTimeL"><input readonly = "readonly" type="text" value = "'+floatingProfit+'" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;background-color:transparent;font-size:12px;width:160px;" id = "floatValue'+contractCode+'" /></span>'
 				+ '			<span class = "position5" style = "display:none">'+commodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+contractNo+'</span>'
@@ -939,44 +1041,243 @@ var stoplossIndex = 0;
  * 缓存选中的止损单列
  */
 var selectStopLoss = {};
-/*function appendStopLossData(param){
+/**
+ * 缓存止损单的信息
+ */
+var localCahceStopLossNo = {};
+/**
+ * 全局保存选中止损单的操作类型 0 - 修改，1-删除 ， 2-暂停
+ */
+var operationStopLossType = undefined;
+function appendStopLossData(param){
 		var contractCode = param.CommodityNo+param.ContractNo;
 		var stopLossNo = param.StopLossNo;
 		var status = param.Status;
 		var statusText = analysisStopLossStatus(status);
-		var exchangeNo = param.ExchangeNo;
+		var exchangeNo = param.ExchangeNo; 
 		var num = param.Num;
 		var stopLossType = param.StopLossType;
 		var stopLossTypeText = analysisStopLossType(stopLossType);
-		var stopLossDiff = param.StopLossDiff;
 		var orderType = param.OrderType;
 		var orderTypeText = lossOrderType(orderType);
 		var holdAvgPrice = param.HoldAvgPrice;
 		var holdDrection = param.HoldDrection;
 		var holdDrectionText = analysisBusinessDirection(holdDrection);
-		var insertTime = param.InsertTime;
+		var insertTime = param.InsertDateTime;
 		var dynamicPrice = param.DynamicPrice;
 		var stopLossPrice = param.StopLossPrice;
+		var stopLossDiff = param.StopLossDiff;
+		var stopLossPriceText = "触发价:";
+		if(stopLossType == 2){
+			stopLossPriceText="追踪价差:";
+			stopLossPrice = stopLossDiff;
+		}
 		var cls = "stoploss"+stoplossIndex;
-		var html =  '<tr class="testclick1 '+cls+'" id = "'+stopLossNo+'">'
+		var html =  '<tr class="testclick1 '+cls+'" data-tion-index = "'+stoplossIndex+'" id = "'+stopLossNo+'">'
 				    +'	<td class = "stoploss0">'+contractCode+'</td>'
 				    +'  <td class = "stoploss1" data-tion-status="'+status+'">'+statusText+'</td>'
 					+'	<td class = "stoploss2" data-tion-drection="'+holdDrection+'">'+holdDrectionText+'</td>'
 					+'	<td class = "stoploss3" data-tion-lossType="'+stopLossType+'">'+stopLossTypeText+'</td>'
 					+'	<td class = "stoploss4">'+num+'</td>'
-					+'	<td class = "stoploss5">'+stopLossPrice+'</td>'
-					+'	<td class = "stoploss6" data-tion-orderType = "'+orderType+'">'+orderTypeText+'/td>'
+					+'	<td class = "stoploss5" data-tion-price="'+stopLossPrice+'">'+stopLossPriceText+stopLossPrice+'</td>'
+					+'	<td class = "stoploss6" data-tion-orderType = "'+orderType+'">'+orderTypeText+'</td>'
+					+'	<td class = "stoploss9">当日有效</td>'
 					+'	<td class = "stoploss7">'+insertTime+'</td>'
+					+'  <td class = "stoploss8" style = "display:none;">'+stopLossDiff+'</td>'
 					+'</tr>';
-		$("#clickTableBody").append(html);
-		addStopLossBindClick(cls);
+		if(status == 0 || status == 1){
+			$("#clickTableBody").append(html);
+			addStopLossBindClick(cls);
+		}else if(status == 2 || status == 3 || status == 4 || status == 5){
+			$("#over-clickTableBody").append(html);
+		}
 		stoplossIndex++;
-}*/
+		localCahceStopLossNo[stopLossNo] = param; 
+}
+/**
+ * 更新止损单信息
+ * @param {Object} param
+ */
+function updateStopLossData(param){
+	var stopLossNo = param.StopLossNo;
+	var contractCode = param.CommodityNo+param.ContractNo;
+	var stopLossNo = param.StopLossNo;
+	var status = param.Status;
+	var statusText = analysisStopLossStatus(status);
+	var exchangeNo = param.ExchangeNo;
+	var num = param.Num;
+	var stopLossType = param.StopLossType;
+	var stopLossTypeText = analysisStopLossType(stopLossType);
+	var stopLossDiff = param.StopLossDiff;
+	var orderType = param.OrderType;
+	var orderTypeText = lossOrderType(orderType);
+	var holdAvgPrice = param.HoldAvgPrice;
+	var holdDrection = param.HoldDrection;
+	var holdDrectionText = analysisBusinessDirection(holdDrection);
+	var insertTime = param.InsertDateTime;
+	var dynamicPrice = param.DynamicPrice;
+	var stopLossPrice = param.StopLossPrice;
+	var stopLossPriceText = "触发价:";
+	if(stopLossType == 2){
+		stopLossPriceText = "追踪价差:";
+		stopLossPrice = stopLossDiff;
+	}
+	var $status = $("#"+stopLossNo+" td[class = 'stoploss1']");
+	var $holdDrection = $("#"+stopLossNo+" td[class = 'stoploss2']");
+	var $stopLossType = $("#"+stopLossNo+" td[class = 'stoploss3']");
+	var $num = $("#"+stopLossNo+" td[class = 'stoploss4']");
+	var $stopLossPrice = $("#"+stopLossNo+" td[class = 'stoploss5']");
+	var $orderType = $("#"+stopLossNo+" td[class = 'stoploss6']");
+	var $insertTime = $("#"+stopLossNo+" td[class = 'stoploss7']");
+	$status.text(statusText);
+	$status.attr("data-tion-status",status);
+	$holdDrection.html(holdDrectionText);
+	$holdDrection.attr("data-tion-drection",holdDrection);
+	$stopLossType.text(stopLossTypeText);
+	$stopLossType.attr("data-tion-lossType",stopLossType);
+	$num.text(num);
+	$stopLossPrice.attr("data-tion-price",stopLossPrice);
+	$stopLossPrice.text(stopLossPriceText+stopLossPrice);
+	$orderType.text(orderTypeText);
+	$insertTime.text(insertTime);
+	if(status == 2 || status == 3 || status == 4 || status == 5){
+		var html = $("#"+stopLossNo).html();
+		$("#over-clickTableBody").append("<tr class = 'testclick1' id = '"+stopLossNo+"'>"+html+"</tr>");
+		$("#"+stopLossNo).remove();
+		isTableIndex = true;
+		selectStopLoss = {};
+	}else{
+		if(status == 0){
+			$("#suspendCondition1").val(2);
+			$("#suspendCondition1").text("暂停");
+		}else if(status == 1){ 
+			$("#suspendCondition1").val(3);  
+			$("#suspendCondition1").text("启动");
+		}
+	}
+}
+/**
+ * 增加条件单
+ * @param {Object} param
+ */
+/**
+ * 条件单列表索引
+ */
+var conditionIndex = 0;
+/**
+ * 缓存的条件单信息
+ */
+var localCacheCondition = {};
+/**
+ * 缓存选定的列表数据
+ * @param {Object} param
+ */
+var selectCondition = {};
+function appendCondition(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var exchangeNo = param.ExchangeNo;
+	var conditionNo = param.ConditionNo;
+	var status = param.Status;
+	var statusText = analysisConditionStatus(status);
+	var num = param.Num;
+	var contractCode = commodityNo+contractNo;
+	var conditionType = param.ConditionType;
+	var conditionTypeText = analysisConditionType(conditionType);
+	var priceTriggerPonit = param.PriceTriggerPonit;
+	var compareType = param.CompareType
+	var compareTypeText = analysisConditionCompareType(compareType);
+	var timeTriggerPoint = param.TimeTriggerPoint;
+	var abBuyPoint = param.AB_BuyPoint;
+	var abSellPoint = param.AB_SellPoint;
+	var orderType = param.OrderType;
+	var drection = param.Drection;
+	var stopLossType = param.StopLossType;
+	var stopLossDiff = param.StopLossDiff;
+	var stopWinDiff = param.StopWinDiff;
+	var insertTime = param.InsertTime;
+	var additionFlag = param.AdditionFlag;
+	var additionType = param.AdditionType;
+	var additionTypeText = "";
+	var additionPrice = param.AdditionPrice;
+	if(additionFlag == 1){
+		additionTypeText = analysisConditionCompareType(additionType)+additionPrice;
+	}
+	compareTypeText = compareTypeText+priceTriggerPonit+"<br/>"+additionTypeText;
+	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(stopLossType)+","+num+"手";
+	var cls = "condition"+conditionIndex;
+	var html = '<tr class="testclick tab_condition '+cls+'" id = "'+conditionNo+'">'
+					+'<td class = "condition0">'+contractCode+'</td>'
+					+'<td class = "condition1" data-tion-status = "'+status+'">'+statusText+'</td>'
+					+'<td class = "condition2" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</td>'
+					+'<td class = "condition3" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</td>'
+					+'<td class = "condition4">'+inserOrderText+'</td>'
+					+'<td class = "condition5">'+formatDateYYYMMDD(new Date())+'</td>'
+					+'<td class = "condition6">'+insertTime+'</td>'
+				+'</tr>';
+	if(status == 0 || status == 1){ 
+		$("#thodyCondition").append(html);
+		addConditionBindClick(cls);
+	}else if(status == 2 || status == 3 || status == 4 || status == 5){
+		$("#over-thbodyCondition").append(html);
+	}
+	localCacheCondition[conditionNo] = param;
+	conditionIndex++;
+}
+/**
+ * 修改条件单列表信息
+ * @param {Object} param
+ */
+function updateCondition(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var exchangeNo = param.ExchangeNo;
+	var conditionNo = param.ConditionNo;
+	var status = param.Status;
+	var statusText = analysisConditionStatus(status);
+	var num = param.Num;
+	var contractCode = commodityNo+contractNo;
+	var conditionType = param.ConditionType;
+	var conditionTypeText = analysisConditionType(conditionType);
+	var priceTriggerPonit = param.PriceTriggerPonit;
+	var compareType = param.CompareType
+	var compareTypeText = analysisConditionCompareType(compareType);
+	var timeTriggerPoint = param.TimeTriggerPoint;
+	var abBuyPoint = param.AB_BuyPoint;
+	var abSellPoint = param.AB_SellPoint;
+	var orderType = param.OrderType;
+	var drection = param.Drection;
+	var stopLossType = param.StopLossType;
+	var stopLossDiff = param.StopLossDiff;
+	var stopWinDiff = param.StopWinDiff;
+	var insertTime = param.InsertTime;
+	var additionFlag = param.AdditionFlag;
+	var additionType = param.AdditionType;
+	var additionTypeText = "";
+	var additionPrice = param.AdditionPrice;
+	if(additionFlag == 1){
+		additionTypeText = analysisConditionCompareType(additionType)+additionPrice;
+	}
+	compareTypeText = compareTypeText+priceTriggerPonit+"<br/>"+additionTypeText;
+	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(stopLossType)+","+num+"手";
+	$("#"+conditionNo+" td[class = 'condition1']").text(statusText);
+	$("#"+conditionNo+" td[class = 'condition1']").attr("data-tion-status",status);
+	$("#"+conditionNo+" td[class = 'condition2']").text(conditionTypeText);
+	$("#"+conditionNo+" td[class = 'condition2']").attr("data-tion-conditionType",conditionType);
+	$("#"+conditionNo+" td[class = 'condition3']").text(compareTypeText);
+	$("#"+conditionNo+" td[class = 'condition3']").attr("data-tion-compareType",compareType);
+	$("#"+conditionNo+" td[class = 'condition4']").text(inserOrderText);
+	if(status == 2 || status == 3 || status == 4 || status == 5){
+		var html = $("#"+conditionNo).html();
+		$("#over-thbodyCondition").append("<tr class = 'testclick1' id = '"+conditionNo+"'>"+html+"</tr>");
+		$("#"+conditionNo).remove();
+	}
+}
 /**
  * 验证持仓信息是否存在 
  */
 function validationPostionIsExsit(param){
-	var contractCode = param.ContractCode;
+	var contractCode = param.ContractCode; 
 	var positionParam = localCachePostion[contractCode];
 	if(positionParam == undefined || positionParam == "undefined" || positionParam == null || $("ul[data-tion-position='"+contractCode+"']").html == undefined){
 		return true;
@@ -1175,10 +1476,29 @@ function addFundDetailBindClick(cls){
  * 绑定止损单列表点击事件
  * @param {Object} cls
  */
+var num=0;
 function addStopLossBindClick(cls){
 	$("."+cls).bind("click",function(){
 		var $this = $(this);
-		selectStopLoss["stopLossNo"]=$this.attr(id);
+		selectStopLoss["stopLossNo"]=$this.attr("id");
+		var status = $("#"+selectStopLoss["stopLossNo"]+" td[class = 'stoploss1']").attr("data-tion-status");
+		if(status == 0){
+			$("#suspendCondition1").val(2);
+			$("#suspendCondition1").text("暂停");
+		}else if(status == 1){
+			$("#suspendCondition1").val(3);  
+			$("#suspendCondition1").text("启动");
+		}
+	});
+}
+/**
+ * 绑定条件单列表点击事件
+ * @param {Object} cls
+ */
+function addConditionBindClick(cls){
+	$("."+cls).bind("click",function(){
+		var $this = $(this);
+		selectCondition["conditionNo"] = $this.attr("id");
 	});
 }
 /**
@@ -1323,6 +1643,10 @@ function loadOperateLogin(){
 		}
 	});
 }
+/**
+ * 条件单操作的类型0-增加，1-修改
+ */
+var insertConditionCount = 0;
 $(function(){
 	var validateQueryCommodity = setInterval(function(){
 			if(getQueryCommodityIsFlag()){ 
@@ -1348,22 +1672,208 @@ $(function(){
 			openLogin();
 		} 
 	});
-/*	$("#stopChoicePrices1").bind("input",function(){  
-		var holdAvgPrice =$("#stopHoldAvgPrice").val();
-		var stopChoicePrices1 = $("#stopChoicePrices1").val();
-		if(stopChoicePrices1 == 0 || stopChoicePrices1.length == 0){ 
+	$("#choiceStopPrices").change(function(){
+		var $this = $(this);
+		var val = $this.val();
+		if(val == 2){
+			$("#stopChoicePrices1").val(0);
+			$("#Increase").val(0);
+		}else if(val == 0){
+			$("#stopChoicePrices1").val($("#stopEvenPrice").text());
+		}
+	});
+	$("#choiceStopPrices2").change(function(){
+		var $this = $(this);
+		var val = $this.val();
+		if(val == 2){
+			$("#stopChoicePrices3").val(0);
+			$("#Increase2").val(0);
+		}else if(val == 0){
+			$("#stopChoicePrices3").val($("#stopEvenPrice1").text());
+		}
+	});
+	$("#insertCondition").click(function(){
+		insertConditionCount = 0;
+		$("#chioceContract").attr("disabled",false);
+	});
+	/**
+	 * 增加止损单监听文本框
+	 */
+	$("#stopChoicePrices1").bind("input",function(){  
+		$("#lossIncrease2").text(0);
+		var contractCode = $("#stopEvenTd").text();
+		var localCommodity = getMarketCommdity(contractCode);
+		if(localCommodity == undefined){
+			tip("无效的合约");
 			return;
 		}
-		var choiceStopPrices = $("#choiceStopPrices").val();
+		var dotSize = localCommodity.DotSize;
+		var holdAvgPrice =$("#stopHoldAvgPrice").val();
+		var stopChoicePrices1 = $("#stopChoicePrices1").val();
+		if(stopChoicePrices1 <= 0 || stopChoicePrices1.length == 0){ 
+			tip("请输入正确价格");
+			return;
+		} 
+		stopChoicePrices1 = replaceNum(stopChoicePrices1,dotSize);
+		var stopEvenPrice = $("#stopEvenPrice").text();
+		var stopType = $("#choiceStopPrices").val();
+		var stopDrection = $("#stopBorderLeft").attr("data-tion-drection");
 		var scale = 0.00;
-		if(choiceStopPrices == 0){ 
-			scale = (holdAvgPrice - stopChoicePrices1) / stopChoicePrices1 * 100;
-		}else if(choiceStopPrices == 2){
-			var stopEvenPrice = $("#stopEvenPrice").text();
+		if(stopType == 0){
+			/*var chaPrice = stopEvenPrice - stopChoicePrices1;
+			if(stopDrection == 0){
+				if(chaPrice <= 0){
+					tip("输入价格已不合适宜");
+					return;
+				}
+			}else if(stopDrection == 1){
+				if(chaPrice >= 0){
+					tip("输入价格已不合适宜");
+					return;
+				}
+			}*/
+			if(stopDrection == 0){
+				scale = (holdAvgPrice - stopChoicePrices1) / stopChoicePrices1 * 100;
+			}else if(stopDrection == 1){
+				scale = (stopChoicePrices1 - holdAvgPrice) / stopChoicePrices1 * 100;
+			}
+		}else if(stopType == 2){
 			scale = stopChoicePrices1 / stopEvenPrice * 100;
 		}
 		$("#Increase").text(parseFloat(scale).toFixed(2)+"%");
-	});*/
+		$("#stopChoicePrices1").val(stopChoicePrices1);
+	});
+	/**
+	 * 修改止损单监听文本框
+	 */
+	$("#stopChoicePrices3").bind("input",function(){  
+		$("#Increase2").text(0);
+		var contractCode = $("#stopEvenTd1").text();
+		var localCommodity = getMarketCommdity(contractCode);
+		if(localCommodity == undefined){
+			tip("无效的合约");
+			return;
+		}
+		var dotSize = localCommodity.DotSize;
+		var holdAvgPrice =$("#stopHoldAvgPrice1").val();
+		var stopChoicePrices3 = $("#stopChoicePrices3").val();
+		if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0){ 
+			tip("请输入正确价格");
+			return;
+		}
+		stopChoicePrices3 = replaceNum(stopChoicePrices3,dotSize);
+		var stopEvenPrice = $("#stopEvenPrice1").text();
+		var stopType = $("#choiceStopPrices2").val();
+		var stopDrection = $("#stopBorderLeft1").attr("data-tion-drection");
+		var scale = 0.00;
+		if(stopType == 0){
+			/*var chaPrice = stopEvenPrice - stopChoicePrices3;
+			if(stopDrection == 0){
+				if(chaPrice <= 0){
+					tip("输入价格已不合适宜");
+					return;
+				}
+			}else if(stopDrection == 1){
+				if(chaPrice >= 0){
+					tip("输入价格已不合适宜");
+					return;
+				}
+			}*/
+			if(stopDrection == 0){
+				scale = (holdAvgPrice - stopChoicePrices3) / stopChoicePrices3 * 100;
+			}else if(stopDrection == 1){
+				scale = (stopChoicePrices3 - holdAvgPrice) / stopChoicePrices3 * 100;
+			}
+		}else if(stopType == 2){
+			scale = stopChoicePrices3 / stopEvenPrice * 100;
+		}
+		$("#Increase2").text(parseFloat(scale).toFixed(2)+"%");
+		$("#stopChoicePrices3").val(stopChoicePrices3);
+	});
+	/**
+	 * 增加止盈 彈框，監聽止盈輸入
+	 */
+	$("#lossChoicePrices2").bind("input",function(){
+		$("#lossIncrease1").text(0);
+		var contractCode = $("#lossContractCode").text();
+		var localCommodity = getMarketCommdity(contractCode);
+		if(localCommodity == undefined){
+			tip("无效的合约");
+			return;
+		}
+		var dotSize = localCommodity.DotSize;
+		var lossChoicePrices2 = $("#lossChoicePrices2").val();
+		if(lossChoicePrices2 <= 0 || lossChoicePrices2.length == 0){
+			tip("请输入正确价格");
+			return;
+		}
+		lossChoicePrices2 = replaceNum(lossChoicePrices2,dotSize);
+		var drection = $("#lossDrection").attr("data-tion-drection");
+		var lossEventPrice = $("#lossEventPrice").text();
+		var holdAvgPrice = $("#lossHoldAvgPrice").val();
+		var chaPrice = lossEventPrice - lossChoicePrices2;
+		/*if(drection == 0){
+			if(chaPrice >= 0){
+				tip("输入价格已不合适宜");
+				return;
+			}
+		}else if(drection == 1){
+			if(chaPrice <= 0){
+				tip("输入价格已不合适宜");
+				return;
+			}
+		}*/
+		var scale = 0.00;
+		if(drection == 0){
+			scale = (lossChoicePrices2 - holdAvgPrice) / lossChoicePrices2 * 100;
+		}else if(drection == 1){
+			scale = (holdAvgPrice - lossChoicePrices2) / lossChoicePrices2 * 100;
+		}
+		$("#lossIncrease1").text(parseFloat(scale).toFixed(2)+"%");
+		$("#lossChoicePrices2").val(lossChoicePrices2);
+	});
+	/**
+	 * 修改止盈单窗口监听输入框
+	 */
+	$("#uLossPrice").bind("input",function(){
+		$("#lossIncrease2").text(0);
+		var contractCode = $("#ulossContractCode").text();
+		var localCommodity = getMarketCommdity(contractCode);
+		if(localCommodity == undefined){
+			tip("无效的合约");
+			return;
+		}
+		var dotSize = localCommodity.DotSize;
+		var uLossPrice = $("#uLossPrice").val();
+		if(uLossPrice <= 0 || uLossPrice.length == 0){
+			tip("请输入正确价格");
+			return;
+		}
+		uLossPrice = replaceNum(uLossPrice,dotSize);
+		var drection = $("#uDrection").attr("data-tion-drection");
+		var lossEventPrice = $("#uEvenPrice").text();
+		var holdAvgPrice = $("#ulossHoldAvgPrice1").val();
+		var chaPrice = lossEventPrice - uLossPrice;
+		/*if(drection == 0){
+			if(chaPrice >= 0){
+				tip("输入价格已不合适宜");
+				return;
+			} 
+		}else if(drection == 1){
+			if(chaPrice <= 0){
+				tip("输入价格已不合适宜");
+				return;
+			}
+		}*/
+		var scale = 0.00;
+		if(drection == 0){
+			scale = (uLossPrice - holdAvgPrice) / uLossPrice * 100;
+		}else if(drection == 1){
+			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
+		}
+		$("#lossIncrease2").text(parseFloat(scale).toFixed(2)+"%");
+		$("#uLossPrice").val(uLossPrice);
+	});
 }); 
 function initSocketTrade(){
 	setTradeConfig(tradeWebSocketIsMock);
@@ -1449,6 +1959,9 @@ function bindOpertion(){
 				orderPrice = doGetMarketPrice(lastPrice,miniTikeSize,tradeDrection,dotSize);
 			}
 			buyOrderPrice = orderPrice;
+			if(priceType == 1){
+				orderPrice = "市价";
+			} 
 			var content = "确定提交订单："+commodityNo+contractNo+",价格("+orderPrice+"),手数("+orderNum+"),方向("+analysisBusinessBuySell(tradeDrection)+")?";
 			alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),doInsertOrder,null,$this);
 		}else{
@@ -1564,10 +2077,10 @@ function bindOpertion(){
 			}
 			var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 			buyOrderPrice = limitPrice;
-			var content = "确定提交订单："+commodityNo+contractNo+",价格("+limitPrice+"),手数("+orderNum+"),方向("+analysisBusinessBuySell(drection)+")?";
+			var content = "确定提交订单："+commodityNo+contractNo+",价格(【市价】),手数("+orderNum+"),方向("+analysisBusinessBuySell(drection)+")?";
 			var isFlag = alertProtype(content,"确认下单?",Btn.confirmedAndCancle(),marketBuy,null,$this);
 		}else{
-			tip("未登录,请先登录");
+			vadationIsLogin();
 		}
 	})
 	$("#changeSingle").bind("click",function(){
@@ -1599,9 +2112,9 @@ function bindOpertion(){
 		}
 	});
 	/**
-	 * 止损单
+	 * 添加止损单
 	 */
-	/*$("#insertStopData").bind("click",function(){
+	$("#insertStopData").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
 			if(contractCode == undefined){
@@ -1610,7 +2123,7 @@ function bindOpertion(){
 			}
 			var localQuote = getLocalCacheQuote(contractCode);
 			if(localQuote == undefined){
-				tip("请重试再试");
+				tip("无效的合约");
 				return;
 			}
 			var lastPrice = $("#stopEvenPrice").text();
@@ -1624,29 +2137,430 @@ function bindOpertion(){
 				tip("请输入手数");
 				return;
 			}
+			var stopDrection = $("#stopBorderLeft").attr("data-tion-drection");
+			var stopLossType = $("#choiceStopPrices").val();
 			var stopLossDiff = 0;
+			var typeText = "限价止损";
 			if(stopLossType == 0){
+				if(stopDrection == 0){
+					if(lastPrice <= stopChoicePrices1){
+						tip("输入价格应小于最新价");
+						return;
+					}
+				}else if(stopDrection == 1){
+					if(lastPrice >= stopChoicePrices1){
+						tip("输入价格应大于最新价");
+						return;
+					}
+				}
 				stopLossDiff = lastPrice - stopChoicePrices1;
-			}else if(stopLossType == 1){
+			}else if(stopLossType == 2){
 				stopLossDiff = stopChoicePrices1;
+				typeText = "动态止损";
 			}
 			if(stopLossDiff == 0){
 				alertProtype("止损价差会导致立即触发,请重新设置","提示",Btn.confirmed());
 				return;
 			}
-			var $contractCode = $("li[data-tion-position='"+contractCode+"'] span[class = 'position0']");
-			var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
-			var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
-			var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
-			var exchangeNo = localQuote.ExchangeNo;
-			var commodityNo = localQuote.CommodityNo;
-			var contractNo = localQuote.ContractNo;
-			var stopLossType = $("#choiceStopPrices").val();
+			alertProtype("是否添加"+typeText,"提示",Btn.confirmedAndCancle(),doGetInsertStopLoss);
 		}else{
 			tip("未登录,请先登录");
 		}
-	});*/
+	});
+	/**
+	 * 修改止损-动态单
+	 */
+	$("#insertStopData1").bind("click",function(){
+		if(isLogin){
+			var stopLossNo = selectStopLoss["stopLossNo"];
+			if(stopLossNo == undefined){
+				tip("请选择一条信息");
+				return;
+			}
+			var contractCode = $("#stopEvenTd1").text();
+			var localQuote = getLocalCacheQuote(contractCode);
+			if(localQuote == undefined){
+				tip("无效的合约");
+				return;
+			}
+			var lastPrice = $("#stopEvenPrice1").text();
+			var stopChoicePrices3 = $("#stopChoicePrices3").val();
+			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0){
+				tip("请输入正确的回撤价");
+				return;  
+			}
+			var stopNumber = $("#stopNumber1").val();
+			if(isNaN(stopNumber) || stopNumber <= 0 || stopNumber.length == 0){
+				tip("请输入手数");
+				return;
+			}
+			var stopDrection = $("#stopBorderLeft1").attr("data-tion-drection");
+			var stopLossType = $("#choiceStopPrices2").val();
+			var stopLossDiff = 0;
+			var typeText = "限价止损";
+			if(stopLossType == 0){
+				var chaPrice = lastPrice - stopChoicePrices3;
+				if(stopDrection == 0){
+					if(chaPrice <= 0 ){
+						tip("输入价格应小于最新价");
+						return;
+					}
+				}else if(stopDrection == 1){
+					if(chaPrice >= 0) {
+						tip("输入价格应大于最新价");
+						return;
+					}
+				}
+				stopLossDiff = lastPrice - stopChoicePrices1;
+			}else if(stopLossType == 2){
+				stopLossDiff = stopChoicePrices1;
+				typeText = "动态止损";
+			}
+			if(stopLossDiff == 0){
+				alertProtype("止损价差会导致立即触发,请重新设置","提示",Btn.confirmed());
+				return;
+			}
+			alertProtype("是否修改【"+contractCode+"】"+typeText+"止损","提示",Btn.confirmedAndCancle(),doUpdateModifyStopLoss);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	/**
+	 * 添加止盈单
+	 */
+	$("#insertLossData").bind("click",function(){
+		if(isLogin){
+			var contractCode = selectPostion["contractCode"];
+			if(contractCode == undefined){
+				tip("请选择一条信息");
+				return;
+			}
+			var localQuote = getLocalCacheQuote(contractCode);
+			if(localQuote == undefined){
+				tip("无效的合约");
+				return;
+			}
+			var lastPrice = $("#lossEventPrice").text();
+			var lossChoicePrices2 = $("#lossChoicePrices2").val();
+			if(lossChoicePrices2 <= 0 || lossChoicePrices2.length == 0){
+				tip("请输入正确的回撤价");
+				return;  
+			}
+			var stopNumber = $("#lossNumber").val();
+			if(isNaN(stopNumber) || stopNumber <= 0 || stopNumber.length == 0){
+				tip("请输入手数");
+				return;
+			}
+			var lossDrection = $("#lossDrection").attr("data-tion-drection");
+			var stopLossDiff = 0;
+			var chaPrice  = lastPrice - lossChoicePrices2;
+			if(lossDrection == 0){
+				if(chaPrice >= 0){
+					tip("输入价格应大于最新价");
+					return;
+				}
+			}else if(lossDrection == 1){
+				if(chaPrice <= 0){
+					tip("输入价格应小于最新价");
+					return;
+				}
+			}
+			stopLossDiff = lossChoicePrices2 - lastPrice;
+			if(stopLossDiff == 0){
+				alertProtype("止盈价差会导致立即触发,请重新设置","提示",Btn.confirmed());
+				return;
+			}
+			alertProtype("是否添加止盈价吗?","提示",Btn.confirmedAndCancle(),doGetInsertLossLoss);
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	/**
+	 * 修改止盈单
+	 */
+	$("#uinsertLossData1").bind("click",function(){
+		if(isLogin){
+			var stopLossNo = selectStopLoss["stopLossNo"];
+			if(stopLossNo == undefined){
+				tip("请选择一条信息");
+				return;
+			}
+			var contractCode = $("#stopEvenTd1").text();
+			var localQuote = getLocalCacheQuote(contractCode);
+			if(localQuote == undefined){
+				tip("无效的合约");
+				return;
+			}
+			var lastPrice = $("#uEvenPrice").text();
+			var stopChoicePrices3 = $("#uLossPrice").val();
+			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0){
+				tip("请输入正确的回撤价");
+				return;  
+			}
+			var stopNumber = $("#ulossNumber").val();
+			if(isNaN(stopNumber) || stopNumber <= 0 || stopNumber.length == 0){
+				tip("请输入手数");
+				return;
+			}
+			var stopDrection = $("#uDrection").attr("data-tion-drection");
+			var chaPrice = lastPrice - stopChoicePrices3;
+			if(stopDrection == 0){
+				if(chaPrice >= 0 ){
+					tip("输入价格应大于最新价");
+					return;
+				}
+			}else if(stopDrection == 1){
+				if(chaPrice <= 0) {
+					tip("输入价格应小于最新价");
+					return;
+				}
+			}
+			var stopLossDiff = lastPrice - stopChoicePrices1;
+			if(stopLossDiff == 0){
+				alertProtype("止盈价差会导致立即触发,请重新设置","提示",Btn.confirmed());
+				return;
+			}
+			alertProtype("是否修改【"+contractCode+"】止盈","提示",Btn.confirmedAndCancle(),doUpdateModifyLoss);
+		}else{
+			tip("未登录,请先登录")
+		}
+	});
+	/**
+	 * 赋值，确定操作是修改-删除-暂停
+	 */
+	$(".updateStopLoss").bind("click",function(){
+		if(isLogin){
+			var stopLossNo = selectStopLoss["stopLossNo"];
+			if(stopLossNo == undefined){
+				tip("请选择一行数据");
+				return;
+			} 
+			var $this = $(this);
+			var modifyFlag = $this.val();
+			operationStopLossType = modifyFlag;
+			var operationText = "";
+			if(operationStopLossType == undefined){
+				tip("请重新操作");
+				return; 
+			}else if(operationStopLossType == 0){
+				operationText = "修改";  
+			}else if(operationStopLossType == 1){
+				operationText = "删除"; 
+			}else if(operationStopLossType == 2){
+				operationText = "暂停";
+			}else if(operationStopLossType == 3){
+				operationText = "启动";
+			}
+			alertProtype("是否"+operationText+"止损单？","提示",Btn.confirmedAndCancle(),doStopAndDelModifyStopLoss);
+		}else{
+			tip("未登录,请先登录")
+		}
+		
+	});
+	/**
+	 * 修改止损/止盈单，显示修改止损、止盈单窗口
+	 */
+	$("#modifyCondition1").bind("click",function(){
+		if(isLogin){
+			operationStopLossType = 0;
+			var stopLossNo = selectStopLoss["stopLossNo"];
+			if(stopLossNo == undefined){
+				tip("请选择一行数据");
+				return;
+			}
+			var status = $("#"+stopLossNo+" td[class = 'stoploss1']").attr("data-tion-status");
+			if(status == 0){
+				tip("运行中的止损/止盈单不能修改,请先暂停");
+				return;
+			}
+			var contractCode = $("#"+stopLossNo+" td[class = 'stoploss0']").text();
+			var localQuote = getLocalCacheQuote(contractCode);
+			if(localQuote == undefined){
+				tip("无效的合约");
+				return;
+			}
+			var holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
+			if(holdAvgPrice == undefined){
+				tip("无效持仓合约");
+				return;
+			}
+			holdAvgPrice = holdAvgPrice.text();
+			var stopDrection = $("#"+stopLossNo+" td[class = 'stoploss2']");
+			var drection = stopDrection.attr("data-tion-drection");
+			var drectionText = stopDrection.text();
+			var stopChoicePrices1 = $("#"+stopLossNo+" td[class = 'stoploss5']").attr("data-tion-price");
+			var num = $("#"+stopLossNo+" td[class = 'stoploss4']").text();
+			var orderType = $("#"+stopLossNo+" td[class = 'stoploss6']").attr("data-tion-orderType");
+			var stopEvenPrice = localQuote.LastPrice;
+			var stoplossType = $("#"+stopLossNo+" td[class = 'stoploss3']");
+			var lossType = stoplossType.attr("data-tion-lossType");
+			$("#stopHoldAvgPrice1").val(holdAvgPrice);
+			$("#stopEvenTd1").text(contractCode);
+			$("#stopBorderLeft1").text(drectionText); 
+			$("#stopBorderLeft1").attr("data-tion-drection",drection);
+			$("#stopEvenPrice1").text(stopEvenPrice);
+			
+			$("#stopChoicePrices1").text(stopEvenPrice);
+			$("#choiceStopPrices2").val(lossType);
+			$("#stopChoicePrices3").val(stopChoicePrices1);
+			$("#stopNumber1").val(num); 
+			
+			$("#stopHoldAvgPrice1").val(holdAvgPrice);
+			$("#choiceStopPrices3").val(orderType);
+			$("#ulossContractCode").text(contractCode);
+			$("#uDrection").text(drectionText);  
+			$("#uDrection").attr("data-tion-drection",drection);
+			$("#uEvenPrice").text(stopEvenPrice);
+			$("#uLossPrice").val(stopChoicePrices1);
+			$("#ulossNumber").val(num);
+			$("#uchoiceLossPrices").val(orderType);
+			$("#ulossHoldAvgPrice1").val(stopEvenPrice);
+			var scale = 0.00; 
+			var chaPrice = stopEvenPrice - stopChoicePrices1;
+			if(lossType == 0){
+				scale = (holdAvgPrice - stopChoicePrices1) / stopChoicePrices1 * 100;
+				$("#Increase2").text(parseFloat(scale).toFixed(2)+"%");
+			}else if(lossType == 1){
+			   scale = (stopChoicePrices1 - holdAvgPrice) / stopChoicePrices1 * 100;
+			   $("#lossIncrease2").text(parseFloat(scale).toFixed(2)+"%");
+			}else if(lossType == 2){
+				scale = stopChoicePrices1 / stopEvenPrice * 100;
+				$("#Increase2").text(parseFloat(scale).toFixed(2)+"%");
+			}
+			mui("#popoverLoss1").popover("toggle");
+			if(lossType == 0 || lossType == 2){
+				$(".ustopTitle").show();
+				$(".ulossTitle").hide();
+			}else if(lossType == 1){
+				$(".ustopTitle").hide();
+				$(".ulossTitle").show(); 
+			}
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	/**
+	 * 添加条件单(价格条件)
+	 */
+	$("#insertConditionTable").bind("click",function(){
+		if(isLogin){
+			var chioceAdditional = $("#chioceAdditional").val();
+			var conditoionPricesInput = $("#ConditoionPricesInput").val();
+			if(conditoionPricesInput == null || conditoionPricesInput.length == 0){
+				tip("触发价格错误");
+				return;
+			}
+			if(chioceAdditional != -1){
+				var conditoionPricesInput1 = $("#ConditoionPricesInput1").val();
+				if(ConditoionPricesInput1 <= 0 || ConditoionPricesInput1.length){
+					tip("附加触发价格错误");
+					return;
+				}
+			}
+			var conditoionPricesInput3 = $("#ConditoionPricesInput3").val();
+			if(conditoionPricesInput3 <= 0 || conditoionPricesInput3.length == 0){
+				tip("手数输入错误");
+				return;
+			} 
+			var chioceContract = $("#chioceContract").val();
+			if(insertConditionCount == 0){
+				alertProtype("你确定要提交【"+chioceContract+"】条件单吗?","提示",Btn.confirmedAndCancle(),doInsertConditionByPrice);
+			}else if(insertConditionCount == 1){
+				alertProtype("你确定要修改【"+chioceContract+"】条件单吗?","提示",Btn.confirmedAndCancle(),doUpdateConditionByPrice);
+			}
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	/**
+	 * 添加条件单(时间条件)
+	 */
+	$("#insertConditionTable1").bind("click",function(){
+		if(isLogin){
+			var chioceTimeAdditional = $("#chioceTimeAdditional").val();
+			if(chioceTimeAdditional != -1){
+				var ConditoionTimePricesInput = $("#ConditoionPricesInput1").val();
+				if(ConditoionTimePricesInput <= 0 || ConditoionTimePricesInput.length){
+					tip("附加触发价格错误");
+					return;
+				}
+			}
+			var ConditoionTimeInput = $("#ConditoionTimeInput").val();
+			if(ConditoionTimeInput <= 0 || ConditoionTimeInput.length == 0){
+				tip("手数输入错误");
+				return;
+			}
+			var chioceContract = $("#chioceContract").text();
+			if(insertConditionCount == 0){
+				alertProtype("你确定要提交【"+chioceContract+"】条件单吗?","提示",Btn.confirmedAndCancle(),doInsertConditionByTime);
+			}else if(insertConditionCount == 1){
+				alertProtype("你确定要修改【"+chioceContract+"】条件单吗?","提示",Btn.confirmedAndCancle(),doUpdateConditionByTime);
+			}
+			
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
+	/**
+	 * 修改条件单显示窗口
+	 */
+	$("#modifyCondition").bind("click",function(){
+		if(isLogin){
+			var conditionNo = selectCondition["conditionNo"];
+			if(conditionNo == undefined){
+				tip("请选择一条数据");
+				return;
+			}
+			var param = localCacheCondition[conditionNo];
+			if(param == undefined){
+				tip("无效数据");
+				return;
+			}
+			var conditionType = param.ConditionType;
+			var commodityNo = param.CommodityNo;
+			var contractNo = param.ContractNo;
+			var contractCode = commodityNo+contractNo;
+			var num = param.Num;
+			var priceTriggerPonit = param.PriceTriggerPonit;
+			var compareType = param.CompareType;
+			var timeTriggerPoint = param.TimeTriggerPoint;
+			var abBuyPoint = param.AB_BuyPoint;
+			var abSellPoint = param.AB_SellPoint;
+			var orderType = param.OrderType;
+			var drection = param.Drection;
+			var additionType = param.AdditionType;
+			var additionPrice = param.AdditionPrice;
+			var df = new DateTimeFormat();
+			var dateTime = df.parse(timeTriggerPoint);
+			var hours = dateTime.getHours();
+			var minutes = dateTime.getMinutes();
+			var time = hours+":"+minutes;
+			$("#chioceContract").val(contractCode);
+			$("#chiocePrices").val(compareType);
+			$("#ConditoionPricesInput").val(priceTriggerPonit);
+			$("#chioceAdditional").val(additionType);
+			$("#ConditoionPricesInput1").val(additionType);
+			$("#shopDrection").val(drection);
+			$("#chiocePricesSelect").val(orderType);
+			$("#ConditoionPricesInput3").val(num);
+			
+			
+			$("#chioceContract1").val(contractCode);
+			$("#insertTimeInput").val(time);
+			$("#chioceTimeAdditional").val(additionType);
+			$("#ConditoionTimePricesInput").val(additionPrice);
+			$("#shopDrectionTime").val(drection);
+			$("#chiocePricesSelectTime").val(orderType);
+			$("#ConditoionTimeInput").val(num);
+			insertConditionCount = 1; 
+			$("#chioceContract").attr("disabled",true);
+			mui("#popoverConditoion").popover("toggle");
+		}else{
+			tip("未登录,请先登录");
+		}
+	});
 }
+
 $("#add").bind("click",function(){
 	var contractCode = selectDesgnate["contraction"];
 	var tipContent = "确认改单合约【"+contractCode+"】"; 
@@ -1658,7 +2572,7 @@ $("#add").bind("click",function(){
 /**
  * 显示止损盈亏的窗口
  */
-/*$("#stopLoss").bind("click",function(){
+$("#stopLoss").bind("click",function(){
 	var contractCode = selectPostion["contractCode"];
 	if(contractCode == undefined){
 		tip("请选择一条信息");
@@ -1670,16 +2584,27 @@ $("#add").bind("click",function(){
 	var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
 	var localQuote = getLocalCacheQuote($contractCode.text());
 	if(localQuote == undefined){
-		tip("!请稍后重试!");
+		tip("无效的品种合约");
 		return;
 	}
+	var lastPrice = localQuote.LastPrice;
+	$("#choiceStopPrices").val(0);
 	$("#stopEvenTd").text($contractCode.text()); 
 	$("#stopBorderLeft").text($drection.text());
-	$("#stopEvenPrice").text(localQuote.LastPrice);
-	$("#stopNumber").val($holdNum.text()); 
+	$("#stopBorderLeft").attr("data-tion-drection",$drection.attr("data-drection"));
+	$("#stopEvenPrice").text(lastPrice);
+	$("#stopNumber").val($holdNum.text());  
 	$("#stopHoldAvgPrice").val($holdAvgPrice.text());
+	$("#stopChoicePrices1").val(lastPrice);
+	$("#lossContractCode").text($contractCode.text());
+	$("#lossDrection").text($drection.text());
+	$("#lossDrection").attr("data-tion-drection",$drection.attr("data-drection"));
+	$("#lossNumber").val($holdNum.text());
+	$("#lossEventPrice").text(lastPrice); 
+	$("#lossChoicePrices2").val(lastPrice);
+	$("#lossHoldAvgPrice").val($holdAvgPrice.text());
 	mui("#popoverLoss").popover("toggle");
-});*/
+});
 /**
  * 下单
  */
@@ -1695,7 +2620,7 @@ function doInsertOrder(param){
 	var $this = param;
 	var tradeDrection = $this.attr("data-tion-buy");
 	var orderNumber = $("#orderNumber").val();
-	//var priceType = $("input[type='radio']:checked").val();
+	var priceType = $("input[type='radio']:checked").val();
 	if(orderNumber == null || isNaN(orderNumber) || orderNumber <= 0 || orderNumber.length <= 0){
 		alertProtype("手数输入错误数量","提示",Btn.confirmed());
 		return;
@@ -1710,7 +2635,7 @@ function doInsertOrder(param){
 	var exchanageNo = $("#exchangeNo").val();
 	var commodeityNo = $("#commodeityNo").val();
 	var contractNo = $("#contractNo").val();
-	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,0,buyOrderPrice,0,doGetOrderRef());
+	Trade.doInsertOrder(exchanageNo,commodeityNo,contractNo,orderNumber,tradeDrection,priceType,buyOrderPrice,0,doGetOrderRef());
 	isBuy = true;
 }
 /**
@@ -1728,7 +2653,7 @@ function doInsertAllSellingOrder(){
 		}
 		var param = new Array();
 		param[0] = tradeParam;
-		closing(param); 
+		closing(param);
 	}
 }
 /**
@@ -1828,35 +2753,284 @@ function doInsertChangeSingleOrder(){
 	modifyOrder(param);  
 	isUpdateOrder = true;
 }
+/**
+ * 添加止损操作
+ */
 function doGetInsertStopLoss(){
 	if(isLogin){
 			var contractCode = selectPostion["contractCode"];
+			var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
+			var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
 			var localQuote = getLocalCacheQuote(contractCode);
 			var lastPrice = $("#stopEvenPrice").text();
 			var stopChoicePrices1 = $("#stopChoicePrices1").val();
 			var stopNumber = $("#stopNumber").val();
-			var choiceStopPrices1 = $("#choiceStopPrices1").val();
 			var stopLossType = $("#choiceStopPrices").val();
+			var choiceStopPrices1 = $("#choiceStopPrices1").val();
 			var stopLossDiff = 0;
+			var drection = $drection.attr("data-drection");
 			if(stopLossType == 0){
 				stopLossDiff = lastPrice - stopChoicePrices1;
-			}else if(stopLossType == 1){
+			}else if(stopLossType == 2){
 				stopLossDiff = stopChoicePrices1;
+				if(drection == 0){
+					stopChoicePrices1 = Number(lastPrice) - Number(stopChoicePrices1);
+				}else if(drection == 1){
+					stopChoicePrices1 =  Number(stopChoicePrices1) + Number(lastPrice);
+				}
 			}
-			var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
-			var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
-			var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
 			var exchangeNo = localQuote.ExchangeNo;
 			var commodityNo = localQuote.CommodityNo;
-			var contractNo = localQuote.ContractNo;
-			var tradeparam = createInsertStopLossParam(exchangeNo,commodityNo,contractNo,$holdNum.text(),stopLossType,stopLossDiff,$holdAvgPrice,$drection.attr("data-drection"),choiceStopPrices1);
+			var contractNo = localQuote.ContractNo; 
+			var tradeparam = createInsertStopLossParam(exchangeNo,commodityNo,contractNo,stopNumber,stopLossType,parseFloat(Math.abs(stopLossDiff)).toFixed(2),$holdAvgPrice.text(),drection,choiceStopPrices1,parseFloat(stopChoicePrices1).toFixed(2));
 			if(tradeparam == undefined){
-				tip("交易错误,请重试");
+				tip("交易错误,请重试"); 
 			}
 			inserStopLoss(tradeparam);
 		}else{
 			tip("未登录,请先登录");
 		}
+}
+/**
+ * 添加止盈操作
+ */
+function doGetInsertLossLoss(){
+	if(isLogin){
+			var contractCode = selectPostion["contractCode"];
+			var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
+			var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
+			var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
+			var localQuote = getLocalCacheQuote(contractCode);
+			var lastPrice = $("#lossEventPrice").text();
+			var lossChoicePrices2 = $("#lossChoicePrices2").val();
+			var stopNumber = $("#lossNumber").val();
+			var stopLossType = 1; 
+			var choiceStopPrices4 = $("#choiceStopPrices4").val();
+			var drection = $drection.attr("data-drection");
+			var	stopLossDiff = lossChoicePrices2 - lastPrice;
+			var exchangeNo = localQuote.ExchangeNo;
+			var commodityNo = localQuote.CommodityNo;
+			var contractNo = localQuote.ContractNo; 
+			var tradeparam = createInsertStopLossParam(exchangeNo,commodityNo,contractNo,stopNumber,stopLossType,parseFloat(Math.abs(stopLossDiff)).toFixed(2),$holdAvgPrice.text(),drection,choiceStopPrices4,parseFloat(lossChoicePrices2).toFixed(2));
+			if(tradeparam == undefined){
+				tip("交易错误,请重试"); 
+			}
+			inserStopLoss(tradeparam);
+		}else{
+			tip("未登录,请先登录");
+		}
+}
+/**
+ * 修改止损操作
+ */
+function doUpdateModifyStopLoss(){
+	if(isLogin){
+			var stopLossNo = selectStopLoss["stopLossNo"];
+			if(stopLossNo == undefined){
+				tip("请选择一行数据");
+				return;
+			}
+			if(operationStopLossType == undefined){
+				tip("请重新操作");
+				return;
+			}
+			var modifyFlag = operationStopLossType; 
+			var num = $("#stopNumber1").val();
+			var stopLossType = $("#choiceStopPrices2").val();
+			var orderType = $("#choiceStopPrices3").val();
+			var lastPrice = $("#stopEvenPrice1").text();
+			var stopChoicePrices3 = $("#stopChoicePrices3").val();
+			var drection = $("#stopBorderLeft1").attr("data-tion-drection");
+			var stopLossDiff = 0;
+			if(stopLossType == 0){
+				stopLossDiff = lastPrice - stopChoicePrices3;
+			}else if(stopLossType == 2){
+				stopLossDiff = stopChoicePrices3;
+				if(drection == 0){
+					stopChoicePrices3 = Number(lastPrice) - Number(stopChoicePrices3);
+				}else if(drection == 1){
+					stopChoicePrices3 = Number(stopChoicePrices3) + Number(lastPrice);
+				}
+			} 
+			var tradeParam = createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,parseFloat(Math.abs(stopLossDiff)).toFixed(2),stopChoicePrices3);
+			doModifyStopLoss(tradeParam)
+		}else{
+			tip("未登录,请先登录");
+		}
+}
+/**
+ * 暂停-删除止损单操作
+ */
+function doStopAndDelModifyStopLoss(){
+	var stopLossNo = selectStopLoss["stopLossNo"];
+	if(stopLossNo == undefined){
+		tip("请选择一行数据");
+		return;
+	}
+	if(operationStopLossType == undefined){
+		tip("请重新操作");
+		return;
+	}
+	var contractCode = $("#"+stopLossNo+" td[class = 'stoploss0']").text();
+	var localQuote = getLocalCacheQuote(contractCode);
+	if(localQuote == undefined){
+		tip("无效的合约");
+		return;
+	}
+	var lastPrice = localQuote.LastPrice;
+	var modifyFlag = operationStopLossType;
+	var num = $("#"+stopLossNo+" td[class = 'stoploss4']").text();
+	var stopLossType = $("#"+stopLossNo+" td[class = 'stoploss3']").attr("data-tion-lossType");
+	var orderType = $("#"+stopLossNo+" td[class = 'stoploss6']").attr("data-tion-orderType");
+	var stopLossDiff = $("#"+stopLossNo+" td[class = 'stoploss8']").text();
+	var stopLossPrice = $("#"+stopLossNo+" td[class = 'stoploss5']").attr("data-tion-price");
+	if(stopLossDiff == 0){
+		stopLossDiff = lastPrice - stopLossPrice;	
+	}
+	var tradeParam = createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,Math.abs(stopLossDiff),stopLossPrice);
+	doModifyStopLoss(tradeParam);
+}
+/**
+ * 修改止盈操作
+ */
+function doUpdateModifyLoss(){
+	if(isLogin){
+		var stopLossNo = selectStopLoss["stopLossNo"];
+		if(stopLossNo == undefined){
+			tip("请选择一行数据");
+			return;
+		}
+		if(operationStopLossType == undefined){
+			tip("请重新操作");
+			return;
+		}
+		var modifyFlag = operationStopLossType; 
+		var num = $("#ulossNumber").val();
+		var stopLossType = 1;
+		var orderType = $("#uchoiceLossPrices").val();
+		var lastPrice = $("#uEvenPrice").text();
+		var uLossPrice = $("#uLossPrice").val();
+		var drection = $("#stopBorderLeft1").attr("data-tion-drection");
+		var lossDiff = lastPrice - uLossPrice;
+		var tradeParam = createModifyStopLossParam(stopLossNo,modifyFlag,num,stopLossType,orderType,parseFloat(Math.abs(lossDiff)).toFixed(2),uLossPrice);
+		doModifyStopLoss(tradeParam)
+	}else{
+		tip("未登录,请先登录");
+	}
+}
+/**
+ * 添加条件单操作（价格条件）
+ */
+function doInsertConditionByPrice(){
+	if(isLogin){
+		var contractCode = $("#chioceContract").val();
+		var compareType = $("#chiocePrices").val();
+		var priceTriggerPonit = $("#ConditoionPricesInput").val();
+		var additionType = $("#chioceAdditional").val();
+		var additionPrice = $("#ConditoionPricesInput1").val();
+		var drection = $("#shopDrection").val();
+		var orderType = $("#chiocePricesSelect").val();
+		var num = $("#ConditoionPricesInput3").val();
+		var flag = true;
+		if(additionPrice <= 0 || additionPrice.length == 0){
+			flag = false;
+		}
+		var localCommdity = getMarketCommdity(contractCode);
+		if(localCommdity == undefined){
+			tip("无效的合约");
+			return;
+		}
+		var exchangeNo = localCommdity.ExchangeNo;
+		var commodityNo = localCommdity.CommodityNo;
+		var contractNo = localCommdity.ContractNo;
+		var tradeparam = createInsertCondition(exchangeNo,commodityNo,contractNo,num,0,priceTriggerPonit,compareType,"","","",orderType,drection,"","","",flag,additionType,additionPrice);
+		insertCondition(tradeparam);
+	}
+}
+/**
+ * 增加条件单操作（时间格式）
+ */
+function doInsertConditionByTime(){
+	if(isLogin){
+		var contradeCode = $("#chioceContract1").val();
+		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val();
+		var additionType = $("#chioceTimeAdditional").val();
+		var additionPrice = $("#ConditoionTimePricesInput").val();
+		var drection = $("#shopDrectionTime").val();
+		var orderType = $("#chiocePricesSelectTime").val();
+		var num = $("#ConditoionTimeInput").val();
+		var flag = true;
+		if(additionPrice <= 0 || additionPrice.length == 0){
+			flag = false;
+		}
+		var localCommdity = getMarketCommdity(contractCode);
+		if(localCommdity == undefined){
+			tip("无效的合约");
+			return;
+		}
+		var exchangeNo = localCommdity.ExchangeNo;
+		var commodityNo = localCommdity.CommodityNo;
+		var contractNo = localCommdity.ContractNo; 
+		var tradeParam = createInsertCondition(exchangeNo,commodityNo,contractNo,num,1,"","",timeTriggerPoint,"","",orderType,drection,"","","",flag,additionType,additionPrice);
+		insertCondition(tradeParam);
+	}else{
+		tip("未登录,请先登录");
+	}
+}
+/**
+ * 修改条件单（价格条件）
+ */
+function doUpdateConditionByPrice(){
+	if(isLogin){
+		var conditionNo = selectCondition[conditionNo];
+		if(conditionNo == undefined){
+			tip("请选择一条数据");
+			return;
+		}
+		var contractCode = $("#chioceContract").val();
+		var compareType = $("#chiocePrices").val();
+		var priceTriggerPonit = $("#ConditoionPricesInput").val();
+		var additionType = $("#chioceAdditional").val();
+		var additionPrice = $("#ConditoionPricesInput1").val();
+		var drection = $("#shopDrection").val();
+		var orderType = $("#chiocePricesSelect").val();
+		var num = $("#ConditoionPricesInput3").val();
+		var flag = true;
+		if(additionPrice <= 0 || additionPrice.length == 0){
+			flag = false;
+		}
+		var tradeParam = createUpdateConditioin(conditionNo,0,num,0,priceTriggerPonit,compareType,"","","",orderType,drection,"","","",flag,additionType,additionPrice);
+		updateCondition(tradeParam);
+	}else{
+		tip("未登录,请先登录");		
+	}
+}
+/**
+ * 修改条件单（时间条件）
+ */
+function doUpdateConditionByTime(){
+	if(isLogin){
+		var conditionNo = selectCondition[conditionNo];
+		if(conditionNo == undefined){
+			tip("请选择一条数据");
+			return;
+		}
+		var contradeCode = $("#chioceContract1").val();
+		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val();
+		var additionType = $("#chioceTimeAdditional").val();
+		var additionPrice = $("#ConditoionTimePricesInput").val();
+		var drection = $("#shopDrectionTime").val();
+		var orderType = $("#chiocePricesSelectTime").val();
+		var num = $("#ConditoionTimeInput").val();
+		var flag = true;
+		if(additionPrice <= 0 || additionPrice.length == 0){
+			flag = false;
+		}
+		var tradeParam = createUpdateConditioin(conditionNo,0,num,1,"","",timeTriggerPoint,"","",orderType,drection,"","","",flag,additionType,additionPrice);
+		updateCondition(tradeParam);
+	}else{
+		tip("未登录,请先登录");		
+	}
 }
 /**
  * 获取平仓的基本信息
@@ -1962,8 +3136,8 @@ function marketBuy(param){
 		}*/
 		//var limitPrice = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
 		var priceType = 0;
-		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,0,buyOrderPrice,0,doGetOrderRef());
-		tip("合约【"+commodityNo+contractNo+"】提交成功,等待交易");
+		Trade.doInsertOrder(exchangeNo,commodityNo,contractNo,orderNum,drection,1,buyOrderPrice,0,doGetOrderRef());
+		/*tip("合约【"+commodityNo+contractNo+"】提交成功,等待交易");*/
 	}
 /**
  * 计算列表的浮动盈亏总和
@@ -1977,7 +3151,7 @@ function sumListfloatingProfit(){
 	    var $contractCode = $this.find("span[class = 'position0']");
 	    var localCommodity = getMarketCommdity($contractCode.text());
 	    if(localCommodity != undefined){
-	    	var currencyNo = localCommodity.CurrencyNo;
+	    	var currencyNo = localCommodity.CurrencyNo; 
 	    	var currencyRate = localCacheCurrencyAndRate[currencyNo];
 			price = price + Number($floatP.text() * currencyRate);
 	    }
@@ -2023,6 +3197,27 @@ function updateAccountBalance(){
 		var todayCanUse = $("#todayCanUse"); 
 		todayBalance.text(parseFloat(loadCachTodayBanlance+Number(floatingProfit)).toFixed(2));
 		todayCanUse.text(parseFloat(loadCachTodayCanuse+Number(floatingProfit)).toFixed(2));
+	}
+}
+/**
+ * 更新止损止盈最新价格
+ */
+function updateStopAndLossLastPrice(param){
+	if(isLogin){
+		var lastPrice = param.LastPrice;
+		var commodityNo = param.CommodityNo;
+		var contractNo = param.ContractNo;
+		var contractCode = commodityNo+contractNo;
+		var ulossContractCode = $("#ulossContractCode").text();
+		var stopEvenTd = $("#stopEvenTd").text();
+		if(contractCode == ulossContractCode){
+			$("#stopEvenPrice1").text(lastPrice);
+			$("#uEvenPrice").text(lastPrice);	
+		}
+		if(contractCode == stopEvenTd){
+			$("#stopEvenPrice").text(lastPrice);
+			$("#lossEventPrice").text(lastPrice); 
+		}
 	}
 }
 /**
@@ -2084,26 +3279,6 @@ function clearLocalCacheData(){
 	isBuy = false;
 	isGetVersion = false;
 	buyOrderPrice=0.00;
-}
-/**
- * 输入价格或数量验证 
- */
-function validationInputPrice(obj){
-	if(obj == undefined || obj == null || obj.length == 0 || parseFloat(obj) <= 0){
-		return true;
-	}else{
-		return false;
-	}
-}
-/**
- * 验证登录
- */
-function vadationIsLogin(){
-	if(username == null){
-		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
-		return false;
-	}
-	return true;
 }
 /**
  * 登录按钮事件
