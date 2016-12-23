@@ -1700,6 +1700,7 @@ $(function(){
 	 * 增加止损单监听文本框
 	 */
 	$("#stopChoicePrices1").bind("input",function(){  
+		$("#lossIncrease2").text(0);
 		var contractCode = $("#stopEvenTd").text();
 		var localCommodity = getMarketCommdity(contractCode);
 		if(localCommodity == undefined){
@@ -1746,6 +1747,7 @@ $(function(){
 	 * 修改止损单监听文本框
 	 */
 	$("#stopChoicePrices3").bind("input",function(){  
+		$("#Increase2").text(0);
 		var contractCode = $("#stopEvenTd1").text();
 		var localCommodity = getMarketCommdity(contractCode);
 		if(localCommodity == undefined){
