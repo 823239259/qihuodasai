@@ -1700,7 +1700,7 @@ $(function(){
 	 * 增加止损单监听文本框
 	 */
 	$("#stopChoicePrices1").bind("input",function(){  
-		$("#lossIncrease2").text(0);
+		$("#Increase").text(0);
 		var contractCode = $("#stopEvenTd").text();
 		var localCommodity = getMarketCommdity(contractCode);
 		if(localCommodity == undefined){
@@ -1733,9 +1733,9 @@ $(function(){
 				}
 			}*/
 			if(stopDrection == 0){
-				scale = (holdAvgPrice - stopChoicePrices1) / stopChoicePrices1 * 100;
+				scale = (stopChoicePrices1 - holdAvgPrice) / holdAvgPrice * 100;
 			}else if(stopDrection == 1){
-				scale = (stopChoicePrices1 - holdAvgPrice) / stopChoicePrices1 * 100;
+				scale = (stopChoicePrices1 - holdAvgPrice) / holdAvgPrice * 100;
 			}
 		}else if(stopType == 2){
 			scale = stopChoicePrices1 / stopEvenPrice * 100;
@@ -1780,9 +1780,9 @@ $(function(){
 				}
 			}*/
 			if(stopDrection == 0){
-				scale = (holdAvgPrice - stopChoicePrices3) / stopChoicePrices3 * 100;
+				scale = (stopChoicePrices3 - holdAvgPrice) / holdAvgPrice * 100;
 			}else if(stopDrection == 1){
-				scale = (stopChoicePrices3 - holdAvgPrice) / stopChoicePrices3 * 100;
+				scale = (stopChoicePrices3 - holdAvgPrice) / holdAvgPrice * 100;
 			}
 		}else if(stopType == 2){
 			scale = stopChoicePrices3 / stopEvenPrice * 100;
@@ -1825,9 +1825,9 @@ $(function(){
 		}*/
 		var scale = 0.00;
 		if(drection == 0){
-			scale = (lossChoicePrices2 - holdAvgPrice) / lossChoicePrices2 * 100;
+			scale = (holdAvgPrice - lossChoicePrices2) / holdAvgPrice * 100;
 		}else if(drection == 1){
-			scale = (holdAvgPrice - lossChoicePrices2) / lossChoicePrices2 * 100;
+			scale = (holdAvgPrice - lossChoicePrices2) / holdAvgPrice * 100;
 		}
 		$("#lossIncrease1").text(parseFloat(scale).toFixed(2)+"%");
 		$("#lossChoicePrices2").val(lossChoicePrices2);
@@ -1867,7 +1867,7 @@ $(function(){
 		}*/
 		var scale = 0.00;
 		if(drection == 0){
-			scale = (uLossPrice - holdAvgPrice) / uLossPrice * 100;
+			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
 		}else if(drection == 1){
 			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
 		}
