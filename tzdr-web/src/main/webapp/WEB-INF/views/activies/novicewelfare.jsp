@@ -21,7 +21,7 @@
 	<div class="xsfl-bottom">免费金牌-第一手交易，双边手续费全免</div>
 	<div class="xsfl-content">
 		<div class="xsfl-xx">
-			<p class="xsfl-xx-title">活动期间，首次进行交易，并终结方案，可免第一手双边交易费，免首笔合约为：富时A50（CN）、恒指期货（HSI）、国际原油（CL）主力合约。</p>
+			<p class="xsfl-xx-title">活动期间，首次进行交易，并终结方案，可免第一手双边交易费，免首笔合约为：不限品种。</p>
 			<p class="xsfl-xx-js" style="margin-top: 40px;">注：<p>
 			<p class="xsfl-xx-js">1、首次终结方案时，自动免除一手交易费，每位实名操盘用户仅限1手；</p>
 			<p class="xsfl-xx-js">2、有任何交易行为的用户，则不算新用户，请知悉；</p>
