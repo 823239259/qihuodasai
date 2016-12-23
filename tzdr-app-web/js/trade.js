@@ -56,12 +56,12 @@ function linearlyLoadData(method) {
 			accountFirstLoadDataIndex++;
 		}
 	}else if (method == "OnRspQryAccount"){
-		if(stopLossLoadDataIndex == 0){
+		if(stopLossLoadDataIndex == 0 && tradeWebSocketIsMock == 1){
 			Trade.doQryStopLoss(username);
 			stopLossLoadDataIndex++;
-		}
+		} 
 	}else if(method == "OnRspQryStopLoss"){
-		if(conditionLoadDataIndex == 0){
+		if(conditionLoadDataIndex == 0  && tradeWebSocketIsMock == 1){
 			Trade.doQryCondition(username);
 			conditionLoadDataIndex++; 
 		}

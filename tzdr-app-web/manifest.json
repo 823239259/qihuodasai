@@ -1394,7 +1394,8 @@
 				"refer": [
 					"tzdr/account/weixinPay.html",
 					"tzdr/account/bankPay.html",
-					"tzdr/account/gopay.html"
+					"tzdr/account/gopay.html",
+					"tzdr/account/alipay.html"
 				],
 				"priority": 0
 			},
