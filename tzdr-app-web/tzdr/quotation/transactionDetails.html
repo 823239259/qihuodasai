@@ -86,7 +86,7 @@
 				top: 16px;
 				right: 6px;
 				/*height: 65px;*/
-				height: 150px;
+				height: 100px;
 				width: 35%;
 			}
 			#topPopover.mui-popover{
@@ -402,10 +402,10 @@
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
 								</li>
-								<li class="mui-table-view-cell">
+								<!--<li class="mui-table-view-cell">
 									<a id="openCondition">条件单</a>
-								</li>
-								<li class="mui-table-view-cell">
+								</li>-->
+								<li class="mui-table-view-cell" id="openStopButton">
 									<a id="openStop">止损单</a>
 								</li>
 								<li class="mui-table-view-cell">
@@ -823,6 +823,15 @@
 			</div>
 		</body>
 			<script>
+				function init(param){
+					$("#exchangeNo").val(param[3]);
+					$("#commodeityNo").val(param[2]);
+					$("#contractNo").val(param[1]);
+					$("#contractSize").val(param[5]);
+					$("#lastPrice").text(param[7]);
+					$("#miniTikeSize").val(param[6]);
+					$("#doSize").val(param[4]);
+				}
 				mui.plusReady(function(){
 				loadCss();
 				var Proportion=1;
@@ -999,6 +1008,10 @@
 					$("#switchBuy").text("模拟买入");
 					$("#marketSell ").text("模拟卖出");
 					$("#switchSell").text("模拟卖出");
+					$("#openStopButton").css("display","block");
+					$("#stopLoss").css("display","block");
+					$("#Open").css("right","25%");
+					$("#allOpen").css("right","50%");
 				}
 				var network = false;
 				mui('.mui-scroll-wrapper').scroll();
@@ -1048,17 +1061,16 @@
 						mui("#topPopover").popover("toggle");
 						$(".mui-content").eq(2).css("z-index","998");
 					}else{
-//						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}})
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
 				});
-				document.getElementById("openCondition").addEventListener("tap",function(){
+				/**document.getElementById("openCondition").addEventListener("tap",function(){
 					$("#bg1").css("display","none");
 					$("#bg3").css("display","none");
 					$("#bg2").css("display","block");
 					mui("#topPopover").popover("toggle");
 					$(".mui-content").eq(1).css("z-index","998");
-				});
+				});**/
 				$("#clickTable").on("tap",".testclick1",function(){
 					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
         			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
@@ -1081,15 +1093,6 @@
 				tradeSetTimeOut = setTimeout(function(){
 								plus.nativeUI.closeWaiting(); 
 							},10000);
-			}
-			function init(param){
-				$("#exchangeNo").val(param[3]);
-				$("#commodeityNo").val(param[2]);
-				$("#contractNo").val(param[1]);
-				$("#contractSize").val(param[5]);
-				$("#lastPrice").text(param[7]);
-				$("#miniTikeSize").val(param[6]);
-				$("#doSize").val(param[4]);
 			}
 			function cachTranFers(param){ 
 				tranferParam = param;

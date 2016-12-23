@@ -2809,7 +2809,7 @@ function doGetInsertLossLoss(){
 			var exchangeNo = localQuote.ExchangeNo;
 			var commodityNo = localQuote.CommodityNo;
 			var contractNo = localQuote.ContractNo; 
-			var tradeparam = createInsertStopLossParam(exchangeNo,commodityNo,contractNo,$holdNum.text(),stopLossType,parseFloat(Math.abs(stopLossDiff)).toFixed(2),$holdAvgPrice.text(),drection,choiceStopPrices4,parseFloat(lossChoicePrices2).toFixed(2));
+			var tradeparam = createInsertStopLossParam(exchangeNo,commodityNo,contractNo,stopNumber,stopLossType,parseFloat(Math.abs(stopLossDiff)).toFixed(2),$holdAvgPrice.text(),drection,choiceStopPrices4,parseFloat(lossChoicePrices2).toFixed(2));
 			if(tradeparam == undefined){
 				tip("交易错误,请重试"); 
 			}
