@@ -645,11 +645,6 @@ function updateDesignatesDom(param){
 	var orderPrice = param.OrderPrice;
 	var orderStatus = param.OrderStatus;
 	var priceType = param.PriceType;
-    orderPrice = parseFloat(orderPrice).toFixed(dotSize);
-	var orderPriceText = orderPrice;
-    if(priceType == 1){
-   		orderPriceText = "市价";
-    }
 	var $gdNum = $("li[data-order-des='"+orderId+"'] span[class = 'desig4']");
 	var $orderPrice = $("li[data-order-des='"+orderId+"'] span[class = 'desig2']");
 	var $orderNum = $("li[data-order-des='"+orderId+"'] span[class = 'desig3']");
@@ -659,6 +654,8 @@ function updateDesignatesDom(param){
     if(localCommodity != undefined){ 
     		dotSize = Number(localCommodity.DotSize);
     }
+     var orderPriceText = orderPrice;
+      orderPrice = parseFloat(orderPrice).toFixed(dotSize);
 	if(holdNum == 0){
 		//当挂单为0时，清理dom节点和存储数据
 		delDesignatesDom(contractCode);
@@ -666,8 +663,8 @@ function updateDesignatesDom(param){
 	}else if(holdNum != 0){ 
 		$gdNum.text(holdNum);
 		$orderNum.text(orderNum);
-		$orderPrice.attr("data-orderPrice",parseFloat(orderPrice).toFixed(dotSize));
-		$orderPrice.text(parseFloat(orderPrice).toFixed(dotSize));
+		$orderPrice.attr("data-orderPrice",orderPrice);
+		$orderPrice.text(orderPrice);
 		//更新储存数据
 		var desiContract = localCacheDesignate[contractCode];
 		desiContract.cdNum = holdNum;
