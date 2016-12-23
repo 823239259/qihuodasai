@@ -58,12 +58,12 @@ function linearlyLoadData(method) {
 			accountFirstLoadDataIndex++;
 		}
 	}else if (method == "OnRspQryAccount"){
-		if(stopLossLoadDataIndex == 0){
+		if(stopLossLoadDataIndex == 0 && tradeWebSocketIsMock == 1){
 			Trade.doQryStopLoss(username);
 			stopLossLoadDataIndex++;
 		}
 	}else if(method == "OnRspQryStopLoss"){
-		if(conditionLoadDataIndex == 0){
+		if(conditionLoadDataIndex == 0 && tradeWebSocketIsMock == 1){
 			Trade.doQryCondition(username);
 			conditionLoadDataIndex++; 
 		}
@@ -1742,7 +1742,7 @@ $(function(){
 		}else if(stopType == 2){
 			scale = stopChoicePrices1 / stopEvenPrice * 100;
 		}
-		$("#Increase").text(parseFloat(scale).toFixed(2)+"%");
+		$("#Increase").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#stopChoicePrices1").val(stopChoicePrices1);
 	});
 	/**
@@ -1789,7 +1789,7 @@ $(function(){
 		}else if(stopType == 2){
 			scale = stopChoicePrices3 / stopEvenPrice * 100;
 		}
-		$("#Increase2").text(parseFloat(scale).toFixed(2)+"%");
+		$("#Increase2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#stopChoicePrices3").val(stopChoicePrices3);
 	});
 	/**
@@ -1831,7 +1831,7 @@ $(function(){
 		}else if(drection == 1){
 			scale = (holdAvgPrice - lossChoicePrices2) / holdAvgPrice * 100;
 		}
-		$("#lossIncrease1").text(parseFloat(scale).toFixed(2)+"%");
+		$("#lossIncrease1").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#lossChoicePrices2").val(lossChoicePrices2);
 	});
 	/**
@@ -1873,7 +1873,7 @@ $(function(){
 		}else if(drection == 1){
 			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
 		}
-		$("#lossIncrease2").text(parseFloat(scale).toFixed(2)+"%");
+		$("#lossIncrease2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#uLossPrice").val(uLossPrice);
 	});
 }); 
