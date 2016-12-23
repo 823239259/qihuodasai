@@ -656,7 +656,7 @@ function updateDesignatesDom(param){
 	var holdNum = orderNum - tradeNum;
 	var localCommodity = getMarketCommdity(commodityNo+contractNo);
     var dotSize = 2;
-    if(localCommodity != undefined){
+    if(localCommodity != undefined){ 
     		dotSize = Number(localCommodity.DotSize);
     }
 	if(holdNum == 0){
@@ -666,11 +666,8 @@ function updateDesignatesDom(param){
 	}else if(holdNum != 0){ 
 		$gdNum.text(holdNum);
 		$orderNum.text(orderNum);
-		var priceType = $orderPrice.attr("data-priceType");
-		if(priceType == 1){
-			$orderPrice.text(orderPriceText);
-		} 
-		$orderPrice.attr("data-orderPrice",orderPrice);
+		$orderPrice.attr("data-orderPrice",parseFloat(orderPrice).toFixed(dotSize));
+		$orderPrice.text(parseFloat(orderPrice).toFixed(dotSize));
 		//更新储存数据
 		var desiContract = localCacheDesignate[contractCode];
 		desiContract.cdNum = holdNum;
