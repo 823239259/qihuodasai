@@ -150,7 +150,7 @@ function input(){
 				var tradeDetail = result.data.tradeDetail;
 				var html = appendTradeDetailHtml(tradeDetail, 0);
 				$("#tradeDetail").html(html);
-				handleData(data,tradeDetail,0);
+				handleData(data,0);
 			}
 		});
 		$("#inputWin").show();
@@ -179,7 +179,7 @@ function importExcl(){
 	            	var data = result.data.data;
 	            	var html = appendTradeDetailHtml(data, 1);
 	            	$("#tradeDetail").html(html);
-	            	handleData(result.data.dataLever,data,1);
+	            	handleData(result.data.dataLever,1);
 	            	localDataLever = JSON.stringify(data);
 	            }else{
 	            	Check.messageBox("提示",data.message);
@@ -262,9 +262,17 @@ function handleData(fast,index){
 		}else if(bussType == "富时A50"){
 			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
 		}else if(bussType == "国际原油"){
-			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+			if(index == 1){
+				$("#tranActualLever").val(dataLever.crudeTranActualLever==undefined?0:dataLever.crudeTranActualLever);
+			}else if(index == 0){
+				$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+			}
 		}else if(bussType == "恒生指数"){
-			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+			if(index == 1){
+				$("#tranActualLever").val(dataLever.hsiTranActualLever==undefined?0:dataLever.hsiTranActualLever);
+			}else if(index == 0){
+				$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
+			}
 		}
 		$("#tranProfitLoss").val(dataLever.tranProfitLoss);
 }

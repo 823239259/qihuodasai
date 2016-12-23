@@ -37,53 +37,53 @@ $(function(){
         $("#economicCalendar_trailer_Content").empty();
         for(var i=0;i<dataAll.length;i++){
             //for(var s=0;s<val.length;s++){
-                if(val.indexOf(dataAll[i].country)>=0){
-                    var date= new Date(parseInt(dataAll[i].timestamp) * 1000).Format("hh:mm");
-                    var star;
-                    if(dataAll[i].importance==1){
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-                    }else if(dataAll[i].importance==2){
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-                    }else if(dataAll[i].importance==3){
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
-                    }else{
-                        star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
-                    }
-                    if(dataAll[i].actual==null || dataAll[i].actual=="null" || dataAll[i].actual==""){
-                        dataAll[i].actual="--";
-                    }
-                    if(dataAll[i].forecast==null || dataAll[i].forecast=="null" || dataAll[i].forecast==""){
-                        dataAll[i].forecast="--";
-                    }
-                    if(dataAll[i].previous==null || dataAll[i].previous=="null" || dataAll[i].previous==""){
-                        dataAll[i].previous="--";
-                    }
-                    if(dataAll[i].calendarType=="FE"){
-                        $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
-                            "<li class='data'>"+date+"</li>"+
-                            "<li class='importance'>"+star+"</li>"+
-                            " <li class='countries'>"+dataAll[i].country+"</li>"+
-                            "  <li class='detailed'>"+dataAll[i].title+"</li>"+
-                            " </ul>");
-                    }else if(dataAll[i].calendarType=="FD"){
-                        $(" .economicCalendar_content .calendar_time_tab").append("<ul>"+
-                            "<li class='data'>"+date+"</li>"+
-                            "<li class='importance'>"+star+"</li>"+
-                            " <li class='countries'>"+dataAll[i].country+"</li>"+
-                            "  <li class='incident'>"+dataAll[i].title+"</li>"+
-                            " <li class='newValue'>"+dataAll[i].actual+"</li>"+
-                            "<li class='expect'>"+dataAll[i].forecast+"</li>"+
-                            "<li class='formerValue'>"+dataAll[i].previous+"</li>"+
-                            " </ul>");
-                    }else if(dataAll[i].calendarType=="VN"){
-                        $(" .economicCalendar_trailer .calendar_time_tab #economicCalendar_trailer_Content").append("<ul>"+
-                            "<li class='data'>"+date+"</li>"+
-                            "<li class='importance'>"+star+"</li>"+
-                            " <li class='countries'>"+dataAll[i].country+"</li>"+
-                            "  <li class='detailed'>"+dataAll[i].title+"</li>"+
-                            " </ul>");
-                    }
+            if(val.indexOf(dataAll[i].country)>=0){
+                var date= new Date(parseInt(dataAll[i].timestamp) * 1000).Format("hh:mm");
+                var star;
+                if(dataAll[i].importance==1){
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
+                }else if(dataAll[i].importance==2){
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
+                }else if(dataAll[i].importance==3){
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
+                }else{
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
                 }
+                if(dataAll[i].actual==null || dataAll[i].actual=="null" || dataAll[i].actual==""){
+                    dataAll[i].actual="--";
+                }
+                if(dataAll[i].forecast==null || dataAll[i].forecast=="null" || dataAll[i].forecast==""){
+                    dataAll[i].forecast="--";
+                }
+                if(dataAll[i].previous==null || dataAll[i].previous=="null" || dataAll[i].previous==""){
+                    dataAll[i].previous="--";
+                }
+                if(dataAll[i].calendarType=="FE"){
+                    $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+dataAll[i].country+"</li>"+
+                        "  <li class='detailed'>"+dataAll[i].title+"</li>"+
+                        " </ul>");
+                }else if(dataAll[i].calendarType=="FD"){
+                    $(" .economicCalendar_content .calendar_time_tab").append("<ul>"+
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+dataAll[i].country+"</li>"+
+                        "  <li class='incident'>"+dataAll[i].title+"</li>"+
+                        " <li class='newValue'>"+dataAll[i].actual+"</li>"+
+                        "<li class='expect'>"+dataAll[i].forecast+"</li>"+
+                        "<li class='formerValue'>"+dataAll[i].previous+"</li>"+
+                        " </ul>");
+                }else if(dataAll[i].calendarType=="VN"){
+                    $(" .economicCalendar_trailer .calendar_time_tab #economicCalendar_trailer_Content").append("<ul>"+
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+dataAll[i].country+"</li>"+
+                        "  <li class='detailed'>"+dataAll[i].title+"</li>"+
+                        " </ul>");
+                }
+            }
             //}
         }
     }
@@ -110,15 +110,21 @@ $(function(){
         var y = dd.getFullYear();
         var m = dd.getMonth()+1;//获取当前月份的日期
         var d = dd.getDate();
-        return y+"年"+m+"月"+d+"日";
+        var i ="",j="";
+        if(m<10){
+            i="0";
+        }
+        if(d<10){
+            j="0";
+        }
+        return y+"年"+i+m+"月"+j+d+"日";
     }
-   function updateDate(date){
-       var date=new Date(date);
-       var y = date.getFullYear();
-       var m = date.getMonth()+1;//获取当前月份的日期
-       var d = date.getDate();
-       console.log(date);
-       return y+"-"+m+"-"+d;
+    function updateDate(date){
+        var date=new Date(date);
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;//获取当前月份的日期
+        var d = date.getDate();
+        return y+"-"+m+"-"+d;
     }
     function GetDateStrDate(date) {
         var dd = new Date(date);
@@ -171,13 +177,21 @@ $(function(){
         var friday = new Date(monday.getTime() + (4 * millisecond));
         var saturday = new Date(monday.getTime() + (5 * millisecond));
         var sunday = new Date(monday.getTime() + (6 * millisecond));//本周日
-        $(".monday").html((monday.getMonth() + 1) + '月' + monday.getDate() + '日');
-        $(".tuesday").html((tuesday.getMonth() + 1) + '月' + tuesday.getDate() + '日');
-        $(".wednesday").html((wednesday.getMonth() + 1) + '月' + wednesday.getDate() + '日');
-        $(".thursday").html((thursday.getMonth() + 1) + '月' + thursday.getDate() + '日');
-        $(".friday").html((friday.getMonth() + 1) + '月' + friday.getDate() + '日');
-        $(".saturday").html((saturday.getMonth() + 1) + '月' + saturday.getDate() + '日');
-        $(".sunday").html((sunday.getMonth() + 1) + '月' + sunday.getDate() + '日');
+        var i ="",j="";
+        if(monday.getMonth()<9){
+            i="0";
+        }
+        if(monday.getDate()<10){
+            j="0";
+        }
+        $(".monday").html(i+(monday.getMonth() + 1) + '/'+ j + monday.getDate()).attr("data-date",(monday.getMonth() + 1) + '月' + monday.getDate() + '日');
+        $(".tuesday").html(i+(tuesday.getMonth() + 1) + '/'+ j + tuesday.getDate()).attr("data-date",(tuesday.getMonth() + 1) + '月' + tuesday.getDate() + '日');
+        $(".wednesday").html(i+(wednesday.getMonth() + 1) + '/'+ j + wednesday.getDate()).attr("data-date",(wednesday.getMonth() + 1) + '月' + wednesday.getDate() + '日');
+        $(".thursday").html(i+(thursday.getMonth() + 1) + '/'+ j + thursday.getDate()).attr("data-date",(thursday.getMonth() + 1) + '月' + thursday.getDate() + '日');
+        $(".friday").html(i+(friday.getMonth() + 1) + '/'+ j + friday.getDate()).attr("data-date",(friday.getMonth() + 1) + '月' + friday.getDate() + '日');
+        $(".saturday").html((saturday.getMonth() + 1) + '/'+ j + saturday.getDate()).attr("data-date",(saturday.getMonth() + 1) + '月' + saturday.getDate() + '日');
+        $(".sunday").html(i+(sunday.getMonth() + 1) + '/'+ j + sunday.getDate()).attr("data-date",(sunday.getMonth() + 1) + '月' + sunday.getDate() + '日');
+
         if(week==1){
             $(".monday").parent().addClass("on");
         }else if(week==2){
@@ -200,13 +214,11 @@ $(function(){
     });
     insertDataF();
     $(".time li").click(function () {
-        var index=$(this).index();
-        $(".time li a").removeClass("on").eq(index).addClass("on");
-        console.log(index);
-        var text="2016年"+$(".time li span").eq(index).text();
+        var index=$(this);
+        $(".time li a").removeClass("on").eq(index.index()).addClass("on");
+        var text="2016年"+index.find("span").attr("data-date");
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
-        console.log("startDate   "+startDate+"endDate         "+endDate);
         var params={
             pageIndex:0,
             startTime:startDate,
@@ -241,7 +253,6 @@ $(function(){
             if(data[i].previous==null || data[i].previous=="null" || data[i].previous==""){
                 data[i].previous="--";
             }
-            console.log(data[i].calendarType);
             if(data[i].calendarType=="FE"){
                 $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
                     "<li class='data'>"+date+"</li>"+
@@ -267,14 +278,13 @@ $(function(){
                     "  <li class='detailed'>"+data[i].title+"</li>"+
                     " </ul>");
             }
-
         }
+        ys();
     }
     function insertDataF(){
         var text=$("#today").text();
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
-        console.log("startDate   "+startDate+"endDate         "+endDate);
         var params={
             pageIndex:0,
             startTime:startDate,
@@ -292,11 +302,9 @@ $(function(){
             if(obj[i].checked){
                 s+=obj[i].value+','; //如果选中，将value添加到变量s中
                 valList+=$(".input_check").eq(i+1).text()+",";
-                console.log($(".input_check").eq(i+1).text())
             }
         }
         if(valList.length>0){
-            console.log(valList);
             if(valList.indexOf("全部类别")>=0){
                 insertData(dataAll);
             }else{
@@ -305,5 +313,18 @@ $(function(){
         }else{
             insertData(dataAll);
         }
-    })
+    });
+    function ys(){
+        var tab =$(".calendar_time_tab ul");
+        var table =$(".economicCalendar_left .economicCalendar_table");
+        table.each(function(){
+            tab.each(function(index){
+                var tab1= tab.eq(index).children(".countries");
+                var tab2= tab.eq(index+1).children(".countries");
+                if(tab1.html() != tab2.html()){
+                    tab2.parent().css("border-top","1px solid #e6e6e6");
+                }
+            });
+        });
+    }
 });

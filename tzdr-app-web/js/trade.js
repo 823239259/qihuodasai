@@ -10,6 +10,8 @@ var tradeFirsetLoadDataIndex = 0;
 var stopLossLoadDataIndex = 0;
 //条件单查询发送请求次数记录
 var conditionLoadDataIndex = 0;
+//存储判断止损止盈提示
+var textList=["止损","止盈"];
 /**
  * 用户登陆成功加载数据
  */ 
@@ -1700,7 +1702,7 @@ $(function(){
 	 * 增加止损单监听文本框
 	 */
 	$("#stopChoicePrices1").bind("input",function(){  
-		$("#lossIncrease2").text(0);
+		$("#Increase").text(0);
 		var contractCode = $("#stopEvenTd").text();
 		var localCommodity = getMarketCommdity(contractCode);
 		if(localCommodity == undefined){
@@ -1733,14 +1735,14 @@ $(function(){
 				}
 			}*/
 			if(stopDrection == 0){
-				scale = (holdAvgPrice - stopChoicePrices1) / stopChoicePrices1 * 100;
+				scale = (stopChoicePrices1 - holdAvgPrice) / holdAvgPrice * 100;
 			}else if(stopDrection == 1){
-				scale = (stopChoicePrices1 - holdAvgPrice) / stopChoicePrices1 * 100;
+				scale = (stopChoicePrices1 - holdAvgPrice) / holdAvgPrice * 100;
 			}
 		}else if(stopType == 2){
 			scale = stopChoicePrices1 / stopEvenPrice * 100;
 		}
-		$("#Increase").text(parseFloat(scale).toFixed(2)+"%");
+		$("#Increase").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#stopChoicePrices1").val(stopChoicePrices1);
 	});
 	/**
@@ -1780,14 +1782,14 @@ $(function(){
 				}
 			}*/
 			if(stopDrection == 0){
-				scale = (holdAvgPrice - stopChoicePrices3) / stopChoicePrices3 * 100;
+				scale = (stopChoicePrices3 - holdAvgPrice) / holdAvgPrice * 100;
 			}else if(stopDrection == 1){
-				scale = (stopChoicePrices3 - holdAvgPrice) / stopChoicePrices3 * 100;
+				scale = (stopChoicePrices3 - holdAvgPrice) / holdAvgPrice * 100;
 			}
 		}else if(stopType == 2){
 			scale = stopChoicePrices3 / stopEvenPrice * 100;
 		}
-		$("#Increase2").text(parseFloat(scale).toFixed(2)+"%");
+		$("#Increase2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#stopChoicePrices3").val(stopChoicePrices3);
 	});
 	/**
@@ -1825,11 +1827,11 @@ $(function(){
 		}*/
 		var scale = 0.00;
 		if(drection == 0){
-			scale = (lossChoicePrices2 - holdAvgPrice) / lossChoicePrices2 * 100;
+			scale = (holdAvgPrice - lossChoicePrices2) / holdAvgPrice * 100;
 		}else if(drection == 1){
-			scale = (holdAvgPrice - lossChoicePrices2) / lossChoicePrices2 * 100;
+			scale = (holdAvgPrice - lossChoicePrices2) / holdAvgPrice * 100;
 		}
-		$("#lossIncrease1").text(parseFloat(scale).toFixed(2)+"%");
+		$("#lossIncrease1").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#lossChoicePrices2").val(lossChoicePrices2);
 	});
 	/**
@@ -1867,11 +1869,11 @@ $(function(){
 		}*/
 		var scale = 0.00;
 		if(drection == 0){
-			scale = (uLossPrice - holdAvgPrice) / uLossPrice * 100;
+			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
 		}else if(drection == 1){
 			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
 		}
-		$("#lossIncrease2").text(parseFloat(scale).toFixed(2)+"%");
+		$("#lossIncrease2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#uLossPrice").val(uLossPrice);
 	});
 }); 
@@ -2220,7 +2222,7 @@ function bindOpertion(){
 				alertProtype("止损价差会导致立即触发,请重新设置","提示",Btn.confirmed());
 				return;
 			}
-			alertProtype("是否修改【"+contractCode+"】"+typeText+"止损","提示",Btn.confirmedAndCancle(),doUpdateModifyStopLoss);
+			alertProtype("是否修改【"+contractCode+"】"+typeText,"提示",Btn.confirmedAndCancle(),doUpdateModifyStopLoss);
 		}else{
 			tip("未登录,请先登录");
 		}
@@ -2320,7 +2322,7 @@ function bindOpertion(){
 				alertProtype("止盈价差会导致立即触发,请重新设置","提示",Btn.confirmed());
 				return;
 			}
-			alertProtype("是否修改【"+contractCode+"】止盈","提示",Btn.confirmedAndCancle(),doUpdateModifyLoss);
+			alertProtype("是否修改【"+contractCode+"】止盈单","提示",Btn.confirmedAndCancle(),doUpdateModifyLoss);
 		}else{
 			tip("未登录,请先登录")
 		}
@@ -2337,6 +2339,8 @@ function bindOpertion(){
 			} 
 			var $this = $(this);
 			var modifyFlag = $this.val();
+			var textAll=$("#"+stopLossNo+" td[class = 'stoploss3']").text();
+			var textTip="止损"
 			operationStopLossType = modifyFlag;
 			var operationText = "";
 			if(operationStopLossType == undefined){
@@ -2351,7 +2355,12 @@ function bindOpertion(){
 			}else if(operationStopLossType == 3){
 				operationText = "启动";
 			}
-			alertProtype("是否"+operationText+"止损单？","提示",Btn.confirmedAndCancle(),doStopAndDelModifyStopLoss);
+			for(var i=0;i<textList.length;i++){
+				if(textAll.indexOf(textList[i])>=0){
+					textTip=textList[i];
+				}
+			}
+			alertProtype("是否"+operationText+textTip+"单？","提示",Btn.confirmedAndCancle(),doStopAndDelModifyStopLoss);
 		}else{
 			tip("未登录,请先登录")
 		}

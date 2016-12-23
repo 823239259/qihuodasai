@@ -58,6 +58,8 @@ public class DxtxPayCallBackController {
 				channel = Channel.WX;
 			}else if(tradeType.equals("3")){
 				channel = Channel.QUICK;
+			}else if(tradeType.equals("6")){
+				channel = Channel.WX_PUB_QR;
 			}
 			if(dxtxPayResultModel.getTradeStatus().equals("TRADE_SUCCESS")){
 				remark = ""+channel.getChannelNote()+"充值"+tranAmt+"元";
