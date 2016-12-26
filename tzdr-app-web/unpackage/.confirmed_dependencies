@@ -1061,7 +1061,8 @@
 			"js/lightChart.config.js",
 			"images/inputRadioBgC.png",
 			"images/inputRadioBg.png",
-			"images/graySanjiaoBg.png"
+			"images/graySanjiaoBg.png",
+			"js/echarts.min.js"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",

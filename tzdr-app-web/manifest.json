@@ -1170,7 +1170,8 @@
 					"images/inputRadioBg.jpg",
 					"images/inputRadioBg.png",
 					"images/graySanjiaoBg.png",
-					"images/insertIon.png"
+					"images/insertIon.png",
+					"js/echarts.min.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",

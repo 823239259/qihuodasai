@@ -667,7 +667,7 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    }
-		     newData=[]; 
+		     newData={}; 
     			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
 				var option = setOption(newData);
