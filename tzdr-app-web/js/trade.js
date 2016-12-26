@@ -3072,7 +3072,7 @@ function doGetSellingBasicParam(obj){
 		tip("平仓价格错误");
 		return false;
 	}
-	var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,0,Math.abs(limitPirce),0,doGetOrderRef());
+	var sellingParam = createSellingParam($exchangeNo,$commodityNo,$contractNo,$holdNum,drection,1,Math.abs(limitPirce),0,doGetOrderRef());
 	return sellingParam;
 }
 /**
