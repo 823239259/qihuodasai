@@ -105,6 +105,22 @@
 		                opacity: 1
 		            }
              	 },
+               	             formatter: function(params) {
+                  var time  = params[0].name;
+                  var kd    = params[0].data;
+                  var ma5 = params[1].data;
+                  var ma10 = params[2].data;
+                  var ma20 = params[3].data;
+                   var ma30 = params[4].data;
+                  var rate = (kd[1]-kd[0])/kd[0]*100;
+                  rate = rate > 0 ?( '+'+rate.toFixed(2)):rate.toFixed(2);
+                   var res = "时间:"+params[0].name+ '  涨跌 : ' + rate;
+		            res += '<br/>  开盘 : ' + kd[0] + '  最高 : ' + kd[3];
+		            res += '<br/>  收盘 : ' + kd[1] + ' 最低 : ' + kd[2];
+		              res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#c23531"></span> MA5 : ' + ma5 + '  MA10 : ' + ma10;
+		              res += '<br/>  MA20 : ' + ma20 + '  MA30 : ' + ma30;
+		            return res;
+              }
 		    },
 		    grid: {
 		               x: 43,
@@ -173,6 +189,7 @@
 	                type: 'line',
 	                data: calculateMA(5,data),
 	                smooth: true,
+	                 showSymbol: false,
 	                lineStyle: {
 	                    normal: {
 	                    	color: '#FD1050',
@@ -183,6 +200,7 @@
 	            {
 	                name: 'MA10',
 	                type: 'line',
+	                 showSymbol: false,
 	                data: calculateMA(10,data),
 	                smooth: true,
 	                lineStyle: {
@@ -195,6 +213,7 @@
 	            {
 	                name: 'MA20',
 	                type: 'line',
+	                 showSymbol: false,
 	                data: calculateMA(20,data),
 	                smooth: true,
 	                lineStyle: {
@@ -207,6 +226,7 @@
 	            {
 	                name: 'MA30',
 	                type: 'line',
+	                 showSymbol: false,
 	                data: calculateMA(30,data),
 	                smooth: true,
 	                lineStyle: {
