@@ -303,11 +303,11 @@ public class FTradeApplyVo implements Serializable {
 			this.ameCopperMarketLever = outDiskParameters.getaCopperActualLever();
 			this.ameSilverMarketLever = outDiskParameters.getaSilverActualLever();
 			this.smallCrudeOilMarketLever = outDiskParameters.getSmaActualLever();
+			this.daxtranMinActualLever = outDiskParameters.getDaxtranMinActualLever();
 			this.traderTotal=outDiskParameters.getTraderTotal();
 			this.lineLoss=outDiskParameters.getLineLoss();
 			this.payable=payable;
 			this.balance=balance;
-			this.daxtranMinActualLever = outDiskParameters.getDaxtranMinActualLever();
 		}
 		
 		

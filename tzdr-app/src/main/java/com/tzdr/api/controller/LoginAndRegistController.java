@@ -36,6 +36,7 @@ import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
+import com.tzdr.business.service.wuser.LoginLogService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.Dates;
@@ -89,12 +90,14 @@ public class LoginAndRegistController {
 	
 	@Autowired
 	private MockTradeAccountService mockTradeAccountService;
-
+	@Autowired
+	private LoginLogService loginLogService;
+	
 	private static Object lock = new Object();
 	
 	/**
 	 * 系统注册接口
-	 * @param requestObj
+	 * @param requestObj 用户注册接口请求类
 	 * @param request
 	 * @param response
 	 * @return
@@ -102,11 +105,11 @@ public class LoginAndRegistController {
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
-		final String mobile=requestObj.getMobile();
-		String code=requestObj.getCode();
-		final String password=requestObj.getPassword();
-		String parentGeneralizeId=requestObj.getParentGeneralizeId();
-	    String channel = requestObj.getChannel();
+		final String mobile=requestObj.getMobile();//电话
+		final String password=requestObj.getPassword();//密码
+		String parentGeneralizeId=requestObj.getParentGeneralizeId();//推广码
+	    String channel = requestObj.getChannel();//渠道
+	    String source = requestObj.getSource();//来源
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(password)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
@@ -121,17 +124,23 @@ public class LoginAndRegistController {
 		}
 		
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
-		if (!ObjectUtil.equals(null, appUserVo)){
+		if (!ObjectUtil.equals(null, appUserVo)){//验证手机号码是否已被注册
 			return new ApiResult(false,ResultStatusConstant.Regist.MOBILE_EXIST,"mobile.exist.");
 		}
+		WUser wUser = new WUser();     //创建注册对象信息
 		
 		if(StringUtil.isNotBlank(parentGeneralizeId) 
 				&& ObjectUtil.equals(null, wUserService.findByGeneralizeId(parentGeneralizeId))){
 			return new ApiResult(false,ResultStatusConstant.Regist.ERROR_GENERALIZE_CODE,"error.generalize.code.");
 		}
+		//--start 高超：注册来源处理   2016/12/13 18:28--//
+		if("web".equals(source)){			
+			wUser.setSource(Constant.RegistSource.WEB_REGIST);
+		}else if("app".equals(source)){
+			wUser.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+		}
+		//--end 高超：注册来源处理   2016/12/13 18:28--//
 		
-		WUser wUser = new WUser();     //创建注册对象信息
-		wUser.setSource(Constant.RegistSource.APP_TZDR_REGIST);
 		WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
 		wUser.setUserType("0");
 		wUser.setParentNode(platformDefaultWuser);
@@ -209,7 +218,7 @@ public class LoginAndRegistController {
 		try {
 			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
 			/*mockTradeAccountService.openMockAccount(mobile, password);*/
-			messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
+			messagePromptService.registNotice(mobile, source, emailChannelName, emailChannelKeyWords);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -240,7 +249,7 @@ public class LoginAndRegistController {
 		String password=requestObj.getPassword();
 		
 		if (StringUtil.isBlank(loginName)
-				|| StringUtil.isBlank(password)){
+				|| StringUtil.isBlank(password)){//后台验证用户名和密码
 			return new ApiResult(false,ResultStatusConstant.Login.LOGIN_INFO_ERROR,"user.info.not.complete.");
 		}
 		if (!PasswordUtils.validatePwd(password)){
@@ -250,7 +259,10 @@ public class LoginAndRegistController {
 		if(ObjectUtil.equals(null, wUser)){   //判断是否登录成功
 			return new ApiResult(false,ResultStatusConstant.FAIL,"login.fail.");
 		}
-		wUserService.updateWUserByUserId(wUser.getId(), IpUtils.getIpAddr(request));   //记录登录信息
+		String ipAddr = IpUtils.getIpAddr(request);
+		wUserService.updateWUserByUserId(wUser.getId(), ipAddr);   //记录登录信息
+		// 记录登录成功日志
+		loginLogService.saveLog(ipAddr,IpAddressUtils.getAffiliationCity(ipAddr,"utf-8"), wUser.getId());
 		JSONObject  jsonObject = new JSONObject();
 		//登录成功 返回用户唯一标志token和对应由密码种子+uid生成的key值
 		String appToken = AuthUtils.createToken(wUser.getId());
@@ -284,7 +296,12 @@ public class LoginAndRegistController {
 		return true;
 	}
 	
-	//用户操盘中账户
+	/**
+	 * 用户操盘中账户
+	 * @param request
+	 * @param httpServletResponse
+	 * @return
+	 */
 	@RequestMapping(value = "/operateLogin",method=RequestMethod.POST)
 	@ResponseBody 
 	public ApiResult operateLogin(HttpServletRequest request,HttpServletResponse httpServletResponse){

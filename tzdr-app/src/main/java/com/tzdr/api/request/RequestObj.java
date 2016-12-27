@@ -104,7 +104,11 @@ public class RequestObj {
 	 */
 	private String channel;
 			
-			
+	/**
+	 *注册来源
+	 */
+	private String source;
+	
 	public String getUid() {
 		return uid;
 	}
@@ -263,6 +267,14 @@ public class RequestObj {
 
 	public void setChannel(String channel) {
 		this.channel = channel;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
 	}
 	
 	

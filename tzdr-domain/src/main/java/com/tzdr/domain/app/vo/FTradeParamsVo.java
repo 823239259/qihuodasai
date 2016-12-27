@@ -30,7 +30,7 @@ public class FTradeParamsVo implements Serializable {
 		
 		
 		/**
-		 * 单手保证金(人民币)
+		 * 保证金(人民币)
 		 */
 		@SqlOrder
 		@SqlColumn(name="trader_bond")
@@ -62,7 +62,7 @@ public class FTradeParamsVo implements Serializable {
 		private Integer hsiTranLever;
 		
 		/**
-		 *原油交易手数
+		 * 原油交易手数
 		 */
 		@SqlColumn(name="ytran_actual_lever")
 		private Integer crudeTranLever;

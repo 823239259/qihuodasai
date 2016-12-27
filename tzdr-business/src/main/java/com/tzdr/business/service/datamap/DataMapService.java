@@ -373,9 +373,7 @@ public class DataMapService extends BaseServiceImpl<DataMap, DataMapDao> {
 	   List<DataMap> dataMaps = getEntityDao().findByTypeKey(DataDicKeyConstants.WITHDRAW_SETTING);
 	   if (CollectionUtils.isEmpty(dataMaps)){
 		   return 0;
-	   }
-	   else
-	   {
+	   }else{
 		   String withdrawSetting = dataMaps.get(0).getValueKey();
 		   return NumberUtils.toInt(withdrawSetting);
 	   }

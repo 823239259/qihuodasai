@@ -11,8 +11,7 @@ import com.tzdr.olog.db.domain.Olog;
 import com.tzdr.olog.db.service.OlogService;
 
 @Service("ologService")
-public class OlogServiceImpl extends BaseServiceImpl<Olog, OlogDao> implements
-		OlogService {
+public class OlogServiceImpl extends BaseServiceImpl<Olog, OlogDao> implements OlogService {
 
 	@Transactional
 	@Override

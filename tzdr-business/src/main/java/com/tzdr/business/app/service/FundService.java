@@ -1,6 +1,7 @@
 package com.tzdr.business.app.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.utils.DateUtils;
 import com.tzdr.domain.app.vo.UserFundVo;
 import com.tzdr.domain.dao.pay.UserFundDao;
 import com.tzdr.domain.web.entity.UserFund;
@@ -81,6 +83,45 @@ public class FundService  extends BaseServiceImpl<UserFund,UserFundDao> {
 		StringBuffer sql  = new StringBuffer();
 		sql.append(" SELECT f.addtime,f.type,f.money,f.uptime,f.pay_status,f.lid,f.rid,f.remark ");
 		sql.append(" FROM w_user_fund f WHERE f.uid=? ORDER BY f.addtime DESC ");
+		List<UserFundVo> dataList = this.getEntityDao().queryListBySql(sql.toString(), UserFundVo.class, null, new Object[]{uid});
+		
+		return dataList;
+	}
+	
+	/**
+	 * @Title: findUserFundVos    
+	 * @Description: 获取用户资金明细信息(有条件)
+	 * @param uid
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<UserFundVo> findUserFundVos(String uid,String type,String starttime,String endtime){
+		
+		if(StringUtil.isBlank(uid)){
+			return null;
+		}
+		
+		StringBuffer sql  = new StringBuffer();
+		sql.append(" SELECT f.addtime,f.type,f.money,f.uptime,f.pay_status,f.lid,f.rid,f.remark ");
+		sql.append(" FROM w_user_fund f WHERE f.uid = ?");
+		
+		if(StringUtil.isNotBlank(type)){
+			sql.append(" and f.type in ('"+type+"')");
+		}
+		
+		if(StringUtil.isNotBlank(starttime)){
+			Date startdate=DateUtils.stringToDate(starttime, "yyyy-MM-dd");
+			long sdate=startdate.getTime()/1000;
+			sql.append(" and f.addtime >= '"+sdate+"' ");
+		}
+		
+		if(StringUtil.isNotBlank(endtime)){
+			endtime+=" 23:59:59";
+			Date enddate=DateUtils.stringToDate(endtime, "yyyy-MM-dd HH:mm:ss");
+			long edate=enddate.getTime()/1000;
+			sql.append(" and f.addtime <= '"+edate+"'");
+		}
+		sql.append(" ORDER BY f.addtime DESC" );
 		List<UserFundVo> dataList = this.getEntityDao().queryListBySql(sql.toString(), UserFundVo.class, null, new Object[]{uid});
 		
 		return dataList;

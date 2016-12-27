@@ -130,7 +130,7 @@ public class WUser extends BaseEntity {
 	private Integer insleep;
 	
 	/**
-	 * '1: web 2:wap 3:bbs';
+	 * '1: web 2:wap 3:bbs 4:p2p 6:直播 注册   7:投资达人 APP
 	 */
 	private int source;
 	private String keyword;
@@ -207,7 +207,7 @@ public class WUser extends BaseEntity {
 	 * 父节点
 	 */
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	 @JoinColumn(name = "parent_id")
+	@JoinColumn(name = "parent_id")
 	@JsonIgnore
 	private WUser parentNode;
 	/**

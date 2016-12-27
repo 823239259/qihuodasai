@@ -39,7 +39,7 @@ public interface PayService extends BaseService<RechargeList>{
 	 * 
 	 * @param source 来源
 	 * @param user 当前登陆用户
-	 * @param bankname 银行名称
+	 * @param bankname 银行简称
 	 * @param status 状态
 	 * @param bankCard 银行卡
 	 * @param paymoney 充值金额

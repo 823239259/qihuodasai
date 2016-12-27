@@ -296,7 +296,7 @@ public class VolumeController extends BaseCmsController<VolumeDeductible> {
 			return result;
 		}
 		
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(wuser.getId());
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(wuser.getId());
 		
 		Map<Object,Object> data = new HashMap<Object, Object>();
 		

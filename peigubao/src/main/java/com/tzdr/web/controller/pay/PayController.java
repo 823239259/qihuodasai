@@ -255,7 +255,7 @@ public class PayController {
 				synchronized (lock) {
 					UserVerified userVerified = userVerifiedService.queryUserVerifiedByAliAccount(alipayaccount);
 					if(ObjectUtil.equals(null, userVerified)) {
-						UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+						UserVerified uv = userVerifiedService.queryUserVerifiedByUid(user.getId());
 						//绑定支付宝账号
 						uv.setAlipayAccount(alipayaccount);
 						userVerifiedService.update(uv);
@@ -303,7 +303,7 @@ public class PayController {
 	public JsonResult queryUserAliAccount(HttpServletRequest request) {
 		UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 		JsonResult jsonResult = new JsonResult(Boolean.FALSE);
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(userSessionBean.getId());
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(userSessionBean.getId());
 		if(!ObjectUtil.equals(null, userVerified)) {
 			jsonResult.setSuccess(Boolean.TRUE);
 			jsonResult.appendData("aliAccount", userVerified.getAlipayAccount());

@@ -198,7 +198,7 @@ public class WuserAuthController  extends BaseCmsController<WUser>
 			for (WUser wu:wuseres.getPageResults()) {
 				WuserVo vo = new WuserVo(wu);
 				UserVerified userVerified = 
-						this.userVerifiedService.queryUserVerifiedByUi(wu.getId());
+						this.userVerifiedService.queryUserVerifiedByUid(wu.getId());
 				if (userVerified != null) {
 					vo.setIdcardFront(userVerified.getIdcardFront());
 					vo.setIdcardBack(userVerified.getIdcardBack());
@@ -226,7 +226,7 @@ public class WuserAuthController  extends BaseCmsController<WUser>
 			for (WUser wu:wuseres.getPageResults()) {
 				WuserVo vo = new WuserVo(wu);
 				UserVerified userVerified = 
-						this.userVerifiedService.queryUserVerifiedByUi(wu.getId());
+						this.userVerifiedService.queryUserVerifiedByUid(wu.getId());
 				if (userVerified != null) {
 					vo.setIdcardFront(userVerified.getIdcardFront());
 					vo.setIdcardBack(userVerified.getIdcardBack());

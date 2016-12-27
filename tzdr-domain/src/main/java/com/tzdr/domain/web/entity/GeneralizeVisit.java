@@ -8,24 +8,43 @@ import com.tzdr.common.domain.BaseEntity;
 @Entity
 @Table(name="w_generalize_visit")
 public class GeneralizeVisit  extends BaseEntity {
-	/**
-	 * 
-	 */ 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * client的IP
+	 */
 	private String clieantIp;
 	
+	/**
+	 * 添加时间
+	 */
 	private Long createdate;
 	
+	/**
+	 * 访问推广URL
+	 */
 	private String url;
 	
+	/**
+	 * 渠道来源编号
+	 */
 	private String param;
 	
+	/**
+	 * 城市
+	 */
 	private String city;
 	
+	/**
+	 * 推广人推广编号
+	 */
 	private String generalizeId;
 	
+	/**
+	 * 活动
+	 */
 	private String activity;
+	
 	@Column(name="clieant_ip")
 	public String getClieantIp() {
 		return this.clieantIp;

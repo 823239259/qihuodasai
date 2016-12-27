@@ -20,8 +20,8 @@ import com.tzdr.domain.web.entity.SocketConfig;
 @Transactional
 public class ScoketConfigServiceImp extends BaseServiceImpl<SocketConfig, SocketConfigDao> implements SocketConfigService{
 	@Override
-	public List<SocketConfig> findSocketConfigByAppVersion(String appVersion) {
-		return getEntityDao().findByAppVersion(appVersion);
+	public List<SocketConfig> findSocketConfigByAppVersion(String version) {
+		return getEntityDao().findByAppVersion(version);
 	}
 	@Override
 	public PageInfo<Object> doGetSocketConfig(EasyUiPageInfo easyUiPage, Map<String, Object> map) {

@@ -7,6 +7,10 @@ package com.tzdr.api.request;
  * @zhouchen
  * 2016年1月20日
  */
+/**
+ * @author gc
+ *
+ */
 public class BankRequest extends BaseRequet {
 
 	/**
@@ -23,6 +27,25 @@ public class BankRequest extends BaseRequet {
 	 * 银行卡号
 	 */
 	private String card;
+	/**
+	 * 确认银行卡号码
+	 */
+	private String agincard;
+	
+	/**
+	 * 省
+	 */
+	private String prov;
+	
+	/**
+	 * 城市
+	 */
+	private String city;
+	
+	/**
+	 * 具体地址
+	 */
+	private String address;
 
 	public String getBankId() {
 		return bankId;
@@ -47,4 +70,37 @@ public class BankRequest extends BaseRequet {
 	public void setCard(String card) {
 		this.card = card;
 	}
+
+	public String getProv() {
+		return prov;
+	}
+
+	public void setProv(String prov) {
+		this.prov = prov;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAgincard() {
+		return agincard;
+	}
+
+	public void setAgincard(String agincard) {
+		this.agincard = agincard;
+	}
+	
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
 import org.apache.commons.lang.math.NumberUtils;
@@ -72,16 +73,17 @@ public class UserCommonController {
 	@Autowired
 	private SecurityInfoService securityInfoService;
 	
-	/**
+   /**
 	* @Title: getbalancerate    
 	* @Description: 获取用户余额以及当前汇率信息
-	* @param businessType 业务类型     如： 1：股指期货追加保证金查询；2：股指期货终结方案查询；3：网银充值查询；
+	* @param businessType 业务类型     如： 1：股指期货追加保证金查询；2：股指期货终结方案查询；3：网银充值查询；4：账户余额实名、提现手续费查询
+	* @param couponBusinessType 优惠券使用范围     如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;
 	* @param modelMap
 	* @param request
 	* @param response
 	* @return
 	* @throws Exception
-	 */
+	*/
 	@RequestMapping(value = "/getbalancerate" , method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult getbalancerate(Integer businessType,Integer couponBusinessType ,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
@@ -90,12 +92,16 @@ public class UserCommonController {
 		
 		WUser wuser =  wUserService.get(uid);  //获取用户信息
 		
+		if(ObjectUtil.equals(null, wuser)){
+			return new ApiResult(false,ResultStatusConstant.Common.USER_INFO_NOT_EXIST,"user info not error");
+		}
+
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
 		dataMap.put("balance", wuser.getAvlBal());   //当前余额
 		dataMap.put("username", wuser.getUserVerified().getTname());   //用户实名
-		dataMap.put("isCertification",RequestUtils.isCertification(wuser));
-		dataMap.put("operateMoney", wuser.getCountOperateMoney());
+		dataMap.put("isCertification",RequestUtils.isCertification(wuser));  //是否实名认证
+		dataMap.put("operateMoney", wuser.getCountOperateMoney()); //累积总操盘金额(提现免手续费额度)
 		UserVerified userVerified = securityInfoService.findByUserId(wuser.getId());
 		String wxAccount = null;
 		if(userVerified != null){
@@ -103,15 +109,15 @@ public class UserCommonController {
 		}
 		dataMap.put("wxAccount",wxAccount);
 		//校验用户是否满足期货合买活动要求
-		if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
+		/*if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
 			dataMap.put("isFtogetherActivityUser",fTogetherTradeService.checkActivityTime() && fTogetherTradeService.checkIsNewUser(uid));   // 是否满足活动免费要求
 			dataMap.put("activityFreeMoney",Constant.FtogetherGame.ACTIVITY_FREE_MONEY);
-		}
+		}*/
 		
-		if (DataConstant.BUSINESSTYPE_WITHDRAW==businessType){
+		if (DataConstant.BUSINESSTYPE_WITHDRAW == businessType){
 			// 获取提现手续费
 			Double drawHandleFee = DataConstant.DEFAULT_HANDLE_FEE;
-			int withdrawSetting = dataMapService.getWithDrawSetting();
+			int withdrawSetting = dataMapService.getWithDrawSetting(); //2
 			String handleFeeStr = null;
 			if (Constant.PaymentChannel.UM_PAY == withdrawSetting){
 				//提现手续费

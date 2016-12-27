@@ -370,7 +370,7 @@ public class PayController {
 	private static Object lock = new Object();
 
 	/**
-	 * 国付宝支付
+	 * 网银（国付宝支付)
 	 * 
 	 * @param response
 	 * @param request
@@ -442,7 +442,7 @@ public class PayController {
 		return resultJson;
 	}
 	/**
-	 * 支付宝转账
+	 * 支付宝转账  || 银行转账
 	 * 
 	 * @param response
 	 * @param request
@@ -469,7 +469,7 @@ public class PayController {
 				synchronized (lock) {
 					UserVerified userVerified = userVerifiedService.queryUserVerifiedByAliAccount(alipayaccount);
 					if (ObjectUtil.equals(null, userVerified)) {
-						UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+						UserVerified uv = userVerifiedService.queryUserVerifiedByUid(user.getId());
 						// 绑定支付宝账号
 						uv.setAlipayAccount(alipayaccount);
 						userVerifiedService.update(uv);
@@ -528,7 +528,7 @@ public class PayController {
 			synchronized (lock) { 
 				UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
 				if (ObjectUtil.equals(null, userVerified)) {
-					UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+					UserVerified uv = userVerifiedService.queryUserVerifiedByUid(user.getId());
 					// 绑定微信账号
 					uv.setWxAccount(account);
 					userVerifiedService.update(uv);
@@ -557,7 +557,7 @@ public class PayController {
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 		JsonResult jsonResult = new JsonResult(Boolean.FALSE);
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(userSessionBean.getId());
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(userSessionBean.getId());
 		if (!ObjectUtil.equals(null, userVerified)) {
 			jsonResult.setSuccess(Boolean.TRUE);
 			jsonResult.appendData("aliAccount", userVerified.getAlipayAccount());
@@ -656,7 +656,7 @@ public class PayController {
 			resultJson.setMessage("用户信息不存在");
 			return resultJson;
 		}
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(uid);
 		if(userVerified != null){
 				synchronized (lock_wechat_transfer) {
 					List<RechargeList> rechargeLists = payService.findByTradeNoList(transactionNo);

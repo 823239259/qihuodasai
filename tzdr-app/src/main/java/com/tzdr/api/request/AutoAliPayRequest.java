@@ -13,7 +13,7 @@ import jodd.util.StringUtil;
  * @zhouchen
  * 2016年1月20日
  */
-public class AutoAliPayRequest {
+public class AutoAliPayRequest{
 
 	/**
 	 * 流水号 
@@ -97,7 +97,7 @@ public class AutoAliPayRequest {
 			|| StringUtil.isBlank(this.tradeTime)
 			|| StringUtil.isBlank(this.realName)
 			|| ObjectUtil.equals(null,money)
-			|| this.money <= DataConstant.ZERO_MONEY){
+			|| this.money < DataConstant.ONE){
 			
 			return true;
 		}

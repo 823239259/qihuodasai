@@ -1,23 +1,19 @@
 package com.tzdr.api.controller;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.alibaba.fastjson.JSONObject;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
@@ -25,6 +21,8 @@ import com.tzdr.business.app.service.FundService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.domain.app.vo.UserFundVo;
 import com.tzdr.domain.web.entity.WUser;
+import jodd.util.ObjectUtil;
+
 
 /**  
  * @Title: UserFundController.java     
@@ -47,7 +45,7 @@ public class UserFundController {
 	
 	@Autowired
 	private WUserService  wUserService;
-
+	
 	/**
 	 * @Title: list    
 	 * @Description: 获取用户资金明细列表信息 
@@ -59,10 +57,18 @@ public class UserFundController {
 	 */
 	@RequestMapping(value = "/list" , method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResult list(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
-
-		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+	public ApiResult list(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
+		String type=request.getParameter("type");
+		String starttime=request.getParameter("starttime");
+		String endtime=request.getParameter("endtime");
+		
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser wuser = wUserService.get(uid);  //获取用户信息
+		
+		if(ObjectUtil.equals(null, wuser)){
+			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
+		}
 		//求所有的收入记录
 		List<Map<String, Object>> indataLisMap = fundService.getFundbytype(uid, new Integer[]{1,3,13,15,19,16,21,23,24,25,26});
 		
@@ -93,20 +99,20 @@ public class UserFundController {
 			}
 		}
 		
-		List<UserFundVo> dataList = fundService.findUserFundVos(uid);  //获取用户资金明细
-		
-		WUser wuser = wUserService.get(uid);  //获取用户信息
+		List<UserFundVo> dataList = fundService.findUserFundVos(uid,type,starttime,endtime);  //获取用户资金明细
 		
 		BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString());  //获取用户余额
 		
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("incomeNum", incomeNum);
-		dataMap.put("incomeMoney", incomeMoney);
-		dataMap.put("outlayNum", outlayNum);
-		dataMap.put("outlayMoney", outlayMoney);
-		dataMap.put("balance", avlBal);
-		dataMap.put("fundList", dataList);
-
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,null,dataMap);
+		JSONObject  jsonObject = new JSONObject();
+		jsonObject.put("incomeNum", incomeNum);
+		jsonObject.put("incomeMoney", incomeMoney);
+		jsonObject.put("outlayNum", outlayNum);
+		jsonObject.put("outlayMoney", outlayMoney);
+		jsonObject.put("balance", avlBal);
+		jsonObject.put("fundList", dataList);
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",jsonObject);
 	}
+	
+	
+
 }

@@ -17,7 +17,7 @@ public interface UserVerifiedService  extends BaseService<UserVerified>{
 	
 	public void update(UserVerified userVerified);
 	
-	public UserVerified queryUserVerifiedByUi(String uid);
+	public UserVerified queryUserVerifiedByUid(String uid);
 	
 	UserVerified queryUserVerifiedByAliAccount(String aliAccount);
 	/**

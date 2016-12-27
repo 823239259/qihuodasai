@@ -235,7 +235,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		rechargeListService.futureHandlerSaveRechargeStateWeb("GT" + fSimpleFtseUserTrade.getId(), mobile,
 				payable.toString(), remark, TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS, businessType);
 		int type = 0;
-		switch (fSimpleFtseUserTrade.getBusinessType()) {
+		switch (fSimpleFtseUserTrade.getBusinessType()) {  //业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指   8.国际综合  9.小恒指     20.商品综合】
 		case 8:
 			type = 2;
 			break;

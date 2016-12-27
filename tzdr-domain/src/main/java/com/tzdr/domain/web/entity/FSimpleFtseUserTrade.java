@@ -109,7 +109,7 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	private BigDecimal nikkeiTranFees;
 	
 	/**
-	 *迷你道指交易手续费
+	 * 迷你道指交易手续费
 	 */
 	private BigDecimal mdTranFees;
 
@@ -216,7 +216,7 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	private Integer nikkeiTranActualLever;
 	
 	/**
-	 *迷你道指交易手数
+	 * 迷你道指交易手数
 	 */
 	private Integer mdtranActualLever;
 

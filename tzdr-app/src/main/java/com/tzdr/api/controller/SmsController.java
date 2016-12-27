@@ -96,7 +96,8 @@ public class SmsController {
 		String template = "ihuyi.verification.code.template";
 		// 获取短信通道
 		int smsChannel = 0;
-		if (DataConstant.SEND_SMS_TYPE_REGIST==type){
+		if (DataConstant.SEND_SMS_TYPE_REGIST==type){//注册验证码短信
+			
 			if (!ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_EXIST,"mobile.exist.");
 			}
@@ -117,7 +118,7 @@ public class SmsController {
 		}
 		
 
-		if (DataConstant.SEND_SMS_TYPE_FORGET_PWD==type){
+		if (DataConstant.SEND_SMS_TYPE_FORGET_PWD==type){//忘记密码验证码短信
 			if (ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_NOT_EXIST,"mobile.not.exist.");
 			}	
@@ -147,6 +148,7 @@ public class SmsController {
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"send.success.");
 	}
+	
 	/**
 	 * 短信验证码验证
 	 * @param request
@@ -157,13 +159,13 @@ public class SmsController {
 	@ResponseBody
 	@RequestMapping(value = "/validate/sms",method = RequestMethod.POST)
 	public ApiResult validateSms(HttpServletRequest request,@RequestParam("mobile") String mobile,@RequestParam("code")String code){
-		ApiResult apiResult = new ApiResult();
+//		ApiResult apiResult = new ApiResult();
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(code)){
-			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
+			return new ApiResult(false,ResultStatusConstant.NO_SOURCE,"user.info.not.complete.");
 		}
 		if (!RequestUtils.isMobileNum(mobile)){
-			return new ApiResult(false,ResultStatusConstant.FAIL,"mobile.parrten.error.");
+			return new ApiResult(false,ResultStatusConstant.ValidateCode.MOBILE_ERROR,"mobile.parrten.error.");
 		}
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		if (!ObjectUtil.equals(null, appUserVo)){
@@ -179,7 +181,7 @@ public class SmsController {
 			//判断验证码是否失效
 			return new ApiResult(false,ResultStatusConstant.Regist.INVALID_CODE,"invalid.code.");
 		}
-		apiResult.setSuccess(true);
-		return apiResult;
+		
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"code.validate.success.");
 	}
 }
