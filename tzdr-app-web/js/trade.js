@@ -224,7 +224,6 @@ function handleData(evt){
 			}else{
 				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
 				mui("#popoverLoss").popover("toggle");
-				console.log("565")
 				$("#popoverLoss").css("display","none");
 				$(".mui-backdrop").css("display","none");
 				$("#bg1").css("display","none");
@@ -2790,6 +2789,10 @@ function doGetInsertStopLoss(){
 				tip("交易错误,请重试"); 
 			}
 			inserStopLoss(tradeparam);
+			$("#ustopTitle").addClass("mui-active");
+			$("#ulossTitle").removeClass("mui-active");
+			$("#stopTitle1").addClass("mui-active");
+			$("#lossTitle1").removeClass("mui-active");
 		}else{
 			tip("未登录,请先登录");
 		}
@@ -2819,6 +2822,10 @@ function doGetInsertLossLoss(){
 				tip("交易错误,请重试"); 
 			}
 			inserStopLoss(tradeparam);
+			$("#ustopTitle").addClass("mui-active");
+			$("#ulossTitle").removeClass("mui-active");
+			$("#stopTitle1").addClass("mui-active");
+			$("#lossTitle1").removeClass("mui-active");
 		}else{
 			tip("未登录,请先登录");
 		}
