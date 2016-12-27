@@ -53,44 +53,43 @@
             		}
             	}
             }
-               newData=rawData.slice(-60);
-		    var    data0=splitData(newData);
-	  		CandlestickChartOption = setOption(data0,x);
+		     newData=splitData(rawData.slice(-40));
+	  		CandlestickChartOption = setOption(newData,x);
 	  		myChart.setOption(CandlestickChartOption);
 	  		myChart.resize();
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	
     }
-    
-    function splitData(data) {
-		    var categoryData = [];
-		    var values = []
-		    for (var i = 0; i < data.length; i++) {
-		        categoryData.push(data[i][0]);
-            	values.push([data[i][1],data[i][2],data[i][3],data[i][4]]);
-		    }
-		    return {
-		        categoryData: categoryData,
-		        values: values
-		    };
-		}
-		
-		function calculateMA(dayCount,data) {
-		    var result = [];
-		    for (var i = 0, len = data.values.length; i < len; i++) {
-		        if (i < dayCount) {
-		            result.push('-');
-		            continue;
-		        }
-		        var sum = 0;
-		        for (var j = 0; j < dayCount; j++) {
-		            sum += data.values[i - j][1];
-		        }
-		        result.push(sum / dayCount);
-		    }
-		    return result;
-		}
+	    function splitData(data0) {
+	        var categoryData = [];
+	        var values = [];
+	        for (var i = 0; i < data0.length; i++) {
+	            categoryData.push(data0[i][0]);
+	            values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
+	        }
+	        return {
+	            categoryData: categoryData,
+	            values: values
+	        };
+	    }
+	
+	    function calculateMA(dayCount,data) {
+	        var result = [];
+	        console.log(data.values);
+	        for (var i = 0, len = data.values.length; i < len; i++) {
+	            if (i < dayCount) {
+	                result.push('-');
+	                continue;
+	            }
+	            var sum = 0;
+	            for (var j = 0; j < dayCount; j++) {
+	                sum += data.values[i - j][1];
+	            }
+	            result.push(sum / dayCount);
+	        }
+	        return result;
+	    }
     //设置数据参数（为画图做准备）
     function setOption(data,x){
         var option = {
@@ -175,42 +174,42 @@
 		                }
 		            }
 		        },
-		                    {
-                name: 'MA5',
-                type: 'line',
-                data: calculateMA(5,data),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA10',
-                type: 'line',
-                data: calculateMA(10,data),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA20',
-                type: 'line',
-                data: calculateMA(20,data),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA30',
-                type: 'line',
-                data: calculateMA(30,data),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            }
+		         {
+	                name: 'MA5',
+	                type: 'line',
+	                data: calculateMA(5,data),
+	                smooth: true,
+	                lineStyle: {
+	                    normal: {opacity: 0.5}
+	                }
+	            },
+	            {
+	                name: 'MA10',
+	                type: 'line',
+	                data: calculateMA(10,data),
+	                smooth: true,
+	                lineStyle: {
+	                    normal: {opacity: 0.5}
+	                }
+	            },
+	            {
+	                name: 'MA20',
+	                type: 'line',
+	                data: calculateMA(20,data),
+	                smooth: true,
+	                lineStyle: {
+	                    normal: {opacity: 0.5}
+	                }
+	            },
+	            {
+	                name: 'MA30',
+	                type: 'line',
+	                data: calculateMA(30,data),
+	                smooth: true,
+	                lineStyle: {
+	                    normal: {opacity: 0.5}
+	                }
+	            }
 		        
 		    ]
 		}

@@ -681,7 +681,7 @@ mui.plusReady(function(){
 			            		}
 			            	}
 			            }
-			            var data=splitData(newData)
+			            var data=splitData(rawData.slice(-60));
 						var option = setOption(data,x);
 			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 						setTimeout(function(){
