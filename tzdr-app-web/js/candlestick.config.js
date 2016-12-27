@@ -117,8 +117,8 @@
                    var res = "时间:"+params[0].name+ '  涨跌 : ' + rate;
 		            res += '<br/>  开盘 : ' + kd[0] + '  最高 : ' + kd[3];
 		            res += '<br/>  收盘 : ' + kd[1] + ' 最低 : ' + kd[2];
-		              res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#c23531"></span> MA5 : ' + ma5 + '  MA10 : ' + ma10;
-		              res += '<br/>  MA20 : ' + ma20 + '  MA30 : ' + ma30;
+		              res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
+		              res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
 		            return res;
               }
 		    },
@@ -192,7 +192,7 @@
 	                 showSymbol: false,
 	                lineStyle: {
 	                    normal: {
-	                    	color: '#FD1050',
+	                    	color: '#3689B3',
 	                    	opacity: 0.5
 	                    }
 	                }
@@ -205,7 +205,7 @@
 	                smooth: true,
 	                lineStyle: {
 	                	normal: {
-	                    	color: '#FD1050',
+	                    	color: '#B236B3',
 	                    	opacity: 0.5
 	                    }
 	                }
@@ -218,7 +218,7 @@
 	                smooth: true,
 	                lineStyle: {
 	                	normal: {
-	                    	color: '#FD1050',
+	                    	color: '#B37436',
 	                    	opacity: 0.5
 	                    }
 	                }
@@ -231,7 +231,7 @@
 	                smooth: true,
 	                lineStyle: {
 	                	normal: {
-	                    	color: '#FD1050',
+	                    	color: '#B2B336',
 	                    	opacity: 0.5
 	                    }
 	                }

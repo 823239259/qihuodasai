@@ -280,7 +280,6 @@
 	  			}
 				initBottom(dataUrl);
 				var url = marketSocketUrl;
-				console.log(url);
 					var socket = new WebSocket(url);
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
