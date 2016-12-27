@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var tradeSocketModelUrl = "";
 var tradeSocketVersion = "";
@@ -22,7 +22,7 @@ var tradeWebSocketIsMock = localStorage.getItem("isMock");
  * 交易配置配置
  */
 
-function tradeConfig(){
+function TradeConfig(){
 	this.TradeSocketUrl = "";//ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "";
 	this.tradeSocketVersion = "";

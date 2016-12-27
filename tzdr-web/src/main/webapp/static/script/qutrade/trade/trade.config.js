@@ -30,10 +30,10 @@ var tradeWebSocket = null;
  * 定义生产环境
  */
 function tradeConfigNewinstance(){
-	this.url = "ws://139.224.24.206:6066";
-	this.isMockUrl = "ws://139.224.24.206:6066";
-	this.version = "2.0.0";
-	this.webVersion = "2.0.0";
+	this.url = "";
+	this.isMockUrl = "";
+	this.version = "";
+	this.webVersion = "3.0.0";
 	return this;
 }
 /**
@@ -41,10 +41,10 @@ function tradeConfigNewinstance(){
  */
 function tradeConfigNewinstanceTest(){
 	//this.url = "ws://192.168.0.213:6060";
-	this.url = "ws://139.224.24.206:6066";
-	this.isMockUrl = "ws://139.224.24.206:6066";
-	this.version = "2.0.0";
-	this.webVersion = "2.0.0";
+	this.url = "";
+	this.isMockUrl = "";
+	this.version = "";
+	this.webVersion = "3.0.0";
 	return this;
 }
 /**
