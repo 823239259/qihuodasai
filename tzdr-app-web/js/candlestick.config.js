@@ -5,7 +5,8 @@
     	time:[],
     	volume:[]
     }
-    var newData={}; 
+    var newData=[]; 
+    var    data0;
     function processingData(jsonData){
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
@@ -14,8 +15,10 @@
     	    var lent=rawData.length;
     	    if(jsonData.Parameters.HisQuoteType==1440){
     	    	for(var i=0;i<Len;i++){
-        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-		            var sgData = [timeStr,parameters[i][OpenPriceSubscript],parameters[i][LastPriceSubscript],parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript]];
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL)];
 			         rawData[lent+i] = sgData; 
 	       		};
 	        	for(var i=0;i<rawData.length-1;i++){
@@ -28,18 +31,17 @@
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
 		        	var str2=str1[0]+":"+str1[1]
-        			var sgData = [str2,parameters[i][OpenPriceSubscript],parameters[i][LastPriceSubscript],parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript]];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL)];
 			         rawData[lent+i] = sgData; 
 	       		};
-	       		rawData=rawData.slice(-40)
 	        	for(var i=0;i<rawData.length-1;i++){
 	        		if(rawData[i][0]==rawData[i+1][0]){
 	        			rawData.splice(i,1);
 	        		}
 	        	}
     	    }
-    	    console.log(rawData)
-        	newData=splitData(rawData);
         	var x=0;
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
@@ -51,46 +53,47 @@
             		}
             	}
             }
-	  		CandlestickChartOption = setOption(newData,x);
+               newData=rawData.slice(-60);
+		    var    data0=splitData(newData);
+	  		CandlestickChartOption = setOption(data0,x);
 	  		myChart.setOption(CandlestickChartOption);
 	  		myChart.resize();
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	
     }
-	function splitData(rawData) {
-	    var categoryData = [];
-	    var values = []
-	    for (var i = 0; i < rawData.length; i++) {
-	        categoryData.push(rawData[i].splice(0, 1)[0]);
-	        values.push(rawData[i])
-	    }
-	    return {
-	        categoryData: categoryData,
-	        values: values
-	    };
-	}
-	
-	function calculateMA(dayCount) {
-	    var result = [];
-	    if(newData.values!=undefined)
-	    var len= newData.values.length;
-	    for (var i = 0; i < len; i++) {
-	        if (i < dayCount) {
-	            result.push('-');
-	            continue;
-	        }
-	        var sum = 0;
-	        for (var j = 0; j < dayCount; j++) {
-	            sum += newData.values[i - j][1];
-	        }
-	        result.push(sum / dayCount);
-	    }
-	    return result;
-	}
+    
+    function splitData(data) {
+		    var categoryData = [];
+		    var values = []
+		    for (var i = 0; i < data.length; i++) {
+		        categoryData.push(data[i][0]);
+            	values.push([data[i][1],data[i][2],data[i][3],data[i][4]]);
+		    }
+		    return {
+		        categoryData: categoryData,
+		        values: values
+		    };
+		}
+		
+		function calculateMA(dayCount,data) {
+		    var result = [];
+		    for (var i = 0, len = data.values.length; i < len; i++) {
+		        if (i < dayCount) {
+		            result.push('-');
+		            continue;
+		        }
+		        var sum = 0;
+		        for (var j = 0; j < dayCount; j++) {
+		            sum += data.values[i - j][1];
+		        }
+		        result.push(sum / dayCount);
+		    }
+		    return result;
+		}
     //设置数据参数（为画图做准备）
-    function setOption(rawData,x){
-       var option = {
+    function setOption(data,x){
+        var option = {
 		    backgroundColor: 'rgba(43, 43, 43, 0)',
 		    tooltip: {
 		        trigger: 'axis',
@@ -118,7 +121,7 @@
 		           },
 		    xAxis: {
 		        type: 'category',
-		        data: rawData.categoryData,
+		        data: data.categoryData,
 		        show:false,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 		    },
@@ -148,7 +151,7 @@
 		        {
 		            type: 'candlestick',
 		            name: '',
-		            data: rawData.values,
+		            data: data.values,
 		              markLine: {
                 		symbol: ['none', 'none'],
                 		clickable:false,
@@ -160,7 +163,6 @@
 		               },
 		                data: [
 			                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
-
 		       				 {name: '标线2终点', xAxis: "2", yAxis: x}
 		                ]
                		 },
@@ -173,42 +175,43 @@
 		                }
 		            }
 		        },
-				{
-		            name: 'MA5',
-		            type: 'line',
-		            data: calculateMA(5),
-		            smooth: true,
-		            lineStyle: {
-		                normal: {opacity: 0.5}
-		            }
-		        },
-		        {
-		            name: 'MA10',
-		            type: 'line',
-		            data: calculateMA(10),
-		            smooth: true,
-		            lineStyle: {
-		                normal: {opacity: 0.5}
-		            }
-		        },
-		        {
-		            name: 'MA20',
-		            type: 'line',
-		            data: calculateMA(20),
-		            smooth: true,
-		            lineStyle: {
-		                normal: {opacity: 0.5}
-		            }
-		        },
-		        {
-		            name: 'MA30',
-		            type: 'line',
-		            data: calculateMA(30),
-		            smooth: true,
-		            lineStyle: {
-		                normal: {opacity: 0.5}
-		            }
-		        }
+		                    {
+                name: 'MA5',
+                type: 'line',
+                data: calculateMA(5,data),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            },
+            {
+                name: 'MA10',
+                type: 'line',
+                data: calculateMA(10,data),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            },
+            {
+                name: 'MA20',
+                type: 'line',
+                data: calculateMA(20,data),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            },
+            {
+                name: 'MA30',
+                type: 'line',
+                data: calculateMA(30,data),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            }
+		        
 		    ]
 		}
         return option;

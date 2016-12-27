@@ -667,10 +667,9 @@ mui.plusReady(function(){
 		    	time:[],
 		    	volume:[]
 		    }
-		     newData={}; 
+		     newData=[]; 
     			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
-				var option = setOption(newData);
 			            var length=$("#positionList .position3").length;
 			        	var text=$("#CommodityNo").text();
 			        	var x=0;
@@ -682,7 +681,9 @@ mui.plusReady(function(){
 			            		}
 			            	}
 			            }
-			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData,x);
+			            var data=splitData(newData)
+						var option = setOption(data,x);
+			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 						setTimeout(function(){
 							myChart.resize();
 							myChart.setOption(option);
