@@ -670,28 +670,28 @@ mui.plusReady(function(){
 		     newData=[]; 
     			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
-			            var length=$("#positionList .position3").length;
-			        	var text=$("#CommodityNo").text();
-			        	var x=0;
-			            if(length!=0){
-			            	for(var i=0;i<length;i++){
-			            		var text1=$("#positionList .position0").eq(i).text();
-			            		if(text.indexOf(text1)>=0){
-			            			x=Number($("#positionList .position3").eq(i).text());
-			            		}
-			            	}
-			            }
-			            var data=splitData(rawData.slice(-60));
-						var option = setOption(data,x);
-			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-						setTimeout(function(){
-							myChart.resize();
-							myChart.setOption(option);
-		        			myChart.resize();	
-		        			CandlestickVolumeChart.resize();	
-							CandlestickVolumeChart.setOption(option2);
-		        			CandlestickVolumeChart.resize();	
-		        		},10);
+//			            var length=$("#positionList .position3").length;
+//			        	var text=$("#CommodityNo").text();
+//			        	var x=0;
+//			            if(length!=0){
+//			            	for(var i=0;i<length;i++){
+//			            		var text1=$("#positionList .position0").eq(i).text();
+//			            		if(text.indexOf(text1)>=0){
+//			            			x=Number($("#positionList .position3").eq(i).text());
+//			            		}
+//			            	}
+//			            }
+//			            var data=splitData(rawData.slice(-40));
+//						var option = setOption(data,x);
+//			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+//						setTimeout(function(){
+//							myChart.resize();
+//							myChart.setOption(option);
+//		        			myChart.resize();	
+//		        			CandlestickVolumeChart.resize();	
+//							CandlestickVolumeChart.setOption(option2);
+//		        			CandlestickVolumeChart.resize();	
+//		        		},10);
 		        		setTimeout(function(){
 		        			$("#CandlestickChart").css("opacity","1");
 		        		},100);

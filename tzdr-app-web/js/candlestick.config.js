@@ -53,9 +53,7 @@
             		}
             	}
             }
-		     newData=splitData(rawData.slice(-40));
-	  		CandlestickChartOption = setOption(newData,x);
-	  		myChart.setOption(CandlestickChartOption);
+		   
 	  		myChart.resize();
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
@@ -104,13 +102,7 @@
 		                width: 1,
 		                opacity: 1
 		            }
-             	  },
-//		         formatter: function (params) {
-//		            var res = "时间:"+params[0].name;
-//		            res += '<br/>  开盘 : ' + params[0].value[0] + '<br/>  最高 : ' + params[0].value[3];
-//		            res += '<br/>  收盘 : ' + params[0].value[1] + '<br/>  最低 : ' + params[0].value[2];
-//		            return res;
-//		        }
+             	 },
 		    },
 		    grid: {
 		               x: 43,
@@ -223,7 +215,6 @@
     		var Len=parameters.length;
     		if(parameters == null)return;
     	    var lent=volumeV.length;
-//  	    var lengt=volumeTimeH.length;
  			if(data.Parameters.HisQuoteType==1440){
 	        	for(var i=0;i<Len;i++){
 	        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
@@ -251,8 +242,8 @@
 	        		}
 	        	}
        		 }
-        	CandlestickVolumeData.time=volumeTime.slice(-60);
-        	CandlestickVolumeData.volume=volumeV.slice(-60);
+        	CandlestickVolumeData.time=volumeTime.slice(-40);
+        	CandlestickVolumeData.volume=volumeV.slice(-40);
         	CandlestickVolumeChart.group="group2";
 		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 		  		CandlestickVolumeChart.resize();	
@@ -276,9 +267,6 @@
 		                opacity: 1
 		            }
                },
-	          },
-	          legend: {
-	              data:['']
 	          },
 	            toolbox: {
 	                show: false,
