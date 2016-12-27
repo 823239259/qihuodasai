@@ -51,14 +51,25 @@ function setIsLogin(flag){
 	isLogin = flag;
 }
 /**
- * 验证登录
+ * 验证是否登录
  */
 function vadationIsLogin(){
-	if(username == null){
+	if(!isLogin){
 		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
 		return false;
-	}
+	} 
 	return true;
+}
+/**
+ * 验证是否登录
+ */
+function vadationIsLoginMuiTip(){
+	if(isLogin){
+		return true;
+	}else{
+		tip("未登录,请先登录");
+		return false
+	}
 }
 /**
  * 更新连接状态

@@ -821,18 +821,18 @@
 				var Proportion=1;
     			function loadCss(){
 		    			var Proportion=1;
-						var screen=plus.screen.resolutionHeight;
+						var screen=window.innerHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
 								"width":"100%",
-								"height":135*screen/568+"px",
+								"height":screen-300-140+"px",
 							});
 							$("#volumeChart,#CandlestickVolumeChart").css({
 								"width":"100%",
-								"height":110*screen/568+"px",
+								"height":140+"px",
 							});
 							$("#lightChart").css({
 								"width":"100%",
-								"height":245*screen/568+"px",
+								"height":screen-300+"px",
 							});
 							$("#alreayStopTale,#NoStopTale").css({
 								"height":screen-160+"px",
@@ -845,7 +845,6 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
-//					bindGuidance()
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
