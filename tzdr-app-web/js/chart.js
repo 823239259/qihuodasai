@@ -802,6 +802,7 @@ mui.plusReady(function(){
         		setTimeout(function(){
         			$("#TimeChart1").css("opacity","1");
         		},11);
+        		
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
     		if(vadationIsLogin()){
