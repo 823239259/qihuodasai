@@ -14,8 +14,8 @@
     	    var lent=rawData.length;
     	    if(jsonData.Parameters.HisQuoteType==1440){
     	    	for(var i=0;i<Len;i++){
-//      			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-		            var sgData = [parameters[i][DateTimeStampSubscript],parameters[i][OpenPriceSubscript],parameters[i][LastPriceSubscript],parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript]];
+        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+		            var sgData = [timeStr,parameters[i][OpenPriceSubscript],parameters[i][LastPriceSubscript],parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
 	        	for(var i=0;i<rawData.length-1;i++){
@@ -25,20 +25,21 @@
 	        	}
     	    }else{
     	    	for(var i=0;i<Len;i++){
-//      		var time2=parameters[i][DateTimeStampSubscript].split(" ");
-//		        	var str1=time2[1].split(":");
-//		        	var str2=str1[0]+":"+str1[1]
-        			var sgData = [parameters[i][DateTimeStampSubscript],parameters[i][OpenPriceSubscript],parameters[i][LastPriceSubscript],parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript]];
+        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
+		        	var str1=time2[1].split(":");
+		        	var str2=str1[0]+":"+str1[1]
+        			var sgData = [str2,parameters[i][OpenPriceSubscript],parameters[i][LastPriceSubscript],parameters[i][LowPriceSubscript],parameters[i][HighPriceSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
+	       		rawData=rawData.slice(-40)
 	        	for(var i=0;i<rawData.length-1;i++){
 	        		if(rawData[i][0]==rawData[i+1][0]){
 	        			rawData.splice(i,1);
 	        		}
 	        	}
     	    }
-        	newData=splitData(rawData.slice(-60));
-        	console.log(JSON.stringify(newData));
+    	    console.log(rawData)
+        	newData=splitData(rawData);
         	var x=0;
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
@@ -89,178 +90,127 @@
 	}
     //设置数据参数（为画图做准备）
     function setOption(rawData,x){
-    option = {
-        title: {
-            text: '上证指数',
-            left: 0
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'line'
-            }
-        },
-        legend: {
-            data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
-        },
-        grid: {
-            left: '10%',
-            right: '10%',
-            bottom: '15%'
-        },
-        xAxis: {
-            type: 'category',
-            data: rawData.categoryData,
-            scale: true,
-            boundaryGap : false,
-            axisLine: {onZero: false},
-            splitLine: {show: false},
-            splitNumber: 20,
-            min: 'dataMin',
-            max: 'dataMax'
-        },
-        yAxis: {
-            scale: true,
-            splitArea: {
-                show: true
-            }
-        },
-        dataZoom: [
-            {
-                type: 'inside',
-                start: 50,
-                end: 100
-            },
-            {
-                show: true,
-                type: 'slider',
-                y: '90%',
-                start: 50,
-                end: 100
-            }
-        ],
-        series: [
-            {
-                name: '日K',
-                type: 'candlestick',
-                data: rawData.values,
-                markPoint: {
-                    label: {
-                        normal: {
-                            formatter: function (param) {
-                                return param != null ? Math.round(param.value) : '';
-                            }
-                        }
-                    },
-                    data: [
-                        {
-                            name: 'XX标点',
-                            coord: ['2013/5/31', 2300],
-                            value: 2300,
-                            itemStyle: {
-                                normal: {color: 'rgb(41,60,85)'}
-                            }
-                        },
-                        {
-                            name: 'highest value',
-                            type: 'max',
-                            valueDim: 'highest'
-                        },
-                        {
-                            name: 'lowest value',
-                            type: 'min',
-                            valueDim: 'lowest'
-                        },
-                        {
-                            name: 'average value on close',
-                            type: 'average',
-                            valueDim: 'close'
-                        }
-                    ],
-                    tooltip: {
-                        formatter: function (param) {
-                            return param.name + '<br>' + (param.data.coord || '');
-                        }
-                    }
-                },
-                markLine: {
-                    symbol: ['none', 'none'],
-                    data: [
-                        [
-                            {
-                                name: 'from lowest to highest',
-                                type: 'min',
-                                valueDim: 'lowest',
-                                symbol: 'circle',
-                                symbolSize: 10,
-                                label: {
-                                    normal: {show: false},
-                                    emphasis: {show: false}
-                                }
-                            },
-                            {
-                                type: 'max',
-                                valueDim: 'highest',
-                                symbol: 'circle',
-                                symbolSize: 10,
-                                label: {
-                                    normal: {show: false},
-                                    emphasis: {show: false}
-                                }
-                            }
-                        ],
-                        {
-                            name: 'min line on close',
-                            type: 'min',
-                            valueDim: 'close'
-                        },
-                        {
-                            name: 'max line on close',
-                            type: 'max',
-                            valueDim: 'close'
-                        }
-                    ]
-                }
-            },
-            {
-                name: 'MA5',
-                type: 'line',
-                data: calculateMA(5),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA10',
-                type: 'line',
-                data: calculateMA(10),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA20',
-                type: 'line',
-                data: calculateMA(20),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA30',
-                type: 'line',
-                data: calculateMA(30),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            }
+       var option = {
+		    backgroundColor: 'rgba(43, 43, 43, 0)',
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer : {
+                   type : 'line',
+                   animation: false,
+		            lineStyle: {
+		                color: '#ffffff',
+		                width: 1,
+		                opacity: 1
+		            }
+             	  },
+//		         formatter: function (params) {
+//		            var res = "时间:"+params[0].name;
+//		            res += '<br/>  开盘 : ' + params[0].value[0] + '<br/>  最高 : ' + params[0].value[3];
+//		            res += '<br/>  收盘 : ' + params[0].value[1] + '<br/>  最低 : ' + params[0].value[2];
+//		            return res;
+//		        }
+		    },
+		    grid: {
+		               x: 43,
+		               y:20,
+		               x2:46,
+		               y2:5
+		           },
+		    xAxis: {
+		        type: 'category',
+		        data: rawData.categoryData,
+		        show:false,
+		        axisLine: { lineStyle: { color: '#8392A5' } }
+		    },
+		    yAxis: {
+		        scale: true,
+		        axisLine: { lineStyle: { color: '#8392A5' } },
+		        splitLine: { show: false },
+		        axisTick:{
+		                   	show:false,
+		                   },
+		        splitArea: {
+		                    show: false
+		                },
+		                axisLabel: {
+		                        inside: false,
+		                        margin: 4
+		                    },
+		                  splitLine: {
+		                    show: true,
+		                    lineStyle: {
+		                        color: "#8392A5"
+		                    }
+		                }
+		    },
+		    animation: false,
+		    series: [
+		        {
+		            type: 'candlestick',
+		            name: '',
+		            data: rawData.values,
+		              markLine: {
+                		symbol: ['none', 'none'],
+                		clickable:false,
+                       lineStyle: {
+		                   normal: {
+		                       width: 1,
+		                       color: "#ffffff"
+		                   }
+		               },
+		                data: [
+			                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
 
-        ]
-    };
+		       				 {name: '标线2终点', xAxis: "2", yAxis: x}
+		                ]
+               		 },
+		            itemStyle: {
+		                normal: {
+		                    color: '#FD1050',
+		                    color0: '#0CF49B',
+		                    borderColor: '#FD1050',
+		                    borderColor0: '#0CF49B'
+		                }
+		            }
+		        },
+				{
+		            name: 'MA5',
+		            type: 'line',
+		            data: calculateMA(5),
+		            smooth: true,
+		            lineStyle: {
+		                normal: {opacity: 0.5}
+		            }
+		        },
+		        {
+		            name: 'MA10',
+		            type: 'line',
+		            data: calculateMA(10),
+		            smooth: true,
+		            lineStyle: {
+		                normal: {opacity: 0.5}
+		            }
+		        },
+		        {
+		            name: 'MA20',
+		            type: 'line',
+		            data: calculateMA(20),
+		            smooth: true,
+		            lineStyle: {
+		                normal: {opacity: 0.5}
+		            }
+		        },
+		        {
+		            name: 'MA30',
+		            type: 'line',
+		            data: calculateMA(30),
+		            smooth: true,
+		            lineStyle: {
+		                normal: {opacity: 0.5}
+		            }
+		        }
+		    ]
+		}
         return option;
     };
     var firstTimeNum=0;
