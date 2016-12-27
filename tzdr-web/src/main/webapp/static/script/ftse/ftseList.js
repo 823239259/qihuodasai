@@ -167,7 +167,8 @@ function bindEndOfFtse(cls){
 					'<td style="width: 90px;">币种</td>'+
 					'<td style="width: 60px;">交易所</td>'+
 					'<td style="width: 90px;">品种</td>'+
-					'<td style="width: 80px;">交易手数</td>'+
+					'<td style="width: 80px;">买</td>'+
+					'<td style="width: 80px;">卖</td>'+
 					'<td style="width: 70px;">成交价</td>'+
 					'<td style="width: 60px;">手续费</td>'+
 					'<td style="width: 70px;">下单类型</td>'+
@@ -186,7 +187,8 @@ function bindEndOfFtse(cls){
 						"<td>"+_data.currencyNo+"</td>" +
 						"<td>"+_data.exchangeNo+"</td>" +
 						"<td>"+_data.commodityNo+"</td>" +
-						"<td>"+(parseInt(_data.buyNum)+parseInt(_data.sellNum))+"</td>" +
+						"<td>"+(parseInt(_data.buyNum))+"</td>" +
+						"<td>"+parseInt(_data.sellNum))+"</td>" +
 						"<td>"+_data.tradePrice+"</td>" +
 						"<td>"+_data.free+"</td>" +
 						"<td>"+_data.orderType+"</td>" +

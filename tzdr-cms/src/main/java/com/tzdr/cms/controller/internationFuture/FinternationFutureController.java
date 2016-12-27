@@ -252,6 +252,29 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		return jsonResult;
 	}
 	/**
+	 * 拒绝结算
+	 * @param request
+	 * @param id
+	 * @param stateType
+	 * @return
+	 */
+	@RequestMapping(value = "/refuseInput",method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult refuseInput(HttpServletRequest request,@RequestParam("id")String id,@RequestParam("stateType")Integer stateType){
+		FSimpleFtseUserTrade fSimpleFtseUserTrade = simpleFtseUserTradeService.get(id);
+		JsonResult jsonResult = new JsonResult();
+		if(fSimpleFtseUserTrade == null){
+			jsonResult.setSuccess(false);
+			jsonResult.setMessage("没有操盘信息");
+		}else{
+			fSimpleFtseUserTrade.setStateType(stateType);
+			simpleFtseUserTradeService.update(fSimpleFtseUserTrade);
+			jsonResult.setSuccess(true);
+			jsonResult.setMessage("拒绝成功");
+		}
+		return jsonResult;
+	}
+	/**
 	 * 结算
 	 * @param request
 	 * @param resp

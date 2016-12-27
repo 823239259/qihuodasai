@@ -348,6 +348,9 @@ function timeConvert(value,rowData,rowIndex) {
 					</form>
 					<div style="margin-bottom: 5px">
 						<shiro:hasPermission name="sys:riskmanager:internationFuture:input">  
+							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="refuseInput()">拒绝结算</a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="sys:riskmanager:internationFuture:input">  
 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="input()">录入结果</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="sys:riskmanager:internationFuture:end">  
