@@ -53,7 +53,9 @@
             		}
             	}
             }
-		   
+		   var chartDataC=splitData(rawData.slice(-40));
+		   var option=setOption(chartDataC,x);
+		   myChart.setOption(option);
 	  		myChart.resize();
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
@@ -73,8 +75,8 @@
 	    }
 	
 	    function calculateMA(dayCount,data) {
+	    	var dosizeL=$("#doSize").val();
 	        var result = [];
-	        console.log(data.values);
 	        for (var i = 0, len = data.values.length; i < len; i++) {
 	            if (i < dayCount) {
 	                result.push('-');
@@ -82,9 +84,9 @@
 	            }
 	            var sum = 0;
 	            for (var j = 0; j < dayCount; j++) {
-	                sum += data.values[i - j][1];
+	                sum += Number(data.values[i - j][1]);
 	            }
-	            result.push(sum / dayCount);
+	            result.push(Number(sum / dayCount).toFixed(dosizeL));
 	        }
 	        return result;
 	    }
@@ -172,7 +174,10 @@
 	                data: calculateMA(5,data),
 	                smooth: true,
 	                lineStyle: {
-	                    normal: {opacity: 0.5}
+	                    normal: {
+	                    	color: '#FD1050',
+	                    	opacity: 0.5
+	                    }
 	                }
 	            },
 	            {
@@ -181,7 +186,10 @@
 	                data: calculateMA(10,data),
 	                smooth: true,
 	                lineStyle: {
-	                    normal: {opacity: 0.5}
+	                	normal: {
+	                    	color: '#FD1050',
+	                    	opacity: 0.5
+	                    }
 	                }
 	            },
 	            {
@@ -190,7 +198,10 @@
 	                data: calculateMA(20,data),
 	                smooth: true,
 	                lineStyle: {
-	                    normal: {opacity: 0.5}
+	                	normal: {
+	                    	color: '#FD1050',
+	                    	opacity: 0.5
+	                    }
 	                }
 	            },
 	            {
@@ -199,7 +210,10 @@
 	                data: calculateMA(30,data),
 	                smooth: true,
 	                lineStyle: {
-	                    normal: {opacity: 0.5}
+	                	normal: {
+	                    	color: '#FD1050',
+	                    	opacity: 0.5
+	                    }
 	                }
 	            }
 		        
