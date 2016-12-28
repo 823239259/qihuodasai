@@ -223,6 +223,7 @@ function insertDataSeeding(dataAll) {
                 + dataAll[i].liveContent + "</div></div></li>")
     }
     $("#directSeedingList ul li").eq(0).addClass("directSeedingListAcitve");
+    $(".NoticeDescribe").html(dataAll[0].liveContent);
 }
 
 /*期货学堂*/

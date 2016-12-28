@@ -44,7 +44,8 @@ function loadUserInfo(){
                     $("#personalCenter").css({
                         "display": "block",
                         "float": "right",
-                        "marginLeft": "15px"
+                        "marginLeft": "15px",
+                        "marginTop": "2px"
                     }).html("我的账户");
                     $("#signOut").bind("click",function(){
                     	location.href = funUrl+"login/user/logout?url="+urlHost;
