@@ -41,7 +41,7 @@ function loadUserInfo(){
                         mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
                         $("#login").html("欢迎您，<a href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>"); 
                         $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
-                        $("#personalCenter").css("display","block").html("我的账户");
+                        $("#personalCenter").css("","").html("我的账户");
                         $("#signOut").bind("click",function(){
                         	location.href = funUrl+"login/user/logout?url="+urlHost;
                         });
