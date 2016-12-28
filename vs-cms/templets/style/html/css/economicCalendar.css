@@ -20,7 +20,7 @@ body{background: #f2f2f2;}
 #economicCalendar .country .checkbox span {display: inline-block; width: 180px; float: left; height: 30px; line-height: 30px; margin: 15px 0;}
 #economicCalendar .country .checkbox span img {position: relative; top: 5px; margin-right: 10px;}
 #economicCalendar .country .checkbox span input {margin-right: 10px; position: relative; top: 2px;}
-/*璧勮鏃ュ巻*/
+/*资讯日历*/
 #economicCalendar .economicCalendar_content {}
 #economicCalendar .economicCalendar_content .calendar_time {font-size:14px; background: #fff; height: 40px; line-height: 40px; margin-top: 10px; border-bottom: 1px solid #e6e6e6;}
 #economicCalendar .economicCalendar_content .calendar_time label {margin-left: 10px; border-radius: 4px; border: 1px solid #e5e5e5; width: 60px; display: inline-table; height: 22px; line-height: 22px;}
@@ -40,7 +40,7 @@ body{background: #f2f2f2;}
 #economicCalendar .economicCalendar_content .formerValue {width: 100px;}
 #economicCalendar .economicCalendar_content .calendar_time_tab {font-size: 14px; padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
 #economicCalendar .economicCalendar_content .calendar_time_tab ul {height: 40px; line-height: 40px;}
-/*璐㈢粡澶т簨棰勮*/
+/*财经大事预览*/
 #economicCalendar .economicCalendar_preview {}
 #economicCalendar .economicCalendar_preview ul li {float: left;}
 #economicCalendar .economicCalendar_preview .calendar_time_title {font-size: 16px; background: #fff; height: 40px; line-height: 40px; padding: 0 10px; }
@@ -55,7 +55,7 @@ body{background: #f2f2f2;}
 #economicCalendar .economicCalendar_preview .formerValue {width: 100px;}
 #economicCalendar .economicCalendar_preview .calendar_time_tab {font-size: 14px;padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
 #economicCalendar .economicCalendar_preview .calendar_time_tab ul {height: 40px; line-height: 40px;}
-/*鍋囨湡棰勫憡*/
+/*假期预告*/
 #economicCalendar .economicCalendar_trailer {margin-bottom: 20px;}
 #economicCalendar .economicCalendar_trailer ul li {float: left;}
 #economicCalendar .economicCalendar_trailer .calendar_time_title {font-size: 16px; background: #fff; height: 40px; line-height: 40px; padding: 0 10px; border-bottom: 1px solid #e5e5e5;}
@@ -66,7 +66,7 @@ body{background: #f2f2f2;}
 #economicCalendar .no {background: #fff; height: 40px; line-height: 40px; padding: 0 10px;}
 #economicCalendar .economicCalendar_trailer .calendar_time_tab {font-size: 14px;padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
 #economicCalendar .economicCalendar_trailer .calendar_time_tab ul {height: 40px; line-height: 40px;}
-/*right 琛屾儏*/
+/*right 行情*/
 #economicCalendar .economicCalendar_right {margin-top: 10px; float: left; width: 362px;margin-left: 10px; color: #666; font-size: 14px;}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation {background: #fff; }
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_title {padding: 0 10px; margin-top: -1px; border-top: 1px solid #dadada; border-bottom: 1px solid #dadada;  height: 60px; line-height: 60px;}
@@ -74,7 +74,7 @@ body{background: #f2f2f2;}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_title:hover {cursor: pointer;}
 #economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title a:hover {color: #ffb319;}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_chart {height: 180px;}
-/*瑙嗙偣*/
+/*视点*/
 #economicCalendar .economicCalendar_right .economicCalendarViewpoint {background: #fff; border-bottom: 2px solid #ccc;}
 #economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title {font-size: 14px;padding: 0 10px; margin-top: -1px; border-top: 1px solid #dadada; border-bottom: 1px solid #dadada;  height: 60px; line-height: 60px;}
 #economicCalendar .economicCalendar_right .economicCalendarViewpoint .viewpoint_dian {margin-right: 10px; color: #999; font-size: 12px;}
