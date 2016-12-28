@@ -1271,7 +1271,7 @@ input{
 #deleteCondition,#deleteCondition1{
 	right: 0%;
 }
-#suspendCondition1,#modifyCondition1,#deleteCondition1{
+#suspendCondition1,#modifyCondition1,#deleteCondition1,#suspendCondition,#modifyCondition,#deleteCondition{
 	width:25%;
 	margin: 0px;
 	padding: 0px;

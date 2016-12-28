@@ -86,7 +86,7 @@
 				top: 16px;
 				right: 6px;
 				/*height: 65px;*/
-				height: 60px;
+				height: 150px;
 				width: 35%;
 			}
 			#topPopover.mui-popover{
@@ -484,7 +484,7 @@
 				    <a class="mui-pull-right" id="insertCondition"></a>
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
-					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
 				        <a class="mui-control-item mui-active" href="#NoCondition" >未触发列表</a>
 				        <a class="mui-control-item" href="#alreayCondition" >已触发列表</a>
 				    </div>
@@ -502,25 +502,11 @@
 				    			</tr>
 				    		</thead>
 							<thody id = "thodyCondition">
-							<tr class="testclick">
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr id="buttonListTr">
-								<td colspan="7"> 
-									<button id="suspendCondition">暂停</button>
-									<button id="modifyCondition">修改</button>
-									<button id="deleteCondition">删除</button>
-								</td>
-							</tr>
 							</thody>
-							
 				    	</table>
+				    	<button id="suspendCondition">暂停</button>
+						<button id="modifyCondition">修改</button>
+						<button id="deleteCondition">删除</button>
 				    </div>
 				    <div class="mui-control-content" id="alreayCondition">
 				    	<table class="ConditionList">
@@ -999,7 +985,7 @@
 					$("#stopLoss").css("display","block");
 					$("#Open").css("right","25%");
 					$("#allOpen").css("right","50%");
-					$("#topPopover").css("height","100px");
+//					$("#topPopover").css("height","100px");
 				}
 				var network = false;
 				mui('.mui-scroll-wrapper').scroll();
@@ -1028,9 +1014,9 @@
 					mui("#popoverConditoion").popover("toggle");
 				});
 				document.getElementById("stopBack").addEventListener("tap",function(){
-					$("#bg2").css("visibility","none");
-					$("#bg3").css("visibility","none");
-					$("#bg1").css("visibility","block");
+					$("#bg2").css("display","none");
+					$("#bg3").css("display","none");
+					$("#bg1").css("display","block");
 					$("#topPopover").css("display","none");
 					$(".mui-content").eq(0).css("z-index","998");
 				});
