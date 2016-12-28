@@ -222,6 +222,7 @@ function insertDataSeeding(dataAll) {
                 + "</div><div class='directSeedingContent'>"
                 + dataAll[i].liveContent + "</div></div></li>")
     }
+    $("#directSeedingList ul li").eq(0).remove();
     $("#directSeedingList ul li").eq(0).addClass("directSeedingListAcitve");
     //$(".NoticeDescribe").html(dataAll[0].liveContent);
 }
