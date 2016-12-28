@@ -39,7 +39,7 @@ function loadUserInfo(){
                 var mobile = data.mobile;
                 if(mobile != null){
                     mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-                    $("#login_Success").html("欢迎您，<a style='margin-left: 15px;' href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>");
+                    $("#login").html("欢迎您，<a style='margin-left: 15px;' href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>");
                     $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
                     $("#personalCenter").css({
                         "display": "block",
