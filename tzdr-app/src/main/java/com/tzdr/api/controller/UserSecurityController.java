@@ -330,14 +330,11 @@ public class UserSecurityController {
 	 */
 	@RequestMapping(value = "/set_withdraw_pwd",method=RequestMethod.POST)
 	@ResponseBody
-	public ApiResult setWithdrawPwd(String password,String repassword,String code,HttpServletResponse response,HttpServletRequest request){
+	public ApiResult setWithdrawPwd(String password,String code,HttpServletResponse response,HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		
-		if (StringUtil.isBlank(password) || StringUtil.isBlank(code) || StringUtil.isBlank(repassword)){
+		if (StringUtil.isBlank(password) || StringUtil.isBlank(code)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.error.");
-		}
-		if(!repassword.equals(password)){
-			return new ApiResult(false,ResultStatusConstant.SetWithDrawPwd.PASSWORD_NOT_EQUALS,"params.error.");
 		}
 		if (!PasswordUtils.validatePwd(password)){
 			return new ApiResult(false,ResultStatusConstant.SetWithDrawPwd.PASSWORD_PATTERN_ERROR,"password.pattern.error.");

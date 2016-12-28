@@ -2,27 +2,22 @@ package com.tzdr.api.controller;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.request.RequestObj;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.support.CacheUser;
-import com.tzdr.api.thread.RegistP2pThread;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
@@ -109,6 +104,7 @@ public class LoginAndRegistController {
 		final String password=requestObj.getPassword();//密码
 		String parentGeneralizeId=requestObj.getParentGeneralizeId();//推广码
 	    String channel = requestObj.getChannel();//渠道
+	    
 	    String source = requestObj.getSource();//来源
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(password)){
@@ -136,6 +132,8 @@ public class LoginAndRegistController {
 		//--start 高超：注册来源处理   2016/12/13 18:28--//
 		if("web".equals(source)){			
 			wUser.setSource(Constant.RegistSource.WEB_REGIST);
+		}else if("wap".equals(source)){
+			wUser.setSource(Constant.RegistSource.WAP_REGIST);
 		}else if("app".equals(source)){
 			wUser.setSource(Constant.RegistSource.APP_TZDR_REGIST);
 		}
