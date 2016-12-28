@@ -1,12 +1,23 @@
-/**
- * Created by ���� on 2016/11/24.
- */
-
 $(function(){
     $("#nav ul li a").eq(0).css("color","#ffb319");
     $("#nav ul li .Triangle").eq(0).css("display","block");
 });
-//��ʼ��������
+
+$(function(){
+    setTimeout(function(){
+        // 最新公告滚动效果
+        var box=document.getElementById("h_notice"),can=true;
+        box.innerHTML+=box.innerHTML;
+        box.onmouseover=function(){can=false};
+        box.onmouseout=function(){can=true};
+        new function (){
+            var stop=box.scrollTop%18==0&&!can;
+            if(!stop)box.scrollTop==parseInt(box.scrollHeight/2)?box.scrollTop=0:box.scrollTop++;
+            setTimeout(arguments.callee,box.scrollTop%17?30:3000);
+        };
+    },2000);
+});
+
 window.onload= function () {
     $("#productList").panel({iWheelStep:32});
     $("#nav>ul>li>a").hover(function() {
@@ -70,7 +81,7 @@ $(document).ready(function(){
     $("#directSeedingList ul").on("click","li", function() {
         $("#directSeedingList ul li ").eq($(this).index()).addClass("directSeedingListAcitve").siblings().removeClass("directSeedingListAcitve");
     });
-    // banner�л�
+    // banner切换
     var num = $("#slide-box a").size();
     var i = 0;
     var theInt = null;
@@ -103,6 +114,7 @@ $(document).ready(function(){
 
     }
 });
+/*财经日历*/
 function GetDateStrDate(date) {
     var dd = new Date(date);
     dd.setDate(dd.getDate()+1);//��ȡAddDayCount��������
@@ -111,7 +123,6 @@ function GetDateStrDate(date) {
     var d = dd.getDate();
     return y+"-"+m+"-"+d;
 }
-//��ȡ�ƾ���������
 $(function(){
     var url="/crawler/getCrawlerCalendar";
     var startDate=new Date().Format("yyyy-MM-dd");
@@ -133,14 +144,14 @@ function insertData(data){
         var date= new Date(parseInt(data[i].timestamp) * 1000).Format("hh:mm");
         var star;
         if(data[i].importance==1){
-            star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-        }else if(data[i].importance==2){
-            star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-        }else if(data[i].importance==3){
-            star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
-        }else{
-            star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
-        }
+                star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+            }else if(data[i].importance==2){
+                star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+            }else if(data[i].importance==3){
+                star="<li class='importance color_importance'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'></li>"
+            }else{
+                star="<li class='importance'<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+            }
         if(data[i].actual==null || data[i].actual=="null" || data[i].actual==""){
             data[i].actual="--";
         }
@@ -150,64 +161,75 @@ function insertData(data){
         if(data[i].previous==null || data[i].previous=="null" || data[i].previous==""){
             data[i].previous="--";
         }
-          $("#EconomicCalendarList").append("<ul class='calendar_time_Content'>"+
-              "<li class='data'>"+date+"</li>"+
-              "<li class='importance'>"+star+"</li>"+
-              " <li class='countries'>"+data[i].country+"</li>"+
-              "  <li class='incident'>"+data[i].title+"</li>"+
-              " <li class='newValue'>"+data[i].actual+"</li>"+
-              "<li class='expect'>"+data[i].forecast+"</li>"+
-              "<li class='formerValue'>"+data[i].previous+"</li>"+
-              " </ul>");
+        if(data[i].importance==3){
+
+        }
+        $(".calendar_tab label").append("<ul class='calendar_time_Content'>"+
+                "<li class='data'>"+date+"</li>"+star+
+                " <li class='countries'>"+data[i].country+"</li>"+
+                "  <li class='incident'>"+data[i].title+"</li>"+
+                " <li class='newValue'>"+data[i].actual+"</li>"+
+                "<li class='expect'>"+data[i].forecast+"</li>"+
+                "<li class='formerValue'>"+data[i].previous+"</li>"+
+                " </ul>");
+        if(data[i].importance==3){
+                $(".calendar_tab label .newValue").eq(i).css("color","#ffb319");
+                $(".calendar_tab label .expect").eq(i).css("color","#ffb319");
+                $(".calendar_tab label .formerValue").eq(i).css("color","#ffb319");
+            }else{
+                $(".calendar_tab label .newValue").eq(i).css("color","#19b2ff");
+                $(".calendar_tab label .expect").eq(i).css("color","#19b2ff");
+                $(".calendar_tab label .formerValue").eq(i).css("color","#19b2ff");
+            }
     }
-    $(".calendar_time_Content li").css({"font-size":"14px"})
+    $(".calendar_time_Content li").css({"font-size":"14px"});
 }
-//��ȡ7*24Сʱ�����
+
+/*全球资讯*/
+$(function(){
+    var  firstThree = $("#homepage_right .information .information_all .p2");
+    var _this = $(this);
+    for(var i=0;i<firstThree.length;i++){
+        _this.find(".span4").eq(i).html("NO."+(i+1));
+    }
+    firstThree.find("span").eq(0).css({
+        "color":"#fff",
+        "background":"#ffb319"
+    });
+    firstThree.find("span").eq(1).css({
+        "color":"#fff",
+        "background":"#19b2ff"
+    });
+});
+/*7*24*/
 $(function () {
     var url="/crawler/getCrawlerByChannelLiveContent";
     var params={
         pageIndex:0,
-        size: 14,
+        size: 9,
         channelset:1
     };
     queryData(url,params,insertDataSeeding);
 });
-function insertDataSeeding(dataAll){
-    for(var i=0;i<dataAll.length;i++){
-        var date=getLocalTime(dataAll[i].createdAt);
+function insertDataSeeding(dataAll) {
+    for (var i = 0; i < dataAll.length; i++) {
+        var date = getLocalTime(dataAll[i].createdAt);
         $("#directSeedingList ul").append("<li>" +
-            "" +  "<div class='directSeedingListContent'>"
-            +  "<div class='directSeedingListContentTop'>"
-            +  "<p class='directSeedingDate'>"+date+"</p>"
-            +  "<p class='directSeedingTitle'><a  class='hoverBlue'>"+dataAll[i].liveTitle+"</a></p>"
-            +  "</div><div class='directSeedingContent'>"
-            + dataAll[i].liveContent + "</div></div></li>")
+                "" + "<div class='directSeedingListContent'>"
+                + "<div class='directSeedingListContentTop'>"
+                + "<p class='directSeedingDate'>" + date + "</p>"
+                + "<p class='directSeedingTitle'><a  class='hoverBlue'>" + dataAll[i].liveTitle + "</a></p>"
+                + "</div><div class='directSeedingContent'>"
+                + dataAll[i].liveContent + "</div></div></li>")
     }
     $("#directSeedingList ul li").eq(0).addClass("directSeedingListAcitve");
 }
-//�������Ч��
-$(document).ready(function(){
-    $("#h_scroll").scrollQ({"line":2,"scrollNum":2,"scrollTime":2000});
-});
-$(function () {
-    var  firstThree = $(".viewpointContentList ul ");
-    firstThree.each(function(){
-        var _this = $(this);
-        for(var i=0;i<_this.find("li").length;i++){
-            _this.find(".numberCode").eq(i).text("NO."+(i+1));
-        }
-        $(this).find(".numberCode").slice(0,3).css({
-            "color":"#333",
-            "background":"#ffb319"
-        });
-    });
-});
-$(function () {
-    var  firstThree = $(".rightContent");
-    firstThree.each(function(){
-        var _this = $(this);
-        for(var i=0;i<_this.find("li").length;i++){
-            _this.find(".numberIcon").eq(i).text("0"+(i+1));
-        }
-    });
+
+/*期货学堂*/
+$(function(){
+	var  firstThree = $("#futures .rightContent ul li");
+	var _this = $(this);
+	for(var i=0;i<firstThree.length;i++){
+    		_this.find(".numberIcon").eq(i).html("0"+(i+1));
+	}
 });

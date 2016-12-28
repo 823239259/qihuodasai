@@ -87,3 +87,8 @@ function queryData(url,params,success,error){
         }
     })
 }
+$(function(){
+    $("#backDiv").click(function(){
+        $('html, body').animate({scrollTop: '0px'}, 800);
+    });
+});
