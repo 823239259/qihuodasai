@@ -67,7 +67,6 @@
     vertical-align: middle;
     font-size: 14px;
     color:#ffffff;
-    float: left;
 }
 .verticalLine {
     margin: 0 15px;
@@ -79,8 +78,7 @@
     height: 12px;
     line-height: 12px;
     position: relative;
-    top: 24px;
-    float: left;
+    top: 2px;
 }
 #headerTopRight a:hover {
     color: #ffb319;
