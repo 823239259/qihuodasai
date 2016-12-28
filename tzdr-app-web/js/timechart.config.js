@@ -58,7 +58,7 @@
     function setOption1(x){
         var  data1=timeData;
        var  option = {
-       	backgroundColor: 'rgba(43, 43, 43, 0)',
+       	backgroundColor: '#1f1f1f',
            tooltip : {
                show: true,
                transitionDuration:0,
@@ -188,7 +188,7 @@
     function volumeChartSetOption(data) {
         var  dataVolume=volumeChartData;
       var  option = {
-      	backgroundColor: '#2B2B2B',
+      	backgroundColor: '#1f1f1f',
       	 color: ['#EDF274'],
           tooltip: {
               trigger: 'axis',

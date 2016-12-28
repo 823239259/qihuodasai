@@ -21,7 +21,7 @@ function lightChartData(json){
   }
     function lightChartDealData(){
      var  option = {
-		    backgroundColor: "rgba(43, 43, 43, 0)",
+		    backgroundColor: "#1f1f1f",
 		    "tooltip": {
 		        "show":false,
 		    },

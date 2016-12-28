@@ -93,7 +93,7 @@
     //设置数据参数（为画图做准备）
     function setOption(data,x){
         var option = {
-		    backgroundColor: 'rgba(43, 43, 43, 0)',
+		    backgroundColor: '#1f1f1f',
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer : {
@@ -193,7 +193,8 @@
 	                lineStyle: {
 	                    normal: {
 	                    	color: '#3689B3',
-	                    	opacity: 0.5
+	                    	 width: 1,
+//	                    	opacity: 0.5
 	                    }
 	                }
 	            },
@@ -206,7 +207,8 @@
 	                lineStyle: {
 	                	normal: {
 	                    	color: '#B236B3',
-	                    	opacity: 0.5
+	                    	 width: 1,
+//	                    	opacity: 0.5
 	                    }
 	                }
 	            },
@@ -219,7 +221,8 @@
 	                lineStyle: {
 	                	normal: {
 	                    	color: '#B37436',
-	                    	opacity: 0.5
+	                    	 width: 1,
+//	                    	opacity: 0.5
 	                    }
 	                }
 	            },
@@ -232,7 +235,8 @@
 	                lineStyle: {
 	                	normal: {
 	                    	color: '#B2B336',
-	                    	opacity: 0.5
+	                    	 width: 1,
+//	                    	opacity: 0.5
 	                    }
 	                }
 	            }
@@ -288,7 +292,7 @@
     function CandlestickVolumeChartSetoption1(data){
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {
-	      	backgroundColor: '#2B2B2B',
+	      	backgroundColor: '#1f1f1f',
 	      	 color: ['#EDF274'],
 	          tooltip: {
 	              trigger: 'axis',
