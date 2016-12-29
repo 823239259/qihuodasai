@@ -72,7 +72,7 @@ body{background: #f2f2f2;}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_title {padding: 0 10px; margin-top: -1px; border-top: 1px solid #dadada; border-bottom: 1px solid #dadada;  height: 60px; line-height: 60px;}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .on {background: #f2f2f2;}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_title:hover {cursor: pointer;}
-#economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title a:hover {color: #ffb319;}
+#economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title a:hover {color: #333;}
 #economicCalendar .economicCalendar_right .economicCalendarViewpoint .quotation_title {color: #333}
 #economicCalendar .economicCalendar_right .economicCalendarQuotation .quotation_chart {height: 180px;}
 /*йс╣Ц*/
