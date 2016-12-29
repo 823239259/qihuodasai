@@ -32,7 +32,7 @@
     margin: 0 20px;
 }
 #customerTel ul li a:hover {
-	color: #fc3;
+	color: #ffb319;
 	text-decoration: none;
     cursor: pointer;
 }
@@ -82,14 +82,14 @@
        		if(request.getSession().getAttribute("userName")!=null){
        	%>
        	<ul>
-            <li class="download" style = "color:#999; font-size: 12px;"><em style="    font-size: 14px;color: #fff;">欢迎您，<a href="${ctx}/user/account" class="top_myt" style = "color:#fc3;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a style="margin-left: 36px;" href="${ctx}/logout">退出</a></li>
+            <li class="download" style = "color:#999; font-size: 12px;"><em style="    font-size: 14px;color: #fff;">欢迎您，<a href="${ctx}/user/account" class="top_myt" style = "color:#fc3;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a style="margin-left: 15px;" href="${ctx}/logout">退出</a></li>
             <li class="top_myc"><a style="margin-left: 15px;" href="${ctx}/user/account" class="on" target="_blank">我的账户</a></li>
         </ul>
        	<%
        		}else{
        	%>
        	<ul>
-       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
+       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span" style="color: #333;position: relative; top: 1px; margin: 0 15px; height: 12px; border-left: 1px solid #fff; display: inline-block;"></span><a href="${ctx}/signin">注册</a></li>
         </ul>
        	<%
        		}

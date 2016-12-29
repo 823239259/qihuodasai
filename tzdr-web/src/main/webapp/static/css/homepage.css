@@ -1,5 +1,6 @@
 /*slide-box*/
-.bannerlist {width: 100%; position: relative; height: 360px;}
+#shouye {color: #ffb319;}
+.bannerlist {width: 100%; position: relative; height: 360px; margin-top: -20px;}
 .bannerlist .login {width: 1000px; margin: 0 auto; position: relative; padding: 0 5px;}
 .bannerlist .login .loginbox {width: 260px;height: 323px;margin: 20px auto 0; float: right;border-radius: 4px; background: #424242;}
 .bannerlist .login .loginbox h3 {height: 40px;line-height: 40px; font-weight: normal; text-align: center; color: #999;margin-top: 10px;background-color: #333333;border-bottom: 1px solid #1a1a1a; font-size: 14px;}
