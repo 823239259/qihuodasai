@@ -237,8 +237,8 @@ function updateQuoteCommodity(param){
     var changeRate = param.ChangeRate;
     var lastPrice = param.LastPrice;
     var qChangeValue = parseFloat(param.ChangeValue).toFixed(dotSize);
-    //昨收
-    var preClosingPrice = parseFloat(param.PreClosingPrice).toFixed(dotSize);
+    //昨结
+    var preSettlePrice = parseFloat(param.PreSettlePrice).toFixed(dotSize);
     //今开
     var openPrice = parseFloat(param.OpenPrice).toFixed(dotSize);
     var scal = changeRate.toFixed(2);
@@ -259,7 +259,7 @@ function updateQuoteCommodity(param){
         color="#333";
     }
     $(".quotation_title_left label").css("color",color);
-    $(".zs").text(preClosingPrice);
+    $(".zs").text(preSettlePrice);
     $(".jk").text(openPrice);
     $(".fd").text(qLowPrice+" - "+qHighPrice);
     $(".quotation_all .time").text(param.DateTimeStamp);
