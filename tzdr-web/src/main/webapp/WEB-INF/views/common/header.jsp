@@ -61,6 +61,9 @@
 #headerTopRight ul li {
     float: left;
 }
+@media screen and (max-width: 1280px) {
+    #header {width: 1280px}
+}
 </style>
 <div id="header">
     <div id="customerTel">
@@ -83,7 +86,7 @@
        	%>
        	<ul>
             <li class="download" style = "color:#999; font-size: 12px;"><em style="    font-size: 14px;color: #fff;">欢迎您，<a href="${ctx}/user/account" class="top_myt" style = "color:#fc3;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a style="margin-left: 15px;" href="${ctx}/logout">退出</a></li>
-            <li class="top_myc"><a style="margin-left: 15px;" href="${ctx}/user/account" class="on" target="_blank">我的账户</a></li>
+            <%-- <li class="top_myc"><a style="margin-left: 15px;" href="${ctx}/user/account" class="on" target="_blank">我的账户</a></li> --%>
         </ul>
        	<%
        		}else{
