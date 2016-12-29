@@ -481,7 +481,7 @@
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack " id= "stopBack"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
-				    <a class="mui-pull-right" id="insertCondition"></a>
+				    <a class="mui-pull-right" id="insertCondition" class = "insertCondition"></a>
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
 					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
@@ -1005,9 +1005,15 @@
 					mui("#popoverLoss1").popover("toggle");
 				});
 				document.getElementById("insertCondition").addEventListener("tap",function(){
+					$("#ConditoionTitlePrices").addClass("mui-active");
+					$("#ConditoionTitleTime").removeClass("mui-active"); 
+					$("#plan_conditionTitlePrice").addClass("mui-active");
+					$("#plan_conditionTitleTime").removeClass("mui-active");
 					$("#plan_conditionTitlePrice").show();
-					$("#plan_conditionTitleTime").show();
-					$("#ConditoionTitlePrices").show(); 
+					$("#plan_conditionTitleTime").show(); 
+					$("#ConditoionTitlePrices").show();
+					$("#ConditoionTitleTime").show();
+					initConditionData(); 
 					mui("#popoverConditoion").popover("toggle");
 				});
 				document.getElementById("closeConditionTable1").addEventListener("tap",function(){

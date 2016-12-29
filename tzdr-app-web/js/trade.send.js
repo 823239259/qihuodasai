@@ -346,7 +346,7 @@ var Trade = {
 							+' "AdditionFlag":'+additionFlag+','
 							+' "AdditionType":'+additionType+','
 							+' "AdditionPrice":'+additionPrice+'}';
-							console.log(param);
+							console.log(param); 
 				Trade.doSendMessage(TradeUrl.ModifyCondition,param);
 			},
 			/**

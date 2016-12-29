@@ -266,12 +266,10 @@ function handleData(evt){
 			tip(stoplossType+"单【"+stopLossNo+"】,"+status);
 			//查询条件单返回
 		}else if(method == "OnRspQryCondition"){
-			console.log(parameters);
 			var conditionParam = parameters;
 			appendCondition(conditionParam);
 			//录入条件单请求返回
 		}else if(method == "OnRspInsertCondition"){
-			console.log(JSON.stringify(parameters));
 			var conditionParam = parameters;
 			var message = "";
 			var status = conditionParam.Status;
@@ -284,6 +282,23 @@ function handleData(evt){
 			appendCondition(conditionParam);
 		}else if(method == "OnRtnConditionState"){ 
 			var conditionParam = parameters;
+			var commodityNo = conditionParam.CommodityNo;
+			var contractNo = conditionParam.ContractNo;
+			var contractCode = commodityNo+contractNo;
+			var conditionNo = conditionParam.StopLossNo;
+			var status = conditionParam.Status; 
+			if(status == 2){
+				status = "已触发";
+			}else if(status == 3){
+				status = "已取消";
+			}else if(status == 4){
+				status = "插入失败";
+			}else if(status == 5){
+				status = "触发失败"; 
+			}else{
+				status = "更新成功";
+			}
+			tip("【"+contractCode+"】条件单【"+conditionNo+"】,"+status);
 			updateConditionList(conditionParam);
 		}
 	}else{  
@@ -1294,7 +1309,16 @@ function updateConditionList(param){
 		var html = $("#"+conditionNo).html();
 		$("#over-thbodyCondition").append("<tr class = 'testclick1' id = '"+conditionNo+"'>"+html+"</tr>");
 		$("#"+conditionNo).remove();
-	}
+	}else {
+		if(status == 0){
+			$("#suspendCondition").val(2);
+			$("#suspendCondition").text("暂停");
+		}else if(status == 1){
+			$("#suspendCondition").val(3);  
+			$("#suspendCondition").text("启动");
+		}
+	} 
+	localCacheCondition[conditionNo] = param;
 }
 /**
  * 验证持仓信息是否存在 
@@ -1716,17 +1740,31 @@ $(function(){
 	$("#choiceStopPrices2").change(function(){
 		var $this = $(this);
 		var val = $this.val();
-		if(val == 2){
+		if(val == 2){ 
 			$("#stopChoicePrices3").val(0);
 			$("#Increase2").val(0);
 		}else if(val == 0){
 			$("#stopChoicePrices3").val($("#stopEvenPrice1").text());
 		}
 	});
-	$("#insertCondition").click(function(){
-		insertConditionCount = 0;
-		$("#chioceContract").attr("disabled",false);
-	});
+	$("#chioceTimeAdditional").change(function(){
+		var $this = $(this);
+		var val = $this.val();
+		if(val == -1){
+			$("#ConditoionTimePricesInput").attr("disabled",true);
+		}else{
+			$("#ConditoionTimePricesInput").attr("disabled",false);
+		}
+	})
+	$("#chioceAdditional").change(function(){
+		var $this = $(this);
+		var val = $this.val();
+		if(val == -1){
+			$("#ConditoionPricesInput1").attr("disabled",true);
+		}else{
+			$("#ConditoionPricesInput1").attr("disabled",false);
+		}
+	})
 	/**
 	 * 增加止损单监听文本框
 	 */
@@ -1901,11 +1939,33 @@ $(function(){
 			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
 		}else if(drection == 1){
 			scale = (holdAvgPrice - uLossPrice) / uLossPrice * 100;
-		}
+		} 
 		$("#lossIncrease2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#uLossPrice").val(uLossPrice);
 	});
 }); 
+/**
+ * 初始化增加条件单弹出框
+ */
+function initConditionData(){
+	$("#chiocePrices").val(0);
+	$("#ConditoionPricesInput").val("");
+	$("#shopDrection").val(0);
+	$("#chiocePricesSelect").val(1); 
+	$("#ConditoionPricesInput3").val(0);
+	$("#chioceAdditional").val(-1);
+	$("#ConditoionPricesInput1").val("");
+	$("#chiocePricesSelectTime").val(1);
+	$("#ConditoionTimePricesInput").val(0);
+	$("#insertTimeInput").val("");
+	$("#chioceTimeAdditional").val(-1);
+	$("#shopDrectionTime").val(0);
+	$("#ConditoionTimeInput").val(0);
+	insertConditionCount = 0; 
+	$("#ConditoionPricesInput1").attr("disabled",true);
+	$("#ConditoionTimePricesInput").attr("disabled",true);
+    $("#chioceContract").attr("disabled",false);
+}
 function initSocketTrade(){
 	setTradeConfig(tradeWebSocketIsMock);
 	/**
@@ -2462,7 +2522,7 @@ function bindOpertion(){
 			}
 			if(chioceAdditional != -1){
 				var conditoionPricesInput1 = $("#ConditoionPricesInput1").val();
-				if(ConditoionPricesInput1 <= 0 || ConditoionPricesInput1.length){
+				if(conditoionPricesInput1 <= 0 || conditoionPricesInput1.length == 0){
 					tip("附加触发价格错误");
 					return;
 				}
@@ -2487,10 +2547,8 @@ function bindOpertion(){
 		if(vadationIsLoginMuiTip()){
 			var chioceTimeAdditional = $("#chioceTimeAdditional").val();
 			if(chioceTimeAdditional != -1){
-				var ConditoionTimePricesInput = $("#ConditoionTimePricesInput").val();
-				console.log(ConditoionTimePricesInput);
-				
-				if(ConditoionTimePricesInput <= 0 || ConditoionTimePricesInput.length == 0){
+				var conditoionTimePricesInput = $("#ConditoionTimePricesInput").val();
+				if(conditoionTimePricesInput <= 0 || conditoionTimePricesInput.length == 0){
 					tip("附加触发价格错误");
 					return;
 				}
@@ -2543,32 +2601,45 @@ function bindOpertion(){
 			$("#chioceContract").val(contractCode);
 			$("#chiocePrices").val(compareType);
 			$("#ConditoionPricesInput").val(priceTriggerPonit);
-			$("#chioceAdditional").val(additionType);
-			$("#ConditoionPricesInput1").val(additionType);
 			$("#shopDrection").val(drection);
 			$("#chiocePricesSelect").val(orderType);
 			$("#ConditoionPricesInput3").val(num);
-			
-			
+			if(additionPrice == undefined || additionPrice == 0 || additionPrice.length == 0){
+				$("#chioceAdditional").val(-1);
+			    $("#ConditoionPricesInput1").val("");
+			    $("#chiocePricesSelectTime").val(-1);
+				$("#ConditoionTimePricesInput").val("");
+			}else{
+				$("#chioceAdditional").val(additionType);
+				$("#ConditoionPricesInput1").val(additionPrice);
+				$("#chiocePricesSelectTime").val(orderType);
+				$("#ConditoionTimePricesInput").val(additionPrice);
+			}
 			$("#chioceContract1").val(contractCode);
 			$("#insertTimeInput").val(time);
 			$("#chioceTimeAdditional").val(additionType);
-			$("#ConditoionTimePricesInput").val(additionPrice);
 			$("#shopDrectionTime").val(drection);
-			$("#chiocePricesSelectTime").val(orderType);
 			$("#ConditoionTimeInput").val(num);
 			insertConditionCount = 1; 
 			$("#chioceContract").attr("disabled",true);
 			if(conditionType == 0){  
-				$("#plan_conditionTitlePrice").show();
 				$("#ConditoionTitlePrices").show();
+				$("#ConditoionTitlePrices").addClass("mui-active");
+				$("#plan_conditionTitlePrice").show();
+				$("#plan_conditionTitlePrice").addClass("mui-active");
 				$("#plan_conditionTitleTime").hide();
+				$("#plan_conditionTitleTime").removeClass("mui-active");
 				$("#ConditoionTitleTime").hide();
+				$("#ConditoionTitleTime").removeClass("mui-active");
 			}else if(conditionType == 1){
 				$("#plan_conditionTitlePrice").hide();
+				$("#plan_conditionTitlePrice").removeClass("mui-active");
 				$("#ConditoionTitlePrices").hide();
+				$("#ConditoionTitlePrices").removeClass("mui-active");
+				$("#plan_conditionTitleTime").addClass("mui-active");
 				$("#plan_conditionTitleTime").show();
 				$("#ConditoionTitleTime").show(); 
+				$("#ConditoionTitleTime").addClass("mui-active");
 			} 
 			mui("#popoverConditoion").popover("toggle");
 		}
@@ -2591,13 +2662,13 @@ function bindOpertion(){
 		}
 		var modifyFlagText = "";
 		if(operateConditionType == 1){
-			valText = "删除";
+			modifyFlagText = "删除";
 		}else if(operateConditionType == 2){
-			valText = "暂停";
+			modifyFlagText = "暂停";
 		}else if(operateConditionType == 3){
-			valText = "启动";
+			modifyFlagText = "启动";
 		}
-		alertProtype("是否要"+modifyFlagText+"条件单?","提示",Btn.confirmed(),doUpdateAndDelCondition);
+		alertProtype("是否要"+modifyFlagText+"条件单?","提示",Btn.confirmedAndCancle(),doUpdateAndDelCondition);
 	});
 }
 
@@ -2970,14 +3041,16 @@ function doInsertConditionByPrice(){
 		var priceTriggerPonit = $("#ConditoionPricesInput").val();
 		var additionType = $("#chioceAdditional").val();
 		var additionPrice = $("#ConditoionPricesInput1").val();
+		alert(additionPrice);
 		var drection = $("#shopDrection").val();
 		var orderType = $("#chiocePricesSelect").val();
 		var num = $("#ConditoionPricesInput3").val();
 		//1-有附加条件，0-没有附加条件
-		var flag = 1;
-		if(additionPrice <= 0 || additionPrice.length == 0){
+		var flag = 1; 
+		if(additionType == -1){
+			additionPrice = 0; 
 			flag = 0;
-			additionType = 0;
+			additionType = 0
 		}
 		var localCommdity = getMarketCommdity(contractCode);
 		if(localCommdity == undefined){
@@ -3004,10 +3077,11 @@ function doInsertConditionByTime(){
 		var orderType = $("#chiocePricesSelectTime").val();
 		var num = $("#ConditoionTimeInput").val();
 		var flag = 1;
-		if(additionPrice <= 0 || additionPrice.length == 0){
+		if(additionType == -1){
+			additionPrice = 0; 
 			flag = 0;
 			additionType = 0
-		} 
+		}
 		var localCommdity = getMarketCommdity(contractCode);
 		if(localCommdity == undefined){
 			tip("无效的合约");
@@ -3039,11 +3113,13 @@ function doUpdateConditionByPrice(){
 		var drection = $("#shopDrection").val();
 		var orderType = $("#chiocePricesSelect").val();
 		var num = $("#ConditoionPricesInput3").val();
-		var flag = true;
-		if(additionPrice <= 0 || additionPrice.length == 0){
-			flag = false;
+		var flag = 1;
+		if(additionType == -1){
+			additionPrice = 0; 
+			flag = 0;
+			additionType = 0
 		}
-		var tradeParam = createUpdateConditioin(conditionNo,0,num,0,priceTriggerPonit,compareType,"","","",orderType,drection,"","","",flag,additionType,additionPrice);
+		var tradeParam = createUpdateConditioin(conditionNo,0,num,0,priceTriggerPonit,compareType,"",0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		updateCondition(tradeParam);
 	}
 }
@@ -3065,9 +3141,10 @@ function doUpdateConditionByTime(){
 		var orderType = $("#chiocePricesSelectTime").val();
 		var num = $("#ConditoionTimeInput").val();
 		var flag = 1;
-		if(additionPrice <= 0 || additionPrice.length == 0){
+		if(additionType == -1){
+			additionPrice = 0; 
 			flag = 0;
-			additionType = 0;
+			additionType = 0
 		}
 		var tradeParam = createUpdateConditioin(conditionNo,0,num,1,0,0,timeTriggerPoint,0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		updateCondition(tradeParam);
