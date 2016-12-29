@@ -19,7 +19,7 @@
 	font-size: 22px;
 	color: #f60;
 }
-#customerTel ul li a.#guojiqihuo {color: #ffb319;}
+#customerTel ul li a#guojiqihuo {color: #ffb319;}
 </style>
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
