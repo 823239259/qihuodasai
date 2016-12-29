@@ -49,6 +49,10 @@
 					<label><img src="../../images/recharge/Transfer.png"><i>银行转账</i></label>
 					<input name="choiceBank" type="radio"value="4">
 				</div>
+				<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Transfer.png"><i>支付宝</i></label>
+					<input name="choiceBank" type="radio"value="10">
+				</div>
 			</form>
 			<div id="buttomDiv">
 				<span>支付：<i class="yellowFont moneyIcont" >¥</i><i id="paymentMoney"></i></span>
@@ -100,6 +104,15 @@
 					quickPay(wv);
 				}else if(val == 8){
 					qrcodePay(wv);
+				}else if(val==10){
+					mui.openWindow({
+						url:"bindzhifubao.html",
+						id:"bindzhifubao.html",
+						extras:{
+						  	money : wv.money,
+					        backId:wv.backId
+						}
+					})
 				}
 			}; 
 			function quickPay(wv){

@@ -6,7 +6,7 @@
     	volume:[]
     }
     var newData=[]; 
-    var    data0;
+    var chartDataC;
     function processingData(jsonData){
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
@@ -36,11 +36,6 @@
 		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL)];
 			         rawData[lent+i] = sgData; 
 	       		};
-	        	for(var i=0;i<rawData.length-1;i++){
-	        		if(rawData[i][0]==rawData[i+1][0]){
-	        			rawData.splice(i,1);
-	        		}
-	        	}
     	    }
         	var x=0;
             var length=$("#positionList .position3").length;
@@ -53,7 +48,7 @@
             		}
             	}
             }
-		   var chartDataC=splitData(rawData.slice(-40));
+		   chartDataC=splitData(rawData.slice(-40));
 		   var option=setOption(chartDataC,x);
 		   myChart.setOption(option);
 	  		myChart.resize();
@@ -61,6 +56,7 @@
 		  	myChart.group="group2";
 		  	
     }
+    //开盘(open)，收盘(close)，最低(lowest)，最高(highest)
 	    function splitData(data0) {
 	        var categoryData = [];
 	        var values = [];

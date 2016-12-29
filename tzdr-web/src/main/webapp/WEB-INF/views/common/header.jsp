@@ -1,38 +1,72 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
 <link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
-<div class="top-title">
-    <div class="topctn">
-        <div class="top_tel"><!--<i></i>-->全国客服热线：<span>400</span>-<span>852</span>-<span>8008</span></div>
-        <%
-       		if(request.getSession().getAttribute("userName")!=null){
-       	%>
-       	<ul>
-            <li class="download" style = "color:#999; font-size: 12px;"><em >你好，<a href="${ctx}/user/account" class="top_myt" style = "color:#fc3;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a style="margin-left: 36px;" href="${ctx}/logout">退出</a></li>
-            <li class="top_myc"><a href="${ctx}/user/account" class="on" target="_blank">我的账户</a></li>
-            <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
-            <li><a href="${ctx}/help?tab=rule&leftMenu=1" target="_blank">新手指南</a></li>
-        </ul>
-       	<%
-       		}else{
-       	%>
-       	<ul>
-       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span"> | </span><a href="${ctx}/signin">注册</a></li>
-            <li><a href="${ctx}/help?tab=software&leftMenu=1" target="_blank">交易软件下载</a></li>
-            <li><a href="${ctx}/help?tab=rule&leftMenu=1" target="_blank">新手指南</a></li>
-        </ul>
-       	<%
-       		}
-       	%>
-    </div>
-</div>
-<div style="background: #333; height: 85px;">
-<div class="navbox">
-    <div class="nav">
-        <div class="navlogo"><a href="http://www.vs.com"><img src="${ctx}/static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a></div>
-        <ul class="navlist">
+<style>
+#header {
+    height: 60px;
+    line-height: 60px;
+    background: #333333;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+}
+#customerTel {
+    height: 60px;
+    line-height: 60px;
+    font-size: 14px;
+    display: inline-block;
+}
+#customerTel img {
+    margin-left: 30px;
+    margin-top: 10px;
+    float: left;
+}
+#customerTel ul {
+    float: left;
+    margin-left: 60px;
+    height: 80px;
+    overflow: hidden;
+}
+#customerTel ul li {
+    float: left;
+    margin: 0 20px;
+}
+#customerTel ul li a:hover {
+	color: #ffb319;
+	text-decoration: none;
+    cursor: pointer;
+}
+#customerTel ul li a {
+    display: inline-block;
+    line-height: 60px;
+    height: 60px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+#headerTopRight {
+    float: right;
+    margin-right: 30px;
+    height: 60px;
+}
+#headerTopRight ul li a {
+    font-size: 14px;
+    color: #fff;
+}
+#headerTopRight ul li a:hover {
+	color: #fc3;
+	text-decoration: none;
+    cursor: pointer;
+}
+#headerTopRight ul li {
+    float: left;
+}
+</style>
+<div id="header">
+    <div id="customerTel">
+        <a href=""><img src="http://www.vs.com/templets/style/html/images/image/logo.png"></a>
+        <ul>   
             <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
-            <%-- <li><a id="qutrade" href="${ctx}/qutrade/view">行情交易</a></li> --%>
             <li><a target="_blank" href="${ctx}/html/qutrade/quoteTrade.html">行情交易</a></li>
             <li><a id="guojiqihuo" href="${ctx}/hsi/index">国际期货</a></li>
  			<li><a href="http://www.vs.com/vsnews/about/" title="" >下载中心</a></li>
@@ -40,21 +74,30 @@
  			<li><a href="http://www.vs.com/vsnews/rili/" title="" >财经日历</a></li>
             <li><a href="http://www.vs.com/vsnews/xuetang/" title="" >期货学堂</a></li>
             <li><a href="http://www.vs.com/vsnews/news/" title="" >全球资讯</a></li>
-            <%-- <%
-        	if(request.getSession().getAttribute("userName") !=null){
-        	%>
-           	<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mc">我的账户</a></li>
-        	<%
-        	}else{
-        	%>
-           	<li><a id="nav_my" href="${ctx}/user/account" class="nav_l_mcnot">我的账户</a></li>
-        	<%
-       		}
-        	%> --%>
+        </ul>   
+    </div>  
+    <div id="headerTopRight" class="">
+    <div class="">
+        <%
+       		if(request.getSession().getAttribute("userName")!=null){
+       	%>
+       	<ul>
+            <li class="download" style = "color:#999; font-size: 12px;"><em style="    font-size: 14px;color: #fff;">欢迎您，<a href="${ctx}/user/account" class="top_myt" style = "color:#fc3;"><%=request.getSession().getAttribute("userName").toString() %></a></em><a style="margin-left: 15px;" href="${ctx}/logout">退出</a></li>
+            <li class="top_myc"><a style="margin-left: 15px;" href="${ctx}/user/account" class="on" target="_blank">我的账户</a></li>
         </ul>
+       	<%
+       		}else{
+       	%>
+       	<ul>
+       		<li class="sign"><a href="${ctx}/user/account">登录</a><span class="sign_span" style="color: #333;position: relative; top: 1px; margin: 0 15px; height: 12px; border-left: 1px solid #fff; display: inline-block;"></span><a href="${ctx}/signin">注册</a></li>
+        </ul>
+       	<%
+       		}
+       	%>
     </div>
 </div>
 </div>
+<div style="height: 80px;"></div>
 <!-- 浮动层 -->
 <div class="floatlayer">
     <!-- 联系客服、返回顶部 -->
@@ -70,25 +113,3 @@
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>   
     </div>
 </div>
-<!-- 弹出层登录 -->
-<%-- <div class="tck01" id="signin_box" style="display: none;">
-	<div class="navtitle">
-		<span class="nava">注册登录！</span><a class="close" onclick="javascript:closeDiv('signin_box')"></a>
-	</div>
-	<div class="center">
-		<form id="signin_boxForm" name="signin_boxForm" onsubmit="return signin_boxForm();" method="post" target="signin_boxFrame">
-			<input type="hidden" name="execution" value="e3s1" id="">
-			<p class="mode"><a href="${ctx}/signin">手机快速注册</a><a href="javascript:void(0)" class="on">账号登录</a></p>
-			<p class="warning"></p>
-			<p class="sigin_ipctn">
-				<input type="tel" id="signin_username" name="username" value="" placeholder="请输入手机号码">
-				<input type="password" id="signin_password" name="password" value="" placeholder="请输入登录密码">
-			</p>
-			<div class="sigin_link">
-				<input type="checkbox" name="" id="" checked="checked" style="margin-right: 10px;"/>两周内自动登录
-			    <a href="${ctx }/forgetpw" style="float: right;">忘记密码?</a>
-		    </div>
- 			<button id="login_box" type="button">立即登录</button>
-		</form>
-	</div>
-</div> --%>

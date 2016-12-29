@@ -2,7 +2,6 @@
     var prices=[];
     var timeLabel=[]
     var timeData={
-        "time":time,
         "prices":prices,
         "timeLabel":timeLabel
     };
@@ -15,7 +14,6 @@
     var timePrice=[];
     function handleTime(json){
     	var dosizeL=$("#doSize").val();
-//  	console.log(JSON.stringify(json));
         var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
@@ -27,14 +25,8 @@
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
         }
-		for(var i=0;i<timeData.timeLabel.length-1;i++){
-			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
-				timeData.timeLabel.splice(i,1);
-				timeData.prices.splice(i,1);
-			}else{
-				
-			}
-		}
+        timeData.timeLabel=timeData.timeLabel.slice(-40);
+        timeData.prices=timeData.prices.slice(-40)
         if(timeChart != null){
         	var x=0;
             var length=$("#positionList .position3").length;
@@ -171,13 +163,15 @@
             volumeChartData.time[VolumeLength+i]=str2;
             volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         };
-        var TimeLength= volumeChartData.time.length;
-		for(var i=0;i<volumeChartData.time.length-1;i++){
-			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
-				volumeChartData.time.splice(i,1);
-				volumeChartData.volume.splice(i,1);
-			}
-		}
+          volumeChartData.time=volumeChartData.time.slice(-40);
+        volumeChartData.volume=volumeChartData.volume.slice(-40)
+//      var TimeLength= volumeChartData.time.length;
+//		for(var i=0;i<volumeChartData.time.length-1;i++){
+//			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
+//				volumeChartData.time.splice(i,1);
+//				volumeChartData.volume.splice(i,1);
+//			}
+//		}
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
             volumeChart.setOption(option);

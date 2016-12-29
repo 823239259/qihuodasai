@@ -60,17 +60,16 @@ mui.plusReady(function(){
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML=Transfer.name[0];
 		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+		$("#doSize").val(Transfer.name[4])
 		init(Transfer.name);
 		$("#MainContract").text(Transfer.name[2]+Transfer.name[1])
 	marketSocket = new WebSocket(marketSocketUrl);
-    var setIntvalTime = null; 
+//  var setIntvalTime = null; 
     var marketLoadParam = {}
 	marketSocket.onopen = function(evt){
       masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
     };
     marketSocket.onclose = function(evt){
-    	if(setIntvalTime != null)
-    		clearInterval(setIntvalTime);
     	if(reconnect != false){
     		if(username==null){
     			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
@@ -108,6 +107,12 @@ mui.plusReady(function(){
 			var newContractNo = subscribeParam.ContractNo;
 			marketLoadParam[newCommdityNo] = subscribeParam;
 			lightChartData(quoteParam);
+			$("#refresh").removeClass("rotateClass");
+			 var commodityNo = $("#commodeityNo").val();
+			 var totalVolume=$("#volumePricesNumber").text()
+			 if(commodityNo==quoteParam.Parameters.CommodityNo){
+			 	dealOnRtnQuoteData(jsonData,totalVolume);
+			 }
 			//如果是当前合约与品种更新行情数据，和浮动盈亏
 			if (valiationIsPresent(newCommdityNo, newContractNo)) {
 				updateLoadWebParam(subscribeParam); 
@@ -124,7 +129,6 @@ mui.plusReady(function(){
 			updateAccountBalance();
 			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
 			setLocalCacheQuote(subscribeParam);
-			$("#refresh").removeClass("rotateClass");
         }else if(method == "OnRspQryCommodity"){
         	if(OnRspQryCommodityDateL==1){
         		commoditysData=jsonData.Parameters;
@@ -162,7 +166,7 @@ mui.plusReady(function(){
 	   			
 			}
 			queryCommodityIsFlag = true;
-        }else if(method == "OnRspUnSubscribe"){
+        }else if(method == "OnRspSubscribe"){
         	var quoteParam = jsonData;
         }
     };
@@ -174,9 +178,9 @@ mui.plusReady(function(){
         var contractNo = $("#contractNo").val();
         masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
         masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-        setIntvalTime = setInterval(function(){
-            masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
-        },3000);
+//      setIntvalTime = setInterval(function(){
+//          masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
+//      },3000);
     }
     /**
 	 * 更新行情数据 
@@ -577,7 +581,6 @@ mui.plusReady(function(){
 				  	$("#miniTikeSize").val(commoditysData[i].MiniTikeSize);
     		}
     	}
-    	clearInterval(setIntvalTime);
     	var CommodityNo=document.getElementById("CommodityNo");
 		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
 		mainTitleFirst.innerHTML= $("#CommodityName").val();
@@ -668,30 +671,7 @@ mui.plusReady(function(){
 		    	volume:[]
 		    }
 		     newData=[]; 
-    			clearInterval(setIntvalTime);
 				sendHistoryMessage(val);
-//			            var length=$("#positionList .position3").length;
-//			        	var text=$("#CommodityNo").text();
-//			        	var x=0;
-//			            if(length!=0){
-//			            	for(var i=0;i<length;i++){
-//			            		var text1=$("#positionList .position0").eq(i).text();
-//			            		if(text.indexOf(text1)>=0){
-//			            			x=Number($("#positionList .position3").eq(i).text());
-//			            		}
-//			            	}
-//			            }
-//			            var data=splitData(rawData.slice(-40));
-//						var option = setOption(data,x);
-//			             var option2=CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-//						setTimeout(function(){
-//							myChart.resize();
-//							myChart.setOption(option);
-//		        			myChart.resize();	
-//		        			CandlestickVolumeChart.resize();	
-//							CandlestickVolumeChart.setOption(option2);
-//		        			CandlestickVolumeChart.resize();	
-//		        		},10);
 		        		setTimeout(function(){
 		        			$("#CandlestickChart").css("opacity","1");
 		        		},100);
@@ -776,7 +756,6 @@ mui.plusReady(function(){
 		    };
 		    var timePrice=[];
     		var val=$("#timeChartMenu").val();
-    		clearInterval(setIntvalTime);
     		sendHistoryMessage(val);
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
@@ -880,4 +859,143 @@ function masendMessage(method,parameters){
 			VolumeSubscript=i;
 		}
 	}
+}
+function dealOnRtnQuoteData(data,totalVolume){
+	var dosizeL=Number($("#doSize").val());
+	var Parameters=data.Parameters;
+	//console.log(JSON.stringify(Parameters))
+	var newTimeHour=new Date().getHours();
+	var newTimeMinutes=new Date().getMinutes();
+	if(Number(newTimeMinutes)<=0){
+		newTimeMinutes="0"+newTimeMinutes
+	}
+	var DateTimeStamp=new Date(Parameters.DateTimeStamp);
+	var oldTimeHour=DateTimeStamp.getHours();
+	var oldTimeMinutes=DateTimeStamp.getMinutes();
+	var newTime=newTimeHour+":"+newTimeMinutes;
+	if(totalVolume=="-"){
+		totalVolume=0;
+		return
+	}
+	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
+	var lastVolume=Number(volumeChartData.volume[volumeChartData.volume.length-1]);
+	freshVolume=lastVolume+Volume;
+	if(timeData.timeLabel[timeData.timeLabel.length-1]==newTime){
+        	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
+        	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;	
+	}else{
+			timeData.timeLabel.push(newTime);
+        	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));	
+        	volumeChartData.time.push(newTime);
+        	volumeChartData.volume.push(freshVolume);
+	}
+	var x=0;
+	var length=$("#positionList .position3").length;
+	var text=$("#CommodityNo").text();
+	if(length!=0){
+		for(var i=0;i<length;i++){
+			var text1=$("#positionList .position0").eq(i).text();
+			if(text.indexOf(text1)>=0){
+				x=Number($("#positionList .position3").eq(i).text());
+			}
+		}
+	}
+    if(timeChart != null){
+         var option = setOption1(x);
+        timeChart.setOption(option);
+        timeChart.resize();
+        var option1 =volumeChartSetOption(volumeChartData);
+        volumeChart.setOption(option1);
+        volumeChart.resize();
+        timeChart.group="group1";
+       	volumeChart.group="group1";
+    }
+    if(chartDataC==undefined){
+    	return
+    }
+	delaDataCandlestick(Parameters,x,newTime,totalVolume);
+}
+function drawChartCandlestick(x){
+	 var option1=setOption(chartDataC,x);
+	   myChart.setOption(option1);
+	   var option2= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+  		CandlestickVolumeChart.resize();	
+  		CandlestickVolumeChart.setOption(option2);
+  		CandlestickVolumeChart.resize();	
+  		CandlestickVolumeChart.group="group2";
+  		myChart.group="group2";
+}
+function delaDataCandlestick(Parameters,x,newTime,totalVolume){
+	var text=$("#selectButon").text();
+	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
+	var lastVolume=Number(CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]);
+	freshVolume=lastVolume+Volume;
+	var length=chartDataC.values.length;
+	var lastPrices=Number(Parameters.LastPrice);
+	if(text=="K线" || text=="1分"){
+    	if(chartDataC.categoryData[length-1]==newTime){
+    		var lowPrices=Number(chartDataC.values[length-1][2]);
+    		var highPrices=Number(chartDataC.values[length-1][3]);
+    		var closePrices=lastPrices;
+    		if(lastPrices >=highPrices){
+    			highPrices=lastPrices
+    		}
+    		if(lowPrices>=highPrices){
+    			lowPrices=lastPrices
+    		}
+    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
+    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
+    	}else{
+    		chartDataC.categoryData.push(newTime);
+    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
+    		CandlestickVolumeData.time.push(newTime)
+    		CandlestickVolumeData.volume.push(freshVolume)
+    	}
+    }else{
+    		var y=5;
+    	if(text=="5分"){
+    		 y=5;
+    	}else if(text=="15分"){
+    		 y=15;
+    	}else if(text=="30分"){
+    		 y=30;
+    	}
+    	
+    	var oldTime=chartDataC.categoryData[chartDataC.categoryData.length-1];
+    	var Minutes=Number(Number(oldTime.split(":")[1])+y)
+    	var Hours=Number(oldTime.split(":")[0]);
+    	var oldTimePre=Hours+":"+Minutes;
+    	if(Minutes>=60){
+    		MinutesCha=Minutes-60
+    		if(MinutesCha==0){
+    			MinutesCha="00";
+    		}else{
+    			
+    		}
+    		if(Hours>=24){
+    			Hours=1;
+    		}
+    	}
+    	if(oldTime<=newTime && newTime<oldTimePre){
+    		var lowPrices=Number(chartDataC.values[length-1][2]);
+    		var highPrices=Number(chartDataC.values[length-1][3]);
+    		var closePrices=lastPrices;
+    		if(lastPrices >=highPrices){
+    			highPrices=lastPrices
+    		}
+    		if(lowPrices>=highPrices){
+    			lowPrices=lastPrices
+    		}
+    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
+    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
+    		console.log(lowPrices+"lowPrices"+highPrices+"highPrices"+closePrices+"closePrices");
+    	}else{
+    		chartDataC.categoryData.push(newTime);
+    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
+    		CandlestickVolumeData.time.push(newTime)
+    		CandlestickVolumeData.volume.push(freshVolume)
+    	}
+    	
+    }
+	drawChartCandlestick(x)
 }

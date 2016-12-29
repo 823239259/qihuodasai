@@ -1,5 +1,6 @@
 /*slide-box*/
-.bannerlist {width: 100%; position: relative; height: 360px;}
+#shouye {color: #ffb319;}
+.bannerlist {width: 100%; position: relative; height: 360px; margin-top: -20px;}
 .bannerlist .login {width: 1000px; margin: 0 auto; position: relative; padding: 0 5px;}
 .bannerlist .login .loginbox {width: 260px;height: 323px;margin: 20px auto 0; float: right;border-radius: 4px; background: #424242;}
 .bannerlist .login .loginbox h3 {height: 40px;line-height: 40px; font-weight: normal; text-align: center; color: #999;margin-top: 10px;background-color: #333333;border-bottom: 1px solid #1a1a1a; font-size: 14px;}
@@ -25,7 +26,7 @@
 .bannerlist .login .lg_link a:hover {text-decoration: underline; color: #ffee33;}
 .bannerlist .lg_bottom {width: 100%;height: 37px; background-color: #333333;border-top: 1px solid #4d4d4d;}
 .slide_box {width: 100%; height: 360px; position: absolute; overflow: hidden;}
-.slide_banner {width:1920px; /*å›¾ç‰‡å®½åº¦*/ position:absolute; left:50%; margin-left:-960px; /*å›¾ç‰‡å®½åº¦çš„ä¸€åŠ*/}
+.slide_banner {width:1920px; /*Ã¥â€ºÂ¾Ã§â€°â€¡Ã¥Â®Â½Ã¥ÂºÂ¦*/ position:absolute; left:50%; margin-left:-960px; /*Ã¥â€ºÂ¾Ã§â€°â€¡Ã¥Â®Â½Ã¥ÂºÂ¦Ã§Å¡â€žÃ¤Â¸â‚¬Ã¥ÂÅ */}
 .slide_box a {width: 100%;  height: 360px; position: absolute; display: block;}
 .slide_box img { position: absolute; width: 100%;}
 .ad_slider {position: absolute; width: 100%; text-align: center;z-index: 10; bottom: 10px;}

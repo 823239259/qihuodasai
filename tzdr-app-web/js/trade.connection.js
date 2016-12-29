@@ -237,8 +237,8 @@ function initTrade(){
 function getVersion(){ 
 	$.ajax({ 
 		url:tzdr.constants.api_domain+"/socket/config/getVersions",
-		type:"POST", 
-		data:{ 
+		type:"post", 
+		data:{
 			version:appVersion
 		},
 		timeout:5000,

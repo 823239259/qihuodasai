@@ -1,235 +1,131 @@
 #header{
-
     height: 60px;
-
     line-height: 60px;
-
     background: #333333;
-
     position: fixed;
-
     z-index: 9999;
-
     width: 100%;
-
 }
-
 @media screen and (max-width: 1280px) {
-
     #header {width: 1280px}
-
 }
-
 #customerTel{
-
     height: 60px;
-
     line-height: 60px;
-
     font-size: 14px;
-
     display: inline-block;
-
 }
-
 #customerTel img {
-
     margin-left: 30px;
-
     margin-top: 10px;
-
     float: left;
-
 }
-
 #customerTel ul {
-
     float: left;
-
     margin-left: 60px;
-
 }
-
 #customerTel ul li {
-
     float: left;
-
     margin: 0 20px;
-
 }
-
 #customerTel ul li a {
-
     display: inline-block;
-
     line-height: 60px;
-
     height: 60px;
-
     font-size: 14px;
-
     color: #fff;
-
     text-align: center;
-
 }
-
 #customerTel ul li a:hover {
-
   color:#ffb319;
-
 }
-
-#headerTopRight{
-
-    float: right;
-
-    margin-right: 30px;
-
-    height: 60px;
-
-}
-
 #headerTopRight span{
-
     cursor: pointer;
-
     position: relative;
-
     right: 16px;
-
 }
-
 #headerTopRight span input{
-
     background: url("../image/grayBackgroudColor.png");
-
     border: 0px;
-
     height: 30px;
-
     width: 160px;
-
     outline: none;
-
     display: none;
-
     padding:0px 27px 0px 5px;
-
 }
-
 #headerTopRight span img{
-
     position: absolute;
-
     right: 5px;
-
     top:3px;
-
 }
-
 #headerTopRight a{
-
     vertical-align: middle;
-
     font-size: 14px;
-
     color:#ffffff;
-
+    float: left;
 }
-
+#login {
+    margin-right: 15px;
+}
+#headerTopRight {
+    float: right;
+    margin-right: 30px;
+    height: 60px;
+    line-height: 60px;
+}
+#headerTopRight ul li {
+    float: left;
+}
 .verticalLine {
-
-    margin: 0px 5px;
-
+    margin-right: 15px;
     color: #ffffff;
-
     font-style: normal;
-
     font-size: 12px;
-
+    border-left: 2px solid #ccc;
+    display: inline-block;
+    height: 12px;
+    line-height: 12px;
+    position: relative;
 }
-
 #headerTopRight a:hover {
-
     color: #ffb319;
-
 }
-
-
 
 #fixedIcon {
-
     position: fixed;
-
     top: 500px;
-
     right: 0px;
-
     width: 40px;
-
     height: auto;
-
     z-index: 1;
-
 }
-
 #fixedIcon a {
-
     display: inline-block;
-
     width: 40px;
-
     height: 40px;
-
     margin-bottom: 2px;
-
 }
-
 #QRCodeDiv {
-
     background: url("/templets/style/html/images/image/icon/1.png") no-repeat;
-
 }
-
 #QRCodeDiv:hover {
-
     background: url("/templets/style/html/images/image/icon/2.png") no-repeat;
-
 }
-
 #QQDiv {
-
     background: url("/templets/style/html/images/image/icon/qq.png") no-repeat;
-
 }
-
 #QQDiv:hover {
-
     background: url("/templets/style/html/images/image/icon/qq2.png") no-repeat;
-
 }
-
 #backDiv {
-
     background: url("/templets/style/html/images/image/icon/top.png") no-repeat;
-
 }
-
 #backDiv:hover {
-
     background: url("/templets/style/html/images/image/icon/top1.png") no-repeat;
-
 }
-
 #QRCodeDiv img {
-
     display: none;
-
 }
-
 #QRCodeDiv:hover img {
-
     display: block;
-
 }

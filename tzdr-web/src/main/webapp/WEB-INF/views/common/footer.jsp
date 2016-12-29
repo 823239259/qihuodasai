@@ -1,8 +1,104 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.umpay.api.log.SysOutLogger"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
-<div style="background: #333;height: 338px;" id="ungundontiao">
-<div class="copyright">
+<style>
+#footer {
+    clear: both;
+    background-color: #333333;
+    overflow: hidden;
+    padding: 40px 0px 40px;
+    width: 1280px;
+    margin: 0 auto;
+    height: 160px;
+    margin-top: 20px;
+}
+#footer div {
+    float: left;
+}
+#footer .footerList ul {
+    float: left;
+    width: 104px;
+    margin-right: 80px;
+}
+#footer .footerList ul li {
+    font-size: 14px;
+    line-height: 24px;
+    color: #999;
+}
+#footer .footerList ul li a {
+    color: #999999;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+}
+#footer .footerList ul li.footHover a:hover {
+    color: #ffb319;
+}
+#footer .footerList ul li a {
+    color: #666;
+}
+#footer .footerList ul li a:hover {
+    color: #ffb319;
+}
+#footer .footerList ul li.footerTitle {
+    margin-bottom: 25px;
+    color: #999;
+    font-size: 16px;
+}
+#iOS {
+    margin-left: 40px;
+    margin-right: 180px;
+}
+#iOS img {
+    width: 160px;
+}
+#iOS p{
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    margin-top: 5px;
+}
+#footer #QRcode #iOS p,
+#footer #QRcode #Android p {
+    margin-top: 8px;
+    color: #ffffff;
+    font-size: 14px;
+}
+#footer #customerService {
+    float: right;
+}
+#footer #customerService ul {
+    width: 145px;
+    margin-right: 0;
+}
+#footer #customerService li {
+    color: #666;
+}
+#footer #customerService li.footerTitle {
+    color: #999;
+}
+#Copyright {
+    width: 1280px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+}
+#Copyright div {
+    padding: 10px 0px;
+    margin: auto;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    color: #999999;
+}
+#Copyright div a {
+    line-height: 20px;
+    margin-left: 5px;
+    color: #999999;
+}
+</style>
+<!-- <div style="background: #333;height: 338px;" id="ungundontiao"> -->
+<div>
+<%-- <div class="copyright">
     <div class="copyright_content">
         <div class="copyright_link">
             <ul class="link">
@@ -64,8 +160,8 @@
             </ul>
         </div>
     </div>
-</div>
-<div class="copybox">
+</div> --%>
+<%-- <div class="copybox">
     <div class="copybox_content">
         <div class="cp_link" style="padding-top: 30px;">
         	<ul class="copy_yqlj">
@@ -73,7 +169,9 @@
         		<li><a target="_blank" href="http://www.58che.com/2600/">沃尔沃S80</a></li>
         		<li><a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a></li>
         		<li><a target="_blank" href="http://www.starswealth.com/">第三方理财机构</a></li>
-        		<li><a target="_blank" href="http://http://www.zhongdaihui.com/">众贷汇理财</a></li>
+        		<li><a target="_blank" href="http://www.zhongdaihui.com/">众贷汇理财</a></li>
+        		<li><a target="_blank" href="http://www.xj917.com/">新疆综合网</a></li>
+        		<li><a target="_blank" href="http://90au.haouc.com/">劲舞团</a></li>
         	</ul>
             <ul>
                 <li>相关网站：</li>
@@ -94,7 +192,70 @@
             <a target="_blank" href="http://www.shuidixy.com/company/professionalInfo?s=94424583567954757334740627845150"><img style="opacity: 0.6;" src="${ctx}/static/images/image/small.png"></a>
         </div>
     </div>
+</div> --%>
+
+<div id="footer">
+    <div id="iOS">
+        <img src="http://cms.vs.com/templets/style/html/images/image/iosCode.png">
+        <p>维胜金融APP下载</p>
+    </div>
+    <div class="footerList" >
+            <ul>
+                <li class="footerTitle">关于我们</li>
+                <li><a href="http://www.vs.com/about">公司简介</a></li>
+                <li><a href="http://www.vs.com/contact">联系我们</a></li>
+                <li><a href="/vsnews/baodao/">媒体报道</a></li>
+                <li><a href="/vsnews/help/">帮助中心</a></li>
+            </ul>
+            <ul>
+                <li class="footerTitle">公司品牌</li>
+                <li><a href=" http://www.vs.com/">维胜</a></li>
+                <li><a href=" http://www.vs.com/">国际期货公司</a></li>
+                <li><a href=" http://www.vs.com/">外盘期货公司</a></li>
+                <li><a href=" http://www.vs.com/">成都期货</a></li>
+            </ul>
+            <ul>
+                <li class="footerTitle">公司产品</li>
+                <li><a href=" http://www.vs.com/">期货</a></li>
+                <li><a href=" http://www.vs.com/">外盘期货</a></li>
+                <li><a href=" http://www.vs.com/">恒指期货</a></li>
+                <li><a href=" http://www.vs.com/">国际原油</a></li>
+                <li><a href=" http://www.vs.com/">富时A50</a></li>
+            </ul>
+            <ul>
+                <li class="footerTitle">公司业务</li>
+                <li><a href=" http://www.vs.com/">期货开户</a></li>
+                <li><a href=" http://www.vs.com/">国际期货开户</a></li>
+                <li><a href=" http://www.vs.com/">期货交易</a></li>
+                <li><a href=" http://www.vs.com/">期货行情</a></li>
+                <li><a href=" http://www.vs.com/">外盘期货行情</a></li>
+            </ul>
+        </div>
+    <div id="customerService" class="footerList">
+        <ul>
+            <li  class="footerTitle">客服热线</li>
+            <li>400-852-8008</li>
+            <li>工作日 08:30-24:00</li>
+            <li>周末 09:00-17:00</li>
+        </ul>
+    </div>
 </div>
+<div id="Copyright">
+    <div>
+        <p>
+            <span style="font-size: 12px;">友情链接：</span>
+            <a target="_blank" href="http://www.58che.com/2600/">沃尔沃S80</a>
+            <a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a>
+            <a target="_blank" href="http://www.starswealth.com/">第三方理财机构</a>
+            <a target="_blank" href="http://www.zhongdaihui.com/">众贷汇理财</a>
+            <a target="_blank" href="http://www.xj917.com/">新疆综合网</a>
+            <a target="_blank" href="http://90au.haouc.com/">劲舞团</a>
+        </p>
+        友情链接：<a href="javascript:void(0);">证监会</a><a href="javascript:void(0);">银监会</a><a href="javascript:void(0);">保监会</a><a href="javascript:void(0);">深交所</a><a href="javascript:void(0);">上交所</a><a href="javascript:void(0);">新加坡交易所</a><a href="javascript:void(0);">新加坡交易所</a><a href="javascript:void(0);">香港交易所</a><a href="javascript:void(0);">纽约证券交易所</a><a href="#">纳斯达克</a>
+        <p>Copyright  2016  成都盈透科技有限公司  版权所有  蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
+    </div>
+</div>
+
 </div>
 <!-- 网站公告 -->
 <div class="site-notice notice-fixed">

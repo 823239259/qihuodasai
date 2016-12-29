@@ -133,4 +133,20 @@ a{
     display: block;
 
 }
-
+.page a {
+    font-size: 14px;
+    background-color: #fff;
+    padding: 5px 10px;
+    color: #333;
+}
+.page li.thisclass {
+    background: #ffb319;
+    padding: 4px 9px;
+    position: relative;
+    top: 1px;
+}
+.page {
+    width: 720px;
+    text-align: center;
+    margin-top: 40px;
+}

@@ -1225,7 +1225,8 @@
 			"tzdr/account/gopay.html",
 			"tzdr/account/dxtxPay.html",
 			"tzdr/account/openUrlPay.html",
-			"tzdr/account/alipay.html"
+			"tzdr/account/alipay.html",
+			"tzdr/account/bindzhifubao.html"
 		],
 		"resources": [
 			"css/own.css",
@@ -1371,6 +1372,18 @@
 			"js/mui.min.js",
 			"js/jquery-1.11.3.js",
 			"css/mui.min.css"
+		]
+	},
+	"tzdr/account/bindzhifubao.html": {
+		"resources": [
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"css/recharge.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/pingpp.js"
 		]
 	}
 }

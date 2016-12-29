@@ -29,26 +29,31 @@ function initLoadParam(name){
     if (r!=null) return unescape(r[2]); return null; //返回参数值
 }
 function loadUserInfo(){
-        $.ajax({
-            type:"get",
-            url:funUrl+"user_login_check",
-            dataType:'json',//服务器返回json格式数据
-            success:function(result){
-                var data = result.data;
-                if(data != null){
-                    var mobile = data.mobile;
-                    if(mobile != null){
-                        mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-                        $("#login").html("欢迎您，<a href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>"); 
-                        $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
-                        $("#personalCenter").css("display","block").html("我的账户");
-                        $("#signOut").bind("click",function(){
-                        	location.href = funUrl+"login/user/logout?url="+urlHost;
-                        });
-                    }
+    $.ajax({
+        type:"get",
+        url:funUrl+"user_login_check",
+        dataType:'json',//服务器返回json格式数据
+        success:function(result){
+            var data = result.data;
+            if(data != null){
+                var mobile = data.mobile;
+                if(mobile != null){
+                    mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
+                    $("#login_on").html("<span style='float: left;color: #fff;font-size: 14px;'>欢迎您，</span><a href='"+funUrl+"/user/account'><span>"+mobile+"</span></a>");
+                    $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
+                    /*$("#personalCenter").css({
+                        "display": "block",
+                        "float": "right",
+                        "marginLeft": "15px",
+                        "marginTop": "2px"
+                    }).html("我的账户");*/
+                    $("#signOut").bind("click",function(){
+                    	location.href = funUrl+"login/user/logout?url="+urlHost;
+                    });
                 }
             }
-        });
+        }
+    });
 }
 function getLocalTime(nS) {
     return  new Date(parseInt(nS) * 1000).Format("yyyy-MM-dd hh:mm:ss");
@@ -87,3 +92,8 @@ function queryData(url,params,success,error){
         }
     })
 }
+$(function(){
+    $("#backDiv").click(function(){
+        $('html, body').animate({scrollTop: '0px'}, 800);
+    });
+});
