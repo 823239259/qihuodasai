@@ -107,9 +107,9 @@ $(function() {
             //console.log(dataall);
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
-                var exs = 3600*8;
-                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
-                timestamp = zhi+"000";
+                /*var exs = 3600*8;*/
+                //var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
+                timestamp = timestamp+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
@@ -297,9 +297,9 @@ $(function() {
             var dataall=data.Data;
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
-                var exs = 3600*8;
-                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
-                timestamp = zhi+"000";
+                /*var exs = 3600*8;
+                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));*/
+                timestamp = timestamp+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
