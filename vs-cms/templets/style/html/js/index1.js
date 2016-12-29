@@ -39,14 +39,14 @@ function loadUserInfo(){
                 var mobile = data.mobile;
                 if(mobile != null){
                     mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-                    $("#login").html("欢迎您，<a style='margin-left: 15px;' href='"+funUrl+"user/account'><span>"+mobile+"</span></a>");
+                    $("#login_on").html("欢迎您，<a style='margin-left: 15px;' href='"+funUrl+"user/account'><span>"+mobile+"</span></a>");
                     $("#registerALL").html("<a href='javascript:void(0);' id='signOut'>退出</a>");
-                    $("#personalCenter").css({
+                    /*$("#personalCenter").css({
                         "display": "block",
                         "float": "right",
                         "marginLeft": "15px",
                         "marginTop": "2px"
-                    }).html("我的账户");
+                    }).html("我的账户");*/
                     $("#signOut").bind("click",function(){
                     	location.href = funUrl+"login/user/logout?url="+urlHost;
                     });
