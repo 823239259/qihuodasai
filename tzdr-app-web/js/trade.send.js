@@ -278,7 +278,7 @@ var Trade = {
 							+' "ConditionType":'+conditionType+','
 							+' "PriceTriggerPonit":'+priceTriggerPonit+','
 							+' "CompareType":'+compareType+','
-							+' "TimeTriggerPoint","'+timeTriggerPoint+'",'
+							+' "TimeTriggerPoint":"'+timeTriggerPoint+'",'
 							+' "AB_BuyPoint":'+abBuyPoint+','
 							+' "AB_SellPoint":'+abSellPoint+','
 							+' "OrderType":'+orderType+','
@@ -289,6 +289,7 @@ var Trade = {
 							+' "AdditionFlag":'+additionFlag+','
 							+' "AdditionType":'+additionType+','
 							+' "AdditionPrice":'+additionPrice+'}';
+							console.log(param); 
 				Trade.doSendMessage(TradeUrl.InsertCondition,param);
 			},
 			/**
@@ -334,7 +335,7 @@ var Trade = {
 							+' "ConditionType":'+conditionType+','
 							+' "PriceTriggerPonit":'+priceTriggerPonit+','
 							+' "CompareType":'+compareType+','
-							+' "TimeTriggerPoint","'+timeTriggerPoint+'",'
+							+' "TimeTriggerPoint":"'+timeTriggerPoint+'",'
 							+' "AB_BuyPoint":'+abBuyPoint+','
 							+' "AB_SellPoint":'+abSellPoint+','
 							+' "OrderType":'+orderType+','
@@ -345,6 +346,7 @@ var Trade = {
 							+' "AdditionFlag":'+additionFlag+','
 							+' "AdditionType":'+additionType+','
 							+' "AdditionPrice":'+additionPrice+'}';
+							console.log(param);
 				Trade.doSendMessage(TradeUrl.ModifyCondition,param);
 			},
 			/**

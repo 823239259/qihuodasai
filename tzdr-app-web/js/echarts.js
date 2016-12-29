@@ -1605,7 +1605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                throw new Error('Initialize failed: invalid dom.');
 	            }
 	            if (zrUtil.isDom(dom) && dom.nodeName.toUpperCase() !== 'CANVAS' && (!dom.clientWidth || !dom.clientHeight)) {
-	                console.warn('Can\'t get dom width or height');
+	                //console.warn('Can\'t get dom width or height');
 	            }
 	        }
 
@@ -49034,7 +49034,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                if (true) {
 	                    if (!legendDrawedMap[name]) {
-	                        console.warn(name + ' series not exists. Legend data should be same with series name or data name.');
+	                        //console.warn(name + ' series not exists. Legend data should be same with series name or data name.');
 	                    }
 	                }
 	            }, this);

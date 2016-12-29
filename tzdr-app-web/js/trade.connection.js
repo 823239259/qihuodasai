@@ -85,7 +85,9 @@ function changeConnectionStatus(){
  * 交易连接
  */
 function tradeConnection(){  
-	socket = new WebSocket(socketUrl);  
+	if(socketUrl.length > 0){
+		socket = new WebSocket(socketUrl);  
+	}
 }
 /**
  * 交易连接断开的处理
@@ -235,14 +237,14 @@ function initTrade(){
 function getVersion(){ 
 	$.ajax({ 
 		url:tzdr.constants.api_domain+"/socket/config/getVersions",
-		type:"get", 
-		data:{
-			appVersions:appVersion
+		type:"POST", 
+		data:{ 
+			version:appVersion
 		},
 		timeout:5000,
 		success:function(result){
 			if(result.success){ 
-				var data = result.data;
+				var data = result.data; 
 				tradeWebsocketUrl = data.socketUrl;
 				tradeWebSocketVersion = data.socketVersion;
 				tradeWebsocketModelUrl = data.socketModelUrl;

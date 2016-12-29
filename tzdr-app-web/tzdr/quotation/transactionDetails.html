@@ -501,12 +501,12 @@
 				    				<td>时间</td>
 				    			</tr>
 				    		</thead>
-							<thody id = "thodyCondition">
-							</thody>
+							<tbody id = "thodyCondition">
+							</tbody>
 				    	</table>
-				    	<button id="suspendCondition">暂停</button>
-						<button id="modifyCondition">修改</button>
-						<button id="deleteCondition">删除</button>
+				    	<button value="2"  class = "updateCondition" id="suspendCondition">暂停</button>
+						<button value="0" id="modifyCondition">修改</button>
+						<button value="1" class = "updateCondition" id="deleteCondition">删除</button>
 				    </div>
 				    <div class="mui-control-content" id="alreayCondition">
 				    	<table class="ConditionList">
@@ -531,8 +531,8 @@
 <!-----------------------------添加条件单的弹窗---------------------------->				
 				<div id="popoverConditoion" class="mui-popover">
 				    <div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
-				        <a class="mui-control-item mui-active" href="#ConditoionTitlePrices" >价格条件</a>
-				        <a class="mui-control-item" href="#ConditoionTitleTime" >时间条件</a>
+				        <a class="mui-control-item mui-active" id = "plan_conditionTitlePrice" href="#ConditoionTitlePrices" >价格条件</a>
+				        <a class="mui-control-item" id = "plan_conditionTitleTime" href="#ConditoionTitleTime" >时间条件</a>
 				    </div>
 				    <div>
 				    	<div id="ConditoionTitlePrices" class="mui-control-content mui-active">
@@ -1005,6 +1005,9 @@
 					mui("#popoverLoss1").popover("toggle");
 				});
 				document.getElementById("insertCondition").addEventListener("tap",function(){
+					$("#plan_conditionTitlePrice").show();
+					$("#plan_conditionTitleTime").show();
+					$("#ConditoionTitlePrices").show(); 
 					mui("#popoverConditoion").popover("toggle");
 				});
 				document.getElementById("closeConditionTable1").addEventListener("tap",function(){

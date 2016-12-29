@@ -66,6 +66,7 @@ function linearlyLoadData(method) {
 		if(conditionLoadDataIndex == 0  && tradeWebSocketIsMock == 1){
 			Trade.doQryCondition(username);
 			conditionLoadDataIndex++; 
+			console.log("条件单查询");
 		}
 	}
 }
@@ -265,12 +266,25 @@ function handleData(evt){
 			tip(stoplossType+"单【"+stopLossNo+"】,"+status);
 			//查询条件单返回
 		}else if(method == "OnRspQryCondition"){
+			console.log(parameters);
 			var conditionParam = parameters;
 			appendCondition(conditionParam);
 			//录入条件单请求返回
 		}else if(method == "OnRspInsertCondition"){
+			console.log(JSON.stringify(parameters));
 			var conditionParam = parameters;
-			updateCondition(conditionParam);
+			var message = "";
+			var status = conditionParam.Status;
+			if(status == 4){
+				tip("添加条件单失败");
+			}else{
+				var conditionNo = conditionParam.StopLossNo;
+				tip("条件单提交成功,单号:"+conditionNo);
+			} 
+			appendCondition(conditionParam);
+		}else if(method == "OnRtnConditionState"){ 
+			var conditionParam = parameters;
+			updateConditionList(conditionParam);
 		}
 	}else{  
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
@@ -1168,11 +1182,15 @@ var localCacheCondition = {};
  * @param {Object} param
  */
 var selectCondition = {};
+/**
+ * 条件单操作标识：0-修改 1-删除 2-暂停 3-启动
+ */
+var operateConditionType = undefined;
 function appendCondition(param){
 	var commodityNo = param.CommodityNo;
 	var contractNo = param.ContractNo;
 	var exchangeNo = param.ExchangeNo;
-	var conditionNo = param.ConditionNo;
+	var conditionNo = param.StopLossNo; 
 	var status = param.Status;
 	var statusText = analysisConditionStatus(status);
 	var num = param.Num;
@@ -1190,16 +1208,21 @@ function appendCondition(param){
 	var stopLossType = param.StopLossType;
 	var stopLossDiff = param.StopLossDiff;
 	var stopWinDiff = param.StopWinDiff;
-	var insertTime = param.InsertTime;
+	var insertTime = param.InsertDateTime;
 	var additionFlag = param.AdditionFlag;
 	var additionType = param.AdditionType;
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){
-		additionTypeText = analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
 	}
-	compareTypeText = compareTypeText+priceTriggerPonit+"<br/>"+additionTypeText;
-	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(stopLossType)+","+num+"手";
+	if(conditionType == 0){
+		compareTypeText = compareTypeText+priceTriggerPonit;
+	}else if(conditionType == 1){
+		compareTypeText = timeTriggerPoint;
+	} 
+	compareTypeText = compareTypeText+additionTypeText;
+	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
 	var cls = "condition"+conditionIndex;
 	var html = '<tr class="testclick tab_condition '+cls+'" id = "'+conditionNo+'">'
 					+'<td class = "condition0">'+contractCode+'</td>'
@@ -1209,7 +1232,7 @@ function appendCondition(param){
 					+'<td class = "condition4">'+inserOrderText+'</td>'
 					+'<td class = "condition5">'+formatDateYYYMMDD(new Date())+'</td>'
 					+'<td class = "condition6">'+insertTime+'</td>'
-				+'</tr>';
+				+'</tr>';  
 	if(status == 0 || status == 1){ 
 		$("#thodyCondition").append(html);
 		addConditionBindClick(cls);
@@ -1223,11 +1246,11 @@ function appendCondition(param){
  * 修改条件单列表信息
  * @param {Object} param
  */
-function updateCondition(param){
+function updateConditionList(param){
 	var commodityNo = param.CommodityNo;
 	var contractNo = param.ContractNo;
 	var exchangeNo = param.ExchangeNo;
-	var conditionNo = param.ConditionNo;
+	var conditionNo = param.StopLossNo;
 	var status = param.Status;
 	var statusText = analysisConditionStatus(status);
 	var num = param.Num;
@@ -1250,16 +1273,21 @@ function updateCondition(param){
 	var additionType = param.AdditionType;
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
-	if(additionFlag == 1){
-		additionTypeText = analysisConditionCompareType(additionType)+additionPrice;
-	}
-	compareTypeText = compareTypeText+priceTriggerPonit+"<br/>"+additionTypeText;
-	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(stopLossType)+","+num+"手";
+	if(additionFlag == 1){ 
+		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
+	}  
+	if(conditionType == 0){
+		compareTypeText = compareTypeText+priceTriggerPonit;
+	}else if(conditionType == 1){
+		compareTypeText = timeTriggerPoint;
+	} 
+	compareTypeText = compareTypeText+additionTypeText;
+	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
 	$("#"+conditionNo+" td[class = 'condition1']").text(statusText);
 	$("#"+conditionNo+" td[class = 'condition1']").attr("data-tion-status",status);
 	$("#"+conditionNo+" td[class = 'condition2']").text(conditionTypeText);
 	$("#"+conditionNo+" td[class = 'condition2']").attr("data-tion-conditionType",conditionType);
-	$("#"+conditionNo+" td[class = 'condition3']").text(compareTypeText);
+	$("#"+conditionNo+" td[class = 'condition3']").html(compareTypeText);
 	$("#"+conditionNo+" td[class = 'condition3']").attr("data-tion-compareType",compareType);
 	$("#"+conditionNo+" td[class = 'condition4']").text(inserOrderText);
 	if(status == 2 || status == 3 || status == 4 || status == 5){
@@ -1494,6 +1522,14 @@ function addConditionBindClick(cls){
 	$("."+cls).bind("click",function(){
 		var $this = $(this);
 		selectCondition["conditionNo"] = $this.attr("id");
+		var status = $("#"+selectCondition["conditionNo"]+" td[class = 'condition1']").attr("data-tion-status");
+		if(status == 0){
+			$("#suspendCondition").val(2);
+			$("#suspendCondition").text("暂停");
+		}else if(status == 1){
+			$("#suspendCondition").val(3);  
+			$("#suspendCondition").text("启动");
+		}
 	});
 }
 /**
@@ -2451,8 +2487,10 @@ function bindOpertion(){
 		if(vadationIsLoginMuiTip()){
 			var chioceTimeAdditional = $("#chioceTimeAdditional").val();
 			if(chioceTimeAdditional != -1){
-				var ConditoionTimePricesInput = $("#ConditoionPricesInput1").val();
-				if(ConditoionTimePricesInput <= 0 || ConditoionTimePricesInput.length){
+				var ConditoionTimePricesInput = $("#ConditoionTimePricesInput").val();
+				console.log(ConditoionTimePricesInput);
+				
+				if(ConditoionTimePricesInput <= 0 || ConditoionTimePricesInput.length == 0){
 					tip("附加触发价格错误");
 					return;
 				}
@@ -2462,7 +2500,7 @@ function bindOpertion(){
 				tip("手数输入错误");
 				return;
 			}
-			var chioceContract = $("#chioceContract").text();
+			var chioceContract = $("#chioceContract").val();
 			if(insertConditionCount == 0){
 				alertProtype("你确定要提交【"+chioceContract+"】条件单吗?","提示",Btn.confirmedAndCancle(),doInsertConditionByTime);
 			}else if(insertConditionCount == 1){
@@ -2499,11 +2537,9 @@ function bindOpertion(){
 			var drection = param.Drection;
 			var additionType = param.AdditionType;
 			var additionPrice = param.AdditionPrice;
-			var df = new DateTimeFormat();
-			var dateTime = df.parse(timeTriggerPoint);
-			var hours = dateTime.getHours();
-			var minutes = dateTime.getMinutes();
-			var time = hours+":"+minutes;
+			var df = new Date(timeTriggerPoint);
+			var dfTime = df.getTime();
+			var time = formatDateHHMMSS(new Date(dfTime));
 			$("#chioceContract").val(contractCode);
 			$("#chiocePrices").val(compareType);
 			$("#ConditoionPricesInput").val(priceTriggerPonit);
@@ -2523,8 +2559,45 @@ function bindOpertion(){
 			$("#ConditoionTimeInput").val(num);
 			insertConditionCount = 1; 
 			$("#chioceContract").attr("disabled",true);
+			if(conditionType == 0){  
+				$("#plan_conditionTitlePrice").show();
+				$("#ConditoionTitlePrices").show();
+				$("#plan_conditionTitleTime").hide();
+				$("#ConditoionTitleTime").hide();
+			}else if(conditionType == 1){
+				$("#plan_conditionTitlePrice").hide();
+				$("#ConditoionTitlePrices").hide();
+				$("#plan_conditionTitleTime").show();
+				$("#ConditoionTitleTime").show(); 
+			} 
 			mui("#popoverConditoion").popover("toggle");
 		}
+	});
+	/**
+	 * 暂停-2，删除-1
+	 */
+	$(".updateCondition").bind("click",function(){
+		var conditionNo = selectCondition["conditionNo"];
+		if(conditionNo == undefined){
+			tip("请选择一行数据");
+			return;
+		}
+		var $this = $(this);
+		var modifyFlag = $this.val();
+		operateConditionType = modifyFlag;
+		if(operateConditionType == undefined){
+			tip("请重新操作");
+			return;
+		}
+		var modifyFlagText = "";
+		if(operateConditionType == 1){
+			valText = "删除";
+		}else if(operateConditionType == 2){
+			valText = "暂停";
+		}else if(operateConditionType == 3){
+			valText = "启动";
+		}
+		alertProtype("是否要"+modifyFlagText+"条件单?","提示",Btn.confirmed(),doUpdateAndDelCondition);
 	});
 }
 
@@ -2891,7 +2964,7 @@ function doUpdateModifyLoss(){
  * 添加条件单操作（价格条件）
  */
 function doInsertConditionByPrice(){
-	if(isLogin){
+	if(vadationIsLoginMuiTip()){
 		var contractCode = $("#chioceContract").val();
 		var compareType = $("#chiocePrices").val();
 		var priceTriggerPonit = $("#ConditoionPricesInput").val();
@@ -2900,9 +2973,11 @@ function doInsertConditionByPrice(){
 		var drection = $("#shopDrection").val();
 		var orderType = $("#chiocePricesSelect").val();
 		var num = $("#ConditoionPricesInput3").val();
-		var flag = true;
+		//1-有附加条件，0-没有附加条件
+		var flag = 1;
 		if(additionPrice <= 0 || additionPrice.length == 0){
-			flag = false;
+			flag = 0;
+			additionType = 0;
 		}
 		var localCommdity = getMarketCommdity(contractCode);
 		if(localCommdity == undefined){
@@ -2911,8 +2986,8 @@ function doInsertConditionByPrice(){
 		}
 		var exchangeNo = localCommdity.ExchangeNo;
 		var commodityNo = localCommdity.CommodityNo;
-		var contractNo = localCommdity.ContractNo;
-		var tradeparam = createInsertCondition(exchangeNo,commodityNo,contractNo,num,0,priceTriggerPonit,compareType,"","","",orderType,drection,"","","",flag,additionType,additionPrice);
+		var contractNo = localCommdity.MainContract; 
+		var tradeparam = createInsertCondition(exchangeNo,commodityNo,contractNo,num,0,priceTriggerPonit,compareType,"",0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		insertCondition(tradeparam);
 	}
 }
@@ -2921,17 +2996,18 @@ function doInsertConditionByPrice(){
  */
 function doInsertConditionByTime(){
 	if(vadationIsLoginMuiTip()){
-		var contradeCode = $("#chioceContract1").val();
+		var contractCode = $("#chioceContract1").val();
 		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val();
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
 		var orderType = $("#chiocePricesSelectTime").val();
 		var num = $("#ConditoionTimeInput").val();
-		var flag = true;
+		var flag = 1;
 		if(additionPrice <= 0 || additionPrice.length == 0){
-			flag = false;
-		}
+			flag = 0;
+			additionType = 0
+		} 
 		var localCommdity = getMarketCommdity(contractCode);
 		if(localCommdity == undefined){
 			tip("无效的合约");
@@ -2939,8 +3015,8 @@ function doInsertConditionByTime(){
 		}
 		var exchangeNo = localCommdity.ExchangeNo;
 		var commodityNo = localCommdity.CommodityNo;
-		var contractNo = localCommdity.ContractNo; 
-		var tradeParam = createInsertCondition(exchangeNo,commodityNo,contractNo,num,1,"","",timeTriggerPoint,"","",orderType,drection,"","","",flag,additionType,additionPrice);
+		var contractNo = localCommdity.MainContract; 
+		var tradeParam = createInsertCondition(exchangeNo,commodityNo,contractNo,num,1,0,0,timeTriggerPoint,0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		insertCondition(tradeParam);
 	}
 }
@@ -2949,7 +3025,8 @@ function doInsertConditionByTime(){
  */
 function doUpdateConditionByPrice(){
 	if(vadationIsLoginMuiTip()){
-		var conditionNo = selectCondition[conditionNo];
+		var conditionNo = selectCondition["conditionNo"];
+		console.log(conditionNo);
 		if(conditionNo == undefined){
 			tip("请选择一条数据");
 			return;
@@ -2975,7 +3052,7 @@ function doUpdateConditionByPrice(){
  */
 function doUpdateConditionByTime(){
 	if(vadationIsLoginMuiTip()){
-		var conditionNo = selectCondition[conditionNo];
+		var conditionNo = selectCondition["conditionNo"];
 		if(conditionNo == undefined){
 			tip("请选择一条数据");
 			return;
@@ -2987,13 +3064,22 @@ function doUpdateConditionByTime(){
 		var drection = $("#shopDrectionTime").val();
 		var orderType = $("#chiocePricesSelectTime").val();
 		var num = $("#ConditoionTimeInput").val();
-		var flag = true;
+		var flag = 1;
 		if(additionPrice <= 0 || additionPrice.length == 0){
-			flag = false;
+			flag = 0;
+			additionType = 0;
 		}
-		var tradeParam = createUpdateConditioin(conditionNo,0,num,1,"","",timeTriggerPoint,"","",orderType,drection,"","","",flag,additionType,additionPrice);
+		var tradeParam = createUpdateConditioin(conditionNo,0,num,1,0,0,timeTriggerPoint,0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		updateCondition(tradeParam);
 	}
+}
+/**
+ * 暂停-删除-启动条件单
+ */
+function doUpdateAndDelCondition(){ 
+	var conditionNo = selectCondition["conditionNo"];
+	var tradeparam = createUpdateConditioin(conditionNo,operateConditionType,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0);
+	updateCondition(tradeparam);
 }
 /**
  * 获取平仓的基本信息
