@@ -39,11 +39,6 @@
 #customerTel ul li a:hover {
   color:#ffb319;
 }
-#headerTopRight{
-    float: right;
-    margin-right: 30px;
-    height: 60px;
-}
 #headerTopRight span{
     cursor: pointer;
     position: relative;
@@ -67,6 +62,19 @@
     vertical-align: middle;
     font-size: 14px;
     color:#ffffff;
+    float: left;
+}
+#login {
+    margin-right: 15px;
+}
+#headerTopRight {
+    float: right;
+    margin-right: 30px;
+    height: 60px;
+    line-height: 60px;
+}
+#headerTopRight ul li {
+    float: left;
 }
 .verticalLine {
     margin-right: 15px;

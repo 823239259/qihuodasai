@@ -74,6 +74,8 @@
         		<li><a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a></li>
         		<li><a target="_blank" href="http://www.starswealth.com/">第三方理财机构</a></li>
         		<li><a target="_blank" href="http://www.zhongdaihui.com/">众贷汇理财</a></li>
+        		<li><a target="_blank" href="http://www.xj917.com/">新疆综合网</a></li>
+        		<li><a target="_blank" href="http://90au.haouc.com/">劲舞团</a></li>
         	</ul>
             <ul>
                 <li>相关网站：</li>
