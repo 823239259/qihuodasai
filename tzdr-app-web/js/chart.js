@@ -82,6 +82,14 @@ mui.plusReady(function(){
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
         	sendHistoryMessage(0);
+//      	TemporaryDataV={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
+//			TemporaryData={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
@@ -178,9 +186,6 @@ mui.plusReady(function(){
         var contractNo = $("#contractNo").val();
         masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
         masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
-//      setIntvalTime = setInterval(function(){
-//          masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","Count":1,"HisQuoteType":'+num+'}');
-//      },3000);
     }
     /**
 	 * 更新行情数据 
@@ -615,6 +620,15 @@ mui.plusReady(function(){
 			"price":[]
 		}    
     	sendHistoryMessage(0);
+//  	getTimeLength=0;
+//  	TemporaryDataV={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
+//			TemporaryData={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
     	
     })
    
@@ -672,6 +686,15 @@ mui.plusReady(function(){
 		    }
 		     newData=[]; 
 				sendHistoryMessage(val);
+//				TemporaryDataV={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
+//			TemporaryData={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
+//				getTimeLength=0;
 		        		setTimeout(function(){
 		        			$("#CandlestickChart").css("opacity","1");
 		        		},100);
@@ -757,6 +780,15 @@ mui.plusReady(function(){
 		    var timePrice=[];
     		var val=$("#timeChartMenu").val();
     		sendHistoryMessage(val);
+//  		getTimeLength=0;
+//  		TemporaryDataV={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
+//			TemporaryData={
+//			 	categoryData:[],
+//			 	values:[]
+//			 }
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
         	var x=0;
@@ -860,6 +892,14 @@ function masendMessage(method,parameters){
 		}
 	}
 }
+ var TemporaryData={
+ 	categoryData:[],
+ 	values:[]
+ }
+ var TemporaryDataV={
+ 	categoryData:[],
+ 	values:[]
+ }
 function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
@@ -873,6 +913,8 @@ function dealOnRtnQuoteData(data,totalVolume){
 		range=15;
 	}else if(text=="30分"){
 		range=30;
+	}else if(text=="日K"){
+		return
 	}
 	if(totalVolume=="-"){
 		totalVolume=0;
@@ -880,7 +922,17 @@ function dealOnRtnQuoteData(data,totalVolume){
 	}
 	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
 	var lastVolume=Number(volumeChartData.volume[volumeChartData.volume.length-1]);
+	if(Volume<=0){
+		Volume=0;
+	}
 	var freshVolume=lastVolume+Volume;
+	var lastVolume1=0;
+	var freshVolume1=0;
+	if(chartDataC != undefined){
+		lastVolume1=Number(CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]);
+		freshVolume1=lastVolume1+Volume;
+	}
+	var getTimeLength=0;
 	var lastPrices=Parameters.LastPrice;
 	var DateTimeStamp=Parameters.DateTimeStamp;
 	var oldTime1=timeData.time[timeData.time.length-1]
@@ -888,44 +940,50 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var nowShjian=Math.round(new Date(DateTimeStamp).getTime()/1000)
 	var time1=parseInt(nowShjian / (60*range));
 	var newTime=time1*60* range;
+	var time5=new Date(parseInt(newTime) * 1000);
+	var time6=getNowFormatDate(time5)
+	var time2=time6.split(" ");
+	var str1=time2[1].split(":");
+	var str2=str1[0]+":"+str1[1];
 	if(oldTime==newTime){
-//      	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
-//      	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;	
-//      	if(chartDataC != undefined){
-//		      	var lowPrices=Number(chartDataC.values[length-1][2]);
-//	    		var highPrices=Number(chartDataC.values[length-1][3]);
-//	    		var closePrices=lastPrices;
-//	    		if(lastPrices >=highPrices){
-//	    			highPrices=lastPrices
-//	    		}
-//	    		if(lowPrices>=highPrices){
-//	    			lowPrices=lastPrices
-//	    		}
-//	    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
-//	    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
-//      	}
-//      	console.log("相同")
+        	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
+        	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;
 	}else{
-//			console.log("不相同");
-//			var time4=new Date(newTime);
-//			var time3=time4.format('yyyy-MM-dd h:m:s');
-//			console.log(time3);
-//			var time2=time3.split(" ");
-//      	var str1=time2[1].split(":");
-//      	var str2=str1[0]+":"+str1[1]
-//			timeData.timeLabel.push();
-//			timeData.time.push(time3);
-//      	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));
-//      	if(chartDataC != undefined){
-//	        	volumeChartData.time.push(str2);
-//	        	volumeChartData.volume.push(freshVolume);
-//	        	chartDataC.categoryData.push(str2);
-//	    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
-//	    		CandlestickVolumeData.time.push(str2)
-//	    		CandlestickVolumeData.volume.push(freshVolume)
-//      	}
+			timeData.timeLabel.push(str2);
+			timeData.time.push(time6);
+        	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));
+        	volumeChartData.time.push(str2);
+	        volumeChartData.volume.push(0);
 	}
-//	console.log(JSON.stringify(timeData.time));
+	if(chartDataC != undefined){
+		var oldTime2=chartDataC.time[chartDataC.time.length-1];
+		var oldTime3=Math.round(new Date(oldTime2).getTime()/1000);
+		if(oldTime3==newTime){
+			var length=chartDataC.values.length;
+	      	var lowPrices=Number(chartDataC.values[length-1][2]);
+    		var highPrices=Number(chartDataC.values[length-1][3]);
+    		var closePrices=lastPrices;
+    		if(lastPrices >=highPrices){
+    			highPrices=lastPrices
+    		}
+    		if(lowPrices>=highPrices){
+    			lowPrices=lastPrices
+    		}
+    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
+    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume1;
+		}else{
+			chartDataC.categoryData.push(str2)
+			chartDataC.time.push(time6);
+    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
+    		CandlestickVolumeData.time.push(str2)
+    		CandlestickVolumeData.volume.push(0);
+    		chartDataC.categoryData=chartDataC.categoryData.slice(-40);
+    		chartDataC.values=chartDataC.values.slice(-40);
+    		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
+    		CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+    		getTimeLength=1;
+		}
+	}
 	var x=0;
 	var length=$("#positionList .position3").length;
 	var text=$("#CommodityNo").text();
@@ -937,6 +995,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 			}
 		}
 	}
+	
 	drawChartCandlestick(x);
 }
 function drawChartCandlestick(x){
@@ -957,7 +1016,27 @@ function drawChartCandlestick(x){
 	  		CandlestickVolumeChart.resize();	
 	  		CandlestickVolumeChart.group="group2";
 	  		myChart.group="group2";
-//	  		console.log("34");
        	}
 
 }
+    function getNowFormatDate(date) {
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        var getMinutes=date.getMinutes();
+        var getSeconds="00"
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        if(Number(getMinutes)<10){
+        	getMinutes="0"+getMinutes;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + getMinutes
+                + seperator2 + getSeconds;
+        return currentdate;
+    }
