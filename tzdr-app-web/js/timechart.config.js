@@ -30,7 +30,6 @@
         timeData.timeLabel=timeData.timeLabel.slice(-40);
         timeData.prices=timeData.prices.slice(-40);
          timeData.time=timeData.time.slice(-40);
-         console.log(timeData.time);
         if(timeChart != null){
         	var x=0;
             var length=$("#positionList .position3").length;

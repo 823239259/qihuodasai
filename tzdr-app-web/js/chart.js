@@ -863,12 +863,6 @@ function masendMessage(method,parameters){
 function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
-//	console.log(JSON.stringify(Parameters));
-	var newTimeHour=new Date().getHours();
-	var newTimeMinutes=new Date().getMinutes();
-	if(Number(newTimeMinutes)<=0){
-		newTimeMinutes="0"+newTimeMinutes
-	}
 	var text=$("#selectButon").text();
 	var range=1
 	if(text=="K线" || text=="1分"){
@@ -880,8 +874,6 @@ function dealOnRtnQuoteData(data,totalVolume){
 	}else if(text=="30分"){
 		range=30;
 	}
-	
-	var newTime1=newTimeHour+":"+newTimeMinutes;
 	if(totalVolume=="-"){
 		totalVolume=0;
 		return
@@ -897,8 +889,8 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var time1=parseInt(nowShjian / (60*range));
 	var newTime=time1*60* range;
 	if(oldTime==newTime){
-        	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
-        	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;	
+//      	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
+//      	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;	
 //      	if(chartDataC != undefined){
 //		      	var lowPrices=Number(chartDataC.values[length-1][2]);
 //	    		var highPrices=Number(chartDataC.values[length-1][3]);
@@ -912,7 +904,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 //	    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
 //	    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
 //      	}
-        	console.log("相同")
+//      	console.log("相同")
 	}else{
 //			console.log("不相同");
 //			var time4=new Date(newTime);
@@ -921,9 +913,9 @@ function dealOnRtnQuoteData(data,totalVolume){
 //			var time2=time3.split(" ");
 //      	var str1=time2[1].split(":");
 //      	var str2=str1[0]+":"+str1[1]
-			timeData.timeLabel.push(str2);
-			timeData.time.push(time3);
-        	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));
+//			timeData.timeLabel.push();
+//			timeData.time.push(time3);
+//      	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));
 //      	if(chartDataC != undefined){
 //	        	volumeChartData.time.push(str2);
 //	        	volumeChartData.volume.push(freshVolume);
@@ -933,7 +925,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 //	    		CandlestickVolumeData.volume.push(freshVolume)
 //      	}
 	}
-	console.log(JSON.stringify(timeData.time));
+//	console.log(JSON.stringify(timeData.time));
 	var x=0;
 	var length=$("#positionList .position3").length;
 	var text=$("#CommodityNo").text();
@@ -965,7 +957,7 @@ function drawChartCandlestick(x){
 	  		CandlestickVolumeChart.resize();	
 	  		CandlestickVolumeChart.group="group2";
 	  		myChart.group="group2";
-	  		console.log("34");
+//	  		console.log("34");
        	}
 
 }
