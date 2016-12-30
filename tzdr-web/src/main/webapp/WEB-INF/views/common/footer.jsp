@@ -95,6 +95,9 @@
     margin-left: 5px;
     color: #999999;
 }
+#Copyright div a:hover {
+    color: #ffb319;
+}
 </style>
 <!-- <div style="background: #333;height: 338px;" id="ungundontiao"> -->
 <div>
@@ -243,16 +246,18 @@
 <div id="Copyright">
     <div>
         <p>
-            <span style="font-size: 12px;">友情链接：</span>
-            <a target="_blank" href="http://www.58che.com/2600/">沃尔沃S80</a>
-            <a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a>
-            <a target="_blank" href="http://www.starswealth.com/">第三方理财机构</a>
-            <a target="_blank" href="http://www.zhongdaihui.com/">众贷汇理财</a>
-            <a target="_blank" href="http://www.xj917.com/">新疆综合网</a>
-            <a target="_blank" href="http://90au.haouc.com/">劲舞团</a>
-        </p>
-        友情链接：<a href="javascript:void(0);">证监会</a><a href="javascript:void(0);">银监会</a><a href="javascript:void(0);">保监会</a><a href="javascript:void(0);">深交所</a><a href="javascript:void(0);">上交所</a><a href="javascript:void(0);">新加坡交易所</a><a href="javascript:void(0);">新加坡交易所</a><a href="javascript:void(0);">香港交易所</a><a href="javascript:void(0);">纽约证券交易所</a><a href="#">纳斯达克</a>
-        <p>Copyright  2016  成都盈透科技有限公司  版权所有  蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
+			<span style="font-size: 12px;">友情链接：</span>
+			<a target="_blank" href="http://www.58che.com/2600/">沃尔沃S80</a>
+			<a target="_blank" href="http://www.shenmingbm.com/">上海注册公司</a>
+			<a target="_blank" href="http://www.starswealth.com/">第三方理财机构</a>
+			<a target="_blank" href="http://www.zhongdaihui.com/">众贷汇理财</a>
+			<a target="_blank" href="http://www.xj917.com/">新疆综合网</a>
+			<a target="_blank" href="http://90au.haouc.com/">劲舞团</a>
+			<a target="_blank" href="http://www.xj917.com/">新抚州网</a>
+			<a target="_blank" href="http://shpain.cn/">点子网</a>
+	    </p>
+    	相关网站：<a href="javascript:void(0);">证监会</a><a href="javascript:void(0);">银监会</a><a href="javascript:void(0);">保监会</a><a href="javascript:void(0);">深交所</a><a href="javascript:void(0);">上交所</a><a href="javascript:void(0);">新加坡交易所</a><a href="javascript:void(0);">新加坡交易所</a><a href="javascript:void(0);">香港交易所</a><a href="javascript:void(0);">纽约证券交易所</a><a href="#">纳斯达克</a>
+    	<p>Copyright  2016  成都盈透科技有限公司  版权所有  蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
     </div>
 </div>
 
