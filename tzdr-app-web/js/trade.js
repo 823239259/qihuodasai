@@ -3097,7 +3097,6 @@ function doInsertConditionByTime(){
 function doUpdateConditionByPrice(){
 	if(vadationIsLoginMuiTip()){
 		var conditionNo = selectCondition["conditionNo"];
-		console.log(conditionNo);
 		if(conditionNo == undefined){
 			tip("请选择一条数据");
 			return;
