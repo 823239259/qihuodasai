@@ -291,6 +291,7 @@ function handleData(evt){
 				status = "已触发";
 			}else if(status == 3){
 				status = "已取消";
+				selectCondition = {}; 
 			}else if(status == 4){
 				status = "插入失败";
 			}else if(status == 5){
@@ -1249,7 +1250,7 @@ function appendCondition(param){
 					+'<td class = "condition2" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</td>'
 					+'<td class = "condition3" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</td>'
 					+'<td class = "condition4">'+inserOrderText+'</td>'
-					+'<td class = "condition5">'+formatDateYYYMMDD(new Date())+'</td>'
+					+'<td class = "condition5">当日有效</td>'
 					+'<td class = "condition6">'+insertTime+'</td>'
 				+'</tr>';  
 	if(status == 0 || status == 1){ 
@@ -1313,6 +1314,7 @@ function updateConditionList(param){
 		var html = $("#"+conditionNo).html();
 		$("#over-thbodyCondition").append("<tr class = 'testclick1' id = '"+conditionNo+"'>"+html+"</tr>");
 		$("#"+conditionNo).remove();
+		selectCondition = {};
 	}else {
 		if(status == 0){
 			$("#suspendCondition").val(2);
@@ -1947,24 +1949,38 @@ $(function(){
 		$("#lossIncrease2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#uLossPrice").val(uLossPrice);
 	});
+	$("#chioceContract").change(function(){
+		$("#ConditoionPricesInput").val(0);
+	});
+	$("#chioceContract1").change(function(){
+		$("#ConditoionTimePricesInput").val(0);
+	});
 }); 
 /**
  * 初始化增加条件单弹出框
  */
 function initConditionData(){
+	var chioceContract = $("#chioceContract").val();
+	var localQuote = getLocalCacheQuote(chioceContract);
+	if(localQuote != undefined){
+		$("#ConditoionPricesInput").val(localQuote.LastPrice);
+	}
+	var chioceContractTime = $("#chioceContract1").val();
+	localQuote = getLocalCacheQuote(chioceContractTime);
+	if(localQuote != undefined){
+		$("#ConditoionTimePricesInput").val(localQuote.LastPrice);
+	}
 	$("#chiocePrices").val(0);
-	$("#ConditoionPricesInput").val("");
 	$("#shopDrection").val(0);
 	$("#chiocePricesSelect").val(1); 
-	$("#ConditoionPricesInput3").val(0);
+	$("#ConditoionPricesInput3").val(1);
 	$("#chioceAdditional").val(-1);
 	$("#ConditoionPricesInput1").val("");
 	$("#chiocePricesSelectTime").val(1);
-	$("#ConditoionTimePricesInput").val(0);
 	$("#insertTimeInput").val("");
 	$("#chioceTimeAdditional").val(-1);
 	$("#shopDrectionTime").val(0);
-	$("#ConditoionTimeInput").val(0);
+	$("#ConditoionTimeInput").val(1); 
 	insertConditionCount = 0; 
 	$("#ConditoionPricesInput1").attr("disabled",true);
 	$("#ConditoionTimePricesInput").attr("disabled",true);
