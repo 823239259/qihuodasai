@@ -3,7 +3,8 @@
     var timeLabel=[]
     var timeData={
         "prices":prices,
-        "timeLabel":timeLabel
+        "timeLabel":timeLabel,
+        "time":[]
     };
     var volumeChartTime=[];
     var volumeChartPrices=[];
@@ -24,9 +25,12 @@
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
+        	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript]
         }
         timeData.timeLabel=timeData.timeLabel.slice(-40);
-        timeData.prices=timeData.prices.slice(-40)
+        timeData.prices=timeData.prices.slice(-40);
+         timeData.time=timeData.time.slice(-40);
+         console.log(timeData.time);
         if(timeChart != null){
         	var x=0;
             var length=$("#positionList .position3").length;

@@ -863,32 +863,77 @@ function masendMessage(method,parameters){
 function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
-	//console.log(JSON.stringify(Parameters))
+//	console.log(JSON.stringify(Parameters));
 	var newTimeHour=new Date().getHours();
 	var newTimeMinutes=new Date().getMinutes();
 	if(Number(newTimeMinutes)<=0){
 		newTimeMinutes="0"+newTimeMinutes
 	}
-	var DateTimeStamp=new Date(Parameters.DateTimeStamp);
-	var oldTimeHour=DateTimeStamp.getHours();
-	var oldTimeMinutes=DateTimeStamp.getMinutes();
-	var newTime=newTimeHour+":"+newTimeMinutes;
+	var text=$("#selectButon").text();
+	var range=1
+	if(text=="K线" || text=="1分"){
+		range=1;
+	}else if(text=="5分"){
+		range=5;
+	}else if(text=="15分"){
+		range=15;
+	}else if(text=="30分"){
+		range=30;
+	}
+	
+	var newTime1=newTimeHour+":"+newTimeMinutes;
 	if(totalVolume=="-"){
 		totalVolume=0;
 		return
 	}
 	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
 	var lastVolume=Number(volumeChartData.volume[volumeChartData.volume.length-1]);
-	freshVolume=lastVolume+Volume;
-	if(timeData.timeLabel[timeData.timeLabel.length-1]==newTime){
+	var freshVolume=lastVolume+Volume;
+	var lastPrices=Parameters.LastPrice;
+	var DateTimeStamp=Parameters.DateTimeStamp;
+	var oldTime1=timeData.time[timeData.time.length-1]
+	var oldTime=Math.round(new Date(oldTime1).getTime()/1000);
+	var nowShjian=Math.round(new Date(DateTimeStamp).getTime()/1000)
+	var time1=parseInt(nowShjian / (60*range));
+	var newTime=time1*60* range;
+	if(oldTime==newTime){
         	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
         	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;	
+//      	if(chartDataC != undefined){
+//		      	var lowPrices=Number(chartDataC.values[length-1][2]);
+//	    		var highPrices=Number(chartDataC.values[length-1][3]);
+//	    		var closePrices=lastPrices;
+//	    		if(lastPrices >=highPrices){
+//	    			highPrices=lastPrices
+//	    		}
+//	    		if(lowPrices>=highPrices){
+//	    			lowPrices=lastPrices
+//	    		}
+//	    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
+//	    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
+//      	}
+        	console.log("相同")
 	}else{
-			timeData.timeLabel.push(newTime);
-        	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));	
-        	volumeChartData.time.push(newTime);
-        	volumeChartData.volume.push(freshVolume);
+//			console.log("不相同");
+//			var time4=new Date(newTime);
+//			var time3=time4.format('yyyy-MM-dd h:m:s');
+//			console.log(time3);
+//			var time2=time3.split(" ");
+//      	var str1=time2[1].split(":");
+//      	var str2=str1[0]+":"+str1[1]
+			timeData.timeLabel.push(str2);
+			timeData.time.push(time3);
+        	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));
+//      	if(chartDataC != undefined){
+//	        	volumeChartData.time.push(str2);
+//	        	volumeChartData.volume.push(freshVolume);
+//	        	chartDataC.categoryData.push(str2);
+//	    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
+//	    		CandlestickVolumeData.time.push(str2)
+//	    		CandlestickVolumeData.volume.push(freshVolume)
+//      	}
 	}
+	console.log(JSON.stringify(timeData.time));
 	var x=0;
 	var length=$("#positionList .position3").length;
 	var text=$("#CommodityNo").text();
@@ -900,7 +945,9 @@ function dealOnRtnQuoteData(data,totalVolume){
 			}
 		}
 	}
-    if(timeChart != null){
+	drawChartCandlestick(x);
+}
+function drawChartCandlestick(x){
          var option = setOption1(x);
         timeChart.setOption(option);
         timeChart.resize();
@@ -909,93 +956,16 @@ function dealOnRtnQuoteData(data,totalVolume){
         volumeChart.resize();
         timeChart.group="group1";
        	volumeChart.group="group1";
-    }
-    if(chartDataC==undefined){
-    	return
-    }
-	delaDataCandlestick(Parameters,x,newTime,totalVolume);
-}
-function drawChartCandlestick(x){
-	 var option1=setOption(chartDataC,x);
-	   myChart.setOption(option1);
-	   var option2= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-  		CandlestickVolumeChart.resize();	
-  		CandlestickVolumeChart.setOption(option2);
-  		CandlestickVolumeChart.resize();	
-  		CandlestickVolumeChart.group="group2";
-  		myChart.group="group2";
-}
-function delaDataCandlestick(Parameters,x,newTime,totalVolume){
-	var text=$("#selectButon").text();
-	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
-	var lastVolume=Number(CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]);
-	freshVolume=lastVolume+Volume;
-	var length=chartDataC.values.length;
-	var lastPrices=Number(Parameters.LastPrice);
-	if(text=="K线" || text=="1分"){
-    	if(chartDataC.categoryData[length-1]==newTime){
-    		var lowPrices=Number(chartDataC.values[length-1][2]);
-    		var highPrices=Number(chartDataC.values[length-1][3]);
-    		var closePrices=lastPrices;
-    		if(lastPrices >=highPrices){
-    			highPrices=lastPrices
-    		}
-    		if(lowPrices>=highPrices){
-    			lowPrices=lastPrices
-    		}
-    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
-    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
-    	}else{
-    		chartDataC.categoryData.push(newTime);
-    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
-    		CandlestickVolumeData.time.push(newTime)
-    		CandlestickVolumeData.volume.push(freshVolume)
-    	}
-    }else{
-    		var y=5;
-    	if(text=="5分"){
-    		 y=5;
-    	}else if(text=="15分"){
-    		 y=15;
-    	}else if(text=="30分"){
-    		 y=30;
-    	}
-    	
-    	var oldTime=chartDataC.categoryData[chartDataC.categoryData.length-1];
-    	var Minutes=Number(Number(oldTime.split(":")[1])+y)
-    	var Hours=Number(oldTime.split(":")[0]);
-    	var oldTimePre=Hours+":"+Minutes;
-    	if(Minutes>=60){
-    		MinutesCha=Minutes-60
-    		if(MinutesCha==0){
-    			MinutesCha="00";
-    		}else{
-    			
-    		}
-    		if(Hours>=24){
-    			Hours=1;
-    		}
-    	}
-    	if(oldTime<=newTime && newTime<oldTimePre){
-    		var lowPrices=Number(chartDataC.values[length-1][2]);
-    		var highPrices=Number(chartDataC.values[length-1][3]);
-    		var closePrices=lastPrices;
-    		if(lastPrices >=highPrices){
-    			highPrices=lastPrices
-    		}
-    		if(lowPrices>=highPrices){
-    			lowPrices=lastPrices
-    		}
-    		chartDataC.values[length-1]=[chartDataC.values[length-1][0],closePrices,lowPrices,highPrices];
-    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume;
-    		console.log(lowPrices+"lowPrices"+highPrices+"highPrices"+closePrices+"closePrices");
-    	}else{
-    		chartDataC.categoryData.push(newTime);
-    		chartDataC.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
-    		CandlestickVolumeData.time.push(newTime)
-    		CandlestickVolumeData.volume.push(freshVolume)
-    	}
-    	
-    }
-	drawChartCandlestick(x)
+       	if(chartDataC != undefined){
+   			var option2=setOption(chartDataC,x);
+	   		myChart.setOption(option2);
+		   	var option3= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+	  		CandlestickVolumeChart.resize();	
+	  		CandlestickVolumeChart.setOption(option3);
+	  		CandlestickVolumeChart.resize();	
+	  		CandlestickVolumeChart.group="group2";
+	  		myChart.group="group2";
+	  		console.log("34");
+       	}
+
 }

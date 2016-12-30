@@ -3,7 +3,7 @@
     var CandlestickVolumeChartOption=null;
     var CandlestickVolumeData={
     	time:[],
-    	volume:[]
+    	volume:[],
     }
     var newData=[]; 
     var chartDataC;
@@ -18,7 +18,7 @@
         		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL)];
+		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
 	        	for(var i=0;i<rawData.length-1;i++){
@@ -33,7 +33,7 @@
 		        	var str2=str1[0]+":"+str1[1]
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL)];
+		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL)];
 			         rawData[lent+i] = sgData; 
 	       		};
     	    }
@@ -60,13 +60,15 @@
 	    function splitData(data0) {
 	        var categoryData = [];
 	        var values = [];
+	        var time=[];
 	        for (var i = 0; i < data0.length; i++) {
 	            categoryData.push(data0[i][0]);
 	            values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
 	        }
 	        return {
 	            categoryData: categoryData,
-	            values: values
+	            values: values,
+	            time:time
 	        };
 	    }
 	

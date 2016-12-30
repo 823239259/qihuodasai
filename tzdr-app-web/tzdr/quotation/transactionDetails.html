@@ -1115,7 +1115,7 @@
 							 * rs.h 时，用法同年
 							 * rs.i 分（minutes 的第二个字母），用法同年
 							 */
-//							result.innerText = '选择结果: ' + rs.text;
+							document.getElementById("insertTimeInput").value = rs.text;
 							/* 
 							 * 返回 false 可以阻止选择框的关闭
 							 * return false;
@@ -1127,6 +1127,7 @@
 							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
 							 */
 							picker.dispose();
+							mui("#popoverConditoion").popover("toggle");
 						});
 					}, false);
 //				});
