@@ -239,11 +239,11 @@ function getVersion(){
 		url:tzdr.constants.api_domain+"/socket/config/getVersions",
 		type:"post", 
 		data:{
-			version:appVersion
+			appVersions:appVersion
 		},
 		timeout:5000,
 		success:function(result){
-			if(result.success){ 
+			if(result.success){
 				var data = result.data; 
 				tradeWebsocketUrl = data.socketUrl;
 				tradeWebSocketVersion = data.socketVersion;

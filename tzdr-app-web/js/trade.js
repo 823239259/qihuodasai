@@ -66,7 +66,6 @@ function linearlyLoadData(method) {
 		if(conditionLoadDataIndex == 0  && tradeWebSocketIsMock == 1){
 			Trade.doQryCondition(username);
 			conditionLoadDataIndex++; 
-			console.log("条件单查询");
 		}
 	}
 }
@@ -292,6 +291,7 @@ function handleData(evt){
 				status = "已触发";
 			}else if(status == 3){
 				status = "已取消";
+				selectCondition = {}; 
 			}else if(status == 4){
 				status = "插入失败";
 			}else if(status == 5){
@@ -1250,7 +1250,7 @@ function appendCondition(param){
 					+'<td class = "condition2" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</td>'
 					+'<td class = "condition3" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</td>'
 					+'<td class = "condition4">'+inserOrderText+'</td>'
-					+'<td class = "condition5">'+formatDateYYYMMDD(new Date())+'</td>'
+					+'<td class = "condition5">当日有效</td>'
 					+'<td class = "condition6">'+insertTime+'</td>'
 				+'</tr>';  
 	if(status == 0 || status == 1){ 
@@ -1314,6 +1314,7 @@ function updateConditionList(param){
 		var html = $("#"+conditionNo).html();
 		$("#over-thbodyCondition").append("<tr class = 'testclick1' id = '"+conditionNo+"'>"+html+"</tr>");
 		$("#"+conditionNo).remove();
+		selectCondition = {};
 	}else {
 		if(status == 0){
 			$("#suspendCondition").val(2);
@@ -1948,28 +1949,43 @@ $(function(){
 		$("#lossIncrease2").text(parseFloat(Math.abs(scale)).toFixed(2)+"%");
 		$("#uLossPrice").val(uLossPrice);
 	});
+	$("#chioceContract").change(function(){
+		$("#ConditoionPricesInput").val(0);
+	});
+	$("#chioceContract1").change(function(){
+		$("#ConditoionTimePricesInput").val(0);
+	});
 }); 
 /**
  * 初始化增加条件单弹出框
  */
 function initConditionData(){
+	var chioceContract = $("#chioceContract").val();
+	var localQuote = getLocalCacheQuote(chioceContract);
+	if(localQuote != undefined){
+		$("#ConditoionPricesInput").val(localQuote.LastPrice);
+	}
+	var chioceContractTime = $("#chioceContract1").val();
+	localQuote = getLocalCacheQuote(chioceContractTime);
+	if(localQuote != undefined){
+		$("#ConditoionTimePricesInput").val(localQuote.LastPrice);
+	}
 	$("#chiocePrices").val(0);
-	$("#ConditoionPricesInput").val("");
 	$("#shopDrection").val(0);
 	$("#chiocePricesSelect").val(1); 
-	$("#ConditoionPricesInput3").val(0);
+	$("#ConditoionPricesInput3").val(1);
 	$("#chioceAdditional").val(-1);
 	$("#ConditoionPricesInput1").val("");
 	$("#chiocePricesSelectTime").val(1);
-	$("#ConditoionTimePricesInput").val(0);
 	$("#insertTimeInput").val("");
 	$("#chioceTimeAdditional").val(-1);
 	$("#shopDrectionTime").val(0);
-	$("#ConditoionTimeInput").val(0);
+	$("#ConditoionTimeInput").val(1); 
 	insertConditionCount = 0; 
 	$("#ConditoionPricesInput1").attr("disabled",true);
 	$("#ConditoionTimePricesInput").attr("disabled",true);
     $("#chioceContract").attr("disabled",false);
+    $("#chioceContract1").attr("disabled",false);
 }
 function initSocketTrade(){
 	setTradeConfig(tradeWebSocketIsMock);
@@ -2602,7 +2618,7 @@ function bindOpertion(){
 			var additionPrice = param.AdditionPrice;
 			var df = new Date(timeTriggerPoint);
 			var dfTime = df.getTime();
-			var time = formatDateHHMMSS(new Date(dfTime));
+			var time = formatDateHHMM(new Date(dfTime));
 			$("#chioceContract").val(contractCode);
 			$("#chiocePrices").val(compareType);
 			$("#ConditoionPricesInput").val(priceTriggerPonit);
@@ -2610,23 +2626,24 @@ function bindOpertion(){
 			$("#chiocePricesSelect").val(orderType);
 			$("#ConditoionPricesInput3").val(num);
 			if(additionPrice == undefined || additionPrice == 0 || additionPrice.length == 0){
+				$("#chioceTimeAdditional").val(-1);
 				$("#chioceAdditional").val(-1);
 			    $("#ConditoionPricesInput1").val("");
-			    $("#chiocePricesSelectTime").val(-1);
 				$("#ConditoionTimePricesInput").val("");
 			}else{
+				$("#chioceTimeAdditional").val(additionType);
 				$("#chioceAdditional").val(additionType);
 				$("#ConditoionPricesInput1").val(additionPrice);
-				$("#chiocePricesSelectTime").val(orderType);
 				$("#ConditoionTimePricesInput").val(additionPrice);
 			}
-			$("#chioceContract1").val(contractCode);
+			$("#chiocePricesSelectTime").val(orderType);
+			$("#chioceContract1").val(contractCode); 
 			$("#insertTimeInput").val(time);
-			$("#chioceTimeAdditional").val(additionType);
 			$("#shopDrectionTime").val(drection);
 			$("#ConditoionTimeInput").val(num);
 			insertConditionCount = 1; 
 			$("#chioceContract").attr("disabled",true);
+			$("#chioceContract1").attr("disabled",true);
 			if(conditionType == 0){  //价格
 				$("#ConditoionTitlePrices").addClass("mui-active");
 				$("#plan_conditionTitlePrice").addClass("mui-active").css("display","table-cell");
@@ -3038,7 +3055,6 @@ function doInsertConditionByPrice(){
 		var priceTriggerPonit = $("#ConditoionPricesInput").val();
 		var additionType = $("#chioceAdditional").val();
 		var additionPrice = $("#ConditoionPricesInput1").val();
-		alert(additionPrice);
 		var drection = $("#shopDrection").val();
 		var orderType = $("#chiocePricesSelect").val();
 		var num = $("#ConditoionPricesInput3").val();
@@ -3067,7 +3083,7 @@ function doInsertConditionByPrice(){
 function doInsertConditionByTime(){
 	if(vadationIsLoginMuiTip()){
 		var contractCode = $("#chioceContract1").val();
-		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val();
+		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val()+":00";
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
@@ -3097,7 +3113,6 @@ function doInsertConditionByTime(){
 function doUpdateConditionByPrice(){
 	if(vadationIsLoginMuiTip()){
 		var conditionNo = selectCondition["conditionNo"];
-		console.log(conditionNo);
 		if(conditionNo == undefined){
 			tip("请选择一条数据");
 			return;
@@ -3132,7 +3147,7 @@ function doUpdateConditionByTime(){
 			return;
 		}
 		var contradeCode = $("#chioceContract1").val();
-		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val();
+		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val()+":00";
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
@@ -3177,7 +3192,7 @@ function doGetSellingBasicParam(obj){
 	var contractCode = $commodityNo + $contractNo;
 	var localCommodity = getMarketCommdity(contractCode);
 	var localQuote = getLocalCacheQuote(contractCode);
-	var miniTikeSize = 0.00;
+	var miniTikeSize = 0.00; 
 	var lastPrice = 0.00;
 	var dotSize = 2;
 	if(localCommodity != undefined && localQuote != undefined){

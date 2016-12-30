@@ -133,11 +133,10 @@ function formatDateYYYMMDD(date) {
  * 获取时间格式
  * @param {Object} now
  */
-function formatDateHHMMSS(now){
+function formatDateHHMM(now){
       var   hour=now.getHours();     
       var   minute=now.getMinutes();     
-      var   second=now.getSeconds();    
-    return hour+":"+minute+":"+second;
+    return hour+":"+minute;
 }
 /**
  * 字符串保留小数

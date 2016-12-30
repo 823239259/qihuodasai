@@ -1098,7 +1098,7 @@
 						var optionsJson = this.getAttribute('data-options') || '{}';
 						var options = JSON.parse(optionsJson);
 						var id = this.getAttribute('id');
-						mui("#popoverConditoion").popover("toggle");
+						/*mui("#popoverConditoion").popover("toggle");*/
 						/*
 						 * 首次显示时实例化组件
 						 * 示例为了简洁，将 options 放在了按钮的 dom 上
@@ -1127,7 +1127,7 @@
 							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
 							 */
 							picker.dispose();
-							mui("#popoverConditoion").popover("toggle");
+							/*mui("#popoverConditoion").popover("toggle");*/
 						});
 					}, false);
 //				});

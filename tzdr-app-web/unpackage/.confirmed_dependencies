@@ -1062,7 +1062,12 @@
 			"images/inputRadioBgC.png",
 			"images/inputRadioBg.png",
 			"images/graySanjiaoBg.png",
-			"js/echarts.min.js"
+			"js/echarts.min.js",
+			"js/mui.picker.js",
+			"css/app.css",
+			"css/mui.picker.css",
+			"js/mui.picker.min.js",
+			"css/mui.picker.min.css"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
