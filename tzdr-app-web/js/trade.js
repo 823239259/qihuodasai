@@ -278,6 +278,7 @@ function handleData(evt){
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				tip("条件单提交成功,单号:"+conditionNo);
+				mui("#popoverConditoion").popover("toggle");
 			} 
 			appendCondition(conditionParam);
 		}else if(method == "OnRtnConditionState"){ 
@@ -297,6 +298,10 @@ function handleData(evt){
 				status = "触发失败"; 
 			}else{
 				status = "更新成功";
+				if(operateConditionType == 0){
+					mui("#popoverConditoion").popover("toggle");
+					operateConditionType = undefined;
+				}
 			}
 			tip("【"+contractCode+"】条件单【"+conditionNo+"】,"+status);
 			updateConditionList(conditionParam);
@@ -2622,23 +2627,15 @@ function bindOpertion(){
 			$("#ConditoionTimeInput").val(num);
 			insertConditionCount = 1; 
 			$("#chioceContract").attr("disabled",true);
-			if(conditionType == 0){  
-				$("#ConditoionTitlePrices").show();
+			if(conditionType == 0){  //价格
 				$("#ConditoionTitlePrices").addClass("mui-active");
-				$("#plan_conditionTitlePrice").show();
-				$("#plan_conditionTitlePrice").addClass("mui-active");
-				$("#plan_conditionTitleTime").hide();
-				$("#plan_conditionTitleTime").removeClass("mui-active");
-				$("#ConditoionTitleTime").hide();
+				$("#plan_conditionTitlePrice").addClass("mui-active").css("display","table-cell");
+				$("#plan_conditionTitleTime").removeClass("mui-active").css("display","none");
 				$("#ConditoionTitleTime").removeClass("mui-active");
-			}else if(conditionType == 1){
-				$("#plan_conditionTitlePrice").hide();
-				$("#plan_conditionTitlePrice").removeClass("mui-active");
-				$("#ConditoionTitlePrices").hide();
+			}else if(conditionType == 1){//时间
+				$("#plan_conditionTitlePrice").css("display","none").removeClass("mui-active");
 				$("#ConditoionTitlePrices").removeClass("mui-active");
-				$("#plan_conditionTitleTime").addClass("mui-active");
-				$("#plan_conditionTitleTime").show();
-				$("#ConditoionTitleTime").show(); 
+				$("#plan_conditionTitleTime").addClass("mui-active").css("display","table-cell");
 				$("#ConditoionTitleTime").addClass("mui-active");
 			} 
 			mui("#popoverConditoion").popover("toggle");
@@ -3121,6 +3118,7 @@ function doUpdateConditionByPrice(){
 		}
 		var tradeParam = createUpdateConditioin(conditionNo,0,num,0,priceTriggerPonit,compareType,"",0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		updateCondition(tradeParam);
+		operateConditionType = 0;
 	}
 }
 /**
@@ -3148,6 +3146,7 @@ function doUpdateConditionByTime(){
 		}
 		var tradeParam = createUpdateConditioin(conditionNo,0,num,1,0,0,timeTriggerPoint,0,0,orderType,drection,0,0,0,flag,additionType,additionPrice);
 		updateCondition(tradeParam);
+		operateConditionType = 0;
 	}
 }
 /**

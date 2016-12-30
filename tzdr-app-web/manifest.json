@@ -1172,7 +1172,12 @@
 					"images/graySanjiaoBg.png",
 					"images/insertIon.png",
 					"js/echarts.min.js",
-					null
+					null,
+					"js/mui.picker.js",
+					"css/app.css",
+					"css/mui.picker.css",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
