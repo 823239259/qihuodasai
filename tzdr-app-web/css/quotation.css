@@ -1229,7 +1229,7 @@ input{
 	margin-top: 40px;
 }
 .ConditionList{width: 900px;}
-#NoCondition .ConditionList,#alreayCondition .ConditionList{width: 1000px;}
+#NoCondition table,#alreayCondition table{width: 1000px;}
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;
@@ -1239,7 +1239,7 @@ input{
 	line-height: 40px;
 }
 .ConditionList tr{
-		border-bottom: 1px solid #121212;
+		border-bottom: 1px solid #121212 ;
 }
 .ConditionList tr td:nth-child(1){
 	width: 90px;
@@ -1258,31 +1258,25 @@ input{
 	height: 30px;
 	line-height: 30px;
 }
-#NoCondition .ConditionList thead tr td{
-	color:#666666;
-	height: 30px;
-	line-height: 30px;
-}
-#NoCondition .ConditionList td{
+#NoCondition td,#alreayCondition td{
 	padding: 0px 10px;
-	width: 50px !important;
+	width: 60px ;
 	color:#CCCCCC;
 	font-size: 14px;
 	height: 40px;
 	line-height: 40px;
 }
-#NoCondition .ConditionList tr td:nth-child(4){
-	width: 140px;
+#NoCondition  thead tr td,#alreayCondition  thead tr td{
+	color:#666666;
+	height: 30px;
+	line-height: 30px;
 }
-#NoCondition .ConditionList tr td:nth-child(4){
-	width: 130px;
+#NoCondition  tr,#alreayCondition  tr{
+	border-bottom: 1px solid #121212 !important;
 }
-#NoCondition .ConditionList tr td:nth-child(6){
-	width: 130px;
+#NoCondition  tr td:nth-child(6){
+	width: 100px;
 }
-/*#alreayStopTale table tr td:nth-last-child(1){
-	width: 120px;
-}*/
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
@@ -1431,9 +1425,23 @@ input{
 	border:none;
 	border-radius: 3px;
 }
-#shopDrection,#shopDrectionTime{
+#shopDrection{
+	width: 35%;
+	padding-left: 5px;
+	color:#cccccc;
+	display: inline-block;
+	background-size: 15% auto;
+	background-position: 90% 14px;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 5px;
+	background-color: #1F1F1F;
+}
+#shopDrectionTime{
 	width: 36%;
-		padding-left: 5px;
+	padding-left: 5px;
 	color:#cccccc;
 	display: inline-block;
 	background-size: 15% auto;
@@ -1448,7 +1456,8 @@ input{
 #chiocePricesSelect,#chiocePricesSelectTime{
 	width: 58%;
 	color:#cccccc;
-		padding-left: 5px;
+	padding-left: 5px;
+	margin-left: 2%;
 	display: inline-block;
 	background-size: 10% auto;
 	background-position: 90% 14px;
@@ -1477,7 +1486,6 @@ input{
 }
 #closeConditionTable,#insertConditionTable,#closeConditionTable1,#insertConditionTable1{
 	width: 50%;
-	background-color: 2b2b2b;
 	border: none;
 	background-color: #2B2B2B;
 	color:#CCCCCC;
