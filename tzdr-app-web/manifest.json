@@ -1177,7 +1177,12 @@
 					"css/app.css",
 					"css/mui.picker.css",
 					"js/mui.picker.min.js",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"images/chartBg.png",
+					"images/conditionBg.png",
+					"images/conditionBg1.png",
+					"images/stopBg.png",
+					"images/tradeBG.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",

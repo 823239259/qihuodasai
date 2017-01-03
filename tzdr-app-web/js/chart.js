@@ -824,7 +824,23 @@ mui.plusReady(function(){
     			$("#Handicap").removeClass("mui-active");
     			$(".BuyDiv").css({"display":"none"});
     			$("#lightDiagram").removeClass("mui-active");
-    		$("#lightChartDiv").removeClass("mui-active");
+    			$("#lightChartDiv").removeClass("mui-active");
+				if(plus.storage.getItem("QuotationGuidanceTrade3")==null){
+					plus.storage.setItem("QuotationGuidanceTrade3","1");
+					setTimeout(function(){
+						var height=window.innerHeight;
+						var width=window.innerWidth;
+						$(".top").css({"height":height+"px",
+								"width":width+"px",
+								"position":"fixed",
+								"z-index":"999",
+								"display":"block",
+								"top":"0px",
+								"background":"url('../../images/tradeBG.png') no-repeat",
+								"background-size":"cover",
+								})		
+					},300)
+				}
 			}
     	});
     	

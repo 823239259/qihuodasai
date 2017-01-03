@@ -746,10 +746,10 @@ input{
 	margin: 8px;
 }
 .top{
-	top:0px;
+	width: 100%;
 	position: fixed;
-	right: 0px;;
-	z-index:990;
+	z-index: 990;
+	top:0px;
 }
 .bottom,.top{
 	width: 100%;
@@ -1197,8 +1197,18 @@ input{
 	text-align: center;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 	
 }
+/*#choiceStopPrices{
+		background: url(../images/graySanjiaoBg.png) no-repeat;
+}
+#choiceStopPrices3{
+		background: url(../images/graySanjiaoBg.png) no-repeat;
+}
+#uchoiceLossPrices{
+		background: url(../images/graySanjiaoBg.png) no-repeat;
+}*/
 #choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices2,#choiceStopPrices5{
 	width: 38%;
 	display: inline-block;
@@ -1211,8 +1221,9 @@ input{
 	font-size: 14px;
 	text-align: center;
 	vertical-align: middle;
-	/*margin-top: 2px;*/
-}
+	margin-top: 1px;
+	background-color: #1F1F1F;
+}*/
 /*条件单**/
 #segmentedControlCondition{
 	width: 100%;
@@ -1249,7 +1260,7 @@ input{
 	
 }
 .ConditionList tr td:nth-child(6){
-	width: 50px;
+	width: 100px;
 	
 }
 .ConditionList thead tr td{
@@ -1302,7 +1313,7 @@ input{
 	background-color: #cccccc;
 	color:#2b2b2b;
 	border-top: none;
-	border-buttom:none;
+	border-bottom:none;
 	position: fixed;
 	bottom: 60px;
 	z-index: 999;
@@ -1343,6 +1354,7 @@ input{
 #ConditoionTitlePrices input{
 	padding: 0px;
 	color:#999999;
+	text-align: center;
 }
 .selectComm{
 	height: 30px;
@@ -1351,9 +1363,17 @@ input{
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
-	background: url(../images/graySanjiaoBg.png) no-repeat;
 	background-color: #1f1f1f;
+	background: url(../images/graySanjiaoBg.png) no-repeat;
 }
+#choiceStopPrices,#choiceStopPrices2{
+	background-size: 6% auto;
+	background-position: 90% 14px;
+	}
+#choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices3,#uchoiceLossPrices{
+	background-size: 11% auto;
+	background-position: 90% 14px;
+	}
 
 #chioceContract,#chioceContract1{
 	color:#cccccc;
@@ -1365,6 +1385,7 @@ input{
 	padding-left: 5px;
 	border:1px solid #121212;
 	vertical-align: middle;
+	background-color: #1F1F1F;
 }
 #chiocePrices{
 	width: 35%;
@@ -1379,6 +1400,7 @@ input{
 	border:1px solid #121212;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 }
 #chioceAdditional,#chioceTimeAdditional{
 	width: 37%;
@@ -1392,6 +1414,7 @@ input{
 	text-align: center;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 }
 #ConditoionPricesInput{
 	width: 58%;
@@ -1430,6 +1453,7 @@ input{
 	text-align: center;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 }
 #chiocePricesSelect,#chiocePricesSelectTime{
 	width: 58%;
@@ -1442,6 +1466,7 @@ input{
 	font-size: 14px;
 	text-align: center;
 	vertical-align: middle;
+	background-color: #1f1f1f;
 }
 #ConditoionPricesInput3,#ConditoionTimeInput{
 	width: 96%;

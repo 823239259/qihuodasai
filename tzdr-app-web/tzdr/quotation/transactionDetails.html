@@ -356,9 +356,7 @@
 						    </div>
 						</div>
 					</div>
-					<div class="top"></div><div class="bottom"></div>
-					<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-					<div id="littleDiv"></div>
+					
 					<div id="list_type" >
 						<span id="sanjiao"></span>
 						<ul >
@@ -789,7 +787,7 @@
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
 				    					<input type="hidden" id = "ulossHoldAvgPrice1" />
-				    					<input type="number" value="0" style="width: 50%;" id="uLossPrice" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+				    					<input type="number" value="0" style="width: 40%;" id="uLossPrice" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
 				    					<span id="lossIncrease2">0.00%</span>
 				    				</td>
 				    			</tr>
@@ -814,6 +812,8 @@
 			</div>
 			</div>
 			</div>
+			<div class="top"></div>
+			<div class="bottom"></div>
 		</body>
 			<script>
 				function init(param){
@@ -833,11 +833,11 @@
 						var screen=window.innerHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
 								"width":"100%",
-								"height":screen-300-80+"px",
+								"height":screen-300-105+"px",
 							});
 							$("#volumeChart,#CandlestickVolumeChart").css({
 								"width":"100%",
-								"height":80+"px",
+								"height":105+"px",
 							});
 							$("#lightChart").css({
 								"width":"100%",
@@ -854,109 +854,24 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+//					bindGuidance();
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
-						$(".top").css({
-							"height":"96px",
-							"background-color":"rgba(0,0,0,0.8)",
-							"display":"block",
-						});
-						$("#closeDiv").css({
-							"top":4+"px",
-							"right":10+"px",
-							"display":"block",
-						});
-						$(".bottom").css({
-							"display":"block",
-							"height":$(".buttomFix").height()+87+"px",
-							"background": "url(../../images/tradeGudice1.png) no-repeat",
-							"background-size":"100% 100%",
-							"z-index":"999",
-						});
-						var clickNum=0;
-						$(".bottom,.top").click(function(){
-							if(clickNum==0){
-								$(".bottom").css({
-									"height":height-86+"px",
-									"bottom":"0px",
-									"background-image": "url(../../images/tradeGudice2.png)",
-								});
-								$(".top").css({
-									"height":46+"px",
-								});
-								$("#littleDiv").css({
+					$(".top").css({"height":height+"px",
+									"width":width+"px",
 									"position":"fixed",
-									"top":"46px",
-									"left":"0px",
-									"width":"20%",
-									"height":50+"px",
-									"background-color":"rgba(0,0,0,0.8)",
-									"z-index":"992",
-								});
-							}else if(clickNum==1){
-								$(".top").css({
-									"display":"none",
-								});
-								$("#closeDiv").css({
-									"left":Proportion*10+"px",
-									"top":"46px",
-									"z-index":"999"
-								});
-								$(".bottom").css({
-									"top":"46px",
-									"left":"0px",
-									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice3.png)",
-								});
-								$("#littleDiv").css({
-									"display":"none",
-								});
-							}else if(clickNum==2){
-								$("#closeDiv").css({
-									"left":width-40+"px"
-								});
-								$(".bottom").css({
-									"bottom":"50px",
-									"left":"0px",
+									"z-index":"999",
+									"display":"block",
 									"top":"0px",
-									"height":height-50+"px",
-									"background-image": "url(../../images/tradeGudice4.png)",
-								});
-							}else if(clickNum==3){
-								$(".bottom").css({
-									"bottom":"0px",
-									"left":"0px",
-									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice5.png)",
-								});
-							}else{
-								$(".bottom").css({
-									"display":"none",
-								});
-								$("#closeDiv").css({
-									"display":"none",
-								});
-							}
-							clickNum++;
-							
-						});
-						$("#closeDiv").click(function(){
-							$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    				"display":"none",
-			    			});
-						});
-						$("#littleDiv").click(function(){
-							$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    				"display":"none",
-			    			});
-						})
-					$("#closeTrade").click(function(){
-						$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    			"display":"none",
-			    		});
-					});
+									"background":"url('../../images/chartBg.png') no-repeat",
+									"background-size":"cover",
+									})		
+					
 				}
+				$(".top").on("tap",function(){
+					$(".top").css("display","none");
+				})
 			});
 			</script>
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
@@ -1063,6 +978,23 @@
 						$("#bg3").css("display","block");
 						mui("#topPopover").popover("toggle");
 						$(".mui-content").eq(2).css("z-index","998");
+						if(plus.storage.getItem("QuotationGuidanceTrade2")==null){
+						plus.storage.setItem("QuotationGuidanceTrade2","1");
+						console.log(plus.storage.getItem("QuotationGuidanceTrade2"));
+							setTimeout(function(){
+								var height=window.innerHeight;
+								var width=window.innerWidth;
+								$(".top").css({"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/stopBg.png') no-repeat",
+										"background-size":"cover",
+										})		
+							},300)
+						}
 					}else{
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
@@ -1073,6 +1005,35 @@
 					$("#bg2").css("display","block");
 					mui("#topPopover").popover("toggle");
 					$(".mui-content").eq(1).css("z-index","998");
+					if(plus.storage.getItem("QuotationGuidanceTrade1")==null){
+						plus.storage.setItem("QuotationGuidanceTrade1","1");
+						var height=window.innerHeight;
+						var width=window.innerWidth;
+						var clickBottomNum=0;
+						setTimeout(function(){
+							$(".bottom").css({
+									"height":height+"px",
+									"width":width+"px",
+									"position":"fixed",
+									"z-index":"999",
+									"display":"block",
+									"top":"0px",
+									"background":"url('../../images/conditionBg.png') no-repeat",
+									"background-size":"cover",
+								});
+							$(".bottom").click(function(){
+								if(clickBottomNum==0){
+									$(".bottom").css({
+										"background":"url('../../images/conditionBg1.png') no-repeat",
+										"background-size":"cover",
+									});
+								}else{
+									$(".bottom").css("display","none")
+								}
+								clickBottomNum++;
+							})
+						},300);
+					}
 				});
 				$("#clickTable").on("tap",".testclick1",function(){
 					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
