@@ -219,6 +219,11 @@
                  boundaryGap: true,
                   axisTick: {onGap:false},
                   splitLine: {show:false},
+                  axisLabel:{
+                  	textStyle:{
+                  		fontSize:10,
+                  	}
+                  },
                    axisLine: { lineStyle: { color: '#8392A5' } },
                   data : dataVolume.time
               }
@@ -238,7 +243,10 @@
                     	    return isFinite(a)
                             ? echarts.format.addCommas(+a / 10000)
                             : '';
-                    }
+                    },
+                    textStyle:{
+                  		fontSize:10,
+                  	}
                 },
                 splitLine: {
                     show: true,
