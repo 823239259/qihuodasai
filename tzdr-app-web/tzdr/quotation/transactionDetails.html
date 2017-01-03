@@ -973,15 +973,8 @@
 				});
 				document.getElementById("openStop").addEventListener("tap",function(){
 					if(isLogin){
-						$("#bg1").css("display","none");
-						$("#bg2").css("display","none");
-						$("#bg3").css("display","block");
-						mui("#topPopover").popover("toggle");
-						$(".mui-content").eq(2).css("z-index","998");
 						if(plus.storage.getItem("QuotationGuidanceTrade2")==null){
-						plus.storage.setItem("QuotationGuidanceTrade2","1");
-						console.log(plus.storage.getItem("QuotationGuidanceTrade2"));
-							setTimeout(function(){
+							plus.storage.setItem("QuotationGuidanceTrade2","1");
 								var height=window.innerHeight;
 								var width=window.innerWidth;
 								$(".top").css({"height":height+"px",
@@ -993,46 +986,53 @@
 										"background":"url('../../images/stopBg.png') no-repeat",
 										"background-size":"cover",
 										})		
-							},300)
 						}
+						$("#bg1").css("display","none");
+						$("#bg2").css("display","none");
+						$("#bg3").css("display","block");
+						mui("#topPopover").popover("toggle");
+						$(".mui-content").eq(2).css("z-index","998");
 					}else{
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
 				});
 				document.getElementById("openCondition").addEventListener("tap",function(){
-					$("#bg1").css("display","none");
-					$("#bg3").css("display","none");
-					$("#bg2").css("display","block");
-					mui("#topPopover").popover("toggle");
-					$(".mui-content").eq(1).css("z-index","998");
-					if(plus.storage.getItem("QuotationGuidanceTrade1")==null){
-						plus.storage.setItem("QuotationGuidanceTrade1","1");
-						var height=window.innerHeight;
-						var width=window.innerWidth;
-						var clickBottomNum=0;
-						setTimeout(function(){
-							$(".bottom").css({
-									"height":height+"px",
-									"width":width+"px",
-									"position":"fixed",
-									"z-index":"999",
-									"display":"block",
-									"top":"0px",
-									"background":"url('../../images/conditionBg.png') no-repeat",
-									"background-size":"cover",
-								});
-							$(".bottom").click(function(){
-								if(clickBottomNum==0){
-									$(".bottom").css({
-										"background":"url('../../images/conditionBg1.png') no-repeat",
+					if(isLogin){
+						if(plus.storage.getItem("QuotationGuidanceTrade1")==null){
+							plus.storage.setItem("QuotationGuidanceTrade1","1");
+							var height=window.innerHeight;
+							var width=window.innerWidth;
+							var clickBottomNum=0;
+								$(".bottom").css({
+										"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/conditionBg.png') no-repeat",
 										"background-size":"cover",
 									});
-								}else{
-									$(".bottom").css("display","none")
-								}
-								clickBottomNum++;
-							})
-						},300);
+								$(".bottom").click(function(){
+									if(clickBottomNum==0){
+										$(".bottom").css({
+											"background":"url('../../images/conditionBg1.png') no-repeat",
+											"background-size":"cover",
+										});
+									}else{
+										$(".bottom").css("display","none")
+									}
+									clickBottomNum++;
+								})
+						}
+
+						$("#bg1").css("display","none");
+						$("#bg3").css("display","none");
+						$("#bg2").css("display","block");
+						mui("#topPopover").popover("toggle");
+						$(".mui-content").eq(1).css("z-index","998");
+					}else{
+						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
 				});
 				$("#clickTable").on("tap",".testclick1",function(){
@@ -1052,9 +1052,6 @@
 			});
 			(function($) {
 				$.init();
-//				var result = $('#result')[0];
-//				var btns = $('.btn');
-//				btns.each(function(i, btn) {
 					document.getElementById("insertTimeInput").addEventListener('tap', function() {
 						var optionsJson = this.getAttribute('data-options') || '{}';
 						var options = JSON.parse(optionsJson);
@@ -1088,10 +1085,8 @@
 							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
 							 */
 							picker.dispose();
-							/*mui("#popoverConditoion").popover("toggle");*/
 						});
 					}, false);
-//				});
 			})(mui);
 		</script>
 		<script>
