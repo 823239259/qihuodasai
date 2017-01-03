@@ -167,7 +167,7 @@ $(function () {
     var url="/crawler/getCrawlerByChannelLiveContent";
     var params={
         pageIndex:0,
-        size: 14,
+        size: 9,
         channelset:1
     };
     queryData(url,params,insertDataSeeding);
