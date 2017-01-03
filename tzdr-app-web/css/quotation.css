@@ -1200,15 +1200,6 @@ input{
 	background-color: #1F1F1F;
 	
 }
-/*#choiceStopPrices{
-		background: url(../images/graySanjiaoBg.png) no-repeat;
-}
-#choiceStopPrices3{
-		background: url(../images/graySanjiaoBg.png) no-repeat;
-}
-#uchoiceLossPrices{
-		background: url(../images/graySanjiaoBg.png) no-repeat;
-}*/
 #choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices2,#choiceStopPrices5{
 	width: 38%;
 	display: inline-block;
@@ -1239,7 +1230,6 @@ input{
 }
 .ConditionList{width: 900px;}
 #NoCondition .ConditionList,#alreayCondition .ConditionList{width: 1000px;}
-/*#alreayStopTale table{width: 900px;}*/
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;

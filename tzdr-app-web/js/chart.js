@@ -827,7 +827,9 @@ mui.plusReady(function(){
     			$("#lightChartDiv").removeClass("mui-active");
 				if(plus.storage.getItem("QuotationGuidanceTrade3")==null){
 					plus.storage.setItem("QuotationGuidanceTrade3","1");
-					setTimeout(function(){
+
+				}
+									setTimeout(function(){
 						var height=window.innerHeight;
 						var width=window.innerWidth;
 						$(".top").css({"height":height+"px",
@@ -836,11 +838,11 @@ mui.plusReady(function(){
 								"z-index":"999",
 								"display":"block",
 								"top":"0px",
-								"background":"url('../../images/tradeBG.png') no-repeat",
-								"background-size":"cover",
+								"background":"url('../../images/tipsBG.png') no-repeat",
+								"background-size":"60% auto",
+								"background-position":"center 85%",
 								})		
 					},300)
-				}
 			}
     	});
     	
