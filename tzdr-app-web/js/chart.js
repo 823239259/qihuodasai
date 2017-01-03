@@ -827,9 +827,7 @@ mui.plusReady(function(){
     			$("#lightChartDiv").removeClass("mui-active");
 				if(plus.storage.getItem("QuotationGuidanceTrade3")==null){
 					plus.storage.setItem("QuotationGuidanceTrade3","1");
-
-				}
-									setTimeout(function(){
+					setTimeout(function(){
 						var height=window.innerHeight;
 						var width=window.innerWidth;
 						$(".top").css({"height":height+"px",
@@ -843,6 +841,7 @@ mui.plusReady(function(){
 								"background-position":"center 85%",
 								})		
 					},300)
+				}
 			}
     	});
     	

@@ -1182,7 +1182,8 @@
 					"images/conditionBg.png",
 					"images/conditionBg1.png",
 					"images/stopBg.png",
-					"images/tradeBG.png"
+					"images/tradeBG.png",
+					"images/tipsBG.png"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
