@@ -1183,7 +1183,9 @@
 					"images/conditionBg1.png",
 					"images/stopBg.png",
 					"images/tradeBG.png",
-					"images/tipsBG.png"
+					"images/tipsBG.png",
+					"js/mui.picker.all.js",
+					"css/mui.picker.all.css"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",

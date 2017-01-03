@@ -28,7 +28,7 @@ function lightChartData(json){
             animation: false,
 	           grid: {
 	               x: 50,
-	               y:20,
+	               y:40,
 	               x2:46,
 	               y2:20
 	           },
