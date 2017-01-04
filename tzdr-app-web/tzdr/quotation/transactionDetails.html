@@ -502,7 +502,7 @@
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack " id= "stopBack"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
-				    <a class="mui-pull-right" id="insertCondition" class = "insertCondition" href="#popoverConditoion"></a>
+				    <a class="mui-pull-right" id="insertCondition" class = "insertCondition"></a>
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
 					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
@@ -522,7 +522,7 @@
 				    				<td>时间</td>
 				    			</tr>
 				    		</thead>
-							<tbody id = "thodyCondition">
+							<tbody id = "thodyCondition" >
 							</tbody>
 				    	</table>
 				    	<button value="2"  class = "updateCondition" id="suspendCondition">暂停</button>
@@ -950,6 +950,8 @@
 					$("#plan_conditionTitleTime").removeClass("mui-active").css("display","table-cell").text("时间条件");
 					$("#ConditoionTitleTime").removeClass("mui-active");
 					mui("#popoverConditoion").popover("toggle");
+					$("#insertConditionTable1").text("添加");
+					$("#insertConditionTable").text("添加");
 				});
 				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
 					mui("#popoverConditoion").popover("toggle");

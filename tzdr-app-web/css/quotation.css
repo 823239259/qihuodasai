@@ -1227,6 +1227,7 @@ input{
 	height: auto;
 	overflow-x: scroll; 
 	margin-top: 40px;
+	padding-bottom: 20px;
 }
 .ConditionList{width: 900px;}
 #NoCondition table,#alreayCondition table{width: 1000px;}
@@ -1271,7 +1272,7 @@ input{
 	height: 30px;
 	line-height: 30px;
 }
-#NoCondition  tr,#alreayCondition  tr{
+#NoCondition table tr,#alreayCondition table  tr{
 	border-bottom: 1px solid #121212 !important;
 }
 #NoCondition  tr td:nth-child(6){

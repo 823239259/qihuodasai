@@ -2649,11 +2649,13 @@ function bindOpertion(){
 				$("#plan_conditionTitlePrice").addClass("mui-active").css("display","table-cell").text("修改条件单");
 				$("#plan_conditionTitleTime").removeClass("mui-active").css("display","none");
 				$("#ConditoionTitleTime").removeClass("mui-active");
+				$("#insertConditionTable").text("修改");
 			}else if(conditionType == 1){//时间
 				$("#plan_conditionTitlePrice").css("display","none").removeClass("mui-active");
 				$("#ConditoionTitlePrices").removeClass("mui-active");
 				$("#plan_conditionTitleTime").addClass("mui-active").css("display","table-cell").text("修改条件单");
 				$("#ConditoionTitleTime").addClass("mui-active");
+				$("#insertConditionTable1").text("修改");
 			} 
 			mui("#popoverConditoion").popover("toggle");
 		}
@@ -3083,7 +3085,7 @@ function doInsertConditionByPrice(){
 function doInsertConditionByTime(){
 	if(vadationIsLoginMuiTip()){
 		var contractCode = $("#chioceContract1").val();
-		var timeTriggerPoint = $("#insertTimeInput").val()+":00";
+		var timeTriggerPoint = $("#insertTimeInput").val();
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
@@ -3147,7 +3149,7 @@ function doUpdateConditionByTime(){
 			return;
 		}
 		var contradeCode = $("#chioceContract1").val();
-		var timeTriggerPoint = formatDateYYYMMDD(new Date())+" "+$("#insertTimeInput").val()+":00";
+		var timeTriggerPoint = $("#insertTimeInput").val();
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
