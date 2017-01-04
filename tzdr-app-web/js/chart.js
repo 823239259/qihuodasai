@@ -668,7 +668,6 @@ mui.plusReady(function(){
 		     newData=[]; 
 			sendHistoryMessage(val);
 			$("#CandlestickChart").css("opacity","1");
-			console.log(new Date()+"22");
     	}
     	var selectButonNum=0;
     /*
@@ -962,19 +961,22 @@ function dealOnRtnQuoteData(data,totalVolume){
 	drawChartCandlestick(x);
 }
 function drawChartTime(x){
-	var option = setOption1(x);
-    timeChart.setOption(option);
-    timeChart.resize();
-    var option1 =volumeChartSetOption(volumeChartData);
-    volumeChart.setOption(option1);
-    volumeChart.resize();
-    timeChart.group="group1";
-   	volumeChart.group="group1";
+	var value=$("#timeChartMenu").hasClass("mui-active");
+	if(value){
+		var option = setOption1(x);
+	    timeChart.setOption(option);
+	    timeChart.resize();
+	    var option1 =volumeChartSetOption(volumeChartData);
+	    volumeChart.setOption(option1);
+	    volumeChart.resize();
+	    timeChart.group="group1";
+	   	volumeChart.group="group1";
+	}
 }
 function drawChartCandlestick(x){
-	var icon=$("#timeChartMenu").hasClass("mui-active")
+	var value=$("#selectButon").hasClass("mui-active");
 	if(chartDataC != undefined){
-			if(icon == false){
+		if(value){
    			var option2=setOption(chartDataC,x);
 	   		myChart.setOption(option2);
 		   	var option3= CandlestickVolumeChartSetoption1(CandlestickVolumeData);

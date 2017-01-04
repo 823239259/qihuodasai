@@ -1404,7 +1404,9 @@
 					"images/recharge/jingdong.png",
 					"images/recharge/wei.png",
 					"js/pingpp.js",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"images/recharge/zhifubao.png",
+					"images/recharge/Quickpayment.png"
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",

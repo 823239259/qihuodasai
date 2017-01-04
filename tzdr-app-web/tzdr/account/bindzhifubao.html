@@ -51,9 +51,9 @@
 								<span>成都维胜智慧科技有限公司</span>
 							</li>
 						</ul>
-						<div class="ac_btn">
+						<!--<div class="ac_btn">
 							<a href="javascript:void(0);" id="openappliy" class="mui-btn mui-btn-block lg-btnlogin">打开支付宝</a>
-						</div>
+						</div>-->
 						<div class="mui-content-padded">
 							<h5>温馨提示：</h5>
 							<p>1、若在该页面打开支付宝失败，您可以手动启动支付宝APP或者登录支付宝官网，选择转账到支付宝账户，手工输入成都维胜智慧科技有限公司的收款支付宝账户，最终完成转账。</p>
@@ -106,7 +106,7 @@
 			});
 			
 		});
-		document.getElementById("openappliy").addEventListener("tap",function(){
+		document.getElementById("recharge-btn").addEventListener("tap",function(){
 			plus.runtime.openURL("https://qr.alipay.com/apw1hz7ddal8e7zsfe");
 			
 		});

@@ -13,9 +13,13 @@ function lightChartData(json){
 			lightChartTime.time=lightChartTime.time.slice(-50);
 			lightChartTime.price=lightChartTime.price.slice(-50);
 	        if(lightChart != null){
-	        	var option = lightChartDealData();
-	            lightChart.setOption(option);
-	            lightChart.resize();
+	        	var value=$("#lightDiagram").hasClass("mui-active");
+	        	if(value){
+		        	var option = lightChartDealData();
+		            lightChart.setOption(option);
+		            lightChart.resize();
+	        	}
+
 	        }
     	}
   }
