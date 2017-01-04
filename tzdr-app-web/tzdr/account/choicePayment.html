@@ -30,7 +30,11 @@
 					<input name="choiceBank" type="radio"value="5">
 				</div>-->
 				<div class="mui-input-row mui-radio">
-					<label><img src="../../images/recharge/Transfer.png"><i>快捷支付</i></label>
+					<label><img src="../../images/recharge/zhifubao.png"><i>支付宝</i></label>
+					<input name="choiceBank" type="radio"value="10">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Quickpayment.png"><i>快捷支付</i></label>
 					<input name="choiceBank" type="radio"value="6" checked="checked">
 				</div>
 				<!--<div class="mui-input-row mui-radio">
@@ -49,10 +53,6 @@
 					<label><img src="../../images/recharge/Transfer.png"><i>银行转账</i></label>
 					<input name="choiceBank" type="radio"value="4">
 				</div>
-				<div class="mui-input-row mui-radio">
-					<label><img src="../../images/recharge/Transfer.png"><i>支付宝</i></label>
-					<input name="choiceBank" type="radio"value="10">
-				</div>
 			</form>
 			<div id="buttomDiv">
 				<span>支付：<i class="yellowFont moneyIcont" >¥</i><i id="paymentMoney"></i></span>
@@ -69,6 +69,7 @@
 					plus.webview.close("bankPay.html");
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
+				var paymentMoney=document.getElementById("paymentMoney");
 				paymentMoney.innerText=wv.money.toFixed(2);
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					immediatePayment(wv);

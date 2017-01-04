@@ -587,7 +587,7 @@ mui.plusReady(function(){
 		var type = $('input:radio[name="prices"]:checked').val();
 		if(type==1){
 			$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
-						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
+			$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
 		}
 		$("#orderPrice").val("");
 		$("#orderPrice").attr("placeholder","市价");
@@ -676,7 +676,6 @@ mui.plusReady(function(){
 		$("#list_type ul li").on("tap",function(){
 			$("#selectButon").text($(this).text())
 			var val=$(this).val();
-			console.log(new Date()+"11");
 			$("#list_type ").css({
 				"display":"none"
 			});
@@ -891,8 +890,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 		lastVolume1=Number(CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]);
 		freshVolume1=lastVolume1+Volume;
 	}
-	var getTimeLength=0;
-	var lastPrices=Parameters.LastPrice;
+	var lastPrices=Number(Parameters.LastPrice).toFixed(dosizeL);
 	var DateTimeStamp=Parameters.DateTimeStamp;
 	var DateTimeStamp1=DateTimeStamp.replace(/-/g, "/");
 	var oldTime1=(timeData.time[timeData.time.length-1]).replace(/-/g, "/");
@@ -917,7 +915,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 		}
 	}
 	if(oldTime==newTime){
-		var lastPrices1=lastPrices.toFixed(dosizeL);
+		var lastPrices1=lastPrices;
 		if(timeData.prices[timeData.prices.length-1]==lastPrices1 && volumeChartData.volume[volumeChartData.volume.length-1]==freshVolume){
 			
 		}else{
@@ -928,7 +926,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 	}else{
 			timeData.timeLabel.push(str2);
 			timeData.time.push(time6);
-        	timeData.prices.push(lastPrices.toFixed(dosizeL));
+        	timeData.prices.push(lastPrices);
         	volumeChartData.time.push(str2);
 	        volumeChartData.volume.push(0);
 	        drawChartTime(x);
@@ -959,7 +957,6 @@ function dealOnRtnQuoteData(data,totalVolume){
     		chartDataC.values=chartDataC.values.slice(-40);
     		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
     		CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
-    		getTimeLength=1;
 		}
 	}
 	drawChartCandlestick(x);
@@ -976,8 +973,8 @@ function drawChartTime(x){
 }
 function drawChartCandlestick(x){
 	var icon=$("#timeChartMenu").hasClass("mui-active")
-	if(icon == false){
-		if(chartDataC != undefined){
+	if(chartDataC != undefined){
+			if(icon == false){
    			var option2=setOption(chartDataC,x);
 	   		myChart.setOption(option2);
 		   	var option3= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
@@ -987,8 +984,6 @@ function drawChartCandlestick(x){
 	  		CandlestickVolumeChart.group="group2";
 	  		myChart.group="group2";
        	}
-	}else{
-		
 	}
 }
     function getNowFormatDate(date) {
