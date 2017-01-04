@@ -214,9 +214,11 @@ $(function(){
     });
     insertDataF();
     $(".time li").click(function () {
+        var myDate = new Date();
+        var year = "" + myDate.getFullYear() + "年";
         var index=$(this);
         $(".time li a").removeClass("on").eq(index.index()).addClass("on");
-        var text="2016年"+index.find("span").attr("data-date");
+        var text = year + index.find("span").attr("data-date");
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
         var params={
