@@ -1,7 +1,7 @@
 .ks_zuce .ks_zuce_content {width: 1280px;}
 .ks_header .denglu {color: #fff;}
 .ks_header .ks_content {width: 1280px;}
-.ks_zuce {background: url("../images/image/cngold_1.png") no-repeat;}
+.ks_zuce {background: url("../images/image/cngold_1.png") center center;}
 .ks_zuce .rg_l_codebtn {right: 29px;}
 #cngold {width: 1280px; margin: 0 auto;}
 #cngold .cngold_title {text-align: center; font-size: 24px; color: #ffffff; background: url("../images/image/cngold_2.png") no-repeat; width: 340px; margin: 40px auto; height: 50px; line-height: 50px;}
