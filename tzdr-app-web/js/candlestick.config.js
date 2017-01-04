@@ -104,7 +104,7 @@
 		                opacity: 1
 		            }
              	 },
-               	             formatter: function(params) {
+               	formatter: function(params) {
                   var time  = params[0].name;
                   var kd    = params[0].data;
                   var ma5 = params[1].data;
