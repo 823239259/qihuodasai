@@ -27,9 +27,9 @@
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
         	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript]
         }
-//      timeData.timeLabel=timeData.timeLabel.slice(-40);
-//      timeData.prices=timeData.prices.slice(-40);
-//       timeData.time=timeData.time.slice(-40);
+        timeData.timeLabel=timeData.timeLabel.slice(-40);
+        timeData.prices=timeData.prices.slice(-40);
+         timeData.time=timeData.time.slice(-40);
         if(timeChart != null){
         	var x=0;
             var length=$("#positionList .position3").length;
@@ -166,15 +166,8 @@
             volumeChartData.time[VolumeLength+i]=str2;
             volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         };
-//        volumeChartData.time=volumeChartData.time.slice(-40);
-//      volumeChartData.volume=volumeChartData.volume.slice(-40)
-//      var TimeLength= volumeChartData.time.length;
-//		for(var i=0;i<volumeChartData.time.length-1;i++){
-//			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
-//				volumeChartData.time.splice(i,1);
-//				volumeChartData.volume.splice(i,1);
-//			}
-//		}
+          volumeChartData.time=volumeChartData.time.slice(-40);
+        volumeChartData.volume=volumeChartData.volume.slice(-40)
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
             volumeChart.setOption(option);

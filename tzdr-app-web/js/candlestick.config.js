@@ -21,11 +21,7 @@
 		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
-	        	for(var i=0;i<rawData.length-1;i++){
-	        		if(rawData[i][0]==rawData[i+1][0]){
-	        			rawData.splice(i,1);
-	        		}
-	        	}
+	       		 chartDataC=splitData(rawData);
     	    }else{
     	    	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
@@ -36,6 +32,7 @@
 		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
+	       		 chartDataC=splitData(rawData.slice(-40));
     	    }
         	var x=0;
             var length=$("#positionList .position3").length;
@@ -48,7 +45,6 @@
             		}
             	}
             }
-		   chartDataC=splitData(rawData.slice(-40));
 		   var option=setOption(chartDataC,x);
 		   myChart.setOption(option);
 	  		myChart.resize();
@@ -251,37 +247,25 @@
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
-    	    var lent=volumeV.length;
+    	    var lent=CandlestickVolumeData.time.length;
  			if(data.Parameters.HisQuoteType==1440){
 	        	for(var i=0;i<Len;i++){
 	        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-	        			volumeTime[lent+i]=timeStr;
-	        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+	        			CandlestickVolumeData.time[lent+i]=timeStr;
+	        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
 	       		};
-	        	for(var i=0;i<volumeTime.length-1;i++){
-	        		if(volumeTime[i]==volumeTime[i+1]){
-	        			volumeTime.splice(i,1);
-	        			volumeV.splice(i,1);
-	        		}
-	        	}
        		 }else{
        		 	for(var i=0;i<Len;i++){
 	        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 			        	var str1=time2[1].split(":");
 			        	var str2=str1[0]+":"+str1[1]
-	        			volumeTime[lent+i]=str2;
-	        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+	        			CandlestickVolumeData.time[lent+i]=str2;
+	        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
 	       		};
-	        	for(var i=0;i<volumeTime.length-1;i++){
-	        		if(volumeTime[i]==volumeTime[i+1]){
-	        			volumeTime.splice(i,1);
-	        			volumeV.splice(i,1);
-	        		}
-	        	}
+	       		CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+	       		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
        		 }
-        	CandlestickVolumeData.time=volumeTime.slice(-40);
-        	CandlestickVolumeData.volume=volumeV.slice(-40);
-        	CandlestickVolumeChart.group="group2";
+        		CandlestickVolumeChart.group="group2";
 		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 		  		CandlestickVolumeChart.resize();	
 		  		CandlestickVolumeChart.setOption(option1);

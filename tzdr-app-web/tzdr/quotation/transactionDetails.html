@@ -1005,6 +1005,7 @@
 							var height=window.innerHeight;
 							var width=window.innerWidth;
 							var clickBottomNum=0;
+							setTimeout(function(){
 								$(".bottom").css({
 										"height":height+"px",
 										"width":width+"px",
@@ -1015,6 +1016,8 @@
 										"background":"url('../../images/conditionBg.png') no-repeat",
 										"background-size":"cover",
 									});
+							},200)
+								
 								$(".bottom").click(function(){
 									if(clickBottomNum==0){
 										$(".bottom").css({
@@ -1027,7 +1030,6 @@
 									clickBottomNum++;
 								})
 						}
-
 						$("#bg1").css("display","none");
 						$("#bg3").css("display","none");
 						$("#bg2").css("display","block");
@@ -1058,7 +1060,6 @@
 						var optionsJson = this.getAttribute('data-options') || '{}';
 						var options = JSON.parse(optionsJson);
 						var id = this.getAttribute('id');
-						/*mui("#popoverConditoion").popover("toggle");*/
 						/*
 						 * 首次显示时实例化组件
 						 * 示例为了简洁，将 options 放在了按钮的 dom 上

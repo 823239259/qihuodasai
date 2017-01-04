@@ -64,7 +64,6 @@ mui.plusReady(function(){
 		init(Transfer.name);
 		$("#MainContract").text(Transfer.name[2]+Transfer.name[1])
 	marketSocket = new WebSocket(marketSocketUrl);
-//  var setIntvalTime = null; 
     var marketLoadParam = {}
 	marketSocket.onopen = function(evt){
       masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
@@ -82,14 +81,6 @@ mui.plusReady(function(){
         var method = jsonData.Method;
         if(method=="OnRspLogin"){
         	sendHistoryMessage(0);
-//      	TemporaryDataV={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
-//			TemporaryData={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
 	       masendMessage('QryCommodity',null);
         }else if(method == "OnRspQryHistory"){
             var historyParam = jsonData;
@@ -620,16 +611,6 @@ mui.plusReady(function(){
 			"price":[]
 		}    
     	sendHistoryMessage(0);
-//  	getTimeLength=0;
-//  	TemporaryDataV={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
-//			TemporaryData={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
-    	
     })
    
     function insertDATA(DATA){
@@ -686,18 +667,9 @@ mui.plusReady(function(){
 		    }
 		     newData=[]; 
 				sendHistoryMessage(val);
-//				TemporaryDataV={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
-//			TemporaryData={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
-//				getTimeLength=0;
-		        		setTimeout(function(){
+//		        		setTimeout(function(){
 		        			$("#CandlestickChart").css("opacity","1");
-		        		},100);
+//		        		},100);
     	}
     /*
 		 获取K线类型**/
@@ -780,15 +752,6 @@ mui.plusReady(function(){
 		    var timePrice=[];
     		var val=$("#timeChartMenu").val();
     		sendHistoryMessage(val);
-//  		getTimeLength=0;
-//  		TemporaryDataV={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
-//			TemporaryData={
-//			 	categoryData:[],
-//			 	values:[]
-//			 }
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
         	var x=0;
@@ -802,17 +765,17 @@ mui.plusReady(function(){
             }
     		var option2=setOption1(x);
 		 	 var option1 =volumeChartSetOption(volumeChartData);
-				setTimeout(function(){
+//				setTimeout(function(){
 				 	timeChart.resize();	
 					timeChart.setOption(option2);
         			timeChart.resize();	
         			volumeChart.resize();	
 					volumeChart.setOption(option1);
         			volumeChart.resize();
-        		},10);
-        		setTimeout(function(){
+//      		},10);
+//      		setTimeout(function(){
         			$("#TimeChart1").css("opacity","1");
-        		},11);
+//      		},11);
         		
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
@@ -1011,18 +974,20 @@ function dealOnRtnQuoteData(data,totalVolume){
 		}
 	}
 	
-	drawChartCandlestick(x);
+	drawChartCandlestick(x,range);
 }
-function drawChartCandlestick(x){
-         var option = setOption1(x);
-        timeChart.setOption(option);
-        timeChart.resize();
-        var option1 =volumeChartSetOption(volumeChartData);
-        volumeChart.setOption(option1);
-        volumeChart.resize();
-        timeChart.group="group1";
-       	volumeChart.group="group1";
-       	if(chartDataC != undefined){
+function drawChartCandlestick(x,range){
+	if(Number(range)==1){
+		  var option = setOption1(x);
+	        timeChart.setOption(option);
+	        timeChart.resize();
+	        var option1 =volumeChartSetOption(volumeChartData);
+	        volumeChart.setOption(option1);
+	        volumeChart.resize();
+	        timeChart.group="group1";
+	       	volumeChart.group="group1";
+	}else{
+		if(chartDataC != undefined){
    			var option2=setOption(chartDataC,x);
 	   		myChart.setOption(option2);
 		   	var option3= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
@@ -1032,6 +997,9 @@ function drawChartCandlestick(x){
 	  		CandlestickVolumeChart.group="group2";
 	  		myChart.group="group2";
        	}
+	}
+       
+       	
 
 }
     function getNowFormatDate(date) {
