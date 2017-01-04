@@ -60,7 +60,6 @@ function linearlyLoadData(method) {
 	}else if (method == "OnRspQryAccount"){
 		if(stopLossLoadDataIndex == 0 && tradeWebSocketIsMock == 1){
 			Trade.doQryStopLoss(username);
-			console.log("查询止损单");
 			stopLossLoadDataIndex++;
 		} 
 	}else if(method == "OnRspQryStopLoss"){
@@ -230,7 +229,6 @@ function handleData(evt){
 			appendStopLossData(stopLossParam);
 			//查询止损止盈返回
 		}else if(method == "OnRspQryStopLoss"){
-			console.log(parameters);
 			var stopLossParam = parameters;
 			appendStopLossData(stopLossParam);
 			//止损止盈状态返回
@@ -912,7 +910,6 @@ function loadCachecentPositionData(param){
  * 交易成功更新持仓信息(计算开仓（持仓）均价)
  */
 function updateOrderUpdatePosition(param){
-	console.log(localCachePositionRecentData);
 	$(".tab_position").each(function(){
 		var $this = $(this);
 		var contractCode = $this.attr("data-tion-position");
@@ -935,7 +932,6 @@ function updateOrderUpdatePosition(param){
 				doSize = localCommodity.DotSize;
 			}
 			var holdAvgPrice = doGetOpenAvgPrice(price, holdNum, doSize);
-			console.log(holdAvgPrice);
 			var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
 			var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
 			$holdAvgPrice.text(holdAvgPrice);
@@ -2082,6 +2078,7 @@ function bindOpertion(){
 			var currencyNo  = localCommodity.CurrencyNo;
 			var lastPrice = localQuote.LastPrice;
 			$("#stop_contractCode").text(contractCode);
+			$("#stopHoldContractCode").val(contractCode);
 			$("#stop_drection").text($drection.text());
 			$("#stop_lastPrice").text(lastPrice);
 			$("#stop_inputprice").val(lastPrice);
@@ -2179,6 +2176,7 @@ function bindOpertion(){
 		$("#loss_confirm").attr("data-tion-operate",2);
 		$("#stopHoldAvgPrice").val(holdAvgPrice);
 		$("#stopHoldDrection").val(holdDrection);
+		$("#stopHoldContractCode").val(contractCode);
 		operationStopLossType = 0;
 		openUpdateStop(stopLossType);
 		
@@ -2597,8 +2595,6 @@ function doStopAndDelModifyStopLoss(){
 		return;
 	}
 	var contractCode = $("#"+stopLossNo).attr("data-tion-contractCode");
-	console.log(stopLossNo);
-	console.log(contractCode);
 	var localQuote = localCacheQuote[contractCode];
 	if(localQuote == undefined){
 		tip("无效的合约");
@@ -2799,7 +2795,6 @@ function doGetSellingBasicParam(obj){
 		return false;
 	}
 	var limitPirce = doGetMarketPrice(lastPrice,miniTikeSize,drection,dotSize);
-	console.log(limitPirce);
 	if(validationInputPrice(limitPirce)){
 		tip("平仓价格错误");
 		return false;

@@ -196,8 +196,9 @@
         <div class="stop_loss_tab"><a href="javascript:void(0);" class="on" id = "stopTitle">止损单</a><a href="javascript:void(0);" id = "lossTitle">止盈单</a></div>
         <div class="stop_loss_all">
             <div class="stop_loss_lis" id = "stopContent" style="display: block;">
-            	<input type="text" style = "display: none;" value = "" id = "stopHoldAvgPrice"/>
-            	<input type="text" style = "display: none;" value = "" id = "stopHoldDrection"/>
+            	<input type="hidden" value = "" id = "stopHoldAvgPrice"/>
+            	<input type="hidden" value = "" id = "stopHoldDrection"/>
+            	<input type="hidden" value = "" id = "stopHoldContractCode"/>
                 <p>合约名称：<span id = "stop_contractCode">HSIF7,恒指F7</span>，<span id = "stop_drection">多头</span>，最新： <span id = "stop_lastPrice">56.12</span></p>
                 <p>止损价：<input type="text" name="stop_inputprice" id="stop_inputprice"/>，<input type="text" name="stop_inputnum" id="stop_inputnum"/>手</p>
                 <div class="prompter">止损价设置需小于持仓价差1，预期亏损<span id = "stop_yjks">0</span><span class = "stop_dw">HKD</span>，百分比<span id = "stop_scale">0</span>%</div>

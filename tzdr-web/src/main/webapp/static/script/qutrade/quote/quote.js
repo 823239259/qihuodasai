@@ -176,6 +176,8 @@ function quotePush(obj){
 	setBuyAndSellFloatPrice(param);
 	//设置盘口
 	setHandicap(param);
+	//更新止损/止盈最新价格
+	updateStopLossLastPrice(param);
 }
 /**
  * 订阅行情
@@ -257,6 +259,21 @@ function setTradeLastPrice(param){
 			$("#money_number").val(lastPrice);
 			setMoneyNumberIndex(1);
 		}
+	}
+}
+/**
+ * 更新止损止盈最新价格
+ * @param param
+ */
+function updateStopLossLastPrice(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode = commodityNo + contractNo;
+	var oldContractCode = $("#stopHoldContractCode").val();
+	if(contractCode == oldContractCode){
+		var lastPrice = param.LastPrice;
+		$("#stop_lastPrice").text(lastPrice);
+		$("#loss_lastPrice").text(lastPrice);
 	}
 }
 /**
