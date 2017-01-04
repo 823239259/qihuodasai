@@ -1,7 +1,7 @@
 	var aa=require.config({
 			    paths:{
-			        'echarts' :'../../js/echarts',
-			        'echarts/chart/pie' :'../../js/echarts',
+			        'echarts' :'../../js/echarts.min',
+			        'echarts/chart/pie' :'../../js/echarts.min',
 			    }
 	});
 //	var muiSpinner=document.getElementsByClassName("mui-spinner");

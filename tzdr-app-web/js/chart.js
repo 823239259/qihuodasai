@@ -668,17 +668,18 @@ mui.plusReady(function(){
 		     newData=[]; 
 			sendHistoryMessage(val);
 			$("#CandlestickChart").css("opacity","1");
+			console.log(new Date()+"22");
     	}
+    	var selectButonNum=0;
     /*
 		 获取K线类型**/
 		$("#list_type ul li").on("tap",function(){
-			$("#CandlestickChart").addClass("mui-active");
-    		$("#trade").removeClass("mui-active")
-    		$("#TimeChart1").removeClass("mui-active")
-    		$("#chartAllDiv").addClass("mui-active");
-    		$("#lightChartDiv").removeClass("mui-active");
 			$("#selectButon").text($(this).text())
 			var val=$(this).val();
+			console.log(new Date()+"11");
+			$("#list_type ").css({
+				"display":"none"
+			});
 			if(val==1){
 				drawChart(val)
 			}else if(val==5){
@@ -686,22 +687,17 @@ mui.plusReady(function(){
 			}else if(val==15){
 				drawChart(val)
 			}else if(val==30){
-				drawChart(val)
+				drawChart(val);
 			}else if(val==1440){
 				drawChart(val)
 			}
-			$("#list_type ").css({
-				"display":"none"
-			})
+
 		});
-	var selectButonNum=0;
+	
 		$("#selectButon").click(function(){
 			if(selectButonNum==0){
-				$("#CandlestickChart").addClass("mui-active");
-	    		$("#trade").removeClass("mui-active")
-	    		$("#TimeChart1").removeClass("mui-active")
-	    		$("#chartAllDiv").addClass("mui-active");
 				drawChart(1);
+				selectButonNum=1;
 			}
 			$("#list_type ").css({
 				"display":"block"
@@ -863,14 +859,6 @@ function masendMessage(method,parameters){
 		}
 	}
 }
- var TemporaryData={
- 	categoryData:[],
- 	values:[]
- }
- var TemporaryDataV={
- 	categoryData:[],
- 	values:[]
- }
 function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
