@@ -2536,16 +2536,23 @@ function bindOpertion(){
 	$("#insertConditionTable").bind("click",function(){
 		if(vadationIsLoginMuiTip()){
 			var chioceAdditional = $("#chioceAdditional").val();
+			var conditoionPricesInput1 = 0;
+			var chiocePrices = $("#chiocePrices").val();
 			var conditoionPricesInput = $("#ConditoionPricesInput").val();
 			if(conditoionPricesInput == null || conditoionPricesInput.length == 0){
 				tip("触发价格错误");
 				return;
 			}
 			if(chioceAdditional != -1){
-				var conditoionPricesInput1 = $("#ConditoionPricesInput1").val();
+				conditoionPricesInput1 = $("#ConditoionPricesInput1").val();
 				if(conditoionPricesInput1 <= 0 || conditoionPricesInput1.length == 0){
 					tip("附加触发价格错误");
 					return;
+				}
+				var flag = validationPriceCondition(chiocePrices,conditoionPricesInput,chioceAdditional,conditoionPricesInput1);
+				if(!flag){
+					tip("两个价格必须形成一个区间");
+					return false;
 				}
 			}
 			var conditoionPricesInput3 = $("#ConditoionPricesInput3").val();
@@ -2573,8 +2580,13 @@ function bindOpertion(){
 					tip("附加触发价格错误");
 					return;
 				}
-			}
+			} 
 			var ConditoionTimeInput = $("#ConditoionTimeInput").val();
+			var flag = validationtimeCondition($("#insertTimeInput").val());
+			if(!flag){
+				tip("设置时间必须大于当前时间");
+				return;
+			}
 			if(ConditoionTimeInput <= 0 || ConditoionTimeInput.length == 0){
 				tip("手数输入错误");
 				return;
@@ -3464,6 +3476,55 @@ function validationLastPrice(){
 	}else{
 		return false;
 	}
+}
+/**
+ * 条件单验证价格条件符合条件
+ * @param {Object} priceType
+ * @param {Object} price
+ * @param {Object} addPriceType
+ * @param {Object} addPrice
+ */
+/**
+ * 验证价格的组合排列：第一位表示原始条件代码，第二位表示附加条件代码，第三位（原始价格-附加价格）如果结果小于0则为代码：0，如果大于0则为代码：1
+ * 组合中的数组组合都是允许通过的选择和输入
+ */
+var priceConditionArr = ["010","101","030","301","301","210","210","210"];
+function validationPriceCondition(priceType,price,addPriceType,addPrice){
+	if(priceType == addPriceType){
+		tip("初始条件和附加条件不能一致");
+		return;
+	}
+	if(price == addPrice){
+		tip("初始价格和附加价格不能一致");
+		return;
+	}
+	var chaPrice =  price - addPrice;
+	var code = 0;
+	if(chaPrice > 0){
+		code = 1;
+	}
+	code = priceType+""+addPriceType+""+code;
+	var size = priceConditionArr.length;
+	var flag = false;
+	for(var i = 0 ; i < size ; i ++){
+		
+		if(priceConditionArr[i] == code){
+			flag = true; 
+			break; 
+		}
+	}
+	return flag;
+}
+/**
+ * 条件单时间条件时间验证
+ * @param {Object} param
+ */
+function validationtimeCondition(time){
+	var now = formatDateHHMM(new Date());
+	if(now > time){
+		return false;
+	}
+	return true;
 }
 /**
  * 下单操作的tip遮罩层
