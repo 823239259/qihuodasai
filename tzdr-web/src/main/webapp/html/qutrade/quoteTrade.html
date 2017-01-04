@@ -11,13 +11,13 @@
     <link href="../../static/css/gybf.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="../../static/ico/icon.png">
     <!-- 弹出层 -->
-    <link href="../../static/css/quotation.css?v=2016-11-11" rel="stylesheet" type="text/css" />
+    <link href="../../static/css/quotation.css" rel="stylesheet" type="text/css" />
     <link  href="../../static/script/layer/skin/layer.css"  rel="stylesheet" type="text/css">
     <script type='text/javascript' src="../../static/script/jquery-1.8.3.js"></script>
     <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
     <script type='text/javascript' src="../../static/script/common/discussStock.js"></script>
 
-    <script type='text/javascript' src="../../static/script/qutrade/quote.trade.js?v=2016-11-11"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote.trade.js"></script>
     <script type='text/javascript' src="../../static/script/qutrade/quotation.js"></script>
     <script type='text/javascript' src="../../static/script/layer/layer.js"></script>
     <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js"></script>
@@ -31,7 +31,7 @@
     <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js"></script>
     <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js"></script>
     <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js?v=2016-11-11"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
     <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
     <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
     <!-- 插件 -->
@@ -193,17 +193,19 @@
          <a class="nava">修改止盈单</a><a class="close"></a>
      </div> -->
     <div class="smain">
-        <div class="stop_loss_tab"><a href="javascript:void(0);" class="on">止损单</a><a href="javascript:void(0);">止盈单</a></div>
+        <div class="stop_loss_tab"><a href="javascript:void(0);" class="on" id = "stopTitle">止损单</a><a href="javascript:void(0);" id = "lossTitle">止盈单</a></div>
         <div class="stop_loss_all">
-            <div class="stop_loss_lis" style="display: block;">
-                <p>合约名称：<span>HSIF7,恒指F7</span>，<span>多头</span>，最新： <span>56.12</span></p>
-                <p>止损价：<input type="text" name="" id=""/>，<input type="text" name="" id=""/>手</p>
-                <div class="prompter">止损价设置需小于持仓价差1，预期亏损<span>10</span>HKD，百分比<span>0.1</span>%</div>
-                <p><input type="checkbox" id="hkd" name="" id=""/>动态追踪，价格回测幅度<input type="text" readonly="readonly" name="" id="" style="margin-left: 10px;"/>HKD</p>
+            <div class="stop_loss_lis" id = "stopContent" style="display: block;">
+            	<input type="text" style = "display: none;" value = "" id = "stopHoldAvgPrice"/>
+            	<input type="text" style = "display: none;" value = "" id = "stopHoldDrection"/>
+                <p>合约名称：<span id = "stop_contractCode">HSIF7,恒指F7</span>，<span id = "stop_drection">多头</span>，最新： <span id = "stop_lastPrice">56.12</span></p>
+                <p>止损价：<input type="text" name="stop_inputprice" id="stop_inputprice"/>，<input type="text" name="stop_inputnum" id="stop_inputnum"/>手</p>
+                <div class="prompter">止损价设置需小于持仓价差1，预期亏损<span id = "stop_yjks">0</span><span class = "stop_dw">HKD</span>，百分比<span id = "stop_scale">0</span>%</div>
+                <p><input type="checkbox"  name="stop_checked" id="stop_checked"/>动态追踪，价格回测幅度<input type="text"  name="stop_diff" id="stop_diff" style="margin-left: 10px;"/><span class = "stop_loss_dw">HKD</span></p>
                 <p>止损委托价：
-                    <select>
-                        <option>市价</option>
-                        <option>限价</option>
+                    <select id = "stop_orderType">
+                        <option value = "1">市价</option>
+                        <option value = "2">对手价</option>
                     </select>
                 </p>
                 <ul>
@@ -211,16 +213,16 @@
                     <li>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</li>
                     <li>3、止损单存在风险，云端系统、网络故障情况下失效等。</li>
                 </ul>
-                <p class="anniu"><span class="confirm">确认</span><span class="cancel close">取消</span></p>
+                <p class="anniu"><span data-tion-operate = "1" id = "stop_confirm" class="confirm">确认</span><span class="cancel close">取消</span></p>
             </div>
-            <div class="stop_loss_lis">
-                <p>合约名称：<span>HSIF7,恒指F7</span>，<span>多头</span>，最新： <span>56.12</span></p>
-                <p>止盈价：<input type="text" name="" id=""/>，<input type="text" name="" id=""/>手</p>
-                <div class="prompter">止赢价设置需大于持仓价差1，预期亏损<span>10</span>HKD，百分比<span>0.1</span>%</div>
+            <div class="stop_loss_lis" id = "lossContent">
+                <p>合约名称：<span id = "loss_contractCode">HSIF7,恒指F7</span>，<span id = "loss_drection">多头</span>，最新： <span id = "loss_lastPrice">56.12</span></p>
+                <p>止盈价：<input type="text" name="loss_inputprice" id="loss_inputprice"/>，<input type="text" name="loss_inputnum" id="loss_inputnum"/>手</p>
+                <div class="prompter">止赢价设置需大于持仓价差1，预期亏损<span id = "loss_yjks">0</span><span id = "loss_dw">HKD</span>，百分比<span id = "loss_scale">0</span>%</div>
                 <p>止盈委托价：
-                    <select>
-                        <option>市价</option>
-                        <option>限价</option>
+                    <select id = "loss_orderType">
+                        <option value = "1">市价</option>
+                        <option value = "2">限价</option>
                     </select>
                 </p>
                 <ul>
@@ -228,7 +230,7 @@
                     <li>2、止盈单在行情不活跃或快速发送变化下，不保证成交价为指定价</li>
                     <li>3、止盈单存在风险，云端系统、网络故障情况下失效等。</li>
                 </ul>
-                <p class="anniu"><span class="confirm">确认</span><span class="cancel close">取消</span></p>
+                <p class="anniu"><span id = "loss_confirm" class="confirm">确认</span><span class="cancel close">取消</span></p>
             </div>
         </div>
     </div>
@@ -740,6 +742,7 @@
                         <li><a href="javascript:void(0);"  id = "allPosition">全部平仓</a></li>
                         <li><a href="javascript:void(0);"  id = "aPosition">平仓</a></li>
                         <li><a href="javascript:void(0);"  id = "positionBckhand">反手</a></li>
+                        <li><a href="javascript:void(0);"  id = "stopLossAndtraders">止损止盈</a></li>
                     </ul>
                 </div>
                 <div class="quotation_detailed_title" style="display: none;" id = "des_title">
@@ -822,116 +825,33 @@
                 </div>
                 <div class="quotation_detailed_title" style="display: none;" id = "loss_title">
                     <div class="gdt1">
-                        <div class = "loss_lis" id="">
+                        <div class = "loss_lis" id="no_stopLoss">
                             <ul class="tab_lis">
                                 <li class="ml" style="width: 100px;">合约</li>
                                 <li style="width: 50px;">状态</li>
-                                <li style="width: 50px;">类别</li>
                                 <li style="width: 50px;">多空</li>
+                                <li style="width: 50px;">类别</li>
                                 <li style="width: 50px;">手数</li>
                                 <li style="width: 140px;">触发条件</li>
                                 <li style="width: 50px;">委托价</li>
+                                <li style="width: 100px;">有效期</li>
                                 <li style="width: 140px;">触发时间</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px">富时A50</li>
-                                <li class="" style="width: 50px;">运行</li>
-                                <li class="" style="width: 50px;">止损</li>
-                                <li class="" style="width: 50px;">多</li>
-                                <li class="" style="width: 50px;">2</li>
-                                <li class="" style="width: 140px;">触发价：233.00</li>
-                                <li class="" style="width: 50px;">市价</li>
-                                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px">富时A50</li>
-                                <li class="" style="width: 50px;">运行</li>
-                                <li class="" style="width: 50px;">止损</li>
-                                <li class="" style="width: 50px;">多</li>
-                                <li class="" style="width: 50px;">2</li>
-                                <li class="" style="width: 140px;">触发价：233.00</li>
-                                <li class="" style="width: 50px;">市价</li>
-                                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px">富时A50</li>
-                                <li class="" style="width: 50px;">运行</li>
-                                <li class="" style="width: 50px;">止损</li>
-                                <li class="" style="width: 50px;">多</li>
-                                <li class="" style="width: 50px;">2</li>
-                                <li class="" style="width: 140px;">触发价：233.00</li>
-                                <li class="" style="width: 50px;">市价</li>
-                                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px">富时A50</li>
-                                <li class="" style="width: 50px;">运行</li>
-                                <li class="" style="width: 50px;">止损</li>
-                                <li class="" style="width: 50px;">多</li>
-                                <li class="" style="width: 50px;">2</li>
-                                <li class="" style="width: 140px;">触发价：233.00</li>
-                                <li class="" style="width: 50px;">市价</li>
-                                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
                             </ul>
                             <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                         </div>
                     </div>
                     <div class="gdt1" style="display: none;">
-                        <div class = "loss_lis" id="">
+                        <div class = "loss_lis" id="yes_stopLoss">
                             <ul class="tab_lis">
                                 <li class="ml" style="width: 100px;">合约</li>
+                                <li style="width: 50px;">状态</li>
                                 <li style="width: 50px;">多空</li>
                                 <li style="width: 50px;">类别</li>
-                                <li style="width: 50px;">手速</li>
+                                <li style="width: 50px;">手数</li>
                                 <li style="width: 140px;">触发条件</li>
                                 <li style="width: 50px;">委托价</li>
                                 <li style="width: 100px;">有效期</li>
                                 <li style="width: 140px;">触发时间</li>
-                                <li style="width: 50px;">委托结果</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px;">富时A50</li>
-                                <li style="width: 50px;">多</li>
-                                <li style="width: 50px;">止损</li>
-                                <li style="width: 50px;">2</li>
-                                <li style="width: 140px;">触发价：233.00</li>
-                                <li style="width: 50px;">市价</li>
-                                <li style="width: 100px;">当日有效</li>
-                                <li style="width: 140px;">2016-12-08 13:59:23</li>
-                                <li style="width: 50px;">成功</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px;">富时A50</li>
-                                <li style="width: 50px;">空</li>
-                                <li style="width: 50px;">止盈</li>
-                                <li style="width: 50px;">2</li>
-                                <li style="width: 140px;">触发价：233.00</li>
-                                <li style="width: 50px;">市价</li>
-                                <li style="width: 100px;">当日有效</li>
-                                <li style="width: 140px;">2016-12-08 13:59:23</li>
-                                <li style="width: 50px;">失败</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px;">富时A50</li>
-                                <li style="width: 50px;">多</li>
-                                <li style="width: 50px;">止损</li>
-                                <li style="width: 50px;">2</li>
-                                <li style="width: 140px;">触发价：233.00</li>
-                                <li style="width: 50px;">市价</li>
-                                <li style="width: 100px;">当日有效</li>
-                                <li style="width: 140px;">2016-12-08 13:59:23</li>
-                                <li style="width: 50px;">成功</li>
-                            </ul>
-                            <ul class="tab_content">
-                                <li class="ml" style="width: 100px;">富时A50</li>
-                                <li style="width: 50px;">多</li>
-                                <li style="width: 50px;">止损</li>
-                                <li style="width: 50px;">2</li>
-                                <li style="width: 140px;">触发价：233.00</li>
-                                <li style="width: 50px;">市价</li>
-                                <li style="width: 100px;">当日有效</li>
-                                <li style="width: 140px;">2016-12-08 13:59:23</li>
-                                <li style="width: 50px;">成功</li>
                             </ul>
                             <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                         </div>
@@ -941,9 +861,9 @@
                         <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="">已触发列表</label>
                     </div>
                     <ul class="caozuo" id="loss_caozuo" style="left: 243px;"><!--style = "display:none"-->
-                        <li><a href="javascript:void(0);"  id = "loss_stop">暂停</a></li>
-                        <li><a href="javascript:void(0);"  id = "loss_update">修改</a></li>
-                        <li><a href="javascript:void(0);"  id = "loss_delete">删除</a></li>
+                        <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "2" id = "loss_stop">暂停</a></li>
+                        <li><a href="javascript:void(0);" data-tion-vale = "0" id = "loss_update">修改</a></li>
+                        <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "1" id = "loss_delete">删除</a></li>
                     </ul>
                 </div>
                 <div class="quotation_detailed_title" style="display: none;" id = "condition_title">2</div>
@@ -1002,16 +922,7 @@
             }
         });
         $("#loss_update").click(function() {
-            $("#stop_loss").css("display","block");
-            $("#div_Mask").show();
-            var popupHeight = $("#stop_loss").outerHeight()/2;
-            var popupWidth = $("#stop_loss").outerWidth()/2;
-            $("#stop_loss").css({
-                top:"50%",
-                left:"50%",
-                marginTop: -(popupHeight+15),
-                marginLeft: -(popupWidth)
-            });
+            
         });
         $(".stop_loss_tab a").click(function(){
             var _this = $(this).index();
