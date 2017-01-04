@@ -506,8 +506,8 @@
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
 					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
-				        <a class="mui-control-item mui-active" href="#NoCondition" >未触发列表</a>
-				        <a class="mui-control-item" href="#alreayCondition" >已触发列表</a>
+				        <a class="mui-control-item mui-active" href="#NoCondition" id="NoConditionTitle">未触发列表</a>
+				        <a class="mui-control-item" href="#alreayCondition" id="alreayConditionTitle">已触发列表</a>
 				    </div>
 				    <div class="mui-control-content mui-active" id="NoCondition">
 				    	<table  id="conditionTable">
@@ -525,10 +525,7 @@
 							<tbody id = "thodyCondition" >
 							</tbody>
 				    	</table>
-				    	<button value="2"  class = "updateCondition" id="suspendCondition">暂停</button>
-						<button value="0" id="modifyCondition">修改</button>
-						<button value="1" class = "updateCondition" id="deleteCondition">删除</button>
-				    </div>
+				   	 </div>
 				    <div class="mui-control-content" id="alreayCondition">
 				    	<table>
 				    		<thead>
@@ -543,11 +540,19 @@
 				    			</tr>
 				    		</thead>
 				    		<tbody id = "over-thbodyCondition">
-				    			
 				    		</tbody>
-							
 				    	</table>
 				    </div>
+				    	<button value="2"  class = "updateCondition" id="suspendCondition">暂停</button>
+						<button value="0" id="modifyCondition">修改</button>
+						<button value="1" class = "updateCondition" id="deleteCondition">删除</button>
+						<div id="stopTips1" class="stopTips">
+							<div>提示</div>
+							<div>
+								<p>1.云端止损单只保证触发不保证成交</p>
+								<p>2.暂不支持显示套利止损单</p>
+							</div>
+						</div>
 				</div>
 <!-----------------------------添加条件单的弹窗---------------------------->				
 				<div id="popoverConditoion" class="mui-popover">
@@ -725,7 +730,7 @@
 				    <button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
 					<button value="0" id="modifyCondition1">修改</button>
 					<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
-					<div id="stopTips">
+					<div id="stopTips" class="stopTips">
 						<div>提示</div>
 						<div>
 							<p>1.云端止损单只保证触发不保证成交</p>
@@ -843,7 +848,7 @@
 								"width":"100%",
 								"height":screen-300+"px",
 							});
-							$("#alreayStopTale,#NoStopTale").css({
+							$("#alreayStopTale,#NoStopTale,#alreayCondition,#NoCondition").css({
 								"height":screen-160+"px",
 							})
 						}	
@@ -1002,10 +1007,11 @@
 					if(isLogin){
 						if(plus.storage.getItem("QuotationGuidanceTrade1")==null){
 							plus.storage.setItem("QuotationGuidanceTrade1","1");
+							var QuotationGuidanceTradeTimeOut=null;
 							var height=window.innerHeight;
 							var width=window.innerWidth;
 							var clickBottomNum=0;
-							setTimeout(function(){
+							QuotationGuidanceTradeTimeOut=setTimeout(function(){
 								$(".bottom").css({
 										"height":height+"px",
 										"width":width+"px",
@@ -1016,9 +1022,10 @@
 										"background":"url('../../images/conditionBg.png') no-repeat",
 										"background-size":"cover",
 									});
-							},200)
-								
+									
+							},400)
 								$(".bottom").click(function(){
+									clearTimeout(QuotationGuidanceTradeTimeOut);
 									if(clickBottomNum==0){
 										$(".bottom").css({
 											"background":"url('../../images/conditionBg1.png') no-repeat",
@@ -1052,6 +1059,12 @@
 				})
 				document.getElementById("NoStopListTitle").addEventListener("tap",function(){
 					$("#suspendCondition1,#modifyCondition1,#deleteCondition1,#stopTips").css("display","block");
+				})
+				document.getElementById("alreayConditionTitle").addEventListener("tap",function(){
+					$("#suspendCondition,#modifyCondition,#deleteCondition,#stopTips1").css("display","none");
+				})
+				document.getElementById("NoConditionTitle").addEventListener("tap",function(){
+					$("#suspendCondition,#modifyCondition,#deleteCondition,#stopTips1").css("display","block");
 				})
 			});
 			(function($) {

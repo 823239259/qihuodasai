@@ -666,10 +666,8 @@ mui.plusReady(function(){
 		    	volume:[]
 		    }
 		     newData=[]; 
-				sendHistoryMessage(val);
-//		        		setTimeout(function(){
-		        			$("#CandlestickChart").css("opacity","1");
-//		        		},100);
+			sendHistoryMessage(val);
+			$("#CandlestickChart").css("opacity","1");
     	}
     /*
 		 获取K线类型**/
@@ -765,18 +763,13 @@ mui.plusReady(function(){
             }
     		var option2=setOption1(x);
 		 	 var option1 =volumeChartSetOption(volumeChartData);
-//				setTimeout(function(){
 				 	timeChart.resize();	
 					timeChart.setOption(option2);
         			timeChart.resize();	
         			volumeChart.resize();	
 					volumeChart.setOption(option1);
         			volumeChart.resize();
-//      		},10);
-//      		setTimeout(function(){
         			$("#TimeChart1").css("opacity","1");
-//      		},11);
-        		
     	});
     	document.getElementById("tradeMenu").addEventListener("tap",function(){
     		if(vadationIsLogin()){
@@ -913,28 +906,47 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var getTimeLength=0;
 	var lastPrices=Parameters.LastPrice;
 	var DateTimeStamp=Parameters.DateTimeStamp;
-	var oldTime1=timeData.time[timeData.time.length-1]
+	var DateTimeStamp1=DateTimeStamp.replace(/-/g, "/");
+	var oldTime1=(timeData.time[timeData.time.length-1]).replace(/-/g, "/");
 	var oldTime=Math.round(new Date(oldTime1).getTime()/1000);
-	var nowShjian=Math.round(new Date(DateTimeStamp).getTime()/1000)
+	var nowShjian=Math.round(new Date(DateTimeStamp1).getTime()/1000)
 	var time1=parseInt(nowShjian / (60*range));
-	var newTime=time1*60* range;
+	var newTime=Number(time1*60* range);
 	var time5=new Date(parseInt(newTime) * 1000);
-	var time6=getNowFormatDate(time5)
+	var time6=getNowFormatDate(time5);
 	var time2=time6.split(" ");
 	var str1=time2[1].split(":");
 	var str2=str1[0]+":"+str1[1];
+	var x=0;
+	var length=$("#positionList .position3").length;
+	var text=$("#CommodityNo").text();
+	if(length!=0){
+		for(var i=0;i<length;i++){
+			var text1=$("#positionList .position0").eq(i).text();
+			if(text.indexOf(text1)>=0){
+				x=Number($("#positionList .position3").eq(i).text());
+			}
+		}
+	}
 	if(oldTime==newTime){
-        	timeData.prices[timeData.timeLabel.length-1]=Parameters.LastPrice.toFixed(dosizeL);	
+		var lastPrices1=lastPrices.toFixed(dosizeL);
+		if(timeData.prices[timeData.prices.length-1]==lastPrices1 && volumeChartData.volume[volumeChartData.volume.length-1]==freshVolume){
+			
+		}else{
+			timeData.prices[timeData.prices.length-1]=lastPrices1;	
         	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;
+        	drawChartTime(x);
+		}
 	}else{
 			timeData.timeLabel.push(str2);
 			timeData.time.push(time6);
-        	timeData.prices.push(Parameters.LastPrice.toFixed(dosizeL));
+        	timeData.prices.push(lastPrices.toFixed(dosizeL));
         	volumeChartData.time.push(str2);
 	        volumeChartData.volume.push(0);
+	        drawChartTime(x);
 	}
 	if(chartDataC != undefined){
-		var oldTime2=chartDataC.time[chartDataC.time.length-1];
+		var oldTime2=(chartDataC.time[chartDataC.time.length-1]).replace(/-/g, "/");
 		var oldTime3=Math.round(new Date(oldTime2).getTime()/1000);
 		if(oldTime3==newTime){
 			var length=chartDataC.values.length;
@@ -962,31 +974,21 @@ function dealOnRtnQuoteData(data,totalVolume){
     		getTimeLength=1;
 		}
 	}
-	var x=0;
-	var length=$("#positionList .position3").length;
-	var text=$("#CommodityNo").text();
-	if(length!=0){
-		for(var i=0;i<length;i++){
-			var text1=$("#positionList .position0").eq(i).text();
-			if(text.indexOf(text1)>=0){
-				x=Number($("#positionList .position3").eq(i).text());
-			}
-		}
-	}
-	
-	drawChartCandlestick(x,range);
+	drawChartCandlestick(x);
 }
-function drawChartCandlestick(x,range){
-	if(Number(range)==1){
-		  var option = setOption1(x);
-	        timeChart.setOption(option);
-	        timeChart.resize();
-	        var option1 =volumeChartSetOption(volumeChartData);
-	        volumeChart.setOption(option1);
-	        volumeChart.resize();
-	        timeChart.group="group1";
-	       	volumeChart.group="group1";
-	}else{
+function drawChartTime(x){
+	var option = setOption1(x);
+    timeChart.setOption(option);
+    timeChart.resize();
+    var option1 =volumeChartSetOption(volumeChartData);
+    volumeChart.setOption(option1);
+    volumeChart.resize();
+    timeChart.group="group1";
+   	volumeChart.group="group1";
+}
+function drawChartCandlestick(x){
+	var icon=$("#timeChartMenu").hasClass("mui-active")
+	if(icon == false){
 		if(chartDataC != undefined){
    			var option2=setOption(chartDataC,x);
 	   		myChart.setOption(option2);
@@ -997,10 +999,9 @@ function drawChartCandlestick(x,range){
 	  		CandlestickVolumeChart.group="group2";
 	  		myChart.group="group2";
        	}
+	}else{
+		
 	}
-       
-       	
-
 }
     function getNowFormatDate(date) {
         var seperator1 = "-";
