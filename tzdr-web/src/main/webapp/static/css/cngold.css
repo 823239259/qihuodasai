@@ -1,0 +1,23 @@
+.ks_zuce .ks_zuce_content {width: 1280px;}
+.ks_header .denglu {color: #fff;}
+.ks_header .ks_content {width: 1280px;}
+.ks_zuce {background: url("../images/image/cngold_1.png") no-repeat;}
+#cngold {width: 1280px; margin: 0 auto;}
+#cngold .cngold_title {text-align: center; font-size: 24px; color: #ffffff; background: url("../images/image/cngold_2.png") no-repeat; width: 340px; margin: 40px auto; height: 50px; line-height: 50px;}
+#cngold .cngold_threshold {background: url("../images/image/cngold_3.png") no-repeat;  width: 600px; height: 168px; text-align: center; font-size: 32px; color: #ffffff; float: left; font-weight: bolder; padding-top: 35px;}
+#cngold .cngold_threshold span {color: #eb3742;}
+#cngold .cngold_threshold p {margin-top: 13px;}
+#cngold .cngold_tab {background: url("../images/image/cngold_4.png") no-repeat; width: 200px; height: 200px; text-align: center; float: left; margin: 0 10px; padding: 0 20px;}
+#cngold .cngold_tab span {color: #eb3742; font-size: 20px; display: inline-block; height: 40px; line-height: 40px; font-weight: bolder;}
+#cngold .cngold_tab p {color: #fff; font-size: 16px; line-height: 30px; margin-top: 35px;}
+.cngold_footer {background: #eb3742; height: 270px; width: 100%; margin-top: 40px;}
+.cngold_footer .cngold_center {width: 880px; margin: 0 auto; padding: 0 200px;}
+.cngold_footer .cngold_center ul {float: left;}
+.cngold_footer .cngold_center ul.app {margin-top: 20px; text-align: center; color: #fff; font-size: 16px; }
+.cngold_footer .cngold_center ul .ms {margin-top: 10px;}
+.cngold_footer .cngold_center ul.gw {float: right; margin-top: 20px; text-align: center;}
+.cngold_footer .cngold_center ul.gw a{text-decoration: none; line-height: 130px; font-size: 32px; color: #333; position: absolute; left: 10px; top: 10px; background: #ffc44c; width: 260px; height: 130px;}
+.cngold_footer .cngold_center ul.come {float: right; font-size: 20px; color: #fff; margin-top: 85px; margin-right: 10px;}
+.cngold_footer .cngold_center ul.gw a:hover {background: #fff;}	
+.cngold_footer .cngold_center ul.gw .back {position: absolute; top: 100px; left: 120px; float: left;}
+.copyright {font-size: 12px; color: #eb3742; height: 60px; line-height: 60px; text-align: center; background: #fff;}
