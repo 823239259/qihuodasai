@@ -116,7 +116,14 @@ public class ExtendsionSignController {
 		}
 		return ViewConstants.SignInViewJsp.EXTENDSIONSIGN_VEIW;
 	}
-
+	/**
+	 * 金投网推广页
+	 * @return
+	 */
+	@RequestMapping(value = "/cngold",method = RequestMethod.GET)
+	public String extendCngoldSignView(){
+		return ViewConstants.SignInViewJsp.EXTENDCNGOLD_VIEW;
+	}
 	/**
 	 * 跳转到抽奖的页面
 	 */

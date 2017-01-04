@@ -63,6 +63,10 @@ public class ViewConstants {
 		 */
 		public static final String EXTENDSIONSIGN_VEIW = "/views/signin/signinExtensions";
 		/**
+		 * 金投网推广页面
+		 */
+		public static final String EXTENDCNGOLD_VIEW = "/views/signin/cngold";
+		/**
 		 * 上线推广抽奖页面
 		 */
 		public static final String EXTENDSION_LUCK_VEIW = "/views/activies/skLuckyDraw";
