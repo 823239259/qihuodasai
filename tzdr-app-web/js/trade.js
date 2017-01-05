@@ -1240,7 +1240,7 @@ function appendCondition(param){
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){
-		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "&nbsp;&nbsp;"+analysisConditionCompareType(additionType)+additionPrice;
 	}
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
@@ -1300,7 +1300,7 @@ function updateConditionList(param){
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){ 
-		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "&nbsp;&nbsp;"+analysisConditionCompareType(additionType)+additionPrice;
 	}  
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
