@@ -273,7 +273,7 @@ function handleData(evt){
 			var message = "";
 			var status = conditionParam.Status;
 			if(status == 4){
-				tip("添加条件单失败");
+				tip(param.StatusMsg);
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				tip("条件单提交成功,单号:"+conditionNo);
@@ -575,21 +575,27 @@ function updateOrder(param){
 	var $desgNumber = $("li[data-order-order='"+orderId+"'] span[class = 'order4']");
 	var $orderStatus = $("li[data-order-order='"+orderId+"'] span[class = 'order1']");
 	var $tradeNum = $("li[data-order-order= '"+orderId+"'] span[class = 'order5']");
-	var orderStatus = param.OrderStatus;
+	var $cdNum = $("li[data-order-order= '"+orderId+"'] span[class = 'order6']");
+	var orderStatus = param.OrderStatus; 
 	var tradeNum = param.TradeNum;
+	var orderNum = param.OrderNum;
 	var orderPrice = param.TradePrice;
 	var priceType = $desgPrice.attr("data-priceType");
 	var dotSize = 2;
 	var localCommodit = getMarketCommdity(contractCode);
-	if(localCommodit != undefined){
+	if(localCommodit != undefined){ 
 		dotSize = localCommodit.DotSize;
 	} 
 	if(priceType == 0){
 		$desgPrice.text(parseFloat(param.OrderPrice).toFixed(dotSize));
 	}
 	$orderStatus.text(analysisOrderStatus(orderStatus));
+	if(orderStatus == 4){
+		
+	}
 	$tradeNum.text(tradeNum);	
-	$desgNumber.text(param.OrderNum);
+	$desgNumber.text(orderNum);
+	$cdNum.text(orderNum-tradeNum);
 };
 /**
  * 缓存挂单的列表信息
