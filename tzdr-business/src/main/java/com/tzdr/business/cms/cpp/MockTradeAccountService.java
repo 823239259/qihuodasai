@@ -1,9 +1,7 @@
 package com.tzdr.business.cms.cpp;
 
 import com.tzdr.common.baseservice.BaseService;
-import com.tzdr.cpp.DataSource;
 import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
-@DataSource(value="dataSource2")
 public interface MockTradeAccountService extends BaseService<MockTradeAccount>{
 	/**
 	 * 开通模拟账号
