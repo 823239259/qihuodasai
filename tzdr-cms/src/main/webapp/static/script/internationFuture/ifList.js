@@ -635,6 +635,15 @@ function filterNull(val) {
 function refuseInput(){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
+		var stateType = rows[0].stateType;
+		if(stateType == "已结算"){
+			Check.messageBox("提示","该用户已结算！");
+			return;
+		}
+		if(stateType == "操盘中"){
+			Check.messageBox("提示","操盘中的方案不能操作！");
+			return;
+		}
 			$.messager.confirm("确认提示","是否拒绝结算？", function(result){
 				if(result){
 					var id = rows[0].id;
