@@ -273,7 +273,7 @@ function handleData(evt){
 			var message = "";
 			var status = conditionParam.Status;
 			if(status == 4){
-				tip("添加条件单失败");
+				tip(param.StatusMsg);
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				tip("条件单提交成功,单号:"+conditionNo);
@@ -575,21 +575,26 @@ function updateOrder(param){
 	var $desgNumber = $("li[data-order-order='"+orderId+"'] span[class = 'order4']");
 	var $orderStatus = $("li[data-order-order='"+orderId+"'] span[class = 'order1']");
 	var $tradeNum = $("li[data-order-order= '"+orderId+"'] span[class = 'order5']");
-	var orderStatus = param.OrderStatus;
+	var $cdNum = $("li[data-order-order= '"+orderId+"'] span[class = 'order6']");
+	var orderStatus = param.OrderStatus; 
 	var tradeNum = param.TradeNum;
+	var orderNum = param.OrderNum;
 	var orderPrice = param.TradePrice;
 	var priceType = $desgPrice.attr("data-priceType");
 	var dotSize = 2;
 	var localCommodit = getMarketCommdity(contractCode);
-	if(localCommodit != undefined){
+	if(localCommodit != undefined){ 
 		dotSize = localCommodit.DotSize;
 	} 
 	if(priceType == 0){
 		$desgPrice.text(parseFloat(param.OrderPrice).toFixed(dotSize));
 	}
 	$orderStatus.text(analysisOrderStatus(orderStatus));
+	if(orderStatus == 4){
+		$cdNum.text(orderNum-tradeNum);
+	}
 	$tradeNum.text(tradeNum);	
-	$desgNumber.text(param.OrderNum);
+	$desgNumber.text(orderNum);
 };
 /**
  * 缓存挂单的列表信息
@@ -2551,8 +2556,7 @@ function bindOpertion(){
 				}
 				var flag = validationPriceCondition(chiocePrices,conditoionPricesInput,chioceAdditional,conditoionPricesInput1);
 				if(!flag){
-					tip("两个价格必须形成一个区间");
-					return false;
+					return;
 				}
 			}
 			var conditoionPricesInput3 = $("#ConditoionPricesInput3").val();
@@ -3490,6 +3494,7 @@ function validationLastPrice(){
  */
 var priceConditionArr = ["010","101","030","301","301","210","210","210"];
 function validationPriceCondition(priceType,price,addPriceType,addPrice){
+	var flag = false;
 	if(priceType == addPriceType){
 		tip("初始条件和附加条件不能一致");
 		return;
@@ -3505,13 +3510,14 @@ function validationPriceCondition(priceType,price,addPriceType,addPrice){
 	}
 	code = priceType+""+addPriceType+""+code;
 	var size = priceConditionArr.length;
-	var flag = false;
 	for(var i = 0 ; i < size ; i ++){
-		
 		if(priceConditionArr[i] == code){
 			flag = true; 
 			break; 
 		}
+	}
+	if(!flag){
+		tip("两个价格必须形成一个区间");
 	}
 	return flag;
 }

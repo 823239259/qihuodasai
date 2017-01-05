@@ -1073,7 +1073,9 @@
 			"images/conditionBg1.png",
 			"images/stopBg.png",
 			"images/tradeBG.png",
-			"images/tipsBG.png"
+			"images/tipsBG.png",
+			"js/mui.picker.all.js",
+			"css/mui.picker.all.css"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
@@ -1250,7 +1252,9 @@
 			"images/recharge/Transfer.png",
 			"images/recharge/bankP.png",
 			"js/pingpp.js",
-			"images/recharge/wei.png"
+			"images/recharge/wei.png",
+			"images/recharge/zhifubao.png",
+			"images/recharge/Quickpayment.png"
 		]
 	},
 	"tzdr/account/weixinPay.html": {
