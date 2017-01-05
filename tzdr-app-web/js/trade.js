@@ -591,11 +591,10 @@ function updateOrder(param){
 	}
 	$orderStatus.text(analysisOrderStatus(orderStatus));
 	if(orderStatus == 4){
-		
+		$cdNum.text(orderNum-tradeNum);
 	}
 	$tradeNum.text(tradeNum);	
 	$desgNumber.text(orderNum);
-	$cdNum.text(orderNum-tradeNum);
 };
 /**
  * 缓存挂单的列表信息
