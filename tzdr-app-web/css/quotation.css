@@ -1278,6 +1278,9 @@ input{
 #NoCondition  tr td:nth-child(4){
 	width: 120px;
 }
+#NoCondition  tr td:nth-last-child(1){
+	width: 120px;
+}
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;

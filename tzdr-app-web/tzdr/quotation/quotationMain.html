@@ -279,8 +279,11 @@
 	  				quotationMain:"quotationMain.html",
 	  			}
 				initBottom(dataUrl);
-				var url = marketSocketUrl;
+					var url = marketSocketUrl;
 					var socket = new WebSocket(url);
+					if(socket==null){
+						return
+					}
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 					}
