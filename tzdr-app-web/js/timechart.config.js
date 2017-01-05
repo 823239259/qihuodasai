@@ -192,9 +192,10 @@
 		            }
                },
           },
-          legend: {
-              data:['最新成交价']
-          },
+//        legend: {
+//        	
+//            data:['最新成交价']
+//        },
             toolbox: {
                 show: false,
             },
@@ -253,26 +254,6 @@
               {
                   name: '成交量',
                   type: 'bar',
-//                 markLine: {
-//		                data: [
-//		                    {type: 'average', name: '平均值'},
-//		                    [{
-//		                        symbol: 'none',
-//		                        x: '90%',
-//		                        yAxis: 'max'
-//		                    }, {
-//		                        symbol: 'circle',
-//		                        label: {
-//		                            normal: {
-//		                                position: 'start',
-//		                                formatter: '最大值'
-//		                            }
-//		                        },
-//		                        type: 'max',
-//		                        name: '最高点'
-//		                    }]
-//		                ]
-//		            },
                   data:dataVolume.volume
               }
           ]

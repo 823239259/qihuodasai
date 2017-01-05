@@ -166,29 +166,31 @@ function setTradeConfig(ismock){
  */
 function initLoad() {
 	plus.nativeUI.showWaiting("正在连接交易服务器...");
-	socket.onopen = function() {   
-		/*layer.closeAll();*/ 
-		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
-		//更新交易连接状态
-		changeConnectionStatus();
-	}
-	socket.onmessage = function(evt) {
-		handleData(evt);
-	} 
-	socket.onclose = function() {
-		clearInterval(tradeIntervalId);
-		socket = null;
-		//更新交易连接状态
-		changeConnectionStatus();
-		//不是手动登出，则重连交易服务器
-		if(loginFail == false){ 
-			//交易连接断开重连
-			tradeReconnect();
-		}else{
-			if(anotherPlace && loginFail){
-				alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
-				//clearLocalCacheData();
-				loginOut();
+	if(socket !=null){
+		socket.onopen = function() {   
+			/*layer.closeAll();*/ 
+			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
+			//更新交易连接状态
+			changeConnectionStatus();
+		}
+		socket.onmessage = function(evt) {
+			handleData(evt);
+		} 
+		socket.onclose = function() {
+			clearInterval(tradeIntervalId);
+			socket = null;
+			//更新交易连接状态
+			changeConnectionStatus();
+			//不是手动登出，则重连交易服务器
+			if(loginFail == false){ 
+				//交易连接断开重连
+				tradeReconnect();
+			}else{
+				if(anotherPlace && loginFail){
+					alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
+					//clearLocalCacheData();
+					loginOut();
+				}
 			}
 		}
 	}
