@@ -273,6 +273,7 @@ function handleData(evt){
 			var message = "";
 			var status = conditionParam.Status;
 			if(status == 4){
+				console.log(JSON.stringify(param));
 				tip(param.StatusMsg);
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
@@ -1244,7 +1245,7 @@ function appendCondition(param){
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
 	}else if(conditionType == 1){
-		compareTypeText = timeTriggerPoint;
+		compareTypeText =  formatDateHHMMSS(new Date(timeTriggerPoint)); 
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
@@ -1304,7 +1305,7 @@ function updateConditionList(param){
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
 	}else if(conditionType == 1){
-		compareTypeText = timeTriggerPoint;
+		compareTypeText = formatDateHHMMSS(new Date(timeTriggerPoint));
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
@@ -2634,7 +2635,7 @@ function bindOpertion(){
 			var additionPrice = param.AdditionPrice;
 			var df = new Date(timeTriggerPoint);
 			var dfTime = df.getTime();
-			var time = formatDateHHMM(new Date(dfTime));
+			var time = formatDateHHMMSS(new Date(dfTime));
 			$("#chioceContract").val(contractCode);
 			$("#chiocePrices").val(compareType);
 			$("#ConditoionPricesInput").val(priceTriggerPonit);
@@ -3101,7 +3102,7 @@ function doInsertConditionByPrice(){
 function doInsertConditionByTime(){
 	if(vadationIsLoginMuiTip()){
 		var contractCode = $("#chioceContract1").val();
-		var timeTriggerPoint = $("#insertTimeInput").val();
+		var timeTriggerPoint = formatDateYYYMMDD(new Date)+ " "+$("#insertTimeInput").val();
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
@@ -3165,7 +3166,7 @@ function doUpdateConditionByTime(){
 			return;
 		}
 		var contradeCode = $("#chioceContract1").val();
-		var timeTriggerPoint = $("#insertTimeInput").val();
+		var timeTriggerPoint = formatDateYYYMMDD(new Date)+ " "+ $("#insertTimeInput").val();
 		var additionType = $("#chioceTimeAdditional").val();
 		var additionPrice = $("#ConditoionTimePricesInput").val();
 		var drection = $("#shopDrectionTime").val();
@@ -3526,7 +3527,7 @@ function validationPriceCondition(priceType,price,addPriceType,addPrice){
  * @param {Object} param
  */
 function validationtimeCondition(time){
-	var now = formatDateHHMM(new Date());
+	var now = formatDateHHMMSS(new Date());
 	if(now > time){
 		return false;
 	}
