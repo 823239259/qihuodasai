@@ -80,6 +80,29 @@
             top: 2px;
             left: -2px;
         }
+        #condition_tab {
+        	position: absolute;
+            bottom: -44px;
+            left: 14px;
+        }
+        #condition_tab label {
+            font-size: 14px;
+            height: 28px;
+            line-height: 28px;
+            color: #ccc;
+            display: block;
+            text-align: center;
+            width: 100px;
+            float: left;
+        }
+        #condition_tab label:hover {
+            cursor: pointer;
+        }
+        #condition_tab label input {
+            position: relative;
+            top: 2px;
+            left: -2px;
+        }
         .tck01 .smain {
             padding: 0;
         }
@@ -178,6 +201,9 @@
             font-size: 12px;
             color: #ffb319;
         }
+        .tck01 {
+        	padding: 0px;
+        }
     </style>
 </head>
 <body>
@@ -187,7 +213,11 @@
 <!--止损止盈 start-->
 <div  class="tck01" id="stop_loss"  style="display: none;">
     <div class="navtitle stop_navtitle">
-        <a class="nava">修改<!-- 止损单 --></a><a class="close"></a>
+        <ul>
+        	<li>修改止损单</li>
+        	<li>修改止盈单</li>
+        </ul>
+        <a class="close"></a>
     </div>
     <!--  <div class="navtitle loss_navtitle" style="display: none;">
          <a class="nava">修改止盈单</a><a class="close"></a>
@@ -237,12 +267,123 @@
     </div>
 </div>
 <!--止损止盈 end-->
+<!--条件单start-->
+<style>
+	.popup {width: 500px; position: absolute; z-index: 9999; background: #fff; border-radius: 10px;}
+	.popup .popup_top {height: 70px; line-height: 70px; text-align: center; position: relative; border-bottom: 1px solid #e6e6e6;}
+	.popup .popup_top a{font-size: 16px; color: #ffb319;}
+	.popup .popup_top a:hover{text-decoration: none; cursor:default;}
+	.popup .popup_top .close {position: absolute; right: 20px; color: #ccc; font-size: 20px;}
+	.popup .popup_top .close:hover {text-decoration: none; cursor: pointer; color: #666;}
+	.popup .popup_center {padding: 10px 20px; border-bottom: 1px solid #e6e6e6; padding-bottom: 20px;}
+	.popup .popup_center ul {height: 45px; line-height: 45px;}
+	.popup .popup_center ul li {float: left; color: #666; font-size: 14px;}
+	.popup .popup_center ul li.li1 {width: 45px; color: #999; font-size: 14px;}
+	.popup .popup_center ul li select {outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; }
+	.popup .popup_center ul li input {outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
+	.popup .popup_footer a {text-decoration: none; margin: 0 10px; font-size: 16px; height: 40px; line-height: 40px; width: 140px; display: inline-block; text-align: center;}
+    .popup .popup_footer {text-align: center; padding: 20px 0;}
+	.popup .popup_footer .sure {color: #fff; background: #ffb319; border-radius: 4px;}
+	.popup .popup_footer .cancel {color: #ffb319; border-radius: 4px; border: 1px solid #ffb319; height: 38px; line-height: 38px; width: 138px;}
+	.popup .popup_footer .sure:hover {background: #ff9f19;}
+	.popup .popup_footer .cancel:hover {border: 1px solid #ff9f19; color: #ff9f19;}
+</style>
+<!-- 价格条件单 -->
+<div class="popup" id="condition_loss_money"  style="display: none;">
+	<div class="popup_top">
+        <a>修改价格条件单</a>
+        <a class="close">✖</a>
+    </div>	
+    <div class="popup_center">
+        <div>
+        	<ul>
+        		<li class="li1">合约：</li>
+        		<li>富时A50  CN1612</li>
+        	</ul>
+        	<ul>
+        		<li class="li1">条件：</li>
+        		<li>
+        			<span>价格</span>
+        			<select style="width: 50px; margin-left: 18px;">
+					    <option>></option>
+					    <option><</option>
+					</select>
+					<input type="text" name="" id=""/>
+					<select style="width: 50px;">
+					    <option><</option>
+					    <option>></option>
+					</select>
+					<input type="text" name="" id=""/>
+        		</li>
+        	</ul>
+        	<ul style="margin-top: 16px;">
+        		<li class="li1">订单：</li>
+        		<li>
+        			<select style="width: 100px; ">
+					    <option>买入</option>
+					    <option>卖出</option>
+					</select>
+					<input type="text" name="" id=""/>手速
+					<input type="text" name="" id="" style=" margin-left: 38px;"/>
+				</li>
+        	</ul>
+        </div>
+    </div>
+    <div class="popup_footer">
+        <a class="sure" href="javascript:void(0)">确定</a>
+        <a class="cancel close" href="javascript:void(0)">取消</a>
+    </div>
+</div>
+<!-- 时间条件单 -->
+<div class="popup" id="condition_loss_time"  style="display: none;">
+	<div class="popup_top">
+        <a>修改时间条件单</a>
+        <a class="close">✖</a>
+    </div>	
+    <div class="popup_center">
+        <div>
+        	<ul>
+        		<li class="li1">合约：</li>
+        		<li>富时A50  CN1612</li>
+        	</ul>
+        	<ul>
+        		<li class="li1">条件：</li>
+        		<li>
+        			<span>时间</span>
+        			<span style="margin-left: 27px;">到达：</span>
+					<input type="text" name="" id=""/>
+					<select style="width: 50px;">
+					    <option><</option>
+					    <option>></option>
+					</select>
+					<input type="text" name="" id=""/>
+        		</li>
+        	</ul>
+        	<ul style="margin-top: 16px;">
+        		<li class="li1">订单：</li>
+        		<li>
+        			<select style="width: 100px; ">
+					    <option>买入</option>
+					    <option>卖出</option>
+					</select>
+					<input type="text" name="" id=""/>手速
+					<input type="text" name="" id="" style=" margin-left: 38px;"/>
+				</li>
+        	</ul>
+        </div>
+    </div>
+    <div class="popup_footer">
+        <a class="sure" href="javascript:void(0)">确定</a>
+        <a class="cancel close" href="javascript:void(0)">取消</a>
+    </div>
+</div>
+<!--条件单end-->
 <div class="tck01" id="weidenglu" style="display: none;">
     <div class="navtitle">
         <a class="nava">提示</a><a class="close"></a>
     </div>
     <div class="smain">
-        <div>对不起了啦~你还未进行登录，请先进行登录后再购买合约吧。</div>
+        <div></div>
     </div>
     <div class="anniu">
         <a class="sure" href="javascript:void(0)">登录</a>
@@ -867,7 +1008,117 @@
                         <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "1" id = "loss_delete">删除</a></li>
                     </ul>
                 </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "condition_title">2</div>
+                <div class="quotation_detailed_title" style="display: none;" id = "condition_title">
+                	<div class="gdt1">
+                        <div>
+                            <ul class="tab_lis">
+				                <li style="width: 100px" class="ml">合约</li>
+				                <li style="width: 50px">状态</li>
+				                <li style="width: 50px">类别</li>
+				                <li style="width: 120px">下单</li>
+				                <li style="width: 220px">条件</li>
+				                <li style="width: 60px">有效日期</li>
+				                <li style="width: 140px">触发时间</li>
+            				</ul>
+            				<ul class="tab_content">
+				                <li style="width: 100px" class="ml">富时A501</li>
+				                <li style="width: 50px;">运行</li>
+				                <li style="width: 50px;">价格</li>
+				                <li style="width: 120px;">买，对手价，2手</li>
+				                <li style="width: 220px;">价格条件单：>=66.00,<100</li>
+				                <li style="width: 60px;">当日有效</li>
+				                <li style="width: 140px;">2016-12-08 13:59:23</li>
+            				</ul>
+            				<ul class="tab_content">
+				                <li style="width: 100px" class="ml" >富时A502</li>
+				                <li style="width: 50px;">运行</li>
+				                <li style="width: 50px;">价格</li>
+				                <li style="width: 120px;">买，对手价，2手</li>
+				                <li style="width: 220px;">时间条件单：11:34:12</li>
+				                <li style="width: 60px;">当日有效</li>
+				                <li style="width: 140px;">2016-12-08 13:59:23</li>
+            				</ul>
+				            <ul class="tab_content">
+				                <li class="ml" style="width: 100px">富时A503</li>
+				                <li class="" style="width: 50px;">运行</li>
+				                <li class="" style="width: 50px;">价格</li>
+				                <li class="" style="width: 120px;">买，对手价，2手</li>
+				                <li class="" style="width: 220px;">时间价格条件单：15:45:58 <1047.5 </li>
+				                <li class="" style="width: 60px;">当日有效</li>
+				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+				            </ul>
+				            <ul class="tab_content">
+				                <li class="ml" style="width: 100px">富时A504</li>
+				                <li class="" style="width: 50px;">运行</li>
+				                <li class="" style="width: 50px;">价格</li>
+				                <li class="" style="width: 120px;">买，对手价，2手</li>
+				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+				                <li class="" style="width: 60px;">当日有效</li>
+				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+				            </ul>
+                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+                        </div>
+                    </div>
+                    <div class="gdt1" style="display: none;">
+                    	<div id = "">
+                    		<ul class="tab_lis">
+				                <li style="width: 100px" class="ml">合约</li>
+				                <li style="width: 50px">类别</li>
+				                <li style="width: 220px">条件</li>
+				                <li style="width: 120px">下单</li>
+				                <li style="width: 100px">有效期</li>
+				                <li style="width: 140px">触发时间</li>
+				                <ii style="width: 50px">委托结果</ii>
+            				</ul>
+            				<ul class="tab_content">
+				                <li class="ml" style="width: 100px">富时A50</li>
+				                <li class="" style="width: 50px;">运行</li>
+				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+				                <li class="" style="width: 120px;">买，对手价，2手</li>
+				                <li class="" style="width: 100px;">当前有效</li>
+				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+				                <li class="" style="width: 50px;">成功</li>
+            				</ul>
+				            <ul class="tab_content">
+				                <li class="ml" style="width: 100px">富时A50</li>
+				                <li class="" style="width: 50px;">运行</li>
+				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+				                <li class="" style="width: 120px;">买，对手价，2手</li>
+				                <li class="" style="width: 100px;">当前有效</li>
+				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+				                <li class="" style="width: 50px;">成功</li>
+				            </ul>
+				            <ul class="tab_content">
+				                <li class="ml" style="width: 100px">富时A50</li>
+				                <li class="" style="width: 50px;">运行</li>
+				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+				                <li class="" style="width: 120px;">买，对手价，2手</li>
+				                <li class="" style="width: 100px;">当前有效</li>
+				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+				                <li class="" style="width: 50px;">成功</li>
+				            </ul>
+				            <ul class="tab_content">
+				                <li class="ml" style="width: 100px">富时A50</li>
+				                <li class="" style="width: 50px;">运行</li>
+				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+				                <li class="" style="width: 120px;">买，对手价，2手</li>
+				                <li class="" style="width: 100px;">当前有效</li>
+				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+				                <li class="" style="width: 50px;">成功</li>
+				            </ul>
+				            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+                    	</div>
+                    </div>
+                    <div id="condition_tab" class="tab_lis_title" style="">
+        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="" checked="checked">未触发列表</label>
+        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="">已触发列表</label>
+    				</div>
+				    <ul class="caozuo" id="condition_caozuo" style="left: 243px;">
+				        <li><a href="javascript:void(0);"  id = "condition_stop">暂停</a></li>
+				        <li><a href="javascript:void(0);"  id = "condition_update">修改</a></li>
+				        <li><a href="javascript:void(0);"  id = "condition_delete">删除</a></li>
+				    </ul>
+                </div>
             </div>
                 <div class="quotation_detailed_qx">
                     <label style="margin-left: 10px; width: 130px;">账户资产（USD）：</br><span id = "todayBalance">00.0</span></label>
@@ -929,6 +1180,47 @@
             var _this = $(this).index();
             $(".stop_loss_tab a").removeClass("on").eq(_this).addClass("on");
             $(".stop_loss_all .stop_loss_lis").hide().eq(_this).show();
+        });
+        /* 条件单 */
+        $("#condition_tab label").click(function(){
+            var _this = $(this).index();
+            $("#condition_title .gdt1").css("display","none").eq(_this).css("display","block");
+            if(_this == 1){
+                $("#condition_caozuo").css("display","none");
+            }else {
+                $("#condition_caozuo").css("display","block");
+            }
+        });
+        
+        $("#condition_update").click(function() {
+        	$("#div_Mask").show();
+        	/* 这里判断一下取的是时间还是条件 然后执行下面的时间或者价格JS */
+            /* 时间 */
+            $("#condition_loss_time").css("display","block");
+            var popupHeight = $("#condition_loss_time").outerHeight()/2;
+            var popupWidth = $("#condition_loss_time").outerWidth()/2;
+            $("#condition_loss_time").css({
+                top:"50%",
+                left:"50%",
+                marginTop: -(popupHeight+15),
+                marginLeft: -(popupWidth)
+            });
+            /* 价格 */
+            
+            /* $("#condition_loss_money").css("display","block");
+            var popupHeight = $("#condition_loss_time").outerHeight()/2;
+            var popupWidth = $("#condition_loss_time").outerWidth()/2;
+            $("#condition_loss_time").css({
+                top:"50%",
+                left:"50%",
+                marginTop: -(popupHeight+15),
+                marginLeft: -(popupWidth)
+            }); */
+        });
+        
+        $(".close").click(function(){
+        	$(".popup").css("display","none");
+            $("#div_Mask").hide();
         });
     });
 </script>
