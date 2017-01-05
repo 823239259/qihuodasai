@@ -272,7 +272,7 @@ function handleData(evt){
 			var conditionParam = parameters;
 			var message = "";
 			var status = conditionParam.Status;
-			if(status == 4){
+			if(status == 4){ 
 				tip(conditionParam.StatusMsg);
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
@@ -1239,7 +1239,7 @@ function appendCondition(param){
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){
-		additionTypeText = "&nbsp;&nbsp;"+analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
 	}
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
@@ -1299,7 +1299,7 @@ function updateConditionList(param){
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){ 
-		additionTypeText = "&nbsp;&nbsp;"+analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
 	}  
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
