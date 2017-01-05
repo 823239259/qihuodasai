@@ -205,89 +205,156 @@
         	padding: 0px;
         }
     </style>
+    <style>
+    /* 新弹出层 */
+		.popup {width: 500px; position: absolute; z-index: 9999; background: #fff; border-radius: 10px;}
+		.popup .popup_top {height: 70px; line-height: 70px; text-align: center; position: relative; border-bottom: 1px solid #e6e6e6;}
+		.popup .popup_top a{font-size: 16px; color: #ffb319;}
+		.popup .popup_top a:hover{text-decoration: none; cursor:default;}
+		.popup .popup_top .close {position: absolute; right: 20px; color: #ccc; font-size: 20px;}
+		.popup .popup_top .close:hover {text-decoration: none; cursor: pointer; color: #666;}
+		.popup .popup_center {padding: 10px 20px; border-bottom: 1px solid #e6e6e6; padding-bottom: 20px;}
+		.popup .popup_center ul {height: 45px; line-height: 45px;}
+		.popup .popup_center ul li {float: left; color: #666; font-size: 14px;}
+		.popup .p1 {color: #666; font-size: 14px;line-height: 24px; margin-bottom: 20px; text-align: left; padding: 0 20px;}
+		.popup .popup_center ul li.li1 {width: 45px; color: #999; font-size: 14px;}
+		.popup .popup_center ul li select {background: #fcfcfc; color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; }
+		.popup .popup_center ul li input {background: #fcfcfc; color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
+		.popup .popup_footer a {text-decoration: none; margin: 0 10px; font-size: 16px; height: 40px; line-height: 40px; width: 140px; display: inline-block; text-align: center;}
+	    .popup .popup_footer {text-align: center; padding: 20px 0;}
+		.popup .popup_footer .sure {color: #fff; background: #ffb319; border-radius: 4px;}
+		.popup .popup_footer .cancel {color: #ffb319; border-radius: 4px; border: 1px solid #ffb319; height: 38px; line-height: 38px; width: 138px;}
+		.popup .popup_footer .sure:hover {background: #ff9f19;}
+		.popup .popup_footer .cancel:hover {border: 1px solid #ff9f19; color: #ff9f19;}
+/* 		#loss_popup_center .popup_center {display: none;} */
+		.popup .popup_top  ul {padding: 0 20px;}
+		.popup .popup_top  ul li{float: left; margin: 0 10px;}
+		.popup .popup_top  ul li:hover {cursor: pointer; color: #ffb319;}
+		.popup .popup_top  ul li.on {color: #ffb319;}
+		.popup .popup_i {float: left; border-left: 1px solid #e6e6e6; display: inline-block; height: 15px; margin-top: 28px;}
+	</style>
 </head>
 <body>
 <!-- 弹出层 -->
 <div id="div_Mask"  style="display:none;"></div>
 <div class="div_loading">
 <!--止损止盈 start-->
-<div  class="tck01" id="stop_loss"  style="display: none;">
-    <div class="navtitle stop_navtitle">
+<div  class="popup" id="stop_loss"  style="display: none;">
+    <div class="popup_top">
         <ul>
-        	<li>修改止损单</li>
-        	<li>修改止盈单</li>
+        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">修改止损单</li><span class="popup_i"></span>
+        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">修改止盈单</li>
         </ul>
-        <a class="close"></a>
+        <a class="close">✖</a>
     </div>
-    <!--  <div class="navtitle loss_navtitle" style="display: none;">
-         <a class="nava">修改止盈单</a><a class="close"></a>
-     </div> -->
-    <div class="smain">
-        <div class="stop_loss_tab"><a href="javascript:void(0);" class="on" id = "stopTitle">止损单</a><a href="javascript:void(0);" id = "lossTitle">止盈单</a></div>
-        <div class="stop_loss_all">
-            <div class="stop_loss_lis" id = "stopContent" style="display: block;">
+    <div id="loss_popup_center">
+    	<div class="popup_center_lis"  id = "stopContent">
+    		<div class="popup_center">
             	<input type="hidden" value = "" id = "stopHoldAvgPrice"/>
             	<input type="hidden" value = "" id = "stopHoldDrection"/>
             	<input type="hidden" value = "" id = "stopHoldContractCode"/>
-                <p>合约名称：<span id = "stop_contractCode">HSIF7,恒指F7</span>，<span id = "stop_drection">多头</span>，最新： <span id = "stop_lastPrice">56.12</span></p>
-                <p>止损价：<input type="text" name="stop_inputprice" id="stop_inputprice"/>，<input type="text" name="stop_inputnum" id="stop_inputnum"/>手</p>
-                <div class="prompter">止损价设置需小于持仓价差1，预期亏损<span id = "stop_yjks">0</span><span class = "stop_dw">HKD</span>，百分比<span id = "stop_scale">0</span>%</div>
-                <p><input type="checkbox"  name="stop_checked" id="stop_checked"/>动态追踪，价格回测幅度<input type="text"  name="stop_diff" id="stop_diff" style="margin-left: 10px;"/><span class = "stop_loss_dw">HKD</span></p>
-                <p>止损委托价：
-                    <select id = "stop_orderType">
-                        <option value = "1">市价</option>
-                        <option value = "2">对手价</option>
-                    </select>
-                </p>
                 <ul>
-                    <li>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</li>
-                    <li>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</li>
-                    <li>3、止损单存在风险，云端系统、网络故障情况下失效等。</li>
+                	<li class="li1" style="width: 85px;text-align: right;">合约名称：</li>
+                	<li style="margin-left: 10px;">
+                		<span id = "stop_contractCode">HSIF7,恒指F7</span>，
+                		<span id = "stop_drection">多头</span>
+                		<span style="margin-left: 76px;">最新：<span id = "stop_lastPrice">56.12</span></span>
+                	</li>
                 </ul>
-                <p class="anniu"><span data-tion-operate = "1" id = "stop_confirm" class="confirm">确认</span><span class="cancel close">取消</span></p>
-            </div>
-            <div class="stop_loss_lis" id = "lossContent">
-                <p>合约名称：<span id = "loss_contractCode">HSIF7,恒指F7</span>，<span id = "loss_drection">多头</span>，最新： <span id = "loss_lastPrice">56.12</span></p>
-                <p>止盈价：<input type="text" name="loss_inputprice" id="loss_inputprice"/>，<input type="text" name="loss_inputnum" id="loss_inputnum"/>手</p>
-                <div class="prompter">止赢价设置需大于持仓价差1，预期亏损<span id = "loss_yjks">0</span><span id = "loss_dw">HKD</span>，百分比<span id = "loss_scale">0</span>%</div>
-                <p>止盈委托价：
-                    <select id = "loss_orderType">
-                        <option value = "1">市价</option>
-                        <option value = "2">限价</option>
-                    </select>
-                </p>
                 <ul>
-                    <li>1、止盈单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</li>
-                    <li>2、止盈单在行情不活跃或快速发送变化下，不保证成交价为指定价</li>
-                    <li>3、止盈单存在风险，云端系统、网络故障情况下失效等。</li>
+                	<li class="li1" style="width: 85px;text-align: right;">止损价：</li>
+                	<li>
+                		<input type="text" name="stop_inputprice" id="stop_inputprice"/>，
+                		<input type="text" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>手数
+                	</li>
                 </ul>
-                <p class="anniu"><span id = "loss_confirm" class="confirm">确认</span><span class="cancel close">取消</span></p>
+                <ul>
+                	<li>
+                		价差<span id = "stop_pricecha"></span>
+                		<span id = "stop_yjks">0</span>
+                		<span class = "stop_dw"></span>，
+                		百分比<span id = "stop_scale">0</span>%
+                	</li>
+                </ul>
+                <ul>
+                	<li class="li1" style="width: 85px; text-align: right;">
+                		<input type="checkbox"  name="stop_checked" id="stop_checked" style="width: 15px; margin-top: 4px; margin-right: 5px;"/>	
+                	</li>
+                	<li style="margin-left: 10px;">
+                		动态追踪，价格回测幅度
+	                	<input type="text"  name="stop_diff" id="stop_diff"/>
+	                	<span class = "stop_loss_dw">HKD</span>
+                	</li>
+                </ul>
+                <ul>
+                	<li class="li1" style="width: 85px;text-align: right; margin-left: -85px;">止损委托价：</li>
+                	<li>
+                		<select id = "stop_orderType" style="margin-left: 10px; width: 102px;">
+	                        <option value = "1">市价</option>
+	                        <option value = "2">对手价</option>
+                    	</select>
+                	</li>
+                </ul>
             </div>
-        </div>
-    </div>
+            <div class="popup_footer">
+            	<div class="p1">
+            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
+	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
+            	</div>
+		        <a class="sure" href="javascript:void(0)" data-tion-operate = "1" id = "stop_confirm">确定</a>
+		        <a class="cancel close" href="javascript:void(0)">取消</a>
+    		</div>
+    	</div>
+    	<div class="popup_center_lis"  id = "lossContent">
+    		<div class="popup_center">
+    			<ul>
+                	<li class="li1" style="width: 85px;text-align: right;">合约名称：</li>
+                	<li style="margin-left: 10px;">
+                		<span id = "loss_contractCode">HSIF7,恒指F7</span>，
+                		<span id = "loss_drection">多头</span>，
+                		<span style="margin-left: 15px;">最新：<span id = "loss_lastPrice">56.12</span></span>
+                	</li>
+                </ul>
+    			<ul>
+                	<li class="li1" style="width: 85px;text-align: right;">止盈价：</li>
+                	<li>
+                		<input type="text" name="loss_inputprice" id="loss_inputprice"/>，
+                		<input type="text" name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>手数
+                	</li>
+                </ul>
+                <ul>
+                	<li>
+                		止赢价设置需大于持仓价差1，预期亏损
+                		<span id = "loss_yjks">0</span>
+                		<span id = "loss_dw">HKD</span>，
+                		百分比<span id = "loss_scale">0</span>%
+                	</li>
+                </ul>
+                <ul>
+                	<li class="li1" style="width: 85px;text-align: right;">止盈委托价：</li>
+                	<li>
+                		<select id = "loss_orderType" style="margin-left: 10px; width: 102px;">
+	                        <option value = "1">市价</option>
+                        	<option value = "2">限价</option>
+                    	</select>
+                	</li>
+                </ul>
+            </div>
+            <div class="popup_footer">
+            	<div class="p1">
+            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
+	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
+            	</div>
+		        <a class="sure" href="javascript:void(0)" id = "loss_confirm">确定</a>
+		        <a class="cancel close" href="javascript:void(0)">取消</a>
+    		</div>
+    	</div>
+    </div> 
 </div>
 <!--止损止盈 end-->
 <!--条件单start-->
-<style>
-	.popup {width: 500px; position: absolute; z-index: 9999; background: #fff; border-radius: 10px;}
-	.popup .popup_top {height: 70px; line-height: 70px; text-align: center; position: relative; border-bottom: 1px solid #e6e6e6;}
-	.popup .popup_top a{font-size: 16px; color: #ffb319;}
-	.popup .popup_top a:hover{text-decoration: none; cursor:default;}
-	.popup .popup_top .close {position: absolute; right: 20px; color: #ccc; font-size: 20px;}
-	.popup .popup_top .close:hover {text-decoration: none; cursor: pointer; color: #666;}
-	.popup .popup_center {padding: 10px 20px; border-bottom: 1px solid #e6e6e6; padding-bottom: 20px;}
-	.popup .popup_center ul {height: 45px; line-height: 45px;}
-	.popup .popup_center ul li {float: left; color: #666; font-size: 14px;}
-	.popup .popup_center ul li.li1 {width: 45px; color: #999; font-size: 14px;}
-	.popup .popup_center ul li select {outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; }
-	.popup .popup_center ul li input {outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
-	.popup .popup_footer a {text-decoration: none; margin: 0 10px; font-size: 16px; height: 40px; line-height: 40px; width: 140px; display: inline-block; text-align: center;}
-    .popup .popup_footer {text-align: center; padding: 20px 0;}
-	.popup .popup_footer .sure {color: #fff; background: #ffb319; border-radius: 4px;}
-	.popup .popup_footer .cancel {color: #ffb319; border-radius: 4px; border: 1px solid #ffb319; height: 38px; line-height: 38px; width: 138px;}
-	.popup .popup_footer .sure:hover {background: #ff9f19;}
-	.popup .popup_footer .cancel:hover {border: 1px solid #ff9f19; color: #ff9f19;}
-</style>
 <!-- 价格条件单 -->
 <div class="popup" id="condition_loss_money"  style="display: none;">
 	<div class="popup_top">

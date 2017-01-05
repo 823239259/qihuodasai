@@ -1778,6 +1778,12 @@ $(function(){
 			$("#stop_diff").attr("disabled",true);
 		}
 	});
+	$(".stop_loiss_title").bind("click",function(){
+		var $this = $(this);
+		var value = $this.attr("data-tion-value");
+		$(".stop_loiss_title").removeClass("on").eq(value).addClass("on");
+		$("#loss_popup_center .popup_center_lis").hide().eq(value).show();
+	});
 });
 /**
  * 获取交易版本
@@ -2194,12 +2200,22 @@ function bindOpertion(){
 		if(localCommodity != undefined){
 			dotSize = localCommodity.DotSize;
 		}
+		var contractSize = localCommodity.ContractSize;
+		var miniTikeSize = localCommodity.MiniTikeSize;
 		stopInputPrice = replaceNum(stopInputPrice,dotSize);
+		var chaPrice = Math.abs(stopInputPrice - lastPrice);
+		var num = $("#stop_inputnum").val();
+		var stopHoldDrection = $("#stopHoldDrection").val();
+		if(num.length != 0){
+			var  price =  doGetFloatingProfit(lastPrice,stopInputPrice,contractSize,miniTikeSize,num,stopHoldDrection);
+			$("#stop_pricecha").val(price);
+		}
 		var scale = 0.00;
 		var holdAvgPrice = $("#stopHoldAvgPrice").val();
 		var stopDrection = $("#stopHoldDrection").val();
 		scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
 		$("#stop_inputprice").val(stopInputPrice);
+		$("#chaPrice").text(parseFloat(stop_pricecha).toFixed(dotSize));
 		$("#stop_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
 	});
 	$("#loss_inputprice").bind("input",function(){
@@ -2419,15 +2435,26 @@ function openUpdateStop(stopLossType){
 		$("#lossTitle").hide();
 		$("#stopContent").show();
 		$("#lossContent").hide();
+		$("#stopTitle").addClass("on");
+		$("#lossTitle").removeClass("on");
 	}else if(stopLossType == 1){
 		$("#stopTitle").hide();
 		$("#lossTitle").show();
 		$("#stopContent").hide();
 		$("#lossContent").show();
+		$("#stopTitle").removeClass("on");
+		$("#lossTitle").addClass("on");
 	}else{
+		var flag = $("#stopTitle").is(".on");
+		if(flag){
+			$("#stopContent").show();
+			$("#lossContent").hide();
+		}else{
+			$("#lossContent").show();
+			$("#stopContent").hide();
+		}
 		$("#stopTitle").show();
-		$("#stopContent").show();
-		$("#lossContent").hide();
+		$("#lossTitle").show();
 	}
 	$("#stop_loss").css("display","block");
     $("#div_Mask").show();
@@ -2864,7 +2891,7 @@ function sumListfloatingProfit(){
 		}
 		var postionDom = $(".position-currency"+currencyNo);
 		if(postionDom.html() == undefined || postionDom.length <= 0){
-			continue
+			continue;
 		}
 		var price  = 0.00;
 		$.each(postionDom,function(i,item){
