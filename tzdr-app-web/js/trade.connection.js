@@ -165,8 +165,10 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	plus.nativeUI.showWaiting("正在连接交易服务器...");
-	if(socket !=null){
+	    plus.nativeUI.showWaiting("正在连接交易服务器...");
+	    if(socket == null){
+	    	return;
+	    }
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
 			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
@@ -193,7 +195,6 @@ function initLoad() {
 				}
 			}
 		}
-	}
 }
 /**
  * 重新连接交易服务器
