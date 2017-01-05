@@ -274,6 +274,27 @@ function updateStopLossLastPrice(param){
 		var lastPrice = param.LastPrice;
 		$("#stop_lastPrice").text(lastPrice);
 		$("#loss_lastPrice").text(lastPrice);
+		var localCommodity = localCacheCommodity[contractCode];
+		var contractSize = localCommodity.ContractSize;
+		var miniTikeSize = localCommodity.MiniTikeSize;
+		var stopDrection = $("#stopHoldDrection").val();
+		var stopInputprice = $("#stop_inputprice").val();
+		if(stopInputprice.length != 0){
+			var stopInputnum = $("#stop_inputnum").val();
+			if(stopInputnum.length != 0){
+				var  price =  doGetFloatingProfit(lastPrice,stopInputprice,contractSize,miniTikeSize,stopInputnum,stopDrection);
+				$("#stop_yjks").text(price);
+			}
+		}
+		var lossInputprice = $("#loss_inputprice").val();
+		if(lossInputprice.length != 0){
+			var lossInputnum = $("#loss_inputnum").val();
+			if(lossInputnum.length != 0){
+				var  price =  doGetFloatingProfit(lastPrice,lossInputprice,contractSize,miniTikeSize,lossInputnum,stopDrection);
+				$("#loss_yjks").text(price);
+			}
+		}
+		
 	}
 }
 /**
