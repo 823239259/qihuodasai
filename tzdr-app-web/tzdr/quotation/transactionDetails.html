@@ -604,7 +604,7 @@
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>
-				    				<td ><input type="number " value="0"  id="ConditoionPricesInput3" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" /></td>
+				    				<td ><input type="number" value="0"  id="ConditoionPricesInput3" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>
@@ -661,7 +661,7 @@
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>
-				    				<td ><input type="number " value="0"  id="ConditoionTimeInput" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" /></td>
+				    				<td ><input type="number " value="0"  id="ConditoionTimeInput" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>

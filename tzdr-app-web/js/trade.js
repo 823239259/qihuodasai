@@ -1239,11 +1239,12 @@ function appendCondition(param){
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){
-		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "&nbsp;&nbsp;"+analysisConditionCompareType(additionType)+additionPrice;
 	}
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
 	}else if(conditionType == 1){
+		timeTriggerPoint = timeTriggerPoint.replace(/-/g,"/");
 		compareTypeText =  formatDateHHMMSS(new Date(timeTriggerPoint)); 
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
@@ -1299,11 +1300,12 @@ function updateConditionList(param){
 	var additionTypeText = "";
 	var additionPrice = param.AdditionPrice;
 	if(additionFlag == 1){ 
-		additionTypeText = "<br/>"+analysisConditionCompareType(additionType)+additionPrice;
+		additionTypeText = "&nbsp;&nbsp;"+analysisConditionCompareType(additionType)+additionPrice;
 	}  
 	if(conditionType == 0){
 		compareTypeText = compareTypeText+priceTriggerPonit;
 	}else if(conditionType == 1){
+		timeTriggerPoint = timeTriggerPoint.replace(/-/g,"/");
 		compareTypeText = formatDateHHMMSS(new Date(timeTriggerPoint));
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
