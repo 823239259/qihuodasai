@@ -273,8 +273,7 @@ function handleData(evt){
 			var message = "";
 			var status = conditionParam.Status;
 			if(status == 4){
-				console.log(JSON.stringify(param));
-				tip(param.StatusMsg);
+				tip(conditionParam.StatusMsg);
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				tip("条件单提交成功,单号:"+conditionNo);
