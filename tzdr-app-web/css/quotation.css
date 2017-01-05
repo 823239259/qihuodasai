@@ -1230,7 +1230,7 @@ input{
 	/*padding-bottom: 160px;*/
 }
 .ConditionList{width: 900px;}
-#NoCondition table,#alreayCondition table{width: 1000px;}
+#NoCondition table,#alreayCondition table{width: 1030px;}
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;
@@ -1275,8 +1275,8 @@ input{
 #NoCondition table tr,#alreayCondition table  tr{
 	border-bottom: 1px solid #121212 !important;
 }
-#NoCondition  tr td:nth-child(6){
-	width: 100px;
+#NoCondition  tr td:nth-child(4){
+	width: 120px;
 }
 #suspendCondition,#suspendCondition1{
 	right: 50%;

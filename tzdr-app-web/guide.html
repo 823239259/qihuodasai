@@ -323,12 +323,14 @@
 				            if(isScrolling === 0){    //当为水平滚动时
 				                if(Number(duration) > 10){     
 				                    //判断是左移还是右移，当偏移量大于10时执行
-				                    if(endPos.x > 80){
-				                        mui.openWindow({
-					                			url:"tzdr/quotation/quotationMain.html",
-					                			id:"quotationMain"
-					                		})
-				                    }else if(endPos.x < -80){
+//				                    if(endPos.x > 80){
+//				                        mui.openWindow({
+//					                			url:"tzdr/quotation/quotationMain.html",
+//					                			id:"quotationMain"
+//					                		})
+//				                    }
+//				                    else 
+										if(endPos.x < -80){
 				                       mui.openWindow({
 				                			url:"tzdr/quotation/quotationMain.html",
 				                			id:"quotationMain"
