@@ -127,7 +127,7 @@ function formatDateYYYMMDD(date) {
     m = m < 10 ? '0' + m : m;  
     var d = date.getDate();  
     d = d < 10 ? ('0' + d) : d;
-    return y + '/' + m + '/' + d;  
+    return y + '-' + m + '-' + d;  
 }; 
 /**
  * 获取时间格式
