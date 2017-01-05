@@ -304,6 +304,9 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			fSimpleFtseUserTrade.setHsiTranFees(null);
 			fSimpleFtseUserTrade.setCrudeTranFees(null);
 			fSimpleFtseUserTrade.setTranFees(null);
+			fSimpleFtseUserTrade.setEndTime(null);
+			fSimpleFtseUserTrade.setEndAmountCal(null);
+			fSimpleFtseUserTrade.setEndAmount(null);
 			simpleFtseUserTradeService.update(fSimpleFtseUserTrade);
 			jsonResult.setSuccess(true);
 			jsonResult.setMessage("拒绝成功");
