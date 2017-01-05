@@ -2551,8 +2551,7 @@ function bindOpertion(){
 				}
 				var flag = validationPriceCondition(chiocePrices,conditoionPricesInput,chioceAdditional,conditoionPricesInput1);
 				if(!flag){
-					tip("两个价格必须形成一个区间");
-					return false;
+					return;
 				}
 			}
 			var conditoionPricesInput3 = $("#ConditoionPricesInput3").val();
@@ -3490,6 +3489,7 @@ function validationLastPrice(){
  */
 var priceConditionArr = ["010","101","030","301","301","210","210","210"];
 function validationPriceCondition(priceType,price,addPriceType,addPrice){
+	var flag = false;
 	if(priceType == addPriceType){
 		tip("初始条件和附加条件不能一致");
 		return;
@@ -3505,13 +3505,14 @@ function validationPriceCondition(priceType,price,addPriceType,addPrice){
 	}
 	code = priceType+""+addPriceType+""+code;
 	var size = priceConditionArr.length;
-	var flag = false;
 	for(var i = 0 ; i < size ; i ++){
-		
 		if(priceConditionArr[i] == code){
 			flag = true; 
 			break; 
 		}
+	}
+	if(!flag){
+		tip("两个价格必须形成一个区间");
 	}
 	return flag;
 }
