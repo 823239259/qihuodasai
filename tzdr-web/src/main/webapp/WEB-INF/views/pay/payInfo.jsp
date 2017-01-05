@@ -69,13 +69,107 @@
 	<div class="uc_mianbar">
 		<div class="uc_pay" id="banktab">			
 			<ul class="uc_paynav">
-				<li><a href="javascript:void(0);" class="on">网银充值</a></li> 
-				<!-- <li><a href="javascript:void(0);">支付宝充值</a></li> -->
+				<li><a href="javascript:void(0);" class="on">支付宝转账</a></li>
+				<li><a href="javascript:void(0);" >网银充值</a></li> 
 				<!-- <li><a href="javascript:void(0);">微信充值</a></li> -->
 				<li><a href="javascript:void(0);">银行转账</a></li>
 				<li style="float:right;"><a href="javascript:void(0);">充值记录</a></li>
 			</ul>
+			
 			 <div class="tabcon">
+			 <div class="subtab">
+				<div id="alipay1" style="padding:20px 50px 50px;">
+					<!-- 支付宝转账 -->
+						<div class="uc_alipay">
+							<div class="uc_apl_title">
+								<img src="${ctx }/static/images/uc/alipay.gif">
+								<i>支付宝转账（手机转账0手续费）</i>
+							</div>
+							<ul class="uc_ap_money">
+								<li>
+									<label>支付宝账号：</label>
+									<input type="text" id="alipayaccount" name="alipayaccount" >
+								</li>
+								<%--
+								<li>
+									<label>充值金额：</label>
+									<input type="text" id="alimoney" name="alimoney" maxlength="7" onKeyUp="javascript:clearNoNumber(event,this)">
+								</li>
+								 --%>
+							</ul>
+							<%--
+							<div class="uc_paybtn uc_apbtn"><a id="aliSubmitBtn" href="javascript:void(0)" onclick="doAliCharge();">立即充值</a></div>
+							 --%>
+							 <div class="uc_paybtn uc_apbtn"><a id="aliSubmitBtn" href="javascript:void(0)" onclick="doAliCharge();">立即绑定</a></div>
+						</div>
+						<div class="uc_banktime uc_aptime">
+							<h3>温馨提示：<i></i></h3>
+							<p>1，为了能使您的支付宝转账能及时到账，请绑定您自己的支付宝账号；</p>
+							<p>2，如果支付宝绑定遇到任何问题，请致电客服：400-020-0158。</p>
+						</div>
+				</div>
+				<div id="alipay2" style="padding:40px 0 0; display:none;">
+					<div class="uc_alipay">
+					<div class="uc_apl_title uc_apl_title2">
+						<img src="${ctx }/static/images/uc/alipay.gif">
+						<i>支付宝转账（手机转账0手续费）</i>
+					</div>
+					<ul class="uc_apl_money">
+						<ol id="ali_account_text">
+							<li><label>支付宝账号：</label><span id="payaliaccount"></span><a href="javascript:;" class="edit">修改支付宝账号</a></li>
+						</ol>
+						<ol style="display: none;" id="ali_account_input">
+							<li><label>支付宝账号：</label><input type="text"><a href="javascript:;" class="btn">立即绑定</a></li>
+						</ol>
+						<ol>
+							<li><label>收款人支付宝账户：</label><span>weisheng@vs.com</span>
+							<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">
+							<input type="hidden" id="popText" value="weisheng@vs.com">
+							</a>
+	                        </li>			
+						</ol>
+						<ol>
+							<li><label>收款人账号名称：</label><span>成都维胜智慧科技有限公司</span></li>
+						</ol>
+					</ul>
+					<%--
+					<ul class="uc_ap_info uc_ap_info1">
+						<li><label>收款人支付宝账户：</label><span>xinhong1@tzdr.com</span>
+						<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">复制
+						<input type="hidden" id="popText" value="xinhong1@tzdr.com">
+						</a>
+                        </li>
+						<li><label>账户名称：</label><span>上海信闳投资管理有限公司</span></li>
+					</ul>
+					<ul class="uc_ap_info">
+						<li><label>您的支付宝账户：</label><span id="payaliaccount"></span></li>
+						<li><label>转入金额：</label><span><i id="payalimoney"></i>元</span><a href="javascript:void(0)" onClick="toAliCharge();">修改金额</a></li>
+					</ul>
+					--%>
+					<div class="uc_ap_link">
+							<div class="uc_ap_code">
+								
+								<img src="${ctx}/static/images/uc/code.png?v=20170105">
+								<p>手机支付宝扫一扫，快速转账，<i>0手续费</i></p>
+							</div>
+							<div class="uc_ap_aplink">
+								<div class="uc_ap_aplink">
+									<span><a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank"><img src="${ctx}/static/images/uc/alipay.gif"></a></span>
+									<a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank" class="uc_ap_apbtn">去支付宝网站转账>></a>
+									<i>*手续费将由支付宝收取，具体请咨询支付宝</i>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="uc_banktime">
+						<h3>温馨提示:</h3>
+						<p>1，请使用您绑定的支付宝账号进行转账付款；</p>
+						<p>2，最快5分钟内到账，最晚下一个工作日09:15前到账；</p>
+		
+					</div>
+				</div>
+			</div>
 				 <div class="subtab">
 					<form id="goNetbank" action="" method="get" target="_blank"  >
 					<div class="uc_olmoney">
