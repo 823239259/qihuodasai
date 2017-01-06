@@ -1554,6 +1554,6 @@ input{
 	font-size: 14px;
 	color:#FFCC33;
 }
-#topPopover #openStopButton{
+#topPopover #openStopButton,#openConditionButton{
 	display: none;
 }

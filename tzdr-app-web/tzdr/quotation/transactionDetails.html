@@ -4,7 +4,6 @@
 		<meta charset="UTF-8">
 		<title>交易中心</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<!--<link rel="stylesheet" href="../../css/app.css">-->
 		<link rel= "stylesheet"  href="../../css/mui.picker.all.css"/>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
@@ -13,6 +12,11 @@
 		<script src="../../js/esl.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		 <script src="../../js/common.js"></script>
+		<script>
+			window.onerror=function(sMessage, sUrl, sLine){
+			 	alert( sMessage + sUrl+sLine +"\n");
+			}
+		</script>
 		<style>
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
@@ -86,8 +90,8 @@
 				z-index: 999;
 				top: 16px;
 				right: 6px;
-				/*height: 65px;*/
-				height: 150px;
+				height: 65px;
+				/*height: 150px;*/
 				width: 35%;
 			}
 			#topPopover.mui-popover{
@@ -403,7 +407,7 @@
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
 								</li>
-								<li class="mui-table-view-cell">
+								<li class="mui-table-view-cell" id="openConditionButton">
 									<a id="openCondition">条件单</a>
 								</li>
 								<li class="mui-table-view-cell" id="openStopButton">
@@ -923,10 +927,11 @@
 					$("#marketSell ").text("模拟卖出");
 					$("#switchSell").text("模拟卖出");
 					$("#openStopButton").css("display","block");
+					$("#openConditionButton").css("display","block");
 					$("#stopLoss").css("display","block");
 					$("#Open").css("right","25%");
 					$("#allOpen").css("right","50%");
-//					$("#topPopover").css("height","100px");
+					$("#topPopover").css("height","150px");
 				}
 				var network = false;
 				mui('.mui-scroll-wrapper').scroll();
