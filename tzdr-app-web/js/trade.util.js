@@ -362,3 +362,21 @@ function analysisConditionCompareType(compareType){
 	}
 	return compareType;
 }
+/**
+ * 解析条件单StopLossType
+ * @param {Object} stopLossType
+ */
+function analysisCondityionStopLossType(stopLossType){
+	if(stopLossType == 0){
+		stopLossType = "止损";
+	}else if(stopLossType == 1){
+		stopLossType = "止盈";
+	}else if(stopLossType == 2){
+		stopLossType = "止损+止盈";
+	}else if(stopLossType == 3){
+		stopLossType = "浮动止损";
+	}else if(stopLossType == 4){
+		stopLossType = "不设置止损";
+	}
+	return stopLossType;
+}

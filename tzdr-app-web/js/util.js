@@ -126,9 +126,19 @@ function formatDateYYYMMDD(date) {
     var m = date.getMonth() + 1;  
     m = m < 10 ? '0' + m : m;  
     var d = date.getDate();  
-    d = d < 10 ? ('0' + d) : d;  
+    d = d < 10 ? ('0' + d) : d;
     return y + '-' + m + '-' + d;  
-};  
+}; 
+/**
+ * 获取时间格式
+ * @param {Object} now
+ */
+function formatDateHHMMSS(now){
+      var   hour=now.getHours();     
+      var   minute=now.getMinutes();  
+      var   ss = now.getSeconds();
+    return hour+":"+minute+":"+ss;
+}
 /**
  * 字符串保留小数
  * @param {Object} value

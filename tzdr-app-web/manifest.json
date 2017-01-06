@@ -1170,7 +1170,22 @@
 					"images/inputRadioBg.jpg",
 					"images/inputRadioBg.png",
 					"images/graySanjiaoBg.png",
-					"images/insertIon.png"
+					"images/insertIon.png",
+					"js/echarts.min.js",
+					null,
+					"js/mui.picker.js",
+					"css/app.css",
+					"css/mui.picker.css",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"images/chartBg.png",
+					"images/conditionBg.png",
+					"images/conditionBg1.png",
+					"images/stopBg.png",
+					"images/tradeBG.png",
+					"images/tipsBG.png",
+					"js/mui.picker.all.js",
+					"css/mui.picker.all.css"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1389,13 +1404,16 @@
 					"images/recharge/jingdong.png",
 					"images/recharge/wei.png",
 					"js/pingpp.js",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"images/recharge/zhifubao.png",
+					"images/recharge/Quickpayment.png"
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",
 					"tzdr/account/bankPay.html",
 					"tzdr/account/gopay.html",
-					"tzdr/account/alipay.html"
+					"tzdr/account/alipay.html",
+					"tzdr/account/bindzhifubao.html"
 				],
 				"priority": 0
 			},
@@ -1595,6 +1613,20 @@
 			"share.html": {
 				"resources": [
 					"js/immersed.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/bindzhifubao.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/pingpp.js"
 				],
 				"refer": [],
 				"priority": 0

@@ -85,7 +85,9 @@ function changeConnectionStatus(){
  * 交易连接
  */
 function tradeConnection(){  
-	socket = new WebSocket(socketUrl);  
+	if(socketUrl.length > 0){
+		socket = new WebSocket(socketUrl);  
+	}
 }
 /**
  * 交易连接断开的处理
@@ -163,33 +165,36 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	plus.nativeUI.showWaiting("正在连接交易服务器...");
-	socket.onopen = function() {   
-		/*layer.closeAll();*/ 
-		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
-		//更新交易连接状态
-		changeConnectionStatus();
-	}
-	socket.onmessage = function(evt) {
-		handleData(evt);
-	} 
-	socket.onclose = function() {
-		clearInterval(tradeIntervalId);
-		socket = null;
-		//更新交易连接状态
-		changeConnectionStatus();
-		//不是手动登出，则重连交易服务器
-		if(loginFail == false){ 
-			//交易连接断开重连
-			tradeReconnect();
-		}else{
-			if(anotherPlace && loginFail){
-				alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
-				//clearLocalCacheData();
-				loginOut();
+	    plus.nativeUI.showWaiting("正在连接交易服务器...");
+	    if(socket == null){
+	    	return;
+	    }
+		socket.onopen = function() {   
+			/*layer.closeAll();*/ 
+			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
+			//更新交易连接状态
+			changeConnectionStatus();
+		}
+		socket.onmessage = function(evt) {
+			handleData(evt);
+		} 
+		socket.onclose = function() {
+			clearInterval(tradeIntervalId);
+			socket = null;
+			//更新交易连接状态
+			changeConnectionStatus();
+			//不是手动登出，则重连交易服务器
+			if(loginFail == false){ 
+				//交易连接断开重连
+				tradeReconnect();
+			}else{
+				if(anotherPlace && loginFail){
+					alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
+					//clearLocalCacheData();
+					loginOut();
+				}
 			}
 		}
-	}
 }
 /**
  * 重新连接交易服务器
@@ -237,12 +242,12 @@ function getVersion(){
 		url:tzdr.constants.api_domain+"/socket/config/getVersions",
 		type:"post", 
 		data:{
-			version:appVersion
+			appVersions:appVersion
 		},
 		timeout:5000,
 		success:function(result){
-			if(result.success){ 
-				var data = result.data;
+			if(result.success){
+				var data = result.data; 
 				tradeWebsocketUrl = data.socketUrl;
 				tradeWebSocketVersion = data.socketVersion;
 				tradeWebsocketModelUrl = data.socketModelUrl;

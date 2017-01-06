@@ -2,9 +2,9 @@
     var prices=[];
     var timeLabel=[]
     var timeData={
-        "time":time,
         "prices":prices,
-        "timeLabel":timeLabel
+        "timeLabel":timeLabel,
+        "time":[]
     };
     var volumeChartTime=[];
     var volumeChartPrices=[];
@@ -15,7 +15,6 @@
     var timePrice=[];
     function handleTime(json){
     	var dosizeL=$("#doSize").val();
-//  	console.log(JSON.stringify(json));
         var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
@@ -26,15 +25,11 @@
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
+        	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript]
         }
-		for(var i=0;i<timeData.timeLabel.length-1;i++){
-			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
-				timeData.timeLabel.splice(i,1);
-				timeData.prices.splice(i,1);
-			}else{
-				
-			}
-		}
+//      timeData.timeLabel=timeData.timeLabel.slice(-40);
+//      timeData.prices=timeData.prices.slice(-40);
+//       timeData.time=timeData.time.slice(-40);
         if(timeChart != null){
         	var x=0;
             var length=$("#positionList .position3").length;
@@ -58,7 +53,7 @@
     function setOption1(x){
         var  data1=timeData;
        var  option = {
-       	backgroundColor: 'rgba(43, 43, 43, 0)',
+       	backgroundColor: '#1f1f1f',
            tooltip : {
                show: true,
                transitionDuration:0,
@@ -171,13 +166,8 @@
             volumeChartData.time[VolumeLength+i]=str2;
             volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         };
-        var TimeLength= volumeChartData.time.length;
-		for(var i=0;i<volumeChartData.time.length-1;i++){
-			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
-				volumeChartData.time.splice(i,1);
-				volumeChartData.volume.splice(i,1);
-			}
-		}
+//        volumeChartData.time=volumeChartData.time.slice(-40);
+//      volumeChartData.volume=volumeChartData.volume.slice(-40)
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
             volumeChart.setOption(option);
@@ -188,7 +178,7 @@
     function volumeChartSetOption(data) {
         var  dataVolume=volumeChartData;
       var  option = {
-      	backgroundColor: '#2B2B2B',
+      	backgroundColor: '#1f1f1f',
       	 color: ['#EDF274'],
           tooltip: {
               trigger: 'axis',
@@ -202,9 +192,10 @@
 		            }
                },
           },
-          legend: {
-              data:['最新成交价']
-          },
+//        legend: {
+//        	
+//            data:['最新成交价']
+//        },
             toolbox: {
                 show: false,
             },
@@ -222,6 +213,11 @@
                  boundaryGap: true,
                   axisTick: {onGap:false},
                   splitLine: {show:false},
+                  axisLabel:{
+                  	textStyle:{
+                  		fontSize:10,
+                  	}
+                  },
                    axisLine: { lineStyle: { color: '#8392A5' } },
                   data : dataVolume.time
               }
@@ -241,7 +237,10 @@
                     	    return isFinite(a)
                             ? echarts.format.addCommas(+a / 10000)
                             : '';
-                    }
+                    },
+                    textStyle:{
+                  		fontSize:10,
+                  	}
                 },
                 splitLine: {
                     show: true,
@@ -255,26 +254,6 @@
               {
                   name: '成交量',
                   type: 'bar',
-//                 markLine: {
-//		                data: [
-//		                    {type: 'average', name: '平均值'},
-//		                    [{
-//		                        symbol: 'none',
-//		                        x: '90%',
-//		                        yAxis: 'max'
-//		                    }, {
-//		                        symbol: 'circle',
-//		                        label: {
-//		                            normal: {
-//		                                position: 'start',
-//		                                formatter: '最大值'
-//		                            }
-//		                        },
-//		                        type: 'max',
-//		                        name: '最高点'
-//		                    }]
-//		                ]
-//		            },
                   data:dataVolume.volume
               }
           ]

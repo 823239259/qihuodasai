@@ -13,22 +13,26 @@ function lightChartData(json){
 			lightChartTime.time=lightChartTime.time.slice(-50);
 			lightChartTime.price=lightChartTime.price.slice(-50);
 	        if(lightChart != null){
-	        	var option = lightChartDealData();
-	            lightChart.setOption(option);
-	            lightChart.resize();
+	        	var value=$("#lightDiagram").hasClass("mui-active");
+	        	if(value){
+		        	var option = lightChartDealData();
+		            lightChart.setOption(option);
+		            lightChart.resize();
+	        	}
+
 	        }
     	}
   }
     function lightChartDealData(){
      var  option = {
-		    backgroundColor: "rgba(43, 43, 43, 0)",
+		    backgroundColor: "#1f1f1f",
 		    "tooltip": {
 		        "show":false,
 		    },
             animation: false,
 	           grid: {
 	               x: 50,
-	               y:20,
+	               y:40,
 	               x2:46,
 	               y2:20
 	           },
