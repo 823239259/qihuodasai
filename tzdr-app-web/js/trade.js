@@ -3528,8 +3528,11 @@ function validationPriceCondition(priceType,price,addPriceType,addPrice){
  * @param {Object} param
  */
 function validationtimeCondition(time){
-	var now = formatDateHHMMSS(new Date());
-	if(now > time){
+	var date = new Date();
+	var now = date.getTime();
+	var time = formatDateYYYMMDD(date)+" "+time;
+	var timeDate = new Date(time).getTime();
+	if(now > timeDate){
 		return false;
 	}
 	return true;
