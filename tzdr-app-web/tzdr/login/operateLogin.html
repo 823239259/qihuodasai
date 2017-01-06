@@ -348,11 +348,7 @@
 										mui.toast("登录成功");
 										localStorage.setItem("isMock",tradeWebSocketIsMock);
 										islogin = true;
-										var re=plus.webview.getWebviewById(Transfer.backpageID);
-										if(re != null && re !=undefined){
-											re.reload();
-										}
-//				      					return;
+										mui.back();
 		      						}else{
 		      							plus.nativeUI.closeWaiting(); 
 										mui.toast("登录成功");

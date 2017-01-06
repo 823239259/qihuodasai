@@ -1234,6 +1234,9 @@ function appendCondition(param){
 	var stopLossDiff = param.StopLossDiff;
 	var stopWinDiff = param.StopWinDiff;
 	var insertTime = param.InsertDateTime;
+	if(status >= 2){
+		insertTime = param.TriggedTime
+	}
 	var additionFlag = param.AdditionFlag;
 	var additionType = param.AdditionType;
 	var additionTypeText = "";
