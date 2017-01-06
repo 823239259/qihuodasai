@@ -746,10 +746,10 @@ input{
 	margin: 8px;
 }
 .top{
-	top:0px;
+	width: 100%;
 	position: fixed;
-	right: 0px;;
-	z-index:990;
+	z-index: 990;
+	top:0px;
 }
 .bottom,.top{
 	width: 100%;
@@ -769,9 +769,9 @@ input{
 	vertical-align: middle;
 }
 #headerMenu{
-	background-color: #2B2B2B;
+	background-color: #1F1F1F;
 	width: 100%;
-	height: 45px;
+	height: 41px;
 	z-index: 990;
 	text-align: center;
 	position: fixed;
@@ -1197,6 +1197,7 @@ input{
 	text-align: center;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 	
 }
 #choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices2,#choiceStopPrices5{
@@ -1211,8 +1212,9 @@ input{
 	font-size: 14px;
 	text-align: center;
 	vertical-align: middle;
-	/*margin-top: 2px;*/
-}
+	margin-top: 1px;
+	background-color: #1F1F1F;
+}*/
 /*条件单**/
 #segmentedControlCondition{
 	width: 100%;
@@ -1225,9 +1227,10 @@ input{
 	height: auto;
 	overflow-x: scroll; 
 	margin-top: 40px;
+	/*padding-bottom: 160px;*/
 }
 .ConditionList{width: 900px;}
-/*#alreayStopTale table{width: 900px;}*/
+#NoCondition table,#alreayCondition table{width: 1030px;}
 .ConditionList tr td{
 	padding: 0px 10px;
 	width: 60px;
@@ -1237,10 +1240,10 @@ input{
 	line-height: 40px;
 }
 .ConditionList tr{
-		border-bottom: 1px solid #121212;
+		border-bottom: 1px solid #121212 ;
 }
 .ConditionList tr td:nth-child(1){
-	width: 100px;
+	width: 90px;
 	
 }
 .ConditionList tr td:nth-child(9){
@@ -1256,10 +1259,28 @@ input{
 	height: 30px;
 	line-height: 30px;
 }
-
-/*#alreayStopTale table tr td:nth-last-child(1){
+#NoCondition td,#alreayCondition td{
+	padding: 0px 10px;
+	width: 60px ;
+	color:#CCCCCC;
+	font-size: 14px;
+	height: 40px;
+	line-height: 40px;
+}
+#NoCondition  thead tr td,#alreayCondition  thead tr td{
+	color:#666666;
+	height: 30px;
+	line-height: 30px;
+}
+#NoCondition table tr,#alreayCondition table  tr{
+	border-bottom: 1px solid #121212 !important;
+}
+#NoCondition  tr td:nth-child(4){
 	width: 120px;
-}*/
+}
+#NoCondition  tr td:nth-last-child(1){
+	width: 120px;
+}
 #suspendCondition,#suspendCondition1{
 	right: 50%;
 	border-right: 1px solid #2b2b2b;
@@ -1271,7 +1292,7 @@ input{
 #deleteCondition,#deleteCondition1{
 	right: 0%;
 }
-#suspendCondition1,#modifyCondition1,#deleteCondition1{
+#suspendCondition1,#modifyCondition1,#deleteCondition1,#suspendCondition,#modifyCondition,#deleteCondition{
 	width:25%;
 	margin: 0px;
 	padding: 0px;
@@ -1280,7 +1301,7 @@ input{
 	background-color: #cccccc;
 	color:#2b2b2b;
 	border-top: none;
-	border-buttom:none;
+	border-bottom:none;
 	position: fixed;
 	bottom: 60px;
 	z-index: 999;
@@ -1318,7 +1339,11 @@ input{
 	color:#999999;
 
 }
-
+#ConditoionTitlePrices input{
+	padding: 0px;
+	color:#999999;
+	text-align: center;
+}
 .selectComm{
 	height: 30px;
 	line-height: 30px;
@@ -1326,9 +1351,17 @@ input{
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
-	background: url(../images/graySanjiaoBg.png) no-repeat;
 	background-color: #1f1f1f;
+	background: url(../images/graySanjiaoBg.png) no-repeat;
 }
+#choiceStopPrices,#choiceStopPrices2{
+	background-size: 6% auto;
+	background-position: 90% 14px;
+}
+#choiceStopPrices1,#choiceStopPrices4,#choiceStopPrices3,#uchoiceLossPrices{
+	background-size: 11% auto;
+	background-position: 90% 14px;
+	}
 
 #chioceContract,#chioceContract1{
 	color:#cccccc;
@@ -1340,6 +1373,7 @@ input{
 	padding-left: 5px;
 	border:1px solid #121212;
 	vertical-align: middle;
+	background-color: #1F1F1F;
 }
 #chiocePrices{
 	width: 35%;
@@ -1354,6 +1388,7 @@ input{
 	border:1px solid #121212;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 }
 #chioceAdditional,#chioceTimeAdditional{
 	width: 37%;
@@ -1367,6 +1402,7 @@ input{
 	text-align: center;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
 }
 #ConditoionPricesInput{
 	width: 58%;
@@ -1393,9 +1429,9 @@ input{
 	border:none;
 	border-radius: 3px;
 }
-#shopDrection,#shopDrectionTime{
-	width: 37%;
-		padding-left: 5px;
+#shopDrection{
+	width: 35%;
+	padding-left: 5px;
 	color:#cccccc;
 	display: inline-block;
 	background-size: 15% auto;
@@ -1405,11 +1441,27 @@ input{
 	text-align: center;
 	vertical-align: middle;
 	margin-top: 5px;
+	background-color: #1F1F1F;
+}
+#shopDrectionTime{
+	width: 36%;
+	padding-left: 5px;
+	color:#cccccc;
+	display: inline-block;
+	background-size: 15% auto;
+	background-position: 90% 14px;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 5px;
+	background-color: #1F1F1F;
 }
 #chiocePricesSelect,#chiocePricesSelectTime{
 	width: 58%;
 	color:#cccccc;
-		padding-left: 5px;
+	padding-left: 5px;
+	margin-left: 2%;
 	display: inline-block;
 	background-size: 10% auto;
 	background-position: 90% 14px;
@@ -1417,6 +1469,7 @@ input{
 	font-size: 14px;
 	text-align: center;
 	vertical-align: middle;
+	background-color: #1f1f1f;
 }
 #ConditoionPricesInput3,#ConditoionTimeInput{
 	width: 96%;
@@ -1437,7 +1490,6 @@ input{
 }
 #closeConditionTable,#insertConditionTable,#closeConditionTable1,#insertConditionTable1{
 	width: 50%;
-	background-color: 2b2b2b;
 	border: none;
 	background-color: #2B2B2B;
 	color:#CCCCCC;
@@ -1479,7 +1531,7 @@ input{
 .clickBg{
 	background-color: #121212;
 }
-#stopTips{
+.stopTips{
 	width: 100%;
 	padding: 0px 2%;
 	position: fixed;
@@ -1489,19 +1541,19 @@ input{
 	font-size: 14px;
 	color:#FFCC33;;
 }
-#stopTips div{
+.stopTips div{
 	float: left;
 }
-#stopTips div:nth-child(1){
+.stopTips div:nth-child(1){
 	width: 12%;
 }
-#stopTips div:nth-child(2){
+.stopTips div:nth-child(2){
 	width: 88%;
 }
-#stopTips div p{
+.stopTips div p{
 	font-size: 14px;
 	color:#FFCC33;
 }
-#topPopover #openStopButton{
+#topPopover #openStopButton,#openConditionButton{
 	display: none;
 }

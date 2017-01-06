@@ -348,8 +348,11 @@
 										mui.toast("登录成功");
 										localStorage.setItem("isMock",tradeWebSocketIsMock);
 										islogin = true;
-				      					mui.app_back(Transfer.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
-				      					return;
+										var re=plus.webview.getWebviewById(Transfer.backpageID);
+										if(re != null && re !=undefined){
+											re.reload();
+										}
+//				      					return;
 		      						}else{
 		      							plus.nativeUI.closeWaiting(); 
 										mui.toast("登录成功");

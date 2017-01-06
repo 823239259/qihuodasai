@@ -3,9 +3,10 @@
     var CandlestickVolumeChartOption=null;
     var CandlestickVolumeData={
     	time:[],
-    	volume:[]
+    	volume:[],
     }
     var newData=[]; 
+    var chartDataC;
     function processingData(jsonData){
     	var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
@@ -17,15 +18,10 @@
         		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
-		            var sgData = [timeStr,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
+		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
-	        	for(var i=0;i<rawData.length-1;i++){
-	        		if(rawData[i][0]==rawData[i+1][0]){
-	        			rawData.splice(i,1);
-	        		}
-	        	}
+	       		 chartDataC=splitData(rawData);
     	    }else{
     	    	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
@@ -33,17 +29,11 @@
 		        	var str2=str1[0]+":"+str1[1]
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var chaPrice = (closePrice - openPrice).toFixed(dosizeL);
-		            var sgData = [str2,openPrice,closePrice,chaPrice,"",(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),"","","-"];
+		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
-	        	for(var i=0;i<rawData.length-1;i++){
-	        		if(rawData[i][0]==rawData[i+1][0]){
-	        			rawData.splice(i,1);
-	        		}
-	        	}
+	       		 chartDataC=splitData(rawData.slice(-40));
     	    }
-        	newData=rawData.slice(-60);
         	var x=0;
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
@@ -55,23 +45,50 @@
             		}
             	}
             }
-	  		CandlestickChartOption = setOption(newData,x);
-	  		myChart.setOption(CandlestickChartOption);
+		   var option=setOption(chartDataC,x);
+		   myChart.setOption(option);
 	  		myChart.resize();
 	  		CandlestickVolumeChart.resize();	
 		  	myChart.group="group2";
 		  	
     }
+    //开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+	    function splitData(data0) {
+	        var categoryData = [];
+	        var values = [];
+	        var time=[]
+	        for (var i = 0; i < data0.length; i++) {
+	            categoryData.push(data0[i][0]);
+	            values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
+	            time.push(data0[i][5])
+	        }
+	        return {
+	            categoryData: categoryData,
+	            values: values,
+	            time:time
+	        };
+	    }
+	
+	    function calculateMA(dayCount,data) {
+	    	var dosizeL=$("#doSize").val();
+	        var result = [];
+	        for (var i = 0, len = data.values.length; i < len; i++) {
+	            if (i < dayCount) {
+	                result.push('-');
+	                continue;
+	            }
+	            var sum = 0;
+	            for (var j = 0; j < dayCount; j++) {
+	                sum += Number(data.values[i - j][1]);
+	            }
+	            result.push(Number(sum / dayCount).toFixed(dosizeL));
+	        }
+	        return result;
+	    }
     //设置数据参数（为画图做准备）
-    function setOption(rawData,x){
-        var dates = rawData.map(function (item) {
-            return item[0];
-        });
-        var data = rawData.map(function (item) {
-            return [+item[1], +item[2], +item[5], +item[6]];
-        });
+    function setOption(data,x){
         var option = {
-		    backgroundColor: 'rgba(43, 43, 43, 0)',
+		    backgroundColor: '#1f1f1f',
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer : {
@@ -82,13 +99,23 @@
 		                width: 1,
 		                opacity: 1
 		            }
-             	  },
-		         formatter: function (params) {
-		            var res = "时间:"+params[0].name;
-		            res += '<br/>  开盘 : ' + params[0].value[0] + '<br/>  最高 : ' + params[0].value[3];
-		            res += '<br/>  收盘 : ' + params[0].value[1] + '<br/>  最低 : ' + params[0].value[2];
+             	 },
+               	formatter: function(params) {
+                  var time  = params[0].name;
+                  var kd    = params[0].data;
+                  var ma5 = params[1].data;
+                  var ma10 = params[2].data;
+                  var ma20 = params[3].data;
+                   var ma30 = params[4].data;
+                  var rate = (kd[1]-kd[0])/kd[0]*100;
+                  rate = rate > 0 ?( '+'+rate.toFixed(2)):rate.toFixed(2);
+                   var res = "时间:"+params[0].name+ '  涨跌 : ' + rate;
+		            res += '<br/>  开盘 : ' + kd[0] + '  最高 : ' + kd[3];
+		            res += '<br/>  收盘 : ' + kd[1] + ' 最低 : ' + kd[2];
+		              res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
+		              res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
 		            return res;
-		        }
+              }
 		    },
 		    grid: {
 		               x: 43,
@@ -98,7 +125,7 @@
 		           },
 		    xAxis: {
 		        type: 'category',
-		        data: dates,
+		        data: data.categoryData,
 		        show:false,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 		    },
@@ -128,7 +155,7 @@
 		        {
 		            type: 'candlestick',
 		            name: '',
-		            data: data,
+		            data: data.values,
 		              markLine: {
                 		symbol: ['none', 'none'],
                 		clickable:false,
@@ -151,7 +178,64 @@
 		                    borderColor0: '#0CF49B'
 		                }
 		            }
-		        }
+		        },
+		         {
+	                name: 'MA5',
+	                type: 'line',
+	                data: calculateMA(5,data),
+	                smooth: true,
+	                 showSymbol: false,
+	                lineStyle: {
+	                    normal: {
+	                    	color: '#3689B3',
+	                    	 width: 1,
+//	                    	opacity: 0.5
+	                    }
+	                }
+	            },
+	            {
+	                name: 'MA10',
+	                type: 'line',
+	                 showSymbol: false,
+	                data: calculateMA(10,data),
+	                smooth: true,
+	                lineStyle: {
+	                	normal: {
+	                    	color: '#B236B3',
+	                    	 width: 1,
+//	                    	opacity: 0.5
+	                    }
+	                }
+	            },
+	            {
+	                name: 'MA20',
+	                type: 'line',
+	                 showSymbol: false,
+	                data: calculateMA(20,data),
+	                smooth: true,
+	                lineStyle: {
+	                	normal: {
+	                    	color: '#B37436',
+	                    	 width: 1,
+//	                    	opacity: 0.5
+	                    }
+	                }
+	            },
+	            {
+	                name: 'MA30',
+	                type: 'line',
+	                 showSymbol: false,
+	                data: calculateMA(30,data),
+	                smooth: true,
+	                lineStyle: {
+	                	normal: {
+	                    	color: '#B2B336',
+	                    	 width: 1,
+//	                    	opacity: 0.5
+	                    }
+	                }
+	            }
+		        
 		    ]
 		}
         return option;
@@ -163,38 +247,25 @@
     		var parameters = data.Parameters.Data;
     		var Len=parameters.length;
     		if(parameters == null)return;
-    	    var lent=volumeV.length;
-//  	    var lengt=volumeTimeH.length;
+    	    var lent=CandlestickVolumeData.time.length;
  			if(data.Parameters.HisQuoteType==1440){
 	        	for(var i=0;i<Len;i++){
 	        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-	        			volumeTime[lent+i]=timeStr;
-	        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+	        			CandlestickVolumeData.time[lent+i]=timeStr;
+	        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
 	       		};
-	        	for(var i=0;i<volumeTime.length-1;i++){
-	        		if(volumeTime[i]==volumeTime[i+1]){
-	        			volumeTime.splice(i,1);
-	        			volumeV.splice(i,1);
-	        		}
-	        	}
        		 }else{
        		 	for(var i=0;i<Len;i++){
 	        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
 			        	var str1=time2[1].split(":");
 			        	var str2=str1[0]+":"+str1[1]
-	        			volumeTime[lent+i]=str2;
-	        			volumeV[lent+i]=parameters[i][VolumeSubscript];
+	        			CandlestickVolumeData.time[lent+i]=str2;
+	        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
 	       		};
-	        	for(var i=0;i<volumeTime.length-1;i++){
-	        		if(volumeTime[i]==volumeTime[i+1]){
-	        			volumeTime.splice(i,1);
-	        			volumeV.splice(i,1);
-	        		}
-	        	}
+	       		CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+	       		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
        		 }
-        	CandlestickVolumeData.time=volumeTime.slice(-60);
-        	CandlestickVolumeData.volume=volumeV.slice(-60);
-        	CandlestickVolumeChart.group="group2";
+        		CandlestickVolumeChart.group="group2";
 		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 		  		CandlestickVolumeChart.resize();	
 		  		CandlestickVolumeChart.setOption(option1);
@@ -204,7 +275,7 @@
     function CandlestickVolumeChartSetoption1(data){
     	 var  CandlestickVolumeChartData=data;
 	      var  option = {
-	      	backgroundColor: '#2B2B2B',
+	      	backgroundColor: '#1f1f1f',
 	      	 color: ['#EDF274'],
 	          tooltip: {
 	              trigger: 'axis',
@@ -217,9 +288,6 @@
 		                opacity: 1
 		            }
                },
-	          },
-	          legend: {
-	              data:['']
 	          },
 	            toolbox: {
 	                show: false,
@@ -238,6 +306,11 @@
 	                 boundaryGap: true,
 	                  axisTick: {onGap:false},
 	                  splitLine: {show:false},
+	                  axisLabel:{
+		                  	textStyle:{
+		                  		fontSize:10,
+		                  	}
+		                  },
 	                   axisLine: { lineStyle: { color: '#8392A5' } },
 	                  data : CandlestickVolumeChartData.time
 	              }
@@ -257,7 +330,10 @@
 	                      return isFinite(a)
 	                          ? echarts.format.addCommas(+a / 10000)
 	                          : '';
-	                  }
+	                  },
+	                  textStyle:{
+	                  		fontSize:10,
+	                  	}
 	              },
 	                splitLine: {
 	                    show: true,
