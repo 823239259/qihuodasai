@@ -10,7 +10,7 @@
     <script src="/templets/style/js/jquery.min.js"></script>
     <script type="text/javascript" src="/templets/style/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/templets/style/html/css/vsViewpoint.css">
-    <script type="text/javascript" src="/templets/style/html/js/vsViewpoint.js"></script>	<script type="text/javascript">		$("#vsViewpoint .tab li").on("click",function(){		    var _this = $(this);		    $(".vsViewpoint_right .tab a").removeClass("on").eq(_this.index()).addClass("on");		    $(".vsViewpoint_right .tab_all .tab_lis").hide().eq(_this.index()).show();	    });	</script>	
+    <script type="text/javascript" src="/templets/style/html/js/vsViewpoint.js"></script>	
 </head>
 <body>
 {dede:include filename="head.htm"/}
@@ -46,5 +46,5 @@
     </div>
 </div>
 {dede:include filename="footer.htm"/}
-</body>
+</body><script>	$("#vsViewpoint .tab li").on("click",function(){	    var _this = $(this);	    $(".vsViewpoint_right .tab a").removeClass("on").eq(_this.index()).addClass("on");	    $(".vsViewpoint_right .tab_all .tab_lis").hide().eq(_this.index()).show();    });</script>
 </html>
