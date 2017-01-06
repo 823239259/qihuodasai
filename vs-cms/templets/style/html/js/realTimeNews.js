@@ -1,7 +1,7 @@
 $(function(){
-    var currentDate = new Date();//获取当前时间
+	var currentDate = new Date();//获取当前时间
     var dataALL;//数据
-    $("#clock").html(currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
+    $("#clock").html(currentDate.getFullYear() + "-"+(currentDate.getMonth()+1) + "-"+currentDate.getDate()+" " +currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
     var clock = setInterval(function(){
         var currentDate = new Date();//获取当前时间
         var year = currentDate.getFullYear() + "-";
@@ -11,10 +11,10 @@ $(function(){
         var minutes = currentDate.getMinutes();
         var seconds = currentDate.getSeconds();
         var i= "",j="",k="",d="",f="";
-        if(month<10){
+        if(currentDate.getMonth()+1<10){
             d="0";
         }
-        if(data<10){
+        if(currentDate.getDate()<10){
             f="0";
         }
         if(hours<10){
@@ -26,7 +26,7 @@ $(function(){
         if(seconds<10){
             k= "0";
         }
-        $("#today").html(year+d+month+f+data+i+hours+":"+j+minutes+":"+k+seconds);
+        $("#clock").html(year+d+month+f+data+i+hours+":"+j+minutes+":"+k+seconds);
     },1000);
     $(".quotation_title").click(function(){
         var _this = $(this);
