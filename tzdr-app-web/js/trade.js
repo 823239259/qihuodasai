@@ -1234,6 +1234,9 @@ function appendCondition(param){
 	var stopLossDiff = param.StopLossDiff;
 	var stopWinDiff = param.StopWinDiff;
 	var insertTime = param.InsertDateTime;
+	if(status >= 2){
+		insertTime = param.TriggedTime
+	}
 	var additionFlag = param.AdditionFlag;
 	var additionType = param.AdditionType;
 	var additionTypeText = "";
@@ -1764,8 +1767,10 @@ $(function(){
 		var $this = $(this);
 		var val = $this.val();
 		if(val == -1){
+			$("#ConditoionTimePricesInput").hide();
 			$("#ConditoionTimePricesInput").attr("disabled",true);
 		}else{
+			$("#ConditoionTimePricesInput").show();
 			$("#ConditoionTimePricesInput").attr("disabled",false);
 		}
 	})
@@ -1773,8 +1778,10 @@ $(function(){
 		var $this = $(this);
 		var val = $this.val();
 		if(val == -1){
+			$("#ConditoionPricesInput1").hide();
 			$("#ConditoionPricesInput1").attr("disabled",true);
 		}else{
+			$("#ConditoionPricesInput1").show();
 			$("#ConditoionPricesInput1").attr("disabled",false);
 		}
 	})
@@ -1957,11 +1964,25 @@ $(function(){
 		$("#uLossPrice").val(uLossPrice);
 	});
 	$("#chioceContract").change(function(){
-		$("#ConditoionPricesInput").val(0);
+		var $this = $(this);
+		var contractCode = $this.val();
+		var localQuote = getLocalCacheQuote(contractCode);
+		if(localQuote != undefined){
+			$("#ConditoionPricesInput").val(localQuote.LastPrice);
+		}
+		
 	});
-	$("#chioceContract1").change(function(){
+	/*$("#chioceContract1").change(function(){
+		var $this = $(this);
+		var contractCode = $this.val();
+		var localQuote = getLocalCacheQuote(contractCode);
+		if(localQuote != undefined){
+			$("#ConditoionPricesInput").val(localQuote.LastPrice);
+		}else{
+			
+		}
 		$("#ConditoionTimePricesInput").val(0);
-	});
+	});*/
 }); 
 /**
  * 初始化增加条件单弹出框
@@ -3499,7 +3520,7 @@ function validationLastPrice(){
  * 验证价格的组合排列：第一位表示原始条件代码，第二位表示附加条件代码，第三位（原始价格-附加价格）如果结果小于0则为代码：0，如果大于0则为代码：1
  * 组合中的数组组合都是允许通过的选择和输入
  */
-var priceConditionArr = ["010","101","030","301","301","210","210","210"];
+var priceConditionArr = ["010","101","030","301","301","210","211","320","321","230","231"];
 function validationPriceCondition(priceType,price,addPriceType,addPrice){
 	var flag = false;
 	if(priceType == addPriceType){

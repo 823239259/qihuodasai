@@ -12,11 +12,6 @@
 		<script src="../../js/esl.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		 <script src="../../js/common.js"></script>
-		<script>
-			window.onerror=function(sMessage, sUrl, sLine){
-			 	//alert( sMessage + sUrl+sLine +"\n");
-			}
-		</script>
 		<style>
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
@@ -519,7 +514,7 @@
 				    				<td>条件</td>
 				    				<td>下单</td>
 				    				<td>有效日期</td>
-				    				<td>时间</td>
+				    				<td>下单时间</td>
 				    			</tr>
 				    		</thead>
 							<tbody id = "thodyCondition" >
@@ -537,7 +532,7 @@
 				    				<td>条件</td>
 				    				<td>下单</td>
 				    				<td>有效日期</td>
-				    				<td>时间</td>
+				    				<td>触发时间</td>
 				    			</tr>
 				    		</thead>
 				    		<tbody id = "over-thbodyCondition">
@@ -661,7 +656,7 @@
 				    					</select>
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelectTime">
 				    						<option value = "1">市价</option>
-				    						<option value = "2">限价</option>
+				    						<option value = "2">对手价</option>
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>

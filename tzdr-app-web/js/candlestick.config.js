@@ -21,7 +21,6 @@
 		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
-	       		 chartDataC=splitData(rawData);
     	    }else{
     	    	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
@@ -32,8 +31,9 @@
 		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
 			         rawData[lent+i] = sgData; 
 	       		};
-	       		 chartDataC=splitData(rawData.slice(-40));
+	       		
     	    }
+    	     chartDataC=splitData(rawData.slice(-40));
         	var x=0;
             var length=$("#positionList .position3").length;
         	var text=$("#CommodityNo").text();
@@ -262,9 +262,9 @@
 	        			CandlestickVolumeData.time[lent+i]=str2;
 	        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
 	       		};
-	       		CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
-	       		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
        		 }
+       		 	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+	       		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
         		CandlestickVolumeChart.group="group2";
 		  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
 		  		CandlestickVolumeChart.resize();	
