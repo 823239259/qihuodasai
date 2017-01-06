@@ -819,7 +819,10 @@ mui.plusReady(function(){
             lightChart.resize();
     	});
 	document.getElementById("backClose").addEventListener("tap",function(){
-		mui.app_back("quotationMain",true)
+		var re=plus.webview.getWebviewById("quotationMain");
+		if(re != null && re !=undefined){
+			re.reload();
+		}
 		masendMessage('Logout','{"UserName":"'+marketUserName+'"}');
 		marketSocket.close();
 		reconnect=false;
