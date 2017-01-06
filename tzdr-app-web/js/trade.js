@@ -2588,6 +2588,11 @@ function bindOpertion(){
 				}
 			} 
 			var ConditoionTimeInput = $("#ConditoionTimeInput").val();
+			var inserTimeInput = $("#insertTimeInput").val();
+			if(inserTimeInput.length == 0 ){
+				tip("请选择时间");
+				return ;
+			}
 			var flag = validationtimeCondition($("#insertTimeInput").val());
 			if(!flag){
 				tip("设置时间必须大于当前时间");
