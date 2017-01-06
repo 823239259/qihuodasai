@@ -1957,11 +1957,25 @@ $(function(){
 		$("#uLossPrice").val(uLossPrice);
 	});
 	$("#chioceContract").change(function(){
-		$("#ConditoionPricesInput").val(0);
+		var $this = $(this);
+		var contractCode = $this.val();
+		var localQuote = getLocalCacheQuote(contractCode);
+		if(localQuote != undefined){
+			$("#ConditoionPricesInput").val(localQuote.LastPrice);
+		}
+		
 	});
-	$("#chioceContract1").change(function(){
+	/*$("#chioceContract1").change(function(){
+		var $this = $(this);
+		var contractCode = $this.val();
+		var localQuote = getLocalCacheQuote(contractCode);
+		if(localQuote != undefined){
+			$("#ConditoionPricesInput").val(localQuote.LastPrice);
+		}else{
+			
+		}
 		$("#ConditoionTimePricesInput").val(0);
-	});
+	});*/
 }); 
 /**
  * 初始化增加条件单弹出框
