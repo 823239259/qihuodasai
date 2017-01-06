@@ -3513,7 +3513,7 @@ function validationLastPrice(){
  * 验证价格的组合排列：第一位表示原始条件代码，第二位表示附加条件代码，第三位（原始价格-附加价格）如果结果小于0则为代码：0，如果大于0则为代码：1
  * 组合中的数组组合都是允许通过的选择和输入
  */
-var priceConditionArr = ["010","101","030","301","301","210","210","210"];
+var priceConditionArr = ["010","101","030","301","301","210","211","320","321","230","231"];
 function validationPriceCondition(priceType,price,addPriceType,addPrice){
 	var flag = false;
 	if(priceType == addPriceType){
