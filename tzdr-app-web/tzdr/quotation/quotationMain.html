@@ -18,7 +18,7 @@
 		</style>
 		<script>
 			window.onerror=function(sMessage, sUrl, sLine){
-			 	alert( sMessage + sUrl+sLine +"\n");
+			 	//alert( sMessage + sUrl+sLine +"\n");
 				}
 		</script>
 	</head>
@@ -353,7 +353,7 @@
 					    }
 					};
 					socket.onerror = function(evt){
-						alert(JSON.stringify(evt))
+//						alert(JSON.stringify(evt))
 					};
 					function ManufacturingData(i){
     					var data=[];
@@ -448,14 +448,18 @@
 				}
 			});
 			document.getElementById("refresh").addEventListener("tap",function(){
-				 var data=ManufacturingData(1);
-				 mui.openWindow({
-							url:"transactionDetails.html",
-							id:"transactionDetails",
-							 extras:{
-								name:data,
-							}
-					});
+				var re=plus.webview.getWebviewById("quotationMain");
+				if(re != null && re !=undefined){
+					re.reload();
+				}
+//				 var data=ManufacturingData(1);
+//				 mui.openWindow({
+//							url:"transactionDetails.html",
+//							id:"transactionDetails",
+//							 extras:{
+//								name:data,
+//							}
+//					});
 			});
 			document.getElementById("tutorial").addEventListener("tap",function(){
 				mui.openWindow({
