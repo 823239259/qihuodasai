@@ -1208,7 +1208,6 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		fSimpleFtseUserTrade.setMnTranFees(null);
 		fSimpleFtseUserTrade.setHsiTranFees(null);
 		fSimpleFtseUserTrade.setCrudeTranFees(null);
-		fSimpleFtseUserTrade.setTranFees(null);
 		fSimpleFtseUserTrade.setEndTime(null);
 		fSimpleFtseUserTrade.setEndAmountCal(null);
 		fSimpleFtseUserTrade.setEndAmount(null);
