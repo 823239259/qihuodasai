@@ -1767,8 +1767,10 @@ $(function(){
 		var $this = $(this);
 		var val = $this.val();
 		if(val == -1){
+			$("#ConditoionTimePricesInput").hide();
 			$("#ConditoionTimePricesInput").attr("disabled",true);
 		}else{
+			$("#ConditoionTimePricesInput").show();
 			$("#ConditoionTimePricesInput").attr("disabled",false);
 		}
 	})
@@ -1776,8 +1778,10 @@ $(function(){
 		var $this = $(this);
 		var val = $this.val();
 		if(val == -1){
+			$("#ConditoionPricesInput1").hide();
 			$("#ConditoionPricesInput1").attr("disabled",true);
 		}else{
+			$("#ConditoionPricesInput1").show();
 			$("#ConditoionPricesInput1").attr("disabled",false);
 		}
 	})
