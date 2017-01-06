@@ -28,6 +28,7 @@ import com.tzdr.business.service.futureMatchAccount.FutureMatchAccountService;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.recharge.RechargeListService;
 import com.tzdr.business.service.thread.SMSSendForContentThread;
+import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.tradecalendar.TradeDayService;
 import com.tzdr.business.service.userTrade.FHandleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
@@ -112,6 +113,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 	private ActivityRewardService activityRewardService;
 	@Autowired
 	private DataMapService dataMapService;
+	@Autowired
+	private TradeDetailService tradeDetailService;
 
 	@Override
 	public FSimpleFtseUserTrade executePayable(FSimpleFtseUserTrade fSimpleFtseUserTrade, String mobile,
@@ -1166,6 +1169,51 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		}
 		return null;
 	}
-	
+	@Override
+	public void clearFsimpleFtseUserTradeById(String id,Integer stateType) {
+		FSimpleFtseUserTrade fSimpleFtseUserTrade =  getEntityDao().get(id);
+		fSimpleFtseUserTrade.setStateType(stateType);
+		fSimpleFtseUserTrade.setTranProfitLoss(null);
+		fSimpleFtseUserTrade.setEndParities(null);
+		fSimpleFtseUserTrade.setTranFeesTotal(null);
+		fSimpleFtseUserTrade.setDaxtranMinActualLever(null);
+		fSimpleFtseUserTrade.setSmallCrudeOilMarketLever(null);
+		fSimpleFtseUserTrade.setAmeSilverMarketLever(null);
+		fSimpleFtseUserTrade.setAmeCopperMarketLever(null);
+		fSimpleFtseUserTrade.setxHStockMarketLever(null);
+		fSimpleFtseUserTrade.sethStockMarketLever(null);
+		fSimpleFtseUserTrade.setAgTranActualLever(null);
+		fSimpleFtseUserTrade.setLhsiTranActualLever(null);
+		fSimpleFtseUserTrade.setMdtranActualLever(null);
+		fSimpleFtseUserTrade.setNikkeiTranActualLever(null);
+		fSimpleFtseUserTrade.setDaxtranActualLever(null);
+		fSimpleFtseUserTrade.setMbtranActualLever(null);
+		fSimpleFtseUserTrade.setMntranActualLever(null);
+		fSimpleFtseUserTrade.setHsiTranActualLever(null);
+		fSimpleFtseUserTrade.setCrudeTranActualLever(null);
+		fSimpleFtseUserTrade.setTranActualLever(null);
+		fSimpleFtseUserTrade.setAppEndTime(null);
+		fSimpleFtseUserTrade.setDaxMinTranFees(null);
+		fSimpleFtseUserTrade.setSmallCTranFees(null);
+		fSimpleFtseUserTrade.setAmeSTranFees(null);
+		fSimpleFtseUserTrade.setAmeCTranFees(null);
+		fSimpleFtseUserTrade.setxHSTranFees(null);
+		fSimpleFtseUserTrade.sethSTranFees(null);
+		fSimpleFtseUserTrade.setAgTranFees(null);
+		fSimpleFtseUserTrade.setLhsiTranFees(null);
+		fSimpleFtseUserTrade.setMdTranFees(null);
+		fSimpleFtseUserTrade.setNikkeiTranFees(null);
+		fSimpleFtseUserTrade.setDaxTranFees(null);
+		fSimpleFtseUserTrade.setMbTranFees(null);
+		fSimpleFtseUserTrade.setMnTranFees(null);
+		fSimpleFtseUserTrade.setHsiTranFees(null);
+		fSimpleFtseUserTrade.setCrudeTranFees(null);
+		fSimpleFtseUserTrade.setTranFees(null);
+		fSimpleFtseUserTrade.setEndTime(null);
+		fSimpleFtseUserTrade.setEndAmountCal(null);
+		fSimpleFtseUserTrade.setEndAmount(null);
+		getEntityDao().update(fSimpleFtseUserTrade);
+		tradeDetailService.deleteByFastId(id);
+	}
 	
 }

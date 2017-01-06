@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${ctx}/static/script/wuser/public.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/my97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList.js?v=${v}"></script>
+<script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList.js?v=20170105"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/ajaxfileupload.js?v=${v}"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 <script type="text/javascript">
@@ -347,6 +347,9 @@ function timeConvert(value,rowData,rowIndex) {
 						</table>	
 					</form>
 					<div style="margin-bottom: 5px">
+						<shiro:hasPermission name="sys:riskmanager:internationFuture:input">  
+							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="refuseInput()">拒绝结算</a>
+						</shiro:hasPermission>
 						<shiro:hasPermission name="sys:riskmanager:internationFuture:input">  
 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="input()">录入结果</a>
 						</shiro:hasPermission>

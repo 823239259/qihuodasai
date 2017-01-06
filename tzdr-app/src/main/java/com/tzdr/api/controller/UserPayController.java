@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
+import com.tzdr.api.request.AutoAliPayRequest;
 import com.tzdr.api.request.BankTransferRequest;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
@@ -609,5 +610,60 @@ public class UserPayController {
 				.concat("realName:"+autoAliPayRequest.getRealName())
 				.concat("status:"+rechargeList.getStatusvalue()));
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"auto.alipay.success.");
+	}
+	/**
+	 * 支付宝 自动充值接口 
+	 * @param autoAliPayRequest
+	 * @return
+	 */
+	@RequestMapping(value = "/auto_alipay",method=RequestMethod.POST)
+	@ResponseBody
+	public synchronized ApiResult autoAlipay(@RequestBody AutoAliPayRequest autoAliPayRequest){
+		if (autoAliPayRequest.isInvalid()){
+			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
+		}
+		List<RechargeList> rechargeLists  = apiRechargeService.queryByTradeNo(autoAliPayRequest.getSerialNo());
+		if (!CollectionUtils.isEmpty(rechargeLists)){
+			return new ApiResult(false, ResultStatusConstant.AutoAlipay.SERIAL_NO_EXIST,"the.serialNo.has.been.processed.");
+		}
+		RechargeList  rechargeList = new RechargeList();
+		rechargeList.setSource(autoAliPayRequest.getSource());
+		rechargeList.setAccount(autoAliPayRequest.getAccount());
+		rechargeList.setMoney(autoAliPayRequest.getMoney());
+		rechargeList.setActualMoney(autoAliPayRequest.getMoney());
+		rechargeList.setTradeNo(autoAliPayRequest.getSerialNo());
+		rechargeList.setTradeAccount(DataConstant.ALIPAY);
+		rechargeList.setType(DataConstant.ALIPAY_TYPE);
+		rechargeList.setRemark(autoAliPayRequest.getTradeTime().concat(MessageUtils.message("auto.alipay.remark",autoAliPayRequest.getMoney())));
+		// 如果真实姓名不为空  同时校验支付宝帐号 和真实姓名
+		List<ApiUserVo> apiUsers =  apiUserService.findByAlipay(autoAliPayRequest.getAccount());
+		if (apiUsers.size()==DataConstant.ONE){
+			ApiUserVo apiUserVo = apiUsers.get(DataConstant.ZERO);
+			// 用户已经实名认证，但是账户姓名与认证实名不一致  则失败
+			if (StringUtil.isNotBlank(apiUserVo.getTname())
+						&& !StringUtil.equals(apiUserVo.getTname(),autoAliPayRequest.getRealName())){
+				rechargeList.setUid(autoAliPayRequest.getRealName());
+				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+			}else
+			{
+				rechargeList.setUid(apiUserVo.getUid());
+				rechargeList.setStatus(DataConstant.RECHARGE_LIST_PAYS_STATUS_SUCCESS);
+			}
+		}
+		else
+		{
+			// 如果用户信息不存在直接将用户真实姓名保存在uid 字段当中
+			rechargeList.setUid(autoAliPayRequest.getRealName());
+			rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+		}
+		
+		apiRechargeService.autoAliPay(rechargeList);
+		logger.info(rechargeList.getRemark()
+				.concat(";alipayAccount:"+autoAliPayRequest.getAccount())
+				.concat("serialNo:"+autoAliPayRequest.getSerialNo())
+				.concat("realName:"+autoAliPayRequest.getRealName())
+				.concat("status:"+rechargeList.getStatusvalue()));
+		return new ApiResult(true, ResultStatusConstant.SUCCESS,"auto.alipay.success.");
+
 	}
 }

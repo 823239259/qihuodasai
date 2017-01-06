@@ -197,7 +197,8 @@ function appendTradeDetailHtml(tradeDetail,index){
 			"<td>币种</td>"+
 			"<td>交易所</td>"+
 			"<td>品种</td>"+
-			"<td>交易手数</td>"+
+			"<td>买</td>"+
+			"<td>卖</td>"+
 			"<td>成交价</td>"+
 			"<td>手续费</td>"+
 			"<td>下单类型</td>"+
@@ -227,7 +228,8 @@ function appendTradeDetailHtml(tradeDetail,index){
 				"<td>"+_data.currencyNo+"</td>" +
 				"<td>"+_data.exchangeNo+"</td>" +
 				"<td>"+_data.commodityNo+"</td>" +
-				"<td>"+number+"</td>" +
+				"<td>"+parseFloat(_data.buyNum).toFixed(0)+"</td>" +
+				"<td>"+parseFloat(_data.sellNum).toFixed(0)+"</td>" +
 				"<td>"+_data.tradePrice+"</td>" +
 				"<td>"+_data.free+"</td>" +
 				"<td>"+_data.orderType+"</td>" +
@@ -627,7 +629,42 @@ function filterNull(val) {
 		return val;
 	}
 }
-
+/**
+ * 拒绝结算
+ */
+function refuseInput(){
+	var rows = $("#hasAuditData").datagrid('getSelections');
+	if (Check.validateSelectItems($("#hasAuditData"),1)) {
+		var stateType = rows[0].stateType;
+		if(stateType == "已结算"){
+			Check.messageBox("提示","该用户已结算！");
+			return;
+		}
+		if(stateType == "操盘中"){
+			Check.messageBox("提示","操盘中的方案不能操作！");
+			return;
+		}
+			$.messager.confirm("确认提示","是否拒绝结算？", function(result){
+				if(result){
+					var id = rows[0].id;
+					$.ajax({
+						url:Check.rootPath() +"/admin/internation/future/refuseInput",
+						type:"post",
+						data:{
+							id:id,
+							stateType:4
+						},success:function(result){
+							if(result.success){
+								eyWindow.walert("成功提示", result.message, 'info');
+								$("#edatagrid").datagrid('reload');
+								$("#hasAuditData").datagrid('reload');
+							}
+						}
+					});
+				}
+		});
+	}
+}
 $(document).ready(function() {
 	$('#hasAuditData').datagrid({
 		onLoadSuccess:function(data) {
