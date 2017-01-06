@@ -4,17 +4,29 @@ $(function(){
     $("#clock").html(currentDate.getHours()+":"+currentDate.getMinutes()+":"+currentDate.getSeconds());
     var clock = setInterval(function(){
         var currentDate = new Date();//获取当前时间
-        var i= "",j="",k="";
-        if(currentDate.getHours()<10){
+        var year = currentDate.getFullYear() + "-";
+        var month = (currentDate.getMonth()+1) + "-";
+        var data = currentDate.getDate() + " ";
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var seconds = currentDate.getSeconds();
+        var i= "",j="",k="",d="",f="";
+        if(month<10){
+            d="0";
+        }
+        if(data<10){
+            f="0";
+        }
+        if(hours<10){
             i= "0";
         }
-        if(currentDate.getMinutes()<10){
+        if(minutes<10){
             j= "0";
         }
-        if(currentDate.getSeconds()<10){
+        if(seconds<10){
             k= "0";
         }
-        $("#clock").html(i+currentDate.getHours()+":"+j+currentDate.getMinutes()+":"+k+currentDate.getSeconds());
+        $("#today").html(year+d+month+f+data+i+hours+":"+j+minutes+":"+k+seconds);
     },1000);
     $(".quotation_title").click(function(){
         var _this = $(this);
