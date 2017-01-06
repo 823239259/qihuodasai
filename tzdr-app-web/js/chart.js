@@ -892,6 +892,9 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var lastPrices=Number(Parameters.LastPrice).toFixed(dosizeL);
 	var DateTimeStamp=Parameters.DateTimeStamp;
 	var DateTimeStamp1=DateTimeStamp.replace(/-/g, "/");
+	if(timeData.time[timeData.time.length-1]==undefined){
+		return
+	}
 	var oldTime1=(timeData.time[timeData.time.length-1]).replace(/-/g, "/");
 	var oldTime=Math.round(new Date(oldTime1).getTime()/1000);
 	var nowShjian=Math.round(new Date(DateTimeStamp1).getTime()/1000)

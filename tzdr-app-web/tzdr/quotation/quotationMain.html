@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>行情</title>
@@ -17,6 +16,11 @@
         	-webkit-transition: all linear 3s;
         }
 		</style>
+		<script>
+			window.onerror=function(sMessage, sUrl, sLine){
+			 	alert( sMessage + sUrl+sLine +"\n");
+				}
+		</script>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -159,9 +163,9 @@
 		<div class="top"></div><div class="bottom"></div>
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
-	<script src="../../js/util.js"></script>
+	<script src="../../js/util.js" charset="UTF-8"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript" charset="UTF-8">
 				$(function(){
 					$("#refresh").addClass("rotateClass");
 				})
@@ -172,18 +176,18 @@
 				var validationLoginTip = null;
 				var width=plus.display.resolutionWidth;
 				var time = 30000;
-				if(plus.storage.getItem("QuotationGuidance")!=null){
-					if(localStorage.getItem("tipLogin") == 1){
-						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-					}else{
-						validationLoginTip = setTimeout(function(){ 
-							if(!mui.cacheUser.isLogin()){
-								localStorage.setItem("tipLogin",1);
-								alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-							}
-						},30000);
-					}
-				}
+//				if(plus.storage.getItem("QuotationGuidance")!=null){
+//					if(localStorage.getItem("tipLogin") == 1){
+//						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+//					}else{
+//						validationLoginTip = setTimeout(function(){ 
+//							if(!mui.cacheUser.isLogin()){
+//								localStorage.setItem("tipLogin",1);
+//								alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+//							}
+//						},30000);
+//					}
+//				}
 				function openLogin(){ 
 					mui.openWindow("../login/login.html","login");
 				} 
@@ -349,6 +353,7 @@
 					    }
 					};
 					socket.onerror = function(evt){
+						alert(JSON.stringify(evt))
 					};
 					function ManufacturingData(i){
     					var data=[];
@@ -443,26 +448,27 @@
 				}
 			});
 			document.getElementById("refresh").addEventListener("tap",function(){
-				var re = plus.webview.getWebviewById("quotationMain");
-					if(re != null || re != undefined){
-						re.reload(); 
-					}
+				 var data=ManufacturingData(1);
+				 mui.openWindow({
+							url:"transactionDetails.html",
+							id:"transactionDetails",
+							 extras:{
+								name:data,
+							}
+					});
 			});
-			function referPage(){
-				plus.webview.getWebviewById("quotationMain").reload();
-			}
 			document.getElementById("tutorial").addEventListener("tap",function(){
 				mui.openWindow({
 					url:"tutorial.html",
 					id:"tutorial",
 				});
 			})
-			setstatus();
+			/*setstatus();
 			function setstatus(){
 				if(plus.navigator.isFullscreen()){
 					plus.navigator.setFullscreen(false);
 				}
-			};
+			};*/
 			var first=null;
 			//Android双击home键退出应用
 				mui.back = function(){
