@@ -1768,10 +1768,8 @@ $(function(){
 		var val = $this.val();
 		if(val == -1){
 			$("#ConditoionTimePricesInput").hide();
-			$("#ConditoionTimePricesInput").attr("disabled",true);
 		}else{
 			$("#ConditoionTimePricesInput").show();
-			$("#ConditoionTimePricesInput").attr("disabled",false);
 		}
 	})
 	$("#chioceAdditional").change(function(){
@@ -1779,10 +1777,8 @@ $(function(){
 		var val = $this.val();
 		if(val == -1){
 			$("#ConditoionPricesInput1").hide();
-			$("#ConditoionPricesInput1").attr("disabled",true);
 		}else{
 			$("#ConditoionPricesInput1").show();
-			$("#ConditoionPricesInput1").attr("disabled",false);
 		}
 	})
 	/**
@@ -2004,14 +2000,14 @@ function initConditionData(){
 	$("#ConditoionPricesInput3").val(1);
 	$("#chioceAdditional").val(-1);
 	$("#ConditoionPricesInput1").val("");
-	$("#chiocePricesSelectTime").val(1);
+	$("#chiocePricesSelectTime").val(1); 
 	$("#insertTimeInput").val("");
 	$("#chioceTimeAdditional").val(-1);
 	$("#shopDrectionTime").val(0);
 	$("#ConditoionTimeInput").val(1); 
 	insertConditionCount = 0; 
-	$("#ConditoionPricesInput1").attr("disabled",true);
-	$("#ConditoionTimePricesInput").attr("disabled",true);
+	$("#ConditoionPricesInput1").hide();
+	$("#ConditoionTimePricesInput").hide();
     $("#chioceContract").attr("disabled",false);
     $("#chioceContract1").attr("disabled",false);
 }
