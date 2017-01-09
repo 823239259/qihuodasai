@@ -4,13 +4,14 @@
 		<meta charset="UTF-8">
 		<title>交易中心</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<script src="../../js/mui.min.js"></script>
-		 <script src="../../js/common.js"></script>
+		<link rel= "stylesheet"  href="../../css/mui.picker.all.css"/>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 
 		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
 		<script src="../../js/esl.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
 		<style>
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
@@ -22,7 +23,6 @@
 				margin-top: -120px;
 				left: 50% !important;
 				margin-left: -141px;
-			/*	background-color: #2b2b2b;*/
 			}
 			#popover .mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
 				background-color: #FFFFFF;
@@ -85,8 +85,8 @@
 				z-index: 999;
 				top: 16px;
 				right: 6px;
-				/*height: 65px;*/
-				height: 60px;
+				height: 65px;
+				/*height: 150px;*/
 				width: 35%;
 			}
 			#topPopover.mui-popover{
@@ -106,6 +106,27 @@
 			.mui-backdrop{
 				background-color: rgba(0, 0, 0, .7);
 			}
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			/*.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}*/
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			* {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
 		</style>
 	</head>
 	<body style="background-color: #2B2B2B">
@@ -117,7 +138,7 @@
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
 			<div class="mui-content" style="padding-top: 80px;">
-					<div id="headerMenu" style="background-color: #2B2B2B;">
+					<div id="headerMenu">
 						<table cellpadding="0" cellspacing="0">
 							<thead>
 								<tr>
@@ -131,7 +152,7 @@
 						</table>
 					</div>
 					<div id="headerContent">
-						<div id="chartAllDiv" class="bottomDivList mui-active">
+						<div id="chartAllDiv" class="bottomDivList mui-active" >
 							<div class="chartDivContent mui-active" id="TimeChart1">
 								<div id="timeChart" style="width:100%;"></div>
 								<div id="volumeChart" style="width:100%;"></div>
@@ -244,9 +265,6 @@
 									<td id = "buy_9" >0</td>
 								</tr>
 							</table>
-							<!--<table cellpadding="0" cellspacing="0" id="HandicapTable">
-
-							</table>-->
 						</div>
 						<div  id="trade" style="padding-bottom: 20px;padding-top: 46px;" class=" bottomDivList">
 						    <div class="Assets" style="background-color: #2B2B2B;">
@@ -333,9 +351,7 @@
 						    </div>
 						</div>
 					</div>
-					<div class="top"></div><div class="bottom"></div>
-					<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-					<div id="littleDiv"></div>
+					
 					<div id="list_type" >
 						<span id="sanjiao"></span>
 						<ul >
@@ -386,9 +402,9 @@
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
 								</li>
-								<!--<li class="mui-table-view-cell">
+								<li class="mui-table-view-cell" id="openConditionButton">
 									<a id="openCondition">条件单</a>
-								</li>-->
+								</li>
 								<li class="mui-table-view-cell" id="openStopButton">
 									<a id="openStop">止损单</a>
 								</li>
@@ -481,15 +497,15 @@
 				<header class="mui-bar mui-bar-nav">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack " id= "stopBack"><i>返回</i></a>
 				    <h1 class="mui-title">条件单</h1>
-				    <a class="mui-pull-right" id="insertCondition"></a>
+				    <a class="mui-pull-right" id="insertCondition" class = "insertCondition"></a>
 				</header>
 				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
-					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
-				        <a class="mui-control-item mui-active" href="#NoCondition" >未触发列表</a>
-				        <a class="mui-control-item" href="#alreayCondition" >已触发列表</a>
+					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
+				        <a class="mui-control-item mui-active" href="#NoCondition" id="NoConditionTitle">未触发列表</a>
+				        <a class="mui-control-item" href="#alreayCondition" id="alreayConditionTitle">已触发列表</a>
 				    </div>
 				    <div class="mui-control-content mui-active" id="NoCondition">
-				    	<table class="ConditionList" id="conditionTable">
+				    	<table  id="conditionTable">
 				    		<thead>
 				    			<tr>
 				    				<td>合约名称</td>
@@ -498,32 +514,16 @@
 				    				<td>条件</td>
 				    				<td>下单</td>
 				    				<td>有效日期</td>
-				    				<td>时间</td>
+				    				<td>下单时间</td>
 				    			</tr>
 				    		</thead>
-							<thody id = "thodyCondition">
-							<tr class="testclick">
-								<td>t6</td>
-								<td>67</td>
-								<td>78</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>ui</td>
-								<td>kl</td>
-							</tr>
-							<tr id="buttonListTr">
-								<td colspan="7"> 
-									<button id="suspendCondition">暂停</button>
-									<button id="modifyCondition">修改</button>
-									<button id="deleteCondition">删除</button>
-								</td>
-							</tr>
-							</thody>
-							
+							<tbody id = "thodyCondition" >
+
+							</tbody>
 				    	</table>
-				    </div>
+				   	 </div>
 				    <div class="mui-control-content" id="alreayCondition">
-				    	<table class="ConditionList">
+				    	<table>
 				    		<thead>
 				    			<tr>
 				    				<td>合约名称</td>
@@ -532,21 +532,29 @@
 				    				<td>条件</td>
 				    				<td>下单</td>
 				    				<td>有效日期</td>
-				    				<td>时间</td>
+				    				<td>触发时间</td>
 				    			</tr>
 				    		</thead>
 				    		<tbody id = "over-thbodyCondition">
-				    			
 				    		</tbody>
-							
 				    	</table>
 				    </div>
+				    	<button value="2"  class = "updateCondition" id="suspendCondition">暂停</button>
+						<button value="0" id="modifyCondition">修改</button>
+						<button value="1" class = "updateCondition" id="deleteCondition">删除</button>
+						<div id="stopTips1" class="stopTips">
+							<div>提示</div>
+							<div>
+								<p>1.云端止损单只保证触发不保证成交</p>
+								<p>2.暂不支持显示套利止损单</p>
+							</div>
+						</div>
 				</div>
 <!-----------------------------添加条件单的弹窗---------------------------->				
 				<div id="popoverConditoion" class="mui-popover">
 				    <div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
-				        <a class="mui-control-item mui-active" href="#ConditoionTitlePrices" >价格条件</a>
-				        <a class="mui-control-item" href="#ConditoionTitleTime" >时间条件</a>
+				        <a class="mui-control-item mui-active" id = "plan_conditionTitlePrice" href="#ConditoionTitlePrices" >价格条件</a>
+				        <a class="mui-control-item" id = "plan_conditionTitleTime" href="#ConditoionTitleTime" >时间条件</a>
 				    </div>
 				    <div>
 				    	<div id="ConditoionTitlePrices" class="mui-control-content mui-active">
@@ -569,7 +577,7 @@
 				    						<option value = "1"><</option>
 				    						<option value = "3"><=</option>
 				    					</select>
-				    					<input type="number" value="0"  id="ConditoionPricesInput"/>
+				    					<input type="number" value="0"  id="ConditoionPricesInput" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"/>
 				    				</td>
 				    				<td colspan="2">
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
@@ -579,7 +587,7 @@
 				    						<option value = "1"><</option>
 				    						<option value = "3"><=</option>
 				    					</select>
-				    					<input type="number " value="0"  id="ConditoionPricesInput1" />
+				    					<input type="number " value="0"  id="ConditoionPricesInput1" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />
 				    				</td>
 				    			</tr>
 				    			<tr>
@@ -595,14 +603,14 @@
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>
-				    				<td ><input type="number " value="0"  id="ConditoionPricesInput3" /></td>
+				    				<td ><input type="number" value="0"  id="ConditoionPricesInput3" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>
 				    				<td colspan="3">当日有效</td>
 				    			</tr>
 				    		</table>
-							<button id="closeConditionTable">关闭</button>
+							<button id="closeConditionTable">取消</button>
 							<button id="insertConditionTable">添加</button>
 				    	</div>
 				    	<div id="ConditoionTitleTime" class="mui-control-content">
@@ -619,7 +627,7 @@
 				    			<tr>
 				    				<td >时间</td>
 				    				<td>
-				    					<input type="text" id="insertTimeInput"  value="0"/>
+				    					<input type="text" placeholder="选择时间" data-options='{"type":"time"}' id="insertTimeInput"  value="0" readonly="readonly"/>
 				    				</td>
 				    				<td></td>
 				    				<td></td>
@@ -634,7 +642,7 @@
 				    						<option value = "1"><</option>
 				    						<option value = "3"><=</option>
 				    					</select>
-				    					<input type="number " value="0"  id="ConditoionTimePricesInput" />
+				    					<input type="number " value="0"  id="ConditoionTimePricesInput" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />
 				    				</td>
 				    				<td></td>
 				    				<td></td>
@@ -648,18 +656,18 @@
 				    					</select>
 				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelectTime">
 				    						<option value = "1">市价</option>
-				    						<option value = "2">限价</option>
+				    						<option value = "2">对手价</option>
 				    					</select>
 				    				</td>
 				    				<td class="borderRight">手数</td>
-				    				<td ><input type="number " value="0"  id="ConditoionTimeInput" /></td>
+				    				<td ><input type="number " value="0"  id="ConditoionTimeInput" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
 				    			</tr>
 				    			<tr> 
 				    				<td>有效</td>
 				    				<td colspan="3">当日有效</td>
 				    			</tr>
 				    		</table>
-							<button id="closeConditionTable1">关闭</button>
+							<button id="closeConditionTable1">取消</button>
 							<button id="insertConditionTable1">添加</button>
 				    	</div>
 				    </div>
@@ -718,7 +726,7 @@
 				    <button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
 					<button value="0" id="modifyCondition1">修改</button>
 					<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
-					<div id="stopTips">
+					<div id="stopTips" class="stopTips">
 						<div>提示</div>
 						<div>
 							<p>1.云端止损单只保证触发不保证成交</p>
@@ -780,7 +788,7 @@
 				    				<td class="oddTd">止盈价</td>
 				    				<td  colspan="3">
 				    					<input type="hidden" id = "ulossHoldAvgPrice1" />
-				    					<input type="number" value="0" style="width: 50%;" id="uLossPrice" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+				    					<input type="number" value="0" style="width: 40%;" id="uLossPrice" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
 				    					<span id="lossIncrease2">0.00%</span>
 				    				</td>
 				    			</tr>
@@ -805,6 +813,8 @@
 			</div>
 			</div>
 			</div>
+			<div class="top"></div>
+			<div class="bottom"></div>
 		</body>
 			<script>
 				function init(param){
@@ -824,17 +834,17 @@
 						var screen=window.innerHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
 								"width":"100%",
-								"height":screen-300-140+"px",
+								"height":screen-300-105+"px",
 							});
 							$("#volumeChart,#CandlestickVolumeChart").css({
 								"width":"100%",
-								"height":140+"px",
+								"height":105+"px",
 							});
 							$("#lightChart").css({
 								"width":"100%",
 								"height":screen-300+"px",
 							});
-							$("#alreayStopTale,#NoStopTale").css({
+							$("#alreayStopTale,#NoStopTale,#alreayCondition,#NoCondition").css({
 								"height":screen-160+"px",
 							})
 						}	
@@ -845,112 +855,28 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+//					bindGuidance();
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
-						$(".top").css({
-							"height":"96px",
-							"background-color":"rgba(0,0,0,0.8)",
-							"display":"block",
-						});
-						$("#closeDiv").css({
-							"top":4+"px",
-							"right":10+"px",
-							"display":"block",
-						});
-						$(".bottom").css({
-							"display":"block",
-							"height":$(".buttomFix").height()+87+"px",
-							"background": "url(../../images/tradeGudice1.png) no-repeat",
-							"background-size":"100% 100%",
-							"z-index":"999",
-						});
-						var clickNum=0;
-						$(".bottom,.top").click(function(){
-							if(clickNum==0){
-								$(".bottom").css({
-									"height":height-86+"px",
-									"bottom":"0px",
-									"background-image": "url(../../images/tradeGudice2.png)",
-								});
-								$(".top").css({
-									"height":46+"px",
-								});
-								$("#littleDiv").css({
+					$(".top").css({"height":height+"px",
+									"width":width+"px",
 									"position":"fixed",
-									"top":"46px",
-									"left":"0px",
-									"width":"20%",
-									"height":50+"px",
-									"background-color":"rgba(0,0,0,0.8)",
-									"z-index":"992",
-								});
-							}else if(clickNum==1){
-								$(".top").css({
-									"display":"none",
-								});
-								$("#closeDiv").css({
-									"left":Proportion*10+"px",
-									"top":"46px",
-									"z-index":"999"
-								});
-								$(".bottom").css({
-									"top":"46px",
-									"left":"0px",
-									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice3.png)",
-								});
-								$("#littleDiv").css({
-									"display":"none",
-								});
-							}else if(clickNum==2){
-								$("#closeDiv").css({
-									"left":width-40+"px"
-								});
-								$(".bottom").css({
-									"bottom":"50px",
-									"left":"0px",
+									"z-index":"999",
+									"display":"block",
 									"top":"0px",
-									"height":height-50+"px",
-									"background-image": "url(../../images/tradeGudice4.png)",
-								});
-							}else if(clickNum==3){
-								$(".bottom").css({
-									"bottom":"0px",
-									"left":"0px",
-									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice5.png)",
-								});
-							}else{
-								$(".bottom").css({
-									"display":"none",
-								});
-								$("#closeDiv").css({
-									"display":"none",
-								});
-							}
-							clickNum++;
-							
-						});
-						$("#closeDiv").click(function(){
-							$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    				"display":"none",
-			    			});
-						});
-						$("#littleDiv").click(function(){
-							$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    				"display":"none",
-			    			});
-						})
-					$("#closeTrade").click(function(){
-						$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    			"display":"none",
-			    		});
-					});
+									"background":"url('../../images/chartBg.png') no-repeat",
+									"background-size":"cover",
+									})		
+					
 				}
+				$(".top").on("tap",function(){
+					$(".top").css("display","none");
+				})
 			});
 			</script>
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
+		<script type="text/javascript" src="../../js/mui.picker.all.js"></script>
 		<script type="text/javascript" src="../../js/util.js" ></script>
 		<script type="text/javascript" src="../../js/trade.util.js" ></script>
 		<script type="text/javascript" src="../../js/trade.data.mode.js" ></script>
@@ -996,10 +922,11 @@
 					$("#marketSell ").text("模拟卖出");
 					$("#switchSell").text("模拟卖出");
 					$("#openStopButton").css("display","block");
+					$("#openConditionButton").css("display","block");
 					$("#stopLoss").css("display","block");
 					$("#Open").css("right","25%");
 					$("#allOpen").css("right","50%");
-					$("#topPopover").css("height","100px");
+					$("#topPopover").css("height","150px");
 				}
 				var network = false;
 				mui('.mui-scroll-wrapper').scroll();
@@ -1019,7 +946,14 @@
 					mui("#popoverLoss1").popover("toggle");
 				});
 				document.getElementById("insertCondition").addEventListener("tap",function(){
+					initConditionData(); 
+					$("#ConditoionTitlePrices").addClass("mui-active");
+					$("#plan_conditionTitlePrice").addClass("mui-active").css("display","table-cell").text("价格条件");
+					$("#plan_conditionTitleTime").removeClass("mui-active").css("display","table-cell").text("时间条件");
+					$("#ConditoionTitleTime").removeClass("mui-active");
 					mui("#popoverConditoion").popover("toggle");
+					$("#insertConditionTable1").text("添加");
+					$("#insertConditionTable").text("添加");
 				});
 				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
 					mui("#popoverConditoion").popover("toggle");
@@ -1028,9 +962,9 @@
 					mui("#popoverConditoion").popover("toggle");
 				});
 				document.getElementById("stopBack").addEventListener("tap",function(){
-					$("#bg2").css("visibility","none");
-					$("#bg3").css("visibility","none");
-					$("#bg1").css("visibility","block");
+					$("#bg2").css("display","none");
+					$("#bg3").css("display","none");
+					$("#bg1").css("display","block");
 					$("#topPopover").css("display","none");
 					$(".mui-content").eq(0).css("z-index","998");
 				});
@@ -1043,6 +977,20 @@
 				});
 				document.getElementById("openStop").addEventListener("tap",function(){
 					if(isLogin){
+						if(plus.storage.getItem("QuotationGuidanceTrade2")==null){
+							plus.storage.setItem("QuotationGuidanceTrade2","1");
+								var height=window.innerHeight;
+								var width=window.innerWidth;
+								$(".top").css({"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/stopBg.png') no-repeat",
+										"background-size":"cover",
+										})		
+						}
 						$("#bg1").css("display","none");
 						$("#bg2").css("display","none");
 						$("#bg3").css("display","block");
@@ -1052,14 +1000,54 @@
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
 				});
-				/**document.getElementById("openCondition").addEventListener("tap",function(){
-					$("#bg1").css("display","none");
-					$("#bg3").css("display","none");
-					$("#bg2").css("display","block");
-					mui("#topPopover").popover("toggle");
-					$(".mui-content").eq(1).css("z-index","998");
-				});**/
+				document.getElementById("openCondition").addEventListener("tap",function(){
+					if(isLogin){
+						if(plus.storage.getItem("QuotationGuidanceTrade1")==null){
+							plus.storage.setItem("QuotationGuidanceTrade1","1");
+							var QuotationGuidanceTradeTimeOut=null;
+							var height=window.innerHeight;
+							var width=window.innerWidth;
+							var clickBottomNum=0;
+							QuotationGuidanceTradeTimeOut=setTimeout(function(){
+								$(".bottom").css({
+										"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/conditionBg.png') no-repeat",
+										"background-size":"cover",
+									});
+									
+							},400)
+								$(".bottom").click(function(){
+									clearTimeout(QuotationGuidanceTradeTimeOut);
+									if(clickBottomNum==0){
+										$(".bottom").css({
+											"background":"url('../../images/conditionBg1.png') no-repeat",
+											"background-size":"cover",
+										});
+									}else{
+										$(".bottom").css("display","none")
+									}
+									clickBottomNum++;
+								})
+						}
+						$("#bg1").css("display","none");
+						$("#bg3").css("display","none");
+						$("#bg2").css("display","block");
+						mui("#topPopover").popover("toggle");
+						$(".mui-content").eq(1).css("z-index","998");
+					}else{
+						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
+					}
+				});
 				$("#clickTable").on("tap",".testclick1",function(){
+					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
+        			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
+				})
+				$("#thodyCondition").on("tap","tr",function(){
 					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
         			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
 				})
@@ -1069,7 +1057,50 @@
 				document.getElementById("NoStopListTitle").addEventListener("tap",function(){
 					$("#suspendCondition1,#modifyCondition1,#deleteCondition1,#stopTips").css("display","block");
 				})
+				document.getElementById("alreayConditionTitle").addEventListener("tap",function(){
+					$("#suspendCondition,#modifyCondition,#deleteCondition,#stopTips1").css("display","none");
+				})
+				document.getElementById("NoConditionTitle").addEventListener("tap",function(){
+					$("#suspendCondition,#modifyCondition,#deleteCondition,#stopTips1").css("display","block");
+				})
 			});
+			(function($) {
+				$.init();
+					document.getElementById("insertTimeInput").addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						/*
+						 * 首次显示时实例化组件
+						 * 示例为了简洁，将 options 放在了按钮的 dom 上
+						 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+						 */
+						var picker = new $.DtPicker(options);
+						picker.show(function(rs) {
+							/*
+							 * rs.value 拼合后的 value
+							 * rs.text 拼合后的 text
+							 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+							 * rs.m 月，用法同年
+							 * rs.d 日，用法同年
+							 * rs.h 时，用法同年
+							 * rs.i 分（minutes 的第二个字母），用法同年
+							 */
+							document.getElementById("insertTimeInput").value = rs.text;
+							/* 
+							 * 返回 false 可以阻止选择框的关闭
+							 * return false;
+							 */
+							/*
+							 * 释放组件资源，释放后将将不能再操作组件
+							 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+							 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+							 */
+							picker.dispose();
+						});
+					}, false);
+			})(mui);
 		</script>
 		<script>
 		

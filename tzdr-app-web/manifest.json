@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.2.8",/*应用版本名称*/
-		"code": "20161227"
+		"name": "2.2.9",/*应用版本名称*/
+		"code": "20170106"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -105,7 +105,7 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"}},"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57b3dbd5e0f55a8232001540","channelid_android":"android"}}},
+		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"}},"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57b2d65067e58e601d00258a","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -1170,7 +1170,22 @@
 					"images/inputRadioBg.jpg",
 					"images/inputRadioBg.png",
 					"images/graySanjiaoBg.png",
-					"images/insertIon.png"
+					"images/insertIon.png",
+					"js/echarts.min.js",
+					null,
+					"js/mui.picker.js",
+					"css/app.css",
+					"css/mui.picker.css",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"images/chartBg.png",
+					"images/conditionBg.png",
+					"images/conditionBg1.png",
+					"images/stopBg.png",
+					"images/tradeBG.png",
+					"images/tipsBG.png",
+					"js/mui.picker.all.js",
+					"css/mui.picker.all.css"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1389,13 +1404,16 @@
 					"images/recharge/jingdong.png",
 					"images/recharge/wei.png",
 					"js/pingpp.js",
-					"tzdr/account/recharge.html"
+					"tzdr/account/recharge.html",
+					"images/recharge/zhifubao.png",
+					"images/recharge/Quickpayment.png"
 				],
 				"refer": [
 					"tzdr/account/weixinPay.html",
 					"tzdr/account/bankPay.html",
 					"tzdr/account/gopay.html",
-					"tzdr/account/alipay.html"
+					"tzdr/account/alipay.html",
+					"tzdr/account/bindzhifubao.html"
 				],
 				"priority": 0
 			},
@@ -1595,6 +1613,20 @@
 			"share.html": {
 				"resources": [
 					"js/immersed.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/bindzhifubao.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/pingpp.js"
 				],
 				"refer": [],
 				"priority": 0

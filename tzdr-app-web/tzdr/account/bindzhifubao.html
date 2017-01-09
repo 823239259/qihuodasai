@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>绑定支付宝</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <link rel="stylesheet" href="../../css/recharge.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <script type="text/javascript" src="../../js/pingpp.js" ></script>
+	    <style>
+	    	.mui-table-view {
+	    		font-size: 14px;
+	    	}
+	    	.mui-table-view label{
+	    		color:#666666 ;
+	    	}
+	    	.mui-table-view span{
+	    		color:#2B2B2B ;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">支付宝</h1>		
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+		<!--	<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">-->
+				<!--<div  class="mui-scroll-wrapper ac_online">-->
+				<!--	<div class="mui-scroll">-->
+					<ul id="list" class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="bindAlipay">
+								<label>绑定支付宝账号</label>
+								<b><span id="alipay_account">待绑定</span></b>
+							</a>
+						</li>
+					</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<label>收款人支付宝账户</label>
+								<span>weisheng@vs.com</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<label>收款人账户名称</label>
+								<span>成都维胜智慧科技有限公司</span>
+							</li>
+						</ul>
+						<!--<div class="ac_btn">
+							<a href="javascript:void(0);" id="openappliy" class="mui-btn mui-btn-block lg-btnlogin">打开支付宝</a>
+						</div>-->
+						<div class="mui-content-padded">
+							<h5>温馨提示：</h5>
+							<p>1、若在该页面打开支付宝失败，您可以手动启动支付宝APP或者登录支付宝官网，选择转账到支付宝账户，手工输入成都维胜智慧科技有限公司的收款支付宝账户，最终完成转账。</p>
+							<p>2、最快5分钟内到账，最晚下一个工作日09:15前到账。</p>
+						</div>
+					<!--</div>
+				</div>
+			</div>-->
+			<div id="buttomDiv">
+				<span>支付：<i class="yellowFont moneyIcont" >¥</i><i id="paymentMoney"></i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即付款</button>
+			</div>
+		</div>
+	</body>
+	<script>
+	mui.plusReady(function(){
+		tzdr.init.initHearListener();
+		getalipayAcount();
+		var wv = plus.webview.currentWebview();
+		var paymentMoney=document.getElementById("paymentMoney")
+		paymentMoney.innerText=wv.money.toFixed(2);
+		document.getElementById("bindAlipay").addEventListener("tap", function() {
+			var alipay_account = document.getElementById("alipay_account");
+			mui.prompt("请输入要绑定的支付宝账号", "支付宝账号", "绑定提示", ['取消', '绑定'], function(e) {
+				if(e.index == 0) {
+					return;
+				}
+				if(mui.isnull(e.value)) {
+					mui.toast("支付宝账号不能为空");
+					return;
+				}
+				mui.app_request('/user/pay/bindalipay', {
+					"alipayAcount": e.value
+				}, function(result) {
+					mui.toast("绑定成功！");
+					alipay_account.innerHTML = e.value;
+					return;
+				}, function(result) {
+					if(result.code == 2) {
+						mui.toast("支付宝账号已经存在！");
+						return;
+					} else if(result.code == 3) {
+						mui.toast("支付宝账号不能为空！");
+						return;
+					} else {
+						mui.toast("系统繁忙，请稍后再试！");
+						return;
+					}
+				})
+			});
+			
+		});
+		document.getElementById("recharge-btn").addEventListener("tap",function(){
+			plus.runtime.openURL("https://qr.alipay.com/aex03954yodc0tgk3uog8d7");
+			
+		});
+		function getalipayAcount() {
+				mui.app_request("/user/pay/getalipayacount", {}, function(result) {
+					if(mui.isnull(result.data.alipayAcount)) {
+						document.getElementById("alipay_account").innerHTML = "待绑定";
+						return;
+					}
+					document.getElementById("alipay_account").innerHTML = result.data.alipayAcount;
+					return;
+				}, function(result) {
+
+					document.getElementById("alipay_account").innerHTML = "待绑定";
+					return;
+				})
+			};
+		})
+	</script>
+</html>

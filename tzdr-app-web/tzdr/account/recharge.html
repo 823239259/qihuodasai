@@ -47,7 +47,7 @@
 						var _length = this.value.length;
 						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
 						changeAllBalance();
-						return;
+						return 
 					} else {
 						var _length = this.value.length;
 						var _index = this.value.lastIndexOf('.');
@@ -112,14 +112,14 @@
 			function changeAllBalance(){
 				var accountBalance=Number($("#accountBalance").text());
 				var inputMoney=Number($("#inputMoney").val());
-				$("#allBalance").text(accountBalance+inputMoney);
+				var allMoney=parseFloat(Number(accountBalance+inputMoney)).toFixed(2) ;
+				$("#allBalance").text(allMoney);
 			}
 			/*
 			 * 立即充值
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
-				console.log(money1);
 				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");

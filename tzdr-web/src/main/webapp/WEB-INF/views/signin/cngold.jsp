@@ -72,8 +72,9 @@
 <div class="ks_zuce">
 	<div class="ks_zuce_content">
 		<div class="rg_ctn">
-			<p class="tt"></p>  
-			<input type = "hidden" value="${channelCode}" id = "channelCode"/>
+			<p class="tt"></p>
+			<input type = "hidden" value="cngold" id = "channelCode"/>
+			<%-- <input type = "hidden" value="${cngold}" id = "channelCode"/> --%>
         	<form  class="form" action="" method="post">  
 		        <ul class="rg_list">
 		            <li>     
@@ -101,6 +102,7 @@
 		        </ul>
         		<div class="rg_agree"><input type="checkbox" checked="checked" id="agreement" name="agreement">我已阅读并同意<a href="javascript:showAgreement();">《维胜网站服务协议》</a></div>
         		<div class="rg_btn"><a status="true" id="signin" name="signin" href="javascript:void(0);">立即注册</a></div>
+        		
         	</form>
     	</div>
     	<%-- cas ajax登录 --%>

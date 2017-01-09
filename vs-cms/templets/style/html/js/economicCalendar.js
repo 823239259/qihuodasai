@@ -40,14 +40,14 @@ $(function(){
             if(val.indexOf(dataAll[i].country)>=0){
                 var date= new Date(parseInt(dataAll[i].timestamp) * 1000).Format("hh:mm");
                 var star;
-                if(dataAll[i].importance==1){
-                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-                }else if(dataAll[i].importance==2){
-                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
-                }else if(dataAll[i].importance==3){
-                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
+                if(data[i].importance==1){
+                    star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                }else if(data[i].importance==2){
+                    star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                }else if(data[i].importance==3){
+                    star="<li class='importance color_importance'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'></li>"
                 }else{
-                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
+                    star="<li class='importance'<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
                 }
                 if(dataAll[i].actual==null || dataAll[i].actual=="null" || dataAll[i].actual==""){
                     dataAll[i].actual="--";
@@ -238,13 +238,13 @@ $(function(){
             var star;
             var id;
             if(data[i].importance==1){
-                star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
+                star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
             }else if(data[i].importance==2){
-                star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
+                star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
             }else if(data[i].importance==3){
-                star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
+                star="<li class='importance color_importance'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'></li>"
             }else{
-                star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
+                star="<li class='importance'<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
             }
             if(data[i].actual==null || data[i].actual=="null" || data[i].actual==""){
                 data[i].actual="--";

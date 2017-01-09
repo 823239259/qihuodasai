@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>行情</title>
@@ -17,6 +16,11 @@
         	-webkit-transition: all linear 3s;
         }
 		</style>
+		<script>
+			window.onerror=function(sMessage, sUrl, sLine){
+			 	//alert( sMessage + sUrl+sLine +"\n");
+				}
+		</script>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -159,9 +163,9 @@
 		<div class="top"></div><div class="bottom"></div>
 		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
-	<script src="../../js/util.js"></script>
+	<script src="../../js/util.js" charset="UTF-8"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript" charset="UTF-8">
 				$(function(){
 					$("#refresh").addClass("rotateClass");
 				})
@@ -279,9 +283,11 @@
 	  				quotationMain:"quotationMain.html",
 	  			}
 				initBottom(dataUrl);
-				var url = marketSocketUrl;
-				console.log(url);
+					var url = marketSocketUrl;
 					var socket = new WebSocket(url);
+					if(socket==null){
+						return
+					}
 					function sendMessage(method,parameters){
 					    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 					}
@@ -308,7 +314,6 @@
 					    ContractSize:ContractSize
 					}
 					socket.onclose = function(evt){
-
 					};
 					socket.onmessage = function(evt){ 
 					    var data = evt.data;
@@ -348,6 +353,7 @@
 					    }
 					};
 					socket.onerror = function(evt){
+//						alert(JSON.stringify(evt))
 					};
 					function ManufacturingData(i){
     					var data=[];
@@ -366,7 +372,7 @@
                     "<span class='reenFont QLastPrice'>-</span> <span class='LastVolume'>-</span> <span class='ChangeRate'><p>-</p></span> </div></div>"
     				};
     				//生成页面传递的数据
-//  				$(".productList").css("height",48*product.CommodityName.length+"px");
+    				$(".productList").css("height",48*product.CommodityName.length+"px");
     				
 			    	$(".openPage").click(function(){
 			    		$(".top,.bottom,#closeDiv").css({
@@ -442,14 +448,19 @@
 				}
 			});
 			document.getElementById("refresh").addEventListener("tap",function(){
-				var re = plus.webview.getWebviewById("quotationMain");
-					if(re != null || re != undefined){
-						re.reload(); 
-					}
+				var re=plus.webview.getWebviewById("quotationMain");
+				if(re != null && re !=undefined){
+					re.reload();
+				}
+//				 var data=ManufacturingData(1);
+//				 mui.openWindow({
+//							url:"transactionDetails.html",
+//							id:"transactionDetails",
+//							 extras:{
+//								name:data,
+//							}
+//					});
 			});
-			function referPage(){
-				plus.webview.getWebviewById("quotationMain").reload();
-			}
 			document.getElementById("tutorial").addEventListener("tap",function(){
 				mui.openWindow({
 					url:"tutorial.html",
