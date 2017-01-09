@@ -3,6 +3,8 @@ package com.tzdr.api.controller;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,7 +94,13 @@ public class WeChatController {
 	@ResponseBody
 	public ApiResult createtThreePartyQrcode(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		WUser user = wUserService.getUser(uid); 
+		WUser user = null;
+		if(StringUtils.isBlank(uid)){
+			String mobile = request.getParameter("mobile");
+			user = wUserService.getWUserByMobile(mobile);
+		}else{
+			user = wUserService.getUser(uid); 
+		}
 		String realName = userVerifiedService.queryUserVerifiedByUid(uid).getTname();
 		String generalizeId = user.getGeneralizeId();
 		String inviteUrl = REDIECTURL + "?generalizeId=" + generalizeId;
