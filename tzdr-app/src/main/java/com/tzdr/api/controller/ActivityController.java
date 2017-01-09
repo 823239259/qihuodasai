@@ -4,24 +4,21 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSONObject;
-import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
+import com.alibaba.fastjson.JSONObject;
+import com.hundsun.t2sdk.common.util.CollectionUtils;
+import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.request.RequestObj;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.support.CacheUser;
@@ -30,6 +27,7 @@ import com.tzdr.api.util.AuthUtils;
 import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.api.service.ApiUserService;
+import com.tzdr.business.service.activity.ActivityOldAndNewService;
 import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.future.FSimpleCouponService;
 import com.tzdr.business.service.generalize.GeneralizeChannelService;
@@ -44,6 +42,7 @@ import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.constants.ExtensionConstants;
 import com.tzdr.domain.entity.DataMap;
+import com.tzdr.domain.vo.activity.OldAndNewVo;
 import com.tzdr.domain.web.entity.GeneralizeChannel;
 import com.tzdr.domain.web.entity.GeneralizeVisit;
 import com.tzdr.domain.web.entity.SecurityCode;
@@ -71,6 +70,12 @@ public class ActivityController {
 	private ApiUserService  apiUserService;
 	@Autowired
 	private FSimpleCouponService fSimpleCouponService;
+	@Autowired
+	private ActivityOldAndNewService  activityOldAndNewService;
+	public ActivityController() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 上线推广注册页面
 	 * 
@@ -102,6 +107,53 @@ public class ActivityController {
 		}
 		return new ApiResult(true, ResultStatusConstant.SUCCESS, "query.success" , resultMap);
 	}
+	
+	/**
+	 * 获取老带新 邀请记录
+	 * @param request
+	 * @param mobile 电话号码后四位
+	 * @param starttime 注册时间  查询的开始时间
+	 * @param endtime 注册时间  查询的结束时间
+	 * @return  ApiResult
+	 */
+	@RequestMapping(value = "/getOldAndNewInvitedList", method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult oldAndNewInvitedToRecord(HttpServletRequest request,HttpServletResponse response){
+		String mobile = request.getParameter("mobile");
+		String starttime=request.getParameter("starttime");
+		String endtime=request.getParameter("endtime");
+		
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser wuser = wUserService.get(uid);  //获取用户信息
+		if(ObjectUtil.equals(null, wuser)){
+			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
+		}
+		List<OldAndNewVo> oldAndNewVos = activityOldAndNewService.getOldAndNewVoList(uid,mobile,starttime,endtime);
+		
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",oldAndNewVos);
+	}
+	
+	
+	/**
+	 * 老带新 邀请 统计某一个用户邀请成功的注册数、申请过方案的人数、及活得奖励的次数
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/oldAndNewInvitedStatistics", method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult oldAndNewStatistics(HttpServletRequest request,HttpServletResponse response){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser wuser = wUserService.get(uid);  //获取用户信息
+		if(ObjectUtil.equals(null, wuser)){
+			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
+		}
+		Map<String, Object> activityStatistics = activityOldAndNewService.getActivityStatistics(uid);
+		
+	    return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",activityStatistics);
+	}
+	
+	
 	private static Object lock = new Object();
 	/**
 	 * 系统注册接口
