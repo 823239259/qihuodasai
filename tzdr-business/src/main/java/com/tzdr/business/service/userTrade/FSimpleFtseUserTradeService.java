@@ -200,6 +200,12 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	public List<FSimpleFtseUserTrade> findLossPlan(Long beginTime,Long endTime);
 	
 	public List<FSimpleFtseUserTrade> findByUidAndStateType(String uid);
+	/**
+	 * 根据id清理录入的结算交易数据
+	 * @param id
+	 * @return
+	 */
+	public void clearFsimpleFtseUserTradeById(String id,Integer stateType);
 	
 	
 }

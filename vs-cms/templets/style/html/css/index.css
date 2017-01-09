@@ -1,990 +1,1 @@
-.fontActive {
-  color: #ffb319 !important;
-}
-.greenFont {
-  color: #30bf30;
-}
-.redFont {
-  color: #ff4040;
-}
-.grayColor {
-  color: #666666;
-}
-.grayColor9 {
-  color: #999999;
-}
-.blackFont3 {
-  color: #333333!important;
-}
-.marginTop {
-  margin-top: 10px;
-}
-.clickLiColor {
-  background-color: #f2f2f2;
-}
-.newTitleActiveColor {
-  color: #ffb725;
-}
-.directSeedingListAcitve .directSeedingListContent {
-  background-image: url("/templets/style/html/images/image/lineIcon.png") !important;
-  background-repeat: no-repeat !important;
-}
-.directSeedingListAcitve .directSeedingContent {
-  display: block !important;
-}
-.blueFont {
-  color: #19b2ff !important;
-}
-.blockDiv {
-  display: block;
-}
-/**************ÂØºËà™Ê†è*************************/
-#headerBottom {
-  border-top: 1px solid #4d4d4d;
-  height: 80px;
-  width: 100%;
-  overflow: hidden;
-}
-#headerBottom #logo {
-  height: 80px;
-  float: left;
-  width: 140px;
-}
-#headerBottom #logo a{
-  margin-top: 20px;
-  height: 40px;
-  width: 140px;
-  display: inline-block;
-  background: url("/templets/style/html/images/image/logo.png") no-repeat;
-}
-/*#headerBottom #logo img {*/
-  /*margin-top: 20px;*/
-/*}*/
-#headerBottom #nav {
-  float: right;
-  height: 80px;
-  width: auto;
-  position: relative;
-}
-#headerBottom #nav ul {
-  list-style-type: none;
-  width: auto;
-  height: 80px;
-  font-size: 16px;
-}
-#headerBottom #nav ul a {
-  display: inline-block;
-  height: 80px;
-  line-height: 80px;
-  color: #ffffff;
-}
-#headerBottom #nav ul li {
-  float: left;
-  margin-left: 50px;
-  line-height: 80px;
-}
-#headerBottom #nav #Triangle {
-  position: absolute;
-  top: 42px;
-  left: 59px;
-}
-/**************banner*************************/
-#banner {
-  width: 100%;
-  height: 360px;
-  clear: both;
-}
-#banner #bannerImageList img {
-  width: 100%;
-  height: 360px;
-}
-/**********************ÁôªÂΩïdiv************************/
-#loginDiv {
-  position: relative;
-  top: 30px;
-  z-index: 999;
-}
-#loginDiv #loginDivList {
-  position: absolute;
-  right: 0px;
-}
-#loginDiv #loginDivList #loginDivTop {
-  padding-top: 10px;
-  width: 250px;
-  height: 190px;
-  text-align: center;
-  color: #ffffff;
-  background-image: url("/templets/style/html/images/image/opacityBackground.png");
-  background-repeat: repeat;
-}
-#loginDiv #loginDivList #loginDivTop #immediatelyTitle {
-  font-size: 20px;
-  font-weight: bold;
-}
-#loginDiv #loginDivList #loginDivTop p {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-#loginDiv #loginDivList #loginDivTop #immediatelyButton,
-#loginDiv #loginDivList #loginDivTop #openAccountButton {
-  display: inline-block;
-  width: 210px;
-  margin-left: 20px;
-  height: 30px;
-  margin-bottom: 10px;
-}
-#immediatelyButton{
-  /*width: 210px;*/
-  /*margin-left: 20px;*/
-  background: url("/templets/style/html/images/image/immediatelyBotton.png") no-repeat;
-}
-#immediatelyButton:hover{
-  background: url("/templets/style/html/images/image/immediatelyBottonHover.png") no-repeat;
-}
-#openAccountButton{
-  background: url("/templets/style/html/images/image/openAccountBottom.png") no-repeat;
-}
-#openAccountButton:hover{
-  background: url("/templets/style/html/images/image/openAccountBottomHover.png") no-repeat;
-}
-#loginDiv #loginDivList #loginDivTop #RechargeButton,
-#loginDiv #loginDivList #loginDivTop #WithdrawalsButton {
-  width: 100px;
-  display: inline-block;
-  height: 30px;
-  margin-left: 1px;
-}
-#RechargeButton{
-  background: url("/templets/style/html/images/image/Recharge.png") no-repeat;;
-}
-#RechargeButton:hover{
-  background: url("/templets/style/html/images/image/RechargeHover.png") no-repeat;;
-}
-#WithdrawalsButton{
-  background: url("/templets/style/html/images/image/Withdrawals.png") no-repeat;;
-}
-#WithdrawalsButton:hover{
-  background: url("/templets/style/html/images/image/WithdrawalsHover.png") no-repeat;;
-}
-#loginDiv #loginDivList #loginDivTop #RechargeButton {
-  margin-right: 5px;
-}
-#loginDiv #loginDivList #loginDivBottom {
-  width: 210px;
-  padding: 0px 20px 3px;
-  margin-top: 10px;
-  height: 87px;
-  background-color: #ffffff;
-  overflow: hidden;
-}
-#loginDiv #loginDivList #loginDivBottom .NoticeTitle {
-  line-height: 40px;
-  height: 40px;
-  width: auto;
-  font-size: 16px;
-  color: #333333;
-  border-bottom: 1px solid #ffb725;
-  text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.NoticeDescribe{
-  text-overflow: ellipsis;
-  overflow: hidden;
-
-}
-#loginDiv #loginDivList #loginDivBottom p {
-  line-height: 22px;
-  font-size: 12px;
-  color: #666666;
-}
-#tradeMarket {
-  background-color: #f2f2f2;
-  padding: 20px 0px 0px;
-  width: 100%;
-  overflow: hidden;
-}
-#tradeMarket #tradeContent {
-  height: 530px;
-  background-color: #ffffff;
-  border-bottom: 2px solid #cccccc;
-}
-#tradeMarket #tradeContent #productList {
-  width: 195px;
-  height: 487px;
-  overflow: auto;
-  float: left;
-  background-color: #ffffff;
-}
-#tradeMarket #tradeContent #productList ul {
-  width: 100%;
-  height: auto;
-}
-#tradeMarket #tradeContent #productList ul li {
-  width: 165px;
-  padding: 0px 20px 0px 10px;
-  height: 60px;
-  border-bottom: 1px solid #e6e6e6;
-  line-height: 25px;
-  font-size: 14px;
-  position: relative;
-  cursor: pointer;
-}
-#tradeMarket #tradeContent #productList ul li span {
-  display: inline-block;
-  width: 48.5% ;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-#tradeMarket #tradeContent #productList ul li .textAlignRight {
-  text-align: right;
-}
-#tradeMarket #tradeContent #productList ul li .productBottom {
-  /*margin-top: 10px;*/
-}
-#tradeMarket #tradeContent #productList ul li .Arrow {
-  position: absolute;
-  top: 25px;
-  left: 94px;
-}
-#tradeMarket #tradeContent #chart {
-  float: left;
-  width: 1085px;
-  height: 487px;
-  background-color: #ffffff;
-}
-#tradeMarket #tradeContent #chart #chartDiv{
-width: 1085px;
-height: 427px;
-}
-#tradeMarket #tradeContent #chart #productTitle {
-  line-height: 60px;
-  height: 60px;
-  border-bottom: 1px solid #e6e6e6;
-}
-#tradeMarket #tradeContent #chart #productTitle span {
-  margin-left: 160px;
-  width: auto ;
-  height: 60px;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 16px;
-  font-weight: bold;
-}
-#tradeMarket #tradeContent #chart #productTitle a {
-  display: inline-block;
-  margin-left: 160px;
-  width: 120px;
-  height: 40px;
-  vertical-align: middle;
-  background: url("/templets/style/html/images/image/RechargeTrade Hover.png") no-repeat;
-}
-#tradeMarket #tradeContent #chart #productTitle a:hover{
-  background: url("/templets/style/html/images/image/RechargeTrade .png") no-repeat;
-}
-#tradeMarket #tradeContent #newList {
-  float: left;
-  width: 364px;
-  height: 487px;
-  border-left: 1px solid #e6e6e6;
-  background-color: #ffffff;
-}
-#tradeMarket #tradeContent #newList #newTitle {
-  height: 61px;
-  width: 100%;
-  line-height: 60px;
-  color: #333333;
-  cursor: pointer;
-  background: url("/templets/style/html/images/image/lingBack.png") repeat;
-  overflow: hidden;
-  font-size: 16px;
-  position: relative;
-}
-#tradeMarket #tradeContent #newList #newTitle ul {
-  width: 100%;
-  height: auto;
-  padding: 0px 20px;
-}
-#tradeMarket #tradeContent #newList #newTitle ul li {
-  float: left;
-  width: 106px;
-}
-#tradeMarket #tradeContent #newList #newTitle #TriangleIcon {
-  position: absolute;
-  clear: both;
-  top: 52px;
-  left: 45px;
-  z-index: 100;
-}
-#tradeMarket #tradeContent #newList #relateInformation {
-  width: 324px;
-  padding: 0px 20px;
-  height: auto;
-  display: none;
-}
-#tradeMarket #tradeContent #newList #relateInformation ul li {
-  height: 80px;
-  line-height: 40px;
-  border-bottom: 1px solid #e6e6e6;
-}
-#tradeMarket #tradeContent #newList #relateInformation ul li p {
-  color: #666666;
-  font-size: 14px;
-  font-weight: bold;
-}
-#tradeMarket #tradeContent #newList #relateInformation ul li p a {
-  color: #666666;
-}
-#tradeMarket #tradeContent #newList #relateInformation ul li p span {
-  color: #999999;
-  font-weight: normal;
-  display: inline-block;
-  width: 50%;
-}
-#tradeMarket #tradeContent #newList #relateInformation ul li p .timeAgo {
-  text-align: right;
-}
-#tradeMarket #tradeContent #newList #realTimeNew {
-  width: 324px;
-  padding: 0px 20px;
-  height: auto;
-  display: block;
-}
-#tradeMarket #tradeContent #newList #realTimeNew ul li {
-  height: 80px;
-  line-height: 40px;
-  border-bottom: 1px solid #e6e6e6;
-}
-#tradeMarket #tradeContent #newList #realTimeNew ul li p {
-  color: #666666;
-  font-size: 14px;
-}
-#tradeMarket #tradeContent #newList #realTimeNew ul li p a {
-  color: #666666;
-}
-#tradeMarket #tradeContent #newList #realTimeNew ul li span {
-  color: #999999;
-  font-size: 14px;
-}
-#tradeMarket #tradeContent #newList #DynamicTrader {
-  width: 324px;
-  padding: 0px 20px;
-  height: auto;
-  display: none;
-}
-#tradeMarket #tradeContent #newList #DynamicTrader ul li {
-  height: 80px;
-  line-height: 40px;
-  border-bottom: 1px solid #e6e6e6;
-  font-size: 14px;
-}
-#tradeMarket #tradeContent #newList #DynamicTrader ul li p {
-  color: #999999;
-}
-#tradeMarket #tradeContent #newList #DynamicTrader ul li span {
-  color: #666666;
-}
-#tradeMarket #tradeContent #newList #DynamicTrader ul li span i {
-  font-style: normal;
-  text-decoration: underline;
-}
-.tradeMarketTop {
-  height: 40px;
-  width: 100%;
-  line-height: 40px;
-  border-bottom: 2px solid #ffb725;
-  position: relative;
-  vertical-align: middle;
-}
-.tradeMarketTop span {
-  font-size: 20px;
-  color: #333333;
-  display: inline-block;
-  width: auto;
-  height: 38px;
-  line-height: 40px;
-}
-.tradeMarketTop span a {
-  color: #333333;
-}
-.tradeMarketTop span i {
-  font-style: normal;
-  color: #666666;
-  font-size: 14px;
-  margin-left: 11px;
-  line-height: 38px;
-}
-.tradeMarketTop img {
-  margin-top: 10px;
-}
-#productList::-webkit-scrollbar {
-  width: 5px;
-  height: 0px;
-  color: #e6e6e6;
-}
-#productListt::-webkit-scrollbar-button {
-  background-color: #e6e6e6;
-}
-#productList::-webkit-scrollbar-track {
-  background: #e6e6e6;
-}
-#productList::-webkit-scrollbar-track-piece {
-  width: 5px;
-}
-#productList::-webkit-scrollbar-thumb {
-  background: #ffb319;
-  border-radius: 4px;
-  background: url('/templets/style/html/images/image/scoller.png');
-}
-#productList::-webkit-scrollbar-corner {
-  background: #82AFFF;
-  height: 1px;
-}
-a{
-  color:#333333;
-}
-.moreIconDiv {
-  position: absolute;
-  right: 10px;
-  display: inline-block;
-  width: auto;
-  height: auto;
-}
-#mainContent {
-  width: 100%;
-  height: auto;
-  background-color: #f2f2f2;
-  overflow: hidden;
-  padding-top:0.5px;
-}
-#mainContent .center {
-  float: left;
-  margin-top: 10px;
-}
-#mainContent #EconomicCalendar {
-  width: 906px;
-  position: relative;
-  background-color: #ffffff;
-  border-bottom: 2px solid #cccccc;
-  overflow: hidden;
-  height:288px;
-}
-#EconomicCalendarList ul li {float: left;font-size: 16px;}
-#EconomicCalendarList .calendar_time_title {font-size: 16px; background: #fff; height: 40px; line-height: 40px; padding: 0 10px; border-bottom: 1px solid #e5e5e5;}
-#EconomicCalendarList .data {width: 100px;}
-#EconomicCalendarList .importance {width: 100px;}
-#EconomicCalendarList .countries {width: 100px;}
-#EconomicCalendarList .incident {width: 270px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
-#EconomicCalendarList .newValue {width: 110px;}
-#EconomicCalendarList .expect {width: 100px;}
-#EconomicCalendarList .formerValue {width: 100px;}
-.calendar_time_Content{
-  font-size: 14px !important;  background: #fff; height: 40px; line-height: 40px; padding: 0 10px; border-bottom: 1px solid #e5e5e5;
-}
-.calendar_time_Content li{
-  font-size: 14px;
-}
-#EconomicCalendarList .importance img{
-  margin-right: 5px;
-}
-#mainContent #directSeeding {
-  float: left;
-  margin-top: 10px;
-  margin-left: 10px;
-  padding-bottom: 10px;
-  width: 362px;
-  background-color: #ffffff;
-  height: auto;
-  border-bottom: 2px solid #cccccc;
-}
-#mainContent #directSeeding #directSeedingList {
-  margin: 10px 10px 0px;
-  width: 342px;
-  height: 895px;
-  border-bottom: 1px solid #dedede;
-}
-#mainContent #directSeeding #directSeedingList ul {
-  width: 100%;
-  height: auto;
-}
-#mainContent #directSeeding #directSeedingList ul li {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-#mainContent #directSeeding #directSeedingList ul li div {
-  float: left;
-}
-#mainContent #directSeeding #directSeedingList ul li .iconLine {
-  width: 11px;
-}
-#mainContent #directSeeding #directSeedingList ul li .iconLine img {
-  width: 100%;
-  height: auto;
-}
-#mainContent #directSeeding #directSeedingList ul li .directSeedingListContentTop {
-  cursor: pointer;
-}
-#mainContent #directSeeding #directSeedingList ul li .directSeedingListContent {
-  width: 320px;
-  background-image: url("/templets/style/html/images/image/grayLineIcon.png");
-  background-repeat: no-repeat;
-  padding-left: 20px;
-  height: auto;
-}
-#mainContent #directSeeding #directSeedingList .directSeedingDate {
-  color: #999999;
-  font-size: 14px;
-}
-#mainContent #directSeeding #directSeedingList .directSeedingTitle {
-  width: 100%;
-  height: 35px;
-  line-height: 35px;
-  font-size: 14px;
-  color: #333333;
-  font-weight: bold;
-  margin-bottom: 12px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-#mainContent #directSeeding #directSeedingList .directSeedingTitle a {
-  color: #333333;
-  width: 100%;
-  display: inline-block;
-  height: 35px;
-  line-height: 35px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-#mainContent #directSeeding #directSeedingList .directSeedingTitle a:hover {
-    color: #ffb319;
-}
-#mainContent #directSeeding #directSeedingList .directSeedingContent {
-  color: #666666;
-  font-size: 14px;
-  line-height: 25px;
-  display: none;
-  height:165px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-#FuturesSchool {
-  margin-top: 10px;
-  background-color: #ffffff;
-  border-bottom: 2px solid #cccccc;
-  width: 906px;
-}
-#FuturesSchool .FuturesSchoolTtile {
-  margin-top: 10px;
-  padding-left: 10px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop {
-  width: 100%;
-  padding-bottom: 10px;
-  height: auto;
-  overflow: hidden;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop div {
-  float: left;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .peopleImage {
-  width: 73px;
-  height: 73px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .peopleImage img {
-  width: 100%;
-  height: auto;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .peopleImageContent {
-  width: 815px;
-  height: 73px;
-  padding-left: 5px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .peopleImageContent p {
-  color: #333333;
-  font-size: 16px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .peopleImageContent .peopleImageContentTitle {
-  margin-top: 10px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .peopleImageContent .peopleImageContentContent {
-  height: 40px;
-  line-height: 40px;
-  font-size: 14px;
-  color: #666666;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .leftImage {
-  width: 480px;
-  height: auto;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .leftImage img {
-  width: 100%;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent {
-  width: 410px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li {
-  width: 100%;
-  height: auto;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li div {
-  float: left;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li .numberIcon {
-  width: 100px;
-  height: 80px;
-  text-align: center;
-  font-size: 20px;
-  color: #ffb319;
-  line-height: 40px;
-  font-weight: bold;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList {
-  height: 80px;
-  width: 310px;
-  border-bottom: 1px solid #dedede;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList p {
-  margin-top: 5px;
-  font-size: 14px;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList p a {
-  color: #333333;
-}
-#FuturesSchool .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList p a:hover {
-    color: #ffb319;
-}
-#viewpoint {
-  width: 906px;
-  height: 257px;
-  border-bottom: 2px solid #cccccc;
-  background-color: #ffffff;
-}
-#viewpoint #viewpointContent {
-  width: 886px;
-  height: auto;
-  padding: 0px 10px 10px ;
-  overflow: hidden;
-}
-#viewpoint #viewpointContent div {
-  float: left;
-}
-#viewpoint #viewpointContent .viewpointContentList {
-  width: 462px;
-  padding-right: 10px;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li {
-  font-size: 14px;
-  line-height: 40px;
-  height: 40px;
-  border-bottom: 1px solid #e6e6e6;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li img {
-  vertical-align: middle;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li .numberCode{
-  font-size: 12px !important;
-  padding: 2px 5px;
-  color:#ffffff;
-  background-color: #999999;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li .viewpointContentListTitle {
-  margin-left: 20px;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li .viewpointContentListTitle a {
-  color: #333333;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li .viewpointContentListTitle a:hover {
-    color: #ffb319;
-}
-#viewpoint #viewpointContent .viewpointContentList ul li .viewpointContentAuthor {
-  display: block;
-  float: right;
-}
-#viewpoint #viewpointContent .viewpointContentListImage {
-  width: 408px;
-  height: auto;
-}
-#viewpoint #viewpointContent .viewpointContentListImage img {
-  width: 100%;
-  height: auto;
-}
-#CooperativePartner {
-  width: 100%;
-  padding: 10px 0px 20px ;
-  height: auto;
-  background-color: #f2f2f2;
-}
-#CooperativePartner #CooperativePartnerList {
-  background-color: #ffffff;
-  height: auto;
-  border-bottom: 2px solid #cccccc;
-}
-#CooperativePartner #CooperativePartnerList ul {
-  height: 120px;
-  padding: 0px 19px;
-  overflow: hidden;
-}
-#CooperativePartner #CooperativePartnerList ul li {
-  height: 120px;
-  float: left;
-  margin-right: 5px;
-}
-#CooperativePartner #CooperativePartnerList ul li img {
-  margin-top: 30px;
-  border-radius: 3px;
-  width: 150px!important;
-  height: 60px;
-}
-#CooperativePartner #CooperativePartnerList ul li img:hover {
-    opacity: 0.9;
-}
-#CooperativePartner #CooperativePartnerList ul .lastImage {
-  margin-right: 0px;
-}
-#footer {
-  background-color: #333333;
-  height: auto;
-  overflow: hidden;
-  padding: 40px 0px 35px;
-}
-#footer .commonWidth div {
-  float: left;
-}
-#footer .footerList ul {
-  float: left;
-  width: 165px;
-}
-#footer .footerList ul li {
-  font-size: 14px;
-  line-height: 24px;
-}
-#footer .footerList ul li a {
-  color: #999999;
-  display: inline-block;
-  height: 24px;
-  line-height: 24px;
-}
-#footer .footerList ul .footerTitle {
-  margin-bottom: 25px;
-}
-#footer #QRcode {
-  float: left;
-}
-#footer #QRcode #iOS,
-#footer #QRcode #Android {
-  width: 160px;
-  height: auto;
-  text-align: center;
-  margin-right: 80px;
-}
-#footer #QRcode #iOS img,
-#footer #QRcode #Android img {
-  width: 160px;
-  height: auto;
-}
-#footer #QRcode #iOS p,
-#footer #QRcode #Android p {
-  margin-top: 8px;
-  color: #ffffff;
-  font-size: 14px;
-}
-#footer #customerService {
-  float: left;
-  width: 100px;
-  margin-left: 15px;
-}
-#Copyright {
-  width: 100%;
-  background-color: #f2f2f2;
-}
-#Copyright div {
-  width: 635px;
-  padding: 30px 0px;
-  margin: auto;
-  font-size: 12px;
-  text-align: center;
-  line-height: 20px;
-  color: #999999;
-}
-#Copyright div a {
-  line-height: 20px;
-  margin-left: 5px;
-  color: #999999;
-}
-#loginDivContent {
-  position: fixed;
-  top: 100px;
-  left: 500px;
-  z-index: 999;
-  display: none;
-}
-#loginDivTitle {
-  height: 383px;
-  width: 360px;
-  background-color: #ffffff;
-}
-#loginDivTitle p {
-  width: 300px;
-  padding: 0px 30px;
-  height: 60px;
-  line-height: 60px;
-  font-size: 16px;
-  border-bottom: 1px solid #e6e6e6;
-}
-#loginDivTitle p #close {
-  margin-left: 100px;
-  cursor: pointer;
-}
-#loginDivTitle #informationLogin {
-  width: 300px;
-  padding: 0px 30px;
-}
-#loginDivTitle #informationLogin p {
-  height: 50px;
-  padding: 30px 0px 0px 0px;
-  border-bottom: 1px solid #e6e6e6;
-  color: #999999;
-  font-size: 14px;
-}
-#loginDivTitle #informationLogin p label {
-  margin-top: 46px;
-}
-#loginDivTitle #informationLogin p input {
-  border: none;
-  height: 40px;
-  width: 250px;
-  outline: none;
-  padding-left: 5px;
-}
-#loginDivTitle #informationLogin p #checkBox {
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-#loginDivTitle #informationLogin p #ForgetPassword {
-  margin-left: 107px;
-  color: #ffb319;
-}
-#loginDivTitle a {
-  color: #333333;
-}
-#loginDivTitle i {
-  font-style: normal;
-  margin: 0px 10px;
-  color: #e6e6e6;
-}
-#bannerImageList{
-  position: relative;
-}
-.slide_banner a{
-  position: absolute;
-  left: 0px;
-  width: 100%;
-  height: auto;
-}
-#ad-slider{
-  position: absolute;
-  left:45%;
-  bottom: 10px;
-  z-index: 999;
-}
-.slide_banner,#slide-box{
-  width: 100%;
-  height: 360px;
-  overflow: hidden;
-}
-#slide-box img{
-  width: 100%;
-  height: 360px !important;
-}
-#ad-slider a{
-  display: inline-block;
-  width: 15px;
-  border:1px solid #ffffff;
-  border-radius: 50%;
-  text-align: center;
-  height: 15px;
-  background-color: rgba(0,0,0,0);
-  margin-left: 8px;
-}
-#slide_banner a{
-  height: 360px;
-  overflow: hidden;
-}
-.on{
-  background-color: #ffffff !important;
-}
-#webNotice{
-  height: 50px;
-  line-height: 50px;
-  overflow: hidden;
-  background-color: #333333;
-}
-#webNotice .commonWidth{
-  height: 50px;
-  position: relative;
-}
-#webNotice h2{
-  display: block;
-  float: left;
-  padding-right: 10px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 14px;
-  color: #ffb319;
-  font-weight: normal;
-  padding-left: 28px;
-  background: url("/templets/style/html/images/image/laba.png") no-repeat left center;
-  background-size: 20px 18px;
-
-}
-#webNotice ul{
-  width: 1150px;
-  height: 50px;
-  float: left;
-  overflow: hidden;
-}
-#webNotice ul li{
-  display: block;
-  float: left;
-  text-align: left;
-  height: 30px;
-  margin-top: 10px;
-  /*padding:10px 0px;*/
-  width: 500px;
-  overflow: hidden;
-}
-#webNotice ul li a{
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color:#ffffff;
-  font-size: 14px;
-  width: 400px;
-  padding: 0px 60px 0px 20px;
-  height: 30px;
-  position: relative;
-  line-height: 30px;
-  background: url("/templets/style/html/images/image/webNoticeBg.png") no-repeat;
-  background-size: 100% 100%;
-}
-#webNotice ul li a span{
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-#webNotice ul li a .timeDate {
-  font-size: 14px;
-  color: #666666;
-  vertical-align: middle;
-  position: absolute;
-  right: 20px;
-  top: 0px;
-  font-style: normal;
-}
+#loginDivTop p {    margin-bottom: 10px;    font-size: 16px;}.zs {    margin-right: 10px;}#loginDivTop #immediatelyTitle {    font-size: 20px;    font-weight: bold;    margin-bottom: 10px;    padding-top: 5px;}#loginDivTop a {    display: inline-block;    width: 210px;    height: 30px;    margin-bottom: 5px;}#immediatelyButton {    background: url("/templets/style/html/images/image/immediatelyBotton.png") no-repeat;}#immediatelyButton:hover {    background: url("/templets/style/html/images/image/immediatelyBottonHover.png") no-repeat;}#openAccountButton {    background: url("/templets/style/html/images/image/openAccountBottom.png") no-repeat;}#openAccountButton:hover {    background: url("/templets/style/html/images/image/openAccountBottomHover.png") no-repeat;}#loginDivTop #RechargeButton {    background: url("/templets/style/html/images/image/Recharge.png") no-repeat;    width: 100px;    display: inline-block;    height: 30px;}#loginDivTop #RechargeButton:hover {    background: url("/templets/style/html/images/image/RechargeHover.png") no-repeat;}#loginDivTop #WithdrawalsButton {    background: url("/templets/style/html/images/image/Withdrawals.png") no-repeat;    width: 100px;    display: inline-block;    height: 30px;    margin-left: 6px;}#loginDivTop #WithdrawalsButton:hover {    background: url("/templets/style/html/images/image/WithdrawalsHover.png") no-repeat;}#homepage {    width: 1280px;    margin: 0px auto;    position: relative;}#bannerImageList {    width: 1280px;    height: 320px;    position: relative;}#bannerImageList .slide_box {    width: 1280px;    height: 320px;}#bannerImageList .slide_box a{    width: 1280px;    height: 320px;    position: absolute;}#bannerImageList .slide_box img{    width: 1280px;    height: 320px;    position: absolute;}#bannerImageList .ad_slider{    position: absolute;    width: 100%;    text-align: center;    z-index: 10;    bottom: 10px;}#bannerImageList .ad_slider a{    display: inline-block;    width: 16px;    text-align: center;    height: 16px;    margin: 0px 5px;    background: url("/templets/style/html/images/image/banner_no.png");}#bannerImageList .ad_slider a.on {    background: url("/templets/style/html/images/image/banner_on.png");}#loginDiv {    position: absolute;    width: 240px;    height: 280px;    right: 20px;    top: 20px;    z-index: 99;}#loginDivTop {    height: 190px;    width: 240px;    text-align: center;    color: #ffffff;    background: url("/templets/style/html/images/image/opacityBackground.png") repeat;}#loginDivBottom {    width: 240px;    margin-top: 10px;    height: 80px;    background-color: #ffffff;    overflow: hidden;}#loginDivBottom .NoticeTitle {    line-height: 30px;    height: 30px;    width: auto;    font-size: 14px;    color: #333333;    border-bottom: 1px solid #ffb725;    text-align: center;    font-weight: bolder;}#loginDivBottom .NoticeDescribe {    line-height: 20px;    font-size: 12px;    color: #666666;    text-indent: 2em;    padding: 5px 10px;    height: 40px;    overflow: hidden;}#webNotice {    height: 50px;    line-height: 50px;    overflow: hidden;    background-color: #333333;    position: relative;}#webNotice h2 {    display: block;    float: left;    margin-right: -10px;    height: 50px;    line-height: 50px;    font-size: 14px;    color: #ffb319;    font-weight: normal;    padding-left: 28px;    background: url("/templets/style/html/images/image/laba.png") no-repeat left center;    background-size: 20px 18px;    margin-left: 20px;}#webNotice ul {    width: 1100px;    float: left;    overflow: hidden;    margin-top: 18px;    height: 16px;    line-height: 16px;}#webNotice ul li {    width: 500px;    float: left;    overflow: hidden;    position: relative;    margin-top: -1px;    padding-left: 20px;    padding-right: 20px;    border-right: 1px solid #fff;    height: 18px;    line-height: 18px;}#webNotice ul li a{    color: #ffb319;    font-size: 14px;}#webNotice ul li .new_title{    width: 430px;    overflow: hidden;    text-overflow: ellipsis;    white-space: nowrap;    display: inline-block;}#webNotice ul li .timeDate{    float: right;    font-size: 12px;    color: #666;}#webNotice .moreIconDiv {    position: absolute;    right: 20px;    display: inline-block;    width: auto;    height: auto;    top: -2px;}#webNotice .moreIconDiv:hover {    opacity: 0.8;}#h_scroll li a {font-size: 14px; color: #ffb319;}#h_scroll li a:hover {color: #ffb319;}/*quotation*/#quotation {    height: 370px;    width: 734px;    position: relative;    top: 0px;    left: 12px;}#quotation_tab {    margin-top: 20px;    height: 100px;    background: #333;    position: relative;}#prev {    width: 120px;    height: 100px;    float: left;    display: inline-block;}#prev span {    background: url("/templets/style/html/images/image/left_on.png") no-repeat;    width: 40px;    height: 40px;    display: inline-block;    margin-left: 60px;    margin-top: 30px;}#prev span:hover {    background: url("/templets/style/html/images/image/left.png") no-repeat;    cursor: pointer;}#next {    width: 120px;    height: 100px;    float: left;    display: inline-block;    border-left: 1px solid #4d4d4d;}#next span {    background: url("/templets/style/html/images/image/right.png") no-repeat;    width: 40px;    height: 40px;    display: inline-block;    margin-left: 20px;    margin-top: 30px;}#next span:hover {    background: url("/templets/style/html/images/image/right_on.png") no-repeat;    cursor: pointer;}#quotation_lis {    height: 100px;    float: left;    overflow: hidden;    width: 1000px;    position: relative;}#commodityListData {    float: left;    position: absolute;}#quotation_lis ul li{    text-align: center;    width: 99px;    border-left: 1px solid #4d4d4d;    float: left;    height: 100px;    display: inline-block;}#quotation_lis ul li:hover {    cursor: pointer;}#quotation_lis ul li.on{    background: #1a1a1a;}#quotation_lis ul li span{    display: block;}#quotation_tab .moreIconDiv {    position: absolute;    right: 20px;    margin-top: 35px;    height: 30px;    line-height: 24px;}#quotation_lis .name {    color: #f2f2f2;    font-size: 14px;    margin-top: 6px;    height: 24px;    line-height: 24px;}#quotation_lis .qlast {    color: #f2f2f2;    font-size: 12px;    margin-top: 5px;    height: 16px;    line-height: 16px;}#quotation_lis .qchange {    font-size: 12px;    margin-top: 4px;    height: 16px;    line-height: 16px;}#quotation_lis .productBottom {    font-size: 12px;    margin-top: 4px;    height: 16px;    line-height: 16px;}#quotation_lis label{    display: inline-block;    width: 56PX;    white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;}#quotation_lis b{    position: relative;    top: -7px;}#homepage_left {    width: 920px;    float: left;}#quotation_all .quotation_name{    float: left;    width: 120px;    height: 450px;    font-size: 16px;    color: #fff;    background: #ffb319;    border-bottom: 1px solid #ffd57f;}#quotation_all .quotation_name span {    margin-top: 40px;    margin-left: 20px;    display: inline-block;    font-weight: bolder;}#quotation_all .quotation_title {    padding: 0 20px;}#quotation_all .quotation_title .quotation_title_left {    float: left;    color: #333;    font-size: 20px;    height: 100px;    line-height: 100px;    width: 430px;}#quotation_all .quotation_title .quotation_title_left label{    font-size: 16px;}#quotation_all .quotation_title .quotation_title_right {    float: left;    font-size: 12px;    color: #999;    line-height: 20px;    margin-top: 20px;    border-left: 1px solid #ccc;    padding-left: 10px;}#cp {    background: url("/templets/style/html/images/image/chaopan.png") no-repeat;    display: inline-block;    width: 120px;    height: 40px;    text-align: center;    line-height: 40px;    margin-top: 30px;    font-size: 20px;}#cp:hover {    background: url("/templets/style/html/images/image/chaopan_on.png");}#quotation_all .quotation_all {    float: left;    width: 800px;    height: 450px;    background: #f2f2f2;    border-bottom: 1px solid #ccc;}#calendar .calendar_name{    float: left;    width: 120px;    height: 340px;    font-size: 16px;    color: #fff;    background: #ff8c19;    border-bottom: 1px solid #ffd57f;}#calendar .calendar_name span {    margin-top: 40px;    margin-left: 20px;    display: inline-block;    font-weight: bolder;}#calendar .calendar_all {    float: left;    width: 800px;    height: 340px;    background: #f2f2f2;    border-bottom: 1px solid #ccc;}#calendar .calendar_all .calendar_tab {    padding: 30px 20px;    font-size: 14px;    color: #333;}#calendar .calendar_all .calendar_tab p {    background: #fff;    border-left: 1px solid #e6e6e6;    border-right: 1px solid #e6e6e6;}#calendar .calendar_all .calendar_tab p a {    width: 710px;    display: inline-block;    line-height: 40px;    height: 40px;    text-align: center;    margin-left: 20px;    color: #999;}#calendar .calendar_all .calendar_tab p a:hover {    color: #ffb319;}#calendar .calendar_all .calendar_tab ul {    height: 40px;    line-height: 39px;    padding: 0 20px;}#calendar .calendar_all .calendar_tab ul .data{    width: 80px;}#calendar .calendar_all .calendar_tab ul .importance{    width: 80px;}#calendar .calendar_all .calendar_tab ul .countries{    width: 70px;}#calendar .calendar_all .calendar_tab ul .incident{    width: 238px;    white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;    padding-right: 10px;}#calendar .calendar_all .calendar_tab ul .newValue{    width: 80px;}#calendar .calendar_all .calendar_tab ul .expect{    width: 80px;}#calendar .calendar_all .calendar_tab ul .formerValue{    width: 80px;}#calendar .calendar_all .calendar_tab ul.calendar_time_title {    background: #e6e6e6;}#calendar .calendar_all .calendar_tab ul.calendar_time_Content {    background: #fff;    border-left: 1px solid #e6e6e6;    border-right: 1px solid #e6e6e6;}#calendar .calendar_all .calendar_tab ul.calendar_time_Content li {    border-bottom: 1px solid #e6e6e6;}#calendar .calendar_all .calendar_tab ul li{    float: left;}#vs_viewpoint .vs_viewpoint_name{    float: left;    width: 120px;    height: 400px;    font-size: 16px;    color: #fff;    background: #ff6619;}#vs_viewpoint .vs_viewpoint_name span {    margin-top: 40px;    margin-left: 20px;    display: inline-block;    font-weight: bolder;}#vs_viewpoint .vs_viewpoint_all {    float: left;    width: 800px;    height: 400px;    background: #f2f2f2;}#vs_viewpoint .vs_viewpoint_title {    margin: 30px 20px;    font-size: 14px;    color: #333;    background: #fff;    border-bottom: 1px solid #e6e6e6;    border-top: 1px solid #e6e6e6;    border-left: 1px solid #e6e6e6;    border-right: 1px solid #e6e6e6;    width: 758px;    height: 338px;}#vs_viewpoint .vs_viewpoint_title a{    height: 59px;    line-height: 59px;    width: 720px;    border-bottom: 1px solid #e6e6e6;    font-weight: bolder;    display: inline-block;    margin-left: 20px;    color: #333;    float: left;}#vs_viewpoint .vs_viewpoint_title a:hover {    cursor: pointer;}#vs_viewpoint .vs_viewpoint_title a .title {    white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;    width: 500px;    display: inline-block;}#vs_viewpoint .vs_viewpoint_title a:hover {    color: #ffb319;;}#vs_viewpoint .vs_viewpoint_title a label {    float: right;}#vs_viewpoint .vs_viewpoint_title a label:hover {    cursor: pointer;}#vs_viewpoint .vs_viewpoint_title a .name {    color: #999;    font-size: 12px;    font-weight: normal;}#vs_viewpoint .vs_viewpoint_title a .time {    color: #999;    font-size: 12px;    margin-left: 20px;    font-weight: normal;}#vs_viewpoint .vs_viewpoint_title .more {    line-height: 40px;    height: 40px;    background: #fff;    text-align: center;}#vs_viewpoint .vs_viewpoint_title .more a {    line-height: 40px;    height: 40px;    font-weight: normal;    color: #999;    border-bottom: none;}#vs_viewpoint .vs_viewpoint_title .more:hover a {    color: #ffb319;}#homepage_right {    width: 360px;    float: left;    background: #e6e6e6;}#homepage_right .information {    padding: 20px;    border-bottom: 2px dashed #fff;}#homepage_right .information p{    background: #fff;}#homepage_right .information .p1 {    padding-left: 10px;    padding-right: 20px;    font-size: 16px;    color: #ffb319;    height: 50px;    line-height: 50px;    border-bottom: 2px solid #ffb319;    position: relative;}#homepage_right .information .p1 a{    float: right;    height: 30px;    line-height: 26px;    margin-top: 10px;}#homepage_right .information .p2 {    height: 60px;    line-height: 60px;    margin: -1px auto 0;    border-top: 1px solid #e6e6e6;    width: 300px;}#homepage_right .information .p2 span {    color: #fff;    font-size: 12px;    background: #999;    margin-right: 10px;    width: 40px;    height: 20px;    line-height: 20px;    display: inline-block;    text-align: center;    float: left;    margin-top: 20px;}#homepage_right .information .p2 a {    font-size: 14px;    color: #333;    font-weight: bolder;    width: 248px;    white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;    display: inline-block;    float: left;}#homepage_right .information .p2 a:hover {    color: #ffb319;}#homepage_right .information .information_all {    background: #fff;    margin-bottom: 10px;}/*7x24÷±≤•*/#homepage_right .directSeedingList {    padding: 30px 20px;}#homepage_right .directSeedingList .p1 {    padding-left: 10px;    padding-right: 20px;    font-size: 16px;    color: #ffb319;    height: 50px;    line-height: 50px;    border-bottom: 2px solid #ffb319;    position: relative;    background: #fff;}#homepage_right .directSeedingList .p1 a {    float: right;    height: 30px;    line-height: 26px;    margin-top: 10px;}#homepage_right .directSeedingList ul {    width: 100%;    height: 656px;    background: #fff;    padding-top: 20px;    overflow: hidden;}#homepage_right .directSeedingList ul li {    width: 100%;    height: auto;    overflow: hidden;    margin-top: 5px;}#homepage_right .directSeedingList ul li .directSeedingListContent {    width: 270px;    background-image: url("/templets/style/html/images/image/grayLineIcon.png");    background-repeat: no-repeat;    padding-left: 20px;    margin-left: 10px;    height: auto;}#directSeedingList .directSeedingDate {    color: #999999;    font-size: 12px;}#directSeedingList a.hoverBlue{    width: 100%;    display: inline-block;    height: 30px;    line-height: 30px;    overflow: hidden;    text-overflow: ellipsis;    font-size: 14px;    color: #333;    font-weight: bolder;    white-space: nowrap;}#directSeedingList a.hoverBlue:hover {    color: #ffb319;    cursor: pointer;}#directSeedingList .directSeedingContent {    color: #666;    font-size: 14px;    line-height: 22px;    height: 135px;    overflow: hidden;    text-overflow: ellipsis;    margin-top: -5px;    display: none;}#directSeedingList .directSeedingListAcitve .directSeedingContent {    display: block;}#directSeedingList .directSeedingListAcitve .directSeedingListContent {    background: url("/templets/style/html/images/image/lineIcon.png") no-repeat !important;}#homepage_center {    height: 1192px;}/*∆⁄ªı—ßÃ√*/#futures .futures_title {    height: 50px;    line-height: 50px;    background: #333;    padding: 0 20px;}#futures .futures_title a {    float: right;    height: 30px;    line-height: 26px;    margin-top: 10px;}#futures .futures_title .name {    color: #ffb319;    font-size: 16px;}#futures .futures_title .jj {    color: #ccc;    font-size: 12px;    margin-left: 20px;}#futures .FuturesSchoolTtile {    padding: 20px;    border-right: 1px solid #e6e6e6;    border-left: 1px solid #e6e6e6;}#futures .FuturesSchoolTtile .futureTop {    width: 100%;    height: auto;    overflow: hidden;}#futures .FuturesSchoolTtile .leftImage img {    float: left;    width: 480px;    height: 244px;}#futures .FuturesSchoolTtile .futureTop .peopleImage {    width: 71px;    height: 72px;    margin-bottom: 20px;}#futures .FuturesSchoolTtile .futureTop .peopleImageContent {    width: 1140px;    height: 73px;    padding-left: 20px;}#futures .FuturesSchoolTtile .futureTop div {    float: left;}#futures .FuturesSchoolTtile .futureTop .peopleImageContent .peopleImageContentTitle {    margin-top: 10px;    font-weight: bolder;}#futures .FuturesSchoolTtile .futureTop .peopleImageContent p {    color: #333333;    font-size: 16px;}#futures .FuturesSchoolTtile .futureTop .peopleImageContent .peopleImageContentContent {    height: 40px;    line-height: 40px;    font-size: 14px;    color: #666666;}#futures .FuturesSchoolTtile .futureTop .rightContent {    width: 757px;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .numberIcon {    width: 120px;    height: 80px;    line-height: 80px;    text-align: center;    font-size: 28px;    color: #ffb319;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList {    height: 80px;    width: 636px;    border-bottom: 1px solid #dedede;    display: inline-block;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList:hover {    cursor: pointer;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList p a {    color: #333333;    font-size: 14px;    font-weight: bolder;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList:hover .hoverBlue {    color: #ffb319;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList .rightContentListContent {    margin-top: 15px;    color: #333;    font-size: 14px;    display: inline-block;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList .rightContentListContent:hover {    cursor: pointer;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList .hoverBlue {    font-weight: bolder;    margin-top: 5px;    display: inline-block;}#futures .FuturesSchoolTtile .futureTop .rightContent ul li .rightContentList .rightContentListDate {    margin-top: 6px;    color: #666;    font-size: 14px;    display: inline-block;    width: 430px;    white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;}#futures .FuturesSchoolTtile .author {    float: right;    margin-top: 32px;    color: #999;    font-size: 12px;}#futures .FuturesSchoolTtile .author:hover {    cursor: pointer;}/*∫œ◊˜ªÔ∞È*/#cooperation {    border-right: 1px solid #e6e6e6;    border-left: 1px solid #e6e6e6;    border-bottom: 1px solid #e6e6e6;}#cooperation .cooperation_top {    height: 50px;    line-height: 50px;    background: #333;    padding: 0 20px;}#cooperation .cooperation_top {    height: 50px;    line-height: 50px;    background: #333;    padding: 0 20px;    color: #ffb319;    font-size: 16px;}#cooperation .cooperation_top a {    float: right;    height: 30px;    line-height: 26px;    margin-top: 10px;}#cooperation ul li {    float: left;    margin: 20px 3px;}#cooperation ul {    height: 100px;    padding: 0px 15px;}#cooperation ul li img {    border-radius: 3px;    width: 150px;    height: 60px;}

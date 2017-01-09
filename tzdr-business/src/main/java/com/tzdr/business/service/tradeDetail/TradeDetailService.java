@@ -16,4 +16,10 @@ public interface TradeDetailService extends BaseService<TradeDetail>{
 	 * @param fsteId
 	 */
 	public List<TradeDetail> doGetByFtseId(String fsteId);
+	/**
+	 * 根据方案id清理数据
+	 * @param fastId
+	 * @return
+	 */
+	public void deleteByFastId(String fastId);
 }

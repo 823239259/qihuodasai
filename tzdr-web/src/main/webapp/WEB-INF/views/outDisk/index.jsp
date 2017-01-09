@@ -17,7 +17,7 @@
 <meta name="keywords" content="国际综合,维胜,外盘期货开户,A50,恒指,原油,德指,小恒指,美黄金,美白银,小原油,期货开户,期货交易,配资,期货配资"/>
 <meta name="description" content="国际综合-可同时操盘15种国际期货的当期主力合约，分别为：富时A50、恒指期货、国际原油、迷你纳指、迷你道指、迷你标普、德国DAX、日经225、小恒指、美黄金、美精铜、小原油、美白银、H股指数、小H股指数、迷你德国DAX指数。"/>
 <style>
-	#guojiqihuo {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
+	#customerTel ul li a#guojiqihuo {color: #ffb319;}
 </style>
 </head>
 <body>

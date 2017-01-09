@@ -69,7 +69,8 @@
 						"<td>"+_data.currencyNo+"</td>" +
 						"<td>"+_data.exchangeNo+"</td>" +
 						"<td>"+_data.commodityNo+"</td>" +
-						"<td>"+Number(parseInt(_data.buyNum)+parseInt(_data.sellNum))+"</td>" +
+						"<td>"+Number(_data.buyNum)+"</td>" +
+						"<td>"+Number(_data.sellNum)+"</td>" +
 						"<td>"+_data.tradePrice+"</td>" +
 						"<td>"+_data.free+"</td>" +
 						"<td>"+_data.orderType+"</td>" +
@@ -324,7 +325,7 @@
 		</li>			
 		<li class="mui-table-view-cell">
 			<label>交易时间：</label>
-			<span>09:05-23:55</span>
+			<span>09:05-02:00</span>
 		</li>
 	</ul>	
 	<div class="sc_listopen" id="opening" style="display: none;">开户中</div>
@@ -425,7 +426,8 @@
 						<td width="100px">币种</td>
 						<td width="100px">交易所</td>
 						<td width="80px">品种</td>
-						<td width="100px">交易手数</td>
+						<td width="80px">买</td>
+						<td width="80px">卖</td>
 						<td width="100px">成交价</td>
 						<td width="80px">手续费</td>
 						<td width="100px">下单类型</td>

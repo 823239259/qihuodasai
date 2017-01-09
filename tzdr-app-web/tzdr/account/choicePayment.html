@@ -30,9 +30,17 @@
 					<input name="choiceBank" type="radio"value="5">
 				</div>-->
 				<div class="mui-input-row mui-radio">
-					<label><img src="../../images/recharge/Transfer.png"><i>快捷支付</i></label>
-					<input name="choiceBank" type="radio"value="6" checked="checked">
+					<label><img src="../../images/recharge/zhifubao.png"><i>支付宝</i></label>
+					<input name="choiceBank" type="radio"value="10" checked="checked">
 				</div>
+				<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Quickpayment.png"><i>快捷支付</i></label>
+					<input name="choiceBank" type="radio"value="6" >
+				</div>
+				<!--<div class="mui-input-row mui-radio">
+					<label><img src="../../images/recharge/Transfer.png"><i>微信扫码支付</i></label>
+					<input name="choiceBank" type="radio"value="8" checked="checked">
+				</div>-->
 				<div class="mui-input-row mui-radio">
 					<label><img src="../../images/recharge/bankP.png"><i>网银支付</i></label>
 					<input name="choiceBank" type="radio" value="2" >
@@ -61,6 +69,7 @@
 					plus.webview.close("bankPay.html");
 				tzdr.init.initHearListener();
 				var wv = plus.webview.currentWebview();
+				var paymentMoney=document.getElementById("paymentMoney");
 				paymentMoney.innerText=wv.money.toFixed(2);
 				document.getElementById("recharge-btn").addEventListener("tap",function(){
 					immediatePayment(wv);
@@ -94,12 +103,33 @@
 					alipay(wv);
 				}else if(val == 6){
 					quickPay(wv);
+				}else if(val == 8){
+					qrcodePay(wv);
+				}else if(val==10){
+					mui.openWindow({
+						url:"bindzhifubao.html",
+						id:"bindzhifubao.html",
+						extras:{
+						  	money : wv.money,
+					        backId:wv.backId
+						}
+					})
 				}
 			}; 
 			function quickPay(wv){
 				plus.nativeUI.showWaiting( "正在跳转..." );
 				var money = wv.money;
 				var w = plus.webview.create("alipay.html","aliay",{top:"45px"},{data:money,type:6});
+				w.show();
+			}
+			/**
+			 * 微信扫码支付
+			 * @param {Object} wv
+			 */
+			function qrcodePay(wv){
+				plus.nativeUI.showWaiting( "正在跳转..." );
+				var money = wv.money;
+				var w = plus.webview.create("alipay.html","aliay",{top:"45px"},{data:money,type:8});
 				w.show();
 			}
 			/**

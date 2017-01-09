@@ -88,3 +88,25 @@ function tipAlert(tipContent){
 function tip(tipContent){
 	layer.msg(tipContent);
 }
+/**
+ * 获取时间格式
+ * @param {Object} now
+ */
+function formatDateHHMM(now){
+      var   hour=now.getHours();     
+      var   minute=now.getMinutes();     
+    return hour+":"+minute;
+}
+/**
+ * 字符串保留小数
+ * @param {Object} value
+ * @param {Object} size
+ */
+function replaceNum(value,size){
+	value = value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符  
+    value = value.replace(/^\./g,""); //验证第一个字符是数字而不是  
+    value = value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的  
+    value = value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");  
+    value = value.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/,'$1$2.$3'); //只能输入四位个小数  
+    return value;
+}

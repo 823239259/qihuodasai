@@ -14,7 +14,7 @@
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">新手指引</h1>
 		</header>
-		<div class="mui-content" id="noviceIntroduction">
+		<!--<div class="mui-content" id="noviceIntroduction">
 			 <h3>注册</h3>
 			 <p>打开维胜手机应用，您看见的是我们的引导页面，主要作用是向您简单的介绍手机应用的功能</p>
 			 <img src="../../images/tutorial/1.png"> 
@@ -117,10 +117,18 @@
 			<img src="../../images/tutorial/32.png" />
 			<p>提现之后，就静静等待资金到账吧</p>
 			<p>以上就是我们维胜App的全部操作流程。使用过程中，有任何问题，欢迎拨打客服热线：4008528008</p>
-		</div>
+		</div>-->
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting( "正在加载..." );
+				var window=plus.webview.create("http://cms.vs.com/uploads/topic/index.html","index",{top:"45px"});
+				window.show();
+				setTimeout(function(){
+					plus.nativeUI.closeWaiting();
+				},300)
+			})
 		</script>
 	</body>
 

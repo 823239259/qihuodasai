@@ -107,6 +107,88 @@ function modifyOrder(param) {
 					cancle.triggerPrice);
 	}
 }
+/**
+ * 止损处理
+ * @param {Object} param
+ */
+function inserStopLoss(param){
+	Trade.doInsertStopLoss(
+						param.exchangeNo,
+						param.commodityNo,
+						param.contractNo,
+						param.num,
+						param.stopLossType,
+						param.stopLossDiff,
+						param.holdAvgPrice,
+						param.holdDrection,
+						param.orderType,
+						param.stopLossPrice);
+}
+/**
+ * 修改止损单处理
+ * @param {Object} param
+ */
+function doModifyStopLoss(param){
+	Trade.doModifyStopLoss(
+						   param.stopLossNo,
+						   param.modifyFlag,
+						   param.num,
+						   param.stopLossType,
+						   param.orderType,
+						   param.stopLossDiff,
+						   param.stopLossPrice);
+}
+/**
+ * 条件增加单处理
+ * @param {Object} param
+ */
+function insertCondition(param){
+	Trade.doInsertCondition(
+							param.exchangeNo,
+							param.commodityNo,
+							param.contractNo,
+							param.num,
+							param.conditionType,
+							param.priceTriggerPonit,
+							param.compareType,
+							param.timeTriggerPoint,
+							param.abBuyPoint,
+							param.abSellPoint,
+							param.orderType,
+							param.drection,
+							param.stopLossType,
+							param.stopLossDiff,
+							param.stopWinDiff,
+							param.additionFlag,
+							param.additionType,
+							param.additionPrice
+	);
+}
+/**
+ * 条件单修改处理
+ * @param {Object} param
+ */
+function updateCondition(param){
+		Trade.doUpdateModifyCondition(
+									param.conditionNo,
+									param.modifyFlag,
+									param.num,
+									param.conditionType,
+									param.priceTriggerPonit,
+									param.compareType,
+									param.timeTriggerPoint,
+									param.abBuyPoint,
+									param.abSellPoint,
+									param.orderType,
+									param.drection,
+									param.stopLossType,
+									param.stopLossDiff,
+									param.stopWinDiff,
+									param.additionFlag,
+									param.additionType,
+									param.additionPrice
+		);
+}
 var kong = "<span style='color:green;'>空</span>";
 var duo = "<span style='color:red;'>多</span>";
 /**
@@ -172,4 +254,119 @@ function analysisOrderPriceType(priceType){
 		priceTypeText = "止损";
 	}
 	return priceTypeText;
+}
+/**
+ * 解析止损单的状态
+ * @param {Object} status
+ */
+function analysisStopLossStatus(status){
+	var lossStatus = "";
+	if(status == 0){
+		lossStatus = "运行中";
+	}else if(status == 1){
+		lossStatus = "暂停";
+	}else if(status == 2){
+		lossStatus = "已触发";
+	}else if(status == 3){
+		lossStatus = "已取消";
+	}else if(status == 4){
+		lossStatus = "插入失败";
+	}else if(status == 5){
+		lossStatus = "触发失败";
+	}
+	return lossStatus;
+}
+/**
+ * 解析止损单类别
+ * @param {Object} param
+ */
+function analysisStopLossType(param){
+	if(param == 0){
+		param = "限价止损";
+	}else if(param == 1){
+		param = "限价止盈";
+	}else if(param == 2){
+		param = "动态止损";
+	}
+	return param;
+}
+/**
+ * 解析止损单价格类型
+ * @param {Object} orderType
+ */
+function lossOrderType(orderType){
+	if(orderType == 1){
+		orderType = "市价";
+	}else if(orderType == 2){
+		orderType = "对手价";
+	}
+	return orderType;
+}
+/**
+ * 解析条件单状态
+ * @param {Object} status
+ */
+function analysisConditionStatus(status){
+	if(status == 0){
+		status = "运行中";
+	}else if(status == 1){
+		status = "暂停";
+	}else if(status == 2){
+		status = "已触发";	
+	}else if(status == 3){
+		status = "已取消";
+	}else if(status == 4){
+		status = "插入失败";
+	}else if(status == 5){
+		status = "触发失败";
+	}
+	return status;
+}
+/**
+ * 解析条件单类型
+ * @param {Object} type
+ */
+function analysisConditionType(type){
+	if(type == 0){
+		type = "价格条件";
+	}else if(type == 1){
+		type = "时间条件";
+	}else if(type == 2){
+		type = "（双向价格）AB单 "
+	}
+	return type;
+}
+/**
+ * 解析价格触发方式
+ * @param {Object} compareType
+ */
+function analysisConditionCompareType(compareType){
+	if(compareType == 0){
+		compareType = ">";
+	}else if(compareType == 1){
+		compareType = "<";
+	}else if(compareType == 2){
+		compareType = ">=";
+	}else if(compareType == 3){
+		compareType = "<=";
+	}
+	return compareType;
+}
+/**
+ * 解析条件单StopLossType
+ * @param {Object} stopLossType
+ */
+function analysisCondityionStopLossType(stopLossType){
+	if(stopLossType == 0){
+		stopLossType = "止损";
+	}else if(stopLossType == 1){
+		stopLossType = "止盈";
+	}else if(stopLossType == 2){
+		stopLossType = "止损+止盈";
+	}else if(stopLossType == 3){
+		stopLossType = "浮动止损";
+	}else if(stopLossType == 4){
+		stopLossType = "不设置止损";
+	}
+	return stopLossType;
 }

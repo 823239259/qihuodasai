@@ -5,9 +5,11 @@ $(function () {
         for(var i=0;i<_this.find(".tab_center").length;i++){
             _this.find("span").eq(i).text("NO."+(i+1));
         }
-        $(this).find("span").slice(0,3).css({
-            "color":"#333",
+        _this.find("span").eq(0).css({
             "background":"#ffb319"
+        });
+        _this.find("span").eq(1).css({
+            "background":"#19b2ff"
         });
     });
 });

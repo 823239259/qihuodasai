@@ -1,59 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>{dede:global.cfg_webname/}</title>
-    <meta name="viewport" content="width=1280">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <meta name="description" content="{dede:global.cfg_description/}" />
-    <meta name="keywords" content="{dede:global.cfg_keywords/}" />
-    <link rel="shortcut icon" href="../../favicon.ico" />
-    <script src="/templets/style/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/templets/style/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="/templets/style/html/css/vsViewpoint.css">
-    <script type="text/javascript" src="/templets/style/html/js/vsViewpoint.js"></script>
-</head>
-<body>
-{dede:include filename="head.htm"/}
-<div id="vsViewpoint">
-    <div class="vsViewpoint_left">
-        <p class="calendar"><span>{dede:type}[field:typename /]{/dede:type}</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
-        <div class="center_all">
-            <p class="details_1">{dede:field.title/}</p>
-            <p class="details_2">文 / <span class="name">{dede:field.writer/}</span><span class="time">{dede:field.pubdate function="MyDate('Y-m-d H:i',@me)"/}</span></p>
-            {dede:field.description function="cn_substr(@me,152)" runphp='yes'}
-            if(@me<>'' )@me = '
-            <p class="details_3"><img src="/templets/style/html/images/image/name_img.png" alt=""/>'.@me.'......</p>
-            ';
-            {/dede:field.description}
-            <p class="details_4">{dede:field.body/}</p>
-            <p class="details_6"><span class="collection">★收藏</span><span class="share"><img src="/templets/style/html/images/image/fenxiang.png" alt="">分享</span></p>
-        </div>
-    </div>
-    <div class="vsViewpoint_right">
-        <p class="calendar"><span>排行榜</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
-        <div class="tab_all">
-            <div class="tab_lis" style="display: block;">
-                {dede:arclist row=5 sort='hot' subday='3000' titlelen=34}
-                <div class="tab_center ">
-                    <p><span>1</span><a href="[field:arcurl/]">[field:title/]</a></p>
-                </div>
-                {/dede:arclist}
-            </div>
-        </div>
-        <p class="calendar"><span>关注我们</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
-        <div class="guanzhu">
-            <p>
-                <span>关注维胜官方微信</span></br>
-                <img src="/templets/style/html/images/image/vsViewpoint_4.png" alt="">
-            </p>
-            <p style="float: right;">
-                <span>关注维胜新浪微博</span></br>
-                <img src="/templets/style/html/images/image/vsViewpoint_5.png" alt="">
-            </p>
-        </div>
-    </div>
-</div>
-{dede:include filename="footer.htm"/}
-</body>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{dede:global.cfg_webname/}</title>
+    <meta name="viewport" content="width=1280">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="description" content="{dede:global.cfg_description/}" />
+    <meta name="keywords" content="{dede:global.cfg_keywords/}" />
+    <script src="/templets/style/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/templets/style/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/templets/style/html/css/vsViewpoint.css">
+    <script type="text/javascript" src="/templets/style/html/js/vsViewpoint.js"></script>	
+</head>
+<body>
+{dede:include filename="head.htm"/}
+<div id="vsViewpoint">
+    <div class="vsViewpoint_left">
+        <p class="calendar"><span>{dede:type}[field:typename /]{/dede:type}</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="center_all">
+            <p class="details_1">{dede:field.title/}</p>
+            <p class="details_2">文 / <span class="name">{dede:field.writer/}</span><span class="time">{dede:field.pubdate function="MyDate('Y-m-d H:i',@me)"/}</span></p>
+            {dede:field.description function="cn_substr(@me,152)" runphp='yes'}
+            if(@me<>'' )@me = '
+            <p class="details_3"><img src="/templets/style/html/images/image/name_img.png" alt=""/>'.@me.'......</p>
+            ';
+            {/dede:field.description}
+            <p class="details_4">{dede:field.body/}</p>
+           <!--  <p class="details_6"><span class="collection">★收藏</span><span class="share"><img src="/templets/style/html/images/image/fenxiang.png" alt="">分享</span></p> -->
+        </div>
+    </div>
+    <div class="vsViewpoint_right">
+        <p class="calendar"><span>排行榜</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="tab">            <ul>                <li><a href="javascript:void(0);" class="on">总排行榜<i></i></a></li>                <li><a href="javascript:void(0);">月排行榜<i style="left: 26px;"></i></a></li>                <li><a href="javascript:void(0);">周排行榜<i style="left: 26px;"></i></a></li>            </ul>        </div>        <div class="tab_all">            <div class="tab_lis" style="display: block;">                {dede:arclist row=5 sort='hot' subday='3000' titlelen=80}                <div class="tab_center">                    <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>                </div>                {/dede:arclist}            </div>            <div class="tab_lis">                {dede:arclist row=5 sort='hot' subday='30' titlelen=80}                <div class="tab_center">                    <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>                </div>                {/dede:arclist}            </div>            <div class="tab_lis">                {dede:arclist row=5 sort='hot' subday='7' titlelen=80}                <div class="tab_center">                    <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>                </div>                {/dede:arclist}            </div>        </div>
+        <p class="calendar"><span>关注我们</span><img class="icon" src="/templets/style/html/images/image/titleIcon.png" alt=""></p>
+        <div class="guanzhu">
+            <p>
+                <span>关注维胜官方微信</span></br>
+                <img src="/templets/style/html/images/image/vsViewpoint_4.png" alt="">
+            </p>
+            <p style="float: right;">
+                <span>关注维胜新浪微博</span></br>
+                <img src="/templets/style/html/images/image/vsViewpoint_5.png" alt="">
+            </p>
+        </div>
+    </div>
+</div>
+{dede:include filename="footer.htm"/}
+</body><script>	$("#vsViewpoint .tab li").on("click",function(){	    var _this = $(this);	    $(".vsViewpoint_right .tab a").removeClass("on").eq(_this.index()).addClass("on");	    $(".vsViewpoint_right .tab_all .tab_lis").hide().eq(_this.index()).show();    });</script>
 </html>
