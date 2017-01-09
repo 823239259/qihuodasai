@@ -9,6 +9,7 @@ import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,7 +43,6 @@ import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.GeneralizeChannel;
-import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 
@@ -99,13 +99,12 @@ public class LoginAndRegistController {
 	 */
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
-	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
+	public ApiResult signInOperation(@RequestBody RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
 		final String mobile=requestObj.getMobile();//电话
 		final String password=requestObj.getPassword();//密码
 		String parentGeneralizeId=requestObj.getParentGeneralizeId();//推广码
 	    String channel = requestObj.getChannel();//渠道
-	    
-	    String source = requestObj.getSource();//来源
+	    String source = requestObj.getSource();//来源    
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(password)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
@@ -129,19 +128,22 @@ public class LoginAndRegistController {
 				&& ObjectUtil.equals(null, wUserService.findByGeneralizeId(parentGeneralizeId))){
 			return new ApiResult(false,ResultStatusConstant.Regist.ERROR_GENERALIZE_CODE,"error.generalize.code.");
 		}
-		//--start 高超：注册来源处理   2016/12/13 18:28--//
-		if("web".equals(source)){			
-			wUser.setSource(Constant.RegistSource.WEB_REGIST);
-		}else if("wap".equals(source)){
-			wUser.setSource(Constant.RegistSource.WAP_REGIST);
-		}else if("app".equals(source)){
-			wUser.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+		//推广人编号
+		if(StringUtil.isNotBlank(parentGeneralizeId)){
+			WUser generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId);
+			if(generalizeWuser == null){
+				return new ApiResult(false,ResultStatusConstant.Regist.ERROR_GENERALIZE_CODE,"error.generalize.code.");
+			}else{
+				//wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null? 0.00:generalizeWuser.getSubordinateDefaultRebate());
+				wUser.setParentNode(generalizeWuser);
+			}
+		}else{
+			WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
+			wUser.setParentNode(platformDefaultWuser);
 		}
-		//--end 高超：注册来源处理   2016/12/13 18:28--//
 		
-		WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
+		wUser.setSource(Integer.parseInt(source));
 		wUser.setUserType("0");
-		wUser.setParentNode(platformDefaultWuser);
 		wUser.setPassword(password);
 		wUser.setMobile(mobile);
 		wUser.setCtime((new Date().getTime()/1000));
@@ -165,16 +167,7 @@ public class LoginAndRegistController {
 		}
 		final String emailChannelName = channelName;
 		final String emailChannelKeyWords = channelKeyWords;
-		/*//设置渠道
-		wUser.setChannel(channel);  
-		//推广人编号
-		if(StringUtil.isNotBlank(parentGeneralizeId)){
-			WUser generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId); 
-			if(generalizeWuser != null){
-				wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null? 0.00:generalizeWuser.getSubordinateDefaultRebate());
-				wUser.setParentNode(generalizeWuser);
-			}
-		}*/
+		
 		wUser.setLastLoginTime(Dates.getCurrentLongDate());
 		String ip = IpUtils.getIpAddr(request);
 		wUser.setLastLoginIp(ip);
@@ -240,7 +233,7 @@ public class LoginAndRegistController {
 	 */
 	@RequestMapping(value = "login",method=RequestMethod.POST)
 	@ResponseBody 
-	public ApiResult login(RequestObj requestObj,
+	public ApiResult login(@RequestBody RequestObj requestObj,
 			HttpServletRequest request,HttpServletResponse response){
 		
 		String loginName=requestObj.getLoginName();
@@ -259,8 +252,7 @@ public class LoginAndRegistController {
 		}
 		String ipAddr = IpUtils.getIpAddr(request);
 		wUserService.updateWUserByUserId(wUser.getId(), ipAddr);   //记录登录信息
-		// 记录登录成功日志
-		loginLogService.saveLog(ipAddr,IpAddressUtils.getAffiliationCity(ipAddr,"utf-8"), wUser.getId());
+		
 		JSONObject  jsonObject = new JSONObject();
 		//登录成功 返回用户唯一标志token和对应由密码种子+uid生成的key值
 		String appToken = AuthUtils.createToken(wUser.getId());
