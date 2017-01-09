@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,24 +113,30 @@ public class ActivityController {
 	/**
 	 * 获取老带新 邀请记录
 	 * @param request
-	 * @param mobile 电话号码后四位
+	 * @param mobile 电话号码
 	 * @param starttime 注册时间  查询的开始时间
 	 * @param endtime 注册时间  查询的结束时间
+	 * @param fourMobile 查询的电话号码后四位 
 	 * @return  ApiResult
 	 */
 	@RequestMapping(value = "/getOldAndNewInvitedList", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult oldAndNewInvitedToRecord(HttpServletRequest request,HttpServletResponse response){
-		String mobile = request.getParameter("mobile");
 		String starttime=request.getParameter("starttime");
 		String endtime=request.getParameter("endtime");
-		
+		String fourMobile = request.getParameter("fourMobile");
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		WUser wuser = wUserService.get(uid);  //获取用户信息
-		if(ObjectUtil.equals(null, wuser)){
+		WUser user = null;
+		if(StringUtils.isBlank(uid)){
+			String mobile = request.getParameter("mobile");
+		    user = wUserService.getWUserByMobile(mobile); //用web传过来mobile获取用户信息
+		}else{
+			user = wUserService.get(uid);  //获取用户信息
+		}
+		if(ObjectUtil.equals(null, user)){
 			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
 		}
-		List<OldAndNewVo> oldAndNewVos = activityOldAndNewService.getOldAndNewVoList(uid,mobile,starttime,endtime);
+		List<OldAndNewVo> oldAndNewVos = activityOldAndNewService.getOldAndNewVoList(uid,fourMobile,starttime,endtime);
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",oldAndNewVos);
 	}
