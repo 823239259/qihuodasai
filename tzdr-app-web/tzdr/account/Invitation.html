@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>邀请有礼</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <style>
+	    	#item1 p{
+	    		font-size: 12px;;
+	    		background-color: #FFFFFF;
+	    		color:#666666;
+	    		line-height: 20px;
+	    		padding: 5px 10px;
+	    		border-bottom: 1px solid #e6e6e6;
+	    		margin-bottom: 5px;
+	    	}
+	    	#linkDiv {
+	    		padding: 5px 10px;
+	    		background-color: #FFFFFF;
+	    		border-bottom: 1px solid #e6e6e6;
+	    		border-top:1px solid #E6E6E6
+	    	}
+	    	#linkDiv label{
+	    		font-size: 12px;
+	    		line-height: 30px;
+	    		color: #2B2B2B;
+	    	
+	    	}
+	    	#shareButton{
+	    		background-color: #fcc900;
+	    		color:#2b2b2b;
+	    		font-size: 12px;
+	    		border: none;
+	    		display: block;
+	    		float: right;
+	    	}
+	    	#shareDivContent{
+	    		padding: 0px 10px;
+	    		background-color: #f2f2f2;
+	    		border-bottom: 1px solid #e6e6e6;
+	    	}
+	    	#guize{
+	    		padding: 0px 10px;
+	    		background-color: #FFFFFF;
+	    	}
+	    	#guize p:nth-child(1){
+	    		border-bottom: 1px solid #e6e6e6;
+	    		line-height: 40px;
+	    		font-size: 14px;
+	    		color:#2b2b2b;
+	    		padding: 0px;
+	    		height: 40px;
+	    	}
+	    	#guize p label:nth-child(2){
+	    		color:#fcc900;
+	    		display: block;
+	    		float: right;
+	    		padding-right: 20px;
+	    		background-image: url(../../images/sharearrow.png);
+	    		background-repeat: no-repeat;
+    			background-position:  right center;
+    			background-size: 15%;
+	    	}
+	    	#guize p:nth-last-child(1){
+	    		color:#999999;
+	    		font-size: 12px;
+	    		line-height: 20px;
+	    		padding-top: 0px;
+	    	}
+	    	#callService{
+	    		text-align: center;
+	    		height: 40px;
+	    		line-height: 40px !important;
+	    		background-color: #2B2B2B !important;
+	    		color:#FFFFFF!important;	
+	    		padding: 0px!important;
+	    		    	}
+	    	#historyDetailsTable1 {
+	    		padding-bottom: 20px;
+	    		background-color: #FFFFFF;
+	    	}
+	    	#historyDetailsTable1 thead td{
+	    		color:#2B2B2B;
+	    		font-size: 12px;
+	    		height: 30px;
+	    		line-height: 30px;
+	    		padding-left: 13px;
+	    	}
+	    	#historyDetailsTable1  thead tr{
+	    		border-bottom: 1px solid #e6e6e6;
+	    	}
+	    	#historyDetailsTable1 tbody tr{
+	    		padding: 13px 0px;
+	    		border-bottom: 1px solid #e6e6e6;
+	    		color:#666666;
+	    		height: 30px;
+	    		font-size: 12px;
+	    		line-height: 30px;
+	    	}
+	    	#historyDetailsTable1 tbody tr td{
+	    		padding-left: 13px;
+	    		line-height: 30px;
+	    	}
+	    	#shareTitle{
+	    		background-color: #1f1f1f;
+	    		padding: 11px 0px;
+	    	}
+	    	#shareTitle p{
+	    		padding: 0px;
+	    		line-height: 14px;
+	    		font-size: 12px;
+	    	}
+	    	#shareTitle p label{
+	    		color:#FFFFFF;
+	    		display: inline-block;
+	    		width: 33%;
+	    		text-align: center;
+	    	}
+	    	.fcc900{
+	    		color: #fcc900 !important;
+	    	}
+	    	#shareDivContent p{
+	    		padding: 0px;
+		    	background-color: #f2f2f2;
+		    	border: none;
+		    	margin: 0px;
+	    	}
+	    	#shareDivContent p:nth-child(2){
+	    		padding: 10px 0px;
+	    	}
+	    	#shareDivContent p:nth-child(3){
+	    		margin-bottom: 20px;
+	    	}
+	    	#shareDivContent p label{
+	    	display: inline-block;
+	    	width: 33%;
+	    	text-align: center;
+	    	font-size: 12px;
+	    	color:#666666;
+	    	}
+	    	#shareDivContent p label img{
+	    		width: 60%;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">邀请有礼</h1>		
+			<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
+		</header>	
+		<div class="mui-content sc_listdeta" id="listDetails">
+			<div  class="mui-slider-indicator mui-segmented-control">
+				<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
+				<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
+			</div>
+			<div id="item1" class="mui-control-content mui-active">	
+				<p>分享以下邀请链接，好友通过您的链接注册成功完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
+				<div id="linkDiv">
+					<label>邀请链接：</label>
+					<label>http://www.vs.com/invite/009406</label>
+					<button id="shareButton">分享</button>
+				</div>
+				<div id="shareDivContent">
+					<img src="../../images/fenxiang.png" width="100%" height="auto">
+					<p><label><img src="../../images/weixinshare.png"></label><label><img src="../../images/weiboshare.png"></label><label><img src="../../images/qqshare.png"></label></p>
+					<p><label>微信朋友圈</label><label>新浪微博</label><label>QQ好友</label></p>
+				</div>
+				<div id="guize">
+					<p><label>邀请好友，免交易手续费！</label><label>活动规则</label></p>
+					<p>多拉新朋友，即可多获减免奖励。比如小明叫了10个朋友来维胜金融操盘，8个进行了实名认证，其中6个人操盘交易均达到双边5手。那么小明就可以获得（累计）：2个1手交易费减免资格，4个2手交易费减免资格，总共1+1+2+2+2=2=10手双边免费交易资格。以此类推，多拉新用户多得减免金。</p>
+				</div>
+				<p id="callService">联系电话：400-852-8008</p>
+			</div>
+			<div id="item2" class="mui-control-content ">
+				<div id="shareTitle">
+					<p><label>注册人数</label><label>申请方案人数</label><label>已获奖励次数</label></p>
+					<p><label class="fcc900">10</label><label class="fcc900">1</label><label class="fcc900">1</label></p>
+				</div>
+				<table id="historyDetailsTable1" width="480px" cellpadding="0" cellspacing="0" border="0">
+					<thead>
+						<tr>
+							<td width="50px">手机号</td>
+							<td width="80px">姓名</td>
+							<td width="80px">注册时间</td>
+							<td width="80px">交易时间</td>
+							<td width="80px">交易手数</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="80px">手机号</td>
+							<td width="80px">姓名</td>
+							<td width="80px">注册时间</td>
+							<td width="80px">交易时间</td>
+							<td width="80px">交易手数</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

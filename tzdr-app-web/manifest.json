@@ -353,7 +353,8 @@
 					"tzdr/account/bindingList.html",
 					"tzdr/account/bindWeixin.html",
 					"tzdr/account/accountno.html",
-					"tzdr/login/retrievePassword.html"
+					"tzdr/login/retrievePassword.html",
+					"tzdr/account/Invitation.html"
 				],
 				"priority": 0
 			},
@@ -1627,6 +1628,17 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/pingpp.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/Invitation.html": {
+				"resources": [
+					"images/sharearrow.png",
+					"images/fenxiang.png",
+					"images/weixinshare.png",
+					"images/qqshare.png",
+					"images/weiboshare.png"
 				],
 				"refer": [],
 				"priority": 0
