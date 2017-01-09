@@ -9,7 +9,6 @@ import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +39,6 @@ import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.api.vo.ApiUserVo;
-import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.GeneralizeChannel;
 import com.tzdr.domain.web.entity.WUser;
@@ -99,7 +97,7 @@ public class LoginAndRegistController {
 	 */
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
-	public ApiResult signInOperation(@RequestBody RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
+	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
 		final String mobile=requestObj.getMobile();//电话
 		final String password=requestObj.getPassword();//密码
 		String parentGeneralizeId=requestObj.getParentGeneralizeId();//推广码
@@ -233,7 +231,7 @@ public class LoginAndRegistController {
 	 */
 	@RequestMapping(value = "login",method=RequestMethod.POST)
 	@ResponseBody 
-	public ApiResult login(@RequestBody RequestObj requestObj,
+	public ApiResult login(RequestObj requestObj,
 			HttpServletRequest request,HttpServletResponse response){
 		
 		String loginName=requestObj.getLoginName();
