@@ -143,7 +143,7 @@ public class ActivityController {
 	
 	
 	/**
-	 * 老带新 邀请 统计某一个用户邀请成功的注册数、申请过方案的人数、及活得奖励的次数
+	 * 老带新邀请 统计单个用户自己邀请成功的注册数、申请过方案的人数、及活得奖励的次数
 	 * @param request
 	 * @param response
 	 * @return
@@ -152,8 +152,14 @@ public class ActivityController {
 	@ResponseBody
 	public ApiResult oldAndNewStatistics(HttpServletRequest request,HttpServletResponse response){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		WUser wuser = wUserService.get(uid);  //获取用户信息
-		if(ObjectUtil.equals(null, wuser)){
+		WUser user = null;
+		if(StringUtils.isBlank(uid)){
+			String mobile = request.getParameter("mobile");
+		    user = wUserService.getWUserByMobile(mobile); //用web传过来mobile获取用户信息
+		}else{
+			user = wUserService.get(uid);  //获取用户信息
+		}
+		if(ObjectUtil.equals(null, user)){
 			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
 		}
 		Map<String, Object> activityStatistics = activityOldAndNewService.getActivityStatistics(uid);
