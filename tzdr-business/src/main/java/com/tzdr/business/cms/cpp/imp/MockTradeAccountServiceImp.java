@@ -20,7 +20,6 @@ import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
 @Transactional
 @DataSource(value="dataSource2")
 public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount, MockTradeAccountDao> implements MockTradeAccountService {
-	@DataSource(value="dataSource2")
 	public boolean openMockAccount(String username,String password){
 		boolean flag = false;
 		List<Object> objectparam = new ArrayList<>();

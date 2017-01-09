@@ -57,4 +57,8 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 	public List<TradeDetail> doGetByFtseId(String fsteId) {
 		return getEntityDao().doGetByFtseId(fsteId);
 	}
+	@Override
+	public void deleteByFastId(String fastId) {
+		getEntityDao().deleteByFastId(fastId);
+	}
 }

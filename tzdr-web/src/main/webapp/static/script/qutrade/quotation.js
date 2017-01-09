@@ -28,10 +28,13 @@ $(function() {
                     var hisQuoteTypes = obj.getAttribute("data");
                     var hisQuoteType =  hisQuoteTypes;
                     loadKData(currenCommodityNo,currenContractNo,currenExchangeNo,hisQuoteType);
+                      $("#lightButton").css("color","#999999");
+			        $("#container1").css("z-index","997");
+			        $("#container").css("z-index","998");
                 }
             }
-            //console.log(currenCommodityNo,currenContractNo,currenExchangeNo,hisQuoteType);
             masendMessage('QryHistory','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'","Count":400,"HisQuoteType":'+hisQuoteType+'}');
+            masendMessage('Subscribe','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'"}');
             cc = setInterval(function(){
                 masendMessage('QryHistory','{"ExchangeNo":"'+currenExchangeNo+'","CommodityNo":"'+currenCommodityNo+'","ContractNo":"'+currenContractNo+'","Count":400,"HisQuoteType":'+hisQuoteType+'}');
             },60000);
@@ -70,13 +73,14 @@ $(function() {
                 chechDataK(data,type);
             }
         }else if(method == "OnRtnQuote"){
-
+				dealLightData(jsonData);
         }
         function click(div){
             for(var i = 0;i<div.length;i++){
                 div[i].onclick = function(){
                     clearInterval(cc);
                     var obj = this;
+                    dataLight=[];
                     var da = obj.getAttribute("data");
                     if(da != null){
                         var daArray = da.split("&");
@@ -103,9 +107,9 @@ $(function() {
             //console.log(dataall);
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
-                var exs = 3600*8;
-                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
-                timestamp = zhi+"000";
+                /*var exs = 3600*8;*/
+                //var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
+                timestamp = timestamp+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
@@ -129,7 +133,17 @@ $(function() {
                     dataC.splice(i,1);
                 }
             }
-            //console.log(dataC);
+			var text=$("#commodity_title").text();
+			var length=$(".tab_content .position0").length;
+			var positionValue=0
+			if(length!=0){
+				for(var i=0;i<length;i++){
+					var text1=$(".tab_content .position0").eq(i).text();
+					if(text.indexOf(text1)>=0){
+						positionValue=$(".tab_content .position3").eq(i).text();
+					}
+				}
+			}
             $('#container').highcharts('StockChart', {
                 chart: {
                     backgroundColor:'#333333'
@@ -150,10 +164,17 @@ $(function() {
                         }
                     },
                     height: 120,
-                    plotLines: [{
-                        value: 0,
+ 					 plotLines: [{
+                        value: positionValue,
+                        color: 'red',
+                        dashStyle: 'shortdash',
                         width: 1,
-                        color: '#808080'
+                        label: {
+                            style: {
+                                color: '#ffffff'
+                            },
+                            text: '持仓均线 '+positionValue
+                        }
                     }]
                 },{
                     title: {
@@ -276,9 +297,9 @@ $(function() {
             var dataall=data.Data;
             for (var i=0; i < dataall.length; i++) {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
-                var exs = 3600*8;
-                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
-                timestamp = zhi+"000";
+                /*var exs = 3600*8;
+                var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));*/
+                timestamp = timestamp+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
@@ -302,7 +323,18 @@ $(function() {
                     dataC.splice(i,1);
                 }
             }
-
+			var text=$("#commodity_title").text();
+			var length=$(".tab_content .position0" ).length;
+			var positionValue=0
+			if(length!=0){
+				for(var i=0;i<length;i++){
+					var text1=$(".tab_content .position0").eq(i).text();
+					if(text.indexOf(text1)>=0){
+						positionValue=$(".tab_content .position3").eq(i).text();
+					}
+				}
+			}
+			console.log(positionValue);
             $('#container').highcharts('StockChart', {
 
                 chart: {
@@ -324,10 +356,17 @@ $(function() {
                         }
                     },
                     height: 120,
-                    plotLines: [{
-                        value: 0,
+ 					 plotLines: [{
+                        value: positionValue,
+                        color: 'red',
+                        dashStyle: 'shortdash',
                         width: 1,
-                        color: '#808080'
+                        label: {
+                            style: {
+                                color: '#ffffff'
+                            },
+                            text: '持仓均线 '+positionValue
+                        }
                     }]
                 },{
                     title: {
@@ -368,34 +407,18 @@ $(function() {
                     }],
                     selected: 0
                 },
-                /* legend: {
-                 enabled: true,
-                 layout: 'vertical',
-                 align: 'right',
-                 verticalAlign: 'middle',
-                 borderWidth: 0
-                 },
-                 plotOptions: {
-                 series: {
-                 marker: {
-                 enabled: false
-                 }
-                 }
-                 }, */
                 series : [{
                     name: '分时线',
                     type : 'line', /*candlestick line*/
                     id: 'primary',
                     animation: false,
-                    data : dataC/*,
-                     visible: false*/
+                    data : dataC
                 },{
                     name: '',
                     type : 'candlestick',
                     id: 'primary',
                     animation: false,
-                    data : dataC/*,
-                     visible: false*/
+                    data : dataC
                 },{
                     type: 'column',
                     name: '成交量',
@@ -429,5 +452,67 @@ $(function() {
             });
             $(".highcharts-series-1").hide();
         }
+
     };
+                /**************************闪电图********************************/
+    var dataLight=[];
+        Highcharts.setOptions({
+        global : {
+            useUTC : false
+        }
+    });
+    function dealLightData(data){
+//  	 var dataLight=[];
+        var dataall=data.Parameters;
+        var text=$("#commodity_title").text();
+        if(text.indexOf(dataall.CommodityNo)>=0){
+            var timestamp = Math.round(new Date().getTime())
+//          var exs = 3600*8;
+//          var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
+//          timestamp = zhi+"000";
+//          timestamp = parseInt(timestamp);
+            dataLight.push([timestamp,dataall.LastPrice]);
+            dataLight=dataLight.slice(-500);
+        }
+        
+        
+        $('#container1').highcharts('StockChart', {
+            chart: {
+                backgroundColor:'#333333'
+            },
+            yAxis: [{
+                title: {
+                    text: '闪电图'
+                },
+                labels: {
+                    style: {
+                        color: '#ffffff'
+                    }
+                },
+                height: 330,
+//              lineWidth: 2
+            }],
+            navigator : {
+                enabled : false
+            },
+            tooltip: {
+                enabled : false,
+                crosshairs: false,
+                shared: false
+            },
+            series : [{
+                name: '闪电图',
+                type : 'line', /*candlestick line*/
+//              id: 'primary',
+                animation: false,
+                data : dataLight
+            }]
+        });
+    }
+    $("#lightButton").click(function(){
+        $("#lightButton").css("color","rgb(255, 179, 25)");
+        $(".carbon_time").css("color","#999999");
+        $("#container1").css("z-index","998");
+        $("#container").css("z-index","997");
+    })
 });

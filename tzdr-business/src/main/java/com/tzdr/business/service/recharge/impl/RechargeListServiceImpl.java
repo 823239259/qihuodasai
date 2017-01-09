@@ -17,6 +17,7 @@ import javax.persistence.criteria.Root;
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,12 +203,18 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 	@Override
 	public RechargeList addUpdateRechargeList(RechargeList rechargeList,Integer userType,String remark) {
 		synchronized (lock) {
-			User user = authService.getCurrentUser();//获取当前登录用户
+			User user = null;
+			try {
+				user = authService.getCurrentUser();//获取当前登录用户
+			} catch (Exception e) {
+				user = new User();
+				log.warn(ExceptionUtils.getStackTrace(e));
+			}
 			UserFund userFund = new UserFund();
 			userFund.setUid(rechargeList.getUid());
 			userFund.setMoney(rechargeList.getActualMoney());
 			userFund.setAddtime(TypeConvert.dbDefaultDate());
-			userFund.setSysUserId(user.getId().toString());
+			userFund.setSysUserId(user.getId() + "");
 			if (userType != null) {
 				userFund.setType(userType);
 			}

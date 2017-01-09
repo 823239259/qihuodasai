@@ -1,51 +1,1 @@
-#headerBottom #nav #Triangle {left: 624px;}
-.downloadCenter_one{background: url(/templets/style/html/images/image/downloadCenter_1.png) no-repeat center; width: 100%; height: 580px;}
-.one_center {width: 1280px; margin: 0 auto;height: 400px; position: relative;}
-.one_center img {position: absolute;left: 320px; top: 210px;}
-.downloadCenter_p1 {font-size: 40px; color: #fff;}
-.downloadCenter_p2 {font-size: 24px; color: #fff;}
-.downloadCenter_one .downloadCenter_p1 {text-align: center; padding-top: 66px;}
-.downloadCenter_one .downloadCenter_p2 {text-align: center; margin-top: 20px;}
-.downloadCenter_two {width: 1280px; margin: 0 auto; height: 400px;}
-.downloadCenter_two .div1{float: left; width: 320px; text-align: center; margin-top: 100px; position: relative;}
-.downloadCenter_two .jixing {color: #fd7a72;font-size: 20px; margin-top: 25px;}
-.downloadCenter_two .kuaishou {color: #4cacff; font-size: 20px; margin-top: 25px;}
-.downloadCenter_two .ios {color: #2f333b; font-size: 20px; margin-top: 25px;position: relative}
-.downloadCenter_two .android {color: #27c605; font-size: 20px; margin-top: 25px;position: relative}
-.downloadCenter_two a {margin-top: 20px; display: inline-block;}
-.downloadCenter_two a img:hover {opacity: 0.8}
-.downloadCenter_there {background: #ffb319;width: 100%;height: 400px;}
-.downloadCenter_there .there_center {width: 1280px;height: 400px; margin: 0 auto; background: url(/templets/style/html/images/image/downloadCenter_2.png) no-repeat center;}
-.downloadCenter_there .there_right {width: 640px; float: right; height: 400px;}
-.downloadCenter_there .there_right .downloadCenter_p1 {padding-top: 140px; padding-bottom: 30px;}
-.downloadCenter_there .there_right .downloadCenter_p2 {padding-bottom: 20px;}
-.downloadCenter_four {width: 1280px; height: 400px; margin: 0 auto; background: url(/templets/style/html/images/image/downloadCenter_3.png) no-repeat center;}
-.downloadCenter_four .four_right {width: 640px; float: left; height: 400px;}
-.downloadCenter_four .four_right .downloadCenter_p1 {color: #ffb319; padding-top: 100px; padding-bottom: 30px;}
-.downloadCenter_four .four_right .downloadCenter_p2 {color: #666; padding-bottom: 20px;}
-.downloadCenter_five {width: 100%;height: 400px; background: #ffb319;}
-.downloadCenter_five .five_center {width: 1280px;height: 400px; margin: 0 auto; background: url(/templets/style/html/images/image/downloadCenter_4.png) no-repeat center;}
-.downloadCenter_five .five_right {width: 640px; height: 400px; float: right;}
-.downloadCenter_five .five_right .downloadCenter_p1 {padding-top: 140px; margin-bottom: 30px;}
-.downloadCenter_five .five_right .downloadCenter_p2 {padding-bottom: 20px;}
-.downloadDiv,.downloadDiv1{
-    width: 208px!important;
-    height: 240px;
-    background:url("/templets/style/html/images/image/download.png") 100% 100% no-repeat;
-    background-size: 100% 100%;
-    position: absolute;
-    /*top:-220px;*/
-    left:60px;
-    display: none;
-    z-index: 999;
-}
-
-
-
-
-
-
-
-
-
-
+#headerBottom #nav #Triangle {left: 624px;}.downloadCenter_one{background: url(/templets/style/html/images/image/downloadCenter_1.png) no-repeat center; width: 100%; height: 540px;}.one_center {width: 1280px; margin: 0 auto;height: 400px; position: relative;}.one_center img {position: absolute;left: 320px; top: 210px;}.downloadCenter_p1 {font-size: 36px; color: #fff; font-weight: bolder;}.downloadCenter_p2 {font-size: 20px; color: #fff;}.downloadCenter_one .downloadCenter_p1 {text-align: center; padding-top: 66px;}.downloadCenter_one .downloadCenter_p2 {text-align: center; margin-top: 20px;}.downloadCenter_two {width: 1200px; margin: 0 auto; height: 275px; padding: 0 40px;}.downloadCenter_two .div1 {float: left; width: 400px; text-align: center; position: relative;}.downloadCenter_two .jixing {color: #a88ae5;font-size: 20px; margin-top: 25px;}.downloadCenter_two .kuaishou {color: #4cacff; font-size: 20px; margin-top: 25px;}.downloadCenter_two .ios {color: #2f333b; font-size: 20px; margin-top: 25px;position: relative}.downloadCenter_two .android {color: #fd7a72; font-size: 20px; margin-top: 25px;position: relative}.downloadCenter_two .d_hover {margin-top: 20px; display: inline-block; width: 200px; height: 50px; position: relative;}.downloadCenter_two .d_hover img:hover {opacity: 0.8}.downloadCenter_there {width: 100%;height: 320px;}.downloadCenter_there .there_center {width: 1280px;height: 320px; margin: 0 auto; background: url(/templets/style/html/images/image/downloadCenter_2.png) no-repeat center; position: relative;}.downloadCenter_there .there_right {text-align: center; width: 640px; float: right; height: 320px; position: absolute; right: 0;}.downloadCenter_there .there_right .downloadCenter_p1 {padding-top: 100px; padding-bottom: 10px;}.downloadCenter_there .there_right .downloadCenter_p2 {padding-bottom: 10px;}.downloadCenter_four {width: 1280px; height: 320px; margin: 0 auto; background: url(/templets/style/html/images/image/downloadCenter_3.png) no-repeat center;}.downloadCenter_four .four_right {width: 640px; float: left; height: 320px; text-align: center;}.downloadCenter_four .four_right .downloadCenter_p1 {color: #ffb319; padding-top: 80px; padding-bottom: 10px;}.downloadCenter_four .four_right .downloadCenter_p2 {color: #666; padding-bottom: 10px;}.downloadCenter_five {width: 100%;height: 320px;}.downloadCenter_five .five_center {width: 1280px;height: 320px; margin: 0 auto; background: url(/templets/style/html/images/image/downloadCenter_4.png) no-repeat center;}.downloadCenter_five .five_right {width: 640px; height: 320px; float: right; text-align: center;}.downloadCenter_five .five_right .downloadCenter_p1 {padding-top: 100px; margin-bottom: 10px;}.downloadCenter_five .five_right .downloadCenter_p2 {padding-bottom: 10px;}.downloadDiv1{    height: 152px;    width: 760px;    left: -280px;    top: -4px;    background: url("/templets/style/html/images/image/downloadCenter_18.png") 100% 100% no-repeat;    display: none;    z-index: 9999;    position: relative;}.downloadDiv1 a {    text-align: center;    width: 200px;    height: 50px;    line-height: 50px;    background: url("/templets/style/html/images/image/downloadCenter_16.png") 100% 100% no-repeat;    margin-top: 50px;    margin-left: 15px;    margin-right: 15px;    color: #fff;    font-size: 16px;    display: inline-block;}.downloadDiv1 a:hover {    opacity: 0.8;    cursor: pointer;}.downloadDiv1 span {    background: url("/templets/style/html/images/image/downloadCenter_17.png") 100% 100% no-repeat;    width: 10px;    height: 5px;    display: inline-block;    position: absolute;    left: 376px;    top: -5px;}#pc img:hover {    opacity: 0.8;    cursor: pointer;}.downloadDiv2 {    width: 208px!important;    height: 240px;    background: url("/templets/style/html/images/image/download.png") 100% 100% no-repeat;    background-size: 100% 100%;    position: absolute;    display: none;    z-index: 9999;}.div1 .navmoon .d_block {    display: block;}.div1 .navmoon img{    opacity: 0.8;}

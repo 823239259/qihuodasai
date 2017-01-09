@@ -23,7 +23,7 @@
                 var _this = $(this);
                 $(".vsViewpoint_right .tab a").removeClass("on").eq(_this.index()).addClass("on");
                 $(".vsViewpoint_right .tab_all .tab_lis").hide().eq(_this.index()).show();
-            });
+            });            $("#customerTel ul li a").eq(6).css("color","#ffb319");
             $("#nav ul li a").eq(6).css("color","#ffb319");
             $("#nav ul li .Triangle").eq(6).css("display","block");
         });
@@ -59,27 +59,27 @@
         <div class="tab">
             <ul>
                 <li><a href="javascript:void(0);" class="on">总排行榜<i></i></a></li>
-                <li><a href="javascript:void(0);">月排行榜<i style="left: 26px;"></i></a></li>
-                <li><a href="javascript:void(0);">周排行榜<i style="left: 26px;"></i></a></li>
+                <li><a href="javascript:void(0);">月排行榜<i style="left: 23px;"></i></a></li>
+                <li><a href="javascript:void(0);">周排行榜<i style="left: 23px;"></i></a></li>
             </ul>
         </div>
         <div class="tab_all">
             <div class="tab_lis" style="display: block;">
-                {dede:arclist row=5 sort='hot' subday='3000' titlelen=34}
+                {dede:arclist row=5 sort='hot' subday='3000' titlelen=60}
                 <div class="tab_center">
                     <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>
                 </div>
                 {/dede:arclist}
             </div>
             <div class="tab_lis">
-                {dede:arclist row=5 sort='hot' subday='30' titlelen=34}
+                {dede:arclist row=5 sort='hot' subday='30' titlelen=60}
                 <div class="tab_center">
                     <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>
                 </div>
                 {/dede:arclist}
             </div>
             <div class="tab_lis">
-                {dede:arclist row=5 sort='hot' subday='7' titlelen=34}
+                {dede:arclist row=5 sort='hot' subday='7' titlelen=60}
                 <div class="tab_center">
                     <p><span>NO.1</span><a href="[field:arcurl/]">[field:title/]</a></p>
                 </div>

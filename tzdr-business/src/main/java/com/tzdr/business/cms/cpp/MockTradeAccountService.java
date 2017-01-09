@@ -2,7 +2,6 @@ package com.tzdr.business.cms.cpp;
 
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
-
 public interface MockTradeAccountService extends BaseService<MockTradeAccount>{
 	/**
 	 * 开通模拟账号

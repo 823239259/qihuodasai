@@ -38,7 +38,32 @@ var TradeUrl = {
 	/**
 	 * 错误通知
 	 */
-	OnError : "OnError"
+	OnError : "OnError",
+	/**
+	 * 止损单录入url
+	 */
+	InsertStopLoss:"InsertStopLoss",
+	/**
+	 * 获取止损单url
+	 */
+	QryStopLoss:"QryStopLoss",
+	/**
+	 * 止损单修改
+	 */
+	ModifyStopLoss:"ModifyStopLoss",
+	/**
+	 * 条件单录入请求url
+	 */
+	InsertCondition:"InsertCondition",
+	/**
+	 * 条件单修改请求url
+	 */
+	ModifyCondition:"ModifyCondition",
+	/**
+	 * 条件单查询url
+	 */
+	QryCondition:"QryCondition"
+	
 }
 var Trade = {
 			/**
@@ -153,6 +178,181 @@ var Trade = {
 								+' "OrderPrice":'+orderPrice+','
 								+' "TriggerPrice":'+triggerPrice+'}';
 				Trade.doSendMessage(TradeUrl.ModifyOrderUrl,param);
+			},
+			/**
+			 * 增加止损单
+			 * @param {Object} exchangeNo
+			 * @param {Object} commodityNo
+			 * @param {Object} contractNo
+			 * @param {Object} num
+			 * @param {Object} stopLossType
+			 * @param {Object} stopLossDiff
+			 * @param {Object} holdAvgPrice
+			 * @param {Object} holdDrection
+			 * @param {Object} orderType
+			 * @param {Object} StopLossPrice
+			 */
+			doInsertStopLoss:function(exchangeNo,commodityNo,contractNo,num,stopLossType,stopLossDiff,holdAvgPrice,holdDrection,orderType,stopLossPrice){
+				var param = '{"ExchangeNo":"'+exchangeNo+'",'
+							+' "CommodityNo":"'+commodityNo+'",'
+							+' "ContractNo":"'+contractNo+'",'
+							+' "Num":'+num+','
+							+' "StopLossType":'+stopLossType+','
+							+' "StopLossDiff":'+stopLossDiff+','
+							+' "HoldAvgPrice":'+holdAvgPrice+','
+							+' "HoldDrection":'+holdDrection+','
+							+' "OrderType":'+orderType+','
+							+' "StopLossPrice":'+stopLossPrice+'}';
+				Trade.doSendMessage(TradeUrl.InsertStopLoss,param);
+			},
+			/**
+			 * 获取止损单请求
+			 * @param {Object} username
+			 */
+			doQryStopLoss:function(username){
+				Trade.doSendMessage(TradeUrl.QryStopLoss,'{"ClientNo":"'+username+'"}');
+			},
+			/**
+			 * 修改止损单
+			 * @param {Object} stopLossNo
+			 * @param {Object} modifyFlag
+			 * @param {Object} num
+			 * @param {Object} stopLossType
+			 * @param {Object} orderType
+			 * @param {Object} stopLossDiff
+			 * @param {Object} stopLossPrice
+			 */
+			doModifyStopLoss:function(stopLossNo,modifyFlag,num,stopLossType,orderType,stopLossDiff,stopLossPrice){
+				var param = '{"StopLossNo":"'+stopLossNo+'",'
+							+' "ModifyFlag":'+modifyFlag+','
+							+' "Num":'+num+','
+							+' "StopLossType":'+stopLossType+','
+							+' "StopLossDiff":'+stopLossDiff+','
+							+' "StopLossPrice":'+stopLossPrice+','
+							+' "OrderType":'+orderType+'}';
+				Trade.doSendMessage(TradeUrl.ModifyStopLoss,param);
+			},
+			/**
+			 * 条件单录入请求
+			 * @param {Object} exchangeNo
+			 * @param {Object} commodityNo
+			 * @param {Object} contractNo
+			 * @param {Object} num
+			 * @param {Object} conditionType
+			 * @param {Object} priceTriggerPonit
+			 * @param {Object} compareType
+			 * @param {Object} timeTriggerPoint
+			 * @param {Object} abBuyPoint
+			 * @param {Object} abSellPoint
+			 * @param {Object} orderType
+			 * @param {Object} drection
+			 * @param {Object} stopLossType
+			 * @param {Object} stopLossDiff
+			 * @param {Object} stopWinDiff
+			 * @param {Object} additionFlag
+			 * @param {Object} additionType
+			 * @param {Object} additionPrice
+			 */
+			doInsertCondition:function(exchangeNo,
+										commodityNo,
+										contractNo,
+										num,
+										conditionType,
+										priceTriggerPonit,
+										compareType,
+										timeTriggerPoint,
+										abBuyPoint,
+										abSellPoint,
+										orderType,
+										drection,
+										stopLossType,
+										stopLossDiff,
+										stopWinDiff,
+										additionFlag,
+										additionType,
+										additionPrice){
+				var param = '{"ExchangeNo":"'+exchangeNo+'",'
+							+' "CommodityNo":"'+commodityNo+'",'
+							+' "ContractNo":"'+contractNo+'",'
+							+' "Num":'+num+','
+							+' "ConditionType":'+conditionType+','
+							+' "PriceTriggerPonit":'+priceTriggerPonit+','
+							+' "CompareType":'+compareType+','
+							+' "TimeTriggerPoint":"'+timeTriggerPoint+'",'
+							+' "AB_BuyPoint":'+abBuyPoint+','
+							+' "AB_SellPoint":'+abSellPoint+','
+							+' "OrderType":'+orderType+','
+							+' "Drection":'+drection+','
+							+' "StopLossType":'+stopLossType+','
+							+' "StopLossDiff":'+stopLossDiff+','
+							+' "StopWinDiff":'+stopWinDiff+','
+							+' "AdditionFlag":'+additionFlag+','
+							+' "AdditionType":'+additionType+','
+							+' "AdditionPrice":'+additionPrice+'}';
+				Trade.doSendMessage(TradeUrl.InsertCondition,param);
+			},
+			/**
+			 * 修改条件单请求
+			 * @param {Object} conditionNo
+			 * @param {Object} modifyFlag
+			 * @param {Object} num
+			 * @param {Object} conditionType
+			 * @param {Object} priceTriggerPonit
+			 * @param {Object} compareType
+			 * @param {Object} timeTriggerPoint
+			 * @param {Object} abBuyPoint
+			 * @param {Object} abSellPoint
+			 * @param {Object} orderType
+			 * @param {Object} drection
+			 * @param {Object} stopLossType
+			 * @param {Object} stopLossDiff
+			 * @param {Object} stopWinDiff
+			 * @param {Object} additionFlag
+			 * @param {Object} additionType
+			 * @param {Object} additionPrice
+			 */
+			doUpdateModifyCondition:function(conditionNo,
+											modifyFlag,
+											num,
+											conditionType,
+											priceTriggerPonit,
+											compareType,
+											timeTriggerPoint,
+											abBuyPoint,
+											abSellPoint,
+											orderType,
+											drection,
+											stopLossType,
+											stopLossDiff,
+											stopWinDiff,
+											additionFlag,
+											additionType,
+											additionPrice){
+				var param = '{"ConditionNo":"'+conditionNo+'",'
+							+' "ModifyFlag":'+modifyFlag+','
+							+' "Num":'+num+','
+							+' "ConditionType":'+conditionType+','
+							+' "PriceTriggerPonit":'+priceTriggerPonit+','
+							+' "CompareType":'+compareType+','
+							+' "TimeTriggerPoint":"'+timeTriggerPoint+'",'
+							+' "AB_BuyPoint":'+abBuyPoint+','
+							+' "AB_SellPoint":'+abSellPoint+','
+							+' "OrderType":'+orderType+','
+							+' "Drection":'+drection+','
+							+' "StopLossType":'+stopLossType+','
+							+' "StopLossDiff":'+stopLossDiff+','
+							+' "StopWinDiff":'+stopWinDiff+','
+							+' "AdditionFlag":'+additionFlag+','
+							+' "AdditionType":'+additionType+','
+							+' "AdditionPrice":'+additionPrice+'}';
+				Trade.doSendMessage(TradeUrl.ModifyCondition,param);
+			},
+			/**
+			 * 查询条件单请求
+			 * @param {Object} username
+			 */
+			doQryCondition:function(username){
+				Trade.doSendMessage(TradeUrl.QryCondition,'{"ClientNo":"'+username+'"}');
 			},
 			/**
 			 * 发送交易请求

@@ -1,72 +1,1 @@
-#footer {
-    clear: both;
-    background-color: #333333;
-    height: auto;
-    overflow: hidden;
-    padding: 40px 0px 35px;
-    width: 100%;
-}
-#footer .commonWidth div {
-    float: left;
-}
-#footer .footerList ul {
-    float: left;
-    width: 165px;
-}
-#footer .footerList ul li {
-    font-size: 14px;
-    line-height: 24px;
-}
-#footer .footerList ul li a {
-    color: #999999;
-    display: inline-block;
-    height: 24px;
-    line-height: 24px;
-}
-#footer .footerList ul .footerTitle {
-    margin-bottom: 25px;
-}
-#footer #QRcode {
-    float: left;
-}
-#footer #QRcode #iOS,
-#footer #QRcode #Android {
-    width: 160px;
-    height: auto;
-    text-align: center;
-    margin-right: 80px;
-}
-#footer #QRcode #iOS img,
-#footer #QRcode #Android img {
-    width: 160px;
-    height: auto;
-}
-#footer #QRcode #iOS p,
-#footer #QRcode #Android p {
-    margin-top: 8px;
-    color: #ffffff;
-    font-size: 14px;
-}
-#footer #customerService {
-    float: left;
-    width: 100px;
-    margin-left: 15px;
-}
-#Copyright {
-    width: 100%;
-    background-color: #f2f2f2;
-}
-#Copyright div {
-    width: 635px;
-    padding: 30px 0px;
-    margin: auto;
-    font-size: 12px;
-    text-align: center;
-    line-height: 20px;
-    color: #999999;
-}
-#Copyright div a {
-    line-height: 20px;
-    margin-left: 5px;
-    color: #999999;
-}
+#footer {    clear: both;    background-color: #333333;    overflow: hidden;    padding: 40px 0px 40px;    width: 1280px;    margin: 0 auto;    height: 160px;    margin-top: 20px;    border-bottom: 1px solid #1a1a1a;}#footer div {    float: left;}#footer .footerList ul {    float: left;    width: 104px;    margin-right: 80px;}#footer .footerList ul li {    font-size: 14px;    line-height: 24px;    color: #999;}#footer .footerList ul li a {    color: #999999;    display: inline-block;    height: 24px;    line-height: 24px;}#footer .footerList ul li.footHover a:hover {    color: #ffb319;}#footer .footerList ul li a {    color: #666;}#footer .footerList ul li a:hover {    color: #ffb319;}#footer .footerList ul li.footerTitle {    margin-bottom: 25px;    color: #999;    font-size: 16px;}#iOS {    margin-left: 40px;    margin-right: 180px;}#iOS img {    width: 160px;}#iOS p{    font-size: 14px;    color: #fff;    text-align: center;    margin-top: 5px;}#footer #QRcode #iOS p,#footer #QRcode #Android p {    margin-top: 8px;    color: #ffffff;    font-size: 14px;}#footer #customerService {    float: right;}#footer #customerService ul {    width: 145px;    margin-right: 0;}#footer #customerService li {    color: #666;}#footer #customerService li.footerTitle {    color: #999;}#Copyright {    width: 1280px;    margin: 0 auto;    background-color: #333333;    border-top: 1px solid #4d4d4d;}#Copyright div {    padding: 10px 0px;    margin: auto;    font-size: 12px;    text-align: center;    line-height: 20px;    color: #999999;}#Copyright div a {    line-height: 20px;    margin-left: 5px;    color: #999999;}#Copyright div a:hover {    color: #ffb319;}

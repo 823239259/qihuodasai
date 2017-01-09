@@ -2,9 +2,9 @@
     var prices=[];
     var timeLabel=[]
     var timeData={
-        "time":time,
         "prices":prices,
-        "timeLabel":timeLabel
+        "timeLabel":timeLabel,
+        "time":[]
     };
     var volumeChartTime=[];
     var volumeChartPrices=[];
@@ -15,7 +15,6 @@
     var timePrice=[];
     function handleTime(json){
     	var dosizeL=$("#doSize").val();
-//  	console.log(JSON.stringify(json));
         var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
@@ -26,48 +25,35 @@
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
+        	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript]
         }
-		for(var i=0;i<timeData.timeLabel.length-1;i++){
-			if(timeData.timeLabel[i]==timeData.timeLabel[i+1]){
-				timeData.timeLabel.splice(i,1);
-				timeData.prices.splice(i,1);
-			}else{
-				
-			}
-		}
+//      timeData.timeLabel=timeData.timeLabel.slice(-40);
+//      timeData.prices=timeData.prices.slice(-40);
+//       timeData.time=timeData.time.slice(-40);
         if(timeChart != null){
-        	var option = setOption1();
+        	var x=0;
+            var length=$("#positionList .position3").length;
+        	var text=$("#CommodityNo").text();
+            if(length!=0){
+            	for(var i=0;i<length;i++){
+            		var text1=$("#positionList .position0").eq(i).text();
+            		if(text.indexOf(text1)>=0){
+            			x=Number($("#positionList .position3").eq(i).text());
+            		}
+            	}
+            }
+             var option = setOption1(x);
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
+           
         }
 
     }
-//  document.getElementById("Time").addEventListener("tap",function(){
-//  	$("#CandlestickChart").css("opacity","0");
-//  	$("#dayCandlestickChart").css("opacity","0");
-//				 if(timeChart != null){
-//				 	var option2=setOption1();
-//				 	 var option1 =volumeChartSetOption(volumeChartData);
-//						setTimeout(function(){
-//							$("#timeChart").css("width","100%");
-//						 	timeChart.resize();	
-//							timeChart.setOption(option2);
-//		        			timeChart.resize();	
-//		        			volumeChart.resize();	
-//							volumeChart.setOption(option1);
-//		        			volumeChart.resize();
-//		        		},10);
-//		        		setTimeout(function(){
-//		        			$("#TimeChart1").css("opacity","1");
-//		        		},11);
-//			    }
-//	});
-    
-    function setOption1(){
+    function setOption1(x){
         var  data1=timeData;
        var  option = {
-       	backgroundColor: 'rgba(43, 43, 43, 0)',
+       	backgroundColor: '#1f1f1f',
            tooltip : {
                show: true,
                transitionDuration:0,
@@ -127,7 +113,7 @@
            grid: {
                x: 40,
                y:20,
-               x2:20,
+               x2:46,
                y2:5
            },
            series: {
@@ -150,6 +136,20 @@
                    }
                },
                symbolSize: 2,
+                  markLine: {
+                symbol: ['none', 'none'],
+                clickable:false,
+                               lineStyle: {
+                   normal: {
+                       width: 1,
+                       color: "#ffffff"
+                   }
+               },
+                data: [
+	                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+        			{name: '标线2终点', xAxis: "2", yAxis: x}
+                ]
+                },
                data:data1.prices
            }
        }
@@ -166,13 +166,8 @@
             volumeChartData.time[VolumeLength+i]=str2;
             volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         };
-        var TimeLength= volumeChartData.time.length;
-		for(var i=0;i<volumeChartData.time.length-1;i++){
-			if(volumeChartData.time[i]==volumeChartData.time[i+1]){
-				volumeChartData.time.splice(i,1);
-				volumeChartData.volume.splice(i,1);
-			}
-		}
+//        volumeChartData.time=volumeChartData.time.slice(-40);
+//      volumeChartData.volume=volumeChartData.volume.slice(-40)
         var option =volumeChartSetOption(volumeChartData);
         if(volumeChart != null){
             volumeChart.setOption(option);
@@ -183,7 +178,7 @@
     function volumeChartSetOption(data) {
         var  dataVolume=volumeChartData;
       var  option = {
-      	backgroundColor: '#2B2B2B',
+      	backgroundColor: '#1f1f1f',
       	 color: ['#EDF274'],
           tooltip: {
               trigger: 'axis',
@@ -197,9 +192,10 @@
 		            }
                },
           },
-          legend: {
-              data:['最新成交价']
-          },
+//        legend: {
+//        	
+//            data:['最新成交价']
+//        },
             toolbox: {
                 show: false,
             },
@@ -207,7 +203,7 @@
 			 grid: {
                x: 40,
                y:30,
-               x2:20,
+               x2:46,
                y2:20
            },
           xAxis:[
@@ -217,6 +213,11 @@
                  boundaryGap: true,
                   axisTick: {onGap:false},
                   splitLine: {show:false},
+                  axisLabel:{
+                  	textStyle:{
+                  		fontSize:10,
+                  	}
+                  },
                    axisLine: { lineStyle: { color: '#8392A5' } },
                   data : dataVolume.time
               }
@@ -236,7 +237,10 @@
                     	    return isFinite(a)
                             ? echarts.format.addCommas(+a / 10000)
                             : '';
-                    }
+                    },
+                    textStyle:{
+                  		fontSize:10,
+                  	}
                 },
                 splitLine: {
                     show: true,
@@ -250,26 +254,6 @@
               {
                   name: '成交量',
                   type: 'bar',
-//                 markLine: {
-//		                data: [
-//		                    {type: 'average', name: '平均值'},
-//		                    [{
-//		                        symbol: 'none',
-//		                        x: '90%',
-//		                        yAxis: 'max'
-//		                    }, {
-//		                        symbol: 'circle',
-//		                        label: {
-//		                            normal: {
-//		                                position: 'start',
-//		                                formatter: '最大值'
-//		                            }
-//		                        },
-//		                        type: 'max',
-//		                        name: '最高点'
-//		                    }]
-//		                ]
-//		            },
                   data:dataVolume.volume
               }
           ]

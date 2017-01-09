@@ -1,16 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>交易</title>
+		<title>交易中心</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<script src="../../js/mui.min.js"></script>
-		 <script src="../../js/common.js"></script>
+		<link rel= "stylesheet"  href="../../css/mui.picker.all.css"/>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<script type="text/javascript" src="../../js/common.config.js" ></script> 
 		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
 		<script src="../../js/esl.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
 		<style>
 			.mui-bar-nav{
 				border-bottom: 1px solid #121212;
@@ -23,15 +24,30 @@
 				left: 50% !important;
 				margin-left: -141px;
 			}
+			#popover .mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+				background-color: #FFFFFF;
+			}
+			#popoverLoss,#popoverLoss1{
+				min-width: 96%;
+				height: 200px ;
+				top:50% !important;
+				margin-top: -100px;
+				left: 2% !important;
+				background-color: #2b2b2b;
+			}
 			@media (min-width: 400px){
 				#popover{
 					width: 80%;
 					margin-left: -40%;
 				}
 			}
-			
-			#popover .mui-popover .mui-popover-arrow{
-				display: none !important;
+			#popoverConditoion{
+				min-width: 90%;
+				height: 240px ;
+				top:50% !important;
+				margin-top: -120px;
+				left: 5% !important;
+				background-color: #2b2b2b;
 			}
 			.mui-input-row label{
 				width: 45%;
@@ -42,7 +58,8 @@
 			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
 				width: 55%;
 				height: 40px;
-				font-size: 14px;;
+				font-size: 14px;
+				background-color: #2b2b2b;
 			}
 			#add,#clsoeAdd{
 				width: 45%;
@@ -63,11 +80,13 @@
 				background-color: #cccccc;
 				color:#2b2b2b;
 			}
-			#topPopover {
+			#topPopover{
 				position: fixed;
+				z-index: 999;
 				top: 16px;
 				right: 6px;
-				height: 60px;
+				height: 65px;
+				/*height: 150px;*/
 				width: 35%;
 			}
 			#topPopover.mui-popover{
@@ -79,295 +98,755 @@
 			#topPopover.mui-popover .mui-table-view{
 				background-color: #383838;
 				color:#999999;
+				font-size: 14px;
+			}
+			#topPopover .mui-table-view-cell:after{
+				background-color: #454545;
+			}
+			.mui-backdrop{
+				background-color: rgba(0, 0, 0, .7);
+			}
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			/*.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}*/
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			* {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
 			}
 		</style>
 	</head>
-	<body style="background-color: #2B2B2B"> 
-		<header class="mui-bar mui-bar-nav"> 
-		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
-		    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
-		     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 25px;"></a>
-		   	<a id="muneBox" href="#topPopover"></a>
-		</header>
-		<div class="mui-content" style="padding-top: 86px;" >
-				<div id="headerMenu" style="background-color: #2B2B2B;">
-					<table cellpadding="0" cellspacing="0">
-						<thead>
-							<tr>
-								<td id="tradeMenu" >交易中心</td>
-								<td id="HandicapButton">盘口</td>
-								<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
-								<td id="selectButon">K线</td>
-							</tr>
-						</thead>
-					</table>
-				</div>
-				<div id="headerContent">
-					<div id="chartAllDiv" class="bottomDivList mui-active">
-						<div class="chartDivContent mui-active" id="TimeChart1">
-							<div id="timeChart" style="width:100%;"></div>
-							<div id="volumeChart" style="width:100%;"></div>
-						</div>
-						<div class="chartDivContent" id="CandlestickChart" style="opacity: 0;">
-							<div   id="CandlestickChartDiv" style="width:100%;"></div>
-							<div id="CandlestickVolumeChart" style="width:100%;"></div>
-						</div>
-						<div class="buttomFix" style="position: fixed;bottom: 0px;height:211px ;">
-							<div class="buttomFixLeft mui-col-xs-6">
-								<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
-								<p>买<span id="sellPrices" class="PricesLeft">-</span ><span id="sellPricesNumber" class="PricesRight">-</span></p>
-								<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
-							</div>
-							<div class="buttomFixRight mui-col-xs-6">
-								<p id="freshPrices">0.00</p> 
-								<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
-							</div> 
-							<div style="display: none;">
-								<input type="text"  id = "exchangeNo"/> 
-								<input type="text"  id = "commodeityNo"/>
-								<input type="text"  id = "contractNo"/>
-								<input type="text"  id = "contractSize" />
-								<input type="text"  id= "miniTikeSize"/>
-								<input type="text"  id = "doSize"/>
-								<input type="text" id="CommodityName" />
-								持仓盈亏:<input type="text" value = "0.00" id = "floatingProfit">
-							</div>
-						</div>
-					</div>
-					<div id="Handicap" class="bottomDivList">
-						<table cellpadding="0" cellspacing="0" id="table_title">
+	<body style="background-color: #2B2B2B">
+		<div id="bg1" style="display: block;">
+			<header class="mui-bar mui-bar-nav"> 
+			    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
+			    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
+			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
+			   	<a id="muneBox" href="#topPopover"></a>
+			</header>
+			<div class="mui-content" style="padding-top: 80px;">
+					<div id="headerMenu">
+						<table cellpadding="0" cellspacing="0">
 							<thead>
 								<tr>
-									<td>卖五档</td>
-									<td>买五档</td>
+									<td id="tradeMenu" >交易中心</td>
+									<td id="lightDiagram">闪电图</td>
+									<td id="HandicapButton">盘口</td>
+									<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
+									<td id="selectButon">K线</td>
 								</tr>
 							</thead>
 						</table>
-						<table cellpadding="0" cellspacing="0" id="table_Content">
-							<tr>
-								<td>卖一</td>
-								<td id = "sell_0">0</td> 
-								<td id = "sell_1">0</td>
-								<td>买一</td>
-								<td id = "buy_0">0</td>
-								<td id = "buy_1">0</td>
-							</tr>
-							<tr>
-								<td>卖二</td>
-								<td id = "sell_2">0</td>
-								<td id = "sell_3">0</td>
-								<td>买二</td>
-								<td id = "buy_2">0</td>
-								<td id = "buy_3">0</td>
-							</tr>
-							<tr>
-								<td>卖三</td>
-								<td id = "sell_4">0</td>
-								<td id = "sell_5">0</td>
-								<td>买三</td>
-								<td id = "buy_4">0</td>
-								<td id = "buy_5">0</td>
-							</tr>
-							<tr>
-								<td>卖四</td>
-								<td id = "sell_6">0</td>
-								<td id = "sell_7">0</td>
-								<td>买四</td>
-								<td id = "buy_6">0</td>
-								<td id = "buy_7">0</td>
-							</tr>
-							<tr>
-								<td>卖五</td>
-								<td id = "sell_8">0</td>
-								<td id = "sell_9">0</td>
-								<td>买五</td>
-								<td id = "buy_8">0</td>
-								<td id = "buy_9">0</td>
-							</tr>
-						</table>
-						<table cellpadding="0" cellspacing="0" id="HandicapTable">
-							<tr>
-								<td>最新 </td>
-								<td id = "pklastparice">0</td>
-								<td>涨跌</td>
-								<td id = "pkzd">0</td>
-							</tr>
-							<tr>
-								<td>开盘 </td>
-								<td id = "pkopenprice">0</td>
-								<td>成交量 </td>
-								<td id = "pktrademl">0</td>
-							</tr>
-							<tr>
-								<td>最高 </td>
-								<td id = "pkhightprice">0</td>
-								<td>持仓量  </td>
-								<td id = "pkccml">0</td>
-							</tr>
-							<tr>
-								<td>最低 </td>
-								<td id  = "pklowprice">0</td>
-								<td>昨结  </td>
-								<td id = "pkzj">0</td>
-							</tr>
-							<tr>
-								<td>结算 </td>
-								<td id = "pkjs">0</td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
 					</div>
-					<div  id="trade" style="padding-top: 40px; padding-bottom: 20px;" class=" bottomDivList">
-					    <div class="Assets" style="background-color: #2B2B2B;">
-					        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
-					        <p><span>总资产</span><span>保证金</span><span>余额</span></p>
-					    </div>
-					    <div class="ProductInformation">
-					        <div class="ProductInformationLeft">
-					                <select class="mui-btn mui-btn-block" id = "tradeTitle" >
-					                </select>
-					                <span id="MainContract"></span>
-					            <span class="mui-icon mui-icon-search" id="searchIcon"></span>
-					        </div>
-					        <div class="ProductInformationRight">
-					            <p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
-					            <p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
-					            <p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
-					        </div>
-					    </div>
-					    <form id="buyFuture">
-					        <div class="butomBoreder">
-					            <div class="mui-input-row mui-radio radioDiv mui-left">
-					                <label>市价</label>
-					                <input type="radio" id="sj" checked name="prices" value="1" class="radioChoice mui-radio">
-					            </div>
-					            <div class="mui-input-row mui-radio radioDiv mui-left">
-					                <label>限价</label>
-					                <input type="radio"  id="xj" class="radioChoice mui-radio" value="0" name="prices">
-					            </div>
-					        </div>
-					        <div class="BuyContentLeft"><label>价格:</label><input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价"></div><div class="BuyContentLeft"><label>手数:</label><input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number"></div>
-					        <div class="buyBtn">
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买入</p><p id = "buyBtn_P" class = "buyBtnPrices">市价</p></button>
-					            <button type="button" class="mui-btn mui-col-xs-5 buy " id = "sell" data-tion-buy = "1"><p id="switchSell" >卖出</p><p id = "sellBtn_P" class = "buyBtnPrices">市价</p></button>
-					        </div>
-					    </form>
-					    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-					        <a class="mui-control-item mui-active" href="#item1" id = "holdCC">持仓</a>
-					        <a class="mui-control-item" href="#item2" id = "desgnateGD">挂单</a>
-					        <a class="mui-control-item" href="#item3" id = "tradeWT">委托</a>
-					        <a class="mui-control-item" href="#item4" id = "successCJ">成交</a>
-					    </div>
-					    <div>
-					        <div id="item1" class="mui-control-content mui-active" >
-					            <ul id="positionList" class="listStyle" style="height: 165px; width: 100%;" >
-					                <li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
-					            </ul>
-					            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
-					            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-					        </div>
-					        <div id="item2" class="mui-control-content">
-					            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
-					                <li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
-					            </ul>
-					             <button type="button" class="mui-btn focusButton" id="fullWithdrawal">全撤</button>
-					            <button type="button" class="mui-btn focusButton " id="kilAnorder">撤单</button>
-					           <button type="button" class="mui-btn focusButton" id="changeSingle">改单</button>
-					        </div>
-					        <div id="item3" class="mui-control-content" style="width: 100%;">
-					            <ul  id="Entrust" class="listStyle" style="height: 165px;" >
-					                <li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
-					            </ul>
-					        </div> 
-					        <div id="item4" class="mui-control-content" >
-					            <ul  id="Deal" class="listStyle" style="height: 165px;">
-					                <li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
-					            </ul>
-					        </div>
-					    </div>
-					</div>
-				</div>
-				<div class="top"></div><div class="bottom"></div>
-				<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-				<div id="littleDiv"></div>
-				<div id="list_type" >
-					<span id="sanjiao"></span>
-					<ul >
-						<li value="1">1分</li>
-						<li value="5">5分</li>
-						<li value="15">15分</li>
-						<li value="30">30分</li>
-						<li value="1440">日K</li>
-					</ul>
-				</div>
-			</div>
-			<div class="BuyDiv">
-				<div id="numberInput">
-					<label>手数:</label>
-					<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
-					<label>（价格：市价）</label>
-				</div>
-				<div class="buttonDivList">
-					<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
-					<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
-				</div>
-			</div>
-			
-			<div id="popover" class="mui-popover" id="inputDiv">
-				<div class="mui-popover-arrow"></div>
-				<div class="mui-content-padded">
-				<h4 id="title" style="text-align: center;margin-top: 10px;">改单</h4>
-					<form class="mui-input-group" style="margin-top: 10px;">
-						<div class="mui-input-row">
-							<label>委托价格：</label>
-							<input type="text" class="mui-input-clear" id="col1" placeholder="请输入">
+					<div id="headerContent">
+						<div id="chartAllDiv" class="bottomDivList mui-active" >
+							<div class="chartDivContent mui-active" id="TimeChart1">
+								<div id="timeChart" style="width:100%;"></div>
+								<div id="volumeChart" style="width:100%;"></div>
+							</div>
+							<div class="chartDivContent" id="CandlestickChart" style="opacity: 0;">
+								<div   id="CandlestickChartDiv" style="width:100%;"></div>
+								<div id="CandlestickVolumeChart" style="width:100%;"></div>
+							</div>
+							<div id="lightChartDiv" class="chartDivContent ">
+								<div id="lightChart"></div>
+							</div>
+							<div class="buttomFix" style="position: fixed;bottom: 0px;height:211px ;">
+								<div class="buttomFixLeft mui-col-xs-6">
+									<p>卖<span id="buyPrices" class="PricesLeft">-</span ><span id="buyPricesNumber" class="PricesRight">-</span></p>
+									<p>买<span id="sellPrices" class="PricesLeft">-</span ><span id="sellPricesNumber" class="PricesRight">-</span></p>
+									<p>成交量<span id="volumePricesNumber" class="PricesRight">-</span></p>
+								</div>
+								<div class="buttomFixRight mui-col-xs-6">
+									<p id="freshPrices">0.00</p> 
+									<p id="domnRange"><span id="rose">-</span><span id="changeValue">-</span></p>
+								</div> 
+								<div style="display: none;">
+									<input type="text"  id = "exchangeNo"/> 
+									<input type="text"  id = "commodeityNo"/>
+									<input type="text"  id = "contractNo"/>
+									<input type="text"  id = "contractSize" />
+									<input type="text"  id= "miniTikeSize"/>
+									<input type="text"  id = "doSize"/>
+									<input type="text" id="CommodityName" />
+									持仓盈亏:<input type="text" value = "0.00" id = "floatingProfit">
+								</div>
+							</div>
 						</div>
-						<div class="mui-input-row">
-							<label>委托数量：</label>
-							<input type="text" class="mui-input-clear" id="col2" placeholder="请输入">
+						<div id="Handicap" class="bottomDivList" style="margin-top: 10px;">
+							<table cellpadding="0" cellspacing="0" id="table_Content">
+								<tr>
+									<td colspan="2" style="text-align: center;" class="borderRight">盘口</td>
+									<td colspan="3" style="text-align: center;" >五档行情</td>
+									
+								</tr>
+								<tr>
+									<td >最新</td>
+									<td id = "pklastparice" class="borderRight"></td>
+									<td>卖五</td>
+									<td id = "sell_8">0</td>
+									<td id = "sell_9" >0</td>
+								</tr>
+								<tr>
+									<td>开盘 </td>
+									<td id = "pkopenprice" class="borderRight">0</td>
+									<td>卖四</td>
+									<td id = "sell_6">0</td>
+									<td id = "sell_7" >0</td>
+								</tr>
+								<tr>
+									<td>最高 </td>
+									<td id = "pkhightprice" class="borderRight">0</td>
+									<td>卖三</td>
+									<td id = "sell_4">0</td>
+									<td id = "sell_5" >0</td>
+									
+								</tr>
+								<tr>
+									<td>最低 </td>
+									<td id  = "pklowprice"class="borderRight">0</td>
+									<td>卖二</td>
+									<td id = "sell_2">0</td>
+									<td id = "sell_3" >0</td>
+								</tr>
+								<tr>
+									<td>结算 </td>
+									<td id = "pkjs" class="borderRight">0</td>
+									<td>卖一</td>
+									<td id = "sell_0">0</td> 
+									<td id = "sell_1" >0</td>
+								</tr>
+								<tr>
+									<td >涨跌</td>
+									<td id = "pkzd" class="borderRight">0</td>
+									<td>买一</td>
+									<td id = "buy_0">0</td>
+									<td id = "buy_1" >0</td>
+								</tr>
+								<tr>
+									<td>成交量 </td>
+									<td id = "pktrademl" class="borderRight">0</td>
+									<td>买二</td>
+									<td id = "buy_2">0</td>
+									<td id = "buy_3" >0</td>
+								</tr>
+								<tr>
+									<td>持仓量  </td>
+									<td id = "pkccml" class="borderRight">0</td>
+									<td>买三</td>
+									<td id = "buy_4">0</td>
+									<td id = "buy_5" >0</td>
+								</tr>
+								<tr>
+									<td>昨结  </td>
+									<td id = "pkzj" class="borderRight">0</td>
+									<td>买四</td>
+									<td id = "buy_6">0</td>
+									<td id = "buy_7" >0</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="borderRight"></td>
+									<td>买五</td>
+									<td id = "buy_8">0</td>
+									<td id = "buy_9" >0</td>
+								</tr>
+							</table>
 						</div>
-					</form>
-					<div id="add_div" class="operate mui-hidden">
-						<button type="button" class="mui-btn mui-btn-blue" id="add">确定</button>
-						<button type="button" class="mui-btn mui-btn-blue" id="clsoeAdd">取消</button>
+						<div  id="trade" style="padding-bottom: 20px;padding-top: 46px;" class=" bottomDivList">
+						    <div class="Assets" style="background-color: #2B2B2B;">
+						        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit">0.00</span><span id = "todayCanUse">0.00</span></p>
+						        <p><span>总资产(USD)</span><span>保证金(USD)</span><span>余额(USD)</span></p>
+						    </div>
+						    <div class="ProductInformation">
+						        <div class="ProductInformationLeft">
+						                <select class="mui-btn mui-btn-block" id = "tradeTitle" >
+						                </select>
+						                <span id="MainContract"></span>
+						            <span class="mui-icon mui-icon-search" id="searchIcon"></span>
+						        </div>
+						        <div class="ProductInformationRight">
+						            <p class="whiteFont">新：<span id = "lastPrice">0.00</span><span class="dataRight" id= "totalVolume">0.00</span></p>
+						            <p class="whiteFont">卖：<span id = "sellLastPrice">0.00</span><span class="dataRight" id = "askQty">0.00</span></p>
+						            <p class="whiteFont">买：<span id = "buyLastPrice">0.00</span><span class="dataRight" id = "bidQty">0.00</span></p>
+						        </div>
+						    </div>
+						    <form id="buyFuture">
+						        <div class="butomBoreder">
+						        	<table  cellpadding="0" cellspacing="0" id="radioDiv">
+						        		<tr>
+						        			<td>
+						                		<span><input type="radio" id="sj" checked name="prices" value="1" class="radioChoice"></span>
+						                		<label>市价</label>
+						        			</td>
+						        			<td >
+						                		<span><input type="radio"  id="xj" class="radioChoice" value="0" name="prices"></span>
+						                		<label>限价</label>
+						        			</td>
+						        		</tr>
+						        		<tr>
+						        			<td>
+						        				<label class="labelTitle">手数:</label>
+						        				<input id = "orderNumber"  onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" class = "numberResize"  value="1" placeholder="1" type="number">
+						        			</td>
+						        			<td>
+						        				<label class="labelTitle">价格:</label>
+						        				<input  id = "orderPrice" onkeypress="if(event.keyCode!=46 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  disabled="disabled" class = "numberResize"  type="number" placeholder = "市价">
+						        			</td>
+	
+						        		</tr>
+						        	</table>
+						        </div>
+						        <div class="buyBtn">
+						            <button type="button" class="mui-btn mui-col-xs-6 buy " id = "buy" data-tion-buy = "0" ><p id="switchBuy">买入</p><p id = "buyBtn_P" class = "buyBtnPrices">市价</p></button>
+						            <button type="button" class="mui-btn mui-col-xs-6 buy " id = "sell" data-tion-buy = "1"><p id="switchSell" >卖出</p><p id = "sellBtn_P" class = "buyBtnPrices">市价</p></button>
+						        </div>
+						    </form>
+						    <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+						        <a class="mui-control-item mui-active" href="#item1" id = "holdCC">持仓</a>
+						        <a class="mui-control-item" href="#item2" id = "desgnateGD">挂单</a>
+						        <a class="mui-control-item" href="#item3" id = "tradeWT">委托</a>
+						        <a class="mui-control-item" href="#item4" id = "successCJ">成交</a>
+						    </div>
+						    <div>
+						        <div id="item1" class="mui-control-content mui-active" >
+						            <ul id="positionList" class="listStyle" style="height: 165px; width: 100%;" >
+						                <li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
+						            </ul>
+						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
+						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
+						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
+						        </div>
+						        <div id="item2" class="mui-control-content">
+						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
+						                <li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
+						            </ul>
+						             <button type="button" class="mui-btn focusButton" id="fullWithdrawal">全撤</button>
+						            <button type="button" class="mui-btn focusButton " id="kilAnorder">撤单</button>
+						           <button type="button" class="mui-btn focusButton" id="changeSingle">改单</button>
+						        </div>
+						        <div id="item3" class="mui-control-content" style="width: 100%;">
+						            <ul  id="Entrust" class="listStyle" style="height: 165px;" >
+						                <li class="fisrtLi EntrustOreder"><a class="mui-navigate-right" ><span>合约名称</span><span>状态</span><span>买卖</span><span>委托价</span><span>委托量</span><span>已成交</span><span>已撤单</span><span class="dateTimeL">下单时间</span></a></li>
+						            </ul>
+						        </div> 
+						        <div id="item4" class="mui-control-content" >
+						            <ul  id="Deal" class="listStyle" style="height: 165px;">
+						                <li class="DealLi" ><a class="mui-navigate-right" ><span>合约名称</span><span>买卖</span><span>成交价</span><span>成交量</span><span class="dateTimeL">成交时间</span></a></li>
+						            </ul>
+						        </div>
+						    </div>
+						</div>
+					</div>
+					
+					<div id="list_type" >
+						<span id="sanjiao"></span>
+						<ul >
+							<li value="1">1分</li>
+							<li value="5">5分</li>
+							<li value="15">15分</li>
+							<li value="30">30分</li>
+							<li value="1440">日K</li>
+						</ul>
 					</div>
 				</div>
-			</div>
-			<!--<div id="dropMune" >
-					<span id="sanjiao"></span>
-					<ul >
-						<li id="switchAccount">切换账号</li>
-					</ul>
-				</div>-->
-		<div id="topPopover" class="mui-popover">
-			<div class="mui-popover-arrow"></div>
-			<div class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a id="switchAccount">切换账号</a>
-						</li>
-					</ul>
+				<div class="BuyDiv">
+					<div id="numberInput">
+						<label>手数:</label>
+						<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="number">
+						<label>（价格：市价）</label>
+					</div>
+					<div class="buttonDivList">
+						<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
+						<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
+					</div>
 				</div>
-			</div>
+				<div id="popover" class="mui-popover">
+					<div class="mui-content-padded">
+					<h4 id="title" style="text-align: center;margin-top: 10px;">改单</h4>
+						<form class="mui-input-group" style="margin-top: 10px;">
+							<div class="mui-input-row">
+								<label>委托价格：</label>
+								<input type="text" class="mui-input-clear" id="col1" placeholder="请输入">
+							</div>
+							<div class="mui-input-row">
+								<label>委托数量：</label>
+								<input type="text" class="mui-input-clear" id="col2" placeholder="请输入">
+							</div>
+						</form>
+						<div id="add_div" class="operate mui-hidden">
+							<button type="button" class="mui-btn mui-btn-blue" id="add">确定</button>
+							<button type="button" class="mui-btn mui-btn-blue" id="clsoeAdd">取消</button>
+						</div>
+					</div>
+				</div>
+				<!---------------------------------下拉菜单--------------------------->
+				<div id="topPopover" class="mui-popover">
+					<div class="mui-popover-arrow"></div>
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									<a id="switchAccount">切换账号</a>
+								</li>
+								<li class="mui-table-view-cell" id="openConditionButton">
+									<a id="openCondition">条件单</a>
+								</li>
+								<li class="mui-table-view-cell" id="openStopButton">
+									<a id="openStop">止损单</a>
+								</li>
+								<li class="mui-table-view-cell">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+<!---------------------------------止损单弹窗--------------------------->
+				<div id="popoverLoss" class="mui-popover">
+				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+				        <a class="mui-control-item mui-active" href="#stopTitle" >止损</a>
+				        <a class="mui-control-item" href="#lossTitle" >止盈</a>
+				    </div>
+				    <div>
+				    	<div id="stopTitle" class="mui-control-content mui-active">
+				    		<table>
+				    			<tr>
+				    				<td class="oddTd" id = "stopOddTd">合约</td>
+				    				<td class="evenTd" id = "stopEvenTd">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "stopBorderLeft">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "stopEvenPrice"></i></td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">方式</td>
+				    				<td  colspan="3">
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices">
+				    						<option value="0">止损价</option>
+				    						<option value="2">动态价</option>
+				    					</select>
+				    					<input type="hidden" id = "stopHoldAvgPrice" />
+				    					<input type="number" value="0" id="stopChoicePrices1" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+				    					<span id="Increase">0.00%</span>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">手数</td>
+				    				<td class="evenTd "><input type="number" value="1" id="stopNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
+				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices1">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
+				    					</select>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2" id="closeStopTable">关闭</td>
+				    				<td colspan="2" id="insertStopData" style="border-right: none;">添加</td>
+				    			</tr>
+				    		</table>
+				    	</div>
+				    	<div id="lossTitle" class="mui-control-content">
+				    		<table>
+				    			<tr>
+				    				<td class="oddTd">合约</td>
+				    				<td class="evenTd " id = "lossContractCode">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "lossDrection">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "lossEventPrice"></i></td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">止盈价</td>
+				    				<td  colspan="3">
+				    					<input type="hidden" id = "lossHoldAvgPrice" />
+				    					<input type="number" value="0" style = "width: 40%;" id="lossChoicePrices2" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+				    					<span id="lossIncrease1">0.00%</span>
+				    				</td> 
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">手数</td>
+				    				<td class="evenTd "><input type="number" value="1" id="lossNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
+				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices4">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
+				    					</select>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2" id="closeLossTable">关闭</td>
+				    				<td colspan="2" id="insertLossData" style="border-right: none;">添加</td>
+				    			</tr>
+				    		</table>
+				    	</div>
+				    </div>
+				</div>
+			</div> 
+			<!---------------------------------条件单--------------------------->
+			<div id="bg2" style="display: none;">
+				<header class="mui-bar mui-bar-nav">
+		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack " id= "stopBack"><i>返回</i></a>
+				    <h1 class="mui-title">条件单</h1>
+				    <a class="mui-pull-right" id="insertCondition" class = "insertCondition"></a>
+				</header>
+				<div class="mui-content" style="padding: 0px;position: absolute;top: 46px;z-index: 997;width: 100%;">
+					<div id="segmentedControlCondition" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
+				        <a class="mui-control-item mui-active" href="#NoCondition" id="NoConditionTitle">未触发列表</a>
+				        <a class="mui-control-item" href="#alreayCondition" id="alreayConditionTitle">已触发列表</a>
+				    </div>
+				    <div class="mui-control-content mui-active" id="NoCondition">
+				    	<table  id="conditionTable">
+				    		<thead>
+				    			<tr>
+				    				<td>合约名称</td>
+				    				<td>状态</td>
+				    				<td>类型</td>
+				    				<td>条件</td>
+				    				<td>下单</td>
+				    				<td>有效日期</td>
+				    				<td>下单时间</td>
+				    			</tr>
+				    		</thead>
+							<tbody id = "thodyCondition" >
 
-		</div>
+							</tbody>
+				    	</table>
+				   	 </div>
+				    <div class="mui-control-content" id="alreayCondition">
+				    	<table>
+				    		<thead>
+				    			<tr>
+				    				<td>合约名称</td>
+				    				<td>状态</td>
+				    				<td>类型</td>
+				    				<td>条件</td>
+				    				<td>下单</td>
+				    				<td>有效日期</td>
+				    				<td>触发时间</td>
+				    			</tr>
+				    		</thead>
+				    		<tbody id = "over-thbodyCondition">
+				    		</tbody>
+				    	</table>
+				    </div>
+				    	<button value="2"  class = "updateCondition" id="suspendCondition">暂停</button>
+						<button value="0" id="modifyCondition">修改</button>
+						<button value="1" class = "updateCondition" id="deleteCondition">删除</button>
+						<div id="stopTips1" class="stopTips">
+							<div>提示</div>
+							<div>
+								<p>1.云端止损单只保证触发不保证成交</p>
+								<p>2.暂不支持显示套利止损单</p>
+							</div>
+						</div>
+				</div>
+<!-----------------------------添加条件单的弹窗---------------------------->				
+				<div id="popoverConditoion" class="mui-popover">
+				    <div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+				        <a class="mui-control-item mui-active" id = "plan_conditionTitlePrice" href="#ConditoionTitlePrices" >价格条件</a>
+				        <a class="mui-control-item" id = "plan_conditionTitleTime" href="#ConditoionTitleTime" >时间条件</a>
+				    </div>
+				    <div>
+				    	<div id="ConditoionTitlePrices" class="mui-control-content mui-active">
+				    		<table>
+								<tr>
+				    				<td >合约</td>
+				    				<td >
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract">
+				    					</select> 
+				    				</td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+				    			<tr>
+				    				<td >方式</td>
+				    				<td class="borderRight">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePrices">
+				    						<option value = "0">></option>
+				    						<option value = "2">>=</option>
+				    						<option value = "1"><</option>
+				    						<option value = "3"><=</option>
+				    					</select>
+				    					<input type="number" value="0"  id="ConditoionPricesInput" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"/>
+				    				</td>
+				    				<td colspan="2">
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceAdditional">
+				    						<option value = "-1">附加</option>
+				    						<option value = "0">></option>
+				    						<option value = "2">>=</option>
+				    						<option value = "1"><</option>
+				    						<option value = "3"><=</option>
+				    					</select>
+				    					<input type="number " value="0"  id="ConditoionPricesInput1" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td >操作</td>
+				    				<td class="borderRight">
+				    					<select class="mui-btn mui-btn-block selectComm" id="shopDrection">
+				    						<option value = "0">买</option>
+				    						<option value = "1">卖</option>
+				    					</select>
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelect">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
+				    					</select>
+				    				</td>
+				    				<td class="borderRight">手数</td>
+				    				<td ><input type="number" value="0"  id="ConditoionPricesInput3" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
+				    			</tr>
+				    			<tr> 
+				    				<td>有效</td>
+				    				<td colspan="3">当日有效</td>
+				    			</tr>
+				    		</table>
+							<button id="closeConditionTable">取消</button>
+							<button id="insertConditionTable">添加</button>
+				    	</div>
+				    	<div id="ConditoionTitleTime" class="mui-control-content">
+				    		<table>
+								<tr>
+				    				<td >合约</td>
+				    				<td >
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract1">
+				    					</select>
+				    				</td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+				    			<tr>
+				    				<td >时间</td>
+				    				<td>
+				    					<input type="text" placeholder="选择时间" data-options='{"type":"time"}' id="insertTimeInput"  value="0" readonly="readonly"/>
+				    				</td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+				    			<tr >
+				    				<td>价格</td>
+				    				<td>
+				    					<select class="mui-btn mui-btn-block selectComm" id="chioceTimeAdditional">
+				    						<option value = "-1">附加</option>
+				    						<option value = "0">></option>
+				    						<option value = "2">>=</option>
+				    						<option value = "1"><</option>
+				    						<option value = "3"><=</option>
+				    					</select>
+				    					<input type="number " value="0"  id="ConditoionTimePricesInput" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />
+				    				</td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+				    			<tr>
+				    				<td >操作</td>
+				    				<td class="borderRight">
+				    					<select class="mui-btn mui-btn-block selectComm" id="shopDrectionTime">
+				    						<option value = "0">买</option>
+				    						<option value = "1">卖</option>
+				    					</select>
+				    					<select class="mui-btn mui-btn-block selectComm" id="chiocePricesSelectTime">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
+				    					</select>
+				    				</td>
+				    				<td class="borderRight">手数</td>
+				    				<td ><input type="number " value="0"  id="ConditoionTimeInput" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
+				    			</tr>
+				    			<tr> 
+				    				<td>有效</td>
+				    				<td colspan="3">当日有效</td>
+				    			</tr>
+				    		</table>
+							<button id="closeConditionTable1">取消</button>
+							<button id="insertConditionTable1">添加</button>
+				    	</div>
+				    </div>
+				</div>
+			</div> 
+<!--------------------------止损单---------------------------------->
+			<div id="bg3" style="display: none;">
+				<header class="mui-bar mui-bar-nav" style="position: fixed;z-index: 998;">
+		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "conditionBack"><i>返回</i></a>
+				    <h1 class="mui-title">止损单</h1>
+				</header>
+				<div class="mui-coontent" style="position: absolute;z-index: 997;top: 46px;width: 100%;">
+					<div id="segmentedControlStop" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;position: fixed;z-index: 998;">
+				        <a class="mui-control-item mui-active" href="#NoStopTale" id="NoStopListTitle">未触发列表</a>
+				        <a class="mui-control-item" href="#alreayStopTale" id="alreayStopListTitle">已触发列表</a>
+				    </div>
+				    <div class="mui-control-content mui-active" id="NoStopTale">
+				    	<table class="ConditionList" id="clickTable">
+				    		<thead>
+				    			<tr>
+				    				<td>合约名称</td>
+				    				<td>状态</td>
+				    				<td>多空</td>
+				    				<td>类别</td>
+				    				<td>手数</td>
+				    				<td>触发条件</td>
+				    				<td>委托价</td>
+				    				<td>有效期</td>
+				    				<td>下单时间</td>
+				    			</tr>
+				    		</thead>
+				    		<tbody id = "clickTableBody">
+				    		</tbody>
+							
+				    	</table>
+				    </div>
+				    <div class="mui-control-content" id="alreayStopTale">
+				    	<table class="ConditionList">
+				    		<thead>
+				    			<tr>
+				    				<td>合约名称</td>
+				    				<td>状态</td>
+				    				<td>多空</td>
+				    				<td>类别</td>
+				    				<td>手数</td>
+				    				<td>触发条件</td>
+				    				<td>委托价</td>
+				    				<td>有效期</td>
+				    				<td>触发时间</td>
+				    			</tr>
+				    		</thead>
+				    		<tbody id = "over-clickTableBody">
+				    		</tbody>
+				    	</table>
+				    </div>
+				    <button value="2" class = "updateStopLoss" id="suspendCondition1">暂停</button>
+					<button value="0" id="modifyCondition1">修改</button>
+					<button value="1" class = "updateStopLoss" id="deleteCondition1">删除</button>
+					<div id="stopTips" class="stopTips">
+						<div>提示</div>
+						<div>
+							<p>1.云端止损单只保证触发不保证成交</p>
+							<p>2.暂不支持显示套利止损单</p>
+						</div>
+					</div>
+				</div>
+				<div id="popoverLoss1" class="mui-popover">
+				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
+				        <a class="mui-control-item mui-active ustopTitle" href="#stopTitle1"  id= "ustopTitle">止损</a>
+				        <a class="mui-control-item ulossTitle mui-active" href="#lossTitle1" id= "ulossTitle">止盈</a>
+				    </div>
+				    <div>
+				    	<div id="stopTitle1" class="mui-control-content mui-active  ustopTitle">
+				    		<table>
+				    			<tr>
+				    				<td class="oddTd" id = "stopOddTd1">合约</td>
+				    				<td class="evenTd" id = "stopEvenTd1">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "stopBorderLeft1">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "stopEvenPrice1"></i></td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">方式</td>
+				    				<td  colspan="3">
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices2">
+				    						<option value="0">止损价</option>
+				    						<option value="2">动态价</option>
+				    					</select>
+				    					<input type="hidden" id = "stopHoldAvgPrice1" />
+				    					<input type="number" value="0" id="stopChoicePrices3" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+				    					<span id="Increase2">0.00%</span>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">手数</td>
+				    				<td class="evenTd "><input type="number" value="1" id="stopNumber1" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" ></td>
+				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止损委托价：
+				    					<select class="mui-btn mui-btn-block selectComm" id="choiceStopPrices3">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
+				    					</select>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2" id="closeStopTable1">关闭</td>
+				    				<td colspan="2" id="insertStopData1" style="border-right: none;">修改</td>
+				    			</tr>
+				    		</table>
+				    	</div>
+				    	<div id="lossTitle1" class="mui-control-content mui-active  ulossTitle">
+				    		<table>
+				    			<tr>
+				    				<td class="oddTd">合约</td>
+				    				<td class="evenTd " id = "ulossContractCode">富时A50</td>
+				    				<td class="oddTd borderLeft" id = "uDrection">多头</td>
+				    				<td class="evenTd">最新：<i class="evenPrice" id = "uEvenPrice"></i></td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">止盈价</td>
+				    				<td  colspan="3">
+				    					<input type="hidden" id = "ulossHoldAvgPrice1" />
+				    					<input type="number" value="0" style="width: 40%;" id="uLossPrice" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+				    					<span id="lossIncrease2">0.00%</span>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td class="oddTd">手数</td>
+				    				<td class="evenTd "><input type="number" value="1" id="ulossNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
+				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
+				    					<select class="mui-btn mui-btn-block selectComm" id="uchoiceLossPrices">
+				    						<option value = "1">市价</option>
+				    						<option value = "2">对手价</option>
+				    					</select>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2" id="closeLossTable1">关闭</td>
+				    				<td colspan="2" id="uinsertLossData1" style="border-right: none;">修改</td>
+				    			</tr>
+				    		</table>
+				    	</div>
+				    </div>
+				</div>
+			</div>
+			</div>
+			</div>
+			<div class="top"></div>
+			<div class="bottom"></div>
+		</body>
 			<script>
+				function init(param){
+					$("#exchangeNo").val(param[3]);
+					$("#commodeityNo").val(param[2]);
+					$("#contractNo").val(param[1]);
+					$("#contractSize").val(param[5]);
+					$("#lastPrice").text(param[7]);
+					$("#miniTikeSize").val(param[6]);
+					$("#doSize").val(param[4]);
+				}
 				mui.plusReady(function(){
 				loadCss();
 				var Proportion=1;
     			function loadCss(){
 		    			var Proportion=1;
-						var screen=plus.screen.resolutionHeight;
+						var screen=window.innerHeight;
 							$("#timeChart,#CandlestickChartDiv").css({
 								"width":"100%",
-								"height":135*screen/568+"px",
+								"height":screen-300-105+"px",
 							});
 							$("#volumeChart,#CandlestickVolumeChart").css({
 								"width":"100%",
-								"height":110*screen/568+"px",
+								"height":105+"px",
 							});
+							$("#lightChart").css({
+								"width":"100%",
+								"height":screen-300+"px",
+							});
+							$("#alreayStopTale,#NoStopTale,#alreayCondition,#NoCondition").css({
+								"height":screen-160+"px",
+							})
 						}	
 					/*
 					 增加新手引导的样式
@@ -376,109 +855,28 @@
 						plus.storage.setItem("QuotationGuidanceTrade","1");
 						bindGuidance();
 					}
+//					bindGuidance();
 					function bindGuidance(){
 					var height=window.innerHeight;
 					var width=window.innerWidth;
-						$(".top").css({
-							"height":"96px",
-							"background-color":"rgba(0,0,0,0.8)",
-							"display":"block",
-						});
-						$("#closeDiv").css({
-							"top":4+"px",
-							"right":10+"px",
-							"display":"block",
-						});
-						$(".bottom").css({
-							"display":"block",
-							"height":$(".buttomFix").height()+87+"px",
-							"background": "url(../../images/tradeGudice1.png) no-repeat",
-							"background-size":"100% 100%",
-							"z-index":"991",
-						});
-						var clickNum=0;
-						$(".bottom,.top").click(function(){
-							if(clickNum==0){
-								$(".bottom").css({
-									"height":height-86+"px",
-									"bottom":"0px",
-									"background-image": "url(../../images/tradeGudice2.png)",
-								});
-								$(".top").css({
-									"height":46+"px",
-								});
-								$("#littleDiv").css({
+					$(".top").css({"height":height+"px",
+									"width":width+"px",
 									"position":"fixed",
-									"top":"46px",
-									"left":"0px",
-									"width":120+"px",
-									"height":50+"px",
-									"background-color":"rgba(0,0,0,0.8)",
-									"z-index":"992",
-								});
-							}else if(clickNum==1){
-								$(".top").css({
-									"display":"none",
-								});
-								$("#closeDiv").css({
-									"left":Proportion*10+"px",
-								});
-								$(".bottom").css({
-									"bottom":"0px",
-									"left":"0px",
-									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice3.png)",
-								});
-								$("#littleDiv").css({
-									"display":"none",
-								});
-							}else if(clickNum==2){
-								$("#closeDiv").css({
-									"left":width-40+"px"
-								});
-								$(".bottom").css({
-									"bottom":"50px",
-									"left":"0px",
-									"height":height-50+"px",
-									"background-image": "url(../../images/tradeGudice4.png)",
-								});
-							}else if(clickNum==3){
-								$(".bottom").css({
-									"bottom":"0px",
-									"left":"0px",
-									"height":height+"px",
-									"background-image": "url(../../images/tradeGudice5.png)",
-								});
-							}else{
-								$(".bottom").css({
-									"display":"none",
-								});
-								$("#closeDiv").css({
-									"display":"none",
-								});
-							}
-							clickNum++;
-							
-						});
-						$("#closeDiv").click(function(){
-							$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    				"display":"none",
-			    			});
-						});
-						$("#littleDiv").click(function(){
-							$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    				"display":"none",
-			    			});
-						})
-					$("#closeTrade").click(function(){
-						$(".top,.bottom,#littleDiv,#closeDiv").css({
-			    			"display":"none",
-			    		});
-					});
+									"z-index":"999",
+									"display":"block",
+									"top":"0px",
+									"background":"url('../../images/chartBg.png') no-repeat",
+									"background-size":"cover",
+									})		
+					
 				}
+				$(".top").on("tap",function(){
+					$(".top").css("display","none");
+				})
 			});
 			</script>
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>
+		<script type="text/javascript" src="../../js/mui.picker.all.js"></script>
 		<script type="text/javascript" src="../../js/util.js" ></script>
 		<script type="text/javascript" src="../../js/trade.util.js" ></script>
 		<script type="text/javascript" src="../../js/trade.data.mode.js" ></script>
@@ -488,6 +886,7 @@
 		<script src="../../js/chart.config.js"></script>
 		<script src="../../js/timechart.config.js"></script>
 		<script src="../../js/candlestick.config.js"></script>
+		<script src="../../js/lightChart.config.js"></script>
 		<script src="../../js/chart.js"></script>
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
@@ -507,9 +906,13 @@
 				var i = 0 ;
 				$(window).resize(function() {
 					if(i % 2 == 0){  
-						 $(".focusButton").css("display","none");
+						$(".focusButton").css("display","none");
 					}else{
 						$(".focusButton").css("display","block");
+						if(localStorage.getItem("isMock")==1){
+						}else{
+							$("#stopLoss").css("display","none");
+						}
 					}
 					i++; 
 				});
@@ -518,61 +921,186 @@
 					$("#switchBuy").text("模拟买入");
 					$("#marketSell ").text("模拟卖出");
 					$("#switchSell").text("模拟卖出");
+					$("#openStopButton").css("display","block");
+					$("#openConditionButton").css("display","block");
+					$("#stopLoss").css("display","block");
+					$("#Open").css("right","25%");
+					$("#allOpen").css("right","50%");
+					$("#topPopover").css("height","150px");
 				}
 				var network = false;
-				/*	var col1 = document.getElementById("col1");
-					var col2 = document.getElementById("col2");
-					var network = false;
-					var add_div = document.getElementById("add_div");
-				document.getElementById("changeSingle").addEventListener("tap",function(){
-						//清空数据
-						col1.value = "";
-						col2.value = "";
-						add_div.classList.remove("mui-hidden");
-						mui("#popover").popover("toggle");
-				})*/
 				mui('.mui-scroll-wrapper').scroll();
-				function trim(str){ //删除左右两端的空格
-			　　     return str.replace(/(^\s*)|(\s*$)/g, "");
-			　　 }
 				document.getElementById("clsoeAdd").addEventListener("tap",function(){
 						mui("#popover").popover("toggle");
+				});
+				document.getElementById("closeLossTable").addEventListener("tap",function(){
+					mui("#popoverLoss").popover("toggle");
+				});
+				document.getElementById("closeStopTable").addEventListener("tap",function(){
+					mui("#popoverLoss").popover("toggle");
 				})
-				/*document.getElementById("add").addEventListener('tap', function() {
-					var check = true;
-					mui(".mui-input-group input").each(function () {
-						if(!this.value||trim(this.value)==""){
-							var label = this.previousElementSibling;
-							mui.alert(label.innerText+"不允许为空");
-							check = false;
-							return false;
-						} 
-					});
-					if(check){
-						add_div.classList.add("mui-hidden");
-						//关闭modal
-						mui("#popover").popover("toggle");
-						mui.toast("添加成功~");
-						//刷新界面
+				document.getElementById("closeLossTable1").addEventListener("tap",function(){
+					mui("#popoverLoss1").popover("toggle");
+				});
+				document.getElementById("closeStopTable1").addEventListener("tap",function(){
+					mui("#popoverLoss1").popover("toggle");
+				});
+				document.getElementById("insertCondition").addEventListener("tap",function(){
+					initConditionData(); 
+					$("#ConditoionTitlePrices").addClass("mui-active");
+					$("#plan_conditionTitlePrice").addClass("mui-active").css("display","table-cell").text("价格条件");
+					$("#plan_conditionTitleTime").removeClass("mui-active").css("display","table-cell").text("时间条件");
+					$("#ConditoionTitleTime").removeClass("mui-active");
+					mui("#popoverConditoion").popover("toggle");
+					$("#insertConditionTable1").text("添加");
+					$("#insertConditionTable").text("添加");
+				});
+				document.getElementById("closeConditionTable1").addEventListener("tap",function(){
+					mui("#popoverConditoion").popover("toggle");
+				});
+				document.getElementById("closeConditionTable").addEventListener("tap",function(){
+					mui("#popoverConditoion").popover("toggle");
+				});
+				document.getElementById("stopBack").addEventListener("tap",function(){
+					$("#bg2").css("display","none");
+					$("#bg3").css("display","none");
+					$("#bg1").css("display","block");
+					$("#topPopover").css("display","none");
+					$(".mui-content").eq(0).css("z-index","998");
+				});
+				document.getElementById("conditionBack").addEventListener("tap",function(){
+					$("#bg2").css("display","none");
+					$("#bg3").css("display","none");
+					$("#bg1").css("display","block");
+					$("#topPopover").css("display","none");
+					$(".mui-content").eq(0).css("z-index","998");
+				});
+				document.getElementById("openStop").addEventListener("tap",function(){
+					if(isLogin){
+						if(plus.storage.getItem("QuotationGuidanceTrade2")==null){
+							plus.storage.setItem("QuotationGuidanceTrade2","1");
+								var height=window.innerHeight;
+								var width=window.innerWidth;
+								$(".top").css({"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/stopBg.png') no-repeat",
+										"background-size":"cover",
+										})		
+						}
+						$("#bg1").css("display","none");
+						$("#bg2").css("display","none");
+						$("#bg3").css("display","block");
+						mui("#topPopover").popover("toggle");
+						$(".mui-content").eq(2).css("z-index","998");
+					}else{
+						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
-				
-				});*/
-//				var clickNun=0;
-//				document.getElementById("muneBox").addEventListener("tap",function(){
-//					if(clickNun%2==0){
-//						$("#dropMune").css({"display":"block"});
-//					}else{
-//						$("#dropMune").css({"display":"none"});
-//					}
-//					clickNun++;
-//				});
-//				$("#dropMune li").on("tap",function(){
-//					setTimeout(function(){
-//						$("#dropMune").css({"display":"none"});
-//					},100);
-//					
-//				})
+				});
+				document.getElementById("openCondition").addEventListener("tap",function(){
+					if(isLogin){
+						if(plus.storage.getItem("QuotationGuidanceTrade1")==null){
+							plus.storage.setItem("QuotationGuidanceTrade1","1");
+							var QuotationGuidanceTradeTimeOut=null;
+							var height=window.innerHeight;
+							var width=window.innerWidth;
+							var clickBottomNum=0;
+							QuotationGuidanceTradeTimeOut=setTimeout(function(){
+								$(".bottom").css({
+										"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/conditionBg.png') no-repeat",
+										"background-size":"cover",
+									});
+									
+							},400)
+								$(".bottom").click(function(){
+									clearTimeout(QuotationGuidanceTradeTimeOut);
+									if(clickBottomNum==0){
+										$(".bottom").css({
+											"background":"url('../../images/conditionBg1.png') no-repeat",
+											"background-size":"cover",
+										});
+									}else{
+										$(".bottom").css("display","none")
+									}
+									clickBottomNum++;
+								})
+						}
+						$("#bg1").css("display","none");
+						$("#bg3").css("display","none");
+						$("#bg2").css("display","block");
+						mui("#topPopover").popover("toggle");
+						$(".mui-content").eq(1).css("z-index","998");
+					}else{
+						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
+					}
+				});
+				$("#clickTable").on("tap",".testclick1",function(){
+					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
+        			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
+				})
+				$("#thodyCondition").on("tap","tr",function(){
+					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
+        			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
+				})
+				document.getElementById("alreayStopListTitle").addEventListener("tap",function(){
+					$("#suspendCondition1,#modifyCondition1,#deleteCondition1,#stopTips").css("display","none");
+				})
+				document.getElementById("NoStopListTitle").addEventListener("tap",function(){
+					$("#suspendCondition1,#modifyCondition1,#deleteCondition1,#stopTips").css("display","block");
+				})
+				document.getElementById("alreayConditionTitle").addEventListener("tap",function(){
+					$("#suspendCondition,#modifyCondition,#deleteCondition,#stopTips1").css("display","none");
+				})
+				document.getElementById("NoConditionTitle").addEventListener("tap",function(){
+					$("#suspendCondition,#modifyCondition,#deleteCondition,#stopTips1").css("display","block");
+				})
 			});
+			(function($) {
+				$.init();
+					document.getElementById("insertTimeInput").addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						/*
+						 * 首次显示时实例化组件
+						 * 示例为了简洁，将 options 放在了按钮的 dom 上
+						 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+						 */
+						var picker = new $.DtPicker(options);
+						picker.show(function(rs) {
+							/*
+							 * rs.value 拼合后的 value
+							 * rs.text 拼合后的 text
+							 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+							 * rs.m 月，用法同年
+							 * rs.d 日，用法同年
+							 * rs.h 时，用法同年
+							 * rs.i 分（minutes 的第二个字母），用法同年
+							 */
+							document.getElementById("insertTimeInput").value = rs.text;
+							/* 
+							 * 返回 false 可以阻止选择框的关闭
+							 * return false;
+							 */
+							/*
+							 * 释放组件资源，释放后将将不能再操作组件
+							 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+							 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+							 */
+							picker.dispose();
+						});
+					}, false);
+			})(mui);
 		</script>
 		<script>
 		
@@ -580,23 +1108,10 @@
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
-//			$(function(){
-//				plus.nativeUI.showWaiting( "正在加载内容" );
-//			})
 			function setTimeOutInsertOrder(){
 				tradeSetTimeOut = setTimeout(function(){
 								plus.nativeUI.closeWaiting(); 
 							},10000);
-			}
-			function init(param){
-				$("#exchangeNo").val(param[3]);
-				$("#commodeityNo").val(param[2]);
-				$("#contractNo").val(param[1]);
-				$("#contractSize").val(param[5]);
-				$("#lastPrice").text(param[7]);
-//				$("#lastPriceNone").val(param[7]);
-				$("#miniTikeSize").val(param[6]);
-				$("#doSize").val(param[4]);
 			}
 			function cachTranFers(param){ 
 				tranferParam = param;
@@ -619,6 +1134,14 @@
 				});
 				$("input[type='radio']").click(function(){
 					var type = $("input[type = 'radio']:checked").val();
+					$("#buyFuture table td span").css("background","url('../../images/inputRadioBg.png') no-repeat")
+					if(type==1){
+						$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
+						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
+					}else{
+						$("#buyFuture table td:nth-child(2) span").css({"background":"url('../../images/inputRadioBgC.png') no-repeat","background-size":"100% auto"});
+						$("#buyFuture table td:nth-child(1) span").css({"background":"url('../../images/inputRadioBg.png') no-repeat","background-size":"100% auto"});
+					}
 					var orderPrice = $("#orderPrice");
 					var lastPrice = $("#lastPrice").text();
 					var miniTikeSize = $("#miniTikeSize").val();
@@ -641,8 +1164,5 @@
 					$("#switchAccount").text("登录账号");
 				}
 			});
-			
 	</script>
-	</body>
-
 </html>

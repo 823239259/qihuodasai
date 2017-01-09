@@ -176,6 +176,8 @@ function quotePush(obj){
 	setBuyAndSellFloatPrice(param);
 	//设置盘口
 	setHandicap(param);
+	//更新止损/止盈最新价格
+	updateStopLossLastPrice(param);
 }
 /**
  * 订阅行情
@@ -257,6 +259,42 @@ function setTradeLastPrice(param){
 			$("#money_number").val(lastPrice);
 			setMoneyNumberIndex(1);
 		}
+	}
+}
+/**
+ * 更新止损止盈最新价格
+ * @param param
+ */
+function updateStopLossLastPrice(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode = commodityNo + contractNo;
+	var oldContractCode = $("#stopHoldContractCode").val();
+	if(contractCode == oldContractCode){
+		var lastPrice = param.LastPrice;
+		$("#stop_lastPrice").text(lastPrice);
+		$("#loss_lastPrice").text(lastPrice);
+		var localCommodity = localCacheCommodity[contractCode];
+		var contractSize = localCommodity.ContractSize;
+		var miniTikeSize = localCommodity.MiniTikeSize;
+		var stopDrection = $("#stopHoldDrection").val();
+		var stopInputprice = $("#stop_inputprice").val();
+		if(stopInputprice.length != 0){
+			var stopInputnum = $("#stop_inputnum").val();
+			if(stopInputnum.length != 0){
+				var  price =  doGetFloatingProfit(lastPrice,stopInputprice,contractSize,miniTikeSize,stopInputnum,stopDrection);
+				$("#stop_yjks").text(price);
+			}
+		}
+		var lossInputprice = $("#loss_inputprice").val();
+		if(lossInputprice.length != 0){
+			var lossInputnum = $("#loss_inputnum").val();
+			if(lossInputnum.length != 0){
+				var  price =  doGetFloatingProfit(lastPrice,lossInputprice,contractSize,miniTikeSize,lossInputnum,stopDrection);
+				$("#loss_yjks").text(price);
+			}
+		}
+		
 	}
 }
 /**

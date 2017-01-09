@@ -342,7 +342,8 @@
 			"js/common.js",
 			"js/mui.min.js",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/jquery-1.11.3.js"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -1006,7 +1007,8 @@
 			"tzdr/account/account.html",
 			"tzdr/scheme.html",
 			"tzdr/account/accountno.html",
-			"tzdr/future/listrg.html"
+			"tzdr/future/listrg.html",
+			"tzdr/login/login.html"
 		]
 	},
 	"tzdr/quotation/transactionDetails.html": {
@@ -1053,7 +1055,27 @@
 			"images/tradeGudice4.png",
 			"images/tradeGudice5.png",
 			"images/buttomSantjiao.png",
-			"images/menu.png"
+			"images/menu.png",
+			"images/graySanjiao.png",
+			"images/insertIon.png",
+			"js/lightChart.config.js",
+			"images/inputRadioBgC.png",
+			"images/inputRadioBg.png",
+			"images/graySanjiaoBg.png",
+			"js/echarts.min.js",
+			"js/mui.picker.js",
+			"css/app.css",
+			"css/mui.picker.css",
+			"js/mui.picker.min.js",
+			"css/mui.picker.min.css",
+			"images/chartBg.png",
+			"images/conditionBg.png",
+			"images/conditionBg1.png",
+			"images/stopBg.png",
+			"images/tradeBG.png",
+			"images/tipsBG.png",
+			"js/mui.picker.all.js",
+			"css/mui.picker.all.css"
 		],
 		"refer": [
 			"tzdr/quotation/trade.html",
@@ -1106,7 +1128,10 @@
 			"tzdr/quotation/transactionDetails.html",
 			"tzdr/agree/tradingMarket.html",
 			"tzdr/future/hsi.html",
-			"tzdr/quotation/quotationMain.html"
+			"tzdr/quotation/quotationMain.html",
+			"tzdr/future/cp.html",
+			"tzdr/login/regist.html",
+			"tzdr/login/retrievePassword.html"
 		]
 	},
 	"tzdr/agree/cpru.html": {
@@ -1210,7 +1235,11 @@
 		"refer": [
 			"tzdr/account/weixinPay.html",
 			"tzdr/account/bankPay.html",
-			"tzdr/account/gopay.html"
+			"tzdr/account/gopay.html",
+			"tzdr/account/dxtxPay.html",
+			"tzdr/account/openUrlPay.html",
+			"tzdr/account/alipay.html",
+			"tzdr/account/bindzhifubao.html"
 		],
 		"resources": [
 			"css/own.css",
@@ -1223,7 +1252,9 @@
 			"images/recharge/Transfer.png",
 			"images/recharge/bankP.png",
 			"js/pingpp.js",
-			"images/recharge/wei.png"
+			"images/recharge/wei.png",
+			"images/recharge/zhifubao.png",
+			"images/recharge/Quickpayment.png"
 		]
 	},
 	"tzdr/account/weixinPay.html": {
@@ -1279,7 +1310,8 @@
 			"js/mui.min.js",
 			"js/jquery-1.11.3.js",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"css/quotation.css"
 		],
 		"refer": [
 			"tzdr/login/retrievePasswordComfirm.html"
@@ -1293,7 +1325,8 @@
 			"js/mui.min.js",
 			"js/jquery-1.11.3.js",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"css/quotation.css"
 		],
 		"refer": [
 			"tzdr/login/login.html"
@@ -1336,6 +1369,36 @@
 			"fonts/mui.ttf",
 			"js/jquery-1.11.3.js",
 			"images/0.0.png"
+		]
+	},
+	"tzdr/account/dxtxPay.html": {
+		"resources": [
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"css/mui.min.css"
+		]
+	},
+	"tzdr/account/alipay.html": {
+		"resources": [
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"css/mui.min.css"
+		]
+	},
+	"tzdr/account/bindzhifubao.html": {
+		"resources": [
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"css/recharge.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/pingpp.js"
 		]
 	}
 }

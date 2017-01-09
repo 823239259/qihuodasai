@@ -36,34 +36,18 @@
 		<script>
 			mui.init();
 			mui.plusReady(function(){
-					loadCss();
 					plus.webview.close("choicePayment.html");
-					function loadCss(){
-						var Proportion=1;
-						var resolutionWidth=plus.screen.resolutionWidth;
-						Proportion=resolutionWidth/320;
-						$("#buttomDiv").css({
-							"line-height":Proportion*50+"px",
-							"height":Proportion*50+"px",
-						})
-						$("#buttomDiv button").css({
-							"line-height":Proportion*50+"px",
-							"height":Proportion*50+"px",
-						})
-					}
-				
-				
 					tzdr.init.initHearListener();
 					var wv = plus.webview.currentWebview();
 					vText=wv.money;
-					var moneyAll=1;
+					var moneyAll=50;
 					//添加充值金额文本框监听
 				document.getElementById("inputMoney").addEventListener('input', function() {
 					if(this.value && !Number(this.value)) { //非数字赋值空
 						var _length = this.value.length;
 						moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
 						changeAllBalance();
-						return;
+						return 
 					} else {
 						var _length = this.value.length;
 						var _index = this.value.lastIndexOf('.');
@@ -128,23 +112,23 @@
 			function changeAllBalance(){
 				var accountBalance=Number($("#accountBalance").text());
 				var inputMoney=Number($("#inputMoney").val());
-				$("#allBalance").text(accountBalance+inputMoney);
+				var allMoney=parseFloat(Number(accountBalance+inputMoney)).toFixed(2) ;
+				$("#allBalance").text(allMoney);
 			}
 			/*
 			 * 立即充值
 			 * */
 			function checkMoney(money1,wv){
 				var money=Number($("#inputMoney").val());
-				console.log(money1);
 				var money2=9999999;
 				if(mui.isnull(money)) {
 					mui.toast("充值金额不能为空");
 					return;  
 				}
-				if(money1 > money){
+				/*if(money1 > money){
 					mui.toast("充值金额不低于"+money1+"元");
 					return; 
-				}
+				}*/
 				if(money2 < money){
 					mui.toast("充值金额不高于"+money2+"元");
 					return; 

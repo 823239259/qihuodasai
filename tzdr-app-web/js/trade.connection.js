@@ -51,6 +51,27 @@ function setIsLogin(flag){
 	isLogin = flag;
 }
 /**
+ * 验证是否登录
+ */
+function vadationIsLogin(){
+	if(!isLogin){
+		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
+		return false;
+	} 
+	return true;
+}
+/**
+ * 验证是否登录
+ */
+function vadationIsLoginMuiTip(){
+	if(isLogin){
+		return true;
+	}else{
+		tip("未登录,请先登录");
+		return false
+	}
+}
+/**
  * 更新连接状态
  */
 function changeConnectionStatus(){
@@ -64,7 +85,9 @@ function changeConnectionStatus(){
  * 交易连接
  */
 function tradeConnection(){  
-	socket = new WebSocket(socketUrl);  
+	if(socketUrl.length > 0){
+		socket = new WebSocket(socketUrl);  
+	}
 }
 /**
  * 交易连接断开的处理
@@ -87,6 +110,7 @@ function loginOut(){
 	socket = null;
 	setIsLogin(false);
 	clearTradListData();
+	reconnectInit();
 	/*clearTradListData();
 	clearLocalCacheData();*/
 }
@@ -141,35 +165,46 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	plus.nativeUI.showWaiting("正在连接交易服务器...");
-	socket.onopen = function() {   
-		/*layer.closeAll();*/ 
-		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
-		//更新交易连接状态
-		changeConnectionStatus();
-	}
-	socket.onmessage = function(evt) {
-		handleData(evt);
-	} 
-	socket.onclose = function() {
-		clearInterval(tradeIntervalId);
-		socket = null;
-		//更新交易连接状态
-		changeConnectionStatus();
-		//不是手动登出，则重连交易服务器
-		if(loginFail == false){ 
-			//交易连接断开重连
-			reconnect();
-		}else{
-			if(anotherPlace && loginFail){
-				alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
-				//clearLocalCacheData();
-				loginOut();
+	    plus.nativeUI.showWaiting("正在连接交易服务器...");
+	    if(socket == null){
+	    	return;
+	    }
+		socket.onopen = function() {   
+			/*layer.closeAll();*/ 
+			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
+			//更新交易连接状态
+			changeConnectionStatus();
+		}
+		socket.onmessage = function(evt) {
+			handleData(evt);
+		} 
+		socket.onclose = function() {
+			clearInterval(tradeIntervalId);
+			socket = null;
+			//更新交易连接状态
+			changeConnectionStatus();
+			//不是手动登出，则重连交易服务器
+			if(loginFail == false){ 
+				//交易连接断开重连
+				tradeReconnect();
+			}else{
+				if(anotherPlace && loginFail){
+					alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
+					//clearLocalCacheData();
+					loginOut();
+				}
 			}
 		}
+}
+/**
+ * 重新连接交易服务器
+ */
+function tradeReconnect(){
+	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
+	if(socket == null){
+		initTrade();
 	}
 }
-
 /**
  * 初始化交易
  */
@@ -197,15 +232,7 @@ function initTrade(){
 	 */
 	tradeLogin();
 }
-/**
- * 重新连接交易服务器
- */
-function reconnect(){
-	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
-	if(socket == null){
-		initTrade();
-	}
-}
+
 
 /**
  * 获取版本信息
@@ -213,14 +240,14 @@ function reconnect(){
 function getVersion(){ 
 	$.ajax({ 
 		url:tzdr.constants.api_domain+"/socket/config/getVersions",
-		type:"get", 
+		type:"post", 
 		data:{
 			appVersions:appVersion
 		},
 		timeout:5000,
 		success:function(result){
-			if(result.success){ 
-				var data = result.data;
+			if(result.success){
+				var data = result.data; 
 				tradeWebsocketUrl = data.socketUrl;
 				tradeWebSocketVersion = data.socketVersion;
 				tradeWebsocketModelUrl = data.socketModelUrl;
