@@ -178,6 +178,8 @@ function quotePush(obj){
 	setHandicap(param);
 	//更新止损/止盈最新价格
 	updateStopLossLastPrice(param);
+	//更新条件单弹出框最新价格
+	setConditionLastPrice(param);
 }
 /**
  * 订阅行情
@@ -207,6 +209,8 @@ function loadSelectData(param){
 		var cls = "select_option"+i;
 		var html = "<option class = '"+cls+"' value='"+contractCode+"'>"+commodityName+"     "+commodityNo+mainContract+"</option>";
 		$("#select_commodity").append(html);
+		$("#contion_time_contractCode").append(html);
+		$("#condition_price_contractCode").append(html);
 	}
 }
 /**
@@ -274,27 +278,24 @@ function updateStopLossLastPrice(param){
 		var lastPrice = param.LastPrice;
 		$("#stop_lastPrice").text(lastPrice);
 		$("#loss_lastPrice").text(lastPrice);
-		var localCommodity = localCacheCommodity[contractCode];
-		var contractSize = localCommodity.ContractSize;
-		var miniTikeSize = localCommodity.MiniTikeSize;
-		var stopDrection = $("#stopHoldDrection").val();
-		var stopInputprice = $("#stop_inputprice").val();
-		if(stopInputprice.length != 0){
-			var stopInputnum = $("#stop_inputnum").val();
-			if(stopInputnum.length != 0){
-				var  price =  doGetFloatingProfit(lastPrice,stopInputprice,contractSize,miniTikeSize,stopInputnum,stopDrection);
-				$("#stop_yjks").text(price);
-			}
-		}
-		var lossInputprice = $("#loss_inputprice").val();
-		if(lossInputprice.length != 0){
-			var lossInputnum = $("#loss_inputnum").val();
-			if(lossInputnum.length != 0){
-				var  price =  doGetFloatingProfit(lastPrice,lossInputprice,contractSize,miniTikeSize,lossInputnum,stopDrection);
-				$("#loss_yjks").text(price);
-			}
-		}
-		
+	}
+}
+/**
+ * 设置条件单弹出框最新价
+ * @param param
+ */
+function setConditionLastPrice(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo  = param.ContractNo;
+	var contractCode = commodityNo + contractNo;
+	var conditionPriceContractCode = $("#condition_price_contractCode").val();
+	var conditionTimeContractCode = $("#contion_time_contractCode").val();
+	var lastPrice = param.LastPrice;
+	if(conditionPriceContractCode == contractCode){
+		$("#condition_price_lastPrice").text(lastPrice);
+	}
+	if(conditionTimeContractCode == contractCode){
+		$("#condition_time_lastPrice").text(lastPrice);
 	}
 }
 /**
