@@ -75,13 +75,17 @@
 	    		padding-top: 0px;
 	    	}
 	    	#callService{
+	    		width: 100%;
 	    		text-align: center;
 	    		height: 40px;
 	    		line-height: 40px !important;
 	    		background-color: #2B2B2B !important;
 	    		color:#FFFFFF!important;	
 	    		padding: 0px!important;
-	    		    	}
+	    		position: fixed;
+	    		bottom: -1px;
+	    		margin: 0px!important;
+	    	}
 	    	#historyDetailsTable1 {
 	    		padding-bottom: 20px;
 	    		background-color: #FFFFFF;
@@ -182,7 +186,7 @@
 			<h1 class="mui-title">邀请有礼</h1>		
 			<!--<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>-->
 		</header>	
-		<div class="mui-content sc_listdeta" id="listDetails">
+		<div class="mui-content sc_listdeta" id="listDetails" style="padding-bottom: 0px;">
 			<div  class="mui-slider-indicator mui-segmented-control">
 				<a class="mui-control-item mui-active" href="#item1" id="detailButton">我的邀请码</a>
 				<a class="mui-control-item" href="#item2" id="historyButton">邀请记录</a>
@@ -200,7 +204,7 @@
 					<p><label class="shareWexin">微信朋友圈</label><label>新浪微博</label><label>QQ好友</label></p>
 				</div>
 				<div id="guize">
-					<p><label>邀请好友，免交易手续费！</label><label>活动规则</label></p>
+					<p><label>邀请好友，免交易手续费！</label><label id="test">活动规则</label></p>
 					<p>多拉新朋友，即可多获减免奖励。比如小明叫了10个朋友来维胜金融操盘，8个进行了实名认证，其中6个人操盘交易均达到双边5手。那么小明就可以获得（累计）：2个1手交易费减免资格，4个2手交易费减免资格，总共1+1+2+2+2=2=10手双边免费交易资格。以此类推，多拉新用户多得减免金。</p>
 				</div>
 				<p id="callService">联系电话：400-852-8008</p>
@@ -210,27 +214,20 @@
 					<div class="mui-scroll" id="mui-scroll">
 						<div id="shareTitle">
 							<p><label>注册人数</label><label>申请方案人数</label><label>已获奖励次数</label></p>
-							<p><label class="fcc900">10</label><label class="fcc900">1</label><label class="fcc900">1</label></p>
+							<p><label class="fcc900" id="registNum">10</label><label class="fcc900" id="ftradeNum">1</label><label class="fcc900" id="awardSum">1</label></p>
 						</div>
 						<div style="height: auto;width: 100%;overflow-x: scroll;">
-							<table id="historyDetailsTable1" width="480px" cellpadding="0" cellspacing="0" border="0">
+							<table id="historyDetailsTable1" width="550px" cellpadding="0" cellspacing="0" border="0">
 								<thead>
 									<tr>
 										<td width="50px">手机号</td>
 										<td width="80px">姓名</td>
-										<td width="80px">注册时间</td>
-										<td width="80px">交易时间</td>
+										<td width="120px">注册时间</td>
+										<td width="120px">交易时间</td>
 										<td width="80px">交易手数</td>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td width="80px">手机号</td>
-										<td width="80px">姓名</td>
-										<td width="80px">注册时间</td>
-										<td width="80px">交易时间</td>
-										<td width="80px">交易手数</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -252,12 +249,15 @@
 				mui.init();
 				var item = document.getElementById('item2');
 			    var scheight = document.documentElement.clientHeight;
-				var infoheihgt = scheight - 44 -100;
+				var infoheihgt = scheight - 44 -60;
 				item.style.height = infoheihgt + 'px';
 				(function($) {
+					var deceleration = mui.os.ios?0.003:0.0009;
 					$('.mui-scroll-wrapper').scroll({
-						indicators: true //是否显示滚动条
-					});				
+						bounce: false,
+						indicators: true, //是否显示滚动条
+						deceleration:deceleration
+					});		
 				})(mui);
 				mui.plusReady(function(){
 					mui(document.querySelector('#item2 .mui-scroll')).pullToRefresh({
@@ -265,19 +265,69 @@
 							callback: function() {
 								var self = this;
 								var ul = self.element.querySelector('#historyDetailsTable1');
-								ajaxQueryPageInfo(self);	
-								
+								setTimeout(function(){
+									ajaxQueryPageInfo(self);	
+								},500)
 							}
 						}
 					});
+					document.getElementById("test").addEventListener("tap",function(){
+						mui.openWindow("../buy/buy.html")
+					})
+					var dataALL=[];
 					var mobile=plus.storage.getItem(tzdr.constants.user_mobile,mobile);
+					mui.app_request("/activity/getOldAndNewInvitedList",{},function(data){
+							if(data.success==true){
+								var dataall=data.data;
+								dataALL=dataall;
+								var length=0;
+								if(dataall.length<=20){
+									length=dataall.length;
+								}else{
+									length=20;
+								}
+								for(var i=0;i<length;i++){
+									var mobile=dataall[i].mobile;
+									var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
+									var ctime=new Date(dataall[i].ctime).format("yyyy-MM-dd hh:mm:ss");
+									var endTime=new Date(dataall[i].endTime).format("yyyy-MM-dd hh:mm:ss");
+									$("#historyDetailsTable1").append("<tr>" +
+					                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
+					            "</tr>")
+								}
+							}
+					},function(){});
+					mui.app_request("/activity/oldAndNewInvitedStatistics",{},function(data){
+						if(data.success==true){
+							$("#ftradeNum").text(data.data.ftradeNum);
+							$("#registNum").text(data.data.registNum);
+							$("#awardSum").text(data.data.awardSum);
+						}
+					},function(){
+						
+					})
 					function  ajaxQueryPageInfo(obj){
-						mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
-							
-						},function(){});
+						var length=dataALL.length;
+						if(length>20){
+							dataALL=dataALL.slice(20);
+							console.log(dataALL.length);
+							for(var i=0;i<dataALL.length;i++){
+									var mobile=dataALL[i].mobile;
+									var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
+									var ctime=new Date(dataALL[i].ctime).format("yyyy-MM-dd hh:mm:ss");
+									var endTime=new Date(dataALL[i].endTime).format("yyyy-MM-dd hh:mm:ss");
+									$("#historyDetailsTable1").append("<tr>" +
+					                    "<td>"+user_mobile+"</td><td>"+dataALL[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataALL[i].sumLever+"</td>"+
+					            "</tr>");
+					            obj.endPullUpToRefresh();
+							}
+						}else{
+							if(obj){
+								obj.endPullUpToRefresh(true);
+							}
+						}
 					}
 					mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
-						console.log(JSON.stringify(data));
 						if(data.success==true){
 							$("#inviteUrl").text(data.data.inviteUrl);
 						}
@@ -304,101 +354,16 @@
 						}
 					}
 					$(".shareWexin").on("tap",function(){
-								var shares=null;
-							var Intent=null,File=null,Uri=null,main=null;
-							// H5 plus事件处理
-							function plusReady(){
-								updateSerivces();
-								if(plus.os.name=="Android"){
-									main = plus.android.runtimeMainActivity();
-									Intent = plus.android.importClass("android.content.Intent");
-									File = plus.android.importClass("java.io.File");
-									Uri = plus.android.importClass("android.net.Uri");
-								}
-							}
-							if(window.plus){
-								plusReady();
-							}else{
-								document.addEventListener("plusready",plusReady,false);
-							}
-							/**
-							 * 更新分享服务
-							 */
-							function updateSerivces(){
-								plus.share.getServices( function(s){
-									shares={};
-									for(var i in s){
-										var t=s[i];
-										shares[t.id]=t;
-									}
-								}, function(e){
-								} );
-							}
-							
-							/**
-							   * 分享操作
-							   * @param {JSON} sb 分享操作对象s.s为分享通道对象(plus.share.ShareService)
-							   * @param {Boolean} bh 是否分享链接
-							   */
-							function shareAction(sb,bh) {
-								console.log(bh);
-								console.log(sb);
-								if(!sb||!sb.s){
-									return;
-								}
-								var msg={content:sharecontent.value,extra:{scene:sb.x}};
-								console.log(JSON.stringify(msg));
-								if(bh){
-									msg.href=sharehref.value;
-									if(sharehrefTitle&&sharehrefTitle.value!=""){
-										msg.title=sharehrefTitle.value;
-									}
-									if(sharehrefDes&&sharehrefDes.value!=""){
-										msg.content=sharehrefDes.value;
-									}
-									msg.thumbs=["http://cms.vs.com/uploads/topic/share/image/100.png"];
-									msg.pictures=["http://cms.vs.com/uploads/topic/share/image/100.png"];
-								}else{
-									if(pic&&pic.realUrl){
-										msg.pictures=[pic.realUrl];
-									}
-								}
-								// 发送分享
-								if ( sb.s.authenticated ) {
-									shareMessage(msg,sb.s);
-								} else {
-									outLine( "---未授权---" );
-									sb.s.authorize( function(){
-											shareMessage(msg,sb.s);
-										},function(e){
-									});
-								}
-							}
-							/**
-							   * 发送分享消息
-							   * @param {JSON} msg
-							   * @param {plus.share.ShareService} s
-							   */
-							function shareMessage(msg,s){
-								s.send( msg, function(){
-								}, function(e){
-								} );
-							}
+							var shareBts=[];
+							var ss=shares['weixin'];
+//							ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
+//							ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'});
+							shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'});
+//							shareAction(shareBts[0],true);
 							// 分析链接
-							function shareHref(){
-								var shareBts=[];
-								// 更新分享列表
-								var ss=shares['weixin'];
-								ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),
-								shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));
-								ss=shares['qq'];
-								ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
-								
-								// 弹出分享列表
-								shareBts.length>0?plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
-									(e.index>0)&&shareAction(shareBts[e.index-1],true);
-								}):plus.nativeUI.alert('暂不支持分享功能');
-							}
+					});
+					document.getElementById("callService").addEventListener("tap",function(){
+						mui.callService();
 					})
 				})
 	</script>
