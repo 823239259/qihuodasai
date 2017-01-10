@@ -39,7 +39,6 @@
 				return;
 			}
 			var msg={content:sharecontent.value,extra:{scene:sb.x}};
-			console.log(JSON.stringify(msg));
 			if(bh){
 				msg.href=sharehref.value;
 				if(sharehrefTitle&&sharehrefTitle.value!=""){
@@ -59,7 +58,7 @@
 			if ( sb.s.authenticated ) {
 				shareMessage(msg,sb.s);
 			} else {
-				outLine( "---未授权---" );
+//				outLine( "---未授权---" );
 				sb.s.authorize( function(){
 						shareMessage(msg,sb.s);
 					},function(e){
