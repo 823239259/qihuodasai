@@ -98,6 +98,7 @@ public class WeChatController {
 		if(StringUtils.isBlank(uid)){
 			String mobile = request.getParameter("mobile");
 			user = wUserService.getWUserByMobile(mobile);
+			uid = user.getId();
 		}else{
 			user = wUserService.getUser(uid); 
 		}
