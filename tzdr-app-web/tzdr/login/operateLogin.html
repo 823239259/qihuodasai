@@ -25,14 +25,14 @@
 	</header>
 	<div class="mui-content" class="operateLogin">
 		<div id="inputList">
-			<div id="accountType" class="commStyle">
+			<!--<div id="accountType" class="commStyle">
 				<label>账号类型：</label>
 				<select class="accountSelect mui-btn mui-btn-block">
 					<option class="mui-selected"  value="0">实盘账号</option>
 					<option class="mui-selected" id="checkContent" value="1">模拟盘账号</option>
 				</select>
 				<img src="../../images/down.png" id="selectBg">
-			</div>
+			</div>-->
 			<div class="commStyle">
 				<label>登录账号：</label>
 				<input type="text"  placeholder="请输入您的账号" id='account' oninput="checkValue()"/>
@@ -121,22 +121,6 @@
 				};
 				var islogin = false;
 				var num=0
-				$("#checkBox i").val(1);
-				$("#checkBox").click(function(){
-					if(num==0){
-						$("#checkBox i").val(2);
-						$("#checkBox i").css({
-							"background-color":"rgba(0, 0, 0, 0)" ,
-						})
-						num=1
-					}else{
-						$("#checkBox i").val(1);
-						num=0;
-						$("#checkBox i").css({
-							"background-color":"#fcc900" ,
-						})
-					}
-				});
 				/*绑定事件
 				 */
 				$("#accountClear").click(function(){
@@ -213,27 +197,6 @@
 					tradeWebSocketIsMock = 0; 
 				}   
 				getVersion();    
-				$(".accountSelect").change(function(){
-					var $this = $(this);
-					var val = $this.val(); 
-					setTradeConfig(val);
-					checkValue();
-						if(val==0){
-							 $("#account").bind("focus",function(){
-							  	$("#username_list").css({
-							  		"display":"block"
-							  	})
-							  });
-							  $("#regLogin").unbind("tap",loginCheckBind);
-								$("#regLogin").bind("tap",loginCheck);
-								$("#regLogin").text("实盘开户申请")
-						}else{
-							$("#account").unbind("focus");
-							$("#regLogin").unbind("tap",loginCheck);
-							$("#regLogin").bind("tap",loginCheckBind);
-							$("#regLogin").text("模拟盘开户申请")
-						}
-				}); 
 				  $("#account").bind("focus",function(){
 				  	$("#username_list").css({
 				  		"display":"block"
@@ -293,8 +256,8 @@
 ////					})
 				}
 				document.getElementById("forgetPassword").addEventListener("tap",function(){
-					mui.openWindow("retrievePassword.html");
-//					mui.callService();
+						mui.confirm("请联系您的开户人员找回密码！","提示",["确认"],function(e){
+//					})
 				});
 				document.getElementById("backClose").addEventListener("tap",function(){
 					if (Transfer.backpageID){

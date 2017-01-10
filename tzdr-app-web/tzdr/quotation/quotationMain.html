@@ -33,18 +33,6 @@
 			<span class="mui-icon"><img src="../../images/0.0.png" style="width: 20px;height:20px;"></span>
 			<span class="mui-tab-label">行情交易</span>
 		</a>
-		<a class="" href="javascript:void(0);"  id="product">
-			<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘申请</span>
-		</a>
-		<a class="" href="javascript:void(0);"  id="scheme">
-			<span class="mui-icon"><img src="../../images/2.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘记录</span>
-		</a>
-		<a class="" id="account" href="javascript:void(0);">
-			<span class="mui-icon"><img src="../../images/3.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
 	</nav>
 	<div class="mui-content">
 		<div id="fisrtLlist"><span>合约名称</span><span>最新价</span><span>成交量</span><span>涨跌幅</span></div>
@@ -426,27 +414,6 @@
 			            }
 			        };
 			    }
-			document.getElementById("product").addEventListener("tap",function(){
-				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-				socket.close();
-				if(validationLoginTip != null){
-					clearTimeout(validationLoginTip);
-				}
-			});
-			document.getElementById("scheme").addEventListener("tap",function(){
-				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-				socket.close();
-				if(validationLoginTip != null){
-					clearTimeout(validationLoginTip);
-				}
-			});
-			document.getElementById("account").addEventListener("tap",function(){
-				sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-				socket.close();
-				if(validationLoginTip != null){
-					clearTimeout(validationLoginTip);
-				}
-			});
 			document.getElementById("refresh").addEventListener("tap",function(){
 				var re=plus.webview.getWebviewById("quotationMain");
 				if(re != null && re !=undefined){
