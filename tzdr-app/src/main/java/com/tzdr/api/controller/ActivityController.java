@@ -130,6 +130,7 @@ public class ActivityController {
 		if(StringUtils.isBlank(uid)){
 			String mobile = request.getParameter("mobile");
 		    user = wUserService.getWUserByMobile(mobile); //用web传过来mobile获取用户信息
+		    uid = user.getId();
 		}else{
 			user = wUserService.get(uid);  //获取用户信息
 		}
@@ -156,6 +157,7 @@ public class ActivityController {
 		if(StringUtils.isBlank(uid)){
 			String mobile = request.getParameter("mobile");
 		    user = wUserService.getWUserByMobile(mobile); //用web传过来mobile获取用户信息
+		    uid = user.getId();
 		}else{
 			user = wUserService.get(uid);  //获取用户信息
 		}
