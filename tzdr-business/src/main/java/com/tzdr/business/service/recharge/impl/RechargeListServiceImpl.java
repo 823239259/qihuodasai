@@ -208,7 +208,6 @@ public class RechargeListServiceImpl extends BaseServiceImpl<RechargeList, Recha
 				user = authService.getCurrentUser();//获取当前登录用户
 			} catch (Exception e) {
 				user = new User();
-				log.warn(ExceptionUtils.getStackTrace(e));
 			}
 			UserFund userFund = new UserFund();
 			userFund.setUid(rechargeList.getUid());
