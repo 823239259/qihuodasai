@@ -941,7 +941,8 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"images/hemai.png"
 				],
 				"refer": [
 					"home.html",
@@ -1645,9 +1646,15 @@
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"tzdr/account/invitation_sub.html"
+					"tzdr/account/invitation_sub.html",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/immersed.js",
+					"js/share.js"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/buy/buy.html"
+				],
 				"priority": 0
 			}
 		},

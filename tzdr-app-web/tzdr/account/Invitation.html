@@ -3,6 +3,8 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	    <title>邀请有礼</title>
 	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
 	    <script type="text/javascript" src="../../js/common.js"></script>
@@ -29,7 +31,7 @@
 	    		font-size: 12px;
 	    		line-height: 30px;
 	    		color: #2B2B2B;
-	    	
+	    		vertical-align: middle;
 	    	}
 	    	#shareButton{
 	    		background-color: #fcc900;
@@ -151,6 +153,27 @@
 				overflow-x: scroll;
 				overflow-y: hidden;
 	    	}
+		.mui-pull-bottom-tips {
+				text-align: center;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+		}
+		.mui-pull-loading { 
+		    margin-right: 10px;
+		    -webkit-transition: -webkit-transform .4s;
+		    transition: transform .4s;
+		    -webkit-transition-duration: 400ms;
+		    transition-duration: 400ms;
+		    vertical-align: middle;
+		}
+		#inviteUrl{
+			display: inline-block;
+			width: 50%;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 	    </style>
 	</head>
 	<body>
@@ -161,20 +184,20 @@
 		</header>	
 		<div class="mui-content sc_listdeta" id="listDetails">
 			<div  class="mui-slider-indicator mui-segmented-control">
-				<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
-				<a class="mui-control-item" href="#item2" id="historyButton">历史成交明细</a>
+				<a class="mui-control-item mui-active" href="#item1" id="detailButton">我的邀请码</a>
+				<a class="mui-control-item" href="#item2" id="historyButton">邀请记录</a>
 			</div>
 			<div id="item1" class="mui-control-content mui-active">	
 				<p>分享以下邀请链接，好友通过您的链接注册成功完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
 				<div id="linkDiv">
 					<label>邀请链接：</label>
-					<label>http://www.vs.com/invite/009406</label>
-					<button id="shareButton">分享</button>
+					<label id="inviteUrl">http://www.vs.com/invite/009406</label>
+					<button id="shareButton">复制链接</button>
 				</div>
 				<div id="shareDivContent">
 					<img src="../../images/fenxiang.png" width="100%" height="auto">
-					<p><label><img src="../../images/weixinshare.png"></label><label><img src="../../images/weiboshare.png"></label><label><img src="../../images/qqshare.png"></label></p>
-					<p><label>微信朋友圈</label><label>新浪微博</label><label>QQ好友</label></p>
+					<p><label class="shareWexin"><img src="../../images/weixinshare.png"></label><label><img src="../../images/weiboshare.png"></label><label><img src="../../images/qqshare.png"></label></p>
+					<p><label class="shareWexin">微信朋友圈</label><label>新浪微博</label><label>QQ好友</label></p>
 				</div>
 				<div id="guize">
 					<p><label>邀请好友，免交易手续费！</label><label>活动规则</label></p>
@@ -183,87 +206,200 @@
 				<p id="callService">联系电话：400-852-8008</p>
 			</div>
 			<div id="item2" class="mui-control-content ">
-				<div id="shareTitle">
-					<p><label>注册人数</label><label>申请方案人数</label><label>已获奖励次数</label></p>
-					<p><label class="fcc900">10</label><label class="fcc900">1</label><label class="fcc900">1</label></p>
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" id="mui-scroll">
+						<div id="shareTitle">
+							<p><label>注册人数</label><label>申请方案人数</label><label>已获奖励次数</label></p>
+							<p><label class="fcc900">10</label><label class="fcc900">1</label><label class="fcc900">1</label></p>
+						</div>
+						<div style="height: auto;width: 100%;overflow-x: scroll;">
+							<table id="historyDetailsTable1" width="480px" cellpadding="0" cellspacing="0" border="0">
+								<thead>
+									<tr>
+										<td width="50px">手机号</td>
+										<td width="80px">姓名</td>
+										<td width="80px">注册时间</td>
+										<td width="80px">交易时间</td>
+										<td width="80px">交易手数</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td width="80px">手机号</td>
+										<td width="80px">姓名</td>
+										<td width="80px">注册时间</td>
+										<td width="80px">交易时间</td>
+										<td width="80px">交易手数</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-				<!--<ul class="mui-table-view mui-table-view-chevron">
-				</ul>-->
-				<div style="height: auto;width: 100%;overflow-x: scroll;" class="test">
-					<table id="historyDetailsTable1" width="480px" cellpadding="0" cellspacing="0" border="0">
-						<thead>
-							<tr>
-								<td width="50px">手机号</td>
-								<td width="80px">姓名</td>
-								<td width="80px">注册时间</td>
-								<td width="80px">交易时间</td>
-								<td width="80px">交易手数</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td width="80px">手机号</td>
-								<td width="80px">姓名</td>
-								<td width="80px">注册时间</td>
-								<td width="80px">交易时间</td>
-								<td width="80px">交易手数</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
 			</div>
 		</div>
+		<input id="sharecontent" type="hidden" value=""></input>
+		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
+		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
+		<div id="output" style="opacity: 0;"></div>
 	</body>
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/share.js"></script>
+	<script src="../../js/immersed.js"></script>
 	<script>
-	mui.init();
-			(function($) {
-				//阻尼系数
-				var deceleration = mui.os.ios?0.003:0.0009;
-				$('.test').scroll({
-					bounce: false,
-					indicators: true, //是否显示滚动条
-					deceleration:deceleration
-				});
-				$.ready(function() {
-					//循环初始化所有下拉刷新，上拉加载。
-					$.each(document.querySelectorAll('.test'), function(index, pullRefreshEl) {
-						$(pullRefreshEl).pullToRefresh({
-							down: {
-								callback: function() {
-									var self = this;
-									setTimeout(function() {
-										var ul = self.element.querySelector('tr');
-										ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
-										self.endPullDownToRefresh();
-									}, 1000);
-								}
-							},
-							up: {
-								callback: function() {
-									var self = this;
-									setTimeout(function() {
-										var ul = self.element.querySelector('#historyDetailsTable1');
-										ul.appendChild(createFragment(ul, index, 5));
-										self.endPullUpToRefresh();
-									}, 1000);
+				mui.init();
+				var item = document.getElementById('item2');
+			    var scheight = document.documentElement.clientHeight;
+				var infoheihgt = scheight - 44 -100;
+				item.style.height = infoheihgt + 'px';
+				(function($) {
+					$('.mui-scroll-wrapper').scroll({
+						indicators: true //是否显示滚动条
+					});				
+				})(mui);
+				mui.plusReady(function(){
+					mui(document.querySelector('#item2 .mui-scroll')).pullToRefresh({
+						up: { 
+							callback: function() {
+								var self = this;
+								var ul = self.element.querySelector('#historyDetailsTable1');
+								ajaxQueryPageInfo(self);	
+								
+							}
+						}
+					});
+					var mobile=plus.storage.getItem(tzdr.constants.user_mobile,mobile);
+					function  ajaxQueryPageInfo(obj){
+						mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
+							
+						},function(){});
+					}
+					mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
+						console.log(JSON.stringify(data));
+						if(data.success==true){
+							$("#inviteUrl").text(data.data.inviteUrl);
+						}
+					},function(){
+						
+					});
+					document.getElementById("shareButton").addEventListener("tap",function(){
+						var text=$("#inviteUrl").text();
+						copytoClip(text);
+					})
+					function copytoClip(text){
+						if(plus.os.name=="Android"){
+							var Context=plus.android.importClass("android.content.Context");
+							var main=plus.android.runtimeMainActivity();
+							var clip=main.getSystemService(Context.CLIPBOARD_SERVICE);
+							plus.android.invoke(clip,"setText",text);   
+							mui.toast("复制成功！");
+						}else{
+							var UIPasteboard=plus.ios.importClass("UIPasteboard");
+							var generalPasteboard=UIPasteboard.generalPasteboard();
+							generalPasteboard.setValueforPasteboardType(text,"public.utf8-plain-text");
+							var value=generalPasteboard.valueForPasteboardType("public.utf8-plain-text");
+							mui.toast("复制成功！");
+						}
+					}
+					$(".shareWexin").on("tap",function(){
+								var shares=null;
+							var Intent=null,File=null,Uri=null,main=null;
+							// H5 plus事件处理
+							function plusReady(){
+								updateSerivces();
+								if(plus.os.name=="Android"){
+									main = plus.android.runtimeMainActivity();
+									Intent = plus.android.importClass("android.content.Intent");
+									File = plus.android.importClass("java.io.File");
+									Uri = plus.android.importClass("android.net.Uri");
 								}
 							}
-						});
-					});
-					var createFragment = function(ul, index, count, reverse) {
-						var length = ul.querySelectorAll('li').length;
-						var fragment = document.createDocumentFragment();
-						var li;
-						for (var i = 0; i < count; i++) {
-							li = document.createElement('li');
-							li.className = 'mui-table-view-cell';
-							li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
-							fragment.appendChild(li);
-						}
-						return fragment;
-					};
-				});
-			})(mui);
+							if(window.plus){
+								plusReady();
+							}else{
+								document.addEventListener("plusready",plusReady,false);
+							}
+							/**
+							 * 更新分享服务
+							 */
+							function updateSerivces(){
+								plus.share.getServices( function(s){
+									shares={};
+									for(var i in s){
+										var t=s[i];
+										shares[t.id]=t;
+									}
+								}, function(e){
+								} );
+							}
+							
+							/**
+							   * 分享操作
+							   * @param {JSON} sb 分享操作对象s.s为分享通道对象(plus.share.ShareService)
+							   * @param {Boolean} bh 是否分享链接
+							   */
+							function shareAction(sb,bh) {
+								console.log(bh);
+								console.log(sb);
+								if(!sb||!sb.s){
+									return;
+								}
+								var msg={content:sharecontent.value,extra:{scene:sb.x}};
+								console.log(JSON.stringify(msg));
+								if(bh){
+									msg.href=sharehref.value;
+									if(sharehrefTitle&&sharehrefTitle.value!=""){
+										msg.title=sharehrefTitle.value;
+									}
+									if(sharehrefDes&&sharehrefDes.value!=""){
+										msg.content=sharehrefDes.value;
+									}
+									msg.thumbs=["http://cms.vs.com/uploads/topic/share/image/100.png"];
+									msg.pictures=["http://cms.vs.com/uploads/topic/share/image/100.png"];
+								}else{
+									if(pic&&pic.realUrl){
+										msg.pictures=[pic.realUrl];
+									}
+								}
+								// 发送分享
+								if ( sb.s.authenticated ) {
+									shareMessage(msg,sb.s);
+								} else {
+									outLine( "---未授权---" );
+									sb.s.authorize( function(){
+											shareMessage(msg,sb.s);
+										},function(e){
+									});
+								}
+							}
+							/**
+							   * 发送分享消息
+							   * @param {JSON} msg
+							   * @param {plus.share.ShareService} s
+							   */
+							function shareMessage(msg,s){
+								s.send( msg, function(){
+								}, function(e){
+								} );
+							}
+							// 分析链接
+							function shareHref(){
+								var shareBts=[];
+								// 更新分享列表
+								var ss=shares['weixin'];
+								ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),
+								shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));
+								ss=shares['qq'];
+								ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
+								
+								// 弹出分享列表
+								shareBts.length>0?plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
+									(e.index>0)&&shareAction(shareBts[e.index-1],true);
+								}):plus.nativeUI.alert('暂不支持分享功能');
+							}
+					})
+				})
 	</script>
 </html>
