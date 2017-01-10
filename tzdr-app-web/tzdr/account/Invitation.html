@@ -298,7 +298,6 @@
 							}
 					},function(){});
 					mui.app_request("/activity/oldAndNewInvitedStatistics",{},function(data){
-						console.log(JSON.stringify(data));
 						if(data.success==true){
 							$("#ftradeNum").text(data.data.ftradeNum);
 							$("#registNum").text(data.data.registNum);
@@ -329,7 +328,6 @@
 						}
 					}
 					mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
-						console.log(JSON.stringify(data));
 						if(data.success==true){
 							$("#inviteUrl").text(data.data.inviteUrl);
 						}
