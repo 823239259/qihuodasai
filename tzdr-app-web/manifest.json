@@ -1638,7 +1638,14 @@
 					"images/fenxiang.png",
 					"images/weixinshare.png",
 					"images/qqshare.png",
-					"images/weiboshare.png"
+					"images/weiboshare.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"tzdr/account/invitation_sub.html"
 				],
 				"refer": [],
 				"priority": 0

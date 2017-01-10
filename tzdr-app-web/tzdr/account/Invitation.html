@@ -146,6 +146,11 @@
 	    	#shareDivContent p label img{
 	    		width: 60%;
 	    	}
+	    	#item2{
+	    		width: 100%;
+				overflow-x: scroll;
+				overflow-y: hidden;
+	    	}
 	    </style>
 	</head>
 	<body>
@@ -157,7 +162,7 @@
 		<div class="mui-content sc_listdeta" id="listDetails">
 			<div  class="mui-slider-indicator mui-segmented-control">
 				<a class="mui-control-item mui-active" href="#item1" id="detailButton">方案明细</a>
-				<a class="mui-control-item" href="" id="historyButton">历史成交明细</a>
+				<a class="mui-control-item" href="#item2" id="historyButton">历史成交明细</a>
 			</div>
 			<div id="item1" class="mui-control-content mui-active">	
 				<p>分享以下邀请链接，好友通过您的链接注册成功完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
@@ -182,27 +187,83 @@
 					<p><label>注册人数</label><label>申请方案人数</label><label>已获奖励次数</label></p>
 					<p><label class="fcc900">10</label><label class="fcc900">1</label><label class="fcc900">1</label></p>
 				</div>
-				<table id="historyDetailsTable1" width="480px" cellpadding="0" cellspacing="0" border="0">
-					<thead>
-						<tr>
-							<td width="50px">手机号</td>
-							<td width="80px">姓名</td>
-							<td width="80px">注册时间</td>
-							<td width="80px">交易时间</td>
-							<td width="80px">交易手数</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td width="80px">手机号</td>
-							<td width="80px">姓名</td>
-							<td width="80px">注册时间</td>
-							<td width="80px">交易时间</td>
-							<td width="80px">交易手数</td>
-						</tr>
-					</tbody>
-				</table>
+				<!--<ul class="mui-table-view mui-table-view-chevron">
+				</ul>-->
+				<div style="height: auto;width: 100%;overflow-x: scroll;" class="test">
+					<table id="historyDetailsTable1" width="480px" cellpadding="0" cellspacing="0" border="0">
+						<thead>
+							<tr>
+								<td width="50px">手机号</td>
+								<td width="80px">姓名</td>
+								<td width="80px">注册时间</td>
+								<td width="80px">交易时间</td>
+								<td width="80px">交易手数</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td width="80px">手机号</td>
+								<td width="80px">姓名</td>
+								<td width="80px">注册时间</td>
+								<td width="80px">交易时间</td>
+								<td width="80px">交易手数</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
 			</div>
 		</div>
 	</body>
+	<script>
+	mui.init();
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios?0.003:0.0009;
+				$('.test').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration:deceleration
+				});
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.test'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('tr');
+										ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('#historyDetailsTable1');
+										ul.appendChild(createFragment(ul, index, 5));
+										self.endPullUpToRefresh();
+									}, 1000);
+								}
+							}
+						});
+					});
+					var createFragment = function(ul, index, count, reverse) {
+						var length = ul.querySelectorAll('li').length;
+						var fragment = document.createDocumentFragment();
+						var li;
+						for (var i = 0; i < count; i++) {
+							li = document.createElement('li');
+							li.className = 'mui-table-view-cell';
+							li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
+							fragment.appendChild(li);
+						}
+						return fragment;
+					};
+				});
+			})(mui);
+	</script>
 </html>
