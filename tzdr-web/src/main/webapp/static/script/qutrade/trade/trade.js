@@ -1367,6 +1367,73 @@ function generateAccountTitle(){
 	$("#account_gdt1").append(html);
 }
 /**
+ * 生成止损/止盈未触发表头
+ */
+function generateStopLossTitle(){
+	var html = '<ul class="tab_lis">'+
+			   '   <li class="ml" style="width: 100px;">合约</li>'+
+			   '   <li style="width: 50px;">状态</li>'+
+			   '   <li style="width: 50px;">多空</li>'+
+			   '   <li style="width: 50px;">类别</li>'+
+			   '   <li style="width: 50px;">手数</li>'+
+			   '   <li style="width: 140px;">触发条件</li>'+
+			   '   <li style="width: 50px;">委托价</li>'+
+			   '   <li style="width: 100px;">有效期</li>'+
+			   '    <li style="width: 140px;">触发时间</li>'+
+			   ' </ul><p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
+	$("#no_stopLoss").append(html);
+}
+/**
+ * 生成止损/止盈触发表头
+ */
+function generateStopLossTitle(){
+	var html = ' <ul class="tab_lis">'+
+			   '     <li class="ml" style="width: 100px;">合约</li>'+
+			   '     <li style="width: 50px;">状态</li>'+
+			   '      <li style="width: 50px;">多空</li>'+
+			   '      <li style="width: 50px;">类别</li>'+
+			   '      <li style="width: 50px;">手数</li>'+
+			   '      <li style="width: 140px;">触发条件</li>'+
+			   '      <li style="width: 50px;">委托价</li>'+
+			   '      <li style="width: 100px;">有效期</li>'+
+			   '      <li style="width: 140px;">触发时间</li>'+
+			   '  </ul>'+
+			   '  <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
+	$("#yes_stopLoss").append(html);
+}
+/**
+ * 生成条件单表头（未触发）
+ */
+function generateConditioinPriceTitle(){
+	var html = '<ul class="tab_lis">'+
+			   '        <li style="width: 100px" class="ml">合约</li>'+
+			   '        <li style="width: 50px">状态</li>'+
+			   '        <li style="width: 100px">类别</li>'+
+			   '        <li style="width: 120px">下单</li>'+
+			   '        <li style="width: 220px">条件</li>'+
+			   '        <li style="width: 60px">有效日期</li>'+
+			   '        <li style="width: 140px">触发时间</li>'+
+			   '	</ul>'+
+			   ' <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
+		$("#yes_condition_list").append(html);
+}
+/**
+ * 生成条件单表头（触发）
+ */
+function generateConditioinPriceTitle(){
+	var html = '<ul class="tab_lis">'+
+			   '        <li style="width: 100px" class="ml">合约</li>'+
+			   '        <li style="width: 50px">状态</li>'+
+			   '        <li style="width: 100px">类别</li>'+
+			   '        <li style="width: 120px">下单</li>'+
+			   '        <li style="width: 220px">条件</li>'+
+			   '        <li style="width: 60px">有效日期</li>'+
+			   '        <li style="width: 140px">触发时间</li>'+
+			   '	</ul>'+
+			   ' <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
+		$("#no_condition_list").append(html);
+}
+/**
  * 生成持仓操作节点
  */
 function generateHoldHandleDom(){
@@ -1387,6 +1454,31 @@ function generateDesHandleDom(){
 				'	<li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>'+
 				'</ul>';
 	$("#des_title").append(html);
+}
+/**
+ * 生成止损止盈操作节点
+ * @returns
+ */
+function generateStopLossHandleDom(){
+	var html = '<ul class="caozuo" id="loss_caozuo" style="left: 243px;">'+
+			   '     <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "2" id = "loss_stop">暂停</a></li>'+
+			   '     <li><a href="javascript:void(0);" data-tion-vale = "0" id = "loss_update">修改</a></li>'+
+			   '     <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "1" id = "loss_delete">删除</a></li>'+
+			   ' </ul>';
+		$("#loss_title").append(html);
+}
+/**
+ * 生成条件单操作节点
+ * @returns
+ */
+function generateConditionHandleDom(){
+	var html = '<ul class="caozuo" id="condition_caozuo" style="left: 243px;">'+
+			   '     <li><a href="javascript:void(0);"  id = "condition_insert">新增</a></li>'+
+			   '     <li><a href="javascript:void(0);" data-operate-value = "2" class= "updateCondition" id = "condition_stop">暂停</a></li>'+
+			   '     <li><a href="javascript:void(0);"  id = "condition_update">修改</a></li>'+
+			   '     <li><a href="javascript:void(0);" data-operate-value = "1" class = "updateCondition" id = "condition_delete">删除</a></li>'+
+			   ' </ul>';
+		$("#condition_title").append(html);
 }
 /**
  * 绑定持仓列表的点击事件
@@ -3434,6 +3526,14 @@ function clearLocalCacheData(){
 	isUpdateOrder = false;
 	isBuy = false;
 	isGetVersion = false;
+	var stoplossIndex = 0;
+	var selectStopLoss = {};
+	var localCahceStopLossNo = {};
+	var operationStopLossType = undefined;
+	var conditionIndex = 0;
+	var localCacheCondition = {};
+	var selectCondition = {};
+	var operateConditionType = undefined;
 }
 /**
  * 条件单验证价格条件符合条件
