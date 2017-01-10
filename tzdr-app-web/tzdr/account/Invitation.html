@@ -275,17 +275,18 @@
 						mui.openWindow("../buy/buy.html")
 					})
 					var dataALL=[];
+					var pageIndex=0;
+					var perPage=1;
+					var totalPage=0;
+					var curreentPage=0;
 					var mobile=plus.storage.getItem(tzdr.constants.user_mobile,mobile);
-					mui.app_request("/activity/getOldAndNewInvitedList",{},function(data){
+					mui.app_request("/activity/getOldAndNewInvitedList",{pageIndex:pageIndex,perPage:perPage},function(data){
+						console.log(JSON.stringify(data));
 							if(data.success==true){
-								var dataall=data.data;
-								dataALL=dataall;
-								var length=0;
-								if(dataall.length<=20){
-									length=dataall.length;
-								}else{
-									length=20;
-								}
+								var dataall=data.data.pageResults;
+								totalPage=data.data.totalPage;
+								curreentPage=data.data.curreentPage;
+								var length=dataall.length;
 								for(var i=0;i<length;i++){
 									var mobile=dataall[i].mobile;
 									var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
@@ -295,6 +296,7 @@
 					                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
 					            "</tr>")
 								}
+								pageIndex=pageIndex+1;
 							}
 					},function(){});
 					mui.app_request("/activity/oldAndNewInvitedStatistics",{},function(data){
@@ -307,25 +309,27 @@
 						
 					})
 					function  ajaxQueryPageInfo(obj){
-						var length=dataALL.length;
-						if(length>20){
-							dataALL=dataALL.slice(20);
-							console.log(dataALL.length);
-							for(var i=0;i<dataALL.length;i++){
-									var mobile=dataALL[i].mobile;
-									var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-									var ctime=new Date(dataALL[i].ctime).format("yyyy-MM-dd hh:mm:ss");
-									var endTime=new Date(dataALL[i].endTime).format("yyyy-MM-dd hh:mm:ss");
-									$("#historyDetailsTable1").append("<tr>" +
-					                    "<td>"+user_mobile+"</td><td>"+dataALL[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataALL[i].sumLever+"</td>"+
-					            "</tr>");
-					            obj.endPullUpToRefresh();
-							}
-						}else{
-							if(obj){
-								obj.endPullUpToRefresh(true);
-							}
+						if(curreentPage<=totalPage){
+							obj.endPullUpToRefresh(true);
+							return
 						}
+						mui.app_request("/activity/getOldAndNewInvitedList",{pageIndex:pageIndex,perPage:perPage},function(data){
+							if(data.success==true){
+									var dataall=data.data.pageResults;
+									curreentPage=data.data.curreentPage;
+									for(var i=0;i<length;i++){
+										var mobile=dataall[i].mobile;
+										var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
+										var ctime=new Date(dataall[i].ctime).format("yyyy-MM-dd hh:mm:ss");
+										var endTime=new Date(dataall[i].endTime).format("yyyy-MM-dd hh:mm:ss");
+										$("#historyDetailsTable1").append("<tr>" +
+						                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
+						            "</tr>")
+									}
+									pageIndex=pageIndex+1;
+									obj.endPullUpToRefresh();
+								}
+						},function(){})
 					}
 					mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
 						if(data.success==true){
