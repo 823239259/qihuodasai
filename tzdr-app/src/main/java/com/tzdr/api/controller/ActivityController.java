@@ -36,6 +36,7 @@ import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.generalize.GeneralizeService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
@@ -74,8 +75,8 @@ public class ActivityController {
 	private FSimpleCouponService fSimpleCouponService;
 	@Autowired
 	private ActivityOldAndNewService  activityOldAndNewService;
+	
 	public ActivityController() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -122,22 +123,27 @@ public class ActivityController {
 	@RequestMapping(value = "/getOldAndNewInvitedList", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult oldAndNewInvitedToRecord(HttpServletRequest request,HttpServletResponse response){
+		int pageIndex=Integer.parseInt(request.getParameter("pageIndex"));  //页索引
+		int perPage=Integer.parseInt(request.getParameter("perPage"));	 //当页记录数 默认为10条记录
 		String starttime=request.getParameter("starttime");
 		String endtime=request.getParameter("endtime");
 		String fourMobile = request.getParameter("fourMobile");
-		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		
+		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取app缓存信息
 		WUser user = null;
-		if(StringUtils.isBlank(uid)){
+		String uid = null;
+		if(cacheUser.getMobile() == null){  //web
 			String mobile = request.getParameter("mobile");
-		    user = wUserService.getWUserByMobile(mobile); //用web传过来mobile获取用户信息
-		    uid = user.getId();
-		}else{
-			user = wUserService.get(uid);  //获取用户信息
+			user = wUserService.getWUserByMobile(mobile);
+		}else{ //app
+			uid = cacheUser.getUid();
+			user = wUserService.getUser(uid); 
 		}
+		
 		if(ObjectUtil.equals(null, user)){
 			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
 		}
-		List<OldAndNewVo> oldAndNewVos = activityOldAndNewService.getOldAndNewVoList(uid,fourMobile,starttime,endtime);
+		PageInfo<OldAndNewVo> oldAndNewVos = activityOldAndNewService.getOldAndNewVoList(pageIndex,perPage,user.getId(),fourMobile,starttime,endtime);
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",oldAndNewVos);
 	}
@@ -152,19 +158,20 @@ public class ActivityController {
 	@RequestMapping(value = "/oldAndNewInvitedStatistics", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult oldAndNewStatistics(HttpServletRequest request,HttpServletResponse response){
-		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取app缓存信息
 		WUser user = null;
-		if(StringUtils.isBlank(uid)){
+		String uid = null;
+		if(cacheUser == null){  //web
 			String mobile = request.getParameter("mobile");
-		    user = wUserService.getWUserByMobile(mobile); //用web传过来mobile获取用户信息
-		    uid = user.getId();
-		}else{
-			user = wUserService.get(uid);  //获取用户信息
+			user = wUserService.getWUserByMobile(mobile);
+		}else{ //app
+			uid = cacheUser.getUid();
+			user = wUserService.getUser(uid); 
 		}
 		if(ObjectUtil.equals(null, user)){
 			return new ApiResult(false, ResultStatusConstant.FundDetail.USER_INFO_NOT_EXIST, "user.info.not.exist.");
 		}
-		Map<String, Object> activityStatistics = activityOldAndNewService.getActivityStatistics(uid);
+		Map<String, Object> activityStatistics = activityOldAndNewService.getActivityStatistics(user.getId());
 		
 	    return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",activityStatistics);
 	}
