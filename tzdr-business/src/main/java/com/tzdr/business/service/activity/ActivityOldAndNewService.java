@@ -27,7 +27,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 		
 		StringBuffer sql = new StringBuffer();
 		sql.append("select s.mobile,s.ctime,s.tname,min(s.end_time) end_time,s.sumLever from (SELECT w.mobile mobile,w.ctime ctime,v.tname tname,f.end_time end_time,"+
-                "(IFNULL(f.tran_actual_lever,0)+IFNULL(f.crude_tran_actual_lever,0)+IFNULL(f.hsi_tran_actual_lever,0)+IFnull(f.mdtran_actual_lever,0)+"+
+                "sum(IFNULL(f.tran_actual_lever,0)+IFNULL(f.crude_tran_actual_lever,0)+IFNULL(f.hsi_tran_actual_lever,0)+IFnull(f.mdtran_actual_lever,0)+"+
 	    		"IFNULL(f.mntran_actual_lever,0)+IFNULL(f.mbtran_actual_lever,0)+IFNULL(f.daxtran_actual_lever,0)+IFNULL(f.nikkei_tran_actual_lever,0)+"+
                 "IFNULL(f.ag_tran_actual_lever,0)+IFNULL(f.lhsi_tran_actual_lever,0)+IFNULL(f.ame_copper_market_lever,0)+IFNULL(f.ame_silver_market_lever,0)+"+
 	    		"IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)) sumLever ");
