@@ -223,6 +223,8 @@ function handleData(evt){
 				message = "添加止损单失败"
 			}else{
 				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
+				$("#stop_loss").css("display","none");
+				 $("#div_Mask").hide();
 			}
 			
 			tip(message);
@@ -269,6 +271,8 @@ function handleData(evt){
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				tip("添加条件单成功,单号:【"+conditionNo+"】");
+				$("#stop_loss").css("display","condition_money_time");
+				 $("#div_Mask").hide();
 			} 
 			appendCondition(conditionParam);
 		}else if(method == "OnRtnConditionState"){ 
