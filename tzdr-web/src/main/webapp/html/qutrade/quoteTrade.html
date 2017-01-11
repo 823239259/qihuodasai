@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="../../static/ico/icon.png">
     <!-- 弹出层 -->
     <link href="../../static/css/quotation.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/css/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
     <link  href="../../static/script/layer/skin/layer.css"  rel="stylesheet" type="text/css">
     <script type='text/javascript' src="../../static/script/jquery-1.8.3.js"></script>
     <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
@@ -33,6 +34,7 @@
     <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
     <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
     <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
+    <script type="text/javascript" src="../../static/script/jquery.datetimepicker.full.min.js"></script>
     <!-- 插件 -->
     <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/d3.min.js"></script>
     <script type="text/javascript" src="../../static/script/qutrade/react.min.js"></script> --%> -->
@@ -1251,6 +1253,11 @@
         $(".close").click(function(){
         	$(".popup").css("display","none");
             $("#div_Mask").hide();
+        });
+        $('#condition_time_time').datetimepicker({
+        	datepicker:false,
+        	format:'H:i:s',
+        	step:1
         });
     });
 </script>
