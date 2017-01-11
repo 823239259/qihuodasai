@@ -154,6 +154,8 @@ function tradeLogin(){
 				clearInterval(loginInterval);
 			}
 		}, 500); 
+	}else{
+		plus.nativeUI.closeWaiting();
 	}
 }
 /**
@@ -186,7 +188,6 @@ function initLoad() {
 			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,null,null);
 			return;
 	    }
-	    plus.nativeUI.showWaiting("正在连接交易服务器...");
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
 			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
