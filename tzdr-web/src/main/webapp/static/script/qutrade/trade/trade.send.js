@@ -229,6 +229,7 @@ var Trade = {
 							+' "StopLossDiff":'+stopLossDiff+','
 							+' "StopLossPrice":'+stopLossPrice+','
 							+' "OrderType":'+orderType+'}';
+				console.log(param);
 				Trade.doSendMessage(TradeUrl.ModifyStopLoss,param);
 			},
 			/**
