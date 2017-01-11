@@ -304,7 +304,7 @@
 					}
 				});
 				$("#operateLogin").click(function(){
-					if(username == null){
+//					if(username == null){
 						account=document.getElementById("account").value;
 						pwd=$.base64.encode(document.getElementById("password").value);
 						if(mui.isnull(account)){
@@ -370,9 +370,9 @@
 								clearTimeout(loginSetTimeOut);
 							}
 						}
-					}else{
-						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
-					}
+//					}else{
+//						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
+//					}
 				});
 				function backReload(){
 					plus.webview.getWebviewById("transactionDetails").reload();
