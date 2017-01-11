@@ -290,8 +290,8 @@
 								for(var i=0;i<length;i++){
 									var mobile=dataall[i].mobile;
 									var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-									var ctime=new Date(dataall[i].ctime).format("yyyy-MM-dd hh:mm:ss");
-									var endTime=new Date(dataall[i].endTime).format("yyyy-MM-dd hh:mm:ss");
+									var ctime=new Date(dataall[i].ctime*1000).format("yyyy-MM-dd hh:mm:ss");
+									var endTime=new Date(dataall[i].endTime*1000).format("yyyy-MM-dd hh:mm:ss");
 									$("#historyDetailsTable1").append("<tr>" +
 					                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
 					            "</tr>")
@@ -322,8 +322,8 @@
 									for(var i=0;i<length;i++){
 										var mobile=dataall[i].mobile;
 										var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
-										var ctime=new Date(dataall[i].ctime).format("yyyy-MM-dd hh:mm:ss");
-										var endTime=new Date(dataall[i].endTime).format("yyyy-MM-dd hh:mm:ss");
+										var ctime=new Date(dataall[i].ctime*1000).format("yyyy-MM-dd hh:mm:ss");
+										var endTime=new Date(dataall[i].endTime*1000).format("yyyy-MM-dd hh:mm:ss");
 										$("#historyDetailsTable1").append("<tr>" +
 						                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
 						            "</tr>")
