@@ -259,7 +259,7 @@ var tzdr = {
 	constants:{
 //		api_domain:"http://api.vs.com/", 
 		api_domain:"http://192.168.2.197:8080/tzdr-app/",
-		//图片地址
+//		图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token
 		user_token:'user_token',
@@ -619,7 +619,6 @@ function initBottom(data){
 					}
 					mui.openWindow({url:data.home,id:"home"});
 				});
-			
 				document.getElementById("quotationMain").addEventListener("tap",function(){
 					var p=plus.webview.getWebviewById("quotationMain");
 					if(p){
