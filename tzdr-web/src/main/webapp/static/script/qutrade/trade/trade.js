@@ -2240,7 +2240,6 @@ function bindOpertion(){
 			$("#stopHoldDrection").val($drection.attr("data-drection"));
 			$("#stop_confirm").attr("data-tion-operate",1);
 			$("#loss_confirm").attr("data-tion-operate",1);
-			$("#loss_chaPrice").text("0");
 			var stopChecked = $("#stop_checked").is(':checked');
 			if(!stopChecked){
 				$("#stop_diff").attr("disabled",true);
@@ -2248,7 +2247,6 @@ function bindOpertion(){
 			var contractSize = localCommodity.ContractSize;
 			var miniTikeSize = localCommodity.MiniTikeSize;
 			var holdAvgPrice = $holdAvgPrice.text();
-			console.log(lastPrice);
 			var stopInputPrice = replaceNum(lastPrice+"",dotSize);
 			var chaPrice = Math.abs(stopInputPrice - holdAvgPrice);
 			var num = $holdNum.text();
@@ -2295,6 +2293,7 @@ function bindOpertion(){
 			tip("无效的合约");
 			return;
 		}
+		var dotSize = localCommodity.DotSize;
 		var localQuote = localCacheQuote[contractCode];
 		var lastPrice = 0;
 		if(localQuote != undefined){
@@ -2308,6 +2307,16 @@ function bindOpertion(){
 		var holdAvgPrice = param.HoldAvgPrice;
 		var holdDrection = param.HoldDrection;
 		var scale = 0;
+		var contractSize = localCommodity.ContractSize;
+		var miniTikeSize = localCommodity.MiniTikeSize;
+		var stopInputPrice = replaceNum(stopLossPrice+"",dotSize);
+		var chaPrice = Math.abs(stopInputPrice - holdAvgPrice);
+		if(num.length != 0){
+			var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,holdDrection);
+			$("#stop_yjks").text(price);
+			$("#loss_yjks").text(price); 
+		}
+		scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
 		if(stopLossType == 0 || stopLossType == 1){
 			scale = (stopLossPrice - holdAvgPrice) / holdAvgPrice * 100;
 			if(stopLossType == 0){
@@ -2318,6 +2327,8 @@ function bindOpertion(){
 				$("#stop_lastPrice").text(lastPrice);
 				$("#stop_orderType").val(orderType);
 				$("#stop_diff").val(0);
+				$("#stop_pricecha").text(parseFloat(chaPrice).toFixed(dotSize));
+				$("#stop_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
 			}else{
 				$("#loss_inputprice").val(stopLossPrice);
 				$("#loss_contractCode").text(contractCode);
@@ -2325,6 +2336,8 @@ function bindOpertion(){
 				$("#loss_dw").text(localCommodity.CurrencyNo);
 				$("#loss_lastPrice").text(lastPrice);
 				$("#loss_orderType").val(orderType);
+				$("#loss_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
+				$("#loss_chaPrice").text(parseFloat(chaPrice).toFixed(dotSize));
 				$("#loss_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
 			}
 			$("#stop_checked").attr("checked",false);
@@ -2340,7 +2353,7 @@ function bindOpertion(){
 		}
 		$("#loss_inputnum").val(num);
 		$("#stop_inputnum").val(num);
-		$("#stop_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
+		/*$("#stop_scale").text(parseFloat(Math.abs(scale)).toFixed(2));*/
 		$("#stop_confirm").attr("data-tion-operate",2);
 		$("#loss_confirm").attr("data-tion-operate",2);
 		$("#stopHoldAvgPrice").val(holdAvgPrice);
