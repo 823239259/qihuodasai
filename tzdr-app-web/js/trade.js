@@ -3493,6 +3493,7 @@ function openLogin(){
 					backpageID:"transactionDetails"
 				}
 	});
+	loginOut();
 }
 /**
  * 验证最新价格 
