@@ -173,8 +173,11 @@ function setTradeConfig(ismock){
  */
 function initLoad() {
 	    plus.nativeUI.showWaiting("正在连接交易服务器...");
-	    if(socket == null){
-	    	return;
+	    if(isConnectionError){
+	    	 plus.nativeUI.closeWaiting();
+	    	clearInterval(tradeIntervalId);
+			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,null,null);
+			return;
 	    }
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
@@ -215,24 +218,24 @@ function tradeReconnect(){
 /**
  * 初始化交易
  */
-function initTradeConnect(){
-	/**
-	 * 交易连接 -->trade.connection
-	 */
-	tradeConnection();
-	/**
-	 * 交易数据初始化加载 --> trade.connections
-	 */
-	initLoad();
-	tradeIntervalId = setInterval(function(){
-			/*layer.msg('正在连接交易服务器...', {icon: 16});*/
-			if(connectionStatus){
-				/*layer.msg('交易服务器连接成功', {icon: 4});*/
-				clearInterval(tradeIntervalId);
+	function initTradeConnect(){
+		/**
+		 * 交易连接 -->trade.connection
+		 */
+		tradeConnection();
+		/**
+		 * 交易数据初始化加载 --> trade.connections
+		 */
+		initLoad();
+		tradeIntervalId = setInterval(function(){
+				/*layer.msg('正在连接交易服务器...', {icon: 16});*/
+				if(connectionStatus){
+					/*layer.msg('交易服务器连接成功', {icon: 4});*/
+					clearInterval(tradeIntervalId);
+				}
 			}
-		}
-	, 2000);
-}
+		, 2000);
+	}
 function initTrade(){
 	/**
 	 * 交易登录（初始化） -->trade.connection
