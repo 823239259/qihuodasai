@@ -309,7 +309,8 @@
 						
 					})
 					function  ajaxQueryPageInfo(obj){
-						if(curreentPage<=totalPage){
+						console.log(curreentPage+"curreentPage"+totalPage)
+						if(Number(curreentPage) >= Number(totalPage)){
 							obj.endPullUpToRefresh(true);
 							return
 						}
