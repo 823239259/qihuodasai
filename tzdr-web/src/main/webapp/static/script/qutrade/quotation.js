@@ -109,7 +109,7 @@ $(function() {
                 var timestamp = Math.round(new Date(dataall[i][0]).getTime()/1000);
                 /*var exs = 3600*8;*/
                 //var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
-                timestamp = timestamp+"000";
+//              timestamp = timestamp+"000";
                 timestamp = parseInt(timestamp);
                 dataC.push([
                     timestamp,
@@ -466,7 +466,7 @@ $(function() {
         var dataall=data.Parameters;
         var text=$("#commodity_title").text();
         if(text.indexOf(dataall.CommodityNo)>=0){
-            var timestamp = Math.round(new Date().getTime())
+            var timestamp = Math.round(new Date().getTime()/1000)
 //          var exs = 3600*8;
 //          var zhi = parseInt((parseInt(timestamp)+ parseInt(exs)));
 //          timestamp = zhi+"000";
