@@ -90,9 +90,17 @@ function changeConnectionStatus(){
  */
 function tradeConnection(){  
 	if(socketUrl.length > 0){
-		socket = new WebSocket(socketUrl); 
-		if(socket.readyState == 0){
-			isConnectionError = false;
+		if(mui.checkNetwork()){
+			socket = new WebSocket(socketUrl); 
+			if(socket.readyState == 0){
+				isConnectionError = false;
+			}else{
+				isConnectionError = true;
+			}
+		}else{
+			isConnectionError = true;
+			plus.nativeUI.closeWaiting();
+			clearInterval(tradeIntervalId); 
 		}
 	}
 }
@@ -172,13 +180,13 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	    plus.nativeUI.showWaiting("正在连接交易服务器...");
 	    if(isConnectionError){
 	    	 plus.nativeUI.closeWaiting();
 	    	clearInterval(tradeIntervalId);
 			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,null,null);
 			return;
 	    }
+	    plus.nativeUI.showWaiting("正在连接交易服务器...");
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
 			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 

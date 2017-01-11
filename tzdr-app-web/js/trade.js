@@ -3493,12 +3493,12 @@ function openLogin(){
 					backpageID:"transactionDetails"
 				}
 	});
+	if(!isConnectionError){
+		socket.onclose();
+	}
 	loginOut();
 	plus.nativeUI.closeWaiting();
-	if(!isConnectionError){
-		/*socket.onclose();*/
-		/*socket.close();*/
-	}
+	
 }
 /**
  * 验证最新价格 
