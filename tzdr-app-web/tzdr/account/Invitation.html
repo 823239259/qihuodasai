@@ -276,7 +276,7 @@
 					})
 					var dataALL=[];
 					var pageIndex=0;
-					var perPage=1;
+					var perPage=20;
 					var totalPage=0;
 					var curreentPage=0;
 					var mobile=plus.storage.getItem(tzdr.constants.user_mobile,mobile);
@@ -285,7 +285,7 @@
 							if(data.success==true){
 								var dataall=data.data.pageResults;
 								totalPage=data.data.totalPage;
-								curreentPage=data.data.curreentPage;
+								currentPage=data.data.currentPage;
 								var length=dataall.length;
 								for(var i=0;i<length;i++){
 									var mobile=dataall[i].mobile;
@@ -309,14 +309,16 @@
 						
 					})
 					function  ajaxQueryPageInfo(obj){
-						if(curreentPage<=totalPage){
+						if(Number(currentPage) >= Number(totalPage)){
 							obj.endPullUpToRefresh(true);
 							return
 						}
 						mui.app_request("/activity/getOldAndNewInvitedList",{pageIndex:pageIndex,perPage:perPage},function(data){
 							if(data.success==true){
+								console.log(JSON.stringify(data));
 									var dataall=data.data.pageResults;
-									curreentPage=data.data.curreentPage;
+									var length=dataall.length;
+									currentPage=data.data.currentPage;
 									for(var i=0;i<length;i++){
 										var mobile=dataall[i].mobile;
 										var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);

@@ -29,15 +29,16 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
      pagediv=pagediv||'Pagination';
 	 divid=divid||'Searchresult';
 	    var pageIndex = index; 
-	  
+	    var mobile = $("#mobile_vs").val();
+	    var http6 = "http://localhost:8080/tzdr-app/activity/getOldAndNewInvitedList";
 	    $.ajax({   
 	        type: "POST",   
-	        url: basepath+"fund/fundHistory",   
-	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"iphone":iphone},   
-	        dataType: 'json',   
+	        url: http6,   
+	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":mobile},   
+	        dataType: 'json',  
 	        contentType: "application/x-www-form-urlencoded",   
 	        success: function(msg){  
-	        	
+	        	console.log(msg);
 	            var total =msg.totalCount;   
 	            var html = '';   
 	            
@@ -55,23 +56,12 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	            	if(statusvalue==null)
 	            		statusvalue="";
 	            	html +="<ol>";
-	            	html+="<li class='uc_fsl165'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; /*时间*/
-	            	html+="<li class='uc_fsl200'>"+13558767652+"</li>";											/*电话号码*/
-	            	html+="<li class='uc_fsl100'>"+"小白"+"</li>";												/*姓名*/
-	            	html+="<li class='uc_fsl100'>"+"佣金收入"+"</li>";											/*佣金类型*/
-	            	html+="<li class='uc_fsl100'>"+100+""+"元"+"</li>";											/*佣金金额*/
-	            	/*if(title=="all"){
-	            		html+="<li class='uc_fsl100'>"+$.formatMoney(n.amount,2)+"元</li>";
-	            	}*/
-	            	/*html+='<li class="uc_fsl100 uc_fslcon" id="fslcon'+title+i+'">'+
-					"<a href='javascript:void(0);' onclick='javascript:showdetail("+showid+")' class='uc_fsllink'>详情</a>"+
-					'</li>';*/
+	            	html+="<li class='uc_fsl165' style='width: 150px;'>"+13558767652+"</li>";                                          /*手机号码*/
+	            	html+="<li class='uc_fsl200' style='width: 50px;'>"+"小白"+"</li>";											       /*姓名*/
+	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; /*注册时间*/
+	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; /*交易时间*/
+	            	html+="<li class='uc_fsl100' style='width: 100px;'>"+10+""+"元"+"</li>";											   /*交易手数*/
 	            	html +="</ol>";
-	            	/*html+='<div class="uc_fslpromt" id="detaildiv'+title+i+'"  style="display:none;">'+
-	                '<i class="uc_ucp_icon"></i>'+
-	                '<p class="uc_flspormtbox">详情：'+detail+'</p>'+
-	                "<a href='javascript:void(0);' onclick='javascript:closedetail("+showid+")' class='uc_fslclose'></a>"+
-	                '</div>';*/
 	            }); 
 	           
 	            $('#'+divid).html(html); 
