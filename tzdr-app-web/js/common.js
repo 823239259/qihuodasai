@@ -257,8 +257,8 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-//		api_domain:"http://api.vs.com/", 
-		api_domain:"http://192.168.2.197:8080/tzdr-app/",
+		api_domain:"http://api.vs.com/", 
+//		api_domain:"http://192.168.2.197:8080/tzdr-app/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token
@@ -589,7 +589,7 @@ tzdr.kuaiqiangshou=function(obj){
 		});
 }
 function initBottom(data){
-	/**document.getElementById("account").addEventListener("tap",function(){
+	document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");
 							if(a){
@@ -619,7 +619,6 @@ function initBottom(data){
 					}
 					mui.openWindow({url:data.home,id:"home"});
 				});
-			***/
 				document.getElementById("quotationMain").addEventListener("tap",function(){
 					var p=plus.webview.getWebviewById("quotationMain");
 					if(p){
