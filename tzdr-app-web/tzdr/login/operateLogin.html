@@ -304,6 +304,7 @@
 					}
 				});
 				$("#operateLogin").click(function(){
+					tradeLoginOut();
 //					if(username == null){
 						account=document.getElementById("account").value;
 						pwd=$.base64.encode(document.getElementById("password").value);
