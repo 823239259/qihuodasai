@@ -129,6 +129,7 @@
              <mvc:mapping path="/regist" />
              <mvc:mapping path="/sms" />
              <mvc:mapping path="/activity/*" />
+             <mvc:mapping path="/wechat/*" />
             <bean class="com.tzdr.api.interceptor.CrossDomainInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
