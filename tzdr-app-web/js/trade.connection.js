@@ -44,6 +44,10 @@ var tradeIntervalId = null;
  */
 var isGetVersion = false;
 /**
+ * 连接是否错误 false - 正常， true - 错误
+ */
+var isConnectionError = true;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -86,7 +90,10 @@ function changeConnectionStatus(){
  */
 function tradeConnection(){  
 	if(socketUrl.length > 0){
-		socket = new WebSocket(socketUrl);  
+		socket = new WebSocket(socketUrl); 
+		if(socket.readyState == 0){
+			isConnectionError = false;
+		}
 	}
 }
 /**

@@ -3494,6 +3494,10 @@ function openLogin(){
 				}
 	});
 	loginOut();
+	plus.nativeUI.closeWaiting();
+	if(!isConnectionError){
+		socket.onclose();
+	}
 }
 /**
  * 验证最新价格 
