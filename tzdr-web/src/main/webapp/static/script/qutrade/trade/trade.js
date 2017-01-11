@@ -2236,8 +2236,11 @@ function bindOpertion(){
 			$("#stopHoldDrection").val($drection.attr("data-drection"));
 			$("#stop_confirm").attr("data-tion-operate",1);
 			$("#loss_confirm").attr("data-tion-operate",1);
-			$("#stop_diff").attr("disabled",true);
 			$("#loss_chaPrice").text("0");
+			var stopChecked = $("#stop_checked").is(':checked');
+			if(!stopChecked){
+				$("#stop_diff").attr("disabled",true);
+			}
 			var contractSize = localCommodity.ContractSize;
 			var miniTikeSize = localCommodity.MiniTikeSize;
 			var holdAvgPrice = $holdAvgPrice.text();
