@@ -1045,9 +1045,11 @@ function appendStopLossData(param){
 			        +'</ul>';
 		if(status == 0 || status == 1){
 			$("#no_stopLoss .tab_lis").after(html);
+			$("#nostop_account_norecord").css("display","none");
 			addStopLossBindClick(cls);
 		}else if(status == 2 || status == 3 || status == 4 || status == 5){
 			$("#yes_stopLoss .tab_lis").after(html);
+			$("#yesstop_account_norecord").css("display","none");
 		}
 		updateStoplossIndex();
 		localCahceStopLossNo[stopLossNo] = param; 
@@ -1186,9 +1188,11 @@ function appendCondition(param){
 				+'</tr>';  
 	if(status == 0 || status == 1){ 
 		$("#yes_condition_list").append(html);
+		$("#nocondition_account_norecord").css("display","none");
 		addConditionBindClick(cls);
 	}else if(status == 2 || status == 3 || status == 4 || status == 5){
 		$("#no_condition_list").append(html);
+		$("#yescondition_account_norecord").css("display","none");
 	}
 	localCacheCondition[conditionNo] = param;
 	conditionIndex++;
