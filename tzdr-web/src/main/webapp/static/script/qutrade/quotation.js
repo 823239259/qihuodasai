@@ -1,3 +1,61 @@
+
+/**
+ * **/
+	var requireEchart=require.config({
+	    paths:{
+	        'echarts' :'./../static/script/qutrade/echarts.min',
+	        'echarts/chart/pie' :'./../static/script/qutrade/echarts.min',
+	    }
+	});
+    function loadK(){
+        // 使用
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie', // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    myChart = ec.init(document.getElementById('CandlestickChartDiv'));
+                    echarts=ec;
+//                  timeChart=ec.init(document.getElementById("timeChart"));
+//                  volumeChart=ec.init(document.getElementById("volumeChart"));
+//                  lightChart=ec.init(document.getElementById("lightChart"));
+//                  CandlestickVolumeChart=ec.init(document.getElementById("CandlestickVolumeChart"));
+//                 	 ec.connect("group1");
+//                   ec.connect("group2");
+                }
+        );
+		
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(function() {
     function masendMessage(method,parameters){
         marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
