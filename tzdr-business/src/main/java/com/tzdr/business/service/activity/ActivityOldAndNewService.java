@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.DateUtils;
 import com.tzdr.domain.dao.activity.OldAndNewActivityDao;
 import com.tzdr.domain.vo.activity.OldAndNewVo;
@@ -21,7 +22,9 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<OldAndNewVo> getOldAndNewVoList(String parentId,String mobile,String starttime,String endtime){
+	public PageInfo<OldAndNewVo> getOldAndNewVoList(int pageIndex,int perPage, String parentId,String mobile,String starttime,String endtime){
+		PageInfo<Object> pageInfo = new PageInfo<Object>(perPage,pageIndex+1);
+		
 		StringBuffer sql = new StringBuffer();
 		sql.append("select s.mobile,s.ctime,s.tname,min(s.end_time) end_time,s.sumLever from (SELECT w.mobile mobile,w.ctime ctime,v.tname tname,f.end_time end_time,"+
                 "(IFNULL(f.tran_actual_lever,0)+IFNULL(f.crude_tran_actual_lever,0)+IFNULL(f.hsi_tran_actual_lever,0)+IFnull(f.mdtran_actual_lever,0)+"+
@@ -29,10 +32,11 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
                 "IFNULL(f.ag_tran_actual_lever,0)+IFNULL(f.lhsi_tran_actual_lever,0)+IFNULL(f.ame_copper_market_lever,0)+IFNULL(f.ame_silver_market_lever,0)+"+
 	    		"IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)) sumLever ");
                 
-		sql.append(" FROM w_user w left join w_user_verified v on w.id = v.uid left join f_simple_ftse_user_trade f on f.uid=w.id where w.parent_id = '"+parentId+"') s  "
-				+ "where s.tname <> '' and s.sumLever != 0 and s.end_time is not null GROUP BY s.mobile");
+		sql.append(" FROM w_user w left join w_user_verified v on w.id = v.uid left join f_simple_ftse_user_trade f on f.uid=w.id where w.parent_id = '"+parentId+"'");
+		
+		
 		if(StringUtil.isNotBlank(mobile)){
-			sql.append(" and (SELECT SUBSTRING(w.mobile,-4) = '"+mobile+"' ");
+			sql.append(" and SUBSTRING(w.mobile,-4) = '"+mobile+"' ");
 		}
 		if(StringUtil.isNotBlank(starttime)){
 			Date startdate=DateUtils.stringToDate(starttime, "yyyy-MM-dd");
@@ -45,10 +49,22 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 			long edate=enddate.getTime()/1000;
 			sql.append(" and w.ctime <= '"+edate+"'");
 		}
+		sql.append(" )s where s.tname <> '' and s.sumLever != 0 and s.end_time is not null GROUP BY s.mobile");
 		sql.append(" order by s.ctime desc");
-	    List<OldAndNewVo> OldAndNewVos = this.getEntityDao().queryListBySql(sql.toString(),OldAndNewVo.class,null,null);
-		return OldAndNewVos;
+		PageInfo<OldAndNewVo> oldAndNewVos = this.getEntityDao().queryPageBySql(pageInfo, sql.toString(), OldAndNewVo.class,null,null);
+		//计算总条数和总页数
+		List<OldAndNewVo> oldAndNewVoList = this.getEntityDao().queryListBySql(sql.toString(),OldAndNewVo.class,null,null);
+		if(oldAndNewVoList==null){
+			pageInfo.setTotalCount(0);
+			pageInfo.setTotalPage((long)((0 + perPage) - 1) / perPage);
+		}else{
+			pageInfo.setTotalCount(oldAndNewVoList.size());
+			pageInfo.setTotalPage((long)((oldAndNewVoList.size() + perPage) - 1) / perPage);
+		}
+
+		return  oldAndNewVos;
 	}
+	
 	
 	/**
 	 * 某一位用户 的 老带新活动统计
