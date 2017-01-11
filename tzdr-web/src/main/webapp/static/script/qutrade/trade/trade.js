@@ -2216,6 +2216,7 @@ function bindOpertion(){
 				tip("无效的品种合约");
 				return;
 			}
+			var dotSize = localCommodity.DotSize;
 			var currencyNo  = localCommodity.CurrencyNo;
 			var lastPrice = localQuote.LastPrice;
 			$("#stop_contractCode").text(contractCode);
@@ -2236,6 +2237,26 @@ function bindOpertion(){
 			$("#stop_confirm").attr("data-tion-operate",1);
 			$("#loss_confirm").attr("data-tion-operate",1);
 			$("#stop_diff").attr("disabled",true);
+			$("#loss_chaPrice").text("0");
+			var contractSize = localCommodity.ContractSize;
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			var holdAvgPrice = $holdAvgPrice.text();
+			console.log(lastPrice);
+			var stopInputPrice = replaceNum(lastPrice+"",dotSize);
+			var chaPrice = Math.abs(stopInputPrice - holdAvgPrice);
+			var num = $holdNum.text();
+			var scale = 0.00;
+			var stopDrection = $("#stopHoldDrection").val();
+			if(num.length != 0){
+				var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
+				$("#stop_yjks").text(price);
+				$("#loss_yjks").text(price); 
+			}
+			scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
+			$("#stop_pricecha").text(parseFloat(chaPrice).toFixed(dotSize));
+			$("#stop_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
+			$("#loss_chaPrice").text(parseFloat(chaPrice).toFixed(dotSize));
+			$("#loss_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
 			openUpdateStop();
 		}else{
 			tip("未登录,请先登录");
@@ -2337,14 +2358,14 @@ function bindOpertion(){
 		}
 		var contractSize = localCommodity.ContractSize;
 		var miniTikeSize = localCommodity.MiniTikeSize;
+		var holdAvgPrice = $("#stopHoldAvgPrice").val();
 		stopInputPrice = replaceNum(stopInputPrice,dotSize);
 		var chaPrice = Math.abs(stopInputPrice - lastPrice);
 		var num = $("#stop_inputnum").val();
 		var scale = 0.00;
-		var holdAvgPrice = $("#stopHoldAvgPrice").val();
 		var stopDrection = $("#stopHoldDrection").val();
 		if(num.length != 0){
-			var  price =  doGetFloatingProfit(lastPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
+			var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
 			$("#stop_yjks").text(price);
 		}
 		scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
@@ -2368,20 +2389,16 @@ function bindOpertion(){
 		var contractSize = localCommodity.ContractSize;
 		var miniTikeSize = localCommodity.MiniTikeSize;
 		stopInputPrice = replaceNum(stopInputPrice,dotSize);
-		var chaPrice = Math.abs(stopInputPrice - lastPrice);
+		var holdAvgPrice = $("#stopHoldAvgPrice").val();
+		var chaPrice = Math.abs(stopInputPrice - holdAvgPrice);
 		var scale = 0.00;
 		var num = $("#loss_inputnum").val();
-		var holdAvgPrice = $("#stopHoldAvgPrice").val();
 		var stopDrection = $("#stopHoldDrection").val();
-		if(num.length == 0){
-			var  price =  doGetFloatingProfit(lastPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
+		if(num.length != 0){
+			var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
 			$("#loss_yjks").text(price);
 		}
-		if(stopDrection == 0){
-			scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
-		}else if(stopDrection == 1){
-			scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
-		}
+		scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
 		$("#loss_chaPrice").text(parseFloat(chaPrice).toFixed(dotSize));
 		$("#loss_inputprice").val(stopInputPrice);
 		$("#loss_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
