@@ -824,7 +824,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					if(countOperateMoney == null){
 						countOperateMoney = 0.00;
 					}
-					Double new_CountOperateMoney = countOperateMoney+endAmlount;
+					Double new_CountOperateMoney = Math.abs(countOperateMoney+endAmlount);
 					BigDecimal bd = new BigDecimal(new_CountOperateMoney); 
 					wuser.setCountOperateMoney(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 				}
