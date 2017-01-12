@@ -157,7 +157,7 @@ function quotePush(obj){
 	//添加行情到全局缓存
 	setLocalCacheQuote(param);
 	//根据行情更新持仓列表
-	/*updatePositionByQuote(param);
+	updatePositionByQuote(param);
 	//根据行情更新挂单列表 
 	updateDesignateByQuote(param);
 	//更新浮动盈亏
@@ -167,7 +167,7 @@ function quotePush(obj){
 	//更新持仓浮动盈亏总和
 	updateHoldProfit();
 	//更新账户资产
-	updateAccountBalance();*/
+	updateAccountBalance();
 	//更新右边边行情
 	updateRight(param);
 	//初始化设置最新价格

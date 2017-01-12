@@ -57,7 +57,7 @@ function linearlyLoadData(method) {
 			Trade.doAccount(username);
 			accountFirstLoadDataIndex++;
 		}
-	}/*else if (method == "OnRspQryAccount"){
+	}else if (method == "OnRspQryAccount"){
 		if(stopLossLoadDataIndex == 0 && tradeWebSocketIsMock == 1){
 			Trade.doQryStopLoss(username);
 			stopLossLoadDataIndex++;
@@ -67,7 +67,7 @@ function linearlyLoadData(method) {
 			Trade.doQryCondition(username);
 			conditionLoadDataIndex++; 
 		}
-	}*/
+	}
 }
 /**
  * 处理返回数据
@@ -220,7 +220,7 @@ function handleData(evt){
 			var message = "";
 			var status = stopLossParam.Status;
 			if(status == 4){
-				message = "添加止损单失败"
+				message = stopLossParam.StatusMsg;
 			}else{
 				message = "提交成功,单号:【"+stopLossParam.StopLossNo+"】";
 				$("#stop_loss").css("display","none");
@@ -267,13 +267,14 @@ function handleData(evt){
 			var message = "";
 			var status = conditionParam.Status;
 			if(status == 4){
-				tip("添加条件单失败");
+				message = stopLossParam.StatusMsg;
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
-				tip("添加条件单成功,单号:【"+conditionNo+"】");
+				message = "添加条件单成功,单号:【"+conditionNo+"】";
 				$("#stop_loss").css("display","condition_money_time");
 				 $("#div_Mask").hide();
 			} 
+			tip(message);
 			appendCondition(conditionParam);
 		}else if(method == "OnRtnConditionState"){ 
 			var conditionParam = parameters;
@@ -3457,13 +3458,21 @@ function doGetModifyOrderBasicParam(obj){
 	return modifyOrderParam;
 }
 /**
- * 计算列表的浮动盈亏
+ * 更新资金明细中的浮动盈亏
  */
 function sumListfloatingProfit(){
+	var p =  $(".tab_position");
+	if(p.length == 0){
+		return;
+	}
 	var currencySize = localCurrencyNo.length;
 	for(var i = 0 ; i < currencySize ; i++){
 		var currencyNo = localCurrencyNo[i];
 		if(currencyNo == undefined || currencyNo.length <= 0){
+			continue;
+		}
+		var postionDom = $(".position-currency"+currencyNo);
+		if(postionDom.html() == undefined || postionDom.length <= 0){
 			continue;
 		}
 		var  floatingProfitDom = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_floatingProfit']");
@@ -3472,15 +3481,7 @@ function sumListfloatingProfit(){
 		var  counterFee = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_counterFee']").text();
 		var  deposit = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_deposit']").text();
 		var  todayBlance = $("ul[data-tion-fund='"+currencyNo+"'] li[class = 'detail_todayBalance']");
-		var p =  $(".tab_position");
-		if(p.length == 0){
-			floatingProfitDom.text(0.00);
-			continue ;
-		}
-		var postionDom = $(".position-currency"+currencyNo);
-		if(postionDom.html() == undefined || postionDom.length <= 0){
-			continue;
-		}
+		floatingProfitDom.text(0.00);
 		var price  = 0.00;
 		$.each(postionDom,function(i,item){
 			var $this = $(this);
