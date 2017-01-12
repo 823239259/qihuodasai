@@ -1380,7 +1380,7 @@ function generateAccountTitle(){
 /**
  * 生成止损/止盈未触发表头
  */
-function generateStopLossTitle(){
+function generateNoStopLossTitle(){
 	var html = '<ul class="tab_lis">'+
 			   '   <li class="ml" style="width: 100px;">合约</li>'+
 			   '   <li style="width: 50px;">状态</li>'+
@@ -1397,7 +1397,7 @@ function generateStopLossTitle(){
 /**
  * 生成止损/止盈触发表头
  */
-function generateStopLossTitle(){
+function generateYesStopLossTitle(){
 	var html = ' <ul class="tab_lis">'+
 			   '     <li class="ml" style="width: 100px;">合约</li>'+
 			   '     <li style="width: 50px;">状态</li>'+
@@ -1415,7 +1415,7 @@ function generateStopLossTitle(){
 /**
  * 生成条件单表头（未触发）
  */
-function generateConditioinPriceTitle(){
+function generateNoConditioinPriceTitle(){
 	var html = '<ul class="tab_lis">'+
 			   '        <li style="width: 80px" class="ml">合约</li>'+
 			   '        <li style="width: 50px">状态</li>'+
@@ -1431,7 +1431,7 @@ function generateConditioinPriceTitle(){
 /**
  * 生成条件单表头（触发）
  */
-function generateConditioinPriceTitle(){
+function generateYesConditioinPriceTitle(){
 	var html = '<ul class="tab_lis">'+
 			   '        <li style="width: 80px" class="ml">合约</li>'+
 			   '        <li style="width: 50px">状态</li>'+
@@ -3548,6 +3548,10 @@ function clearTradListData(){
 	generateAccountTitle();
 	generateOrderTitle();
 	generateTradeSuccessTitle();
+	generateNoStopLossTitle();
+	generateYesStopLossTitle();
+	generateNoConditioinPriceTitle();
+	generateYesConditioinPriceTitle();
 }
 /**
  * 清理全局缓存数据
