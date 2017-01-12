@@ -26,7 +26,7 @@ public class SocketConfigController {
 	@RequestMapping(value = "/getVersions", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult getVersion(HttpServletRequest request,HttpServletResponse response){
-		String version = request.getParameter("version");
+		String version = request.getParameter("appVersions");
 		if(StringUtil.isBlank(version)){
 			return new ApiResult(false,ResultStatusConstant.AUTH_PARAMS_ERROR,"param is null");
 		}

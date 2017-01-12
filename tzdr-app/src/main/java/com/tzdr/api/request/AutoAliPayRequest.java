@@ -97,7 +97,7 @@ public class AutoAliPayRequest{
 			|| StringUtil.isBlank(this.tradeTime)
 			|| StringUtil.isBlank(this.realName)
 			|| ObjectUtil.equals(null,money)
-			|| this.money < DataConstant.ONE){
+			|| this.money <= DataConstant.ZERO_MONEY){
 			
 			return true;
 		}
