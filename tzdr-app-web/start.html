@@ -227,6 +227,8 @@
 					},function(e){
 						plus.nativeUI.closeWaiting();
 						// 弹出系统提示对话框
+						console.log("安装wgt文件失败["+e.code+"]："+e.message);
+       					 plus.nativeUI.alert("安装wgt文件失败["+e.code+"]："+e.message);
 						plus.nativeUI.alert( "应用升级失败！如多次失败请到官网下载最新APP。", function(){
 							_callback();
 						}, "软件升级", "确定" );
