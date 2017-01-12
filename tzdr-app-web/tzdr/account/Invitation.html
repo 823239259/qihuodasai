@@ -369,10 +369,11 @@
 							// 分析链接
 					});
 					$(".shareWeibo").on("tap",function(){
-						var shareBts=[];
-						var ss=shares['sinaweibo'];
-						ss&&shareBts.push({title:'新浪微博',s:ss});
-						shareAction(shareBts[0],true);
+						shareSystem();
+//						var shareBts=[];
+//						var ss=shares['sinaweibo'];
+//						ss&&shareBts.push({title:'新浪微博',s:ss});
+//						shareAction(shareBts[0],true);
 					})
 					$(".qq").on("tap",function(){
 						var shareBts=[];
@@ -383,6 +384,40 @@
 					document.getElementById("callService").addEventListener("tap",function(){
 						mui.callService();
 					})
+					/**
+					 * 调用系统分享
+					 * 调用
+					 */
+				function shareSystem() {
+						if(plus.os.name!=="Android"){
+							plus.nativeUI.alert("此平台暂不支持系统分享功能!");
+							return;
+						}
+						var intent=new Intent(Intent.ACTION_SEND);
+						var p = "";
+//						if(pic&&pic.realUrl){
+//							p = pic.realUrl;
+//							if(p.substr(0,7)==="file://"){
+//								p=p.substr(7);
+//							}else if(p.sub(0)!=="/"){
+//								p=plus.io.convertLocalFileSystemURL(p);
+//							}
+//						}
+						var f = new File(p);
+						var uri = Uri.fromFile(f);
+						if(f.exists()&&f.isFile()){
+							console.log("image/*");
+							intent.setType("image/*");
+							intent.putExtra(Intent.EXTRA_STREAM,uri);
+						}else{
+							console.log("text/plain");
+							intent.setType("text/plain");
+						}
+						intent.putExtra(Intent.EXTRA_SUBJECT,"HBuilder");
+						intent.putExtra(Intent.EXTRA_TEXT,sharecontent.value);
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						main.startActivity(Intent.createChooser(intent,"系统分享"));
+					}
 				})
 	</script>
 </html>
