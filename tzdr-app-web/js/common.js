@@ -55,15 +55,16 @@
 				'secret':mui.cacheUser.get(tzdr.constants.user_secret)   
 			},
 			data:params,
-			timeout:60000,
+			timeout:100000,
 			dataType:'JSON',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
+			crossDomain:true,
 			success:function(data){ 
 				// plus.nativeUI.closeWaiting();
 			    //获得服务器响应
-			    console.log(JSON.stringify(data));
+//			    console.log(JSON.stringify("data"+data));
 			    var data=JSON.parse(data);
-			    console.log(data.success)
+//			    console.log(data.success)
 			    if (data.success){
 			    	onSuccess(data);
 			    }
@@ -259,7 +260,7 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain:"http://test.api.vs.com/", 
+		api_domain:"http://api.vs.com/", 
 //		api_domain:"http://192.168.2.197:8080/tzdr-app/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',

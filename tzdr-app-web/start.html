@@ -42,7 +42,6 @@
 						plus.navigator.setFullscreen(false);
 					}
 				};
-				
 				//状态栏设置
 			 if(plus.storage.getItem("guide")==null){
 				 plus.storage.setItem("guide","12");
@@ -206,7 +205,7 @@
 					console.log(dataVersion.Android.littleUrl);
 					plus.downloader.createDownload(dataVersion.Android.littleUrl, {filename:"_doc/update/"}, function(d,status){
 						plus.nativeUI.closeWaiting();
-						console.log(d);
+						console.log(JSON.stringify(d));
 						console.log(status);
 						if (status == 200) { 
 							installWgt(d.filename,_callback);	// 安装wgt包

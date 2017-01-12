@@ -112,7 +112,8 @@
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"frameworks": [],
+				"plistcmds":["Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true"]
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
@@ -1493,7 +1494,8 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/quotation.css"
 				],
 				"refer": [
 					"tzdr/login/login.html"
