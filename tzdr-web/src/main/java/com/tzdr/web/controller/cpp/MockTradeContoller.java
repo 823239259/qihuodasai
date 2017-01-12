@@ -50,10 +50,10 @@ public class MockTradeContoller {
 		JsonResult resultJson = new JsonResult();
 		boolean flag = mockTradeAccountService.updateMockAccount(userSessionBean == null ? username : userSessionBean.getMobile(), password);
 		if(flag){
-			resultJson.setMessage("模拟账号开户成功");
+			resultJson.setMessage("模拟账号修改成功");
 			resultJson.setSuccess(true);
 		}else{
-			resultJson.setMessage("模拟账号开户失败");
+			resultJson.setMessage("模拟账号修改失败");
 			resultJson.setSuccess(false);
 		}
 		return resultJson;
