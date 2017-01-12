@@ -255,6 +255,8 @@ function handleData(evt){
 				status = "触发失败"; 
 			}else{
 				status = "更新成功";
+				$("#stop_loss").css("display","none");
+				$("#div_Mask").hide();
 			}
 			tip(stoplossType+"单【"+stopLossNo+"】,"+status);
 			//查询条件单返回
@@ -271,7 +273,7 @@ function handleData(evt){
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				message = "添加条件单成功,单号:【"+conditionNo+"】";
-				$("#stop_loss").css("display","condition_money_time");
+				$("#condition_money_time").css("display","none");
 				 $("#div_Mask").hide();
 			} 
 			tip(message);
@@ -294,9 +296,11 @@ function handleData(evt){
 				status = "触发失败"; 
 			}else{
 				status = "更新成功";
-				if(operateConditionType == 0){
+				$("#condition_money_time").css("display","none");
+				 $("#div_Mask").hide();
+				/*if(operateConditionType == 0){
 					operateConditionType = undefined;
-				}
+				}*/
 			}
 			tip("【"+contractCode+"】条件单【"+conditionNo+"】,"+status);
 			updateConditionList(conditionParam);
@@ -2626,6 +2630,10 @@ function bindOpertion(){
 			tip("未登录,请先登录");
 		}
 	});
+	$("#condition_insert").bind("click",function(){
+		$("#sub_condition_price").text("确定");
+		$("#sub_condition_time").text("确定");
+	});
 	/**
 	 * 添加条件单(价格条件)
 	 */
@@ -2761,6 +2769,8 @@ function bindOpertion(){
 				$("#select_condition_price_addoption").val(additionType);
 				$("#condtion_price_addPrice").val(additionPrice);
 				$("#condtion_time_addPrice").val(additionPrice);
+				$("#condtion_time_addPrice").attr("disabled",false);
+				$("#condtion_price_addPrice").attr("disabled",false);
 			}
 			$("#condition_orderType_time").val(orderType);
 			$("#contion_time_contractCode").val(contractCode); 
@@ -3592,14 +3602,14 @@ function clearLocalCacheData(){
 	isUpdateOrder = false;
 	isBuy = false;
 	isGetVersion = false;
-	var stoplossIndex = 0;
-	var selectStopLoss = {};
-	var localCahceStopLossNo = {};
-	var operationStopLossType = undefined;
-	var conditionIndex = 0;
-	var localCacheCondition = {};
-	var selectCondition = {};
-	var operateConditionType = undefined;
+	stoplossIndex = 0;
+	selectStopLoss = {};
+	localCahceStopLossNo = {};
+	operationStopLossType = undefined;
+	conditionIndex = 0;
+	localCacheCondition = {};
+	selectCondition = {};
+	operateConditionType = undefined;
 }
 /**
  * 条件单验证价格条件符合条件
