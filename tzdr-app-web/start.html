@@ -91,7 +91,7 @@
 						mui.app_request('/getVersion',{force:true},
 							function(result){
 								dataVersion=result.data.version;
-								console.log(JSON.stringify(dataVersion))
+								alert(JSON.stringify(dataVersion))
 								if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
 									return;
 								}
@@ -205,8 +205,8 @@
 					console.log(dataVersion.Android.littleUrl);
 					plus.downloader.createDownload(dataVersion.Android.littleUrl, {filename:"_doc/update/"}, function(d,status){
 						plus.nativeUI.closeWaiting();
-						console.log(JSON.stringify(d));
-						console.log(status);
+						alert(JSON.stringify(d));
+						alert(status);
 						if (status == 200) { 
 							installWgt(d.filename,_callback);	// 安装wgt包
 						}else{
