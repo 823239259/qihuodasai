@@ -55,13 +55,15 @@
 				'secret':mui.cacheUser.get(tzdr.constants.user_secret)   
 			},
 			data:params,
-			timeout:60000,
-			dataType:'json',//服务器返回json格式数据
+			timeout:100000,
+			dataType:'JSON',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			success:function(data){ 
 				// plus.nativeUI.closeWaiting();
 			    //获得服务器响应
-			    
+			    console.log(JSON.stringify("data"+data));
+			    var data=JSON.parse(data);
+			    console.log(data.success)
 			    if (data.success){
 			    	onSuccess(data);
 			    }
@@ -80,6 +82,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+				console.log(XMLHttpRequest+"    XMLHttpRequest   "+textStatus+"     JSON   "+"    errorThrown    "+errorThrown);
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -88,7 +91,6 @@
 			}
 			});
 	}
-	
 	//用户信息管理
 	mui.cacheUser = { 
 		/**
