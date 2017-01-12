@@ -351,7 +351,7 @@ $(document).ready(function(){
 				$this.text("注册");
 				return;
 			}
-			$.post(basepath+"signin_operation",{source:source,mobile:mobile,code:code,password:password,generalizeId:parentGeneralizeId,ajax:1},function(data){ //注册
+			$.post(basepath+"signin_operation",{source:source,mobile:mobile,code:code,password:password,parentGeneralizeId:parentGeneralizeId,ajax:1},function(data){ //注册
 				if(data.success){
 					if(data.message!="" && data.message!=null){
 						if(data.message=="mobileIsExist"){
