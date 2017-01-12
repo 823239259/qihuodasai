@@ -220,7 +220,7 @@
 		.popup .p1 {color: #666; font-size: 14px;line-height: 24px; margin-bottom: 20px; text-align: left; padding: 0 20px;}
 		.popup .popup_center ul li.li1 {width: 45px; color: #999; font-size: 14px;}
 		.popup .popup_center ul li select {background: #fcfcfc; color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; }
-		.popup .popup_center ul li input {background: #fcfcfc; color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
+		.popup .popup_center ul li input {color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
 		.popup .popup_footer a {text-decoration: none; margin: 0 10px; font-size: 16px; height: 40px; line-height: 40px; width: 140px; display: inline-block; text-align: center;}
 	    .popup .popup_footer {text-align: center; padding: 20px 0;}
 		.popup .popup_footer .sure {color: #fff; background: #ffb319; border-radius: 4px;}
@@ -243,8 +243,8 @@
 <div  class="popup" id="stop_loss"  style="display: none;">
     <div class="popup_top">
         <ul>
-        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">修改止损单</li><span class="popup_i"></span>
-        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">修改止盈单</li>
+        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">设置止损单</li><span class="popup_i"></span>
+        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">设置止盈单</li>
         </ul>
         <a class="close">✖</a>
     </div>
@@ -271,24 +271,24 @@
                 </ul>
                 <ul>
                 	<li>
-                		价差<span id = "stop_pricecha">0,</span>&nbsp;&nbsp;
+                		价差<span id = "stop_pricecha">0,</span>，
                 		预计亏损<span id = "stop_yjks">0</span>
                 		<span class = "stop_dw">0</span>，
                 		百分比<span id = "stop_scale">0</span>%
                 	</li>
                 </ul>
-                <ul>
-                	<li class="li1" style="width: 85px; text-align: right;">
+                <ul style="overflow: hidden;">
+                	<li class="li1" style="width: 85px; text-align: right; height: 45px;">
                 		<input type="checkbox"  name="stop_checked" id="stop_checked" style="width: 15px; margin-top: 4px; margin-right: 5px;"/>	
                 	</li>
                 	<li style="margin-left: 10px;">
-                		动态追踪，价格回测幅度
-	                	<input type="text"  name="stop_diff" id="stop_diff"/>
-	                	<span class = "stop_dw"></span>
+                		动态追踪，价格回撤幅度
+	                	<input type="text"  name="stop_diff" id="stop_diff" style="margin-left: 36px;"/>
+	                	<span class = "stop_dw" style="white-space: nowrap; text-overflow: ellipsis; width: 50px; display: inline-block;"></span>
                 	</li>
                 </ul>
                 <ul>
-                	<li class="li1" style="width: 85px;text-align: right; margin-left: -85px;">止损委托价：</li>
+                	<li class="li1" style="width: 85px;text-align: right;">止损委托价：</li>
                 	<li>
                 		<select id = "stop_orderType" style="margin-left: 10px; width: 102px;">
 	                        <option value = "1">市价</option>
@@ -326,7 +326,7 @@
                 </ul>
                 <ul>
                 	<li>
-                		价差<span id = "loss_chaPrice"></span>,
+                		价差<span id = "loss_chaPrice"></span>，
                 		预计盈利<span id = "loss_yjks">0</span>
                 		<span id = "stop_dw">HKD</span>，
                 		百分比<span id = "loss_scale">0</span>%
@@ -344,9 +344,9 @@
             </div>
             <div class="popup_footer">
             	<div class="p1">
-            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
-	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
-	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
+            		<p>1、止盈单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+	                <p>2、止盈单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
+	                <p>3、止盈单存在风险，云端系统、网络故障情况下失效等。</p>
             	</div>
 		        <a class="sure" href="javascript:void(0)" id = "loss_confirm">确定</a>
 		        <a class="cancel close" href="javascript:void(0)">取消</a>
@@ -1046,9 +1046,9 @@
                                 <li style="width: 70px;">成交均价</li>
                                 <li style="width: 50px;">成交量</li>
                                 <!-- <li style="width: 70px;">币种</li> -->
-                                <li style="width: 250px;">成交编号</li>
-                                <li style="width: 80px;">订单号</li>
-                                <li style="width: 120px;">成交时间</li>
+                                <li style="width: 150px;">成交编号</li>
+                                <li style="width: 150px;">订单号</li>
+                                <li style="width: 150px;">成交时间</li>
                                 <li style="width: 40px;">交易所</li>
                             </ul>
                             <p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
@@ -1122,13 +1122,13 @@
                 	<div class="gdt1">
                         <div id = "yes_condition_list">
                             <ul class="tab_lis">
-				                <li style="width: 100px" class="ml">合约</li>
+				                <li style="width: 80px" class="ml">合约</li>
 				                <li style="width: 50px">状态</li>
 				                <li style="width: 100px">类别</li>
 				                <li style="width: 120px">下单</li>
-				                <li style="width: 220px">条件</li>
+				                <li style="width: 120px">条件</li>
 				                <li style="width: 60px">有效日期</li>
-				                <li style="width: 140px">触发时间</li>
+				                <li style="width: 130px">下单时间</li>
             				</ul>
                             <p class="account_NoRecord" id = "nocondition_account_norecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                         </div>
@@ -1136,13 +1136,13 @@
                     <div class="gdt1" style="display: none;">
                     	<div id = "no_condition_list">
                     		<ul class="tab_lis">
-				                <li style="width: 100px" class="ml">合约</li>
+				                <li style="width: 80px" class="ml">合约</li>
+				                <li style="width: 50px">状态</li>
 				                <li style="width: 100px">类别</li>
-				                <li style="width: 220px">条件</li>
 				                <li style="width: 120px">下单</li>
-				                <li style="width: 100px">有效期</li>
-				                <li style="width: 140px">触发时间</li>
-				                <ii style="width: 50px">委托结果</ii>
+				                <li style="width: 120px">条件</li>
+				                <li style="width: 60px">有效日期</li>
+				                <li style="width: 130px">触发时间</li>
             				</ul>
 				            <p class="account_NoRecord" id = "yescondition_account_norecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                     	</div>

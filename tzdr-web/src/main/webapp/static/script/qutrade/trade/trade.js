@@ -676,9 +676,9 @@ function appendTradeSuccess(param){
 				'	<li class = "trade2" style="width: 70px;">'+tradePrice+'</li>'+
 				'	<li class = "trade3" style="width: 50px;">'+tradeNum+'</li>'+
 				/*'	<li class = "trade4"  style="width: 70px;">'+currencyNo+'</li>'+*/
-				'	<li class = "trade5" style="width: 250px;">'+tradeNo+'</li>'+
-				'	<li class = "trade6"  style="width: 80px;">'+orderId+'</li>'+
-				'	<li class = "trade7"  style="width: 120px;">'+tradeTime+'</li>'+
+				'	<li class = "trade5" style="width: 150px;">'+tradeNo+'</li>'+
+				'	<li class = "trade6"  style="width: 150px;">'+orderId+'</li>'+
+				'	<li class = "trade7"  style="width: 150px;">'+tradeTime+'</li>'+
 				'	<li class = "trade8" style="width: 40px;">'+exchangeNo+'</li>'+
 				'</ul>';
 	$("#trade_gdt1").append(html);
@@ -775,8 +775,8 @@ function addPostion(param){
 		var html = '<ul class="tab_content '+cls+' '+currcls+' tab_position" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
 					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
 					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
-					'	<li  class = "position2" style="width: 80px;padding-left:10px" data-drection = "'+drection+'">'+drectionText+'</li>'+
-					'	<li  class = "position3" style="width: 80px;">'+holdAvgPrice+'</li>'+
+					'	<li  class = "position2" style="width: 80px;" data-drection = "'+drection+'">'+drectionText+'</li>'+
+					'	<li  class = "position3" style="width: 100px;">'+holdAvgPrice+'</li>'+
 					'	<li  class = "position4"  style="width: 160px;">'+floatingProfit+'</li>'+
 					'	<li  class = "position5"  style="width: 80px;">'+exchangeNo+'</li>'+
 					'	<li  class = "position6"  style="width: 80px;">'+currencyNo+'</li>'+
@@ -1057,6 +1057,7 @@ function appendStopLossData(param){
 		}
 		updateStoplossIndex();
 		localCahceStopLossNo[stopLossNo] = param; 
+		tabOn();
 }
 /**
  * 更新止损单信息
@@ -1182,13 +1183,13 @@ function appendCondition(param){
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
 	var cls = "condition"+conditionIndex;
 	var html = '<ul class="testclick tab_content '+cls+'" id = "'+conditionNo+'">'
-					+'<li class = "ml condition0" style="width: 100px">'+contractCode+'</li>'
+					+'<li class = "ml condition0" style="width: 80px">'+contractCode+'</li>'
 					+'<li class = "condition1" style="width: 50px" data-tion-status = "'+status+'">'+statusText+'</li>'
 					+'<li class = "condition2" style="width: 100px" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</li>'
 					+'<li class = "condition3" style="width: 120px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
-					+'<li class = "condition4" style="width: 220px">'+inserOrderText+'</li>'
+					+'<li class = "condition4" style="width: 120px">'+inserOrderText+'</li>'
 					+'<li class = "condition5" style="width: 60px">当日有效</li>'
-					+'<li class = "condition6" style="width: 140px">'+insertTime+'</li>'
+					+'<li class = "condition6" style="width: 130px">'+insertTime+'</li>'
 				+'</tr>';  
 	if(status == 0 || status == 1){ 
 		$("#yes_condition_list").append(html);
@@ -1348,9 +1349,9 @@ function generateTradeSuccessTitle(){
 				'	<li  style="width: 70px;">成交均价</li>'+
 				'	<li  style="width: 50px;">成交量</li>'+
 				/*'	<li  style="width: 70px;">币种</li>'+*/
-				'	<li  style="width: 250px;">成交编号</li>'+
-				'	<li  style="width: 80px;">订单号</li>'+
-				'	<li  style="width: 120px;">成交时间</li>'+
+				'	<li  style="width: 150px;">成交编号</li>'+
+				'	<li  style="width: 150px;">订单号</li>'+
+				'	<li  style="width: 150px;">成交时间</li>'+
 				'	<li  style="width: 40px;">交易所</li>'+
 				'</ul><p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#trade_gdt1").append(html);
@@ -1414,13 +1415,13 @@ function generateStopLossTitle(){
  */
 function generateConditioinPriceTitle(){
 	var html = '<ul class="tab_lis">'+
-			   '        <li style="width: 100px" class="ml">合约</li>'+
+			   '        <li style="width: 80px" class="ml">合约</li>'+
 			   '        <li style="width: 50px">状态</li>'+
 			   '        <li style="width: 100px">类别</li>'+
 			   '        <li style="width: 120px">下单</li>'+
-			   '        <li style="width: 220px">条件</li>'+
+			   '        <li style="width: 120px">条件</li>'+
 			   '        <li style="width: 60px">有效日期</li>'+
-			   '        <li style="width: 140px">触发时间</li>'+
+			   '        <li style="width: 130px">下单时间</li>'+
 			   '	</ul>'+
 			   ' <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 		$("#yes_condition_list").append(html);
@@ -1430,13 +1431,13 @@ function generateConditioinPriceTitle(){
  */
 function generateConditioinPriceTitle(){
 	var html = '<ul class="tab_lis">'+
-			   '        <li style="width: 100px" class="ml">合约</li>'+
+			   '        <li style="width: 80px" class="ml">合约</li>'+
 			   '        <li style="width: 50px">状态</li>'+
 			   '        <li style="width: 100px">类别</li>'+
 			   '        <li style="width: 120px">下单</li>'+
-			   '        <li style="width: 220px">条件</li>'+
+			   '        <li style="width: 120px">条件</li>'+
 			   '        <li style="width: 60px">有效日期</li>'+
-			   '        <li style="width: 140px">触发时间</li>'+
+			   '        <li style="width: 130px">触发时间</li>'+
 			   '	</ul>'+
 			   ' <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 		$("#no_condition_list").append(html);
@@ -2182,7 +2183,7 @@ function bindOpertion(){
 							 return;
 						 }
 						 if(number <= 0){
-							 layer.tips("数量输入错误", '#update_des_number');
+							 layer.tips("手数输入错误", '#update_des_number');
 							 return;
 						 }
 						 var tipContent = "确认改单合约【"+contractCode+"】"; 
@@ -2350,6 +2351,7 @@ function bindOpertion(){
 			$("#stop_diff").attr("disabled",false);
 			$("#stop_inputprice").attr("disabled",true);
 			$("#stop_inputprice").val(0);
+			$("#stop_drection").html(analysisBusinessDirection(holdDrection));
 		}
 		$("#loss_inputnum").val(num);
 		$("#stop_inputnum").val(num);
@@ -2450,7 +2452,12 @@ function bindOpertion(){
 			}
 			var stopInputnum = $("#stop_inputnum").val();
 			if(stopInputnum <= 0 || stopInputnum.length == 0){
-				layer.tips("数量输入错误", '#stop_inputnum');
+				layer.tips("手数输入错误", '#stop_inputnum');
+				return;
+			}
+			var positiveInteger = /^\+?[1-9][0-9]*$/;
+			if (positiveInteger.test(stopInputnum)==false){
+				layer.tips("手数输入错误", '#stop_inputnum');
 				return;
 			}
 			var stopChecked = $("#stop_checked").is(':checked');
@@ -2487,6 +2494,11 @@ function bindOpertion(){
 			}
 			if(stopLossDiff == 0){
 				layer.tips("止损价差会导致立即触发,请重新设置", '#stop_diff');
+				return;
+			}
+			var positiveInteger = /^\+?[1-9][0-9]*$/;
+			if (positiveInteger.test(stopLossDiff)==false){
+				layer.tips("止损价差输入错误", '#stop_diff');
 				return;
 			}
 			var tipContent = "";
@@ -2571,7 +2583,12 @@ function bindOpertion(){
 			}
 			var lossInputnum = $("#loss_inputnum").val();
 			if(lossInputnum <= 0 || lossInputnum.length == 0){
-				layer.tips("数量输入错误", '#loss_inputnum');
+				layer.tips("手数输入错误", '#loss_inputnum');
+				return;
+			}
+			var positiveInteger = /^\+?[1-9][0-9]*$/;
+			if (positiveInteger.test(lossInputnum)==false){
+				layer.tips("手数输入错误", '#loss_inputnum');
 				return;
 			}
 			if(stopLossType == 0){

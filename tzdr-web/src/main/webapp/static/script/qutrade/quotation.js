@@ -334,7 +334,6 @@ $(function() {
 					}
 				}
 			}
-			console.log(positionValue);
             $('#container').highcharts('StockChart', {
 
                 chart: {
