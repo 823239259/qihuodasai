@@ -32,12 +32,12 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	    var http6 ="http://192.168.2.197:8080/tzdr-app/activity/getOldAndNewInvitedList";
 	    var http8= "http://localhost:63342/web/erweima2.json"
 	    var http9 =	basepath+"fund/fundHistory";
-	    
+	    var mobile = $("#mobile_vs").val();
 	    $.ajax({   
 	        type: "POST",   
 	        url: http6, 
 	        //data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"iphone":iphone}, 
-	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":"18280302936"},
+	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":mobile},
 	        dataType: 'json',   
 	        contentType: "application/x-www-form-urlencoded",   
 	        success: function(msg){ 

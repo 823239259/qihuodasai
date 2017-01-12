@@ -293,7 +293,7 @@
 /* 活动统计 */
 	var http2 = "http://192.168.2.197:8080/tzdr-app/activity/oldAndNewInvitedStatistics";
 	var http3 = "http://localhost:63342/web/erweima1.json";
-	$.post(http2,{"mobile":"13558767653"},function(data){
+	$.post(http2,{"mobile":mobile},function(data){
 	    if(data.success){
 	    	$(".ftradeNum").html(data.data.ftradeNum);
 	    	$(".registNum").html(data.data.registNum);

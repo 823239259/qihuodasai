@@ -200,8 +200,8 @@
 				</div>
 				<div id="shareDivContent">
 					<img src="../../images/fenxiang.png" width="100%" height="auto">
-					<p><label class="shareWexin"><img src="../../images/weixinshare.png"></label><label><img src="../../images/weiboshare.png"></label><label><img src="../../images/qqshare.png"></label></p>
-					<p><label class="shareWexin">微信朋友圈</label><label>新浪微博</label><label>QQ好友</label></p>
+					<p><label class="shareWexin"><img src="../../images/weixinshare.png"></label><label class="shareWeibo"><img src="../../images/weiboshare.png"></label><label class="qq"><img src="../../images/qqshare.png"></label></p>
+					<p><label class="shareWexin">微信朋友圈</label><label class="shareWeibo">新浪微博</label><label class="qq">QQ好友</label></p>
 				</div>
 				<div id="guize">
 					<p><label>邀请好友，免交易手续费！</label><label id="test">活动规则</label></p>
@@ -365,9 +365,21 @@
 //							ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
 //							ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'});
 							shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'});
-//							shareAction(shareBts[0],true);
+							shareAction(shareBts[0],true);
 							// 分析链接
 					});
+					$(".shareWeibo").on("tap",function(){
+						var shareBts=[];
+						var ss=shares['sinaweibo'];
+						ss&&shareBts.push({title:'新浪微博',s:ss});
+						shareAction(shareBts[0],true);
+					})
+					$(".qq").on("tap",function(){
+						var shareBts=[];
+						var	ss=shares['qq'];
+						ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
+						shareAction(shareBts[0],true);
+					})
 					document.getElementById("callService").addEventListener("tap",function(){
 						mui.callService();
 					})
