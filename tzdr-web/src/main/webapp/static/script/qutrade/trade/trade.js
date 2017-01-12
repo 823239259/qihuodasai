@@ -1811,6 +1811,8 @@ $(function(){
 	$("#show_login").show();
 	$("#show_user_info").hide();
 	$("#marketPrice").prop("checked","checked");
+	$("#stoploss_no_radio").prop("checked","checked");
+	$("#condition_no_radio").prop("checked","checked");
 	$("#firm_btn").click(function(){
 		if(tradeWebSocketIsMock == 0){
 			username = $("#firm_name").val();

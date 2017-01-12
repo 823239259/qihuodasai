@@ -384,8 +384,8 @@
 		        		<li style = "margin-left: 5px;">最新价：</li>
 		        		<li><span id = "condition_price_lastPrice"></span></li>
 		        	</ul>
-		        	<ul>
-		        		<!-- <li class="li1">条件：</li> -->
+		        	<ul style="margin-top: 16px;">
+		        		<li class="li1">条件：</li>
 		        		<li>
 		        			<span>价格</span>
 		        			<select style="width: 50px; margin-left: 18px;" id = "select_condition_option">
@@ -394,16 +394,16 @@
 							   <option value = "1"><</option>
 							   <option value = "3"><=</option>
 							</select>
-							<input type="text" name="condition_price_inputprice" id="condition_price_inputprice"/>
-							附加:
-							<select style="width: 50px;" id = "select_condition_price_addoption">
+							<input type="text" name="condition_price_inputprice" id="condition_price_inputprice" style="margin-left: 6px; margin-right: 14px;"/>
+							附加：
+							<select style="width: 52px;" id = "select_condition_price_addoption">
 							    <option value = "-1">附加</option>
 		   						<option value = "0">></option>
 		   						<option value = "2">>=</option>
 		   						<option value = "1"><</option>
 		   						<option value = "3"><=</option>
 							</select>
-							<input type="text" name="condtion_price_addPrice" id="condtion_price_addPrice"/>
+							<input type="text" name="condtion_price_addPrice" id="condtion_price_addPrice" style="margin-left: 6px; width: 62px; margin-right: 0px;"/>
 		        		</li>
 		        	</ul>
 		        	<ul style="margin-top: 16px;">
@@ -413,11 +413,11 @@
 							    <option value = "0">买入</option>
 							    <option value = "1">卖出</option>
 							</select>
-							<select id = "condition_price_orderType">
+							<select id = "condition_price_orderType" style="margin-left: 6px;">
 								<option value = "1">市价</option>
 								<option value = "2">对手价</option>
-							</select>手数
-							<input type="text" name="contract_price_num" id="contract_price_num" style=" margin-left: 38px;"/>
+							</select>
+							<span style="margin-left: 50px;">手数：<input type="text" name="contract_price_num" id="contract_price_num" style=" margin-left: 5px;"/></span>
 						</li>
 		        	</ul>
 		        </div>
@@ -436,12 +436,13 @@
 		        		<li style = "margin-left: 5px;">最新价：</li>
 		        		<li><span id = "condition_time_lastPrice"></span></li>
 		        	</ul>
-		        	<ul>
+		        	<ul style="margin-top: 16px;">
+		        		<li class="li1">条件：</li>
 		        		<li>
-		        			<span>时间</span>
+		        			<span style="margin-left: 32px;">时间</span>
 							<input type="text" name="condition_time_time" id="condition_time_time"/>
 							附加：
-							<select style="width: 50px;" id = "select_time_condition_option">
+							<select style="width: 52px;" id = "select_time_condition_option">
 							    <option value = "-1">附加</option>
 		   						<option value = "0">></option>
 		   						<option value = "2">>=</option>
@@ -458,12 +459,11 @@
 							    <option value = "0">买入</option>
 							    <option value = "1">卖出</option>
 							</select>
-							<select id = "condition_orderType_time">
+							<select id = "condition_orderType_time" style="margin-left: 5px;">
 								<option value = "1">市价</option>
 								<option value = "2">对手价</option>
 							</select>
-							手数
-							<input type="text" name="condition_time_inputnum" id="condition_time_inputnum" style=" margin-left: 38px;"/>
+							<span style="margin-left: 11px;">手数：<input type="text" name="condition_time_inputnum" id="condition_time_inputnum" style=" margin-left: 6px;"/></span>
 						</li>
 		        	</ul>
 		        </div>
@@ -1109,8 +1109,8 @@
                         </div>
                     </div>
                     <div id="loss_tab" style="">
-                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="" checked="checked">未触发列表</label>
-                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="">已触发列表</label>
+                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="stoploss_no_radio" checked="checked">未触发列表</label>
+                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="stoploss_yes_radio">已触发列表</label>
                     </div>
                     <ul class="caozuo" id="loss_caozuo" style="left: 243px;display: none;">
                         <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "2" id = "loss_stop">暂停</a></li>
@@ -1148,8 +1148,8 @@
                     	</div>
                     </div>
                     <div id="condition_tab" class="tab_lis_title" style="">
-        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="" checked="checked">未触发列表</label>
-        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="">已触发列表</label>
+        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="condition_no_radio" checked="checked">未触发列表</label>
+        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="condition_yes_radio">已触发列表</label>
     				</div>
 				    <ul class="caozuo" id="condition_caozuo" style="left: 243px;display: none;">
 				        <li><a href="javascript:void(0);"  id = "condition_insert">新增</a></li>
