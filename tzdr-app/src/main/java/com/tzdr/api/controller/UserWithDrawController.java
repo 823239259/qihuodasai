@@ -228,7 +228,6 @@ public class UserWithDrawController {
 	public ApiResult addBank(BankRequest bankRequest, HttpServletResponse response, HttpServletRequest request) {
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		String card = bankRequest.getCard();
-		String agincard = bankRequest.getAgincard();//获取前台确认银行卡号码
 		String bank = bankRequest.getBank();
 		String prov = bankRequest.getProv();//省
 		String city = bankRequest.getCity();// 市
@@ -238,12 +237,7 @@ public class UserWithDrawController {
 		
 		if (StringUtil.isBlank(card) || StringUtil.isBlank(uid) || StringUtil.isBlank(bank)) {
 			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");
-		}
-		
-		if(!card.equals(agincard)){
-			return new ApiResult(false, ResultStatusConstant.AddBank.CARD_NOT_EQUALLY, "Two.card.input.error.");
-		}
-		
+		}		
 
 		WUser user = this.drawMoneyService.getUser(uid);
 		if (ObjectUtil.equals(null, user)) {

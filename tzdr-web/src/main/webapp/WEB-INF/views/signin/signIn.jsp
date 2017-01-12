@@ -93,7 +93,7 @@
 			 			<input type="text" class="rg_l_code rg_l_ip" id="generalizeId" name="generalizeId" maxlength="6" readonly="readonly" value="${generalizeUid}" style="width:151px;" />
 					</c:when>
 					<c:otherwise>
-						<input type="text" class="rg_l_code rg_l_ip" id="generalizeId" name="generalizeId" maxlength="6" />
+						<input type="text" class="rg_l_code rg_l_ip" id="generalizeId" name="generalizeId" maxlength="6" value=""/>
 					</c:otherwise>
 				</c:choose>
                 <span class="rg_l_promt" style="display: none;">向邀请人索取，可不填</span>
@@ -120,4 +120,6 @@
 <div class="footer"><p>Copyright © 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1</p></div>
 <%@ include file="../common/dsp.jsp"%>
 </body>
+<script>
+</script>
 </html>

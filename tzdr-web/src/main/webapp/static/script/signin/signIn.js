@@ -390,7 +390,8 @@ $(document).ready(function(){
 							$("#loginUsername").val(mobile);
 							$("#loginPassword").val(password);
 							$("#loginForm").submit();*/
-							openMockTrade(mobile,password);
+							var generalizeId = $("#generalizeId").val();
+							openMockTrade(mobile,password,generalizeId);
 							window.location.href = "/signinsucess";
 							/*
 							//达人论股系统登录
@@ -429,13 +430,14 @@ $(document).ready(function(){
  * @param username
  * @param password
  */
-function openMockTrade(username,password){
+function openMockTrade(username,password,generalizeId){
 	$.ajax({
 		url:basepath+"/mock/trade/openMock",
 		type:"post",
 		data:{
 			username:username,
-			password:password
+			password:password,
+			generalizeId:generalizeId
 		},
 		success:function(result){
 			
@@ -493,4 +495,14 @@ function flushLoginTicket() {
 		$('#J_FlowExecutionKey').val(_flowExecutionKey);
 	});
 };
-
+/*获取邀请码开始*/
+$(document).ready(function(){ 
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg); //匹配目标参数
+		if (r != null) return unescape(r[2]); return null; //返回参数值
+	}
+	var getUrlParamuUrl = getUrlParam('generalizeId');
+	$("#generalizeId").val(getUrlParamuUrl);
+}); 
+/*获取邀请码赋值结束*/

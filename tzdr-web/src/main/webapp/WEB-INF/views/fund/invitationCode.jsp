@@ -226,8 +226,8 @@
 									<!-- <em style="margin-left: 5px;">收支类型：</em> 
 									<input type="text" class="uc_fs_ip" id="fundtype" name="fundtype" value="佣金收入">
 									<a href="javascript:void(0)" id="alltype" class="uc_fssdown uc_fsiptype"></a>  -->
-									<em>时间：</em> <input type="text" name="allstarttime" readonly="readonly" onclick="WdatePicker();" id="allstarttime" class="uc_fsiptime">
-									<i>—</i> <input type="text" name="allendtime" id="allendtime" readonly="readonly" onclick="WdatePicker();" class="uc_fsiptime"> 
+									<em>时间：</em> <input style="width: 100px;" type="text" name="allstarttime" readonly="readonly" onclick="WdatePicker();" id="allstarttime" class="uc_fsiptime">
+									<i>—</i> <input type="text" style="width: 100px;" name="allendtime" id="allendtime" readonly="readonly" onclick="WdatePicker();" class="uc_fsiptime"> 
 									<span><a href="javascript:void(0)" onclick="findAllData('Searchresult','Pagination');">查询</a></span>
 								</div>
 							</div>
@@ -257,14 +257,14 @@
 </body>
 <script>
 /* 链接和二维码  */
-	var http = "http://localhost:8080/tzdr-app/wechat/threePartyCreateQrcode";
+	var http = "http://192.168.2.197:8080/tzdr-app/wechat/threePartyCreateQrcode";
 	var http1 = "http://localhost:63342/web/erweima.json";
 	var mobile = $("#mobile_vs").val();
 	$.post(http,{"mobile":mobile},function(data){
 	    if(data.success){
 	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
 	    	$("#test").html(data.data.inviteUrl);
-	        if(data.data.isRealName =="以实名认证"){
+	        if(data.data.isRealName){
 	        	copy();
 	        }else {
 	        	rz();
@@ -291,7 +291,7 @@
 		});
 	}
 /* 活动统计 */
-	var http2 = "http://localhost:8080/tzdr-app/activity/oldAndNewInvitedStatistics";
+	var http2 = "http://192.168.2.197:8080/tzdr-app/activity/oldAndNewInvitedStatistics";
 	var http3 = "http://localhost:63342/web/erweima1.json";
 	$.post(http2,{"mobile":"13558767653"},function(data){
 	    if(data.success){

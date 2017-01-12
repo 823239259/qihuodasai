@@ -9,12 +9,12 @@ $(document).ready(function(){
 	$('.navlist li a').removeClass('on');
 	$("#nav_my").addClass("on");
 	inittab();
-	getDataList(page_index,"","","","","","all");
-	getDataList(page_index,"1,2,3,4","","","payfundSearchresult","payfundPagination","pay");
-	getDataList(page_index,"11,12,10,15,16,17,18,25,26","","","loanSearchresult","loanPagination","loan");
-	
-	getDataList(page_index,"11,12,25,26","","","interestSearchresult","interestPagination","interest");
-	getDataList(page_index,"13","","","unionSearchresult","unionPagination","unioin");
+	getDataList(page_index,"","","","","","");
+//	getDataList(page_index,"1,2,3,4","","","payfundSearchresult","payfundPagination","pay");
+//	getDataList(page_index,"11,12,10,15,16,17,18,25,26","","","loanSearchresult","loanPagination","loan");
+//	
+//	getDataList(page_index,"11,12,25,26","","","interestSearchresult","interestPagination","interest");
+//	getDataList(page_index,"13","","","unionSearchresult","unionPagination","unioin");
 	
 	//点击左边菜单
 	$('.uc_sidebar').find("div.uc_nav ul a").each(function(){
@@ -23,27 +23,28 @@ $(document).ready(function(){
 	$("#invitationCode").parent().addClass('on');
 });
 
-
 //分页查询充值记录
 function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){   
      pagediv=pagediv||'Pagination';
 	 divid=divid||'Searchresult';
 	    var pageIndex = index; 
+	  
+	    var http6 ="http://192.168.2.197:8080/tzdr-app/activity/getOldAndNewInvitedList";
+	    var http8= "http://localhost:63342/web/erweima2.json"
+	    var http9 =	basepath+"fund/fundHistory";
 	    var mobile = $("#mobile_vs").val();
-	    var http6 = "http://localhost:8080/tzdr-app/activity/getOldAndNewInvitedList";
 	    $.ajax({   
 	        type: "POST",   
-	        url: http6,   
-	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":mobile},   
-	        dataType: 'json',  
+	        url: http6, 
+	        //data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"iphone":iphone}, 
+	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":mobile},
+	        dataType: 'json',   
 	        contentType: "application/x-www-form-urlencoded",   
-	        success: function(msg){  
-	        	console.log(msg);
+	        success: function(msg){ 
 	            var total =msg.totalCount;   
 	            var html = '';   
-	            
-	            $.each(msg.pageResults,function(i,n){
-	            	var showid='"'+title+i+'"';
+	            $.each(msg.data.pageResults,function(i,n){
+	            	/*var showid='"'+title+i+'"';
 	            	var outmoney="";
 	            	var inmoney="";
 	            	if(n.money<0){
@@ -54,13 +55,21 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	            	var detail=getdetail(n);
 	            	var statusvalue=n.typevale;
 	            	if(statusvalue==null)
-	            		statusvalue="";
+	            		statusvalue="";*/
 	            	html +="<ol>";
-	            	html+="<li class='uc_fsl165' style='width: 150px;'>"+13558767652+"</li>";                                          /*手机号码*/
-	            	html+="<li class='uc_fsl200' style='width: 50px;'>"+"小白"+"</li>";											       /*姓名*/
-	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; /*注册时间*/
-	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; /*交易时间*/
-	            	html+="<li class='uc_fsl100' style='width: 100px;'>"+10+""+"元"+"</li>";											   /*交易手数*/
+/*	            	html+="<li class='uc_fsl165'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; //时间
+	            	html+="<li class='uc_fsl200'>"+13558767652+"</li>";											//电话号码
+	            	html+="<li class='uc_fsl100'>"+"小白"+"</li>";												//姓名
+	            	html+="<li class='uc_fsl100'>"+"佣金收入"+"</li>";											//佣金类型
+	            	html+="<li class='uc_fsl100'>"+100+""+"元"+"</li>";											//佣金金额
+*/	            	n.mobile=n.mobile.substring(0,3)+"****"+n.mobile.substring(7,11);
+					n.tname=n.tname.substring(0,1)+"**";
+	            	html+="<li class='uc_fsl165' style='width: 150px;'>"+n.mobile+"</li>";                                                 //手机号码
+	            	html+="<li class='uc_fsl200' style='width: 50px;'>"+n.tname+"</li>";											       //姓名
+	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.ctime,'yyyy-MM-dd hh:mm:ss')+"</li>";       //注册时间
+	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.endTime,'yyyy-MM-dd hh:mm:ss')+"</li>";     //交易时间
+	            	html+="<li class='uc_fsl100' style='width: 100px;'>"+n.sumLever+""+"手"+"</li>";										   //交易手数
+	            	
 	            	html +="</ol>";
 	            }); 
 	           
@@ -114,8 +123,6 @@ function getdetail(obj){
 		}
 	}
 	
-	
-	
 	return detail;
 }
 
@@ -163,12 +170,12 @@ function findAllData(divid,pagediv){
 		}
 	}
 	
-	getTitleData(starttime,endtime,type,"incount","insummoney");
-	getDataList(page_index,type,starttime,endtime,divid,pagediv,iphone,"all");
+	//getTitleData(starttime,endtime,type,"incount","insummoney");
+	getDataList(page_index,type,starttime,endtime,divid,pagediv,iphone,"");
 }
 
 //查询收入
-function getTitleData(starttime,endtime,type,incount,insummoneydiv){
+/*function getTitleData(starttime,endtime,type,incount,insummoneydiv){
 	 $.post(basepath+"fund/getTitleData",{"starttime":starttime,"endtime":endtime,"type":type,"isAjax":"1"},function(data){  
 		if(data.success){
 			$("#"+incount).html(data.obj.count);
@@ -177,4 +184,4 @@ function getTitleData(starttime,endtime,type,incount,insummoneydiv){
 			$("#"+insummoneydiv).html(smoney);
 		}
 	},"json"); 
-}
+}*/
