@@ -1,9 +1,9 @@
+var adders = "http://test.api.vs.com/";
+//var adders = "http://www.api.vs.com/";
 $(function(){
 	/* 链接和二维码  */
-	var http = "http://192.168.2.197:8080/tzdr-app/wechat/threePartyCreateQrcode";
-	var http1 = "http://localhost:63342/web/erweima.json";
 	var mobile = $("#mobile_vs").val();
-	$.post(http,{"mobile":mobile},function(data){
+	$.post(adders+"wechat/threePartyCreateQrcode",{"mobile":mobile},function(data){
 	    if(data.success){
 	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
 	    	$("#test").html(data.data.inviteUrl);
@@ -34,9 +34,7 @@ $(function(){
 		});
 	}
 	/* 活动统计 */
-	var http2 = "http://192.168.2.197:8080/tzdr-app/activity/oldAndNewInvitedStatistics";
-	var http3 = "http://localhost:63342/web/erweima1.json";
-	$.post(http2,{"mobile":mobile},function(data){
+	$.post(adders+"activity/oldAndNewInvitedStatistics",{"mobile":mobile},function(data){
 	    if(data.success){
 	    	$(".registNum").html(data.data.ftradeNum);
 	    	$(".ftradeNum").html(data.data.registNum);
@@ -74,14 +72,12 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
      pagediv=pagediv||'Pagination';
 	 divid=divid||'Searchresult';
 	    var pageIndex = index; 
-	  
-	    var http6 ="http://192.168.2.197:8080/tzdr-app/activity/getOldAndNewInvitedList";
-	    var http8= "http://localhost:63342/web/erweima2.json"
+
 	    var http9 =	basepath+"fund/fundHistory";
 	    var mobile = $("#mobile_vs").val();
 	    $.ajax({   
 	        type: "POST",   
-	        url: http6, 
+	        url: adders+"activity/getOldAndNewInvitedList", 
 	        //data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"iphone":iphone}, 
 	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":mobile},
 	        dataType: 'json',   
@@ -103,12 +99,7 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	            	if(statusvalue==null)
 	            		statusvalue="";*/
 	            	html +="<ol>";
-/*	            	html+="<li class='uc_fsl165'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; //时间
-	            	html+="<li class='uc_fsl200'>"+13558767652+"</li>";											//电话号码
-	            	html+="<li class='uc_fsl100'>"+"小白"+"</li>";												//姓名
-	            	html+="<li class='uc_fsl100'>"+"佣金收入"+"</li>";											//佣金类型
-	            	html+="<li class='uc_fsl100'>"+100+""+"元"+"</li>";											//佣金金额
-*/	            	n.mobile=n.mobile.substring(0,3)+"****"+n.mobile.substring(7,11);
+	            	n.mobile=n.mobile.substring(0,3)+"****"+n.mobile.substring(7,11);
 					n.tname=n.tname.substring(0,1)+"**";
 	            	html+="<li class='uc_fsl165' style='width: 150px;'>"+n.mobile+"</li>";                                                 //手机号码
 	            	html+="<li class='uc_fsl200' style='width: 50px;'>"+n.tname+"</li>";											       //姓名
