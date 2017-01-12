@@ -132,7 +132,7 @@ public class ActivityController {
 		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取app缓存信息
 		WUser user = null;
 		String uid = null;
-		if(cacheUser.getMobile() == null){  //web
+		if(cacheUser == null || cacheUser.getUid() == null){  //web
 			String mobile = request.getParameter("mobile");
 			user = wUserService.getWUserByMobile(mobile);
 		}else{ //app
@@ -161,7 +161,7 @@ public class ActivityController {
 		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取app缓存信息
 		WUser user = null;
 		String uid = null;
-		if(cacheUser == null){  //web
+		if(cacheUser == null || cacheUser.getUid() == null){  //web
 			String mobile = request.getParameter("mobile");
 			user = wUserService.getWUserByMobile(mobile);
 		}else{ //app

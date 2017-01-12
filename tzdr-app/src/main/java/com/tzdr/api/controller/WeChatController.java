@@ -100,7 +100,7 @@ public class WeChatController {
 		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取用户信息
 		WUser user = null;
 		String uid = null;
-		if(cacheUser == null){
+		if(cacheUser == null || cacheUser.getUid() == null){
 			String mobile = request.getParameter("mobile");
 			user = wUserService.getWUserByMobile(mobile);
 		    uid = user.getId();

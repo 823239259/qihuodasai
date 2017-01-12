@@ -26,14 +26,13 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 		PageInfo<Object> pageInfo = new PageInfo<Object>(perPage,pageIndex+1);
 		
 		StringBuffer sql = new StringBuffer();
-		sql.append("select s.mobile,s.ctime,s.tname,min(s.end_time) end_time,s.sumLever from (SELECT w.mobile mobile,w.ctime ctime,v.tname tname,f.end_time end_time,"+
-                "(IFNULL(f.tran_actual_lever,0)+IFNULL(f.crude_tran_actual_lever,0)+IFNULL(f.hsi_tran_actual_lever,0)+IFnull(f.mdtran_actual_lever,0)+"+
-	    		"IFNULL(f.mntran_actual_lever,0)+IFNULL(f.mbtran_actual_lever,0)+IFNULL(f.daxtran_actual_lever,0)+IFNULL(f.nikkei_tran_actual_lever,0)+"+
-                "IFNULL(f.ag_tran_actual_lever,0)+IFNULL(f.lhsi_tran_actual_lever,0)+IFNULL(f.ame_copper_market_lever,0)+IFNULL(f.ame_silver_market_lever,0)+"+
-	    		"IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)) sumLever ");
-                
-		sql.append(" FROM w_user w left join w_user_verified v on w.id = v.uid left join f_simple_ftse_user_trade f on f.uid=w.id where w.parent_id = '"+parentId+"'");
-		
+		sql.append("select s.mobile,s.ctime,s.tname,s.end_time,s.sumLever from ");
+		sql.append("(SELECT w.mobile mobile,w.ctime ctime,v.tname tname,min(f.end_time) end_time, ");
+		sql.append("sum(IFNULL(f.tran_actual_lever,0)+IFNULL(f.crude_tran_actual_lever,0)+IFNULL(f.hsi_tran_actual_lever,0)+IFnull(f.mdtran_actual_lever,0)+ ");
+		sql.append("IFNULL(f.mntran_actual_lever,0)+IFNULL(f.mbtran_actual_lever,0)+IFNULL(f.daxtran_actual_lever,0)+IFNULL(f.nikkei_tran_actual_lever,0)+ ");
+		sql.append("IFNULL(f.ag_tran_actual_lever,0)+IFNULL(f.lhsi_tran_actual_lever,0)+IFNULL(f.ame_copper_market_lever,0)+IFNULL(f.ame_silver_market_lever,0)+ ");
+		sql.append("IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)) sumLever ");
+		sql.append("FROM w_user w inner join w_user_verified v on w.id = v.uid inner join f_simple_ftse_user_trade f on f.uid=w.id where w.parent_id = '"+parentId+"' ");
 		
 		if(StringUtil.isNotBlank(mobile)){
 			sql.append(" and SUBSTRING(w.mobile,-4) = '"+mobile+"' ");
@@ -49,7 +48,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 			long edate=enddate.getTime()/1000;
 			sql.append(" and w.ctime <= '"+edate+"'");
 		}
-		sql.append(" )s where s.tname <> '' and s.sumLever != 0 and s.end_time is not null GROUP BY s.mobile");
+		sql.append("  GROUP BY  f.uid )s where s.tname <> '' and s.sumLever != 0 and s.end_time is not null GROUP BY s.mobile");
 		sql.append(" order by s.ctime desc");
 		PageInfo<OldAndNewVo> oldAndNewVos = this.getEntityDao().queryPageBySql(pageInfo, sql.toString(), OldAndNewVo.class,null,null);
 		//计算总条数和总页数
