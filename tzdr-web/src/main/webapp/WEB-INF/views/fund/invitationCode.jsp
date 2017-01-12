@@ -21,7 +21,7 @@
 	 -->
 	<script src="${ctx}/static/script/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script type='text/javascript' src="${ctx}/static/script/fund/invitationCode.js?version=20150721"></script>
-	<script type='text/javascript' src="${ctx}/static/script/common/jquery.zclip.min.js?version=20150721"></script>
+	<%-- <script type='text/javascript' src="${ctx}/static/script/common/jquery.zclip.min.js?version=20150721"></script> --%>
 	<script type='text/javascript' src="${ctx}/static/script/fund/share.js?version=20150721"></script>
 	<script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js"></script>
 	<script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
@@ -65,7 +65,7 @@
 					return;
 				}
 			}
-			getTitleData(starttime,endtime,type,"incount","insummoney");
+			/* getTitleData(starttime,endtime,type,"incount","insummoney"); */
 			var index="${index}";
 			if(index){
 				$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
@@ -256,49 +256,6 @@
 	<%@ include file="../common/dsp.jsp"%>
 </body>
 <script>
-/* 链接和二维码  */
-	var http = "http://192.168.2.197:8080/tzdr-app/wechat/threePartyCreateQrcode";
-	var http1 = "http://localhost:63342/web/erweima.json";
-	var mobile = $("#mobile_vs").val();
-	$.post(http,{"mobile":mobile},function(data){
-	    if(data.success){
-	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
-	    	$("#test").html(data.data.inviteUrl);
-	        if(data.data.isRealName){
-	        	copy();
-	        }else {
-	        	rz();
-	        }
-	    }
-	},"json");
-	
-	function rz(){
-		$("#anniucopy").click(function(){
-			showMsgDialog("提示","还没有实名认证,<a href="+basepath+'securityInfo/secInfo'+">认证去</a>");
-			return;
-		})
-	}
-	function copy(){
-		$(".cancelCopy").zclip({
-			path: basepath+"static/swf/ZeroClipboard.swf",
-			copy: function(){
-			return $(this).parent().find("#test").html();
-			},
-			afterCopy:function(){/* 复制成功后的操作 */
-				var $copysuc = $("#xians").html("<span class='copy-tips'>复制成功</span>");
-	            $(".copy-tips").fadeOut(3000);
-	        }
-		});
-	}
-/* 活动统计 */
-	var http2 = "http://192.168.2.197:8080/tzdr-app/activity/oldAndNewInvitedStatistics";
-	var http3 = "http://localhost:63342/web/erweima1.json";
-	$.post(http2,{"mobile":mobile},function(data){
-	    if(data.success){
-	    	$(".ftradeNum").html(data.data.ftradeNum);
-	    	$(".registNum").html(data.data.registNum);
-	    	$(".awardSum").html(data.data.awardSum);
-	    }
-	},"json");
+
 </script>
 </html>
