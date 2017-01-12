@@ -113,14 +113,7 @@
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
 				"frameworks": [],
-								"plistcmds":["Add :NSAppTransportSecurity:NSExceptionDomains dict ",
-    "Add :NSAppTransportSecurity:NSExceptionDomains:qq.com dict ",                      // 指定允许不使用ATS访问qq.com域名
-    "Add :NSAppTransportSecurity:NSExceptionDomains:qq.com:NSIncludesSubdomains bool true",
-    "Add :NSAppTransportSecurity:NSExceptionDomains:qq.com:NSExceptionAllowsInsecureHTTPLoads bool true",
-    "Add :NSAppTransportSecurity:NSExceptionDomains:api.vs.com dict ",            // 指定允许不使用ATS访问dcloud.net.cn域名
-    "Add :NSAppTransportSecurity:NSExceptionDomains:api.vs.com:NSIncludesSubdomains bool true",
-    "Add :NSAppTransportSecurity:NSExceptionDomains:api.vs.com:NSExceptionAllowsInsecureHTTPLoads bool true"
-]
+					"plistcmds":["Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true"]
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
