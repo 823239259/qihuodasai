@@ -1044,7 +1044,7 @@ function appendStopLossData(param){
 			            +'<li class="stoploss4" style="width: 50px;">'+num+'</li>'
 			            +'<li class="stoploss5" style="width: 140px;" data-tion-price="'+stopLossPrice+'">'+stopLossPriceText+stopLossPrice+'</li>'
 			            +'<li class="stoploss6" style="width: 50px;"  data-tion-orderType = "'+orderType+'">'+orderTypeText+'</li>'
-			            +'<li class="stoploss9" style="width: 140px;">当日有效</li>'
+			            +'<li class="stoploss9" style="width: 100px;">当日有效</li>'
 			            +'<li class="stoploss7" style="width: 140px;">'+insertTime+'</li>'
 			            +'<li class="stoploss8" style = "display:none;">'+stopLossDiff+'</li>'
 			        +'</ul>';
@@ -1390,7 +1390,7 @@ function generateStopLossTitle(){
 			   '   <li style="width: 140px;">触发条件</li>'+
 			   '   <li style="width: 50px;">委托价</li>'+
 			   '   <li style="width: 100px;">有效期</li>'+
-			   '    <li style="width: 140px;">触发时间</li>'+
+			   '    <li style="width: 140px;">下单时间</li>'+
 			   ' </ul><p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>';
 	$("#no_stopLoss").append(html);
 }
