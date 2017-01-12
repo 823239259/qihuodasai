@@ -57,7 +57,7 @@ function linearlyLoadData(method) {
 			Trade.doAccount(username);
 			accountFirstLoadDataIndex++;
 		}
-	}else if (method == "OnRspQryAccount"){
+	}/*else if (method == "OnRspQryAccount"){
 		if(stopLossLoadDataIndex == 0 && tradeWebSocketIsMock == 1){
 			Trade.doQryStopLoss(username);
 			stopLossLoadDataIndex++;
@@ -67,7 +67,7 @@ function linearlyLoadData(method) {
 			Trade.doQryCondition(username);
 			conditionLoadDataIndex++; 
 		}
-	}
+	}*/
 }
 /**
  * 处理返回数据
@@ -1201,6 +1201,7 @@ function appendCondition(param){
 	}
 	localCacheCondition[conditionNo] = param;
 	conditionIndex++;
+	tabOn();
 }
 /**
  * 修改条件单列表信息
@@ -1383,7 +1384,7 @@ function generateStopLossTitle(){
 			   '   <li class="ml" style="width: 100px;">合约</li>'+
 			   '   <li style="width: 50px;">状态</li>'+
 			   '   <li style="width: 50px;">多空</li>'+
-			   '   <li style="width: 50px;">类别</li>'+
+			   '   <li style="width: 50px;">类型</li>'+
 			   '   <li style="width: 50px;">手数</li>'+
 			   '   <li style="width: 140px;">触发条件</li>'+
 			   '   <li style="width: 50px;">委托价</li>'+
@@ -1400,7 +1401,7 @@ function generateStopLossTitle(){
 			   '     <li class="ml" style="width: 100px;">合约</li>'+
 			   '     <li style="width: 50px;">状态</li>'+
 			   '      <li style="width: 50px;">多空</li>'+
-			   '      <li style="width: 50px;">类别</li>'+
+			   '      <li style="width: 50px;">类型</li>'+
 			   '      <li style="width: 50px;">手数</li>'+
 			   '      <li style="width: 140px;">触发条件</li>'+
 			   '      <li style="width: 50px;">委托价</li>'+
@@ -1417,7 +1418,7 @@ function generateConditioinPriceTitle(){
 	var html = '<ul class="tab_lis">'+
 			   '        <li style="width: 80px" class="ml">合约</li>'+
 			   '        <li style="width: 50px">状态</li>'+
-			   '        <li style="width: 100px">类别</li>'+
+			   '        <li style="width: 100px">类型</li>'+
 			   '        <li style="width: 120px">下单</li>'+
 			   '        <li style="width: 120px">条件</li>'+
 			   '        <li style="width: 60px">有效日期</li>'+
@@ -1433,7 +1434,7 @@ function generateConditioinPriceTitle(){
 	var html = '<ul class="tab_lis">'+
 			   '        <li style="width: 80px" class="ml">合约</li>'+
 			   '        <li style="width: 50px">状态</li>'+
-			   '        <li style="width: 100px">类别</li>'+
+			   '        <li style="width: 100px">类型</li>'+
 			   '        <li style="width: 120px">下单</li>'+
 			   '        <li style="width: 120px">条件</li>'+
 			   '        <li style="width: 60px">有效日期</li>'+
@@ -2382,7 +2383,7 @@ function bindOpertion(){
 		var miniTikeSize = localCommodity.MiniTikeSize;
 		var holdAvgPrice = $("#stopHoldAvgPrice").val();
 		stopInputPrice = replaceNum(stopInputPrice,dotSize);
-		var chaPrice = Math.abs(stopInputPrice - lastPrice);
+		var chaPrice = Math.abs(stopInputPrice - holdAvgPrice);
 		var num = $("#stop_inputnum").val();
 		var scale = 0.00;
 		var stopDrection = $("#stopHoldDrection").val();
