@@ -146,7 +146,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 				statistics.setFtradeLt5(ftradeLt5);
 				statistics.setFtradeNum(ftradeGt5 + ftradeLt5);
 				statistics.setAwardSum(ftradeGt5 / 3 > 0 ? ftradeGt5 * 2 - 2 : ftradeGt5);
-				statistics.setDateTime(new Date().getTime());
+				statistics.setDateTime((new Date().getTime()) / 1000);
 				this.getEntityDao().save(statistics);
 			}
 		}
