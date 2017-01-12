@@ -591,7 +591,7 @@ public class UserPayController {
 	 */
 	@RequestMapping(value = "/auto_wechat",method=RequestMethod.POST)
 	@ResponseBody
-	public synchronized ApiResult autoAlipay(@RequestBody AutoWechatRequestVo autoAliPayRequest){
+	public synchronized ApiResult autoAlipay(AutoWechatRequestVo autoAliPayRequest){
 		if (autoAliPayRequest.isInvalid()){
 			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
 		}

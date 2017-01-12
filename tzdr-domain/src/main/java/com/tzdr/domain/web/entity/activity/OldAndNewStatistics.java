@@ -58,7 +58,7 @@ public class OldAndNewStatistics implements Serializable {
 	/**
 	 * 每日统计表生成时间
 	 */
-	private Date date = new Date();
+	private Long dateTime;
 	
 	public String getRealName() {
 		return realName;
@@ -102,17 +102,17 @@ public class OldAndNewStatistics implements Serializable {
 	public void setAwardSum(Integer awardSum) {
 		this.awardSum = awardSum;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Long getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(Long dateTime) {
+		this.dateTime = dateTime;
 	}
 	
 }
