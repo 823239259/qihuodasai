@@ -56,12 +56,14 @@
 			},
 			data:params,
 			timeout:60000,
-			dataType:'json',//服务器返回json格式数据
+			dataType:'JSON',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			success:function(data){ 
 				// plus.nativeUI.closeWaiting();
 			    //获得服务器响应
-			    
+			    console.log(JSON.stringify(data));
+			    var data=JSON.parse(data);
+			    console.log(data.success)
 			    if (data.success){
 			    	onSuccess(data);
 			    }
@@ -80,7 +82,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
-				console.log(textStatus);
+				console.log(XMLHttpRequest+"    XMLHttpRequest   "+textStatus+"     JSON   "+"    errorThrown    "+errorThrown);
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -89,7 +91,6 @@
 			}
 			});
 	}
-	
 	//用户信息管理
 	mui.cacheUser = { 
 		/**
@@ -258,7 +259,7 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain:"http://api.vs.com/", 
+		api_domain:"http://test.api.vs.com/", 
 //		api_domain:"http://192.168.2.197:8080/tzdr-app/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',

@@ -92,16 +92,18 @@
 						mui.app_request('/getVersion',{force:true},
 							function(result){
 								dataVersion=result.data.version;
+								console.log(JSON.stringify(dataVersion))
 								if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
 									return;
 								}
 								dataVersion = JSON.parse(dataVersion);
 								updateApk1(_callback);
 							},function(result){
-								_callback();
-								if(mui.cacheUser.isLogin()){
-									mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
-								}
+								console.log(result);
+//								_callback();
+//								if(mui.cacheUser.isLogin()){
+//									mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+//								}
 								return; 
 							},paramUrl
 			    		);
@@ -201,8 +203,11 @@
 				// 下载wgt文件
 				function downWgt(_callback,data){
 					plus.nativeUI.showWaiting("下载升级包..."); 
+					console.log(dataVersion.Android.littleUrl);
 					plus.downloader.createDownload(dataVersion.Android.littleUrl, {filename:"_doc/update/"}, function(d,status){
 						plus.nativeUI.closeWaiting();
+						console.log(d);
+						console.log(status);
 						if (status == 200) { 
 							installWgt(d.filename,_callback);	// 安装wgt包
 						}else{
@@ -228,8 +233,6 @@
 						}, "软件升级", "确定" );
 					});
 				}
-				
-				
 			})
 		</script>
 	</body>

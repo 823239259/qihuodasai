@@ -3495,7 +3495,7 @@ function openLogin(){
 				}
 	});
 	if(!isConnectionError){
-		socket.onclose();
+		/*socket.onclose();*/
 	}
 	loginOut();
 	plus.nativeUI.closeWaiting();
