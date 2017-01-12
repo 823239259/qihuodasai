@@ -277,7 +277,7 @@ $(function(){
             }else if(data[i].calendarType=="VN"){
                 $(" .economicCalendar_trailer .calendar_time_tab #economicCalendar_trailer_Content").append("<ul>"+
                         "<li class='data'>"+date+"</li>"+
-                        "<li class='importance'>"+data[i].country+"</li>"+
+                        "<li class='countries'>"+data[i].country+"</li>"+
                         "  <li class='detailed'>"+data[i].title+"</li>"+
                         " </ul>");
             }

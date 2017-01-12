@@ -53,7 +53,7 @@ body{background: #f2f2f2;}
 #economicCalendar .economicCalendar_preview .newValue {width: 110px;}
 #economicCalendar .economicCalendar_preview .expect {width: 100px;}
 #economicCalendar .economicCalendar_preview .formerValue {width: 100px;}
-#economicCalendar .economicCalendar_preview .calendar_time_tab {font-size: 14px;padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc;}
+#economicCalendar .economicCalendar_preview .calendar_time_tab {font-size: 14px;padding: 0 10px; background: #fff; border-bottom: 2px solid #ccc; margin-top: 1px;}
 #economicCalendar .economicCalendar_preview .calendar_time_tab ul {height: 40px; line-height: 40px;}
 /*¼ÙÆÚÔ¤¸æ*/
 #economicCalendar .economicCalendar_trailer {margin-bottom: 20px;}
