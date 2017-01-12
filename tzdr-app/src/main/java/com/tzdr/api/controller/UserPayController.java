@@ -645,7 +645,7 @@ public class UserPayController {
 	 */
 	@RequestMapping(value = "/auto_alipay",method=RequestMethod.POST)
 	@ResponseBody
-	public synchronized ApiResult autoAlipay(@RequestBody AutoAliPayRequest autoAliPayRequest){
+	public synchronized ApiResult autoAlipay(AutoAliPayRequest autoAliPayRequest){
 		if (autoAliPayRequest.isInvalid()){
 			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
 		}

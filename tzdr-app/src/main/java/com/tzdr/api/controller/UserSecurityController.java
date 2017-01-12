@@ -227,28 +227,24 @@ public class UserSecurityController {
 	 */
 	@RequestMapping(value = "/realNameAuth")
 	@ResponseBody
-	public ApiResult realNameAuth(String idcardPath,String idcardBack,String idcardFront,ModelMap modelMap,HttpServletResponse response,HttpServletRequest request){
+	public ApiResult realNameAuth(HttpServletResponse response,HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		UserVerified userverified = securityInfoService.findByUserId(uid);
-		if (StringUtil.isNotBlank(userverified.getIdcardBack()) 
-				&& StringUtil.isNotBlank(userverified.getIdcardFront()) 
-				&& StringUtil.isNotBlank(userverified.getIdcardPath())){ //判断身份证是否以上传过
-			return new ApiResult(false,ResultStatusConstant.ValidateCardConstant.IDCRAD_PHOTO_EXIST,"Idcard photo already exists");
+		String idcardPath=request.getParameter("idcardPath");
+		String idcardBack=request.getParameter("idcardBack");
+		String idcardFront=request.getParameter("idcardFront");
+				
+		if(StringUtils.isNotBlank(idcardPath) &&
+				StringUtils.isNotBlank(idcardPath)&&StringUtils.isNotBlank(idcardPath)){
+			userverified.setIdcardFront(idcardFront);
+			userverified.setIdcardBack(idcardBack);
+			userverified.setIdcardPath(idcardPath);
+			userverified.setStatus(DataConstant.Idcard.AUTHPASS);//审核中
+			userverified.setLastSubmitVerifiedTime(new Date().getTime()/1000);
+			securityInfoService.update(userverified);
+			return new ApiResult(true,ResultStatusConstant.SUCCESS,"Idcard photo upload success");
 		}
-		
-		if(StringUtils.isBlank(idcardPath) &&
-				StringUtils.isBlank(idcardPath)&&StringUtils.isBlank(idcardPath)){
-			return new ApiResult(false,ResultStatusConstant.ValidateCardConstant.IDCRAD_PHOTO_NOT_NULL,"Idcard photo is not update success");
-		}
-		
-		userverified.setIdcardFront(idcardFront);
-		userverified.setIdcardBack(idcardBack);
-		userverified.setIdcardPath(idcardPath);
-		userverified.setStatus(DataConstant.Idcard.UPLOADSTATUS);//审核中
-		userverified.setLastSubmitVerifiedTime(new Date().getTime()/1000);
-		securityInfoService.update(userverified);
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Idcard photo upload success");
-		
+		return new ApiResult(false,ResultStatusConstant.FAIL,"照片上传失败");
 	}
 	/**
 	* @Title: updatePhone    

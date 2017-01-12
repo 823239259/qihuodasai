@@ -49,7 +49,7 @@ public class CouponService extends BaseServiceImpl<FSimpleCoupon, FSimpleCouponD
 		}
 		
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT f.id,f.type,f.money,f.deadline,f.grant_time,f.`name`,if(UNIX_TIMESTAMP(NOW()) > f.deadline,4,f.`status`) `status` ");
+		sql.append(" SELECT f.id,f.type,f.money,f.deadline,f.grant_time,f.`name`,if((UNIX_TIMESTAMP(NOW()) > f.deadline and f.`status` != 3 ),4,f.`status`) `status` ");
 		sql.append(" from f_simple_coupon f ");
 		sql.append(" WHERE f.user_id=? and f.type in(1,2,3) ORDER BY ");
 		sql.append(" status ASC,f.grant_time DESC ");  
