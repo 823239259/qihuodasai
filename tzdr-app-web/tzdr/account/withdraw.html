@@ -125,7 +125,7 @@
 			mui.app_request("user/withdraw/drawFee",{
 				"money":drawmoney
 			},function(result){
-				var message = result.message;
+				var message = result.data.fee;
 				$("#drawHandleFee").text(message);
 				if(!isNaN(message)){
 					$("#draw_time").text(drawmoney - message);
