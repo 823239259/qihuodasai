@@ -292,8 +292,14 @@
 									var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
 									var ctime=new Date(dataall[i].ctime*1000).format("yyyy-MM-dd hh:mm:ss");
 									var endTime=new Date(dataall[i].endTime*1000).format("yyyy-MM-dd hh:mm:ss");
+									var name=dataall[i].tname;
+									name=name.substr(0,1);
+									var str="";
+									for(var j=0;j<name.length;j++){
+										str=str+" *";
+									}
 									$("#historyDetailsTable1").append("<tr>" +
-					                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
+					                    "<td>"+user_mobile+"</td><td>"+name+str+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
 					            "</tr>")
 								}
 								pageIndex=pageIndex+1;
@@ -324,8 +330,14 @@
 										var user_mobile=mobile.substring(0,3)+"****"+mobile.substring(7,11);
 										var ctime=new Date(dataall[i].ctime*1000).format("yyyy-MM-dd hh:mm:ss");
 										var endTime=new Date(dataall[i].endTime*1000).format("yyyy-MM-dd hh:mm:ss");
+										var name=dataall[i].tname;
+										name=name.substr(0,1);
+										var str="";
+										for(var j=0;j<name.length;j++){
+											str=str+" *";
+										}
 										$("#historyDetailsTable1").append("<tr>" +
-						                    "<td>"+user_mobile+"</td><td>"+dataall[i].tname+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
+						                    "<td>"+user_mobile+"</td><td>"+name+str+"</td><td>"+ctime+"</td><td>"+endTime+"</td><td>"+dataall[i].sumLever+"</td>"+
 						            "</tr>")
 									}
 									pageIndex=pageIndex+1;
