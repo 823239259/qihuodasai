@@ -21,7 +21,7 @@
 	 -->
 	<script src="${ctx}/static/script/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 	<script type='text/javascript' src="${ctx}/static/script/fund/invitationCode.js?version=20150721"></script>
-	<script type='text/javascript' src="${ctx}/static/script/common/jquery.zclip.min.js?version=20150721"></script>
+	<%-- <script type='text/javascript' src="${ctx}/static/script/common/jquery.zclip.min.js?version=20150721"></script> --%>
 	<script type='text/javascript' src="${ctx}/static/script/fund/share.js?version=20150721"></script>
 	<script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js"></script>
 	<script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js"></script>
@@ -65,7 +65,7 @@
 					return;
 				}
 			}
-			getTitleData(starttime,endtime,type,"incount","insummoney");
+			/* getTitleData(starttime,endtime,type,"incount","insummoney"); */
 			var index="${index}";
 			if(index){
 				$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
@@ -264,7 +264,7 @@
 	    if(data.success){
 	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
 	    	$("#test").html(data.data.inviteUrl);
-	        if(data.data.isRealName){
+	        if(data.data.isRealName == true){
 	        	copy();
 	        }else {
 	        	rz();
