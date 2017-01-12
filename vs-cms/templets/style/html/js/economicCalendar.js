@@ -41,13 +41,13 @@ $(function(){
                 var date= new Date(parseInt(dataAll[i].timestamp) * 1000).Format("hh:mm");
                 var star;
                 if(data[i].importance==1){
-                    star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                    star="<img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
                 }else if(data[i].importance==2){
-                    star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                    star="<img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
                 }else if(data[i].importance==3){
-                    star="<li class='importance color_importance'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'></li>"
+                    star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
                 }else{
-                    star="<li class='importance'<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                    star="<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
                 }
                 if(dataAll[i].actual==null || dataAll[i].actual=="null" || dataAll[i].actual==""){
                     dataAll[i].actual="--";
@@ -84,7 +84,6 @@ $(function(){
                         " </ul>");
                 }
             }
-            //}
         }
     }
     /*复选*/
@@ -218,7 +217,7 @@ $(function(){
         var year = "" + myDate.getFullYear() + "年";
         var index=$(this);
         $(".time li a").removeClass("on").eq(index.index()).addClass("on");
-        var text = year + index.find("span").attr("data-date");
+        var text= year + index.find("span").attr("data-date");
         var startDate=text.replace(/[\u4e00-\u9fa5]/g,"-").slice(0,text.length-1);
         var endDate=GetDateStrDate(startDate,1);
         var params={
@@ -233,18 +232,21 @@ $(function(){
         $(".calendar_time_tab").eq(1).empty();
         $("#economicCalendar_trailer_Content").empty();
         dataAll=data;
+        if(!data){
+            $("#economicCalendar_trailer_Content").append("<ul style='text-align: center;'>没有数据。</ul>");
+        }
         for(var i=0;i<data.length;i++){
             var date= new Date(parseInt(data[i].timestamp) * 1000).Format("hh:mm");
             var star;
             var id;
             if(data[i].importance==1){
-                star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                star="<img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
             }else if(data[i].importance==2){
-                star="<li class='importance'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                star="<img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/blueStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
             }else if(data[i].importance==3){
-                star="<li class='importance color_importance'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'></li>"
+                star="<img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'><img src='/templets/style/html/images/image/yellowStart.png'>"
             }else{
-                star="<li class='importance'<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'></li>"
+                star="<img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'><img src='/templets/style/html/images/image/grayStart.png'>"
             }
             if(data[i].actual==null || data[i].actual=="null" || data[i].actual==""){
                 data[i].actual="--";
@@ -257,28 +259,26 @@ $(function(){
             }
             if(data[i].calendarType=="FE"){
                 $(" .economicCalendar_preview .calendar_time_tab").append("<ul>"+
-                    "<li class='data'>"+date+"</li>"+
-                    "<li class='importance'>"+star+"</li>"+
-                    " <li class='countries'>"+data[i].country+"</li>"+
-                    "  <li class='detailed'>"+data[i].title+"</li>"+
-                    " </ul>");
+                        "<li class='data'>"+date+"</li>"+
+                        " <li class='countries'>"+data[i].country+"</li>"+
+                        "  <li class='detailed'>"+data[i].title+"</li>"+
+                        " </ul>");
             }else if(data[i].calendarType=="FD"){
                 $(" .economicCalendar_content .calendar_time_tab").append("<ul>"+
-                    "<li class='data'>"+date+"</li>"+
-                    "<li class='importance'>"+star+"</li>"+
-                    " <li class='countries'>"+data[i].country+"</li>"+
-                    "  <li class='incident'>"+data[i].title+"</li>"+
-                    " <li class='newValue'>"+data[i].actual+"</li>"+
-                    "<li class='expect'>"+data[i].forecast+"</li>"+
-                    "<li class='formerValue'>"+data[i].previous+"</li>"+
-                    " </ul>");
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+star+"</li>"+
+                        " <li class='countries'>"+data[i].country+"</li>"+
+                        "  <li class='incident'>"+data[i].title+"</li>"+
+                        " <li class='newValue'>"+data[i].actual+"</li>"+
+                        "<li class='expect'>"+data[i].forecast+"</li>"+
+                        "<li class='formerValue'>"+data[i].previous+"</li>"+
+                        " </ul>");
             }else if(data[i].calendarType=="VN"){
                 $(" .economicCalendar_trailer .calendar_time_tab #economicCalendar_trailer_Content").append("<ul>"+
-                    "<li class='data'>"+date+"</li>"+
-                    "<li class='importance'>"+star+"</li>"+
-                    " <li class='countries'>"+data[i].country+"</li>"+
-                    "  <li class='detailed'>"+data[i].title+"</li>"+
-                    " </ul>");
+                        "<li class='data'>"+date+"</li>"+
+                        "<li class='importance'>"+data[i].country+"</li>"+
+                        "  <li class='detailed'>"+data[i].title+"</li>"+
+                        " </ul>");
             }
         }
         ys();
