@@ -75,8 +75,8 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 		String sql1 = " select count(id) from w_user where parent_id = '"+parentId+"' ";
 		Object registNum = this.nativeQueryOne(sql1,null);
 		data.put("registNum", registNum);
-		//查询推广 申请过方案的用户个数
-		String sql2 = " select w.id from w_user w left join f_simple_ftse_user_trade f on w.id = f.uid where parent_id = '"+parentId+"' and f.state_type = 6 group by w.id ";
+		//查询推广 申请过方案的用户个数(操盘中和已结算)
+		String sql2 = " select w.id from w_user w left join f_simple_ftse_user_trade f on w.id = f.uid where parent_id = '"+parentId+"' and f.state_type in (4,6) group by w.id ";
 		List ftradeNum = this.nativeQuery(sql2,null);
 		data.put("ftradeNum", ftradeNum.size());
 		//统计用户已实名认证并且方案状态为已结算的方案手数 按照申请方案时间排序
