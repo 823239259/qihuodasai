@@ -107,23 +107,18 @@
 		<div class="uc_mianbar">
 			<div class="uc_pay" id="fundtab">
 				<ul class="uc_paynav">
-					<li><a href="javascript:void(0)" class="on">邀请赚钱</a></li>
-					<li><a href="javascript:void(0)">邀请记录</a></li>
+					<li><a href="javascript:void(0);" class="on">邀请赚钱</a></li>
+					<li><a href="javascript:void(0);">邀请记录</a></li>
 				</ul>
 				<div class="tabcon">
 					<div class="subtab">
 						<div class="my_invitationCode">
-							<p class="my_jieshao">分享以下邀请链接，好友通过您的链接注册成功并完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
+							<p class="my_jieshao" style="font-weight: bolder;">分享以下邀请链接，好友通过您的链接注册成功并完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
 							<p class="fzwz">
 								<span class="wangzhi" id="test">http://www.vs.com/signin</span>
-            					<a href="javascript:" id = "anniucopy" class="anniucopy cancelCopy">复制邀请链接地址</a>
+            					<a href="javascript:" id = "anniucopy" class="anniucopy cancelCopy">复制链接</a>
             					<span id="xians" style="float: right; color: red; margin-right: 20px;"></span>
             				</p>
-            				<div class="erweima">
-            					<p>您的专属二维码</p>
-            					<div id="ewm" style="width: 160px; height: 160px; margin: 0 auto;"></div>
-            					<p>将二维码发送给好友，好友扫描二维码后打开邀请页注册</p>
-            				</div>
             				<input type="hidden" name="" id="mobile_vs" value="<%=mobile %>"/>
 							<!-- <textarea maxlength="3000"></textarea> -->
 							<%-- <p><span class="fenxiang">分享到: </span>
@@ -133,7 +128,7 @@
                     			<a href="#" onclick="shareQQ(event)"  title="分享到QQ好友"><img alt="" src="${ctx}/static/images/uc/fenxiang_qq.jpg"></a>
                     			<a href="#" onclick="shareToQzone(event)" title="分享到QQ空间"><img alt="" src="${ctx}/static/images/uc/fenxiang_zone.jpg"></a>
                     		</p> --%>
-                    		<div class="bdsharebuttonbox" data-tag="share_1" style="height: 30px; line-height: 26px; margin-top: 10px;">
+                    		<div class="bdsharebuttonbox" data-tag="share_1" style="height: 30px; line-height: 26px; margin-top: 10px; border-bottom: 1px solid #e6e6e6; padding-bottom: 10px;">
 								<span style="float: left;">分享：</span><a class="bds_mshare" data-cmd="mshare"></a>
 								<a class="bds_qzone" data-cmd="qzone" href="#"></a>
 								<a class="bds_tsina" data-cmd="tsina"></a>
@@ -143,6 +138,11 @@
 								<a class="bds_more" data-cmd="more">更多</a>
 								<a class="bds_count" data-cmd="count"></a>
 							</div>
+							<div class="erweima">
+            					<p style="font-weight: bolder; font-size: 14px;">您的专属二维码</p>
+            					<div id="ewm" style="width: 160px; height: 160px; margin: 0 auto;"></div>
+            					<p style="font-size: 14px;">将二维码发送给好友，好友扫描二维码后打开邀请页注册</p>
+            				</div>
 							<div class="invitation">
 								<ul class="i_register">
 									<img src="${ctx}/static/images/image/yao_2.png" alt=""/>
@@ -161,9 +161,8 @@
 								</ul>
 							</div>
 							<div class="xj">
-								<p class="p2">规则详解</p>
-								<p class="p1">1、推荐的第一、第二位实名用户，每位双边操作达到5手，分别为关联老用户减免1手双边交易费；</p>
-								<p class="p1">2、推荐的第三、第四位（及往后）实名用户，每位双边操作达到5手，均为关联老用户减免2手双边交易费，并可累计。</p>
+								<p class="p2">邀请好友，免交易手续费！<a href="${ctx}/topic/oldBelt/index.html" target="_blank">活动规则</a></p>
+								<p class="p1">多拉新朋友，即可多获减免奖励。比如小明叫了10个朋友来维胜金融操盘，8个进行了实名认证，其中6个人操盘交易均达到双边5手。那么小明就可以获得（累计）：2个1手交易费减免资格，4个2手交易费减免资格，总共1+1+2+2+2=2=10手双边免费交易资格。以此类推，多拉新用户多得减免金。</p>
 							</div>
 <script>
 	window._bd_share_config = {

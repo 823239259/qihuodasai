@@ -94,9 +94,9 @@
 		<!--网银支付-->
 		<div class="uc_mianbar">
 			<div class="uc_siflist" style="margin-bottom:20px;">
-				<div class="uc_sl_nav">
-					<a href="javascript:void(0);" class="on">账户概况</a>
-				</div>
+				<ul class="uc_paynav">
+					<li><a href="javascript:void(0);" class="on">账户概况</a></li>
+				</ul>
 				<div class="uc_sifmoney" style="border:none;">
 					<ul class="uc_sm_over">
 						<li class="uc_sm_overmoney">
