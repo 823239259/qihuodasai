@@ -12,15 +12,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="baidu-site-verification" content="19aaf89cfc08519ae9fee304f1fcca71"/>
 	<title>我的邀请码 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
-	<link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20150721" type="text/css">
+	<link rel="stylesheet" href="${ctx}/static/css/uc.css?version=20170113" type="text/css">
 	<link href="${ctx}/static/css/public.css" rel="stylesheet" type="text/css">
-	<link href="${ctx}/static/css/pagination.css" rel="stylesheet" type="text/css" />
+	<link href="${ctx}/static/css/pagination.css?version=20170113" rel="stylesheet" type="text/css" />
 	<script src="${ctx}/static/script/common/jquery.pagination.js" type="text/javascript"></script>
 	<!-- 
 <link href="common/tablesorter.css" rel="stylesheet" type="text/css" />
 	 -->
 	<script src="${ctx}/static/script/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
-	<script type='text/javascript' src="${ctx}/static/script/fund/invitationCode.js?version=20150721"></script>
+	<script type='text/javascript' src="${ctx}/static/script/fund/invitationCode.js?version=20170113"></script>
 	<%-- <script type='text/javascript' src="${ctx}/static/script/common/jquery.zclip.min.js?version=20150721"></script> --%>
 	<script type='text/javascript' src="${ctx}/static/script/fund/share.js?version=20150721"></script>
 	<script type='text/javascript' src="${ctx}/static/script/common/dateUtils.js"></script>

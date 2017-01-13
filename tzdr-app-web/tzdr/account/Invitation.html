@@ -272,7 +272,7 @@
 						}
 					});
 					document.getElementById("test").addEventListener("tap",function(){
-						mui.openWindow("../buy/buy.html")
+//						mui.openWindow("../buy/buy.html")
 					})
 					var dataALL=[];
 					var pageIndex=0;
@@ -345,14 +345,20 @@
 								}
 						},function(){})
 					}
+					var isRealName;
 					mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
 						if(data.success==true){
 							$("#inviteUrl").text(data.data.inviteUrl);
+							isRealName=data.data.isRealName;
 						}
 					},function(){
 						
 					});
 					document.getElementById("shareButton").addEventListener("tap",function(){
+						if(isRealName==false){
+							mui.toast("您还没有实名认证");
+							return
+						}
 						var text=$("#inviteUrl").text();
 						copytoClip(text);
 					})
