@@ -59,7 +59,7 @@ function setIsLogin(flag){
  */
 function vadationIsLogin(){
 	if(!isLogin){
-		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),switchAccount);
+		alertProtype("你还未登录,请先登录","提示",Btn.confirmedAndCancle(),openLogin);
 		return false;
 	} 
 	return true;
