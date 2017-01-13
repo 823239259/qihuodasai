@@ -207,6 +207,15 @@ function loadSelectData(param){
 		var cls = "select_option"+i;
 		var html = "<option class = '"+cls+"' value='"+contractCode+"'>"+commodityName+"     "+commodityNo+mainContract+"</option>";
 		$("#select_commodity").append(html);
+		if(i == 0){
+			$("#trade_data #lastPrice").val(data.lastPrice);
+			$("#trade_data #miniTikeSize").val(data.miniTikeSize);
+			$("#trade_data #contractSize").val(data.ContractSize);
+			$("#trade_data #exchangeNo").val(data.ExchangeNo);
+			$("#trade_data #commodeityNo").val(commodityNo);
+			$("#trade_data #contractNo").val(mainContract);
+			$("#trade_data #doSize").val(data.DotSize);
+		}
 	}
 }
 /**
