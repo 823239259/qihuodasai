@@ -8,6 +8,7 @@
 	    }
 	});
 	var timeChart=null;
+	var volumeChart=null;
 	//webSocket链接/名字/密码
 	var url = "ws://quote.vs.com:9002";
     var username="13677622344";
@@ -42,12 +43,33 @@
     };
     //发送方法
 	marketSocket.onmessage = function(evt){
-		
+		var data = evt.data;
+        var jsonData = JSON.parse(data);
+        var method = jsonData.Method;
+         if(method=="OnRspLogin"){
+        	sendHistoryMessage(0);
+	       masendMessage('QryCommodity',null);
+        }else if(method == "OnRspQryHistory"){
+        	dealTimeChartData(jsonData);
+        }else if(method == "OnRtnQuote"){
+        	
+        }
 	}
+	 function sendHistoryMessage(num){
+        var exchangeNo = $("#exchangeNo").val();
+        var commodityNo = $("#commodeityNo").val();
+        var contractNo = $("#contractNo").val();
+        masendMessage('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+num+'}');
+        masendMessage('Subscribe','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+    }
 	loadK()
+	
+	function dealTimeChartData(data){
+		console.log(JSON.stringify(data))
+	}
+	
 	//配置分时线
-    function setOption1(x){
-        var  data1=timeData;
+    function setOption(x){
        var  option = {
        	backgroundColor: '#1f1f1f',
            tooltip : {
