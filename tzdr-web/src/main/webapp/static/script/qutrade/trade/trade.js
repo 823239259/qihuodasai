@@ -94,6 +94,7 @@ function handleData(evt){
 				$("#stoploss_top_title").hide();
 				$("#condition_top_title").hide();
 				$("#stop_loss_conditon_x").hide();
+				$("#stopLossAndtraders").hide();
 			}else if(tradeWebSocketIsMock == 1){
 				$("#ismockReak").text("模拟账户:");
 				$("#stoploss_top_title").show();
