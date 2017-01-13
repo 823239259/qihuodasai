@@ -193,7 +193,6 @@ function handleData(evt){
 			var locaOrderId = resultInsertOrderId[orderId];
 			/*if(referCount == 0){*/
 				tradeSuccessLoadHoldData();
-				$("#floatingProfit").text("00.0");
 			/*	console.log($(".tab_position"));
 				if($(".tab_position").length == 0){
 					$("#floatingProfit").text("00.0");
