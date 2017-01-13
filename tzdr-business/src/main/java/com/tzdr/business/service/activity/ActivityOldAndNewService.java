@@ -72,7 +72,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	public Map<String,Object> getActivityStatistics(String parentId){
 		Map<String,Object> data = new HashMap<String,Object>();
 		//查询推广 注册的用户个数(有无实名均统计)
-		String sql1 = " select count(id) from w_user where parent_id = '"+parentId+"' and w.ctime > '2017-01-13 12:00:00' ";
+		String sql1 = " select count(id) from w_user where parent_id = '"+parentId+"' and ctime > '2017-01-13 12:00:00' ";
 		Object registNum = this.nativeQueryOne(sql1,null);
 		data.put("registNum", registNum);
 		//查询推广 申请过方案的用户个数(操盘中和已结算)(有无实名均统计)
