@@ -40,11 +40,12 @@
 	background:#fff;
 	text-align: right; 
 }
-
-.erweima {text-align: center; margin-top: 30px; border-bottom: 1px solid #e6e6e6; padding-bottom: 30px;}
+.erweima {text-align: center; margin-top: 20px;}
 .erweima img {width: 160px; height: 160px; margin-top: 0px;}
-.xj .p1 {font-size: 14px; line-height: 22px;}
-.xj .p2 {font-size: 16px; line-height: 40px; height: 40px; font-weight: bolder;}
+.xj .p1 {font-size: 14px; line-height: 22px; color: #666;}
+.xj .p2 {font-size: 14px; line-height: 40px; height: 40px; font-weight: bolder; margin: 5px 0;}
+.xj .p2 a {font-weight: normal; float: right; color: 19b2ff;}
+.xj .p2 a:hover {text-decoration: none; opacity: 0.8;}
 .invitation {height: 110px; padding: 0 88px; border-bottom: 1px solid #e6e6e6;}
 .invitation ul {float: left; width: 180px; height: 70px; margin: 20px 5px; font-size: 14px; color: #fff;}
 .my_invitationCode {width: 746px;}
