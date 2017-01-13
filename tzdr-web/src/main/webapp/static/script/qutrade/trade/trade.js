@@ -91,9 +91,14 @@ function handleData(evt){
 			$("#simulation_btn").text("立即登录");
 			if(tradeWebSocketIsMock == 0){
 				$("#ismockReak").text("实盘账户:");
-				
+				$("#stoploss_top_title").hide();
+				$("#condition_top_title").hide();
+				$("#stop_loss_conditon_x").hide();
 			}else if(tradeWebSocketIsMock == 1){
 				$("#ismockReak").text("模拟账户:");
+				$("#stoploss_top_title").show();
+				$("#condition_top_title").show();
+				$("#stop_loss_conditon_x").show();
 			}
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
@@ -188,6 +193,11 @@ function handleData(evt){
 			var locaOrderId = resultInsertOrderId[orderId];
 			/*if(referCount == 0){*/
 				tradeSuccessLoadHoldData();
+				$("#floatingProfit").text("00.0");
+			/*	console.log($(".tab_position"));
+				if($(".tab_position").length == 0){
+					$("#floatingProfit").text("00.0");
+				}*/
 		/*	}*/
 			/*referCount++;*/
 			/*if(isBuy && locaOrderId == locaOrderId){
@@ -1191,8 +1201,8 @@ function appendCondition(param){
 	var html = '<ul class="testclick tab_content '+cls+'" id = "'+conditionNo+'">'
 					+'<li class = "ml condition0" style="width: 80px">'+contractCode+'</li>'
 					+'<li class = "condition1" style="width: 50px" data-tion-status = "'+status+'">'+statusText+'</li>'
-					+'<li class = "condition2" style="width: 100px" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</li>'
-					+'<li class = "condition3" style="width: 120px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
+					+'<li class = "condition3" style="width: 100px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
+					+'<li class = "condition2" style="width: 120px" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</li>'
 					+'<li class = "condition4" style="width: 120px">'+inserOrderText+'</li>'
 					+'<li class = "condition5" style="width: 60px">当日有效</li>'
 					+'<li class = "condition6" style="width: 130px">'+insertTime+'</li>'
@@ -1887,7 +1897,9 @@ $(function(){
 		if(checked){
 			$("#stop_inputprice").attr("disabled",true);
 			$("#stop_diff").attr("disabled",false);
+			$("#yj_tip_stop").hide();
 		}else{
+			$("#yj_tip_stop").show();
 			$("#stop_inputprice").attr("disabled",false);
 			$("#stop_diff").attr("disabled",true);
 		}
@@ -1920,8 +1932,10 @@ $(function(){
 		var $this = $(this);
 		var val = $this.val();
 		if(val == -1){
+			$("#condtion_time_addPrice").hide()
 			$("#condtion_time_addPrice").attr("disabled",true);
 		}else{
+			$("#condtion_time_addPrice").show();
 			$("#condtion_time_addPrice").attr("disabled",false);
 		}
 	})
@@ -1929,11 +1943,27 @@ $(function(){
 		var $this = $(this);
 		var val = $this.val();
 		if(val == -1){
+			$("#condtion_price_addPrice").hide();
 			$("#condtion_price_addPrice").attr("disabled",true);
 		}else{
+			$("#condtion_price_addPrice").show();
 			$("#condtion_price_addPrice").attr("disabled",false);
 		}
 	})
+	$("#contion_time_contractCode").change(function(){
+		var val = $(this).val();
+		var localQuote = localCacheQuote[val];
+		if(localQuote != undefined){
+			$("#condtion_time_addPrice").val(localQuote.LastPrice);
+		}
+	});
+	$("#condition_price_contractCode").change(function(){
+		var val = $(this).val();
+		var localQuote = localCacheQuote[val];
+		if(localQuote != undefined){
+			$("#condition_price_inputprice").val(localQuote.LastPrice);
+		}
+	});
 });
 /**
  * 获取交易版本
@@ -2254,6 +2284,7 @@ function bindOpertion(){
 			var stopChecked = $("#stop_checked").is(':checked');
 			if(!stopChecked){
 				$("#stop_diff").attr("disabled",true);
+				$("#yj_tip_stop").show();
 			}
 			var contractSize = localCommodity.ContractSize;
 			var miniTikeSize = localCommodity.MiniTikeSize;
@@ -2266,7 +2297,7 @@ function bindOpertion(){
 			if(num.length != 0){
 				var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
 				$("#stop_yjks").text(price);
-				$("#loss_yjks").text(price); 
+				$("#loss_yjks").text(-price); 
 			}
 			scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
 			$("#stop_pricecha").text(parseFloat(chaPrice).toFixed(dotSize));
@@ -2325,7 +2356,7 @@ function bindOpertion(){
 		if(num.length != 0){
 			var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,holdDrection);
 			$("#stop_yjks").text(price);
-			$("#loss_yjks").text(price); 
+			$("#loss_yjks").text(-price); 
 		}
 		scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
 		if(stopLossType == 0 || stopLossType == 1){
@@ -2359,6 +2390,7 @@ function bindOpertion(){
 			$("#stop_diff").val(stopLossDiff);
 			$("#stop_checked").attr("checked",true);
 			$("#stop_diff").attr("disabled",false);
+			$("#yj_tip_stop").hide();
 			$("#stop_inputprice").attr("disabled",true);
 			$("#stop_inputprice").val(0);
 			$("#stop_drection").html(analysisBusinessDirection(holdDrection));
@@ -2428,7 +2460,7 @@ function bindOpertion(){
 		var stopDrection = $("#stopHoldDrection").val();
 		if(num.length != 0){
 			var  price =  doGetFloatingProfit(holdAvgPrice,stopInputPrice,contractSize,miniTikeSize,num,stopDrection);
-			$("#loss_yjks").text(price);
+			$("#loss_yjks").text(-price);
 		}
 		scale = (stopInputPrice - holdAvgPrice) / holdAvgPrice * 100;
 		$("#loss_chaPrice").text(parseFloat(chaPrice).toFixed(dotSize));
@@ -2503,12 +2535,12 @@ function bindOpertion(){
 				stopLossDiff = lastPrice - stopInputPrice;
 			}
 			if(stopLossDiff == 0){
+				var positiveInteger = /^\+?[1-9][0-9]*$/;
+				if (positiveInteger.test(stopLossDiff)==false){
+					layer.tips("止损价差输入错误", '#stop_diff');
+					return;
+				}
 				layer.tips("止损价差会导致立即触发,请重新设置", '#stop_diff');
-				return;
-			}
-			var positiveInteger = /^\+?[1-9][0-9]*$/;
-			if (positiveInteger.test(stopLossDiff)==false){
-				layer.tips("止损价差输入错误", '#stop_diff');
 				return;
 			}
 			var tipContent = "";
@@ -2766,6 +2798,8 @@ function bindOpertion(){
 				$("#select_condition_price_addoption").val(-1);
 			    $("#condtion_price_addPrice").val("");
 				$("#condtion_time_addPrice").val("");
+				$("#condtion_price_addPrice").hide();
+				$("#condtion_time_addPrice").hide();
 			}else{
 				$("#select_time_condition_option").val(additionType);
 				$("#select_condition_price_addoption").val(additionType);
@@ -2773,6 +2807,8 @@ function bindOpertion(){
 				$("#condtion_time_addPrice").val(additionPrice);
 				$("#condtion_time_addPrice").attr("disabled",false);
 				$("#condtion_price_addPrice").attr("disabled",false);
+				$("#condtion_time_addPrice").show();
+				$("#condtion_price_addPrice").show();
 			}
 			$("#condition_orderType_time").val(orderType);
 			$("#contion_time_contractCode").val(contractCode); 
@@ -2853,6 +2889,8 @@ function initConditionData(){
 		insertConditionCount = 0; 
 		$("#condtion_price_addPrice").attr("disabled",true);
 		$("#condtion_time_addPrice").attr("disabled",true);
+		$("#condtion_price_addPrice").hide();
+		$("#condtion_time_addPrice").hide();
 	    $("#condition_price_contractCode").attr("disabled",false);
 	    $("#contion_time_contractCode").attr("disabled",false);
 	    openCondition();
@@ -3551,6 +3589,10 @@ function clearTradListData(){
 	$("#des_gdt1").html("");
 	$("#trade_gdt1").html("");
 	$("#hold_gdt1").html("");
+	$("#no_condition_list").html("");
+	$("#yes_condition_list").html("");
+	$("#yes_stopLoss").html("");
+	$("#no_stopLoss").html("")
 	$("#todayBalance").html("0.00");
 	$("#deposit").html("0.00");
 	$("#todayCanUse").html("0.00");

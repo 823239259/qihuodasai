@@ -208,7 +208,7 @@
     </style>
     <style>
     /* 新弹出层 */
-		.popup {width: 500px; position: absolute; z-index: 9999; background: #fff; border-radius: 10px;}
+		.popup {width: 500px; position: fixed; z-index: 9999; background: #fff; border-radius: 10px;}
 		.popup .popup_top {height: 70px; line-height: 70px; text-align: center; position: relative; border-bottom: 1px solid #e6e6e6;}
 		.popup .popup_top a{font-size: 16px; color: #ffb319;}
 		.popup .popup_top a:hover{text-decoration: none; cursor:default;}
@@ -270,10 +270,10 @@
                 	</li>
                 </ul>
                 <ul>
-                	<li>
+                	<li id = "yj_tip_stop">
                 		价差<span id = "stop_pricecha">0,</span>，
                 		预计亏损<span id = "stop_yjks">0</span>
-                		<span class = "stop_dw">0</span>，
+                		<span class = "stop_dw">HKD</span>，
                 		百分比<span id = "stop_scale">0</span>%
                 	</li>
                 </ul>
@@ -284,7 +284,7 @@
                 	<li style="margin-left: 10px;">
                 		动态追踪，价格回撤幅度
 	                	<input type="text"  name="stop_diff" id="stop_diff" style="margin-left: 36px;"/>
-	                	<span class = "stop_dw" style="white-space: nowrap; text-overflow: ellipsis; width: 50px; display: inline-block;"></span>
+	                	<span  style="white-space: nowrap; text-overflow: ellipsis; width: 50px; display: inline-block;"></span>
                 	</li>
                 </ul>
                 <ul>
@@ -337,7 +337,7 @@
                 	<li>
                 		<select id = "loss_orderType" style="margin-left: 10px; width: 102px;">
 	                        <option value = "1">市价</option>
-                        	<option value = "2">限价</option>
+                        	<option value = "2">对手价</option>
                     	</select>
                 	</li>
                 </ul>
@@ -966,13 +966,13 @@
         </div>
         <div class="quotation_detailed">
             <div class="quotation_detailed_lis">
-                <a href="javascript:void(0);" class="on">持仓</a>|
-                <a href="javascript:void(0);">挂单</a>|
-                <a href="javascript:void(0);">委托</a>|
-                <a href="javascript:void(0);">成交记录</a>|
-                <a href="javascript:void(0);">资金明细</a>|
-                <a href="javascript:void(0);" id = "stoploss_top_title">止损单</a>|
-                <a href="javascript:void(0);" id = "condition_top_title">条件单</a>
+                <a href="javascript:void(0);" data = "0" class="on">持仓</a>|
+                <a href="javascript:void(0);" data = "1">挂单</a>|
+                <a href="javascript:void(0);" data = "2">委托</a>|
+                <a href="javascript:void(0);" data = "3">成交记录</a>|
+                <a href="javascript:void(0);" data = "4">资金明细</a>|
+                <a href="javascript:void(0);" data = "5" id = "stoploss_top_title">止损单</a><lable id = "stop_loss_conditon_x">|</lable>
+                <a href="javascript:void(0);" data = "6" id = "condition_top_title">条件单</a>
             </div>
             <div class="quotation_detailed_conent" style="position: relative;">
                 <div class="quotation_detailed_title" id = "hold_title">

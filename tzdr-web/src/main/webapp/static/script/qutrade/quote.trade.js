@@ -51,13 +51,10 @@ $(document).ready(
 		
 
 $(function() {
-		// 持仓 委托 挂单 tab 切换
 		$(".quotation_detailed_lis a").click(function() {
 			var index = $(this);
-            index.addClass('on');
-            index.siblings().removeClass('on');
-            $(".quotation_detailed_title").hide();
-            $(".quotation_detailed_title").eq(index.index()).show();
+	        index.addClass('on').eq(index.attr("data")).removeClass('on');
+	        $(".quotation_detailed_title").hide().eq(index.attr("data")).show();
 		});
 		// 股市tab切换
 		$(".futuresList ul").click(function() {
