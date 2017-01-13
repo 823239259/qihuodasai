@@ -24,7 +24,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	@SuppressWarnings("unchecked")
 	public PageInfo<OldAndNewVo> getOldAndNewVoList(int pageIndex,int perPage, String parentId,String mobile,String starttime,String endtime){
 		PageInfo<Object> pageInfo = new PageInfo<Object>(perPage,pageIndex+1);
-		
+		//邀请记录统计实名的用户、 单边交易手数
 		StringBuffer sql = new StringBuffer();
 		sql.append("select s.mobile,s.ctime,s.tname,s.end_time,s.sumLever from ");
 		sql.append("(SELECT w.mobile mobile,w.ctime ctime,v.tname tname,min(f.end_time) end_time, ");
@@ -32,8 +32,8 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 		sql.append("IFNULL(f.mntran_actual_lever,0)+IFNULL(f.mbtran_actual_lever,0)+IFNULL(f.daxtran_actual_lever,0)+IFNULL(f.nikkei_tran_actual_lever,0)+ ");
 		sql.append("IFNULL(f.ag_tran_actual_lever,0)+IFNULL(f.lhsi_tran_actual_lever,0)+IFNULL(f.ame_copper_market_lever,0)+IFNULL(f.ame_silver_market_lever,0)+ ");
 		sql.append("IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)) sumLever ");
-		sql.append("FROM w_user w inner join w_user_verified v on w.id = v.uid inner join f_simple_ftse_user_trade f on f.uid=w.id where w.parent_id = '"+parentId+"' ");
-		
+		sql.append("FROM w_user w inner join w_user_verified v on w.id = v.uid inner join f_simple_ftse_user_trade f on f.uid=w.id where  w.parent_id = '"+parentId+"' ");
+		sql.append("and w.ctime > '2017-01-13 12:00:00' ");  //活动开始时间
 		if(StringUtil.isNotBlank(mobile)){
 			sql.append(" and SUBSTRING(w.mobile,-4) = '"+mobile+"' ");
 		}
@@ -71,21 +71,21 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	 */
 	public Map<String,Object> getActivityStatistics(String parentId){
 		Map<String,Object> data = new HashMap<String,Object>();
-		//查询推广 注册的用户个数
-		String sql1 = " select count(id) from w_user where parent_id = '"+parentId+"' ";
+		//查询推广 注册的用户个数(有无实名均统计)
+		String sql1 = " select count(id) from w_user where parent_id = '"+parentId+"' and w.ctime > '2017-01-13 12:00:00' ";
 		Object registNum = this.nativeQueryOne(sql1,null);
 		data.put("registNum", registNum);
-		//查询推广 申请过方案的用户个数(操盘中和已结算)
-		String sql2 = " select w.id from w_user w left join f_simple_ftse_user_trade f on w.id = f.uid where parent_id = '"+parentId+"' and f.state_type in (4,6) group by w.id ";
+		//查询推广 申请过方案的用户个数(操盘中和已结算)(有无实名均统计)
+		String sql2 = " select w.id from w_user w left join f_simple_ftse_user_trade f on w.id = f.uid where  w.ctime > '2017-01-13 12:00:00' and w.parent_id = '"+parentId+"' and f.state_type in (4,6) group by w.id ";
 		List ftradeNum = this.nativeQuery(sql2,null);
 		data.put("ftradeNum", ftradeNum.size());
 		//统计用户已实名认证并且方案状态为已结算的方案手数 按照申请方案时间排序
 		String sql3 = "SELECT w.id, f.app_time,sum(IFNULL(f.tran_actual_lever, 0) + IFNULL(f.crude_tran_actual_lever,0) + IFNULL(f.hsi_tran_actual_lever, 0) + IFnull(f.mdtran_actual_lever, 0) "
 				+ "+ IFNULL(f.mntran_actual_lever, 0) + IFNULL(f.mbtran_actual_lever, 0) + IFNULL(f.daxtran_actual_lever, 0) + IFNULL(f.nikkei_tran_actual_lever,0) + IFNULL(f.ag_tran_actual_lever, 0) "
 				+ "+ IFNULL(f.lhsi_tran_actual_lever, 0) + IFNULL(f.ame_copper_market_lever,0) + IFNULL(f.ame_silver_market_lever,0) + IFNULL(f.h_stock_market_lever, 0) + IFNULL(f.small_crude_oil_market_lever,0) "
-				+ "+ IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0)) lever "
+				+ "+ IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0))/2 lever "
 				+ "FROM w_user w Left JOIN w_user_verified v on w.id = v.uid LEFT JOIN f_simple_ftse_user_trade f ON w.id = f.uid "
-				+ "WHERE w.parent_id = '"+parentId+"' and v.tname <>  '' and f.state_type = 6 GROUP BY w.id  ORDER BY f.app_time;";
+				+ "WHERE w.ctime > '2017-01-13 12:00:00' and w.parent_id = '"+parentId+"' and v.tname <>  '' and f.state_type = 6 GROUP BY w.id  ORDER BY f.app_time;";
 		List<Map<String, Object>>  awards = this.nativeQuery(sql3,null);
 		Integer sum  = 0;
 		for (int i = 0; i < awards.size(); i++) {
@@ -110,7 +110,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 				+ "+ IFnull(f.mdtran_actual_lever, 0) + IFNULL(f.mntran_actual_lever, 0) + IFNULL(f.mbtran_actual_lever, 0) + IFNULL(f.daxtran_actual_lever, 0) "
 				+ "+ IFNULL( f.nikkei_tran_actual_lever, 0 ) + IFNULL(f.ag_tran_actual_lever, 0) + IFNULL(f.lhsi_tran_actual_lever, 0) "
 				+ "+ IFNULL( f.ame_copper_market_lever, 0 ) + IFNULL( f.ame_silver_market_lever, 0 ) + IFNULL(f.h_stock_market_lever, 0) "
-				+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) + IFNULL( f.daxtran_min_actual_lever, 0 )) lever "
+				+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) + IFNULL( f.daxtran_min_actual_lever, 0 ))/2 lever "
 				+ "FROM f_simple_ftse_user_trade f WHERE f.state_type = 6 GROUP BY f.uid ) g1 "
 				+ "INNER JOIN w_user w ON w.id = g1.uid ) g2 INNER JOIN w_user_verified v ON v.uid = g2.id WHERE v.tname <> '';";
 		List<Map<String, Object>>  lists = this.nativeQuery(sql,null);
