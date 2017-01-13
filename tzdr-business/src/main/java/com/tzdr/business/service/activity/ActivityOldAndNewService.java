@@ -90,7 +90,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 		Integer sum  = 0;
 		for (int i = 0; i < awards.size(); i++) {
 			Map<String, Object>  map = awards.get(i);
-			Integer lever = Integer.parseInt(String.valueOf(map.get("lever")));
+			double lever = Double.parseDouble(String.valueOf(map.get("lever")));
 			if(lever >= 5){
 				if(i == 0 || i == 1){
 					sum = sum + 1;
@@ -133,7 +133,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 				 String parentId = String.valueOf(map2.get("parent_id"));
 				 if(id.equals(parentId)){
 					 registNum++ ;
-					 int lever = Integer.parseInt(String.valueOf(map2.get("lever")));
+					 double lever = Double.parseDouble(String.valueOf(map2.get("lever")));
 					 if(lever >= 5)
 						 ftradeGt5 ++;
 					 else 
