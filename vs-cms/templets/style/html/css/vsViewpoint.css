@@ -39,7 +39,7 @@
 .vsViewpoint_right .guanzhu {height: 193px; border-bottom: 1px solid #e6e6e6;}
 .vsViewpoint_right .guanzhu p{float: left; font-size: 14px; color: #666; text-align: center; padding: 10px 10px;}
 .vsViewpoint_right .guanzhu p span {margin: 10px 0; display: inline-block;}
-.page{width: 720px; text-align: center; margin-top: 40px;}
+.page{width: 720px; text-align: center; margin-top: 20px;}
 .page li {display: inline-block}
 .page li.thisclass {background: #ffb319; padding: 4px 9px; position: relative; top: 1px;}
 .page a{font-size: 14px;background-color: #fff;padding: 5px 10px;}
