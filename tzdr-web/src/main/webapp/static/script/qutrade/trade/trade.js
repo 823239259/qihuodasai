@@ -91,6 +91,7 @@ function handleData(evt){
 			$("#simulation_btn").text("立即登录");
 			if(tradeWebSocketIsMock == 0){
 				$("#ismockReak").text("实盘账户:");
+				
 			}else if(tradeWebSocketIsMock == 1){
 				$("#ismockReak").text("模拟账户:");
 			}
@@ -1860,6 +1861,7 @@ $(function(){
 	});
 	$("#float_buy").text("市价");
 	$("#float_sell").text("市价");
+	
 	$("#trade_loginOut").click(function(){
 		tipConfirm("确认退出当前登录吗", tradeLoginOut, cancleCallBack);
 	});
