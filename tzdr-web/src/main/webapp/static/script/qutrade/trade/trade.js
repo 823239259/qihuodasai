@@ -1194,6 +1194,9 @@ function appendCondition(param){
 		timeTriggerPoint = timeTriggerPoint.replace(/-/g,"/");
 		compareTypeText =  formatDateHHMMSS(new Date(timeTriggerPoint)); 
 	} 
+	if(status == 3 || status == 4 || status == 5){
+		insertTime = param.TriggedTime;
+	}
 	compareTypeText = compareTypeText+additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
 	var cls = "condition"+conditionIndex;
@@ -1260,6 +1263,9 @@ function updateConditionList(param){
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
+	if(status == 3 || status == 4 || status == 5){
+		insertTime = param.TriggedTime;
+	}
 	$("#"+conditionNo+" li[class = 'condition1']").text(statusText);
 	$("#"+conditionNo+" li[class = 'condition1']").attr("data-tion-status",status);
 	$("#"+conditionNo+" li[class = 'condition2']").text(conditionTypeText);
@@ -1267,6 +1273,7 @@ function updateConditionList(param){
 	$("#"+conditionNo+" li[class = 'condition3']").html(compareTypeText);
 	$("#"+conditionNo+" li[class = 'condition3']").attr("data-tion-compareType",compareType);
 	$("#"+conditionNo+" li[class = 'condition4']").text(inserOrderText);
+	$("#"+conditionNo+" li[class = 'condition6']").text(insertTime);
 	if(status == 2 || status == 3 || status == 4 || status == 5){
 		var html = $("#"+conditionNo).html();
 		$("#no_condition_list").append("<ul class = 'testclick1 tab_content' id = '"+conditionNo+"'>"+html+"</ul>");
@@ -1953,14 +1960,18 @@ $(function(){
 		var val = $(this).val();
 		var localQuote = localCacheQuote[val];
 		if(localQuote != undefined){
-			$("#condtion_time_addPrice").val(localQuote.LastPrice);
+			var lastPrice = localQuote.LastPrice;
+			$("#condtion_time_addPrice").val(lastPrice);
+			$("#condition_time_lastPrice").text(lastPrice);
 		}
 	});
 	$("#condition_price_contractCode").change(function(){
 		var val = $(this).val();
 		var localQuote = localCacheQuote[val];
 		if(localQuote != undefined){
-			$("#condition_price_inputprice").val(localQuote.LastPrice);
+			var lastPrice = localQuote.LastPrice;
+			$("#condition_price_inputprice").val(lastPrice);
+			$("#condition_price_lastPrice").text(lastPrice);
 		}
 	});
 });

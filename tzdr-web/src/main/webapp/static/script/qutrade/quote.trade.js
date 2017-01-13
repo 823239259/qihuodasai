@@ -53,7 +53,7 @@ $(document).ready(
 $(function() {
 		$(".quotation_detailed_lis a").click(function() {
 			var index = $(this);
-	        index.addClass('on').eq(index.attr("data")).removeClass('on');
+			$(".quotation_detailed_lis a").removeClass('on').eq(index.attr("data")).addClass('on');
 	        $(".quotation_detailed_title").hide().eq(index.attr("data")).show();
 		});
 		// 股市tab切换
