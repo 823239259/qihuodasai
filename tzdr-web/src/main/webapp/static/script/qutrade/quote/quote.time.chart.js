@@ -184,6 +184,11 @@
 	      };
 	        return option
 	}
+	var timeData={
+		"timeLabel":[],
+		"prices":[],
+		"time":[]
+	}
 	function handleTimeChartData(json){
     	var dosizeL=$("#doSize").val();
         var Len=json.Parameters.Data.length;
@@ -198,22 +203,9 @@
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
         	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript]
         }
-//      timeData.timeLabel=timeData.timeLabel.slice(-40);
-//      timeData.prices=timeData.prices.slice(-40);
-//       timeData.time=timeData.time.slice(-40);
         if(timeChart != null){
-        	var x=0;
-            var length=$("#positionList .position3").length;
-        	var text=$("#CommodityNo").text();
-            if(length!=0){
-            	for(var i=0;i<length;i++){
-            		var text1=$("#positionList .position0").eq(i).text();
-            		if(text.indexOf(text1)>=0){
-            			x=Number($("#positionList .position3").eq(i).text());
-            		}
-            	}
-            }
-             var option = setOption1(x);
+        	var positionValue=getPositionValue();
+             var option = setOption1(positionValue);
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
