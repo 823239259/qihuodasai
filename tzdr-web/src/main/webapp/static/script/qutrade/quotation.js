@@ -49,6 +49,8 @@
          if(method=="OnRspLogin"){
         	sendHistoryMessage(0);
 	       masendMessage('QryCommodity',null);
+        }else if(method == "OnRspQryCommodity"){
+        	console.log(jsonData);
         }else if(method == "OnRspQryHistory"){
         	dealTimeChartData(jsonData);
         }else if(method == "OnRtnQuote"){
