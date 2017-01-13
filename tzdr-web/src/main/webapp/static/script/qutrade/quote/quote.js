@@ -32,6 +32,8 @@ function quoteHandleData(evt){
 		generateRealTimeQuote(jsonData);
 	}else if(method = "OnRtnQuote"){
 		quotePush(jsonData);
+	}else if(method=="OnRspQryHistory"){
+		
 	}
 }
 /**
