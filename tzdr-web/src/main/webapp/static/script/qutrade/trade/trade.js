@@ -100,6 +100,7 @@ function handleData(evt){
 				$("#stoploss_top_title").show();
 				$("#condition_top_title").show();
 				$("#stop_loss_conditon_x").show();
+				$("#stopLossAndtraders").show();
 			}
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
