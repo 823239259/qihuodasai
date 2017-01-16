@@ -8,13 +8,13 @@ $(function(){
 	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
 	    	$("#test").html(data.data.inviteUrl);
 	        if(data.data.isRealName == true){
-	        	copy();
+	        	$(".my_invitationCode .anniucopy").css("z-index","0");
 	        }else {
 	        	rz();
 	        }
 	    }
 	},"json");
-
+	copy();
 	function rz(){
 		$("#anniucopy").click(function(){
 			showMsgDialog("提示","还没有实名认证,<a href="+basepath+'securityInfo/secInfo'+">认证去</a>");
@@ -25,20 +25,31 @@ $(function(){
 		$(".cancelCopy").zclip({
 			path: basepath+"static/swf/ZeroClipboard.swf",
 			copy: function(){
-			return $(this).parent().find("#test").html();
+				return $(this).parent().find("#test").html();
 			},
 			afterCopy:function(){/* 复制成功后的操作 */
 				var $copysuc = $("#xians").html("<span class='copy-tips'>复制成功</span>");
 	            $(".copy-tips").fadeOut(3000);
-	        }
+	            $("#test").setSelectionRange(0,$("#test").html().length);
+	        	$("#test").focus();
+	        }/*,
+	        beforeCopy:function(){
+	        	
+            }*/
 		});
 	}
 	/* 活动统计 */
 	$.post(adders+"activity/oldAndNewInvitedStatistics",{"mobile":mobile},function(data){
 	    if(data.success){
-	    	$(".registNum").html(data.data.ftradeNum);
-	    	$(".ftradeNum").html(data.data.registNum);
-	    	$(".awardSum").html(data.data.awardSum);
+	    	if(data.data){
+	    		$(".registNum").html(data.data.ftradeNum);
+		    	$(".ftradeNum").html(data.data.registNum);
+		    	$(".awardSum").html(data.data.awardSum);
+	    	}else{
+	    		$(".registNum").html("0");
+		    	$(".ftradeNum").html("0");
+		    	$(".awardSum").html("0");
+	    	}
 	    }
 	},"json");
 });

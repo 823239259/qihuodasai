@@ -2680,6 +2680,16 @@ function bindOpertion(){
 		$("#sub_condition_price").text("确定");
 		$("#sub_condition_time").text("确定");
 	});
+	$("#condition_price_inputprice").bind("input",function(){
+		var $this = $(this);
+		var val = replaceNum($this.val(), 4);
+		$this.val(val);
+	});
+	$("#condtion_time_addPrice").bind("input",function(){
+		var $this = $(this);
+		var val = replaceNum($this.val(), 4);
+		$this.val(val);
+	});
 	/**
 	 * 添加条件单(价格条件)
 	 */

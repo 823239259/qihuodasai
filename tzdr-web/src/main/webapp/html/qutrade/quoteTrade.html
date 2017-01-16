@@ -266,7 +266,7 @@
                 	<li class="li1" style="width: 85px;text-align: right;">止损价：</li>
                 	<li>
                 		<input type="text" name="stop_inputprice" id="stop_inputprice"/>，手数
-                		<input type="text" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>
+                		<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>
                 	</li>
                 </ul>
                 <ul>
@@ -321,7 +321,7 @@
                 	<li class="li1" style="width: 85px;text-align: right;">止盈价：</li>
                 	<li>
                 		<input type="text" name="loss_inputprice" id="loss_inputprice"/>，手数
-                		<input type="text" name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>
+                		<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>
                 	</li>
                 </ul>
                 <ul>
@@ -417,7 +417,7 @@
 								<option value = "1">市价</option>
 								<option value = "2">对手价</option>
 							</select>
-							<span style="margin-left: 50px;">手数：<input type="text" name="contract_price_num" id="contract_price_num" style=" margin-left: 5px;"/></span>
+							<span style="margin-left: 50px;">手数：<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  name="contract_price_num" id="contract_price_num" style=" margin-left: 5px;"/></span>
 						</li>
 		        	</ul>
 		        </div>
@@ -463,7 +463,7 @@
 								<option value = "1">市价</option>
 								<option value = "2">对手价</option>
 							</select>
-							<span style="margin-left: 11px;">手数：<input type="text" name="condition_time_inputnum" id="condition_time_inputnum" style=" margin-left: 6px;"/></span>
+							<span style="margin-left: 11px;">手数：<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  name="condition_time_inputnum" id="condition_time_inputnum" style=" margin-left: 6px;"/></span>
 						</li>
 		        	</ul>
 		        </div>
