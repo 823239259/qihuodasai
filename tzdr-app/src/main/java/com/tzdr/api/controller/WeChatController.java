@@ -3,24 +3,20 @@ package com.tzdr.api.controller;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.hundsun.t2sdk.common.util.ObjectUtils;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.support.CacheUser;
 import com.tzdr.api.util.AuthUtils;
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.utils.WeChatUtil;
 import com.tzdr.common.utils.WeChatUtil.QrcodeType;
-import com.tzdr.domain.vo.WuserActivityVo;
 import com.tzdr.domain.web.entity.WUser;
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
@@ -32,6 +28,8 @@ public class WeChatController {
 	private WUserService wUserService;
 	@Autowired
 	private UserVerifiedService userVerifiedService;
+	@Autowired
+	private DataMapService dataMapService;
 	
 	//注册页面
 	private static final String  REDIECTURL = "http://www.vs.com/signin";
@@ -97,6 +95,8 @@ public class WeChatController {
 	@RequestMapping(value="/threePartyCreateQrcode",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult createtThreePartyQrcode(HttpServletRequest request){
+		if(!dataMapService.activityExpired("activityOldAndNewEndTime"))
+			return new ApiResult(false,ResultStatusConstant.FAIL,"无效的活动");
 		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取用户信息
 		WUser user = null;
 		String uid = null;

@@ -98,7 +98,7 @@ public class ExtendsionSignController {
 	public String extendSignView(ModelMap modelMap, HttpServletRequest request,
 			@RequestParam(value = "channelCode", required = false) String channelCode,
 			@RequestParam(value = "activity", required = false) String activity) {
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			GeneralizeVisit generalizeVisit = new GeneralizeVisit();
 			String ip = IpUtils.getIpAddr(request);
 			generalizeVisit.setClieantIp(ip);
@@ -148,7 +148,7 @@ public class ExtendsionSignController {
 	public String invitationView(ModelMap modelMap, HttpServletRequest request,
 			@RequestParam(value = "channelCode", required = false) String channelCode,
 			@RequestParam(value = "activity", required = false) String activity){
-			if(dataMapService.activityExpired()){
+			if(dataMapService.activityExpired("activityOnlineEndTime")){
 				GeneralizeVisit generalizeVisit = new GeneralizeVisit();
 				String ip = IpUtils.getIpAddr(request);
 				generalizeVisit.setClieantIp(ip);
@@ -189,7 +189,7 @@ public class ExtendsionSignController {
 			String code, String password, String parentGeneralizeId, String yzmCode, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			if (wUserService.getWUserByMobile(mobile) != null) { // 判断手机号码是否已存在
 				jsonResult.setMessage("mobileIsExist");
 				return jsonResult;
@@ -306,7 +306,7 @@ public class ExtendsionSignController {
 	 */
 	@RequestMapping(value = "/extensionSignSuc", method = RequestMethod.GET)
 	public String extensionSignSucView(ModelMap modelMap,HttpServletRequest  request) {
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			modelMap.put("islogin", true);
 			modelMap.put("m", request.getParameter("m"));
 			modelMap.put("p", request.getParameter("p"));
@@ -325,7 +325,7 @@ public class ExtendsionSignController {
 	@ResponseBody
 	public JsonResult luckDraw(@RequestParam("money") Double money, HttpServletRequest request,@RequestParam("rewardId")String rewardId) {
 		JsonResult resultJson = null;
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 					.getAttribute(Constants.TZDR_USER_SESSION);
 			String id = userSessionBean.getId();
@@ -357,7 +357,7 @@ public class ExtendsionSignController {
 	public JsonResult validationTip(HttpServletRequest request,
 			@RequestParam(value = "activity", required = false) String activity) {
 		JsonResult resultJson = new JsonResult();
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 					.getAttribute(Constants.TZDR_USER_SESSION);
 			if (userSessionBean == null) {
