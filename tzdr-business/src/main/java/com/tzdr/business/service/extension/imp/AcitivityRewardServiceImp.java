@@ -47,7 +47,7 @@ public class AcitivityRewardServiceImp extends BaseServiceImpl<ActivityReward,Ac
 	}
 	@Override
 	public void doSaveActivityReward(Long startTime, Long endTime) {
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			List<FSimpleFtseUserTrade> fSimpleFtseUserTrades = fSimpleFtseUserTradeService.findLossPlan(startTime, endTime);
 			List<ActivityReward> activityRewards = new ArrayList<>();
 			//单日总的交易手数

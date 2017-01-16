@@ -92,7 +92,7 @@ public class ActivityController {
 			@RequestParam(value = "channelCode", required = false) String channelCode,
 			@RequestParam(value = "activity", required = false) String activity) {
 		Map<String, Object> resultMap = new HashMap<>();
-		if(dataMapService.activityExpired()){
+		if(dataMapService.activityExpired("activityOnlineEndTime")){
 			GeneralizeVisit generalizeVisit = new GeneralizeVisit();
 			String ip = IpUtils.getIpAddr(request);
 			generalizeVisit.setClieantIp(ip);
@@ -123,6 +123,8 @@ public class ActivityController {
 	@RequestMapping(value = "/getOldAndNewInvitedList", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult oldAndNewInvitedToRecord(HttpServletRequest request,HttpServletResponse response){
+		if(!dataMapService.activityExpired("activityOldAndNewEndTime"))
+			return new ApiResult(false,ResultStatusConstant.FAIL,"无效的活动");
 		int pageIndex=Integer.parseInt(request.getParameter("pageIndex"));  //页索引
 		int perPage=Integer.parseInt(request.getParameter("perPage"));	 //当页记录数 默认为10条记录
 		String starttime=request.getParameter("starttime");
@@ -146,6 +148,7 @@ public class ActivityController {
 		PageInfo<OldAndNewVo> oldAndNewVos = activityOldAndNewService.getOldAndNewVoList(pageIndex,perPage,user.getId(),fourMobile,starttime,endtime);
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",oldAndNewVos);
+		
 	}
 	
 	
@@ -158,6 +161,8 @@ public class ActivityController {
 	@RequestMapping(value = "/oldAndNewInvitedStatistics", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult oldAndNewStatistics(HttpServletRequest request,HttpServletResponse response){
+		if(!dataMapService.activityExpired("activityOldAndNewEndTime"))
+			return new ApiResult(false,ResultStatusConstant.FAIL,"无效的活动");
 		CacheUser cacheUser = AuthUtils.getCacheUser(request);  //获取app缓存信息
 		WUser user = null;
 		String uid = null;
