@@ -1196,7 +1196,7 @@ function appendCondition(param){
 		timeTriggerPoint = timeTriggerPoint.replace(/-/g,"/");
 		compareTypeText =  formatDateHHMMSS(new Date(timeTriggerPoint)); 
 	} 
-	if(status == 3 || status == 4 || status == 5){
+	if(status == 2 || status == 3 || status == 4 || status == 5){
 		insertTime = param.TriggedTime;
 	}
 	compareTypeText = compareTypeText+additionTypeText;
@@ -1265,7 +1265,7 @@ function updateConditionList(param){
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
-	if(status == 3 || status == 4 || status == 5){
+	if(status == 2 || status == 3 || status == 4 || status == 5){
 		insertTime = param.TriggedTime;
 	}
 	$("#"+conditionNo+" li[class = 'condition1']").text(statusText);
