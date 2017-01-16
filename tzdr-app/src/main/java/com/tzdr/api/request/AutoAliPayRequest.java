@@ -109,6 +109,12 @@ public class AutoAliPayRequest{
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "AutoAliPayRequest [serialNo=" + serialNo + ", tradeTime=" + tradeTime + ", money=" + money
+				+ ", account=" + account + ", realName=" + realName + ", source=" + source + "]";
+	}
+
 	public int getSource() {
 		return source;
 	}
