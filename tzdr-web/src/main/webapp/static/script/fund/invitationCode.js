@@ -95,20 +95,16 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	        contentType: "application/x-www-form-urlencoded",   
 	        success: function(msg){ 
 	            var total =msg.totalCount;   
+	            var data = msg.data;
+	            if(data == null){
+	            	return;
+	            }
+	            var dataPageResult = data.pageResults;
+	            if(dataPageResult == null){
+	            	return;
+	            }
 	            var html = '';   
-	            $.each(msg.data.pageResults,function(i,n){
-	            	/*var showid='"'+title+i+'"';
-	            	var outmoney="";
-	            	var inmoney="";
-	            	if(n.money<0){
-	            		outmoney=Math.abs(n.money)+"元";
-	            	}else{
-	            		inmoney=n.money+"元";
-	            	}
-	            	var detail=getdetail(n);
-	            	var statusvalue=n.typevale;
-	            	if(statusvalue==null)
-	            		statusvalue="";*/
+	            $.each(dataPageResult,function(i,n){
 	            	html +="<ol>";
 	            	n.mobile=n.mobile.substring(0,3)+"****"+n.mobile.substring(7,11);
 					n.tname=n.tname.substring(0,1)+"**";
@@ -117,7 +113,6 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.ctime,'yyyy-MM-dd hh:mm:ss')+"</li>";       //注册时间
 	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.endTime,'yyyy-MM-dd hh:mm:ss')+"</li>";     //交易时间
 	            	html+="<li class='uc_fsl100' style='width: 100px;'>"+n.sumLever+""+"手"+"</li>";										   //交易手数
-	            	
 	            	html +="</ol>";
 	            }); 
 	           
