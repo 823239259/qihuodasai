@@ -9,7 +9,8 @@
 <meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <style type="text/css">
  .font_size_15 {font-size: 15px; color: #f60; }
- .font_size_22 {font-size: 22px; color: #f60; }                       
+ .font_size_22 {font-size: 22px; color: #f60; } 
+ #customerTel ul li a#guojiqihuo {color: #ffb319;}                      
 </style>
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet"
 	type="text/css">
@@ -52,9 +53,9 @@ $(document).ready(function(){
 					<h3>恭喜您，开户成功！</h3>
 					<p>恭喜您完成开户申请，系统将在<label class="cp_djs">3</label>秒后后跳转到<a href="${ctx}/userftse/trade_list" target="_blank">操盘明细</a>页面。<br>您也可以点击<a href="${ctx}/html/qutrade/quoteTrade.html" target="_blank">行情交易</a>查看当前行情。</p>		
 				</div> 	
-				<p class="cp_jja">点击【操盘明细】页面跳转到个人中心->操盘明细；</p>
+				<!-- <p class="cp_jja">点击【操盘明细】页面跳转到个人中心->操盘明细；</p>
 				<p class="cp_jja">点击【行情交易】页面跳转到行情交易页；</p>
-				<p class="cp_jja">不点击自动跳转到操盘明细页面；</p>
+				<p class="cp_jja">不点击自动跳转到操盘明细页面；</p> -->
 			</c:otherwise>
 		</c:choose>
 	</div>
