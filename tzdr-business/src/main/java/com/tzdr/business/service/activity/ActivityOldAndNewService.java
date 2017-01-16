@@ -32,12 +32,12 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	public PageInfo<OldAndNewVo> getOldAndNewVoList(int pageIndex, int perPage, String parentId, String mobile,
 			String starttime, String endtime) {
 		PageInfo<Object> pageInfo = new PageInfo<Object>(perPage, pageIndex + 1);
-		PageInfo<OldAndNewVo> oldAndNewVos = null;
-		List<DataMap> dataMaps = dataMapService.findByTypeKey("activeityOnlineOldAndNewStartTime");
+		PageInfo<OldAndNewVo> oldAndNewVos = null;			   
+		List<DataMap> dataMaps = dataMapService.findByTypeKey("activityOldAndNewStartTime");
 		if (dataMaps != null && dataMaps.size() != 0) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:ss");
 			try {
-				Long time = df.parse(dataMaps.get(0).getValueName()).getTime();
+				Long time = df.parse(dataMaps.get(0).getValueName()).getTime()/1000;
 
 				// 邀请记录统计实名的用户、 单边交易手数
 				StringBuffer sql = new StringBuffer();
@@ -96,19 +96,19 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	 */
 	public Map<String, Object> getActivityStatistics(String parentId) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		List<DataMap> dataMaps = dataMapService.findByTypeKey("activeityOnlineOldAndNewStartTime");
+		List<DataMap> dataMaps = dataMapService.findByTypeKey("activityOldAndNewStartTime");
 		if (dataMaps != null && dataMaps.size() != 0) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:ss");
 			try {
-				Long time = df.parse(dataMaps.get(0).getValueName()).getTime();
+				Long time = df.parse(dataMaps.get(0).getValueName()).getTime()/1000;
 
 				// 查询推广 注册的用户个数(有无实名均统计)
 				String sql1 = " select count(id) from w_user where parent_id = '" + parentId
-						+ "' and ctime > 1484280000 ";
+						+ "' and ctime > "+time+" ";
 				Object registNum = this.nativeQueryOne(sql1, null);
 				data.put("registNum", registNum);
 				// 查询推广 申请过方案的用户个数(操盘中和已结算)(有无实名均统计)
-				String sql2 = " select w.id from w_user w left join f_simple_ftse_user_trade f on w.id = f.uid where  w.ctime > 1484280000 and w.parent_id = '"
+				String sql2 = " select w.id from w_user w left join f_simple_ftse_user_trade f on w.id = f.uid where  w.ctime > "+time+" and w.parent_id = '"
 						+ parentId + "' and f.state_type in (4,6) group by w.id ";
 				List ftradeNum = this.nativeQuery(sql2, null);
 				data.put("ftradeNum", ftradeNum.size());
@@ -141,11 +141,11 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 	}
 
 	public void getActivityStatistics() {
-		List<DataMap> dataMaps = dataMapService.findByTypeKey("activeityOnlineOldAndNewStartTime");
+		List<DataMap> dataMaps = dataMapService.findByTypeKey("activityOldAndNewStartTime");
 		if (dataMaps != null && dataMaps.size() != 0) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:ss");
 			try {
-				Long time = df.parse(dataMaps.get(0).getValueName()).getTime();
+				Long time = df.parse(dataMaps.get(0).getValueName()).getTime()/1000;
 				String sql = "SELECT v.tname, g2.mobile, g2.id id, g2.lever lever, g2.parent_id FROM "
 						+ "(SELECT w.id, g1.lever, w.parent_id, w.mobile FROM "
 						+ "( SELECT f.uid, sum( IFNULL(f.tran_actual_lever, 0) + IFNULL( f.crude_tran_actual_lever, 0 ) + IFNULL(f.hsi_tran_actual_lever, 0) "
@@ -154,8 +154,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 						+ "+ IFNULL( f.ame_copper_market_lever, 0 ) + IFNULL( f.ame_silver_market_lever, 0 ) + IFNULL(f.h_stock_market_lever, 0) "
 						+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) + IFNULL( f.daxtran_min_actual_lever, 0 ))/2 lever "
 						+ "FROM f_simple_ftse_user_trade f WHERE f.state_type = 6 GROUP BY f.uid ) g1 "
-						+ "INNER JOIN w_user w ON w.id = g1.uid and w.ctime > " + time
-						+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id WHERE v.tname <> '';";
+						+ "INNER JOIN w_user w ON w.id = g1.uid and w.ctime > " + time+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id WHERE v.tname <> '';";
 				List<Map<String, Object>> lists = this.nativeQuery(sql, null);
 
 				for (int i = 0; i < lists.size(); i++) {
