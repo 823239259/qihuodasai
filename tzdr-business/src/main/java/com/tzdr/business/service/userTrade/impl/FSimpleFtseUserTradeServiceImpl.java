@@ -799,7 +799,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 				// handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade);
 				// // 保存收益报表记录
 			}
-			if (dataMapService.activityExpired()) {
+			if (dataMapService.activityExpired("activityOnlineEndTime")) {
 				this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(), wuser.getMobile(), wellGoldA50.getId());
 			}
 			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue() * simpleFtseUserTrade.getEndParities().doubleValue();

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.tzdr.business.service.activity.ActivityOldAndNewService;
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.common.utils.SpringUtils;
 
 /**
@@ -20,10 +21,12 @@ public class OldAndNewActivityJob extends QuartzJobBean{
 	@Override
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException {
+		DataMapService dataMapService = SpringUtils.getBean(DataMapService.class);
 		logger.info("------------------老带新数据统计定时任务--------begin-------------------");		
-
-		ActivityOldAndNewService activityOldAndNewService = SpringUtils.getBean(ActivityOldAndNewService.class);
-		activityOldAndNewService.getActivityStatistics();
-		logger.info("------------------老带新数据统计定时任务--------end-------------------");	
+		if(dataMapService.activityExpired("activityOldAndNewEndTime")){
+			ActivityOldAndNewService activityOldAndNewService = SpringUtils.getBean(ActivityOldAndNewService.class);
+			activityOldAndNewService.getActivityStatistics();
+			logger.info("------------------老带新数据统计定时任务--------end-------------------");	
+		}
 	}
 }

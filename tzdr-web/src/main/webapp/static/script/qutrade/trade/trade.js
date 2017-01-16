@@ -281,7 +281,7 @@ function handleData(evt){
 			var message = "";
 			var status = conditionParam.Status;
 			if(status == 4){
-				message = stopLossParam.StatusMsg;
+				message = conditionParam.StatusMsg;
 			}else{
 				var conditionNo = conditionParam.StopLossNo;
 				message = "添加条件单成功,单号:【"+conditionNo+"】";
@@ -1196,7 +1196,7 @@ function appendCondition(param){
 		timeTriggerPoint = timeTriggerPoint.replace(/-/g,"/");
 		compareTypeText =  formatDateHHMMSS(new Date(timeTriggerPoint)); 
 	} 
-	if(status == 3 || status == 4 || status == 5){
+	if(status == 2 || status == 3 || status == 4 || status == 5){
 		insertTime = param.TriggedTime;
 	}
 	compareTypeText = compareTypeText+additionTypeText;
@@ -1265,7 +1265,7 @@ function updateConditionList(param){
 	} 
 	compareTypeText = compareTypeText+additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection)+","+lossOrderType(orderType)+","+num+"手";
-	if(status == 3 || status == 4 || status == 5){
+	if(status == 2 || status == 3 || status == 4 || status == 5){
 		insertTime = param.TriggedTime;
 	}
 	$("#"+conditionNo+" li[class = 'condition1']").text(statusText);
@@ -1833,9 +1833,9 @@ $(function(){
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
-	$("#marketPrice").prop("checked","checked");
-	$("#stoploss_no_radio").prop("checked","checked");
 	$("#condition_no_radio").prop("checked","checked");
+	$("#stoploss_no_radio").attr("checked","checked");
+	$("#marketPrice").prop("checked","checked");
 	$("#firm_btn").click(function(){
 		if(tradeWebSocketIsMock == 0){
 			username = $("#firm_name").val();
@@ -2718,7 +2718,20 @@ function bindOpertion(){
 			if(inputnum <= 0 || inputnum.length == 0){
 				layer.tips("手数输入错误", '#contract_price_num');
 				return;
-			} 
+			}
+			var drection = $("#condition_price_drection").val();
+			var lastPrice = $("#condition_price_lastPrice").text();
+			if(drection == 0){
+				if(inputprice <= lastPrice){
+					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
+					return;
+				}
+			}else if(drection == 1) {
+				if(inputprice >= lastPrice){
+					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
+					return;
+				}
+			}
 			var chioceContract = $("#condition_price_contractCode").val();
 			if(insertConditionCount == 0){
 				var tipContent = "你确定要提交【"+chioceContract+"】条件单吗?";
@@ -2742,6 +2755,19 @@ function bindOpertion(){
 				if(conditoionTimePricesInput <= 0 || conditoionTimePricesInput.length == 0){
 					tip("附加触发价格错误");
 					return;
+				}
+				var drection = $("#condition_drection_time").val();
+				var lastPrice = $("#condition_time_lastPrice").text();
+				if(drection == 0){
+					if(inputprice <= lastPrice){
+						layer.tips("附加价格必须大于最新价", '#condtion_time_addPrice');
+						return;
+					}
+				}else if(drection == 1) {
+					if(input >= lastPrice){
+						layer.tips("附加价格必须小于最新价", '#condtion_time_addPrice');
+						return;
+					}
 				}
 			} 
 			var ConditoionTimeInput = $("#condition_time_inputnum").val();
@@ -2875,7 +2901,7 @@ function bindOpertion(){
 			}else if(operateConditionType == 3){
 				modifyFlagText = "启动";
 			}
-			var tipContent = "是否要"+modifyFlagText+"条件单?";
+			var tipContent = "是否要"+modifyFlagText+"条件单";
 			tipConfirm(tipContent,doUpdateAndDelCondition,cancleCallBack);
 		}else{
 			tip("未登录,请先登录");
