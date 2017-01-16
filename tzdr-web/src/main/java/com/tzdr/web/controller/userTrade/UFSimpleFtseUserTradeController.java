@@ -352,15 +352,16 @@ public class UFSimpleFtseUserTradeController {
 				// 入金金额(美元)
 				BigDecimal goldenMoney = new BigDecimal("0").add(fSimpleConfig.getGoldenMoney());
 				st.setGoldenMoney(goldenMoney);
+				FSimpleFtseUserTrade fSimpleFtseUserTrade = null;
 				// 设置代金券相关信息
 				if (this.fSimpleCouponService.isCouponValid(voucher, 2, 0)) {
 					st.setVoucherId(voucher.getId());
 					st.setVoucherMoney(voucher.getMoney());
 					st.setVoucherActualMoney(voucherActualMoney);
-					this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,
+					fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,
 							"投资新华富时A50申请（划款）。", 1);
 				} else {
-					this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable, "投资新华富时A50申请（划款）。",
+					fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable, "投资新华富时A50申请（划款）。",
 							1);
 				}
 				request.getSession(false).removeAttribute("tokenTzdr");
@@ -373,6 +374,9 @@ public class UFSimpleFtseUserTradeController {
 
 				} catch (Exception e) {
 					log.info("发送邮件失败", e);
+				}
+				if(fSimpleFtseUserTrade != null){
+					modelMap.addAttribute("stateType", fSimpleFtseUserTrade.getStateType());
 				}
 				return ViewConstants.FSimpleFtseUserTradeJsp.FTSE_PAY_SUCCESSFUL;
 			} else {

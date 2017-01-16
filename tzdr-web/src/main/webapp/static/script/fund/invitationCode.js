@@ -8,13 +8,13 @@ $(function(){
 	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
 	    	$("#test").html(data.data.inviteUrl);
 	        if(data.data.isRealName == true){
-	        	copy();
+	        	$(".my_invitationCode .anniucopy").css("z-index","0");
 	        }else {
 	        	rz();
 	        }
 	    }
 	},"json");
-
+	copy();
 	function rz(){
 		$("#anniucopy").click(function(){
 			showMsgDialog("提示","还没有实名认证,<a href="+basepath+'securityInfo/secInfo'+">认证去</a>");
@@ -25,20 +25,31 @@ $(function(){
 		$(".cancelCopy").zclip({
 			path: basepath+"static/swf/ZeroClipboard.swf",
 			copy: function(){
-			return $(this).parent().find("#test").html();
+				return $(this).parent().find("#test").html();
 			},
 			afterCopy:function(){/* 复制成功后的操作 */
 				var $copysuc = $("#xians").html("<span class='copy-tips'>复制成功</span>");
 	            $(".copy-tips").fadeOut(3000);
-	        }
+	            $("#test").setSelectionRange(0,$("#test").html().length);
+	        	$("#test").focus();
+	        }/*,
+	        beforeCopy:function(){
+	        	
+            }*/
 		});
 	}
 	/* 活动统计 */
 	$.post(adders+"activity/oldAndNewInvitedStatistics",{"mobile":mobile},function(data){
 	    if(data.success){
-	    	$(".registNum").html(data.data.ftradeNum);
-	    	$(".ftradeNum").html(data.data.registNum);
-	    	$(".awardSum").html(data.data.awardSum);
+	    	if(data.data){
+	    		$(".registNum").html(data.data.ftradeNum);
+		    	$(".ftradeNum").html(data.data.registNum);
+		    	$(".awardSum").html(data.data.awardSum);
+	    	}else{
+	    		$(".registNum").html("0");
+		    	$(".ftradeNum").html("0");
+		    	$(".awardSum").html("0");
+	    	}
 	    }
 	},"json");
 });
@@ -84,20 +95,16 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	        contentType: "application/x-www-form-urlencoded",   
 	        success: function(msg){ 
 	            var total =msg.totalCount;   
+	            var data = msg.data;
+	            if(data == null){
+	            	return;
+	            }
+	            var dataPageResult = data.pageResults;
+	            if(dataPageResult == null){
+	            	return;
+	            }
 	            var html = '';   
-	            $.each(msg.data.pageResults,function(i,n){
-	            	/*var showid='"'+title+i+'"';
-	            	var outmoney="";
-	            	var inmoney="";
-	            	if(n.money<0){
-	            		outmoney=Math.abs(n.money)+"元";
-	            	}else{
-	            		inmoney=n.money+"元";
-	            	}
-	            	var detail=getdetail(n);
-	            	var statusvalue=n.typevale;
-	            	if(statusvalue==null)
-	            		statusvalue="";*/
+	            $.each(dataPageResult,function(i,n){
 	            	html +="<ol>";
 	            	n.mobile=n.mobile.substring(0,3)+"****"+n.mobile.substring(7,11);
 					n.tname=n.tname.substring(0,1)+"**";
@@ -106,7 +113,6 @@ function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){
 	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.ctime,'yyyy-MM-dd hh:mm:ss')+"</li>";       //注册时间
 	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.endTime,'yyyy-MM-dd hh:mm:ss')+"</li>";     //交易时间
 	            	html+="<li class='uc_fsl100' style='width: 100px;'>"+n.sumLever+""+"手"+"</li>";										   //交易手数
-	            	
 	            	html +="</ol>";
 	            }); 
 	           
