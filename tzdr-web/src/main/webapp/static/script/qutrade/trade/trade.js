@@ -2690,6 +2690,11 @@ function bindOpertion(){
 		var val = replaceNum($this.val(), 4);
 		$this.val(val);
 	});
+	$("#stop_diff").bind("input",function(){
+		var $this = $(this);
+		var val = replaceNum($this.val(), 4);
+		$this.val(val);
+	});
 	/**
 	 * 添加条件单(价格条件)
 	 */

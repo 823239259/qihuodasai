@@ -70,10 +70,10 @@
 			if(index){
 				$("#fundtab ul.uc_paynav a").eq(index).trigger("click");
 			}
-			/* $('.fzwz a.anniucopy').on('click',function() {
+			/* $('.fzwz span.anniucopy').on('click',function() {
 	            var $this = $(this);
 	            var $target = $this.prev(),
-	                    $copy = $this.closest('.fzwz'),
+	                    $copy = $this.closest('.wangzhi'),
 	                    $str = $('<div class="pop">按 Ctrl+C 复制地址</div>');
 	            var a =$target.select();
 	            $copy.find('.pop').stop(true).remove();
@@ -107,7 +107,7 @@
 		<div class="uc_mianbar">
 			<div class="uc_pay" id="fundtab">
 				<ul class="uc_paynav">
-					<li><a href="javascript:void(0);" class="on">邀请赚钱</a></li>
+					<li><a href="javascript:void(0);" class="on">我的邀请码</a></li>
 					<li><a href="javascript:void(0);">邀请记录</a></li>
 				</ul>
 				<div class="tabcon">
@@ -117,7 +117,7 @@
 							<p class="fzwz">
 								<span class="wangzhi" id="test">http://www.vs.com/signin</span>
             					<a href="javascript:" id = "anniucopy" class="anniucopy cancelCopy">复制链接</a>
-            					<span id="xians" style="float: right; color: red; margin-right: 20px;"></span>
+            					<span id="xians" style="float: right; color: red; margin-right: 200px;"></span>
             				</p>
             				<input type="hidden" name="" id="mobile_vs" value="<%=mobile %>"/>
 							<!-- <textarea maxlength="3000"></textarea> -->
@@ -162,7 +162,7 @@
 							</div>
 							<div class="xj">
 								<p class="p2">邀请好友，免交易手续费！<a href="${ctx}/topic/oldBelt/index.html" target="_blank">活动规则</a></p>
-								<p class="p1">多拉新朋友，即可多获减免奖励。比如小明叫了10个朋友来维胜金融操盘，8个进行了实名认证，其中6个人操盘交易均达到双边5手。那么小明就可以获得（累计）：2个1手交易费减免资格，4个2手交易费减免资格，总共1+1+2+2+2=2=10手双边免费交易资格。以此类推，多拉新用户多得减免金。</p>
+								<p class="p1">多拉新朋友，即可多获减免奖励。比如小明叫了10个朋友来维胜金融操盘，8个进行了实名认证，其中6个人操盘交易均达到双边5手。那么小明就可以获得（累计）：2个1手交易费减免资格，4个2手交易费减免资格，总共 1 + 1 + 2 + 2 + 2 = 2 = 10 手双边免费交易资格。以此类推，多拉新用户多得减免金。</p>
 							</div>
 <script>
 	window._bd_share_config = {

@@ -172,7 +172,6 @@ $("#login_box").click(function(){
 	$this.removeAttr("disabled");
 	//basepath+"login"
 	$.post("http://localhost:8088/cas/login",{username:loginName,password:password,ajax:1},function(data){ //登录
-		alert(data);
 		if(data.success){
 			alert("登录成功");
 			$("#signin_box").css("display","none");
@@ -199,3 +198,14 @@ $("#login_box").click(function(){
 	},"json");
 });
 
+$(function() {
+	var cp_djs  = parseInt($(".cp_djs").html());
+    var time3 = setInterval(function(){
+        cp_djs --;
+        $(".cp_djs").html(cp_djs);
+        if(cp_djs==0){
+            clearInterval(time3);
+            window.location.href= basepath+"userftse/trade_list"; 
+        }
+    },1000);
+});
