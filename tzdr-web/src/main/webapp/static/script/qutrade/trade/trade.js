@@ -1209,7 +1209,7 @@ function appendCondition(param){
 					+'<li class = "condition1" style="width: 50px" data-tion-status = "'+status+'">'+statusText+'</li>'
 					+'<li class = "condition2" style="width: 100px" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</li>'
 					+'<li class = "condition4" style="width: 120px">'+inserOrderText+'</li>'
-					+'<li class = "condition3" style="width: 100px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
+					+'<li class = "condition3" style="width: 120px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
 					+'<li class = "condition5" style="width: 60px">当日有效</li>'
 					+'<li class = "condition6" style="width: 130px">'+insertTime+'</li>'
 				+'</tr>';  

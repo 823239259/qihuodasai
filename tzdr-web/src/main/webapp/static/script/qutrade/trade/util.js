@@ -108,6 +108,9 @@ function formatDateHHMMSS(now){
       var   hour=now.getHours();     
       var   minute=now.getMinutes();  
       var   ss = now.getSeconds();
+      if(ss < 10){
+    	  ss = "0"+ss;
+      }
     return hour+":"+minute+":"+ss;
 }
 /**
