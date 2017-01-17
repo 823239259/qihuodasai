@@ -33,6 +33,7 @@
 					<th field="mobileNo" width="150">手机号 </th>
 					<th field="tname" width="150">用户姓名</th>
 					<th field="account" width="150">支付宝账号</th>
+					<th field="tradeNo" width="150">交易号</th>
 					<th field="money" width="150">充值表单金额</th>
 					<th field="actualMoney" width="150">实际到账金额 </th>
 					<th field="status" width="150">充值状态 </th>
