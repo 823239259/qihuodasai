@@ -153,7 +153,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 						+ "+ IFNULL( f.ame_copper_market_lever, 0 ) + IFNULL( f.ame_silver_market_lever, 0 ) + IFNULL(f.h_stock_market_lever, 0) "
 						+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) + IFNULL( f.daxtran_min_actual_lever, 0 ))/2 lever "
 						+ "FROM f_simple_ftse_user_trade f WHERE f.state_type = 6 GROUP BY f.uid ) g1 "
-						+ "INNER JOIN w_user w ON w.id = g1.uid and w.ctime > " + time+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id WHERE v.tname <> '';";
+						+ "right JOIN w_user w ON w.id = g1.uid and w.ctime > " + time+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id WHERE v.tname <> '';";
 				List<Map<String, Object>> lists = this.nativeQuery(sql, null);
 
 				for (int i = 0; i < lists.size(); i++) {
@@ -174,11 +174,13 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 						String parentId = String.valueOf(map2.get("parent_id"));
 						if (id.equals(parentId)) {
 							registNum++;
-							double lever = Double.parseDouble(String.valueOf(map2.get("lever")));
-							if (lever >= 5)
-								ftradeGt5++;
-							else
-								ftradeLt5++;
+							if(map2.get("lever") != null){
+								double lever = Double.parseDouble(String.valueOf(map2.get("lever")));
+								if (lever >= 5)
+									ftradeGt5++;
+								else
+									ftradeLt5++;
+							}
 						}
 					}
 					if (registNum != 0) {
