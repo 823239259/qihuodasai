@@ -1,5 +1,7 @@
 package com.tzdr.web.controller.ExtensionSign;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -115,6 +117,23 @@ public class ExtendsionSignController {
 			modelMap.put("footNote", dataMaps != null && dataMaps.size() >0 ?dataMaps.get(0).getValueName():"");
 		}
 		return ViewConstants.SignInViewJsp.EXTENDSIONSIGN_VEIW;
+	}
+	/**
+	 * 推广页面跳转
+	 * @return
+	 */
+	@RequestMapping(value = "/activeity/view",method = RequestMethod.GET)
+	public String activetyView(HttpServletRequest request,ModelMap modelMap){
+		String url = request.getParameter("url");
+		String channelCode = request.getParameter("channelCode");
+		try {
+			modelMap.addAttribute("channelCode", channelCode);
+			url = URLDecoder.decode(url,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return url;
 	}
 	/**
 	 * 金投网推广页

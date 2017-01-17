@@ -60,7 +60,7 @@
 	<div class="ks_zuce_content">
 		<div class="rg_ctn">
 			<p class="tt"></p>  
-			<input type = "hidden" value="cngold_two" id = "channelCode"/>
+			<input type = "hidden" value="${channelCode }" id = "channelCode"/>
         	<form  class="form" action="" method="post">  
 		        <ul class="rg_list">
 		            <li>     
