@@ -118,9 +118,10 @@ var Quote = {
 		 * @param exchangeNo
 		 * @param commodityNo
 		 * @param contractNo
+		 * @param hisQuoteType
 		 */
-		doQryHistoryALL:function(exchangeNo,commodityNo,contractNo,hisQuoteType){
+		doQryHistoryALL:function(exchangeNo,commodityNo,contractNo,HisQuoteType){
 			console.log("111")
-			Quote.doSendMessage(QuoteUrl.QryHistoryUrl,'{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+'}');
+			Quote.doSendMessage(QuoteUrl.QryHistoryUrl,'{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+HisQuoteType+'}');
 		}
 }

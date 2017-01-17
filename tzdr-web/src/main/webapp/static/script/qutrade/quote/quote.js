@@ -34,16 +34,15 @@ function quoteHandleData(evt){
 		Quote.doAllQryCommodity();
 	}else if(method == "OnRspQryCommodity"){
 		generateRealTimeQuote(jsonData);
-		sendHistory(1);
+		sendHistory(0);
 	}else if(method = "OnRtnQuote"){
 		quotePush(jsonData);
-	}else if(method=="OnRspQryHistory"){
+	}else if(method == "OnRspQryHistory"){
 		console.log(jsonData);
 		if(firstTimeLength==1){
 				getSubscript(historyParam.Parameters.ColumNames);
 				firstTimeLength=2;
 			}
-		
 		handleTimeChartData(jsonData);
 	}
 }
@@ -881,11 +880,11 @@ function clearRightData(){
  /**
   * 发送查询的历史数据的方法
   * */
- 	function sendHistory(hisQuoteType){
+ 	function sendHistory(HisQuoteType){
  		var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
-        console.log(exchangeNo,commodityNo,contractNo,hisQuoteType)
+        console.log(exchangeNo,commodityNo,contractNo,HisQuoteType);
 //       Quote.doQryHistoryALL('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+'}');
-        Quote.doQryHistoryALL(exchangeNo,commodityNo,contractNo,hisQuoteType)
+        Quote.doQryHistoryALL(exchangeNo,commodityNo,contractNo,HisQuoteType)
  	}
