@@ -95,12 +95,16 @@ function handleData(evt){
 				$("#condition_top_title").hide();
 				$("#stop_loss_conditon_x").hide();
 				$("#stopLossAndtraders").hide();
+				$("#stoploss_top_title").hide();
+				$("#condition_top_title").hide();
 			}else if(tradeWebSocketIsMock == 1){
 				$("#ismockReak").text("模拟账户:");
 				$("#stoploss_top_title").show();
 				$("#condition_top_title").show();
 				$("#stop_loss_conditon_x").show();
 				$("#stopLossAndtraders").show();
+				$("#stoploss_top_title").show();
+				$("#condition_top_title").show();
 			}
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
@@ -1053,6 +1057,9 @@ function appendStopLossData(param){
 			stopLossPriceText="追踪价差:";
 			stopLossPrice = stopLossDiff;
 		}
+		if(status == 2 || status == 3 || status == 4 || status == 5){
+			insertTime = param.TriggedTime;
+		}
 		var cls = "stoploss"+stoplossIndex;
 		var html = '<ul class="tab_content '+cls+'" data-tion-index = "'+stoplossIndex+'" data-tion-contractCode = "'+contractCode+'" id = "'+stopLossNo+'">'
 			            +'<li class="ml stoploss0" style="width: 100px">'+contractCode+'</li>'
@@ -1105,6 +1112,9 @@ function updateStopLossData(param){
 	if(stopLossType == 2){
 		stopLossPriceText = "追踪价差:";
 		stopLossPrice = stopLossDiff;
+	}
+	if(status == 2 || status == 3 || status == 4 || status == 5){
+		insertTime = param.TriggedTime;
 	}
 	var $status = $("#"+stopLossNo+" li[class = 'stoploss1']");
 	var $holdDrection = $("#"+stopLossNo+" li[class = 'stoploss2']");
@@ -1835,6 +1845,9 @@ $(function(){
 	});
 	$("#show_login").show();
 	$("#show_user_info").hide();
+	$("#stoploss_top_title").hide();
+	$("#condition_top_title").hide();
+	$("#stop_loss_conditon_x").hide();
 	$("#condition_no_radio").prop("checked","checked");
 	$("#stoploss_no_radio").attr("checked","checked");
 	$("#marketPrice").prop("checked","checked");
@@ -3658,6 +3671,9 @@ function clearTradListData(){
 	$("#floatingProfit").html("0.00");
 	$("#closeProfit").html("0.00");
 	$(".caozuo").hide();
+	$("#stoploss_top_title").hide();
+	$("#condition_top_title").hide();
+	$("#stop_loss_conditon_x").hide();
 	generatePostionTitle();
 	generateDesignateTitle();
 	generateAccountTitle();
