@@ -118,19 +118,18 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 						+ "+ IFNULL(f.lhsi_tran_actual_lever, 0) + IFNULL(f.ame_copper_market_lever,0) + IFNULL(f.ame_silver_market_lever,0) + IFNULL(f.h_stock_market_lever, 0) + IFNULL(f.small_crude_oil_market_lever,0) "
 						+ "+ IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0))/2 lever "
 						+ "FROM w_user w Left JOIN w_user_verified v on w.id = v.uid LEFT JOIN f_simple_ftse_user_trade f ON w.id = f.uid "
-						+ "WHERE w.ctime > " + time + " and w.parent_id = '" + parentId
-						+ "' and v.tname <>  '' and f.state_type = 6 GROUP BY w.id  ORDER BY f.app_time;";
+						+ "WHERE w.ctime > " + time + " and w.parent_id = '" + parentId+ "' and v.tname <>  '' and f.state_type = 6 "
+						+ "GROUP BY w.id  having sum(IFNULL(f.tran_actual_lever, 0) + IFNULL(f.crude_tran_actual_lever,0) + IFNULL(f.hsi_tran_actual_lever, 0) "
+						+ "+ IFnull(f.mdtran_actual_lever, 0) + IFNULL(f.mntran_actual_lever, 0) + IFNULL(f.mbtran_actual_lever, 0) + IFNULL(f.daxtran_actual_lever, 0) + IFNULL(f.nikkei_tran_actual_lever,0) "
+						+ "+ IFNULL(f.ag_tran_actual_lever, 0) + IFNULL(f.lhsi_tran_actual_lever, 0) + IFNULL(f.ame_copper_market_lever,0) + IFNULL(f.ame_silver_market_lever,0) + IFNULL(f.h_stock_market_lever, 0) "
+						+ "+ IFNULL(f.small_crude_oil_market_lever,0) + IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0))/2 >= 5 ORDER BY f.app_time;";
 				List<Map<String, Object>> awards = this.nativeQuery(sql3, null);
 				Integer sum = 0;
 				for (int i = 0; i < awards.size(); i++) {
-					Map<String, Object> map = awards.get(i);
-					double lever = Double.parseDouble(String.valueOf(map.get("lever")));
-					if (lever >= 5) {
-						if (i == 0 || i == 1) {
-							sum = sum + 1;
-						} else
-							sum = sum + 2;
-					}
+					if (i == 0 || i == 1) 
+						sum = sum + 1;
+					else
+						sum = sum + 2;
 				}
 				data.put("awardSum", sum);
 			} catch (ParseException e) {
