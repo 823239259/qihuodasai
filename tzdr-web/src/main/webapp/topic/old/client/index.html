@@ -26,6 +26,7 @@
         #main{
             height: auto;
             overflow: hidden;
+            position: relative;
         }
         .title{
             padding-left: 7px;;
@@ -47,10 +48,13 @@
         #buttom{
             width: 100%;
             height: auto;
+            position: relative;
+            bottom: -3px;
+            z-index: 999;
         }
     </style>
 </head>
-<body>
+<body id="body">
     <div id="main">
         <img src="image/top.png" id="top">
         <div id="content">
@@ -112,31 +116,8 @@
                 <div class="titleContent">本活动最终解释权归成都盈透科技有限公司所有。</div>
             </div>
         </div>
-        <img src="image/buttom.png" id="buttom">
     </div>
+    <img src="image/buttom.png" id="buttom">
     <script src="jquery.min.js"></script>
-    <script>
-        $(function () {
-            var buttom=document.getElementById("buttom");
-            var height1=buttom.clientHeight;
-            buttom.style.height=height1+"px";
-            var top=document.getElementById("top");
-            var height2=top.clientHeight;
-            top.style.height=height2+"px";
-            var main=document.getElementById("main");
-            main.style.height=main.clientHeight-4+"px";
-        })
-//        window.onload= function () {
-//            var buttom=document.getElementById("buttom");
-//            var height1=buttom.clientHeight;
-//            buttom.style.height=height1+"px";
-//            var top=document.getElementById("top");
-//            var height2=top.clientHeight;
-//            top.style.height=height2+"px";
-//            var main=document.getElementById("main");
-//            main.style.height=main.clientHeight-4+"px";
-//        }
-
-    </script>
 </body>
 </html>
