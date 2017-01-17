@@ -157,7 +157,8 @@
 			"tzdr/quotation/quotationMain.html",
 			"tzdr/account/recharge.html",
 			"tzdr/account/bindingList.html",
-			"tzdr/account/bindWeixin.html"
+			"tzdr/account/bindWeixin.html",
+			"tzdr/account/Invitation.html"
 		]
 	},
 	"tzdr/login/regist.html": {
@@ -1399,6 +1400,25 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/pingpp.js"
+		]
+	},
+	"tzdr/account/Invitation.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"images/weixinshare.png",
+			"images/qqshare.png",
+			"js/mui.pullToRefresh.material.js",
+			"images/sharearrow.png",
+			"images/fenxiang.png",
+			"js/share.js",
+			"images/weiboshare.png",
+			"js/immersed.js",
+			"js/jquery-1.11.3.js",
+			"fonts/mui.ttf",
+			"css/own.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
 		]
 	}
 }

@@ -236,7 +236,7 @@
 			</div>
 		</div>
 		<input id="sharecontent" type="hidden" value=""></input>
-		<input id="sharehref" class="sharehref" type="hidden" value="http://192.168.0.44:8080/huodong/share.html"/>
+		<input id="sharehref" class="sharehref" type="hidden"/>
 		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
 		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
 		<div id="output" style="opacity: 0;"></div>
@@ -283,7 +283,6 @@
 					var curreentPage=0;
 					var mobile=plus.storage.getItem(tzdr.constants.user_mobile,mobile);
 					mui.app_request("/activity/getOldAndNewInvitedList",{pageIndex:pageIndex,perPage:perPage},function(data){
-						console.log(JSON.stringify(data));
 							if(data.success==true){
 								var dataall=data.data.pageResults;
 								totalPage=data.data.totalPage;
@@ -323,7 +322,6 @@
 						}
 						mui.app_request("/activity/getOldAndNewInvitedList",{pageIndex:pageIndex,perPage:perPage},function(data){
 							if(data.success==true){
-								console.log(JSON.stringify(data));
 									var dataall=data.data.pageResults;
 									var length=dataall.length;
 									currentPage=data.data.currentPage;
@@ -352,6 +350,8 @@
 						mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
 							if(data.success==true){
 								$("#inviteUrl").text(data.data.inviteUrl);
+								document.getElementById("sharehref").value=data.data.inviteUrl
+//								$("#sharehref1").value(data.data.inviteUrl);
 								isRealName=data.data.isRealName;
 								plus.storage.setItem("inviteUrl",data.data.inviteUrl);
 								plus.storage.setItem("isRealName",isRealName)
@@ -361,6 +361,7 @@
 						});
 					}else{
 						$("#inviteUrl").text(plus.storage.getItem("inviteUrl"));
+						document.getElementById("sharehref").value=plus.storage.getItem("inviteUrl");
 						isRealName=plus.storage.getItem("isRealName")
 					}
 
@@ -434,11 +435,9 @@
 						var f = new File(p);
 						var uri = Uri.fromFile(f);
 						if(f.exists()&&f.isFile()){
-							console.log("image/*");
 							intent.setType("image/*");
 							intent.putExtra(Intent.EXTRA_STREAM,uri);
 						}else{
-							console.log("text/plain");
 							intent.setType("text/plain");
 						}
 						intent.putExtra(Intent.EXTRA_SUBJECT,"HBuilder");
