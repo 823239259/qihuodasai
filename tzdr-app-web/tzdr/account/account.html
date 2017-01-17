@@ -157,6 +157,8 @@
 				var aid = a.id;
 				if ('confirm_quit'==aid){
 					mui.cacheUser.clear();
+						plus.storage.removeItem("isRealName");
+			      		plus.storage.removeItem("inviteUrl");   
     				// 清除缓存页面    
 					//mui.cacheUser.clearCachePages();
 					mui.openWindow({url:"../account/accountno.html",id:"accountno"});
