@@ -269,14 +269,14 @@
                 		<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>
                 	</li>
                 </ul>
-                <ul>
+               <!--  <ul>
                 	<li id = "yj_tip_stop">
                 		价差<span id = "stop_pricecha">0,</span>，
                 		预计亏损<span id = "stop_yjks">0</span>
                 		<span class = "stop_dw">HKD</span>，
                 		百分比<span id = "stop_scale">0</span>%
                 	</li>
-                </ul>
+                </ul> -->
                 <ul style="overflow: hidden; margin-top: 10px;">
                 	<li class="li1" style="width: 85px; text-align: right; height: 45px;">
                 		<input type="checkbox"  name="stop_checked" id="stop_checked" style="width: 15px; margin-top: 4px; margin-right: 5px;"/>	
@@ -396,7 +396,7 @@
 							</select>
 							<input type="text" name="condition_price_inputprice" id="condition_price_inputprice" style="margin-left: 6px; margin-right: 14px;"/>
 							附加：
-							<select style="width: 52px;" id = "select_condition_price_addoption">
+							<select style="width: 54px;" id = "select_condition_price_addoption">
 							    <option value = "-1">附加</option>
 		   						<option value = "0">></option>
 		   						<option value = "2">>=</option>
@@ -423,6 +423,11 @@
 		        </div>
 		    </div>
 		    <div class="popup_footer">
+		    	<div class="p1">
+            		<p>1、条件单在云端运行，软件关闭后仍然有效，云端自动确认结算单。</p>
+	                <p>2、上期所合约，按照设置决定是否优先平今。</p>
+	                <p>3、条件单存在风险，云端系统、网络故障情况下失效等。</p>
+            	</div>
 		        <a class="sure" id = "sub_condition_price" href="javascript:void(0)">确定</a>
 		        <a class="cancel close" href="javascript:void(0)">取消</a>
 		    </div>
@@ -439,11 +444,11 @@
 		        	<ul style="margin-top: 16px;">
 		        		<li class="li1">条件：</li>
 		        		<li>
-		        			<span style="margin-left: 32px;">时间</span>
+		        			<span>时间</span>
 		        			<input onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 							<input type="text" name="condition_time_time" id="condition_time_time"/>
 							附加：
-							<select style="width: 52px;" id = "select_time_condition_option">
+							<select style="width: 54px;" id = "select_time_condition_option">
 							    <option value = "-1">附加</option>
 		   						<option value = "0">></option>
 		   						<option value = "2">>=</option>
@@ -470,6 +475,11 @@
 		        </div>
 		    </div>
 		    <div class="popup_footer">
+		    	<div class="p1">
+            		<p>1、条件单在云端运行，软件关闭后仍然有效，云端自动确认结算单。</p>
+	                <p>2、上期所合约，按照设置决定是否优先平今。</p>
+	                <p>3、条件单存在风险，云端系统、网络故障情况下失效等。</p>
+            	</div>
 		        <a class="sure" id = "sub_condition_time" href="javascript:void(0)">确定</a>
 		        <a class="cancel close" href="javascript:void(0)">取消</a>
 		    </div>
