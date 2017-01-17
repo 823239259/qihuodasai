@@ -2293,14 +2293,14 @@ function bindOpertion(){
 			var lastPrice = localQuote.LastPrice;
 			$("#stop_contractCode").text(contractCode);
 			$("#stopHoldContractCode").val(contractCode);
-			$("#stop_drection").text($drection.text());
+			$("#stop_drection").html(analysisBusinessDirection($drection.attr("data-drection")));
 			$("#stop_lastPrice").text(lastPrice);
 			$("#stop_inputprice").val(lastPrice);
 			$("#stop_inputnum").val($holdNum.text());
 			$(".stop_dw").text(currencyNo);
 			$(".loss_dw").text(currencyNo);
 			$("#loss_contractCode").text(contractCode);
-			$("#loss_drection").text($drection.text());
+			$("#loss_drection").html(analysisBusinessDirection($drection.attr("data-drection")));
 			$("#loss_lastPrice").text(lastPrice);
 			$("#loss_inputprice").val(lastPrice);
 			$("#loss_inputnum").val($holdNum.text());
@@ -2331,6 +2331,8 @@ function bindOpertion(){
 			$("#stop_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
 			$("#loss_chaPrice").text(parseFloat(chaPrice).toFixed(dotSize));
 			$("#loss_scale").text(parseFloat(Math.abs(scale)).toFixed(2));
+			$("#stopTitle").text("设置止损单");
+			$("#lossTitle").text("设置止盈单");
 			openUpdateStop();
 		}else{
 			tip("未登录,请先登录");
@@ -2430,6 +2432,8 @@ function bindOpertion(){
 		$("#stopHoldAvgPrice").val(holdAvgPrice);
 		$("#stopHoldDrection").val(holdDrection);
 		$("#stopHoldContractCode").val(contractCode);
+		$("#stopTitle").text("修改止损单");
+		$("#lossTitle").text("修改止盈单");
 		operationStopLossType = 0;
 		openUpdateStop(stopLossType);
 		
@@ -2694,6 +2698,7 @@ function bindOpertion(){
 	$("#condition_insert").bind("click",function(){
 		$("#sub_condition_price").text("确定");
 		$("#sub_condition_time").text("确定");
+		$("#condition_time_time").val(formatDateHHMMSS(new Date()));
 	});
 	$("#condition_price_inputprice").bind("input",function(){
 		var $this = $(this);
