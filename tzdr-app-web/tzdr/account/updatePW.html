@@ -120,6 +120,8 @@
       				updateMockAccount(mobile,password);
       				mui.toast("密码重置成功，请重新登录！");
       				mui.cacheUser.clear();
+      				plus.storage.removeItem("isRealName");
+			      	plus.storage.removeItem("inviteUrl"); 
       				var lo=plus.webview.getWebviewById("login");
 			  		if(lo){
 			  			mui.app_refresh("login"); 

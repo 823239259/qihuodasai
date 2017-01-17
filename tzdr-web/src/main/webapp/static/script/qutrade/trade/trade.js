@@ -193,6 +193,8 @@ function handleData(evt){
 			appendPostionAndUpdate(tradeParam);
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
+			$("#floatingProfit").text("0.00");
+			$("#floatingProfit").css("color","#FFFFFF");
 			/*if(referCount == 0){*/
 				tradeSuccessLoadHoldData();
 			/*	console.log($(".tab_position"));
@@ -355,7 +357,7 @@ function updateBalance(parama){
 	var todayAmount = parama.TodayAmount;
 	var unExpiredProfit = parama.UnExpiredProfit;
 	var unAccountProfit = parama.UnAccountProfit;
-	var floatingProfit = $("#floatingProfit").val();
+	var floatingProfit = $("#floatingProfit").text();
 	var banlance = parseFloat(Number(todayAmount)+Number(unExpiredProfit)+Number(unAccountProfit)+Number(floatingProfit)).toFixed(2);;//今结存+浮盈+未结平盈+未到期平盈
 	var canuse = parseFloat(banlance-deposit-frozenMoney).toFixed(2);
 	localCacheCurrencyAndRate[currencyNo]  = currency == undefined ? localCacheCurrencyAndRate[currencyNo]:currency;
@@ -1205,9 +1207,9 @@ function appendCondition(param){
 	var html = '<ul class="testclick tab_content '+cls+'" id = "'+conditionNo+'">'
 					+'<li class = "ml condition0" style="width: 80px">'+contractCode+'</li>'
 					+'<li class = "condition1" style="width: 50px" data-tion-status = "'+status+'">'+statusText+'</li>'
-					+'<li class = "condition3" style="width: 100px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
-					+'<li class = "condition2" style="width: 120px" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</li>'
+					+'<li class = "condition2" style="width: 100px" data-tion-conditionType = "'+conditionType+'">'+conditionTypeText+'</li>'
 					+'<li class = "condition4" style="width: 120px">'+inserOrderText+'</li>'
+					+'<li class = "condition3" style="width: 100px" data-tion-compareType = "'+compareType+'">'+compareTypeText+'</li>'
 					+'<li class = "condition5" style="width: 60px">当日有效</li>'
 					+'<li class = "condition6" style="width: 130px">'+insertTime+'</li>'
 				+'</tr>';  
@@ -3601,27 +3603,31 @@ function sumListfloatingProfit(){
  * 更新持仓总盈亏
  */
 function updateHoldProfit(){
-	var price = 0.00;
-	for (var i = 0; i < fundsDetailsIndex; i++) {
-		if($(".funds-index"+i).html() != undefined){
-			var floatingProfit = $("#floatingProfit");
-			var floating = $(".funds-index"+i+" li[class = 'detail_floatingProfit']").text();
-			var currencyRate = $(".funds-index"+i+" li[class = 'detail_currencyRate']").text();
-			var total = floating*currencyRate;
-			/*if(isNaN(total)){
-				total = 0;
-			}*/
-			price = price + total;
-			if(price < 0){
-				floatingProfit.css("color","#0bffa4");
-			}else if(price > 0){
-				floatingProfit.css("color","#ff5500");
-			}else if(price == 0){
-				floatingProfit.css("color","#FFFFFF");
-			}
-			floatingProfit.text(parseFloat(price).toFixed(2));
-		}
+	var p =  $(".tab_position");
+	if(p.length == 0){
+		return;
 	}
+	var price = 0.00;
+	var floatingProfit = $("#floatingProfit");
+	$.each(p,function(i,item){
+		var $this = $(item);
+		var currencyNo  = $this.find(".position6").text();
+		var floatingProfiting = $this.find(".position10").text();
+		var currencyRate = localCacheCurrencyAndRate[currencyNo];
+		var total = floatingProfiting*currencyRate;
+		if(isNaN(total)){
+			total = 0;
+		}
+		price = price + total;
+		if(price < 0){
+			floatingProfit.css("color","#0bffa4");
+		}else if(price > 0){
+			floatingProfit.css("color","#ff5500");
+		}else if(price == 0){
+			floatingProfit.css("color","#FFFFFF");
+		}
+		floatingProfit.text(parseFloat(price).toFixed(2));
+	})
 }
 /**
  * 更新账户资产

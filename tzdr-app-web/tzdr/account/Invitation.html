@@ -195,7 +195,7 @@
 				<p>分享以下邀请链接，好友通过您的链接注册成功完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
 				<div id="linkDiv">
 					<label>邀请链接：</label>
-					<label id="inviteUrl">http://www.vs.com/invite/009406</label>
+					<label id="inviteUrl"></label>
 					<button id="shareButton">复制链接</button>
 				</div>
 				<div id="shareDivContent">
@@ -214,7 +214,7 @@
 					<div class="mui-scroll" id="mui-scroll">
 						<div id="shareTitle">
 							<p><label>注册人数</label><label>申请方案人数</label><label>已获奖励次数</label></p>
-							<p><label class="fcc900" id="registNum">10</label><label class="fcc900" id="ftradeNum">1</label><label class="fcc900" id="awardSum">1</label></p>
+							<p><label class="fcc900" id="registNum">0</label><label class="fcc900" id="ftradeNum">0</label><label class="fcc900" id="awardSum">0</label></p>
 						</div>
 						<div style="height: auto;width: 100%;overflow-x: scroll;">
 							<table id="historyDetailsTable1" width="550px" cellpadding="0" cellspacing="0" border="0">
@@ -346,14 +346,22 @@
 						},function(){})
 					}
 					var isRealName;
-					mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
-						if(data.success==true){
-							$("#inviteUrl").text(data.data.inviteUrl);
-							isRealName=data.data.isRealName;
-						}
-					},function(){
-						
-					});
+					if(plus.storage.getItem("inviteUrl")==null){
+						mui.app_request("/wechat/threePartyCreateQrcode",{mobile:mobile},function(data){
+							if(data.success==true){
+								$("#inviteUrl").text(data.data.inviteUrl);
+								isRealName=data.data.isRealName;
+								plus.storage.setItem("inviteUrl",data.data.inviteUrl);
+								plus.storage.setItem("isRealName",isRealName)
+							}
+						},function(){
+							
+						});
+					}else{
+						$("#inviteUrl").text(plus.storage.getItem("inviteUrl"));
+						isRealName=plus.storage.getItem("isRealName")
+					}
+
 					document.getElementById("shareButton").addEventListener("tap",function(){
 						if(isRealName==false){
 							mui.toast("您还没有实名认证");
