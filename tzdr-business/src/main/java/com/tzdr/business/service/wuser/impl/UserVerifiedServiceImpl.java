@@ -25,7 +25,7 @@ public class UserVerifiedServiceImpl extends BaseServiceImpl<UserVerified, UserV
      implements UserVerifiedService {
 
 	@Override
-	public UserVerified queryUserVerifiedByUi(String uid) {
+	public UserVerified queryUserVerifiedByUid(String uid) {
 		Map<String,Object> equals = new HashMap<String,Object>();
 		equals.put("wuser.id", uid);
 		List<UserVerified> userVerifieds = this.getEntityDao().queryBySimple(equals, null,null);

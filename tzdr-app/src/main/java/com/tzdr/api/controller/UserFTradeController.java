@@ -140,6 +140,7 @@ public class UserFTradeController {
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,null,dataMap);
 	}
+	
 	/**
 	 * 获取交易明细
 	 * @return
@@ -150,13 +151,16 @@ public class UserFTradeController {
 		ApiResult apiResult = new ApiResult();
 		try {
 			apiResult.setSuccess(true);
+			apiResult.setCode(ResultStatusConstant.SUCCESS);
 			List<TradeDetail> details = tradeDetailService.doGetByFtseId(id);
 			apiResult.setData(details);
 		} catch (Exception e) {
 			apiResult.setSuccess(false);
+			apiResult.setCode(ResultStatusConstant.FAIL);
 		}
 		return apiResult;
 	}
+	
 	/**
 	* @Title: details    
 	* @Description: 追加保证金
@@ -232,7 +236,7 @@ public class UserFTradeController {
 			return new ApiResult(false,ResultStatusConstant.EndtradeConstant.ID_NOT_NULL,"The id cannot be empty");
 		}
 		
-		FSimpleFtseUserTrade fSimpleFtseUserTrade = fTradeService.get(id);
+		FSimpleFtseUserTrade fSimpleFtseUserTrade = fTradeService.get(id); //根据id查询期货方案
 		
 		if(fSimpleFtseUserTrade == null || !uid.equals(fSimpleFtseUserTrade.getUid())){
 			return new ApiResult(false,ResultStatusConstant.EndtradeConstant.UN_FIND_FRADE_DATA,"The ftrade data was not found");
@@ -258,7 +262,7 @@ public class UserFTradeController {
 		
 		if(StringUtil.isNotBlank(cId) && businessType != null){   //判断是否使用折扣劵
 			discount = fSimpleCouponService.get(cId);
-			if(discount == null){  //为找到折扣劵信息
+			if(discount == null){  //未找到折扣劵信息
 				return new ApiResult(false,ResultStatusConstant.EndtradeConstant.UN_FIND_COUPON_DATA,"The Coupon data was not found");
 			}
 			if(!fSimpleCouponService.isCouponValid(discount,DataConstant.COUPON_TYPE_3, businessType)) {  //判断该折扣劵是否可以使用
@@ -295,7 +299,11 @@ public class UserFTradeController {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		//获取用户信息
 		String uid = AuthUtils.getCacheUser(request).getUid();  
-		WUser wuser = wUserService.get(uid);		
+		WUser wuser = wUserService.get(uid);	
+		if(ObjectUtil.equals(null, wuser)){
+		   return new ApiResult(false,ResultStatusConstant.Apply.USER_INFO_NOT_EXIST,"user.info.not.error.");
+		}
+		
 		//应付金额
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO);
 		//A50 \ 国际期货 \ 原油  \ 小恒指
@@ -306,11 +314,11 @@ public class UserFTradeController {
 			int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
 			FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(cfgBusinessType,String.valueOf(tranLever));  //获取配置方案信息
 			if (ObjectUtil.equals(null, fSimpleConfig)){
-				return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
+				return new ApiResult(false,ResultStatusConstant.Apply.NOT_FSIMPLE_CONFIG,"没有获取到配置方案信息");	
 			}
 			// 传入的保证金是否与系统匹配
 			if (DataConstant.ZERO != traderBond.compareTo(fSimpleConfig.getTraderBond())){
-				return new ApiResult(false,ResultStatusConstant.FAIL,"traderBond.is.error.params.");	
+				return new ApiResult(false,ResultStatusConstant.Apply.TRADER_BOND_ERROR,"traderBond.is.error.params.");	
 			}
 			
 			// 如果是恒指获取配置的固定手续费
@@ -322,16 +330,16 @@ public class UserFTradeController {
 			 }*/
 			//管理费
 			BigDecimal manageFee = ObjectUtil.equals(null,fSimpleConfig.getFeeManage())?new BigDecimal(DataConstant.ZERO):fSimpleConfig.getFeeManage();
-			//应付金额
+			//应付金额：保证金+管理费
 			payable =  traderBond.add(manageFee);
 			dataMap.put("confirmInfo", new FTradeApplyVo(fSimpleConfig, payable, wuser.getAvlBal()));
 		}
 		
 		// 国际综合
-		if (BusinessTypeEnum.MULTIPLE.getValue()==businessType){
+		if (BusinessTypeEnum.MULTIPLE.getValue() == businessType){
 			List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);
 			if (CollectionUtils.isEmpty(outDiskParametersList)){
-				return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
+				return new ApiResult(false,ResultStatusConstant.Apply.NOT_FSIMPLE_CONFIG,"根据传入的配置金没有找到配置方案");	
 			}
 			//应付金额
 			payable =  traderBond;
@@ -345,6 +353,17 @@ public class UserFTradeController {
 	}
 	
 	
+	/**
+	 *  支付确认接口
+	 * @param businessType
+	 * @param traderBond
+	 * @param tranLever
+	 * @param vid
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/handle")
 	@ResponseBody
 	public synchronized ApiResult handle(int businessType,BigDecimal traderBond, Integer tranLever,String vid,
@@ -454,10 +473,10 @@ public class UserFTradeController {
 	public synchronized ApiResult multipleHandle(int businessType,BigDecimal traderBond,String voucherId,
 			HttpServletRequest request) throws Exception{
 		
-		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();
-		List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);
+		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();  //国际综合价格
+		List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);  //国际综合参数
 		if(CollectionUtils.isEmpty(outDiskParametersList) || CollectionUtils.isEmpty(outDiskPrice)){
-			return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
+			return new ApiResult(false,ResultStatusConstant.HandleFTrade.NOT_FSIMPLE_CONFIG,"not.fund.config.params.");	
 		}
 		OutDiskParameters outDiskParameters= outDiskParametersList.get(DataConstant.ZERO);
 		//获取用户信息
@@ -465,13 +484,14 @@ public class UserFTradeController {
 		WUser wuser = wUserService.get(uid);		
 		//应付金额
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO).add(traderBond);
-
+        //用户余额
 		BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString());
 		// 验证代金券
 		FSimpleCoupon voucher = this.fSimpleCouponService.get(voucherId);
 		BigDecimal voucherActualMoney = null; // 代金券使用金额
 		if(this.fSimpleCouponService.isCouponValid(voucher,DataConstant.BUSINESSTYPE_APPLY_COUPONS, businessType)) {
 			voucherActualMoney = new BigDecimal(voucher.getMoney()+"");
+			//支付金额 = 保证金  - 优惠券
 			payable = payable.subtract(voucherActualMoney);
 			if(payable.compareTo(BigDecimal.ZERO) < 0) {
 				voucherActualMoney = voucherActualMoney.add(payable);
@@ -489,16 +509,16 @@ public class UserFTradeController {
 		// 插入方案数据
 		FSimpleFtseUserTrade fSimpleFtseUserTrade = new FSimpleFtseUserTrade();
 		fSimpleFtseUserTrade.setUid(uid);
-		fSimpleFtseUserTrade.setTraderTotal(outDiskParameters.getTraderTotal());
-		fSimpleFtseUserTrade.setTraderBond(traderBond);
-		fSimpleFtseUserTrade.setLineLoss(outDiskParameters.getLineLoss());
-		fSimpleFtseUserTrade.setFeeManage(new BigDecimal(DataConstant.ZERO));
-		fSimpleFtseUserTrade.setTranFees(outDiskPrice.get(0).getPrice());
+		fSimpleFtseUserTrade.setTraderTotal(outDiskParameters.getTraderTotal());//总操盘资金($)
+		fSimpleFtseUserTrade.setTraderBond(traderBond);  //总保证金额
+		fSimpleFtseUserTrade.setLineLoss(outDiskParameters.getLineLoss()); //亏损平仓线($)
+		fSimpleFtseUserTrade.setFeeManage(new BigDecimal(DataConstant.ZERO));  //管理费
+		fSimpleFtseUserTrade.setTranFees(outDiskPrice.get(0).getPrice());  //交易手续费
 		
-		fSimpleFtseUserTrade.setCrudeTranFees(outDiskPrice.get(1).getPrice());
-		fSimpleFtseUserTrade.setHsiTranFees(outDiskPrice.get(2).getPrice());
+		fSimpleFtseUserTrade.setCrudeTranFees(outDiskPrice.get(1).getPrice());  //国际原油交易手续费
+		fSimpleFtseUserTrade.setHsiTranFees(outDiskPrice.get(2).getPrice());  //恒生指数交易手续费
 		//设置来源
-		fSimpleFtseUserTrade.setSource(2);
+		fSimpleFtseUserTrade.setSource(2);  //平台来源   1：网站平台    2：APP平台
 		//设置新增品种价格
 		fSimpleFtseUserTrade.setMdTranFees(outDiskPrice.get(3).getPrice());
 		fSimpleFtseUserTrade.setMnTranFees(outDiskPrice.get(4).getPrice());
@@ -514,14 +534,14 @@ public class UserFTradeController {
 		fSimpleFtseUserTrade.setSmallCTranFees(outDiskPrice.get(14).getPrice());
 		fSimpleFtseUserTrade.setDaxMinTranFees(outDiskPrice.get(15).getPrice());
 		//审核中
-		fSimpleFtseUserTrade.setStateType(1);
+		fSimpleFtseUserTrade.setStateType(1); //状态【1.开户中、2.申请结算、3.待结算、4.操盘中  5.审核不通过 、6.已结算】
 		fSimpleFtseUserTrade.setBusinessType(businessType); 
-		fSimpleFtseUserTrade.setGoldenMoney(outDiskParameters.getGoldenMoney());
+		fSimpleFtseUserTrade.setGoldenMoney(outDiskParameters.getGoldenMoney());  //入金金额(美元)
 		// 设置代金券相关信息
 		if(this.fSimpleCouponService.isCouponValid(voucher,DataConstant.BUSINESSTYPE_APPLY_COUPONS, businessType)) {
 			fSimpleFtseUserTrade.setVoucherId(voucher.getId());
-			fSimpleFtseUserTrade.setVoucherMoney(voucher.getMoney());
-			fSimpleFtseUserTrade.setVoucherActualMoney(voucherActualMoney);
+			fSimpleFtseUserTrade.setVoucherMoney(voucher.getMoney());  //代金券面额
+			fSimpleFtseUserTrade.setVoucherActualMoney(voucherActualMoney);  //代金券使用金额
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, voucher, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);
 		} else {
 			this.fSimpleFtseUserTradeService.executePayable(fSimpleFtseUserTrade, wuser.getMobile(), payable,BusinessTypeEnum.getBussinessFundRemark(businessType),businessType);

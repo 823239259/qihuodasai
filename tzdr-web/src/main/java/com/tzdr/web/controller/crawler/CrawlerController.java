@@ -16,6 +16,10 @@ import com.tzdr.common.utils.Page;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
 
+/**
+ * 7*24小时 controller
+ *
+ */
 @Controller
 @RequestMapping(value = "/crawler")
 public class CrawlerController {
@@ -31,7 +35,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawler",method = RequestMethod.GET)
+	@RequestMapping(value = "/getCrawler",method = RequestMethod.POST)
 	public JsonResult getCrawler(CrawlerWallstreetnLive crawlerWallstreetnLive,HttpServletRequest request){
 		JsonResult result = new JsonResult(true);
 		try {
@@ -48,7 +52,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerByChannel",method = RequestMethod.GET)
+	@RequestMapping(value = "/getCrawlerByChannel",method = RequestMethod.POST)
 	public JsonResult getCrawlerByChannel(HttpServletRequest request,@RequestParam("channelset")String channelset){
 		JsonResult result = new JsonResult(true);
 		try {
@@ -65,7 +69,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerByChannelLiveContent",method = RequestMethod.GET)
+	@RequestMapping(value = "/getCrawlerByChannelLiveContent",method = RequestMethod.POST)
 	public JsonResult getCrawlerByChannelLiveContent(HttpServletRequest request,@RequestParam("channelset")String channelset){
 		JsonResult result = new JsonResult(true);
 		try {
@@ -81,7 +85,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerCalendar",method = RequestMethod.GET)
+	@RequestMapping(value = "/getCrawlerCalendar",method = RequestMethod.POST)
 	public JsonResult getCrawlerCalendar(HttpServletRequest request,@RequestParam("type")String type,@RequestParam("startTime")String startTime,@RequestParam("endTime")String endTime){
 		JsonResult result = new JsonResult();
 		result.setSuccess(true);
@@ -101,7 +105,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerCalendarByTime",method = RequestMethod.GET)
+	@RequestMapping(value = "/getCrawlerCalendarByTime",method = RequestMethod.POST)
 	public JsonResult getCrawlerCalendarByTime(HttpServletRequest request,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime){
 		JsonResult result = new JsonResult();
 		result.setSuccess(true);
@@ -119,7 +123,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerLiveContent",method = RequestMethod.GET)
+	@RequestMapping(value = "/getCrawlerLiveContent",method = RequestMethod.POST)
 	public JsonResult getCrawlerLiveContent(HttpServletRequest request,@RequestParam("liveId")String liveId){
 		JsonResult result = new JsonResult(true);
 		try {

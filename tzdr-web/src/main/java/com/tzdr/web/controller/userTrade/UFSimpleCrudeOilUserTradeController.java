@@ -343,14 +343,15 @@ public class UFSimpleCrudeOilUserTradeController {
 				//入金金额(美元)
 				BigDecimal goldenMoney = new BigDecimal("0").add(fSimpleConfig.getGoldenMoney());
 				st.setGoldenMoney(goldenMoney);
+				FSimpleFtseUserTrade fSimpleFtseUserTrade = null;
 				// 设置代金券相关信息
 				if(this.fSimpleCouponService.isCouponValid(voucher, 2, 6)) {
 					st.setVoucherId(voucher.getId());
 					st.setVoucherMoney(voucher.getMoney());
 					st.setVoucherActualMoney(voucherActualMoney);
-					this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,"投资国际原油期货申请（划款）。",MONEYDETAILTYPE);
+					fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,"投资国际原油期货申请（划款）。",MONEYDETAILTYPE);
 				} else {
-					this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable,"投资国际原油期货申请（划款）。",MONEYDETAILTYPE);
+					fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable,"投资国际原油期货申请（划款）。",MONEYDETAILTYPE);
 				}
 				request.getSession(false).removeAttribute("tokenTzdr");
 				//TODO 申请操盘，支付成功给工作人员发送Email
@@ -362,6 +363,9 @@ public class UFSimpleCrudeOilUserTradeController {
 					
 				} catch (Exception e) {
 					log.info("发送邮件失败",e);
+				}
+				if(fSimpleFtseUserTrade != null){
+					modelMap.addAttribute("stateType", fSimpleFtseUserTrade.getStateType());
 				}
 				return ViewConstants.FSimpleCrudeOilUserTradeJsp.CRUDE_OIL_PAY_SUCCESSFUL;
 			}

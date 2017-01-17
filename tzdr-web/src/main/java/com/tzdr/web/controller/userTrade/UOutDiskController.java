@@ -268,15 +268,16 @@ public class UOutDiskController {
 					st.setStateType(1);
 					st.setBusinessType(8);
 					st.setGoldenMoney(outDiskParameters.getGoldenMoney());
+					FSimpleFtseUserTrade fSimpleFtseUserTrade = null;
 					// 设置代金券相关信息
 					if (this.fSimpleCouponService.isCouponValid(voucher, 2, 8)) {
 						st.setVoucherId(voucher.getId());
 						st.setVoucherMoney(voucher.getMoney());
 						st.setVoucherActualMoney(voucherActualMoney);
-						this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,
+						fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,
 								"投资国际综合方案申请(划款)。", MONEYDETAILTYPE);
 					} else {
-						this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable,
+						fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable,
 								"投资国际综合方案申请(划款)。", MONEYDETAILTYPE);
 					}
 					request.getSession(false).removeAttribute("tokenTzdr");
@@ -289,6 +290,9 @@ public class UOutDiskController {
 
 					} catch (Exception e) {
 						log.info("发送邮件失败", e);
+					}
+					if(fSimpleFtseUserTrade != null){
+						modelMap.addAttribute("stateType", fSimpleFtseUserTrade.getStateType());
 					}
 					return ViewConstants.OutDiskJsp.PAY_SUCCESSFUL;
 				} else {

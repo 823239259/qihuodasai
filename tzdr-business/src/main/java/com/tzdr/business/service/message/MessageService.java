@@ -33,9 +33,9 @@ public interface MessageService extends BaseService<Message>{
 	* @Description: TODO(根据留言编号，删除留言信息,逻辑删除)
 	* @Title: deleteMessageById  
 	* @param id   留言编号
-	* @return void    返回类型
+	* @return boolean    返回类型
 	 */
-	public void deleteMessageById(String id);
+	public boolean deleteMessageById(String id);
 	
 	/**
 	 * 回复反馈

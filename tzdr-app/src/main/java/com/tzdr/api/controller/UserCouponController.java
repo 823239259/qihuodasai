@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
 import org.slf4j.Logger;
@@ -66,6 +67,10 @@ public class UserCouponController {
 	public ApiResult list(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 	
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		WUser user  = wUserService.get(uid);
+		if(ObjectUtil.equals(null, user)){
+			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.exist.");
+		}
 		
 		List<UserCouponVo> dataList = couponService.findUserCouponVos(uid);  //获取用户优惠劵列表信息
 		

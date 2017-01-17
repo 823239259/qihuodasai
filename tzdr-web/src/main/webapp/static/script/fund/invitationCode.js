@@ -1,3 +1,58 @@
+var adders = "http://test.api.vs.com/";
+//var adders = "http://www.api.vs.com/";
+$(function(){
+	/* 链接和二维码  */
+	var mobile = $("#mobile_vs").val();
+	$.post(adders+"wechat/threePartyCreateQrcode",{"mobile":mobile},function(data){
+	    if(data.success){
+	    	$("#ewm").html("<img alt='' src ='"+data.data.qrcodeUrl+"'/>");
+	    	$("#test").html(data.data.inviteUrl);
+	        if(data.data.isRealName == true){
+	        	$(".my_invitationCode .anniucopy").css("z-index","0");
+	        }else {
+	        	rz();
+	        }
+	    }
+	},"json");
+	copy();
+	function rz(){
+		$("#anniucopy").click(function(){
+			showMsgDialog("提示","还没有实名认证,<a href="+basepath+'securityInfo/secInfo'+">认证去</a>");
+			return;
+		})
+	}
+	function copy(){
+		$(".cancelCopy").zclip({
+			path: basepath+"static/swf/ZeroClipboard.swf",
+			copy: function(){
+				return $(this).parent().find("#test").html();
+			},
+			afterCopy:function(){/* 复制成功后的操作 */
+				var $copysuc = $("#xians").html("<span class='copy-tips'>复制成功</span>");
+	            $(".copy-tips").fadeOut(3000);
+	            $("#test").setSelectionRange(0,$("#test").html().length);
+	        	$("#test").focus();
+	        }/*,
+	        beforeCopy:function(){
+	        	
+            }*/
+		});
+	}
+	/* 活动统计 */
+	$.post(adders+"activity/oldAndNewInvitedStatistics",{"mobile":mobile},function(data){
+	    if(data.success){
+	    	if(data.data){
+	    		$(".registNum").html(data.data.ftradeNum);
+		    	$(".ftradeNum").html(data.data.registNum);
+		    	$(".awardSum").html(data.data.awardSum);
+	    	}else{
+	    		$(".registNum").html("0");
+		    	$(".ftradeNum").html("0");
+		    	$(".awardSum").html("0");
+	    	}
+	    }
+	},"json");
+});
 
 var items_per_page = 10;
 var page_index = 0;
@@ -9,12 +64,12 @@ $(document).ready(function(){
 	$('.navlist li a').removeClass('on');
 	$("#nav_my").addClass("on");
 	inittab();
-	getDataList(page_index,"","","","","","all");
-	getDataList(page_index,"1,2,3,4","","","payfundSearchresult","payfundPagination","pay");
-	getDataList(page_index,"11,12,10,15,16,17,18,25,26","","","loanSearchresult","loanPagination","loan");
-	
-	getDataList(page_index,"11,12,25,26","","","interestSearchresult","interestPagination","interest");
-	getDataList(page_index,"13","","","unionSearchresult","unionPagination","unioin");
+	getDataList(page_index,"","","","","","");
+//	getDataList(page_index,"1,2,3,4","","","payfundSearchresult","payfundPagination","pay");
+//	getDataList(page_index,"11,12,10,15,16,17,18,25,26","","","loanSearchresult","loanPagination","loan");
+//	
+//	getDataList(page_index,"11,12,25,26","","","interestSearchresult","interestPagination","interest");
+//	getDataList(page_index,"13","","","unionSearchresult","unionPagination","unioin");
 	
 	//点击左边菜单
 	$('.uc_sidebar').find("div.uc_nav ul a").each(function(){
@@ -23,55 +78,42 @@ $(document).ready(function(){
 	$("#invitationCode").parent().addClass('on');
 });
 
-
 //分页查询充值记录
 function getDataList(index,type,starttime,endtime,divid,pagediv,iphone,title){   
      pagediv=pagediv||'Pagination';
 	 divid=divid||'Searchresult';
 	    var pageIndex = index; 
-	  
+
+	    var http9 =	basepath+"fund/fundHistory";
+	    var mobile = $("#mobile_vs").val();
 	    $.ajax({   
 	        type: "POST",   
-	        url: basepath+"fund/fundHistory",   
-	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"iphone":iphone},   
+	        url: adders+"activity/getOldAndNewInvitedList", 
+	        //data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"iphone":iphone}, 
+	        data: {"pageIndex":pageIndex,'perPage':items_per_page,"type":type,"starttime":starttime,"endtime":endtime,"fourMobile":iphone,"mobile":mobile},
 	        dataType: 'json',   
 	        contentType: "application/x-www-form-urlencoded",   
-	        success: function(msg){  
-	        	
+	        success: function(msg){ 
 	            var total =msg.totalCount;   
+	            var data = msg.data;
+	            if(data == null){
+	            	return;
+	            }
+	            var dataPageResult = data.pageResults;
+	            if(dataPageResult == null){
+	            	return;
+	            }
 	            var html = '';   
-	            
-	            $.each(msg.pageResults,function(i,n){
-	            	var showid='"'+title+i+'"';
-	            	var outmoney="";
-	            	var inmoney="";
-	            	if(n.money<0){
-	            		outmoney=Math.abs(n.money)+"元";
-	            	}else{
-	            		inmoney=n.money+"元";
-	            	}
-	            	var detail=getdetail(n);
-	            	var statusvalue=n.typevale;
-	            	if(statusvalue==null)
-	            		statusvalue="";
+	            $.each(dataPageResult,function(i,n){
 	            	html +="<ol>";
-	            	html+="<li class='uc_fsl165'>"+getFormatDateByLong(n.addtime,'yyyy-MM-dd hh:mm:ss')+"</li>"; /*时间*/
-	            	html+="<li class='uc_fsl200'>"+13558767652+"</li>";											/*电话号码*/
-	            	html+="<li class='uc_fsl100'>"+"小白"+"</li>";												/*姓名*/
-	            	html+="<li class='uc_fsl100'>"+"佣金收入"+"</li>";											/*佣金类型*/
-	            	html+="<li class='uc_fsl100'>"+100+""+"元"+"</li>";											/*佣金金额*/
-	            	/*if(title=="all"){
-	            		html+="<li class='uc_fsl100'>"+$.formatMoney(n.amount,2)+"元</li>";
-	            	}*/
-	            	/*html+='<li class="uc_fsl100 uc_fslcon" id="fslcon'+title+i+'">'+
-					"<a href='javascript:void(0);' onclick='javascript:showdetail("+showid+")' class='uc_fsllink'>详情</a>"+
-					'</li>';*/
+	            	n.mobile=n.mobile.substring(0,3)+"****"+n.mobile.substring(7,11);
+					n.tname=n.tname.substring(0,1)+"**";
+	            	html+="<li class='uc_fsl165' style='width: 150px;'>"+n.mobile+"</li>";                                                 //手机号码
+	            	html+="<li class='uc_fsl200' style='width: 50px;'>"+n.tname+"</li>";											       //姓名
+	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.ctime,'yyyy-MM-dd hh:mm:ss')+"</li>";       //注册时间
+	            	html+="<li class='uc_fsl100' style='width: 200px;'>"+getFormatDateByLong(n.endTime,'yyyy-MM-dd hh:mm:ss')+"</li>";     //交易时间
+	            	html+="<li class='uc_fsl100' style='width: 100px;'>"+n.sumLever+""+"手"+"</li>";										   //交易手数
 	            	html +="</ol>";
-	            	/*html+='<div class="uc_fslpromt" id="detaildiv'+title+i+'"  style="display:none;">'+
-	                '<i class="uc_ucp_icon"></i>'+
-	                '<p class="uc_flspormtbox">详情：'+detail+'</p>'+
-	                "<a href='javascript:void(0);' onclick='javascript:closedetail("+showid+")' class='uc_fslclose'></a>"+
-	                '</div>';*/
 	            }); 
 	           
 	            $('#'+divid).html(html); 
@@ -124,8 +166,6 @@ function getdetail(obj){
 		}
 	}
 	
-	
-	
 	return detail;
 }
 
@@ -173,12 +213,12 @@ function findAllData(divid,pagediv){
 		}
 	}
 	
-	getTitleData(starttime,endtime,type,"incount","insummoney");
-	getDataList(page_index,type,starttime,endtime,divid,pagediv,iphone,"all");
+	//getTitleData(starttime,endtime,type,"incount","insummoney");
+	getDataList(page_index,type,starttime,endtime,divid,pagediv,iphone,"");
 }
 
 //查询收入
-function getTitleData(starttime,endtime,type,incount,insummoneydiv){
+/*function getTitleData(starttime,endtime,type,incount,insummoneydiv){
 	 $.post(basepath+"fund/getTitleData",{"starttime":starttime,"endtime":endtime,"type":type,"isAjax":"1"},function(data){  
 		if(data.success){
 			$("#"+incount).html(data.obj.count);
@@ -187,4 +227,4 @@ function getTitleData(starttime,endtime,type,incount,insummoneydiv){
 			$("#"+insummoneydiv).html(smoney);
 		}
 	},"json"); 
-}
+}*/

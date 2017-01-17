@@ -12,27 +12,29 @@
     <link rel="shortcut icon" href="../../static/ico/icon.png">
     <!-- 弹出层 -->
     <link href="../../static/css/quotation.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/css/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
     <link  href="../../static/script/layer/skin/layer.css"  rel="stylesheet" type="text/css">
     <script type='text/javascript' src="../../static/script/jquery-1.8.3.js"></script>
     <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
     <script type='text/javascript' src="../../static/script/common/discussStock.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote.trade.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quotation.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote.trade.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quotation.js?v=201701170"></script>
     <script type='text/javascript' src="../../static/script/layer/layer.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.send.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.connection.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/jquery.base64.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/util.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.config.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.send.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.send.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.connection.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/jquery.base64.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/util.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.config.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.send.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js?v=201701170"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js?v=201701170"></script>
     <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
     <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
+    <script type="text/javascript" src="../../static/script/jquery.datetimepicker.full.min.js"></script>
     <!-- 插件 -->
     <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/d3.min.js"></script>
     <script type="text/javascript" src="../../static/script/qutrade/react.min.js"></script> --%> -->
@@ -206,7 +208,7 @@
     </style>
     <style>
     /* 新弹出层 */
-		.popup {width: 500px; position: absolute; z-index: 9999; background: #fff; border-radius: 10px;}
+		.popup {width: 500px; position: fixed; z-index: 9999; background: #fff; border-radius: 10px;}
 		.popup .popup_top {height: 70px; line-height: 70px; text-align: center; position: relative; border-bottom: 1px solid #e6e6e6;}
 		.popup .popup_top a{font-size: 16px; color: #ffb319;}
 		.popup .popup_top a:hover{text-decoration: none; cursor:default;}
@@ -218,7 +220,7 @@
 		.popup .p1 {color: #666; font-size: 14px;line-height: 24px; margin-bottom: 20px; text-align: left; padding: 0 20px;}
 		.popup .popup_center ul li.li1 {width: 45px; color: #999; font-size: 14px;}
 		.popup .popup_center ul li select {background: #fcfcfc; color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; }
-		.popup .popup_center ul li input {background: #fcfcfc; color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
+		.popup .popup_center ul li input {color: #666; outline: none; border: 1px solid #e6e6e6; border-radius: 4px; height: 40px; line-height: 40px; width: 90px; padding-left: 10px; margin: 0 10px;}
 		.popup .popup_footer a {text-decoration: none; margin: 0 10px; font-size: 16px; height: 40px; line-height: 40px; width: 140px; display: inline-block; text-align: center;}
 	    .popup .popup_footer {text-align: center; padding: 20px 0;}
 		.popup .popup_footer .sure {color: #fff; background: #ffb319; border-radius: 4px;}
@@ -241,8 +243,8 @@
 <div  class="popup" id="stop_loss"  style="display: none;">
     <div class="popup_top">
         <ul>
-        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">修改止损单</li><span class="popup_i"></span>
-        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">修改止盈单</li>
+        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">设置止损单</li><span class="popup_i"></span>
+        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">设置止盈单</li>
         </ul>
         <a class="close">✖</a>
     </div>
@@ -263,30 +265,30 @@
                 <ul>
                 	<li class="li1" style="width: 85px;text-align: right;">止损价：</li>
                 	<li>
-                		<input type="text" name="stop_inputprice" id="stop_inputprice"/>，
-                		<input type="text" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>手数
+                		<input type="text" name="stop_inputprice" id="stop_inputprice"/>，手数
+                		<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>
                 	</li>
                 </ul>
-                <ul>
-                	<li>
-                		价差<span id = "stop_pricecha">0,</span>&nbsp;&nbsp;
+               <!--  <ul>
+                	<li id = "yj_tip_stop">
+                		价差<span id = "stop_pricecha">0,</span>，
                 		预计亏损<span id = "stop_yjks">0</span>
-                		<span class = "stop_dw">0</span>，
+                		<span class = "stop_dw">HKD</span>，
                 		百分比<span id = "stop_scale">0</span>%
                 	</li>
-                </ul>
-                <ul>
-                	<li class="li1" style="width: 85px; text-align: right;">
+                </ul> -->
+                <ul style="overflow: hidden; margin-top: 10px;">
+                	<li class="li1" style="width: 85px; text-align: right; height: 45px;">
                 		<input type="checkbox"  name="stop_checked" id="stop_checked" style="width: 15px; margin-top: 4px; margin-right: 5px;"/>	
                 	</li>
                 	<li style="margin-left: 10px;">
-                		动态追踪，价格回测幅度
-	                	<input type="text"  name="stop_diff" id="stop_diff"/>
-	                	<span class = "stop_dw"></span>
+                		动态追踪，价格回撤幅度
+	                	<input type="text"  name="stop_diff" id="stop_diff" style="margin-left: 36px;"/>
+	                	<span  style="white-space: nowrap; text-overflow: ellipsis; width: 50px; display: inline-block;"></span>
                 	</li>
                 </ul>
                 <ul>
-                	<li class="li1" style="width: 85px;text-align: right; margin-left: -85px;">止损委托价：</li>
+                	<li class="li1" style="width: 85px;text-align: right;">止损委托价：</li>
                 	<li>
                 		<select id = "stop_orderType" style="margin-left: 10px; width: 102px;">
 	                        <option value = "1">市价</option>
@@ -297,7 +299,7 @@
             </div>
             <div class="popup_footer">
             	<div class="p1">
-            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+            		<p>1、止损单在云端执行，软件关闭后仍然有效，云端自动确认结算单。</p>
 	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
 	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
             	</div>
@@ -318,33 +320,33 @@
     			<ul>
                 	<li class="li1" style="width: 85px;text-align: right;">止盈价：</li>
                 	<li>
-                		<input type="text" name="loss_inputprice" id="loss_inputprice"/>，
-                		<input type="text" name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>手数
+                		<input type="text" name="loss_inputprice" id="loss_inputprice"/>，手数
+                		<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>
                 	</li>
                 </ul>
-                <ul>
+                <!-- <ul>
                 	<li>
-                		<span id = "loss_chaPrice"></span>,
+                		价差<span id = "loss_chaPrice"></span>，
                 		预计盈利<span id = "loss_yjks">0</span>
                 		<span id = "stop_dw">HKD</span>，
                 		百分比<span id = "loss_scale">0</span>%
                 	</li>
-                </ul>
-                <ul>
+                </ul> -->
+                <ul style="margin-top: 10px;">
                 	<li class="li1" style="width: 85px;text-align: right;">止盈委托价：</li>
                 	<li>
                 		<select id = "loss_orderType" style="margin-left: 10px; width: 102px;">
 	                        <option value = "1">市价</option>
-                        	<option value = "2">限价</option>
+                        	<option value = "2">对手价</option>
                     	</select>
                 	</li>
                 </ul>
             </div>
             <div class="popup_footer">
             	<div class="p1">
-            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
-	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
-	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
+            		<p>1、止盈单在云端执行，软件关闭后仍然有效，云端自动确认结算单。</p>
+	                <p>2、止盈单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
+	                <p>3、止盈单存在风险，云端系统、网络故障情况下失效等。</p>
             	</div>
 		        <a class="sure" href="javascript:void(0)" id = "loss_confirm">确定</a>
 		        <a class="cancel close" href="javascript:void(0)">取消</a>
@@ -355,92 +357,132 @@
 <!--止损止盈 end-->
 <!--条件单start-->
 <!-- 价格条件单 -->
-<div class="popup" id="condition_loss_money"  style="display: none;">
+<!-- <div class="popup" id="condition_loss_money"  style="display: none;">
 	<div class="popup_top">
-        <a>修改价格条件单</a>
+	
+        <a>价格条件单</a>
         <a class="close">✖</a>
     </div>	
-    <div class="popup_center">
-        <div>
-        	<ul>
-        		<li class="li1">合约：</li>
-        		<li>富时A50  CN1612</li>
-        	</ul>
-        	<ul>
-        		<li class="li1">条件：</li>
-        		<li>
-        			<span>价格</span>
-        			<select style="width: 50px; margin-left: 18px;">
-					    <option>></option>
-					    <option><</option>
-					</select>
-					<input type="text" name="" id=""/>
-					<select style="width: 50px;">
-					    <option><</option>
-					    <option>></option>
-					</select>
-					<input type="text" name="" id=""/>
-        		</li>
-        	</ul>
-        	<ul style="margin-top: 16px;">
-        		<li class="li1">订单：</li>
-        		<li>
-        			<select style="width: 100px; ">
-					    <option>买入</option>
-					    <option>卖出</option>
-					</select>
-					<input type="text" name="" id=""/>手速
-					<input type="text" name="" id="" style=" margin-left: 38px;"/>
-				</li>
-        	</ul>
-        </div>
-    </div>
-    <div class="popup_footer">
-        <a class="sure" href="javascript:void(0)">确定</a>
-        <a class="cancel close" href="javascript:void(0)">取消</a>
-    </div>
-</div>
-<!-- 时间条件单 -->
-<div class="popup" id="condition_loss_time"  style="display: none;">
+    
+</div> -->
+<!-- 条件单 -->
+<div class="popup" id="condition_money_time"  style="display: none;">
 	<div class="popup_top">
-        <a>修改时间条件单</a>
+		<ul>
+        	<li class="condition_money_time_lis on" data-title-value = "0"  id = "condition_title_price" >价格条件单</li><span class="popup_i"></span>
+        	<li class="condition_money_time_lis" data-title-value = "1" id = "condtion_title_time">时间条件单</li>
+        </ul>
         <a class="close">✖</a>
     </div>	
-    <div class="popup_center">
-        <div>
-        	<ul>
-        		<li class="li1">合约：</li>
-        		<li>富时A50  CN1612</li>
-        	</ul>
-        	<ul>
-        		<li class="li1">条件：</li>
-        		<li>
-        			<span>时间</span>
-        			<span style="margin-left: 27px;">到达：</span>
-					<input type="text" name="" id=""/>
-					<select style="width: 50px;">
-					    <option><</option>
-					    <option>></option>
-					</select>
-					<input type="text" name="" id=""/>
-        		</li>
-        	</ul>
-        	<ul style="margin-top: 16px;">
-        		<li class="li1">订单：</li>
-        		<li>
-        			<select style="width: 100px; ">
-					    <option>买入</option>
-					    <option>卖出</option>
-					</select>
-					<input type="text" name="" id=""/>手速
-					<input type="text" name="" id="" style=" margin-left: 38px;"/>
-				</li>
-        	</ul>
-        </div>
-    </div>
-    <div class="popup_footer">
-        <a class="sure" href="javascript:void(0)">确定</a>
-        <a class="cancel close" href="javascript:void(0)">取消</a>
+    <div id="condition_time_money">
+    	<div class="condition_time_money_lis" id = "condition_content_price">
+    		<div class="popup_center">
+		        <div>
+		        	<ul>
+		        		<li class="li1">合约：</li>
+		        		<li><select id = "condition_price_contractCode"></select></li>
+		        		<li style = "margin-left: 5px;">最新价：</li>
+		        		<li><span id = "condition_price_lastPrice"></span></li>
+		        	</ul>
+		        	<ul style="margin-top: 16px;">
+		        		<li class="li1">条件：</li>
+		        		<li>
+		        			<span>价格</span>
+		        			<select style="width: 50px; margin-left: 18px;" id = "select_condition_option">
+							   <option value = "0">></option>
+							   <option value = "2">>=</option>
+							   <option value = "1"><</option>
+							   <option value = "3"><=</option>
+							</select>
+							<input type="text" name="condition_price_inputprice" id="condition_price_inputprice" style="margin-left: 6px; margin-right: 14px;"/>
+							附加：
+							<select style="width: 54px;" id = "select_condition_price_addoption">
+							    <option value = "-1">附加</option>
+		   						<option value = "0">></option>
+		   						<option value = "2">>=</option>
+		   						<option value = "1"><</option>
+		   						<option value = "3"><=</option>
+							</select>
+							<input type="text" name="condtion_price_addPrice" id="condtion_price_addPrice" style="margin-left: 6px; width: 62px; margin-right: 0px;"/>
+		        		</li>
+		        	</ul>
+		        	<ul style="margin-top: 16px;">
+		        		<li class="li1">操作：</li>
+		        		<li>
+		        			<select style="width: 100px; " id = "condition_price_drection">
+							    <option value = "0">买入</option>
+							    <option value = "1">卖出</option>
+							</select>
+							<select id = "condition_price_orderType" style="margin-left: 6px;">
+								<option value = "1">市价</option>
+								<option value = "2">对手价</option>
+							</select>
+							<span style="margin-left: 50px;">手数：<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  name="contract_price_num" id="contract_price_num" style=" margin-left: 5px;"/></span>
+						</li>
+		        	</ul>
+		        </div>
+		    </div>
+		    <div class="popup_footer">
+		    	<div class="p1">
+            		<p>1、条件单在云端运行，软件关闭后仍然有效，云端自动确认结算单。</p>
+	                <p>2、上期所合约，按照设置决定是否优先平今。</p>
+	                <p>3、条件单存在风险，云端系统、网络故障情况下失效等。</p>
+            	</div>
+		        <a class="sure" id = "sub_condition_price" href="javascript:void(0)">确定</a>
+		        <a class="cancel close" href="javascript:void(0)">取消</a>
+		    </div>
+    	</div>
+    	<div class="condition_time_money_lis" style="display: none;" id = "condition_content_time">
+    		<div class="popup_center">
+		        <div>
+		        	<ul>
+		        		<li class="li1">合约：</li>
+		        		<li><select id = "contion_time_contractCode"></select></li>
+		        		<li style = "margin-left: 5px;">最新价：</li>
+		        		<li><span id = "condition_time_lastPrice"></span></li>
+		        	</ul>
+		        	<ul style="margin-top: 16px;">
+		        		<li class="li1">条件：</li>
+		        		<li>
+		        			<span>时间</span>
+							<input type="text" name="condition_time_time" id="condition_time_time"/>
+							附加：
+							<select style="width: 54px;" id = "select_time_condition_option">
+							    <option value = "-1">附加</option>
+		   						<option value = "0">></option>
+		   						<option value = "2">>=</option>
+		   						<option value = "1"><</option>
+		   						<option value = "3"><=</option>
+							</select>
+							<input type="text" name="condtion_time_addP1.rice" id="condtion_time_addPrice"/>
+		        		</li>
+		        	</ul>
+		        	<ul style="margin-top: 16px;">
+		        		<li class="li1">操作：</li>
+		        		<li>
+		        			<select style="width: 100px; " id = "condition_drection_time">
+							    <option value = "0">买入</option>
+							    <option value = "1">卖出</option>
+							</select>
+							<select id = "condition_orderType_time" style="margin-left: 5px;">
+								<option value = "1">市价</option>
+								<option value = "2">对手价</option>
+							</select>
+							<span style="margin-left: 11px;">手数：<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  name="condition_time_inputnum" id="condition_time_inputnum" style=" margin-left: 6px;"/></span>
+						</li>
+		        	</ul>
+		        </div>
+		    </div>
+		    <div class="popup_footer">
+		    	<div class="p1">
+            		<p>1、条件单在云端运行，软件关闭后仍然有效，云端自动确认结算单。</p>
+	                <p>2、上期所合约，按照设置决定是否优先平今。</p>
+	                <p>3、条件单存在风险，云端系统、网络故障情况下失效等。</p>
+            	</div>
+		        <a class="sure" id = "sub_condition_time" href="javascript:void(0)">确定</a>
+		        <a class="cancel close" href="javascript:void(0)">取消</a>
+		    </div>
+    	</div>	
     </div>
 </div>
 <!--条件单end-->
@@ -548,14 +590,26 @@
     </p>
     <div class="signLogin_mode">
         <div class="signLogin_all signLogin_firm"  style="display: block;">
-            <p class="p2"><input type="text" name="firm_name" id="firm_name" placeholder="输入实盘账号"></p>
-            <p class="p2"><input type="password" name="firm_password" id="firm_password" placeholder="输入实盘密码"></p>
+            <p class="p2">
+            	<span class="error">输入实盘账号</span>
+            	<input type="text" name="firm_name" id="firm_name" placeholder="">
+            </p>
+            <p class="p2">
+            	<span class="error">输入实盘密码</span>
+            	<input type="password" name="firm_password" id="firm_password" placeholder="">
+            </p>
             <p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
             <p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="../../outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
         </div>
         <div class="signLogin_all signLogin_simulation">
-            <p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
-            <p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
+            <p class="p2">
+	            <span class="error">输入模拟账号</span>
+	            <input type="text" name="simulation_mame" id="simulation_mame" placeholder="">
+            </p>
+            <p class="p2">
+            	<span class="error">输入模拟密码</span>
+            	<input type="password" name="simulation_password" id="simulation_password" placeholder="">
+            </p>
             <p class="p3"><a href="http://www.vs.com/forgetpw"  target="_blank"  class="">忘记密码？</a></p>
             <p class="p4"><span class="on" id="simulation_btn">立即登录</span><!-- <span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span> --></p>
             <span style="font-size: 14px; color: #ffb319; position: relative; top: 5px;">模拟盘账密为您的维胜账密，如有问题请拨打400-852-8008；</span>
@@ -922,13 +976,13 @@
         </div>
         <div class="quotation_detailed">
             <div class="quotation_detailed_lis">
-                <a href="javascript:void(0);" class="on">持仓</a>|
-                <a href="javascript:void(0);">挂单</a>|
-                <a href="javascript:void(0);">委托</a>|
-                <a href="javascript:void(0);">成交记录</a>|
-                <a href="javascript:void(0);">资金明细</a><!-- |
-                <a href="javascript:void(0);">止损单</a>|
-                <a href="javascript:void(0);">条件单</a> -->
+                <a href="javascript:void(0);" data = "0" class="on">持仓</a>|
+                <a href="javascript:void(0);" data = "1">挂单</a>|
+                <a href="javascript:void(0);" data = "2">委托</a>|
+                <a href="javascript:void(0);" data = "3">成交记录</a>|
+                <a href="javascript:void(0);" data = "4">资金明细</a>|
+                <a href="javascript:void(0);" data = "5" style = "display:none" id = "stoploss_top_title">止损单</a><lable id = "stop_loss_conditon_x">|</lable>
+                <a href="javascript:void(0);" data = "6" style = "display:none" id = "condition_top_title">条件单</a>
             </div>
             <div class="quotation_detailed_conent" style="position: relative;">
                 <div class="quotation_detailed_title" id = "hold_title">
@@ -950,7 +1004,7 @@
                         <li><a href="javascript:void(0);"  id = "allPosition">全部平仓</a></li>
                         <li><a href="javascript:void(0);"  id = "aPosition">平仓</a></li>
                         <li><a href="javascript:void(0);"  id = "positionBckhand">反手</a></li>
-                        <li><a href="javascript:void(0);" style = "display: none;" id = "stopLossAndtraders">止损止盈</a></li>
+                        <li><a href="javascript:void(0);"  id = "stopLossAndtraders">止损止盈</a></li>
                     </ul>
                 </div>
                 <div class="quotation_detailed_title" style="display: none;" id = "des_title">
@@ -1002,9 +1056,9 @@
                                 <li style="width: 70px;">成交均价</li>
                                 <li style="width: 50px;">成交量</li>
                                 <!-- <li style="width: 70px;">币种</li> -->
-                                <li style="width: 250px;">成交编号</li>
-                                <li style="width: 80px;">订单号</li>
-                                <li style="width: 120px;">成交时间</li>
+                                <li style="width: 150px;">成交编号</li>
+                                <li style="width: 150px;">订单号</li>
+                                <li style="width: 150px;">成交时间</li>
                                 <li style="width: 40px;">交易所</li>
                             </ul>
                             <p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
@@ -1038,14 +1092,14 @@
                                 <li class="ml" style="width: 100px;">合约</li>
                                 <li style="width: 50px;">状态</li>
                                 <li style="width: 50px;">多空</li>
-                                <li style="width: 50px;">类别</li>
+                                <li style="width: 50px;">类型</li>
                                 <li style="width: 50px;">手数</li>
                                 <li style="width: 140px;">触发条件</li>
                                 <li style="width: 50px;">委托价</li>
                                 <li style="width: 100px;">有效期</li>
-                                <li style="width: 140px;">触发时间</li>
+                                <li style="width: 140px;">下单时间</li>
                             </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+                            <p class="account_NoRecord" id = "nostop_account_norecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                         </div>
                     </div>
                     <div class="gdt1" style="display: none;">
@@ -1054,21 +1108,21 @@
                                 <li class="ml" style="width: 100px;">合约</li>
                                 <li style="width: 50px;">状态</li>
                                 <li style="width: 50px;">多空</li>
-                                <li style="width: 50px;">类别</li>
+                                <li style="width: 50px;">类型</li>
                                 <li style="width: 50px;">手数</li>
                                 <li style="width: 140px;">触发条件</li>
                                 <li style="width: 50px;">委托价</li>
                                 <li style="width: 100px;">有效期</li>
                                 <li style="width: 140px;">触发时间</li>
                             </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+                            <p class="account_NoRecord" id = "yesstop_account_norecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                         </div>
                     </div>
                     <div id="loss_tab" style="">
-                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="" checked="checked">未触发列表</label>
-                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="">已触发列表</label>
+                        <label class="xdfs_sj"><input type="radio" value="0" name="mode_order_stoploss" id="stoploss_no_radio" checked = "checked">未触发列表</label>
+                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order_stoploss" id="stoploss_yes_radio">已触发列表</label>
                     </div>
-                    <ul class="caozuo" id="loss_caozuo" style="left: 243px;"><!--style = "display:none"-->
+                    <ul class="caozuo" id="loss_caozuo" style="left: 243px;display: none;">
                         <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "2" id = "loss_stop">暂停</a></li>
                         <li><a href="javascript:void(0);" data-tion-vale = "0" id = "loss_update">修改</a></li>
                         <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "1" id = "loss_delete">删除</a></li>
@@ -1076,113 +1130,42 @@
                 </div>
                 <div class="quotation_detailed_title" style="display: none;" id = "condition_title">
                 	<div class="gdt1">
-                        <div>
+                        <div id = "yes_condition_list">
                             <ul class="tab_lis">
-				                <li style="width: 100px" class="ml">合约</li>
+				                <li style="width: 80px" class="ml">合约</li>
 				                <li style="width: 50px">状态</li>
-				                <li style="width: 50px">类别</li>
+				                <li style="width: 100px">类型</li>
 				                <li style="width: 120px">下单</li>
-				                <li style="width: 220px">条件</li>
+				                <li style="width: 120px">条件</li>
 				                <li style="width: 60px">有效日期</li>
-				                <li style="width: 140px">触发时间</li>
+				                <li style="width: 130px">下单时间</li>
             				</ul>
-            				<ul class="tab_content">
-				                <li style="width: 100px" class="ml">富时A501</li>
-				                <li style="width: 50px;">运行</li>
-				                <li style="width: 50px;">价格</li>
-				                <li style="width: 120px;">买，对手价，2手</li>
-				                <li style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li style="width: 60px;">当日有效</li>
-				                <li style="width: 140px;">2016-12-08 13:59:23</li>
-            				</ul>
-            				<ul class="tab_content">
-				                <li style="width: 100px" class="ml" >富时A502</li>
-				                <li style="width: 50px;">运行</li>
-				                <li style="width: 50px;">价格</li>
-				                <li style="width: 120px;">买，对手价，2手</li>
-				                <li style="width: 220px;">时间条件单：11:34:12</li>
-				                <li style="width: 60px;">当日有效</li>
-				                <li style="width: 140px;">2016-12-08 13:59:23</li>
-            				</ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A503</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 50px;">价格</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 220px;">时间价格条件单：15:45:58 <1047.5 </li>
-				                <li class="" style="width: 60px;">当日有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				            </ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A504</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 50px;">价格</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 60px;">当日有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				            </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+                            <p class="account_NoRecord" id = "nocondition_account_norecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                         </div>
                     </div>
                     <div class="gdt1" style="display: none;">
-                    	<div id = "">
+                    	<div id = "no_condition_list">
                     		<ul class="tab_lis">
-				                <li style="width: 100px" class="ml">合约</li>
-				                <li style="width: 50px">类别</li>
-				                <li style="width: 220px">条件</li>
+				                <li style="width: 80px" class="ml">合约</li>
+				                <li style="width: 50px">状态</li>
+				                <li style="width: 100px">类型</li>
 				                <li style="width: 120px">下单</li>
-				                <li style="width: 100px">有效期</li>
-				                <li style="width: 140px">触发时间</li>
-				                <ii style="width: 50px">委托结果</ii>
+				                <li style="width: 120px">条件</li>
+				                <li style="width: 60px">有效日期</li>
+				                <li style="width: 130px">触发时间</li>
             				</ul>
-            				<ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-            				</ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-				            </ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-				            </ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-				            </ul>
-				            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+				            <p class="account_NoRecord" id = "yescondition_account_norecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
                     	</div>
                     </div>
                     <div id="condition_tab" class="tab_lis_title" style="">
-        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="" checked="checked">未触发列表</label>
-        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="">已触发列表</label>
+        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="condition_no_radio" checked="checked">未触发列表</label>
+        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="condition_yes_radio">已触发列表</label>
     				</div>
-				    <ul class="caozuo" id="condition_caozuo" style="left: 243px;">
-				        <li><a href="javascript:void(0);"  id = "condition_stop">暂停</a></li>
+				    <ul class="caozuo" id="condition_caozuo" style="left: 243px;display: none;">
+				        <li><a href="javascript:void(0);"  id = "condition_insert">新增</a></li>
+				        <li><a href="javascript:void(0);" data-operate-value = "2" class= "updateCondition" id = "condition_stop">暂停</a></li>
 				        <li><a href="javascript:void(0);"  id = "condition_update">修改</a></li>
-				        <li><a href="javascript:void(0);"  id = "condition_delete">删除</a></li>
+				        <li><a href="javascript:void(0);" data-operate-value = "1" class = "updateCondition" id = "condition_delete">删除</a></li>
 				    </ul>
                 </div>
             </div>
@@ -1257,36 +1240,34 @@
                 $("#condition_caozuo").css("display","block");
             }
         });
-        
-        $("#condition_update").click(function() {
-        	$("#div_Mask").show();
-        	/* 这里判断一下取的是时间还是条件 然后执行下面的时间或者价格JS */
-            /* 时间 */
-            $("#condition_loss_time").css("display","block");
-            var popupHeight = $("#condition_loss_time").outerHeight()/2;
-            var popupWidth = $("#condition_loss_time").outerWidth()/2;
-            $("#condition_loss_time").css({
-                top:"50%",
-                left:"50%",
-                marginTop: -(popupHeight+15),
-                marginLeft: -(popupWidth)
-            });
-            /* 价格 */
-            
-            /* $("#condition_loss_money").css("display","block");
-            var popupHeight = $("#condition_loss_time").outerHeight()/2;
-            var popupWidth = $("#condition_loss_time").outerWidth()/2;
-            $("#condition_loss_time").css({
+        /* 条件单 */
+        $("#condition_insert").click(function() {
+        	/* $("#div_Mask").show();
+            $("#condition_money_time").css("display","block");
+            var popupHeight = $("#condition_money_time").outerHeight()/2;
+            var popupWidth = $("#condition_money_time").outerWidth()/2;
+            $("#condition_money_time").css({
                 top:"50%",
                 left:"50%",
                 marginTop: -(popupHeight+15),
                 marginLeft: -(popupWidth)
             }); */
+        	initConditionData();
+        });
+         $("#condition_money_time .popup_top ul .condition_money_time_lis").click(function(){
+        	var _this = $(this).attr("data-title-value");
+			$("#condition_money_time .popup_top ul .condition_money_time_lis").removeClass("on").eq(_this).addClass("on");
+			$("#condition_time_money .condition_time_money_lis").hide().eq(_this).show();
         });
         
         $(".close").click(function(){
         	$(".popup").css("display","none");
             $("#div_Mask").hide();
+        });
+        $('#condition_time_time').datetimepicker({
+        	datepicker:false,
+        	format:'H:i:s',
+        	step:1
         });
     });
 </script>

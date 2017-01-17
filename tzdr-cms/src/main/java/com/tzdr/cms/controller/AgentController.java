@@ -166,7 +166,7 @@ public class AgentController extends BaseCmsController<WUser> {
 						vo.setChildNumber(childs.size());
 						
 						if (vo.getUname() == null || "".equals(vo.getUname())) {
-							UserVerified uv = userVerifiedService.queryUserVerifiedByUi(wu.getId());
+							UserVerified uv = userVerifiedService.queryUserVerifiedByUid(wu.getId());
 							if (uv != null) {
 								vo.setUname(uv.getTname());
 							}

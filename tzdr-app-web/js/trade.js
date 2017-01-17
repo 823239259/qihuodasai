@@ -3485,6 +3485,7 @@ function switchAccount(){
 function openLogin(){ 
 	loginOutFlag = true;
 	loginOutTip=true;
+	
 	mui.openWindow({
 		url:"../login/operateLogin.html",
 		id : "operateLogin",

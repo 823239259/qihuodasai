@@ -251,7 +251,7 @@ function analysisOrderPriceType(priceType){
 	}else if(priceType == 1){
 		priceTypeText = "市价";
 	}else if(priceType == 2){
-		priceTypeText = "止损";
+		priceTypeText = "对手价";
 	}
 	return priceTypeText;
 }

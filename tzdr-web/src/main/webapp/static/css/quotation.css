@@ -1,3 +1,4 @@
+@charset "utf-8";
 .quotation_title {height: 60px; line-height: 60px; background: #333; border-bottom: 1px solid #1a1a1a;}
 .quotation_title img {margin-top: 10px; margin-left: 10px;}
 .quotation_title .quotation_anniu {float: right; position: relative;}
@@ -6,11 +7,11 @@
 .quotation_title .quotation_anniu label a:hover {text-decoration: underline; cursor: pointer;}
 .quotation_title .quotation_anniu label {background: #333; margin-right: 10px; color: #ccc;}
 .quotation_title .backPassword {color: #ffb319; margin-right: 10px;}
-/* ��¼����˺�  */ 
+/* 登录更多账号  */ 
 #more_account {position: absolute; width:130px; background: #ffffff; z-index: 9; top: 43px; border-radius: 4px;}
 #more_account p {height: 26px; line-height: 26px; border-radius: 4px; padding-left: 11px;}
 #more_account p:hover {background: #ccc; cursor: pointer;}
-/* ������ */
+/* 滚动条 */
 #gdt{height: 687px;}
 .zUIpanelScrollBox,.zUIpanelScrollBar{width:10px; top:4px; right:2px; border-radius:5px; }
 .zUIpanelScrollBox{background:black;opacity:0.1;filter:alpha(opacity=10);}
@@ -20,10 +21,10 @@
 .clear:after{content:"";display:block;clear:both;}
 
 .gdt1, .gdt2, .gdt3, .gdt4, .gdt5 {height: 120px; overflow: hidden;}
-/* ������ */
+/* 滚动条 */
 .quotation_center {width: 100%; height: 737px; background: #666;}
 #left {float: left; width: 205px; height: 737px;}
-#content {position: relative; margin-left: 205px;height: 737px;/*==������������==*/ border-left: 5px solid #1a1a1a;}
+#content {position: relative; margin-left: 205px;height: 737px;/*==等于左边栏宽度==*/ border-left: 5px solid #1a1a1a;}
 #content .stretch, #content .stretch1 {position: absolute; z-index: 9; top: 430px; left: -5px;}
 #content .stretch:hover ,#content .stretch1:hover {cursor: pointer;}
 .quotation_center .center_futures {height: 48px; line-height: 48px; border-top: 1px solid #4d4d4d; border-bottom: 1px solid #1a1a1a; background: #333;}
@@ -64,7 +65,7 @@
 #right .right_tab ul .right_tab1_center {width: 200px; color: #ccc; text-align: center;}
 #right .right_tab ul .right_tab1_right {color: #999; width: 38px; text-align: right; margin-right: 10px;}
 #footer {background: #333; text-align: center;width: 100%; font-size: 14px; color: #666; border-top: 1px solid #1a1a1a; height: 37px; line-height: 37px;}
-/* ��С�� 1366 */
+/* 最小屏 1366 */
 @media screen and (max-width: 1366px) {
     .quotation_title {width: 1366px;}
     .quotation_center {width: 1366px;}
@@ -77,7 +78,7 @@
     }
     .chart-component .gcrow {width: 841px;}
 }
-/* �������� */
+/* 买入卖出 */
 #content .quotation_transaction .quotation_type .quotation_p {width: 280px; height: 36px; line-height: 35px; margin: 0 auto;}
 #content .quotation_transaction .quotation_type .quotation_p label {float: left; font-size: 14px; color: #999;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr {float: left; margin-left: 23px;}
@@ -103,7 +104,7 @@
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr ul li {height: 25px; line-height: 25px;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .mairu:hover {cursor: pointer; background: #e65639;}
 #content .quotation_transaction .quotation_type .quotation_p .quotation_type_fr .maichu:hover {cursor: pointer; background: #29a629;}
-/* �ֲ� */
+/* 持仓 */
 .quotation_detailed ul li {float: left;}
 .quotation_detailed .quotation_detailed_lis a {padding: 0 20px; color: #999; text-decoration: none;}
 .quotation_detailed .quotation_detailed_lis a:hover {color: #ffb319; cursor: pointer;}
@@ -142,7 +143,7 @@
 #qiehuan ul li:hover {color: #ffb319; cursor: pointer;}
 #change input {outline: none; border: 1px solid #4d4d4d; border-radius: 4px; padding: 5px 10px 5px 10px; width: 195px; color: #666; margin-top: 10px; margin-left: 10px;}
 
-/* ������� */
+/* 插件行情 */
 .dropdown,.dropup{position:relative}
 .dropdown-menu{position:absolute;z-index:1000;display:none;}
 .dropdown-menu>li>a{display:block;white-space:nowrap}
@@ -160,44 +161,52 @@
 .open>.dropdown-menu li a {color: #999; text-decoration: none;}
 .open>.dropdown-menu li.dropdown-header {display: none;}
 
-/* ������  */
+/* 弹出层  */
 .tck01 {width: 360px; position: fixed;}
 .tck01 .smain {padding: 15px 0px 15px 10px;}
-.tck01 .navtitle .close {margin-right: 10px;}
+.tck01 .navtitle .close {position: absolute;right: 20px; top: 18px;}
 .tck01 .anniu a {margin-left: 0; width: 140px; height: 40px; line-height: 40px; display: inline-block; text-align: center; text-decoration: none; cursor: pointer;}
 .tck01 .anniu .sure {background: #ffb319; color: #333; font-size: 16px; border-radius: 4px; margin-left: 12px;}
 .tck01 .anniu .sure:hover {background: #ff9f19;}
 .tck01 .anniu .cancel {background: #ccc; color: #333; font-size: 16px; border-radius: 4px; margin-left: 55px;}
 .tck01 .anniu .cancel:hover {background: #b3b3b3;}
 .smain > div {padding: 10px 18px; line-height: 22px; line-height: 22px\9; }
+.tck01 .navtitle .nava {display: inline-block; text-align: center; width: 100%; height: 0; padding: 0;}
 
-/* ��¼������ */
-#signLogin {width: 360px; height: 430px; background: #fff; z-index: 1000; position: fixed; border-radius: 4px;}
-#signLogin .signLogin_mode .signLogin_all {display: none; padding: 30px;}
-#signLogin .p1 {border-bottom: 1px solid #e6e6e6; height: 60px; line-height: 60px; padding: 0 15px;}
+/* 登录弹出层 */
+#signLogin {width: 360px; height: 430px; background: #fff; z-index: 1000; position: fixed; border-radius: 10px;}
+#signLogin .signLogin_mode .signLogin_all {display: none; padding: 0 30px;}
+#signLogin .p1 {border-bottom: 1px solid #e6e6e6; height: 70px; line-height: 70px; padding: 0 15px;}
 #signLogin .p1 span {margin: 0 15px; color: #333; font-size: 16px; padding: 5px 0;}
 #signLogin .p1 span.on {color: #ffb319;}
 #signLogin .p1 span:hover {color: #ffb319; cursor: pointer;}
 #signLogin .p1 i {font-size: 14px; position: relative; top: -1px; color: #e6e6e6; left: -118px;}
 #signLogin .p1 a {color: #ccc; float: right;}
 #signLogin .signLogin_mode .signLogin_all input {outline: none; border-bottom: 1px solid #e6e6e6; width: 100%; padding: 10px 0;}
-#signLogin .signLogin_mode .signLogin_all .p2 {padding: 20px 0;}
-#signLogin .signLogin_mode .signLogin_all .p3 {font-size: 16px; color: #999; margin: 10px 0;}
+/* #signLogin .signLogin_mode .signLogin_all .p2 {padding: 20px 0;} */
+#signLogin .signLogin_mode .signLogin_all .p2 {padding-top: 20px;}
+#signLogin .signLogin_mode .signLogin_all .error {font-size: 14px; color: #999;}
+#signLogin .signLogin_mode .signLogin_all .p3 {font-size: 14px; color: #999; margin: 10px 0;}
 #signLogin .signLogin_mode .signLogin_all .p3 a {color: #ffb319;}
 #signLogin .signLogin_mode .signLogin_all .p4 span {margin: 10px 0; border-radius: 4px; height: 40px; line-height: 40px; display: inline-block; width: 100%; text-align: center;}
-#signLogin .signLogin_mode .signLogin_all .p4 span.on {background: #ffb319;}
-#signLogin .signLogin_mode .signLogin_all .p4 a.no {background: #e6e6e6; height: 40px; line-height: 40px; display: inline-block; width: 100%; color: #333;}
+#signLogin .signLogin_mode .signLogin_all .p4 span.on {background: #ffb319; color: #fff;}
+#signLogin .signLogin_mode .signLogin_all .p4 a.no {border: 1px solid #ffb319; height: 38px; line-height: 38px; display: inline-block; border-radius: 4px; width: 298px; color: #ffb319;}
 #signLogin .signLogin_mode .signLogin_all .p4 span.on:hover {background: #ff9f19; cursor: pointer;}
-#signLogin .signLogin_mode .signLogin_all .p4 a.no:hover {background: #d9d9d9; text-decoration: none; cursor: pointer;}
+#signLogin .signLogin_mode .signLogin_all .p4 a.no:hover {text-decoration: none; cursor: pointer; border: 1px solid #ff9f19;}
 
-/* �̿ڵ����� */
-#handicapDetails {width: 600px;}
-#handicapDetails .hkDetails {display: inline-block; border-top: 1px solid #e7e7e7; border-left: 1px solid #e7e7e7;}
-#handicapDetails .hkDetails ul {width: 218px; float :left; border-right: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7; height: 40px; line-height: 40px; padding: 0 40px;}
+/* 盘口弹出层 */
+#handicapDetails {width: 500px;}
+#handicapDetails .hkDetails ul {width: 149px; float: left; height: 40px; line-height: 40px; padding-right: 50px; padding-left: 20px; border-bottom: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6; border-right: 1px solid #e6e6e6; margin-left: -1px; margin-bottom: -1px;}
 #handicapDetails .hkDetails ul li {float :left;}
 #handicapDetails .hkDetails ul li.fr {float :right;}
 #handicapDetails .smain > div {padding: 0;}
-#handicapDetails .smain {padding: 0; margin-top: 20px;}
+#handicapDetails .smain .hkDetails {display: inline-block; border-top: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7; padding: 0 30px;}
+#handicapDetails .smain {padding: 0;}
 #handicap,#lightButton{margin: 0px 10px;}
 #handicap:hover {cursor: pointer; color: #ffb319;}
 #lightButton:hover {cursor: pointer; color: #ffb319;}
+#handicapDetails .navtitle {height: 70px; line-height: 70px; border: none;}
+
+
+
+

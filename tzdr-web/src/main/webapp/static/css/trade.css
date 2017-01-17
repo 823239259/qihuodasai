@@ -516,7 +516,10 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
 	line-height: 30px;
 	color: #666;
 	font-size: 16px;
-
+}
+.cp_suc p a { 
+	color: #fc3;
+	font-size: 16px;
 }
 .cp_suc span.red { color: #f00;}
 .cp_suc span a { color: #34b3e0; padding:0 5px;}
@@ -784,4 +787,8 @@ ul,li,ol,i,em,p { list-style: none; font-style: normal;}
 #weixinbank .weixin_bind:hover{background: #fe3; border: 1px solid #fe3; cursor: pointer;}
 #weixinbank .weixin_update {text-align: center; background: #fc3; border: 1px solid #fc3; border-radius: 3px; padding: 0 10px; margin-left: 10px;}
 #weixinbank .weixin_update:hover{background: #fe3; border: 1px solid #fe3; cursor: pointer;}
+
+.cp_jja {padding-left: 310px; font-size: 16px; color: #666; margin-top: 10px;}
+
+
 

@@ -107,6 +107,11 @@
 			
 		});
 		document.getElementById("recharge-btn").addEventListener("tap",function(){
+			var text=$("#alipay_account").text();
+			if(text=="待绑定"){
+				mui.toast("请绑定支付宝");
+				return
+			}
 			plus.runtime.openURL("https://qr.alipay.com/aex03954yodc0tgk3uog8d7");
 			
 		});

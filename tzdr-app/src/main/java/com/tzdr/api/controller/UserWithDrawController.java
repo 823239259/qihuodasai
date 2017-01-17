@@ -156,28 +156,25 @@ public class UserWithDrawController {
 		return new ApiResult(true, ResultStatusConstant.SUCCESS, "query.success.", jsonArray);
 	}
 	/**
-	 * 计算体现手续费
+	 * 计算提现手续费
 	 * @param request
 	 * @param money
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/drawFee",method = RequestMethod.POST)
-	public JsonResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
-		JsonResult resultJson = new JsonResult(false);
+	public ApiResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		Double fee = drawMoneyService.drawFee(uid, money);
-		String message = "";
+		Map<String, Double> dataMap = new HashMap<String, Double>();
 		if(fee == null){
-			message = "用户错误";
+			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.USER_INFO_NOT_EXIST,"用户信息不存在");
 		}else if(fee < 0){
-			message = "账户余额不足";
+			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.NOT_SUFFICIENT_FUNDS,"余额不足");
 		}else{
-			resultJson.setSuccess(true);
-			message = String.valueOf(fee);
+			dataMap.put("fee", fee);
+			return new ApiResult(true,ResultStatusConstant.SUCCESS,"success……",dataMap);
 		}
-		resultJson.setMessage(message);
-		return resultJson;
 	} 
 	/**
 	 * 获取当前系统支持提现的银行列表
@@ -201,7 +198,7 @@ public class UserWithDrawController {
 		int withdrawSetting = dataMapService.getWithDrawSetting();
 		if (Constant.PaymentChannel.BB_PAY != withdrawSetting && Constant.PaymentChannel.UM_PAY != withdrawSetting
 				&& Constant.PaymentChannel.EASE_PAY != withdrawSetting) {
-			return new ApiResult(false, ResultStatusConstant.FAIL, "system.withdraw.setting.error.");
+			return new ApiResult(false, ResultStatusConstant.BankList.WITHDRAW_SETTING, "system.withdraw.setting.error.");
 		}
 
 		List<PaymentSupportBankVo> paymentSupportBankVos = paymentSupportBankService
@@ -232,13 +229,15 @@ public class UserWithDrawController {
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		String card = bankRequest.getCard();
 		String bank = bankRequest.getBank();
-		String prov = request.getParameter("prov");// 省
-		String city = request.getParameter("city");// 市
-		String address = request.getParameter("address");// 具体地址
+		String prov = bankRequest.getProv();//省
+		String city = bankRequest.getCity();// 市
+		String address = bankRequest.getAddress();// 具体地址
+		
 		String provinceCity = StringUtil.join(prov, city);
+		
 		if (StringUtil.isBlank(card) || StringUtil.isBlank(uid) || StringUtil.isBlank(bank)) {
 			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");
-		}
+		}		
 
 		WUser user = this.drawMoneyService.getUser(uid);
 		if (ObjectUtil.equals(null, user)) {
@@ -276,11 +275,13 @@ public class UserWithDrawController {
 	public ApiResult delBank(BankRequest bankRequest, HttpServletResponse response, HttpServletRequest request) {
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		String bankid = bankRequest.getBankId();
-		if (StringUtil.isBlank(bankid) || StringUtil.isBlank(uid)) {
-			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");
+		
+		if(StringUtil.isBlank(uid) || StringUtil.isBlank(bankid)){
+			return new ApiResult(false, ResultStatusConstant.AUTH_PARAMS_ERROR, "params.error.p");
 		}
-
+		
 		ApiUserVo appUserVo = apiUserService.findByUid(uid);
+		
 		if (ObjectUtil.equals(null, appUserVo)) {
 			return new ApiResult(false, ResultStatusConstant.DelBank.USER_INFO_NOT_EXIST, "user.info.not.exist.");
 		}
@@ -301,7 +302,7 @@ public class UserWithDrawController {
 	}
 
 	/**
-	 * 删除已绑定的银行卡
+	 * 设置默认银行卡
 	 * 
 	 * @param bankRequest
 	 * @param response
@@ -310,10 +311,10 @@ public class UserWithDrawController {
 	 */
 	@RequestMapping(value = "/set_default_bank", method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResult delBank(String bankId, HttpServletResponse response, HttpServletRequest request) {
+	public ApiResult setDefaultBank(String bankId, HttpServletResponse response, HttpServletRequest request) {
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		if (StringUtil.isBlank(bankId) || StringUtil.isBlank(uid)) {
-			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");
+			return new ApiResult(false, ResultStatusConstant.AUTH_PARAMS_ERROR, "params.error.");
 		}
 
 		UserBank userBank = apiBankService.findByIdAndUserId(bankId, uid);
@@ -375,6 +376,7 @@ public class UserWithDrawController {
 		String abbreviation = withDrawRequest.getBank();
 		String withdrawPwd = withDrawRequest.getWithdrawPwd();
 		Double money = withDrawRequest.getMoney();
+		
 		if (ObjectUtil.equals(null, money) || StringUtil.isBlank(abbreviation) || StringUtil.isBlank(card)
 				|| StringUtil.isBlank(withdrawPwd) || StringUtil.isBlank(uid)) {
 			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");
@@ -392,6 +394,7 @@ public class UserWithDrawController {
 				&& Constant.PaymentChannel.EASE_PAY != withdrawSetting) {
 			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");
 		}
+		
 		if (Constant.PaymentChannel.BB_PAY == withdrawSetting
 				&& DataConstant.PAYMENT_SUPPORT != paymentSupportBank.getSupportBbdraw()) {
 			return new ApiResult(false, ResultStatusConstant.WithDrawHandle.NOT_SUPPORT_THE_BANK,
@@ -478,7 +481,7 @@ public class UserWithDrawController {
 			return new ApiResult(false, ResultStatusConstant.WithDrawHandle.WITHDRAW_PASSWORD_ERROR,
 					"withdraw.password.error.");
 		}
-
+		
 		// 开始提现插入数据
 		String ip = IpUtils.getIpAddr(request);
 		String orderId = drawMoneyService.getRandomStr(DataConstant.WITHDRAW_ORDERID_LENGTH);
@@ -514,59 +517,7 @@ public class UserWithDrawController {
 			}
 			// 联动优势
 			if (Constant.PaymentChannel.UM_PAY == withdrawSetting) {
-				// 开始调用接口
-				WithdrawPayExtendInfo extendInfo = new WithdrawPayExtendInfo();
-				// 提现手续费
-				String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
-				Double handleFee = 0.00;
-				// 提现金额
-				Double dmoney = Double.valueOf(money);
-				WithdrawPayInfo withdrawPayInfo = null;
-
-				if (!StringUtil.isBlank(handleFeeStr)) {
-					handleFee = Double.valueOf(handleFeeStr);
-				}
-
-				if (BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
-					// 扣除手续费
-					dmoney = BigDecimalUtils.subRound(dmoney, handleFee);
-					withdrawPayInfo = this.setWithdrawInfo(user, dmoney, orderId, card, user.getUserVerified());
-				} else {
-					withdrawPayInfo = this.setWithdrawInfo(user, dmoney, orderId, card, user.getUserVerified());
-				}
-				UserVerified uvf = user.getUserVerified();
-				extendInfo.setCheckFlag(DataConstant.WITHDRAW_EXTENDINFO_CHECK_FLAG);
-				extendInfo.setIdentityCode(uvf.getIdcard());
-				WithdrawPay draw = WithdrawPay.getInstance();
-				JSONObject jsonResult = null;
-				try {
-					logger.info("APP接口-开始调用取款接口,金额:" + dmoney + ", orderId:" + orderId + ", 账号:" + user.getMobile());
-					jsonResult = draw.getWithdrawResponse(withdrawPayInfo, extendInfo);
-					logger.info("结束调用取款接口.");
-				} catch (Exception e) {
-					logger.error("APP接口-调用取款接口失败" + e.getMessage());
-					String dataDetail = "APP接口:userInfo:id:" + user.getId() + "|mobile:" + user.getMobile() + "orderId:"
-							+ orderId + "|ip:" + ip + "|异常：" + e.getMessage();
-					EmailExceptionHandler.getInstance().HandleExceptionWithData(e, "API接口--调用取款接口失败",
-							this.getClass().getName() + ":moreSuccess", dataDetail);
-				}
-
-				if (ObjectUtil.equals(null, jsonResult)) {
-					return new ApiResult(false, ResultStatusConstant.FAIL,
-							"withdraw.fail;transfer.withdraw.interface.fail.");
-				}
-
-				String code = jsonResult.getString("retCode");
-				if (!StringUtil.equals(DataConstant.WITHDRAW_SUCCESS, code)) {
-					return new ApiResult(false, ResultStatusConstant.FAIL,
-							"withdraw.fail;transfer.withdraw.interface.fail.");
-				}
-
-				// 发送短信
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("account", user.getMobile());
-				map.put("money", String.valueOf(money));
-				new SMSPgbSenderThread(user.getMobile(), "draw.money.template", map).start();
+				umDrawMoney(money,user,card,orderId,ip);
 			}
 		}
 		try {
@@ -574,6 +525,73 @@ public class UserWithDrawController {
 		} catch (Exception e) {
            logger.info("申请提现发送邮件给工作人员失败！");
 		}
+		return new ApiResult(true, ResultStatusConstant.SUCCESS, "withdraw.success.");
+	}
+	
+	/**
+	 * 联动优势提现
+	 * @param money
+	 * @param user
+	 * @param card
+	 * @param orderId
+	 * @param ip
+	 * @return
+	 */
+	private ApiResult umDrawMoney(Double money, WUser user,String card,String orderId,String ip){
+		// 开始调用接口
+		WithdrawPayExtendInfo extendInfo = new WithdrawPayExtendInfo();
+		// 提现手续费
+		String handleFeeStr = CacheManager.getDataMapByKey(DataDicKeyConstants.WITHDRAW_HANDLE_FEE, "5000");
+		Double handleFee = 0.00;
+		// 提现金额
+		Double dmoney = Double.valueOf(money);
+		WithdrawPayInfo withdrawPayInfo = null;
+
+		if (!StringUtil.isBlank(handleFeeStr)) {
+			handleFee = Double.valueOf(handleFeeStr);
+		}
+
+		if (BigDecimalUtils.compareTo(dmoney, 5000) < 0) {
+			// 扣除手续费
+			dmoney = BigDecimalUtils.subRound(dmoney, handleFee);
+			withdrawPayInfo = this.setWithdrawInfo(user, dmoney, orderId, card, user.getUserVerified());
+		} else {
+			withdrawPayInfo = this.setWithdrawInfo(user, dmoney, orderId, card, user.getUserVerified());
+		}
+		UserVerified uvf = user.getUserVerified();
+		extendInfo.setCheckFlag(DataConstant.WITHDRAW_EXTENDINFO_CHECK_FLAG);
+		extendInfo.setIdentityCode(uvf.getIdcard());
+		WithdrawPay draw = WithdrawPay.getInstance();
+		JSONObject jsonResult = null;
+		try {
+			logger.info("APP接口-开始调用取款接口,金额:" + dmoney + ", orderId:" + orderId + ", 账号:" + user.getMobile());
+			jsonResult = draw.getWithdrawResponse(withdrawPayInfo, extendInfo);
+			logger.info("结束调用取款接口.");
+		} catch (Exception e) {
+			logger.error("APP接口-调用取款接口失败" + e.getMessage());
+			String dataDetail = "APP接口:userInfo:id:" + user.getId() + "|mobile:" + user.getMobile() + "orderId:"
+					+ orderId + "|ip:" + ip + "|异常：" + e.getMessage();
+			EmailExceptionHandler.getInstance().HandleExceptionWithData(e, "API接口--调用取款接口失败",
+					this.getClass().getName() + ":moreSuccess", dataDetail);
+		}
+
+		if (ObjectUtil.equals(null, jsonResult)) {
+			return new ApiResult(false, ResultStatusConstant.FAIL,
+					"withdraw.fail;transfer.withdraw.interface.fail.");
+		}
+
+		String code = jsonResult.getString("retCode");
+		if (!StringUtil.equals(DataConstant.WITHDRAW_SUCCESS, code)) {
+			return new ApiResult(false, ResultStatusConstant.FAIL,
+					"withdraw.fail;transfer.withdraw.interface.fail.");
+		}
+
+		// 发送短信
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account", user.getMobile());
+		map.put("money", String.valueOf(money));
+		new SMSPgbSenderThread(user.getMobile(), "draw.money.template", map).start();
+		
 		return new ApiResult(true, ResultStatusConstant.SUCCESS, "withdraw.success.");
 	}
 

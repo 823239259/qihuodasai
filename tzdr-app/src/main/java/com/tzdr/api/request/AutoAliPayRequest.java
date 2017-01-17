@@ -13,7 +13,7 @@ import jodd.util.StringUtil;
  * @zhouchen
  * 2016年1月20日
  */
-public class AutoAliPayRequest {
+public class AutoAliPayRequest{
 
 	/**
 	 * 流水号 
@@ -107,6 +107,12 @@ public class AutoAliPayRequest {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "AutoAliPayRequest [serialNo=" + serialNo + ", tradeTime=" + tradeTime + ", money=" + money
+				+ ", account=" + account + ", realName=" + realName + ", source=" + source + "]";
 	}
 
 	public int getSource() {

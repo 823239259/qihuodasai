@@ -348,15 +348,17 @@ public class UFSimpleHSIUserTradeController {
 				BigDecimal goldenMoney = new BigDecimal("0").add(fSimpleConfig.getGoldenMoney());
 				st.setGoldenMoney(goldenMoney);
 				// 设置代金券相关信息
+				FSimpleFtseUserTrade fSimpleFtseUserTrade = null; 
 				if (this.fSimpleCouponService.isCouponValid(voucher, 2, 7)) {
 					st.setVoucherId(voucher.getId());
 					st.setVoucherMoney(voucher.getMoney());
 					st.setVoucherActualMoney(voucherActualMoney);
-					this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,
+					fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, voucher, wuser.getMobile(), payable,
 							"投资香港恒生指数期货申请（划款）。", MONEYDETAILTYPE);
 				} else {
-					this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable, "投资香港恒生指数期货申请（划款）。",
+					fSimpleFtseUserTrade = this.fSimpleFtseUserTradeService.executePayable(st, wuser.getMobile(), payable, "投资香港恒生指数期货申请（划款）。",
 							MONEYDETAILTYPE);
+					
 				}
 				request.getSession(false).removeAttribute("tokenTzdr");
 				// TODO 申请操盘，支付成功给工作人员发送Email
@@ -368,6 +370,9 @@ public class UFSimpleHSIUserTradeController {
 
 				} catch (Exception e) {
 					log.info("发送邮件失败", e);
+				}
+				if(fSimpleFtseUserTrade != null){
+					modelMap.addAttribute("stateType", fSimpleFtseUserTrade.getStateType());
 				}
 				return ViewConstants.FSimpleHSIUserTradeJsp.HSI_PAY_SUCCESSFUL;
 			} else {

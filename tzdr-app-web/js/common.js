@@ -618,7 +618,6 @@ function initBottom(data){
 					}
 					mui.openWindow({url:data.home,id:"home"});
 				});
-			
 				document.getElementById("quotationMain").addEventListener("tap",function(){
 					var p=plus.webview.getWebviewById("quotationMain");
 					if(p){

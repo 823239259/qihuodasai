@@ -46,7 +46,7 @@ public class NewsVo implements Serializable{
 	private String issueDate;
 	
 	public NewsVo() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public NewsVo(OperationalConfig config) {

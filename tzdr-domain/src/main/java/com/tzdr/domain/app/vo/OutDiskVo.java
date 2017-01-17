@@ -20,7 +20,8 @@ public class OutDiskVo implements Serializable{
 	private static final long serialVersionUID = -4693834438577977997L;
 
 	/**
-	 * 交易品种 如：0:富时A50；6:国际原油;7:恒指期货;9:迷你道指;10:迷你纳指;11:迷你标普;12:德国DAX;13:日经225
+	 * 交易品种 如：0:富时A50；6:国际原油;7:恒指期货;9:迷你道指;10:迷你纳指;11:迷你标普;12:德国DAX;13:日经225;14:小恒指
+     * 15:美黄金;16:H股指数;17:小H股指数;18:美铜;19:美白银;20:小原油;21:迷你德国DAX指数;
 	 */
 	@SqlColumn(name="trade_type")
 	private Integer tradeType;
@@ -38,7 +39,7 @@ public class OutDiskVo implements Serializable{
 	private BigDecimal price;
 	
 	/**
-	 * 交易时间
+	 * 交易时间段
 	 */
 	@SqlColumn(name="trad_time")
 	private String tradTime;
