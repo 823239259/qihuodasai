@@ -1,5 +1,5 @@
 //var adders = "http://test.api.vs.com/";
-var adders = "http://www.api.vs.com/";
+var adders = "http://api.vs.com/";
 $(function(){
 	/* 链接和二维码  */
 	var mobile = $("#mobile_vs").val();
