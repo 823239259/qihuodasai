@@ -24,8 +24,9 @@
 		}
 		return positionValue;
     }
-	
-
+	$(".carbon_time").bind("click",function(){
+		alert($(this).index())
+	})
 
 //$(function() {
 //  

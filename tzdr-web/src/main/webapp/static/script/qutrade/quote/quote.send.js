@@ -112,5 +112,15 @@ var Quote = {
 		 */
 		doQryFirstHistory:function(exchangeNo,commodityNo,contractNo){
 			Quote.doSendMessage(QuoteUrl.QryHistoryUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+		},
+		/**
+		 * 按类型查询历史数据
+		 * @param exchangeNo
+		 * @param commodityNo
+		 * @param contractNo
+		 */
+		doQryHistoryALL:function(exchangeNo,commodityNo,contractNo,hisQuoteType){
+			console.log("111")
+			Quote.doSendMessage(QuoteUrl.QryHistoryUrl,'{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+'}');
 		}
 }

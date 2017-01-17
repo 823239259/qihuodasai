@@ -195,6 +195,26 @@
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
        	var leng=timePrice.length;
+//     	if(jsonData.Parameters.HisQuoteType==1440){
+//	    	for(var i=0;i<Len;i++){
+//			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+//				var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+//	            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+//	            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
+//		         rawData[lent+i] = sgData; 
+//	   		};
+//	    }else{
+//	    	for(var i=0;i<Len;i++){
+//			var time2=parameters[i][DateTimeStampSubscript].split(" ");
+//	        	var str1=time2[1].split(":");
+//	        	var str2=str1[0]+":"+str1[1]
+//				var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+//	            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+//	            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
+//		         rawData[lent+i] = sgData; 
+//	   		};
+//	   		
+//	    }
         for(var i=0;i<Len;i++){ 
         	var time2=Parameters[i][DateTimeStampSubscript].split(" ");
         	var str1=time2[1].split(":");

@@ -1,4 +1,41 @@
     //开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+    var rawData=[];
+    var chartDataC;
+        function processingData(jsonData){
+    		var dosizeL=$("#doSize").val();
+    		var parameters = jsonData.Parameters.Data;
+    		var Len=parameters.length;
+    		if(jsonData == null)return;
+    	    var lent=rawData.length;
+    	    if(jsonData.Parameters.HisQuoteType==1440){
+    	    	for(var i=0;i<Len;i++){
+        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
+			         rawData[lent+i] = sgData; 
+	       		};
+    	    }else{
+    	    	for(var i=0;i<Len;i++){
+        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
+		        	var str1=time2[1].split(":");
+		        	var str2=str1[0]+":"+str1[1]
+        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
+		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
+		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
+			         rawData[lent+i] = sgData; 
+	       		};
+	       		
+    	    }
+    	     chartDataC=splitData(rawData.slice(-40));
+		   var option=setOption(chartDataC,x);
+		   timeChart.setOption(option);
+	  		timeChart.resize();
+	  		CandlestickVolumeChart.resize();	
+		  	timeChart.group="group1";
+		  	
+    }
+    
 	    function splitData(data0) {
 	        var categoryData = [];
 	        var values = [];
@@ -263,3 +300,33 @@
 	      };
         return option
     }
+    
+	function processingCandlestickVolumeData(data){
+		var parameters = data.Parameters.Data;
+		var Len=parameters.length;
+		if(parameters == null)return;
+	    var lent=CandlestickVolumeData.time.length;
+		if(data.Parameters.HisQuoteType==1440){
+        	for(var i=0;i<Len;i++){
+        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
+        			CandlestickVolumeData.time[lent+i]=timeStr;
+        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
+       		};
+   		 }else{
+   		 	for(var i=0;i<Len;i++){
+        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
+		        	var str1=time2[1].split(":");
+		        	var str2=str1[0]+":"+str1[1]
+        			CandlestickVolumeData.time[lent+i]=str2;
+        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
+       		};
+   		 }
+   		 	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+       		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
+    		CandlestickVolumeChart.group="group2";
+	  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
+	  		CandlestickVolumeChart.resize();	
+	  		CandlestickVolumeChart.setOption(option1);
+	  		CandlestickVolumeChart.resize();	
+		  	
+    };

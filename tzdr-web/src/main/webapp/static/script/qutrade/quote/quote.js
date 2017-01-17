@@ -22,6 +22,10 @@ var localCacheSelect = null;
  * 处理行情数据
  * @param evt
  */
+/**
+ * 第一次获取数据数组的下表
+ * */
+var firstTimeLength=1
 function quoteHandleData(evt){
 	var data = evt.data;
 	var jsonData = JSON.parse(data);
@@ -30,10 +34,17 @@ function quoteHandleData(evt){
 		Quote.doAllQryCommodity();
 	}else if(method == "OnRspQryCommodity"){
 		generateRealTimeQuote(jsonData);
+		sendHistory(1);
 	}else if(method = "OnRtnQuote"){
 		quotePush(jsonData);
 	}else if(method=="OnRspQryHistory"){
+		console.log(jsonData);
+		if(firstTimeLength==1){
+				getSubscript(historyParam.Parameters.ColumNames);
+				firstTimeLength=2;
+			}
 		
+		handleTimeChartData(jsonData);
 	}
 }
 /**
@@ -850,3 +861,31 @@ function clearRightData(){
 	$("#right_buy_8").text(0.00);
 	$("#right_buy_9").text(0.00);
 }
+ function getSubscript(data){
+	for(var i=0;i<=data.length-1;i++){
+		if(data[i]=="DateTimeStamp"){
+			DateTimeStampSubscript=i;
+		}else if(data[i]=="LastPrice"){
+			LastPriceSubscript=i;
+		}else if(data[i]=="OpenPrice"){
+			OpenPriceSubscript=i;
+		}else if(data[i]=="LowPrice"){
+			LowPriceSubscript=i
+		}else if(data[i]=="HighPrice"){
+			HighPriceSubscript=i
+		}else if(data[i]=="Volume"){
+			VolumeSubscript=i;
+		}
+	}
+}
+ /**
+  * 发送查询的历史数据的方法
+  * */
+ 	function sendHistory(hisQuoteType){
+ 		var exchangeNo = $("#exchangeNo").val();
+        var commodityNo = $("#commodeityNo").val();
+        var contractNo = $("#contractNo").val();
+        console.log(exchangeNo,commodityNo,contractNo,hisQuoteType)
+//       Quote.doQryHistoryALL('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+'}');
+        Quote.doQryHistoryALL(exchangeNo,commodityNo,contractNo,hisQuoteType)
+ 	}

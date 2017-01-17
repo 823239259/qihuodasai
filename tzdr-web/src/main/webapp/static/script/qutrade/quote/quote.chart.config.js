@@ -8,6 +8,13 @@ var requireEchart=require.config({
 });
 var timeChart=null;
 var volumeChart=null;
+var Candlestick=null;
+var DateTimeStampSubscript;
+var LastPriceSubscript;
+var OpenPriceSubscript;
+var LowPriceSubscript;
+var HighPriceSubscript;
+var VolumeSubscript;
 function loadK(){
     require(
             [
