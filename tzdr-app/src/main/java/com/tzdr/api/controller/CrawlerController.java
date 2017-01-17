@@ -47,7 +47,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawler",method = RequestMethod.POST)
+	@RequestMapping(value = "/getCrawler",method = {RequestMethod.POST,RequestMethod.GET})
 	public ApiResult getCrawler(HttpServletRequest request){
 		
 		Map<String,List<CrawlerWallstreetnLive>> result = new HashMap<String,List<CrawlerWallstreetnLive>>();
@@ -65,7 +65,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerByChannel",method = RequestMethod.POST)
+	@RequestMapping(value = "/getCrawlerByChannel",method = {RequestMethod.POST,RequestMethod.GET})
 	public ApiResult getCrawlerByChannel(HttpServletRequest request,@RequestParam(value = "channelset",required = false)String channelset){
 		if(StringUtil.isBlank(channelset)){
 			return new ApiResult(false,ResultStatusConstant.AUTH_PARAMS_ERROR," no passing parame channelset ");
@@ -85,7 +85,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerByChannelLiveContent",method = RequestMethod.POST)
+	@RequestMapping(value = "/getCrawlerByChannelLiveContent",method = {RequestMethod.POST,RequestMethod.GET})
 	public ApiResult getCrawlerByChannelLiveContent(HttpServletRequest request,@RequestParam(value = "channelset",required = false)String channelset){
 		if(StringUtil.isBlank(channelset)){
 			return new ApiResult(false,ResultStatusConstant.AUTH_PARAMS_ERROR," no passing parame channelset ");
@@ -103,7 +103,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerCalendar",method = RequestMethod.POST)
+	@RequestMapping(value = "/getCrawlerCalendar",method = {RequestMethod.POST,RequestMethod.GET})
 	public ApiResult getCrawlerCalendar(HttpServletRequest request,@RequestParam("type")String type,@RequestParam("startTime")String startTime,@RequestParam("endTime")String endTime){
 
 		Map<String,List<CrawlerCalendar>> result = new HashMap<String,List<CrawlerCalendar>>() ;
@@ -119,7 +119,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerCalendarByTime",method = RequestMethod.POST)
+	@RequestMapping(value = "/getCrawlerCalendarByTime",method = {RequestMethod.POST,RequestMethod.GET})
 	public ApiResult getCrawlerCalendarByTime(HttpServletRequest request,@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime){
 		
 		Map<String,List<CrawlerCalendar>> result = new HashMap<String,List<CrawlerCalendar>>() ;
@@ -132,7 +132,7 @@ public class CrawlerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCrawlerLiveContent",method = RequestMethod.POST)
+	@RequestMapping(value = "/getCrawlerLiveContent",method = {RequestMethod.POST,RequestMethod.GET})
 	public ApiResult getCrawlerLiveContent(HttpServletRequest request,@RequestParam("liveId")String liveId){
 		Map<String,List<CrawlerWallstreetnLiveContent>> result = new HashMap<String,List<CrawlerWallstreetnLiveContent>>();
 		result.put("crawlers",crawlerWallstreetnLiveContentService.doGetCrawlerLiveContent(liveId));
