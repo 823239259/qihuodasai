@@ -35,12 +35,12 @@ function quoteHandleData(evt){
 	}else if(method == "OnRspQryCommodity"){
 		generateRealTimeQuote(jsonData);
 		sendHistory(0);
-	}else if(method = "OnRtnQuote"){
+	}else if(method == "OnRtnQuote"){
 		quotePush(jsonData);
 	}else if(method == "OnRspQryHistory"){
 		console.log(jsonData);
 		if(firstTimeLength==1){
-				getSubscript(historyParam.Parameters.ColumNames);
+				getSubscript(jsonData.Parameters.ColumNames);
 				firstTimeLength=2;
 			}
 		handleTimeChartData(jsonData);
@@ -886,5 +886,5 @@ function clearRightData(){
         var contractNo = $("#contractNo").val();
         console.log(exchangeNo,commodityNo,contractNo,HisQuoteType);
 //       Quote.doQryHistoryALL('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+'}');
-        Quote.doQryHistoryALL(exchangeNo,commodityNo,contractNo,HisQuoteType)
+        Quote.doQryHistory(exchangeNo,commodityNo,contractNo,HisQuoteType,"","",0);
  	}
