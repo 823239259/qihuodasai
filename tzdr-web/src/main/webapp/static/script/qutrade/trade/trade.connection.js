@@ -40,6 +40,10 @@ var tradeIntervalId = null;
  */
 var socketUrl = null;
 /**
+ * 超时处理重连处理ID
+ */
+var timeoutReconnID = null;
+/**
  * 设置登录状态
  * @param flag
  */
@@ -105,6 +109,7 @@ function loginCache(account,password){
  * @param password
  */
 function tradeLogin(){
+	
 	if(username != null && password != null){
 		initTradeConnect();
 		var loginInterval = setInterval(function(){
@@ -147,6 +152,8 @@ function initLoad() {
 		changeConnectionStatus();
 	}
 	socket.onmessage = function(evt) {
+		window.clearTimeout(timeoutReconnID); // 规定时间内接收到消息则取消刷新
+		console.log('onmessage【' + evt.data + '】readyState【' + (socket==null?'null':socket.readyState) + '】');
 		handleData(evt);
 	}
 	socket.onclose = function() {
@@ -165,6 +172,9 @@ function initLoad() {
 				loginOut();
 			}
 		}
+	}
+	socket.onerror = function(evt) {
+		 console.log('Error occured: ' + evt.data + 'readyState【' + (socket==null?'null':socket.readyState) + '】'); 
 	}
 }
 
