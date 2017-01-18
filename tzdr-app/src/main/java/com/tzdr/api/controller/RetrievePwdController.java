@@ -92,9 +92,6 @@ public class RetrievePwdController {
 	@RequestMapping(value = "/reset_validation/code")
 	public ApiResult resetValidationCode(HttpServletRequest request,@RequestParam("mobile")String mobile,@RequestParam("code") String code){
 
-		if(StringUtil.isBlank(mobile) || StringUtil.isBlank(code)){
-			return new ApiResult(false,ResultStatusConstant.NO_SOURCE,"params.error.");
-		}
 		WUser wUser = wUserService.getWUserByMobile(mobile);
 		if (ObjectUtil.equals(null,wUser)){
 			return new ApiResult(false,ResultStatusConstant.ForgetPwd.USER_INFO_NOT_EXIST,"user.info.not.exist.");
