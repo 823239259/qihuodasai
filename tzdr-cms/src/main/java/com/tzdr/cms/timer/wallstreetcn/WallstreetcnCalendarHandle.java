@@ -57,7 +57,7 @@ public class WallstreetcnCalendarHandle extends BaseWallstreetcnHandle{
 		String stringJson = param;
 		JSONArray array = JSONObject.parseObject(stringJson).getJSONArray("results");
 		List<CrawlerCalendar> calendars = setCrawlerCalendarList(array);
-		logger.info("获取数据{}",calendars.size());
+		/*logger.info("获取数据{}",calendars.size());*/
 		getCrawlerCalendarService().doSaveCrawlerCalendarList(calendars);
 		if(calendars.size() > 0){
 			JSONObject object = array.getJSONObject(0);
