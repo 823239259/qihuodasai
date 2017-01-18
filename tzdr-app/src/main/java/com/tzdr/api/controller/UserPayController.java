@@ -128,9 +128,8 @@ public class UserPayController {
 		Map<String,Object> dataMap = new HashMap<String,Object>(); 
 		dataMap.put("alipayAcount", alipayAcount);
 		
-		return new ApiResult(true, ResultStatusConstant.SUCCESS,"success……",dataMap);
+		return new ApiResult(true, ResultStatusConstant.SUCCESS,null,dataMap);
 	}
-	
 	
 	/**
 	* @Title: bindAlipay    
@@ -163,8 +162,6 @@ public class UserPayController {
 		
 		return new ApiResult(true, ResultStatusConstant.SUCCESS,"Successful binding");
 	}
-	
-	 
 	/**
 	 * 验证用户是否绑定微信号
 	 * @return
@@ -174,17 +171,15 @@ public class UserPayController {
 	public ApiResult checkedWxAccount(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(uid);
-		
+		ApiResult resultJson = new ApiResult(false);
 		if(userVerified != null){
 			String wxAccount = userVerified.getWxAccount();
 			if(wxAccount != null && wxAccount.length() > 0){
-				Map<String, String> data = new HashMap<String,String>();
-				data.put("wxAccount", wxAccount);
-				return new ApiResult(true,ResultStatusConstant.SUCCESS,"Have binding WeChat ID",data);
+				resultJson.setSuccess(true);
+				resultJson.setMessage(wxAccount);
 			}
 		}
-		return new ApiResult(false,ResultStatusConstant.FAIL,"There is no binding WeChat ID");
-
+		return resultJson;
 	}
 	/**
 	 * 绑定微信账号
@@ -196,23 +191,22 @@ public class UserPayController {
 	public ApiResult wxBindAccount(HttpServletRequest request,@RequestParam("account")String account){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
-		if(StringUtil.isBlank(account)){
-			return new ApiResult(false,ResultStatusConstant.Wx.PARAM_NULL,"Parameter is null");
+		ApiResult resultJson = new ApiResult(false);
+		if (StringUtil.isNotBlank(account)) {
+			UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
+			if (ObjectUtil.equals(null, userVerified)) {
+				UserVerified uv = userVerifiedService.queryUserVerifiedByUid(user.getId());
+				// 绑定微信账号
+				uv.setWxAccount(account);
+				userVerifiedService.update(uv);
+				resultJson.setSuccess(true);
+			} else {
+				resultJson.setMessage("微信账号已存在");
+			}
+		} else {
+			resultJson.setMessage("微信账号不能为空");
 		}
-		
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
-		
-		if (!ObjectUtil.equals(null, userVerified)) {
-			return new ApiResult(false,ResultStatusConstant.Wx.HAVE_BIND_WX,"Have binding WeChat……");
-		}
-			
-		
-		UserVerified uv = userVerifiedService.queryUserVerifiedByUid(user.getId());
-	    // 绑定微信账号
-		uv.setWxAccount(account);
-		userVerifiedService.update(uv);
-			
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Binding success");
+		return resultJson;
 	}
 	/**
 	 * 银行转账接口
@@ -222,6 +216,7 @@ public class UserPayController {
 	@RequestMapping(value = "/bank_transfer",method=RequestMethod.POST)
 	@ResponseBody
 	public  synchronized ApiResult bankTransfer(BankTransferRequest bankTransferRequest,HttpServletRequest request){
+	
 		if (bankTransferRequest.isInvalid()){
 			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
 		}
@@ -231,7 +226,7 @@ public class UserPayController {
 			return new ApiResult(false,ResultStatusConstant.BankTransfer.MONEY_CANNOT_LESS_THAN_ONE,"money.cannot.less.than.one.");
 		}
 		
-		String uid =  AuthUtils.getCacheUser(request).getUid();  //获取用户信息  通过缓存获取
+		String uid =  AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser wUser = apiUserService.get(uid);
 		if (ObjectUtil.equals(null, wUser)){
 			return new ApiResult(false,ResultStatusConstant.BankTransfer.USER_INFO_NOT_EXIST,"user.info.not.exist.");
@@ -298,16 +293,11 @@ public class UserPayController {
 	@ResponseBody
 	public ApiResult goPay(HttpServletRequest request,@RequestParam("goPaymoney") Double goPaymoney, @RequestParam("gopayWay") String gopayWay){
 		String uid = AuthUtils.getCacheUser(request).getUid();
-		WUser user = payService.getUser(uid);
-		if(ObjectUtil.equals(null, user)){
-			return new ApiResult(false,ResultStatusConstant.PayConstant.USER_INFO_NOT_EXIST,"user.info.not.exist.");
-	
-		}
 		if(goPaymoney == null){  //判断充值金额不能为空
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_NOT_NULL,"The money cannot be empty");
 		}
 		
-		if(goPaymoney < 1 || goPaymoney > 5000000 ){  //判断金额范围
+		if(goPaymoney < 1){  //判断金额范围
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"The money must be greater than or equal to 1 less than or equal to 5000000");
 		}
 		
@@ -315,9 +305,9 @@ public class UserPayController {
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"Top-up amount can only keep 2 decimal places");
 		}
 		String money = String.valueOf(goPaymoney);
+		WUser user = payService.getUser(uid);
 		String ip=IpUtils.getIpAddr(request);	 //获取客户端IP
-		
-		String orderNo = ChargeExample.randomNo();//生成交易订单hao
+		String orderNo = ChargeExample.randomNo();
 		Channel payWayChannl = null;
 		if (gopayWay == null) {
 			payWayChannl = Channel.ALIPAY_PC_DIRECT;
@@ -330,9 +320,9 @@ public class UserPayController {
 		int status = DataConstant.PAY_NO_PROCESSING;
 		String paytype = DataConstant.NET_BANK;  //表示网银充值
 		int source = Constant.Source.TZDR;  //表示维胜
-		
+		String message = null;
+		boolean flag = false;
 		String result = payService.doSavePingPPRecharge(payWayChannl, source, user, status, "", money, ip, paytype,orderNo);
-		String data = null;
 		if (result.equals("1")) {
 			GoPayRequestModel goPayRequestModel = new GoPayRequestModel();
 			goPayRequestModel.setBuyerContact("");
@@ -347,16 +337,19 @@ public class UserPayController {
 			goPayRequestModel.setBuyerName("MWEB");//移动支付标识，固定值
 			try {
 				String tradeData = GoPayTradeData.createTradeData(goPayRequestModel);
-				data = tradeData;
+				message = tradeData;
+				flag = true;
 				logger.info(tradeData);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 		} else {
-			return new ApiResult(false,ResultStatusConstant.PayConstant.ORDER_SBUMIT_FALT,"Orders submitted fail");
+			message = "操作失败，请重试!";
 		}
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",data);
-
+		ApiResult resultJson = new ApiResult();
+		resultJson.setSuccess(flag);
+		resultJson.setData(message);
+		return resultJson;
 	}
 	/**
 	 * 盾行天下-支付宝支付  || 快捷支付
@@ -368,26 +361,19 @@ public class UserPayController {
 	public ApiResult dxtxAlipay(HttpServletRequest request,@RequestParam("payModelId")Integer payModelId,@RequestParam("money")String paymoney,@RequestParam("payWay")String payWay){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
-		if(ObjectUtil.equals(null, user)){
-			return new ApiResult(false,ResultStatusConstant.PayConstant.USER_INFO_NOT_EXIST,"user.info.not.exist.");
-		}
-		
-		if(paymoney == null){  //判断充值金额不能为空
-			return new ApiResult(false,ResultStatusConstant.FAIL,"Parameters can not be empty(money)");
-		}else if(Double.parseDouble(paymoney) < 1 || Double.parseDouble(paymoney) > 5000000 ){  //判断金额范围
-			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"The money must be greater than or equal to 1 less than or equal to 5000000");
-		}else if(Double.parseDouble(paymoney) > Math.floor(Double.parseDouble(paymoney)*100)/100){  //判断小数是否保留2位
-			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"Top-up amount can only keep 2 decimal places");
-		}else{
-	
-			Channel payWayChannl = null;//支付方式枚举类型
+		ApiResult resultJson = new ApiResult(false);
+		if(paymoney != null && Double.parseDouble(paymoney) > 0){
+			Channel payWayChannl = null;
 			if(payWay == null){
-				return new ApiResult(false,ResultStatusConstant.FAIL,"Parameters can not be empty(payway)");
-				
+				resultJson.setMessage("支付错误");
+				resultJson.setSuccess(false);
+				return resultJson;
 			}else{
 				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
 				if(payWayChannl == null){
-					return new ApiResult(false,ResultStatusConstant.PayConstant.PAY_WAY_ERROR,"Payment error parameters");
+					resultJson.setMessage("支付错误");
+					resultJson.setSuccess(false);
+					return resultJson;
 				}
 			}
 			int status = DataConstant.PAY_NO_PROCESSING;
@@ -395,9 +381,9 @@ public class UserPayController {
 			if(payModelId == 3){
 				paytype = "1";  //表示快捷支付
 			}
-			int source = Constant.Source.TZDR;  //表示维胜
+			int source = Constant.Source.TZDR;
 			String ip = IpUtils.getIpAddr(request);
-			String orderNo = ChargeExample.randomNo(); //生产订单号
+			String orderNo = ChargeExample.randomNo();
 			String charage = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
 			if(charage.equals("1")){
 				DxtxPayModel dxtxPayModel = new DxtxPayModel();
@@ -425,16 +411,14 @@ public class UserPayController {
 					result = dxtxPayModel.toJSON();
 				}
 				if(result==null){
-					return new ApiResult(false,ResultStatusConstant.PayConstant.ORDER_SBUMIT_FALT,"Orders submitted fail");
+					resultJson.setSuccess(false);
 				}else{
-					return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",result);
+					resultJson.setSuccess(true);
+					resultJson.setData(result);
 				}
-				
-			}else{
-				return new ApiResult(false,ResultStatusConstant.PayConstant.ORDER_SBUMIT_FALT,"Orders submitted fail");
 			}
 		}
-		
+		return resultJson;
 	}
 	/**
 	 * ping++京东手机网页支付
@@ -446,22 +430,13 @@ public class UserPayController {
 	public ApiResult pingplusplusJdPayWap(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
-		if(ObjectUtil.equals(null, user)){
-			return new ApiResult(false,ResultStatusConstant.PayConstant.USER_INFO_NOT_EXIST,"user info not error");
-		}
 		String paymoney=request.getParameter("money");
 		String payWay = request.getParameter("payWay");
-		
-		if(StringUtil.isBlank(paymoney)){  //判断充值金额不能为空
-			return new ApiResult(false,ResultStatusConstant.FAIL,"Parameters can not be empty(money)");
-		}else if(Double.parseDouble(paymoney) < 1 || Double.parseDouble(paymoney) > 5000000 ){  //判断金额范围
-			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"The money must be greater than or equal to 1 less than or equal to 5000000");
-		}else if(Double.parseDouble(paymoney) > Math.floor(Double.parseDouble(paymoney)*100)/100){  //判断小数是否保留2位
-			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_ERROR,"Top-up amount can only keep 2 decimal places");
-		}else{
+		ApiResult resultJson = new ApiResult(false);
+		if(paymoney != null && Double.parseDouble(paymoney) > 0){
 			Channel payWayChannl = null;
 			if(payWay == null){
-				return new ApiResult(false,ResultStatusConstant.PayConstant.PAY_WAY_ERROR,"Payment error parameters");
+				payWayChannl = Channel.ALIPAY_PC_DIRECT;
 			}else{
 				payWayChannl = Channel.newInstanceChannel(Integer.parseInt(payWay));
 				if(payWayChannl == null){
@@ -484,12 +459,14 @@ public class UserPayController {
 				pingPPModel.setOrder_no(orderNo);
 				pingPPModel.setSubject(Config.SUBJECT);
 				String chargeData = ChargeExample.createCharge(pingPPModel).toString();
+				resultJson.setSuccess(true);
+				resultJson.setData(chargeData);
 				logger.info(chargeData);
-				return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",chargeData);
 			}else{
-				return new ApiResult(false,ResultStatusConstant.PayConstant.ORDER_SBUMIT_FALT,"Orders submitted fail");
+				resultJson.setMessage("支付错误,请确认支付信息");
 			}
 		}
+		return resultJson;
 	}
 	
 	private static Object lock = new Object();
@@ -504,42 +481,41 @@ public class UserPayController {
 	public ApiResult wechatTransfer(HttpServletRequest request,@RequestParam("money")Double money,@RequestParam("transactionNo") String transactionNo){
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
 		WUser user = this.payService.getUser(uid);
-		if(ObjectUtil.equals(null, user)){
-			return new ApiResult(false,ResultStatusConstant.Wx.USER_INFO_NOT_EXIST,"user info not error");
+		ApiResult resultJson = new ApiResult(true);
+		if(user == null){
+			resultJson.setSuccess(false);
+			resultJson.setMessage("用户信息不存在");
+			return resultJson;
 		}
-		if(StringUtil.isBlank(transactionNo)|| money == null || money == 0 ){
-			return new ApiResult(false,ResultStatusConstant.Wx.PARAM_NULL,"param is null");
-		}
-		
 		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(uid);
-		if(userVerified == null){
-			return new ApiResult(false,ResultStatusConstant.Wx.NO_USER_VERIFIED,"User not verified");
-		}
-		synchronized (lock) {
-			List<RechargeList>	rechargeLists = apiRechargeService.queryByTradeNo(transactionNo);
-			if(rechargeLists != null && rechargeLists.size() > 0){
-				return new ApiResult(false,ResultStatusConstant.Wx.REPEAT_ORDER,"duplicate order number");
+		if(userVerified != null){
+			synchronized (lock) {
+				List<RechargeList>	rechargeLists = apiRechargeService.queryByTradeNo(transactionNo);
+				if(rechargeLists != null && rechargeLists.size() > 0){
+					resultJson.setMessage("提交失败,重复的订单号");
+					resultJson.setSuccess(false);
+					return resultJson;
+				}
+				RechargeList  rechargeList = new RechargeList();
+				rechargeList.setAccount("");
+				rechargeList.setAddtime(new Date().getTime());
+				rechargeList.setUid(uid);
+				rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+				/*rechargeList.setActualMoney(money);*/
+				rechargeList.setMoney(money);
+				rechargeList.setTradeAccount(DataConstant.WECHAT);
+				rechargeList.setType(DataConstant.WECHAT_TYPE);
+				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+				rechargeList.setTradeNo(transactionNo);
+				apiRechargeService.autoWechat(rechargeList);
 			}
-			RechargeList  rechargeList = new RechargeList();
-			rechargeList.setAccount("");
-			rechargeList.setAddtime(new Date().getTime());
-			rechargeList.setUid(uid);
-			rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-			/*rechargeList.setActualMoney(money);*/
-			rechargeList.setMoney(money);
-			rechargeList.setTradeAccount(DataConstant.WECHAT);
-			rechargeList.setType(DataConstant.WECHAT_TYPE);
-			rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
-			rechargeList.setTradeNo(transactionNo);
-			apiRechargeService.autoWechat(rechargeList);
+			try {
+				messagePromptService.sendMessage(PromptTypes.isWechatTransfer, user.getMobile());
+			} catch (Exception e) {
+				logger.info("发送邮件失败", e);
+			}
 		}
-		try {
-			messagePromptService.sendMessage(PromptTypes.isWechatTransfer, user.getMobile());
-		} catch (Exception e) {
-			logger.info("发送邮件失败", e);
-		}
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"wechat transfer success");
-		
+		return resultJson;
 	}
 	/**
 	* @Title: ebankrecharge    
@@ -549,15 +525,11 @@ public class UserPayController {
 	* @param request
 	* @return
 	 */                       
-	@RequestMapping(value = "/ebankrecharge",method =RequestMethod.POST)
+	@RequestMapping(value = "/ebankrecharge")
 	@ResponseBody
 	public ApiResult ebankrecharge(String money,HttpServletResponse response,HttpServletRequest request){
 		
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		WUser user = payService.getUser(uid);
-		if (ObjectUtil.equals(null, user)){
-			return new ApiResult(false,ResultStatusConstant.PayConstant.USER_INFO_NOT_EXIST,"user.info.not.exist.");
-		}
 		Double  dbmoney = Double.valueOf(money);
 		if(money == null){  //判断充值金额不能为空
 			return new ApiResult(false,ResultStatusConstant.PayConstant.MONEY_NOT_NULL,"The money cannot be empty");
@@ -577,13 +549,14 @@ public class UserPayController {
 			return new ApiResult(false,ResultStatusConstant.PayConstant.OVER_MAX_DAY_CHARGE,"over.max.day.charges,max.money less than 100000");
 		}
 		*/
+		WUser user = this.payService.getUser(uid);   //获取用户信息
+		
 		String ip=IpUtils.getIpAddr(request);	 //获取客户端IP
 		
-	   PayEaseParams  payEaseParams = new PayEaseParams(PayEase.WAP_PAY_PMODE, money, ip,DataConstant.PayStatus.NO_PROCESSING,"");//支付方式\订单总金额\ip\充值状态\银行简称
+	   PayEaseParams  payEaseParams = new PayEaseParams(PayEase.WAP_PAY_PMODE, money, ip,DataConstant.PayStatus.NO_PROCESSING,"");
 	   payEaseParams = this.payService.PayEasePay(user, PayEaseUtil.tzdrAppPay(payEaseParams),Constant.Source.TZDR,Constant.SystemFlag.TZDR_APP);
 	   return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",payEaseParams);
 	}
-	
 	/**
 	 * 微信 自动充值接口 
 	 * @param autoAliPayRequest
