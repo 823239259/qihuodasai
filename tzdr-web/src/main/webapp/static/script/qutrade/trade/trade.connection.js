@@ -105,7 +105,15 @@ function loginCache(account,password){
  * @param password
  */
 function tradeLogin(){
+	
 	if(username != null && password != null){
+		
+		/**
+		 * 禁止登录友情提示
+		 */
+		tipAlert("维胜金融WEB实盘交易目前处于维护中，技术人员正在抓紧修复！建议您使用APP操盘，给您带来的不便敬请谅解。如有疑问请致电客服热线：400-852-8008");
+		return ;
+		
 		initTradeConnect();
 		var loginInterval = setInterval(function(){
 			if(connectionStatus && isLogin){
