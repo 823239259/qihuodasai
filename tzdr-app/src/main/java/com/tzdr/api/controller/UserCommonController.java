@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
@@ -92,16 +87,12 @@ public class UserCommonController {
 		
 		WUser wuser =  wUserService.get(uid);  //获取用户信息
 		
-		if(ObjectUtil.equals(null, wuser)){
-			return new ApiResult(false,ResultStatusConstant.Common.USER_INFO_NOT_EXIST,"user info not error");
-		}
-
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
 		dataMap.put("balance", wuser.getAvlBal());   //当前余额
 		dataMap.put("username", wuser.getUserVerified().getTname());   //用户实名
-		dataMap.put("isCertification",RequestUtils.isCertification(wuser));  //是否实名认证
-		dataMap.put("operateMoney", wuser.getCountOperateMoney()); //累积总操盘金额(提现免手续费额度)
+		dataMap.put("isCertification",RequestUtils.isCertification(wuser));
+		dataMap.put("operateMoney", wuser.getCountOperateMoney());
 		UserVerified userVerified = securityInfoService.findByUserId(wuser.getId());
 		String wxAccount = null;
 		if(userVerified != null){
@@ -109,15 +100,15 @@ public class UserCommonController {
 		}
 		dataMap.put("wxAccount",wxAccount);
 		//校验用户是否满足期货合买活动要求
-		/*if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
+		if (DataConstant.BUSINESSTYPE_FTOGETHER_ACTIVITY == businessType ){
 			dataMap.put("isFtogetherActivityUser",fTogetherTradeService.checkActivityTime() && fTogetherTradeService.checkIsNewUser(uid));   // 是否满足活动免费要求
 			dataMap.put("activityFreeMoney",Constant.FtogetherGame.ACTIVITY_FREE_MONEY);
-		}*/
+		}
 		
-		if (DataConstant.BUSINESSTYPE_WITHDRAW == businessType){
+		if (DataConstant.BUSINESSTYPE_WITHDRAW==businessType){
 			// 获取提现手续费
 			Double drawHandleFee = DataConstant.DEFAULT_HANDLE_FEE;
-			int withdrawSetting = dataMapService.getWithDrawSetting(); //2
+			int withdrawSetting = dataMapService.getWithDrawSetting();
 			String handleFeeStr = null;
 			if (Constant.PaymentChannel.UM_PAY == withdrawSetting){
 				//提现手续费
