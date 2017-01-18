@@ -31,11 +31,9 @@ import com.tzdr.business.service.generalize.GeneralizeChannelService;
 import com.tzdr.business.service.securitycode.SecurityCodeService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.UserTradeService;
-import com.tzdr.business.service.wuser.LoginLogService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.Dates;
-import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.api.vo.ApiUserVo;
@@ -83,8 +81,6 @@ public class LoginAndRegistController {
 	
 	@Autowired
 	private MockTradeAccountService mockTradeAccountService;
-	@Autowired
-	private LoginLogService loginLogService;
 	
 	private static Object lock = new Object();
 	
@@ -122,10 +118,6 @@ public class LoginAndRegistController {
 		}
 		WUser wUser = new WUser();     //创建注册对象信息
 		
-		if(StringUtil.isNotBlank(parentGeneralizeId) 
-				&& ObjectUtil.equals(null, wUserService.findByGeneralizeId(parentGeneralizeId))){
-			return new ApiResult(false,ResultStatusConstant.Regist.ERROR_GENERALIZE_CODE,"error.generalize.code.");
-		}
 		//推广人编号
 		if(StringUtil.isNotBlank(parentGeneralizeId)){
 			WUser generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId);
@@ -139,7 +131,7 @@ public class LoginAndRegistController {
 			WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
 			wUser.setParentNode(platformDefaultWuser);
 		}
-		if(source == null){  //app注册
+		if(source == null){  //app注册兼容老版本
 			wUser.setSource(7);
 		}else{
 			wUser.setSource(Integer.parseInt(source));
@@ -210,7 +202,7 @@ public class LoginAndRegistController {
 		try {
 			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
 			/*mockTradeAccountService.openMockAccount(mobile, password);*/
-			messagePromptService.registNotice(mobile, source, emailChannelName, emailChannelKeyWords);
+			messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -251,9 +243,7 @@ public class LoginAndRegistController {
 		if(ObjectUtil.equals(null, wUser)){   //判断是否登录成功
 			return new ApiResult(false,ResultStatusConstant.FAIL,"login.fail.");
 		}
-		String ipAddr = IpUtils.getIpAddr(request);
-		wUserService.updateWUserByUserId(wUser.getId(), ipAddr);   //记录登录信息
-		
+		wUserService.updateWUserByUserId(wUser.getId(), IpUtils.getIpAddr(request));   //记录登录信息
 		JSONObject  jsonObject = new JSONObject();
 		//登录成功 返回用户唯一标志token和对应由密码种子+uid生成的key值
 		String appToken = AuthUtils.createToken(wUser.getId());
