@@ -10,6 +10,7 @@ var timeChart=null;
 var volumeChart=null;
 var Candlestick=null;
 loadK();
+
 var DateTimeStampSubscript;
 var LastPriceSubscript;
 var OpenPriceSubscript;
