@@ -97,7 +97,6 @@ public class SmsController {
 		// 获取短信通道
 		int smsChannel = 0;
 		if (DataConstant.SEND_SMS_TYPE_REGIST==type){//注册验证码短信
-			
 			if (!ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_EXIST,"mobile.exist.");
 			}
@@ -148,7 +147,6 @@ public class SmsController {
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"send.success.");
 	}
-	
 	/**
 	 * 短信验证码验证
 	 * @param request
@@ -159,13 +157,12 @@ public class SmsController {
 	@ResponseBody
 	@RequestMapping(value = "/validate/sms",method = RequestMethod.POST)
 	public ApiResult validateSms(HttpServletRequest request,@RequestParam("mobile") String mobile,@RequestParam("code")String code){
-//		ApiResult apiResult = new ApiResult();
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(code)){
-			return new ApiResult(false,ResultStatusConstant.NO_SOURCE,"user.info.not.complete.");
+			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
 		}
 		if (!RequestUtils.isMobileNum(mobile)){
-			return new ApiResult(false,ResultStatusConstant.ValidateCode.MOBILE_ERROR,"mobile.parrten.error.");
+			return new ApiResult(false,ResultStatusConstant.FAIL,"mobile.parrten.error.");
 		}
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		if (!ObjectUtil.equals(null, appUserVo)){
