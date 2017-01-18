@@ -1,5 +1,5 @@
 	//配置分时线
-    function setOption(x){
+    function setOptionTime(data,positionValue){
        var  option = {
        	backgroundColor: '#1f1f1f',
            tooltip : {
@@ -30,7 +30,7 @@
 			 xAxis:[{
 					type: 'category',
 					show:false,
-			        data: data1.timeLabel,
+			        data: data.timeLabel,
 			        axisLine: { lineStyle: { color: '#8392A5' } },
 			        boundaryGap: true
 			}],	
@@ -94,11 +94,11 @@
                    }
                },
                 data: [
-	                 {name: '标线2起点', value: x, xAxis: "1", yAxis: x},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
-        			{name: '标线2终点', xAxis: "2", yAxis: x}
+	                 {name: '标线2起点', value: positionValue, xAxis: "1", yAxis: positionValue},     // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+        			{name: '标线2终点', xAxis: "2", yAxis: positionValue}
                 ]
                 },
-               data:data1.prices
+               data:data.prices
            }
        }
         return option
@@ -143,7 +143,7 @@
 	                  	}
 	                  },
 	                   axisLine: { lineStyle: { color: '#8392A5' } },
-	                  data : dataVolume.time
+	                  data : data.time
 	              }
 	          ],
 			 yAxis: [
@@ -178,7 +178,7 @@
 	              {
 	                  name: '成交量',
 	                  type: 'bar',
-	                  data:dataVolume.volume
+	                  data:data.volume
 	              }
 	          ]
 	      };
@@ -189,12 +189,17 @@
 		"prices":[],
 		"time":[]
 	}
+	var volumeChartData={
+		"time":[],
+		"volume":[]
+	}
 	function handleTimeChartData(json){
     	var dosizeL=$("#doSize").val();
         var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;
-       	var leng=timePrice.length;
+       	var leng=timeData.time.length;
+       	var VolumeLength=volumeChartData.time.length;
 //     	if(jsonData.Parameters.HisQuoteType==1440){
 //	    	for(var i=0;i<Len;i++){
 //			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
@@ -221,11 +226,18 @@
         	var str2=str1[0]+":"+str1[1];
 			timeData.timeLabel[TimeLength+i]=str2;
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
-        	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript]
+        	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript];
+        	volumeChartData.time[VolumeLength+i]=str2;
+            volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         }
         if(timeChart != null){
         	var positionValue=getPositionValue();
-             var option = setOption1(positionValue);
+        	console.log(positionValue);
+             var option = setOptionTime(timeData,positionValue);
+             var volumeChartOption=volumeChartSetOption(volumeChartData)
+            volumeChart.setOption(volumeChartOption);
+            volumeChart.resize();
+           	volumeChart.group="group1";
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";

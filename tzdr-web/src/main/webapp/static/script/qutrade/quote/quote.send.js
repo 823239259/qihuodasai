@@ -102,7 +102,6 @@ var Quote = {
 		 * @param count
 		 */
 		doQryHistory:function(exchangeNo,commodityNo,contractNo,hisQuoteType,beginTime,endTime,count){
-			console.log('{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+',"BeginTime":"'+beginTime+'","EndTime":"'+endTime+'","Count":'+count+'}');
 			Quote.doSendMessage(QuoteUrl.QryHistoryUrl, '{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+',"BeginTime":"'+beginTime+'","EndTime":"'+endTime+'","Count":'+count+'}');
 		},
 		/**

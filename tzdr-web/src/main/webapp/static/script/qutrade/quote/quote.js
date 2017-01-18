@@ -38,7 +38,6 @@ function quoteHandleData(evt){
 	}else if(method == "OnRtnQuote"){
 		quotePush(jsonData);
 	}else if(method == "OnRspQryHistory"){
-		console.log(jsonData);
 		if(firstTimeLength==1){
 				getSubscript(jsonData.Parameters.ColumNames);
 				firstTimeLength=2;
@@ -884,7 +883,5 @@ function clearRightData(){
  		var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
-        console.log(exchangeNo,commodityNo,contractNo,HisQuoteType);
-//       Quote.doQryHistoryALL('QryHistory','{"ExchangeNo":"'+exchangeNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'","HisQuoteType":'+hisQuoteType+'}');
         Quote.doQryHistory(exchangeNo,commodityNo,contractNo,HisQuoteType,"","",0);
  	}
