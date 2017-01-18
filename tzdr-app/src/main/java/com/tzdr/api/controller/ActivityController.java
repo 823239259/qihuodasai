@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +49,6 @@ import com.tzdr.domain.web.entity.GeneralizeVisit;
 import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
 
@@ -76,9 +73,6 @@ public class ActivityController {
 	@Autowired
 	private ActivityOldAndNewService  activityOldAndNewService;
 	
-	public ActivityController() {
-	}
-
 	/**
 	 * 上线推广注册页面
 	 * 
