@@ -140,7 +140,6 @@ public class UserFTradeController {
 		
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,null,dataMap);
 	}
-	
 	/**
 	 * 获取交易明细
 	 * @return
@@ -151,16 +150,13 @@ public class UserFTradeController {
 		ApiResult apiResult = new ApiResult();
 		try {
 			apiResult.setSuccess(true);
-			apiResult.setCode(ResultStatusConstant.SUCCESS);
 			List<TradeDetail> details = tradeDetailService.doGetByFtseId(id);
 			apiResult.setData(details);
 		} catch (Exception e) {
 			apiResult.setSuccess(false);
-			apiResult.setCode(ResultStatusConstant.FAIL);
 		}
 		return apiResult;
 	}
-	
 	/**
 	* @Title: details    
 	* @Description: 追加保证金
@@ -236,7 +232,7 @@ public class UserFTradeController {
 			return new ApiResult(false,ResultStatusConstant.EndtradeConstant.ID_NOT_NULL,"The id cannot be empty");
 		}
 		
-		FSimpleFtseUserTrade fSimpleFtseUserTrade = fTradeService.get(id); //根据id查询期货方案
+		FSimpleFtseUserTrade fSimpleFtseUserTrade = fTradeService.get(id);
 		
 		if(fSimpleFtseUserTrade == null || !uid.equals(fSimpleFtseUserTrade.getUid())){
 			return new ApiResult(false,ResultStatusConstant.EndtradeConstant.UN_FIND_FRADE_DATA,"The ftrade data was not found");
@@ -262,7 +258,7 @@ public class UserFTradeController {
 		
 		if(StringUtil.isNotBlank(cId) && businessType != null){   //判断是否使用折扣劵
 			discount = fSimpleCouponService.get(cId);
-			if(discount == null){  //未找到折扣劵信息
+			if(discount == null){  //为找到折扣劵信息
 				return new ApiResult(false,ResultStatusConstant.EndtradeConstant.UN_FIND_COUPON_DATA,"The Coupon data was not found");
 			}
 			if(!fSimpleCouponService.isCouponValid(discount,DataConstant.COUPON_TYPE_3, businessType)) {  //判断该折扣劵是否可以使用
@@ -299,11 +295,7 @@ public class UserFTradeController {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		//获取用户信息
 		String uid = AuthUtils.getCacheUser(request).getUid();  
-		WUser wuser = wUserService.get(uid);	
-		if(ObjectUtil.equals(null, wuser)){
-		   return new ApiResult(false,ResultStatusConstant.Apply.USER_INFO_NOT_EXIST,"user.info.not.error.");
-		}
-		
+		WUser wuser = wUserService.get(uid);		
 		//应付金额
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO);
 		//A50 \ 国际期货 \ 原油  \ 小恒指
@@ -314,11 +306,11 @@ public class UserFTradeController {
 			int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
 			FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(cfgBusinessType,String.valueOf(tranLever));  //获取配置方案信息
 			if (ObjectUtil.equals(null, fSimpleConfig)){
-				return new ApiResult(false,ResultStatusConstant.Apply.NOT_FSIMPLE_CONFIG,"没有获取到配置方案信息");	
+				return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
 			}
 			// 传入的保证金是否与系统匹配
 			if (DataConstant.ZERO != traderBond.compareTo(fSimpleConfig.getTraderBond())){
-				return new ApiResult(false,ResultStatusConstant.Apply.TRADER_BOND_ERROR,"traderBond.is.error.params.");	
+				return new ApiResult(false,ResultStatusConstant.FAIL,"traderBond.is.error.params.");	
 			}
 			
 			// 如果是恒指获取配置的固定手续费
@@ -336,10 +328,10 @@ public class UserFTradeController {
 		}
 		
 		// 国际综合
-		if (BusinessTypeEnum.MULTIPLE.getValue() == businessType){
+		if (BusinessTypeEnum.MULTIPLE.getValue()==businessType){
 			List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);
 			if (CollectionUtils.isEmpty(outDiskParametersList)){
-				return new ApiResult(false,ResultStatusConstant.Apply.NOT_FSIMPLE_CONFIG,"根据传入的配置金没有找到配置方案");	
+				return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
 			}
 			//应付金额
 			payable =  traderBond;
@@ -351,7 +343,6 @@ public class UserFTradeController {
 		dataMap.put("voucherList",vouchers);
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"apply.Successful",dataMap);
 	}
-	
 	
 	/**
 	 *  支付确认接口
@@ -473,10 +464,10 @@ public class UserFTradeController {
 	public synchronized ApiResult multipleHandle(int businessType,BigDecimal traderBond,String voucherId,
 			HttpServletRequest request) throws Exception{
 		
-		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();  //国际综合价格
-		List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);  //国际综合参数
+		List<OutDiskPrice> outDiskPrice = outDiskPriceService.findAllOutDiskPrice();
+		List<OutDiskParameters> outDiskParametersList = outDiskParametersService.findByTraderBond(traderBond);
 		if(CollectionUtils.isEmpty(outDiskParametersList) || CollectionUtils.isEmpty(outDiskPrice)){
-			return new ApiResult(false,ResultStatusConstant.HandleFTrade.NOT_FSIMPLE_CONFIG,"not.fund.config.params.");	
+			return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
 		}
 		OutDiskParameters outDiskParameters= outDiskParametersList.get(DataConstant.ZERO);
 		//获取用户信息
