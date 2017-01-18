@@ -1,21 +1,11 @@
     //开盘(open)，收盘(close)，最低(lowest)，最高(highest)
     var rawData=[];
-    var chartDataC;
         function processingData(jsonData){
+        	console.log(rawData);
     		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(jsonData == null)return;
-    	    var lent=rawData.length;
-    	    if(jsonData.Parameters.HisQuoteType==1440){
-    	    	for(var i=0;i<Len;i++){
-        		var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-        			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
-		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var sgData = [timeStr,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][OpenPriceSubscript]];
-			         rawData[lent+i] = sgData; 
-	       		};
-    	    }else{
     	    	for(var i=0;i<Len;i++){
         		var time2=parameters[i][DateTimeStampSubscript].split(" ");
 		        	var str1=time2[1].split(":");
@@ -23,53 +13,19 @@
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
 		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
-			         rawData[lent+i] = sgData; 
+			         rawData[i] = sgData; 
 	       		};
-	       		
-    	    }
-    	     chartDataC=splitData(rawData.slice(-40));
-		   var option=setOption(chartDataC,x);
-		   timeChart.setOption(option);
-	  		timeChart.resize();
-	  		CandlestickVolumeChart.resize();	
-		  	timeChart.group="group1";
-		  	
+	       	var positionValue=getPositionValue();
+	       	var rawData=splitData(rawData);
+			var option=setOptionCandlestick(rawData,positionValue);
+			CandlestickChart.setOption(option);
+	  		CandlestickChart.resize();
+		  	CandlestickChart.group="group1";
     }
     
-	    function splitData(data0) {
-	        var categoryData = [];
-	        var values = [];
-	        var time=[]
-	        for (var i = 0; i < data0.length; i++) {
-	            categoryData.push(data0[i][0]);
-	            values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
-	            time.push(data0[i][5])
-	        }
-	        return {
-	            categoryData: categoryData,
-	            values: values,
-	            time:time
-	        };
-	    }
-	//计算均线的数据
-    function calculateMA(dayCount,data) {
-    	var dosizeL=$("#doSize").val();
-        var result = [];
-        for (var i = 0, len = data.values.length; i < len; i++) {
-            if (i < dayCount) {
-                result.push('-');
-                continue;
-            }
-            var sum = 0;
-            for (var j = 0; j < dayCount; j++) {
-                sum += Number(data.values[i - j][1]);
-            }
-            result.push(Number(sum / dayCount).toFixed(dosizeL));
-        }
-        return result;
-    }
+
     //设置数据参数（为画图做准备）
-    function setOption(data,x){
+    function setOptionCandlestick(data,x){
         var option = {
 		    backgroundColor: '#1f1f1f',
 		    tooltip: {
@@ -219,114 +175,35 @@
 		}
         return option;
     };
-    function CandlestickVolumeChartSetoption1(data){
-    	 var  CandlestickVolumeChartData=data;
-	      var  option = {
-	      	backgroundColor: '#1f1f1f',
-	      	 color: ['#EDF274'],
-	          tooltip: {
-	              trigger: 'axis',
-	              axisPointer : {
-                   type : 'line',
-                   animation: false,
-		            lineStyle: {
-		                color: '#ffffff',
-		                width: 1,
-		                opacity: 1
-		            }
-               },
-	          },
-	            toolbox: {
-	                show: false,
-	            },
-	             animation: false,
-				 grid: {
-	               x: 40,
-	               y:30,
-	               x2:46,
-	               y2:20
-	           },
-	          xAxis:[
-	              {
-	                  type : 'category',
-	                  position:'bottom',
-	                 boundaryGap: true,
-	                  axisTick: {onGap:false},
-	                  splitLine: {show:false},
-	                  axisLabel:{
-		                  	textStyle:{
-		                  		fontSize:10,
-		                  	}
-		                  },
-	                   axisLine: { lineStyle: { color: '#8392A5' } },
-	                  data : CandlestickVolumeChartData.time
-	              }
-	          ],
-			 yAxis: [
-			            {
-	                type : 'value',
-	              name : '成交量(万)',
-	                 axisLine: { lineStyle: { color: '#8392A5' } },
-		              axisTick:{
-		               	show:false,
-		              },
-		              scale:true,
-	              axisLabel: {
-	                  formatter: function (a) {
-	                      a = +a;
-	                      return isFinite(a)
-	                          ? echarts.format.addCommas(+a / 10000)
-	                          : '';
-	                  },
-	                  textStyle:{
-	                  		fontSize:10,
-	                  	}
-	              },
-	                splitLine: {
-	                    show: true,
-	                    lineStyle: {
-	                        color: "#8392A5"
-	                    }
-	                }
-	            }
-	        ],
-	          series : [
-	              {
-	                  name: '成交量',
-	                  type: 'bar',
-	                  data:CandlestickVolumeChartData.volume
-	              },
-	          ]
-	      };
-        return option
+    function splitData(data0) {
+        var categoryData = [];
+        var values = [];
+        var time=[]
+        for (var i = 0; i < data0.length; i++) {
+            categoryData.push(data0[i][0]);
+            values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
+            time.push(data0[i][5])
+        }
+        return {
+            categoryData: categoryData,
+            values: values,
+            time:time
+        };
     }
-    
-	function processingCandlestickVolumeData(data){
-		var parameters = data.Parameters.Data;
-		var Len=parameters.length;
-		if(parameters == null)return;
-	    var lent=CandlestickVolumeData.time.length;
-		if(data.Parameters.HisQuoteType==1440){
-        	for(var i=0;i<Len;i++){
-        			var timeStr=parameters[i][DateTimeStampSubscript].split(" ")[0];
-        			CandlestickVolumeData.time[lent+i]=timeStr;
-        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
-       		};
-   		 }else{
-   		 	for(var i=0;i<Len;i++){
-        			var time2=parameters[i][DateTimeStampSubscript].split(" ");
-		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
-        			CandlestickVolumeData.time[lent+i]=str2;
-        			CandlestickVolumeData.volume[lent+i]=parameters[i][VolumeSubscript];
-       		};
-   		 }
-   		 	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
-       		CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
-    		CandlestickVolumeChart.group="group2";
-	  		var option1= CandlestickVolumeChartSetoption1(CandlestickVolumeData);
-	  		CandlestickVolumeChart.resize();	
-	  		CandlestickVolumeChart.setOption(option1);
-	  		CandlestickVolumeChart.resize();	
-		  	
-    };
+	//计算均线的数据
+    function calculateMA(dayCount,data) {
+    	var dosizeL=$("#doSize").val();
+        var result = [];
+        for (var i = 0, len = data.values.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += Number(data.values[i - j][1]);
+            }
+            result.push(Number(sum / dayCount).toFixed(dosizeL));
+        }
+        return result;
+    }

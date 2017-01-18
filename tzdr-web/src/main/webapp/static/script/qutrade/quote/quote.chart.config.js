@@ -8,15 +8,23 @@ var requireEchart=require.config({
 });
 var timeChart=null;
 var volumeChart=null;
-var Candlestick=null;
+var CandlestickChart=null;
 loadK();
-
 var DateTimeStampSubscript;
 var LastPriceSubscript;
 var OpenPriceSubscript;
 var LowPriceSubscript;
 var HighPriceSubscript;
 var VolumeSubscript;
+var timeData={
+	"timeLabel":[],
+	"prices":[],
+	"time":[]
+}
+var volumeChartData={
+	"time":[],
+	"volume":[]
+}
 function loadK(){
     require(
             [
@@ -26,8 +34,8 @@ function loadK(){
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 timeChart = ec.init(document.getElementById('timeChart'));
-                console.log(timeChart);
                 volumeChart=ec.init(document.getElementById("volumeChart"));
+                 CandlestickChart=ec.init(document.getElementById("CandlestickChart"));
                	 ec.connect("group1");
             }
     );

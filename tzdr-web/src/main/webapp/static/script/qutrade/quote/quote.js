@@ -38,11 +38,13 @@ function quoteHandleData(evt){
 	}else if(method == "OnRtnQuote"){
 		quotePush(jsonData);
 	}else if(method == "OnRspQryHistory"){
+		console.log(jsonData)
 		if(firstTimeLength==1){
 				getSubscript(jsonData.Parameters.ColumNames);
 				firstTimeLength=2;
 			}
 		handleTimeChartData(jsonData);
+		processingData(jsonData);
 	}
 }
 /**
@@ -361,6 +363,7 @@ function addQuoteListBindClick(cls){
 		 setSelectOption(contractCode);
 		 setMoneyNumberIndex(0);
 		 clearHandicapData();
+		 sendHistory(0);
 	});
 }
 /**
@@ -883,5 +886,15 @@ function clearRightData(){
  		var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
+		timeData={
+		"timeLabel":[],
+		"prices":[],
+		"time":[]
+		}
+		volumeChartData={
+			"time":[],
+			"volume":[]
+		}
+		rawData=[];
         Quote.doQryHistory(exchangeNo,commodityNo,contractNo,HisQuoteType,"","",0);
  	}

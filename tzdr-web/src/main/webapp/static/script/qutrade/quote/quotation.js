@@ -25,9 +25,17 @@
 		return positionValue;
     }
 	window.onload=function(){
-			document.getElementsByClassName("carbon_time")[0].addEventListener("click",function(){
-		alert("565")
-	})
+			$(".carbon_time").on("click",function(){
+				var HisQuoteType=$(this).attr("data");
+				if(HisQuoteType==0){
+					$("#CandlestickChart").css("z-index","999");
+					$("#timeChart").css("z-index","998")
+				}else{
+					$("#CandlestickChart").css("z-index","998");
+					$("#timeChart").css("z-index","999")
+				}
+				sendHistory(HisQuoteType);
+			});
 	}
 
 //$(function() {
