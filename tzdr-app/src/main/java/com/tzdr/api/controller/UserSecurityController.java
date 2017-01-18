@@ -3,13 +3,10 @@ package com.tzdr.api.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
@@ -38,7 +34,6 @@ import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.RandomCodeUtil;
 import com.tzdr.common.utils.ValidatorUtil;
-import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.UserVerified;
@@ -94,7 +89,7 @@ public class UserSecurityController {
 	public ApiResult sendSms(String mobile,int type,HttpServletRequest request) {
 	
 		if (!RequestUtils.isMobileNum(mobile)){
-			return new ApiResult(false,ResultStatusConstant.ValidateCode.MOBILE_ERROR,"mobile.parrten.error.");
+			return new ApiResult(false,ResultStatusConstant.FAIL,"mobile.parrten.error.");
 		}
 		
 		//查看当前手机号码 上次发送成功时间 是否在一分钟
@@ -178,7 +173,7 @@ public class UserSecurityController {
 			return new ApiResult(false,ResultStatusConstant.ValidateCardConstant.CARD_FORMAT_ERROR,"Id card format error");
 		}
 		
-		UserVerified usercard = securityInfoService.findByIdCard(card);  //根据填入的身份证去 用户认证资料信息数据库表中 查找
+		UserVerified usercard = securityInfoService.findByIdCard(card);
 		if (!ObjectUtil.equals(null, usercard)){  //判断该身份证号码是否已被实名认证过
 			return new ApiResult(false,ResultStatusConstant.ValidateCardConstant.CARD_IS_SECURITY,"The id card number has been real-name authentication");
 		}
@@ -189,7 +184,7 @@ public class UserSecurityController {
 			return new ApiResult(false,ResultStatusConstant.ValidateCardConstant.IS_SECURITY,"You've been real-name authentication");
 		}
 		
-		Integer validatecount = userverified.getValidatenum() == null ? 0 : userverified.getValidatenum();  //Validatenum验证次数
+		Integer validatecount = userverified.getValidatenum() == null ? 0 : userverified.getValidatenum();
 		if (validatecount >= DataConstant.VALIDATE_CARD_MAX_TIME){  //判断用户实名认证失败次数是否大于最高次数
 			userverified.setStatus(DataConstant.Idcard.NOPASS);//验证失败
 			securityInfoService.update(userverified);
@@ -267,7 +262,7 @@ public class UserSecurityController {
 		
 		String mobile = oldWuser.getMobile();  //获取用户手机号码
 		
-		if(StringUtil.isBlank(oldCode)){  //判断原手机验证码是否为空
+		if(StringUtil.isBlank(oldCode)){  //判断原验证码是否为空
 			return new ApiResult(false,ResultStatusConstant.BindPhoneConstant.OLD_CODE_NOT_NULL,"The oldCode cannot be empty");
 		}
 		
@@ -311,7 +306,7 @@ public class UserSecurityController {
 		
 		 //更新手机号
 		this.securityInfoService.updatUserMobile(oldWuser,newMobile);
-		AuthUtils.clearCacheUser(oldWuser.getId());//清除旧手机缓存
+		AuthUtils.clearCacheUser(oldWuser.getId());
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful binding");
 	}
 	
@@ -328,7 +323,6 @@ public class UserSecurityController {
 	@ResponseBody
 	public ApiResult setWithdrawPwd(String password,String code,HttpServletResponse response,HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();
-		
 		if (StringUtil.isBlank(password) || StringUtil.isBlank(code)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"params.error.");
 		}
@@ -343,7 +337,6 @@ public class UserSecurityController {
 		}
 		
 		UserVerified userverified=securityInfoService.findByUserId(uid);
-		
 		WUser user = securityInfoService.getUsesrbyId(uid);
 		if (ObjectUtil.equals(null, user) || ObjectUtil.equals(null, userverified)){
 			return new ApiResult(false,ResultStatusConstant.SetWithDrawPwd.USER_INFO_NOT_EXIST,"user.info.not.exist.");
