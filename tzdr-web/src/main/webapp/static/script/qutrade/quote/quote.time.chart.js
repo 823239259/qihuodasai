@@ -1,7 +1,7 @@
 	//配置分时线
     function setOptionTime(data,positionValue){
        var  option = {
-       	backgroundColor: '#1f1f1f',
+       	backgroundColor: '#333333',
            tooltip : {
                show: true,
                transitionDuration:0,
@@ -106,7 +106,7 @@
     //配置成交量
 	function volumeChartSetOption(data) {
 	      var  option = {
-	      	backgroundColor: '#1f1f1f',
+	      	backgroundColor: '#333333',
 	      	 color: ['#EDF274'],
 	          tooltip: {
 	              trigger: 'axis',
@@ -156,12 +156,12 @@
 		              },
 		              scale:true,
 	                axisLabel: {
-	                    formatter: function (a) {
-	                    	   a = +a;
-	                    	    return isFinite(a)
-	                            ? echarts.format.addCommas(+a / 10000)
-	                            : '';
-	                    },
+//	                    formatter: function (a) {
+//	                    	   a = +a;
+//	                    	    return isFinite(a)
+//	                            ? echarts.format.addCommas(+a / 10000)
+//	                            : '';
+//	                    },
 	                    textStyle:{
 	                  		fontSize:10,
 	                  	}

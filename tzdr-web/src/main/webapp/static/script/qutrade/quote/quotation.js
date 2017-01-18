@@ -24,9 +24,11 @@
 		}
 		return positionValue;
     }
-	$(".carbon_time").bind("click",function(){
-		alert($(this).index())
+	window.onload=function(){
+			document.getElementsByClassName("carbon_time")[0].addEventListener("click",function(){
+		alert("565")
 	})
+	}
 
 //$(function() {
 //  
