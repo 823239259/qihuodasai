@@ -139,8 +139,11 @@ public class LoginAndRegistController {
 			WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
 			wUser.setParentNode(platformDefaultWuser);
 		}
-		
-		wUser.setSource(Integer.parseInt(source));
+		if(source == null){  //app注册
+			wUser.setSource(7);
+		}else{
+			wUser.setSource(Integer.parseInt(source));
+		}
 		wUser.setUserType("0");
 		wUser.setPassword(password);
 		wUser.setMobile(mobile);
