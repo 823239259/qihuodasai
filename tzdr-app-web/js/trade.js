@@ -889,6 +889,11 @@ function updatePostion(param){
 	if(openAvgPrice == undefined){
 		openAvgPrice = param.TradePrice;
 	}
+	var localCommodity = getMarketCommdity(contractCode);
+	var doSize = 0;
+	if(localCommodity != undefined){ 
+		doSize = Number(localCommodity.DotSize);
+	}
 	var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
 	var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
 	var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
@@ -896,16 +901,12 @@ function updatePostion(param){
 	var $floatingProfit =$("#floatValue"+contractCode);
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(2) *  oldHoldNum;
-	var price = parseFloat(openAvgPrice).toFixed(2) * holdNum;
+	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(doSize) *  oldHoldNum;
+	var price = parseFloat(openAvgPrice).toFixed(doSize) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
-		price = parseFloat(price + oldPrice).toFixed(2);
-		var localCommodity = getMarketCommdity(contractCode);
-		var doSize = 0;
-		if(localCommodity != undefined){ 
-			doSize = Number(localCommodity.DotSize);
-		}
+		price = parseFloat(price + oldPrice).toFixed(doSize);
+		
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
 		$holdAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
