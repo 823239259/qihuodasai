@@ -44,7 +44,6 @@ function quoteHandleData(evt){
 		 	lightChartData(jsonData);
 		 }
 	}else if(method == "OnRspQryHistory"){
-		console.log(jsonData)
 		if(firstTimeLength==1){
 				getSubscript(jsonData.Parameters.ColumNames);
 				firstTimeLength=2;
@@ -103,7 +102,6 @@ function generateRealTimeQuote(obj){
 function searchQuote(){
 	var length = localCacheCommodityArray.length;
 	var inputValue = $("#quotation_futures").val();
-	console.log(inputValue.length);
 	if(inputValue.length == 0){
 		$(".left_xiangmu").css("display","block");
 		return;
@@ -916,8 +914,6 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
 	var range=checkRange();
-	console.log(range+"range");
-	console.log(totalVolume);
 	if(totalVolume=="0"){
 		totalVolume=0;
 		$("#totalVolume").val(Parameters.TotalVolume);
@@ -927,7 +923,6 @@ function dealOnRtnQuoteData(data,totalVolume){
 		return;
 	}
 	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
-	console.log(Number(Parameters.TotalVolume)+"Number(Parameters.TotalVolume)-Number(totalVolume)"+Number(totalVolume))
 	var lastVolume=Number(volumeChartData.volume[volumeChartData.volume.length-1]);
 	if(Volume<=0){
 		Volume=0;
@@ -961,7 +956,6 @@ function dealOnRtnQuoteData(data,totalVolume){
 		}else{
 			timeData.prices[timeData.prices.length-1]=lastPrices1;	
         	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;
-        	console.log(freshVolume+"freshVolume");
         	drawChartTime(positionValue);
 		}
 	}else{

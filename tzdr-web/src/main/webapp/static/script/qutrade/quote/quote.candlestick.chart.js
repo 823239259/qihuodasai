@@ -4,7 +4,6 @@
     		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
-    		console.log(Len);
     		if(jsonData == null)return;
     	    	for(var i=0;i<Len;i++){
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);

@@ -1,11 +1,11 @@
 /**
  *引入echart配置 **/
-var requireEchart=require.config({
-    paths:{
-        'echarts' :'../../static/script/qutrade/echarts',
-        'echarts/chart/pie' :'../../static/script/qutrade/echarts',
-    }
-});
+//		require.config({
+//  paths:{
+//      'echarts' :'../../static/script/qutrade/echarts.min',
+//      'echarts/chart/pie' :'../../static/script/qutrade/echarts.min',
+//  }
+//});
 var timeChart=null;
 var volumeChart=null;
 var CandlestickChart=null;
@@ -41,20 +41,20 @@ var lightChartTime={
 	"price":[]
 }
 function loadK(){
-    require(
-            [
-                'echarts',
-                'echarts/chart/pie', // 使用柱状图就加载bar模块，按需加载
-            ],
-            function (ec) {
+//  require(
+//          [
+//              'echarts',
+//              'echarts/chart/pie', // 使用柱状图就加载bar模块，按需加载
+//          ],
+//          function (ec) {
                 // 基于准备好的dom，初始化echarts图表
-                	timeChart = ec.init(document.getElementById('timeChart'));
-                	volumeChart=ec.init(document.getElementById("volumeChart"));
-                 	CandlestickChart=ec.init(document.getElementById("CandlestickChart"));
-                 	CandlestickVolumeChart=ec.init(document.getElementById("CandlestickVolumeChart"));
-                 	lightChart=ec.init(document.getElementById("container1"));
-               	 	ec.connect("group1");
-               	 	ec.connect("group2");
-            }
-    );
+                	timeChart = echarts.init(document.getElementById('timeChart'));
+                	volumeChart=echarts.init(document.getElementById("volumeChart"));
+                 	CandlestickChart=echarts.init(document.getElementById("CandlestickChart"));
+                 	CandlestickVolumeChart=echarts.init(document.getElementById("CandlestickVolumeChart"));
+                 	lightChart=echarts.init(document.getElementById("container1"));
+               	 	echarts.connect("group1");
+               	 	echarts.connect("group2");
+//          }
+//  );
 };
