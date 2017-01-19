@@ -1,6 +1,23 @@
+function lightChartData(json){
+    	var dosizeL=$("#doSize").val();
+	        var TimeLength=lightChartTime.time.length;
+	        lightChartTime.price.push(json.Parameters.LastPrice);
+	           lightChartTime.time.push((json.Parameters.DateTimeStamp).split(" ")[1]);
+			lightChartTime.time=lightChartTime.time.slice(-50);
+			lightChartTime.price=lightChartTime.price.slice(-50);
+	        if(lightChart != null){
+	        	var value=$("#lightButton").hasClass("active");
+	        	if(value){
+		        	var option = lightChartDealData();
+		            lightChart.setOption(option);
+		            lightChart.resize();
+	        	}
+
+	        }
+  }
     function lightChartDealData(){
      var  option = {
-		    backgroundColor: "#1f1f1f",
+		    backgroundColor: "#333333",
 		    "tooltip": {
 		        "show":false,
 		    },

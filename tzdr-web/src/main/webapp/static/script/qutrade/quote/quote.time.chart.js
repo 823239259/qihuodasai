@@ -191,25 +191,17 @@
        	var Parameters=json.Parameters.Data;
        	var leng=timeData.time.length;
        	var VolumeLength=volumeChartData.time.length;
-       	var rowdataLength=rawData.length;
         for(var i=0;i<Len;i++){ 
 			timeData.timeLabel[TimeLength+i]=Parameters[i][DateTimeStampSubscript];
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
-        	timeData.time[TimeLength+i]=Parameters[i][DateTimeStampSubscript];
         	volumeChartData.time[VolumeLength+i]=Parameters[i][DateTimeStampSubscript];
             volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
-          	var openPrice = (Parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
-            var closePrice = (Parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-            var sgData = [Parameters[i][DateTimeStampSubscript],openPrice,closePrice,(Parameters[i][LowPriceSubscript]).toFixed(dosizeL),(Parameters[i][HighPriceSubscript]).toFixed(dosizeL),Parameters[i][DateTimeStampSubscript]];
-	         rawData[rowdataLength+i] = sgData; 
         }
     	var positionValue=getPositionValue();
-        if(json.Parameters.HisQuoteType==0){
-        	var option = setOptionTime(timeData,positionValue);
-            timeChart.setOption(option);
-            timeChart.resize();
-            timeChart.group="group1";
-        }
+    	var option = setOptionTime(timeData,positionValue);
+        timeChart.setOption(option);
+        timeChart.resize();
+        timeChart.group="group1";
 		var volumeChartOption=volumeChartSetOption(volumeChartData)
         volumeChart.setOption(volumeChartOption);
         volumeChart.resize();

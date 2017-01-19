@@ -15,29 +15,6 @@
     <link  href="../../static/script/layer/skin/layer.css"  rel="stylesheet" type="text/css">
     <script type="text/javascript" src="../../static/script/qutrade/esl.js"></script>
     <script type='text/javascript' src="../../static/script/jquery-1.8.3.js"></script>
-    <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
-    <script type='text/javascript' src="../../static/script/common/discussStock.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.trade.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.chart.config.js"></script>
-    <script type="text/javascript" src="../../static/script/qutrade/quote/quote.time.chart.js"></script>
-    <script type="text/javascript" src="../../static/script/qutrade/quote/quote.candlestick.chart.js"></script>
-   	<script type="text/javascript" src="../../static/script/qutrade/quote/quote.lghtning.chart.js"></script>
-    <script type='text/javascript' src="../../static/script/layer/layer.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.send.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.connection.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.js"></script>
-    <script type="text/javascript" src="../../static/script/qutrade/quote/quotation.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/jquery.base64.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/util.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.config.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.send.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js"></script>
-    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
-    <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
-    <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
     <!-- 插件 -->
     <!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/d3.min.js"></script>
     <script type="text/javascript" src="../../static/script/qutrade/react.min.js"></script> --%> -->
@@ -238,1064 +215,1093 @@
 	</style>
 </head>
 <body>
-<!-- 弹出层 -->
-<div id="div_Mask"  style="display:none;"></div>
-<div class="div_loading">
-<!--止损止盈 start-->
-<div  class="popup" id="stop_loss"  style="display: none;">
-    <div class="popup_top">
-        <ul>
-        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">修改止损单</li><span class="popup_i"></span>
-        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">修改止盈单</li>
-        </ul>
-        <a class="close">✖</a>
-    </div>
-    <div id="loss_popup_center">
-    	<div class="popup_center_lis"  id = "stopContent">
-    		<div class="popup_center">
-            	<input type="hidden" value = "" id = "stopHoldAvgPrice"/>
-            	<input type="hidden" value = "" id = "stopHoldDrection"/>
-            	<input type="hidden" value = "" id = "stopHoldContractCode"/>
-                <ul>
-                	<li class="li1" style="width: 85px;text-align: right;">合约名称：</li>
-                	<li style="margin-left: 10px;">
-                		<span id = "stop_contractCode">HSIF7,恒指F7</span>，
-                		<span id = "stop_drection">多头</span>
-                		<span style="margin-left: 76px;">最新：<span id = "stop_lastPrice">56.12</span></span>
-                	</li>
-                </ul>
-                <ul>
-                	<li class="li1" style="width: 85px;text-align: right;">止损价：</li>
-                	<li>
-                		<input type="text" name="stop_inputprice" id="stop_inputprice"/>，
-                		<input type="text" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>手数
-                	</li>
-                </ul>
-                <ul>
-                	<li>
-                		价差<span id = "stop_pricecha">0,</span>&nbsp;&nbsp;
-                		预计亏损<span id = "stop_yjks">0</span>
-                		<span class = "stop_dw">0</span>，
-                		百分比<span id = "stop_scale">0</span>%
-                	</li>
-                </ul>
-                <ul>
-                	<li class="li1" style="width: 85px; text-align: right;">
-                		<input type="checkbox"  name="stop_checked" id="stop_checked" style="width: 15px; margin-top: 4px; margin-right: 5px;"/>	
-                	</li>
-                	<li style="margin-left: 10px;">
-                		动态追踪，价格回测幅度
-	                	<input type="text"  name="stop_diff" id="stop_diff"/>
-	                	<span class = "stop_dw"></span>
-                	</li>
-                </ul>
-                <ul>
-                	<li class="li1" style="width: 85px;text-align: right; margin-left: -85px;">止损委托价：</li>
-                	<li>
-                		<select id = "stop_orderType" style="margin-left: 10px; width: 102px;">
-	                        <option value = "1">市价</option>
-	                        <option value = "2">对手价</option>
-                    	</select>
-                	</li>
-                </ul>
-            </div>
-            <div class="popup_footer">
-            	<div class="p1">
-            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
-	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
-	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
-            	</div>
-		        <a class="sure" href="javascript:void(0)" data-tion-operate = "1" id = "stop_confirm">确定</a>
-		        <a class="cancel close" href="javascript:void(0)">取消</a>
-    		</div>
-    	</div>
-    	<div class="popup_center_lis"  id = "lossContent">
-    		<div class="popup_center">
-    			<ul>
-                	<li class="li1" style="width: 85px;text-align: right;">合约名称：</li>
-                	<li style="margin-left: 10px;">
-                		<span id = "loss_contractCode">HSIF7,恒指F7</span>，
-                		<span id = "loss_drection">多头</span>，
-                		<span style="margin-left: 15px;">最新：<span id = "loss_lastPrice">56.12</span></span>
-                	</li>
-                </ul>
-    			<ul>
-                	<li class="li1" style="width: 85px;text-align: right;">止盈价：</li>
-                	<li>
-                		<input type="text" name="loss_inputprice" id="loss_inputprice"/>，
-                		<input type="text" name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>手数
-                	</li>
-                </ul>
-                <ul>
-                	<li>
-                		<span id = "loss_chaPrice"></span>,
-                		预计盈利<span id = "loss_yjks">0</span>
-                		<span id = "stop_dw">HKD</span>，
-                		百分比<span id = "loss_scale">0</span>%
-                	</li>
-                </ul>
-                <ul>
-                	<li class="li1" style="width: 85px;text-align: right;">止盈委托价：</li>
-                	<li>
-                		<select id = "loss_orderType" style="margin-left: 10px; width: 102px;">
-	                        <option value = "1">市价</option>
-                        	<option value = "2">限价</option>
-                    	</select>
-                	</li>
-                </ul>
-            </div>
-            <div class="popup_footer">
-            	<div class="p1">
-            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
-	                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
-	                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
-            	</div>
-		        <a class="sure" href="javascript:void(0)" id = "loss_confirm">确定</a>
-		        <a class="cancel close" href="javascript:void(0)">取消</a>
-    		</div>
-    	</div>
-    </div> 
-</div>
-<!--止损止盈 end-->
-<!--条件单start-->
-<!-- 价格条件单 -->
-<div class="popup" id="condition_loss_money"  style="display: none;">
-	<div class="popup_top">
-        <a>修改价格条件单</a>
-        <a class="close">✖</a>
-    </div>	
-    <div class="popup_center">
-        <div>
-        	<ul>
-        		<li class="li1">合约：</li>
-        		<li>富时A50  CN1612</li>
-        	</ul>
-        	<ul>
-        		<li class="li1">条件：</li>
-        		<li>
-        			<span>价格</span>
-        			<select style="width: 50px; margin-left: 18px;">
-					    <option>></option>
-					    <option><</option>
-					</select>
-					<input type="text" name="" id=""/>
-					<select style="width: 50px;">
-					    <option><</option>
-					    <option>></option>
-					</select>
-					<input type="text" name="" id=""/>
-        		</li>
-        	</ul>
-        	<ul style="margin-top: 16px;">
-        		<li class="li1">订单：</li>
-        		<li>
-        			<select style="width: 100px; ">
-					    <option>买入</option>
-					    <option>卖出</option>
-					</select>
-					<input type="text" name="" id=""/>手速
-					<input type="text" name="" id="" style=" margin-left: 38px;"/>
-				</li>
-        	</ul>
-        </div>
-    </div>
-    <div class="popup_footer">
-        <a class="sure" href="javascript:void(0)">确定</a>
-        <a class="cancel close" href="javascript:void(0)">取消</a>
-    </div>
-</div>
-<!-- 时间条件单 -->
-<div class="popup" id="condition_loss_time"  style="display: none;">
-	<div class="popup_top">
-        <a>修改时间条件单</a>
-        <a class="close">✖</a>
-    </div>	
-    <div class="popup_center">
-        <div>
-        	<ul>
-        		<li class="li1">合约：</li>
-        		<li>富时A50  CN1612</li>
-        	</ul>
-        	<ul>
-        		<li class="li1">条件：</li>
-        		<li>
-        			<span>时间</span>
-        			<span style="margin-left: 27px;">到达：</span>
-					<input type="text" name="" id=""/>
-					<select style="width: 50px;">
-					    <option><</option>
-					    <option>></option>
-					</select>
-					<input type="text" name="" id=""/>
-        		</li>
-        	</ul>
-        	<ul style="margin-top: 16px;">
-        		<li class="li1">订单：</li>
-        		<li>
-        			<select style="width: 100px; ">
-					    <option>买入</option>
-					    <option>卖出</option>
-					</select>
-					<input type="text" name="" id=""/>手速
-					<input type="text" name="" id="" style=" margin-left: 38px;"/>
-				</li>
-        	</ul>
-        </div>
-    </div>
-    <div class="popup_footer">
-        <a class="sure" href="javascript:void(0)">确定</a>
-        <a class="cancel close" href="javascript:void(0)">取消</a>
-    </div>
-</div>
-<!--条件单end-->
-<div class="tck01" id="weidenglu" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">提示</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div></div>
-    </div>
-    <div class="anniu">
-        <a class="sure" href="javascript:void(0)">登录</a>
-        <a class="cancel close">取消</a>
-    </div>
-</div>
-<div class="tck01" id="mairu" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">提示</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div>
-            <p>合约信息：国际原油 CL1611</p>
-            <p>委托价格：2998.79</p>
-            <p>委托数量：1</p>
-            <p>支付金额：2998.79</p>
-        </div>
-    </div>
-    <div class="anniu">
-        <a class="sure" href="javascript:void(0)">确认支付</a>
-        <a class="cancel close">取消支付</a>
-    </div>
-</div>
-<div class="tck01" id="maichu" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">提示</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div>
-            <p>合约信息：国际原油 CL1611</p>
-            <p>委托价格：2998.79</p>
-            <p>委托数量：1</p>
-            <p>支付金额：2998.79</p>
-        </div>
-    </div>
-    <div class="anniu">
-        <a class="sure" href="javascript:void(0)">确认卖出</a>
-        <a class="cancel close">取消卖出</a>
-    </div>
-</div>
-<div class="tck01" id="revoke" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">提示</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div>你确定对当前合约进行撤单操作？</div>
-    </div>
-    <div class="anniu">
-        <a class="sure" href="javascript:void(0)">是</a>
-        <a class="cancel close">否</a>
-    </div>
-</div>
-<div class="tck01" id="change" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">提示</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div>
-            <p>修改委托价格：<input type="text" name="" id=""/></p>
-            <p>修改委托数量：<input type="text" name="" id=""/></p>
-        </div>
-    </div>
-    <div class="anniu">
-        <a class="sure" href="javascript:void(0)">确认改单</a>
-        <a class="cancel close">取消改单</a>
-    </div>
-</div>
-<div class="tck01" id="back_passwork" style="display: none;">
-    <div class="smain">
-        <div>
-            <p>如您忘记密码请及时与我们的取得联系。</p>
-            <p>联系电话：<span style="color:#fc3;">400-852-8008！</span></p>
-        </div>
-    </div>
-    <div class="anniu">
-
-    </div>
-</div>
-<div class="tck01" id="open_account" style="display: none;">
-    <div class="smain">
-        <div>
-            <p>模拟账户申请功能正在研发中，</p>
-            <p>联系客服：<span style="color:#fc3;">400-852-8008</span>，为您手动开通</p>
-        </div>
-    </div>
-    <div class="anniu">
-
-    </div>
-</div>
-<div class="" id="signLogin" style="display:none;">
-    <p class="p1">
-        <span class="signLogin_span on" data-tion = "0">实盘登录</span>
-        <span class="signLogin_span" data-tion = "1">模拟盘登录</span>
-        <i>|</i>
-        <a class="signLogin_close" href="javascript:void(0);">✖</a>
-    </p>
-    <div class="signLogin_mode">
-        <div class="signLogin_all signLogin_firm"  style="display: block;">
-            <p class="p2"><input type="text" name="firm_name" id="firm_name" placeholder="输入实盘账号"></p>
-            <p class="p2"><input type="password" name="firm_password" id="firm_password" placeholder="输入实盘密码"></p>
-            <p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
-            <p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="../../outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
-        </div>
-        <div class="signLogin_all signLogin_simulation">
-            <p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
-            <p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
-            <p class="p3"><a href="http://www.vs.com/forgetpw"  target="_blank"  class="">忘记密码？</a></p>
-            <p class="p4"><span class="on" id="simulation_btn">立即登录</span><!-- <span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span> --></p>
-            <span style="font-size: 14px; color: #ffb319; position: relative; top: 5px;">模拟盘账密为您的维胜账密，如有问题请拨打400-852-8008；</span>
-        </div>
-    </div>
-</div>
-<div class="tck01" id="handicapDetails" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">盘口信息</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div class="hkDetails">
-            <ul>
-                <li>卖价</li>
-                <li class="fr" id = "pkmj_sell">0</li>
-            </ul>
-            <ul>
-                <li>卖量</li>
-                <li class="fr" id = "pkml_sell">0</li>
-            </ul>
-            <ul>
-                <li>买价</li>
-                <li class="fr" id = "pkmj_buy">0</li>
-            </ul>
-            <ul>
-                <li>买量</li>
-                <li class="fr" id = "pkml_buy">0</li>
-            </ul>
-            <ul>
-                <li>最新</li>
-                <li class="fr" id = "pklastparice">0</li>
-            </ul>
-            <ul>
-                <li>涨跌</li>
-                <li class="fr" id = "pkzd">0/0</li>
-            </ul>
-            <ul>
-                <li>开盘</li>
-                <li class="fr" id = "pkopenprice">0</li>
-            </ul>
-            <ul>
-                <li>成交量</li>
-                <li class="fr" id = "pktrademl">0</li>
-            </ul>
-            <ul>
-                <li>最高</li>
-                <li class="fr" id = "pkhightprice">0</li>
-            </ul>
-            <ul>
-                <li>持仓量</li>
-                <li class="fr" id = "pkccml">0</li>
-            </ul>
-            <ul>
-                <li>最低</li>
-                <li class="fr" id = "pklowprice">0</li>
-            </ul>
-            <!-- <ul>
-                <li>均价</li>
-                <li class="fr"></li>
-            </ul> -->
-            <!-- <ul>
-                <li>昨收</li>
-                <li class="fr">12312</li>
-            </ul> -->
-            <ul>
-                <li>昨结</li>
-                <li class="fr" id = "pkzj">0</li>
-            </ul>
-            <!-- <ul>
-                <li>涨停</li>
-                <li class="fr">011212</li>
-            </ul> -->
-            <!-- <ul>
-                <li>涨跌</li>
-                <li class="fr">515445</li>
-            </ul> -->
-            <ul>
-                <li>结算</li>
-                <li class="fr" id = "pkjs">0</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="tck01" id="handicapDetails" style="display: none;">
-    <div class="navtitle">
-        <a class="nava">盘口信息</a><a class="close"></a>
-    </div>
-    <div class="smain">
-        <div class="hkDetails">
-            <ul>
-                <li>卖价</li>
-                <li class="fr" id = "pkmj_sell">0</li>
-            </ul>
-            <ul>
-                <li>卖量</li>
-                <li class="fr" id = "pkml_sell">0</li>
-            </ul>
-            <ul>
-                <li>买价</li>
-                <li class="fr" id = "pkmj_buy">0</li>
-            </ul>
-            <ul>
-                <li>买量</li>
-                <li class="fr" id = "pkml_buy">0</li>
-            </ul>
-            <ul>
-                <li>最新</li>
-                <li class="fr" id = "pklastparice">0</li>
-            </ul>
-            <ul>
-                <li>涨跌</li>
-                <li class="fr" id = "pkzd">0/0</li>
-            </ul>
-            <ul>
-                <li>开盘</li>
-                <li class="fr" id = "pkopenprice">0</li>
-            </ul>
-            <ul>
-                <li>成交量</li>
-                <li class="fr" id = "pktrademl">0</li>
-            </ul>
-            <ul>
-                <li>最高</li>
-                <li class="fr" id = "pkhightprice">0</li>
-            </ul>
-            <ul>
-                <li>持仓量</li>
-                <li class="fr" id = "pkccml">0</li>
-            </ul>
-            <ul>
-                <li>最低</li>
-                <li class="fr" id = "pklowprice">0</li>
-            </ul>
-            <!-- <ul>
-                <li>均价</li>
-                <li class="fr"></li>
-            </ul> -->
-            <!-- <ul>
-                <li>昨收</li>
-                <li class="fr">12312</li>
-            </ul> -->
-            <ul>
-                <li>昨结</li>
-                <li class="fr" id = "pkzj">0</li>
-            </ul>
-            <!-- <ul>
-                <li>涨停</li>
-                <li class="fr">011212</li>
-            </ul> -->
-            <!-- <ul>
-                <li>涨跌</li>
-                <li class="fr">515445</li>
-            </ul> -->
-            <ul>
-                <li>结算</li>
-                <li class="fr" id = "pkjs">0</li>
-            </ul>
-        </div>
-    </div>
-</div>
-</div>
-<!-- top -->
-<div class="quotation_title">
-    <a href="http://www.vs.com" target="_blank"><img src="../../static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
-    <div class="quotation_anniu" id = "show_login">
-        <label>你好，请先<a id="sign_login">登录</a></label>
-        <label><a href="../../outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></label>
-        <div id="more_account" style="display: none;"></div>
-    </div>
-    <div class="quotation_anniu" id = "show_user_info"  style = "display:none">
-        你好，<!-- <span id = "ismockReak"></span> -->
-        <label class="quotation_xl"><span id = "top_username"></span>
-            <img src="../../static/images/xl.png" style="padding: 0px 15px 0px 0; position: relative; top: 4px;">
-        </label>
-        <ul class="show_user_ul" style="display:none">
-            <li><a target="_blank" href="http://www.vs.com/help?tab=rule&leftMenu=1">帮助中心</a></li>
-            <li><a id = "trade_loginOut">退出</a></li>
-            <li style="height: 0"><img src="../../static/images/xl1.png" style="position: absolute; right: 0; top: -15px;"></li>
-        </ul>
-    </div>
-</div>
-<!-- center -->
-<div class="quotation_center">
-    <div id="left">
-        <p class="center_futures"><input type="text" oninput="searchQuote()" name="quotation_futures" id="quotation_futures" placeholder="合约搜索"/></p>
-        <div id="gdt">
-            <div class="futuresList">
-
-            </div>
-        </div>
-    </div>
-<div id="content" style="">
-    <img class="stretch" alt="" src="../../static/images/stretch.png">
-    <img class="stretch1" alt="" src="../../static/images/stretch.png" style="display: nonel">
-    <div class="quotation_echarts">
-        <div id="right">
-            <!-- <p class="right_title"><p> -->
-            <p class="right_lis" id = "commodity_title"></p>
-            <div class="right_tab">
-                <ul>
-                    <li class="right_tab_zxj" >最新价</li>
-                    <li class="right_tab_zxjq" id = "right_lastPrice_0">0.00</li>
-                    <li class="right_tab_zj">昨结</li>
-                    <li class="right_tab_zjl" id = "right_zj_0">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab_zxj">涨跌</li>
-                    <li class="right_tab_zxjq" id = "right_zd_1" style="color: #ff4040;">0.00</li>
-                    <li class="right_tab_zj">今开</li>
-                    <li class="right_tab_zjl" id = "right_jk_1">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab_zxj">幅度</li>
-                    <li class="right_tab_zxjq" id = "right_fd_2" style="color: #ff4040;">0.00</li>
-                    <li class="right_tab_zj">最高</li>
-                    <li class="right_tab_zjl" id = "right_zg_2">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab_zxj">总量</li>
-                    <li class="right_tab_zxjq" id = "right_zl_3">0.00</li>
-                    <li class="right_tab_zj">最低</li>
-                    <li class="right_tab_zjl" id = "right_zd_3">0.00</li>
-                </ul>
-            </div>
-            <div class="right_tab tab1" style="border-bottom: 5px solid #404040; border-top: 5px solid #404040;">
-                <ul>
-                    <li class="right_tab1_left">卖五</li>
-                    <li class="right_tab1_center" id = "right_sell_0">0.00</li>
-                    <li class="right_tab1_right" id = "right_sell_1">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">卖四</li>
-                    <li class="right_tab1_center" id = "right_sell_2">0.00</li>
-                    <li class="right_tab1_right" id = "right_sell_3">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">卖三</li>
-                    <li class="right_tab1_center" id = "right_sell_4">0.00</li>
-                    <li class="right_tab1_right" id = "right_sell_5">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">卖二</li>
-                    <li class="right_tab1_center" id = "right_sell_6">0.00</li>
-                    <li class="right_tab1_right" id ="right_sell_7">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">卖一</li>
-                    <li class="right_tab1_center" id = "right_sell_8">0.00</li>
-                    <li class="right_tab1_right" id = "right_sell_9">0.00</li>
-                </ul>
-            </div>
-            <div class="right_tab tab2">
-                <ul>
-                    <li class="right_tab1_left">买一</li>
-                    <li class="right_tab1_center" id = "right_buy_0">0.00</li>
-                    <li class="right_tab1_right" id = "right_buy_1">2</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">买二</li>
-                    <li class="right_tab1_center" id = "right_buy_2">0.00</li>
-                    <li class="right_tab1_right" id = "right_buy_3">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">卖三</li>
-                    <li class="right_tab1_center" id = "right_buy_4">0.00</li>
-                    <li class="right_tab1_right" id = "right_buy_5">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">买四</li>
-                    <li class="right_tab1_center" id = "right_buy_6">0.00</li>
-                    <li class="right_tab1_right" id = "right_buy_7">0.00</li>
-                </ul>
-                <ul>
-                    <li class="right_tab1_left">买五</li>
-                    <li class="right_tab1_center" id = "right_buy_8">0.00</li>
-                    <li class="right_tab1_right" id = "right_buy_9">0.00</li>
-                </ul>
-            </div>
-        </div>
-        <div id="content2">
-            <div id="qiehuan">
-                <ul>
-                    <li class="carbon_time" data="0" style="color: #ffb319;">分时</li>
-                    <li class="carbon_time" data="1">1分</li>
-                    <li class="carbon_time" data="5">5分</li>
-                    <li class="carbon_time" data="15">15分</li>
-                    <li class="carbon_time" data="30">30分</li>
-                    <li class="carbon_time" data="1440">日K</li>
-                    <span id="handicap">盘口</span>
-                    <span id="lightButton">闪电图</span>
-                </ul>
-            </div>
-            <!--<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>-->
-            <div id="container" style="min-width: 500px;max-width: 1600px;width: 100%; height: 450px; margin: 0 auto;position:absolute;z-index: 998;left: 0px;top:0px">
-            	<div id="timeChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 250px;position: absolute;top:50px;left: 0px;z-index: 999;"></div>
-            	<div id="CandlestickChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 250px;position: absolute;top:50px;left: 0px;z-index: 998;">11</div>
-            	<div id="volumeChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 150px;position: absolute;top:280px;left: 0px;"></div>
-            </div>
-            <div id="container1" style="min-width: 500px;max-width:1600px;width: 100%; height: 450px; margin: 0 auto;position:absolute;z-index: 997;left: 0px;top:0px"></div>
-            <!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
-                <div id="app">
-                    http://localhost:8088/tzdr-web/static/ico/MSFT_full.json
-                </div>
-                <div id="qiehuan">
-                    <ul>
-                        <li class="carbon_time" data="1440">日K</li>
-                        <li class="carbon_time" data="30">30分</li>
-                        <li class="carbon_time" data="15">15分</li>
-                        <li class="carbon_time" data="5">5分</li>
-                        <li class="carbon_time" data="1" style="color: #ffb319;">1分</li>
-                        <li class="carbon_time" data="0">分时</li>
-                    </ul>
-                </div>
-            </div> -->
-        </div>
-    </div>
-    <div class="quotation_transaction">
-        <div class="quotation_type">
-            <div class="quotation_p" style="margin-top: 20px;">
-                <label>合约代码</label>
-                <div class="quotation_type_fr">
-                    <select  id = "select_commodity">
-
-                    </select>
-                </div>
-            </div>
-            <div class="quotation_p">
-                <label>下单方式</label>
-                <div class="quotation_type_fr">
-                    <label class="xdfs_sj"><input type="radio" value = "1" name="mode_order" id="marketPrice" checked="checked"/>市价</label>
-                    <label class="xdfs_xj"><input type="radio" value = "0" name="mode_order" id="fixedPrice" style="margin-left:50px;"/>限价</label>
-                </div>
-            </div>
-            <div class="quotation_p" style="height: 38px;">
-                <label>委托价格</label>
-                <div class="quotation_type_fr">
-                    <p class="money_sj">市价</p>
-                    <p class="money_js" style="display: none;">
-                        <span class="del">-</span>
-                        <span class="add">+</span>
-                        <input type="text" name="" id="money_number" style="" value="102.5">
-                    </p>
-                </div>
-            </div>
-            <div class="quotation_p">
-                <label>委托数量</label>
-                <div class="quotation_type_fr">
-                    <p class="money_sjsl">
-                        <span class="del">-</span>
-                        <span class="add">+</span>
-                        <input type="text" name="" id="entrust_number" style="margin-top:5px;" value="1"/>
-                    </p>
-                </div>
-            </div>
-            <div class="quotation_p" style="margin-top: 10px;">
-                <label style="width: 56px;">&nbsp;</label>
-                <div class="quotation_type_fr">
-                    <ul class="mairu trade_buy" data-tion-buy = "0">
-                        <li style="border-bottom: 1px solid #ff8c8c;">买入</li>
-                        <li id = "float_buy">0.00</li>
-                    </ul>
-                    <ul class="maichu trade_buy" data-tion-buy = "1" style="margin-left: 8px;">
-                        <li style="border-bottom: 1px solid #83d983">卖出</li>
-                        <li id = "float_sell">0.00</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="quotation_detailed">
-            <div class="quotation_detailed_lis">
-                <a href="javascript:void(0);" class="on">持仓</a>|
-                <a href="javascript:void(0);">挂单</a>|
-                <a href="javascript:void(0);">委托</a>|
-                <a href="javascript:void(0);">成交记录</a>|
-                <a href="javascript:void(0);">资金明细</a><!-- |
-                <a href="javascript:void(0);">止损单</a>|
-                <a href="javascript:void(0);">条件单</a> -->
-            </div>
-            <div class="quotation_detailed_conent" style="position: relative;">
-                <div class="quotation_detailed_title" id = "hold_title">
-                    <div class="gdt1">
-                        <div id = "hold_gdt1">
-                            <ul class="tab_lis">
-                                <li class="ml" style="width: 80px;">合约代码</li>
-                                <li style="width: 80px;">持仓数量</li>
-                                <li style="width: 80px">买卖</li>
-                                <li style="width: 100px;">持仓均价</li>
-                                <li style="width: 160px;">浮动盈利</li>
-                                <li  style="width: 80px;">交易所</li>
-                                <li  style="width: 80px;">币种</li>
-                            </ul>
-                            <p class="hold_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                    <ul class="caozuo"  style = "display:none">
-                        <li><a href="javascript:void(0);"  id = "allPosition">全部平仓</a></li>
-                        <li><a href="javascript:void(0);"  id = "aPosition">平仓</a></li>
-                        <li><a href="javascript:void(0);"  id = "positionBckhand">反手</a></li>
-                        <li><a href="javascript:void(0);" style = "display: none;" id = "stopLossAndtraders">止损止盈</a></li>
-                    </ul>
-                </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "des_title">
-                    <div class="gdt1">
-                        <div id = "des_gdt1">
-                            <ul class="tab_lis">
-                                <li class="ml">合约代码</li>
-                                <li>合约名称</li>
-                                <li>买卖</li>
-                                <li style="width: 120px;">委托价</li>
-                                <li>委托量</li>
-                                <li>挂单量</li>
-                            </ul>
-                            <p class="des_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                    <ul class="caozuo" style = "display:none">
-                        <li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>
-                        <li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>
-                        <li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>
-                    </ul>
-                </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "order_title">
-                    <div class="gdt1">
-                        <div id = "order_gdt1">
-                            <ul class="tab_lis">
-                                <li class="ml">合约代码</li>
-                                <li style="width: 50px;">买卖</li>
-                                <li  style="width: 50px;">委托价</li>
-                                <li style="width: 50px;">委托量</li>
-                                <li style="width: 70px;">订单类型</li>
-                                <li style="width: 70px;">委托状态</li>
-                                <li style="width: 70px;">成交均价</li>
-                                <li style="width: 50px;">成交量</li>
-                                <li style="width: 120px;">委托时间</li>
-                                <li style="width: 80px;">订单号</li>
-                                <li style="width: 80px;">反馈信息</li>
-                            </ul>
-                            <p class="order_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
-                    <div class="gdt1">
-                        <div style="width: 850px;" id = "trade_gdt1">
-                            <ul class="tab_lis">
-                                <li class="ml">合约代码</li>
-                                <li style="width: 40px;">买卖</li>
-                                <li style="width: 70px;">成交均价</li>
-                                <li style="width: 50px;">成交量</li>
-                                <!-- <li style="width: 70px;">币种</li> -->
-                                <li style="width: 250px;">成交编号</li>
-                                <li style="width: 80px;">订单号</li>
-                                <li style="width: 120px;">成交时间</li>
-                                <li style="width: 40px;">交易所</li>
-                            </ul>
-                            <p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "account_title">
-                    <div class="gdt1">
-                        <div id = "account_gdt1">
-                            <ul class="tab_lis">
-                                <li class="ml">币种</li>
-                                <li>今权益</li>
-                                <li>今可用</li>
-                                <li>保证金</li>
-                                <li>今日浮盈</li>
-                                <li>维持保证金</li>
-                                <li>昨权益</li>
-                                <li>昨结存</li>
-                                <li>今结存</li>
-                                <li>冻结资金</li>
-                                <li>盈利率</li>
-                            </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "loss_title">
-                    <div class="gdt1">
-                        <div class = "loss_lis" id="no_stopLoss">
-                            <ul class="tab_lis">
-                                <li class="ml" style="width: 100px;">合约</li>
-                                <li style="width: 50px;">状态</li>
-                                <li style="width: 50px;">多空</li>
-                                <li style="width: 50px;">类别</li>
-                                <li style="width: 50px;">手数</li>
-                                <li style="width: 140px;">触发条件</li>
-                                <li style="width: 50px;">委托价</li>
-                                <li style="width: 100px;">有效期</li>
-                                <li style="width: 140px;">触发时间</li>
-                            </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                    <div class="gdt1" style="display: none;">
-                        <div class = "loss_lis" id="yes_stopLoss">
-                            <ul class="tab_lis">
-                                <li class="ml" style="width: 100px;">合约</li>
-                                <li style="width: 50px;">状态</li>
-                                <li style="width: 50px;">多空</li>
-                                <li style="width: 50px;">类别</li>
-                                <li style="width: 50px;">手数</li>
-                                <li style="width: 140px;">触发条件</li>
-                                <li style="width: 50px;">委托价</li>
-                                <li style="width: 100px;">有效期</li>
-                                <li style="width: 140px;">触发时间</li>
-                            </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                    <div id="loss_tab" style="">
-                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="" checked="checked">未触发列表</label>
-                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="">已触发列表</label>
-                    </div>
-                    <ul class="caozuo" id="loss_caozuo" style="left: 243px;"><!--style = "display:none"-->
-                        <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "2" id = "loss_stop">暂停</a></li>
-                        <li><a href="javascript:void(0);" data-tion-vale = "0" id = "loss_update">修改</a></li>
-                        <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "1" id = "loss_delete">删除</a></li>
-                    </ul>
-                </div>
-                <div class="quotation_detailed_title" style="display: none;" id = "condition_title">
-                	<div class="gdt1">
-                        <div>
-                            <ul class="tab_lis">
-				                <li style="width: 100px" class="ml">合约</li>
-				                <li style="width: 50px">状态</li>
-				                <li style="width: 50px">类别</li>
-				                <li style="width: 120px">下单</li>
-				                <li style="width: 220px">条件</li>
-				                <li style="width: 60px">有效日期</li>
-				                <li style="width: 140px">触发时间</li>
-            				</ul>
-            				<ul class="tab_content">
-				                <li style="width: 100px" class="ml">富时A501</li>
-				                <li style="width: 50px;">运行</li>
-				                <li style="width: 50px;">价格</li>
-				                <li style="width: 120px;">买，对手价，2手</li>
-				                <li style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li style="width: 60px;">当日有效</li>
-				                <li style="width: 140px;">2016-12-08 13:59:23</li>
-            				</ul>
-            				<ul class="tab_content">
-				                <li style="width: 100px" class="ml" >富时A502</li>
-				                <li style="width: 50px;">运行</li>
-				                <li style="width: 50px;">价格</li>
-				                <li style="width: 120px;">买，对手价，2手</li>
-				                <li style="width: 220px;">时间条件单：11:34:12</li>
-				                <li style="width: 60px;">当日有效</li>
-				                <li style="width: 140px;">2016-12-08 13:59:23</li>
-            				</ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A503</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 50px;">价格</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 220px;">时间价格条件单：15:45:58 <1047.5 </li>
-				                <li class="" style="width: 60px;">当日有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				            </ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A504</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 50px;">价格</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 60px;">当日有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				            </ul>
-                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                        </div>
-                    </div>
-                    <div class="gdt1" style="display: none;">
-                    	<div id = "">
-                    		<ul class="tab_lis">
-				                <li style="width: 100px" class="ml">合约</li>
-				                <li style="width: 50px">类别</li>
-				                <li style="width: 220px">条件</li>
-				                <li style="width: 120px">下单</li>
-				                <li style="width: 100px">有效期</li>
-				                <li style="width: 140px">触发时间</li>
-				                <ii style="width: 50px">委托结果</ii>
-            				</ul>
-            				<ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-            				</ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-				            </ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-				            </ul>
-				            <ul class="tab_content">
-				                <li class="ml" style="width: 100px">富时A50</li>
-				                <li class="" style="width: 50px;">运行</li>
-				                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
-				                <li class="" style="width: 120px;">买，对手价，2手</li>
-				                <li class="" style="width: 100px;">当前有效</li>
-				                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
-				                <li class="" style="width: 50px;">成功</li>
-				            </ul>
-				            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
-                    	</div>
-                    </div>
-                    <div id="condition_tab" class="tab_lis_title" style="">
-        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="" checked="checked">未触发列表</label>
-        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="">已触发列表</label>
-    				</div>
-				    <ul class="caozuo" id="condition_caozuo" style="left: 243px;">
-				        <li><a href="javascript:void(0);"  id = "condition_stop">暂停</a></li>
-				        <li><a href="javascript:void(0);"  id = "condition_update">修改</a></li>
-				        <li><a href="javascript:void(0);"  id = "condition_delete">删除</a></li>
-				    </ul>
-                </div>
-            </div>
-                <div class="quotation_detailed_qx">
-                    <label style="margin-left: 10px; width: 130px;">账户资产（USD）：</br><span id = "todayBalance">00.0</span></label>
-                    <label>交易保证金(USD)：</br><span id = "deposit">00.0</span></label>
-                    <label>账户余额(USD)：</br><span id = "todayCanUse">00.0</span></label>
-                    <label>持仓盈亏(USD)：</br><span id = "floatingProfit">00.0</span></label>
-                    <label>交易盈亏(USD)：</br><span id = "closeProfit">00.0</span></label>
-                    <a href="../../toUserftseTradeListSSO" target="_blank">追加保证金</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- footer -->
-<p id="footer">Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</p>
-<div style = "display: none;" id = "trade_data">
-    <input type="text" id = "lastPrice"/>
-    <input type="text" id = "contractSize"/>
-    <input type="text" id = "miniTikeSize"/>
-    <input type="text"  id = "exchangeNo"/>
-    <input type="text"  id = "commodeityNo"/>
-    <input type="text"  id = "contractNo"/>
-    <input type="text"  id = "doSize"/>
-</div>
+	<!-- 弹出层 -->
+	<div id="div_Mask"  style="display:none;"></div>
+	<div class="div_loading">
+	<!--止损止盈 start-->
+	<div  class="popup" id="stop_loss"  style="display: none;">
+	    <div class="popup_top">
+	        <ul>
+	        	<li data-tion-value = "0"  id = "stopTitle" class="on stop_loiss_title">修改止损单</li><span class="popup_i"></span>
+	        	<li data-tion-value = "1" class = "stop_loiss_title" id = "lossTitle">修改止盈单</li>
+	        </ul>
+	        <a class="close">✖</a>
+	    </div>
+	    <div id="loss_popup_center">
+	    	<div class="popup_center_lis"  id = "stopContent">
+	    		<div class="popup_center">
+	            	<input type="hidden" value = "" id = "stopHoldAvgPrice"/>
+	            	<input type="hidden" value = "" id = "stopHoldDrection"/>
+	            	<input type="hidden" value = "" id = "stopHoldContractCode"/>
+	                <ul>
+	                	<li class="li1" style="width: 85px;text-align: right;">合约名称：</li>
+	                	<li style="margin-left: 10px;">
+	                		<span id = "stop_contractCode">HSIF7,恒指F7</span>，
+	                		<span id = "stop_drection">多头</span>
+	                		<span style="margin-left: 76px;">最新：<span id = "stop_lastPrice">56.12</span></span>
+	                	</li>
+	                </ul>
+	                <ul>
+	                	<li class="li1" style="width: 85px;text-align: right;">止损价：</li>
+	                	<li>
+	                		<input type="text" name="stop_inputprice" id="stop_inputprice"/>，
+	                		<input type="text" name="stop_inputnum" id="stop_inputnum" style="margin-left: 36px;"/>手数
+	                	</li>
+	                </ul>
+	                <ul>
+	                	<li>
+	                		价差<span id = "stop_pricecha">0,</span>&nbsp;&nbsp;
+	                		预计亏损<span id = "stop_yjks">0</span>
+	                		<span class = "stop_dw">0</span>，
+	                		百分比<span id = "stop_scale">0</span>%
+	                	</li>
+	                </ul>
+	                <ul>
+	                	<li class="li1" style="width: 85px; text-align: right;">
+	                		<input type="checkbox"  name="stop_checked" id="stop_checked" style="width: 15px; margin-top: 4px; margin-right: 5px;"/>	
+	                	</li>
+	                	<li style="margin-left: 10px;">
+	                		动态追踪，价格回测幅度
+		                	<input type="text"  name="stop_diff" id="stop_diff"/>
+		                	<span class = "stop_dw"></span>
+	                	</li>
+	                </ul>
+	                <ul>
+	                	<li class="li1" style="width: 85px;text-align: right; margin-left: -85px;">止损委托价：</li>
+	                	<li>
+	                		<select id = "stop_orderType" style="margin-left: 10px; width: 102px;">
+		                        <option value = "1">市价</option>
+		                        <option value = "2">对手价</option>
+	                    	</select>
+	                	</li>
+	                </ul>
+	            </div>
+	            <div class="popup_footer">
+	            	<div class="p1">
+	            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+		                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
+		                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
+	            	</div>
+			        <a class="sure" href="javascript:void(0)" data-tion-operate = "1" id = "stop_confirm">确定</a>
+			        <a class="cancel close" href="javascript:void(0)">取消</a>
+	    		</div>
+	    	</div>
+	    	<div class="popup_center_lis"  id = "lossContent">
+	    		<div class="popup_center">
+	    			<ul>
+	                	<li class="li1" style="width: 85px;text-align: right;">合约名称：</li>
+	                	<li style="margin-left: 10px;">
+	                		<span id = "loss_contractCode">HSIF7,恒指F7</span>，
+	                		<span id = "loss_drection">多头</span>，
+	                		<span style="margin-left: 15px;">最新：<span id = "loss_lastPrice">56.12</span></span>
+	                	</li>
+	                </ul>
+	    			<ul>
+	                	<li class="li1" style="width: 85px;text-align: right;">止盈价：</li>
+	                	<li>
+	                		<input type="text" name="loss_inputprice" id="loss_inputprice"/>，
+	                		<input type="text" name="loss_inputnum" id="loss_inputnum" style="margin-left: 36px;"/>手数
+	                	</li>
+	                </ul>
+	                <ul>
+	                	<li>
+	                		<span id = "loss_chaPrice"></span>,
+	                		预计盈利<span id = "loss_yjks">0</span>
+	                		<span id = "stop_dw">HKD</span>，
+	                		百分比<span id = "loss_scale">0</span>%
+	                	</li>
+	                </ul>
+	                <ul>
+	                	<li class="li1" style="width: 85px;text-align: right;">止盈委托价：</li>
+	                	<li>
+	                		<select id = "loss_orderType" style="margin-left: 10px; width: 102px;">
+		                        <option value = "1">市价</option>
+	                        	<option value = "2">限价</option>
+	                    	</select>
+	                	</li>
+	                </ul>
+	            </div>
+	            <div class="popup_footer">
+	            	<div class="p1">
+	            		<p>1、止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+		                <p>2、止损单在行情不活跃或快速发送变化下，不保证成交价为指定价</p>
+		                <p>3、止损单存在风险，云端系统、网络故障情况下失效等。</p>
+	            	</div>
+			        <a class="sure" href="javascript:void(0)" id = "loss_confirm">确定</a>
+			        <a class="cancel close" href="javascript:void(0)">取消</a>
+	    		</div>
+	    	</div>
+	    </div> 
+	</div>
+	<!--止损止盈 end-->
+	<!--条件单start-->
+	<!-- 价格条件单 -->
+	<div class="popup" id="condition_loss_money"  style="display: none;">
+		<div class="popup_top">
+	        <a>修改价格条件单</a>
+	        <a class="close">✖</a>
+	    </div>	
+	    <div class="popup_center">
+	        <div>
+	        	<ul>
+	        		<li class="li1">合约：</li>
+	        		<li>富时A50  CN1612</li>
+	        	</ul>
+	        	<ul>
+	        		<li class="li1">条件：</li>
+	        		<li>
+	        			<span>价格</span>
+	        			<select style="width: 50px; margin-left: 18px;">
+						    <option>></option>
+						    <option><</option>
+						</select>
+						<input type="text" name="" id=""/>
+						<select style="width: 50px;">
+						    <option><</option>
+						    <option>></option>
+						</select>
+						<input type="text" name="" id=""/>
+	        		</li>
+	        	</ul>
+	        	<ul style="margin-top: 16px;">
+	        		<li class="li1">订单：</li>
+	        		<li>
+	        			<select style="width: 100px; ">
+						    <option>买入</option>
+						    <option>卖出</option>
+						</select>
+						<input type="text" name="" id=""/>手速
+						<input type="text" name="" id="" style=" margin-left: 38px;"/>
+					</li>
+	        	</ul>
+	        </div>
+	    </div>
+	    <div class="popup_footer">
+	        <a class="sure" href="javascript:void(0)">确定</a>
+	        <a class="cancel close" href="javascript:void(0)">取消</a>
+	    </div>
+	</div>
+	<!-- 时间条件单 -->
+	<div class="popup" id="condition_loss_time"  style="display: none;">
+		<div class="popup_top">
+	        <a>修改时间条件单</a>
+	        <a class="close">✖</a>
+	    </div>	
+	    <div class="popup_center">
+	        <div>
+	        	<ul>
+	        		<li class="li1">合约：</li>
+	        		<li>富时A50  CN1612</li>
+	        	</ul>
+	        	<ul>
+	        		<li class="li1">条件：</li>
+	        		<li>
+	        			<span>时间</span>
+	        			<span style="margin-left: 27px;">到达：</span>
+						<input type="text" name="" id=""/>
+						<select style="width: 50px;">
+						    <option><</option>
+						    <option>></option>
+						</select>
+						<input type="text" name="" id=""/>
+	        		</li>
+	        	</ul>
+	        	<ul style="margin-top: 16px;">
+	        		<li class="li1">订单：</li>
+	        		<li>
+	        			<select style="width: 100px; ">
+						    <option>买入</option>
+						    <option>卖出</option>
+						</select>
+						<input type="text" name="" id=""/>手速
+						<input type="text" name="" id="" style=" margin-left: 38px;"/>
+					</li>
+	        	</ul>
+	        </div>
+	    </div>
+	    <div class="popup_footer">
+	        <a class="sure" href="javascript:void(0)">确定</a>
+	        <a class="cancel close" href="javascript:void(0)">取消</a>
+	    </div>
+	</div>
+	<!--条件单end-->
+	<div class="tck01" id="weidenglu" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">提示</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div></div>
+	    </div>
+	    <div class="anniu">
+	        <a class="sure" href="javascript:void(0)">登录</a>
+	        <a class="cancel close">取消</a>
+	    </div>
+	</div>
+	<div class="tck01" id="mairu" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">提示</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div>
+	            <p>合约信息：国际原油 CL1611</p>
+	            <p>委托价格：2998.79</p>
+	            <p>委托数量：1</p>
+	            <p>支付金额：2998.79</p>
+	        </div>
+	    </div>
+	    <div class="anniu">
+	        <a class="sure" href="javascript:void(0)">确认支付</a>
+	        <a class="cancel close">取消支付</a>
+	    </div>
+	</div>
+	<div class="tck01" id="maichu" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">提示</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div>
+	            <p>合约信息：国际原油 CL1611</p>
+	            <p>委托价格：2998.79</p>
+	            <p>委托数量：1</p>
+	            <p>支付金额：2998.79</p>
+	        </div>
+	    </div>
+	    <div class="anniu">
+	        <a class="sure" href="javascript:void(0)">确认卖出</a>
+	        <a class="cancel close">取消卖出</a>
+	    </div>
+	</div>
+	<div class="tck01" id="revoke" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">提示</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div>你确定对当前合约进行撤单操作？</div>
+	    </div>
+	    <div class="anniu">
+	        <a class="sure" href="javascript:void(0)">是</a>
+	        <a class="cancel close">否</a>
+	    </div>
+	</div>
+	<div class="tck01" id="change" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">提示</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div>
+	            <p>修改委托价格：<input type="text" name="" id=""/></p>
+	            <p>修改委托数量：<input type="text" name="" id=""/></p>
+	        </div>
+	    </div>
+	    <div class="anniu">
+	        <a class="sure" href="javascript:void(0)">确认改单</a>
+	        <a class="cancel close">取消改单</a>
+	    </div>
+	</div>
+	<div class="tck01" id="back_passwork" style="display: none;">
+	    <div class="smain">
+	        <div>
+	            <p>如您忘记密码请及时与我们的取得联系。</p>
+	            <p>联系电话：<span style="color:#fc3;">400-852-8008！</span></p>
+	        </div>
+	    </div>
+	    <div class="anniu">
+	
+	    </div>
+	</div>
+	<div class="tck01" id="open_account" style="display: none;">
+	    <div class="smain">
+	        <div>
+	            <p>模拟账户申请功能正在研发中，</p>
+	            <p>联系客服：<span style="color:#fc3;">400-852-8008</span>，为您手动开通</p>
+	        </div>
+	    </div>
+	    <div class="anniu">
+	
+	    </div>
+	</div>
+	<div class="" id="signLogin" style="display:none;">
+	    <p class="p1">
+	        <span class="signLogin_span on" data-tion = "0">实盘登录</span>
+	        <span class="signLogin_span" data-tion = "1">模拟盘登录</span>
+	        <i>|</i>
+	        <a class="signLogin_close" href="javascript:void(0);">✖</a>
+	    </p>
+	    <div class="signLogin_mode">
+	        <div class="signLogin_all signLogin_firm"  style="display: block;">
+	            <p class="p2"><input type="text" name="firm_name" id="firm_name" placeholder="输入实盘账号"></p>
+	            <p class="p2"><input type="password" name="firm_password" id="firm_password" placeholder="输入实盘密码"></p>
+	            <p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+	            <p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="../../outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
+	        </div>
+	        <div class="signLogin_all signLogin_simulation">
+	            <p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
+	            <p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
+	            <p class="p3"><a href="http://www.vs.com/forgetpw"  target="_blank"  class="">忘记密码？</a></p>
+	            <p class="p4"><span class="on" id="simulation_btn">立即登录</span><!-- <span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span> --></p>
+	            <span style="font-size: 14px; color: #ffb319; position: relative; top: 5px;">模拟盘账密为您的维胜账密，如有问题请拨打400-852-8008；</span>
+	        </div>
+	    </div>
+	</div>
+	<div class="tck01" id="handicapDetails" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">盘口信息</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div class="hkDetails">
+	            <ul>
+	                <li>卖价</li>
+	                <li class="fr" id = "pkmj_sell">0</li>
+	            </ul>
+	            <ul>
+	                <li>卖量</li>
+	                <li class="fr" id = "pkml_sell">0</li>
+	            </ul>
+	            <ul>
+	                <li>买价</li>
+	                <li class="fr" id = "pkmj_buy">0</li>
+	            </ul>
+	            <ul>
+	                <li>买量</li>
+	                <li class="fr" id = "pkml_buy">0</li>
+	            </ul>
+	            <ul>
+	                <li>最新</li>
+	                <li class="fr" id = "pklastparice">0</li>
+	            </ul>
+	            <ul>
+	                <li>涨跌</li>
+	                <li class="fr" id = "pkzd">0/0</li>
+	            </ul>
+	            <ul>
+	                <li>开盘</li>
+	                <li class="fr" id = "pkopenprice">0</li>
+	            </ul>
+	            <ul>
+	                <li>成交量</li>
+	                <li class="fr" id = "pktrademl">0</li>
+	            </ul>
+	            <ul>
+	                <li>最高</li>
+	                <li class="fr" id = "pkhightprice">0</li>
+	            </ul>
+	            <ul>
+	                <li>持仓量</li>
+	                <li class="fr" id = "pkccml">0</li>
+	            </ul>
+	            <ul>
+	                <li>最低</li>
+	                <li class="fr" id = "pklowprice">0</li>
+	            </ul>
+	            <!-- <ul>
+	                <li>均价</li>
+	                <li class="fr"></li>
+	            </ul> -->
+	            <!-- <ul>
+	                <li>昨收</li>
+	                <li class="fr">12312</li>
+	            </ul> -->
+	            <ul>
+	                <li>昨结</li>
+	                <li class="fr" id = "pkzj">0</li>
+	            </ul>
+	            <!-- <ul>
+	                <li>涨停</li>
+	                <li class="fr">011212</li>
+	            </ul> -->
+	            <!-- <ul>
+	                <li>涨跌</li>
+	                <li class="fr">515445</li>
+	            </ul> -->
+	            <ul>
+	                <li>结算</li>
+	                <li class="fr" id = "pkjs">0</li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	<div class="tck01" id="handicapDetails" style="display: none;">
+	    <div class="navtitle">
+	        <a class="nava">盘口信息</a><a class="close"></a>
+	    </div>
+	    <div class="smain">
+	        <div class="hkDetails">
+	            <ul>
+	                <li>卖价</li>
+	                <li class="fr" id = "pkmj_sell">0</li>
+	            </ul>
+	            <ul>
+	                <li>卖量</li>
+	                <li class="fr" id = "pkml_sell">0</li>
+	            </ul>
+	            <ul>
+	                <li>买价</li>
+	                <li class="fr" id = "pkmj_buy">0</li>
+	            </ul>
+	            <ul>
+	                <li>买量</li>
+	                <li class="fr" id = "pkml_buy">0</li>
+	            </ul>
+	            <ul>
+	                <li>最新</li>
+	                <li class="fr" id = "pklastparice">0</li>
+	            </ul>
+	            <ul>
+	                <li>涨跌</li>
+	                <li class="fr" id = "pkzd">0/0</li>
+	            </ul>
+	            <ul>
+	                <li>开盘</li>
+	                <li class="fr" id = "pkopenprice">0</li>
+	            </ul>
+	            <ul>
+	                <li>成交量</li>
+	                <li class="fr" id = "pktrademl">0</li>
+	            </ul>
+	            <ul>
+	                <li>最高</li>
+	                <li class="fr" id = "pkhightprice">0</li>
+	            </ul>
+	            <ul>
+	                <li>持仓量</li>
+	                <li class="fr" id = "pkccml">0</li>
+	            </ul>
+	            <ul>
+	                <li>最低</li>
+	                <li class="fr" id = "pklowprice">0</li>
+	            </ul>
+	            <!-- <ul>
+	                <li>均价</li>
+	                <li class="fr"></li>
+	            </ul> -->
+	            <!-- <ul>
+	                <li>昨收</li>
+	                <li class="fr">12312</li>
+	            </ul> -->
+	            <ul>
+	                <li>昨结</li>
+	                <li class="fr" id = "pkzj">0</li>
+	            </ul>
+	            <!-- <ul>
+	                <li>涨停</li>
+	                <li class="fr">011212</li>
+	            </ul> -->
+	            <!-- <ul>
+	                <li>涨跌</li>
+	                <li class="fr">515445</li>
+	            </ul> -->
+	            <ul>
+	                <li>结算</li>
+	                <li class="fr" id = "pkjs">0</li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	</div>
+	<!-- top -->
+	<div class="quotation_title">
+	    <a href="http://www.vs.com" target="_blank"><img src="../../static/images/common-new/new_logo.png" title="维胜金融" alt="维胜金融"></a>
+	    <div class="quotation_anniu" id = "show_login">
+	        <label>你好，请先<a id="sign_login">登录</a></label>
+	        <label><a href="../../outDisk/index"  target="_blank" style="width: 80px;">立即开户</a></label>
+	        <div id="more_account" style="display: none;"></div>
+	    </div>
+	    <div class="quotation_anniu" id = "show_user_info"  style = "display:none">
+	        你好，<!-- <span id = "ismockReak"></span> -->
+	        <label class="quotation_xl"><span id = "top_username"></span>
+	            <img src="../../static/images/xl.png" style="padding: 0px 15px 0px 0; position: relative; top: 4px;">
+	        </label>
+	        <ul class="show_user_ul" style="display:none">
+	            <li><a target="_blank" href="http://www.vs.com/help?tab=rule&leftMenu=1">帮助中心</a></li>
+	            <li><a id = "trade_loginOut">退出</a></li>
+	            <li style="height: 0"><img src="../../static/images/xl1.png" style="position: absolute; right: 0; top: -15px;"></li>
+	        </ul>
+	    </div>
+	</div>
+	<!-- center -->
+	<div class="quotation_center">
+	    <div id="left">
+	        <p class="center_futures"><input type="text" oninput="searchQuote()" name="quotation_futures" id="quotation_futures" placeholder="合约搜索"/></p>
+	        <div id="gdt">
+	            <div class="futuresList">
+	
+	            </div>
+	        </div>
+	    </div>
+	<div id="content" style="">
+	    <img class="stretch" alt="" src="../../static/images/stretch.png">
+	    <img class="stretch1" alt="" src="../../static/images/stretch.png" style="display: nonel">
+	    <div class="quotation_echarts">
+	        <div id="right">
+	            <!-- <p class="right_title"><p> -->
+	            <p class="right_lis" id = "commodity_title"></p>
+	            <div class="right_tab">
+	                <ul>
+	                    <li class="right_tab_zxj" >最新价</li>
+	                    <li class="right_tab_zxjq" id = "right_lastPrice_0">0.00</li>
+	                    <li class="right_tab_zj">昨结</li>
+	                    <li class="right_tab_zjl" id = "right_zj_0">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab_zxj">涨跌</li>
+	                    <li class="right_tab_zxjq" id = "right_zd_1" style="color: #ff4040;">0.00</li>
+	                    <li class="right_tab_zj">今开</li>
+	                    <li class="right_tab_zjl" id = "right_jk_1">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab_zxj">幅度</li>
+	                    <li class="right_tab_zxjq" id = "right_fd_2" style="color: #ff4040;">0.00</li>
+	                    <li class="right_tab_zj">最高</li>
+	                    <li class="right_tab_zjl" id = "right_zg_2">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab_zxj">总量</li>
+	                    <li class="right_tab_zxjq" id = "right_zl_3">0.00</li>
+	                    <li class="right_tab_zj">最低</li>
+	                    <li class="right_tab_zjl" id = "right_zd_3">0.00</li>
+	                </ul>
+	            </div>
+	            <div class="right_tab tab1" style="border-bottom: 5px solid #404040; border-top: 5px solid #404040;">
+	                <ul>
+	                    <li class="right_tab1_left">卖五</li>
+	                    <li class="right_tab1_center" id = "right_sell_0">0.00</li>
+	                    <li class="right_tab1_right" id = "right_sell_1">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">卖四</li>
+	                    <li class="right_tab1_center" id = "right_sell_2">0.00</li>
+	                    <li class="right_tab1_right" id = "right_sell_3">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">卖三</li>
+	                    <li class="right_tab1_center" id = "right_sell_4">0.00</li>
+	                    <li class="right_tab1_right" id = "right_sell_5">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">卖二</li>
+	                    <li class="right_tab1_center" id = "right_sell_6">0.00</li>
+	                    <li class="right_tab1_right" id ="right_sell_7">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">卖一</li>
+	                    <li class="right_tab1_center" id = "right_sell_8">0.00</li>
+	                    <li class="right_tab1_right" id = "right_sell_9">0.00</li>
+	                </ul>
+	            </div>
+	            <div class="right_tab tab2">
+	                <ul>
+	                    <li class="right_tab1_left">买一</li>
+	                    <li class="right_tab1_center" id = "right_buy_0">0.00</li>
+	                    <li class="right_tab1_right" id = "right_buy_1">2</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">买二</li>
+	                    <li class="right_tab1_center" id = "right_buy_2">0.00</li>
+	                    <li class="right_tab1_right" id = "right_buy_3">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">卖三</li>
+	                    <li class="right_tab1_center" id = "right_buy_4">0.00</li>
+	                    <li class="right_tab1_right" id = "right_buy_5">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">买四</li>
+	                    <li class="right_tab1_center" id = "right_buy_6">0.00</li>
+	                    <li class="right_tab1_right" id = "right_buy_7">0.00</li>
+	                </ul>
+	                <ul>
+	                    <li class="right_tab1_left">买五</li>
+	                    <li class="right_tab1_center" id = "right_buy_8">0.00</li>
+	                    <li class="right_tab1_right" id = "right_buy_9">0.00</li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div id="content2">
+	            <div id="qiehuan">
+	                <ul>
+	                    <li class="carbon_time active" data="0" style="color: #ffb319;">分时</li>
+	                    <li class="carbon_time" data="1">1分</li>
+	                    <li class="carbon_time" data="5">5分</li>
+	                    <li class="carbon_time" data="15">15分</li>
+	                    <li class="carbon_time" data="30">30分</li>
+	                    <li class="carbon_time" data="1440">日K</li>
+	                    <li id="lightButton" class="carbon_time" data="2" >闪电图</li>
+	                    <span id="handicap">盘口</span>
+	                </ul>
+	            </div>
+	            <!--<div id="container" style="min-width: 500px; height: 450px; margin: 0 auto"></div>-->
+	            <div id="container" style="min-width: 500px;max-width: 1600px;width: 100%; height: 450px; margin: 0 auto;position:absolute;z-index: 998;left: 0px;top:0px">
+	            	<div id="time" style="height: 400px;position: absolute;z-index: 999;top: 50px;width: 100%;">
+	            		<div id="timeChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 250px;"></div>
+	            		<div id="volumeChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 150px;"></div>
+	            	</div>
+	            	<div id="Candlestick" style="height: 400px;position: absolute;z-index: 998;top: 50px;width: 100%;">
+	            		<div id="CandlestickChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 250px;"></div>
+	            		<div id="CandlestickVolumeChart" style="min-width: 500px;max-width: 1600px;width: 100%; height: 150px;"></div>
+	            	</div>
+	            </div>
+	            <div id="container1" style="min-width: 500px;max-width:1600px;width: 100%; height: 400px; margin: 0 auto;position:absolute;z-index: 997;left: 0px;top:50px"></div>
+	            <!-- <div class="carbon" style="position: relative; width: 100%; height: 500px; border-top: 1px solid #4d4d4d;">
+	                <div id="app">
+	                    http://localhost:8088/tzdr-web/static/ico/MSFT_full.json
+	                </div>
+	                <div id="qiehuan">
+	                    <ul>
+	                        <li class="carbon_time" data="1440">日K</li>
+	                        <li class="carbon_time" data="30">30分</li>
+	                        <li class="carbon_time" data="15">15分</li>
+	                        <li class="carbon_time" data="5">5分</li>
+	                        <li class="carbon_time" data="1" style="color: #ffb319;">1分</li>
+	                        <li class="carbon_time" data="0">分时</li>
+	                    </ul>
+	                </div>
+	            </div> -->
+	        </div>
+	    </div>
+	    <div class="quotation_transaction">
+	        <div class="quotation_type">
+	            <div class="quotation_p" style="margin-top: 20px;">
+	                <label>合约代码</label>
+	                <div class="quotation_type_fr">
+	                    <select  id = "select_commodity">
+	
+	                    </select>
+	                </div>
+	            </div>
+	            <div class="quotation_p">
+	                <label>下单方式</label>
+	                <div class="quotation_type_fr">
+	                    <label class="xdfs_sj"><input type="radio" value = "1" name="mode_order" id="marketPrice" checked="checked"/>市价</label>
+	                    <label class="xdfs_xj"><input type="radio" value = "0" name="mode_order" id="fixedPrice" style="margin-left:50px;"/>限价</label>
+	                </div>
+	            </div>
+	            <div class="quotation_p" style="height: 38px;">
+	                <label>委托价格</label>
+	                <div class="quotation_type_fr">
+	                    <p class="money_sj">市价</p>
+	                    <p class="money_js" style="display: none;">
+	                        <span class="del">-</span>
+	                        <span class="add">+</span>
+	                        <input type="text" name="" id="money_number" style="" value="102.5">
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="quotation_p">
+	                <label>委托数量</label>
+	                <div class="quotation_type_fr">
+	                    <p class="money_sjsl">
+	                        <span class="del">-</span>
+	                        <span class="add">+</span>
+	                        <input type="text" name="" id="entrust_number" style="margin-top:5px;" value="1"/>
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="quotation_p" style="margin-top: 10px;">
+	                <label style="width: 56px;">&nbsp;</label>
+	                <div class="quotation_type_fr">
+	                    <ul class="mairu trade_buy" data-tion-buy = "0">
+	                        <li style="border-bottom: 1px solid #ff8c8c;">买入</li>
+	                        <li id = "float_buy">0.00</li>
+	                    </ul>
+	                    <ul class="maichu trade_buy" data-tion-buy = "1" style="margin-left: 8px;">
+	                        <li style="border-bottom: 1px solid #83d983">卖出</li>
+	                        <li id = "float_sell">0.00</li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="quotation_detailed">
+	            <div class="quotation_detailed_lis">
+	                <a href="javascript:void(0);" class="on">持仓</a>|
+	                <a href="javascript:void(0);">挂单</a>|
+	                <a href="javascript:void(0);">委托</a>|
+	                <a href="javascript:void(0);">成交记录</a>|
+	                <a href="javascript:void(0);">资金明细</a><!-- |
+	                <a href="javascript:void(0);">止损单</a>|
+	                <a href="javascript:void(0);">条件单</a> -->
+	            </div>
+	            <div class="quotation_detailed_conent" style="position: relative;">
+	                <div class="quotation_detailed_title" id = "hold_title">
+	                    <div class="gdt1">
+	                        <div id = "hold_gdt1">
+	                            <ul class="tab_lis">
+	                                <li class="ml" style="width: 80px;">合约代码</li>
+	                                <li style="width: 80px;">持仓数量</li>
+	                                <li style="width: 80px">买卖</li>
+	                                <li style="width: 100px;">持仓均价</li>
+	                                <li style="width: 160px;">浮动盈利</li>
+	                                <li  style="width: 80px;">交易所</li>
+	                                <li  style="width: 80px;">币种</li>
+	                            </ul>
+	                            <p class="hold_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                    <ul class="caozuo"  style = "display:none">
+	                        <li><a href="javascript:void(0);"  id = "allPosition">全部平仓</a></li>
+	                        <li><a href="javascript:void(0);"  id = "aPosition">平仓</a></li>
+	                        <li><a href="javascript:void(0);"  id = "positionBckhand">反手</a></li>
+	                        <li><a href="javascript:void(0);" style = "display: none;" id = "stopLossAndtraders">止损止盈</a></li>
+	                    </ul>
+	                </div>
+	                <div class="quotation_detailed_title" style="display: none;" id = "des_title">
+	                    <div class="gdt1">
+	                        <div id = "des_gdt1">
+	                            <ul class="tab_lis">
+	                                <li class="ml">合约代码</li>
+	                                <li>合约名称</li>
+	                                <li>买卖</li>
+	                                <li style="width: 120px;">委托价</li>
+	                                <li>委托量</li>
+	                                <li>挂单量</li>
+	                            </ul>
+	                            <p class="des_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                    <ul class="caozuo" style = "display:none">
+	                        <li><a href="javascript:void(0);" id = "allDesOrder">全撤</a></li>
+	                        <li><a href="javascript:void(0);" id = "desOrder">撤单</a></li>
+	                        <li><a href="javascript:void(0);" id = "updateDesOrder">改单</a></li>
+	                    </ul>
+	                </div>
+	                <div class="quotation_detailed_title" style="display: none;" id = "order_title">
+	                    <div class="gdt1">
+	                        <div id = "order_gdt1">
+	                            <ul class="tab_lis">
+	                                <li class="ml">合约代码</li>
+	                                <li style="width: 50px;">买卖</li>
+	                                <li  style="width: 50px;">委托价</li>
+	                                <li style="width: 50px;">委托量</li>
+	                                <li style="width: 70px;">订单类型</li>
+	                                <li style="width: 70px;">委托状态</li>
+	                                <li style="width: 70px;">成交均价</li>
+	                                <li style="width: 50px;">成交量</li>
+	                                <li style="width: 120px;">委托时间</li>
+	                                <li style="width: 80px;">订单号</li>
+	                                <li style="width: 80px;">反馈信息</li>
+	                            </ul>
+	                            <p class="order_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="quotation_detailed_title" style="display: none;" id = "trade_title">
+	                    <div class="gdt1">
+	                        <div style="width: 850px;" id = "trade_gdt1">
+	                            <ul class="tab_lis">
+	                                <li class="ml">合约代码</li>
+	                                <li style="width: 40px;">买卖</li>
+	                                <li style="width: 70px;">成交均价</li>
+	                                <li style="width: 50px;">成交量</li>
+	                                <!-- <li style="width: 70px;">币种</li> -->
+	                                <li style="width: 250px;">成交编号</li>
+	                                <li style="width: 80px;">订单号</li>
+	                                <li style="width: 120px;">成交时间</li>
+	                                <li style="width: 40px;">交易所</li>
+	                            </ul>
+	                            <p class="trade_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="quotation_detailed_title" style="display: none;" id = "account_title">
+	                    <div class="gdt1">
+	                        <div id = "account_gdt1">
+	                            <ul class="tab_lis">
+	                                <li class="ml">币种</li>
+	                                <li>今权益</li>
+	                                <li>今可用</li>
+	                                <li>保证金</li>
+	                                <li>今日浮盈</li>
+	                                <li>维持保证金</li>
+	                                <li>昨权益</li>
+	                                <li>昨结存</li>
+	                                <li>今结存</li>
+	                                <li>冻结资金</li>
+	                                <li>盈利率</li>
+	                            </ul>
+	                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="quotation_detailed_title" style="display: none;" id = "loss_title">
+	                    <div class="gdt1">
+	                        <div class = "loss_lis" id="no_stopLoss">
+	                            <ul class="tab_lis">
+	                                <li class="ml" style="width: 100px;">合约</li>
+	                                <li style="width: 50px;">状态</li>
+	                                <li style="width: 50px;">多空</li>
+	                                <li style="width: 50px;">类别</li>
+	                                <li style="width: 50px;">手数</li>
+	                                <li style="width: 140px;">触发条件</li>
+	                                <li style="width: 50px;">委托价</li>
+	                                <li style="width: 100px;">有效期</li>
+	                                <li style="width: 140px;">触发时间</li>
+	                            </ul>
+	                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                    <div class="gdt1" style="display: none;">
+	                        <div class = "loss_lis" id="yes_stopLoss">
+	                            <ul class="tab_lis">
+	                                <li class="ml" style="width: 100px;">合约</li>
+	                                <li style="width: 50px;">状态</li>
+	                                <li style="width: 50px;">多空</li>
+	                                <li style="width: 50px;">类别</li>
+	                                <li style="width: 50px;">手数</li>
+	                                <li style="width: 140px;">触发条件</li>
+	                                <li style="width: 50px;">委托价</li>
+	                                <li style="width: 100px;">有效期</li>
+	                                <li style="width: 140px;">触发时间</li>
+	                            </ul>
+	                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                    <div id="loss_tab" style="">
+	                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="" checked="checked">未触发列表</label>
+	                        <label class="xdfs_sj"><input type="radio" value="1" name="mode_order" id="">已触发列表</label>
+	                    </div>
+	                    <ul class="caozuo" id="loss_caozuo" style="left: 243px;"><!--style = "display:none"-->
+	                        <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "2" id = "loss_stop">暂停</a></li>
+	                        <li><a href="javascript:void(0);" data-tion-vale = "0" id = "loss_update">修改</a></li>
+	                        <li><a href="javascript:void(0);" class = "updateAndDelStop" data-tion-value = "1" id = "loss_delete">删除</a></li>
+	                    </ul>
+	                </div>
+	                <div class="quotation_detailed_title" style="display: none;" id = "condition_title">
+	                	<div class="gdt1">
+	                        <div>
+	                            <ul class="tab_lis">
+					                <li style="width: 100px" class="ml">合约</li>
+					                <li style="width: 50px">状态</li>
+					                <li style="width: 50px">类别</li>
+					                <li style="width: 120px">下单</li>
+					                <li style="width: 220px">条件</li>
+					                <li style="width: 60px">有效日期</li>
+					                <li style="width: 140px">触发时间</li>
+	            				</ul>
+	            				<ul class="tab_content">
+					                <li style="width: 100px" class="ml">富时A501</li>
+					                <li style="width: 50px;">运行</li>
+					                <li style="width: 50px;">价格</li>
+					                <li style="width: 120px;">买，对手价，2手</li>
+					                <li style="width: 220px;">价格条件单：>=66.00,<100</li>
+					                <li style="width: 60px;">当日有效</li>
+					                <li style="width: 140px;">2016-12-08 13:59:23</li>
+	            				</ul>
+	            				<ul class="tab_content">
+					                <li style="width: 100px" class="ml" >富时A502</li>
+					                <li style="width: 50px;">运行</li>
+					                <li style="width: 50px;">价格</li>
+					                <li style="width: 120px;">买，对手价，2手</li>
+					                <li style="width: 220px;">时间条件单：11:34:12</li>
+					                <li style="width: 60px;">当日有效</li>
+					                <li style="width: 140px;">2016-12-08 13:59:23</li>
+	            				</ul>
+					            <ul class="tab_content">
+					                <li class="ml" style="width: 100px">富时A503</li>
+					                <li class="" style="width: 50px;">运行</li>
+					                <li class="" style="width: 50px;">价格</li>
+					                <li class="" style="width: 120px;">买，对手价，2手</li>
+					                <li class="" style="width: 220px;">时间价格条件单：15:45:58 <1047.5 </li>
+					                <li class="" style="width: 60px;">当日有效</li>
+					                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+					            </ul>
+					            <ul class="tab_content">
+					                <li class="ml" style="width: 100px">富时A504</li>
+					                <li class="" style="width: 50px;">运行</li>
+					                <li class="" style="width: 50px;">价格</li>
+					                <li class="" style="width: 120px;">买，对手价，2手</li>
+					                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+					                <li class="" style="width: 60px;">当日有效</li>
+					                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+					            </ul>
+	                            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                        </div>
+	                    </div>
+	                    <div class="gdt1" style="display: none;">
+	                    	<div id = "">
+	                    		<ul class="tab_lis">
+					                <li style="width: 100px" class="ml">合约</li>
+					                <li style="width: 50px">类别</li>
+					                <li style="width: 220px">条件</li>
+					                <li style="width: 120px">下单</li>
+					                <li style="width: 100px">有效期</li>
+					                <li style="width: 140px">触发时间</li>
+					                <ii style="width: 50px">委托结果</ii>
+	            				</ul>
+	            				<ul class="tab_content">
+					                <li class="ml" style="width: 100px">富时A50</li>
+					                <li class="" style="width: 50px;">运行</li>
+					                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+					                <li class="" style="width: 120px;">买，对手价，2手</li>
+					                <li class="" style="width: 100px;">当前有效</li>
+					                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+					                <li class="" style="width: 50px;">成功</li>
+	            				</ul>
+					            <ul class="tab_content">
+					                <li class="ml" style="width: 100px">富时A50</li>
+					                <li class="" style="width: 50px;">运行</li>
+					                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+					                <li class="" style="width: 120px;">买，对手价，2手</li>
+					                <li class="" style="width: 100px;">当前有效</li>
+					                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+					                <li class="" style="width: 50px;">成功</li>
+					            </ul>
+					            <ul class="tab_content">
+					                <li class="ml" style="width: 100px">富时A50</li>
+					                <li class="" style="width: 50px;">运行</li>
+					                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+					                <li class="" style="width: 120px;">买，对手价，2手</li>
+					                <li class="" style="width: 100px;">当前有效</li>
+					                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+					                <li class="" style="width: 50px;">成功</li>
+					            </ul>
+					            <ul class="tab_content">
+					                <li class="ml" style="width: 100px">富时A50</li>
+					                <li class="" style="width: 50px;">运行</li>
+					                <li class="" style="width: 220px;">价格条件单：>=66.00,<100</li>
+					                <li class="" style="width: 120px;">买，对手价，2手</li>
+					                <li class="" style="width: 100px;">当前有效</li>
+					                <li class="" style="width: 140px;">2016-12-08 13:59:23</li>
+					                <li class="" style="width: 50px;">成功</li>
+					            </ul>
+					            <p class="account_NoRecord" style="color: #ccc; text-align: center; padding: 10px 0;">暂无记录</p>
+	                    	</div>
+	                    </div>
+	                    <div id="condition_tab" class="tab_lis_title" style="">
+	        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="" checked="checked">未触发列表</label>
+	        				<label class="xdfs_sj"><input type="radio" value="1" name="condition_order" id="">已触发列表</label>
+	    				</div>
+					    <ul class="caozuo" id="condition_caozuo" style="left: 243px;">
+					        <li><a href="javascript:void(0);"  id = "condition_stop">暂停</a></li>
+					        <li><a href="javascript:void(0);"  id = "condition_update">修改</a></li>
+					        <li><a href="javascript:void(0);"  id = "condition_delete">删除</a></li>
+					    </ul>
+	                </div>
+	            </div>
+	                <div class="quotation_detailed_qx">
+	                    <label style="margin-left: 10px; width: 130px;">账户资产（USD）：</br><span id = "todayBalance">00.0</span></label>
+	                    <label>交易保证金(USD)：</br><span id = "deposit">00.0</span></label>
+	                    <label>账户余额(USD)：</br><span id = "todayCanUse">00.0</span></label>
+	                    <label>持仓盈亏(USD)：</br><span id = "floatingProfit">00.0</span></label>
+	                    <label>交易盈亏(USD)：</br><span id = "closeProfit">00.0</span></label>
+	                    <a href="../../toUserftseTradeListSSO" target="_blank">追加保证金</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- footer -->
+	<p id="footer">Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1 投资有风险，入市需谨慎</p>
+	<div style = "display: none;" id = "trade_data">
+	    <input type="text" id = "lastPrice"/>
+	    <input type="text" id = "contractSize"/>
+	    <input type="text" id = "miniTikeSize"/>
+	    <input type="text"  id = "exchangeNo"/>
+	    <input type="text"  id = "commodeityNo"/>
+	    <input type="text"  id = "contractNo"/>
+	    <input type="text"  id = "doSize"/>
+	    <input type="text" id="totalVolume" value="0" />
+	</div>
 </body>
-<!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
-<script>
-    $(function() {
-        var url = document.referrer;
-        if(url.indexOf("simulateOperate/operate") >= 0 ){
-            $("#signLogin").css("display","block");
-            $("#div_Mask").show();
-            var popupHeight = $("#signLogin").outerHeight()/2;
-            var popupWidth = $("#signLogin").outerWidth()/2;
-            $("#signLogin").css({
-                top:"50%",
-                left:"50%",
-                marginTop: -(popupHeight+15),
-                marginLeft: -(popupWidth)
-            });
-        }
-    })
-</script>
-<script>
-    $(function() {
-        $("#loss_tab label").click(function(){
-            var _this = $(this).index();
-            $("#loss_title .gdt1").css("display","none").eq(_this).css("display","block");
-            if(_this == 1){
-                $("#loss_caozuo").css("display","none");
-            }else {
-                $("#loss_caozuo").css("display","block");
-            }
-        });
-        $("#loss_update").click(function() {
-            
-        });
-        $(".stop_loss_tab a").click(function(){
-            var _this = $(this).index();
-            $(".stop_loss_tab a").removeClass("on").eq(_this).addClass("on");
-            $(".stop_loss_all .stop_loss_lis").hide().eq(_this).show();
-        });
-        /* 条件单 */
-        $("#condition_tab label").click(function(){
-            var _this = $(this).index();
-            $("#condition_title .gdt1").css("display","none").eq(_this).css("display","block");
-            if(_this == 1){
-                $("#condition_caozuo").css("display","none");
-            }else {
-                $("#condition_caozuo").css("display","block");
-            }
-        });
-        
-        $("#condition_update").click(function() {
-        	$("#div_Mask").show();
-        	/* 这里判断一下取的是时间还是条件 然后执行下面的时间或者价格JS */
-            /* 时间 */
-            $("#condition_loss_time").css("display","block");
-            var popupHeight = $("#condition_loss_time").outerHeight()/2;
-            var popupWidth = $("#condition_loss_time").outerWidth()/2;
-            $("#condition_loss_time").css({
-                top:"50%",
-                left:"50%",
-                marginTop: -(popupHeight+15),
-                marginLeft: -(popupWidth)
-            });
-            /* 价格 */
-            
-            /* $("#condition_loss_money").css("display","block");
-            var popupHeight = $("#condition_loss_time").outerHeight()/2;
-            var popupWidth = $("#condition_loss_time").outerWidth()/2;
-            $("#condition_loss_time").css({
-                top:"50%",
-                left:"50%",
-                marginTop: -(popupHeight+15),
-                marginLeft: -(popupWidth)
-            }); */
-        });
-        
-        $(".close").click(function(){
-        	$(".popup").css("display","none");
-            $("#div_Mask").hide();
-        });
-    });
-</script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.chart.config.js"></script>
+    <script type='text/javascript' src="../../static/script/common/commonUtils.js"></script>
+    <script type='text/javascript' src="../../static/script/common/discussStock.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.trade.js"></script>
+    <script type="text/javascript" src="../../static/script/qutrade/quote/quote.time.chart.js"></script>
+    <script type="text/javascript" src="../../static/script/qutrade/quote/quote.candlestick.chart.js"></script>
+   	<script type="text/javascript" src="../../static/script/qutrade/quote/quote.lghtning.chart.js"></script>
+    <script type='text/javascript' src="../../static/script/layer/layer.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.config.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.send.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.connection.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/quote/quote.js"></script>
+    <script type="text/javascript" src="../../static/script/qutrade/quote/quotation.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/jquery.base64.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/util.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.config.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.send.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.util.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.data.mode.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.connection.js"></script>
+    <script type='text/javascript' src="../../static/script/qutrade/trade/trade.js"></script>
+    <!-- <%-- <script type='text/javascript' src="../../static/script/qutrade/trade/trade.reconnect.js"></script> --%> -->
+    <script type="text/javascript" src="../../static/script/qutrade/zUI.js"></script>
+	<!-- <%-- <script type="text/javascript" src="../../static/script/qutrade/bundle.min.js"></script> -->
+	<script>
+	    $(function() {
+	        var url = document.referrer;
+	        if(url.indexOf("simulateOperate/operate") >= 0 ){
+	            $("#signLogin").css("display","block");
+	            $("#div_Mask").show();
+	            var popupHeight = $("#signLogin").outerHeight()/2;
+	            var popupWidth = $("#signLogin").outerWidth()/2;
+	            $("#signLogin").css({
+	                top:"50%",
+	                left:"50%",
+	                marginTop: -(popupHeight+15),
+	                marginLeft: -(popupWidth)
+	            });
+	        }
+	    })
+	</script>
+	<script>
+	    $(function() {
+	        $("#loss_tab label").click(function(){
+	            var _this = $(this).index();
+	            $("#loss_title .gdt1").css("display","none").eq(_this).css("display","block");
+	            if(_this == 1){
+	                $("#loss_caozuo").css("display","none");
+	            }else {
+	                $("#loss_caozuo").css("display","block");
+	            }
+	        });
+	        $("#loss_update").click(function() {
+	            
+	        });
+	        $(".stop_loss_tab a").click(function(){
+	            var _this = $(this).index();
+	            $(".stop_loss_tab a").removeClass("on").eq(_this).addClass("on");
+	            $(".stop_loss_all .stop_loss_lis").hide().eq(_this).show();
+	        });
+	        /* 条件单 */
+	        $("#condition_tab label").click(function(){
+	            var _this = $(this).index();
+	            $("#condition_title .gdt1").css("display","none").eq(_this).css("display","block");
+	            if(_this == 1){
+	                $("#condition_caozuo").css("display","none");
+	            }else {
+	                $("#condition_caozuo").css("display","block");
+	            }
+	        });
+	        
+	        $("#condition_update").click(function() {
+	        	$("#div_Mask").show();
+	        	/* 这里判断一下取的是时间还是条件 然后执行下面的时间或者价格JS */
+	            /* 时间 */
+	            $("#condition_loss_time").css("display","block");
+	            var popupHeight = $("#condition_loss_time").outerHeight()/2;
+	            var popupWidth = $("#condition_loss_time").outerWidth()/2;
+	            $("#condition_loss_time").css({
+	                top:"50%",
+	                left:"50%",
+	                marginTop: -(popupHeight+15),
+	                marginLeft: -(popupWidth)
+	            });
+	            /* 价格 */
+	            
+	            /* $("#condition_loss_money").css("display","block");
+	            var popupHeight = $("#condition_loss_time").outerHeight()/2;
+	            var popupWidth = $("#condition_loss_time").outerWidth()/2;
+	            $("#condition_loss_time").css({
+	                top:"50%",
+	                left:"50%",
+	                marginTop: -(popupHeight+15),
+	                marginLeft: -(popupWidth)
+	            }); */
+	        });
+	        
+	        $(".close").click(function(){
+	        	$(".popup").css("display","none");
+	            $("#div_Mask").hide();
+	        });
+	    });
+	</script>
 </html>

@@ -1,33 +1,35 @@
     //开盘(open)，收盘(close)，最低(lowest)，最高(highest)
-    var rawData=[];
+
         function processingData(jsonData){
-        	console.log(rawData);
     		var dosizeL=$("#doSize").val();
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
+    		console.log(Len);
     		if(jsonData == null)return;
     	    	for(var i=0;i<Len;i++){
-        		var time2=parameters[i][DateTimeStampSubscript].split(" ");
-		        	var str1=time2[1].split(":");
-		        	var str2=str1[0]+":"+str1[1]
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
-		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
-			         rawData[i] = sgData; 
+		            var sgData = [parameters[i][DateTimeStampSubscript],openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
+			        rawData.push(sgData);
+			        CandlestickVolumeData.time.push(parameters[i][DateTimeStampSubscript]);
+	        		CandlestickVolumeData.volume.push(parameters[i][VolumeSubscript]);
 	       		};
 	       	var positionValue=getPositionValue();
-	       	var rawData=splitData(rawData);
-			var option=setOptionCandlestick(rawData,positionValue);
+	       	splitData(rawData);
+			var option=setOptionCandlestick(CandlestickData,positionValue);
+			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
 			CandlestickChart.setOption(option);
 	  		CandlestickChart.resize();
-		  	CandlestickChart.group="group1";
+		  	CandlestickChart.group="group2";
+		  	CandlestickVolumeChart.setOption(option1);
+	  		CandlestickVolumeChart.resize();
+		  	CandlestickVolumeChart.group="group2";
+		  	
     }
-    
-
     //设置数据参数（为画图做准备）
     function setOptionCandlestick(data,x){
         var option = {
-		    backgroundColor: '#1f1f1f',
+		    backgroundColor: '#333333',
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer : {
@@ -68,6 +70,32 @@
 		        show:false,
 		        axisLine: { lineStyle: { color: '#8392A5' } }
 		    },
+		    dataZoom: [{
+		        textStyle: {
+		            color: '#8392A5'
+		        },
+		        show:false,
+		        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+		        handleSize: '80%',
+		        dataBackground: {
+		            areaStyle: {
+		                color: '#8392A5'
+		            },
+		            lineStyle: {
+		                opacity: 0.8,
+		                color: '#8392A5'
+		            }
+		        },
+		        handleStyle: {
+		            color: '#fff',
+		            shadowBlur: 3,
+		            shadowColor: 'rgba(0, 0, 0, 0.6)',
+		            shadowOffsetX: 2,
+		            shadowOffsetY: 2
+		        }
+		    }, {
+		        type: 'inside'
+		    }],
 		    yAxis: {
 		        scale: true,
 		        axisLine: { lineStyle: { color: '#8392A5' } },
@@ -176,19 +204,11 @@
         return option;
     };
     function splitData(data0) {
-        var categoryData = [];
-        var values = [];
-        var time=[]
         for (var i = 0; i < data0.length; i++) {
-            categoryData.push(data0[i][0]);
-            values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
-            time.push(data0[i][5])
+            CandlestickData.categoryData.push(data0[i][0]);
+            CandlestickData.values.push([data0[i][1],data0[i][2],data0[i][3],data0[i][4]]);
         }
-        return {
-            categoryData: categoryData,
-            values: values,
-            time:time
-        };
+        return
     }
 	//计算均线的数据
     function calculateMA(dayCount,data) {
@@ -207,3 +227,103 @@
         }
         return result;
     }
+        //配置成交量
+	function volumeChartCandlestickSetOption(data) {
+	      var  option = {
+	      	backgroundColor: '#333333',
+	      	 color: ['#EDF274'],
+	          tooltip: {
+	              trigger: 'axis',
+	              axisPointer : {
+	                   type : 'line',
+	                   animation: false,
+			            lineStyle: {
+			                color: '#ffffff',
+			                width: 1,
+			                opacity: 1
+			            }
+	               },
+	          },
+	            toolbox: {
+	                show: false,
+	            },
+	             animation: false,
+				 grid: {
+	               x: 40,
+	               y:30,
+	               x2:46,
+	               y2:60
+	           },
+	          xAxis:[
+	              {
+	                  type : 'category',
+	                  position:'bottom',
+	                 boundaryGap: true,
+	                  axisTick: {onGap:false},
+	                  splitLine: {show:false},
+	                  axisLabel:{
+	                  	textStyle:{
+	                  		fontSize:10,
+	                  	}
+	                  },
+	                   axisLine: { lineStyle: { color: '#8392A5' } },
+	                  data : data.time
+	              }
+	          ],
+			     dataZoom: [{
+		        textStyle: {
+		            color: '#8392A5'
+		        },
+		        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+		        handleSize: '80%',
+		        dataBackground: {
+		            areaStyle: {
+		                color: '#8392A5'
+		            },
+		            lineStyle: {
+		                opacity: 0.8,
+		                color: '#8392A5'
+		            }
+		        },
+		        handleStyle: {
+		            color: '#fff',
+		            shadowBlur: 3,
+		            shadowColor: 'rgba(0, 0, 0, 0.6)',
+		            shadowOffsetX: 2,
+		            shadowOffsetY: 2
+		        }
+		    }, {
+		        type: 'inside'
+		    }],
+			 yAxis: [
+			            {
+	                type : 'value',
+	                name : '成交量',
+	                 axisLine: { lineStyle: { color: '#8392A5' } },
+		              axisTick:{
+		               	show:false,
+		              },
+		              scale:true,
+	                axisLabel: {
+	                    textStyle:{
+	                  		fontSize:10,
+	                  	}
+	                },
+	                splitLine: {
+	                    show: true,
+	                    lineStyle: {
+	                        color: "#8392A5"
+	                    }
+	                }
+	            }
+	        ],
+	          series : [
+	              {
+	                  name: '成交量',
+	                  type: 'bar',
+	                  data:data.volume
+	              }
+	          ]
+	      };
+	        return option
+	}
