@@ -67,7 +67,9 @@ function tipConfirm(tipContent,successCallBack,cancleCallBack){
 	//询问框
 	layer.confirm(tipContent+"?", {
 	  btn: ['确认','取消'] //按钮
-	}, function(){
+	}, function(index){
+		layer.close(index); // 点击确定后关闭确认框
+		
 		successCallBack();
 	}, function(){
 		cancleCallBack();

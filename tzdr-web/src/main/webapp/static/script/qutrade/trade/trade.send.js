@@ -364,6 +364,9 @@ var Trade = {
 				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 				
 				// 发送消息1秒内没有回报则认为链接丢失，则刷新重连
-				timeoutReconnID = setTimeout("location.reload();",1000);
+				timeoutReconnID = setTimeout(function(){
+					layer.alert("交易服务连接断开，正在重新连接...");
+					location.reload();
+				},1000);
 			}
 		}

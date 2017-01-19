@@ -2115,7 +2115,8 @@ function bindOpertion(){
 			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】,买卖方向:【"+analysisBusinessBuySell(tradeDrection)+"】";
 			layer.confirm(tipContent+"?", {
 			  btn: ['确认','取消'] //按钮
-			}, function(){
+			}, function(index){
+				layer.close(index); // 下单后首先关闭下单按钮
 				doInsertOrder(orderNum,tradeDrection,orderPrice);
 			}, function(){
 				cancleCallBack();
