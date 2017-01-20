@@ -347,13 +347,13 @@
           <a class="colorred font14 fontarail ">${requestScope.idcard }</a><a class="color34b3e0 font14 mglt10">照片审核中</a>
  </c:when> 
   <c:when test="${not empty requestScope.userverified.idcard && requestScope.userverified.status=='3'}">  
-       <a class='colorred font14 fontarail '>${requestScope.idcard }</a><a class='color34b3e0 font14 mglt10' href='javascript:toupdateCardFile();'>上传照片</a>
+       <a class='colorred font14 fontarail '>${requestScope.idcard }</a><!-- <a class='color34b3e0 font14 mglt10' href='javascript:toupdateCardFile();'>上传照片</a> -->
 </c:when> 
 <c:when test="${ empty requestScope.userverified.idcard && requestScope.userverified.validatenum>='3'}">   
 <a class="colorred font14 ">认证失败(请联系客服处理)</a>
 </c:when>
   <c:when test="${not empty requestScope.userverified.idcard && not empty requestScope.userverified.status}">  
-       <a class=' colorred font14 fontarail '>${requestScope.idcard }</a><a class='color34b3e0 font14 mglt10' href='javascript:toupdateCardFile();'>上传照片</a>
+       <a class=' colorred font14 fontarail '>${requestScope.idcard }</a><!-- <a class='color34b3e0 font14 mglt10' href='javascript:toupdateCardFile();'>上传照片</a> -->
 </c:when> 
 <c:otherwise>
 <a class="colorred font14 ">未认证</a><a class="color34b3e0 font14 mglt20" href="javascript:authcard();">立即认证</a>
