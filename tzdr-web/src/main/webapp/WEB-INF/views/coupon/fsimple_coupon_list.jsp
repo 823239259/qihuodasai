@@ -34,7 +34,7 @@
 		<div class="uc_mianbar">
 			<div class="uc_siflist" style="margin-bottom: 20px;">
 				<ul class="uc_paynav">
-					<li><a data="couponAll" href="javascript:void(0);" class="on"  id="fSimpleCoupon">优惠列表</a></li>
+					<li><a data="couponAll" href="javascript:void(0);" class="on tzdr-tab"  id="fSimpleCoupon">优惠列表</a></li>
 				</ul>
 				<!-- 优惠列表 -->
 				<div id="fSimpleCouponData" class="uc_cu_list tzdr-data01">
