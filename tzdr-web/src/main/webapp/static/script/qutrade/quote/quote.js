@@ -389,7 +389,8 @@ function addQuoteListBindClick(cls){
 		 setSelectOption(contractCode);
 		 setMoneyNumberIndex(0);
 		 clearHandicapData();
-		 sendHistory(0);
+		 var HisQuoteType=checkHisQuoteType();
+		 sendHistory(HisQuoteType);
 	});
 }
 /**
@@ -1078,4 +1079,14 @@ function checkRange(){
                 + " " + date.getHours() + seperator2 + getMinutes
                 + seperator2 + getSeconds;
         return currentdate;
+    }
+    function checkHisQuoteType(){
+    	var length=$(".carbon_time").length;
+		for(var i=0;i<length;i++){
+			if($(".carbon_time").eq(i).hasClass("active")==true){
+				var data=$(".carbon_time").eq(i).attr("data");
+				HisQuoteType=data;
+			}
+		}
+    	return HisQuoteType;
     }
