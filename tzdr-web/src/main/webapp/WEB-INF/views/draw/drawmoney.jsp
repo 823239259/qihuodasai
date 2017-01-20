@@ -180,7 +180,7 @@
 								<div class="uc_paypromt" style="left: -86px;">
 									<ul>
 										<li class="first" style="border-right: 1px solid #e9e9e9;">
-											<!-- <h4>最快<i>10分钟</i>到账</h4> -->
+											<h4>迅捷提现，极速到账</h4>
 											<p style="line-height: 20px;">
 											1、到账时间：工作日09：00——16:30申请，一个工作日内到账，最快5分钟到账。其余时间申请，将在下一个工作日到账。<br>
 											2、提现手续费 :</br><span style="margin-left: 66px;">1%（适用于充值后，未实际操盘金额）</span></br><span style="margin-left: 66px;">0元（适用于操盘用户提现）。</span></span>
