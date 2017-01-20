@@ -153,7 +153,6 @@ function initLoad() {
 	}
 	socket.onmessage = function(evt) {
 		window.clearTimeout(timeoutReconnID); // 规定时间内接收到消息则取消刷新
-		console.log('onmessage【' + evt.data + '】readyState【' + (socket==null?'null':socket.readyState) + '】');
 		handleData(evt);
 	}
 	socket.onclose = function() {
