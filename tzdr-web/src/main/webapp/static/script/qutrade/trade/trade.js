@@ -836,7 +836,7 @@ function updatePostion(param){
 	if(openAvgPrice == undefined){
 		openAvgPrice = param.TradePrice;
 	}
-	var localCommodity = getMarketCommdity(contractCode);
+	var localCommodity = getLocalCacheCommodity(contractCode);
 	var doSize = 0;
 	if(localCommodity != undefined){ 
 		doSize = Number(localCommodity.DotSize);
