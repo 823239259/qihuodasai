@@ -1,14 +1,13 @@
 package com.tzdr.api.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
@@ -104,14 +103,14 @@ public class UserSecurityController {
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
 		String template = "ihuyi.verification.code.template";
 		
-		if (DataConstant.SEND_SMS_TYPE_UPDATE_PHONE==type){
+		if (DataConstant.SEND_SMS_TYPE_UPDATE_PHONE==type){ 
 			if (ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_NOT_EXIST,"mobile.not.exist.");
 			}		
 			smsParams.put("module", DataConstant.SEND_SMS_TYPE_UPDATE_PHONE_MODULE);
 		}
 		
-		if (DataConstant.SEND_SMS_TYPE_UPDATE_PHONE_NEW==type){
+		if (DataConstant.SEND_SMS_TYPE_UPDATE_PHONE_NEW==type){ 
 			if (!ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_EXIST,"mobile.is.exist.");
 			}		
@@ -211,10 +210,41 @@ public class UserSecurityController {
 		return new ApiResult(false,ResultStatusConstant.ValidateCardConstant.CARD_SECURITY_FAIL,"success identity");
 	}
 	
+	
+	/**
+	 * @Title:realNameAuth    
+	 * @Description:  实名认证-图片上传
+	 * @param response
+	 * @param request
+	 * @date 2016年12月14日
+	 * @author gaochao
+	 * @return
+	 */
+	@RequestMapping(value = "/realNameAuth")
+	@ResponseBody
+	public ApiResult realNameAuth(HttpServletResponse response,HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
+		UserVerified userverified = securityInfoService.findByUserId(uid);
+		String idcardPath=request.getParameter("idcardPath");
+		String idcardBack=request.getParameter("idcardBack");
+		String idcardFront=request.getParameter("idcardFront");
+				
+		if(StringUtils.isNotBlank(idcardPath) &&
+				StringUtils.isNotBlank(idcardPath)&&StringUtils.isNotBlank(idcardPath)){
+			userverified.setIdcardFront(idcardFront);
+			userverified.setIdcardBack(idcardBack);
+			userverified.setIdcardPath(idcardPath);
+			userverified.setStatus(DataConstant.Idcard.AUTHPASS);//审核中
+			userverified.setLastSubmitVerifiedTime(new Date().getTime()/1000);
+			securityInfoService.update(userverified);
+			return new ApiResult(true,ResultStatusConstant.SUCCESS,"Idcard photo upload success");
+		}
+		return new ApiResult(false,ResultStatusConstant.FAIL,"照片上传失败");
+	}
 	/**
 	* @Title: updatePhone    
 	* @Description: 修改绑定手机
-	* @param oldCode  原验证码
+	* @param oldCode  原手机验证码
 	* @param newMobile 新手机号码
 	* @param newCode   新验证码
 	* @param modelMap
@@ -269,7 +299,7 @@ public class UserSecurityController {
 			return new ApiResult(false,ResultStatusConstant.BindPhoneConstant.NEW_CODE_ERROR,"The newCode is error");
 		}
 		
-		if((Dates.getCurrentLongDate()-newSecurityCode.getCreatedate()) > DataConstant.VALIDATE_CODE_INVALID_TIME){ //判断新验证码是否正确
+		if((Dates.getCurrentLongDate()-newSecurityCode.getCreatedate()) > DataConstant.VALIDATE_CODE_INVALID_TIME){ //判断新验证码是否失效
 			//判断验证码是否失效
 			return new ApiResult(false,ResultStatusConstant.BindPhoneConstant.NEW_CODE_OVER_TIME,"The newCode is overtime");
 		}
@@ -283,7 +313,7 @@ public class UserSecurityController {
 	
 	
 	/**
-	 * 设置用户的提现密码
+	 * 设置/修改用户的提现密码
 	 * @param drawPwdRequest
 	 * @param response
 	 * @param request
@@ -320,6 +350,120 @@ public class UserSecurityController {
 		
 		this.securityInfoService.updatUserMoneyPwd(password,user,userverified);
 		return new ApiResult(true,ResultStatusConstant.SUCCESS,"setting.success.");
-
+	}
+	
+	/**
+	 * 发送邮件验证码
+	 * @param response
+	 * @param request
+	 * @return
+	 * @date 2014年12月25日
+	 * @author zhangjun
+	 */
+	/**
+	 * @param email
+	 * @param response
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/sendEmailCode")
+	@ResponseBody
+	public ApiResult sendEmailCode(HttpServletResponse response,HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		UserVerified userverified=securityInfoService.findByUserId(uid);
+		WUser user = securityInfoService.getUsesrbyId(uid);
+		long codestart=new Date().getTime();
+		String randomStr=RandomCodeUtil.randStr(6);
+		userverified.setValidateEmailTime(codestart);
+		userverified.setEmailActivecode(randomStr);
+		String email = request.getParameter("email");
+		//如果从后台传入email则表示注册，否则从user表里拿数据表示修改邮箱
+		if(StringUtil.isNotBlank(email)){
+			WUser wuser=securityInfoService.getUserByEmail(email);
+			if(wuser!=null){
+				return new ApiResult(false,ResultStatusConstant.Email.EMAIL_YET_REGISTER,"Email has been registered");
+			}
+			userverified.setValidateemail(email);
+		}else{
+			email=user.getEmail();
+		}
+		
+		boolean flag=securityInfoService.sendEmail(userverified.getTname(),email, randomStr, "维胜");
+		securityInfoService.update(userverified);
+		if(flag)
+			return new ApiResult(true,ResultStatusConstant.SUCCESS,"Email code send success");
+		else
+			return new ApiResult(false,ResultStatusConstant.FAIL,"Email code send fail");
+	}
+	/**
+	 * 验证修改邮箱时验证码是否正确
+	 * @param response
+	 * @param request
+	 * @return
+	 * @date 2014年12月27日
+	 * @author zhangjun
+	 */
+	@RequestMapping(value = "/checkEmailCode")
+	@ResponseBody
+	public ApiResult checkEmailCode(HttpServletResponse response,HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		UserVerified userverified=securityInfoService.findByUserId(uid);
+		
+		String code=request.getParameter("emailcode");
+		
+		String emailcode=userverified.getEmailActivecode();
+		
+		long nowtime=new Date().getTime();
+		long vtime=userverified.getValidateEmailTime();
+		long minit=nowtime-vtime;
+		
+		if(minit>300000){
+			return new ApiResult(false,ResultStatusConstant.Email.CODE_TIME_OUT,"验证码超时");
+		}else{
+			if(code.equals(emailcode)){
+				return new ApiResult(true,ResultStatusConstant.SUCCESS,"Email bind success");
+			}else{
+				return new ApiResult(false,ResultStatusConstant.Email.CODE_ERROR,"验证码错误");
+		    }
+	    }
+	}
+	/**
+	 * 绑定/修改邮箱
+	 * @param result
+	 * @param request
+	 * @return
+	 * @date 2014年12月23日
+	 * @author zhangjun
+	 */
+	@RequestMapping(value = "/bindingEmail")
+	@ResponseBody
+	public ApiResult bindingEmail(@RequestParam("email")String email,@RequestParam("code")String code,HttpServletResponse response,HttpServletRequest request){
+		String uid = AuthUtils.getCacheUser(request).getUid();
+		WUser user = securityInfoService.getUsesrbyId(uid);
+		UserVerified userverified=securityInfoService.findByUserId(uid);
+		
+		WUser wuser=securityInfoService.getUserByEmail(email);
+		if(wuser!=null){
+			return new ApiResult(false,ResultStatusConstant.Email.EMAIL_YET_REGISTER,"邮箱也被注册");
+		}
+		if(!email.equals(userverified.getValidateemail())){
+			return new ApiResult(false,ResultStatusConstant.Email.TWO_EMAIL_EQUALLY,"修改密码和原密码一样");
+		}
+		
+		String emailcode=userverified.getEmailActivecode();
+		long nowtime=new Date().getTime();
+		long vtime=userverified.getValidateEmailTime();
+		long difftime=nowtime-vtime;
+		if(difftime>24*60*60000){
+			return new ApiResult(false,ResultStatusConstant.Email.CODE_TIME_OUT,"验证码超时");
+		}else{
+			if(code.equals(emailcode)){
+				 //绑定、更新邮箱
+				securityInfoService.updateEmail(user,email);
+				return new ApiResult(true,ResultStatusConstant.SUCCESS,"Email bind success");
+			}else{
+				return new ApiResult(false,ResultStatusConstant.Email.CODE_ERROR,"验证码错误");
+			}
+		}
 	}
 }

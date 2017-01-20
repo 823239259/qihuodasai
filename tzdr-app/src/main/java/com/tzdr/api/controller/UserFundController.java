@@ -4,10 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
@@ -25,6 +22,7 @@ import com.tzdr.business.app.service.FundService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.domain.app.vo.UserFundVo;
 import com.tzdr.domain.web.entity.WUser;
+
 
 /**  
  * @Title: UserFundController.java     
@@ -62,7 +60,7 @@ public class UserFundController {
 	public ApiResult list(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{
 
 		String uid = AuthUtils.getCacheUser(request).getUid();  //获取用户信息
-		
+        
 		//求所有的收入记录
 		List<Map<String, Object>> indataLisMap = fundService.getFundbytype(uid, new Integer[]{1,3,13,15,19,16,21,23,24,25,26});
 		
@@ -94,7 +92,7 @@ public class UserFundController {
 		}
 		
 		List<UserFundVo> dataList = fundService.findUserFundVos(uid);  //获取用户资金明细
-		
+        
 		WUser wuser = wUserService.get(uid);  //获取用户信息
 		
 		BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString());  //获取用户余额
@@ -107,6 +105,6 @@ public class UserFundController {
 		dataMap.put("balance", avlBal);
 		dataMap.put("fundList", dataList);
 
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,null,dataMap);
+		return new ApiResult(true,ResultStatusConstant.SUCCESS,"success",dataMap);
 	}
 }

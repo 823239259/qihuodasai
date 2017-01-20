@@ -1720,6 +1720,7 @@ function loadOperateLogin(){
 var insertConditionCount = 0;
 $(function(){
 	var validateQueryCommodity = setInterval(function(){
+		    plus.nativeUI.showWaiting("正在连接交易服务器...");
 			if(getQueryCommodityIsFlag()){ 
 				/**
 				 * 初始化交易配置 --> trade.config
@@ -3484,6 +3485,7 @@ function switchAccount(){
 function openLogin(){ 
 	loginOutFlag = true;
 	loginOutTip=true;
+	
 	mui.openWindow({
 		url:"../login/operateLogin.html",
 		id : "operateLogin",
@@ -3493,6 +3495,12 @@ function openLogin(){
 					backpageID:"transactionDetails"
 				}
 	});
+	if(!isConnectionError){
+		/*socket.onclose();*/
+	}
+	loginOut();
+	plus.nativeUI.closeWaiting();
+	
 }
 /**
  * 验证最新价格 

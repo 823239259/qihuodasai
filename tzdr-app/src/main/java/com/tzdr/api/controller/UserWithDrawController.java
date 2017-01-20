@@ -156,28 +156,25 @@ public class UserWithDrawController {
 		return new ApiResult(true, ResultStatusConstant.SUCCESS, "query.success.", jsonArray);
 	}
 	/**
-	 * 计算体现手续费
+	 * 计算提现手续费
 	 * @param request
 	 * @param money
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/drawFee",method = RequestMethod.POST)
-	public JsonResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
-		JsonResult resultJson = new JsonResult(false);
+	public ApiResult drawfFee(HttpServletRequest request,@RequestParam("money") Double money){
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		Double fee = drawMoneyService.drawFee(uid, money);
-		String message = "";
+		Map<String, Double> dataMap = new HashMap<String, Double>();
 		if(fee == null){
-			message = "用户错误";
+			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.USER_INFO_NOT_EXIST,"用户错误");
 		}else if(fee < 0){
-			message = "账户余额不足";
+			return new ApiResult(false,ResultStatusConstant.WithDrawHandle.NOT_SUFFICIENT_FUNDS,"账户余额不足");
 		}else{
-			resultJson.setSuccess(true);
-			message = String.valueOf(fee);
+			dataMap.put("fee", fee);
+			return new ApiResult(true,ResultStatusConstant.SUCCESS,String.valueOf(fee),dataMap);
 		}
-		resultJson.setMessage(message);
-		return resultJson;
 	} 
 	/**
 	 * 获取当前系统支持提现的银行列表
@@ -301,7 +298,7 @@ public class UserWithDrawController {
 	}
 
 	/**
-	 * 删除已绑定的银行卡
+	 * 设置默认银行卡
 	 * 
 	 * @param bankRequest
 	 * @param response
@@ -310,7 +307,7 @@ public class UserWithDrawController {
 	 */
 	@RequestMapping(value = "/set_default_bank", method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResult delBank(String bankId, HttpServletResponse response, HttpServletRequest request) {
+	public ApiResult setDefaultBank(String bankId, HttpServletResponse response, HttpServletRequest request) {
 		String uid = AuthUtils.getCacheUser(request).getUid();
 		if (StringUtil.isBlank(bankId) || StringUtil.isBlank(uid)) {
 			return new ApiResult(false, ResultStatusConstant.FAIL, "params.error.");

@@ -238,7 +238,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		rechargeListService.futureHandlerSaveRechargeStateWeb("GT" + fSimpleFtseUserTrade.getId(), mobile,
 				payable.toString(), remark, TypeConvert.SYS_TYPE_OFFSET_ACCOUNTS, businessType);
 		int type = 0;
-		switch (fSimpleFtseUserTrade.getBusinessType()) {
+		switch (fSimpleFtseUserTrade.getBusinessType()) {  //业务类型【0.富时A50  1.沪金     2.沪银   3.沪铜   4.橡胶  6.原油    7. 恒指   8.国际综合  9.小恒指     20.商品综合】
 		case 8:
 			type = 2;
 			break;
@@ -799,7 +799,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 				// handleFtseUserTradeService.saveHandleFtseUserTrade(simpleFtseUserTrade);
 				// // 保存收益报表记录
 			}
-			if (dataMapService.activityExpired()) {
+			if (dataMapService.activityExpired("activityOnlineEndTime")) {
 				this.validationIsTradeSubsidy(simpleFtseUserTrade.getUid(), wuser.getMobile(), wellGoldA50.getId());
 			}
 			Double tranProfitLoss = simpleFtseUserTrade.getTranProfitLoss().doubleValue() * simpleFtseUserTrade.getEndParities().doubleValue();
@@ -824,7 +824,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					if(countOperateMoney == null){
 						countOperateMoney = 0.00;
 					}
-					Double new_CountOperateMoney = countOperateMoney+endAmlount;
+					Double new_CountOperateMoney = Math.abs(countOperateMoney+endAmlount);
 					BigDecimal bd = new BigDecimal(new_CountOperateMoney); 
 					wuser.setCountOperateMoney(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 				}

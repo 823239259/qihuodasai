@@ -195,6 +195,8 @@ function quotePush(obj){
 	setHandicap(param);
 	//更新止损/止盈最新价格
 	updateStopLossLastPrice(param);
+	//更新条件单弹出框最新价格
+	setConditionLastPrice(param);
 }
 /**
  * 订阅行情
@@ -224,6 +226,8 @@ function loadSelectData(param){
 		var cls = "select_option"+i;
 		var html = "<option class = '"+cls+"' value='"+contractCode+"'>"+commodityName+"     "+commodityNo+mainContract+"</option>";
 		$("#select_commodity").append(html);
+		$("#contion_time_contractCode").append(html);
+		$("#condition_price_contractCode").append(html);
 		if(i == 0){
 			$("#trade_data #lastPrice").val(data.lastPrice);
 			$("#trade_data #miniTikeSize").val(data.miniTikeSize);
@@ -321,6 +325,24 @@ function updateStopLossLastPrice(param){
 			}
 		}
 		
+	}
+}
+/**
+ * 设置条件单弹出框最新价
+ * @param param
+ */
+function setConditionLastPrice(param){
+	var commodityNo = param.CommodityNo;
+	var contractNo  = param.ContractNo;
+	var contractCode = commodityNo + contractNo;
+	var conditionPriceContractCode = $("#condition_price_contractCode").val();
+	var conditionTimeContractCode = $("#contion_time_contractCode").val();
+	var lastPrice = param.LastPrice;
+	if(conditionPriceContractCode == contractCode){
+		$("#condition_price_lastPrice").text(lastPrice);
+	}
+	if(conditionTimeContractCode == contractCode){
+		$("#condition_time_lastPrice").text(lastPrice);
 	}
 }
 /**

@@ -26,7 +26,6 @@ public class FTogetherRecordDetailServiceImpl extends BaseServiceImpl<FTogetherR
 	    			+ "	FROM f_together_record_detail detail WHERE detail.trade_id = ? AND detail.direction = ?  ";
 		return this.getEntityDao().queryMapObj(sql, tradeId,direction);
 	}
-
 	@Override
 	public List<Map<String, Object>> queryRecords(String tradeId, Integer direction) {
 		  String  sql = " SELECT usr.mobile,fdetail.is_back, FROM_UNIXTIME( fdetail.buy_time/1000, '%m.%d %H:%i' ) buyTime, temp.percent FROM w_user usr, "

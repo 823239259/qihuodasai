@@ -229,6 +229,7 @@ var Trade = {
 							+' "StopLossDiff":'+stopLossDiff+','
 							+' "StopLossPrice":'+stopLossPrice+','
 							+' "OrderType":'+orderType+'}';
+				console.log(param);
 				Trade.doSendMessage(TradeUrl.ModifyStopLoss,param);
 			},
 			/**
@@ -359,6 +360,10 @@ var Trade = {
 			 * @param {Object} parameters
 			 */
 			doSendMessage:function(method,parameters){
+				console.log('send【{"Method":"'+method+'","Parameters":'+parameters+'}】readyState【' + (socket==null?'null':socket.readyState) + '】');
 				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+				
+				// 发送消息1秒内没有回报则认为链接丢失，则刷新重连
+				timeoutReconnID = setTimeout("location.reload();",1000);
 			}
 		}

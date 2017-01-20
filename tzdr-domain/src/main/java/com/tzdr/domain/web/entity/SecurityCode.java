@@ -17,11 +17,11 @@ public class SecurityCode  extends BaseEntity {
 	 */ 
 	private static final long serialVersionUID = 1L;
 
-	private String mobile;
+	private String mobile;//电话
 
-	private Long createdate;
+	private Long createdate;//发送时间
 
-	private String securityCode;
+	private String securityCode;//验证码
 
 
 	@Column(name="mobile", nullable=false, length=32)

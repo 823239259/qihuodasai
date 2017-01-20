@@ -1,22 +1,17 @@
 package com.tzdr.web.controller.fundDetail;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.StringUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.business.service.generalize.AgentReturnInfoService;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.userTrade.UserTradeService;
@@ -26,7 +21,6 @@ import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.BigDecimalUtils;
 import com.tzdr.common.utils.ConnditionVo;
 import com.tzdr.common.utils.DateUtils;
-import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
@@ -261,6 +255,7 @@ public class FundDetailController {
 		UserSessionBean userSessionBean=(UserSessionBean) request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 		JsonResult jsonResult = new JsonResult(false);
 		jsonResult.setSuccess(true);
+		
 		String type=request.getParameter("type");
 		String starttime=request.getParameter("starttime");
 		String endtime=request.getParameter("endtime");

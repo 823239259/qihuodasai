@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.StringUtil;
-
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
@@ -72,16 +68,17 @@ public class UserCommonController {
 	@Autowired
 	private SecurityInfoService securityInfoService;
 	
-	/**
+   /**
 	* @Title: getbalancerate    
 	* @Description: 获取用户余额以及当前汇率信息
-	* @param businessType 业务类型     如： 1：股指期货追加保证金查询；2：股指期货终结方案查询；3：网银充值查询；
+	* @param businessType 业务类型     如： 1：股指期货追加保证金查询；2：股指期货终结方案查询；3：网银充值查询；4：账户余额实名、提现手续费查询
+	* @param couponBusinessType 优惠券使用范围     如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;
 	* @param modelMap
 	* @param request
 	* @param response
 	* @return
 	* @throws Exception
-	 */
+	*/
 	@RequestMapping(value = "/getbalancerate" , method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResult getbalancerate(Integer businessType,Integer couponBusinessType ,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) throws Exception{

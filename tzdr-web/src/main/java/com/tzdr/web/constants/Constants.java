@@ -139,11 +139,29 @@ public class Constants {
 
 	// 支付类型
 	public static class PayType {
-		public static final String QUICK = "1";// 快捷支付
+		/**
+		 * 快捷支付
+		 */
+		public static final String QUICK = "1";
+		/**
+		 * 网银：现在连的国付宝
+		 */
 		public static final String NET_BANK = "2";// 网银
+		/**
+		 * 支付宝
+		 */
 		public static final String ALIPAY = "3";// 支付宝
+		/**
+		 * 银行转账
+		 */
 		public static final String TRANSBANK = "4";// 银行转账
+		/**
+		 * 国付宝
+		 */
 		public static final String GO_WAY = "5";//国付宝
+		/**
+		 * 微信转账
+		 */
 		public static final String WECHAT_TYPE = "9";//微信转账
 	}
 

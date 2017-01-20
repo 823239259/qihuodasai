@@ -61,6 +61,7 @@ public class MessagePromptService {
 					twoParam = "银行转账充值";
 					url = "http://manage.vs.com/admin/rechargeReview/list";
 					typeKey = "fundEmail";
+					emailTemplet = "messagePrompt";
 				}else if(submitType.equalsIgnoreCase(PromptTypes.isInternetBanking)){
 					fristParam = "网银充值";
 					twoParam = "网银充值成功";

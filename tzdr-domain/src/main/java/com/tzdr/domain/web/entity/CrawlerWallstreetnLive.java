@@ -34,14 +34,26 @@ public class CrawlerWallstreetnLive extends BaseEntity{
 	 * 修改时间
 	 */
 	private Long liveUpdatetime;
+	
 	private String channelSet;
 	private String type;
 	private String codeType;
+	/**
+	 * 重要程度（1-表示一颗星，2-表示二颗星，3-表示3颗星）
+	 */
 	private String importance;
+	/**
+	 * 第三方数据创建时间
+	 */
 	private Long createdAt;
+	/**
+	 * 第三方数据更新时间
+	 */
 	private Long updatedAt;
 	private String commentStatus;
 	private String star;
+	
+	
 	public String getLiveTitle() {
 		return liveTitle;
 	}

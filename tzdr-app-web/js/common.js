@@ -41,7 +41,6 @@
 	// 需要认证用户身份的请求调用接口
 	mui.app_request= function (func_url,params,onSuccess,onError,paramUrl){
 		if(mui.checkNetwork()==false){ 
-			console.log("当前网络不给力");
 			mui.toast("当前网络不给力，请稍后再试"); 
 			return;
 		}
@@ -55,13 +54,13 @@
 				'secret':mui.cacheUser.get(tzdr.constants.user_secret)   
 			},
 			data:params,
-			timeout:60000,
-			dataType:'json',//服务器返回json格式数据
+			timeout:100000,
+			dataType:'JSON',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			success:function(data){ 
 				// plus.nativeUI.closeWaiting();
 			    //获得服务器响应
-			    
+			    var data=JSON.parse(data);
 			    if (data.success){
 			    	onSuccess(data);
 			    }
@@ -80,6 +79,7 @@
 			    }
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){ 
+				console.log(XMLHttpRequest+"    XMLHttpRequest   "+textStatus+"     JSON   "+"    errorThrown    "+errorThrown);
 				if(network==false){
 					mui.toast("当前网络不给力，请稍后再试"); 
 					return;
@@ -88,7 +88,6 @@
 			}
 			});
 	}
-	
 	//用户信息管理
 	mui.cacheUser = { 
 		/**
@@ -258,7 +257,7 @@ var tzdr = {
 	// 系统常量
 	constants:{
 		api_domain:"http://api.vs.com/", 
-//		api_domain:"http://192.168.2.197:8080/tzdr-app/",
+//		api_domain:"http://192.168.0.93:8080/tzdr-app/",
 		//图片地址
 		base_images_url:'http://manage.vs.com/',
 		//token
@@ -619,7 +618,6 @@ function initBottom(data){
 					}
 					mui.openWindow({url:data.home,id:"home"});
 				});
-			
 				document.getElementById("quotationMain").addEventListener("tap",function(){
 					var p=plus.webview.getWebviewById("quotationMain");
 					if(p){

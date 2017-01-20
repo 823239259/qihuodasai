@@ -1,5 +1,7 @@
 package com.tzdr.api.constants;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
+
 /**
  * <B>说明: </B>接口状态返回
  * @zhouchen
@@ -66,6 +68,7 @@ public class ResultStatusConstant {
 	 * 2015年5月26日 上午10:46:41
 	 */
 	public class ValidateCode{
+		
 		/**
 		 * 验证码错误
 		 */
@@ -80,6 +83,11 @@ public class ResultStatusConstant {
 		 * 验证码失效
 		 */
 		public static final String INVALID_CODE="5";
+		
+		/**
+		 * 电话号码格式错误
+		 */
+		public static final String MOBILE_ERROR="6";
 	}
 	
 	
@@ -95,7 +103,7 @@ public class ResultStatusConstant {
 		public static final String MOBILE_EXIST="3";
 		
 		/**
-		 * 验证码错误或为空
+		 * 验证码错误
 		 */
 		public static final String ERROR_CODE="4";
 		
@@ -140,7 +148,7 @@ public class ResultStatusConstant {
 	 */
 	public class ForgetPwd{
 		/**
-		 *登录信息为空
+		 *用户信息不存在
 		 */
 		public static final String USER_INFO_NOT_EXIST="3";
 		
@@ -158,6 +166,7 @@ public class ResultStatusConstant {
 		 * 密码格式有误
 		 */
 		public static final String PASSWORD_PATTERN_ERROR="6";
+		
 	}
 	
 	
@@ -242,11 +251,33 @@ public class ResultStatusConstant {
 	}
 	
 	/**
+	 * 申请操盘
+	 */
+	public class Apply{
+		/**
+		 *用户信息不存在
+		 */
+		public static final String USER_INFO_NOT_EXIST="3";
+		/**
+		 * 没有获取到配置方案信息
+		 */
+		public static final String NOT_FSIMPLE_CONFIG="4";
+		/**
+		 * 传入的保证金金额不符合要求
+		 */
+		public static final String TRADER_BOND_ERROR="5";
+	}
+	
+	/**
 	 * 国际期货操盘支付确认
 	 * @author zhouchen
 	 * 2015年5月26日 上午10:46:41
 	 */
 	public class HandleFTrade{
+		/**
+		 * 没有获取到配置方案
+		 */
+		public static final String NOT_FSIMPLE_CONFIG = "2";
 		/**
 		 *余额不足
 		 */
@@ -551,6 +582,11 @@ public class ResultStatusConstant {
 		 * 验证码不对
 		 */
 		public static final String VALIDATE_CODE_ERROR="6";
+		/**
+		 * 两次输入的密码不一致
+		 */
+		public static final String PASSWORD_NOT_EQUALS="7"; 
+		
 		
 	}
 	
@@ -598,6 +634,10 @@ public class ResultStatusConstant {
 	 */
 	public class BankList{
 		/**
+		 * 系统提现渠道参数设置错误
+		 */
+		public static final String WITHDRAW_SETTING = "2";
+		/**
 		 *用户信息不存在
 		 */
 		public static final String USER_INFO_NOT_EXIST="3";
@@ -611,6 +651,7 @@ public class ResultStatusConstant {
 	 * 2015年5月26日 上午10:46:41
 	 */
 	public class AddBank{
+		
 		/**
 		 *用户信息不存在
 		 */
@@ -625,6 +666,10 @@ public class ResultStatusConstant {
 		 * 请先实名认证方可添加银行卡
 		 */
 		public static final String IDENTITY_AUTHENTICATION="5";
+		/**
+		 * 两次输入的卡号不一致
+		 */
+		public static final String CARD_NOT_EQUALLY = "6";
 
 	}
 	
@@ -736,6 +781,11 @@ public class ResultStatusConstant {
 		*/
 
 		public static final String EASEPAY_LIMIT_MAX_MONEY="14";
+		
+		/**
+		 * 提现渠道设置参数错误
+		 */
+		public static final String FAIT="15";
 	}
 	
 	
@@ -828,7 +878,7 @@ public class ResultStatusConstant {
 		public static final String CARD_FORMAT_ERROR = "3";
 		
 		/**
-		 * 该实名已被认证过
+		 * 该身份证已被认证过
 		 */
 		public static final String CARD_IS_SECURITY= "4";
 		
@@ -851,6 +901,17 @@ public class ResultStatusConstant {
 		 * 实名认证失败超过最高次数
 		 */
 		public static final String VALIDATE_OVER_LIMITED = "8";
+		
+		/**
+		 * 身份证照片已经存在
+		 */
+		public static final String IDCRAD_PHOTO_EXIST = "9";
+		
+		/**
+		 * 身份证照片没有全部上传
+		 */
+		public static final String IDCRAD_PHOTO_NOT_NULL = "10";
+
 	}
 	
 	/**
@@ -1036,7 +1097,6 @@ public class ResultStatusConstant {
 	* @version： V1.0
 	 */
 	public static class CouponEmployConstant{
-		
 		/**
 		 * 未找到该方案
 		 */
@@ -1076,6 +1136,11 @@ public class ResultStatusConstant {
 	public static class PayConstant{
 		
 		/**
+		 * 用户信息不存在
+		 */
+		public static final String USER_INFO_NOT_EXIST="-1";
+		
+		/**
 		 * 充值金额不能为空
 		 */
 		public static final String MONEY_NOT_NULL = "2";
@@ -1090,6 +1155,17 @@ public class ResultStatusConstant {
 		 * 超过当日充值最大金额
 		 */
 		public static final String OVER_MAX_DAY_CHARGE = "4";
+		
+		/**
+		 * 订单提交失败
+		 */
+		public static final String ORDER_SBUMIT_FALT = "5";
+		
+		/**
+		 * 支付方式错误
+		 */
+		public static final String PAY_WAY_ERROR = "6";
+		
 	}
 	
 	
@@ -1132,4 +1208,103 @@ public class ResultStatusConstant {
 		 */
 		public static final String OVER_MAX_COPIES = "8";
 	}
+	
+	/**
+	 * 微信
+	 */
+	public static class Wx{
+		/**
+		 * 参数为空
+		 */
+		public static final String PARAM_NULL = "2";
+		/**
+		 *用户信息不存在
+		 */
+		public static final String USER_INFO_NOT_EXIST="3";
+		
+		/**
+		 * 已经绑定微信
+		 */
+		public static final String HAVE_BIND_WX = "4";
+		/**
+		 * 订单重复
+		 */
+		public static final String REPEAT_ORDER = "5";
+		/**
+		 * 用户没有认证
+		 */
+		public static final String NO_USER_VERIFIED = "6";
+		
+	}
+	
+	/**
+	 * 7*24小时
+	 *
+	 */
+	public static class CrawlerCalendar{
+		
+		/**
+		 * 查询开始时间大于结束时间
+		 */
+		public static final String STARTTIME_GT_ENDTIME ="3";
+	}
+	
+	/**
+	 * 公共接口
+	 */
+	public static class Common{
+		/**
+		 * 参数为空
+		 */
+		public static final String PARAM_NULL = "2";
+		/**
+		 *用户信息不存在
+		 */
+		public static final String USER_INFO_NOT_EXIST="3";
+	}
+	
+	/**
+	 * @author gc
+	 *
+	 */
+	public static class Email{
+		/**
+		 * 邮箱已被注册
+		 */
+		public static final String EMAIL_YET_REGISTER = "2";
+		
+		/**
+		 * 邮箱格式错误
+		 */
+		public static final String EMAIL_ERROR = "3";
+		
+		/**
+		 * 修改密码和原密码一样
+		 */
+		public static final String TWO_EMAIL_EQUALLY="4";
+		
+		/**
+		 * 验证码超时
+		 */
+		public static final String CODE_TIME_OUT ="5";
+		/**
+		 * 验证码错误
+		 */
+		public static final String CODE_ERROR ="6";
+	}
+	/**
+	 * @author gc
+	 *
+	 */
+	public static class Message{
+		/**
+		 * 邮箱已被注册
+		 */
+		public static final String EMAIL_YET_REGISTER = "2";
+		
+		
+	}
+	
+	
+	
 }

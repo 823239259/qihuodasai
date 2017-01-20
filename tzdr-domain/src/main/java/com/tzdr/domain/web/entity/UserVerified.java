@@ -60,8 +60,9 @@ public class UserVerified extends BaseEntity{
 	private WUser wuser;
 	private String tname;
 	private String idcard;
-	private String idcardFront;
-	private String idcardBack;
+	private String idcardFront; //身份证正面
+	private String idcardBack;  //身份证反面
+	private String idcardPath;  //手持身份证正面
 	private Short moblieActive;
 	private Short emailActive;
 	private String emailActivecode;
@@ -70,7 +71,6 @@ public class UserVerified extends BaseEntity{
 	private String mainotice;
 	private String validateemail;
 	
-	private String idcardPath;//手持身份证正面
 	private Integer validatenum;//验证次数
 	private String phonecode;//手机验证码
 	private Long  validatePhoneTime;//验证码有效开始时间

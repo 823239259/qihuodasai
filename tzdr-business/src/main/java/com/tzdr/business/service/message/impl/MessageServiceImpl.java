@@ -46,10 +46,14 @@ public class MessageServiceImpl extends BaseServiceImpl<Message, MessageDao> imp
 	}
 
 	@Override
-	public void deleteMessageById(String id) {
+	public boolean deleteMessageById(String id) {
 		Message message = super.get(id);
+		if(message == null){
+			return false;
+		}
 		message.setDeleted(true);  //逻辑删除
 		super.update(message);
+		return true;
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public interface DataConstant {
 	
 	
 	/**
-	 * 忘记提现密码短信
+	 * 设置/修改提现密码短信
 	 */
 	public static final int  SEND_SMS_TYPE_FORGET_WITHDRAW_PWD=2;
 	
@@ -247,6 +247,11 @@ public interface DataConstant {
 	 * 充值成功paystatus
 	 */
 	public final static int RECHARGE_LIST_PAYS_STATUS_SUCCESS = 21;
+	
+	/**
+	 * 网银
+	 */
+	public final static  String  NET_BANK = "2";
 	
 	/**
 	 * 支付宝充值类型

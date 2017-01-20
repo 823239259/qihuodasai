@@ -886,6 +886,7 @@ public class UserFundServiceImpl extends BaseServiceImpl<UserFund,UserFundDao> i
 		}
 		
 		List<UserFundVo> fundVos = nativeQuery(sql, params, UserFundVo.class);
+		
 		return fundVos;
 	}
 

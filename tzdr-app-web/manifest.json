@@ -7,8 +7,8 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.2.9",/*应用版本名称*/
-		"code": "20170106"
+		"name": "2.3.3",/*应用版本名称*/
+		"code": "20170117"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -105,14 +105,15 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"}},"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57e87c26e0f55a1329001876","channelid_android":"android"}}},
+		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"},"sina":{"appkey":"926212424","appsecret":"39f93abbc724514ba9867a6610364e83","redirect_uri":"http://open.weibo.com/apps/1272700885/privilege/oauth","description":"可选，新浪微博分享"},"qq":{"appid":"1105527637","description":"QQ分享"}},"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57b2d65067e58e601d00258a","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"frameworks": [],
+					"plistcmds":["Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true"]
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
@@ -130,7 +131,7 @@
 					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
 						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
-						"retina": "unpackage/res/icons/144x144.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
 						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
 						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
 						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
@@ -353,7 +354,8 @@
 					"tzdr/account/bindingList.html",
 					"tzdr/account/bindWeixin.html",
 					"tzdr/account/accountno.html",
-					"tzdr/login/retrievePassword.html"
+					"tzdr/login/retrievePassword.html",
+					"tzdr/account/Invitation.html"
 				],
 				"priority": 0
 			},
@@ -1493,7 +1495,8 @@
 					"js/mui.min.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"css/quotation.css"
 				],
 				"refer": [
 					"tzdr/login/login.html"
@@ -1627,6 +1630,27 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/pingpp.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/Invitation.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"images/weixinshare.png",
+					"images/qqshare.png",
+					"images/sharearrow.png",
+					"js/jquery-1.11.3.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"images/fenxiang.png",
+					"js/immersed.js",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/share.js",
+					"images/weiboshare.png"
 				],
 				"refer": [],
 				"priority": 0

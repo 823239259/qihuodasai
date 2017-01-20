@@ -42,11 +42,10 @@
 						plus.navigator.setFullscreen(false);
 					}
 				};
-				
 				//状态栏设置
 			 if(plus.storage.getItem("guide")==null){
 				 plus.storage.setItem("guide","12");
-				 plus.storage.setItem("apk","57e87c26e0f55a1329001876");
+				 plus.storage.setItem("apk","587d8e8065b6d656a700021c");
 					setTimeout(function(){
 						mui.openWindow({
 							url:"guide.html",
@@ -92,17 +91,16 @@
 						mui.app_request('/getVersion',{force:true},
 							function(result){
 								dataVersion=result.data.version;
-								
 								if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
 									return;
 								}
 								dataVersion = JSON.parse(dataVersion);
 								updateApk1(_callback);
 							},function(result){
-								_callback();
-								if(mui.cacheUser.isLogin()){
-									mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
-								}
+//								_callback();
+//								if(mui.cacheUser.isLogin()){
+//									mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+//								}
 								return; 
 							},paramUrl
 			    		);
@@ -229,8 +227,6 @@
 						}, "软件升级", "确定" );
 					});
 				}
-				
-				
 			})
 		</script>
 	</body>

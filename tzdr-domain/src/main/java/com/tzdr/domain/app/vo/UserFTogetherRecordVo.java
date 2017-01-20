@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-
 import jodd.util.ObjectUtil;
-
 import com.tzdr.common.utils.Dates;
 import com.tzdr.domain.cache.CacheManager;
 import com.tzdr.domain.cache.DataDicKeyConstants;
@@ -31,7 +29,7 @@ public class UserFTogetherRecordVo  implements Serializable  {
     /**
      * 方案名称
      */
-    private String name;
+    private String name;  
 
     /**
      * 方案id
@@ -67,7 +65,6 @@ public class UserFTogetherRecordVo  implements Serializable  {
      * 盈亏点数
      */
     private BigDecimal profitLossPoint;
-
     /**
      * 实现盈亏
      */

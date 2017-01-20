@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.math.NumberUtils;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.request.AutoAliPayRequest;
 import com.tzdr.api.request.BankTransferRequest;
+import com.tzdr.api.request.RequestObj;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.api.service.ApiRechargeService;
@@ -57,7 +57,6 @@ import com.tzdr.common.api.payease.vo.PayEaseParams;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.Md5Utils;
 import com.tzdr.common.utils.MessageUtils;
-import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.api.vo.ApiUserVo;
 import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.vo.AutoWechatRequestVo;
@@ -103,6 +102,7 @@ public class UserPayController {
 	
 	@Autowired
 	private PaymentSupportBankService paymentSupportBankService;
+	
 	@Autowired
 	private ApiRechargeService  apiRechargeService;
 	
@@ -170,7 +170,7 @@ public class UserPayController {
 	@ResponseBody
 	public ApiResult checkedWxAccount(HttpServletRequest request){
 		String uid = AuthUtils.getCacheUser(request).getUid();
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(uid);
 		ApiResult resultJson = new ApiResult(false);
 		if(userVerified != null){
 			String wxAccount = userVerified.getWxAccount();
@@ -195,7 +195,7 @@ public class UserPayController {
 		if (StringUtil.isNotBlank(account)) {
 			UserVerified userVerified = userVerifiedService.queryUserVerifiedByWechatAccount(account);
 			if (ObjectUtil.equals(null, userVerified)) {
-				UserVerified uv = userVerifiedService.queryUserVerifiedByUi(user.getId());
+				UserVerified uv = userVerifiedService.queryUserVerifiedByUid(user.getId());
 				// 绑定微信账号
 				uv.setWxAccount(account);
 				userVerifiedService.update(uv);
@@ -284,7 +284,7 @@ public class UserPayController {
 		return resultJson;
 	}
 	/**
-	 * 国付宝充值
+	 * 国付宝（网银）充值 
 	 * @param request
 	 * @param money
 	 * @return
@@ -317,9 +317,9 @@ public class UserPayController {
 				payWayChannl = Channel.ALIPAY_PC_DIRECT;
 			}
 		}
-		int status = 0;
-		String paytype = "2";
-		int source = 1;
+		int status = DataConstant.PAY_NO_PROCESSING;
+		String paytype = DataConstant.NET_BANK;  //表示网银充值
+		int source = Constant.Source.TZDR;  //表示维胜
 		String message = null;
 		boolean flag = false;
 		String result = payService.doSavePingPPRecharge(payWayChannl, source, user, status, "", money, ip, paytype,orderNo);
@@ -352,7 +352,7 @@ public class UserPayController {
 		return resultJson;
 	}
 	/**
-	 * 盾行天下-支付宝支付
+	 * 盾行天下-支付宝支付  || 快捷支付
 	 * @param request
 	 * @return
 	 */
@@ -376,12 +376,12 @@ public class UserPayController {
 					return resultJson;
 				}
 			}
-			int status = 0;
-			String paytype = "3" ;
+			int status = DataConstant.PAY_NO_PROCESSING;
+			String paytype = DataConstant.ALIPAY_TYPE;  //表示支付宝充值
 			if(payModelId == 3){
-				paytype = "1";
+				paytype = "1";  //表示快捷支付
 			}
-			int source = 1;
+			int source = Constant.Source.TZDR;
 			String ip = IpUtils.getIpAddr(request);
 			String orderNo = ChargeExample.randomNo();
 			String charage = payService.doSavePingPPRecharge(payWayChannl,source,user,status,"",paymoney,ip,paytype,orderNo);
@@ -401,7 +401,7 @@ public class UserPayController {
 				try {
 					toJsonParam = URLEncoder.encode(dxtxPayModel.toJSON(), "UTF-8");
 				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 				String result = null;
@@ -416,7 +416,6 @@ public class UserPayController {
 					resultJson.setSuccess(true);
 					resultJson.setData(result);
 				}
-				System.out.println(result);
 			}
 		}
 		return resultJson;
@@ -444,7 +443,7 @@ public class UserPayController {
 					payWayChannl = Channel.JD_WAP;
 				}
 			}
-			int status = 0;
+			int status = DataConstant.PAY_NO_PROCESSING;
 			String paytype = "10" ;
 			int source = 1;
 			String ip = IpUtils.getIpAddr(request);
@@ -469,7 +468,9 @@ public class UserPayController {
 		}
 		return resultJson;
 	}
+	
 	private static Object lock = new Object();
+	
 	/**
 	 * 微信转账确认充值
 	 * @param request
@@ -486,45 +487,44 @@ public class UserPayController {
 			resultJson.setMessage("用户信息不存在");
 			return resultJson;
 		}
-		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUi(uid);
+		UserVerified userVerified = userVerifiedService.queryUserVerifiedByUid(uid);
 		if(userVerified != null){
-				synchronized (lock) {
-					List<RechargeList>	rechargeLists = apiRechargeService.queryByTradeNo(transactionNo);
-					if(rechargeLists != null && rechargeLists.size() > 0){
-						resultJson.setMessage("提交失败,重复的订单号");
-						resultJson.setSuccess(false);
-						return resultJson;
-					}
-					RechargeList  rechargeList = new RechargeList();
-					rechargeList.setAccount("");
-					rechargeList.setAddtime(new Date().getTime());
-					rechargeList.setUid(uid);
-					rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-					/*rechargeList.setActualMoney(money);*/
-					rechargeList.setMoney(money);
-					rechargeList.setTradeAccount(DataConstant.WECHAT);
-					rechargeList.setType(DataConstant.WECHAT_TYPE);
-					rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
-					rechargeList.setTradeNo(transactionNo);
-					apiRechargeService.autoWechat(rechargeList);
+			synchronized (lock) {
+				List<RechargeList>	rechargeLists = apiRechargeService.queryByTradeNo(transactionNo);
+				if(rechargeLists != null && rechargeLists.size() > 0){
+					resultJson.setMessage("提交失败,重复的订单号");
+					resultJson.setSuccess(false);
+					return resultJson;
 				}
-				// TODO 充值银行审核，给工作人员发送Email
-				try {
-					messagePromptService.sendMessage(PromptTypes.isWechatTransfer, user.getMobile());
-				} catch (Exception e) {
-					logger.info("发送邮件失败", e);
-				}
+				RechargeList  rechargeList = new RechargeList();
+				rechargeList.setAccount("");
+				rechargeList.setAddtime(new Date().getTime());
+				rechargeList.setUid(uid);
+				rechargeList.setSource(Constant.RegistSource.APP_TZDR_REGIST);
+				/*rechargeList.setActualMoney(money);*/
+				rechargeList.setMoney(money);
+				rechargeList.setTradeAccount(DataConstant.WECHAT);
+				rechargeList.setType(DataConstant.WECHAT_TYPE);
+				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
+				rechargeList.setTradeNo(transactionNo);
+				apiRechargeService.autoWechat(rechargeList);
+			}
+			try {
+				messagePromptService.sendMessage(PromptTypes.isWechatTransfer, user.getMobile());
+			} catch (Exception e) {
+				logger.info("发送邮件失败", e);
+			}
 		}
 		return resultJson;
 	}
 	/**
 	* @Title: ebankrecharge    
-	* @Description: 网页充值接口 
+	* @Description: 网银充值接口 //易支付（停用）
 	* @param money   充值金额
 	* @param response
 	* @param request
 	* @return
-	 */
+	 */                       
 	@RequestMapping(value = "/ebankrecharge")
 	@ResponseBody
 	public ApiResult ebankrecharge(String money,HttpServletResponse response,HttpServletRequest request){
@@ -555,7 +555,7 @@ public class UserPayController {
 		
 	   PayEaseParams  payEaseParams = new PayEaseParams(PayEase.WAP_PAY_PMODE, money, ip,DataConstant.PayStatus.NO_PROCESSING,"");
 	   payEaseParams = this.payService.PayEasePay(user, PayEaseUtil.tzdrAppPay(payEaseParams),Constant.Source.TZDR,Constant.SystemFlag.TZDR_APP);
-		return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",payEaseParams);
+	   return new ApiResult(true,ResultStatusConstant.SUCCESS,"Successful submit",payEaseParams);
 	}
 	/**
 	 * 微信 自动充值接口 
@@ -564,7 +564,7 @@ public class UserPayController {
 	 */
 	@RequestMapping(value = "/auto_wechat",method=RequestMethod.POST)
 	@ResponseBody
-	public synchronized ApiResult autoAlipay(@RequestBody AutoWechatRequestVo autoAliPayRequest){
+	public synchronized ApiResult autoAlipay(AutoWechatRequestVo autoAliPayRequest){
 		if (autoAliPayRequest.isInvalid()){
 			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
 		}
@@ -618,7 +618,7 @@ public class UserPayController {
 	 */
 	@RequestMapping(value = "/auto_alipay",method=RequestMethod.POST)
 	@ResponseBody
-	public synchronized ApiResult autoAlipay(@RequestBody AutoAliPayRequest autoAliPayRequest){
+	public synchronized ApiResult autoAlipay(AutoAliPayRequest autoAliPayRequest){
 		if (autoAliPayRequest.isInvalid()){
 			return new ApiResult(false, ResultStatusConstant.FAIL,"invalid.params.");
 		}

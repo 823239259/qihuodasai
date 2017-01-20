@@ -2,27 +2,22 @@ package com.tzdr.api.controller;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.request.RequestObj;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.support.CacheUser;
-import com.tzdr.api.thread.RegistP2pThread;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
@@ -39,14 +34,11 @@ import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.utils.Dates;
-import com.tzdr.common.utils.IpAddressUtils;
 import com.tzdr.common.utils.IpUtils;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.domain.api.vo.ApiUserVo;
-import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.GeneralizeChannel;
-import com.tzdr.domain.web.entity.SecurityCode;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
 
@@ -89,12 +81,12 @@ public class LoginAndRegistController {
 	
 	@Autowired
 	private MockTradeAccountService mockTradeAccountService;
-
+	
 	private static Object lock = new Object();
 	
 	/**
 	 * 系统注册接口
-	 * @param requestObj
+	 * @param requestObj 用户注册接口请求类
 	 * @param request
 	 * @param response
 	 * @return
@@ -102,11 +94,11 @@ public class LoginAndRegistController {
 	@RequestMapping(value = "/regist",method=RequestMethod.POST)
 	@ResponseBody
 	public ApiResult signInOperation(RequestObj requestObj,HttpServletRequest request,HttpServletResponse response){
-		final String mobile=requestObj.getMobile();
-		String code=requestObj.getCode();
-		final String password=requestObj.getPassword();
-		String parentGeneralizeId=requestObj.getParentGeneralizeId();
-	    String channel = requestObj.getChannel();
+		final String mobile=requestObj.getMobile();//电话
+		final String password=requestObj.getPassword();//密码
+		String parentGeneralizeId=requestObj.getParentGeneralizeId();//推广码
+	    String channel = requestObj.getChannel();//渠道
+	    String source = requestObj.getSource();//来源    
 		if (StringUtil.isBlank(mobile)
 				|| StringUtil.isBlank(password)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"user.info.not.complete.");
@@ -121,20 +113,30 @@ public class LoginAndRegistController {
 		}
 		
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
-		if (!ObjectUtil.equals(null, appUserVo)){
+		if (!ObjectUtil.equals(null, appUserVo)){//验证手机号码是否已被注册
 			return new ApiResult(false,ResultStatusConstant.Regist.MOBILE_EXIST,"mobile.exist.");
 		}
-		
-		if(StringUtil.isNotBlank(parentGeneralizeId) 
-				&& ObjectUtil.equals(null, wUserService.findByGeneralizeId(parentGeneralizeId))){
-			return new ApiResult(false,ResultStatusConstant.Regist.ERROR_GENERALIZE_CODE,"error.generalize.code.");
-		}
-		
 		WUser wUser = new WUser();     //创建注册对象信息
-		wUser.setSource(Constant.RegistSource.APP_TZDR_REGIST);
-		WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
+		
+		//推广人编号
+		if(StringUtil.isNotBlank(parentGeneralizeId)){
+			WUser generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId);
+			if(generalizeWuser == null){
+				return new ApiResult(false,ResultStatusConstant.Regist.ERROR_GENERALIZE_CODE,"error.generalize.code.");
+			}else{
+				//wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null? 0.00:generalizeWuser.getSubordinateDefaultRebate());
+				wUser.setParentNode(generalizeWuser);
+			}
+		}else{
+			WUser platformDefaultWuser = wUserService.queryByUserType(DataConstant.TZDR_DEFAULT_USERTYPE).get(0);  //获取平台默认用户
+			wUser.setParentNode(platformDefaultWuser);
+		}
+		if(source == null){  //app注册兼容老版本
+			wUser.setSource(7);
+		}else{
+			wUser.setSource(Integer.parseInt(source));
+		}
 		wUser.setUserType("0");
-		wUser.setParentNode(platformDefaultWuser);
 		wUser.setPassword(password);
 		wUser.setMobile(mobile);
 		wUser.setCtime((new Date().getTime()/1000));
@@ -158,16 +160,7 @@ public class LoginAndRegistController {
 		}
 		final String emailChannelName = channelName;
 		final String emailChannelKeyWords = channelKeyWords;
-		/*//设置渠道
-		wUser.setChannel(channel);  
-		//推广人编号
-		if(StringUtil.isNotBlank(parentGeneralizeId)){
-			WUser generalizeWuser = wUserService.findByGeneralizeId(parentGeneralizeId); 
-			if(generalizeWuser != null){
-				wUser.setRebate(generalizeWuser.getSubordinateDefaultRebate() == null? 0.00:generalizeWuser.getSubordinateDefaultRebate());
-				wUser.setParentNode(generalizeWuser);
-			}
-		}*/
+		
 		wUser.setLastLoginTime(Dates.getCurrentLongDate());
 		String ip = IpUtils.getIpAddr(request);
 		wUser.setLastLoginIp(ip);
@@ -240,7 +233,7 @@ public class LoginAndRegistController {
 		String password=requestObj.getPassword();
 		
 		if (StringUtil.isBlank(loginName)
-				|| StringUtil.isBlank(password)){
+				|| StringUtil.isBlank(password)){//后台验证用户名和密码
 			return new ApiResult(false,ResultStatusConstant.Login.LOGIN_INFO_ERROR,"user.info.not.complete.");
 		}
 		if (!PasswordUtils.validatePwd(password)){
@@ -284,7 +277,12 @@ public class LoginAndRegistController {
 		return true;
 	}
 	
-	//用户操盘中账户
+	/**
+	 * 用户操盘中账户
+	 * @param request
+	 * @param httpServletResponse
+	 * @return
+	 */
 	@RequestMapping(value = "/operateLogin",method=RequestMethod.POST)
 	@ResponseBody 
 	public ApiResult operateLogin(HttpServletRequest request,HttpServletResponse httpServletResponse){

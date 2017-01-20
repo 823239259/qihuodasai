@@ -18,7 +18,8 @@
 				<ref bean="endOfTransferMoneyTrigger"/>
 				<!-- <ref bean="endOfCommissionMoneyTrigger"/> -->
 <!-- 				<ref bean="queryActivityProfitTrigger"/>
- -->				
+ -->			
+                <ref bean="oldAndNewActivityTrigger"/>
                 <ref bean="programmeExtensionSendMessageTrigger"/>
                 <ref bean="autoLimitParentAccountTrigger"/>
  				<ref bean="thawAccountTrigger"/>			
@@ -172,7 +173,7 @@
 		<property name="durability" value="false"/>
 		<property name="jobClass" value="com.tzdr.cms.quartz.QueryActivityProfit" />
 	</bean> -->
-	
+		
 	<!-- 解冻下一个交易日开始账号式 Trigger定义-->
 	<bean id="thawAccountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="thawAccountJobDetail" />
@@ -325,5 +326,17 @@
 	<bean id="crawlerCalendarBackUpFree" class="org.springframework.scheduling.quartz.JobDetailFactoryBean" >
 		<property name="durability" value="false"/>
 		<property name="jobClass" value="com.tzdr.cms.quartz.WallStreetcnBackHistoryJob" />
+	</bean>
+	
+	<!-- 老带新活动统计  每天早上01:20生产数据向数据库添加-->
+	<!-- Timer式 Trigger定义-->
+	<bean id = "oldAndNewActivityTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="oldAndNewActivityJobDetail" />
+		<property name="cronExpression" value="0 20 01 * * ?" /> 
+	</bean>	
+	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean id= "oldAndNewActivityJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="false"/>
+		<property name="jobClass" value="com.tzdr.cms.quartz.OldAndNewActivityJob" />
 	</bean>
 </beans>

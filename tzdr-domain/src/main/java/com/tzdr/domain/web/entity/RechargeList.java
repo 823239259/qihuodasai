@@ -25,7 +25,7 @@ public class RechargeList   extends BaseEntity {
 	private Double fee;
 	private Double money;
 	private Double actualMoney;//实际到账金额
-	// S001:系统调账、 S002：系统冲账
+	// S001:系统调账、 S002：系统冲账  1：快捷支付  2：网银充值  3：支付宝支付？    4：银行转账
 	private String type;
 	private String tradeAccount;
 	private String tradeNo;
@@ -43,7 +43,7 @@ public class RechargeList   extends BaseEntity {
 	private String reAccountId;//充值人员编号
 	
 	/**
-	 * 充值渠道 1:联动优势 2：币币支付 3:易支付
+	 * 充值渠道 1:联动优势 2：币币支付 3:易支付 
 	 */
 	private Integer paymentChannel=0;
 	

@@ -10,7 +10,7 @@ import com.tzdr.domain.web.entity.SocketConfig;
 
 public interface SocketConfigService extends BaseService<SocketConfig>{
 	/**
-	 * 根据APP版本号查询socketconfig
+	 * 根据app版本号socketconfig
 	 * @param version
 	 * @return
 	 */
