@@ -1,5 +1,6 @@
 package com.tzdr.business.service.crawler.imp;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveContentService;
 import com.tzdr.business.service.crawler.CrawlerWallstreetnLiveService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
+import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.Page;
 import com.tzdr.domain.dao.crawler.CrawlerWallstreetnLiveDao;
 import com.tzdr.domain.web.entity.CrawlerWallstreetnLive;
@@ -51,7 +53,7 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 	@Override
 	public List<Map<String, Object>> getCrawlerLiveContent(Page page, String channelset) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("select l.id,l.published,l.live_title as liveTitle,"
+		/*buffer.append("select l.id,l.published,l.live_title as liveTitle,"
 				+ "l.live_wallstreetn_id as liveWallstreetnId,l.live_type as liveType,"
 				+ "l.live_createtime as liveCreatetime,l.live_updatetime as liveUpdatetime,"
 				+ "l.channel_set as channelSet,l.type,l.code_type as codeType,"
@@ -64,8 +66,20 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 				+ " and l.channel_set = '"+channelset+"' "
 				+ " and c.live_id=l.live_wallstreetn_id "
 				+ " GROUP BY l.channel_set,l.live_wallstreetn_id "
+				+ " order by created_at desc  LIMIT "+page.getStartIndex()+" , "+page.getSize()+"");*/
+		Long time =  Dates.addDay(new Date(), -7).getTime();
+		buffer.append("select l.id,l.live_title as liveTitle,"
+				+ "l.live_createtime as liveCreatetime,"
+				+ "l.created_at as createdAt,"
+				+ "c.live_content_html as liveContent "
+				+ " from crawler_wallstreetn_live l ,crawler_wallstreetn_live_content c "
+				+ " where "
+				+ " l.published = 1 "
+				+ " l.live_createtime = "+time+" "
+				+ " and l.channel_set = '"+channelset+"' "
+				+ " and c.live_id=l.live_wallstreetn_id "
+				+ " GROUP BY l.channel_set,l.live_wallstreetn_id "
 				+ " order by created_at desc  LIMIT "+page.getStartIndex()+" , "+page.getSize()+"");
-		
 		return getEntityDao().queryMapBySql(buffer.toString(), null);
 	}
 }

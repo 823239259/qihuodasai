@@ -836,47 +836,45 @@ function updatePostion(param){
 	if(openAvgPrice == undefined){
 		openAvgPrice = param.TradePrice;
 	}
-	var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
-	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
-	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
-	var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
-	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position10']");
-	var $floatingProfit = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position4']");
+	var localCommodity = getMarketCommdity(contractCode);
+	var doSize = 0;
+	if(localCommodity != undefined){ 
+		doSize = Number(localCommodity.DotSize);
+	}
+	var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
+	var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
+	var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
+	var $floatP = $("li[data-tion-position='"+contractCode+"'] span[class = 'position8']");
+	var $floatingProfit =$("#floatValue"+contractCode);
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($openAvgPrice.text()).toFixed(2) *  oldHoldNum;
-	var price = parseFloat(openAvgPrice).toFixed(2) * holdNum;
+	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(doSize) *  oldHoldNum;
+	var price = parseFloat(openAvgPrice).toFixed(doSize) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
-		price = parseFloat(price + oldPrice).toFixed(2);
-		var localCommodity = getLocalCacheCommodity(contractCode);
-		var doSize = 0;
-		if(localCommodity != undefined){
-			doSize = localCommodity.DotSize;
-		}
+		price = parseFloat(price + oldPrice).toFixed(doSize);
+		
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
-		$openAvgPrice.text(openAvgPrice);
 		$holdAvgPrice.text(openAvgPrice);
 		var commdityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 
 		var floatP = 0.00;
 		var contractAndCommodity = commdityNo+contractNo;
-		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
-		if(localCommodity != undefined){
-			var lastPrice = getLocalCacheQuote(contractAndCommodity);
+		var localCommodity  = getMarketCommdity(contractAndCommodity);
+		if(localCommodity != undefined){ 
+			var localQuote = getLocalCacheQuote(contractAndCommodity);
 			var contractSize = localCommodity.ContractSize;
 			var miniTikeSize = localCommodity.MiniTikeSize;
 			var currencyNo = localCommodity.CurrencyNo;
-			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			floatP = doGetFloatingProfit(parseFloat(localQuote.LastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
 			if(isNaN(floatP)){
 				floatP = 0.00;
 			}
 			floatingProft = floatP +":"+ currencyNo; 
 		}
-		$floatingProfit.text(floatingProft);
+		$floatingProfit.val(floatingProft);
 		$floatP.text(floatP);
-		$floatingProfit.css("width","160px");
 		if(floatP < 0 ){
 			$floatingProfit.css("color","green");
 		}else if(floatP > 0){
