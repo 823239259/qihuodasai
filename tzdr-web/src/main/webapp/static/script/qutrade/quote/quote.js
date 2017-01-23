@@ -1010,6 +1010,10 @@ function dealOnRtnQuoteData(data,totalVolume){
     		CandlestickData.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
     		CandlestickVolumeData.time.push(time6)
     		CandlestickVolumeData.volume.push(0);
+	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-600);
+	        CandlestickData.values=CandlestickData.values.slice(-600);
+	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-600);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-600);
 		}
 	}
 	$("#totalVolume").val(Parameters.TotalVolume)
@@ -1040,8 +1044,6 @@ function drawChartCandlestick(positionValue){
 		  	CandlestickVolumeChart.setOption(option1);
 	  		CandlestickVolumeChart.resize();
 		  	CandlestickVolumeChart.group="group2";
-//		  	CandlestickVolumeChart.connect([CandlestickChart]);
-//		  	CandlestickChart.connect([CandlestickVolumeChart]);
        	}
 	}
 }
