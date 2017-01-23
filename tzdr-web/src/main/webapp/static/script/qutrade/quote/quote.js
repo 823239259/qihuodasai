@@ -83,9 +83,9 @@ function generateRealTimeQuote(obj){
 					'    	<span class="futures_mz">'+commodityName+'</span>'+
 					'    	<span class="futures_bm">'+commodityNo+mainContract+'</span>'+
 					'    </li>'+
-					'    <li class="qlast" style="color: #30bf30;"></li>'+
-					'    <li class="futures_number"></li>'+
-					'   <li class="scal" style="color: #30bf30;"></li>'+
+					'    <li class="qlast" style="color: #666666;">-</li>'+
+					'    <li class="futures_number">-</li>'+
+					'   <li class="scal" style="color: #666666;">-</li>'+
 					'</ul>';
 		$(".futuresList").append(html);
 		updataQuoteIndex();
