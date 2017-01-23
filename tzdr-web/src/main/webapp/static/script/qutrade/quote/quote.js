@@ -1022,6 +1022,9 @@ function dealOnRtnQuoteData(data,totalVolume){
 function drawChartTime(positionValue){
 	var value=$(".carbon_time").eq(1).hasClass("active")
 	if(value){
+		if(CandlestickData.volume==null){
+	       		return
+	    }
 		var option = setOptionTime(timeData,positionValue);
 	    timeChart.setOption(option);
         timeChart.resize();
@@ -1036,6 +1039,9 @@ function drawChartCandlestick(positionValue){
 	var value=$(".carbon_time").eq(0).hasClass("active")
 	if(CandlestickData != undefined){
 		if(!value){
+	       	if(CandlestickData.categoryData==null){
+	       		return
+	       	}
 			var option=setOptionCandlestick(CandlestickData,positionValue);
 			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
    			CandlestickChart.setOption(option);
