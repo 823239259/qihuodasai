@@ -186,6 +186,9 @@
 	}
 	function handleTimeChartData(json){
     	var dosizeL=$("#doSize").val();
+    	if(json.Parameters.Data==null){
+    		return
+    	}
         var Len=json.Parameters.Data.length;
         var TimeLength=timeData.timeLabel.length;
        	var Parameters=json.Parameters.Data;

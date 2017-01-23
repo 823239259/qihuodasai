@@ -50,6 +50,7 @@ function quoteHandleData(evt){
 			}
 		handleTimeChartData(jsonData);
 		processingData(jsonData);
+	}else if(method == "OnRspSubscribe"){
 	}
 }
 /**
@@ -82,9 +83,9 @@ function generateRealTimeQuote(obj){
 					'    	<span class="futures_mz">'+commodityName+'</span>'+
 					'    	<span class="futures_bm">'+commodityNo+mainContract+'</span>'+
 					'    </li>'+
-					'    <li class="qlast" style="color: #30bf30;"></li>'+
-					'    <li class="futures_number"></li>'+
-					'   <li class="scal" style="color: #30bf30;"></li>'+
+					'    <li class="qlast" style="color: #666666;">-</li>'+
+					'    <li class="futures_number">-</li>'+
+					'   <li class="scal" style="color: #666666;">-</li>'+
 					'</ul>';
 		$(".futuresList").append(html);
 		updataQuoteIndex();
@@ -1009,14 +1010,21 @@ function dealOnRtnQuoteData(data,totalVolume){
     		CandlestickData.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
     		CandlestickVolumeData.time.push(time6)
     		CandlestickVolumeData.volume.push(0);
+	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-500);
+	        CandlestickData.values=CandlestickData.values.slice(-500);
+	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
 		}
 	}
 	$("#totalVolume").val(Parameters.TotalVolume)
 	drawChartCandlestick(positionValue);
 }
 function drawChartTime(positionValue){
-	var value=$(".carbon_time").eq(0).hasClass("active")
+	var value=$(".carbon_time").eq(1).hasClass("active")
 	if(value){
+		if(CandlestickData.volume==null){
+	       		return
+	    }
 		var option = setOptionTime(timeData,positionValue);
 	    timeChart.setOption(option);
         timeChart.resize();
@@ -1031,6 +1039,9 @@ function drawChartCandlestick(positionValue){
 	var value=$(".carbon_time").eq(0).hasClass("active")
 	if(CandlestickData != undefined){
 		if(!value){
+	       	if(CandlestickData.categoryData==null){
+	       		return
+	       	}
 			var option=setOptionCandlestick(CandlestickData,positionValue);
 			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
    			CandlestickChart.setOption(option);
@@ -1039,8 +1050,6 @@ function drawChartCandlestick(positionValue){
 		  	CandlestickVolumeChart.setOption(option1);
 	  		CandlestickVolumeChart.resize();
 		  	CandlestickVolumeChart.group="group2";
-//		  	CandlestickVolumeChart.connect([CandlestickChart]);
-//		  	CandlestickChart.connect([CandlestickVolumeChart]);
        	}
 	}
 }
