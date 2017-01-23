@@ -14,9 +14,9 @@
 	        		CandlestickVolumeData.volume.push(parameters[i][VolumeSubscript]);
 	       		};
 	       	var positionValue=getPositionValue();
-	       	rawData=rawData.slice(-600);
-	       	 CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-600);
-	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-600);
+	       	rawData=rawData.slice(-500);
+	       	 CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
 	       	splitData(rawData);
 			var option=setOptionCandlestick(CandlestickData,positionValue);
 			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
