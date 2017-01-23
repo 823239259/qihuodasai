@@ -292,7 +292,10 @@
 		            shadowOffsetY: 2
 		        }
 		    }, {
-		        type: 'inside'
+		        type: 'inside',
+		        start: 94,
+                end: 100,
+                handleSize: 8
 		    }],
 			 yAxis: [
 			            {
