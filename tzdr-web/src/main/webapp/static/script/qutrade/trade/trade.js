@@ -774,7 +774,7 @@ function addPostion(param){
 		}
 		var floatP = 0.00;
 		var contractAndCommodity = commodityNo+contractNo;
-		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
+		var localCommodity  = localCacheCommodity[contractAndCommodity];
 		if(localCommodity != undefined){
 			var lastPrice = getLocalCacheQuote(contractAndCommodity);
 			var contractSize = localCommodity.ContractSize;
@@ -795,8 +795,8 @@ function addPostion(param){
 		}
 		var currcls  = "position-currency"+currencyNo;
 		var cls = "postion-index"+postionIndex;
-		var html = '<ul class="tab_content '+cls+' '+currcls+' tab_position" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractCode+'" id = "'+contractCode+'"> '+
-					'	<li class="position0 ml" style="width: 80px;">'+contractCode+'</li>'+
+		var html = '<ul class="tab_content '+cls+' '+currcls+' tab_position" data-index-position = "'+postionIndex+'" data-tion-position = "'+contractAndCommodity+'" id = "'+contractAndCommodity+'"> '+
+					'	<li class="position0 ml" style="width: 80px;">'+contractAndCommodity+'</li>'+
 					'	<li  class = "position1" style="width: 80px;">'+holdNum+'</li>'+
 					'	<li  class = "position2" style="width: 80px;" data-drection = "'+drection+'">'+drectionText+'</li>'+
 					'	<li  class = "position3" style="width: 100px;">'+holdAvgPrice+'</li>'+
@@ -823,12 +823,14 @@ function addPostion(param){
  * @param param
  */
 function updatePostion(param){
-	var contractCode = param.ContractCode;
 	var holdNum = parseInt(param.HoldNum);
 	var drection = param.Drection;
 	var holdAvgPrice = param.HoldAvgPrice;
 	var exchangeNo = param.ExchangeNo;
 	var currencyNo = param.CurrencyNo;
+	var commdityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var contractCode = commdityNo+contractNo;
 	var openAvgPrice = param.OpenAvgPrice;
 	if(isNaN(holdNum)){
 		holdNum = parseInt(param.TradeNum);
@@ -836,47 +838,40 @@ function updatePostion(param){
 	if(openAvgPrice == undefined){
 		openAvgPrice = param.TradePrice;
 	}
+	var localCommodity = localCacheCommodity[contractCode];
+	var doSize = 0;
+	if(localCommodity != undefined){ 
+		doSize = localCommodity.DotSize;
+	}
 	var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
 	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
 	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
-	var $openAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position9']");
-	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position10']");
-	var $floatingProfit = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position4']");
+	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position8']");
+	var $floatingProfit =$("#floatValue"+contractCode);                  
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
-	var oldPrice = parseFloat($openAvgPrice.text()).toFixed(2) *  oldHoldNum;
-	var price = parseFloat(openAvgPrice).toFixed(2) * holdNum;
+	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(doSize) *  oldHoldNum;
+	var price = parseFloat(openAvgPrice).toFixed(doSize) * holdNum;
 	if(oldDrection == drection){
 		oldHoldNum = oldHoldNum + holdNum;
-		price = parseFloat(price + oldPrice).toFixed(2);
-		var localCommodity = getLocalCacheCommodity(contractCode);
-		var doSize = 0;
-		if(localCommodity != undefined){
-			doSize = localCommodity.DotSize;
-		}
+		price = parseFloat(price + oldPrice).toFixed(doSize);
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
-		$openAvgPrice.text(openAvgPrice);
 		$holdAvgPrice.text(openAvgPrice);
-		var commdityNo = param.CommodityNo;
-		var contractNo = param.ContractNo;
 		var floatingProft = 0.00; 
 		var floatP = 0.00;
-		var contractAndCommodity = commdityNo+contractNo;
-		var localCommodity  = getLocalCacheCommodity(contractAndCommodity);
-		if(localCommodity != undefined){
-			var lastPrice = getLocalCacheQuote(contractAndCommodity);
+		if(localCommodity != undefined){ 
+			var localQuote = getLocalCacheQuote(contractCode);
 			var contractSize = localCommodity.ContractSize;
 			var miniTikeSize = localCommodity.MiniTikeSize;
 			var currencyNo = localCommodity.CurrencyNo;
-			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			floatP = doGetFloatingProfit(parseFloat(localQuote.LastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
 			if(isNaN(floatP)){
 				floatP = 0.00;
 			}
 			floatingProft = floatP +":"+ currencyNo; 
 		}
-		$floatingProfit.text(floatingProft);
+		$floatingProfit.val(floatingProft);
 		$floatP.text(floatP);
-		$floatingProfit.css("width","160px");
 		if(floatP < 0 ){
 			$floatingProfit.css("color","green");
 		}else if(floatP > 0){
@@ -2721,9 +2716,12 @@ function bindOpertion(){
 	 */
 	$("#sub_condition_price").bind("click",function(){
 		if(isLogin){
+			//附加值
 			var addoption = $("#select_condition_price_addoption").val();
 			var addinputprice = 0;
+			//选择的符号
 			var option = $("#select_condition_option").val();
+			//输入价格
 			var inputprice = $("#condition_price_inputprice").val();
 			if(inputprice == null || inputprice.length == 0){
 				layer.tips("触发价格错误", '#condition_price_inputprice');
@@ -2740,22 +2738,42 @@ function bindOpertion(){
 					return;
 				}
 			}
+			//手数
 			var inputnum = $("#contract_price_num").val();
 			if(inputnum <= 0 || inputnum.length == 0){
 				layer.tips("手数输入错误", '#contract_price_num');
 				return;
 			}
+			//方向
 			var drection = $("#condition_price_drection").val();
+			//最新价
 			var lastPrice = $("#condition_price_lastPrice").text();
 			if(drection == 0){
+				if(inputprice >= lastPrice){
+					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
+					return;
+				}
+			}else if(drection == 1) {
 				if(inputprice <= lastPrice){
 					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
 					return;
 				}
-			}else if(drection == 1) {
-				if(inputprice >= lastPrice){
+			}
+			if(option=='>'){
+				if(inputprice  <= lastPrice){
+					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
+				}
+			}else if(option=='<'){
+				if(inputprice  >= lastPrice){
 					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
-					return;
+				}
+			}else if(option=='>='){
+				if(inputprice  < lastPrice){
+					layer.tips("输入价格必须大于等于最新价", '#condition_price_inputprice');
+				}
+			}else if(option=='<='){
+				if(inputprice  > lastPrice){
+					layer.tips("输入价格必须小于等于最新价", '#condition_price_inputprice');
 				}
 			}
 			var chioceContract = $("#condition_price_contractCode").val();
