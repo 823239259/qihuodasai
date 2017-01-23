@@ -27,7 +27,7 @@ body {background: #f2f2f2;}
 #realTimeNews .realTimeNews_right .economicCalendarViewpoint .quotation_title {height: 60px; line-height: 60px; margin: -1px auto 0; border-top: 1px solid #dadada;width: 342px;}
 #realTimeNews .realTimeNews_right .economicCalendarViewpoint .quotation_title a:hover{color: #ffb319;}
 #realTimeNews .realTimeNews_right .economicCalendarViewpoint {background: #fff; border-bottom: 2px solid #ccc;} 
-#realTimeNews .realTimeNews_right .economicCalendarViewpoint a {color: #666;}
+#realTimeNews .realTimeNews_right .economicCalendarViewpoint a {color: #666; font-weight: bolder;}
 .calendar-link{
     display: none;!important;
 }
