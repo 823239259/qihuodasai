@@ -847,7 +847,7 @@ function updatePostion(param){
 	var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
 	var $holdAvgPrice = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position3']");
 	var $floatP = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position8']");
-	var $floatingProfit =$("#floatValue"+contractCode);
+	var $floatingProfit =$("#floatValue"+contractCode);                  
 	var oldHoldNum = parseInt($holdNum.text());
 	var oldDrection = parseInt($drection.attr("data-drection"));
 	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(doSize) *  oldHoldNum;
@@ -2716,9 +2716,12 @@ function bindOpertion(){
 	 */
 	$("#sub_condition_price").bind("click",function(){
 		if(isLogin){
+			//附加值
 			var addoption = $("#select_condition_price_addoption").val();
 			var addinputprice = 0;
+			//选择的符号
 			var option = $("#select_condition_option").val();
+			//输入价格
 			var inputprice = $("#condition_price_inputprice").val();
 			if(inputprice == null || inputprice.length == 0){
 				layer.tips("触发价格错误", '#condition_price_inputprice');
@@ -2735,22 +2738,42 @@ function bindOpertion(){
 					return;
 				}
 			}
+			//手数
 			var inputnum = $("#contract_price_num").val();
 			if(inputnum <= 0 || inputnum.length == 0){
 				layer.tips("手数输入错误", '#contract_price_num');
 				return;
 			}
+			//方向
 			var drection = $("#condition_price_drection").val();
+			//最新价
 			var lastPrice = $("#condition_price_lastPrice").text();
 			if(drection == 0){
+				if(inputprice >= lastPrice){
+					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
+					return;
+				}
+			}else if(drection == 1) {
 				if(inputprice <= lastPrice){
 					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
 					return;
 				}
-			}else if(drection == 1) {
-				if(inputprice >= lastPrice){
+			}
+			if(option=='>'){
+				if(inputprice  <= lastPrice){
+					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
+				}
+			}else if(option=='<'){
+				if(inputprice  >= lastPrice){
 					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
-					return;
+				}
+			}else if(option=='>='){
+				if(inputprice  < lastPrice){
+					layer.tips("输入价格必须大于等于最新价", '#condition_price_inputprice');
+				}
+			}else if(option=='<='){
+				if(inputprice  > lastPrice){
+					layer.tips("输入价格必须小于等于最新价", '#condition_price_inputprice');
 				}
 			}
 			var chioceContract = $("#condition_price_contractCode").val();
