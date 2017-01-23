@@ -2,6 +2,9 @@
 
         function processingData(jsonData){
     		var dosizeL=$("#doSize").val();
+    		if(jsonData.Parameters.Data==null){
+	    		return
+	    	}
     		var parameters = jsonData.Parameters.Data;
     		var Len=parameters.length;
     		if(jsonData == null)return;
@@ -14,10 +17,16 @@
 	        		CandlestickVolumeData.volume.push(parameters[i][VolumeSubscript]);
 	       		};
 	       	var positionValue=getPositionValue();
-	       	rawData=rawData.slice(-600);
-	       	 CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-600);
-	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-600);
+	       	rawData=rawData.slice(-500);
+	       	 CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
 	       	splitData(rawData);
+	       	if(CandlestickData.volume==null){
+	       		return
+	       	}
+	       	if(CandlestickData.categoryData==null){
+	       		return
+	       	}
 			var option=setOptionCandlestick(CandlestickData,positionValue);
 			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
 			CandlestickChart.setOption(option);

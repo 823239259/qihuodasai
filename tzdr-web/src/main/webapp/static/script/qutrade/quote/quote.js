@@ -1010,18 +1010,21 @@ function dealOnRtnQuoteData(data,totalVolume){
     		CandlestickData.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
     		CandlestickVolumeData.time.push(time6)
     		CandlestickVolumeData.volume.push(0);
-	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-600);
-	        CandlestickData.values=CandlestickData.values.slice(-600);
-	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-600);
-	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-600);
+	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-500);
+	        CandlestickData.values=CandlestickData.values.slice(-500);
+	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
 		}
 	}
 	$("#totalVolume").val(Parameters.TotalVolume)
 	drawChartCandlestick(positionValue);
 }
 function drawChartTime(positionValue){
-	var value=$(".carbon_time").eq(0).hasClass("active")
+	var value=$(".carbon_time").eq(1).hasClass("active")
 	if(value){
+		if(CandlestickData.volume==null){
+	       		return
+	    }
 		var option = setOptionTime(timeData,positionValue);
 	    timeChart.setOption(option);
         timeChart.resize();
@@ -1036,6 +1039,9 @@ function drawChartCandlestick(positionValue){
 	var value=$(".carbon_time").eq(0).hasClass("active")
 	if(CandlestickData != undefined){
 		if(!value){
+	       	if(CandlestickData.categoryData==null){
+	       		return
+	       	}
 			var option=setOptionCandlestick(CandlestickData,positionValue);
 			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
    			CandlestickChart.setOption(option);
