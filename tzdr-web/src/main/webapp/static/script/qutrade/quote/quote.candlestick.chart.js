@@ -93,7 +93,7 @@
 		            shadowOffsetY: 2
 		        }
 		    }, {
-		        type: 'inside'
+		        type: 'inside',
 		    }],
 		    yAxis: {
 		        scale: true,

@@ -50,6 +50,7 @@ function quoteHandleData(evt){
 			}
 		handleTimeChartData(jsonData);
 		processingData(jsonData);
+	}else if(method == "OnRspSubscribe"){
 	}
 }
 /**
