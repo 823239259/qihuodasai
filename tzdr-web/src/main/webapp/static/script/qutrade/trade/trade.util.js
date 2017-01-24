@@ -395,6 +395,8 @@ function fixedPrice(price, commodityNo, contractNo) {
  * @returns
  */
 function checkPrice(price, miniTikeSize) {
+	price = parseInt(price * 1000000);
+	miniTikeSize = parseInt(miniTikeSize * 1000000);
 	var iTemp = price/miniTikeSize;
 	if(parseInt(price/miniTikeSize) != iTemp) {
 		return false;
