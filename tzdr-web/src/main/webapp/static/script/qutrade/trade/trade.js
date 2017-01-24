@@ -203,20 +203,14 @@ function handleData(evt){
 			var locaOrderId = resultInsertOrderId[orderId];
 			$("#floatingProfit").text("0.00");
 			$("#floatingProfit").css("color","#FFFFFF");
-			/*if(referCount == 0){*/
 				tradeSuccessLoadHoldData();
-			/*	console.log($(".tab_position"));
-				if($(".tab_position").length == 0){
-					$("#floatingProfit").text("00.0");
-				}*/
-		/*	}*/
-			/*referCount++;*/
-			/*if(isBuy && locaOrderId == locaOrderId){
-				tradeSuccessLoadHoldData();
-				resultInsertOrderId[orderId] = null;
-				isBuy = false;
-			}*/
-			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
+				
+			var commodityNo = tradeParam.CommodityNo;
+			var contractNo = tradeParam.ContractNo;
+			var tradePrice = tradeParam.TradePrice;
+			tradePrice = fixedPrice(tradePrice, commodityNo, contractNo);
+			
+			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradePrice+"】");
 			//资金变化通知
 		} else if (method == "OnRtnMoney") {
 			var accountParam = parameters;
