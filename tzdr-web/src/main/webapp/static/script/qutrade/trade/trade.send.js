@@ -365,6 +365,6 @@ var Trade = {
 				timeoutReconnID = setTimeout(function(){
 					layer.alert("交易服务连接断开，正在重新连接...");
 					location.reload();
-				},1000);
+				},2000);
 			}
 		}
