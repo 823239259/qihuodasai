@@ -43,7 +43,7 @@ var Quote = {
 		 * @param password
 		 */
 		doLogin:function(username,password){
-			Quote.doSendMessage(QuoteUrl.LoginUrl, '{"UserName":"'+username+'","PassWord":"'+password+'"}');
+			Quote.doSendMessage(QuoteUrl.LoginUrl, '{"UserName":"'+username+'","PassWord":"'+password+'","Source":"'+Source+'"}');
 		},
 		/**
 		 * 登录请求

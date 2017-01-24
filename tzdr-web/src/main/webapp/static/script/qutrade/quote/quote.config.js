@@ -7,6 +7,10 @@ var model = "dev";
  */
 var quoteWebsocketUrl = null;
 /**
+ * 标识用户登录的端
+ */
+var Source="web";
+/**
  * 定义生产环境
  */
 function quoteConfigNewinstance(){

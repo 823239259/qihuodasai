@@ -72,7 +72,7 @@ var Trade = {
 			 * @param {Object} password 密码
 			 */ 
 			doLogin:function(username,password,isMock,version){
-				Trade.doSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'","IsMock":'+isMock+',"Version":"'+version+'"}');
+				Trade.doSendMessage(TradeUrl.LoginUrl,'{"ClientNo":"'+username+'","PassWord":"'+password+'","IsMock":'+isMock+',"Version":"'+version+'","Source":"'+Source+'"}');
 			},
 			/**
 			 * 登出

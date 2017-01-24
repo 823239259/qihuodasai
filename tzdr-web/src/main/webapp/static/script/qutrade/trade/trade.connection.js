@@ -147,9 +147,10 @@ function setTradeConfig(ismock){
 function initLoad() {
 	socket.onopen = function() {
 		layer.closeAll();
-		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion);
+		Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion,Source);
 		//更新交易连接状态
 		changeConnectionStatus();
+		/*clearInterval(tradeIntervalId);*/
 	}
 	socket.onmessage = function(evt) {
 		window.clearTimeout(timeoutReconnID); // 规定时间内接收到消息则取消刷新

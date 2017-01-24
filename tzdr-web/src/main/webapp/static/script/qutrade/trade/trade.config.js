@@ -6,6 +6,7 @@ var model = "dev";
  * websocket地址
  */
 var tradeWebsocketUrl = null;
+
 /**
  * 模拟socket地址
  */

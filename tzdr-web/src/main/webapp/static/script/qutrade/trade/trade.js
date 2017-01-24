@@ -2759,19 +2759,19 @@ function bindOpertion(){
 					return;
 				}
 			}
-			if(option=='>'){
+			if(option=='0'){
 				if(inputprice  <= lastPrice){
 					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
 				}
-			}else if(option=='<'){
+			}else if(option=='1'){
 				if(inputprice  >= lastPrice){
 					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
 				}
-			}else if(option=='>='){
+			}else if(option=='2'){
 				if(inputprice  < lastPrice){
 					layer.tips("输入价格必须大于等于最新价", '#condition_price_inputprice');
 				}
-			}else if(option=='<='){
+			}else if(option=='3'){
 				if(inputprice  > lastPrice){
 					layer.tips("输入价格必须小于等于最新价", '#condition_price_inputprice');
 				}
