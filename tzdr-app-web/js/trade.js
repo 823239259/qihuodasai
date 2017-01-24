@@ -103,6 +103,7 @@ function handleData(evt){
 				loginOut();
 			}
 			plus.nativeUI.closeWaiting();
+			clearInterval(tradeIntervalId);
 			//查询个人账户信息回复
 		} else if (method == "OnRspQryAccount") {
 			var accountParam = parameters;

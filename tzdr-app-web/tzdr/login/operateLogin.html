@@ -242,8 +242,8 @@
 				   $("#account").bind("blur",function(){
 				  	$("#username_list").css({
 				  		"display":"none"
-				  	})
-				  })
+				  	});
+				  });
 					   if($("#account").val().length>0){
 						$("#accountClear").css({
 							"display":"block"
@@ -327,7 +327,7 @@
 						setTimeOutIsLogin();
 						var loginSocket = new WebSocket(socketUrl);
 						loginSocket.onopen = function(){
-							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+',"Version":"'+tradeWebSocketVersion+'"}}');
+							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+',"Version":"'+tradeWebSocketVersion+'","Source":"'+Source+'"}}');
 						}
 						loginSocket.onmessage = function(evt){
 							var dataString = evt.data;

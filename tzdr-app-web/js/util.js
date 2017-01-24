@@ -108,6 +108,7 @@ var Btn = {
 	 */
 function alertProtype(alertContent, alertTitle, btnArray, successCallBack, colseCallBack,param) {
 	mui.confirm(alertContent, alertTitle, btnArray, function(e) {
+		console.log(e.index);
 		if(e.index == 1) {
 			successCallBack(param);
 		} else {
