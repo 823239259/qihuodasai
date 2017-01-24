@@ -190,7 +190,7 @@ function initLoad() {
 	    }
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
-			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
+			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion,Source); 
 			//更新交易连接状态
 			changeConnectionStatus();
 		}
