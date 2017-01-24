@@ -185,7 +185,11 @@ function handleData(evt){
 				tip("交易失败:合约【"+orderParam.ContractCode+"】,原因【"+orderParam.StatusMsg+"】");
 			}
 			if(isUpdateOrder && cacaleOrderId==orderId){
+				var commodityNo = orderParam.CommodityNo;
+				var contractNo = orderParam.ContractNo;
 				var orderPrice = orderParam.OrderPrice;
+				orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+				
 				var orderNum = orderParam.OrderNum;
 				isUpdateOrder = false;
 				tip("改单成功:合约【"+contractCode+"】,委托价【"+orderPrice+"】,委托量【"+orderNum+"】");
@@ -523,21 +527,25 @@ var orderIndex = 0;
 function appendOrder(param){
 	var contractCode = param.ContractCode;
 	var drectionText = analysisBusinessBuySell(param.Drection);
-	var contractNo = param.ContractNo;
+	
 	var commodityNo = param.CommodityNo;
-	var localCommodity  = getLocalCacheCommodity(commodityNo+contractNo);
+	var contractNo = param.ContractNo;
 	var orderPrice = param.OrderPrice;
-	if(localCommodity != undefined){
-		var doSize = localCommodity.DotSize;
-		orderPrice = parseFloat(orderPrice).toFixed(doSize);
-	}
+	orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+	
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
 	var orderNum = param.OrderNum;
 	var tradeNum = param.TradeNum;
+	
 	var triggerPrice = param.TriggerPrice;
+	triggerPrice = fixedPrice(triggerPrice, commodityNo, contractNo);
+	
 	var priceType = param.OrderPriceType;
+	
 	var tradePrice = param.TradePrice;
+	tradePrice = fixedPrice(tradePrice, commodityNo, contractNo);
+	
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
 	var insertDateTime = param.InsertDateTime;
@@ -577,12 +585,20 @@ function updateOrder(param){
 	var $statusMsg = $("ul[data-order-order= '"+orderId+"'] li[class = 'order10']");
 	var orderStatus = param.OrderStatus;
 	var tradeNum = param.TradeNum;
-	var orderPrice = param.TradePrice;
+	
+	var drection = param.Drection;
+	var tradePrice = param.TradePrice;
+	
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
+	var orderPrice = param.OrderPrice
+	orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+	
 	$orderStatus.text(analysisOrderStatus(orderStatus));
 	$tradeNum.text(tradeNum);	
 	$statusMsg.text(statusMsg);
-	$orderPrice.text(orderPrice);
-	$desgPrice.text(param.OrderPrice);
+	$orderPrice.text(tradePrice);
+	$desgPrice.text(orderPrice);
 	$desgNumber.text(param.OrderNum);
 };
 /**
@@ -611,13 +627,19 @@ function appendDesignates(param){
    var commodityNo = param.CommodityNo;
    var drection = param.Drection;
    var drectionText = analysisBusinessBuySell(drection);
+   
    var orderPrice = param.OrderPrice;
+   orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+   
    var orderNum = param.OrderNum;
    var tradeNum = param.TradeNum;
    var orderSysId = param.OrderSysID;
    var exchangeNo = param.ExchangeNo;
    var orderId = param.OrderID;
+   
    var triggerPrice = param.TriggerPrice;
+   triggerPrice = fixedPrice(triggerPrice, commodityNo, contractNo);
+   
    var cls = "des-index"+designateIndex;
    var html = '<ul class="tab_content '+cls+' tab_des" data-order-des = "'+orderId+'"   data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
@@ -652,7 +674,13 @@ function updateDesignatesDom(param){
 	var drectionText = analysisBusinessBuySell(drection);
 	var orderNum = parseInt(param.OrderNum);
 	var tradeNum = parseInt(param.TradeNum);
+	
+	
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
 	var orderPrice = param.OrderPrice;
+	orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+	
 	var orderStatus = param.OrderStatus;
 	var $gdNum = $("ul[data-order-des='"+orderId+"'] li[class = 'des5']");
 	var $orderPrice = $("ul[data-order-des='"+orderId+"'] li[class = 'des3']");
@@ -685,7 +713,12 @@ function appendTradeSuccess(param){
 	var drectionText = analysisBusinessBuySell(drection);
 	var orderId = param.OrderID;
 	var contractCode = param.ContractCode;
+	
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
 	var tradePrice = param.TradePrice;
+	tradePrice = fixedPrice(tradePrice, commodityNo, contractNo);
+	
 	var tradeNum = param.TradeNum;
 	var currencyNo = param.CurrencyNo;
 	var tradeNo = param.TradeNo;
@@ -772,6 +805,8 @@ function addPostion(param){
 		if(holdAvgPrice == undefined){
 			holdAvgPrice = openAvgPrice;
 		}
+		holdAvgPrice = fixedPrice(holdAvgPrice, commodityNo, contractNo);
+		
 		var floatP = 0.00;
 		var contractAndCommodity = commodityNo+contractNo;
 		var localCommodity  = localCacheCommodity[contractAndCommodity];
@@ -2107,6 +2142,11 @@ function bindOpertion(){
 			}else{
 				orderPrice = $("#money_number").val();
 			}
+			if(!checkPrice(orderPrice, localCommodity.MiniTikeSize)) {
+				layer.alert("下单价格必须是最小变动价格【" + localCommodity.MiniTikeSize + "】的整数倍");
+				return ;
+			}
+			
 			var tipContent = "确认提交订单:合约【"+commodityNo+contractNo+"】,价格:【"+orderPrice+"】,手数:【"+orderNum+"】,买卖方向:【"+analysisBusinessBuySell(tradeDrection)+"】";
 			layer.confirm(tipContent+"?", {
 			  btn: ['确认','取消'] //按钮

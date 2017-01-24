@@ -370,3 +370,34 @@ function analysisCondityionStopLossType(stopLossType){
 	}
 	return stopLossType;
 }
+
+/**
+ * 根据合约价格精度处理价格小数位数
+ * @param price
+ * @param commodityNo
+ * @param contractNo
+ * @returns
+ */
+function fixedPrice(price, commodityNo, contractNo) {
+	var localCommodity  = getLocalCacheCommodity(commodityNo+contractNo);
+	if(localCommodity != undefined){
+		var doSize = localCommodity.DotSize;
+		return parseFloat(price).toFixed(doSize);
+	}
+	return price;
+}
+
+/**
+ * 根据合约价格检查报价是否正确
+ * @param price
+ * @param commodityNo
+ * @param contractNo
+ * @returns
+ */
+function checkPrice(price, miniTikeSize) {
+	var iTemp = price/miniTikeSize;
+	if(parseInt(price/miniTikeSize) != iTemp) {
+		return false;
+	}
+	return true;
+}

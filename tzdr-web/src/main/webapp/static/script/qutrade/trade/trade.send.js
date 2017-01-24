@@ -359,6 +359,7 @@ var Trade = {
 			 * @param {Object} parameters
 			 */
 			doSendMessage:function(method,parameters){
+//				console.log('{"Method":"'+method+'","Parameters":'+parameters+'}');
 				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 				
 				// 发送消息1秒内没有回报则认为链接丢失，则刷新重连

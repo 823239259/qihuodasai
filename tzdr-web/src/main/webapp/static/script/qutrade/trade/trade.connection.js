@@ -153,6 +153,7 @@ function initLoad() {
 		/*clearInterval(tradeIntervalId);*/
 	}
 	socket.onmessage = function(evt) {
+//		console.log(evt.data);
 		window.clearTimeout(timeoutReconnID); // 规定时间内接收到消息则取消刷新
 		handleData(evt);
 	}
