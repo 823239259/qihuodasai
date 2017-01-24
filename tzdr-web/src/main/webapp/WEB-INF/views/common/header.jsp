@@ -69,7 +69,7 @@
     <div id="customerTel">
         <a href=""><img src="http://www.vs.com/templets/style/html/images/image/logo.png"></a>
         <ul>   
-            <li><a href="${ctx}/" id="shouye" class="on" style="padding: 0 16px 26px 16px;">首页</a></li>
+            <li><a href="${ctx}/" id="shouye" class="on">首页</a></li>
             <li><a target="_blank" href="${ctx}/html/qutrade/quoteTrade.html">行情交易</a></li>
             <li><a id="guojiqihuo" href="${ctx}/hsi/index">国际期货</a></li>
  			<li><a href="http://www.vs.com/vsnews/about/" title="" >下载中心</a></li>
