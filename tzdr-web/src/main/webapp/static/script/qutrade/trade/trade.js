@@ -2748,7 +2748,7 @@ function bindOpertion(){
 			var drection = $("#condition_price_drection").val();
 			//最新价
 			var lastPrice = $("#condition_price_lastPrice").text();
-			if(drection == 0){
+			/*if(drection == 0){
 				if(inputprice >= lastPrice){
 					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
 					return;
@@ -2758,22 +2758,26 @@ function bindOpertion(){
 					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
 					return;
 				}
-			}
+			}*/
 			if(option=='0'){
 				if(inputprice  <= lastPrice){
 					layer.tips("输入价格必须大于最新价", '#condition_price_inputprice');
+					return;
 				}
 			}else if(option=='1'){
 				if(inputprice  >= lastPrice){
 					layer.tips("输入价格必须小于最新价", '#condition_price_inputprice');
+					return;
 				}
 			}else if(option=='2'){
 				if(inputprice  < lastPrice){
 					layer.tips("输入价格必须大于等于最新价", '#condition_price_inputprice');
+					return;
 				}
 			}else if(option=='3'){
 				if(inputprice  > lastPrice){
 					layer.tips("输入价格必须小于等于最新价", '#condition_price_inputprice');
+					return;
 				}
 			}
 			var chioceContract = $("#condition_price_contractCode").val();

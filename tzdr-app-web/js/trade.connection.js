@@ -90,7 +90,7 @@ function changeConnectionStatus(){
  */
 function tradeConnection(){  
 	if(socketUrl.length > 0){
-		/*if(mui.checkNetwork()){
+		if(mui.checkNetwork()){
 			socket = new WebSocket(socketUrl); 
 			if(socket.readyState == 0){
 				isConnectionError = false;
@@ -102,16 +102,7 @@ function tradeConnection(){
 			isConnectionError = true;
 			plus.nativeUI.closeWaiting();
 			
-		}*/
-		
-			socket = new WebSocket(socketUrl); 
-			if(socket.readyState == 1){
-				isConnectionError = false;
-				clearInterval(tradeIntervalId); 
-			}else{
-				isConnectionError = true;
-			}
-		
+		}
 	}
 }
 /**
@@ -192,12 +183,13 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	   /* if(isConnectionError){
+	    if(isConnectionError){
+	    	console.log("test2");
 	    	 plus.nativeUI.closeWaiting();
 	    	clearInterval(tradeIntervalId);
 			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,null,null);
 			return;
-	    }*/
+	    }
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
 			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion,Source); 
@@ -209,6 +201,7 @@ function initLoad() {
 			handleData(evt);
 		} 
 		socket.onclose = function() {
+			console.log("test1");
 			clearInterval(tradeIntervalId);
 			socket = null;
 			//更新交易连接状态
@@ -216,7 +209,8 @@ function initLoad() {
 			//不是手动登出，则重连交易服务器
 			if(loginFail == false){ 
 				//交易连接断开重连
-				tradeReconnect();
+				//tradeReconnect();
+				alertProtype("网络异常,是否重连？","提示",Btn.confirmedAndCancle(),null,tradereconnectPage);
 			}else{
 				if(anotherPlace && loginFail){
 					alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
@@ -236,6 +230,12 @@ function tradeReconnect(){
 		initTrade();
 	}
 }
+/**
+ * 刷新交易服务器
+ */
+function tradereconnectPage(){
+		plus.webview.currentWebview().reload();
+	} 
 /**
  * 初始化交易
  */
@@ -257,11 +257,8 @@ function tradeReconnect(){
 					clearInterval(tradeIntervalId);
 				}
 			}
-		, 2000);
-		/*tradeIntervalId = setInterval(function(){
-			layer.msg('正在连接交易服务器...', {icon: 16});
-		}
-	    , 2000);*/
+		, 3000);
+		
 	}
 function initTrade(){
 	/**

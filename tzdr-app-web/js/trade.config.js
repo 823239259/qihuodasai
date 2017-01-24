@@ -5,6 +5,7 @@ var tradeWebsocketUrl = null;
 var tradeWebsocketModelUrl = null;
 var tradeWebSocketVersion = null;
 var appVersion = null;
+var Source="app";
 function tradeConfigInstance(){
 	this.url = tradeSocketUrl;
 	this.tradeSocketModelUrl = tradeSocketModelUrl;
