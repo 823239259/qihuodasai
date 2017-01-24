@@ -90,7 +90,18 @@ function changeConnectionStatus(){
  */
 function tradeConnection(){  
 	if(socketUrl.length > 0){
-		socket = new WebSocket(socketUrl); 
+		if(mui.checkNetwork()){
+			socket = new WebSocket(socketUrl); 
+			if(socket.readyState == 0){
+				isConnectionError = false;
+			}else{
+				isConnectionError = true;
+			}
+		}else{
+			isConnectionError = true;
+			plus.nativeUI.closeWaiting();
+			clearInterval(tradeIntervalId); 
+		}
 	}
 }
 /**
@@ -135,8 +146,6 @@ function loginCache(account,password){
  * @param password
  */
 function tradeLogin(){
-	console.log(username);
-	console.log(password);
 	if(username != null && password != null){
 		initTradeConnect();
 		var loginInterval = setInterval(function(){
@@ -173,30 +182,30 @@ function setTradeConfig(ismock){
  * 交易初始化加载
  */
 function initLoad() {
-	  
+	    if(isConnectionError){
+	    	 plus.nativeUI.closeWaiting();
+	    	clearInterval(tradeIntervalId);
+			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,null,null);
+			return;
+	    }
 		socket.onopen = function() {   
 			/*layer.closeAll();*/ 
-			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion,Source); 
+			Trade.doLogin(username , password,tradeWebSocketIsMock,tradeWebSocketVersion); 
 			//更新交易连接状态
 			changeConnectionStatus();
-			clearInterval(tradeIntervalId);
 		}
 		socket.onmessage = function(evt) {
 			handleData(evt);
 		} 
 		socket.onclose = function() {
-			console.log("test1");
 			clearInterval(tradeIntervalId);
 			socket = null;
 			//更新交易连接状态
 			changeConnectionStatus();
 			//不是手动登出，则重连交易服务器
 			if(loginFail == false){ 
-				//tip("网络异常，请检查网络设置");
-				//alertProtype("网络异常,点击确定重新连接","提示",Btn.confirmedAndCancle(),tradereconnectPage,null,null);
 				//交易连接断开重连
-				tradeReconnect(); 
-				//alertProtype("网络异常,是否重连？","提示",Btn.confirmedAndCancle(),null,tradereconnectPage);
+				tradeReconnect();
 			}else{
 				if(anotherPlace && loginFail){
 					alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008","下线提示",Btn.confirmed(),null,null,null);
@@ -211,43 +220,30 @@ function initLoad() {
  */
 function tradeReconnect(){
 	//layer.msg('交易连接断开,正在重新连接...', {icon: 16});
-	//tip("正在链接交易服务器1...")
 	if(socket == null){
 		initTrade();
 	}
 }
 /**
- * 刷新交易服务器
- */
-function tradereconnectPage(){
-		//plus.webview.currentWebview().reload(); 
-		tradeReconnect();
-	} 
-/**
  * 初始化交易
  */
 	function initTradeConnect(){
-		tradeIntervalId = setInterval(function(){
-				//layer.msg('正在连接交易服务器...', {icon: 16});
-				tip("正在连接交易服务器...");
-				if(connectionStatus){
-					//layer.msg('交易服务器连接成功', {icon: 4});
-					tip("交易服务器连接成功");
-					clearInterval(tradeIntervalId);
-				}
-			}
-		, 3000);
 		/**
 		 * 交易连接 -->trade.connection
 		 */
 		tradeConnection();
-		console.log(socket);
 		/**
 		 * 交易数据初始化加载 --> trade.connections
 		 */
 		initLoad();
-		
-		
+		tradeIntervalId = setInterval(function(){
+				/*layer.msg('正在连接交易服务器...', {icon: 16});*/
+				if(connectionStatus){
+					/*layer.msg('交易服务器连接成功', {icon: 4});*/
+					clearInterval(tradeIntervalId);
+				}
+			}
+		, 2000);
 	}
 function initTrade(){
 	/**
