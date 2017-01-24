@@ -525,19 +525,22 @@ function appendOrder(param){
 	var drectionText = analysisBusinessBuySell(param.Drection);
 	var contractNo = param.ContractNo;
 	var commodityNo = param.CommodityNo;
-	var localCommodity  = getLocalCacheCommodity(commodityNo+contractNo);
 	var orderPrice = param.OrderPrice;
-	if(localCommodity != undefined){
-		var doSize = localCommodity.DotSize;
-		orderPrice = parseFloat(orderPrice).toFixed(doSize);
-	}
+	orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+	
 	var orderStatus = param.OrderStatus;
 	var ordreStatusText = analysisOrderStatus(orderStatus);
 	var orderNum = param.OrderNum;
 	var tradeNum = param.TradeNum;
+	
 	var triggerPrice = param.TriggerPrice;
+	triggerPrice = fixedPrice(triggerPrice, commodityNo, contractNo);
+	
 	var priceType = param.OrderPriceType;
+	
 	var tradePrice = param.TradePrice;
+	tradePrice = fixedPrice(tradePrice, commodityNo, contractNo);
+	
 	var orderId = param.OrderID;
 	var statusMsg = param.StatusMsg;
 	var insertDateTime = param.InsertDateTime;
@@ -611,13 +614,19 @@ function appendDesignates(param){
    var commodityNo = param.CommodityNo;
    var drection = param.Drection;
    var drectionText = analysisBusinessBuySell(drection);
+   
    var orderPrice = param.OrderPrice;
+   orderPrice = fixedPrice(orderPrice, commodityNo, contractNo);
+   
    var orderNum = param.OrderNum;
    var tradeNum = param.TradeNum;
    var orderSysId = param.OrderSysID;
    var exchangeNo = param.ExchangeNo;
    var orderId = param.OrderID;
+   
    var triggerPrice = param.TriggerPrice;
+   triggerPrice = fixedPrice(triggerPrice, commodityNo, contractNo);
+   
    var cls = "des-index"+designateIndex;
    var html = '<ul class="tab_content '+cls+' tab_des" data-order-des = "'+orderId+'"   data-index-des = "'+designateIndex+'" data-tion-des= "'+contractCode+'">'+
 				'	<li class="ml des0">'+contractCode+'</li>'+
@@ -685,7 +694,12 @@ function appendTradeSuccess(param){
 	var drectionText = analysisBusinessBuySell(drection);
 	var orderId = param.OrderID;
 	var contractCode = param.ContractCode;
+	
+	var commodityNo = param.CommodityNo;
+	var contractNo = param.ContractNo;
 	var tradePrice = param.TradePrice;
+	tradePrice = fixedPrice(tradePrice, commodityNo, contractNo);
+	
 	var tradeNum = param.TradeNum;
 	var currencyNo = param.CurrencyNo;
 	var tradeNo = param.TradeNo;
@@ -772,6 +786,8 @@ function addPostion(param){
 		if(holdAvgPrice == undefined){
 			holdAvgPrice = openAvgPrice;
 		}
+		holdAvgPrice = fixedPrice(holdAvgPrice, commodityNo, contractNo);
+		
 		var floatP = 0.00;
 		var contractAndCommodity = commodityNo+contractNo;
 		var localCommodity  = localCacheCommodity[contractAndCommodity];
