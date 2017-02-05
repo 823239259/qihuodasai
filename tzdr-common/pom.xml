@@ -2,13 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.tzdr</groupId>
-		<artifactId>tzdr</artifactId>
+		<groupId>com.vs</groupId>
+		<artifactId>vs</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>tzdr-common</artifactId>
-	<name>tzdr-commom</name>
+	<artifactId>vs-common</artifactId>
+	<name>vs-commom</name>
 	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
 		
 	<dependencies>
 		<!-- 身份认证jar 这个jar包在lib下面 -->

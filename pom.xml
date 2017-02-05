@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.tzdr</groupId>
-	<artifactId>tzdr</artifactId>
+	<groupId>com.vs</groupId>
+	<artifactId>vs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>tzdr</name>
+	<name>vs</name>
 	<modules>  
-		<module>tzdr-common</module>
-		<module>tzdr-domain</module>
-		<module>tzdr-business</module>
-		<module>tzdr-web</module>
-		<module>tzdr-cms</module>
-		<module>tzdr-olog</module>
-		<module>peigubao</module>
-		<module>tzdr-app</module>
+		<module>vs-common</module>
+		<module>vs-domain</module>
+		<module>vs-business</module>
+		<module>vs-olog</module>
+		
+		<module>vs-web</module>
+		<module>vs-manage</module>
+		<module>vs-api</module>
 	</modules>
 	<properties>
 		<jdk.version>1.7</jdk.version>

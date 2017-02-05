@@ -3,26 +3,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.tzdr</groupId>
-    <artifactId>tzdr</artifactId>
+    <groupId>com.vs</groupId>
+    <artifactId>vs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.tzdr</groupId>
-  <artifactId>tzdr-app</artifactId>
+  <groupId>com.vs</groupId>
+  <artifactId>vs-api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>tzdr-app</name>
+  <name>vs-api</name>
   <url>http://maven.apache.org</url>
   
   <dependencies>
 		<dependency>
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-business</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-business</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-olog</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-olog</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>  
@@ -35,7 +35,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>tzdr-app</finalName>
+		<finalName>vs-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>

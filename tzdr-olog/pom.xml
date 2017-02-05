@@ -2,27 +2,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.tzdr</groupId>
-		<artifactId>tzdr</artifactId>
+		<groupId>com.vs</groupId>
+		<artifactId>vs</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>tzdr-olog</artifactId>
-	<name>tzdr-olog</name>
+	<artifactId>vs-olog</artifactId>
+	<name>vs-olog</name>
 
 	<dependencies>
 		<dependency> 
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-common</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-domain</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-business</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-business</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

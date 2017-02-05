@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.tzdr</groupId>
-    <artifactId>tzdr</artifactId>
+    <groupId>com.vs</groupId>
+    <artifactId>vs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.tzdr</groupId>
-  <artifactId>tzdr-cms</artifactId>
+  <groupId>com.vs</groupId>
+  <artifactId>vs-manage</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>cms</name>
@@ -16,19 +16,19 @@
   
   <dependencies>
 		<dependency>
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-business</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-business</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.tzdr</groupId>
-			<artifactId>tzdr-olog</artifactId>
+			<groupId>com.vs</groupId>
+			<artifactId>vs-olog</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>cms</finalName>
+		<finalName>vs-manage</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
