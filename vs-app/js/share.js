@@ -85,7 +85,11 @@
 			ss=shares['qq'];
 			ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
 			// 弹出分享列表
-			plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
-				(e.index>0)&&shareAction(shareBts[e.index-1],true);
-			});
+			if(shareBts.length>0){
+				plus.nativeUI.actionSheet({title:'分享链接',cancel:'取消',buttons:shareBts},function(e){
+					(e.index>0)&&shareAction(shareBts[e.index-1],true);
+				});
+			}else{
+				mui.toast("当前手机不支持分享功能");
+			}
 		}
