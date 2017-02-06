@@ -18,10 +18,10 @@
 	       		};
 	       	var positionValue=getPositionValue();
 	       	rawData=rawData.slice(-500);
-	       	 CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	       	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
 	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
 	       	splitData(rawData);
-	       	if(CandlestickData.volume==null){
+	       	if(CandlestickVolumeData.volume==null){
 	       		return
 	       	}
 	       	if(CandlestickData.categoryData==null){

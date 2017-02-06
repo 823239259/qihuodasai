@@ -14,14 +14,14 @@ var Source="web";
  * 定义生产环境
  */
 function quoteConfigNewinstance(){
-	this.url = "ws://quote.vs.com:9002";
+	this.url = "ws://139.196.228.143:8001";
 	return this;
 }
 /**
  * 定义测试环境服务器
  */
 function quoteConfigNewinstanceTest(){
-	this.url = "ws://quote.vs.com:9002";
+	this.url = "ws://139.196.228.143:8001";
 	return this;
 }
 /**

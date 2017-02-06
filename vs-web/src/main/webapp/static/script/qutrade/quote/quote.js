@@ -1098,4 +1098,5 @@ function checkRange(){
 			}
 		}
     	return HisQuoteType;
+    	
     }

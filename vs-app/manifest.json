@@ -294,7 +294,9 @@
 					"tzdr/quotation/transactionDetails.html",
 					"tzdr/quotation/activity.html",
 					"tzdr/account/recharge.html",
-					"tzdr/news/active.html"
+					"tzdr/news/active.html",
+					"tzdr/future/DetailCl.html",
+					"tzdr/future/DetailCp.html"
 				],
 				"priority": 0
 			},
