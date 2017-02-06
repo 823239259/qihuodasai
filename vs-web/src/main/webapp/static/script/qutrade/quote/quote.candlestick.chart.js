@@ -1,6 +1,7 @@
     //开盘(open)，收盘(close)，最低(lowest)，最高(highest)
 
         function processingData(jsonData){
+        	console.log(jsonData);
     		var dosizeL=$("#doSize").val();
     		if(jsonData.Parameters.Data==null){
 	    		return
@@ -18,15 +19,17 @@
 	       		};
 	       	var positionValue=getPositionValue();
 	       	rawData=rawData.slice(-500);
-	       	 CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	       	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
 	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
 	       	splitData(rawData);
-	       	if(CandlestickData.volume==null){
+	       	console.log(CandlestickData);
+	       	if(CandlestickVolumeData.volume==null){
 	       		return
 	       	}
 	       	if(CandlestickData.categoryData==null){
 	       		return
 	       	}
+	       	console.log("画")
 			var option=setOptionCandlestick(CandlestickData,positionValue);
 			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
 			CandlestickChart.setOption(option);

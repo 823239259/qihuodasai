@@ -44,6 +44,7 @@ function quoteHandleData(evt){
 		 	lightChartData(jsonData);
 		 }
 	}else if(method == "OnRspQryHistory"){
+		console.log(jsonData);
 		if(firstTimeLength==1){
 				getSubscript(jsonData.Parameters.ColumNames);
 				firstTimeLength=2;
@@ -1098,4 +1099,5 @@ function checkRange(){
 			}
 		}
     	return HisQuoteType;
+    	
     }
