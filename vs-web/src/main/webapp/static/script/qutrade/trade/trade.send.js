@@ -121,6 +121,7 @@ var Trade = {
 			 * @param {Object} orderRef 报单引用，用户自己生成
 			 */
 			doInsertOrder:function(exchangeNo,commodeityNo,contractNo,orderNum,drection,priceType,limitPrice,triggerPrice,orderRef){
+				fullPeaceAndWithdrawa=true;
 				var param = '{"ExchangeNo":"'+ exchangeNo +'",'
 							+' "CommodityNo":"'+ commodeityNo +'",'
 							+' "ContractNo":"'+ contractNo +'",'
@@ -131,6 +132,7 @@ var Trade = {
 							+' "TriggerPrice":'+ triggerPrice +','
 							+' "OrderRef":"'+ orderRef +'"}';
 				Trade.doSendMessage(TradeUrl.InsertOrderUrl,param);
+				fullPeaceAndWithdrawa=false;
 			},
 			/**
 			 * 撤单请求
@@ -144,6 +146,7 @@ var Trade = {
 			 * @param {Object} orderPrice 订单价格
 			 */
 			doCancelOrder:function(orderSysId,orderId,exchangeNo,commodityNo,contractNo,orderNum,drection,orderPrice){
+				fullPeaceAndWithdrawa=true;
 				var param = '{"OrderSysID":"'+orderSysId+'",'
 							+' "OrderID":"'+orderId+'",'
 							+' "ExchangeNo":"'+exchangeNo+'",'
@@ -153,6 +156,7 @@ var Trade = {
 							+' "Drection":'+drection+','
 							+' "OrderPrice":'+orderPrice+'}';
 				Trade.doSendMessage(TradeUrl.CancelOrderUrl,param);
+				fullPeaceAndWithdrawa=false;
 			},
 			/**
 			 * 改单请求
@@ -363,9 +367,12 @@ var Trade = {
 				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 				
 				// 发送消息1秒内没有回报则认为链接丢失，则刷新重连
-				timeoutReconnID = setTimeout(function(){
-					layer.alert("交易服务连接断开，正在重新连接...");
-					location.reload();
-				},2000);
+				if(!fullPeaceAndWithdrawa){
+					timeoutReconnID = setTimeout(function(){
+						layer.alert("交易服务连接断开，正在重新连接...");
+						location.reload();
+					},2000);
+				}
+				
 			}
 		}

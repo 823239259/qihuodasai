@@ -27,6 +27,8 @@ var tradeWebCmsVersion = null;
  * 全局使用的交易配置对象
  */
 var tradeWebSocket = null;
+
+var fullPeaceAndWithdrawa=false;
 /**
  * 定义生产环境
  */
