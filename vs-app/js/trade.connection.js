@@ -185,7 +185,7 @@ function initLoad() {
 	    if(isConnectionError){
 	    	plus.nativeUI.closeWaiting();
 	    	clearInterval(tradeIntervalId);
-			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,tradeReconnect,null);
+			alertProtype("网络连接断开，请检查网络设置","提示",Btn.confirmed(),null,tradeReconnect,null);
 			return;
 	    }
 		socket.onopen = function() {   
