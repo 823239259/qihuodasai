@@ -52,7 +52,7 @@ var firstTimeLength=1;
 var commoditysData; 
 var OnRspQryCommodityDateL=1;
 function subscribeHold(exchageNo,commodityNo,contractNo){
-	masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
+	 masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
 mui.plusReady(function(){
 	var Transfer=plus.webview.currentWebview();
