@@ -183,9 +183,9 @@ function setTradeConfig(ismock){
  */
 function initLoad() {
 	    if(isConnectionError){
-	    	 plus.nativeUI.closeWaiting();
+	    	plus.nativeUI.closeWaiting();
 	    	clearInterval(tradeIntervalId);
-			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,null,null);
+			alertProtype("交易服务器连接错误,请检查网络连接","提示",Btn.confirmed(),null,tradeReconnect,null);
 			return;
 	    }
 		socket.onopen = function() {   

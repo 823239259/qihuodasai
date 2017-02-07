@@ -55,15 +55,17 @@ function subscribeHold(exchageNo,commodityNo,contractNo){
 		masendMessage('Subscribe','{"ExchangeNo":"'+exchageNo+'","CommodityNo":"'+commodityNo+'","ContractNo":"'+contractNo+'"}');
 }
 mui.plusReady(function(){
-    	var Transfer=plus.webview.currentWebview();
-		var CommodityNo=document.getElementById("CommodityNo");
-		var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
-		mainTitleFirst.innerHTML=Transfer.name[0];
-		CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
-		$("#doSize").val(Transfer.name[4])
-		init(Transfer.name);
-		$("#MainContract").text(Transfer.name[2]+Transfer.name[1])
-	marketSocket = new WebSocket(marketSocketUrl);
+	var Transfer=plus.webview.currentWebview();
+	var CommodityNo=document.getElementById("CommodityNo");
+	var mainTitleFirst=document.getElementsByClassName("mainTitleFirst")[0];
+	mainTitleFirst.innerHTML=Transfer.name[0];
+	CommodityNo.innerHTML=Transfer.name[2]+Transfer.name[1];
+	$("#doSize").val(Transfer.name[4])
+	init(Transfer.name);
+	$("#MainContract").text(Transfer.name[2]+Transfer.name[1]);
+	initMakect();
+	function initMakect(){
+		marketSocket = new WebSocket(marketSocketUrl);
     var marketLoadParam = {}
 	marketSocket.onopen = function(evt){
       masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
@@ -73,6 +75,7 @@ mui.plusReady(function(){
     		if(username==null){
     			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
     		}
+    		initMakect();
     	}
     };
     marketSocket.onmessage = function(evt){
@@ -171,6 +174,7 @@ mui.plusReady(function(){
     };
     marketSocket.onerror = function(evt){
     };
+	}
     function sendHistoryMessage(num){
         var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
@@ -838,7 +842,18 @@ mui.plusReady(function(){
 	});
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();
-	} 
+	}
+	function checNetwork(){
+		var checkNetworkInterval=setInterval(function(){
+			if(mui.checkNetwork){
+				marketSocket = new WebSocket(marketSocketUrl);
+				marketSocket.onopen = function(evt){
+			      masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
+			    };
+			}
+		},1000)
+		
+	}
 });
 function masendMessage(method,parameters){
 	 marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
