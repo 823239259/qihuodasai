@@ -154,11 +154,13 @@ function handleData(evt){
 			//订单状态通知
 		} else if (method == "OnRtnOrderState") {
 			var orderParam = parameters;
+			console.log(orderParam);
 			updateOrder(orderParam);
 			var orderId = orderParam.OrderID;
 			var orderStatusWeHooks = orderParam.OrderStatus;
 			//当订单状态改变
-			var contractCode = orderParam.ContractCode;
+			//var contractCode = orderParam.ContractCode;
+			var contractCode = orderParam.CommodityNo + orderParam.ContractNo;
 			if (orderStatusWeHooks == 3 || orderStatusWeHooks == 4 || orderStatusWeHooks == 5) {
 				delDesignatesDom(orderId);
 			} else if (orderStatusWeHooks == 0) {
