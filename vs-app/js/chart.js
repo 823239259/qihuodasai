@@ -72,9 +72,9 @@ mui.plusReady(function(){
     };
     marketSocket.onclose = function(evt){
     	if(reconnect != false){
-    		if(username==null){
-    			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,reconnectPage);
-    		}
+//  		if(username==null){
+//  			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,null,null);
+//  		}
     		initMakect();
     	}
     };
