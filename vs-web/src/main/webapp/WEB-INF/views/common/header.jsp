@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
-<link href="${ctx }/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
+<link href="${ctx }/static/css/trade.css?v=2017-2-7" rel="stylesheet" type="text/css" />
 <style>
 #header {
     height: 60px;
@@ -68,7 +68,7 @@
 <div id="header">
     <div id="customerTel">
         <a href=""><img src="http://www.vs.com/templets/style/html/images/image/logo.png"></a>
-        <ul>   
+        <ul>    
             <li><a href="${ctx}/" id="shouye" class="on">首页</a></li>
             <li><a target="_blank" href="${ctx}/html/qutrade/quoteTrade.html">行情交易</a></li>
             <li><a id="guojiqihuo" href="${ctx}/hsi/index">国际期货</a></li>
