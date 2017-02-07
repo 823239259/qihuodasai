@@ -96,11 +96,12 @@ function handleData(evt){
 				loginFail = false;
 				anotherPlace = false;
 			} else {
-				loginFail = -2;
+				loginFail = false;
+				anotherPlace=false;
 				alertProtype(loginMessage,"登录提示",Btn.confirmed());
 				tipAlert(loginMessage);
 				//登录失败清理数据
-				loginOut();
+				//loginOut();
 			}
 			plus.nativeUI.closeWaiting();
 			clearInterval(tradeIntervalId);
