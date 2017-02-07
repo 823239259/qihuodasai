@@ -101,7 +101,9 @@
 			"tzdr/quotation/transactionDetails.html",
 			"tzdr/news/news.html",
 			"tzdr/quotation/activity.html",
-			"tzdr/account/recharge.html"
+			"tzdr/account/recharge.html",
+			"tzdr/future/DetailCl.html",
+			"tzdr/future/DetailCp.html"
 		]
 	},
 	"list.html": {
@@ -502,7 +504,11 @@
 			"js/mui.min.js",
 			"js/common.js",
 			"images/list_01.png",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"js/common1.js",
+			"js/jquery-1.11.3.js",
+			"js/share.js",
+			"js/immersed.js"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -569,7 +575,12 @@
 			"css/own.css",
 			"js/mui.min.js",
 			"js/common.js",
-			"images/list_01.png"
+			"images/list_01.png",
+			"js/common1.js",
+			"js/jquery-1.11.3.js",
+			"fonts/mui.ttf",
+			"js/share.js",
+			"js/immersed.js"
 		],
 		"refer": [
 			"tzdr/account/account.html",
@@ -835,7 +846,8 @@
 			"css/mui.min.css",
 			"css/own.css",
 			"js/mui.min.js",
-			"js/common.js"
+			"js/common.js",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"tzdr/account/account.html",
