@@ -126,6 +126,7 @@ function loginOut(){
 	setIsLogin(false);
 	clearTradListData();
 	reconnectInit();
+	window.clearInterval(intervalHeartBeatID); // 断开心跳请求
 	/*clearTradListData();
 	clearLocalCacheData();*/
 }
@@ -185,7 +186,7 @@ function initLoad() {
 	    if(isConnectionError){
 	    	plus.nativeUI.closeWaiting();
 	    	clearInterval(tradeIntervalId);
-			alertProtype("网络连接断开，请检查网络设置","提示",Btn.confirmed(),null,tradeReconnect,null);
+//			alertProtype("网络连接断开，请检查网络设置","提示",Btn.confirmed(),null,tradeReconnect,null);
 			return;
 	    }
 		socket.onopen = function() {   

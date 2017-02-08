@@ -27,7 +27,7 @@
 		<div id="inputList">
 			<div id="accountType" class="commStyle">
 				<label>账号类型：</label>
-				<select class="accountSelect mui-btn mui-btn-block">
+				<select class="accountSelect mui-btn mui-btn-block" id="tradeType">
 					<option class="mui-selected"  value="0">实盘账号</option>
 					<option class="mui-selected" id="checkContent" value="1">模拟盘账号</option>
 				</select>
@@ -322,11 +322,12 @@
 						     mui.toast("您还未勾选协议"); 
 						   return;
 						 }; 
+						var tradeType=document.getElementById("tradeType").value;
 						setTradeConfig(tradeWebSocketIsMock);
+						console.log("tradeType | " + tradeType + " | socketUrl | " + socketUrl + " | tradeWebSocketIsMock | " + tradeWebSocketIsMock);
 						plus.nativeUI.showWaiting( "正在登录中" );
 						setTimeOutIsLogin();
 						var loginSocket = new WebSocket(socketUrl);
-						console.log(socketUrl);
 						loginSocket.onopen = function(){
 							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+',"Version":"'+tradeWebSocketVersion+'","Source":"'+Source+'"}}');
 						}
