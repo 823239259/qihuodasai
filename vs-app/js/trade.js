@@ -95,6 +95,8 @@ function handleData(evt){
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
+				
+				startHeartBeat();
 			} else {
 				loginFail = false;
 				anotherPlace=false;
@@ -307,8 +309,11 @@ function handleData(evt){
 			}
 			tip("【"+contractCode+"】条件单【"+conditionNo+"】,"+status);
 			updateConditionList(conditionParam);
+		}else if(method == "OnRspHeartBeat"){ // 心跳
+//			console.log("心跳回复《《《" + dataString);
+			lastHeartBeatTime = new Date().getTime();
 		}
-	}else{  
+	}else{
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
 			updateOrderUpdatePosition();
 			tradeSuccessLoadFlag = false;
@@ -3599,4 +3604,21 @@ function tabOn() {
 		$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
 		_this.addClass("on");
 	});
+}
+
+var intervalHeartBeatID = null,tmp = "";
+var lastHeartBeatTime = 0;
+function startHeartBeat(){
+	window.clearInterval(intervalHeartBeatID);
+	
+	lastHeartBeatTime = new Date().getTime();
+	intervalHeartBeatID = setInterval(function(){
+		if (tmp == lastHeartBeatTime) { // 如果5秒内心跳未返回则做超时处理
+			window.clearInterval(intervalHeartBeatID);
+			alertProtype("交易连接断开，请单击确定重新登录","提示",Btn.confirmed(),null,switchAccount,null);
+		}
+//		console.log("请求心跳》》》" + lastHeartBeatTime);
+		Trade.doHeartBeat(username, lastHeartBeatTime);
+		tmp = lastHeartBeatTime;
+	},5000); // 每隔5秒发一次心跳
 }
