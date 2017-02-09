@@ -2,7 +2,7 @@ $(function() {
     function masendMessage(method,parameters){
         marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
     }
-    var url = "ws://139.196.228.143:8001";
+    var url = "ws://quote.vs.com:9002";
     var username="13677622344";
     var password="a123456";
     var firstTimeLength = 0;

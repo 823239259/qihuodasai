@@ -45,7 +45,7 @@ function MarketConfig(){
 	return this;
 }
 function MarketConfigTest(){
-	this.MarketSocketUrl = "ws://192.168.0.213:9002";
+	this.MarketSocketUrl = "ws://quote.vs.com:9002";
 	this.username = "13677622344";
 	this.password = "a123456";
 	return this;
