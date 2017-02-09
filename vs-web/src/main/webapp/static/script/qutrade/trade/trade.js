@@ -121,8 +121,7 @@ function handleData(evt){
 				anotherPlace = false;
 				layer.msg('交易服务器连接成功', {icon: 4});
 			} else {
-				loginFail = true;
-				anotherPlace=false;
+				loginFail = -2;
 				tipAlert(loginMessage);
 				//登录失败清理数据
 				loginOut();
