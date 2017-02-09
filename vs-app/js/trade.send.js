@@ -62,11 +62,7 @@ var TradeUrl = {
 	/**
 	 * 条件单查询url
 	 */
-	QryCondition:"QryCondition",
-	/**
-	 * 心跳请求
-	 */
-	HeartBeat:"HeartBeat"
+	QryCondition:"QryCondition"
 	
 }
 var Trade = {
@@ -359,26 +355,11 @@ var Trade = {
 				Trade.doSendMessage(TradeUrl.QryCondition,'{"ClientNo":"'+username+'"}');
 			},
 			/**
-			 * 请求心跳
-			 * @param {Object} username
-			 */
-			doHeartBeat:function(username, ref){
-				Trade.doSendMessage(TradeUrl.HeartBeat,'{"ClientNo":"'+username+'","Ref":"' + ref + '"}');
-			},
-			/**
 			 * 发送交易请求
 			 * @param {Object} method
 			 * @param {Object} parameters
 			 */
 			doSendMessage:function(method,parameters){
-				console.log('{"Method":"'+method+'","Parameters":'+parameters+'}');
-				try{
-					socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
-				}catch(e){
-					window.clearInterval(intervalHeartBeatID);
-					if (method != "Logout") {
-						alertProtype("交易连接断开，请单击确定重新登录","提示",Btn.confirmed(),null,switchAccount,null);
-					}
-				}
+				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
 			}
 		}
