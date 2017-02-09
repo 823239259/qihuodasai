@@ -45,7 +45,6 @@ public class WallstreetcnHandle extends BaseWallstreetcnHandle{
 		String stringJson = param;
 		List<CrawlerWallstreetnLive> wallstreetnLives = new ArrayList<>();
 		List<CrawlerWallstreetnLiveContent> contents = new ArrayList<>();
-		/*logger.info("请求成功:"+stringJson);*/
 		try {
 			JSONObject resultData = JSONObject.parseObject(stringJson);
 			JSONArray resultArray = resultData.getJSONArray("results");

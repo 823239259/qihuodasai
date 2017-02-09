@@ -26,7 +26,7 @@ function TradeConfig(){
 	this.TradeSocketUrl = "";//ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "";
 	this.tradeSocketVersion = "";
-	this.tradeAppVersion = "3.1";
+	this.tradeAppVersion = "3.2";
 	return this;
 }
 
@@ -34,18 +34,18 @@ function TradeConfigTest(){
 	this.TradeSocketUrl = "";//"ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "";
 	this.tradeSocketVersion = "";
-	this.tradeAppVersion = "3.1";
+	this.tradeAppVersion = "3.2";
 	return this; 
 }
 
 function MarketConfig(){
-	this.MarketSocketUrl = "ws://139.196.228.143:8001";
+	this.MarketSocketUrl = "ws://quote.vs.com:9002";
 	this.username = "13677622344";
 	this.password = "a123456";
 	return this;
 }
 function MarketConfigTest(){
-	this.MarketSocketUrl = "ws://139.196.228.143:8001";
+	this.MarketSocketUrl = "ws://192.168.0.213:9002";
 	this.username = "13677622344";
 	this.password = "a123456";
 	return this;
