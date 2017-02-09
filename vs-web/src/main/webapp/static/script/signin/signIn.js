@@ -392,7 +392,7 @@ $(document).ready(function(){
 							$("#loginForm").submit();*/
 							var generalizeId = $("#generalizeId").val();
 							openMockTrade(mobile,password,generalizeId);
-							window.location.href = "/signinsucess";
+							window.location.href = basepath+"/signinsucess";
 							/*
 							//达人论股系统登录
 							discussStockLogin(data.data.key,function(){
