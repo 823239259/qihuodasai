@@ -89,7 +89,7 @@
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://localhost:8080</param-value>
+			<param-value>http://localhost:8088</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 		<init-param>
@@ -323,7 +323,7 @@
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://localhost:8080</param-value>
+			<param-value>http://localhost:8088</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 	</filter>
