@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.tzdr.common.domain.BaseEntity;
-
+/**
+ * 交易明细表
+ */
 @Entity
 @Table(name = "w_trade_detail")
 public class TradeDetail extends BaseEntity{
