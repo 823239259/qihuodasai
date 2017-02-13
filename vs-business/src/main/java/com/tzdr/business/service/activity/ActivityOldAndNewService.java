@@ -153,7 +153,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 						+ "+ IFNULL( f.ame_copper_market_lever, 0 ) + IFNULL( f.ame_silver_market_lever, 0 ) + IFNULL(f.h_stock_market_lever, 0) "
 						+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) + IFNULL( f.daxtran_min_actual_lever, 0 ))/2 lever "
 						+ "FROM f_simple_ftse_user_trade f WHERE f.state_type = 6 GROUP BY f.uid ) g1 "
-						+ "right JOIN w_user w ON w.id = g1.uid and w.ctime > " + time+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id WHERE v.tname <> '';";
+						+ "right JOIN w_user w ON w.id = g1.uid and w.ctime > " + time+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id;";
 				List<Map<String, Object>> lists = this.nativeQuery(sql, null);
 
 				for (int i = 0; i < lists.size(); i++) {
@@ -161,14 +161,17 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 					int ftradeGt5 = 0;
 					int ftradeLt5 = 0;
 					Map<String, Object> map = lists.get(i);
-					String realName = String.valueOf(map.get("tname"));
+					Object tname =map.get("tname");
+					if(tname == null ){
+						continue;
+					}
+					String realName = String.valueOf(tname);
 					String mobile = String.valueOf(map.get("mobile"));
 					String id = String.valueOf(map.get("id"));
-
 					OldAndNewStatistics statistics = new OldAndNewStatistics();
 					statistics.setRealName(realName);
 					statistics.setMobile(mobile);
-
+					
 					for (int j = 0; j < lists.size(); j++) {
 						Map<String, Object> map2 = lists.get(j);
 						String parentId = String.valueOf(map2.get("parent_id"));
