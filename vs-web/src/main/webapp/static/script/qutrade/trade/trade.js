@@ -29,7 +29,7 @@ var tradeSuccessLoadFlag = false;
  * 合约交易成功查询持仓信息
  */
 function tradeSuccessLoadHoldData(){
-	//tradeSuccessLoadFlag = true;
+	tradeSuccessLoadFlag = true;
 	localCachePositionRecentData = {}; 
 	localCachePostion = {};
 	$("#hold_gdt1").html("");
@@ -203,7 +203,7 @@ function handleData(evt){
 			var locaOrderId = resultInsertOrderId[orderId];
 			$("#floatingProfit").text("0.00");
 			$("#floatingProfit").css("color","#FFFFFF");
-				tradeSuccessLoadHoldData();
+//				tradeSuccessLoadHoldData();
 				
 			var commodityNo = tradeParam.CommodityNo;
 			var contractNo = tradeParam.ContractNo;
@@ -742,15 +742,15 @@ function appendTradeSuccess(param){
  * @param {Object} param 用户持仓信息
  */
 function appendPostionAndUpdate(param){
-	//验证持仓信息是否在列表中存在
+	//持仓信息在列表中存在
 	if(validationPostionIsExsit(param)){
-		addPostion(param);
-	}else{
 		if(tradeSuccessLoadFlag){
 			loadCachecentPositionData(param);
 		}else{
 			updatePostion(param);
 		}
+	}else{
+		addPostion(param);
 	}
 };
 /**
@@ -881,7 +881,7 @@ function updatePostion(param){
 	var oldDrection = parseInt($drection.attr("data-drection"));
 	var oldPrice = parseFloat($holdAvgPrice.text()).toFixed(doSize) *  oldHoldNum;
 	var price = parseFloat(openAvgPrice).toFixed(doSize) * holdNum;
-	if(oldDrection == drection){
+	if(oldDrection == drection){ // 持仓方向与成交方向一致
 		oldHoldNum = oldHoldNum + holdNum;
 		price = parseFloat(price + oldPrice).toFixed(doSize);
 		var openAvgPrice = doGetOpenAvgPrice(price,oldHoldNum,doSize);
@@ -908,26 +908,23 @@ function updatePostion(param){
 		}else{
 			$floatingProfit.css("color","white");
 		}
-	}else{
+	}else{// 持仓方向与成交方向相反
 		oldHoldNum = oldHoldNum - holdNum;
-		//当持仓为空时，清理dom节点和存储数据
-		if(oldHoldNum == 0){	
+		if(oldHoldNum == 0){	//当持仓为空时，清理dom节点和存储数据
 			delPositionDom(contractCode);
 			deletePositionsContractCode(contractCode);
-		//当drection为0时，上一次更新数据为’多‘，holdNum 小于0时表示这次这次更新数据买卖方向变为’空‘
-		}else if(oldHoldNum < 0 && oldDrection == 0){
-			drectionText = kong;
-			drection = 1;
-		//当drection为1时，上一次数据更新为’空‘，holdNum小于0时表示这次更新数据买卖方向变为’多‘
-		}else if(oldHoldNum < 0 && oldDrection == 1){
+		}else if(oldHoldNum > 0 && oldDrection == 0){	// 剩余持多仓
 			drectionText = duo;
 			drection = 0;
-		}else if(oldHoldNum > 0 && oldDrection == 0){
-			drectionText =duo;
-			drection = 0;
-		}else if(oldHoldNum > 0 && oldDrection == 1){
+		}else if(oldHoldNum > 0 && oldDrection == 1){	// 剩余持空仓
 			drectionText = kong;
 			drection = 1;
+		}else if(oldHoldNum < 0 && oldDrection == 0){	// 反方向持仓，多变空
+			drectionText = kong;
+			drection = 1;
+		}else if(oldHoldNum < 0 && oldDrection == 1){	// 反方向持仓，空变多
+			drectionText = duo;
+			drection = 0;
 		}
 	}
 	if(oldHoldNum != 0){
@@ -1335,9 +1332,9 @@ function validationPostionIsExsit(param){
 	var contractCode = param.ContractCode;
 	var positionParam = localCachePostion[contractCode];
 	if(positionParam == undefined || positionParam == "undefined" || positionParam == null || $("ul[data-tion-position='"+contractCode+"']").html == undefined){
-		return true;
-	}else{
 		return false;
+	}else{
+		return true;
 	}
 }
 /**
@@ -1694,12 +1691,10 @@ function updateStoplossIndex(){
  * @param {Object} 删除节点
  */
 function delPositionDom(contractCode){
-	$(function(){
-		$("ul[data-tion-position='"+contractCode+"']").remove();
-		if($(".tab_position").length == 0){
-			$(".hold_NoRecord").css("display","block");
-		}
-	});
+	$("ul[data-tion-position='"+contractCode+"']").remove();
+	if($(".tab_position").length == 0){
+		$(".hold_NoRecord").css("display","block");
+	}
 }
 /**
  * 删除挂单中的元素节点 
