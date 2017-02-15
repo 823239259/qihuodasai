@@ -1021,12 +1021,10 @@ function dealOnRtnQuoteData(data,totalVolume){
 }
 function drawChartTime(positionValue){
 	var value=$(".carbon_time").eq(1).hasClass("active");
-	console.log(value);
 	if(value){
 		if(volumeChartData.volume==null){
 	       		return
 	    }
-		console.log('454545')
 		var option = setOptionTime(timeData,positionValue);
 	    timeChart.setOption(option);
         timeChart.resize();
