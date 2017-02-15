@@ -1020,11 +1020,13 @@ function dealOnRtnQuoteData(data,totalVolume){
 	drawChartCandlestick(positionValue);
 }
 function drawChartTime(positionValue){
-	var value=$(".carbon_time").eq(1).hasClass("active")
+	var value=$(".carbon_time").eq(1).hasClass("active");
+	console.log(value);
 	if(value){
-		if(CandlestickData.volume==null){
+		if(volumeChartData.volume==null){
 	       		return
 	    }
+		console.log('454545')
 		var option = setOptionTime(timeData,positionValue);
 	    timeChart.setOption(option);
         timeChart.resize();
