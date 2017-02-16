@@ -201,10 +201,6 @@
             volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
         }
     	var positionValue=getPositionValue();
-    	timeData.timeLabel=timeData.timeLabel.slice(-40);
-    	timeData.prices=timeData.prices.slice(-40);
-    	volumeChartData.time=volumeChartData.time.slice(-40);
-    	volumeChartData.volume=volumeChartData.volume.slice(-40);
     	var option = setOptionTime(timeData,positionValue);
         timeChart.setOption(option);
         timeChart.resize();

@@ -987,10 +987,6 @@ function dealOnRtnQuoteData(data,totalVolume){
         	timeData.prices.push(lastPrices);
         	volumeChartData.time.push(time6);
 	        volumeChartData.volume.push(0);
-	        timeData.timeLabel=timeData.timeLabel.slice(-40);
-	        timeData.prices=timeData.prices.slice(-40);
-	        volumeChartData.time=volumeChartData.time.slice(-40);
-	        volumeChartData.volume=volumeChartData.volume.slice(-40);
 	        drawChartTime(positionValue);
 	}
 	if(CandlestickData != undefined){
@@ -1014,10 +1010,10 @@ function dealOnRtnQuoteData(data,totalVolume){
     		CandlestickData.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
     		CandlestickVolumeData.time.push(time6)
     		CandlestickVolumeData.volume.push(0);
-	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-500);
-	        CandlestickData.values=CandlestickData.values.slice(-500);
-	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
-	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
+	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-40);
+	        CandlestickData.values=CandlestickData.values.slice(-40);
+	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
 		}
 	}
 	$("#totalVolume").val(Parameters.TotalVolume)
