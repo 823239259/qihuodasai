@@ -42,7 +42,7 @@ function tradeSuccessLoadHoldData(){
  * @param {Object} method 返回的数据标识
  */
 function linearlyLoadData(method) {
-	if (method == "OnRspQryHold") {
+	if (method == "OnRspQryHoldTotal") {
 		if (orderFirsetLoadDataIndex == 0) {
 			Trade.doOrder(username);
 			orderFirsetLoadDataIndex++;
@@ -121,9 +121,9 @@ function handleData(evt){
 		} else if (method == "OnRspQryTrade") {
 			appendTradeSuccess(parameters);
 			//查询持仓信息回复
-		} else if (method == "OnRspQryHold") {
+		} else if (method == "OnRspQryHoldTotal") {
 			var positionParam = parameters;
-			appendPostionAndUpdate(positionParam);
+			updateHoldTotal(parameters); // 更新持仓
 			var commdityNo  = positionParam.CommodityNo;
 			var contractNo =positionParam.ContractNo;
 			var commdityAndcontract = commdityNo+contractNo;
@@ -183,26 +183,17 @@ function handleData(evt){
 		} else if (method == "OnRtnOrderTraded") {
 			var tradeParam = parameters;
 			appendTradeSuccess(tradeParam);
-			appendPostionAndUpdate(tradeParam); 
 			var orderId = tradeParam.OrderID;
 			var locaOrderId = resultInsertOrderId[orderId];
-			/*if(referCount == 0){*/
-			tradeSuccessLoadHoldData();
-			/*}*/
-			/*referCount++;*/
-			/*if(isBuy && orderId == locaOrderId){   
-				tradeSuccessLoadHoldData();
-				resultInsertOrderId[orderId] = null; 
-				localCachePositionRecentData = {}; 
-				localCachePostion = {};
-			    
-			}*/
 			tip("交易成功：合约【"+tradeParam.ContractCode+"】,交易手数:【"+tradeParam.TradeNum+"】,交易价格:【"+tradeParam.TradePrice+"】");
 			//资金变化通知  
 		} else if (method == "OnRtnMoney") {
 			var accountParam = parameters;
 			updateBalance(accountParam) 
 			updateFundsDetails(accountParam);
+		} else if (method == "OnRtnHoldTotal") {
+			updateHoldTotal(parameters); // 更新持仓
+			//报单录入请求回复
 		} else if (method == "OnError") {
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
@@ -754,22 +745,75 @@ function appendTradeSuccess(param){
 	updateTradesIndex();
 };
 /**
- * 添加或修改用户持仓信息
- * @param {Object} param 用户持仓信息
+ * 更新持仓合计
+ * 
+ * @param holdTotal	根据持仓合计推送信息更新持仓列表
  */
-function appendPostionAndUpdate(param){
-	//验证持仓信息是否在列表中存在
-	if(validationPostionIsExsit(param)){
-		addPostion(param);
-	}else{
-		updatePostion(param);
-		/*if(tradeSuccessLoadFlag){
-			loadCachecentPositionData(param);
-		}else{
-			
-		}*/
+function updateHoldTotal(holdTotal){
+	var holdNum = parseInt(holdTotal.HoldNum);
+	var commdityNo = holdTotal.CommodityNo;
+	var contractNo = holdTotal.ContractNo;
+	var contractCode = commdityNo+contractNo;
+	if (holdNum == 0) {	// 如果持仓手数为0则删除
+		delPositionDom(contractCode);
+		deletePositionsContractCode(contractCode);
+		return;
 	}
-};
+	
+	// 无持仓：新增
+	if (!validationPostionIsExsit(contractCode)) {
+		addPostion(holdTotal);
+	} else {	// 有持仓：修改
+		var drection = holdTotal.Drection;
+		var holdAvgPrice = holdTotal.HoldAvgPrice;
+		var $holdNum = $("li[data-tion-position='"+contractCode+"'] span[class = 'position2']");
+		var $drection = $("li[data-tion-position='"+contractCode+"'] span[class = 'position1']");
+		var $holdAvgPrice = $("li[data-tion-position='"+contractCode+"'] span[class = 'position3']");
+		
+		// 持仓数量、方向、均价
+		var drectionText = analysisBusinessDirection(drection);
+		$holdNum.text(holdNum);
+		$drection.html(drectionText);
+		$drection.attr("data-drection",drection);
+		
+		holdAvgPrice = fixedPrice(holdAvgPrice, commdityNo, contractNo);
+		$holdAvgPrice.text(holdAvgPrice);
+		
+		// 初始化浮动盈亏
+		var floatingProft = 0.00; 
+		var floatP = 0.00;
+		var localCommodity = getMarketCommdity(contractCode);
+		if(localCommodity != undefined){
+			var localQuote = getLocalCacheQuote(contractCode);
+			var contractSize = localCommodity.ContractSize;
+			var miniTikeSize = localCommodity.MiniTikeSize;
+			var currencyNo = localCommodity.CurrencyNo;
+			floatP = doGetFloatingProfit(parseFloat(localQuote.LastPrice),holdAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			if(isNaN(floatP)){
+				floatP = 0.00;
+			}
+			floatingProft = floatP +":"+ currencyNo; 
+		}
+		var $floatP = $("li[data-tion-position='"+contractCode+"'] span[class = 'position8']");
+		var $floatingProfit =$("#floatValue"+contractCode);
+		
+		$floatP.text(floatP);
+		$floatingProfit.val(floatingProft);
+		if(floatP < 0 ){
+			$floatingProfit.css("color","green");
+		}else if(floatP > 0){
+			$floatingProfit.css("color","red");
+		}else{
+			$floatingProfit.css("color","white");
+		}
+		
+		//更新储存数据
+		var postContract = localCachePostion[contractCode];
+		postContract.holdNum = holdNum;
+		postContract.drection = drectionText;
+	}
+	
+}
 /**
  * 缓存持仓的列表信息
  */
@@ -806,13 +850,13 @@ function addPostion(param){
 		if(Dosize != undefined){
 			dotSize = Number(Dosize.DotSize);
 		}
-		var holdAvgPrice = Number(param.HoldAvgPrice);
+		var holdAvgPrice = param.HoldAvgPrice;
 		var floatingProfit = param.FloatingProfit;
 		var exchangeNo = param.ExchangeNo;
 		var currencyNo = param.CurrencyNo;
 		var commodityNo = param.CommodityNo;
 		var contractNo = param.ContractNo;
-		var openAvgPrice = Number(param.OpenAvgPrice);
+		var openAvgPrice = param.OpenAvgPrice;
 		if(holdNum == undefined){
 			holdNum = param.TradeNum;
 		}
@@ -831,7 +875,8 @@ function addPostion(param){
 			var miniTikeSize = localCommodity.MiniTikeSize;
 			currencyNo = localCommodity.CurrencyNo;
 			exchangeNo = localCommodity.ExchangeNo;
-			floatP = doGetFloatingProfit(parseFloat(lastPrice),openAvgPrice,contractSize,miniTikeSize,holdNum,drection);
+			
+			floatP = doGetFloatingProfit(parseFloat(lastPrice),holdAvgPrice,contractSize,miniTikeSize,holdNum,drection);
 			if(isNaN(floatP)){
 				floatP = 0.00;
 			}
@@ -852,7 +897,7 @@ function addPostion(param){
 				+ '			<span class = "position0">'+contractCode+'</span>'
 				+ '			<span class = "position1" data-drection = '+drection+'>'+drectionText+'</span>'
 				+ '			<span class = "position2">'+holdNum+'</span>'
-				+ '			<span class = "position3">'+holdAvgPrice.toFixed(dotSize)+'</span>'
+				+ '			<span class = "position3">'+parseFloat(holdAvgPrice).toFixed(dotSize)+'</span>'
 				+ '			<span class = "position4 dateTimeL"><input readonly = "readonly" type="text" value = "'+floatingProfit+'" style="border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;background-color:transparent;font-size:12px;width:160px;" id = "floatValue'+contractCode+'" /></span>'
 				+ '			<span class = "position5" style = "display:none">'+commodityNo+'</span>'
 				+ '			<span class = "position6" style = "display:none">'+contractNo+'</span>'
@@ -1341,13 +1386,12 @@ function updateConditionList(param){
 /**
  * 验证持仓信息是否存在 
  */
-function validationPostionIsExsit(param){
-	var contractCode = param.ContractCode; 
+function validationPostionIsExsit(contractCode){
 	var positionParam = localCachePostion[contractCode];
 	if(positionParam == undefined || positionParam == "undefined" || positionParam == null || $("ul[data-tion-position='"+contractCode+"']").html == undefined){
-		return true;
-	}else{
 		return false;
+	}else{
+		return true;
 	}
 }
 /**
@@ -1610,9 +1654,7 @@ function updateFundsDetailsIndex(){
  * @param {Object} 删除节点
  */
 function delPositionDom(contractCode){
-	$(function(){
-		$("li[data-tion-position='"+contractCode+"']").remove();
-	});
+	$("li[data-tion-position='"+contractCode+"']").remove();
 }
 /**
  * 删除挂单中的元素节点 
