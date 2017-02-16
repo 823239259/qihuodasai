@@ -22,7 +22,7 @@ var TradeUrl = {
 	/**
 	 * 获取持仓信息url
 	 */
-	QryHoldUrl:"QryHold",
+	QryHoldUrl:"QryHoldTotal",
 	/**
 	 * 报单录入url
 	 */
