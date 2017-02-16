@@ -987,6 +987,10 @@ function dealOnRtnQuoteData(data,totalVolume){
         	timeData.prices.push(lastPrices);
         	volumeChartData.time.push(time6);
 	        volumeChartData.volume.push(0);
+	        timeData.timeLabel=timeData.timeLabel.slice(-40);
+	        timeData.prices=timeData.prices.slice(-40);
+	        volumeChartData.time=volumeChartData.time.slice(-40);
+	        volumeChartData.volume=volumeChartData.volume.slice(-40);
 	        drawChartTime(positionValue);
 	}
 	if(CandlestickData != undefined){
