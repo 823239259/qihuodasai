@@ -34,7 +34,7 @@ function tradeConfigNewinstance(){
 	this.url = "";
 	this.isMockUrl = "";
 	this.version = "";
-	this.webVersion = "3.1";
+	this.webVersion = "3.2";
 	return this;
 }
 /**
@@ -45,7 +45,7 @@ function tradeConfigNewinstanceTest(){
 	this.url = "";
 	this.isMockUrl = "";
 	this.version = "";
-	this.webVersion = "3.1";
+	this.webVersion = "3.2";
 	return this;
 }
 /**
