@@ -1023,7 +1023,6 @@ function dealOnRtnQuoteData(data,totalVolume){
 	drawChartCandlestick(positionValue);
 }
 function drawChartTime(positionValue){
-	console.log(volumeChartData);
 	var value=$(".carbon_time").eq(1).hasClass("active");
 	if(value){
 		if(volumeChartData.volume==null){
