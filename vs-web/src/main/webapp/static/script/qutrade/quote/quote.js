@@ -938,7 +938,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
 	var range=checkRange();
-	if(totalVolume=="0"){
+	if(totalVolume==0){
 		totalVolume=0;
 		$("#totalVolume").val(Parameters.TotalVolume);
 		return
@@ -947,6 +947,9 @@ function dealOnRtnQuoteData(data,totalVolume){
 		return;
 	}
 	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
+	if(undefined==volumeChartData.volume[volumeChartData.volume.length-1]){
+		return
+	}
 	var lastVolume=Number(volumeChartData.volume[volumeChartData.volume.length-1]);
 	if(Volume<=0){
 		Volume=0;
@@ -1020,6 +1023,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 	drawChartCandlestick(positionValue);
 }
 function drawChartTime(positionValue){
+	console.log(volumeChartData);
 	var value=$(".carbon_time").eq(1).hasClass("active");
 	if(value){
 		if(volumeChartData.volume==null){
