@@ -78,7 +78,7 @@ function passClose() {
 };
 
 
-function removeRecord(){
+function removeRecord1(){
 	
 	var rows = $("#edatagrid").datagrid('getSelections');
 	if (Check.validateSelectItems($("#edatagrid"),1)) {
@@ -115,7 +115,7 @@ function removeRecord(){
 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="pass(2)">修改</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="sys:settingParams:hsiSetParameter:delete">  
-							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="removeRecord()">删除</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"   plain="true" onclick="removeRecord1()">删除</a>
 						</shiro:hasPermission>
 					</div>
 				</div> 
