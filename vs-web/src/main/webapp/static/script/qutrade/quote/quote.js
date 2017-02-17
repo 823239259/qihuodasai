@@ -392,6 +392,7 @@ function addQuoteListBindClick(cls){
 		 clearHandicapData();
 		 var HisQuoteType=checkHisQuoteType();
 		 sendHistory(HisQuoteType);
+		 $("#totalVolume").val(0);
 	});
 }
 /**
@@ -938,7 +939,7 @@ function dealOnRtnQuoteData(data,totalVolume){
 	var dosizeL=Number($("#doSize").val());
 	var Parameters=data.Parameters;
 	var range=checkRange();
-	if(totalVolume=="0"){
+	if(totalVolume==0){
 		totalVolume=0;
 		$("#totalVolume").val(Parameters.TotalVolume);
 		return
@@ -947,6 +948,9 @@ function dealOnRtnQuoteData(data,totalVolume){
 		return;
 	}
 	var Volume=Number(Parameters.TotalVolume)-Number(totalVolume);
+	if(undefined==volumeChartData.volume[volumeChartData.volume.length-1]){
+		return
+	}
 	var lastVolume=Number(volumeChartData.volume[volumeChartData.volume.length-1]);
 	if(Volume<=0){
 		Volume=0;
@@ -1010,19 +1014,19 @@ function dealOnRtnQuoteData(data,totalVolume){
     		CandlestickData.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
     		CandlestickVolumeData.time.push(time6)
     		CandlestickVolumeData.volume.push(0);
-	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-500);
-	        CandlestickData.values=CandlestickData.values.slice(-500);
-	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
-	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
+	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-40);
+	        CandlestickData.values=CandlestickData.values.slice(-40);
+	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
 		}
 	}
 	$("#totalVolume").val(Parameters.TotalVolume)
 	drawChartCandlestick(positionValue);
 }
 function drawChartTime(positionValue){
-	var value=$(".carbon_time").eq(1).hasClass("active")
+	var value=$(".carbon_time").eq(1).hasClass("active");
 	if(value){
-		if(CandlestickData.volume==null){
+		if(volumeChartData.volume==null){
 	       		return
 	    }
 		var option = setOptionTime(timeData,positionValue);

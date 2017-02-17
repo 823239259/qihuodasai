@@ -197,8 +197,8 @@
         for(var i=0;i<Len;i++){ 
 			timeData.timeLabel[TimeLength+i]=Parameters[i][DateTimeStampSubscript];
         	timeData.prices[TimeLength+i]=(Parameters[i][LastPriceSubscript]).toFixed(dosizeL);	
-        	volumeChartData.time[VolumeLength+i]=Parameters[i][DateTimeStampSubscript];
-            volumeChartData.volume[VolumeLength+i]=Parameters[i][VolumeSubscript];
+        	volumeChartData.time.push(Parameters[i][DateTimeStampSubscript]);
+            volumeChartData.volume.push(Parameters[i][VolumeSubscript]);
         }
     	var positionValue=getPositionValue();
     	var option = setOptionTime(timeData,positionValue);

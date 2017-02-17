@@ -17,9 +17,9 @@
 	        		CandlestickVolumeData.volume.push(parameters[i][VolumeSubscript]);
 	       		};
 	       	var positionValue=getPositionValue();
-	       	rawData=rawData.slice(-500);
-	       	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
-	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
+	       	rawData=rawData.slice(-40);
+	       	CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-40);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-40);
 	       	splitData(rawData);
 	       	if(CandlestickVolumeData.volume==null){
 	       		return

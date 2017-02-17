@@ -10,8 +10,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${ctx}/static/css/new_index.css?v=20151127">
-<link rel="stylesheet" href="${ctx}/static/css/skLuckyDraw.css?v=20151127">
+<link rel="stylesheet" href="${ctx}/static/css/new_index.css?v=2017-2-14">
+<link rel="stylesheet" href="${ctx}/static/css/skLuckyDraw.css?v=2017-2-14">
 <title>新手福利- 维胜</title>
 </head>
 <body>
@@ -23,7 +23,7 @@
 		<div class="xsfl-xx">
 			<p class="xsfl-xx-title">活动期间，首次进行交易，并终结方案，可免第一手双边交易费，免首笔合约为：不限品种。</p>
 			<p class="xsfl-xx-js" style="margin-top: 40px;">注：<p>
-			<p class="xsfl-xx-js">1、首次终结方案时，自动免除一手交易费，每位实名操盘用户仅限1手；</p>
+			<p class="xsfl-xx-js">1、以交易时间为准，帐号的首笔操盘可满足新手奖励。奖励于第二个工作日内返还；</p>
 			<p class="xsfl-xx-js">2、有任何交易行为的用户，则不算新用户，请知悉；</p>
 			<p class="xsfl-xx-js">3、不限期货品种的减免规则，将在2016年12月26日起生效，请注意；</p>
 			<p class="xsfl-xx-js">4、第一手交易出现持仓过夜情况的用户，不享受该活动优惠，且终结方案的时间须在活动期间内；</p>
