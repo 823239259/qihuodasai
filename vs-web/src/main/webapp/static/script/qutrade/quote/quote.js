@@ -392,6 +392,7 @@ function addQuoteListBindClick(cls){
 		 clearHandicapData();
 		 var HisQuoteType=checkHisQuoteType();
 		 sendHistory(HisQuoteType);
+		 $("#totalVolume").val(0);
 	});
 }
 /**
