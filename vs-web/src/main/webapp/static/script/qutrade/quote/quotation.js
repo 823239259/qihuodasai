@@ -16,6 +16,9 @@
     $(function(){
     	$(".carbon_time").on("click",function(){
 				var HisQuoteType=$(this).attr("data");
+				if($(this).hasClass("active")){
+					return;
+				}
 				$(this).addClass("active");
 				$(this).siblings('li').removeClass('active');
 				if(HisQuoteType==0){
