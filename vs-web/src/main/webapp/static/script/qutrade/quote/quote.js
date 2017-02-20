@@ -26,6 +26,10 @@ var localCacheSelect = null;
  * 第一次获取数据数组的下表
  * */
 var firstTimeLength=1
+/*
+ 记录每次点击的下标
+ */
+var clickIindex=0;
 function quoteHandleData(evt){
 	var data = evt.data;
 	var jsonData = JSON.parse(data);
@@ -380,19 +384,23 @@ function addQuoteListBindClick(cls){
 	$("."+cls+"").bind("click",function(){
 		 var obj = $(this);
 		 var left_xiangmu   = $(".futuresList .left_xiangmu");
-		 left_xiangmu.each(function(){
-			 left_xiangmu.removeClass('on');
-		 });
-		 obj.addClass('on');
 		 var contractCode = obj.attr("data-tion-com");
 		 setLocalCacheSelect(contractCode);
 		 clearRightData();
 		 setSelectOption(contractCode);
 		 setMoneyNumberIndex(0);
 		 clearHandicapData();
-		 var HisQuoteType=checkHisQuoteType();
-		 sendHistory(HisQuoteType);
-		 $("#totalVolume").val(0);
+		  if(obj.hasClass("on")){
+		 }else{
+		 	 var HisQuoteType=checkHisQuoteType();
+			 sendHistory(HisQuoteType);
+			 $("#totalVolume").val(0);
+		 }
+		 left_xiangmu.each(function(){
+			 left_xiangmu.removeClass('on');
+		 });
+		 obj.addClass('on');
+		
 	});
 }
 /**
@@ -1104,3 +1112,4 @@ function checkRange(){
     	return HisQuoteType;
     	
     }
+

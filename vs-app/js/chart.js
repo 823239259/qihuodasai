@@ -675,13 +675,16 @@ mui.plusReady(function(){
     	}
     	var selectButonNum=0;
     /*
-		 获取K线类型**/
+	 获取K线类型
+	 **/
 		$("#list_type ul li").on("tap",function(){
 			$("#selectButon").text($(this).text())
 			var val=$(this).val();
-			$("#list_type ").css({
-				"display":"none"
-			});
+			if($(this).hasClass("on")!=false){
+				return;
+			}
+			$(this).addClass("on");
+			$(this).siblings('li').removeClass('on'); 
 			if(val==1){
 				drawChart(val)
 			}else if(val==5){
@@ -693,7 +696,9 @@ mui.plusReady(function(){
 			}else if(val==1440){
 				drawChart(val)
 			}
-
+			$("#list_type").css({
+				"display":"none"
+			});
 		});
 	
 		$("#selectButon").click(function(){
