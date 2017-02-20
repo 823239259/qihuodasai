@@ -726,6 +726,9 @@ mui.plusReady(function(){
 			})
 		})
     	document.getElementById("timeChartMenu").addEventListener("tap",function(){
+    		if($("#timeChartMenu").hasClass("mui-active")==true){
+    			return;
+    		}
     		$("#headerMenu table td").removeClass("mui-active");
     		$("#TimeChart1").css("opacity","0").addClass("mui-active");
     		$("#timeChartMenu").addClass("mui-active");
@@ -814,6 +817,9 @@ mui.plusReady(function(){
     		$("#lightChartDiv").removeClass("mui-active");
     	});
     	document.getElementById("lightDiagram").addEventListener("tap",function(){
+    		if($("#lightDiagram").hasClass("mui-active")==true){
+    			return;
+    		}
     		$("#headerMenu table td").removeClass("mui-active");
     		$("#lightDiagram").addClass("mui-active");
     		$("#chartAllDiv").addClass("mui-active");
