@@ -1557,3 +1557,15 @@ input{
 #topPopover #openStopButton,#openConditionButton{
 	display: none;
 }
+#netWorkTips{
+	padding: 0px 15px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;;
+	color:#FFCC33;
+	position: fixed;
+	top:0px;
+	background-color: #2B2B2B;
+	z-index: 999;
+	display: none;
+}

@@ -63,117 +63,119 @@ mui.plusReady(function(){
 	$("#doSize").val(Transfer.name[4])
 	init(Transfer.name);
 	$("#MainContract").text(Transfer.name[2]+Transfer.name[1]);
-	initMakect();
-	function initMakect(){
+	initMarketSocket();
+	function initMarketSocket(){
 		marketSocket = new WebSocket(marketSocketUrl);
-    var marketLoadParam = {}
-	marketSocket.onopen = function(evt){
-      masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
-    };
-    marketSocket.onclose = function(evt){
-    	if(reconnect != false){
-//  		if(username==null){
-//  			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,null,null);
-//  		}
-    		initMakect();
-    	}
-    };
-    marketSocket.onmessage = function(evt){
-        var data = evt.data;
-        var jsonData = JSON.parse(data);
-        var method = jsonData.Method;
-        if(method=="OnRspLogin"){
-        	sendHistoryMessage(0);
-	       masendMessage('QryCommodity',null);
-        }else if(method == "OnRspQryHistory"){
-            var historyParam = jsonData;
-			if(historyParam.Parameters==null){
-				return
-			};
-			if(firstTimeLength==1){
-				getSubscript(historyParam.Parameters.ColumNames);
-				firstTimeLength=2;
-			}
-			if(historyParam.Parameters.HisQuoteType==0){
-				handleTime(historyParam);
-				handleVolumeChartData(historyParam);
-			}else{
-				processingData(historyParam);
-	            processingCandlestickVolumeData(historyParam);
-			}
-        }else if(method == "OnRtnQuote"){
-        	var quoteParam = jsonData;
-        	if(quoteParam.Parameters == null)return;
-        	var subscribeParam = quoteParam.Parameters;
-			var newCommdityNo = subscribeParam.CommodityNo;
-			var newContractNo = subscribeParam.ContractNo;
-			marketLoadParam[newCommdityNo] = subscribeParam;
-			lightChartData(quoteParam);
-			$("#refresh").removeClass("rotateClass");
-			 var commodityNo = $("#commodeityNo").val();
-			 var totalVolume=$("#volumePricesNumber").text()
-			 if(commodityNo==quoteParam.Parameters.CommodityNo){
-			 	dealOnRtnQuoteData(jsonData,totalVolume);
-			 }
-			//如果是当前合约与品种更新行情数据，和浮动盈亏
-			if (valiationIsPresent(newCommdityNo, newContractNo)) {
-				updateLoadWebParam(subscribeParam); 
-				insertDATA(quoteParam);
-				setFiveMarket(subscribeParam);
-				setHandicap(subscribeParam);
-			} 
-			updateStopAndLossLastPrice(subscribeParam);
-			updateDesignateByQuote(subscribeParam);
-			updateFloatProfit(subscribeParam);
-			//计算浮动盈亏总和
-			sumListfloatingProfit();
-			//更新账户资产
-			updateAccountBalance();
-			setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
-			setLocalCacheQuote(subscribeParam);
-        }else if(method == "OnRspQryCommodity"){
-        	if(OnRspQryCommodityDateL==1){
-        		commoditysData=jsonData.Parameters;
-        	}
-        	var commoditys = jsonData.Parameters;
-			if(commoditys == null)return;
-			var size = commoditys.length;
-			var tradeTitleHtml=document.getElementById("tradeTitle");
-			for(var i = 0 ; i < size ; i++){
-				var comm = commoditys[i];
-				var newCommdityNo = comm.CommodityNo;
-				var newContractNo = comm.MainContract;
-				var newExchangeNo = comm.ExchangeNo;
-				//如果是当前合约与品种更新乘数
-				if (valiationIsPresent(newCommdityNo, newContractNo)) {
-					$("#contractSize").val(comm.ContractSize);
-				} 
-				var commdityAndContract = newCommdityNo+newContractNo;
-				setMarketCommdity(commdityAndContract,comm);
-				//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
-				var comContract = marketNotSubCommdity[commdityAndContract];
-				if(comContract != undefined){ 
-					if(marketSubCommdity[commdityAndContract] == undefined){
-						subscribeHold(newExchangeNo,newCommdityNo,newContractNo);
-						setMarketSubCommdity(commdityAndContract,commdityAndContract);
-					}
+    	var marketLoadParam = {}
+		marketSocket.onopen = function(evt){
+	      	masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
+	      	 $("#netWorkTips").css("display","none");
+	       	plus.nativeUI.closeWaiting(); 
+			mui.toast("行情连接服务器成功！");
+	    };
+	    marketSocket.onclose = function(evt){
+//	    	if(reconnect != false){
+//		  		if(username==null){
+//		  			alertProtype("行情服务器连接超时,点击确定重新连接","提示",Btn.confirmed(),null,null,null);
+//		  		}
+//	    	}
+	    };
+	    marketSocket.onmessage = function(evt){
+	        var data = evt.data;
+	        var jsonData = JSON.parse(data);
+	        var method = jsonData.Method;
+	        if(method=="OnRspLogin"){
+	        	sendHistoryMessage(0);
+		       masendMessage('QryCommodity',null);
+	        }else if(method == "OnRspQryHistory"){
+	            var historyParam = jsonData;
+				if(historyParam.Parameters==null){
+					return
+				};
+				if(firstTimeLength==1){
+					getSubscript(historyParam.Parameters.ColumNames);
+					firstTimeLength=2;
 				}
-				$("#chioceContract").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
-				$("#chioceContract1").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
-				if(Transfer.name[2]==newCommdityNo){
-   					tradeTitleHtml.innerHTML+="<option value="+commdityAndContract+" selected>"+comm.CommodityName+"</option>"
-	   			}else{
-	   				tradeTitleHtml.innerHTML+="<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>"
-	   			}
-	   			
-			}
-			queryCommodityIsFlag = true;
-        }else if(method == "OnRspSubscribe"){
-        	var quoteParam = jsonData;
-        }
-    };
-    marketSocket.onerror = function(evt){
-    };
+				if(historyParam.Parameters.HisQuoteType==0){
+					handleTime(historyParam);
+					handleVolumeChartData(historyParam);
+				}else{
+					processingData(historyParam);
+		            processingCandlestickVolumeData(historyParam);
+				}
+	        }else if(method == "OnRtnQuote"){
+	        	var quoteParam = jsonData;
+	        	if(quoteParam.Parameters == null)return;
+	        	var subscribeParam = quoteParam.Parameters;
+				var newCommdityNo = subscribeParam.CommodityNo;
+				var newContractNo = subscribeParam.ContractNo;
+				marketLoadParam[newCommdityNo] = subscribeParam;
+				lightChartData(quoteParam);
+				$("#refresh").removeClass("rotateClass");
+				 var commodityNo = $("#commodeityNo").val();
+				 var totalVolume=$("#volumePricesNumber").text()
+				 if(commodityNo==quoteParam.Parameters.CommodityNo){
+				 	dealOnRtnQuoteData(jsonData,totalVolume);
+				 }
+				//如果是当前合约与品种更新行情数据，和浮动盈亏
+				if (valiationIsPresent(newCommdityNo, newContractNo)) {
+					updateLoadWebParam(subscribeParam); 
+					insertDATA(quoteParam);
+					setFiveMarket(subscribeParam);
+					setHandicap(subscribeParam);
+				} 
+				updateStopAndLossLastPrice(subscribeParam);
+				updateDesignateByQuote(subscribeParam);
+				updateFloatProfit(subscribeParam);
+				//计算浮动盈亏总和
+				sumListfloatingProfit();
+				//更新账户资产
+				updateAccountBalance();
+				setMarketCommdityLastPrice(newCommdityNo+newContractNo,subscribeParam.LastPrice);
+				setLocalCacheQuote(subscribeParam);
+	        }else if(method == "OnRspQryCommodity"){
+	        	if(OnRspQryCommodityDateL==1){
+	        		commoditysData=jsonData.Parameters;
+	        	}
+	        	var commoditys = jsonData.Parameters;
+				if(commoditys == null)return;
+				var size = commoditys.length;
+				var tradeTitleHtml=document.getElementById("tradeTitle");
+				for(var i = 0 ; i < size ; i++){
+					var comm = commoditys[i];
+					var newCommdityNo = comm.CommodityNo;
+					var newContractNo = comm.MainContract;
+					var newExchangeNo = comm.ExchangeNo;
+					//如果是当前合约与品种更新乘数
+					if (valiationIsPresent(newCommdityNo, newContractNo)) {
+						$("#contractSize").val(comm.ContractSize);
+					} 
+					var commdityAndContract = newCommdityNo+newContractNo;
+					setMarketCommdity(commdityAndContract,comm);
+					//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
+					var comContract = marketNotSubCommdity[commdityAndContract];
+					if(comContract != undefined){ 
+						if(marketSubCommdity[commdityAndContract] == undefined){
+							subscribeHold(newExchangeNo,newCommdityNo,newContractNo);
+							setMarketSubCommdity(commdityAndContract,commdityAndContract);
+						}
+					}
+					$("#chioceContract").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
+					$("#chioceContract1").append("<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>")
+					if(Transfer.name[2]==newCommdityNo){
+	   					tradeTitleHtml.innerHTML+="<option value="+commdityAndContract+" selected>"+comm.CommodityName+"</option>"
+		   			}else{
+		   				tradeTitleHtml.innerHTML+="<option value='"+commdityAndContract+"'>"+comm.CommodityName+"</option>"
+		   			}
+		   			
+				}
+				queryCommodityIsFlag = true;
+	        }else if(method == "OnRspSubscribe"){
+	        	var quoteParam = jsonData;
+	        }
+	    };
+	    marketSocket.onerror = function(evt){
+	    };
 	}
     function sendHistoryMessage(num){
         var exchangeNo = $("#exchangeNo").val();
@@ -863,8 +865,24 @@ mui.plusReady(function(){
 			    };
 			}
 		},1000)
-		
 	}
+    var checkNetWorkSateInterval=setInterval(function(){
+		reconnectMarketSocket()
+    },500);
+    var netWorkState=true;
+    function reconnectMarketSocket(){
+    	var netWorkStateType=mui.checkNetworkState();
+    	if(netWorkStateType[plus.networkinfo.getCurrentType()]=="None connection"){
+			$("#netWorkTips").css("display","block");
+			netWorkState=false;
+		}else{
+			if(netWorkState==false){
+				plus.nativeUI.showWaiting( "正在连接行情服务器" );
+				initMarketSocket();
+			}
+			netWorkState=true;
+		}
+    }
 });
 function masendMessage(method,parameters){
 	 marketSocket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
