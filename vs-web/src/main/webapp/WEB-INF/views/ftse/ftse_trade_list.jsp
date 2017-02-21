@@ -178,7 +178,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 			<a href="javascript:void(0);" onclick="closeWindow('#appendMoneyDetailInfo')" class="close"></a>
 		</div>
 		<div class="fl_uc_main">
-			<p style="font-size:14px;text-align: center;font-family: '宋体'; line-height: 24px;">系统将在下个交易日前为您的期货账户补充保证金;<br/>添加成功将短信通知您,最低补充金额为2000元;<br/>
+			<p style="font-size:14px;text-align: center;font-family: '宋体'; line-height: 24px;">系统将在下个交易日前为您的期货账户补充保证金;<br/>添加成功将短信通知您,最低补充金额为500元;<br/>
 			<span id = 'rate' style="color: #FF0000;"></span>
 			<input type="hidden" id = 'rateValue'>
 			</p>
@@ -190,7 +190,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 				</li>
 				<li>
 					<label>补充保证金：</label>
-					<input type="hidden" id="append_minAppendMoney" name="append_minAppendMoney" value="2000"> 
+					<input type="hidden" id="append_minAppendMoney" name="append_minAppendMoney" value="500"> 
 					<input type="text" id="appendMoney" name="appendMoney" maxlength="9"> 
 					<span>元 </span>
 				</li>
