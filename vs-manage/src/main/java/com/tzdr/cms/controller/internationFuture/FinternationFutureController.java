@@ -7,20 +7,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import jodd.util.Base64;
 import jodd.util.StringUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.CollectionUtils;
+import com.tzdr.business.service.datamap.DataMapService;
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.userTrade.FinternationFutureAppendLevelMoneyService;
@@ -48,7 +48,7 @@ import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.common.web.support.EasyUiPageData;
 import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.JsonResult;
-import com.tzdr.domain.vo.TradeExclDetailVo;
+import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.vo.TradeExclDetailVos;
 import com.tzdr.domain.vo.ftse.FSimpleFtseVo;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
@@ -73,6 +73,13 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	
 	@Autowired
 	private TradeDetailService tradeDetailService;
+	
+	@Autowired
+	private SecurityInfoService securityInfoService;
+	
+	@Autowired
+	private DataMapService dataMapService;
+	
 	@Override
 	public BaseService<FSimpleFtseUserTrade> getBaseService() {
 		return simpleFtseUserTradeService;
@@ -227,7 +234,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	 * @param hsi
 	 * @return
 	 */
-	@RequestMapping(value="input")
+	@RequestMapping(value="/input")
 	@ResponseBody
 	public JsonResult input(HttpServletRequest request,HttpServletResponse resp,FSimpleFtseVo hsi){
 		JsonResult jsonResult  = new JsonResult();
@@ -241,7 +248,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			}
 			jsonResult = this.simpleFtseUserTradeService.inputResult(hsi);
 			String tradeDetail = request.getParameter("tradeDetail");
-			if(tradeDetail != null && tradeDetail.length() > 0){
+			if(tradeDetail != null && tradeDetail.trim().length() > 0){
 				tradeDetailService.doSaveTradeExclDetail(tradeDetail,hsi.getId());
 			}
 		} catch (Exception e) {
@@ -335,8 +342,11 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	@ResponseBody
 	@RequestMapping(value = "/getFtse",method = RequestMethod.GET)
 	public JsonResult getFtse(HttpServletRequest request,@RequestParam("id")String id){
-		FSimpleFtseUserTrade fSimpleFtseUserTrade = simpleFtseUserTradeService.get(id);
 		List<TradeDetail> tradeDetail = tradeDetailService.doGetByFtseId(id);
+		FSimpleFtseUserTrade fSimpleFtseUserTrade = simpleFtseUserTradeService.get(id);
+		String tranPassword = fSimpleFtseUserTrade.getTranPassword();
+		String tranPasswordBase64 = Base64.encodeToString(tranPassword);//Base64加密
+		fSimpleFtseUserTrade.setTranPassword(tranPasswordBase64);
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);
 		resultJson.appendData("fste", fSimpleFtseUserTrade);
@@ -361,7 +371,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			return resultJson;
 		}
 		List<TradeExclDetailVos> detailVos = new ArrayList<>();
-		Map<String, Double> map = new HashMap<String,Double>();
+		Map<String, Double> map = null;
 		InputStream inputStream = null;
 		try {
 			inputStream = multipartFile.getInputStream();
@@ -376,148 +386,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			detailVos = (List<TradeExclDetailVos>)readExclPOI.readExcl2007(filePath, TradeExclDetailVos.class);
 			File file = new File(filePath);
 			file.delete();
-			for (int i = 1; i < detailVos.size(); i++) {
-				TradeExclDetailVos detailVo = detailVos.get(i);
-				String contractNo = detailVo.getCommodityNo();
-				if(contractNo == null || contractNo.equalsIgnoreCase("null")){
-					continue;
-				}
-				String buyNum = detailVo.getBuyNum();
-				String sellNum = detailVo.getSellNum();
-				Double tradeNum = Double.parseDouble(buyNum == null ? "0" : buyNum)+Double.parseDouble(sellNum == null ? "0" : sellNum);
-				Double lever = 0.0;
-				Double number = 0.0;
-				Double tradeNumbDob = tradeNum;
-				if(contractNo.startsWith("CL")){
-					lever = map.get("crudeTranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("crudeTranActualLever", number);
-				}else if(contractNo.startsWith("CN")){
-					lever = map.get("tranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("tranActualLever", number);
-				}else if(contractNo.startsWith("HSI")){
-					lever = map.get("hsiTranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("hsiTranActualLever", number);
-				}else if(contractNo.startsWith("YM")){
-					lever = map.get("mdtranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("mdtranActualLever", number);
-				}else if(contractNo.startsWith("NQ")){
-					lever = map.get("mntranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("mntranActualLever", number);
-				}else if(contractNo.startsWith("ES")){
-					lever = map.get("mbtranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("mbtranActualLever", number);
-				}else if(contractNo.startsWith("FDAX")){
-					lever = map.get("daxtranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("daxtranActualLever", number);
-				}else if(contractNo.startsWith("NK")){
-					lever = map.get("nikkeiTranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("nikkeiTranActualLever", number);
-				}else if(contractNo.startsWith("MHI")){
-					lever = map.get("lhsiTranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("lhsiTranActualLever", number);
-				}else if(contractNo.startsWith("GC")){
-					lever = map.get("agTranActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("agTranActualLever", number);
-				}else if(contractNo.startsWith("HHI")){
-					lever = map.get("heStockMarketLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("heStockMarketLever", number);
-				}else if(contractNo.startsWith("MCH")){
-					lever = map.get("xhStockMarketLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("xhStockMarketLever", number);
-				}else if(contractNo.startsWith("HG")){
-					lever = map.get("AmeCopperMarketLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("AmeCopperMarketLever", number);
-				}else if(contractNo.startsWith("SI")){
-					lever = map.get("AmeSilverMarketLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("AmeSilverMarketLever", number);
-				}else if(contractNo.startsWith("QM")){
-					lever = map.get("smallCrudeOilMarketLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("smallCrudeOilMarketLever", number);
-				}else if(contractNo.startsWith("FDXM")){
-					lever = map.get("daxtranMinActualLever");
-					if(lever != null){
-						number = tradeNumbDob + lever;
-					}else{
-						number = tradeNumbDob;
-					}
-					map.put("daxtranMinActualLever", number);
-				}
-			}
+			map = leadLever(detailVos);
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -578,5 +447,263 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			e.printStackTrace();
 		}  
         return null; 
+	}
+	
+	/**
+	 * 通过ws保存成交信息
+	 * @param request
+	 * @param resp
+	 * @return
+	 */
+	@RequestMapping(value="/detailSave")
+	@ResponseBody
+	public JsonResult detailSave(HttpServletRequest request,HttpServletResponse resp,TradeExclDetailVos detailVo){
+		tradeDetailService.deleteByTradeNo(detailVo.getTradeNo());  
+		
+		Long time = new Date().getTime();
+		String userNo = detailVo.getUserNo();
+		String uid = simpleFtseUserTradeService.findByUserNo(userNo).getUid();
+		String tname = securityInfoService.findByUserId(uid).getTname();
+		
+		TradeDetail detail = new TradeDetail();
+		
+		detail.setBuyNum(detailVo.getBuyNum());
+		detail.setCommodityNo(detailVo.getCommodityNo());
+		detail.setCurrencyNo(detailVo.getCurrencyNo());
+		detail.setExchangeNo(detailVo.getExchangeNo());
+		detail.setFree(detailVo.getFree());
+		detail.setOrderUserno(detailVo.getOrderUserno());
+		detail.setOrderType(detailVo.getOrderType());
+		if("QPServer".equals(detailVo.getUserNo())){
+			detail.setOrderUsername("vs_system");
+		}else{
+			detail.setOrderUsername(tname);
+		}
+		detail.setSellNum(detailVo.getSellNum());
+		detail.setTradeDate(detailVo.getTradeDate());
+		detail.setTradePrice(detailVo.getTradePrice());
+		detail.setTradeType(detailVo.getTradeType());
+		detail.setUsername(tname);
+		detail.setUserNo(detailVo.getUserNo());
+		detail.setUpdateTime(time);
+		detail.setCreateTime(time);
+		detail.setFastId(detailVo.getFastId()); //方案号
+		detail.setTradeNo(detailVo.getTradeNo());//  成交号
+		tradeDetailService.save(detail);
+		return new JsonResult(true,"保存一笔成交记录，成交号："+detailVo.getTradeNo());
+	}
+	/**
+	 * 查询某账号的所有成交记录
+	 * @param request
+	 * @param resp
+	 * @return
+	 */
+	@RequestMapping(value="getAllDetails")
+	@ResponseBody
+	public JsonResult getAllDetails(HttpServletRequest request,HttpServletResponse resp,String tranAccount,String todayMoeny,String id){
+		List<TradeDetail> tradeDetails = tradeDetailService.getByTranAccounts(tranAccount);
+//		if(tradeDetails == null || tradeDetails.size() == 0){
+//			return new JsonResult(false,"无成交记录");
+//		}
+		//计算交易手数
+		List<TradeExclDetailVos> detailVos = new ArrayList<TradeExclDetailVos>();
+		TradeExclDetailVos detailVo = new TradeExclDetailVos();
+		detailVos.add(detailVo);//第一个放入null 也方便和手动结算的excel表对应
+		TradeDetail tradeDetail = null;
+		for(int i=0; i < tradeDetails.size(); i++){
+			tradeDetail=tradeDetails.get(i);
+			detailVo = new TradeExclDetailVos();
+			detailVo.setBuyNum(tradeDetail.getBuyNum());
+			detailVo.setCommodityNo(tradeDetail.getCommodityNo());
+			detailVo.setCurrencyNo(tradeDetail.getCurrencyNo());
+			detailVo.setExchangeNo(tradeDetail.getExchangeNo());
+			detailVo.setFree(tradeDetail.getFree());
+			detailVo.setOrderType(tradeDetail.getOrderType());
+			detailVo.setOrderUsername(tradeDetail.getOrderUsername());
+			detailVo.setOrderUserno(tradeDetail.getOrderUserno());
+			detailVo.setSellNum(tradeDetail.getSellNum());
+			detailVo.setTradeDate(tradeDetail.getTradeDate());
+			detailVo.setTradeNo(tradeDetail.getTradeNo());
+			detailVo.setTradePrice(tradeDetail.getTradePrice());
+			detailVo.setTradeType(tradeDetail.getTradeType());
+			detailVo.setUsername(tradeDetail.getUsername());
+			detailVo.setUserNo(tradeDetail.getUserNo());
+			detailVo.setFastId(tradeDetail.getFastId());
+			detailVos.add(detailVo);
+		}
+		
+		
+		Map<String, Double> leadLever = leadLever(detailVos);
+		//获取结算汇率
+		List<DataMap> dataMap = dataMapService.findByTypeKey("tranProfitLossParities");
+		String parities = CollectionUtils.isEmpty(dataMap) ? null :dataMap.get(0).getValueName();
+		//获取总的保证金
+		FSimpleFtseUserTrade ftse = null;
+		try {
+			ftse = simpleFtseUserTradeService.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		BigDecimal traderTotal = ftse.getTraderTotal();
+		//计算交易盈亏
+		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,parities,new BigDecimal(todayMoeny),traderTotal);
+		leadLever.put("tranProfitLoss", countTranProfitLoss);
+		ftse.setEndType(1);  //自动结算
+		simpleFtseUserTradeService.save(ftse);
+		JsonResult resultJson = new JsonResult();
+		resultJson.setSuccess(true);
+		resultJson.appendData("tradeDetails", tradeDetails);
+		resultJson.appendData("leadLever", leadLever);
+		return resultJson;
+	}
+	
+
+	//导入交易手数
+	public Map<String, Double>  leadLever(List<TradeExclDetailVos> detailVos){
+		Map<String, Double> map = new HashMap<String,Double>();
+		for (int i = 1; i < detailVos.size(); i++) {
+			TradeExclDetailVos detailVo = detailVos.get(i);
+			String contractNo = detailVo.getCommodityNo();
+			if(contractNo == null || contractNo.equalsIgnoreCase("null")){
+				continue;
+			}
+			String buyNum = detailVo.getBuyNum();
+			String sellNum = detailVo.getSellNum();
+			Double tradeNum = Double.parseDouble(buyNum == null ? "0" : buyNum)+Double.parseDouble(sellNum == null ? "0" : sellNum);
+			Double lever = 0.0;
+			Double number = 0.0;
+			Double tradeNumbDob = tradeNum;
+			if(contractNo.startsWith("CL")){
+				lever = map.get("crudeTranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("crudeTranActualLever", number);
+			}else if(contractNo.startsWith("CN")){
+				lever = map.get("tranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("tranActualLever", number);
+			}else if(contractNo.startsWith("HSI")){
+				lever = map.get("hsiTranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("hsiTranActualLever", number);
+			}else if(contractNo.startsWith("YM")){
+				lever = map.get("mdtranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("mdtranActualLever", number);
+			}else if(contractNo.startsWith("NQ")){
+				lever = map.get("mntranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("mntranActualLever", number);
+			}else if(contractNo.startsWith("ES")){
+				lever = map.get("mbtranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("mbtranActualLever", number);
+			}else if(contractNo.startsWith("FDAX")){
+				lever = map.get("daxtranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("daxtranActualLever", number);
+			}else if(contractNo.startsWith("NK")){
+				lever = map.get("nikkeiTranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("nikkeiTranActualLever", number);
+			}else if(contractNo.startsWith("MHI")){
+				lever = map.get("lhsiTranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("lhsiTranActualLever", number);
+			}else if(contractNo.startsWith("GC")){
+				lever = map.get("agTranActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("agTranActualLever", number);
+			}else if(contractNo.startsWith("HHI")){
+				lever = map.get("heStockMarketLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("heStockMarketLever", number);
+			}else if(contractNo.startsWith("MCH")){
+				lever = map.get("xhStockMarketLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("xhStockMarketLever", number);
+			}else if(contractNo.startsWith("HG")){
+				lever = map.get("AmeCopperMarketLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("AmeCopperMarketLever", number);
+			}else if(contractNo.startsWith("SI")){
+				lever = map.get("AmeSilverMarketLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("AmeSilverMarketLever", number);
+			}else if(contractNo.startsWith("QM")){
+				lever = map.get("smallCrudeOilMarketLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("smallCrudeOilMarketLever", number);
+			}else if(contractNo.startsWith("FDXM")){
+				lever = map.get("daxtranMinActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("daxtranMinActualLever", number);
+			}
+		}
+		return map;
 	}
 }		

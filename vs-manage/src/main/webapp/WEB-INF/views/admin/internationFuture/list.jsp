@@ -12,7 +12,11 @@
 <script type="text/javascript" src="${ctx}/static/script/wuser/public.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/my97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList.js?v=20170105"></script>
+<script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList2.js?v=20170105"></script>
+<script type="text/javascript" src="${ctx}/static/script/quote.trade/n_quote.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/quote.trade/n_trade_vo.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/quote.trade/n_trade.js"></script>
+<script type="text/javascript" src="${ctx}/static/script/quote.trade/n_utils.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/ajaxfileupload.js?v=${v}"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dataStyle.css">
 <script type="text/javascript">
@@ -536,7 +540,7 @@ function timeConvert(value,rowData,rowIndex) {
 			                   <input id="xhStockMarketLever" name="xhStockMarketLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
-						   <tr  id="asTradeNumTR">
+						 <tr  id="asTradeNumTR">
 						    <td class="label right">美铜交易:</td>
 			                <td>
 			                   <input id="AmeCopperMarketLever" name="AmeCopperMarketLever" class="easyui-validatebox"  data-options=""/>
@@ -558,7 +562,7 @@ function timeConvert(value,rowData,rowIndex) {
 						</tr>
 						  <tr>
 			                <td align="center" colspan="3">
-			                <a id="btn" href="javascript:void(0);" onclick="inputSave()" class="easyui-linkbutton">提交</a>
+			                <a id="btn" href="javascript:void(0);" onclick="handInputSave()" class="easyui-linkbutton">提交</a>
 			               <a id="btn" href="javascript:void(0);" onclick="inputClose()" class="easyui-linkbutton">取消</a>
               			 </td>
             </tr>

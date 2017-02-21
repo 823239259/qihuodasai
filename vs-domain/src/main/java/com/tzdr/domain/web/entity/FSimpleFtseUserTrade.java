@@ -326,10 +326,19 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 */
 	private String operator;
 	
+	/**
+	 * 结算类型  1：自动计算   0：手动计算
+	 */
+	private Integer endType;
 	
-
-	public FSimpleFtseUserTrade() {
+	@Column(name = "end_type")
+	public Integer getEndType() {
+		return endType;
 	}
+	public void setEndType(Integer endType) {
+		this.endType = endType;
+	}
+	
 	@Column(name = "source")
 	public Integer getSource() {
 		return source;

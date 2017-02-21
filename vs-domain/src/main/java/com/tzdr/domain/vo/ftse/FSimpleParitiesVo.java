@@ -87,6 +87,11 @@ public class FSimpleParitiesVo implements Serializable {
 	 * 添加时间
 	 */
 	private BigInteger  addTime;
+	
+	/**
+	 * 币种
+	 */
+	private String currencyNo;
 
 	public String getId() {
 		return id;
@@ -231,6 +236,14 @@ public class FSimpleParitiesVo implements Serializable {
 
 	public void setVersion(BigInteger version) {
 		this.version = version;
+	}
+
+	public String getCurrencyNo() {
+		return currencyNo;
+	}
+
+	public void setCurrencyNo(String currencyNo) {
+		this.currencyNo = currencyNo;
 	}
 	
 }
