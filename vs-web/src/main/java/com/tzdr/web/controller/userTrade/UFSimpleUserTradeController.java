@@ -98,7 +98,7 @@ public class UFSimpleUserTradeController {
 
 		BigDecimal payMoney = new BigDecimal(appendMoney);  //追加保证金
 		
-		BigDecimal defaultMinAppendMoney = new BigDecimal(3000.00);  //默认最小追加保证金
+		BigDecimal defaultMinAppendMoney = new BigDecimal(500.00);  //默认最小追加保证金
 
 		if(payMoney.compareTo(defaultMinAppendMoney) < 0){   //追加金额是否低于默认最小追加保证金
 			jsonResult.setMessage("underDefaultMinAppendMoney");

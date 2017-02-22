@@ -563,7 +563,7 @@ public class UFSimpleHSIUserTradeController {
 
 		BigDecimal payMoney = new BigDecimal(appendMoney); // 追加保证金
 
-		BigDecimal defaultMinAppendMoney = new BigDecimal(2000.00); // 默认最小追加保证金2000
+		BigDecimal defaultMinAppendMoney = new BigDecimal(500.00); // 默认最小追加保证金500
 
 		if (payMoney.compareTo(defaultMinAppendMoney) < 0) { // 追加金额是否低于默认最小追加保证金
 			jsonResult.setMessage("underDefaultMinAppendMoney");
