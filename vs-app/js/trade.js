@@ -1771,24 +1771,41 @@ function loadOperateLogin() {
  */
 var insertConditionCount = 0;
 $(function() {
-	var validateQueryCommodity = setInterval(function() {
-		//			plus.nativeUI.closeWaiting();
-		plus.nativeUI.showWaiting("正在连接交易服务\n如等待时间过长请返回重新尝试", { modal: false });
+	var satartCheckTime = new Date().getTime();
+	plus.nativeUI.showWaiting("等待行情服务器连接...");
+	var checkQuoteConnect = setInterval(function(){
+		if (username == null) {	// 不存在账号则不尝试登录
+			plus.nativeUI.closeWaiting();
+			$("#switchAccount").text("登录账号");
+			window.clearInterval(checkQuoteConnect); // 关闭尝试
+			return;
+		}
+		
+		// 等待行情连接成功后，连接交易服务器
 		if(getQueryCommodityIsFlag()) {
+			plus.nativeUI.closeWaiting();
+			plus.nativeUI.showWaiting("正在连接交易服务器...");
+			
+			window.clearInterval(checkQuoteConnect); // 关闭尝试
+			
 			/**
 			 * 初始化交易配置 --> trade.config
 			 */
 			initTradeConfig();
 			validateIsGetVersion();
 			getVersion(); // 更新交易连接地址
-			if(username == null) {
-				$("#switchAccount").text("登录账号");
-			}
 			bindOpertion();
-			clearInterval(validateQueryCommodity);
+		} else {		// 尝试连接超过6秒既重新登录
+			console.log("等待行情连接时间（毫秒）：" + (new Date().getTime() - satartCheckTime));
+			if (new Date().getTime() - satartCheckTime >= 6000) {
+				plus.nativeUI.closeWaiting();
+				$("#switchAccount").text("登录账号");
+				mui.toast("交易服务器连接失败，请重新登录！");
+				openLogin();
+			}
 		}
-	}, 500);
-
+	}, 500); // 500毫秒尝试一次检查
+	
 	$("#switchAccount").click(function() {
 		if(isLogin) {
 			alertProtype("是否切换当前账号", "提示", Btn.confirmedAndCancle(), switchAccount, null, null);
@@ -2155,8 +2172,8 @@ function bindOpertion() {
 			if(priceType == 1) {
 				orderPrice = "市价";
 			}
-			var content = "确定提交订单：" + commodityNo + contractNo + ",价格(" + orderPrice + "),手数(" + orderNum + "),方向(" + analysisBusinessBuySell(tradeDrection) + ")?";
-			alertProtype(content, "确认下单?", Btn.confirmedAndCancle(), doInsertOrder, null, $this);
+			var content = "确认提交订单：【" + commodityNo + contractNo + "】,价格【" + orderPrice + "】,手数【" + orderNum + "】,方向【" + analysisBusinessBuySell(tradeDrection) + "】?";
+			alertProtype(content, "确认下单？", Btn.confirmedAndCancle(), doInsertOrder, null, $this);
 		}
 	});
 	$("#allOpen").bind("click", function() {
@@ -2166,8 +2183,8 @@ function bindOpertion() {
 				tip("没有需要平仓的数据");
 				return;
 			}
-			var tipContent = "确认全部平仓?";
-			alertProtype(tipContent, "确认下单吗?", Btn.confirmedAndCancle(), doInsertAllSellingOrder);
+			var tipContent = "此操作将平掉持仓列表中所有合约，请您慎重选择。是否确认将所有合约全部平仓？";
+			alertProtype(tipContent, "确认全部平仓？", Btn.confirmedAndCancle(), doInsertAllSellingOrder);
 		}
 	});
 
@@ -2179,8 +2196,9 @@ function bindOpertion() {
 				tip("请选择一项需要平仓的数据");
 				return;
 			}
-			var tipContent = "确认平仓合约【" + contractCode + "】";
-			alertProtype(tipContent, "确认下单吗?", Btn.confirmedAndCancle(), doInsertSellingOrder);
+			var holdNum = $("li[data-tion-position='" + contractCode + "'] span[class = 'position2']").text();
+			var tipContent = "确认平仓合约【" + contractCode + "】，价格【市价】，手数【" + holdNum + "】";
+			alertProtype(tipContent, "确认平仓？", Btn.confirmedAndCancle(), doInsertSellingOrder);
 		}
 	});
 	$("#positionBckhand").bind("click", function() {
@@ -2213,8 +2231,8 @@ function bindOpertion() {
 				tip("没有需要撤单的数据");
 				return;
 			}
-			var tipContent = "确认全部撤单合约";
-			alertProtype(tipContent, "确认撤单吗?", Btn.confirmedAndCancle(), doInsertAllCancleOrder, cancleCallBack);
+			var tipContent = "此操作将撤销挂单中所有合约，请您慎重选择。是否确认将所有合约全部撤销？";
+			alertProtype(tipContent, "确认全部撤单？", Btn.confirmedAndCancle(), doInsertAllCancleOrder, cancleCallBack);
 		}
 	});
 	$("#kilAnorder").bind("click", function() {
@@ -2225,7 +2243,8 @@ function bindOpertion() {
 				tip("请选择一项需要撤单的数据");
 				return;
 			}
-			var tipContent = "确认撤单合约【" + contractCode + "】";
+			var holdNum = selectDesgnate["orderNum"];
+			var tipContent = "确认撤单合约【" + contractCode + "】，手数【" + holdNum + "】";
 			alertProtype(tipContent, "确认撤单?", Btn.confirmedAndCancle(), doInsertCancleOrder);
 		}
 	});
@@ -2258,7 +2277,7 @@ function bindOpertion() {
 			}
 			var limitPrice = doGetMarketPrice(lastPrice, miniTikeSize, drection, dotSize);
 			buyOrderPrice = limitPrice;
-			var content = "确定提交订单：" + commodityNo + contractNo + ",价格(【市价】),手数(" + orderNum + "),方向(" + analysisBusinessBuySell(drection) + ")?";
+			var content = "确认提交订单：【" + commodityNo + contractNo + "】,价格【市价】,手数【" + orderNum + "】,方向【" + analysisBusinessBuySell(drection) + "】?";
 			var isFlag = alertProtype(content, "确认下单?", Btn.confirmedAndCancle(), marketBuy, null, $this);
 		}
 	})
@@ -2443,7 +2462,7 @@ function bindOpertion() {
 				alertProtype("止盈价差会导致立即触发,请重新设置", "提示", Btn.confirmed());
 				return;
 			}
-			alertProtype("是否添加止盈价吗?", "提示", Btn.confirmedAndCancle(), doGetInsertLossLoss);
+			alertProtype("是否添加止盈价?", "提示", Btn.confirmedAndCancle(), doGetInsertLossLoss);
 		}
 	});
 	/**
@@ -2642,9 +2661,9 @@ function bindOpertion() {
 			}
 			var chioceContract = $("#chioceContract").val();
 			if(insertConditionCount == 0) {
-				alertProtype("你确定要提交【" + chioceContract + "】条件单吗?", "提示", Btn.confirmedAndCancle(), doInsertConditionByPrice);
+				alertProtype("你确定要提交【" + chioceContract + "】条件单?", "提示", Btn.confirmedAndCancle(), doInsertConditionByPrice);
 			} else if(insertConditionCount == 1) {
-				alertProtype("你确定要修改【" + chioceContract + "】条件单吗?", "提示", Btn.confirmedAndCancle(), doUpdateConditionByPrice);
+				alertProtype("你确定要修改【" + chioceContract + "】条件单?", "提示", Btn.confirmedAndCancle(), doUpdateConditionByPrice);
 			}
 		}
 	});
@@ -2678,9 +2697,9 @@ function bindOpertion() {
 			}
 			var chioceContract = $("#chioceContract").val();
 			if(insertConditionCount == 0) {
-				alertProtype("你确定要提交【" + chioceContract + "】条件单吗?", "提示", Btn.confirmedAndCancle(), doInsertConditionByTime);
+				alertProtype("你确定要提交【" + chioceContract + "】条件单?", "提示", Btn.confirmedAndCancle(), doInsertConditionByTime);
 			} else if(insertConditionCount == 1) {
-				alertProtype("你确定要修改【" + chioceContract + "】条件单吗?", "提示", Btn.confirmedAndCancle(), doUpdateConditionByTime);
+				alertProtype("你确定要修改【" + chioceContract + "】条件单?", "提示", Btn.confirmedAndCancle(), doUpdateConditionByTime);
 			}
 		}
 	});
