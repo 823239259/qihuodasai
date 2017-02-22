@@ -71,7 +71,7 @@ mui.plusReady(function(){
 	      	masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
 	      	 $("#netWorkTips").css("display","none");
 	       	plus.nativeUI.closeWaiting(); 
-			mui.toast("行情连接服务器成功！");
+			mui.toast("行情服务器连接成功！");
 	    };
 	    marketSocket.onclose = function(evt){
 //	    	if(reconnect != false){
