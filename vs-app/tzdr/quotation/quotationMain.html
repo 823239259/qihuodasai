@@ -47,7 +47,7 @@
 		</a>
 	</nav>
 	<div class="mui-content">
-		<div id="netWorkTips">当前行情网络未连接，会自动重试！</div>
+		<div id="netWorkTips">当前行情网络未连接，会自动连接！</div>
 		<div id="fisrtLlist"><span>合约名称</span><span>最新价</span><span>成交量</span><span>涨跌幅</span></div>
 		<div class="productList">
 			<div class='openPage'>
@@ -318,7 +318,7 @@
 					    socket.send('{"Method":"Login","Parameters":{"UserName":"' + user +'","PassWord":"' + pwd +'"}}');
 					    $("#netWorkTips").css("display","none");
 					    plus.nativeUI.closeWaiting(); 
-					    mui.toast("行情连接服务器成功！");
+					    mui.toast("行情服务器连接成功！");
 					};
 					socket.onclose = function(evt){
 					};

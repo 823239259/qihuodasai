@@ -46,7 +46,7 @@
             timeChart.setOption(option);
             timeChart.resize();
             timeChart.group="group1";
-           
+            
         }
 
     }
@@ -70,6 +70,9 @@
                formatter: function(params) {
                	  var time  = params[0].name;
                    var val   = params[0].value;
+                  if(time==null || time==""){
+                  	return
+                  }
                    var html  = '时间:'+time + '<br/>' +
                            '价格: ' + val + '<br/>';
                    return html;
