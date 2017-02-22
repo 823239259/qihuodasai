@@ -46,11 +46,11 @@ import com.tzdr.web.constants.ViewConstants;
 import com.tzdr.web.utils.UserSessionBean;
 
 /**
- * <B>说明: </B>商品期货
+ * <B>璇存槑: </B>鍟嗗搧鏈熻揣
  * 
  * @author LiuYang
  *
- *         2015年9月17日 下午6:40:08
+ *         2015骞�鏈�7鏃�涓嬪崍6:40:08
  */
 @Controller
 @RequestMapping("/userproduct")
@@ -106,7 +106,7 @@ public class UFSimpleProductUserTradeController {
 	}
 
 	/**
-	 * 支付页
+	 * 鏀粯椤�
 	 * 
 	 * @param modelMap
 	 * @param inputTraderBond
@@ -144,80 +144,80 @@ public class UFSimpleProductUserTradeController {
 		}
 		modelMap.put("contract", newConfig.getContract());
 
-		if (inputTraderBond == null) { // 判断保证金
+		if (inputTraderBond == null) { // 鍒ゆ柇淇濊瘉閲�
 			inputTraderBond = new BigDecimal("0");
 		}
 
-		if (inputTranLever == null) { // 判断手数
+		if (inputTranLever == null) { // 鍒ゆ柇鎵嬫暟
 			inputTranLever = 0;
 		}
 
-		if (inputTranFees == null) { // 判断手数
+		if (inputTranFees == null) { // 鍒ゆ柇鎵嬫暟
 			inputTranFees = new BigDecimal("0");
 		}
 
-		inputTranFees = inputTranFees.abs(); // 绝对值
+		inputTranFees = inputTranFees.abs(); // 缁濆鍊�
 
-		inputTraderBond = inputTraderBond.abs(); // 绝对值
+		inputTraderBond = inputTraderBond.abs(); // 缁濆鍊�
 
-		inputTranLever = Math.abs(inputTranLever); // 绝对值
+		inputTranLever = Math.abs(inputTranLever); // 缁濆鍊�
 
-		FSimpleConfig fSimpleConfig = fSimpleProductConfigService.getFSimpleConfigByType(type); // 获取配置方案信息
+		FSimpleConfig fSimpleConfig = fSimpleProductConfigService.getFSimpleConfigByType(type); // 鑾峰彇閰嶇疆鏂规淇℃伅
 
-		// 系统单手操盘金额
+		// 绯荤粺鍗曟墜鎿嶇洏閲戦
 		BigDecimal traderMoney = fSimpleConfig != null ? fSimpleConfig.getTraderMoney() : new BigDecimal("0");
 
-		// 系统单手亏损警告线
+		// 绯荤粺鍗曟墜浜忔崯璀﹀憡绾�
 		BigDecimal LineLoss = fSimpleConfig != null ? fSimpleConfig.getLineLoss() : new BigDecimal("0");
 
-		// 系统单手管理费
+		// 绯荤粺鍗曟墜绠＄悊璐�
 		BigDecimal feeManage = fSimpleConfig != null ? fSimpleConfig.getFeeManage() : new BigDecimal("0");
 
-		// 总操盘保证金=操盘保证金*手数
+		// 鎬绘搷鐩樹繚璇侀噾=鎿嶇洏淇濊瘉閲�鎵嬫暟
 		BigDecimal inputTotalTraderBond = new BigDecimal("0").add(inputTraderBond)
 				.multiply(new BigDecimal(inputTranLever), MathContext.DECIMAL32);
 
-		// 总操盘保证金=单手保证金金额*手数
+		// 鎬绘搷鐩樹繚璇侀噾=鍗曟墜淇濊瘉閲戦噾棰�鎵嬫暟
 		BigDecimal traderTotal = new BigDecimal("0").add(traderMoney).multiply(new BigDecimal(inputTranLever),
 				MathContext.DECIMAL32);
 
-		// 亏损警告线
+		// 浜忔崯璀﹀憡绾�
 		BigDecimal lossLine = new BigDecimal("0").add(traderTotal.subtract(inputTotalTraderBond)
 				.add(LineLoss.multiply(new BigDecimal(inputTranLever), MathContext.DECIMAL32)));
-		// 单管理费
+		// 鍗曠鐞嗚垂
 		BigDecimal manageAmount = new BigDecimal("0").add(feeManage);
 
-		// 总管理费
+		// 鎬荤鐞嗚垂
 		BigDecimal totalManageAmount = new BigDecimal("0").add(manageAmount);
 
-		// 应付金额
+		// 搴斾粯閲戦
 		BigDecimal payable = new BigDecimal("0").add(inputTotalTraderBond).abs().add(totalManageAmount);
 
-		// 开仓手数
+		// 寮�粨鎵嬫暟
 		modelMap.addAttribute("inputTranLever", inputTranLever);
 
-		// 总操盘金
+		// 鎬绘搷鐩橀噾
 		modelMap.addAttribute("traderTotal", this.moneyToStrObject(traderTotal));
 
-		// 操盘保证金
+		// 鎿嶇洏淇濊瘉閲�
 		modelMap.addAttribute("inputTraderBond", inputTraderBond);
 
-		// 总操盘保证金
+		// 鎬绘搷鐩樹繚璇侀噾
 		modelMap.addAttribute("traderBond", this.moneyToStrObject(inputTotalTraderBond));
 
-		// 亏损平仓线
+		// 浜忔崯骞充粨绾�
 		modelMap.addAttribute("lossLine", this.moneyToStrObject(lossLine));
 
-		// 管理费
+		// 绠＄悊璐�
 		modelMap.addAttribute("inputManageAmount", this.moneyToStrObject(manageAmount));
 
-		// 总管理费
+		// 鎬荤鐞嗚垂
 		modelMap.addAttribute("totalManageAmount", this.moneyToStrObject(totalManageAmount));
 
-		// 交易费
+		// 浜ゆ槗璐�
 		modelMap.addAttribute("inputTranFees", this.moneyToStrObject(inputTranFees));
 
-		// 应付金额
+		// 搴斾粯閲戦
 		modelMap.addAttribute("payable", payable);
 
 		modelMap.addAttribute("showAvl", 0);
@@ -225,21 +225,21 @@ public class UFSimpleProductUserTradeController {
 		String userUid = userSessionBean.getId();
 		WUser wuser = wUserService.get(userUid);
 
-		// 用户余额
+		// 鐢ㄦ埛浣欓
 		Double avlBal = wuser.getAvlBal();
 		modelMap.addAttribute("avlBal", avlBal);
 
-		// 代金券
+		// 浠ｉ噾鍒�
 		List<Map<String, Object>> voucher = this.fSimpleCouponService.queryCouponByUserId(userUid, 2, 5);
 		modelMap.put("voucher", voucher);
 
-		// 用户余额+最大代金券是否充足
+		// 鐢ㄦ埛浣欓+鏈�ぇ浠ｉ噾鍒告槸鍚﹀厖瓒�
 		BigDecimal voucherMoney = new BigDecimal(0);
 		if (null != voucher && !voucher.isEmpty()) {
 			voucherMoney = voucherMoney.add(new BigDecimal(voucher.get(0).get("money").toString()));
 		}
 
-		// 用户余额
+		// 鐢ㄦ埛浣欓
 		if (payable.compareTo(new BigDecimal(avlBal).add(voucherMoney)) > 0) {
 			modelMap.addAttribute("avlBal_user", this.moneyToStrObject(new BigDecimal(avlBal)));
 			modelMap.addAttribute("payable_avlBal_user",
@@ -251,7 +251,7 @@ public class UFSimpleProductUserTradeController {
 	}
 
 	/**
-	 * 支付成功页
+	 * 鏀粯鎴愬姛椤�
 	 * 
 	 * @param modelMap
 	 * @param inputTraderBond
@@ -278,67 +278,67 @@ public class UFSimpleProductUserTradeController {
 			return payView.get(type);
 		}
 
-		FSimpleConfig fSimpleConfig = fSimpleProductConfigService.getFSimpleConfigByType(type); // 获取配置方案信息
+		FSimpleConfig fSimpleConfig = fSimpleProductConfigService.getFSimpleConfigByType(type); // 鑾峰彇閰嶇疆鏂规淇℃伅
 
 		if (fSimpleConfig == null) {
 			this.pay(modelMap, inputTraderBond, inputTranLever, inputTranFees, type, request);
 			return payView.get(type);
 		}
 
-		if (fSimpleConfig.getTraderBond().compareTo(inputTraderBond) != 0) { // 判断当前配置方案单手保证金是正确
+		if (fSimpleConfig.getTraderBond().compareTo(inputTraderBond) != 0) { // 鍒ゆ柇褰撳墠閰嶇疆鏂规鍗曟墜淇濊瘉閲戞槸姝ｇ‘
 			this.pay(modelMap, inputTraderBond, inputTranLever, inputTranFees, type, request);
 			return payView.get(type);
 		}
 
-		String[] tranLeverStrs = null; // 现有开仓手数
+		String[] tranLeverStrs = null; // 鐜版湁寮�粨鎵嬫暟
 
 		if (fSimpleConfig != null && StringUtil.isNotBlank(fSimpleConfig.getTranLever())) {
 			tranLeverStrs = fSimpleConfig.getTranLever().split(",");
 		}
 
-		boolean isTranLeverTrue = false; // 当前开仓手数是否正确
+		boolean isTranLeverTrue = false; // 褰撳墠寮�粨鎵嬫暟鏄惁姝ｇ‘
 
 		if (tranLeverStrs != null && tranLeverStrs.length > 0) {
 			for (String tranLever : tranLeverStrs) {
-				if (Integer.parseInt(tranLever) == inputTranLever) { // 当前开仓手数是否存在
+				if (Integer.parseInt(tranLever) == inputTranLever) { // 褰撳墠寮�粨鎵嬫暟鏄惁瀛樺湪
 					isTranLeverTrue = true;
 					break;
 				}
 			}
 		}
 
-		if (!isTranLeverTrue) { // 判断当前开仓手数是否正确
+		if (!isTranLeverTrue) { // 鍒ゆ柇褰撳墠寮�粨鎵嬫暟鏄惁姝ｇ‘
 			this.pay(modelMap, inputTraderBond, inputTranLever, inputTranFees, type, request);
 			return payView.get(type);
 		}
 
-		String[] tranFeesStrs = null; // 现有手续费配置
+		String[] tranFeesStrs = null; // 鐜版湁鎵嬬画璐归厤缃�
 
 		if (fSimpleConfig != null && StringUtil.isNotBlank(fSimpleConfig.getTranLever())) {
 			tranFeesStrs = fSimpleConfig.getTranFeesArray().split(",");
 		}
 
-		boolean isTranFeesTrue = false; // 当前手续费是否正确
+		boolean isTranFeesTrue = false; // 褰撳墠鎵嬬画璐规槸鍚︽纭�
 
 		if (tranFeesStrs != null && tranFeesStrs.length > 0) {
 			for (String tranFees : tranFeesStrs) {
-				if (new BigDecimal(tranFees).equals(inputTranFees)) { // 当前开仓手数是否存在
+				if (new BigDecimal(tranFees).equals(inputTranFees)) { // 褰撳墠寮�粨鎵嬫暟鏄惁瀛樺湪
 					isTranFeesTrue = true;
 					break;
 				}
 			}
 		}
 
-		if (!isTranFeesTrue) { // 判断当前手续费是否正确
+		if (!isTranFeesTrue) { // 鍒ゆ柇褰撳墠鎵嬬画璐规槸鍚︽纭�
 			this.pay(modelMap, inputTraderBond, inputTranLever, inputTranFees, type, request);
 			return payView.get(type);
 		}
 
-		inputTranFees = inputTranFees.abs(); // 绝对值
+		inputTranFees = inputTranFees.abs(); // 缁濆鍊�
 
-		inputTraderBond = inputTraderBond.abs(); // 绝对值
+		inputTraderBond = inputTraderBond.abs(); // 缁濆鍊�
 
-		inputTranLever = Math.abs(inputTranLever); // 绝对值
+		inputTranLever = Math.abs(inputTranLever); // 缁濆鍊�
 
 		Object object = request.getSession().getAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION);
 		String uid = "";
@@ -356,37 +356,37 @@ public class UFSimpleProductUserTradeController {
 			return payView.get(type);
 		}
 
-		// 获取用户信息
+		// 鑾峰彇鐢ㄦ埛淇℃伅
 		WUser wuser = wUserService.get(uid);
 
-		// 总操盘保证金=操盘保证金*手数
+		// 鎬绘搷鐩樹繚璇侀噾=鎿嶇洏淇濊瘉閲�鎵嬫暟
 		BigDecimal inputTotalTraderBond = new BigDecimal("0").add(inputTraderBond)
 				.multiply(new BigDecimal(inputTranLever), MathContext.DECIMAL32);
 
-		// 总操盘保证金=单手保证金金额*手数
+		// 鎬绘搷鐩樹繚璇侀噾=鍗曟墜淇濊瘉閲戦噾棰�鎵嬫暟
 		BigDecimal traderTotal = new BigDecimal("0").add(fSimpleConfig.getTraderMoney())
 				.multiply(new BigDecimal(inputTranLever), MathContext.DECIMAL32);
 
-		// 亏损警告线
+		// 浜忔崯璀﹀憡绾�
 		BigDecimal lossLine = new BigDecimal("0").add(traderTotal.subtract(inputTotalTraderBond)
 				.add(fSimpleConfig.getLineLoss().multiply(new BigDecimal(inputTranLever), MathContext.DECIMAL32)));
-		// 单管理费
+		// 鍗曠鐞嗚垂
 		BigDecimal manageAmount = new BigDecimal("0").add(fSimpleConfig.getFeeManage());
 
-		// 总管理费
+		// 鎬荤鐞嗚垂
 		BigDecimal totalManageAmount = new BigDecimal("0").add(manageAmount);
 
-		// 应付金额
+		// 搴斾粯閲戦
 		BigDecimal payable = new BigDecimal("0").add(inputTotalTraderBond).abs().add(totalManageAmount);
 
-		// 交易费
+		// 浜ゆ槗璐�
 		BigDecimal totalTranFees = new BigDecimal("0").add(inputTranFees);
 
 		if (wuser != null && wuser.getMobile() != null) {
 			BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString());
-			// 验证代金券
+			// 楠岃瘉浠ｉ噾鍒�
 			FSimpleCoupon voucher = this.fSimpleCouponService.get(voucherId);
-			BigDecimal voucherActualMoney = null; // 代金券使用金额
+			BigDecimal voucherActualMoney = null; // 浠ｉ噾鍒镐娇鐢ㄩ噾棰�
 			if (this.fSimpleCouponService.isCouponValid(voucher, 2, 5)) {
 				voucherActualMoney = new BigDecimal(voucher.getMoney() + "");
 				payable = payable.subtract(voucherActualMoney);
@@ -408,10 +408,10 @@ public class UFSimpleProductUserTradeController {
 				st.setLineLoss(lossLine);
 				st.setFeeManage(totalManageAmount);
 				st.setTranFees(totalTranFees);
-				// 审核中
+				// 瀹℃牳涓�
 				st.setStateType(1);
 				st.setBusinessType(type);
-				// 设置代金券相关信息
+				// 璁剧疆浠ｉ噾鍒哥浉鍏充俊鎭�
 				if (this.fSimpleCouponService.isCouponValid(voucher, 2, 5)) {
 					st.setVoucherId(voucher.getId());
 					st.setVoucherMoney(voucher.getMoney());
@@ -421,7 +421,7 @@ public class UFSimpleProductUserTradeController {
 					this.fSimpleProductUserTradeService.executePayable(st, wuser.getMobile(), payable);
 				}
 				request.getSession(false).removeAttribute("tokenTzdr");
-				// TODO 申请操盘，支付成功给工作人员发送Email
+				// TODO 鐢宠鎿嶇洏锛屾敮浠樻垚鍔熺粰宸ヤ綔浜哄憳鍙戦�Email
 				try {
 
 					if (wuser != null) {
@@ -429,7 +429,7 @@ public class UFSimpleProductUserTradeController {
 					}
 
 				} catch (Exception e) {
-					log.info("发送邮件失败", e);
+					log.info("鍙戦�閭欢澶辫触", e);
 				}
 				return ViewConstants.FSimpleProductUserTradeViewJsp.PAY_SUCCESSFUL;
 			} else {
@@ -446,7 +446,7 @@ public class UFSimpleProductUserTradeController {
 	}
 
 	/**
-	 * 跳转方案列表页面
+	 * 璺宠浆鏂规鍒楄〃椤甸潰
 	 * 
 	 * @param modelMap
 	 * @param request
@@ -459,7 +459,7 @@ public class UFSimpleProductUserTradeController {
 	}
 
 	/**
-	 * 获取折扣券
+	 * 鑾峰彇鎶樻墸鍒�
 	 * 
 	 * @param modelMap
 	 * @param businessType
@@ -473,7 +473,7 @@ public class UFSimpleProductUserTradeController {
 			HttpServletResponse response) {
 		JsonResult jsonResult = new JsonResult(true);
 		Map<Object, Object> data = new HashMap<Object, Object>();
-		// 折扣券
+		// 鎶樻墸鍒�
 		List<Map<String, Object>> discount = new ArrayList<>();
 		Object userSession = request.getSession().getAttribute(Constants.TZDR_USER_SESSION);
 		if (null != userSession) {
@@ -486,7 +486,7 @@ public class UFSimpleProductUserTradeController {
 	}
 
 	/**
-	 * 查询方案数据
+	 * 鏌ヨ鏂规鏁版嵁
 	 * 
 	 * @param response
 	 * @param request
@@ -522,7 +522,7 @@ public class UFSimpleProductUserTradeController {
 	}
 
 	/**
-	 * 申请终结
+	 * 鐢宠缁堢粨
 	 * 
 	 * @param modelMap
 	 * @param id
@@ -552,20 +552,20 @@ public class UFSimpleProductUserTradeController {
 			return jsonResult;
 		}
 
-		if (fSimpleFtseUserTrade.getStateType() == 2) { // 不能重复申请
+		if (fSimpleFtseUserTrade.getStateType() == 2) { // 涓嶈兘閲嶅鐢宠
 			jsonResult.setMessage("notRepetitionApply");
 			return jsonResult;
 		}
 
-		if (fSimpleFtseUserTrade.getStateType() != 4) { // 判断是不是操盘中
+		if (fSimpleFtseUserTrade.getStateType() != 4) { // 鍒ゆ柇鏄笉鏄搷鐩樹腑
 			jsonResult.setMessage("applyEndTradeFail");
 			return jsonResult;
 		}
 
-		fSimpleFtseUserTrade.setStateType(2); // 申请终结方案
-		fSimpleFtseUserTrade.setAppEndTime(Dates.getCurrentLongDate()); // 申请终结时间
+		fSimpleFtseUserTrade.setStateType(2); // 鐢宠缁堢粨鏂规
+		fSimpleFtseUserTrade.setAppEndTime(Dates.getCurrentLongDate()); // 鐢宠缁堢粨鏃堕棿
 
-		// 验证折扣券
+		// 楠岃瘉鎶樻墸鍒�
 		FSimpleCoupon discount = this.fSimpleCouponService.get(discountId);
 		if (this.fSimpleCouponService.isCouponValid(discount, 3, businessType)) {
 			fSimpleFtseUserTrade.setDiscountId(discount.getId());
@@ -574,21 +574,21 @@ public class UFSimpleProductUserTradeController {
 		} else {
 			fSimpleProductUserTradeService.update(fSimpleFtseUserTrade);
 		}
-		WUser wuser = wUserService.get(userSessionBean.getId()); // 获取用户信息
-		// TODO 终结方案，给工作人员发送Email
+		WUser wuser = wUserService.get(userSessionBean.getId()); // 鑾峰彇鐢ㄦ埛淇℃伅
+		// TODO 缁堢粨鏂规锛岀粰宸ヤ綔浜哄憳鍙戦�Email
 		try {
 			messagePromptService.sendMessage(PromptTypes.isEndScheme, wuser.getMobile());
 		} catch (Exception e) {
-			log.info("发送邮件失败", e);
+			log.info("鍙戦�閭欢澶辫触", e);
 		}
 		return jsonResult;
 	}
 
 	/**
-	 * 获取需要追加保证金信息
+	 * 鑾峰彇闇�杩藉姞淇濊瘉閲戜俊鎭�
 	 * 
 	 * @param id
-	 *            方案编号
+	 *            鏂规缂栧彿
 	 * @param modelMap
 	 * @param request
 	 * @param response
@@ -605,30 +605,30 @@ public class UFSimpleProductUserTradeController {
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 
-		WUser wuser = wUserService.get(userSessionBean.getId()); // 获取用户信息
+		WUser wuser = wUserService.get(userSessionBean.getId()); // 鑾峰彇鐢ㄦ埛淇℃伅
 
 		FSimpleFtseUserTrade fSimpleUserTrade = fSimpleProductUserTradeService.get(id);
 
-		if (fSimpleUserTrade == null) { // 未找到该方案
+		if (fSimpleUserTrade == null) { // 鏈壘鍒拌鏂规
 			jsonResult.setMessage("notFindData");
 			return jsonResult;
 		}
 
 		Map<Object, Object> data = new HashMap<Object, Object>();
-		data.put("avlBal", wuser.getAvlBal()); // 当前余额
-		data.put("traderTotal", fSimpleUserTrade.getTraderTotal()); // 总操盘金额
+		data.put("avlBal", wuser.getAvlBal()); // 褰撳墠浣欓
+		data.put("traderTotal", fSimpleUserTrade.getTraderTotal()); // 鎬绘搷鐩橀噾棰�
 
 		jsonResult.setData(data);
 		return jsonResult;
 	}
 
 	/**
-	 * 追加保证金
+	 * 杩藉姞淇濊瘉閲�
 	 * 
 	 * @param id
-	 *            方案号TG+ID号
+	 *            鏂规鍙稵G+ID鍙�
 	 * @param appendMoney
-	 *            追加保证金额
+	 *            杩藉姞淇濊瘉閲戦
 	 * @param modelMap
 	 * @param request
 	 * @param response
@@ -640,11 +640,11 @@ public class UFSimpleProductUserTradeController {
 			HttpServletResponse response) throws Exception {
 		JsonResult jsonResult = new JsonResult(true);
 
-		BigDecimal payMoney = new BigDecimal(appendMoney); // 追加保证金
+		BigDecimal payMoney = new BigDecimal(appendMoney); // 杩藉姞淇濊瘉閲�
 
-		BigDecimal defaultMinAppendMoney = new BigDecimal(2000.00); // 默认最小追加保证金2000
+		BigDecimal defaultMinAppendMoney = new BigDecimal(500.00); // 榛樿鏈�皬杩藉姞淇濊瘉閲�000
 
-		if (payMoney.compareTo(defaultMinAppendMoney) < 0) { // 追加金额是否低于默认最小追加保证金
+		if (payMoney.compareTo(defaultMinAppendMoney) < 0) { // 杩藉姞閲戦鏄惁浣庝簬榛樿鏈�皬杩藉姞淇濊瘉閲�
 			jsonResult.setMessage("underDefaultMinAppendMoney");
 			return jsonResult;
 		}
@@ -652,33 +652,33 @@ public class UFSimpleProductUserTradeController {
 		UserSessionBean userSessionBean = (UserSessionBean) request.getSession()
 				.getAttribute(Constants.TZDR_USER_SESSION);
 
-		WUser wuser = wUserService.get(userSessionBean.getId()); // 获取用户信息
+		WUser wuser = wUserService.get(userSessionBean.getId()); // 鑾峰彇鐢ㄦ埛淇℃伅
 
-		BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString()); // 获取用户余额
+		BigDecimal avlBal = new BigDecimal(wuser.getAvlBal().toString()); // 鑾峰彇鐢ㄦ埛浣欓
 
-		if (avlBal.compareTo(payMoney) < 0) { // 判断追加保证金是否大于用户余额
+		if (avlBal.compareTo(payMoney) < 0) { // 鍒ゆ柇杩藉姞淇濊瘉閲戞槸鍚﹀ぇ浜庣敤鎴蜂綑棰�
 			jsonResult.setMessage("insufficientBalance");
 			return jsonResult;
 		}
 
 		FSimpleFtseUserTrade fSimpleFtseUserTrade = fSimpleProductUserTradeService.get(id);
 
-		if (fSimpleFtseUserTrade == null) { // 未找到该方案
+		if (fSimpleFtseUserTrade == null) { // 鏈壘鍒拌鏂规
 			jsonResult.setMessage("notFindData");
 			return jsonResult;
-		} else if (fSimpleFtseUserTrade.getStateType() == 6) { // 已完结
+		} else if (fSimpleFtseUserTrade.getStateType() == 6) { // 宸插畬缁�
 			jsonResult.setMessage("isOver");
 			return jsonResult;
 		}
 
-		// 追加保证金
+		// 杩藉姞淇濊瘉閲�
 		fSimpleProductUserTradeService.addAppendTraderBond(fSimpleFtseUserTrade, appendMoney, wuser);
 
-		// TODO 追加保证金，给工作人员发送Email
+		// TODO 杩藉姞淇濊瘉閲戯紝缁欏伐浣滀汉鍛樺彂閫丒mail
 		try {
 			messagePromptService.sendMessage(PromptTypes.isAddBond, wuser.getMobile());
 		} catch (Exception e) {
-			log.info("发送邮件失败", e);
+			log.info("鍙戦�閭欢澶辫触", e);
 		}
 		return jsonResult;
 	}
