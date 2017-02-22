@@ -154,14 +154,6 @@
 					$("#password").val("");
 					checkValue()
 				})
-				//				$(".accountSelect").change(function(){
-				//					var val=$(".accountSelect").val();
-				//					if(val==1){
-				//						$("#tipsMoni").css("display","block");
-				//						return
-				//					}
-				//					$("#tipsMoni").css("display","none");
-				//				})
 				/*
 				 * 选择账号
 				 */
@@ -290,19 +282,9 @@
 
 				function loginCheckBind() {
 					mui.openWindow("regist.html");
-					//					plus.nativeUI.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。",function(e){
-					//							if(e.index==1){
-					//								plus.device.dial("4008528008",false);
-					//							}
-					//						},
-					//						"400-852-8008",["取消","呼叫"]);
-					//					
-					////					mui.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。","提示",["确认"],function(e){
-					////					})
 				}
 				document.getElementById("forgetPassword").addEventListener("tap", function() {
 					mui.openWindow("retrievePassword.html");
-					//					mui.callService();
 				});
 				document.getElementById("backClose").addEventListener("tap", function() {
 					if(Transfer.backpageID) {
@@ -312,7 +294,6 @@
 					}
 				});
 				$("#operateLogin").click(function() {
-					//					if(username == null){
 					account = document.getElementById("account").value;
 					pwd = $.base64.encode(document.getElementById("password").value);
 					if(mui.isnull(account)) {
@@ -378,9 +359,6 @@
 							clearTimeout(loginSetTimeOut);
 						}
 					}
-					//					}else{
-					//						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
-					//					}
 				});
 
 				function backReload() {
