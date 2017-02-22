@@ -29,7 +29,7 @@
         			var openPrice = (parameters[i][OpenPriceSubscript]).toFixed(dosizeL);
 		            var closePrice = (parameters[i][LastPriceSubscript]).toFixed(dosizeL);
 		            var sgData = [str2,openPrice,closePrice,(parameters[i][LowPriceSubscript]).toFixed(dosizeL),(parameters[i][HighPriceSubscript]).toFixed(dosizeL),parameters[i][DateTimeStampSubscript]];
-			         rawData[lent+i] = sgData; 
+			        rawData[lent+i] = sgData; 
 	       		};
 	       		
     	    }
@@ -102,6 +102,9 @@
              	 },
                	formatter: function(params) {
                   var time  = params[0].name;
+                   if(time==null || time==""){
+                  	return
+                  }
                   var kd    = params[0].data;
                   var ma5 = params[1].data;
                   var ma10 = params[2].data;
