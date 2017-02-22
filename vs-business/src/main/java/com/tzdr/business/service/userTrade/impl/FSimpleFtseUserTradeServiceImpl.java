@@ -555,6 +555,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			simpleFtseUserTrade.setSmallCrudeOilMarketLever(wellGoldA50.getSmallCrudeOilMarketLever());//小原油
 			simpleFtseUserTrade.setDaxtranMinActualLever(wellGoldA50.getDaxtranMinActualLever());//迷你德国DAX指数
 		}
+		
+		simpleFtseUserTrade.setEndType(wellGoldA50.getEndType());	//设置结算方式
 		/**
 		 * 获取汇率
 		 */
@@ -720,9 +722,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		simpleFtseUserTrade.setEndActualMoney(endActualMoney); // 设置实际抵扣金额
 
 		simpleFtseUserTrade.setEndAmount(endAmount); // 设置实际结算金额
-		if(simpleFtseUserTrade.getEndType() == null || simpleFtseUserTrade.getEndType() != 1){  //设置手动计算
-			simpleFtseUserTrade.setEndType(0);
-		}
+		
+		
 		simpleFtseUserTrade.setStateType(3); // 待结算
 		simpleFtseUserTrade.setOperator(authService.getCurrentUser().getRealname());
 		this.update(simpleFtseUserTrade);

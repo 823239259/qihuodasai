@@ -84,7 +84,7 @@ var Quote = {
 		Quote.doSendMessage(QuoteMethod.LoginMethod, '{"UserName":"' + username + '","PassWord":"' + password + '","Source":"web"}');
 	},
 	/**
-	 * 登录请求
+	 * 登出请求
 	 * @param username
 	 */
 	doLoginOut: function(username) {
@@ -163,11 +163,12 @@ function quoteHandleData(evt){
 	var data = evt.data;
 	var jsonData = JSON.parse(data);
 	var method = jsonData.Method;
+	var parameters = jsonData.Parameters;
 	if(method == "OnRspLogin"){ // 登录行情服务器
 		Quote.doAllQryCommodity();
 	}else if(method == "OnRspQryCommodity"){ // 行情服务器支持的品种
-		
-		subscribe(jsonData.Parameters);
+		subscribe(parameters);
+		initTradeClient(trade_username,trade_password);//连接交易
 	}
 }
 
@@ -212,7 +213,6 @@ function cacheContractAttribute(jQuote) {
 }
 function getCacheContractAttribute(commodityNo, attr) {
 	if (isEmpty(jCacheContractAttribute[commodityNo]) || isEmpty(jCacheContractAttribute[commodityNo][attr])) {
-		console.log("13478314138930");
 		return 0;
 	}
 	return jCacheContractAttribute[commodityNo][attr];

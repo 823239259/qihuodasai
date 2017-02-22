@@ -1,3 +1,4 @@
+
 /**
  * 拒绝
  */
@@ -82,56 +83,68 @@ function passClose() {
 	$("#passWin").window('close');
 };
 
+	
+
 /**
  * 录入
  */
 var bussType = "";
 
 
-function input(){
+function autoinput(){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
 		var bussinessType = rows[0].businessType;
 		bussType = bussinessType;
+		var id = rows[0].id;
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
 			return;
 		}		
-		var id = rows[0].id;
-		
-		$.ajax({
-			url:Check.rootPath() +"/admin/internation/future/getFtse",
-			type:"get",
-			data:{
-				id:id
-			},
-			success:function(result){
-				var tranAccount = result.data.fste.tranAccount;
-				var tranPassword = result.data.fste.tranPassword;
-				initQuoteClient();//连接行情
-				initTradeClient(tranAccount,tranPassword);//连接交易
-				
-				if(rspQryFlag == false){
-					Check.messageBox("提示","有持仓，不能结算");
-					return false;
-				}else if(loginCode == -1){
-					Check.messageBox("提示","结算的账户号或者密码不正确");
-					return false;
-				}else if(logoutCode == -1){
-					Check.messageBox("提示","登录交易系统没有正常退出");
-					return false;
+		if(rows[0].stateType == "待结算"){
+			$.ajax({
+				url:Check.rootPath() +"/admin/internation/future/getFtse",
+				type:"get",
+				data:{
+					id:id
+				},
+				success:function(result){
+					var data = result.data.fste;
+					var tradeDetail = result.data.tradeDetail;
+					var html = appendTradeDetailHtml(tradeDetail, 0);
+					$("#tradeDetail").html(html);
+					handleData(data,0);
+					inputLever();
+					$("#inputWin .easyui-validatebox").attr("disabled","disabled");
+					$("#inputWin").show();
+					$("#inputWin").window('open');
 				}
-			}
-		});
-		$("#inputWin").show();
-		$("#inputWin").window('open');
+			});
+			
+		}		
+		if(rows[0].stateType == "申请结算" || rows[0].stateType == "操盘中"){
+			$.ajax({
+				url:Check.rootPath() +"/admin/internation/future/getFtse",
+				type:"get",
+				data:{
+					id:id
+				},
+				success:function(result){
+					var tranAccount = result.data.fste.tranAccount;
+					var tranPassword = result.data.fste.tranPassword;
+					evaluation(tranAccount,tranPassword);
+				    initQuoteClient()//连接行情
+				}
+			});
+		}
+		
 		$("#mobile").val(rows[0].mobile);
 		$("#Account").val(rows[0].tranAccount);
 		$("#traderBond").val(rows[0].traderBond);
 		$("#tradeDetail").html("");
 	}
 }
-
+var endType = 0;
 function testcheck(tranAccount,todayMoeny){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	var id = rows[0].id;
@@ -150,7 +163,11 @@ function testcheck(tranAccount,todayMoeny){
 			$("#tradeDetail").html(html);
 			handleData(leadLever,1);
 			inputLever();
-			
+			endType = 1;
+			Trade.doLoginOut(tranAccount,"");
+			$("#inputWin .easyui-validatebox").attr("disabled","disabled");
+			$("#inputWin").show();
+			$("#inputWin").window('open');
 		}						
 	});
 }
@@ -296,7 +313,6 @@ function inputLever() {
 			$("#scTradeNumTR").show();
 			$("#daxMinTradeNumTR").show();
 			$("#inputWin").css("height","457px");
-		
 		}else
 		{
 			$("#a50td").html("交易手数:");
@@ -316,7 +332,6 @@ function inputLever() {
 			$("#scTradeNumTR").hide();
 			$("#daxMinTradeNumTR").hide();
 			$("#inputWin").css("height","457px");
-
 		}
 	}
 };
@@ -390,7 +405,7 @@ function handInputSave() {
 				"agTranActualLever":agTranActualLever,"heStockMarketLever":heStockMarketLever,"xhStockMarketLever":xhStockMarketLever,
 				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,
 				"smallCrudeOilMarketLever":smallCrudeOilMarketLever,"daxtranMinActualLever":daxtranMinActualLever,
-				"tradeDetail":localDataLever
+				"endType":endType,"tradeDetail":localDataLever
 				} ,
 				function(data){
 					eyWindow.closeProgress();
@@ -563,7 +578,7 @@ function tradeCount() {
 			url:Check.rootPath() +"/admin/internation/future/getFtse",
 			type:"get",
 			data:{
-				id:id
+				id:rows[0].id
 			},
 			success:function(result){
 				var data = result.data.fste;

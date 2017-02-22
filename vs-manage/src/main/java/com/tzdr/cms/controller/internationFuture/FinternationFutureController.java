@@ -498,13 +498,10 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	 * @param resp
 	 * @return
 	 */
-	@RequestMapping(value="getAllDetails")
+	@RequestMapping(value="/getAllDetails")
 	@ResponseBody
 	public JsonResult getAllDetails(HttpServletRequest request,HttpServletResponse resp,String tranAccount,String todayMoeny,String id){
 		List<TradeDetail> tradeDetails = tradeDetailService.getByTranAccounts(tranAccount);
-//		if(tradeDetails == null || tradeDetails.size() == 0){
-//			return new JsonResult(false,"无成交记录");
-//		}
 		//计算交易手数
 		List<TradeExclDetailVos> detailVos = new ArrayList<TradeExclDetailVos>();
 		TradeExclDetailVos detailVo = new TradeExclDetailVos();
@@ -549,8 +546,6 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		//计算交易盈亏
 		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,parities,new BigDecimal(todayMoeny),traderTotal);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);
-		ftse.setEndType(1);  //自动结算
-		simpleFtseUserTradeService.save(ftse);
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);
 		resultJson.appendData("tradeDetails", tradeDetails);

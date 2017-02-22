@@ -18,18 +18,15 @@ function connectTradeServer() {
  * 为账号，密码赋值
  */
 
-function assign(tranAccount,tranPassword){
+function evaluation(tranAccount,tranPassword){
 	trade_username = tranAccount;
 	trade_password = tranPassword;
-	console.log("trade_username: "+trade_username);
-	console.log("trade_password: "+trade_password);
 }
 
 /**
  * 交易初始化加载
  */
 function initTradeClient(tranAccount,tranPassword) {
-	assign(tranAccount,tranPassword);
 	
 	if(tradeSocket == null) {
 		connectTradeServer();
@@ -427,20 +424,6 @@ var Trade = {
 }
 
 
-/**
- * 登录消息
- */
-var loginCode = 0;
-/**
- * 退出消息
- */
-var logoutCode = 0;
-/**
- * 判断有无持仓
- */
-var rspQryFlag = true;
-
-var todayMoeny = 0.0;
 
 /**
  * 交易接口返回处理
@@ -453,7 +436,7 @@ function handleMessage(evt) {
 	var method = jData.Method;
 	var parameters = jData.Parameters;
 	if (method != "OnRspQryHold" &&		// 持仓返回结束需要做合并处理
-	    method != "OnRspQryAccount") { 		// 资金返回结束需要做合并处理
+	    method != "OnRspQryAccount" && method != "OnRspQryTrade") { 		// 资金返回结束需要做合并处理
 		if (parameters == null || typeof(parameters) == "undefined") {
 			vsLog("返回交易参数不做处理【" + dataString + "】");
 			return;
@@ -469,7 +452,8 @@ function handleMessage(evt) {
 				// 查询持仓
 				Trade.doSendMessage(TradeMethod.QryHoldUrl,'{"ClientNo":"'+trade_username+'"}');
 			} else {
-				loginCode = -1;
+				Check.messageBox("提示","结算的账户号或者密码不正确");
+				return;
 			}
     	}	
     	break;
@@ -479,7 +463,8 @@ function handleMessage(evt) {
 			if(code == 0) {
 				//退出成功
 			}else{
-				logoutCode = -1;
+				Check.messageBox("提示","登录交易系统没有正常退出");
+				return;
 			}
 		}	
     	break;
@@ -494,10 +479,11 @@ function handleMessage(evt) {
 				Trade.doQryCondition(trade_username);
 				//查询订单成交记录
 				Trade.doTrade(trade_username); 
-				// 查询个人账户
-				Trade.doAccount(trade_username);
+				
 			} else {//有持仓
-				rspQryFlag = false; 
+				Check.messageBox("提示","有持仓，不能结算");
+				Trade.doLoginOut(tranAccount,"");
+				return;
 			}
     	}	
     	break;
@@ -548,67 +534,71 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
-    		var tradeNo = parameters.TradeNo;
-    		var commodityNo = parameters.CommodityNo;
-    		var exchangeNo = parameters.ExchangeNo;
-    		var contractNo = parameters.ContractNo;
-    		var orderSysID = parameters.OrderSysID;
-    		var orderRef = parameters.OrderRef;
-    		var orderID = parameters.OrderID;
-    		var drection = parameters.Drection;
-    		var tradeNum = parameters.TradeNum;
-    		var tradePrice = parameters.TradePrice;
-    		var tradeDateTime = parameters.TradeDateTime;
-    		var tradeFee = parameters.TradeFee;
-    		var clientNo = parameters.ClientNo;
-    		var clientNo = trade_username;
-    		var currencyNo = getCacheContractAttribute(commodityNo, "CurrencyNo");  //获取对应的币种简称??
-    		var tradeType = "正常单";
-    		var orderType = "客户单";//or 强平单
-    		var orderUserno = null;
-    		if(orderType == "客户单"){
-    			orderUserno = clientNo;
-    		}else if(orderType == "强平单"){
-    			orderUserno = "QPServer";
-    		}
-    		var buyNum = 0;
-    		var sellNum = 0;
-    		if(drection == 0){
-    			buyNum = tradeNum;
+    		if(isEmpty(parameters)){
+    			//延迟5秒 查询个人账户
+    			setTimeout("Trade.doAccount(trade_username)",5000);
     		}else{
-    			sellNum = tradeNum;
-    		}
-    		var rows = $("#hasAuditData").datagrid('getSelections');
-    		var id = rows[0].id;
-    		if(parameters != null && typeof(parameters) != "undefined"){  
+	    		var tradeNo = parameters.TradeNo;
+	    		var commodityNo = parameters.CommodityNo;
+	    		var exchangeNo = parameters.ExchangeNo;
+	    		var contractNo = parameters.ContractNo;
+	    		var orderSysID = parameters.OrderSysID;
+	    		var orderRef = parameters.OrderRef;
+	    		var orderID = parameters.OrderID;
+	    		var drection = parameters.Drection;
+	    		var tradeNum = parameters.TradeNum;
+	    		var tradePrice = parameters.TradePrice;
+	    		var tradeDateTime = parameters.TradeDateTime;
+	    		var tradeFee = parameters.TradeFee;
+	    		var clientNo = parameters.ClientNo;
+	    		var clientNo = trade_username;
+	    		var currencyNo = getCacheContractAttribute(commodityNo, "CurrencyNo");  //获取对应的币种简称??
+	    		var tradeType = "正常单";
+	    		var orderType = "客户单";//or 强平单
+	    		var orderUserno = null;
+	    		if(orderType == "客户单"){
+	    			orderUserno = clientNo;
+	    		}else if(orderType == "强平单"){
+	    			orderUserno = "QPServer";
+	    		}
+	    		var buyNum = 0;
+	    		var sellNum = 0;
+	    		if(drection == 0){
+	    			buyNum = tradeNum;
+	    		}else{
+	    			sellNum = tradeNum;
+	    		}
+	    		var rows = $("#hasAuditData").datagrid('getSelections');
+	    		var id = rows[0].id;
+	    		
     			$.post(Check.rootPath() + "/admin/internation/future/detailSave",
-    					{	
-    						"tradeDate":tradeDateTime,
-    						"userNo":clientNo,
-    						"currencyNo":currencyNo,
-    						"exchangeNo":exchangeNo,
-    						"commodityNo":commodityNo,
-    						"buyNum":buyNum,
-    						"sellNum":sellNum,
-    						"tradePrice":tradePrice,
-    						"free":tradeFee,
-    						"orderType":orderType,
-    						"orderUserno":orderUserno,
-    						"tradeType":tradeType,
-    						"tradeNo":tradeNo,
-    						"fastId":id
-    					} ,
-    					function(data){
-    						if(data.success == true){
-    							console.log(data.message);
-    						}
-    				});
+					{	
+						"tradeDate":tradeDateTime,
+						"userNo":clientNo,
+						"currencyNo":currencyNo,
+						"exchangeNo":exchangeNo,
+						"commodityNo":commodityNo,
+						"buyNum":buyNum,
+						"sellNum":sellNum,
+						"tradePrice":tradePrice,
+						"free":tradeFee,
+						"orderType":orderType,
+						"orderUserno":orderUserno,
+						"tradeType":tradeType,
+						"tradeNo":tradeNo,
+						"fastId":id
+					} ,
+					function(data){
+						if(data.success == true){
+							console.log(data.message);
+						}
+				});
+    			
     		}
 		}	
     	break;
     	
     	case "OnRspQryAccount":	{	// 查询个人账户信息回复
-    		
 			// 资金返回结束显示
 			if (isEmpty(parameters)) {
 				todayMoeny = cacheTotalAccount.TodayAmount;
