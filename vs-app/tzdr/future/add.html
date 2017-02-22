@@ -54,7 +54,6 @@
     			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
     			return;
     		}
-    		console.log(app_fund)
     		if(app_fund<500){
     			mui.toast("追加金额最低500元！！");
     			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
@@ -79,7 +78,6 @@
 	    			"id":win.did,
 					"addBond":app_fund
 	    		},function(result){
-	    			console.log(result);
 	    			mui.toast("申请成功，系统会尽快处理！");
 	    			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用 
 	    			mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
