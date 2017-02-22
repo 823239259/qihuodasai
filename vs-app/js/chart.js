@@ -178,6 +178,23 @@ mui.plusReady(function(){
 	    };
 	}
     function sendHistoryMessage(num){
+    	rawData=[]; 
+   		dayCandlestickChartData=[];
+   		timeData.timeLabel=[];
+   		timeData.prices=[];
+   		volumeChartData.time=[];
+   		volumeChartData.volume=[];
+   		volumeTime=[];
+   		volumeV=[];
+   		newData=[];
+   		CandlestickVolumeData={
+	    	time:[],
+	    	volume:[]
+		};
+	 	lightChartTime={
+			"time":[],
+			"price":[]
+		}    
         var exchangeNo = $("#exchangeNo").val();
         var commodityNo = $("#commodeityNo").val();
         var contractNo = $("#contractNo").val();
@@ -599,23 +616,6 @@ mui.plusReady(function(){
 		$("#orderPrice").attr("placeholder","市价");
 		$("#buyBtn_P").text("市价");
 		$("#sellBtn_P").text("市价");
-   		rawData=[]; 
-   		dayCandlestickChartData=[];
-   		timeData.timeLabel=[];
-   		timeData.prices=[];
-   		volumeChartData.time=[];
-   		volumeChartData.volume=[];
-   		volumeTime=[];
-   		volumeV=[];
-   		newData=[];
-   		 CandlestickVolumeData={
-		    	time:[],
-		    	volume:[]
-		    };
-	 lightChartTime={
-			"time":[],
-			"price":[]
-		}    
     	sendHistoryMessage(0);
     })
    
