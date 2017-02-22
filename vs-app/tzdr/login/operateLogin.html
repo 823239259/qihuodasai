@@ -1,425 +1,433 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../js/mui.min.js"></script>
-		 <script src="../../js/common.js"></script>
-		 <script type="text/javascript" src="../../js/common.config.js" ></script>
-		 <script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
-		 <script type="text/javascript" src="../../js/jquery.base64.js" ></script>
-		<script type="text/javascript" src="../../js/trade.config.js" ></script>
-		<script type="text/javascript" src="../../js/util.js" ></script>
-		 <script type="text/javascript" src="../../js/trade.connection.js" ></script>
-		 <script type="text/javascript" src="../../js/trade.send.js" ></script>
-		 <link rel="stylesheet" href="../../css/own.css" />
+		<script src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/common.config.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="../../js/jquery.base64.js"></script>
+		<script type="text/javascript" src="../../js/trade.config.js"></script>
+		<script type="text/javascript" src="../../js/util.js"></script>
+		<script type="text/javascript" src="../../js/trade.connection.js"></script>
+		<script type="text/javascript" src="../../js/trade.send.js"></script>
+		<link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id = "backClose" ><i>返回</i></a>
-		<h1 class="mui-title">操盘登录</h1>
-		<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
-	</header>
-	<div class="mui-content" class="operateLogin">
-		<div id="inputList">
-			<div id="accountType" class="commStyle">
-				<label>账号类型：</label>
-				<select class="accountSelect mui-btn mui-btn-block">
-					<option class="mui-selected"  value="0">实盘账号</option>
-					<option class="mui-selected" id="checkContent" value="1">模拟盘账号</option>
-				</select>
-				<img src="../../images/down.png" id="selectBg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id="backClose"><i>返回</i></a>
+			<h1 class="mui-title">操盘登录</h1>
+			<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
+		</header>
+		<div class="mui-content" class="operateLogin">
+			<div id="inputList">
+				<div id="accountType" class="commStyle">
+					<label>账号类型：</label>
+					<select class="accountSelect mui-btn mui-btn-block">
+						<option class="mui-selected" value="0">实盘账号</option>
+						<option class="mui-selected" id="checkContent" value="1">模拟盘账号</option>
+					</select>
+					<img src="../../images/down.png" id="selectBg">
+				</div>
+				<div class="commStyle">
+					<label>登录账号：</label>
+					<input type="text" placeholder="请输入您的账号" id='account' oninput="checkValue()" />
+					<img src="../../images/close.png" id="accountClear">
+				</div>
+				<div class="commStyle">
+					<label>登录密码：</label>
+					<input type="password" placeholder="请输入您的密码" id="password" oninput="checkValue()" />
+					<img src="../../images/close.png" id="passwordClear">
+				</div>
+				<div class="mui-content-padded" style="margin-top: 20px;">
+					<button class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
+					<button id='regLogin' class="mui-btn mui-btn-block">实盘开户申请</button>
+				</div>
+				<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
+					<p id="loginAgree"><span id="checkBox"><i ></i></span>
+						<sapn>阅读并接受</sapn>
+						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a>
+					</p>
+					<p id="tipsMoni">模拟盘账密为您的维胜账密，如有问题请拨打400-852-8008</p>
+				</div>
 			</div>
-			<div class="commStyle">
-				<label>登录账号：</label>
-				<input type="text"  placeholder="请输入您的账号" id='account' oninput="checkValue()"/>
-				<img src="../../images/close.png" id="accountClear">
-			</div>
-			<div class="commStyle">
-				<label>登录密码：</label>
-				<input type="password"  placeholder="请输入您的密码" id="password" oninput="checkValue()"/>
-				<img src="../../images/close.png" id="passwordClear">
-			</div>
-			<div class="mui-content-padded" style="margin-top: 20px;">
-				<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
-				<button id='regLogin' class="mui-btn mui-btn-block">实盘开户申请</button>
-			</div>
-			<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
-				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>阅读并接受</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a></p>
-				<p id="tipsMoni">模拟盘账密为您的维胜账密，如有问题请拨打400-852-8008</p>
+			<div class="top"></div>
+			<div class="bottom"></div>
+			<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
+			<div id="username_list">
+				<ul>
+				</ul>
 			</div>
 		</div>
-		<div class="top"></div><div class="bottom"></div>
-		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
-		<div id="username_list">
-			<ul>
-			</ul>
-		</div>
-	</div>
 		<script type="text/javascript">
-		    initTradeConfig();
+			initTradeConfig();
 			mui.init();
-				var width=window.innerWidth;
-					$(".commStyle input,.commStyle select").css({
-						"width":width-120+"px",
-					});
-					$("#username_list li").css({
-						"width":width-115+"px"
-					})
-			mui.plusReady(function(){
+			var width = window.innerWidth;
+			$(".commStyle input,.commStyle select").css({
+				"width": width - 120 + "px",
+			});
+			$("#username_list li").css({
+				"width": width - 115 + "px"
+			})
+			mui.plusReady(function() {
 				/*加载新手指南*/
-				if(plus.storage.getItem("QuotationGuidanceLogin")==null){
+				if(plus.storage.getItem("QuotationGuidanceLogin") == null) {
 					bindGuidance()
-					plus.storage.setItem("QuotationGuidanceLogin","1");
+					plus.storage.setItem("QuotationGuidanceLogin", "1");
 				}
-				function bindGuidance(){
-					var height=window.innerHeight;
-						$(".top").css({
-							"height":height+"px",
-							"background-image": "url(../../images/quotationLogin.png)",
-							"display":"block",
+
+				function bindGuidance() {
+					var height = window.innerHeight;
+					$(".top").css({
+						"height": height + "px",
+						"background-image": "url(../../images/quotationLogin.png)",
+						"display": "block",
+					});
+					$("#closeDiv").css({
+						"display": "block"
+					});
+					$("#closeDiv").click(function() {
+						$(".top,#closeDiv,.bottom").css({
+							"display": "none",
 						});
-						$("#closeDiv").css({
-							"display":"block"
-						});
-						$("#closeDiv").click(function(){
+					});
+					var clickNum = 0;
+					$(".top").click(function() {
+						if(clickNum == 0) {
+							$(".top").css({
+								"height": 263 + "px",
+								"background-color": "rgba(0,0,0,0.8)",
+								"background-image": "none",
+								"top": "0px"
+							});
+							$(".bottom").css({
+								"display": "block",
+								"bottom": "0px",
+								"left": "0px",
+								"height": height - 263 - 40 + "px",
+								"background-image": "url(../../images/quotationLogin1.png)",
+							})
+						} else {
 							$(".top,#closeDiv,.bottom").css({
 								"display": "none",
 							});
+						};
+						clickNum++;
+					});
+					$(".bottom").click(function() {
+						$(".top,#closeDiv,.bottom").css({
+							"display": "none",
 						});
-						var clickNum=0;
-						$(".top").click(function(){
-							if(clickNum==0){
-								$(".top").css({
-									"height":263+"px",
-									"background-color":"rgba(0,0,0,0.8)",
-									"background-image":"none",
-									"top":"0px"
-								});
-								$(".bottom").css({
-									"display":"block",
-									"bottom":"0px",
-									"left":"0px",
-									"height":height-263-40+"px",
-									"background-image": "url(../../images/quotationLogin1.png)",
-								})
-							}else{
-								$(".top,#closeDiv,.bottom").css({
-									"display": "none",
-								});
-							};
-							clickNum++;
-						});
-						$(".bottom").click(function(){
-								$(".top,#closeDiv,.bottom").css({
-									"display": "none",
-								});
-						})
+					})
 				};
 				var islogin = false;
-				var num=0
+				var num = 0
 				$("#checkBox i").val(1);
-				$("#checkBox").click(function(){
-					if(num==0){
+				$("#checkBox").click(function() {
+					if(num == 0) {
 						$("#checkBox i").val(2);
 						$("#checkBox i").css({
-							"background-color":"rgba(0, 0, 0, 0)" ,
+							"background-color": "rgba(0, 0, 0, 0)",
 						})
-						num=1
-					}else{
+						num = 1
+					} else {
 						$("#checkBox i").val(1);
-						num=0;
+						num = 0;
 						$("#checkBox i").css({
-							"background-color":"#fcc900" ,
+							"background-color": "#fcc900",
 						})
 					}
 				});
 				/*绑定事件
 				 */
-				$("#accountClear").click(function(){
+				$("#accountClear").click(function() {
 					$("#account").val("");
 					checkValue()
 				});
-				$("#passwordClear").click(function(){
+				$("#passwordClear").click(function() {
 					$("#password").val("");
 					checkValue()
 				})
-//				$(".accountSelect").change(function(){
-//					var val=$(".accountSelect").val();
-//					if(val==1){
-//						$("#tipsMoni").css("display","block");
-//						return
-//					}
-//					$("#tipsMoni").css("display","none");
-//				})
+				//				$(".accountSelect").change(function(){
+				//					var val=$(".accountSelect").val();
+				//					if(val==1){
+				//						$("#tipsMoni").css("display","block");
+				//						return
+				//					}
+				//					$("#tipsMoni").css("display","none");
+				//				})
 				/*
 				 * 选择账号
 				 */
-				var user_mobile=mui.cacheUser.get(tzdr.constants.user_mobile);
-				var user=[];
-				if(user_mobile==null){
-				}else{
-						var paramUrl={
-							url:"login.html"
-						}
-						mui.app_request("/operateLogin",{mobile:user_mobile},function(result){
-						var data=result.data;
-						var Len=data.length;
-						for(var i=0;i<=Len;i++){
-							if(i==Len){
-								
-							}else{
-								var acount={};
-								acount.tranAccount=data[i].tranAccount;
-								acount.tranPassword=data[i].tranPassword;
-								user[i]=acount;
-								$("#username_list ul").append("<li>"+data[i].tranAccount+"</li>")
+				var user_mobile = mui.cacheUser.get(tzdr.constants.user_mobile);
+				var user = [];
+				if(user_mobile == null) {} else {
+					var paramUrl = {
+						url: "login.html"
+					}
+					mui.app_request("/operateLogin", { mobile: user_mobile }, function(result) {
+						var data = result.data;
+						var Len = data.length;
+						for(var i = 0; i <= Len; i++) {
+							if(i == Len) {
+
+							} else {
+								var acount = {};
+								acount.tranAccount = data[i].tranAccount;
+								acount.tranPassword = data[i].tranPassword;
+								user[i] = acount;
+								$("#username_list ul").append("<li>" + data[i].tranAccount + "</li>")
 							}
 						};
 						$("#username_list li").css({
-							"width":width-115+"px"
+							"width": width - 115 + "px"
 						});
-						$("#username_list ul li").on("tap",function(){
-							var index=$(this).index();
-								$("#account").val(user[index].tranAccount);
-								$("#password").val(user[index].tranPassword);
-								$("#username_list").css({
-									"display":"none"
-								});
-								checkValue();
+						$("#username_list ul li").on("tap", function() {
+							var index = $(this).index();
+							$("#account").val(user[index].tranAccount);
+							$("#password").val(user[index].tranPassword);
+							$("#username_list").css({
+								"display": "none"
+							});
+							checkValue();
 						});
-					},function(result){
-					},paramUrl);
+					}, function(result) {}, paramUrl);
 				}
-				var accountEnd = endLoginAccount == null?"":endLoginAccount;
-				if(accountEnd != ""){
+				var accountEnd = endLoginAccount == null ? "" : endLoginAccount;
+				if(accountEnd != "") {
 					$("#userAcount").show();
-				}   
+				}
 				$("#account").val(accountEnd);
-				
-				if($("#account").val()!="" || $("#account").val()!=null){
+
+				if($("#account").val() != "" || $("#account").val() != null) {
 					$("#operateLogin").css({
-						"background-color":"#fcc900"
+						"background-color": "#fcc900"
 					});
 				}
 				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
-				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null){
+				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null) {
 					$(".accountSelect").val(tradeWebSocketIsMock);
-				}else{   
+				} else {
 					$(".accountSelect").val(0);
-					tradeWebSocketIsMock = 0; 
-				}   
-				getVersion();    
-				$(".accountSelect").change(function(){
+					tradeWebSocketIsMock = 0;
+				}
+				getVersion();
+				$(".accountSelect").change(function() {
 					var $this = $(this);
-					var val = $this.val(); 
+					var val = $this.val();
 					setTradeConfig(val);
 					checkValue();
-						if(val==0){
-							 $("#account").bind("focus",function(){
-							  	$("#username_list").css({
-							  		"display":"block"
-							  	})
-							  });
-							  $("#regLogin").unbind("tap",loginCheckBind);
-								$("#regLogin").bind("tap",loginCheck);
-								$("#regLogin").text("实盘开户申请")
-						}else{
-							$("#account").unbind("focus");
-							$("#regLogin").unbind("tap",loginCheck);
-							$("#regLogin").bind("tap",loginCheckBind);
-							$("#regLogin").text("模拟盘开户申请")
-						}
-				}); 
-				  $("#account").bind("focus",function(){
-				  	$("#username_list").css({
-				  		"display":"block"
-				  	})
-				  });
-				   $("#account").bind("blur",function(){
-				  	$("#username_list").css({
-				  		"display":"none"
-				  	});
-				  });
-					   if($("#account").val().length>0){
-						$("#accountClear").css({
-							"display":"block"
+					if(val == 0) {
+						$("#account").bind("focus", function() {
+							$("#username_list").css({
+								"display": "block"
+							})
 						});
+						$("#regLogin").unbind("tap", loginCheckBind);
+						$("#regLogin").bind("tap", loginCheck);
+						$("#regLogin").text("实盘开户申请")
+					} else {
+						$("#account").unbind("focus");
+						$("#regLogin").unbind("tap", loginCheck);
+						$("#regLogin").bind("tap", loginCheckBind);
+						$("#regLogin").text("模拟盘开户申请")
 					}
-					if($("#password").val().length>0){
-						$("#passwordClear").css({
-							"display":"block"
-						});
-					}
+				});
+				$("#account").bind("focus", function() {
+					$("#username_list").css({
+						"display": "block"
+					})
+				});
+				$("#account").bind("blur", function() {
+					$("#username_list").css({
+						"display": "none"
+					});
+				});
+				if($("#account").val().length > 0) {
+					$("#accountClear").css({
+						"display": "block"
+					});
+				}
+				if($("#password").val().length > 0) {
+					$("#passwordClear").css({
+						"display": "block"
+					});
+				}
 				/**
 				 * 登录超时处理 
 				 */
 				var loginSetTimeOut = null;
-				function setTimeOutIsLogin(){
-					loginSetTimeOut = setTimeout(function(){
-						if(!islogin){
+
+				function setTimeOutIsLogin() {
+					loginSetTimeOut = setTimeout(function() {
+						if(!islogin) {
 							plus.nativeUI.closeWaiting();
 							mui.toast("网络不给力");
 						}
-					},10000);
+					}, 10000);
 				}
-				var Transfer=plus.webview.currentWebview();
+				var Transfer = plus.webview.currentWebview();
 				var commdityNo = Transfer.commdityNo;
 				var account = null;
 				var pwd = null;
-				$("#regLogin").bind("tap",loginCheck);
-				function loginCheck(){
+				$("#regLogin").bind("tap", loginCheck);
+
+				function loginCheck() {
 					$(".top,.bottom").css({
-			    			"display":"none",
-			    		});
+						"display": "none",
+					});
 					mui.openWindow({
-							url:"../future/cp.html",
-							id:"cp"
-						});
+						url: "../future/cp.html",
+						id: "cp"
+					});
 				}
-				function loginCheckBind(){
+
+				function loginCheckBind() {
 					mui.openWindow("regist.html");
-//					plus.nativeUI.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。",function(e){
-//							if(e.index==1){
-//								plus.device.dial("4008528008",false);
-//							}
-//						},
-//						"400-852-8008",["取消","呼叫"]);
-//					
-////					mui.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。","提示",["确认"],function(e){
-////					})
+					//					plus.nativeUI.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。",function(e){
+					//							if(e.index==1){
+					//								plus.device.dial("4008528008",false);
+					//							}
+					//						},
+					//						"400-852-8008",["取消","呼叫"]);
+					//					
+					////					mui.confirm("模拟操盘赢取现金大奖期待您的加入，拨打400-852-8008免费获取账号。","提示",["确认"],function(e){
+					////					})
 				}
-				document.getElementById("forgetPassword").addEventListener("tap",function(){
+				document.getElementById("forgetPassword").addEventListener("tap", function() {
 					mui.openWindow("retrievePassword.html");
-//					mui.callService();
+					//					mui.callService();
 				});
-				document.getElementById("backClose").addEventListener("tap",function(){
-					if (Transfer.backpageID){
+				document.getElementById("backClose").addEventListener("tap", function() {
+					if(Transfer.backpageID) {
 						backReload();
-					}else{
+					} else {
 						mui.back();
 					}
 				});
-				$("#operateLogin").click(function(){
-//					if(username == null){
-						account=document.getElementById("account").value;
-						pwd=$.base64.encode(document.getElementById("password").value);
-						if(mui.isnull(account)){
-			    			mui.toast("请输入账号");
-			    			return; 
-							};
-			
-						if(mui.isnull(pwd)){
-			    			mui.toast("请输入密码");
-			    			return;
-						}
-						if($("#checkBox i").val()==1){
-						        
-						}else{
-						     mui.toast("您还未勾选协议"); 
-						   return;
-						 }; 
-						setTradeConfig(tradeWebSocketIsMock);
-						plus.nativeUI.showWaiting( "正在登录中" );
-						setTimeOutIsLogin();
-						var loginSocket = new WebSocket(socketUrl);
-						loginSocket.onopen = function(){
-							loginSocket.send('{"Method":"'+TradeUrl.LoginUrl+'","Parameters":{"ClientNo":"'+account+'","PassWord":"'+pwd+'","IsMock":'+tradeWebSocketIsMock+',"Version":"'+tradeWebSocketVersion+'","Source":"'+Source+'"}}');
-						}
-						loginSocket.onmessage = function(evt){
-							var dataString = evt.data;
-							var data = JSON.parse(dataString);
-							var method = data.Method;
-							var parameters = data.Parameters;
-							if (method == "OnRspLogin") {
-								var code = parameters.Code;
-								var loginMessage = parameters.Message;
-								if (code == 0) {
-										localStorage.setItem("trade_account",account);
-										localStorage.setItem("trade_password",pwd); 
-										localStorage.setItem("trade_endLoginAccount",account);
-				 						localStorage.setItem("trade_endLoginPassword",pwd);
-									if (Transfer.backpageID){
-										backReload();
-										plus.nativeUI.closeWaiting();
-										mui.toast("登录成功");
-										localStorage.setItem("isMock",tradeWebSocketIsMock);
-										islogin = true;
-										mui.back();
-		      						}else{
-		      							plus.nativeUI.closeWaiting(); 
-										mui.toast("登录成功");
-										localStorage.setItem("isMock",tradeWebSocketIsMock);
-										islogin = true;
-		      							mui.openWindow({
-		      								url:"../quotation/quotationMain.html",
-		      								id:"quotationMain"
-		      							})
-		      						}
-								} else {
-									alertProtype(loginMessage,"提示",Btn.confirmed());
+				$("#operateLogin").click(function() {
+					//					if(username == null){
+					account = document.getElementById("account").value;
+					pwd = $.base64.encode(document.getElementById("password").value);
+					if(mui.isnull(account)) {
+						mui.toast("请输入账号");
+						return;
+					};
+
+					if(mui.isnull(pwd)) {
+						mui.toast("请输入密码");
+						return;
+					}
+					if($("#checkBox i").val() == 1) {
+
+					} else {
+						mui.toast("您还未勾选协议");
+						return;
+					};
+					setTradeConfig(tradeWebSocketIsMock);
+					plus.nativeUI.showWaiting("正在登录中");
+					setTimeOutIsLogin();
+					var loginSocket = new WebSocket(socketUrl);
+					loginSocket.onopen = function() {
+						loginSocket.send('{"Method":"' + TradeUrl.LoginUrl + '","Parameters":{"ClientNo":"' + account + '","PassWord":"' + pwd + '","IsMock":' + tradeWebSocketIsMock + ',"Version":"' + tradeWebSocketVersion + '","Source":"' + Source + '"}}');
+					}
+					loginSocket.onmessage = function(evt) {
+						var dataString = evt.data;
+						var data = JSON.parse(dataString);
+						var method = data.Method;
+						var parameters = data.Parameters;
+						if(method == "OnRspLogin") {
+							var code = parameters.Code;
+							var loginMessage = parameters.Message;
+							if(code == 0) {
+								localStorage.setItem("trade_account", account);
+								localStorage.setItem("trade_password", pwd);
+								localStorage.setItem("trade_endLoginAccount", account);
+								localStorage.setItem("trade_endLoginPassword", pwd);
+								if(Transfer.backpageID) {
+									backReload();
 									plus.nativeUI.closeWaiting();
+									mui.toast("登录成功");
+									localStorage.setItem("isMock", tradeWebSocketIsMock);
+									islogin = true;
+									mui.back();
+								} else {
+									plus.nativeUI.closeWaiting();
+									mui.toast("登录成功");
+									localStorage.setItem("isMock", tradeWebSocketIsMock);
+									islogin = true;
+									mui.openWindow({
+										url: "../quotation/quotationMain.html",
+										id: "quotationMain"
+									})
 								}
-							} 
-						}
-						loginSocket.onclose = function(){
-							if(loginSetTimeOut != null){ 
-								clearTimeout(loginSetTimeOut);
+							} else {
+								alertProtype(loginMessage, "提示", Btn.confirmed());
+								plus.nativeUI.closeWaiting();
 							}
 						}
-//					}else{
-//						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
-//					}
+					}
+					loginSocket.onclose = function() {
+						if(loginSetTimeOut != null) {
+							clearTimeout(loginSetTimeOut);
+						}
+					}
+					//					}else{
+					//						alertProtype("你已登录,请勿重复登录","提示",Btn.confirmed());
+					//					}
 				});
-				function backReload(){
+
+				function backReload() {
 					plus.webview.getWebviewById("transactionDetails").reload();
 				};
-				document.getElementById("tzdr_info").addEventListener("tap",function(){
+				document.getElementById("tzdr_info").addEventListener("tap", function() {
 					mui.openWindow({
-						url:"../agree/tradingMarket.html",
-						id:"tradingMarket"
+						url: "../agree/tradingMarket.html",
+						id: "tradingMarket"
 					})
 				});
-			checkValue();
+				checkValue();
 			});
 			/*按钮变色*/
-			function checkValue(){
-				var account=$("#account").val();
-				var password=$("#password").val();
-				if(password.length>0 && password.length>0){
+			function checkValue() {
+				var account = $("#account").val();
+				var password = $("#password").val();
+				if(password.length > 0 && password.length > 0) {
 					$("#operateLogin").css({
-						"background-color":"#fcc900"
+						"background-color": "#fcc900"
 					});
-				}else{
+				} else {
 					$("#operateLogin").css({
-						"background-color":"#cccccc"
+						"background-color": "#cccccc"
 					});
 				};
-				if(account=="" || account==null || account.length==0) {
+				if(account == "" || account == null || account.length == 0) {
 					$("#accountClear").css({
 						"display": "none"
 					});
 				}
-				if(password=="" || password==null || password.length==0){
+				if(password == "" || password == null || password.length == 0) {
 					$("#passwordClear").css({
-					"display":"none"
+						"display": "none"
 					});
 				};
-				if(account.length>0){
+				if(account.length > 0) {
 					$("#accountClear").css({
-						"display":"block"
+						"display": "block"
 					});
 				}
-				if(password.length>0){
+				if(password.length > 0) {
 					$("#passwordClear").css({
-						"display":"block"
+						"display": "block"
 					});
 				}
 			};
-			
 		</script>
 	</body>
 
