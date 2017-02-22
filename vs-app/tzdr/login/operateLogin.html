@@ -209,7 +209,6 @@
 					$(".accountSelect").val(0);
 					tradeWebSocketIsMock = 0;
 				}
-				getVersion();
 				$(".accountSelect").change(function() {
 					var $this = $(this);
 					var val = $this.val();
@@ -294,71 +293,73 @@
 					}
 				});
 				$("#operateLogin").click(function() {
-					account = document.getElementById("account").value;
-					pwd = $.base64.encode(document.getElementById("password").value);
-					if(mui.isnull(account)) {
-						mui.toast("请输入账号");
-						return;
-					};
-
-					if(mui.isnull(pwd)) {
-						mui.toast("请输入密码");
-						return;
-					}
-					if($("#checkBox i").val() == 1) {
-
-					} else {
-						mui.toast("您还未勾选协议");
-						return;
-					};
-					setTradeConfig(tradeWebSocketIsMock);
-					plus.nativeUI.showWaiting("正在登录中");
-					setTimeOutIsLogin();
-					var loginSocket = new WebSocket(socketUrl);
-					loginSocket.onopen = function() {
-						loginSocket.send('{"Method":"' + TradeUrl.LoginUrl + '","Parameters":{"ClientNo":"' + account + '","PassWord":"' + pwd + '","IsMock":' + tradeWebSocketIsMock + ',"Version":"' + tradeWebSocketVersion + '","Source":"' + Source + '"}}');
-					}
-					loginSocket.onmessage = function(evt) {
-						var dataString = evt.data;
-						var data = JSON.parse(dataString);
-						var method = data.Method;
-						var parameters = data.Parameters;
-						if(method == "OnRspLogin") {
-							var code = parameters.Code;
-							var loginMessage = parameters.Message;
-							if(code == 0) {
-								localStorage.setItem("trade_account", account);
-								localStorage.setItem("trade_password", pwd);
-								localStorage.setItem("trade_endLoginAccount", account);
-								localStorage.setItem("trade_endLoginPassword", pwd);
-								if(Transfer.backpageID) {
-									backReload();
-									plus.nativeUI.closeWaiting();
-									mui.toast("登录成功");
-									localStorage.setItem("isMock", tradeWebSocketIsMock);
-									islogin = true;
-									mui.back();
+					getVersion(function(){
+						account = document.getElementById("account").value;
+						pwd = $.base64.encode(document.getElementById("password").value);
+						if(mui.isnull(account)) {
+							mui.toast("请输入账号");
+							return;
+						};
+	
+						if(mui.isnull(pwd)) {
+							mui.toast("请输入密码");
+							return;
+						}
+						if($("#checkBox i").val() == 1) {
+	
+						} else {
+							mui.toast("您还未勾选协议");
+							return;
+						};
+						setTradeConfig(tradeWebSocketIsMock);
+						plus.nativeUI.showWaiting("正在登录中");
+						setTimeOutIsLogin();
+						var loginSocket = new WebSocket(socketUrl);
+						loginSocket.onopen = function() {
+							loginSocket.send('{"Method":"' + TradeUrl.LoginUrl + '","Parameters":{"ClientNo":"' + account + '","PassWord":"' + pwd + '","IsMock":' + tradeWebSocketIsMock + ',"Version":"' + tradeWebSocketVersion + '","Source":"' + Source + '"}}');
+						}
+						loginSocket.onmessage = function(evt) {
+							var dataString = evt.data;
+							var data = JSON.parse(dataString);
+							var method = data.Method;
+							var parameters = data.Parameters;
+							if(method == "OnRspLogin") {
+								var code = parameters.Code;
+								var loginMessage = parameters.Message;
+								if(code == 0) {
+									localStorage.setItem("trade_account", account);
+									localStorage.setItem("trade_password", pwd);
+									localStorage.setItem("trade_endLoginAccount", account);
+									localStorage.setItem("trade_endLoginPassword", pwd);
+									if(Transfer.backpageID) {
+										backReload();
+										plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										localStorage.setItem("isMock", tradeWebSocketIsMock);
+										islogin = true;
+										mui.back();
+									} else {
+										plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										localStorage.setItem("isMock", tradeWebSocketIsMock);
+										islogin = true;
+										mui.openWindow({
+											url: "../quotation/quotationMain.html",
+											id: "quotationMain"
+										})
+									}
 								} else {
+									alertProtype(loginMessage, "提示", Btn.confirmed());
 									plus.nativeUI.closeWaiting();
-									mui.toast("登录成功");
-									localStorage.setItem("isMock", tradeWebSocketIsMock);
-									islogin = true;
-									mui.openWindow({
-										url: "../quotation/quotationMain.html",
-										id: "quotationMain"
-									})
 								}
-							} else {
-								alertProtype(loginMessage, "提示", Btn.confirmed());
-								plus.nativeUI.closeWaiting();
 							}
 						}
-					}
-					loginSocket.onclose = function() {
-						if(loginSetTimeOut != null) {
-							clearTimeout(loginSetTimeOut);
+						loginSocket.onclose = function() {
+							if(loginSetTimeOut != null) {
+								clearTimeout(loginSetTimeOut);
+							}
 						}
-					}
+					});
 				});
 
 				function backReload() {

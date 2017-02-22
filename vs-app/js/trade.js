@@ -96,6 +96,8 @@ function handleData(evt) {
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
+				
+				mui.toast("交易服务器连接成功！");
 			} else {
 				loginFail = -2;
 				alertProtype(loginMessage, "登录提示", Btn.confirmed());
@@ -1771,21 +1773,18 @@ var insertConditionCount = 0;
 $(function() {
 	var validateQueryCommodity = setInterval(function() {
 		//			plus.nativeUI.closeWaiting();
-		plus.nativeUI.showWaiting("正在连接交易服务器...", { modal: false });
-		console.log("正在连接交易服务器...");
+		plus.nativeUI.showWaiting("正在连接交易服务\n如等待时间过长请返回重新尝试", { modal: false });
 		if(getQueryCommodityIsFlag()) {
-			console.log("初始化交易配置");
 			/**
 			 * 初始化交易配置 --> trade.config
 			 */
 			initTradeConfig();
 			validateIsGetVersion();
-			getVersion();
+			getVersion(); // 更新交易连接地址
 			if(username == null) {
 				$("#switchAccount").text("登录账号");
 			}
 			bindOpertion();
-			console.log("准备关闭");
 			clearInterval(validateQueryCommodity);
 		}
 	}, 500);

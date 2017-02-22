@@ -185,7 +185,8 @@ function initLoad() {
 	if(isConnectionError) {
 		plus.nativeUI.closeWaiting();
 		clearInterval(tradeIntervalId);
-		alertProtype("交易服务器连接错误,请检查网络连接", "提示", Btn.confirmed(), null, null, null);
+		mui.toast("交易服务器断开，请重新连接！");
+		openLogin();
 		return;
 	}
 	socket.onopen = function() {
@@ -237,9 +238,7 @@ function initTradeConnect() {
 	 */
 	initLoad();
 	tradeIntervalId = setInterval(function() {
-		/*layer.msg('正在连接交易服务器...', {icon: 16});*/
 		if(connectionStatus) {
-			/*layer.msg('交易服务器连接成功', {icon: 4});*/
 			clearInterval(tradeIntervalId);
 		}
 	}, 2000);
@@ -255,7 +254,17 @@ function initTrade() {
 /**
  * 获取版本信息
  */
-function getVersion() {
+/**
+ * 获取版本信息
+ * 
+ * @param {Function} successCB
+ * @param {Function} errorCB
+ */
+function getVersion(successCB, errorCB) {
+	if(mui.checkNetwork()==false){
+		mui.toast("当前网络不给力，请稍后再试"); 
+		return;
+	}
 	$.ajax({
 		url: tzdr.constants.api_domain + "/socket/config/getVersions",
 		type: "post",
@@ -271,8 +280,20 @@ function getVersion() {
 				tradeWebsocketModelUrl = data.socketModelUrl;
 				isGetVersion = true;
 			}
+			
+			// 执行回调函数
+			if (typeof(successCB)=="function") {
+				successCB();
+			}
 		},
-		error: function(result) {}
+		error: function(result) {
+			mui.toast("当前网络不给力，请稍后再试");
+			
+			// 执行回调函数
+			if (typeof(successCB)=="errorCB") {
+				errorCB();
+			}
+		}
 	});
 }
 /**
@@ -282,7 +303,6 @@ function validateIsGetVersion() {
 	var i = 0;
 	var initIsGetVersion = setInterval(function() {
 		i++;
-		//		console.log(i);
 		if(isGetVersion == false) {
 			if(i > 50) {
 				isGetVersion = true;
