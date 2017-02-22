@@ -433,7 +433,7 @@ public interface DataConstant {
 	/**
 	 * 期货默认最小追加保证金
 	 */
-	public static final double FTRADE_DEFAULT_MIN_ADD_BOND = 2000.00;
+	public static final double FTRADE_DEFAULT_MIN_ADD_BOND = 500.00;
 	
 	/**
 	 * 优惠劵类型【折扣劵】
