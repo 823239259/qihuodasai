@@ -54,8 +54,8 @@
     			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
     			return;
     		}
-    		if(app_fund<2000){
-    			mui.toast("追加金额最低2000元！！");
+    		if(app_fund<500){
+    			mui.toast("追加金额最低500元！！");
     			document.getElementById("toappend").removeAttribute('disabled');  //恢复按钮为非禁用
     			return;
     		}
@@ -184,7 +184,7 @@
 	</div>
 	<div class="mui-content-padded">
 		<h5>温馨提示：</h5>
-		<p>1、最低追加金额为2000元。</p>
+		<p>1、最低追加金额为500元。</p>
 		<p>2、系统将在下个交易日前为您的操盘账户追加保证金。</p>
 		<p>3、追加成功后，系统将短信通知您。</p>
 	</div>
