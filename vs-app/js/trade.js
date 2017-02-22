@@ -1774,6 +1774,7 @@ $(function() {
 	var satartCheckTime = new Date().getTime();
 	plus.nativeUI.showWaiting("等待行情服务器连接...");
 	var checkQuoteConnect = setInterval(function(){
+		bindOpertion();
 		if (username == null) {	// 不存在账号则不尝试登录
 			plus.nativeUI.closeWaiting();
 			$("#switchAccount").text("登录账号");
@@ -1794,7 +1795,6 @@ $(function() {
 			initTradeConfig();
 			validateIsGetVersion();
 			getVersion(); // 更新交易连接地址
-			bindOpertion();
 		} else {		// 尝试连接超过6秒既重新登录
 			console.log("等待行情连接时间（毫秒）：" + (new Date().getTime() - satartCheckTime));
 			if (new Date().getTime() - satartCheckTime >= 6000) {
@@ -2806,7 +2806,12 @@ function bindOpertion() {
 
 $("#add").bind("click", function() {
 	var contractCode = selectDesgnate["contraction"];
-	var tipContent = "确认改单合约【" + contractCode + "】";
+	var oldOrderPrice = selectDesgnate["orderPrice"];
+	var oldOrderNum = selectDesgnate["orderNum"];
+	
+	var orderPrice = $("#col1").val();
+	var orderNum = $("#col2").val();
+	var tipContent = "确认将原合约【" + contractCode + "】，价格【" + oldOrderPrice + "】，手数【" + oldOrderNum + "】\n改为：价格【" + orderPrice + "】，手数【" + orderNum + "】";
 	alertProtype(tipContent, "确认改单?", Btn.confirmedAndCancle(), doInsertChangeSingleOrder, cancleCallBack);
 	var add_div = $("#add_div");
 	add_div.addClass("mui-hidden");
