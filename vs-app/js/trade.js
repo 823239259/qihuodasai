@@ -1771,10 +1771,11 @@ function loadOperateLogin() {
  */
 var insertConditionCount = 0;
 $(function() {
+	bindOpertion();
+	
 	var satartCheckTime = new Date().getTime();
 	plus.nativeUI.showWaiting("等待行情服务器连接...");
 	var checkQuoteConnect = setInterval(function(){
-		bindOpertion();
 		if (username == null) {	// 不存在账号则不尝试登录
 			plus.nativeUI.closeWaiting();
 			$("#switchAccount").text("登录账号");
@@ -1782,9 +1783,18 @@ $(function() {
 			return;
 		}
 		
+		console.log("等待行情连接时间（毫秒）：" + (new Date().getTime() - satartCheckTime));
+		if (new Date().getTime() - satartCheckTime >= 6000) {	// 尝试连接超过6秒既重新登录
+			window.clearInterval(checkQuoteConnect); // 关闭尝试
+			plus.nativeUI.closeWaiting();
+			$("#switchAccount").text("登录账号");
+			mui.toast("交易服务器连接失败，请重新登录！");
+			openLogin();
+			return;
+		}
+		
 		// 等待行情连接成功后，连接交易服务器
 		if(getQueryCommodityIsFlag()) {
-			plus.nativeUI.closeWaiting();
 			plus.nativeUI.showWaiting("正在连接交易服务器...");
 			
 			window.clearInterval(checkQuoteConnect); // 关闭尝试
@@ -1795,14 +1805,6 @@ $(function() {
 			initTradeConfig();
 			validateIsGetVersion();
 			getVersion(); // 更新交易连接地址
-		} else {		// 尝试连接超过6秒既重新登录
-			console.log("等待行情连接时间（毫秒）：" + (new Date().getTime() - satartCheckTime));
-			if (new Date().getTime() - satartCheckTime >= 6000) {
-				plus.nativeUI.closeWaiting();
-				$("#switchAccount").text("登录账号");
-				mui.toast("交易服务器连接失败，请重新登录！");
-				openLogin();
-			}
 		}
 	}, 500); // 500毫秒尝试一次检查
 	
