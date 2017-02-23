@@ -75,6 +75,7 @@ public class CrawlerController {
 		try {
 			result.appendData("data", crawlerWallstreetnLiveService.getCrawlerLiveContent(new Page(request),channelset));
 		} catch (Exception e) {
+			e.printStackTrace();
 			result.setSuccess(false);
 			result.setMessage("数据获取失败");
 		}
