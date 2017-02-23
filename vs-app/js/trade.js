@@ -1775,7 +1775,7 @@ $(function() {
 	
 	function plusReady(){
 		var satartCheckTime = new Date().getTime();
-		plus.nativeUI.showWaiting("等待行情服务器连接...");
+		plus.nativeUI.showWaiting("行情服务器连接中...");
 		var checkQuoteConnect = setInterval(function(){
 			if (username == null) {	// 不存在账号则不尝试登录
 				plus.nativeUI.closeWaiting();
@@ -1796,7 +1796,8 @@ $(function() {
 			
 			// 等待行情连接成功后，连接交易服务器
 			if(getQueryCommodityIsFlag()) {
-				plus.nativeUI.showWaiting("正在连接交易服务器...");
+				plus.nativeUI.closeWaiting();  // 关闭行情连接提示
+				plus.nativeUI.showWaiting("交易服务器连接中...");
 				
 				window.clearInterval(checkQuoteConnect); // 关闭尝试
 				
