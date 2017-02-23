@@ -212,6 +212,7 @@ function initLoad() {
 				alertProtype("您的账号在另一地点登录，您被迫下线。如果不是您本人操作，那么您的密码很可能已被泄露，建议您及时致电：400-852-8008", "下线提示", Btn.confirmed(), null, null, null);
 				//clearLocalCacheData();
 				loginOut();
+				openLogin();
 			}
 		}
 	}
