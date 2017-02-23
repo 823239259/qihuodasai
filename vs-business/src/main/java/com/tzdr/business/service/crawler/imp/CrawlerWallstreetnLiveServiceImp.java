@@ -75,7 +75,7 @@ public class CrawlerWallstreetnLiveServiceImp extends BaseServiceImpl<CrawlerWal
 				+ " from crawler_wallstreetn_live l ,crawler_wallstreetn_live_content c "
 				+ " where "
 				+ " l.published = 1 "
-				+ " l.live_createtime = "+time+" "
+				+ " and l.live_createtime > "+time+" "
 				+ " and l.channel_set = '"+channelset+"' "
 				+ " and c.live_id=l.live_wallstreetn_id "
 				+ " GROUP BY l.channel_set,l.live_wallstreetn_id "
