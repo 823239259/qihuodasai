@@ -37,6 +37,7 @@
       			},function(result){
       					if(!mui.isnull(result.data.username)){
       						title_name.innerHTML="欢迎您，"+result.data.username+":";
+      						plus.storage.setItem("userName",result.data.username);
       					}else if(!mui.isnull(user_mobile)){
       						user_mobile=user_mobile.substring(0,3)+"****"+user_mobile.substring(7,11);
       						title_name.innerHTML="欢迎您，"+user_mobile+":";

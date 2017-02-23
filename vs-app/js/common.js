@@ -162,12 +162,13 @@
 	
 	//呼叫弹出框
     mui.callService=function(){
-			plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",function(e){
+			/*plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",function(e){
 				if(e.index==1){
 					plus.device.dial("4008528008",false);
 				}
 			},
-			"400-852-8008",["取消","呼叫"]);
+			"400-852-8008",["取消","呼叫"]);*/
+			initCallService();
     }
     
 
@@ -231,6 +232,12 @@
 	mui.app_filePath=function(file_url){
 //		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
 //		var filePath = plus.io.convertAbsoluteFileSystem(path);
+		return filePath;
+	}
+	
+	mui.app_filePath1=function(file_url){
+		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
+		var filePath = plus.io.convertAbsoluteFileSystem(path);
 		return filePath;
 	}
 	
@@ -636,4 +643,11 @@ function initBottom(data){
 	}
 String.prototype.trim = function() {
   return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
+
+function initCallService(){
+	document.getElementById("telBtn").addEventListener("tap",function(){
+		var path=mui.app_filePath1("chart.html");
+		mui.openWindow(path,"telBtn"); 
+	});
 }
