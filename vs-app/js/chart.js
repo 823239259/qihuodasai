@@ -70,7 +70,6 @@ mui.plusReady(function(){
 		marketSocket.onopen = function(evt){
 	      	masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
 	      	 $("#netWorkTips").css("display","none");
-	       	plus.nativeUI.closeWaiting(); 
 			mui.toast("行情服务器连接成功！");
 			$(".mui-bar").css("background-color","#2B2B2B");
 	    };
@@ -878,7 +877,6 @@ mui.plusReady(function(){
     		}
 		}else{
 			if(netWorkState==false){
-				plus.nativeUI.showWaiting( "正在连接行情服务器" );
 				initMarketSocket();
 			}
 			checkNetWorkStateNum=0;
