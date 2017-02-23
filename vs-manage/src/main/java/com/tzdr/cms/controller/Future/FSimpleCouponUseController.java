@@ -68,7 +68,7 @@ public class FSimpleCouponUseController extends BaseCmsController<FSimpleCoupon>
 						jsonArray.add(jsonObject);
 					}
 				}else{
-					return null;
+					return jsonArray;
 				}
 		return jsonArray;
 		
