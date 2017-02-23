@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="../../static/script/common/jquery-1.8.0.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+	var a = window.location.href;
+    var url=a.split("?");
+    var url2=url[1].split("&");
+    var phone = url2[0].split("=")[1]; 
+    var userName = (decodeURI(decodeURI(url2[1].split("=")[1])));;
+	//alert(userName);
+    function yourFunction(servability) {
+        // 你可以根据自己的需求编写相应的代码
+        console.log('美洽网站插件初始化完毕。');
+        if (servability) {
+            console.log('有客服在线');
+        } else {
+            console.log('无客服在线');
+        }
+    }
+    (function(m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function() {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.charset = 'UTF-8';
+        j.src = '//static.meiqia.com/dist/meiqia.js';
+        s.parentNode.insertBefore(j, s);
+    })(window, document, 'script', '_MEIQIA');
+    _MEIQIA('entId', '48917');
+    _MEIQIA('allSet', yourFunction);
+    _MEIQIA('showPanel');
+    if(userName == null && phone != null){
+    	_MEIQIA('metadata', {
+    		tel: phone
+        });
+    }else if(userName != null && phone == null) {
+    	_MEIQIA('metadata', {
+            name: userName
+        });
+    }else if(userName != null && phone !== null) {
+    	_MEIQIA('metadata', {
+            name: userName,
+            tel: phone
+        });
+    }
+    /* address, // 地址
+    age, // 年龄
+    comment, // 备注
+    email, // 邮箱
+    gender, // 性别
+    name, // 名字
+    qq, // QQ
+    tel, // 电话
+    weibo, // 微博
+    weixin // 微信 */
+</script>
+</html>
