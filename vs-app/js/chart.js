@@ -72,6 +72,7 @@ mui.plusReady(function(){
 	      	 $("#netWorkTips").css("display","none");
 	       	plus.nativeUI.closeWaiting(); 
 			mui.toast("行情服务器连接成功！");
+			$(".mui-bar").css("background-color","#2B2B2B");
 	    };
 	    marketSocket.onclose = function(evt){
 //	    	if(reconnect != false){
@@ -856,31 +857,33 @@ mui.plusReady(function(){
 	function reconnectPage(){
 		plus.webview.getWebviewById("transactionDetails").reload();
 	}
-	function checNetwork(){
-		var checkNetworkInterval=setInterval(function(){
-			if(mui.checkNetwork){
-				marketSocket = new WebSocket(marketSocketUrl);
-				marketSocket.onopen = function(evt){
-			      masendMessage('Login','{"UserName":"'+marketUserName+'","PassWord":"'+marketPassword+'"}');
-			    };
-			}
-		},1000)
-	}
     var checkNetWorkSateInterval=setInterval(function(){
 		reconnectMarketSocket()
     },500);
     var netWorkState=true;
+    var netWorkTipsTimeout=null;
+	var checkNetWorkStateNum=0;
     function reconnectMarketSocket(){
     	var netWorkStateType=mui.checkNetworkState();
+    	var netWorkTips=document.getElementById("netWorkTips");
     	if(netWorkStateType[plus.networkinfo.getCurrentType()]=="None connection"){
-			$("#netWorkTips").css("display","block");
-			netWorkState=false;
+    		netWorkState=false;
+    		if(checkNetWorkStateNum==0){
+    			netWorkTips.style.display="block";
+    			netWorkTipsTimeout=setTimeout(function(){
+	        		netWorkTips.style.display="none";
+	        		$(".mui-bar").css("background-color","#e9392a");
+	        	},2000);
+	        	checkNetWorkStateNum++;
+    		}
 		}else{
 			if(netWorkState==false){
 				plus.nativeUI.showWaiting( "正在连接行情服务器" );
 				initMarketSocket();
 			}
+			checkNetWorkStateNum=0;
 			netWorkState=true;
+			clearTimeout(netWorkTipsTimeout);
 		}
     }
 });

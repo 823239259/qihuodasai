@@ -1566,6 +1566,6 @@ input{
 	position: fixed;
 	top:0px;
 	background-color: #2B2B2B;
-	z-index: 999;
+	z-index: 99;
 	display: none;
 }
