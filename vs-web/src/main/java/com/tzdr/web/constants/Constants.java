@@ -85,6 +85,11 @@ public class Constants {
 	 * 保存投资达人用户名称session
 	 */
 	public static final String TZDR_USERNAME_SESSION = "userName";
+	
+	/**
+	 * 保存用户真实姓名
+	 */
+	public static final String TZDR_REALNAME_SESSION = "realName";
 
 	/**
 	 * 首次访问页面

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.Constants;
 import com.tzdr.business.service.generalize.GeneralizeService;
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.userInfo.UserInfoService;
 import com.tzdr.business.service.userTrade.UserTradeService;
 import com.tzdr.business.service.wuser.LoginLogService;
@@ -63,6 +64,9 @@ public class LoginController{
 	
 	@Autowired
 	private UserInfoService userInfoService;
+	
+	@Autowired
+	private SecurityInfoService securityInfoService;
 	
 	@Autowired
 	private LoginLogService loginLogService;
@@ -181,7 +185,9 @@ public class LoginController{
 			String mobile = userSessionBean.getMobile();
 			userName = StringCodeUtils.buildMobile(mobile);
 		}
+		String tname = securityInfoService.findByUserId(wUser.getId()).getTname();
 		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USERNAME_SESSION, userName);
+		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_REALNAME_SESSION, tname);
 		Map<Object,Object> data = new HashMap<Object, Object>();
 		data.put("key",  Base64.encodeToString(wUser.getId()));
 		data.put("userName", userName);
