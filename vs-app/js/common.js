@@ -162,16 +162,18 @@
 	
 	//呼叫弹出框
     mui.callService=function(){
-			/*plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",function(e){
-				if(e.index==1){
-					plus.device.dial("4008528008",false);
-				}
-			},
-			"400-852-8008",["取消","呼叫"]);*/
-			initCallService();
+		plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",function(e){
+			if(e.index==1){
+				plus.device.dial("4008528008",false);
+			}
+		},
+		"400-852-8008",["取消","呼叫"]);
     }
+    /*//呼出美洽在线客服
+    document.getElementById("consistentBeauty").addEventListener("tap",function(){
+    	initCallService();
+    }*/
     
-
     /**
      * 打开新页面 
      * @param {Object} page_url页面路径
@@ -643,11 +645,4 @@ function initBottom(data){
 	}
 String.prototype.trim = function() {
   return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-}
-
-function initCallService(){
-	document.getElementById("telBtn").addEventListener("tap",function(){
-		var path=mui.app_filePath1("chart.html");
-		mui.openWindow(path,"telBtn"); 
-	});
 }

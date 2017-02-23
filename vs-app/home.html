@@ -26,7 +26,7 @@
 		<a href="javascript:void(0);" id="toNews"><img src="images/news.png" id="newsimg"></a>
 		<h1 id="nav-title" class="mui-title">操盘申请</h1>
 		<!--<a href="#" class="top-tel" id="telBtn">客服热线</a>-->
-		<a class="top-tel" id="telBtn">客服热线</a>
+		<a class="top-tel" id="consistentBeauty">客服热线</a>
 	</header>
 	<nav class="navlist">
 		<a class="" href="javascript:void(0);" id="quotationMain">
@@ -357,5 +357,14 @@
 //				}
 //			}
 		});	
+		document.getElementById("consistentBeauty").addEventListener("tap",function(){
+			initCallService();
+		});
+		function initCallService(){
+			document.getElementById("consistentBeauty").addEventListener("tap",function(){
+				var path=mui.app_filePath1("chart.html");
+				mui.openWindow(path,"consistentBeauty"); 
+			});
+		}
 </script>
 </html>
