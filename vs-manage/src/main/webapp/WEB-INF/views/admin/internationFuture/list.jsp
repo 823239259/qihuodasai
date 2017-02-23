@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${ctx}/static/script/wuser/public.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/my97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList2.js?v=20170105"></script>
+<script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList.js?v=20170105"></script>
 <script type="text/javascript" src="${ctx}/static/script/quote.trade/n_quote.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/quote.trade/n_trade_vo.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/quote.trade/n_trade.js"></script>
@@ -635,19 +635,19 @@ function timeConvert(value,rowData,rowIndex) {
 	               	<td align="center" id='xhsCount'></td>
         		</tr>
         	</table>
-        	<table border="0" style="font-size:12px;" class="conn"  width="80%" cellpadding="0" cellspacing="0">
+        	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
         		<tr>
         			<td class="label center">美铜</td>
         			<td class="label center">美白银</td>
         			<td class="label center">小原油</td>
         			<td class="label center">迷你德国DAX指数</td>
-        			
         		</tr>
         		<tr>
         			<td align="center" id='acCount'></td>
 	               	<td align="center" id='asCount'></td>
 	               	<td align="center" id='scCount'></td>
 	                <td align="center" id='daxMinCount'></td>
+	                <td align="center" id="end_type_td"></td>
         		</tr>
         	</table>
         	<table id="end_tradeDetail"  border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0"></table>
