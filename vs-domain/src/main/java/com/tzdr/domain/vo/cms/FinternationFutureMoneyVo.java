@@ -7,6 +7,12 @@ import java.math.BigInteger;
 import com.tzdr.common.utils.AllowExcel;
 import com.tzdr.common.utils.Dates;
 
+import net.sf.cglib.transform.impl.InterceptFieldFilter;
+
+/**
+ * @author gc
+ *
+ */
 public class FinternationFutureMoneyVo implements Serializable {
 
 	private static final long serialVersionUID = -5466393557404329044L;
@@ -99,7 +105,7 @@ public class FinternationFutureMoneyVo implements Serializable {
 	
 	@AllowExcel(name="操作员")
 	private String operator;//操作员
-	
+
 	public Integer getSource() {
 		return source;
 	}

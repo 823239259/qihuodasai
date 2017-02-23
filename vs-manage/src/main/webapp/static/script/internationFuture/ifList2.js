@@ -84,23 +84,22 @@ function passClose() {
 };
 
 	
-
-/**
- * 录入
- */
 var bussType = "";
-
-
+var endType = 0;
+/**
+ * 自动导入
+ */
 function autoinput(){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	if (Check.validateSelectItems($("#hasAuditData"),1)) {
 		var bussinessType = rows[0].businessType;
 		bussType = bussinessType;
 		var id = rows[0].id;
+		$("#input_file_tr").hide();//隐藏导入数据tr
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
 			return;
-		}		
+		}
 		if(rows[0].stateType == "待结算"){
 			$.ajax({
 				url:Check.rootPath() +"/admin/internation/future/getFtse",
@@ -114,7 +113,8 @@ function autoinput(){
 					var html = appendTradeDetailHtml(tradeDetail, 0);
 					$("#tradeDetail").html(html);
 					handleData(data,0);
-					inputLever();
+					inputLeverShow(bussinessType);
+					$("#tranProfitLoss").attr("disabled","disabled");
 					$("#inputWin .easyui-validatebox").attr("disabled","disabled");
 					$("#inputWin").show();
 					$("#inputWin").window('open');
@@ -144,7 +144,7 @@ function autoinput(){
 		$("#tradeDetail").html("");
 	}
 }
-var endType = 0;
+
 function testcheck(tranAccount,todayMoeny){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	var id = rows[0].id;
@@ -162,15 +162,56 @@ function testcheck(tranAccount,todayMoeny){
 			var html = appendTradeDetailHtml(tradeDetails, 0);
 			$("#tradeDetail").html(html);
 			handleData(leadLever,1);
-			inputLever();
+			inputLeverShow(bussType);
 			endType = 1;
 			Trade.doLoginOut(tranAccount,"");
+			$("#tranProfitLoss").attr("disabled","disabled");
 			$("#inputWin .easyui-validatebox").attr("disabled","disabled");
 			$("#inputWin").show();
 			$("#inputWin").window('open');
 		}						
 	});
 }
+
+
+/**
+ * 手动导入
+ */
+function input(){
+	localDataLever = null;
+	var rows = $("#hasAuditData").datagrid('getSelections');
+	if (Check.validateSelectItems($("#hasAuditData"),1)) {
+		if(rows[0].stateType == "已结算"){
+			Check.messageBox("提示","已结算的用户不能再次录入！");
+			return;
+		}
+		var bussinessType = rows[0].businessType;
+		bussType = bussinessType;
+		inputLeverShow(bussinessType);
+		var id = rows[0].id;
+		$.ajax({
+			url:Check.rootPath() +"/admin/internation/future/getFtse",
+			type:"get",
+			data:{
+				id:id
+			},
+			success:function(result){
+				var data = result.data.fste;
+				var tradeDetail = result.data.tradeDetail;
+				var html = appendTradeDetailHtml(tradeDetail, 0);
+				$("#tradeDetail").html(html);
+				handleData(data,0);
+			}
+		});
+		$("#inputWin").show();
+		$("#inputWin").window('open');
+		$("#mobile").val(rows[0].mobile);
+		$("#Account").val(rows[0].tranAccount);
+		$("#traderBond").val(rows[0].traderBond);
+		$("#tradeDetail").html("");
+	}
+}
+
 var localDataLever = null;
 function importExcl(){
 	$(function(){
@@ -190,7 +231,6 @@ function importExcl(){
 	            	var html = appendTradeDetailHtml(data, 1);
 	            	$("#tradeDetail").html(html);
 	            	handleData(result.data.dataLever,1);
-	            	tradeCount();
 	            	localDataLever = JSON.stringify(data);
 	            }else{
 	            	Check.messageBox("提示",data.message);
@@ -290,49 +330,43 @@ function handleData(fast,index){
 		$("#tranProfitLoss").val(dataLever.tranProfitLoss);
 }
 
-function inputLever() {
-	var rows = $("#hasAuditData").datagrid('getSelections');
-	if (Check.validateSelectItems($("#hasAuditData"),1)) {
-		
-		if (rows[0].businessType == "国际综合"){
-			
-			$("#a50td").html("A50交易手数:");
-			$(".hsiTradeNumTR").show();
-			$("#crudeTradeNumTR").show();
-			$("#mdTradeNumTR").show();
-			$("#mnTradeNumTR").show();
-			$("#mbTradeNumTR").show();
-			$("#daxTradeNumTR").show();
-			$("#nikkeiTradeNumTR").show();
-			$("#lhsiTradeNumTR").show();
-			$("#agTradeNumTR").show();
-			$("#hsTradeNumTR").show();
-			$("#xHsTradeNumTR").show();
-			$("#acTradeNumTR").show();
-			$("#asTradeNumTR").show();
-			$("#scTradeNumTR").show();
-			$("#daxMinTradeNumTR").show();
-			$("#inputWin").css("height","457px");
-		}else
-		{
-			$("#a50td").html("交易手数:");
-			$(".hsiTradeNumTR").hide();
-			$("#crudeTradeNumTR").hide();
-			$("#mdTradeNumTR").hide();
-			$("#mnTradeNumTR").hide();
-			$("#mbTradeNumTR").hide();
-			$("#daxTradeNumTR").hide();
-			$("#nikkeiTradeNumTR").hide();
-			$("#lhsiTradeNumTR").hide();
-			$("#agTradeNumTR").hide();
-			$("#hsTradeNumTR").hide();
-			$("#xHsTradeNumTR").hide();
-			$("#acTradeNumTR").hide();
-			$("#asTradeNumTR").hide();
-			$("#scTradeNumTR").hide();
-			$("#daxMinTradeNumTR").hide();
-			$("#inputWin").css("height","457px");
-		}
+function inputLeverShow(businessType) {
+	if (businessType == "国际综合"){
+		$("#a50td").html("A50交易手数:");
+		$(".hsiTradeNumTR").show();
+		$("#crudeTradeNumTR").show();
+		$("#mdTradeNumTR").show();
+		$("#mnTradeNumTR").show();
+		$("#mbTradeNumTR").show();
+		$("#daxTradeNumTR").show();
+		$("#nikkeiTradeNumTR").show();
+		$("#lhsiTradeNumTR").show();
+		$("#agTradeNumTR").show();
+		$("#hsTradeNumTR").show();
+		$("#xHsTradeNumTR").show();
+		$("#acTradeNumTR").show();
+		$("#asTradeNumTR").show();
+		$("#scTradeNumTR").show();
+		$("#daxMinTradeNumTR").show();
+		$("#inputWin").css("height","457px");
+	}else{
+		$("#a50td").html("交易手数:");
+		$(".hsiTradeNumTR").hide();
+		$("#crudeTradeNumTR").hide();
+		$("#mdTradeNumTR").hide();
+		$("#mnTradeNumTR").hide();
+		$("#mbTradeNumTR").hide();
+		$("#daxTradeNumTR").hide();
+		$("#nikkeiTradeNumTR").hide();
+		$("#lhsiTradeNumTR").hide();
+		$("#agTradeNumTR").hide();
+		$("#hsTradeNumTR").hide();
+		$("#xHsTradeNumTR").hide();
+		$("#acTradeNumTR").hide();
+		$("#asTradeNumTR").hide();
+		$("#scTradeNumTR").hide();
+		$("#daxMinTradeNumTR").hide();
+		$("#inputWin").css("height","457px");
 	}
 };
 
@@ -573,7 +607,6 @@ function tradeCount() {
 		$('#asCount').html(filterNull(rows[0].ameSilverMarketLever));
 		$('#scCount').html(filterNull(rows[0].smallCrudeOilMarketLever));
 		$("#daxMinCount").html(filterNull(rows[0].daxtranMinActualLever));
-		
 		$.ajax({
 			url:Check.rootPath() +"/admin/internation/future/getFtse",
 			type:"get",
@@ -583,6 +616,13 @@ function tradeCount() {
 			success:function(result){
 				var data = result.data.fste;
 				var tradeDetail = result.data.tradeDetail;
+				if(data.endtype == 1){
+					$("#end_type_show").html("自动结算");
+					$("#end_type_show").css({color:'#FFDEAD',width:'16px'});
+				}else{
+					$("#end_type_show").html("手动结算");
+					$("#end_type_show").css({color:'#C0C0C0',width:'16px'});
+				}
 				var html = appendTradeDetailHtml(tradeDetail, 0);
 				$("#end_tradeDetail").html(html);
 			}

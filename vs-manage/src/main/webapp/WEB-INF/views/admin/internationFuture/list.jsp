@@ -407,7 +407,6 @@ function timeConvert(value,rowData,rowIndex) {
 								<!-- <th field="tranActualLever" width="160">A50交易手数</th>
 								<th field="hsiTranActualLever" width="160">恒指交易手数</th>
 								<th field="crudeTranActualLever" width="160">原油交易手数</th>
-
 								<th field="mdtranActualLever" width="160">迷你道指交易手数</th>
 								<th field="mntranActualLever" width="160">迷你纳指交易手数</th>
 								<th field="mbtranActualLever" width="160">迷你标普交易手数</th>
@@ -425,8 +424,17 @@ function timeConvert(value,rowData,rowIndex) {
 								<th field="sourceStr" width="150">平台来源</th>
 								<th field="programNo" width="150">方案编号</th>
 								<th field="stateType" width="100">结算状态</th>
+								<th field="endType" width="100" data-options="formatter:function(value,row,index){
+									if (row.endType == 1){
+										return '自动';
+									}else if(row.endType == 0){
+										return '手动';
+									}else
+									   return '';
+								}">结算方式</th>
 								<th field="operator" width="100">操作员</th>
 				            </tr>
+				            
 				        </thead>
 	   				</table>
 				</div>
@@ -475,11 +483,12 @@ function timeConvert(value,rowData,rowIndex) {
         			 		<td>操盘保证金</td>
         			 		<td><input id="traderBond" name="traderBond"  class="easyui-textbox" disabled="disabled" /></td>
         			 		<td>交易盈亏($)</td>
-        			 		<td><input id="tranProfitLoss" name="tranProfitLoss"  class="easyui-textbox" disabled="disabled" data-options="required:true" /></td>
+        			 		<td><input id="tranProfitLoss" name="tranProfitLoss"  class="easyui-textbox"  data-options="required:true" /></td>
         			 	</tr>
-        			 	<!-- <tr>
+        				<tr id = "input_file_tr">
         			 		<td><input type = "file" id = "input_file" name = "input_file"/><button  onclick="importExcl()" id = "input_import">导入明细</button></td>
-        			 	</tr> -->
+        			 	</tr>
+        			 	
         		</table>
         		<table  id="freeTable" border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
         			<tr>
@@ -626,12 +635,13 @@ function timeConvert(value,rowData,rowIndex) {
 	               	<td align="center" id='xhsCount'></td>
         		</tr>
         	</table>
-        	<table border="0" style="font-size:12px;" class="conn"  width="75%" cellpadding="0" cellspacing="0">
+        	<table border="0" style="font-size:12px;" class="conn"  width="80%" cellpadding="0" cellspacing="0">
         		<tr>
         			<td class="label center">美铜</td>
         			<td class="label center">美白银</td>
         			<td class="label center">小原油</td>
         			<td class="label center">迷你德国DAX指数</td>
+        			
         		</tr>
         		<tr>
         			<td align="center" id='acCount'></td>
@@ -639,7 +649,6 @@ function timeConvert(value,rowData,rowIndex) {
 	               	<td align="center" id='scCount'></td>
 	                <td align="center" id='daxMinCount'></td>
         		</tr>
-	              
         	</table>
         	<table id="end_tradeDetail"  border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0"></table>
         	 	<div style = "margin-left: 50%;margin-top: 10px;">

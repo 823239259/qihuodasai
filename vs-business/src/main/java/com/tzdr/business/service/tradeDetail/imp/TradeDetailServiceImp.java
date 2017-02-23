@@ -104,7 +104,7 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 							 .add(JPYfreeMoeny.multiply(new BigDecimal(jsStr.getString("JPY"))))
 							 .add(EURfreeMoeny.multiply(new BigDecimal(jsStr.getString("EUR"))))
 							 .add(USDfreeMoeny);
-		//总盈亏  交易盈亏=账户余额  - 总操盘资金  + 手续费
+		//总盈亏  交易盈亏=账户余额  - 总操盘资金（初始+追加保证金）  + 手续费
 	    double tranProfitLoss = todayMoeny.subtract(traderTotal).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 		
 		return tranProfitLoss;

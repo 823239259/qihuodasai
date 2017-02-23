@@ -307,13 +307,23 @@ public class FSimpleFtseManageVo implements Serializable {
 	 */
     @AllowExcel(name = "操作员")
 	private String operator;
-
+    /**
+     * 结算方式
+     */
+    private Integer endType;
 	public Integer getSource() {
 		return source;
 	}
 
 	public void setSource(Integer source) {
 		this.source = source;
+	}
+	
+	public Integer getEndType() {
+		return endType;
+	}
+	public void setEndType(Integer endType) {
+		this.endType = endType;
 	}
 
 	public String getSourceStr() {

@@ -51,7 +51,7 @@ public class FinternationFutureAppendLevelMoneyService
 	 */
 	public PageInfo<Object> getData(EasyUiPageInfo easyUiPage, Map<String, Object> searchParams) {
 
-		String sql = "SELECT f.id," + "f.uid," + "f.type," + "f.status," + "fut.tran_account AS tranAccount,"
+		String sql = "SELECT f.id," + "f.uid," + "f.type," + "f.status," + "fut.tran_account AS tranAccount," 
 				+ "fut.line_loss AS lineLoss," + "f.program_no AS programNo," + "f.append_money AS appendMoney,"
 				+ "f.dollar_money as dollarMoney, " + "f.append_date AS appendDate," + "f.update_time AS updateTime,"
 				+ "fut.source AS source," + "w.mobile," + "v.tname AS username,"+"f.operator as operator FROM f_internation_future_append_level_money f,f_simple_ftse_user_trade fut,"

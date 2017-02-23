@@ -529,20 +529,19 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			detailVos.add(detailVo);
 		}
 		
-		
 		Map<String, Double> leadLever = leadLever(detailVos);
 		//获取结算汇率
 		List<DataMap> dataMap = dataMapService.findByTypeKey("tranProfitLossParities");
 		String parities = CollectionUtils.isEmpty(dataMap) ? null :dataMap.get(0).getValueName();
-		//获取总的保证金
+		
 		FSimpleFtseUserTrade ftse = null;
 		try {
 			ftse = simpleFtseUserTradeService.findById(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		BigDecimal traderTotal = ftse.getTraderTotal();
+		//获取总的操盘资金 初始操盘资金+追加保证金
+		BigDecimal traderTotal = ftse.getTraderTotal().add(ftse.getAppendTraderBond());
 		//计算交易盈亏
 		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,parities,new BigDecimal(todayMoeny),traderTotal);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);

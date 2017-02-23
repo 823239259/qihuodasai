@@ -1030,6 +1030,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			// sql.append(" userTrade.app_time as appTime,\n");
 			sql.append("	userTrade.app_end_time as appEndTime,\n");
 			sql.append("	userTrade.end_time as endTime,\n");
+			sql.append("	userTrade.end_type as endType,\n");
 			// sql.append(" userTrade.fee_manage as feeManage,\n");
 			// sql.append(" userTrade.line_loss as lineLoss,\n");
 			sql.append("	userTrade.program_no as programNo,\n");

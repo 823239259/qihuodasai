@@ -540,8 +540,8 @@ function handleMessage(evt) {
     		}else{
 	    		var tradeNo = parameters.TradeNo;
 	    		var commodityNo = parameters.CommodityNo;
-	    		var exchangeNo = parameters.ExchangeNo;
 	    		var contractNo = parameters.ContractNo;
+	    		var exchangeNo = parameters.ExchangeNo;
 	    		var orderSysID = parameters.OrderSysID;
 	    		var orderRef = parameters.OrderRef;
 	    		var orderID = parameters.OrderID;
@@ -577,7 +577,7 @@ function handleMessage(evt) {
 						"userNo":clientNo,
 						"currencyNo":currencyNo,
 						"exchangeNo":exchangeNo,
-						"commodityNo":commodityNo,
+						"commodityNo":commodityNo+contractNo,
 						"buyNum":buyNum,
 						"sellNum":sellNum,
 						"tradePrice":tradePrice,
