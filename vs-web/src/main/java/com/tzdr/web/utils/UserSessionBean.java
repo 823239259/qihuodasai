@@ -22,6 +22,8 @@ public class UserSessionBean implements Serializable{
 	private String email;
 	
 	private String mobile;
+	
+	private String realName;
 
 	public String getId() {
 		return id;
@@ -54,4 +56,14 @@ public class UserSessionBean implements Serializable{
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	
+	
 }

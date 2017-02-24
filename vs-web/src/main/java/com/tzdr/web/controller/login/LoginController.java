@@ -167,27 +167,27 @@ public class LoginController{
 		if(loginFailData != null){
 			UserLoginFail.removeUserLoginFailBean(loginFailData, request, response);    //删除application登录失败次数(包含失效数据)
 		}
+		String tname = securityInfoService.findByUserId(wUser.getId()).getTname(); //真实姓名
 		request.getSession().removeAttribute(com.tzdr.web.constants.Constants.LOGIN_FAIL_MAX_COUNT_SESSION_KEY);   //清空是否需要验证码登录session登录失败次数
 		UserSessionBean userSessionBean = new UserSessionBean();   //session对象
 		userSessionBean.setId(wUser.getId());
 		userSessionBean.setEmail(wUser.getEmail());
 		userSessionBean.setMobile(wUser.getMobile());
 		userSessionBean.setUname(wUser.getUname());
+		userSessionBean.setRealName(tname);
 		String ipAddr = IpUtils.getIpAddr(request);
 		wUserService.updateWUserByUserId(wUser.getId(),ipAddr);   //记录登录信息
 		
 		
 		// 记录登录成功日志
 		loginLogService.saveLog(ipAddr,IpAddressUtils.getAffiliationCity(ipAddr,"utf-8"), wUser.getId());
-		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION, userSessionBean); //保存都信息
+		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION, userSessionBean); //保存登陆信息
 		String userName = null;  //用户名称
 		if(!StringUtil.isBlank(userSessionBean.getMobile())){  //手机号码加*
 			String mobile = userSessionBean.getMobile();
 			userName = StringCodeUtils.buildMobile(mobile);
 		}
-		String tname = securityInfoService.findByUserId(wUser.getId()).getTname();
 		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USERNAME_SESSION, userName);
-		request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_REALNAME_SESSION, tname);
 		Map<Object,Object> data = new HashMap<Object, Object>();
 		data.put("key",  Base64.encodeToString(wUser.getId()));
 		data.put("userName", userName);
