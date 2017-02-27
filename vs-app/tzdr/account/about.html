@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>关于维胜</title>
+	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
+	    <script type="text/javascript" src="../../js/common.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+	    <link rel="stylesheet" href="../../css/own.css" />
+	    <script src="../../js/jquery-1.11.3.js"></script>
+	    <style>
+	    	.alertDiv{
+			    width: 100%;
+			    position: fixed;
+			    top:0px;
+			    left: 0px;
+			    background-color: rgba(0, 0, 0, 0.38);
+			    height: 600px;
+			    z-index: 998;
+			    display: none;
+			}
+			#close{
+			    cursor: pointer;
+			}
+			.alertDivContent{
+			    position: absolute;
+			    background-color: #FFFFFF;
+			    top:50%;
+			    left: 50%;
+			    width: 90%;
+			    height: 240px;
+			    z-index: 999;
+			    margin:-120px 0px 0px -45%;
+			    color:#2b2b2b;
+			     padding:0px 0px 10px 0px;
+			}
+			.alertDivContent h4 {
+			    text-align: center;
+			    line-height: 40px;
+			    position: relative;
+			    padding:0px 20px;
+			    border-bottom: 1px solid #E5E5E5;
+			}
+			.alertDivContent h4 img{
+			    width: 30px;
+			    position: absolute;
+			    right: 20px;
+			    top:5px;
+			    vertical-align: middle;
+			}
+			.alertDivContent p{
+			    text-align: left;
+			    padding:0px 20px;
+			    color: #666666;
+			    font-size: 14px;
+			    margin-bottom: 0px;
+			    line-height: 25px;
+			}
+			.alertDivContent p:nth-child(2){
+			    margin-top: 20px;
+			}
+			.alertDivContent p:nth-child(5){
+			    margin-bottom: 20px;
+			}
+			.alertDivContent button{
+			    height: 40px;
+			    line-height: 40px;
+			    font-size: 16px;
+			}
+			.alertDivContent #download{
+			    background-color: #fcc900;
+			    border:none;
+			    margin-left: 20px;
+			     margin-right: 20px;
+			     padding: 0px;
+			    width: 40%;
+			    color: #2b2b2b;
+			}
+			.alertDivContent #openPage{
+			    background-color: #CCCCCC;
+			   	width: 40%;
+			   	float: right;
+			    border:none;
+			    margin-right: 20px;
+			    color: #FFFFFF;
+			     padding: 0px;
+			}
+	    </style>
+	</head>
+	<body  class="about">
+		<header class="mui-bar mui-bar-nav own-topbg">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+		<h1 class="mui-title">关于维胜</h1>		
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">在线客服</a>
+	</header>	
+	<div class="mui-content">
+		<div class="about-top"></div>
+		<ul id="list" class="mui-table-view ac_list">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="charge"><i>版本号</i><span id="editon">2.0.0</span></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="charge"><i>来给维胜评分吧~</i></a>
+			</li>
+		</ul>
+		<div class="alertDiv">
+            <div class="alertDivContent">
+                <h4>有新版本啦！<img src="../../images/close1.png" id="close"></h4>
+                <p>1.追加保证金更换为500起。</p>
+                <p>2.在线客服上线啦！</p>
+                <p>3.优化了一些基础体验。！</p>
+                <p>未下载请点击下载，已下载请点击打开~</p>
+                <button id="download">立即更新</button><button id="openPage" >下次再说</button>
+            </div>
+        </div>
+	</div>
+	<script>
+		mui.init();
+		mui.plusReady(function(){
+			document.getElementById("close").addEventListener("tap",function(){
+				$(".alertDiv").css("display","none");
+			});
+			document.getElementById("download").addEventListener("tap",function(){
+				$(".alertDiv").css("display","none");
+			});
+			document.getElementById("openPage").addEventListener("tap",function(){
+				$(".alertDiv").css("display","none");
+			});
+		})
+	</script>
+	</body>
+</html>
