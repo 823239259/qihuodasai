@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.util.CollectionUtils;
-import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
+import com.tzdr.business.service.userTrade.FPoundageParitiesService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
+import com.tzdr.business.service.userTrade.FSimpleParitiesService;
 import com.tzdr.business.service.userTrade.FinternationFutureAppendLevelMoneyService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
@@ -48,10 +48,11 @@ import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.common.web.support.EasyUiPageData;
 import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.JsonResult;
-import com.tzdr.domain.entity.DataMap;
 import com.tzdr.domain.vo.TradeExclDetailVos;
 import com.tzdr.domain.vo.ftse.FSimpleFtseVo;
+import com.tzdr.domain.web.entity.FPoundageParities;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
+import com.tzdr.domain.web.entity.FSimpleParities;
 import com.tzdr.domain.web.entity.TradeDetail;
 
 
@@ -76,9 +77,10 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	
 	@Autowired
 	private SecurityInfoService securityInfoService;
-	
 	@Autowired
-	private DataMapService dataMapService;
+	private FPoundageParitiesService poundageParitiesService;
+	@Autowired
+	private FSimpleParitiesService simpleParitiesService;
 	
 	@Override
 	public BaseService<FSimpleFtseUserTrade> getBaseService() {
@@ -531,8 +533,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		
 		Map<String, Double> leadLever = leadLever(detailVos);
 		//获取结算汇率
-		List<DataMap> dataMap = dataMapService.findByTypeKey("tranProfitLossParities");
-		String parities = CollectionUtils.isEmpty(dataMap) ? null :dataMap.get(0).getValueName();
+		List<FPoundageParities> paritiess = poundageParitiesService.getAll();
 		
 		FSimpleFtseUserTrade ftse = null;
 		try {
@@ -540,10 +541,13 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//获取总的操盘资金 初始操盘资金+追加保证金
-		BigDecimal traderTotal = ftse.getTraderTotal().add(ftse.getAppendTraderBond());
+		
+		//获取总的操盘资金 初始操盘资金($)+追加保证金(￥)
+		FSimpleParities fSimpleParities = simpleParitiesService.getFSimpleParities(1);
+		BigDecimal appendTraderTotal = ftse.getAppendTraderBond().divide(fSimpleParities.getParities(),4, BigDecimal.ROUND_HALF_EVEN);
+		BigDecimal traderTotal = ftse.getTraderTotal().add(appendTraderTotal);
 		//计算交易盈亏
-		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,parities,new BigDecimal(todayMoeny),traderTotal);
+		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,paritiess,new BigDecimal(todayMoeny),traderTotal);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);

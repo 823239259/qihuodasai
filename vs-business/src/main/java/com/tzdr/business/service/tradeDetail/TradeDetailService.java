@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tzdr.common.baseservice.BaseService;
+import com.tzdr.domain.web.entity.FPoundageParities;
 import com.tzdr.domain.web.entity.FSimpleParities;
 import com.tzdr.domain.web.entity.TradeDetail;
 
@@ -47,5 +48,5 @@ public interface TradeDetailService extends BaseService<TradeDetail>{
 	 * @param traderBondSum  总的保证金
 	 * @return
 	 */
-	public double countTranProfitLoss(List<TradeDetail> tradeDetails,String parities,BigDecimal todayMoeny,BigDecimal traderTotal);
+	public double countTranProfitLoss(List<TradeDetail> tradeDetails,List<FPoundageParities> parities,BigDecimal todayMoeny,BigDecimal traderTotal);
 }

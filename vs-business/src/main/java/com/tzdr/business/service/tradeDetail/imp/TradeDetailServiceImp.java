@@ -10,15 +10,18 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.tools.internal.xjc.reader.xmlschema.BGMBuilder;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
+import com.tzdr.business.service.userTrade.FPoundageParitiesService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.domain.dao.tradeDetail.TradeDetailDao;
 import com.tzdr.domain.vo.ftse.FSimpleParitiesVo;
+import com.tzdr.domain.web.entity.FPoundageParities;
 import com.tzdr.domain.web.entity.FSimpleParities;
 import com.tzdr.domain.web.entity.TradeDetail;
 
@@ -27,6 +30,7 @@ import rop.thirdparty.com.alibaba.fastjson.JSON;
 @Service("tradeDetailService")
 @Transactional
 public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDetailDao> implements TradeDetailService{
+	
 	@Override
 	public void doSaveTradeExclDetail(String tradeDetail,String fastId) {
 		JSONArray jsonArray = JSONArray.parseArray(tradeDetail);
@@ -80,8 +84,8 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		
 	}
 	@Override
-	public double countTranProfitLoss(List<TradeDetail> tradeDetails,String parities,BigDecimal todayMoeny,BigDecimal traderTotal) {
-		JSONObject jsStr = JSONObject.parseObject(parities);
+	public double countTranProfitLoss(List<TradeDetail> tradeDetails,List<FPoundageParities> parities,BigDecimal todayMoeny,BigDecimal traderTotal) {
+		
 		BigDecimal HKDfreeMoeny = new BigDecimal(0.0);
 		BigDecimal JPYfreeMoeny = new BigDecimal(0.0);
 		BigDecimal EURfreeMoeny = new BigDecimal(0.0);
@@ -99,12 +103,21 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 			}else
 				USDfreeMoeny = USDfreeMoeny.add(lever.multiply(free));
 		}
-		//计算总的手续费  保留2位小数
-		BigDecimal freeSum = HKDfreeMoeny.multiply(new BigDecimal(jsStr.getString("HKD-HKFE")))
-							 .add(JPYfreeMoeny.multiply(new BigDecimal(jsStr.getString("JPY"))))
-							 .add(EURfreeMoeny.multiply(new BigDecimal(jsStr.getString("EUR"))))
-							 .add(USDfreeMoeny);
-		//总盈亏  交易盈亏=账户余额  - 总操盘资金（初始+追加保证金）  + 手续费
+		
+		//计算总的手续费    
+		BigDecimal freeSum = USDfreeMoeny;
+		//根据结算手续费汇率  将各币种手续费转化为美元    
+		for (FPoundageParities fPoundageParities : parities) {
+			if("HKD-HKFE".equals(fPoundageParities.getCurrencyNo())){
+				freeSum = freeSum.add(HKDfreeMoeny.multiply(fPoundageParities.getParities()));
+			}else if("JPY".equals(fPoundageParities.getCurrencyNo())){
+				freeSum = freeSum.add(JPYfreeMoeny.multiply(fPoundageParities.getParities()));
+			}else if("EUR".equals(fPoundageParities.getCurrencyNo())){
+				freeSum = freeSum.add(EURfreeMoeny.multiply(fPoundageParities.getParities()));
+			}
+		}
+	
+		//总盈亏  交易盈亏=账户余额  - 总操盘资金（初始+追加保证金）  + 手续费  （保留2位小数）
 	    double tranProfitLoss = todayMoeny.subtract(traderTotal).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 		
 		return tranProfitLoss;

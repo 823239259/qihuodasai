@@ -21,6 +21,8 @@ function connectTradeServer() {
 function evaluation(tranAccount,tranPassword){
 	trade_username = tranAccount;
 	trade_password = tranPassword;
+	console.log("trade_username: "+trade_username);
+	console.log("trade_password: "+trade_password);
 }
 
 /**
@@ -431,6 +433,7 @@ var Trade = {
  * @param {Object} evt
  */
 function handleMessage(evt) {
+	
 	var dataString = evt.data;
 	var jData = JSON.parse(dataString);
 	var method = jData.Method;
@@ -534,10 +537,13 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
+    		console.log("parameters: "+parameters);
     		if(isEmpty(parameters)){
+    			console.log("2222222222");
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
     		}else{
+    			console.log("%%%%%%%%");
 	    		var tradeNo = parameters.TradeNo;
 	    		var commodityNo = parameters.CommodityNo;
 	    		var contractNo = parameters.ContractNo;
