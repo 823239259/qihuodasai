@@ -7,7 +7,7 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.3.6",/*应用版本名称*/
+		"name": "2.3.5",/*应用版本名称*/
 		"code": "2017022302"
 	},
 	"description": "",/*应用描述信息*/
@@ -336,7 +336,8 @@
 					"js/jquery-1.11.3.js",
 					"images/weixinIcon.png",
 					"images/close.png",
-					"images/close1.png"
+					"images/close1.png",
+					"images/about.png"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
@@ -357,7 +358,8 @@
 					"tzdr/account/bindWeixin.html",
 					"tzdr/account/accountno.html",
 					"tzdr/login/retrievePassword.html",
-					"tzdr/account/Invitation.html"
+					"tzdr/account/Invitation.html",
+					"tzdr/account/about.html"
 				],
 				"priority": 0
 			},
@@ -870,7 +872,8 @@
 					"images/0.png",
 					"images/2.png",
 					"images/1.png",
-					"images/weixinIcon.png"
+					"images/weixinIcon.png",
+					"images/about.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
@@ -1653,6 +1656,21 @@
 					"css/mui.min.css",
 					"js/share.js",
 					"images/weiboshare.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/about.html": {
+				"resources": [
+					"images/aboutBg.png",
+					"images/newEdition.jpg",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/close1.png"
 				],
 				"refer": [],
 				"priority": 0
