@@ -537,13 +537,10 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
-    		console.log("parameters: "+parameters);
     		if(isEmpty(parameters)){
-    			console.log("2222222222");
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
     		}else{
-    			console.log("%%%%%%%%");
 	    		var tradeNo = parameters.TradeNo;
 	    		var commodityNo = parameters.CommodityNo;
 	    		var contractNo = parameters.ContractNo;
