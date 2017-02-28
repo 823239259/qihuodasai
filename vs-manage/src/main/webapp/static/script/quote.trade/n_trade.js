@@ -1,6 +1,6 @@
 var tradeSocket = null;
 var trade_url = "ws://192.168.0.213:7001";
-var trade_model = "0"; // 实盘：0；模拟盘：1
+var trade_model = "1"; // 实盘：0；模拟盘：1
 var trade_version = "3.2";
 var trade_username = null;
 var trade_password = null; 	// base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4)
@@ -29,7 +29,6 @@ function evaluation(tranAccount,tranPassword){
  * 交易初始化加载
  */
 function initTradeClient(tranAccount,tranPassword) {
-	
 	if(tradeSocket == null) {
 		connectTradeServer();
 	}
@@ -43,7 +42,8 @@ function initTradeClient(tranAccount,tranPassword) {
 	}
 
 	tradeSocket.onclose = function(evt) {
-		console.log("onclose【" + evt + "】");
+		initTradeData();
+		console.log("交易退出");
 	}
 
 	tradeSocket.onerror = function(evt) {
@@ -464,6 +464,8 @@ function handleMessage(evt) {
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			if(code == 0) {
+				quoteSocket.close();
+				tradeSocket.close();
 				//退出成功
 			}else{
 				Check.messageBox("提示","登录交易系统没有正常退出");
@@ -485,7 +487,6 @@ function handleMessage(evt) {
 				
 			} else {//有持仓
 				Check.messageBox("提示","有持仓，不能结算");
-				Trade.doLoginOut(tranAccount,"");
 				return;
 			}
     	}	
@@ -537,6 +538,7 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
+    		console.log("parameters: "+parameters);
     		if(isEmpty(parameters)){
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
@@ -658,6 +660,21 @@ function mergeAccount(jAccount) {
 	cacheTotalAccount.RiskRate += accountVO.RiskRate;
 }
 
+function initTradeData(){
+	tradeSocket = null;
+	trade_username = null;
+	trade_password = null;
+	cacheAccount = new Object();
+	cacheTotalAccount = new Object();
+	cacheTotalAccount.TodayAmount = 0.0;
+	cacheTotalAccount.TodayCanUse = 0.0;
+	cacheTotalAccount.FloatingProfit = 0.0;
+	cacheTotalAccount.CloseProfit = 0.0;
+	cacheTotalAccount.FrozenMoney = 0.0;
+	cacheTotalAccount.Deposit = 0.0;
+	cacheTotalAccount.CounterFee = 0.0;
+	cacheTotalAccount.RiskRate = 0.0;
+}
 
 
 

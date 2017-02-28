@@ -164,11 +164,13 @@ function testcheck(tranAccount,todayMoeny){
 			handleData(leadLever,1);
 			inputLeverShow(bussType);
 			endType = 1;
-			Trade.doLoginOut(tranAccount,"");
 			$("#tranProfitLoss").attr("disabled","disabled");
 			$("#inputWin .easyui-validatebox").attr("disabled","disabled");
 			$("#inputWin").show();
 			$("#inputWin").window('open');
+			//退出行情、交易
+			Quote.doLoginOut(quote_username);
+			Trade.doLoginOut(trade_username);
 		}						
 	});
 }
