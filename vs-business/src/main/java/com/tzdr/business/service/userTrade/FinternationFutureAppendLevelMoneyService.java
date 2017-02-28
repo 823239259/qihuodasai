@@ -1,13 +1,10 @@
 package com.tzdr.business.service.userTrade;
 
-import java.math.BigDecimal;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.google.common.collect.Lists;
 import com.tzdr.business.cms.service.auth.AuthService;
 import com.tzdr.business.service.thread.SMSSendForContentThread;
@@ -16,13 +13,10 @@ import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.MessageUtils;
-import com.tzdr.common.utils.TypeConvert;
 import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.MultiListParam;
 import com.tzdr.domain.dao.userTrade.FinternationFutureAppendLevelMoneyDao;
 import com.tzdr.domain.vo.cms.FinternationFutureMoneyVo;
-import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
-import com.tzdr.domain.web.entity.FSimpleProductAppendLevelMoney;
 import com.tzdr.domain.web.entity.FinternationFutureAppendLevelMoney;
 import com.tzdr.domain.web.entity.WUser;
 

@@ -16,12 +16,16 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.tools.internal.xjc.reader.xmlschema.BGMBuilder;
+import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FPoundageParitiesService;
+import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
+import com.tzdr.business.service.userTrade.FinternationFutureAppendLevelMoneyService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.domain.dao.tradeDetail.TradeDetailDao;
 import com.tzdr.domain.vo.ftse.FSimpleParitiesVo;
 import com.tzdr.domain.web.entity.FPoundageParities;
+import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.FSimpleParities;
 import com.tzdr.domain.web.entity.TradeDetail;
 
@@ -30,7 +34,10 @@ import rop.thirdparty.com.alibaba.fastjson.JSON;
 @Service("tradeDetailService")
 @Transactional
 public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDetailDao> implements TradeDetailService{
-	
+	@Autowired
+	DataMapService dataMapService;
+	@Autowired
+	FSimpleFtseUserTradeService simpleFtseUserTradeService;
 	@Override
 	public void doSaveTradeExclDetail(String tradeDetail,String fastId) {
 		JSONArray jsonArray = JSONArray.parseArray(tradeDetail);
@@ -84,7 +91,7 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		
 	}
 	@Override
-	public double countTranProfitLoss(List<TradeDetail> tradeDetails,List<FPoundageParities> parities,BigDecimal todayMoeny,BigDecimal traderTotal) {
+	public double countTranProfitLoss(List<TradeDetail> tradeDetails,List<FPoundageParities> parities,BigDecimal todayMoeny,String id) {
 		
 		BigDecimal HKDfreeMoeny = new BigDecimal(0.0);
 		BigDecimal JPYfreeMoeny = new BigDecimal(0.0);
@@ -116,8 +123,15 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 				freeSum = freeSum.add(EURfreeMoeny.multiply(fPoundageParities.getParities()));
 			}
 		}
-	
-		//总盈亏  交易盈亏=账户余额  - 总操盘资金（初始+追加保证金）  + 手续费  （保留2位小数）
+		//追加保证金汇率
+		String rate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
+		FSimpleFtseUserTrade ftse = simpleFtseUserTradeService.get(id);
+		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(rate),4, BigDecimal.ROUND_HALF_EVEN);
+		//总操盘资金（初始入金+追加保证金）
+		BigDecimal traderTotal = ftse.getTraderTotal().add(appendTraderBond);
+		
+		
+		//总盈亏  交易盈亏=账户余额  - 总操盘资金  + 手续费  （保留2位小数）
 	    double tranProfitLoss = todayMoeny.subtract(traderTotal).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 		
 		return tranProfitLoss;

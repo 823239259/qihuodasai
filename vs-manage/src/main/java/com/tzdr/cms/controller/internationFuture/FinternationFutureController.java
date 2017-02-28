@@ -535,19 +535,8 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		//获取结算汇率
 		List<FPoundageParities> paritiess = poundageParitiesService.getAll();
 		
-		FSimpleFtseUserTrade ftse = null;
-		try {
-			ftse = simpleFtseUserTradeService.findById(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		//获取总的操盘资金 初始操盘资金($)+追加保证金(￥)
-		FSimpleParities fSimpleParities = simpleParitiesService.getFSimpleParities(1);
-		BigDecimal appendTraderTotal = ftse.getAppendTraderBond().divide(fSimpleParities.getParities(),4, BigDecimal.ROUND_HALF_EVEN);
-		BigDecimal traderTotal = ftse.getTraderTotal().add(appendTraderTotal);
 		//计算交易盈亏
-		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,paritiess,new BigDecimal(todayMoeny),traderTotal);
+		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,paritiess,new BigDecimal(todayMoeny),id);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);
