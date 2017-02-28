@@ -130,6 +130,9 @@
 				$(".alertDiv").css("display","none");
 			});
 			document.getElementById("editonButton").addEventListener("tap",function(){
+				if(dataVersion==undefined){
+					return
+				}
 				if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer){
 					$(".alertDiv").css("display","block");
 				}else{
@@ -156,6 +159,9 @@
 									return;
 								}
 								dataVersion = JSON.parse(dataVersion);
+								if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer){
+									$("#editon").css("background","url(../images/newEdition.jpg) no-repeat right center");
+								}
 //								updateApk1(_callback);
 							},function(result){
 								return; 
@@ -178,7 +184,7 @@
 										if (mui.cacheUser.isLogin()){
 												mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
 										}
-										});	// 下载升级包
+										},Android);	// 下载升级包
 									}else{
 										var _download_url = Android.bigUrl;
 											plus.runtime.openURL(_download_url);
@@ -193,7 +199,7 @@
 												if (mui.cacheUser.isLogin()){
 													mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
 												}
-											});	// 下载升级包
+											},Android);	// 下载升级包
 										}else{
 											var _download_url = Android.bigUrl;
 											plus.runtime.openURL(_download_url);
@@ -218,7 +224,7 @@
 										if (mui.cacheUser.isLogin()){
 											mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
 										}
-										});	// 下载升级包
+										},iOS);	// 下载升级包
 									}else{
 										var _download_url = iOS.bigUrl;
 											plus.runtime.openURL(_download_url);
@@ -233,7 +239,7 @@
 												if (mui.cacheUser.isLogin()){
 													mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
 												}
-											});	// 下载升级包
+											},iOS);	// 下载升级包
 										}else{
 											var _download_url = iOS.bigUrl;
 											plus.runtime.openURL(_download_url);
@@ -254,7 +260,8 @@
 				// 下载wgt文件
 				function downWgt(_callback,data){
 					plus.nativeUI.showWaiting("下载升级包..."); 
-					plus.downloader.createDownload(dataVersion.Android.littleUrl, {filename:"_doc/update/"}, function(d,status){
+					console.log(data.littleUrl);
+					plus.downloader.createDownload(data.littleUrl, {filename:"_doc/update/"}, function(d,status){
 						plus.nativeUI.closeWaiting();
 						if (status == 200) { 
 							installWgt(d.filename,_callback);	// 安装wgt包
