@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>历史成交查询</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel= "stylesheet"  href="../../css/mui.picker.all.css"/>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/quotation.css" />
+		<script type="text/javascript" src="../../js/common.config.js" ></script> 
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/mui.picker1.min.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			 <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
+		    <h1 class="mui-title" id="quotationTitle"><span>历史成交查询</span></h1>
+		</header>
+		<div class="mui-content">
+			<div class="detail-title">
+				<span id="chioceDate" data-options='{"type":"date","beginYear":2014,"endYear":2016}' ></span>
+				<span id="chioceDataRes">2017-02-24</span>
+				<span>查询</span>
+			</div>
+			<div class="detail-table">
+				<table>
+					<thead>
+						<tr>
+							<td>序号</td>
+							<td>合约名称</td>
+							<td>交易所</td>
+							<td>币种</td>
+							<td>买卖</td>
+							<td>成交价</td>
+							<td>成交量</td>
+							<td>手续费</td>
+							<td>下单类型</td>
+							<td>下单人编号</td>
+							<td>成交时间</td>
+						</tr>
+					</thead>
+					<tr>
+						<td>序号</td>
+						<td>合约名称</td>
+						<td>交易所</td>
+						<td>币种</td>
+						<td>买卖</td>
+						<td>成交价</td>
+						<td>成交量</td>
+						<td>手续费</td>
+						<td>下单类型</td>
+						<td>下单人编号</td>
+						<td>成交时间</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script>
+			(function($) {
+				$.init();
+				document.getElementById("chioceDate").addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						/*
+						 * 首次显示时实例化组件
+						 * 示例为了简洁，将 options 放在了按钮的 dom 上
+						 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+						 */
+						var picker = new $.DtPicker(options);
+						picker.show(function(rs) {
+							/*
+							 * rs.value 拼合后的 value
+							 * rs.text 拼合后的 text
+							 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+							 * rs.m 月，用法同年
+							 * rs.d 日，用法同年
+							 * rs.h 时，用法同年
+							 * rs.i 分（minutes 的第二个字母），用法同年
+							 */
+							document.getElementById("chioceDataRes").innerHTML = rs.text;
+							/* 
+							 * 返回 false 可以阻止选择框的关闭
+							 * return false;
+							 */
+							/*
+							 * 释放组件资源，释放后将将不能再操作组件
+							 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+							 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+							 */
+							picker.dispose();
+						});
+					}, false);
+			})(mui);
+		</script>
+	</body>
+</html>
