@@ -1,7 +1,8 @@
 
 //交易明细窗口
 function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,tranCommission,endAmount,businessType,tranActualLever,crudeTranActualLever,hsiTranActualLever,
-		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever,daxtranMinActualLever) {
+		mdtranActualLever,mntranActualLever,mbtranActualLever,daxtranActualLever,nikkeiTranActualLever,lhsiTranActualLever,agTranActualLever,heIndexActualLever,
+		xheIndexActualLever,ameCopperActualLever,ameSilverActualLever,smaActualLever,daxtranMinActualLever,naturalGasActualLever) {
 	var detailInfoFtseHeight  = $("#detailInfoFtse").outerHeight()/2;
     $(".sif_money").css({
         top:"50%",
@@ -109,6 +110,10 @@ function settingEndInfoFtse(traderBond,appendTraderBond,tranProfitLoss,parities,
 		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3>迷你德国DAX指数</h3>';
 		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+(daxtranMinActualLever == undefined ? 0 : daxtranMinActualLever)+'手</p>';
+		tradeDev+= '</li>';
+		tradeDev+= '<li style="width:200px;">';
+		tradeDev+= '<h3>天然气</h3>';
+		tradeDev+= '<p style= "border-bottom: 1px solid #e7e7e7;">'+(naturalGasActualLever == undefined ? 0 : naturalGasActualLever)+'手</p>';
 		tradeDev+= '</li>';
 		tradeDev+= '<li style="width:200px;">';
 		tradeDev+= '<h3></h3>';
@@ -336,7 +341,7 @@ function getFtseDataList(index,type,
 	            	+n.endParities+","
 	             	+ n.tranFeesTotal +"," + n.endAmount +","+n.businessType+","+n.tranActualLever +","+n.crudeTranActualLever +","+n.hsiTranActualLever+ ","+n.mdtranActualLever+","
 	            	+n.mntranActualLever+","+n.mbtranActualLever+","+n.daxtranActualLever+","+n.nikkeiTranActualLever+","+n.lhsiTranActualLever+","+n.agTranActualLever+","+n.heIndexActualLever+","
-	            	+n.xheIndexActualLever+","+n.ameCopperActualLever+","+n.ameSilverActualLever+","+n.smaActualLever+","+n.daxtranMinActualLever+"));\" " +
+	            	+n.xheIndexActualLever+","+n.ameCopperActualLever+","+n.ameSilverActualLever+","+n.smaActualLever+","+n.daxtranMinActualLever+","+n.naturalGasActualLever+"));\" " +
 	            	"style=\"cursor:pointer;color:#fc3;\" class='uc_tlbtn_btn_see' >账单详细</a></td>";
             	}else{
             		html = html + "<td></td>";

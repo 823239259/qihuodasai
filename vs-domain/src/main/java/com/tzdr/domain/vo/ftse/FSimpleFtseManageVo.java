@@ -197,6 +197,11 @@ public class FSimpleFtseManageVo implements Serializable {
 	@AllowExcel(name = "迷你德国DAX指数")
 	private Integer daxtranMinActualLever;
 	/**
+	 * 天然气指数手数
+	 */
+	@AllowExcel(name = "天然气指数")
+	private Integer naturalGasActualLever;
+	/**
 	 * 交易手续费总额
 	 */
 	@AllowExcel(name = "交易手续费")
@@ -829,4 +834,12 @@ public class FSimpleFtseManageVo implements Serializable {
 		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
+	}
+	
 }

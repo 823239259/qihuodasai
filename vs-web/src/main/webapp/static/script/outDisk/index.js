@@ -45,6 +45,7 @@ function getData(){
 			$("#aSilverActualLever").html(result.obj.aSilverActualLever);
 			$("#smaActualLever").html(result.obj.smaActualLever);
 			$("#daxtranMinActualLever").html(result.obj.daxtranMinActualLever);
+			$("#naturalGasActualLever").html(result.obj.naturalGasActualLever);
 		} else {
 			showMsgDialog("提示",result.message);
 		}

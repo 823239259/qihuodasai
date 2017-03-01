@@ -524,6 +524,7 @@ public class UserFTradeController {
 		fSimpleFtseUserTrade.setAmeSTranFees(outDiskPrice.get(13).getPrice());
 		fSimpleFtseUserTrade.setSmallCTranFees(outDiskPrice.get(14).getPrice());
 		fSimpleFtseUserTrade.setDaxMinTranFees(outDiskPrice.get(15).getPrice());
+		fSimpleFtseUserTrade.setNaturalGasFess(outDiskPrice.get(16).getPrice());
 		//审核中
 		fSimpleFtseUserTrade.setStateType(1); //状态【1.开户中、2.申请结算、3.待结算、4.操盘中  5.审核不通过 、6.已结算】
 		fSimpleFtseUserTrade.setBusinessType(businessType); 

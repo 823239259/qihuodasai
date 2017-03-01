@@ -203,7 +203,9 @@ public class FSimpleFtseVo implements Serializable {
 	 * 迷你德国DAX指数
 	 */
 	private Integer daxtranMinActualLever;
-	
+	/**
+	 * 天然气交易手数
+	 */
 	private Integer naturalGasActualLever;
 	/**
 	 * 交易手续费总额

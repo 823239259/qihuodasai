@@ -206,6 +206,14 @@
                     <td>￥<i>${outDiskPrice[15].price}</i>/手</td>
                 </tr>
                 
+                 <tr>
+                    <td style="line-height: normal;">天然气</td>
+                    <td>${outDiskPrice[16].mainContract}</td>
+                    <td>${outDiskPrice[16].tradTime}</td>
+                    <td>只交天然气时，初始最大可持仓<i id='naturalGasActualLever'>${outDiskParameters[0].naturalGasActualLever}</i>手</td>
+                    <td>￥<i>${outDiskPrice[16].price}</i>/手</td>
+                </tr>
+                
                 <tr>
                 	<td colspan="5">在各品种停止交易的5分钟内，即<i style="font-size:14px;">${transTime}</i>六个时段所有品种只能平仓，不能开仓。</td>
                 </tr>
