@@ -1,6 +1,6 @@
 var tradeSocket = null;
 var trade_url = "ws://192.168.0.213:7001";
-var trade_model = "0"; // 实盘：0；模拟盘：1
+var trade_model = "1"; // 实盘：0；模拟盘：1
 var trade_version = "3.2";
 var trade_username = null;
 var trade_password = null; 	// base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4)
@@ -541,7 +541,7 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
-
+    		console.log("成交记录parameters: "+parameters);
     		if(isEmpty(parameters)){
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
