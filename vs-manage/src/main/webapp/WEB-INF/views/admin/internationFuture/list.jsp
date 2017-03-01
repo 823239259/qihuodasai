@@ -404,15 +404,6 @@ function timeConvert(value,rowData,rowIndex) {
 								<th field="tranProfitLoss" width="160">交易盈亏(美元)</th>
 								<th field="tranActLever" width="160">交易手数</th>
 								
-								<!-- <th field="tranActualLever" width="160">A50交易手数</th>
-								<th field="hsiTranActualLever" width="160">恒指交易手数</th>
-								<th field="crudeTranActualLever" width="160">原油交易手数</th>
-								<th field="mdtranActualLever" width="160">迷你道指交易手数</th>
-								<th field="mntranActualLever" width="160">迷你纳指交易手数</th>
-								<th field="mbtranActualLever" width="160">迷你标普交易手数</th>
-								<th field="daxtranActualLever" width="160">德国DAX交易手数</th>
-								<th field="nikkeiTranActualLever" width="160">日经225交易手数</th> -->
-								
 								<th field="tranFeesTotal" width="160">交易手续费(元)</th>
 								<th field="discountMoneyStr" width="150">优惠券</th>
 								<th field="discountActualMoney" width="150">抵扣手续费(元)</th>
@@ -503,7 +494,7 @@ function timeConvert(value,rowData,rowIndex) {
 			       </tr> 
 			           <tr id="mdTradeNumTR">
 			           
-			           		<td class="label right">迷你道指交易:</td>、
+			           		<td class="label right">迷你道指交易:</td>
 			                <td>
 			                   <input id="mdtranActualLever" name="mdtranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>

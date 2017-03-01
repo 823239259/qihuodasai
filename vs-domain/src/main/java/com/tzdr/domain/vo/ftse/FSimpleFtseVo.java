@@ -203,6 +203,8 @@ public class FSimpleFtseVo implements Serializable {
 	 * 迷你德国DAX指数
 	 */
 	private Integer daxtranMinActualLever;
+	
+	private Integer naturalGasActualLever;
 	/**
 	 * 交易手续费总额
 	 */
@@ -730,6 +732,14 @@ public class FSimpleFtseVo implements Serializable {
 
 	public void setEndType(Integer endType) {
 		this.endType = endType;
+	}
+
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
 	}
 	
 }

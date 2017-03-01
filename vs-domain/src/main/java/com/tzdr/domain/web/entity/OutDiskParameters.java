@@ -45,40 +45,30 @@ public class OutDiskParameters extends BaseCrudEntity{
 	 */
 	private Integer atranActualLever;
 	
-	
-	
 	/**
 	 * 恒指交易手数
 	 */
 	private Integer htranActualLever;
-	
-	
 	
 	/**
 	 *原油交易手数
 	 */
 	private Integer ytranActualLever;
 	
-
-	
 	/**
 	 * 迷你纳指交易手数
 	 */
 	private Integer mntranActualLever;
 
-	
 	/**
 	 * 迷你标普交易手数
 	 */
 	private Integer mbtranActualLever;
 	
-	
 	/**
 	 * 德国DAX交易手数
 	 */
 	private Integer daxtranActualLever;
-	
-	
 	
 	/**
 	 * 日经225交易手数
@@ -137,6 +127,12 @@ public class OutDiskParameters extends BaseCrudEntity{
 	 * 迷你德国DAX指数交易手数
 	 */
 	private Integer daxtranMinActualLever;
+	
+	/**
+	 * 天然气交易手数
+	 */
+	private Integer naturalGasActualLever;
+	
 	public BigDecimal getTraderBond() {
 		return traderBond;
 	}
@@ -301,6 +297,14 @@ public class OutDiskParameters extends BaseCrudEntity{
 
 	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
 		this.daxtranMinActualLever = daxtranMinActualLever;
+	}
+	
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
 	}
 
 	

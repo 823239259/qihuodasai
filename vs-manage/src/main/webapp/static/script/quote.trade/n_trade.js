@@ -1,6 +1,6 @@
 var tradeSocket = null;
 var trade_url = "ws://192.168.0.213:7001";
-var trade_model = "1"; // 实盘：0；模拟盘：1
+var trade_model = "0"; // 实盘：0；模拟盘：1
 var trade_version = "3.2";
 var trade_username = null;
 var trade_password = null; 	// base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4)
@@ -541,7 +541,6 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
-    		console.log("成交记录parameters: "+parameters);
     		if(isEmpty(parameters)){
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
@@ -558,17 +557,9 @@ function handleMessage(evt) {
 	    		var tradePrice = Number(parameters.TradePrice).toFixed(6);
 	    		var tradeDateTime = parameters.TradeDateTime;
 	    		var tradeFee = Number(parameters.TradeFee).toFixed(6);
-	    		var clientNo = parameters.ClientNo;
 	    		var clientNo = trade_username;
 	    		var currencyNo = getCacheContractAttribute(commodityNo, "CurrencyNo");  //获取对应的币种简称??
 	    		var tradeType = "正常单";
-	    		var orderType = "客户单";//or 强平单
-	    		var orderUserno = null;
-	    		if(orderType == "客户单"){
-	    			orderUserno = clientNo;
-	    		}else if(orderType == "强平单"){
-	    			orderUserno = "QPServer";
-	    		}
 	    		var buyNum = 0;
 	    		var sellNum = 0;
 	    		if(drection == 0){
@@ -590,8 +581,6 @@ function handleMessage(evt) {
 						"sellNum":sellNum,
 						"tradePrice":tradePrice,
 						"free":tradeFee,
-						"orderType":orderType,
-						"orderUserno":orderUserno,
 						"tradeType":tradeType,
 						"tradeNo":tradeNo,
 						"fastId":id

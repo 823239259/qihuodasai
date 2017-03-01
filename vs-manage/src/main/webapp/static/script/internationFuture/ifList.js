@@ -286,8 +286,8 @@ function appendTradeDetailHtml(tradeDetail,index){
 				"<td>"+_data.commodityNo+"</td>" +
 				"<td>"+parseFloat(_data.buyNum).toFixed(0)+"</td>" +
 				"<td>"+parseFloat(_data.sellNum).toFixed(0)+"</td>" +
-				"<td>"+_data.tradePrice+"</td>" +
-				"<td>"+_data.free+"</td>" +
+				"<td>"+parseFloat(_data.tradePrice).toFixed(2)+"</td>" +
+				"<td>"+parseFloat(_data.free).toFixed(2)+"</td>" +
 				"<td>"+_data.orderType+"</td>" +
 				"<td>"+_data.orderUserno+"</td>" +
 				"<td>"+_data.orderUsername+"</td>" +

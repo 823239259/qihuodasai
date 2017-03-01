@@ -462,7 +462,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	public JsonResult detailSave(HttpServletRequest request,HttpServletResponse resp,TradeExclDetailVos detailVo){
 		tradeDetailService.deleteByTradeNo(detailVo.getTradeNo());  
 		
-		Long time = new Date().getTime();
+		Long time = (new Date().getTime())/1000;
 		String userNo = detailVo.getUserNo();
 		String uid = simpleFtseUserTradeService.findByUserNo(userNo).getUid();
 		String tname = securityInfoService.findByUserId(uid).getTname();
@@ -474,13 +474,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		detail.setCurrencyNo(detailVo.getCurrencyNo());
 		detail.setExchangeNo(detailVo.getExchangeNo());
 		detail.setFree(detailVo.getFree());
-		detail.setOrderUserno(detailVo.getOrderUserno());
-		detail.setOrderType(detailVo.getOrderType());
-		if("QPServer".equals(detailVo.getUserNo())){
-			detail.setOrderUsername("vs_system");
-		}else{
-			detail.setOrderUsername(tname);
-		}
+		detail.setOrderUsername(tname);
 		detail.setSellNum(detailVo.getSellNum());
 		detail.setTradeDate(detailVo.getTradeDate());
 		detail.setTradePrice(detailVo.getTradePrice());
@@ -689,6 +683,14 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 					number = tradeNumbDob;
 				}
 				map.put("daxtranMinActualLever", number);
+			}else if(contractNo.startsWith("NG")){
+				lever = map.get("naturalGasActualLever");
+				if(lever != null){
+					number = tradeNumbDob + lever;
+				}else{
+					number = tradeNumbDob;
+				}
+				map.put("naturalGasActualLever", number);
 			}
 		}
 		return map;
