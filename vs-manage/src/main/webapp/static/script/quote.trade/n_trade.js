@@ -555,9 +555,9 @@ function handleMessage(evt) {
 	    		var orderID = parameters.OrderID;
 	    		var drection = parameters.Drection;
 	    		var tradeNum = parameters.TradeNum;
-	    		var tradePrice = parameters.TradePrice;
+	    		var tradePrice = Number(parameters.TradePrice).toFixed(6);
 	    		var tradeDateTime = parameters.TradeDateTime;
-	    		var tradeFee = parameters.TradeFee;
+	    		var tradeFee = Number(parameters.TradeFee).toFixed(6);
 	    		var clientNo = parameters.ClientNo;
 	    		var clientNo = trade_username;
 	    		var currencyNo = getCacheContractAttribute(commodityNo, "CurrencyNo");  //获取对应的币种简称??
