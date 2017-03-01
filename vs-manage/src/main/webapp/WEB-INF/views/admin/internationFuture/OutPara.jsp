@@ -42,6 +42,7 @@ function pass(type,tabs) {
 			$("#aSilverActualLever").val("");
 			$("#smaActualLever").val("");
 			$("#daxtranMinActualLever").val("");
+			$("#naturalGasActualLever").val("");
 			$("#passWin").window({title:'添加'});
 		} else if(type==2){
 			
@@ -72,6 +73,7 @@ function pass(type,tabs) {
 				$("#aSilverActualLever").val(rows[0].aSilverActualLever);
 				$("#smaActualLever").val(rows[0].smaActualLever);
 				$("#daxtranMinActualLever").val(rows[0].daxtranMinActualLever);
+				$("#naturalGasActualLever").val(rows[0].naturalGasActualLever);
 				$("#passWin").window({title:'修改'});
 		
 			}else{
@@ -136,6 +138,7 @@ function passSave() {
 			var aSilverActualLever=$("#aSilverActualLever").val();
 			var daxtranMinActualLever = $("#daxtranMinActualLever").val();
 			var smaActualLever=$("#smaActualLever").val();
+			var naturalGasActualLever=$("#naturalGasActualLever").val();
 		
 		
 			var parameters = '{}';
@@ -144,7 +147,8 @@ function passSave() {
 						"htranActualLever":HTranActualLever,"ytranActualLever":YTranActualLever,"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
 						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever,"hIndexActualLever":hIndexActualLever,"xhIndexActualLever":xhIndexActualLever,
-						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever,"daxtranMinActualLever":daxtranMinActualLever};
+						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever,
+						"daxtranMinActualLever":daxtranMinActualLever,"naturalGasActualLever":naturalGasActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/create",
 						parameters,
 						function(data){
@@ -162,7 +166,8 @@ function passSave() {
 						"mntranActualLever":mntranActualLever,"mbtranActualLever":mbtranActualLever,
 						"daxtranActualLever":daxtranActualLever,"mdtranActualLever":mdtranActualLever,"nikkeiTranActualLever":nikkeiTranActualLever,
 						"hstranActualLever":hstranActualLever,"agtranActualLever":agtranActualLever,"hIndexActualLever":hIndexActualLever,"xhIndexActualLever":xhIndexActualLever,
-						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever,"daxtranMinActualLever":daxtranMinActualLever};
+						"aCopperActualLever":aCopperActualLever,"aSilverActualLever":aSilverActualLever,"smaActualLever":smaActualLever,
+						"daxtranMinActualLever":daxtranMinActualLever,"naturalGasActualLever":naturalGasActualLever};
 				$.post(Check.rootPath() + "/admin/OutDiskParameters/outUpdate",
 						parameters,
 						function(data){
@@ -347,6 +352,7 @@ $(document).ready(function(){
 							<th field="aSilverActualLever" width="150" hidden="true">美白银交易手数</th>
 							<th field="smaActualLever" width="150" hidden="true">小原油交易手数</th>
 							<th field="daxtranMinActualLever" width="150" hidden="true">迷你德国DAX指数</th>
+							<th field="naturalGasActualLever" width="150" hidden="true">天然气交易手数</th>
 							<th field="updateTime" width="150" formatter="DateToS">更新时间</th>
 							<th field="updateUser" width="150">操作人</th>
 			            </tr>
@@ -442,7 +448,7 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
-             <tr>
+            <tr>
                 <td class="label right">迷你纳指交易手数:</td>
                 <td>
                    <input id="mntranActualLever" name="mntranActualLever" class="easyui-validatebox"  data-options="required:true"/>
@@ -453,7 +459,7 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
-             <tr>
+            <tr>
                 <td class="label right">德国DAX交易手数:</td>
                 <td>
                    <input id="daxtranActualLever" name="daxtranActualLever" class="easyui-validatebox"  data-options="required:true"/>
@@ -475,7 +481,7 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
-             <tr>
+            <tr>
                 <td class="label right">H股指交易手数:</td>
                 <td>
                    <input id="hIndexActualLever" name="hIndexActualLever" class="easyui-validatebox"  data-options="required:true"/>
@@ -486,7 +492,7 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
-                 <tr>
+            <tr>
                 <td class="label right">美铜交易手数:</td>
                 <td>
                    <input id="aCopperActualLever" name="aCopperActualLever" class="easyui-validatebox"  data-options="required:true"/>
@@ -497,17 +503,24 @@ $(document).ready(function(){
                 </td>
                 <td><span ></span></td>
             </tr>
+           
             <tr>
-              </tr>
-                 <tr>
                 <td class="label right">小原油交易手数:</td>
                 <td>
                    <input id="smaActualLever" name="smaActualLever" class="easyui-validatebox"  data-options="required:true"/>
                 </td>
-               <td class="label right">迷你德国DAX指数交易手数:</td>
+               	<td class="label right">迷你德国DAX指数交易手数:</td>
                 <td>
                    <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options="required:true"/>
                 </td>
+                <td><span ></span></td>
+            </tr>
+            <tr>
+                <td class="label right">天然气交易手数:</td>
+                <td>
+                   <input id="naturalGasActualLever" name="naturalGasActualLever" class="easyui-validatebox"  data-options="required:true"/>
+                </td>
+              	<td><span ></span></td>
             </tr>
             <tr>
                 <td align="center" colspan="5">
