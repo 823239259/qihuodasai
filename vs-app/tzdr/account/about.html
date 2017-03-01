@@ -174,7 +174,8 @@
 								}
 								dataVersion = JSON.parse(dataVersion);
 								if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer){
-									$("#editon").css("background","url(../images/newEdition.jpg) no-repeat right center");
+									console.log("454");
+									$("#editon").css({"background":"url(../../images/newEdition.jpg) no-repeat right center","padding-right":"60px"});
 								}
 //								updateApk1(_callback);
 							},function(result){
