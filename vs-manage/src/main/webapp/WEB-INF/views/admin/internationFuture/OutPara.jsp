@@ -546,6 +546,7 @@ $(document).ready(function(){
 				    <option value="19">美白银</option>
 				    <option value="20">小原油</option>
 				    <option value="21">迷你德国DAX指数</option>
+				    <option value="22">天然气</option>
 				</select>
                 </td>
                 <td><span ></span></td>

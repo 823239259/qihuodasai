@@ -503,7 +503,7 @@ function timeConvert(value,rowData,rowIndex) {
 			       </tr> 
 			           <tr id="mdTradeNumTR">
 			           
-			           		<td class="label right">迷你道指交易:</td>
+			           		<td class="label right">迷你道指交易:</td>、
 			                <td>
 			                   <input id="mdtranActualLever" name="mdtranActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
@@ -513,7 +513,7 @@ function timeConvert(value,rowData,rowIndex) {
 			                </td>
 			            </tr>
 			           	<tr id="mbTradeNumTR">
-			           		<td class="label right">原油交易:</td>
+			           		<td class="label right">国际原油交易:</td>
 				            <td>
 				                <input id="crudeTranActualLever" name="crudeTranActualLever"  class="easyui-validatebox"  data-options=""/>
 				            </td>
@@ -572,6 +572,13 @@ function timeConvert(value,rowData,rowIndex) {
 			                   <input id="daxtranMinActualLever" name="daxtranMinActualLever" class="easyui-validatebox"  data-options=""/>
 			                </td>
 						</tr>
+						 <tr id="gasTradeNumTR">
+						 	<td class="label right">天然气交易:</td>
+			                <td>
+			                   <input id="naturalGasActualLever" name="naturalGasActualLever" class="easyui-validatebox"  data-options=""/>
+			                </td>
+						</tr>
+						
 						  <tr>
 			                <td align="center" colspan="3">
 			                <a id="btn" href="javascript:void(0);" onclick="handInputSave()" class="easyui-linkbutton">提交</a>
@@ -597,24 +604,28 @@ function timeConvert(value,rowData,rowIndex) {
         			<td class="label center">恒指期货</td>
         			<td class="label center">国际原油</td>
         			<td class="label center">迷你道指</td>
+        			<td class="label center">迷你纳指</td>
         		</tr>
         		<tr>
         			<td align="center" id='a50Count'></td>
 	               	<td align="center" id='hsiCount'></td>
 	               	<td align="center" id='crudeCount'></td>
 	               	<td align="center" id='mdCount'></td>
+	               	<td align="center" id='mnCount'></td>
         		</tr>
         	</table>
         	<br/>
         	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
         		<tr>
-        			<td class="label center">迷你纳指</td>
+        			<td class="label center">小恒指</td>
+        			<td class="label center">H股指</td>
         			<td class="label center">迷你标普</td>
         			<td class="label center">德国DAX</td>
         			<td class="label center">日经225</td>
         		</tr>
         		<tr>
-        			<td align="center" id='mnCount'></td>
+        			<td align="center" id='lhsiCount'></td>
+	               	<td align="center" id='hsCount'></td>
 	               	<td align="center" id='mbCount'></td>
 	               	<td align="center" id='daxCount'></td>
 	               	<td align="center" id='nikkeiCount'></td>
@@ -623,33 +634,34 @@ function timeConvert(value,rowData,rowIndex) {
         	<br/>
         	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
         		<tr>
-        			<td class="label center">小恒指</td>
         			<td class="label center">美黄金</td>
-        			<td class="label center">H股指</td>
-        			<td class="label center">小H股指</td>
-        		</tr>
-        		<tr>
-        			<td align="center" id='lhsiCount'></td>
-	               	<td align="center" id='agCount'></td>
-	               	<td align="center" id='hsCount'></td>
-	               	<td align="center" id='xhsCount'></td>
-        		</tr>
-        	</table>
-        	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
-        		<tr>
         			<td class="label center">美铜</td>
         			<td class="label center">美白银</td>
         			<td class="label center">小原油</td>
-        			<td class="label center">迷你德国DAX指数</td>
+        			<td class="label center">天然气</td>
         		</tr>
         		<tr>
+        			<td align="center" id='agCount'></td>
         			<td align="center" id='acCount'></td>
 	               	<td align="center" id='asCount'></td>
 	               	<td align="center" id='scCount'></td>
-	                <td align="center" id='daxMinCount'></td>
+	               	<td align="center" id='gasCount'></td>
+        		</tr>
+        	</table>
+        	<br/>
+        	<table border="0" style="font-size:12px;" class="conn"  width="99%" cellpadding="0" cellspacing="0">
+        		<tr>
+        			<td class="label center">小H股指</td>
+        			<td class="label center">迷你德国DAX指数</td>
+        		</tr>
+        		<tr>
+	               	<td align="center" id='xhsCount'></td>
+	               	<td align="center" id='daxMinCount'></td>
+	               	
 	                <td align="center" id="end_type_td"></td>
         		</tr>
         	</table>
+        	
         	<table id="end_tradeDetail"  border="0" style="font-size:12px;td:width=30px;" class="conn"  width="100%" cellpadding="0" cellspacing="0"></table>
         	 	<div style = "margin-left: 50%;margin-top: 10px;">
         	 		<a id="btn_end"  href="javascript:void(0);"  onclick="end()" class="easyui-linkbutton">结算</a>

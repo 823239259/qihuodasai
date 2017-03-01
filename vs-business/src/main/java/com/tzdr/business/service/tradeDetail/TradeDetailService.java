@@ -43,10 +43,9 @@ public interface TradeDetailService extends BaseService<TradeDetail>{
 	
 	/**
 	 * @param tradeDetails 成交记录	
-	 * @param parities     结算汇率
 	 * @param todayMoeny   账户今权益（今可用）
-	 * @param traderBondSum  总的保证金
+	 * @param id  方案id
 	 * @return
 	 */
-	public double countTranProfitLoss(List<TradeDetail> tradeDetails,List<FPoundageParities> parities,BigDecimal todayMoeny,String id);
+	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id);
 }

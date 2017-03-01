@@ -317,6 +317,7 @@ function handleData(fast,index){
 			$("#AmeSilverMarketLever").val(dataLever.AmeSilverMarketLever==undefined?0:dataLever.AmeSilverMarketLever);
 			$("#smallCrudeOilMarketLever").val(dataLever.smallCrudeOilMarketLever==undefined?0:dataLever.smallCrudeOilMarketLever);
 			$("#daxtranMinActualLever").val(dataLever.daxtranMinActualLever==undefined?0:dataLever.daxtranMinActualLever);
+			$("#naturalGasActualLever").val(dataLever.naturalGasActualLever==undefined?0:dataLever.naturalGasActualLever);
 		}else if(bussType == "富时A50"){
 			$("#tranActualLever").val(dataLever.tranActualLever==undefined?0:dataLever.tranActualLever);
 		}else if(bussType == "国际原油"){
@@ -353,6 +354,7 @@ function inputLeverShow(businessType) {
 		$("#asTradeNumTR").show();
 		$("#scTradeNumTR").show();
 		$("#daxMinTradeNumTR").show();
+		$("#gasTradeNumTR").show();
 		$("#inputWin").css("height","457px");
 	}else{
 		$("#a50td").html("交易手数:");
@@ -371,6 +373,7 @@ function inputLeverShow(businessType) {
 		$("#asTradeNumTR").hide();
 		$("#scTradeNumTR").hide();
 		$("#daxMinTradeNumTR").hide();
+		$("#gasTradeNumTR").hide();
 		$("#inputWin").css("height","457px");
 	}
 };
@@ -401,6 +404,7 @@ function handInputSave() {
 		var AmeSilverMarketLever=$("#AmeSilverMarketLever").val();
 		var smallCrudeOilMarketLever=$("#smallCrudeOilMarketLever").val();
 		var daxtranMinActualLever = $("#daxtranMinActualLever").val();
+		var naturalGasActualLever = $("#naturalGasActualLever").val();
 		if (!profit) {
 			Check.messageBox("提示","请输入对应交易盈亏！");
 			return ;
@@ -412,7 +416,8 @@ function handInputSave() {
 					|| !mdtranActualLever || !mbtranActualLever || !daxtranActualLever
 					|| !nikkeiTranActualLever || !mntranActualLever
 					|| !lhsiTranActualLever || !agTranActualLever||!heStockMarketLever||!xhStockMarketLever
-					||!AmeCopperMarketLever||!AmeSilverMarketLever||!smallCrudeOilMarketLever || !daxtranMinActualLever) {
+					|| !AmeCopperMarketLever||!AmeSilverMarketLever||!smallCrudeOilMarketLever 
+					|| !daxtranMinActualLever|| !naturalGasActualLever) {
 
 				Check.messageBox("提示","请输入对应交易手数！");
 				return ;
@@ -421,7 +426,8 @@ function handInputSave() {
 					|| mdtranActualLever<0 || mbtranActualLever < 0 || daxtranActualLever < 0
 					|| nikkeiTranActualLever < 0 || mntranActualLever < 0
 					|| lhsiTranActualLever < 0 || agTranActualLever < 0||heStockMarketLever<0||xhStockMarketLever<0
-					||AmeCopperMarketLever<0||AmeSilverMarketLever<0||smallCrudeOilMarketLever<0 || daxtranMinActualLever < 0) {
+					|| AmeCopperMarketLever<0||AmeSilverMarketLever<0||smallCrudeOilMarketLever<0 
+					|| daxtranMinActualLever < 0 || naturalGasActualLever < 0) {
 
 				Check.messageBox("提示","输入的数据有误,交易手数不能输入负数！");
 				return;
@@ -444,7 +450,7 @@ function handInputSave() {
 				"agTranActualLever":agTranActualLever,"heStockMarketLever":heStockMarketLever,"xhStockMarketLever":xhStockMarketLever,
 				"AmeCopperMarketLever":AmeCopperMarketLever,"AmeSilverMarketLever":AmeSilverMarketLever,
 				"smallCrudeOilMarketLever":smallCrudeOilMarketLever,"daxtranMinActualLever":daxtranMinActualLever,
-				"endType":endType,"tradeDetail":localDataLever
+				"naturalGasActualLever":naturalGasActualLever,"endType":endType,"tradeDetail":localDataLever
 				} ,
 				function(data){
 					eyWindow.closeProgress();
@@ -479,6 +485,7 @@ function inputClose() {
 	$("#AmeSilverMarketLever").val("");
 	$("#smallCrudeOilMarketLever").val("");
 	$("#daxtranMinActualLever").val("");
+	$("#naturalGasActualLever").val("");
 	$("#inputWin").show();
 	$("#inputWin").window('close');
 };
@@ -612,6 +619,7 @@ function tradeCount() {
 		$('#asCount').html(filterNull(rows[0].ameSilverMarketLever));
 		$('#scCount').html(filterNull(rows[0].smallCrudeOilMarketLever));
 		$("#daxMinCount").html(filterNull(rows[0].daxtranMinActualLever));
+		$("#gasCount").html(filterNull(rows[0].naturalGasActualLever));
 		$.ajax({
 			url:Check.rootPath() +"/admin/internation/future/getFtse",
 			type:"get",

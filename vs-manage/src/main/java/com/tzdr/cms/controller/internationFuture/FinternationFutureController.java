@@ -532,11 +532,11 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		}
 		
 		Map<String, Double> leadLever = leadLever(detailVos);
-		//获取结算汇率
-		List<FPoundageParities> paritiess = poundageParitiesService.getAll();
+//		//获取结算汇率
+//		List<FPoundageParities> paritiess = poundageParitiesService.getAll();
 		
 		//计算交易盈亏
-		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,paritiess,new BigDecimal(todayMoeny),id);
+		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,new BigDecimal(todayMoeny),id);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);
