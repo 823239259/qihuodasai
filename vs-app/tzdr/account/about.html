@@ -1,308 +1,338 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
-		 <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	    <title>关于维胜</title>
-	    <script type="text/javascript" src="../../js/mui.min.js"></script> 
-	    <script type="text/javascript" src="../../js/common.js"></script>
-	    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
-	    <link rel="stylesheet" href="../../css/own.css" />
-	    <script src="../../js/jquery-1.11.3.js"></script>
-	    <style>
-	    	.alertDiv{
-			    width: 100%;
-			    position: fixed;
-			    top:0px;
-			    left: 0px;
-			    background-color: rgba(0, 0, 0, 0.38);
-			    height: 600px;
-			    z-index: 998;
-			    display: none;
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>关于维胜</title>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<script src="../../js/jquery-1.11.3.js"></script>
+		<style>
+			.alertDiv {
+				width: 100%;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				background-color: rgba(0, 0, 0, 0.38);
+				height: 600px;
+				z-index: 998;
+				display: none;
 			}
-			#close{
-			    cursor: pointer;
+			
+			#close {
+				cursor: pointer;
 			}
-			.alertDivContent{
-			    position: absolute;
-			    background-color: #FFFFFF;
-			    top:50%;
-			    left: 50%;
-			    width: 90%;
-			    height: 240px;
-			    z-index: 999;
-			    margin:-120px 0px 0px -45%;
-			    color:#2b2b2b;
-			     padding:0px 0px 10px 0px;
+			
+			.alertDivContent {
+				position: absolute;
+				background-color: #FFFFFF;
+				top: 50%;
+				left: 50%;
+				width: 90%;
+				height: 140px;
+				z-index: 999;
+				margin: -70px 0px 0px -45%;
+				color: #2b2b2b;
+				padding: 0px 0px 10px 0px;
 			}
+			
 			.alertDivContent h4 {
-			    text-align: center;
-			    line-height: 40px;
-			    position: relative;
-			    padding:0px 20px;
-			    border-bottom: 1px solid #E5E5E5;
+				text-align: center;
+				line-height: 40px;
+				position: relative;
+				padding: 0px 20px;
+				border-bottom: 1px solid #E5E5E5;
 			}
-			.alertDivContent h4 img{
-			    width: 30px;
-			    position: absolute;
-			    right: 20px;
-			    top:5px;
-			    vertical-align: middle;
+			
+			.alertDivContent h4 img {
+				width: 30px;
+				position: absolute;
+				right: 20px;
+				top: 5px;
+				vertical-align: middle;
 			}
-			.alertDivContent p{
-			    text-align: left;
-			    padding:0px 20px;
-			    color: #666666;
-			    font-size: 14px;
-			    margin-bottom: 0px;
-			    line-height: 25px;
+			
+			.alertDivContent p {
+				text-align: left;
+				padding: 0px 20px;
+				color: #666666;
+				font-size: 14px;
+				margin-bottom: 0px;
+				line-height: 25px;
 			}
+			
 			.alertDivContent div {
-			    padding: 20px 0px;
+				padding: 20px 0px;
 			}
-			.alertDivContent button{
-			    height: 40px;
-			    line-height: 40px;
-			    font-size: 16px;
+			
+			.alertDivContent button {
+				height: 40px;
+				line-height: 40px;
+				font-size: 16px;
 			}
-			.alertDivContent #download{
-			    background-color: #fcc900;
-			    border:none;
-			    margin-left: 20px;
-			     margin-right: 20px;
-			     padding: 0px;
-			    width: 40%;
-			    color: #2b2b2b;
+			
+			.alertDivContent #download {
+				background-color: #fcc900;
+				border: none;
+				margin-left: 20px;
+				margin-right: 20px;
+				padding: 0px;
+				width: 40%;
+				color: #2b2b2b;
 			}
-			.alertDivContent #openPage{
-			    background-color: #CCCCCC;
-			   	width: 40%;
-			   	float: right;
-			    border:none;
-			    margin-right: 20px;
-			    color: #FFFFFF;
-			     padding: 0px;
+			
+			.alertDivContent #openPage {
+				background-color: #CCCCCC;
+				width: 40%;
+				float: right;
+				border: none;
+				margin-right: 20px;
+				color: #FFFFFF;
+				padding: 0px;
 			}
-	    </style>
+		</style>
 	</head>
-	<body  class="about">
+
+	<body class="about">
 		<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
-		<h1 class="mui-title">关于维胜</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="consistentBeauty">在线客服</a>
-	</header>	
-	<div class="mui-content">
-		<div class="about-top"></div>
-		<ul id="list" class="mui-table-view ac_list">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="editonButton"><i>版本号</i><span id="editon"></span></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="score"><i>来给维胜评分吧~</i></a>
-			</li>
-		</ul>
-		<div class="alertDiv">
-            <div class="alertDivContent">
-                <h4>有新版本啦！<img src="../../images/close1.png" id="close"></h4>
-                <div class="editonContent">
-                	<p>1.追加保证金更换为500起。</p>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">关于维胜</h1>
+			<a href="javascript:void(0)" class="top-tel" id="consistentBeauty">在线客服</a>
+		</header>
+		<div class="mui-content">
+			<div class="about-top"></div>
+			<ul id="list" class="mui-table-view ac_list">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="editonButton"><i>版本号</i><span id="editon"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="score"><i>来给维胜评分吧~</i></a>
+				</li>
+			</ul>
+			<div class="alertDiv">
+				<div class="alertDivContent">
+					<h4>有新版本啦！<img src="../../images/close1.png" id="close"></h4>
+					<div class="editonContent">
+						<p>1.追加保证金更换为500起。</p>
 	                <p>2.在线客服上线啦！</p>
 	                <p>3.优化了一些基础体验。！</p>
 	                <p>未下载请点击下载，已下载请点击打开~</p>
-                </div>
-                <button id="download">立即更新</button><button id="openPage" >下次再说</button>
-            </div>
-        </div>
-	</div>
-	<script>
-		mui.init();
-		mui.plusReady(function(){
-			var dataVersion;
-			var wgtVer;
-			document.getElementById("close").addEventListener("tap",function(){
-				$(".alertDiv").css("display","none");
-			});
-			document.getElementById("download").addEventListener("tap",function(){
-				$(".alertDiv").css("display","none");
-				updateApk1(function(){})
-			});
-			document.getElementById("openPage").addEventListener("tap",function(){
-				$(".alertDiv").css("display","none");
-			});
-			document.getElementById("consistentBeauty").addEventListener("tap",function(){
-				initCallService();
-			});
-			document.getElementById("score").addEventListener("tap",function(){
-				if(plus.os.name == "Android"){
+					</div>
+					<button id="download">立即更新</button><button id="openPage">下次再说</button>
+				</div>
+			</div>
+		</div>
+		<script>
+			mui.init();
+			mui.plusReady(function() {
+				var dataVersion;
+				var wgtVer;
+				document.getElementById("close").addEventListener("tap", function() {
+					$(".alertDiv").css("display", "none");
+				});
+				document.getElementById("download").addEventListener("tap", function() {
+					$(".alertDiv").css("display", "none");
+					updateApk1(function() {})
+				});
+				document.getElementById("openPage").addEventListener("tap", function() {
+					$(".alertDiv").css("display", "none");
+				});
+				document.getElementById("consistentBeauty").addEventListener("tap", function() {
 					initCallService();
-				}else if(plus.os.name == "iOS"){
-					plus.runtime.openURL("https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8");
+				});
+				document.getElementById("score").addEventListener("tap", function() {
+					if(plus.os.name == "Android") {
+						initCallService();
+					} else if(plus.os.name == "iOS") {
+						plus.runtime.openURL("https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8");
+					}
+				});
+
+				function initCallService() {
+					var path = mui.app_filePath1("chart.html");
+					mui.openWindow(path, "consistentBeauty");
 				}
-			});
-			function initCallService(){
-				var path=mui.app_filePath1("chart.html");
-				mui.openWindow(path,"consistentBeauty"); 
-			}
-			document.getElementById("editonButton").addEventListener("tap",function(){
-				if(dataVersion==undefined){
-					return
-				}
-				if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer){
-					$(".alertDiv").css("display","block");
-				}else{
-					mui.toast("当前为最新版本，无需更新~");
-				}
-			});
-			// 获取本地应用资源版本号
-				plus.runtime.getProperty(plus.runtime.appid,function(inf){
-					wgtVer=inf.version;
-					document.getElementById("editon").innerHTML=wgtVer;
+				document.getElementById("editonButton").addEventListener("tap", function() {
+					if(dataVersion == undefined) {
+						return
+					}
+					if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer) {
+						$(".alertDiv").css("display", "block");
+					} else {
+						mui.toast("当前为最新版本，无需更新~");
+					}
+				});
+				// 获取本地应用资源版本号
+				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+					wgtVer = inf.version;
+					document.getElementById("editon").innerHTML = wgtVer;
 					//检查更新版本 
-					checkUpdate(function(){});
+					checkUpdate(function() {});
 				});
 				// 检测更新
-				function checkUpdate(_callback){
+				function checkUpdate(_callback) {
 					//获取最新版本信息
-						var paramUrl={
-							url:"../login/login.html"
-						}
-						mui.app_request('/getVersion',{force:true},
-							function(result){
-								dataVersion=result.data.version;
-								if (dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
-									return;
-								}
-								dataVersion = JSON.parse(dataVersion);
-								if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer){
-									$("#editon").css({"background":"url(../../images/newEdition.jpg) no-repeat right center","padding-right":"60px"});
-								}
-//								updateApk1(_callback);
-							},function(result){
-								return; 
-							},paramUrl
-			    		);
+					var paramUrl = {
+						url: "../login/login.html"
 					}
-				function updateApk1(_callback){
-				var nowDate = new Date();
-				var Android = dataVersion.Android;
-				var iOS = dataVersion.iOS;
-				var upDateAndroid = new Date(Android.date);
-				var upDateiOS = new Date(iOS.date);
-				if(plus.os.name == "Android"){
-					if(Android.version > wgtVer){
-						if(nowDate >= upDateAndroid){
-							if(Android.isForceUpdate == true){
-								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
-									if(Android.bigUrl == null || Android.bigUrl == "" || Android.bigUrl == undefined || Android.bigUrl.length == 0){
-										downWgt(function(){
-										if (mui.cacheUser.isLogin()){
-												mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
-										}
-										},Android);	// 下载升级包
-									}else{
-										var _download_url = Android.bigUrl;
-											plus.runtime.openURL(_download_url);
-									}
-								
-								}, "软件升级", "立即下载" );
-							}else{
-								plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
-									if(e.index==0){
-										if(Android.bigUrl=="" || Android.bigUrl.length==0 || Android.bigUrl==null){
-											downWgt(function(){
-												if (mui.cacheUser.isLogin()){
-													mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+					mui.app_request('/getVersion', { force: true },
+						function(result) {
+							dataVersion = result.data.version;
+							if(dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
+								return;
+							}
+							dataVersion = JSON.parse(dataVersion);
+							insertUpdateData(dataVersion);
+						},
+						function(result) {
+							return;
+						}, paramUrl
+					);
+				}
+
+				function updateApk1(_callback) {
+					var nowDate = new Date();
+					var Android = dataVersion.Android;
+					var iOS = dataVersion.iOS;
+					var upDateAndroid = new Date(Android.date);
+					var upDateiOS = new Date(iOS.date);
+					if(plus.os.name == "Android") {
+						if(Android.version > wgtVer) {
+							if(nowDate >= upDateAndroid) {
+								if(Android.isForceUpdate == true) {
+									plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function() {
+										if(Android.bigUrl == null || Android.bigUrl == "" || Android.bigUrl == undefined || Android.bigUrl.length == 0) {
+											downWgt(function() {
+												if(mui.cacheUser.isLogin()) {
+													mui.openWindow({ url: "tzdr/quotation/quotationMain.html", id: "quotationMain" });
 												}
-											},Android);	// 下载升级包
-										}else{
+											}, Android); // 下载升级包
+										} else {
 											var _download_url = Android.bigUrl;
 											plus.runtime.openURL(_download_url);
 										}
-										
-									}else{
-										if (mui.cacheUser.isLogin()){
-												mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+
+									}, "软件升级", "立即下载");
+								} else {
+									plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e) {
+										if(e.index == 0) {
+											if(Android.bigUrl == "" || Android.bigUrl.length == 0 || Android.bigUrl == null) {
+												downWgt(function() {
+													if(mui.cacheUser.isLogin()) {
+														mui.openWindow({ url: "tzdr/quotation/quotationMain.html", id: "quotationMain" });
+													}
+												}, Android); // 下载升级包
+											} else {
+												var _download_url = Android.bigUrl;
+												plus.runtime.openURL(_download_url);
+											}
+
+										} else {
+											if(mui.cacheUser.isLogin()) {
+												mui.openWindow({ url: "tzdr/quotation/quotationMain.html", id: "quotationMain" });
+											}
 										}
-									}
-								}, "软件升级", ["升级","稍后再说"] );	
+									}, "软件升级", ["升级", "稍后再说"]);
+								}
 							}
 						}
-					}
-				}else if(plus.os.name == "iOS"){
-					if(iOS.version > wgtVer){
-						if(nowDate >= upDateiOS){
-							if(iOS.isForceUpdate == true){
-								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
-									if(iOS.bigUrl == null || iOS.bigUrl == "" || iOS.bigUrl == undefined || iOS.bigUrl.length == 0){
-										downWgt(function(){
-										if (mui.cacheUser.isLogin()){
-											mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
-										}
-										},iOS);	// 下载升级包
-									}else{
-										var _download_url = iOS.bigUrl;
-											plus.runtime.openURL(_download_url);
-									}
-								
-								}, "软件升级", "立即下载" );
-							}else{
-								plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e){
-									if(e.index==0){
-										if(iOS.bigUrl=="" || iOS.bigUrl.length==0 || iOS.bigUrl==null){
-											downWgt(function(){
-												if (mui.cacheUser.isLogin()){
-													mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+					} else if(plus.os.name == "iOS") {
+						if(iOS.version > wgtVer) {
+							if(nowDate >= upDateiOS) {
+								if(iOS.isForceUpdate == true) {
+									plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function() {
+										if(iOS.bigUrl == null || iOS.bigUrl == "" || iOS.bigUrl == undefined || iOS.bigUrl.length == 0) {
+											downWgt(function() {
+												if(mui.cacheUser.isLogin()) {
+													mui.openWindow({ url: "tzdr/quotation/quotationMain.html", id: "quotationMain" });
 												}
-											},iOS);	// 下载升级包
-										}else{
+											}, iOS); // 下载升级包
+										} else {
 											var _download_url = iOS.bigUrl;
 											plus.runtime.openURL(_download_url);
 										}
-										
-									}else{
-										if (mui.cacheUser.isLogin()){
-											mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+
+									}, "软件升级", "立即下载");
+								} else {
+									plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e) {
+										if(e.index == 0) {
+											if(iOS.bigUrl == "" || iOS.bigUrl.length == 0 || iOS.bigUrl == null) {
+												downWgt(function() {
+													if(mui.cacheUser.isLogin()) {
+														mui.openWindow({ url: "tzdr/quotation/quotationMain.html", id: "quotationMain" });
+													}
+												}, iOS); // 下载升级包
+											} else {
+												var _download_url = iOS.bigUrl;
+												plus.runtime.openURL(_download_url);
+											}
+
+										} else {
+											if(mui.cacheUser.isLogin()) {
+												mui.openWindow({ url: "tzdr/quotation/quotationMain.html", id: "quotationMain" });
+											}
 										}
-									}
-								}, "软件升级", ["升级","稍后再说"] );	
+									}, "软件升级", ["升级", "稍后再说"]);
+								}
 							}
 						}
 					}
-				}
-			};
-			
+				};
+
 				// 下载wgt文件
-				function downWgt(_callback,data){
-					plus.nativeUI.showWaiting("下载升级包..."); 
+				function downWgt(_callback, data) {
+					plus.nativeUI.showWaiting("下载升级包...");
 					console.log(data.littleUrl);
-					plus.downloader.createDownload(data.littleUrl, {filename:"_doc/update/"}, function(d,status){
+					plus.downloader.createDownload(data.littleUrl, { filename: "_doc/update/" }, function(d, status) {
 						plus.nativeUI.closeWaiting();
-						if (status == 200) { 
-							installWgt(d.filename,_callback);	// 安装wgt包
-						}else{
+						if(status == 200) {
+							installWgt(d.filename, _callback); // 安装wgt包
+						} else {
 							// 弹出系统提示对话框
-							plus.nativeUI.alert( "下载升级包失败！如多次失败请到官网下载最新APP。", function(){
+							plus.nativeUI.alert("下载升级包失败！如多次失败请到官网下载最新APP。", function() {
 								_callback();
-							}, "软件升级", "确定" );
+							}, "软件升级", "确定");
 						}
 					}).start();
 				}
-				
+
 				// 更新应用资源
-				function installWgt(path,_callback){
-					plus.nativeUI.showWaiting("软件升级..."); 
-					plus.runtime.install(path,{force:true},function(){
+				function installWgt(path, _callback) {
+					plus.nativeUI.showWaiting("软件升级...");
+					plus.runtime.install(path, { force: true }, function() {
 						plus.nativeUI.closeWaiting();
 						plus.runtime.restart();
-					},function(e){
+					}, function(e) {
 						plus.nativeUI.closeWaiting();
 						// 弹出系统提示对话框
-						plus.nativeUI.alert( "应用升级失败！如多次失败请到官网下载最新APP。", function(){
+						plus.nativeUI.alert("应用升级失败！如多次失败请到官网下载最新APP。", function() {
 							_callback();
-						}, "软件升级", "确定" );
+						}, "软件升级", "确定");
 					});
 				}
-		})
-	</script>
+				//处理更新的内容
+				function insertUpdateData(dataVersion) {
+					var Android = dataVersion.Android;
+					var iOS = dataVersion.iOS;
+					if(Android.version > wgtVer || iOS.version > wgtVer) {
+						$("#editon").css({ "background": "url(../../images/newEdition.jpg) no-repeat right center", "padding-right": "60px", "background-size": "40px auto" });
+					}
+					if(plus.os.name == "Android") {
+						console.log(Android.content);
+						$(".editonContent").html(Android.content);
+						var length=$(".editonContent p").length;
+						$(".alertDivContent").css({"height":length*25+140+"px","margin":-(length*25+140)/2+"px 0px 0px -45%"});
+					}else if(plus.os.name == "iOS"){
+						$(".editonContent").html(iOS.content);
+						var length=$(".editonContent p").length;
+						$(".alertDivContent").css({"height":length*25+140+"px","margin":-(length*25+140)/2+"px 0px 0px -45%"});
+					}
+				}
+			});
+		</script>
 	</body>
+
 </html>

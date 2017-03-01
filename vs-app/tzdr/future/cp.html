@@ -274,6 +274,11 @@
 					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易迷你德国DAX指数时，初始最大可持仓"+(mui.isnull(init_params.daxtranMinActualLever) ? 0 : init_params.daxtranMinActualLever)+"手";
 					break;
+				case 22:
+					td_1.innerHTML="天然气指数";
+					td_3.innerHTML=tradeTime;
+					td_5.innerHTML="只交易天然气指数时，初始最大可持仓"+(mui.isnull(init_params.naturalGasActualLever) ? 0 : init_params.naturalGasActualLever)+"手";
+					break;
 				default:
 					break;
 			}
@@ -343,6 +348,9 @@
 				break;
 				case 16: 
 					td_5.innerHTML="只交易迷你德国DAX指数时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
+				break;
+				case 17: 
+					td_5.innerHTML="只交易天然气时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
 				break;
 				default:
 					break;

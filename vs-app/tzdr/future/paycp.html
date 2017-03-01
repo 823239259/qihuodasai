@@ -306,6 +306,15 @@
     			b.innerHTML="迷你德国DAX指数 - 0手";
     			tradelever_info.appendChild(b);
     		}
+    		if(!mui.isnull(confirmInfo.naturalGasActualLever)){
+    			var b=document.createElement("b");
+    			b.innerHTML="天然气指数 - "+confirmInfo.naturalGasActualLever+"手";
+    			tradelever_info.appendChild(b);
+    		}else{
+    			var b=document.createElement("b");
+    			b.innerHTML="天然气指数 - 0手";
+    			tradelever_info.appendChild(b);
+    		}
     	}
 //  	var traderBond=document.getElementById("traderBond").innerHTML;
 //  	traderBond=tzdr.moneyUtils.reverseMoney(traderBond);
