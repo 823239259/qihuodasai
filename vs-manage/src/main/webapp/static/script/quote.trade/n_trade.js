@@ -1,6 +1,6 @@
 var tradeSocket = null;
 var trade_url = "ws://192.168.0.213:7001";
-var trade_model = "1"; // 实盘：0；模拟盘：1
+var trade_model = "0"; // 实盘：0；模拟盘：1
 var trade_version = "3.2";
 var trade_username = null;
 var trade_password = null; 	// base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4)
@@ -456,6 +456,7 @@ function handleMessage(evt) {
 				Trade.doSendMessage(TradeMethod.QryHoldUrl,'{"ClientNo":"'+trade_username+'"}');
 			} else {
 				Check.messageBox("提示","结算的账户号或者密码不正确");
+				quoteSocket.close();
 				return;
 			}
     	}	
@@ -487,6 +488,8 @@ function handleMessage(evt) {
 				
 			} else {//有持仓
 				Check.messageBox("提示","有持仓，不能结算");
+				quoteSocket.close();
+				tradeSocket.close();
 				return;
 			}
     	}	
@@ -497,7 +500,7 @@ function handleMessage(evt) {
 			var orderStatus = parameters.OrderStatus;
 			if(orderStatus < 3) { // 未成交信息全部撤单
 				var orderSysId = parameters.OrderSysID;
-				var order = parameters.OrderID;
+				var orderId = parameters.OrderID;
 				var exchangeNo = parameters.ExchangeNo;
 				var commodityNo = parameters.CommodityNo;
 				var contractNo = parameters.ContractNo;
@@ -538,7 +541,7 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
-    		console.log("parameters: "+parameters);
+
     		if(isEmpty(parameters)){
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
