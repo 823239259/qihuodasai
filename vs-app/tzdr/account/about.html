@@ -89,7 +89,7 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 		<h1 class="mui-title">关于维胜</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="telBtn">在线客服</a>
+		<a href="javascript:void(0)" class="top-tel" id="consistentBeauty">在线客服</a>
 	</header>	
 	<div class="mui-content">
 		<div class="about-top"></div>
@@ -98,7 +98,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0)" id="editonButton"><i>版本号</i><span id="editon"></span></a>
 			</li>
 			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="charge"><i>来给维胜评分吧~</i></a>
+				<a class="mui-navigate-right" href="javascript:void(0)" id="score"><i>来给维胜评分吧~</i></a>
 			</li>
 		</ul>
 		<div class="alertDiv">
@@ -129,6 +129,20 @@
 			document.getElementById("openPage").addEventListener("tap",function(){
 				$(".alertDiv").css("display","none");
 			});
+			document.getElementById("consistentBeauty").addEventListener("tap",function(){
+				initCallService();
+			});
+			document.getElementById("score").addEventListener("tap",function(){
+				if(plus.os.name == "Android"){
+					initCallService();
+				}else if(plus.os.name == "iOS"){
+					plus.runtime.openURL("https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8");
+				}
+			});
+			function initCallService(){
+				var path=mui.app_filePath1("chart.html");
+				mui.openWindow(path,"consistentBeauty"); 
+			}
 			document.getElementById("editonButton").addEventListener("tap",function(){
 				if(dataVersion==undefined){
 					return
@@ -136,7 +150,7 @@
 				if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer){
 					$(".alertDiv").css("display","block");
 				}else{
-					mui.toast("当前为最新版本，无需更新~”");
+					mui.toast("当前为最新版本，无需更新~");
 				}
 			});
 			// 获取本地应用资源版本号
