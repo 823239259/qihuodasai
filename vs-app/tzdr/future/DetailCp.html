@@ -31,7 +31,6 @@
     				queryDetails(result.data.details.id);
     				//获取详细数据
     				setDetails(result.data.details);
-    				console.log(JSON.stringify(result.data.details));
     				//获取主力合约
     				mui.each(result.data.details.outDiskVoList,function(i,item){
     					setOutDisks(item);
@@ -175,7 +174,7 @@
 
     		document.getElementById("app_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.appTime,"yyyy-MM-dd hh:mm");
     		
-    		document.getElementById("tranLever").innerHTML="无限制";
+    		document.getElementById("tranLever").innerHTML="参考初始可持仓手数";
     		
     		
     		document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(details.traderBond)+"元";
@@ -243,9 +242,7 @@
     		document.getElementById("end_info").style.display="block";
     		document.getElementById("end_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.endtime,"yyyy-MM-dd hh:mm");
     		document.getElementById("tranProfitLoss").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranProfitLoss)+"美元("+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities)+"人民币)";
-    		console.log(tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
     		$("#sharehref").val("http://cms.vs.com/uploads/topic/share/share.html?="+tzdr.moneyUtils.formatCurrency(details.tranProfitLoss*details.endParities));
-    		console.log($("#sharehref").val());
     		if (details.tranProfitLoss<0){
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
     			
