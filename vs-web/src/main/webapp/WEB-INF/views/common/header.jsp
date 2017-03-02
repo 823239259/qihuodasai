@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.tzdr.common.utils.ConfUtil"%>
-<link href="${ctx }/static/css/trade.css?v=2017-2-7" rel="stylesheet" type="text/css" />
+<link href="${ctx }/static/css/trade.css?v=2017-3-2" rel="stylesheet" type="text/css" />
 <style>
 #header {
     height: 60px;
