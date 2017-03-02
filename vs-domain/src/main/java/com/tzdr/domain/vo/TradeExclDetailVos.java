@@ -18,8 +18,6 @@ public class TradeExclDetailVos implements Serializable{
 	private String orderUserno;
 	private String orderUsername;
 	private String tradeType;
-	private String fastId;  //方案Id
-	private String tradeNo;  //成交号
 	
 	public String getTradeDate() {
 		return tradeDate;
@@ -106,19 +104,35 @@ public class TradeExclDetailVos implements Serializable{
 		this.tradeType = tradeType;
 	}
 	
-	public String getTradeNo() {
-		return tradeNo;
+	public TradeExclDetailVos() {
 	}
-	public void setTradeNo(String tradeNo) {
-		this.tradeNo = tradeNo;
-	}
-	public String getFastId() {
-		return fastId;
-	}
-	public void setFastId(String fastId) {
-		this.fastId = fastId;
+	public TradeExclDetailVos(String tradeDate, String username, String userNo, String currencyNo, String exchangeNo,
+			String commodityNo, String buyNum, String sellNum, String tradePrice, String free, String orderType,
+			String orderUserno, String orderUsername, String tradeType) {
+		this.tradeDate = tradeDate;
+		this.username = username;
+		this.userNo = userNo;
+		this.currencyNo = currencyNo;
+		this.exchangeNo = exchangeNo;
+		this.commodityNo = commodityNo;
+		this.buyNum = buyNum;
+		this.sellNum = sellNum;
+		this.tradePrice = tradePrice;
+		this.free = free;
+		this.orderType = orderType;
+		this.orderUserno = orderUserno;
+		this.orderUsername = orderUsername;
+		this.tradeType = tradeType;
 	}
 	
+	@Override
+	public String toString() {
+		return "TradeExclDetailVos [tradeDate=" + tradeDate + ", username=" + username + ", userNo=" + userNo
+				+ ", currencyNo=" + currencyNo + ", exchangeNo=" + exchangeNo + ", commodityNo=" + commodityNo
+				+ ", buyNum=" + buyNum + ", sellNum=" + sellNum + ", tradePrice=" + tradePrice + ", free=" + free
+				+ ", orderType=" + orderType + ", orderUserno=" + orderUserno + ", orderUsername=" + orderUsername
+				+ ", tradeType=" + tradeType + "]";
+	}
 	
 	
 }

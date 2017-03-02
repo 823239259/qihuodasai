@@ -35,7 +35,7 @@
 						</tr>
 						<tr>
 							<td>值名称:</td>
-							<td><textarea class="easyui-validatebox" value="${dataMap.valueName}" id="valueName"  name="valueName" data-options="required:true"></textarea></td>
+							<td><input class="easyui-validatebox" value="${dataMap.valueName}" id="valueName"  name="valueName" data-options="required:true"></td>
 						</tr>
 						<tr>
 							<td>权重:</td>

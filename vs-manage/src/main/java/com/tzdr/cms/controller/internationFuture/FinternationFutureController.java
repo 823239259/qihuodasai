@@ -496,19 +496,14 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 			detailVo.setOrderUserno(tradeDetail.getOrderUserno());
 			detailVo.setSellNum(tradeDetail.getSellNum());
 			detailVo.setTradeDate(tradeDetail.getTradeDate());
-			detailVo.setTradeNo(tradeDetail.getTradeNo());
 			detailVo.setTradePrice(tradeDetail.getTradePrice());
 			detailVo.setTradeType(tradeDetail.getTradeType());
 			detailVo.setUsername(tradeDetail.getUsername());
 			detailVo.setUserNo(tradeDetail.getUserNo());
-			detailVo.setFastId(tradeDetail.getFastId());
 			detailVos.add(detailVo);
 		}
 		
 		Map<String, Double> leadLever = leadLever(detailVos);
-//		//获取结算汇率
-//		List<FPoundageParities> paritiess = poundageParitiesService.getAll();
-		
 		//计算交易盈亏
 		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,new BigDecimal(todayMoeny),id);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);
