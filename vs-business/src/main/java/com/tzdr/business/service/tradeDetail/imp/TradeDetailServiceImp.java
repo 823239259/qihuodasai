@@ -106,10 +106,20 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 			detail.setFree(tradeFee);
 			String currencyNo = jsonObject.getString("CurrencyNo");
 			detail.setCurrencyNo(currencyNo);
+			detail.setFastId(fastId);
+			String insertUser = jsonObject.getString("InsertUser");
+			detail.setOrderType(insertUser);
+			if("强平单".equals(insertUser)){
+				detail.setOrderUserno("QPServer");
+				detail.setOrderUsername("风控");
+			}else if("客户单".equals(insertUser)){
+				detail.setOrderUserno(clientNo);
+				detail.setOrderUsername(tname);
+			}
 			
+			detail.setTradeType("正常单");
 			this.deleteByTradeNo(tradeNo);
 			
-			detail.setFastId(fastId);
 			details.add(detail);
 		}
 		getEntityDao().saves(details);

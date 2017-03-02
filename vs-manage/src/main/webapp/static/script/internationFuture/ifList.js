@@ -100,8 +100,11 @@ function autoinput(){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
 			return;
 		}
-		
-		if(rows[0].stateType == "申请结算" || rows[0].stateType == "操盘中"){
+		if(rows[0].stateType == "操盘中"){
+			Check.messageBox("提示","操盘中，如要结算，请用手工结算！");
+			return;
+		}
+		if(rows[0].stateType == "申请结算" || rows[0].stateType == "待结算"){
 			$.ajax({
 				url:Check.rootPath() +"/admin/internation/future/getFtse",
 				type:"get",
@@ -112,7 +115,7 @@ function autoinput(){
 					var tranAccount = result.data.fste.tranAccount;
 					var tranPassword = result.data.fste.tranPassword;
 					evaluation(tranAccount,tranPassword);
-				    initQuoteClient()//连接行情
+					initTradeClient(tranAccount,tranPassword)//连接行情
 				}
 			});
 		}
@@ -147,8 +150,6 @@ function testcheck(tranAccount,todayMoeny){
 			$("#inputWin .easyui-validatebox").attr("disabled","disabled");
 			$("#inputWin").show();
 			$("#inputWin").window('open');
-			//退出行情、交易
-			Quote.doLoginOut(quote_username);
 			Trade.doLoginOut(trade_username);
 		}						
 	});

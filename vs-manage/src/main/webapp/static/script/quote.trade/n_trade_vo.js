@@ -61,7 +61,9 @@ function TradeOrderVO(jTradeOrder) {
 	this.TradePrice=Number(jTradeOrder.TradePrice).toFixed(6);
 	this.TradeDateTime=jTradeOrder.TradeDateTime;
 	this.TradeFee=Number(jTradeOrder.TradeFee).toFixed(6);
-	this.CurrencyNo=getCacheContractAttribute(this.CommodityNo, "CurrencyNo");
+	this.InsertUser =jTradeOrder.InsertUser;
+//	this.CurrencyNo=getCacheContractAttribute(this.CommodityNo, "CurrencyNo");
+	this.CurrencyNo=jTradeOrder.CurrencyNo;
 	return this;
 }
 

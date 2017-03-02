@@ -1,5 +1,6 @@
 var tradeSocket = null;
 var trade_url = "ws://192.168.0.213:7001";
+//var trade_url = "ws://139.224.6.183:6071";
 var trade_model = "0"; // 实盘：0；模拟盘：1
 var trade_version = "3.2";
 var trade_username = null;
@@ -454,7 +455,6 @@ function handleMessage(evt) {
 				Trade.doSendMessage(TradeMethod.QryHoldUrl,'{"ClientNo":"'+trade_username+'"}');
 			} else {
 				Check.messageBox("提示","结算的账户号或者密码不正确");
-				quoteSocket.close();
 				return;
 			}
     	}	
@@ -463,7 +463,6 @@ function handleMessage(evt) {
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
 			if(code == 0) {
-				quoteSocket.close();
 				tradeSocket.close();
 				//退出成功
 			}else{
@@ -486,7 +485,6 @@ function handleMessage(evt) {
 				
 			} else {//有持仓
 				Check.messageBox("提示","有持仓，不能结算");
-				quoteSocket.close();
 				tradeSocket.close();
 				return;
 			}
@@ -558,52 +556,6 @@ function handleMessage(evt) {
     			setTimeout("Trade.doAccount(trade_username)",5000);
     		}else{
     			mergeTrade(parameters);
-	    		/*var tradeNo = parameters.TradeNo;
-	    		var commodityNo = parameters.CommodityNo;
-	    		var contractNo = parameters.ContractNo;
-	    		var exchangeNo = parameters.ExchangeNo;
-	    		var orderSysID = parameters.OrderSysID;
-	    		var orderRef = parameters.OrderRef;
-	    		var orderID = parameters.OrderID;
-	    		var drection = parameters.Drection;
-	    		var tradeNum = parameters.TradeNum;
-	    		var tradePrice = Number(parameters.TradePrice).toFixed(6);
-	    		var tradeDateTime = parameters.TradeDateTime;
-	    		var tradeFee = Number(parameters.TradeFee).toFixed(6);
-	    		var clientNo = trade_username;
-	    		var currencyNo = getCacheContractAttribute(commodityNo, "CurrencyNo");  //获取对应的币种简称??
-	    		var tradeType = "正常单";
-	    		var buyNum = 0;
-	    		var sellNum = 0;
-	    		if(drection == 0){
-	    			buyNum = tradeNum;
-	    		}else{
-	    			sellNum = tradeNum;
-	    		}
-	    		var rows = $("#hasAuditData").datagrid('getSelections');
-	    		var id = rows[0].id;
-	    		
-    			$.post(Check.rootPath() + "/admin/internation/future/detailSave",
-					{	
-						"tradeDate":tradeDateTime,
-						"userNo":clientNo,
-						"currencyNo":currencyNo,
-						"exchangeNo":exchangeNo,
-						"commodityNo":commodityNo+contractNo,
-						"buyNum":buyNum,
-						"sellNum":sellNum,
-						"tradePrice":tradePrice,
-						"free":tradeFee,
-						"tradeType":tradeType,
-						"tradeNo":tradeNo,
-						"fastId":id
-					} ,
-					function(data){
-						if(data.success == true){
-							console.log(data.message);
-						}
-				});*/
-    			
     		}
 		}	
     	break;
@@ -675,9 +627,6 @@ var cacheTrade = [];
  */
 function mergeTrade(jAccount) {
 	var tradeOrderVO = new TradeOrderVO(jAccount);
-	// 以成交号为key
-//	var sKey = tradeOrderVO.TradeNo;
-//	cacheTrade[sKey] = tradeOrderVO;
 	cacheTrade.push(tradeOrderVO);
 }
 
