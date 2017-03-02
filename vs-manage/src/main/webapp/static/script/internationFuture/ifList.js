@@ -100,28 +100,7 @@ function autoinput(){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
 			return;
 		}
-		if(rows[0].stateType == "待结算"){
-			$.ajax({
-				url:Check.rootPath() +"/admin/internation/future/getFtse",
-				type:"get",
-				data:{
-					id:id
-				},
-				success:function(result){
-					var data = result.data.fste;
-					var tradeDetail = result.data.tradeDetail;
-					var html = appendTradeDetailHtml(tradeDetail, 0);
-					$("#tradeDetail").html(html);
-					handleData(data,0);
-					inputLeverShow(bussinessType);
-					$("#tranProfitLoss").attr("disabled","disabled");
-					$("#inputWin .easyui-validatebox").attr("disabled","disabled");
-					$("#inputWin").show();
-					$("#inputWin").window('open');
-				}
-			});
-			
-		}		
+		
 		if(rows[0].stateType == "申请结算" || rows[0].stateType == "操盘中"){
 			$.ajax({
 				url:Check.rootPath() +"/admin/internation/future/getFtse",

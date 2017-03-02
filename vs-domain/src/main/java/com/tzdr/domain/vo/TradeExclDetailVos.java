@@ -118,39 +118,7 @@ public class TradeExclDetailVos implements Serializable{
 	public void setFastId(String fastId) {
 		this.fastId = fastId;
 	}
-	public TradeExclDetailVos() {
-	}
 	
-	
-	public TradeExclDetailVos(String tradeDate, String username, String userNo, String currencyNo, String exchangeNo,
-			String commodityNo, String buyNum, String sellNum, String tradePrice, String free, String orderType,
-			String orderUserno, String orderUsername, String tradeType, String fastId, String tradeNo) {
-		super();
-		this.tradeDate = tradeDate;
-		this.username = username;
-		this.userNo = userNo;
-		this.currencyNo = currencyNo;
-		this.exchangeNo = exchangeNo;
-		this.commodityNo = commodityNo;
-		this.buyNum = buyNum;
-		this.sellNum = sellNum;
-		this.tradePrice = tradePrice;
-		this.free = free;
-		this.orderType = orderType;
-		this.orderUserno = orderUserno;
-		this.orderUsername = orderUsername;
-		this.tradeType = tradeType;
-		this.fastId = fastId;
-		this.tradeNo = tradeNo;
-	}
-	@Override
-	public String toString() {
-		return "TradeExclDetailVos [tradeDate=" + tradeDate + ", username=" + username + ", userNo=" + userNo
-				+ ", currencyNo=" + currencyNo + ", exchangeNo=" + exchangeNo + ", commodityNo=" + commodityNo
-				+ ", buyNum=" + buyNum + ", sellNum=" + sellNum + ", tradePrice=" + tradePrice + ", free=" + free
-				+ ", orderType=" + orderType + ", orderUserno=" + orderUserno + ", orderUsername=" + orderUsername
-				+ ", tradeType=" + tradeType + ", fastId=" + fastId + ", tradeNo=" + tradeNo + "]";
-	}
 	
 	
 }

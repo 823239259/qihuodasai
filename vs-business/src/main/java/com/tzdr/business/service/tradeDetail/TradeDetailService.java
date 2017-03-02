@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONArray;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.domain.web.entity.FPoundageParities;
 import com.tzdr.domain.web.entity.FSimpleParities;
@@ -48,4 +49,12 @@ public interface TradeDetailService extends BaseService<TradeDetail>{
 	 * @return
 	 */
 	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id);
+
+	/**
+	 * 保存成交记录
+	 * @param jsonArrary
+	 */
+	public void doSaveTrades(JSONArray jsonArrary,String fastId,String userNo);
+
+
 }

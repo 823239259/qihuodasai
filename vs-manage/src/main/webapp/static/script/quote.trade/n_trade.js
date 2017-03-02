@@ -21,8 +21,6 @@ function connectTradeServer() {
 function evaluation(tranAccount,tranPassword){
 	trade_username = tranAccount;
 	trade_password = tranPassword;
-	console.log("trade_username: "+trade_username);
-	console.log("trade_password: "+trade_password);
 }
 
 /**
@@ -541,11 +539,27 @@ function handleMessage(evt) {
     	}	
     	break;
     	case "OnRspQryTrade":{	// 查询成交记录回复
+    		var rows = $("#hasAuditData").datagrid('getSelections');
+    		var id = rows[0].id;
     		if(isEmpty(parameters)){
+    			var json=JSON.stringify(cacheTrade)
+    			console.log("json:"+json);
+    			$.post(Check.rootPath() + "/admin/internation/future/saveTrades",
+    					{	
+    						"cacheTrades":json,
+    						"fastId":id,
+    						"userNo":trade_username
+    					} ,
+    					function(data){
+    						/*if(data.success == true){
+    							console.log(data.message);
+    						}*/
+    				});
     			//延迟5秒 查询个人账户
     			setTimeout("Trade.doAccount(trade_username)",5000);
     		}else{
-	    		var tradeNo = parameters.TradeNo;
+    			mergeTrade(parameters);
+	    		/*var tradeNo = parameters.TradeNo;
 	    		var commodityNo = parameters.CommodityNo;
 	    		var contractNo = parameters.ContractNo;
 	    		var exchangeNo = parameters.ExchangeNo;
@@ -589,7 +603,7 @@ function handleMessage(evt) {
 						if(data.success == true){
 							console.log(data.message);
 						}
-				});
+				});*/
     			
     		}
 		}	
@@ -616,6 +630,7 @@ function handleMessage(evt) {
 	} 
 	
 }
+
 
 /**
  * 账户资金缓存信息
@@ -652,11 +667,27 @@ function mergeAccount(jAccount) {
 	cacheTotalAccount.RiskRate += accountVO.RiskRate;
 }
 
+/**
+ * 缓存交易信息
+ */
+var cacheTrade = [];
+/**
+ * 交易信息汇总
+ */
+function mergeTrade(jAccount) {
+	var tradeOrderVO = new TradeOrderVO(jAccount);
+	// 以成交号为key
+//	var sKey = tradeOrderVO.TradeNo;
+//	cacheTrade[sKey] = tradeOrderVO;
+	cacheTrade.push(tradeOrderVO);
+}
+
 function initTradeData(){
 	tradeSocket = null;
 	trade_username = null;
 	trade_password = null;
 	cacheAccount = new Object();
+	cacheTrade = [];
 	cacheTotalAccount = new Object();
 	cacheTotalAccount.TodayAmount = 0.0;
 	cacheTotalAccount.TodayCanUse = 0.0;

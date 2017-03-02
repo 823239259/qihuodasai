@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tzdr.business.service.datamap.DataMapService;
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FPoundageParitiesService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
@@ -28,6 +29,9 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 	FSimpleFtseUserTradeService simpleFtseUserTradeService;
 	@Autowired
 	private FPoundageParitiesService poundageParitiesService;
+	@Autowired
+	private SecurityInfoService securityInfoService;
+	
 	@Override
 	public void doSaveTradeExclDetail(String tradeDetail,String fastId) {
 		JSONArray jsonArray = JSONArray.parseArray(tradeDetail);
@@ -63,6 +67,55 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		}
 		getEntityDao().saves(details);
 	}
+	
+	@Override
+	public void doSaveTrades(JSONArray jsonArrary,String fastId,String userNo) {
+		Integer size = jsonArrary.size();
+		List<TradeDetail> details = new ArrayList<>();
+		Long time = (new Date().getTime())/1000;
+		String uid = simpleFtseUserTradeService.findByUserNo(userNo).getUid();
+		String tname = securityInfoService.findByUserId(uid).getTname();
+		for(int i = 0 ; i < size ; i++){
+			TradeDetail detail = new TradeDetail();
+			detail.setUsername(tname);
+			detail.setCreateTime(time);
+			JSONObject jsonObject = jsonArrary.getJSONObject(i);
+			String tradeNo = jsonObject.getString("TradeNo");
+			detail.setTradeNo(tradeNo);
+			String clientNo = jsonObject.getString("ClientNo");
+			detail.setUserNo(clientNo);
+			String commodityNo = jsonObject.getString("CommodityNo");
+			String contractNo = jsonObject.getString("ContractNo");
+			detail.setCommodityNo(commodityNo+contractNo);
+			String exchangeNo = jsonObject.getString("ExchangeNo");
+			detail.setExchangeNo(exchangeNo);
+			String drection = jsonObject.getString("Drection");
+			String tradeNum = jsonObject.getString("TradeNum");
+			if("0".equals(drection)){
+				detail.setBuyNum(tradeNum);
+				detail.setSellNum("0");
+			}else{
+				detail.setBuyNum("0");
+				detail.setSellNum(tradeNum);
+			}
+			String tradePrice = jsonObject.getString("TradePrice");
+			detail.setTradePrice(tradePrice);
+			String tradeDateTime = jsonObject.getString("TradeDateTime");
+			detail.setTradeDate(tradeDateTime);
+			String tradeFee = jsonObject.getString("TradeFee");
+			detail.setFree(tradeFee);
+			String currencyNo = jsonObject.getString("CurrencyNo");
+			detail.setCurrencyNo(currencyNo);
+			
+			this.deleteByTradeNo(tradeNo);
+			
+			detail.setFastId(fastId);
+			details.add(detail);
+		}
+		getEntityDao().saves(details);
+		
+	}
+	
 	@Override
 	public List<TradeDetail> doGetByFtseId(String fsteId) {
 		return getEntityDao().doGetByFtseId(fsteId);
@@ -131,4 +184,5 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		
 		return tranProfitLoss;
 	}
+	
 }

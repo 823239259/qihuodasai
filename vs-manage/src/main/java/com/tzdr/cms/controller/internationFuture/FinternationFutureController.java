@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSONArray;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FPoundageParitiesService;
@@ -77,10 +79,6 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	
 	@Autowired
 	private SecurityInfoService securityInfoService;
-	@Autowired
-	private FPoundageParitiesService poundageParitiesService;
-	@Autowired
-	private FSimpleParitiesService simpleParitiesService;
 	
 	@Override
 	public BaseService<FSimpleFtseUserTrade> getBaseService() {
@@ -457,36 +455,18 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 	 * @param resp
 	 * @return
 	 */
-	@RequestMapping(value="/detailSave")
+	@RequestMapping(value="/saveTrades")
 	@ResponseBody
-	public JsonResult detailSave(HttpServletRequest request,HttpServletResponse resp,TradeExclDetailVos detailVo){
-		tradeDetailService.deleteByTradeNo(detailVo.getTradeNo());  
-		
-		Long time = (new Date().getTime())/1000;
-		String userNo = detailVo.getUserNo();
-		String uid = simpleFtseUserTradeService.findByUserNo(userNo).getUid();
-		String tname = securityInfoService.findByUserId(uid).getTname();
-		
-		TradeDetail detail = new TradeDetail();
-		
-		detail.setBuyNum(detailVo.getBuyNum());
-		detail.setCommodityNo(detailVo.getCommodityNo());
-		detail.setCurrencyNo(detailVo.getCurrencyNo());
-		detail.setExchangeNo(detailVo.getExchangeNo());
-		detail.setFree(detailVo.getFree());
-		detail.setOrderUsername(tname);
-		detail.setSellNum(detailVo.getSellNum());
-		detail.setTradeDate(detailVo.getTradeDate());
-		detail.setTradePrice(detailVo.getTradePrice());
-		detail.setTradeType(detailVo.getTradeType());
-		detail.setUsername(tname);
-		detail.setUserNo(detailVo.getUserNo());
-		detail.setUpdateTime(time);
-		detail.setCreateTime(time);
-		detail.setFastId(detailVo.getFastId()); //方案号
-		detail.setTradeNo(detailVo.getTradeNo());//  成交号
-		tradeDetailService.save(detail);
-		return new JsonResult(true,"保存一笔成交记录，成交号："+detailVo.getTradeNo());
+	public JsonResult saveTrades(HttpServletRequest request,HttpServletResponse resp){
+		String cacheTrades = request.getParameter("cacheTrades");
+ 		String fastId = request.getParameter("fastId");
+		String userNo = request.getParameter("userNo");
+		JSONArray jsonArrary = JSONArray.parseArray(cacheTrades);
+		if(jsonArrary==null || jsonArrary.size() == 0){
+			return new JsonResult(true,"今日无成交记录");
+		}
+		tradeDetailService.doSaveTrades(jsonArrary,fastId,userNo);
+		return new JsonResult(true,"保存"+jsonArrary.size()+"条数据");
 	}
 	/**
 	 * 查询某账号的所有成交记录
