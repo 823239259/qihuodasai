@@ -2836,10 +2836,10 @@ function bindOpertion(){
 			}
 			var chioceContract = $("#condition_price_contractCode").val();
 			if(insertConditionCount == 0){
-				var tipContent = "你确定要提交【"+chioceContract+"】条件单吗?";
+				var tipContent = "你确定要提交【"+chioceContract+"】条件单吗";
 				tipConfirm(tipContent,doInsertConditionByPrice,cancleCallBack);
 			}else if(insertConditionCount == 1){
-				var tipContent = "你确定要修改【"+chioceContract+"】条件单吗?";
+				var tipContent = "你确定要修改【"+chioceContract+"】条件单吗";
 				tipConfirm(tipContent,doUpdateConditionByPrice,cancleCallBack);
 			}
 		}else{
@@ -2889,10 +2889,10 @@ function bindOpertion(){
 			}
 			var chioceContract = $("#contion_time_contractCode").val();
 			if(insertConditionCount == 0){
-				var tipContent = "你确定要提交【"+chioceContract+"】条件单吗?";
+				var tipContent = "你确定要提交【"+chioceContract+"】条件单吗";
 				tipConfirm(tipContent,doInsertConditionByTime,cancleCallBack);
 			}else if(insertConditionCount == 1){
-				var tipContent = "你确定要修改【"+chioceContract+"】条件单吗?";
+				var tipContent = "你确定要修改【"+chioceContract+"】条件单吗";
 				tipConfirm(tipContent,doUpdateConditionByTime,cancleCallBack);
 			}
 		}else{
