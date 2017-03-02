@@ -1569,3 +1569,15 @@ input{
 	z-index: 99;
 	display: none;
 }
+.detail-title{padding: 14px 15px;height: auto; overflow: hidden; background-color: #1f1f1f;} 
+.detail-title span{display: block; color: #ffffff; font-size: 14px;}
+.detail-title span:nth-child(1){background: url(../images/time.png) no-repeat center center; width: 18px; height: 18px; background-size: 17px 17px; float: left; margin-right: 10px;}
+.detail-title span:nth-child(2){float: left; height: 18px;}
+.detail-title span:nth-child(3){float: right;  height: 18px; padding-left: 12px; border-left: 1px solid #666666;}
+.detail-table{width: 100%; height: auto;}
+.detail-table table{width: 1300px; overflow-x: scroll;}
+.detail-table table tr{color: #FFFFFF; text-align: center; font-size: 12px; color: #cccccc; height: 40px; line-height: 40px; border: 1px solid #121212;}
+.detail-table table thead tr{color: #666666; height: 30px; line-height: 30px;}
+.detail-table table tr td{width: 60px; }
+.detail-table table tr td:nth-child(1){width: 40px; padding-left: 10px;}
+.detail-table table tr td:nth-last-child(1){width: 120px;}
