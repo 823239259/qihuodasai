@@ -543,7 +543,6 @@ function handleMessage(evt) {
     		var id = rows[0].id;
     		if(isEmpty(parameters)){
     			var json=JSON.stringify(cacheTrade)
-    			console.log("json:"+json);
     			$.post(Check.rootPath() + "/admin/internation/future/saveTrades",
     					{	
     						"cacheTrades":json,

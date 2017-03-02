@@ -272,6 +272,8 @@ function tradeToS(value,row,index){
 		return '小原油';
 	}else if(value == 21){
 		return '迷你德国DAX指数';
+	}else if(value == 22){
+		return '天然气';
 	}
 	
 	// 9.迷你道指、10.迷你纳指、11.迷你标普、12.德国DAX、13.日经225、14.小恒指、15.美黄金
@@ -399,7 +401,7 @@ $(document).ready(function(){
 	
 	<!-- 国际综合参数操作弹框-->
 	<div id="passWin" class="easyui-window" title="编辑" 
-		style="width:600px;height:380px;display:none;border:none; overflow: hidden;"
+		style="width:600px;height:420px;display:none;border:none; overflow: hidden;"
         data-options="iconCls:'icon-save',modal:true,closed:true">
         <form id="passForm">
         <table border="0" style="font-size:12px;" class="conn"  width="100%" cellpadding="0" cellspacing="0">
