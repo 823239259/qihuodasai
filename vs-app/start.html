@@ -153,15 +153,16 @@
 						}
 					}
 				}else if(plus.os.name == "iOS"){
+					console.log(JSON.stringify(iOS));
 					if(iOS.version > wgtVer){
 						if(nowDate >= upDateiOS){
 							if(iOS.isForceUpdate == true){
 								plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function(){
 									if(iOS.bigUrl == null || iOS.bigUrl == "" || iOS.bigUrl == undefined || iOS.bigUrl.length == 0){
 										downWgt(function(){
-										if (mui.cacheUser.isLogin()){
-											mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
-										}
+											if (mui.cacheUser.isLogin()){
+												mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
+											}
 										});	// 下载升级包
 									}else{
 										var _download_url = iOS.bigUrl;
@@ -182,7 +183,6 @@
 											var _download_url = iOS.bigUrl;
 											plus.runtime.openURL(_download_url);
 										}
-										
 									}else{
 										if (mui.cacheUser.isLogin()){
 											mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});

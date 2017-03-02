@@ -7,7 +7,7 @@
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.3.5",/*应用版本名称*/
+		"name": "2.3.6",/*应用版本名称*/
 		"code": "2017022302"
 	},
 	"description": "",/*应用描述信息*/
@@ -1192,7 +1192,8 @@
 					"images/tradeBG.png",
 					"images/tipsBG.png",
 					"js/mui.picker.all.js",
-					"css/mui.picker.all.css"
+					"css/mui.picker.all.css",
+					"js/mui.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1693,7 +1694,6 @@
 			"resources": [
 				"images/ac_08.png",
 				"tzdr/future/paysuc.html",
-				"js/mui.js",
 				"js/mui.min.2.9.js",
 				"css/mui.css",
 				"images/acp_04.gif",
