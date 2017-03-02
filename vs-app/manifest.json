@@ -336,7 +336,8 @@
 					"js/jquery-1.11.3.js",
 					"images/weixinIcon.png",
 					"images/close.png",
-					"images/close1.png"
+					"images/close1.png",
+					"images/about.png"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
@@ -357,7 +358,8 @@
 					"tzdr/account/bindWeixin.html",
 					"tzdr/account/accountno.html",
 					"tzdr/login/retrievePassword.html",
-					"tzdr/account/Invitation.html"
+					"tzdr/account/Invitation.html",
+					"tzdr/account/about.html"
 				],
 				"priority": 0
 			},
@@ -870,7 +872,8 @@
 					"images/0.png",
 					"images/2.png",
 					"images/1.png",
-					"images/weixinIcon.png"
+					"images/weixinIcon.png",
+					"images/about.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
@@ -1189,7 +1192,8 @@
 					"images/tradeBG.png",
 					"images/tipsBG.png",
 					"js/mui.picker.all.js",
-					"css/mui.picker.all.css"
+					"css/mui.picker.all.css",
+					"js/mui.js"
 				],
 				"refer": [
 					"tzdr/quotation/trade.html",
@@ -1656,13 +1660,40 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"tzdr/account/about.html": {
+				"resources": [
+					"images/aboutBg.png",
+					"images/newEdition.jpg",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/close1.png"
+				],
+				"refer": [
+					"chart.html"
+				],
+				"priority": 0
+			},
+			"chart.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
 				"images/ac_08.png",
 				"tzdr/future/paysuc.html",
-				"js/mui.js",
 				"js/mui.min.2.9.js",
 				"css/mui.css",
 				"images/acp_04.gif",

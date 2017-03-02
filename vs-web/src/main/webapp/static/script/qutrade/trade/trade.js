@@ -2313,10 +2313,17 @@ function bindOpertion(){
 	$("#stopLossAndtraders").bind("click",function(){
 		if(isLogin){
 			var contractCode = selectPostion["contractCode"];
-			if(contractCode == undefined){
-				tip("请选择一行数据");
+			var postionIndex = selectPostion["postionIndex"];
+			if(contractCode == undefined || $(".postion-index"+postionIndex+"").html() == undefined){
+				tip("请选择一个持仓数据");
 				return;
 			}
+			
+//			var contractCode = selectPostion["contractCode"];
+//			if(contractCode == undefined){
+//				tip("请选择一行数据");
+//				return;
+//			}
 			var $contractCode = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position0']");
 			var $drection = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position2']");
 			var $holdNum = $("ul[data-tion-position='"+contractCode+"'] li[class = 'position1']");
