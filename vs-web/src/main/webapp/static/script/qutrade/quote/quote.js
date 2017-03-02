@@ -431,6 +431,9 @@ function setSelectOption(contractCode){
 	//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
 	//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
 	updateRight(localQoute);
+	var HisQuoteType=checkHisQuoteType();
+	 sendHistory(HisQuoteType);
+	 $("#totalVolume").val(0);
 }
 /**
  * 更新行情列表索引
