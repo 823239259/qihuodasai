@@ -40,6 +40,11 @@ public class Constants {
 	 * 保存投资达人session
 	 */
 	public static final String TZDR_USER_SESSION = "tzdrUser";
+	/**
+	 * 真实姓名
+	 */
+	public static final String TZDR_REALNAME_SESSION = "realName";
+
 
 	/**
 	 * 登录失败最大允许次数，超过需要验证码验证

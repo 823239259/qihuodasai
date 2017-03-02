@@ -98,6 +98,19 @@
 #Copyright div a:hover {
     color: #ffb319;
 }
+#MEIQIA-BTN #MEIQIA-BTN-TEXT {
+	display: none;
+}
+#MEIQIA-BTN-HOLDER {
+	right: 10px;
+    bottom: 239px;
+    width: 40px;
+    height: 40px;
+}
+#MEIQIA-BTN {
+	background-color: #1a1a1a;
+	border-radius: 4px;
+}
 </style>
 <!-- <div style="background: #333;height: 338px;" id="ungundontiao"> -->
 <div>
@@ -297,3 +310,44 @@
 	</div>	
 </div>
 <script type='text/javascript' src="${ctx}/static/script/common/footer.js?v=${v}"></script>
+<script>
+var phone = $("#mq_userName").val(); 
+var userName = $("#mq_realName").val();
+function yourFunction(servability) {
+    // 你可以根据自己的需求编写相应的代码
+    console.log('美洽网站插件初始化完毕。');
+    if (servability) {
+        console.log('有客服在线');
+    } else {
+        console.log('无客服在线');
+    }
+}
+(function(m, ei, q, i, a, j, s) {
+    m[i] = m[i] || function() {
+        (m[i].a = m[i].a || []).push(arguments)
+    };
+    j = ei.createElement(q),
+            s = ei.getElementsByTagName(q)[0];
+    j.async = true;
+    j.charset = 'UTF-8';
+    j.src = '//static.meiqia.com/dist/meiqia.js';
+    s.parentNode.insertBefore(j, s);
+})(window, document, 'script', '_MEIQIA');
+_MEIQIA('entId', '48917');
+_MEIQIA('allSet', yourFunction);
+//_MEIQIA('showPanel');
+if(userName == null && phone != null){
+	_MEIQIA('metadata', {
+		tel: phone
+    });
+}else if(userName != null && phone == null) {
+	_MEIQIA('metadata', {
+        name: userName
+    });
+}else if(userName != null && phone !== null) {
+	_MEIQIA('metadata', {
+        name: userName,
+        tel: phone
+    });
+}
+</script>

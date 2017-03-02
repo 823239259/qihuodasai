@@ -77,7 +77,7 @@
  			<li><a href="http://www.vs.com/vsnews/rili/" title="" >财经日历</a></li>
             <li><a href="http://www.vs.com/vsnews/xuetang/" title="" >期货学堂</a></li>
             <li><a href="http://www.vs.com/vsnews/news/" title="" >全球资讯</a></li>
-        </ul>   
+        </ul>
     </div>  
     <div id="headerTopRight" class="">
     <div class="">
@@ -116,3 +116,5 @@
         <p class="fl_sv_up"><a href="javascript: scrollTop();"></a></p>   
     </div>
 </div>
+<input type="hidden"  id="mq_userName" value="${userName}"/>
+<input type="hidden"  id="mq_realName" value="${realName}"/>

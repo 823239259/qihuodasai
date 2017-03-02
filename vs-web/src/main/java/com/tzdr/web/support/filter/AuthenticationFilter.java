@@ -18,9 +18,11 @@ import jodd.util.StringUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.common.utils.SpringUtils;
 import com.tzdr.common.utils.StringCodeUtils;
+import com.tzdr.domain.web.entity.UserVerified;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.web.constants.Constants;
 import com.tzdr.web.utils.UserSessionBean;
@@ -30,13 +32,14 @@ public class AuthenticationFilter implements Filter {
 	
 	private WUserService wUserService = SpringUtils.getBean(WUserService.class);
 	
+	private SecurityInfoService securityInfoService = SpringUtils.getBean(SecurityInfoService.class);
+	
 	//URL排除的正则表达式
 	private String excludePattern; 
 	
 	@Override
 	public void destroy() {
 	}
-	
 	
 
 	@Override
@@ -65,13 +68,14 @@ public class AuthenticationFilter implements Filter {
 				userSessionBean.setEmail(wUser.getEmail());
 				userSessionBean.setMobile(wUser.getMobile());
 				userSessionBean.setUname(wUser.getUname());
-				
 				request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USER_SESSION, userSessionBean); //保存都信息
 				String userName = null;  //用户名称
 				if(!StringUtil.isBlank(userSessionBean.getMobile())){  //手机号码加*
 					String mobile = userSessionBean.getMobile();
 					userName = StringCodeUtils.buildMobile(mobile);
 				}
+				String realName = securityInfoService.findByUserId(wUser.getId()).getTname();
+				request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_REALNAME_SESSION, realName);
 				request.getSession().setAttribute(com.tzdr.web.constants.Constants.TZDR_USERNAME_SESSION, userName);
 			}
 		} else if(StringUtils.isEmpty(remoteUserName)) { // 不存在登录名
