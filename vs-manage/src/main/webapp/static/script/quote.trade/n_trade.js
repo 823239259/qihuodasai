@@ -1,8 +1,8 @@
 var tradeSocket = null;
-var trade_url = "ws://192.168.0.213:7001";
-//var trade_url = "ws://139.224.6.183:6071";
+//var trade_url = "ws://192.168.0.213:7001";
+var trade_url = "ws://139.224.6.183:6072";
 var trade_model = "0"; // 实盘：0；模拟盘：1
-var trade_version = "3.2";
+var trade_version = "3.3";
 var trade_username = null;
 var trade_password = null; 	// base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4)
 var trade_source = "vs_system";
