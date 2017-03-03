@@ -671,6 +671,13 @@ var tab="<%=tab%>";
 			  	<td>1个指数点（5欧元）   </td>
 			  	<td class="sp">无涨跌幅限制</td>
 			  </tr>
+			  <tr>
+			  	<td>天然气 (Natural Gas)</td>
+			  	<td>CME (NYMEX）</td>
+			  	<td>天然气</td>
+			  	<td>0.001= USD10</td>
+			  	<td class="sp">±1.00美元,若最近的三个合 约同时出现涨跌停,所有合约 熔断5分钟</td>
+			  </tr>
 			</tbody>
 			</table>
 			<h2 style="margin-top: 15px;">操盘流程：</h2>
