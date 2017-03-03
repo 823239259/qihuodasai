@@ -13,7 +13,6 @@
 <script type="text/javascript" src="${ctx}/static/script/common/dateUtils.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/my97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${ctx}/static/script/internationFuture/ifList.js?v=20170228"></script>
-<script type="text/javascript" src="${ctx}/static/script/quote.trade/n_quote.js?v=20170228"></script>
 <script type="text/javascript" src="${ctx}/static/script/quote.trade/n_trade_vo.js?v=20170228"></script>
 <script type="text/javascript" src="${ctx}/static/script/quote.trade/n_trade.js?v=20170228"></script>
 <script type="text/javascript" src="${ctx}/static/script/quote.trade/n_utils.js?v=20170228"></script>
