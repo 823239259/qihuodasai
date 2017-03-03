@@ -182,15 +182,18 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 				freeSum = freeSum.add(CNYfreeMoeny.multiply(fPoundageParities.getParities()));
 			}
 		}
-		//追加保证金汇率
-		String rate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
 		FSimpleFtseUserTrade ftse = simpleFtseUserTradeService.get(id);
-		BigDecimal traderBond = ftse.getTraderBond().divide(new BigDecimal(rate),4, BigDecimal.ROUND_HALF_EVEN); //初始保证金（$）
-		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(rate),4, BigDecimal.ROUND_HALF_EVEN);//追加保证金（$）
+		
+		//追加保证金汇率,,,注意:入金汇率、追加保证金、手续费汇率、结算汇率均不一样
+		String exchangeRate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
+		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(exchangeRate),4, BigDecimal.ROUND_HALF_EVEN);//追加保证金（$）
 		
 		char ch = tranAccount.charAt(0);
 		double tranProfitLoss = 0;
-		if(ch == 'Q'){//易胜盈亏结算
+		if(ch == 'Q'){//易胜盈亏结算  
+			//入金汇率
+			String goldExchangeRate = dataMapService.findByTypeKey("goldExchangeRate").get(0).getValueKey();
+			BigDecimal traderBond = ftse.getTraderBond().divide(new BigDecimal(goldExchangeRate),0, BigDecimal.ROUND_DOWN ); //初始保证金（$），
 			
 			//总盈亏  交易盈亏=账户余额  - （初始保证金 + 追加保证金） + 手续费  （保留2位小数）
 			tranProfitLoss = todayMoeny.subtract(traderBond.add(appendTraderBond)).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
