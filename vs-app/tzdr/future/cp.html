@@ -274,11 +274,11 @@
 					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易迷你德国DAX指数时，初始最大可持仓"+(mui.isnull(init_params.daxtranMinActualLever) ? 0 : init_params.daxtranMinActualLever)+"手";
 					break;
-				/*case 22:
+				case 22:
 					td_1.innerHTML="天然气指数";
 					td_3.innerHTML=tradeTime;
 					td_5.innerHTML="只交易天然气指数时，初始最大可持仓"+(mui.isnull(init_params.naturalGasActualLever) ? 0 : init_params.naturalGasActualLever)+"手";
-					break;*/
+					break;
 				default:
 					break;
 			}
@@ -294,7 +294,6 @@
 		
 		
 		function setTran_lever(){
-			
 			var table=document.getElementById("table_list");
 			var rows=table.rows;
 			var td_5=null;
@@ -347,10 +346,10 @@
 					td_5.innerHTML="只交易小原油时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
 				break;
 				case 16: 
-					td_5.innerHTML="只交易迷你德国DAX指数时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
+					td_5.innerHTML="只交易迷你德国DAX指数时，初始最大可持仓"+(mui.isnull(init_params.daxtranMinActualLever) ? 0 : init_params.daxtranMinActualLever)+"手";
 				break;
 				case 17: 
-					td_5.innerHTML="只交易天然气时，初始最大可持仓"+(mui.isnull(init_params.smaActualLever) ? 0 : init_params.smaActualLever)+"手";
+					td_5.innerHTML="只交易天然气时，初始最大可持仓"+(mui.isnull(init_params.naturalGasActualLever) ? 0 : init_params.naturalGasActualLever)+"手";
 				break;
 				default:
 					break;
@@ -385,7 +384,7 @@
 			<span id="lineLoss">10,450美元</span>
 		</li>
 	</ul>
-	<p id="tradeingVariety" style="border-top: 1px solid #E4E4E4;"><span>可交易品种：</span><b>一个账号可同时交易16种期货产品</b></p>
+	<p id="tradeingVariety" style="border-top: 1px solid #E4E4E4;"><span>可交易品种：</span><b>一个账号可同时交易17种期货产品</b></p>
 	<p class="tips borderClass" >（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
 	<p style="border-bottom: 1px solid #E4E4E4;color: #2B2B2B;font-size: 12px;padding: 4px 10px;margin: 0px;background-color: #FFFFFF;">在各品种停止交易的5分钟内，即11:55-12:00,14:25-14:30,16:25-16:30,16:30-16:35,11:40-11:45,11:55-12:00六个时段所有品种只能平仓，不能开仓。</p>
 	<div class="acp_font">
