@@ -144,7 +144,7 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		
 	}
 	@Override
-	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id) {
+	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id,String tranAccount) {
 
 		BigDecimal HKDfreeMoeny = new BigDecimal(0.0);
 		BigDecimal JPYfreeMoeny = new BigDecimal(0.0);
@@ -185,13 +185,20 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		//追加保证金汇率
 		String rate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
 		FSimpleFtseUserTrade ftse = simpleFtseUserTradeService.get(id);
-		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(rate),4, BigDecimal.ROUND_HALF_EVEN);
-		//总操盘资金（初始入金+追加保证金）
-		BigDecimal traderTotal = ftse.getTraderTotal().add(appendTraderBond);
+		BigDecimal traderBond = ftse.getTraderBond().divide(new BigDecimal(rate),4, BigDecimal.ROUND_HALF_EVEN); //初始保证金（$）
+		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(rate),4, BigDecimal.ROUND_HALF_EVEN);//追加保证金（$）
 		
-		//总盈亏  交易盈亏=账户余额  - 总操盘资金  + 手续费  （保留2位小数）
-	    double tranProfitLoss = todayMoeny.subtract(traderTotal).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-		
+		char ch = tranAccount.charAt(0);
+		double tranProfitLoss = 0;
+		if(ch == 'Q'){//易胜盈亏结算
+			
+			//总盈亏  交易盈亏=账户余额  - （初始保证金 + 追加保证金） + 手续费  （保留2位小数）
+			tranProfitLoss = todayMoeny.subtract(traderBond.add(appendTraderBond)).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+		}else{//直达盈亏结算
+			
+			//总盈亏  交易盈亏=账户余额  - 总操盘资金（初始入金+追加保证金）  + 手续费  （保留2位小数）
+	        tranProfitLoss = todayMoeny.subtract(ftse.getTraderTotal().add(appendTraderBond)).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+		}
 		return tranProfitLoss;
 	}
 	

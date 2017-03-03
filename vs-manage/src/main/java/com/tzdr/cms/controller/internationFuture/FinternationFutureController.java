@@ -505,7 +505,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		
 		Map<String, Double> leadLever = leadLever(detailVos);
 		//计算交易盈亏
-		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,new BigDecimal(todayMoeny),id);
+		double countTranProfitLoss = tradeDetailService.countTranProfitLoss(tradeDetails,new BigDecimal(todayMoeny),id,tranAccount);
 		leadLever.put("tranProfitLoss", countTranProfitLoss);
 		JsonResult resultJson = new JsonResult();
 		resultJson.setSuccess(true);

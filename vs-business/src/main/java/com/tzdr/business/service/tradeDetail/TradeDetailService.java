@@ -48,7 +48,7 @@ public interface TradeDetailService extends BaseService<TradeDetail>{
 	 * @param id  方案id
 	 * @return
 	 */
-	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id);
+	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id,String tranAccount);
 
 	/**
 	 * 保存成交记录
