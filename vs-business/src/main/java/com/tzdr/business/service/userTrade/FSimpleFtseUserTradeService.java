@@ -207,5 +207,10 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	 */
 	public void clearFsimpleFtseUserTradeById(String id,Integer stateType);
 	
+	/**
+	 * 根据客户号查询
+	 */
+	public FSimpleFtseUserTrade findByUserNo(String userNo);
+	
 	
 }

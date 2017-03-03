@@ -535,7 +535,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 					|| null == wellGoldA50.getDaxtranActualLever() || null == wellGoldA50.getLhsiTranActualLever()
 					|| null == wellGoldA50.getAgTranActualLever()||null==wellGoldA50.getHeStockMarketLever()||null==wellGoldA50.getXhStockMarketLever()
 					||null==wellGoldA50.getAmeCopperMarketLever()||null==wellGoldA50.getAmeSilverMarketLever()||null==wellGoldA50.getSmallCrudeOilMarketLever()
-					|| null == wellGoldA50.getDaxtranMinActualLever()) {
+					|| null == wellGoldA50.getDaxtranMinActualLever() || null == wellGoldA50.getNaturalGasActualLever()) {
 				return new JsonResult(false, "交易手数输入有误，请核对后重新输入！");
 			}
 			simpleFtseUserTrade.setCrudeTranActualLever(wellGoldA50.getCrudeTranActualLever()); // 原油交易手数
@@ -554,7 +554,10 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			simpleFtseUserTrade.setAmeSilverMarketLever(wellGoldA50.getAmeSilverMarketLever());//美白银
 			simpleFtseUserTrade.setSmallCrudeOilMarketLever(wellGoldA50.getSmallCrudeOilMarketLever());//小原油
 			simpleFtseUserTrade.setDaxtranMinActualLever(wellGoldA50.getDaxtranMinActualLever());//迷你德国DAX指数
+			simpleFtseUserTrade.setNaturalGasActualLever(wellGoldA50.getNaturalGasActualLever());//天然气指数
 		}
+		
+		simpleFtseUserTrade.setEndType(wellGoldA50.getEndType());	//设置结算方式
 		/**
 		 * 获取汇率
 		 */
@@ -632,6 +635,10 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			BigDecimal daxmintranfess = simpleFtseUserTrade.getDaxMinTranFees();
 			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getDaxtranMinActualLever())
 					.multiply((daxmintranfess == null ? new BigDecimal(0) :daxmintranfess), MathContext.DECIMAL32));
+			//天然气指数交易手续费
+			BigDecimal naturalGasFess = simpleFtseUserTrade.getNaturalGasFess();
+			tranFees = tranFees.add(new BigDecimal(simpleFtseUserTrade.getNaturalGasActualLever())
+					.multiply((naturalGasFess == null ? new BigDecimal(0) :naturalGasFess), MathContext.DECIMAL32));
 		}
 
 		// 抵扣券抵扣手续费
@@ -720,7 +727,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		simpleFtseUserTrade.setEndActualMoney(endActualMoney); // 设置实际抵扣金额
 
 		simpleFtseUserTrade.setEndAmount(endAmount); // 设置实际结算金额
-
+		
+		
 		simpleFtseUserTrade.setStateType(3); // 待结算
 		simpleFtseUserTrade.setOperator(authService.getCurrentUser().getRealname());
 		this.update(simpleFtseUserTrade);
@@ -1017,6 +1025,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			sql.append("	userTrade.ame_silver_market_lever as ameSilverMarketLever,\n");
 			sql.append("	userTrade.small_crude_oil_market_lever as smallCrudeOilMarketLever,\n");
 			sql.append("	userTrade.daxtran_min_actual_lever as daxtranMinActualLever,\n");
+			sql.append("	userTrade.natural_gas_actual_lever as naturalGasActualLever,\n");
 			sql.append("	userTrade.tran_fees as tranFees,\n");
 			sql.append("	userTrade.tran_fees_total as tranFeesTotal,\n");
 			sql.append("	userTrade.discount_money as discountMoney,\n");
@@ -1027,6 +1036,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			// sql.append(" userTrade.app_time as appTime,\n");
 			sql.append("	userTrade.app_end_time as appEndTime,\n");
 			sql.append("	userTrade.end_time as endTime,\n");
+			sql.append("	userTrade.end_type as endType,\n");
 			// sql.append(" userTrade.fee_manage as feeManage,\n");
 			// sql.append(" userTrade.line_loss as lineLoss,\n");
 			sql.append("	userTrade.program_no as programNo,\n");
@@ -1177,6 +1187,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		fSimpleFtseUserTrade.setEndParities(null);
 		fSimpleFtseUserTrade.setTranFeesTotal(null);
 		fSimpleFtseUserTrade.setDaxtranMinActualLever(null);
+		fSimpleFtseUserTrade.setNaturalGasActualLever(null);;
 		fSimpleFtseUserTrade.setSmallCrudeOilMarketLever(null);
 		fSimpleFtseUserTrade.setAmeSilverMarketLever(null);
 		fSimpleFtseUserTrade.setAmeCopperMarketLever(null);
@@ -1198,6 +1209,19 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		fSimpleFtseUserTrade.setEndAmount(null);
 		getEntityDao().update(fSimpleFtseUserTrade);
 		tradeDetailService.deleteByFastId(id);
+	}
+
+	@Override
+	public FSimpleFtseUserTrade findByUserNo(String userNo) {
+		
+		if(!StringUtils.isEmpty(userNo)){
+			List<FSimpleFtseUserTrade> findByTranAccount = this.getEntityDao().findByTranAccount(userNo);
+			if(findByTranAccount!=null){
+				return findByTranAccount.get(0);
+			}
+			return null;
+		}
+		return null;
 	}
 	
 }

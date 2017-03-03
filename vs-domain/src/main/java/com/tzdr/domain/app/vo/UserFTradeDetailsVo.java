@@ -70,7 +70,7 @@ public class UserFTradeDetailsVo implements Serializable {
 	private BigDecimal feeManage;
 	
 	/**
-	 * 交易手续费(元/手【双向】)
+	 * 交易手续费(元/手)
 	 */
 	@SqlColumn(name="tran_fees")
 	private BigDecimal tranFees;
@@ -208,6 +208,12 @@ public class UserFTradeDetailsVo implements Serializable {
 	 */
 	@SqlColumn(name = "daxtran_min_actual_lever")
 	private Integer daxtranMinActualLever;
+	
+	/**
+	 * 天然气指数
+	 */
+	@SqlColumn(name = "natural_gas_actual_lever")
+	private Integer naturalGasActualLever;
 	
 	/**
 	 * 结算金额
@@ -513,6 +519,14 @@ public class UserFTradeDetailsVo implements Serializable {
 
 	public void setSmallCrudeOilMarketLever(Integer smallCrudeOilMarketLever) {
 		this.smallCrudeOilMarketLever = smallCrudeOilMarketLever;
+	}
+
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
 	}
 	
 	

@@ -202,6 +202,11 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	@SqlColumn(name="daxtran_min_actual_lever")
 	private Integer daxtranMinActualLever = new Integer(0);
 	/**
+	 * 天然气交易手数
+	 */
+	@SqlColumn(name="natural_gas_actual_lever")
+	private Integer naturalGasActualLever = new Integer(0);
+	/**
 	 * 交易手续费总额
 	 */
 	@SqlColumn(name="tran_fees_total")
@@ -630,9 +635,11 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	public void setDaxtranMinActualLever(Integer daxtranMinActualLever) {
 		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
-
-
-	
-	
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
+	}
 	
 }

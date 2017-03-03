@@ -204,6 +204,10 @@ public class FSimpleFtseVo implements Serializable {
 	 */
 	private Integer daxtranMinActualLever;
 	/**
+	 * 天然气交易手数
+	 */
+	private Integer naturalGasActualLever;
+	/**
 	 * 交易手续费总额
 	 */
 	private BigDecimal tranFeesTotal;
@@ -227,6 +231,10 @@ public class FSimpleFtseVo implements Serializable {
 	 * 结算时间
 	 */
 	private BigInteger endTime;
+	/**
+	 * 结算方式
+	 */
+	private Integer endType;
 
 	/**
 	 * 实际操盘时间
@@ -720,4 +728,20 @@ public class FSimpleFtseVo implements Serializable {
 		this.daxtranMinActualLever = daxtranMinActualLever;
 	}
 
+	public Integer getEndType() {
+		return endType;
+	}
+
+	public void setEndType(Integer endType) {
+		this.endType = endType;
+	}
+
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
+	}
+	
 }

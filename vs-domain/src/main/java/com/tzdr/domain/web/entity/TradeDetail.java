@@ -28,7 +28,8 @@ public class TradeDetail extends BaseEntity{
 	private String tradeType;
 	private Long createTime;
 	private Long updateTime;
-	private String fastId;
+	private String tradeNo;  //交易成交号
+	private String fastId;   //方案id
 	
 	public String getFastId() {
 		return fastId;
@@ -133,12 +134,18 @@ public class TradeDetail extends BaseEntity{
 		this.tradeType = tradeType;
 	}
 	
-	 public TradeDetail() {
-		// TODO Auto-generated constructor stub
+	public String getTradeNo() {
+		return tradeNo;
+	}
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
+	}
+	public TradeDetail() {
 	}
 	public TradeDetail(String tradeDate, String username, String userNo, String currencyNo, String exchangeNo,
 			String commodityNo, String buyNum, String sellNum, String tradePrice, String free, String orderType,
-			String orderUserno, String orderUsername, String tradeType, Long createTime, Long updateTime,String fastId) {
+			String orderUserno, String orderUsername, String tradeType, Long createTime, Long updateTime,
+			String tradeNo, String fastId) {
 		super();
 		this.tradeDate = tradeDate;
 		this.username = username;
@@ -156,6 +163,7 @@ public class TradeDetail extends BaseEntity{
 		this.tradeType = tradeType;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
+		this.tradeNo = tradeNo;
 		this.fastId = fastId;
 	}
 	

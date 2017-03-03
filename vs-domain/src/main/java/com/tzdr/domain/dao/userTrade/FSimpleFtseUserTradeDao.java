@@ -44,4 +44,9 @@ public interface FSimpleFtseUserTradeDao extends BaseJpaDao<FSimpleFtseUserTrade
 	
 	@Query(value="from FSimpleFtseUserTrade where stateType=4 and uid=?1")
 	List<FSimpleFtseUserTrade> findByUidAndStateType(String uid);
+	
+	@Query(value="from FSimpleFtseUserTrade where tranAccount=?1")
+	List<FSimpleFtseUserTrade> findByTranAccount(String tranAccount);
+	
+	
 }

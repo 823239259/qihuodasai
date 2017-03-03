@@ -391,7 +391,7 @@ $(document).ready(function(){
 							$("#loginPassword").val(password);
 							$("#loginForm").submit();*/
 							var generalizeId = $("#generalizeId").val();
-							openMockTrade(mobile,password,generalizeId);
+							openMockTrade(mobile,password);
 							window.location.href = basepath+"/signinsucess";
 							/*
 							//达人论股系统登录
@@ -430,17 +430,16 @@ $(document).ready(function(){
  * @param username
  * @param password
  */
-function openMockTrade(username,password,generalizeId){
+function openMockTrade(username,password){
 	$.ajax({
 		url:basepath+"/mock/trade/openMock",
 		type:"post",
 		data:{
 			username:username,
 			password:password,
-			generalizeId:generalizeId
 		},
 		success:function(result){
-			
+
 		}
 	});
 }

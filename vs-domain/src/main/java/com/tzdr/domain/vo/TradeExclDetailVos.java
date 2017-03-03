@@ -1,11 +1,6 @@
 package com.tzdr.domain.vo;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import com.tzdr.common.utils.ReadExclPOI;
 
 @SuppressWarnings("serial")
 public class TradeExclDetailVos implements Serializable{
@@ -23,6 +18,7 @@ public class TradeExclDetailVos implements Serializable{
 	private String orderUserno;
 	private String orderUsername;
 	private String tradeType;
+	
 	public String getTradeDate() {
 		return tradeDate;
 	}
@@ -137,28 +133,6 @@ public class TradeExclDetailVos implements Serializable{
 				+ ", orderType=" + orderType + ", orderUserno=" + orderUserno + ", orderUsername=" + orderUsername
 				+ ", tradeType=" + tradeType + "]";
 	}
-	public static void main(String[] args) {
-		ReadExclPOI readExclPOI = new ReadExclPOI();
-		try {
-			List<TradeExclDetailVos> detailVos = (List<TradeExclDetailVos>)readExclPOI.readExcl2007("C:\\Users\\username\\Desktop\\成交单管理2016-12-02.xlsx", TradeExclDetailVos.class);
-			for (int i = 0; i < detailVos.size(); i++) {
-				System.out.println(detailVos.get(i).toString());
-			}
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
+	
 }

@@ -31,7 +31,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>汇率:</td>
+			<td>汇率(兑人民币):</td>
 			<td><input type="number" value="${simpleParities.parities}" class="easyui-validatebox"  id="parities"  name="parities" data-options="required:true"></td>
 		</tr>
 		<tr>

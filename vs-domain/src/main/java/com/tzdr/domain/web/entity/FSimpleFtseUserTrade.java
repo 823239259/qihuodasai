@@ -83,8 +83,10 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 恒生指数交易手续费
 	 */
 	private BigDecimal hsiTranFees;
-	
-
+	/**
+	 * 天然气交易手续费
+	 */
+	private BigDecimal naturalGasFess;
 
 	/**
 	 * 迷你纳指交易手续费
@@ -151,6 +153,8 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 迷你德国DAX指数交易手续费
 	 */
 	private BigDecimal daxMinTranFees;
+	
+	
 	/**
 	 * 申请时间
 	 */
@@ -258,7 +262,11 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 * 迷你德国DAX指数交易手数
 	 */
 	private Integer daxtranMinActualLever;
-
+	
+	/**
+	 * 天然气交易手数
+	 */ 
+	private Integer naturalGasActualLever; 
 	/**
 	 * 交易手续费总额
 	 */
@@ -326,10 +334,19 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 */
 	private String operator;
 	
+	/**
+	 * 结算类型  1：自动计算   0：手动计算
+	 */
+	private Integer endType;
 	
-
-	public FSimpleFtseUserTrade() {
+	@Column(name = "end_type")
+	public Integer getEndType() {
+		return endType;
 	}
+	public void setEndType(Integer endType) {
+		this.endType = endType;
+	}
+	
 	@Column(name = "source")
 	public Integer getSource() {
 		return source;
@@ -904,4 +921,19 @@ public class FSimpleFtseUserTrade extends BaseEntity {
 	 */
 	@Column
 	private BigDecimal discountActualMoney;
+
+	public Integer getNaturalGasActualLever() {
+		return naturalGasActualLever;
+	}
+	public void setNaturalGasActualLever(Integer naturalGasActualLever) {
+		this.naturalGasActualLever = naturalGasActualLever;
+	}
+	public BigDecimal getNaturalGasFess() {
+		return naturalGasFess;
+	}
+	public void setNaturalGasFess(BigDecimal naturalGasFess) {
+		this.naturalGasFess = naturalGasFess;
+	}
+	
+	
 }

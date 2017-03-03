@@ -470,9 +470,13 @@ public class ViewConstants {
 		 */
 		public static final String PARITIES_LIST_VIEW="/views/admin/parities/list";
 		/**
-		 * 每日汇率维护页面
+		 * 每日汇率修改页面
 		 */
 		public static final String PARITIES_EDIT_VIEW="/views/admin/parities/edit";
+		/**
+		 * 结算手续费汇率修改页面
+		 */
+		public static final String POUN_PARITIES_EDIT_VIEW="/views/admin/parities/edit_poundage";
 	}
 		
 	/**

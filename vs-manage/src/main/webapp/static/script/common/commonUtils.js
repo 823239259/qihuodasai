@@ -417,7 +417,6 @@ var baseUtils={
 			if ($("#addForm").form('validate') == false) {
 				return;
 			}
-			//alert($("#addForm").serialize());
 			ajaxPost({
 				url : basepath + url,
 				cache : false,
@@ -430,6 +429,35 @@ var baseUtils={
 						if (iframe){
 							parent.$('#addWin').window('close');
 							parent.$('#edatagrid').datagrid('reload');
+							parent.eyWindow.walert("成功提示", data.message, 'info');
+							return;
+						}
+						eyWindow.walert("成功提示", data.message, 'info');
+						return;
+					}
+					eyWindow.walert("错误提示", data.message, 'error');
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					eyWindow.walert("错误提示", "系统异常，错误类型textStatus: "+textStatus+",异常对象errorThrown: "+errorThrown, 'error');
+				}
+			});
+		},
+		saveOrUpdate2:function(url,iframe){
+			if ($("#addForm2").form('validate') == false) {
+				return;
+			}
+			ajaxPost({
+				url : basepath + url,
+				cache : false,
+				async : false,
+				data : $("#addForm2").serialize(),
+				success : function(data) {
+					if (data.success) {
+						$('#addWin2').window('close');
+						$("#edatagrid2").datagrid('reload');
+						if (iframe){
+							parent.$('#addWin2').window('close');
+							parent.$('#edatagrid2').datagrid('reload');
 							parent.eyWindow.walert("成功提示", data.message, 'info');
 							return;
 						}
