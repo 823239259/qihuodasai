@@ -101,19 +101,18 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		BigDecimal USDfreeMoeny = new BigDecimal(0.0);
 		BigDecimal CNYfreeMoeny = new BigDecimal(0.0);
 		for (TradeDetail tradeDetail : tradeDetails) {
-			BigDecimal lever = new BigDecimal(tradeDetail.getBuyNum()).add(new BigDecimal(tradeDetail.getSellNum()));
 			String currencyNo = tradeDetail.getCurrencyNo();
 			BigDecimal free = new BigDecimal(tradeDetail.getFree());
 			if("HKD-HKFE".equals(currencyNo)){
-				HKDfreeMoeny = HKDfreeMoeny.add(lever.multiply(free));
+				HKDfreeMoeny = HKDfreeMoeny.add(free);
 			}else if("JPY".equals(currencyNo)){
-				JPYfreeMoeny = JPYfreeMoeny.add(lever.multiply(free));
+				JPYfreeMoeny = JPYfreeMoeny.add(free);
 			}else if("EUR".equals(currencyNo)){
-				EURfreeMoeny = EURfreeMoeny.add(lever.multiply(free));
+				EURfreeMoeny = EURfreeMoeny.add(free);
 			}else if("CNY".equals(currencyNo)){
-				CNYfreeMoeny = CNYfreeMoeny.add(lever.multiply(free));
+				CNYfreeMoeny = CNYfreeMoeny.add(free);
 			}else
-				USDfreeMoeny = USDfreeMoeny.add(lever.multiply(free));
+				USDfreeMoeny = USDfreeMoeny.add(free);
 		}
 		//获取结算汇率
 	    List<FPoundageParities> parities = poundageParitiesService.getAll();
