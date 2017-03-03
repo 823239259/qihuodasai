@@ -54,7 +54,7 @@ public interface TradeDetailService extends BaseService<TradeDetail>{
 	 * 保存成交记录
 	 * @param jsonArrary
 	 */
-	public void doSaveTrades(JSONArray jsonArrary,String fastId,String userNo);
+	public void doSaveTrades(List<TradeDetail> details);
 
 
 }

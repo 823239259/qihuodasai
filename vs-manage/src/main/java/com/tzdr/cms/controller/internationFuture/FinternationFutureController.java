@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.pay.pingpp.config.enums.TradeStatus;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FPoundageParitiesService;
@@ -465,7 +467,60 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 		if(jsonArrary==null || jsonArrary.size() == 0){
 			return new JsonResult(true,"今日无成交记录");
 		}
-		tradeDetailService.doSaveTrades(jsonArrary,fastId,userNo);
+		
+		List<TradeDetail> details = new ArrayList<>();
+		Integer size = jsonArrary.size();
+		Long time = (new Date().getTime())/1000;
+		String uid = simpleFtseUserTradeService.findByUserNo(userNo).getUid();
+		String tname = securityInfoService.findByUserId(uid).getTname();
+		for(int i = 0 ; i < size ; i++){
+			JSONObject jsonObject = jsonArrary.getJSONObject(i);
+			String tradeNo = jsonObject.getString("TradeNo");
+			tradeDetailService.deleteByTradeNo(tradeNo);
+			TradeDetail detail = new TradeDetail();
+			detail.setUsername(tname);
+			detail.setCreateTime(time);
+			detail.setTradeNo(tradeNo);
+			String clientNo = jsonObject.getString("ClientNo");
+			detail.setUserNo(clientNo);
+			String commodityNo = jsonObject.getString("CommodityNo");
+			String contractNo = jsonObject.getString("ContractNo");
+			detail.setCommodityNo(commodityNo+contractNo);
+			String exchangeNo = jsonObject.getString("ExchangeNo");
+			detail.setExchangeNo(exchangeNo);
+			String drection = jsonObject.getString("Drection");
+			String tradeNum = jsonObject.getString("TradeNum");
+			if("0".equals(drection)){
+				detail.setBuyNum(tradeNum);
+				detail.setSellNum("0");
+			}else{
+				detail.setBuyNum("0");
+				detail.setSellNum(tradeNum);
+			}
+			String tradePrice = jsonObject.getString("TradePrice");
+			detail.setTradePrice(tradePrice);
+			String tradeDateTime = jsonObject.getString("TradeDateTime");
+			detail.setTradeDate(tradeDateTime);
+			String tradeFee = jsonObject.getString("TradeFee");
+			detail.setFree(tradeFee);
+			String currencyNo = jsonObject.getString("CurrencyNo");
+			detail.setCurrencyNo(currencyNo);
+			detail.setFastId(fastId);
+			String insertUser = jsonObject.getString("InsertUser");
+			detail.setOrderType(insertUser);
+			if("强平单".equals(insertUser)){
+				detail.setOrderUserno("QPServer");
+				detail.setOrderUsername("风控");
+			}else if("客户单".equals(insertUser)){
+				detail.setOrderUserno(clientNo);
+				detail.setOrderUsername(tname);
+			}
+			
+			detail.setTradeType("正常单");
+			
+			details.add(detail);
+		}
+		tradeDetailService.doSaveTrades(details);
 		return new JsonResult(true,"保存"+jsonArrary.size()+"条数据");
 	}
 	/**

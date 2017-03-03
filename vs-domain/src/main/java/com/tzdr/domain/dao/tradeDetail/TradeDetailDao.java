@@ -11,7 +11,7 @@ import com.tzdr.domain.web.entity.TradeDetail;
 public interface TradeDetailDao extends BaseJpaDao<TradeDetail, String>{
 	@SQLDelete(sql = "delete from  w_trade_detail where fast_id = ?1")
 	public void deleteByFastId(String fastId);
-	
+	 
 	@SQLDelete(sql = "delete from  w_trade_detail where trade_no = ?1")
 	public void deleteByTradeNo(String tradeNo);
 	/**
