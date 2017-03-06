@@ -428,13 +428,31 @@ function setSelectOption(contractCode){
 		$("#float_buy").text(money);
 		$("#float_sell").text(money);
 	}
-	//$("#float_buy").text(doGetMarketPrice(lastPrice, miniTikeSize, 0));
-	//$("#float_sell").text(doGetMarketPrice(lastPrice, miniTikeSize, 1));
 	updateRight(localQoute);
-	var HisQuoteType=checkHisQuoteType();
+}
+/**
+ * 下拉选择框绑定事件
+ */
+$("#select_commodity").change(function(){
+	var contractCode=$("#select_commodity").val();
+	var localCommodity = localCacheCommodity[contractCode];
+	var localQoute = localCacheQuote[contractCode];
+	var miniTikeSize = localCommodity.MiniTikeSize;
+	var lastPrice = localQoute.LastPrice;
+	$("#trade_data #lastPrice").val(lastPrice);
+	$("#trade_data #miniTikeSize").val(miniTikeSize);
+	$("#trade_data #contractSize").val(localCommodity.ContractSize);
+	$("#trade_data #exchangeNo").val(localCommodity.ExchangeNo);
+	$("#trade_data #commodeityNo").val(localCommodity.CommodityNo);
+	$("#trade_data #contractNo").val(localCommodity.MainContract);
+	$("#trade_data #doSize").val(localCommodity.DotSize);
+	 var HisQuoteType=checkHisQuoteType();
 	 sendHistory(HisQuoteType);
 	 $("#totalVolume").val(0);
-}
+})
+
+
+
 /**
  * 更新行情列表索引
  * @returns
