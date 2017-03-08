@@ -385,21 +385,8 @@ $(document).ready(function(){
 							form.append("<input type=hidden name=userName value='" + data.data.userName + "'/></form>");
 							form.appendTo(document.body).submit();
 						}else{
-							/*$('#backData').val(data.data.from);
-							//隐藏向CAS服务端提交登录的用户名和密码
-							$("#loginUsername").val(mobile);
-							$("#loginPassword").val(password);
-							$("#loginForm").submit();*/
-							var generalizeId = $("#generalizeId").val();
 							openMockTrade(mobile,password);
 							window.location.href = basepath+"/signinsucess";
-							/*
-							//达人论股系统登录
-							discussStockLogin(data.data.key,function(){
-								var form = $("<form action='"+basepath+"signinsucess' method='post'><input type='hidden' name='volumeNum' value='" + data.data.volumeNum + "'/><input type='hidden' name='volumePrice' value='" + data.data.volumePrice + "'/></form>");
-								form.appendTo(document.body).submit();
-							});
-							*/
 						}
 					}
 				}else{
@@ -439,7 +426,7 @@ function openMockTrade(username,password){
 			password:password,
 		},
 		success:function(result){
-
+			console.log(result.message)
 		}
 	});
 }
