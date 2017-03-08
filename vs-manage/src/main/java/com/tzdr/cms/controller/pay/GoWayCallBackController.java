@@ -2,6 +2,8 @@ package com.tzdr.cms.controller.pay;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +25,7 @@ import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.service.pay.PayService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.cms.support.BaseCmsController;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.domain.web.entity.RechargeList;
 import com.tzdr.domain.web.entity.WUser;
@@ -65,11 +68,17 @@ public class GoWayCallBackController  extends BaseCmsController<RechargeList> {
 						WUser user =  wUserService.getUser(userId);
 						if(user != null){
 							messagePromptService.sendMessage(PromptTypes.isInternetBanking, user.getMobile());
+							//短信
+							Map<String, String> map = new HashMap<String, String>();
+							map.put("money", tranAmt);
+							String mobile = user.getMobile();
+							SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.recharge.success.template", map);
 						}
 					}
 				} catch (Exception e) {
 					logger.info("发送邮件失败",e);
 				}
+				
 			}
 			return resultGoWay(model.getFrontMerUrl());
 		}

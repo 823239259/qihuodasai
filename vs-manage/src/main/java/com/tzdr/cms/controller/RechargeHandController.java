@@ -7,10 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +20,6 @@ import com.tzdr.business.service.exception.WuserConcurrencyUpdateException;
 import com.tzdr.business.service.exception.WuserDoesNotExistException;
 import com.tzdr.business.service.pay.UserFundService;
 import com.tzdr.business.service.recharge.RechargeListService;
-import com.tzdr.business.service.wuser.UserVerifiedService;
 import com.tzdr.business.service.wuser.WUserService;
 import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
@@ -44,8 +39,6 @@ import com.tzdr.domain.vo.HandUserFundVo;
 import com.tzdr.domain.vo.RechargeListVo;
 import com.tzdr.domain.web.entity.RechargeList;
 import com.tzdr.domain.web.entity.WUser;
-
-import jodd.util.StringUtil;
 
 /**
  * 
@@ -76,9 +69,6 @@ public class RechargeHandController  extends BaseCmsController<RechargeList> {
 
 	@Autowired
 	private WUserService wuserService;
-	
-	@Autowired
-	private UserVerifiedService userVerifiedService;
 	
 	@Autowired
 	private UserFundService userFundService;
@@ -338,11 +328,6 @@ public class RechargeHandController  extends BaseCmsController<RechargeList> {
 						TypeConvert.USER_FUND_C_TYPE_RECHARGE,
 						TypeConvert.payRemark("银行转账", rechargeList.getActualMoney()));
 			}
-			//短信
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("money", String.valueOf(rechargeList.getActualMoney()));
-			String mobile = wuserService.get(rechargeList.getUid()).getMobile();
-			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.recharge.success.template", map);
 			WebUtil.printText("success", resp);
 		} 
 		catch (WuserDoesNotExistException e) {

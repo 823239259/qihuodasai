@@ -434,6 +434,7 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 						currentAvlVal = wuser.getAvlBal();
 					}
 				}
+				mobile = account;
 				opVo.add(currentAvlVal != null ? currentAvlVal.toString() : "");
 				log.info(TypeConvert.printPaymentOperationLog(opVo));
 			}else {
@@ -472,6 +473,7 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 						currentAvlVal = wuser.getAvlBal();
 					}
 				}
+				mobile = account;
 				opVo.add(currentAvlVal != null ? currentAvlVal.toString() : "");
 				log.info(TypeConvert.printPaymentOperationLog(opVo));
 
@@ -481,6 +483,7 @@ public class RechargeListController extends BaseCmsController<RechargeList> {
 			map.put("money", String.valueOf(rechargeList.getActualMoney()));
 			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.recharge.success.template", map);
 			WebUtil.printText("success", resp);
+			
 		} catch (ObjectOptimisticLockingFailureException e) {
 			WebUtil.printText("操作失败，请重试！如多次失败，请联系系统管理员。", resp);
 		} catch (StaleObjectStateException e) {

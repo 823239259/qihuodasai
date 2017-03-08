@@ -181,10 +181,9 @@ public class SMSSender {
 		}else if("ihuyi.verification.signin.success.template".equals(templateKey)){
 			content = String.format(template);
 		}else if("ihuyi.recharge.success.template".equals(templateKey)){
-			content = String.format(template , "1");
+			content = String.format(template , map.get("money"));
 		}else if("ihuyi.settlement.success.template".equals(templateKey)){
-			content = String.format(template , map.get("lever"));
-			content = String.format(template , map.get("business"));
+			content = String.format(template , map.get("lever"),map.get("business"));
 		}else if("ihuyi.presentation.to.account.template".equals(templateKey)){
 			content = String.format(template , map.get("money"));
 		}

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -838,6 +839,34 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 				}
 			}
 			wUserService.update(wuser);
+			//短信
+			Map<String, String> map = new HashMap<String, String>();
+			int lever = 0;
+			if(business.endsWith("国际综合")){
+				lever = (simpleFtseUserTrade.getTranActualLever()==null ? 0 : simpleFtseUserTrade.getTranActualLever() )+
+						(simpleFtseUserTrade.getCrudeTranActualLever()==null ? 0 : simpleFtseUserTrade.getCrudeTranActualLever() )+
+						(simpleFtseUserTrade.getHsiTranActualLever()==null ? 0 : simpleFtseUserTrade.getHsiTranActualLever() )+
+						(simpleFtseUserTrade.getMntranActualLever()==null ? 0 : simpleFtseUserTrade.getMntranActualLever() )+
+						(simpleFtseUserTrade.getMbtranActualLever()==null ? 0 : simpleFtseUserTrade.getMbtranActualLever() )+
+						(simpleFtseUserTrade.getDaxtranActualLever()==null ? 0 : simpleFtseUserTrade.getDaxtranActualLever() )+
+						(simpleFtseUserTrade.getNikkeiTranActualLever()==null ? 0 : simpleFtseUserTrade.getNikkeiTranActualLever() )+
+						(simpleFtseUserTrade.getMdtranActualLever()==null ? 0 : simpleFtseUserTrade.getMdtranActualLever() )+
+						(simpleFtseUserTrade.getLhsiTranActualLever()==null ? 0 : simpleFtseUserTrade.getLhsiTranActualLever() )+
+						(simpleFtseUserTrade.getAgTranActualLever()==null ? 0 : simpleFtseUserTrade.getAgTranActualLever() )+
+						(simpleFtseUserTrade.gethStockMarketLever()==null ? 0 : simpleFtseUserTrade.gethStockMarketLever() )+
+						(simpleFtseUserTrade.getxHStockMarketLever()==null ? 0 : simpleFtseUserTrade.getxHStockMarketLever() )+
+						(simpleFtseUserTrade.getAmeCopperMarketLever()==null ? 0 : simpleFtseUserTrade.getAmeCopperMarketLever() )+
+						(simpleFtseUserTrade.getAmeSilverMarketLever()==null ? 0 : simpleFtseUserTrade.getAmeSilverMarketLever() )+
+						(simpleFtseUserTrade.getSmallCrudeOilMarketLever()==null ? 0 : simpleFtseUserTrade.getSmallCrudeOilMarketLever() )+
+						(simpleFtseUserTrade.getDaxtranMinActualLever()==null ? 0 : simpleFtseUserTrade.getDaxtranMinActualLever() )+
+						(simpleFtseUserTrade.getNaturalGasActualLever()==null ? 0 : simpleFtseUserTrade.getNaturalGasActualLever() );
+			}else{
+				lever = (simpleFtseUserTrade.getAgTranActualLever()==null ? 0 : simpleFtseUserTrade.getAgTranActualLever());
+			}
+			map.put("lever", String.valueOf(lever));
+			map.put("business", business);
+			SMSSender.getInstance().sendByTemplate(1, wuser.getMobile(), "ihuyi.settlement.success.template", map);
+			
 			return new JsonResult(true, "方案结算成功！");
 		}
 	}

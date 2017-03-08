@@ -7,30 +7,24 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.apache.commons.lang.math.NumberUtils;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.request.AutoAliPayRequest;
 import com.tzdr.api.request.BankTransferRequest;
-import com.tzdr.api.request.RequestObj;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.api.util.AuthUtils;
 import com.tzdr.business.api.service.ApiRechargeService;
@@ -47,10 +41,10 @@ import com.tzdr.business.pay.pingpp.config.enums.Channel;
 import com.tzdr.business.pay.pingpp.example.ChargeExample;
 import com.tzdr.business.pay.pingpp.model.PingPPModel;
 import com.tzdr.business.service.pay.PayService;
-import com.tzdr.business.service.pay.PaymentSupportBankService;
 import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.wuser.UserVerifiedService;
 import com.tzdr.common.api.bbpay.util.BbConfigUtil;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.api.payease.PayEase;
 import com.tzdr.common.api.payease.util.PayEaseUtil;
 import com.tzdr.common.api.payease.vo.PayEaseParams;
@@ -96,12 +90,8 @@ public class UserPayController {
 	@Autowired
 	private SecurityInfoService securityInfoService;
 	
-	
 	@Autowired
 	private PayService  payService;
-	
-	@Autowired
-	private PaymentSupportBankService paymentSupportBankService;
 	
 	@Autowired
 	private ApiRechargeService  apiRechargeService;
@@ -644,14 +634,16 @@ public class UserPayController {
 						&& !StringUtil.equals(apiUserVo.getTname(),autoAliPayRequest.getRealName())){
 				rechargeList.setUid(autoAliPayRequest.getRealName());
 				rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);
-			}else
-			{
+			}else{
 				rechargeList.setUid(apiUserVo.getUid());
 				rechargeList.setStatus(DataConstant.RECHARGE_LIST_PAYS_STATUS_SUCCESS);
 			}
-		}
-		else
-		{
+			//支付宝充值短信通知
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("money", String.valueOf(rechargeList.getActualMoney()));
+			String mobile = apiUserVo.getMobile();
+			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.recharge.success.template", map);
+		}else{
 			// 如果用户信息不存在直接将用户真实姓名保存在uid 字段当中
 			rechargeList.setUid(autoAliPayRequest.getRealName());
 			rechargeList.setStatus(DataConstant.PAY_NO_PROCESSING);

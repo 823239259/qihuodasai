@@ -373,10 +373,6 @@ public class RechargeReviewController  extends BaseCmsController<RechargeList> {
 						TypeConvert.payRemark("银行转账", rechargeList.getActualMoney()));
 			}
 			
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("money", String.valueOf(rechargeList.getActualMoney()));
-			String mobile = wuserService.get(rechargeList.getUid()).getMobile();
-			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.recharge.success.template", map);
 			WebUtil.printText("success", resp);
 		} 
 		catch (WuserDoesNotExistException e) {
