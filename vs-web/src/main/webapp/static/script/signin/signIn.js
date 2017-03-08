@@ -423,7 +423,7 @@ function openMockTrade(username,password){
 		type:"post",
 		data:{
 			username:username,
-			password:password,
+			password:password
 		},
 		success:function(result){
 			console.log(result.message)
