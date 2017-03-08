@@ -180,6 +180,13 @@ public class SMSSender {
 			content = String.format(template);
 		}else if("ihuyi.verification.signin.success.template".equals(templateKey)){
 			content = String.format(template);
+		}else if("ihuyi.recharge.success.template".equals(templateKey)){
+			content = String.format(template , "1");
+		}else if("ihuyi.settlement.success.template".equals(templateKey)){
+			content = String.format(template , map.get("lever"));
+			content = String.format(template , map.get("business"));
+		}else if("ihuyi.presentation.to.account.template".equals(templateKey)){
+			content = String.format(template , map.get("money"));
 		}
 		log.info("发送模板内容为："+content);
 		return send(smsChannel, mobile, content);

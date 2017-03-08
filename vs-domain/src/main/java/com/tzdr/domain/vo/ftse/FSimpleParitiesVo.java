@@ -79,9 +79,13 @@ public class FSimpleParitiesVo implements Serializable {
 	private String typeName;
 	
 	/**
-	 * 汇率
+	 * 直达汇率
 	 */
 	private BigDecimal parities;
+	/**
+	 * 易胜汇率
+	 */
+	private BigDecimal paritiesYs;
 	
 	/**
 	 * 添加时间
@@ -247,6 +251,14 @@ public class FSimpleParitiesVo implements Serializable {
 
 	public void setCurrencyNo(String currencyNo) {
 		this.currencyNo = currencyNo;
+	}
+
+	public BigDecimal getParitiesYs() {
+		return paritiesYs;
+	}
+
+	public void setParitiesYs(BigDecimal paritiesYs) {
+		this.paritiesYs = paritiesYs;
 	}
 	
 }

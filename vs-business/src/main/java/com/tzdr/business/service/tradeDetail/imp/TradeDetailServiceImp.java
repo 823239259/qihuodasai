@@ -9,15 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.tzdr.business.service.OutDisk.OutDiskParametersService;
 import com.tzdr.business.service.datamap.DataMapService;
-import com.tzdr.business.service.securityInfo.SecurityInfoService;
 import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FPoundageParitiesService;
+import com.tzdr.business.service.userTrade.FSimpleConfigService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.domain.dao.tradeDetail.TradeDetailDao;
 import com.tzdr.domain.web.entity.FPoundageParities;
+import com.tzdr.domain.web.entity.FSimpleConfig;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
+import com.tzdr.domain.web.entity.OutDiskParameters;
 import com.tzdr.domain.web.entity.TradeDetail;
 
 @Service("tradeDetailService")
@@ -30,8 +33,9 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 	@Autowired
 	private FPoundageParitiesService poundageParitiesService;
 	@Autowired
-	private SecurityInfoService securityInfoService;
-	
+	OutDiskParametersService outDiskParametersService;
+	@Autowired
+	FSimpleConfigService simpleConfigService;
 	@Override
 	public void doSaveTradeExclDetail(String tradeDetail,String fastId) {
 		JSONArray jsonArray = JSONArray.parseArray(tradeDetail);
@@ -94,12 +98,14 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 	}
 	@Override
 	public double countTranProfitLoss(List<TradeDetail> tradeDetails,BigDecimal todayMoeny,String id,String tranAccount) {
-
+		char ch = tranAccount.charAt(0);
+		
 		BigDecimal HKDfreeMoeny = new BigDecimal(0.0);
 		BigDecimal JPYfreeMoeny = new BigDecimal(0.0);
 		BigDecimal EURfreeMoeny = new BigDecimal(0.0);
 		BigDecimal USDfreeMoeny = new BigDecimal(0.0);
 		BigDecimal CNYfreeMoeny = new BigDecimal(0.0);
+		
 		for (TradeDetail tradeDetail : tradeDetails) {
 			String currencyNo = tradeDetail.getCurrencyNo();
 			BigDecimal free = new BigDecimal(tradeDetail.getFree());
@@ -119,15 +125,29 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		//计算总的手续费    
 		BigDecimal freeSum = USDfreeMoeny;
 		//根据结算手续费汇率  将各币种手续费转化为美元    
-		for (FPoundageParities fPoundageParities : parities) {
-			if("HKD-HKFE".equals(fPoundageParities.getCurrencyNo())){
-				freeSum = freeSum.add(HKDfreeMoeny.multiply(fPoundageParities.getParities()));
-			}else if("JPY".equals(fPoundageParities.getCurrencyNo())){
-				freeSum = freeSum.add(JPYfreeMoeny.multiply(fPoundageParities.getParities()));
-			}else if("EUR".equals(fPoundageParities.getCurrencyNo())){
-				freeSum = freeSum.add(EURfreeMoeny.multiply(fPoundageParities.getParities()));
-			}else if("CNY".equals(fPoundageParities.getCurrencyNo())){
-				freeSum = freeSum.add(CNYfreeMoeny.multiply(fPoundageParities.getParities()));
+		if(ch == 'Q'){//易胜手续费计算
+			for (FPoundageParities fPoundageParities : parities) {
+				if("HKD-HKFE".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(HKDfreeMoeny.multiply(fPoundageParities.getParitiesYs()));
+				}else if("JPY".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(JPYfreeMoeny.multiply(fPoundageParities.getParitiesYs()));
+				}else if("EUR".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(EURfreeMoeny.multiply(fPoundageParities.getParitiesYs()));
+				}else if("CNY".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(CNYfreeMoeny.multiply(fPoundageParities.getParitiesYs()));
+				}
+			}
+		}else{
+			for (FPoundageParities fPoundageParities : parities) {
+				if("HKD-HKFE".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(HKDfreeMoeny.multiply(fPoundageParities.getParities()));
+				}else if("JPY".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(JPYfreeMoeny.multiply(fPoundageParities.getParities()));
+				}else if("EUR".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(EURfreeMoeny.multiply(fPoundageParities.getParities()));
+				}else if("CNY".equals(fPoundageParities.getCurrencyNo())){
+					freeSum = freeSum.add(CNYfreeMoeny.multiply(fPoundageParities.getParities()));
+				}
 			}
 		}
 		FSimpleFtseUserTrade ftse = simpleFtseUserTradeService.get(id);
@@ -136,15 +156,31 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		String exchangeRate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
 		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(exchangeRate),4, BigDecimal.ROUND_HALF_EVEN);//追加保证金（$）
 		
-		char ch = tranAccount.charAt(0);
+		
 		double tranProfitLoss = 0;
 		if(ch == 'Q'){//易胜盈亏结算  
-			//入金汇率
-			String goldExchangeRate = dataMapService.findByTypeKey("goldExchangeRate").get(0).getValueKey();
-			BigDecimal traderBond = ftse.getTraderBond().divide(new BigDecimal(goldExchangeRate),0, BigDecimal.ROUND_DOWN ); //初始保证金（$），
+			
+			Integer businessType = ftse.getBusinessType();
+			BigDecimal traderBond = ftse.getTraderBond();//初始保证金人民币
+			BigDecimal $traderBond = new BigDecimal(0); //入金
+			if(businessType == 8){//国际综合
+				OutDiskParameters outDiskParameters = outDiskParametersService.findByTraderBond(traderBond).get(0);
+				$traderBond = outDiskParameters.getGoldenMoney();
+			}else{
+				if(businessType == 0){
+					businessType = 5;
+				}
+				List<FSimpleConfig> findFSimpleConfigsByType = simpleConfigService.findFSimpleConfigsByType(businessType);
+				for (FSimpleConfig fSimpleConfig : findFSimpleConfigsByType) {
+					if(fSimpleConfig.getTraderBond().doubleValue() == traderBond.doubleValue()){
+						$traderBond = fSimpleConfig.getGoldenMoney();
+						break;
+					}
+				}
+			}
 			
 			//总盈亏  交易盈亏=账户余额  - （初始保证金 + 追加保证金） + 手续费  （保留2位小数）
-			tranProfitLoss = todayMoeny.subtract(traderBond.add(appendTraderBond)).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+			tranProfitLoss = todayMoeny.subtract($traderBond.add(appendTraderBond)).add(freeSum).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 		}else{//直达盈亏结算
 			
 			//总盈亏  交易盈亏=账户余额  - 总操盘资金（初始入金+追加保证金）  + 手续费  （保留2位小数）

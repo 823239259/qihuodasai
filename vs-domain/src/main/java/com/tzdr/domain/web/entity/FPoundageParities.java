@@ -30,9 +30,13 @@ public class FPoundageParities  extends BaseCrudEntity{
 	private String typeName;
 
 	/**
-	 * 对美元汇率
+	 * 直达对美元汇率
 	 */
 	private BigDecimal parities;
+	/**
+	 * 易胜对美元汇率
+	 */
+	private BigDecimal paritiesYs;
 	
 	/**
 	 * 添加时间
@@ -82,6 +86,14 @@ public class FPoundageParities  extends BaseCrudEntity{
 
 	public void setCurrencyNo(String currencyNo) {
 		this.currencyNo = currencyNo;
+	}
+	@Column(name = "parities_ys")
+	public BigDecimal getParitiesYs() {
+		return paritiesYs;
+	}
+
+	public void setParitiesYs(BigDecimal paritiesYs) {
+		this.paritiesYs = paritiesYs;
 	} 
 	
 	

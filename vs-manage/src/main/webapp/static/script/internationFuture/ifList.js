@@ -95,6 +95,7 @@ function autoinput(){
 		var bussinessType = rows[0].businessType;
 		bussType = bussinessType;
 		var id = rows[0].id;
+		console.log("id0: "+id);
 		$("#input_file_tr").hide();//隐藏导入数据tr
 		if(rows[0].stateType == "已结算"){
 			Check.messageBox("提示","已结算的用户不能再次录入！");
@@ -130,6 +131,7 @@ function autoinput(){
 function testcheck(tranAccount,todayMoeny){
 	var rows = $("#hasAuditData").datagrid('getSelections');
 	var id = rows[0].id;
+	console.log("id2: "+id);
 	$.ajax({
 		url:Check.rootPath() +"/admin/internation/future/getAllDetails",
 		type:"post",
@@ -173,26 +175,27 @@ function input(){
 		var bussinessType = rows[0].businessType;
 		bussType = bussinessType;
 		inputLeverShow(bussinessType);
-		var id = rows[0].id;
-		$.ajax({
-			url:Check.rootPath() +"/admin/internation/future/getFtse",
-			type:"get",
-			data:{
-				id:id
-			},
-			success:function(result){
-				var data = result.data.fste;
-				var tradeDetail = result.data.tradeDetail;
-				var html = appendTradeDetailHtml(tradeDetail, 0);
-				$("#tradeDetail").html(html);
-				handleData(data,0);
-			}
-		});
+//		var id = rows[0].id;
+//		$.ajax({
+//			url:Check.rootPath() +"/admin/internation/future/getFtse",
+//			type:"get",
+//			data:{
+//				id:id
+//			},
+//			success:function(result){
+//				var data = result.data.fste;
+//				var tradeDetail = result.data.tradeDetail;
+//				var html = appendTradeDetailHtml(tradeDetail, 0);
+//				$("#tradeDetail").html(html);
+//				handleData(data,0);
+//			}
+//		});
 		$("#inputWin").show();
 		$("#inputWin").window('open');
 		$("#mobile").val(rows[0].mobile);
 		$("#Account").val(rows[0].tranAccount);
 		$("#traderBond").val(rows[0].traderBond);
+		$("#tranProfitLoss").val("");
 		$("#tradeDetail").html("");
 	}
 }
@@ -217,6 +220,7 @@ function importExcl(){
 	            	$("#tradeDetail").html(html);
 	            	handleData(result.data.dataLever,1);
 	            	localDataLever = JSON.stringify(data);
+	            	endType=0;
 	            }else{
 	            	Check.messageBox("提示",data.message);
 	            }
@@ -249,13 +253,14 @@ function appendTradeDetailHtml(tradeDetail,index){
 			if(_data.tradeDate == null || _data.tradeDate == "null" || _data.tradeDate.length == 0){
 				continue;
 			}
-			var marketTime = "";
-			if(_data.marketTime==undefined||_data.marketTime==null||_data.marketTime=="null"){
-				marketTime = "";
-			}else{
-				marketTime = _data.marketTime;
-			}
-			var  number = parseInt(_data.buyNum)+parseInt(_data.sellNum);
+//			var marketTime = "";
+//			if(_data.marketTime==undefined||_data.marketTime==null||_data.marketTime=="null"){
+//				marketTime = "";
+//			}else{
+//				marketTime = _data.marketTime;
+//			}
+//			var  number = parseInt(_data.buyNum)+parseInt(_data.sellNum);
+			console.log("fastId: "+ _data.fastId);
 			html += "<tr>" +
 				"<td>"+i+"</td>" +
 				"<td>"+_data.tradeDate+"</td>" +
@@ -421,6 +426,7 @@ function handInputSave() {
 		}
 
 		eyWindow.wprogress("系统提示","系统处理中,请稍候...");
+		console.log("id3: "+rows[0].id);
 		$.post(Check.rootPath() + "/admin/internation/future/input" 
 				,{"id":rows[0].id,"tranProfitLoss":profit,"tranActualLever":commission,
 				"crudeTranActualLever":crudeTranActualLever,"hsiTranActualLever":hsiTranActualLever,
@@ -448,6 +454,7 @@ function handInputSave() {
 	
 };
 function inputClose() {
+	$("#input_file").val("");
 	$("#tranProfitLoss").val("");
 	$("#tranActualLever").val("");
 	$("#hsiTranActualLever").val("");
@@ -487,6 +494,7 @@ function tradeOpenEnd(){
 			}else{
 				tradeCount();
 				var id = rows[0].id;
+				console.log("id4: "+id);
 				$.ajax({
 					url:Check.rootPath() +"/admin/internation/future/getFtse",
 					type:"get",
@@ -600,11 +608,13 @@ function tradeCount() {
 		$('#scCount').html(filterNull(rows[0].smallCrudeOilMarketLever));
 		$("#daxMinCount").html(filterNull(rows[0].daxtranMinActualLever));
 		$("#gasCount").html(filterNull(rows[0].naturalGasActualLever));
+		var id = rows[0].id;
+		console.log("id5: "+id);
 		$.ajax({
 			url:Check.rootPath() +"/admin/internation/future/getFtse",
 			type:"get",
 			data:{
-				id:rows[0].id
+				id:id
 			},
 			success:function(result){
 				var data = result.data.fste;
@@ -612,7 +622,7 @@ function tradeCount() {
 				if(data.endType == 1){
 					$("#end_type_td").html("自动结算");
 					$("#end_type_td").css({color:'#FF0000'});
-				}else{
+				}else if(data.endType == 0){
 					$("#end_type_td").html("手动结算");
 					$("#end_type_td").css({color:'#0000C6'});
 				}

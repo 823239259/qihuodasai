@@ -87,6 +87,7 @@ public class FPoundageParitiesServiceImpl extends BaseServiceImpl<FPoundageParit
 			poundageParities.setTypeName(simpleParitiesVo.getTypeName());
 			poundageParities.setCurrencyNo(simpleParitiesVo.getCurrencyNo());
 			poundageParities.setParities(simpleParitiesVo.getParities());
+			poundageParities.setParitiesYs(simpleParitiesVo.getParitiesYs());
 			poundageParities.setAddTime(dateLong);
 			poundageParities.setCreateTime(dateLong);
 			poundageParities.setCreateUser(user.getUsername());
@@ -101,6 +102,7 @@ public class FPoundageParitiesServiceImpl extends BaseServiceImpl<FPoundageParit
 			}
 			FPoundageParities poundageParities = this.get(simpleParitiesVo.getId());
 			poundageParities.setParities(simpleParitiesVo.getParities());
+			poundageParities.setParitiesYs(simpleParitiesVo.getParitiesYs());
 			poundageParities.setOperateContent("修改汇率记录");
 			poundageParities.setUpdateTime(dateLong);
 			poundageParities.setUpdateUser(user.getUsername());

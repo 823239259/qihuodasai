@@ -3,6 +3,7 @@ package com.tzdr.business.service.withdrawal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import com.tzdr.business.service.datamap.DataMapService;
 import com.tzdr.business.service.drawMoney.DrawMoneyService;
 import com.tzdr.business.service.drawMoneyData.DrawMoneyDataService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.dao.support.SearchFilter;
 import com.tzdr.common.domain.PageInfo;
@@ -216,6 +218,11 @@ public class WithdrawalService extends BaseServiceImpl<DrawList, WithdrawalDao> 
 						: dataMap.getValueName())
 				+ "】;" + "审核通过客户【手机号：" + drawList.getUser().getMobile() + ",姓名：" + drawList.getName() + "】提现，金额："
 				+ drawList.getMoney());
+		//短信提现通知
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("money", String.valueOf(drawList.getMoney()));
+		String mobile = drawList.getUser().getMobile();
+		SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.presentation.to.account.template", map);
 
 	}
 

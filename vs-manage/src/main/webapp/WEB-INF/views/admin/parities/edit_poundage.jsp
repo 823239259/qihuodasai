@@ -34,8 +34,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td>汇率(兑美元):</td>
+			<td>直达汇率(兑美元):</td>
 			<td><input type="money" value="${poundageParities.parities}" class="easyui-validatebox"  id="parities"  name="parities" data-options="required:true"></td>
+		</tr>
+		<tr>	
+			<td>易胜汇率(兑美元):</td>
+			<td><input type="money" value="${poundageParities.paritiesYs}" class="easyui-validatebox"  id="parities"  name="paritiesYs" data-options="required:true"></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">

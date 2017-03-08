@@ -17,25 +17,7 @@
 <body>
 	<shiro:hasPermission name="sys:finance:parities:view">
 	<div id="spifTab" class="easyui-tabs"  style="margin-top: 5px;"> 
-	
-	<div title="结算交易手续费汇率维护" data-options="tools:'#p-tools'" style="padding:20px;">
-		<div id="tb2" style="padding: 5px; height: auto">
-				
-				<div style="margin-bottom: 5px">
-					<shiro:hasPermission name="sys:finance:parities:update"> 
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="showCreateWin2(2);">修改</a>
-					</shiro:hasPermission>
-					
-					<shiro:hasPermission name="sys:finance:parities:create"> 
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="showCreateWin2(1);">新增汇率</a>
-					</shiro:hasPermission>
-				</div>
-			</div>
-			<table id="edatagrid2"></table>
-			
-			<div id="addWin2" style="padding:10px;top: 20px;"></div>
-	</div>
-	<div title="每日结算汇率维护" data-options="tools:'#p-tools'" style="padding:20px;">
+		<div title="每日结算汇率维护" data-options="tools:'#p-tools'" style="padding:20px;">
 			<div id="tb" style="padding: 5px; height: auto">
 				<div>
 					<table>
@@ -66,6 +48,24 @@
 			<div id="addWin" style="padding:10px;top: 20px;"></div>
 	
 		</div>
+		<div title="结算交易手续费汇率维护" data-options="tools:'#p-tools'" style="padding:20px;">
+			<div id="tb2" style="padding: 5px; height: auto">
+				
+				<div style="margin-bottom: 5px">
+					<shiro:hasPermission name="sys:finance:parities:update"> 
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="showCreateWin2(2);">修改</a>
+					</shiro:hasPermission>
+					
+					<shiro:hasPermission name="sys:finance:parities:create"> 
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="showCreateWin2(1);">新增汇率</a>
+					</shiro:hasPermission>
+				</div>
+			</div>
+			<table id="edatagrid2"></table>
+			
+			<div id="addWin2" style="padding:10px;top: 20px;"></div>
+		</div>
+	
  	</div>
 	
 	</shiro:hasPermission>

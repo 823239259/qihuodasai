@@ -1,6 +1,7 @@
 package com.tzdr.cms.controller;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import com.tzdr.cms.constants.ViewConstants;
 import com.tzdr.cms.support.BaseCmsController;
 import com.tzdr.cms.utils.DataGridVo;
 import com.tzdr.cms.utils.WebUtil;
+import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.utils.ConnditionVo;
@@ -336,6 +338,11 @@ public class RechargeHandController  extends BaseCmsController<RechargeList> {
 						TypeConvert.USER_FUND_C_TYPE_RECHARGE,
 						TypeConvert.payRemark("银行转账", rechargeList.getActualMoney()));
 			}
+			//短信
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("money", String.valueOf(rechargeList.getActualMoney()));
+			String mobile = wuserService.get(rechargeList.getUid()).getMobile();
+			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.recharge.success.template", map);
 			WebUtil.printText("success", resp);
 		} 
 		catch (WuserDoesNotExistException e) {
