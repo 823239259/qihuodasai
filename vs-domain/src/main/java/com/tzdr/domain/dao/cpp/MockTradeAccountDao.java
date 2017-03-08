@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import com.tzdr.common.dao.BaseJpaDao;
+import com.tzdr.cpp.DataSource;
 import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
-
+@DataSource(value="dataSource2")
 public interface MockTradeAccountDao extends BaseJpaDao<MockTradeAccount, String>,JpaSpecificationExecutor<MockTradeAccount>{
 	/**
 	 * 

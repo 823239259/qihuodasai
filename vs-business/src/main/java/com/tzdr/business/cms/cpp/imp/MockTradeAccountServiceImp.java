@@ -18,6 +18,7 @@ import com.tzdr.domain.web.entity.cpp.MockTradeAccount;
 
 @Service("mockTradeAccountService")
 @Transactional
+@DataSource(value="dataSource2")
 public class MockTradeAccountServiceImp extends BaseServiceImpl<MockTradeAccount, MockTradeAccountDao> implements MockTradeAccountService {
 	public boolean openMockAccount(String username,String password){
 		boolean flag = false;
