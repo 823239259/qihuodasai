@@ -154,7 +154,7 @@ public class TradeDetailServiceImp extends BaseServiceImpl<TradeDetail, TradeDet
 		
 		//追加保证金汇率,,,注意:入金汇率、追加保证金、手续费汇率、结算汇率均不一样
 		String exchangeRate = dataMapService.findByTypeKey("exchangeRate").get(0).getValueKey();
-		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(exchangeRate),4, BigDecimal.ROUND_HALF_EVEN);//追加保证金（$）
+		BigDecimal appendTraderBond = ftse.getAppendTraderBond().divide(new BigDecimal(exchangeRate),2, BigDecimal.ROUND_DOWN);//追加保证金（$）
 		
 		
 		double tranProfitLoss = 0;
