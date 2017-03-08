@@ -387,7 +387,7 @@ $(document).ready(function(){
 		 var moneypwd=$("#drawmoneypwd").val();
 		 var aginmoneypwd=$("#aginmoneypwd").val();
 		 if(moneypwd==""){
-			 $.alertTip($("#drawmoneypwd"),"请输入提现秘密");
+			 $.alertTip($("#drawmoneypwd"),"请输入提现密码");
 			 return;
 		 }else if(aginmoneypwd==""){
 				 $.alertTip($("#aginmoneypwd"),"确认密码不能为空");

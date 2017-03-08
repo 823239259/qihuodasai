@@ -35,7 +35,7 @@ table.data_web td a { padding:0 5px; color:#f80; }
 .sif_money ul {margin: 10px auto;}
 .sif_money ul li h3 {height: 32px; line-height: 32px;}
 .sif_money ul li p {height: 32px; line-height: 32px;}
-#window_detail_tab table tr td {height: 40px; line-height: 40px; padding: 0px;}
+#window_detail_tab table tr td {height: 40px; vertical-align: middle;}
 .ftse_money {width: 1000px; margin-left: -500px;}
 </style>
 <script type="text/javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
