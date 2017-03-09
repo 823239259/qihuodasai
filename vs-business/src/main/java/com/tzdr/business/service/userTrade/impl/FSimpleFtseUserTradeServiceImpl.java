@@ -842,7 +842,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			//短信
 			Map<String, String> map = new HashMap<String, String>();
 			int lever = 0;
-			if(business.endsWith("国际综合")){
+			if(business.equals("国际综合")){
 				lever = (simpleFtseUserTrade.getTranActualLever()==null ? 0 : simpleFtseUserTrade.getTranActualLever() )+
 						(simpleFtseUserTrade.getCrudeTranActualLever()==null ? 0 : simpleFtseUserTrade.getCrudeTranActualLever() )+
 						(simpleFtseUserTrade.getHsiTranActualLever()==null ? 0 : simpleFtseUserTrade.getHsiTranActualLever() )+
@@ -861,7 +861,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 						(simpleFtseUserTrade.getDaxtranMinActualLever()==null ? 0 : simpleFtseUserTrade.getDaxtranMinActualLever() )+
 						(simpleFtseUserTrade.getNaturalGasActualLever()==null ? 0 : simpleFtseUserTrade.getNaturalGasActualLever() );
 			}else{
-				lever = (simpleFtseUserTrade.getAgTranActualLever()==null ? 0 : simpleFtseUserTrade.getAgTranActualLever());
+				lever = (simpleFtseUserTrade.getTranActualLever()==null ? 0 : simpleFtseUserTrade.getTranActualLever());
 			}
 			map.put("lever", String.valueOf(lever));
 			map.put("business", business);

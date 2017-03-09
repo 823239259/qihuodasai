@@ -689,7 +689,7 @@ public class FinternationFutureController extends BaseCmsController<FSimpleFtseU
 					number = tradeNumbDob;
 				}
 				map.put("AmeCopperMarketLever", number);
-			}else if(contractNo.startsWith("SI")){
+			}else if(contractNo.startsWith("SI") || contractNo.startsWith("SL")){
 				lever = map.get("AmeSilverMarketLever");
 				if(lever != null){
 					number = tradeNumbDob + lever;
