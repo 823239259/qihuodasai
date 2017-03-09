@@ -421,12 +421,13 @@ function openMockTrade(username,password){
 	$.ajax({
 		url:basepath+"/mock/trade/openMock",
 		type:"post",
+		async: false,
 		data:{
 			username:username,
 			password:password
 		},
 		success:function(result){
-			console.log(result.message)
+			console.log(result.message);
 		}
 	});
 }
