@@ -26,7 +26,7 @@ function TradeConfig(){
 	this.TradeSocketUrl = "";//ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "";
 	this.tradeSocketVersion = "";
-	this.tradeAppVersion = "3.2";
+	this.tradeAppVersion = "3.3";
 	return this;
 }
 
@@ -34,7 +34,7 @@ function TradeConfigTest(){
 	this.TradeSocketUrl = "";//"ws://139.196.228.143:6066
 	this.TradeSocketModelUrl = "";
 	this.tradeSocketVersion = "";
-	this.tradeAppVersion = "3.2";
+	this.tradeAppVersion = "3.3";
 	return this; 
 }
 
