@@ -41,6 +41,7 @@ import com.tzdr.common.api.ihuyi.SMSSender;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.exception.BusinessException;
+import com.tzdr.common.utils.ConnditionVo;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.MessageUtils;
 import com.tzdr.common.utils.TypeConvert;
@@ -52,6 +53,7 @@ import com.tzdr.domain.constants.Constant;
 import com.tzdr.domain.constants.ExtensionConstants;
 import com.tzdr.domain.dao.userTrade.FSimpleFtseUserTradeDao;
 import com.tzdr.domain.vo.FSimpleFtseUserTradeWebVo;
+import com.tzdr.domain.vo.HandUserFundVoNew;
 import com.tzdr.domain.vo.ftse.FHandleFtseUserTradeVo;
 import com.tzdr.domain.vo.ftse.FHandleFtseUserTradeVo2;
 import com.tzdr.domain.vo.ftse.FSimpleFtseManageVo;
@@ -63,6 +65,8 @@ import com.tzdr.domain.web.entity.FinternationFutureAppendLevelMoney;
 import com.tzdr.domain.web.entity.FutureMatchAccount;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
+
+import jodd.util.StringUtil;
 
 /**
  * <p>
@@ -85,13 +89,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 	@Autowired
 	private FSimpleFtseUserTradeDao simpleFtseUserTradeDao;
 	@Autowired
-	private AccountService accountService;
-	@Autowired
 	private WUserService wUserService;
-	@Autowired
-	private HandTradeService handTradeService;
-	@Autowired
-	private UserFundService userFundService;
 	@Autowired
 	private RechargeListService rechargeListService;
 	@Autowired
@@ -100,8 +98,6 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 	private TradeDayService tradeDayService;
 	@Autowired
 	private FSimpleParitiesService simpleParitiesService;
-	@Autowired
-	private FHandleFtseUserTradeService handleFtseUserTradeService;
 	@Autowired
 	private FtseActiveService ftseActiveService;
 	@Autowired
@@ -1251,6 +1247,27 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public PageInfo<FSimpleFtseUserTradeWebVo> queryUsertradeList(PageInfo<FSimpleFtseUserTradeWebVo> page,
+			ConnditionVo conn) {
+		List<Object> params = new ArrayList<Object>();
+		StringBuffer sqlBuf = new StringBuffer(
+				  "SELECT uid, business_type,trader_bond,append_trader_bond,tran_fees,"
+				+"tran_lever,tran_account,app_time,state_type,end_time "
+			    +"FROM f_simple_ftse_user_trade WHERE  1=1 "); 
+		if (conn != null) {
+			String uid = TypeConvert.objToStrIsNotNull(conn.getValue("uid"));
+			if (uid != null) {
+				sqlBuf.append(" AND uid = ?");
+				params.add(uid);
+			}
+		}
+		
+		sqlBuf.append(" ORDER BY state_type ASC,end_time DESC  ");
+		return this.getEntityDao().queryPageBySql(page, sqlBuf.toString(), 
+				FSimpleFtseUserTradeWebVo.class, conn,params.toArray());
 	}
 	
 }

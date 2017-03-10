@@ -3,8 +3,6 @@ package com.tzdr.domain.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.DecimalFormat;
-
 import com.tzdr.common.utils.AllowExcel;
 import com.tzdr.common.utils.SqlColumn;
 import com.tzdr.common.utils.TypeConvert;
@@ -17,6 +15,10 @@ import com.tzdr.domain.cache.CacheManager;
  * @see
  * @version 2.0
  * 2015年2月27日上午10:51:50
+ */
+/**
+ * @author gc
+ *
  */
 public class WuserListVo implements Serializable {
 	
@@ -100,12 +102,9 @@ public class WuserListVo implements Serializable {
 	@SqlColumn
 	private String wechatAccount;
 	
-	
 	@SqlColumn
 	private BigInteger ctime;//注册时间
 	
-	
-
 	@SqlColumn
 	private BigInteger lastLoginTime;//最后登陆时间
 	
@@ -131,10 +130,11 @@ public class WuserListVo implements Serializable {
 	@AllowExcel(name = "关键词来源")
 	@SqlColumn
 	private String keyword;
-
-
 	
-
+	/**
+	 * 方案手数
+	 */
+	private Double lever; 
 	
 	public String getId() {
 		return id;
@@ -348,15 +348,6 @@ public class WuserListVo implements Serializable {
 		} else {
 			sourceName = "维胜Web";
 		}
-		
-		/*
-		if(this.source == 2 || this.source == 5){
-			sourceName = "配股宝";
-		}else{
-			sourceName = "投资达人";
-		}
-		*/
-		
 		return sourceName;
 	}
 
@@ -390,7 +381,16 @@ public class WuserListVo implements Serializable {
 		this.wechatAccount = wechatAccount;
 	}
 
-	
+	public Double getLever() {
+		if(htranActualLever==null && ytranActualLever==null && atranActualLever==null && interActualLever==null){
+			return null;
+		}
+		lever = (htranActualLever==null?0:htranActualLever.doubleValue())+(ytranActualLever==null?0:ytranActualLever.doubleValue())
+				+(atranActualLever==null?0:atranActualLever.doubleValue())+(interActualLever==null?0:interActualLever.doubleValue());
+		return lever;
+	}
 
-
+	public void setLever(Double lever) {
+		this.lever = lever;
+	}
 }

@@ -8,9 +8,11 @@ import java.util.Map;
 import com.tzdr.common.baseservice.BaseService;
 import com.tzdr.common.domain.PageInfo;
 import com.tzdr.common.exception.BusinessException;
+import com.tzdr.common.utils.ConnditionVo;
 import com.tzdr.common.web.support.EasyUiPageInfo;
 import com.tzdr.common.web.support.JsonResult;
 import com.tzdr.domain.vo.FSimpleFtseUserTradeWebVo;
+import com.tzdr.domain.vo.HandUserFundVoNew;
 import com.tzdr.domain.vo.ftse.FSimpleFtseVo;
 import com.tzdr.domain.web.entity.FSimpleFtseUserTrade;
 import com.tzdr.domain.web.entity.WUser;
@@ -211,6 +213,14 @@ public interface FSimpleFtseUserTradeService extends BaseService<FSimpleFtseUser
 	 * 根据客户号查询
 	 */
 	public FSimpleFtseUserTrade findByUserNo(String userNo);
+	
+	/**
+	 * 操盘信息分页查询
+	 * @param page
+	 * @param conn
+	 * @return
+	 */
+	public PageInfo<FSimpleFtseUserTradeWebVo> queryUsertradeList(PageInfo<FSimpleFtseUserTradeWebVo> page,ConnditionVo conn);
 	
 	
 }
