@@ -9,6 +9,12 @@
 <link href="${ctx}/static/css/public.css?v=${v}" rel="stylesheet" type="text/css">
 <link href="${ctx}/static/css/trade.css?v=${v}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/capital.css?v=${v}">
+
+<script type="text/javascript">
+    alert("维胜金融于2017年3月13日0点起暂停开户服务。");
+    window.location.href=basepath;
+</script>
+
 <script language="javascript" src="${ctx}/static/script/tzdr.js?v=${v}"></script>
 
 <script type="text/javascript" src="${ctx}/static/script/outDisk/index.js?v=${v}"></script>
