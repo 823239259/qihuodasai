@@ -174,6 +174,11 @@ public class ViewConstants {
 		public static final String LIST_VIEW="/views/admin/wuser/list";
 		
 		/**
+		 * 操盘用户列表
+		 */
+		public static final String ACCOUNT_LIST_VIEW = "/views/admin/userAccount/list";
+		
+		/**
 		 * 显示列表name
 		 */
 		public static final String LIST_AGENTS_VIEW="/views/admin/wuser/agents_list";

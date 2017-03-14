@@ -24,6 +24,7 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 	/**
 	 * 用户编号
 	 */
+	@SqlColumn
 	private String uid;
 
 	/**
@@ -476,7 +477,7 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 
 	public String getEndTimeStr() {
 		if (this.endTime != null) {
-			this.endTimeStr = TypeConvert.long1000ToDateStr(this.endTime);
+			this.endTimeStr = TypeConvert.long1000ToDatetimeStr(this.endTime);
 		}
 		else {
 			this.endTimeStr = "";
@@ -509,17 +510,15 @@ public class FSimpleFtseUserTradeWebVo implements Serializable {
 			//状态【1.开户中、2.申请结算、3.待结算、4.操盘中  5.审核不通过 、6.已结算】
 			if (this.stateType == 1) {
 				this.stateTypeStr = "开户中";
-			}
-			else if (this.stateType == 2 || this.stateType == 4) {
+			}else if (this.stateType == 2) {
+				this.stateTypeStr = "申请结算";
+			}else if(this.stateType == 4){
 				this.stateTypeStr = "操盘中";
-			}
-			else if (this.stateType == 3) {
+			}else if (this.stateType == 3) {
 				this.stateTypeStr = "结算中";
-			}
-			else if (this.stateType == 5) {
+			}else if (this.stateType == 5) {
 				this.stateTypeStr = "审核不通过";
-			}
-			else if (this.stateType == 6) {
+			}else if (this.stateType == 6) {
 				this.stateTypeStr = "已完结";
 			}
 		}

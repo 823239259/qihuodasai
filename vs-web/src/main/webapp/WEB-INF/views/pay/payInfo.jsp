@@ -22,6 +22,7 @@
  <script type='text/javascript' src="${ctx}/static/script/common/ZeroClipboard.min.js?v=${v}"></script>
 <script type="text/javascript">
 	var tab=<%=tab%>;
+	alert("维胜金融于2017年3月13日0点起暂停充值服务。");
 </script>
 <style>
 	#nav_my {color: #ffcc33; border-bottom:2px solid #ffcc33; padding-bottom: 26px;}
@@ -68,7 +69,7 @@
 	<%@ include file="../common/leftnav.jsp"%>
 	<div class="uc_mianbar">
 		<div class="uc_pay" id="banktab">			
-			<ul class="uc_paynav">
+			<%-- <ul class="uc_paynav">
 				<li><a href="javascript:void(0);" class="on">支付宝转账</a></li>
 				<li><a href="javascript:void(0);" >网银充值</a></li> 
 				<!-- <li><a href="javascript:void(0);">微信充值</a></li> -->
@@ -90,16 +91,16 @@
 									<label>支付宝账号：</label>
 									<input type="text" id="alipayaccount" name="alipayaccount" >
 								</li>
-								<%--
+								
 								<li>
 									<label>充值金额：</label>
 									<input type="text" id="alimoney" name="alimoney" maxlength="7" onKeyUp="javascript:clearNoNumber(event,this)">
 								</li>
-								 --%>
+								
 							</ul>
-							<%--
+							
 							<div class="uc_paybtn uc_apbtn"><a id="aliSubmitBtn" href="javascript:void(0)" onclick="doAliCharge();">立即充值</a></div>
-							 --%>
+							
 							 <div class="uc_paybtn uc_apbtn"><a id="aliSubmitBtn" href="javascript:void(0)" onclick="doAliCharge();">立即绑定</a></div>
 						</div>
 						<div class="uc_banktime uc_aptime">
@@ -132,7 +133,7 @@
 							<li><label>收款人账号名称：</label><span>成都维胜智慧科技有限公司</span></li>
 						</ol>
 					</ul>
-					<%--
+					
 					<ul class="uc_ap_info uc_ap_info1">
 						<li><label>收款人支付宝账户：</label><span>xinhong1@tzdr.com</span>
 						<a id="popBtn" href="javascript:;" class="ml15" data-clipboard-target="popText">复制
@@ -145,7 +146,7 @@
 						<li><label>您的支付宝账户：</label><span id="payaliaccount"></span></li>
 						<li><label>转入金额：</label><span><i id="payalimoney"></i>元</span><a href="javascript:void(0)" onClick="toAliCharge();">修改金额</a></li>
 					</ul>
-					--%>
+					
 					<div class="uc_ap_link">
 							<div class="uc_ap_code">
 								
@@ -194,7 +195,7 @@
 					</div>
 				</form>
 			</div> 
-			<%-- <div class="subtab">
+			<div class="subtab">
 					<form id="netbank" action="" method="post" target="_blank"  >
 					<div class="uc_olmoney">
 						<ul class="uc_pblist">
@@ -211,8 +212,8 @@
 						<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</br>2、充值前请注意您的银行卡充值限制，以免造成不便；</br>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</br>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</br>5、如果充值遇到任何问题，请联系客服：400-852-8008.</p>
 					</div>
 				</form>
-			</div> --%>
-			<%-- <div class="subtab">
+			</div>
+			<div class="subtab">
 				<form id="weixinbank" action="" method="post" target="_blank">
 					<div class="uc_olmoney" style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
 						<p style="color: #fc3;font-size: 14px;">温馨提示：如您已开通网银，请尽量选择网银充值，如您是柜台转账请尽量选择相同银行转账，这样可以快速及时到账！</p>
@@ -245,7 +246,7 @@
 						</div>
 					</div>
 				</form>
-			</div> --%>
+			</div>
 			<div class="subtab">
 					<div class="uc_bank">
 						<p class="uc_b_title">温馨提示：如您已开通网银，请尽量选择网银充值，如您是柜台转账请尽量选择相同银行转账，这样可以快速及时到账！</p>
@@ -361,7 +362,7 @@
 				</div>
 			</div>	
 		  </div>
-		</div>		
+		</div>	 --%>	
 	</div>
 </div>
 	<%@include file="../common/footer.jsp"%>
