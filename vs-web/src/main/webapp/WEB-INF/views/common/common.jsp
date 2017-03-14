@@ -72,11 +72,11 @@ _atrk_opts = { atrk_acct:"lhQPn1QolK10WR", domain:"vs.com",dynamic: true};
 	}
 </script>
 <!-- 百度统计代码 -->
-<script type="text/javascript">
+<script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?fbd29c5eb5edb0451d4013a408d41fbb";
+  hm.src = "https://hm.baidu.com/hm.js?5821fca394a56fe77045cd4d42c8576e";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
