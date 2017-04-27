@@ -116,27 +116,9 @@
     			mui.openWindow("fundDetail.html","fundDetail");
     		});
     		
-    		document.getElementById("coupon").addEventListener("tap",function(){
-    			mui.openWindow("coupon.html","coupon"); 
-    		});
-    		document.getElementById("Invitation").addEventListener("tap",function(){
-    			mui.openWindow("Invitation.html","Invitation"); 
-    		});
     		document.getElementById("telPhone").addEventListener("tap",function(){
     			mui.app_refresh("telphone");
     			mui.openWindow("telphone.html",'telphone');
-    		});
-    		document.getElementById("weixin").addEventListener("tap",function(){
-    			if($("#weixin b").text()=="已关注"){
-    				mui.toast("你已关注过啦~");
-    				return;
-    			}
-    			$("#weixinCodeImage").css({"display":"block"});
-    			chechCode();
-//  			mui.openWindow({
-//					url:"bindWeixin.html",
-//					id:"bindWeixin"
-//				});
     		});
     		document.getElementById("weixinCodeImage").addEventListener("tap",function(){
     			mui.app_refresh("account");

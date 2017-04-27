@@ -178,7 +178,9 @@
 			var paramUrl={
 				url:"../login/login.html"
 			}
+			var vid=-1;
     		mui.app_request("/user/ftrade/handle",{
+    			"vid":vid,
 				"traderBond":win.traderBond,
 				"tranLever":trade_leve,
 				"businessType":win.businessType
