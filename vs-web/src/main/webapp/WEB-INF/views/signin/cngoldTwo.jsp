@@ -145,7 +145,7 @@
 		</div>
 	</div>
 </div>
-<p style="font-size: 12px; color: #ffd400; height: 60px; line-height: 60px; text-align: center; background: #771a1a;">以上所有活动最终解释权归维胜网所有，客服咨询：400-852-8008</p>
+<p style="font-size: 12px; color: #ffd400; height: 60px; line-height: 60px; text-align: center; background: #771a1a;">以上所有活动最终解释权归维胜网所有，客服咨询：400-180-1860</p>
 </div>
 <%@ include file="../common/dsp.jsp"%>
 </body>

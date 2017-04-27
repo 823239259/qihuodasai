@@ -168,7 +168,7 @@
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+					<p>如您不清楚规则，或有其他疑问，请联系客服：400-180-1860</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
 						<span>我已阅读并同意<a href="${ctx}/static/product/au.html" target="_blank">《沪金期货操盘合作协议》</a></span>

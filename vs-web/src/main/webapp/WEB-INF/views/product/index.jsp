@@ -810,7 +810,7 @@ $(document).ready(function() {
         
           
         <div class="cp_bom cpp_bom">
-            <p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+            <p>如您不清楚规则，或有其他疑问，请联系客服：400-180-1860</p>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="checkbox_agree"ame="agree">
                 <span>我已阅读并同意<a href="javascript:lookContract()">《商品期货综合操盘合作协议》</a></span>

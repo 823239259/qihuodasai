@@ -118,7 +118,7 @@ function setNeedMoney(){
 
  一个身份证只能绑定一个帐号。
 
-如遇到问题，请联系客服 400-852-8008
+如遇到问题，请联系客服 400-180-1860
 </div>
 <div class="smain" >
 <div class="srk">

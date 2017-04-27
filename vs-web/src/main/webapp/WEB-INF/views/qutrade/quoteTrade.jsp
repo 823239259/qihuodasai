@@ -143,7 +143,7 @@
 		<div class="smain">
 			<div>
 				<p>如您忘记密码请及时与我们的取得联系。</p>
-				<p>联系电话：<span style="color:#fc3;">400-852-8008！</span></p>
+				<p>联系电话：<span style="color:#fc3;">400-180-1860！</span></p>
 			</div>
 		</div>
 		<div class="anniu">
@@ -154,7 +154,7 @@
 		<div class="smain">
 			<div>
 				<p>模拟账户申请功能正在研发中，</p>
-				<p>联系客服：<span style="color:#fc3;">400-852-8008</span>，为您手动开通</p>
+				<p>联系客服：<span style="color:#fc3;">400-180-1860</span>，为您手动开通</p>
 			</div>
 		</div>
 		<div class="anniu">
@@ -172,13 +172,13 @@
 			<div class="signLogin_all signLogin_firm"  style="display: block;">
 				<p class="p2"><input type="text" name="firm_name" id="firm_name" placeholder="输入实盘账号"></p>
 				<p class="p2"><input type="password" name="firm_password" id="firm_password" placeholder="输入实盘密码"></p>
-				<p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+				<p class="p3"><a  href="javascript:void(0)" class="backPassword">忘记密码？</a>（请联系客服400-180-1860）</p>
 				<p class="p4"><span class="on" id="firm_btn">立即登录</span><span><a href="${ctx }/outDisk/index"  target="_blank"  class="no">立即开户</a></span></p>
 			</div>
 			<div class="signLogin_all signLogin_simulation">
 				<p class="p2"><input type="text" name="simulation_mame" id="simulation_mame" placeholder="输入模拟账号"></p>
 				<p class="p2"><input type="password" name="simulation_password" id="simulation_password" placeholder="输入模拟密码"></p>
-				<p class="p3"><a href="javascript:void(0)"  class="backPassword">忘记密码？</a>（请联系客服400-852-8008）</p>
+				<p class="p3"><a href="javascript:void(0)"  class="backPassword">忘记密码？</a>（请联系客服400-180-1860）</p>
 				<p class="p4"><span class="on" id="simulation_btn">立即登录</span><span><a href="javascript:void(0);"  target="_blank"  class="no open_account">立即开户</a></span></p>
 			</div>
 		</div>	

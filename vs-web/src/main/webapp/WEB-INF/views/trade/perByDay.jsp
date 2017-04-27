@@ -358,7 +358,7 @@ $(document).ready(function(){
             </div>
         </div>
         <div class="cp_bom">
-            <p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+            <p>如您不清楚规则，或有其他疑问，请联系客服：400-180-1860</p>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="agree">
                 <span>我已阅读并同意<a href="javascript:tradeContract();">《随心操盘合作协议》</a></span>
@@ -367,7 +367,7 @@ $(document).ready(function(){
               <div class="cp_b_promt">* 为保障更多用户获得操盘，本时段每用户最大操盘配额限<i><fmt:formatNumber value="${maxLeverMoney}" pattern="###,###" ></fmt:formatNumber></i>元</div>
               </c:if>	
             <div class="cp_b_btn"><a href="javascript:void(0);" style="background:#eae9e9;" <%--id="submit"--%>>提交申请</a></div>
-            <p style="color:#f00;">维胜遵守证监会新规，现暂停股票操盘业务，有疑问请联系客服：400-852-8008</p>
+            <p style="color:#f00;">维胜遵守证监会新规，现暂停股票操盘业务，有疑问请联系客服：400-180-1860</p>
         </div>
     </div>
     </form>

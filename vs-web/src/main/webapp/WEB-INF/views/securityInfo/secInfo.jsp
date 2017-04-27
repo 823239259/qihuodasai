@@ -31,7 +31,7 @@
 <!--001-->
 <div class="tck01" id="idcardDiv" style="display:none;" >
 <div class="navtitle"><a class="nava" style="width:90px;" >实名认证</a><a class="close" onclick="javascript:closeDiv('idcardDiv')"></a></div>
-<div class=" wzms"> 实名信息提交后不可修改，请务必认真填写真实资料一个身份证只能绑定一个帐号。如遇到问题，请联系客服 400-852-8008</div>
+<div class=" wzms"> 实名信息提交后不可修改，请务必认真填写真实资料一个身份证只能绑定一个帐号。如遇到问题，请联系客服 400-180-1860</div>
 <div class="smain" >
 	<div class="srk">
 		<span class="label">真实姓名：</span><input class="au-ipt" name="cardname" id="cardname" type="text">

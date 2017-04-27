@@ -167,7 +167,7 @@
 				plus.device.dial("4008528008",false);
 			}
 		},
-		"400-852-8008",["取消","呼叫"]);
+		"400-180-1860",["取消","呼叫"]);
     }
     /*//呼出美洽在线客服
     document.getElementById("consistentBeauty").addEventListener("tap",function(){

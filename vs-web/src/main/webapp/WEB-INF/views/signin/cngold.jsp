@@ -173,7 +173,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="copyright">以上所有活动最终解释权归维胜网所有，客服咨询：400-852-8008</div>	
+	<div class="copyright">以上所有活动最终解释权归维胜网所有，客服咨询：400-180-1860</div>	
 <!-- content end -->
 <%@ include file="../common/dsp.jsp"%>
 </body>

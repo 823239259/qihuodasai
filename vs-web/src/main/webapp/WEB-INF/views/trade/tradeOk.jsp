@@ -32,7 +32,7 @@
 				<h3>申请方案验资中......</h3>
 				<%-- <span>您现在可以<a href="${ctx}/help?tab=software&leftMenu=2" target="_blank">下载安装</a>交易软件！</span> --%>
 				<span>申请成功后我们会向您的手机${mobile}发送短信提醒您！</span>
-				<span>如果您有什么疑问，请联系客服：400-852-8008，客服将第一时间解决您的问题。</span>			
+				<span>如果您有什么疑问，请联系客服：400-180-1860，客服将第一时间解决您的问题。</span>			
 			</c:if>	
 			<c:if test="${isActive}">
 				<c:if test="${activityType}">
@@ -57,7 +57,7 @@
 					</c:if>	
 					<c:if test="${isMore}">
 					<h3>恭喜您！追加操盘方案成功!</h3>
-					<p>操盘资金已划转到您的操盘方案【<a href="${ctx}/trade/detail/${groupId}">${groupId}</a>】中。如您有疑问，请联系客服：400-852-8008</p>
+					<p>操盘资金已划转到您的操盘方案【<a href="${ctx}/trade/detail/${groupId}">${groupId}</a>】中。如您有疑问，请联系客服：400-180-1860</p>
 					</c:if>	
 				</c:if>	
 			</c:if>	

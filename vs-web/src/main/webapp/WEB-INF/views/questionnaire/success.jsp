@@ -62,7 +62,7 @@ $(document).ready(function() {
 
             </ul>
             <div class="tp_font tp_fontspace">我们将在<i>3月30日</i>公布加推名单，届时客服将与您联系确认。<br>如您的加推报名审核通过，即可领取8800红包，并参与炒股比赛赢取iPhone 6 plus大奖！</div>
-            <div class="tp_font">我们已将账号密码同步发送至您的手机${mobile }。<br>请妥善保存您的账号密码，如遗失可致电客服400-852-8008寻求帮助。<br>现在您可以立即<a href="${ctx }/day?enter=0">操盘炒股</a>，开始您的维胜财富之路。</div>
+            <div class="tp_font">我们已将账号密码同步发送至您的手机${mobile }。<br>请妥善保存您的账号密码，如遗失可致电客服400-180-1860寻求帮助。<br>现在您可以立即<a href="${ctx }/day?enter=0">操盘炒股</a>，开始您的维胜财富之路。</div>
         </div>
 
 

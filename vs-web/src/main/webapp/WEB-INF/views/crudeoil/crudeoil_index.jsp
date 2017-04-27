@@ -157,7 +157,7 @@
 					</div>
 				</div>
 				<div class="cp_bom">
-					<p><a href="${ctx}/help?tab=rule&leftMenu=8" style="color:#fc3;" target="_blank">查看国际原油操盘细则,</a>若还有疑问，请联系客服：400-852-8008</p>
+					<p><a href="${ctx}/help?tab=rule&leftMenu=8" style="color:#fc3;" target="_blank">查看国际原油操盘细则,</a>若还有疑问，请联系客服：400-180-1860</p>
 					<div class="cp_b_link">
 						<input type="checkbox" checked="checked" id="checkbox_agree"ame="agree"> 
 						<span>我已阅读并同意<a href="${ctx}/static/crudeoil/crudeoil.html" target="_blank">《国际原油操盘合作协议》</a></span>

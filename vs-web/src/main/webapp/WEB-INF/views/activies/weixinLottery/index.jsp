@@ -114,7 +114,7 @@
 	    
 	    <div class="main_box">
 	        <img src="${ctx}/static/images/weixinLottery/main_06.jpg">
-	        <p class="main_tel">使用奖品，拨打热线：<a href="tel:400-852-8008">400-852-8008</a></p>
+	        <p class="main_tel">使用奖品，拨打热线：<a href="tel:400-180-1860">400-180-1860</a></p>
 	    </div>
 	</div>
 	

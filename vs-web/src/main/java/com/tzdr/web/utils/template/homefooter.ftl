@@ -25,7 +25,7 @@
         </div>
         <div class="cp_hot">
             <h3>客服热线</h3>
-            <p class="cp_hotphone">400-852-8008</p>
+            <p class="cp_hotphone">400-180-1860</p>
             <p class="cp_hotqq">QQ服务群196113230<br>交流群201182159</p>
         </div>
     </div>

@@ -250,7 +250,7 @@
     <div id="customerService" class="footerList">
         <ul>
             <li  class="footerTitle">客服热线</li>
-            <li>400-852-8008</li>
+            <li>400-180-1860</li>
             <li>工作日 08:30-24:00</li>
             <li>周末 09:00-17:00</li>
         </ul>

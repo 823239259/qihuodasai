@@ -38,7 +38,7 @@
 		<p>2，在此活动期间申请的港股方案一律免除通道使用费和账户管理费，您只需要支付操盘本金；</p>
 		<p>3，每个用户最多可持有一个免费操盘方案；</p>
 		<p>4，活动期间所有的方案将于2016.04.28 15:30开始执行平仓，并终结方案，请您在此之前卖出股票；</p>
-		<p>5，若您要申请总操盘资金大于10万港币的方案，请联系客服：400-852-8008。</p></div>
+		<p>5，若您要申请总操盘资金大于10万港币的方案，请联系客服：400-180-1860。</p></div>
 	</div>
     <div class="capital_ctn">
    		<form method="post" action="${ctx}/userhkstock/confirm">
@@ -171,7 +171,7 @@
             </div>
         </div>
         <div class="cp_bom">
-            <p>如您不清楚规则，或有其他疑问，请联系客服：400-852-8008</p>
+            <p>如您不清楚规则，或有其他疑问，请联系客服：400-180-1860</p>
             <div class="cp_b_link">
                 <input type="checkbox" checked="checked" id="agree">
                 <span>我已阅读并同意<a href="javascript:hkTradeContract();">《港股操盘合作协议》</a></span>

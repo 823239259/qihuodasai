@@ -326,7 +326,7 @@ public class DrawMoneyController {
 						// messagePromptService.sendMessage(PromptTypes.isTheTrial,
 						// user.getMobile());
 						if(drawList == null){
-							jsonResult.setMessage("提现申请错误,如有疑问请联系客服400-852-8008");
+							jsonResult.setMessage("提现申请错误,如有疑问请联系客服400-180-1860");
 							return jsonResult;
 						}
 					} catch (Exception e1) {
@@ -336,7 +336,7 @@ public class DrawMoneyController {
 								+ orderId + "|ip:" + ip + "|异常：" + e1.getMessage();
 						EmailExceptionHandler.getInstance().HandleExceptionWithData(e1, "插入提现数据失败",
 								this.getClass().getName() + ":moreSuccess", dataDetail);
-						jsonResult.setMessage("提现失败，请联系客服400-852-8008");
+						jsonResult.setMessage("提现失败，请联系客服400-180-1860");
 						return jsonResult;
 					}
 					if (flag) {
@@ -392,7 +392,7 @@ public class DrawMoneyController {
 								if (json != null) {
 									String code = json.getString("retCode");
 									if (!Constants.Draw.SUCCESS.equals(code)) {
-										jsonResult.setMessage("提现失败，请联系客服 400-852-8008");
+										jsonResult.setMessage("提现失败，请联系客服 400-180-1860");
 									} else {
 										// 发送短信
 										Map<String, String> map = new HashMap<String, String>();
@@ -401,12 +401,12 @@ public class DrawMoneyController {
 										new SMSSenderThread(user.getMobile(), "draw.money.template", map).start();
 									}
 								} else {
-									jsonResult.setMessage("提现失败，请联系客服 400-852-8008");
+									jsonResult.setMessage("提现失败，请联系客服 400-180-1860");
 								}
 							}
 						}
 					} else {
-						jsonResult.setMessage("提现失败，请联系客服 400-852-8008");
+						jsonResult.setMessage("提现失败，请联系客服 400-180-1860");
 					}
 				} else {
 					if (bank == null) {
@@ -901,7 +901,7 @@ public class DrawMoneyController {
 			logger.info("币币支付调用取款接口失败，" + bbResult);
 			EmailExceptionHandler.getInstance().HandleHintWithData("币币支付调用取款接口失败", "bbDrawMoney",
 					bbResult.toJSONString());
-			return new JsonResult("提现失败，请联系客服 400-852-8008");
+			return new JsonResult("提现失败，请联系客服 400-180-1860");
 		}
 
 		

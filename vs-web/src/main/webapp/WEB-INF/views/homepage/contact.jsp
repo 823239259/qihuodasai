@@ -33,7 +33,7 @@
              <h3>成都盈透科技有限公司</h3>
              <h3>四川省成都市武侯区世纪城南路599号软件园D区</h3>
              <h4>客户服务</h4>
-             <p><span>如果您在使用维胜网(www.vs.com)的过程中有任何疑问请您与维胜网客服人员联系。<br></span><span>客服热线：400-852-8008<br></span><span>工作时间：工作日9:00-12:00 13:30-18:00<br></span><span>客服邮箱：support@vs.com</span></p>
+             <p><span>如果您在使用维胜网(www.vs.com)的过程中有任何疑问请您与维胜网客服人员联系。<br></span><span>客服热线：400-180-1860<br></span><span>工作时间：工作日9:00-12:00 13:30-18:00<br></span><span>客服邮箱：support@vs.com</span></p>
              <h4>商务合作</h4>
              <p><span>如果贵公司希望与我们建立合作关系，形成优势互补，请根据合作类型按照下面的联系方式联系我们。<br></span><span>营销/推广合作：marketing@vs.com<br></span><span>媒体合作：media@vs.com<br></span><span>其他合作：business@vs.com</span></p>
         </div>
