@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tzdr.api.constants.BusinessTypeEnum;
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
@@ -37,6 +36,7 @@ import com.tzdr.business.service.tradeDetail.TradeDetailService;
 import com.tzdr.business.service.userTrade.FSimpleConfigService;
 import com.tzdr.business.service.userTrade.FSimpleFtseUserTradeService;
 import com.tzdr.business.service.wuser.WUserService;
+import com.tzdr.common.api.contact.BusinessTypeEnum;
 import com.tzdr.domain.app.vo.FTradeApplyVo;
 import com.tzdr.domain.app.vo.UserFTradeDetailsVo;
 import com.tzdr.domain.app.vo.UserFTradeVo;
@@ -299,11 +299,11 @@ public class UserFTradeController {
 		//应付金额
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO);
 		//A50 \ 国际期货 \ 原油  \ 小恒指
-		if (BusinessTypeEnum.A50.getValue()==businessType 
-				||BusinessTypeEnum.CRUDE.getValue()==businessType 
+		if (BusinessTypeEnum.CN.getValue()==businessType 
+				||BusinessTypeEnum.CL.getValue()==businessType 
 				||BusinessTypeEnum.HSI.getValue()==businessType
-				||BusinessTypeEnum.LHSI.getValue()==businessType){
-			int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
+				||BusinessTypeEnum.MHI.getValue()==businessType){
+			int cfgBusinessType = (BusinessTypeEnum.CN.getValue()==businessType)?BusinessTypeEnum.CN_CONFIG.getValue():businessType;
 			FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(cfgBusinessType,String.valueOf(tranLever));  //获取配置方案信息
 			if (ObjectUtil.equals(null, fSimpleConfig)){
 				return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	
@@ -377,7 +377,7 @@ public class UserFTradeController {
 		BigDecimal payable = new BigDecimal(DataConstant.ZERO);
 		
 		//A50 \ 国际期货 \ 原油 \ 小恒指
-		int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
+		int cfgBusinessType = (BusinessTypeEnum.CN.getValue()==businessType)?BusinessTypeEnum.CN_CONFIG.getValue():businessType;
 		FSimpleConfig fSimpleConfig = fSimpleConfigService.getFSimpleConfig(cfgBusinessType,String.valueOf(tranLever));  //获取配置方案信息
 		if (ObjectUtil.equals(null, fSimpleConfig)){
 			return new ApiResult(false,ResultStatusConstant.FAIL,"not.fund.config.params.");	

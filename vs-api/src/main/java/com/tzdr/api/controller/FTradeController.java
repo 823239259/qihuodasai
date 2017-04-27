@@ -13,11 +13,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.tzdr.api.constants.BusinessTypeEnum;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
 import com.tzdr.business.app.service.FTradeService;
 import com.tzdr.business.service.togetherFuture.FTogetherTradeService;
+import com.tzdr.common.api.contact.BusinessTypeEnum;
 import com.tzdr.domain.app.vo.FTradeParamsVo;
 import com.tzdr.domain.app.vo.FTradeVo;
 
@@ -93,11 +93,11 @@ public class FTradeController {
 		}
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		// 获取A50、恒指、原油、小恒指的操盘参数
-		if (BusinessTypeEnum.A50.getValue()==businessType 
-				|| BusinessTypeEnum.CRUDE.getValue()==businessType 
-				|| BusinessTypeEnum.HSI.getValue()==businessType 
-				|| BusinessTypeEnum.LHSI.getValue()==businessType){
-			 int cfgBusinessType = (BusinessTypeEnum.A50.getValue()==businessType)?BusinessTypeEnum.A50_CONFIG.getValue():businessType;
+		if (BusinessTypeEnum.CN.getValue()==businessType 
+				||BusinessTypeEnum.CL.getValue()==businessType 
+				||BusinessTypeEnum.HSI.getValue()==businessType
+				||BusinessTypeEnum.MHI.getValue()==businessType){
+			 int cfgBusinessType = (BusinessTypeEnum.CN.getValue()==businessType)?BusinessTypeEnum.CN_CONFIG.getValue():businessType;
 			 List<FTradeParamsVo> fTradeParamsVos  = fTradeService.queryFtradeParams(cfgBusinessType);
 			 // 如果是恒指获取配置的固定手续费
 			/* if (BusinessTypeEnum.HSI.getValue()==businessType){

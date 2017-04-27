@@ -2,13 +2,10 @@ package com.tzdr.api.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jodd.util.ObjectUtil;
 import jodd.util.StringUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.tzdr.api.constants.DataConstant;
 import com.tzdr.api.constants.ResultStatusConstant;
 import com.tzdr.api.support.ApiResult;
-import com.tzdr.api.util.PasswordUtils;
 import com.tzdr.api.util.RequestUtils;
 import com.tzdr.business.api.service.ApiUserService;
 import com.tzdr.business.cms.service.user.PasswordService;
@@ -93,7 +88,7 @@ public class SmsController {
 		int sendTimes = ObjectUtil.equals(null,DataConstant.SMS_LIMIT_MAPS.get(mobile))?DataConstant.ZERO:DataConstant.SMS_LIMIT_MAPS.get(mobile);
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
-		String template = "ihuyi.verification.code.template";
+		String template = "ihuyi.forget.loginPwd.code.template";
 		// 获取短信通道
 		int smsChannel = 0;
 		if (DataConstant.SEND_SMS_TYPE_REGIST==type){//注册验证码短信

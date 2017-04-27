@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
 import com.google.common.collect.Lists;
 import com.hundsun.t2sdk.common.util.CollectionUtils;
 import com.tzdr.business.cms.service.auth.AuthService;
@@ -65,7 +63,7 @@ import com.tzdr.domain.web.entity.FinternationFutureAppendLevelMoney;
 import com.tzdr.domain.web.entity.FutureMatchAccount;
 import com.tzdr.domain.web.entity.WUser;
 import com.tzdr.domain.web.entity.future.FSimpleCoupon;
-
+import com.tzdr.common.api.contact.BusinessTypeEnum;
 import jodd.util.StringUtil;
 
 /**
@@ -169,20 +167,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			lever = fSimpleFtseUserTrade.getTranLever();
 		}
 
-		String business = "";
-		if (fSimpleFtseUserTrade.getBusinessType() == 0) {
-			business = "富时A50";
-		} else if (fSimpleFtseUserTrade.getBusinessType() == 6) {
-			business = "国际原油";
-		} else if (fSimpleFtseUserTrade.getBusinessType() == 7) {
-			business = "恒生指数";
-		} else if (fSimpleFtseUserTrade.getBusinessType() == 8) {
-			business = "国际综合";
-		} else if (fSimpleFtseUserTrade.getBusinessType() == 20) {
-			business = "商品综合";
-		} else if (fSimpleFtseUserTrade.getBusinessType() == 9) {
-			business = "小恒指";
-		}
+		String business=BusinessTypeEnum.getBusinessTypeToBusiness(fSimpleFtseUserTrade.getBusinessType());
 
 		FutureMatchAccount futureMatchAccount = futureMatchAccountService.getOne(type, lever,
 				fSimpleFtseUserTrade.getTraderTotal().doubleValue());
@@ -203,11 +188,11 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			this.futureMatchAccountService.update(futureMatchAccount);
 			WUser wUser = wUserService.get(fSimpleFtseUserTrade.getUid());
 			if (type == 1) {
-				String content = MessageUtils.message("commodity.future.apply.audit.success", business);
+				String content = MessageUtils.message("commodity.future.apply.audit.success", business,lever);
 				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 
 			} else {
-				String content = MessageUtils.message("commodity.crude.apply.audit.success", business);
+				String content = MessageUtils.message("commodity.crude.apply.audit.success", business,lever);
 				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 			}
 		} else {
@@ -470,18 +455,8 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		User currentUser = this.authService.getCurrentUser();
 		FSimpleFtseUserTrade rsUserTrade = this.get(id);
 		WUser wUser = wUserService.get(rsUserTrade.getUid());
-		String business = "";
-		if (rsUserTrade.getBusinessType() == 0) {
-			business = "富时A50";
-		} else if (rsUserTrade.getBusinessType() == 6) {
-			business = "国际原油";
-		} else if (rsUserTrade.getBusinessType() == 7) {
-			business = "恒生指数";
-		} else if (rsUserTrade.getBusinessType() == 8) {
-			business = "国际综合";
-		} else if (rsUserTrade.getBusinessType() == 9) {
-			business = "小恒指";
-		}
+		String business =BusinessTypeEnum.getBusinessTypeToBusiness(rsUserTrade.getBusinessType());
+		
 		Long dateLong = Dates.getCurrentLongDate();
 		String msg = "分配帐号";
 		Integer stateType = rsUserTrade.getStateType();
@@ -508,7 +483,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		if (stateType == 1) {
 			// handleFtseUserTradeService.saveHandleFtseUserTrade(rsUserTrade);
 			// // 保存收益报表记录
-			String content = MessageUtils.message("commodity.crude.apply.audit.success", business);
+			String content = MessageUtils.message("commodity.crude.apply.audit.success", business,rsUserTrade.getTranLever());
 			new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 		}
 		return new JsonResult(true, msg + "成功!");
@@ -735,18 +710,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 	@Override
 	public JsonResult settlementA50(FSimpleFtseVo wellGoldA50) throws Exception {
 		FSimpleFtseUserTrade simpleFtseUserTrade = this.get(wellGoldA50.getId());
-		String business = "";
-		if (simpleFtseUserTrade.getBusinessType() == 0) {
-			business = "富时A50";
-		} else if (simpleFtseUserTrade.getBusinessType() == 6) {
-			business = "国际原油";
-		} else if (simpleFtseUserTrade.getBusinessType() == 7) {
-			business = "恒生指数";
-		} else if (simpleFtseUserTrade.getBusinessType() == 8) {
-			business = "国际综合";
-		} else if (simpleFtseUserTrade.getBusinessType() == 9) {
-			business = "小恒指";
-		}
+		String business = BusinessTypeEnum.getBusinessTypeToBusiness(simpleFtseUserTrade.getBusinessType());
 		if (simpleFtseUserTrade.getStateType() == 6) {
 			return new JsonResult(false, "该方案已结算，请刷新后查看!");
 		}

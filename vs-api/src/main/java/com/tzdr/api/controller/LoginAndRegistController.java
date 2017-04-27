@@ -168,23 +168,6 @@ public class LoginAndRegistController {
 		try {
 			synchronized (lock) {
 				wUserService.saveWUser(wUser);
-				//活动发放注册券
-				String couponName=MessageUtils.message("regist.app.coupon");
-				List<FSimpleCoupon> coupons=this.fSimpleCouponService.findByStatusAndName((short)1, couponName);
-				//发放
-				if(checkRegistCoupon(coupons)){
-					FSimpleCoupon f=coupons.get(0);
-					f.setUserId(wUser.getId());
-					f.setUserPhone(mobile);
-					f.setStatus((short)2);
-					f.setGrantTime(new Date().getTime()/1000);
-					if(f.getCycle()!=null && f.getCycle()!=0){
-						Long grantTime = f.getGrantTime();
-						Long deadLine = Dates.toDate(Dates.dateAddDay(Dates.parseLong2Date(grantTime),f.getCycle())).getTime() / 1000;
-						f.setDeadline(deadLine);
-					}
-					fSimpleCouponService.update(f);
-				}
 			}
 		} catch (Exception e) {
 		}
@@ -201,7 +184,6 @@ public class LoginAndRegistController {
 		// 用户注册成功之后给用户手机发送短信
 		try {
 			SMSSender.getInstance().sendByTemplate(1, mobile, "ihuyi.verification.signin.success.template", null);
-			/*mockTradeAccountService.openMockAccount(mobile, password);*/
 			messagePromptService.registNotice(mobile, "APP", emailChannelName, emailChannelKeyWords);
 		} catch (Exception e) {
 			e.printStackTrace();

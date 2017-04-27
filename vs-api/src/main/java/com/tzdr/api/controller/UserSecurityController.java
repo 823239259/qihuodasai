@@ -101,7 +101,7 @@ public class UserSecurityController {
 		}
 		ApiUserVo appUserVo = apiUserService.findByMobile(mobile);
 		Map<String,String> smsParams= new HashMap<String,String>();  //创建短信动态参数集合 
-		String template = "ihuyi.verification.code.template";
+		String template = "ihuyi.update.newMobile.code.template";
 		
 		if (DataConstant.SEND_SMS_TYPE_UPDATE_PHONE==type){ 
 			if (ObjectUtil.equals(null, appUserVo)){
@@ -120,7 +120,8 @@ public class UserSecurityController {
 		if (DataConstant.SEND_SMS_TYPE_FORGET_WITHDRAW_PWD==type){
 			if (ObjectUtil.equals(null, appUserVo)){
 				return new ApiResult(false,ResultStatusConstant.SendSms.MOBILE_NOT_EXIST,"mobile.not.exist.");
-			}		
+			}
+			template = "ihuyi.forget.withdrawPwd.code.template";
 			smsParams.put("module", DataConstant.SEND_SMS_TYPE_FORGET_WITHDRAW_PWD_MODULE);
 		}
 		

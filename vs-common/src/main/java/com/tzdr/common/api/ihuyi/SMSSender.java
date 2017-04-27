@@ -154,11 +154,26 @@ public class SMSSender {
 		String template = ConfUtil.getContext(templateKey);
 		log.info("template"+template);
 		String content = "";
-		if ("ihuyi.verification.code.template".equals(templateKey)) {
+		if("ihuyi.verification.signin.success.template".equals(templateKey)){
+			content = String.format(template);
+		}else if("ihuyi.forget.loginPwd.code.template".equals(templateKey)){
+			content = String.format(template, map.get("code"));
+		}else if("ihuyi.forget.withdrawPwd.code.template".equals(templateKey)){
+			content = String.format(template, map.get("code"));
+		}else if("ihuyi.update.newMobile.code.template".equals(templateKey)){
+			content = String.format(template,map.get("code"));
+		}else if("ihuyi.recharge.success.template".equals(templateKey)){
+			content = String.format(template , map.get("money"));
+		}else if("ihuyi.settlement.success.template".equals(templateKey)){
+			content = String.format(template , map.get("lever"),map.get("business"));
+		}else if("ihuyi.presentation.to.account.template".equals(templateKey)){
+			content = String.format(template , map.get("money"));
+		}else if ("ihuyi.verification.signin.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("module"), map.get("code"));
-		} else if ("ihuyi.verification.signin.code.template".equals(templateKey)) {
+		}else if ("ihuyi.verification.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("module"), map.get("code"));
-		} else if ("ihuyi.trade.ok.code.template".equals(templateKey)) {
+		} 
+		if ("ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
 		} else if ("hk.ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
@@ -178,15 +193,8 @@ public class SMSSender {
 			content = String.format(template , map.get("money"));
 		} else if("activity.luck.ihuyi.code.template".equals(templateKey)){
 			content = String.format(template);
-		}else if("ihuyi.verification.signin.success.template".equals(templateKey)){
-			content = String.format(template);
-		}else if("ihuyi.recharge.success.template".equals(templateKey)){
-			content = String.format(template , map.get("money"));
-		}else if("ihuyi.settlement.success.template".equals(templateKey)){
-			content = String.format(template , map.get("lever"),map.get("business"));
-		}else if("ihuyi.presentation.to.account.template".equals(templateKey)){
-			content = String.format(template , map.get("money"));
 		}
+		
 		log.info("发送模板内容为："+content);
 		return send(smsChannel, mobile, content);
 	}
