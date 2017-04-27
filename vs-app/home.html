@@ -26,7 +26,7 @@
 		<a href="javascript:void(0);" id="toNews"><img src="images/news.png" id="newsimg"></a>
 		<h1 id="nav-title" class="mui-title">操盘申请</h1>
 		<!--<a href="#" class="top-tel" id="telBtn">客服热线</a>-->
-		<a class="top-tel" id="consistentBeauty">在线客服</a>
+		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 	</header>
 	<nav class="navlist">
 		<a class="" href="javascript:void(0);" id="quotationMain">
@@ -69,30 +69,6 @@
 					
 				</a>
 			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0);" id="cn">
-						<img src="images/icon1.png" />
-						<h2>A股行情风向标</h2>
-						<p>交易手续费：<i id="cn_tranfee">¥0/单边</i></p>
-						<p class="buttomP"><label>交易时间：</label><span>9:05-16:30,17:05-02:00</span></p>	
-				</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0);" id="hsi">
-					<img src="images/icon2.png" />
-					<h2>港版IF 全网最低手续费</h2>
-					<p>交易手续费：<i id="hsi_tranfee">¥0/单边</i></p>
-					<p class="buttomP"><label>交易时间：</label><span>09:20-11:55,13:05-16:25,17:20-23:40</span></p>	
-				</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0);" id="cl">
-						<img src="images/icon3.png" />
-					<h2>全天候交易 夜盘行情更好</h2>
-					<p>交易手续费：<i id="cl_tranfee">¥0/单边</i></p>
-					<p class="buttomP"><label>交易时间：</label><span>09:05-02:00</span></p>
-				</a>
-			</li>
 			
 			
 		</ul>
@@ -122,23 +98,9 @@
 			    document.getElementById("newsimg").setAttribute("src","images/news.png"); 
 				mui.openWindow("tzdr/news/newslist.html");
 			});
-			
-			document.getElementById("cl").addEventListener("tap",function(){
-				mui.openWindow("tzdr/future/cl.html","cl");
-			});
-			document.getElementById("cn").addEventListener("tap",function(){
-				mui.openWindow("tzdr/future/cn.html","cn");
-			});
-			document.getElementById("hsi").addEventListener("tap",function(){
-				mui.openWindow("tzdr/future/hsi.html","hsi"); 
-			});
 			document.getElementById("cp").addEventListener("tap",function(){
 				mui.openWindow("tzdr/future/cp.html","cp"); 
-//				mui.openWindow("tzdr/account/recharge.html","recharge.html"); 
-			});
-//			document.getElementById("lhsi").addEventListener("tap",function(){
-//				mui.openWindow("tzdr/future/lhsi.html","lhsi");  
-//			});
+s			});
 			//获取手续费
 			setTranfees();
 			/** 
@@ -321,50 +283,12 @@
 //								});
 //							}
 					}
-					if(!mui.isnull(result.data.tradeList)){
-						mui.each(result.data.tradeList,function(i,item){
-							switch (item.type){
-								case 0:
-									document.getElementById("cn_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
-									break;
-								case 6:
-									document.getElementById("cl_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
-									break;
-								case 7:
-									document.getElementById("hsi_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
-									break;
-								case 9:
-									document.getElementById("lhsi_tranfee").innerHTML="¥"+item.tradeFees+"/单边";
-								break;
-								default:
-									break;
-							}
-						});
-					}
 				},function(result){
 					mui.toast("系统繁忙，请刷新再试！");
 					return;
 				},paramUrl);
 			}
-			
-			// 关闭活动图片
-//			function closeActivityImg (){
-//				document.getElementById("app_tc").style.display="none";
-//				document.getElementById("app_qj").style.display="none";
-//				var ftogether_activity_show = plus.storage.getItem("ftogether_activity_show");
-//				if (mui.isnull(ftogether_activity_show)){
-//					plus.storage.setItem("ftogether_activity_show","has-show");
-//				}
-//			}
 		});	
-		document.getElementById("consistentBeauty").addEventListener("tap",function(){
-			initCallService();
-		});
-		function initCallService(){
-//			document.getElementById("consistentBeauty").addEventListener("tap",function(){
-				var path=mui.app_filePath1("chart.html");
-				mui.openWindow(path,"consistentBeauty"); 
-//			});
-		}
+
 </script>
 </html>

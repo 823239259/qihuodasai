@@ -24,7 +24,6 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-left" id="tutorial"><img src="../../images/newUser.png"></a>
 		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
 		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" ></a>
 		</header>
@@ -161,8 +160,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="top"></div><div class="bottom"></div>
-		<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 	</div>
 	<script src="../../js/util.js" charset="UTF-8"></script>
 	<script src="../../js/jquery-1.11.3.js"></script>
@@ -195,85 +192,6 @@
 				function openHome(){
 					mui.openWindow("../../home.html","home");
 				}
-				/*
-				 增加新手引导的样式
-				 */
-				if(plus.storage.getItem("QuotationGuidance")==null){
-					plus.storage.setItem("QuotationGuidance","1");
-					bindGuidance();
-				}
-				function bindGuidance(){
-					var height=window.innerHeight;
-						$(".top").css({
-							"height":height+"px",
-							"background-image": "url(../../images/quotation.png)",
-							"display":"block",
-						});
-						$("#closeDiv").css({
-							"display":"block",
-						});
-						var clickNum=0;
-						$("#closeDiv").click(function(){
-							$(".top,.bottom,#closeDiv").css({
-					    			"display":"none",
-					    		});
-						})
-						$(".bottom").click(function(){
-							$(".top,.bottom,#closeDiv").css({
-					    			"display":"none",
-					    	});
-			    		  var data=ManufacturingData(3);
-				            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-				            socket.close();
-				            mui.openWindow({
-								url:"transactionDetails.html",
-								id:"transactionDetails",
-								 extras:{
-									name:data,
-								}
-							});
-						})
-						$(".top").click(function(){
-							if(clickNum==0){
-								$(".top").css({
-									"background-image": "url(../../images/quotation0.png)",
-								});
-								$("#closeDiv").css({
-									"left":10+"px",
-								});
-							}else if(clickNum==1){
-								$(".top").css({
-									"height":239+"px",
-									"background-color":"rgba(0,0,0,0.8)",
-									"background-image":"none",
-								});
-								
-								$(".bottom").css({
-									"display":"block",
-									"bottom":"0px",
-									"left":"0px",
-									"height":height-239-50+"px",
-									"background-image": "url(../../images/quotation4.png)",
-								})
-							}else{
-								$(".top,.bottom,#closeDiv").css({
-					    			"display":"none",
-					    		});
-					    		  var data=ManufacturingData(3);
-						            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-						            socket.close();
-						            mui.openWindow({
-										url:"transactionDetails.html",
-										id:"transactionDetails",
-										 extras:{
-											name:data,
-										}
-									});
-					    		
-							}
-							clickNum++;
-						});
-						}
 				//链接socket;
 				var dataUrl={
 	  				home:"../../home.html",
@@ -461,12 +379,6 @@
 						re.reload();
 					}
 				});
-				document.getElementById("tutorial").addEventListener("tap",function(){
-					mui.openWindow({
-						url:"tutorial.html",
-						id:"tutorial",
-					});
-				})
 				setstatus();
 				function setstatus(){
 					if(plus.navigator.isFullscreen()){

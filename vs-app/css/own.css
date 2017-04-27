@@ -752,6 +752,6 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .about  .mui-content{background-color: #FFFFFF; padding-bottom: 0px;}
 .about .ac_list li{border-bottom: 1px solid #E5E5E5;}
 .about .ac_list{margin: 0px 0px;}
-.about .about-top{width: 100%; height: 150px; border-bottom: 1px solid #E5E5E5; background: url(../images/aboutBg.png) no-repeat center center; background-size: 135px auto; }
+.about .about-top{width: 100%; height: 150px; border-bottom: 1px solid #E5E5E5; background: url(../images/aboutBg.png) no-repeat center center; background-size: 220px auto; }
 .about #editon{display: block; float: right; padding-right:20px;  background-size: 40px auto;}
 .about  .mui-table-view-cell{padding-right: 25px;}

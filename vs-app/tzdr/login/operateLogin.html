@@ -52,14 +52,11 @@
 				<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 					<p id="loginAgree"><span id="checkBox"><i ></i></span>
 						<sapn>阅读并接受</sapn>
-						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《维胜行情交易协议》</a>
+						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《艺华金斯达行情交易协议》</a>
 					</p>
-					<p id="tipsMoni">模拟盘账密为您的维胜账密，如有问题请拨打400-180-1860</p>
+					<p id="tipsMoni">模拟盘账密为您的艺华金斯达账密，如有问题请拨打400-180-1860</p>
 				</div>
 			</div>
-			<div class="top"></div>
-			<div class="bottom"></div>
-			<div id="closeDiv"><img src="../../images/quotationColse.png" id="closeTrade"></div>
 			<div id="username_list">
 				<ul>
 				</ul>
@@ -77,55 +74,6 @@
 			})
 			mui.plusReady(function() {
 				/*加载新手指南*/
-				if(plus.storage.getItem("QuotationGuidanceLogin") == null) {
-					bindGuidance()
-					plus.storage.setItem("QuotationGuidanceLogin", "1");
-				}
-
-				function bindGuidance() {
-					var height = window.innerHeight;
-					$(".top").css({
-						"height": height + "px",
-						"background-image": "url(../../images/quotationLogin.png)",
-						"display": "block",
-					});
-					$("#closeDiv").css({
-						"display": "block"
-					});
-					$("#closeDiv").click(function() {
-						$(".top,#closeDiv,.bottom").css({
-							"display": "none",
-						});
-					});
-					var clickNum = 0;
-					$(".top").click(function() {
-						if(clickNum == 0) {
-							$(".top").css({
-								"height": 263 + "px",
-								"background-color": "rgba(0,0,0,0.8)",
-								"background-image": "none",
-								"top": "0px"
-							});
-							$(".bottom").css({
-								"display": "block",
-								"bottom": "0px",
-								"left": "0px",
-								"height": height - 263 - 40 + "px",
-								"background-image": "url(../../images/quotationLogin1.png)",
-							})
-						} else {
-							$(".top,#closeDiv,.bottom").css({
-								"display": "none",
-							});
-						};
-						clickNum++;
-					});
-					$(".bottom").click(function() {
-						$(".top,#closeDiv,.bottom").css({
-							"display": "none",
-						});
-					})
-				};
 				var islogin = false;
 				var num = 0
 				$("#checkBox i").val(1);

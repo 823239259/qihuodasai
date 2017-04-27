@@ -816,8 +816,6 @@
 			</div>
 			</div>
 			</div>
-			<div class="top"></div>
-			<div class="bottom"></div>
 		</body>
 			<script>
 				function init(param){
@@ -854,28 +852,6 @@
 					/*
 					 增加新手引导的样式
 					 */
-					if(plus.storage.getItem("QuotationGuidanceTrade")==null){
-						plus.storage.setItem("QuotationGuidanceTrade","1");
-						bindGuidance();
-					}
-//					bindGuidance();
-					function bindGuidance(){
-					var height=window.innerHeight;
-					var width=window.innerWidth;
-					$(".top").css({"height":height+"px",
-									"width":width+"px",
-									"position":"fixed",
-									"z-index":"999",
-									"display":"block",
-									"top":"0px",
-									"background":"url('../../images/chartBg.png') no-repeat",
-									"background-size":"cover",
-									})		
-					
-				}
-				$(".top").on("tap",function(){
-					$(".top").css("display","none");
-				})
 			});
 			</script>
 		<script type="text/javascript" src="../../js/jquery.base64.js" ></script>

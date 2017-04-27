@@ -108,7 +108,7 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 			<h1 class="mui-title">关于维胜</h1>
-			<a href="javascript:void(0)" class="top-tel" id="consistentBeauty">在线客服</a>
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
 		</header>
 		<div class="mui-content">
 			<div class="about-top"></div>
@@ -117,7 +117,7 @@
 					<a class="mui-navigate-right" href="javascript:void(0)" id="editonButton"><i>版本号</i><span id="editon"></span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0)" id="score"><i>来给维胜评分吧~</i></a>
+					<a class="mui-navigate-right" href="javascript:void(0)" id="score"><i>来给金斯达来平分吧~</i></a>
 				</li>
 			</ul>
 			<p id="Copyright">Copyright2016 成都盈透科技有限公司 所有 <br>投资有风险，入市需谨慎</p>
@@ -139,6 +139,7 @@
 			mui.plusReady(function() {
 				var dataVersion;
 				var wgtVer;
+				tzdr.init.initHearListener();
 				document.getElementById("close").addEventListener("tap", function() {
 					$(".alertDiv").css("display", "none");
 				});
@@ -149,9 +150,6 @@
 				document.getElementById("openPage").addEventListener("tap", function() {
 					$(".alertDiv").css("display", "none");
 				});
-				document.getElementById("consistentBeauty").addEventListener("tap", function() {
-					initCallService();
-				});
 				document.getElementById("score").addEventListener("tap", function() {
 					if(plus.os.name == "Android") {
 						initCallService();
@@ -160,10 +158,6 @@
 					}
 				});
 
-				function initCallService() {
-					var path = mui.app_filePath1("chart.html");
-					mui.openWindow(path, "consistentBeauty");
-				}
 				document.getElementById("editonButton").addEventListener("tap", function() {
 					if(dataVersion == undefined) {
 						return

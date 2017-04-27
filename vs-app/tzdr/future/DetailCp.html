@@ -162,12 +162,6 @@
 	    			return
 	    		}
 	    	});
-	    	document.getElementById("sharePay").addEventListener("tap",function(){
-	    		if(endNum==6){
-	    			shareHref();
-	    		}
-	    	})
-
     		function setDetails(details){
     		document.getElementById("trade_account").innerHTML=details.tranAccount;
     		document.getElementById("trade_password").innerHTML=details.tranPassword;
@@ -601,16 +595,6 @@
 						</thead>
 					</table>
 		</div>
-		<div id="shareDiv">
-			<button type="button" id="sharePay" class="mui-btn  lg-btnlogin">分享</button>
-		</div>
-		<input id="sharecontent" type="hidden" value=""></input>
-		<input id="sharehref" class="sharehref" type="hidden"/>
-		<input id="sharehrefTitle" class="sharehref" type="hidden" value="原来国际期货赚钱这么简单，双边第一手还免费！"/>
-		<input id="sharehrefDes" class="sharehref" type="hidden" value="我在维胜金融操盘国际期货，门槛低、手续费用低，你也来试试吧"/>
-		<div id="output" style="opacity: 0;"></div>
 	</div>
-	<script src="../../js/share.js"></script>
-	<script src="../../js/immersed.js"></script>
 </body>
 </html>
