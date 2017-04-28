@@ -19,6 +19,7 @@ import com.tzdr.business.service.recharge.RechargeListService;
 import com.tzdr.business.service.userTrade.FSimpleConfigService;
 import com.tzdr.business.service.userTrade.FSimpleParitiesService;
 import com.tzdr.business.service.userTrade.FinternationFutureAppendLevelMoneyService;
+import com.tzdr.common.api.contact.BusinessTypeEnum;
 import com.tzdr.common.baseservice.BaseServiceImpl;
 import com.tzdr.common.utils.Dates;
 import com.tzdr.common.utils.TypeConvert;
@@ -166,7 +167,6 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		//方案详情信息
 		UserFTradeDetailsVo userFTradeDetailsVo =  null;
 		
-		//业务类型 如：0：富时A50;6：国际原油;7：恒指期货;8：国际综合;9:小恒指
 		Integer businessType = null;
 		
 		if(!CollectionUtils.isEmpty(userFTradeDetailsVoList)){  //判断集合是否为空
@@ -216,19 +216,8 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	public void addbond(WUser wuser,FSimpleFtseUserTrade fSimpleFtseUserTrade,BigDecimal addbond) throws Exception{
 
 		Integer type = fSimpleFtseUserTrade.getBusinessType();
-		String remark="";
-		if(type == 0){
-			remark ="国际期货(富时A50)追加保证金。";
-		}else if(type == 6){
-			remark ="国际期货(国际原油)追加保证金。";
-		}else if(type == 7){
-			remark ="国际期货(恒生指数)追加保证金。";
-		}else if(type == 8){
-			remark ="国际期货(国际综合)追加保证金。";
-		}
-		else if(type == 9){
-			remark ="国际期货(迷你恒指)追加保证金。";
-		}
+		String remark=BusinessTypeEnum.getBusinessTypeToBusiness(type);
+		remark = remark + "追加保证金";
 		fSimpleFtseUserTrade.setAppendTraderBond(TypeConvert.scale(fSimpleFtseUserTrade.getAppendTraderBond().add(addbond),2));
 		
 		//追加保证金划款

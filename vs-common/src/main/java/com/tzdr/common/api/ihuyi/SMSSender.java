@@ -172,15 +172,19 @@ public class SMSSender {
 			content = String.format(template, map.get("module"), map.get("code"));
 		}else if ("ihuyi.verification.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("module"), map.get("code"));
+		}else if ("tzdr.alidayu.signin.code.template".equals(templateKey)) {
+			content = String.format(template, map.get("code"));
+		}else if ("draw.money.template".equals(templateKey)) {
+			content = String.format(template, map.get("account"), map.get("money"));
 		} 
+		
+		
 		if ("ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
 		} else if ("hk.ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
 		} else if ("8800.template".equals(templateKey)) {
 			content = template;
-		} else if ("draw.money.template".equals(templateKey)) {
-			content = String.format(template, map.get("account"), map.get("money"));
 		} else if ("hk.ihuyi.end.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("groupId"), map.get("leverMoney"), map.get("accrualValue"), map.get("endMoney"));
 		} else if ("together.ihuyi.trade.ok.code.template".equals(templateKey)) {

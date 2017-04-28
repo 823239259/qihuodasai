@@ -188,11 +188,11 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			this.futureMatchAccountService.update(futureMatchAccount);
 			WUser wUser = wUserService.get(fSimpleFtseUserTrade.getUid());
 			if (type == 1) {
-				String content = MessageUtils.message("commodity.future.apply.audit.success", business,lever);
+				String content = MessageUtils.message("commodity.future.apply.audit.success",lever, business);
 				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 
 			} else {
-				String content = MessageUtils.message("commodity.crude.apply.audit.success", business,lever);
+				String content = MessageUtils.message("commodity.crude.apply.audit.success",lever, business);
 				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 			}
 		} else {
@@ -483,7 +483,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		if (stateType == 1) {
 			// handleFtseUserTradeService.saveHandleFtseUserTrade(rsUserTrade);
 			// // 保存收益报表记录
-			String content = MessageUtils.message("commodity.crude.apply.audit.success", business,rsUserTrade.getTranLever());
+			String content = MessageUtils.message("commodity.crude.apply.audit.success",rsUserTrade.getTranLever(), business);
 			new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 		}
 		return new JsonResult(true, msg + "成功!");

@@ -102,7 +102,7 @@ public class SmsController {
 			// 获取短信通道
 			smsChannel = ((DataConstant.SEND_SMS_TYPE_REGIST == type) ? dataMapService.getSmsContentRegister() : dataMapService.getSmsContentOthers());
 			
-			template = smsChannel == 3 ? "tzdr.alidayu.signin.code.template" : "ihuyi.verification.signin.code.template";
+			template = smsChannel == 3 ? "tzdr.alidayu.signin.code.template" : "tzdr.alidayu.signin.code.template";
 			if(smsChannel == 3){
 				smsParams.put("typeName",DataConstant.SEND_SMS_TYPE_REGIST_MODULE);
 			}else{
