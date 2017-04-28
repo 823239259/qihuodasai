@@ -248,6 +248,7 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 		}
 		FutureMatchAccount futureMatchAccount = futureMatchAccountService.getOne(type, lever,
 				fSimpleFtseUserTrade.getTraderTotal().doubleValue());
+		String business=BusinessTypeEnum.getBusinessTypeToBusiness(fSimpleFtseUserTrade.getBusinessType());
 		/*
 		 * if (type == 5 && 2 == fSimpleFtseUserTrade.getSource()){
 		 * futureMatchAccount = null; }
@@ -262,6 +263,15 @@ public class FSimpleFtseUserTradeServiceImpl extends BaseServiceImpl<FSimpleFtse
 			futureMatchAccount.setTid(fSimpleFtseUserTrade.getId());
 			futureMatchAccount.setAssignTime(new Date().getTime() / 1000);
 			this.futureMatchAccountService.update(futureMatchAccount);
+			WUser wUser = wUserService.get(fSimpleFtseUserTrade.getUid());
+			if (type == 1) {
+				String content = MessageUtils.message("commodity.future.apply.audit.success",lever, business);
+				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
+
+			} else {
+				String content = MessageUtils.message("commodity.crude.apply.audit.success",lever, business);
+				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
+			}
 		} else {
 			// 审核中
 			fSimpleFtseUserTrade.setStateType(1);
