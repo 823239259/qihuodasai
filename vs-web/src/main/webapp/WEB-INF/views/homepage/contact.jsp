@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
-<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+<meta name="description" content="维胜（www.qdjinsida.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>联系我们|维胜金融-致力于国际期货开户|国际期货交易|外盘衍生品等相关业务_主要有恒指期货,国际原油,富时A50等外盘期货产品</title>
 <link rel="stylesheet" href="${ctx}/static/css/login.css">
 <link rel="stylesheet" href="${ctx}/static/css/news.css">
@@ -33,7 +33,7 @@
              <h3>成都盈透科技有限公司</h3>
              <h3>四川省成都市武侯区世纪城南路599号软件园D区</h3>
              <h4>客户服务</h4>
-             <p><span>如果您在使用维胜网(www.vs.com)的过程中有任何疑问请您与维胜网客服人员联系。<br></span><span>客服热线：400-180-1860<br></span><span>工作时间：工作日9:00-12:00 13:30-18:00<br></span><span>客服邮箱：support@vs.com</span></p>
+             <p><span>如果您在使用维胜网(www.qdjinsida.com)的过程中有任何疑问请您与维胜网客服人员联系。<br></span><span>客服热线：400-180-1860<br></span><span>工作时间：工作日9:00-12:00 13:30-18:00<br></span><span>客服邮箱：support@vs.com</span></p>
              <h4>商务合作</h4>
              <p><span>如果贵公司希望与我们建立合作关系，形成优势互补，请根据合作类型按照下面的联系方式联系我们。<br></span><span>营销/推广合作：marketing@vs.com<br></span><span>媒体合作：media@vs.com<br></span><span>其他合作：business@vs.com</span></p>
         </div>

@@ -6,14 +6,14 @@
     </encoder>
   </appender> 
   <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <File>/data/wwwlogs/www.vs.com.log</File>
+    <File>/data/wwwlogs/www.qdjinsida.com.log</File>
     <encoder>
       <pattern>%d %p [%c] - &lt;%m&gt;%n</pattern>
     </encoder>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
     
       <MaxHistory>50000</MaxHistory>
-      <fileNamePattern>/data/wwwlogs/www.vs.com.log.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+      <fileNamePattern>/data/wwwlogs/www.qdjinsida.com.log.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
       <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 	      <MaxFileSize>50MB</MaxFileSize>
       </TimeBasedFileNamingAndTriggeringPolicy>

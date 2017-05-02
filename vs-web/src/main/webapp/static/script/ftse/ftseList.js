@@ -250,7 +250,7 @@ function settingAccountInfoFtse(tranAccount,tranPassword,businessType) {
 //	}
 	tranAccountTable+= '<tr>';
 	tranAccountTable+= '<td>交易软件：</td>';           /*'+basepath+'help?tab=software&leftMenu=1*/
-	tranAccountTable+= '<td><a target="_blank" href="http://www.vs.com/vsnews/about/">交易软件下载</a></td>';
+	tranAccountTable+= '<td><a target="_blank" href="http://www.qdjinsida.com/vsnews/about/">交易软件下载</a></td>';
 	tranAccountTable+= '</tr>';
 	tranAccountTable+= '<tr>';
 	tranAccountTable+= '<td></td>';

@@ -3,7 +3,7 @@ var _title,_source,_sourceUrl,_pic,_showcount,_desc,_summary,_site,
               _height = 600,
              _top = (screen.height-_height)/2,
              _left = (screen.width-_width)/2,
-             _url = 'http://www.vs.com/message/usermessage',
+             _url = 'http://www.qdjinsida.com/message/usermessage',
              _pic = '';
     //分享到新浪微博
     function shareToSinaWB(event){

@@ -29,7 +29,7 @@
     <div class="suc_user">
         <label>密码：</label><span>a<%=username%></span>
     </div>
-    <h2><i>您已经注册成为维胜用户</i><a href="http://update.vs.com/Future/download/模拟盘交易软件.zip" class="suc_link1">下载行情&模拟软件</a><a href="http://www.vs.com/pay/payinfo" class="suc_link2">充值开通业务</a></h2>
+    <h2><i>您已经注册成为维胜用户</i><a href="http://update.vs.com/Future/download/模拟盘交易软件.zip" class="suc_link1">下载行情&模拟软件</a><a href="http://www.qdjinsida.com/pay/payinfo" class="suc_link2">充值开通业务</a></h2>
     <h2><i style="color:#0086f5;">注意事项</i></h2>
     <p>1. 请您修改密码，输入原服务密码和新服务密码，即可进行密码修改</p>
     <p>2. 如果您有任何疑问！请联系QQ：4000200158</p>

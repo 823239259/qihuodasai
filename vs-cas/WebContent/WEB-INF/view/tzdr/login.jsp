@@ -7,7 +7,7 @@
 <%
 	String appPath = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+appPath;
-	String forgetPw = "http"+"://www.vs.com";//"http"+"://localhost:8088/tzdr-web/";////www.dktai.com
+	String forgetPw = "http"+"://www.qdjinsida.com";//"http"+"://localhost:8088/tzdr-web/";////www.dktai.com
 %>
 <c:set var="ctx" value="<%=basePath%>"></c:set>
 <c:set var="forget" value="<%=forgetPw%>"></c:set>
@@ -17,10 +17,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录|维胜金融-致力于国际期货开户|国际期货交易|外盘衍生品等相关业务_为用户提供期货交易时间,成都期货入门,期货公司排名等服务</title>
 <meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
-	<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+	<meta name="description" content="维胜（www.qdjinsida.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <link rel="shortcut icon" href="${ctx}/images/login/weisheng-icon.png">
 <link rel="stylesheet" href="${ctx}/css/login.css?ver=20150901">
-<!-- <script language="javascript" src="http://www.vs.com/static/script/common/jquery-1.8.0.min.js"></script> -->
+<!-- <script language="javascript" src="http://www.qdjinsida.com/static/script/common/jquery-1.8.0.min.js"></script> -->
 <!-- start 吉鹏代码 -->
 <script type="text/javascript">
 var _zzsiteid="g2CiQ0pbhOF";

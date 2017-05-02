@@ -11,7 +11,7 @@
 	<meta name="robots" content="all" />
 	<meta name="keywords" content="股票、期货" />
 	<meta name="description" content="维胜投身普惠金融互联网服务，以网络平台为A股、港股、美股、富时A50、恒指期货、国际原油等金融产品的操盘提供便利条件。" />
-	<meta name="author" content="www.vs.com" />
+	<meta name="author" content="www.qdjinsida.com" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="HandheldFriendly" content="true">
 	<meta name="MobileOptimized" content="320">

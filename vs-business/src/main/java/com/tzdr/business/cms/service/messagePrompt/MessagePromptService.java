@@ -35,61 +35,61 @@ public class MessagePromptService {
 				if (submitType.equalsIgnoreCase(PromptTypes.isFutures)) {
 					fristParam = "申请列表";
 					twoParam = "期货方案";
-					url = "http://manage.vs.com/admin/internation/future/list";
+					url = "http://manage.qdjinsida.com/admin/internation/future/list";
 					typeKey = "riskEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isAddBond)) {
 					fristParam = "补充保证金";
 					twoParam = "补充保证金";
-					url = "http://manage.vs.com/admin/internation/future/list";
+					url = "http://manage.qdjinsida.com/admin/internation/future/list";
 					typeKey = "riskEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isEndScheme)) {
 					fristParam = "方案管理";
 					twoParam = "申请结算方案的";
-					url = "http://manage.vs.com/admin/internation/future/list";
+					url = "http://manage.qdjinsida.com/admin/internation/future/list";
 					typeKey = "riskEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isAlipayRecharge)) {
 					fristParam = "支付宝充值审核";
 					twoParam = "支付宝充值";
-					url = "http://manage.vs.com/admin/rechargeReview/list";
+					url = "http://manage.qdjinsida.com/admin/rechargeReview/list";
 					typeKey = "fundEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isBankReCharge)) {
 					fristParam = "银行转账充值审核";
 					twoParam = "银行转账充值";
-					url = "http://manage.vs.com/admin/rechargeReview/list";
+					url = "http://manage.qdjinsida.com/admin/rechargeReview/list";
 					typeKey = "fundEmail";
 					emailTemplet = "messagePrompt";
 				}else if(submitType.equalsIgnoreCase(PromptTypes.isInternetBanking)){
 					fristParam = "网银充值";
 					twoParam = "网银充值成功";
-					url = "http://manage.vs.com/admin/recharge/rechargeQuery";
+					url = "http://manage.qdjinsida.com/admin/recharge/rechargeQuery";
 					typeKey = "fundEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isLineTransfer)) {
 					fristParam = "线下转账待审核";
 					twoParam = "线下转账提现";
-					url = "http://manage.vs.com/admin/withdrawAudit/list";
+					url = "http://manage.qdjinsida.com/admin/withdrawAudit/list";
 					typeKey = "fundEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isTheTrial)) {
 					fristParam = "提现待审核【初审】";
 					twoParam = "提现";
-					url = "http://manage.vs.com/admin/withdrawAudit/list";
+					url = "http://manage.qdjinsida.com/admin/withdrawAudit/list";
 					typeKey = "fundEmail";
 					emailTemplet = "messagePrompt";
 				} else if (submitType.equalsIgnoreCase(PromptTypes.isReview)) {
 					fristParam = "提现待审核【复审】";
 					twoParam = "提现";
-					url = "http://manage.vs.com/admin/withdrawAudit/list";
+					url = "http://manage.qdjinsida.com/admin/withdrawAudit/list";
 					typeKey = "reviewEmail";
 					emailTemplet = "messagePrompt";
 				}else if(submitType.equalsIgnoreCase(PromptTypes.isWechatTransfer)){
 					fristParam = "微信充值";
 					twoParam = "微信充值审核";
-					url = "http://manage.vs.com/admin/rechargeReview/list";
+					url = "http://manage.qdjinsida.com/admin/rechargeReview/list";
 					typeKey = "fundEmail";
 					emailTemplet = "messagePrompt";
 				}

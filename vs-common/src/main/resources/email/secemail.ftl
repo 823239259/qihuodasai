@@ -6,6 +6,6 @@
     <p>感谢您的使用，祝您投资一切顺利！<br><br><br><br></p> 
     <p>投资是道，步步为赢<br></p> 
     <p>维胜 您的财富梦想加速器<br></p> 
-    <p>www.vs.com</p> 
+    <p>www.qdjinsida.com</p> 
 </body>  
 </html>

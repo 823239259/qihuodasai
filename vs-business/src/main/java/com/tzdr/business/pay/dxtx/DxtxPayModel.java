@@ -171,7 +171,7 @@ public class DxtxPayModel implements Serializable{
 		dxtxPayModel.setoPaymodeId(1);
 		dxtxPayModel.setoPrice(0.01);
 		dxtxPayModel.setoPrivateinfo("fd");
-		dxtxPayModel.setoShowaddress("http://www.vs.com");
+		dxtxPayModel.setoShowaddress("http://www.qdjinsida.com");
 		String str = dxtxPayModel.toJSON();
 		Map<String, Object> s = HttpClientUtils.httpPostMap("http://payment.dunxingpay.com/Pay.ashx", "Pay=" + str);
 		System.out.println(s.get("result"));

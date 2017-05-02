@@ -126,36 +126,36 @@
             </ul>
             <ul>
 	           	<li>公司品牌：</li>
-	           	<li><a href=" http://www.vs.com/" target="_blank">维胜</a> </li>
-	           	<li><a href=" http://www.vs.com/" target="_blank">国际期货公司</a></li>
-	           	<li><a href=" http://www.vs.com/" target="_blank">外盘期货公司</a></li>
-	           	<li><a href=" http://www.vs.com/" target="_blank">成都期货</a></li>
+	           	<li><a href=" http://www.qdjinsida.com/" target="_blank">维胜</a> </li>
+	           	<li><a href=" http://www.qdjinsida.com/" target="_blank">国际期货公司</a></li>
+	           	<li><a href=" http://www.qdjinsida.com/" target="_blank">外盘期货公司</a></li>
+	           	<li><a href=" http://www.qdjinsida.com/" target="_blank">成都期货</a></li>
          	</ul>
             <ul>
             	<li>公司产品：</li>
-            	<li><a href=" http://www.vs.com/" target="_blank">期货</a></li>
-            	<li><a href=" http://www.vs.com/" target="_blank">外盘期货</a></li>
-            	<li><a href=" http://www.vs.com/" target="_blank">恒指期货</a></li>
-            	<li><a href=" http://www.vs.com/" target="_blank">国际原油</a></li>
-            	<li><a href=" http://www.vs.com/" target="_blank">富时A50</a></li>
+            	<li><a href=" http://www.qdjinsida.com/" target="_blank">期货</a></li>
+            	<li><a href=" http://www.qdjinsida.com/" target="_blank">外盘期货</a></li>
+            	<li><a href=" http://www.qdjinsida.com/" target="_blank">恒指期货</a></li>
+            	<li><a href=" http://www.qdjinsida.com/" target="_blank">国际原油</a></li>
+            	<li><a href=" http://www.qdjinsida.com/" target="_blank">富时A50</a></li>
             </ul>
 	        <ul>
 		       	<li>公司业务：</li>
-		       	<li><a href=" http://www.vs.com/" target="_blank">期货开户</a></li>
-		       	<li><a href=" http://www.vs.com/" target="_blank">国际期货开户</a></li>
-		       	<li><a href=" http://www.vs.com/" target="_blank">期货交易</a></li>
-		       	<li><a href=" http://www.vs.com/" target="_blank">期货行情</a></li>
-		       	<li><a href=" http://www.vs.com/" target="_blank">外盘期货行情</a></li>
+		       	<li><a href=" http://www.qdjinsida.com/" target="_blank">期货开户</a></li>
+		       	<li><a href=" http://www.qdjinsida.com/" target="_blank">国际期货开户</a></li>
+		       	<li><a href=" http://www.qdjinsida.com/" target="_blank">期货交易</a></li>
+		       	<li><a href=" http://www.qdjinsida.com/" target="_blank">期货行情</a></li>
+		       	<li><a href=" http://www.qdjinsida.com/" target="_blank">外盘期货行情</a></li>
 	        </ul>
 			<ul style="line-height: 25px;">
 				<li style="width: 70px; text-align: right; height: 50px;">维胜资讯：</li>
-				<li><a href="http://www.vs.com/a/news/commodity/" target="_blank">商品市场</a></li>
-				<li><a href="http://www.vs.com/a/view/stock/" target="_blank">证券市场</a></li>
-				<li><a href="http://www.vs.com/a/news/exchange/" target="_blank">外汇市场</a></li>
-				<li><a href="http://www.vs.com/a/news/whole/" target="_blank">宏观经济</a></li>
-				<li><a href="http://www.vs.com/a/view/cnstock/" target="_blank">中国股市</a></li>
-				<li><a href="http://www.vs.com/a/view/usstock/" target="_blank">欧美股市</a></li>
-				<li><a href="http://www.vs.com/a/view/international/" target="_blank">国际商品</a></li>
+				<li><a href="http://www.qdjinsida.com/a/news/commodity/" target="_blank">商品市场</a></li>
+				<li><a href="http://www.qdjinsida.com/a/view/stock/" target="_blank">证券市场</a></li>
+				<li><a href="http://www.qdjinsida.com/a/news/exchange/" target="_blank">外汇市场</a></li>
+				<li><a href="http://www.qdjinsida.com/a/news/whole/" target="_blank">宏观经济</a></li>
+				<li><a href="http://www.qdjinsida.com/a/view/cnstock/" target="_blank">中国股市</a></li>
+				<li><a href="http://www.qdjinsida.com/a/view/usstock/" target="_blank">欧美股市</a></li>
+				<li><a href="http://www.qdjinsida.com/a/view/international/" target="_blank">国际商品</a></li>
 			</ul>
         </div>
         <div class="copyright_contact">
@@ -204,7 +204,7 @@
             <p>Copyright &copy; 2016 成都盈透科技有限公司 版权所有 蜀ICP备16018768号-1  投资有风险，入市需谨慎</p>
         </div>
         <div class="cp_cppic">
-            <a target="_blank" href="http://webscan.360.cn/index/checkwebsite?url=www.vs.com"><img src="${ctx}/static/images/image/anquan.png"></a>
+            <a target="_blank" href="http://webscan.360.cn/index/checkwebsite?url=www.qdjinsida.com"><img src="${ctx}/static/images/image/anquan.png"></a>
             <a target="_blank" href="http://www.shuidixy.com/company/professionalInfo?s=94424583567954757334740627845150"><img style="opacity: 0.6;" src="${ctx}/static/images/image/small.png"></a>
         </div>
     </div>
@@ -218,33 +218,33 @@
     <div class="footerList" >
             <ul>
                 <li class="footerTitle">关于我们</li>
-                <li><a href="http://www.vs.com/about">公司简介</a></li>
-                <li><a href="http://www.vs.com/contact">联系我们</a></li>
+                <li><a href="http://www.qdjinsida.com/about">公司简介</a></li>
+                <li><a href="http://www.qdjinsida.com/contact">联系我们</a></li>
                 <li><a href="/vsnews/baodao/">媒体报道</a></li>
                 <li><a href="/vsnews/help/">帮助中心</a></li>
             </ul>
             <ul>
                 <li class="footerTitle">公司品牌</li>
-                <li><a href=" http://www.vs.com/">维胜</a></li>
-                <li><a href=" http://www.vs.com/">国际期货公司</a></li>
-                <li><a href=" http://www.vs.com/">外盘期货公司</a></li>
-                <li><a href=" http://www.vs.com/">成都期货</a></li>
+                <li><a href=" http://www.qdjinsida.com/">维胜</a></li>
+                <li><a href=" http://www.qdjinsida.com/">国际期货公司</a></li>
+                <li><a href=" http://www.qdjinsida.com/">外盘期货公司</a></li>
+                <li><a href=" http://www.qdjinsida.com/">成都期货</a></li>
             </ul>
             <ul>
                 <li class="footerTitle">公司产品</li>
-                <li><a href=" http://www.vs.com/">期货</a></li>
-                <li><a href=" http://www.vs.com/">外盘期货</a></li>
-                <li><a href=" http://www.vs.com/">恒指期货</a></li>
-                <li><a href=" http://www.vs.com/">国际原油</a></li>
-                <li><a href=" http://www.vs.com/">富时A50</a></li>
+                <li><a href=" http://www.qdjinsida.com/">期货</a></li>
+                <li><a href=" http://www.qdjinsida.com/">外盘期货</a></li>
+                <li><a href=" http://www.qdjinsida.com/">恒指期货</a></li>
+                <li><a href=" http://www.qdjinsida.com/">国际原油</a></li>
+                <li><a href=" http://www.qdjinsida.com/">富时A50</a></li>
             </ul>
             <ul>
                 <li class="footerTitle">公司业务</li>
-                <li><a href=" http://www.vs.com/">期货开户</a></li>
-                <li><a href=" http://www.vs.com/">国际期货开户</a></li>
-                <li><a href=" http://www.vs.com/">期货交易</a></li>
-                <li><a href=" http://www.vs.com/">期货行情</a></li>
-                <li><a href=" http://www.vs.com/">外盘期货行情</a></li>
+                <li><a href=" http://www.qdjinsida.com/">期货开户</a></li>
+                <li><a href=" http://www.qdjinsida.com/">国际期货开户</a></li>
+                <li><a href=" http://www.qdjinsida.com/">期货交易</a></li>
+                <li><a href=" http://www.qdjinsida.com/">期货行情</a></li>
+                <li><a href=" http://www.qdjinsida.com/">外盘期货行情</a></li>
             </ul>
         </div>
     <div id="customerService" class="footerList">

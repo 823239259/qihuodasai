@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
-<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+<meta name="description" content="维胜（www.qdjinsida.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>我的邀请码 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/uc.css?version=20150721">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
@@ -321,7 +321,7 @@ $(document).ready(function() {
 					</div>
 					<div class="uc_spl_share content">
 						<p class="uc_spl_sfont">
-							牛市来了，小资金如何做大？我最近在维胜网站股票操盘炒股，收益可扩大15倍，你也可以来试试！<%-- <a href="http://www.vs.com?uid=${id}">http://www.vs.com?uid=${id}</a> --%>
+							牛市来了，小资金如何做大？我最近在维胜网站股票操盘炒股，收益可扩大15倍，你也可以来试试！<%-- <a href="http://www.qdjinsida.com?uid=${id}">http://www.qdjinsida.com?uid=${id}</a> --%>
 						</p>
 						<div class="uc_spl_sharelist">
 							<span>分享到：</span>

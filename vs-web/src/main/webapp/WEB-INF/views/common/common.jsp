@@ -68,7 +68,7 @@ _atrk_opts = { atrk_acct:"lhQPn1QolK10WR", domain:"vs.com",dynamic: true};
 	var stockForumBasePath = '${sfb}'+"/";
 	var isOpanStockForum = '${iosf}';
 	function showQQDialog(){
-		window.open('http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=4000200158&curl=http://www.vs.com/','在线客服','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');
+		window.open('http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=4000200158&curl=http://www.qdjinsida.com/','在线客服','height=405,width=500,top=200,left=200,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no');
 	}
 </script>
 <!-- 百度统计代码 -->

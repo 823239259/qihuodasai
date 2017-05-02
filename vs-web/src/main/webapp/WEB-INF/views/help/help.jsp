@@ -12,7 +12,7 @@ tab=tab==null?"":tab;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="维胜，国际期货，期货，投资达人，金勺子，高盛，都城，南华期货，配资，期货配资，期货开户，外盘，富时A50，国际原油，恒指期货，期货公司，期货平台，炒期货，模拟盘，赚钱，头寸，持仓，成都盈透科技有限公司"/>
-<meta name="description" content="维胜（www.vs.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
+<meta name="description" content="维胜（www.qdjinsida.com）-致力于成为中国领先的国际期货及衍生品互联网交易平台，提供恒指期货、国际原油、富时A50等主流国际期货产品，开户操盘快捷方便，交易费用全网最低。"/>
 <title>帮助中心 - 维胜金融-中国领先的国际期货及衍生品互联网交易平台</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/public.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/static/css/help.css?20150806">
@@ -305,7 +305,7 @@ var tab="<%=tab%>";
         </div>   
         <div class="hp_mainbar hp_mbox3" style="display:none;">    
         	<h2>第一步，手机号注册/登录</h2>
-        	<p> 首先，我们得有个账号打开维胜网（www.vs.com）官网，点击首页登录窗口右下角“免费注册”按钮（您也可以选择上方的另一个入口“注册”</p>
+        	<p> 首先，我们得有个账号打开维胜网（www.qdjinsida.com）官网，点击首页登录窗口右下角“免费注册”按钮（您也可以选择上方的另一个入口“注册”</p>
         	<img src="${ctx}/static/images/help/vs-help-4.png" width="677" style="margin-left:30px;">
         	<p>两个入口都会来到注册页面，请按照相应位置分别填写相关信息</p>
         	<img src="${ctx}/static/images/help/vs-help-5.png" width="677" style="margin-left:30px;">
@@ -332,7 +332,7 @@ var tab="<%=tab%>";
         	<img src="${ctx}/static/images/help/vs-help-18.png" width="677" style="margin-left:30px;">
         	<h2>第六步，下载交易客户端</h2>
         	<p>PC — Windows平台我们提供的交易软件有自主开发的<b style="font-weight: bold;">维胜标准版</b>和<b style="font-weight: bold;">维胜快手客户端</b>；以及<b style="font-weight: bold;">易盛极星</b>，您可按需选择（下载地址：维胜网首页 - 新手指南 - 交易软件下载）</p>
-        	<p>App不用电脑，手机也能随时操盘。移动端，我们有Android（安卓）和iOS双平台应用。</br>Android：http://api.vs.com/upload/vsapp.apk</br>iOS：请于App Store搜索“维胜”</p>
+        	<p>App不用电脑，手机也能随时操盘。移动端，我们有Android（安卓）和iOS双平台应用。</br>Android：http://api.qdjinsida.com/upload/vsapp.apk</br>iOS：请于App Store搜索“维胜”</p>
         	<h2>第七步，投资交易</h2>
         	<p>1、打开维胜标准版客户端，进入软件，用户可根据自身对期货的了解选择模拟操盘，和实际操盘。模拟操盘针对新手用户，更快的上手。实盘操盘必须现在维胜的官网申请操盘方案，获得操盘账号和密码方可进入。</p>
         	<p>2、根据相应账户登录交易端，用户可以清晰的看见维胜交易标准版分为行情和交易板块。行情板块分为：行情列表、分时图、K线图、闪电图四个内容，用户可以自由的切换区域查看自己交易的期货；交易板块分为：快手版、限价版；</p>
@@ -1198,7 +1198,7 @@ var tab="<%=tab%>";
         </div>
         <div class="hp_mainbar hp_mbox1" >
         	<h2>如何注册成为维胜用户？</h2>
-        	<p>第一步：打开维胜首页(www.vs.com)，点击首页头部“注册”，跳转注册页面；</p>
+        	<p>第一步：打开维胜首页(www.qdjinsida.com)，点击首页头部“注册”，跳转注册页面；</p>
         	<img src="${ctx}/static/images/help/vs-help-4.png" width="677" style="margin-left:30px;">
         	<p>第二步：填写手机号码、手机验证码、密码、确认密码、推广码等信息；</p>
         	<img src="${ctx}/static/images/help/vs-help-5.png" width="677" style="margin-left:30px;">

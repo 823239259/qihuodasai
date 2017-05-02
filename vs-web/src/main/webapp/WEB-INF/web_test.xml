@@ -74,7 +74,7 @@
 		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
 		<init-param>
 			<param-name>casServerUrlPrefix</param-name>
-			<param-value>http://test.login.vs.com/</param-value>
+			<param-value>http://test.login.qdjinsida.com/</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
@@ -88,12 +88,12 @@
 		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
 		<init-param>
 			<param-name>casServerLoginUrl</param-name>
-			<param-value>http://test.login.vs.com/login</param-value>
+			<param-value>http://test.login.qdjinsida.com/login</param-value>
 			<!-- 使用的CAS-Server的登录地址,一定是到登录的action -->
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://test.www.vs.com</param-value>
+			<param-value>http://test.www.qdjinsida.com</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 		<init-param>  
@@ -323,12 +323,12 @@
 		<filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
 		<init-param>
 			<param-name>casServerUrlPrefix</param-name>
-			<param-value>http://test.login.vs.com/</param-value>
+			<param-value>http://test.login.qdjinsida.com/</param-value>
 			<!-- 使用的CAS-Server的地址,一定是在浏览器输入该地址能正常打开CAS-Server的根地址 -->
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
-			<param-value>http://test.www.vs.com</param-value>
+			<param-value>http://test.www.qdjinsida.com</param-value>
 			<!-- 当前Client系统的地址 -->
 		</init-param>
 	</filter>
