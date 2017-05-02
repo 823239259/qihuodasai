@@ -162,7 +162,7 @@
 					if(dataVersion == undefined) {
 						return
 					}
-					if(dataVersion.Android.version > wgtVer || dataVersion.iOS.version > wgtVer) {
+					if(dataVersion.Android.version > wgtVer) {
 						$(".alertDiv").css("display", "block");
 					} else {
 						mui.toast("当前为最新版本，无需更新~");
@@ -242,7 +242,8 @@
 								}
 							}
 						}
-					} else if(plus.os.name == "iOS") {
+					} 
+					/*else if(plus.os.name == "iOS") {
 						if(iOS.version > wgtVer) {
 							if(nowDate >= upDateiOS) {
 								if(iOS.isForceUpdate == true) {
@@ -282,7 +283,7 @@
 								}
 							}
 						}
-					}
+					}*/
 				};
 
 				// 下载wgt文件
