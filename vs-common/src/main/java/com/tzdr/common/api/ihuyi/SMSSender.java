@@ -1,8 +1,6 @@
 package com.tzdr.common.api.ihuyi;
 
-import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -11,7 +9,6 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.tzdr.common.api.alidayu.AlidayuSMSSender;
 import com.tzdr.common.api.ihuyi.util.IhuyiConfigUtil;
 import com.tzdr.common.api.lianyus.LianyusSMSSender;
@@ -179,7 +176,7 @@ public class SMSSender {
 		} 
 		
 		
-		if ("ihuyi.trade.ok.code.template".equals(templateKey)) {
+		/*if ("ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
 		} else if ("hk.ihuyi.trade.ok.code.template".equals(templateKey)) {
 			content = String.format(template, map.get("group"), map.get("starttime"));
@@ -197,7 +194,7 @@ public class SMSSender {
 			content = String.format(template , map.get("money"));
 		} else if("activity.luck.ihuyi.code.template".equals(templateKey)){
 			content = String.format(template);
-		}
+		}*/
 		
 		log.info("发送模板内容为："+content);
 		return send(smsChannel, mobile, content);

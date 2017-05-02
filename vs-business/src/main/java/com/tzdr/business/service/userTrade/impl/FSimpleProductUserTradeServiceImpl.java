@@ -237,7 +237,7 @@ public class FSimpleProductUserTradeServiceImpl extends BaseServiceImpl<FSimpleF
 			update(userTrade);
 //			fHandleFtseUserTradeService.save(getFHandleFtseUserTrade(userTrade));
 			if (type == 1) {
-				String content = MessageUtils.message("commodity.future.apply.audit.success",userTrade.getTranLever(),
+				String content = MessageUtils.message("commodity.future.apply.audit.success",
 						getTypeName(userTrade.getBusinessType().intValue()));
 				new SMSSendForContentThread(wUser.getMobile(), content, 2000).start();
 			}
