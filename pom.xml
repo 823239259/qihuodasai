@@ -98,23 +98,18 @@
 				</includes>
 			</resource>
 			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-					<include>**/*.*</include>
-				</includes>
-				  <!-- 资源根目录排除各环境的配置，使用单独的资源目录来指定 -->  
-				 <excludes>  
-                    <exclude>test/*</exclude>  
-                    <exclude>tzdr.web/*</exclude>
-                    <exclude>development.pgb/*</exclude>  
-                    <exclude>development/*</exclude>  
-                    <exclude>cms/*</exclude> 
-                    <exclude>test.pgb/*</exclude>
-                    <exclude>peigubao/*</exclude> 
-                </excludes>  
-			</resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.*</include>
+                </includes>
+                <!-- 排除的文件 -->
+                <excludes>
+                    <!-- 排除各个环境的配置文件 -->
+                    <exclude>profile/**</exclude>
+                </excludes>
+            </resource>
             <resource>  
                 <directory>src/main/resources/${profiles.active}</directory>  
             </resource>  
@@ -593,69 +588,37 @@
 		
 	</dependencies>
 
-	<profiles>  
-	    <profile>  
-	        <!-- 本地开发环境 -->  
-	        <id>development</id>  
-	        <properties>
-	            <profiles.active>development</profiles.active>
-	            <deploy.url>http://host:port/manager/text</deploy.url>
-	        </properties>
-	        <activation>
-	            <activeByDefault>true</activeByDefault>
-	        </activation>
-	    </profile>  
-	    <profile>  
-	        <!-- 测试环境 -->  
-	        <id>test</id>  
-	        <properties>  
-	            <profiles.active>test</profiles.active>  
-	           <!--  <deploy.url>http://host:port/manager/text</deploy.url>   -->
-	        </properties>  
-	    </profile>  
-	    <profile>  
-	        <!-- 生产环境app1 -->  
-	        <id>tzdr.web</id>  
-	        <properties>  
-	            <profiles.active>tzdr.web</profiles.active>  
-	            <!-- <deploy.url>http://host:port/manager/text</deploy.url>   -->
-	        </properties>  
-	    </profile>  
-	    <profile>  
-	         <!-- 配股宝本地开发环境 -->  
-	        <id>development.pgb</id>  
-	        <properties>  
-	            <profiles.active>development.pgb</profiles.active>  
-	             <!-- <deploy.url>http://host:port/manager/text</deploy.url> -->
-	        </properties>
-	         <!-- <activation>
-	            <activeByDefault>true</activeByDefault>
-	        </activation> -->
-		</profile>
-	    <profile>  
-	        <!-- 报表环境-->  
-	        <id>cms</id>  
-	        <properties>  
-	            <profiles.active>cms</profiles.active>  
-	            <!-- <deploy.url>http://host:port/manager/text</deploy.url>   -->
-	        </properties>  
-	    </profile>  
-	      <profile>  
-	        <!-- 配股宝测试环境-->  
-	        <id>test.pgb</id>  
-	        <properties>  
-	            <profiles.active>test.pgb</profiles.active>  
-	            <!-- <deploy.url>http://host:port/manager/text</deploy.url>   -->
-	        </properties>  
-	    </profile>  
-	     <profile>  
-	        <!-- 配股宝正式环境-->  
-	        <id>peigubao</id>  
-	        <properties>  
-	            <profiles.active>peigubao</profiles.active>  
-	            <!-- <deploy.url>http://host:port/manager/text</deploy.url>   -->
-	        </properties>  
-	    </profile>  
-	    
-	</profiles> 
+	<profiles>
+        <!-- 本地/开发环境配置 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>profile/dev</profiles.active>
+                <deploy.url>http://host:port/manager/text</deploy.url>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+
+        <!-- 测试环境配置 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>profile/test</profiles.active>
+                <!-- <deploy.url>http://host:port/manager/text</deploy.url> -->
+            </properties>
+        </profile>
+
+
+        <!-- 生产环境配置 -->
+        <profile>
+            <id>product</id>
+            <properties>
+                <profiles.active>profile/product</profiles.active>
+                <!-- <deploy.url>http://host:port/manager/text</deploy.url> -->
+            </properties>
+        </profile>
+    </profiles>
 </project>
