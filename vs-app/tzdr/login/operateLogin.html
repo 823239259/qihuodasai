@@ -240,8 +240,8 @@
 						mui.back();
 					}
 				});
+					getVersion();
 				$("#operateLogin").click(function() {
-					getVersion(function(){
 						account = document.getElementById("account").value;
 						pwd = $.base64.encode(document.getElementById("password").value);
 						if(mui.isnull(account)) {
@@ -307,7 +307,6 @@
 								clearTimeout(loginSetTimeOut);
 							}
 						}
-					});
 				});
 
 				function backReload() {
