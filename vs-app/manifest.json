@@ -165,7 +165,7 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "images/boot/ios/640#960.png", /*iPhone3启动图片选，分辨率：320x480*/
+						"default": "images/boot/ios/640+960.png", /*iPhone3启动图片选，分辨率：320x480*/
 						"retina35": "images/boot/ios/640+960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "images/boot/ios/640+1136.png",
 						"retina47": "images/boot/ios/750+1334.png",
@@ -183,8 +183,8 @@
 					}
 				},
 				"android": {
-					"mdpi": "images/boot/android/480#800.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "images/boot/android/480#800.png", /*大屏启动图片，分辨率：320x442*/
+					"mdpi": "images/boot/android/720+1242.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "images/boot/android/720+1242.png", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "images/boot/android/1080+1920.png", /*高分屏启动图片，分辨率：480x762*/
 					"xhdpi": "images/boot/android/720+1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
 					"xxhdpi": "images/boot/android/1080+1920.png"
