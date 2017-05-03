@@ -19,9 +19,9 @@
     <!-- 数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://rm-uf67eoo59vi986767.mysql.rds.aliyuncs.com/dktai?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-        <property name="username" value="dktai"/>
-        <property name="password" value="Dktai888"/>
+        <property name="url" value="jdbc:mysql://rm-uf6rpwcy8v6t6y2e3.mysql.rds.aliyuncs.com/platform?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="username" value="platform"/>
+        <property name="password" value="irhf8HUEF0E4j"/>
        
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="5"/>
@@ -52,9 +52,9 @@
     <!-- 数据源 -->
     <bean id="dataSource2" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-         <property name="url" value="jdbc:mysql://rm-uf67eoo59vi986767.mysql.rds.aliyuncs.com/dktai_cpp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-        <property name="username" value="dktai_cpp"/>
-        <property name="password" value="Dktai2016"/>
+         <property name="url" value="jdbc:mysql://rm-uf6rpwcy8v6t6y2e3.mysql.rds.aliyuncs.com/markettrade?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="username" value="markettrade"/>
+        <property name="password" value="Ug3kf5fPTmn"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="2"/>
         <property name="minIdle" value="5"/>
