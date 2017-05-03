@@ -159,27 +159,27 @@
 					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
 					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
 					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "unpackage/res/icons/144x144.png"
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
 				"ios": {
 					"iphone": {
 						"default": "images/boot/ios/640#960.png", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "images/boot/android/720+1242.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina35": "images/boot/ios/640+960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "images/boot/ios/640+1136.png",
 						"retina47": "images/boot/ios/750+1334.png",
-						"retina55": "images/boot/ios/1242+2208.png","retina55l":"images/boot/ios/1242+2208.png"
+						"retina55": "images/boot/ios/1242+2208.png","retina55l":"images/boot/ios/640+960.png"
 					},
 					"ipad": {
-						"portrait": "images/boot/ios/1242+2208.png", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "images/boot/ios/1242+2208.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "images/boot/ios/1242+2208.png", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "images/boot/ios/1242+2208.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "images/boot/ios/1242+2208.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "images/boot/ios/1242+2208.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "images/boot/ios/1242+2208.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": "images/boot/ios/1242+2208.png"
+						"portrait": "images/boot/ios/640+960.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "images/boot/ios/640+960.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "images/boot/ios/640+960.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "images/boot/ios/640+960.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "images/boot/ios/640+960.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "images/boot/ios/640+960.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "images/boot/ios/640+960.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "images/boot/ios/640+960.png"
 					}
 				},
 				"android": {
