@@ -32,7 +32,7 @@ public class WeChatController {
 	private DataMapService dataMapService;
 	
 	//注册页面
-	private static final String  REDIECTURL = "http://www.qdjinsida.com/signin";
+	private static final String  REDIECTURL = "http://www.mzkqh.com/signin";
 	
 	/**
 	 * 第三方链接  用于生成二维码

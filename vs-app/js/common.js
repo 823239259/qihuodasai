@@ -274,10 +274,10 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain:"http://test.api.qdjinsida.com/", 
+		api_domain:"http://test.api.mzkqh.com/", 
 //		api_domain:"http://192.168.0.72:8080/vs-api/", 
 		//图片地址
-		base_images_url:'http://manage.qdjinsida.com/',
+		base_images_url:'http://manage.mzkqh.com/',
 		//token
 		user_token:'user_token',
 		//密钥 

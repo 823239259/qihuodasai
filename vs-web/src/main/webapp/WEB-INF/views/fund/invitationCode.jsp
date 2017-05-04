@@ -115,7 +115,7 @@
 						<div class="my_invitationCode">
 							<p class="my_jieshao" style="font-weight: bolder;">分享以下邀请链接，好友通过您的链接注册成功并完成实名认证，并成功申请方案，您可获得免手续费的奖励，可累计。</p>
 							<p class="fzwz">
-								<span class="wangzhi" id="test">http://www.qdjinsida.com/signin</span>
+								<span class="wangzhi" id="test">http://www.mzkqh.com/signin</span>
             					<a href="javascript:" id = "anniucopy" class="anniucopy cancelCopy">复制链接</a>
             					<span id="xians" style="float: right; color: red; margin-right: 200px;"></span>
             				</p>
@@ -169,8 +169,8 @@
 		common : {
 			bdText : '自定义分享内容',	
 			bdDesc : '自定义分享摘要',	
-			bdUrl : 'http://www.qdjinsida.com', 	
-			bdPic : 'http://www.qdjinsida.com/static/images/common-new/new_logo.png'
+			bdUrl : 'http://www.mzkqh.com', 	
+			bdPic : 'http://www.mzkqh.com/static/images/common-new/new_logo.png'
 		},
 		share : [{
 			"bdSize" : 16

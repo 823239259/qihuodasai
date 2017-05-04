@@ -67,16 +67,16 @@
 </style>
 <div id="header">
     <div id="customerTel">
-        <a href=""><img src="http://www.qdjinsida.com/templets/style/html/images/image/logo.png"></a>
+        <a href=""><img src="http://www.mzkqh.com/templets/style/html/images/image/logo.png"></a>
         <ul>    
             <li><a href="${ctx}/" id="shouye" class="on">首页</a></li>
             <li><a target="_blank" href="${ctx}/html/qutrade/quoteTrade.html">行情交易</a></li>
             <li><a id="guojiqihuo" href="${ctx}/hsi/index">国际期货</a></li>
- 			<li><a href="http://www.qdjinsida.com/vsnews/about/" title="" >下载中心</a></li>
- 			<li><a href="http://www.qdjinsida.com/vsnews/zimeiti/" title="" >7X24直播</a></li>
- 			<li><a href="http://www.qdjinsida.com/vsnews/rili/" title="" >财经日历</a></li>
-            <li><a href="http://www.qdjinsida.com/vsnews/xuetang/" title="" >期货学堂</a></li>
-            <li><a href="http://www.qdjinsida.com/vsnews/news/" title="" >全球资讯</a></li>
+ 			<li><a href="http://www.mzkqh.com/vsnews/about/" title="" >下载中心</a></li>
+ 			<li><a href="http://www.mzkqh.com/vsnews/zimeiti/" title="" >7X24直播</a></li>
+ 			<li><a href="http://www.mzkqh.com/vsnews/rili/" title="" >财经日历</a></li>
+            <li><a href="http://www.mzkqh.com/vsnews/xuetang/" title="" >期货学堂</a></li>
+            <li><a href="http://www.mzkqh.com/vsnews/news/" title="" >全球资讯</a></li>
         </ul>
     </div>  
     <div id="headerTopRight" class="">

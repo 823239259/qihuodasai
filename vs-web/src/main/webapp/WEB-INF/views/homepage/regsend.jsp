@@ -21,7 +21,7 @@
         <img src="${ctx }/static/images/regsend/banner_02.jpg">
         <img src="${ctx }/static/images/regsend/banner_03.jpg">
         <img src="${ctx }/static/images/regsend/banner_04.jpg">
-        <a href="http://www.qdjinsida.com/signin" target="_blank" title="立即注册">立即注册</a>
+        <a href="http://www.mzkqh.com/signin" target="_blank" title="立即注册">立即注册</a>
     </div>
 </div>
 <div class="main">
