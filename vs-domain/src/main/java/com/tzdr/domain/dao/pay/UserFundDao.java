@@ -78,8 +78,7 @@ public interface UserFundDao extends BaseJpaDao<UserFund, String> {
 	 * @param type Integer
 	 * @return List<UserFund>
 	 */
-	public List<UserFund> findByUidAndPayStatusAndTypeOrderByMoneyDesc(String uid,
-			Short payStatus,Integer type);
+	public List<UserFund> findByUidAndPayStatusAndTypeOrderByMoneyDesc(String uid,Short payStatus,Integer type);
 	
 	/**
 	 * 根据  no 和 type 查询 list

@@ -50,7 +50,7 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 				sql.append(
 						"IFNULL(f.ag_tran_actual_lever,0)+IFNULL(f.lhsi_tran_actual_lever,0)+IFNULL(f.ame_copper_market_lever,0)+IFNULL(f.ame_silver_market_lever,0)+ ");
 				sql.append(
-						"IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)) sumLever ");
+						"IFNULL(f.h_stock_market_lever,0)+IFNULL(f.small_crude_oil_market_lever,0)+IFNULL(f.xhstock_market_lever,0)+IFNULL(f.daxtran_min_actual_lever,0)+IFNULL(f.natural_gas_actual_lever,0)) sumLever ");
 				sql.append(
 						"FROM w_user w inner join w_user_verified v on w.id = v.uid inner join f_simple_ftse_user_trade f on f.uid=w.id where  w.parent_id = '"
 								+ parentId + "' ");
@@ -116,13 +116,13 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 				String sql3 = "SELECT w.id, f.app_time,sum(IFNULL(f.tran_actual_lever, 0) + IFNULL(f.crude_tran_actual_lever,0) + IFNULL(f.hsi_tran_actual_lever, 0) + IFnull(f.mdtran_actual_lever, 0) "
 						+ "+ IFNULL(f.mntran_actual_lever, 0) + IFNULL(f.mbtran_actual_lever, 0) + IFNULL(f.daxtran_actual_lever, 0) + IFNULL(f.nikkei_tran_actual_lever,0) + IFNULL(f.ag_tran_actual_lever, 0) "
 						+ "+ IFNULL(f.lhsi_tran_actual_lever, 0) + IFNULL(f.ame_copper_market_lever,0) + IFNULL(f.ame_silver_market_lever,0) + IFNULL(f.h_stock_market_lever, 0) + IFNULL(f.small_crude_oil_market_lever,0) "
-						+ "+ IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0))/2 lever "
+						+ "+ IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0) + IFNULL(f.natural_gas_actual_lever,0))/2 lever "
 						+ "FROM w_user w Left JOIN w_user_verified v on w.id = v.uid LEFT JOIN f_simple_ftse_user_trade f ON w.id = f.uid "
 						+ "WHERE w.ctime > " + time + " and w.parent_id = '" + parentId+ "' and v.tname <>  '' and f.state_type = 6 "
 						+ "GROUP BY w.id  having sum(IFNULL(f.tran_actual_lever, 0) + IFNULL(f.crude_tran_actual_lever,0) + IFNULL(f.hsi_tran_actual_lever, 0) "
 						+ "+ IFnull(f.mdtran_actual_lever, 0) + IFNULL(f.mntran_actual_lever, 0) + IFNULL(f.mbtran_actual_lever, 0) + IFNULL(f.daxtran_actual_lever, 0) + IFNULL(f.nikkei_tran_actual_lever,0) "
 						+ "+ IFNULL(f.ag_tran_actual_lever, 0) + IFNULL(f.lhsi_tran_actual_lever, 0) + IFNULL(f.ame_copper_market_lever,0) + IFNULL(f.ame_silver_market_lever,0) + IFNULL(f.h_stock_market_lever, 0) "
-						+ "+ IFNULL(f.small_crude_oil_market_lever,0) + IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0))/2 >= 5 ORDER BY f.app_time;";
+						+ "+ IFNULL(f.small_crude_oil_market_lever,0) + IFNULL(f.xhstock_market_lever, 0) + IFNULL(f.daxtran_min_actual_lever,0) + IFNULL(f.natural_gas_actual_lever,0))/2 >= 5 ORDER BY f.app_time;";
 				List<Map<String, Object>> awards = this.nativeQuery(sql3, null);
 				Integer sum = 0;
 				for (int i = 0; i < awards.size(); i++) {
@@ -151,7 +151,8 @@ public class ActivityOldAndNewService extends BaseServiceImpl<OldAndNewStatistic
 						+ "+ IFnull(f.mdtran_actual_lever, 0) + IFNULL(f.mntran_actual_lever, 0) + IFNULL(f.mbtran_actual_lever, 0) + IFNULL(f.daxtran_actual_lever, 0) "
 						+ "+ IFNULL( f.nikkei_tran_actual_lever, 0 ) + IFNULL(f.ag_tran_actual_lever, 0) + IFNULL(f.lhsi_tran_actual_lever, 0) "
 						+ "+ IFNULL( f.ame_copper_market_lever, 0 ) + IFNULL( f.ame_silver_market_lever, 0 ) + IFNULL(f.h_stock_market_lever, 0) "
-						+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) + IFNULL( f.daxtran_min_actual_lever, 0 ))/2 lever "
+						+ "+ IFNULL( f.small_crude_oil_market_lever, 0 ) + IFNULL(f.xhstock_market_lever, 0) "
+						+ "+ IFNULL( f.daxtran_min_actual_lever, 0 ) + IFNULL(f.natural_gas_actual_lever,0))/2 lever "
 						+ "FROM f_simple_ftse_user_trade f WHERE f.state_type = 6 GROUP BY f.uid ) g1 "
 						+ "right JOIN w_user w ON w.id = g1.uid and w.ctime > " + time+ ") g2 INNER JOIN w_user_verified v ON v.uid = g2.id;";
 				List<Map<String, Object>> lists = this.nativeQuery(sql, null);

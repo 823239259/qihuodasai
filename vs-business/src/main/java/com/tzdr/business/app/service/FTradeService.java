@@ -157,7 +157,8 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 		sql.append(" ,f.tran_password,f.end_time,f.tran_profit_loss,f.end_parities ");
 		sql.append(" ,f.tran_fees_total,f.tran_actual_lever,f.crude_tran_actual_lever,f.mdtran_actual_lever ");
 		sql.append(" ,f.hsi_tran_actual_lever,f.mntran_actual_lever,f.mbtran_actual_lever,f.ag_tran_actual_lever,f.lhsi_tran_actual_lever ");
-		sql.append(" ,f.daxtran_actual_lever,f.nikkei_tran_actual_lever,f.daxtran_min_actual_lever,f.xhstock_market_lever,f.ame_copper_market_lever,f.ame_silver_market_lever,f.small_crude_oil_market_lever,f.h_stock_market_lever ");
+		sql.append(" ,f.daxtran_actual_lever,f.nikkei_tran_actual_lever,f.daxtran_min_actual_lever,f.xhstock_market_lever ");
+		sql.append(" ,f.ame_copper_market_lever,f.ame_silver_market_lever,f.small_crude_oil_market_lever,f.h_stock_market_lever,f.natural_gas_actual_lever ");
 		sql.append(" ,f.end_amount,f.state_type,f.business_type ");
 		sql.append(" FROM f_simple_ftse_user_trade f ");
 		sql.append(" WHERE f.id=? AND f.uid=? ");
@@ -283,7 +284,7 @@ public class FTradeService extends BaseServiceImpl<FSimpleFtseUserTrade, FSimple
 	 */
 	public List<FTradeParamsVo> queryFtradeParams(){
 		StringBuffer sql = new StringBuffer(" SELECT atran_actual_lever tran_lever, htran_actual_lever, ytran_actual_lever, mntran_actual_lever, mbtran_actual_lever, daxtran_actual_lever, nikkei_tran_actual_lever, mdtran_actual_lever, hstran_actual_lever, agtran_actual_lever,"
-				+ "h_index_actual_lever,xh_index_actual_lever,a_copper_actual_lever,a_silver_actual_lever,sma_actual_lever,daxtran_min_actual_lever,line_loss, trader_bond, trader_total FROM w_out_disk_parameters ORDER BY trader_bond ASC ");
+				+ "h_index_actual_lever,xh_index_actual_lever,a_copper_actual_lever,a_silver_actual_lever,sma_actual_lever,daxtran_min_actual_lever,natural_gas_actual_lever,line_loss, trader_bond, trader_total FROM w_out_disk_parameters ORDER BY trader_bond ASC ");
 		List<FTradeParamsVo> ftradeParamsVos = this.getEntityDao().queryListBySql(sql.toString(), FTradeParamsVo.class, null);
 		return ftradeParamsVos;
 	}
