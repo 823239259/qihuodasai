@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>修改账号</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">修改账号</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view password-withdramals">
+				<li class="mui-table-view-cell">
+					<label>原号码</label>
+					<input type="number" placeholder="请输入原号码" id="oldMobile" />
+					<button id="code">获取验证码</button>
+				</li>
+				<li class="mui-table-view-cell">
+					<label>验证码</label>
+					<input type="number" placeholder="输入验证码" id="oldCode" />
+				</li>
+			</ul>
+			<ul class="mui-table-view password-withdramals margin-top-5">
+				<li class="mui-table-view-cell">
+					<label>新号码</label>
+					<input type="number" placeholder="请输入新号码" id="newMobile" />
+					<button id="code1">获取验证码</button>
+				</li>
+				<li class="mui-table-view-cell">
+					<label>验证码</label>
+					<input type="number" placeholder="输入验证码" id="newCode" />
+				</li>
+			</ul>
+			<div class="bottom-button-contanier">
+				<button id="confirmPasswordButton">验 证</button>
+				<p>如遇到问题，请拨打<em id="telBtn"> 400-852-8008</em></p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		vs.callService();
+		document.getElementById("code").addEventListener("tap", function() {
+			getCode();
+		});
+		document.getElementById("code1").addEventListener("tap", function() {
+			getnewCode();
+		});
+		//获取短信验证码
+		function getCode() {
+			var mobile = document.getElementById("oldMobile").value;
+			if(!vs.validate_mobile(mobile) || mui.isnull(mobile)) {
+				mui.toast("手机号码不正确");
+				return;
+			}
+			//发送验证码
+			mui.app_request("user/security/send_sms", {
+				"mobile": mobile,
+				"type": 1
+			}, function(result) {
+				mui.toast("发送成功！");
+				var o = document.getElementById("code");
+				vs.smsTime(o);
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("短信验证码发送失败！");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("手机号码已经存在！");
+					return;
+				} else if(result.code == 4) {
+					mui.toast("手机号码不存在！");
+					return;
+				} else if(result.code == 5) {
+					mui.toast("操作过于频繁，请稍候再试！");
+					return;
+				} else {
+					mui.toast("系统繁忙，请稍候再试！");
+					return;
+				}
+			})
+
+		};
+		//获取新验证码
+		function getnewCode() {
+			var oldMobile = document.getElementById("oldMobile").value;
+			var newMobile = document.getElementById("newMobile").value;
+			if(mui.isnull(newMobile) || !vs.validate_mobile(newMobile)) {
+				mui.toast("新手机号码不正确");
+				return;
+			}
+			if(oldMobile == newMobile) {
+				mui.toast("手机号码已经注册");
+				return;
+			}
+			mui.app_request("user/security/send_sms", {
+				"mobile": newMobile,
+				"type": 3
+			}, function(result) {
+				mui.toast("发送成功！");
+				var o = document.getElementById("code1");
+				vs.smsTime_new(o);
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("短信验证码发送失败！");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("手机号码已经注册！");
+					return;
+				} else if(result.code == 5) {
+					mui.toast("操作过于频繁，请稍后再试！");
+					return;
+				}
+			})
+		};
+		/**
+		 * 短信倒计时 60s
+		 * @param {Object} o  点击获取验证码对象
+		 */
+		var time_new = 60;
+		vs.smsTime_new = function(o) {
+			if(time_new == 0) {
+				o.removeAttribute("disabled");
+				o.innerHTML = "获取验证码";
+				time_new = 60;
+				o.style.background = "#fff";
+				o.style.color = "#ffb319";
+			} else {
+				o.setAttribute("disabled", true);
+				o.innerHTML = "倒计时(" + time_new + ")";
+				time_new--;
+				o.style.background = "#33333";
+				o.style.color = "#ffb319";
+				setTimeout(function() {
+						vs.smsTime_new(o);
+					},
+					1000)
+			}
+		}
+		document.getElementById("confirmPasswordButton").addEventListener("tap", function() {
+			passwordSet()
+		})
+		//修改提交
+		function passwordSet() {
+			var oldCode = document.getElementById("oldCode").value;
+			var newCode = document.getElementById("newCode").value;
+			var newMobile = document.getElementById("newMobile").value;
+			if(mui.isnull(newMobile) || !vs.validate_mobile(newMobile)) {
+				mui.toast("新手机号码不正确");
+				return;
+			}
+			if(mui.isnull(oldCode)) {
+				mui.toast("原手机的短信验证码不能为空");
+				return;
+			}
+			if(mui.isnull(newCode)) {
+				mui.toast("新手机的短信验证码不能为空");
+				return;
+			}
+
+			mui.app_request("/user/security/upphone", {
+				"oldCode": oldCode,
+				"newMobile": newMobile,
+				"newCode": newCode
+			}, function(result) {
+				mui.toast("修改成功！请使用新号码登录");
+				mui.cacheUser.clear();
+				mui.app_refresh("login");
+				mui.openWindow("../login/login.html", 'login');
+
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("手机号码已经注册！");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("原验证码超时！");
+					return;
+				} else if(result.code == 4) {
+					mui.toast("原验证码错误！");
+					return;
+				} else if(result.code == 5) {
+					mui.toast("新验证码超时！");
+					return;
+				} else if(result.code == 6) {
+					mui.toast("新验证码错误！");
+					return;
+				} else if(result.code == 7) {
+					mui.toast("原验证码不能为空！");
+					return;
+				} else if(result.code == 8) {
+					mui.toast("新验证码不能为空！");
+					return;
+				} else if(result.code == 9) {
+					mui.toast("新手机号码不能为空！");
+					return;
+				} else {
+					mui.toast("新手机号码格式错误！");
+					return;
+				}
+			})
+
+		};
+	</script>
+
+</html>

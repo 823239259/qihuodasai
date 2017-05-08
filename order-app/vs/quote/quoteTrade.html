@@ -1,0 +1,812 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>行情交易页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<link rel="stylesheet" href="../../css/home.css" />
+		<link rel="stylesheet" href="../../css/quoteTrade.css" />
+		<link rel="stylesheet" href="../../css/layui.css" />
+		<!--<link rel="stylesheet" href="../../css/flashSeting.css" />-->
+		<style>
+			html,
+			body {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #FFFFFF;
+			}
+			
+			.mui-pages {
+				top: 64px;
+				height: auto;
+			}
+			
+			.mui-scroll-wrapper,
+			.mui-scroll {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			
+			.mui-navbar {
+				position: fixed;
+				right: 0;
+				left: 0;
+				z-index: 10;
+				height: 64px;
+				background-color: #ffb319;
+			}
+			
+			.mui-navbar .mui-bar {
+				position: absolute;
+				background: transparent;
+				text-align: center;
+			}
+			
+			.mui-android .mui-navbar-inner.mui-navbar-left {
+				opacity: 0;
+			}
+			
+			.mui-ios .mui-navbar-left .mui-left,
+			.mui-ios .mui-navbar-left .mui-center,
+			.mui-ios .mui-navbar-left .mui-right {
+				opacity: 0;
+			}
+			
+			.mui-navbar .mui-btn-nav {
+				-webkit-transition: none;
+				transition: none;
+				-webkit-transition-duration: .0s;
+				transition-duration: .0s;
+			}
+			
+			.mui-navbar .mui-bar .mui-title {
+				display: inline-block;
+				width: auto;
+			}
+			
+			.mui-navbar-inner.mui-transitioning,
+			.mui-navbar-inner .mui-transitioning {
+				-webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+				transition: opacity 300ms ease, transform 300ms ease;
+			}
+			
+			.mui-page {
+				display: none;
+			}
+			
+			.mui-pages .mui-page {
+				display: block;
+			}
+			
+			.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #ffb319;
+			}
+			
+			.mui-ios .mui-navbar .mui-bar .mui-title {
+				position: static;
+			}
+			
+			.mui-ios .mui-navbar .mui-bar .mui-title.ps {
+				position: absolute;
+				margin-right: -32px;
+			}
+		</style>
+	</head>
+
+	<body id="quote" class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="home" class="mui-page">
+			<nav class="navlist">
+				<a class="navon" href="javascript:void(0);" id="quoteTrade">
+					<span class="mui-icon"><img src="../../img/homeOn.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">首页</span>
+				</a>
+				<a href="javascript:void(0);" id="directSeed">
+					<span class="mui-icon"><img src="../../img/directSeeding.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">直播</span>
+				</a>
+				<a class="" href="javascript:void(0);" id="find">
+					<span class="mui-icon"><img src="../../img/found.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">发现</span>
+				</a>
+				<a class="" id="account" href="javascript:void(0);">
+					<span class="mui-icon"><img src="../../img/my.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">我的</span>
+				</a>
+			</nav>
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left" id="telBtn">
+					<a class="mui-pull-left">客服</a>
+				</button>
+				<h1 class="mui-center mui-title">维胜金融<a class="mui-pull-right right" id="">新手</a></h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-slider" id="slider">
+							<div class="mui-slider-group mui-slider-loop" id="bannerloop">
+								<div class="mui-slider-item">
+									<a href="javascript:void(0);"><img src="../../img/banner_load.jpg" /></a>
+								</div>
+							</div>
+							<div class="mui-slider-indicator" id="indicatorid">
+								<!--<div class="mui-indicator mui-active"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>-->
+							</div>
+						</div>
+						<!--栏目-->
+						<ul class="mui-table-view mui-grid-view mui-grid-9 find-tab" style="background: #fff;">
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="trainingCenter">
+								<a href="#setting">
+									<img src="../../img/find/find_1.png" />
+									<div class="mui-media-body">训练中心</div>
+									<span class="size-11">十万元，免费用</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="globalInformation">
+								<a href="#">
+									<img src="../../img/find/find_2.png" />
+									<div class="mui-media-body">全球资讯</div>
+									<span class="size-11">看资讯，学分析	</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="activityCenter">
+								<a href="#">
+									<img src="../../img/find/find_3.png" />
+									<div class="mui-media-body">活动中心</div>
+									<span class="size-11">大活动，大优惠</span>
+								</a>
+							</li>
+						</ul>
+						<!--合约列表-->
+						<ul id="list" class="mui-table-view mui-table-view-chevron main-list">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
+									<label>
+										<span class="commodityNo">CL</span>
+										<span class="commodityNo_name">期货</span>
+									</label>
+									<p class="title">国际原油<span>CL1702</span><span class="title_number ">33.12</span></p>
+									<p class="time">23小时连续交易
+										<!--<i id="cp_tranfee">¥19.5/单边</i>起--><span class="time_fd">+0.39%</span></p>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:void(0);" id="cn">
+									<label>
+										<span class="commodityNo">CL</span>
+										<span class="commodityNo_name">期货</span>
+									</label>
+									<p class="title">国际原油<span>CL1702</span><span class="title_number">33.12</span></p>
+									<p class="time">23小时连续交易
+										<!--<i id="cp_tranfee">¥19.5/单边</i>起--><span class="time_fd">-0.39%</span></p>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:void(0);" id="">
+									<label>
+										<span class="commodityNo">CL</span>
+										<span class="commodityNo_name">期货</span>
+									</label>
+									<p class="title">国际原油<span>CL1702</span><span class="title_number">33.12</span></p>
+									<p class="time">23小时连续交易
+										<!--<i id="cp_tranfee">¥19.5/单边</i>起--><span class="time_fd">-0.39%</span></p>
+								</a>
+							</li>
+						</ul>
+						<!--关于我们-->
+						<div class="home-about">
+							<ul>
+								<li class="mui-media mui-col-xs-4 mui-col-sm-4">
+									<p><button class="btn mui-btn-grey" id="security">安全保障</button></p>
+								</li>
+								<li class="mui-media mui-col-xs-4 mui-col-sm-4">
+									<p><button class="btn mui-btn-grey" id="inform">风险告知</button></p>
+								</li>
+								<li class="mui-media mui-col-xs-4 mui-col-sm-4">
+									<p><button class="btn mui-btn-grey" id="about">关于我们</button></p>
+								</li>
+							</ul>
+						</div>
+						<ul class="mui-push-right home-iphone mui-table-view">
+							<li class="mui-table-view-cell" id="telBtn">客服电话：400-852-8008</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="setting" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title ps">
+					<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item mui-active" href="#trade">模拟盘下单</a>
+						<a class="mui-control-item" href="#position" >模拟盘持仓</a> 
+					</div>
+				</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div id="trade" class="mui-slider-item mui-control-content mui-active">
+							<div id="Navigation">
+								<div class="navigation-container" id="choiceProductButton">
+									<p>国际原油</p>
+									<p>CL1702</p>
+								</div>
+								<div class="navigation-container">
+									<p>持仓盈亏</p>
+									<p>CL1702</p>
+								</div>
+								<div class="navigation-container">
+									<button id="clearanceButton">一键清仓</button>
+								</div>
+								<div class="navigation-container">
+									<button id="reloadButton">刷新</button>
+								</div>
+								<ul id="choiceProductList">
+								</ul>
+							</div>
+							<div class="candlestick-nav">
+								<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="candlestickNavContainer">
+									<a class="mui-control-item " href="#lightContainerDiv">闪电</a>
+									<a class="mui-control-item mui-active" href="#timeChartContainerDiv">分时</a>
+									<a class="mui-control-item " href="#candlestickContainerDiv">日线▼</a>
+									<a class="mui-control-item" href="#HandicapDiv">盘口</a>
+								</div>
+							</div>
+							<div class="candlestick-nav" id="candlestickNav">
+								<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="candlestickList">
+									<a class=" mui-control-item" data="1440">日线</a>
+									<a class="mui-control-item mui-active" href="#candlestickContainerDiv" data="1">1分</a>
+									<a class="mui-control-item" href="#candlestickContainerDiv" data="5">5分</a>
+									<a class="mui-control-item" href="#candlestickContainerDiv" data="15">15分</a>
+									<a class="mui-control-item" href="#candlestickContainerDiv" data="30">30分</a>
+								</div>
+							</div>
+							<div id="chartContainer">
+								<div class="mui-slider-item mui-control-content " id="lightContainerDiv">
+									<div id="lightContainer">
+										<div style="height: 300px;width: 100%;" id="lightChart"></div>
+									</div>
+								</div>
+								<div class="mui-slider-item mui-control-content  mui-active" id="timeChartContainerDiv">
+									<div id="timeChartContainer">
+										<div style="height: 220px;width: 100%;" id="timeChart"></div>
+										<div style="height: 100px;width: 100%;" id="volumeChart"></div>
+									</div>
+								</div>
+								<div class="mui-slider-item mui-control-content" id="candlestickContainerDiv">
+									<div id="candlestickContainer">
+										<div style="height: 120px;width: 100%;" id="candlestickChartDiv"></div>
+										<div style="height: 200px;width: 100%;" id="candlestickVolumeChart"></div>
+									</div>
+								</div>
+								<div class="mui-slider-item mui-control-content" id="HandicapDiv">
+									<div style="height: 300px;width: 100%;"></div>
+								</div>
+							</div>
+							<div id="bottomContent">
+								<p><span id="lastPrices">55.12</span ><span id="riseAndFall">+0.09</span><span id="riseAndFallRange">+0.18%</span></p>
+								<div id="buySellNum">
+									<ul>
+										<li class="mui-col-xs-5 mui-col-sm-5"><span id="buySellNumLeft"></span><span id="askPrice1">12/<i>59.01</i></span></li>
+										<li class="mui-col-xs-2 mui-col-sm-2"><span>买卖量</span></li>
+										<li class="mui-col-xs-5 mui-col-sm-5"><span id="bidPrice1">12/<i>555</i></span><span id="buySellNumright"></span></li>
+									</ul>
+								</div>
+								<div id="buttonList">
+									<button><a href="#placeOrder">买涨价<i id="bidPrice1Button">59.01</i></a></button>
+									<button><a href="#placeOrder">买跌价<i id="askPrice1Button">59.01</i></a></button>
+									<span id="flashButton"><a href="#flashSeting">快闪</a></span>
+								</div>
+							</div>
+						</div>
+						<div id="position" class="mui-slider-item mui-control-content">
+							<div class="candlestick-nav">
+								<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+									<a class="mui-control-item mui-active" href="#positionList">持仓</a>
+									<a class="mui-control-item" href="#settlementSheet">结算单</a>
+								</div>
+							</div>
+							<div id="positionList" class="mui-slider-item mui-control-content mui-active">
+								<div class="mui-scroll-wrapper" style="height: 400px;">
+									<div class="mui-scroll">
+										<ul id="positionListOrder" style="height: auto;">
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<p>美国原油 CL1702</p>
+												<div>
+													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+													<ul class="position-list-content">
+														<li>止盈<i>1</i></li>
+														<li>买入<i>1</i></li>
+														<li><button id="closePosition">平仓</button></li>
+														<li>止损<i>1</i></li>
+														<li>当前<i>1</i></li>
+														<li><button id="backhand">反手</button></li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+										<p id="allClosePosition">
+											<span>持仓盈亏：<em>$12017.00</em></span>
+											<button>全部平仓</button>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div id="settlementSheet" class="mui-slider-item mui-control-content ">
+								<ul>
+									<li>
+										<p><span>美国原油 CL1702</span><span>2017-01-25 11:30</span></p>
+										<div>
+											<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+											<div>
+												<ul>
+													<li>止盈<i>1</i></li>
+													<li>买入<i>1</i></li>
+													<li>止损<i>1</i></li>
+													<li>当前<i>1</i></li>
+												</ul>
+												<div class="settlement-sate">手动<br>平仓</div>
+											</div>
+											<!--<div class="trigger-close-position">触发止损平仓</div>-->
+										</div>
+									</li>
+									<li>
+										<p><span>美国原油 CL1702</span><span>2017-01-25 11:30</span></p>
+										<div>
+											<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
+											<div>
+												<ul>
+													<li>止盈<i>1</i></li>
+													<li>买入<i>1</i></li>
+													<li>止损<i>1</i></li>
+													<li>当前<i>1</i></li>
+												</ul>
+												<div class="settlement-sate">止损<br>平仓
+												</div>
+											</div>
+											<!--<div class="trigger-close-position">手动平仓</div>-->
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div style="display: none;" id="trade_data">
+							<input type="text" id="lastPrice" />
+							<input type="text" id="contractSize" />
+							<input type="text" id="miniTikeSize" />
+							<input type="text" id="exchangeNo" />
+							<input type="text" id="commodeityNo" />
+							<input type="text" id="contractNo" />
+							<input type="text" id="doSize" />
+							<input type="text" id="totalVolume" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面结束-->
+		<div id="placeOrder" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+						<span class="mui-icon mui-icon-left-nav"></span>
+					</button>
+				<h1 class="mui-center mui-title">
+						<p>美黄金</p><p>GC1702</p
+					</h1>
+			</div>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-page-content">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<p id="flashPassageway">看多价：59.01 持仓至05:55</p>
+							<div class="flash-seting-content">
+								<ul>
+									<li>
+										<label>交易数量：</label>
+										<button class="chioce-button on">1手</button>
+										<button class="chioce-button">3手</button>
+										<button class="chioce-button">16手</button>
+										<button class="chioce-button">11手</button>
+										<button class="chioce-button">10手</button>
+									</li>
+									<li>
+										<label>触发止盈：</label>
+										<span id="closeProfitTable">1440元</span>
+									</li>
+									<li>
+										<label>触发止损：</label>
+										<span id="closeLossTable">1440元</span>
+									</li>
+								</ul>
+							</div>
+							<div id="exchangeRate" class="flash-seting-content">
+								<ul>
+									<li>
+										<label>汇率 - 美元人民币</label>
+										<p>1美元=7.10元人民币</p>
+									</li>
+									<li>
+										<label>支付 - 交易综合手续费</label>
+										<p>（$400）2880元</p>
+									</li>
+									<li>
+										<label>冻结 - 履约保证金</label>
+										<p>（$400）2880元</p>
+									</li>
+								</ul>
+							</div>
+							<div id="flashExplainConatiner">
+								<div class="flash-Explain">
+									<div class="left-div">账户余额：</div>
+									<div class="center-div">100元</div>
+									<div class="right-div">余额不足</div>
+								</div>
+								<div class="rule-div">
+									<input type="text" id="checkboxButton" readonly="readonly" /><label>我已阅读并同意<i>《维胜操盘合作协议》</i></label>
+								</div>
+							</div>
+							<div id="orderList">
+								<label>支付金额: <i>￥2230.00</i>元</label>
+								<button>看多买入</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="flashSeting" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title"><p>美黄金</p><p>GC1702</p></h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<p id="flashPassageway">快速通道设置</p>
+						<div class="flash-seting-content">
+							<ul>
+								<li>
+									<label>交易数量：</label>
+									<button class="chioce-button on">1手</button>
+									<button class="chioce-button">3手</button>
+									<button class="chioce-button">16手</button>
+									<button class="chioce-button">11手</button>
+									<button class="chioce-button">10手</button>
+								</li>
+								<li>
+									<label>触发止盈：</label>
+									<span id="closeProfitTableSeting">1440元</span>
+								</li>
+								<li>
+									<label>触发止损：</label>
+									<span id="closeLossTableSeting">1440元</span>
+								</li>
+							</ul>
+						</div>
+						<div id="exchangeRate" class="flash-seting-content">
+							<ul>
+								<li>
+									<label>汇率 - 美元人民币</label>
+									<p>1美元=7.10元人民币</p>
+								</li>
+								<li>
+									<label>支付 - 交易综合手续费</label>
+									<p>（$400）2880元</p>
+								</li>
+								<li>
+									<label>冻结 - 履约保证金</label>
+									<p>（$400）2880元</p>
+								</li>
+							</ul>
+						</div>
+						<div id="flashExplain">
+							<p>说明：</p>
+							<p>1.一旦开启，点击及买</p>
+							<p>2.关闭以后才可重新设置，开启生效</p>
+						</div>
+						<div class="openFlash">
+							<button>立即开启</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="operateDetailed" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">操盘明细</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="operate-detail-top">
+							<div><em>+0</em>元（盈利）</div>
+							<ul>
+								<li><span>0</span><span>成交（手）</span></li>
+								<li><span>0</span><span>盈利（手）</span></li>
+								<li><span>0</span><span>胜率</span></li>
+							</ul>
+						</div>
+						<p class="BgF2F2F2"></p>
+						<ul class="mui-table-view mui-table-view-chevron operate-detail-list">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="">
+									当前持仓<em>（2）</em>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="">
+									历史交易<em>（2）</em>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="test"></div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.view.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/quote/echarts.min.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.config.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.send.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.connect.js"></script>
+	<script type="text/javascript" src="../../js/quote/chart.config.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.candlestick.chart.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.lghtning.chart.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.time.chart.js"></script>
+	<script type="text/javascript" src="../../js/quote/quote.js"></script>
+	<script type="text/javascript" src="../../js/layui.js"></script>
+	<script type="text/javascript" src="../../js/quote/mui.page.js"></script>
+	<script type="text/javascript" src="../../js/alertProtype.js"></script>
+	<script type="text/javascript" src="../../js/quote/quoteBindEvent.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		vs.callService();
+		/*var paramUrl={
+			url:"tzdr/login/login.html"
+		}*/
+		initBottom("../account/account.html","../find/find.html","quoteTrade.html","../directSeed/directSeed.html");
+		/*打开训练中心*/
+		/*document.getElementById("trainingCenter").addEventListener("tap",function() {
+			mui.openWindow("../quote/quoteTrade.html","quoteTrade");
+		});*/
+		/*打开全球资讯*/
+		document.getElementById("globalInformation").addEventListener("tap", function() {
+			mui.openWindow("../find/informationCenter/informationCenter.html", "informationCenter");
+		});
+		/*打开活动中心*/
+		document.getElementById("activityCenter").addEventListener("tap", function() {
+			mui.openWindow("../find/activityCenter/activityCenter.html", "activityCenter");
+		});
+		document.getElementById("security").addEventListener("tap", function() {
+			mui.openWindow("../login/safetyGuarantee.html", "safetyGuarantee");
+		});
+		document.getElementById("inform").addEventListener("tap", function() {
+			mui.openWindow("../login/riskAcknowledgements.html", "riskAcknowledgements");
+		});
+		document.getElementById("about").addEventListener("tap", function() {
+			mui.openWindow("../login/aboutUs.html", "aboutUs");
+		});
+		/** 
+		 * banner 至少6张最好  
+		 */
+		//获取banner图片
+		var imgId = [];
+		mui.plusReady(function() {
+			mui.app_request("/banner/list", {}, function(result) {
+				//console.log(JSON.stringify(result));
+				var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
+				if(bannerLen > 0) {
+					var banner_content = '';
+					var indicator_content = '';
+					for(var i = 0; i < bannerLen; i++) {
+
+						if(i == 0) {
+							banner_content += addBanner(result.data.bannerList[bannerLen - 1], true);
+							indicator_content += '<div class="mui-indicator mui-active"></div>';
+						} else {
+							indicator_content += '<div class="mui-indicator"></div>';
+						}
+
+						banner_content += addBanner(result.data.bannerList[i]);
+
+						if(i == (bannerLen - 1)) {
+							banner_content += addBanner(result.data.bannerList[0], true);
+						}
+
+					}
+					document.getElementById('bannerloop').innerHTML = banner_content;
+					document.getElementById('indicatorid').innerHTML = indicator_content;
+				}
+				var slider = mui("#slider");
+				slider.slider({ interval: 3000 });
+			}, function(result) {
+
+			});
+			//新增banner 显示
+			var timeNum = 0;
+
+			function addBanner(banner, firstend) {
+				var _html = '';
+				if(firstend) {
+					_html = '<div class="mui-slider-item mui-slider-item-duplicate" >';
+				} else {
+					_html = '<div class="mui-slider-item">';
+				}
+				_html += '<a class="id" href="javascript:void(0);" id="' + banner.newId + '" data-id="' + timeNum + '"><img src="' + vs.constants.base_images_url + banner.imgPath + '" title=""/>';
+				_html += '</a></div>';
+				imgId.push(banner.newId);
+				timeNum++;
+				return _html;
+			}
+			//监听banner点击事件
+			var clickNum = 0;
+			mui("#bannerloop").on('tap', 'a', function() {
+				//获取id
+				var nid = this.getAttribute("id");
+				if(clickNum <= imgId.length - 1) {
+					var clickId = $(this).attr('data-id');
+					nid = imgId[clickId];
+					clickNum++;
+				}
+				var str = "http";
+				if(nid == "" || nid == null || nid.length == 0) {} else if(nid.indexOf(str) == -1) {
+					//mui.openWindow({url:"vs/news/news.html",id:nid,extras:{nid:nid}});
+				} else {
+					//mui.openWindow({url:"vs/news/active.html",id:"active",extras:{nid:nid}});
+				}
+			});
+		});
+	</script>
+
+</html>

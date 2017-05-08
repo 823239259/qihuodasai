@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/home.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-pull-left" id="">客服</a>
+		    <h1 class="mui-title">维胜金融</h1>
+		    <a class="mui-pull-right" id="">新手</a>
+		</header>
+		<nav class="navlist">
+			<a class="navon" href="javascript:void(0);" id="quoteTrade">
+				<span class="mui-icon"><img src="../../img/homeOn.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a href="javascript:void(0);"  id="directSeed">
+				<span class="mui-icon"><img src="../../img/directSeeding.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">直播</span>
+			</a>
+			<a class="" href="javascript:void(0);"  id="find">
+				<span class="mui-icon"><img src="../../img/found.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			<a class="" id="account" href="javascript:void(0);">
+				<span class="mui-icon"><img src="../../img/my.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label" >我的</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<!--轮播-->
+			<div class="mui-slider" id="slider">
+			  	<div class="mui-slider-group mui-slider-loop" id="bannerLoop" >
+			  		<div class="mui-slider-item" ><a href="javascript:void(0);"><img src="../../img/banner_load.jpg"/></a></div>
+			  	</div>
+			  	<div class="mui-slider-indicator" id="indicatorid">
+					<!--<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>-->
+				</div>
+			</div>
+			<!--栏目-->
+	        <ul class="mui-table-view mui-grid-view mui-grid-9 find-tab" style="background: #fff;">
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="trainingCenter">
+	            	<a href="#">
+	                    <img src="../../img/find/find_1.png"/>
+	                    <div class="mui-media-body">训练中心</div>
+	                    <span class="size-11">十万元，免费用</span>
+	            	</a>
+	            </li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="globalInformation">
+	            	<a href="#">
+	                    <img src="../../img/find/find_2.png"/>
+	                    <div class="mui-media-body">全球资讯</div>
+	                    <span class="size-11">看资讯，学分析	</span>
+	            	</a>
+	            </li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="activityCenter">
+	            	<a href="#">
+	                    <img src="../../img/find/find_3.png"/>
+	                    <div class="mui-media-body">活动中心</div>
+	                    <span class="size-11">大活动，大优惠</span>
+	            	</a>
+	            </li>
+	        </ul>
+	       	<!--合约列表-->
+	        <ul id="list" class="mui-table-view mui-table-view-chevron main-list">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0);" id="cp">
+						<label>
+							<span class="commodityNo">CL</span>
+							<span class="commodityNo_name">期货</span>
+						</label>
+						<p class="title">国际原油<span>CL1702</span><span class="title_number ">33.12</span></p>
+						<p class="time">23小时连续交易<!--<i id="cp_tranfee">¥19.5/单边</i>起--><span class="time_fd">+0.39%</span></p>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0);" id="cn">
+						<label>
+							<span class="commodityNo">CL</span>
+							<span class="commodityNo_name">期货</span>
+						</label>
+						<p class="title">国际原油<span>CL1702</span><span class="title_number">33.12</span></p>
+						<p class="time">23小时连续交易<!--<i id="cp_tranfee">¥19.5/单边</i>起--><span class="time_fd">-0.39%</span></p>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0);" id="">
+						<label>
+							<span class="commodityNo">CL</span>
+							<span class="commodityNo_name">期货</span>
+						</label>
+						<p class="title">国际原油<span>CL1702</span><span class="title_number">33.12</span></p>
+						<p class="time">23小时连续交易<!--<i id="cp_tranfee">¥19.5/单边</i>起--><span class="time_fd">-0.39%</span></p>
+					</a>
+				</li>
+			</ul>
+			<!--关于我们-->
+			<div class="home-about">
+				<ul>
+					<li class="mui-media mui-col-xs-4 mui-col-sm-4">
+						<p>安全保障</p>	
+					</li>
+					<li class="mui-media mui-col-xs-4 mui-col-sm-4">
+						<p>风险告知</p>
+					</li>
+					<li class="mui-media mui-col-xs-4 mui-col-sm-4">
+						<p>关于我们</p>
+					</li>
+				</ul>
+			</div>
+			<p class="mui-push-right home-iphone">客服电话：400-852-8008</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		//initBottom("../account/account.html","../find/find.html","../quote/quoteTrade.html","../directSeed/directSeed.html");
+		/*打开训练中心*/
+		document.getElementById("trainingCenter").addEventListener("tap",function() {
+			mui.openWindow("../quote/quoteTrade.html","quoteTrade");
+		});
+		/*打开全球资讯*/
+		document.getElementById("globalInformation").addEventListener("tap",function() {
+			mui.openWindow("../find/informationCenter/informationCenter.html","informationCenter");
+		});
+		/*打开活动中心*/
+		document.getElementById("activityCenter").addEventListener("tap",function() {
+			mui.openWindow("../find/activityCenter/activityCenter.html","activityCenter");
+		});
+		/** 
+		 * banner 至少6张最好  
+		 */
+		//获取banner图片
+		/*var imgId=[];
+		mui.app_request('banner/list',{},
+			function(result) {
+				var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
+				if (bannerLen>0) { 
+					var  banner_content='';
+					var indicator_content='';
+					for (var i=0;i<bannerLen;i++) { 
+						
+						if (i==0) {
+							banner_content +=addBanner(result.data.bannerList[bannerLen-1],true);
+							indicator_content+='<div class="mui-indicator mui-active"></div>';
+						}else
+						{
+							indicator_content+='<div class="mui-indicator"></div>';
+						}  
+						 
+						banner_content +=addBanner(result.data.bannerList[i]); 
+						
+						if (i==(bannerLen-1)) { 
+							banner_content +=addBanner(result.data.bannerList[0],true); 
+						}
+						
+					} 
+					//alert(banner_content);
+					document.getElementById('bannerLoop').innerHTML=banner_content;
+					document.getElementById('indicatorid').innerHTML=indicator_content; 
+				}
+				var slider = mui("#slider");  
+				slider.slider({interval: 3000});
+				
+			},
+			function() {
+				
+			},paramUrl
+		);*/
+		//新增banner 显示
+		/*var timeNum=0;
+		function addBanner(banner,firstend) {
+			var _html='';
+			if (firstend) {
+				 _html='<div class="mui-slider-item mui-slider-item-duplicate" >';
+			}
+			else { 
+				 _html='<div class="mui-slider-item">';
+			}
+			_html +='<a class="id" href="javascript:void(0);" id="'+banner.newId+'" data-id="'+timeNum+'"><img src="'+tzdr.constants.base_images_url+banner.imgPath+'" title=""/>';
+			_html +='</a></div>';
+			imgId.push(banner.newId);
+			timeNum++;
+			return _html;
+		}*/
+		//监听banner点击事件
+		/*var clickNum=0;
+		mui("#bannerLoop").on('tap','a',function() {		 
+		//获取id
+			var nid = this.getAttribute("id");
+			if(clickNum<=imgId.length-1) {
+				var clickId = $(this).attr('data-id');
+				nid=imgId[clickId];
+				clickNum++;
+			}
+			var str="http";
+			if(nid == "" || nid == null || nid.length == 0 ) {
+			}else if(nid.indexOf(str)==-1){
+			mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
+			}else {
+				mui.openWindow({url:"tzdr/news/active.html",id:"active",extras:{nid:nid}});
+			}
+			//mui.openWindow({url:"tzdr/quotation/activity.html",id:"activity"});
+			//mui.openWindow({url:"tzdr/news/news.html",id:nid,extras:{nid:nid}});
+		});*/
+	</script>
+</html>

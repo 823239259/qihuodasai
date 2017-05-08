@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>活动中心</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/common.css" />
+		<link rel="stylesheet" href="../../../css/activityCenter.css" />
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">活动中心</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-slider mui-fullscreen">
+				<div class="mui-slider-group">
+					<div id="activityCenter" class="mui-slider-item mui-control-content mui-active">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll" data-url="http://127.0.0.1:8020/kanakn1/directSeed-news.json">
+								<!--数据列表-->
+								<ul class="mui-table-view">
+									<!--<li class="mui-table-view-cell">
+										<div class="mui-slider-item">
+											<img src="../../../img/find/banner_load.jpg">
+											<span class="activityCenter">已结束</span>
+										</div>
+									</li>-->
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="../../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../../js/mui.pullToRefresh.material.js"></script>
+		<script>
+			mui.init();
+			(function($) {
+				//阻尼系数
+				var url= [
+				"http://127.0.0.1:8020/kanakn1/directSeed-news.json"
+				]
+				var deceleration = mui.os.ios?0.003:0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration:deceleration
+				});
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						var div = this;
+             			$.ajax({
+	        				type: "GET",
+	        				url: url[index],
+	        				dataType: 'json',
+	        				success: function(data){
+	        					setTimeout(function() {
+									var ul = div.querySelector('.mui-table-view');
+									var length = data.directSeedNews.length < 10 ? data.directSeedNews.length: 10;
+									var li;
+									for (var i = 0; i < length; i++) {
+										li = document.createElement('li');
+										li.className = 'mui-table-view-cell';
+										li.innerHTML = '<div class="mui-slider-item" >' +
+	            							'<img src="../../../img/find/banner_load.jpg"/>'+
+	            							'<span class="activityCenter">已结束</span>'+
+	            							'</div>';
+										ul.appendChild(li);
+									}
+								}, 1500);
+								refresh();
+							},
+			        		error: function(data){
+			        			setTimeout(function() {
+									var ul = div.querySelector('.mui-table-view');
+									var li;
+										li = document.createElement('li');
+										li.innerHTML = '<div id="noSearchResultContainer" >' +
+	            							'暂无活动喔，你可关注维胜公众号留意近期活动~</div>';
+										ul.appendChild(li);
+								}, 1500);
+			        		}
+	    				});
+	    				function refresh() {
+	    					$(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										var length = ul.querySelectorAll('li').length;
+										var fragment = document.createDocumentFragment();
+										var li;
+										for (var i = 0; i < 10; i++) {
+											li = document.createElement('li');
+											li.className = 'mui-table-view-cell';
+											li.innerHTML = '<div class="mui-slider-item" >' +
+	            							'<img src="../../../img/find/banner_load.jpg"/>'+
+	            							'<span class="activityCenter">已结束</span>'+
+	            							'</div>';
+											ul.insertBefore(li, ul.firstChild);
+										}
+										self.endPullDownToRefresh();
+									}, 1500);
+								}
+							},
+							up: {
+								contentrefresh: '正在加载更多的数据...',
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										var length = ul.querySelectorAll('li').length;
+										var fragment = document.createDocumentFragment();
+										var li;
+										for (var i = 0; i < 10; i++) {
+											li = document.createElement('li');
+											li.className = 'mui-table-view-cell';
+											li.innerHTML = '<div class="mui-slider-item" >' +
+	            							'<img src="../../../img/find/banner_load.jpg"/>'+
+	            							'<span class="activityCenter">已结束</span>'+
+	            							'</div>';
+											ul.appendChild(li);
+										}
+										self.endPullUpToRefresh();
+									}, 1500);
+								}
+							}
+						});	
+	    				}
+					});
+				});
+			})(mui);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,6 @@
+@charset "utf-8";
+body{background-color: #FFFFFF;}
+.mui-content{padding: 0px 15px; background-color: #FFFFFF;}
+.rule-content{width: 100%; background: url(../img/quote/circle.png) no-repeat left 15px; background-size: 10px; padding-left: 20px; border-bottom: 1px solid #e5e5e5;}
+.rule-content p:nth-child(1){font-size: 15px; color:#333333; padding: 10px 0px;}
+.rule-content p:nth-child(2){font-size: 13px; color:#999999; margin-bottom: 10px;}

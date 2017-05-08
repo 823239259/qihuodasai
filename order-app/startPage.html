@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>启动页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/common.css" rel="stylesheet"/>
+		<link href="css/account.css" rel="stylesheet" />
+		<link href="css/own.css" rel="stylesheet"/>
+	</head>
+	<body style="background-color: #fcca00;">
+		<img src="img/startPageBG.png" />
+	</body>
+	<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script>
+		$("body").css({"background-color":"#fcca00"});
+		$("img").css({
+			"width":window.innerWidth+"px ",
+			"height":window.innerHeight-4+"px",
+		});
+		setTimeout(function(){
+			mui.openWindow({
+				"url":"vs/find/find.html",
+				"id":"find"
+			})
+		},2000)
+	</script>
+</html>

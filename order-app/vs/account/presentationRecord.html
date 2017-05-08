@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">提现记录</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view presentation-record-information-list">
+				<li class="mui-table-view-cell">
+						<label class="bank-information-title">
+							<span>中国工商银行 (0803)</span>
+							<span>17-01-09 12:01:43</span>
+						</label>
+						<label class="withdrawals-state">
+							<span>-10元</span>
+							<span>未处理</span>
+						</label>
+				</li>
+				<li class="mui-table-view-cell">
+					<label class="bank-information-title">
+						<span>中国工商银行 (0803)</span>
+						<span>17-01-09 12:01:43</span>
+					</label>
+					<label class="withdrawals-state">
+						<span>-10元</span>
+						<span>未处理</span>
+					</label>
+				</li>
+				<li class="mui-table-view-cell">
+					<label class="bank-information-title">
+						<span>中国工商银行 (0803)</span>
+						<span>17-01-09 12:01:43</span>
+					</label>
+					<label class="withdrawals-state">
+						<span>-10元</span>
+						<span>未处理</span>
+					</label>
+				</li>
+				<li class="mui-table-view-cell">
+					<label class="bank-information-title">
+						<span>中国工商银行 (0803)</span>
+						<span>17-01-09 12:01:43</span>
+					</label>
+					<label class="withdrawals-state">
+						<span>-10元</span>
+						<span>未处理</span>
+					</label>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+			//提现明细
+		  	mui.app_request("/user/fund/list",{"type":2},function(result){
+		  		if(!mui.isnull(result.data)){
+		  			console.log(JSON.stringify(result.data))
+		  		}
+		  	},function(result){
+		  		return;
+		  	});
+	</script>
+</html>

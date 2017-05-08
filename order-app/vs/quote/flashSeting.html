@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/flashSeting.css" />
+		<title>快闪设置</title>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title"><p>美黄金</p><p>GC1702</p></h1>
+		</header>
+		<div class="mui-content">
+			<p id="flashPassageway">快速通道设置</p>
+			<div class="flash-seting-content">
+				<ul>
+					<li>
+						<label>交易数量：</label>
+						<button class="chioce-button on">1手</button>
+						<button class="chioce-button">3手</button>
+						<button class="chioce-button">16手</button>
+						<button class="chioce-button">11手</button>
+						<button class="chioce-button">10手</button>
+					</li>
+					<li>
+						<label>触发止盈：</label>
+						<span id="closeProfitTable">1440元</span>
+					</li>
+					<li>
+						<label>触发止损：</label>
+						<span id="closeLossTable">1440元</span>
+					</li>
+				</ul>
+			</div>
+			<div id="exchangeRate" class="flash-seting-content">
+				<ul>
+					<li>
+						<label>汇率 - 美元人民币</label>
+						<p>1美元=7.10元人民币</p>
+					</li>
+					<li>
+						<label>支付 - 交易综合手续费</label>
+						<p>（$400）2880元</p>
+					</li>
+					<li>
+						<label>冻结 - 履约保证金</label>
+						<p>（$400）2880元</p>
+					</li>
+				</ul>
+			</div>
+			<div id="flashExplain">
+				<p>说明：</p>
+				<p>1.一旦开启，点击及买</p>
+				<p>2.关闭以后才可重新设置，开启生效</p>
+			</div>
+			<div class="openFlash">
+				<button >立即开启</button>
+			</div>
+			<div class="mui-backdrop" id="chioceProfit">
+				<div id="alertContent1">
+					<div  class="alert-content-inside">
+						<span id="closeCirlcle"></span>
+						<ul id="buttonListLi">
+							<li class="on">1元</li>
+							<li>2元</li>
+							<li>3元</li>
+							<li>3元</li>
+							<li>3元</li>
+							<li>3元</li>
+							<li>3元</li>
+							<li>3元</li>
+						</ul>
+						<button id="confirmBottonProfit">确认</button>
+						<button id="cancelBottonProfit">取消</button>
+					</div>
+				</div>
+			</div>
+			<div class="mui-backdrop" id="chioceStopLoss">
+				<div id="alertContent2">
+					<div  class="alert-content-inside">
+						<span id="closeCirlcleStopLoss"></span>
+						<ul id="buttonListLiStopLoss">
+							<li class="on">1元</li>
+							<li>2d元</li>
+							<li>3d元</li>
+							<li>3d元</li>
+							<li>3d元</li>
+							<li>3d元</li>
+							<li>3d元</li>
+							<li>3d元</li>
+						</ul>
+						<button id="confirmStopLossBotton">确认</button>
+						<button id="cancelStopLossBotton">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/common.js"></script>
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		mui.init();
+		var alertContent=document.getElementById("buttonListLi");
+		var buttonListLiStopLoss=document.getElementById("buttonListLiStopLoss");
+		mui("#buttonListLi").on("tap","li",function(){
+			var li=document.getElementById("buttonListLi").getElementsByTagName("li");
+			mui.each(li,function(i,item){
+				if(item.getAttribute("class")=="on"){
+						item.setAttribute("class","");
+					}
+			});
+			this.setAttribute("class","on");
+		});
+		mui("#buttonListLiStopLoss").on("tap","li",function(){
+			var li=document.getElementById("buttonListLiStopLoss").getElementsByTagName("li");
+			mui.each(li,function(i,item){
+				if(item.getAttribute("class")=="on"){
+						item.setAttribute("class","");
+					}
+			});
+			this.setAttribute("class","on");
+		})
+		$(".chioce-button").on("tap",function(){
+			 $(this).addClass('on');    // 设置被点击元素为黄色
+			$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+		})
+		document.getElementById("closeProfitTable").addEventListener("tap",function(){
+			$("#chioceProfit").css("display","block");
+			var height=alertContent.offsetHeight;
+			$("#alertContent1").css({"height":height+75+"px","margin-top":-(height+75)/2+"px"});
+		});
+		document.getElementById("closeCirlcle").addEventListener("tap",function(){
+			$("#chioceProfit").css("display","none");
+		});
+		document.getElementById("cancelBottonProfit").addEventListener("tap",function(){
+			$("#chioceProfit").css("display","none");
+		});
+		document.getElementById("confirmBottonProfit").addEventListener("tap",function(){
+			$("#chioceProfit").css("display","none");
+			var text=$("#buttonListLi li.on").text();
+			$("#closeProfitTable").text(text);
+		});
+		document.getElementById("closeLossTable").addEventListener("tap",function(){
+			$("#chioceStopLoss").css("display","block");
+			var height=buttonListLiStopLoss.offsetHeight;
+			$("#alertContent2").css({"height":height+75+"px","margin-top":-(height+75)/2+"px"});
+		});
+		document.getElementById("closeCirlcleStopLoss").addEventListener("tap",function(){
+			$("#chioceStopLoss").css("display","none");
+		});
+		document.getElementById("cancelStopLossBotton").addEventListener("tap",function(){
+			$("#chioceStopLoss").css("display","none");
+		});
+		document.getElementById("confirmStopLossBotton").addEventListener("tap",function(){
+			$("#chioceStopLoss").css("display","none");
+			var text=$("#buttonListLiStopLoss li.on").text();
+			$("#closeLossTable").text(text);
+		});
+	</script>
+</html>

@@ -1,0 +1,44 @@
+@charset "utf-8";
+/*
+ *登录
+ * */
+html, body {background: #f25749;}
+.mui-bar-nav~.mui-content {background: #f25749;}
+.mui-bar {background: #f25749;}
+.mui-title {color: #ffffff;}
+.top-tel {color: #ffffff!important;}
+#logo {padding-top: 40px; margin-bottom: 20%;}
+#logo img {width: 100px; height: auto; display: block; margin: auto;}
+.mui-icon-arrowleft:before {color: #fff;}
+#back {height: 44px; line-height: 44px;}
+#inputList {width: 100%; padding: 0px 20px;}
+.commStyle {margin-top: 15px; height: 42px; line-height: 42px; font-size: 13px; color: #fff;}
+.commStyle label {line-height: 42px; height: 42px; float: left; width: 10px; padding: 0px; margin-left: 30px; position: absolute;}
+.commStyle label img {height: 42px;}
+.mui-input-row {background: url(../img/login/inputBimg.png) no-repeat; width: 100%; background-size: 100% 100%;}
+.mui-input-row label~input {height: 42px; font-size: 13px; width: 100%; adding: 0px; padding-left: 50px;}
+.mui-btn-block {height: 42px; line-height: 42px; padding: 0px; margin-bottom: 0px; border-radius: 20px; color: #f25749; font-size: 17px;}
+.footer {position: absolute; bottom: 17px; text-align: center; font-size: 13px; color: #ffffff; width: 100%;}
+.mui-input-row .mui-input-clear~.mui-icon-clear {color: #ffffff; right: 15px;}
+/*提示颜色*/
+::-webkit-input-placeholder { /* WebKit browsers */ color: #ffffff; } 
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #ffffff; } 
+::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #ffffff;} 
+:-ms-input-placeholder { /* Internet Explorer 10+ */ color: #ffffff; }
+/*
+ *注册
+ * */
+.login {text-align: center; margin-top: 5px;}
+#yzm {position: absolute; right: 30px;}
+#checkbox {display: inline-block; background: url(../img/login/registerInput.png) no-repeat; width: 10px; height: 10px; background-size: 100% 100%; position: relative; top: 1px; margin-right: 5px;}
+#checkbox.checked {background: url(../img/login/registerInputOn.png) no-repeat; background-size: 100% 100%;}
+.checked {font-size: 11px; text-align: center; margin-top: 5px;}
+/*
+ *切换登录
+ * */
+#switchAccount {text-align: center; font-size: 17px; color: #ffffff;}
+/*.passwordIputList .mui-input-row label~input{padding-left:0px}*/
+/*.passwordIputList input{padding-left:0px ;}*/
+/*.passwordIputList label{margin-left:0px; width:80px};
+
+.*/

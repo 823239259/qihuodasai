@@ -1,0 +1,302 @@
+/**
+ * 首页
+ */
+@charset "utf-8";
+#list {border-top: 10px solid #f2f2f2;}
+body{background-color: #FFFFFF;}
+.mui-content{background-color: #f2f2f2;}
+#list.mui-table-view:before {background: #ffffff;}
+#list.mui-table-view:after {background: #ffffff;}
+#list .mui-table-view-cell a span {font-style: normal; vertical-align: 5px; padding-left: 10px; font-weight: normal; font-size: 15px; color: #333333;}
+.account-title {}
+.account-title img {width: 30px; height: 30px;}
+.account-title a span {font-style: normal; vertical-align: 9px; padding-left: 10px; font-weight: normal; font-size: 13px; color: #333333;}
+.account-title .account-signer {}
+.account-title .account-signer li {float: left; text-align: center;}
+.ac-list .account-signer li p {font-size: 15px; height: 35px; line-height: 35px; border-radius: 4px;}
+.ac-list .account-signer li p.account-signer-left {width: 95%; margin-right: 5%; background: #ffb319; color: #fff;}
+.ac-list .account-signer li p.account-signer-right {width: 95%; margin-left: 5%; background: #ffffff; border: 1px solid #ffb319; color: #ffb319;}
+.mui-table-view-chevron .account-tab {position: relative; overflow: hidden; padding: 11px 15px;}
+.account-balance {font-size: 13px; color: #999999;}
+.account-balance {font-size: 13px; color: #999999;}
+.account-money {font-size: 17px; color: #ffb319; margin-bottom: 10px;}
+.mui-bar-nav~.mui-content {margin-bottom: 49px;}
+/*
+客服 */
+.customer-service .mui-table-view-cell:after{background-color: #FFFFFF;}
+.customer-service .mui-table-view:after{background-color: #E5E5E5;}
+.customer-service .mui-table-view:before{background-color: #FFFFFF;}
+.customer-service .mui-table-view-cell{height: 50px; color: #333333; font-size: 15px;border-bottom: 1px solid #E5E5E5;}
+.customer-service .mui-table-view-cell a{height: 50px; line-height: 28px; }
+.customer-service-list{margin-top: 0px !important;}
+/*
+ 修改银行*/
+.mui-content{background-color: #F2F2F2;}
+.mui-content>.mui-table-view:first-child{margin-top: 0px;}
+.top-bank-information{height: 60px; padding: 0px 15px; background-color: #FFFFFF; border-bottom: 1px solid #E5E5E5;}
+.top-bank-information label:nth-child(1){float: left; height: 60px; line-height: 60px;}
+.top-bank-information label img{width: 25px; height:  25px; vertical-align: middle;}
+.top-bank-information div{float: left; height: 60px;margin-left: 15px; color: #333333; font-size: 15px; padding: 13px 0px;}
+.top-bank-information div span{display: block; }
+.top-bank-information span:nth-child(2){color: #999999; font-size: 13px;}
+.top-bank-information label:nth-child(3){float: right; height: 60px; line-height: 60px; font-size: 13px; color: #999999;}
+/*.modify-bank-information-list{margin-top: 5px;}*/
+.modify-bank-information-list li{height: 50px; line-height: 50px;}
+.modify-bank-information-list li  label{height: 28px; line-height: 28px;color: #333333; font-size: 15px; float: left;}
+.modify-bank-information-list li input{width: 80%; float: right; border: none; text-align: right;margin-bottom: 0px; padding: 0px 20px 0px 0px; height: 50px; line-height: 50px; margin-top: -10px; font-size: 15px; color: #666666;}
+.modify-bank-information-list li  span{height: 28px; display: block; float: right; line-height: 28px; color: #333333; font-size: 15px; margin-right: 20px; color: #666666;}
+/*
+ 意见反馈页面
+ */
+.feedback-tips{margin-top: 5px; background-color: #FFFFFF; padding: 10px 15px; height: auto; overflow: hidden;}
+.feedback-tips p{color:  #666666; font-size: 13px; line-height: 25px; }
+.feedback-tips div:nth-child(2){float: left; width: 100%; border-bottom: 1px solid #E5E5E5;height: 14px;}
+.feedback-tips div:nth-child(3){position: absolute; right: 15px; line-height: 25px; font-size: 13px; color: #333333; background-color: #FFFFFF; padding: 0px 0px 0px 17px;}
+.feedback-content{padding: 0px 15px; background-color: #FFFFFF;}
+.feedback-content textarea,.feedback-content input{border: 1px solid #e5e5e5; background-color: #f2f2f2; width: 100%; font-size: 13px; color: #999999; }
+.feedback-content textarea{margin-bottom: 5px; height: 120px;} 
+.feedback-content input{margin-bottom: 0px; height: 40px;}
+/*
+ 修改登录密码
+ */
+.mui-content .passwore-row-contanier{padding: 0px 0px 0px 15px; background-color: #FFFFFF;}
+.mui-content .passwore-row-contanier .passwore-row{width: 100%; height: 50px; line-height: 50px; }
+.mui-content .passwore-row-contanier .passwore-row label{width: auto; color: #333; font-size: 15px; float: left; }
+.mui-content .passwore-row-contanier .passwore-row input{width: 80%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px 15px 0px 0px;height: 49px; line-height: 49px; margin: 0px; }
+.mui-content .passwore-row-contanier:nth-child(2){border-bottom: 1px solid #E5E5E5; margin-top: 5px;}
+.mui-content .passwore-row-contanier .new-passsword-row{border-bottom: 1px solid #E5E5E5;}
+/*
+ 实名验证页面
+ */
+.real-name-verification{border-bottom: 1px solid #E5E5E5;}
+/*
+ 我的银行卡页面
+ */
+ .mui-content>.mui-table-view:first-child{margin-top: 0px;}
+.mycard-list .mui-table-view-cell:after{background-color: #FFFFFF;}
+.mycard-list .mui-table-view:after{background-color: #FFFFFF;}
+.mycard-list .mui-table-view:before{background-color: #FFFFFF;}
+.mycard-list .mui-table-view-cell{height: 60px; color: #333333; font-size: 15px;border-bottom: 1px solid #E5E5E5;}
+.mycard-list .mui-table-view-cell a{height: 60px; }
+.mycard-list .my-bank-list label{float: left; height: 60px; line-height: 38px;}
+.mycard-list .my-bank-list label img{width: 25px; height:  25px; vertical-align: middle;}
+.mycard-list .my-bank-list div{float: left; height: 38px;margin-left: 15px; color: #333333; font-size: 15px;}
+.mycard-list .my-bank-list div span{display: block; line-height: 21px;}
+.mycard-list .my-bank-list div span:nth-child(2){color: #999999; font-size: 13px;}
+.bind-card{height: 60px; line-height: 60px; padding: 0px 15px; background-color: #FFFFFF; border-bottom: 1px solid #E5E5E5;}
+.bind-card p{color: #333333; font-size: 13px; background: url(../img/account/accountBankBg.png) no-repeat center left; background-size: 25px 25px; text-align: center;}
+/*
+ 操盘明细
+ */
+.operate-detail-top{padding: 0px 15px; height: auto; background-color: #FFFFFF;}
+.operate-detail-top div{height: 60px; line-height: 60px; color: #333333; font-size: 15px; width: 100%; text-align:  center; border-bottom: 1px solid #E5E5E5;}
+.operate-detail-top div em{color:#ffb319; font-size: 21px; font-style: normal;}
+.operate-detail-top ul{height: auto; overflow: hidden; }
+.operate-detail-top ul li{float: left; width: 33.3%; height: 50px; padding: 5px 0px;}
+.operate-detail-top ul li span{display: inline-block; width: 100%; text-align: center; color: #333333; line-height: 20px;}
+.operate-detail-top ul li span:nth-child(2){color: #999999; font-size: 13px;}
+.operate-detail-top ul li span:nth-child(1){font-size: 15px;}
+.operate-detail-top ul li:nth-child(2){background: url(../img/account/borderLine.png) no-repeat left center,url(../img/account/borderLine.png) no-repeat right center; background-size: 1px 15px,1px 15px;}
+.operate-detail-list{margin-top: 5px; }
+.mui-table-view-cell:after{background-color: #e5e5e5;}
+.mui-table-view:after{background-color: #e5e5e5;}
+.mui-table-view:before{background-color: #FFFFFF;}
+.mui-table-view-cell{height: 50px; color: #333333; font-size: 15px;}
+.mui-table-view-cell a{height: 50px; line-height: 28px; }
+.mui-table-view-cell a em{color: #999999; font-style: normal;}
+.operate-detail-list .mui-table-view-cell:after(:nth-last-child(1)){background-color: #FFFFFF;}
+.mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after{color: #666666;}
+/*
+ 提现记录
+ */
+.presentation-record-information-list li{padding: 0px 15px;overflow: hidden;}
+.presentation-record-information-list li .bank-information-title {display: block; float: left; height: 50px; line-height: 50px;}
+.presentation-record-information-list li .bank-information-title span:nth-child(1){font-size: 15px; color: #333333; display: block;  width: 100%; height: 25px; line-height: 35px;}
+.presentation-record-information-list li .bank-information-title span:nth-child(2){font-size: 13px; color: #999999; display: block; width: 100%; height: 15px; line-height: 18px;}
+.presentation-record-information-list li .withdrawals-state{display: block; float: right; height: 50px; line-height: 50px;}
+.presentation-record-information-list li .withdrawals-state span:nth-child(1){font-size: 13px; color: #333333; display: block;  width: 100%; height: 25px; line-height: 35px;}
+.presentation-record-information-list li .withdrawals-state span:nth-child(2){font-size: 13px; color: #999999; display: block; width: 100%; height: 15px; line-height: 18px;}
+/*
+ 提现密码
+ */
+.password-withdramals label{font-size: 15px; color: #333333; height: 28px; line-height: 28px;}
+.password-withdramals li{position: relative;}
+.password-withdramals input{width: 75%;float: right; border: none; height: 28px ; line-height: 28px; padding: 0px; margin-bottom: 0px; font-size: 13px; color: #999999;}
+.password-withdramals  button{position: absolute;right: 15px; height: 28px; line-height: 28px; color: #ffb319; padding: 0px 10px; text-align: center; border: none; font-size: 13px;}
+/*
+ 提现*/
+.withdrawals .mui-table-view-chevron .mui-table-view-cell{padding-right: 35px;}
+.withdrawals .mui-content{background-color: #F2F2F2;}
+.withdrawals .account-balance{height: 50px; line-height: 50px; text-align: center; color: #ffb319; font-size: 21px; background-color: #FFFFFF; margin-bottom: 5px;}
+.withdrawals .withdrawals-information-list li label:nth-child(1){width: auto; color: #333; font-size: 15px; float: left; line-height: 28px;}
+.withdrawals .withdrawals-information-list li{position: relative;}
+/*.mui-table-view-chevron .mui-table-view-cell a{padding-right: 55px;}*/
+.withdrawals .withdrawals-information-list li input{width: 60%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px ;height: 28px; line-height: 28px; margin: 0px; }
+.withdrawals .withdrawals-information-list li label:nth-child(3){position: absolute; right: 15px;height: 28px; line-height: 28px;color: #333333; font-size: 15px;}
+.withdrawals .withdrawals-information-list li span{display: block;float: right; text-align: right; width: 60%; height: 28px; line-height: 28px; font-size: 13px; color: #999999;}
+.withdrawals .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){margin-right: -35px;}
+.withdrawals .withdrawals-information-list li span select{padding: 0px 0px 0px 0px; margin-bottom: 0px; height: 28px; line-height: 28px;}
+.withdrawals .counter-fee{width: 100%; height: 25px; line-height: 25px; color: #999999; font-size: 13px; text-align: center; background-color: #FFFFFF; border-bottom: 1px solid #E5E5E5;}
+.withdrawals .counter-fee em{color: #333333; font-style: normal;}
+.withdrawals .reminder{padding: 0px 15px; background-color: #FFFFFF;}
+.withdrawals .reminder p{line-height: 22px; color: #666666; font-size: 13px;}
+.withdrawals .reminder p:nth-child(1){color: #f25749;}
+.withdrawals .mui-backdrop{background-color: rgba(0,0,0,0.4); }
+.settting-password{position: fixed; top: 50%; bottom: 50%; left: 50%; right: 50%; width: 90%; margin-left: -45%; border: 1px solid #E5E5E5;height: 160px;overflow: hidden; background-color: #FFFFFF; margin-top: -80px;}
+.settting-password div{padding: 0px 5%; height: auto; overflow: hidden;} 
+.settting-password input{width: 16.6%;margin: 0px; padding: 0px; float: left; border-radius: 0px; height: 50px; box-shadow: none; text-align: center; font-size: 15px;}
+.settting-password input:not(:last-child){border-right: none;}
+.settting-password  p:nth-child(1){width: 100%; font-size: 15px; line-height: 40px; height: 40px; text-align: center; color: #333; border-bottom: 1px solid #E5E5E5;}
+.settting-password  p:nth-child(2){color: #666; font-size: 13px; height: 35px; line-height: 35px;text-align: center; }
+.settting-password  p:nth-last-child(1){color: #666; font-size: 13px; height: 35px; line-height: 35px;text-align: right; padding-right: 5%; }
+/*
+ 优惠券
+ */
+.coupon .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{color: #ffb319; border-bottom: 2px solid #ffb319; background-color: #FFFFFF;}
+.coupon .mui-segmented-control .mui-control-item{color: #333333; font-size: 15px; height: 38px; line-height: 38px; background-color: #FFFFFF;}
+.coupon .coupon-list,.coupon-list-overdue,.coupon-list-use{padding: 10px 15px; background-color: #FFFFFF;}
+.coupon  li{margin-bottom: 7px; border-radius: 4px; -webkit-box-shadow:0 0 2px rgba(153, 153, 153,0.5);  -moz-box-shadow:0 0 2px rgba(153, 153, 153,0.5);  box-shadow:0 0 2px rgba(153, 153, 153,0.5);}
+.coupon  li .coupon-list-title{width: 100%; background:url(../img/account/couponTitleBg.png) no-repeat center center; background-size: 100% 50px; overflow: hidden; padding: 0px 15px;}
+.coupon  li .coupon-list-title span{ display: block; height: 50px; line-height: 50px; color: #ffffff;}
+.coupon  li .coupon-list-title span:nth-child(1){float: left; font-size: 13px;}
+.coupon  li .coupon-list-title span:nth-child(2){float: right; font-size: 21px; font-weight: bold;}
+.coupon  li .coupon-list-content{overflow: hidden; padding: 10px 15px;}
+.coupon  li .coupon-list-content .float-left{height: 30px; color: #666666; font-size: 11px;}
+.coupon  li .coupon-list-content .float-left span{display: block; line-height: 15px; padding-left: 20px;}
+.coupon  li .coupon-list-content .float-left span:nth-child(1){background: url(../img/account/careful.png) no-repeat left center; background-size: 10px auto;}
+.coupon  li .coupon-list-content .float-left span:nth-child(2){background: url(../img/account/time.png) no-repeat left center; background-size: 10px auto;}
+.coupon  li .coupon-list-content .float-right{height: 30px; line-height: 30px; font-size: 13px; }
+.coupon-list-use li .coupon-list-title{width: 100%; background:url(../img/account/couponTitleBgUse.png) no-repeat center center; background-size: 100% 50px; overflow: hidden; padding: 0px 15px;}
+.coupon-list-overdue li .coupon-list-title{width: 100%; background:url(../img/account/couponTitleBgOverdue.png) no-repeat center center; background-size: 100% 50px; overflow: hidden; padding: 0px 15px;}
+.coupon .coupon-list li .coupon-list-content .float-right{font-weight: bold; color: #f25749;}
+.coupon .coupon-list-use li .coupon-list-content .float-right{color: #ffb319;}
+.coupon .coupon-list-overdue li .coupon-list-content .float-right{color: #999999;}
+.coupon .noCouponTips{width: 100%; text-align: center; background-color: #FFFFFF; color: #333; font-size: 15px; line-height: 80px;}
+/*
+ 账户设置
+ */
+.account-setting li img{width: 15px; height: 15px; vertical-align: middle;}
+.account-setting li span{line-height: 28px; margin-left: 8px; font-size: 15px; color: #333333;}
+.account-setting li span:nth-child(3){display: block; float: right; color: #666666; font-size: 13px; line-height: 28px;}
+.account-setting-page .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){padding-right: 35px;}
+.account-setting li input{width: 50%; float: right; padding: 0px; height: 28px; line-height: 28px; text-align: right; border: none; color: #333333; font-size: 13px;}
+#editionNew{padding-right: 35px; background: url(../img/account/newBG.png) no-repeat center right; background-size: 25px auto;}
+#weixinCodeImage{ background-color: rgba(51, 51, 51, 0.5); width: 100%; text-align: center; top:0px; position: fixed; z-index: 999; display: none;}
+#box{ background-color: #FFFFFF;height:300px; position:absolute; width:90%; top:50%; margin-top:-150px;  text-align: center; margin-left:-45%; left: 50%;}
+#box p{ color:#2b2b2b; font-size: 16px; position: relative; height: 40px;line-height: 40px; border-bottom: 1px solid #e5e5e5;}
+#close{ position: absolute; right:10px; width: 18px; top:11px;}
+#weixinContent{ width: 100%; height: auto; padding:0px 10% 20px; text-align: center;}
+#weixinContent span{ font-size: 12px;; text-align: left; line-height: 25px; color:#666666; text-align: center; width: 70%; display: inline-block;}
+#weixinContent img{width: 100%; margin: 20px 0px; height: 150px;}
+/*
+ 我要充值
+ */
+.charge-information{background-color: #FFFFFF;}
+.charge-information .charge-list li{line-height: 28px;}
+.charge-information .charge-list li label{color: #333; font-size: 15px; display: block; float: left; margin-right: 10px;}
+.charge-information .charge-list li i{font-style: normal;}
+.charge-information .charge-list li  input{width: 70%; border: none; height: 28px;line-height: 28px; font-size: 15px; color: 666; margin-bottom: 0px; padding: 0px;}
+.textAlignRightP{width: 100%; padding:0px 15px; text-align: right;}
+.textAlignRightP i{font-style: normal;}
+/*
+ 选择支付方式页面
+ */
+.choice-payment .charge-list .mui-input-row{ height: 50px; line-height: 50px;}
+.choice-payment .charge-list .mui-input-row label{height: 50px; line-height: 28px;}
+.choice-payment .charge-list .mui-input-row label img {width: 15px; height: 15px; vertical-align: middle;}
+.choice-payment .charge-list .mui-input-row label i{font-style: normal; color: #333; font-size: 15px; margin-left: 8px;}
+.choice-payment .charge-list .mui-input-row input{vertical-align: middle; margin-top: 8px;}
+.choice-payment .mui-input-group .mui-input-row:after,.choicePayment .mui-input-group .mui-input-row:after{background-color: #E5E5E5;}
+#buttomDiv{background-color: #FFFFFF; position: fixed; bottom: 0px; width: 100%; border-top:1px solid #333; height: 50px; line-height: 50px; font-size: 15px;}
+#buttomDiv span{display: inline-block; background-color: #333; width: 50%; color:#FFFFFF; text-align: center;}
+#buttomDiv button{display: inline-block; position: absolute; right: 0px; width: 50%; padding:0px; border: none; background-color: #ffb319; color:#2b2b2b; height: 50px; line-height: 50px;}
+#buttomDiv i{font-style: normal;}
+.choicePayment  .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size:22px;}
+.choicePayment .mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{color: #ffb319;}
+/*
+ 银行转账
+ */
+.bank-pay  p{font-size: 15px; color: #333; line-height: 40px;padding: 3px 15px;}
+.bank-pay .ac_bankpromt { font-size: 13px; color: #333;background-color: #FFFFFF; line-height: 25px;}
+.bank-pay .bank-list .mui-input-row{ height: 100px; line-height: 100px;}
+.bank-pay .bank-list  .mui-input-row label{height: 100px;  font-size: 15px;}
+.bank-pay .bank-list  .mui-input-row label div{height: 78px; float: left;}
+.bank-pay .bank-list  .mui-input-row label div:nth-child(1){width: 20%;}
+.bank-pay .bank-list  .mui-input-row label div:nth-child(2){width: 80%;}
+.bank-pay .bank-list  .mui-input-row label div:nth-child(2) span{display: inline-block; width: 100%; font-size: 13px; line-height: 20px;}
+.bank-pay .bank-list  .mui-input-row label div img {width: 50px; height: 50px; margin-top: 12.5px;}
+.bank-pay .mui-input-group .mui-input-row:after,.choicePayment .mui-input-group .mui-input-row:after{background-color: #E5E5E5;}
+.bank-pay .list-money input{ width: 60%; border: none; padding: 0px; font-size: 15px; color: #333; margin-bottom: 0px; height: 28px; line-height: 28px;}
+.bank-pay .list-money li{height: 50px; line-height: 28px; font-size: 15px; color: #333;}
+.bank-pay .list-money li label{height: 28px; line-height: 28px; display: inline-block;}
+.bank-pay  .mui-input-row input{ margin-top: 39px;}
+/*
+ 支付宝绑定
+ */
+.bind-zhifubao .reminder{padding: 0px 15px; background-color: #FFFFFF;}
+.bind-zhifubao .reminder p{line-height: 22px; color: #666666; font-size: 13px;}
+.bind-zhifubao .reminder p:nth-child(1){color: #f25749;}
+.bind-zhifubao .bind-zhifubao-information-list li input{width: 60%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px ;height: 28px; line-height: 28px; margin: 0px; }
+.bind-zhifubao .bind-zhifubao-information-list li label:nth-child(3){position: absolute; right: 15px;height: 28px; line-height: 28px;color: #333333; font-size: 15px;}
+.bind-zhifubao .bind-zhifubao-information-list li span{display: block;float: right; text-align: right; width: 60%; height: 28px; line-height: 28px; font-size: 13px; color: #999999;}
+/*
+ 资金明细
+ */
+.fundDetails .account-balance{height: 50px; line-height: 50px; text-align: center; color: #ffb319; font-size: 21px; background-color: #FFFFFF; margin-bottom: 5px;}.presentation-record-information-list li{padding: 0px 15px;overflow: hidden;}
+.fund-details-information-list li{padding: 0px 15px; height: 60px;}
+.fund-details-information-list li .fund-details-information-title {display: block; float: left; height: 60px; padding: 10px 0px;}
+.fund-details-information-list li .fund-details-information-title span:nth-child(1){font-size: 15px; color: #333333; display: block;  width: 100%; height: 25px; line-height: 25px;}
+.fund-details-information-list li .fund-details-information-title span:nth-child(2){font-size: 13px; color: #999999; display: block; width: 100%; height: 15px; line-height: 15px;}
+.fund-details-information-list li label:nth-child(2){display: block; float: right; height: 60px; line-height: 60px;}
+/*
+ 邀请有礼
+ */
+.Invitation #InvitationCode,#InvitationList{width: 100%;}
+.Invitation .mui-segmented-control .mui-control-item.mui-active{background-color: #1f1f1f;color:#fcc900}
+.Invitation .mui-segmented-control{border-bottom: 1px solid #121212; border-top: none; border-radius: 0px;border-left: none; border-right: none;}
+.Invitation .mui-segmented-control .mui-control-item{border: none;background-color: #2b2b2b;color:#cccccc;font-size: 14px;;height: 40px;line-height: 40px;}
+#InvitationCode{width: 100%; height: auto;}
+.Invitation-code p{font-size: 12px;; background-color: #FFFFFF; color:#666666; line-height: 20px; padding: 5px 10px; border-bottom: 1px solid #e6e6e6; margin-bottom: 5px; margin-bottom: 0px;}
+.Invitation-code .link-div{padding: 10px 15px; margin: 10px 0px 0px; border-bottom: 1px solid #E6E6E6; border-top: 1px solid #E6E6E6; background-color: #FFFFFF;}
+.Invitation-code .link-div label{font-size: 12px; line-height: 30px; color: #2B2B2B; vertical-align: middle;}
+.Invitation-code .link-div button{background-color: #fcc900; color:#2b2b2b; font-size: 12px; border: none; display: block; float: right;}
+.share-div-content{padding: 0px 10px; background-color: #f2f2f2; border-bottom: 1px solid #e6e6e6;}
+.share-div-content .share-img{ width: 100%; height: auto; }
+.share-div-content p{ padding: 0px; background-color: #f2f2f2; border: none; margin: 0px;}
+.share-div-content p:nth-child(2){ padding: 10px 0px; width: 100%;}
+.share-div-content p:nth-child(3){ margin-bottom: 20px; width: 100%;}
+.share-div-content p label{display: inline-block; width: 33%; text-align: center; font-size: 12px; color:#666666; } 
+.share-div-content p label img{ width: 60%; } 
+.guize{padding: 0px 10px; background-color: #FFFFFF;}
+.guize p:nth-child(1){ border-bottom: 1px solid #e6e6e6; line-height: 40px; font-size: 14px; color:#2b2b2b; padding: 0px; height: 40px;}
+.guize p label:nth-child(2){ color:#fcc900; display: block; float: right; padding-right: 20px; background-image: url(../../images/sharearrow.png); background-repeat: no-repeat;background-position:  right center;background-size: 15%;}
+.guize p:nth-last-child(1){ color:#999999; font-size: 12px; line-height: 20px; padding-top: 0px;}
+#callService{ width: 100%; text-align: center; height: 40px; line-height: 40px ; background-color: #2B2B2B ; color:#FFFFFF;	 padding: 0px!important; position: fixed; bottom: -1px; margin: 0px;}
+.share-title{ background-color: #1f1f1f; padding: 11px 0px;}
+.share-title p{ padding: 0px; line-height: 14px; font-size: 12px;}
+.share-title p label{ color:#FFFFFF; display: inline-block; width: 33%; text-align: center;}
+.fcc900{ color: #fcc900 !important;}
+/*.Invitation .mui-scroll-wrapper{height: 500px;}*/
+#historyDetailsTable1 { padding-bottom: 20px; background-color: #FFFFFF;}
+#historyDetailsTable1 thead td{ color:#2B2B2B; font-size: 12px; height: 30px; line-height: 30px; padding-left: 13px;}
+#historyDetailsTable1  thead tr{ border-bottom: 1px solid #e6e6e6;}
+#historyDetailsTable1 tbody tr{ padding: 13px 0px; border-bottom: 1px solid #e6e6e6; color:#666666; height: 30px; font-size: 12px; line-height: 30px;}
+#historyDetailsTable1 tbody tr td{ padding-left: 13px; line-height: 30px;}
+#inviteUrl{display: inline-block; width: 50%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+/*
+ 维信转账
+ */
+.weixinPayPage .reminder{padding: 0px 15px; background-color: #FFFFFF;}
+.weixinPayPage .reminder p{line-height: 22px; color: #666666; font-size: 13px;}
+.weixinPayPage .reminder p:nth-child(1){color: #f25749;}
+.title-list{font-size: 15px; line-height: 50px; color: #333334; padding-left: 15px;}
+.weixinPayPage  li input{width: 60%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px ;height: 28px; line-height: 28px; margin: 0px; }
+.weixinPayPage  li label:nth-child(3){position: absolute; right: 15px;height: 28px; line-height: 28px;color: #333333; font-size: 15px;}
+.weixinPayPage  li span{display: block;float: right; text-align: right; width: 60%; height: 28px; line-height: 28px; font-size: 13px; color: #999999;}
+.weixinPayPage  .numberCode {font-size: 13px;color: #333; background-color: #fff; border-bottom: 1px solid #E5E5E5; margin-bottom: 10px; padding: 0px 15px;}
+.weixinPayPage  .numberCode input{width: 80%; border: none; margin-bottom: 0px;}
+#weiPayCode {background-color: #fff; padding: 10px 0px;}
+#weiPayCode  img{display: block; margin: auto;}
+#weiPayCode div{text-align: center;}
+#weiPayCode  span{display: inline-block; width: 70%; text-align: center; font-size: 13px; margin-top: 10px;}
+#weixinpayBack{display: none;}

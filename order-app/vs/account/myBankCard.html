@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的银行卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+
+	<body class="mycard-list">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的银行卡</h1>
+			<a class="mui-pull-right header-right-button" id="insertBank">添加</a>
+		</header>
+		<div class="mui-content">
+			<div class="bind-card">
+				<p>您还没绑定银行卡喔~</p>
+			</div>
+			<ul class="mui-table-view my-bank-list" id="bankList">
+				<!--<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">
+						<label>
+							<img src="../../img/bank/cmb.png" />
+						</label>
+						<div>
+							<span>中国工商银行</span>
+							<span>6214********0803</span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">
+						<label>
+							<img src="../../img/bank/cmb.png" />
+						</label>
+						<div>
+							<span>中国工商银行</span>
+							<span>6214********0803</span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">
+						<label>
+							<img src="../../img/bank/cmb.png" />
+						</label>
+						<div>
+							<span>中国工商银行</span>
+							<span>6214********0803</span>
+						</div>
+					</a>
+				</li>-->
+			</ul>
+			<p class="buttom-button">
+				<button id="bankButton" value="2">我要提现</button>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		mui.init();
+		var userName = null;
+		var bankButton = document.getElementById("bankButton"); //value 0 未实名  1 没有银行卡 2 有银行卡
+		bankButton.addEventListener("tap", function() {
+			if(bankButton.value == 0) {
+				mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "myBankCard", "url": "myBankCard.html" });
+			} else if(bankButton.value == 1) {
+				mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "myBankCard", "url": "myBankCard.html" });
+			} else {
+				mui.openWindow({ "url": "Withdrawals.html", id: "Withdrawals" })
+			}
+		});
+		document.getElementById("insertBank").addEventListener("tap", function() {
+			mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "myBankCard", "url": "myBankCard.html" });
+		})
+		mui.app_request('/user/getbalancerate', {
+			"businessType": 4
+		}, function(result) {
+			if(result.success == true) {
+				userName = result.data.username;
+				localStorage.setItem("userName",userName);
+				queryname()
+			}
+		}, function(res) {});
+
+		function queryname() {
+			if(userName != null && userName != "") {
+				mui.app_request('user/withdraw/bank_list', {}, function(result) {
+					if(result.success == true) {
+						if(result.data.length > 0) {
+							insertBankList(result.data);
+							$(".bind-card").css("display", "none");
+						} else {
+							bankButton.innerHTML = "添加银行卡";
+							bankButton.value = "1";
+						}
+					}
+				}, function(res) {});
+			} else {
+				bankButton.innerHTML = "添加银行卡，请先进行实名认证";
+				bankButton.value = "0";
+			}
+		}
+
+		function insertBankList(data) {
+			var bankList = document.getElementById("bankList");
+			for(var i = 0; i < data.length; i++) {
+				bankList.innerHTML += "<li class='mui-table-view-cell'>" +
+					"<a class='mui-navigate-right' href='javascript:void(0)'>" +
+					"<label>" +
+					"<img src='../../img/bank/cmb.png' />" +
+					"</label>" +
+					"<div>" +
+					"<span>" + data[i].bankName + "</span>" +
+					"<span>" + data[i].card + "</span>" +
+					"</div>" +
+					"</a>" +
+					"</li>"
+			}
+		}
+		$("#bankList").on("tap", "li", function() {
+			var index = $(this).index();
+			mui.open_window_data("modifyBank.html", "modifyBank", { "backpageID": "myBankCard", "url": "myBankCard.html", "index": index });
+		})
+	</script>
+
+</html>

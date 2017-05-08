@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>修改银行</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/mui.picker.min.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的银行卡</h1>
+			<a class="mui-pull-right header-right-button" id="deleteBank">删除</a>
+		</header>
+		<div class="mui-content">
+			<div class="top-bank-information">
+				<label>
+					<img src="../../img/bank/cmb.png" />
+				</label>
+				<div>
+					<span id="bankName">中国工商银行</span>
+					<span id="card">62148312****0803</span>
+				</div>
+				<label id="defaultBank">设为默认</label>
+			</div>
+			<ul class="mui-table-view modify-bank-information-list">
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户名
+						</label>
+					<input type="text" placeholder="" value="*汉三" id="userName" />
+					<!--</a>-->
+				</li>
+				<!--<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">
+						<label>
+							开户所在省
+						</label>
+						<span>四川省</span>
+					</a>
+				</li>-->
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户所在省市
+						</label>
+					<span id="showCityPicker">请选择省市</span>
+					<!--</a>-->
+				</li>
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户支行
+						</label>
+					<input type="text" placeholder="请输入开户支行名称" id="bankAddress" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')" />
+					<!--</a>-->
+				</li>
+			</ul>
+			<p class="buttom-button">
+				<button>确 认</button>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../../js/city.data.js"></script>
+	<script>
+		//		
+		var userName = localStorage.getItem("userName");
+		userName = "*" + userName.substring(1, userName.length);
+		document.getElementById("userName").value = userName;
+		var showCityPickerButton = document.getElementById("showCityPicker");
+		document.getElementById("bankAddress").addEventListener("blur", function() {
+			var value = document.getElementById("bankAddress").value;
+			var Reg = new RegExp("^[0-9]*$");
+			if(Reg.test(value) == true) {
+				mui.toast("不能全是数字");
+			}
+		});
+
+		document.getElementById("defaultBank").addEventListener("tap", function() {
+			mui.confirm("您确定将该银行卡设置为默认提款银行卡吗？", "提示", ["取消", "确认"], function(e) {
+				if(e.index == 1) {
+					settiingBefaultBank();
+				}
+			});
+		});
+		document.getElementById("deleteBank").addEventListener("tap",function(){
+			mui.confirm("您确定要删除该银行卡吗？", "提示", ["取消", "确认"], function(e) {
+				if(e.index == 1) {
+					deleteBank();
+				}
+			});
+		})
+		var data = null;
+		var index = 0;
+		var win=null;
+		mui.app_request('user/withdraw/bank_list', {}, function(result) {
+			console.log(JSON.stringify(result));
+			if(result.success == true) {
+				if(vs.browser.versions.Html5Plus) {
+					mui.plusReady(function() {
+						win = mui.get_window_data("modifyBank");
+						index = win.index;
+						data = result.data;
+						document.getElementById("bankName").innerHTML = data[index].bankName;
+						var card = data[index].card
+						card = card.substring(0, 10) + "****" + card.substring(14, card.length);
+						document.getElementById("card").innerHTML = card;
+					})
+				} else {
+
+				}
+			}
+		}, function(res) {});
+
+		function settiingBefaultBank() {
+			if(mui.isnull(data)) {
+				return;
+			}
+			mui.app_request("user/withdraw/set_default_bank", {
+				"bankId": data[index].bankId
+			}, function(result) {
+				mui.toast("设置成功");
+				mui.app_back(win.backpageID,true,win.url);
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("设置失败");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("银行卡不存在");
+					return;
+				}
+			});
+		};
+		function deleteBank(){
+			mui.app_request("user/withdraw/del_bank", {
+				"bankId": data[index].bankId
+			}, function(result) {
+				mui.toast("设置成功");
+				mui.app_back(win.backpageID,true,win.url);
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("设置失败");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("银行卡不存在");
+					return;
+				}
+			})
+		}
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//级联示例
+				var cityPicker = new $.PopPicker({
+					layer: 2
+				});
+				cityPicker.setData(cityData);
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker.show(function(items) {
+						showCityPickerButton.innerHTML = items[0].text + " " + items[1].text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+	</script>
+
+</html>

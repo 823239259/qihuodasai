@@ -1,0 +1,34 @@
+@charset "utf-8";
+/**
+ * 资讯中心
+ */
+#information {background: #ffffff; top: 64px;}
+#informationCenter.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {border-bottom: 2px solid #e5e5e5;}
+#informationCenter.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{color: #ffb319; border-bottom: 2px solid #ffb319;}
+#informationCenter {position: fixed; background: #ffffff; z-index: 3;}
+.mui-control-content {position: static;}
+.mui-table-view .mui-table-view-cell {height: 90px;}
+.mui-table-view-chevron .mui-table-view-cell {padding-right: 0px;}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {height: 90px; margin-right: 0px; padding-right: 110px;}
+#information .mui-pull-right {position: absolute; height: 68px; width: 80px; max-width: 80px; right: 15px; top: 11px; border-radius: 4px;}
+.mui-ellipsis {height: 46px; font-size: 15px; color: #333333;}
+.signature {font-size: 11px; color: #999999;}
+#global, #futures {padding-top: 105px;}
+.mui-bar-nav~.mui-content .mui-pull-top-pocket {top: 100px;}
+.mui-slider-indicator.mui-segmented-control {height: 40px; line-height: 40px;}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {float: left; border-bottom: 1px solid #e7e7e7; color: #333333; font-size: 15px; height: 40px; line-height: 40px; width: 50%; padding: 0px;}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {border-bottom: 1px solid #ffb319; font-size: 15px; color: #ffb319;}
+.mui-segmented-control.mui-scroll-wrapper .mui-scroll {width: 100%;}
+.mui-slider-indicator.mui-segmented-control {background: #ffffff;}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {border-top: none;}
+/*资讯详情*/
+.details {padding: 10px 15px; border-bottom: 1px solid #e5e5e5;}
+.details .p1 {font-size: 17px; text-align: left; color: #333333; }
+.details .p2 {font-size: 11px; color: #999999; margin-top: 10px; border-left: 2px solid #999999; height: 12px; line-height: 12px; padding-left: 5px;}
+.detailsContent {padding: 15px; border-bottom: 5px solid #f2f2f2;}
+.detailsContent p {font-size: 15px; color: #333333; line-height: 22px;}
+.detailsMore {padding: 15px;}
+.detailsMore .relevant {border-left: 2px solid #ffb319; height: 15px; line-height: 15px; padding-left: 5px; font-size: 15px; color: #333333;}
+#information .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {padding-right: 15px;}
+#information .mui-table-view-cell p {height: 50px; color: #333333; font-size: 15px;}
+#information .mui-table-view-cell span {color: #999999; font-size: 11px;} 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我要充值</title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我要充值</h1>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
+		</header>
+		<div class="mui-content charge-information">
+			<ul class="charge-list">
+				<li class="mui-table-view-cell">
+					<label>账户余额：</label>
+					<span class="yellowFont"><i id="accountBalance">0</i>游戏币</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<label>充值数量：</label>
+					<input type="number" placeholder="请输入充值游戏币" class="mui-input" id="inputMoney" />
+				</li>
+				<li class="mui-table-view-cell">
+					<label>应付金额：</label>
+					<label><span id="amountMoney">0.00</span>元</label>
+				</li>
+			</ul>
+			<p style="padding: 0 10px; font-size: 12px;">注:充值¥1元=100游戏币</p>
+			<p class="buttom-button" id="recharge-btn">
+				<button>立即充值</button>
+			</p>
+			<p class="textAlignRightP">充值后的余额：<span class="yellowFont"><i id="allBalance">0</i>游戏币</span></p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		mui.init();
+		vs.online();
+		//			mui.plusReady(function(){
+		//					plus.webview.close("choicePayment.html");
+		//					var wv = plus.webview.currentWebview();
+		var wv;
+		var vText;
+		if(vs.browser.versions.Html5Plus) {
+			mui.plusReady(function() {
+				wv = mui.get_window_data("recharge");
+				vText = wv.money;
+			})
+		}
+		var moneyAll = 0;
+		//添加充值金额文本框监听
+		document.getElementById("inputMoney").addEventListener('input', function() {
+			if(this.value && !Number(this.value)) { //非数字赋值空
+				var _length = this.value.length;
+				moneyHandle(this.value.substr(0, _length - 1), this); //删除非金额字符
+				changeAllBalance();
+				return
+			} else {
+				var _length = this.value.length;
+				var _index = this.value.lastIndexOf('.');
+				var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
+				this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+				changeAllBalance();
+				return;
+			}
+
+		});
+		//金额处理方法【_value：金额(如果包含非金额字符，递归到删除非金额字符)，_obj输入框对象】
+		function moneyHandle(_value, _obj) {
+			if(_value && !Number(_value)) { //非数字赋值空
+				var _length = _value.length;
+				moneyHandle(_value.substr(0, _length - 1), _obj);
+			} else {
+				_obj.value = _value
+				return;
+			}
+		}
+
+		document.getElementById("recharge-btn").addEventListener("tap", function() {
+			checkMoney(moneyAll, wv)
+		});
+
+		//获取用户余额
+		mui.app_request('/user/getbalancerate', {
+			"businessType": 4
+		}, function(result) {
+			var accountBalance = document.getElementById("accountBalance");
+			if(!mui.isnull(result.data.balance)) {
+				accountBalance.innerHTML = result.data.balance;
+				changeAllBalance();
+				if(vText != null && vText != 0) {
+					var chargeAmount = vs.moneyUtils.reverseMoney(vText) - result.data.balance;
+					moneyAll = chargeAmount;
+					document.getElementById("inputMoney").value = chargeAmount;
+					changeAllBalance();
+				}
+			} else {
+				accountBalance.innerHTML = "0.00";
+				if(vText != null) {
+					var chargeAmount = vs.moneyUtils.reverseMoney(vText) - result.data.balance;
+					moneyAll = chargeAmount;
+					document.getElementById("inputMoney").value = chargeAmount;
+				}
+				changeAllBalance();
+			}
+			return;
+		}, function(result) {
+			return;
+		});
+		//			})
+		/*
+		 * 修改充值后的余额
+		 * */
+		function changeAllBalance() {
+			var accountBalance = Number($("#accountBalance").text());
+			var inputMoney = Number($("#inputMoney").val());
+			var allMoney = parseFloat(Number(accountBalance + inputMoney)).toFixed(2);
+			$("#allBalance").text(allMoney);
+			$("#amountMoney").text((inputMoney / 100).toFixed(2));
+		}
+		/*
+		 * 立即充值
+		 * */
+		function checkMoney(money1, wv) {
+			var money = Number($("#inputMoney").val());
+			money = money;
+			var money2 = 9999999;
+			if(mui.isnull(money)) {
+				mui.toast("充值金额不能为空");
+				return;
+			}
+			if(money < 100) {
+				mui.toast("充值金额不低于100游戏币");
+				return;
+			}
+			if(money2 < money) {
+				mui.toast("充值金额不高于" + money2 + "游戏币");
+				return;
+			}
+			mui.open_window_data("choicePayment.html", "choicePayment", { money: money / 100, backId: wv.backId });
+		}
+	</script>
+
+</html>

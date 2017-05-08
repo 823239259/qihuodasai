@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>活动中心</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title">活动中心</h1>
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded news_info">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		mui.init();
+		vs.callService();
+		mui.plusReady(function() {
+			var win = plus.webview.currentWebview();
+			var nid = win.nid;
+			if(mui.isnull(nid)) {
+				return;
+			};
+			plus.nativeUI.showWaiting("正在跳转...");
+			setTimeout(function() {
+				plus.nativeUI.closeWaiting();
+				w.show();
+			}, 2000);
+			var w = plus.webview.create(nid, "baidu", { top: "65px" }, { data: "123" });
+			document.getElementById("back").addEventListener("tap", function() {
+				mui.back();
+			})
+
+		})
+	</script>
+
+</html>

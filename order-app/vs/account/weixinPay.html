@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>微信支付</title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+	</head>
+
+	<body class="weixin-pay">
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">微信转账</h1>
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		</header>
+		<div class="mui-content weixinPayPage">
+			<div class="mainContent">
+				<p class="title-list">第一步：核实收款方信息</p>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<label>微信账户:</label>
+						<span>1369866402@1369866402</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<label>账户名称:</label>
+						<span>成都盈透科技有限公司</span>
+					</li>
+				</ul>
+				<p class="title-list">第二步：微信扫一扫，进行支付</p>
+				<div id="weiPayCode">
+					<img src="../../img/weixinpay.png" id="weixinPayCode">
+					<div>
+						<span>点击二维码，截图到本地，打开微信扫一扫，识别二维码，进行付款！</span>
+					</div>
+
+				</div>
+				<p class="title-list">第三步：输入交易单号，确认充值</p>
+				<div class="numberCode">
+					<label>交易单号</label>
+					<input id="chargeNum" type="number" class="mui-input-clear" placeholder="请输入交易单号" style="font-size: 13px;" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+				</div>
+				<div class="reminder">
+					<p>温馨提示：</p>
+					<p>1、为了您的资金安全，您的账户资金将由第三方银行托管；</p>
+					<p>2、充值前请注意您的银行卡充值限制，以免造成不便；</p>
+					<p>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</p>
+					<p>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</p>
+					<p>5、如果充值遇到任何问题，请联系客服：400-852-8008；</p>
+				</div>
+				<div id="weixinpayBack">
+					<img src="../../img/weixinpay.png" id="bigImg">
+				</div>
+			</div>
+			<div id="buttomDiv">
+				<span>支付：<i class="yellowFont">¥</i><i id="paymentMoney"></i></span>
+				<button type="button" id="recharge-btn" class="mui-btn  lg-btnlogin">立即充值</button>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+		<script>
+			mui.init();
+			vs.callService();
+			var wv;
+			var paymentMoney
+			if(vs.browser.versions.Html5Plus) {
+				mui.plusReady(function() {
+					wv = mui.get_window_data("recharge");
+					paymentMoney = document.getElementById("paymentMoney");
+					paymentMoney.innerText = wv.money.toFixed(2);
+				})
+			}
+			var i = 0;
+			$(window).resize(function() {
+				if(i % 2 == 0) {
+					$("#buttomDiv").css("display", "none");
+				} else {
+					$("#buttomDiv").css("display", "block");
+				}
+				i++;
+			});
+			$("#weixinpayBack").css({ "height": window.innerHeight + "px", "background-color": "rgba(0, 0, 0, 0.2)" });
+			var leftWidth = window.innerWidth / 2 - window.innerWidth * 0.4;
+			$("#weixinpayBack img").css({ "top": window.innerHeight / 2 - 120 + "px", "left": leftWidth + "px" });
+
+			document.getElementById("weixinPayCode").addEventListener("tap", function() {
+				$("#weixinpayBack").css("display", "block");
+			});
+			document.getElementById("weixinpayBack").addEventListener("tap", function() {
+				$("#weixinpayBack").css("display", "none");
+			});
+			document.getElementById("recharge-btn").addEventListener("tap", function() {
+				weixinPay();
+			});
+
+			function weixinPay() {
+				var chargeNum = $("#chargeNum").val();
+				var paymentMoney = $("#paymentMoney").text();
+				var paramUrl = {
+					url: "../login/login.html"
+				}
+				if(mui.isnull(chargeNum)) {
+					mui.toast("交易单号不能为空，且不能含有字符");
+					return;
+				}
+				mui.app_request("/user/pay/wechat_transfer", {
+					"money": paymentMoney,
+					"transactionNo": chargeNum
+				}, function(result) {
+					mui.toast("提交成功");
+					mui.app_refresh("recharge.html");
+					setTimeout(function() {
+						mui.openWindow({ url: "account.html", id: "account" });
+					}, 800);
+				}, function(result) {
+					mui.toast(result.message);
+				})
+			}
+		</script>
+	</body>
+
+</html>

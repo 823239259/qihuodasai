@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+		<link href="../../css/login.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav topMenu">
+			<a class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left" id="back"></a>
+			<h1 class="mui-title">登录</h1>
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服</a>
+		</header>
+		<div class="mui-content ">
+			<div id="logo">
+				<img src="../../img/login/LOGO.png">
+			</div>
+			<div id="inputList">
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/ipnoneBimg.png"/></label>
+					<input type="tel" class="mui-input-clear" maxlength="11" id='account' placeholder="请输入手机号"  autocomplete="off" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+				</div>
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/passWord.png"/></label>
+					<input type="password" class="mui-input-clear" maxlength="18" id="password" placeholder="请输入密码"  autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+				</div>
+				<div class="commStyle">
+					<button class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
+				</div>
+				<div class="commStyle mui-pull-left" id="resigterDiv">
+					<span id='reg'>注册账号</span>
+				</div>
+				<div class="commStyle mui-pull-right" id="forgetPasswordDiv">
+					<span id="forgetPassword">忘记密码</span>
+				</div>
+			</div>
+			<div class="footer">
+				如遇到问题请拨打 400-852-8008
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		document.getElementById("reg").addEventListener("tap", function() {
+			mui.openWindow("register.html", "register");
+		});
+//		mui.plusReady(function(){
+			document.getElementById("operateLogin").addEventListener("click",function(){
+				userLogin() 
+			});
+//		})
+		document.getElementById("back").addEventListener("tap",function(){
+			mui.app_refresh("account");
+		})
+		//清除历史数据
+		clearinfo();
+		mui.cacheUser.clear();
+		function clearinfo() {
+			document.getElementById("account").value = "";
+			document.getElementById("password").value = "";
+		};
+		function userLogin() {
+			var mobile = document.getElementById("account").value;
+			var password = document.getElementById("password").value;
+			//这里要对手机号码进行格式校验
+			if(!vs.validate_mobile(mobile) || mui.isnull(mobile)) {
+				mui.toast("请输入正确的手机号");
+				return;
+			}
+			if(mui.isnull(password)) {
+				mui.toast("请输入正确密码！");
+				return;
+			}
+			mui.app_request('/login', {
+				'loginName': mobile,
+				'password': password
+			}, function(result) {
+				mui.toast("登录成功！");
+				//存储用户信息
+				var win=mui.get_window_data();
+				mui.cacheUser.save(result.data.token, result.data.secret, mobile);
+				if(win.backpageID) {
+						mui.app_back(win.backpageID, true,win.url);
+					 //放回businessPageId页面，并且刷新该页面信息
+					return;
+				}
+				var wsreload = plus.webview.getWebviewById("home");
+				if(wsreload != null) {
+					wsreload.reload();
+				}
+				mui.openWindow("../home/home.html", "home");
+				return;
+
+			}, function(result) {
+				console.log(JSON.stringify(result));
+				if(result.code == 3) {
+					mui.toast("用户名或密码为空！");
+					return;
+				} else if(result.code == 4) {
+					mui.toast("帐号或密码错误！");
+					return;
+				} else if(result.code == 2) {
+					mui.toast("登录失败！");
+					return;
+				} else {
+					mui.toast("帐号或密码错误");
+					return;
+				}
+
+			});
+
+		};
+	</script>
+
+</html>

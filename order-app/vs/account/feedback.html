@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>意见反馈</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">意见反馈</h1>
+		</header>
+		<div class="mui-content">
+			<p class="top-tips">工作日：8:30-24:00  周末：9:00-17:00</p>
+			<ul class="mui-table-view modify-bank-information-list">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">
+						<label>
+							拨打官方客服热线：400-852-8008
+						</label>
+					</a>
+				</li>
+			</ul>
+			<div class="feedback-tips">
+				<p>亲爱的大大们，我们珍视您的每一个反馈意见，您的建议和批评是我们最大的支持，是我们对产品优化和改进的方向和动力！</p>
+				<div></div>
+				<div>维胜金融</div>
+			</div>
+			<div class="feedback-content">
+				<textarea placeholder="请在这里输入内容..." id="content"></textarea>
+				<input type="number" placeholder="请输入手机号，方便我们尽快联系你喔" id="phone"/>
+			</div>
+			<p class="buttom-button">
+				<button id="confirmButton">提 交</button>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script>
+		document.getElementById("confirmButton").addEventListener("tap",function(){
+			submit()
+		})
+		function submit(){
+			var content=document.getElementById("content").value;
+			var phone=document.getElementById("phone").value;
+			if(mui.isnull(content)){
+				mui.toast("请输入内容进行提交");
+				return;
+			}
+			mui.app_request('/message/save_message', {
+				"type": 1,
+				"content": content
+			}, function(result) {
+				console.log(JSON.stringify(result));
+					if(result.success == true){
+						mui.toast("感谢你的支持，我们会更努力");
+						setTimeout(function(){
+							location.reload(true);
+						},1500)
+					}
+			}, function(res) {
+			});
+		}
+	</script>
+</html>

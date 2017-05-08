@@ -1,0 +1,60 @@
+@charset "utf-8";
+/*直播*/
+.mui-content {background: #ffffff;}
+.directSeed-tab {height: 44px;}
+.directSeed-tab .directSeed-lis {float: left;height: 44px;}
+.mui-bar .mui-title {left: 0;right: 0;}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {font-size: 13px;color: #333333;}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {font-size: 13px;color: #ffffff;border-bottom: none;}
+#directSeedSearch {float: right;right: 15px;top: 6px;font-size: 20px;width: 38px;height: 38px;}
+#directSeedSearch:before {top: 10px;position: relative;}
+.directSeed-inquire .btn {/*	float: right;margin-right: 15px;margin-top: 20px;width: 14px;height: 14px;*/}
+.directSeed-inquire label {height: 38px;width: 38px;display: inline-block;margin-top: 6px;}
+.directSeed-inquire img {float: right;margin-right: 12px;margin-top: 14px;width: 14px;}
+.directSeed-all {height: 40px;background: #ffffff;z-index: 3;width: 100%;position: fixed; top: 64px;}
+.chartContainer-time {font-size: 13px;color: #999999;border-left: 5px solid #ffb319;height: 20px;line-height: 20px;padding-left: 10px;position: fixed;width: 100%;background: #ffffff;z-index: 1;margin-top: 10px;}
+#chartContainerContent li {position: relative;overflow: hidden;}
+#chartContainerContent li:last-child .content-right{border-left: 1px solid #ffffff;}
+#chartContainerContent .content-left {position: absolute;font-size: 11px;color: #999999;width: 60px;padding-left: 15px;height: 16px;line-height: 16px;}
+#chartContainerContent .content-circular {position: absolute;font-size: 11px;width: 15px;height: 15px;background: #ffb319;border-radius: 15px;left: 53px;}
+#chartContainerContent .content-right {float: left;font-size: 13px;color: #666666;margin-left: 60px;border-left: 1px solid #ffb319;padding-bottom: 10px;}
+#chartContainerContent .content-right p {padding-left: 15px;padding-right: 15px;position: relative;top: -3px;color: #666;font-size: 13px;}
+#chartContainerContent1 {padding-top: 104px; padding-bottom: 60px;}
+/*财经日历*/
+.finance-time {font-size: 11px;color: #ffffff;background: #ff8c19;text-align: center;height: 20px;line-height: 20px;}
+#weekLis a {font-size: 9px;color: #666666;line-height: 20px;background: #f2f2f2;}
+#weekLis a span{font-size: 15px;font-weight: bolder;}
+#weekLis.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {color: #ffb319;}
+.directSeed-calendar-all {position: fixed;background: #ffffff;z-index: 3;}
+#finance {padding-top: 125px;background: #ffffff;}
+#finance .finance-lis {height: 120px;}
+#finance li .finance-left {float: left;text-align: center;height: 120px;border-bottom: 1px solid #ffffff;}
+#finance li .overdue {background: #999999;}
+#finance li .key {background: #ff8c19;}
+#finance li .commonly {background: #ffb319;}
+#finance li .finance-left span {font-size: 15px;color: #ffffff;}
+#finance li .finance-left .finance-hour {font-size: 13px;color: #ffffff;margin-top: 5px;}
+#finance li .finance-left img {margin-top: 10px;}
+#finance li .finance-right {float: left;height: 120px;border-bottom: 1px solid #e5e5e5;background: #ffffff;}
+#finance .finance-stars {margin-top: 20px;}
+#finance li .finance-right ul li {color: #666666;font-size: 11px;float: left;text-align: center;height: 25px;line-height: 25px;background: #f2f2f2;margin-top: 11px;}
+#finance li .finance-right ul li.on {color: #ffb319;}
+#finance li .finance-right .finance-right-title {font-size: 13px;color: #333333;padding: 0px 15px;overflow: hidden;text-overflow: ellipsis;height: 42px;}
+#finance li .finance-right .finance-right-country {padding: 10px 0;}
+#finance li .finance-right .finance-right-country img{height: 15px;margin-left: 15px;vertical-align: middle;}
+#finance li .finance-right .finance-right-country span{font-size: 11px;color: #333333;height: 15px;line-height: 15px;display: inline-block;margin-left: 15px;}
+#chartContainerContent .mui-table-view-chevron .mui-table-view-cell {padding-right: 0px;}
+#chartContainerContent .mui-table-view-cell {padding: 0px;}
+#chartContainerContent .mui-table-view:before {background-color: #ffffff;}
+#chartContainerContent .mui-table-view-cell:after {background-color: #ffffff;}
+#chartContainerContent .mui-table-view:after {background-color: #ffffff;}
+#chartContainerContent .mui-pull-top-pocket {top: 90px;}
+#chartContainer .mui-control-content {position: static;}
+.mui-bar~.mui-pull-top-tips {z-index: 3;}
+/*弹出层*/
+#chioceProfit ul li {float: left; margin: 8px 0; font-size: 13px;}
+#chioceProfit ul li span {text-align: center; background: #f2f2f2; width: 80%; display: inline-block; padding: 5px 0; margin-left: 10%;}
+.buttonListLi {padding: 0;}
+.buttonListLi p {text-align: center; font-size: 15px; color: #666666; height: 30px; line-height: 30px; background: #f2f2f2;}
+#chioceProfit ul {display: inline-block; padding: 15px;}
+#chioceProfit ul li span.checked {color: #ffffff; background: #ffb319;}

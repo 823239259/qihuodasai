@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的银行卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/mui.picker.min.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的银行卡</h1>
+		</header>
+		<div class="mui-content">
+			<p class="top-tips">为保障资金安全，只能添加<em style="font-style: normal;" id="userName">*汉三</em>的银行卡</p>
+			<ul class="mui-table-view modify-bank-information-list">
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户名
+						</label>
+					<input type="text" placeholder="" value="*汉三" id="userNameTitle" />
+					<!--</a>-->
+				</li>
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户银行
+						</label>
+					<span id="choiceBank">请选择开户银行</span>
+					<span style="display: none;" id="choiceBankVule"></span>
+					<!--</a>-->
+				</li>
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户所在省
+						</label>
+					<span id="showCityPicker">请选择省市</span>
+					<!--</a>-->
+				</li>
+				<!--<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">
+						<label>
+							开户所在市
+						</label>
+						<span>请选择市</span>
+						<!--<input type="text" value="天府大道一段" />
+					</a>
+				</li>-->
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							开户支行
+						</label>
+					<input type="text" placeholder="请输入开户支行名称" id="bankAddress" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')" />
+					<!--</a>-->
+				</li>
+			</ul>
+			<ul class="mui-table-view modify-bank-information-list margin-top-5">
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							银行卡号
+						</label>
+					<input type="number" placeholder="请输入银行卡号" id="card" />
+					<!--</a>-->
+				</li>
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>
+							确认卡号
+						</label>
+					<input type="number" placeholder="请确认银行卡号" id="confirmCard" />
+					<!--</a>-->
+				</li>
+			</ul>
+			<p class="buttom-button">
+				<button id="confirmButton">确 认</button>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../../js/city.data.js"></script>
+	<script>
+		var userName = localStorage.getItem("userName");
+		userName = "*" + userName.substring(1, userName.length);
+		document.getElementById("userName").innerHTML = userName;
+		document.getElementById("userNameTitle").value = userName;
+		var choiceBankVule = document.getElementById("choiceBankVule")
+		var showCityPickerButton = document.getElementById('showCityPicker');
+		var choiceBank = document.getElementById('choiceBank');
+		var bankList = [];
+		document.getElementById("bankAddress").addEventListener("blur", function() {
+			var value = document.getElementById("bankAddress").value;
+			var Reg = new RegExp("^[0-9]*$");
+			if(Reg.test(value) == true) {
+				mui.toast("不能全是数字");
+			}
+		});
+		document.getElementById("confirmButton").addEventListener("tap", function() {
+			insertBank();
+		});
+
+		function insertBank() {
+			var choiceBankVule1 = choiceBankVule.innerHTML;
+			var card = document.getElementById("card").value;
+			var confirmCard = document.getElementById("confirmCard").value;
+			var bankAddress = document.getElementById("bankAddress").value;
+			var cityList = (showCityPickerButton.innerHTML).split(" ");
+			var prov = cityList[0];
+			var detailCity = cityList[1];
+			var bank_list = document.getElementById("card");
+			if(card != confirmCard) {
+				mui.toast("银行卡号和确认卡号不一致");
+				return
+			}
+			var cardTrue = luhmCheck(card);
+			if(cardTrue != true) {
+				mui.toast("银行卡号格式不正确");
+				return
+			}
+			mui.app_request("/user/withdraw/add_bank", {
+				"bank": choiceBankVule1,
+				"prov": prov,
+				"city": detailCity,
+				"address": bankAddress,
+				"card": card
+			}, function(result) {
+				mui.toast("添加银行卡号成功！");
+				var win = mui.get_window_data("insertBank");
+				if(win.backpageID) {
+					mui.app_back(win.backpageID, true, win.url);
+					return;
+				}
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("添加失败！");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("用户信息不存在！");
+					return;
+				} else if(result.code == 4) {
+					mui.toast("银行卡卡号已经存在！");
+					return;
+				} else if(result.code == 5) {
+					mui.toast("请先实名认证方可添加银行卡！");
+					mui.openWindow("verified.html");
+					return;
+				} else {
+					mui.toast("系统繁忙，请稍后再试！");
+					return;
+				}
+			});
+		};
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//获取系统中支持提现的银行列表
+				mui.app_request('user/withdraw/support_banks', {}, function(result) {
+					if(!mui.isnull(result.data)) {
+						var data = result.data
+						for(var i = 0; i < data.length; i++) {
+							bankList.push({ "value": data[i].abbreviation, "text": data[i].bankName })
+						}
+						var userPicker = new $.PopPicker();
+						userPicker.setData(bankList);
+						choiceBank.addEventListener('tap', function(event) {
+							userPicker.show(function(items) {
+								choiceBank.innerText = items[0].text;
+								console.log(items[0].value)
+								choiceBankVule.innerHTML = items[0].value;
+								//返回 false 可以阻止选择框的关闭
+								//return false;
+							});
+						}, false);
+					}
+				}, function(result) {
+					if(result.code == 3) {
+						mui.toast("用户信息不存在！");
+						return;
+					} else if(result.code == 2) {
+						mui.toast("获取失败");
+						return;
+					}
+				});
+				//级联示例
+				var cityPicker = new $.PopPicker({
+					layer: 2
+				});
+				cityPicker.setData(cityData);
+
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker.show(function(items) {
+						showCityPickerButton.innerHTML = items[0].text + " " + items[1].text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+
+		function luhmCheck(bankno) {
+			if(bankno.length < 16 || bankno.length > 19) {
+				return false;
+			}
+			var num = /^\d*$/; //全数字
+			if(!num.exec(bankno)) {
+				return false;
+			}
+			//开头6位
+			var strBin = "10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";
+			if(strBin.indexOf(bankno.substring(0, 2)) == -1) {
+				//$("#banknoInfo").html("银行卡号开头6位不符合规范");
+				return false;
+			}
+			var lastNum = bankno.substr(bankno.length - 1, 1); //取出最后一位（与luhm进行比较）
+
+			var first15Num = bankno.substr(0, bankno.length - 1); //前15或18位
+			var newArr = new Array();
+			for(var i = first15Num.length - 1; i > -1; i--) { //前15或18位倒序存进数组
+				newArr.push(first15Num.substr(i, 1));
+			}
+			var arrJiShu = new Array(); //奇数位*2的积 <9
+			var arrJiShu2 = new Array(); //奇数位*2的积 >9
+
+			var arrOuShu = new Array(); //偶数位数组
+			for(var j = 0; j < newArr.length; j++) {
+				if((j + 1) % 2 == 1) { //奇数位
+					if(parseInt(newArr[j]) * 2 < 9)
+						arrJiShu.push(parseInt(newArr[j]) * 2);
+					else
+						arrJiShu2.push(parseInt(newArr[j]) * 2);
+				} else //偶数位
+					arrOuShu.push(newArr[j]);
+			}
+
+			var jishu_child1 = new Array(); //奇数位*2 >9 的分割之后的数组个位数
+			var jishu_child2 = new Array(); //奇数位*2 >9 的分割之后的数组十位数
+			for(var h = 0; h < arrJiShu2.length; h++) {
+				jishu_child1.push(parseInt(arrJiShu2[h]) % 10);
+				jishu_child2.push(parseInt(arrJiShu2[h]) / 10);
+			}
+
+			var sumJiShu = 0; //奇数位*2 < 9 的数组之和
+			var sumOuShu = 0; //偶数位数组之和
+			var sumJiShuChild1 = 0; //奇数位*2 >9 的分割之后的数组个位数之和
+			var sumJiShuChild2 = 0; //奇数位*2 >9 的分割之后的数组十位数之和
+			var sumTotal = 0;
+			for(var m = 0; m < arrJiShu.length; m++) {
+				sumJiShu = sumJiShu + parseInt(arrJiShu[m]);
+			}
+
+			for(var n = 0; n < arrOuShu.length; n++) {
+				sumOuShu = sumOuShu + parseInt(arrOuShu[n]);
+			}
+
+			for(var p = 0; p < jishu_child1.length; p++) {
+				sumJiShuChild1 = sumJiShuChild1 + parseInt(jishu_child1[p]);
+				sumJiShuChild2 = sumJiShuChild2 + parseInt(jishu_child2[p]);
+			}
+			//计算总和
+			sumTotal = parseInt(sumJiShu) + parseInt(sumOuShu) + parseInt(sumJiShuChild1) + parseInt(sumJiShuChild2);
+
+			//计算Luhm值
+			var k = parseInt(sumTotal) % 10 == 0 ? 10 : parseInt(sumTotal) % 10;
+			var luhm = 10 - k;
+
+			if(lastNum == luhm) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
+
+</html>

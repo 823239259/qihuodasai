@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>优惠券</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+	<body class="coupon">
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">优惠券</h1>
+		    <a class="mui-pull-right header-right-button">使用规则</a>
+		</header>
+		<div class="mui-content">
+			<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item mui-active" href="#couponList">未使用</a>
+				<a class="mui-control-item" href="#couponListuse" >已使用</a>
+				<a class="mui-control-item" href="#couponListOverdue" >已过期</a> 
+			</div>
+			<div id="couponList" class="mui-slider-item mui-control-content mui-active">
+				<p  class="noCouponTips chioce">暂时还未有优惠卷哦</p>
+				<ul class="coupon-list">
+					<!--<li>
+						<div class="coupon-list-title">
+							<span>第一笔交易免手续费</span>
+							<span>￥100</span>
+						</div>
+						<div class="coupon-list-content">
+							<div class="float-left">
+								<span>仅限新注册用户</span>
+								<span>2017-2-28 10:30 到期</span>
+							</div>
+							<div class="float-right">有效</div>
+						</div>
+					</li>
+					<li>
+						<div class="coupon-list-title">
+							<span>第一笔交易免手续费</span>
+							<span>￥100</span>
+						</div>
+						<div class="coupon-list-content">
+							<div class="float-left">
+								<span>仅限新注册用户</span>
+								<span>2017-2-28 10:30 到期</span>
+							</div>
+							<div class="float-right">有效</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+			<div id="couponListuse" class="mui-slider-item mui-control-content">
+				<p  class="noCouponTips chioce">暂时还未有优惠卷哦</p>
+				<ul class="coupon-list-use">
+					<!--<li>
+						<div class="coupon-list-title">
+							<span>第一笔交易免手续费</span>
+							<span>￥100</span>
+						</div>
+						<div class="coupon-list-content">
+							<div class="float-left">
+								<span>仅限新注册用户</span>
+								<span>2017-2-28 10:30 到期</span>
+							</div>
+							<div class="float-right">已使用</div>
+						</div>
+					</li>
+					<li>
+						<div class="coupon-list-title">
+							<span>第一笔交易免手续费</span>
+							<span>￥100</span>
+						</div>
+						<div class="coupon-list-content">
+							<div class="float-left">
+								<span>仅限新注册用户</span>
+								<span>2017-2-28 10:30 到期</span>
+							</div>
+							<div class="float-right">已使用</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+			<div id="couponListOverdue" class="mui-slider-item mui-control-content">
+				<p  class="noCouponTips chioce">暂时还未有优惠卷哦</p>
+				<ul class="coupon-list-overdue">
+					<!--<li>
+						<div class="coupon-list-title">
+							<span>第一笔交易免手续费</span>
+							<span>￥100</span>
+						</div>
+						<div class="coupon-list-content">
+							<div class="float-left">
+								<span>仅限新注册用户</span>
+								<span>2017-2-28 10:30 到期</span>
+							</div>
+							<div class="float-right">已过期</div>
+						</div>
+					</li>
+					<li>
+						<div class="coupon-list-title">
+							<span>第一笔交易免手续费</span>
+							<span>￥100</span>
+						</div>
+						<div class="coupon-list-content">
+							<div class="float-left">
+								<span>仅限新注册用户</span>
+								<span>2017-2-28 10:30 到期</span>
+							</div>
+							<div class="float-right">已过期</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/common.js"></script>
+	<script>
+		mui.app_request('/user/coupon/list', {}, function(result) {
+				console.log(JSON.stringify(result));
+					if(result.success == true){
+						insertCoupon(result.data)
+					}
+			}, function(res) {
+				console.log(JSON.stringify(res));
+			});
+			function insertCoupon(data){
+				console.log(data.couponList !=null && data.couponList !="");
+				if(data.couponList !=null && data.couponList !=""){
+					for(var i=0;i<data.couponList.length;i++){
+						var text="有效"
+						var html="<li>"+
+						"<div class='coupon-list-title'>"+
+							"<span>"+data.couponList[i].name+"</span>"+
+							"<span>￥"+data.couponList[i].money+"</span>"+
+						"</div>"+
+						"<div class='coupon-list-content'>"+
+							"<div class='float-left'>"+
+								"<span>仅限新注册用户</span>"+
+								"<span>"+data.couponList[i].deadlin+" 到期</span>"+
+							"</div>"+
+						"<div class='float-right'>"+text+"</div>"+
+						"</div>"+
+					"</li>";
+					if(data.couponList[i].status==2){
+							text="有效";
+							$(".coupon-list").append(html);
+						}else if(data.couponList[i].status==3){
+							text="已使用";
+							$(".coupon-list-use").append(html);
+						}else if(data.couponList[i].status==4){
+							text="已过期";
+							$(".coupon-list-overdue").append(html);
+						}
+					}
+					
+				}else{
+					$(".noCouponTips").removeClass("chioce");
+				}
+				
+			}
+	</script>
+</html>

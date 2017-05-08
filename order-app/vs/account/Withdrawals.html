@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+
+	<body class="withdrawals">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">提现</h1>
+			<a class="mui-pull-right header-right-button" id="WithdrawalsList">提款记录</a>
+		</header>
+		<div class="mui-content">
+			<p class="top-tips">账户余额</p>
+			<p class="account-balance" id="accountBalance">0.00</p>
+			<ul class="mui-table-view mui-table-view-chevron withdrawals-information-list">
+				<li class="mui-table-view-cell">
+					<label>提现金额</label>
+					<input type="number" placeholder="请输入金额，需大于10" id="WithdrawalsMoney" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+					<label>元</label>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)">
+						<label>提现银行卡</label>
+						<span>
+							<select id="backList">
+							</select>
+							<span id="abbreviation" style="display: none;"></span>
+						</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="">-->
+					<label>实际到账</label>
+					<span id="draw_time">0.00</span>
+					<!--</a>-->
+				</li>
+			</ul>
+			<p class="counter-fee">扣除手续费：<em id="drawHandleFee">0.00 </em>元</p>
+			<p class="buttom-button">
+				<button id="confirmButton">确 认</button>
+			</p>
+			<div class="reminder">
+				<p>温馨提示：</p>
+				<p>1.到账时间：工作日09:00-16:30申请，24小时内到账，最快5分钟到账，其余时间申请将在下个工作日到账；</p>
+				<p>2.提现手续费：（a）1%（适用于充值后，未实际操盘金额）。（b）0元（适用于操盘用户提现）。</p>
+			</div>
+			<div class="mui-backdrop chioce">
+				<div class="settting-password">
+					<p>输入支付密码</p>
+					<p>提现到尾号<em id="cardInfomation">0719</em>的银行卡</p>
+					<div>
+						<input type="password">
+						<input type="password">
+						<input type="password">
+						<input type="password">
+						<input type="password">
+						<input type="password">
+					</div>
+					<p id="forgetPassword">忘记密码?</p>
+				</div> 
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		var SetDrawPwd=null;
+		var dataBankList=null;
+		mui.app_request('/user/getbalancerate', {
+			"businessType": 4
+		}, function(result) {
+			console.log(JSON.stringify(result));
+			if(result.success == true) {
+				insertAccountData(result.data)
+			}
+		}, function(res) {});
+		mui.app_request('user/withdraw/bank_list', {}, function(result) {
+			console.log(JSON.stringify(result));
+			if(result.success == true) {
+				dataBankList=result.data;
+				insertBankData(result.data)
+			}
+		}, function(res) {});
+
+		function insertAccountData(data) {
+			var accountBalance = document.getElementById("accountBalance");
+			if(!mui.isnull(data.balance)) {
+				accountBalance.innerText = data.balance;
+			} else {
+				accountBalance.innerText = "0.00";
+			}
+			SetDrawPwd= data.isSetDrawPwd;
+		}
+		document.getElementById("confirmButton").addEventListener("tap", function() {
+			confirmData();
+		});
+		document.getElementById("forgetPassword").addEventListener("tap", function() {
+			mui.openWindow({ "url": "withdramalsPassword.html", "id": "withdramalsPassword" });
+		});
+		document.getElementById("WithdrawalsList").addEventListener("tap", function() {
+			mui.openWindow({ "url": "presentationRecord.html", "id": "presentationRecord" });
+		});
+		document.getElementById("WithdrawalsMoney").addEventListener("input", function() {
+			Withdrawals()
+			drawMoney();
+		});
+	
+		function Withdrawals() {
+			var WithdrawalsMoney = document.getElementById("WithdrawalsMoney").value;
+			if(Number(WithdrawalsMoney) < 10) {
+				mui.toast("提现金额必须大于10元起");
+				return
+			}
+		}
+
+		function insertBankData(data) {
+			
+			for(var i = 0; i < data.length; i++) {
+				if(data[i].default) {
+					$("#backList").append("<option selected='selected' value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
+					$("#abbreviation").html(data[i].abbreviation);
+				} else {
+					$("#backList").append("<option value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
+				}
+			}
+
+		}
+
+		function drawMoney() {
+			var WithdrawalsMoney = document.getElementById("WithdrawalsMoney").value;
+			if(mui.isnull(WithdrawalsMoney)) {
+				document.getElementById("WithdrawalsMoney").value = "";
+				mui.toast("不能输入非法字符");
+				return;
+			}
+			if(WithdrawalsMoney > parseFloat($("#accountBalance").text())) {
+				mui.toast("账户余额不足");
+				return;
+			}
+			mui.app_request("user/withdraw/drawFee", {
+				"money": WithdrawalsMoney
+			}, function(result) {
+				console.log(JSON.stringify(result));
+				var message = result.data.fee;
+				$("#drawHandleFee").text(message);
+				if(!isNaN(message)) {
+					$("#draw_time").text(WithdrawalsMoney - message);
+				}
+				return;
+			}, function(result) {
+				return;
+			})
+
+		};
+		//确认提现
+		function drawmoneySubmit() {
+			var input =$("");
+			var drawpassword="";
+			 $(".settting-password input").each(function(){     
+		        drawpassword=drawpassword+ $(this).val();     
+		      });  
+			var abbreviation=	$("#abbreviation").html();
+			var drawmoney = document.getElementById("WithdrawalsMoney").value;
+			var card=$("#backList").val();
+			console.log(drawpassword)
+			if(mui.isnull(drawpassword)) {
+				mui.toast("请输入提现密码");
+				return;
+			}
+			if(mui.isnull(abbreviation) || mui.isnull(card)) {
+				mui.toast("请绑定银行卡");
+				return;
+			}
+			if(mui.isnull(drawmoney)) {
+				mui.toast("提现金额不能为空");
+				return;
+			}
+			mui.app_request("user/withdraw/handle", {
+				"bank": abbreviation,
+				"card": card,
+				"money": drawmoney,
+				"withdrawPwd": drawpassword
+			}, function(result) {
+					mui.toast("提款申请成功");
+//					plus.nativeUI.showWaiting();
+//				setTimeout(function() {
+//					location.reload(true);
+//				}, 1500);
+				return;
+			}, function(result) {
+				if(result.code == 0) {
+					mui.toast("token失效");
+					return;
+				} else if(result.code == 2) {
+					mui.toast("提现失败");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("用户信息不存在");
+					return;
+				} else if(result.code == 4) {
+					mui.toast("银行卡卡号不存在");
+					return;
+				} else if(result.code == 5) {
+					mui.toast("你的账户已被限制提现，具体原因为：" + result.message + ",请联系客服解除限制！");
+					return;
+				} else if(result.code == 6) {
+					mui.toast("系统升级期间无法提现");
+					return;
+				} else if(result.code == 7) {
+					mui.toast("余额不足不能提现");
+					return;
+				} else if(result.code == 8) {
+					mui.toast("当天取款次数不能超过5次");
+					return;
+				} else if(result.code == 9) {
+					mui.toast("每次提现金额不能小于10元");
+					return;
+				} else if(result.code == 10) {
+					mui.toast("提现密码错误，请重新输入");
+					 $(".settting-password input").each(function(){     
+				      	 $(this).val("");     
+				      });  
+				       $(".settting-password input").eq(0).focus()
+					return;
+				} else if(result.code == 11) {
+					mui.toast("网银平台暂不支持此银行提现，请重新添加银行！");
+					return;
+				} else if(result.code == 12) {
+					mui.toast("网银限制，单笔提现金额不能超过50000元，每天可提现5笔。");
+					return;
+				} else if(result.code == 13) {
+					mui.toast("未实名认证");
+					return;
+				}
+
+			})
+
+		};
+		function confirmData(){
+			if(SetDrawPwd ==false){
+				mui.openWindow()
+			}
+		var card=$("#backList").val();
+		if(card ==null && card ==""){
+			mui.toast("请选择银行卡");
+			return
+		}
+			$(".mui-backdrop").removeClass("chioce");
+		}
+		
+		 $(".settting-password input").keyup(function(event){
+	        var  e = (event) ? event : window.event;
+	        var value = $(this).val();
+	        var length = value.length;
+	        var val;
+	        if(length>0.5){
+	            val = value.substring(length-1,length);
+	            $(this).val(val).next().focus()
+	        }
+	        console.log($(".settting-password input").eq(5).val());
+        if($(".settting-password input").eq(5).val() != null && $(".settting-password input").eq(5).val() !=""){
+//      	plus.nativeUI.showWaiting();
+        	drawmoneySubmit();
+        }
+    });
+    $("#backList").change(function(){
+    	var value=$("#backList").val();
+    	console.log(value);
+    	$("#cardInfomation").html(value.substring(value.length-4,value.length));
+    	for(var i=0;i<dataBankList.length;i++){
+    		if(value==dataBankList[i].card){
+    			$("#abbreviation").html(dataBankList[i].abbreviation);
+    			return;
+    		}
+    	}
+    })
+	</script>
+
+</html>

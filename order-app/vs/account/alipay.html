@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付宝支付</title>
+		<link rel="stylesheet" href="../../css/own.css" />
+		<script src="../../js/mui.min.js"></script>
+		 <script src="../../js/common.js"></script>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
+	</head>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting( "正在跳转..." );
+				var ws = plus.webview.currentWebview();
+				var money = ws.data; 
+				var type = ws.type;
+				var payUrl = "http://payment.dunxingpay.com/Pay.ashx";
+				var payWay = 0;
+				var payModelId = 0;
+				if(type == 5){ 
+					payWay = 4;
+					payModelId = 1;
+				}else if(type == 6){
+					payWay = 11;
+					payModelId = 3;
+				}else if(type == 8){
+					payWay = 8;
+					payModelId = 6;
+				}else{
+					type = -99;
+				}
+				if(type != -99){
+					mui.app_request('/user/pay/dxtx/alipay',
+									{"money":money,
+									 "payWay":payWay,
+									 "payModelId":payModelId
+							},function(result){
+									console.log(JSON.stringify(result));
+									if(result.success){ 
+										var dataForm = null; 
+										if(payModelId == 3){
+											dataForm = result.data; 
+											console.log(payUrl+"?Pay="+dataForm);
+											window.location = payUrl+"?Pay="+dataForm+"";
+										}else if(payModelId == 1){  
+											var charge = JSON.parse(result.data);
+											dataForm =charge.data.pay;
+											$("#dxtxForm").html(dataForm);
+											$("#alipaysubmit").submit();
+										}else if(payModelId == 6){
+											var charge = JSON.parse(result.data);
+											window.location = charge.data;
+										}
+									}   
+									plus.nativeUI.closeWaiting();
+								},function(result){
+									mui.toast("连接充值失败,请重试!")
+									plus.nativeUI.closeWaiting();
+								}
+					)
+				}else{
+					mui.toast("支付渠道异常,请重试!");
+				}
+			});
+		</script> 
+	<body>
+			<div id = "dxtxForm" style="display: none;"></div>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+@charset "utf-8";
+/*
+ 关于我们页面
+ */
+.about-top{width: 100%; height: 90px;  background: url(../img/aboutBg.png) no-repeat center center; background-size: 135px auto; background-color: #FFFFFF;}
+.about-content{padding: 0px 15px; margin-bottom: 25px; font-size: 15px; color: #333333; line-height: 25px;}
+.about .mui-content,.about{background-color: #FFFFFF;}
+/*
+ 安全保障
+ */
+.safaty-guarantee .mui-content,.safaty-guarantee{background-color: #FFFFFF;}
+.safaty-guarantee-content{padding: 0px 15px;}
+.safaty-guarantee-content h3{font-size: 15px; color: #333333; font-weight: bold; line-height: 25px; padding-top: 20px;}
+.safaty-guarantee-content p{color: #333333; font-size: 15px; line-height: 25px;}
+.safaty-guarantee-content em{font-style: normal; color: #f25749;}
+.safaty-guarantee-content .safaty-guarantee-notice{color: #f25749; margin-top: 20px;}
+/*
+ */
+.risk-acknowledgements .mui-content,.risk-acknowledgements{background-color: #FFFFFF;}
+.risk-acknowledgements-content{padding: 0px 15px;}
+.risk-acknowledgements-content h3{font-size: 15px; color: #333333; font-weight: bold; line-height: 25px; padding-top: 20px;}
+.risk-acknowledgements-content p{color: #333333; font-size: 15px; line-height: 25px;}

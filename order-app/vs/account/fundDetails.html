@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+
+	<body class="fundDetails">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">资金明细</h1>
+		</header>
+		<div class="mui-content">
+			<p class="top-tips">账户余额</p>
+			<p class="account-balance" id="accountBalance">0.00</p>
+			<ul class="mui-table-view fund-details-information-list" id="fundDetailsList">
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		var SetDrawPwd=null;
+		var dataBankList=null;
+		mui.app_request('/user/fund/list', {
+			"businessType": 4
+		}, function(result) {
+			console.log(JSON.stringify(result));
+			if(result.success == true) {
+				insertFundDetail(result.data);
+				insertAccountData(result.data)
+			}
+		}, function(res) {});
+		function insertAccountData(data) {
+			var accountBalance = document.getElementById("accountBalance");
+			if(!mui.isnull(data.balance)) {
+				accountBalance.innerText = data.balance;
+			} else {
+				accountBalance.innerText = "0.00";
+			}
+		}
+		function insertFundDetail(data){
+			var fundDetailsList=document.getElementById("fundDetailsList");
+			var data=data.fundList;
+			console.log(data.length);
+			for(var i=0;i<data.length;i++){
+				var iscome=data[i].money >= 0 ? true : false; 
+				var timeo=vs.dateUtil.getFormatDataByLong(data[i].payTime,"yyyy-MM-dd hh:mm:ss");
+				var className="1f9947";
+				var money=0;
+				var text="提款取出";
+				if(iscome){
+					className="f25749";
+					money="+¥"+data[i].money;
+					 text="充值存入";
+			  	}else{
+			  		className="1f9947";
+			  		money="-¥"+data[i].money;
+			  		 text="提款取出";
+			  	}
+				var html="<li class='mui-table-view-cell'>"+
+					"<label class='fund-details-information-title'>"+
+						"<span>"+text+"</span>"+
+						"<span>"+timeo+"</span>"+
+					"</label><label class='"+className+"'>"+money+"</label>"+
+				"</li>";
+				fundDetailsList.innerHTML+=html;
+			}
+		}
+	
+	</script>
+
+</html>

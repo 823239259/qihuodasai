@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/own.css" rel="stylesheet"/>
+		<link href="../../css/login.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav topMenu">
+			<a class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left" id="back"></a>
+			<h1 class="mui-title">登录</h1>	
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服</a>
+		</header>
+		<div class="mui-content ">
+			<div id="logo">
+				<img src="../../img/login/LOGO.png" >
+			</div>
+			<div id="inputList">
+				<div class="commStyle">
+					<p id="switchAccount">135****7653</p>
+				</div>
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/passWord.png"/></label>
+					<input type="password" class="mui-input-clear" maxlength="18" id="password" placeholder="请输入密码"  oninput="checkValue()" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+				</div>
+				<div class="commStyle">
+					<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
+				</div>
+				<div class="commStyle mui-pull-left"  id="resigterDiv">
+					<span id='reg'>切换账号</span>
+				</div>
+				<div class="commStyle mui-pull-right"  id="forgetPasswordDiv">
+					<span id="forgetPassword">忘记密码</span>
+				</div>
+			</div>
+			<div class="footer">
+				如遇到问题请拨打 400-852-8008
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		document.getElementById("reg").addEventListener("tap",function() {
+			mui.openWindow("login.html","login");
+		});
+	</script>
+</html>

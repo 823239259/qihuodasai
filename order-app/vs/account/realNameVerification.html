@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>实名验证</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">实名验证</h1>
+		</header>
+		<div class="mui-content">
+			<div class="passwore-row-contanier real-name-verification">
+				<div class="passwore-row new-passsword-row">
+					<label>真实姓名</label>
+					<input type="text" placeholder="请输入真实姓名" id="realName" />
+				</div>
+				<div class="passwore-row">
+					<label>身份证号</label>
+					<input type="number" placeholder="请输入身份证号" id="card" />
+				</div>
+			</div>
+			<div class="bottom-button-contanier">
+				<button id="verified">验 证</button>
+				<p>如遇到问题，请拨打<em id="telBtn"> 400-852-8008</em></p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		mui.init();
+		document.getElementById("verified").addEventListener("tap", function() {
+			validatecard();
+		});
+		vs.callService();
+		function validatecard() {
+			var username = document.getElementById("realName").value;
+			var card = document.getElementById("card").value;
+			if(mui.isnull(username)) {
+				mui.toast("真实姓名不能为空！");
+				return;
+			}
+			if(username.length < 2 || username.length > 4) {
+				mui.toast("真实姓名有误！");
+				return;
+			}
+			if(mui.isnull(card)) {
+				mui.toast("身份证号不能为空！");
+				return;
+			}
+			mui.app_request('/user/security/validatecard', {
+				"name": username,
+				"card": card
+			}, function(result) {
+				console.log(JSON.stringify(result));
+				if(result.success == true) {
+					mui.toast("认证成功！");
+					var win = mui.get_window_data("realNameVerification");
+					if(win.backpageID) {
+						if(vs.browser.versions.Html5Plus) {
+							console.log("34")
+							mui.app_refresh(win.backpageID, true);
+						} else {
+							mui.openWindow({ "url": win.url, "id": win.backpageID })
+						}
+						//放回businessPageId页面，并且刷新该页面信息
+						return;
+					}
+				}
+			}, function(res) {
+				console.log(JSON.stringify(res));
+			});
+		}
+		mui.app_request('/user/getbalancerate', {
+			"businessType": 4
+		}, function(result) {
+			console.log(JSON.stringify(result));
+			if(result.success == true) {
+				if(result.data.username != null) {
+					
+				}
+			}
+		}, function(res) {});
+	</script>
+
+</html>

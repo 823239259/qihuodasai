@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>账户设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+	</head>
+
+	<body class="account-setting-page">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">账户设置</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron account-setting">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="realNameVerification">
+						<img src="../../img/account/accountSetting1.png">
+						<span>实名认证</span>
+						<span id="realNameVerificationTips">未认证</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="bank">
+						<img src="../../img/account/accountSetting2.png">
+						<span>我的银行卡</span>
+						<span id="backNum">未设置</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="modifyPhone">
+						<img src="../../img/account/accountSetting3.png">
+						<span>账号绑定</span>
+						<span>修改</span>
+						<input type="text" value="183****2773" id="phone" readonly="readonly" />
+
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="bindWxAccount">
+						<img src="../../img/account/accountSetting4.png">
+						<span>微信绑定</span>
+						<span id="wxAccount">未关注</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-table-view-chevron account-setting margin-top-5">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="loginPassword">
+						<img src="../../img/account/accountSetting5.png">
+						<span>登录密码</span>
+						<span>已设置</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="setttingDrawPwd">
+						<img src="../../img/account/accountSetting6.png">
+						<span>提现密码</span>
+						<span id="isSetDrawPwd">未设置</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view account-setting margin-top-5">
+				<li class="mui-table-view-cell">
+					<!--<a class="mui-navigate-right" href="javascript:void(0)" id="">-->
+					<img src="../../img/account/accountSetting7.png">
+					<span>版本信息</span>
+					<span id="editionNew">1.12</span>
+					<!--</a>-->
+				</li>
+			</ul>
+		</div>
+		<div id="weixinCodeImage">
+		<div id="box">
+			<p>微信绑定<img src="../../img/close.png" id="close"></p>
+			<div id="weixinContent">  
+				<img src="../../img/weixinshare.png">
+				<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+			</div>
+		</div>
+	</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script>
+		document.getElementById("weixinCodeImage").style.height=window.innerHeight+"px";
+		document.getElementById("close").addEventListener("tap",function(){
+			document.getElementById("weixinCodeImage").style.display="none";
+		});
+		document.getElementById("realNameVerification").addEventListener("tap", function() {
+			var text = document.getElementById("realNameVerificationTips").innerHTML;
+			mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "accountSetting", "url": "accountSetting.html" });
+		});
+		var phone = localStorage.getItem(vs.constants.user_mobile);
+		phone = phone.substring(0, 3) + "****" + phone.substring(7, 11);
+		document.getElementById("phone").value = phone;
+		document.getElementById("bank").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "myBankCard.html",
+				id: "myBankCard"
+			});
+		});
+		document.getElementById("modifyPhone").addEventListener("tap", function() {
+			mui.open_window_data("modifyPhone.html", "modifyPhone", { "backpageID": "accountSetting", "url": "accountSetting.html" });
+		});
+		document.getElementById("loginPassword").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "modifyLoginPassword.html",
+				id: "modifyLoginPassword"
+			});
+		});
+		document.getElementById("setttingDrawPwd").addEventListener("tap", function() {
+			mui.open_window_data("withdramalsPassword.html", "withdramalsPassword", { "backpageID": "accountSetting", "url": "accountSetting.html" });
+		});
+		document.getElementById("bindWxAccount").addEventListener("tap", function() {
+			var text = document.getElementById("bindWxAccount").innerText;
+			if(text == "已关注") {
+				mui.toast("你已关注过啦~”");
+			} else {
+				document.getElementById("weixinCodeImage").style.display="block";
+			}
+		});
+		mui.app_request('/user/getbalancerate', {
+			"businessType": 4
+		}, function(result) {
+			if(result.success == true) {
+				console.log(JSON.stringify(result));
+				updateData(result.data)
+			}
+		}, function(res) {});
+		mui.app_request('user/withdraw/bank_list', {}, function(result) {
+			if(result.success == true) {
+				if(result.data.length > 0) {
+					document.getElementById("backNum").innerHTML = result.data.length + "张";
+				}
+			}
+		}, function(res) {});
+
+		function updateData(data) {
+			var realNameVerificationTips = document.getElementById("realNameVerificationTips");
+			if(data.isCertification!= false) {
+				realNameVerificationTips.innerHTML = "已认证";
+			}
+			if(!mui.isnull(data.wxAccount)) {
+				document.getElementById("wxAccount").innerHTML = "已关注";
+			}
+			if(data.isSetDrawPwd != false) {
+				document.getElementById("isSetDrawPwd").innerHTML = "已设置";
+			}
+		}
+		mui.plusReady(function() {
+			// 获取本地应用资源版本号
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				wgtVer = inf.version;
+				document.getElementById("editionNew").innerHTML = wgtVer;
+				//检查更新版本 
+			});
+		})
+	</script>
+
+</html>

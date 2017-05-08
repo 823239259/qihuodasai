@@ -1,0 +1,18 @@
+@charset "utf-8";
+/*
+ *帮助中心
+ * */
+body {background: #ffffff;}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell {padding: 2px 10px;}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell {border: none;}
+.find-tab img {width: 40px; height: 40px;}
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {font-size: 13px; line-height: 13px; height: 13px; font-weight: bolder;}
+.mui-content>.mui-table-view:first-child {margin-top: 0px;}
+.mui-table-view-chevron .mui-table-view-cell {height: 50px; line-height: 30px;}
+.mui-table-view-cell p.title {font-size: 13px; color: #666666;}
+#list.mui-table-view:before {background-color: #ffffff;}
+/*帮助详情 */
+.helpDetails {background: #ffffff;}
+.helpDetails li div.title {font-size: 17px; color: #333333; text-align: center; height: 50px; line-height: 50px; border-bottom: 1px solid #f1f1f1;}
+.helpDetails li p.content {padding: 11px 13px; font-size: 15px; color: #333333; line-height: 24px;}
+.helpDetails li p.prompt {font-size: 15px; color: #f25749; padding-left: 13px; margin-top: 20px;}

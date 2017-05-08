@@ -1,0 +1,148 @@
+ul{
+	list-style-type: none;
+	padding:0px;
+	background-color: #FFFFFF;
+}
+.rechageList li{
+	width: 100%;
+	padding:0px 2%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom:1px solid #E4E4E4;
+}
+
+.rechageList li input{
+	display: inline-block;
+	width: 70%;
+	border: none;
+	margin: 0px;
+	color:#FFCC33;
+}
+i{
+	font-style: normal;
+}
+.yellowFont{
+	color:#FFCC33;
+}
+.textAlignRightP{
+	width: 100%;
+	padding:0px 2%;
+	text-align: right;
+}
+.chargeList input{
+	margin-top: -4px;
+}
+.chargeList .mui-input-row{
+	height: 50px;
+	line-height: 50px;
+}
+.chargeList .mui-input-row label{
+	width: 50%;
+	vertical-align: middle;
+}
+.chargeList .mui-input-row label i{
+	margin-left: 5px;
+}
+.chargeList .mui-input-row label img{
+	width: 30px;
+	height: auto;
+	vertical-align: middle;
+}
+.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{
+	color:#FFCC33;
+}
+.moneyIcont,#paymentMoney{
+	color:#FFCC33;
+	font-size: 20px;
+	font-weight: 600;
+}
+#buttomDiv{
+	background-color: #FFFFFF;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+/*	padding:0px 4%;*/
+	border-top:1px solid #606060;
+}
+#buttomDiv span{
+	display: inline-block;
+	background-color: #2B2B2B;
+	width: 50%;
+	color:#FFFFFF;
+	text-align: center;
+	
+}
+#buttomDiv button{
+	display: inline-block;
+	position: absolute;
+	right: 0px;
+	width: 50%;
+	padding:0px;
+	border: none;
+	background-color: #fcc900;
+	color:#2b2b2b;
+}
+#weixinpayBack{
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	top:0px;
+	left: 0px;
+	z-index: 999;
+	display: none;
+}
+#weixinpayBack img{
+	width: 80%;
+	display: block;
+	height: auto;
+	position: absolute;
+}
+#weiPayCode{
+	width: 100%;
+	padding:0px 15px;
+	height: 210px;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+#weiPayCode img{
+	margin-top: 12px;
+}
+ #weiPayCode div:nth-child(2){
+ 	padding:10px 10% 10px;
+ }
+.numberCode{
+	width: 96%;
+	margin-left: 2%;
+	border:1px solid #E4E4E4;
+	background: #FFFFFF; 
+}
+.numberCode label{
+	display: inline-block;
+	width: 23%;
+	margin-right: 5px;
+	text-align: center;
+}
+.numberCode input{
+	display: inline-block;
+	width: 74%;
+	border:none;
+	margin: 0px;
+}
+.listMoney{
+	width: 100%;
+}
+.listMoney label{
+	width: 30%;
+}
+.listMoney input{
+	width: 69%;
+	margin: 0px;
+}
+.choiceBankIcon{
+	margin-top: 30px;
+}
+.mui-bar-nav{
+			-webkit-box-shadow:none;
+			box-shadow:none;
+			/*border-bottom: 1px solid #454545;*/
+		}

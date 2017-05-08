@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的账户</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/account.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="javascript:void(0)" class="top-tel-left" id="customerService">客服</a>
+			<h1 class="mui-title">我的账户</h1>
+			<a href="javascript:void(0)" class="top-tel" id="signOut">注册</a>
+		</header>
+		<nav class="navlist">
+			<a class="" href="javascript:void(0);" id="quoteTrade">
+				<span class="mui-icon"><img src="../../img/home.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a href="javascript:void(0);" id="directSeed">
+				<span class="mui-icon"><img src="../../img/directSeeding.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">直播</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="find">
+				<span class="mui-icon"><img src="../../img/found.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			<a class="navon" id="account" href="javascript:void(0);">
+				<span class="mui-icon"><img src="../../img/myOn.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<div class="account-title">
+				<ul class="mui-table-view mui-table-view-chevron ac-list">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="javascript:void(0)" id=""><img src="../../img/account/signImg.png"><span id="accountName">您好，请先登录喔~O(∩_∩)O</span></a>
+					</li>
+					<li class="account-tab">
+						<p class="account-balance">账户余额：</p>
+						<p class="account-money" id="accountBalance">0.00</p>
+						<div class="account-signer">
+							<ul>
+								<li class="mui-media mui-col-xs-6 mui-col-sm-6">
+									<p class="account-signer-left" id="login">登录</p>
+								</li>
+								<li class="mui-media mui-col-xs-6 mui-col-sm-=6">
+									<p class="account-signer-right" id="regist">注册</p>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<ul id="list" class="mui-table-view mui-table-view-chevron ac-list">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="operateDetailed"><img src="../../img/account/accountDetailed.png"><span>操盘明细</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="fundDetails"><img src="../../img/account/accountCapital.png"><span>资金明细</span></a>
+				</li>
+			</ul>
+			<ul id="list" class="mui-table-view mui-table-view-chevron ac-list">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="accountSetting"><img src="../../img/account/accountSettings.png"><span>账户设置</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="Invitation"><img src="../../img/account/accountInvitation.png"><span>邀请有礼</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="coupon"><img src="../../img/account/accountDiscount.png"><span>我的优惠</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" id="feedback"><img src="../../img/account/accountOpinion.png"><span>意见反馈</span></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		var isCertification=false;
+		var bankList=[];
+		initBottom("account.html", "../find/find.html", "../quote/quoteTrade.html", "../directSeed/directSeed.html");
+		document.getElementById("accountSetting").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "accountSetting.html",
+				id: "accountSetting"
+			})
+		});
+		document.getElementById("operateDetailed").addEventListener("tap", function() {
+			mui.open_window_data("../quote/quoteTrade.html", "quoteTrade", { "backpageID": "account", "url": "../account/accout.html", "id": "operateDetailed" });
+		});
+		document.getElementById("fundDetails").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "fundDetails.html",
+				id: "fundDetails"
+			})
+//			var w = plus.webview.create("http://192.168.0.44:8080/vs-app/tzdr/account/recharge.html", "recharge", { top: "65px" }, { });
+//			w.show();
+		});
+		document.getElementById("coupon").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "coupon.html",
+				id: "coupon"
+			})
+		});
+		document.getElementById("feedback").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "feedback.html",
+				id: "feedback"
+			})
+		});
+		document.getElementById("customerService").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "customerService.html",
+				id: "customerService"
+			});
+		});
+		document.getElementById("Invitation").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "Invitation.html",
+				id: "Invitation"
+			});
+		});
+		document.getElementById("login").addEventListener("tap", function() {
+			if(mui.cacheUser.isLogin()) {
+				mui.open_window_data("recharge.html", "recharge", { "money": "0"});
+			} else {
+				mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "app-game-order/vs/account/account.html" });
+			}
+			//			mui.openWindow({
+			//				url:"../login/login.html",
+			//				id:"login",
+			//				extras:{backpageID:"login"}
+			//			});
+		});
+		document.getElementById("regist").addEventListener("tap", function() {
+			if(mui.cacheUser.isLogin()) {
+				if(isCertification){
+					if(bankList.length<=0){
+						mui.confirm("您当前还未添加银行卡，为保障您的账户安全，请先添加银行卡！","提示",["取消，确认"],function(){
+						mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "account", "url": "account.html" });
+					});
+					}else{
+						mui.openWindow({ "url": "Withdrawals.html", "id": "Withdrawals" });
+					}
+				}else{
+					mui.confirm("您当前还未实名认证，为保障您的账户安全，请先实名认证！","提示",["取消，确认"],function(){
+						mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
+					});
+				}
+				
+			} else {
+				mui.openWindow({
+					url: "../login/register.html",
+					id: "register"
+				})
+			}
+		});
+		document.getElementById("signOut").addEventListener("tap", function() {
+			if(mui.cacheUser.isLogin()) {
+				mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
+			} else {
+				mui.openWindow({
+					url: "../login/register.html",
+					id: "register"
+				})
+			}
+		})
+		mui.checkNetwork();
+		if(mui.cacheUser.isLogin()) {
+			document.getElementById("login").innerText = "充值";
+			document.getElementById("regist").innerText = "提现";
+			document.getElementById("signOut").innerText = "退出";
+			mui.app_request('/user/getbalancerate', {
+				"businessType": 4
+			}, function(result) {
+				console.log(JSON.stringify(result));
+				if(result.success == true) {
+					insertAccountData(result.data)
+				}
+			}, function(res) {});
+		} else {
+//			mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
+		}
+
+		function insertAccountData(data) {
+			var accountBalance = document.getElementById("accountBalance");
+			var accountName = document.getElementById("accountName");
+			if(!mui.isnull(data.balance)) {
+				accountBalance.innerText = data.balance;
+			} else {
+				accountBalance.innerText = "0.00";
+			}
+			if(!mui.isnull(data.username)) {
+				accountName.innerText = "你好，" + data.username;
+				localStorage.setItem("userName", data.username);
+			} else if(!mui.isnull(mui.cacheUser.get(vs.constants.user_mobile))) {
+				var user_mobile = mui.cacheUser.get(vs.constants.user_mobile)
+				user_mobile = user_mobile.substring(0, 3) + "****" + user_mobile.substring(7, 11);
+				accountName.innerText = "你好，" + user_mobile;
+			}
+			isCertification=data.isCertification;
+		}
+		mui.app_request('user/withdraw/bank_list', {}, function(result) {
+			console.log(JSON.stringify(result));
+			if(result.success == true) {
+				bankList=result.data;
+			}
+		}, function(res) {});
+	</script>
+
+</html>

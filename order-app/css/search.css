@@ -1,0 +1,33 @@
+/*
+ *直播搜索
+ * */
+@charset "utf-8";
+#search{border-left: none; border-top: none; border-right: none; padding-left: 40px; height: 43px; background: url(../img/searchIcon.png) no-repeat left center; background-position-x: 15px; background-size: 16px 16px; background-color: #FFFFFF; border-radius: 0px; border-bottom: 1px solid #E4E3E6;}
+.mui-bar .mui-title{left: 0px; right: 0px;}
+#searchButton{position: absolute; right: 15px; height: 22px; display: inline-block; text-align: right; width:37px ; top:30px; color:#666666; font-size: 13px; border-left: 1px solid #E5E5E5;}
+#searchContainer{position: relative; /*overflow: hidden;*/ clear: both; height: auto;}
+#searchHistory{position: absolute; top:50px; background-color: #FFFFFF; padding: 0px 15px; width: 100%;}
+#searchContainer p{padding: 0px 15px;; height: 50px; background-color: #FFFFFF; line-height: 50px; border-bottom: 1px solid #e5e5e5;}
+#searchContainer p span:nth-child(1){display: inline-block; color:#333333; font-size: 13px;}
+#searchContainer p span:nth-child(2){text-align: right; float: right; background: url(../img/garbage.png) no-repeat left center; display: block; font-size: 11px; background-size: 16px 16px; padding-left: 25px;}
+#searchHistory li{height: 50px; line-height: 50px; border-bottom: 1px solid #E5E5E5; color:#666666; font-size: 15px;}
+/*
+ 搜索结果
+ */
+body{background-color: #f2f2f2;}
+#noSearchResult{position: relative;}
+#noSearchResultContainer{position:fixed; top:50%; left: 50%;; margin-left: -85px; margin-top: -57px; padding-top: 68px; height: 115px; width: 170px; color: #999999; font-size: 15px; line-height: 23px; text-align: center; background: url(../img/searchResult.png) no-repeat center top; background-size: 45px auto;}
+/*搜索有结果的时候的样式*/
+.directSeed-all {height: 40px; background: #ffffff; z-index: 3; width: 100%;}
+.chartContainer-time {font-size: 13px; color: #999999; border-left: 5px solid #ffb319; height: 20px; line-height: 20px; padding-left: 10px; width: 100%; background: #ffffff; z-index: 1; position: relative; top: 10px;}
+#searchResultContainer .mui-table-view:before {background-color: #ffffff;}
+#searchResultContainer .mui-table-view-chevron .mui-table-view-cell {padding-right: 0px;}
+#searchResultContainer .mui-table-view-cell {padding: 0px;}
+#searchResultContainer li {position: relative; overflow: hidden;}
+#searchResultContainer .mui-table-view-cell:after {background-color: #ffffff;}
+#searchResultContainer .content-left {position: absolute; font-size: 11px; color: #999999; width: 60px; padding-left: 15px; height: 16px; line-height: 16px;}
+#searchResultContainer .content-circular {position: absolute; font-size: 11px; width: 15px; height: 15px; background: #ffb319; border-radius: 15px; left: 53px;}
+#searchResultContainer .content-right {float: left; font-size: 13px; color: #666666; margin-left: 60px; border-left: 1px solid #ffb319; padding-bottom: 10px;}
+#searchResultContainer .content-right p {padding-left: 15px; padding-right: 15px; position: relative; top: -3px; color: #666; font-size: 13px;}
+#searchResultContainer ul li:last-child .content-right {border-left: 1px solid #ffffff;}
+.searchResultContainer-all {/*padding-top: 40px;*/}

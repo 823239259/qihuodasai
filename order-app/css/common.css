@@ -1,0 +1,73 @@
+/*
+ *公共样式
+ * */
+p{margin: 0px;}
+ul{list-style: none; -webkit-padding-start:0px; -webkit-margin-before:0px; -webkit-margin-after:0px;}
+.mui-bar{background-color: #ffb319; color:#333333; overflow: hidden; height: 64px; padding-top: 20px; -webkit-box-shadow:none;box-shadow:none}
+.mui-bar-nav~.mui-content{padding-top: 64px;}
+.mui-icon-back:before, .mui-icon-left-nav:before{content: ""; height: 44px; width: 30px; display: inline-block; background:url(../img/backBg.png)  no-repeat left center ; background-size: 34% auto ; float: left;}
+.mui-bar-nav.mui-bar .mui-icon{padding-left: 5px; padding-right: 0px; margin-right:0px; margin-left: 0px;}
+.mui-bar .mui-icon{padding-left: 5px; padding-right: 5px; padding-top: 0px; padding-bottom: 0px; }
+/*底部*/
+/*头部*/
+.top-tel {display: block; width: auto; height: 44px; line-height: 44px; font-size: 13px; color: #333333!important; float: right;}
+.top-tel-left {display: block; width: auto; height: 44px; line-height: 44px; font-size: 13px; color: #333333!important; float: left;}
+.redColor{color:#f25749;}
+.greenColor{color: #1f9947;}
+/*
+ 头部的提示块
+ */
+.top-tips{width: 100%; background-color: #ff8c1a; color: #fff; text-align: center; font-size: 13px; height: 30px; line-height: 30px;}
+/*
+ 头部右边的按钮
+ */
+.header-right-button{height: 44px; line-height: 44px; color: #333333; font-size: 13px;margin-right: 15px;}
+/*
+ 底部按钮
+ */
+.buttom-button{padding: 20px 15px; background-color: #FFFFFF;}
+.buttom-button button{width: 100%; color: #fff; text-align: center; background-color: #ffb319; border: none; padding: 0px; line-height: 40px; height: 40px;}
+/*
+ 底部按钮，加客服电话
+ */
+.mui-content .bottom-button-contanier{padding: 30px 15px; background-color: #FFFFFF;}
+.mui-content .bottom-button-contanier button{width: 100%; border: none; color: #fff; background-color: #ffb319; font-size: 17px; padding: 0px; line-height: 40px; height: 40px;margin-bottom: 30px;}
+.mui-content .bottom-button-contanier p{margin: 0px; width: 100%; text-align: center; font-size: 13px; color: #666666;}
+.mui-content .bottom-button-contanier p em{font-style: normal; color: #f25749;}
+/*
+ 距离头部5px的margin*/
+.margin-top-5{margin-top: 5px;}
+/*
+ 向左向右浮动
+ */
+.float-left{float: left;}
+.float-right{float: right;}
+/*
+下拉刷新上拉加载
+ */
+html,body {background-color: #efeff4;}
+.mui-bar~.mui-content .mui-fullscreen {top: 44px; height: auto;}
+.mui-pull-top-tips {position: absolute; top: -20px; left: 50%; margin-left: -25px; width: 40px; height: 40px; border-radius: 100%; z-index: 1; }
+.mui-bar~.mui-pull-top-tips { top: 24px;}
+.mui-pull-top-wrapper {width: 42px; height: 42px; display: block; text-align: center; background-color: #efeff4; border: 1px solid #ddd; border-radius: 25px; background-clip: padding-box; box-shadow: 0 4px 10px #bbb; overflow: hidden;}
+.mui-pull-top-tips.mui-transitioning {-webkit-transition-duration: 200ms; transition-duration: 200ms;}
+.mui-pull-top-tips .mui-pull-loading {/*-webkit-backface-visibility: hidden; -webkit-transition-duration: 400ms; transition-duration: 400ms;*/ margin: 0;}
+.mui-pull-top-wrapper .mui-icon,
+.mui-pull-top-wrapper .mui-spinner {margin-top: 7px;}
+.mui-pull-top-wrapper .mui-icon.mui-reverse {/*-webkit-transform: rotate(180deg) translateZ(0);*/}
+.mui-pull-bottom-tips {text-align: center; background-color: #efeff4; font-size: 15px; line-height: 40px; color: #777;}
+.mui-pull-top-canvas {overflow: hidden; background-color: #fafafa; border-radius: 40px; box-shadow: 0 4px 10px #bbb; width: 40px; height: 40px; margin: 0 auto;}
+.mui-pull-top-canvas canvas {width: 40px;}
+/*
+弹出框
+ */
+.popupButton {background: #fff; border-radius: 15px; font-size: 25px; margin-bottom: 10px; float: right; color: #999;}
+.mui-backdrop {background-color: rgba(0,0,0,0.4);}
+.alertContent {position: absolute; top: 50%; left: 50%; width: 90%; margin-left: -45%; display: none; z-index: 101;}
+.buttonListLi {padding: 15px 23px; width: 100%; background-color: #FFFFFF; overflow: hidden; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 1px solid #E5E5E5;}
+.confirmBottonProfit {width: 100%; border: none; float: left; height: 40px; padding: 0px; line-height: 40px; text-align: center; color:#ffb319; font-size: 15px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 5px; border-bottom-right-radius: 0px; border-right: 1px solid #e5e5e5;}
+.cancelBottonProfit {width: 100%; border: none; float: left; height: 40px; padding: 0px; line-height: 40px; text-align: center; color:#999999; font-size: 15px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 5px; }
+.chioce {display: none;}
+.12b362{color: #12b362;}
+.f25749{color: #f25749;}
+#chioce {display: none; z-index: 100;}

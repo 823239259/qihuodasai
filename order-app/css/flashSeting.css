@@ -1,0 +1,46 @@
+@charset "utf-8";
+.mui-title p:nth-child(1){height: 25px; text-align: center; line-height: 25px; font-size: 15px; color:#333333; }
+.mui-title p:nth-child(2){height: 11px; text-align: center; line-height: 11px; font-size: 11px; color:#333333; }
+.mui-content{padding-bottom: 50px; }
+#flashPassageway{width: 100%; height: 30px; background-color: #ff8c1a; text-align: center; line-height: 30px; font-size: 13px; color: #FFFFFF; }
+.flash-seting-content{padding: 0px 15px; background-color: #FFFFFF; }
+.flash-seting-content ul li label{color: #666666; font-size: 13px; height: 50px; line-height: 50px; }
+.flash-seting-content ul li .chioce-button{width: 40px; height: 25px; vertical-align: middle; text-align: center; padding: 0px; line-height: 25px; font-size: 13px; color:#333333; border: none; }
+.flash-seting-content ul li{border-bottom: 1px solid #e5e5e5; }
+.flash-seting-content ul li:nth-last-child(1){border: none; }
+.flash-seting-content ul li span,.flash-seting-content ul li p{display: block; width: 50%; float: right; height: 50px; line-height: 50px; text-align: right; font-size: 15px; color:#333333; }
+.flash-seting-content ul li span{padding-right: 15px; background: url(../img/quote/rightArrow.png) no-repeat right center; background-size: 5px auto; }
+.flash-seting-content ul li .chioce-button.on{background-color: #ffb319; color:#FFFFFF; }
+#exchangeRate{margin-top: 5px; }
+#flashExplain{margin-top: 5px; padding: 13px 15px; background-color: #FFFFFF; }
+#flashExplainConatiner{padding: 0px 15px; background-color: #FFFFFF; }
+.flash-Explain{margin-top: 5px; width: 100%; position: relative; text-align: center; font-size: 13px; height: 50px; line-height: 50px; border-bottom: 1px solid #E5E5E5; }
+#flashExplain p{color: #666666; line-height: 25px; height: 25px; font-size: 13px; }
+#flashExplain p:nth-child(1){color:#f25749; }
+.openFlash{position: fixed; bottom: 8px; width: 100%; padding: 0px 15px; }
+.openFlash button{background-color: #ffb319; border: none; height: 40px; font-size: 15px; ; color: #fff; text-align: center; width: 100%; padding: 0px; line-height: 40px; width: 100%; }
+/*#alertContent1,#alertContent2{position: fixed; top: 50%; bottom: 50%; left: 50%; right: 50%; width: 90%; margin-left: -45%; }*/
+/*#closeCirlcle,#closeCirlcleStopLoss{display: block; width: 100%; background: url(../img/quote/closeCircle.png) no-repeat right center; height: 25px; background-size: 25px auto; margin-bottom: 10px; }*/
+/*#buttonListLi,#buttonListLiStopLoss{padding: 15px 23px; width: 100%; background-color: #FFFFFF; overflow: hidden; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 1px solid #E5E5E5; }*/
+#buttonListLi li,#buttonListLiStopLoss li{width:110px; text-align: center; font-size: 15px; color: #333333; margin-bottom: 10px; cursor: pointer; }
+#buttonListLi li:nth-child(2n+1),#buttonListLiStopLoss li:nth-child(2n+1){float: left; }
+#buttonListLi li:nth-child(2n+0),#buttonListLiStopLoss li:nth-child(2n+0){float: right; }
+#buttonListLi li.on,#buttonListLiStopLoss li.on{color:#FFFFFF; background-color: #ffb319; border-radius: 2px; }
+.alert-content-inside button:nth-child(3){width: 50%; border: none; float: left; height: 40px; padding: 0px; line-height: 40px; text-align: center; color:#ffb319; font-size: 15px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 5px; border-bottom-right-radius: 0px; }
+.alert-content-inside button:nth-child(4){width: 50%; border: none; float: left; height: 40px; padding: 0px; line-height: 40px; text-align: center; color:#999999; font-size: 15px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 5px; }
+/***
+ * 下单页面
+ * **/
+.flash-Explain .left-div{float: left; color:#666666; height: 50px; line-height: 50px; }
+.flash-Explain .right-div{float: right; color:#999999; height: 50px; line-height: 50px; }
+.flash-Explain  .center-div{position: absolute; width: 100%; color:#333333; font-size: 17px; height: 50px; line-height: 50px; }
+.rule-div{color: #666666; height: 50px; line-height: 50px; background-color: #FFFFFF; padding: 0px 15px 0px 33px; }
+.rule-div label{margin-left: 5px; font-size: 13px;vertical-align: middle;  }
+.rule-div label i{color:#ffb319; font-style: normal; }
+#orderList{position: fixed; bottom: 0px; height: 50px; line-height: 50px; text-align: center; width: 100%; background-color: #FFFFFF; border-top: 1px solid #e5e5e5; }
+#orderList  label{width: 57%; float: left; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; color:#333333; font-size: 13px; }
+#orderList  label i{font-size: 21px; font-weight: bold; font-style:normal; color:#ffb319; }
+#orderList button{display: inline-block; width: 43%; float: left; height: 50px; line-height: 50px; padding: 0px; border: none; background-color: #f25749; font-size: 17px; color:#FFFFFF; border-radius: 0px; }
+#chioceProfit{display: none; }
+#chioceStopLoss{display: none; }
+#checkboxButton{background-color: #ffb319; width:15px; height: 15px; border: none; padding: 0px; cursor: pointer;}
