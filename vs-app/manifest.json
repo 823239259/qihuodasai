@@ -16,8 +16,8 @@
 	},
 	"launch_path": "start.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
-		"name": "青岛艺华金斯达商贸有限公司",/*开发者名称*/
-		"email": "vs@vs.com",/*开发者邮箱地址*/
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
 		"url": ""
 	},
 	"permissions": {
