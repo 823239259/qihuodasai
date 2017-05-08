@@ -5,10 +5,10 @@
 		"iPad"
 	],
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "艺华金斯达金融",/*应用名称，程序桌面图标名称*/
+	"name": "维金期货",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
-		"code": "2017030900"
+		"name": "2.4.0",/*应用版本名称*/
+		"code": "2017050501"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -16,9 +16,9 @@
 	},
 	"launch_path": "start.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
-		"name": "",/*开发者名称*/
-		"email": "",/*开发者邮箱地址*/
-		"url": "http://www.dcloud.io"
+		"name": "青岛艺华金斯达商贸有限公司",/*开发者名称*/
+		"email": "vs@vs.com",/*开发者邮箱地址*/
+		"url": ""
 	},
 	"permissions": {
 		"Push": {
@@ -105,7 +105,7 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"},"sina":{"appkey":"926212424","appsecret":"39f93abbc724514ba9867a6610364e83","redirect_uri":"http://open.weibo.com/apps/1272700885/privilege/oauth","description":"可选，新浪微博分享"},"qq":{"appid":"1105527637","description":"QQ分享"}},"push":{"igexin":{"appid":"fRLYjPxMj48DlupC7XH4P1","appkey":"d1VbMkBFjx77hyeVojN0H5","appsecret":"JWGNMyXxuK6xn7FXHKbjp"}},"statics":{"umeng":{"appkey_ios":"57a29e6ce0f55a5a040013bd","channelid_ios":"appstore","appkey_android":"57b2d65067e58e601d00258a","channelid_android":"android"}}},
+		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"},"sina":{"appkey":"926212424","appsecret":"39f93abbc724514ba9867a6610364e83","redirect_uri":"http://open.weibo.com/apps/1272700885/privilege/oauth","description":"可选，新浪微博分享"},"qq":{"appid":"1105527637","description":"QQ分享"}},"push":{"igexin":{"appid":"oWVlP5jSZg9l1FtY6XvfT7","appkey":"pUSSWhvhXk9piMysEHNq97","appsecret":"SKdd2WH8sl9EghFLZqjb4"}},"statics":{"umeng":{"appkey_ios":"583d7749734be40bbb0010bc","channelid_ios":"appstore","appkey_android":"5909ac6ff5ade4156d001192","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
