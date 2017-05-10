@@ -3,7 +3,7 @@
 <head>      
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>金斯达</title>
+    <title>期货大赛</title>
     <script src="js/mui.min.js"></script>
     <script src="js/common.js"></script>
     <link href="css/mui.min.css" rel="stylesheet"/>
@@ -26,7 +26,7 @@
 		<a href="javascript:void(0);" id="toNews"><img src="images/news.png" id="newsimg"></a>
 		<h1 id="nav-title" class="mui-title">操盘申请</h1>
 		<!--<a href="#" class="top-tel" id="telBtn">客服热线</a>-->
-		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 	</header>
 	<nav class="navlist">
 		<a class="" href="javascript:void(0);" id="quotationMain">
@@ -36,6 +36,10 @@
 		<a class="navon" href="javascript:void(0);"  id="product">
 			<span class="mui-icon"><img src="images/1.0.png" style="width: 20px;height:20px;"></span>
 			<span class="mui-tab-label">操盘申请</span>
+		</a>
+		<a href="javascript:void(0);"  id="information">
+			<span class="mui-icon"><img src="images/4.png" style="width: 20px;height:20px;"></span>
+			<span class="mui-tab-label">资讯直播</span>
 		</a>
 		<a class="" href="javascript:void(0);"  id="scheme">
 			<span class="mui-icon"><img src="images/2.png" style="width: 20px;height:20px;"></span>
@@ -69,8 +73,30 @@
 					
 				</a>
 			</li>
-			
-			
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0);" id="cn">
+						<img src="images/icon1.png" />
+						<h2>A股行情风向标</h2>
+						<p>交易手续费：<i id="cn_tranfee">¥0/单边</i></p>
+						<p class="buttomP"><label>交易时间：</label><span>9:05-16:30,17:05-02:00</span></p>	
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0);" id="hsi">
+					<img src="images/icon2.png" />
+					<h2>港版IF 全网最低手续费</h2>
+					<p>交易手续费：<i id="hsi_tranfee">¥0/单边</i></p>
+					<p class="buttomP"><label>交易时间：</label><span>09:20-11:55,13:05-16:25,17:20-23:40</span></p>	
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0);" id="cl">
+						<img src="images/icon3.png" />
+					<h2>全天候交易 夜盘行情更好</h2>
+					<p>交易手续费：<i id="cl_tranfee">¥0/单边</i></p>
+					<p class="buttomP"><label>交易时间：</label><span>09:05-02:00</span></p>
+				</a>
+			</li>
 		</ul>
 	</div>
 </body>
@@ -80,6 +106,7 @@
 		mui.init({
 				swipeBack:true //启用右滑关闭功能
 		});
+		tzdr.online();
 			mui.plusReady(function(){ 
   			tzdr.init.initHearListener();
   			var dataUrl={
@@ -89,6 +116,7 @@
   				scheme:"tzdr/scheme.html",
   				listrg:"tzdr/future/listrg.html",
   				quotationMain:"tzdr/quotation/quotationMain.html",
+  				information: "tzdr/information/information.html"
   			}
   			initBottom(dataUrl);
   			var paramUrl={
@@ -101,7 +129,15 @@
 			document.getElementById("cp").addEventListener("tap",function(){
 				mui.openWindow("tzdr/future/cp.html","cp"); 
 			});
-			
+			document.getElementById("cn").addEventListener("tap",function(){
+				mui.openWindow("tzdr/future/cn.html","cn");
+			});
+			document.getElementById("hsi").addEventListener("tap",function(){
+				mui.openWindow("tzdr/future/hsi.html","hsi"); 
+			});
+			document.getElementById("cl").addEventListener("tap",function(){
+				mui.openWindow("tzdr/future/cl.html","cl");
+			});
 			//获取手续费
 			setTranfees();
 			/** 

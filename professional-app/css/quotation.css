@@ -891,12 +891,12 @@ input{
 	height: 39px;
 	line-height: 39px;
 	font-size: 14px;
-	
+	float: left;
 }				
 .commStyle input{
 	height: 40px;;
 	line-height: 40px;
-	width:76.8% ;
+	width:100% ;
 	padding-left: 10px;
 	font-size:14px;
 	position: relative;
@@ -907,6 +907,9 @@ input{
 	border: none;
 	color:#666666;
 	background-color: rgba(0,0,0,0);
+	float: left;
+	margin-top: -40px;
+	margin-left: 70px;
 }
 .commStyle select{
 	height: 39px;;
@@ -955,8 +958,8 @@ input{
 	margin-bottom: 30%;
 }
 #logo img{
-	width: 220px;
-	height: auto;
+	width: 80px;
+	height: 100px;
 	display: block;
 	margin: auto;
 }

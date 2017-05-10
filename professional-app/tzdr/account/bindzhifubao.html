@@ -27,7 +27,7 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 			<h1 class="mui-title">支付宝</h1>		
-			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 		</header>
 		<div class="mui-content">
 		<!--	<div id="item2mobile" class="mui-slider-item mui-control-content ac_alipay">-->
@@ -44,11 +44,11 @@
 						<ul class="mui-table-view">
 							<li class="mui-table-view-cell">
 								<label>收款人支付宝账户</label>
-								<span>qdjinsida@163.com</span>
+								<span>weisheng@vs.com</span>
 							</li>
 							<li class="mui-table-view-cell">
 								<label>收款人账户名称</label>
-								<span>青岛艺华金斯达商贸有限公司</span>
+								<span>成都维胜智慧科技有限公司</span>
 							</li>
 						</ul>
 						<!--<div class="ac_btn">
@@ -56,7 +56,7 @@
 						</div>-->
 						<div class="mui-content-padded">
 							<h5>温馨提示：</h5>
-							<p>1、若在该页面打开支付宝失败，您可以手动启动支付宝APP或者登录支付宝官网，选择转账到支付宝账户，手工输入青岛艺华金斯达商贸有限公司的收款支付宝账户，最终完成转账。</p>
+							<p>1、若在该页面打开支付宝失败，您可以手动启动支付宝APP或者登录支付宝官网，选择转账到支付宝账户，手工输入青岛艺华期货大赛商贸有限公司的收款支付宝账户，最终完成转账。</p>
 							<p>2、最快5分钟内到账，最晚下一个工作日09:15前到账。</p>
 						</div>
 					<!--</div>
@@ -69,6 +69,7 @@
 		</div>
 	</body>
 	<script>
+		tzdr.online();
 	mui.plusReady(function(){
 		tzdr.init.initHearListener();
 		getalipayAcount();
@@ -112,7 +113,7 @@
 				mui.toast("请绑定支付宝");
 				return
 			}
-			plus.runtime.openURL("https://qr.alipay.com/aex09078kvrnzru19t4ri67");
+			plus.runtime.openURL("https://qr.alipay.com/aex03954yodc0tgk3uog8d7");
 			
 		});
 		function getalipayAcount() {

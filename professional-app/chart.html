@@ -3,15 +3,16 @@
 <head>      
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>金斯达</title>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="css/own.css" rel="stylesheet"/>
+    <title>期货大赛</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+	<link href="css/common.css" rel="stylesheet"/>
+	<link href="css/about.css" rel="stylesheet"/>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav own-topbg"> 
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="test"></a>
-		<h1 id="nav-title" class="mui-title" >在线客服</h1>
-	</header>
+	<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">在线客服</h1>
+		</header>
 		<script src="js/mui.min.js"></script> 
 		<script src="js/common.js"></script>
 		<script>
@@ -20,8 +21,7 @@
 				var phone = plus.storage.getItem("user_mobile");
     			var userName = encodeURI(encodeURI(plus.storage.getItem("userName")));
 				plus.nativeUI.showWaiting( "正在加载..." );
-    			//var window=plus.webview.create("http://192.168.0.188:8080/vs-web/topic/consistentBeauty/consistentbeauty.html?phone="+phone+"&userName="+userName+"","index",{top:"40px"});
-				var window=plus.webview.create("http://www.mzkqh.com/topic/consistentBeauty/consistentbeauty.html?phone="+phone+"&userName="+userName+"","index",{top:"45px"});
+				var window=plus.webview.create("http://www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone="+phone+"&userName="+userName+"","index",{top:"45px"});
 				window.show();
 				setTimeout(function(){
 					plus.nativeUI.closeWaiting();
@@ -29,10 +29,9 @@
 			});
 		</script>
 		<script>
-		mui.plusReady(function(){ 
-			var  a=mui.app_filePath1("chart.html");
-			//console.log(a);
-		});
+//		mui.plusReady(function(){ 
+//			var  a=mui.app_filePath("chart.html");
+//		});
 		</script>
 	</body>
 </html>

@@ -23,15 +23,15 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left quotationBack" id="backClose"><i>返回</i></a>
 			<h1 class="mui-title">操盘登录</h1>
-			<a id='forgetPassword' href="javascript:void(0)">忘记密码</a>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 		</header>
 		<div class="mui-content" class="operateLogin">
 			<div id="inputList">
-				<div id="accountType" class="commStyle">
+				<div id="accountType" class="commStyle" style="display: none;">
 					<label>账号类型：</label>
 					<select class="accountSelect mui-btn mui-btn-block">
-						<option class="mui-selected" value="0">实盘账号</option>
 						<option class="mui-selected" id="checkContent" value="1">模拟盘账号</option>
+						<!--<option class="mui-selected" value="0">实盘账号</option>-->
 					</select>
 					<img src="../../images/down.png" id="selectBg">
 				</div>
@@ -47,14 +47,14 @@
 				</div>
 				<div class="mui-content-padded" style="margin-top: 20px;">
 					<button class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
-					<button id='regLogin' class="mui-btn mui-btn-block">实盘开户申请</button>
+					<button id='regLogin' class="mui-btn mui-btn-block">模拟盘开户申请</button>
 				</div>
 				<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 					<p id="loginAgree"><span id="checkBox"><i ></i></span>
 						<sapn>阅读并接受</sapn>
-						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《艺华金斯达行情交易协议》</a>
+						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《期货大赛注册协议》</a>
 					</p>
-					<p id="tipsMoni">模拟盘账密为您的艺华金斯达账密，如有问题请拨打400-180-1860</p>
+					<p id="tipsMoni">模拟盘账密为您的期货大赛账密，如有问题请拨打400-852-8008</p>
 				</div>
 			</div>
 			<div id="username_list">
@@ -65,13 +65,14 @@
 		<script type="text/javascript">
 			initTradeConfig();
 			mui.init();
+			tzdr.online();
 			var width = window.innerWidth;
-			$(".commStyle input,.commStyle select").css({
+			/*$(".commStyle input,.commStyle select").css({
 				"width": width - 140 + "px",
 			});
 			$("#username_list li").css({
 				"width": width - 125 + "px"
-			})
+			})*/
 			mui.plusReady(function() {
 				/*加载新手指南*/
 				var islogin = false;
@@ -154,8 +155,8 @@
 				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null) {
 					$(".accountSelect").val(tradeWebSocketIsMock);
 				} else {
-					$(".accountSelect").val(0);
-					tradeWebSocketIsMock = 0;
+					$(".accountSelect").val(1);
+					tradeWebSocketIsMock = 1;
 				}
 				$(".accountSelect").change(function() {
 					var $this = $(this);
@@ -222,17 +223,17 @@
 						"display": "none",
 					});
 					mui.openWindow({
-						url: "../future/cp.html",
-						id: "cp"
+						url: "../../home.html",
+						id: "home"
 					});
 				}
 
 				function loginCheckBind() {
 					mui.openWindow("regist.html");
 				}
-				document.getElementById("forgetPassword").addEventListener("tap", function() {
+				/*document.getElementById("forgetPassword").addEventListener("tap", function() {
 					mui.openWindow("retrievePassword.html");
-				});
+				});*/
 				document.getElementById("backClose").addEventListener("tap", function() {
 					if(Transfer.backpageID) {
 						backReload();
@@ -248,7 +249,6 @@
 							mui.toast("请输入账号");
 							return;
 						};
-	
 						if(mui.isnull(pwd)) {
 							mui.toast("请输入密码");
 							return;

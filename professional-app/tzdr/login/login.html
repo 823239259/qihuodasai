@@ -73,9 +73,9 @@
 						}
 						mui.openWindow({url:"../account/accountno.html",id:"accountno"});
     		});
-    		document.getElementById("telBtn").addEventListener("tap",function(){
+    		/*document.getElementById("telBtn").addEventListener("tap",function(){
     			mui.callService();
-    		});
+    		});*/
 			document.getElementById("reg").addEventListener("tap",function(){
 				mui.openWindow("regist.html");
 			});
@@ -191,7 +191,7 @@
 	<header class="mui-bar mui-bar-nav topMenu">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 		<h1 class="mui-title">登录</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 	</header>
 	<div class="mui-content ">
 		<div id="logo">
@@ -222,7 +222,7 @@
 	</div>
 	<script src="../../js/jquery-1.11.3.js"></script>
 	<script>
-		
+		tzdr.online();
 	</script>
 </body>
 </html>

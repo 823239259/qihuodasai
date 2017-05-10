@@ -11,9 +11,9 @@
     <script>
     	mui.init();
     	mui.plusReady(function(){
-    		document.getElementById("telBtn").addEventListener("tap",function(){
+    		/*document.getElementById("telBtn").addEventListener("tap",function(){
     			mui.callService();
-    		});
+    		});*/
     		document.getElementById("back").addEventListener("tap",function(){
     			history.back();
     		});
@@ -26,7 +26,10 @@
 	<header class="mui-bar mui-bar-nav own-topbg">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 		<h1 id="nav-title" class="mui-title">我的账户</h1>
-		<a href="#" class="top-tel" id="telBtn">客服热线</a>
+		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 	</header>
 </body>
+<script>
+	tzdr.online();
+</script>
 </html>

@@ -74,6 +74,7 @@
   				scheme:"../scheme.html",
   				listrg:"../future/listrg.html",
   				quotationMain:"../quotation/quotationMain.html",
+  				information:"../information/information.html"
   			}
       		
       		
@@ -168,11 +169,11 @@
       	
     </script>
 </head>
-<body>
+<body><!--id="online">在线客服</a>     tzdr.online();-->
 	<header class="mui-bar mui-bar-nav own-topbg">
 		<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>-->
 		<h1 class="mui-title">我的账户</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="telBtn">客服热线</a>
+		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 	</header>	
 	<nav class="navlist">
 		<a class="" href="javascript:void(0);" id="quotationMain" >
@@ -183,6 +184,10 @@
 		<a class="" href="javascript:void(0);"  id="product">
 			<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
 			<span class="mui-tab-label">操盘申请</span>
+		</a>
+		<a href="javascript:void(0);"  id="information">
+			<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
+			<span class="mui-tab-label">资讯直播</span>
 		</a>
 		<a class="" href="javascript:void(0);"  id="scheme">
 			<span class="mui-icon"><img src="../../images/2.png" style="width: 20px;height:20px;"></span>
@@ -232,7 +237,7 @@
 				<a class="mui-navigate-right" href="javascript:void(0)" id="Invitation"><img src="../../images/ac_04.png"><i>邀请有礼</i></a>
 			</li>-->
 			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="about"><img src="../../images/about.png"><i>关于金斯达</i></a>
+				<a class="mui-navigate-right" href="javascript:void(0)" id="about"><img src="../../images/about.png"><i>关于期货大赛</i></a>
 			</li>
 		</ul>
 		<ul class="mui-table-view ac_listbtn">
@@ -276,7 +281,8 @@
 			  $("#box").css({
 			  	"margin":"auto",
 			  });
-		})
+		});
+		tzdr.online();
 	</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var model = "live";
+var model = "dev";
 var tradeSocketUrl = "";
 var tradeSocketModelUrl = "";
 var tradeSocketVersion = "";
@@ -45,7 +45,7 @@ function MarketConfig(){
 	return this;
 }
 function MarketConfigTest(){
-	this.MarketSocketUrl = "ws://192.168.0.223:9002";
+	this.MarketSocketUrl = "ws://192.168.0.213:9002";
 	this.username = "13677622344";
 	this.password = "a123456";
 	return this;

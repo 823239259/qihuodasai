@@ -78,7 +78,8 @@
       "images/2.png",
       "images/3.png",
       "images/0.png",
-      "js/jquery-1.11.3.js"
+      "js/jquery-1.11.3.js",
+      "images/4.png"
     ],
     "refer": [
       "list.html",
@@ -103,7 +104,8 @@
       "tzdr/quotation/activity.html",
       "tzdr/account/recharge.html",
       "tzdr/future/DetailCl.html",
-      "tzdr/future/DetailCp.html"
+      "tzdr/future/DetailCp.html",
+      "tzdr/information/information.html"
     ]
   },
   "list.html": {
@@ -138,7 +140,9 @@
       "js/jquery-1.11.3.js",
       "images/weixinIcon.png",
       "images/close.png",
-      "images/close1.png"
+      "images/close1.png",
+      "images/about.png",
+      "images/4.png"
     ],
     "refer": [
       "tzdr/commonback.html",
@@ -591,7 +595,8 @@
       "tzdr/future/listrg.html",
       "tzdr/future/add.html",
       "tzdr/future/DetailCl.html",
-      "tzdr/future/end.html"
+      "tzdr/future/end.html",
+      "tzdr/login/operateLogin.html"
     ],
     "priority": 0
   },
@@ -613,7 +618,8 @@
       "images/0.png",
       "images/2.png",
       "images/1.png",
-      "images/weixinIcon.png"
+      "images/weixinIcon.png",
+      "images/about.png"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -946,7 +952,8 @@
       "images/0.png",
       "images/status_02.png",
       "images/status_04.png",
-      "images/status_03.png"
+      "images/status_03.png",
+      "images/4.png"
     ],
     "refer": [
       "tzdr/account/account.html",
@@ -954,7 +961,8 @@
       "tzdr/quotation/quotationMain.html",
       "tzdr/future/DetailCn.html",
       "tzdr/future/DetailHsi.html",
-      "tzdr/future/DetailCp.html"
+      "tzdr/future/DetailCp.html",
+      "tzdr/future/DetailCl.html"
     ]
   },
   "tzdr/account/openUrlPay.html": {
@@ -1012,7 +1020,8 @@
       "images/quotation0.png",
       "images/quotation.png",
       "images/quotationColse.png",
-      "images/quotation4.png"
+      "images/quotation4.png",
+      "images/4.png"
     ],
     "refer": [
       "home.html",
@@ -1382,7 +1391,8 @@
       "fonts/mui.ttf",
       "js/jquery-1.11.3.js",
       "images/0.0.png"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/account/dxtxPay.html": {
     "resources": [
@@ -1391,7 +1401,8 @@
       "js/mui.min.js",
       "js/jquery-1.11.3.js",
       "css/mui.min.css"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/account/alipay.html": {
     "resources": [
@@ -1400,7 +1411,8 @@
       "js/mui.min.js",
       "js/jquery-1.11.3.js",
       "css/mui.min.css"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/account/bindzhifubao.html": {
     "resources": [
@@ -1412,7 +1424,8 @@
       "fonts/mui.ttf",
       "css/mui.min.css",
       "js/pingpp.js"
-    ]
+    ],
+    "refer": []
   },
   "tzdr/account/Invitation.html": {
     "resources": [
@@ -1431,6 +1444,50 @@
       "js/common.js",
       "js/mui.min.js",
       "css/mui.min.css"
-    ]
+    ],
+    "refer": []
+  },
+  "tzdr/agree/tzdr.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "tzdr/information/information.html": {
+    "resources": [
+      "images/directSeed-country.png",
+      "js/mui.pullToRefresh.js",
+      "js/information.js",
+      "js/mui.picker.min.js",
+      "js/mui.pullToRefresh.material.js",
+      "css/mui.picker.min.css",
+      "images/directSeedCalendar.png",
+      "css/information.css",
+      "images/4.0.png",
+      "images/Seoul.png",
+      "images/directSeed-clock.png",
+      "images/France.png",
+      "images/Sweden.png",
+      "images/Italy.png",
+      "images/USA.png",
+      "images/Germany.png",
+      "images/China.png",
+      "images/Japan.png",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "images/0.png",
+      "css/own.css",
+      "images/2.png",
+      "js/common.js",
+      "images/1.png",
+      "images/3.png",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": []
   }
 }

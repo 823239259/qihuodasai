@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/search.css" />
+		<title>搜索页面</title>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+		    <h1 class="mui-title">
+		    	<form action="searchResult.html"> 
+		    		<input type="text" id="search" placeholder="请输入关键词" style="color: #000;" value=""/>
+		    	</form>
+		    </h1>
+		    <a id="searchButton" class="mui-action-back">取消</a>
+		</header>
+		<div class="mui-content">
+			<div id="searchContainer">
+				<p id=""><span>搜索历史</span><span id="clearSearchHistory">清除搜索历史</span></p>
+				<ul id="searchHistory">
+					<li>富时A50</li>
+					<li>富时A50</li>
+					<li>富时A501</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		document.getElementById("clearSearchHistory").addEventListener("tap",function(){
+			document.getElementById("searchHistory").innerHTML="";
+		});
+	</script>
+</html>

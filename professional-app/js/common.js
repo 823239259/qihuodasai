@@ -232,8 +232,8 @@
 	 * @param {Object} file_url 文件及文件所在位置    如：tzdr/login/login.html
 	 */
 	mui.app_filePath=function(file_url){
-//		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
-//		var filePath = plus.io.convertAbsoluteFileSystem(path);
+		var path=plus.io.convertLocalFileSystemURL('_www/'+file_url);
+		var filePath = plus.io.convertAbsoluteFileSystem(path);
 		return filePath;
 	}
 	
@@ -274,10 +274,12 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain:"http://api.mzkqh.com/", 
+//		api_domain:"http://test.api.mzkqh.com/", 
+		api_domain: "http://test.api.dktai.cn/",
 //		api_domain:"http://192.168.0.72:8080/vs-api/", 
 		//图片地址
-		base_images_url:'http://manage.mzkqh.com/',
+		base_images_url: 'http://test.manage.dktai.cn/',
+//		base_images_url:'http://manage.mzkqh.com/',
 		//token
 		user_token:'user_token',
 		//密钥 
@@ -287,7 +289,9 @@ var tzdr = {
 		//区分appstore，如:false=否，true=是,默认值为false
 		is_appstore:false,
 		//企业ipa下载地址
-		ipa_download_url:'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8'
+		ipa_download_url:'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8',
+		// 财经日历、7*24小时
+		api_calendar: 'http://api.vs.com/'
 	},
 	cacheNews:{
 		// 新闻加载日期
@@ -491,6 +495,12 @@ var tzdr = {
 		removeY:function(s){
 			return s.substring(1);
 		}
+	},
+	online: function() {
+		document.getElementById("online").addEventListener("tap", function() {
+			var path = mui.app_filePath("chart.html");
+			mui.openWindow(path, "online");
+		});
 	}
 }
 
@@ -606,7 +616,7 @@ tzdr.kuaiqiangshou=function(obj){
 		});
 }
 function initBottom(data){
-	document.getElementById("account").addEventListener("tap",function(){
+				document.getElementById("account").addEventListener("tap",function(){
 						if (mui.cacheUser.isLogin()){
 							var a=plus.webview.getWebviewById("account");
 							if(a){
@@ -642,6 +652,13 @@ function initBottom(data){
 						mui.app_refresh('quotationMain');  
 					}
 					mui.openWindow({url:data.quotationMain,id:"quotationMain"});
+				});
+				document.getElementById("information").addEventListener("tap",function(){
+					var p=plus.webview.getWebviewById("information");
+					if(p){
+						mui.app_refresh('information');  
+					}
+					mui.openWindow({url:data.information,id:"information"});
 				});
 	}
 String.prototype.trim = function() {
