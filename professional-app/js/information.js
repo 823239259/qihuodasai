@@ -324,7 +324,7 @@ function time() {
 				var li;
 				li = document.createElement('li');
 				li.innerHTML = '<div style="width: 100%;height: 115px; position: absolute; z-index: 99999; background: #efeff4;"><div id="noSearchResultContainer" >' +
-	            				'没有没有数据拉</div></div>';
+	            				'没有搜索到相关财经日历！</div></div>';
 				ul.append(li);
 			}
 		}else{
@@ -332,7 +332,7 @@ function time() {
 			var li;
 			li = document.createElement('li');
 			li.innerHTML = '<div style="width: 100%;height: 115px; position: absolute; z-index: 99999; background: #efeff4;"><div id="noSearchResultContainer" >' +
-	        				'没有没有数据拉</div></div>';
+	        				'没有搜索到相关财经日历！</div></div>';
 			ul.append(li);
 		}
 	}
@@ -460,7 +460,7 @@ function time() {
 				var li;
 				li = document.createElement('li');
 				li.innerHTML = '<div style="width: 100%;height: 115px; position: absolute; z-index: 99999; background: #efeff4;"><div id="noSearchResultContainer" >' +
-	            				'没有数据拉</div></div>';
+	            				'暂时无数据！</div></div>';
 				ul.append(li);
 			}
 		}

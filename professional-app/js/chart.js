@@ -171,6 +171,9 @@ mui.plusReady(function() {
 					}
 					$("#chioceContract").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					$("#chioceContract1").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
+					if(comm.IsUsed==0){
+			        		continue
+			        	}
 					if(Transfer.name[2] == newCommdityNo) {
 						tradeTitleHtml.innerHTML += "<option value=" + commdityAndContract + " selected>" + comm.CommodityName + "</option>"
 					} else {

@@ -891,7 +891,8 @@ input{
 	height: 39px;
 	line-height: 39px;
 	font-size: 14px;
-	
+	/*display: inline-block;
+    width: 60px;*/
 }				
 .commStyle input{
 	height: 40px;;
@@ -955,7 +956,7 @@ input{
 	margin-bottom: 30%;
 }
 #logo img{
-	width: 220px;
+	width: 80px;
 	height: auto;
 	display: block;
 	margin: auto;

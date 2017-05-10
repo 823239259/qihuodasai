@@ -275,9 +275,13 @@
 				//订阅合约
 				function sendSubscrib(jsonData){
 					var commoditys = jsonData.Parameters;
+					console.log(JSON.stringify(commoditys));
 			        var size = commoditys.length;
 			        var setTime=null;	
 			        for(var i=0;i<size;i++){
+			        	if(commoditys[i].IsUsed==0){
+			        		continue
+			        	}
 			            product.CommodityName[i]=commoditys[i].CommodityName;
 			            product.CommodityNo1[i]=commoditys[i].MainContract;
 			            product.CommodityNo2[i]=commoditys[i].CommodityNo;
