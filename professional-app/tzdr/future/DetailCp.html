@@ -54,12 +54,13 @@
 	    		});
     		}
     		function insertDateils(data){
+    			console.log(1);
     			for(var i=0;i<data.length;i++){
     				var _data = data[i];
     				$("#historyDetailsTable").append("<tr>"+
     						"<td>"+Number(i+1)+"</td>" +
 	    				"<td>"+_data.tradeDate+"</td>" +
-						"<td>"+_data.username+"</td>" +
+//						"<td>"+_data.username+"</td>" +
 						"<td>"+_data.userNo+"</td>" +
 						"<td>"+_data.currencyNo+"</td>" +
 						"<td>"+_data.exchangeNo+"</td>" +
@@ -68,10 +69,10 @@
 						"<td>"+Number(_data.sellNum)+"</td>" +
 						"<td>"+Number(_data.tradePrice).toFixed(4)+"</td>" +
 						"<td>"+Number(_data.free).toFixed(2)+"</td>" +
-						"<td>"+_data.orderType+"</td>" +
-						"<td>"+_data.orderUserno+"</td>" +
-						"<td>"+_data.orderUsername+"</td>" +
-						"<td>"+_data.tradeType+"</td>" +
+//						"<td>"+_data.orderType+"</td>" +
+//						"<td>"+_data.orderUserno+"</td>" +
+//						"<td>"+_data.orderUsername+"</td>" +
+//						"<td>"+_data.tradeType+"</td>" +
 	    			"</tr>");
     			}
     			
@@ -578,7 +579,7 @@
 							<tr>
 								<td width="50px">序号</td>
 								<td width="200px">成交日期</td>
-								<td width="100px">客户名称</td>
+								<!--<td width="100px">客户名称</td>-->
 								<td width="100px">客户号</td>
 								<td width="100px">币种</td>
 								<td width="100px">交易所</td>
@@ -587,10 +588,10 @@
 								<td width="80px">卖</td>
 								<td width="100px">成交价</td>
 								<td width="80px">手续费</td>
-								<td width="100px">下单类型</td>
-								<td width="100px">下单人编号</td>
-								<td width="100px">下单人姓名</td>
-								<td width="100px">成交类型</td>
+								<!--<td width="100px">下单类型</td>-->
+								<!--<td width="100px">下单人编号</td>-->
+								<!--<td width="100px">下单人姓名</td>-->
+								<!--<td width="100px">成交类型</td>-->
 							</tr>
 						</thead>
 					</table>

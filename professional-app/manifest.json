@@ -1007,7 +1007,8 @@
 					"tzdr/quotation/quotationMain.html",
 					"tzdr/future/DetailHsi.html",
 					"tzdr/future/DetailCp.html",
-					"tzdr/future/DetailCl.html"
+					"tzdr/future/DetailCl.html",
+					"tzdr/information/information.html"
 				],
 				"priority": 0
 			},
@@ -1735,9 +1736,18 @@
 					"images/1.png",
 					"images/3.png",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"images/Zealand.png",
+					"images/Belgium.png",
+					"images/Britain.png",
+					"images/Switzerland.png",
+					"images/Canada.png",
+					"images/Austria.png"
 				],
-				"refer": [],
+				"refer": [
+					"tzdr/future/listrg.html",
+					"home.html"
+				],
 				"priority": 0
 			}
 		},

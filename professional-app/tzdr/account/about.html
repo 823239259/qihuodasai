@@ -114,7 +114,7 @@
 			<div class="about-top"></div>
 			<ul id="list" class="mui-table-view ac_list">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0)" id="editonButton"><i>版本号</i><span id="editon"></span></a>
+					<a  href="javascript:void(0)" id="editonButton"><i>版本号</i><span id="editon"></span></a>
 				</li>
 				<!--<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="score"><i>来给期货大赛来评分吧~</i></a>
@@ -151,26 +151,26 @@
 				document.getElementById("openPage").addEventListener("tap", function() {
 					$(".alertDiv").css("display", "none");
 				});
-				document.getElementById("score").addEventListener("tap", function() {
-					if(plus.os.name == "Android") {
-						mui.callService();
-					} else if(plus.os.name == "iOS") {
-						//plus.runtime.openURL("https://itunes.apple.com/.global/app/wei-sheng-qi-huo/id1140076487?mt=8");
-					}
-				});
+//				document.getElementById("score").addEventListener("tap", function() {
+//					if(plus.os.name == "Android") {
+//						mui.callService();
+//					} else if(plus.os.name == "iOS") {
+//						//plus.runtime.openURL("https://itunes.apple.com/.global/app/wei-sheng-qi-huo/id1140076487?mt=8");
+//					}
+//				});
 
-				/*document.getElementById("editonButton").addEventListener("tap", function() {
-					if(dataVersion == undefined) {
-						return
-					}
-					if(dataVersion.Android.version > wgtVer) {
-						$(".alertDiv").css("display", "block");
-					} else if(plus.os.name == "iOS") {
-						
-					}else {
-						mui.toast("当前为最新版本，无需更新~");
-					}
-				});*/
+//				document.getElementById("editonButton").addEventListener("tap", function() {
+//					if(dataVersion == undefined) {
+//						return
+//					}
+//					if(dataVersion.Android.version > wgtVer) {
+//						$(".alertDiv").css("display", "block");
+//					} else if(plus.os.name == "iOS") {
+//						
+//					}else {
+//						mui.toast("当前为最新版本，无需更新~");
+//					}
+//				});
 				// 获取本地应用资源版本号
 				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 					wgtVer = inf.version;
@@ -287,7 +287,7 @@
 						$("#editon").css({ "background": "url(../../images/newEdition.jpg) no-repeat right center", "padding-right": "60px", "background-size": "40px auto" });
 					}
 					if(plus.os.name == "Android") {
-						console.log(Android.content);
+						//console.log(Android.content);
 						$(".editonContent").html(Android.content);
 						var length=$(".editonContent p").length;
 						$(".alertDivContent").css({"height":length*25+140+"px","margin":-(length*25+140)/2+"px 0px 0px -45%"});
