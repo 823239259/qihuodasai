@@ -891,13 +891,13 @@ input{
 	height: 39px;
 	line-height: 39px;
 	font-size: 14px;
-	/*display: inline-block;
-    width: 60px;*/
+	display: inline-block;
+    width: 70px;
 }				
 .commStyle input{
 	height: 40px;;
 	line-height: 40px;
-	width:76.8% ;
+	width:60% ;
 	padding-left: 10px;
 	font-size:14px;
 	position: relative;
