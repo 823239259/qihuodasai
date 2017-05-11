@@ -1,4 +1,4 @@
-var model = "dev";
+var model = "live";
 var tradeSocketUrl = "";
 var tradeSocketModelUrl = "";
 var tradeSocketVersion = "";
@@ -39,7 +39,7 @@ function TradeConfigTest(){
 }
 
 function MarketConfig(){
-	this.MarketSocketUrl = "ws://quote.mzkqh.com:9002";
+	this.MarketSocketUrl = "ws://quote.vs.com:9002";
 	this.username = "13677622344";
 	this.password = "a123456";
 	return this;
