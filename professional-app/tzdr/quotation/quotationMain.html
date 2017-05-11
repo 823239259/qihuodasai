@@ -280,15 +280,16 @@
 			        var setTime=null;	
 			        for(var i=0;i<size;i++){
 			        	if(commoditys[i].IsUsed==0){
+			        		console.log(JSON.stringify(commoditys[i]));
 			        		continue
 			        	}
-			            product.CommodityName[i]=commoditys[i].CommodityName;
-			            product.CommodityNo1[i]=commoditys[i].MainContract;
-			            product.CommodityNo2[i]=commoditys[i].CommodityNo;
-			           	product.DotSize[i]=commoditys[i].DotSize;
-			           	product.ExchangeNo[i]=commoditys[i].ExchangeNo;
-			           	product.MiniTikeSize[i]=commoditys[i].MiniTikeSize;
-			            product.ContractSize[i]=commoditys[i].ContractSize;
+			            product.CommodityName.push(commoditys[i].CommodityName);
+			            product.CommodityNo1.push(commoditys[i].MainContract);
+			            product.CommodityNo2.push(commoditys[i].CommodityNo);
+			           	product.DotSize.push(commoditys[i].DotSize);
+			           	product.ExchangeNo.push(commoditys[i].ExchangeNo);
+			           	product.MiniTikeSize.push(commoditys[i].MiniTikeSize);
+			            product.ContractSize.push(commoditys[i].ContractSize);
 			           socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
 			        }
 				}
@@ -300,6 +301,7 @@
 				function AddTo(){
 				    var productList=document.getElementsByClassName("productList")[0];
 				     productList.innerHTML="";
+				     console.log(product.CommodityName);
 				    for(var i=0;i<product.CommodityName.length;i++){
            				 productList.innerHTML+="<div class='openPage'><div class='productContentLeft mui-col-xs-3' >" +
                     " <p class='productName'>"+product.CommodityName[i]+"</p> " +
