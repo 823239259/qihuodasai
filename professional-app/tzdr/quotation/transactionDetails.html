@@ -630,7 +630,7 @@
 				    			<tr>
 				    				<td >时间</td>
 				    				<td>
-				    					<input type="text" placeholder="选择时间" data-options='{"type":"time"}' id="insertTimeInput"  value="0" readonly="readonly"/>
+				    					<input type="text" placeholder="选择时间" data-options='{"type":"time"}' id="insertTimeInput"   readonly="readonly"/>
 				    				</td>
 				    				<td></td>
 				    				<td></td>
@@ -1065,6 +1065,7 @@
 							 * rs.h 时，用法同年
 							 * rs.i 分（minutes 的第二个字母），用法同年
 							 */
+							console.log(rs.text);
 							document.getElementById("insertTimeInput").value = rs.text;
 							/* 
 							 * 返回 false 可以阻止选择框的关闭

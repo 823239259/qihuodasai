@@ -2743,8 +2743,7 @@ function bindOpertion() {
 			var additionType = param.AdditionType;
 			var additionPrice = param.AdditionPrice;
 			var df = new Date(timeTriggerPoint);
-			var dfTime = df.getTime();
-			var time = formatDateHHMMSS(new Date(dfTime));
+			var time =timeTriggerPoint.split(" ")[1];
 			$("#chioceContract").val(contractCode);
 			$("#chiocePrices").val(compareType);
 			$("#ConditoionPricesInput").val(priceTriggerPonit);
