@@ -568,6 +568,8 @@ function time() {
         	country ="<img src='../../images/Australia.png'/>";
         }else if(fund.country == "奥地利") {
         	country ="<img src='../../images/Austria.png'/>";
+        }else {
+        	country ="<img src='../../images/allCity.png'/>";
         }
         var now = Date.parse(new Date());
 		var timestamp = fund.timestamp+"000";
