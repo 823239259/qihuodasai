@@ -55,9 +55,16 @@
 		document.getElementById("operateLogin").addEventListener("tap",function(){
 			registUser();
 		});
+		document.getElementById("checkbox").addEventListener("tap", function() {
+			var _this = $(this);
+			var check = _this.attr("class");
+			if(check == "checked") {
+				_this.removeClass("checked");
+			} else if(check == "") {
+				_this.addClass("checked");
+			}
+		});
 		document.getElementById("yzm").addEventListener("tap",function(){
-			var mobile="18780199916";
-			mui.open_window_data("confirmPassword.html", "confirmPassword", {"mobile": mobile });
 			getCode() ;
 		});
 		
@@ -111,7 +118,7 @@
 				mui.toast("验证码不能为空！");
 				return;
 			}
-			if($("#checkBox i").val() == 1) {
+			if($("#checkbox").hasClass("checked")) {
 
 			} else {
 				mui.toast("您还未勾选协议");
@@ -122,13 +129,6 @@
 				'code': code,
 			}, function(result) {
 				mui.open_window_data("confirmPassword.html", "confirmPassword", {"mobile": mobile });
-//				mui.openWindow({
-//					url: 'confirmPassword.html',
-//					id: 'confirmPassword.html',
-//					extras: {
-//						mobile: mobile,
-//					}
-//				});
 				return;
 			}, function(result) {
 				if(result.code == 2) {

@@ -61,13 +61,13 @@
 					onSuccess(data);
 				} else {
 					if(data.code == -1) {
-						if(paramUrl != undefined || paramUrl != null || paramUrl != "") {
-							mui.cacheUser.clearCachePages(true);
-							mui.cacheUser.clear();
-							mui.toast("认证失败，请重新登录！");
-							mui.openWindow({ url: params.url, id: "login" });
-							return;
-						}
+//						if(paramUrl != undefined || paramUrl != null || paramUrl != "") {
+//							mui.cacheUser.clearCachePages(true);
+//							mui.cacheUser.clear();
+//							mui.toast("认证失败，请重新登录！");
+////							mui.openWindow({ url: params.url, id: "login" });
+//							return;
+//						}
 					}
 					onError(data);
 				}
@@ -240,8 +240,7 @@
 		var data = null;
 		if(vs.browser.versions.Html5Plus) {
 			var currentWebview = plus.webview.currentWebview();
-			data = currentWebview.extras;
-			console.log(data);
+			data = currentWebview.pageData;
 		} else {
 			var pageId=window.location.search.split("?")[1];
 			data = sessionStorage.getItem(pageId);

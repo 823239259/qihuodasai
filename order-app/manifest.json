@@ -265,7 +265,8 @@
 				],
 				"refer": [
 					"vs/directSeed/directSeed.html",
-					"vs/account/account.html"
+					"vs/account/account.html",
+					"vs/find/activityCenter/activityCenter.html"
 				],
 				"priority": 0
 			},
@@ -754,7 +755,8 @@
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js",
 					"css/activityCenter.css",
-					"img/searchResult.png"
+					"img/searchResult.png",
+					"img/backBg.png"
 				],
 				"refer": [],
 				"priority": 0
