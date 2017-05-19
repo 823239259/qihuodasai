@@ -12,6 +12,7 @@
 		types[plus.networkinfo.CONNECTION_CELL4G] = "Cellular 4G connection"; 
 			return types;
 	}*/
+	//检查网络
 	mui.checkNetwork = function() {
 		if(mui.os.plus) {
 			mui.plusReady(function() {
@@ -27,7 +28,7 @@
 		}
 		return network;
 	}
-
+	//检查网络
 	function onNetChange() {
 		var nt = plus.networkinfo.getCurrentType();
 		if(nt == plus.networkinfo.CONNECTION_NONE) {
@@ -37,7 +38,7 @@
 		}
 	}
 	// 需要认证用户身份的请求调用接口
-	mui.app_request = function(func_url, params, onSuccess, onError, paramUrl) {
+	mui.app_request = function(func_url, params, onSuccess, onError) {
 		if(mui.checkNetwork() == false) {
 			mui.toast("当前网络不给力，请稍后再试");
 			return;
@@ -60,20 +61,10 @@
 				if(data.success) {
 					onSuccess(data);
 				} else {
-					if(data.code == -1) {
-//						if(paramUrl != undefined || paramUrl != null || paramUrl != "") {
-//							mui.cacheUser.clearCachePages(true);
-//							mui.cacheUser.clear();
-//							mui.toast("认证失败，请重新登录！");
-////							mui.openWindow({ url: params.url, id: "login" });
-//							return;
-//						}
-					}
 					onError(data);
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				console.log(XMLHttpRequest + "    XMLHttpRequest   " + textStatus + "     JSON   " + "    errorThrown    " + errorThrown);
 				if(network == false) {
 					mui.toast("当前网络不给力，请稍后再试");
 					return;
@@ -123,7 +114,7 @@
 				mui.each(cachepages, function(index, item) {
 					//alert(item.getURL());
 					// 不是当前页和首页的都可以删除
-					if(item.getURL().indexOf('start.html') < 0) {
+					if(item.getURL().indexOf('startPage.html') < 0) {
 						plus.webview.close(item);
 					}
 				});
@@ -157,7 +148,7 @@
     }
 	/**
 	 * 获取文件所在环境具体位置 
-	 * @param {Object} file_url 文件及文件所在位置    如：tzdr/login/login.html
+	 * @param {Object} file_url 文件及文件所在位置    如：vs/login/login.html
 	 */
 	mui.app_filePath = function(file_url) {
 		var path = plus.io.convertLocalFileSystemURL('_www/' + file_url);
@@ -177,15 +168,11 @@
 				}
 			}else{
 				location.reload(true)
-//				data = sessionStorage.getItem(pageId);
-//				if(data.backpageID){
-//					window.location.href="http://127.0.0.1:8020/"+data.backpageID;
-//				}
 			}
 		}
 	}
 	/**
-	 * 放回指定页面，并且刷新指定页面
+	 * 返回指定页面，并且刷新指定页面
 	 * @param {Object} pageId 指定页面ID
 	 * @param {Object} isRefresh  是否刷新  如：true=刷新；false=不刷新
 	 */
@@ -204,9 +191,9 @@
 			});
 			mui.back();
 		}else{
-			window.location.href="http://127.0.0.1:8020/"+url;
+			//服务器地址+绝对地址
+			window.location.href=vs.constants.server_url+url;
 		}
-		
 	}
 	/**
 	 * 打开需要传值的页面
@@ -257,7 +244,7 @@
 		document.getElementById(id).style.marginTop= "-"+height/2+"px";
     }
 })(mui);
-//扩展Date的format方法
+//扩展Date的format方法  format格式字符串,例如：yyyy-MM-dd hh:mm:ss
 Date.prototype.format = function(format) {
 	var o = {
 		"M+": this.getMonth() + 1,
@@ -284,7 +271,7 @@ Date.prototype.format = function(format) {
 var vs = {
 	// 系统常量
 	constants: {
-		api_domain: "http://test.api.vs.com/",
+		api_domain: "http://test.api.dktai.cn/",
 		//图片地址
 		base_images_url: 'http://manage.vs.com/',
 		//token
@@ -293,50 +280,18 @@ var vs = {
 		user_secret: 'user_secret',
 		//用户手机号
 		user_mobile: 'user_mobile',
+		//服务器地址
+		server_url:"http://www.vs.com/",
 		//区分appstore，如:false=否，true=是,默认值为false
 		is_appstore: false,
 		//企业ipa下载地址
 		ipa_download_url: 'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8'
-	},
-	cacheNews: {
-		// 新闻加载日期
-		load_news_date: 'load_news_date',
-		//新闻数据
-		news_data: 'news_data',
-		//已经阅读过的新闻id集合
-		readed_nids: 'readed_nids',
-		getData: function(key) {
-			return plus.storage.getItem(key);
-		},
-		setData: function(key, data) {
-			plus.storage.setItem(key, data);
-		},
-		clearData: function(key) {
-			plus.storage.removeItem(key);
-		},
-		/**
-		 * 判断是否已读
-		 * @param {Object} nid
-		 * return false 未读  true已读
-		 */
-		isread: function(nid) {
-			var readed_nids = tzdr.cacheNews.getData(tzdr.cacheNews.readed_nids);
-			if(mui.isnull(readed_nids)) {
-				return false;
-			}
-			var readed_nids_array = readed_nids.split(",");
-			if(readed_nids_array.indexOf(nid) < 0) {
-				return false;
-			}
-			return true;
-		}
 	},
 	/**
 	 * 验证手机号是否符合格式要求 
 	 * @param {Object} mobile
 	 */
 	validate_mobile: function(mobile) {
-		//var mobilePattern=/^(((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;//手机校验规则
 		var mobilePattern = { mobile: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/ };
 		if(!mobilePattern.mobile.test(mobile)) {
 			return false;
@@ -465,11 +420,13 @@ var vs = {
 		}(),
 		language: (navigator.browserLanguage || navigator.language).toLowerCase()
 	},
-	callService : function(){
+	//绑定客服热线的点击事件
+	callServiceBindEvent : function(){
 		document.getElementById("telBtn").addEventListener("tap",function(){
 		mui.callService();
 	})
 	},
+	//绑定在线客服的点击事件
 	online:function(){
 		document.getElementById("online").addEventListener("tap",function(){
 			if(vs.browser.versions.Html5Plus){
@@ -550,16 +507,4 @@ vs.smsTime=function(o){
         1000)  
     } 
 }
-/*弹出层*/
-//$(".click-alert").on("tap",function(){
-//	var _this = $(this);
-//	var id = _this.attr("data-id");
-//	$(".chioce").css("display","block");
-//	var height = $(".alert-content-inside").height();
-//	$("#"+id).css({"margin-top":-(height+40)/2+"px"});
-//});
-//$(".popupButton").on("tap",function(){
-//	var _this = $(this);
-//	var id = _this.attr("data-id");
-//	$("#"+id).parent().css("display","none");
-// });
+
