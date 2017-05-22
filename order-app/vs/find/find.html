@@ -192,28 +192,26 @@
 						}
 					});
 					var dataALL="";
+					var dataL="";
 					mui.app_request("/news/list",{},function(data){
+						dataL=data.data;
 							var lenght=data.data.length;
 							if(lenght<=20){
 								for(var i=0;i<lenght;i++){
-									var nid=data.data[i].nid;
-									var title=data.data[i].title;
-									var active=""
+									var active="";
 									if(i==0){
 										active="mui-active";
 									}
-									quueryDateil(nid,title,active);
+									quueryDateil(i,active);
 								}
 							}else{
 								lenght=20;
 								for(var i=0;i<lenght;i++){
-									var nid=data.data[i].nid;
-									var title=data.data[i].title;
 									var active=""
 									if(i==0){
 										active="mui-active";
 									}
-									quueryDateil(nid,title,active);
+									quueryDateil(i,active);
 								}
 								dataALL=data.data.slice(20,data.data.length);
 							}
@@ -223,7 +221,6 @@
 						
 					});
 					function ajaxQueryPageInfo(self){
-						console.log(dataALL);
 						if(dataALL==""){
 							self.endPullUpToRefresh(true);
 							return;
@@ -232,24 +229,30 @@
 							if(lenght<=20){
 								for(var i=0;i<lenght;i++){
 									var nid=dataALL[i].nid;
-									var title=ddataALL[i].title;
-									quueryDateil(nid,title);
+									var title=dataALL[i].title;
+									var active=""
+									quueryDateil(i,active);
 								}
+								self.endPullUpToRefresh(true);
 							}else{
 								lenght=20;
 								for(var i=0;i<lenght;i++){
 									var nid=dataALL[i].nid;
 									var title=dataALL[i].title;
-									quueryDateil(nid,title);
+									var active="";
+									quueryDateil(i,active);
 								}
 								dataALL=dataALL.slice(20,dataALL.length);
+								self.endPullUpToRefresh();
 							}
 						}
-						self.endPullUpToRefresh();
+						
 					}
-					function quueryDateil(nid,title,active){
+					function quueryDateil(i,active){
+						var nid=dataL[i].nid;
+						var title=dataL[i].title;
 						var content1="";
-						if(active!=""){
+						if(i==0){
 							content1="<span class='new'>New</span>"
 						}
 						mui.app_request("/news/detail",{"nid":nid},function(data){
@@ -261,7 +264,12 @@
 												"<p>"+content+"</p>"+
 											"</div>"+
 										"</li>";
-									$(".find-notice-all").append(html);
+									
+									if(i==0){
+										$(".find-notice-all").prepend(html);
+									}else{
+										$(".find-notice-all").append(html);
+									}
 								},function(){
 								});
 					}

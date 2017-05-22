@@ -268,7 +268,8 @@
 					"vs/account/account.html",
 					"vs/find/activityCenter/activityCenter.html",
 					"vs/news/news.html",
-					"vs/quote/novice.html"
+					"vs/quote/novice.html",
+					"vs/news/active.html"
 				],
 				"priority": 0
 			},
@@ -417,7 +418,13 @@
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js",
 					"js/common.js",
-					"js/directSeed.js"
+					"js/directSeed.js",
+					"img/Canada.png",
+					"img/USA.png",
+					"img/Japan.png",
+					"img/Britain.png",
+					"img/allCity.png",
+					"img/Belgium.png"
 				],
 				"refer": [
 					"vs/find/find.html",
@@ -1011,6 +1018,13 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"css/vsViewpoint.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/news/active.html": {
+				"resources": [
+					"img/backBg.png"
 				],
 				"refer": [],
 				"priority": 0

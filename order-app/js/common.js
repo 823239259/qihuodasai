@@ -273,7 +273,7 @@ var vs = {
 	constants: {
 		api_domain: "http://test.api.dktai.cn/",
 		//图片地址
-		base_images_url: 'http://manage.vs.com/',
+		base_images_url: 'http://test.manage.dktai.cn/',
 		//token
 		user_token: 'user_token',
 		//密钥 
