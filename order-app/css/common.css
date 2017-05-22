@@ -71,3 +71,7 @@ html,body {background-color: #efeff4;}
 .12b362{color: #12b362;}
 .f25749{color: #f25749;}
 #chioce {display: none; z-index: 100;}
+.fixed-bottom{position: fixed; bottom: 0px; width: 100%;}
+html, body{background-color: #fff;}
+.mui-content{background-color: #fff;}
+.mui-title{z-index: -1;}

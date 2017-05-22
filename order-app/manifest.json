@@ -266,7 +266,9 @@
 				"refer": [
 					"vs/directSeed/directSeed.html",
 					"vs/account/account.html",
-					"vs/find/activityCenter/activityCenter.html"
+					"vs/find/activityCenter/activityCenter.html",
+					"vs/news/news.html",
+					"vs/quote/novice.html"
 				],
 				"priority": 0
 			},
@@ -289,7 +291,11 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/common.js",
-					"img/foundOn.png"
+					"img/foundOn.png",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/immersed.js",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"vs/account/account.html",
@@ -298,7 +304,8 @@
 					"vs/quote/quoteTrade.html",
 					"vs/directSeed/directSeed.html",
 					"vs/find/activityCenter/activityCenter.html",
-					"vs/find/informationCenter/informationCenter.html"
+					"vs/find/informationCenter/informationCenter.html",
+					"vs/find/viewpoint/vsViewpoint.html"
 				],
 				"priority": 0
 			},
@@ -582,7 +589,9 @@
 					"css/mui.min.css",
 					"js/common.js"
 				],
-				"refer": [],
+				"refer": [
+					"vs/login/login.html"
+				],
 				"priority": 0
 			},
 			"vs/account/myBankCard.html": {
@@ -756,7 +765,12 @@
 					"js/mui.pullToRefresh.material.js",
 					"css/activityCenter.css",
 					"img/searchResult.png",
-					"img/backBg.png"
+					"img/backBg.png",
+					"js/mui.min.js",
+					"css/common.css",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -882,7 +896,8 @@
 					"js/mui.pullToRefresh.material.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"img/searchResult.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -955,6 +970,47 @@
 					"js/common.js",
 					"img/backBg.png",
 					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/news/news.html": {
+				"resources": [
+					"img/backBg.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/quote/novice.html": {
+				"resources": [
+					"img/backBg.png",
+					"js/common.js",
+					"css/quoteTrade.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/find/viewpoint/vsViewpoint.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"img/backBg.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"js/mui.pullToRefresh.material.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/vsViewpoint.css"
 				],
 				"refer": [],
 				"priority": 0

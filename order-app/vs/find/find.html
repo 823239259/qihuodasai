@@ -1,154 +1,271 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>发现</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/common.css" rel="stylesheet" />
 		<link href="../../css/find.css" rel="stylesheet" />
-		<link href="../../css/own.css" rel="stylesheet"/>
+		<link href="../../css/own.css" rel="stylesheet" />
+		<style>
+			.mui-pull-bottom-tips {
+				text-align: center;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+		}
+		.mui-pull-loading { 
+		    margin-right: 10px;
+		    -webkit-transition: -webkit-transform .4s;
+		    transition: transform .4s;
+		    -webkit-transition-duration: 400ms;
+		    transition-duration: 400ms;
+		    vertical-align: middle;
+		}
+		#newList{margin-bottom: 50px;}
+		</style>
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <h1 class="mui-title">发现</h1>
+			<h1 class="mui-title">发现</h1>
 		</header>
 		<nav class="navlist">
 			<a class="" href="javascript:void(0);" id="quoteTrade">
 				<span class="mui-icon"><img src="../../img/home.png" style="width: 20px;height:20px;"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a href="javascript:void(0);"  id="directSeed">
+			<a href="javascript:void(0);" id="directSeed">
 				<span class="mui-icon"><img src="../../img/directSeeding.png" style="width: 20px;height:20px;"></span>
 				<span class="mui-tab-label">直播</span>
 			</a>
-			<a class="navon" href="javascript:void(0);"  id="find">
+			<a class="navon" href="javascript:void(0);" id="find">
 				<span class="mui-icon"><img src="../../img/foundOn.png" style="width: 20px;height:20px;"></span>
 				<span class="mui-tab-label">发现</span>
 			</a>
 			<a class="" id="account" href="javascript:void(0);">
 				<span class="mui-icon"><img src="../../img/my.png" style="width: 20px;height:20px;"></span>
-				<span class="mui-tab-label" >我的</span>
+				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
 		<div class="mui-content">
 			<!--栏目-->
-	        <ul class="mui-table-view mui-grid-view mui-grid-9 find-tab" style="background: #fff;">
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="trainingCenter">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../img/find/find_1.png"/>
-	                    <div class="mui-media-body">训练中心</div>
-	                    <span class="size-11">十万元，免费用</span>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="globalInformation">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../img/find/find_2.png"/>
-	                    <div class="mui-media-body">全球资讯</div>
-	                    <span class="size-11">看资讯，学分析	</span>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="activityCenter">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../img/find/find_3.png"/>
-	                    <div class="mui-media-body">活动中心</div>
-	                    <span class="size-11">大活动，大优惠</span>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="vsViewpoint">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../img/find/find_4.png"/>
-	                    <div class="mui-media-body">维胜视点</div>
-	                    <span class="size-11">顺市场，跟大势</span>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="helpCenter">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../img/find/find_5.png"/>
-	                    <div class="mui-media-body">帮助中心</div>
-	                    <span class="size-11">有不懂，点这里</span>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="futuresSchool">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../img/find/find_6.png"/>
-	                    <div class="mui-media-body">期货学堂</div>
-	                    <span class="size-11">用问答，明基础</span>
-	            	</a>
-	            </li>
-	        </ul>
-	        <!--通知-->
-	        <ul class="mui-table-view find-notice find-notice-all">  
-	        	<li class="mui-table-view-cell mui-collapse mui-active">  
-		            <a class="mui-navigate-right" href="#">元旦假期休市通知<span class="new">New</span></a>  
-		            <div class="mui-collapse-content">  
-		                <p>尊敬尊敬的用户：2016.12.31－2017.01.02为元旦假期。根据国内外各交易所公告，休市时间具体如下：内盘：30日(周五)夜盘起至2日全部休市不交易，3日恢复交易。外盘：德指2日(周一)正常交易，其余商品全部休市，3日恢复交易。提款每天15:00统一处理，2日需要充值交易的用户建议优先使用银行卡快捷支付即时到账！祝大家节日快乐！</p>  
-		            </div>  
-		        </li>  
-	       	</ul>
-	        <ul class="mui-table-view find-notice" style="padding-bottom: 50px;">
-		        <li class="mui-table-view-cell mui-collapse">  
-		            <a class="mui-navigate-right" href="#">面板1</a>  
-		                <div class="mui-collapse-content">  
-		                <p>面板1子内容</p>  
-		            </div>  
-		        </li>  
-		        <li class="mui-table-view-cell mui-collapse">  
-		            <a class="mui-navigate-right" href="#">面板2</a>  
-		            <div class="mui-collapse-content">  
-		                <p>面板2子内容</p>  
-		            </div>  
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">  
-		            <a class="mui-navigate-right" href="#">面板3</a>  
-		            <div class="mui-collapse-content">  
-		                <p>面板3子内容</p>  
-		            </div>  
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">  
-		            <a class="mui-navigate-right" href="#">面板4</a>  
-		            <div class="mui-collapse-content">  
-		                <p>面板4子内容</p>  
-		            </div>  
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">  
-		            <a class="mui-navigate-right" href="#">面板5</a>  
-		            <div class="mui-collapse-content">  
-		                <p>面板5子内容</p>  
-		            </div>  
-		        </li>
-    		</ul>  
+			<ul class="mui-table-view mui-grid-view mui-grid-9 find-tab" style="background: #fff;">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="trainingCenter">
+					<a href="javascript:void(0);">
+						<img src="../../img/find/find_1.png" />
+						<div class="mui-media-body">训练中心</div>
+						<span class="size-11">十万元，免费用</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="globalInformation">
+					<a href="javascript:void(0);">
+						<img src="../../img/find/find_2.png" />
+						<div class="mui-media-body">全球资讯</div>
+						<span class="size-11">看资讯，学分析	</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="activityCenter">
+					<a href="javascript:void(0);">
+						<img src="../../img/find/find_3.png" />
+						<div class="mui-media-body">活动中心</div>
+						<span class="size-11">大活动，大优惠</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="vsViewpoint">
+					<a href="javascript:void(0);">
+						<img src="../../img/find/find_4.png" />
+						<div class="mui-media-body">维胜视点</div>
+						<span class="size-11">顺市场，跟大势</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="helpCenter">
+					<a href="javascript:void(0);">
+						<img src="../../img/find/find_5.png" />
+						<div class="mui-media-body">帮助中心</div>
+						<span class="size-11">有不懂，点这里</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="futuresSchool">
+					<a href="javascript:void(0);">
+						<img src="../../img/find/find_6.png" />
+						<div class="mui-media-body">期货学堂</div>
+						<span class="size-11">用问答，明基础</span>
+					</a>
+				</li>
+			</ul>
+			<!--通知-->
+			<div id="newList">
+				<ul class="mui-table-view find-notice find-notice-all">
+					
+				</ul>
+				<!--
+				<ul class="mui-table-view find-notice" style="padding-bottom: 50px;">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">面板1</a>
+						<div class="mui-collapse-content">
+							<p>面板1子内容</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">面板2</a>
+						<div class="mui-collapse-content">
+							<p>面板2子内容</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">面板3</a>
+						<div class="mui-collapse-content">
+							<p>面板3子内容</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">面板4</a>
+						<div class="mui-collapse-content">
+							<p>面板4子内容</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">面板5</a>
+						<div class="mui-collapse-content">
+							<p>面板5子内容</p>
+						</div>
+					</li>
+				</ul>-->
+			</div>
+
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/immersed.js"></script>
+	<script src="../../js/jquery-1.11.3.js"></script>
 	<script type="text/javascript">
 		mui.init();
-		initBottom("../account/account.html","find.html","../quote/quoteTrade.html","../directSeed/directSeed.html");
+		initBottom("../account/account.html", "find.html", "../quote/quoteTrade.html", "../directSeed/directSeed.html");
 		/*打开训练中心*/
-		document.getElementById("trainingCenter").addEventListener("tap",function() {
-			mui.openWindow("../quote/placeOrder.html","quoteTrade");
+		document.getElementById("trainingCenter").addEventListener("tap", function() {
+			mui.openWindow("../quote/placeOrder.html", "quoteTrade");
 		});
 		/*打开全球资讯*/
-		document.getElementById("globalInformation").addEventListener("tap",function() {
-			mui.openWindow("informationCenter/informationCenter.html","informationCenter");
+		document.getElementById("globalInformation").addEventListener("tap", function() {
+			mui.openWindow("informationCenter/informationCenter.html", "informationCenter");
 		});
 		/*打开活动中心*/
-		document.getElementById("activityCenter").addEventListener("tap",function() {
-			mui.openWindow("activityCenter/activityCenter.html","activityCenter");
+		document.getElementById("activityCenter").addEventListener("tap", function() {
+			mui.openWindow("activityCenter/activityCenter.html", "activityCenter");
 		});
 		/*打开维胜视点*/
-		document.getElementById("vsViewpoint").addEventListener("tap",function() {
-			mui.openWindow("viewpoint/vsViewpoint.html","vsViewpoint");
+		document.getElementById("vsViewpoint").addEventListener("tap", function() {
+			mui.openWindow("viewpoint/vsViewpoint.html", "vsViewpoint");
 		});
 		/*打开帮助中心*/
-		document.getElementById("helpCenter").addEventListener("tap",function() {
-			mui.openWindow("helpCenter/helpCenter.html","helpCenter");
+		document.getElementById("helpCenter").addEventListener("tap", function() {
+			mui.openWindow("helpCenter/helpCenter.html", "helpCenter");
 		});
 		/*打开期货学堂*/
-		document.getElementById("futuresSchool").addEventListener("tap",function() {
-			mui.openWindow("informationCenter/informationCenter.html","informationCenter");
+		document.getElementById("futuresSchool").addEventListener("tap", function() {
+			mui.openWindow("informationCenter/informationCenter.html", "informationCenter");
 		});
-		
-	</script> 
+		(function($) {
+					var deceleration = mui.os.ios?0.003:0.0009;
+					$('.mui-scroll-wrapper').scroll({
+						bounce: false,
+						indicators: true, //是否显示滚动条
+						deceleration:deceleration
+					});		
+				})(mui);
+				mui(document.querySelector('#newList')).pullToRefresh({
+						up: { 
+							contentrefresh: '正在加载...',
+							callback: function() {
+								var self = this;
+								var ul = self.element.querySelector('#historyDetailsTable1');
+								setTimeout(function(){
+									ajaxQueryPageInfo(self);	
+								},500)
+							}
+						}
+					});
+					var dataALL="";
+					mui.app_request("/news/list",{},function(data){
+							var lenght=data.data.length;
+							if(lenght<=20){
+								for(var i=0;i<lenght;i++){
+									var nid=data.data[i].nid;
+									var title=data.data[i].title;
+									var active=""
+									if(i==0){
+										active="mui-active";
+									}
+									quueryDateil(nid,title,active);
+								}
+							}else{
+								lenght=20;
+								for(var i=0;i<lenght;i++){
+									var nid=data.data[i].nid;
+									var title=data.data[i].title;
+									var active=""
+									if(i==0){
+										active="mui-active";
+									}
+									quueryDateil(nid,title,active);
+								}
+								dataALL=data.data.slice(20,data.data.length);
+							}
+							
+							
+					},function(){
+						
+					});
+					function ajaxQueryPageInfo(self){
+						console.log(dataALL);
+						if(dataALL==""){
+							self.endPullUpToRefresh(true);
+							return;
+						}else{
+							var lenght=dataALL.length;
+							if(lenght<=20){
+								for(var i=0;i<lenght;i++){
+									var nid=dataALL[i].nid;
+									var title=ddataALL[i].title;
+									quueryDateil(nid,title);
+								}
+							}else{
+								lenght=20;
+								for(var i=0;i<lenght;i++){
+									var nid=dataALL[i].nid;
+									var title=dataALL[i].title;
+									quueryDateil(nid,title);
+								}
+								dataALL=dataALL.slice(20,dataALL.length);
+							}
+						}
+						self.endPullUpToRefresh();
+					}
+					function quueryDateil(nid,title,active){
+						var content1="";
+						if(active!=""){
+							content1="<span class='new'>New</span>"
+						}
+						mui.app_request("/news/detail",{"nid":nid},function(data){
+									var content=data.data.content;
+									var html=
+										"<li class='mui-table-view-cell mui-collapse "+active+"' dataid="+nid+">"+
+											"<a class='mui-navigate-right' href='#'>"+title+content1+"</a>"+
+											"<div class='mui-collapse-content'>"+
+												"<p>"+content+"</p>"+
+											"</div>"+
+										"</li>";
+									$(".find-notice-all").append(html);
+								},function(){
+								});
+					}
+					
+	</script>
+
 </html>

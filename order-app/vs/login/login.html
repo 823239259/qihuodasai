@@ -87,7 +87,12 @@
 				mui.toast("登录成功！");
 				//存储用户信息
 				var win=mui.get_window_data();
+				console.log(win);
 				mui.cacheUser.save(result.data.token, result.data.secret, mobile);
+				if(win==undefined){
+						mui.openWindow("../home/home.html", "home");
+				return;
+				}
 				if(win.backpageID) {
 						mui.app_back(win.backpageID, true,win.url);
 					 //放回businessPageId页面，并且刷新该页面信息
@@ -97,8 +102,7 @@
 				if(wsreload != null) {
 					wsreload.reload();
 				}
-				mui.openWindow("../home/home.html", "home");
-				return;
+			
 
 			}, function(result) {
 				console.log(JSON.stringify(result));

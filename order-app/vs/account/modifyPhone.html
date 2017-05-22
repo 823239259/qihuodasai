@@ -62,6 +62,7 @@
 				mui.toast("手机号码不正确");
 				return;
 			}
+			
 			//发送验证码
 			mui.app_request("user/security/send_sms", {
 				"mobile": mobile,

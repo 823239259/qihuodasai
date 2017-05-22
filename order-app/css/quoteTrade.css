@@ -180,3 +180,12 @@ flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: rel
 #operateDetailed .operate-detail-list .mui-table-view-cell:after(:nth-last-child(1)){background-color: #FFFFFF;}
 #operateDetailed .mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after{color: #666666;}
 #operateDetailed .BgF2F2F2{background-color: #F2F2F2; height: 5px; width: 100%;}
+/*
+ 新手指南
+ */
+
+.novice{
+	font-size: 13px; color: #333333;padding: 0px 15px; line-height: 25px;
+}
+.mui-center{margin-left: 0px!important;}
+.mui-title{margin-left: 0px!important;}

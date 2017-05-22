@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/quoteTrade.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">标题</h1>
+			<a href="javascript:void(0)" class="top-tel"  id="telBtn">客服</a>
+		</header>
+		<div class="mui-content  ">
+			<div class="novice">
+				22222
+			</div>
+			<p class="buttom-button fixed-bottom">
+				<button id="bankButton">去模拟</button>
+			</p>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+			<script src="../../js/common.js"></script>
+		<script>
+			document.getElementById("bankButton").addEventListener("tap", function() {
+				mui.openWindow({
+					"url": "quoteTrade.html",
+					"id": "quoteTrade"
+				})
+			});
+			vs.callService();
+		</script>
+	</body>
+
+</html>
