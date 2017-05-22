@@ -48,6 +48,9 @@
 		function insertFundDetail(data){
 			var fundDetailsList=document.getElementById("fundDetailsList");
 			var data=data.fundList;
+			if(mui.isnull(data)){
+				return
+			}
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				var iscome=data[i].money >= 0 ? true : false; 

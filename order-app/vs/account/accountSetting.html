@@ -76,26 +76,29 @@
 			</ul>
 		</div>
 		<div id="weixinCodeImage">
-		<div id="box">
-			<p>微信绑定<img src="../../img/close.png" id="close"></p>
-			<div id="weixinContent">  
-				<img src="../../img/weixinshare.png">
-				<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+			<div id="box">
+				<p>微信绑定<img src="../../img/close.png" id="close"></p>
+				<div id="weixinContent">
+					<img src="../../img/weixinshare.png">
+					<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+				</div>
 			</div>
 		</div>
-	</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
 	<script>
-		document.getElementById("weixinCodeImage").style.height=window.innerHeight+"px";
-		document.getElementById("close").addEventListener("tap",function(){
-			document.getElementById("weixinCodeImage").style.display="none";
+		document.getElementById("weixinCodeImage").style.height = window.innerHeight + "px";
+		document.getElementById("close").addEventListener("tap", function() {
+			document.getElementById("weixinCodeImage").style.display = "none";
 		});
 		document.getElementById("realNameVerification").addEventListener("tap", function() {
 			var text = document.getElementById("realNameVerificationTips").innerHTML;
-			mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "accountSetting", "url": "accountSetting.html" });
+			mui.open_window_data("realNameVerification.html", "realNameVerification", {
+				"backpageID": "accountSetting",
+				"url": "accountSetting.html"
+			});
 		});
 		var phone = localStorage.getItem(vs.constants.user_mobile);
 		phone = phone.substring(0, 3) + "****" + phone.substring(7, 11);
@@ -107,7 +110,10 @@
 			});
 		});
 		document.getElementById("modifyPhone").addEventListener("tap", function() {
-			mui.open_window_data("modifyPhone.html", "modifyPhone", { "backpageID": "accountSetting", "url": "accountSetting.html" });
+			mui.open_window_data("modifyPhone.html", "modifyPhone", {
+				"backpageID": "accountSetting",
+				"url": "accountSetting.html"
+			});
 		});
 		document.getElementById("loginPassword").addEventListener("tap", function() {
 			mui.openWindow({
@@ -116,14 +122,17 @@
 			});
 		});
 		document.getElementById("setttingDrawPwd").addEventListener("tap", function() {
-			mui.open_window_data("withdramalsPassword.html", "withdramalsPassword", { "backpageID": "accountSetting", "url": "accountSetting.html" });
+			mui.open_window_data("withdramalsPassword.html", "withdramalsPassword", {
+				"backpageID": "accountSetting",
+				"url": "accountSetting.html"
+			});
 		});
 		document.getElementById("bindWxAccount").addEventListener("tap", function() {
 			var text = document.getElementById("bindWxAccount").innerText;
 			if(text == "已关注") {
 				mui.toast("你已关注过啦~”");
 			} else {
-				document.getElementById("weixinCodeImage").style.display="block";
+				document.getElementById("weixinCodeImage").style.display = "block";
 			}
 		});
 		mui.app_request('/user/getbalancerate', {
@@ -144,7 +153,7 @@
 
 		function updateData(data) {
 			var realNameVerificationTips = document.getElementById("realNameVerificationTips");
-			if(data.isCertification!= false) {
+			if(data.isCertification != false) {
 				realNameVerificationTips.innerHTML = "已认证";
 			}
 			if(!mui.isnull(data.wxAccount)) {

@@ -43,7 +43,7 @@ body{background-color: #FFFFFF;}
 /*.modify-bank-information-list{margin-top: 5px;}*/
 .modify-bank-information-list li{height: 50px; line-height: 50px;}
 .modify-bank-information-list li  label{height: 28px; line-height: 28px;color: #333333; font-size: 15px; float: left;}
-.modify-bank-information-list li input{width: 80%; float: right; border: none; text-align: right;margin-bottom: 0px; padding: 0px 20px 0px 0px; height: 50px; line-height: 50px; margin-top: -10px; font-size: 15px; color: #666666;}
+.modify-bank-information-list li input{width: 70%; float: right; border: none; text-align: right;margin-bottom: 0px; padding: 0px 20px 0px 0px; height: 50px; line-height: 50px; margin-top: -10px; font-size: 15px; color: #666666;}
 .modify-bank-information-list li  span{height: 28px; display: block; float: right; line-height: 28px; color: #333333; font-size: 15px; margin-right: 20px; color: #666666;}
 /*
  意见反馈页面
@@ -218,9 +218,9 @@ body{background-color: #FFFFFF;}
  */
 .bank-pay  p{font-size: 15px; color: #333; line-height: 40px;padding: 3px 15px;}
 .bank-pay .ac_bankpromt { font-size: 13px; color: #333;background-color: #FFFFFF; line-height: 25px;}
-.bank-pay .bank-list .mui-input-row{ height: 100px; line-height: 100px;}
-.bank-pay .bank-list  .mui-input-row label{height: 100px;  font-size: 15px;}
-.bank-pay .bank-list  .mui-input-row label div{height: 78px; float: left;}
+.bank-pay .bank-list .mui-input-row{ height: auto}
+.bank-pay .bank-list  .mui-input-row label{height: auto;  font-size: 15px;}
+.bank-pay .bank-list  .mui-input-row label div{height: auto; float: left;}
 .bank-pay .bank-list  .mui-input-row label div:nth-child(1){width: 20%;}
 .bank-pay .bank-list  .mui-input-row label div:nth-child(2){width: 80%;}
 .bank-pay .bank-list  .mui-input-row label div:nth-child(2) span{display: inline-block; width: 100%; font-size: 13px; line-height: 20px;}
@@ -238,7 +238,7 @@ body{background-color: #FFFFFF;}
 .bind-zhifubao .reminder p:nth-child(1){color: #f25749;}
 .bind-zhifubao .bind-zhifubao-information-list li input{width: 60%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px ;height: 28px; line-height: 28px; margin: 0px; }
 .bind-zhifubao .bind-zhifubao-information-list li label:nth-child(3){position: absolute; right: 15px;height: 28px; line-height: 28px;color: #333333; font-size: 15px;}
-.bind-zhifubao .bind-zhifubao-information-list li span{display: block;float: right; text-align: right; width: 60%; height: 28px; line-height: 28px; font-size: 13px; color: #999999;}
+.bind-zhifubao .bind-zhifubao-information-list li span{display: block;float: right; text-align: right; width: auto; height: 28px; line-height: 28px; font-size: 13px; color: #999999;}
 /*
  资金明细
  */

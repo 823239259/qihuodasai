@@ -421,7 +421,7 @@ var vs = {
 		language: (navigator.browserLanguage || navigator.language).toLowerCase()
 	},
 	//绑定客服热线的点击事件
-	callServiceBindEvent : function(){
+	callService : function(){
 		document.getElementById("telBtn").addEventListener("tap",function(){
 		mui.callService();
 	})
