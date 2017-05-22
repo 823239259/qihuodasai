@@ -285,7 +285,9 @@ var vs = {
 		//区分appstore，如:false=否，true=是,默认值为false
 		is_appstore: false,
 		//企业ipa下载地址
-		ipa_download_url: 'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8'
+		ipa_download_url: 'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8',
+		// 财经日历、7*24小时
+		api_calendar: 'http://api.vs.com/'
 	},
 	/**
 	 * 验证手机号是否符合格式要求 

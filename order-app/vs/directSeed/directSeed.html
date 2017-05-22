@@ -56,7 +56,7 @@
 			<div id="chartContainer">
 				<div class="mui-slider-group">
 					<!--7*24小时直播-->
-					<div class="mui-slider-item mui-control-content" id="directSeedNews">
+					<div class="mui-slider-item mui-control-content mui-active" id="directSeedNews">
 						<div class="directSeed-all"><p class="chartContainer-time">2017-01-20</p></div>
 						<div id="chartContainerContent">
 							<div class="mui-scroll-wrapper" id="chartContainerContent1">
@@ -70,9 +70,9 @@
 						</div>
 					</div>
 					<!--财经日历-->
-					<div class="mui-slider-item mui-control-content" id="directSeedCalendar">
+					<div class="mui-slider-item mui-control-content" id="directSeedCalendar" style="height: 500px;">
 						<div class="directSeed-calendar-all">
-							<p class="finance-time" id="result">2017年02月</p>
+							<p class="finance-time" id="result">0000年0月00号</p>
 							<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="weekLis">
 								<a class="mui-control-item" href="javascript:void(0);">周一</br><span class="monday" data-time>00</span></a>
 								<a class="mui-control-item" href="javascript:void(0);">周二</br><span class="tuesday" data-time>00</span></a>
@@ -83,36 +83,41 @@
 								<a class="mui-control-item" href="javascript:void(0);">周日</br><span class="sunday" data-time>00</span></a>
 							</div>
 						</div>
-						<div class="mui-scroll-wrapper" id="chartContainerContentOne" style="padding-bottom: 50px;">
-							<div class="mui-scroll">
+						<div class="mui-scroll-wrapper" id="chartContainerContentOne" style="padding-bottom: 40px; background: #efeff4;">
+							<div class="mui-scroll" id="mui-scroll-one">
 								<!--数据列表-->
 								<ul class="mui-table-view" id="finance">
-									
+								
 								</ul>
 							</div>
 						</div>
 						<div class="mui-backdrop" id="chioce">
-							<!--遮罩层一个页面放一个-->
 						</div>
-						<!--弹出层DIV-->
+						<!--财经日历弹出层DIV-->
 						<div class="alertContent" id="chioceProfit">
-							<div  class="alert-content-inside">
-								<span class="mui-icon mui-icon-closeempty popupButton" id="popupButton" data-id="chioceProfit"></span>
+							<div class="alert-content-inside">
+	
 								<div class="buttonListLi">
-									<p>按国家</p>
-									<ul>
-										<li class="mui-col-xs-3 mui-col-sm-3 on"><span class="" data-city="China">中国</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="USA">美国</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="Britain">英国</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="France">法国</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="Russia">俄罗斯</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="Canada">加拿大</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="Italy">意大利</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="Germany">德国</span></li>
-										<li class="mui-col-xs-3 mui-col-sm-3"><span class="" data-city="">全部</span></li>
+									<p>按国家<span class="mui-icon mui-icon-closeempty popupButton mui-pull-right" id="popupButton" data-id="chioceProfit"></span></p>
+									<ul class="country" style="padding-bottom: 0;">
+										<li class="mui-col-xs-4 mui-col-sm-4 on"><span class="" data-city="China">中国</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="USA">美国</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Britain">英国</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="France">法国</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Russia">俄罗斯</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Canada">加拿大</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Italy">意大利</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Germany">德国</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Japan">日本</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="">全部</span></li>
+									</ul>
+									<p>按重要性</p>
+									<ul class="important" style="display: block; padding-top: 0; height: 40px;">
+										<li class="mui-col-xs-4 mui-col-sm-4 on"><span class="span-selected" >全部</span></li>
+										<li class="mui-col-xs-4 mui-col-sm-4"><span class="" >重要</span></li>
 									</ul>
 								</div>
-								<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="confirmBottonProfit" id="confirmBottonProfit">确认</button></a>
+								<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="confirmBottonProfit" id="confirmBottonProfit" data-id="chioceProfit">确认</button></a>
 								<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="cancelBottonProfit" data-id="chioceProfit">取消</button></a>
 							</div>
 						</div>

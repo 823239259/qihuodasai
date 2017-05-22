@@ -51,10 +51,12 @@
 #chartContainerContent .mui-pull-top-pocket {top: 90px;}
 #chartContainer .mui-control-content {position: static;}
 .mui-bar~.mui-pull-top-tips {z-index: 3;}
+#noSearchResultContainer {position: fixed;top: 35px;left: -85px;margin-left: 50%;margin-top: 50%;padding-top: 68px;height: 115px;width: 170px;color: #999999;font-size: 15px;line-height: 23px;text-align: center;background: url(../img/searchResult.png) no-repeat center top;background-size: 45px auto;}
+.nodata {text-align: center;background-color: #efeff4; font-size: 15px;line-height: 40px;color: #777;position: absolute;width: 100%;}
 /*弹出层*/
-#chioceProfit ul li {float: left; margin: 8px 0; font-size: 13px;}
-#chioceProfit ul li span {text-align: center; background: #f2f2f2; width: 80%; display: inline-block; padding: 5px 0; margin-left: 10%;}
+#chioceProfit ul li {float: left; margin: 8px 0; font-size: 13px; list-style-type: none;}
+#chioceProfit ul li span {text-align: center; background: #f0f5f7; border-radius: 4px; width: 80%; display: inline-block; padding: 5px 0; margin-left: 10%;}
 .buttonListLi {padding: 0;}
-.buttonListLi p {text-align: center; font-size: 15px; color: #666666; height: 30px; line-height: 30px; background: #f2f2f2;}
-#chioceProfit ul {display: inline-block; padding: 15px;}
-#chioceProfit ul li span.checked {color: #ffffff; background: #ffb319;}
+.buttonListLi p {margin-bottom: 0; text-align: center; font-size: 15px; color: #666666; height: 40px; line-height: 40px; border-bottom: 1px solid #efefef;}
+#chioceProfit ul {display: inline-block; padding: 0 10px; margin-top: 10px; margin-bottom: 0;}
+#chioceProfit ul li span.span-selected {color: #ffffff; background: #fcc900;}
