@@ -264,9 +264,85 @@ function dealOnRtnQuoteData(data, totalVolume){
 	var time6 = getNowFormatDate(time5);
 	var length = $("#positionList .position3").length;
 	var positionValue = getPositionValue();
+	if(oldTime==newTime){
+		var lastPrices1=lastPrices;
+		if(timeData.prices[timeData.prices.length-1]==lastPrices1 && volumeChartData.volume[volumeChartData.volume.length-1]==freshVolume){
+			
+		}else{
+			timeData.prices[timeData.prices.length-1]=lastPrices1;	
+        	volumeChartData.volume[volumeChartData.volume.length-1]=freshVolume;
+        	drawChartTime(positionValue);
+		}
+	}else{
+			timeData.timeLabel.push(time6);
+        	timeData.prices.push(lastPrices);
+        	volumeChartData.time.push(time6);
+	        volumeChartData.volume.push(0);
+	        drawChartTime(positionValue);
+	}
+	if(CandlestickData != undefined){
+		var oldTime2=(CandlestickData.categoryData[CandlestickData.categoryData.length-1]);
+		var oldTime3=Math.round(new Date(oldTime2).getTime()/1000);
+		if(oldTime3==newTime){
+			var length=CandlestickData.values.length;
+	      	var lowPrices=Number(CandlestickData.values[length-1][2]);
+    		var highPrices=Number(CandlestickData.values[length-1][3]);
+    		var closePrices=lastPrices;
+    		if(lastPrices >=highPrices){
+    			highPrices=lastPrices
+    		}
+    		if(lowPrices>=highPrices){
+    			lowPrices=lastPrices
+    		}
+    		CandlestickData.values[length-1]=[CandlestickData.values[length-1][0],closePrices,lowPrices,highPrices];
+    		CandlestickVolumeData.volume[CandlestickVolumeData.volume.length-1]=freshVolume1;
+		}else{
+			CandlestickData.categoryData.push(time6)
+    		CandlestickData.values.push([lastPrices,lastPrices,lastPrices,lastPrices]);
+    		CandlestickVolumeData.time.push(time6)
+    		CandlestickVolumeData.volume.push(0);
+	       	CandlestickData.categoryData=CandlestickData.categoryData.slice(-500);
+	        CandlestickData.values=CandlestickData.values.slice(-500);
+	        CandlestickVolumeData.time=CandlestickVolumeData.time.slice(-500);
+	        CandlestickVolumeData.volume=CandlestickVolumeData.volume.slice(-500);
+		}
+	}
+	
+	$("#totalVolume").val(Parameters.TotalVolume)
+	drawChartCandlestick(positionValue);
 	
 	
 }
+
+function drawChartTime(positionValue) {
+		var option = setOptionTime(timeData,positionValue);
+	    timeChart.setOption(option);
+        timeChart.resize();
+        timeChart.group="group1";
+		var volumeChartOption=volumeChartSetOption(volumeChartData)
+        volumeChart.setOption(volumeChartOption);
+        volumeChart.resize();
+       	volumeChart.group="group1";
+}
+
+
+function drawChartCandlestick(positionValue) {
+	if(CandlestickData != undefined){
+	       	if(CandlestickData.categoryData==null){
+	       		return
+	       	}
+			var option=setOptionCandlestick(CandlestickData,positionValue);
+			var option1=volumeChartCandlestickSetOption(CandlestickVolumeData);
+   			CandlestickChart.setOption(option);
+	  		CandlestickChart.resize();
+		  	CandlestickChart.group="group2";
+		  	CandlestickVolumeChart.setOption(option1);
+	  		CandlestickVolumeChart.resize();
+		  	CandlestickVolumeChart.group="group2";
+       	}
+}
+
+
 
 function checkRange() {
 	var range = 1;
@@ -295,8 +371,18 @@ function updateQuoteInfo(jQuote){
 	$('#'+contract+'-price').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
 	if(SuperCommodityNo==jQuote.CommodityNo){
 		
-		
-		
+		$('#lastPrices').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));		
+		$('#riseAndFall').text(fixedPriceByContract(jQuote.ChangeValue, jQuote.CommodityNo));
+		$('#riseAndFallRange').text(parseFloat(jQuote.ChangeRate).toFixed(2) + '%');
+		//买一
+		$('#askPrice1').text(fixedPriceByContract(jQuote.BidPrice1, jQuote.CommodityNo)+'/');
+		$('#askQty1').text(jQuote.BidQty1);
+		//卖一
+		$('#bidPrice1').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo)+'/');
+		$('#bidQty1').text(jQuote.AskQty1);
+		//最新价
+		$('#bidPrice1Button').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+		$('#askPrice1Button').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
 	}
 }
 

@@ -70,12 +70,13 @@ window.onload = function() {
 		checkboxButtonClickNum++;
 	});
 }
+/*
 document.getElementById("novice").addEventListener("tap",function(){
 	mui.openWindow({
 					"url": "novice.html",
 					"id": "novice"
 				})
-})
+})*/
 var imgId=[];
 			mui.app_request('banner/list',{},
 				function(result){
