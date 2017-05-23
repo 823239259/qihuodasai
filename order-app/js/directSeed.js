@@ -127,8 +127,8 @@ function time() {
 })(mui);
 /*下拉刷新 上拉加载*/
 	
-	var url= vs.constants.api_calendar + "crawler/getCrawlerByChannelLiveContent";
-	var urlTwo= vs.constants.api_calendar + "crawler/getCrawlerCalendarByTime";
+	var url= "http://www.vs.com/crawler/getCrawlerByChannelLiveContent";
+	var urlTwo= "http://www.vs.com/crawler/getCrawlerCalendarByTime";
 	var dataAll;
 	var list = null;
 	var listtwo = null;
