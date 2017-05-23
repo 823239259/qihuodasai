@@ -110,10 +110,8 @@
 			})
 		});
 		document.getElementById("feedback").addEventListener("tap", function() {
-			mui.openWindow({
-				url: "feedback.html",
-				id: "feedback"
-			})
+			var path=mui.app_filePath("online.html");
+				mui.openWindow(path,"online"); 
 		});
 		document.getElementById("customerService").addEventListener("tap", function() {
 			mui.openWindow({

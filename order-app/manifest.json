@@ -390,7 +390,8 @@
 					"vs/directSeed/directSeed.html",
 					"vs/account/Invitation.html",
 					"vs/account/fundDetails.html",
-					"vs/quote/quoteTrade.html"
+					"vs/quote/quoteTrade.html",
+					"online.html"
 				],
 				"priority": 0
 			},
