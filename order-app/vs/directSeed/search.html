@@ -4,37 +4,223 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../../css/common.css" />
+		<link href="../../css/common.css" rel="stylesheet"/>
+		<link href="../../css/own.css" rel="stylesheet"/>
+		<link href="../../css/mui.picker.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/search.css" />
 		<title>搜索页面</title>
+		<style>
+			#chartContainerContent1 {
+				margin-top: 100px;
+			}
+			.caoz {
+			    padding-left: 15px;
+			    color: #fcc900;
+			}
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 		    <h1 class="mui-title">
-		    	<form action="searchResult.html"> 
+		    	<form action="search.html">
 		    		<input type="text" id="search" />
 		    	</form>
 		    </h1>
 		    <a id="searchButton" class="mui-action-back">取消</a>
 		</header>
 		<div class="mui-content">
-			<div id="searchContainer">
+			<!--<div id="searchContainer">
 				<p id=""><span>搜索历史</span><span id="clearSearchHistory">清除搜索历史</span></p>
 				<ul id="searchHistory">
 					<li>富时A50</li>
 					<li>富时A50</li>
 					<li>富时A501</li>
 				</ul>
+			</div>-->
+			<!--<div id="searchResultContainer">
+				<div class="directSeed-all">
+					<p class="chartContainer-time">2017-01-20</p>
+				</div>
+				<div class="searchResultContainer-all">
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<div class="content-left">11:02</div>
+							<div class="content-circular"></div>
+							<div class="content-right"><p>统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。</p></div>
+						</li>
+					</ul>
+				</div>
+			</div>-->
+			<div class="mui-slider-item mui-control-content mui-active" id="searchResultContainer" style="position: static;">
+				<div class="directSeed-all"><p class="chartContainer-time">2017-01-20</p></div>
+				<div id="chartContainerContent" class="searchResultContainer-all">
+					<div class="mui-scroll-wrapper" id="chartContainerContent1">
+						<div class="mui-scroll">
+							
+							<ul class="mui-table-view mui-table-view-chevron">
+								<!--<li class="mui-table-view-cell">
+									<div class="content-left">11:02</div>
+									<div class="content-circular"></div>
+									<div class="content-right"><p>统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。</p></div>
+								</li>
+								<li class="mui-table-view-cell">
+									<div class="content-left">11:02</div>
+									<div class="content-circular"></div>
+									<div class="content-right"><p>统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。</p></div>
+								</li>-->
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
+			<!---->
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 	<script type="text/javascript">
 		mui.init();
-		document.getElementById("clearSearchHistory").addEventListener("tap",function(){
+		/*document.getElementById("clearSearchHistory").addEventListener("tap",function(){
 			document.getElementById("searchHistory").innerHTML="";
-		});
+		});*/
+
+		 
+		/*加载更多*/
+		var url= "http://www.vs.com/crawler/getCrawlerByChannelLiveContent";
+		var list = null;
+		var params={
+		    pageIndex:0,
+		    size: 30,
+		    channelset:1
+		};
+		(function($) {
+			//阻尼系数
+			var deceleration = mui.os.ios?0.003:0.0009;
+			$('.mui-scroll-wrapper').scroll({
+				bounce: false,
+				indicators: true, //是否显示滚动条
+				deceleration:deceleration
+			});
+			// 7*24
+			$.each(document.querySelectorAll('#searchResultContainer .mui-scroll'), function(index, pullRefreshEl) {
+				var div = this;
+				contentrefresh: '正在加载...',
+				newData(url,params,forList,"","post");
+				
+				$(pullRefreshEl).pullToRefresh({
+					up: {
+						contentrefresh: '正在加载更多的数据...',
+						callback: function() {
+							var self = this;
+							setTimeout(function() {
+								fundmore();
+								if(list.length == 30){
+									self.endPullUpToRefresh(false);
+									num++;
+								}else{
+									self.endPullUpToRefresh(true);
+								}
+							}, 1500);
+						}
+					}
+				});
+			});
+		})(mui);
+		
+		//7*24 ajax
+		function newData(url,params,success,error,method){
+		    var success = arguments[2]?arguments[2]:function(){};
+		    var error = arguments[3]?arguments[3]:function(){};
+			if(method == undefined){
+				method = "get";
+			}
+		    $.ajax({
+		        url:url,
+		        type:method,
+		        dataType:"json",
+		        data:params,
+		        success: function (res) {
+		        	if(res.success==true){
+	                	success(res.data);
+	            	}
+		        },
+		        error: function (res) {
+		            error(res);
+		            var ul = $('#chartContainerContent1 .mui-table-view');
+		            var ts = $('#chartContainerContent1 .mui-pull-bottom-tips');
+		            ts.css("display","none");
+					var li;
+					li = document.createElement('li');
+					li.innerHTML = '<div id="noSearchResultContainer" >' +
+		            				'暂无活动喔，你可关注维胜公众号留意近期活动~</div>';
+					ul.append(li);
+		        }
+		    })
+		}
+		var num = 1; 
+		function fundmore(){
+			var self = this;
+			var params1={
+		        pageIndex:num,
+		        size: 30,
+		        channelset:1
+			};
+	  		newData(url,params1,forList,"","post");
+		}
+		// 7*24小时数据
+		function forList(res){ 
+			console.log(JSON.stringify(res));
+			if(!mui.isnull(res)){
+	  			list=res.data;
+				if(!mui.isnull(list)){
+					for(var i= 0;i<list.length; i++) {
+						fundList(list,i);
+					}
+					for(var j= 0;j<$("#chartContainerContent1 ul li .content-right").length; j++){
+						if($("#chartContainerContent1 ul li .content-right").eq(j).height() > 85){
+							$("#chartContainerContent1 ul li .content-right").eq(j).css("height","105px");
+						}else{
+							$("#chartContainerContent1 ul li .content-right").eq(j).find(".caoz").css("display","none");
+						}
+					}
+					$("#chartContainerContent1 .caoz").on("tap",function() {
+						var _this = $(this);
+						if(_this.html()  == "展开") {
+							_this.parent().removeAttr("style");
+							_this.parent().parent().css("height","inherit");
+							_this.html("收起");
+						}else if(_this.html()  == "收起") {
+							_this.parent().css({
+								"background": "#ffffff",
+								"z-index": "999",
+								"width": "100%",
+								"position": "absolute",
+								"top": "80px",
+								"height": "21px"
+							});
+							_this.parent().parent().css("height","105px");
+							_this.html("展开");
+						}
+					});
+				}
+			}
+		}
+		function fundList(list,i){
+		  	var $fundList=document.body.querySelector("#searchResultContainer .mui-table-view"); 
+		  	var time = vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"hh:mm");
+		  	//console.log(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
+		  	$("#result1").html(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
+		  	var li=document.createElement("li");
+		  	li.innerHTML = "<div class='content-left'>"+time+"</div>"+
+		  					"<div class='content-circular'></div>"+
+		  					"<div class='content-right'>"+list[i].liveContent+"<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 80px;'><span class='caoz'>展开</div></div>";
+		  	$fundList.appendChild(li);
+		}
+		
 	</script>
 </html>

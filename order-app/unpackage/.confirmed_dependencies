@@ -41,7 +41,12 @@
 			"js/quote/quote.js",
 			"js/quote/chart.config.js",
 			"js/alertProtype.js",
-			"css/layui.css"
+			"css/layui.css",
+			"img/homeOn.png",
+			"img/banner_load.jpg",
+			"css/home.css",
+			"img/home_list_1.png",
+			"img/found.png"
 		],
 		"refer": []
 	},
@@ -72,7 +77,8 @@
 			"vs/home/home.html",
 			"vs/directSeed/directSeed.html",
 			"vs/find/activityCenter/activityCenter.html",
-			"vs/find/informationCenter/informationCenter.html"
+			"vs/find/informationCenter/informationCenter.html",
+			"vs/quote/quoteTrade.html"
 		]
 	},
 	"vs/home/home.html": {
@@ -178,11 +184,23 @@
 			"css/mui.picker.min.css",
 			"js/mui.pullToRefresh.js",
 			"js/mui.pullToRefresh.material.js",
-			"js/common.js"
+			"js/common.js",
+			"js/directSeed.js",
+			"img/Canada.png",
+			"img/USA.png",
+			"img/Germany.png",
+			"img/Britain.png",
+			"img/Belgium.png",
+			"img/Eurozone.png",
+			"img/Australia.png",
+			"img/Zealand.png",
+			"img/Japan.png",
+			"img/allCity.png"
 		],
 		"refer": [
 			"vs/find/find.html",
-			"vs/directSeed/search.html"
+			"vs/directSeed/search.html",
+			"vs/home/home.html"
 		]
 	},
 	"vs/quote/placeOrder.html": {
@@ -492,7 +510,8 @@
 			"js/mui.pullToRefresh.js",
 			"js/mui.pullToRefresh.material.js",
 			"css/activityCenter.css",
-			"img/searchResult.png"
+			"img/searchResult.png",
+			"img/backBg.png"
 		],
 		"refer": []
 	},
