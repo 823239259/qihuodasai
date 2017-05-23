@@ -21,7 +21,7 @@
 		<div class="mui-content">
 			<div class="top-bank-information">
 				<label>
-					<img src="../../img/bank/cmb.png" />
+					<img src="../../img/bank/cmb.png" id="abbreviation" />
 				</label>
 				<div>
 					<span id="bankName">中国工商银行</span>
@@ -95,7 +95,7 @@
 				}
 			});
 		});
-		document.getElementById("deleteBank").addEventListener("tap",function(){
+		document.getElementById("deleteBank").addEventListener("tap", function() {
 			mui.confirm("您确定要删除该银行卡吗？", "提示", ["取消", "确认"], function(e) {
 				if(e.index == 1) {
 					deleteBank();
@@ -104,35 +104,38 @@
 		})
 		var data = null;
 		var index = 0;
-		var win=null;
-		mui.app_request('user/withdraw/bank_list', {}, function(result) {
-			console.log(JSON.stringify(result));
-			if(result.success == true) {
-				if(vs.browser.versions.Html5Plus) {
-					mui.plusReady(function() {
-						win = mui.get_window_data("modifyBank");
-						index = win.index;
-						data = result.data;
-						document.getElementById("bankName").innerHTML = data[index].bankName;
-						var card = data[index].card
+		var win = null;
+		if(vs.browser.versions.Html5Plus) {
+			mui.plusReady(function() {
+				win = mui.get_window_data("modifyBank");
+				var bankId = win.id;
+				mui.app_request('user/withdraw/queryBank', {
+					"bankId": bankId
+				}, function(result) {
+					if(result.success == true) {
+						document.getElementById("bankName").innerHTML = data[0].bankName;
+						var card = data[0].card
 						card = card.substring(0, 10) + "****" + card.substring(14, card.length);
 						document.getElementById("card").innerHTML = card;
-					})
-				} else {
+						document.getElementById("abbreviation").setAttribute("src", "../../img/bank/" + data[0].abbreviation + ".png");
+						document.getElementById("showCityPicker").innerHTML = data[0].accountAddress;
+						document.getElementById("bankAddress").value = data[0].subbank;
+					}
+				}, function(res) {});
+			})
+		} else {
 
-				}
-			}
-		}, function(res) {});
+		}
 
 		function settiingBefaultBank() {
-			if(mui.isnull(data)) {
+			if(mui.isnull(win.id)) {
 				return;
 			}
 			mui.app_request("user/withdraw/set_default_bank", {
-				"bankId": data[index].bankId
+				"bankId": win.id
 			}, function(result) {
 				mui.toast("设置成功");
-				mui.app_back(win.backpageID,true,win.url);
+				mui.app_back(win.backpageID, true, win.url);
 				return;
 			}, function(result) {
 				if(result.code == 2) {
@@ -144,12 +147,13 @@
 				}
 			});
 		};
-		function deleteBank(){
+
+		function deleteBank() {
 			mui.app_request("user/withdraw/del_bank", {
-				"bankId": data[index].bankId
+				"bankId": win.id
 			}, function(result) {
 				mui.toast("设置成功");
-				mui.app_back(win.backpageID,true,win.url);
+				mui.app_back(win.backpageID, true, win.url);
 				return;
 			}, function(result) {
 				if(result.code == 2) {

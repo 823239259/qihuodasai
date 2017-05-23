@@ -109,12 +109,13 @@
 		}
 
 		function insertBankList(data) {
+				console.log(JSON.stringify(data));
 			var bankList = document.getElementById("bankList");
 			for(var i = 0; i < data.length; i++) {
-				bankList.innerHTML += "<li class='mui-table-view-cell'>" +
+				bankList.innerHTML += "<li class='mui-table-view-cell' dataid="+data[i].bankId+">" +
 					"<a class='mui-navigate-right' href='javascript:void(0)'>" +
 					"<label>" +
-					"<img src='../../img/bank/cmb.png' />" +
+					"<img src='../../img/bank/"+data[i].abbreviation+".png' />" +
 					"</label>" +
 					"<div>" +
 					"<span>" + data[i].bankName + "</span>" +
@@ -125,8 +126,8 @@
 			}
 		}
 		$("#bankList").on("tap", "li", function() {
-			var index = $(this).index();
-			mui.open_window_data("modifyBank.html", "modifyBank", { "backpageID": "myBankCard", "url": "myBankCard.html", "index": index });
+			var index = $(this).attr("dataid");
+			mui.open_window_data("modifyBank.html", "modifyBank", { "backpageID": "myBankCard", "url": "myBankCard.html", "id": index });
 		})
 	</script>
 
