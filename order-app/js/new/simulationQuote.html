@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>模拟交易</title>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/simulationQuote.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<link rel="stylesheet" href="../../css/mui.page.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.all.css" />
+	</head>
+
+	<body class="simulation_content">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="contractList" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left top_button">
+					 <a class="mui-icon mui-pull-left mui-icon-search" href="#serachListTrade"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title">
+					<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item mui-active" href="#myOptional">我的自选</a>
+						<a class="mui-control-item" href="#allOptional" >全部合约</a> 
+					</div> 
+				</h1>
+				<button type="button" class="mui-right mui-btn  mui-btn-link mui-btn-nav mui-pull-right top_button">
+					<a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
+				</button>
+			</div>
+			<nav class="navlist">
+				<a href="javascript:void(0);" id="information">
+					<span class="mui-icon"><img src="../../img/information.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">资讯</span>
+				</a>
+				<a href="javascript:void(0);" id="quoteTrade">
+					<span class="mui-icon"><img src="../../img/quotation.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">行情</span>
+				</a>
+				<a href="javascript:void(0);" id="simulationQuote" style="overflow: initial;" class="navon">
+					<span class="mui-icon"><img src="../../img/transaction.png" style="height: 42px; position: absolute; top: -15px; margin-left: -21px;"></span>
+					<span class="mui-tab-label">模拟交易</span>
+				</a>
+				<a class="" id="find" href="javascript:void(0);">
+					<span class="mui-icon"><img src="../../img/find.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">发现</span>
+				</a>
+				<a id="account" href="javascript:void(0);">
+					<span class="mui-icon"><img src="../../img/my.png" style="width: 20px;height:20px;"></span>
+					<span class="mui-tab-label">我的</span>
+				</a>
+			</nav>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-slider-item mui-control-content mui-active" id="myOptional">
+							<ul class="simulation_optional_title">
+								<li>合约名称</li>
+								<li>最新价</li>
+								<li>成交量</li>
+								<li id="riseAndFallListMyOptional" value="1">涨跌幅</li>
+							</ul>
+							<div id="myQuote-list"></div>
+							<p class="insert_optional">
+								<a href="#serachListTrade"><span class="mui-icon mui-icon-plus"></span><span>添加自选</span></a>
+							</p>
+						</div>
+						<div class="mui-slider-item mui-control-content" id="allOptional">
+							<p class="top_list_title">国际期货</p>
+							<ul class="simulation_optional_title">
+								<li>合约名称</li>
+								<li>最新价</li>
+								<li>成交量</li>
+								<li id="riseAndFallListAllOptional" value="1">涨跌幅</li>
+							</ul>
+							<div id="quote-list"></div>
+							<!--tplQuoteList-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面开始-->
+		<div id="simulationTrade" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left" id="backToPage">
+					 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back7"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title ">
+					<div id="simulation_trade_name" class="simulation_trade_title">
+						<p><select id="select000"><option>富时A501608</option></select></p>
+						<p id="p00">CNQ16</p>
+					</div>
+				</h1>
+				<button type="button" class="mui-right mui-btn  mui-btn-link mui-btn-nav mui-pull-right" id="tradeMune">
+					<a href="#topPopover"></a>
+				</button>
+				<button type="button" class="mui-right mui-btn  mui-btn-link mui-btn-nav mui-pull-right top_button">
+					<a class="mui-icon mui-icon-loop mui-pull-right" id="refresh1"></a>
+				</button>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted chart_nav_list">
+							<a class="mui-control-item " href="#lightContainerDiv" id="lightChartButton">闪电</a>
+							<a class="mui-control-item mui-active" href="#timeChartContainerDiv" id="timeChartButton">分时</a>
+							<a class="mui-control-item " href="#candlestickContainerDiv" id="chiocecandlestickButton">K线</a>
+							<a class="mui-control-item" href="#HandicapDiv" id="HandicapDivButton">盘口</a>
+							<a class="mui-control-item " href="#tradeDiv" id="tradeDivButton">交易</a>
+						</div>
+						<div class="candlestick_nav display_none" id="candlestickNav">
+							<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+								<a id="1_k" class="mui-control-item mui-active" href="#candlestickContainerDiv" data="1">1分</a>
+								<a id="5_k" class="mui-control-item" href="#candlestickContainerDiv" data="5">5分</a>
+								<a id="15_k" class="mui-control-item" href="#candlestickContainerDiv" data="15">15分</a>
+								<a id="30_k" class="mui-control-item" href="#candlestickContainerDiv" data="30">30分</a>
+								<a id="1440_k" class=" mui-control-item" data="1440" >日K</a>
+							</div>
+						</div>
+						<div id="candlestick_data_id" class="candlestick_data">
+							<div>-</div>
+							<div>
+								<p>0000-00-00 00:00</p>
+								<p><span>-</span><span>-</span></p>
+							</div>
+							<ul>
+								<li>开盘：</li>
+								<li>-</li>
+								<li>最高：</li>
+								<li>-</li>
+								<li>成交量：</li>
+								<li>-</li>
+								<li>最低：</li>
+								<li>-</li>
+							</ul>
+						</div>
+						<div id="chartContainer">
+							<div class="mui-slider-item mui-control-content " id="lightContainerDiv">
+								<div id="lightContainer">
+									<div style="height: 300px;width: 100%;" id="lightChart"></div>
+								</div>
+							</div>
+							<div class="mui-slider-item mui-control-content mui-active" id="timeChartContainerDiv">
+								<div id="timeChartContainer">
+									<div style="height: 100px;width: 100%;" id="timeChart"></div>
+									<div style="height: 100px;width: 100%;" id="volumeChart"></div>
+								</div>
+							</div>
+							<div class="mui-slider-item mui-control-content" id="candlestickContainerDiv">
+								<div id="candlestickContainer">
+									<div style="height: 100px;width: 100%;" id="candlestickChartDiv"></div>
+									<div style="height: 100px;width: 100%;" id="candlestickVolumeChart"></div>
+								</div>
+							</div>
+							<div class="mui-slider-item mui-control-content" id="HandicapDiv">
+								<p><span>盘口</span><span>五档行情</span></p>
+								<table>
+									<tr>
+										<td>最新</td>
+										<td id="pklastparice">0</td>
+										<td>卖五</td>
+										<td id="sell_8">0</td>
+										<td id="sell_9">0</td>
+									</tr>
+									<tr>
+										<td>开盘 </td>
+										<td id="pkopenprice">0</td>
+										<td>卖四</td>
+										<td id="sell_6">0</td>
+										<td id="sell_7">0</td>
+									</tr>
+									<tr>
+										<td>最高 </td>
+										<td id="pkhightprice">0</td>
+										<td>卖三</td>
+										<td id="sell_4">0</td>
+										<td id="sell_5">0</td>
+
+									</tr>
+									<tr>
+										<td>最低 </td>
+										<td id="pklowprice">0</td>
+										<td>卖二</td>
+										<td id="sell_2">0</td>
+										<td id="sell_3">0</td>
+									</tr>
+									<tr>
+										<td>涨跌</td>
+										<td id="pkzd">0</td>
+										<!--<td>结算 </td>
+									<td id = "pkjs"  >0</td>-->
+										<td>卖一</td>
+										<td id="sell_0">0</td>
+										<td id="sell_1">0</td>
+									</tr>
+									<tr>
+										<td>成交量 </td>
+										<td id="pktrademl">0</td>
+										<td>买一</td>
+										<td id="buy_0">0</td>
+										<td id="buy_1">0</td>
+									</tr>
+									<tr>
+										<td>持仓量 </td>
+										<td id="pkccml">0</td>
+										<td>买二</td>
+										<td id="buy_2">0</td>
+										<td id="buy_3">0</td>
+									</tr>
+									<tr>
+										<td>昨结 </td>
+										<td id="pkzj">0</td>
+										<td>买三</td>
+										<td id="buy_4">0</td>
+										<td id="buy_5">0</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>买四</td>
+										<td id="buy_6">0</td>
+										<td id="buy_7">0</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>买五</td>
+										<td id="buy_8">0</td>
+										<td id="buy_9">0</td>
+									</tr>
+								</table>
+							</div>
+							<div class="mui-slider-item mui-control-content  " id="tradeDiv">
+								<div id="accountInfo" class="trade_title_top">
+
+								</div>
+								<form action="">
+									<div class="chioce_contract">
+										<div class="chioce_contract_top">
+											<div>
+												<select name="contract" id="contract">
+													<!--tplTradeContractOption-->
+												</select>
+												<p id="contractNoSelect"></p>
+											</div>
+											<ul>
+												<li>新：</li>
+												<li id="xin0">-</li>
+												<li id="xin1">-</li>
+												<li>卖：</li>
+												<li id="sell00">-</li>
+												<li id="sell11">-</li>
+												<li>买：</li>
+												<li id="buy00">-</li>
+												<li id="buy11">-</li>
+											</ul>
+										</div>
+										<div class="chioce_contract_bottom">
+											<p>
+												<label>手数：</label><input id="orderNum" type="text" value="1" /><label>（手）</label>
+											</p>
+											<p>
+												<label>价格：</label><input id="marketPrice" type="text" value="市价" readonly="readonly" onkeyup="value=value.replace(/[^0-9.]/g,'') " />
+											</p>
+											<input id="checkPriceButton" value="1" type="text" readonly="readonly">
+										</div>
+									</div>
+									<div class="buy_and_sell_button">
+										<div lay-submit="" lay-filter="orderBuy">
+											<p id="sumbuyPrice">市价</p>
+											<p>模拟买入</p>
+										</div>
+										<div lay-submit="" lay-filter="orderSel">
+											<p id="sumsellPrice">市价</p>
+											<p>模拟卖出</p>
+										</div>
+									</div>
+								</form>
+								<div class="trade_bottom_list">
+									<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+										<a class="mui-control-item mui-active" href="#positionListOrder">持仓</a>
+										<a class="mui-control-item" href="#guandanListOrder">挂单</a>
+										<a class="mui-control-item" href="#entrustListOrder">委托</a>
+										<a class="mui-control-item" href="#dealtListOrder">成交</a>
+										<a class="mui-control-item" href="#dealtListOrder1" style="display: none;">资金</a>
+									</div>
+									<div class="mui-slider-item mui-control-content mui-active order_list" id="positionListOrder">
+										<div class="mui-scroll-wrapper">
+											<div class=" mui-scroll">
+												<table>
+													<thead>
+														<tr>
+															<td>合约名称</td>
+															<td>多空</td>
+															<td>手数</td>
+															<td>开仓均价</td>
+															<td>浮动盈利</td>
+														</tr>
+													</thead>
+													<tbody id="holdList">
+														<!-- tplHoldList 模板填充 -->
+													</tbody>
+
+												</table>
+											</div>
+										</div>
+										<div class="button_list">
+											<button type="button" id="allOpen">全部平仓</button>
+											<button type="button" id="Open">平仓</button>
+											<button type="button" id="stopLoss" >止损止盈</button>
+										</div>
+									</div>
+									<div class="mui-slider-item mui-control-content order_list" id="guandanListOrder">
+										<div class="mui-scroll-wrapper">
+											<div class=" mui-scroll">
+												<table>
+													<thead>
+														<tr>
+															<td>合约名称</td>
+															<td>买卖</td>
+															<td>委托价</td>
+															<td>委托量</td>
+															<td>挂单量</td>
+															<td>挂单时间</td>
+														</tr>
+													</thead>
+													<tbody id="applyOrderList">
+														<!-- tplApplyOrderList 模板填充 -->
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="button_list">
+											<button type="button" id="fullWithdrawal">全撤</button>
+											<button type="button" id="kilAnorder">撤单</button>
+											<button type="button" id="changeSingle">改单</button>
+										</div>
+									</div>
+									<div class="mui-slider-item mui-control-content order_list" id="entrustListOrder">
+										<div class="mui-scroll-wrapper">
+											<div class=" mui-scroll">
+												<table>
+													<thead>
+														<tr>
+															<td>合约名称</td>
+															<td>状态</td>
+															<td>买卖</td>
+															<td>委托价</td>
+															<td>委托量</td>
+															<td>已成交</td>
+															<td>已撤单</td>
+															<td>下单时间</td>
+														</tr>
+													</thead>
+													<tbody id="orderList">
+														<!-- tplOrderList 模板填充 -->
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="mui-slider-item mui-control-content order_list" id="dealtListOrder">
+										<div class="mui-scroll-wrapper order_list">
+											<div class=" mui-scroll">
+												<table>
+													<thead>
+														<tr>
+															<td>合约名称</td>
+															<td>买卖</td>
+															<td>成交价</td>
+															<td>成交量</td>
+															<td>成交时间</td>
+														</tr>
+													</thead>
+													<tbody id="tradeList">
+														<!-- tplTradeList 模板填充 -->
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="mui-slider-item mui-control-content order_list" id="dealtListOrder1">
+										<div class="mui-scroll-wrapper order_list">
+											<div class=" mui-scroll">
+												<table>
+													<thead>
+														<tr>
+															<th>币种</th>
+															<th>期初权益</th>
+															<th>出入金</th>
+															<th>手续费</th>
+															<th>平仓盈亏</th>
+															<th>平仓盈亏率</th>
+															<th>当前结存</th>
+															<th>逐笔浮盈</th>
+															<th>逐笔浮盈率</th>
+															<th>当前权益</th>
+															<th>保证金</th>
+															<th>挂单保证金</th>
+															<th>挂单手续费</th>
+															<th>可用资金</th>
+														</tr>
+													</thead>
+													<tbody id="accountList">
+														<!-- tplTradeList 模板填充 -->
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class=" bottom_buy_div">
+							<div class="trade_buy_sell_num">
+								<div>
+									<span>卖：</span>
+									<span id="_sell00_">-</span>
+									<span id="_sell01_">-</span>
+									<span id="sellLength"></span>
+								</div>
+								<div>
+									<span>买：</span>
+									<span id="_buy00_">-</span>
+									<span id="_buy01_">-</span>
+									<span id="buyLength"></span>
+								</div>
+								<div>
+									<label>手数:</label>
+									<label>（价格：市价）</label>
+									<input id="orderNum0" type="text" value="1" />
+								</div>
+							</div>
+							<div class="trade_bottom_nav">
+								<div id="simBuy">
+									<p></p>
+									<p>模拟买入</p>
+								</div>
+								<div id="simSell">
+									<p></p>
+									<p>模拟卖出</p>
+								</div>
+								<div id="saveOptional">
+									<p></p>
+									<p>添加自选</p>
+								</div>
+								<div id="xx-remind">
+									<a href="#remindListTrade">
+										<p></p>
+										<p>提醒</p>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---------------------------------下拉菜单--------------------------->
+				<div id="topPopover" class="mui-popover">
+					<div class="mui-popover-arrow"></div>
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									<a id="stopOrderListTrade00" href="#stopOrderListTrade">止损单</a>
+								</li>
+								<li class="mui-table-view-cell" id="openConditionButton">
+									<a id="conditioListTrade00" href="#conditioListTrade">条件单</a>
+								</li>
+								<li class="mui-table-view-cell" id="qryHisTrade1">
+									<a href="#historyDetailsListTrade">历史成交</a>
+								</li>
+								<li class="mui-table-view-cell" id="online">
+									在线客服
+								</li>
+								<li class="mui-table-view-cell">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--单页面开始-->
+		<div id="conditioListTrade" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back1"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title ">
+					条件单
+				</h1>
+				<button type="button" class="mui-right mui-btn  mui-btn-link mui-btn-nav mui-pull-right">
+					<a class="mui-icon  mui-pull-right" id="conditionButton"></a>
+				</button>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="conditio_list_title">
+							<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+								<a class="mui-control-item mui-active" href="#notConditioListTable">未触发列表</a>
+								<a class="mui-control-item " href="#alreadyConditioListTable">已触发列表</a>
+							</div>
+						</div>
+						<div class="mui-slider-item mui-control-content mui-active condition_list" id="notConditioListTable">
+							<div class="mui-scroll-wrapper">
+								<div class=" mui-scroll">
+									<div class="over_table">
+										<table>
+											<thead>
+												<tr>
+													<td>合约名称</td>
+													<td>状态</td>
+													<td>类型</td>
+													<td>条件</td>
+													<td>下单</td>
+													<td>有效日期</td>
+													<td>下单时间</td>
+												</tr>
+											</thead>
+											<tbody id="condition-list">
+												<!--tplConditionList-->
+											</tbody>
+										</table>
+									</div>
+									<div class="tips_list">
+										<p>提示：</p>
+										<p>1、云端条件单只保证触发不保证成交</p>
+										<p>2、暂不支持显示套利条件单</p>
+									</div>
+									<div class="button_list">
+										<button type="button" id="suspendConditionList">暂停</button>
+										<button type="button" id="modifiyConditionListPopover">修改</button>
+										<button type="button" id="deleteCondition">删除</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="mui-slider-item mui-control-content condition_list" id="alreadyConditioListTable">
+							<div class="mui-scroll-wrapper">
+								<div class=" mui-scroll">
+									<div class="over_table">
+										<table>
+											<thead>
+												<tr>
+													<td>合约名称</td>
+													<td>状态</td>
+													<td>类型</td>
+													<td>条件</td>
+													<td>下单</td>
+													<td>有效日期</td>
+													<td>触发时间</td>
+												</tr>
+											</thead>
+											<tbody id="condition-notrigger-list">
+												<!--tplNotriggerConditionList-->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面开始-->
+		<div id="stopOrderListTrade" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back3"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title ">
+					止损单
+				</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="conditio_list_title">
+							<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+								<a class="mui-control-item  mui-active" href="#notstopOrderListTable">未触发列表</a>
+								<a class="mui-control-item" href="#alreadystopOrderTable">已触发列表</a>
+							</div>
+						</div>
+						<div class="mui-slider-item mui-control-content mui-active condition_list" id="notstopOrderListTable">
+							<div class="mui-scroll-wrapper">
+								<div class=" mui-scroll">
+									<div class="over_table">
+										<table>
+											<thead>
+												<tr>
+													<td>合约名称</td>
+													<td>状态</td>
+													<td>多空</td>
+													<td>类别</td>
+													<td>手数</td>
+													<td>触发条件</td>
+													<td>委托价</td>
+													<td>有效期</td>
+													<td>下单时间</td>
+												</tr>
+											</thead>
+											<tbody id="stopLoss-list">
+												<!--tplStopLossList-->
+
+											</tbody>
+										</table>
+									</div>
+									<div class="tips_list">
+										<p>提示：</p>
+										<p>1、云端条件单只保证触发不保证成交</p>
+										<p>2、暂不支持显示套利条件单</p>
+									</div>
+
+									<div class="button_list">
+										<button type="button" id="zhanting">暂停</button>
+										<button type="button" id="modifiystopOrderPopover">修改</button>
+										<button type="button" id="shanchu">删除</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="mui-slider-item mui-control-content condition_list" id="alreadystopOrderTable">
+							<div class="mui-scroll-wrapper">
+								<div class=" mui-scroll">
+									<div class="over_table">
+										<table>
+											<thead>
+												<tr>
+													<td>合约名称</td>
+													<td>状态</td>
+													<td>类型</td>
+													<td>条件</td>
+													<td>下单</td>
+													<td>有效日期</td>
+													<td>触发时间</td>
+												</tr>
+											</thead>
+											<tbody id="stopLoss-list00">
+												<!--tplStopLossList00-->
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--单页面开始-->
+		<div id="historyDetailsListTrade" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back4"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title ">
+					历史成交记录
+				</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="choice_calendar" >
+								<p>
+									<label id='timechioce' class="btn" data-options='{"type":"date"}'></label>
+								<input type="text" id="finance" readonly="readonly">
+								</p>
+									<span>至</span>
+								<p>
+									<label id='timechioce1' class="btn" data-options='{"type":"date"}'></label>
+									<input type="text" id="finance1" readonly="readonly">
+								</p>
+								<span id = "qryHisTrade2">查询</span>
+						</div>
+						<div class="table_div" id="table_div">
+							<table id="historyDetailsTable">
+								<thead>
+									<tr>
+										<td width="30px">序号</td>
+										<td width="60px">合约名称</td>
+										<td width="30px">交易所</td>
+										<td width="60px">币种</td>
+										<td width="30px">买卖</td>
+										<td width="60px">成交价</td>
+										<td width="30px">成交量</td>
+										<td width="30px">手续费</td>
+										<!--<td width="100px">下单类型</td>
+										<td width="100px">下单人编号</td>-->
+										<td width="150px">成交日期</td>
+									</tr>
+								</thead>
+								<tbody id="hisTradeList">
+									
+								</tbody>
+							</table>
+						</div>
+						<div id="notext_hisTradeList" class="display_none">没有对应的记录，赶快去交易吧！</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="serachListTrade" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left" id="backToPage1">
+					 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back5"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title ">
+					搜索
+				</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<p class="choice_calendar">
+							<a class="mui-icon  mui-pull-left  mui-icon-search" class="back"></a><input type="text" placeholder="输入代码/名称" id="serchInput"><label>查询</label></p>
+						<ul class="search_list">
+
+						</ul>
+
+						<!--<img src="../../img/noresult.png" />-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="remindListTrade" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left" id="back-alls">
+					 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back6"></a>
+				</button>
+				<h1 class="mui-center mui-title simulation_title ">
+					<div class="simulation_trade_title" style="background:none;">
+						<p>
+							<select id="select666">
+								<option>富时A501608</option>
+							</select>
+						</p>
+						<p id="p66">CNQ16</p>
+					</div>
+				</h1>
+				<button type="button" class="mui-right mui-btn  mui-btn-link mui-btn-nav mui-pull-right preservation" id="messagePreservation">
+					保存
+				</button>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<p class="price_title">
+							<span id="hy-line-candlestick-price" class="mui-col-xs-3 mui-col-sm-3" style="display: inline-block;height: 30px; line-height: 30px; text-align: center;"></span>
+							<span id="hy-line-candlestick-zd" class="mui-col-xs-3 mui-col-sm-3" style="display: inline-block;height: 30px; line-height: 30px; text-align: center;"></span>
+							<span id="hy-line-candlestick-zdf" class="mui-col-xs-3 mui-col-sm-3" style="display: inline-block;height: 30px; line-height: 30px; text-align: center;"></span>
+						</p>
+						<ul class="remind_list_rise">
+							<li>
+								<label>上涨位提醒</label>
+								<div class="float_right">
+									<div class="mui-switch  mui-switch-mini" id="remind-rise">
+										<div class="mui-switch-handle"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<label>价格涨到</label>
+								<div class="float_right">
+									<input type="text" id="remind-rise-number" readonly="readonly"/>
+								</div>
+							</li>
+							<li>
+								<label>最近</label>
+								<div class="float_right"> 
+									<input type="tel" readonly="readonly" style="width: 15%;" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="2" class="margin_right_10" id="remind-rise-day"/>
+									<span>天最高价 <i id="remind-rise-high">54.42</i></span>
+								</div>
+							</li>
+						</ul>
+						<div class="color_div"></div>
+						<ul class="remind_list_rise">
+							<li>
+								<label>下跌位提醒</label>
+								<div class="float_right">
+									<div class="mui-switch  mui-switch-mini" id="remind-fall">
+										<div class="mui-switch-handle"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<label>价格跌到</label>
+								<div class="float_right">
+									<input type="text" id="remind-fall-number" readonly="readonly"/>
+								</div>
+							</li>
+							<li>
+								<label>最近</label>
+								<div class="float_right"> 
+									<input type="tel" readonly="readonly" style="width: 15%;" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="2" class="margin_right_10" id="remind-fall-day"/>
+									<span>天最低价 <i class="remind-fall-high" id="remind-fall-high">--</i></span>
+								</div>
+							</li>
+						</ul>
+						<div class="color_div"></div>
+						<ul class="remind_list_rise">
+							<li>
+								<label>日涨幅超过</label>
+								<div class="float_right">
+									<input type="text" readonly="readonly" class="margin_right_10" id="remind-rise-exceed"/><span class="margin_right_10">%</span>
+									<div class="mui-switch  mui-switch-mini" id="remind-rise-exceed-active">
+										<div class="mui-switch-handle"></div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<label>日跌幅超过</label>
+								<div class="float_right">
+									<input type="text" readonly="readonly" class="margin_right_10" id="remind-fall-exceed"/><span class="margin_right_10">%</span>
+									<div class="mui-switch  mui-switch-mini" id="remind-fall-exceed-active">
+										<div class="mui-switch-handle"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="color_div"></div>
+						<ul class="remind_list_rise">
+							<li>
+								<label>提醒方式</label>
+								<div class="float_right color_999999">
+									通知
+								</div>
+							</li>
+							<li>
+								<label>提醒频率</label>
+								<div class="float_right color_999999"> 
+									<select id="notifyInterval" > 
+										<option class="mui-selected" data-notifyInterval="5">五分钟一次</option>
+										<option class="mui-selected" data-notifyInterval="1440">每天一次</option>
+										<option class="mui-selected" data-notifyInterval="-1">仅提醒一次</option>
+									</select>
+								</div>
+							</li>
+							<li class="bottom_tips">
+								<label>价格提醒服务，依赖于网络，可能出现通知延迟状况，请保持网络通畅。</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="popoverLoss" class="mui-popover">
+			<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" id="stopAndLoss">
+				<a class="mui-control-item mui-active" href="#stopTitle">止损</a>
+				<a class="mui-control-item" href="#lossTitle">止盈</a>
+			</div>
+			<div>
+				<div id="stopTitle" class="mui-control-content mui-active">
+					<table>
+						<tr>
+							<td>合约</td>
+							<td><span id="stopContract" ></span></td>
+							<td id="stopMoreOrNull">-</td>
+							<td>最新：<i id="stopLast">-</i></td>
+						</tr>
+						<tr>
+							<td>方式</td>
+							<td>
+								<select id="stopSecOption" class="mui-btn mui-btn-block selectComm">
+									<option value="1">止损价</option>
+									<option value="2">动态价</option>
+								</select>
+							</td>
+							<td colspan="2">
+								<input type="hidden" />
+								<!--<input type="number" id="stopPrice" value="0" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">-->
+								<input type="number" id="stopPrice" value="0" />
+								<span id="stopPercent" >0.00</span><span>%</span>
+							</td>
+						</tr>
+						<tr>
+							<td>手数</td>
+							<td><input id="zhiyinNum" type="number" value="1" class="selectComm" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
+							<td>止损委托价：</td>
+							<td>
+								<select id="zhiyinOrderType" class="mui-btn mui-btn-block selectComm">
+									<option value="1">市价</option>
+									<option value="2">对手价</option>
+								</select>
+							</td>
+						</tr>
+					
+					</table>
+	<button class="button_left close_propove_Loss">关闭</button>
+					<button id="stopAdd00" class="button_left close_propove_Loss">添加</button>
+				</div>
+				<div id="lossTitle" class="mui-control-content">
+					<table>
+						<tr>
+							<td>合约</td>
+							<td id="zhiyin00heyue"></td>
+							<td id="zhiyin00moreOrNull">多头</td>
+							<td>最新：<i id="zhiyin00Last">-</i></td>
+						</tr>
+						<tr>
+							<td>止盈价</td>
+							<td colspan="3">
+								<input type="hidden" />
+								<input id="zhiyinjia" type="number" value="0" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')">
+								<!--<input id="zhiyinjia" type="number" value="0" />-->
+								<span id="zhiyinPercent00">0.00</span><span>%</span>
+							</td>
+						</tr>
+						<tr>
+							<td>手数</td>
+							<td><input id="zhiyinshoushu" type="number" value="1" class="selectComm" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
+							<td colspan="2" style="border-right: none;">止盈委托价：
+								<select id="zhiyinweituojia" class="mui-btn mui-btn-block selectComm">
+									<option value="1">市价</option>
+									<option value="2">对手价</option>
+								</select>
+							</td>
+						</tr>
+					
+					</table>
+	<button class="button_left close_propove_Loss">关闭</button>
+					<button id="zhiyinAdd" class="button_left close_propove_Loss">添加</button>
+				</div>
+			</div>
+		</div>
+		<div id="popoverConditoion" class="mui-popover">
+			<div id="segmentedControlConditoion" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+				<a class="mui-control-item mui-active" id="plan_conditionTitlePrice" href="#ConditoionTitlePrices">价格条件</a>
+				<a class="mui-control-item" id="plan_conditionTitleTime" href="#ConditoionTitleTime">时间条件</a>
+			</div>
+			<div>
+				<div id="ConditoionTitlePrices" class="mui-control-content mui-active">
+					<table>
+						<tr>
+							<td>合约</td>
+							<td>
+								<select  id="pricesContract" class="mui-btn mui-btn-block selectComm select_90">
+								</select>
+							</td>
+							<td>最新价</td>
+							<td id="jgtjLastPrice"></td>
+						</tr>
+						<tr>
+							<td>方式</td>
+							<td>
+								<select id="selectCompareType" class="mui-btn mui-btn-block selectComm">
+									<option value="0">></option>
+									<option value="1"><</option>
+									<option value="2">>=</option>	
+									<option value="3"><=</option>
+								</select>
+								<!--<input id="priceTriggerPonit" type="number" value="0" class="selectComm" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />-->
+								<input id="priceTriggerPonit" type="number" value="0" class="selectComm"/>
+							</td>
+							<td colspan="2">
+								<select id="selectAddition" class="mui-btn mui-btn-block selectComm ">
+									<option value="-1">附加</option>
+									<option value="0">></option>
+									<option value="1"><</option>
+									<option value="2">>=</option>	
+									<option value="3"><=</option>
+								</select>
+								<!--<input id="additionPriceNumber" type="number " value="0" class="selectComm" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />-->
+								<input id="additionPriceNumber" type="text" value="0" class="selectComm" />
+							</td>
+						</tr>
+						<tr>
+							<td>操作</td>
+							<td>
+								<select id="priceBuyOrSellSelect" class="mui-btn mui-btn-block selectComm">
+									<option value="0">买</option>
+									<option value="1">卖</option>
+								</select>
+								<select id="priceSelectOrderType" class="mui-btn mui-btn-block selectComm">
+									<option value="1">市价</option>
+									<option value="2">对手价</option>
+								</select>
+							</td>
+							<td>手数</td>
+							<td>
+								<!--<input id="priceNumber" type="number" value="1" class="select_90" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />-->
+								<input id="priceNumber" type="tel" value="1" class="select_90"/>
+							</td>
+						</tr>
+						<tr>
+							<td>有效</td>
+							<td colspan="3">当日有效</td>
+						</tr>
+					
+					</table>
+	<button class="button_left close_propove_conditoion">关闭</button>
+					<button id="pricesAdd"  class="button_left close_propove_conditoion">添加</button>
+				</div>
+				<div id="ConditoionTitleTime" class="mui-control-content">
+					<table>
+						<tr>
+							<td>合约</td>
+							<td class="border_none">
+								<select id="timeContract" class="mui-btn mui-btn-block selectComm select_90">
+								</select>
+							</td>
+							<td class="border_none">最新价</td>
+							<td><input id="ConditionNo00" type="text" value="0" style="display: none;"/><span id="_ConditionNo000_"></span></td>
+						</tr>
+						<tr>
+							<td>时间</td>
+							<td class="border_none">
+								<input type="text" placeholder="选择时间" data-options='{"type":"time"}' id="insertTimeInput" value="0" readonly="readonly" class="select_90" />
+							</td>
+							<td class="border_none"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>价格</td>
+							<td class="border_none">
+								<select id="selectTimeAdditionType" class="mui-btn mui-btn-block selectComm">
+									<option value="-1">附加</option>
+									<option value="0">></option>
+									<option value="1"><</option>
+									<option value="2">>=</option>
+									<option value="3"><=</option>
+								</select>
+								<input id="TimeAdditionPrice" type="number " value="0" class="selectComm" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')" />
+							</td>
+							<td class="border_none"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>操作</td>
+							<td>
+								<select id="selectTimeDirection" class="mui-btn mui-btn-block selectComm">
+									<option value="0">买</option>
+									<option value="1">卖</option>
+								</select>
+								<select id="selectTimeOrderTyep" class="mui-btn mui-btn-block selectComm">
+									<option value="1">市价</option>
+									<option value="2">对手价</option>
+								</select>
+							</td>
+							<td>手数</td>
+							<td><input id="timeNumber" type="text " value="1" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" /></td>
+						</tr>
+						<tr>
+							<td>有效</td>
+							<td colspan="3">当日有效</td>
+						</tr>
+					
+					</table>
+<button class="button_left close_propove_conditoion">关闭</button>
+					<button id="timeAdd" class="button_left close_propove_conditoion">添加</button>
+				</div>
+			</div>
+		</div>
+		<div id="popover" class="mui-popover">
+			<div class="mui-content-padded">
+				<h4 id="title">改单</h4>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>委托价格：</label>
+						<input type="text" class="mui-input-clear" id="col1" placeholder="请输入" value="">
+					</div>
+					<div class="mui-input-row">
+						<label>委托数量：</label>
+						<input type="text" class="mui-input-clear" id="col2" placeholder="请输入" value="">
+					</div>
+				</form>
+				<button type="button" class="mui-btn" id="add">确定</button>
+				<button type="button" class="mui-btn" id="clsoeAdd">取消</button>
+			</div>
+		</div>
+		<input type="hidden" id="totalVolume" />
+		<input type="hidden" id="commodityNo" />
+		<input type="hidden" id="contractNo" />
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../lib/layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/mui.view.js"></script>
+	<script type="text/javascript" src="../../js/mui.page.js"></script>
+	<script type="text/javascript" src="../../js/bindEvent.js"></script>
+	<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript" src="../../js/mui.picker.all1.js"></script>
+	<script type="text/javascript" src="../../js/quote_echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="../../js/quote_echarts/chart.config.js"></script>
+	<script type="text/javascript" src="../../js/quote_echarts/quote.candlestick.chart.js"></script>
+	<script type="text/javascript" src="../../js/quote_echarts/quote.lghtning.chart.js"></script>
+	<script type="text/javascript" src="../../js/quote_echarts/quote.time.chart.js"></script>
+	<script type="text/javascript" src="../../js/simulationQuote.js"></script>
+	<script type="text/javascript" src="../../js/n_utils.js"></script>
+	<script type="text/javascript" src="../../js/trade/n_trade_vo.js"></script>
+	<script type="text/javascript" src="../../js/trade/n_trade.js"></script>
+	<script type="text/javascript" src="../../js/quote/n_quote_vo.js"></script>
+	<script type="text/javascript" src="../../js/quote/n_quote.js"></script>
+	<script type="text/javascript" src="../../js/search.js"></script>
+	<script type="text/javascript" src="../../js/notice.js"></script>
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			initBottom("../information/information.html", "../quote/quote.html", "simulationQuote.html", "../find/find.html", "../account/account.html");
+			$("#refresh,#refresh1").on("tap", function() {
+				mui.app_refresh("simulationQuote")
+			});
+		});
+		var jsonDataTwo;
+		var layer, form, element, laytpl;
+		layui.use(['layer', 'form', 'element', 'laytpl'], function() {
+			layer = layui.layer,
+				form = layui.form(),
+				element = layui.element(),
+				laytpl = layui.laytpl;
+			// 初始化行情
+			initQuoteClient();
+
+			// 买多
+			form.on('submit(orderBuy)', function() {
+				var data = {
+					contract: $('#contract option:selected').val(),
+					priceType: $.trim($('#marketPrice').val()) != '市价' ? 0 : 1,
+					limitPrice: $.trim($('#marketPrice').val())=='市价'? 0:$('#marketPrice').val(),
+					orderNum: $('#orderNum').val()
+				};
+				orderInsert(data, 0);
+				return false; // 禁止提交表单
+			});
+			// 卖空
+			form.on('submit(orderSel)', function() {
+				var data = {
+					contract: $('#contract option:selected').val(),
+					limitPrice: $.trim($('#marketPrice').val())=='市价'? 0:$('#marketPrice').val(),
+					priceType: $.trim($('#marketPrice').val()) != '市价' ? 0 : 1,
+					orderNum: $('#orderNum').val()
+				};
+				orderInsert(data, 1);
+				return false;
+			});
+
+			//初始化交易数据
+			//			initTradeInfo();
+		});
+	</script>
+	<script id="tplQuoteList" type="text/html">
+		{{# layui.each(d, function(index, item){ if(item.IsUsed!=0){    }}
+		<a id="{{ item.CommodityNo }}{{ item.MainContract }}-line" href="#simulationTrade" class="simulation_optional_list_href" data="{{ item.CommodityNo }}-{{ item.MainContract }}">
+			<ul class="simulation_optional_list">
+				<li>
+					<span>{{item.CommodityName}}</span>
+					<span>{{item.CommodityNo}}{{item.MainContract}}</span>
+					<span style="display: none;">{{item.MainContract}}</span>
+					<span style="display: none;">{{item.ExchangeNo}}</span>
+					<span style="display: none;">{{item.CommodityNo}}</span>
+				</li>
+				<li id="{{ item.CommodityNo }}{{ item.MainContract }}-price">0</li>
+				<li id="{{ item.CommodityNo }}{{ item.MainContract }}-TotalVolume">0</li>
+				<li id="{{ item.CommodityNo }}{{ item.MainContract }}-zd" class=" risea_and_fall_all_optional display_none ">0</li>
+				<li id="{{ item.CommodityNo }}{{ item.MainContract }}-zdf" class="rise_of_fall_list_all_optional  ">0</li>
+			</ul>
+		</a>
+		{{#			}	}); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+	</script>
+	<!-- 描述：订阅模 -->
+	<script id="tplQuoteListMy" type="text/html">
+		{{# layui.each(d, function(index, item){ if(item.IsUsed!=0){    }}
+		<a id="{{ item.CommodityNo }}{{ item.MainContract }}-line" href="#simulationTrade" class="simulation_optional_list_href" data="{{ item.CommodityNo }}-{{ item.MainContract }}">
+			<ul class="simulation_optional_list">
+				<li>
+					<span>{{item.CommodityName}}</span>
+					<span>{{item.CommodityNo}}{{item.MainContract}}</span>
+					<span style="display: none;">{{item.MainContract}}</span>
+					<span style="display: none;">{{item.ExchangeNo}}</span>
+					<span style="display: none;">{{item.CommodityNo}}</span>
+				</li>
+				<li class="{{ item.CommodityNo }}{{ item.MainContract }}-price">{{item.price}}</li>
+				<li class="{{ item.CommodityNo }}{{ item.MainContract }}-TotalVolume">{{item.TotalVolume}}</li>
+				<li class="{{ item.CommodityNo }}{{ item.MainContract }}-zd  risea_and_fall_all_optional display_none " >{{item.zd}}</li>
+				<li class="{{ item.CommodityNo }}{{ item.MainContract }}-zdf rise_of_fall_list_all_optional">{{item.zdf}}</li>
+			</ul>
+		</a>
+		{{#			}	}); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+	</script>
+	<!-- 描述：委托订单列表显示模板 -->
+	<script id="tplOrderList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<tr id="{{d.OrderRef}}-OrderList">
+			<td id="{{d.OrderRef}}-OrderList-Contract">{{ d.CommodityNo + d.ContractNo }}</td>
+			<td id="{{d.OrderRef}}-OrderList-OrderStatus">{{ OrderType.getOrderTypeName(d.OrderStatus) }}</td>
+			<td id="{{d.OrderRef}}-OrderList-Drection">{{ getDrectionName(d.Drection) }}</td>
+			<td id="{{d.OrderRef}}-OrderList-OrderPrice">{{ d.OrderPriceType == 1 ? "市价" : fixedPriceByContract(d.OrderPrice,d.CommodityNo) }}</td>
+			<td id="{{d.OrderRef}}-OrderList-OrderNum">{{ d.OrderNum }}</td>
+			<td id="{{d.OrderRef}}-OrderList-TradeNum">{{ d.TradeNum }}</td>
+			<!--<td id="{{d.OrderRef}}-OrderList-RevokeNum">{{ d.OrderNum-d.TradeNum }}</td>-->
+			<td id="{{d.OrderRef}}-OrderList-RevokeNum">{{doRevokeNum(d.OrderNum,d.TradeNum,d.OrderStatus)}}</td>
+			<!--撤单-->
+			<td id="{{d.OrderRef}}-OrderList-InsertDateTime">{{ d.InsertDateTime }}</td>
+			<td id="{{d.OrderRef}}-OrderList-StatusMsg" style="display: none;">{{ d.StatusMsg }}</td>
+			<td id="{{d.OrderRef}}-OrderList-TradePrice" style="display: none;">{{ d.TradePrice }}</td>
+			<td id="{{d.OrderRef}}-OrderList-OrderStatus0" style="display: none;">{{d.OrderStatus}}</td>
+		</tr>
+		{{# } }}
+	</script>
+	<!-- 描述：成交单列表显示模板 -->
+	<script id="tplTradeList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<tr>
+			<td>{{ d.CommodityNo + d.ContractNo }}</td>
+			<td>{{ getDrectionName(d.Drection) }}</td>
+			<!--<td>{{ toFixedFloatNumber(d.TradePrice,d.CommodityNo) }}</td>-->
+			<td>{{ fixedPriceByContract(d.TradePrice,d.CommodityNo) }}</td>
+			<td>{{ d.TradeNum }}</td>
+			<td>{{ d.TradeDateTime }}</td>
+		</tr>
+		{{# } }}
+	</script>
+	<!-- 描述：历史成交列表显示模板 -->
+	<script id="tplHisTradeList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+			<tr>
+				<td>{{ d.index }}</td>
+				<td>{{ d.CommodityNo + d.ContractNo }}</td>
+				<td>{{ d.ExchangeNo}}</td>
+				<td>{{ d.CurrencyNo}}</td>
+				<td>{{ getDrectionName(d.Drection) }}</td>
+				<td>{{ fixedPriceByContract(d.TradePrice,d.CommodityNo) }}</td>
+				<td>{{ d.TradeNum }}</td>
+				<td>{{ d.TradeFee }}</td>
+				<td>{{ d.TradeDateTime }}</td>
+			
+			</tr>
+		{{# } }}
+		
+	</script>
+	<!-- 描述：持仓列表显示模板 -->
+	<script id="tplHoldList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<tr id="{{ d.CommodityNo + d.ContractNo }}-hold">
+			<input type="hidden" id="{{ d.CommodityNo + d.ContractNo }}-hold-CommodityNo" value="{{ d.CommodityNo }}" />
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-Contract">{{ d.CommodityNo + d.ContractNo }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-Drection" class="hold-Drection">{{getDrectionName2(d.Drection)}}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-HoldNum">{{ d.HoldNum }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-OpenAvgPrice">{{ fixedPriceByContract(d.OpenAvgPrice,d.CommodityNo) }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-FloatingProfit">{{ isEmpty(d.FloatingProfit)?"--":d.FloatingProfit }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-CurrencyNo" style="display: none;">{{ CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CurrencyNo") }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-ContractNo" style="display: none;">{{d.ContractNo }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-ExchangeNo" style="display: none;">{{d.ExchangeNo }}</td>
+			<td id="{{ d.CommodityNo + d.ContractNo }}-hold-Drection" style="display: none;">{{d.Drection }}</td>
+		</tr>
+		{{# } }}
+	</script>
+	<!-- 描述：挂单订单列表显示模板 -->
+	<script id="tplApplyOrderList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<tr id="{{d.OrderRef}}-ApplyOrderList">
+			<td id="{{d.OrderRef}}-ApplyOrderList-Contract">{{ d.CommodityNo + d.ContractNo }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-Drection">{{ getDrectionName(d.Drection) }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-OrderPrice">{{ fixedPriceByContract(d.OrderPrice,d.CommodityNo) }}</td>
+			<!--<td id="{{d.OrderRef}}-ApplyOrderList-OrderPrice">{{ d.OrderPrice }}</td>-->
+			<td id="{{d.OrderRef}}-ApplyOrderList-OrderNum">{{ d.OrderNum }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-ApplyOrderNum">{{ d.OrderNum-d.TradeNum }}</td>
+			<!--挂单量=委托量-已成交-->
+			<td id="{{d.OrderRef}}-ApplyOrderList-InsertDateTime">{{ d.InsertDateTime }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-OrderID" style="display: none;">{{ d.OrderID }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-ExchangeNo" style="display: none;">{{ d.ExchangeNo }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-CommodityNo" style="display: none;">{{ d.CommodityNo }}</td>
+			<td id="{{d.OrderRef}}-ApplyOrderList-ContractNo" style="display: none;">{{ d.ContractNo }}</td>
+		</tr>
+		{{# } }}
+	</script>
+	<!-- 描述：资金列表显示模板 -->
+	<script id="tplAccountList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CurrencyName) != "undefined"){ }}
+		<tr>
+			<td>{{ d.CurrencyName }}（{{ d.CurrencyNo }}）</td>
+			<td id="{{ d.CurrencyNo }}-accountList-OldAmount">{{ d.OldAmount }}</td>
+			<td id="{{ d.CurrencyNo }}-accountList-Money">{{ d.InMoney-d.OutMoney }}</td>
+			<td id="{{ d.CurrencyNo }}-accountList-CounterFee">{{ d.CounterFee }}</td>
+			<td id="{{ d.CurrencyNo }}-accountList-CloseProfit">{{ d.CloseProfit }}</td>
+			<td id="{{ d.CurrencyNo }}-accountList-CloseProfitRate">{{ toFixedFloatNumber(d.CloseProfit/(d.TodayAmount
+				<0?-d.TodayAmount:d.TodayAmount)*100, 2) }}%</td>
+					<td id="{{ d.CurrencyNo }}-accountList-TodayAmount">{{ d.TodayAmount }}</td>
+					<td id="{{ d.CurrencyNo }}-accountList-FloatingProfit">{{ d.FloatingProfit }}</td>
+					<td id="{{ d.CurrencyNo }}-accountList-FloatingProfitRate">{{ toFixedFloatNumber(d.FloatingProfit/(d.TodayAmount
+						<0?-d.TodayAmount:d.TodayAmount)*100, 2) }}%</td>
+							<td id="{{ d.CurrencyNo }}-accountList-TodayBalance">{{ d.TodayAmount + d.FloatingProfit }}</td>
+							<td id="{{ d.CurrencyNo }}-accountList-Deposit">{{ d.Deposit }}</td>
+							<td id="{{ d.CurrencyNo }}-accountList-FrozenMoney">{{ d.FrozenMoney }}</td>
+							<td>--</td>
+							<td id="{{ d.CurrencyNo }}-accountList-TodayCanUse">{{ d.TodayAmount + d.FloatingProfit - d.FrozenMoney - d.Deposit }}</td>
+		</tr>
+		{{# } }}
+	</script>
+	<!-- 描述：资金信息显示模板 -->
+	<script id="tplAccountInfo" type="text/html">
+		{{# if(!isEmpty(d)){ }}
+		<div>
+			<p>今权益</p>
+			<p id="todayBalance">{{ toFixedFloatNumber(d.TodayBalance, 2) }}</p>
+		</div>
+		<div>
+			<p>浮动盈亏</p>
+			<p id="floatingProfit">{{ toFixedFloatNumber(d.FloatingProfit, 2) }}</p>
+		</div>
+		<div>
+			<p>今可用</p>
+			<p id="todayCanUse">{{ toFixedFloatNumber(d.TodayCanUse, 2) }}</p>
+		</div>
+		{{# } }}
+	</script>
+	<!-- 描述：下单面板合约代码选项 -->
+	<script id="tplTradeContractOption" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<option id="select00Commodity" class="{{ d.CommodityNo + d.ContractNo }}-option-contract"  value="{{ d.CommodityNo + d.ContractNo }}">{{ CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}</option>
+		{{# }; }}
+		{{# form.render('select'); }}
+	</script>
+
+	<script id="tplStopLossList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<tr id="{{ d.CommodityNo + d.ContractNo }}-stopLoss">
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-Contract">{{ d.CommodityNo + d.ContractNo }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-Status">{{ dealStatus(d.Status) }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-HoldDrection">{{dealMoreOrNull( d.HoldDrection)}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-StopLossType">{{ dealStopLossType(d.StopLossType) }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-Num">{{ d.Num }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-StopLossPrice">{{isZero(d.StopLossPrice,d.StopLossDiff)?'触发价:'+fixedPriceByContract(d.StopLossPrice,d.CommodityNo):'追踪价差:'+d.StopLossDiff}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-OrderType">{{dealOrderType(d.OrderType)}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-validity">当日有效</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-InsertDateTime">{{d.InsertDateTime}}</td>
+
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-StopLossNo" style="display: none;">{{d.StopLossNo}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-StopLossType01" style="display: none;">{{d.StopLossType}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-StopLossPrice01" style="display: none">{{d.StopLossPrice}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-StopLossDiff" style="display: none;">{{d.StopLossDiff}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-OrderType01" style="display: none;">{{d.OrderType}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-CommodityNo" style="display: none;">{{ d.CommodityNo}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-HoldDrection01" style="display: none;">{{d.HoldDrection}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-HoldAvgPrice" style="display: none;">{{d.HoldAvgPrice}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss-Status01" style="display: none;">{{d.Status}}</td>
+		</tr>
+		{{# } }}
+	</script>
+	<script id="tplStopLossList00" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+		<tr id="{{ d.CommodityNo + d.ContractNo }}-stopLoss00">
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-Contract">{{ d.CommodityNo + d.ContractNo }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-Status">{{ dealStatus(d.Status) }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-HoldDrection">{{dealMoreOrNull( d.HoldDrection)}}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-StopLossType">{{ dealStopLossType(d.StopLossType) }}</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-Num">{{ d.Num }}</td>
+			<!--<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-StopLossPrice">{{isZero(d.StopLossPrice,d.StopLossDiff)?'触发价:'+d.StopLossPrice:'追踪价差:'+d.StopLossDiff}}</td>-->
+			<!--<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-OrderType">{{dealOrderType(d.OrderType)}}</td>-->
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-validity">当日有效</td>
+			<td id="{{d.CommodityNo + d.ContractNo}}-stopLoss00-InsertDateTime">{{d.TriggedTime}}</td>
+		</tr>
+		{{# } }}
+	</script>	
+	<!--条件单未触发列表-->
+	<script id="tplConditionList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+			<tr id="{{ d.CommodityNo + d.ContractNo }}-condition">
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-Contract">{{d.CommodityNo + d.ContractNo}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-Status">{{dealStatus(d.Status)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-ConditionType">{{dealConditionType(d.ConditionType)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-CompareType">{{d.TimeTriggerPoint+' '+dealCompareType(d.CompareType,d.PriceTriggerPonit,d.AdditionFlag,d.AdditionType,d.AdditionPrice,d.CommodityNo)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-OrderType">{{dealDrection(d.Drection)+','+dealOrderType0(d.OrderType)+','+d.Num+'手'}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-ValidDate">当日有效</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-InsertDateTime">{{d.InsertDateTime}}</td>
+				
+				<!--7-->
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-ConditionNo" style="display: none;" class="ConditionNo">{{d.ConditionNo}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-Num" style="display: none;">{{d.Num}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-ConditionType0" style="display: none;">{{d.ConditionType}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-PriceTriggerPonit" style="display: none;">{{fixedPriceByContract(d.PriceTriggerPonit,d.CommodityNo)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-CompareType0" style="display: none;">{{d.CompareType}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-TimeTriggerPoint" style="display: none;">{{d.TimeTriggerPoint}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-AB_BuyPoint" style="display: none;">{{d.AB_BuyPoint}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-AB_SellPoint" style="display: none;">{{d.AB_SellPoint}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-OrderType0" style="display: none;">{{d.OrderType}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-StopLossType" style="display: none;">{{d.StopLossType}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-Drection" style="display: none;">{{d.Drection}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-StopLossDiff" style="display: none;">{{d.StopLossDiff}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-AdditionFlag" style="display: none;">{{d.AdditionFlag}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-AdditionType" style="display: none;">{{d.AdditionType}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-AdditionPrice" style="display: none;">{{fixedPriceByContract(d.AdditionPrice,d.CommodityNo)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-Status00" style="display: none;">{{d.Status}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-condition-LastPrice" style="display: none;">{{fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</td>
+			</tr>	
+		{{# } }}
+	</script>
+	
+	<!--条件单触发列表-->
+	<script id="tplNotriggerConditionList" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+			<tr id="{{ d.CommodityNo + d.ContractNo }}-NotriggerCondition">
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-Contract">{{d.CommodityNo + d.ContractNo}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-Status">{{dealStatus(d.Status)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-ConditionType">{{dealConditionType(d.ConditionType)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-CompareType">{{dealCompareType(d.CompareType,d.PriceTriggerPonit,d.AdditionFlag,d.AdditionType,d.AdditionPrice,d.CommodityNo)}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-OrderType">{{dealDrection(d.Drection)+','+dealOrderType0(d.OrderType)+','+d.Num+'手'}}</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-ValidDate">当日有效</td>
+				<td id="{{d.CommodityNo + d.ContractNo}}-NotriggerCondition-TriggedTime">{{d.TriggedTime}}</td>
+			</tr>	
+		{{# } }}
+	</script>
+	
+	
+	<script>
+			(function($) {
+				$.init();
+				document.getElementById("insertTimeInput").addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					/*
+					 * 首次显示时实例化组件
+					 * 示例为了简洁，将 options 放在了按钮的 dom 上
+					 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+					 */
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						/*
+						 * rs.value 拼合后的 value
+						 * rs.text 拼合后的 text
+						 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+						 * rs.m 月，用法同年
+						 * rs.d 日，用法同年
+						 * rs.h 时，用法同年
+						 * rs.i 分（minutes 的第二个字母），用法同年
+						 */
+						document.getElementById("insertTimeInput").value = rs.text;
+						/* 
+						 * 返回 false 可以阻止选择框的关闭
+						 * return false;
+						 */
+						/*
+						 * 释放组件资源，释放后将将不能再操作组件
+						 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+						 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+						 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+						 */
+						picker.dispose();
+					});
+				}, false);
+			})(mui);
+		</script>
+
+</html>
