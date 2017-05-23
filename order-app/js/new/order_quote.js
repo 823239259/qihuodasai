@@ -380,14 +380,77 @@ function updateQuoteInfo(jQuote){
 		//卖一
 		$('#bidPrice1').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo)+'/');
 		$('#bidQty1').text(jQuote.AskQty1);
-		//最新价
-		$('#bidPrice1Button').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
-		$('#askPrice1Button').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+		//卖一价
+		$('#bidPrice1Button').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo));
+		//买一价
+		$('#askPrice1Button').text(fixedPriceByContract(jQuote.BidPrice1, jQuote.CommodityNo));
+		
+		updatePankou(jQuote);
 	}
 }
 
-
-
+/**
+ * 更新盘口
+ * @param {Object} jQuote
+ */
+function updatePankou(jQuote){
+		//盘口--最新价
+		$('#pklastparice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+		//盘口--卖五
+		$('#sell_8').text(fixedPriceByContract(jQuote.AskPrice5, jQuote.CommodityNo));
+		//盘口--卖五-人数
+		$('#sell_9').text(jQuote.AskQty5);
+		//盘口--开盘
+		$('#pkopenprice').text(fixedPriceByContract(jQuote.OpenPrice,jQuote.CommodityNo));
+		//盘口--卖四
+		$('#sell_6').text(fixedPriceByContract(jQuote.AskPrice4, jQuote.CommodityNo));
+		//盘口--卖四--人数
+		$('#sell_7').text(jQuote.AskQty4);
+		//盘口--最高
+		$('#pkhightprice').text(fixedPriceByContract(jQuote.HighPrice, jQuote.CommodityNo));
+		//盘口--卖三
+		$('#sell_4').text(fixedPriceByContract(jQuote.AskPrice3, jQuote.CommodityNo));
+		//盘口--卖三--人数
+		$('#sell_5').text(jQuote.AskQty3);
+		//盘口--最低
+		$('#pklowprice').text(fixedPriceByContract(jQuote.LowPrice, jQuote.CommodityNo));
+		//盘口--卖二
+		$('#sell_2').text(fixedPriceByContract(jQuote.AskPrice2, jQuote.CommodityNo));
+		//盘口--卖二--人数
+		$('#sell_3').text(jQuote.AskQty2);
+		//盘口--涨跌
+		$('#pkzd').text(fixedPriceByContract(jQuote.ChangeValue, jQuote.CommodityNo));
+		//盘口--卖一
+		$('#sell_0').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo));
+		//盘口--卖一--人数
+		$('#sell_1').text(jQuote.AskQty1);
+		//盘口--成交量
+		$('#pktrademl').text(jQuote.TotalVolume);
+		//盘口--买一
+		$('#buy_0').text(fixedPriceByContract(jQuote.BidPrice1, jQuote.CommodityNo));
+		//盘口--买一--人数
+		$('#buy_1').text(jQuote.BidQty1);
+		//盘口--持仓量
+		$('#pkccml').text(jQuote.Position);
+		//盘口--买二
+		$('#buy_2').text(fixedPriceByContract(jQuote.BidPrice2, jQuote.CommodityNo));
+		//盘口--买二--人数
+		$('#buy_3').text(jQuote.BidQty2);
+		//盘口--昨结
+		$('#pkzj').text(fixedPriceByContract(jQuote.PreSettlePrice, jQuote.CommodityNo));
+		//盘口--买三
+		$('#buy_4').text(fixedPriceByContract(jQuote.BidPrice3, jQuote.CommodityNo));
+		//盘口--买三--人数
+		$('#buy_5').text(jQuote.BidQty3);
+		//盘口--买四
+		$('#buy_6').text(fixedPriceByContract(jQuote.BidPrice4, jQuote.CommodityNo));
+		//盘口--买四--人数
+		$('#buy_7').text(jQuote.BidQty4);
+		//盘口--买五
+		$('#buy_8').text(fixedPriceByContract(jQuote.BidPrice5, jQuote.CommodityNo));
+		//盘口--买五--人数
+		$('#buy_9').text(jQuote.BidQty5);
+}
 
 
 
