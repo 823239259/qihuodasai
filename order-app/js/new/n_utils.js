@@ -507,7 +507,105 @@ var Trade = {
 //		vsLog('{"Method":"'+method+'","Parameters":'+parameters+'}');
 		
 		tradeSocket.send('{"Method":"' + method + '","Parameters":' + parameters + '}');
+	},
+	/**
+	 * 订单版 开仓请求
+	 * @param {Object} ClientNo 交易账号（000013）
+	 * @param {Object} PlatForm_User 平台账号（手机号）
+	 * @param {Object} ProductID 产品编号，在后台配置的，用户选择
+	 * @param {Object} CommodityNo 品种代码
+	 * @param {Object} ContractNo 合约代码
+	 * @param {Object} OrderNum 订单数量
+	 * @param {Object} Direction 开仓买卖方向（0：买，1：卖）
+	 * @param {Object} StopWin 订单的止盈金额（人民币）
+	 * @param {Object} StopLoss 订单的止损金额（人民币）
+	 * @param {Object} Deposit 滑点保证金（人民币）
+	 * @param {Object} Fee Fee	该订单的手续费(总和) （人民币）
+	 */
+	doOpenOrderGW:function(
+		ClientNo,PlatForm_User,ProductID,
+		CommodityNo,ContractNo,OrderNum,
+		Direction,StopWin,StopLoss,Deposit,Fee
+		){
+		var param = '{"ClientNo":"' + ClientNo + '",' +
+			' "PlatForm_User":' + PlatForm_User + ',' +
+			' "ProductID":' + ProductID + ',' +
+			' "CommodityNo":' + CommodityNo + ',' +
+			' "ContractNo":' + ContractNo + ',' +
+			' "OrderNum":' + OrderNum + ',' +
+			' "Direction":"' + Direction + '",' +
+			' "StopWin":' + StopWin + ',' +
+			' "StopLoss":' + StopLoss + ',' +
+			' "Deposit":' + Deposit + ',' +
+			' "Fee":' + Fee +
+			'}';
+		
+		Trade.doSendMessage(TradeMethod.OpenOrderGW, param);
 	}
+	/**
+	 * 订单版 平仓请求
+	 * @param {Object} ClientNo
+	 * @param {Object} PlatForm_User
+	 * @param {Object} OrderID
+	 */
+	doCloseOrderGW:function(
+		ClientNo,PlatForm_User,OrderID
+			){
+		var param = '{"ClientNo":"' + ClientNo + '",' +
+			' "PlatForm_User":' + PlatForm_User + ',' +
+			' "OrderID":' + OrderID + 
+			'}';
+		Trade.doSendMessage(TradeMethod.CloseOrderGW, param);	
+	}
+	/**
+	 * 订单版 修改订单（修改止损止盈）
+	 * @param {Object} ClientNo
+	 * @param {Object} PlatForm_User
+	 * @param {Object} OrderID
+	 * @param {Object} StopWin
+	 * @param {Object} StopLoss
+	 */
+	doChangeOrderGW:function(
+		ClientNo,PlatForm_User,OrderID,StopWin,StopLoss
+		){
+		
+		var param = '{"ClientNo":"' + ClientNo + '",' +
+			' "PlatForm_User":' + PlatForm_User + ',' +
+			' "OrderID":' + OrderID + ',' +
+			' "StopWin":' + StopWin + ',' +
+			' "StopLoss":' + StopLoss +
+			'}';
+		Trade.doSendMessage(TradeMethod.ChangeOrderGW, param);	
+	}
+	
+	/**
+	 * 订单版  查询订单
+	 * @param {Object} ClientNo
+	 */
+	doQryOrderGW:function(ClientNo){
+		
+		var param = '{"ClientNo":"' + ClientNo + 
+			'}';
+		Trade.doSendMessage(TradeMethod.QryOrderGW, param);		
+	}
+	/**
+	 * 订单版  查询历史订单
+	 * @param {Object} ClientNo
+	 * @param {Object} BeginTime
+	 * @param {Object} EndTime
+	 */
+	doQryHisOrderGW:function(
+		ClientNo,BeginTime,EndTime
+		){
+		var param = '{"ClientNo":"' + ClientNo + '",' +
+			' "BeginTime":' + BeginTime + ',' +
+			' "EndTime":' + EndTime + 
+			'}';
+		Trade.doSendMessage(TradeMethod.QryHisOrderGW, param);		
+	}
+	
+	
+	
 }
 // 填充类型：1:before，前置插入; 2:after，追加插入；0：替换。默认为替换
 var FillType = {

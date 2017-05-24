@@ -309,7 +309,30 @@ var TradeMethod = {
 	/**
 	 * 条件单查询url
 	 */
-	QryCondition: "QryCondition"
+	QryCondition: "QryCondition",
+	/**
+	 * 订单版开仓请求url
+	 */
+	OpenOrderGW:'OpenOrderGW',
+	/**
+	 * 订单版平仓请求url
+	 */
+	CloseOrderGW:'CloseOrderGW',
+	/**
+	 * 订单版修改订单（修改止损止盈）url
+	 */
+	ChangeOrderGW:'ChangeOrderGW',
+	/**
+	 * 订单版查询订单
+	 */
+	QryOrderGW:'QryOrderGW',
+	/**
+	 * 订单版查询历史订单
+	 */
+	QryHisOrderGW:'QryHisOrderGW'
+	
+	
+	
 }
 // 订单状态。	eg：OrderType.getOrderTypeName("4");
 var OrderType = {
