@@ -70,7 +70,7 @@
 					<!--<a class="mui-navigate-right" href="javascript:void(0)" id="">-->
 					<img src="../../img/account/accountSetting7.png">
 					<span>版本信息</span>
-					<span id="editionNew">1.12</span>
+					<span id="editionNew">0.0.0</span>
 					<!--</a>-->
 				</li>
 			</ul>
@@ -95,10 +95,14 @@
 		});
 		document.getElementById("realNameVerification").addEventListener("tap", function() {
 			var text = document.getElementById("realNameVerificationTips").innerHTML;
-			mui.open_window_data("realNameVerification.html", "realNameVerification", {
-				"backpageID": "accountSetting",
-				"url": "accountSetting.html"
-			});
+			if(text == "已认证"){
+				mui.toast("你已实名认证了");
+			}else{
+				mui.open_window_data("realNameVerification.html", "realNameVerification", {
+					"backpageID": "accountSetting",
+					"url": "accountSetting.html"
+				});
+			}
 		});
 		var phone = localStorage.getItem(vs.constants.user_mobile);
 		phone = phone.substring(0, 3) + "****" + phone.substring(7, 11);

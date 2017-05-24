@@ -36,6 +36,11 @@
 			</a>
 		</nav>
 		<div class="mui-content">
+			<div class="mui-backdrop"></div>
+			<div class="main_nolg">		
+				<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>		
+				<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist">新用户注册</button>
+			</div>
 			<div class="account-title">
 				<ul class="mui-table-view mui-table-view-chevron ac-list">
 					<li class="mui-table-view-cell">
@@ -72,9 +77,9 @@
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="Invitation"><img src="../../img/account/accountInvitation.png"><span>邀请有礼</span></a>
 				</li>
-				<li class="mui-table-view-cell">
+				<!--<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="coupon"><img src="../../img/account/accountDiscount.png"><span>我的优惠</span></a>
-				</li>
+				</li>-->
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="feedback"><img src="../../img/account/accountOpinion.png"><span>意见反馈</span></a>
 				</li>
@@ -83,6 +88,7 @@
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
 	<script type="text/javascript">
 		mui.init();
 		var isCertification=false;
@@ -95,7 +101,14 @@
 			})
 		});
 		document.getElementById("operateDetailed").addEventListener("tap", function() {
-			mui.open_window_data("../quote/quoteTrade.html", "quoteTrade", { "backpageID": "account", "url": "../account/accout.html", "id": "operateDetailed" });
+			mui.open_window_data(
+				"../quote/quoteTrade.html", "quoteTrade",
+				{ 
+					"backpageID": "account",
+					"url": "../account/accout.html", 
+					"id": "operateDetailed" 
+				}
+			);
 		});
 		document.getElementById("fundDetails").addEventListener("tap", function() {
 			mui.openWindow({
@@ -103,12 +116,12 @@
 				id: "fundDetails"
 			})
 		});
-		document.getElementById("coupon").addEventListener("tap", function() {
+		/*document.getElementById("coupon").addEventListener("tap", function() {
 			mui.openWindow({
 				url: "coupon.html",
 				id: "coupon"
 			})
-		});
+		});*/
 		document.getElementById("feedback").addEventListener("tap", function() {
 			var path=mui.app_filePath("online.html");
 				mui.openWindow(path,"online"); 
@@ -172,6 +185,8 @@
 		})
 		mui.checkNetwork();
 		if(mui.cacheUser.isLogin()) {
+			$(".mui-backdrop").hide();
+			$(".main_nolg").hide();
 			document.getElementById("login").innerText = "充值";
 			document.getElementById("regist").innerText = "提现";
 			document.getElementById("signOut").innerText = "退出";
@@ -184,6 +199,10 @@
 				}
 			}, function(res) {});
 		} else {
+			$(".mui-backdrop").show();
+			$(".main_nolg").show();
+			$(".account-signer").hide();
+			$("#accountName").hide();
 //			mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
 		}
 
