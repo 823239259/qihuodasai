@@ -541,22 +541,20 @@ var Trade = {
 			'}';
 		
 		Trade.doSendMessage(TradeMethod.OpenOrderGW, param);
-	}
+	},
 	/**
 	 * 订单版 平仓请求
 	 * @param {Object} ClientNo
 	 * @param {Object} PlatForm_User
 	 * @param {Object} OrderID
 	 */
-	doCloseOrderGW:function(
-		ClientNo,PlatForm_User,OrderID
-			){
+	doCloseOrderGW:function(ClientNo,PlatForm_User,OrderID){
 		var param = '{"ClientNo":"' + ClientNo + '",' +
 			' "PlatForm_User":' + PlatForm_User + ',' +
 			' "OrderID":' + OrderID + 
 			'}';
 		Trade.doSendMessage(TradeMethod.CloseOrderGW, param);	
-	}
+	},
 	/**
 	 * 订单版 修改订单（修改止损止盈）
 	 * @param {Object} ClientNo
@@ -576,7 +574,7 @@ var Trade = {
 			' "StopLoss":' + StopLoss +
 			'}';
 		Trade.doSendMessage(TradeMethod.ChangeOrderGW, param);	
-	}
+	},
 	
 	/**
 	 * 订单版  查询订单
@@ -587,7 +585,7 @@ var Trade = {
 		var param = '{"ClientNo":"' + ClientNo + 
 			'}';
 		Trade.doSendMessage(TradeMethod.QryOrderGW, param);		
-	}
+	},
 	/**
 	 * 订单版  查询历史订单
 	 * @param {Object} ClientNo

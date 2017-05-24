@@ -281,7 +281,7 @@ $("#candlestickNav").on("tap","a", function() {
 
 $('#orderListButton').on('tap',function(){
 	
-	
+	Trade.doOpenOrderGW('000013','18782922259','00001','CL','1707',1,0,2000,1000,100);
 });
 
 
