@@ -40,27 +40,23 @@
 					<li>富时A501</li>
 				</ul>
 			</div>-->
-			<div class="mui-slider-item mui-control-content mui-active" id="searchResultContainer" style="position: static;">
+			<!--<div class="mui-slider-item mui-control-content mui-active" id="searchResultContainer" style="position: static;">-->
 				<!--<div class="directSeed-all">
 					<p class="chartContainer-time">2017-01-20</p>
 				</div>-->
-				<div id="chartContainerContent" class="searchResultContainer-all">
-					<div class="mui-scroll-wrapper" id="chartContainerContent1">
-						<div class="mui-scroll">
-							<ul class="mui-table-view mui-table-view-chevron" id="newsList">
-								<!--<li class="mui-table-view-cell">
-									<div class="content-left">11:02</div>
-									<div class="content-circular"></div>
-									<div class="content-right">
-										<p>统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。统计局：研究将共享经济纳入GDP核算。</p>
-									</div>
-								</li>-->
-								<!-- 参见 tplNews 模板 -->
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+				<!--<div id="chartContainerContent" class="searchResultContainer-all">-->
+					<!--<div class="mui-scroll-wrapper" id="chartContainerContent1">-->
+						<!--<div class="mui-scroll">-->
+							<div id="searchResultContainer" style="padding-top: 10px;">
+								<ul class="mui-table-view " id="newsList">
+									
+									<!-- 参见 tplNews 模板 -->
+								</ul>
+							</div>
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -73,19 +69,20 @@
 	
 	<script id="tplNews" type="text/html">
 		{{# layui.each(d, function(index, item){ if(item.IsUsed!=0){    }}
-		<li class="mui-table-view-cell">
+		<li class="">
 			<div class="content-left">{{vs.dateUtil.getFormatDataByLong(item.liveCreatetime / 1000, "MM-dd hh:mm")}}</div>
 			<div class="content-circular"></div>
 			<div class="content-right">
 				<p>{{item.liveContent}}</p>
+				<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 90px;'><span class='caoz'>展开</div>
 			</div>
 		</li>
 		{{#			}	}); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
 	</script>
 	
 	<script type="text/javascript">
-		mui.init();
-		
+//		mui.init();
+//		
 		var layer, laytpl;
 		//一般直接写在一个js文件中
 		layui.use(['layer', 'laytpl'], function() {
@@ -106,6 +103,32 @@
 				success: function(res) {
 					if(res.success == true) {
 						vs.tplFillData("newsList", "tplNews", res.data.data, vs.constants.FillType.after);
+						for(var j= 0;j<$("#searchResultContainer ul li .content-right").length; j++){
+							if($("#searchResultContainer ul li .content-right").eq(j).height() > 85){
+								$("#searchResultContainer ul li .content-right").eq(j).css("height","112px");
+							}else{
+								$("#searchResultContainer ul li .content-right").eq(j).find(".caoz").css("display","none");
+							}
+						}
+						$("#searchResultContainer .caoz").on("tap",function() {
+							var _this = $(this);
+							if(_this.html()  == "展开") {
+								_this.parent().removeAttr("style");
+								_this.parent().parent().css("height","inherit");
+								_this.html("收起");
+							}else if(_this.html()  == "收起") {
+								_this.parent().css({
+									"background": "#ffffff",
+									"z-index": "999",
+									"width": "100%",
+									"position": "absolute",
+									"top": "90px",
+									"height": "21px"
+								});
+								_this.parent().parent().css("height","112px");
+								_this.html("展开");
+							}
+						});
 					}
 				},
 				error: function(res) {
@@ -119,7 +142,7 @@
 						'暂无活动喔，你可关注维胜公众号留意近期活动~</div>';
 					ul.append(li);
 				}
-			})
+			});
 		});
 
 		//		/*加载更多*/
