@@ -138,14 +138,14 @@
 	/**
 	 * 呼叫弹出框
 	 */
-	mui.callService=function(){
-		plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",function(e){
-			if(e.index==1){
-				plus.device.dial("4008528008",false);
-			}
-		},
-		"400-852-8008",["取消","呼叫"]);
-    }
+	mui.callService = function() {
+		plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00", function(e) {
+				if(e.index == 1) {
+					plus.device.dial("4008528008", false);
+				}
+			},
+			"400-852-8008", ["取消", "呼叫"]);
+	}
 	/**
 	 * 获取文件所在环境具体位置 
 	 * @param {Object} file_url 文件及文件所在位置    如：vs/login/login.html
@@ -161,12 +161,12 @@
 	 */
 	mui.app_refresh = function(pageId) {
 		if(!mui.isnull(pageId)) {
-			if(vs.browser.versions.Html5Plus){
+			if(vs.browser.versions.Html5Plus) {
 				var _page = plus.webview.getWebviewById(pageId);
 				if(_page) {
 					_page.reload(true);
 				}
-			}else{
+			} else {
 				location.reload(true)
 			}
 		}
@@ -176,7 +176,7 @@
 	 * @param {Object} pageId 指定页面ID
 	 * @param {Object} isRefresh  是否刷新  如：true=刷新；false=不刷新
 	 */
-	mui.app_back = function(pageId, isRefresh,url) {
+	mui.app_back = function(pageId, isRefresh, url) {
 		if(vs.browser.versions.Html5Plus) {
 			mui.init({
 				beforeback: function() {
@@ -190,9 +190,9 @@
 				}
 			});
 			mui.back();
-		}else{
+		} else {
 			//服务器地址+绝对地址
-			window.location.href=vs.constants.server_url+url;
+			window.location.href = vs.constants.server_url + url;
 		}
 	}
 	/**
@@ -214,7 +214,7 @@
 			pageData = JSON.stringify(pageData)
 			sessionStorage.setItem(pageId, pageData);
 			mui.openWindow({
-				"url": pageUrl+"?"+pageId,
+				"url": pageUrl + "?" + pageId,
 				"id": pageId,
 			});
 		}
@@ -229,20 +229,20 @@
 			var currentWebview = plus.webview.currentWebview();
 			data = currentWebview.pageData;
 		} else {
-			var pageId=window.location.search.split("?")[1];
+			var pageId = window.location.search.split("?")[1];
 			data = sessionStorage.getItem(pageId);
 			data = JSON.parse(data);
 		}
 		return data;
 	}
 	/*弹出层*/
-	mui.clickLayer=function(_this){
+	mui.clickLayer = function(_this) {
 		var id = _this.attr("data-id");
-		document.getElementById("chioce").style.display="block";
-		document.getElementById(id).style.display="block";
+		document.getElementById("chioce").style.display = "block";
+		document.getElementById(id).style.display = "block";
 		var height = document.getElementById(id).offsetHeight;
-		document.getElementById(id).style.marginTop= "-"+height/2+"px";
-    }
+		document.getElementById(id).style.marginTop = "-" + height / 2 + "px";
+	}
 })(mui);
 //扩展Date的format方法  format格式字符串,例如：yyyy-MM-dd hh:mm:ss
 Date.prototype.format = function(format) {
@@ -281,20 +281,28 @@ var vs = {
 		//用户手机号
 		user_mobile: 'user_mobile',
 		//服务器地址
-		server_url:"http://www.vs.com/",
+		server_url: "http://www.vs.com/",
 		//区分appstore，如:false=否，true=是,默认值为false
 		is_appstore: false,
 		//企业ipa下载地址
 		ipa_download_url: 'https://itunes.apple.com/cn/app/wei-sheng-qi-huo/id1140076487?mt=8',
 		// 财经日历、7*24小时
-		api_calendar: 'http://api.vs.com/'
+		api_calendar: 'http://api.vs.com/',
+		// 填充类型：1:before，前置插入; 2:after，追加插入；0：替换。默认为替换
+ 		FillType : {
+			repalce: 0,
+			before: 1,
+			after: 2
+		}
 	},
 	/**
 	 * 验证手机号是否符合格式要求 
 	 * @param {Object} mobile
 	 */
 	validate_mobile: function(mobile) {
-		var mobilePattern = { mobile: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/ };
+		var mobilePattern = {
+			mobile: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/
+		};
 		if(!mobilePattern.mobile.test(mobile)) {
 			return false;
 		}
@@ -423,64 +431,115 @@ var vs = {
 		language: (navigator.browserLanguage || navigator.language).toLowerCase()
 	},
 	//绑定客服热线的点击事件
-	callService : function(){
-		document.getElementById("telBtn").addEventListener("tap",function(){
-		mui.callService();
-	})
+	callService: function() {
+		document.getElementById("telBtn").addEventListener("tap", function() {
+			mui.callService();
+		})
 	},
 	//绑定在线客服的点击事件
-	online:function(){
-		document.getElementById("online").addEventListener("tap",function(){
-			if(vs.browser.versions.Html5Plus){
-				var path=mui.app_filePath("online.html");
-				mui.openWindow(path,"online"); 
-			}else{
-				
+	online: function() {
+		document.getElementById("online").addEventListener("tap", function() {
+			if(vs.browser.versions.Html5Plus) {
+				var path = mui.app_filePath("online.html");
+				mui.openWindow(path, "online");
+			} else {
+
 			}
-			
+
 		});
 	},
-	clickLayer : function(){
-		document.getElementById("click-alert").addEventListener("tap",function(){
+	clickLayer: function() {
+		document.getElementById("click-alert").addEventListener("tap", function() {
 			var _this = $(this);
 			var id = _this.attr("data-id");
-			document.getElementById("chioce").style.display="block";
-			document.getElementById(id).style.display="block";
+			document.getElementById("chioce").style.display = "block";
+			document.getElementById(id).style.display = "block";
 			var height = document.getElementById(id).offsetHeight;
-			document.getElementById(id).style.marginTop= "-"+height/2+"px";
+			document.getElementById(id).style.marginTop = "-" + height / 2 + "px";
 		});
-		document.getElementById("popupButton").addEventListener("tap",function(){
+		document.getElementById("popupButton").addEventListener("tap", function() {
 			var _this = $(this);
 			var id = _this.attr("data-id");
-			document.getElementById("chioce").style.display="none";
-			document.getElementById(id).style.display="none";
+			document.getElementById("chioce").style.display = "none";
+			document.getElementById(id).style.display = "none";
 		});
-		
+
+	},
+	/**
+	 * 检查对象是否为空:
+	 * @param {Object} obj
+	 * @return {Boolean}		空返回true，不为空返回false
+	 */
+	isEmpty: function(obj) {
+		if(obj == null || typeof(obj) == "undefined" || obj.length == 0) {
+			return true;
+		}
+		return false;
+	},
+	/**
+	 * 将模板填充数据后显示到对应元素
+	 * @param viewId 显示元素目标ID
+	 * @param tplId 显示模板
+	 * @param jData 填充模板数据。json对象
+	 * @param fillType 填充方式，1:before，前置插入; 2:after，追加插入；0：替换。默认为替换
+	 */
+	tplFillData: function(viewId, tplId, jData, fillType) {
+		if(vs.isEmpty(jData)) {
+			return;
+		}
+		if(document.getElementById(viewId) == null) {
+			return;
+		}
+		var tpl = document.getElementById(tplId).innerHTML;
+		laytpl(tpl).render(jData, function(html) {
+			if(fillType === vs.constants.FillType.before) { // before
+				document.getElementById(viewId).innerHTML = html + document.getElementById(viewId).innerHTML;
+			} else if(fillType === vs.constants.FillType.after) { // after
+				document.getElementById(viewId).innerHTML = document.getElementById(viewId).innerHTML + html;
+			} else { // replace
+				document.getElementById(viewId).innerHTML = html;
+			}
+		});
 	}
 }
 
 function initBottom(url1, url2, url3, url4) {
 	document.getElementById("account").addEventListener("tap", function() {
 		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({ url: url1, id: 'account' });
+			mui.openWindow({
+				url: url1,
+				id: 'account'
+			});
 			return;
 		}
 		mui.openWindow(url1, "account");
 	});
 	document.getElementById("find").addEventListener("tap", function() {
 		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({ url: url2, id: "find" });
+			mui.openWindow({
+				url: url2,
+				id: "find"
+			});
 			return;
 		}
-		mui.openWindow({ url: url2, id: "find" });
+		mui.openWindow({
+			url: url2,
+			id: "find"
+		});
 
 	});
 	document.getElementById("quoteTrade").addEventListener("tap", function() {
-		mui.openWindow({ url: url3, id: "quoteTrade" });
+		mui.openWindow({
+			url: url3,
+			id: "quoteTrade"
+		});
 	});
 
 	document.getElementById("directSeed").addEventListener("tap", function() {
-		mui.openWindow({ url: url4, id: "directSeed" });
+		mui.openWindow({
+			url: url4,
+			id: "directSeed"
+		});
 	});
 
 }
@@ -489,24 +548,23 @@ function initBottom(url1, url2, url3, url4) {
  * 短信倒计时 60s
  * @param {Object} o  点击获取验证码对象
  */
-var time=60;
-vs.smsTime=function(o){
-    if (time == 0) {  
-        o.removeAttribute("disabled");            
-        o.innerHTML="获取验证码";  
-        time = 60;  
-       o.style.background="#fff";
-         o.style.color="#ffb319";
-    } else {  
-        o.setAttribute("disabled", true);  
-        o.innerHTML="倒计时(" + time + ")";  
-        time--;  
-       o.style.background="#33333";
-         o.style.color="#ffb319";
-        setTimeout(function() {  
-            vs.smsTime(o);  
-        },  
-        1000)  
-    } 
+var time = 60;
+vs.smsTime = function(o) {
+	if(time == 0) {
+		o.removeAttribute("disabled");
+		o.innerHTML = "获取验证码";
+		time = 60;
+		o.style.background = "#fff";
+		o.style.color = "#ffb319";
+	} else {
+		o.setAttribute("disabled", true);
+		o.innerHTML = "倒计时(" + time + ")";
+		time--;
+		o.style.background = "#33333";
+		o.style.color = "#ffb319";
+		setTimeout(function() {
+				vs.smsTime(o);
+			},
+			1000)
+	}
 }
-
