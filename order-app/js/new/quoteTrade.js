@@ -30,6 +30,10 @@ $("#list").on('tap','li',function(){
 	
 	pankou(CommodityNoContractNo);
 	
+	//委托页面title
+	$('#entrustCommodityName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
+	$('#entrustContract').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
+		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
 	
 	
 	
@@ -135,7 +139,10 @@ $('#contract').change(function(){
 	
 	pankou(CommodityNoContractNo);
 	
-	
+	//委托页面title
+	$('#entrustCommodityName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
+	$('#entrustContract').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
+		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
 	
 	
 	
@@ -270,6 +277,13 @@ $("#candlestickNav").on("tap","a", function() {
 		default:
 	}
 });
+
+
+$('#orderListButton').on('tap',function(){
+	
+	
+});
+
 
 
 
