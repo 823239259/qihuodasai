@@ -391,6 +391,11 @@ function updateQuoteInfo(jQuote){
 		$('#askPrice1Button').text(fixedPriceByContract(jQuote.BidPrice1, jQuote.CommodityNo));
 		
 		updatePankou(jQuote);
+		
+		//模拟盘持仓中的当前
+		$('.'+contract+'-PositionListOrder-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+		//模拟盘结算中的当前
+		$('.'+contract+'-SettlementSheet-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
 	}
 }
 

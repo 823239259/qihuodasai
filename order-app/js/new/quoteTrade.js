@@ -278,6 +278,30 @@ $("#candlestickNav").on("tap","a", function() {
 	}
 });
 
+function dealDrection(value){
+	if(value==0){
+		return '买入';
+	}else{
+		return '卖出';
+	}
+}
+
+$('#placeOrderBidPrice1').on('tap',function(){
+	
+	$('#flashMore').text('看多价:');
+	$('#flashMorePrice').text($('#bidPrice1Button').text());
+	$('#orderListButton').text('看多买入');
+});
+
+$('#placeOrderAskPrice1').on('tap',function(){
+	
+	$('#flashMore').text('看空价:');
+	$('#flashMorePrice').text($('#askPrice1Button').text());
+	$('#orderListButton').text('看空买入');
+});
+
+
+
 
 $('#orderListButton').on('tap',function(){
 	

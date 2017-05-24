@@ -404,8 +404,8 @@
 									</ul>
 								</div>
 								<div id="buttonList">
-									<button><a href="#placeOrder">买涨价<i id="bidPrice1Button">59.01</i></a></button>
-									<button><a href="#placeOrder">买跌价<i id="askPrice1Button">59.01</i></a></button>
+									<button id="placeOrderBidPrice1"><a href="#placeOrder">买涨价<i id="bidPrice1Button">59.01</i></a></button>
+									<button id="placeOrderAskPrice1"><a href="#placeOrder">买跌价<i id="askPrice1Button">59.01</i></a></button>
 									<span id="flashButton"><a href="#flashSeting">快闪</a></span>
 								</div>
 							</div>
@@ -430,9 +430,8 @@
 									</div>
 								</div>
 							</div>
-							<div  class="mui-slider-item mui-control-content ">
-								<ul id="settlementSheet">
-												
+							<div  id="settlementSheet" class="mui-slider-item mui-control-content ">
+								<ul id="settlementSheet00">
 									<!--plSettlementSheet-->									
 								</ul>
 							</div>
@@ -468,7 +467,7 @@
 				<div class="mui-page-content">
 					<div class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<p id="flashPassageway">看多价：59.01 持仓至05:55</p>
+							<p id="flashPassageway"><span id="flashMore">看多价：</span><span id="flashMorePrice">59.01</span><span>持仓至</span> <span id="flashMoreTime">05:55</span></p>
 							<div class="flash-seting-content">
 								<ul>
 									<li>
@@ -700,23 +699,26 @@
 	</script>
 	<script id="tplPositionListOrder" type="text/html">
 		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
-			<li id="{{d.OrderRef}}-PositionListOrder">
-				<p id="{{d.OrderRef}}-PositionListOrder-CommodityNo">{{CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo+d.ContractNo, "LastQuotation", "CommodityName")}}{{d.CommodityNo + d.ContractNo}}</p>
+			<li id="{{d.OrderID}}-PositionListOrder">
+				<p id="{{d.OrderID}}-PositionListOrder-CommodityNo">
+					{{CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}
+					{{d.CommodityNo + d.ContractNo}}
+				</p>
 				<div>
 					<p>
-						<span>买入10手</span>
-						<span>
+						<span>{{dealDrection(d.Open_Direction)}}{{d.OrderNum+'手'}}</span><span>
 							<i>+￥14400</i>
 							<i>（+$2000）</i>
 						</span>
 						
+						
 					</p>
 					<ul class="position-list-content">
-						<li>止盈<i>1</i></li>
-						<li>买入<i>1</i></li>
+						<li>止盈<i>{{fixedPriceByContract(d.StopWin,d.CommodityNo)}}</i></li>
+						<li>买入<i>{{fixedPriceByContract(d.Open_Price,d.CommodityNo)}}</i></li>
 						<li><button id="closePosition">平仓</button></li>
-						<li>止损<i>1</i></li>
-						<li>当前<i>1</i></li>
+						<li>止损<i>{{fixedPriceByContract(d.StopLoss,d.CommodityNo)}}</i></li>
+						<li>当前<i class="{{d.CommodityNo + d.ContractNo}}-PositionListOrder-LastPrice">{{fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
 						<li><button id="backhand">反手</button></li>
 					</ul>
 				</div>
@@ -726,11 +728,13 @@
 	
 	<script id="plSettlementSheet" type="text/html">
 		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
-			<li>
-				<p><span>美国原油 CL1702</span><span>2017-01-25 11:30</span></p>
+			<li id="{{d.OrderID}}-SettlementSheet">
+				<p>
+					<span id="{{d.OrderID}}-SettlementSheet-CommodityNo">{{CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}{{d.CommodityNo + d.ContractNo}}</span><span>{{d.Open_DateTime}}</span>
+				</p>
 				<div>
 					<p>
-						<span>买入10手</span>
+						<span>{{dealDrection(d.Open_Direction)}}{{d.OrderNum+'手'}}</span>
 						<span>
 							<i>+￥14400</i>
 							<i>（+$2000）</i>
@@ -738,14 +742,16 @@
 					</p>
 					<div>
 						<ul>
-							<li>止盈<i>1</i></li>
-							<li>买入<i>1</i></li>
-							<li>止损<i>1</i></li>
-							<li>当前<i>1</i></li>
+							<li>止盈<i>{{fixedPriceByContract(d.StopWin,d.CommodityNo)}}</i></li>
+							<li>买入<i>{{fixedPriceByContract(d.Open_Price,d.CommodityNo)}}</i></li>
+							<li>止损<i>{{fixedPriceByContract(d.StopLoss,d.CommodityNo)}}</i></li>
+							<li>当前<i class="{{d.CommodityNo + d.ContractNo}}-SettlementSheet-LastPrice">
+								{{fixedPriceByContract(
+									CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
 						</ul>
 						<div class="settlement-sate">手动<br>平仓</div>
 					</div>
-										<!--<div class="trigger-close-position">触发止损平仓</div>-->
+					<!--<div class="trigger-close-position">触发止损平仓</div>-->
 				</div>
 			</li>
 		{{# } }}
