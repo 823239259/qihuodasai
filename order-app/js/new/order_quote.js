@@ -145,10 +145,15 @@ function quoteHandleData(evt) {
 		initQuoteList(jsonData.Parameters); // 初始化行情列表
 		subscribe(jsonData.Parameters); //订阅支持的主行情合约	并缓存基础属性
 	}else if(method == "OnRspSubscribe") { // 订阅成功信息
+		
 		initQuoteInfo(jsonData.Parameters); // 初始化行情价格（订阅成功返回最新的行情状态）
 		CacheQuoteSubscribe.setCacheContractQuote(jsonData.Parameters); // 缓存初始化行情信息
 		initTradeContractOption(jsonData.Parameters); // 初始化交易合约选项
+		
+		initTradeClient();// 初始化交易
+		
 	}else if(method == "OnRtnQuote") { // 最新行情
+		
 		HeartBeat00.lastHeartBeatTimestamp = new Date().getTime();
 		updateQuoteInfo(jsonData.Parameters); // 更新最新行情信息
 //		UpdateHoldProfit(jsonData.Parameters); // 更新持仓盈亏

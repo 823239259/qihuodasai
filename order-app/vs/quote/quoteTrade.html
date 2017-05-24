@@ -254,8 +254,11 @@
 									</select>
 								</div>
 								<div class="navigation-container">
-									<p>持仓盈亏</p>
-									<p>CL1702</p>
+									<!--持仓盈亏-->
+									<p id="holdProfit">持仓盈亏</p>
+									<!--账户余额-->
+									<p id="accoutSurplus">账户余额</p>
+									<!--<p>CL1702</p>-->
 								</div>
 								<div class="navigation-container">
 									<button id="clearanceButton">一键清仓</button>
@@ -418,104 +421,7 @@
 								<div class="mui-scroll-wrapper" style="height: 400px;">
 									<div class="mui-scroll">
 										<ul id="positionListOrder" style="height: auto;">
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
-											<li>
-												<p>美国原油 CL1702</p>
-												<div>
-													<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-													<ul class="position-list-content">
-														<li>止盈<i>1</i></li>
-														<li>买入<i>1</i></li>
-														<li><button id="closePosition">平仓</button></li>
-														<li>止损<i>1</i></li>
-														<li>当前<i>1</i></li>
-														<li><button id="backhand">反手</button></li>
-													</ul>
-												</div>
-											</li>
+											<!--tplPositionListOrder-->
 										</ul>
 										<p id="allClosePosition">
 											<span>持仓盈亏：<em>$12017.00</em></span>
@@ -524,41 +430,10 @@
 									</div>
 								</div>
 							</div>
-							<div id="settlementSheet" class="mui-slider-item mui-control-content ">
-								<ul>
-									<li>
-										<p><span>美国原油 CL1702</span><span>2017-01-25 11:30</span></p>
-										<div>
-											<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-											<div>
-												<ul>
-													<li>止盈<i>1</i></li>
-													<li>买入<i>1</i></li>
-													<li>止损<i>1</i></li>
-													<li>当前<i>1</i></li>
-												</ul>
-												<div class="settlement-sate">手动<br>平仓</div>
-											</div>
-											<!--<div class="trigger-close-position">触发止损平仓</div>-->
-										</div>
-									</li>
-									<li>
-										<p><span>美国原油 CL1702</span><span>2017-01-25 11:30</span></p>
-										<div>
-											<p><span>买入10手</span><span><i>+￥14400</i><i>（+$2000）</i></span></p>
-											<div>
-												<ul>
-													<li>止盈<i>1</i></li>
-													<li>买入<i>1</i></li>
-													<li>止损<i>1</i></li>
-													<li>当前<i>1</i></li>
-												</ul>
-												<div class="settlement-sate">止损<br>平仓
-												</div>
-											</div>
-											<!--<div class="trigger-close-position">手动平仓</div>-->
-										</div>
-									</li>
+							<div  class="mui-slider-item mui-control-content ">
+								<ul id="settlementSheet">
+												
+									<!--plSettlementSheet-->									
 								</ul>
 							</div>
 						</div>
@@ -822,6 +697,58 @@
 				<span style="display: none;">{{ item.CommodityNo + item.MainContract }}</span>
 			</li>
 		{{#	 }	}); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+	</script>
+	<script id="tplPositionListOrder" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+			<li id="{{d.OrderRef}}-PositionListOrder">
+				<p id="{{d.OrderRef}}-PositionListOrder-CommodityNo">{{CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo+d.ContractNo, "LastQuotation", "CommodityName")}}{{d.CommodityNo + d.ContractNo}}</p>
+				<div>
+					<p>
+						<span>买入10手</span>
+						<span>
+							<i>+￥14400</i>
+							<i>（+$2000）</i>
+						</span>
+						
+					</p>
+					<ul class="position-list-content">
+						<li>止盈<i>1</i></li>
+						<li>买入<i>1</i></li>
+						<li><button id="closePosition">平仓</button></li>
+						<li>止损<i>1</i></li>
+						<li>当前<i>1</i></li>
+						<li><button id="backhand">反手</button></li>
+					</ul>
+				</div>
+			</li>
+		{{# } }}
+	</script>
+	
+	<script id="plSettlementSheet" type="text/html">
+		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
+			<li>
+				<p><span>美国原油 CL1702</span><span>2017-01-25 11:30</span></p>
+				<div>
+					<p>
+						<span>买入10手</span>
+						<span>
+							<i>+￥14400</i>
+							<i>（+$2000）</i>
+						</span>
+					</p>
+					<div>
+						<ul>
+							<li>止盈<i>1</i></li>
+							<li>买入<i>1</i></li>
+							<li>止损<i>1</i></li>
+							<li>当前<i>1</i></li>
+						</ul>
+						<div class="settlement-sate">手动<br>平仓</div>
+					</div>
+										<!--<div class="trigger-close-position">触发止损平仓</div>-->
+				</div>
+			</li>
+		{{# } }}
 	</script>
 	
 	<!-- 描述：下单面板合约代码选项 -->

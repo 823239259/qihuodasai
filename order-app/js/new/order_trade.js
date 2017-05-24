@@ -7,13 +7,13 @@ var TradeConfig = {
 	username : "000013",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 	password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 };
-
+/*
 mui.app_request('/user/getTradeAccount', {}, function(result) {
 			if(result.success == true) {
 				TradeConfig.username = result.data.tradeProfessionalAccount;
 				TradeConfig.password = result.data.tradeProfessionalPwd;
 			}
-		}, function(res) {});
+		}, function(res) {});*/
 var tradeSocket = null;
 
 // 是否更新持仓盈亏：连接上交易，且接收完持仓信息再开始根据最新行情更新持仓盈亏
@@ -136,6 +136,11 @@ function handleMessage(evt){
 			}
 		}break;
 		
+		case "OnRspQryOrderGW":{//查询订单回复
+			
+			appendOrder(parameters); // 增加订单
+		}
+		
 	}
 }
 
@@ -157,14 +162,29 @@ function initHoldFloatingProfit(holdOrder) {
  */
 function updateHoldFloatingProfit(contract, lastPrice){
 	
-	
-	
-	
-	
 }
 
+/**
+ * 初始化交易信息
+ */
+function initTradeInfo(){
+	
+	// 查询订单
+	Trade.doQryOrderGW(TradeConfig.username);
+}
 
-
+/**
+ * 查询订单回复后
+ */
+function appendOrder(orderInfo){
+	
+	//订单列表
+	tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
+	
+	//结算单列表
+	tplFillData("settlementSheet", "plSettlementSheet", orderInfo, FillType.before);
+	
+}
 
 
 

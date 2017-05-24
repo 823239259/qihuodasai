@@ -528,12 +528,12 @@ var Trade = {
 		Direction,StopWin,StopLoss,Deposit,Fee
 		){
 		var param = '{"ClientNo":"' + ClientNo + '",' +
-			' "PlatForm_User":' + PlatForm_User + ',' +
-			' "ProductID":' + ProductID + ',' +
-			' "CommodityNo":' + CommodityNo + ',' +
-			' "ContractNo":' + ContractNo + ',' +
+			' "PlatForm_User":"' + PlatForm_User + '",' +
+			' "ProductID":"' + ProductID + '",' +
+			' "CommodityNo":"' + CommodityNo + '",' +
+			' "ContractNo":"' + ContractNo + '",' +
 			' "OrderNum":' + OrderNum + ',' +
-			' "Direction":"' + Direction + '",' +
+			' "Direction":' + Direction + ',' +
 			' "StopWin":' + StopWin + ',' +
 			' "StopLoss":' + StopLoss + ',' +
 			' "Deposit":' + Deposit + ',' +
@@ -550,8 +550,8 @@ var Trade = {
 	 */
 	doCloseOrderGW:function(ClientNo,PlatForm_User,OrderID){
 		var param = '{"ClientNo":"' + ClientNo + '",' +
-			' "PlatForm_User":' + PlatForm_User + ',' +
-			' "OrderID":' + OrderID + 
+			' "PlatForm_User":"' + PlatForm_User + '",' +
+			' "OrderID":"' + OrderID +'"'+ 
 			'}';
 		Trade.doSendMessage(TradeMethod.CloseOrderGW, param);	
 	},
@@ -568,8 +568,8 @@ var Trade = {
 		){
 		
 		var param = '{"ClientNo":"' + ClientNo + '",' +
-			' "PlatForm_User":' + PlatForm_User + ',' +
-			' "OrderID":' + OrderID + ',' +
+			' "PlatForm_User":"' + PlatForm_User + '",' +
+			' "OrderID":"' + OrderID + '",' +
 			' "StopWin":' + StopWin + ',' +
 			' "StopLoss":' + StopLoss +
 			'}';
@@ -582,7 +582,7 @@ var Trade = {
 	 */
 	doQryOrderGW:function(ClientNo){
 		
-		var param = '{"ClientNo":"' + ClientNo + 
+		var param = '{"ClientNo":"' + ClientNo + '"'+
 			'}';
 		Trade.doSendMessage(TradeMethod.QryOrderGW, param);		
 	},
@@ -596,8 +596,8 @@ var Trade = {
 		ClientNo,BeginTime,EndTime
 		){
 		var param = '{"ClientNo":"' + ClientNo + '",' +
-			' "BeginTime":' + BeginTime + ',' +
-			' "EndTime":' + EndTime + 
+			' "BeginTime":"' + BeginTime + '",' +
+			' "EndTime":"' + EndTime + '"'+
 			'}';
 		Trade.doSendMessage(TradeMethod.QryHisOrderGW, param);		
 	}
