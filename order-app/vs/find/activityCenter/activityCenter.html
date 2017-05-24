@@ -7,6 +7,7 @@
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../../css/common.css" />
 		<link rel="stylesheet" href="../../../css/activityCenter.css" />
+		
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -14,34 +15,55 @@
 		    <h1 class="mui-title">活动中心</h1>
 		</header>
 		<div class="mui-content">
-			<div class="mui-slider mui-fullscreen">
+			<!--<div class="mui-slider mui-fullscreen">
 				<div class="mui-slider-group">
 					<div id="activityCenter" class="mui-slider-item mui-control-content mui-active">
 						<div class="mui-scroll-wrapper">
 							<div class="mui-scroll" data-url="http://127.0.0.1:8020/kanakn1/directSeed-news.json">
-								<!--数据列表-->
 								<ul class="mui-table-view">
-									<!--<li class="mui-table-view-cell">
-										<div class="mui-slider-item">
-											<img src="../../../img/find/banner_load.jpg">
-											<span class="activityCenter">已结束</span>
-										</div>
-									</li>-->
-									
+							        
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>-->
+			<div id="activityCenter">
+				<ul class="mui-table-view">
+					<li>
+			           <img  id="report" src="../../../img/banner_load.jpg" alt="" />
+			           <div class="content">
+			           		<p class="title">新手任务活动</p>
+			           		<p class="startTime">开始时间：<span>2017-04-21</span></p>
+			           		<p class="endTime">结束时间：<span>待定</span></p>
+			           </div>
+			        </li>	
+			        <li>
+			           <img  id="report" src="../../../img/banner_load.jpg" alt="" />
+			           <div class="content">
+			           		<p class="title">新手任务活动</p>
+			           		<p class="startTime">开始时间：<span>2017-04-21</span></p>
+			           		<p class="endTime">结束时间：<span>待定</span></p>
+			           </div>
+			        </li>	
+			        <li>
+			           <img  id="report" src="../../../img/banner_load.jpg" alt="" />
+			           <div class="content">
+			           		<p class="title">新手任务活动</p>
+			           		<p class="startTime">开始时间：<span>2017-04-21</span></p>
+			           		<p class="endTime">结束时间：<span>待定</span></p>
+			           </div>
+			        </li>	
+				</ul>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../../js/jquery-1.11.3.js"></script>
-		<script type="text/javascript" src="../../../js/mui.pullToRefresh.js"></script>
-		<script type="text/javascript" src="../../../js/mui.pullToRefresh.material.js"></script>
+		<!--<script type="text/javascript" src="../../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../../js/mui.pullToRefresh.material.js"></script>-->
 		<script>
 			mui.init();
-			(function($) {
+			/*(function($) {
 				//阻尼系数
 				var url= [
 				"http://127.0.0.1:8020/kanakn1/directSeed-news.json"
@@ -137,7 +159,7 @@
 	    				}
 					});
 				});
-			})(mui);
+			})(mui);*/
 		</script>
 	</body>
 </html>

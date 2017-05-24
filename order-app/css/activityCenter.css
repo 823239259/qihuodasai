@@ -6,7 +6,9 @@
 .mui-slider .mui-slider-group .mui-slider-item img {vertical-align: top;}
 .mui-table-view-cell {padding: 0px;}
 .mui-table-view-cell:after {left: 0; height: 10px; background: #ffffff;}
-#activityCenter {padding-top: 20px;}
 #activityCenter .activityCenter {position: absolute; z-index: 999; top: 10px; font-size: 11px; color: #ffffff; height: 20px; line-height: 20px; width: 60px; display: block; text-align: center; background: url(../img/find/activityCenter.png) no-repeat;}
 #noSearchResultContainer {position: fixed; top: 35px; left: -85px; margin-left: 50%; margin-top: 50%; padding-top: 68px; height: 115px; width: 170px; color: #999999; font-size: 15px; line-height: 23px; text-align: center; background: url(../img/searchResult.png) no-repeat center top; background-size: 45px auto;}
 .mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {top: 64px;}
+#activityCenter ul li .content {padding: 15px;}
+#activityCenter ul li .title {font-size: 14px; color: #333333; margin-bottom: 10px;}
+#activityCenter ul li img {width: 100%;}
