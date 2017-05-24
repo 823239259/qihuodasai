@@ -9,23 +9,25 @@
 	<link href="css/about.css" rel="stylesheet"/>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-bar-nav" style="position: fixed; z-index: 99; padding-top: 0;">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">在线客服</h1>
 		</header>
 		<script src="js/mui.min.js"></script> 
 		<script src="js/common.js"></script>
+		<script src="js/jquery-1.11.3.js"></script>
 		<script>
 			mui.init();
 			mui.plusReady(function(){
 				var phone = plus.storage.getItem("user_mobile");
     			var userName = encodeURI(encodeURI(plus.storage.getItem("userName")));
 				plus.nativeUI.showWaiting( "正在加载..." );
-				var window=plus.webview.create("http://www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone="+phone+"&userName="+userName+"","index",{top:"65px"});
+				var window=plus.webview.create("http://www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone="+phone+"&userName="+userName+"","index",{top:"45px"});
 				window.show();
 				setTimeout(function(){
 					plus.nativeUI.closeWaiting();
-				},300)
+				},300);
+
 			});
 		</script>
 		<script>

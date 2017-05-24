@@ -21,6 +21,10 @@ body{background-color: #FFFFFF;}
 .account-balance {font-size: 13px; color: #999999;}
 .account-money {font-size: 17px; color: #ffb319; margin-bottom: 10px;}
 .mui-bar-nav~.mui-content {margin-bottom: 49px;}
+.mui-backdrop {z-index: 49;}
+.main_nolg {position: fixed; width: 100%; padding: 0 15px; left: 0; bottom: 70px; z-index: 50;}
+#login {color: #ffffff; height: 40px; line-height: 40px; padding: 0; border: 1px solid #ffb319; background: #ffb319; }
+#regist {color: #ffb319; height: 40px; line-height: 40px; padding: 0; border: 1px solid #ffb319; background: #ffffff; }
 /*
 客服 */
 .customer-service .mui-table-view-cell:after{background-color: #FFFFFF;}
