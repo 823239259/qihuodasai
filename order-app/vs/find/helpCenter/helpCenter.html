@@ -8,6 +8,9 @@
 		<link href="../../../css/common.css" rel="stylesheet"/>
 		<link href="../../../css/own.css" rel="stylesheet"/>
 		<link href="../../../css/helpCenter.css" rel="stylesheet" />
+		<style>
+			
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -15,84 +18,7 @@
 		    <h1 class="mui-title">帮助中心</h1>
 		</header>
 		<div class="mui-content">
-			<!--栏目-->
-	        <ul class="mui-table-view mui-grid-view mui-grid-9 find-tab" style="background: #fff; margin-bottom: 5px;">
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpOne.png"/>
-	                    <div class="mui-media-body">开户相关</div>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpTwo.png"/>
-	                    <div class="mui-media-body">资金相关</div>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpThree.png"/>
-	                    <div class="mui-media-body">收费标准</div>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpFour.png"/>
-	                    <div class="mui-media-body">新手教程</div>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpFive.png"/>
-	                    <div class="mui-media-body">产品介绍</div>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpSix.png"/>
-	                    <div class="mui-media-body">账户安全</div>
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="">
-	            	<a href="javascript:void(0);">
-	                    <img src="../../../img/find/helpSeven.png"/>
-	                    <div class="mui-media-body">邀请有礼</div>
-	            	</a>
-	            </li>
-	        </ul>
-	       	<!--问题-->
-	        <ul id="list" class="mui-table-view mui-table-view-chevron main-list">
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0);" id="">
-						<p class="title">实名认证常见问题</p>
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0);" id="">
-						<p class="title">充值提现常见问题</p>
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0);" id="">
-						<p class="title">手机绑定常见问题</p>
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0);" id="">
-						<p class="title">期货交易常见问题</p>
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0);" id="">
-						<p class="title">购买合约常见问题</p>
-					</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0);" id="">
-						<p class="title">操盘账号登录常见问题</p>
-					</a>
-				</li>
-			</ul>
+			
 		</div>
 	</body>
 	<script type="text/javascript" src="../../../js/jquery-1.11.3.js"></script>
@@ -100,8 +26,12 @@
 	<script type="text/javascript" src="../../../js/common.js"></script>
 	<script type="text/javascript">
 		mui.init();
-		$("#list").on("tap","li",function() {
-			mui.openWindow("helpDetails.html", "helpDetails");
+		mui.plusReady(function(){
+			var w;
+			var height = window.innerHeight;
+			height = height - 80;
+			w = plus.webview.create("http://test.cms.vs.com/vsnew/jinsida-help/index.html", "jinsida-xuetang", { top: "60px", width: '100%', height: height + 'px', margin: "auto" });
+			w.show();
 		});
 	</script> 
 </html>
