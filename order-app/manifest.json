@@ -300,7 +300,25 @@
 					"img/find/find_2.png",
 					"img/found.png",
 					"img/directSeeding.png",
-					"img/home_list_1.png"
+					"img/home_list_1.png",
+					"js/new/n_utils.js",
+					"js/quote_echarts/quote.candlestick.chart.js",
+					"lib/layui/lay/modules/laytpl.js",
+					"lib/layui/lay/modules/form.js",
+					"lib/layui/lay/modules/element.js",
+					"js/quote_echarts/quote.time.chart.js",
+					"js/quote_echarts/echarts.min.js",
+					"js/new/quoteTrade.js",
+					"lib/layui/layui.js",
+					"lib/layui/lay/modules/layer.js",
+					"js/quote_echarts/chart.config.js",
+					"js/new/n_trade_vo.js",
+					"lib/layui/css/modules/layer/default/layer.css",
+					"js/new/n_quote_vo.js",
+					"js/new/order_quote.js",
+					"js/quote_echarts/quote.lghtning.chart.js",
+					"lib/layui/css/layui.css",
+					"js/new/order_trade.js"
 				],
 				"refer": [
 					"vs/directSeed/directSeed.html",
@@ -729,11 +747,14 @@
 					"css/common.css",
 					"js/jquery-1.11.3.js",
 					"css/account.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/common.js"
 				],
 				"refer": [
 					"vs/find/find.html",
-					"vs/ym/a.html"
+					"vs/ym/a.html",
+					"vs/home/home.html",
+					"guide.html"
 				],
 				"priority": 0
 			},
@@ -1066,6 +1087,16 @@
 			"vs/news/active.html": {
 				"resources": [
 					"img/backBg.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"guide.html": {
+				"resources": [
+					"css/own.css",
+					"img/startG2.png",
+					"css/mui.min.css",
+					"img/startG1.png"
 				],
 				"refer": [],
 				"priority": 0

@@ -39,6 +39,7 @@ window.onload = function() {
 		var height = buttonListLiStopLoss.offsetHeight;
 		$("#alertContent2").css({ "height": height + 75 + "px", "margin-top": -(height + 75) / 2 + "px" });
 	});
+	/*
 	document.getElementById("closeLossTableSeting").addEventListener("tap", function() {
 		$("#chioceStopLoss").css("display", "block").attr("data-id", "3");
 		var buttonListLiStopLoss = document.getElementById("buttonListLiStopLoss");
@@ -51,14 +52,7 @@ window.onload = function() {
 		var height = buttonListLiStopLoss.offsetHeight;
 		$("#alertContent2").css({ "height": height + 75 + "px", "margin-top": -(height + 75) / 2 + "px" });
 	});
-	$("#flashSeting .chioce-button").on("tap", function() {
-		$(this).addClass('on'); // 设置被点击元素为黄色
-		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
-	});
-	$("#placeOrder .chioce-button").on("tap", function() {
-		$(this).addClass('on'); // 设置被点击元素为黄色
-		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
-	});
+	*/
 	var checkboxButtonClickNum = 0;
 	document.getElementById("checkboxButton").addEventListener("click", function() {
 		if(checkboxButtonClickNum % 2 == 0) {

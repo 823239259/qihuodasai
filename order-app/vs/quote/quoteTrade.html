@@ -470,7 +470,7 @@
 							<p id="flashPassageway"><span id="flashMore">看多价：</span><span id="flashMorePrice">59.01</span><span>持仓至</span> <span id="flashMoreTime">05:55</span></p>
 							<div class="flash-seting-content">
 								<ul>
-									<li>
+									<li id="treadNum">
 										<label>交易数量：</label>
 										<button class="chioce-button on">1手</button>
 										<button class="chioce-button">3手</button>
@@ -528,29 +528,32 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title"><p>美黄金</p><p>GC1702</p></h1>
+				<h1 class="mui-center mui-title"><p id="flashSetingName">美黄金</p><p id="flashSetingCon">GC1702</p></h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<p id="flashPassageway">快速通道设置</p>
-						<div class="flash-seting-content">
+						<div class="flash-seting-content" >
 							<ul>
-								<li>
-									<label>交易数量：</label>
-									<button class="chioce-button on">1手</button>
-									<button class="chioce-button">3手</button>
-									<button class="chioce-button">16手</button>
-									<button class="chioce-button">11手</button>
-									<button class="chioce-button">10手</button>
+								<!--<label>交易数量：</label>-->
+								<li id="TradeNum">
+									<!--tpTradeNum-->
+									
 								</li>
-								<li>
+								<li id="stopWin010">
+									<!--tpstopWin010-->
 									<label>触发止盈：</label>
-									<span id="closeProfitTableSeting">1440元</span>
+									<!--<span id="closeProfitTableSeting">1440元</span>-->
+									<button class="chioce-button ">1440元</button>
+									
 								</li>
-								<li>
+								<li id="stopLoss010">
+									<!--tpstopLoss010-->
 									<label>触发止损：</label>
-									<span id="closeLossTableSeting">1440元</span>
+									<!--<span id="closeLossTableSeting">1440元</span>-->
+									<button class="chioce-button ">1440元</button>
+									
 								</li>
 							</ul>
 						</div>
@@ -702,8 +705,9 @@
 			<li id="{{d.OrderID}}-PositionListOrder">
 				<p id="{{d.OrderID}}-PositionListOrder-CommodityNo">
 					{{CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}
-					{{d.CommodityNo + d.ContractNo}}
+					{{d.CommodityNo + d.ContractNo}}<span>{{'     '+d.OrderID}}</span>
 				</p>
+				
 				<div>
 					<p>
 						<span>{{dealDrection(d.Open_Direction)}}{{d.OrderNum+'手'}}</span><span>
@@ -765,6 +769,11 @@
 		{{# form.render('select'); }}
 	</script>
 	
+	<script id="tpTradeNum" type="text/html">
+		{{# if(!isEmpty(d)){ }}
+			<button class="chioce-button">{{d.lever+'手'}}</button>
+		{{# } }}
+	</script>
 	
 	
 	<script type="text/javascript">

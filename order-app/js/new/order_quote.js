@@ -9,7 +9,7 @@ var QuoteConfig = {
 var HeartBeat00 = {
 	lastHeartBeatTimestamp : 1,	// 最后心跳时间
 	oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-	intervalCheckTime : 8000000,   // 间隔检查时间：8秒
+	intervalCheckTime : 8000,   // 间隔检查时间：8秒
 	check : function(){
 		if (this.lastHeartBeatTimestamp == this.oldHeartBeatTimestamp) { // 心跳未更新——上次心跳时间与最新心跳时间一致
 			console.log('lastHeartBeatTimestamp:'+this.lastHeartBeatTimestamp+',oldHeartBeatTimestamp:'+this.oldHeartBeatTimestamp);
@@ -392,11 +392,15 @@ function updateQuoteInfo(jQuote){
 		
 		updatePankou(jQuote);
 		
-		//模拟盘持仓中的当前
-		$('.'+contract+'-PositionListOrder-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
-		//模拟盘结算中的当前
-		$('.'+contract+'-SettlementSheet-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
 	}
+	
+	//模拟盘持仓中的当前
+	$('.'+contract+'-PositionListOrder-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+	//模拟盘结算中的当前
+	$('.'+contract+'-SettlementSheet-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+	
+	
+	
 }
 
 /**

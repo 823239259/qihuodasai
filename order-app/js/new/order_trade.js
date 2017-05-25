@@ -2,10 +2,10 @@
 var TradeConfig = {
 	version : "3.3",	// 版本
 //	url_real : "ws://192.168.0.213:7002", // 实盘地址
-	url_real : "ws://192.168.0.213:6102",
+	url_real : "ws://192.168.0.147:7001",
 	model : "1", // 实盘：0；	模拟盘：1
 	client_source : "N_WEB",	// 客户端渠道
-	username : "C000001",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+	username : "000003",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 	password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 };
 /*
@@ -197,7 +197,11 @@ function appendOrder(orderInfo){
  * @param {Object} orderInfo
  */
 function appendOrderAfter(orderInfo){
-	tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
+	if(orderInfo.Status==8){
+		tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
+	}else if(orderInfo.Status==1){
+		tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.repalce);
+	}
 	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 }
 

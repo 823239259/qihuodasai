@@ -35,7 +35,10 @@ $("#list").on('tap','li',function(){
 	$('#entrustContract').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
 		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
 	
-	
+	//闪电设置页面title
+	$('#flashSetingName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
+	$('#flashSetingCon').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
+		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
 	
 	
 	//分时图
@@ -144,8 +147,10 @@ $('#contract').change(function(){
 	$('#entrustContract').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
 		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
 	
-	
-	
+	//闪电设置页面title
+	$('#flashSetingName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
+	$('#flashSetingCon').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
+		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
 	
 	//分时图
 	clearCache();
@@ -178,7 +183,6 @@ function click1k(){
 		is_k = true;
 		is_fenshi=false;
 		is_shandian=false;
-		console.log('exchangeNo:'+exchangeNo+'SuperCommodityNo:'+SuperCommodityNo+'contractNo:'+contractNo);
 		Quote.doQryHistory(exchangeNo, SuperCommodityNo, contractNo, 1, '', '', '');
 	}
 function click5k(){
@@ -300,20 +304,57 @@ $('#placeOrderAskPrice1').on('tap',function(){
 	$('#orderListButton').text('看空买入');
 });
 
-
+/**
+ * 点击快闪按钮
+ */
+$('#flashButton').on('tap',function(){
+	
+	mui.app_request(
+		'game/order/contractParam',
+		{
+			'contractNo':SuperCommodityNo
+			
+		},function(result){
+			
+			console.log(JSON.stringify(result));
+			$.each(result.data,function(index, obj){
+				console.log(JSON.stringify(obj));
+				tplFillData("TradeNum", "tpTradeNum", obj, FillType.before);
+			});
+			
+		}
+		
+	);
+	
+});
 
 
 $('#orderListButton').on('tap',function(){
 	
-	Trade.doOpenOrderGW(TradeConfig.username,'13558767653','00001','CL','1707',1,0,2000,1000,100,10);
+	Trade.doOpenOrderGW(TradeConfig.username,'13558767653','00001','CL','1707',2,0,80.25,2.36,5,2);
 });
 
 
 
 
-
-
-
+$("#TradeNum .chioce-button").on("tap", function() {
+		$(this).addClass('on'); // 设置被点击元素为黄色
+		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+	});
+	
+$("#stopWin010 .chioce-button").on("tap", function() {
+		$(this).addClass('on'); // 设置被点击元素为黄色
+		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+	});	
+$("#stopLoss010 .chioce-button").on("tap", function() {
+		$(this).addClass('on'); // 设置被点击元素为黄色
+		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+	});		
+	
+$("#placeOrder .chioce-button").on("tap", function() {
+		$(this).addClass('on'); // 设置被点击元素为黄色
+		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+});
 
 
 
