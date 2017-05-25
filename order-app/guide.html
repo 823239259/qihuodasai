@@ -332,10 +332,10 @@
 //				                    else 
 									// test conflict
 										if(endPos.x < -80){
-				                       mui.openWindow({
-				                			url: 'vs/home/home.html',
-					                        id: 'home'
-				                		})
+				                       	mui.openWindow({
+												id:"quoteTrade",
+												url:"vs/quote/quoteTrade.html"
+										});
 				                    }
 				                }
 				            }
@@ -347,9 +347,9 @@
 					document.getElementById("skip").addEventListener('tap', function(event) {
 					                    //打开关于页面
 					                    mui.openWindow({
-					                        url: 'vs/home/home.html',
-					                        id: 'home'
-					                    });
+												id:"quoteTrade",
+												url:"vs/quote/quoteTrade.html"
+										});
 					                }, false);
                 });
                 
@@ -364,7 +364,7 @@
                         if (item != null && item.classList.contains("mui-hidden")) {
                             item.classList.remove("mui-hidden");
                             item.classList.add("guide-show");
-                        } 
+                        }
                     }
                  });
       </script>

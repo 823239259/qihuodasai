@@ -123,8 +123,10 @@
 			})
 		});*/
 		document.getElementById("feedback").addEventListener("tap", function() {
-			var path=mui.app_filePath("online.html");
-				mui.openWindow(path,"online"); 
+			mui.openWindow({
+				url: "customerService.html",
+				id: "customerService"
+			});
 		});
 		document.getElementById("customerService").addEventListener("tap", function() {
 			mui.openWindow({
@@ -187,6 +189,8 @@
 		if(mui.cacheUser.isLogin()) {
 			$(".mui-backdrop").hide();
 			$(".main_nolg").hide();
+			$(".account-signer").hide();
+			$("#accountName").show();
 			document.getElementById("login").innerText = "充值";
 			document.getElementById("regist").innerText = "提现";
 			document.getElementById("signOut").innerText = "退出";

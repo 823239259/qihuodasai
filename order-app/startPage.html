@@ -54,8 +54,8 @@
 			 	}else{
 			 		setTimeout(function(){
 						mui.openWindow({
-							id:"home",
-							url:"vs/home/home.html"
+							id:"quoteTrade",
+							url:"vs/quote/quoteTrade.html"
 						})
 					},1500)
 	            };
@@ -119,7 +119,10 @@
 									if(Android.bigUrl == null || Android.bigUrl == "" || Android.bigUrl == undefined || Android.bigUrl.length == 0){
 										downWgt(function(){
 										if (mui.cacheUser.isLogin()){
-												mui.openWindow({url:"vs/home/home.html",id:"home"});
+											mui.openWindow({
+												id:"quoteTrade",
+												url:"vs/quote/quoteTrade.html"
+											})
 										}
 										});	// 下载升级包
 									}else{
@@ -134,7 +137,10 @@
 										if(Android.bigUrl=="" || Android.bigUrl.length==0 || Android.bigUrl==null){
 											downWgt(function(){
 												if (mui.cacheUser.isLogin()){
-													mui.openWindow({url:"vs/home/home.html",id:"home"});
+													mui.openWindow({
+														id:"quoteTrade",
+														url:"vs/quote/quoteTrade.html"
+													})
 												}
 											});	// 下载升级包
 										}else{
@@ -144,7 +150,10 @@
 										
 									}else{
 										if (mui.cacheUser.isLogin()){
-												mui.openWindow({url:"vs/home/home.html",id:"home"});
+												mui.openWindow({
+												id:"quoteTrade",
+												url:"vs/quote/quoteTrade.html"
+											})
 										}
 									}
 								}, "软件升级", ["升级","稍后再说"] );	

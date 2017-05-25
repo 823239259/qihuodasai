@@ -15,7 +15,7 @@
 		<header class="mui-bar mui-bar-nav topMenu">
 			<a class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left" id="back"></a>
 			<h1 class="mui-title">登录</h1>
-			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服</a>
+			<a href="javascript:void(0)" class="top-tel" id="customerService">客服</a>
 		</header>
 		<div class="mui-content ">
 			<div id="logo">
@@ -50,6 +50,12 @@
 	<script type="text/javascript" src="../../js/common.js"></script>
 	<script type="text/javascript">
 		mui.init();
+		document.getElementById("customerService").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "../account/customerService.html",
+				id: "customerService"
+			});
+		});
 		document.getElementById("reg").addEventListener("tap", function() {
 			mui.openWindow("register.html", "register");
 		});
