@@ -306,6 +306,29 @@ $('#placeOrderAskPrice1').on('tap',function(){
 
 /**
  * 点击快闪按钮
+ * 
+ */
+/* obj
+ * {
+    "id": null,
+    "paramId": null,
+    "contractNo": null,
+    "contractName": "国际原油",
+    "timeBucket": "4:00",
+    "icon": null,
+    "described": null,
+    "tradeRule": null,
+    "lever": 1,
+    "stopProfit": "1000,2000,3000,5000,10000",
+    "stopLoss": "-1000,-2000,-3000,-5000,-10000",
+    "tradeFee": 40,
+    "slipBond": 2000,
+    "updateUserId": null,
+    "updateUser": null,
+    "updateTime": null,
+    "updateUserOrg": null,
+    "mainId": null
+}
  */
 $('#flashButton').on('tap',function(){
 	
@@ -320,6 +343,8 @@ $('#flashButton').on('tap',function(){
 			$.each(result.data,function(index, obj){
 				console.log(JSON.stringify(obj));
 				tplFillData("TradeNum", "tpTradeNum", obj, FillType.before);
+				obj.lever=2
+				obj.stopProfit="10000,20000,30000,50000,100000";
 			});
 			
 		}

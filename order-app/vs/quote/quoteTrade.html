@@ -543,7 +543,7 @@
 								</li>
 								<li id="stopWin010">
 									<!--tpstopWin010-->
-									<label>触发止盈：</label>
+									<!--<label>触发止盈：</label>-->
 									<!--<span id="closeProfitTableSeting">1440元</span>-->
 									<button class="chioce-button ">1440元</button>
 									
@@ -774,7 +774,12 @@
 			<button class="chioce-button">{{d.lever+'手'}}</button>
 		{{# } }}
 	</script>
-	
+	<script id="tpstopWin010" type="text/html">
+		{{# if(!isEmpty(d)){ }}
+			<button class="chioce-button">{{d.stopProfit}}</button>
+		{{# } }}
+		
+	</script>
 	
 	<script type="text/javascript">
 		mui.init();

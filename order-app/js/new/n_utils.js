@@ -666,5 +666,19 @@ function fixedPriceByContract(price, commodityNo) {
 	return parseFloat(price).toFixed(dotSize);
 }
 
-
+/**
+ *数据缓存 
+ */
+mui.cacheData ={
+	
+	save: function(key, value) {
+			localStorage.setItem(key, value);
+	},
+	get: function(key) {
+			return localStorage.getItem(key);
+	},
+	clear: function() {
+			localStorage.clear();
+	},
+}
 
