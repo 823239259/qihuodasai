@@ -18,7 +18,7 @@ html, body {background: #f25749;}
 .mui-input-row {background: url(../img/login/inputBimg.png) no-repeat; width: 100%; background-size: 100% 100%;}
 .mui-input-row label~input {height: 42px; font-size: 13px; width: 100%; adding: 0px; padding-left: 50px;}
 .mui-btn-block {height: 42px; line-height: 42px; padding: 0px; margin-bottom: 0px; border-radius: 20px; color: #f25749; font-size: 17px;}
-.footer {position: absolute; bottom: 17px; text-align: center; font-size: 13px; color: #ffffff; width: 100%;}
+.footer {position: absolute; bottom: 17px; text-align: center; font-size: 13px; color: #ffffff; width: 100%; z-index: -1;}
 .mui-input-row .mui-input-clear~.mui-icon-clear {color: #ffffff; right: 15px;}
 /*提示颜色*/
 ::-webkit-input-placeholder { /* WebKit browsers */ color: #ffffff; } 

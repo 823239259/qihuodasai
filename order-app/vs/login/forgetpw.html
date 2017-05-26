@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>找回密码</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+		<link href="../../css/login.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav topMenu">
+			<a class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left" id="back"></a>
+			<h1 class="mui-title">找回密码</h1>
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">客服</a>
+		</header>
+		<div class="mui-content ">
+			<div id="logo" style="margin-bottom: 20px; padding-top: 20px;">
+				<img src="../../img/login/LOGO.png">
+			</div>
+			<div id="inputList">
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/ipnoneBimg.png"/></label>
+					<input type="tel" class="" maxlength="11" id='account' placeholder="请输入手机号" autocomplete="off" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+					<span id="yzm">发送验证码</span>
+				</div>
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/passWord.png"/></label>
+					<input type="number" class="mui-input-clear" maxlength="6" id="codeInput" placeholder="请输入验证码"  autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+				</div>
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/passWord.png"/></label>
+					<input type="password" class="mui-input-clear" maxlength="16" id="password" placeholder="请输入新密码"   autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+				</div>
+				<div class="commStyle mui-input-row">
+					<label><img src="../../img//login/passWord.png"/></label>
+					<input type="password" class="mui-input-clear" maxlength="16" id="confirm_password" placeholder="请输再次输入密码"  autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+				</div>
+				<!--<div class="commStyle checked"><span id="checkbox" class="checked"></span>同意《维胜金融注册协议》并开通模拟盘账户</div>-->
+				<div class="commStyle" style="margin-top: 15px;">
+					<button class="mui-btn mui-btn-block" id="operateLogin">下一步</button>
+				</div>
+				<div class="commStyle login">
+					<span id="reg">已有账号？立即登录</span>
+				</div>
+			</div>
+			<div class="footer">
+				如遇到问题请拨打 400-852-8008
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		document.getElementById("reg").addEventListener("tap", function() {
+			mui.openWindow("login.html", "login");
+		});
+		document.getElementById("operateLogin").addEventListener("tap",function(){
+			registUser();
+		});
+		document.getElementById("yzm").addEventListener("tap",function(){
+			getCode() ;
+		});
+		
+		//获取验证码
+		function getCode() {
+			var mobile = document.getElementById("account").value;
+			//这里要对手机号码进行格式校验
+			if(!vs.validate_mobile(mobile) || mui.isnull(mobile)) {
+				mui.toast("请输入正确的手机号");
+				return;
+			}
+    		mui.app_request('sms',{ 
+      			 'mobile':mobile,
+			     'type':2 
+      		},function(result){
+  				mui.toast("发送成功！");  
+  				var o=document.getElementById("codeInput");
+	  			//vs.smsTime(o); 
+  				return;
+      		},function(result){
+      			if(result.code==2){
+      				mui.toast("短信验证码发送失败！");
+      				return;
+      			}else if(result.code==5){
+      				mui.toast("操作过于频繁，请稍后再试！");
+      				return;
+      			}else if(result.code==3){
+      				mui.toast("手机号码已经存在！");
+      				return;
+      			}else{
+      				mui.toast("手机号码不存在，请确认后再试！");
+      				return;
+      			}
+      		});
+		}
+
+		function registUser() {
+			var mobile = document.getElementById("account").value;
+			var code = document.getElementById("codeInput").value;
+			//这里要对手机号码进行格式校验
+			if(!vs.validate_mobile(mobile) || mui.isnull(mobile)) {
+				mui.toast("请输入正确的手机号");
+				return;
+			}
+			if(mui.isnull(code)) {
+				mui.toast("验证码不能为空！");
+				return;
+			}
+			mui.app_request('/reset_validation/code', {
+				'mobile': mobile,
+				'code': code,
+			}, function(result) {
+//				mui.open_window_data("confirmPassword.html", "confirmPassword", {"mobile": mobile });
+				registPassword(mobile);
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("注册失败！");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("手机号码已经存在！");
+					return;
+				} else if(result.code == 4) {
+					mui.toast("验证码错误或为空！");
+					return;
+				} else if(result.code == 5) {
+					mui.toast("验证码失效！");
+					return;
+				} else if(result.code == 6) {
+					mui.toast("推广码错误！");
+					return;
+				} else {
+					mui.toast("系统繁忙，请稍后再试！");
+					return;
+				}
+			});
+		};
+		function registPassword(mobile) {
+			var password= document.getElementById("password").value;
+			var password2= document.getElementById("confirm_password").value;
+			if(mui.isnull(password)){
+				mui.toast("登录密码不能为空！");
+				return;
+			}
+			if(mui.isnull(password2)){
+				mui.toast("确认密码不能为空！");
+				return;
+			}
+			if(!vs.validate_password(password)){
+				mui.toast("密码由6-16位数字和字母组成。");
+				return;
+			}
+			//校验登录密码与确认密码是否一致
+			if(password!=password2){
+				mui.toast("两次输入密码不一致，请重新输入");
+				return;
+			}
+			mui.app_request('/reset_password',{ 
+  				'mobile':mobile,
+		    	'password':password,
+      		},function(result){ 
+      			console.log(JSON.stringify(result));
+  				updateMockAccount(mobile,password);
+				mui.toast("密码重置成功，请重新登录！"); 
+				mui.openWindow("login.html");
+  				return;
+      		},function(result){
+      			console.log(JSON.stringify(result));
+      			if(result.code==2){
+      				mui.toast("注册失败！");
+      				return;
+      			}else if(result.code==5){
+      				mui.toast("验证码失效！");
+      				return;
+      			}else if(result.code==6){
+      				mui.toast("推广码错误！"); 
+      				return;
+      			}else{
+      				mui.toast("手机号码不存在，请确认后再试！");
+      				return;
+      			}
+      		
+      		});
+      		function updateMockAccount(username,password){
+				mui.app_request("/mock/trade/updateMock",{
+					"username":username,
+					"password":password
+				},function(result){
+						console.log("修改模拟账号成功");
+				},function(result){
+						console.log("修改模拟账号失败");
+				}
+			)}
+		}
+	</script>
+
+</html>
