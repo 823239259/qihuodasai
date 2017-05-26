@@ -332,6 +332,7 @@ $('#placeOrderAskPrice1').on('tap',function(){
  */
 $('#flashButton').on('tap',function(){
 	
+	var i = 0;
 	mui.app_request(
 		'game/order/contractParam',
 		{
@@ -339,17 +340,87 @@ $('#flashButton').on('tap',function(){
 			
 		},function(result){
 			
-			console.log(JSON.stringify(result));
+			$('#TradeNum .chioce-button').remove();
+			mui.cacheData.clear();
 			$.each(result.data,function(index, obj){
-				console.log(JSON.stringify(obj));
-				tplFillData("TradeNum", "tpTradeNum", obj, FillType.before);
-				obj.lever=2
-				obj.stopProfit="10000,20000,30000,50000,100000";
+				tplFillData("TradeNum", "tpTradeNum", obj, FillType.after);
+				mui.cacheData.savezy(obj.lever,obj.stopProfit);
+				mui.cacheData.savezs(obj.lever,obj.stopLoss);
+				
 			});
+			
+			
+			$("#TradeNum button:first-child").addClass('on');
+			var num0=$("#TradeNum button:first-child").text().substr(0,1);
+			
+			var arrayCFZY0= mui.cacheData.getzy(num0+'zy').split(',');//触发止盈数组
+			$('#stopWin010 .chioce-button').remove();
+			$.each(arrayCFZY0,function(index,value){
+					$('#stopWin010').append('<button class="chioce-button">'+value+'</button>');
+			});
+			$('#stopWin010 button:first-child').addClass('on');
+			
+			$("#stopWin010 .chioce-button").on('tap',function(){
+				
+				$(this).addClass('on'); // 设置被点击元素为黄色
+				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+			});
+			
+			var arrayCFZS0= mui.cacheData.getzy(num0+'zs').split(',');//触发止盈数组
+			$('#stopLoss010 .chioce-button').remove();
+			$.each(arrayCFZS0,function(index,value){
+					$('#stopLoss010').append('<button class="chioce-button">'+value+'</button>');
+			});
+			$('#stopLoss010 button:first-child').addClass('on');
+			
+			
+			
+			$("#stopLoss010 .chioce-button").on('tap',function(){
+					
+				$(this).addClass('on'); // 设置被点击元素为黄色
+				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+			});
+			
+			
+			$("#TradeNum .chioce-button").on("tap", function() {
+				$(this).addClass('on'); // 设置被点击元素为黄色
+				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				
+				var num = $(this).text().substr(0,1);//手数
+				var arrayCFZY= mui.cacheData.getzy(num+'zy').split(',');//触发止盈数组
+				$('#stopWin010 .chioce-button').remove();
+				$.each(arrayCFZY,function(index,value){
+					$('#stopWin010').append('<button class="chioce-button">'+value+'</button>');
+				});
+				
+				var arrayCFZS= mui.cacheData.getzs(num+'zs').split(',');//触发止损数组
+				$('#stopLoss010 .chioce-button').remove();
+				$.each(arrayCFZS,function(index,value){
+					$('#stopLoss010').append('<button class="chioce-button">'+value+'</button>');
+				});
+				
+				$("#stopWin010 .chioce-button").on('tap',function(){
+				
+					$(this).addClass('on'); // 设置被点击元素为黄色
+					$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				});
+			
+				$("#stopLoss010 .chioce-button").on('tap',function(){
+					
+					$(this).addClass('on'); // 设置被点击元素为黄色
+					$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				});
+				
+				
+				
+			});
+			
 			
 		}
 		
 	);
+	
+	
 	
 });
 
@@ -362,19 +433,7 @@ $('#orderListButton').on('tap',function(){
 
 
 
-$("#TradeNum .chioce-button").on("tap", function() {
-		$(this).addClass('on'); // 设置被点击元素为黄色
-		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
-	});
 	
-$("#stopWin010 .chioce-button").on("tap", function() {
-		$(this).addClass('on'); // 设置被点击元素为黄色
-		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
-	});	
-$("#stopLoss010 .chioce-button").on("tap", function() {
-		$(this).addClass('on'); // 设置被点击元素为黄色
-		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
-	});		
 	
 $("#placeOrder .chioce-button").on("tap", function() {
 		$(this).addClass('on'); // 设置被点击元素为黄色

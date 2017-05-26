@@ -1098,7 +1098,9 @@
 					"css/mui.min.css",
 					"img/startG1.png"
 				],
-				"refer": [],
+				"refer": [
+					"vs/quote/quoteTrade.html"
+				],
 				"priority": 0
 			}
 		},

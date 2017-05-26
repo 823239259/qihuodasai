@@ -685,6 +685,9 @@
 			"img/startG2.png",
 			"css/mui.min.css",
 			"img/startG1.png"
+		],
+		"refer": [
+			"vs/quote/quoteTrade.html"
 		]
 	}
 }

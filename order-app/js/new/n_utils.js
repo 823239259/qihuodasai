@@ -671,14 +671,20 @@ function fixedPriceByContract(price, commodityNo) {
  */
 mui.cacheData ={
 	
-	save: function(key, value) {
-			localStorage.setItem(key, value);
+	savezy: function(key, value) {
+			localStorage.setItem(key+'zy', value);
 	},
-	get: function(key) {
+	getzy: function(key) {
 			return localStorage.getItem(key);
 	},
 	clear: function() {
 			localStorage.clear();
+	},
+	savezs: function(key, value) {
+			localStorage.setItem(key+'zs', value);
+	},
+	getzs: function(key) {
+			return localStorage.getItem(key);
 	},
 }
 

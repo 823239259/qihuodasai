@@ -536,24 +536,22 @@
 						<p id="flashPassageway">快速通道设置</p>
 						<div class="flash-seting-content" >
 							<ul>
-								<!--<label>交易数量：</label>-->
-								<li id="TradeNum">
+								
+								<li style="position: relative;">
+									<label>交易数量：</label>
+									<c id="TradeNum" style="width: 80%; float: right; position: absolute; top: 13px;">
 									<!--tpTradeNum-->
-									
+									</c>
 								</li>
-								<li id="stopWin010">
-									<!--tpstopWin010-->
-									<!--<label>触发止盈：</label>-->
-									<!--<span id="closeProfitTableSeting">1440元</span>-->
-									<button class="chioce-button ">1440元</button>
-									
+								<li style="position: relative;">
+									<label>触发止盈：</label>
+									<c id="stopWin010" style="width: 80%; float: right; position: absolute; top: 13px;">
+									</c>
 								</li>
-								<li id="stopLoss010">
-									<!--tpstopLoss010-->
+								<li style="position: relative;">
 									<label>触发止损：</label>
-									<!--<span id="closeLossTableSeting">1440元</span>-->
-									<button class="chioce-button ">1440元</button>
-									
+									<c id="stopLoss010" style="width: 80%; float: right; position: absolute; top: 13px;">
+									</c>
 								</li>
 							</ul>
 						</div>
@@ -669,6 +667,16 @@
 	<script type="text/javascript" src="../../js/new/quoteTrade.js"></script>
 	-->
 	<script type="text/javascript">
+	
+	
+	$("#stopWin010 .chioce-button").on("tap", function() {
+			$(this).addClass('on'); // 设置被点击元素为黄色
+			$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+		});	
+	$("#stopLoss010 .chioce-button").on("tap", function() {
+		$(this).addClass('on'); // 设置被点击元素为黄色
+		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+	});		
 	var layer, form, element, laytpl;
 	layui.use(['layer', 'form', 'element', 'laytpl'],function(){
 		layer = layui.layer,
@@ -774,13 +782,7 @@
 			<button class="chioce-button">{{d.lever+'手'}}</button>
 		{{# } }}
 	</script>
-	<script id="tpstopWin010" type="text/html">
-		{{# if(!isEmpty(d)){ }}
-			<button class="chioce-button">{{d.stopProfit}}</button>
-		{{# } }}
-		
-	</script>
-	
+
 	<script type="text/javascript">
 		mui.init();
 		vs.callService();

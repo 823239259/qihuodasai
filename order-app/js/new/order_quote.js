@@ -157,7 +157,7 @@ function quoteHandleData(evt) {
 		HeartBeat00.lastHeartBeatTimestamp = new Date().getTime();
 		updateQuoteInfo(jsonData.Parameters); // 更新最新行情信息
 //		UpdateHoldProfit(jsonData.Parameters); // 更新持仓盈亏
-		dealOnRtnQuoteData(jsonData);
+//		dealOnRtnQuoteData(jsonData);
 		//闪电图
 		if(is_shandian) {
 			lightChartData(jsonData);
