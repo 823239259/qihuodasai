@@ -74,7 +74,7 @@
 			<div class="content-circular"></div>
 			<div class="content-right">
 				<p>{{item.liveContent}}</p>
-				<div class='xians' style='background: #fff;z-index: 5; width: 100%; position: absolute; top: 90px;'><span class='caoz'>展开</div>
+				<div class='xians' style='background: #fff;z-index: 5; width: 100%; position: absolute; top: 103px;'><span class='caoz'>展开</div>
 			</div>
 		</li>
 		{{#			}	}); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
@@ -90,7 +90,7 @@
 			laytpl = layui.laytpl;
 		});
 		
-		mui.plusReady(function() {
+//		mui.plusReady(function() {
 			$.ajax({
 				url: "http://www.vs.com/crawler/getCrawlerByChannelLiveContent",
 				type: "get",
@@ -105,7 +105,7 @@
 						vs.tplFillData("newsList", "tplNews", res.data.data, vs.constants.FillType.after);
 						for(var j= 0;j<$("#searchResultContainer ul li .content-right").length; j++){
 							if($("#searchResultContainer ul li .content-right").eq(j).height() > 85){
-								$("#searchResultContainer ul li .content-right").eq(j).css("height","112px");
+								$("#searchResultContainer ul li .content-right").eq(j).css("height","120px");
 							}else{
 								$("#searchResultContainer ul li .content-right").eq(j).find(".caoz").css("display","none");
 							}
@@ -122,10 +122,10 @@
 									"z-index": "999",
 									"width": "100%",
 									"position": "absolute",
-									"top": "90px",
+									"top": "103px",
 									"height": "21px"
 								});
-								_this.parent().parent().css("height","112px");
+								_this.parent().parent().css("height","120px");
 								_this.html("展开");
 							}
 						});
@@ -143,7 +143,7 @@
 					ul.append(li);
 				}
 			});
-		});
+//		});
 
 		//		/*加载更多*/
 		//		var url = "http://www.vs.com/crawler/getCrawlerByChannelLiveContent";
