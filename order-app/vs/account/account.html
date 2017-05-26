@@ -43,7 +43,7 @@
 			</div>
 			<div class="account-title">
 				<ul class="mui-table-view mui-table-view-chevron ac-list">
-					<li class="mui-table-view-cell">
+					<li class="mui-table-view-cell" id="accountSetting">
 						<a class="mui-navigate-right" href="javascript:void(0)" id=""><img src="../../img/account/signImg.png"><span id="accountName">您好，请先登录喔~O(∩_∩)O</span></a>
 					</li>
 					<li class="account-tab">
@@ -52,10 +52,10 @@
 						<div class="account-signer">
 							<ul>
 								<li class="mui-media mui-col-xs-6 mui-col-sm-6">
-									<p class="account-signer-left" id="login">登录</p>
+									<p class="account-signer-left" id="recharge">充值</p>
 								</li>
 								<li class="mui-media mui-col-xs-6 mui-col-sm-=6">
-									<p class="account-signer-right" id="regist">注册</p>
+									<p class="account-signer-right" id="withdrawals">提现</p>
 								</li>
 							</ul>
 						</div>
@@ -140,9 +140,13 @@
 				id: "Invitation"
 			});
 		});
+		document.getElementById("recharge").addEventListener("tap", function() {
+			mui.open_window_data("recharge.html", "recharge", { "money": "0"});	
+		});
+		
 		document.getElementById("login").addEventListener("tap", function() {
 			if(mui.cacheUser.isLogin()) {
-				mui.open_window_data("recharge.html", "recharge", { "money": "0"});
+				
 			} else {
 				mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "app-game-order/vs/account/account.html" });
 			}
@@ -154,20 +158,6 @@
 		});
 		document.getElementById("regist").addEventListener("tap", function() {
 			if(mui.cacheUser.isLogin()) {
-				if(isCertification){
-					if(bankList.length<=0){
-						mui.confirm("您当前还未添加银行卡，为保障您的账户安全，请先添加银行卡！","提示",["取消，确认"],function(){
-						mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "account", "url": "account.html" });
-					});
-					}else{
-						mui.openWindow({ "url": "Withdrawals.html", "id": "Withdrawals" });
-					}
-				}else{
-					mui.confirm("您当前还未实名认证，为保障您的账户安全，请先实名认证！","提示",["取消，确认"],function(){
-						mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
-					});
-				}
-				
 			} else {
 				mui.openWindow({
 					url: "../login/register.html",
@@ -175,6 +165,23 @@
 				})
 			}
 		});
+		
+		document.getElementById("withdrawals").addEventListener("tap", function() {
+			if(isCertification){
+				if(bankList.length<=0){
+					mui.confirm("您当前还未添加银行卡，为保障您的账户安全，请先添加银行卡！","提示",["取消，确认"],function(){
+					mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "account", "url": "account.html" });
+				});
+				}else{
+					mui.openWindow({ "url": "Withdrawals.html", "id": "Withdrawals" });
+				}
+			}else{
+				mui.confirm("您当前还未实名认证，为保障您的账户安全，请先实名认证！","提示",["取消，确认"],function(){
+					mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
+				});
+			}
+		});
+		
 		document.getElementById("signOut").addEventListener("tap", function() {
 			if(mui.cacheUser.isLogin()) {
 				mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
@@ -189,25 +196,19 @@
 		if(mui.cacheUser.isLogin()) {
 			$(".mui-backdrop").hide();
 			$(".main_nolg").hide();
-			$(".account-signer").hide();
 			$("#accountName").show();
-			document.getElementById("login").innerText = "充值";
-			document.getElementById("regist").innerText = "提现";
 			document.getElementById("signOut").innerText = "退出";
+			$(".account-signer").show();
 			mui.app_request('/user/getbalancerate', {
 				"businessType": 4
 			}, function(result) {
-				console.log(JSON.stringify(result));
 				if(result.success == true) {
 					insertAccountData(result.data)
 				}
 			}, function(res) {});
 		} else {
-			$(".mui-backdrop").show();
-			$(".main_nolg").show();
 			$(".account-signer").hide();
 			$("#accountName").hide();
-//			mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
 		}
 
 		function insertAccountData(data) {
