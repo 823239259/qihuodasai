@@ -318,7 +318,8 @@
 					"js/new/order_quote.js",
 					"js/quote_echarts/quote.lghtning.chart.js",
 					"lib/layui/css/layui.css",
-					"js/new/order_trade.js"
+					"js/new/order_trade.js",
+					"lib/layui/css/modules/layer/default/icon.png"
 				],
 				"refer": [
 					"vs/directSeed/directSeed.html",
@@ -423,7 +424,8 @@
 					"img/found_on.png",
 					"img/account/accountCapital.png",
 					"img/myOn.png",
-					"img/account/signImg.png"
+					"img/account/signImg.png",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"vs/home/home.html",
@@ -482,7 +484,8 @@
 					"img/Japan.png",
 					"img/Britain.png",
 					"img/allCity.png",
-					"img/Belgium.png"
+					"img/Belgium.png",
+					"img/Italy.png"
 				],
 				"refer": [
 					"vs/find/find.html",
@@ -754,7 +757,8 @@
 					"vs/find/find.html",
 					"vs/ym/a.html",
 					"vs/home/home.html",
-					"guide.html"
+					"guide.html",
+					"vs/quote/quoteTrade.html"
 				],
 				"priority": 0
 			},
@@ -775,7 +779,8 @@
 				],
 				"refer": [
 					"vs/login/register.html",
-					"vs/home/home.html"
+					"vs/home/home.html",
+					"vs/account/customerService.html"
 				],
 				"priority": 0
 			},
