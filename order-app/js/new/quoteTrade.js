@@ -48,6 +48,14 @@ $("#list").on('tap','li',function(){
 	
 	//为select赋值
 	$('#contract').val(CommodityNoContractNo);
+	console.log(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));
+	//判断是否存在闪电设置
+	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null){
+//		$('#placeOrderBidPrice1').unbind('tap');
+		$('#placeOrder00').attr('href','#');
+	}
+	
+	
 });
 
 //为盘口赋值
@@ -651,22 +659,22 @@ $('#flashButton').on('tap',function(){
 					var zsj= $(this).text();//止损价
 					var lybzj = hdbzj*num + Number(zsj);//滑点保证金*手数+止损价=履约保证金
 					$('#performance_margin').text(lybzj+'元');
+					
+					var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
+					superPoundage = poundage*num;
+					super_lybzj_ = lybzj;
 				});
 				
 				
 				//手续费
 				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
 				$('#poundage').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
-				superPoundage = poundage*num;
 				
 				//履约保证金
 				var _hdbzj_ = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
 				var _zsj_= 0;//止损价
 				var _lybzj_ = _hdbzj_*num;//滑点保证金*手数+止损价=履约保证金
 				$('#performance_margin').text(_lybzj_+'元');
-				super_lybzj_ = _lybzj_;
-				
-				
 				
 			});
 			<!---------------------------------------------------------------------------->
@@ -674,15 +682,26 @@ $('#flashButton').on('tap',function(){
 					var tradeNum=$('#TradeNum .on').text();
 					var stopWin= $('#stopWin010 .on').text();
 					var stopLoss= $('#stopLoss010 .on').text();
-					var lybzj = 
+					var poundage = $('#poundage').text().substr($('#poundage').text().indexOf(')')+2, $('#poundage').text().indexOf('元'));
+					poundage = poundage.substr(0,poundage.length-1);
+					var lybzj =
 					$('#performance_margin').text().substr(0,$('#performance_margin').text().length-1);//履约保证金
 					var commodityNo = SuperCommodityNo;
+					
+					
+					
+					mui.cacheData.removeFlash(phone+commodityNo+'tradeNum');
+					mui.cacheData.removeFlash(phone+commodityNo+'stopWin');
+					mui.cacheData.removeFlash(phone+commodityNo+'stopLoss');
+					mui.cacheData.removeFlash(phone+commodityNo+'lybzj');
+					mui.cacheData.removeFlash(phone+commodityNo+'zfzje');
+					
 					//phone 变量在common.js最后一行
-//					mui.cacheData.saveFlash(phone+commodityNo+'tradeNum',tradeNum);//交易数量
-//					mui.cacheData.saveFlash(phone+commodityNo+'stopWin',stopWin);//止盈
-//					mui.cacheData.saveFlash(phone+commodityNo+'stopLoss',stopLoss);//止损
-//					mui.cacheData.saveFlash(phone+commodityNo+'lybzj',lybzj);//履约保证金
-//					mui.cacheData.saveFlash(phone+commodityNo+'zfzje',superPoundage+super_lybzj_);//支付总金额（不含下单费用）
+					mui.cacheData.saveFlash(phone+commodityNo+'tradeNum',tradeNum);//交易数量
+					mui.cacheData.saveFlash(phone+commodityNo+'stopWin',stopWin);//止盈
+					mui.cacheData.saveFlash(phone+commodityNo+'stopLoss',stopLoss);//止损
+					mui.cacheData.saveFlash(phone+commodityNo+'lybzj',lybzj);//履约保证金
+					mui.cacheData.saveFlash(phone+commodityNo+'zfzje',Number(poundage)+Number(lybzj));//支付总金额（不含下单费用）
 					
 			});
 			

@@ -721,6 +721,9 @@ mui.cacheData ={
 	},
 	getFlash:function(key){
 		return localStorage.getItem(key);
+	},
+	removeFlash:function(key){
+		return localStorage.removeItem(key);
 	}
 }
 
