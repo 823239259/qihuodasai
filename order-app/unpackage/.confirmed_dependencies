@@ -1,712 +1,712 @@
 {
-	"index.html": {
-		"resources": [
-			"css/mui.min.css",
-			"js/mui.min.js"
-		],
-		"refer": [
-			"vs/quote/quoteTrade.html",
-			"vs/find/find.html",
-			"vs/home/home.html",
-			"vs/account/account.html",
-			"vs/directSeed/directSeed.html"
-		]
-	},
-	"vs/quote/quoteTrade.html": {
-		"resources": [
-			"fonts/mui.ttf",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"img/backBg.png",
-			"css/common.css",
-			"css/quoteTrade.css",
-			"img/quote/whiteSanjiao.png",
-			"js/quote/quote.config.js",
-			"js/jquery-1.11.3.js",
-			"js/quote/quote.candlestick.chart.js",
-			"js/quote/quoteBindEvent.js",
-			"js/lay/modules/laytpl.js",
-			"js/quote/echarts.min.js",
-			"js/quote/quote.send.js",
-			"js/mui.view.js",
-			"js/mui.pullToRefresh.js",
-			"js/quote/mui.page.js",
-			"img/quote/flash.png",
-			"js/quote/quote.time.chart.js",
-			"js/mui.pullToRefresh.material.js",
-			"js/layui.js",
-			"js/quote/quote.lghtning.chart.js",
-			"js/quote/quote.connect.js",
-			"js/quote/quote.js",
-			"js/quote/chart.config.js",
-			"js/alertProtype.js",
-			"css/layui.css",
-			"img/homeOn.png",
-			"img/banner_load.jpg",
-			"css/home.css",
-			"img/home_list_1.png",
-			"img/found.png",
-			"js/new/n_utils.js",
-			"js/quote_echarts/quote.candlestick.chart.js",
-			"lib/layui/lay/modules/laytpl.js",
-			"lib/layui/lay/modules/form.js",
-			"lib/layui/lay/modules/element.js",
-			"js/quote_echarts/quote.time.chart.js",
-			"js/quote_echarts/echarts.min.js",
-			"js/new/quoteTrade.js",
-			"lib/layui/layui.js",
-			"lib/layui/lay/modules/layer.js",
-			"js/quote_echarts/chart.config.js",
-			"js/new/n_trade_vo.js",
-			"lib/layui/css/modules/layer/default/layer.css",
-			"js/new/n_quote_vo.js",
-			"js/new/order_quote.js",
-			"js/quote_echarts/quote.lghtning.chart.js",
-			"lib/layui/css/layui.css",
-			"js/new/order_trade.js",
-			"img/my.png",
-			"img/find/find_3.png",
-			"img/find/find_1.png",
-			"css/own.css",
-			"img/find/find_2.png",
-			"img/directSeeding.png",
-			"lib/layui/css/modules/layer/default/icon.png"
-		],
-		"refer": [
-			"vs/account/account.html",
-			"vs/find/find.html"
-		]
-	},
-	"vs/find/find.html": {
-		"resources": [
-			"img/find/find_3.png",
-			"css/own.css",
-			"img/find/find_2.png",
-			"fonts/mui.ttf",
-			"img/find/find_6.png",
-			"img/find/find_1.png",
-			"css/find.css",
-			"img/find/find_4.png",
-			"img/find/find_5.png",
-			"img/my.png",
-			"css/common.css",
-			"img/home.png",
-			"img/directSeeding.png",
-			"img/found_on.png",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/common.js",
-			"img/foundOn.png",
-			"js/immersed.js",
-			"js/mui.pullToRefresh.js",
-			"js/jquery-1.11.3.js",
-			"js/mui.pullToRefresh.material.js"
-		],
-		"refer": [
-			"vs/account/account.html",
-			"vs/quote/placeOrder.html",
-			"vs/home/home.html",
-			"vs/directSeed/directSeed.html",
-			"vs/find/activityCenter/activityCenter.html",
-			"vs/find/informationCenter/informationCenter.html",
-			"vs/quote/quoteTrade.html"
-		]
-	},
-	"vs/home/home.html": {
-		"resources": [
-			"img/my.png",
-			"fonts/mui.ttf",
-			"img/banner_load.jpg",
-			"css/home.css",
-			"img/find/find_3.png",
-			"css/own.css",
-			"img/find/find_2.png",
-			"css/common.css",
-			"img/direct seeding.png",
-			"img/home_list_1.png",
-			"img/home_on.png",
-			"img/find/find_1.png",
-			"img/found.png",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"img/directSeeding.png",
-			"img/my_on.png",
-			"img/home.png",
-			"js/common.js",
-			"img/homeOn.png",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": [
-			"vs/directSeed/directSeed.html",
-			"vs/account/account.html"
-		]
-	},
-	"vs/account/account.html": {
-		"resources": [
-			"img/account/accountSettings.png",
-			"fonts/mui.ttf",
-			"img/account/accountcapital.png",
-			"img/my_on.png",
-			"css/own.css",
-			"js/common.js",
-			"img/account/accountOpinion.png",
-			"css/common.css",
-			"img/direct seeding.png",
-			"img/account/accountDetailed.png",
-			"img/account/accountDiscount.png",
-			"css/account.css",
-			"img/found.png",
-			"img/home.png",
-			"img/account/sign_img.png",
-			"img/account/accountInvitation.png",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"img/directSeeding.png",
-			"img/my.png",
-			"img/found_on.png",
-			"img/account/accountCapital.png",
-			"img/myOn.png",
-			"img/account/signImg.png",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": [
-			"vs/home/home.html",
-			"vs/account/operateDetailed.html",
-			"vs/account/accountSetting.html",
-			"vs/account/coupon.html",
-			"vs/account/feedback.html",
-			"vs/account/customerService.html",
-			"vs/account/insertBank.html",
-			"vs/account/modifyBank.html",
-			"vs/account/modifyLoginPassword.html",
-			"vs/account/myBankCard.html",
-			"vs/account/presentationRecord.html",
-			"vs/account/realNameVerification.html",
-			"vs/account/withdramalsPassword.html",
-			"vs/account/Withdrawals.html",
-			"vs/find/find.html",
-			"vs/login/login.html",
-			"vs/login/register.html",
-			"vs/account/recharge.html",
-			"vs/directSeed/directSeed.html",
-			"vs/account/Invitation.html",
-			"vs/account/fundDetails.html",
-			"vs/quote/quoteTrade.html"
-		]
-	},
-	"vs/directSeed/directSeed.html": {
-		"resources": [
-			"img/my.png",
-			"img/directSeeding_on.png",
-			"css/own.css",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"img/found.png",
-			"img/home.png",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"img/directSeedCalendar.png",
-			"img/directSeed-country.png",
-			"js/mui.picker.min.js",
-			"js/jquery-1.11.3.js",
-			"css/directSeed.css",
-			"img/China.png",
-			"img/directSeedingOn.png",
-			"img/directSeed-clock.png",
-			"css/mui.picker.min.css",
-			"js/mui.pullToRefresh.js",
-			"js/mui.pullToRefresh.material.js",
-			"js/common.js",
-			"js/directSeed.js",
-			"img/Canada.png",
-			"img/USA.png",
-			"img/Germany.png",
-			"img/Britain.png",
-			"img/Belgium.png",
-			"img/Eurozone.png",
-			"img/Australia.png",
-			"img/Zealand.png",
-			"img/Japan.png",
-			"img/allCity.png",
-			"img/Italy.png",
-			"img/Switzerland.png"
-		],
-		"refer": [
-			"vs/find/find.html",
-			"vs/directSeed/search.html",
-			"vs/home/home.html"
-		]
-	},
-	"vs/quote/placeOrder.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/jquery-1.11.3.js",
-			"css/flashSeting.css",
-			"img/quote/rightArrow.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"vs/account/operateDetailed.html": {
-		"resources": [
-			"img/backBg.png",
-			"img/account/borderLine.png",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/mui.min.js"
-		],
-		"refer": []
-	},
-	"vs/account/accountSetting.html": {
-		"resources": [
-			"img/account/accountSetting1.png",
-			"img/backBg.png",
-			"img/account/accountSetting4.png",
-			"fonts/mui.ttf",
-			"img/account/accountSetting5.png",
-			"img/account/accountSetting6.png",
-			"img/account/accountSetting3.png",
-			"css/own.css",
-			"img/account/newBG.png",
-			"css/common.css",
-			"js/mui.min.js",
-			"css/account.css",
-			"css/mui.min.css",
-			"img/account/accountSetting7.png",
-			"img/account/accountSetting2.png",
-			"js/common.js",
-			"img/weixinshare.png",
-			"img/close.png"
-		],
-		"refer": [
-			"vs/account/realNameVerification.html",
-			"vs/account/myBankCard.html",
-			"vs/account/modifyLoginPassword.html",
-			"vs/account/withdramalsPassword.html",
-			"vs/account/modifyPhone.html"
-		]
-	},
-	"vs/account/coupon.html": {
-		"resources": [
-			"img/account/couponTitleBg.png",
-			"img/backBg.png",
-			"js/common.js",
-			"img/account/careful.png",
-			"js/mui.min.js",
-			"css/common.css",
-			"img/account/couponTitleBgOverdue.png",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"img/account/time.png",
-			"img/account/couponTitleBgUse.png",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": []
-	},
-	"vs/account/feedback.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/common.js",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": []
-	},
-	"vs/account/customerService.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"online.html"
-		]
-	},
-	"vs/account/insertBank.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/mui.min.js",
-			"css/common.css",
-			"css/account.css",
-			"css/mui.min.css",
-			"fonts/mui.ttf",
-			"js/common.js",
-			"js/city.data.js",
-			"js/mui.picker.min.js",
-			"js/mui.picker.js",
-			"css/mui.picker.css",
-			"css/mui.picker.min.css",
-			"js/mui.poppicker.js",
-			"css/mui.picker.all.css",
-			"css/mui.poppicker.css",
-			"css/app.css"
-		],
-		"refer": []
-	},
-	"vs/account/modifyBank.html": {
-		"resources": [
-			"img/backBg.png",
-			"img/bank/cmb.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/mui.picker.min.js",
-			"js/mui.poppicker.js",
-			"js/city.data.js",
-			"css/mui.picker.min.css",
-			"css/mui.poppicker.css"
-		],
-		"refer": []
-	},
-	"vs/account/modifyLoginPassword.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/jquery-1.11.3.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/common.js"
-		],
-		"refer": []
-	},
-	"vs/account/myBankCard.html": {
-		"resources": [
-			"img/backBg.png",
-			"img/bank/cmb.png",
-			"img/account/accountBankBg.png",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/common.js",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": [
-			"vs/account/insertBank.html",
-			"vs/account/Withdrawals.html",
-			"vs/account/modifyBank.html",
-			"vs/account/realNameVerification.html"
-		]
-	},
-	"vs/account/presentationRecord.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"vs/account/realNameVerification.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/jquery-1.11.3.js",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"vs/account/withdramalsPassword.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/common.js",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": []
-	},
-	"vs/account/Withdrawals.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/common.js",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": [
-			"vs/account/presentationRecord.html"
-		]
-	},
-	"startPage.html": {
-		"resources": [
-			"img/startPageBG.png",
-			"css/own.css",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"css/account.css",
-			"css/mui.min.css",
-			"js/common.js"
-		],
-		"refer": [
-			"vs/find/find.html",
-			"vs/home/home.html",
-			"guide.html",
-			"vs/quote/quoteTrade.html"
-		]
-	},
-	"vs/login/login.html": {
-		"resources": [
-			"img//login/ipnoneBimg.png",
-			"img/login/inputBimg.png",
-			"img//login/passWord.png",
-			"css/login.css",
-			"img/login/LOGO.png",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"vs/login/register.html",
-			"vs/home/home.html",
-			"vs/account/customerService.html"
-		]
-	},
-	"vs/login/register.html": {
-		"resources": [
-			"img//login/ipnoneBimg.png",
-			"css/own.css",
-			"img/login/inputBimg.png",
-			"js/common.js",
-			"img//login/passWord.png",
-			"js/mui.min.js",
-			"css/login.css",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"img/login/registerInputOn.png",
-			"img/login/LOGO.png"
-		],
-		"refer": [
-			"vs/login/login.html",
-			"vs/login/confirmPassword.html"
-		]
-	},
-	"vs/account/recharge.html": {
-		"resources": [
-			"img/backBg.png",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"vs/account/choicePayment.html"
-		]
-	},
-	"vs/directSeed/search.html": {
-		"resources": [
-			"img/garbage.png",
-			"css/search.css",
-			"img/searchIcon.png"
-		],
-		"refer": []
-	},
-	"vs/find/activityCenter/activityCenter.html": {
-		"resources": [
-			"js/mui.pullToRefresh.js",
-			"js/mui.pullToRefresh.material.js",
-			"css/activityCenter.css",
-			"img/searchResult.png",
-			"img/backBg.png"
-		],
-		"refer": []
-	},
-	"online.html": {
-		"resources": [
-			"css/about.css",
-			"img/backBg.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"vs/account/choicePayment.html": {
-		"resources": [
-			"css/recharge.css",
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"css/account.css",
-			"css/mui.min.css",
-			"img/backBg.png",
-			"fonts/mui.ttf",
-			"img/recharge/bankP.png",
-			"img/recharge/Transfer.png",
-			"img/recharge/zhifubao.png",
-			"js/pingpp.js"
-		],
-		"refer": [
-			"vs/account/gopay.html",
-			"vs/account/bindzhifubao.html",
-			"vs/account/bankPay.html"
-		]
-	},
-	"vs/account/Invitation.html": {
-		"resources": [
-			"js/mui.pullToRefresh.js",
-			"js/mui.pullToRefresh.material.js",
-			"img/backBg.png",
-			"img/weixinshare.png",
-			"fonts/mui.ttf",
-			"img/fenxiang.png",
-			"img/qqshare.png",
-			"css/own.css",
-			"js/common.js",
-			"css/common.css",
-			"js/mui.min.js",
-			"css/account.css",
-			"css/mui.min.css",
-			"img/weiboshare.png",
-			"js/immersed.js",
-			"js/share.js",
-			"js/jquery-1.11.3.js"
-		]
-	},
-	"vs/account/gopay.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"js/jquery-1.11.3.js",
-			"css/mui.min.css"
-		]
-	},
-	"vs/account/bindzhifubao.html": {
-		"resources": [
-			"css/own.css",
-			"js/common.js",
-			"js/mui.min.js",
-			"js/jquery-1.11.3.js",
-			"css/recharge.css",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"img/backBg.png",
-			"css/common.css",
-			"css/account.css"
-		]
-	},
-	"vs/account/bankPay.html": {
-		"resources": [
-			"css/recharge.css",
-			"img/bank/bank1.png",
-			"img/bank/bank_04.gif",
-			"img/backBg.png",
-			"fonts/mui.ttf",
-			"img/bank/bank_01.gif",
-			"css/own.css",
-			"img/bank/bank_03.gif",
-			"js/common.js",
-			"css/common.css",
-			"js/mui.min.js",
-			"css/account.css",
-			"img/bank/bank_02.gif",
-			"css/mui.min.css"
-		]
-	},
-	"vs/find/informationCenter/informationCenter.html": {
-		"resources": [
-			"js/mui.pullToRefresh.js",
-			"css/own.css",
-			"img/backBg.png",
-			"js/common.js",
-			"css/informationCenter.css",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/mui.pullToRefresh.material.js",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		]
-	},
-	"vs/account/fundDetails.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css"
-		]
-	},
-	"vs/account/modifyPhone.html": {
-		"resources": [
-			"img/backBg.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"css/common.css",
-			"js/jquery-1.11.3.js",
-			"fonts/mui.ttf",
-			"css/account.css",
-			"css/mui.min.css"
-		]
-	},
-	"guide.html": {
-		"resources": [
-			"css/own.css",
-			"img/startG2.png",
-			"css/mui.min.css",
-			"img/startG1.png",
-			"js/common.js",
-			"js/mui.min.js",
-			"js/jquery-1.11.3.js"
-		],
-		"refer": [
-			"vs/quote/quoteTrade.html"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "vs/quote/quoteTrade.html",
+      "vs/find/find.html",
+      "vs/home/home.html",
+      "vs/account/account.html",
+      "vs/directSeed/directSeed.html"
+    ]
+  },
+  "vs/quote/quoteTrade.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "img/backBg.png",
+      "css/common.css",
+      "css/quoteTrade.css",
+      "img/quote/whiteSanjiao.png",
+      "js/quote/quote.config.js",
+      "js/jquery-1.11.3.js",
+      "js/quote/quote.candlestick.chart.js",
+      "js/quote/quoteBindEvent.js",
+      "js/lay/modules/laytpl.js",
+      "js/quote/echarts.min.js",
+      "js/quote/quote.send.js",
+      "js/mui.view.js",
+      "js/mui.pullToRefresh.js",
+      "js/quote/mui.page.js",
+      "img/quote/flash.png",
+      "js/quote/quote.time.chart.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/layui.js",
+      "js/quote/quote.lghtning.chart.js",
+      "js/quote/quote.connect.js",
+      "js/quote/quote.js",
+      "js/quote/chart.config.js",
+      "js/alertProtype.js",
+      "css/layui.css",
+      "img/homeOn.png",
+      "img/banner_load.jpg",
+      "css/home.css",
+      "img/home_list_1.png",
+      "img/found.png",
+      "js/new/n_utils.js",
+      "js/quote_echarts/quote.candlestick.chart.js",
+      "lib/layui/lay/modules/laytpl.js",
+      "lib/layui/lay/modules/form.js",
+      "lib/layui/lay/modules/element.js",
+      "js/quote_echarts/quote.time.chart.js",
+      "js/quote_echarts/echarts.min.js",
+      "js/new/quoteTrade.js",
+      "lib/layui/layui.js",
+      "lib/layui/lay/modules/layer.js",
+      "js/quote_echarts/chart.config.js",
+      "js/new/n_trade_vo.js",
+      "lib/layui/css/modules/layer/default/layer.css",
+      "js/new/n_quote_vo.js",
+      "js/new/order_quote.js",
+      "js/quote_echarts/quote.lghtning.chart.js",
+      "lib/layui/css/layui.css",
+      "js/new/order_trade.js",
+      "img/my.png",
+      "img/find/find_3.png",
+      "img/find/find_1.png",
+      "css/own.css",
+      "img/find/find_2.png",
+      "img/directSeeding.png",
+      "lib/layui/css/modules/layer/default/icon.png"
+    ],
+    "refer": [
+      "vs/account/account.html",
+      "vs/find/find.html"
+    ]
+  },
+  "vs/find/find.html": {
+    "resources": [
+      "img/find/find_3.png",
+      "css/own.css",
+      "img/find/find_2.png",
+      "fonts/mui.ttf",
+      "img/find/find_6.png",
+      "img/find/find_1.png",
+      "css/find.css",
+      "img/find/find_4.png",
+      "img/find/find_5.png",
+      "img/my.png",
+      "css/common.css",
+      "img/home.png",
+      "img/directSeeding.png",
+      "img/found_on.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/common.js",
+      "img/foundOn.png",
+      "js/immersed.js",
+      "js/mui.pullToRefresh.js",
+      "js/jquery-1.11.3.js",
+      "js/mui.pullToRefresh.material.js"
+    ],
+    "refer": [
+      "vs/account/account.html",
+      "vs/quote/placeOrder.html",
+      "vs/home/home.html",
+      "vs/directSeed/directSeed.html",
+      "vs/find/activityCenter/activityCenter.html",
+      "vs/find/informationCenter/informationCenter.html",
+      "vs/quote/quoteTrade.html"
+    ]
+  },
+  "vs/home/home.html": {
+    "resources": [
+      "img/my.png",
+      "fonts/mui.ttf",
+      "img/banner_load.jpg",
+      "css/home.css",
+      "img/find/find_3.png",
+      "css/own.css",
+      "img/find/find_2.png",
+      "css/common.css",
+      "img/direct seeding.png",
+      "img/home_list_1.png",
+      "img/home_on.png",
+      "img/find/find_1.png",
+      "img/found.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "img/directSeeding.png",
+      "img/my_on.png",
+      "img/home.png",
+      "js/common.js",
+      "img/homeOn.png",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": [
+      "vs/directSeed/directSeed.html",
+      "vs/account/account.html"
+    ]
+  },
+  "vs/account/account.html": {
+    "resources": [
+      "img/account/accountSettings.png",
+      "fonts/mui.ttf",
+      "img/account/accountcapital.png",
+      "img/my_on.png",
+      "css/own.css",
+      "js/common.js",
+      "img/account/accountOpinion.png",
+      "css/common.css",
+      "img/direct seeding.png",
+      "img/account/accountDetailed.png",
+      "img/account/accountDiscount.png",
+      "css/account.css",
+      "img/found.png",
+      "img/home.png",
+      "img/account/sign_img.png",
+      "img/account/accountInvitation.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "img/directSeeding.png",
+      "img/my.png",
+      "img/found_on.png",
+      "img/account/accountCapital.png",
+      "img/myOn.png",
+      "img/account/signImg.png",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": [
+      "vs/home/home.html",
+      "vs/account/operateDetailed.html",
+      "vs/account/accountSetting.html",
+      "vs/account/coupon.html",
+      "vs/account/feedback.html",
+      "vs/account/customerService.html",
+      "vs/account/insertBank.html",
+      "vs/account/modifyBank.html",
+      "vs/account/modifyLoginPassword.html",
+      "vs/account/myBankCard.html",
+      "vs/account/presentationRecord.html",
+      "vs/account/realNameVerification.html",
+      "vs/account/withdramalsPassword.html",
+      "vs/account/Withdrawals.html",
+      "vs/find/find.html",
+      "vs/login/login.html",
+      "vs/login/register.html",
+      "vs/account/recharge.html",
+      "vs/directSeed/directSeed.html",
+      "vs/account/Invitation.html",
+      "vs/account/fundDetails.html",
+      "vs/quote/quoteTrade.html"
+    ]
+  },
+  "vs/directSeed/directSeed.html": {
+    "resources": [
+      "img/my.png",
+      "img/directSeeding_on.png",
+      "css/own.css",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "img/found.png",
+      "img/home.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "img/directSeedCalendar.png",
+      "img/directSeed-country.png",
+      "js/mui.picker.min.js",
+      "js/jquery-1.11.3.js",
+      "css/directSeed.css",
+      "img/China.png",
+      "img/directSeedingOn.png",
+      "img/directSeed-clock.png",
+      "css/mui.picker.min.css",
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/common.js",
+      "js/directSeed.js",
+      "img/Canada.png",
+      "img/USA.png",
+      "img/Germany.png",
+      "img/Britain.png",
+      "img/Belgium.png",
+      "img/Eurozone.png",
+      "img/Australia.png",
+      "img/Zealand.png",
+      "img/Japan.png",
+      "img/allCity.png",
+      "img/Italy.png",
+      "img/Switzerland.png"
+    ],
+    "refer": [
+      "vs/find/find.html",
+      "vs/directSeed/search.html",
+      "vs/home/home.html"
+    ]
+  },
+  "vs/quote/placeOrder.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/jquery-1.11.3.js",
+      "css/flashSeting.css",
+      "img/quote/rightArrow.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "vs/account/operateDetailed.html": {
+    "resources": [
+      "img/backBg.png",
+      "img/account/borderLine.png",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ],
+    "refer": []
+  },
+  "vs/account/accountSetting.html": {
+    "resources": [
+      "img/account/accountSetting1.png",
+      "img/backBg.png",
+      "img/account/accountSetting4.png",
+      "fonts/mui.ttf",
+      "img/account/accountSetting5.png",
+      "img/account/accountSetting6.png",
+      "img/account/accountSetting3.png",
+      "css/own.css",
+      "img/account/newBG.png",
+      "css/common.css",
+      "js/mui.min.js",
+      "css/account.css",
+      "css/mui.min.css",
+      "img/account/accountSetting7.png",
+      "img/account/accountSetting2.png",
+      "js/common.js",
+      "img/weixinshare.png",
+      "img/close.png"
+    ],
+    "refer": [
+      "vs/account/realNameVerification.html",
+      "vs/account/myBankCard.html",
+      "vs/account/modifyLoginPassword.html",
+      "vs/account/withdramalsPassword.html",
+      "vs/account/modifyPhone.html"
+    ]
+  },
+  "vs/account/coupon.html": {
+    "resources": [
+      "img/account/couponTitleBg.png",
+      "img/backBg.png",
+      "js/common.js",
+      "img/account/careful.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "img/account/couponTitleBgOverdue.png",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "img/account/time.png",
+      "img/account/couponTitleBgUse.png",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": []
+  },
+  "vs/account/feedback.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": []
+  },
+  "vs/account/customerService.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "online.html"
+    ]
+  },
+  "vs/account/insertBank.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/account.css",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/common.js",
+      "js/city.data.js",
+      "js/mui.picker.min.js",
+      "js/mui.picker.js",
+      "css/mui.picker.css",
+      "css/mui.picker.min.css",
+      "js/mui.poppicker.js",
+      "css/mui.picker.all.css",
+      "css/mui.poppicker.css",
+      "css/app.css"
+    ],
+    "refer": []
+  },
+  "vs/account/modifyBank.html": {
+    "resources": [
+      "img/backBg.png",
+      "img/bank/cmb.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/mui.picker.min.js",
+      "js/mui.poppicker.js",
+      "js/city.data.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css"
+    ],
+    "refer": []
+  },
+  "vs/account/modifyLoginPassword.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/jquery-1.11.3.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/common.js"
+    ],
+    "refer": []
+  },
+  "vs/account/myBankCard.html": {
+    "resources": [
+      "img/backBg.png",
+      "img/bank/cmb.png",
+      "img/account/accountBankBg.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": [
+      "vs/account/insertBank.html",
+      "vs/account/Withdrawals.html",
+      "vs/account/modifyBank.html",
+      "vs/account/realNameVerification.html"
+    ]
+  },
+  "vs/account/presentationRecord.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "vs/account/realNameVerification.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/jquery-1.11.3.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "vs/account/withdramalsPassword.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": []
+  },
+  "vs/account/Withdrawals.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": [
+      "vs/account/presentationRecord.html"
+    ]
+  },
+  "startPage.html": {
+    "resources": [
+      "img/startPageBG.png",
+      "css/own.css",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "css/account.css",
+      "css/mui.min.css",
+      "js/common.js"
+    ],
+    "refer": [
+      "vs/find/find.html",
+      "vs/home/home.html",
+      "guide.html",
+      "vs/quote/quoteTrade.html"
+    ]
+  },
+  "vs/login/login.html": {
+    "resources": [
+      "img//login/ipnoneBimg.png",
+      "img/login/inputBimg.png",
+      "img//login/passWord.png",
+      "css/login.css",
+      "img/login/LOGO.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "vs/login/register.html",
+      "vs/home/home.html",
+      "vs/account/customerService.html"
+    ]
+  },
+  "vs/login/register.html": {
+    "resources": [
+      "img//login/ipnoneBimg.png",
+      "css/own.css",
+      "img/login/inputBimg.png",
+      "js/common.js",
+      "img//login/passWord.png",
+      "js/mui.min.js",
+      "css/login.css",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "img/login/registerInputOn.png",
+      "img/login/LOGO.png"
+    ],
+    "refer": [
+      "vs/login/login.html",
+      "vs/login/confirmPassword.html"
+    ]
+  },
+  "vs/account/recharge.html": {
+    "resources": [
+      "img/backBg.png",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "vs/account/choicePayment.html"
+    ]
+  },
+  "vs/directSeed/search.html": {
+    "resources": [
+      "img/garbage.png",
+      "css/search.css",
+      "img/searchIcon.png"
+    ],
+    "refer": []
+  },
+  "vs/find/activityCenter/activityCenter.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "css/activityCenter.css",
+      "img/searchResult.png",
+      "img/backBg.png"
+    ],
+    "refer": []
+  },
+  "online.html": {
+    "resources": [
+      "css/about.css",
+      "img/backBg.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "vs/account/choicePayment.html": {
+    "resources": [
+      "css/recharge.css",
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "css/account.css",
+      "css/mui.min.css",
+      "img/backBg.png",
+      "fonts/mui.ttf",
+      "img/recharge/bankP.png",
+      "img/recharge/Transfer.png",
+      "img/recharge/zhifubao.png",
+      "js/pingpp.js"
+    ],
+    "refer": [
+      "vs/account/gopay.html",
+      "vs/account/bindzhifubao.html",
+      "vs/account/bankPay.html"
+    ]
+  },
+  "vs/account/Invitation.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "img/backBg.png",
+      "img/weixinshare.png",
+      "fonts/mui.ttf",
+      "img/fenxiang.png",
+      "img/qqshare.png",
+      "css/own.css",
+      "js/common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "css/account.css",
+      "css/mui.min.css",
+      "img/weiboshare.png",
+      "js/immersed.js",
+      "js/share.js",
+      "js/jquery-1.11.3.js"
+    ]
+  },
+  "vs/account/gopay.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js",
+      "css/mui.min.css"
+    ]
+  },
+  "vs/account/bindzhifubao.html": {
+    "resources": [
+      "css/own.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js",
+      "css/recharge.css",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "img/backBg.png",
+      "css/common.css",
+      "css/account.css"
+    ]
+  },
+  "vs/account/bankPay.html": {
+    "resources": [
+      "css/recharge.css",
+      "img/bank/bank1.png",
+      "img/bank/bank_04.gif",
+      "img/backBg.png",
+      "fonts/mui.ttf",
+      "img/bank/bank_01.gif",
+      "css/own.css",
+      "img/bank/bank_03.gif",
+      "js/common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "css/account.css",
+      "img/bank/bank_02.gif",
+      "css/mui.min.css"
+    ]
+  },
+  "vs/find/informationCenter/informationCenter.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "css/own.css",
+      "img/backBg.png",
+      "js/common.js",
+      "css/informationCenter.css",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/mui.pullToRefresh.material.js",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "vs/account/fundDetails.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css"
+    ]
+  },
+  "vs/account/modifyPhone.html": {
+    "resources": [
+      "img/backBg.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/jquery-1.11.3.js",
+      "fonts/mui.ttf",
+      "css/account.css",
+      "css/mui.min.css"
+    ]
+  },
+  "guide.html": {
+    "resources": [
+      "css/own.css",
+      "img/startG2.png",
+      "css/mui.min.css",
+      "img/startG1.png",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/jquery-1.11.3.js"
+    ],
+    "refer": [
+      "vs/quote/quoteTrade.html"
+    ]
+  }
 }

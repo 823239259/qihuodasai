@@ -5,10 +5,10 @@
 		"iPad"
 	],
 	"id": "H5710B368",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "维胜金融",/*应用名称，程序桌面图标名称*/
+	"name": "期货大赛",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
-		"code": "2017052401"
+		"code": "2017052201"
 	},
 	"description": "",/*应用描述信息*/
 	"icons": {
@@ -21,48 +21,31 @@
 		"url": ""
 	},
 	"permissions": {
-		"Accelerometer": {
-			"description": "访问加速度感应器"
-		},
-		"Audio": {
-			"description": "访问麦克风"
-		},
-		"Messaging": {
-			"description": "短彩邮件插件"
+		"Push": {
+			"description": "管理推送消息插件"
 		},
 		"Cache": {
 			"description": "管理应用缓存"
 		},
-		"Camera": {
-			"description": "访问摄像头"
-		},
+
 		"Console": {
 			"description": "跟踪调试输出日志"
 		},
-		"Contacts": {
-			"description": "访问系统联系人信息"
-		},
-		"Device": {
-			"description": "访问设备信息"
-		},
-		"Downloader": {
-			"description": "文件下载管理"
-		},
+
+
+		"Downloader": {},
 		"Events": {
 			"description": "应用扩展事件"
 		},
 		"File": {
 			"description": "访问本地文件系统"
 		},
-		"Gallery": {
-			"description": "访问系统相册"
-		},
-		"Geolocation": {
-			"description": "访问位置信息"
-		},
+
+
 		"Invocation": {
 			"description": "使用Native.js能力"
 		},
+
 		"Orientation": {
 			"description": "访问方向感应器"
 		},
@@ -85,12 +68,8 @@
 		"Zip": {
 			"description": "文件压缩与解压缩"
 		},
-		"Barcode": {
-			"description": "管理二维码扫描插件"
-		},
-		"Maps": {
-			"description": "管理地图插件"
-		},
+
+
 		"Speech": {
 			"description": "管理语音识别插件"
 		},
@@ -106,85 +85,60 @@
 		"NativeObj": {
 			"description": "原生对象"
 		},
-		"Push": {}
+		"Device": {},
+		"Accelerometer": {},
+		"Contacts": {},
+		"Maps": {},
+		"Audio": {},
+		"Camera": {},
+		"Gallery": {},
+		"Barcode": {},
+		"Geolocation": {},"Messaging":{},"Statistic":{},"Push":{},"Share":{},
+		"Share":{
+			"description": "管理分享插件"
+		}
 	},
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
 			"waiting": true
 		},
-		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
-		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {
-			"plugins": {
-				"push": {
-					"igexin": {
-						"appid": "fRLYjPxMj48DlupC7XH4P1",
-						"appkey": "d1VbMkBFjx77hyeVojN0H5",
-						"appsecret": "JWGNMyXxuK6xn7FXHKbjp"
-					}
-				}
-			},
+		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"},"sina":{"appkey":"926212424","appsecret":"39f93abbc724514ba9867a6610364e83","redirect_uri":"http://open.weibo.com/apps/1272700885/privilege/oauth","description":"可选，新浪微博分享"},"qq":{"appid":"1105527637","description":"QQ分享"}},"push":{"igexin":{"appid":"oWVlP5jSZg9l1FtY6XvfT7","appkey":"pUSSWhvhXk9piMysEHNq97","appsecret":"SKdd2WH8sl9EghFLZqjb4"}},"statics":{"umeng":{"appkey_ios":"591c025faed17931ec001c88","channelid_ios":"appstore","appkey_android":"5909ac6ff5ade4156d001192","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"frameworks": [],
+					"plistcmds":["Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true"]
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"ImmersedStatusbar": true,//沉浸式状态栏
-				"permissions": [
-					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
-					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
-					"<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.GET_TASKS\"/>",
-					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
-					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-					"<uses-feature android:name=\"android.hardware.camera\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
-					"<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
-					"<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
-					"<uses-permission android:name=\"android.permission.CAMERA\"/>"
-				]
+				"minSdkVersion":19,
+				"schemes":["test"],
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
 			},
-			"orientation": [
-				"portrait-primary"
-			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"orientation": ["portrait-primary","portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
 				"ios": {
 					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
 					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
-						"normal": "unpackage/res/icons/57x57.png", /*iPhone3/3GS程序图标，分辨率：57x57*/
-						"retina": "unpackage/res/icons/114x114.png", /*iPhone4程序图标，分辨率：114x114*/
-						"retina7": "unpackage/res/icons/120x120.png", /*iPhone4S/5/6程序图标，分辨率：120x120*/
-						"retina8": "unpackage/res/icons/180x180.png", /*iPhone6 Plus程序图标，分辨率：180x180*/
-						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
-						"spotlight-retina7": "unpackage/res/icons/80x80.png", /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone4设置页面程序图标，分辨率：29x29*/
-						"settings-retina": "unpackage/res/icons/58x58.png", /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png",
+						"retina8": "unpackage/res/icons/180x180.png",
 						"settings-retina8": "unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
@@ -205,919 +159,1676 @@
 					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
 					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
 					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "unpackage/res/icons/144x144.png",
-					"xxxhdpi": "unpackage/res/icons/192x192.png"
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"default": "images/boot/ios/640+960.png", /*iPhone3启动图片选，分辨率：320x480*/
 						"retina35": "img/boot/ios/640+960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": "img/boot/ios/640+1136.png",/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
-						"retina47": "img/boot/ios/750+1334.png",/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
-						"retina55": "img/boot/ios/1242+2208.png",/*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
-						"retina55l": "img/boot/ios/1242+2208.png"
+						"retina40": "img/boot/ios/640+1136.png",
+						"retina47": "img/boot/ios/750+1334.png",
+						"retina55": "img/boot/ios/1242+2208.png","retina55l":"img/boot/ios/1242+2208.png"
 					},
 					"ipad": {
 						"portrait": "img/boot/ios/720+1242.png", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "img/boot/ios/640+960.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"portrait-retina": "img/boot/ios/1242+2208.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
 						"landscape": "img/boot/ios/640+1136.png", /*iPad横屏启动图片，分辨率：1024x748*/
 						"landscape-retina": "img/boot/ios/1242+2208.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "img/boot/ios/640+960.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait7": "img/boot/ios/720+1242.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
 						"portrait-retina7": "img/boot/ios/1242+2208.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "img/boot/ios/720+1242.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": "img/boot/ios/750+1334.png"
+						"landscape7": "img/boot/ios/750+1334.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "img/boot/ios/1242+2208.png"
 					}
 				},
 				"android": {
-					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"mdpi": "images/boot/android/720+1242.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "images/boot/android/720+1242.png", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "img/boot/android/640+960.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "img/boot/android/720+1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xhdpi": "img/boot/android/720+1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
 					"xxhdpi": "img/boot/android/1080+1920.png"
 				}
-			}
+			},
+			"debug": false
 		}
 	},
 	"dependencies": {
 		"pages": {
-			"index.html": {
+			"main.html": {
 				"resources": [
+					"css/own.css",
+					"js/mui.min.js",
 					"css/mui.min.css",
+					"images/main.png",
+					"js/common.js",
+					"css/common.css",
+					"images/icons/LOGO.png",
+					"manifest.json",
+					"/manifest.json"
+				],
+				"refer": [
+					"tzdr/login/login.html",
+					"tzdr/login/regist.html",
+					"home.html",
+					"guide.html",
+					"tzdr/quotation/quotationMain.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/login.html": {
+				"resources": [
+					"js/common.js",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js",
+					"js/mui.enterfocus.js",
+					"js/jquery-1.11.3.js",
+					"images/login.png",
+					"images/close.png",
+					"images/LOGO.png",
+					"images/resigter.png",
+					"css/quotation.css"
+				],
+				"refer": [
+					"home.html",
+					"tzdr/login/regist.html",
+					"tzdr/login/password.html",
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/retrievePassword.html",
+					"tzdr/future/add.html",
+					"tzdr/account/accountno.html",
+					"tzdr/account/account.html"
+				],
+				"priority": 0
+			},
+			"home.html": {
+				"resources": [
+					"list.html",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/banner.jpg",
+					"images/icon_03.png",
+					"images/icon_02.png",
+					"fonts/mui.ttf",
+					"images/icon_01.png",
+					"images/icon_04.png",
+					"images/news.png",
+					"images/newson.png",
+					"images/banner_load.jpg",
+					"images/app_x.png",
+					"images/icon_05.png",
+					"images/app-g.png",
+					"images/app_an.png",
+					"images/icon4.png",
+					"images/icon1.png",
+					"images/icon3.png",
+					"images/icon2.png",
+					"images/banner3.png",
+					"images/1.0.png",
+					"images/2.png",
+					"images/3.png",
+					"images/0.png",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/account/account.html",
+					"tzdr/future/list.html",
+					"tzdr/news/newslist.html",
+					"tzdr/future/cn.html",
+					"tzdr/future/cl.html",
+					"tzdr/future/hsi.html",
+					"tzdr/future/cp.html",
+					"tzdr/future/listrg.html",
+					"tzdr/account/accountno.html",
+					"tzdr/news/news.html",
+					"tzdr/buy/buy.html",
+					"tzdr/future/lhsi.html",
+					"tzdr/scheme.html",
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/quotation/transactionDetails.html",
+					"tzdr/quotation/activity.html",
+					"tzdr/account/recharge.html",
+					"tzdr/news/active.html",
+					"tzdr/future/DetailCl.html",
+					"tzdr/future/DetailCp.html"
+				],
+				"priority": 0
+			},
+			"list.html": {
+				"resources": [
+					"images/banner.jpg",
+					"images/icon_03.png",
+					"images/icon_02.png",
+					"images/icon_01.png",
+					"images/icon_04.png",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/account.html": {
+				"resources": [
+					"images/ac_02.png",
+					"css/own.css",
+					"js/common.js",
+					"images/ac_04.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/ac_05.png",
+					"images/ac_06.png",
+					"css/mui.min.css",
+					"images/ac_01.png",
+					"images/ac_03.png",
+					"tzdr/commonback.html",
+					"images/3.0.png",
+					"images/0.png",
+					"images/2.png",
+					"images/1.png",
+					"js/jquery-1.11.3.js",
+					"images/weixinIcon.png",
+					"images/close.png",
+					"images/close1.png",
+					"images/about.png"
+				],
+				"refer": [
+					"tzdr/account/charge.html",
+					"home.html",
+					"tzdr/account/fundDetail.html",
+					"tzdr/future/list.html",
+					"tzdr/account/withdraw.html",
+					"tzdr/account/verified.html",
+					"tzdr/account/telphone.html",
+					"tzdr/account/coupon.html",
+					"tzdr/login/login.html",
+					"tzdr/account/updatePW.html",
+					"tzdr/scheme.html",
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/account/recharge.html",
+					"tzdr/future/listrg.html",
+					"tzdr/account/bindingList.html",
+					"tzdr/account/bindWeixin.html",
+					"tzdr/account/accountno.html",
+					"tzdr/login/retrievePassword.html",
+					"tzdr/account/Invitation.html",
+					"tzdr/account/about.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/charge.html": {
+				"resources": [
+					"images/bank_04.gif",
+					"images/bank_01.gif",
+					"images/ac_bank.gif",
+					"images/bank_03.gif",
+					"images/bank_02.gif",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"tzdr/commonback.html",
+					"js/jquery-1.11.3.js",
+					"js/pingpp.js",
+					"images/bank1.png"
+				],
+				"refer": [
+					"tzdr/account/bbpay.html",
+					"tzdr/account/pay.html",
+					"tzdr/account/account.html",
+					"tzdr/future/list.html",
+					"home.html",
+					"tzdr/account/openUrlPay.html",
+					"tzdr/login/login.html",
+					"tzdr/future/paycp.html",
+					"tzdr/account/gopay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/regist.html": {
+				"resources": [
+					"js/common.js",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"manifest.json",
+					"images/close.png",
+					"images/login.png",
+					"js/jquery-1.11.3.js",
+					"images/LOGO.png",
+					"css/quotation.css"
+				],
+				"refer": [
+					"tzdr/login/confirmPassword.html",
+					"tzdr/login/retrievePassword.html",
+					"tzdr/login/retrievePasswordComfirm.html",
+					"tzdr/agree/tzdr.html",
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/list.html": {
+				"resources": [
+					"css/own.css",
+					"css/mui.min.css",
+					"tzdr/future/list_sub.html",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/commonback.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/charge.html",
+					"tzdr/login/password.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/bbpay.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"tzdr/account/test_b_bbpay.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/pay.html": {
+				"resources": [
+					"tzdr/account/bbpay.html",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/test_b_bbpay.html",
+					"tzdr/account/test_b_b_bbpay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/fundDetail.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"tzdr/account/fundDetail_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/news/newslist.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/news/news.html"
+				],
+				"priority": 0
+			},
+			"tzdr/news/news.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/withdraw.html": {
+				"resources": [
+					"images/ac_code.gif",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/icbc.gif",
+					"js/jquery-1.11.3.js",
+					"images/bank/ccb.png",
+					"images/bank/psbc.png",
+					"images/bank/cmb.png",
+					"images/bank/spdb.png",
+					"images/bank/cmbc.png",
+					"images/bank/ceb.png"
+				],
+				"refer": [
+					"tzdr/account/account.html",
+					"tzdr/account/withdcode.html",
+					"tzdr/account/bankcode.html",
+					"tzdr/future/paycp.html",
+					"tzdr/future/cp.html",
+					"tzdr/future/cn.html",
+					"tzdr/future/hsi.html",
+					"tzdr/future/cl.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/list_sub.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"images/list_02.png",
+					"images/status_03.png",
+					"images/status_01.png",
+					"images/status_02.png"
+				],
+				"refer": [
+					"tzdr/future/DetailCp.html",
+					"tzdr/future/DetailCn.html",
+					"tzdr/future/DetailCl.html",
+					"tzdr/future/DetailHsi.html",
+					"tzdr/future/list.html",
+					"tzdr/account/account.html",
+					"home.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/DetailCn.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/list_01.png",
+					"js/jquery-1.11.3.js",
+					"js/common1.js",
+					"js/share.js",
+					"js/immersed.js"
+				],
+				"refer": [
+					"tzdr/future/add.html",
+					"tzdr/future/end.html",
+					"tzdr/account/account.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/DetailCl.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/list_01.png",
+					"js/common1.js",
+					"js/share.js",
+					"js/immersed.js",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/future/end.html",
+					"tzdr/future/add.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/DetailCp.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/list_01.png",
+					"js/jquery-1.11.3.js",
+					"js/immersed.js",
+					"js/common1.js",
+					"js/share.js"
+				],
+				"refer": [
+					"tzdr/account/account.html",
+					"tzdr/future/end.html",
+					"tzdr/future/add.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/cn.html": {
+				"resources": [
+					"css/own.css",
+					"css/mui.min.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/recharge.css",
+					"images/gouOn.png",
+					"images/gou.png",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/future/list.html",
+					"tzdr/future/pay.html",
+					"tzdr/login/login.html",
+					"tzdr/agree/a50.html",
+					"tzdr/agree/a50ru.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/end.html": {
+				"resources": [
+					"css/own.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/common.js",
 					"js/mui.min.js"
 				],
 				"refer": [
-					"vs/quote/quoteTrade.html",
-					"vs/find/find.html",
-					"vs/home/home.html",
-					"vs/account/account.html",
-					"vs/directSeed/directSeed.html"
+					"tzdr/account/account.html",
+					"tzdr/future/list.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/DetailHsi.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/list_01.png",
+					"js/common1.js",
+					"js/jquery-1.11.3.js",
+					"js/share.js",
+					"js/immersed.js"
+				],
+				"refer": [
+					"tzdr/future/end.html",
+					"tzdr/future/add.html",
+					"tzdr/future/download.html",
+					"tzdr/agree/clru.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/add.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/future/list.html",
+					"tzdr/account/account.html",
+					"tzdr/account/charge.html",
+					"tzdr/account/recharge.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/cl.html": {
+				"resources": [
+					"css/own.css",
+					"css/mui.min.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/recharge.css",
+					"js/jquery-1.11.3.js",
+					"images/gouOn.png",
+					"images/gou.png"
+				],
+				"refer": [
+					"tzdr/future/pay.html",
+					"tzdr/login/login.html",
+					"tzdr/agree/cl.html",
+					"tzdr/agree/clru.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/hsi.html": {
+				"resources": [
+					"css/own.css",
+					"css/mui.min.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/recharge.css",
+					"images/gouOn.png",
+					"images/gou.png",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/future/pay.html",
+					"tzdr/agree/hsi.html",
+					"home.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/verified.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/telphone.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"tzdr/commonback.html"
+				],
+				"refer": [
+					"tzdr/future/list.html",
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/coupon.html": {
+				"resources": [
+					"images/acp_03.gif",
+					"css/own.css",
+					"js/common.js",
+					"images/acp_02.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/acp_06.gif",
+					"css/mui.min.css",
+					"images/acp_05.gif",
+					"images/acp_01.png",
+					"images/list_02.png"
+				],
+				"refer": [
+					"tzdr/future/list.html",
+					"home.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/cp.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/recharge.css",
+					"js/jquery-1.11.3.js",
+					"images/gou.png",
+					"images/gouOn.png"
+				],
+				"refer": [
+					"tzdr/account/account.html",
+					"tzdr/future/paycp.html",
+					"tzdr/agree/cp.html",
+					"tzdr/agree/cpru.html",
+					"home.html",
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/pay.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/future/futurePaySuc.html",
+					"tzdr/account/charge.html",
+					"tzdr/login/login.html",
+					"tzdr/account/recharge.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/test_b_b_bbpay.html": {
+				"resources": [
+					"tzdr/account/test_b_bbpay.html",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/updatePW.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/future/listrg.html": {
+				"resources": [
+					"images/list_02.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"images/2.0.png",
+					"images/1.png",
+					"images/3.png",
+					"images/0.png"
+				],
+				"refer": [
+					"tzdr/login/regist.html",
+					"tzdr/login/login.html",
+					"home.html",
+					"tzdr/account/accountno.html",
+					"tzdr/quotation/quotationMain.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/accountno.html": {
+				"resources": [
+					"images/ac_02.png",
+					"css/own.css",
+					"js/common.js",
+					"images/ac_04.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/ac_05.png",
+					"images/ac_06.png",
+					"css/mui.min.css",
+					"images/ac_01.png",
+					"images/ac_03.png",
+					"images/3.0.png",
+					"images/0.png",
+					"images/2.png",
+					"images/1.png",
+					"images/weixinIcon.png",
+					"images/about.png"
+				],
+				"refer": [
+					"tzdr/login/regist.html",
+					"tzdr/login/login.html",
+					"tzdr/future/listrg.html",
+					"tzdr/quotation/quotationMain.html",
+					"home.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/password.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/futurePaySuc.html": {
+				"resources": [
+					"images/suc_01.png"
+				],
+				"refer": [
+					"tzdr/future/DetailCn.html",
+					"home.html",
+					"tzdr/future/DetailLhsi.html",
+					"tzdr/future/DetailCp.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/download.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/dl_01.gif",
+					"css/mui.min.css",
+					"images/dl_02.gif"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/fundDetail_sub.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/buy/buy.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"images/rank_01.png",
+					"js/mui.pullToRefresh.material.js",
+					"images/buy_up.png",
+					"images/buy_qu.png",
+					"images/rank_03.png",
+					"images/buy_down.png",
+					"images/rank_02.png",
+					"images/buy_win.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"home.html",
+					"tzdr/buy/buyDate.html",
+					"tzdr/scheme.html",
+					"tzdr/future/listrg.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/lhsi.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/future/pay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/DetailLhsi.html": {
+				"resources": [
+					"images/list_01.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/scheme.html": {
+				"resources": [
+					"images/list_02.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/status_02.png",
+					"images/status_03.png",
+					"images/status_04.png",
+					"images/2.0.png",
+					"images/1.png",
+					"images/3.png",
+					"images/0.png",
+					"images/status_01.png"
+				],
+				"refer": [
+					"tzdr/buy/buy.html",
+					"home.html",
+					"tzdr/account/account.html",
+					"tzdr/future/DetailCn.html",
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/future/DetailHsi.html",
+					"tzdr/future/DetailCp.html",
+					"tzdr/future/DetailCl.html"
+				],
+				"priority": 0
+			},
+			"tzdr/buy/buyDate.html": {
+				"resources": [
+					"images/buy_01.png",
+					"js/echarts.common.min.js",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/buy/pay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/buy/pay.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/charge.html"
+				],
+				"priority": 0
+			},
+			"tzdr/future/paycp.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/account/charge.html",
+					"tzdr/account/recharge.html",
+					"tzdr/future/futurePaySuc.html"
+				],
+				"priority": 0
+			},
+			"guide.html": {
+				"resources": [
+					"images/guide1.png",
+					"fonts/mui.ttf",
+					"images/guide4.png",
+					"images/guide2.png",
+					"images/guide3.png",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"main.html",
+					"css/own.css",
+					"js/common.js",
+					"images/startG3.png",
+					"images/startG2.png",
+					"images/startG4.png",
+					"images/startG1.png",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/login.html",
+					"tzdr/login/regist.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/openUrlPay.html": {
+				"resources": [
+					"css/own.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/common.js",
+					"js/jquery-1.11.3.js",
+					"js/pingpp.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/quotation/quotationMain.html": {
+				"resources": [
+					"images/0.0.png",
+					"js/common.js",
+					"images/1.png",
+					"css/quotation.css",
+					"images/2.png",
+					"css/own.css",
+					"images/3.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/common.config.js",
+					"js/jquery-1.11.3.js",
+					"js/jquery.base64.js",
+					"js/util.js",
+					"images/newUser.png",
+					"images/quotation.png",
+					"images/quotationColse.png",
+					"images/quotation0.png",
+					"images/quotation1.png",
+					"images/quotation4.png"
+				],
+				"refer": [
+					"home.html",
+					"tzdr/quotation/transactionDetails.html",
+					"tzdr/account/account.html",
+					"tzdr/scheme.html",
+					"tzdr/account/accountno.html",
+					"tzdr/future/listrg.html",
+					"tzdr/quotation/tutorial.html",
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/quotation/transactionDetails.html": {
+				"resources": [
+					"js/chart.js",
+					"js/echarts.js",
+					"js/esl.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css",
+					"js/echarts.min (2).js",
+					"js/jquery-1.11.3.js",
+					"js/util.js",
+					"js/trade.data.model.js",
+					"js/jquery.base64.js",
+					"js/market.trade.js",
+					"js/trade.send.js",
+					"js/allChart.js",
+					"js/trade.js",
+					"js/reconnecting-websocket.min.js",
+					"js/reconnecting-websocket.js",
+					"js/common.config.js",
+					"js/chart.config.js",
+					"js/timechart.config.js",
+					"js/candlestick.config.js",
+					"js/dayCandlestick.config.js",
+					"js/FiveTestCandlestickChart.js",
+					"js/fiveChart.config.js",
+					"js/tenChart.config.js",
+					"js/threeChart.config.js",
+					"js/trade.util.js",
+					"js/trade.connection.js",
+					"js/trade.data.mode.js",
+					"js/trade.config.js",
+					"images/tradeOrderBg.png",
+					"images/down.png",
+					"images/quotationColse.png",
+					"images/quotation.png",
+					"images/quotation4.png",
+					"images/quotation1.png",
+					"images/quotation0.png",
+					"images/tradeGudice1.png",
+					"images/tradeGudice2.png",
+					"images/tradeGudice3.png",
+					"images/tradeGudice4.png",
+					"images/tradeGudice5.png",
+					"images/buttomSantjiao.png",
+					"images/graySanjiao.jpg",
+					"images/graySanjiao.png",
+					"images/menu.png",
+					"js/lightChart.config.js",
+					"images/inputRadioBgC.png",
+					"images/inputRadioBg.jpg",
+					"images/inputRadioBg.png",
+					"images/graySanjiaoBg.png",
+					"images/insertIon.png",
+					"js/echarts.min.js",
+					null,
+					"js/mui.picker.js",
+					"css/app.css",
+					"css/mui.picker.css",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"images/chartBg.png",
+					"images/conditionBg.png",
+					"images/conditionBg1.png",
+					"images/stopBg.png",
+					"images/tradeBG.png",
+					"images/tipsBG.png",
+					"js/mui.picker.all.js",
+					"css/mui.picker.all.css",
+					"js/mui.js"
+				],
+				"refer": [
+					"tzdr/quotation/trade.html",
+					"tzdr/login/operateLogin.html",
+					"tzdr/quotation/quotationMain.html"
+				],
+				"priority": 0
+			},
+			"tzdr/quotation/trade.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css",
+					"js/trade.market.js",
+					"js/util.js",
+					"js/jquery-1.11.3.js",
+					"js/trade.js",
+					"js/trade.data.model.js",
+					"js/jquery.base64.js",
+					"js/trade.send.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/login/operateLogin.html": {
+				"resources": [
+					"js/common.js",
+					"js/util.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/jquery.base64.js",
+					"css/quotation.css",
+					"js/trade.send.js",
+					"js/common.config.js",
+					"js/trade.config.js",
+					"js/trade.connection.js",
+					"images/close.png",
+					"images/down.jpg",
+					"images/down.png",
+					"images/quotationColse.png",
+					"images/quotationLogin.png",
+					"images/quotationLogin1.png",
+					"css/own.css"
+				],
+				"refer": [
+					"tzdr/future/cl.html",
+					"tzdr/future/cn.html",
+					"tzdr/quotation/transactionDetails.html",
+					"tzdr/agree/tradingMarket.html",
+					"tzdr/future/hsi.html",
+					"tzdr/future/cp.html",
+					"tzdr/quotation/quotationMain.html",
+					"tzdr/login/retrievePassword.html",
+					"tzdr/login/regist.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/withdcode.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/cpru.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/clru.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/cl.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/hsi.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/a50.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/a50ru.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/agree/cp.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/bankcode.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"css/app.css",
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"js/city.data.js",
+					"images/bank/citic.png",
+					"images/bank/gdb.png",
+					"images/bank/abc.png",
+					"images/bank/cmb.png",
+					"images/bank/cmbc.png",
+					"images/bank/spdb.png",
+					"js/jquery-1.11.3.js",
+					"images/bank/boc.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/quotation/activity.html": {
+				"resources": [
+					"js/common.config.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/bannerActivity.jpg",
+					"images/bannerActivity.png",
+					"images/activeTitle.png",
+					"images/backgound1.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/recharge.html": {
+				"resources": [
+					"css/recharge.css",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"tzdr/account/choicePayment.html"
+				],
+				"refer": [
+					"tzdr/account/bankPay.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/choicePayment.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/recharge/Transfer.png",
+					"images/recharge/bankP.png",
+					"images/recharge/jingdong.png",
+					"images/recharge/wei.png",
+					"js/pingpp.js",
+					"tzdr/account/recharge.html",
+					"images/recharge/zhifubao.png",
+					"images/recharge/Quickpayment.png"
+				],
+				"refer": [
+					"tzdr/account/weixinPay.html",
+					"tzdr/account/bankPay.html",
+					"tzdr/account/gopay.html",
+					"tzdr/account/alipay.html",
+					"tzdr/account/bindzhifubao.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/weixinPay.html": {
+				"resources": [
+					"images/weixinpay.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/bankPay.html": {
+				"resources": [
+					"images/bank1.png",
+					"images/bank_01.gif",
+					"images/bank_04.gif",
+					"images/bank_03.gif",
+					"images/bank_02.gif",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/account.html",
+					"home.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/confirmPassword.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css"
+				],
+				"refer": [
+					"tzdr/login/login.html",
+					"tzdr/quotation/quotationMain.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/retrievePassword.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css"
+				],
+				"refer": [
+					"tzdr/login/retrievePasswordComfirm.html"
+				],
+				"priority": 0
+			},
+			"tzdr/login/retrievePasswordComfirm.html": {
+				"resources": [
+					"images/close.png",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/quotation.css"
+				],
+				"refer": [
+					"tzdr/login/login.html"
+				],
+				"priority": 0
+			},
+			"tzdr/quotation/tutorial.html": {
+				"resources": [
+					"images/tutorial/27.png",
+					"images/tutorial/3.png",
+					"images/tutorial/4(1).png",
+					"css/noviceIntroduction.css",
+					"images/tutorial/18.png",
+					"images/tutorial/30.png",
+					"images/tutorial/24.png",
+					"images/tutorial/12.png",
+					"images/tutorial/25.png",
+					"images/tutorial/11.png",
+					"images/tutorial/2.png",
+					"images/tutorial/6.png",
+					"images/tutorial/29.png",
+					"images/tutorial/23.png",
+					"images/tutorial/32.png",
+					"images/tutorial/13.png",
+					"images/tutorial/19.png",
+					"images/tutorial/31.png",
+					"images/tutorial/28.png",
+					"images/tutorial/14.png",
+					"images/tutorial/22.png",
+					"images/tutorial/8.jpg",
+					"images/tutorial/20.png",
+					"images/tutorial/21.png",
+					"images/tutorial/16.png",
+					"images/tutorial/10.png",
+					"images/tutorial/7.jpg",
+					"images/tutorial/5.png",
+					"images/tutorial/9.png",
+					"images/tutorial/1.png",
+					"images/tutorial/15.png",
+					"images/tutorial/26.png",
+					"images/tutorial/17.png",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"start.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"images/startPage.png",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/jquery-1.11.3.js"
+				],
+				"refer": [
+					"tzdr/quotation/quotationMain.html",
+					"guide.html",
+					"tzdr/future/historyDetail.html",
+					"share.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/bindingList.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/ac_05.png",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tzdr/account/bindWeixin.html",
+					"tzdr/account/telphone.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/bindWeixin.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/jquery-1.11.3.js",
+					"images/0.0.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/news/active.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/future/historyDetail.html": {
+				"resources": [
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share.html": {
+				"resources": [
+					"js/immersed.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/bindzhifubao.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/recharge.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/pingpp.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tzdr/account/Invitation.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"images/weixinshare.png",
+					"images/qqshare.png",
+					"images/sharearrow.png",
+					"js/jquery-1.11.3.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"images/fenxiang.png",
+					"js/immersed.js",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/share.js",
+					"images/weiboshare.png"
+				],
+				"refer": [
+					"tzdr/news/active.html"
+				],
+				"priority": 0
+			},
+			"tzdr/account/about.html": {
+				"resources": [
+					"images/aboutBg.png",
+					"images/newEdition.jpg",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/close1.png"
+				],
+				"refer": [
+					"chart.html"
+				],
+				"priority": 0
+			},
+			"chart.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"startPage.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"vs/quote/quoteTrade.html"
 				],
 				"priority": 0
 			},
 			"vs/quote/quoteTrade.html": {
 				"resources": [
-					"fonts/mui.ttf",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/mui.min.css",
-					"img/backBg.png",
-					"css/common.css",
-					"css/quoteTrade.css",
-					"img/quote/whiteSanjiao.png",
-					"js/mui.pullToRefresh.js",
-					"js/quote/quote.config.js",
-					"img/quote/flash.png",
-					"js/quote/quote.time.chart.js",
-					"js/mui.pullToRefresh.material.js",
-					"js/quote/quote.lghtning.chart.js",
-					"js/quote/quote.connect.js",
-					"js/quote/quote.js",
-					"js/quote/chart.config.js",
-					"js/quote/quote.candlestick.chart.js",
-					"js/quote/echarts.min.js",
-					"js/quote/quote.send.js",
-					"css/flashSeting.css",
-					"js/mui.view.js",
-					"js/jquery-1.11.3.js",
-					"img/quote/rightArrow.png",
-					"img/quote/closeCircle.png",
-					"js/quote/quoteBindEvent.js",
-					"js/lay/modules/laytpl.js",
-					"js/quote/mui.page.js",
-					"js/layui.js",
-					"js/alertProtype.js",
-					"css/layui.css",
 					"img/my.png",
-					"img/banner_load.jpg",
-					"img/find/find_3.png",
-					"img/find/find_1.png",
-					"img/homeOn.png",
-					"img/account/borderLine.png",
-					"css/home.css",
-					"css/own.css",
-					"img/find/find_2.png",
-					"img/found.png",
-					"img/directSeeding.png",
-					"img/home_list_1.png",
 					"js/new/n_utils.js",
-					"js/quote_echarts/quote.candlestick.chart.js",
+					"img/banner_load.jpg",
 					"lib/layui/lay/modules/laytpl.js",
+					"img/find/find_3.png",
+					"js/quote_echarts/quote.candlestick.chart.js",
 					"lib/layui/lay/modules/form.js",
 					"lib/layui/lay/modules/element.js",
-					"js/quote_echarts/quote.time.chart.js",
+					"css/quoteTrade.css",
 					"js/quote_echarts/echarts.min.js",
+					"js/quote_echarts/quote.time.chart.js",
+					"js/quote/quoteBindEvent.js",
+					"img/home_list_1.png",
 					"js/new/quoteTrade.js",
+					"css/common.css",
+					"img/find/find_1.png",
 					"lib/layui/layui.js",
 					"lib/layui/lay/modules/layer.js",
+					"js/mui.view.js",
+					"js/mui.pullToRefresh.js",
+					"js/quote/mui.page.js",
+					"img/homeOn.png",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
 					"js/quote_echarts/chart.config.js",
 					"js/new/n_trade_vo.js",
 					"lib/layui/css/modules/layer/default/layer.css",
+					"css/home.css",
 					"js/new/n_quote_vo.js",
+					"img/find/find_2.png",
+					"img/found.png",
+					"img/directSeeding.png",
 					"js/new/order_quote.js",
+					"js/alertProtype.js",
 					"js/quote_echarts/quote.lghtning.chart.js",
-					"lib/layui/css/layui.css",
 					"js/new/order_trade.js",
+					"lib/layui/css/layui.css",
 					"lib/layui/css/modules/layer/default/icon.png"
 				],
 				"refer": [
-					"vs/directSeed/directSeed.html",
 					"vs/account/account.html",
-					"vs/find/activityCenter/activityCenter.html",
-					"vs/news/news.html",
-					"vs/quote/novice.html",
-					"vs/news/active.html",
-					"vs/find/find.html"
-				],
-				"priority": 0
-			},
-			"vs/find/find.html": {
-				"resources": [
-					"img/find/find_3.png",
-					"css/own.css",
-					"img/find/find_2.png",
-					"fonts/mui.ttf",
-					"img/find/find_6.png",
-					"img/find/find_1.png",
-					"css/find.css",
-					"img/find/find_4.png",
-					"img/find/find_5.png",
-					"img/my.png",
-					"css/common.css",
-					"img/home.png",
-					"img/directSeeding.png",
-					"img/found_on.png",
-					"js/mui.min.js",
-					"css/mui.min.css",
-					"js/common.js",
-					"img/foundOn.png",
-					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js",
-					"js/immersed.js",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [
-					"vs/account/account.html",
-					"vs/quote/placeOrder.html",
-					"vs/home/home.html",
-					"vs/quote/quoteTrade.html",
-					"vs/directSeed/directSeed.html",
-					"vs/find/activityCenter/activityCenter.html",
-					"vs/find/informationCenter/informationCenter.html",
-					"vs/find/viewpoint/vsViewpoint.html"
-				],
-				"priority": 0
-			},
-			"vs/home/home.html": {
-				"resources": [
-					"img/my.png",
-					"fonts/mui.ttf",
-					"img/banner_load.jpg",
-					"css/home.css",
-					"img/find/find_3.png",
-					"css/own.css",
-					"img/find/find_2.png",
-					"css/common.css",
-					"img/direct seeding.png",
-					"img/home_list_1.png",
-					"img/home_on.png",
-					"img/find/find_1.png",
-					"img/found.png",
-					"js/mui.min.js",
-					"css/mui.min.css",
-					"img/directSeeding.png",
-					"img/my_on.png",
-					"img/home.png",
-					"js/common.js",
-					"img/homeOn.png",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [
-					"vs/directSeed/directSeed.html",
-					"vs/account/account.html",
-					"vs/quote/quoteTrade.html"
+					"vs/directSeed/directSeed.html"
 				],
 				"priority": 0
 			},
 			"vs/account/account.html": {
 				"resources": [
 					"img/account/accountSettings.png",
-					"fonts/mui.ttf",
-					"img/account/accountcapital.png",
-					"img/my_on.png",
-					"css/own.css",
-					"js/common.js",
 					"img/account/accountOpinion.png",
-					"css/common.css",
-					"img/direct seeding.png",
 					"img/account/accountDetailed.png",
-					"img/account/accountDiscount.png",
-					"css/account.css",
-					"img/found.png",
-					"img/home.png",
-					"img/account/sign_img.png",
-					"img/account/accountInvitation.png",
-					"js/mui.min.js",
-					"css/mui.min.css",
-					"img/directSeeding.png",
-					"img/my.png",
-					"img/found_on.png",
 					"img/account/accountCapital.png",
+					"css/account.css",
 					"img/myOn.png",
 					"img/account/signImg.png",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [
-					"vs/home/home.html",
-					"vs/account/operateDetailed.html",
-					"vs/account/accountSetting.html",
-					"vs/account/coupon.html",
-					"vs/account/feedback.html",
-					"vs/account/customerService.html",
-					"vs/account/insertBank.html",
-					"vs/account/modifyBank.html",
-					"vs/account/modifyLoginPassword.html",
-					"vs/account/myBankCard.html",
-					"vs/account/presentationRecord.html",
-					"vs/account/realNameVerification.html",
-					"vs/account/withdramalsPassword.html",
-					"vs/account/Withdrawals.html",
-					"vs/find/find.html",
-					"vs/login/login.html",
-					"vs/login/register.html",
-					"vs/account/recharge.html",
-					"vs/directSeed/directSeed.html",
-					"vs/account/Invitation.html",
-					"vs/account/fundDetails.html",
-					"vs/quote/quoteTrade.html",
-					"online.html"
-				],
-				"priority": 0
-			},
-			"vs/directSeed/directSeed.html": {
-				"resources": [
-					"img/my.png",
-					"img/directSeeding_on.png",
-					"css/own.css",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"img/found.png",
 					"img/home.png",
-					"js/mui.min.js",
-					"css/mui.min.css",
-					"img/directSeedCalendar.png",
-					"img/directSeed-country.png",
-					"js/mui.picker.min.js",
-					"js/jquery-1.11.3.js",
-					"css/directSeed.css",
-					"img/China.png",
-					"img/directSeedingOn.png",
-					"img/directSeed-clock.png",
-					"css/mui.picker.min.css",
-					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js",
-					"js/common.js",
-					"js/directSeed.js",
-					"img/Canada.png",
-					"img/USA.png",
-					"img/Japan.png",
-					"img/Britain.png",
-					"img/allCity.png",
-					"img/Belgium.png",
-					"img/Italy.png",
-					"img/Switzerland.png"
+					"img/account/accountInvitation.png"
 				],
 				"refer": [
-					"vs/find/find.html",
-					"vs/directSeed/search.html",
-					"vs/home/home.html"
-				],
-				"priority": 0
-			},
-			"vs/quote/placeOrder.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/jquery-1.11.3.js",
-					"css/flashSeting.css",
-					"img/quote/rightArrow.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"js/layui.js",
-					"css/layui.css",
-					"js/lay/modules/laytpl.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/operateDetailed.html": {
-				"resources": [
-					"img/backBg.png",
-					"img/account/borderLine.png",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/mui.min.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/accountSetting.html": {
-				"resources": [
-					"img/account/accountSetting1.png",
-					"img/backBg.png",
-					"img/account/accountSetting4.png",
-					"fonts/mui.ttf",
-					"img/account/accountSetting5.png",
-					"img/account/accountSetting6.png",
-					"img/account/accountSetting3.png",
-					"css/own.css",
-					"img/account/newBG.png",
-					"css/common.css",
-					"js/mui.min.js",
-					"css/account.css",
-					"css/mui.min.css",
-					"img/account/accountSetting7.png",
-					"img/account/accountSetting2.png",
-					"js/common.js",
-					"img/close.png",
-					"img/weixinshare.png",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [
-					"vs/account/realNameVerification.html",
-					"vs/account/myBankCard.html",
-					"vs/account/modifyLoginPassword.html",
-					"vs/account/withdramalsPassword.html",
-					"vs/account/modifyPhone.html"
-				],
-				"priority": 0
-			},
-			"vs/account/coupon.html": {
-				"resources": [
-					"img/account/couponTitleBg.png",
-					"img/backBg.png",
-					"js/common.js",
-					"img/account/careful.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"img/account/couponTitleBgOverdue.png",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"img/account/time.png",
-					"img/account/couponTitleBgUse.png",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/feedback.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/common.js",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/customerService.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css"
-				],
-				"refer": [
-					"online.html"
-				],
-				"priority": 0
-			},
-			"vs/account/insertBank.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"css/account.css",
-					"css/mui.min.css",
-					"fonts/mui.ttf",
-					"js/common.js",
-					"js/city.data.js",
-					"js/mui.picker.min.js",
-					"js/mui.picker.js",
-					"css/mui.picker.css",
-					"css/mui.picker.min.css",
-					"js/mui.poppicker.js",
-					"css/mui.picker.all.css",
-					"css/mui.poppicker.css",
-					"css/app.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/modifyBank.html": {
-				"resources": [
-					"img/backBg.png",
-					"img/bank/cmb.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/mui.picker.min.js",
-					"js/mui.poppicker.js",
-					"js/city.data.js",
-					"css/mui.picker.min.css",
-					"css/mui.poppicker.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/modifyLoginPassword.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/jquery-1.11.3.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/common.js"
-				],
-				"refer": [
-					"vs/login/login.html"
-				],
-				"priority": 0
-			},
-			"vs/account/myBankCard.html": {
-				"resources": [
-					"img/backBg.png",
-					"img/bank/cmb.png",
-					"img/account/accountBankBg.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/common.js",
-					"js/jquery-1.11.3.js",
-					"img/bank/icbc.png"
-				],
-				"refer": [
-					"vs/account/insertBank.html",
-					"vs/account/Withdrawals.html",
-					"vs/account/modifyBank.html",
-					"vs/account/realNameVerification.html"
-				],
-				"priority": 0
-			},
-			"vs/account/presentationRecord.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/realNameVerification.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/jquery-1.11.3.js",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/withdramalsPassword.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/common.js",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/Withdrawals.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/common.js",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [
-					"vs/account/presentationRecord.html",
-					"vs/account/withdramalsPassword.html"
-				],
-				"priority": 0
-			},
-			"startPage.html": {
-				"resources": [
-					"img/startPageBG.png",
-					"css/own.css",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"css/account.css",
-					"css/mui.min.css",
-					"js/common.js"
-				],
-				"refer": [
-					"vs/find/find.html",
-					"vs/ym/a.html",
-					"vs/home/home.html",
-					"guide.html",
-					"vs/quote/quoteTrade.html"
-				],
-				"priority": 0
-			},
-			"vs/login/login.html": {
-				"resources": [
-					"img//login/ipnoneBimg.png",
-					"img/login/inputBimg.png",
-					"img//login/passWord.png",
-					"css/login.css",
-					"img/login/LOGO.png",
-					"css/own.css",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [
-					"vs/login/register.html",
-					"vs/home/home.html",
-					"vs/account/customerService.html"
-				],
-				"priority": 0
-			},
-			"vs/login/register.html": {
-				"resources": [
-					"img//login/ipnoneBimg.png",
-					"css/own.css",
-					"img/login/inputBimg.png",
-					"js/common.js",
-					"img//login/passWord.png",
-					"js/mui.min.js",
-					"css/login.css",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"img/login/registerInputOn.png",
-					"img/login/LOGO.png"
-				],
-				"refer": [
-					"vs/login/login.html",
-					"vs/login/confirmPassword.html"
-				],
-				"priority": 0
-			},
-			"vs/account/recharge.html": {
-				"resources": [
-					"img/backBg.png",
-					"css/own.css",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css"
-				],
-				"refer": [
-					"vs/account/choicePayment.html",
-					"online.html"
-				],
-				"priority": 0
-			},
-			"vs/directSeed/search.html": {
-				"resources": [
-					"img/garbage.png",
-					"css/search.css",
-					"img/searchIcon.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/find/activityCenter/activityCenter.html": {
-				"resources": [
-					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js",
-					"css/activityCenter.css",
-					"img/searchResult.png",
-					"img/backBg.png",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"online.html": {
-				"resources": [
-					"css/about.css",
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/choicePayment.html": {
-				"resources": [
-					"css/recharge.css",
-					"css/own.css",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"css/account.css",
-					"css/mui.min.css",
-					"img/backBg.png",
-					"fonts/mui.ttf",
-					"img/recharge/bankP.png",
-					"img/recharge/Transfer.png",
-					"img/recharge/zhifubao.png",
-					"js/pingpp.js"
-				],
-				"refer": [
-					"vs/account/gopay.html",
-					"vs/account/bindzhifubao.html",
-					"vs/account/bankPay.html",
-					"vs/account/weixinPay.html"
+					"vs/account/Invitation.html"
 				],
 				"priority": 0
 			},
 			"vs/account/Invitation.html": {
 				"resources": [
-					"js/mui.pullToRefresh.js",
-					"js/mui.pullToRefresh.material.js",
 					"img/backBg.png",
 					"img/weixinshare.png",
-					"fonts/mui.ttf",
-					"img/fenxiang.png",
+					"js/share.js",
 					"img/qqshare.png",
-					"css/own.css",
-					"js/common.js",
-					"css/common.css",
-					"js/mui.min.js",
-					"css/account.css",
-					"css/mui.min.css",
+					"img/fenxiang.png",
 					"img/weiboshare.png",
 					"js/immersed.js",
-					"js/share.js",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/gopay.html": {
-				"resources": [
-					"css/own.css",
-					"js/common.js",
-					"js/mui.min.js",
-					"js/jquery-1.11.3.js",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/bindzhifubao.html": {
-				"resources": [
-					"css/own.css",
-					"js/common.js",
-					"js/mui.min.js",
-					"js/jquery-1.11.3.js",
-					"css/recharge.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"img/backBg.png",
-					"css/common.css",
-					"css/account.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/bankPay.html": {
-				"resources": [
-					"css/recharge.css",
-					"img/bank/bank1.png",
-					"img/bank/bank_04.gif",
-					"img/backBg.png",
-					"fonts/mui.ttf",
-					"img/bank/bank_01.gif",
-					"css/own.css",
-					"img/bank/bank_03.gif",
-					"js/common.js",
-					"css/common.css",
-					"js/mui.min.js",
-					"css/account.css",
-					"img/bank/bank_02.gif",
-					"css/mui.min.css",
-					"js/jquery-1.11.3.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/find/informationCenter/informationCenter.html": {
-				"resources": [
 					"js/mui.pullToRefresh.js",
-					"css/own.css",
-					"img/backBg.png",
-					"js/common.js",
-					"css/informationCenter.css",
-					"js/mui.min.js",
-					"css/common.css",
 					"js/mui.pullToRefresh.material.js",
 					"js/jquery-1.11.3.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"img/searchResult.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/fundDetails.html": {
-				"resources": [
-					"img/backBg.png",
+					"css/own.css",
 					"js/common.js",
-					"js/mui.min.js",
 					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
+					"js/mui.min.js",
 					"css/account.css",
 					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"vs/account/modifyPhone.html": {
+			"vs/directSeed/directSeed.html": {
 				"resources": [
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/login/confirmPassword.html": {
-				"resources": [
-					"css/own.css",
-					"img/login/inputBimg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/login.css",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"img/login/registerInputOn.png",
-					"img/login/LOGO.png",
-					"img//login/ipnoneBimg.png",
-					"img//login/passWord.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/account/weixinPay.html": {
-				"resources": [
-					"img/weixinpay.png",
-					"css/own.css",
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/account.css",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/ym/a.html": {
-				"resources": [
-					"js/common.js",
-					"img/backBg.png",
-					"fonts/mui.ttf"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/news/news.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/quote/novice.html": {
-				"resources": [
-					"img/backBg.png",
-					"js/common.js",
-					"css/quoteTrade.css",
-					"js/mui.min.js",
-					"css/common.css",
-					"fonts/mui.ttf",
-					"css/mui.min.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/find/viewpoint/vsViewpoint.html": {
-				"resources": [
-					"js/mui.pullToRefresh.js",
-					"img/backBg.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"css/common.css",
-					"js/mui.pullToRefresh.material.js",
-					"js/jquery-1.11.3.js",
-					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"css/vsViewpoint.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"vs/news/active.html": {
-				"resources": [
-					"img/backBg.png"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"guide.html": {
-				"resources": [
-					"css/own.css",
-					"img/startG2.png",
-					"css/mui.min.css",
-					"img/startG1.png",
-					"js/common.js",
-					"js/mui.min.js",
-					"js/jquery-1.11.3.js"
+					"img/directSeedCalendar.png",
+					"js/mui.picker.min.js",
+					"img/USA.png",
+					"img/China.png",
+					"img/directSeedingOn.png",
+					"img/Japan.png",
+					"img/directSeed-country.png",
+					"img/Switzerland.png",
+					"css/directSeed.css",
+					"img/directSeed-clock.png",
+					"css/mui.picker.min.css",
+					"img/home.png",
+					"js/directSeed.js"
 				],
 				"refer": [
-					"vs/quote/quoteTrade.html"
+					"vs/account/account.html"
 				],
 				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
-				"fonts/mui-icons-extra.ttf"
+				"images/ac_08.png",
+				"tzdr/future/paysuc.html",
+				"js/mui.min.2.9.js",
+				"css/mui.css",
+				"images/acp_04.gif",
+				"images/ac_07.png",
+				"tzdr/future/outdisk.html",
+				"tzdr/account/share.html"
 			]
 		}
-	}
+	},
+	"fullscreen": true,
+	"unpackage":[
+	  "css/mui.css",
+	  "js/mui.js"
+	]
 }
