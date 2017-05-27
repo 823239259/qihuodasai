@@ -289,6 +289,8 @@ function dealDrection(value){
 	}
 }
 
+
+
 $('#placeOrderBidPrice1').on('tap',function(){
 	
 	$('#flashMore').text('看多价:');
@@ -342,6 +344,7 @@ $('#placeOrderBidPrice1').on('tap',function(){
 			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
 			$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
 			
+			
 			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
 			$('#_stopWin010_ .chioce-button').remove();
 			
@@ -370,6 +373,15 @@ $('#placeOrderBidPrice1').on('tap',function(){
 			var initlybzj = (initHdbzj*num0)+Number(initzsj);//滑点保证金*手数+止损价=履约保证金
 			$('#_performance_margin_').text(initlybzj+'元');
 			
+			//初始化支付金额
+			$('#payment_amount').text(initsxf*num0+initlybzj);
+			var payment_amount = initsxf*num0+initlybzj;
+			//初始化余额不足
+			if(Number($('#difference').text())-payment_amount<0){
+				$('#differenceNotFull').text('余额不足');
+			}
+			
+			
 			$("#_stopLoss010_ .chioce-button").on('tap',function(){
 					
 				$(this).addClass('on'); // 设置被点击元素为黄色
@@ -379,6 +391,9 @@ $('#placeOrderBidPrice1').on('tap',function(){
 				var zsj=$(this).text();//止损价
 				var lybzj = (initHdbzj*num0)+Number(zsj);//滑点保证金*手数+止损价=履约保证金
 				$('#_performance_margin_').text(lybzj+'元');
+				
+				
+				
 			});
 			
 			$("#_TradeNum_ .chioce-button").on('tap',function(){
@@ -421,9 +436,15 @@ $('#placeOrderBidPrice1').on('tap',function(){
 					var zsj= $(this).text();//止损价
 					var lybzj = hdbzj*num + Number(zsj);//滑点保证金*手数+止损价=履约保证金
 					$('#_performance_margin_').text(lybzj+'元');
+					var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
+					$('#payment_amount').text(poundage*num+lybzj);
+					
+					if(Number($('#difference').text())-Number($('#payment_amount').text())<0){
+						$('#differenceNotFull').text('余额不足');
+					}
 				});
 				
-				//手续费
+				//综合手续费
 				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
 				$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
 				
@@ -433,6 +454,11 @@ $('#placeOrderBidPrice1').on('tap',function(){
 				var _lybzj_ = _hdbzj_*num;//滑点保证金*手数+止损价=履约保证金
 				$('#_performance_margin_').text(_lybzj_+'元');
 				
+				$('#payment_amount').text(poundage*num+_lybzj_);
+				
+				if(Number($('#difference').text())-Number($('#payment_amount').text())<0){
+					$('#differenceNotFull').text('余额不足');
+				}
 				
 			});
 			
@@ -442,6 +468,19 @@ $('#placeOrderBidPrice1').on('tap',function(){
 	);
 	
 });
+
+
+mui.app_request('/user/getbalancerate', {
+				"businessType": 4
+		}, function(result) {
+			if(result.success == true) {
+					
+				$('#difference').text(result.data.balance);
+			}
+	}, function(res) {});
+	
+
+
 
 $('#placeOrderAskPrice1').on('tap',function(){
 	
@@ -476,6 +515,9 @@ $('#placeOrderAskPrice1').on('tap',function(){
     "mainId": null
 }
  */
+
+var superPoundage;
+var super_lybzj_;
 $('#flashButton').on('tap',function(){
 	
 	mui.app_request(
@@ -526,7 +568,7 @@ $('#flashButton').on('tap',function(){
 			//初始化 手续费
 			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
 			$('#poundage').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
-			
+			superPoundage = initsxf*num0;
 			
 			
 			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
@@ -554,6 +596,8 @@ $('#flashButton').on('tap',function(){
 			var initzsj=$('#stopLoss010 button:first-child').text();//止损价
 			var initlybzj = (initHdbzj*num0)+Number(initzsj);//滑点保证金*手数+止损价=履约保证金
 			$('#performance_margin').text(initlybzj+'元');
+			super_lybzj_ = initlybzj;
+			
 						
 			
 			$("#stopLoss010 .chioce-button").on('tap',function(){
@@ -613,13 +657,14 @@ $('#flashButton').on('tap',function(){
 				//手续费
 				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
 				$('#poundage').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
+				superPoundage = poundage*num;
 				
 				//履约保证金
 				var _hdbzj_ = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
 				var _zsj_= 0;//止损价
 				var _lybzj_ = _hdbzj_*num;//滑点保证金*手数+止损价=履约保证金
 				$('#performance_margin').text(_lybzj_+'元');
-				
+				super_lybzj_ = _lybzj_;
 				
 				
 				
@@ -633,12 +678,12 @@ $('#flashButton').on('tap',function(){
 					$('#performance_margin').text().substr(0,$('#performance_margin').text().length-1);//履约保证金
 					var commodityNo = SuperCommodityNo;
 					//phone 变量在common.js最后一行
-					mui.cacheData.saveFlash(phone+commodityNo+tradeNum,tradeNum);
-					mui.cacheData.saveFlash(phone+commodityNo+stopWin,stopWin);
-					mui.cacheData.saveFlash(phone+commodityNo+stopLoss,stopLoss);
-					mui.cacheData.saveFlash(phone+commodityNo+lybzj,lybzj);
+//					mui.cacheData.saveFlash(phone+commodityNo+'tradeNum',tradeNum);//交易数量
+//					mui.cacheData.saveFlash(phone+commodityNo+'stopWin',stopWin);//止盈
+//					mui.cacheData.saveFlash(phone+commodityNo+'stopLoss',stopLoss);//止损
+//					mui.cacheData.saveFlash(phone+commodityNo+'lybzj',lybzj);//履约保证金
+//					mui.cacheData.saveFlash(phone+commodityNo+'zfzje',superPoundage+super_lybzj_);//支付总金额（不含下单费用）
 					
-					window.location.href='#trade';
 			});
 			
 		}

@@ -507,15 +507,15 @@
 							<div id="flashExplainConatiner">
 								<div class="flash-Explain">
 									<div class="left-div">账户余额：</div>
-									<div class="center-div">100元</div>
-									<div class="right-div">余额不足</div>
+									<div class="center-div" id="difference">100元</div>
+									<div class="right-div" id="differenceNotFull"></div>
 								</div>
 								<div class="rule-div">
 									<input type="text" id="checkboxButton" readonly="readonly" /><label>我已阅读并同意<i>《维胜操盘合作协议》</i></label>
 								</div>
 							</div>
 							<div id="orderList">
-								<label>支付金额: <i>￥2230.00</i>元</label>
+								<label>支付金额: ￥<i id="payment_amount">0.00</i>元</label>
 								<button id="orderListButton">看多买入</button>
 							</div>
 						</div>

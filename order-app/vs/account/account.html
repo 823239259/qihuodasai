@@ -200,6 +200,7 @@
 			}, function(result) {
 				if(result.success == true) {
 					insertAccountData(result.data)
+					
 				}
 			}, function(res) {});
 		} else {
@@ -212,6 +213,7 @@
 			var accountName = document.getElementById("accountName");
 			if(!mui.isnull(data.balance)) {
 				accountBalance.innerText = data.balance;
+				
 			} else {
 				accountBalance.innerText = "0.00";
 			}
