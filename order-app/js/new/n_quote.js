@@ -57,6 +57,7 @@ function initQuoteClient() {
 	}
 }
 
+
 /**
  * 缓存订阅合约属性信息。以原油举例：
  * {"CommodityName":"国际原油","CommodityNo":"CL","ContractSize":10,"CurrencyNo":"USD",

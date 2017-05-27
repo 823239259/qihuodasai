@@ -207,7 +207,7 @@
 						</ul>
 						<!--合约列表-->
 						<ul id="list" class="mui-table-view mui-table-view-chevron main-list">
-							<!--tplQuoteList-->
+							<!--tplQuoteList00-->
 						</ul>
 						<!--关于我们-->
 						<div class="home-about">
@@ -470,37 +470,37 @@
 							<p id="flashPassageway"><span id="flashMore">看多价：</span><span id="flashMorePrice">59.01</span><span>持仓至</span> <span id="flashMoreTime">05:55</span></p>
 							<div class="flash-seting-content">
 								<ul>
-									<li id="treadNum">
+									<li style="position: relative;">
 										<label>交易数量：</label>
-										<button class="chioce-button on">1手</button>
-										<button class="chioce-button">3手</button>
-										<button class="chioce-button">16手</button>
-										<button class="chioce-button">11手</button>
-										<button class="chioce-button">10手</button>
+										<c id="_TradeNum_" style="width: 80%; float: right; position: absolute; top: 13px;">
+										<!--tp_TradeNum_-->
+										</c>
 									</li>
-									<li>
+									<li style="position: relative;">
 										<label>触发止盈：</label>
-										<span id="closeProfitTable">1440元</span>
+										<c id="_stopWin010_" style="width: 80%; float: right; position: absolute; top: 13px;">
+										</c>
 									</li>
-									<li>
+									<li style="position: relative;">
 										<label>触发止损：</label>
-										<span id="closeLossTable">1440元</span>
+										<c id="_stopLoss010_" style="width: 80%; float: right; position: absolute; top: 13px;">
+										</c>
 									</li>
 								</ul>
 							</div>
 							<div id="exchangeRate" class="flash-seting-content">
 								<ul>
 									<li>
-										<label>汇率 - 美元人民币</label>
-										<p>1美元=7.10元人民币</p>
+										<label id="_exchange_rate_string_">汇率 - 美元人民币</label>
+										<p id="_exchange_rate_">1美元=7.10元人民币</p>
 									</li>
 									<li>
 										<label>支付 - 交易综合手续费</label>
-										<p>（$400）2880元</p>
+										<p id="_poundage_"></p>
 									</li>
 									<li>
 										<label>冻结 - 履约保证金</label>
-										<p>（$400）2880元</p>
+										<p id="_performance_margin_">（$400）2880元</p>
 									</li>
 								</ul>
 							</div>
@@ -558,16 +558,16 @@
 						<div id="exchangeRate" class="flash-seting-content">
 							<ul>
 								<li>
-									<label>汇率 - 美元人民币</label>
-									<p>1美元=7.10元人民币</p>
+									<label id="exchange_rate_string">汇率 - 美元人民币</label>
+									<p id="exchange_rate">1美元=7.10元人民币</p>
 								</li>
 								<li>
 									<label>支付 - 交易综合手续费</label>
-									<p>（$400）2880元</p>
+									<p id="poundage"></p>
 								</li>
 								<li>
 									<label>冻结 - 履约保证金</label>
-									<p>（$400）2880元</p>
+									<p id="performance_margin">（$400）2880元</p>
 								</li>
 							</ul>
 						</div>
@@ -576,7 +576,7 @@
 							<p>1.一旦开启，点击及买</p>
 							<p>2.关闭以后才可重新设置，开启生效</p>
 						</div>
-						<div class="openFlash">
+						<div class="openFlash" id="openFlash">
 							<button>立即开启</button>
 						</div>
 					</div>
@@ -693,21 +693,43 @@
 			<li class="mui-table-view-cell">
 				<a id="{{ item.CommodityNo }}{{ item.MainContract }}-line" class="mui-navigate-right" href="#setting">
 					<label>
-						<span class="commodityNo">CL</span>
-						<span class="commodityNo_name">期货</span>
+						<span class="commodityNo" id="{{ item.CommodityNo }}{{ item.MainContract }}-line-commodityNo">CL</span>
+						<span class="commodityNo_name" id="{{ item.CommodityNo }}{{ item.MainContract }}-line-commodityNo_name">期货</span>
 					</label>
 					<p class="title">{{item.CommodityName}}
 						<span>{{item.CommodityNo}}{{item.MainContract}}</span>
 						<span id="{{ item.CommodityNo }}{{ item.MainContract }}-price" class="title_number">0</span>
 					</p>
-					<p class="time">23小时连续交易
-					<span id="{{ item.CommodityNo }}{{ item.MainContract }}-zdf" class="time_fd">0%</span></p>
+					<p class="time" id="{{ item.CommodityNo }}{{ item.MainContract }}-line-time">23小时连续交易</p>
+					<span id="{{ item.CommodityNo }}{{ item.MainContract }}-zdf" class="time_fd">0%</span>
 				</a>
 				<span style="display: none;">{{ item.CommodityNo }}</span>
 				<span style="display: none;">{{ item.CommodityNo + item.MainContract }}</span>
 			</li>
 		{{#	 }	}); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
 	</script>
+	
+	<script id="tplQuoteList00" type="text/html">
+		{{# if(!isEmpty(d)){ }}
+			<li class="mui-table-view-cell">
+				<a id="{{d.contractNo}}-line" class="mui-navigate-right" href="#setting">
+					<label>
+						<img src="{{vs.constants.base_images_url+d.icon}}" alt="" />
+					</label>
+					<p class="title">
+						<span>{{d.contractNo}}</span>
+						<span>{{d.contractName}}</span>
+						<span id="price" class="title_number">0</span>
+					</p>
+					<p class="time" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p>
+					<span id="zdf" class="time_fd">0%</span>
+				</a>
+				<span style="display: none;">{{ dealContractNo(d.contractNo) }}</span>
+				<span style="display: none;">{{ d.contractNo }}</span>
+			</li>
+		{{# } }}	
+	</script>
+	
 	<script id="tplPositionListOrder" type="text/html">
 		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
 			<li id="{{d.OrderID}}-PositionListOrder">
@@ -772,16 +794,25 @@
 	<!-- 描述：下单面板合约代码选项 -->
 	<script id="tplTradeContractOption" type="text/html">
 		{{# if(typeof(d) != null && typeof(d.CommodityNo) != "undefined"){ }}
-		<option id="selectCommodity" class="{{ d.CommodityNo + d.ContractNo }}-option-contract"  value="{{ d.CommodityNo + d.ContractNo }}">{{ CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}</option>
+		<option  class="{{ d.CommodityNo + d.ContractNo }}-option-contract"  value="{{ d.CommodityNo + d.ContractNo }}">{{ CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}</option>
 		{{# }; }}
 		{{# form.render('select'); }}
 	</script>
 	
+	<!--TradeNum-->
 	<script id="tpTradeNum" type="text/html">
 		{{# if(!isEmpty(d)){ }}
 			<button class="chioce-button">{{d.lever+'手'}}</button>
 		{{# } }}
 	</script>
+	
+	<!--_TradeNum_-->
+	<script id="tp_TradeNum_" type="text/html">
+		{{# if(!isEmpty(d)){ }}
+			<button class="chioce-button">{{d.lever+'手'}}</button>
+		{{# } }}
+	</script>
+	
 
 	<script type="text/javascript">
 		mui.init();

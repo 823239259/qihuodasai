@@ -27,6 +27,7 @@ window.onload = function() {
 			default:
 		};
 	});
+	/*
 	document.getElementById("closeProfitTable").addEventListener("tap", function() {
 		$("#chioceStopLoss").css("display", "block").attr("data-id", "1");
 		var buttonListLiStopLoss = document.getElementById("buttonListLiStopLoss");
@@ -38,7 +39,7 @@ window.onload = function() {
 		var buttonListLiStopLoss = document.getElementById("buttonListLiStopLoss");
 		var height = buttonListLiStopLoss.offsetHeight;
 		$("#alertContent2").css({ "height": height + 75 + "px", "margin-top": -(height + 75) / 2 + "px" });
-	});
+	});*/
 	/*
 	document.getElementById("closeLossTableSeting").addEventListener("tap", function() {
 		$("#chioceStopLoss").css("display", "block").attr("data-id", "3");

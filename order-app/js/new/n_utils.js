@@ -138,6 +138,12 @@ var Quote = {
 		Quote.doSendMessage(QuoteMethod.QryCommodityMethod, null);
 	},
 	/**
+	 * 查询币种
+	 */
+	doQryCurrency:function(){
+		Quote.doSendMessage(QuoteMethod.QryCurrency);
+	},
+	/**
 	 * 查询合约请求
 	 * @param exchangeNo
 	 * @param commodityNo
@@ -677,6 +683,9 @@ mui.cacheData ={
 	getzy: function(key) {
 			return localStorage.getItem(key);
 	},
+	removezy:function(key) {
+			return localStorage.removeItem(key+'zy');
+	},
 	clear: function() {
 			localStorage.clear();
 	},
@@ -686,5 +695,32 @@ mui.cacheData ={
 	getzs: function(key) {
 			return localStorage.getItem(key);
 	},
+	removezs: function(key) {
+			return localStorage.removeItem(key+'zs');
+	},
+	savesxf:function(key, value) {
+			localStorage.setItem(key+'sxf', value);
+	},
+	getsxf: function(key) {
+			return localStorage.getItem(key);
+	},
+	removesxf: function(key) {
+			return localStorage.removeItem(key+'sxf');
+	},
+	saveSlipBond:function(key, value) {
+			localStorage.setItem(key+'hdbzj', value);
+	},
+	getSlipBond: function(key) {
+			return localStorage.getItem(key);
+	},
+	removeSlipBond: function(key) {
+			return localStorage.removeItem(key+'hdbzj');
+	},
+	saveFlash:function(key,value){
+		localStorage.setItem(key, value);
+	},
+	getFlash:function(key){
+		return localStorage.getItem(key);
+	}
 }
 

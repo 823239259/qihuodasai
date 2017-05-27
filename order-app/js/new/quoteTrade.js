@@ -1,4 +1,3 @@
-
 var SuperCommodityNo;
 var contractNo;
 var exchangeNo;
@@ -295,6 +294,153 @@ $('#placeOrderBidPrice1').on('tap',function(){
 	$('#flashMore').text('看多价:');
 	$('#flashMorePrice').text($('#bidPrice1Button').text());
 	$('#orderListButton').text('看多买入');
+	
+	mui.app_request(
+		'game/order/contractParam',
+		{
+			'contractNo':SuperCommodityNo
+			
+		},function(result){
+			
+			$('#_TradeNum_ .chioce-button').remove();
+			$('#_exchange_rate_string_').text('');
+			$('#_exchange_rate_').text('');
+			$('#_poundage_').text('');
+			$('#_performance_margin_').text('');
+			
+			//汇率设置
+			var currencyNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CurrencyNo");//币种  USD
+			var CNYExchangeRate;//汇率
+			
+			$.each(currencyArray, function(index,value) {
+				if(currencyArray[index].CurrencyNo ==currencyNo){
+					$('#_exchange_rate_string_').text('汇率 - '+currencyArray[index].CurrencyName+'人民币');
+					$('#_exchange_rate_').text('1'+currencyArray[index].CurrencyName+'='+currencyArray[index].CNYExchangeRate+'元人民币');
+					CNYExchangeRate = currencyArray[index].CNYExchangeRate;
+				}
+			});
+			
+			$.each(result.data,function(index, obj){
+				tplFillData("_TradeNum_", "tp_TradeNum_", obj, FillType.after);
+				mui.cacheData.removezy(obj.lever+SuperCommodityNo);
+				mui.cacheData.savezy(obj.lever+SuperCommodityNo,obj.stopProfit);
+				
+				mui.cacheData.removezs(obj.lever+SuperCommodityNo);
+				mui.cacheData.savezs(obj.lever+SuperCommodityNo,obj.stopLoss);
+				
+				mui.cacheData.removesxf(obj.lever+SuperCommodityNo);
+				mui.cacheData.savesxf(obj.lever+SuperCommodityNo,obj.tradeFee);//手续费
+				
+				mui.cacheData.removeSlipBond(obj.lever+SuperCommodityNo);
+				mui.cacheData.saveSlipBond(obj.lever+SuperCommodityNo,obj.slipBond);//滑点保证金
+			});
+			
+			$("#_TradeNum_ button:first-child").addClass('on');
+			var num0=$("#_TradeNum_ button:first-child").text().substr(0,1);
+			
+			//初始化 手续费
+			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
+			$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
+			
+			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
+			$('#_stopWin010_ .chioce-button').remove();
+			
+			$.each(arrayCFZY0,function(index,value){
+					$('#_stopWin010_').append('<button class="chioce-button">'+value+'</button>');
+			});
+			
+			$('#_stopWin010_ button:first-child').addClass('on');
+			
+			$("#_stopWin010_ .chioce-button").on('tap',function(){
+				
+				$(this).addClass('on'); // 设置被点击元素为黄色
+				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+			});
+			
+			var arrayCFZS0= mui.cacheData.getzy(num0+SuperCommodityNo+'zs').split(',');//触发止盈数组
+			$('#_stopLoss010_ .chioce-button').remove();
+			$.each(arrayCFZS0,function(index,value){
+					$('#_stopLoss010_').append('<button class="chioce-button">'+value+'</button>');
+			});
+			$('#_stopLoss010_ button:first-child').addClass('on');
+			
+			//初始化 履约保证金
+			var initHdbzj = mui.cacheData.getSlipBond(num0+SuperCommodityNo+'hdbzj');//滑点保证金
+			var initzsj=$('#_stopLoss010_ button:first-child').text();//止损价
+			var initlybzj = (initHdbzj*num0)+Number(initzsj);//滑点保证金*手数+止损价=履约保证金
+			$('#_performance_margin_').text(initlybzj+'元');
+			
+			$("#_stopLoss010_ .chioce-button").on('tap',function(){
+					
+				$(this).addClass('on'); // 设置被点击元素为黄色
+				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				
+				//履约保证金
+				var zsj=$(this).text();//止损价
+				var lybzj = (initHdbzj*num0)+Number(zsj);//滑点保证金*手数+止损价=履约保证金
+				$('#_performance_margin_').text(lybzj+'元');
+			});
+			
+			$("#_TradeNum_ .chioce-button").on('tap',function(){
+				
+				$(this).addClass('on'); // 设置被点击元素为黄色
+				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				
+				var num;
+				if($(this).text().length<=2){
+					 num = $(this).text().substr(0,1);//手数
+				}else{
+					num = $(this).text().substr(0,2);//手数
+				}
+				
+				var arrayCFZY= mui.cacheData.getzy(num+SuperCommodityNo+'zy').split(',');//触发止盈数组
+				$('#_stopWin010_ .chioce-button').remove();
+				$.each(arrayCFZY,function(index,value){
+					$('#_stopWin010_').append('<button class="chioce-button">'+value+'</button>');
+				});
+				
+				var arrayCFZS= mui.cacheData.getzs(num+SuperCommodityNo+'zs').split(',');//触发止损数组
+				$('#_stopLoss010_ .chioce-button').remove();
+				$.each(arrayCFZS,function(index,value){
+					$('#_stopLoss010_').append('<button class="chioce-button">'+value+'</button>');
+				});
+				
+				$("#_stopWin010_ .chioce-button").on('tap',function(){
+				
+					$(this).addClass('on'); // 设置被点击元素为黄色
+					$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				});
+				
+				$("#_stopLoss010_ .chioce-button").on('tap',function(){
+					
+					$(this).addClass('on'); // 设置被点击元素为黄色
+					$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+					
+					//履约保证金
+					var hdbzj = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
+					var zsj= $(this).text();//止损价
+					var lybzj = hdbzj*num + Number(zsj);//滑点保证金*手数+止损价=履约保证金
+					$('#_performance_margin_').text(lybzj+'元');
+				});
+				
+				//手续费
+				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
+				$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
+				
+				//履约保证金
+				var _hdbzj_ = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
+				var _zsj_= 0;//止损价
+				var _lybzj_ = _hdbzj_*num;//滑点保证金*手数+止损价=履约保证金
+				$('#_performance_margin_').text(_lybzj_+'元');
+				
+				
+			});
+			
+			
+		}
+		
+	);
+	
 });
 
 $('#placeOrderAskPrice1').on('tap',function(){
@@ -332,28 +478,58 @@ $('#placeOrderAskPrice1').on('tap',function(){
  */
 $('#flashButton').on('tap',function(){
 	
-	var i = 0;
 	mui.app_request(
 		'game/order/contractParam',
 		{
 			'contractNo':SuperCommodityNo
 			
 		},function(result){
-			
 			$('#TradeNum .chioce-button').remove();
-			mui.cacheData.clear();
+			$('#exchange_rate_string').text('');
+			$('#exchange_rate').text('');
+			$('#poundage').text('');
+			$('#performance_margin').text('');
+			//汇率设置
+			var currencyNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CurrencyNo");//币种  USD
+			var CNYExchangeRate;//汇率
+			$.each(currencyArray, function(index,value) {
+				if(currencyArray[index].CurrencyNo ==currencyNo){
+				$('#exchange_rate_string').text('汇率 - '+currencyArray[index].CurrencyName+'人民币');
+				$('#exchange_rate').text('1'+currencyArray[index].CurrencyName+'='+currencyArray[index].CNYExchangeRate+'元人民币');
+				CNYExchangeRate = currencyArray[index].CNYExchangeRate;
+					}
+				});
 			$.each(result.data,function(index, obj){
 				tplFillData("TradeNum", "tpTradeNum", obj, FillType.after);
-				mui.cacheData.savezy(obj.lever,obj.stopProfit);
-				mui.cacheData.savezs(obj.lever,obj.stopLoss);
+//				tplFillData("_TradeNum_", "tp_TradeNum_", obj, FillType.after);
+				
+				
+				mui.cacheData.removezy(obj.lever+SuperCommodityNo);
+				mui.cacheData.savezy(obj.lever+SuperCommodityNo,obj.stopProfit);
+				
+				mui.cacheData.removezs(obj.lever+SuperCommodityNo);
+				mui.cacheData.savezs(obj.lever+SuperCommodityNo,obj.stopLoss);
+				
+				mui.cacheData.removesxf(obj.lever+SuperCommodityNo);
+				mui.cacheData.savesxf(obj.lever+SuperCommodityNo,obj.tradeFee);//手续费
+				
+				mui.cacheData.removeSlipBond(obj.lever+SuperCommodityNo);
+				mui.cacheData.saveSlipBond(obj.lever+SuperCommodityNo,obj.slipBond);//滑点保证金
 				
 			});
+			
 			
 			
 			$("#TradeNum button:first-child").addClass('on');
 			var num0=$("#TradeNum button:first-child").text().substr(0,1);
 			
-			var arrayCFZY0= mui.cacheData.getzy(num0+'zy').split(',');//触发止盈数组
+			//初始化 手续费
+			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
+			$('#poundage').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
+			
+			
+			
+			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
 			$('#stopWin010 .chioce-button').remove();
 			$.each(arrayCFZY0,function(index,value){
 					$('#stopWin010').append('<button class="chioce-button">'+value+'</button>');
@@ -366,34 +542,50 @@ $('#flashButton').on('tap',function(){
 				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
 			});
 			
-			var arrayCFZS0= mui.cacheData.getzy(num0+'zs').split(',');//触发止盈数组
+			var arrayCFZS0= mui.cacheData.getzy(num0+SuperCommodityNo+'zs').split(',');//触发止盈数组
 			$('#stopLoss010 .chioce-button').remove();
 			$.each(arrayCFZS0,function(index,value){
 					$('#stopLoss010').append('<button class="chioce-button">'+value+'</button>');
 			});
 			$('#stopLoss010 button:first-child').addClass('on');
 			
-			
+			//初始化 履约保证金
+			var initHdbzj = mui.cacheData.getSlipBond(num0+SuperCommodityNo+'hdbzj');//滑点保证金
+			var initzsj=$('#stopLoss010 button:first-child').text();//止损价
+			var initlybzj = (initHdbzj*num0)+Number(initzsj);//滑点保证金*手数+止损价=履约保证金
+			$('#performance_margin').text(initlybzj+'元');
+						
 			
 			$("#stopLoss010 .chioce-button").on('tap',function(){
 					
 				$(this).addClass('on'); // 设置被点击元素为黄色
 				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+				
+				//履约保证金
+				var zsj=$(this).text();//止损价
+				var lybzj = (initHdbzj*num0)+Number(zsj);//滑点保证金*手数+止损价=履约保证金
+				$('#performance_margin').text(lybzj+'元');
 			});
 			
 			
+			<!--------------------------------------->
 			$("#TradeNum .chioce-button").on("tap", function() {
 				$(this).addClass('on'); // 设置被点击元素为黄色
 				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
 				
-				var num = $(this).text().substr(0,1);//手数
-				var arrayCFZY= mui.cacheData.getzy(num+'zy').split(',');//触发止盈数组
+				var num;
+				if($(this).text().length<=2){
+					 num = $(this).text().substr(0,1);//手数
+				}else{
+					num = $(this).text().substr(0,2);//手数
+				}
+				var arrayCFZY= mui.cacheData.getzy(num+SuperCommodityNo+'zy').split(',');//触发止盈数组
 				$('#stopWin010 .chioce-button').remove();
 				$.each(arrayCFZY,function(index,value){
 					$('#stopWin010').append('<button class="chioce-button">'+value+'</button>');
 				});
 				
-				var arrayCFZS= mui.cacheData.getzs(num+'zs').split(',');//触发止损数组
+				var arrayCFZS= mui.cacheData.getzs(num+SuperCommodityNo+'zs').split(',');//触发止损数组
 				$('#stopLoss010 .chioce-button').remove();
 				$.each(arrayCFZS,function(index,value){
 					$('#stopLoss010').append('<button class="chioce-button">'+value+'</button>');
@@ -409,29 +601,56 @@ $('#flashButton').on('tap',function(){
 					
 					$(this).addClass('on'); // 设置被点击元素为黄色
 					$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
+					
+					//履约保证金
+					var hdbzj = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
+					var zsj= $(this).text();//止损价
+					var lybzj = hdbzj*num + Number(zsj);//滑点保证金*手数+止损价=履约保证金
+					$('#performance_margin').text(lybzj+'元');
 				});
+				
+				
+				//手续费
+				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
+				$('#poundage').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
+				
+				//履约保证金
+				var _hdbzj_ = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
+				var _zsj_= 0;//止损价
+				var _lybzj_ = _hdbzj_*num;//滑点保证金*手数+止损价=履约保证金
+				$('#performance_margin').text(_lybzj_+'元');
+				
 				
 				
 				
 			});
-			
+			<!---------------------------------------------------------------------------->
+			$('#openFlash').on('tap',function(){
+					var tradeNum=$('#TradeNum .on').text();
+					var stopWin= $('#stopWin010 .on').text();
+					var stopLoss= $('#stopLoss010 .on').text();
+					var lybzj = 
+					$('#performance_margin').text().substr(0,$('#performance_margin').text().length-1);//履约保证金
+					var commodityNo = SuperCommodityNo;
+					//phone 变量在common.js最后一行
+					mui.cacheData.saveFlash(phone+commodityNo+tradeNum,tradeNum);
+					mui.cacheData.saveFlash(phone+commodityNo+stopWin,stopWin);
+					mui.cacheData.saveFlash(phone+commodityNo+stopLoss,stopLoss);
+					mui.cacheData.saveFlash(phone+commodityNo+lybzj,lybzj);
+					
+					window.location.href='#trade';
+			});
 			
 		}
-		
 	);
-	
-	
 	
 });
 
 
 $('#orderListButton').on('tap',function(){
 	
-	Trade.doOpenOrderGW(TradeConfig.username,'13558767653','00001','CL','1707',2,0,80.25,2.36,5,2);
+	Trade.doOpenOrderGW(TradeConfig.username,phone,'00001','CL','1707',2,0,80.25,2.36,5,2);
 });
-
-
-
 
 	
 	
@@ -440,5 +659,8 @@ $("#placeOrder .chioce-button").on("tap", function() {
 		$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
 });
 
-
+function dealContractNo(contractNo){
+	
+	return  contractNo.substr(0,contractNo.length-4);
+}
 

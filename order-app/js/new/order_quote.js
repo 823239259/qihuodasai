@@ -9,7 +9,7 @@ var QuoteConfig = {
 var HeartBeat00 = {
 	lastHeartBeatTimestamp : 1,	// 最后心跳时间
 	oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-	intervalCheckTime : 8000,   // 间隔检查时间：8秒
+	intervalCheckTime : 800000,   // 间隔检查时间：8秒
 	check : function(){
 		if (this.lastHeartBeatTimestamp == this.oldHeartBeatTimestamp) { // 心跳未更新——上次心跳时间与最新心跳时间一致
 			console.log('lastHeartBeatTimestamp:'+this.lastHeartBeatTimestamp+',oldHeartBeatTimestamp:'+this.oldHeartBeatTimestamp);
@@ -52,6 +52,21 @@ function initQuoteClient() {
 		quoteSocket = null;
 	}
 }
+/**
+ * 缓存币种信息
+ */
+/**
+ * {"Method":"OnRspQryCurrency","Parameters":
+ * [{"CNYExchangeRate":6.8996,"CurrencyName":"美元","CurrencyNo":"USD","ExchangeRate":1},
+ * {"CNYExchangeRate":0.8871,"CurrencyName":"港币","CurrencyNo":"HKD-HKFE","ExchangeRate":0.1285},
+ * {"CNYExchangeRate":7.3395,"CurrencyName":"欧元","CurrencyNo":"EUR","ExchangeRate":1.091},
+ * {"CNYExchangeRate":0.0633,"CurrencyName":"日元","CurrencyNo":"JPY","ExchangeRate":0.0089},
+ * {"CNYExchangeRate":1,"CurrencyName":"人民币","CurrencyNo":"CNY","ExchangeRate":0.145}]}
+ * 
+ * 
+ */
+var currencyArray;
+
 
 /**
  * 缓存订阅合约属性信息。以原油举例：
@@ -122,6 +137,7 @@ var CacheQuoteSubscribe = {
 
 
 
+
 /**
  * 行情消息处理
  * @param {Object} evt
@@ -141,9 +157,12 @@ function quoteHandleData(evt) {
 		layer.msg('行情连接成功');
 
 		Quote.doAllQryCommodity(); // 查询服务器支持品种用于订阅
+		Quote.doQryCurrency();	//查询币种
+		
 	}else if(method == "OnRspQryCommodity") { // 行情服务器支持的品种
 		initQuoteList(jsonData.Parameters); // 初始化行情列表
 		subscribe(jsonData.Parameters); //订阅支持的主行情合约	并缓存基础属性
+		
 	}else if(method == "OnRspSubscribe") { // 订阅成功信息
 		
 		initQuoteInfo(jsonData.Parameters); // 初始化行情价格（订阅成功返回最新的行情状态）
@@ -172,6 +191,9 @@ function quoteHandleData(evt) {
 		if(is_fenshi) {
 			handleTimeChartData(jsonData);
 		}
+	}else if(method == "OnRspQryCurrency"){//币种返回信息
+		
+		currencyArray = jsonData.Parameters;
 	}
 		
 }
@@ -181,7 +203,19 @@ function quoteHandleData(evt) {
  */
 function initQuoteList(jQuoteList) {
 	
-	tplFillData("list", "tplQuoteList", jQuoteList, FillType.repalce);
+//	tplFillData("list", "tplQuoteList", jQuoteList, FillType.repalce);
+	mui.app_request(
+		'/game/order/contractMain',
+		{},
+		function(result){
+			console.log(JSON.stringify(result));
+			if(result.success==true){
+				$.each(result.data, function(index,value) {
+					tplFillData("list", "tplQuoteList00", value, FillType.after );
+				});
+			}
+		}
+	);
 }
 
 /**

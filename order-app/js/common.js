@@ -570,3 +570,5 @@ vs.smsTime = function(o) {
 			1000)
 	}
 }
+
+var phone = localStorage.getItem(vs.constants.user_mobile);

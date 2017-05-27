@@ -33,5 +33,9 @@ var QuoteMethod = {
 	/**
 	 * 查询深度行情组
 	 */
-	QryDepthQuoteGroupMethod:"QryDepthQuoteGroup"
+	QryDepthQuoteGroupMethod:"QryDepthQuoteGroup",
+	/**
+	 *查询币种 
+	 */
+	QryCurrency:'QryCurrency'
 }
