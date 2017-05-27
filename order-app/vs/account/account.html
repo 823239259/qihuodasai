@@ -43,8 +43,8 @@
 			</div>
 			<div class="account-title">
 				<ul class="mui-table-view mui-table-view-chevron ac-list">
-					<li class="mui-table-view-cell" id="accountSetting">
-						<a class="mui-navigate-right" href="javascript:void(0)" id=""><img src="../../img/account/signImg.png"><span id="accountName">您好，请先登录喔~O(∩_∩)O</span></a>
+					<li class="mui-table-view-cell" id="">
+						<a class="" href="javascript:void(0)" id=""><img src="../../img/account/signImg.png"><span id="accountName">您好，请先登录喔~O(∩_∩)O</span></a>
 					</li>
 					<li class="account-tab">
 						<p class="account-balance">账户余额：</p>
@@ -101,14 +101,10 @@
 			})
 		});
 		document.getElementById("operateDetailed").addEventListener("tap", function() {
-			mui.open_window_data(
-				"../quote/quoteTrade.html", "quoteTrade",
-				{ 
-					"backpageID": "account",
-					"url": "../account/accout.html", 
-					"id": "operateDetailed" 
-				}
-			);
+			mui.openWindow({
+				url: "operateDetailed.html",
+				id: "operateDetailed"
+			})
 		});
 		document.getElementById("fundDetails").addEventListener("tap", function() {
 			mui.openWindow({

@@ -327,7 +327,8 @@
 					"vs/find/activityCenter/activityCenter.html",
 					"vs/news/news.html",
 					"vs/quote/novice.html",
-					"vs/news/active.html"
+					"vs/news/active.html",
+					"vs/find/find.html"
 				],
 				"priority": 0
 			},
@@ -485,7 +486,8 @@
 					"img/Britain.png",
 					"img/allCity.png",
 					"img/Belgium.png",
-					"img/Italy.png"
+					"img/Italy.png",
+					"img/Switzerland.png"
 				],
 				"refer": [
 					"vs/find/find.html",
@@ -1101,7 +1103,10 @@
 					"css/own.css",
 					"img/startG2.png",
 					"css/mui.min.css",
-					"img/startG1.png"
+					"img/startG1.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.3.js"
 				],
 				"refer": [
 					"vs/quote/quoteTrade.html"

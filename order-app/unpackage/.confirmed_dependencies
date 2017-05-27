@@ -74,7 +74,8 @@
 			"lib/layui/css/modules/layer/default/icon.png"
 		],
 		"refer": [
-			"vs/account/account.html"
+			"vs/account/account.html",
+			"vs/find/find.html"
 		]
 	},
 	"vs/find/find.html": {
@@ -97,7 +98,10 @@
 			"css/mui.min.css",
 			"js/common.js",
 			"img/foundOn.png",
-			"js/immersed.js"
+			"js/immersed.js",
+			"js/mui.pullToRefresh.js",
+			"js/jquery-1.11.3.js",
+			"js/mui.pullToRefresh.material.js"
 		],
 		"refer": [
 			"vs/account/account.html",
@@ -226,7 +230,8 @@
 			"img/Zealand.png",
 			"img/Japan.png",
 			"img/allCity.png",
-			"img/Italy.png"
+			"img/Italy.png",
+			"img/Switzerland.png"
 		],
 		"refer": [
 			"vs/find/find.html",
@@ -516,7 +521,8 @@
 			"img/login/LOGO.png"
 		],
 		"refer": [
-			"vs/login/login.html"
+			"vs/login/login.html",
+			"vs/login/confirmPassword.html"
 		]
 	},
 	"vs/account/recharge.html": {
@@ -694,7 +700,10 @@
 			"css/own.css",
 			"img/startG2.png",
 			"css/mui.min.css",
-			"img/startG1.png"
+			"img/startG1.png",
+			"js/common.js",
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js"
 		],
 		"refer": [
 			"vs/quote/quoteTrade.html"

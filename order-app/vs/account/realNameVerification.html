@@ -23,7 +23,7 @@
 				</div>
 				<div class="passwore-row">
 					<label>身份证号</label>
-					<input type="number" placeholder="请输入身份证号" id="card" />
+					<input type="text" placeholder="请输入身份证号" id="card" maxlength="18" onkeyup="value=value.replace(/^[a-zA-Z]+\D*|^\d{0,16}[a-zA-Z]+|[^0-9Xx]/g,'') " onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 				</div>
 			</div>
 			<div class="bottom-button-contanier">
