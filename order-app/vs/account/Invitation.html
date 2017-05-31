@@ -107,12 +107,17 @@
 					}
 				}
 			});
-			document.getElementById("test").addEventListener("tap", function() {
+			/*document.getElementById("test").addEventListener("tap", function() {
 				//						mui.openWindow("../buy/buy.html");
 				var nid = "http://www.vs.com/topic/old/client/index.html"
 					mui.open_window_data("../news/active.html", "active", {nid: nid});
 //				mui.openWindow({ url: "../news/active.html", id: "active", extras: { nid: nid } });
-			})
+			});*/
+			document.getElementById("test").addEventListener("tap",function(){
+//			mui.openWindow("../buy/buy.html");
+				var nid="http://www.vs.com/topic/old/client/index.html"
+				mui.openWindow({url:"../news/active.html",id:"active",extras:{nid:nid}});
+			});
 			var dataALL = [];
 			var pageIndex = 0;
 			var perPage = 20;
