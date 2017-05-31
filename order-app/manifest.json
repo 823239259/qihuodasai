@@ -1749,11 +1749,16 @@
 					"js/common.js",
 					"js/mui.min.js",
 					"css/own.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"img/backBg.png",
+					"img/quote/flash.png",
+					"img/quote/whiteSanjiao.png"
 				],
 				"refer": [
 					"vs/account/account.html",
-					"vs/directSeed/directSeed.html"
+					"vs/directSeed/directSeed.html",
+					"vs/find/informationCenter/informationCenter.html",
+					"vs/find/find.html"
 				],
 				"priority": 0
 			},
@@ -1770,7 +1775,9 @@
 					"img/account/accountInvitation.png"
 				],
 				"refer": [
-					"vs/account/Invitation.html"
+					"vs/account/Invitation.html",
+					"vs/account/recharge.html",
+					"vs/account/Withdrawals.html"
 				],
 				"priority": 0
 			},
@@ -1815,6 +1822,52 @@
 				],
 				"refer": [
 					"vs/account/account.html"
+				],
+				"priority": 0
+			},
+			"vs/find/informationCenter/informationCenter.html": {
+				"resources": [
+					"img/backBg.png",
+					"css/informationCenter.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/find/find.html": {
+				"resources": [
+					"img/find/find_6.png",
+					"img/foundOn.png",
+					"img/home.png",
+					"css/find.css",
+					"img/find/find_4.png",
+					"js/immersed.js",
+					"img/find/find_5.png"
+				],
+				"refer": [
+					"vs/find/informationCenter/informationCenter.html"
+				],
+				"priority": 0
+			},
+			"vs/account/recharge.html": {
+				"resources": [
+					"img/backBg.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/account/Withdrawals.html": {
+				"resources": [
+					"img/backBg.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/account.css",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"vs/account/withdramalsPassword.html"
 				],
 				"priority": 0
 			}

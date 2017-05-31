@@ -165,9 +165,12 @@
 		document.getElementById("withdrawals").addEventListener("tap", function() {
 			if(isCertification){
 				if(bankList.length<=0){
-					mui.confirm("您当前还未添加银行卡，为保障您的账户安全，请先添加银行卡！","提示",["取消，确认"],function(){
-					mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "account", "url": "account.html" });
-				});
+					var btnArray = ['否', '是'];
+					mui.confirm('您当前还未添加银行卡，为保障您的账户安全，请先添加银行卡！', '提示', btnArray, function(e) {
+						if (e.index == 1) {
+							mui.open_window_data("insertBank.html", "insertBank", { "backpageID": "account", "url": "account.html" });
+						}
+					});
 				}else{
 					mui.openWindow({ "url": "Withdrawals.html", "id": "Withdrawals" });
 				}
@@ -200,7 +203,6 @@
 			}, function(result) {
 				if(result.success == true) {
 					insertAccountData(result.data)
-					
 				}
 			}, function(res) {});
 		} else {
@@ -213,7 +215,6 @@
 			var accountName = document.getElementById("accountName");
 			if(!mui.isnull(data.balance)) {
 				accountBalance.innerText = data.balance;
-				
 			} else {
 				accountBalance.innerText = "0.00";
 			}

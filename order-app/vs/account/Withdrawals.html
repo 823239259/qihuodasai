@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>提现</title>
@@ -9,7 +8,6 @@
 		<link href="../../css/common.css" rel="stylesheet" />
 		<link href="../../css/account.css" rel="stylesheet" />
 	</head>
-
 	<body class="withdrawals">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -51,22 +49,27 @@
 				<p>1.到账时间：工作日09:00-16:30申请，24小时内到账，最快5分钟到账，其余时间申请将在下个工作日到账；</p>
 				<p>2.提现手续费：（a）1%（适用于充值后，未实际操盘金额）。（b）0元（适用于操盘用户提现）。</p>
 			</div>
+			
 			<div class="mui-backdrop chioce">
 				<div class="settting-password">
-					<p>输入支付密码</p>
+					<p class="backdrop-title">输入兑换密码<span class="mui-icon mui-icon-closeempty mui-pull-right cancel" data-id="password" id="cancel"></span></p>
 					<p>提现到尾号<em id="cardInfomation">0719</em>的银行卡</p>
-					<div>
-						<input type="password">
-						<input type="password">
-						<input type="password">
-						<input type="password">
-						<input type="password">
-						<input type="password">
-					</div>
+					<div class="ipt-box-nick">
+			        	<div style="width: 100%; height: 50px; position: relative; overflow: hidden; z-index: 3;"><input type="text" maxlength="6"  class="ipt-real-nick"/></div>
+				        <div class="ipts-box-nick">
+				            <div class="ipt-fake-box">
+				                <input type="password" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+				                <input type="password" >
+				                <input type="password" >
+				                <input type="password" >
+				                <input type="password" >
+				                <input type="password" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+				            </div>
+				        </div>
+			    	</div>
 					<p id="forgetPassword">忘记密码?</p>
 				</div> 
 			</div>
-
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -104,7 +107,11 @@
 			confirmData();
 		});
 		document.getElementById("forgetPassword").addEventListener("tap", function() {
-			mui.openWindow({ "url": "withdramalsPassword.html", "id": "withdramalsPassword" });
+			mui.open_window_data(
+				"withdramalsPassword.html", "withdramalsPassword",{ 
+					"backpageID": "Withdrawals","url": "Withdrawals.html" 
+				}
+			);
 		});
 		document.getElementById("WithdrawalsList").addEventListener("tap", function() {
 			mui.openWindow({ "url": "presentationRecord.html", "id": "presentationRecord" });
@@ -123,16 +130,15 @@
 		}
 
 		function insertBankData(data) {
-			
+			console.log(JSON.stringify(data));
 			for(var i = 0; i < data.length; i++) {
 				if(data[i].default) {
-					$("#backList").append("<option selected='selected' value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
+					$("#backList").append("<option data-abbreviation='"+data[i].abbreviation+"' selected='selected' value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
 					$("#abbreviation").html(data[i].abbreviation);
 				} else {
-					$("#backList").append("<option value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
+					$("#backList").append("<option data-abbreviation='"+data[i].abbreviation+"' value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
 				}
 			}
-
 		}
 
 		function drawMoney() {
@@ -165,13 +171,13 @@
 		function drawmoneySubmit() {
 			var input =$("");
 			var drawpassword="";
-			 $(".settting-password input").each(function(){     
-		        drawpassword=drawpassword+ $(this).val();     
-		      });  
+			$(".settting-password input").each(function(){     
+				drawpassword=drawpassword+ $(this).val();
+			});
 			var abbreviation=	$("#abbreviation").html();
 			var drawmoney = document.getElementById("WithdrawalsMoney").value;
 			var card=$("#backList").val();
-			console.log(drawpassword)
+			
 			if(mui.isnull(drawpassword)) {
 				mui.toast("请输入提现密码");
 				return;
@@ -246,43 +252,141 @@
 
 		};
 		function confirmData(){
-			if(SetDrawPwd ==false){
+			/*if(SetDrawPwd ==false){
 				mui.openWindow()
+			}*/
+			var card=$("#backList").val();
+			if(card ==null && card ==""){
+				mui.toast("请选择银行卡");
+				return
 			}
-		var card=$("#backList").val();
-		if(card ==null && card ==""){
-			mui.toast("请选择银行卡");
-			return
+			var WithdrawalsMoney = $("#WithdrawalsMoney").val();
+			if(!WithdrawalsMoney){
+				mui.toast("请输入提现金额");
+				return
+			}
+			if(WithdrawalsMoney < 11){
+				mui.toast("输入金额需大于10元");
+				return
+			}
+			var WithdrawalsMoney = document.getElementById("WithdrawalsMoney").value;
+			if(WithdrawalsMoney > parseFloat($("#accountBalance").text())) {
+				mui.toast("账户余额不足");
+				return;
+			}
+			mui.app_request("/user/getbalancerate",{"businessType": 4},function(result){
+				if(result.data.isSetDrawPwd){
+					$(".mui-backdrop").removeClass("chioce");
+				}else {
+					var btnArray = ['否', '是'];
+					mui.confirm('您当前还未设置提现密码，请先设置提现密码！', '提示', btnArray, function(e) {
+						if (e.index == 1) {
+							mui.open_window_data("withdramalsPassword.html", "withdramalsPassword", { "backpageID": "Withdrawals", "url": "Withdrawals.html" });
+						}
+					});
+				}
+			});
+			
 		}
-			$(".mui-backdrop").removeClass("chioce");
-		}
+		/*输入提现密码*/
+		$(".ipt-real-nick").focus(function(){
+			$(".ipt-box-nick .ipt-real-nick").css("right","1000px");
+		}).blur(function () {  
+			$(".ipt-box-nick .ipt-real-nick").css("right","0");
+		});
 		
-		 $(".settting-password input").keyup(function(event){
-	        var  e = (event) ? event : window.event;
-	        var value = $(this).val();
-	        var length = value.length;
-	        var val;
-	        if(length>0.5){
-	            val = value.substring(length-1,length);
-	            $(this).val(val).next().focus()
-	        }
-	        console.log($(".settting-password input").eq(5).val());
-        if($(".settting-password input").eq(5).val() != null && $(".settting-password input").eq(5).val() !=""){
-//      	plus.nativeUI.showWaiting();
-        	drawmoneySubmit();
-        }
-    });
-    $("#backList").change(function(){
-    	var value=$("#backList").val();
-    	console.log(value);
-    	$("#cardInfomation").html(value.substring(value.length-4,value.length));
-    	for(var i=0;i<dataBankList.length;i++){
-    		if(value==dataBankList[i].card){
-    			$("#abbreviation").html(dataBankList[i].abbreviation);
-    			return;
-    		}
-    	}
-    })
+		$(".ipt-real-nick").on("input", function() {	
+			var $input = $(".ipt-fake-box input");
+			if(/^[0-9]*$/g.test($(this).val())){
+				var pwd = $(this).val().trim();
+				for (var i = 0, len = pwd.length; i < len; i++) {
+					$input.eq(i).val(pwd[i]);
+				}
+				$input.each(function() {
+				    var index = $(this).index();
+				    if (index >= len) {
+				        $(this).val("");
+				    }
+				});
+				if (len == 6) {
+				    passworld($(this).val());
+				}
+			}else{
+			    var arr=$(this).val().match(/\d/g);
+			    $(this).val($(this).val().slice(0,$(this).val().lastIndexOf(arr[arr.length-1])+1));
+			}
+    	});
+    	/*提现密码输入完成时*/ 
+		function passworld(password) {
+			var bank = $("#backList option:selected").attr("data-abbreviation");
+			var abbreviation = $("#backList option:selected").val();
+			var WithdrawalsMoney = $("#WithdrawalsMoney").val();
+			mui.app_request("/user/withdraw/handle",{
+				"bank":bank,
+				"card": abbreviation,
+				"money": WithdrawalsMoney,
+				"withdrawPwd": password
+			},function(result){
+		  		if(result.success == true) {
+		  			$(".mui-backdrop").addClass("chioce");
+		  			mui.toast("提现成功");
+		  			mui.open_window_data("presentationRecord.html", "presentationRecord", { "backpageID": "Withdrawals", "url": "Withdrawals.html" });
+			  	}
+		  	},function(result){
+		  		console.log(JSON.stringify(result));
+	  			if(result.code==3){
+			  		mui.toast("用户信息不存在");
+			  		return;
+			  	}else if(result.code==4){
+			  		mui.toast("银行卡卡号不存在");
+			  		return;
+			  	}else if(result.code==5){
+			  		mui.toast("存在欠费无法提现");
+			  		return;
+			  	}else if(result.code==6){
+			  		mui.toast("系统升级期间无法提现");
+			  		return;
+			  	}else if(result.code==7){
+			  		mui.toast("余额不足不能提现");
+			  		return;
+			  	}else if(result.code==8){
+			  		mui.toast("当天取款次数不能超过5次");
+			  		return;
+			  	}else if(result.code==9){
+			  		mui.toast("每次提现金额不能小于10元");
+			  		return;
+			  	}else if(result.code==10){
+			  		mui.toast("提现密码错误");
+			  		return;
+			  	}else if(result.code==11){
+			  		mui.toast("网银平台暂不支持此银行提现，请添加其他银行！");
+			  		return;
+			  	}else if(result.code==12){
+			  		mui.toast("网银限制，单笔提现金额不能超过50000元，每天可提现5笔（币币支付）。");
+			  		return;
+			  	}else if(result.code==13){
+			  		mui.toast("未实名认证");
+			  		return;
+			  	}else if (result.code==14){
+			  		mui.toast("网银限制，单笔提现金额不能超过500000元，每天可提现5笔（易支付支付）。");
+			  		return;
+			  	}
+			});
+		}
+		document.getElementById("cancel").addEventListener("tap", function() {
+			$(".mui-backdrop").addClass("chioce");
+		});
+	    $("#backList").change(function(){
+	    	var value=$("#backList").val();
+	    	console.log(value);
+	    	$("#cardInfomation").html(value.substring(value.length-4,value.length));
+	    	for(var i=0;i<dataBankList.length;i++){
+	    		if(value==dataBankList[i].card){
+	    			$("#abbreviation").html(dataBankList[i].abbreviation);
+	    			return;
+	    		}
+	    	}
+	    })
 	</script>
 
 </html>

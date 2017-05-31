@@ -40,12 +40,31 @@
 	<script type="text/javascript" src="../../../js/common.js"></script>
 	<script type="text/javascript">
 		mui.init();
+		var vText;
+		if(vs.browser.versions.Html5Plus) {
+			mui.plusReady(function() {
+				wv = mui.get_window_data("type");
+				if(wv){
+					vText = wv.type;
+				}
+			});
+		}
 		mui.plusReady(function(){
-			var w;
-			var height = window.innerHeight;
-			height = height - 80;
-			w = plus.webview.create("http://test.cms.vs.com/vsnews/jinsida-xuetang/index.html", "jinsida-xuetang", { top: "120px", width: '100%', height: height + 'px', margin: "auto" });
-			w.show();
+			if(vText ==1){
+				$("#clickglobalInformation").removeClass("mui-active");
+				$("#clickfuturesSchool").addClass("mui-active");
+				var w;
+				var height = window.innerHeight;
+				height = height - 80;
+				w = plus.webview.create("http://test.cms.vs.com/vsnews/jinsida-xuetang/index.html", "jinsida-xuetang", { top: "120px", width: '100%', height: height + 'px', margin: "auto" });
+				w.show();
+			}else {
+				var w;
+				var height = window.innerHeight;
+				height = height - 80;
+				w = plus.webview.create("http://test.cms.vs.com/vsnews/jinsida-zixun/index.html", "jinsida-zixun", { top: "120px", width: '100%', height: height + 'px', margin: "auto" });
+				w.show();
+			}
 		});
 		var tt=1;
 		document.getElementById("clickfuturesSchool").addEventListener("tap", function() {
