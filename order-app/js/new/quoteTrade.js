@@ -298,13 +298,7 @@ function dealDrection(value){
 }
 
 
-
-$('#placeOrderBidPrice1').on('tap',function(){
-	
-	$('#flashMore').text('看多价:');
-	$('#flashMorePrice').text($('#bidPrice1Button').text());
-	$('#orderListButton').text('看多买入');
-	
+function getContractParam(){
 	mui.app_request(
 		'game/order/contractParam',
 		{
@@ -471,11 +465,20 @@ $('#placeOrderBidPrice1').on('tap',function(){
 				}
 				
 			});
-			
-			
 		}
 		
 	);
+	
+}
+
+
+$('#placeOrderBidPrice1').on('tap',function(){
+	
+	$('#flashMore').text('看多价:');
+	$('#flashMorePrice').text($('#bidPrice1Button').text());
+	$('#orderListButton').text('看多买入');
+	
+	getContractParam();
 	
 });
 
@@ -497,6 +500,7 @@ $('#placeOrderAskPrice1').on('tap',function(){
 	$('#flashMore').text('看空价:');
 	$('#flashMorePrice').text($('#askPrice1Button').text());
 	$('#orderListButton').text('看空买入');
+	getContractParam();
 });
 
 /**
@@ -715,6 +719,7 @@ $('#flashButton').on('tap',function(){
 
 $('#orderListButton').on('tap',function(){
 	
+	
 	var ClientNo = TradeConfig.username;
 	var PlatForm_User = phone;
 	var ProductID = '';
@@ -722,15 +727,25 @@ $('#orderListButton').on('tap',function(){
 	var ContractNo = contractNo;
 	var OrderNum = 	$('#_TradeNum_ .on').text();
 	OrderNum = OrderNum.substring(0,OrderNum.length-1);
-	var Direction = 0;//买
+	
 	var StopWin = $('#_stopWin010_ .on').text(); //触发止盈
 	var StopLoss = $('#_stopLoss010_ .on').text();//触发止损
 	var Deposit = $('#_slipBond_').val();//滑点保证金
 	var a = $('#_poundage_').text();
 	var Fee = $('#_poundage_').text().substring(a.indexOf(')')+2,a.indexOf('元'));
 	alert(OrderNum);
-	Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
-			ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+	if($('#orderListButton').text()=='看多买入'){
+		var Direction = 0;//买
+		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+	}
+	
+	if($('#orderListButton').text()=='看空买入'){
+		var Direction = 1;//卖
+		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+	}
+	
 });
 
 	
@@ -746,5 +761,15 @@ function dealContractNo(contractNo){
 }
 
 
-
+$('#allCloseOrder').on('tap',function(){
+	
+	$('#positionListOrder').children().each(function(){
+		var _this = $(this);
+		var OrderID =  _this.children().eq(1).children().eq(1).children().eq(6).text();
+		var ClientNo = TradeConfig.username;
+		var PlatForm_User = phone;
+		Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
+		_this.remove();
+	});
+});
 
