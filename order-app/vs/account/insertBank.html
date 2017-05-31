@@ -15,7 +15,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">我的银行卡</h1>
+			<h1 class="mui-title">添加银行卡</h1>
 		</header>
 		<div class="mui-content">
 			<p class="top-tips">为保障资金安全，只能添加<em style="font-style: normal;" id="userName">*汉三</em>的银行卡</p>
@@ -120,6 +120,27 @@
 			var prov = cityList[0];
 			var detailCity = cityList[1];
 			var bank_list = document.getElementById("card");
+			
+			if(choiceBankVule1 == ""){
+				mui.toast("请选择开户银行");
+				return
+			}
+			if(!detailCity){
+				mui.toast("请选择省市");
+				return
+			}
+			if(!bankAddress){
+				mui.toast("请输入开户支行名称");
+				return
+			}
+			if(!card) {
+				mui.toast("请输入银行卡号");
+				return
+			}
+			if(!confirmCard){
+				mui.toast("请再次输入输入银行卡号");
+				return
+			}
 			if(card != confirmCard) {
 				mui.toast("银行卡号和确认卡号不一致");
 				return

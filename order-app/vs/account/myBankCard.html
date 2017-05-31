@@ -107,11 +107,13 @@
 				bankButton.value = "0";
 			}
 		}
-
 		function insertBankList(data) {
 				console.log(JSON.stringify(data));
 			var bankList = document.getElementById("bankList");
 			for(var i = 0; i < data.length; i++) {
+				var card = data[i].card;
+				card = card.substring(0, 10) + "****" + card.substring(14, card.length);
+				card = card.substring(0, 10) + "****" + card.substring(14, card.length);
 				bankList.innerHTML += "<li class='mui-table-view-cell' dataid="+data[i].bankId+">" +
 					"<a class='mui-navigate-right' href='javascript:void(0)'>" +
 					"<label>" +
@@ -119,7 +121,7 @@
 					"</label>" +
 					"<div>" +
 					"<span>" + data[i].bankName + "</span>" +
-					"<span>" + data[i].card + "</span>" +
+					"<span>" + card + "</span>" +
 					"</div>" +
 					"</a>" +
 					"</li>"

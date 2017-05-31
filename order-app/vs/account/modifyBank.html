@@ -35,7 +35,7 @@
 					<label>
 							开户名
 						</label>
-					<input type="text" placeholder="" value="*汉三" id="userName" />
+					<input type="text" placeholder="" disabled="disabled" value="*汉三" id="userName" />
 					<!--</a>-->
 				</li>
 				<!--<li class="mui-table-view-cell">
@@ -63,8 +63,9 @@
 					<!--</a>-->
 				</li>
 			</ul>
+			<input type="hidden" name="" id="back-abbreviation" value=""/>
 			<p class="buttom-button">
-				<button>确 认</button>
+				<button id="del-back">确认修改</button>
 			</p>
 		</div>
 	</body>
@@ -101,7 +102,14 @@
 					deleteBank();
 				}
 			});
-		})
+		});
+		document.getElementById("del-back").addEventListener("tap", function() {
+			mui.confirm("您确定要修改该银行卡信息？", "提示", ["取消", "确认"], function(e) {
+				if(e.index == 1) {
+					getBack();
+				}
+			});
+		});
 		var data = null;
 		var index = 0;
 		var win = null;
@@ -112,14 +120,16 @@
 				mui.app_request('user/withdraw/queryBank', {
 					"bankId": bankId
 				}, function(result) {
+					console.log(JSON.stringify(result));
 					if(result.success == true) {
-						document.getElementById("bankName").innerHTML = data[0].bankName;
-						var card = data[0].card
+						document.getElementById("bankName").innerHTML = result.data.bankName;
+						var card = result.data.card;
 						card = card.substring(0, 10) + "****" + card.substring(14, card.length);
 						document.getElementById("card").innerHTML = card;
-						document.getElementById("abbreviation").setAttribute("src", "../../img/bank/" + data[0].abbreviation + ".png");
-						document.getElementById("showCityPicker").innerHTML = data[0].accountAddress;
-						document.getElementById("bankAddress").value = data[0].subbank;
+						document.getElementById("abbreviation").setAttribute("src", "../../img/bank/" + result.data.abbreviation + ".png");
+						document.getElementById("showCityPicker").innerHTML = result.data.province+ " " + result.data.city;
+						document.getElementById("bankAddress").value = result.data.subbank;
+						$("#back-abbreviation").val(result.data.abbreviation);
 					}
 				}, function(res) {});
 			})
@@ -164,6 +174,34 @@
 					return;
 				}
 			})
+		}
+		function getBack() {
+			var abbreviation = $("#back-abbreviation").val();
+			var card = $("#card").text();
+			var cityList = $("#showCityPicker").text().split(" ");
+			var prov = cityList[0];
+			var detailCity = cityList[1];
+			var bankAddress = $("#bankAddress").val();
+			mui.app_request("user/withdraw/add_bank", {
+				"bankId": win.id,
+				"bank": abbreviation,
+				"card": card,
+				"prov": prov,
+				"city": detailCity,
+				"subbank": bankAddress
+			}, function(result) {
+				mui.toast("设置成功");
+				mui.app_back(win.backpageID, true, win.url);
+				return;
+			}, function(result) {
+				if(result.code == 2) {
+					mui.toast("设置失败");
+					return;
+				} else if(result.code == 3) {
+					mui.toast("银行卡不存在");
+					return;
+				}
+			});
 		}
 		(function($, doc) {
 			$.init();
