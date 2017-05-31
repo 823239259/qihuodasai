@@ -4,7 +4,7 @@ var exchangeNo;
 $("#list").on('tap','li',function(){
 	
 	var index = $(this).index();
-	SuperCommodityNo = $('#list li').eq(index).children().eq(1).text();
+	SuperCommodityNo = $('#list li').eq(index).children().eq(1).text();//CL
 	var CommodityNoContractNo = $('#list li').eq(index).children().eq(2).text();
 	contractNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract");
 	exchangeNo=CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "ExchangeNo");
@@ -343,6 +343,8 @@ $('#placeOrderBidPrice1').on('tap',function(){
 				
 				mui.cacheData.removeSlipBond(obj.lever+SuperCommodityNo);
 				mui.cacheData.saveSlipBond(obj.lever+SuperCommodityNo,obj.slipBond);//滑点保证金
+				
+				$('#_slipBond_').val(obj.slipBond);
 			});
 			
 			$("#_TradeNum_ button:first-child").addClass('on');
@@ -713,7 +715,22 @@ $('#flashButton').on('tap',function(){
 
 $('#orderListButton').on('tap',function(){
 	
-	Trade.doOpenOrderGW(TradeConfig.username,phone,'00001','CL','1707',2,0,80.25,2.36,5,2);
+	var ClientNo = TradeConfig.username;
+	var PlatForm_User = phone;
+	var ProductID = '';
+	var CommodityNo = SuperCommodityNo;
+	var ContractNo = contractNo;
+	var OrderNum = 	$('#_TradeNum_ .on').text();
+	OrderNum = OrderNum.substring(0,OrderNum.length-1);
+	var Direction = 0;//买
+	var StopWin = $('#_stopWin010_ .on').text(); //触发止盈
+	var StopLoss = $('#_stopLoss010_ .on').text();//触发止损
+	var Deposit = $('#_slipBond_').val();//滑点保证金
+	var a = $('#_poundage_').text();
+	var Fee = $('#_poundage_').text().substring(a.indexOf(')')+2,a.indexOf('元'));
+	alert(OrderNum);
+	Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+			ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
 });
 
 	
@@ -727,4 +744,7 @@ function dealContractNo(contractNo){
 	
 	return  contractNo.substr(0,contractNo.length-4);
 }
+
+
+
 

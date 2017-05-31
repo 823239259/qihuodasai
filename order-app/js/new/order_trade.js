@@ -140,14 +140,33 @@ function handleMessage(evt){
 		case "OnRspQryOrderGW":{//查询订单回复
 			
 			layerMessage(parameters);
+			console.log(JSON.stringify(parameters));
 			appendOrder(parameters); // 订单列表
 			
 		}break;
 		case "OnRtnOrderStateChgGW":{//开仓请求订单变化通知
 			
 			layerMessage(parameters);
-			appendOrderAfter(parameters);//订单列表追加
-		}
+			console.log('222222');
+			console.log(JSON.stringify(parameters));
+			if(parameters.Status==1){//开仓成功
+				appendOrderAfter(parameters);//订单列表追加
+			}else if(parameters.Status==3){//平仓成功
+				console.log('平仓成功');
+				
+			}else if(parameters.Status==4){//平仓失败
+				console.log('平仓失败');
+				$('#'+parameters.OrderID+'-PositionListOrder').remove();
+				tplFillData("settlementSheet00", "plSettlementSheet", parameters, FillType.before);
+				
+			}else if(parameters.Status==2){//开仓失败
+				console.log('开仓失败');
+			}
+			
+		}break;
+		case "OnRspOpenOrderGW":{
+			
+		}break;
 		
 	}
 }
@@ -186,10 +205,22 @@ function initTradeInfo(){
  */
 function appendOrder(orderInfo){
 	//订单列表
-	tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
-	
+	console.log(JSON.stringify(orderInfo));
+	if(orderInfo.Status==1){
+		tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
+	}
 	//结算单列表
 	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
+	
+	
+	$('.closePositionClass').on('tap',function(){
+		
+		var _this = $(this);
+		var OrderID =  _this.parent().parent().find('.li-none').text();
+		var ClientNo = TradeConfig.username;
+		var PlatForm_User = phone;
+		Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
+	});
 	
 }
 /**
@@ -197,15 +228,20 @@ function appendOrder(orderInfo){
  * @param {Object} orderInfo
  */
 function appendOrderAfter(orderInfo){
-	if(orderInfo.Status==8){
-		tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
-	}else if(orderInfo.Status==1){
-		tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.repalce);
-	}
-	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
+	tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
+//	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 }
 
 function layerMessage(parameters){
 	
-	layer.msg(parameters.StatusMsg);
+	switch(parameters.Status){
+		case 1:
+		 
+		  break;
+		case 9:
+			layer.msg('订单不存在');
+		  	break;
+		default:
+	  
+	}
 }

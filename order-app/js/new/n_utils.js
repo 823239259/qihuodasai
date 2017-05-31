@@ -727,3 +727,18 @@ mui.cacheData ={
 	}
 }
 
+
+var currency = {
+	
+	acontractParam:{},
+	setCache:function(currencyArray){
+			this.acontractParam[currencyArray.CurrencyNo] = currencyArray;
+	},
+	getCache:function(CurrencyNo){
+			return this.acontractParam[CurrencyNo];
+	}
+}
+
+
+
+

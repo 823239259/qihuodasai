@@ -194,6 +194,7 @@ function quoteHandleData(evt) {
 	}else if(method == "OnRspQryCurrency"){//币种返回信息
 		
 		currencyArray = jsonData.Parameters;
+		console.log(JSON.stringify(currencyArray));
 	}
 		
 }
@@ -208,7 +209,6 @@ function initQuoteList(jQuoteList) {
 		'/game/order/contractMain',
 		{},
 		function(result){
-			console.log(JSON.stringify(result));
 			if(result.success==true){
 				$.each(result.data, function(index,value) {
 					tplFillData("list", "tplQuoteList00", value, FillType.after );
@@ -434,7 +434,33 @@ function updateQuoteInfo(jQuote){
 	$('.'+contract+'-SettlementSheet-LastPrice').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
 	
 	
-	
+	var sumFloatMoney=0;//总的持仓盈亏
+	$('#positionListOrder').children().each(function(){
+			
+			var _this = $(this);
+			var commodityNo = _this.children().eq(1).find('.li-CommodityNo').text();
+			var yuan =  _this.children().eq(1).find('.Yuan').text();
+			var mairu = _this.children().eq(1).find('.mairu').text();
+			var lastPrice = _this.children().eq(1).find('.i-dangqian').text();
+			var CommodityNo = _this.children().eq(1).find('.li-CommodityNo').text();
+			var ContractSize = CacheQuoteBase.getCacheContractAttribute(CommodityNo, "ContractSize");//合约乘数
+			var MiniTikeSize = CacheQuoteBase.getCacheContractAttribute(CommodityNo, "MiniTikeSize");//最小变动价
+			var currencyNo0 = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CurrencyNo");//币种
+			var CNYExchangeRate0;
+			$.each(currencyArray,function(index,value){
+				if(currencyArray[index].CurrencyNo ==currencyNo0){
+					CNYExchangeRate0 = currencyArray[index].CNYExchangeRate;
+				}
+			});
+			//（最新价-持仓价 ）*合约乘数/最小变动 * RMB汇率
+			//MiniTikeSize：0.01 --ContractSize：10-- CNYExchangeRate0：6.8996
+			var FloatMoney = (lastPrice-mairu)*ContractSize/MiniTikeSize*CNYExchangeRate0;
+			_this.children().eq(1).find('.Yuan').text(parseFloat(FloatMoney).toFixed(4));
+			sumFloatMoney =sumFloatMoney+FloatMoney;
+			
+		});
+		$('#sumFloatMoney').text(parseFloat(sumFloatMoney).toFixed(4));
+		$('#holdProfit00').text(parseFloat(sumFloatMoney).toFixed(4));
 }
 
 /**

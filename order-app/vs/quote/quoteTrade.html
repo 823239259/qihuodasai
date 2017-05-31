@@ -255,7 +255,7 @@
 								</div>
 								<div class="navigation-container">
 									<!--持仓盈亏-->
-									<p id="holdProfit">持仓盈亏</p>
+									<p id="holdProfit">持仓盈亏</p><span id="holdProfit00"></span>
 									<!--账户余额-->
 									<p id="accoutSurplus">账户余额</p>
 									<!--<p>CL1702</p>-->
@@ -424,7 +424,7 @@
 											<!--tplPositionListOrder-->
 										</ul>
 										<p id="allClosePosition">
-											<span>持仓盈亏：<em>$12017.00</em></span>
+											<span>持仓盈亏：<em id="sumFloatMoney"></em></span>
 											<button>全部平仓</button>
 										</p>
 									</div>
@@ -487,6 +487,7 @@
 										</c>
 									</li>
 								</ul>
+								<input id="_slipBond_" value="1" style="display: none;"/>
 							</div>
 							<div id="exchangeRate" class="flash-seting-content">
 								<ul>
@@ -514,6 +515,7 @@
 									<input type="text" id="checkboxButton" readonly="readonly" /><label>我已阅读并同意<i>《维胜操盘合作协议》</i></label>
 								</div>
 							</div>
+							
 							<div id="orderList">
 								<label>支付金额: ￥<i id="payment_amount">0.00</i>元</label>
 								<button id="orderListButton">看多买入</button>
@@ -737,23 +739,24 @@
 					{{CacheQuoteBase.getCacheContractAttribute(d.CommodityNo, "CommodityName")}}
 					{{d.CommodityNo + d.ContractNo}}<span>{{'     '+d.OrderID}}</span>
 				</p>
-				
 				<div>
 					<p>
 						<span>{{dealDrection(d.Open_Direction)}}{{d.OrderNum+'手'}}</span><span>
-							<i>+￥14400</i>
-							<i>（+$2000）</i>
+							<i id="{{d.CommodityNo + d.ContractNo}}-Yuan" class="Yuan">+￥14400</i>
+							<!--<i>（+$2000）</i>-->
 						</span>
-						
-						
 					</p>
 					<ul class="position-list-content">
 						<li>止盈<i>{{fixedPriceByContract(d.StopWin,d.CommodityNo)}}</i></li>
-						<li>买入<i>{{fixedPriceByContract(d.Open_Price,d.CommodityNo)}}</i></li>
-						<li><button id="closePosition">平仓</button></li>
+						<li>买入<i class="mairu">{{fixedPriceByContract(d.Open_Price,d.CommodityNo)}}</i></li>
+						<li><button id="closePosition" class="closePositionClass">平仓</button></li>
 						<li>止损<i>{{fixedPriceByContract(d.StopLoss,d.CommodityNo)}}</i></li>
-						<li>当前<i class="{{d.CommodityNo + d.ContractNo}}-PositionListOrder-LastPrice">{{fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
-						<li><button id="backhand">反手</button></li>
+						<li>当前<i class="{{d.CommodityNo + d.ContractNo}}-PositionListOrder-LastPrice i-dangqian">{{fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
+						<li><button id="{{d.OrderID}}-backhand">反手</button></li>
+						<li style="display: none;" class="li-none">{{d.OrderID}}</li>
+						<li style="display: none;" class="li-CommodityNo">{{d.CommodityNo}}</li>
+						<li style="display: none;" class="li-CommodityNoContractNo">{{d.CommodityNo+ d.ContractNo}}</li>
+						<li style="display: none;" class="li-CurrencyNo">{{d.CurrencyNo}}</li>
 					</ul>
 				</div>
 			</li>
@@ -783,7 +786,7 @@
 								{{fixedPriceByContract(
 									CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
 						</ul>
-						<div class="settlement-sate">手动<br>平仓</div>
+						<div class="settlement-sate" id="{{d.OrderID}}-settlement-sate">{{d.StatusMsg}}</div>
 					</div>
 					<!--<div class="trigger-close-position">触发止损平仓</div>-->
 				</div>
