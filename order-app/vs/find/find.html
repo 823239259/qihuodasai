@@ -172,107 +172,118 @@
 			mui.openWindow("informationCenter/informationCenter.html", "informationCenter");
 		});
 		(function($) {
-					var deceleration = mui.os.ios?0.003:0.0009;
-					$('.mui-scroll-wrapper').scroll({
-						bounce: false,
-						indicators: true, //是否显示滚动条
-						deceleration:deceleration
-					});		
-				})(mui);
-				mui(document.querySelector('#newList')).pullToRefresh({
-						up: { 
-							contentrefresh: '正在加载...',
-							callback: function() {
-								var self = this;
-								var ul = self.element.querySelector('#historyDetailsTable1');
-								setTimeout(function(){
-									ajaxQueryPageInfo(self);	
-								},500)
-							}
-						}
-					});
-					var dataALL="";
-					var dataL="";
-					mui.app_request("/news/list",{},function(data){
-						dataL=data.data;
-							var lenght=data.data.length;
-							if(lenght<=20){
-								for(var i=0;i<lenght;i++){
-									var active="";
-									if(i==0){
-										active="mui-active";
-									}
-									quueryDateil(i,active);
-								}
-							}else{
-								lenght=20;
-								for(var i=0;i<lenght;i++){
-									var active=""
-									if(i==0){
-										active="mui-active";
-									}
-									quueryDateil(i,active);
-								}
-								dataALL=data.data.slice(20,data.data.length);
-							}
-							
-							
-					},function(){
-						
-					});
-					function ajaxQueryPageInfo(self){
-						if(dataALL==""){
-							self.endPullUpToRefresh(true);
-							return;
-						}else{
-							var lenght=dataALL.length;
-							if(lenght<=20){
-								for(var i=0;i<lenght;i++){
-									var nid=dataALL[i].nid;
-									var title=dataALL[i].title;
-									var active=""
-									quueryDateil(i,active);
-								}
-								self.endPullUpToRefresh(true);
-							}else{
-								lenght=20;
-								for(var i=0;i<lenght;i++){
-									var nid=dataALL[i].nid;
-									var title=dataALL[i].title;
-									var active="";
-									quueryDateil(i,active);
-								}
-								dataALL=dataALL.slice(20,dataALL.length);
-								self.endPullUpToRefresh();
-							}
-						}
-						
-					}
-					function quueryDateil(i,active){
-						var nid=dataL[i].nid;
-						var title=dataL[i].title;
-						var content1="";
+			var deceleration = mui.os.ios?0.003:0.0009;
+			$('.mui-scroll-wrapper').scroll({
+				bounce: false,
+				indicators: true, //是否显示滚动条
+				deceleration:deceleration
+			});		
+		})(mui);
+		mui(document.querySelector('#newList')).pullToRefresh({
+			up: { 
+				contentrefresh: '正在加载...',
+				callback: function() {
+					var self = this;
+					var ul = self.element.querySelector('#historyDetailsTable1');
+					setTimeout(function(){
+						ajaxQueryPageInfo(self);	
+					},500)
+				}
+			}
+		});
+		var dataALL="";
+		var dataL="";
+		mui.app_request("/news/list",{},function(data){
+			console.log(JSON.stringify(data));
+			dataL=data.data;
+			if(dataL) {
+				var lenght=data.data.length;
+				if(lenght<=20){
+					for(var i=0;i<lenght;i++){
+						var active="";
 						if(i==0){
-							content1="<span class='new'>New</span>"
+							active="mui-active";
 						}
-						mui.app_request("/news/detail",{"nid":nid},function(data){
-									var content=data.data.content;
-									var html=
-										"<li class='mui-table-view-cell mui-collapse "+active+"' dataid="+nid+">"+
-											"<a class='mui-navigate-right' href='#'>"+title+content1+"</a>"+
-											"<div class='mui-collapse-content'>"+
-												"<p>"+content+"</p>"+
-											"</div>"+
-										"</li>";
-									
-									if(i==0){
-										$(".find-notice-all").prepend(html);
-									}else{
-										$(".find-notice-all").append(html);
-									}
-								},function(){
-								});
+						quueryDateil(i,active);
 					}
+				}else{
+					lenght=20;
+					for(var i=0;i<lenght;i++){
+						var active=""
+						if(i==0){
+							active="mui-active";
+						}
+						quueryDateil(i,active);
+					}
+					dataALL=data.data.slice(20,data.data.length);
+				}
+			}else {
+				var ul = $('#newList .mui-table-view');
+				var li;
+				li = document.createElement('li');
+				li.setAttribute("class","mui-table-view-cell");
+				li.innerHTML = '<div style="text-align: center;width: 100%; height: 25px; z-index: 999999; "><div id="noSearchResultContainer" >' +
+	            				'暂时没有更多公告！</div></div>';
+				ul.append(li);
+			}
+			
+		},function(){
+			
+		});
+		function ajaxQueryPageInfo(self){
+			if(dataALL==""){
+				self.endPullUpToRefresh(true);
+				return;
+			}else{
+				var lenght=dataALL.length;
+				if(lenght<=20){
+					for(var i=0;i<lenght;i++){
+						var nid=dataALL[i].nid;
+						var title=dataALL[i].title;
+						var active=""
+						quueryDateil(i,active);
+					}
+					self.endPullUpToRefresh(true);
+				}else{
+					lenght=20;
+					for(var i=0;i<lenght;i++){
+						var nid=dataALL[i].nid;
+						var title=dataALL[i].title;
+						var active="";
+						quueryDateil(i,active);
+					}
+					dataALL=dataALL.slice(20,dataALL.length);
+					self.endPullUpToRefresh();
+				}
+			}
+			
+		}
+		function quueryDateil(i,active){
+			var nid=dataL[i].nid;
+			var title=dataL[i].title;
+			var content1="";
+			if(i==0){
+				content1="<span class='new'>New</span>"
+			}
+			mui.app_request("/news/detail",{"nid":nid},function(data){
+				var content=data.data.content;
+				var html=
+					"<li class='mui-table-view-cell mui-collapse "+active+"' dataid="+nid+">"+
+						"<a class='mui-navigate-right' href='#'>"+title+content1+"</a>"+
+						"<div class='mui-collapse-content'>"+
+							"<p>"+content+"</p>"+
+						"</div>"+
+					"</li>";
+						
+				if(i==0){
+					$(".find-notice-all").prepend(html);
+				}else{
+					$(".find-notice-all").append(html);
+				}
+			},function(){
+				
+			});
+		}
 					
 	</script>
 
