@@ -41,6 +41,14 @@
 				</li>
 			</ul>
 			<p class="counter-fee">扣除手续费：<em id="drawHandleFee">0.00 </em>元</p>
+			<ul class="mui-table-view mui-table-view-chevron withdrawals-information-list">
+				<li class="mui-table-view-cell">
+					<label>提现密码</label>
+					<input id="drawpassword" type="password" class="mui-input-password" placeholder="请输入提现密码" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+					<label>元</label>
+				</li>
+			</ul>
+			<a id="modifyPassword">设置/修改提现密码</a>
 			<p class="buttom-button">
 				<button id="confirmButton">确 认</button>
 			</p>
@@ -81,13 +89,13 @@
 		mui.app_request('/user/getbalancerate', {
 			"businessType": 4
 		}, function(result) {
-			console.log(JSON.stringify(result));
+//			console.log(JSON.stringify(result));
 			if(result.success == true) {
 				insertAccountData(result.data)
 			}
 		}, function(res) {});
 		mui.app_request('user/withdraw/bank_list', {}, function(result) {
-			console.log(JSON.stringify(result));
+//			console.log(JSON.stringify(result));
 			if(result.success == true) {
 				dataBankList=result.data;
 				insertBankData(result.data)
@@ -120,7 +128,9 @@
 			Withdrawals()
 			drawMoney();
 		});
-	
+		document.getElementById("modifyPassword").addEventListener("tap",function(){
+			mui.open_window_data("withdramalsPassword.html", "withdramalsPassword", { "backpageID": "Withdrawals", "url": "Withdrawals.html" });
+		});
 		function Withdrawals() {
 			var WithdrawalsMoney = document.getElementById("WithdrawalsMoney").value;
 			if(Number(WithdrawalsMoney) < 10) {
@@ -130,7 +140,7 @@
 		}
 
 		function insertBankData(data) {
-			console.log(JSON.stringify(data));
+//			console.log(JSON.stringify(data));
 			for(var i = 0; i < data.length; i++) {
 				if(data[i].default) {
 					$("#backList").append("<option data-abbreviation='"+data[i].abbreviation+"' selected='selected' value='" + data[i].card + "'>" + data[i].bankName + " " + data[i].card + "</option>");
@@ -155,7 +165,7 @@
 			mui.app_request("user/withdraw/drawFee", {
 				"money": WithdrawalsMoney
 			}, function(result) {
-				console.log(JSON.stringify(result));
+//				console.log(JSON.stringify(result));
 				var message = result.data.fee;
 				$("#drawHandleFee").text(message);
 				if(!isNaN(message)) {
@@ -168,93 +178,10 @@
 
 		};
 		//确认提现
-		function drawmoneySubmit() {
-			var input =$("");
-			var drawpassword="";
-			$(".settting-password input").each(function(){     
-				drawpassword=drawpassword+ $(this).val();
-			});
-			var abbreviation=	$("#abbreviation").html();
-			var drawmoney = document.getElementById("WithdrawalsMoney").value;
-			var card=$("#backList").val();
-			
-			if(mui.isnull(drawpassword)) {
-				mui.toast("请输入提现密码");
-				return;
-			}
-			if(mui.isnull(abbreviation) || mui.isnull(card)) {
-				mui.toast("请绑定银行卡");
-				return;
-			}
-			if(mui.isnull(drawmoney)) {
-				mui.toast("提现金额不能为空");
-				return;
-			}
-			mui.app_request("user/withdraw/handle", {
-				"bank": abbreviation,
-				"card": card,
-				"money": drawmoney,
-				"withdrawPwd": drawpassword
-			}, function(result) {
-					mui.toast("提款申请成功");
-//					plus.nativeUI.showWaiting();
-//				setTimeout(function() {
-//					location.reload(true);
-//				}, 1500);
-				return;
-			}, function(result) {
-				if(result.code == 0) {
-					mui.toast("token失效");
-					return;
-				} else if(result.code == 2) {
-					mui.toast("提现失败");
-					return;
-				} else if(result.code == 3) {
-					mui.toast("用户信息不存在");
-					return;
-				} else if(result.code == 4) {
-					mui.toast("银行卡卡号不存在");
-					return;
-				} else if(result.code == 5) {
-					mui.toast("你的账户已被限制提现，具体原因为：" + result.message + ",请联系客服解除限制！");
-					return;
-				} else if(result.code == 6) {
-					mui.toast("系统升级期间无法提现");
-					return;
-				} else if(result.code == 7) {
-					mui.toast("余额不足不能提现");
-					return;
-				} else if(result.code == 8) {
-					mui.toast("当天取款次数不能超过5次");
-					return;
-				} else if(result.code == 9) {
-					mui.toast("每次提现金额不能小于10元");
-					return;
-				} else if(result.code == 10) {
-					mui.toast("提现密码错误，请重新输入");
-					 $(".settting-password input").each(function(){     
-				      	 $(this).val("");     
-				      });  
-				       $(".settting-password input").eq(0).focus()
-					return;
-				} else if(result.code == 11) {
-					mui.toast("网银平台暂不支持此银行提现，请重新添加银行！");
-					return;
-				} else if(result.code == 12) {
-					mui.toast("网银限制，单笔提现金额不能超过50000元，每天可提现5笔。");
-					return;
-				} else if(result.code == 13) {
-					mui.toast("未实名认证");
-					return;
-				}
-
-			})
-
-		};
 		function confirmData(){
-			/*if(SetDrawPwd ==false){
+			if(SetDrawPwd ==false){
 				mui.openWindow()
-			}*/
+			}
 			var card=$("#backList").val();
 			if(card ==null && card ==""){
 				mui.toast("请选择银行卡");
@@ -274,9 +201,10 @@
 				mui.toast("账户余额不足");
 				return;
 			}
+			var drawpassword=document.getElementById("drawpassword").value;
 			mui.app_request("/user/getbalancerate",{"businessType": 4},function(result){
 				if(result.data.isSetDrawPwd){
-					$(".mui-backdrop").removeClass("chioce");
+					passworld(drawpassword);
 				}else {
 					var btnArray = ['否', '是'];
 					mui.confirm('您当前还未设置提现密码，请先设置提现密码！', '提示', btnArray, function(e) {
@@ -286,6 +214,10 @@
 					});
 				}
 			});
+			if(mui.isnull(drawpassword)){
+				mui.toast("请输入提现密码");
+				return;
+			}
 			
 		}
 		/*输入提现密码*/
