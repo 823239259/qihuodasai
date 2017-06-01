@@ -8,9 +8,13 @@ $("#list").on('tap','li',function(){
 	var CommodityNoContractNo = $('#list li').eq(index).children().eq(2).text()+$('#list li').eq(index).children().eq(3).text();//CL1707
 	contractNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract");
 	exchangeNo=CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "ExchangeNo");
+	
 	$("#totalVolume").val('');
 	$("#commodityNo").val(SuperCommodityNo);
 	$("#contractNo").val( CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract"));
+	
+	//持仓时间
+	$('#flashMoreTime').text($('#'+SuperCommodityNo+'-line-time').text());
 	
 	//初始化模拟下单页面的值
 	$('#lastPrices').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "LastPrice"),SuperCommodityNo));
