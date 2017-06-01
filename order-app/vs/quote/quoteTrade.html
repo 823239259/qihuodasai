@@ -501,7 +501,7 @@
 									</li>
 									<li>
 										<label>冻结 - 履约保证金</label>
-										<p id="_performance_margin_">（$400）2880元</p>
+										<p id="_performance_margin_"></p>
 									</li>
 								</ul>
 							</div>
@@ -723,8 +723,8 @@
 						<span>{{d.contractName}}</span>
 						<span id="{{d.contractNo}}-price" class="title_number">0</span>
 					</p>
-					<p class="time" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p>
-					<span id="{{d.contractNo}}-zdf" class="time_fd">0%</span>
+					<p class="time" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p><span id="{{d.contractNo}}-zdf" class="time_fd">0%</span>
+					
 				</a>
 				<span style="display: none;">{{ dealContractNo(d.contractNo) }}</span>
 				<span style="display: none;">{{ d.contractNo }}</span><!--CL-->
@@ -753,11 +753,18 @@
 						<li><button id="closePosition" class="closePositionClass">平仓</button></li>
 						<li>止损<i>{{fixedPriceByContract(d.StopLoss,d.CommodityNo)}}</i></li>
 						<li>当前<i class="{{d.CommodityNo + d.ContractNo}}-PositionListOrder-LastPrice i-dangqian">{{fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
-						<li><button id="{{d.OrderID}}-backhand">反手</button></li>
+						<li><button id="{{d.OrderID}}-backhand" class="backhandClass">反手</button></li>
 						<li style="display: none;" class="li-none">{{d.OrderID}}</li>
 						<li style="display: none;" class="li-CommodityNo">{{d.CommodityNo}}</li>
 						<li style="display: none;" class="li-CommodityNoContractNo">{{d.CommodityNo+ d.ContractNo}}</li>
 						<li style="display: none;" class="li-CurrencyNo">{{d.CurrencyNo}}</li>
+						<li style="display: none;" class="li-ContractNo">{{d.ContractNo}}</li>
+						<li style="display: none;" class="li-OrderNum">{{d.OrderNum}}</li>
+						<li style="display: none;" class="li-StopWin">{{d.StopWin}}</li>
+						<li style="display: none;" class="li-StopLoss">{{d.StopLoss}}</li>
+						<li style="display: none;" class="li-Deposit">{{d.Deposit}}</li>
+						<li style="display: none;" class="li-Fee">{{d.Fee}}</li>
+						<li style="display: none;" class="li-Open_Direction">{{d.Open_Direction}}</li>
 					</ul>
 				</div>
 			</li>

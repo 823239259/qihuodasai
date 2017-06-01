@@ -395,9 +395,9 @@ function getContractParam(){
 				var zsj=$(this).text();//止损价
 				var lybzj = (initHdbzj*num0)+Number(zsj);//滑点保证金*手数+止损价=履约保证金
 				$('#_performance_margin_').text(lybzj+'元');
-				
-				
-				
+				var a = $('#_poundage_').text();
+				a = a.substring(a.indexOf(')')+1,a.indexOf('元'));
+				$('#payment_amount').text(Number(a)+Number(lybzj));
 			});
 			
 			$("#_TradeNum_ .chioce-button").on('tap',function(){

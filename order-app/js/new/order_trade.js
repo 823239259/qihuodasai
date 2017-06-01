@@ -5,7 +5,7 @@ var TradeConfig = {
 	url_real : "ws://192.168.0.147:7001",
 	model : "1", // 实盘：0；	模拟盘：1
 	client_source : "N_WEB",	// 客户端渠道
-	username : "000003",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+	username : "000001",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 	password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 };
 /*
@@ -139,28 +139,25 @@ function handleMessage(evt){
 		
 		case "OnRspQryOrderGW":{//查询订单回复
 			
-			layerMessage(parameters);
-			console.log(JSON.stringify(parameters));
 			appendOrder(parameters); // 订单列表
 			
 		}break;
 		case "OnRtnOrderStateChgGW":{//开仓请求订单变化通知
 			
-			layerMessage(parameters);
-			console.log('222222');
-			console.log(JSON.stringify(parameters));
+			console.log('------->'+JSON.stringify(parameters));
 			if(parameters.Status==1){//开仓成功
+				layer.msg('开仓成功:'+parameters.StatusMsg);
 				appendOrderAfter(parameters);//订单列表追加
 			}else if(parameters.Status==3){//平仓成功
-				console.log('平仓成功');
+				layer.msg('平仓成功:'+parameters.StatusMsg);
 				
 			}else if(parameters.Status==4){//平仓失败
-				console.log('平仓失败');
+				layer.msg('平仓失败:'+parameters.StatusMsg);
 				$('#'+parameters.OrderID+'-PositionListOrder').remove();
 				tplFillData("settlementSheet00", "plSettlementSheet", parameters, FillType.before);
 				
 			}else if(parameters.Status==2){//开仓失败
-				console.log('开仓失败');
+				layer.msg('开仓失败:'+parameters.StatusMsg);
 			}
 			
 		}break;
@@ -211,7 +208,7 @@ function appendOrder(orderInfo){
 		//结算单列表
 		tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 	}
-	
+	//平仓
 	$('.closePositionClass').on('tap',function(){
 		
 		var _this = $(this);
@@ -219,7 +216,46 @@ function appendOrder(orderInfo){
 		var ClientNo = TradeConfig.username;
 		var PlatForm_User = phone;
 		Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
+		_this.remove();
 	});
+	//反手 先平仓再相反的方向买
+	$('.backhandClass').on('tap',function(){
+		
+		var _this = $(this);
+		var OrderID =  _this.parent().parent().find('.li-none').text();
+		var ClientNo = TradeConfig.username;
+		var PlatForm_User = phone;
+		Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
+		
+		//反方向买
+		var ClientNo = TradeConfig.username;
+		var PlatForm_User = phone;
+		var ProductID = '';
+		var CommodityNo = _this.parent().parent().find('.li-CommodityNo').text();
+		var ContractNo = _this.parent().parent().find('.li-ContractNo').text();
+		var OrderNum = 	_this.parent().parent().find('.li-OrderNum').text();
+		var Deposit = _this.parent().parent().find('.li-Deposit').text();//滑点保证金
+		var StopWin = _this.parent().parent().find('.li-StopWin').text(); //触发止盈
+		var StopLoss = _this.parent().parent().find('.li-StopLoss').text();//触发止损
+		var Fee = _this.parent().parent().find('.li-Fee').text();
+		//0:买入 1：卖出
+		var Open_Direction = _this.parent().parent().find('.li-Open_Direction').text();
+		
+		if(Open_Direction==0){
+				var Direction = 1;
+				Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		}
+		
+		if(Open_Direction==1){
+				var Direction = 0;
+				Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		}
+		_this.remove();
+	});
+	
+	
 	
 }
 /**
@@ -227,6 +263,7 @@ function appendOrder(orderInfo){
  * @param {Object} orderInfo
  */
 function appendOrderAfter(orderInfo){
+	console.log(JSON.stringify(orderInfo));
 	tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
 //	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 }
