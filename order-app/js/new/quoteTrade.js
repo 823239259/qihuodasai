@@ -4,8 +4,8 @@ var exchangeNo;
 $("#list").on('tap','li',function(){
 	
 	var index = $(this).index();
-	SuperCommodityNo = $('#list li').eq(index).children().eq(1).text();//CL
-	var CommodityNoContractNo = $('#list li').eq(index).children().eq(2).text();
+	SuperCommodityNo = $('#list li').eq(index).children().eq(2).text();//CL
+	var CommodityNoContractNo = $('#list li').eq(index).children().eq(2).text()+$('#list li').eq(index).children().eq(3).text();//CL1707
 	contractNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract");
 	exchangeNo=CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "ExchangeNo");
 	$("#totalVolume").val('');

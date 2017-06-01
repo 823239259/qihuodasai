@@ -205,13 +205,12 @@ function initTradeInfo(){
  */
 function appendOrder(orderInfo){
 	//订单列表
-	console.log(JSON.stringify(orderInfo));
 	if(orderInfo.Status==1){
 		tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
+	}else{
+		//结算单列表
+		tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 	}
-	//结算单列表
-	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
-	
 	
 	$('.closePositionClass').on('tap',function(){
 		

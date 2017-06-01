@@ -719,15 +719,16 @@
 						<img src="{{vs.constants.base_images_url+d.icon}}" alt="" />
 					</label>
 					<p class="title">
-						<span>{{d.contractNo}}</span>
+						<span>{{d.contractNo}}</span><span id="{{d.contractNo}}-contractNo00"></span>
 						<span>{{d.contractName}}</span>
-						<span id="price" class="title_number">0</span>
+						<span id="{{d.contractNo}}-price" class="title_number">0</span>
 					</p>
 					<p class="time" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p>
-					<span id="zdf" class="time_fd">0%</span>
+					<span id="{{d.contractNo}}-zdf" class="time_fd">0%</span>
 				</a>
 				<span style="display: none;">{{ dealContractNo(d.contractNo) }}</span>
-				<span style="display: none;">{{ d.contractNo }}</span>
+				<span style="display: none;">{{ d.contractNo }}</span><!--CL-->
+				<span id="{{d.contractNo}}-contractNo" style="display: none;"></span>
 			</li>
 		{{# } }}	
 	</script>

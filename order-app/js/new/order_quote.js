@@ -194,7 +194,6 @@ function quoteHandleData(evt) {
 	}else if(method == "OnRspQryCurrency"){//币种返回信息
 		
 		currencyArray = jsonData.Parameters;
-		console.log(JSON.stringify(currencyArray));
 	}
 		
 }
@@ -406,8 +405,10 @@ function checkRange() {
 function updateQuoteInfo(jQuote){
 	
 	var contract = jQuote.CommodityNo + jQuote.ContractNo;
-	$('#'+contract+'-zdf').text(parseFloat(jQuote.ChangeRate).toFixed(2) + '%');
-	$('#'+contract+'-price').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+	$('#'+jQuote.CommodityNo+'-zdf').text(parseFloat(jQuote.ChangeRate).toFixed(2) + '%');
+	$('#'+jQuote.CommodityNo+'-price').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));
+	$('#'+jQuote.CommodityNo+'-contractNo').text(jQuote.ContractNo);
+	$('#'+jQuote.CommodityNo+'-contractNo00').text(jQuote.ContractNo);
 	if(SuperCommodityNo==jQuote.CommodityNo){
 		
 		$('#lastPrices').text(fixedPriceByContract(jQuote.LastPrice, jQuote.CommodityNo));		
