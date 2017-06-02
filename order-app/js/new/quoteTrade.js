@@ -787,7 +787,7 @@ $('#orderListButton').on('tap',function(){
 	var Deposit = mui.cacheData.getSlipBond(OrderNum+CommodityNo+'hdbzj');
 	var a = $('#_poundage_').text();
 	var Fee = $('#_poundage_').text().substring(a.indexOf(')')+2,a.indexOf('元'));
-	alert(Deposit);
+//	alert(Deposit);
 	if($('#orderListButton').text()=='看多买入'){
 		var Direction = 0;//买
 		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,

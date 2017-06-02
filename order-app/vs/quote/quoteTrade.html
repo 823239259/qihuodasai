@@ -254,14 +254,14 @@
 		</div>
 		<div id="setting" class="mui-page">
 			<!--页面标题栏开始-->
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav trade-view-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title ps">
 					<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 						<a class="mui-control-item mui-active" href="#trade">模拟盘下单</a>
-						<a class="mui-control-item" href="#position" >模拟盘持仓</a> 
+						<a class="mui-control-item" href="#position">模拟盘持仓</a> 
 					</div>
 				</h1>
 			</div>
@@ -269,8 +269,9 @@
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div id="trade" class="mui-slider-item mui-control-content mui-active">
-							<div id="Navigation">
-								<div class="navigation-container" id="choiceProductButton">
+							<div id="Navigation" class="trade-title">
+								<!--<div class="navigation-container slt-box" id="choiceProductButton">-->
+									<div class="navigation-container slt-box" >
 									<select name="contract" id="contract">
 										<!--tplTradeContractOption-->
 									</select>
@@ -279,7 +280,7 @@
 									<!--持仓盈亏-->
 									<p id="holdProfit">持仓盈亏</p><span id="holdProfit00"></span>
 									<!--账户余额-->
-									<p id="accoutSurplus">账户余额</p>
+									<!--<p id="accoutSurplus">账户余额</p>-->
 									<!--<p>CL1702</p>-->
 								</div>
 								<div class="navigation-container">
@@ -317,7 +318,7 @@
 								<div class="mui-slider-item mui-control-content  mui-active" id="timeChartContainerDiv">
 									<div id="timeChartContainer">
 										<div style="height: 220px;width: 100%;" id="timeChart"></div>
-										<div style="height: 100px;width: 100%;" id="volumeChart"></div>
+										<!--<div style="height: 100px;width: 100%;" id="volumeChart"></div>-->
 									</div>
 								</div>
 								<div class="mui-slider-item mui-control-content" id="candlestickContainerDiv">
@@ -540,7 +541,7 @@
 							
 							<div id="orderList">
 								<label>支付金额: ￥<i id="payment_amount">0.00</i>元</label>
-								<button id="orderListButton">看多买入</button>
+								<a href="#setting"><button id="orderListButton">看多买入</button></a>
 							</div>
 						</div>
 					</div>

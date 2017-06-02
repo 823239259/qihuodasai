@@ -13,7 +13,7 @@
 #rule{display: inline-block; width: 40px; padding-right: 5px; height: 44px;line-height: 44px; text-align: right; font-size: 13px; color:#333333;}
 #Navigation{height: 50px;background-color: #f25749; padding: 0px 15px; }
 #Navigation p{white-space: nowrap;text-overflow:ellipsis ;overflow: hidden;}
-.navigation-container{display: inline-block; width: 21%; height: 50px; vertical-align: middle;}
+.navigation-container{display: inline-block; float: left; width: 19%; height: 50px; vertical-align: middle; margin: 6px 0 0 0;}
 #Navigation .navigation-container:not(:last-child){margin-right: 4.7%;}
 #Navigation .navigation-container:nth-child(4){margin-right: 0%; width: 18%;}
 #Navigation .navigation-container #reloadButton{width: 100%; background-color:  #f25749; border: none; font-size: 13px; padding: 0px; color: #FFFFFF;} 
