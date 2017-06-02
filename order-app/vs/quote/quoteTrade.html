@@ -897,7 +897,9 @@
 		//获取banner图片
 		var imgId = [];
 		mui.plusReady(function() {
-			mui.app_request("/banner/list", {}, function(result) {
+			mui.app_request("/banner/list", {
+				"type": 9
+			}, function(result) {
 				//console.log(JSON.stringify(result));
 				var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
 				if(bannerLen > 0) {
@@ -960,22 +962,6 @@
 					//mui.openWindow({url:"vs/news/active.html",id:"active",extras:{nid:nid}});
 				}
 			});
-			var first=null;
-			//Android双击home键退出应用
-			mui.back = function(){
-               if(!first) {
-					first = new Date().getTime(); 
-					mui.toast('再按一次退出期货大赛');
-					setTimeout(function() {
-					first = null;
-					}, 1000);
-					}else{
-						if (new Date().getTime() - first < 1000) {   
-							plus.runtime.quit();  
-						} 
-					}
-	        };
 		}); 
 	</script>
-
 </html>
