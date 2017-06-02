@@ -4,7 +4,7 @@
 @charset "utf-8";
 .mui-grid-view.mui-grid-9 .mui-table-view-cell {padding: 0 10px;}
 .find-tab img {width: 50px; height: 50px;}
-.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {font-size: 13px; line-height: 13px; height: 13px; font-weight: bolder;}
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {font-size: 13px; line-height: 16px; height: 15px; font-weight: bolder;}
 .size-11 {font-size: 11px; color: #999999;}
 .mui-grid-view.mui-grid-9 .mui-table-view-cell {border-bottom: none;}
 .main-list .mui-table-view-cell {min-height: 60px; overflow: hidden; height: auto; position: relative; color: #999999;}

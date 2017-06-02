@@ -8,7 +8,7 @@
 .mui-grid-view.mui-grid-9 {border-top: none;}
 .mui-grid-view.mui-grid-9 .mui-table-view-cell {border-bottom: none; border-top: 1px solid #eee;}
 .mui-grid-view.mui-grid-9 .mui-table-view-cell {padding: 11px 10px;}
-.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {font-size: 13px; line-height: 13px; height: 13px; font-weight: bolder;}
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {font-size: 13px; line-height: 16px; height: 15px; font-weight: bolder;}
 /*.find-notice-all{border-top: 10px solid #F2F2F2; border-bottom: 10px solid #F2F2F2;}*/
 .find-notice li a {font-size: 15px; color: #333333;}
 .find-notice li p {font-size: 13px; color: #666666;}

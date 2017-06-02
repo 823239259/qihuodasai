@@ -228,7 +228,7 @@ body{background-color: #FFFFFF;}
 .account-setting li span:nth-child(3){display: block; float: right; color: #666666; font-size: 13px; line-height: 28px;}
 .account-setting-page .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){padding-right: 35px;}
 .account-setting li input{width: 50%; float: right; padding: 0px; height: 28px; line-height: 28px; text-align: right; border: none; color: #333333; font-size: 13px;}
-#editionNew{padding-right: 35px; background: url(../img/account/newBG.png) no-repeat center right; background-size: 25px auto;}
+#editionNew{padding-right: 5px; /*background: url(../img/account/newBG.png) no-repeat center right; background-size: 25px auto;*/}
 #weixinCodeImage{ background-color: rgba(51, 51, 51, 0.5); width: 100%; text-align: center; top:0px; position: fixed; z-index: 999; display: none;}
 #box{ background-color: #FFFFFF;height:300px; position:absolute; width:90%; top:50%; margin-top:-150px;  text-align: center; margin-left:-45%; left: 50%;}
 #box p{ color:#2b2b2b; font-size: 16px; position: relative; height: 40px;line-height: 40px; border-bottom: 1px solid #e5e5e5;}

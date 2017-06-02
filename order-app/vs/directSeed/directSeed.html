@@ -118,7 +118,7 @@
 									</ul>
 								</div>
 								<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="confirmBottonProfit" id="confirmBottonProfit" data-id="chioceProfit">确认</button></a>
-								<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="cancelBottonProfit" data-id="chioceProfit">取消</button></a>
+								<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="cancelBottonProfit" id="cancelBottonProfit" data-id="chioceProfit">取消</button></a>
 							</div>
 						</div>
 					</div>
@@ -137,7 +137,7 @@
 		mui.init();
 		vs.clickLayer();
 		
-		initBottom("../account/account.html","../find/find.html","../quote/quoteTrade.html","directSeed.html");
+		initBottom("../account/account.html","../find/find.html","../quote/quoteTrade.html","directSeed.html","../account/accountno.html");
 		mui("#directSeedTitle").on("tap","a",function() {
 			var _this = $(this);
 			$("#directSeedContent a").hide().eq(_this.index()).show();
@@ -145,6 +145,12 @@
 		/*打开搜索页*/
 		document.getElementById("directSeedSearch").addEventListener("tap",function() {
 			mui.openWindow("search.html","search");
+		});
+		$("#cancelBottonProfit").on("tap",function() {
+			var _this = $(this);
+			var id = _this.attr("data-id");
+			$("#"+id).css("display","none");
+			$("#chioce").css("display","none");
 		});
 		/*国家选择*/
 		/*mui("#chioceProfit .buttonListLi").on("tap","span",function() {

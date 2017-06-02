@@ -96,22 +96,38 @@
 			}, function(result) {
 				mui.toast("登录成功！");
 				//存储用户信息
-				var win=mui.get_window_data();
+				var win=mui.get_window_data();/*
 				console.log(win);
+				console.log("win");*/
 				mui.cacheUser.save(result.data.token, result.data.secret, mobile);
 				if(win==undefined){
-						mui.openWindow("../home/home.html", "home");
-				return;
-				}
+					mui.openWindow("../account/account.html", "account");
+					return;
+				}/*
+				console.log(win.backpageID);
+				console.log("win.backpageID");*/
 				if(win.backpageID) {
-						mui.app_back(win.backpageID, true,win.url);
-					 //放回businessPageId页面，并且刷新该页面信息
+					mui.app_back(win.backpageID, true,win.url);
+					//放回businessPageId页面，并且刷新该页面信息
 					return;
 				}
 				var wsreload = plus.webview.getWebviewById("home");
 				if(wsreload != null) {
 					wsreload.reload();
 				}
+				
+				/*mui.cacheUser.save(result.data.token,result.data.secret,mobile);
+  				localStorage.removeItem("tipLogin");
+  				if (win.backpageID){ 
+  					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
+  					return;
+  				} 
+  				var wsreload = plus.webview.getWebviewById("quotationMain");
+  				if(wsreload != null){
+      				wsreload.reload(); 
+  				}
+  				mui.openWindow("../quotation/quotationMain.html","quotationMain");
+  				return;*/
 			
 
 			}, function(result) {
