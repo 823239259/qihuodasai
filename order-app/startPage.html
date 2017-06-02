@@ -193,7 +193,22 @@
 						}, "软件升级", "确定" );
 					});
 				}
-			})
+			});
+			var first=null;
+			//Android双击home键退出应用
+			mui.back = function(){
+               if(!first) {
+					first = new Date().getTime(); 
+					mui.toast('再按一次退出期货大赛');
+					setTimeout(function() {
+					first = null;
+					}, 1000);
+				}else{
+					if (new Date().getTime() - first < 1000) {   
+						plus.runtime.quit();  
+					} 
+				}
+	        };
 		</script>
 	</body>
 </html>

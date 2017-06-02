@@ -274,6 +274,7 @@ var vs = {
 	// 系统常量
 	constants: {
 		api_domain: "http://test.api.dktai.cn/",
+//		api_domain:"http://192.168.0.72:8080/vs-api/", 
 		//图片地址
 		base_images_url: 'http://test.manage.dktai.cn/',
 		//token
@@ -507,41 +508,38 @@ var vs = {
 
 function initBottom(url1, url2, url3, url4) {
 	document.getElementById("account").addEventListener("tap", function() {
+		mui.app_refresh("account");
 		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({
-				url: url1,
-				id: 'account'
-			});
+			mui.openWindow({ url: url1, id: 'account' });
 			return;
 		}
 		mui.openWindow(url1, "account");
 	});
 	document.getElementById("find").addEventListener("tap", function() {
+		mui.app_refresh("find");
 		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({
-				url: url2,
-				id: "find"
-			});
+			mui.openWindow({ url: url2, id: 'find' });
 			return;
 		}
-		mui.openWindow({
-			url: url2,
-			id: "find"
-		});
+		mui.openWindow(url2, "find");
 
 	});
 	document.getElementById("quoteTrade").addEventListener("tap", function() {
-		mui.openWindow({
-			url: url3,
-			id: "quoteTrade"
-		});
+		mui.app_refresh("quoteTrade");
+		if(mui.cacheUser.isLogin()) {
+			mui.openWindow({ url: url3, id: 'quoteTrade' });
+			return;
+		}
+		mui.openWindow(url3, "quoteTrade");
 	});
 
 	document.getElementById("directSeed").addEventListener("tap", function() {
-		mui.openWindow({
-			url: url4,
-			id: "directSeed"
-		});
+		mui.app_refresh("directSeed");
+		if(mui.cacheUser.isLogin()) {
+			mui.openWindow({ url: url4, id: 'directSeed' });
+			return;
+		}
+		mui.openWindow(url4, "directSeed");
 	});
 
 }

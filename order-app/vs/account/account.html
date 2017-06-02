@@ -74,9 +74,9 @@
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="accountSetting"><img src="../../img/account/accountSettings.png"><span>账户设置</span></a>
 				</li>
-				<li class="mui-table-view-cell">
+				<!--<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="Invitation"><img src="../../img/account/accountInvitation.png"><span>邀请有礼</span></a>
-				</li>
+				</li>-->
 				<!--<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" id="coupon"><img src="../../img/account/accountDiscount.png"><span>我的优惠</span></a>
 				</li>-->
@@ -93,7 +93,12 @@
 		mui.init();
 		var isCertification=false;
 		var bankList=[];
-		initBottom("account.html", "../find/find.html", "../quote/quoteTrade.html", "../directSeed/directSeed.html");
+		initBottom(
+			"account.html",
+			"../find/find.html",
+			"../quote/quoteTrade.html",
+			"../directSeed/directSeed.html"
+			);
 		document.getElementById("accountSetting").addEventListener("tap", function() {
 			mui.openWindow({
 				url: "accountSetting.html",
@@ -130,12 +135,12 @@
 				id: "customerService"
 			});
 		});
-		document.getElementById("Invitation").addEventListener("tap", function() {
+		/*document.getElementById("Invitation").addEventListener("tap", function() {
 			mui.openWindow({
 				url: "Invitation.html",
 				id: "Invitation"
 			});
-		});
+		});*/
 		document.getElementById("recharge").addEventListener("tap", function() {
 			mui.open_window_data("recharge.html", "recharge", { "money": "0"});	
 		});
@@ -151,7 +156,7 @@
 			//				id:"login",
 			//				extras:{backpageID:"login"}
 			//			});
-		});
+		}); 
 		document.getElementById("regist").addEventListener("tap", function() {
 			if(mui.cacheUser.isLogin()) {
 			} else {
@@ -175,8 +180,11 @@
 					mui.openWindow({ "url": "Withdrawals.html", "id": "Withdrawals" });
 				}
 			}else{
-				mui.confirm("您当前还未实名认证，为保障您的账户安全，请先实名认证！","提示",["取消，确认"],function(){
-					mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
+				var btnArray = ['否', '是'];
+				mui.confirm('您当前还未实名认证，为保障您的账户安全，请先实名认证！', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
+					}
 				});
 			}
 		});

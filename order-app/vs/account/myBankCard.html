@@ -98,11 +98,14 @@
 							$(".bind-card").css("display", "none");
 						} else {
 							bankButton.innerHTML = "添加银行卡";
+							$("#insertBank").text("");
 							bankButton.value = "1";
+							
 						}
 					}
 				}, function(res) {});
 			} else {
+				$("#insertBank").text("");
 				bankButton.innerHTML = "添加银行卡，请先进行实名认证";
 				bankButton.value = "0";
 			}
