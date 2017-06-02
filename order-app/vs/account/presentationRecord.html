@@ -16,7 +16,7 @@
 			.af_total span.left { float: left; }
 			.af_total span.right { float: right;}
 			.af_income { background: #fffbf8; border-bottom: 1px solid #e0e0e0;}
-			.af_exp { background: #e9fcff; border-bottom: 1px solid #e0e0e0;}
+			.af_exp { background: #ffffff; border-bottom: 1px solid #e0e0e0;}
 			.af_list .mui-table-view-cell:after { background-color: #fff;}
 			.af_btmpromt { text-align: center; color: #999999; padding: 10px 0;}
 			.af_list li.mui-table-view { padding: 0; margin: 0;}
@@ -37,12 +37,12 @@
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ac_tel" style="padding-top:0;">
 			<div class="mui-scroll af_list">
-<!--				<div class="af_total">
+				<!--<div class="af_total">
 					<span id="left" class="left">收入0笔： 0.00元</span>
 					<span id="right" class="right">支出0笔： 0.00元</span>
 				</div>-->
 				<!--数据列表-->
-				<ul class="mui-table-view af_list"  id="fundListul">
+				<ul class="mui-table-view af_list"  id="fundListul" style="margin-top: 63px">
 					<!--<li class="mui-table-view-cell af_income">
 						<p class="af_time">2017-05-31   <b>09:00</b></p>
 						<p class="af_date"><b>asasfsafasfasf</b></p>
@@ -132,45 +132,43 @@
 		  	}
 		}
 		function fundList(fund){
-		  	var $fundList=document.body.querySelector(".mui-table-view"); 
+			console.log(JSON.stringify(fund));
+			if(fund.type ==2){
+				var $fundList=document.body.querySelector(".mui-table-view"); 
 		  	
-		  	var li=document.createElement("li");
+			  	var li=document.createElement("li");
+			  	
+			  	var iscome=fund.money >= 0 ? true : false; 
+			  	var p1=document.createElement("p");
+			  	p1.setAttribute("class","af_time");
+			  	
+			  	var b1=document.createElement("b");
+			  	var timeo=vs.dateUtil.getFormatDataByLong(fund.payTime,"yyyy-MM-dd");
+			  	var timet=vs.dateUtil.getFormatDataByLong(fund.payTime,"hh:mm");
+			  	p1.innerHTML=timeo;
+			  	b1.innerHTML=timet;
+			  	var p2=document.createElement("p");
+			  	p2.setAttribute("class","af_date");
+			  	
+			  	if(iscome){
+			  		li.setAttribute("class","mui-table-view-cell af_income");
+			  		p2.innerHTML="+"+fund.money+"元1";
+			  		/*$(".af_income").css("display","none");*/
+			  	}else{
+			  		li.setAttribute("class","mui-table-view-cell af_exp");
+			  		p2.innerHTML=fund.money+"元"; 
+			  	}
+			  	var b2=document.createElement("b");
+			  	b2.innerHTML=fund.remark;
+			  	
+			  	p1.appendChild(b1);
+			  	p2.appendChild(b2);
+			  	li.appendChild(p1);
+			  	li.appendChild(p2);
+			  	
+			  	$fundList.appendChild(li);
+			}
 		  	
-		  	var iscome=fund.money >= 0 ? true : false; 
-		  	var p1=document.createElement("p");
-		  	p1.setAttribute("class","af_time");
-		  	
-		  	var b1=document.createElement("b");
-		  	var timeo=vs.dateUtil.getFormatDataByLong(fund.payTime,"yyyy-MM-dd");
-		  	var timet=vs.dateUtil.getFormatDataByLong(fund.payTime,"hh:mm");
-		  	p1.innerHTML=timeo;
-		  	b1.innerHTML=timet;
-		  	var p2=document.createElement("p");
-		  	p2.setAttribute("class","af_date");
-		  	
-		  	if(iscome){
-		  		li.setAttribute("class","mui-table-view-cell af_income");
-		  		p2.innerHTML="+"+fund.money+"元";
-		  	}else{
-		  		li.setAttribute("class","mui-table-view-cell af_exp");
-		  		p2.innerHTML=fund.money+"元"; 
-		  	}
-		  	var b2=document.createElement("b");
-		  	b2.innerHTML=fund.remark;
-		  	
-		  	p1.appendChild(b1);
-		  	p2.appendChild(b2);
-		  	li.appendChild(p1);
-		  	li.appendChild(p2);
-		  	
-		  	$fundList.appendChild(li);
 		}
-		  	/*mui.app_request("/user/fund/list",{"type":2},function(result){
-		  		if(!mui.isnull(result.data)){
-		  			console.log(JSON.stringify(result.data))
-		  		}
-		  	},function(result){
-		  		return;
-		  	});*/
 	</script>
 </html>
