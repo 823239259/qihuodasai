@@ -1772,12 +1772,22 @@
 					"img/myOn.png",
 					"img/account/signImg.png",
 					"img/home.png",
-					"img/account/accountInvitation.png"
+					"img/account/accountInvitation.png",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"img/found.png",
+					"img/directSeeding.png"
 				],
 				"refer": [
 					"vs/account/Invitation.html",
 					"vs/account/recharge.html",
-					"vs/account/Withdrawals.html"
+					"vs/account/Withdrawals.html",
+					"vs/login/login.html"
 				],
 				"priority": 0
 			},
@@ -1869,6 +1879,26 @@
 				"refer": [
 					"vs/account/withdramalsPassword.html"
 				],
+				"priority": 0
+			},
+			"vs/login/login.html": {
+				"resources": [
+					"img//login/ipnoneBimg.png",
+					"img/login/inputBimg.png",
+					"img//login/passWord.png",
+					"css/login.css",
+					"img/login/LOGO.png"
+				],
+				"refer": [
+					"vs/login/register.html"
+				],
+				"priority": 0
+			},
+			"vs/login/register.html": {
+				"resources": [
+					"img/login/registerInputOn.png"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

@@ -60,7 +60,6 @@
 				"name": username,
 				"card": card
 			}, function(result) {
-				console.log(JSON.stringify(result));
 				if(result.success == true) {
 					mui.toast("认证成功！");
 					var win = mui.get_window_data("realNameVerification");
@@ -75,8 +74,21 @@
 						return;
 					}
 				}
-			}, function(res) {
-				console.log(JSON.stringify(res));
+			}, function(result) {
+				console.log(JSON.stringify(result));
+				if(result.code ==2) {
+					mui.toast("实名认证失败");
+					return;
+				}else if(result.code ==3) {
+					mui.toast("身份证号格式有误");
+					return;
+				}else if(result.code ==4) {
+					mui.toast("该身份证已经被认证过");
+					return;
+				}else if(result.code ==8) {
+					mui.toast("实名认证失败次数超过最高次数");
+					return;
+				}
 			});
 		}
 		mui.app_request('/user/getbalancerate', {

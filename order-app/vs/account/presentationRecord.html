@@ -37,10 +37,10 @@
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ac_tel" style="padding-top:0;">
 			<div class="mui-scroll af_list">
-				<div class="af_total">
+<!--				<div class="af_total">
 					<span id="left" class="left">收入0笔： 0.00元</span>
 					<span id="right" class="right">支出0笔： 0.00元</span>
-				</div>
+				</div>-->
 				<!--数据列表-->
 				<ul class="mui-table-view af_list"  id="fundListul">
 					<!--<li class="mui-table-view-cell af_income">
@@ -86,11 +86,11 @@
 		  	//获取资金明细信息
 		  	mui.app_request("/user/fund/list",{},function(result){
 		  		if(!mui.isnull(result.data)){
-		  			var income="收入"+result.data.incomeNum+"笔："+vs.moneyUtils.decimal(result.data.incomeMoney,2)+"元";
-		  			var out="支出"+result.data.outlayNum+"笔："+vs.moneyUtils.decimal(result.data.outlayMoney,2)+"元";
-		  			
-		  			document.getElementById("left").innerHTML=income;
-		  			document.getElementById("right").innerHTML=out;
+//		  			var income="收入"+result.data.incomeNum+"笔："+vs.moneyUtils.decimal(result.data.incomeMoney,2)+"元";
+//		  			var out="支出"+result.data.outlayNum+"笔："+vs.moneyUtils.decimal(result.data.outlayMoney,2)+"元";
+//		  			
+//		  			document.getElementById("left").innerHTML=income;
+//		  			document.getElementById("right").innerHTML=out;
 		  			list=result.data.fundList;  
 		  			
 		  			if(!mui.isnull(list)){

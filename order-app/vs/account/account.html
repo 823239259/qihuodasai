@@ -175,8 +175,11 @@
 					mui.openWindow({ "url": "Withdrawals.html", "id": "Withdrawals" });
 				}
 			}else{
-				mui.confirm("您当前还未实名认证，为保障您的账户安全，请先实名认证！","提示",["取消，确认"],function(){
-					mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
+				var btnArray = ['否', '是'];
+				mui.confirm('您当前还未实名认证，为保障您的账户安全，请先实名认证！', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.open_window_data("realNameVerification.html", "realNameVerification", { "backpageID": "account", "url": "account.html" });
+					}
 				});
 			}
 		});

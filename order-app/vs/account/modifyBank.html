@@ -162,15 +162,20 @@
 			mui.app_request("user/withdraw/del_bank", {
 				"bankId": win.id
 			}, function(result) {
-				mui.toast("设置成功");
+				console.log(JSON.stringify(result));
+				mui.toast("删除银行卡成功");
 				mui.app_back(win.backpageID, true, win.url);
 				return;
 			}, function(result) {
+				console.log(JSON.stringify(result));
 				if(result.code == 2) {
-					mui.toast("设置失败");
+					mui.toast("删除银行卡失败");
 					return;
 				} else if(result.code == 3) {
 					mui.toast("银行卡不存在");
+					return;
+				}else if (result.code == 5) {
+					mui.toast("该银行卡正在提现处理中，不能删除");
 					return;
 				}
 			})
@@ -190,12 +195,12 @@
 				"city": detailCity,
 				"subbank": bankAddress
 			}, function(result) {
-				mui.toast("设置成功");
+				mui.toast("修改成功");
 				mui.app_back(win.backpageID, true, win.url);
 				return;
 			}, function(result) {
 				if(result.code == 2) {
-					mui.toast("设置失败");
+					mui.toast("修改失败");
 					return;
 				} else if(result.code == 3) {
 					mui.toast("银行卡不存在");
