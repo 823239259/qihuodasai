@@ -125,6 +125,36 @@
 				position: absolute;
 				margin-right: -32px;
 			}
+			/*****修改样式-wxf*****/
+			.type-list .title{
+				margin: 2px 0;
+			}
+			.type-list .title span{
+				display: inline-block;
+				float: left;
+			}
+			.type-list .title span.mg-0{
+				margin: 0 !important;
+			}
+			.type-list .title-name{
+				float: left;
+				display: block;
+				width: 36px;
+				height: 36px;
+				line-height: 36px;
+				text-align: center;
+				background: #ffc400;
+				border-radius: 100%;
+				color: #fff;
+			}
+			/*.title-number-price, .time-fd-zdf{
+				float: left !important;
+			}
+			.title-number-price{
+				margin-left: 20px !important;
+			}*/
+			
+			
 		</style>
 	</head>
 
@@ -713,18 +743,23 @@
 	
 	<script id="tplQuoteList00" type="text/html">
 		{{# if(!isEmpty(d)){ }}
-			<li class="mui-table-view-cell">
+			<li class="mui-table-view-cell type-list">
 				<a id="{{d.contractNo}}-line" class="mui-navigate-right" href="#setting">
-					<label>
+					<span class="title-name">{{d.contractNo}}</span>
+					<!--<label>
 						<img src="{{vs.constants.base_images_url+d.icon}}" alt="" />
-					</label>
+					</label>-->
 					<p class="title">
-						<span>{{d.contractNo}}</span><span id="{{d.contractNo}}-contractNo00"></span>
 						<span>{{d.contractName}}</span>
-						<span id="{{d.contractNo}}-price" class="title_number">0</span>
+						<span>{{d.contractNo}}</span>
+						<span id="{{d.contractNo}}-contractNo00" class="mg-0"></span>
+						<span id="{{d.contractNo}}-price" class="title_number title-number-price">0</span>
 					</p>
-					<p class="time" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p><span id="{{d.contractNo}}-zdf" class="time_fd">0%</span>
-					
+					<p class="title">
+						<span>23小时连续交易</span>
+						<span id="{{d.contractNo}}-zdf" class="time_fd" style="float: right; margin-right: 30px;">0%</span>
+					</p>
+					<p class="time" style="display: none;" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p>
 				</a>
 				<span style="display: none;">{{ dealContractNo(d.contractNo) }}</span>
 				<span style="display: none;">{{ d.contractNo }}</span><!--CL-->
