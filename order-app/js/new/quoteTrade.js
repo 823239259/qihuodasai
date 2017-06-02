@@ -8,9 +8,13 @@ $("#list").on('tap','li',function(){
 	var CommodityNoContractNo = $('#list li').eq(index).children().eq(2).text()+$('#list li').eq(index).children().eq(3).text();//CL1707
 	contractNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract");
 	exchangeNo=CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "ExchangeNo");
+	
 	$("#totalVolume").val('');
 	$("#commodityNo").val(SuperCommodityNo);
 	$("#contractNo").val( CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract"));
+	
+	//持仓时间
+	$('#flashMoreTime').text($('#'+SuperCommodityNo+'-line-time').text());
 	
 	//初始化模拟下单页面的值
 	$('#lastPrices').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "LastPrice"),SuperCommodityNo));
@@ -48,11 +52,55 @@ $("#list").on('tap','li',function(){
 	
 	//为select赋值
 	$('#contract').val(CommodityNoContractNo);
-	console.log(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));
+	
 	//判断是否存在闪电设置
 	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null){
-//		$('#placeOrderBidPrice1').unbind('tap');
 		$('#placeOrder00').attr('href','#');
+		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
+		console.log('支付总金额:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));//支付总金额
+		console.log('交易数量:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum'));
+		console.log('止盈:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'stopWin'));
+		console.log('止损:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss'));
+		console.log('滑点保证金:'+mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit'));
+		console.log('综合交易手续费:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee'));
+		console.log('履约保证金:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'lybzj'));
+		
+		$('#placeOrderBidPrice1').on('tap',function(){
+			
+			var Direction = 0;//买
+			var ClientNo = TradeConfig.username;
+			var PlatForm_User = phone;
+			var ProductID = '';
+			var CommodityNo = SuperCommodityNo;
+			var ContractNo = contractNo;
+			var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
+			var StopWin = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopWin');
+			var StopLoss = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss');
+			var Deposit = mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit');
+			var Fee = mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee');
+			
+			Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		});
+		
+		$('#placeOrderAskPrice1').on('tap',function(){
+			
+			var Direction = 1;//卖
+			var ClientNo = TradeConfig.username;
+			var PlatForm_User = phone;
+			var ProductID = '';
+			var CommodityNo = SuperCommodityNo;
+			var ContractNo = contractNo;
+			var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
+			var StopWin = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopWin');
+			var StopLoss = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss');
+			var Deposit = mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit');
+			var Fee = mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee');
+			
+			Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		});
+		
 	}
 	
 	
@@ -305,7 +353,6 @@ function getContractParam(){
 			'contractNo':SuperCommodityNo
 			
 		},function(result){
-			
 			$('#_TradeNum_ .chioce-button').remove();
 			$('#_exchange_rate_string_').text('');
 			$('#_exchange_rate_').text('');
@@ -395,9 +442,9 @@ function getContractParam(){
 				var zsj=$(this).text();//止损价
 				var lybzj = (initHdbzj*num0)+Number(zsj);//滑点保证金*手数+止损价=履约保证金
 				$('#_performance_margin_').text(lybzj+'元');
-				
-				
-				
+				var a = $('#_poundage_').text();
+				a = a.substring(a.indexOf(')')+1,a.indexOf('元'));
+				$('#payment_amount').text(Number(a)+Number(lybzj));
 			});
 			
 			$("#_TradeNum_ .chioce-button").on('tap',function(){
@@ -688,17 +735,22 @@ $('#flashButton').on('tap',function(){
 					var tradeNum=$('#TradeNum .on').text();
 					var stopWin= $('#stopWin010 .on').text();
 					var stopLoss= $('#stopLoss010 .on').text();
-					var poundage = $('#poundage').text().substr($('#poundage').text().indexOf(')')+2, $('#poundage').text().indexOf('元'));
-					poundage = poundage.substr(0,poundage.length-1);
+					var poundage = $('#poundage').text().substring($('#poundage').text().indexOf(')')+1, $('#poundage').text().indexOf('元'));
 					var lybzj =
 					$('#performance_margin').text().substr(0,$('#performance_margin').text().length-1);//履约保证金
 					var commodityNo = SuperCommodityNo;
+					
+					$.each(result.data,function(index, obj){
+						mui.cacheData.removeFlash(phone+commodityNo+obj.lever+'Deposit');
+						mui.cacheData.saveFlash(phone+commodityNo+obj.lever+'Deposit',obj.slipBond);
+					});
 					
 					
 					
 					mui.cacheData.removeFlash(phone+commodityNo+'tradeNum');
 					mui.cacheData.removeFlash(phone+commodityNo+'stopWin');
 					mui.cacheData.removeFlash(phone+commodityNo+'stopLoss');
+					mui.cacheData.removeFlash(phone+commodityNo+'Fee');
 					mui.cacheData.removeFlash(phone+commodityNo+'lybzj');
 					mui.cacheData.removeFlash(phone+commodityNo+'zfzje');
 					
@@ -706,6 +758,7 @@ $('#flashButton').on('tap',function(){
 					mui.cacheData.saveFlash(phone+commodityNo+'tradeNum',tradeNum);//交易数量
 					mui.cacheData.saveFlash(phone+commodityNo+'stopWin',stopWin);//止盈
 					mui.cacheData.saveFlash(phone+commodityNo+'stopLoss',stopLoss);//止损
+					mui.cacheData.saveFlash(phone+commodityNo+'Fee',poundage);//综合交易手续费
 					mui.cacheData.saveFlash(phone+commodityNo+'lybzj',lybzj);//履约保证金
 					mui.cacheData.saveFlash(phone+commodityNo+'zfzje',Number(poundage)+Number(lybzj));//支付总金额（不含下单费用）
 					
@@ -730,10 +783,11 @@ $('#orderListButton').on('tap',function(){
 	
 	var StopWin = $('#_stopWin010_ .on').text(); //触发止盈
 	var StopLoss = $('#_stopLoss010_ .on').text();//触发止损
-	var Deposit = $('#_slipBond_').val();//滑点保证金
+//	var Deposit = $('#_slipBond_').val();//滑点保证金
+	var Deposit = mui.cacheData.getSlipBond(OrderNum+CommodityNo+'hdbzj');
 	var a = $('#_poundage_').text();
 	var Fee = $('#_poundage_').text().substring(a.indexOf(')')+2,a.indexOf('元'));
-	alert(OrderNum);
+	alert(Deposit);
 	if($('#orderListButton').text()=='看多买入'){
 		var Direction = 0;//买
 		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
