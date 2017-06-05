@@ -32,31 +32,11 @@
 			<a id="searchButton" class="mui-action-back">取消</a>
 		</header>
 		<div class="mui-content">
-			<!--<div id="searchContainer">
-				<p id=""><span>搜索历史</span><span id="clearSearchHistory">清除搜索历史</span></p>
-				<ul id="searchHistory">
-					<li>富时A50</li>
-					<li>富时A50</li>
-					<li>富时A501</li>
+			<div id="searchResultContainer" style="padding-top: 10px;">
+				<ul class="mui-table-view " id="newsList">
+					<!-- 参见 tplNews 模板 -->
 				</ul>
-			</div>-->
-			<!--<div class="mui-slider-item mui-control-content mui-active" id="searchResultContainer" style="position: static;">-->
-				<!--<div class="directSeed-all">
-					<p class="chartContainer-time">2017-01-20</p>
-				</div>-->
-				<!--<div id="chartContainerContent" class="searchResultContainer-all">-->
-					<!--<div class="mui-scroll-wrapper" id="chartContainerContent1">-->
-						<!--<div class="mui-scroll">-->
-							<div id="searchResultContainer" style="padding-top: 10px;">
-								<ul class="mui-table-view " id="newsList">
-									
-									<!-- 参见 tplNews 模板 -->
-								</ul>
-							</div>
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</div>-->
+			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -66,9 +46,9 @@
 	<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
 	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 	<script type="text/javascript" src="../../lib/layui/layui.js"></script>
-	
+
 	<script id="tplNews" type="text/html">
-		{{# layui.each(d, function(index, item){ if(item.IsUsed!=0){    }}
+		{{# layui.each(d, function(index, item){ if(item.IsUsed!=0){ }}
 		<li class="">
 			<div class="content-left">{{vs.dateUtil.getFormatDataByLong(item.liveCreatetime / 1000, "MM-dd hh:mm")}}</div>
 			<div class="content-circular"></div>
@@ -81,8 +61,6 @@
 	</script>
 	
 	<script type="text/javascript">
-//		mui.init();
-//		
 		var layer, laytpl;
 		//一般直接写在一个js文件中
 		layui.use(['layer', 'laytpl'], function() {
@@ -90,194 +68,61 @@
 			laytpl = layui.laytpl;
 		});
 		
-//		mui.plusReady(function() {
-			$.ajax({
-				url: "http://www.vs.com/crawler/getCrawlerByChannelLiveContent",
-				type: "get",
-				dataType: "json",
-				data: {
-					pageIndex: 0,
-					size: 30,
-					channelset: 1
-				},
-				success: function(res) {
-					if(res.success == true) {
-						vs.tplFillData("newsList", "tplNews", res.data.data, vs.constants.FillType.after);
-						for(var j= 0;j<$("#searchResultContainer ul li .content-right").length; j++){
-							if($("#searchResultContainer ul li .content-right").eq(j).height() > 85){
-								$("#searchResultContainer ul li .content-right").eq(j).css("height","120px");
-							}else{
-								$("#searchResultContainer ul li .content-right").eq(j).find(".caoz").css("display","none");
-							}
-						}
-						$("#searchResultContainer .caoz").on("tap",function() {
-							var _this = $(this);
-							if(_this.html()  == "展开") {
-								_this.parent().removeAttr("style");
-								_this.parent().parent().css("height","inherit");
-								_this.html("收起");
-							}else if(_this.html()  == "收起") {
-								_this.parent().css({
-									"background": "#ffffff",
-									"z-index": "999",
-									"width": "100%",
-									"position": "absolute",
-									"top": "103px",
-									"height": "21px"
-								});
-								_this.parent().parent().css("height","120px");
-								_this.html("展开");
-							}
-						});
-					}
-				},
-				error: function(res) {
-					error(res);
-					var ul = $('#chartContainerContent1 .mui-table-view');
-					var ts = $('#chartContainerContent1 .mui-pull-bottom-tips');
-					ts.css("display", "none");
-					var li;
-					li = document.createElement('li');
-					li.innerHTML = '<div id="noSearchResultContainer" >' +
-						'暂无活动喔，你可关注维胜公众号留意近期活动~</div>';
-					ul.append(li);
+		$.ajax({
+			url: "http://www.vs.com/crawler/getCrawlerByChannelLiveContent",
+			type: "get",
+			dataType: "json",
+			data: {
+				pageIndex: 0,
+				size: 30,
+				channelset: 1
+			},
+			success: function(res) {
+				if(res.success == true) {
+					vs.tplFillData("newsList", "tplNews", res.data.data, vs.constants.FillType.after);
+					expandAbleNews();
+				}
+			},
+			error: function(res) {
+				error(res);
+				var ul = $('#chartContainerContent1 .mui-table-view');
+				var ts = $('#chartContainerContent1 .mui-pull-bottom-tips');
+				ts.css("display", "none");
+				var li;
+				li = document.createElement('li');
+				li.innerHTML = '<div id="noSearchResultContainer" >' +
+					'暂无活动喔，你可关注维胜公众号留意近期活动~</div>';
+				ul.append(li);
+			}
+		});
+		
+		function expandAbleNews() {
+			for(var j= 0;j<$("#searchResultContainer ul li .content-right").length; j++){
+				if($("#searchResultContainer ul li .content-right").eq(j).height() > 85){
+					$("#searchResultContainer ul li .content-right").eq(j).css("height","120px");
+				}else{
+					$("#searchResultContainer ul li .content-right").eq(j).find(".caoz").css("display","none");
+				}
+			}
+			$("#searchResultContainer .caoz").on("tap",function() {
+				var _this = $(this);
+				if(_this.html()  == "展开") {
+					_this.parent().removeAttr("style");
+					_this.parent().parent().css("height","inherit");
+					_this.html("收起");
+				}else if(_this.html()  == "收起") {
+					_this.parent().css({
+						"background": "#ffffff",
+						"z-index": "999",
+						"width": "100%",
+						"position": "absolute",
+						"top": "103px",
+						"height": "21px"
+					});
+					_this.parent().parent().css("height","120px");
+					_this.html("展开");
 				}
 			});
-//		});
-
-		//		/*加载更多*/
-		//		var url = "http://www.vs.com/crawler/getCrawlerByChannelLiveContent";
-		//		var list = null;
-		//		var params = {
-		//			pageIndex: 0,
-		//			size: 30,
-		//			channelset: 1
-		//		};
-		//		(function($) {
-		//			//阻尼系数
-		//			var deceleration = mui.os.ios ? 0.003 : 0.0009;
-		//			$('.mui-scroll-wrapper').scroll({
-		//				bounce: false,
-		//				indicators: true, //是否显示滚动条
-		//				deceleration: deceleration
-		//			});
-		//			// 7*24
-		//			$.each(document.querySelectorAll('#searchResultContainer .mui-scroll'), function(index, pullRefreshEl) {
-		//				var div = this;
-		//				contentrefresh: '正在加载...',
-		//					newData(url, params, forList, "", "post");
-		//
-		//				$(pullRefreshEl).pullToRefresh({
-		//					up: {
-		//						contentrefresh: '正在加载更多的数据...',
-		//						callback: function() {
-		//							var self = this;
-		//							setTimeout(function() {
-		//								fundmore();
-		//								if(list.length == 30) {
-		//									self.endPullUpToRefresh(false);
-		//									num++;
-		//								} else {
-		//									self.endPullUpToRefresh(true);
-		//								}
-		//							}, 1500);
-		//						}
-		//					}
-		//				});
-		//			});
-		//		})(mui);
-		//
-		//		//7*24 ajax
-		//		function newData(url, params, success, error, method) {
-		//			var success = arguments[2] ? arguments[2] : function() {};
-		//			var error = arguments[3] ? arguments[3] : function() {};
-		//			if(method == undefined) {
-		//				method = "get";
-		//			}
-		//			$.ajax({
-		//				url: url,
-		//				type: method,
-		//				dataType: "json",
-		//				data: params,
-		//				success: function(res) {
-		//					if(res.success == true) {
-		//						success(res.data);
-		//					}
-		//				},
-		//				error: function(res) {
-		//					error(res);
-		//					var ul = $('#chartContainerContent1 .mui-table-view');
-		//					var ts = $('#chartContainerContent1 .mui-pull-bottom-tips');
-		//					ts.css("display", "none");
-		//					var li;
-		//					li = document.createElement('li');
-		//					li.innerHTML = '<div id="noSearchResultContainer" >' +
-		//						'暂无活动喔，你可关注维胜公众号留意近期活动~</div>';
-		//					ul.append(li);
-		//				}
-		//			})
-		//		}
-		//		var num = 1;
-		//
-		//		function fundmore() {
-		//			var self = this;
-		//			var params1 = {
-		//				pageIndex: num,
-		//				size: 30,
-		//				channelset: 1
-		//			};
-		//			newData(url, params1, forList, "", "post");
-		//		}
-		//		// 7*24小时数据
-		//		function forList(res) {
-		//			console.log(JSON.stringify(res));
-		//			if(!mui.isnull(res)) {
-		//				list = res.data;
-		//				if(!mui.isnull(list)) {
-		//					for(var i = 0; i < list.length; i++) {
-		//						fundList(list, i);
-		//					}
-		//					for(var j = 0; j < $("#chartContainerContent1 ul li .content-right").length; j++) {
-		//						if($("#chartContainerContent1 ul li .content-right").eq(j).height() > 85) {
-		//							$("#chartContainerContent1 ul li .content-right").eq(j).css("height", "105px");
-		//						} else {
-		//							$("#chartContainerContent1 ul li .content-right").eq(j).find(".caoz").css("display", "none");
-		//						}
-		//					}
-		//					$("#chartContainerContent1 .caoz").on("tap", function() {
-		//						var _this = $(this);
-		//						if(_this.html() == "展开") {
-		//							_this.parent().removeAttr("style");
-		//							_this.parent().parent().css("height", "inherit");
-		//							_this.html("收起");
-		//						} else if(_this.html() == "收起") {
-		//							_this.parent().css({
-		//								"background": "#ffffff",
-		//								"z-index": "999",
-		//								"width": "100%",
-		//								"position": "absolute",
-		//								"top": "80px",
-		//								"height": "21px"
-		//							});
-		//							_this.parent().parent().css("height", "105px");
-		//							_this.html("展开");
-		//						}
-		//					});
-		//				}
-		//			}
-		//		}
-		//
-		//		function fundList(list, i) {
-		//			var $fundList = document.body.querySelector("#searchResultContainer .mui-table-view");
-		//			var time = vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime / 1000, "hh:mm");
-		//			//console.log(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
-		//			$("#result1").html(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime / 1000, "yyyy-MM-dd"));
-		//			var li = document.createElement("li");
-		//			li.innerHTML = "<div class='content-left'>" + time + "</div>" +
-		//				"<div class='content-circular'></div>" +
-		//				"<div class='content-right'>" + list[i].liveContent + "<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 80px;'><span class='caoz'>展开</div></div>";
-		//			$fundList.appendChild(li);
-		//		}
+		}
 	</script>
-
 </html>

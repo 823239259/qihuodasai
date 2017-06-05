@@ -506,23 +506,22 @@ var vs = {
 	}
 }
 
-function initBottom(url1, url2, url3, url4) {
+function initBottom(url1, url2, url3, url4,url5) {
 	document.getElementById("account").addEventListener("tap", function() {
-		mui.app_refresh("account");
-		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({ url: url1, id: 'account' });
+		if (mui.cacheUser.isLogin()){
+			var a=plus.webview.getWebviewById("account");
+			if(a){
+				mui.app_refresh('account');
+			}
+			mui.openWindow({url:url1,id:'account'}); 
 			return;
 		}
-		mui.openWindow(url1, "account");
+		mui.openWindow({url:url5,id:"accountno"});
 	});
 	document.getElementById("find").addEventListener("tap", function() {
 		mui.app_refresh("find");
-		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({ url: url2, id: 'find' });
-			return;
-		}
-		mui.openWindow(url2, "find");
-
+		mui.openWindow({ url: url2, id: 'find' });
+		return;
 	});
 	document.getElementById("quoteTrade").addEventListener("tap", function() {
 		mui.app_refresh("quoteTrade");
@@ -532,16 +531,11 @@ function initBottom(url1, url2, url3, url4) {
 		}
 		mui.openWindow(url3, "quoteTrade");
 	});
-
 	document.getElementById("directSeed").addEventListener("tap", function() {
 		mui.app_refresh("directSeed");
-		if(mui.cacheUser.isLogin()) {
-			mui.openWindow({ url: url4, id: 'directSeed' });
-			return;
-		}
-		mui.openWindow(url4, "directSeed");
+		mui.openWindow({ url: url4, id: 'directSeed' });
+		return;
 	});
-
 }
 
 /**

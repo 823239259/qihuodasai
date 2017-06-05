@@ -146,7 +146,13 @@
 	<script src="../../js/jquery-1.11.3.js"></script>
 	<script type="text/javascript">
 		mui.init();
-		initBottom("../account/account.html", "find.html", "../quote/quoteTrade.html", "../directSeed/directSeed.html");
+		initBottom(
+			"../account/account.html",
+			"find.html", 
+			"../quote/quoteTrade.html",
+			"../directSeed/directSeed.html",
+			"../account/accountno.html"
+			);
 		/*打开训练中心*/
 		document.getElementById("trainingCenter").addEventListener("tap", function() {
 			mui.openWindow("../quote/placeOrder.html", "quoteTrade");
@@ -169,7 +175,12 @@
 		});
 		/*打开期货学堂*/
 		document.getElementById("futuresSchool").addEventListener("tap", function() {
-			mui.openWindow("informationCenter/informationCenter.html", "informationCenter");
+			mui.open_window_data(
+				"informationCenter/informationCenter.html", 
+				"informationCenter", 
+				{ 
+					"type": "1"
+				});
 		});
 		(function($) {
 			var deceleration = mui.os.ios?0.003:0.0009;
