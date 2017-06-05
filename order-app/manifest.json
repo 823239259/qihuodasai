@@ -1787,7 +1787,9 @@
 					"vs/account/Invitation.html",
 					"vs/account/recharge.html",
 					"vs/account/Withdrawals.html",
-					"vs/login/login.html"
+					"vs/login/login.html",
+					"vs/account/accountSetting.html",
+					"vs/directSeed/directSeed.html"
 				],
 				"priority": 0
 			},
@@ -1828,7 +1830,25 @@
 					"img/directSeed-clock.png",
 					"css/mui.picker.min.css",
 					"img/home.png",
-					"js/directSeed.js"
+					"js/directSeed.js",
+					"img/Canada.png",
+					"img/Austria.png",
+					"img/Seoul.png",
+					"img/Britain.png",
+					"img/allCity.png",
+					"img/Belgium.png",
+					"img/Eurozone.png",
+					"img/my.png",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"img/found.png"
 				],
 				"refer": [
 					"vs/account/account.html"
@@ -1851,10 +1871,27 @@
 					"css/find.css",
 					"img/find/find_4.png",
 					"js/immersed.js",
-					"img/find/find_5.png"
+					"img/find/find_5.png",
+					"img/my.png",
+					"js/mui.pullToRefresh.js",
+					"js/jquery-1.11.3.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"img/find/find_3.png",
+					"css/own.css",
+					"js/common.js",
+					"img/find/find_2.png",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"img/find/find_1.png",
+					"img/directSeeding.png"
 				],
 				"refer": [
-					"vs/find/informationCenter/informationCenter.html"
+					"vs/find/informationCenter/informationCenter.html",
+					"vs/account/account.html",
+					"vs/directSeed/directSeed.html",
+					"vs/find/viewpoint/vsViewpoint.html"
 				],
 				"priority": 0
 			},
@@ -1897,6 +1934,39 @@
 			"vs/login/register.html": {
 				"resources": [
 					"img/login/registerInputOn.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/account/accountSetting.html": {
+				"resources": [
+					"img/account/accountSetting6.png",
+					"img/account/accountSetting5.png",
+					"img/account/accountSetting1.png",
+					"img/account/accountSetting3.png",
+					"img/backBg.png",
+					"img/account/accountSetting4.png",
+					"img/weixinshare.png",
+					"img/close.png",
+					"img/account/accountSetting2.png",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/own.css",
+					"js/common.js",
+					"img/account/newBG.png",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/account.css",
+					"css/mui.min.css",
+					"img/account/accountSetting7.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vs/find/viewpoint/vsViewpoint.html": {
+				"resources": [
+					"img/backBg.png",
+					"css/vsViewpoint.css"
 				],
 				"refer": [],
 				"priority": 0
