@@ -1758,7 +1758,8 @@
 					"vs/account/account.html",
 					"vs/directSeed/directSeed.html",
 					"vs/find/informationCenter/informationCenter.html",
-					"vs/find/find.html"
+					"vs/find/find.html",
+					"vs/account/accountno.html"
 				],
 				"priority": 0
 			},
@@ -1927,7 +1928,8 @@
 					"img/login/LOGO.png"
 				],
 				"refer": [
-					"vs/login/register.html"
+					"vs/login/register.html",
+					"vs/account/account.html"
 				],
 				"priority": 0
 			},
@@ -1969,6 +1971,22 @@
 					"css/vsViewpoint.css"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"vs/account/accountno.html": {
+				"resources": [
+					"img/account/accountSettings.png",
+					"img/account/accountOpinion.png",
+					"img/account/accountDetailed.png",
+					"img/account/accountCapital.png",
+					"css/account.css",
+					"img/myOn.png",
+					"img/account/signImg.png",
+					"img/home.png"
+				],
+				"refer": [
+					"vs/login/login.html"
+				],
 				"priority": 0
 			}
 		},

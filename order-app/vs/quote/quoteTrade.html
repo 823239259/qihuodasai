@@ -425,13 +425,13 @@
 									<ul>
 										<li class="mui-col-xs-5 mui-col-sm-5">
 											<i id="buySellNumLeft"></i>
-											<i id="askPrice1">12/</i>
-											<i id="askQty1">59.01</i>
+											<i id="askPrice1"></i>
+											<i id="askQty1"></i>
 										</li>
 										<li class="mui-col-xs-2 mui-col-sm-2"><span>买卖量</span></li>
 										<li class="mui-col-xs-5 mui-col-sm-5">
-											<i id="bidPrice1">12/</i>
-											<i id="bidQty1">555</i>
+											<i id="bidPrice1"></i>
+											<i id="bidQty1"></i>
 											<i id="buySellNumright"></i>
 										</li>
 									</ul>
@@ -735,7 +735,7 @@
 						<span>{{item.CommodityNo}}{{item.MainContract}}</span>
 						<span id="{{ item.CommodityNo }}{{ item.MainContract }}-price" class="title_number">0</span>
 					</p>
-					<p class="time" id="{{ item.CommodityNo }}{{ item.MainContract }}-line-time">23小时连续交易</p>
+					<p class="time" id="{{ item.CommodityNo }}{{ item.MainContract }}-line-time">{{item.described}}</p>
 					<span id="{{ item.CommodityNo }}{{ item.MainContract }}-zdf" class="time_fd">0%</span>
 				</a>
 				<span style="display: none;">{{ item.CommodityNo }}</span>
@@ -759,7 +759,7 @@
 						<span id="{{d.contractNo}}-price" class="title_number title-number-price">0</span>
 					</p>
 					<p class="title">
-						<span>23小时连续交易</span>
+						<span>{{d.described}}</span>
 						<span id="{{d.contractNo}}-zdf" class="time_fd" style="float: right; margin-right: 30px;">0%</span>
 					</p>
 					<p class="time" style="display: none;" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p>

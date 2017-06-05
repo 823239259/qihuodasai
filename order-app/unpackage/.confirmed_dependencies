@@ -76,7 +76,8 @@
 		"refer": [
 			"vs/account/account.html",
 			"vs/find/find.html",
-			"vs/find/informationCenter/informationCenter.html"
+			"vs/find/informationCenter/informationCenter.html",
+			"vs/account/accountno.html"
 		]
 	},
 	"vs/find/find.html": {
@@ -507,7 +508,8 @@
 		"refer": [
 			"vs/login/register.html",
 			"vs/home/home.html",
-			"vs/account/customerService.html"
+			"vs/account/customerService.html",
+			"vs/account/account.html"
 		]
 	},
 	"vs/login/register.html": {
@@ -719,6 +721,21 @@
 		"resources": [
 			"img/backBg.png",
 			"css/vsViewpoint.css"
+		]
+	},
+	"vs/account/accountno.html": {
+		"resources": [
+			"img/account/accountSettings.png",
+			"img/account/accountOpinion.png",
+			"img/account/accountDetailed.png",
+			"img/account/accountCapital.png",
+			"css/account.css",
+			"img/myOn.png",
+			"img/account/signImg.png",
+			"img/home.png"
+		],
+		"refer": [
+			"vs/login/login.html"
 		]
 	}
 }
