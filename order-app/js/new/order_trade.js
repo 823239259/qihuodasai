@@ -5,7 +5,7 @@ var TradeConfig = {
 	url_real : "ws://192.168.0.147:7001",
 	model : "1", // 实盘：0；	模拟盘：1
 	client_source : "N_WEB",	// 客户端渠道
-	username : "000001",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+	username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 	password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 };
 /*
@@ -212,6 +212,9 @@ function appendOrder(orderInfo){
 	$('.closePositionClass').on('tap',function(){
 		
 		var _this = $(this);
+//		mui.confirm('',function(e){
+//			
+//		});
 		var OrderID =  _this.parent().parent().find('.li-none').text();
 		var ClientNo = TradeConfig.username;
 		var PlatForm_User = phone;
