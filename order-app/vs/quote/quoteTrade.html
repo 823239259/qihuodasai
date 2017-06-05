@@ -437,9 +437,9 @@
 									</ul>
 								</div>
 								<div id="buttonList">
-									<button id="placeOrderBidPrice1"><a href="#placeOrder" id="placeOrder00">买涨价<i id="bidPrice1Button">59.01</i></a></button>
-									<button id="placeOrderAskPrice1"><a href="#placeOrder">买跌价<i id="askPrice1Button">59.01</i></a></button>
-									<span id="flashButton"><a href="#flashSeting">快闪</a></span>
+									<button id="placeOrderBidPrice1"><a href="#" id="placeOrder00">买涨价<i id="bidPrice1Button">59.01</i></a></button>
+									<button id="placeOrderAskPrice1"><a href="#" id="placeOrder-die">买跌价<i id="askPrice1Button">59.01</i></a></button>
+									<span id="flashButton"><a href="#" id="flashSeting-ks">快闪</a></span>
 								</div>
 							</div>
 						</div>
@@ -975,5 +975,35 @@
 				}
 			});
 		}); 
+		if (mui.cacheUser.isLogin()){
+			$("#placeOrder00").attr("href","#placeOrder");
+			$("#placeOrder-die").attr("href","#placeOrder");
+			$("#flashSeting-ks").attr("href","#flashSeting");
+		}else{
+			document.getElementById("placeOrder00").addEventListener("tap", function() {
+				var btnArray = ['否', '是'];
+				mui.confirm('您还没有登录，请先登录！', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.open_window_data("../login/login.html", "login", { "backpageID": "quoteTrade", "url": "quoteTrade.html" });
+					}
+				});
+			});
+			document.getElementById("placeOrder-die").addEventListener("tap", function() {
+				var btnArray = ['否', '是'];
+				mui.confirm('您还没有登录，请先登录！', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.open_window_data("../login/login.html", "login", { "backpageID": "quoteTrade", "url": "quoteTrade.html" });
+					}
+				});
+			});
+			document.getElementById("flashSeting-ks").addEventListener("tap", function() {
+				var btnArray = ['否', '是'];
+				mui.confirm('您还没有登录，请先登录！', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.open_window_data("../login/login.html", "login", { "backpageID": "quoteTrade", "url": "quoteTrade.html" });
+					}
+				});
+			});
+		}
 	</script>
 </html>
