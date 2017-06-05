@@ -19,9 +19,6 @@ mui("#candlestickNavContainer").on("tap", "a", function() {
 	lightChart.resize();
 
 });
-document.getElementById("choiceProductButton").addEventListener("tap", function() {
-	document.getElementById("choiceProductList").style.display = "block";
-});
 (function($) {
 	var deceleration = mui.os.ios ? 0.003 : 0.0009;
 	$('.mui-scroll-wrapper').scroll({
