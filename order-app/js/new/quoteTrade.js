@@ -839,3 +839,18 @@ $('#allCloseOrder').on('tap',function(){
 	
 });
 
+$('#clearanceButton').on('tap',function(){
+	
+	mui.confirm('确认全部清仓？',function(e){
+		if(e.index==1){
+			$('#positionListOrder').children().each(function(){
+				var _this = $(this);
+				var OrderID =  _this.children().eq(1).children().eq(1).children().eq(6).text();
+				var ClientNo = TradeConfig.username;
+				var PlatForm_User = phone;
+				Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
+				_this.remove();
+			});
+		}
+	});
+});
