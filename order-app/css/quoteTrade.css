@@ -126,7 +126,7 @@
 .flash-seting-content ul li .chioce-button{width: 40px; height: 25px; vertical-align: middle; text-align: center; padding: 0px; line-height: 25px; font-size: 13px; color:#333333; border: none; }
 .flash-seting-content ul li{border-bottom: 1px solid #e5e5e5; }
 .flash-seting-content ul li:nth-last-child(1){border: none; }
-.flash-seting-content ul li span,.flash-seting-content ul li p{display: block; width: 50%; float: right; height: 50px; line-height: 50px; text-align: right; font-size: 15px; color:#333333; }
+.flash-seting-content ul li span,.flash-seting-content ul li p{display: block; float: right; height: 50px; line-height: 48px; text-align: right; font-size: 14px; color:#333333; }
 .flash-seting-content ul li span{padding-right: 15px; background: url(../img/quote/rightArrow.png) no-repeat right center; background-size: 5px auto; }
 .flash-seting-content ul li .chioce-button.on{background-color: #ffb319; color:#FFFFFF; }
 #exchangeRate{margin-top: 5px; }
@@ -165,6 +165,8 @@ flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: rel
 #chioceProfit{display: none; }
 #chioceStopLoss{display: none; }
 #checkboxButton{background-color: #ffb319; width:15px; height: 15px; border: none; padding: 0px; cursor: pointer; margin-top: -1px; position: absolute; top: 19px;left: 15px}
+#poundage.poundage-label label {line-height: 20px; height: 20px; display: inline-block;}
+#poundage.poundage-label label:nth-child(1) {margin-top: 5px;}
 /*
  操盘明细
  */
