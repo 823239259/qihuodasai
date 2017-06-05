@@ -157,7 +157,7 @@ flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: rel
 .rule-div{color: #666666; height: 50px; line-height: 50px; background-color: #FFFFFF; padding: 0px 15px 0px 33px; position: relative;}
 .rule-div label{margin-left: 5px; font-size: 13px;  }
 .rule-div label i{color:#ffb319; font-style: normal; }
-#flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: relative;}
+/*#flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: relative;}*/
 #orderList{position: fixed; bottom: -50px; height: 50px; line-height: 50px; text-align: center; width: 100%; background-color: #FFFFFF; border-top: 1px solid #e5e5e5; }
 #orderList  label{width: 57%; float: left; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; color:#333333; font-size: 13px; }
 #orderList  label i{font-size: 21px; font-weight: bold; font-style:normal; color:#ffb319; }
