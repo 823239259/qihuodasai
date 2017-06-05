@@ -55,6 +55,7 @@ $("#list").on('tap','li',function(){
 	
 	//判断是否存在闪电设置
 	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null){
+		$('#flashSeting-ks').text('快闪已开启');
 		$('#placeOrder00').attr('href','#');
 		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
 		console.log('支付总金额:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));//支付总金额
@@ -101,6 +102,9 @@ $("#list").on('tap','li',function(){
 				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
 		});
 		
+	}else{
+		
+		$('#flashSeting-ks').text('开启快闪');
 	}
 	
 	
@@ -393,8 +397,8 @@ function getContractParam(){
 			
 			//初始化 手续费
 			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
-			$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
-			
+//			$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
+			$('#_poundage_').html('<label>HKD-HKFE77</label></br><label>774545.5元</label>');
 			
 			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
 			$('#_stopWin010_ .chioce-button').remove();
@@ -535,7 +539,7 @@ mui.app_request('/user/getbalancerate', {
 		}, function(result) {
 			if(result.success == true) {
 					
-				$('#difference').text(result.data.balance);
+				$('#difference').text(result.data.balance+'元');
 			}
 	}, function(res) {});
 	
@@ -590,7 +594,7 @@ $('#flashButton').on('tap',function(){
 			$('#TradeNum .chioce-button').remove();
 			$('#exchange_rate_string').text('');
 			$('#exchange_rate').text('');
-			$('#poundage').text('');
+			$('#poundage').html('');
 			$('#performance_margin').text('');
 			//汇率设置
 			var currencyNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CurrencyNo");//币种  USD
@@ -628,7 +632,8 @@ $('#flashButton').on('tap',function(){
 			
 			//初始化 手续费
 			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
-			$('#poundage').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
+//			$('#poundage').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
+			$('#poundage').html('<label>'+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+'</label></br><label>'+initsxf*num0+'元</label>');
 			superPoundage = initsxf*num0;
 			
 			
@@ -721,8 +726,8 @@ $('#flashButton').on('tap',function(){
 				
 				//手续费
 				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
-				$('#poundage').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
-				
+				//$('#poundage').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
+				$('#poundage').html('<label>'+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+'</label></br><label>'+initsxf*num0+'元</label>');
 				//履约保证金
 				var _hdbzj_ = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
 				var _zsj_= 0;//止损价
@@ -735,16 +740,18 @@ $('#flashButton').on('tap',function(){
 					var tradeNum=$('#TradeNum .on').text();
 					var stopWin= $('#stopWin010 .on').text();
 					var stopLoss= $('#stopLoss010 .on').text();
-					var poundage = $('#poundage').text().substring($('#poundage').text().indexOf(')')+1, $('#poundage').text().indexOf('元'));
+					//var poundage = $('#poundage').text().substring($('#poundage').text().indexOf(')')+1, $('#poundage').text().indexOf('元'));
+					var poundage =$('#poundage').children().eq(2).text();
+					poundage = poundage.substring(0,poundage.length-1);
 					var lybzj =
 					$('#performance_margin').text().substr(0,$('#performance_margin').text().length-1);//履约保证金
 					var commodityNo = SuperCommodityNo;
+					
 					
 					$.each(result.data,function(index, obj){
 						mui.cacheData.removeFlash(phone+commodityNo+obj.lever+'Deposit');
 						mui.cacheData.saveFlash(phone+commodityNo+obj.lever+'Deposit',obj.slipBond);
 					});
-					
 					
 					
 					mui.cacheData.removeFlash(phone+commodityNo+'tradeNum');
@@ -787,7 +794,7 @@ $('#orderListButton').on('tap',function(){
 	var Deposit = mui.cacheData.getSlipBond(OrderNum+CommodityNo+'hdbzj');
 	var a = $('#_poundage_').text();
 	var Fee = $('#_poundage_').text().substring(a.indexOf(')')+2,a.indexOf('元'));
-//	alert(Deposit);
+	alert(Deposit);
 	if($('#orderListButton').text()=='看多买入'){
 		var Direction = 0;//买
 		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
