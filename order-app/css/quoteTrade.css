@@ -53,6 +53,13 @@
 #buttonList button:nth-child(2){background-color: #1f9947;}
 #flashButton{position: absolute;z-index: 999;display: inline-block;top:0px;height: 40px;width: 50px;left: 50%;margin-left: -25px;background: url(../img/quote/flash.png) no-repeat center;background-size: 50px auto;font-size: 9px;color:#ffb319;line-height: 56px;}
 #flashButton a{display: inline-block; width: 100%; height: 40px; color: #ffb319;}
+#HandicapDiv p {height: 33px;color: #666666;font-size: 14px;background-color: #f0f5f7;line-height: 33px;}
+#HandicapDiv table tr td:nth-child(1) {width: 18%;padding-left: 15px;}
+#HandicapDiv table tr td:nth-child(2) {width: 32%;}
+#HandicapDiv table tr td:nth-child(3) {width: 18%; padding-left: 15px; border-left: 1px solid #D9D9D9;}
+#HandicapDiv table tr td:nth-child(4), #HandicapDiv table tr td:nth-child(5) {width: 16%;}
+#HandicapDiv table tr {height: 30px; line-height: 30px; font-size: 14px; color: #333333; border-bottom: 1px solid #D9D9D9;}
+#HandicapDiv p span {display: inline-block; width: 50%; padding-left: 15px;}
 /**
  * 行情交易页面---- 模拟盘持仓
  * */
