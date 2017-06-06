@@ -452,11 +452,15 @@ function updateQuoteInfo(jQuote){
 		
 		
 		//买一
-		$('#askPrice1').text(fixedPriceByContract(jQuote.BidPrice1, jQuote.CommodityNo)+'/');
+		$('#askPrice1').text(fixedPriceByContract(jQuote.BidPrice1, jQuote.CommodityNo));
 		$('#askQty1').text(jQuote.BidQty1);
+		var buyLength = jQuote.BidQty1/(jQuote.BidQty1+jQuote.AskQty1);		
+		$("#buySellNumLeft").css('width',parseInt(buyLength*100)+"px");
 		//卖一
-		$('#bidPrice1').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo)+'/');
+		$('#bidPrice1').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo));
 		$('#bidQty1').text(jQuote.AskQty1);
+		var sellLength = jQuote.AskQty1/(jQuote.BidQty1+jQuote.AskQty1);	
+		$('#buySellNumright').css('width',parseInt(sellLength*100)+"px");
 		//卖一价
 		$('#bidPrice1Button').text(fixedPriceByContract(jQuote.AskPrice1, jQuote.CommodityNo));
 		//买一价

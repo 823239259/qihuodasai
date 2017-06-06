@@ -360,7 +360,7 @@ function getContractParam(){
 			$('#_TradeNum_ .chioce-button').remove();
 			$('#_exchange_rate_string_').text('');
 			$('#_exchange_rate_').text('');
-			$('#_poundage_').text('');
+			$('#_poundage_').html('');
 			$('#_performance_margin_').text('');
 			
 			//汇率设置
@@ -398,7 +398,7 @@ function getContractParam(){
 			//初始化 手续费
 			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
 //			$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
-			$('#_poundage_').html('<label>HKD-HKFE77</label></br><label>774545.5元</label>');
+			$('#_poundage_').html('<label>'+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+'</label></br><label>'+initsxf*num0+'元</label>');
 			
 			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
 			$('#_stopWin010_ .chioce-button').remove();
@@ -432,10 +432,21 @@ function getContractParam(){
 			$('#payment_amount').text(initsxf*num0+initlybzj);
 			var payment_amount = initsxf*num0+initlybzj;
 			//初始化余额不足
+			/*
 			if(Number($('#difference').text())-payment_amount<0){
 				$('#differenceNotFull').text('余额不足');
+			}*/
+			if(Number($('#difference').text())-payment_amount<0){
+				$('#differenceNotFull').text('余额不足');
+				$('#orderListButton').text('立即充值');
+				document.getElementById("orderListButton").addEventListener("tap", function() {
+					mui.open_window_data(
+						"../account/recharge.html",
+						"recharge",
+						{ "backId": "quoteTrade"}
+						);
+				});
 			}
-			
 			
 			$("#_stopLoss010_ .chioce-button").on('tap',function(){
 					
@@ -450,6 +461,10 @@ function getContractParam(){
 				a = a.substring(a.indexOf(')')+1,a.indexOf('元'));
 				$('#payment_amount').text(Number(a)+Number(lybzj));
 			});
+			
+			
+			
+			
 			
 			$("#_TradeNum_ .chioce-button").on('tap',function(){
 				
@@ -501,7 +516,8 @@ function getContractParam(){
 				
 				//综合手续费
 				var poundage= mui.cacheData.getzs(num+SuperCommodityNo+'sxf');
-				$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
+				//$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(poundage*num/CNYExchangeRate,4))+')'+' '+poundage*num+'元');
+				$('#_poundage_').html('<label>'+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+'</label></br><label>'+poundage*num+'元</label>');		
 				
 				//履约保证金
 				var _hdbzj_ = mui.cacheData.getSlipBond(num+SuperCommodityNo+'hdbzj');//滑点保证金
@@ -511,8 +527,10 @@ function getContractParam(){
 				
 				$('#payment_amount').text(poundage*num+_lybzj_);
 				
+				
 				if(Number($('#difference').text())-Number($('#payment_amount').text())<0){
 					$('#differenceNotFull').text('余额不足');
+					
 				}
 				
 			});
@@ -792,9 +810,9 @@ $('#orderListButton').on('tap',function(){
 	var StopLoss = $('#_stopLoss010_ .on').text();//触发止损
 //	var Deposit = $('#_slipBond_').val();//滑点保证金
 	var Deposit = mui.cacheData.getSlipBond(OrderNum+CommodityNo+'hdbzj');
-	var a = $('#_poundage_').text();
-	var Fee = $('#_poundage_').text().substring(a.indexOf(')')+2,a.indexOf('元'));
-	alert(Deposit);
+	var Fee = $('#_poundage_').children().eq(2).text();
+	Fee = Fee.substring(0,Fee.length-1)
+	
 	if($('#orderListButton').text()=='看多买入'){
 		var Direction = 0;//买
 		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
@@ -806,6 +824,7 @@ $('#orderListButton').on('tap',function(){
 		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
 				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
 	}
+	
 	
 });
 
