@@ -271,7 +271,7 @@ function handleData(evt) {
 			if(status == 4) {
 				tip(conditionParam.StatusMsg);
 			} else {
-				var conditionNo = conditionParam.StopLossNo;
+				var conditionNo = conditionParam.ConditionNo;
 				tip("条件单提交成功,单号:" + conditionNo);
 				mui("#popoverConditoion").popover("toggle");
 			}
@@ -281,7 +281,7 @@ function handleData(evt) {
 			var commodityNo = conditionParam.CommodityNo;
 			var contractNo = conditionParam.ContractNo;
 			var contractCode = commodityNo + contractNo;
-			var conditionNo = conditionParam.StopLossNo;
+			var conditionNo = conditionParam.ConditionNo;
 			var status = conditionParam.Status;
 			if(status == 2) {
 				status = "已触发";
@@ -1269,7 +1269,7 @@ function appendCondition(param) {
 	var commodityNo = param.CommodityNo;
 	var contractNo = param.ContractNo;
 	var exchangeNo = param.ExchangeNo;
-	var conditionNo = param.StopLossNo;
+	var conditionNo = param.ConditionNo;
 	var status = param.Status;
 	var statusText = analysisConditionStatus(status);
 	var num = param.Num;
@@ -1333,7 +1333,7 @@ function updateConditionList(param) {
 	var commodityNo = param.CommodityNo;
 	var contractNo = param.ContractNo;
 	var exchangeNo = param.ExchangeNo;
-	var conditionNo = param.StopLossNo;
+	var conditionNo = param.ConditionNo;
 	var status = param.Status;
 	var statusText = analysisConditionStatus(status);
 	var num = param.Num;
