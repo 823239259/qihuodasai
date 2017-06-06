@@ -55,7 +55,7 @@ $("#list").on('tap','li',function(){
 	
 	//判断是否存在闪电设置
 	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null){
-		$('#flashSeting-ks').text('快闪已开启');
+		$('#flashSeting-ks').text('已开启');
 		$('#placeOrder00').attr('href','#');
 		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
 		console.log('支付总金额:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));//支付总金额
@@ -100,6 +100,23 @@ $("#list").on('tap','li',function(){
 			
 			Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
 				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		});
+		
+		
+		$('#flashSeting-ks').on('tap',function(){
+			if($('#flashSeting-ks').text()=='已开启'){	
+				mui.confirm('关闭之后不再享受快速下单通道，需重新开启此功能，确认关闭？',function(e){
+					if(e.index==1){
+						mui.cacheData.removeFlash(phone+SuperCommodityNo+'tradeNum');
+						mui.cacheData.removeFlash(phone+SuperCommodityNo+'stopWin');
+						mui.cacheData.removeFlash(phone+SuperCommodityNo+'stopLoss');
+						mui.cacheData.removeFlash(phone+SuperCommodityNo+'Fee');
+						mui.cacheData.removeFlash(phone+SuperCommodityNo+'lybzj');
+						mui.cacheData.removeFlash(phone+SuperCommodityNo+'zfzje');
+					}
+					
+				});
+			}	
 		});
 		
 	}else{
