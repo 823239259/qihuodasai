@@ -20,6 +20,7 @@ function LoginForwardInitLoadData() {
 		Trade.doHold(username);
 		holdFirstLoadDataIndex++;
 	}
+	
 }
 /**
  * 合约交易成功加载持仓信息的标志
@@ -96,7 +97,7 @@ function handleData(evt) {
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
-				
+				$('#loss-Open-line').text(parameters.ForceLine);
 				mui.toast("交易服务器连接成功！");
 			} else {
 				loginFail = -2;
@@ -3469,6 +3470,18 @@ function updateAccountBalance() {
 		var todayBalance = $("#todayBalance");
 		var todayCanUse = $("#todayCanUse");
 		todayBalance.text(parseFloat(loadCachTodayBanlance + Number(floatingProfit)).toFixed(2));
+		
+		var ForceLine = $('#loss-Open-line').text();
+		ForceLine = Number(ForceLine);
+		var num=parseFloat(loadCachTodayBanlance + Number(floatingProfit)).toFixed(2);
+		if(isNaN(ForceLine/num)){
+			$('#open-risk-degree').text('0.00%');
+		}else{
+			$('#open-risk-degree').text((ForceLine/num).toFixed(2)+'%');
+//			var a=10000000000000/num;
+//			$('#open-risk-degree').text(a.toFixed(2)+'%');
+		}
+		
 		todayCanUse.text(parseFloat(loadCachTodayCanuse + Number(floatingProfit)).toFixed(2));
 	}
 }
