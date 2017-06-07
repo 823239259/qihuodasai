@@ -143,7 +143,7 @@ mui.plusReady(function() {
 					}else{
 						timeArr+=timez;   //如果时间差不满足大于xxx毫秒，就把差值加到一个容器变量中
 						if(timeArr>=3000){
-							console.log('我终于更新了');
+//							console.log('我终于更新了');
 							dealOnRtnQuoteData(jsonData, totalVolume);
 							timeArr=0;
 						}

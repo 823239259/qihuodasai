@@ -1582,3 +1582,30 @@ input{
 .detail-table table tr td{width: 60px; }
 .detail-table table tr td:nth-child(1){width: 40px; padding-left: 10px;}
 .detail-table table tr td:nth-last-child(1){width: 120px;}
+
+.Assets ul{
+	list-style: none;
+	font-size: 14px;
+	position: relative;
+	right: 4%;
+	bottom: 70%;
+}
+.Assets ul:first-child{
+	width: 30%;
+	text-align: center;
+}
+.Assets ul:nth-child(2){
+	width: 27%;
+	text-align: center;
+}
+.Assets ul:nth-child(3){
+	width: 43%;
+	text-align: left;
+}
+.Assets ul li:nth-child(2){
+	color: white;
+}
+.fl{
+	float: left;
+	box-sizing: border-box;
+}

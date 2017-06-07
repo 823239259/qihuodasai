@@ -271,8 +271,52 @@
 						</div>
 						<div  id="trade" style="padding-bottom: 20px;padding-top: 46px;" class=" bottomDivList">
 						    <div class="Assets" style="background-color: #2B2B2B;">
-						        <p class="YellowFont"><span id = "todayBalance">0.00</span><span id = "deposit" style="display: none;">0.00</span><span id = "todayCanUse" style="display: none;">0.00</span><span>亏损平仓线</span><span id = "loss-Open-line"></span></p>
-						        <p><span>总资产(USD)</span><span style="display: none;">保证金(USD)</span><span style="display: none;">余额(USD)</span><span>强平风险度</span><span id="open-risk-degree">123</span></p>
+						        <!--<p class="YellowFont">
+						        	<span id = "todayBalance">0.00</span>
+						        	<span id = "deposit" style="display: none;">0.00</span>
+						        	<span id = "todayCanUse" >0.00</span>
+						        	<span>亏损平仓线</span>
+						        	<span id = "loss-Open-line"></span>
+						        </p>
+						        <p>
+						        	<span>总资产(USD)</span>
+						        	<span style="display: none;">保证金(USD)</span>
+						        	<span>余额(USD)</span>
+						        	<span>强平风险度</span>
+						        	<span id="open-risk-degree">123</span>
+						        </p>-->
+						        <ul class="fl">
+						        	<li class="YellowFont">
+						        		<span id = "todayBalance">0.00</span>
+						        	</li>
+						        	<li>
+						        		<span>总资产(USD)</span>
+						        	</li>
+						        </ul>
+						        <ul class="fl">
+						        	<li class="YellowFont">
+						        		<span id = "todayCanUse" >0.00</span>
+						        	</li>
+						        	<li>
+						        		<span>余额(USD)</span>
+						        	</li>
+						        </ul>
+						        <ul class="fl">
+						        	<li class="YellowFont">
+						        		亏损平仓线: <span id = "loss-Open-line"></span>
+						        	</li>
+						        	<li>
+						        		强平风险度: <span id="open-risk-degree">123</span>
+						        	</li>
+						        </ul>
+						        <ul style="display: none;" class="fl">
+						        	<li style="display: none;">
+						        		<span id = "deposit">0.00</span>
+						        	</li>
+						        	<li style="display: none;">
+						        		<span>保证金(USD)</span>
+						        	</li>
+						        </ul>
 						    </div>
 						    <div class="ProductInformation">
 						        <div class="ProductInformationLeft">
