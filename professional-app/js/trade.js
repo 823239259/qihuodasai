@@ -3047,7 +3047,26 @@ function doGetInsertStopLoss() {
 		var exchangeNo = localQuote.ExchangeNo;
 		var commodityNo = localQuote.CommodityNo;
 		var contractNo = localQuote.ContractNo;
-		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, contractNo, stopNumber, stopLossType, parseFloat(Math.abs(stopLossDiff)).toFixed(2), $holdAvgPrice.text(), drection, choiceStopPrices1, parseFloat(stopChoicePrices1).toFixed(2));
+		var contractObject = getMarketCommdity(contractCode);
+		/*
+		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, 
+			contractNo, stopNumber, stopLossType, 
+			parseFloat(Math.abs(stopLossDiff)).toFixed(2), 
+			$holdAvgPrice.text(), drection, choiceStopPrices1, 
+			parseFloat(stopChoicePrices1).toFixed(2));
+		*/
+		/*
+		if((stopChoicePrices1*10000)%(contractObject.MiniTikeSize*10000)!=0){
+			mui.toast('止损价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
+			return;
+		}
+		*/
+		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, 
+				contractNo, stopNumber, stopLossType, 
+				parseFloat(Math.abs(stopLossDiff)).toFixed(contractObject.DotSize), 
+				$holdAvgPrice.text(), drection, choiceStopPrices1, 
+				parseFloat(stopChoicePrices1).toFixed(contractObject.DotSize));
+		
 		if(tradeparam == undefined) {
 			tip("交易错误,请重试");
 		}
