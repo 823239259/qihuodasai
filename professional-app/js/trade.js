@@ -1801,7 +1801,7 @@ $(function() {
 			
 			// 等待行情连接成功后，连接交易服务器
 			if(getQueryCommodityIsFlag()) {
-				plus.nativeUI.closeWaiting();  // 关闭行情连接提示
+				plus.nativeUI.closeWaiting();  // 关闭行情连接提+示
 				plus.nativeUI.showWaiting("交易服务器连接中...");
 				
 				window.clearInterval(checkQuoteConnect); // 关闭尝试
@@ -2354,12 +2354,12 @@ function bindOpertion() {
 			var typeText = "限价止损";
 			if(stopLossType == 0) {
 				if(stopDrection == 0) {
-					if(lastPrice <= stopChoicePrices1) {
+					if(Number(lastPrice) <= Number(stopChoicePrices1)) {
 						tip("输入价格应小于最新价");
 						return;
 					}
 				} else if(stopDrection == 1) {
-					if(lastPrice >= stopChoicePrices1) {
+					if(Number(lastPrice) >= Number(stopChoicePrices1)) {
 						tip("输入价格应大于最新价");
 						return;
 					}
