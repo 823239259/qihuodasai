@@ -97,7 +97,11 @@ function handleData(evt) {
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
-				$('#loss-Open-line').text(parameters.ForceLine);
+				if(parameters.ForceLine==undefined){
+					$('#loss-Open-line').text('0.00');
+				}else{
+					$('#loss-Open-line').text(parameters.ForceLine);
+				}
 				mui.toast("交易服务器连接成功！");
 			} else {
 				loginFail = -2;
