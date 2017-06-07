@@ -89,7 +89,18 @@ mui.plusReady(function() {
 			//		  		}
 			//	    	}
 		};
+		//以下为更新代码
+		var updateStart=0,updateEnd=0,timeArr=0,timez;
+		
+		//以上为更新代码
+		
 		marketSocket.onmessage = function(evt) {
+			
+			updateStart=(new Date()).getTime();
+//			console.log(updateStart);
+			timez=updateStart-updateEnd;
+			
+
 			var data = evt.data;
 			var jsonData = JSON.parse(data);
 			var method = jsonData.Method;
@@ -113,18 +124,30 @@ mui.plusReady(function() {
 					processingCandlestickVolumeData(historyParam);
 				}
 			} else if(method == "OnRtnQuote") {
+				
 				var quoteParam = jsonData;
 				if(quoteParam.Parameters == null) return;
 				var subscribeParam = quoteParam.Parameters;
 				var newCommdityNo = subscribeParam.CommodityNo;
 				var newContractNo = subscribeParam.ContractNo;
 				marketLoadParam[newCommdityNo] = subscribeParam;
-				lightChartData(quoteParam);
+				lightChartData(quoteParam);   //绘制闪电图
 				$("#refresh").removeClass("rotateClass");
 				var commodityNo = $("#commodeityNo").val();
 				var totalVolume = $("#volumePricesNumber").text()
 				if(commodityNo == quoteParam.Parameters.CommodityNo) {
-					dealOnRtnQuoteData(jsonData, totalVolume);
+//					console.log(timez);   //打印时间差
+					if(timez==updateStart || timez>=3000){  //如果时间差大于XXX毫秒才执行更新
+//						console.log('我更新了');
+						dealOnRtnQuoteData(jsonData, totalVolume);     //更新图表
+					}else{
+						timeArr+=timez;   //如果时间差不满足大于xxx毫秒，就把差值加到一个容器变量中
+						if(timeArr>=3000){
+							console.log('我终于更新了');
+							dealOnRtnQuoteData(jsonData, totalVolume);
+							timeArr=0;
+						}
+					}
 				}
 				//如果是当前合约与品种更新行情数据，和浮动盈亏
 				if(valiationIsPresent(newCommdityNo, newContractNo)) {
@@ -185,6 +208,7 @@ mui.plusReady(function() {
 			} else if(method == "OnRspSubscribe") {
 				var quoteParam = jsonData;
 			}
+			updateEnd=(new Date()).getTime();
 		};
 		marketSocket.onerror = function(evt) {};
 	}

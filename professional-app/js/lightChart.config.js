@@ -3,7 +3,7 @@ var lightChartTime = {
 	"price": []
 }
 
-function lightChartData(json) {
+function lightChartData(json) {    //根据得到的json数据，以及页面上获取的信息，生成闪电图属性
 	var dosizeL = $("#doSize").val();
 	var CommodityNo = $("#CommodityNo").text();
 	var CommodityNo1 = json.Parameters.CommodityNo + json.Parameters.ContractNo;
@@ -25,7 +25,7 @@ function lightChartData(json) {
 	}
 }
 
-function lightChartDealData() {
+function lightChartDealData() {   //返回绘制chart时的属性。
 	var option = {
 		backgroundColor: "#1f1f1f",
 		"tooltip": {

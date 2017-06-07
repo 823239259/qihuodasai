@@ -129,6 +129,9 @@
 						}else if(result.code==7 || result.code==8 || result.code==9){
 							mui.toast("请求数据有误，无法申请终结！");
 							return;
+						}else if(result.code==10){
+							mui.toast("有持仓或挂单，请平仓后再试！");
+							return;
 						}else{
 							mui.toast("系统繁忙，请稍后再试！");
 							return;

@@ -7,6 +7,11 @@
     <title>恒指期货 - 方案详情</title>
     <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
+    <style type="text/css">
+    	#tranProfitLoss{
+    		color: #E9392A;
+    	}
+    </style>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script src="../../js/common1.js"></script>
@@ -113,6 +118,7 @@
 				},paramUrl);
     		});
     		document.getElementById("immediately").addEventListener("tap",function(){
+    			
     			mui.openWindow({
     				url:"../login/operateLogin.html",
     				id:"operateLogin",
