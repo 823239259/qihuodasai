@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
+		
 	</head>
 
 	<body>
@@ -144,14 +145,58 @@
 				if(accountEnd != "") {
 					$("#userAcount").show();
 				}
-				$("#account").val(accountEnd);
-
 				if($("#account").val() != "" || $("#account").val() != null) {
 					$("#operateLogin").css({
 						"background-color": "#fcc900"
 					});
 				}
-				$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
+				
+				var web=plus.webview.currentWebview();
+				var trade_account=web.trade_account;
+				var trade_password=web.trade_password;
+				if(trade_account){
+					$("#account").val(trade_account);
+					$("#password").val(trade_password);
+				}else {
+//					console.log(accountEnd);
+//					if(accountEnd){
+//						$("#account").val(accountEnd);
+//						$("#password").val(endLoginPassword == null ? "" : $.base64.decode(endLoginPassword));
+//					}else {
+						//      下面代码实现抓取用户的账号密码并显示到input框里	
+						if(mui.cacheUser.isLogin()) {
+//							var user_token = plus.storage.getItem(tzdr.constants.user_token);
+//							var user_secret = plus.storage.getItem(tzdr.constants.user_secret);
+							mui.app_request("/user/ftrade/list", {}, function(result) {
+								console.log("111");
+								console.log(JSON.stringify(result));
+								if(!mui.isnull(result.data)) {
+									ftrade_list = result.data.tradeList;
+									mui.each(ftrade_list, function(i, item) {
+			//							console.log(JSON.stringify(item.stateType));
+										if(item.stateType==4){
+											mui.app_request('/user/ftrade/details',{"id":item.id},function(result){
+			//									console.log(JSON.stringify(result.data.details.tranAccount));
+			//									console.log(JSON.stringify(result.data.details.tranPassword));
+												$('#account').val(result.data.details.tranAccount);
+												$('#password').val(result.data.details.tranPassword);
+											});
+											return false;
+										}else{
+											$('#account').val('');
+											$('#password').val('');
+											return false;
+										}
+									});
+								}
+							}, function(result) {
+								mui.toast(result.message);
+								return;
+							});
+						};
+//					}
+				}
+				
 				if(tradeWebSocketIsMock != undefined && tradeWebSocketIsMock != null) {
 					$(".accountSelect").val(tradeWebSocketIsMock);
 				} else {
