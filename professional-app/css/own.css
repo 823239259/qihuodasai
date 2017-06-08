@@ -60,7 +60,7 @@
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	background-color: #f5f5f5;
+	background-color: #ffffff;
 }
 .mui-content{height: 100%; background: none; padding-bottom: 50px;}
 .mui-input-group .mui-input-row { height: 45px;}
@@ -277,7 +277,7 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .list_nolg { padding: 0 15px;}
 .main_nolg { position: fixed; width: 100%; padding: 0 15px; left: 0; bottom: 70px; z-index: 50;}
 .main_nolg button { padding: 8px 0; left: 0; }
-.main_nolg button.sc_listbtn { border: 1px solid #333333; background: #333333; text-align: center; color: #FFCC33;}
+.main_nolg button.sc_listbtn { border: 1px solid #333333; background: #333333; text-align: center; color: #FFCC33; border-radius: 20px;}
 /*追加保证金*/
 .add_color  {color: #FFCC33;}
 .add_money .lg-btnlogin { padding: 6px 10px;}

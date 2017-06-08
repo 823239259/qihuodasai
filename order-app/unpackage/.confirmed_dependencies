@@ -77,7 +77,8 @@
 			"vs/account/account.html",
 			"vs/find/find.html",
 			"vs/find/informationCenter/informationCenter.html",
-			"vs/account/accountno.html"
+			"vs/account/accountno.html",
+			"vs/directSeed/directSeed.html"
 		]
 	},
 	"vs/find/find.html": {
@@ -236,7 +237,9 @@
 			"img/Italy.png",
 			"img/Switzerland.png",
 			"img/Austria.png",
-			"img/Seoul.png"
+			"img/Seoul.png",
+			"img/France.png",
+			"img/Spain.png"
 		],
 		"refer": [
 			"vs/find/find.html",

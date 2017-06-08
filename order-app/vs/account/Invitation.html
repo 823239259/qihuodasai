@@ -107,17 +107,12 @@
 					}
 				}
 			});
-			/*document.getElementById("test").addEventListener("tap", function() {
+			document.getElementById("test").addEventListener("tap", function() {
 				//						mui.openWindow("../buy/buy.html");
 				var nid = "http://www.vs.com/topic/old/client/index.html"
 					mui.open_window_data("../news/active.html", "active", {nid: nid});
 //				mui.openWindow({ url: "../news/active.html", id: "active", extras: { nid: nid } });
-			});*/
-			document.getElementById("test").addEventListener("tap",function(){
-//			mui.openWindow("../buy/buy.html");
-				var nid="http://www.vs.com/topic/old/client/index.html"
-				mui.openWindow({url:"../news/active.html",id:"active",extras:{nid:nid}});
-			});
+			})
 			var dataALL = [];
 			var pageIndex = 0;
 			var perPage = 20;
@@ -191,20 +186,21 @@
 			var isRealName;
 			if(mui.cacheUser.get("inviteUrl") == null) {
 				mui.app_request("/wechat/threePartyCreateQrcode", { mobile: mobile }, function(data) {
+					console.log(JSON.stringify(data));
 					if(data.success == true) {
 						$("#inviteUrl").text(data.data.inviteUrl);
 						document.getElementById("sharehref").value = data.data.inviteUrl
 						isRealName = data.data.isRealName;
-//						localStorage.setItem("inviteUrl", data.data.inviteUrl);
-//						localStorage.setItem("isRealName", isRealName)
+						localStorage.setItem("inviteUrl", data.data.inviteUrl);
+						localStorage.setItem("isRealName", isRealName)
 					}
-				}, function() {
-
+				}, function(data) {
+					console.log(JSON.stringify(data));
 				});
 			} else {
-//				$("#inviteUrl").text(plus.storage.getItem("inviteUrl"));
-//				document.getElementById("sharehref").value = plus.storage.getItem("inviteUrl");
-//				isRealName = plus.storage.getItem("isRealName")
+				$("#inviteUrl").text(plus.storage.getItem("inviteUrl"));
+				document.getElementById("sharehref").value = plus.storage.getItem("inviteUrl");
+				isRealName = plus.storage.getItem("isRealName")
 			}
 
 			document.getElementById("shareButton").addEventListener("tap", function() {

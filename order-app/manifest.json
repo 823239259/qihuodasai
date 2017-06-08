@@ -1849,7 +1849,12 @@
 					"css/common.css",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"img/found.png"
+					"img/found.png",
+					"img/France.png",
+					"img/Australia.png",
+					"img/Germany.png",
+					"img/Spain.png",
+					"img/Italy.png"
 				],
 				"refer": [
 					"vs/account/account.html"

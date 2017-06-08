@@ -49,7 +49,7 @@
 		<div class="mui-content-padded">
 			<h5>温馨提示：</h5>
 			<p>1、系统将在下个交易日开盘前终结</p>
-			<p>2、折扣券一般由期货大赛平台活动发放，请大家多多关注</p>
+			<p>2、折扣券一般由期货原油通平台活动发放，请大家多多关注</p>
 		</div>
 	</div>
 </body>
@@ -131,6 +131,9 @@
 							return;
 						}else if(result.code==10){
 							mui.toast("有持仓或挂单，请平仓后再试！");
+							return;
+						}else if(result.code==22){
+							mui.toast("未找到该方案，无法申请终结方案！");
 							return;
 						}else{
 							mui.toast("系统繁忙，请稍后再试！");
