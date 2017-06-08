@@ -2460,8 +2460,12 @@ function bindOpertion() {
 			}
 			var lastPrice = $("#lossEventPrice").text();
 			var lossChoicePrices2 = $("#lossChoicePrices2").val();
+			var contractObject = getMarketCommdity(contractCode);
 			if(lossChoicePrices2 <= 0 || lossChoicePrices2.length == 0) {
 				tip("请输入正确的回撤价");
+				return;
+			}else if((lossChoicePrices2*10000)%(contractObject.MiniTikeSize*10000)!=0){
+				tip('止盈价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
 			var stopNumber = $("#lossNumber").val();
@@ -2509,8 +2513,12 @@ function bindOpertion() {
 			}
 			var lastPrice = $("#uEvenPrice").text();
 			var stopChoicePrices3 = $("#uLossPrice").val();
+			var contractObject = getMarketCommdity(contractCode);
 			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0) {
 				tip("请输入正确的回撤价");
+				return;
+			}else if((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)!=0){
+				tip('止盈价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
 			var stopNumber = $("#ulossNumber").val();
