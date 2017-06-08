@@ -91,8 +91,6 @@ function handleData(evt) {
 			$("#trade_login").text("登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
-			console.log('ForceLine:'+parameters.ForceLine);
-			console.log('123xx'+JSON.stringify(parameters));
 			//登录成功加载
 			if(code == 0) {
 				LoginForwardInitLoadData();
@@ -3512,8 +3510,6 @@ function updateAccountBalance() {
 			$('#open-risk-degree').text('0.00%');
 		}else{
 			$('#open-risk-degree').text((ForceLine/num).toFixed(2)+'%');
-//			var a=10000000000000/num;
-//			$('#open-risk-degree').text(a.toFixed(2)+'%');
 		}
 		
 		todayCanUse.text(parseFloat(loadCachTodayCanuse + Number(floatingProfit)).toFixed(2));
