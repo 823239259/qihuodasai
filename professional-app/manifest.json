@@ -1745,7 +1745,8 @@
 					"images/Canada.png",
 					"images/Austria.png",
 					"images/Australia.png",
-					"images/Eurozone.png"
+					"images/Eurozone.png",
+					"images/allCity.png"
 				],
 				"refer": [
 					"tzdr/future/listrg.html",

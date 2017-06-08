@@ -126,15 +126,6 @@
 				},paramUrl);
     		});
     		
-    		document.getElementById("immediately").addEventListener("tap",function(){
-    			mui.openWindow({
-    				url:"../login/operateLogin.html",
-    				id:"operateLogin",
-    				 extras:{
-    				 	name:"123"
-    				 }
-    			})
-    		});
     		var endNum=0;
 	    	document.getElementById("historyButton").addEventListener("tap",function(){
 	    		if(endNum==1){
@@ -167,11 +158,10 @@
     		function setDetails(details){
     		document.getElementById("trade_account").innerHTML=details.tranAccount;
     		document.getElementById("trade_password").innerHTML=details.tranPassword;
-
+			
     		document.getElementById("app_time").innerHTML=tzdr.dateUtil.getFormatDataByLong(details.appTime,"yyyy-MM-dd hh:mm");
     		
     		document.getElementById("tranLever").innerHTML="参考初始可持仓手数";
-    		
     		
     		document.getElementById("traderBond").innerHTML=tzdr.moneyUtils.formatCurrency(details.traderBond)+"元";
     		if(mui.isnull(details.appendTraderBond)){
@@ -232,6 +222,20 @@
     				tzdr.kuaiqiangshou(obj);*/
     				break;
     		}
+    		
+			document.getElementById("immediately").addEventListener("tap",function(){
+				var trade_account = document.getElementById("trade_account").innerHTML;
+    			var trade_password = document.getElementById("trade_password").innerHTML;
+				mui.openWindow({
+					url:"../login/operateLogin.html",
+					id:"operateLogin",
+					 extras:{
+					 	name:"123",
+					 	trade_account:trade_account,
+					 	trade_password:trade_password
+					 }
+				});
+			});
     	};
     	
     	function setEnd_info(details){
@@ -243,6 +247,12 @@
     			document.getElementById("tranProfitLoss").className='dt_m_loss';
     			
     		}
+    		var tP=parseInt($('#tranProfitLoss').text());
+			if(tP>=0){
+				$('#tranProfitLoss').removeClass().addClass('tPred');
+			}else{
+				$('#tranProfitLoss').removeClass().addClass('tPgreen');
+			}
     		document.getElementById("endParities").innerHTML="1美元 = "+details.endParities+"人民币";
     		document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
     		//document.getElementById("tranFeesTotal").innerHTML=tzdr.moneyUtils.formatCurrency(details.tranFeesTotal)+"元";
@@ -548,14 +558,6 @@
 						<label>交易盈亏($)：</label>
 						<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
 					</li>
-					<script type="text/javascript">
-						var tP=parseInt($('#tranProfitLoss').text());
-						if(tP>=0){
-							$('#tranProfitLoss').removeClass().addClass('tPred');
-						}else{
-							$('#tranProfitLoss').removeClass().addClass('tPgreen');
-						}
-					</script>
 					<li class="mui-table-view-cell">
 						<label>美元结算汇率：</label>
 						<span id="endParities">1美元 = 6.5327人民币</span>

@@ -1188,5 +1188,16 @@
 					$("#switchAccount").text("登录账号");
 				}
 			});
+			//监听安卓返回键
+			mui.plusReady(function(){
+				plus.key.addEventListener("backbutton",function(){
+//					var p=plus.webview.getWebviewById("transactionDetails");
+//					if(p){
+//						mui.app_refresh('quotationMain');  
+//					}
+					mui.app_refresh('quotationMain'); 
+//					mui.openWindow({url:"quotationMain.html",id:"quotationMain"});
+				});
+			});
 	</script>
 </html>
