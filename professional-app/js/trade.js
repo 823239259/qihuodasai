@@ -91,12 +91,15 @@ function handleData(evt) {
 			$("#trade_login").text("登录");
 			var code = parameters.Code;
 			var loginMessage = parameters.Message;
+			console.log('ForceLine:'+parameters.ForceLine);
+			console.log('123xx'+JSON.stringify(parameters));
 			//登录成功加载
 			if(code == 0) {
 				LoginForwardInitLoadData();
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
+				
 				if(parameters.ForceLine==undefined){
 					$('#loss-Open-line').text('0.00');
 				}else{
@@ -1157,7 +1160,9 @@ function appendStopLossData(param) {
 	var insertTime = param.InsertDateTime;
 	var dynamicPrice = param.DynamicPrice;
 	var stopLossPrice = param.StopLossPrice;
+	stopLossPrice = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossDiff = param.StopLossDiff;
+	console.log('123xx'+JSON.stringify(param));
 	var stopLossPriceText = "触发价:";
 	if(stopLossType == 2) {
 		stopLossPriceText = "追踪价差:";
@@ -2339,8 +2344,13 @@ function bindOpertion() {
 			}
 			var lastPrice = $("#stopEvenPrice").text();
 			var stopChoicePrices1 = $("#stopChoicePrices1").val();
+			var contractObject = getMarketCommdity(contractCode);
 			if(stopChoicePrices1 <= 0 || stopChoicePrices1.length == 0) {
 				tip("请输入正确的回撤价");
+				return;
+			}else if((stopChoicePrices1*10000)%(contractObject.MiniTikeSize*10000)!=0){
+				
+				tip('不符合最小变动价,请重新输入,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
 			var stopNumber = $("#stopNumber").val();
