@@ -3508,7 +3508,7 @@ function updateAccountBalance() {
 		if(isNaN(ForceLine/num)){
 			$('#open-risk-degree').text('0.00%');
 		}else{
-			$('#open-risk-degree').text((ForceLine/num).toFixed(2)+'%');
+			$('#open-risk-degree').text(((ForceLine*100)/num).toFixed(2)+'%');
 		}
 		
 		todayCanUse.text(parseFloat(loadCachTodayCanuse + Number(floatingProfit)).toFixed(2));
