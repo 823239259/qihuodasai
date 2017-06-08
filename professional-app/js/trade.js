@@ -1162,7 +1162,7 @@ function appendStopLossData(param) {
 	var stopLossPrice = param.StopLossPrice;
 	stopLossPrice = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossDiff = param.StopLossDiff;
-	console.log('123xx'+JSON.stringify(param));
+	stopLossDiff = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossPriceText = "触发价:";
 	if(stopLossType == 2) {
 		stopLossPriceText = "追踪价差:";
@@ -1233,6 +1233,7 @@ function updateStopLossData(param) {
 	$stopLossType.attr("data-tion-lossType", stopLossType);
 	$num.text(num);
 	$stopLossPrice.attr("data-tion-price", stopLossPrice);
+	stopLossPrice = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
 	$stopLossPrice.text(stopLossPriceText + stopLossPrice);
 	$orderType.text(orderTypeText);
 	$insertTime.text(insertTime);
