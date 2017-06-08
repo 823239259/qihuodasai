@@ -6,11 +6,6 @@
     <title>小恒指期货 - 方案详情</title>
     <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/own.css"/>
-    <style type="text/css">
-    	#tranProfitLoss{
-    		color: #E9392A;
-    	}
-    </style>
     <script type="text/javascript" src="../../js/mui.min.js" ></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script src="../../js/jquery-1.11.3.js"></script>
@@ -329,6 +324,14 @@
 			<label>交易盈亏($)：</label>
 			<span><b  id="tranProfitLoss">-12,000.00美元(72,000人民币)</b></span>
 		</li>
+		<script type="text/javascript">
+				var tP=parseInt($('#tranProfitLoss').text());
+				if(tP>=0){
+					$('#tranProfitLoss').removeClass().addClass('tPred');
+				}else{
+					$('#tranProfitLoss').removeClass().addClass('tPgreen');
+				}
+		</script>
 		<li class="mui-table-view-cell">
 			<label>美元结算汇率：</label>
 			<span id="endParities">1美元 = 6.5327人民币</span>

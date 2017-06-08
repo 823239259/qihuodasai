@@ -347,9 +347,9 @@ function time() {
 		// 7*24
 		$.each(document.querySelectorAll('#directSeedNews .mui-scroll'), function(index, pullRefreshEl) {
 			var div = this;
-			contentrefresh: '正在加载...',
-			newData(url,params,forList,"","post");
 			
+			newData(url,params,forList,"","post");
+			contentrefresh: '正在加载...',
 			$(pullRefreshEl).pullToRefresh({
 				up: {
 					contentrefresh: '正在加载更多的数据...',
@@ -641,7 +641,7 @@ function time() {
 	}
 	// 7*24小时开始
 	function forList(res){ 
-		console.log(JSON.stringify(res));
+//		console.log(JSON.stringify(res));
 		if(!mui.isnull(res)){
   			list=res.data;
 			if(!mui.isnull(list)){
