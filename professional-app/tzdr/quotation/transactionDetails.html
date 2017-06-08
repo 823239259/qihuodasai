@@ -427,11 +427,11 @@
 						<form class="mui-input-group" style="margin-top: 10px;">
 							<div class="mui-input-row">
 								<label>委托价格：</label>
-								<input type="text" class="mui-input-clear" id="col1" placeholder="请输入">
+								<input type="text" class="mui-input-clear" id="col1" placeholder="请输入" onblur="value=value.replace(/[^\d\.]/g,'')">
 							</div>
 							<div class="mui-input-row">
 								<label>委托数量：</label>
-								<input type="text" class="mui-input-clear" id="col2" placeholder="请输入">
+								<input type="text" class="mui-input-clear" id="col2" placeholder="请输入" onblur="value=value.replace(/[^\d\.]/g,'')">
 							</div>
 						</form>
 						<div id="add_div" class="operate mui-hidden">
