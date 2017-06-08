@@ -2347,7 +2347,6 @@ function bindOpertion() {
 				tip("请输入正确的回撤价");
 				return;
 			}else if((stopChoicePrices1*10000)%(contractObject.MiniTikeSize*10000)!=0){
-				
 				tip('不符合最小变动价,请重新输入,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2402,8 +2401,12 @@ function bindOpertion() {
 			}
 			var lastPrice = $("#stopEvenPrice1").text();
 			var stopChoicePrices3 = $("#stopChoicePrices3").val();
+			var contractObject = getMarketCommdity(contractCode);
 			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0) {
 				tip("请输入正确的回撤价");
+				return;
+			}else if((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)!=0){
+				tip('止损价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
 			var stopNumber = $("#stopNumber1").val();
