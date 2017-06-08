@@ -97,7 +97,6 @@ function handleData(evt) {
 				setIsLogin(true);
 				loginFail = false;
 				anotherPlace = false;
-				
 				if(parameters.ForceLine==undefined){
 					$('#loss-Open-line').text('0.00');
 				}else{

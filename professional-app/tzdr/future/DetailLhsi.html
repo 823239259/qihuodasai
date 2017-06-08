@@ -153,6 +153,19 @@
     				tzdr.kuaiqiangshou(obj);*/
     				break;
     		}
+    		document.getElementById("immediately").addEventListener("tap",function(){
+				var trade_account = document.getElementById("trade_account").innerHTML;
+    			var trade_password = document.getElementById("trade_password").innerHTML;
+				mui.openWindow({
+					url:"../login/operateLogin.html",
+					id:"operateLogin",
+					 extras:{
+					 	name:"123",
+					 	trade_account:trade_account,
+					 	trade_password:trade_password
+					 }
+				});
+			});
     	};
     	
     	
