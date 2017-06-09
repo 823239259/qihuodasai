@@ -162,18 +162,23 @@
 		});
 		
 		document.getElementById("signOut").addEventListener("tap", function() {
-			mui.openWindow({url:"../account/accountno.html",id:"accountno"});
-			mui.cacheUser.clear();
-			plus.storage.removeItem("isRealName");
-	  		plus.storage.removeItem("inviteUrl");   
-			/*if(mui.cacheUser.isLogin()) {
-				mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
-			} else {
-				mui.openWindow({
-					url: "../login/register.html",
-					id: "register"
-				})
-			}*/
+			var btnArray = ['否', '继续退出'];
+			mui.confirm('是否继续退出登录！', '提示', btnArray, function(e) {
+				if (e.index == 1) {
+					mui.openWindow({url:"../account/accountno.html",id:"accountno"});
+					mui.cacheUser.clear();
+					plus.storage.removeItem("isRealName");
+			  		plus.storage.removeItem("inviteUrl");   
+					/*if(mui.cacheUser.isLogin()) {
+						mui.open_window_data("../login/login.html", "login", { "backpageID": "account", "url": "../account/accout.html" });
+					} else {
+						mui.openWindow({
+							url: "../login/register.html",
+							id: "register"
+						})
+					}*/
+				}
+			});
 		})
 		mui.checkNetwork();
 		if(mui.cacheUser.isLogin()) {
