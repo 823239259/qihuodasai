@@ -139,8 +139,19 @@ function formatDateHHMMSS(now){
       var   hour=now.getHours();     
       var   minute=now.getMinutes();  
       var   ss = now.getSeconds();
-    return hour+":"+minute+":"+ss;
+    return hour+":"+checkTime(minute)+":"+checkTime(ss);
 }
+/**
+ * 在时间中当小于 10 时前面的 0补足
+ */
+function checkTime(i){
+    if (i<10){
+        i = '0' + i;
+    }
+    return i;
+}
+
+
 /**
  * 字符串保留小数
  * @param {Object} value

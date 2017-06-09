@@ -1310,6 +1310,7 @@ function appendCondition(param) {
 	} else if(conditionType == 1) {
 		timeTriggerPoint = timeTriggerPoint.replace(/-/g, "/");
 		compareTypeText = formatDateHHMMSS(new Date(timeTriggerPoint));
+		
 	}
 	compareTypeText = compareTypeText + additionTypeText;
 	var inserOrderText = analysisBusinessBuySell(drection) + "," + lossOrderType(orderType) + "," + num + "手";
