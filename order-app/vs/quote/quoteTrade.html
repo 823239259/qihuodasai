@@ -439,7 +439,7 @@
 								<div id="buttonList">
 									<button id="placeOrderBidPrice1"><a href="#" id="placeOrder00">买涨价<i id="bidPrice1Button">59.01</i></a></button>
 									<button id="placeOrderAskPrice1"><a href="#" id="placeOrder-die">买跌价<i id="askPrice1Button">59.01</i></a></button>
-									<span id="flashButton"><a href="#" id="flashSeting-ks">快闪</a></span>
+									<span id="flashButton"><a href="#" id="flashSeting-ks"></a></span>
 								</div>
 							</div>
 						</div>
@@ -832,7 +832,8 @@
 								{{fixedPriceByContract(
 									CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
 						</ul>
-						<div class="settlement-sate" id="{{d.OrderID}}-settlement-sate">{{d.StatusMsg}}</div>
+						<!--<div class="settlement-sate" id="{{d.OrderID}}-settlement-sate">{{d.StatusMsg}}</div>-->
+						<div  id="{{d.OrderID}}-settlement-sate">{{d.StatusMsg}}</div>
 					</div>
 					<!--<div class="trigger-close-position">触发止损平仓</div>-->
 				</div>

@@ -54,9 +54,12 @@ $("#list").on('tap','li',function(){
 	$('#contract').val(CommodityNoContractNo);
 	
 	//判断是否存在闪电设置
+	
 	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null){
 		$('#flashSeting-ks').text('已开启');
+		/*
 		$('#placeOrder00').attr('href','#');
+		$('#placeOrder-die').attr('href','#');
 		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
 		console.log('支付总金额:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));//支付总金额
 		console.log('交易数量:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum'));
@@ -67,7 +70,7 @@ $("#list").on('tap','li',function(){
 		console.log('履约保证金:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'lybzj'));
 		
 		$('#placeOrderBidPrice1').on('tap',function(){
-			
+			console.log($('#placeOrder00').attr('href'));
 			var Direction = 0;//买
 			var ClientNo = TradeConfig.username;
 			var PlatForm_User = phone;
@@ -82,6 +85,7 @@ $("#list").on('tap','li',function(){
 			
 			Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
 				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+			mui.toast('买入成功');	
 		});
 		
 		$('#placeOrderAskPrice1').on('tap',function(){
@@ -100,27 +104,11 @@ $("#list").on('tap','li',function(){
 			
 			Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
 				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+			mui.toast('卖出成功');		
 		});
-		
-		
-		$('#flashSeting-ks').on('tap',function(){
-			if($('#flashSeting-ks').text()=='已开启'){	
-				mui.confirm('关闭之后不再享受快速下单通道，需重新开启此功能，确认关闭？',function(e){
-					if(e.index==1){
-						mui.cacheData.removeFlash(phone+SuperCommodityNo+'tradeNum');
-						mui.cacheData.removeFlash(phone+SuperCommodityNo+'stopWin');
-						mui.cacheData.removeFlash(phone+SuperCommodityNo+'stopLoss');
-						mui.cacheData.removeFlash(phone+SuperCommodityNo+'Fee');
-						mui.cacheData.removeFlash(phone+SuperCommodityNo+'lybzj');
-						mui.cacheData.removeFlash(phone+SuperCommodityNo+'zfzje');
-					}
-					
-				});
-			}	
-		});
+		*/
 		
 	}else{
-		
 		$('#flashSeting-ks').text('开启快闪');
 	}
 	
@@ -560,12 +548,38 @@ function getContractParam(){
 
 $('#placeOrderBidPrice1').on('tap',function(){
 	
-	$('#flashMore').text('看多价:');
-	$('#flashMorePrice').text($('#bidPrice1Button').text());
-	$('#orderListButton').text('看多买入');
-	
-	getContractParam();
-	
+	//判断是否存在闪电设置
+	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null && $('#flashSeting-ks').text()=='已开启'){
+		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
+		console.log('支付总金额:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));//支付总金额
+		console.log('交易数量:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum'));
+		console.log('止盈:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'stopWin'));
+		console.log('止损:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss'));
+		console.log('滑点保证金:'+mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit'));
+		console.log('综合交易手续费:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee'));
+		console.log('履约保证金:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'lybzj'));
+		
+		var Direction = 0;//买
+		var ClientNo = TradeConfig.username;
+		var PlatForm_User = phone;
+		var ProductID = '';
+		var CommodityNo = SuperCommodityNo;
+		var ContractNo = contractNo;
+		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
+		var StopWin = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopWin');
+		var StopLoss = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss');
+		var Deposit = mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit');
+		var Fee = mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee');
+			
+		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		mui.toast('买入成功');	
+	}else{
+		$('#flashMore').text('看多价:');
+		$('#flashMorePrice').text($('#bidPrice1Button').text());
+		$('#orderListButton').text('看多买入');
+		getContractParam();
+	}
 });
 
 
@@ -619,7 +633,32 @@ $('#placeOrderAskPrice1').on('tap',function(){
 var superPoundage;
 var super_lybzj_;
 $('#flashButton').on('tap',function(){
+	if($('#flashSeting-ks').text()=='开启快闪'){
+		$("#flashSeting-ks").attr("href","#flashSeting");
+		getContractParam00();
+	}
 	
+	if($('#flashSeting-ks').text()=='已开启'){
+		
+		$('#flashSeting-ks').attr('href','#');
+		$("#placeOrder00").attr("href","#placeOrder");
+		$("#placeOrder-die").attr("href","#placeOrder");
+			mui.confirm('关闭之后不再享受快速下单通道，需重新开启此功能，确认关闭？',function(e){
+				if(e.index==1){
+					mui.cacheData.removeFlash(phone+SuperCommodityNo+'tradeNum');
+					mui.cacheData.removeFlash(phone+SuperCommodityNo+'stopWin');
+					mui.cacheData.removeFlash(phone+SuperCommodityNo+'stopLoss');
+					mui.cacheData.removeFlash(phone+SuperCommodityNo+'Fee');
+					mui.cacheData.removeFlash(phone+SuperCommodityNo+'lybzj');
+					mui.cacheData.removeFlash(phone+SuperCommodityNo+'zfzje');
+					$('#flashSeting-ks').text('开启快闪');
+				}
+					
+			});
+	}
+	
+});
+function getContractParam00(){
 	mui.app_request(
 		'game/order/contractParam',
 		{
@@ -772,6 +811,7 @@ $('#flashButton').on('tap',function(){
 			});
 			<!---------------------------------------------------------------------------->
 			$('#openFlash').on('tap',function(){
+					$('#flashSeting-ks').text('已开启');
 					var tradeNum=$('#TradeNum .on').text();
 					var stopWin= $('#stopWin010 .on').text();
 					var stopLoss= $('#stopLoss010 .on').text();
@@ -804,17 +844,20 @@ $('#flashButton').on('tap',function(){
 					mui.cacheData.saveFlash(phone+commodityNo+'lybzj',lybzj);//履约保证金
 					mui.cacheData.saveFlash(phone+commodityNo+'zfzje',Number(poundage)+Number(lybzj));//支付总金额（不含下单费用）
 					
+					mui.toast('开启成功');
+					$("#placeOrder00").attr("href","#");
+					$("#placeOrder-die").attr("href","#");
+					
 			});
 			
 		}
 	);
 	
-});
-
+}
 
 $('#orderListButton').on('tap',function(){
 	
-	
+	alert();
 	var ClientNo = TradeConfig.username;
 	var PlatForm_User = phone;
 	var ProductID = '';
@@ -828,7 +871,7 @@ $('#orderListButton').on('tap',function(){
 //	var Deposit = $('#_slipBond_').val();//滑点保证金
 	var Deposit = mui.cacheData.getSlipBond(OrderNum+CommodityNo+'hdbzj');
 	var Fee = $('#_poundage_').children().eq(2).text();
-	Fee = Fee.substring(0,Fee.length-1)
+	Fee = Fee.substring(0,Fee.length-1);
 	
 	if($('#orderListButton').text()=='看多买入'){
 		var Direction = 0;//买

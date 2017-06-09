@@ -1,11 +1,11 @@
 // 交易配置
 var TradeConfig = {
 	version : "3.3",	// 版本
-//	url_real : "ws://192.168.0.213:7002", // 实盘地址
-	url_real : "ws://192.168.0.147:7001",
+	url_real : "ws://192.168.0.213:6102", // 实盘地址
+//	url_real : "ws://192.168.0.147:7001",
 	model : "1", // 实盘：0；	模拟盘：1
 	client_source : "N_WEB",	// 客户端渠道
-	username : "000001",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+	username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 	password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 };
 /*
@@ -146,23 +146,23 @@ function handleMessage(evt){
 			
 			console.log('------->'+JSON.stringify(parameters));
 			if(parameters.Status==1){//开仓成功
-				layer.msg('开仓成功:'+parameters.StatusMsg);
+				mui.toast('开仓成功:'+parameters.StatusMsg);
 				appendOrderAfter(parameters);//订单列表追加
 			}else if(parameters.Status==3){//平仓成功
-				layer.msg('平仓成功:'+parameters.StatusMsg);
+				mui.toast('平仓成功:'+parameters.StatusMsg);
 				
 			}else if(parameters.Status==4){//平仓失败
-				layer.msg('平仓失败:'+parameters.StatusMsg);
+				mui.toast('平仓失败:'+parameters.StatusMsg);
 				$('#'+parameters.OrderID+'-PositionListOrder').remove();
 				tplFillData("settlementSheet00", "plSettlementSheet", parameters, FillType.before);
 				
 			}else if(parameters.Status==2){//开仓失败
-				layer.msg('开仓失败:'+parameters.StatusMsg);
+				mui.toast('开仓失败:'+parameters.StatusMsg);
 			}
 			
 		}break;
 		case "OnRspOpenOrderGW":{
-			
+//			layer.msg(parameters.StatusMsg);
 		}break;
 		
 	}
