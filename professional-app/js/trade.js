@@ -1322,7 +1322,8 @@ function appendCondition(param) {
 		'<td class = "condition3" data-tion-compareType = "' + compareType + '">' + compareTypeText + '</td>' +
 		'<td class = "condition4">' + inserOrderText + '</td>' +
 		'<td class = "condition5">当日有效</td>' +
-		'<td class = "condition6">' + insertTime + '</td>' +
+//		'<td class = "condition6">' + insertTime + '</td>' +
+		'<td class = "condition6">' + nullOrInsertTime(insertTime,param.StatusMsg) + '</td>' +
 		'</tr>';
 	if(status == 0 || status == 1) {
 		$("#thodyCondition").append(html);

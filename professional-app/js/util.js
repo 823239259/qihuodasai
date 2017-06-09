@@ -165,3 +165,14 @@ function replaceNum(value,size){
     value = value.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/,'$1$2.$3'); //只能输入四位个小数  
     return value;
 }
+
+function nullOrInsertTime(insertTime,StatusMsg){
+	
+	if(insertTime==''){
+		return StatusMsg;
+	}else{
+		return  insertTime;
+	}
+}
+
+
