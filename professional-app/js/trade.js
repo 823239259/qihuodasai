@@ -3518,10 +3518,15 @@ function updateAccountBalance() {
 		var ForceLine = $('#loss-Open-line').text();
 		ForceLine = Number(ForceLine);
 		var num=parseFloat(loadCachTodayBanlance + Number(floatingProfit)).toFixed(2);
-		if(isNaN(ForceLine/num)){
+		if(isNaN(ForceLine/num) ){
 			$('#open-risk-degree').text('0.00%');
 		}else{
-			$('#open-risk-degree').text(((ForceLine*100)/num).toFixed(2)+'%');
+			if(isFinite(((ForceLine*100)/num).toFixed(2))){
+				
+				$('#open-risk-degree').text(((ForceLine*100)/num).toFixed(2)+'%');
+			}else{
+				$('#open-risk-degree').text('0.00%');
+			}
 		}
 		
 		todayCanUse.text(parseFloat(loadCachTodayCanuse + Number(floatingProfit)).toFixed(2));
