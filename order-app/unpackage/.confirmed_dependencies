@@ -244,7 +244,8 @@
 		"refer": [
 			"vs/find/find.html",
 			"vs/directSeed/search.html",
-			"vs/home/home.html"
+			"vs/home/home.html",
+			"vs/account/account.html"
 		]
 	},
 	"vs/quote/placeOrder.html": {

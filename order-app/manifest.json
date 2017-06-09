@@ -1864,7 +1864,14 @@
 			"vs/find/informationCenter/informationCenter.html": {
 				"resources": [
 					"img/backBg.png",
-					"css/informationCenter.css"
+					"css/informationCenter.css",
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"js/jquery-1.11.3.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
