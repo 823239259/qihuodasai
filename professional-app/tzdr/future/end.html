@@ -133,7 +133,7 @@
 							mui.toast("有持仓或挂单，请平仓后再试！");
 							return;
 						}else if(result.code==22 || result.code==20){
-							mui.toast("连接交易不成功，请稍后再试！");
+							mui.toast("系统处理繁忙，请稍后再试。如多次尝试失败，请联系客服处理。");
 							return;
 						}else{
 							mui.toast("系统繁忙，请稍后再试！");
