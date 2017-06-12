@@ -20,13 +20,23 @@
 	    </style> 
 	</head>
 	<body style="background-color: #fcfaf0;">
-		<img src="images/startPage.png" style="width: 100%;">
+		<img src="images/startPage.png" id="startPage" style="width: 100%;">
 		<script>
 		$("img").css({
 						"width":window.innerWidth+"px ",
 						"height":window.innerHeight-40+"px",
 				});
 			mui.plusReady(function(){
+//				mui.app_request('/banner/list',{
+//					"type": 10
+//				},
+//					function(result){
+//						console.log(JSON.stringify(result));
+//						$("#startPage").attr("src",tzdr.constants.base_images_url+"upload/banner/2017/05/31/27a5eb47ace2dd38e047bdc40c94a0d9.png");
+//					},function(result){
+//						console.log(JSON.stringify(result));
+//					}
+//	    		);
 //				$("img").css({
 //						"width":window.innerWidth+"px ",
 //						"height":window.innerHeight+"px",
