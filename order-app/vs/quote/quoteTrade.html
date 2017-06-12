@@ -269,11 +269,12 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title ps">
+				<h1 class="mui-center mui-title ps" style="padding: 0 !important;">
 					<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 						<a class="mui-control-item mui-active" href="#trade">模拟盘下单</a>
 						<a class="mui-control-item" href="#position">模拟盘持仓</a> 
 					</div>
+					<a id="reloadButton" class="mui-icon mui-icon-loop mui-pull-right" style="font-weight: bold; position: absolute; top: 0; right: 0;"></a>
 				</h1>
 			</div>
 			<div class="mui-page-content">
@@ -293,12 +294,12 @@
 									<!--<p id="accoutSurplus">账户余额</p>-->
 									<!--<p>CL1702</p>-->
 								</div>
-								<div class="navigation-container">
+								<div class="navigation-container" style="float: right;">
 									<button id="clearanceButton">一键清仓</button>
 								</div>
-								<div class="navigation-container">
+								<!--<div class="navigation-container">
 									<button id="reloadButton">刷新</button>
-								</div>
+								</div>-->
 								<ul id="choiceProductList">
 								</ul>
 							</div>

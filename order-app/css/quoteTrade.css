@@ -11,12 +11,12 @@
 #quote .mui-segmented-control .mui-control-item:nth-child(1){border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-right: none;}
 #quote .mui-segmented-control .mui-control-item:nth-child(2){border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-left: none;}
 #rule{display: inline-block; width: 40px; padding-right: 5px; height: 44px;line-height: 44px; text-align: right; font-size: 13px; color:#333333;}
-#Navigation{height: 50px;background-color: #f25749; padding: 0px 15px; }
+#Navigation{height: 50px;background-color: #f25749; padding: 0px 15px;}
 #Navigation p{white-space: nowrap;text-overflow:ellipsis ;overflow: hidden;}
-.navigation-container{display: inline-block; float: left; width: 19%; height: 50px; vertical-align: middle; margin: 6px 0 0 0;}
-#Navigation .navigation-container:not(:last-child){margin-right: 4.7%;}
-#Navigation .navigation-container:nth-child(4){margin-right: 0%; width: 18%;}
-#Navigation .navigation-container #reloadButton{width: 100%; background-color:  #f25749; border: none; font-size: 13px; padding: 0px; color: #FFFFFF;} 
+.navigation-container{display: inline-block; float: left; height: 50px; text-align: center; vertical-align: middle; margin: 6px 0 0 0;}
+#Navigation .navigation-container:first-child{margin-right: 15%;}
+/*#Navigation .navigation-container:last-child{margin-right: 0; background: red !important;}*/
+/*#Navigation .navigation-container #reloadButton{width: 100%; background-color:  #f25749; border: none; font-size: 13px; padding: 0px; color: #FFFFFF;}*/ 
 .navigation-container:nth-child(1){text-align: left;background:url(../img/quote/whiteSanjiao.png) no-repeat center right;background-size: 8px auto;}
 .navigation-container #reloadButton{display: inline-block; height: 50px; line-height: 50px; padding: 0px;}
 /*.navigation-container:nth-child(2){width: 100%;text-align: center;position: absolute;z-index: 1;}
