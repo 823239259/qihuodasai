@@ -2,7 +2,6 @@ var SuperCommodityNo;
 var contractNo;
 var exchangeNo;
 $("#list").on('tap','li',function(){
-	
 	var index = $(this).index();
 	SuperCommodityNo = $('#list li').eq(index).children().eq(2).text();//CL
 	var CommodityNoContractNo = $('#list li').eq(index).children().eq(2).text()+$('#list li').eq(index).children().eq(3).text();//CL1707
@@ -10,6 +9,7 @@ $("#list").on('tap','li',function(){
 	exchangeNo=CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "ExchangeNo");
 	
 	$("#totalVolume").val('');
+	$("#exchangeNo").val(exchangeNo);
 	$("#commodityNo").val(SuperCommodityNo);
 	$("#contractNo").val( CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract"));
 	
@@ -42,7 +42,6 @@ $("#list").on('tap','li',function(){
 	$('#flashSetingName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
 	$('#flashSetingCon').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
 		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
-	
 	
 	//分时图
 	clearCache();
@@ -113,6 +112,91 @@ $("#list").on('tap','li',function(){
 	}
 	
 	
+});
+//刷新chart
+document.getElementById("reloadButton").addEventListener("tap", function() {
+	var divID = $("#candlestickNavContainer a.mui-active").attr("id");
+	if(divID == "lightChartButton"){
+//		alert("闪电图");
+		lightChart00();	
+	}else if(divID == "timeChartButton") {
+//		alert("分时图");
+		var contractNo = $("#contractNo").val();
+		var SuperCommodityNo = $("#commodityNo").val();
+		var exchangeNo = $("#exchangeNo").val();
+		clearCache();
+		is_fenshi=true;
+		Quote.doQryHistory(exchangeNo, SuperCommodityNo, contractNo, 0, '', '', '');
+	}else if(divID == "chiocecandlestickButton") {
+//		alert("K线图");
+		var HisQuoteType = $("#candlestickList a.mui-active").attr("data");
+		clearCache();
+		is_k = true;
+		is_fenshi=false;
+		is_shandian=false;
+		Quote.doQryHistory(exchangeNo,commodityNo,contractNo,HisQuoteType,"","",0);
+	}
+})
+//点击训练中心默认进入第一个
+document.getElementById("trainingCenter").addEventListener("tap",function() {
+	
+	var index = $(this).index();
+	SuperCommodityNo = $('#list li').eq(0).children().eq(2).text();//CL
+	var CommodityNoContractNo = $('#list li').eq(0).children().eq(2).text()+$('#list li').eq(0).children().eq(3).text();//CL1707
+	contractNo = CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract");
+	exchangeNo=CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "ExchangeNo");
+	
+	$("#totalVolume").val('');
+	$("#exchangeNo").val(exchangeNo);
+	$("#commodityNo").val(SuperCommodityNo);
+	$("#contractNo").val( CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "MainContract"));
+	
+	//持仓时间
+	$('#flashMoreTime').text($('#'+SuperCommodityNo+'-line-time').text());
+	
+	//初始化模拟下单页面的值
+	$('#lastPrices').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "LastPrice"),SuperCommodityNo));
+	$('#riseAndFall').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ChangeValue"),SuperCommodityNo));
+	$('#riseAndFallRange').text(parseFloat(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ChangeRate")).toFixed(2) + "%");
+	//买一价
+	$('#askPrice1').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "BidPrice1"),SuperCommodityNo)+'/');
+	$('#askQty1').text(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "BidQty1"));
+	//卖一价
+	$('#bidPrice1').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "AskPrice1"),SuperCommodityNo)+'/');
+	$('#bidQty1').text(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "AskQty1"));
+	//卖一价
+	$('#bidPrice1Button').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "AskPrice1"),SuperCommodityNo));
+	//买一价
+	$('#askPrice1Button').text(fixedPriceByContract(CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "BidPrice1"),SuperCommodityNo));
+	
+	pankou(CommodityNoContractNo);
+	
+	//委托页面title
+	$('#entrustCommodityName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
+	$('#entrustContract').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
+		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
+	
+	//闪电设置页面title
+	$('#flashSetingName').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityName"));
+	$('#flashSetingCon').text(CacheQuoteBase.getCacheContractAttribute(SuperCommodityNo, "CommodityNo")
+		+CacheQuoteSubscribe.getCacheContractQuote(CommodityNoContractNo, "LastQuotation", "ContractNo"));
+	
+	//分时图
+	clearCache();
+	is_fenshi=true;
+	Quote.doQryHistory(exchangeNo, SuperCommodityNo, contractNo, 0, '', '', '');
+	
+	
+	//为select赋值
+	$('#contract').val(CommodityNoContractNo);
+	
+	//判断是否存在闪电设置
+	
+	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null){
+		$('#flashSeting-ks').text('已开启');
+	}else{
+		$('#flashSeting-ks').text('开启快闪');
+	}
 });
 
 //为盘口赋值
