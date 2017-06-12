@@ -112,7 +112,7 @@
 					},function(result){
 						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
 						if(result.code==2){
-							mui.toast("未找到该方案,无法申请终结！");
+							mui.toast("系统处理繁忙，请稍后再试。如多次尝试失败，请联系客服处理。");
 							return;
 						}else if(result.code==3){
 							mui.toast("已申请终结，不能重复申请！");
@@ -132,8 +132,8 @@
 						}else if(result.code==10){
 							mui.toast("有持仓或挂单，请平仓后再试！");
 							return;
-						}else if(result.code==22){
-							mui.toast("未找到该方案，无法申请终结方案！");
+						}else if(result.code==22 || result.code==20){
+							mui.toast("系统处理繁忙，请稍后再试。如多次尝试失败，请联系客服处理。");
 							return;
 						}else{
 							mui.toast("系统繁忙，请稍后再试！");

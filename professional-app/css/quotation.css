@@ -322,55 +322,52 @@ p{
 	z-index: 999;
 }
 #kilAnorder{
-	bottom: 1%;
-	right: 25%;
-	border-top:none;
-	border-bottom: none;
-	border-right: 1px solid #1f1f1f!important;
+	top: 0px;
+	width: 33.3%;
+	left: 0%;
+	border-right: 1px solid #1f1f1f !important;
 }
 .focusButton{
 	height: 40px;
 	line-height: 40px;
 	padding: 0px;
-	width: 25%;
 	color:#2b2b2b;
 	background-color: #cccccc;
-	display: block;
-	position: fixed;
+	display: inline-block;
+	position: relative;
 	border:none;
 	color:#2b2b2b;
 	font-size: 16px;;
+	float: left;
 }
 #fullWithdrawal{
-	bottom: 1%;
-	right: 50%;
-	border-top:none;
-	border-left: none;
-	border-bottom: none;
+	top: 0px;
+	width: 33.3%;
+	left: 0;
 	border-right: 1px solid #1f1f1f!important;
 }
 #changeSingle{
-	bottom: 1%;
-	right: 0px;
+	top: 0px;
+	width: 33.3%;
+	right: 0%;
 }
 
 #allOpen{
-	bottom: 1%;
-	right: 25%;
-	border-top:none;
-	border-left: none;
-	border-bottom: none;
+	top: 0px;
+	width: 33.3%;
+	left: 0;
 	border-right: 1px solid #1f1f1f!important;
 }
 #Open{
-	bottom: 1%;
-	right: 0px;
+	top: 0px;
+	width: 33.3%;
+	left: 0%;
 	border-right: 1px solid #1f1f1f !important;
 }
 #stopLoss{
-	bottom: 1%;
-	right: 0px;
-	display: none;
+	top: 0px;
+	width: 33.3%;
+	right: 0%;
 }
 #positionList,#postersOrder{
 	width: 100%;
