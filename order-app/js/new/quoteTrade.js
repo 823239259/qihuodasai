@@ -226,10 +226,6 @@ $('#contract').change(function(){
 
 
 
-
-
-
-
 $("#lightChartButton").on("tap", function() {
 	lightChart00();
 });
@@ -403,7 +399,7 @@ function getContractParam(){
 			//初始化 手续费
 			var initsxf = mui.cacheData.getsxf(num0+SuperCommodityNo+'sxf');
 //			$('#_poundage_').text('('+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+')'+' '+initsxf*num0+'元');
-			$('#_poundage_').html('<label>'+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+'</label></br><label>'+initsxf*num0+'元</label>');
+			$('#_poundage_').html('<label>'+currencyNo+(toFixedFloatNumber(initsxf*num0/CNYExchangeRate,4))+'</label></br><label id="_poundage_00">'+initsxf*num0+'元</label>');
 			
 			var arrayCFZY0= mui.cacheData.getzy(num0+SuperCommodityNo+'zy').split(',');//触发止盈数组
 			$('#_stopWin010_ .chioce-button').remove();
@@ -454,7 +450,7 @@ function getContractParam(){
 			}
 			
 			$("#_stopLoss010_ .chioce-button").on('tap',function(){
-					
+				
 				$(this).addClass('on'); // 设置被点击元素为黄色
 				$(this).siblings(".chioce-button").removeClass('on'); // 去除所有同胞元素的黄色样式
 				
@@ -462,14 +458,10 @@ function getContractParam(){
 				var zsj=$(this).text();//止损价
 				var lybzj = (initHdbzj*num0)+Number(zsj);//滑点保证金*手数+止损价=履约保证金
 				$('#_performance_margin_').text(lybzj+'元');
-				var a = $('#_poundage_').text();
-				a = a.substring(a.indexOf(')')+1,a.indexOf('元'));
+				var a = $('#_poundage_00').text();
+				a=a.match(/\d+\.?\d*/);
 				$('#payment_amount').text(Number(a)+Number(lybzj));
 			});
-			
-			
-			
-			
 			
 			$("#_TradeNum_ .chioce-button").on('tap',function(){
 				
@@ -545,11 +537,15 @@ function getContractParam(){
 	
 }
 
-
+/**
+ *买涨价 
+ */
 $('#placeOrderBidPrice1').on('tap',function(){
 	
 	//判断是否存在闪电设置
 	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null && $('#flashSeting-ks').text()=='已开启'){
+		
+		$("#placeOrder00").attr("href","#");
 		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
 		console.log('支付总金额:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje'));//支付总金额
 		console.log('交易数量:'+mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum'));
@@ -570,7 +566,7 @@ $('#placeOrderBidPrice1').on('tap',function(){
 		var StopLoss = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss');
 		var Deposit = mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit');
 		var Fee = mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee');
-			
+		
 		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
 				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
 		mui.toast('买入成功');	
@@ -594,13 +590,37 @@ mui.app_request('/user/getbalancerate', {
 	
 
 
-
+/**
+ *买跌价
+ */
 $('#placeOrderAskPrice1').on('tap',function(){
 	
-	$('#flashMore').text('看空价:');
-	$('#flashMorePrice').text($('#askPrice1Button').text());
-	$('#orderListButton').text('看空买入');
-	getContractParam();
+	if(mui.cacheData.getFlash(phone+SuperCommodityNo+'zfzje')!=null && $('#flashSeting-ks').text()=='已开启'){
+		
+		$("#placeOrder-die").attr("href","#");
+		var Direction = 1;//卖
+		var ClientNo = TradeConfig.username;
+		var PlatForm_User = phone;
+		var ProductID = '';
+		var CommodityNo = SuperCommodityNo;
+		var ContractNo = contractNo;
+		var OrderNum = 	mui.cacheData.getFlash(phone+SuperCommodityNo+'tradeNum').substring(0,1);
+		var StopWin = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopWin');
+		var StopLoss = mui.cacheData.getFlash(phone+SuperCommodityNo+'stopLoss');
+		var Deposit = mui.cacheData.getFlash(phone+SuperCommodityNo+OrderNum+'Deposit');
+		var Fee = mui.cacheData.getFlash(phone+SuperCommodityNo+'Fee');
+			
+		Trade.doOpenOrderGW(ClientNo,PlatForm_User,ProductID,CommodityNo,
+				ContractNo,OrderNum,Direction,StopWin,StopLoss,Deposit,Fee);
+		mui.toast('卖出成功');		
+		
+	}else{
+		$('#flashMore').text('看空价:');
+		$('#flashMorePrice').text($('#askPrice1Button').text());
+		$('#orderListButton').text('看空买入');
+		getContractParam();
+		
+	}
 });
 
 /**
