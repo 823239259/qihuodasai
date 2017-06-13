@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "H50967E1D",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "期货原油通",/*应用名称，程序桌面图标名称*/
+	"name": "期货大赛",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
 		"code": "2017061201"
@@ -105,7 +105,7 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"},"sina":{"appkey":"926212424","appsecret":"39f93abbc724514ba9867a6610364e83","redirect_uri":"http://open.weibo.com/apps/1272700885/privilege/oauth","description":"可选，新浪微博分享"},"qq":{"appid":"1105527637","description":"QQ分享"}},"push":{"igexin":{"appid":"QScHCMFtxt5lbVmduBPSg8","appkey":"OiopE6XWJG8UH5quz9B7H5","appsecret":"OiopE6XWJG8UH5quz9B7H5"}},"statics":{"umeng":{"appkey_ios":"5937e12ef43e48465100053d","channelid_ios":"appstore","appkey_android":"5909ac6ff5ade4156d001192","channelid_android":"android"}}},
+		"distribute": {"plugins":{"share":{"weixin":{"appid":"wx7301b8ea28488408","appsecret":"223f9b4139c4f0f7211cf7f6e918401e","description":"可选，微信分享"},"sina":{"appkey":"926212424","appsecret":"39f93abbc724514ba9867a6610364e83","redirect_uri":"http://open.weibo.com/apps/1272700885/privilege/oauth","description":"可选，新浪微博分享"},"qq":{"appid":"1105527637","description":"QQ分享"}},"push":{"igexin":{"appid":"QScHCMFtxt5lbVmduBPSg8","appkey":"OiopE6XWJG8UH5quz9B7H5","appsecret":"OiopE6XWJG8UH5quz9B7H5"}},"statics":{"umeng":{"appkey_ios":"59155332717c1948e5001b22","channelid_ios":"appstore","appkey_android":"59155332717c1948e5001b22","channelid_android":"android"}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -166,17 +166,17 @@
 				"ios": {
 					"iphone": {
 						"default": "images/boot/ios/640+960.png", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "images/boot/ios/640+960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina35": "images/boot/android/640+960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "images/boot/ios/640+1136.png",
 						"retina47": "images/boot/ios/750+1334.png",
 						"retina55": "images/boot/ios/1242+2208.png","retina55l":"images/boot/ios/1242+2208.png"
 					},
 					"ipad": {
-						"portrait": "images/boot/ios/750+1334.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait": "images/boot/ios/720+1242.png", /*iPad竖屏启动图片，分辨率：768x1004*/
 						"portrait-retina": "images/boot/ios/1242+2208.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
 						"landscape": "images/boot/ios/750+1334.png", /*iPad横屏启动图片，分辨率：1024x748*/
 						"landscape-retina": "images/boot/ios/1242+2208.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "images/boot/ios/750+1334.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait7": "images/boot/ios/720+1242.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
 						"portrait-retina7": "images/boot/ios/1242+2208.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
 						"landscape7": "images/boot/ios/750+1334.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
 						"landscape-retina7": "images/boot/ios/1242+2208.png"
@@ -185,7 +185,7 @@
 				"android": {
 					"mdpi": "images/boot/android/720+1242.png", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "images/boot/android/720+1242.png", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "images/boot/android/640+960.png", /*高分屏启动图片，分辨率：480x762*/
+					"hdpi": "images/boot/ios/640+960.png", /*高分屏启动图片，分辨率：480x762*/
 					"xhdpi": "images/boot/android/720+1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
 					"xxhdpi": "images/boot/android/1080+1920.png"
 				}
