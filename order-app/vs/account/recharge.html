@@ -21,22 +21,22 @@
 			<ul class="charge-list">
 				<li class="mui-table-view-cell">
 					<label>账户余额：</label>
-					<span class="yellowFont"><i id="accountBalance">0</i>游戏币</span>
+					<span class="yellowFont"><i id="accountBalance">0</i>元</span>
 				</li>
 				<li class="mui-table-view-cell">
-					<label>充值数量：</label>
-					<input type="number" placeholder="请输入充值游戏币" class="mui-input" id="inputMoney" />
+					<label>充值金额：</label>
+					<input type="number" placeholder="请输入充值金额" class="mui-input" id="inputMoney" />
 				</li>
-				<li class="mui-table-view-cell">
+				<!--<li class="mui-table-view-cell">
 					<label>应付金额：</label>
 					<label><span id="amountMoney">0.00</span>元</label>
-				</li>
+				</li>-->
 			</ul>
-			<p style="padding: 0 10px; font-size: 12px;">注:充值¥1元=100游戏币</p>
+			<!--<p style="padding: 0 10px; font-size: 12px;">注:充值¥1元=100游戏币</p>-->
 			<p class="buttom-button" id="recharge-btn">
-				<button>立即充值</button>
+				<button>立即充值￥<span></span> 元</button>
 			</p>
-			<p class="textAlignRightP">充值后的余额：<span class="yellowFont"><i id="allBalance">0</i>游戏币</span></p>
+			<p class="textAlignRightP">充值后的余额：<span class="yellowFont"><i id="allBalance">0</i>元</span></p>
 		</div>
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -66,9 +66,15 @@
 				return
 			} else {
 				var _length = this.value.length;
+				if(_length > 6){
+					$("#inputMoney").val('');
+					mui.toast('充值金额过大，请重新输入！');
+					return;
+				}
 				var _index = this.value.lastIndexOf('.');
 				var _temp_value = _index > 0 ? this.value.substr(_index + 1, _length) : '';
 				this.value = _temp_value.length > 2 ? this.value.substr(0, _length - 1) : this.value;
+				$("#recharge-btn span").text(this.value);
 				changeAllBalance();
 				return;
 			}

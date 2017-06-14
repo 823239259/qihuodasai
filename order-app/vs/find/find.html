@@ -190,18 +190,6 @@
 				deceleration:deceleration
 			});		
 		})(mui);
-		mui(document.querySelector('#newList')).pullToRefresh({
-			up: { 
-				contentrefresh: '正在加载...',
-				callback: function() {
-					var self = this;
-					var ul = self.element.querySelector('#historyDetailsTable1');
-					setTimeout(function(){
-						ajaxQueryPageInfo(self);	
-					},500)
-				}
-			}
-		});
 		var dataALL="";
 		var dataL="";
 		mui.app_request("/news/list",{},function(data){
@@ -228,6 +216,19 @@
 					}
 					dataALL=data.data.slice(20,data.data.length);
 				}
+				//有数据才调用上拉加载
+				mui(document.querySelector('#newList')).pullToRefresh({
+					up: { 
+						contentrefresh: '正在加载...',
+						callback: function() {
+							var self = this;
+							var ul = self.element.querySelector('#historyDetailsTable1');
+							setTimeout(function(){
+								ajaxQueryPageInfo(self);	
+							},500)
+						}
+					}
+				});
 			}else {
 				var ul = $('#newList .mui-table-view');
 				var li;
@@ -235,7 +236,7 @@
 				li.setAttribute("class","mui-table-view-cell");
 				li.innerHTML = '<div style="text-align: center;width: 100%; height: 25px; z-index: 999999; "><div id="noSearchResultContainer" >' +
 	            				'暂时没有更多公告！</div></div>';
-				ul.append(li);
+//				ul.append(li);
 			}
 			
 		},function(){
