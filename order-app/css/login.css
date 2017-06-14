@@ -33,6 +33,7 @@ html, body {background: #f25749;}
 #checkbox {display: inline-block; background: url(../img/login/registerInput.png) no-repeat; width: 10px; height: 10px; background-size: 100% 100%; position: relative; top: 1px; margin-right: 5px;}
 #checkbox.checked {background: url(../img/login/registerInputOn.png) no-repeat; background-size: 100% 100%;}
 .checked {font-size: 11px; text-align: center; margin-top: 5px;}
+.commStyle em{font-style: normal; text-decoration: underline;}
 /*
  *切换登录
  * */
