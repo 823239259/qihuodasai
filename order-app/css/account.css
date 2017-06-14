@@ -66,7 +66,7 @@ body{background-color: #FFFFFF;}
 .mui-content .passwore-row-contanier{padding: 0px 0px 0px 15px; background-color: #FFFFFF;}
 .mui-content .passwore-row-contanier .passwore-row{width: 100%; height: 50px; line-height: 50px; }
 .mui-content .passwore-row-contanier .passwore-row label{width: auto; color: #333; font-size: 15px; float: left; }
-.mui-content .passwore-row-contanier .passwore-row input{width: 80%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px 15px 0px 0px;height: 49px; line-height: 49px; margin: 0px; }
+.mui-content .passwore-row-contanier .passwore-row input{width: 75%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle;padding: 0px 15px 0px 0px;height: 49px; line-height: 49px; margin: 0px; }
 .mui-content .passwore-row-contanier:nth-child(2){border-bottom: 1px solid #E5E5E5; margin-top: 5px;}
 .mui-content .passwore-row-contanier .new-passsword-row{border-bottom: 1px solid #E5E5E5;}
 /*
@@ -137,7 +137,7 @@ body{background-color: #FFFFFF;}
 /*.mui-table-view-chevron .mui-table-view-cell a{padding-right: 55px;}*/
 .withdrawals .withdrawals-information-list li input{width: 60%; color: #999999; font-size: 15px; float: right; border: none; vertical-align: middle; text-align: right;padding: 0px ;height: 28px; line-height: 28px; margin: 0px; }
 .withdrawals .withdrawals-information-list li label:nth-child(3){position: absolute; right: 15px;height: 28px; line-height: 28px;color: #333333; font-size: 15px;}
-.withdrawals .withdrawals-information-list li span{display: block;float: right; text-align: right; width: 60%; height: 28px; line-height: 28px; font-size: 13px; color: #999999;}
+.withdrawals .withdrawals-information-list li span{display: block;float: right; text-align: right; width: 60%; height: 28px; line-height: 28px; font-size: 15px; color: #999999;}
 .withdrawals .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){margin-right: -35px;}
 .withdrawals .withdrawals-information-list li span select{padding: 0px 0px 0px 0px; margin-bottom: 0px; height: 28px; line-height: 28px;}
 .withdrawals .counter-fee{width: 100%; height: 25px; line-height: 25px; color: #999999; font-size: 13px; text-align: center; background-color: #FFFFFF; border-bottom: 1px solid #E5E5E5;}
