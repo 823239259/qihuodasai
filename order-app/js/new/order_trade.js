@@ -5,7 +5,7 @@ var TradeConfig = {
 //	url_real : "ws://192.168.0.147:7001",
 	model : "1", // 实盘：0；	模拟盘：1
 	client_source : "N_WEB",	// 客户端渠道
-	username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+	username : "000030",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 	password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 };
 /*
@@ -144,7 +144,7 @@ function handleMessage(evt){
 		}break;
 		case "OnRtnOrderStateChgGW":{//开仓请求订单变化通知
 			
-			console.log('------->'+JSON.stringify(parameters));
+			console.log('开仓请求订单变化通知'+JSON.stringify(parameters));
 			if(parameters.Status==1){//开仓成功
 				mui.toast('开仓成功:'+parameters.StatusMsg);
 				appendOrderAfter(parameters);//订单列表追加
@@ -208,6 +208,15 @@ function appendOrder(orderInfo){
 		//结算单列表
 		tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 	}
+	var len = $("#positionListOrder > li").length;
+	if(len == 0){
+		$("#noOrder").show();
+		$("#allClosePosition").hide();
+	}else{
+		$("#noOrder").hide();
+		$("#allClosePosition").show();
+	}
+	
 	//平仓
 	$('.closePositionClass').on('tap',function(){
 		

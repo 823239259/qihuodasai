@@ -150,6 +150,9 @@ flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: rel
 #buttonListLi li.on,#buttonListLiStopLoss li.on{color:#FFFFFF; background-color: #ffb319; border-radius: 2px; }
 .alert-content-inside button:nth-child(3){width: 50%; border: none; float: left; height: 40px; padding: 0px; line-height: 40px; text-align: center; color:#ffb319; font-size: 15px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 5px; border-bottom-right-radius: 0px; }
 .alert-content-inside button:nth-child(4){width: 50%; border: none; float: left; height: 40px; padding: 0px; line-height: 40px; text-align: center; color:#999999; font-size: 15px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 5px; }
+.totalData{float: left; width: 75% !important;}
+.statusMsg{position: absolute;top: 0;right: 0; width: 60px !important;height: 60px;line-height: 60px !important;text-align: center;overflow: hidden;border: 5px solid red; border-radius: 100%;}
+.statusMsg span{ display: block; line-height: 21px;}
 /***
  * 下单页面
  * **/
