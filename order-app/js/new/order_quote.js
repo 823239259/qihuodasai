@@ -12,7 +12,7 @@ var HeartBeat00 = {
 	intervalCheckTime : 800000,   // 间隔检查时间：8秒
 	check : function(){
 		if (this.lastHeartBeatTimestamp == this.oldHeartBeatTimestamp) { // 心跳未更新——上次心跳时间与最新心跳时间一致
-			console.log('lastHeartBeatTimestamp:'+this.lastHeartBeatTimestamp+',oldHeartBeatTimestamp:'+this.oldHeartBeatTimestamp);
+//			console.log('lastHeartBeatTimestamp:'+this.lastHeartBeatTimestamp+',oldHeartBeatTimestamp:'+this.oldHeartBeatTimestamp);
 			layer.msg('行情服务器断开，正在刷新重连...', {
 				icon: 7
 			});
@@ -406,6 +406,7 @@ function updateQuoteInfo(jQuote){
 	
 	var contract = jQuote.CommodityNo + jQuote.ContractNo;
 	$('#'+jQuote.CommodityNo+'-zdf').text(parseFloat(jQuote.ChangeRate).toFixed(2) + '%');
+	$('#'+jQuote.CommodityNo+'-totalVolume').text(jQuote.TotalVolume);
 	if(jQuote.ChangeValue>0){
 		$('#'+jQuote.CommodityNo+'-zdf').css('color','red');
 	}
@@ -501,7 +502,7 @@ function updateQuoteInfo(jQuote){
 			sumFloatMoney =sumFloatMoney+FloatMoney;
 			
 		});
-		$('#sumFloatMoney').text(parseFloat(sumFloatMoney).toFixed(4));
+		$('#sumFloatMoney').text(parseFloat(sumFloatMoney).toFixed(2));
 		$('#holdProfit00').text(parseFloat(sumFloatMoney).toFixed(4));
 }
 

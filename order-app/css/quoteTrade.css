@@ -81,8 +81,10 @@
 #positionListOrder  div ul li:nth-child(1),#positionListOrder  div ul li:nth-child(4){width: 46%;}
 #positionListOrder  div ul li:nth-child(2),#positionListOrder  div ul li:nth-child(5){width: 25%;}
 #positionListOrder  div ul li:nth-child(3),#positionListOrder  div ul li:nth-child(6){width: 29%;}
-#allClosePosition{width: 100%; padding: 0px 15px; }
-#allClosePosition button{background-color: #ffb319; border: none; height: 40px; font-size: 15px;; color: #fff; text-align: center; width: 100%; padding: 0px; line-height: 40px; width: 100%;}
+#allClosePosition, .allCloseOrder{width: 100%; padding: 0px 15px; }
+.allCloseOrder{position: fixed; bottom: 0; left: 0;}
+#allClosePosition button{ background-color: #ffb319; border: none; height: 40px; font-size: 15px;; color: #fff; text-align: center; width: 100%; padding: 0px; line-height: 40px;}
+.allCloseOrder button{ background-color: #ffb319; border: none; height: 40px; font-size: 15px;; color: #fff; text-align: center; width: 100%; padding: 0px; line-height: 40px;}
 #allClosePosition span{height: 45px; line-height: 35px; display: inline-block; width: 100%; text-align: center; font-size: 13px; color: #333333; }
 #allClosePosition span em{font-style: normal; font-weight: bold;}
 /**
@@ -167,6 +169,7 @@ flashSeting .mui-scroll-wrapper{height: 500px; overflow-y: scroll; position: rel
 #checkboxButton{background-color: #ffb319; width:15px; height: 15px; border: none; padding: 0px; cursor: pointer; margin-top: -1px; position: absolute; top: 19px;left: 15px}
 #poundage.poundage-label label ,#_poundage_.poundage-label label {line-height: 20px; height: 20px; display: inline-block;}
 #_poundage_.poundage-label label:nth-child(1) {margin-top: 5px;}
+/*.rule-div #checkboxButton{ background: url(../img/checkboxBg.png) no-repeat center center;}*/
 /*
  操盘明细
  */

@@ -57,7 +57,6 @@ window.onload = function() {
 	var checkboxButtonClickNum = 0;
 	document.getElementById("checkboxButton").addEventListener("click", function() {
 		if(checkboxButtonClickNum % 2 == 0) {
-			console.log("544")
 			$("#checkboxButton").css({ "background": "url('../../img/checkboxBg.png') no-repeat center", "background-size": "15px 15px" });
 		} else {
 			$("#checkboxButton").css({ "background": "", "background-size": "15px 15px" });

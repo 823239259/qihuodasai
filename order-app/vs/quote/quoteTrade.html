@@ -455,12 +455,17 @@
 								<div class="mui-scroll-wrapper" style="height: 400px;">
 									<div class="mui-scroll">
 										<ul id="positionListOrder" style="height: auto;">
+											
 											<!--tplPositionListOrder-->
 										</ul>
+										<p id="noOrder" style="display: none; background: #fff; text-align: center; padding: 20px 0;">目前暂无持仓合约，赶紧去操盘吧~</p>
 										<p id="allClosePosition">
 											<span>持仓盈亏：<em id="sumFloatMoney"></em></span>
 											<button id="allCloseOrder">全部平仓</button>
 										</p>
+										<!--<div class="allCloseOrder">
+											<button id="allCloseOrder">全部平仓</button>
+										</div>-->
 									</div>
 								</div>
 							</div>
@@ -750,21 +755,35 @@
 		{{# if(!isEmpty(d)){ }}
 			<li class="mui-table-view-cell type-list">
 				<a id="{{d.contractNo}}-line" class="mui-navigate-right" href="#setting">
-					<span class="title-name">{{d.contractNo}}</span>
+					<span class="title-name" style="margin: 0;">{{d.contractNo}}</span>
 					<!--<label>
 						<img src="{{vs.constants.base_images_url+d.icon}}" alt="" />
 					</label>-->
-					<p class="title">
+					<!--<p class="title">
 						<span>{{d.contractName}}</span>
 						<span>{{d.contractNo}}</span>
-						<span id="{{d.contractNo}}-contractNo00" class="mg-0"></span>
+						<span id="{{d.contractNo}}-contractNo00" class="mg-0" style="background: red; width: 20%;"></span>
 						<span id="{{d.contractNo}}-price" class="title_number title-number-price">0</span>
+						
 					</p>
 					<p class="title">
 						<span>{{d.described}}</span>
 						<span id="{{d.contractNo}}-zdf" class="time_fd" style="float: right; margin-right: 30px;">0%</span>
+					</p>-->
+					<p class="title float-left" style="width: 41%; margin: 5px 10px 0 5px;">
+						<span>{{d.contractName}}</span>
+						<span>{{d.contractNo}}</span>
+						<span id="{{d.contractNo}}-contractNo00" class="mg-0"></span>
+						<span style="display: block;">{{d.described}}</span>
 					</p>
+					<p class="title float-left" style="width: 15%; margin: 5px 0 0 0;text-align: center;"><span id="{{d.contractNo}}-totalVolume">0</span></p>
+					<p class="title float-right" style="width: 20%; margin: 5px 0 0 0;">
+						<span id="{{d.contractNo}}-price" class="title_number title-number-price">0</span>
+						<span id="{{d.contractNo}}-zdf" class="time_fd" style="float: right; margin-right: 30px;">0%</span>
+					</p>
+					<!--<p style="background: red; float: left;"></p>-->
 					<p class="time" style="display: none;" id="{{d.contractNo}}-line-time">{{d.timeBucket}}</p>
+					
 				</a>
 				<span style="display: none;">{{ dealContractNo(d.contractNo) }}</span>
 				<span style="display: none;">{{ d.contractNo }}</span><!--CL-->

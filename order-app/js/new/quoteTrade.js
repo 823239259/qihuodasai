@@ -961,7 +961,7 @@ function getContractParam00(){
 
 $('#orderListButton').on('tap',function(){
 	
-	alert();
+//	alert();
 	var ClientNo = TradeConfig.username;
 	var PlatForm_User = phone;
 	var ProductID = '';
