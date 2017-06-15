@@ -1037,3 +1037,17 @@ $('#clearanceButton').on('tap',function(){
 		}
 	});
 });
+
+(function(){
+	//全部平仓按钮定位
+	var h = window.innerHeight;
+	var _h = $("#allCloseOrder").height();
+	$("#allCloseOrder").css({
+		top: h - _h - 115 + "px"
+	});
+	//看多买入按钮定位
+	var orderListH = $("#orderList").height();
+	$("#orderList").css({
+		top: h - orderListH - 65 + "px"
+	});
+})();
