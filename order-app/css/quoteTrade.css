@@ -76,7 +76,7 @@
 #positionListOrder  div ul li{height: 30px;line-height:30px;font-size: 13px;float: left;color: #999999;margin-bottom:0px;}
 #positionListOrder  div ul li i{margin-left: 8px;color:#333333;}
 #positionListOrder  div ul li button{width: 100%;padding: 0px;height:30px ;line-height: 30px;border: none;font-size: 15px;}
-#positionListOrder  div ul li #closePosition{background-color: #ffb319;color: #FFFFFF;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;}
+#positionListOrder  div ul li #closePosition{background-color: #ffb319;color: #FFFFFF;}
 #positionListOrder  div ul li #backhand{border: 1px solid #ffb319;color: #ffb319;border-top-left-radius: 0px;border-top-right-radius: 0px;}
 #positionListOrder  div ul li:nth-child(1),#positionListOrder  div ul li:nth-child(4){width: 46%;}
 #positionListOrder  div ul li:nth-child(2),#positionListOrder  div ul li:nth-child(5){width: 25%;}

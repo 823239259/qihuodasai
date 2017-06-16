@@ -144,7 +144,7 @@ function handleMessage(evt){
 		}break;
 		case "OnRtnOrderStateChgGW":{//开仓请求订单变化通知
 			
-			console.log('开仓请求订单变化通知'+JSON.stringify(parameters));
+//			console.log('开仓请求订单变化通知'+JSON.stringify(parameters));
 			if(parameters.Status==1){//开仓成功
 				mui.toast('开仓成功:'+parameters.StatusMsg);
 				appendOrderAfter(parameters);//订单列表追加
@@ -173,11 +173,9 @@ function handleMessage(evt){
 		$('#Navigation .navigation-container').not(":first-child").hide();
 	}else{
 		if(orderNum > 0){
-			console.log(2);
 			$("#holdProfitBox, #clearanceButtonBox").show();
 			$("#accoutSurplusBox, #rechargeMoneyBox").hide();
 		}else{
-			console.log(1);
 			$("#holdProfitBox, #clearanceButtonBox").hide();
 			$("#accoutSurplusBox, #rechargeMoneyBox").show();
 		}
@@ -237,7 +235,6 @@ function appendOrder(orderInfo){
 	
 	//平仓
 	$('.closePositionClass').on('tap',function(){
-		
 		var _this = $(this);
 //		mui.confirm('',function(e){
 //			
@@ -247,6 +244,12 @@ function appendOrder(orderInfo){
 		var PlatForm_User = phone;
 		Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
 		_this.remove();
+		var len = $("#positionListOrder > li").length - 1;
+		if(len <= 0){
+			 $("#noOrder").show();
+			 $("#allClosePosition").hide();
+			 $("#allCloseOrder").hide();
+		}
 	});
 	//反手 先平仓再相反的方向买
 	$('.backhandClass').on('tap',function(){

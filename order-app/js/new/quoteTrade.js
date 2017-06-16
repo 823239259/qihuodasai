@@ -1019,6 +1019,10 @@ $('#allCloseOrder').on('tap',function(){
 				var PlatForm_User = phone;
 				Trade.doCloseOrderGW(ClientNo,PlatForm_User,OrderID);
 				_this.remove();
+				//全部平仓完显示暂无持仓合约
+				$("#noOrder").show();
+				$("#allClosePosition").hide();
+				$("#allCloseOrder").hide();
 			});
 		}
 	});
