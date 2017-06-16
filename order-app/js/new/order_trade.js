@@ -166,6 +166,22 @@ function handleMessage(evt){
 		}break;
 		
 	}
+
+	//交易页面状态区分
+	var orderNum = $("#positionListOrder > li").length;   //持仓数量
+	if (!mui.cacheUser.isLogin()){
+		$('#Navigation .navigation-container').not(":first-child").hide();
+	}else{
+		if(orderNum > 0){
+			console.log(2);
+			$("#holdProfitBox, #clearanceButtonBox").show();
+			$("#accoutSurplusBox, #rechargeMoneyBox").hide();
+		}else{
+			console.log(1);
+			$("#holdProfitBox, #clearanceButtonBox").hide();
+			$("#accoutSurplusBox, #rechargeMoneyBox").show();
+		}
+	}
 }
 
 /**
@@ -212,9 +228,11 @@ function appendOrder(orderInfo){
 	if(len == 0){
 		$("#noOrder").show();
 		$("#allClosePosition").hide();
+		$("#allCloseOrder").hide();
 	}else{
 		$("#noOrder").hide();
 		$("#allClosePosition").show();
+		$("#allCloseOrder").show();
 	}
 	
 	//平仓

@@ -27,26 +27,26 @@ mui("#candlestickNavContainer").on("tap", "a", function() {
 		deceleration: deceleration
 	});
 })(mui);
-mui(document.querySelector('#positionList .mui-scroll')).pullToRefresh({
-	up: {
-		callback: function() {
-			var self = this;
-			var ul = self.element.querySelector('#positionListOrder');
-			//					setTimeout(function(){
-			//						ajaxQueryPageInfo(self);	
-			//					},500)
-		}
-	},
-	down: {
-		callback: function() {
-			var self = this;
-			var ul = self.element.querySelector('#positionListOrder');
-			//					setTimeout(function(){
-			//						ajaxQueryPageInfo(self);	
-			//					},500)
-		}
-	}
-});
+//mui(document.querySelector('#positionList .mui-scroll')).pullToRefresh({
+//	up: {
+//		callback: function() {
+//			var self = this;
+//			var ul = self.element.querySelector('#positionListOrder');
+//			//					setTimeout(function(){
+//			//						ajaxQueryPageInfo(self);	
+//			//					},500)
+//		}
+//	},
+//	down: {
+//		callback: function() {
+//			var self = this;
+//			var ul = self.element.querySelector('#positionListOrder');
+//			//					setTimeout(function(){
+//			//						ajaxQueryPageInfo(self);	
+//			//					},500)
+//		}
+//	}
+//});
 
 function ajaxQueryPageInfo() {
 

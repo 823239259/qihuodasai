@@ -669,6 +669,7 @@ mui.app_request('/user/getbalancerate', {
 			if(result.success == true) {
 					
 				$('#difference').text(result.data.balance+'元');
+				$("#accoutSurplus").text(result.data.balance.toFixed(2)+'元');
 			}
 	}, function(res) {});
 	
@@ -960,7 +961,9 @@ function getContractParam00(){
 }
 
 $('#orderListButton').on('tap',function(){
-	
+	$("#noOrder").hide();
+	$("#allClosePosition").show();
+	$("#allCloseOrder").show();
 //	alert();
 	var ClientNo = TradeConfig.username;
 	var PlatForm_User = phone;
@@ -1042,8 +1045,8 @@ $('#clearanceButton').on('tap',function(){
 	//全部平仓按钮定位
 	var h = window.innerHeight;
 	var _h = $("#allCloseOrder").height();
-	$("#allCloseOrder").css({
-		top: h - _h - 115 + "px"
+	$(".allCloseOrder").css({
+		top: h - _h - 125 + "px"
 	});
 	//看多买入按钮定位
 	var orderListH = $("#orderList").height();
