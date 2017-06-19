@@ -839,10 +839,10 @@
 				<div>
 					<p>
 						<span class="float-left">{{dealDrection(d.Open_Direction)}}{{d.OrderNum+'手'}}</span>
-						<span class="float-left">
+						<!--<span class="float-left">
 							<i>+￥14400</i>
 							<i>（+$2000）</i>
-						</span>
+						</span>-->
 					</p>
 					<div style="position: relative;">
 						<ul class="totalData">
@@ -854,8 +854,8 @@
 									CacheQuoteSubscribe.getCacheContractQuote(d.CommodityNo + d.ContractNo, "LastQuotation", "LastPrice"),d.CommodityNo)}}</i></li>
 						</ul>
 						<!--<div class="settlement-sate" id="{{d.OrderID}}-settlement-sate">{{d.StatusMsg}}</div>-->
-						<div class="statusMsg"><span>止损</span><span>平仓</span></div>
-						<div  id="{{d.OrderID}}-settlement-sate">{{d.StatusMsg}}</div>
+						<div class="closeStatus" id="closeStatus"><span>止损</span><span>平仓</span></div>
+						<div  id="{{d.OrderID}}-settlement-sate" style="display: none !important;">{{d.StatusMsg}}</div>
 					</div>
 					<!--<div class="trigger-close-position">触发止损平仓</div>-->
 				</div>

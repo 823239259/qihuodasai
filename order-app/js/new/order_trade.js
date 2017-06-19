@@ -138,7 +138,6 @@ function handleMessage(evt){
 		}break;
 		
 		case "OnRspQryOrderGW":{//查询订单回复
-			
 			appendOrder(parameters); // 订单列表
 			
 		}break;
@@ -233,6 +232,18 @@ function appendOrder(orderInfo){
 		$("#allCloseOrder").show();
 	}
 	
+	//判断平仓状态
+	var closeProfit = orderInfo.Close_Profit;
+	if(orderInfo.Close_Type == 0){
+		$("#closeStatus span").eq(0).text("手动");
+	}else{
+		if(closeProfit && closeProfit > 0){
+			$("#closeStatus").addClass("green").find("span").eq(0).text("止赢");
+		}else if(closeProfit && closeProfit < 0){
+			$("#closeStatus").addClass("red").find("span").eq(0).text("止损");
+		} 
+	}
+	
 	//平仓
 	$('.closePositionClass').on('tap',function(){
 		var _this = $(this);
@@ -296,7 +307,6 @@ function appendOrder(orderInfo){
  * @param {Object} orderInfo
  */
 function appendOrderAfter(orderInfo){
-	console.log(JSON.stringify(orderInfo));
 	tplFillData("positionListOrder", "tplPositionListOrder", orderInfo, FillType.before);
 //	tplFillData("settlementSheet00", "plSettlementSheet", orderInfo, FillType.before);
 }
