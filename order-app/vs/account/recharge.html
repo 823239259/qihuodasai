@@ -145,11 +145,11 @@
 				return;
 			}
 			if(money < 100) {
-				mui.toast("充值金额不低于100游戏币");
+				mui.toast("充值金额不低于100元");
 				return;
 			}
 			if(money2 < money) {
-				mui.toast("充值金额不高于" + money2 + "游戏币");
+				mui.toast("充值金额不高于" + money2 + "元");
 				return;
 			}
 			mui.open_window_data("choicePayment.html", "choicePayment", { money: money / 100, backId: wv.backId });
