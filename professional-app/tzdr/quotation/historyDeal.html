@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>历史成交</title>
+	    <link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/common.css" rel="stylesheet" />
+		<link href="../../css/own.css" rel="stylesheet" />
+		<link href="../../css/mui.picker.min.css" rel="stylesheet" />
+	    <style>
+	    	body {background: #1f1f1f;}
+	    	.calendar {height: 40px; line-height: 40px; color: #ffffff; font-size: 12px; background: #2b2b2b;}
+	    	.calendar > div {float: left; background: #1f1f1f; border-radius: 5px; width: 115px; padding-left: 10px; height: 30px; margin-top: 5px;}
+	    	.calendar > div input {margin-bottom: 0; text-align: center; width: 80px; background: #1f1f1f; height: 30px;border: 1px solid #1f1f1f; padding: 0; margin: 0; position: relative; top: -4px; font-size: 12px}
+	    	.calendar > div > label img {width: 17px; height: 17px; position: relative; top: -1px;}
+	    	.calendar > span {float: right;}
+	    	#qryHisTrade {color: #1f1f1f; background: #cccccc; border-radius: 5px; display: inline-block; width: 50px; text-align: center; height: 30px; line-height: 30px; margin-top: 5px; margin-right: 5px;}
+	    	#directSeedTitle {background: #2b2b2b;}
+	    	#directSeedTitle a {border: none; color: #cccccc; font-size: 14px;}
+	    	#directSeedTitle a.mui-active {color: #ffd400;}
+	    	#chartContainerContent ul li {float: left; list-style-type: none;}
+	    	#chartContainerContent .ul-lis {background: #383838; height: 40px;margin: 0;padding: 0; color: #999999; font-size: 14px;}
+	    	#historyDetailsTables tr td {color: #ffffff; font-size: 14px; height: 40px; line-height: 40px;}
+	    	#historyDetailsTables thead tr td {color: #999999; background: #383838;}
+	    	#hisTradeList {background: #2b2b2b;}
+	    	#hisTradeList tr {border: 1px solid #1f1f1f;}
+	    	#historyDetailsTables {overflow-y: hidden;}
+	    </style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">历史成交</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-slider-group">
+				<!--7*24小时直播-->
+				<div class="mui-slider-item" id="directSeedNews" style="position: static;">
+					<div class="calendar">
+						<div style="margin-left: 15px;" id='timechioce' data-options='{"type":"date"}'>
+							<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
+							<input type="text" id="finance" readonly="readonly">
+						</div>
+						<p style="float: left;">---</p>
+						<div id='timechioce1' data-options='{"type":"date"}'>
+							<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
+							<input type="text" id="finance1" readonly="readonly">
+						</div>
+						<span id="qryHisTrade">查询</span>
+					</div>
+					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
+						<a class="mui-control-item title_school  mui-active">一天内</a>
+						<a class="mui-control-item title_school">一周内</a> 
+						<a class="mui-control-item title_school">一月内</a> 
+					</div>
+					<div id="chartContainerContent">
+						<div id="chartContainerContent1">
+							<div class="mui-scroll">
+								<div class="table_div" id="table_div">
+									<table id="historyDetailsTables">
+										<thead>
+											<tr>
+												<td width="30px">序号</td>
+												<td width="80px">合约名称</td>
+												<td width="60px">交易盈亏</td>
+												<td width="60px">交易手数</td>
+												<td width="100px">交易手续费</td>
+											</tr>
+										</thead>
+										<tbody id="hisTradeList">
+											<tr class="red">
+												<td width="30px">1</td>
+												<td width="80px">美原油09</td>
+												<td width="60px">多</td>
+												<td width="60px">12</td>
+												<td width="100px">10000</td>
+											</tr>
+											<tr class="green">
+												<td width="30px">2</td>
+												<td width="80px">美原油09</td>
+												<td width="60px">空</td>
+												<td width="60px">12</td>
+												<td width="100px">10000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		/*年月日-日历*/
+		(function($) {
+			$.init();
+			document.getElementById("timechioce").addEventListener('tap', function() {
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				var picker = new $.DtPicker(options);
+				picker.show(function(rs) {
+					document.getElementById("finance").value = rs.text;
+					picker.dispose();
+				});
+			}, false);
+			document.getElementById("timechioce1").addEventListener('tap', function() {
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				var picker = new $.DtPicker(options);
+				picker.show(function(rs) {
+					document.getElementById("finance1").value = rs.text;
+					picker.dispose();
+				});
+			}, false);
+		})(mui);
+	</script>
+	<script type="text/javascript">
+		$("#qryHisTrade").on("tap",function(){
+			var finance = $("#finance").val();
+			var finance1 = $("#finance1").val();
+			if(!finance){
+				mui.toast('请输入开始时间');
+				return;
+			}
+			if(!finance1){
+				mui.toast('请输入结束时间');
+				return;
+			}
+			
+		});
+		
+	</script>
+</html>
