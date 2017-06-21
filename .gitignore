@@ -7,3 +7,7 @@ target
 *.ipa
 *.apk
 马甲
+
+##vue结构不需要提交的目录
+node_modules
+dist
