@@ -249,7 +249,6 @@ function initQuoteInfo(jQuote){
 
 // 初始化交易合约选项
 function initTradeContractOption(jQuote){
-	
 	tplFillData("contract", "tplTradeContractOption", jQuote, FillType.after);
 }
 

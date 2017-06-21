@@ -958,6 +958,7 @@ function getContractParam00(){
 				mui.cacheData.saveFlash(phone+commodityNo+'zfzje',Number(poundage)+Number(lybzj));//支付总金额（不含下单费用）
 				
 				mui.toast('开启成功');
+				mui.back();
 				$("#placeOrder00").attr("href","#");
 				$("#placeOrder-die").attr("href","#");
 					
