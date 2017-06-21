@@ -455,7 +455,8 @@
 								<li class="mui-table-view-cell" id="openStopButton">
 									<a id="openStop">止损单</a>
 								</li>
-								<li class="mui-table-view-cell">
+								<li class="mui-table-view-cell" id="historyDeal">
+									<a id="openStop">历史成交</a>
 								</li>
 							</ul>
 						</div>
@@ -968,6 +969,10 @@
 				document.getElementById("closeStopTable1").addEventListener("tap",function(){
 					mui("#popoverLoss1").popover("toggle");
 				});
+				document.getElementById("historyDeal").addEventListener("tap",function(){
+					mui.openWindow("historyDeal.html");
+				});
+				
 				document.getElementById("insertCondition").addEventListener("tap",function(){
 					initConditionData(); 
 					$("#ConditoionTitlePrices").addClass("mui-active");
