@@ -71,7 +71,6 @@
   				home:"../../home.html",
   				account:"account.html",
   				accountno:"tzdr/account/accountno.html",
-  				scheme:"../scheme.html",
   				listrg:"../future/listrg.html",
   				quotationMain:"../quotation/quotationMain.html",
   				information:"../information/information.html"
@@ -93,6 +92,13 @@
     		
     		document.getElementById("withdraw").addEventListener("tap",function(){
     				mui.openWindow("withdraw.html","withdraw");
+    		});
+    		document.getElementById("scheme").addEventListener("tap",function(){
+    			if(mui.cacheUser.isLogin()){
+    				mui.openWindow("../scheme.html","scheme");
+    			}else {
+    				mui.openWindow("../future/listrg.html","listrg");
+    			}
     		});
     		/*document.getElementById("about").addEventListener("tap",function(){
     				mui.openWindow("about.html","about");
@@ -189,10 +195,6 @@
 			<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
 			<span class="mui-tab-label">资讯直播</span>
 		</a>
-		<a class="" href="javascript:void(0);"  id="scheme">
-			<span class="mui-icon"><img src="../../images/2.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘记录</span>
-		</a>
 		<a class="navon" id="account" href="javascript:void(0);">
 			<span class="mui-icon"><img src="../../images/3.0.png" style="width: 20px;height:20px;"></span>
 			<span class="mui-tab-label" >账户</span>
@@ -213,6 +215,9 @@
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0)" id="funddetail"><img src="../../images/ac_03.png"><i>资金明细</i></a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" id="scheme"><img src="../../images/ac_07.png"><i>操盘记录</i></a>
 			</li>
 		</ul>
 		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">

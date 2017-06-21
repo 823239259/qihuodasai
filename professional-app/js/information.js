@@ -127,8 +127,8 @@ function time() {
 })(mui);
 /*下拉刷新 上拉加载*/
 	
-	var url= tzdr.constants.api_calendar + "crawler/getCrawlerByChannelLiveContent";
-	var urlTwo= tzdr.constants.api_calendar + "crawler/getCrawlerCalendarByTime";
+	var url= tzdr.constants.api_domain + "crawler/getCrawlerByChannelLiveContent";
+	var urlTwo= tzdr.constants.api_domain + "crawler/getCrawlerCalendarByTime";
 	var dataAll;
 	var list = null;
 	var listtwo = null;
