@@ -62,7 +62,11 @@ var TradeUrl = {
 	/**
 	 * 条件单查询url
 	 */
-	QryCondition:"QryCondition"
+	QryCondition:"QryCondition",
+	/**
+	 * 查询历史成交记录
+	 */
+	QryHisTrade:'QryHisTrade'
 	
 }
 var Trade = {
@@ -361,5 +365,17 @@ var Trade = {
 			 */
 			doSendMessage:function(method,parameters){
 				socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+			},
+			
+			/**
+			 * 查询历史成交记录
+			 * @param {Object} ClientNo
+			 * @param {Object} BeginTime
+			 * @param {Object} EndTime
+			 */
+			doQryHisTrade:function(ClientNo,BeginTime,EndTime){
+				Trade.doSendMessage(TradeUrl.QryHisTrade,'{"ClientNo":"'+ClientNo+'","BeginTime":"'+BeginTime+'","EndTime":"'+EndTime+'"}');
+//				var a = '{"ClientNo":"'+ClientNo+'","BeginTime":"'+BeginTime+'","EndTime":"'+EndTime+'"}';
+				
 			}
 		}

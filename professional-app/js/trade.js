@@ -305,6 +305,9 @@ function handleData(evt) {
 			}
 			tip("【" + contractCode + "】条件单【" + conditionNo + "】," + status);
 			updateConditionList(conditionParam);
+		}else if(method == "OnRspQryHisTrade"){
+			dealWithQryHisTrade(data.Parameters);
+			
 		}
 	} else {
 		/*if(method == "OnRspQryHold" && tradeSuccessLoadFlag){
@@ -335,6 +338,27 @@ var loadCachFloatingProfit = {};
 var loadCachCloseProfit = {};
 var loadCachTodayBanlance = 0;
 var loadCachTodayCanuse = 0;
+
+/**
+ * 处理历史成交
+ * @param {Object} parameters
+ */
+function dealWithQryHisTrade(parameters){
+	
+	$('#hisTradeList').prepend('<tr class="red"><td width="30px">'+parameters.TradeNo+'</td><td width="80px">'+parameters.ContractCode+'</td><td width="60px">'+dealwithBuyOrSell(parameters.Drection)+'</td><td width="60px">'+parameters.TradeNum+'</td><td width="100px">'+parameters.TradeFee+'</td></tr>');
+}
+
+function dealwithBuyOrSell(date){
+	
+	if(date=='1'){
+		
+		return '卖'.fontcolor('green');
+	}
+	
+	if(date=='0'){
+		return '买'.fontcolor('red');
+	}
+}
 
 function updateBalance(parama) {
 	var currencyNo = parama.CurrencyNo;
@@ -3749,4 +3773,97 @@ function tabOn() {
 		$(".quotation_detailed .quotation_detailed_title .tab_content").removeClass("on");
 		_this.addClass("on");
 	});
+}
+
+var date00 = new Date();//当前日期   
+var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
+var nowDay = date00.getDate(); //当前日   
+var nowMonth = date00.getMonth(); //当前月   
+var nowYear = date00.getYear(); //当前年   
+nowYear += (nowYear < 2000) ? 1900 : 0;
+/**
+ * 获取当前日期与时间
+ */
+function getCurrentDateAndTime(){
+	
+	return date00.getFullYear()+'-'+(date00.getMonth()+1)+'-'+date00.getDate()+' '+date00.getHours()+':'+date00.getMinutes()+':'+date00.getSeconds();
+}
+
+/**
+ * 获取当前日期
+ */
+function getCurrentDate(){
+	
+	var weekStartDate = new Date(nowYear, nowMonth, nowDay);   
+    return formatDate(weekStartDate);   
+}
+/**
+ * 获取当前日期与当前的日期的零点
+ */
+function getCurrentDateMidnight(){
+	return date00.getFullYear()+'-'+(date00.getMonth()+1)+'-'+date00.getDate()+' '+'00:00:00';
+}
+
+
+function getWeekStartDate() {   
+    var weekStartDate = new Date(nowYear, nowMonth, nowDay - 7);   
+    return formatDate(weekStartDate);   
+} 
+
+function getMonthStartDate(){
+	
+	var weekStartDate = new Date(nowYear, nowMonth, nowDay - getCurrentMonthDays());   
+    return formatDate(weekStartDate);   
+}
+
+/**
+ * 获取昨天的日期
+ */
+function getYesterdayDate(){
+	
+	var yesterdayDate = new Date(nowYear, nowMonth, nowDay - 1);   
+    return formatDate(yesterdayDate);   
+}
+
+/**
+ * 获取当前月的天数
+ */
+function getCurrentMonthDays(){
+	var CurrentDate = new Date(nowYear, nowMonth, nowDay); 
+	
+	return CurrentDate.getDate();
+}
+
+
+
+$('#directSeedTitle').children().on('tap',function(){
+	var _this = $(this);
+	if(_this.text()=='一周内'){
+		$('#hisTradeList').children().remove();
+		Trade.doQryHisTrade(username,getWeekStartDate(),getCurrentDate());
+	}
+	
+	if(_this.text()=='一月内'){
+		$('#hisTradeList').children().remove();
+		Trade.doQryHisTrade(username,getMonthStartDate(),getCurrentDate());
+	}
+	
+	if(_this.text()=='一天内'){
+		$('#hisTradeList').children().remove();
+		Trade.doQryHisTrade(username,getYesterdayDate(),getCurrentDate());
+	}
+	
+});
+
+function formatDate(date) {   
+    var myyear = date.getFullYear();   
+    var mymonth = date.getMonth() + 1;   
+    var myweekday = date.getDate();   
+    if (mymonth < 10) {   
+        mymonth = "0" + mymonth;   
+    }   
+    if (myweekday < 10) {   
+        myweekday = "0" + myweekday;   
+    }   
+    return (myyear + "-" + mymonth + "-" + myweekday);   
 }
