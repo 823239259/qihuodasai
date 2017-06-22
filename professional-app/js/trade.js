@@ -79,6 +79,8 @@ function linearlyLoadData(method) {
  */
 var resultInsertOrderId = {};
 var referCount = 0;
+var InitBalance; //初始资金（初始权益）
+
 
 function handleData(evt) {
 	var dataString = evt.data;
@@ -102,6 +104,8 @@ function handleData(evt) {
 				}else{
 					$('#loss-Open-line').text(parameters.ForceLine);
 				}
+				
+				InitBalance = parameters.InitBalance;
 				mui.toast("交易服务器连接成功！");
 			} else {
 				loginFail = -2;
@@ -3542,15 +3546,16 @@ function updateAccountBalance() {
 		var ForceLine = $('#loss-Open-line').text();
 		ForceLine = Number(ForceLine);
 		var num=parseFloat(loadCachTodayBanlance + Number(floatingProfit)).toFixed(2);
-		if(isNaN(ForceLine/num) ){
+		if(isNaN((InitBalance-num)/(InitBalance-ForceLine)) ){
 			$('#open-risk-degree').text('0.00%');
 		}else{
-			if(isFinite(((ForceLine*100)/num).toFixed(2))){
-				
-				$('#open-risk-degree').text(((ForceLine*100)/num).toFixed(2)+'%');
-			}else{
-				$('#open-risk-degree').text('0.00%');
-			}
+//			if(isFinite(((ForceLine*100)/num).toFixed(2))){
+//				
+//				$('#open-risk-degree').text(((ForceLine*100)/num).toFixed(2)+'%');
+//			}else{
+//				$('#open-risk-degree').text('0.00%');
+//			}
+			$('#open-risk-degree').text(((InitBalance-num)/(InitBalance-ForceLine)).toFixed(2)+'%');
 		}
 		
 		todayCanUse.text(parseFloat(loadCachTodayCanuse + Number(floatingProfit)).toFixed(2));
