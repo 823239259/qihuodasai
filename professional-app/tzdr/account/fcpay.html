@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>fc网银支付</title>
+<link rel="stylesheet" href="../../css/own.css" />
+<script src="../../js/mui.min.js"></script>
+ <script src="../../js/common.js"></script>
+<link rel="stylesheet" href="../../css/mui.min.css" />
+<script type="text/javascript" src="../../js/jquery-1.11.3.js" ></script>
+</head>
+<script>
+			mui.init();
+			mui.plusReady(function(){
+				plus.nativeUI.showWaiting( "正在跳转..." );
+				var ws = plus.webview.currentWebview();
+				var data = ws.data.data; 
+				$("input[name = postDatas]").val(data) ;
+				$("#form").submit(); 	
+			});
+</script>
+<body>
+	<form action="http://des.payhere.cc/pay" method="POST" id ="form" style="display: none;"> 
+	     <input type="hidden" name="postDatas" value="">
+		 <input type="submit" >
+	</form>
+</body>
+</html>
