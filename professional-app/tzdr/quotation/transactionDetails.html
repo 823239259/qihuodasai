@@ -875,7 +875,11 @@
 		    	#historyDetailsTables thead tr td {color: #999999; background: #383838;}
 		    	#hisTradeList {background: #2b2b2b;}
 		    	#hisTradeList tr {border: 1px solid #1f1f1f;}
-		    	#historyDetailsTables {overflow-y: hidden;}
+		    	#historyDetailsTables {overflow-y: hidden; width: 100%;}
+		    	.quotationBack i {font-style: normal; font-size: 14px; vertical-align: 2px;}
+		    	.mui-dtpicker{height: 274px;}
+		    	#historyDetailsTables thead tr td:first-child {text-align: center;}
+	    		#historyDetailsTables tr td:first-child {text-align: center;}
 			</style>
 			<!--历史成交-->
 			<div id="bg4" style="display: none;">
@@ -886,12 +890,12 @@
 				<div class="mui-coontent" style="position: absolute;z-index: 997;top: 46px;width: 100%;">
 					<div class="mui-slider-item" id="directSeedNews" style="position: static;">
 						<div class="calendar">
-							<div style="margin-left: 15px;" id='timechioce' data-options='{"type":"date"}'>
+							<div style="margin-left: 15px;" class="btn1" id='timechioce' data-options='{"type":"date"}'>
 								<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
 								<input type="text" id="finance" readonly="readonly">
 							</div>
-							<p style="float: left;">--</p>
-							<div id='timechioce1' data-options='{"type":"date"}'>
+							<p style="float: left;">→</p>
+							<div id='timechioce1' class="btn2" data-options='{"type":"date"}'>
 								<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
 								<input type="text" id="finance1" readonly="readonly">
 							</div>
@@ -1329,30 +1333,37 @@
 			});
 	</script>
 	<script type="text/javascript">
-		mui.init();
 		/*年月日-日历*/
 		(function($) {
 			$.init();
-			document.getElementById("timechioce").addEventListener('tap', function() {
-				var optionsJson = this.getAttribute('data-options') || '{}';
-				var options = JSON.parse(optionsJson);
-				var id = this.getAttribute('id');
-				var picker = new $.DtPicker(options);
-				picker.show(function(rs) {
-					document.getElementById("finance").value = rs.text;
-					picker.dispose();
-				});
-			}, false);
-			document.getElementById("timechioce1").addEventListener('tap', function() {
-				var optionsJson = this.getAttribute('data-options') || '{}';
-				var options = JSON.parse(optionsJson);
-				var id = this.getAttribute('id');
-				var picker = new $.DtPicker(options);
-				picker.show(function(rs) {
-					document.getElementById("finance1").value = rs.text;
-					picker.dispose();
-				});
-			}, false);
+			var result = $('#finance')[0];
+			var btns = $('.btn1');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;;
+						picker.dispose();
+					});
+				}, false);
+			});
+			var result1 = $('#finance1')[0];
+			var btns1 = $('.btn2');
+			btns1.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result1.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;;
+						picker.dispose();
+					});
+				}, false);
+			});
 		})(mui);
 	</script>
 	<script type="text/javascript">
