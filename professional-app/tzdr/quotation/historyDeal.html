@@ -22,10 +22,13 @@
 	    	#chartContainerContent ul li {float: left; list-style-type: none;}
 	    	#chartContainerContent .ul-lis {background: #383838; height: 40px;margin: 0;padding: 0; color: #999999; font-size: 14px;}
 	    	#historyDetailsTables tr td {color: #ffffff; font-size: 14px; height: 40px; line-height: 40px;}
+	    	#historyDetailsTables tr td:first-child {text-align: center;}
 	    	#historyDetailsTables thead tr td {color: #999999; background: #383838;}
+	    	#historyDetailsTables thead tr td:first-child {text-align: center;}
 	    	#hisTradeList {background: #2b2b2b;}
 	    	#hisTradeList tr {border: 1px solid #1f1f1f;}
-	    	#historyDetailsTables {overflow-y: hidden;}
+	    	#table_div {width: 500px; overflow-x: scroll;}
+	    	#chartContainerContent {padding-top: 90px;}
 	    </style>
 	</head>
 	<body>
@@ -37,22 +40,24 @@
 			<div class="mui-slider-group">
 				<!--7*24小时直播-->
 				<div class="mui-slider-item" id="directSeedNews" style="position: static;">
-					<div class="calendar">
-						<div style="margin-left: 15px;" id='timechioce' data-options='{"type":"date"}'>
-							<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
-							<input type="text" id="finance" readonly="readonly">
+					<div style="position: fixed; z-index: 9;">
+						<div class="calendar">
+							<div style="margin-left: 15px;" class="btn1" id='timechioce' data-options='{"type":"date"}'>
+								<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
+								<input type="text" id="finance" readonly="readonly">
+							</div>
+							<p style="float: left;">---</p>
+							<div id='timechioce1'  class="btn2"  data-options='{"type":"date"}'>
+								<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
+								<input type="text" id="finance1" readonly="readonly">
+							</div>
+							<span id="qryHisTrade">查询</span>
 						</div>
-						<p style="float: left;">---</p>
-						<div id='timechioce1' data-options='{"type":"date"}'>
-							<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
-							<input type="text" id="finance1" readonly="readonly">
+						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
+							<a class="mui-control-item title_school  mui-active">一天内</a>
+							<a class="mui-control-item title_school">一周内</a> 
+							<a class="mui-control-item title_school">一月内</a> 
 						</div>
-						<span id="qryHisTrade">查询</span>
-					</div>
-					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
-						<a class="mui-control-item title_school  mui-active">一天内</a>
-						<a class="mui-control-item title_school">一周内</a> 
-						<a class="mui-control-item title_school">一月内</a> 
 					</div>
 					<div id="chartContainerContent">
 						<div id="chartContainerContent1">
@@ -61,10 +66,10 @@
 									<table id="historyDetailsTables">
 										<thead>
 											<tr>
-												<td width="30px">序号</td>
-												<td width="80px">合约名称</td>
-												<td width="60px">交易盈亏</td>
-												<td width="60px">交易手数</td>
+												<td width="140px">序号</td>
+												<td width="100px">合约代码</td>
+												<td width="80px">交易盈亏</td>
+												<td width="80px">交易手数</td>
 												<td width="100px">交易手续费</td>
 											</tr>
 										</thead>
@@ -101,29 +106,38 @@
 	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 	<script type="text/javascript">
 		mui.init();
+		
 		/*年月日-日历*/
 		(function($) {
 			$.init();
-			document.getElementById("timechioce").addEventListener('tap', function() {
-				var optionsJson = this.getAttribute('data-options') || '{}';
-				var options = JSON.parse(optionsJson);
-				var id = this.getAttribute('id');
-				var picker = new $.DtPicker(options);
-				picker.show(function(rs) {
-					document.getElementById("finance").value = rs.text;
-					picker.dispose();
-				});
-			}, false);
-			document.getElementById("timechioce1").addEventListener('tap', function() {
-				var optionsJson = this.getAttribute('data-options') || '{}';
-				var options = JSON.parse(optionsJson);
-				var id = this.getAttribute('id');
-				var picker = new $.DtPicker(options);
-				picker.show(function(rs) {
-					document.getElementById("finance1").value = rs.text;
-					picker.dispose();
-				});
-			}, false);
+			var result = $('#finance')[0];
+			var btns = $('.btn1');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;;
+						picker.dispose();
+					});
+				}, false);
+			});
+			var result1 = $('#finance1')[0];
+			var btns1 = $('.btn2');
+			btns1.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result1.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;;
+						picker.dispose();
+					});
+				}, false);
+			});
 		})(mui);
 	</script>
 	<script type="text/javascript">
