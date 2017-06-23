@@ -1188,7 +1188,7 @@ function appendStopLossData(param) {
 	var stopLossPrice = param.StopLossPrice;
 	stopLossPrice = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossDiff = param.StopLossDiff;
-	stopLossDiff = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
+	stopLossDiff = parseFloat(stopLossDiff).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossPriceText = "触发价:";
 	if(stopLossType == 2) {
 		stopLossPriceText = "追踪价差:";
