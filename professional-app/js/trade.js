@@ -2376,7 +2376,7 @@ function bindOpertion() {
 			if(stopChoicePrices1 <= 0 || stopChoicePrices1.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if((stopChoicePrices1*10000)%(contractObject.MiniTikeSize*10000)!=0){
+			}else if(((stopChoicePrices1*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
 				tip('不符合最小变动价,请重新输入,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2435,7 +2435,7 @@ function bindOpertion() {
 			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)!=0){
+			}else if(((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
 				tip('止损价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2494,7 +2494,7 @@ function bindOpertion() {
 			if(lossChoicePrices2 <= 0 || lossChoicePrices2.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if((lossChoicePrices2*10000)%(contractObject.MiniTikeSize*10000)!=0){
+			}else if(((lossChoicePrices2*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
 				tip('止盈价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2547,7 +2547,7 @@ function bindOpertion() {
 			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)!=0){
+			}else if(((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
 				tip('止盈价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2726,7 +2726,8 @@ function bindOpertion() {
 			var chioceContract = $("#chioceContract").val();
 			var MiniTikeSize = CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,chioceContract.length-4), "MiniTikeSize");
 			var conditoionPricesInput00 = Number(conditoionPricesInput);
-			if(((conditoionPricesInput00*10000)%(MiniTikeSize*10000))!=0){
+			
+			if((((conditoionPricesInput00*10000)%(MiniTikeSize*10000)).toFixed(4))!=0){
 				tip('输入价格不符合最小变动价,最小变动价为:'+MiniTikeSize);
 				return;
 			}
