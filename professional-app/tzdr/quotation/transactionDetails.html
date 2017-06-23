@@ -1387,11 +1387,11 @@
 			finance = finance.replace(/-/g,'/');  
 			var time = new Date(finance).getTime(); 
 			time =parseInt(time/1000+21*24*3600); 
-			finance1 = finance.replace(/-/g,'/');  
+			finance1 = finance1.replace(/-/g,'/');  
 			var time1 = new Date(finance1).getTime(); 
 			time1 =parseInt(time1/1000+21*24*3600); 
 			if(time1 <= time) {
-				mui.toast('请输入大于开始时间的结束时间');
+				mui.toast('请输入结束时间大于开始时间');
 				return;
 			}
 			$('#hisTradeList').children().remove();
