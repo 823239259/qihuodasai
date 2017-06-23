@@ -3563,7 +3563,7 @@ function updateAccountBalance() {
 //				$('#open-risk-degree').text('0.00%');
 //			}
 			if(((InitBalance-num)/(InitBalance-ForceLine))>0){
-				$('#open-risk-degree').text(((InitBalance-num)/(InitBalance-ForceLine)).toFixed(2)+'%');
+				$('#open-risk-degree').text(((InitBalance-num)*100/(InitBalance-ForceLine)).toFixed(2)+'%');
 			}else{
 				$('#open-risk-degree').text('0.00%');
 			}
