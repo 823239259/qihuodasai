@@ -174,10 +174,17 @@ mui.plusReady(function() {
 				var size = commoditys.length;
 				var tradeTitleHtml = document.getElementById("tradeTitle");
 				for(var i = 0; i < size; i++) {
+					
 					var comm = commoditys[i];
 					var newCommdityNo = comm.CommodityNo;
 					var newContractNo = comm.MainContract;
 					var newExchangeNo = comm.ExchangeNo;
+					
+					/**
+			        * 缓存行情信息
+			        */
+			        CacheQuoteBase.setCacheContractAttribute(comm);
+					
 					//如果是当前合约与品种更新乘数
 					if(valiationIsPresent(newCommdityNo, newContractNo)) {
 						$("#contractSize").val(comm.ContractSize);

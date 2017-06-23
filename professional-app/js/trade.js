@@ -2724,6 +2724,13 @@ function bindOpertion() {
 				return;
 			}
 			var chioceContract = $("#chioceContract").val();
+			var MiniTikeSize = CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,chioceContract.length-4), "MiniTikeSize");
+			var conditoionPricesInput00 = Number(conditoionPricesInput);
+			if(((conditoionPricesInput00*10000)%(MiniTikeSize*10000))!=0){
+				tip('输入价格不符合最小变动价,最小变动价为:'+MiniTikeSize);
+				return;
+			}
+			
 			if(insertConditionCount == 0) {
 				alertProtype("你确定要提交【" + chioceContract + "】条件单?", "提示", Btn.confirmedAndCancle(), doInsertConditionByPrice);
 			} else if(insertConditionCount == 1) {
@@ -3555,7 +3562,11 @@ function updateAccountBalance() {
 //			}else{
 //				$('#open-risk-degree').text('0.00%');
 //			}
-			$('#open-risk-degree').text(((InitBalance-num)/(InitBalance-ForceLine)).toFixed(2)+'%');
+			if(((InitBalance-num)/(InitBalance-ForceLine))>0){
+				$('#open-risk-degree').text(((InitBalance-num)*100/(InitBalance-ForceLine)).toFixed(2)+'%');
+			}else{
+				$('#open-risk-degree').text('0.00%');
+			}
 		}
 		
 		todayCanUse.text(parseFloat(loadCachTodayCanuse + Number(floatingProfit)).toFixed(2));
