@@ -1164,6 +1164,7 @@
 						mui("#topPopover").popover("toggle");
 						$(".mui-content").eq(2).css("z-index","998");
 						$('#hisTradeList').children().remove();
+						history_index=1;
 						Trade.doQryHisTrade(username,getYesterdayDate(),getCurrentDate());
 					}else{
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
@@ -1407,6 +1408,7 @@
 				return;
 			}*/
 			$('#hisTradeList').children().remove();
+			history_index=1;
 			Trade.doQryHisTrade(username,finance,finance1);
 		});
 	</script>	
