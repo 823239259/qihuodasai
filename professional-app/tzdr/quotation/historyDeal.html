@@ -42,7 +42,7 @@
 							<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
 							<input type="text" id="finance" readonly="readonly">
 						</div>
-						<p style="float: left;">---</p>
+						<p style="float: left;">--</p>
 						<div id='timechioce1' data-options='{"type":"date"}'>
 							<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
 							<input type="text" id="finance1" readonly="readonly">
@@ -96,9 +96,22 @@
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/common.config.js"></script>
 	<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
 	<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
 	<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript" src="../../js/util.js" ></script>
+	<script type="text/javascript" src="../../js/trade.util.js" ></script>
+	<script type="text/javascript" src="../../js/trade.data.mode.js" ></script>
+	<script type="text/javascript" src="../../js/trade.config.js" ></script>
+	<script type="text/javascript" src="../../js/trade.connection.js" ></script>
+	<script type="text/javascript" src="../../js/trade.send.js" ></script>
+	<script src="../../js/chart.config.js"></script>
+	<script src="../../js/timechart.config.js"></script>
+	<script src="../../js/candlestick.config.js"></script>
+	<script src="../../js/lightChart.config.js"></script>
+	<script src="../../js/chart.js"></script>
+	<script type="text/javascript" src="../../js/trade.js"></script>
 	<script type="text/javascript">
 		mui.init();
 		/*年月日-日历*/
@@ -127,6 +140,51 @@
 		})(mui);
 	</script>
 	<script type="text/javascript">
+//		loadConfig();
+//		initSocketTrade();
+//		setTradeConfig(tradeWebSocketIsMock);
+		getVersion();
+//		var loginSocket = new WebSocket(socketUrl);
+//		console.log(loginSocket);
+		
+		/*
+		tradeConnection();
+		function initTrade(){
+			socket.onopen = function() {
+				Trade.doLogin(username, password, tradeWebSocketIsMock, tradeWebSocketVersion, Source);
+				changeConnectionStatus();
+			}
+			socket.onmessage = function(evt) {
+				handleData(evt);
+			}
+			
+			socket.onclose = function(){
+				
+			}
+		}
+		
+		function handleData(evt){
+			var dataString = evt.data;
+			var data = JSON.parse(dataString);
+			var method = data.Method;
+			var parameters = data.Parameters;
+			
+			if(parameters != null){
+				if(method == "OnRspLogin"){
+					console.log('登录成功!');
+				}else if(method == "OnRspQryHisTrade"){
+					console.log('历史成交记录回复');
+				}
+			}
+		}
+		*/
+		
+		
+		
+		
+		
+		
+		
 		$("#qryHisTrade").on("tap",function(){
 			var finance = $("#finance").val();
 			var finance1 = $("#finance1").val();
@@ -139,6 +197,7 @@
 				return;
 			}
 			
+			Trade.doQryHisTrade(username,finance,finance1);			
 		});
 		
 	</script>
