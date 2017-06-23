@@ -860,13 +860,13 @@
 				</div>
 			</div>
 			<style>
-				.calendar {height: 40px; line-height: 40px; color: #ffffff; font-size: 12px; background: #2b2b2b;}
+				.calendar {height: 45px; line-height: 40px; color: #ffffff; font-size: 12px; background: #2b2b2b; border-bottom: 5px solid #1f1f1f;}
 		    	.calendar > div {float: left; background: #1f1f1f; border-radius: 5px; width: 115px; padding-left: 10px; height: 30px; margin-top: 5px;}
-		    	.calendar > div input {margin-bottom: 0; text-align: center; width: 80px; background: #1f1f1f; height: 30px;border: 1px solid #1f1f1f; padding: 0; margin: 0; position: relative; top: -4px; font-size: 12px}
+		    	.calendar > div input {margin-bottom: 0; text-align: center; width: 80px; background: #1f1f1f; height: 29px;border: 1px solid #1f1f1f; padding: 0; margin: 0; position: relative; top: -5px; font-size: 12px}
 		    	.calendar > div > label img {width: 17px; height: 17px; position: relative; top: -1px;}
 		    	.calendar > span {float: right;}
 		    	#qryHisTrade {color: #1f1f1f; background: #cccccc; border-radius: 5px; display: inline-block; width: 50px; text-align: center; height: 30px; line-height: 30px; margin-top: 5px; margin-right: 5px;}
-		    	#directSeedTitle {background: #2b2b2b;}
+		    	#directSeedTitle {background: #2b2b2b; border: 1px solid #1f1f1f;}
 		    	#directSeedTitle a {border: none; color: #cccccc; font-size: 14px;}
 		    	#directSeedTitle a.mui-active {color: #ffd400;}
 		    	#chartContainerContent ul li {float: left; list-style-type: none;}
@@ -880,7 +880,7 @@
 		    	#historyDetailsTables thead tr td:first-child {text-align: center;}
 	    		#historyDetailsTables tr td:first-child {text-align: center;}
 	    		#historyDetailsTables {width: 600px; overflow-x: scroll;}
-	    		#chartContainerContent {padding-top: 90px;}
+	    		#chartContainerContent {padding-top: 85px;}
 			</style>
 			<!--历史成交-->
 			<div id="bg4" style="display: none;">
@@ -894,12 +894,12 @@
 						<div class="calendar">
 							<div style="margin-left: 15px;" class="btn1" id='timechioce' data-options='{"type":"date"}'>
 								<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
-								<input type="text" id="finance" readonly="readonly">
+								<input type="text" id="finance" readonly="readonly" placeholder="开始时间">
 							</div>
 							<p style="float: left;">→</p>
 							<div id='timechioce1' class="btn2" data-options='{"type":"date"}'>
 								<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
-								<input type="text" id="finance1" readonly="readonly">
+								<input type="text" id="finance1" readonly="readonly" placeholder="结束时间">
 							</div>
 							<span id="qryHisTrade">查询</span>
 						</div>
@@ -1100,6 +1100,8 @@
 					$("#bg3").css("display","none");
 					$("#bg1").css("display","block");
 					$("#bg4").css("display","none");
+					$("#finance").val("");
+					$("#finance1").val("");
 					$("#topPopover").css("display","none");
 					$(".mui-content").eq(0).css("z-index","998");
 				});
@@ -1371,6 +1373,7 @@
 		})(mui);
 	</script>
 	<script type="text/javascript">
+		
 		$("#qryHisTrade").on("tap",function(){
 			var finance = $("#finance").val();
 			var finance1 = $("#finance1").val();
@@ -1382,6 +1385,17 @@
 				mui.toast('请输入结束时间');
 				return;
 			}
+			finance = finance.replace(/-/g,'/');  
+			var time = new Date(finance).getTime(); 
+			time =parseInt(time/1000+21*24*3600); 
+			finance1 = finance1.replace(/-/g,'/');  
+			var time1 = new Date(finance1).getTime(); 
+			time1 =parseInt(time1/1000+21*24*3600); 
+			if (time1 <= time){
+				mui.toast('输入结束时间应大于开始时间');
+				return;
+			}
+			
 			$('#hisTradeList').children().remove();
 			Trade.doQryHisTrade(username,finance,finance1);
 		});
