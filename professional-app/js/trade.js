@@ -3897,5 +3897,5 @@ function formatDate(date) {
     if (myweekday < 10) {   
         myweekday = "0" + myweekday;   
     }   
-    return (myyear + "-" + mymonth + "-" + myweekday);   
+    return (myyear + "-" + mymonth + "-" + myweekday+' '+'00:00:00');   
 }
