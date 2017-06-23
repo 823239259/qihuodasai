@@ -2436,6 +2436,7 @@ function bindOpertion() {
 				tip("请输入正确的回撤价");
 				return;
 			}else if((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)!=0){
+				alert((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000));
 				tip('止损价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
