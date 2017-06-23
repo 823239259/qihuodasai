@@ -861,11 +861,11 @@
 			</div>
 			<style>
 				.calendar {height: 45px; line-height: 40px; color: #ffffff; font-size: 12px; background: #2b2b2b; border-bottom: 5px solid #1f1f1f;}
-		    	.calendar > div {float: left; background: #1f1f1f; border-radius: 5px; width: 115px; padding-left: 10px; height: 30px; margin-top: 5px;}
-		    	.calendar > div input {margin-bottom: 0; text-align: center; width: 80px; background: #1f1f1f; height: 29px;border: 1px solid #1f1f1f; padding: 0; margin: 0; position: relative; top: -5px; font-size: 12px}
+		    	.calendar > div {float: left; background: #1f1f1f; border-radius: 5px; width: 148px; padding-left: 5px; height: 30px; margin-top: 5px;}
+		    	.calendar > div input {margin-bottom: 0; text-align: center; width: 122px; background: #1f1f1f; height: 29px;border: 1px solid #1f1f1f; padding: 0; margin: 0; position: relative; top: -5px; font-size: 12px}
 		    	.calendar > div > label img {width: 17px; height: 17px; position: relative; top: -1px;}
 		    	.calendar > span {float: right;}
-		    	#qryHisTrade {color: #1f1f1f; background: #cccccc; border-radius: 5px; display: inline-block; width: 50px; text-align: center; height: 30px; line-height: 30px; margin-top: 5px; margin-right: 5px;}
+		    	#qryHisTrade {color: #ffffff;  text-align: center;margin-top: 10px; }
 		    	#directSeedTitle {background: #2b2b2b; border-bottom: 1px solid #1f1f1f;}
 		    	#directSeedTitle a {border: none; color: #cccccc; font-size: 14px;}
 		    	#directSeedTitle a.mui-active {color: #ffd400;}
@@ -887,21 +887,21 @@
 				<header class="mui-bar mui-bar-nav" style="position: fixed;z-index: 998;">
 		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "historyback"><i>返回</i></a>
 				    <h1 class="mui-title" style="color: #CCCCCC;">历史成交</h1>
+				    <span id="qryHisTrade" class="mui-pull-right">查询</span>
 				</header>
 				<div class="mui-coontent" style="position: absolute;z-index: 997;top: 46px;width: 100%;">
 					<div class="mui-slider-item" id="directSeedNews" style="position: static;">
 						<div style="position: fixed; z-index: 9;">
 						<div class="calendar">
-							<div style="margin-left: 15px;" class="btn1" id='timechioce' data-options='{"type":"date"}'>
+							<div style="margin-left: 5px;" class="btn1" id='timechioce' data-options='{}'>
 								<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
 								<input type="text" id="finance" readonly="readonly" placeholder="开始时间">
 							</div>
 							<p style="float: left;">→</p>
-							<div id='timechioce1' class="btn2" data-options='{"type":"date"}'>
+							<div id='timechioce1' class="btn2" data-options='{}'>
 								<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
 								<input type="text" id="finance1" readonly="readonly" placeholder="结束时间">
 							</div>
-							<span id="qryHisTrade">查询</span>
 						</div>
 						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
 							<a class="mui-control-item title_school  mui-active">一天内</a>
@@ -928,6 +928,7 @@
 												</tr>
 											</thead>
 											<tbody id="hisTradeList">
+												
 												<tr class="red">
 													<td width="50px">序号</td>
 													<td width="100px">合约代码</td>
@@ -1362,7 +1363,7 @@
 					var id = this.getAttribute('id');
 					var picker = new $.DtPicker(options);
 					picker.show(function(rs) {
-						result.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;;
+						result.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text + ' '+ rs.h.text + ':'+ rs.i.text + ':'+ "00";
 						picker.dispose();
 					});
 				}, false);
@@ -1376,7 +1377,7 @@
 					var id = this.getAttribute('id');
 					var picker = new $.DtPicker(options);
 					picker.show(function(rs) {
-						result1.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;;
+						result1.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text + ' '+ rs.h.text + ':'+ rs.i.text + ':'+ "00";
 						picker.dispose();
 					});
 				}, false);
@@ -1395,6 +1396,7 @@
 				mui.toast('请输入结束时间');
 				return;
 			}
+			/*console.log(finance);
 			finance = finance.replace(/-/g,'/');  
 			var time = new Date(finance).getTime(); 
 			time =parseInt(time/1000+21*24*3600); 
@@ -1404,7 +1406,7 @@
 			if(time1 <= time) {
 				mui.toast('请输入结束时间大于开始时间');
 				return;
-			}
+			}*/
 			$('#hisTradeList').children().remove();
 			history_index=1;
 			Trade.doQryHisTrade(username,finance,finance1);
