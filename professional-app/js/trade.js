@@ -2913,6 +2913,13 @@ $("#stopLoss").bind("click", function() {
 			tip("请选择一条信息");
 			return;
 		}
+		
+		var contractCode = selectPostion["contractCode"];
+		var postionIndex = selectPostion["postionIndex"];
+		if(contractCode == undefined || $(".postion-index" + postionIndex + "").html() == undefined) {
+			tip("请选择一项数据");
+			return;
+		}
 		var $contractCode = $("li[data-tion-position='" + contractCode + "'] span[class = 'position0']");
 		var $drection = $("li[data-tion-position='" + contractCode + "'] span[class = 'position1']");
 		var $holdNum = $("li[data-tion-position='" + contractCode + "'] span[class = 'position2']");
