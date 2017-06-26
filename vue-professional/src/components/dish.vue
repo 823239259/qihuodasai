@@ -1,0 +1,461 @@
+<template>
+	<div id="dish">
+		<div class="title">
+			<span>盘口</span>
+			<span>五档</span>
+		</div>
+		<div class="list">
+			<div class="list_col fl">
+				<ul>
+					<li>
+						<span>卖量</span>
+						<span>21213</span>
+					</li>
+					<li>
+						<span>买量</span>
+						<span>21213</span>
+					</li>
+					<li>
+						<span>涨跌</span>
+						<span class="red">0.94/1.12%</span>
+					</li>
+					<li>
+						<span>成交量</span>
+						<span>21213</span>
+					</li>
+					<li>
+						<span>持仓量</span>
+						<span>21213</span>
+					</li>
+					<li>
+						<span>昨结</span>
+						<span class="red">68.12</span>
+					</li>
+					<li>
+						<span>卖价</span>
+						<span class="red">68.12</span>
+					</li>
+					<li>
+						<span>买价</span>
+						<span class="red">68.12</span>
+					</li>
+					<li>
+						<span>最新</span>
+						<span class="red">68.12</span>
+					</li>
+					<li>
+						<span>开盘</span>
+						<span class="green">68.12</span>
+					</li>
+					<li>
+						<span>最高</span>
+						<span class="red">68.12</span>
+					</li>
+					<li>
+						<span>最低</span>
+						<span class="red">68.12</span>
+					</li>
+					<li>
+						<span>结算</span>
+						<span class="red">68.12</span>
+					</li>
+				</ul>
+			</div>
+			<div class="list_col fl">
+				<ul>
+					<template>
+						<li>
+							<span class="green">卖五</span>
+							<span class="green">21213.12</span>
+							<span class="green">20</span>
+						</li>
+						<li>
+							<span class="green">卖四</span>
+							<span class="green">21213.12</span>
+							<span class="green">20</span>
+						</li>
+						<li>
+							<span class="green">卖三</span>
+							<span class="green">21213.12</span>
+							<span class="green">20</span>
+						</li>
+						<li>
+							<span class="green">卖二</span>
+							<span class="green">21213.12</span>
+							<span class="green">20</span>
+						</li>
+						<li>
+							<span class="green">卖一</span>
+							<span class="green">21213.12</span>
+							<span class="green">20</span>
+						</li>
+						<li>
+							<span class="red">买一</span>
+							<span class="red">21213.12</span>
+							<span class="red">20</span>
+						</li>
+						<li>
+							<span class="red">买二</span>
+							<span class="red">21213.12</span>
+							<span class="red">20</span>
+						</li>
+						<li>
+							<span class="red">买三</span>
+							<span class="red">21213.12</span>
+							<span class="red">20</span>
+						</li>
+						<li>
+							<span class="red">买四</span>
+							<span class="red">21213.12</span>
+							<span class="red">20</span>
+						</li>
+						<li>
+							<span class="red">买五</span>
+							<span class="red">21213.12</span>
+							<span class="red">20</span>
+						</li>
+						<li>
+							<span></span>
+							<span></span>
+							<span></span>
+						</li>
+						<li>
+							<span></span>
+							<span></span>
+							<span></span>
+						</li>
+						<li>
+							<span></span>
+							<span></span>
+							<span></span>
+						</li>
+					</template>
+				</ul>
+			</div>
+		</div>
+		<div class="oprtate_num">
+			<operatenum></operatenum>
+		</div>
+		<div class="btn_box">
+			<tradebtn marketprice="132133" transaction='sell'></tradebtn>
+			<tradebtn marketprice="13221321" transaction='buy'></tradebtn>
+		</div>
+		
+	</div>
+</template>
+
+<script>
+	import tradebtn from '../components/tradeButton.vue'
+	import operatenum from '../components/oprtateNum.vue'
+	export default{
+		name: 'dish',
+		components: {tradebtn, operatenum},
+		mounted: function(){
+			$("#tradeCenter").css("height",window.screen.height + "px");
+		}
+		
+	}
+	
+</script>
+
+<style scoped lang="less">
+	@import url("../assets/css/main.less");
+	@import url("../assets/css/base.less");
+	/*ip6p及以上*/
+	@media (min-width:411px) {
+		#dish{
+			width: 100%;
+			background: @black;
+		}
+	    .title{
+	    	height: 44px;
+	    	line-height: 44px;
+	    	background: #36394d;
+	    	span{
+	    		display: inline-block;
+	    		float: left;
+	    		width: 50%;
+	    		text-align: center;
+	    		font-size: @fs14;
+	    		color: @blue;
+	    	}
+	    }
+	    .list{
+	    	overflow: hidden;
+	    	background: @deepblue;
+	    	.list_col{
+	    		width: 50%;
+	    		&:first-child{
+	    			border-right: 1px solid @black;
+	    		}
+	    		li{
+	    			height: 32px;
+	    			line-height: 32px;
+	    			overflow: hidden;
+	    			border-top: 1px solid @black;
+	    			padding-left: 22px; 
+	    			span{
+	    				color: @white;
+	    				font-size: @fs14;
+	    				margin-right: 15px;
+	    				&.red{
+	    					color: @red;
+	    				}
+	    				&.green{
+	    					color: @green;
+	    				}
+	    			} 
+	    		}
+	    	}
+	    }
+	    .operate_num_box{
+	    	width: 100%;
+	    	height: 55px;
+	    	margin-top: 15px;
+	    	padding: 5px 15px;
+	    	background: @deepblue;
+	    	.operate_num{
+	    		height: 45px;
+	    		border-radius: 5px;
+	    		border: 1px solid #12121a;
+	    		background: @black;
+	    	}
+	    }
+	    .oprtate_num{
+	    	width: 100%;
+	    	height: 55px;
+	    	background: @deepblue;
+	    	padding: 5px 15px;
+	    	margin-top: 10px;
+	    }
+	    .btn_box{
+	    	width: 100%;
+	    	height: 65px;
+	    	padding: 5px 15px;
+	    	background: @deepblue;
+	    	margin-top: 10px;
+	    	div:first-child{
+	    		float: left;
+	    	}
+	    	div:last-child{
+	    		float: right;
+	    	}
+	    }
+	    #dish{
+			width: 100%;
+			background: @black;
+		}
+	    .title{
+	    	height: 44px;
+	    	line-height: 44px;
+	    	background: #36394d;
+	    	span{
+	    		display: inline-block;
+	    		float: left;
+	    		width: 50%;
+	    		text-align: center;
+	    		font-size: @fs14;
+	    		color: @blue;
+	    	}
+	    }
+	    .list{
+	    	overflow: hidden;
+	    	background: @deepblue;
+	    	.list_col{
+	    		width: 50%;
+	    		&:first-child{
+	    			border-right: 1px solid @black;
+	    		}
+	    		li{
+	    			height: 32px;
+	    			line-height: 32px;
+	    			overflow: hidden;
+	    			border-top: 1px solid @black;
+	    			padding-left: 22px; 
+	    			span{
+	    				color: @white;
+	    				font-size: @fs14;
+	    				margin-right: 15px;
+	    				&.red{
+	    					color: @red;
+	    				}
+	    				&.green{
+	    					color: @green;
+	    				}
+	    			} 
+	    		}
+	    	}
+	    }
+	    .operate_num_box{
+	    	width: 100%;
+	    	height: 55px;
+	    	margin-top: 15px;
+	    	padding: 5px 15px;
+	    	background: @deepblue;
+	    	.operate_num{
+	    		height: 45px;
+	    		border-radius: 5px;
+	    		border: 1px solid #12121a;
+	    		background: @black;
+	    	}
+	    }
+	    .oprtate_num{
+	    	width: 100%;
+	    	height: 55px;
+	    	background: @deepblue;
+	    	padding: 5px 15px;
+	    	margin-top: 10px;
+	    }
+	    .btn_box{
+	    	width: 100%;
+	    	height: 65px;
+	    	padding: 5px 15px;
+	    	background: @deepblue;
+	    	margin-top: 10px;
+	    	div:first-child{
+	    		float: left;
+	    	}
+	    	div:last-child{
+	    		float: right;
+	    	}
+	    }
+	}
+	/*ip6*/
+	@media (min-width:371px) and (max-width:410px) {
+	    #dish{
+			width: 100%;
+			background: @black;
+		}
+	    .title{
+	    	height: 44px*@ip6;
+	    	line-height: 44px*@ip6;
+	    	background: #36394d;
+	    	span{
+	    		display: inline-block;
+	    		float: left;
+	    		width: 50%;
+	    		text-align: center;
+	    		font-size: @fs14*@ip6;
+	    		color: @blue;
+	    	}
+	    }
+	    .list{
+	    	overflow: hidden;
+	    	background: @deepblue;
+	    	.list_col{
+	    		width: 50%;
+	    		&:first-child{
+	    			border-right: 1px solid @black;
+	    		}
+	    		li{
+	    			height: 32px*@ip6;
+	    			line-height: 32px*@ip6;
+	    			overflow: hidden;
+	    			border-top: 1px solid @black;
+	    			padding-left: 22px*@ip6; 
+	    			span{
+	    				color: @white;
+	    				font-size: @fs14*@ip6;
+	    				margin-right: 15px*@ip6;
+	    				&.red{
+	    					color: @red;
+	    				}
+	    				&.green{
+	    					color: @green;
+	    				}
+	    			} 
+	    		}
+	    	}
+	    }
+	    .oprtate_num{
+	    	width: 100%;
+	    	height: 55px*@ip6;
+	    	background: @deepblue;
+	    	padding: 5px*@ip6 15px*@ip6;
+	    	margin-top: 10px*@ip6;
+	    }
+	    .btn_box{
+	    	width: 100%;
+	    	height: 65px*@ip6;
+	    	padding: 5px*@ip6 15px*@ip6;
+	    	background: @deepblue;
+	    	margin-top: 10px*@ip6;
+	    	div:first-child{
+	    		float: left;
+	    	}
+	    	div:last-child{
+	    		float: right;
+	    	}
+	    }
+	}
+	/*ip5*/
+	@media(max-width:370px) {
+		#dish{
+			width: 100%;
+			background: @black;
+		}
+	    .title{
+	    	height: 44px*@ip5;
+	    	line-height: 44px*@ip5;
+	    	background: #36394d;
+	    	span{
+	    		display: inline-block;
+	    		float: left;
+	    		width: 50%;
+	    		text-align: center;
+	    		font-size: @fs14*@ip5;
+	    		color: @blue;
+	    	}
+	    }
+	    .list{
+	    	overflow: hidden;
+	    	background: @deepblue;
+	    	.list_col{
+	    		width: 50%;
+	    		&:first-child{
+	    			border-right: 1px solid @black;
+	    		}
+	    		li{
+	    			height: 32px*@ip5;
+	    			line-height: 32px*@ip5;
+	    			overflow: hidden;
+	    			border-top: 1px solid @black;
+	    			padding-left: 22px*@ip5; 
+	    			span{
+	    				color: @white;
+	    				font-size: @fs14*@ip5;
+	    				margin-right: 15px*@ip5;
+	    				&.red{
+	    					color: @red;
+	    				}
+	    				&.green{
+	    					color: @green;
+	    				}
+	    			} 
+	    		}
+	    	}
+	    }
+	    .oprtate_num{
+	    	width: 100%;
+	    	height: 55px*@ip5;
+	    	background: @deepblue;
+	    	padding: 5px*@ip5 15px*@ip5;
+	    	margin-top: 10px*@ip5;
+	    }
+	    .btn_box{
+	    	width: 100%;
+	    	height: 65px*@ip5;
+	    	padding: 5px*@ip5 15px*@ip5;
+	    	background: @deepblue;
+	    	margin-top: 10px*@ip5;
+	    	div:first-child{
+	    		float: left;
+	    	}
+	    	div:last-child{
+	    		float: right;
+	    	}
+	    }
+	}
+	
+	
+</style>

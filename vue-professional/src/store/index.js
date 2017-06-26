@@ -2,13 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
-var state = {
-	navBarShow: true,
-	isconnected:false
-}
-
+//控制显示与否的模块
+var isshow = {
+	state: {
+		navBarShow: true,
+		isconnected: false,
+		bottomshow: false,
+		pshow:false
+	}
+};
 
 export default new Vuex.Store({
-	state,
+	modules:{
+		isshow
+	}
 })

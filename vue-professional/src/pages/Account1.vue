@@ -43,7 +43,7 @@
 				</li>
 			</ul>
 		</div>
-		<button class="btn mt10">退出登录</button>
+		<button class="btn mt10" @tap='totest'>点我看其他demo</button>
 	</div>
 </template>
 
@@ -52,6 +52,13 @@
 	export default{
 		name:'account',
 		components:{topbar},
+		methods:{
+			totest:function(){
+				this.$router.push({
+					path:'/test'
+				})
+			}
+		},
 		mounted: function(){
 			$("#account").css("height",window.screen.height + "px");
 //			console.log(window.screen.height);

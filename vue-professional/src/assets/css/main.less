@@ -51,3 +51,36 @@
       transform: translateY(-10px);
     opacity: 0;
 }
+.topdown-enter-active {
+    transition: all 0.5s ease;
+}
+.topdown-leave-active {
+    transition: all 0.5s ease;
+}
+.topdown-enter {
+    transform: translateY(-30px);
+    opacity: 0;
+}
+.topdown-leave-active{
+    transform: translateY(-30px);
+    opacity: 0;
+}
+
+//定义比例系数
+@sw:414px;
+@ip5:0.7729;
+@ip6:0.9058;
+@ip6p:1;
+
+/*ip5*/
+@media(max-width:370px) {
+
+}
+/*ip6*/
+@media (min-width:371px) and (max-width:410px) {
+    
+}
+/*ip6p及以上*/
+@media (min-width:411px) {
+    
+}

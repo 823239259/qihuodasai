@@ -84,11 +84,11 @@
 							12:30
 						</p>
 						<p class="fl">
-	
+
 						</p>
 						<p class="fl fontgray">
 							据工信部，2017年我国造船三大指标市场份额总体保持世界领先，造船完工量、新接订单量、手持订单量分别占世界市场份额的35.6%、65.2%和43.9%，其中完工量居第一位拓尔思、 兆日科技涨停，美亚柏科北信源等涨幅靠前。
-							
+
 						</p>
 						<button class="fontwhite fontxs" @tap='showmore'>展开</button>
 					</li>
@@ -97,42 +97,41 @@
 							12:30
 						</p>
 						<p class="fl">
-	
+
 						</p>
 						<p class="fl fontgray">
 							据工信部，2017年我国造船三大指标市场份额总体保持世界领先，造船完工量、新接订单量、手持订单量分别占世界市场份额的35.6%、65.2%和43.9%，其中完工量居第一位拓尔思、 兆日科技涨停，美亚柏科北信源等涨幅靠前。
+
+						</p>
+						<button class="fontwhite fontxs"  @tap='showmore'>展开</button>
+					</li>
+					<li>
+						<p class="fl fontgray ">
+							12:30
+						</p>
+						<p class="fl ">
+	
+						</p>
+						<p class="fl fontgray ">
+							据工信部，2017年我国造船三大指标市场份额总体保持世界领先，造船完工量、新接订单量、手持订单量分别占世界市场份额的35.6%、65.2%和43.9%，其中完工量居第一位拓尔思、 兆日科技涨停，美亚柏科北信源等涨幅靠前。
 							
 						</p>
-						<button class="fontwhite fontxs"" @tap='showmore'>展开</button>
+						<button class="fontwhite fontxs "" @tap='showmore'>展开</button>
 					</li>
 					<li>
 						<p class="fl fontgray">
 							12:30
 						</p>
 						<p class="fl">
-	
+
 						</p>
 						<p class="fl fontgray">
-							据工信部，2017年我国造船三大指标市场份额总体保持世界领先，造船完工量、新接订单量、手持订单量分别占世界市场份额的35.6%、65.2%和43.9%，其中完工量居第一位拓尔思、 兆日科技涨停，美亚柏科北信源等涨幅靠前。
-							
-						</p>
-						<button class="fontwhite fontxs"" @tap='showmore'>展开</button>
-					</li>
-					<li>
-						<p class="fl fontgray">
-							12:30
-						</p>
-						<p class="fl">
-	
-						</p>
-						<p class="fl fontgray">
-							据工信部，2017年我国造船三大指标市场份额总体保持世界领先，造船完工量、新接订单量、手持订单量分别占世界市场份额的35.6%、65.2%和43.9%，其中完工量居第一位拓尔思、 兆日科技涨停，美亚柏科北信源等涨幅靠前。
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad maxime aperiam voluptatibus voluptates nulla et modi veritatis nostrum vel deleniti maiores delectus aut est? Repellendus quas nulla ipsum sapiente sequi.
+							据工信部，2017年我国造船三大指标市场份额总体保持世界领先，造船完工量、新接订单量、手持订单量分别占世界市场份额的35.6%、65.2%和43.9%，其中完工量居第一位拓尔思、 兆日科技涨停，美亚柏科北信源等涨幅靠前。 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad maxime aperiam voluptatibus voluptates nulla et modi veritatis nostrum vel deleniti maiores delectus aut est? Repellendus quas nulla ipsum sapiente sequi.
 						</p>
 						<button class="fontwhite fontxs" @tap='showmore'>展开</button>
 					</li>
 				</template>
-				
+
 			</ul>
 		</div>
 	</div>
@@ -160,18 +159,18 @@
 					this.isshow = false;
 				}
 			},
-			showmore:function(e){
-				if($(e.target).text()=='展开'){
+			showmore: function(e) {
+				if($(e.target).text() == '展开') {
 					$(e.target).html('收起');
 					$(e.target).prev().css({
-						'overflow':'visible',
-						'height':'auto'
+						'overflow': 'visible',
+						'height': 'auto'
 					});
-				}else{
+				} else {
 					$(e.target).html('展开');
 					$(e.currentTarget).prev().css({
-						'overflow':'hidden',
-						'height':'45px'
+						'overflow': 'hidden',
+						'height': '45px'
 					});
 				}
 			}
@@ -227,14 +226,15 @@
 		padding-bottom: 50px;
 		background-color: #1b1b26;
 		overflow-y: scroll;
-		
 	}
-	.selectbar{
+	
+	.selectbar {
 		position: fixed;
 		top: 50px;
 		width: 100%;
 		z-index: 600;
 	}
+	
 	.selectbar>ul:after {
 		content: '';
 		display: block;
@@ -348,26 +348,29 @@
 		height: 40px;
 		line-height: 10px;
 	}
-	.sevenlist li{
+	
+	.sevenlist li {
 		position: relative;
 		margin-bottom: 10%;
-		
 	}
-	.sevenlist li:after{
+	
+	.sevenlist li:after {
 		content: '';
 		display: block;
 		clear: both;
 	}
-	.sevenlist p{
+	
+	.sevenlist p {
 		/*控制文字默认高度*/
-		height:45px;
+		height: 45px;
 		overflow: hidden;
-		
 	}
-	.sevenlist p:first-child{
+	
+	.sevenlist p:first-child {
 		width: 15%;
 	}
-	.sevenlist p:nth-child(2){
+	
+	.sevenlist p:nth-child(2) {
 		width: 2%;
 		/*border-right: 1px solid #ffd400;*/
 		background-image: url('../assets/img/quanline.png');
@@ -377,10 +380,12 @@
 		left: 10%;
 		top: 15%;
 	}
-	.sevenlist p:nth-child(3){
+	
+	.sevenlist p:nth-child(3) {
 		width: 80%;
 	}
-	button{
+	
+	button {
 		position: absolute;
 		bottom: -20px;
 		right: 25px;
@@ -389,10 +394,12 @@
 		outline: none;
 		border: none;
 	}
-	#seven{
+	
+	#seven {
 		padding-left: 5%;
 	}
-	#seven>div:first-child{
+	
+	#seven>div:first-child {
 		width: 25%;
 		height: 30px;
 		line-height: 30px;
@@ -403,4 +410,21 @@
 		margin-bottom: 3%;
 		margin-top: 1%;
 	}
+	/*ip5*/
+	
+	@media(max-width:370px) {
+		.selectbar {
+			top: 50px*@ip5;
+		}
+	}
+	/*ip6*/
+	
+	@media (min-width:371px) and (max-width:410px) {
+		.selectbar {
+			top: 50px*@ip6;
+		}
+	}
+	/*ip6p及以上*/
+	
+	@media (min-width:411px) {}
 </style>

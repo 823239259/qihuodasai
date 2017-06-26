@@ -25,7 +25,7 @@ new Vue({
 	},
 	computed: {
 		navbarshow() {
-			return this.$store.state.navBarShow
+			return this.$store.state.isshow.navBarShow
 		}
 	}
 })
