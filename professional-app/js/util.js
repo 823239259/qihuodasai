@@ -243,6 +243,14 @@ var CacheQuoteSubscribe = {
 };
 
 
-
+	var formatFloat = function(num, digit) {
+		var m = Math.pow(10, Math.abs(digit)); 
+		if(digit < 0){ return num / m; }
+		else if(digit > 0){ 
+			return num * m; 
+		}else{ 
+			return num; 
+		}
+}
 
 

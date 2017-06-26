@@ -1188,7 +1188,7 @@ function appendStopLossData(param) {
 	var stopLossPrice = param.StopLossPrice;
 	stopLossPrice = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossDiff = param.StopLossDiff;
-	stopLossDiff = parseFloat(stopLossPrice).toFixed(getMarketCommdity(contractCode).DotSize);
+	stopLossDiff = parseFloat(stopLossDiff).toFixed(getMarketCommdity(contractCode).DotSize);
 	var stopLossPriceText = "触发价:";
 	if(stopLossType == 2) {
 		stopLossPriceText = "追踪价差:";
@@ -2374,10 +2374,12 @@ function bindOpertion() {
 			var lastPrice = $("#stopEvenPrice").text();
 			var stopChoicePrices1 = $("#stopChoicePrices1").val();
 			var contractObject = getMarketCommdity(contractCode);
+			var a0 =  (formatFloat(stopChoicePrices1,contractObject.DotSize)*10000).toFixed(0);
+			var b0 = formatFloat(contractObject.MiniTikeSize,contractObject.DotSize)*10000;
 			if(stopChoicePrices1 <= 0 || stopChoicePrices1.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if(((stopChoicePrices1*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
+			}else if(a0%b0!=0){
 				tip('不符合最小变动价,请重新输入,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2433,10 +2435,12 @@ function bindOpertion() {
 			var lastPrice = $("#stopEvenPrice1").text();
 			var stopChoicePrices3 = $("#stopChoicePrices3").val();
 			var contractObject = getMarketCommdity(contractCode);
+			var a2 = (formatFloat(stopChoicePrices3,contractObject.DotSize)*10000).toFixed(0);
+			var b2 = formatFloat(contractObject.MiniTikeSize,contractObject.DotSize)*10000;
 			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if(((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
+			}else if(a2%b2!=0){
 				tip('止损价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2492,10 +2496,13 @@ function bindOpertion() {
 			var lastPrice = $("#lossEventPrice").text();
 			var lossChoicePrices2 = $("#lossChoicePrices2").val();
 			var contractObject = getMarketCommdity(contractCode);
+			
+			var a4 = (formatFloat(lossChoicePrices2,contractObject.DotSize)*10000).toFixed(0);
+			var b4 = formatFloat(contractObject.MiniTikeSize,contractObject.DotSize)*10000;
 			if(lossChoicePrices2 <= 0 || lossChoicePrices2.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if(((lossChoicePrices2*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
+			}else if(a4%b4!=0){
 				tip('止盈价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2545,10 +2552,12 @@ function bindOpertion() {
 			var lastPrice = $("#uEvenPrice").text();
 			var stopChoicePrices3 = $("#uLossPrice").val();
 			var contractObject = getMarketCommdity(contractCode);
+			var a3 = (formatFloat(stopChoicePrices3,contractObject.DotSize)*10000).toFixed(0);
+			var b3 = formatFloat(contractObject.MiniTikeSize,contractObject.DotSize)*10000;
 			if(stopChoicePrices3 <= 0 || stopChoicePrices3.length == 0) {
 				tip("请输入正确的回撤价");
 				return;
-			}else if(((stopChoicePrices3*10000)%(contractObject.MiniTikeSize*10000)).toFixed(4)!=0){
+			}else if(a3%b3!=0){
 				tip('止盈价不符合最小变动价,最小变动价为:'+contractObject.MiniTikeSize);
 				return;
 			}
@@ -2726,9 +2735,11 @@ function bindOpertion() {
 			}
 			var chioceContract = $("#chioceContract").val();
 			var MiniTikeSize = CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,chioceContract.length-4), "MiniTikeSize");
+			var DotSize = CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,chioceContract.length-4), "DotSize");
 			var conditoionPricesInput00 = Number(conditoionPricesInput);
-			
-			if((((conditoionPricesInput00*10000)%(MiniTikeSize*10000)).toFixed(4))!=0){
+			var a = formatFloat(conditoionPricesInput00,DotSize)*10000;
+			var b = formatFloat(MiniTikeSize,DotSize)*10000;
+			if(a%b!=0){
 				tip('输入价格不符合最小变动价,最小变动价为:'+MiniTikeSize);
 				return;
 			}
@@ -3886,5 +3897,5 @@ function formatDate(date) {
     if (myweekday < 10) {   
         myweekday = "0" + myweekday;   
     }   
-    return (myyear + "-" + mymonth + "-" + myweekday);   
+    return (myyear + "-" + mymonth + "-" + myweekday+' '+'00:00:00');   
 }
