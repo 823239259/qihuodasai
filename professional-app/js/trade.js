@@ -1194,7 +1194,8 @@ function appendStopLossData(param) {
 		stopLossPriceText = "追踪价差:";
 		stopLossPrice = stopLossDiff;
 	}
-	var cls = "stoploss" + stoplossIndex;
+	var cls = "stoploss-00" + stoplossIndex;
+	
 	var html = '<tr class="testclick1 ' + cls + '" data-tion-index = "' + stoplossIndex + '" id = "' + stopLossNo + '">' +
 		'	<td class = "stoploss0">' + contractCode + '</td>' +
 		'  <td class = "stoploss1" data-tion-status="' + status + '">' + statusText + '</td>' +
@@ -1207,6 +1208,8 @@ function appendStopLossData(param) {
 		'	<td class = "stoploss7">' + insertTime + '</td>' +
 		'  <td class = "stoploss8" style = "display:none;">' + stopLossDiff + '</td>' +
 		'</tr>';
+	
+	
 	if(status == 0 || status == 1) {
 		$("#clickTableBody").append(html);
 		addStopLossBindClick(cls);
@@ -2590,7 +2593,7 @@ function bindOpertion() {
 	/**
 	 * 赋值，确定操作是修改-删除-暂停
 	 */
-	$(".updateStopLoss").bind("click", function() {
+	$(".updateStopLoss").bind("tap", function() {
 		if(vadationIsLoginMuiTip()) {
 			var stopLossNo = selectStopLoss["stopLossNo"];
 			if(stopLossNo == undefined) {

@@ -167,8 +167,6 @@
 //							var user_token = plus.storage.getItem(tzdr.constants.user_token);
 //							var user_secret = plus.storage.getItem(tzdr.constants.user_secret);
 							mui.app_request("/user/ftrade/list", {}, function(result) {
-								console.log("111");
-								console.log(JSON.stringify(result));
 								if(!mui.isnull(result.data)) {
 									ftrade_list = result.data.tradeList;
 									mui.each(ftrade_list, function(i, item) {
