@@ -1636,7 +1636,7 @@ function addFundDetailBindClick(cls) {
 var num = 0;
 
 function addStopLossBindClick(cls) {
-	$("." + cls).bind("click", function() {
+	$("." + cls).on("tap", function() {
 		var $this = $(this);
 		selectStopLoss["stopLossNo"] = $this.attr("id");
 		var status = $("#" + selectStopLoss["stopLossNo"] + " td[class = 'stoploss1']").attr("data-tion-status");
