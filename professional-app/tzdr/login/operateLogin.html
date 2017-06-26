@@ -53,9 +53,8 @@
 				<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 					<p id="loginAgree"><span id="checkBox"><i ></i></span>
 						<sapn>阅读并接受</sapn>
-						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《期货大赛注册协议》</a>
+						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《国际期货通行情交易协议》</a>
 					</p>
-					<p id="tipsMoni">模拟盘账密为您的期货大赛账密，如有问题请拨打400-852-8008</p>
 				</div>
 			</div>
 			<!--<div id="username_list">
@@ -168,8 +167,6 @@
 //							var user_token = plus.storage.getItem(tzdr.constants.user_token);
 //							var user_secret = plus.storage.getItem(tzdr.constants.user_secret);
 							mui.app_request("/user/ftrade/list", {}, function(result) {
-								console.log("111");
-								console.log(JSON.stringify(result));
 								if(!mui.isnull(result.data)) {
 									ftrade_list = result.data.tradeList;
 									mui.each(ftrade_list, function(i, item) {

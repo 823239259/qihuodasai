@@ -175,4 +175,82 @@ function nullOrInsertTime(insertTime,StatusMsg){
 	}
 }
 
+/**
+ * 缓存订阅合约属性信息。以原油举例：
+ * {"CommodityName":"国际原油","CommodityNo":"CL","ContractSize":10,"CurrencyNo":"USD",
+ * 		"DotSize":2,"ExchangeNo":"NYMEX","Index":1,"MainContract":"1704","MiniTikeSize":0.01,
+ * 		"TradingTimeSeg":[{"DateFlag":"1","IsDST":"N","TimeBucketBeginTime":"07:00:00","TradingState":"3","TradingTimeBucketID":0},
+ * 						  {"DateFlag":"2","IsDST":"N","TimeBucketBeginTime":"06:00:00","TradingState":"5","TradingTimeBucketID":1}]}
+ */
+var CacheQuoteBase = {
+	jCacheContractAttribute: {}, // key 为CommodityNo
+	setCacheContractAttribute: function(jQuote) {
+		this.jCacheContractAttribute[jQuote.CommodityNo] = jQuote;
+	},
+	getCacheContractAttribute: function(commodityNo, attr) {
+		if(isEmpty(this.jCacheContractAttribute[commodityNo]) || isEmpty(this.jCacheContractAttribute[commodityNo][attr])) {
+			return 0;
+		}
+		return this.jCacheContractAttribute[commodityNo][attr];
+	}
+};
+/**
+ * 缓存订阅合约行情信息，包括
+ * 		{"CommodityNo":"CL","ContractNo":"1703","ErrorCode":0,"ErrorMsg":"订阅成功","ExchangeNo":"CME",
+ * 		"LastQuotation":{"AskPrice1":53.88,"AskPrice2":53.89,"AskPrice3":53.9,"AskPrice4":53.92,"AskPrice5":53.95,
+ * 						"AskQty1":1,"AskQty2":2,"AskQty3":33,"AskQty4":2,"AskQty5":12,
+ * 						"AveragePrice":0,"BidPrice1":53.79,"BidPrice2":53.76,"BidPrice3":53.73,"BidPrice4":53.72,"BidPrice5":53.67,
+ * 						"BidQty1":3,"BidQty2":2,"BidQty3":1,"BidQty4":1,"BidQty5":16,
+ * 						"ChangeRate":0.03715400334386611,"ChangeValue":0.02000000000000313,"ClosingPrice":0,
+ * 						"CommodityNo":"CL","ContractNo":"1703","DateTimeStamp":"2017-02-04 07:03:37","ExchangeNo":"CME",
+ * 						"HighPrice":54.22,"LastPrice":53.85,"LastVolume":1,"LimitDownPrice":0,"LimitUpPrice":0,"LowPrice":53.4,"OpenPrice":53.68,
+ * 						"Position":542680,"PreClosingPrice":0,"PrePosition":0,"PreSettlePrice":53.83,"SettlePrice":1486163017351,
+ * 						"TotalAskQty":0,"TotalBidQty":0,"TotalTurnover":0,"TotalVolume":440576}}
+ * 
+ * 用行情服务器的配置增加/覆盖订阅合约配置：
+ * {"CommodityName":"国际原油","CommodityNo":"CL","ContractSize":10,"CurrencyNo":"USD",
+ * 		"DotSize":2,"ExchangeNo":"NYMEX","Index":1,"MainContract":"1704","MiniTikeSize":0.01,
+ * 		"TradingTimeSeg":[{"DateFlag":"1","IsDST":"N","TimeBucketBeginTime":"07:00:00","TradingState":"3","TradingTimeBucketID":0},
+ * 						  {"DateFlag":"2","IsDST":"N","TimeBucketBeginTime":"06:00:00","TradingState":"5","TradingTimeBucketID":1}]}
+ */
+var CacheQuoteSubscribe = {
+	jCacheContractQuote: {}, // key 为contract(jQuote.CommodityNo + jQuote.ContractNo)
+	setCacheContractQuote: function(jQuote) {
+		// 根据行情服务器的配置更新到合约行情缓存配置
+		jQuote.CommodityName = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "CommodityName");
+		jQuote.CurrencyNo = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "CurrencyNo");
+		jQuote.DotSize = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "DotSize");
+		jQuote.ExchangeNo = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "ExchangeNo");
+		jQuote.Index = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "Index");
+		jQuote.MainContract = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "MainContract");
+		jQuote.ContractSize = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "ContractSize");
+		jQuote.MiniTikeSize = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "MiniTikeSize");
+		jQuote.TradingTimeSeg = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "TradingTimeSeg");
+
+		this.jCacheContractQuote[jQuote.CommodityNo + jQuote.ContractNo] = jQuote;
+	},
+	getCacheContractQuote: function(contract, attr1, attr2) {
+		if(isEmpty(this.jCacheContractQuote[contract]) || isEmpty(this.jCacheContractQuote[contract][attr1])) {
+			return 0;
+		}
+		if(arguments.length == 2) {
+			//		vsLog("this.jCacheContractQuote[" + contract + "][" + attr1 + "]=" + this.jCacheContractQuote[contract][attr1]);
+			return this.jCacheContractQuote[contract][attr1];
+		}
+		//	vsLog("this.jCacheContractQuote[" + contract + "][" + attr1 + "][" + attr2 + "]=" + this.jCacheContractQuote[contract][attr1][attr2]);
+		return this.jCacheContractQuote[contract][attr1][attr2];
+	}
+};
+
+
+	var formatFloat = function(num, digit) {
+		var m = Math.pow(10, Math.abs(digit)); 
+		if(digit < 0){ return num / m; }
+		else if(digit > 0){ 
+			return num * m; 
+		}else{ 
+			return num; 
+		}
+}
+
 

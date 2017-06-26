@@ -12,40 +12,17 @@
 <body>
 	<header class="mui-bar mui-bar-nav own-topbg">
 	    <h1 class="mui-title">操盘记录</h1>
+	    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 	</header>
-	<nav class="navlist">
-		<a class="" href="javascript:void(0);" id="quotationMain">
-			<!--<span class="mui-icon mui-icon-settings"></span>-->
-			<span class="mui-icon"><img src="../images/0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">行情交易</span>
-		</a>
-		<a class="" href="javascript:void(0);"  id="product">
-			<span class="mui-icon"><img src="../images/1.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘申请</span>
-		</a>
-		<a href="javascript:void(0);"  id="information">
-			<span class="mui-icon"><img src="../images/4.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">资讯直播</span>
-		</a>
-		<a class="navon" href="javascript:void(0);"  id="scheme">
-			<span class="mui-icon"><img src="../images/2.0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘记录</span>
-		</a>
-		<a class="" id="account" href="javascript:void(0);">
-			<span class="mui-icon"><img src="../images/3.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
-	</nav>
-<div class="mui-content sc_list bl_list">
+<div class="mui-content sc_list bl_list" style="padding-bottom: 0;">
 	<div id="slider" class="mui-slider">
 		<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="buy_nav">
-			<!--<a class="mui-control-item mui-active" href="#stockTrade">操盘方案</a>-->
-			<!--<a class="mui-control-item" href="#ftogetherTrade">合买方案</a>-->
+			
 		</div>
 		<div class="mui-slider-group" id="itembox">
 			<div id="stockTrade" class="mui-slider-item mui-control-content mui-active">
 				<!--下拉刷新容器-->
-				<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-bottom: 0;">
 					<div class="mui-scroll sc_list">
 						<!--数据列表-->
 						<ul class="mui-table-view mui-table-view-chevron"  id="list_ul">
@@ -118,7 +95,8 @@
 	<script>
 		var item = document.getElementById('itembox');
 	    var scheight = document.documentElement.clientHeight;
-		var infoheihgt = scheight - 44 -57;
+//		var infoheihgt = scheight - 44 -57;
+		var infoheihgt = scheight -35;
 		item.style.height = infoheihgt + 'px'; 
 		(function($) {
 			$('.mui-scroll-wrapper').scroll({
@@ -141,16 +119,7 @@
 		mui.plusReady(function(){  
 			//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
-			var dataUrl={
-  				home:"../home.html",
-  				account:"account/account.html",
-  				accountno:"account/accountno.html",
-  				scheme:"scheme.html",
-  				listrg:"future/listrg.html",
-  				quotationMain:"quotation/quotationMain.html",
-  				information:"information/information.html"
-  			}
-			initBottom(dataUrl);
+			
 			var paramUrl={
 				url:"login/login.html"
 			}

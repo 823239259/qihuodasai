@@ -85,12 +85,14 @@
 				z-index: 999;
 				top: 16px;
 				right: 6px;
-				height: 65px;
+				height: 45px;
 				/*height: 150px;*/
 				width: 35%;
+				overflow: hidden;
 			}
 			#topPopover.mui-popover{
 				background-color: #383838;
+				border-radius: 15px;
 			}
 			#topPopover.mui-popover .mui-popover-arrow:after{
 				background-color: #383838;
@@ -443,8 +445,8 @@
 				<!---------------------------------下拉菜单--------------------------->
 				<div id="topPopover" class="mui-popover">
 					<div class="mui-popover-arrow"></div>
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
+					<div>
+						<div>
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
@@ -455,7 +457,8 @@
 								<li class="mui-table-view-cell" id="openStopButton">
 									<a id="openStop">止损单</a>
 								</li>
-								<li class="mui-table-view-cell">
+								<li class="mui-table-view-cell" id="historyDeal">
+									<a id="historytable">历史成交</a>
 								</li>
 							</ul>
 						</div>
@@ -858,6 +861,115 @@
 				    </div>
 				</div>
 			</div>
+			<style>
+				.calendar {height: 45px; line-height: 40px; color: #ffffff; font-size: 12px; background: #2b2b2b; border-bottom: 5px solid #1f1f1f;}
+		    	.calendar > div {float: left; background: #1f1f1f; border-radius: 5px; width: 148px; padding-left: 5px; height: 30px; margin-top: 5px;}
+		    	.calendar > div input {margin-bottom: 0; text-align: center; width: 122px; background: #1f1f1f; height: 29px;border: 1px solid #1f1f1f; padding: 0; margin: 0; position: relative; top: -5px; font-size: 12px}
+		    	.calendar > div > label img {width: 17px; height: 17px; position: relative; top: -1px;}
+		    	.calendar > span {float: right;}
+		    	#qryHisTrade {color: #ffffff;  text-align: center;margin-top: 10px; }
+		    	#directSeedTitle {background: #2b2b2b; border-bottom: 1px solid #1f1f1f;}
+		    	#directSeedTitle a {border: none; color: #cccccc; font-size: 14px;}
+		    	#directSeedTitle a.mui-active {color: #ffd400;}
+		    	#chartContainerContent ul li {float: left; list-style-type: none;}
+		    	#chartContainerContent .ul-lis {background: #383838; height: 40px;margin: 0;padding: 0; color: #999999; font-size: 14px;}
+		    	#historyDetailsTables tr td {color: #ffffff; font-size: 14px; height: 40px; line-height: 40px;}
+		    	#historyDetailsTables thead tr td {color: #999999; background: #383838;}
+		    	#hisTradeList {background: #2b2b2b;}
+		    	#hisTradeList tr {border: 1px solid #1f1f1f;}
+		    	.quotationBack i {font-style: normal; font-size: 14px; vertical-align: 2px;}
+		    	.mui-dtpicker{height: 274px;}
+		    	#historyDetailsTables thead tr td:first-child {text-align: center;}
+	    		#historyDetailsTables tr td:first-child {text-align: center;}
+	    		#historyDetailsTables {width: 850px; overflow-x: scroll;}
+	    		#chartContainerContent {padding-top: 85px;}
+			</style>
+			<!--历史成交-->
+			<div id="bg4" style="display: none;">
+				<header class="mui-bar mui-bar-nav" style="position: fixed;z-index: 998;">
+		   		    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack" id= "historyback"><i>返回</i></a>
+				    <h1 class="mui-title" style="color: #CCCCCC;">历史成交</h1>
+				    <span id="qryHisTrade" class="mui-pull-right">查询</span>
+				</header>
+				<div class="mui-coontent" style="position: absolute;z-index: 997;top: 46px;width: 100%;">
+					<div class="mui-slider-item" id="directSeedNews" style="position: static;">
+						<div style="position: fixed; z-index: 9;">
+						<div class="calendar">
+							<div style="margin-left: 5px;" class="btn1" id='timechioce' data-options='{}'>
+								<label class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
+								<input type="text" id="finance" readonly="readonly" placeholder="开始时间">
+							</div>
+							<p style="float: left;">→</p>
+							<div id='timechioce1' class="btn2" data-options='{}'>
+								<label  class="btn"><img src="../../images/directSeedCalendar.png" alt="" /></label>
+								<input type="text" id="finance1" readonly="readonly" placeholder="结束时间">
+							</div>
+						</div>
+						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
+							<a class="mui-control-item title_school  mui-active">一天内</a>
+							<a class="mui-control-item title_school">一周内</a> 
+							<a class="mui-control-item title_school">一月内</a> 
+						</div>
+						</div>
+						<div id="chartContainerContent">
+							<div id="chartContainerContent1">
+								<div class="mui-scroll" style="padding-bottom: 120px;">
+									<div class="table_div" id="table_div">
+										<table id="historyDetailsTables">
+											<thead>
+												<tr>
+													<td width="50px">序号</td>
+													<td width="100px">合约代码</td>
+													<td width="100px">交易所</td>
+													<td width="100px">币种</td>
+													<td width="50px">买卖</td>
+													<td width="150px">成交价</td>
+													<td width="50px">成交量</td>
+													<td width="100px">手续费</td>
+													<td width="150px">成交时间</td>
+												</tr>
+											</thead>
+											<tbody id="hisTradeList">
+												<tr class="red">
+													<td width="50px">序号</td>
+													<td width="100px">合约代码</td>
+													<td width="100px">交易所</td>
+													<td width="100px">币种</td>
+													<td width="50px">买卖</td>
+													<td width="150px">成交价</td>
+													<td width="50px">成交量</td>
+													<td width="100px">手续费</td>
+													<td width="150px">成交时间</td>
+												</tr>
+												<tr class="green">
+													<td width="50px">序号</td>
+													<td width="100px">合约代码</td>
+													<td width="100px">交易所</td>
+													<td width="100px">币种</td>
+													<td width="50px">买卖</td>
+													<td width="150px">成交价</td>
+													<td width="50px">成交量</td>
+													<td width="100px">手续费</td>
+													<td width="150px">成交时间</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="stopTips1" class="stopTips" style="z-index: 999; background: #2b2b2b; bottom: 0; padding: 10px;">
+							<div>提示</div>
+							<div>
+								<p>1.历史成交明细只可查询当日凌晨5点之前的数据；</p>
+								<p>2.当日的成交明细可到交易中心-》成交中心查询；</p>
+								<p>2.若有问题可拨打：400-852-8008；</p>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+			
 			</div>
 			</div>
 		</body>
@@ -926,6 +1038,7 @@
 				var candlestickChartItem = document.getElementById('CandlestickChart');
 				init(Transfer.name);
 				cachTranFers(Transfer.name);
+				console.log(Transfer.name);
 				var i = 0 ;
 				$(window).resize(function() {
 					if(i % 2 == 0){  
@@ -949,7 +1062,7 @@
 					$("#stopLoss").css("display","block");
 					$("#Open").css("right","25%");
 					$("#allOpen").css("right","50%");
-					$("#topPopover").css("height","150px");
+					$("#topPopover").css("height","173px");
 				}
 				var network = false;
 				mui('.mui-scroll-wrapper').scroll();
@@ -968,6 +1081,10 @@
 				document.getElementById("closeStopTable1").addEventListener("tap",function(){
 					mui("#popoverLoss1").popover("toggle");
 				});
+				/*document.getElementById("historyDeal").addEventListener("tap",function(){
+					mui.openWindow("historyDeal.html");
+				});*/
+				
 				document.getElementById("insertCondition").addEventListener("tap",function(){
 					initConditionData(); 
 					$("#ConditoionTitlePrices").addClass("mui-active");
@@ -998,6 +1115,16 @@
 					$("#topPopover").css("display","none");
 					$(".mui-content").eq(0).css("z-index","998");
 				});
+				document.getElementById("historyback").addEventListener("tap",function(){
+					$("#bg2").css("display","none");
+					$("#bg3").css("display","none");
+					$("#bg1").css("display","block");
+					$("#bg4").css("display","none");
+					$("#finance").val("");
+					$("#finance1").val("");
+					$("#topPopover").css("display","none");
+					$(".mui-content").eq(0).css("z-index","998");
+				});
 				document.getElementById("openStop").addEventListener("tap",function(){
 					if(isLogin){
 						if(plus.storage.getItem("QuotationGuidanceTrade2")==null){
@@ -1019,6 +1146,35 @@
 						$("#bg3").css("display","block");
 						mui("#topPopover").popover("toggle");
 						$(".mui-content").eq(2).css("z-index","998");
+					}else{
+						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
+					}
+				});
+				document.getElementById("historytable").addEventListener("tap",function(){
+					if(isLogin){
+						if(plus.storage.getItem("QuotationGuidanceTrade2")==null){
+							plus.storage.setItem("QuotationGuidanceTrade2","1");
+								var height=window.innerHeight;
+								var width=window.innerWidth;
+								$(".top").css({"height":height+"px",
+										"width":width+"px",
+										"position":"fixed",
+										"z-index":"999",
+										"display":"block",
+										"top":"0px",
+										"background":"url('../../images/stopBg.png') no-repeat",
+										"background-size":"cover",
+										})		
+						}
+						$("#bg1").css("display","none");
+						$("#bg2").css("display","none");
+						$("#bg3").css("display","none");
+						$("#bg4").css("display","block");
+						mui("#topPopover").popover("toggle");
+						$(".mui-content").eq(2).css("z-index","998");
+						$('#hisTradeList').children().remove();
+						history_index=1;
+						Trade.doQryHisTrade(username,getYesterdayDate(),getCurrentDate());
 					}else{
 						mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin.html",extras:{backpageID:"transactionDetails"}});
 					}
@@ -1067,7 +1223,7 @@
 					}
 				});
 				$("#clickTable").on("tap",".testclick1",function(){
-					 $(this).addClass('clickBg');    // 设置被点击元素为黑色
+					$(this).addClass('clickBg');    // 设置被点击元素为黑色
         			$(this).siblings('tr').removeClass('clickBg'); // 去除所有同胞元素的黑色样式
 				})
 				$("#thodyCondition").on("tap","tr",function(){
@@ -1125,10 +1281,13 @@
 						});
 					}, false);
 			})(mui);
+			
+			
+			
 		</script>
 		<script>
 		
-			var tranferParam = null ;
+			 tranferParam = null ;
 			/**
 			 * 获取行情请求的数据-并初始化页面 
 			 */
@@ -1200,4 +1359,66 @@
 				});
 			});
 	</script>
+	<script type="text/javascript">
+		/*年月日-日历*/
+		(function($) {
+			$.init();
+			var result = $('#finance')[0];
+			var btns = $('.btn1');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text + ' '+ rs.h.text + ':'+ rs.i.text + ':'+ "00";
+						picker.dispose();
+					});
+				}, false);
+			});
+			var result1 = $('#finance1')[0];
+			var btns1 = $('.btn2');
+			btns1.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result1.value = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text + ' '+ rs.h.text + ':'+ rs.i.text + ':'+ "00";
+						picker.dispose();
+					});
+				}, false);
+			});
+		})(mui);
+	</script>
+	<script type="text/javascript">
+		$("#qryHisTrade").on("tap",function(){
+			var finance = $("#finance").val();
+			var finance1 = $("#finance1").val();
+			if(!finance){
+				mui.toast('请输入开始时间');
+				return;
+			}
+			if(!finance1){
+				mui.toast('请输入结束时间');
+				return;
+			}
+			/*console.log(finance);
+			finance = finance.replace(/-/g,'/');  
+			var time = new Date(finance).getTime(); 
+			time =parseInt(time/1000+21*24*3600); 
+			finance1 = finance1.replace(/-/g,'/');  
+			var time1 = new Date(finance1).getTime(); 
+			time1 =parseInt(time1/1000+21*24*3600); 
+			if(time1 <= time) {
+				mui.toast('请输入结束时间大于开始时间');
+				return;
+			}*/
+			$('#hisTradeList').children().remove();
+			history_index=1;
+			Trade.doQryHisTrade(username,finance,finance1);
+		});
+	</script>	
 </html>

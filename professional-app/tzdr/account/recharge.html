@@ -134,6 +134,10 @@
 					mui.toast("充值金额不高于"+money2+"元");
 					return; 
 				}
+				if(money < 10){
+					mui.toast("充值金额应大于等于10元");
+					return; 
+				}
 				mui.openWindow({
 					url:"choicePayment.html",
 					id:"choicePayment.html",
