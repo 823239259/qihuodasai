@@ -88,9 +88,11 @@
 				height: 65px;
 				/*height: 150px;*/
 				width: 35%;
+				overflow: hidden;
 			}
 			#topPopover.mui-popover{
 				background-color: #383838;
+				border-radius: 15px;
 			}
 			#topPopover.mui-popover .mui-popover-arrow:after{
 				background-color: #383838;
@@ -443,8 +445,8 @@
 				<!---------------------------------下拉菜单--------------------------->
 				<div id="topPopover" class="mui-popover">
 					<div class="mui-popover-arrow"></div>
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
+					<div>
+						<div>
 							<ul class="mui-table-view">
 								<li class="mui-table-view-cell">
 									<a id="switchAccount">切换账号</a>
@@ -1053,7 +1055,7 @@
 					$("#stopLoss").css("display","block");
 					$("#Open").css("right","25%");
 					$("#allOpen").css("right","50%");
-					$("#topPopover").css("height","180px");
+					$("#topPopover").css("height","173px");
 				}
 				var network = false;
 				mui('.mui-scroll-wrapper').scroll();
