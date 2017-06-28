@@ -37,7 +37,7 @@
 		},
 		watch: {
 			defaultNum: function(){
-				if(this.defaultNum <= 0){
+				if(this.defaultNum < 0){
 					this.defaultNum = 0;
 				}
 			}
@@ -88,11 +88,11 @@
 				float: left;
 				width: 160px;
 				height: 45px;
-				line-height: 45px;
+				font-size: @fs14;
 				background: none;
 				border: none;
 				margin: 0;
-				padding: 0 10px;
+				padding: 5px 10px;
 				color: @white;
 				text-align: center;
 				&.ipt{
@@ -141,11 +141,11 @@
 				float: left;
 				width: 160px*@ip6;
 				height: 45px*@ip6;
-				line-height: 45px*@ip6;
+				font-size: @fs14*@ip6;
 				background: none;
 				border: none;
 				margin: 0;
-				padding: 0 10px*@ip6;
+				padding: 5px*@ip6 10px*@ip6;
 				color: @white;
 				text-align: center;
 				&.ipt{
@@ -194,11 +194,11 @@
 				float: left;
 				width: 160px*@ip5;
 				height: 45px*@ip5;
-				line-height: 45px*@ip5;
+				font-size: @fs14*@ip5;
 				background: none;
 				border: none;
 				margin: 0;
-				padding: 0 10px*@ip5;
+				padding: 5px*@ip5 10px*@ip5;
 				color: @white;
 				text-align: center;
 				&.ipt{

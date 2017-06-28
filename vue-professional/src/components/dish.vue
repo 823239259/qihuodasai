@@ -152,8 +152,7 @@
 		components: {tradebtn, operatenum},
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
-		}
-		
+		}	
 	}
 	
 </script>
@@ -166,6 +165,9 @@
 		#dish{
 			width: 100%;
 			background: @black;
+			position: fixed;
+			top: 90px;
+			left: 0;
 		}
 	    .title{
 	    	height: 44px;
@@ -325,6 +327,9 @@
 	    #dish{
 			width: 100%;
 			background: @black;
+			position: fixed;
+			top: 90px*@ip6;
+			left: 0;
 		}
 	    .title{
 	    	height: 44px*@ip6;
@@ -393,6 +398,9 @@
 		#dish{
 			width: 100%;
 			background: @black;
+			position: fixed;
+			top: 90px*@ip5;
+			left: 0;
 		}
 	    .title{
 	    	height: 44px*@ip5;

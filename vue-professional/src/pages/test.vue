@@ -19,6 +19,9 @@
 		<topbar cname='国际原油' cnum='CL' mc="1708"></topbar>
 		<selectbar></selectbar>
 		<tradebottom></tradebottom>
+		<stopmoneyalert></stopmoneyalert>
+		<pbtn name="止盈弹窗" color="gray" @tap.native='alert4'></pbtn>
+		<charts></charts>
 	</div>
 </template>
 
@@ -35,6 +38,8 @@
 	import topbar from '../components/detailTopbar.vue'
 	import selectbar from '../components/detailSelectbar.vue'
 	import tradebottom from '../components/tradeBottom.vue'
+	import stopmoneyalert from '../components/stopmoneyalert.vue'
+	import charts from '../components/chartfens.vue'
 	export default {
 		name: 'test',
 		components: {
@@ -49,7 +54,9 @@
 			changealert,
 			topbar,
 			selectbar,
-			tradebottom
+			tradebottom,
+			stopmoneyalert,
+			charts
 		},
 		methods: {
 			alert: function() {
@@ -62,6 +69,10 @@
 			alert3: function() {
 				//				console.log(this.$children);
 				this.$children[11].isshow = true;
+			},
+			alert4:function(){
+//				console.log(this.$children)
+				this.$children[19].isshow = true;	
 			},
 			goCon() {
 				this.$router.push({
@@ -109,6 +120,8 @@
 	#test {
 		background:#242633;
 		padding-top: 100px;
+		overflow-y: scroll;
+		padding-bottom: 300px;
 	}
 	
 	#menus {

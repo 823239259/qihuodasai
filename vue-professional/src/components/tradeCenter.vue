@@ -66,115 +66,10 @@
 				</div>
 			</template>
 		</div>
-		<div class="list" id="positionCont" v-if="positionShow">
-			<ul>
-				<li>
-					<span>合约名称</span>
-					<span>多空</span>
-					<span>手数</span>
-					<span>平仓均价</span>
-					<span>浮动盈利</span>
-				</li>
-				<template v-for='key in positionListCont'>
-					<li>
-						<div :class="[list_cont,{current:key.showbar}]" @tap="listTap(positionListCont)">
-							<span>{{key.name}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span>{{key.price}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.total}}</span>
-						</div>
-						<transition name="fade" mode="out-in">
-							<div class="list_tools " v-show="key.showbar">
-								<cbtn name="暂停"></cbtn>
-								<cbtn name="修改"></cbtn>
-								<cbtn name="删除"></cbtn>
-							</div>
-						</transition>
-					</li>
-				</template>
-			</ul>
-		</div>
-		<div class="list" id="orderCont" v-else-if="orderShow">
-			<ul>
-				<li>
-					<span>合约名称</span>
-					<span>多空</span>
-					<span>手数</span>
-					<span>平仓均价</span>
-					<span>浮动盈利</span>
-				</li>
-				<template v-for='key in orderListCont'>
-					<li>
-						<div :class="[list_cont,{current:key.showbar}]" @tap="listTap(orderListCont)">
-							<span>{{key.name}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span>{{key.price}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.total}}</span>
-						</div>
-						<transition name="fade" mode="out-in">
-							<div class="list_tools " v-show="key.showbar">
-								<cbtn name="暂停"></cbtn>
-								<cbtn name="修改"></cbtn>
-								<cbtn name="删除"></cbtn>
-							</div>
-						</transition>
-					</li>
-				</template>
-			</ul>
-		</div>
-		<div class="list" id="entrustCont" v-else-if="entrustShow">
-			<ul>
-				<li>
-					<span>合约名称</span>
-					<span>多空</span>
-					<span>手数</span>
-					<span>平仓均价</span>
-					<span>浮动盈利</span>
-				</li>
-				<template v-for='key in entrustListCont'>
-					<li>
-						<div :class="[list_cont,{current:key.showbar}]" @tap="listTap(entrustListCont)">
-							<span>{{key.name}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span>{{key.price}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.total}}</span>
-						</div>
-						<transition name="fade" mode="out-in">
-							<div class="list_tools " v-show="key.showbar">
-								<cbtn name="暂停"></cbtn>
-								<cbtn name="修改"></cbtn>
-								<cbtn name="删除"></cbtn>
-							</div>
-						</transition>
-					</li>
-				</template>
-			</ul>
-		</div>
-		<div class="list" id="dealCont" v-else>
-			<ul>
-				<li>
-					<span>合约名称</span>
-					<span>多空</span>
-					<span>手数</span>
-					<span>平仓均价</span>
-					<span>浮动盈利</span>
-				</li>
-				<template v-for='key in dealListCont'>
-					<li>
-						<div :class="[list_cont]">
-							<span>{{key.name}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span>{{key.price}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.total}}</span>
-						</div>
-					</li>
-				</template>
-			</ul>
-		</div>
+		<orderlist :val="positionContEvent" id="positionCont" v-if="positionShow"></orderlist>
+		<orderlist :val="orderContEvent" id="orderCont" v-else-if="orderShow"></orderlist>
+		<orderlist :val="entrustContEvent" id="entrustCont" v-else-if="entrustShow"></orderlist>
+		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>
 	</div>
 </template>
 
@@ -182,9 +77,10 @@
 	import tradebtn from '../components/tradeButton.vue'
 	import cbtn from '../components/conditionBtn.vue'
 	import operatenum from '../components/oprtateNum.vue'
+	import orderlist from '../components/orderList.vue'
 	export default{
 		name: 'tradeCenter',
-		components: {tradebtn, cbtn, operatenum},
+		components: {tradebtn, cbtn, operatenum, orderlist},
 		data(){
 			return {
 				isShow: true,
@@ -233,6 +129,106 @@
 						type_color: 'green',
 						total_color: 'red'
 					},
+					{
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'red',
+						total_color: 'green'
+					},
+					{
+						name: '美原油09',
+						type: '空',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'green',
+						total_color: 'red'
+					},
+					{
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'red',
+						total_color: 'green'
+					},
+					{
+						name: '美原油09',
+						type: '空',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'green',
+						total_color: 'red'
+					},
+					{
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'red',
+						total_color: 'green'
+					},
+					{
+						name: '美原油09',
+						type: '空',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'green',
+						total_color: 'red'
+					},
+					{
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'red',
+						total_color: 'green'
+					},
+					{
+						name: '美原油09',
+						type: '空',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'green',
+						total_color: 'red'
+					},
+					{
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'red',
+						total_color: 'green'
+					},
+					{
+						name: '123',
+						type: '空',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'green',
+						total_color: 'red'
+					},
 				],
 				orderListCont:[
 					{
@@ -273,16 +269,27 @@
 			}
 		},
 		computed:{
-			list_cont: function(){
-				return 'list_cont'
+			positionContEvent: function(){
+				return JSON.stringify(this.positionListCont);
+			},
+			orderContEvent: function(){
+				return JSON.stringify(this.orderListCont);
+			},
+			entrustContEvent: function(){
+				return JSON.stringify(this.entrustListCont);
+			},
+			dealContEvent: function(){
+				return JSON.stringify(this.dealListCont);
 			}
 		},
 		methods: {
 			showPrice: function(e){
 				if(this.isShow == true){
 					this.isShow = false;
+					$(e.currentTarget).find('span').text('限价');
 				}else{
 					this.isShow = true;
+					$(e.currentTarget).find('span').text('市价');
 				}
 			},
 			showCont: function(e){
@@ -306,18 +313,28 @@
 					this.entrustShow = false;
 				}
 			},
-			listTap: function(obj){
-				var index  = $(event.currentTarget).parents("li").index();
-				if(obj[index - 1].showbar == false){
-					obj[index - 1].showbar = true;
-				}else{
-					obj[index - 1].showbar = false;
-				}
-			}
 		},
 		mounted: function(){
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
-			$("#tradeCenter").css("height",window.screen.height + "px");
+//			$("#tradeCenter").css("height",window.screen.height - $("#detailTopbar").height() - $("#detailselectbar").height() - 10 + "px");
+			var h = $("#detailTopbar").height() + $("#detailselectbar").height() + $(".money_total").height() + 
+					$(".order_type").height() + $(".order_num").height() + $(".trade_btn").height() +
+					$(".tab_box").height() + $(".list ul:first-child").height();
+			var screenHeight = window.screen.height;
+			switch (screenHeight){
+				case 736:
+					$(".list_cont_box").css("height", screenHeight - h - 20 - 41 + 'px');
+					break;
+				case 667:
+					$(".list_cont_box").css("height", screenHeight - h - 20 - 40 + 'px');
+					break;
+				case 568:
+					$(".list_cont_box").css("height", screenHeight - h - 20 - 37 + 'px');
+					break;
+				default:
+					break;
+			}
+			
 		}
 	}
 </script>
@@ -330,12 +347,16 @@
 	    #tradeCenter{
 			width: 100%;
 			background: @black;
+			position: fixed;
+			top: 90px;
+			left: 0;
 		}
 		.border_bottom{
 			border-bottom: 1px solid @black;
 		}
 		.money_total{
 			height: 42px;
+			overflow: hidden;
 			padding: 0 15px;
 			background: @deepblue;
 			span, i{
@@ -465,12 +486,12 @@
 						float: left;
 						width: 85px;
 						height: 45px;
-						line-height: 45px;
 						text-align: left;
-						padding: 0 5px;
+						padding: 5px;
 						background: none;
 						border: none;
 						text-align: left;
+						font-size: @fs14;
 						color: @white;
 					}
 					&:last-child{
@@ -546,6 +567,9 @@
 				}
 			}
 		.list{
+			ul{
+				overflow: hidden;
+			}
 			li{
 				width: 100%;
 				background: @deepblue;
@@ -611,6 +635,9 @@
 		#tradeCenter{
 			width: 100%;
 			background: @black;
+			position: fixed;
+			top: 90px*@ip6;
+			left: 0;
 		}
 		.border_bottom{
 			border-bottom: 1px solid @black;
@@ -618,6 +645,7 @@
 		.money_total{
 			height: 42px*@ip6;
 			padding: 0 15px*@ip6;
+			overflow: hidden;
 			background: @deepblue;
 			span, i{
 				display: inline-block;
@@ -746,9 +774,8 @@
 						float: left;
 						width: 85px*@ip6;
 						height: 45px*@ip6;
-						line-height: 45px*@ip6;
 						text-align: left;
-						padding: 0 5px*@ip6;
+						padding: 5px*@ip6;
 						font-size: @fs14*@ip6;
 						background: none;
 						border: none;
@@ -828,6 +855,9 @@
 				}
 			}
 		.list{
+			ul{
+				overflow: hidden;
+			}
 			li{
 				width: 100%;
 				background: @deepblue;
@@ -893,6 +923,9 @@
 		#tradeCenter{
 			width: 100%;
 			background: @black;
+			position: fixed;
+			top: 90px*@ip5;
+			left: 0;
 		}
 		.border_bottom{
 			border-bottom: 1px solid @black;
@@ -900,6 +933,7 @@
 		.money_total{
 			height: 42px*@ip5;
 			padding: 0 15px*@ip5;
+			overflow: hidden;
 			background: @deepblue;
 			span, i{
 				display: inline-block;
@@ -1028,9 +1062,8 @@
 						float: left;
 						width: 80px*@ip5;
 						height: 45px*@ip5;
-						line-height: 45px*@ip5;
 						text-align: left;
-						padding: 0 5px*@ip5;
+						padding: 5px*@ip5;
 						font-size: @fs14*@ip5;
 						background: none;
 						border: none;
@@ -1110,6 +1143,9 @@
 				}
 			}
 		.list{
+			ul{
+				overflow: hidden;
+			}
 			li{
 				width: 100%;
 				background: @deepblue;

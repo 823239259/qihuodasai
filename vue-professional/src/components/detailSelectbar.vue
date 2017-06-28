@@ -28,9 +28,6 @@
 		name: 'detailselectbar',
 		data() {
 			return {
-				sshow: false,
-				fshow: true,
-				kshow: false,
 				olshow: false
 			}
 		},
@@ -55,42 +52,42 @@
 				//				console.log(e.target);
 				switch(tex) {
 					case '闪电图':
-						this.sshow = true;
-						this.fshow = false;
-						this.kshow = false;
+						this.$store.state.isshow.sshow = true;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = false;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = false;
 						this.olshow = false;
 						break;
 					case '分时':
-						this.sshow = false;
-						this.fshow = true;
-						this.kshow = false;
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = true;
+						this.$store.state.isshow.kshow = false;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = false;
 						this.olshow = false;
 						break;
 					case '盘口':
-						this.sshow = false;
-						this.fshow = false;
-						this.kshow = false;
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = false;
 						this.$store.state.isshow.pshow = true;
 						this.$store.state.isshow.bottomshow = false;
 						this.olshow = false;
 						break;
 					case '交易中心':
-						this.sshow = false;
-						this.fshow = false;
-						this.kshow = false;
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = false;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = true;
 						this.olshow = false;
 						break;
 					case 'K线':
 
-						this.sshow = false;
-						this.fshow = false;
-						this.kshow = true;
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = true;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = false;
 						if(this.olshow == false) {
@@ -100,9 +97,9 @@
 						}
 						break;
 					default:
-						this.sshow = false;
-						this.fshow = false;
-						this.kshow = true;
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = true;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = false;
 						if(this.olshow == false) {
@@ -129,6 +126,15 @@
 			},
 			pshow(){
 				return this.$store.state.isshow.pshow
+			},
+			sshow(){
+				return this.$store.state.isshow.sshow
+			},
+			fshow(){
+				return this.$store.state.isshow.fshow
+			},
+			kshow(){
+				return this.$store.state.isshow.kshow
 			}
 		},
 		mounted:function(){
@@ -143,6 +149,8 @@
 	#detailselectbar {
 		position: fixed;
 		top: 50px;
+		left: 0;
+		z-index: 99;
 	}
 	
 	#detailselectbar>ul>li.current {
@@ -204,6 +212,8 @@
 		#detailselectbar {
 			position: fixed;
 			top: 50px*@ip5;
+			left: 0;
+			z-index: 99;
 		}
 		#detailselectbar>ul>li.current {
 			color: #ffd400;
@@ -259,6 +269,8 @@
 		#detailselectbar {
 			position: fixed;
 			top: 50px*@ip6;
+			left: 0;
+			z-index: 99;
 		}
 		#detailselectbar>ul>li.current {
 			color: #ffd400;

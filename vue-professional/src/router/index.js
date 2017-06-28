@@ -13,6 +13,7 @@ import historyTrade from '../pages/market/historyTrade.vue'
 import moneyDetails from '../pages/market/moneyDetails.vue'
 import stopMoney from '../pages/market/stopMoney.vue'
 import orderdetail from '../pages/market/orderdetail.vue'
+import space from '../pages/space.vue'
 Vue.use(Router)
 
  
@@ -71,6 +72,10 @@ const router=new Router({
 			component: orderdetail
 		},
 		{
+			path:'/space',
+			component: space
+		},
+		{
 			path: '*',
 			component: home
 		}
@@ -78,7 +83,7 @@ const router=new Router({
 })
 router.afterEach(route => {
 	var txt=route.path.slice(-5);
-	if(!(txt==".html" || route.path=='/' || route.path=='/index' || route.path=='/tradeapply' || route.path=='/information' ||route.path=='/account')){
+	if(!(txt==".html" || route.path=='/' || route.path=='/home' ||  route.path=='/index' ||route.path=='/tradeapply' || route.path=='/information' ||route.path=='/account')){
 		store.state.isshow.navBarShow=false;
 	}else{
 		store.state.isshow.navBarShow=true;

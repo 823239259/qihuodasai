@@ -12,64 +12,8 @@
 				</div>
 			</template>
 		</div>
-		<div class="list" id="noCont" v-if="isShow">
-			<ul>
-				<li>
-					<span>合约名称</span>
-					<span>多空</span>
-					<span>手数</span>
-					<span>平仓均价</span>
-					<span>浮动盈利</span>
-				</li>
-				<template v-for='key in noListCont'>
-					<li>
-						<div :class="[list_cont,{current:key.showbar}]" @tap="listTap(noListCont)">
-							<span>{{key.name}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span>{{key.price}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.total}}</span>
-						</div>
-						<transition name="fade" mode="out-in">
-							<div class="list_tools " v-show="key.showbar">
-								<cbtn name="暂停"></cbtn>
-								<cbtn name="修改"></cbtn>
-								<cbtn name="删除"></cbtn>
-							</div>
-						</transition>
-					</li>
-				</template>
-			</ul>
-		</div>
-		<div class="list" id="yesCont" v-else>
-			<ul>
-				<li>
-					<span>合约名称</span>
-					<span>多空</span>
-					<span>手数</span>
-					<span>平仓均价</span>
-					<span>浮动盈利</span>
-				</li>
-				<template v-for='key in yesListCont'>
-					<li>
-						<div :class="[list_cont,{current:key.showbar}]" @tap="listTap(yesListCont)">
-							<span>{{key.name}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span>{{key.price}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.total}}</span>
-						</div>
-						<transition name="fade" mode="out-in">
-							<div class="list_tools " v-show="key.showbar">
-								<cbtn name="暂停"></cbtn>
-								<cbtn name="修改"></cbtn>
-								<cbtn name="删除"></cbtn>
-							</div>
-						</transition>
-					</li>
-				</template>
-			</ul>
-		</div>
+		<orderlist :val="noContEvent" id="noCont" v-if="isShow"></orderlist>
+		<orderlist :val="yesContEvent"  id="yesCont" v-else="isShow"></orderlist>
 	</div>
 </template>
 
@@ -78,9 +22,10 @@
 	import back from '../../components/back.vue'
 	import cbtn from '../../components/conditionBtn.vue'
 	import refresh from '../../components/Refresh.vue'
+	import orderlist from '../../components/orderList.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, refresh},
+		components:{topbar, back, cbtn, refresh, orderlist},
 		data(){
 			return {
 				isShow: true,
@@ -106,6 +51,16 @@
 						type_color: 'green',
 						total_color: 'red'
 					},
+					{
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						price: '123.98',
+						total: '4800.00',
+						showbar: false,
+						type_color: 'red',
+						total_color: 'green'
+					},
 				],
 				yesListCont:[
 					{
@@ -122,8 +77,11 @@
 			}
 		},
 		computed:{
-			list_cont: function(){
-				return 'list_cont'
+			noContEvent: function(){
+				return JSON.stringify(this.noListCont);
+			},
+			yesContEvent: function(){
+				return JSON.stringify(this.yesListCont);
 			}
 		},
 		methods: {
@@ -136,18 +94,11 @@
 					this.isShow = false;
 				}
 			},
-			listTap: function(obj){
-				var index  = $(event.currentTarget).parents("li").index();
-				if(obj[index - 1].showbar == false){
-					obj[index - 1].showbar = true;
-				}else{
-					obj[index - 1].showbar = false;
-				}
-			}
 		},
 		mounted: function(){
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
 			$("#conditions").css("height",window.screen.height + "px");
+			$(".list_cont_box").css("height", window.screen.height - 136 + 'px');
 		}
 	}
 </script>
@@ -209,65 +160,6 @@
 				}	
 			}
 		}
-		.list{
-			li{
-				width: 100%;
-				background: @deepblue;
-				border-top: 1px solid @black;
-				&:first-child{
-					padding: 0 3.62%;
-					background: #36394d;
-				}
-				.list_cont{
-					height: 44px;
-					padding: 0 3.62%;
-					&.current{
-						background: #2d3040;
-					}
-				}
-				span{
-					display: inline-block;
-					height: 44px;
-					line-height: 44px;
-					overflow: hidden;
-					color: @lightblue;
-					font-size: @fs14;
-					margin: 0 0.4%;
-					&:nth-child(1){
-						width: 22.61%;
-					}
-					&:nth-child(2){
-						width: 14.5%;
-					}
-					&:nth-child(3){
-						width: 14.5%;
-					}
-					&:nth-child(4){
-						width: 21.5%;
-					}
-					&:nth-child(5){
-						width: 16.5%;
-					}
-					&.red{
-						color: @red;
-					}
-					&.green{
-						color: @green;
-					}
-				}
-				.list_tools{
-					height: 44px;
-					overflow: hidden;
-					border-top: 1px solid @black;
-					background: #2d3040;
-					padding: 0 3.62%;
-					#conditionBtn{
-						float: right;
-						margin: 6px 0 0 5px;
-					}
-				}
-			}
-		}
 	}
 	
 	/*ip6*/
@@ -324,65 +216,6 @@
 				}	
 			}
 		}
-		.list{
-			li{
-				width: 100%;
-				background: @deepblue;
-				border-top: 1px solid @black;
-				&:first-child{
-					padding: 0 3.62%;
-					background: #36394d;
-				}
-				.list_cont{
-					height: 44px*@ip6;
-					padding: 0 3.62%;
-					&.current{
-						background: #2d3040;
-					}
-				}
-				span{
-					display: inline-block;
-					height: 44px;
-					line-height: 44px;
-					overflow: hidden;
-					color: @lightblue;
-					font-size: @fs14;
-					margin: 0 0.4%;
-					&:nth-child(1){
-						width: 21.11%;
-					}
-					&:nth-child(2){
-						width: 14.5%;
-					}
-					&:nth-child(3){
-						width: 14.5%;
-					}
-					&:nth-child(4){
-						width: 21.5%;
-					}
-					&:nth-child(5){
-						width: 18.5%;
-					}
-					&.red{
-						color: @red;
-					}
-					&.green{
-						color: @green;
-					}
-				}
-				.list_tools{
-					height: 44px*@ip6;
-					overflow: hidden;
-					border-top: 1px solid @black;
-					background: #2d3040;
-					padding: 0 3.62%;
-					#conditionBtn{
-						float: right;
-						margin: 6px*@ip6 0 0 5px*@ip6;
-					}
-				}
-			}
-		}
 	}
 	
 	/*ip5*/
@@ -437,65 +270,6 @@
 						border-bottom: 4px*@ip5 solid @yellow;
 					}
 				}	
-			}
-		}
-		.list{
-			li{
-				width: 100%;
-				background: @deepblue;
-				border-top: 1px solid @black;
-				&:first-child{
-					padding: 0 3.62%;
-					background: #36394d;
-				}
-				.list_cont{
-					height: 44px*@ip5;
-					padding: 0 3.62%;
-					&.current{
-						background: #2d3040;
-					}
-				}
-				span{
-					display: inline-block;
-					height: 44px;
-					line-height: 44px;
-					overflow: hidden;
-					color: @lightblue;
-					font-size: @fs14;
-					margin: 0 0.4%;
-					&:nth-child(1){
-						width: 21.11%;
-					}
-					&:nth-child(2){
-						width: 14%;
-					}
-					&:nth-child(3){
-						width: 14%;
-					}
-					&:nth-child(4){
-						width: 21%;
-					}
-					&:nth-child(5){
-						width: 19%;
-					}
-					&.red{
-						color: @red;
-					}
-					&.green{
-						color: @green;
-					}
-				}
-				.list_tools{
-					height: 44px*@ip5;
-					overflow: hidden;
-					border-top: 1px solid @black;
-					background: #2d3040;
-					padding: 0 3.62%;
-					#conditionBtn{
-						float: right;
-						margin: 6px*@ip5 0 0 5px*@ip5;
-					}
-				}
 			}
 		}
 	}

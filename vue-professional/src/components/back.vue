@@ -21,15 +21,23 @@
 @icon_width:12px;
 @icon_height:20px;
 .icon{
-	background-image: url('../assets/img/back.png') ;
+	background-image: url('../assets/img/back.png');
 	background-size:100% 100% ;
 }
 #back{
-	width: 40px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	padding: 15px;
 }
 /*ip5*/
 @media(max-width:370px) {
+	#back{
+		width: 50px*@ip5;
+		height: 50px*@ip5;
+		overflow: hidden;
+		padding: 15px*@ip5;
+	}
 	.icon{
 		width: @icon_width*@ip5;
 		height: @icon_height*@ip5;
@@ -37,6 +45,12 @@
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
+	#back{
+		width: 50px*@ip6;
+		height: 50px*@ip6;
+		overflow: hidden;
+		padding: 15px*@ip6;
+	}
     .icon{
 		width: @icon_width*@ip6;
 		height: @icon_height*@ip6;

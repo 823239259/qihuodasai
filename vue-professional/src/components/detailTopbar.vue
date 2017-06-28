@@ -51,18 +51,18 @@
 }
 #back{
 	position: absolute;
-	left: 16px;
-	top: 15px;
+	left: 0;
+	top: 0;
 }
 #refresh{
 	position: absolute;
-	top: 15px;
-	right: 68px;
+	top: 0;
+	right: 50px;
 }
 #menus{
 	position: absolute;
-	top: 15px;
-	right: 16px;
+	top: 0;
+	right: 0;
 	z-index: 1100;
 }
 #menus ol{
@@ -101,18 +101,18 @@ h6{
 }
 #back{
 	position: absolute;
-	left: 16px*@ip5;
-	top: 15px*@ip5;
+	left: 0;
+	top: 0;
 }
 #refresh{
 	position: absolute;
-	top: 15px*@ip5;
-	right: 68px*@ip5;
+	top: 0;
+	right: 50px*@ip5;
 }
 #menus{
 	position: absolute;
-	top: 15px*@ip5;
-	right: 16px*@ip5;
+	top: 0;
+	right: 0;
 }
 h6{
 	margin-top: 6px*@ip5;
@@ -144,18 +144,18 @@ h6{
 }
 #back{
 	position: absolute;
-	left: 16px*@ip6;
-	top: 15px*@ip6;
+	left: 0;
+	top: 0;
 }
 #refresh{
 	position: absolute;
-	top: 15px*@ip6;
-	right: 68px*@ip6;
+	top: 0;
+	right: 50px*@ip6;
 }
 #menus{
 	position: absolute;
-	top: 15px*@ip6;
-	right: 16px*@ip6;
+	top: 0;
+	right: 0;
 }
 h6{
 	margin-top: 6px*@ip6;

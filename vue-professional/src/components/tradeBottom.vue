@@ -33,7 +33,7 @@
 				<div class="fl">
 					<ul>
 						<li class="fontred">
-							15725
+							{{Data[Data.length-1][1]}}
 						</li>
 						<li class="fontred">
 							<span>55.0</span>
@@ -79,6 +79,12 @@
 			},
 			min() {
 				this.lotnum--;
+			}
+		},
+		computed:{
+			//映射假数据
+			Data(){
+				return this.$store.state.market.jsonData.Parameters.Data;
 			}
 		},
 		watch:{
@@ -413,4 +419,15 @@
 			margin-left: 51px*@ip6;
 		}
 	}
+	
+	
+	/*ip6p及以上*/
+@media (min-width:411px) {
+    #tradebottom{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	}
+}
 </style>

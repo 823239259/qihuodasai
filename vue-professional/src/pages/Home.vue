@@ -224,7 +224,9 @@
 		},
 		methods: {
 			refresh: function(e) {
-				window.location.reload();
+				this.$router.push({
+					path:'/space'
+				});
 			},
 			selectClass: function(e) {
 				$(e.target).addClass('current').siblings('li').removeClass('current');
