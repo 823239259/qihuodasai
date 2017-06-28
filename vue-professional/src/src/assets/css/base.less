@@ -1,0 +1,68 @@
+/**
+ * 功能：基本样式
+ * 作者：WXF
+ * 日期：
+ */
+/*****字体及字体大小*****/
+@yh: "\5FAE\8F6F\96C5\9ED1";    /*微软雅黑*/
+@st: "\5B8B\4F53"; /*宋体*/
+@ht: "\9ED1\4F53"; /*黑体*/
+@arial: Arial;
+@fs12: 12px;
+@fs14: 14px;
+@fs16: 16px;
+
+/*****颜色*****/
+@yellow: #ffd400;
+@blue: #a3aacc;
+@deepblue: #242633;
+@lightblue: #ccd4ff;
+@white: #fff;
+@red: #ff4c4c;
+@green: #3dcc85;
+@black: #1b1b26;
+
+body, html{
+    font-family: @yh;
+    background: @black; 
+    color: @white; 
+    font-size: @fs12;
+}
+h1, h2, h3, h4, h5, h6{ font-weight: normal;}
+ul, ol, li{ list-style: none;}
+img{ display: block; max-width: 100%; vertical-align: middle; outline: none; -webkit-appearance: none;}
+div, figure, figcaption, li, p, input, textarea{ box-sizing: border-box;}
+button, select, textarea {
+    font-size: @fs14;
+    font-family: @yh; 
+    vertical-align: middle;
+    outline: none;
+    -webkit-appearance: none;
+}
+input{
+    font-size: @fs14;
+    font-family: @yh;
+    vertical-align: middle;
+    outline: none;
+}
+ input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset; /*利用阴影来填充掉input自动填充色*/
+}
+em, i{ font-style: normal;}
+a{ 
+    color: @white; 
+    text-decoration: none; 
+}
+
+/*****排版*****/
+.clear{ clear: both;} /*清除浮动*/
+.fl{ float: left;} /*左浮动*/
+.fr{ float: right;} /*右浮动*/
+.oh{ overflow: hidden;} /*防止溢出*/
+.none{  display: none;} /*隐藏*/
+
+/*****外边距*****/
+.mt10{ margin-top: 10px;}
+.mb10{ margin-bottom: 10px;}
+.ml10{ margin-left: 10px;}
+.mr10{ margin-right: 10px;}
