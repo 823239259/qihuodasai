@@ -10,15 +10,9 @@
 
 			<div id="selectbar">
 				<ul>
-					<li @tap="selectClass" class="fl fontsm current">欧美指数</li>
+					<li @tap="selectClass" class="fl fontsm current">商品</li>
 					<li @tap="selectClass" class="fl fontsm">亚洲指数</li>
-					<li @tap="selectClass" class="fl fontsm">外汇</li>
-					<li @tap="selectClass" class="fl fontsm">贵金属</li>
-					<li @tap="selectClass" class="fl fontsm">商品</li>
-					<li @tap="selectClass" class="fl fontsm">国内</li>
-					<li @tap="selectClass" class="fl fontsm">全部</li>
-					<!--用于留白-->
-					<li class="fl fontsm">&nbsp;&nbsp;</li>
+					<li @tap="selectClass" class="fl fontsm">欧美指数</li>
 				</ul>
 			</div>
 			<div id="datalist">
@@ -45,127 +39,6 @@
 								<li class="fl fontred">+0.03%</li>
 							</ol>
 						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontred">257.00</li>
-								<li class="fl fontred">+0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontred">257.00</li>
-								<li class="fl fontred">+0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontgreen">257.00</li>
-								<li class="fl fontgreen">-0.03%</li>
-							</ol>
-						</li>
-						<li class="list cl" @tap='toDetail'>
-							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontred">7.00</li>
-								<li class="fl fontred">+0.03%</li>
-							</ol>
-						</li>
 					</template>
 				</ul>
 			</div>
@@ -183,7 +56,7 @@
 		//		store,
 		data(){
 			return {
-				time:5
+				time:3
 			}
 		},
 		components: {
@@ -243,11 +116,11 @@
 					this.time--;
 				}.bind(this),1000);
 			setTimeout(function(){
-				this.$store.state.isshow.isconnected=true
+				this.$store.state.isshow.isconnected=true  //store中取值，专用来控制是否连接成功的显示与否
 				clearInterval(timer);
-			}.bind(this),5000);
+			}.bind(this),3000);
+			
 			var sw = window.screen.width;
-			//			console.log(sw);
 			if(this.isconnected) {
 				if(sw <= 370) {
 					$('#home').css('padding-top', 50 * 0.7729 + 'px');
@@ -302,20 +175,20 @@
 	#selectbar {
 		width: @width;
 		overflow-x: scroll;
-		padding: 2%;
-		background-color: #36394d;
+		padding: 0 2%;
+		line-height: 45px;
+		background-color: #242633;
 		border-bottom: 1px solid #1b1b26;
 		height: 45px;
 		position: fixed;
 	}
-	
 	#selectbar ul {
 		box-sizing: content-box;
 		width: 150%;
 	}
 	
 	#selectbar li {
-		padding: 0.3% 0;
+		height: 45px;
 		margin: 0 2%;
 		color: #ccd5ff;
 		text-align: center;
@@ -416,6 +289,7 @@
 	@media(max-width:370px) {
 		#home {
 			background: #1b1b26;
+			height:736px*@ip5 - 20px;
 		}
 		#disconnect {
 			top: 50px*@ip5
@@ -452,6 +326,7 @@
 	@media (min-width:371px) and (max-width:410px) {
 		#home {
 			background: #1b1b26;
+			height:736px*@ip6 - 20px;
 		}
 		#disconnect {
 			top: 50px*@ip6
@@ -488,6 +363,7 @@
 	@media (min-width:411px) {
 		#home {
 			background: #1b1b26;
+			height:736px*@ip6p - 20px;
 		}
 		#disconnect {
 			top: 50px*@ip6p

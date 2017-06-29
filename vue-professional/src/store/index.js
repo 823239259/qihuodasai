@@ -17,6 +17,7 @@ var isshow = {
 //控制行情数据
 var market = {
 	state: {
+		//用于存放从后台抓取的历史合约数据
 		jsonData: {
 			"Method": "OnRspQryHistory",
 			"Parameters": {
@@ -132,17 +133,83 @@ var market = {
 				"HisQuoteType": 0
 			}
 		},
-		option1:{
-			
+		//用于存放从后台抓取的合约数据
+		jsonTow: {
+			"Method": "OnRtnQuote",
+			"Parameters": {
+				"AskPrice1": 44.92,
+				"AskPrice2": 44.93,
+				"AskPrice3": 44.94,
+				"AskPrice4": 44.95,
+				"AskPrice5": 44.96,
+				"AskQty1": 15,
+				"AskQty2": 37,
+				"AskQty3": 35,
+				"AskQty4": 33,
+				"AskQty5": 61,
+				"AveragePrice": 0,
+				"BidPrice1": 44.91,
+				"BidPrice2": 44.9,
+				"BidPrice3": 44.89,
+				"BidPrice4": 44.88,
+				"BidPrice5": 44.87,
+				"BidQty1": 28,
+				"BidQty2": 47,
+				"BidQty3": 38,
+				"BidQty4": 90,
+				"BidQty5": 33,
+				"ChangeRate": 0.402324541797049,
+				"ChangeValue": 0.1799999999999997,
+				"ClosingPrice": 0,
+				"CommodityNo": "CL",
+				"ContractNo": "1708",
+				"DateTimeStamp": "2017-06-29 11:40:36",
+				"ExchangeNo": "NYMEX",
+				"HighPrice": 45.03,
+				"LastPrice": 44.92,
+				"LastVolume": 1,
+				"LimitDownPrice": 0,
+				"LimitUpPrice": 0,
+				"LowPrice": 44.75,
+				"OpenPrice": 44.89,
+				"Position": 541143,
+				"PreClosingPrice": 0,
+				"PrePosition": 0,
+				"PreSettlePrice": 44.74,
+				"SettlePrice": 0,
+				"TotalAskQty": 0,
+				"TotalBidQty": 0,
+				"TotalTurnover": 0,
+				"TotalVolume": 26287
+			}
 		},
-		option2:{
-			
+		//绘制分时的设置
+		option1: {
+
 		},
-		option3:{
-			
+		//绘制分时的设置
+		option2: {
+
 		},
-		option4:{
-			
+		//绘制K线的设置
+		option3: {
+
+		},
+		//绘制K线的设置
+		option4: {
+
+		},
+		//绘制闪电图的设置
+		option5: {
+
+		},
+		//K线用到的数据
+		rawData: [],
+		//K线用到的数据
+		chartDataC: null,
+		lightChartTime: {
+			"time": [],
+			"price": []
 		}
 	}
 }
@@ -153,43 +220,387 @@ export default new Vuex.Store({
 		market
 	},
 	mutations: {
-		drawfens:function(state,x){
+		drawlight: function(state, e) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
-//			console.log(echarts);
+			// 引入柱状图
+			require('echarts/lib/chart/bar');
+			// 基于准备好的dom，初始化echarts图表
+			var lightChart = echarts.init(document.getElementById(e));
+			lightChart.setOption(state.market.option5);
+		},
+		drawlightsec: function(state, e) {
+			// 引入 ECharts 主模块
+			var echarts = require('echarts/lib/echarts');
+			// 引入柱状图
+			require('echarts/lib/chart/bar');
+			// 基于准备好的dom，初始化echarts图表
+			var lightChart = echarts.getInstanceByDom(document.getElementById(e));
+			lightChart.setOption(state.market.option5);
+		},
+		setlightDate: function(state) {
+			var TimeLength = state.market.lightChartTime.time.length;
+			state.market.lightChartTime.price.push(state.market.jsonTow.Parameters.LastPrice);
+			state.market.lightChartTime.time.push((state.market.jsonTow.Parameters.DateTimeStamp).split(" ")[1]);
+			state.market.lightChartTime.time = state.market.lightChartTime.time.slice(-50);
+			state.market.lightChartTime.price = state.market.lightChartTime.price.slice(-50);
+			state.market.option5 = {
+				backgroundColor: "#1f1f1f",
+				"tooltip": {
+					"show": false,
+				},
+				animation: false,
+				grid: {
+					x: 50,
+					y: 40,
+					x2: 46,
+					y2: 20
+				},
+				xAxis: [{
+					type: 'category',
+					show: true,
+					data: state.market.lightChartTime.time,
+					axisLine: {
+						lineStyle: {
+							color: '#8392A5'
+						}
+					},
+					boundaryGap: true
+				}],
+				yAxis: [{
+					type: 'value',
+					scale: true,
+					position: "left",
+					axisTick: {
+						show: false,
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#8392A5'
+						}
+					},
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						inside: false,
+						margin: 4,
+					},
+					splitLine: {
+						show: true,
+						lineStyle: {
+							color: "#8392A5"
+						}
+					}
+				}],
+				"series": [{
+					"name": "总数",
+					"type": "line",
+					"stack": "总量",
+					symbolSize: 10,
+					symbol: 'circle',
+					"itemStyle": {
+						"normal": {
+							"color": "#8392A5",
+							"barBorderRadius": 0,
+							"label": {
+								"show": true,
+								"position": "top",
+								formatter: function(p) {
+									return p.value > 0 ? (p.value) : '';
+								}
+							}
+						}
+					},
+					"data": state.market.lightChartTime.price
+				}]
+			}
+		},
+		processingData: function(state) {
+			console.time('e');
+			// 引入 ECharts 主模块
+			var echarts = require('echarts/lib/echarts');
+			//			console.log(echarts);
 			// 引入柱状图
 			require('echarts/lib/chart/bar');
 			require('echarts/lib/chart/line');
 			require('echarts/lib/component/tooltip');
-			
+			require('echarts/lib/chart/candlestick');
+			var dosizeL = 2;
+			var parameters = state.market.jsonData.Parameters.Data;
+			var Len = parameters.length;
+			//			if(state.market.jsonData == null) return;
+			var lent = state.market.rawData.length;
+
+			if(state.market.jsonData.Parameters.HisQuoteType == 1440) {
+				for(var i = 0; i < Len; i++) {
+					var timeStr = parameters[i][0].split(" ")[0];
+					var openPrice = (parameters[i][2]).toFixed(dosizeL);
+					var closePrice = (parameters[i][1]).toFixed(dosizeL);
+					var sgData = [timeStr, openPrice, closePrice, (parameters[i][3]).toFixed(dosizeL), (parameters[i][4]).toFixed(dosizeL), parameters[i][2]];
+					state.market.rawData[lent + i] = sgData;
+
+				};
+			} else {
+				for(var i = 0; i < Len; i++) {
+					var time2 = parameters[i][0].split(" ");
+					var str1 = time2[1].split(":");
+					var str2 = str1[0] + ":" + str1[1]
+					var openPrice = (parameters[i][2]).toFixed(dosizeL);
+					var closePrice = (parameters[i][1]).toFixed(dosizeL);
+					var sgData = [str2, openPrice, closePrice, (parameters[i][3]).toFixed(dosizeL), (parameters[i][4]).toFixed(dosizeL), parameters[i][0]];
+					state.market.rawData[lent + i] = sgData;
+				};
+				//				console.log(state.market.rawData);
+			}
+
+			var categoryData = [];
+			var values = [];
+			var time = []
+			for(var i = 0; i < state.market.rawData.slice(-40).length; i++) {
+				categoryData.push(state.market.rawData.slice(-40)[i][0]);
+				//				console.log(state.market.rawData.slice(-40)[0][0]);
+				values.push([state.market.rawData.slice(-40)[i][1], state.market.rawData.slice(-40)[i][2], state.market.rawData.slice(-40)[i][3], state.market.rawData.slice(-40)[i][4]]);
+				time.push(state.market.rawData.slice(-40)[i][5])
+			}
+
+			state.market.chartDataC = {
+				categoryData: categoryData,
+				values: values,
+				time: time
+			};
+
+			/*MA5 10 20 30*/
+			function calculateMA(dayCount) {
+				var result = [];
+				for(var i = 0, len = state.market.chartDataC.values.length; i < len; i++) {
+					if(i < dayCount) {
+						result.push('-');
+						continue;
+					}
+					var sum = 0;
+					for(var j = 0; j < dayCount; j++) {
+						sum += Number(state.market.chartDataC.values[i - j][1]);
+					}
+					result.push(Number(sum / dayCount).toFixed(2));
+				}
+				return result;
+			}
+
+			state.market.option3 = {
+				backgroundColor: 'transparent',
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'line',
+						animation: false,
+						lineStyle: {
+							color: '#ffffff',
+							width: 1,
+							opacity: 1
+						}
+					},
+					formatter: function(params) {
+						var time = params[0].name;
+						if(time == null || time == "") {
+							return
+						}
+						var kd = params[0].data;
+						var ma5 = params[1].data;
+						var ma10 = params[2].data;
+						var ma20 = params[3].data;
+						var ma30 = params[4].data;
+						var rate = (kd[1] - kd[0]) / kd[0] * 100;
+						rate = rate > 0 ? ('+' + rate.toFixed(2)) : rate.toFixed(2);
+						var res = "时间:" + params[0].name + '  涨跌 : ' + rate;
+						res += '<br/>  开盘 : ' + kd[0] + '  最高 : ' + kd[3];
+						res += '<br/>  收盘 : ' + kd[1] + ' 最低 : ' + kd[2];
+						res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
+						res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
+						return res;
+					}
+				},
+				grid: {
+					x: 43,
+					y: 20,
+					x2: 30,
+					y2: 5
+				},
+				xAxis: {
+					type: 'category',
+					data: state.market.chartDataC.categoryData,
+					show: false,
+					axisLine: {
+						lineStyle: {
+							color: '#8392A5'
+						}
+					}
+				},
+				yAxis: {
+					scale: true,
+					axisLine: {
+						lineStyle: {
+							color: '#8392A5'
+						}
+					},
+					splitLine: {
+						show: false
+					},
+					axisTick: {
+						show: false,
+					},
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						inside: false,
+						margin: 4
+					},
+					splitLine: {
+						show: true,
+						lineStyle: {
+							color: "#8392A5"
+						}
+					}
+				},
+				animation: false,
+				series: [{
+						type: 'candlestick',
+						name: '',
+						data: state.market.chartDataC.values,
+						markLine: {
+							symbol: ['none', 'none'],
+							clickable: false,
+							lineStyle: {
+								normal: {
+									width: 1,
+									color: "#ffffff"
+								}
+							},
+							data: [{
+									name: '标线2起点',
+									value: 0,
+									xAxis: "1",
+									yAxis: 0
+								}, // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+								{
+									name: '标线2终点',
+									xAxis: "2",
+									yAxis: 0
+								}
+							]
+						},
+						itemStyle: {
+							normal: {
+								color: '#FD1050',
+								color0: '#0CF49B',
+								borderColor: '#FD1050',
+								borderColor0: '#0CF49B'
+							}
+						}
+					},
+					{
+						name: 'MA5',
+						type: 'line',
+						data: calculateMA(5),
+						smooth: true,
+						showSymbol: false,
+						lineStyle: {
+							normal: {
+								color: '#3689B3',
+								width: 1,
+								//	                    	opacity: 0.5
+							}
+						}
+					},
+					{
+						name: 'MA10',
+						type: 'line',
+						showSymbol: false,
+						data: calculateMA(10),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								color: '#B236B3',
+								width: 1,
+								//	                    	opacity: 0.5
+							}
+						}
+					},
+					{
+						name: 'MA20',
+						type: 'line',
+						showSymbol: false,
+						data: calculateMA(20),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								color: '#B37436',
+								width: 1,
+								//	                    	opacity: 0.5
+							}
+						}
+					},
+					{
+						name: 'MA30',
+						type: 'line',
+						showSymbol: false,
+						data: calculateMA(30),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								color: '#B2B336',
+								width: 1,
+								//	                    	opacity: 0.5
+							}
+						}
+					}
+
+				]
+			}
+			console.timeEnd('e');
+		},
+
+	},
+	actions: {
+		drawfens: function(context, x) {
+			// 引入 ECharts 主模块
+			var echarts = require('echarts/lib/echarts');
+			//			console.log(echarts);
+			// 引入柱状图
+			require('echarts/lib/chart/bar');
+			require('echarts/lib/chart/line');
+			require('echarts/lib/component/tooltip');
+
 			var volume = echarts.init(document.getElementById(x.id1));
 			volume.group = 'group1';
 			// 基于准备好的dom，初始化echarts实例
 			var fens = echarts.init(document.getElementById(x.id2));
-//			console.log(x.op1.option1);
+			//			console.log(x.op1.option1);
 			fens.group = 'group1';
 			echarts.connect("group1");
-			fens.setOption(state.market.option1);
-			volume.setOption(state.market.option2);
+			fens.setOption(context.state.market.option1);
+			volume.setOption(context.state.market.option2);
 		},
-		drawfenssecond:function(state,x){
+		drawfenssecond: function(context, x) {
 			var echarts = require('echarts/lib/echarts');
 			var volume = echarts.getInstanceByDom(document.getElementById(x.id1));
 			var fens = echarts.getInstanceByDom(document.getElementById(x.id2));
-			fens.setOption(state.market.option1);
-			volume.setOption(state.market.option2);
+			console.log(fens);
+			fens.setOption(context.state.market.option1);
+			volume.setOption(context.state.market.option2);
 		},
-		setfensoption: function(state) {
+		setfensoption: function(context) {
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
 				price = [],
 				time = [];
-			state.market.jsonData.Parameters.Data.forEach(function(e) {
+			context.state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
 			})
-			state.market.option1={
+			context.state.market.option1 = {
 				grid: {
 					x: 50,
 					y: 30,
@@ -269,7 +680,7 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
-			state.market.option2={
+			context.state.market.option2 = {
 				backgroundColor: 'transparent',
 				tooltip: {
 					show: true,
@@ -388,20 +799,22 @@ export default new Vuex.Store({
 				}
 			};
 		},
-		setklineoption:function(state){
+
+		setklineoption: function(context) {
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
 				price = [],
 				time = [];
-			state.market.jsonData.Parameters.Data.forEach(function(e) {
+			context.state.market.jsonData.Parameters.Data.slice(-40).forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-			})
+			});
+
 			//成交量设置
-			state.market.option4={
+			context.state.market.option4 = {
 				grid: {
-					x: 50,
+					x: 43,
 					y: 30,
 					x2: 30,
 					y2: 20
@@ -480,23 +893,41 @@ export default new Vuex.Store({
 				}]
 			};
 		},
-		drawkline:function(state,x){
+		drawkline: function(context, x) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
-//			console.log(echarts);
+			//			console.log(echarts);
 			// 引入柱状图
 			require('echarts/lib/chart/bar');
 			require('echarts/lib/chart/line');
 			require('echarts/lib/component/tooltip');
-			
+			require('echarts/lib/chart/candlestick');
+			var kline = echarts.init(document.getElementById(x.id1));
 			var volume = echarts.init(document.getElementById(x.id2));
 			volume.group = 'group1';
+			kline.group = 'group1';
 			// 基于准备好的dom，初始化echarts实例
-//			var kline = echarts.init(document.getElementById(x.id1));
-//			fens.group = 'group1';
-//			echarts.connect("group1");
-//			kline.setOption(state.market.option1);
-			volume.setOption(state.market.option4);
+
+			echarts.connect("group1");
+
+			kline.setOption(context.state.market.option3);
+			volume.setOption(context.state.market.option4);
+		},
+		drawklinesec: function(context, x) {
+			// 引入 ECharts 主模块
+			var echarts = require('echarts/lib/echarts');
+			//			console.log(echarts);
+			// 引入柱状图
+			require('echarts/lib/chart/bar');
+			require('echarts/lib/chart/line');
+			require('echarts/lib/component/tooltip');
+			require('echarts/lib/chart/candlestick');
+			var kline = echarts.getInstanceByDom(document.getElementById(x.id1));
+			var volume = echarts.getInstanceByDom(document.getElementById(x.id2));
+
+			kline.setOption(context.state.market.option3);
+
+			volume.setOption(context.state.market.option4);
 		}
 	}
 })

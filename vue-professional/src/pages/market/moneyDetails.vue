@@ -120,7 +120,7 @@
 		name:'moneyDetails',
 		components:{topbar, back},
 		mounted: function(){
-			$("#conditions").css("height",window.screen.height + "px");
+			$("#moneyDetails").css("height",window.screen.height + "px");
 		}
 	}
 </script>
@@ -133,20 +133,22 @@
 	    #moneyDetails{
 			width: 100%;
 			padding-top: 50px;
-			padding-bottom: 50px;
 			background: @black;
 		}
 		.head{
-			position: relative;
 			#back{
-				position: absolute;
+				position: fixed;
+				top: 0;
+				left: 0;
 				z-index: 1000;
-				top: -35px;
-				left: 15px;
 			}
 		}
 		.list{
+			width: 100%;
 			overflow: hidden;
+			position: fixed;
+			top: 50px;
+			left: 0;
 			.list_left{
 				width: 88px;
 				li{
@@ -201,20 +203,22 @@
 	    #moneyDetails{
 			width: 100%;
 			padding-top: 50px*@ip6;
-			padding-bottom: 50px*@ip6;
 			background: @black;
 		}
 		.head{
-			position: relative;
 			#back{
-				position: absolute;
+				position: fixed;
+				top: 0;
+				left: 0;
 				z-index: 1000;
-				top: -35px*@ip6;
-				left: 15px*@ip6;
 			}
 		}
 		.list{
+			width: 100%;
 			overflow: hidden;
+			position: fixed;
+			top: 50px*@ip6;
+			left: 0;
 			.list_left{
 				width: 88px*@ip6;
 				li{
@@ -269,20 +273,22 @@
 		#moneyDetails{
 			width: 100%;
 			padding-top: 50px*@ip5;
-			padding-bottom: 50px*@ip5;
 			background: @black;
 		}
 		.head{
-			position: relative;
 			#back{
-				position: absolute;
+				position: fixed;
+				top: 0;
+				left: 0;
 				z-index: 1000;
-				top: -35px*@ip5;
-				left: 15px*@ip5;
 			}
 		}
 		.list{
+			width: 100%;
 			overflow: hidden;
+			position: fixed;
+			top: 50px*@ip6;
+			left: 0;
 			.list_left{
 				width: 88px*@ip5;
 				li{

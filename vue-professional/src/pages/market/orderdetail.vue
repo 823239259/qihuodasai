@@ -7,6 +7,7 @@
 		<tradecenter v-if='jshow'></tradecenter>
 		<chartfens v-if='fshow'></chartfens>
 		<kline v-if='kshow'></kline>
+		<lightchart v-if='sshow'></lightchart>
 	</div>
 </template>
 
@@ -18,6 +19,7 @@
 	import dish from '../../components/dish.vue'
 	import chartfens from '../../components/chartfens.vue'
 	import kline from '../../components/kline.vue'
+	import lightchart from '../../components/lightchart.vue'
 	export default {
 		name: 'orderdetail',
 		components: {
@@ -27,9 +29,13 @@
 			tradecenter,
 			dish,
 			chartfens,
-			kline
+			kline,
+			lightchart
 		},
 		computed:{
+			sshow(){
+				return this.$store.state.isshow.sshow;
+			},
 			kshow(){
 				return this.$store.state.isshow.kshow;
 			},
@@ -55,12 +61,15 @@
 			}
 		},
 		mounted:function(){
-			//下面的循环用于假数据更新
-			setInterval(function() {
-				var ran = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;
-				this.$store.state.market.jsonData.Parameters.Data.pop();
-				this.$store.state.market.jsonData.Parameters.Data.push(["2017-06-26 11:16:00", ran, 43.46, 43.46, 43.46, 548303, 2]);
-			}.bind(this), 100);
+			var vol=5;
+////			下面的循环用于假数据更新
+//			setInterval(function() {
+//				var ran = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;
+//				var ran2 = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;
+//				vol+=5;
+//				this.$store.state.market.jsonData.Parameters.Data.pop();
+//				this.$store.state.market.jsonData.Parameters.Data.push(["2017-06-26 11:16:00", ran, ran2, 43.46, 43.46, 548303,vol ]);
+//			}.bind(this), 100);
 		}
 	}
 </script>

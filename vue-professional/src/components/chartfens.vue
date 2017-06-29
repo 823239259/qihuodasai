@@ -10,11 +10,11 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'chartfens',
 		methods: {
-			...mapMutations([
+			...mapActions([
 				'drawfens',
 				'setfensoption',
 				'drawfenssecond'
@@ -60,11 +60,11 @@
 		}
 		#fens {
 			width: 100%;
-			height: 390px/4*3*@ip5;
+			height: 390px/5*3*@ip5;
 		}
 		#volume {
 			width: 100%;
-			height: 390px/4*@ip5;
+			height: 390px/5*2*@ip5;
 		}
 	}
 	/*ip6*/
@@ -76,11 +76,11 @@
 		}
 		#fens {
 			width: 100%;
-			height: 390px/4*3*@ip6;
+			height: 390px/5*3*@ip6;
 		}
 		#volume {
 			width: 100%;
-			height: 390px/4*@ip6;
+			height: 390px/5*2*@ip6;
 		}
 	}
 	/*ip6p及以上*/
@@ -92,11 +92,11 @@
 		}
 		#fens {
 			width: 100%;
-			height: 390px/4*3*@ip6p;
+			height: 390px/5*3*@ip6p;
 		}
 		#volume {
 			width: 100%;
-			height: 390px/4*@ip6p;
+			height: 390px/5*2*@ip6p;
 		}
 	}
 </style>

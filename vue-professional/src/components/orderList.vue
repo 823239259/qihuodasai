@@ -56,7 +56,6 @@
 		methods: {
 			listTap: function(obj){
 				var index  = $(event.currentTarget).parents("li").index();
-				console.log(index);
 				if(obj[index].showbar == false){
 					for(var i in obj){
 						obj[i].showbar = false;
@@ -168,7 +167,7 @@
 					line-height: 44px*@ip6;
 					overflow: hidden;
 					color: @lightblue;
-					font-size: @fs14;
+					font-size: @fs14*@ip6;
 					margin: 0 0.4%;
 					&:nth-child(1){
 						width: 21.11%;
@@ -235,7 +234,7 @@
 					line-height: 44px*@ip5;
 					overflow: hidden;
 					color: @lightblue;
-					font-size: @fs14;
+					font-size: @fs14*@ip5;
 					margin: 0 0.4%;
 					&:nth-child(1){
 						width: 21.11%;

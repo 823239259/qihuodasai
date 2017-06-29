@@ -29,7 +29,6 @@
 			height: 50px*@ip5;
 			background-color: #242633;
 			text-align: center;
-			box-shadow: 1px 1px 1px #000;
 			position: fixed;
 			top: 0;
 			z-index: 999;
@@ -50,7 +49,6 @@
 			height: 50px*@ip6;
 			background-color: #242633;
 			text-align: center;
-			box-shadow: 1px 1px 1px #000;
 			position: fixed;
 			top: 0;
 			z-index: 999;
@@ -71,7 +69,6 @@
 			height: 50px;
 			background-color: #242633;
 			text-align: center;
-			box-shadow: 1px 1px 1px #000;
 			position: fixed;
 			top: 0;
 			z-index: 999;

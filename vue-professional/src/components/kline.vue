@@ -1,7 +1,7 @@
 <template>
 	<div id="klines">
-		<div id="kline" style="margin: 0 auto;">
-
+		<div id="kliness" style="margin: 0 auto;">
+			
 		</div>
 		<div id="volume" style="margin: 0 auto;">
 
@@ -10,19 +10,23 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'klines',
 		methods: {
-			...mapMutations([
+			...mapActions([
 				'setklineoption',
-				'drawkline'
+				'drawkline',
+				'drawklinesec'
 			]),
+			...mapMutations([
+				'processingData'
+			])
 		},
 		data() {
 			return {
 				obj: {
-					id1: 'kline',
+					id1: 'kliness',
 					id2: 'volume'
 				}
 			}
@@ -34,15 +38,15 @@
 		},
 		watch: {
 			Data: function(n, o) {
-//				this.setfensoption();
-				//用下面注释的方法也可调用store中的函数
-				//				this.$store.commit('setfensoption');   
-				//				this.$store.commit('drawfenssecond',this.obj);
-//				this.drawfenssecond(this.obj);
+				this.setklineoption(); //成交量设置
+				this.processingData();
+				this.drawklinesec(this.obj);
+//				this.drawkline(this.obj);
 			}
 		},
 		mounted: function() {
 			this.setklineoption();
+			this.processingData();
 			this.drawkline(this.obj);
 		}
 	}
@@ -57,13 +61,13 @@
 			width: 100%;
 			height: 390px*@ip5;
 		}
-		#kline {
+		#kliness {
 			width: 100%;
-			height: 390px/4*3*@ip5;
+			height: 390px/5*3*@ip5;
 		}
 		#volume {
 			width: 100%;
-			height: 390px/4*@ip5;
+			height: 390px/5*2*@ip5;
 		}
 	}
 	/*ip6*/
@@ -73,13 +77,13 @@
 			width: 100%;
 			height: 390px*@ip6;
 		}
-		#kline {
+		#kliness {
 			width: 100%;
-			height: 390px/4*3*@ip6;
+			height: 390px/5*3*@ip6;
 		}
 		#volume {
 			width: 100%;
-			height: 390px/4*@ip6;
+			height: 390px/5*2*@ip6;
 		}
 	}
 	/*ip6p及以上*/
@@ -87,15 +91,15 @@
 	@media (min-width:411px) {
 		#klines {
 			width: 100%;
-			height: 390px;
+			height: 390px*@ip6p;
 		}
-		#kline {
+		#kliness {
 			width: 100%;
-			height: 390px/4*3*@ip6p;
+			height: 390px/5*3*@ip6p;
 		}
 		#volume {
 			width: 100%;
-			height: 390px/4*@ip6p;
+			height: 390px/5*2*@ip6p;
 		}
 	}
 </style>

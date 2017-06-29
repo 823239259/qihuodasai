@@ -5,16 +5,18 @@
 			<back></back>
 			<i class="add"></i>
 		</div>
-		<div class="tab_box" id="tabBox">
-			<template v-for="key in tabList">
-				<div class="tab_box_col" @tap="showCont">
-					<span>{{key.nav}}</span>
-				</div>
-			</template>
+		<div class="page_cont">
+			<div class="tab_box" id="tabBox">
+				<template v-for="key in tabList">
+					<div class="tab_box_col" @tap="showCont">
+						<span>{{key.nav}}</span>
+					</div>
+				</template>
+			</div>
+			<orderlist :val="noContEvent" id="noCont" v-if="isShow"></orderlist>
+			<orderlist :val="yesContEvent"  id="yesCont" v-else="isShow"></orderlist>
 		</div>
-		<!--<div class="list" id="noCont" v-if="isShow">-->
-		<orderlist :val="noContEvent" id="noCont" v-if="isShow"></orderlist>
-		<orderlist :val="yesContEvent"  id="yesCont" v-else="isShow"></orderlist>
+		
 	</div>
 </template>
 
@@ -182,7 +184,7 @@
 						total_color: 'green'
 					},
 					{
-						name: '美原油09',
+						name: '123',
 						type: '空',
 						num: 12,
 						price: '123.98',
@@ -228,9 +230,10 @@
 		},
 		mounted: function(){
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
-			$("#conditions").css("height",window.screen.height + "px");
+			var screenHeight = window.screen.height;
+			$("#conditions").css("height", screenHeight + "px");
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
-			$(".list_cont_box").css("height", window.screen.height - h + 'px');
+			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 		}
 	}
 </script>
@@ -242,54 +245,53 @@
 	@media (min-width:411px) {
 	    #conditions{
 			width: 100%;
+			overflow: hidden;
 			padding-top: 50px;
-			padding-bottom: 50px;
 			background: @black;
 		}
 		.head{
-			position: relative;
 			#back{
-				position: absolute;
+				position: fixed;
 				z-index: 1000;
-				top: -35px;
-				left: 15px;
+				top: 0;
+				left: 0;
 			}
 			.add{
 				display: block;
-				width: 22px;
-				height: 22px;
-				background: url(../../assets/img/add.png) no-repeat center center;
-				background-size: 100% 100%;
-				position: absolute;
+				width: 50px;
+				height: 50px;
+				background: url(../../assets/img/add.png) no-repeat 14px 14px;
+				background-size: 22px 22px;
+				position: fixed;
 				z-index: 1000;
-				top: -37px;
-				right: 15px;
-			}
-			#refresh{
-				position: absolute;
-				top: -35px;
-				right: 15px;
-				z-index: 1000;
+				top: 0;
+				right: 0;
 			}
 		}
-		.tab_box{
-			height: 44px;
-			background: @deepblue;
-			.tab_box_col{
-				float: left;
-				width: 50%;
-				text-align: center;
-				span{
-					display: inline-block;
-					height: 44px;
-					line-height: 44px;
-					color: @lightblue;
-					font-size: @fs14;
-					&.current{
-						color: @yellow;
-						border-bottom: 4px solid @yellow;
-					}
-				}	
+		.page_cont{
+			width: 100%;
+			position: fixed;
+			top: 50px;
+			left: 0;
+			.tab_box{
+				height: 44px;
+				background: @deepblue;
+				.tab_box_col{
+					float: left;
+					width: 50%;
+					text-align: center;
+					span{
+						display: inline-block;
+						height: 44px;
+						line-height: 44px;
+						color: @lightblue;
+						font-size: @fs14;
+						&.current{
+							color: @yellow;
+							border-bottom: 4px solid @yellow;
+						}
+					}	
+				}
 			}
 		}
 	}
@@ -298,54 +300,54 @@
 	@media (min-width:371px) and (max-width:410px) {
 	    #conditions{
 			width: 100%;
+			overflow: hidden;
 			padding-top: 50px*@ip6;
-			padding-bottom: 50px*@ip6;
 			background: @black;
 		}
 		.head{
 			position: relative;
 			#back{
-				position: absolute;
+				position: fixed;
 				z-index: 1000;
-				top: -35px*@ip6;
-				left: 15px*@ip6;
+				top: 0;
+				left: 0;
 			}
 			.add{
 				display: block;
-				width: 22px*@ip6;
-				height: 22px*@ip6;
-				background: url(../../assets/img/add.png) no-repeat center center;
-				background-size: 100% 100%;
-				position: absolute;
+				width: 50px*@ip6;
+				height: 50px*@ip6;
+				background: url(../../assets/img/add.png) no-repeat 14px*@ip6 14px*@ip6;
+				background-size: 22px*@ip6 22px*@ip6;
+				position: fixed;
 				z-index: 1000;
-				top: -37px*@ip6;
-				right: 15px*@ip6;
-			}
-			#refresh{
-				position: absolute;
-				top: -35px*@ip6;
-				right: 15px*@ip6;
-				z-index: 1000;
+				top: 0;
+				right: 0;
 			}
 		}
-		.tab_box{
-			height: 44px*@ip6;
-			background: @deepblue;
-			.tab_box_col{
-				float: left;
-				width: 50%;
-				text-align: center;
-				span{
-					display: inline-block;
-					height: 44px*@ip6;
-					line-height: 44px*@ip6;
-					color: @lightblue;
-					font-size: @fs14*@ip6;
-					&.current{
-						color: @yellow;
-						border-bottom: 4px*@ip6 solid @yellow;
-					}
-				}	
+		.page_cont{
+			width: 100%;
+			position: fixed;
+			top: 50px*@ip6;
+			left: 0;
+			.tab_box{
+				height: 44px*@ip6;
+				background: @deepblue;
+				.tab_box_col{
+					float: left;
+					width: 50%;
+					text-align: center;
+					span{
+						display: inline-block;
+						height: 44px*@ip6;
+						line-height: 44px*@ip6;
+						color: @lightblue;
+						font-size: @fs14*@ip6;
+						&.current{
+							color: @yellow;
+							border-bottom: 4px*@ip6 solid @yellow;
+						}
+					}	
+				}
 			}
 		}
 	}
@@ -354,54 +356,54 @@
 	@media(max-width:370px) {
 		#conditions{
 			width: 100%;
+			overflow: hidden;
 			padding-top: 50px*@ip5;
-			padding-bottom: 50px*@ip5;
 			background: @black;
 		}
 		.head{
 			position: relative;
 			#back{
-				position: absolute;
+				position: fixed;
 				z-index: 1000;
-				top: -35px*@ip5;
-				left: 15px*@ip5;
+				top: 0;
+				left: 0;
 			}
 			.add{
 				display: block;
-				width: 22px*@ip5;
-				height: 22px*@ip5;
-				background: url(../../assets/img/add.png) no-repeat center center;
-				background-size: 100% 100%;
-				position: absolute;
+				width: 50px*@ip5;
+				height: 50px*@ip5;
+				background: url(../../assets/img/add.png) no-repeat 14px*@ip5 14px*@ip5;
+				background-size: 22px*@ip5 22px*@ip5;
+				position: fixed;
 				z-index: 1000;
-				top: -37px*@ip5;
-				right: 15px*@ip5;
-			}
-			#refresh{
-				position: absolute;
-				top: -35px*@ip5;
-				right: 15px*@ip5;
-				z-index: 1000;
+				top: 0;
+				right: 0;
 			}
 		}
-		.tab_box{
-			height: 44px*@ip5;
-			background: @deepblue;
-			.tab_box_col{
-				float: left;
-				width: 50%;
-				text-align: center;
-				span{
-					display: inline-block;
-					height: 44px*@ip5;
-					line-height: 44px*@ip5;
-					color: @lightblue;
-					font-size: @fs14*@ip5;
-					&.current{
-						color: @yellow;
-						border-bottom: 4px*@ip5 solid @yellow;
-					}
-				}	
+		.page_cont{
+			width: 100%;
+			position: fixed;
+			top: 50px*@ip5;
+			left: 0;
+			.tab_box{
+				height: 44px*@ip5;
+				background: @deepblue;
+				.tab_box_col{
+					float: left;
+					width: 50%;
+					text-align: center;
+					span{
+						display: inline-block;
+						height: 44px*@ip5;
+						line-height: 44px*@ip5;
+						color: @lightblue;
+						font-size: @fs14*@ip5;
+						&.current{
+							color: @yellow;
+							border-bottom: 4px*@ip5 solid @yellow;
+						}
+					}	
+				}
 			}
 		}
 	}
