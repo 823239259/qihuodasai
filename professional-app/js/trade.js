@@ -667,6 +667,7 @@ function appendDesignates(param) {
 	}
 	var priceType = param.OrderPriceType;
 	orderPrice = parseFloat(orderPrice).toFixed(dotSize);
+	
 	var orderPriceText = orderPrice;
 	if(priceType == 1) {
 		orderPriceText = "市价";
@@ -1195,7 +1196,6 @@ function appendStopLossData(param) {
 		stopLossPrice = stopLossDiff;
 	}
 	var cls = "stoploss-00" + stoplossIndex;
-	
 	var html = '<tr class="testclick1 ' + cls + '" data-tion-index = "' + stoplossIndex + '" id = "' + stopLossNo + '">' +
 		'	<td class = "stoploss0">' + contractCode + '</td>' +
 		'  <td class = "stoploss1" data-tion-status="' + status + '">' + statusText + '</td>' +
@@ -1592,6 +1592,8 @@ function addDesignateBindClick(cls) {
 	$(function() {
 		$("." + cls + "").bind("click", function() {
 			var $this = $(this);
+			$this.addClass('selected');
+			$this.siblings().removeClass('selected');
 			var orderId = $this.attr("data-order-des");
 			selectDesgnate["contraction"] = $this.attr("data-tion-des");
 			selectDesgnate["designateIndex"] = $this.attr("data-index-des");
@@ -2335,14 +2337,27 @@ function bindOpertion() {
 	})
 	$("#changeSingle").bind("click", function() {
 		if(vadationIsLoginMuiTip()) {
+			
 			var contractCode = selectDesgnate["contraction"];
 			var designateIndex = selectDesgnate["designateIndex"];
 			if(contractCode == undefined || $(".des-index" + designateIndex + "").html() == undefined) {
 				tip("请选择一项需要改单的数据");
 				return;
 			}
-			var orderPrice = selectDesgnate["orderPrice"];
-			var orderNum = selectDesgnate["orderNum"];
+			var orderPrice;
+			var orderNum;
+//			var orderPrice = selectDesgnate["orderPrice"];
+//			var orderNum = selectDesgnate["orderNum"];
+			if($('#postersOrder').children().hasClass('selected')){
+				$('#postersOrder').children().each(function(){
+					var _this = $(this);
+					if(_this.hasClass('selected')){
+						orderPrice=_this.children().children('.desig2').text();
+						orderNum = _this.children().children('.desig3').text();
+					}
+				});
+			}
+			
 			if(orderPrice == undefined) {
 				orderPrice = 0;
 			}
@@ -2357,6 +2372,7 @@ function bindOpertion() {
 			col2.val(orderNum);
 			add_div.removeClass("mui-hidden");
 			mui("#popover").popover("toggle");
+			
 		}
 	});
 	/**
