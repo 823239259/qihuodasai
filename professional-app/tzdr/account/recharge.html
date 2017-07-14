@@ -138,15 +138,24 @@
 					mui.toast("充值金额应大于等于10元");
 					return; 
 				}
-				mui.openWindow({
-					url:"choicePayment.html",
-					id:"choicePayment.html",
-					extras:{
-						  money : money,
-					      backId:wv.backId
-					}
-				})
+//				mui.openWindow({
+//					url:"choicePayment.html",
+//					id:"choicePayment.html",
+//					extras:{
+//						  money : money,
+//					      backId:wv.backId
+//					}
+//				})
+
+				user_mobile=mui.cacheUser.get("user_mobile");
+				plus.nativeUI.showWaiting( "正在加载..." );
+				var window=plus.webview.create("http://192.168.0.191:8080/vs-web/app/appPayinfo?mobile="+user_mobile+"&money="+money+"","index",{top:"0px"});
+				window.show();
+				setTimeout(function(){
+					plus.nativeUI.closeWaiting();
+				},1000);
 			}
+			
 		</script>
 	</body>
 </html>
