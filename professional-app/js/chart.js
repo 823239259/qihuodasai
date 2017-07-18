@@ -124,7 +124,6 @@ mui.plusReady(function() {
 					processingCandlestickVolumeData(historyParam);
 				}
 			} else if(method == "OnRtnQuote") {
-				
 				var quoteParam = jsonData;
 				if(quoteParam.Parameters == null) return;
 				var subscribeParam = quoteParam.Parameters;
