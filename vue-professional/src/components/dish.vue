@@ -8,56 +8,48 @@
 			<div class="list_col fl">
 				<ul>
 					<li>
-						<span>卖量</span>
-						<span>21213</span>
-					</li>
-					<li>
-						<span>买量</span>
-						<span>21213</span>
-					</li>
-					<li>
 						<span>涨跌</span>
-						<span class="red">0.94/1.12%</span>
+						<span :class="[{'green':detail.LastQuotation.ChangeValue<0},{'red':detail.LastQuotation.ChangeValue>0},{'white':detail.LastQuotation.ChangeValue==0}]">{{detail.LastQuotation.ChangeValue | fixNum2(detail.DotSize)}}/{{detail.LastQuotation.ChangeRate | fixNum}}%</span>
 					</li>
 					<li>
 						<span>成交量</span>
-						<span>21213</span>
+						<span>{{detail.LastQuotation.TotalVolume}}</span>
 					</li>
 					<li>
 						<span>持仓量</span>
-						<span>21213</span>
+						<span>{{detail.LastQuotation.Position}}</span>
 					</li>
 					<li>
 						<span>昨结</span>
-						<span class="red">68.12</span>
-					</li>
-					<li>
-						<span>卖价</span>
-						<span class="red">68.12</span>
-					</li>
-					<li>
-						<span>买价</span>
-						<span class="red">68.12</span>
+						<span :class="[{'green':detail.LastQuotation.PreSettlePrice<0},{'red':detail.LastQuotation.PreSettlePrice>0},{'white':detail.LastQuotation.PreSettlePrice==0}]">{{detail.LastQuotation.PreSettlePrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最新</span>
-						<span class="red">68.12</span>
+						<span class="red">{{detail.LastQuotation.LastPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>开盘</span>
-						<span class="green">68.12</span>
+						<span class="green">{{detail.LastQuotation.OpenPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最高</span>
-						<span class="red">68.12</span>
+						<span class="red">{{detail.LastQuotation.HighPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最低</span>
-						<span class="red">68.12</span>
+						<span class="red">{{detail.LastQuotation.LowPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>结算</span>
-						<span class="red">68.12</span>
+						<span class="red">{{detail.LastQuotation.SettlePrice | fixNum2(detail.DotSize)}}</span>
+					</li>
+					<li>
+						<span>结算</span>
+						<span class="red">{{detail.LastQuotation.SettlePrice | fixNum2(detail.DotSize)}}</span>
+					</li>
+					<li>
+						<span>结算</span>
+						<span class="red">{{detail.LastQuotation.SettlePrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 				</ul>
 			</div>
@@ -66,53 +58,53 @@
 					<template>
 						<li>
 							<span class="green">卖五</span>
-							<span class="green">21213.12</span>
-							<span class="green">20</span>
+							<span class="green">{{detail.LastQuotation.AskPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span class="green">{{detail.LastQuotation.AskQty5}}</span>
 						</li>
 						<li>
 							<span class="green">卖四</span>
-							<span class="green">21213.12</span>
-							<span class="green">20</span>
+							<span class="green">{{detail.LastQuotation.AskPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span class="green">{{detail.LastQuotation.AskQty4}}</span>
 						</li>
 						<li>
 							<span class="green">卖三</span>
-							<span class="green">21213.12</span>
-							<span class="green">20</span>
+							<span class="green">{{detail.LastQuotation.AskPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span class="green">{{detail.LastQuotation.AskQty3}}</span>
 						</li>
 						<li>
 							<span class="green">卖二</span>
-							<span class="green">21213.12</span>
-							<span class="green">20</span>
+							<span class="green">{{detail.LastQuotation.AskPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span class="green">{{detail.LastQuotation.AskQty2}}</span>
 						</li>
 						<li>
 							<span class="green">卖一</span>
-							<span class="green">21213.12</span>
-							<span class="green">20</span>
+							<span class="green">{{detail.LastQuotation.AskPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span class="green">{{detail.LastQuotation.AskQty1}}</span>
 						</li>
 						<li>
 							<span class="red">买一</span>
-							<span class="red">21213.12</span>
-							<span class="red">20</span>
+							<span class="red">{{detail.LastQuotation.BidPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span class="red">{{detail.LastQuotation.BidQty1}}</span>
 						</li>
 						<li>
 							<span class="red">买二</span>
-							<span class="red">21213.12</span>
-							<span class="red">20</span>
+							<span class="red">{{detail.LastQuotation.BidPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span class="red">{{detail.LastQuotation.BidQty2}}</span>
 						</li>
 						<li>
 							<span class="red">买三</span>
-							<span class="red">21213.12</span>
-							<span class="red">20</span>
+							<span class="red">{{detail.LastQuotation.BidPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span class="red">{{detail.LastQuotation.BidQty3}}</span>
 						</li>
 						<li>
 							<span class="red">买四</span>
-							<span class="red">21213.12</span>
-							<span class="red">20</span>
+							<span class="red">{{detail.LastQuotation.BidPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span class="red">{{detail.LastQuotation.BidQty4}}</span>
 						</li>
 						<li>
 							<span class="red">买五</span>
-							<span class="red">21213.12</span>
-							<span class="red">20</span>
+							<span class="red">{{detail.LastQuotation.BidPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span class="red">{{detail.LastQuotation.BidQty5}}</span>
 						</li>
 						<li>
 							<span></span>
@@ -137,8 +129,8 @@
 			<operatenum></operatenum>
 		</div>
 		<div class="btn_box">
-			<tradebtn marketprice="132133" transaction='sell'></tradebtn>
-			<tradebtn marketprice="13221321" transaction='buy'></tradebtn>
+			<tradebtn :marketprice="detail.LastQuotation.AskPrice1 | fixNum2(detail.DotSize)" transaction='sell'></tradebtn>
+			<tradebtn :marketprice="detail.LastQuotation.BidPrice1 | fixNum2(detail.DotSize)" transaction='buy'></tradebtn>
 		</div>
 		
 	</div>
@@ -152,7 +144,20 @@
 		components: {tradebtn, operatenum},
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
-		}	
+		},
+		computed:{
+			detail(){
+				return this.$parent.detail;
+			}
+		},
+		filters:{
+			fixNum:function(num){
+				return num.toFixed(2);
+			},
+			fixNum2:function(num,dotsize){
+				return num.toFixed(dotsize);
+			}
+		},
 	}
 	
 </script>

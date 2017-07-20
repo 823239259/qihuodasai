@@ -6,18 +6,18 @@
 					<ul>
 						<li>
 							<div class="fontgray fl">
-								卖 <span class="fontred">4556</span>
+								卖 <span class="fontred">{{LastQuotation.AskPrice1 | fixNum2(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
-								56
+								{{LastQuotation.AskQty1}}
 							</p>
 						</li>
 						<li>
 							<div class="fontgray fl">
-								买 <span class="fontred">4556</span>
+								买 <span class="fontred">{{LastQuotation.BidPrice1 | fixNum2(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
-								56
+								{{LastQuotation.BidQty1}}
 							</p>
 						</li>
 						<li>
@@ -25,7 +25,7 @@
 								成交量
 							</div>
 							<div class="fontwhite fr">
-								112
+								{{LastQuotation.LastVolume}}
 							</div>
 						</li>
 					</ul>
@@ -33,11 +33,11 @@
 				<div class="fl">
 					<ul>
 						<li class="fontred">
-							{{Data[Data.length-1][1]}}
+							{{LastQuotation.LastPrice}}
 						</li>
 						<li class="fontred">
-							<span>55.0</span>
-							<span>+0.85%</span>
+							<span>{{LastQuotation.ChangeValue | fixNum2(detail.DotSize)}}</span>
+							<span> {{LastQuotation.ChangeRate | fixNum}}%</span>
 						</li>
 					</ul>
 				</div>
@@ -68,9 +68,25 @@
 		components: {
 			tradebtn
 		},
+		filters:{
+			fixNum:function(num){
+				if(num>=0){
+					return '+'+num.toFixed(2);
+				}else{
+					return ' '+num.toFixed(2);
+				}
+			},
+			fixNum2:function(num,dotsize){
+				if(num>=0){
+					return '+'+num.toFixed(dotsize);
+				}else{
+					return ' '+num.toFixed(dotsize);
+				}
+			}
+		},
 		data() {
 			return {
-				lotnum: 0
+				lotnum: 0,
 			}
 		},
 		methods: {
@@ -85,7 +101,17 @@
 			//映射假数据
 			Data(){
 				return this.$store.state.market.jsonData.Parameters.Data;
+			},
+			detail(){
+				return this.$store.state.currentdetail;
+			},
+			LastQuotation(){
+				return this.$store.state.currentdetail.LastQuotation
 			}
+		},
+		activated:function(){
+			console.log(1);
+			this.detail=this.$parent.detail;
 		},
 		watch:{
 			lotnum:function(n,o){

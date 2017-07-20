@@ -18,7 +18,7 @@
 		<div class="order_type border_bottom">
 			<div class="order_type_left fl">
 				<div class="cont">
-					<span class="white">国际原油</span>
+					<span class="white">{{detail.CommodityName}}</span>
 					<span>CL1609</span>
 					<i class="icon_search"></i>
 				</div>
@@ -280,6 +280,9 @@
 			},
 			dealContEvent: function(){
 				return JSON.stringify(this.dealListCont);
+			},
+			detail(){
+				return this.$parent.detail;
 			}
 		},
 		methods: {

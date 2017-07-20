@@ -1,49 +1,51 @@
 <template>
 	<div id="home">
-		<div id="disconnect" v-show='!isconnected'>
-			<div><s></s>&nbsp;&nbsp;行情连接已断开，<span>{{time}}</span>秒后自动重连</div>
-		</div>
-		<div>
-			<topbar title="行情" :connected='!isconnected'></topbar>
-			<button id="refresh" @tap="refresh"></button>
-			<!--选择条-->
-
-			<div id="selectbar">
-				<ul>
-					<li @tap="selectClass" class="fl fontsm current">商品</li>
-					<li @tap="selectClass" class="fl fontsm">亚洲指数</li>
-					<li @tap="selectClass" class="fl fontsm">欧美指数</li>
-				</ul>
+		<template>
+			<div id="disconnect" v-show='!isconnected'>
+				<div><s></s>&nbsp;&nbsp;行情连接已断开，<span>{{time}}</span>秒后自动重连</div>
 			</div>
-			<div id="datalist">
-				<ul>
-					<li>
-						<ol>
-							<li class="fl fontgray">合约名称</li>
-							<li class="fl fontgray">成交量</li>
-							<li class="fl fontgray">最新价</li>
-							<li class="fl fontgray">涨跌幅 <i></i></li>
-						</ol>
-					</li>
-				</ul>
-				<ul>
-					<template>
-						<li class="list cl" @tap='toDetail'>
+			<div>
+				<topbar title="行情" :connected='!isconnected'></topbar>
+				<button id="refresh" @tap="refresh"></button>
+				<!--选择条-->
+
+				<div id="selectbar">
+					<ul>
+						<li @tap="selectClass" class="fl fontsm current">商品</li>
+						<li @tap="selectClass" class="fl fontsm">亚洲指数</li>
+						<li @tap="selectClass" class="fl fontsm">欧美指数</li>
+					</ul>
+				</div>
+				<div id="datalist">
+					<ul>
+						<li>
 							<ol>
-								<li class="fl">
-									<h5 class="fontwhite">11富时A50</h5>
-									<h5 class="fontgray">CNQ16</h5>
-								</li>
-								<li class="fl">10086</li>
-								<li class="fl fontred">257.00</li>
-								<li class="fl fontred">+0.03%</li>
+								<li class="fl fontgray">合约名称</li>
+								<li class="fl fontgray">成交量</li>
+								<li class="fl fontgray">最新价</li>
+								<li class="fl fontgray">涨跌幅 <i></i></li>
 							</ol>
 						</li>
-					</template>
-				</ul>
+					</ul>
+					<ul>
+						<template v-for="(v,i) in Parameters">
+							<li class="list cl" @tap='toDetail'>
+								<ol>
+									<li class="fl">
+										<h5 class="fontwhite">{{v.CommodityName}}</h5>
+										<h5 class="fontgray">{{v.CommodityNo}}{{v.MainContract}}</h5>
+									</li>
+									<li class="fl">{{v.LastQuotation.TotalVolume}}</li>
+									<li :class="['fl',{'fontgreen':v.LastQuotation.ChangeRate<0},{'fontred':v.LastQuotation.ChangeRate>0},{'fontwhite':v.LastQuotation.ChangeRate==0}]">{{v.LastQuotation.LastPrice | fixNum2(v.DotSize)}}</li>
+									<li :class="['fl',{'fontgreen':v.LastQuotation.ChangeRate<0},{'fontred':v.LastQuotation.ChangeRate>0},{'fontwhite':v.LastQuotation.ChangeRate==0}]">{{v.LastQuotation.ChangeRate | fixNum}}%</li>
+								</ol>
+							</li>
+						</template>
+					</ul>
+				</div>
 			</div>
-		</div>
-
+		</template>
+		<guide v-if='guideshow'></guide>
 	</div>
 
 </template>
@@ -51,21 +53,56 @@
 <script>
 	//	import store from '../store'
 	import topbar from '../components/Topbar.vue'
+	import guide from './Guide.vue'
+
+	import Vue from 'vue'
+	import Vuex from 'vuex'
+	import VueNativeSock from 'vue-native-websocket'
+	//	import QuoteMethod from '../assets/n_quote_vo'
+	//	import Quote from '../assets/QuoteUtils'
+	import { mapMutations, mapActions } from 'vuex'
+
 	export default {
 		name: 'home',
 		//		store,
-		data(){
+		data() {
 			return {
-				time:3
+				time: 3,
+				CommodityName:'',
+			}
+		},
+		filters: {
+			fixNum: function(num) {
+				return num.toFixed(2);
+			},
+			fixNum2: function(num, dotsize) {
+				dotsize = dotsize;
+				return num.toFixed(dotsize);
 			}
 		},
 		components: {
-			topbar
+			topbar,
+			guide
 		},
 		computed: {
+			detail(){
+				return this.$store.state.currentdetail;
+			},
+			LastQuotation(){
+				return this.$store.state.currentdetail.LastQuotation;
+			},
+			Parameters() {
+				return this.$store.state.market.Parameters
+			},
 			isconnected() {
 				return this.$store.state.isshow.isconnected
-			}
+			},
+			guideshow() {
+				return this.$store.state.isshow.guideshow
+			},
+			quoteSocket() {
+				return this.$store.state.quoteSocket;
+			},
 		},
 		watch: {
 			isconnected: function(n, o) {
@@ -96,30 +133,44 @@
 			}
 		},
 		methods: {
+			...mapMutations([
+				'initQuoteClient'
+			]),
 			refresh: function(e) {
 				this.$router.push({
-					path:'/space'
+					path: '/space'
 				});
 			},
 			selectClass: function(e) {
 				$(e.target).addClass('current').siblings('li').removeClass('current');
 			},
-			toDetail: function() {
+			toDetail: function(e) {
+				this.Parameters.forEach(function(e) {
+					if(e.CommodityName ==  $(e.currentTarget).children().find('h5:first-child').text()) {
+						this.$store.state.currentdetail = e;
+					}
+				}.bind(this));
+				var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.ContractNo + '","HisQuoteType":' + 0 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+				this.quoteSocket.send(b);
 				this.$router.push({
-					path: '/orderdetail'
+					path: '/orderdetail',
+					query: {
+						'CommodityName': $(e.currentTarget).children().find('h5:first-child').text(),
+						'EngName': $(e.currentTarget).children().find('h5:nth-child(2)').text()
+					}
 				})
 			}
 		},
 		mounted: function() {
+			this.initQuoteClient();
 			//用于控制未连接重连
-			var timer=setInterval(function(){
-					this.time--;
-				}.bind(this),1000);
-			setTimeout(function(){
-				this.$store.state.isshow.isconnected=true  //store中取值，专用来控制是否连接成功的显示与否
-				clearInterval(timer);
-			}.bind(this),3000);
-			
+			//			var timer = setInterval(function() {
+			//				this.time--;
+			//			}.bind(this), 1000);
+			//			setTimeout(function() {
+			//				this.$store.state.isshow.isconnected = true //store中取值，专用来控制是否连接成功的显示与否
+			//				clearInterval(timer);
+			//			}.bind(this), 3000);
 			var sw = window.screen.width;
 			if(this.isconnected) {
 				if(sw <= 370) {
@@ -145,6 +196,12 @@
 				}
 
 			}
+		},
+		activated: function() {
+			//			this.initQuoteClient();
+		},
+		deactivated: function() {
+			//			this.quoteSocket.close();
 		}
 	}
 </script>
@@ -155,11 +212,10 @@
 	#home {
 		background: #1b1b26;
 	}
-	
-	#home>div:only-child {
+	/*#home>div:only-child {
 		position: absolute;
 		top: 80px;
-	}
+	}*/
 	
 	#disconnect {
 		width: 100%;
@@ -182,6 +238,7 @@
 		height: 45px;
 		position: fixed;
 	}
+	
 	#selectbar ul {
 		box-sizing: content-box;
 		width: 150%;
@@ -289,7 +346,7 @@
 	@media(max-width:370px) {
 		#home {
 			background: #1b1b26;
-			height:736px*@ip5 - 20px;
+			height: 736px*@ip5 - 20px;
 		}
 		#disconnect {
 			top: 50px*@ip5
@@ -326,7 +383,7 @@
 	@media (min-width:371px) and (max-width:410px) {
 		#home {
 			background: #1b1b26;
-			height:736px*@ip6 - 20px;
+			height: 736px*@ip6 - 20px;
 		}
 		#disconnect {
 			top: 50px*@ip6
@@ -363,7 +420,7 @@
 	@media (min-width:411px) {
 		#home {
 			background: #1b1b26;
-			height:736px*@ip6p - 20px;
+			height: 736px*@ip6p - 20px;
 		}
 		#disconnect {
 			top: 50px*@ip6p

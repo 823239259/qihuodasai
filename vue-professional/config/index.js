@@ -13,6 +13,16 @@ module.exports = {
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
+    proxyTable: {
+    	//    	跨域请求配置
+//  		'/api':{
+//  			target:'http://test.api.dktai.cn',
+//  			changeOrigin:true,
+//  			pathRewrite:{
+//  				'^/api':''
+//  			}
+//  		}
+    },
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],
     // Run the build command with an extra argument to
@@ -26,7 +36,7 @@ module.exports = {
     port: 8090,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
     proxyTable: {
     	//    	跨域请求配置
     		'/api':{

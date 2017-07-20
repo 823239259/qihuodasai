@@ -40,6 +40,7 @@
 	import tradebottom from '../components/tradeBottom.vue'
 	import stopmoneyalert from '../components/stopmoneyalert.vue'
 	import charts from '../components/chartfens.vue'
+	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'test',
 		components: {
@@ -59,6 +60,9 @@
 			charts
 		},
 		methods: {
+			 ...mapActions([
+      			'add' // 映射 this.increment() 为 this.$store.commit('increment')
+    			]),
 			alert: function() {
 				this.$children[8].isshow = true;
 			},
@@ -110,6 +114,10 @@
 			objst: function() {
 				return JSON.stringify(this.obj);
 			}
+		},
+		activated:function(){
+			console.log(1);
+			this.add(this.$stoe);
 		}
 	}
 </script>
