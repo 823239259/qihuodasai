@@ -1,22 +1,99 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+//import QuoteMethod from '../assets/n_quote_vo'
+//import Quote from '../assets/QuoteUtils'
+
+//this.$http.post(
+//	'/api/user/security/validatecard', {
+//		emulateJSON: true
+//	}, {
+//		headers: {
+//			"secret": "b45efe40116ba803048613d0b163a96d",
+//			"token": "ZmY4MDgwODE1YzliYzY0ZjAxNWNhNTkxN2Q1YTAyNTc="
+//		}
+//	}, {
+//		params: {
+//			"name": "黄俊",
+//			"card": "510107198801302311"
+//		}
+//	}
+//
+//).then(function(e) {
+//	console.log(e.body)
+//}, function() {});
+
+//var format = function(time, format) {
+//				var t = new Date(time);
+//				var tf = function(i) {
+//					return(i < 10 ? '0' : '') + i
+//				};
+//				return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function(a) {
+//					switch(a) {
+//						case 'yyyy':
+//							return tf(t.getFullYear());
+//							break;
+//						case 'MM':
+//							return tf(t.getMonth() + 1);
+//							break;
+//						case 'mm':
+//							return tf(t.getMinutes());
+//							break;
+//						case 'dd':
+//							return tf(t.getDate());
+//							break;
+//						case 'HH':
+//							return tf(t.getHours());
+//							break;
+//						case 'ss':
+//							return tf(t.getSeconds());
+//							break;
+//					};
+//				});
+//			};
+//			alert(format(1498029506000, 'yyyy-MM-dd HH:mm:ss'));
+
 Vue.use(Vuex)
+
 //控制显示与否的模块
 var isshow = {
 	state: {
 		navBarShow: true,
-		isconnected: false,
+		isconnected: true,
 		bottomshow: false,
 		pshow: false,
 		sshow: false,
 		fshow: true,
-		kshow: false
+		kshow: false,
+		guideshow: false
 	}
 };
+
+//控制个人数据
+var account = {
+	state: {
+		islogin: false,     //是否登录
+		phone: '',        //账户
+		password: '',     //密码 
+		token: '',
+		secret: '',
+		isCertification: false,    //是否实名认证
+		username: '',      //实名
+		balance: 0.00,      //余额
+		operateMoney: 0.00,//免提现手续费额度
+		bankList: [] ,      //已绑定银行卡信息
+		//存不知道有用没的数据
+		tempList:[],
+		//存合约列表
+		programList:[]
+	}
+}
+
 //控制行情数据
 var market = {
 	state: {
+		markettemp: [],
+		Parameters: [],
 		//用于存放从后台抓取的历史合约数据
 		jsonData: {
 			"Method": "OnRspQryHistory",
@@ -217,9 +294,119 @@ var market = {
 export default new Vuex.Store({
 	modules: {
 		isshow,
-		market
+		market,
+		account
+	},
+	state: {
+		//打包的时候，值为 build ，开发的时候，值为 dev
+		setting: 'build',
+		//请求的操盘参数数据
+		tempTradeapply: {},
+		quoteSocket: {},
+		webuser: {
+			username: '13677622344',
+			password: 'a123456'
+		},
+		wsjsondata: {},
+		//连接提示语
+		wsmsg: '',
+		currentdetail:{},
+		QuoteMethod: {
+			/**
+			 * 登录Method
+			 */
+			LoginMethod: "Login",
+			/**
+			 * 登出Method
+			 */
+			LogoutMethod: "Logout",
+			/**
+			 * 查询品种Method
+			 */
+			QryCommodityMethod: "QryCommodity",
+			/**
+			 * 查询合约Method
+			 */
+			QryContractMethod: "QryContract",
+			/**
+			 * 订阅Method
+			 */
+			SubscribeMethod: "Subscribe",
+			/**
+			 * 取消订阅Method
+			 */
+			UnSubscribeMethod: "UnSubscribe",
+			/**
+			 * 查询历史数据Method
+			 */
+			QryHistoryMethod: "QryHistory",
+			/**
+			 * 查询深度行情组
+			 */
+			QryDepthQuoteGroupMethod: "QryDepthQuoteGroup"
+		}
+	},
+	getters: {
+		PATH: function(state) {
+			if(state.setting == 'dev') {
+				return '/api'
+			} else if(state.setting == 'build') {
+				return 'http://test.api.dktai.cn'
+			}
+		}
 	},
 	mutations: {
+		initQuoteClient: function(state) {
+			state.quoteSocket = new WebSocket('ws://192.168.0.213:9002');
+			state.quoteSocket.onopen = function(evt) {
+				console.log('open');
+				state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"13677622344","PassWord":"a123456"}}');
+
+			};
+			state.quoteSocket.onclose = function(evt) {
+				console.log('close');
+			};
+			state.quoteSocket.onerror = function(evt) {
+				console.log('error');
+			};
+			state.quoteSocket.onmessage = function(evt) {
+				state.wsjsondata = JSON.parse(evt.data);
+				if(state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
+					state.wsmsg = '行情连接成功';
+					// 查询服务器支持品种用于订阅
+					state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
+				} else if(state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
+					// 行情服务器支持的品种
+					state.market.markettemp = JSON.parse(evt.data).Parameters;
+					//							console.log(JSON.stringify(state.market.markettemp));
+					state.market.markettemp.forEach(function(e) {
+						if(e.IsUsed != 0) {
+							state.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + e.ExchangeNo + '","CommodityNo":"' + e.CommodityNo + '","ContractNo":"' + e.MainContract + '"}}');
+						}
+					});
+				} else if(state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
+					state.market.markettemp.forEach(function(e) {
+						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
+							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
+							state.market.Parameters.push(e);
+						}
+					})
+				} else if(state.wsjsondata.Method == "OnRtnQuote") { // 最新行情
+
+				} else if(state.wsjsondata.Method == "OnRspQryHistory") { // 历史行情
+//					//k线图
+//					jsonDataTwo = jsonData;
+//					if(is_k) {
+//						processingData(jsonData);
+//					}
+//
+//					//分时图
+//					if(is_fenshi) {
+//						handleTimeChartData(jsonData);
+//					}
+				}
+			}
+		},
 		drawlight: function(state, e) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
@@ -563,6 +750,7 @@ export default new Vuex.Store({
 
 	},
 	actions: {
+
 		drawfens: function(context, x) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');

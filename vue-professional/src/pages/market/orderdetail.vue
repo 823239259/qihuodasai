@@ -1,6 +1,6 @@
 <template>
 	<div id="orderdetail">
-		<topbar cname='国际原油' cnum='CL' mc="1708"></topbar>
+		<topbar :cname='CommodityName' :cnum='EngName'></topbar>
 		<selectbar></selectbar>
 		<dish v-if="pshow"></dish>
 		<tradebottom v-if='s'></tradebottom>
@@ -32,7 +32,23 @@
 			kline,
 			lightchart
 		},
+		data(){
+			return{
+				CommodityName:this.$route.query.CommodityName,
+				EngName:this.$route.query.EngName,
+				
+			}
+		},
 		computed:{
+			detail(){
+				return this.$store.state.currentdetail;
+			},
+			Parameters(){
+				return this.$store.state.market.Parameters;	
+			},
+			quoteSocket(){
+				return this.$store.state.quoteSocket;	
+			},
 			sshow(){
 				return this.$store.state.isshow.sshow;
 			},
@@ -60,9 +76,25 @@
 				return this.$store.state.market.jsonData.Parameters.Data;
 			}
 		},
+		activated:function(){
+			this.CommodityName=this.$route.query.CommodityName;
+			this.EngName=this.$route.query.EngName;
+			this.Parameters.forEach(function(e){
+				if(e.CommodityName==this.CommodityName){
+					this.$store.state.currentdetail=e;
+				}
+			}.bind(this));
+			var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"'+this.detail.LastQuotation.ExchangeNo+'","CommodityNo":"'+this.detail.CommodityNo+'","ContractNo":"'+this.detail.LastQuotation.ContractNo+'","HisQuoteType":'+0+',"BeginTime":"","EndTime":"","Count":'+0+'}}'
+			this.quoteSocket.send(b);
+		},
 		mounted:function(){
-			var vol=5;
-////			下面的循环用于假数据更新
+			this.$store.state.isshow.fshow=true;
+			this.$store.state.isshow.pshow=false;
+			this.$store.state.isshow.sshow=false;
+			this.$store.state.isshow.kshow=false;
+			this.$store.state.isshow.bottomshow=false;
+//			var vol=5;
+//			下面的循环用于假数据更新
 //			setInterval(function() {
 //				var ran = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;
 //				var ran2 = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;

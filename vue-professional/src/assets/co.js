@@ -1,7 +1,1 @@
-export default {
-	comit:function(a,b){
-		var c=JSON.parse(b);
-		console.log('地址是'+a+'数据是'+b);
-		console.log(c);
-	}
-}
+意外错误。未能在撤销／重做时从本地历史记录复原文件内容。
