@@ -1,7 +1,7 @@
-﻿{
+{
     "@platforms": ["android", "iPhone", "iPad"],
-    "id": "H539E63C2",/*应用的标识，创建应用时自动生成，勿手动修改*/
-    "name": "123",/*应用名称，程序桌面图标名称*/
+    "id": "H55829F85",/*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name": "vueprofeesionalbuild",/*应用名称，程序桌面图标名称*/
     "version": {
         "name": "1.0",/*应用版本名称*/
         "code": ""
@@ -199,5 +199,37 @@
                 }
             }
         }
-    }
+    },
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"static/js/vendor.ba119d3926f7c36c930b.js",
+					"static/css/app.89312ab209baf2dab5b83edc053b4e97.css",
+					"static/lib/jquery-1.11.3.js",
+					"static/lib/mui/css/mui.min.css",
+					"static/lib/mui/js/mui.min.js",
+					"static/js/app.e5537852a5a9754c1d67.js",
+					"static/js/manifest.6021d4778bc601724294.js",
+					"static/js/manifest.1e9ae2aef27964365171.js",
+					"static/css/app.b50c4bef367b03e0ca54908e8e2d648b.css",
+					"static/js/app.11ed5836312da795d61c.js"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"static/js/manifest.6021d4778bc601724294.js.map",
+				"static/lib/mui/fonts/mui.ttf",
+				"static/lib/mui/js/mui.js",
+				"static/js/app.e5537852a5a9754c1d67.js.map",
+				"static/css/app.89312ab209baf2dab5b83edc053b4e97.css.map",
+				"static/js/vendor.ba119d3926f7c36c930b.js.map",
+				"static/img/banner01.png",
+				"static/lib/mui/css/mui.css"
+			]
+		}
+	}
 }
