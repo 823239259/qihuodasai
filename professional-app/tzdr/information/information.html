@@ -14,12 +14,14 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<h1 class="mui-title">
 				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
-					<a class="mui-control-item title_school  mui-active" href="#directSeedCalendar">日历</a>
-					<a class="mui-control-item title_school" href="#directSeedNews">7*24</a> 
+					<a class="mui-control-item title_school mui-active" href="#directSeedNews">7*24</a> 
+					<a class="mui-control-item title_school" href="#directSeedCalendar">日历</a>
+					
 				</div>
 			</h1>
 			<div class="cz">
-				<a href="javascript:void(0);" class="directSeed-inquire">
+				<a></a>
+				<a href="javascript:void(0);" class="directSeed-inquire" style="display: none;">
 					<label class="click-alert" id="click-alert" data-id="chioceProfit">
 						<img src="../../images/directSeed-country.png"/>
 					</label>
@@ -27,7 +29,6 @@
 						<img src="../../images/directSeedCalendar.png"/>
 					</label>
 				</a>
-				<a></a>
 			</div>
 		</header>	
 		<nav class="navlist">
@@ -52,7 +53,7 @@
 		<div class="mui-content">
 			<div class="mui-slider-group">
 				<!--财经日历-->
-				<div class="mui-slider-item mui-control-content mui-active" id="directSeedCalendar" style="height: 500px;">
+				<div class="mui-slider-item mui-control-content" id="directSeedCalendar" style="height: 500px;">
 					<div class="directSeed-calendar-all">
 						<p class="finance-time" id="result">0000年0月00号</p>
 						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="weekLis">
@@ -105,7 +106,7 @@
 					</div>
 				</div>
 				<!--7*24小时直播-->
-				<div class="mui-slider-item mui-control-content" id="directSeedNews">
+				<div class="mui-slider-item mui-control-content mui-active" id="directSeedNews">
 					<div class="directSeed-all">
 						<p class="chartContainer-time" id="result1">2017-01-20</p>
 					</div>
