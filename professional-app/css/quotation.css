@@ -322,52 +322,55 @@ p{
 	z-index: 999;
 }
 #kilAnorder{
-	top: 0px;
-	width: 33.3%;
-	left: 0%;
-	border-right: 1px solid #1f1f1f !important;
+	bottom: 1%;
+	right: 25%;
+	border-top:none;
+	border-bottom: none;
+	border-right: 1px solid #1f1f1f!important;
 }
 .focusButton{
 	height: 40px;
 	line-height: 40px;
 	padding: 0px;
+	width: 25%;
 	color:#2b2b2b;
 	background-color: #cccccc;
-	display: inline-block;
-	position: relative;
+	display: block;
+	position: fixed;
 	border:none;
 	color:#2b2b2b;
 	font-size: 16px;;
-	float: left;
 }
 #fullWithdrawal{
-	top: 0px;
-	width: 33.3%;
-	left: 0;
+	bottom: 1%;
+	right: 50%;
+	border-top:none;
+	border-left: none;
+	border-bottom: none;
 	border-right: 1px solid #1f1f1f!important;
 }
 #changeSingle{
-	top: 0px;
-	width: 33.3%;
-	right: 0%;
+	bottom: 1%;
+	right: 0px;
 }
 
 #allOpen{
-	top: 0px;
-	width: 33.3%;
-	left: 0;
+	bottom: 1%;
+	right: 25%;
+	border-top:none;
+	border-left: none;
+	border-bottom: none;
 	border-right: 1px solid #1f1f1f!important;
 }
 #Open{
-	top: 0px;
-	width: 33.3%;
-	left: 0%;
+	bottom: 1%;
+	right: 0px;
 	border-right: 1px solid #1f1f1f !important;
 }
 #stopLoss{
-	top: 0px;
-	width: 33.3%;
-	right: 0%;
+	bottom: 1%;
+	right: 0px;
+	display: none;
 }
 #positionList,#postersOrder{
 	width: 100%;
@@ -444,7 +447,6 @@ p{
 	height: 40px;;
 	line-height: 40px;
 	font-size: 16px;
-	border-radius: 20px;
 }
 #operateLogin{
 	background-color: #cccccc;
@@ -904,7 +906,7 @@ input{
 	padding-bottom: 0px;
 	text-align: left;
 	border: none;
-	color:#cccccc;
+	color:#666666;
 	background-color: rgba(0,0,0,0);
 }
 .commStyle select{
@@ -1580,6 +1582,7 @@ input{
 .detail-table table tr td{width: 60px; }
 .detail-table table tr td:nth-child(1){width: 40px; padding-left: 10px;}
 .detail-table table tr td:nth-last-child(1){width: 120px;}
+
 
 .Assets ul{
 	list-style: none;
