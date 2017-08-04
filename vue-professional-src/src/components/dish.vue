@@ -43,6 +43,10 @@
 						<span>结算</span>
 						<span class="red">{{Parameters.SettlePrice | fixNum2(detail.DotSize)}}</span>
 					</li>-->
+					<!--<li>
+						<span></span>
+						<span class="red"></span>
+					</li>-->
 					<li>
 						<span></span>
 						<span class="red"></span>
@@ -51,14 +55,10 @@
 						<span></span>
 						<span class="red"></span>
 					</li>
-					<li>
+					<!--<li>
 						<span></span>
 						<span class="red"></span>
-					</li>
-					<li>
-						<span></span>
-						<span class="red"></span>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 			<div class="list_col fl">
@@ -114,7 +114,12 @@
 							<span class="green">{{Parameters.BidPrice5 | fixNum2(detail.DotSize)}}</span>
 							<span class="green">{{Parameters.BidQty5}}</span>
 						</li>
-						<li>
+						<!--<li>
+							<span></span>
+							<span></span>
+							<span></span>
+						</li>-->
+						<!--<li>
 							<span></span>
 							<span></span>
 							<span></span>
@@ -123,12 +128,7 @@
 							<span></span>
 							<span></span>
 							<span></span>
-						</li>
-						<li>
-							<span></span>
-							<span></span>
-							<span></span>
-						</li>
+						</li>-->
 					</template>
 				</ul>
 			</div>
@@ -207,8 +207,8 @@
 	    			border-right: 1px solid @black;
 	    		}
 	    		li{
-	    			height: 32px;
-	    			line-height: 32px;
+	    			height: 36px;
+	    			line-height: 36px;
 	    			overflow: hidden;
 	    			border-top: 1px solid @black;
 	    			padding-left: 22px; 
@@ -291,8 +291,8 @@
 	    			border-right: 1px solid @black;
 	    		}
 	    		li{
-	    			height: 32px*@ip6;
-	    			line-height: 32px*@ip6;
+	    			height: 36px*@ip6;
+	    			line-height: 36px*@ip6;
 	    			overflow: hidden;
 	    			border-top: 1px solid @black;
 	    			padding-left: 22px*@ip6; 
@@ -362,8 +362,8 @@
 	    			border-right: 1px solid @black;
 	    		}
 	    		li{
-	    			height: 32px*@ip5;
-	    			line-height: 32px*@ip5;
+	    			height: 36px*@ip5;
+	    			line-height: 36px*@ip5;
 	    			overflow: hidden;
 	    			border-top: 1px solid @black;
 	    			padding-left: 22px*@ip5; 

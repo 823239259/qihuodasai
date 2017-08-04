@@ -117,9 +117,9 @@
 						this.msg = '提现金额不能是负数';
 						this.money = '';
 					}else{
-						var str = this.money.toString().split('.')[1];
-						if(str && str.length > 1){
-							this.money = parseFloat(this.money).toFixed(2);
+						var str = this.money.toString().split('.');
+						if(str[1] && str[1].length > 1){
+							this.money = parseFloat(str[0]+ '.'+str[1].substring(0,2));
 						}
 //						this.relmoney = this.money;
 						this.$http.post(this.PATH + '/user/withdraw/drawFee', {emulateJSON: true},{
