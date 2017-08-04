@@ -1,0 +1,316 @@
+/**
+ * 功能：基本样式
+ * 作者：WXF
+ * 日期：
+ */
+
+@import url("./main.less");
+/*****字体及字体大小*****/
+@yh: "\5FAE\8F6F\96C5\9ED1";    /*微软雅黑*/
+@st: "\5B8B\4F53"; /*宋体*/
+@ht: "\9ED1\4F53"; /*黑体*/
+@arial: Arial;
+@fs12: 12px;
+@fs14: 14px;
+@fs16: 16px;
+@fs18: 18px;
+/*****颜色*****/
+@yellow: #ffd400;
+@blue: #a3aacc;
+@deepblue: #242633;
+@lightblue: #ccd4ff;
+@white: #fff;
+@red: #ff4c4c;
+@green: #3dcc85;
+@black: #1b1b26;
+
+body, html{
+    font-family: @yh;
+    background: @black; 
+    color: @white; 
+    font-size: @fs12;
+}
+h1, h2, h3, h4, h5, h6{ font-weight: normal; font-size: 100%;}
+ul, ol, li{ list-style: none;}
+img{ max-width: 100%; vertical-align: middle; outline: none; -webkit-appearance: none;}
+div, figure, figcaption, li, p, input, textarea{ box-sizing: border-box;}
+button, select, textarea {
+    font-size: @fs14;
+    font-family: @yh; 
+    vertical-align: middle;
+    outline: none;
+    -webkit-appearance: none;
+}
+input{
+    font-family: @yh;
+    vertical-align: middle;
+    outline: none;
+}
+ input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset; /*利用阴影来填充掉input自动填充色*/
+}
+em, i{ font-style: normal;}
+a{ 
+    color: @white; 
+    text-decoration: none; 
+}
+
+/*****排版*****/
+.clear{ clear: both;} /*清除浮动*/
+.fl{ float: left;} /*左浮动*/
+.fr{ float: right;} /*右浮动*/
+.oh{ overflow: hidden;} /*防止溢出*/
+.none{ display: none;} /*隐藏*/
+
+/*****字体颜色*****/
+.yellow{
+    color: @yellow;
+}
+.white{
+    color: @white;
+}
+
+/*ip6p及以上*/
+@media (min-width:411px) {
+    /*****外边距*****/
+    .mt10{ margin-top: 10px;}
+    .mb10{ margin-bottom: 10px;}
+    .ml10{ margin-left: 10px;}
+    .mr10{ margin-right: 10px;}
+    /*****input框*****/
+    .ipt_row{
+        width: 92.75%;
+        height: 54px;
+        margin: 0 3.625% 15px 3.625%;
+        position: relative;
+        label{
+            display: inline-block;
+            width: 90px;
+            height: 54px;
+            line-height: 54px;
+            color: @blue;
+            font-size: @fs16;
+            padding-left: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+        input{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            display: inline-block;
+            width: 100%;
+            height: 54px;
+            border: 1px solid #12121a;
+            border-radius: 5px;
+            padding: 10px 90px 10px 100px;
+            color: @white;
+            font-size: @fs16;
+            background: @black;
+            &:focus{
+                border-color: @yellow;
+            }
+        }
+        .code{
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            z-index: 5;
+            width: 85px;
+            height: 52px;
+            line-height: 52px;
+            text-align: center;
+            background: @deepblue;
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+            color: @blue;
+            font-size: @fs14;
+            border-left: 1px solid @black;
+            &.current{
+                background: #2d3040;
+            }
+        }
+        .eye{
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            display: inline-block;
+            width: 54px;
+            height: 54px;
+            overflow: hidden;
+            background: url(../img/eye_open.png) no-repeat 16px 21px;
+            background-size: 22px 12px;
+            &.current{
+                background: url(../img/eye.png) no-repeat 16px 21px;
+                background-size: 22px 12px;
+            }
+        }
+    }
+}
+/*ip6*/
+@media (min-width:371px) and (max-width:410px) {
+    /*****外边距*****/
+    .mt10{ margin-top: 10px*@ip6;}
+    .mb10{ margin-bottom: 10px*@ip6;}
+    .ml10{ margin-left: 10px*@ip6;}
+    .mr10{ margin-right: 10px*@ip6;}
+    /*****input框*****/
+    .ipt_row{
+        width: 92.75%;
+        height: 54px*@ip6;
+        margin: 0 3.625% 15px*@ip6 3.625%;
+        position: relative;
+        label{
+            display: inline-block;
+            width: 90px*@ip6;
+            height: 54px*@ip6;
+            line-height: 54px*@ip6;
+            color: @blue;
+            font-size: @fs16*@ip6;
+            padding-left: 15px*@ip6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+        input{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            display: inline-block;
+            width: 100%;
+            height: 54px*@ip6;
+            border: 1px solid #12121a;
+            border-radius: 5px*@ip6;
+            padding: 10px*@ip6 90px*@ip6 10px*@ip6 100px*@ip6;
+            color: @white;
+            font-size: @fs16*@ip6;
+            background: @black;
+            &:focus{
+                border-color: @yellow;
+            }
+        }
+        .code{
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            z-index: 5;
+            width: 85px*@ip6;
+            height: 52px*@ip6;
+            line-height: 52px*@ip6;
+            text-align: center;
+            background: @deepblue;
+            border-bottom-right-radius: 5px*@ip6;
+            border-top-right-radius: 5px*@ip6;
+            color: @blue;
+            font-size: @fs14*@ip6;
+            border-left: 1px solid @black;
+            &.current{
+                background: #2d3040;
+            }
+        }
+        .eye{
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            display: inline-block;
+            width: 54px*@ip6;
+            height: 54px*@ip6;
+            overflow: hidden;
+            background: url(../img/eye_open.png) no-repeat 16px*@ip6 21px*@ip6;
+            background-size: 22px*@ip6 12px*@ip6;
+            &.current{
+                background: url(../img/eye.png) no-repeat 16px*@ip6 21px*@ip6;
+                background-size: 22px*@ip6 12px*@ip6;
+            }
+        }
+    }
+}
+/*ip5*/
+@media(max-width:370px) {
+    /*****外边距*****/
+    .mt10{ margin-top: 10px*@ip5;}
+    .mb10{ margin-bottom: 10px*@ip5;}
+    .ml10{ margin-left: 10px*@ip5;}
+    .mr10{ margin-right: 10px*@ip5;}
+    /*****input框*****/
+    .ipt_row{
+        width: 92.75%;
+        height: 54px*@ip5;
+        margin: 0 3.625% 15px*@ip5 3.625%;
+        position: relative;
+        label{
+            display: inline-block;
+            width: 90px*@ip5;
+            height: 54px*@ip5;
+            line-height: 54px*@ip5;
+            color: @blue;
+            font-size: @fs16*@ip5;
+            padding-left: 15px*@ip5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+        input{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            display: inline-block;
+            width: 100%;
+            height: 54px*@ip5;
+            border: 1px solid #12121a;
+            border-radius: 5px*@ip5;
+            padding: 10px*@ip5 90px*@ip5 10px*@ip5 100px*@ip5;
+            color: @white;
+            font-size: @fs16*@ip5;
+            background: @black;
+            &:focus{
+                border-color: @yellow;
+            }
+        }
+        .code{
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            z-index: 5;
+            width: 85px*@ip5;
+            height: 51px*@ip5;
+            line-height: 51px*@ip5;
+            text-align: center;
+            background: @deepblue;
+            border-bottom-right-radius: 5px*@ip5;
+            border-top-right-radius: 5px*@ip5;
+            color: @blue;
+            font-size: @fs14*@ip5;
+            border-left: 1px solid @black;
+            &.current{
+                background: #2d3040;
+            }
+        }
+        .eye{
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            display: inline-block;
+            width: 54px*@ip5;
+            height: 54px*@ip5;
+            overflow: hidden;
+            background: url(../img/eye_open.png) no-repeat 16px*@ip5 21px*@ip5;
+            background-size: 22px*@ip5 12px*@ip5;
+            &.current{
+                background: url(../img/eye.png) no-repeat 16px*@ip5 21px*@ip5;
+                background-size: 22px*@ip5 12px*@ip5;
+            }
+        }
+    }
+}
+
