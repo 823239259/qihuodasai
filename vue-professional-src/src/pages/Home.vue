@@ -1,6 +1,7 @@
 <template>
 	<div id="home">
 		<template>
+			<tipsDialog :msg="msgTips"></tipsDialog>
 			<div id="disconnect" v-show='!isconnected'>
 				<div><s></s>&nbsp;&nbsp;行情连接已断开，<span>{{time}}</span>秒后自动重连</div>
 			</div>
@@ -52,6 +53,7 @@
 
 <script>
 	//	import store from '../store'
+	import tipsDialog from '../components/tipsDialog.vue'
 	import topbar from '../components/Topbar.vue'
 	import guide from './Guide.vue'
 	
@@ -68,7 +70,8 @@
 		//		store,
 		data() {
 			return {
-				time: 3
+				time: 3,
+				msg: ''
 			}
 		},
 		filters:{
@@ -82,9 +85,16 @@
 		},
 		components: {
 			topbar,
-			guide
+			guide,
+			tipsDialog
 		},
 		computed: {
+			msgTips: function(){
+				return this.msg;
+			},
+			tipMsg: function(){
+				return this.$store.state.wsmsg;
+			},
 			Parameters(){
 				return this.$store.state.market.Parameters
 			},
@@ -181,6 +191,9 @@
 		activated:function(){
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
+			//提示框
+			this.$children[0].isShow = true;
+			this.msg = this.tipMsg;
 		}
 	}
 </script>

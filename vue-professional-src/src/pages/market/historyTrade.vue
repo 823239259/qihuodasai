@@ -15,7 +15,7 @@
 					<img src="../../assets/img/date.png"/>
 					<input type="text" />
 				</div>
-				<cbtn name="搜索"></cbtn>
+				<cbtn name="搜索" @tap.native="search00"></cbtn>
 			</div>
 			<div class="tab_box mt10" id="tab_box">
 				<ul>
@@ -36,7 +36,7 @@
 					<template v-for="key in dataList">
 						<li>
 							<span>{{key.index}}</span>
-							<span>{{key.name}}</span>
+							<span>{{key.ContractNo}}</span>
 							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
 							<span>{{key.num}}</span>
 							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.money}}</span>
@@ -106,28 +106,31 @@
 					nav: '一月内',
 				}],
 				dataList: [
-					{
-						index: 1,
-						name: '美原油09',
-						type: '多',
-						num: 12,
-						money: 4800,
-						type_color: 'green',
-						money_color: 'green'
-					},
-					{
-						index: 2,
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						money: 4800,
-						type_color: 'red',
-						money_color: 'red'
-					},
+//					{
+//						index: 1,
+//						name: '美原油09',
+//						type: '多',
+//						num: 12,
+//						money: 4800,
+//						type_color: 'green',
+//						money_color: 'green'
+//					},
+//					{
+//						index: 2,
+//						name: '美原油09',
+//						type: '空',
+//						num: 12,
+//						money: 4800,
+//						type_color: 'red',
+//						money_color: 'red'
+//					},
 				]
 			}
 		},
 		methods: {
+			search00:function(){
+				console.log('1111111111');
+			},
 			showCont: function(e){
 				$(e.currentTarget).addClass('current').siblings().removeClass('current');
 				if($(e.currentTarget).index() == 0){

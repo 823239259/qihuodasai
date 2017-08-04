@@ -56,6 +56,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 1010;
 		background-color: rgba(0, 0, 0, .8);
 	}
 	
@@ -131,6 +132,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
+			z-index: 1010;
 			background-color: rgba(0, 0, 0, .8);
 		}
 		#alert>div {
@@ -191,6 +193,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
+			z-index: 1010;
 			background-color: rgba(0, 0, 0, .8);
 		}
 		#alert>div {
@@ -251,6 +254,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
+			z-index: 1010;
 			background-color: rgba(0, 0, 0, .8);
 		}
 		#alert>div {

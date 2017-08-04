@@ -3,6 +3,7 @@
 		<!--topbar-->
 		<!--tab切换-->
 		<changealert :price="bindPrice" :num="bindNum"></changealert>
+		<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" addr="127.0.0.1" :objstr='objst'></alert>
 		<div class="money_total border_bottom">
 			<span>总资产</span>
 			<span class="white">{{this.jCacheTotalAccount.TodayBalance | fixNum}}</span>
@@ -184,9 +185,10 @@
 	import operatenum from '../components/oprtateNum.vue'
 	import orderlist from '../components/orderList.vue'
 	import changealert from '../components/changealert.vue'
+	import alert from '../components/Tradealert.vue'
 	export default{
 		name: 'tradeCenter',
-		components: {tradebtn, cbtn, operatenum, orderlist, changealert},
+		components: {tradebtn, cbtn, operatenum, orderlist, changealert, alert},
 		data(){
 			return {
 				selectId:'',
@@ -276,6 +278,9 @@
 			}
 		},
 		computed:{
+			insertOrder: function(){
+				return  1232424243;
+			},
 			bindPrice: function(){
 				if(this.$store.state.market.openChangealertCurrentObj){
 					return  this.$store.state.market.openChangealertCurrentObj.delegatePrice;
@@ -628,6 +633,7 @@
 				}
 			},
 			buy:function(){
+				this.$children[1].isshow = true;
 					var commodityNo = this.detail.CommodityNo;
 					if(this.isShow==true){
 						
