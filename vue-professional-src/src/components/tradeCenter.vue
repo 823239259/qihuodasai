@@ -1119,6 +1119,7 @@
 				ul{
 					width: 100%;
 					padding: 0;
+					height: 330px;
 					overflow-x: scroll;
 					li{
 						width: 480px;
@@ -1147,7 +1148,8 @@
 				ul{
 					width: 100%;
 					padding: 0;
-					overflow-x: scroll;
+					height: 330px;
+					overflow: scroll;
 					li{
 						width: 700px;
 						padding-left: 15px;
@@ -1184,6 +1186,7 @@
 				ul{
 					width: 100%;
 					padding: 0;
+					height: 330px;
 					overflow-x: scroll;
 					li{
 						width: 530px;
@@ -1510,6 +1513,7 @@
 				ul{
 					width: 100%;
 					padding: 0;
+					height: 330px*@ip6;
 					overflow-x: scroll;
 					li{
 						width: 480px*@ip6;
@@ -1538,7 +1542,8 @@
 				ul{
 					width: 100%;
 					padding: 0;
-					overflow-x: scroll;
+					height: 330px*@ip6;
+					overflow: scroll;
 					li{
 						width: 700px*@ip6;
 						padding-left: 15px*@ip6;
@@ -1575,6 +1580,7 @@
 				ul{
 					width: 100%;
 					padding: 0;
+					height: 330px*@ip6;
 					overflow-x: scroll;
 					li{
 						width: 530px*@ip6;
@@ -1901,6 +1907,7 @@
 				ul{
 					width: 100%;
 					padding: 0;
+					height: 330px*@ip5;
 					overflow-x: scroll;
 					li{
 						width: 480px*@ip5;
@@ -1929,7 +1936,8 @@
 				ul{
 					width: 100%;
 					padding: 0;
-					overflow-x: scroll;
+					height: 330px*@ip5;
+					overflow: scroll;
 					li{
 						width: 710px*@ip5;
 						padding-left: 15px*@ip5;
@@ -1966,6 +1974,7 @@
 				ul{
 					width: 100%;
 					padding: 0;
+					height: 330px*@ip5;
 					overflow-x: scroll;
 					li{
 						width: 540px*@ip5;
