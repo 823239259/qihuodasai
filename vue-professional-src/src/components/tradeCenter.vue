@@ -433,7 +433,7 @@
 					obj.InsertDateTime = e.InsertDateTime;
 					obj.ContractCode = e.ContractCode;
 					obj.OrderID = e.OrderID;
-					this.$store.state.market.entrustCont.unshift(obj);
+					this.$store.state.market.entrustCont.push(obj);
 				}.bind(this));
 			},
 			OnRspOrderInsertOrderListCont:function(n,o){
@@ -816,7 +816,7 @@
 				obj.InsertDateTime = e.InsertDateTime;
 				obj.ContractCode = e.ContractCode;
 				obj.OrderID = e.OrderID;
-				this.$store.state.market.entrustCont.unshift(obj);
+				this.$store.state.market.entrustCont.push(obj);
 			}.bind(this));
 			
 			this.$store.state.market.orderListCont=[];

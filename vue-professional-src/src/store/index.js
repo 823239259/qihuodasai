@@ -1636,7 +1636,7 @@ export default new Vuex.Store({
 			obj.InsertDateTime = parameters.InsertDateTime;
 			obj.ContractCode = parameters.ContractCode;
 			obj.OrderID = parameters.OrderID;
-			context.state.market.entrustCont.unshift(obj);		
+			context.state.market.entrustCont.push(obj);		
 			
 		},
 		updateOrder:function(context,parameters){
