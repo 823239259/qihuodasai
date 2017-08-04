@@ -102,8 +102,8 @@
 				</template>
 			</ul>
 			<div class="list_tools">
-				<cbtn name="全撤"></cbtn>
-				<cbtn name="撤单"></cbtn>
+				<cbtn name="全撤" @tap.native="cancelAllOrder"></cbtn>
+				<cbtn name="撤单" @tap.native="cancelOrder"></cbtn>
 				<cbtn name="改单" @tap.native="openChangealert"></cbtn>
 			</div>
 		</div>
@@ -493,6 +493,71 @@
 			
 		},
 		methods: {
+			cancelAllOrder:function(){
+				this.$store.state.market.orderListCont.forEach(function(e,i){
+					var CurrentObj = e;
+					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
+					var b={
+							"Method":'CancelOrder',
+							"Parameters":{
+								"OrderSysID":'',
+								"OrderID":CurrentObj.OrderID,
+								"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
+								"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
+								"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+								"OrderNum":parseFloat(CurrentObj.delegateNum),
+								"Direction":function(){
+												if(CurrentObj.buyOrSell=='买'){
+													return 0;
+												}else{
+													return 1;
+												}
+											},
+								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
+							}
+					};
+					this.tradeSocket.send(JSON.stringify(b));
+					
+				}.bind(this));
+			},
+			cancelOrder:function(){
+				var orderListId= this.orderListId;
+				var isExist = false;
+				var CurrentObj = null;
+				var index =0;
+				this.$store.state.market.orderListCont.forEach(function(e,i){
+					if(e.OrderID==orderListId){
+						CurrentObj = e;
+						index = i;
+						isExist = true;
+					}
+				}.bind(this));
+				console.log(CurrentObj);
+				if(isExist==true){
+					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
+					var b={
+							"Method":'CancelOrder',
+							"Parameters":{
+								"OrderSysID":'',
+								"OrderID":CurrentObj.OrderID,
+								"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
+								"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
+								"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+								"OrderNum":parseFloat(CurrentObj.delegateNum),
+								"Direction":function(){
+												if(CurrentObj.buyOrSell=='买'){
+													return 0;
+												}else{
+													return 1;
+												}
+											},
+								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
+							}
+						};
+					this.tradeSocket.send(JSON.stringify(b));
+				}
+				
+			},
 			openChangealert: function(){
 				var orderListId= this.orderListId;
 				var isExist = false;

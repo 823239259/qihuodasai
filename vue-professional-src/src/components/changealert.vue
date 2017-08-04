@@ -59,11 +59,7 @@
 				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
 				 */
 				this.isshow = false;
-				console.log(this.price);
-				console.log(this.$store.state.market.openChangealertCurrentObj);
 				var Contract=this.$store.state.market.openChangealertCurrentObj.ContractCode.substring(0,this.$store.state.market.openChangealertCurrentObj.ContractCode.length-4);
-				console.log(this.templateList[Contract].LastQuotation);
-				
 				var b={
 							"Method":'ModifyOrder',
 							"Parameters":{
@@ -84,7 +80,6 @@
 								"TriggerPrice":0
 							}
 						};
-				console.log(JSON.stringify(b));		
 				this.tradeSocket.send(JSON.stringify(b));
 				
 			}
