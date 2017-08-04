@@ -1746,7 +1746,7 @@
 					}
 					.ipt{
 						float: left;
-						width: 85px*@ip5;
+						width: 80px*@ip5;
 						height: 45px*@ip5;
 						text-align: left;
 						padding: 5px*@ip5;
