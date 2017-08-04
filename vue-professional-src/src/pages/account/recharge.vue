@@ -68,12 +68,11 @@
 				if(this.money == '' || this.money == NaN){
 					this.totalMoney = this.userInfo.balance;
 				}else{
-					var str = this.money.toString().split('.')[1];
-					if(str && str.length > 1){
-						this.money = parseFloat(this.money).toFixed(2);
+					var str = this.money.toString().split('.');
+					if(str[1] && str[1].length > 1){
+						this.money = parseFloat(str[0]+ '.'+str[1].substring(0,2));
 					}
-					console.log(this.userInfo.balance + Number(this.money));
-					this.totalMoney = parseFloat(this.userInfo.balance + Number(this.money)).toFixed(2);
+					this.totalMoney = (Number(this.userInfo.balance) + Number(this.money)).toFixed(2);
 					
 				}
 			}
