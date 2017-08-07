@@ -499,9 +499,11 @@
 		},
 		methods: {
 			cancelAllOrder:function(){
-				console.log(this.$children);
-				this.$children[6].isshow = true;
-				console.log(111);
+				if(this.isShow == false){
+					this.$children[5].isshow = true;
+				}else{
+					this.$children[6].isshow = true;
+				}
 				var arr=[];
 				this.$store.state.market.orderListCont.forEach(function(e,i){
 					var CurrentObj = e;
