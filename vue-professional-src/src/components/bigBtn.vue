@@ -1,11 +1,20 @@
 <template>
-	<button id="bigBtn" class="btn" @touchstart="lontap" @touchend='levtap'>{{name}}</button>
+	<button id="bigBtn" class="btn" :class="colors" @touchstart="lontap" @touchend='levtap'>{{name}}</button>
 </template>
 
 <script>
 	export default{
 		name:'bigBtn',
-		props: ['name'],
+		props: ['name','color'],
+		computed: {
+			colors: function(){
+				if(this.color == 'blue'){
+					return 'blue';
+				}else{
+					return 'yellow';
+				}
+			}
+		},
 		methods: {
 			lontap:function(){
 				$(this.$el).addClass("current");
@@ -25,7 +34,7 @@
     #bigBtn{
     	width: 92.75%;
     	height: 54px;
-    	line-height: 54px;
+    	line-height: 52px;
     	overflow: hidden;
     	background: @yellow;
     	border: 1px solid @black;
@@ -34,6 +43,9 @@
     	font-size: @fs18;
     	text-align: center;
     	margin: 0 3.625%;
+    	&.blue{
+    		background: @blue;
+    	}
     	&.current{
 			background: #ccaa00;
     	}
@@ -44,7 +56,7 @@
     #bigBtn{
     	width: 92.75%;
     	height: 54px*@ip6;
-    	line-height: 54px*@ip6;
+    	line-height: 52px*@ip6;
     	overflow: hidden;
     	background: @yellow;
     	border: 1px solid @black;
@@ -53,6 +65,9 @@
     	font-size: @fs18*@ip6;
     	text-align: center;
     	margin: 0 3.625%;
+    	&.blue{
+    		background: @blue;
+    	}
     	&.current{
 			background: #ccaa00;
     	}
@@ -63,7 +78,7 @@
 	#bigBtn{
     	width: 92.75%;
     	height: 54px*@ip5;
-    	line-height: 54px*@ip5;
+    	line-height: 52px*@ip5;
     	overflow: hidden;
     	background: @yellow;
     	border: 1px solid @black;
@@ -72,6 +87,9 @@
     	font-size: @fs18*@ip5;
     	text-align: center;
     	margin: 0 3.625%;
+    	&.blue{
+    		background: @blue;
+    	}
     	&.current{
 			background: #ccaa00;
     	}

@@ -45,7 +45,7 @@
 						<li>
 							<span class="title">操盘账户：</span>
 							<span>{{tradeDetails.tranAccount}}</span>
-							<cbtn name="立即操盘"></cbtn>
+							<cbtn name="立即操盘" @tap.native="toTradeLogin"></cbtn>
 						</li>
 						<li>
 							<span class="title">操盘密码：</span>
@@ -376,6 +376,9 @@
 			}
 		},
 		methods: {
+			toTradeLogin: function(){
+				this.$router.push({path: '/tradeLogin', query: {user: this.tradeDetails.tranAccount, pwd: this.tradeDetails.tranPassword}});
+			},
 			toTradersRules: function(){
 				this.$router.push({path: '/tradersRules'});
 			},
