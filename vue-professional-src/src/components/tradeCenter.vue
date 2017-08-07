@@ -618,6 +618,7 @@
 				}
 			},
 			sell:function(){
+				this.$children[1].isshow = true;
 				var commodityNo = this.detail.CommodityNo;
 				if(this.isShow==true){
 					var buildIndex=0;
@@ -630,7 +631,7 @@
 								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
 								"CommodityNo":this.templateList[commodityNo].CommodityNo,
 								"ContractNo":this.detail.LastQuotation.ContractNo,
-								"OrderNum":this.$children[0].defaultNum,
+								"OrderNum":this.$children[2].defaultNum,
 								"Drection":1,
 								"PriceType":1,
 								"LimitPrice":0.00,
@@ -638,7 +639,8 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 						};
-					this.tradeSocket.send(JSON.stringify(b));
+					this.buyText = b;	
+//					this.tradeSocket.send(JSON.stringify(b));
 					
 				}else{
 						var buildIndex=0;
@@ -659,7 +661,8 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 						};
-						this.tradeSocket.send(JSON.stringify(b));
+						this.buyText = b;
+//						this.tradeSocket.send(JSON.stringify(b));
 				}
 			},
 			buy:function(){
