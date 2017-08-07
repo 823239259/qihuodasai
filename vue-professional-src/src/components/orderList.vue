@@ -1,5 +1,7 @@
 <template>
 	<div id="orderList" class="list" :val="getData">
+		<alert title="确认全部平仓"  :line2="closeAllOutAlert" :objstr='closeAllOutAlertObj' type="1"></alert>
+		<alert title="确认平仓"  :line2="closeOutAlert" :objstr='closeOutAlertObj' type="1"></alert>
 		<ul>
 			<li class="list_head">
 				<span>合约名称</span>
@@ -32,17 +34,44 @@
 
 <script>
 	import cbtn from '../components/conditionBtn.vue'
+	import alert from '../components/Tradealert.vue'
 	export default{
 		name: 'orderList',
-		components: {cbtn},
+		components: {cbtn,alert},
 		props: ['val'],
 		data(){
 			return {
 				datas: '',
 				orderListId: '',
+				tempText:{}
 			}
 		},
 		computed: {
+			closeOutAlertObj:function(){
+				if(this.tempText){
+					return JSON.stringify(this.tempText);
+				}
+			},
+			closeOutAlert:function(){
+				console.log(this.tempText);
+				var obj = this.tempText.Parameters;
+				if(obj!=undefined){
+					var contract=obj.CommodityNo+obj.ContractNo;
+					var orderNum = obj.OrderNum
+					var text = '确认平仓合约【'+contract+'】,价格【市价】,手数【'+orderNum+'】';
+					return text;
+					
+				}
+			},
+			closeAllOutAlertObj:function(){
+				if(this.tempText){
+					return JSON.stringify(this.tempText);
+				}
+			},
+			closeAllOutAlert:function(){
+				
+				return '此操作将平掉持仓列表中所有合约,请你慎重选择。是否确认将所有合约全部平仓？';
+			},
 			list_cont: function(){
 				return 'list_cont'
 			},
@@ -73,7 +102,8 @@
 				}
 			},
 			closeAllOut:function(){
-//				var positionCurrent;
+				this.$children[0].isshow = true;
+				var arr=[];
 				for(var positionCurrent in this.positionListCont){
 					var buildIndex=0;
 					var drection ;
@@ -101,11 +131,14 @@
 					
 					this.$store.state.market.positionListCont.splice(positionCurrent,1);
 					this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
-					this.tradeSocket.send(JSON.stringify(b));
+					arr.push(b);
+					this.tempText = arr;
+//					this.tradeSocket.send(JSON.stringify(b));
 					
 				}
 			},
 			closeOut:function(obj){
+				this.$children[1].isshow = true;
 				var positionCurrent;
 				for( positionCurrent in this.positionListCont){
 					if(this.orderListId==this.positionListCont[positionCurrent].commodityNocontractNo){
@@ -140,18 +173,12 @@
 						
 						this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 						
-						
-						this.tradeSocket.send(JSON.stringify(b));
+						this.tempText = b;
+//						this.tradeSocket.send(JSON.stringify(b));
 						
 					}
 				}
-				/*
-				this.positionListCont.forEach(function(e){
-					if(this.orderListId==e.commodityNocontractNo){
-						console.log(e);
-					}
-				}).bind(this);
-				*/
+				
 			}
 			
 		}

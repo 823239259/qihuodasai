@@ -177,7 +177,7 @@
 		<!--<orderlist :val="orderContEvent" id="orderCont" v-else-if="orderShow"></orderlist>
 		<orderlist :val="entrustContEvent" id="entrustCont" v-else-if="entrustShow"></orderlist>
 		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>-->
-		<alert title="确认撤单" line1="确认撤单吗？" :line2="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
+		<alert title="确认撤单" :line2="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
 		<alert title="确认全部撤单"  :line2="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
 	</div>
 </template>
