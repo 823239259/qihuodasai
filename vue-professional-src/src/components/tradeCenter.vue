@@ -289,10 +289,13 @@
 			insertOrder: function(){
 				var obj = this.buyText.Parameters;
 				if(obj !=undefined){
+					console.log(obj);
 					var contract=obj.CommodityNo+obj.ContractNo;
-					var priceType;
+					var LimitPrice;
 					if(obj.PriceType==1){
-						priceType='市价';
+						LimitPrice='市价';
+					}else{
+						LimitPrice = obj.LimitPrice;
 					}
 					var orderNum = obj.OrderNum;
 					var drection;
@@ -302,7 +305,7 @@
 						drection = '卖';
 					}
 					
-					var text = '确认提交订单:【'+contract+'】,价格【'+priceType +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
+					var text = '确认提交订单:【'+contract+'】,价格【'+LimitPrice +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
 					return  text;
 				}
 				
@@ -704,7 +707,8 @@
 									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 								}
 							};
-							this.tradeSocket.send(JSON.stringify(b));
+							this.buyText = b;
+//							this.tradeSocket.send(JSON.stringify(b));
 						
 					}
 				
