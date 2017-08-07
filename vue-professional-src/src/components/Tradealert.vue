@@ -22,7 +22,7 @@
 <script>
 	export default {
 		name: 'alert',
-		props: ['title', 'line1', 'line2', 'addr', 'objstr'],
+		props: ['title', 'line1', 'line2', 'addr', 'objstr','type'],
 		data() {
 			return {
 				isshow: false
@@ -38,7 +38,15 @@
 				this.isshow = false;
 			},
 			confirm: function(a, b) {
-				this.tradeSocket.send(this.objstr);
+				console.log(this.objstr);
+				if(this.type == '1'){
+					var cnm = JSON.parse(this.objstr);
+					for(var i=0;i<cnm.length;i++){
+						this.tradeSocket.send(JSON.stringify(cnm[i]));
+					}
+				}else{
+					this.tradeSocket.send(this.objstr);
+				}
 				this.isshow = false;
 			}
 		}

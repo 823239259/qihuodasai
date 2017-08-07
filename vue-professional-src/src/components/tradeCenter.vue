@@ -177,6 +177,8 @@
 		<!--<orderlist :val="orderContEvent" id="orderCont" v-else-if="orderShow"></orderlist>
 		<orderlist :val="entrustContEvent" id="entrustCont" v-else-if="entrustShow"></orderlist>
 		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>-->
+		<alert title="确认撤单" line1="确认撤单吗？" :line2="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
+		<alert title="确认全部撤单"  :line2="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
 	</div>
 </template>
 
@@ -222,54 +224,6 @@
 				tabList: [{nav:'持仓'},{nav:'挂单'},{nav:'委托'},{nav:'成交'}],
 				orderListId: '',
 				buyText:{},
-				
-//				openChangealertCurrentObj:null,
-//				positionListCont:[
-////					{
-////						name: '美原油09111',
-////						type: '多',
-////						num: 12,
-////						price: '123.98',
-////						total: '4800.00',
-////						showbar: false,
-////						type_color: 'red',
-////						total_color: 'green'
-////					}
-//				],
-//				orderListCont:[
-//					{
-//						name: '美原油09',
-//						type: '空',
-//						num: 12,
-//						price: '123.98',
-//						total: '48',
-//						showbar: false,
-//						type_color: 'red',
-//						total_color: 'green'
-//					},
-//				],
-//				entrustCont:[
-//					{
-//						name: '美原油10',
-//						type: '空',
-//						num: 12,
-//						price: '123.98',
-//						total: '4800.00',
-//						showbar: false,
-//						type_color: 'red',
-//						total_color: 'green'
-//					},
-//				],
-//				dealListCont:[
-//					{
-//						name: '美原油11',
-//						num: 12,
-//						price: '123.98',
-//						total: '48',
-//						time: '2017-07-20',
-//						showbar: false
-//					},
-//				],
 			}
 		},
 		filters:{
@@ -281,6 +235,32 @@
 			}
 		},
 		computed:{
+			cancelAllOrderAlertObj:function(){
+				if(this.buyText){
+					return JSON.stringify(this.buyText);
+				}
+				
+			},
+			cancelAllOrderAlert:function(){
+				return '此操作将撤销挂单中所有合约,请你慎重选择。是否确认将所有合约全部撤销？';
+			},
+			cancelOrderAlertObj:function(){
+				if(this.buyText){
+					return JSON.stringify(this.buyText);
+				}
+				
+			},
+			cancelOrderAlert:function(){
+				
+				var obj = this.buyText.Parameters;
+				
+				if(obj!=undefined){
+					var contract=obj.CommodityNo+obj.ContractNo;
+					var orderNum = obj.OrderNum;
+					var text = '确认撤单:合约【'+contract+'】,手数【'+orderNum+'】';
+					return text;
+				}
+			},
 			objst: function(){
 				if(this.buyText){
 					return JSON.stringify(this.buyText);
@@ -289,7 +269,6 @@
 			insertOrder: function(){
 				var obj = this.buyText.Parameters;
 				if(obj !=undefined){
-					console.log(obj);
 					var contract=obj.CommodityNo+obj.ContractNo;
 					var LimitPrice;
 					if(obj.PriceType==1){
@@ -382,15 +361,6 @@
 			positionContEvent: function(){
 				return JSON.stringify(this.positionListCont);
 			},
-//			orderContEvent: function(){
-//				return JSON.stringify(this.orderListCont);
-//			},
-//			entrustContEvent: function(){
-//				return JSON.stringify(this.entrustListCont);
-//			},
-//			dealContEvent: function(){
-//				return JSON.stringify(this.dealListCont);
-//			},
 			detail(){
 				return this.$parent.detail;
 			}
@@ -529,6 +499,10 @@
 		},
 		methods: {
 			cancelAllOrder:function(){
+				console.log(this.$children);
+				this.$children[6].isshow = true;
+				console.log(111);
+				var arr=[];
 				this.$store.state.market.orderListCont.forEach(function(e,i){
 					var CurrentObj = e;
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
@@ -551,11 +525,15 @@
 								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
 							}
 					};
-					this.tradeSocket.send(JSON.stringify(b));
 					
+//					this.tradeSocket.send(JSON.stringify(b));
+					arr.push(b);
+					this.buyText = arr;
 				}.bind(this));
+				
 			},
 			cancelOrder:function(){
+				this.$children[5].isshow = true;
 				var orderListId= this.orderListId;
 				var isExist = false;
 				var CurrentObj = null;
@@ -567,7 +545,6 @@
 						isExist = true;
 					}
 				}.bind(this));
-				console.log(CurrentObj);
 				if(isExist==true){
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
 					var b={
@@ -589,7 +566,8 @@
 								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
 							}
 						};
-					this.tradeSocket.send(JSON.stringify(b));
+						this.buyText = b;
+//					this.tradeSocket.send(JSON.stringify(b));
 				}
 				
 			},
