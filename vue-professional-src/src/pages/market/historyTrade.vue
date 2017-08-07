@@ -8,12 +8,14 @@
 			<div class="search">
 				<div class="ipt_box fl">
 					<img src="../../assets/img/date.png"/>
-					<input type="text" />
+					<input type="date" class="ipt_date" v-model="start_date" />
+					<input type="text" v-model="startDate" />
 				</div>
 				<img src="../../assets/img/date_arrow.png" class="date_arrow fl" />
 				<div class="ipt_box fl">
 					<img src="../../assets/img/date.png"/>
-					<input type="text" />
+					<input type="date" class="ipt_date" v-model="end_date" />
+					<input type="text" v-model="endDate" />
 				</div>
 				<cbtn name="搜索" @tap.native="search00"></cbtn>
 			</div>
@@ -98,6 +100,10 @@
 		components:{topbar, back, cbtn},
 		data() {
 			return {
+				start_date: '',
+				end_date: '',
+				startDate: '',
+				endDate: '',
 				dayShow: true,
 				weekShow: false,
 				tablist: [{
@@ -106,25 +112,33 @@
 					nav: '一月内',
 				}],
 				dataList: [
-//					{
-//						index: 1,
-//						name: '美原油09',
-//						type: '多',
-//						num: 12,
-//						money: 4800,
-//						type_color: 'green',
-//						money_color: 'green'
-//					},
-//					{
-//						index: 2,
-//						name: '美原油09',
-//						type: '空',
-//						num: 12,
-//						money: 4800,
-//						type_color: 'red',
-//						money_color: 'red'
-//					},
+					{
+						index: 1,
+						name: '美原油09',
+						type: '多',
+						num: 12,
+						money: 4800,
+						type_color: 'green',
+						money_color: 'green'
+					},
+					{
+						index: 2,
+						name: '美原油09',
+						type: '空',
+						num: 12,
+						money: 4800,
+						type_color: 'red',
+						money_color: 'red'
+					},
 				]
+			}
+		},
+		watch: {
+			start_date: function(n, o){
+				this.startDate = n;
+			},
+			end_date: function(n, o){
+				this.endDate = n;
 			}
 		},
 		methods: {
@@ -185,27 +199,43 @@
 				padding: 0 15px*@ip5;
 				background: @deepblue;
 				.ipt_box{
-					width: 110px*@ip5;
+					width: 120px*@ip5;
 					height: 34px*@ip5;
 					overflow: hidden;
 					background: @black;
 					margin: 5px*@ip5 0;
 					border-radius: 4px*@ip5;
+					position: relative;
 					img{
 						float: left;
 						width: 20px*@ip5;
 						height: 21px*@ip5;
 						margin: 7px*@ip5;
 					}
+					.ipt_date{
+						position: absolute;
+						top: ;
+						width: ;
+					}
+					.ipt_date{
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 34px*@ip5;
+						height: 34px*@ip5;
+						overflow: hidden;
+						opacity: 0;
+					}
 					input{
 						float: left;
-						width: 75px*@ip5;
+						width: 85px*@ip5;
 						height: 34px*@ip5;
 						line-height: 34px*@ip5;
 						background: none;
 						border: none;
 						color: @white;
 						padding: 0;
+						font-size: @fs14*@ip5;
 					}
 				}
 				.date_arrow{
@@ -297,27 +327,38 @@
 				padding: 0 15px*@ip6;
 				background: @deepblue;
 				.ipt_box{
-					width: 110px*@ip6;
+					width: 120px*@ip6;
 					height: 34px*@ip6;
 					overflow: hidden;
 					background: @black;
 					margin: 5px*@ip6 0;
 					border-radius: 4px*@ip6;
+					position: relative;
 					img{
 						float: left;
 						width: 20px*@ip6;
 						height: 21px*@ip6;
 						margin: 7px*@ip6;
 					}
+					.ipt_date{
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 34px*@ip6;
+						height: 34px*@ip6;
+						overflow: hidden;
+						opacity: 0;
+					}
 					input{
 						float: left;
-						width: 75px*@ip6;
+						width: 85px*@ip6;
 						height: 34px*@ip6;
 						line-height: 34px*@ip6;
 						background: none;
 						border: none;
 						color: @white;
 						padding: 0;
+						font-size: @fs14*@ip6;
 					}
 				}
 				.date_arrow{
@@ -409,27 +450,38 @@
 				padding: 0 15px;
 				background: @deepblue;
 				.ipt_box{
-					width: 110px;
+					width: 120px;
 					height: 34px;
 					overflow: hidden;
 					background: @black;
 					margin: 5px 0;
 					border-radius: 4px;
+					position: relative;
 					img{
 						float: left;
 						width: 20px;
 						height: 21px;
 						margin: 7px;
 					}
+					.ipt_date{
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 34px;
+						height: 34px;
+						overflow: hidden;
+						opacity: 0;
+					}
 					input{
 						float: left;
-						width: 75px;
+						width: 85px;
 						height: 34px;
 						line-height: 34px;
 						background: none;
 						border: none;
 						color: @white;
 						padding: 0;
+						font-size: @fs14;
 					}
 				}
 				.date_arrow{
