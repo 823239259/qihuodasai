@@ -3,7 +3,8 @@
 		<!--topbar-->
 		<!--tab切换-->
 		<changealert :price="bindPrice" :num="bindNum"></changealert>
-		<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" addr="127.0.0.1" :objstr='objst'></alert>
+		<!--<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" addr="127.0.0.1" :objstr='objst'></alert>-->
+		<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" :objstr='objst'></alert>
 		<div class="money_total border_bottom">
 			<span>总资产</span>
 			<span class="white">{{this.jCacheTotalAccount.TodayBalance | fixNum}}</span>
@@ -220,6 +221,8 @@
 				],
 				tabList: [{nav:'持仓'},{nav:'挂单'},{nav:'委托'},{nav:'成交'}],
 				orderListId: '',
+				buyText:{},
+				
 //				openChangealertCurrentObj:null,
 //				positionListCont:[
 ////					{
@@ -278,8 +281,32 @@
 			}
 		},
 		computed:{
+			objst: function(){
+				if(this.buyText){
+					return JSON.stringify(this.buyText);
+				}
+			},
 			insertOrder: function(){
-				return  1232424243;
+				var obj = this.buyText.Parameters;
+				if(obj !=undefined){
+					var contract=obj.CommodityNo+obj.ContractNo;
+					var priceType;
+					if(obj.PriceType==1){
+						priceType='市价';
+					}
+					var orderNum = obj.OrderNum;
+					var drection;
+					if(obj.Drection==0){
+						drection = '买';
+					}else{
+						drection = '卖';
+					}
+					
+					var text = '确认提交订单:【'+contract+'】,价格【'+priceType +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
+					return  text;
+				}
+				
+				
 			},
 			bindPrice: function(){
 				if(this.$store.state.market.openChangealertCurrentObj){
@@ -633,49 +660,51 @@
 				}
 			},
 			buy:function(){
-				this.$children[1].isshow = true;
+					this.$children[1].isshow = true;
 					var commodityNo = this.detail.CommodityNo;
 					if(this.isShow==true){
 						
-						var buildIndex=0;
-						if(buildIndex>100){
-							buildIndex=0;
-						}
-						var b={
-							"Method":'InsertOrder',
-							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
-								"OrderNum":this.$children[0].defaultNum,
-								"Drection":0,
-								"PriceType":1,
-								"LimitPrice":0.00,
-								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							var buildIndex=0;
+							if(buildIndex>100){
+								buildIndex=0;
 							}
-						};
-						this.tradeSocket.send(JSON.stringify(b));
+							var b={
+								"Method":'InsertOrder',
+								"Parameters":{
+									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+									"CommodityNo":this.templateList[commodityNo].CommodityNo,
+									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"OrderNum":this.$children[2].defaultNum,
+									"Drection":0,
+									"PriceType":1,
+									"LimitPrice":0.00,
+									"TriggerPrice":0,
+									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+							this.buyText = b;
+//							this.tradeSocket.send(JSON.stringify(b));
+						
 					}else{
-						var buildIndex=0;
-						if(buildIndex>100){
-							buildIndex=0;
-						}
-						var b={
-							"Method":'InsertOrder',
-							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
-								"OrderNum": parseInt(this.tradeNum),
-								"Drection":0,
-								"PriceType":0,
-								"LimitPrice":parseFloat(this.tradePrice),
-								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							var buildIndex=0;
+							if(buildIndex>100){
+								buildIndex=0;
 							}
-						};
-						this.tradeSocket.send(JSON.stringify(b));
+							var b={
+								"Method":'InsertOrder',
+								"Parameters":{
+									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+									"CommodityNo":this.templateList[commodityNo].CommodityNo,
+									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"OrderNum": parseInt(this.tradeNum),
+									"Drection":0,
+									"PriceType":0,
+									"LimitPrice":parseFloat(this.tradePrice),
+									"TriggerPrice":0,
+									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+							this.tradeSocket.send(JSON.stringify(b));
 						
 					}
 				

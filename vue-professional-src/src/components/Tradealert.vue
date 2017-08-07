@@ -28,19 +28,18 @@
 				isshow: false
 			}
 		},
+		computed:{
+			tradeSocket:function(){
+				return this.$store.state.tradeSocket;
+			}
+		},
 		methods: {
 			close: function() {
 				this.isshow = false;
 			},
 			confirm: function(a, b) {
-				/*
-				 * 确认并提交数据到后台
-				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
-				 */
+				this.tradeSocket.send(this.objstr);
 				this.isshow = false;
-				var c = JSON.parse(b);
-				console.log('地址是' + a + '数据是' + b);
-				console.log(c);
 			}
 		}
 	}
