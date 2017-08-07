@@ -1562,6 +1562,7 @@ export default new Vuex.Store({
 					if(parameters!=null){
 						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 					}
+					context.dispatch('layerOnRtnOrderTraded',parameters);
 					break;
 				case 'OnError':
 					console.log('OnError');
@@ -1570,8 +1571,23 @@ export default new Vuex.Store({
 					break;
 			}
 		},
+		layerOnRtnOrderTraded:function(context,parameters){
+			if(parameters!=null){
+				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
+				var DirectionStr;
+				if(parameters.Drection==0){
+					DirectionStr='买';
+				}
+				if(parameters.Drection==1){
+					DirectionStr='卖';
+				}
+				var TradeNum = parameters.TradeNum;
+				var TradeNo = parameters.TradeNo;
+				var TradePrice = parseFloat(parameters.TradePrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+				context.state.market.layer="成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）";
+			}
+		},
 		layerMessage:function(context,parameters){
-			console.log(parameters);
 			if(parameters!=null){
 				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 				var DirectionStr;
