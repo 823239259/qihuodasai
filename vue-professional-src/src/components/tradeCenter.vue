@@ -179,10 +179,12 @@
 		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>-->
 		<alert title="确认撤单" :line2="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
 		<alert title="确认全部撤单"  :line2="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
+		<tipsDialog :msg="msgTips"></tipsDialog>
 	</div>
 </template>
 
 <script>
+	import tipsDialog from '../components/tipsDialog.vue'
 	import tradebtn from '../components/tradeButton.vue'
 	import cbtn from '../components/conditionBtn.vue'
 	import operatenum from '../components/oprtateNum.vue'
@@ -191,9 +193,10 @@
 	import alert from '../components/Tradealert.vue'
 	export default{
 		name: 'tradeCenter',
-		components: {tradebtn, cbtn, operatenum, orderlist, changealert, alert},
+		components: {tradebtn, cbtn, operatenum, orderlist, changealert, alert, tipsDialog},
 		data(){
 			return {
+				msg: '',
 				selectId:'',
 				isShow: true,
 				positionShow: true,
@@ -235,11 +238,16 @@
 			}
 		},
 		computed:{
+			msgTips: function(){
+				return this.msg;
+			},
+			layer(){
+				return this.$store.state.market.layer;
+			},
 			cancelAllOrderAlertObj:function(){
 				if(this.buyText){
 					return JSON.stringify(this.buyText);
 				}
-				
 			},
 			cancelAllOrderAlert:function(){
 				return '此操作将撤销挂单中所有合约,请你慎重选择。是否确认将所有合约全部撤销？';
@@ -366,6 +374,11 @@
 			}
 		},
 		watch:{
+			layer: function(n, o){
+				console.log(this.$children);
+				this.$children[8].isShow = true;
+				this.msg = this.layer;
+			},
 			selectId:function(n,o){
 				if(n != undefined){
 					var arr=n.split(' ');
@@ -493,9 +506,6 @@
 					
 				}.bind(this));
 			}
-			
-			
-			
 		},
 		methods: {
 			cancelAllOrder:function(){

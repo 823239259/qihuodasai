@@ -31,8 +31,8 @@
     	left: 50%;
     	z-index: 1111;
     	width: 220px;
-    	height: 44px;
-    	line-height: 44px;
+    	line-height: 24px;
+    	padding: 5px 0;
     	text-align: center;
     	overflow: hidden;
     	margin-left: -110px;
@@ -51,8 +51,8 @@
     	left: 50%;
     	z-index: 1111;
     	width: 220px*@ip6;
-    	height: 44px*@ip6;
-    	line-height: 44px*@ip6;
+    	line-height: 24px*@ip6;
+    	padding: 5px*@ip6 0;
     	text-align: center;
     	overflow: hidden;
     	margin-left: -110px*@ip6;
@@ -71,8 +71,8 @@
     	left: 50%;
     	z-index: 1111;
     	width: 220px*@ip5;
-    	height: 44px*@ip5;
-    	line-height: 44px*@ip5;
+    	line-height: 24px*@ip5;
+    	padding: 5px*@ip5 0;
     	text-align: center;
     	overflow: hidden;
     	margin-left: -110px*@ip5;

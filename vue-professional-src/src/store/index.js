@@ -124,6 +124,8 @@ var market = {
 		
 		openChangealertCurrentObj:null,
 		
+		layer:null,
+		
 		
 		
 		//选择K线时候的值
@@ -1498,8 +1500,6 @@ export default new Vuex.Store({
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
 						//初始化持仓列表中的浮动盈亏
-//						console.log(context.state.market.qryHoldTotalArr);
-						console.log(context.state.market.positionListCont);
 						context.dispatch('updateHoldFloatingProfit',parameters);
 						
 					}
@@ -1507,7 +1507,6 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspQryOrder': //查询订单信息回复
 					console.log('查询订单信息回复');
-//					console.log(context.state.market.orderTemplist[parameters.CommodityNo].CommodityName);
 					if(parameters!=null){
 						context.dispatch('appendOrder',parameters);
 						context.dispatch('appendApply',parameters);
@@ -1547,6 +1546,8 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspOrderInsert':
 					console.log('报单请求回复');
+					
+					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder',parameters);
 					// 排队中委托单放入挂单列表
@@ -1556,11 +1557,46 @@ export default new Vuex.Store({
 					console.log('持仓合计变化推送通知');
 					context.dispatch('updateHold',parameters);
 					break;
+				case 'OnRtnOrderTraded':
+					console.log('成交单通知');
+					if(parameters!=null){
+						context.state.market.OnRspQryTradeDealListCont.push(parameters);
+					}
+					break;
 				case 'OnError':
 					console.log('OnError');
 					console.log(parameters);
 				default:
 					break;
+			}
+		},
+		layerMessage:function(context,parameters){
+			console.log(parameters);
+			if(parameters!=null){
+				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
+				var DirectionStr;
+				if(parameters.Drection==0){
+					DirectionStr='买';
+				}
+				if(parameters.Drection==1){
+					DirectionStr='卖';
+				}
+				var price;
+				if(parameters.OrderPriceType==1){
+					price = '市价';
+				}
+				if(parameters.OrderPriceType==0){
+					price = parseFloat(parameters.OrderPrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+				}
+				var OrderNum = parameters.OrderNum;
+				var OrderID = parameters.OrderID;
+				
+				if(parameters.OrderStatus<4){
+					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）';
+				}else{
+					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）';
+				}
+				
 			}
 		},
 		updateApply:function(context,parameters){
@@ -1576,7 +1612,6 @@ export default new Vuex.Store({
 					currentObj = e;
 				}
 			});
-			console.log(parameters);
 			if(parameters.OrderStatus < 3 ){
 //				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 				if(isExist==true){
