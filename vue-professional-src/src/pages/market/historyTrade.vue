@@ -26,7 +26,7 @@
 					</template>
 				</ul>
 			</div>
-			<div id="dayCont" class="list_cont" v-if="dayShow">
+			<div id="dayCont" class="list_cont">
 				<ul>
 					<li>
 						<span>序号</span>
@@ -55,7 +55,7 @@
 				
 				</ul>
 			</div>
-			<div id="weekCont" class="list_cont" v-else-if="weekShow">
+			<!--<div id="weekCont" class="list_cont" v-else-if="weekShow">
 				<ul>
 					<li>
 						<span>序号</span>
@@ -68,22 +68,22 @@
 						<span>手续费</span>
 						<span>成交时间</span>
 					</li>
-					<template>
+					<template v-for="key in dataList">
 						<li>
-							<span>2</span>
-							<span>美原油09</span>
-							<span>多</span>
-							<span>12</span>
-							<span>4800</span>
-							<span></span>
-							<span></span>
-							<span></span>
-							<span></span>
+							<span>{{key.index}}</span>
+							<span>{{key.CommodityNoContractNo}}</span>
+							<span>{{key.ExchangeNo}}</span>
+							<span>{{key.CurrencyNo}}</span>
+							<span :class="{red: key.Drection == '买', green: key.Drection == '卖'}">{{key.Drection}}</span>
+							<span>{{key.TradePrice}}</span>
+							<span>{{key.TradeNum}}</span>
+							<span>{{key.TradeFee}}</span>
+							<span>{{key.TradeDateTime}}</span>
 						</li>
 					</template>
 				</ul>
-			</div>
-			<div id="monthCont" class="list_cont" v-else>
+			</div>-->
+			<!--<div id="monthCont" class="list_cont" v-else>
 				<ul>
 					<li>
 						<span>序号</span>
@@ -110,7 +110,7 @@
 						</li>
 					</template>
 				</ul>
-			</div>
+			</div>-->
 		</div>
 	</div>
 </template>
@@ -136,19 +136,7 @@
 					nav: '一月内',
 				}],
 				
-				dataList: [
-				/*
-					{
-						index: 1,
-						name: '美原油09',
-						type: '多',
-						num: 12,
-						money: 4800,
-						type_color: 'green',
-						money_color: 'green'
-					},*/
-					
-				]
+				dataList: []
 			}
 		},
 		computed:{
@@ -157,6 +145,9 @@
 			},
 			orderTemplist(){
 				return	this.$store.state.market.orderTemplist;
+			},
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
 			}
 		},
 		watch: {
@@ -171,17 +162,56 @@
 			search00:function(){
 				console.log('1111111111');
 			},
+			eachData: function(){
+				this.dataList = [];
+				this.queryHisList.forEach(function(e,i){
+					var b ={};
+					b.index = i;
+					b.CommodityNoContractNo = e.ContractCode;
+					b.ExchangeNo = e.ExchangeNo;
+					b.CurrencyNo = e.CurrencyNo;
+					b.Drection =(function(){
+						if(e.Drection==0){
+							return '买';
+						}else{
+							return '卖';
+						}
+					})();
+					b.TradePrice = parseFloat(e.TradePrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
+					b.TradeNum = e.TradeNum;
+					b.TradeFee = e.TradeFee;
+					b.TradeDateTime = e.TradeDateTime;
+					this.dataList.push(b);
+				}.bind(this));
+			},
 			showCont: function(e){
 				$(e.currentTarget).addClass('current').siblings().removeClass('current');
-				if($(e.currentTarget).index() == 0){
-					this.dayShow = true;
-					this.weekShow = false;
-				}else if($(e.currentTarget).index() == 1){
-					this.dayShow = false;
-					this.weekShow = true;
-				}else{
-					this.dayShow = false;
-					this.weekShow = false;
+				if($(e.currentTarget).index() == 0){ //一天
+//					this.dayShow = true;
+//					this.weekShow = false;
+				}else if($(e.currentTarget).index() == 1){ //一周
+//					this.dayShow = false;
+//					this.weekShow = true;
+					console.log(234);
+					var date = new Date(); 
+		    		date.setDate(date.getDate()-7);
+		    		var year = date.getFullYear();
+		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
+		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
+		    		
+		    		var date00 = new Date(); 
+		    		date00.setDate(date00.getDate());
+		    		var year00 = date00.getFullYear();
+		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
+		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
+		    		
+		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+					this.eachData();
+				}else{ //一月
+//					this.dayShow = false;
+//					this.weekShow = false;
 				}
 				
 			}
@@ -192,26 +222,7 @@
 			$("#historyTrade").css("height", screenHeight + "px");
 		},
 		activated: function(){
-			this.queryHisList.forEach(function(e,i){
-				console.log(this.orderTemplist[e.CommodityNo]);
-				var b ={};
-				b.index = i;
-				b.CommodityNoContractNo = e.ContractCode;
-				b.ExchangeNo = e.ExchangeNo;
-				b.CurrencyNo = e.CurrencyNo;
-				b.Drection =(function(){
-					if(e.Drection==0){
-						return '买';
-					}else{
-						return '卖';
-					}
-				})();
-				b.TradePrice = parseFloat(e.TradePrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
-				b.TradeNum = e.TradeNum;
-				b.TradeFee = e.TradeFee;
-				b.TradeDateTime = e.TradeDateTime;
-				this.dataList.push(b);
-			}.bind(this));
+			this.eachData();
 		}
 		
 	}
