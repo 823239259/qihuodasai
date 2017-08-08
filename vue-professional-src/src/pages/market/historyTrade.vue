@@ -30,18 +30,26 @@
 				<ul>
 					<li>
 						<span>序号</span>
-						<span>合约名称</span>
-						<span>交易盈亏</span>
-						<span>交易手数</span>
-						<span>交易手续费</span>
+						<span>合约代码</span>
+						<span>交易所</span>
+						<span>币种</span>
+						<span>买卖</span>
+						<span>成交价</span>
+						<span>成交量</span>
+						<span>手续费</span>
+						<span>成交时间</span>
 					</li>
 					<template v-for="key in dataList">
 						<li>
-							<span>{{key.index}}</span>
-							<span>{{key.ContractNo}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>
-							<span>{{key.num}}</span>
-							<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.money}}</span>
+							<span>2</span>
+							<span>美原油09</span>
+							<span>多</span>
+							<span>12</span>
+							<span>4800</span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
 						</li>
 					</template>
 				
@@ -51,10 +59,14 @@
 				<ul>
 					<li>
 						<span>序号</span>
-						<span>合约名称</span>
-						<span>交易盈亏</span>
-						<span>交易手数</span>
-						<span>交易手续费</span>
+						<span>合约代码</span>
+						<span>交易所</span>
+						<span>币种</span>
+						<span>买卖</span>
+						<span>成交价</span>
+						<span>成交量</span>
+						<span>手续费</span>
+						<span>成交时间</span>
 					</li>
 					<template>
 						<li>
@@ -63,6 +75,10 @@
 							<span>多</span>
 							<span>12</span>
 							<span>4800</span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
 						</li>
 					</template>
 				</ul>
@@ -71,10 +87,14 @@
 				<ul>
 					<li>
 						<span>序号</span>
-						<span>合约名称</span>
-						<span>交易盈亏</span>
-						<span>交易手数</span>
-						<span>交易手续费</span>
+						<span>合约代码</span>
+						<span>交易所</span>
+						<span>币种</span>
+						<span>买卖</span>
+						<span>成交价</span>
+						<span>成交量</span>
+						<span>手续费</span>
+						<span>成交时间</span>
 					</li>
 					<template>
 						<li>
@@ -83,6 +103,10 @@
 							<span>多</span>
 							<span>12</span>
 							<span>4800</span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
 						</li>
 					</template>
 				</ul>
@@ -110,7 +134,7 @@
 					nav: '一天内'},{
 					nav: '一周内'},{
 					nav: '一月内',
-				}],/*
+				}],
 				dataList: [
 					{
 						index: 1,
@@ -131,7 +155,6 @@
 						money_color: 'red'
 					},
 				]
-				*/
 			}
 		},
 		computed:{
@@ -186,11 +209,11 @@
 <style scoped lang="less">
 	@import url("../../assets/css/main.less");
 	@import url("../../assets/css/base.less");
-	/*ip5*/
-	@media(max-width:370px) {
-		#historyTrade{
+	/*ip6p及以上*/
+	@media (min-width:411px) {
+	    #historyTrade{
 			width: 100%;
-			padding-top: 50px*@ip5;
+			padding-top: 50px;
 			background: @black;
 		}
 		.head{
@@ -204,73 +227,68 @@
 		.page_cont{
 			width: 100%;
 			position: fixed;
-			top: 50px*@ip5;
+			top: 50px;
 			left: 0;
 			.search{
-				height: 44px*@ip5;
-				padding: 0 15px*@ip5;
+				height: 44px;
+				padding: 0 15px;
 				background: @deepblue;
 				.ipt_box{
-					width: 120px*@ip5;
-					height: 34px*@ip5;
+					width: 120px;
+					height: 34px;
 					overflow: hidden;
 					background: @black;
-					margin: 5px*@ip5 0;
-					border-radius: 4px*@ip5;
+					margin: 5px 0;
+					border-radius: 4px;
 					position: relative;
 					img{
 						float: left;
-						width: 20px*@ip5;
-						height: 21px*@ip5;
-						margin: 7px*@ip5;
-					}
-					.ipt_date{
-						position: absolute;
-						top: ;
-						width: ;
+						width: 20px;
+						height: 21px;
+						margin: 7px;
 					}
 					.ipt_date{
 						position: absolute;
 						top: 0;
 						left: 0;
-						width: 34px*@ip5;
-						height: 34px*@ip5;
+						width: 34px;
+						height: 34px;
 						overflow: hidden;
 						opacity: 0;
 					}
 					input{
 						float: left;
-						width: 85px*@ip5;
-						height: 34px*@ip5;
-						line-height: 34px*@ip5;
+						width: 85px;
+						height: 34px;
+						line-height: 34px;
 						background: none;
 						border: none;
 						color: @white;
 						padding: 0;
-						font-size: @fs14*@ip5;
+						font-size: @fs14;
 					}
 				}
 				.date_arrow{
-					width: 18px*@ip5;
-					height: 8px*@ip5;
-					margin: 18px*@ip5 5px*@ip5;
+					width: 18px;
+					height: 8px;
+					margin: 18px 5px;
 				}
 				#conditionBtn{
 					float: right;
-					margin-top: 5px*@ip5;	
+					margin-top: 5px;	
 				}
 			}
 			.tab_box{
-				height: 42px*@ip5;
+				height: 42px;
 				background: @deepblue;
 				li{
 					float: left;
 					width: 33.33%;
-					height: 42px*@ip5;
-					line-height: 42px*@ip5;
+					height: 42px;
+					line-height: 42px;
 					color: @lightblue;
 					text-align: center;
-					font-size: @fs14*@ip5;
+					font-size: @fs14;
 					&.current{
 						color: @yellow;
 					}
@@ -280,27 +298,36 @@
 				width: 100%;
 				height: auto;
 				background: @deepblue;
-				overflow-x: scroll;
 				ul{
-					width: 120%;
+					width: 100%;
+					overflow-x: scroll;
 					box-sizing: content-box;
 					li{
-						width: 100%;
-						height: 44px*@ip5;
-						line-height: 44px*@ip5;
+						width: 800px;
+						height: 44px;
+						line-height: 44px;
 						border-top: 1px solid @black;
-						padding: 0 3.62%;
+						padding-left: 15px;
 						&:nth-child(1){
 							background: #36394d;
 						}
 						span{
 							display: inline-block;
 							float: left;
-							width: 20%;
-							font-size: @fs14*@ip5;
+							width: 50px;
+							font-size: @fs14;
 							color: @blue;
-							&:nth-child(1){
-								width: 14%;
+							&:nth-child(2){
+								width: 90px;
+							}
+							&:nth-child(3), &:nth-child(4){
+								width: 70px;
+							}
+							&:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8){
+								width: 80px;
+							}
+							&:nth-child(9){
+								width: 150px;
 							}
 							&.red{
 								color: @red;
@@ -403,27 +430,36 @@
 				width: 100%;
 				height: auto;
 				background: @deepblue;
-				overflow-x: scroll;
 				ul{
-					width: 120%;
+					width: 100%;
+					overflow-x: scroll;
 					box-sizing: content-box;
 					li{
-						width: 100%;
+						width: 800px*@ip6;
 						height: 44px*@ip6;
 						line-height: 44px*@ip6;
 						border-top: 1px solid @black;
-						padding: 0 3.62%;
+						padding-left: 15px*@ip6;
 						&:nth-child(1){
 							background: #36394d;
 						}
 						span{
 							display: inline-block;
 							float: left;
-							width: 20%;
+							width: 50px*@ip6;
 							font-size: @fs14*@ip6;
 							color: @blue;
-							&:nth-child(1){
-								width: 14%;
+							&:nth-child(2){
+								width: 90px*@ip6;
+							}
+							&:nth-child(3), &:nth-child(4){
+								width: 70px*@ip6;
+							}
+							&:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8){
+								width: 80px*@ip6;
+							}
+							&:nth-child(9){
+								width: 150px*@ip6;
 							}
 							&.red{
 								color: @red;
@@ -437,11 +473,11 @@
 			}
 		}
 	}
-	/*ip6p及以上*/
-	@media (min-width:411px) {
-	    #historyTrade{
+	/*ip5*/
+	@media(max-width:370px) {
+		#historyTrade{
 			width: 100%;
-			padding-top: 50px;
+			padding-top: 50px*@ip5;
 			background: @black;
 		}
 		.head{
@@ -455,68 +491,68 @@
 		.page_cont{
 			width: 100%;
 			position: fixed;
-			top: 50px;
+			top: 50px*@ip5;
 			left: 0;
 			.search{
-				height: 44px;
-				padding: 0 15px;
+				height: 44px*@ip5;
+				padding: 0 15px*@ip5;
 				background: @deepblue;
 				.ipt_box{
-					width: 120px;
-					height: 34px;
+					width: 120px*@ip5;
+					height: 34px*@ip5;
 					overflow: hidden;
 					background: @black;
-					margin: 5px 0;
-					border-radius: 4px;
+					margin: 5px*@ip5 0;
+					border-radius: 4px*@ip5;
 					position: relative;
 					img{
 						float: left;
-						width: 20px;
-						height: 21px;
-						margin: 7px;
+						width: 20px*@ip5;
+						height: 21px*@ip5;
+						margin: 7px*@ip5;
 					}
 					.ipt_date{
 						position: absolute;
 						top: 0;
 						left: 0;
-						width: 34px;
-						height: 34px;
+						width: 34px*@ip5;
+						height: 34px*@ip5;
 						overflow: hidden;
 						opacity: 0;
 					}
 					input{
 						float: left;
-						width: 85px;
-						height: 34px;
-						line-height: 34px;
+						width: 85px*@ip5;
+						height: 34px*@ip5;
+						line-height: 34px*@ip5;
 						background: none;
 						border: none;
 						color: @white;
 						padding: 0;
-						font-size: @fs14;
+						font-size: @fs14*@ip5;
 					}
 				}
 				.date_arrow{
-					width: 18px;
-					height: 8px;
-					margin: 18px 5px;
+					width: 18px*@ip5;
+					height: 8px*@ip5;
+					margin: 18px*@ip5 5px*@ip5;
 				}
 				#conditionBtn{
 					float: right;
-					margin-top: 5px;	
+					margin-top: 5px*@ip5;	
 				}
 			}
 			.tab_box{
-				height: 42px;
+				height: 42px*@ip5;
 				background: @deepblue;
 				li{
 					float: left;
 					width: 33.33%;
-					height: 42px;
-					line-height: 42px;
+					height: 42px*@ip5;
+					line-height: 42px*@ip5;
 					color: @lightblue;
 					text-align: center;
-					font-size: @fs14;
+					font-size: @fs14*@ip5;
 					&.current{
 						color: @yellow;
 					}
@@ -526,27 +562,36 @@
 				width: 100%;
 				height: auto;
 				background: @deepblue;
-				overflow-x: scroll;
 				ul{
-					width: 120%;
+					width: 100%;
+					overflow-x: scroll;
 					box-sizing: content-box;
 					li{
-						width: 100%;
-						height: 44px;
-						line-height: 44px;
+						width: 800px*@ip5;
+						height: 44px*@ip5;
+						line-height: 44px*@ip5;
 						border-top: 1px solid @black;
-						padding: 0 3.62%;
+						padding-left: 15px*@ip5;
 						&:nth-child(1){
 							background: #36394d;
 						}
 						span{
 							display: inline-block;
 							float: left;
-							width: 20%;
-							font-size: @fs14;
+							width: 50px*@ip5;
+							font-size: @fs14*@ip5;
 							color: @blue;
-							&:nth-child(1){
-								width: 14%;
+							&:nth-child(2){
+								width: 90px*@ip5;
+							}
+							&:nth-child(3), &:nth-child(4){
+								width: 70px*@ip5;
+							}
+							&:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8){
+								width: 80px*@ip5;
+							}
+							&:nth-child(9){
+								width: 150px*@ip5;
 							}
 							&.red{
 								color: @red;
@@ -560,7 +605,5 @@
 			}
 		}
 	}
-	
-	
 	
 </style>

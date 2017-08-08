@@ -95,7 +95,7 @@
 					<template v-for="key in sevenlist">
 						<li>
 							<p class="fl fontgray">
-								{{ key.createdAt | getTime('HH:mm') }}
+								{{key.createdAt | getTime('HH:mm')}}
 							</p>
 							<p class="fl">
 
@@ -138,6 +138,7 @@
 			},
 			getTime: function(e, format) {
 				//				var format = function(e, format) {
+					console.log(e);
 				var t = new Date(e);
 				var tf = function(i) {
 					return(i < 10 ? '0' : '') + i
@@ -316,6 +317,7 @@
 
 				).then(function(e) {
 					this.sevenlist = e.body.data.data;
+					console.log(this.sevenlist);
 					if(e.body.data.data.length<1){
 						this.msg = '查询当日没有更多数据...点击加载前一天数据';
 					}else{
