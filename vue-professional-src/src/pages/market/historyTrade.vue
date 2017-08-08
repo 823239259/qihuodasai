@@ -104,7 +104,22 @@
 		},
 		methods: {
 			search00:function(){
-				console.log('1111111111');
+				var year = this.startDate.substring(0,4);
+				var month = this.startDate.substring(5,7);
+				var day =  this.startDate.substring(8,10);
+				var beginTime = year+'/'+month+'/'+day+' 00:00:00';
+				
+				var year0 = this.endDate.substring(0,4);
+				var month0 = this.endDate.substring(5,7);
+				var day0 =  this.endDate.substring(8,10);
+				var endTime = year0+'/'+month0+'/'+day0+' 00:00:00';
+				
+				this.dataList = [];
+				this.$store.state.market.queryHisList = [];
+				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+				setTimeout(function(){
+						this.eachData();
+				}.bind(this),1000);
 			},
 			eachData: function(){
 //				this.$store.state.market.queryHisList=[];
@@ -132,7 +147,6 @@
 			showCont: function(e){
 				$(e.currentTarget).addClass('current').siblings().removeClass('current');
 				if($(e.currentTarget).index() == 0){ //一天
-//					this.eachData();
 					this.dataList = [];
 					var date = new Date(); 
 		    		date.setDate(date.getDate()-1);
