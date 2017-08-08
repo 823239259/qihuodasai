@@ -55,62 +55,6 @@
 				
 				</ul>
 			</div>
-			<!--<div id="weekCont" class="list_cont" v-else-if="weekShow">
-				<ul>
-					<li>
-						<span>序号</span>
-						<span>合约代码</span>
-						<span>交易所</span>
-						<span>币种</span>
-						<span>买卖</span>
-						<span>成交价</span>
-						<span>成交量</span>
-						<span>手续费</span>
-						<span>成交时间</span>
-					</li>
-					<template v-for="key in dataList">
-						<li>
-							<span>{{key.index}}</span>
-							<span>{{key.CommodityNoContractNo}}</span>
-							<span>{{key.ExchangeNo}}</span>
-							<span>{{key.CurrencyNo}}</span>
-							<span :class="{red: key.Drection == '买', green: key.Drection == '卖'}">{{key.Drection}}</span>
-							<span>{{key.TradePrice}}</span>
-							<span>{{key.TradeNum}}</span>
-							<span>{{key.TradeFee}}</span>
-							<span>{{key.TradeDateTime}}</span>
-						</li>
-					</template>
-				</ul>
-			</div>-->
-			<!--<div id="monthCont" class="list_cont" v-else>
-				<ul>
-					<li>
-						<span>序号</span>
-						<span>合约代码</span>
-						<span>交易所</span>
-						<span>币种</span>
-						<span>买卖</span>
-						<span>成交价</span>
-						<span>成交量</span>
-						<span>手续费</span>
-						<span>成交时间</span>
-					</li>
-					<template>
-						<li>
-							<span>3</span>
-							<span>美原油09</span>
-							<span>多</span>
-							<span>12</span>
-							<span>4800</span>
-							<span></span>
-							<span></span>
-							<span></span>
-							<span></span>
-						</li>
-					</template>
-				</ul>
-			</div>-->
 		</div>
 	</div>
 </template>
@@ -163,8 +107,9 @@
 				console.log('1111111111');
 			},
 			eachData: function(){
-				this.dataList = [];
+				console.log(123);
 				this.queryHisList.forEach(function(e,i){
+					console.log(i);
 					var b ={};
 					b.index = i;
 					b.CommodityNoContractNo = e.ContractCode;
@@ -183,16 +128,16 @@
 					b.TradeDateTime = e.TradeDateTime;
 					this.dataList.push(b);
 				}.bind(this));
+				
 			},
 			showCont: function(e){
 				$(e.currentTarget).addClass('current').siblings().removeClass('current');
 				if($(e.currentTarget).index() == 0){ //一天
-//					this.dayShow = true;
-//					this.weekShow = false;
+					console.log(1);
+					this.eachData();
 				}else if($(e.currentTarget).index() == 1){ //一周
-//					this.dayShow = false;
-//					this.weekShow = true;
-					console.log(234);
+					console.log(2);
+					this.dataList = [];
 					var date = new Date(); 
 		    		date.setDate(date.getDate()-7);
 		    		var year = date.getFullYear();
@@ -207,19 +152,21 @@
 		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
 		    		
 		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+		    		this.$store.state.market.queryHisList = [];
 					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-					this.eachData();
+					setTimeout(function(){
+						this.eachData();
+					}.bind(this),500);
 				}else{ //一月
-//					this.dayShow = false;
-//					this.weekShow = false;
+					console.log(3);
 				}
 				
 			}
 		},
 		mounted: function(){
 			$("#tab_box li:first-child").addClass("current");
-			var screenHeight = window.screen.height;
-			$("#historyTrade").css("height", screenHeight + "px");
+			var h = window.screen.height - $("#tab_box").height() - $(".search").height() - $("#topbar").height();
+			$(".list_cont ul").height(h);
 		},
 		activated: function(){
 			this.eachData();
@@ -322,7 +269,7 @@
 				background: @deepblue;
 				ul{
 					width: 100%;
-					overflow-x: scroll;
+					overflow: scroll;
 					box-sizing: content-box;
 					li{
 						width: 800px;
@@ -457,7 +404,7 @@
 				background: @deepblue;
 				ul{
 					width: 100%;
-					overflow-x: scroll;
+					overflow: scroll;
 					box-sizing: content-box;
 					li{
 						width: 800px*@ip6;
@@ -592,7 +539,7 @@
 				background: @deepblue;
 				ul{
 					width: 100%;
-					overflow-x: scroll;
+					overflow: scroll;
 					box-sizing: content-box;
 					li{
 						width: 800px*@ip5;
