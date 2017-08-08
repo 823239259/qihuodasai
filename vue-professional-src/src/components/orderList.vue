@@ -53,7 +53,6 @@
 				}
 			},
 			closeOutAlert:function(){
-				console.log(this.tempText);
 				var obj = this.tempText.Parameters;
 				if(obj!=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;

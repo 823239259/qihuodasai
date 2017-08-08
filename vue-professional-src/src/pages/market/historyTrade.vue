@@ -41,15 +41,15 @@
 					</li>
 					<template v-for="key in dataList">
 						<li>
-							<span>2</span>
-							<span>美原油09</span>
-							<span>多</span>
-							<span>12</span>
-							<span>4800</span>
-							<span></span>
-							<span></span>
-							<span></span>
-							<span></span>
+							<span>{{key.index}}</span>
+							<span>{{key.CommodityNoContractNo}}</span>
+							<span>{{key.ExchangeNo}}</span>
+							<span>{{key.CurrencyNo}}</span>
+							<span>{{key.Drection}}</span>
+							<span>{{key.TradePrice}}</span>
+							<span>{{key.TradeNum}}</span>
+							<span>{{key.TradeFee}}</span>
+							<span>{{key.TradeDateTime}}</span>
 						</li>
 					</template>
 				
@@ -135,7 +135,9 @@
 					nav: '一周内'},{
 					nav: '一月内',
 				}],
+				
 				dataList: [
+				/*
 					{
 						index: 1,
 						name: '美原油09',
@@ -144,16 +146,8 @@
 						money: 4800,
 						type_color: 'green',
 						money_color: 'green'
-					},
-					{
-						index: 2,
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						money: 4800,
-						type_color: 'red',
-						money_color: 'red'
-					},
+					},*/
+					
 				]
 			}
 		},
@@ -199,8 +193,24 @@
 //			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 //			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 			this.queryHisList.forEach(function(e,i){
-				console.log('1111');
-				console.log(e);
+				
+				var b ={};
+				b.index = i;
+				b.CommodityNoContractNo = e.ContractCode;
+				b.ExchangeNo = e.ExchangeNo;
+				b.CurrencyNo = e.CurrencyNo;
+				b.Drection =(function(){
+					if(e.Drection==0){
+						return '买';
+					}else{
+						return '卖';
+					}
+				});
+				b.TradePrice = e.TradePrice;
+				b.TradeNum = e.TradeNum;
+				b.TradeFee = e.TradeFee;
+				b.TradeDateTime = e.TradeDateTime;
+				this.dataList.push(b);
 			});
 		}
 	}
