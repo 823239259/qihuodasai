@@ -107,9 +107,8 @@
 				console.log('1111111111');
 			},
 			eachData: function(){
-				console.log(123);
+//				this.$store.state.market.queryHisList=[];
 				this.queryHisList.forEach(function(e,i){
-					console.log(i);
 					var b ={};
 					b.index = i;
 					b.CommodityNoContractNo = e.ContractCode;
@@ -133,10 +132,28 @@
 			showCont: function(e){
 				$(e.currentTarget).addClass('current').siblings().removeClass('current');
 				if($(e.currentTarget).index() == 0){ //一天
-					console.log(1);
-					this.eachData();
+//					this.eachData();
+					this.dataList = [];
+					var date = new Date(); 
+		    		date.setDate(date.getDate());
+		    		var year = date.getFullYear();
+		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
+		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
+		    		
+		    		var date00 = new Date(); 
+		    		date00.setDate(date00.getDate());
+		    		var year00 = date00.getFullYear();
+		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
+		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
+		    		
+		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+		    		this.$store.state.market.queryHisList = [];
+					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+					setTimeout(function(){
+						this.eachData();
+					}.bind(this),1000);
 				}else if($(e.currentTarget).index() == 1){ //一周
-					console.log(2);
 					this.dataList = [];
 					var date = new Date(); 
 		    		date.setDate(date.getDate()-7);
@@ -156,9 +173,30 @@
 					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
 						this.eachData();
-					}.bind(this),500);
+					}.bind(this),1000);
 				}else{ //一月
-					console.log(3);
+					
+					this.dataList = [];
+					var date = new Date(); 
+		    		date.setDate(date.getDate()-30);
+		    		var year = date.getFullYear();
+		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
+		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
+		    		
+		    		var date00 = new Date(); 
+		    		date00.setDate(date00.getDate());
+		    		var year00 = date00.getFullYear();
+		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
+		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
+		    		
+		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+		    		this.$store.state.market.queryHisList = [];
+					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+					setTimeout(function(){
+						this.eachData();
+						}.bind(this),1000);
+						
 				}
 				
 			}
