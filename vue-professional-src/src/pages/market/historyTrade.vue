@@ -190,12 +190,10 @@
 			$("#tab_box li:first-child").addClass("current");
 			var screenHeight = window.screen.height;
 			$("#historyTrade").css("height", screenHeight + "px");
-//			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
-//			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 		},
 		activated: function(){
 			this.queryHisList.forEach(function(e,i){
-				console.log(e);
+				console.log(this.orderTemplist[e.CommodityNo]);
 				var b ={};
 				b.index = i;
 				b.CommodityNoContractNo = e.ContractCode;
@@ -208,7 +206,7 @@
 						return '卖';
 					}
 				})();
-				b.TradePrice = e.TradePrice;
+				b.TradePrice = parseFloat(e.TradePrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
 				b.TradeNum = e.TradeNum;
 				b.TradeFee = e.TradeFee;
 				b.TradeDateTime = e.TradeDateTime;
