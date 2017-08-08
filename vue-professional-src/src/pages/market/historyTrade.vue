@@ -110,7 +110,7 @@
 					nav: '一天内'},{
 					nav: '一周内'},{
 					nav: '一月内',
-				}],
+				}],/*
 				dataList: [
 					{
 						index: 1,
@@ -131,6 +131,15 @@
 						money_color: 'red'
 					},
 				]
+				*/
+			}
+		},
+		computed:{
+			queryHisList(){
+				return this.$store.state.market.queryHisList;
+			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
 			}
 		},
 		watch: {
@@ -166,7 +175,10 @@
 			$("#historyTrade").css("height", screenHeight + "px");
 //			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 //			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
-			
+			this.queryHisList.forEach(function(e,i){
+				console.log('1111');
+				console.log(e);
+			});
 		}
 	}
 </script>

@@ -80,10 +80,9 @@
 					this.$children[0].isShow = true;
 					this.msg = '请输入您的交易密码';
 				}else{
-//					 var base = require('base64-js');
 					this.pwd = Base64.encode(this.pwd);
-					this.$store.state.market.tradeConfig.username = this.username;
-					this.$store.state.market.tradeConfig.password = this.pwd;
+//					this.$store.state.market.tradeConfig.username = this.username;
+//					this.$store.state.market.tradeConfig.password = this.pwd;
 					this.$router.push({path: '/orderdetail'})
 				}
 				
