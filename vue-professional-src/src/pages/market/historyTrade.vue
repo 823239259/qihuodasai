@@ -45,7 +45,7 @@
 							<span>{{key.CommodityNoContractNo}}</span>
 							<span>{{key.ExchangeNo}}</span>
 							<span>{{key.CurrencyNo}}</span>
-							<span>{{key.Drection}}</span>
+							<span :class="{red: key.Drection == '买', green: key.Drection == '卖'}">{{key.Drection}}</span>
 							<span>{{key.TradePrice}}</span>
 							<span>{{key.TradeNum}}</span>
 							<span>{{key.TradeFee}}</span>
@@ -192,8 +192,10 @@
 			$("#historyTrade").css("height", screenHeight + "px");
 //			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 //			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
+		},
+		activated: function(){
 			this.queryHisList.forEach(function(e,i){
-				
+				console.log(e);
 				var b ={};
 				b.index = i;
 				b.CommodityNoContractNo = e.ContractCode;
@@ -205,14 +207,15 @@
 					}else{
 						return '卖';
 					}
-				});
+				})();
 				b.TradePrice = e.TradePrice;
 				b.TradeNum = e.TradeNum;
 				b.TradeFee = e.TradeFee;
 				b.TradeDateTime = e.TradeDateTime;
 				this.dataList.push(b);
-			});
+			}.bind(this));
 		}
+		
 	}
 </script>
 
@@ -330,8 +333,11 @@
 							&:nth-child(2){
 								width: 90px;
 							}
-							&:nth-child(3), &:nth-child(4){
+							&:nth-child(3){
 								width: 70px;
+							}
+							&:nth-child(4){
+								width: 90px;
 							}
 							&:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8){
 								width: 80px;
@@ -462,8 +468,11 @@
 							&:nth-child(2){
 								width: 90px*@ip6;
 							}
-							&:nth-child(3), &:nth-child(4){
+							&:nth-child(3){
 								width: 70px*@ip6;
+							}
+							&:nth-child(4){
+								width: 90px*@ip6;
 							}
 							&:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8){
 								width: 80px*@ip6;
@@ -594,8 +603,11 @@
 							&:nth-child(2){
 								width: 90px*@ip5;
 							}
-							&:nth-child(3), &:nth-child(4){
+							&:nth-child(3){
 								width: 70px*@ip5;
+							}
+							&:nth-child(4){
+								width: 90px*@ip5;
 							}
 							&:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8){
 								width: 80px*@ip5;
