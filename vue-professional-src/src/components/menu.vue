@@ -12,7 +12,7 @@
 					<li class="fontgray">止损止盈</li>
 					<li class="fontgray">资金详情</li>
 					<li class="fontgray" @tap="toHistoryTrade">历史成交</li>
-					<li class="fontgray">切换账号</li>
+					<li class="fontgray" @tap="toTradeLogin">切换账号</li>
 				</ul>
 			</div>
 			<!--</transition>-->
@@ -32,6 +32,9 @@
 			}
 		},
 		methods: {
+			toTradeLogin: function(){
+				this.$router.push({path:'/tradeLogin'});
+			},
 			toHistoryTrade: function(){
 				this.$router.push({path:'/historyTrade'});
 			},

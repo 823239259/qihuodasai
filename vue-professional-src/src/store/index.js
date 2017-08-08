@@ -60,8 +60,10 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
-			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
+//			username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+//			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
+			username:'',
+			password:''
 		},
 		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
@@ -2058,7 +2060,7 @@ export default new Vuex.Store({
 		},
 		initTrade:function(context){
 			
-			context.state.tradeSocket = new WebSocket('ws://192.168.0.213:6102');
+			context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
