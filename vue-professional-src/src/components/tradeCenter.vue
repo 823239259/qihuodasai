@@ -21,8 +21,8 @@
 		<div class="order_type border_bottom">
 			<div class="order_type_left fl">
 				<div class="cont">
-					<span class="white">{{detail.CommodityName}}</span>
-					<span>{{detail.CommodityNo}}{{detail.LastQuotation.ContractNo}}</span>
+					<span class="white">{{commodityName00}}</span>
+					<span>{{commodityNo00}}</span>
 					<i class="icon_search"></i>
 					<select v-model="selectId">
 						<option  v-for="v in parameters">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
@@ -204,6 +204,8 @@
 				entrustShow: false,
 				tradeNum:1,
 				tradePrice:'',
+				commodityName00: '',
+				commodityNo00: '',
 				list: [
 					{
 						type: '新',
@@ -380,8 +382,10 @@
 			},
 			selectId:function(n,o){
 				if(n != undefined){
-					var arr=n.split(' ');
+					var arr = n.split(' ');
 					this.$store.state.market.currentNo=arr[1];
+					this.commodityName00 = arr[0];
+					this.commodityNo00 = arr[1] + arr[2];
 				}
 				
 			},
@@ -900,7 +904,11 @@
 				
 			}.bind(this));
 			
-		}
+			//初始合约名称
+			this.commodityName00 = this.detail.CommodityName;
+			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
+			
+		},
 	}
 </script>
 
