@@ -189,6 +189,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 2110;
 		background-color: rgba(0, 0, 0, .8);
 	}
 	/*ip6p及以上*/
@@ -201,6 +202,7 @@
 			width: 330px;
 			height: 400px;
 			overflow: hidden;
+			z-index: 2111;
 			margin: -200px 0 0 -165px;
 			i {
 				display: inline-block;
@@ -273,6 +275,7 @@
 			width: 330px*@ip6;
 			height: 400px*@ip6;
 			overflow: hidden;
+			z-index: 2111;
 			margin: -200px*@ip6 0 0 -165px*@ip6;
 			i {
 				display: inline-block;
@@ -345,6 +348,7 @@
 			width: 330px*@ip5;
 			height: 400px*@ip5;
 			overflow: hidden;
+			z-index: 2111;
 			margin: -200px*@ip5 0 0 -165px*@ip5;
 			i {
 				display: inline-block;
