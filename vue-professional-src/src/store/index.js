@@ -1470,7 +1470,8 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
-						console.log('交易连接成功');
+						console.log('登录成功');
+						context.state.market.layer='登录成功';
 						// 查询持仓合计 QryHoldTotal
 						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询订单 QryOrder
@@ -1482,7 +1483,8 @@ export default new Vuex.Store({
 						// 查询历史成交
 //						context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"","EndTime":""}}');
 					}else{
-						console.log('交易连接失败');
+						console.log('登录失败');
+						context.state.market.layer='登录失败';
 					}
 					break;
 				case 'OnRspLogout': //登出回复
@@ -1546,7 +1548,6 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspOrderInsert':
 					console.log('报单请求回复');
-					
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder',parameters);
@@ -1566,7 +1567,7 @@ export default new Vuex.Store({
 					break;
 				case 'OnError':
 					console.log('OnError');
-					console.log(parameters);
+					context.state.market.layer=parameters.Message;
 				default:
 					break;
 			}
@@ -1703,10 +1704,6 @@ export default new Vuex.Store({
 		},
 		//更新持仓
 		updateHold:function(context,parameters){
-			console.log(parameters);
-			console.log(context.state.market.qryHoldTotalArr);
-			console.log('3333333');
-			console.log(context.state.market.positionListCont);
 			var isExist = false;
 			var positionListContCurrent = null;
 			var positionListContCurrentIndex=0;
@@ -1993,7 +1990,7 @@ export default new Vuex.Store({
 		updateHoldFloatingProfit:function(context,parameters){
 			console.log('根据订阅行情初始化持仓盈亏');
 			console.log(parameters);
-			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
+//			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
 			var lastPrice = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.LastPrice;
 			var contract=parameters.ContractCode;
 			var CommodityNo = context.state.market.orderTemplist[parameters.CommodityNo]
@@ -2054,6 +2051,7 @@ export default new Vuex.Store({
 		setTim:function(context){
 				if (context.state.HeartBeat.lastHeartBeatTimestamp == context.state.HeartBeat.oldHeartBeatTimestamp){
 					console.log('交易服务器断开，正在重连');
+					context.state.market.layer='交易服务器断开，正在重连';
 				}else{
 					context.state.HeartBeat.oldHeartBeatTimestamp = context.state.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 				}
@@ -2070,10 +2068,10 @@ export default new Vuex.Store({
 				}																
 			};
 			context.state.tradeSocket.onclose = function(evt) {
-				console.log('tradeClose');
+				console.log('tradeClose:'+evt);
 			};
 			context.state.tradeSocket.onerror = function(evt) {
-				console.log('tradeError');
+				console.log('tradeError:'+evt);
 			};
 			context.state.tradeSocket.onmessage = function(evt) {
 				context.dispatch('handleTradeMessage',evt);
