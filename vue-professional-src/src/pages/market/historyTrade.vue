@@ -135,7 +135,7 @@
 //					this.eachData();
 					this.dataList = [];
 					var date = new Date(); 
-		    		date.setDate(date.getDate());
+		    		date.setDate(date.getDate()-1);
 		    		var year = date.getFullYear();
 		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
 		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
