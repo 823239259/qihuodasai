@@ -312,7 +312,6 @@
 <style scoped lang="less">
 	@import url("../../assets/css/main.less");
 	/*ip5*/
-	
 	@media(max-width:370px) {
 		#applydetail {
 			height: 2104px/2 *@ip5 - 20px;
@@ -390,7 +389,7 @@
 				background: #242633;
 				>ol {
 					height: 50px*@ip5;
-					width:700px*@ip5; 
+					width: 680px*@ip5; 
 					&:after {
 						content: '';
 						display: block;
@@ -478,7 +477,6 @@
 		}
 	}
 	/*ip6*/
-	
 	@media (min-width:371px) and (max-width:410px) {
 		#applydetail {
 			height: 2104px/2 *@ip6 - 20px;
@@ -553,7 +551,7 @@
 				background: #242633;
 				>ol {
 					height: 50px*@ip6;
-					width:700px*@ip6; 
+					width:650px*@ip6; 
 					&:after {
 						content: '';
 						display: block;
@@ -641,7 +639,6 @@
 		}
 	}
 	/*ip6p及以上*/
-	
 	@media (min-width:411px) {
 		#applydetail {
 			height: 2104px/2 - 20px;
@@ -716,7 +713,7 @@
 				background: #242633;
 				>ol {
 					height: 50px;
-					width:700px; 
+					width:650px; 
 					&:after {
 						content: '';
 						display: block;

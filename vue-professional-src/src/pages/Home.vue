@@ -147,14 +147,14 @@
 				$(e.target).addClass('current').siblings('li').removeClass('current');
 			},
 			toDetail: function(a) {
-				this.$children[0].isShow = true;
-				this.msg = '此功能暂未上线';
-//				this.Parameters.forEach(function(e){
-//					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
-//						this.$store.state.market.currentdetail=e;
-//					}
-//				}.bind(this));
-//				this.$router.push({path: '/orderdetail'});
+//				this.$children[0].isShow = true;
+//				this.msg = '此功能暂未上线';
+				this.Parameters.forEach(function(e){
+					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
+						this.$store.state.market.currentdetail=e;
+					}
+				}.bind(this));
+				this.$router.push({path: '/orderdetail'});
 			}
 		},
 		mounted: function() {
