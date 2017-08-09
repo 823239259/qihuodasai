@@ -130,6 +130,10 @@ var market = {
 		
 		queryHisList:[],
 		
+		forceLine:0.00,
+		
+		
+		
 		
 		
 		//选择K线时候的值
@@ -1475,7 +1479,10 @@ export default new Vuex.Store({
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
 						console.log('登录成功');
+						
 						context.state.market.layer='登录成功';
+						context.state.market.forceLine = parameters.ForceLine;
+						
 						// 查询持仓合计 QryHoldTotal
 						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询订单 QryOrder
@@ -1486,6 +1493,8 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
+						
+						
 					}else{
 						console.log('登录失败');
 						context.state.market.layer='登录失败';
@@ -1593,8 +1602,6 @@ export default new Vuex.Store({
     		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
     		
     		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
-    		console.log('beginTime:'+beginTime);
-    		console.log('endTime:'+endTime);
 			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 		},
 		layerOnRtnOrderTraded:function(context,parameters){

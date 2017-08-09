@@ -13,7 +13,7 @@
 			<span class="white">{{this.jCacheTotalAccount.TodayCanUse | fixNum}}</span>
 			<i>|</i>
 			<span>平仓线</span>
-			<span class="white">223325</span>
+			<span class="white">{{forceLine}}</span>
 			<div class="icon_arrow fr">
 				<a href="#" class="icon"></a>
 			</div>
@@ -240,6 +240,9 @@
 			}
 		},
 		computed:{
+			forceLine(){
+				return this.$store.state.market.forceLine;
+			},
 			msgTips: function(){
 				return this.msg;
 			},
