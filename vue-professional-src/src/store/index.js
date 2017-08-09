@@ -2075,15 +2075,19 @@ export default new Vuex.Store({
 		},
 		
 		HeartBeatTimingCheck:function(context){
-			setInterval(context.setTim, 8000);	// 间隔8秒检查一次
-		},
-		setTim:function(context){
-				if (context.state.HeartBeat.lastHeartBeatTimestamp == context.state.HeartBeat.oldHeartBeatTimestamp){
-					console.log('交易服务器断开，正在重连');
-					context.state.market.layer='交易服务器断开，正在重连';
-				}else{
-					context.state.HeartBeat.oldHeartBeatTimestamp = context.state.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+			setInterval(
+				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
+			);	
+			function heartBeatUpdate(){
+//				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
+				if(1==1){
+						console.log('交易服务器断开，正在重连');
+						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+					}else{
+						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 				}
+			}
+			heartBeatUpdate();
 		},
 		initTrade:function(context){
 			

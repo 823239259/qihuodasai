@@ -384,8 +384,9 @@
 		},
 		watch:{
 			layer: function(n, o){
+				console.log(1111);
 				this.$children[8].isShow = true;
-				this.msg = this.layer;
+				this.msg = n;
 			},
 			selectId:function(n,o){
 				if(n != undefined){
