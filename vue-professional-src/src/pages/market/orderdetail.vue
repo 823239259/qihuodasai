@@ -40,7 +40,6 @@
 		},
 		computed: {
 			detail() {
-				console.log(this.$store.state.market.currentdetail);
 				return this.$store.state.market.currentdetail;
 			},
 			Parameters() {

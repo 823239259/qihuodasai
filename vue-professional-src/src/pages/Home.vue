@@ -71,7 +71,8 @@
 		data() {
 			return {
 				time: 3,
-				msg: ''
+				msg: '',
+				isBack: ''
 			}
 		},
 		filters:{
@@ -194,6 +195,13 @@
 			//提示框
 			this.$children[0].isShow = true;
 			this.msg = this.tipMsg;
+			
+			this.isBack = this.$route.query.isBack;
+			if(this.isBack && this.isBack == 1){
+				console.log(123);
+				window.location.reload();
+//				this.$router.go(-1);
+			}
 		}
 	}
 </script>

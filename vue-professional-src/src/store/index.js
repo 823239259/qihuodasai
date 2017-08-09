@@ -132,9 +132,7 @@ var market = {
 		
 		forceLine:0.00,
 		
-		
-		
-		
+		toast:'',
 		
 		//选择K线时候的值
 		selectTime: 1,
@@ -489,41 +487,8 @@ export default new Vuex.Store({
 		},
 		wsjsondata: {},
 		//连接提示语
-		wsmsg: '行情连接成功',
-		QuoteMethod: {
-			/**
-			 * 登录Method
-			 */
-			LoginMethod: "Login",
-			/**
-			 * 登出Method
-			 */
-			LogoutMethod: "Logout",
-			/**
-			 * 查询品种Method
-			 */
-			QryCommodityMethod: "QryCommodity",
-			/**
-			 * 查询合约Method
-			 */
-			QryContractMethod: "QryContract",
-			/**
-			 * 订阅Method
-			 */
-			SubscribeMethod: "Subscribe",
-			/**
-			 * 取消订阅Method
-			 */
-			UnSubscribeMethod: "UnSubscribe",
-			/**
-			 * 查询历史数据Method
-			 */
-			QryHistoryMethod: "QryHistory",
-			/**
-			 * 查询深度行情组
-			 */
-			QryDepthQuoteGroupMethod: "QryDepthQuoteGroup"
-		}
+		wsmsg: ''
+		
 	},
 	getters: {
 		PATH: function(state) {
