@@ -104,7 +104,6 @@
 				this.$children[0].isshow = true;
 				var arr=[];
 				for(var positionCurrent in this.positionListCont){
-					console.log(positionCurrent);
 					var buildIndex=0;
 					var drection ;
 					if(this.positionListCont[positionCurrent].Drection==0){

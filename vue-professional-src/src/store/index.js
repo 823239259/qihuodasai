@@ -60,7 +60,7 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+			username : "000004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 //			username:'',
 //			password:''
@@ -2045,12 +2045,12 @@ export default new Vuex.Store({
 			);	
 			function heartBeatUpdate(){
 //				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
-				if(1==1){
-						console.log('交易服务器断开，正在重连');
-						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
-					}else{
-						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
-				}
+//				if(1==1){
+//						console.log('交易服务器断开，正在重连');
+//						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+//					}else{
+//						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+//				}
 			}
 			heartBeatUpdate();
 		},
