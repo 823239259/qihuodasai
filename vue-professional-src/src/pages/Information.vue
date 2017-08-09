@@ -276,25 +276,37 @@
 					}
 
 				).then(function(e) {
-//					var arr=[];
-					e.body.data.data.forEach(function(e) {
-//						var time=new Date(e.createdAt*1000);
-//						if(time.getDate() == Number(this.day.day)){
-//							this.sevenlist.push(e);
-//						}else{
-//							arr.push(e);
-//						}
-//						console.log(Number(this.day.day));
-//						console.log(time.getDate());
-						this.sevenlist.push(e);
+					var sevenMore = e.body.data.data;
+//					console.log(sevenMore);
+					sevenMore.forEach(function(o, i) {
+						this.$http.post(this.PATH + '/crawler/getCrawlerLiveContent', {emulateJSON: true}, {
+							params: {
+								liveId: o.liveWallstreetnId
+							},
+							timeout: 5000
+						}).then(function(e) {
+							var data = e.body;
+							if(data.success == true){
+								var str = data.data.data[0].liveContentHtml.replace(/<p>/g, ' ');
+								str = str.replace(/<\/p>/g, ' ');
+								o.liveTitle = str;
+								this.sevenlist.push(o);
+							}else{
+								switch (data.code){
+									case '2':
+										this.$children[0].isShow = true;
+										this.msg = '获取数据失败';
+										break;
+									default:
+										break;
+								}
+							}
+						}.bind(this), function() {
+							this.$children[0].isShow = true;
+							this.msg = '服务器连接失败'
+						});
 					}.bind(this));
 					$('#showmore').text('点击加载更多...');
-//					console.log(arr.length)
-					//当天数据读完后
-//					if(arr.length >= 20) {
-//						this.updateTime();
-//						$('#showmore').text('今天没有更多数据了...点击加载前一天数据');
-//					}
 					if(e.body.data.data.length==0){
 						$('#showmore').text('查询当日没有更多数据...点击加载前一天数据');
 						this.updateTime();
@@ -322,6 +334,40 @@
 
 				).then(function(e) {
 					this.sevenlist = e.body.data.data;
+					this.sevenlist.forEach(function(o, i){
+						this.$http.post(this.PATH + '/crawler/getCrawlerLiveContent', {emulateJSON: true}, {
+							params: {
+								liveId: o.liveWallstreetnId
+							},
+							timeout: 5000
+						}).then(function(e) {
+							var data = e.body;
+							if(data.success == true){
+								var str = data.data.data[0].liveContentHtml.replace(/<p>/g, ' ');
+								str = str.replace(/<\/p>/g, ' ');
+								o.liveTitle = str;
+							}else{
+								switch (data.code){
+									case '2':
+										this.$children[0].isShow = true;
+										this.msg = '获取数据失败';
+										break;
+									default:
+										break;
+								}
+							}
+						}.bind(this), function() {
+							this.$children[0].isShow = true;
+							this.msg = '服务器连接失败'
+						});
+					}.bind(this));
+					
+					
+					
+					
+					
+					
+					
 					if(e.body.data.data.length<1){
 						this.msg = '查询当日没有更多数据...点击加载前一天数据';
 					}else{
@@ -329,7 +375,7 @@
 					}
 					
 				}.bind(this), function(e) {
-					//					alert('服务器请求失败，请稍后再试');
+					//alert('服务器请求失败，请稍后再试');
 					$('#showmore').text('点击重新请求数据...');
 					this.sevenparams.pageIndex -= 1;
 				});
@@ -362,7 +408,6 @@
 				}
 			},
 			showmore: function(e) {
-				console.log($(e.target));
 				if($(e.target).text() == '展开') {
 					$(e.target).html('收起');
 					$(e.target).prev().css({
