@@ -2133,6 +2133,7 @@ export default new Vuex.Store({
 				} else if(context.state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
+//					console.log(context.state.market.templateList);
 					context.state.market.markettemp.forEach(function(e) {
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;

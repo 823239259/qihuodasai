@@ -372,8 +372,12 @@
 				return JSON.stringify(this.positionListCont);
 			},
 			detail(){
-				return this.$parent.detail;
-			}
+//				return this.$parent.detail;
+				return this.$store.state.market.currentdetail
+			},
+			Parameters00(){   //合约详情obj
+				return this.$store.state.market.Parameters;
+			},
 		},
 		watch:{
 			layer: function(n, o){
@@ -386,6 +390,13 @@
 					this.$store.state.market.currentNo=arr[1];
 					this.commodityName00 = arr[0];
 					this.commodityNo00 = arr[1] + arr[2];
+					
+					this.Parameters00.forEach(function(o, i){
+						if(o.CommodityName == this.commodityName00){
+							this.$store.state.market.currentdetail = o;
+							this.$store.state.market.jsonTow.Parameters = o.LastQuotation;
+						}
+					}.bind(this));
 				}
 				
 			},

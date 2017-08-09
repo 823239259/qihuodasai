@@ -147,16 +147,16 @@
 			},
 			toDetail: function(a) {
 				this.Parameters.forEach(function(e){
-					if(e.CommodityName==$(a.currentTarget).children().find('h5:first-child').text()){
+					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
 						this.$store.state.market.currentdetail=e;
 					}
 				}.bind(this));
 				this.$router.push({
 					path: '/orderdetail',
-					query:{
-						'CommodityName':$(a.currentTarget).children().find('h5:first-child').text(),
-						'EngName':$(a.currentTarget).children().find('h5:nth-child(2)').text()
-					}
+//					query:{
+//						'CommodityName':$(a.currentTarget).children().find('h5:first-child').text(),
+//						'EngName':$(a.currentTarget).children().find('h5:nth-child(2)').text()
+//					}
 				})
 			}
 		},
