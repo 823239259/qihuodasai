@@ -54,8 +54,8 @@
 				</div>
 			</div>
 			<div class="bottompart">
-				<chartBtn type="buy" class="fl"></chartBtn>
-				<chartBtn type="sell" class="fr"></chartBtn>
+				<chartBtn type="buy" class="fl" @tap.native='buyOrder'></chartBtn>
+				<chartBtn type="sell" class="fr" @tap.native='sellOrder'></chartBtn>
 			</div>
 		</div>
 	</div>
@@ -111,6 +111,49 @@
 			},
 			min() {
 				this.lotnum--;
+			},
+			buyOrder:function(){
+				var buildIndex=0;
+				if(buildIndex>100){
+					buildIndex=0;
+				}
+							var b={
+								"Method":'InsertOrder',
+								"Parameters":{
+									"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
+									"CommodityNo":this.detail.LastQuotation.CommodityNo,
+									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"OrderNum": this.lotnum,
+									"Drection":0,
+									"PriceType":1,
+									"LimitPrice":0.00,
+									"TriggerPrice":0,
+									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+				this.tradeSocket.send(JSON.stringify(b));			
+							
+			},
+			sellOrder:function(){
+				var buildIndex=0;
+				if(buildIndex>100){
+					buildIndex=0;
+				}
+							var b={
+								"Method":'InsertOrder',
+								"Parameters":{
+									"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
+									"CommodityNo":this.detail.LastQuotation.CommodityNo,
+									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"OrderNum": this.lotnum,
+									"Drection":1,
+									"PriceType":1,
+									"LimitPrice":0.00,
+									"TriggerPrice":0,
+									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+				this.tradeSocket.send(JSON.stringify(b));
 			}
 		},
 		computed:{
@@ -123,6 +166,15 @@
 			},
 			Parameters(){
 				return this.$store.state.market.jsonTow.Parameters;
+			},
+			templateList(){
+				return this.$store.state.market.templateList;
+			},
+			detail(){
+				return this.$store.state.market.currentdetail
+			},
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
 			}
 		},
 		watch:{
