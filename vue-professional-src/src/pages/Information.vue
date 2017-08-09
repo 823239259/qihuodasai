@@ -138,8 +138,13 @@
 			},
 			getTime: function(e, format) {
 				//				var format = function(e, format) {
-					console.log(e);
-				var t = new Date(e);
+				var len = e.toString().length;
+				var t;
+				if(len > 10){
+					t = new Date(e);
+				}else{
+					t = new Date(e * 1000);
+				}
 				var tf = function(i) {
 					return(i < 10 ? '0' : '') + i
 				};
@@ -317,7 +322,6 @@
 
 				).then(function(e) {
 					this.sevenlist = e.body.data.data;
-					console.log(this.sevenlist);
 					if(e.body.data.data.length<1){
 						this.msg = '查询当日没有更多数据...点击加载前一天数据';
 					}else{
@@ -358,6 +362,7 @@
 				}
 			},
 			showmore: function(e) {
+				console.log($(e.target));
 				if($(e.target).text() == '展开') {
 					$(e.target).html('收起');
 					$(e.target).prev().css({

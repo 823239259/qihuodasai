@@ -377,7 +377,10 @@
 		},
 		methods: {
 			toTradeLogin: function(){
-				this.$router.push({path: '/tradeLogin', query: {user: this.tradeDetails.tranAccount, pwd: this.tradeDetails.tranPassword}});
+				//交易暂不上
+				this.$children[0].isShow = true;
+				this.msg = '功能暂未上线';
+//				this.$router.push({path: '/tradeLogin', query: {user: this.tradeDetails.tranAccount, pwd: this.tradeDetails.tranPassword}});
 			},
 			toTradersRules: function(){
 				this.$router.push({path: '/tradersRules'});
@@ -599,6 +602,7 @@
 			}
 		},
 		activated: function() {
+			this.isShow = true;
 			//获取操盘明细
 			this.getTradeDetails();
 			this.type = this.$route.query.type.toString();
