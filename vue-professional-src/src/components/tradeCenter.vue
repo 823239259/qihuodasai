@@ -25,7 +25,7 @@
 					<span>{{commodityNo00}}</span>
 					<i class="icon_search"></i>
 					<select v-model="selectId">
-						<option  v-for="v in parameters">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
+						<option  v-for="v in parameters" :value="v.CommodityName + '&' + v.CommodityNo + '&' + v.MainContract">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
 					</select>
 				</div>
 			</div>
@@ -382,7 +382,7 @@
 			},
 			selectId:function(n,o){
 				if(n != undefined){
-					var arr = n.split(' ');
+					var arr = n.split('&');
 					this.$store.state.market.currentNo=arr[1];
 					this.commodityName00 = arr[0];
 					this.commodityNo00 = arr[1] + arr[2];
@@ -815,7 +815,7 @@
 					this.$store.state.market.positionListCont.unshift(obj);
 				}.bind(this));
 				
-			this.selectId=this.detail.CommodityName+this.detail.CommodityNo+this.detail.LastQuotation.ContractNo;
+//			this.selectId=this.detail.CommodityName+this.detail.CommodityNo+this.detail.LastQuotation.ContractNo;
 			
 			
 			this.$store.state.market.entrustCont=[];
