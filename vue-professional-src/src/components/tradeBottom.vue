@@ -33,7 +33,7 @@
 				<div class="fl">
 					<ul>
 						<li class="fontred">
-							{{Parameters.LastPrice}}
+							{{Parameters.LastPrice | fixNum2(detail.DotSize)}}
 						</li>
 						<li class="fontred">
 							<span>{{Parameters.ChangeValue | fixNum2(detail.DotSize)}}</span>
