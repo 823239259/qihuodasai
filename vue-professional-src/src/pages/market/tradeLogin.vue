@@ -81,8 +81,10 @@
 					this.msg = '请输入您的交易密码';
 				}else{
 					this.pwd = Base64.encode(this.pwd);
-//					this.$store.state.market.tradeConfig.username = this.username;
-//					this.$store.state.market.tradeConfig.password = this.pwd;
+					this.$store.state.market.tradeConfig.username = this.username;
+					this.$store.state.market.tradeConfig.password = this.pwd;
+					console.log(this.username);
+					console.log(this.pwd);
 					this.$router.push({path: '/orderdetail'})
 				}
 				
