@@ -33,17 +33,17 @@
 				<ul>
 					<li>
 						<span>新</span>
-						<span :class="color1">{{Parameters.LastPrice | fixNum2(2)}}</span>
+						<span :class="color1">{{Parameters.LastPrice | fixNum2(orderTemplist[Parameters.CommodityNo].DotSize)}}</span>
 						<span>{{Parameters.LastVolume}}</span>
 					</li>
 					<li>
 						<span>买</span>
-						<span :class="color2">{{Parameters.BidPrice1 | fixNum2(2)}}</span>
+						<span :class="color2">{{Parameters.BidPrice1 | fixNum2(orderTemplist[Parameters.CommodityNo].DotSize)}}</span>
 						<span>{{Parameters.BidQty1}}</span>
 					</li>
 					<li>
 						<span>卖</span>
-						<span :class="color3">{{Parameters.AskPrice1 | fixNum2(2)}}</span>
+						<span :class="color3">{{Parameters.AskPrice1 | fixNum2(orderTemplist[Parameters.CommodityNo].DotSize)}}</span>
 						<span>{{Parameters.AskQty1}}</span>
 					</li>
 				</ul>
@@ -70,8 +70,8 @@
 			</div>
 		</div>
 		<div class="trade_btn mt10">
-			<tradebtn :marketprice="Parameters.BidPrice1 | fixNum2(2)" transaction='buy' @tap.native='buy'></tradebtn>
-			<tradebtn :marketprice="Parameters.AskPrice1 | fixNum2(2)" transaction='sell' @tap.native='sell'></tradebtn>
+			<tradebtn :marketprice="marketpriceEvent" transaction='buy' @tap.native='buy'></tradebtn>
+			<tradebtn :marketprice="marketpriceEvent" transaction='sell' @tap.native='sell'></tradebtn>
 		</div>
 		<div class="tab_box mt10" id="tabBox">
 			<template v-for="key in tabList">
@@ -240,6 +240,13 @@
 			}
 		},
 		computed:{
+			marketpriceEvent: function(){
+				if(this.isShow == true){
+					return '市价';
+				}else{
+					return  this.Parameters.LastPrice;
+				}
+			},
 			forceLine(){
 				return this.$store.state.market.forceLine;
 			},
@@ -369,6 +376,7 @@
 				return this.Parameters.AskPrice1-this.Parameters.OpenPrice >=0 ?  'red' :  'green'
 			},
 			Parameters(){
+				console.log(this.$store.state.market.jsonTow.Parameters);
 				return this.$store.state.market.jsonTow.Parameters;
 			},
 			positionContEvent: function(){
@@ -922,6 +930,8 @@
 			//初始合约名称
 			this.commodityName00 = this.detail.CommodityName;
 			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
+			
+			this.tradePrice = this.Parameters.LastPrice;
 		},
 	}
 </script>
