@@ -25,7 +25,7 @@
 								成交量
 							</div>
 							<div class="fontwhite fr">
-								{{Parameters.LastVolume}}
+								{{Parameters.TotalVolume}}
 							</div>
 						</li>
 					</ul>
