@@ -841,7 +841,7 @@ export default new Vuex.Store({
 				time = [];
 			state.market.jsonDataKline.Parameters.Data.slice(-40).forEach(function(e) {
 				vol.push(e[6]);
-				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
+				time.push(e[0].split(' ')[0]);
 				price.push(e[1]);
 			});
 
@@ -2307,7 +2307,7 @@ export default new Vuex.Store({
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 1440){
-										var timeDifference=arr2[1]-arr4[1]; 
+										var timeDifference=arr2[1]-arr4[1];
 										if(timeDifference%1440 != 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
