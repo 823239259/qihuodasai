@@ -126,6 +126,12 @@
 						} else {
 							this.olshow = false;
 						}
+						//默认一分钟K线
+						this.$store.state.market.selectTime=1;
+						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+						this.quoteSocket.send(b);
+						
+						
 						break;
 					default:
 						this.$store.state.isshow.sshow = false;

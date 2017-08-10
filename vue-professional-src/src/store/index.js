@@ -839,9 +839,15 @@ export default new Vuex.Store({
 			var vol = [],
 				price = [],
 				time = [];
+			var Ktime;
 			state.market.jsonDataKline.Parameters.Data.slice(-40).forEach(function(e) {
 				vol.push(e[6]);
-				time.push(e[0].split(' ')[0]);
+				Ktime = e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1];
+				if(Ktime == '00:00'){
+					time.push(e[0].split(' ')[0]);
+				}else{
+					time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
+				}
 				price.push(e[1]);
 			});
 
