@@ -25,28 +25,20 @@
 					</li>
 					<li>
 						<span>最新</span>
-						<span class="red">{{Parameters.LastPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: Parameters.LastPrice - Parameters.PreSettlePrice > 0,green: Parameters.LastPrice - Parameters.PreSettlePrice < 0}">{{Parameters.LastPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>开盘</span>
-						<span class="green">{{Parameters.OpenPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: Parameters.OpenPrice - Parameters.PreSettlePrice > 0,green: Parameters.OpenPrice - Parameters.PreSettlePrice < 0}">{{Parameters.OpenPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最高</span>
-						<span class="red">{{Parameters.HighPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: Parameters.HighPrice - Parameters.PreSettlePrice > 0,green: Parameters.HighPrice - Parameters.PreSettlePrice < 0}">{{Parameters.HighPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最低</span>
-						<span class="red">{{Parameters.LowPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: Parameters.LowPrice - Parameters.PreSettlePrice > 0,green: Parameters.LowPrice - Parameters.PreSettlePrice < 0}">{{Parameters.LowPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
-					<!--<li>
-						<span>结算</span>
-						<span class="red">{{Parameters.SettlePrice | fixNum2(detail.DotSize)}}</span>
-					</li>-->
-					<!--<li>
-						<span></span>
-						<span class="red"></span>
-					</li>-->
 					<li>
 						<span></span>
 						<span class="red"></span>
@@ -55,10 +47,6 @@
 						<span></span>
 						<span class="red"></span>
 					</li>
-					<!--<li>
-						<span></span>
-						<span class="red"></span>
-					</li>-->
 				</ul>
 			</div>
 			<div class="list_col fl">
