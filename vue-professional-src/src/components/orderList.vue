@@ -53,7 +53,6 @@
 				}
 			},
 			closeOutAlert:function(){
-				console.log(this.tempText);
 				var obj = this.tempText.Parameters;
 				if(obj!=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;
@@ -105,7 +104,6 @@
 				this.$children[0].isshow = true;
 				var arr=[];
 				for(var positionCurrent in this.positionListCont){
-					console.log(positionCurrent);
 					var buildIndex=0;
 					var drection ;
 					if(this.positionListCont[positionCurrent].Drection==0){

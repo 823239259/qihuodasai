@@ -60,7 +60,7 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+			username : "000004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 //			username:'',
 //			password:''
@@ -130,6 +130,9 @@ var market = {
 		
 		queryHisList:[],
 		
+		forceLine:0.00,
+		
+		toast:'',
 		
 		//选择K线时候的值
 		selectTime: 1,
@@ -484,41 +487,8 @@ export default new Vuex.Store({
 		},
 		wsjsondata: {},
 		//连接提示语
-		wsmsg: '行情连接成功',
-		QuoteMethod: {
-			/**
-			 * 登录Method
-			 */
-			LoginMethod: "Login",
-			/**
-			 * 登出Method
-			 */
-			LogoutMethod: "Logout",
-			/**
-			 * 查询品种Method
-			 */
-			QryCommodityMethod: "QryCommodity",
-			/**
-			 * 查询合约Method
-			 */
-			QryContractMethod: "QryContract",
-			/**
-			 * 订阅Method
-			 */
-			SubscribeMethod: "Subscribe",
-			/**
-			 * 取消订阅Method
-			 */
-			UnSubscribeMethod: "UnSubscribe",
-			/**
-			 * 查询历史数据Method
-			 */
-			QryHistoryMethod: "QryHistory",
-			/**
-			 * 查询深度行情组
-			 */
-			QryDepthQuoteGroupMethod: "QryDepthQuoteGroup"
-		}
+		wsmsg: ''
+		
 	},
 	getters: {
 		PATH: function(state) {
@@ -1474,7 +1444,10 @@ export default new Vuex.Store({
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
 						console.log('登录成功');
+						
 						context.state.market.layer='登录成功';
+						context.state.market.forceLine = parameters.ForceLine;
+						
 						// 查询持仓合计 QryHoldTotal
 						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询订单 QryOrder
@@ -1484,8 +1457,9 @@ export default new Vuex.Store({
 						// 查询账户信息 QryAccount
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
-//						context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"","EndTime":""}}');
 						context.dispatch('qryHisTrade');
+						
+						
 					}else{
 						console.log('登录失败');
 						context.state.market.layer='登录失败';
@@ -1534,8 +1508,6 @@ export default new Vuex.Store({
 					}
 					break;
 				case 'OnRspQryHisTrade'://查询历史成交记录回复
-					console.log('查询历史成交记录回复');
-					console.log(parameters);
 					if(parameters!=null){
 						context.state.market.queryHisList.push(parameters);
 					}
@@ -1582,7 +1554,7 @@ export default new Vuex.Store({
 		},
 		qryHisTrade:function(context){
 			var date = new Date(); 
-    		date.setDate(date.getDate()-3);
+    		date.setDate(date.getDate()-1);
     		var year = date.getFullYear();
     		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
     		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
@@ -1595,8 +1567,6 @@ export default new Vuex.Store({
     		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
     		
     		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
-    		console.log('beginTime:'+beginTime);
-    		console.log('endTime:'+endTime);
 			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 		},
 		layerOnRtnOrderTraded:function(context,parameters){
@@ -2070,15 +2040,19 @@ export default new Vuex.Store({
 		},
 		
 		HeartBeatTimingCheck:function(context){
-			setInterval(context.setTim, 8000);	// 间隔8秒检查一次
-		},
-		setTim:function(context){
-				if (context.state.HeartBeat.lastHeartBeatTimestamp == context.state.HeartBeat.oldHeartBeatTimestamp){
-					console.log('交易服务器断开，正在重连');
-					context.state.market.layer='交易服务器断开，正在重连';
-				}else{
-					context.state.HeartBeat.oldHeartBeatTimestamp = context.state.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
-				}
+			setInterval(
+				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
+			);	
+			function heartBeatUpdate(){
+//				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
+//				if(1==1){
+//						console.log('交易服务器断开，正在重连');
+//						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+//					}else{
+//						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+//				}
+			}
+			heartBeatUpdate();
 		},
 		initTrade:function(context){
 			
@@ -2135,6 +2109,7 @@ export default new Vuex.Store({
 				} else if(context.state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
+//					console.log(context.state.market.templateList);
 					context.state.market.markettemp.forEach(function(e) {
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;

@@ -38,7 +38,6 @@
 				this.isshow = false;
 			},
 			confirm: function(a, b) {
-				console.log(this.objstr);
 				if(this.type == '1'){
 					var cnm = JSON.parse(this.objstr);
 					for(var i=0;i<cnm.length;i++){

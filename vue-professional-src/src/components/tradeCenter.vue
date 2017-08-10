@@ -13,7 +13,7 @@
 			<span class="white">{{this.jCacheTotalAccount.TodayCanUse | fixNum}}</span>
 			<i>|</i>
 			<span>平仓线</span>
-			<span class="white">223325</span>
+			<span class="white">{{forceLine}}</span>
 			<div class="icon_arrow fr">
 				<a href="#" class="icon"></a>
 			</div>
@@ -21,11 +21,11 @@
 		<div class="order_type border_bottom">
 			<div class="order_type_left fl">
 				<div class="cont">
-					<span class="white">{{detail.CommodityName}}</span>
-					<span>{{detail.CommodityNo}}{{detail.LastQuotation.ContractNo}}</span>
+					<span class="white">{{commodityName00}}</span>
+					<span>{{commodityNo00}}</span>
 					<i class="icon_search"></i>
 					<select v-model="selectId">
-						<option  v-for="v in parameters">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
+						<option  v-for="v in parameters" :value="v.CommodityName + '&' + v.CommodityNo + '&' + v.MainContract">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
 					</select>
 				</div>
 			</div>
@@ -204,6 +204,8 @@
 				entrustShow: false,
 				tradeNum:1,
 				tradePrice:'',
+				commodityName00: '',
+				commodityNo00: '',
 				list: [
 					{
 						type: '新',
@@ -238,6 +240,9 @@
 			}
 		},
 		computed:{
+			forceLine(){
+				return this.$store.state.market.forceLine;
+			},
 			msgTips: function(){
 				return this.msg;
 			},
@@ -370,18 +375,32 @@
 				return JSON.stringify(this.positionListCont);
 			},
 			detail(){
-				return this.$parent.detail;
-			}
+//				return this.$parent.detail;
+				return this.$store.state.market.currentdetail
+			},
+			Parameters00(){   //合约详情obj
+				return this.$store.state.market.Parameters;
+			},
 		},
 		watch:{
 			layer: function(n, o){
+				console.log(1111);
 				this.$children[8].isShow = true;
-				this.msg = this.layer;
+				this.msg = n;
 			},
 			selectId:function(n,o){
 				if(n != undefined){
-					var arr=n.split(' ');
+					var arr = n.split('&');
 					this.$store.state.market.currentNo=arr[1];
+					this.commodityName00 = arr[0];
+					this.commodityNo00 = arr[1] + arr[2];
+					
+					this.Parameters00.forEach(function(o, i){
+						if(o.CommodityName == this.commodityName00){
+							this.$store.state.market.currentdetail = o;
+							this.$store.state.market.jsonTow.Parameters = o.LastQuotation;
+						}
+					}.bind(this));
 				}
 				
 			},
@@ -811,7 +830,7 @@
 					this.$store.state.market.positionListCont.unshift(obj);
 				}.bind(this));
 				
-			this.selectId=this.detail.CommodityName+this.detail.CommodityNo+this.detail.LastQuotation.ContractNo;
+//			this.selectId=this.detail.CommodityName+this.detail.CommodityNo+this.detail.LastQuotation.ContractNo;
 			
 			
 			this.$store.state.market.entrustCont=[];
@@ -900,7 +919,12 @@
 				
 			}.bind(this));
 			
-		}
+			//初始合约名称
+			this.commodityName00 = this.detail.CommodityName;
+			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
+			
+			console.log(11111);
+		},
 	}
 </script>
 

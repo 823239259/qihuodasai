@@ -128,7 +128,6 @@
 						}
 						break;
 					default:
-						console.log(e.target)
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = true;

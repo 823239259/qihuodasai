@@ -5,7 +5,7 @@
 			<h4 class="fontwhite">{{cname}}</h4>
 			<h6 class="fontwhite"><span>{{cnum}}</span><span>{{mc}}</span></h6>
 		</div>
-		<refresh></refresh>
+		<refresh @tap.native="tradeRefresh"></refresh>
 		<menus></menus>
 	</div>
 </template>
@@ -23,6 +23,10 @@
 		methods:{
 			clearPositionListCont:function(){
 				this.$store.state.market.positionListCont=[];
+			},
+			tradeRefresh: function(){
+				window.location.reload();
+//				this.$router.push({path: '/index', query: {isBack: 1}});
 			}
 		}
 	}

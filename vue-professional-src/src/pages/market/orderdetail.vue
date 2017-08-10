@@ -1,6 +1,6 @@
 <template>
 	<div id="orderdetail">
-		<topbar :cname='CommodityName' :cnum='EngName'></topbar>
+		<topbar :cname='detail.CommodityName' :cnum='detail.CommodityNo + detail.MainContract'></topbar>
 		<selectbar></selectbar>
 		<dish v-if="pshow"></dish>
 		<tradebottom v-if='s'></tradebottom>
@@ -34,13 +34,13 @@
 		},
 		data() {
 			return {
-				CommodityName: this.$route.query.CommodityName,
-				EngName: this.$route.query.EngName,
+				CommodityName: '',
+				EngName: '',
 			}
 		},
 		computed: {
 			detail() {
-				return this.$store.state.market.currentdetail
+				return this.$store.state.market.currentdetail;
 			},
 			Parameters() {
 				return this.$store.state.market.Parameters;
