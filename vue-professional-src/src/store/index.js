@@ -2060,10 +2060,7 @@ export default new Vuex.Store({
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-					console.log('3333333333333');
-					context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}'
-							);
-																				
+					context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 				}																
 			};
 			context.state.tradeSocket.onclose = function(evt) {
@@ -2280,7 +2277,6 @@ export default new Vuex.Store({
 									}else if(context.state.market.selectTime == 30){
 										var timeDifference=arr2[1]-arr4[1]; 
 										if(timeDifference%30 != 0) {
-											console.log(1)
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];

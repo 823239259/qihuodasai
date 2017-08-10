@@ -66,6 +66,7 @@
 		methods:{
 			...mapActions([
 				'handleTradeMessage',
+				'initTrade'
 			]),
 			eyeEvent: function(e){
 				if(this.eyeShow == false){
@@ -90,17 +91,8 @@
 					this.pwd = Base64.encode(this.pwd);
 					this.$store.state.market.tradeConfig.username = this.username;
 					this.$store.state.market.tradeConfig.password = this.pwd;
-					var tradeSocket = new WebSocket(this.$store.state.market.tradeConfig.url_real);
-					tradeSocket.onopen = function(evt){
-						if(tradeSocket.readyState==1){
-							tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+this.username+'","PassWord":"'+this.pwd+'","IsMock":'+this.$store.state.market.tradeConfig.model+',"Version":"'+this.$store.state.market.tradeConfig.version+'","Source":"'+this.$store.state.market.tradeConfig.client_source+'"}}'
-							);
-						}
-					}.bind(this);
-					tradeSocket.onmessage = function(evt) {
-						this.handleTradeMessage(evt);
-					}.bind(this);
-					
+					//初始化交易
+					this.initTrade();
 					this.$router.push({path: '/orderdetail'})
 				}
 				

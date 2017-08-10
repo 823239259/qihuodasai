@@ -33,9 +33,11 @@
 		},
 		methods: {
 			toTradeLogin: function(){
+				this.open = false;
 				this.$router.push({path:'/tradeLogin'});
 			},
 			toHistoryTrade: function(){
+				this.open = false;
 				this.$router.push({path:'/historyTrade'});
 			},
 			openmenu: function(e) {
