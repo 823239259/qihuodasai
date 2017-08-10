@@ -101,7 +101,7 @@
 		},
 		data() {
 			return {
-				lotnum: 0,
+				lotnum: 1,
 				numReg: /^[0-9]*$/
 			}
 		},

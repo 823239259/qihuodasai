@@ -60,7 +60,7 @@
 				</div>
 				<div class="limit_cont_col">
 					<span>价格：</span>
-					<input type="number" class="ipt fl" v-model="tradePrice"/>
+					<input type="number" class="ipt fl" v-model="tradePrices"/>
 					<span class="white">(元)</span>
 				</div>
 			</div>
@@ -203,7 +203,7 @@
 				orderShow: false,
 				entrustShow: false,
 				tradeNum:1,
-				tradePrice:'',
+				tradePrices:0,
 				commodityName00: '',
 				commodityNo00: '',
 				list: [
@@ -244,7 +244,7 @@
 				if(this.isShow == true){
 					return '市价';
 				}else{
-					return  this.Parameters.LastPrice;
+					return parseFloat(this.detail.LastQuotation.LastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
 				}
 			},
 			forceLine(){
@@ -388,6 +388,9 @@
 			Parameters00(){   //合约详情obj
 				return this.$store.state.market.Parameters;
 			},
+			tradePrice(){
+				return this.detail.LastQuotation.LastPrice;
+			}
 		},
 		watch:{
 			layer: function(n, o){
@@ -402,13 +405,25 @@
 					this.commodityName00 = arr[0];
 					this.commodityNo00 = arr[1] + arr[2];
 					
+					var orderTemplist = this.orderTemplist;
 					this.Parameters00.forEach(function(o, i){
 						if(o.CommodityName == this.commodityName00){
 							this.$store.state.market.currentdetail = o;
+							this.tradePrices = dealDotSize(o.LastQuotation.LastPrice,o.LastQuotation);
 						}
 					}.bind(this));
+					function dealDotSize(price,LastQuotation){
+					  	return  parseFloat(price).toFixed(orderTemplist[LastQuotation.CommodityNo].DotSize) ;
+					}
 				}
-				
+			},
+			tradePrices: function(n, o){
+					if(n.length<1){
+						$(".redbtn li:first-child, .greenbtn li:first-child").text('');
+					}else{
+						$(".redbtn li:first-child, .greenbtn li:first-child").text(n);
+					}
+					
 			},
 			/*
 			qryHoldTotalArr:function(n,o){
@@ -929,7 +944,8 @@
 			this.commodityName00 = this.detail.CommodityName;
 			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
 			
-			this.tradePrice = this.Parameters.LastPrice;
+			this.tradePrices = parseFloat(this.tradePrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
+			
 		},
 	}
 </script>
