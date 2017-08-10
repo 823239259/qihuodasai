@@ -151,6 +151,7 @@
 //				this.msg = '此功能暂未上线';
 				this.Parameters.forEach(function(e){
 					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
+						console.log(e);
 						this.$store.state.market.currentdetail=e;
 					}
 				}.bind(this));

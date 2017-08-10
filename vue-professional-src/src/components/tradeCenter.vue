@@ -33,18 +33,18 @@
 				<ul>
 					<li>
 						<span>新</span>
-						<span :class="color1">{{Parameters.LastPrice | fixNum2(orderTemplist[Parameters.CommodityNo].DotSize)}}</span>
-						<span>{{Parameters.LastVolume}}</span>
+						<span :class="color1">{{detail.LastQuotation.LastPrice | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span>{{detail.LastQuotation.LastVolume}}</span>
 					</li>
 					<li>
 						<span>买</span>
-						<span :class="color2">{{Parameters.BidPrice1 | fixNum2(orderTemplist[Parameters.CommodityNo].DotSize)}}</span>
-						<span>{{Parameters.BidQty1}}</span>
+						<span :class="color2">{{detail.LastQuotation.BidPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span>{{detail.LastQuotation.BidQty1}}</span>
 					</li>
 					<li>
 						<span>卖</span>
-						<span :class="color3">{{Parameters.AskPrice1 | fixNum2(orderTemplist[Parameters.CommodityNo].DotSize)}}</span>
-						<span>{{Parameters.AskQty1}}</span>
+						<span :class="color3">{{detail.LastQuotation.AskPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span>{{detail.LastQuotation.AskQty1}}</span>
 					</li>
 				</ul>
 			</div>
@@ -376,7 +376,6 @@
 				return this.Parameters.AskPrice1-this.Parameters.OpenPrice >=0 ?  'red' :  'green'
 			},
 			Parameters(){
-				console.log(this.$store.state.market.jsonTow.Parameters);
 				return this.$store.state.market.jsonTow.Parameters;
 			},
 			positionContEvent: function(){
@@ -406,7 +405,6 @@
 					this.Parameters00.forEach(function(o, i){
 						if(o.CommodityName == this.commodityName00){
 							this.$store.state.market.currentdetail = o;
-							this.$store.state.market.jsonTow.Parameters = o.LastQuotation;
 						}
 					}.bind(this));
 				}
