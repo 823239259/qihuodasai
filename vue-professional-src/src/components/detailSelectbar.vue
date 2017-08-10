@@ -1,5 +1,6 @@
 <template>
 	<div id="detailselectbar">
+		<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
 		<ul>
 			<li :class="[fontgray,fl,{current:sshow}]" @tap='sel'>闪电图</li>
 			<li :class="[fontgray,fl,{current:fshow}]" @tap='sel'>分时</li>
@@ -24,11 +25,18 @@
 <script>
 	var yellow = require('../assets/img/sanjiao01.png');
 	var blue = require('../assets/img/sanjiao02.png');
+	import alert from './Tradealert.vue'
 	export default {
 		name: 'detailselectbar',
+		components: {alert},
 		data() {
 			return {
 				olshow: false
+			}
+		},
+		computed: {
+			tradeConfig(){
+				return this.$store.state.market.tradeConfig;
 			}
 		},
 		watch: {
@@ -103,15 +111,20 @@
 						this.$store.state.isshow.isklineshow = false;
 						break;
 					case '交易中心':
-						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = false;
-						this.$store.state.isshow.pshow = false;
-						this.$store.state.isshow.bottomshow = true;
-						this.olshow = false;
-						this.$store.state.isshow.isfensshow = false;
-						this.$store.state.isshow.islightshow = false;
-						this.$store.state.isshow.isklineshow = false;
+						var tradeConfig =this.$store.state.market.tradeConfig
+						if(tradeConfig.username == '' && tradeConfig.password == ''){
+							this.$children[0].isshow = true;
+						}else{
+							this.$store.state.isshow.sshow = false;
+							this.$store.state.isshow.fshow = false;
+							this.$store.state.isshow.kshow = false;
+							this.$store.state.isshow.pshow = false;
+							this.$store.state.isshow.bottomshow = true;
+							this.olshow = false;
+							this.$store.state.isshow.isfensshow = false;
+							this.$store.state.isshow.islightshow = false;
+							this.$store.state.isshow.isklineshow = false;
+						}
 						break;
 					case 'K线':
 						this.$store.state.isshow.sshow = false;

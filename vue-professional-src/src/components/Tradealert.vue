@@ -22,7 +22,7 @@
 <script>
 	export default {
 		name: 'alert',
-		props: ['title', 'line1', 'line2', 'addr', 'objstr','type'],
+		props: ['title', 'line1', 'line2', 'addr', 'objstr','type', 'jump'],
 		data() {
 			return {
 				isshow: false
@@ -44,9 +44,13 @@
 						this.tradeSocket.send(JSON.stringify(cnm[i]));
 					}
 				}else{
-					console.log('1112222');
-					
-					this.tradeSocket.send(this.objstr);
+					if(this.objstr){
+						console.log(123);
+						this.tradeSocket.send(this.objstr);
+					}
+				}
+				if(this.jump && this.jump == 'true'){
+					this.$router.push({path: '/tradeLogin'});
 				}
 				this.isshow = false;
 			}
