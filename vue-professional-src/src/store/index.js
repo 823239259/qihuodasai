@@ -1437,6 +1437,7 @@ export default new Vuex.Store({
 		handleTradeMessage:function(context,evt){
 			var data = JSON.parse(evt.data);
 			var parameters = data.Parameters;
+			
 			switch (data.Method){
 				case 'OnRtnHeartBeat':
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
@@ -1444,7 +1445,6 @@ export default new Vuex.Store({
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
 						console.log('登录成功');
-						
 						context.state.market.layer='登录成功';
 						context.state.market.forceLine = parameters.ForceLine;
 						

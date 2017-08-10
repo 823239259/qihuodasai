@@ -922,8 +922,6 @@
 			//初始合约名称
 			this.commodityName00 = this.detail.CommodityName;
 			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
-			
-			console.log(11111);
 		},
 	}
 </script>

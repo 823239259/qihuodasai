@@ -44,6 +44,8 @@
 						this.tradeSocket.send(JSON.stringify(cnm[i]));
 					}
 				}else{
+					console.log('1112222');
+					
 					this.tradeSocket.send(this.objstr);
 				}
 				this.isshow = false;
