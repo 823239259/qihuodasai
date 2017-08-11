@@ -26,7 +26,7 @@
 /*ip6p及以上*/
 @media (min-width:411px) {
     #tipsDialog{
-    	position: absolute;
+    	position: fixed;
     	bottom: 125px;
     	left: 50%;
     	z-index: 1111;
@@ -46,7 +46,7 @@
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
     #tipsDialog{
-    	position: absolute;
+    	position: fixed;
     	bottom: 125px*@ip6;
     	left: 50%;
     	z-index: 1111;
@@ -66,7 +66,7 @@
 /*ip5*/
 @media(max-width:370px) {
 	#tipsDialog{
-    	position: absolute;
+    	position: fixed;
     	bottom: 125px*@ip5;
     	left: 50%;
     	z-index: 1111;
