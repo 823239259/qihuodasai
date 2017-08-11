@@ -91,10 +91,11 @@
 		},
 		computed: {
 			msgTips: function(){
-				return this.msg;
-			},
-			tipMsg: function(){
-				return this.$store.state.wsmsg;
+				if(this.$store.state.market.quoteConnectedMsg==0){
+					return '行情服务器连接成功';
+				}else{
+					return this.msg;
+				}
 			},
 			Parameters(){
 				return this.$store.state.market.Parameters
@@ -183,19 +184,17 @@
 					$('#home').css('padding-top', '80px');
 					$('#selectbar').css('top', '80px');
 				}
-
-			}
+			};
 		},
 		activated:function(){
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
 			//提示框
 			this.$children[0].isShow = true;
-			this.msg = this.tipMsg;
+//			this.msg = this.tipMsg;
 			
 			this.isBack = this.$route.query.isBack;
 			if(this.isBack && this.isBack == 1){
-				console.log(123);
 				window.location.reload();
 //				this.$router.go(-1);
 			}

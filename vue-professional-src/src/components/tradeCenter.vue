@@ -456,6 +456,7 @@
 				}.bind(this));
 			},
 			*/
+			
 			OnRspOrderInsertEntrustCont:function(n,o){
 				this.$store.state.market.entrustCont=[];
 				var orderTemplist = this.orderTemplist;
@@ -463,6 +464,8 @@
 					var obj={};
 					obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
 					obj.commodityStatus=this.OrderType[e.OrderStatus];
+					console.log(e.CommodityNo+','+e.OrderStatus);
+					console.log(this.OrderType[e.OrderStatus]);
 					obj.buyOrSell = function(){
 						if(e.Drection==0){
 							return '买';
@@ -490,7 +493,7 @@
 					obj.InsertDateTime = e.InsertDateTime;
 					obj.ContractCode = e.ContractCode;
 					obj.OrderID = e.OrderID;
-					this.$store.state.market.entrustCont.push(obj);
+					this.$store.state.market.entrustCont.unshift(obj);
 				}.bind(this));
 			},
 			OnRspOrderInsertOrderListCont:function(n,o){
@@ -798,7 +801,6 @@
 			}
 //			console.log(this.qryHoldTotalArr);
 			this.$store.state.market.positionListCont=[];
-			
 			this.qryHoldTotalArr.forEach(function(e){
 					var obj={};
 					obj.name=this.orderTemplist[e.CommodityNo].CommodityName;
@@ -855,39 +857,42 @@
 			
 			
 			this.$store.state.market.entrustCont=[];
+			var orderTemplist = this.orderTemplist;
 			this.OnRspOrderInsertEntrustCont.forEach(function(e){
-				var obj={};
-				var orderTemplist = this.orderTemplist;
-				obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
-				obj.commodityStatus=this.OrderType[e.OrderStatus];
-				obj.buyOrSell = function(){
-					if(e.Drection==0){
-						return '买';
-					}else{
-						return '卖';
-					}
-				}();
-				obj.delegatePrice = function(){
-					if(e.OrderPrice==0){
-						return '市价';
-					}else{
-						return parseFloat(e.OrderPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
-					}
-				}();
-				
-				obj.delegateNum = e.OrderNum;
-				obj.TradeNum = e.TradeNum;
-				obj.RevokeNum=function(){
-					if(e.OrderStatus==4){
-						return e.OrderNum - e.TradeNum;
-					}else{
-						return 0;
-					}
-				}();
-				obj.InsertDateTime = e.InsertDateTime;
-				obj.ContractCode = e.ContractCode;
-				obj.OrderID = e.OrderID;
-				this.$store.state.market.entrustCont.push(obj);
+				if(e.CommodityNo!=''){
+					var obj={};
+					obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
+					
+					obj.commodityStatus=this.OrderType[e.OrderStatus];
+					obj.buyOrSell = function(){
+						if(e.Drection==0){
+							return '买';
+						}else{
+							return '卖';
+						}
+					}();
+					obj.delegatePrice = function(){
+						if(e.OrderPrice==0){
+							return '市价';
+						}else{
+							return parseFloat(e.OrderPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+						}
+					}();
+					
+					obj.delegateNum = e.OrderNum;
+					obj.TradeNum = e.TradeNum;
+					obj.RevokeNum=function(){
+						if(e.OrderStatus==4){
+							return e.OrderNum - e.TradeNum;
+						}else{
+							return 0;
+						}
+					}();
+					obj.InsertDateTime = e.InsertDateTime;
+					obj.ContractCode = e.ContractCode;
+					obj.OrderID = e.OrderID;
+					this.$store.state.market.entrustCont.push(obj);
+				}
 			}.bind(this));
 			
 			this.$store.state.market.orderListCont=[];
@@ -939,7 +944,6 @@
 				this.$store.state.market.dealListCont.unshift(obj);
 				
 			}.bind(this));
-			
 			//初始合约名称
 			this.commodityName00 = this.detail.CommodityName;
 			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;

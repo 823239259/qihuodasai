@@ -60,10 +60,10 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-//			username : "000004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
-//			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
-			username:'',
-			password:''
+			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
+//			username:'',
+//			password:''
 		},
 		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
@@ -133,6 +133,8 @@ var market = {
 		forceLine:0.00,
 		
 		toast:'',
+		
+		quoteConnectedMsg:'',
 		
 		//选择K线时候的值
 		selectTime: 1,
@@ -480,7 +482,7 @@ export default new Vuex.Store({
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
-		tradeSocket:{},
+		tradeSocket:null,
 		webuser: {
 			username: '13677622344',
 			password: 'a123456'
@@ -1469,6 +1471,7 @@ export default new Vuex.Store({
 					}else{
 						console.log('登录失败');
 						context.state.market.layer='登录失败';
+						context.state.tradeSocket.close();
 					}
 					break;
 				case 'OnRspLogout': //登出回复
@@ -1660,6 +1663,7 @@ export default new Vuex.Store({
 		},
 		appendOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.push(parameters);
+			/*
 			var obj={};
 			obj.commodityName = context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 			obj.commodityStatus=context.state.market.OrderType[parameters.OrderStatus];
@@ -1689,13 +1693,14 @@ export default new Vuex.Store({
 			obj.InsertDateTime = parameters.InsertDateTime;
 			obj.ContractCode = parameters.ContractCode;
 			obj.OrderID = parameters.OrderID;
-			context.state.market.entrustCont.push(obj);		
+			context.state.market.entrustCont.unshift(obj);		
+			*/
 			
 		},
 		updateOrder:function(context,parameters){
 			context.state.market.entrustCont.forEach(function(e,i){
-				
 				if(e.OrderID==parameters.OrderID){
+//					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,e);
 					e.commodityStatus = context.state.market.OrderType[parameters.OrderStatus];
 					e.delegatePrice=e.delegatePrice=='市价'?'市价':parameters.OrderPrice;
 					e.delegateNum = parameters.OrderNum;
@@ -2062,7 +2067,9 @@ export default new Vuex.Store({
 		},
 		initTrade:function(context){
 			
-			context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
+			if(context.state.tradeSocket==null){
+				context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
+			}
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
@@ -2070,10 +2077,13 @@ export default new Vuex.Store({
 				}																
 			};
 			context.state.tradeSocket.onclose = function(evt) {
-				console.log('tradeClose:'+evt);
+				console.log('tradeClose:');
+				console.log(evt);
+				context.state.tradeSocket=null;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
-				console.log('tradeError:'+evt);
+				console.log('tradeError:');
+				console.log(evt);
 			};
 			context.state.tradeSocket.onmessage = function(evt) {
 				context.dispatch('handleTradeMessage',evt);
@@ -2096,7 +2106,7 @@ export default new Vuex.Store({
 			context.state.quoteSocket.onmessage = function(evt) {
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
-					context.state.wsmsg = '行情连接成功';
+					context.state.market.quoteConnectedMsg=0;
 					// 查询服务器支持品种用于订阅
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
