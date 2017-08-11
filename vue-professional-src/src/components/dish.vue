@@ -21,7 +21,7 @@
 					</li>
 					<li>
 						<span>昨结</span>
-						<span :class="[{'green':Parameters.PreSettlePrice<0},{'red':Parameters.PreSettlePrice>0},{'white':Parameters.PreSettlePrice==0}]">{{Parameters.PreSettlePrice | fixNum2(detail.DotSize)}}</span>
+						<span>{{Parameters.PreSettlePrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最新</span>

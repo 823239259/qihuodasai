@@ -154,12 +154,10 @@
 				$(e.target).addClass('current').siblings('li').removeClass('current');
 			},
 			toDetail: function(a) {
-				console.log(1111);
 				this.$children[0].isShow = true;
-				this.msg = '该功能正在开发中，您可登录www.dktai.cn进行交易或等待新功能上线！';
+				this.msg = '该功能正在开发中，敬请期待';
 //				this.Parameters.forEach(function(e){
 //					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
-//						console.log(e);
 //						this.$store.state.market.currentdetail=e;
 //					}
 //				}.bind(this));

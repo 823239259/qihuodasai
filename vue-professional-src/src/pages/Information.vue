@@ -327,6 +327,7 @@
 
 				).then(function(e) {
 					this.sevenlist = e.body.data.data;
+					console.log(this.sevenlist);
 					this.sevenlist.forEach(function(o, i){
 						this.$http.post(this.PATH + '/crawler/getCrawlerLiveContent', {emulateJSON: true}, {
 							params: {
