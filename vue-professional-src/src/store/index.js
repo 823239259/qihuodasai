@@ -60,7 +60,7 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+			username : "000029",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 //			username:'',
 //			password:''
@@ -1698,22 +1698,21 @@ export default new Vuex.Store({
 			
 		},
 		updateOrder:function(context,parameters){
-			console.log(context.state.market.entrustCont);
-			context.state.market.entrustCont.forEach(function(e,i){
-				if(e.OrderID==parameters.OrderID){
-//					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,e);
-					e.commodityStatus = context.state.market.OrderType[parameters.OrderStatus];
-					console.log(e);
-					console.log(parameters);
-					e.delegatePrice=e.delegatePrice=='市价'?'市价':parameters.OrderPrice;
-					e.delegateNum = parameters.OrderNum;
-					e.TradeNum = parameters.TradeNum;
-					e.RevokeNum=parameters.OrderNum-parameters.TradeNum;
-					context.state.market.entrustCont.splice(i,1,e);
-				}
-			});
+//			context.state.market.entrustCont.forEach(function(e,i){
+//				if(e.OrderID==parameters.OrderID){
+////					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,e);
+//					e.commodityStatus = context.state.market.OrderType[parameters.OrderStatus];
+//					e.delegatePrice=e.delegatePrice=='市价'?'市价':parameters.OrderPrice;
+//					e.delegateNum = parameters.OrderNum;
+//					e.TradeNum = parameters.TradeNum;
+//					e.RevokeNum=parameters.OrderNum-parameters.TradeNum;
+//					context.state.market.entrustCont.splice(i,1,e);
+//				}
+//			});
 			context.state.market.OnRspOrderInsertEntrustCont.forEach(function(e,i){
-				if(e.OrderID==parameters.OrderID){
+				if(e.OrderID == parameters.OrderID){
+					console.log(1232313);
+					console.log(e);
 					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,e);
 				}
 			});
@@ -1901,7 +1900,6 @@ export default new Vuex.Store({
 			
 		},
 		updateAccount:function(context,parameters){
-			console.log(parameters);
 			// 入金
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].InMoney = parameters.InMoney;
 			//出金
@@ -1916,7 +1914,6 @@ export default new Vuex.Store({
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].Deposit = parameters.Deposit;
 			// 挂单保证金
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].FrozenMoney = parameters.FrozenMoney;
-			console.log(context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo]);
 		},
 		initCacheAccount:function(context,parameters){
 			if(parameters!=null){
@@ -1924,8 +1921,6 @@ export default new Vuex.Store({
 			}
 		},
 		LayerOnRspOrderInsert:function(context,parameters){
-			console.log(parameters);
-			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
 			var CommodityName=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 			var DirectionStr;
 			if(parameters.Drection==0){
@@ -2002,7 +1997,6 @@ export default new Vuex.Store({
 		},
 		updateHoldFloatingProfit:function(context,parameters){
 			console.log('根据订阅行情初始化持仓盈亏');
-			console.log(parameters);
 //			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
 			var lastPrice = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.LastPrice;
 			var contract=parameters.ContractCode;
