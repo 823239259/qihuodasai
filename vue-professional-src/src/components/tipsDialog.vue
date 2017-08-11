@@ -30,9 +30,9 @@
     	bottom: 125px;
     	left: 50%;
     	z-index: 1111;
-    	width: 220px;
+    	width: 240px;
     	line-height: 24px;
-    	padding: 5px 0;
+    	padding: 10px;
     	text-align: center;
     	overflow: hidden;
     	margin-left: -110px;
@@ -52,7 +52,7 @@
     	z-index: 1111;
     	width: 220px*@ip6;
     	line-height: 24px*@ip6;
-    	padding: 5px*@ip6 0;
+    	padding: 10px*@ip6;
     	text-align: center;
     	overflow: hidden;
     	margin-left: -110px*@ip6;
@@ -72,7 +72,7 @@
     	z-index: 1111;
     	width: 220px*@ip5;
     	line-height: 24px*@ip5;
-    	padding: 5px*@ip5 0;
+    	padding: 10px*@ip5;
     	text-align: center;
     	overflow: hidden;
     	margin-left: -110px*@ip5;
