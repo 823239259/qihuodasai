@@ -1698,15 +1698,23 @@ export default new Vuex.Store({
 			
 		},
 		updateOrder:function(context,parameters){
+			console.log(context.state.market.entrustCont);
 			context.state.market.entrustCont.forEach(function(e,i){
 				if(e.OrderID==parameters.OrderID){
 //					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,e);
 					e.commodityStatus = context.state.market.OrderType[parameters.OrderStatus];
+					console.log(e);
+					console.log(parameters);
 					e.delegatePrice=e.delegatePrice=='市价'?'市价':parameters.OrderPrice;
 					e.delegateNum = parameters.OrderNum;
 					e.TradeNum = parameters.TradeNum;
 					e.RevokeNum=parameters.OrderNum-parameters.TradeNum;
 					context.state.market.entrustCont.splice(i,1,e);
+				}
+			});
+			context.state.market.OnRspOrderInsertEntrustCont.forEach(function(e,i){
+				if(e.OrderID==parameters.OrderID){
+					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,e);
 				}
 			});
 		},
