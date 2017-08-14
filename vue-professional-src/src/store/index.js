@@ -138,6 +138,10 @@ var market = {
 		
 		quoteConnectedMsg:'',
 		
+		tradeConnectedMsg:'',
+		
+		
+		
 		//选择K线时候的值
 		selectTime: 1,
 		//存进入详情页的No
@@ -1455,7 +1459,7 @@ export default new Vuex.Store({
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
 						console.log('交易服务器连接成功');
-						context.state.market.layer='交易服务器连接成功';
+						context.state.market.tradeConnectedMsg='交易服务器连接成功';
 						context.state.market.forceLine = parameters.ForceLine;
 						
 						// 查询持仓合计 QryHoldTotal
@@ -1472,7 +1476,7 @@ export default new Vuex.Store({
 						
 					}else{
 						console.log('登录失败');
-						context.state.market.layer=parameters.Message;
+						context.state.market.tradeConnectedMsg=parameters.Message;
 						context.state.tradeSocket.close();
 					}
 					break;

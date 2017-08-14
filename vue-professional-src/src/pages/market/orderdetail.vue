@@ -43,8 +43,8 @@
 			}
 		},
 		computed: {
-			layer: function(){
-				return this.$store.state.market.layer;
+			tradeConnectedMsg: function(){
+				return this.$store.state.market.tradeConnectedMsg;
 			},
 			sysMsg: function(){
 				return this.msg;
@@ -86,11 +86,10 @@
 			}
 		},
 		watch: {
-			layer: function(n, o){
+			tradeConnectedMsg: function(n, o){
 				this.$children[0].isShow = true;
 				this.msg = n;
-//				console.log(1231);
-//				this.$router.push({path: '/index', query: {isBack: 1}});
+				this.$router.push({path: '/index', query: {isBack: 1}});
 			}
 		},
 		activated: function() {
@@ -112,7 +111,7 @@
 			this.$store.state.isshow.kshow = false;
 			this.$store.state.isshow.bottomshow = false;
 			this.$children[0].isShow = true;
-			this.msg = this.layer;
+			this.msg = this.tradeConnectedMsg;
 			
 			//			var vol=5;
 			//			下面的循环用于假数据更新

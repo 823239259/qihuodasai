@@ -45,7 +45,6 @@
 					}
 				}else{
 					if(this.objstr){
-						console.log(123);
 						this.tradeSocket.send(this.objstr);
 					}
 				}
@@ -53,6 +52,7 @@
 					this.$router.push({path: '/tradeLogin'});
 				}
 				this.isshow = false;
+				console.log('222');
 			}
 		}
 	}
