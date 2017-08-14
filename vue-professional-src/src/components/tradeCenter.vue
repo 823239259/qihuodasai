@@ -804,6 +804,7 @@
 			}
 			this.$store.state.market.positionListCont=[];
 			this.qryHoldTotalArr.forEach(function(e){
+				console.log(e);
 					var obj={};
 					obj.name=this.orderTemplist[e.CommodityNo].CommodityName;
 					obj.type=function(){
