@@ -143,9 +143,11 @@
 				}
 			},
 			closeOut:function(obj){
+				var i = 0;
 				var positionCurrent;
 				for(positionCurrent in this.positionListCont){
 					if(this.orderListId == this.positionListCont[positionCurrent].commodityNocontractNo){
+						i++;
 						this.$children[1].isshow = true;
 						var buildIndex=0;
 						if(buildIndex>100){
@@ -178,10 +180,11 @@
 						this.tempText = b;
 						return false;
 //						this.tradeSocket.send(JSON.stringify(b));
-					}else{
-						this.$children[4].isShow = true;
-						this.msg = '请选择一条数据';
 					}
+				}
+				if(i < 1){
+					this.$children[4].isShow = true;
+					this.msg = '请选择一条数据';
 				}
 				
 			}
