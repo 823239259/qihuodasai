@@ -73,7 +73,7 @@
 			return {
 				time: 3,
 				msg: '',
-				isBack: ''
+//				isBack: ''
 			}
 		},
 		filters:{
@@ -111,9 +111,17 @@
 			},
 			guideshow(){
 				return this.$store.state.isshow.guideshow
+			},
+			isBack: function(){
+				return this.$route.query.isBack;
 			}
 		},
 		watch: {
+			isBack: function(n, o){
+				if(n == 2){
+					window.location.reload();
+				}
+			},
 			isconnected: function(n, o) {
 				var sw = window.screen.width;
 				if(n == true) {
@@ -190,19 +198,15 @@
 					$('#selectbar').css('top', '80px');
 				}
 			};
-			
-			this.isBack = this.$route.query.isBack;
-			if(this.isBack == 2){
-//				window.location.reload();
-//				this.$router.pu
-			}
 		},
 		activated:function(){
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
 			//提示框
 			this.$children[1].isShow = true;
-//			this.msg = this.tipMsg;
+			
+
+				
 			
 //			this.isBack = this.$route.query.isBack;
 //			if(this.isBack && this.isBack == 1){

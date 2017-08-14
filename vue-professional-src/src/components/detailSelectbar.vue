@@ -112,7 +112,7 @@
 						break;
 					case '交易中心':
 						var tradeConfig =this.$store.state.market.tradeConfig
-						if(tradeConfig.username == '' && tradeConfig.password == ''){
+						if(JSON.parse(localStorage.getItem('tradeUser')).username == '' && JSON.parse(localStorage.getItem('tradeUser')).password == ''){
 							this.$children[0].isshow = true;
 						}else{
 							this.$store.state.isshow.sshow = false;

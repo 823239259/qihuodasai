@@ -123,9 +123,6 @@
 			//				this.$store.state.market.jsonData.Parameters.Data.pop();
 			//				this.$store.state.market.jsonData.Parameters.Data.push(["2017-06-26 11:16:00", ran, ran2, 43.46, 43.46, 548303,vol ]);
 			//			}.bind(this), 100);
-		},
-		activated: function(){
-			console.log(1111);
 		}
 	}
 </script>

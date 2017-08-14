@@ -91,12 +91,16 @@
 					this.pwd = Base64.encode(this.pwd);
 					this.$store.state.market.tradeConfig.username = this.username;
 					this.$store.state.market.tradeConfig.password = this.pwd;
-//					var userData = {'username': this.username, 'password': this.pwd};  
-//					localStorage.setItem("tradeUser", JSON.stringify(userData));
+					var userData = {'username': this.username, 'password': this.pwd};  
+					localStorage.setItem("tradeUser", JSON.stringify(userData));
 //					console.log(JSON.parse(localStorage.getItem('tradeUser')).username);
 					//初始化交易
-					this.initTrade();
-					this.$router.push({path: '/index', query: {isBack: 2}});
+					this.$children[0].isShow = true;
+					this.msg = '登录成功';
+					setTimeout(function(){
+						this.$router.push({path: '/index', query: {isBack: 2}});
+					}.bind(this),500);
+//					this.initTrade();
 				}
 				
 			},

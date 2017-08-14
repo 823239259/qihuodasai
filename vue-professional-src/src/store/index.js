@@ -2035,14 +2035,17 @@ export default new Vuex.Store({
 		},
 		initTrade:function(context){
 			
-			if(context.state.tradeSocket==null){
+//			if(context.state.tradeSocket==null){
 				context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
-			}
+//			}
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-					context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
-//					context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+					if(JSON.parse(localStorage.getItem('tradeUser')).username!=null){
+						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+					}else{
+						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+					}
 				}
 			};
 			context.state.tradeSocket.onclose = function(evt) {
