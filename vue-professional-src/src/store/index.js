@@ -60,7 +60,7 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000086",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+			username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 //			username:'',
 //			password:''
@@ -1596,6 +1596,15 @@ export default new Vuex.Store({
 		},
 		layerMessage:function(context,parameters){
 			if(parameters!=null){
+//				console.log(parameters);
+//				context.state.market.qryHoldTotalArr
+				
+				if(parameters.OrderStatus==5){
+					context.state.market.layer=parameters.StatusMsg;
+					console.log(parameters.StatusMsg);
+					return;
+				}
+				
 				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 				var DirectionStr;
 				if(parameters.Drection==0){
@@ -1615,9 +1624,10 @@ export default new Vuex.Store({
 				var OrderID = parameters.OrderID;
 				
 				if(parameters.OrderStatus<4){
-					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）';
+					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.random();
 				}else{
-					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）';
+					console.log('11111');
+					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.random();
 				}
 				
 			}
@@ -1663,39 +1673,6 @@ export default new Vuex.Store({
 		},
 		appendOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.push(parameters);
-			/*
-			var obj={};
-			obj.commodityName = context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-			obj.commodityStatus=context.state.market.OrderType[parameters.OrderStatus];
-			obj.buyOrSell = function(){
-				if(parameters.Drection==0){
-					return '买';
-				}else{
-					return '卖';
-				}
-			}();
-			obj.delegatePrice = function(){
-				if(parameters.OrderPrice==0){
-					return '市价';
-				}else{
-					return parseFloat(parameters.OrderPrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				}
-			}();
-			obj.delegateNum = parameters.OrderNum;
-			obj.TradeNum = parameters.TradeNum;
-			obj.RevokeNum=function(){
-				if(parameters.OrderStatus==4){
-					return parameters.OrderNum - parameters.TradeNum;
-				}else{
-					return 0;
-				}
-			}();
-			obj.InsertDateTime = parameters.InsertDateTime;
-			obj.ContractCode = parameters.ContractCode;
-			obj.OrderID = parameters.OrderID;
-			context.state.market.entrustCont.unshift(obj);		
-			*/
-			
 		},
 		updateOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.forEach(function(e,i){

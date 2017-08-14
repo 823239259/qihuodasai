@@ -1,6 +1,6 @@
 <template>
 	<div id="orderList" class="list" :val="getData">
-		<alert title="确认全部平仓"  :line2="closeAllOutAlert" :objstr='closeAllOutAlertObj' type="1"></alert>
+		<alert title="确认全部平仓" :line2="closeAllOutAlert" :objstr='closeAllOutAlertObj' type="1"></alert>
 		<alert title="确认平仓"  :line2="closeOutAlert" :objstr='closeOutAlertObj'></alert>
 		<ul>
 			<li class="list_head">
@@ -103,14 +103,14 @@
 			closeAllOut:function(){
 				this.$children[0].isshow = true;
 				var arr=[];
-				for(var positionCurrent in this.positionListCont){
+				for(var i in this.positionListCont){
 					var buildIndex=0;
-					var drection ;
-					if(this.positionListCont[positionCurrent].Drection==0){
+					var drection;
+					if(this.positionListCont[i].Drection==0){
 						drection = 1;
 					}
 						
-					if(this.positionListCont[positionCurrent].Drection==1){
+					if(this.positionListCont[i].Drection==1){
 						drection = 0;
 					}
 					var b={
@@ -128,8 +128,8 @@
 							}
 					};
 					
-					this.$store.state.market.positionListCont.splice(positionCurrent,1);
-					this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
+//					this.$store.state.market.positionListCont.splice(positionCurrent,1);
+//					this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 					arr.push(b);
 					this.tempText = arr;
 //					this.tradeSocket.send(JSON.stringify(b));
@@ -141,6 +141,7 @@
 				var positionCurrent;
 				for( positionCurrent in this.positionListCont){
 					if(this.orderListId==this.positionListCont[positionCurrent].commodityNocontractNo){
+						console.log(this.positionListCont[positionCurrent]);
 						var buildIndex=0;
 						if(buildIndex>100){
 							buildIndex=0;
@@ -168,9 +169,9 @@
 							}
 						};
 						
-						this.$store.state.market.positionListCont.splice(positionCurrent,1);
-						
-						this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
+//						this.$store.state.market.positionListCont.splice(positionCurrent,1);
+//						
+//						this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 						
 						this.tempText = b;
 //						this.tradeSocket.send(JSON.stringify(b));
