@@ -242,7 +242,7 @@
 		},
 		computed:{
 			marketpriceEvent: function(){
-				if(this.isShow == true){
+				if(this.isShow === true){
 					return '市价';
 				}else{
 					return parseFloat(this.detail.LastQuotation.LastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
@@ -395,7 +395,7 @@
 		},
 		watch:{
 			layer: function(n, o){
-				this.$children[8].isShow = true;
+				this.$children[7].isShow = true;
 				this.msg = n;
 			},
 			selectId:function(n,o){
@@ -418,12 +418,13 @@
 				}
 			},
 			tradePrices: function(n, o){
-					if(n.length<1){
-						$(".redbtn li:first-child, .greenbtn li:first-child").text('');
-					}else{
+				if(n.length<1){
+					$(".redbtn li:first-child, .greenbtn li:first-child").text('');
+				}else{
+					if(this.isShow == false){
 						$(".redbtn li:first-child, .greenbtn li:first-child").text(n);
 					}
-					
+				}
 			},
 			/*
 			qryHoldTotalArr:function(n,o){
@@ -804,57 +805,56 @@
 			}
 			this.$store.state.market.positionListCont=[];
 			this.qryHoldTotalArr.forEach(function(e){
-				console.log(e);
-					var obj={};
-					obj.name=this.orderTemplist[e.CommodityNo].CommodityName;
-					obj.type=function(){
-						if(e.Drection==0){
-							return '多'
-						}else{
-							return '空'
-						}
-					}();
-					obj.num=e.HoldNum;
-					obj.price=e.HoldAvgPrice.toFixed(this.orderTemplist[e.CommodityNo].DotSize);
-					var currentCommodity = this.orderTemplist[e.CommodityNo];
-					var CacheHoldFloatingProfit = this.CacheHoldFloatingProfit;
-					obj.total=function(){
-						var diff = currentCommodity.LastPrice - e.HoldAvgPrice;
-						var mult = currentCommodity.ContractSize/currentCommodity.MiniTikeSize;
-						var tmpFloatingProfit = parseFloat(diff * mult * e.HoldNum).toFixed(2);
-						if(isNaN(tmpFloatingProfit)){
-							tmpFloatingProfit=0;
-						}
-						if(e.Drection === 1) { // 空反向
-							tmpFloatingProfit = -tmpFloatingProfit;
-						}
-						if(tmpFloatingProfit>=0){
-							obj.total_color = 'red';
-						}else{
-							obj.total_color = 'green';
-						}
-						var floatingProfit=tmpFloatingProfit+':'+currentCommodity.CurrencyNo;
-						CacheHoldFloatingProfit.jHoldFloatingProfit[e.ContractCode] 
-							= {"currencyNo" : currentCommodity.CurrencyNo, "floatingProfit" : tmpFloatingProfit};
-						return floatingProfit;
-					}();
-					obj.showbar=false;
-					obj.type_color=function(){
-						if(e.Drection==0){
-							return 'red'
-						}else{
-							return 'green'
-						}
-					}();
-					obj.ExchangeNo = this.orderTemplist[e.CommodityNo].ExchangeNo;
-					obj.CommodityNo=this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo;
-					obj.ContractNo=this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
-					obj.Drection = e.Drection;
-					
-					obj.commodityNocontractNo = this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo
-												+this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
-					this.$store.state.market.positionListCont.unshift(obj);
-				}.bind(this));
+				var obj={};
+				obj.name=this.orderTemplist[e.CommodityNo].CommodityName;
+				obj.type=function(){
+					if(e.Drection==0){
+						return '多'
+					}else{
+						return '空'
+					}
+				}();
+				obj.num=e.HoldNum;
+				obj.price=e.HoldAvgPrice.toFixed(this.orderTemplist[e.CommodityNo].DotSize);
+				var currentCommodity = this.orderTemplist[e.CommodityNo];
+				var CacheHoldFloatingProfit = this.CacheHoldFloatingProfit;
+				obj.total=function(){
+					var diff = currentCommodity.LastPrice - e.HoldAvgPrice;
+					var mult = currentCommodity.ContractSize/currentCommodity.MiniTikeSize;
+					var tmpFloatingProfit = parseFloat(diff * mult * e.HoldNum).toFixed(2);
+					if(isNaN(tmpFloatingProfit)){
+						tmpFloatingProfit=0;
+					}
+					if(e.Drection === 1) { // 空反向
+						tmpFloatingProfit = -tmpFloatingProfit;
+					}
+					if(tmpFloatingProfit>=0){
+						obj.total_color = 'red';
+					}else{
+						obj.total_color = 'green';
+					}
+					var floatingProfit=tmpFloatingProfit+':'+currentCommodity.CurrencyNo;
+					CacheHoldFloatingProfit.jHoldFloatingProfit[e.ContractCode] 
+						= {"currencyNo" : currentCommodity.CurrencyNo, "floatingProfit" : tmpFloatingProfit};
+					return floatingProfit;
+				}();
+				obj.showbar=false;
+				obj.type_color=function(){
+					if(e.Drection==0){
+						return 'red'
+					}else{
+						return 'green'
+					}
+				}();
+				obj.ExchangeNo = this.orderTemplist[e.CommodityNo].ExchangeNo;
+				obj.CommodityNo=this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo;
+				obj.ContractNo=this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
+				obj.Drection = e.Drection;
+				
+				obj.commodityNocontractNo = this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo
+											+this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
+				this.$store.state.market.positionListCont.unshift(obj);
+			}.bind(this));
 			
 			//委托
 			this.appendOrderList(this.OnRspOrderInsertEntrustCont);
