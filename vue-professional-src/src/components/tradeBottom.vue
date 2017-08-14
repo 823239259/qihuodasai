@@ -6,7 +6,7 @@
 					<ul>
 						<li>
 							<div class="fontgray fl">
-								卖 <span class="fontred">{{Parameters.AskPrice1 | fixNum4(detail.DotSize)}}</span>
+								卖 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0}">{{Parameters.AskPrice1 | fixNum4(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
 								{{Parameters.AskQty1}}
@@ -14,7 +14,7 @@
 						</li>
 						<li>
 							<div class="fontgray fl">
-								买 <span class="fontred">{{Parameters.BidPrice1 | fixNum4(detail.DotSize)}}</span>
+								买 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0}">{{Parameters.BidPrice1 | fixNum4(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
 								{{Parameters.BidQty1}}
@@ -32,7 +32,7 @@
 				</div>
 				<div class="fl">
 					<ul>
-						<li class="fontred">
+						<li class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0}">
 							{{Parameters.LastPrice | fixNum2(detail.DotSize)}}
 						</li>
 						<li class="fontred">
@@ -191,6 +191,7 @@
 
 <style scoped lang="less">
 	@import url("../assets/css/main.less");
+	@import url("../assets/css/base.less");
 	#tradebottom{
 		position: fixed;
 		bottom: 0;
@@ -312,6 +313,12 @@
 	
 	.bottompart>div:last-child {
 		margin-left: 51px;
+	}
+	span.red, li.red{
+		color: @red;
+	}
+	span.green, li.green{
+		color: @green;
 	}
 	
 	@media(max-width:370px) {

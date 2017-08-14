@@ -379,7 +379,7 @@
 			toTradeLogin: function(){
 				//交易暂不上
 				this.$children[0].isShow = true;
-				this.msg = '功能暂未上线';
+				this.msg = '该功能正在开发中，您可登录www.dktai.cn进行交易或等待新功能上线！';
 //				this.$router.push({path: '/tradeLogin', query: {user: this.tradeDetails.tranAccount, pwd: this.tradeDetails.tranPassword}});
 			},
 			toTradersRules: function(){

@@ -2,6 +2,7 @@
 	<div id="home">
 		<template>
 			<tipsDialog :msg="msgTips"></tipsDialog>
+			<tipsDialog :msg="sysMsg"></tipsDialog>
 			<div id="disconnect" v-show='!isconnected'>
 				<div><s></s>&nbsp;&nbsp;行情连接已断开，<span>{{time}}</span>秒后自动重连</div>
 			</div>
@@ -91,10 +92,15 @@
 		},
 		computed: {
 			msgTips: function(){
+//				if(this.$store.state.market.quoteConnectedMsg==0){
+//					return '行情服务器连接成功';
+//				}else{
+					return this.msg;
+//				}
+			},
+			sysMsg: function(){
 				if(this.$store.state.market.quoteConnectedMsg==0){
 					return '行情服务器连接成功';
-				}else{
-					return this.msg;
 				}
 			},
 			Parameters(){
@@ -148,15 +154,14 @@
 				$(e.target).addClass('current').siblings('li').removeClass('current');
 			},
 			toDetail: function(a) {
-//				this.$children[0].isShow = true;
-//				this.msg = '此功能暂未上线';
-				this.Parameters.forEach(function(e){
-					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
-						console.log(e);
-						this.$store.state.market.currentdetail=e;
-					}
-				}.bind(this));
-				this.$router.push({path: '/orderdetail'});
+				this.$children[0].isShow = true;
+				this.msg = '该功能正在开发中，敬请期待';
+//				this.Parameters.forEach(function(e){
+//					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
+//						this.$store.state.market.currentdetail=e;
+//					}
+//				}.bind(this));
+//				this.$router.push({path: '/orderdetail'});
 			}
 		},
 		mounted: function() {
@@ -190,7 +195,7 @@
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
 			//提示框
-			this.$children[0].isShow = true;
+			this.$children[1].isShow = true;
 //			this.msg = this.tipMsg;
 			
 			this.isBack = this.$route.query.isBack;
