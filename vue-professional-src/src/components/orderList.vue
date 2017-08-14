@@ -122,10 +122,10 @@
 					var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.positionListCont[positionCurrent].ExchangeNo,
-								"CommodityNo":this.positionListCont[positionCurrent].CommodityNo,
-								"ContractNo":this.positionListCont[positionCurrent].ContractNo,
-								"OrderNum":this.positionListCont[positionCurrent].num,
+								"ExchangeNo":this.positionListCont[i].ExchangeNo,
+								"CommodityNo":this.positionListCont[i].CommodityNo,
+								"ContractNo":this.positionListCont[i].ContractNo,
+								"OrderNum":this.positionListCont[i].num,
 								"Drection":drection,
 								"PriceType":1,
 								"LimitPrice":0.00,
@@ -143,9 +143,9 @@
 				}
 			},
 			closeOut:function(obj){
-				for(var positionCurrent in this.positionListCont){
+				var positionCurrent;
+				for(positionCurrent in this.positionListCont){
 					if(this.orderListId == this.positionListCont[positionCurrent].commodityNocontractNo){
-						console.log(1);
 						this.$children[1].isshow = true;
 						var buildIndex=0;
 						if(buildIndex>100){
@@ -179,7 +179,6 @@
 						return false;
 //						this.tradeSocket.send(JSON.stringify(b));
 					}else{
-						console.log(2);
 						this.$children[4].isShow = true;
 						this.msg = '请选择一条数据';
 					}
