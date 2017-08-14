@@ -29,24 +29,30 @@
 			<cbtn name="平仓"  @tap.native="closeOut"></cbtn>
 			<!--<cbtn name="止损止赢"></cbtn>-->
 		</div>
+		<tipsDialog :msg="msgTips"></tipsDialog>
 	</div>
 </template>
 
 <script>
 	import cbtn from '../components/conditionBtn.vue'
 	import alert from '../components/Tradealert.vue'
+	import tipsDialog from '../components/tipsDialog.vue'
 	export default{
 		name: 'orderList',
-		components: {cbtn,alert},
+		components: {cbtn, alert, tipsDialog},
 		props: ['val'],
 		data(){
 			return {
+				msg: '',
 				datas: '',
 				orderListId: '',
 				tempText:{}
 			}
 		},
 		computed: {
+			msgTips: function(){
+				return this.msg;
+			},
 			closeOutAlertObj:function(){
 				if(this.tempText){
 					return JSON.stringify(this.tempText);
@@ -137,21 +143,18 @@
 				}
 			},
 			closeOut:function(obj){
-				this.$children[1].isshow = true;
-				var positionCurrent;
-				for( positionCurrent in this.positionListCont){
-					if(this.orderListId==this.positionListCont[positionCurrent].commodityNocontractNo){
-						console.log(this.positionListCont[positionCurrent]);
+				for(var positionCurrent in this.positionListCont){
+					if(this.orderListId == this.positionListCont[positionCurrent].commodityNocontractNo){
+						console.log(1);
+						this.$children[1].isshow = true;
 						var buildIndex=0;
 						if(buildIndex>100){
 							buildIndex=0;
 						}
-						var drection ;
+						var drection;
 						if(this.positionListCont[positionCurrent].Drection==0){
 							drection = 1;
-						}
-						
-						if(this.positionListCont[positionCurrent].Drection==1){
+						}else if(this.positionListCont[positionCurrent].Drection==1){
 							drection = 0;
 						}
 						var b={
@@ -168,14 +171,17 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 						};
-						
 //						this.$store.state.market.positionListCont.splice(positionCurrent,1);
 //						
 //						this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 						
 						this.tempText = b;
+						return false;
 //						this.tradeSocket.send(JSON.stringify(b));
-						
+					}else{
+						console.log(2);
+						this.$children[4].isShow = true;
+						this.msg = '请选择一条数据';
 					}
 				}
 				
