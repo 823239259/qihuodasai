@@ -60,7 +60,7 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000002",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 //			username:'',
 //			password:''
@@ -2022,12 +2022,12 @@ export default new Vuex.Store({
 			);	
 			function heartBeatUpdate(){
 //				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
-//				if(1==1){
-//						console.log('交易服务器断开，正在重连');
-//						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
-//					}else{
-//						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
-//				}
+				if(1==1){
+						console.log('交易服务器断开，正在重连');
+						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+					}else{
+						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+				}
 			}
 			heartBeatUpdate();
 		},
@@ -2161,7 +2161,6 @@ export default new Vuex.Store({
 									var arr2 = arr1[1].split(':'); //得到的数据
 									var arr3 = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0].split(' ');
 									var arr4 = arr3[1].split(':'); //历史
-
 									if(context.state.market.selectTime == 1) {
 										if(arr2[1] == arr4[1]) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
@@ -2195,7 +2194,7 @@ export default new Vuex.Store({
 										}
 									}else if(context.state.market.selectTime == 5){
 										var timeDifference=arr2[1]-arr4[1]; 
-										if(timeDifference%5 != 0) {
+										if(timeDifference%5 == 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2223,11 +2222,12 @@ export default new Vuex.Store({
 											arrTemp[5] = arr[5];
 											arrTemp[6] = arr[6];
 											arr = arrTemp;
+											console.log(arrTemp);
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 15){
 										var timeDifference=arr2[1]-arr4[1]; 
-										if(timeDifference%15 != 0) {
+										if(timeDifference%15 == 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2259,7 +2259,7 @@ export default new Vuex.Store({
 										}
 									}else if(context.state.market.selectTime == 30){
 										var timeDifference=arr2[1]-arr4[1]; 
-										if(timeDifference%30 != 0) {
+										if(timeDifference%30 == 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2291,7 +2291,7 @@ export default new Vuex.Store({
 										}
 									}else if(context.state.market.selectTime == 1440){
 										var timeDifference=arr2[1]-arr4[1];
-										if(timeDifference%1440 != 0) {
+										if(timeDifference%1440 == 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
