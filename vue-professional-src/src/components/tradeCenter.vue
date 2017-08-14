@@ -50,10 +50,10 @@
 			</div>
 		</div>
 		<div class="order_num border_bottom">
-			<div class="operate_num fl" v-if="isShow">
+			<div class="operate_num fl" v-show="isShow">
 				<operatenum w="sm"></operatenum>
 			</div>
-			<div class="limit_cont" v-else>
+			<div class="limit_cont" v-show="!isShow">
 				<div class="limit_cont_col">
 					<span>手数：</span>
 					<input type="number" class="ipt fl" v-model="tradeNum" />
