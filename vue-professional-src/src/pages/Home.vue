@@ -190,6 +190,12 @@
 					$('#selectbar').css('top', '80px');
 				}
 			};
+			
+			this.isBack = this.$route.query.isBack;
+			if(this.isBack == 2){
+//				window.location.reload();
+//				this.$router.pu
+			}
 		},
 		activated:function(){
 			this.$store.state.market.currentNo='';
@@ -198,11 +204,16 @@
 			this.$children[1].isShow = true;
 //			this.msg = this.tipMsg;
 			
-			this.isBack = this.$route.query.isBack;
-			if(this.isBack && this.isBack == 1){
-				window.location.reload();
+//			this.isBack = this.$route.query.isBack;
+//			if(this.isBack && this.isBack == 1){
+//				window.location.reload();
 //				this.$router.go(-1);
-			}
+//			}else if(this.isBack == 2){
+//				window.location.reload();
+////				this.$router.pu
+//			}
+			
+			
 		}
 	}
 </script>

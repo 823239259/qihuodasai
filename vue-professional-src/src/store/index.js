@@ -60,10 +60,12 @@ var market = {
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
-			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
-//			username:'',
-//			password:''
+//			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+//			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
+//			username:JSON.parse(localStorage.getItem('tradeUser')).username,
+//			password:JSON.parse(localStorage.getItem('tradeUser')).password
+			username:'',
+			password:''
 		},
 		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
@@ -1452,8 +1454,8 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
-						console.log('登录成功');
-						context.state.market.layer='登录成功';
+						console.log('交易服务器连接成功');
+						context.state.market.layer='交易服务器连接成功';
 						context.state.market.forceLine = parameters.ForceLine;
 						
 						// 查询持仓合计 QryHoldTotal
@@ -1470,7 +1472,7 @@ export default new Vuex.Store({
 						
 					}else{
 						console.log('登录失败');
-						context.state.market.layer='登录失败';
+						context.state.market.layer=parameters.Message;
 						context.state.tradeSocket.close();
 					}
 					break;
@@ -2021,10 +2023,10 @@ export default new Vuex.Store({
 				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
 			);	
 			function heartBeatUpdate(){
-//				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
-				if(1==1){
+				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
 						console.log('交易服务器断开，正在重连');
 						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+//						context.dispatch('initTrade');
 					}else{
 						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 				}
@@ -2040,7 +2042,8 @@ export default new Vuex.Store({
 				//登录
 				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
 					context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
-				}																
+//					context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+				}
 			};
 			context.state.tradeSocket.onclose = function(evt) {
 				console.log('tradeClose:');
@@ -2222,7 +2225,6 @@ export default new Vuex.Store({
 											arrTemp[5] = arr[5];
 											arrTemp[6] = arr[6];
 											arr = arrTemp;
-											console.log(arrTemp);
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 15){

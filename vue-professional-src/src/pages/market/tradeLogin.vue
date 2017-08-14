@@ -91,9 +91,12 @@
 					this.pwd = Base64.encode(this.pwd);
 					this.$store.state.market.tradeConfig.username = this.username;
 					this.$store.state.market.tradeConfig.password = this.pwd;
+//					var userData = {'username': this.username, 'password': this.pwd};  
+//					localStorage.setItem("tradeUser", JSON.stringify(userData));
+//					console.log(JSON.parse(localStorage.getItem('tradeUser')).username);
 					//初始化交易
 					this.initTrade();
-					this.$router.push({path: '/orderdetail'})
+					this.$router.push({path: '/index', query: {isBack: 2}});
 				}
 				
 			},
