@@ -123,6 +123,7 @@
 						this.$children[0].isShow = true;
 						this.msg = '服务器连接失败'
 					});
+					
 				}
 			},
 			toRegister: function(){

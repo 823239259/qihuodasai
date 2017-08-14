@@ -495,11 +495,11 @@ export default new Vuex.Store({
 	getters: {
 		PATH: function(state) {
 			if(state.setting == 'dev') {
-				return '/api'
+				return '/api';
 			} else if(state.setting == 'build') {
-				return 'http://test.api.dktai.cn'
+				return 'http://test.api.dktai.cn';
 			} else if(state.setting == 'nat') {
-				return '/nat/vs-api'
+				return '/nat/vs-api';
 			}
 		}
 	},
@@ -2081,6 +2081,7 @@ export default new Vuex.Store({
 		},
 		initQuoteClient: function(context) {
 			context.state.quoteSocket = new WebSocket('ws://192.168.0.213:9002');
+//			context.state.quoteSocket = new WebSocket('ws://quote.vs.com:9002');
 			context.state.quoteSocket.onopen = function(evt) {
 				console.log('open');
 				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"13677622344","PassWord":"a123456"}}');

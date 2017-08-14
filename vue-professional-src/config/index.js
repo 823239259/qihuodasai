@@ -14,14 +14,14 @@ module.exports = {
 		// Before setting to `true`, make sure to:
 		// npm install --save-dev compression-webpack-plugin
 		proxyTable: {
-			//    	跨域请求配置
-			//  		'/api':{
-			//  			target:'http://test.api.dktai.cn',
-			//  			changeOrigin:true,
-			//  			pathRewrite:{
-			//  				'^/api':''
-			//  			}
-			//  		}
+			//跨域请求配置
+//	  		'/api':{
+//	  			target:'http://api.dktai.cn',
+//	  			changeOrigin:true,
+//	  			pathRewrite:{
+//	  				'^/api':''
+//	  			}
+//	  		}
 		},
 		productionGzip: false,
 		productionGzipExtensions: ['js', 'css'],
