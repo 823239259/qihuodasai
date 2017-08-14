@@ -77,11 +77,11 @@
 				}
 			},
 			fixNum2:function(num,dotsize){
-				if(num>=0){
-					return '+'+num.toFixed(dotsize);
-				}else{
-					return ' '+num.toFixed(dotsize);
-				}
+//				if(num>=0){
+					return num.toFixed(dotsize);
+//				}else{
+//					return ' '+num.toFixed(dotsize);
+//				}
 			},
 			fixNum3:function(num,dotsize){
 				if(num>=0){
