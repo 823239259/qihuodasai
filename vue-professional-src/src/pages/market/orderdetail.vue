@@ -86,7 +86,13 @@
 			},
 			layerOnRtnOrder(){
 				return this.$store.state.market.layerOnRtnOrder;
-			}
+			},
+			tradeLoginSuccessMsg(){
+				return this.$store.state.market.tradeLoginSuccessMsg;
+			},
+//			tradeLoginfailMsg(){
+//				return this.$store.state.market.tradeLoginfailMsg;
+//			},
 		},
 		watch: {
 			layerOnRtnOrder: function(n, o){
@@ -97,6 +103,10 @@
 				this.$children[0].isShow = true;
 				this.msg = n;
 				this.$router.push({path: '/index', query: {isBack: 1}});
+			},
+			tradeLoginSuccessMsg: function(n, o){
+				this.$children[0].isShow = true;
+				this.msg = n;
 			}
 		},
 		activated: function() {
@@ -118,17 +128,7 @@
 			this.$store.state.isshow.kshow = false;
 			this.$store.state.isshow.bottomshow = false;
 			this.$children[0].isShow = true;
-			this.msg = this.tradeConnectedMsg;
-			
-			//			var vol=5;
-			//			下面的循环用于假数据更新
-			//			setInterval(function() {
-			//				var ran = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;
-			//				var ran2 = Math.floor(Math.random() * (4350 - 4348 + 1) + 4348)/100;
-			//				vol+=5;
-			//				this.$store.state.market.jsonData.Parameters.Data.pop();
-			//				this.$store.state.market.jsonData.Parameters.Data.push(["2017-06-26 11:16:00", ran, ran2, 43.46, 43.46, 548303,vol ]);
-			//			}.bind(this), 100);
+			this.msg = this.tradeLoginSuccessMsg;
 		}
 	}
 </script>

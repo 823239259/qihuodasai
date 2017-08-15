@@ -140,6 +140,10 @@ var market = {
 		
 		tradeConnectedMsg:'',
 		
+		tradeLoginSuccessMsg:'',
+		
+		tradeLoginfailMsg:'',
+		
 		layerOnRtnOrder: '',     //买入成功提示
 		
 		
@@ -1460,8 +1464,13 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
+						
 						console.log('交易服务器连接成功');
-						context.state.market.tradeConnectedMsg='交易服务器连接成功';
+						context.state.market.tradeLoginSuccessMsg='交易服务器连接成功';
+						
+						//启动交易心跳定时检查
+						context.dispatch('HeartBeatTimingCheck');
+						
 						context.state.market.forceLine = parameters.ForceLine;
 						
 						// 查询持仓合计 QryHoldTotal
@@ -1478,7 +1487,8 @@ export default new Vuex.Store({
 						
 					}else{
 						console.log('登录失败');
-						context.state.market.tradeConnectedMsg=parameters.Message;
+						context.state.market.tradeLoginSuccessMsg='请登录交易服务器';
+//						context.state.market.tradeLoginfailMsg=parameters.Message;
 						context.state.tradeSocket.close();
 					}
 					break;
@@ -2046,7 +2056,7 @@ export default new Vuex.Store({
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-					if(JSON.parse(localStorage.getItem('tradeUser')).username!=null){
+					if(JSON.parse(localStorage.getItem('tradeUser'))){
 						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 					}else{
 						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
@@ -2111,8 +2121,7 @@ export default new Vuex.Store({
 					if(context.state.market.subscribeIndex==1){
 						//初始化交易
 						context.dispatch('initTrade');
-						//启动交易心跳定时检查
-						context.dispatch('HeartBeatTimingCheck');
+						
 					}
 					
 					context.state.market.subscribeIndex++;

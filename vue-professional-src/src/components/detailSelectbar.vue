@@ -111,8 +111,8 @@
 						this.$store.state.isshow.isklineshow = false;
 						break;
 					case '交易中心':
-						var tradeConfig =this.$store.state.market.tradeConfig
-						if(JSON.parse(localStorage.getItem('tradeUser')).username == null && JSON.parse(localStorage.getItem('tradeUser')).password == null){
+						var tradeConfig =this.$store.state.market.tradeConfig;
+						if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 							this.$children[0].isshow = true;
 						}else{
 							this.$store.state.isshow.sshow = false;

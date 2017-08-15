@@ -93,7 +93,6 @@
 					this.$store.state.market.tradeConfig.password = this.pwd;
 					var userData = {'username': this.username, 'password': this.pwd};  
 					localStorage.setItem("tradeUser", JSON.stringify(userData));
-//					console.log(JSON.parse(localStorage.getItem('tradeUser')).username);
 					//初始化交易
 					this.$children[0].isShow = true;
 					this.msg = '登录成功';
