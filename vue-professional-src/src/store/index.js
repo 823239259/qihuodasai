@@ -1599,7 +1599,7 @@ export default new Vuex.Store({
 				var TradeNum = parameters.TradeNum;
 				var TradeNo = parameters.TradeNo;
 				var TradePrice = parseFloat(parameters.TradePrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				context.state.market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）";
+				context.state.market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）" + Math.floor(Math.random()*10);
 			}
 		},
 		layerMessage:function(context,parameters){

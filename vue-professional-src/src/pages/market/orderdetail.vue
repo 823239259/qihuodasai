@@ -91,7 +91,7 @@
 		watch: {
 			layerOnRtnOrder: function(n, o){
 				this.$children[0].isShow = true;
-				this.msg = n;
+				this.msg = n.slice(0, -1);
 			},
 			tradeConnectedMsg: function(n, o){
 				this.$children[0].isShow = true;
