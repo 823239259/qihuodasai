@@ -6,7 +6,7 @@
 					<ul>
 						<li>
 							<div class="fontgray fl">
-								卖 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0}">{{Parameters.AskPrice1 | fixNum4(detail.DotSize)}}</span>
+								卖 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice1 | fixNum4(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
 								{{Parameters.AskQty1}}
@@ -14,7 +14,7 @@
 						</li>
 						<li>
 							<div class="fontgray fl">
-								买 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0}">{{Parameters.BidPrice1 | fixNum4(detail.DotSize)}}</span>
+								买 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice1 | fixNum4(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
 								{{Parameters.BidQty1}}
@@ -32,12 +32,12 @@
 				</div>
 				<div class="fl">
 					<ul>
-						<li class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0}">
+						<li class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">
 							{{Parameters.LastPrice | fixNum2(detail.DotSize)}}
 						</li>
 						<li class="fontred">
-							<span>{{Parameters.ChangeValue | fixNum2(detail.DotSize)}}</span>
-							<span> {{Parameters.ChangeRate | fixNum}}%</span>
+							<span :class="{red: Parameters.ChangeValue > 0,green: Parameters.ChangeValue < 0}">{{Parameters.ChangeValue | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: Parameters.ChangeValue > 0,green: Parameters.ChangeValue < 0}">{{Parameters.ChangeRate | fixNum}}%</span>
 						</li>
 					</ul>
 				</div>
