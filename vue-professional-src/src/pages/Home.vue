@@ -118,14 +118,16 @@
 		},
 		watch: {
 			isBack: function(n, o){
+				console.log(window.location.href.split('?')[0]);
 				if(n == 1 || n==2){
-					window.location.reload();
+					window.location.href = window.location.href.split('?')[0];
 				}
 			},
 			isconnected: function(n, o) {
 				var sw = window.screen.width;
 				if(n == true) {
 					if(sw <= 370) {
+						
 						$('#home').css('padding-top', 50 * 0.7729 + 'px');
 						$('#selectbar').css('top', 50 * 0.7729 + 'px');
 					} else if(sw <= 410) {
