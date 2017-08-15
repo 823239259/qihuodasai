@@ -52,7 +52,6 @@
 					this.$router.push({path: '/tradeLogin'});
 				}
 				this.isshow = false;
-				console.log('222');
 			}
 		}
 	}

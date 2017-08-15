@@ -295,7 +295,8 @@
 					if(obj.PriceType==1){
 						LimitPrice='市价';
 					}else{
-						LimitPrice = obj.LimitPrice;
+//						LimitPrice = obj.LimitPrice;
+						LimitPrice = this.tradePrices;
 					}
 					var orderNum = obj.OrderNum;
 					var drection;
@@ -391,13 +392,19 @@
 			},
 			tradePrice(){
 				return this.detail.LastQuotation.LastPrice;
+			},
+			appendOrderMsg(){
+				return this.$store.state.market.appendOrderMsg;
 			}
 		},
 		watch:{
+			appendOrderMsg: function(n, o){
+				this.$children[8].isShow = true;
+				this.msg = n.slice(0,-1);
+			},
 			layer: function(n, o){
-				console.log(n);
 				this.$children[7].isShow = true;
-				this.msg = n;
+				this.msg = n.slice(0,-1);
 			},
 			selectId:function(n,o){
 				if(n != undefined){
@@ -653,7 +660,7 @@
 								"OrderNum": parseInt(this.tradeNum),
 								"Drection":1,
 								"PriceType":0,
-								"LimitPrice":parseFloat(this.tradePrice),
+								"LimitPrice":parseFloat(this.tradePrices),
 								"TriggerPrice":0,
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
@@ -702,7 +709,7 @@
 									"OrderNum": parseInt(this.tradeNum),
 									"Drection":0,
 									"PriceType":0,
-									"LimitPrice":parseFloat(this.tradePrice),
+									"LimitPrice":parseFloat(this.tradePrices),
 									"TriggerPrice":0,
 									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 								}
