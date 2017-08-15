@@ -125,8 +125,8 @@
 			<operatenum></operatenum>
 		</div>
 		<div class="btn_box">
-			<chartBtn type="buy" class="fl"></chartBtn>
-			<chartBtn type="sell" class="fr"></chartBtn>
+			<chartBtn type="buy" class="fl" @tap.native='buy'></chartBtn>
+			<chartBtn type="sell" class="fr" @tap.native='sell'></chartBtn>
 		</div>
 		
 	</div>
@@ -147,7 +147,13 @@
 			},
 			Parameters(){
 				return this.$store.state.market.jsonTow.Parameters;
-			}
+			},
+			templateList(){
+				return this.$store.state.market.templateList;
+			},
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
+			},
 		},
 		filters:{
 			fixNum:function(num){
@@ -157,6 +163,57 @@
 				return num.toFixed(dotsize);
 			}
 		},
+		methods:{
+			buy:function(){
+				var commodityNo = this.detail.CommodityNo;
+				var buildIndex=0;
+				if(buildIndex>100){
+					buildIndex=0;
+				}
+				var b={
+						"Method":'InsertOrder',
+								"Parameters":{
+									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+									"CommodityNo":this.templateList[commodityNo].CommodityNo,
+									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"OrderNum":this.$children[0].defaultNum,
+									"Drection":0,
+									"PriceType":1,
+									"LimitPrice":0.00,
+									"TriggerPrice":0,
+									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+				};
+				this.tradeSocket.send(JSON.stringify(b));
+			},
+			sell:function(){
+				var commodityNo = this.detail.CommodityNo;
+				var buildIndex=0;
+				if(buildIndex>100){
+					buildIndex=0;
+				}
+				
+				var b={
+							"Method":'InsertOrder',
+							"Parameters":{
+								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+								"CommodityNo":this.templateList[commodityNo].CommodityNo,
+								"ContractNo":this.detail.LastQuotation.ContractNo,
+								"OrderNum":this.$children[0].defaultNum,
+								"Drection":1,
+								"PriceType":1,
+								"LimitPrice":0.00,
+								"TriggerPrice":0,
+								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							}
+					};
+				
+				this.tradeSocket.send(JSON.stringify(b));
+				
+				
+				
+			}
+		}
 	}
 	
 </script>
