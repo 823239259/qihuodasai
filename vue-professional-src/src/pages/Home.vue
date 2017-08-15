@@ -118,9 +118,10 @@
 		},
 		watch: {
 			isBack: function(n, o){
-				console.log(window.location.href.split('?')[0]);
+//				console.log(window.location.href.split('?')[0]);
 				if(n == 1 || n==2){
-					window.location.href = window.location.href.split('?')[0];
+					location.reload(true);
+//					window.location.href = window.location.href.split('?')[0];
 				}
 			},
 			isconnected: function(n, o) {
