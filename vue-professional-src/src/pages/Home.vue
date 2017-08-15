@@ -119,7 +119,7 @@
 		watch: {
 			isBack: function(n, o){
 				if(n == 1 || n==2){
-//					window.location.reload();
+					window.location.reload();
 				}
 			},
 			isconnected: function(n, o) {

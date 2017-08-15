@@ -395,6 +395,7 @@
 		},
 		watch:{
 			layer: function(n, o){
+				console.log(123);
 				this.$children[7].isShow = true;
 				this.msg = n;
 			},
