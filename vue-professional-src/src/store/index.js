@@ -535,7 +535,7 @@ export default new Vuex.Store({
 		},
 		setlightDate: function(state) {
 			var TimeLength = state.market.lightChartTime.time.length;
-			state.market.lightChartTime.price.push(state.market.jsonTow.Parameters.LastPrice);
+			state.market.lightChartTime.price.push(state.market.jsonTow.Parameters.LastPrice.toFixed(state.market.currentdetail.DotSize));
 			state.market.lightChartTime.time.push((state.market.jsonTow.Parameters.DateTimeStamp).split(" ")[1]);
 			state.market.lightChartTime.time = state.market.lightChartTime.time.slice(-50);
 			state.market.lightChartTime.price = state.market.lightChartTime.price.slice(-50);
@@ -622,7 +622,7 @@ export default new Vuex.Store({
 			require('echarts/lib/component/tooltip');
 			require('echarts/lib/chart/candlestick');
 
-			var dosizeL = 2;
+			var dosizeL = state.market.currentdetail.DotSize;
 			var rawData = [];
 			var parameters = state.market.jsonDataKline.Parameters.Data;
 			var Len = parameters.length;
@@ -674,7 +674,7 @@ export default new Vuex.Store({
 					for(var j = 0; j < dayCount; j++) {
 						sum += Number(chartDataC.values[i - j][1]);
 					}
-					result.push(Number(sum / dayCount).toFixed(2));
+					result.push(Number(sum / dayCount).toFixed(dosizeL));
 				}
 				return result;
 			}
@@ -703,7 +703,7 @@ export default new Vuex.Store({
 						var ma20 = params[3].data;
 						var ma30 = params[4].data;
 						var rate = (kd[1] - kd[0]) / kd[0] * 100;
-						rate = rate > 0 ? ('+' + rate.toFixed(2)) : rate.toFixed(2);
+						rate = rate.toFixed(dosizeL);
 						var res = "时间:" + params[0].name + '  涨跌 : ' + rate;
 						res += '<br/>  开盘 : ' + kd[0] + '  最高 : ' + kd[3];
 						res += '<br/>  收盘 : ' + kd[1] + ' 最低 : ' + kd[2];
@@ -1423,10 +1423,10 @@ export default new Vuex.Store({
 			state.market.markettemp.forEach(function(e) {
 				if(e.CommodityNo == obj) {
 					state.market.tempArr[0] = e.LastQuotation.DateTimeStamp;
-					state.market.tempArr[1] = e.LastQuotation.LastPrice;
-					state.market.tempArr[2] = e.LastQuotation.OpenPrice;
-					state.market.tempArr[3] = e.LastQuotation.LowPrice;
-					state.market.tempArr[4] = e.LastQuotation.HighPrice;
+					state.market.tempArr[1] = e.LastQuotation.LastPrice.toFixed(e.DotSize);
+					state.market.tempArr[2] = e.LastQuotation.OpenPrice.toFixed(e.DotSize);
+					state.market.tempArr[3] = e.LastQuotation.LowPrice.toFixed(e.DotSize);
+					state.market.tempArr[4] = e.LastQuotation.HighPrice.toFixed(e.DotSize);
 					state.market.tempArr[5] = e.LastQuotation.Position;
 					state.market.tempArr[6] = e.LastQuotation.LastVolume;
 				}
