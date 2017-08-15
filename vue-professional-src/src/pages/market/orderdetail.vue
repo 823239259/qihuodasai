@@ -83,9 +83,16 @@
 			},
 			quoteSocket() {
 				return this.$store.state.quoteSocket
+			},
+			layerOnRtnOrder(){
+				return this.$store.state.market.layerOnRtnOrder;
 			}
 		},
 		watch: {
+			layerOnRtnOrder: function(n, o){
+				this.$children[0].isShow = true;
+				this.msg = n;
+			},
 			tradeConnectedMsg: function(n, o){
 				this.$children[0].isShow = true;
 				this.msg = n;

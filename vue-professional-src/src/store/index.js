@@ -140,6 +140,8 @@ var market = {
 		
 		tradeConnectedMsg:'',
 		
+		layerOnRtnOrder: '',     //买入成功提示
+		
 		
 		
 		//选择K线时候的值
@@ -1597,7 +1599,7 @@ export default new Vuex.Store({
 				var TradeNum = parameters.TradeNum;
 				var TradeNo = parameters.TradeNo;
 				var TradePrice = parseFloat(parameters.TradePrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				context.state.market.layer="成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）";
+				context.state.market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）";
 			}
 		},
 		layerMessage:function(context,parameters){
@@ -2028,11 +2030,10 @@ export default new Vuex.Store({
 			);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
-						console.log('交易服务器断开，正在重连');
-						context.state.market.layer='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
-//						context.dispatch('initTrade');
-					}else{
-						context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+					console.log('交易服务器断开，正在重连');
+					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+				}else{
+					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 				}
 			}
 			heartBeatUpdate();
