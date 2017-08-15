@@ -1644,7 +1644,6 @@ export default new Vuex.Store({
 				if(parameters.OrderStatus<4){
 					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.random();
 				}else{
-					console.log('11111');
 					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.random();
 				}
 				
