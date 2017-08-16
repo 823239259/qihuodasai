@@ -40,7 +40,7 @@ import tradeLogin from '../pages/market/tradeLogin.vue'
 Vue.use(Router)
 
 const router = new Router({
-	mode: 'history',
+//	mode: 'history',
 	routes: [
 		{
 			path: '/',
