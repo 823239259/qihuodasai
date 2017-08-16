@@ -181,7 +181,6 @@
 			lotnum:function(n,o){
 				this.lotnum = parseFloat(n);
 				if(this.numReg.test(n) == false || n < 0){
-					console.log(1111);
 					this.lotnum = 0;
 				};
 			}

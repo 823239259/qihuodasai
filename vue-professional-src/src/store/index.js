@@ -1489,8 +1489,8 @@ export default new Vuex.Store({
 						
 					}else{
 						console.log('登录失败');
-						context.state.market.tradeLoginSuccessMsg='请登录交易服务器';
-//						context.state.market.tradeLoginfailMsg=parameters.Message;
+//						context.state.market.tradeLoginSuccessMsg='请登录交易服务器';
+						context.state.market.tradeLoginSuccessMsg=parameters.Message;
 						context.state.tradeSocket.close();
 					}
 					break;
