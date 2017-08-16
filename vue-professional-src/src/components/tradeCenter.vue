@@ -34,7 +34,7 @@
 					<li>
 						<span>新</span>
 						<span :class="color1">{{detail.LastQuotation.LastPrice | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
-						<span>{{detail.LastQuotation.LastVolume}}</span>
+						<span>{{detail.LastQuotation.TotalVolume}}</span>
 					</li>
 					<li>
 						<span>买</span>
