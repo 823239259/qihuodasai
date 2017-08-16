@@ -118,10 +118,13 @@
 		},
 		watch: {
 			isBack: function(n, o){
-//				console.log(window.location.href.split('?')[0]);
-				if(n == 1 || n==2){
-					location.reload(true);
-//					window.location.href = window.location.href.split('?')[0];
+				if(n == 1){
+//					console.log(plus.webview.currentWebview().getURL());
+					window.location.reload();
+//					window.location.href = '../../index.html';
+//					window.location.reload();	
+//					mui.openWindow({url:'_www/index.html'});
+//					window.location.href=file:
 				}
 			},
 			isconnected: function(n, o) {

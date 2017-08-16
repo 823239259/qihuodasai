@@ -14,9 +14,9 @@
 			<i>|</i>
 			<span>平仓线</span>
 			<span class="white">{{forceLine}}</span>
-			<div class="icon_arrow fr">
+			<!--<div class="icon_arrow fr">
 				<a href="#" class="icon"></a>
-			</div>
+			</div>-->
 		</div>
 		<div class="order_type border_bottom">
 			<div class="order_type_left fl">
