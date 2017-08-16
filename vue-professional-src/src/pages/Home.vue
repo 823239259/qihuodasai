@@ -119,12 +119,7 @@
 		watch: {
 			isBack: function(n, o){
 				if(n == 1){
-//					console.log(plus.webview.currentWebview().getURL());
 					window.location.reload();
-//					window.location.href = '../../index.html';
-//					window.location.reload();	
-//					mui.openWindow({url:'_www/index.html'});
-//					window.location.href=file:
 				}
 			},
 			isconnected: function(n, o) {
