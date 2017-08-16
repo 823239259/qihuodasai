@@ -1,5 +1,6 @@
 <template>
 	<div id="dish">
+		<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" :objstr='objst'></alert>
 		<div class="title">
 			<span>盘口</span>
 			<span>五档</span>
@@ -135,9 +136,15 @@
 <script>
 	import chartBtn from '../components/chartBtn.vue'
 	import operatenum from '../components/oprtateNum.vue'
+	import alert from '../components/Tradealert.vue'
 	export default{
 		name: 'dish',
-		components: {chartBtn, operatenum},
+		components: {chartBtn, operatenum, alert},
+		data(){
+			return{
+				buyText: {}
+			}
+		},
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
 		},
@@ -154,6 +161,32 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
+			objst: function(){
+				if(this.buyText){
+					return JSON.stringify(this.buyText);
+				}
+			},
+			insertOrder: function(){
+				var obj = this.buyText.Parameters;
+				if(obj != undefined){
+					var contract=obj.CommodityNo+obj.ContractNo;
+					var LimitPrice;
+					if(obj.PriceType == 1){
+						LimitPrice='市价';
+					}else{
+						LimitPrice = this.tradePrices;
+					}
+					var orderNum = obj.OrderNum;
+					var drection;
+					if(obj.Drection==0){
+						drection = '买';
+					}else{
+						drection = '卖';
+					}
+					var text = '确认提交订单:【'+contract+'】,价格【'+LimitPrice +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
+					return  text;
+				}
+			},
 		},
 		filters:{
 			fixNum:function(num){
@@ -165,50 +198,52 @@
 		},
 		methods:{
 			buy:function(){
+				this.$children[0].isshow = true;
 				var commodityNo = this.detail.CommodityNo;
 				var buildIndex=0;
 				if(buildIndex>100){
 					buildIndex=0;
 				}
 				var b={
-						"Method":'InsertOrder',
-								"Parameters":{
-									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-									"CommodityNo":this.templateList[commodityNo].CommodityNo,
-									"ContractNo":this.detail.LastQuotation.ContractNo,
-									"OrderNum":this.$children[0].defaultNum,
-									"Drection":0,
-									"PriceType":1,
-									"LimitPrice":0.00,
-									"TriggerPrice":0,
-									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-								}
+					"Method":'InsertOrder',
+					"Parameters":{
+						"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+						"CommodityNo":this.templateList[commodityNo].CommodityNo,
+						"ContractNo":this.detail.LastQuotation.ContractNo,
+						"OrderNum":this.$children[1].defaultNum,
+						"Drection":0,
+						"PriceType":1,
+						"LimitPrice":0.00,
+						"TriggerPrice":0,
+						"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+					}
 				};
-				this.tradeSocket.send(JSON.stringify(b));
+				this.buyText = b;
+//				this.tradeSocket.send(JSON.stringify(b));
 			},
 			sell:function(){
+				this.$children[0].isshow = true;
 				var commodityNo = this.detail.CommodityNo;
 				var buildIndex=0;
 				if(buildIndex>100){
 					buildIndex=0;
 				}
-				
 				var b={
-							"Method":'InsertOrder',
-							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
-								"OrderNum":this.$children[0].defaultNum,
-								"Drection":1,
-								"PriceType":1,
-								"LimitPrice":0.00,
-								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-							}
-					};
-				
-				this.tradeSocket.send(JSON.stringify(b));
+					"Method":'InsertOrder',
+					"Parameters":{
+						"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+						"CommodityNo":this.templateList[commodityNo].CommodityNo,
+						"ContractNo":this.detail.LastQuotation.ContractNo,
+						"OrderNum":this.$children[1].defaultNum,
+						"Drection":1,
+						"PriceType":1,
+						"LimitPrice":0.00,
+						"TriggerPrice":0,
+						"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+					}
+				};
+				this.buyText = b;
+//				this.tradeSocket.send(JSON.stringify(b));
 				
 				
 				

@@ -98,7 +98,7 @@
 					this.msg = '登录成功';
 					setTimeout(function(){
 						this.$router.push({path: '/index', query: {isBack: 1}});
-					}.bind(this),500);
+					}.bind(this),300);
 //					this.initTrade();
 				}
 				
