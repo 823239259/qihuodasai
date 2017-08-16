@@ -34,10 +34,14 @@
 		methods: {
 			toTradeLogin: function(){
 				this.open = false;
+				this.shadeShow = false;
+				$(".icon").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/tradeLogin'});
 			},
 			toHistoryTrade: function(){
 				this.open = false;
+				this.shadeShow = false;
+				$(".icon").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/historyTrade'});
 			},
 			openmenu: function(e) {
