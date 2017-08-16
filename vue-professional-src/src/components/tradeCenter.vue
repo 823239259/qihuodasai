@@ -309,8 +309,6 @@
 					var text = '确认提交订单:【'+contract+'】,价格【'+LimitPrice +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
 					return  text;
 				}
-				
-				
 			},
 			bindPrice: function(){
 				if(this.$store.state.market.openChangealertCurrentObj){
@@ -523,11 +521,7 @@
 		},
 		methods: {
 			cancelAllOrder:function(){
-				if(this.isShow == false){
-					this.$children[5].isshow = true;
-				}else{
-					this.$children[6].isshow = true;
-				}
+				this.$children[6].isshow = true;
 				var arr=[];
 				this.$store.state.market.orderListCont.forEach(function(e,i){
 					var CurrentObj = e;
@@ -555,17 +549,20 @@
 //					this.tradeSocket.send(JSON.stringify(b));
 					arr.push(b);
 					this.buyText = arr;
+					console.log(this.buyText);
 				}.bind(this));
 				
 			},
 			cancelOrder:function(){
-				this.$children[5].isshow = true;
 				var orderListId= this.orderListId;
 				var isExist = false;
 				var CurrentObj = null;
-				var index =0;
+				var index = 0;
+				var len = 0;
 				this.$store.state.market.orderListCont.forEach(function(e,i){
 					if(e.OrderID==orderListId){
+						len++;
+						this.$children[5].isshow = true;
 						CurrentObj = e;
 						index = i;
 						isExist = true;
@@ -594,6 +591,10 @@
 						};
 						this.buyText = b;
 //					this.tradeSocket.send(JSON.stringify(b));
+				}
+				if(len < 1){
+					this.$children[7].isShow = true;
+					this.msg = '请选择一条数据';
 				}
 				
 			},

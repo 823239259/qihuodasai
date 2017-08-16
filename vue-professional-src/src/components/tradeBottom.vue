@@ -1,6 +1,7 @@
 <template>
 	<div id="tradebottom">
 		<div>
+			<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" :objstr='objst'></alert>
 			<div class="toppart">
 				<div class="fl">
 					<ul>
@@ -63,10 +64,11 @@
 
 <script>
 	import chartBtn from '../components/chartBtn.vue'
+	import alert from '../components/Tradealert.vue'
 	export default {
 		name: 'tradebottom',
 		components: {
-			chartBtn
+			chartBtn, alert
 		},
 		filters:{
 			fixNum:function(num){
@@ -102,7 +104,8 @@
 		data() {
 			return {
 				lotnum: 1,
-				numReg: /^[0-9]*$/
+				numReg: /^[0-9]*$/,
+				buyText: {}
 			}
 		},
 		methods: {
@@ -113,47 +116,50 @@
 				this.lotnum--;
 			},
 			buyOrder:function(){
-				var buildIndex=0;
-				if(buildIndex>100){
-					buildIndex=0;
+				this.$children[0].isshow = true;
+				var buildIndex = 0;
+				if(buildIndex > 100){
+					buildIndex = 0;
 				}
-							var b={
-								"Method":'InsertOrder',
-								"Parameters":{
-									"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
-									"CommodityNo":this.detail.LastQuotation.CommodityNo,
-									"ContractNo":this.detail.LastQuotation.ContractNo,
-									"OrderNum": this.lotnum,
-									"Drection":0,
-									"PriceType":1,
-									"LimitPrice":0.00,
-									"TriggerPrice":0,
-									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-								}
-							};
-				this.tradeSocket.send(JSON.stringify(b));			
-							
+				var b ={
+					"Method":'InsertOrder',
+					"Parameters": {
+						"ExchangeNo": this.detail.LastQuotation.ExchangeNo,
+						"CommodityNo": this.detail.LastQuotation.CommodityNo,
+						"ContractNo": this.detail.LastQuotation.ContractNo,
+						"OrderNum": this.lotnum,
+						"Drection": 0,
+						"PriceType": 1,
+						"LimitPrice": 0.00,
+						"TriggerPrice": 0,
+						"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+					}
+				};
+				this.buyText = b;
+//				this.tradeSocket.send(JSON.stringify(b));			
 			},
 			sellOrder:function(){
+				this.$children[0].isshow = true;
 				var buildIndex=0;
 				if(buildIndex>100){
 					buildIndex=0;
 				}
-							var b={
-								"Method":'InsertOrder',
-								"Parameters":{
-									"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
-									"CommodityNo":this.detail.LastQuotation.CommodityNo,
-									"ContractNo":this.detail.LastQuotation.ContractNo,
-									"OrderNum": this.lotnum,
-									"Drection":1,
-									"PriceType":1,
-									"LimitPrice":0.00,
-									"TriggerPrice":0,
-									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-								}
-							};
-				this.tradeSocket.send(JSON.stringify(b));
+				var b={
+					"Method":'InsertOrder',
+					"Parameters":{
+						"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
+						"CommodityNo":this.detail.LastQuotation.CommodityNo,
+						"ContractNo":this.detail.LastQuotation.ContractNo,
+						"OrderNum": this.lotnum,
+						"Drection":1,
+						"PriceType":1,
+						"LimitPrice":0.00,
+						"TriggerPrice":0,
+						"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+					}
+				};
+				this.buyText = b;
+//				this.tradeSocket.send(JSON.stringify(b));
 			}
 		},
 		computed:{
@@ -175,7 +181,33 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
-			}
+			},
+			objst: function(){
+				if(this.buyText){
+					return JSON.stringify(this.buyText);
+				}
+			},
+			insertOrder: function(){
+				var obj = this.buyText.Parameters;
+				if(obj != undefined){
+					var contract=obj.CommodityNo+obj.ContractNo;
+					var LimitPrice;
+					if(obj.PriceType == 1){
+						LimitPrice='市价';
+					}else{
+						LimitPrice = this.tradePrices;
+					}
+					var orderNum = obj.OrderNum;
+					var drection;
+					if(obj.Drection==0){
+						drection = '买';
+					}else{
+						drection = '卖';
+					}
+					var text = '确认提交订单:【'+contract+'】,价格【'+LimitPrice +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
+					return  text;
+				}
+			},
 		},
 		watch:{
 			lotnum:function(n,o){
@@ -195,6 +227,7 @@
 		position: fixed;
 		bottom: 0;
 		left: 0;
+		z-index: 1015;
 		width: 100%;
 	}
 	.haddle {
@@ -528,6 +561,7 @@
 		position: fixed;
 		bottom: 0;
 		left: 0;
+		z-index: 1015;
 		width: 100%;
 	}
 }
