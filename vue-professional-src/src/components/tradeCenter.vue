@@ -393,7 +393,7 @@
 			},
 			appendOrderMsg(){
 				return this.$store.state.market.appendOrderMsg;
-			}
+			},
 		},
 		watch:{
 			appendOrderMsg: function(n, o){
@@ -432,37 +432,6 @@
 					}
 				}
 			},
-			/*
-			qryHoldTotalArr:function(n,o){
-				this.$store.state.market.positionListCont=[];
-				this.qryHoldTotalArr.forEach(function(e){
-					var obj={};
-					obj.name=this.orderTemplist[e.CommodityNo].CommodityName;
-					obj.type=function(){
-						if(e.Drection==0){
-							return '多'
-						}else{
-							return '空'
-						}
-					}();
-					obj.num=e.HoldNum;
-					obj.price=e.HoldAvgPrice.toFixed(this.orderTemplist[e.CommodityNo].DotSize);
-					obj.total=0;
-					obj.showbar=false;
-					obj.type_color=function(){
-						if(e.Drection==0){
-							return 'red'
-						}else{
-							return 'green'
-						}
-					}();
-					obj.total_color='green';
-					obj.commodityNocontractNo = this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo
-												+this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
-					this.$store.state.market.positionListCont.unshift(obj);
-				}.bind(this));
-			},
-			*/
 			OnRspOrderInsertEntrustCont:function(n,o){
 				this.appendOrderList(n);
 			},
@@ -549,7 +518,6 @@
 //					this.tradeSocket.send(JSON.stringify(b));
 					arr.push(b);
 					this.buyText = arr;
-					console.log(this.buyText);
 				}.bind(this));
 				
 			},
@@ -601,16 +569,21 @@
 			openChangealert: function(){
 				var orderListId= this.orderListId;
 				var isExist = false;
+				var i = 0;
 				this.$store.state.market.orderListCont.forEach(function(e){
 					if(e.OrderID==orderListId){
+						i++;
+						this.$children[0].isshow = true;
 						this.$store.state.market.openChangealertCurrentObj = e;
 						isExist = true;
 					}
 				}.bind(this));
-				
-				if(isExist==true){
-					this.$children[0].isshow = true;
+				if(i <= 0){
+					console.log(1111);
+					this.$children[7].isShow = true;
+					this.msg = '请选择一条数据';
 				}
+				if(isExist==true){}
 				
 			},
 			listTap: function(obj){
@@ -922,8 +895,8 @@
 			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
 			
 			this.tradePrices = parseFloat(this.tradePrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
-			
-		}
+		},
+		activated: function(){}
 		
 		
 	}

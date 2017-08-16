@@ -1588,7 +1588,7 @@ export default new Vuex.Store({
 					break;
 				case 'OnError':
 					console.log('OnError');
-					context.state.market.layer=parameters.Message;
+					context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
 				default:
 					break;
 			}

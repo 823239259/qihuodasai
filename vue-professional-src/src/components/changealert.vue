@@ -1,5 +1,6 @@
 <template>
 	<div id="changealert" v-if='isshow'>
+		<tipsDialog :msg="msgTips"></tipsDialog>
 		<div>
 			<ul>
 				<li class="fontwhite">改单 <i @tap='close'></i></li>
@@ -10,7 +11,7 @@
 					</div>
 					<div>
 						<label for="num" class="fontgray">委托数量</label>
-						<input type="number" id="num" class="fontwhite" :value="numFun" v-model="n" />
+						<input type="number" id="num" class="fontwhite" :value="numFun" v-model="entrustNum" />
 					</div>
 				</li>
 				<li>
@@ -23,23 +24,31 @@
 </template>
 
 <script>
+	import tipsDialog from '../components/tipsDialog.vue'
 	export default {
 		name: 'changealert',
+		components:{tipsDialog},
 		data(){
 			return{
+				numReg: /^[0-9]*$/,
 				isshow:false,
 				p: 0.00,
-				n: 0
+				entrustNum: 0,
+				msg: '',
+				editNum: ''
 			}
 		},
 		props: ['price', 'num'],
 		computed: {
+			msgTips: function(){
+				return this.msg;
+			},
 			priceFun(){
 				this.p = this.price;
 				return this.price;
 			},
 			numFun(){
-				this.n = this.num;
+				this.entrustNum = this.num;
 				return this.num;
 			},
 			tradeSocket() {
@@ -48,6 +57,14 @@
 			templateList(){
 				return this.$store.state.market.templateList;
 			},
+		},
+		watch: {
+			entrustNum: function(n, o){
+				this.entrustNum = Number(n);
+				if(n == '' || n < 1){
+					this.entrustNum = 0;
+				}
+			}
 		},
 		methods:{
 			close:function(){
@@ -58,29 +75,29 @@
 				 * 确认并提交数据到后台
 				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
 				 */
-				this.isshow = false;
 				var Contract=this.$store.state.market.openChangealertCurrentObj.ContractCode.substring(0,this.$store.state.market.openChangealertCurrentObj.ContractCode.length-4);
 				var b={
-							"Method":'ModifyOrder',
-							"Parameters":{
-								"OrderSysID":'',
-								"OrderID":this.$store.state.market.openChangealertCurrentObj.OrderID,
-								"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
-								"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
-								"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
-								"OrderNum":parseFloat(this.n),
-								"Direction":function(){
-												if(this.$store.state.market.openChangealertCurrentObj.buyOrSell=='买'){
-													return 0;
-												}else{
-													return 1;
-												}
-											},
-								"OrderPrice":parseFloat(this.p),
-								"TriggerPrice":0
-							}
-						};
+					"Method":'ModifyOrder',
+					"Parameters":{
+						"OrderSysID":'',
+						"OrderID":this.$store.state.market.openChangealertCurrentObj.OrderID,
+						"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
+						"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
+						"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+						"OrderNum":parseFloat(this.entrustNum),
+						"Direction":function(){
+										if(this.$store.state.market.openChangealertCurrentObj.buyOrSell=='买'){
+											return 0;
+										}else{
+											return 1;
+										}
+									},
+						"OrderPrice":parseFloat(this.p),
+						"TriggerPrice":0
+					}
+				};
 				this.tradeSocket.send(JSON.stringify(b));
+				this.isshow = false;
 				
 			}
 		}
