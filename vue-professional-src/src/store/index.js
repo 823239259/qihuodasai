@@ -525,11 +525,14 @@ export default new Vuex.Store({
 			// 引入柱状图
 			require('echarts/lib/chart/bar');
 			// 基于准备好的dom，初始化echarts图表
+			var lightChart;
 			if(state.isshow.islightshow == false) {
-				var lightChart = echarts.init(document.getElementById(e));
+				lightChart = echarts.init(document.getElementById(e));
 				state.isshow.islightshow = true;
 			} else {
-				var lightChart = echarts.getInstanceByDom(document.getElementById(e));
+				if(document.getElementById(e) != null){
+					lightChart = echarts.getInstanceByDom(document.getElementById(e));
+				}
 			}
 			lightChart.setOption(state.market.option5);
 		},
@@ -957,17 +960,22 @@ export default new Vuex.Store({
 			require('echarts/lib/chart/line');
 			require('echarts/lib/component/tooltip');
 			require('echarts/lib/chart/candlestick');
+			var kline, volume;
 			if(state.isshow.isklineshow == false) {
-				var kline = echarts.init(document.getElementById(x.id1));
-				var volume = echarts.init(document.getElementById(x.id2));
+				kline = echarts.init(document.getElementById(x.id1));
+				volume = echarts.init(document.getElementById(x.id2));
 				volume.group = 'group1';
 				kline.group = 'group1';
 				// 基于准备好的dom，初始化echarts实例
 				echarts.connect("group1");
 				state.isshow.isklineshow = true;
 			} else {
-				var kline = echarts.getInstanceByDom(document.getElementById(x.id1));
-				var volume = echarts.getInstanceByDom(document.getElementById(x.id2));
+				if(document.getElementById(x.id1) != null){
+					kline = echarts.getInstanceByDom(document.getElementById(x.id1));
+				}
+				if(document.getElementById(x.id2) != null){
+					volume = echarts.getInstanceByDom(document.getElementById(x.id2));
+				}
 			}
 			kline.setOption(state.market.option3);
 			volume.setOption(state.market.option4);
@@ -979,19 +987,23 @@ export default new Vuex.Store({
 			require('echarts/lib/chart/bar');
 			require('echarts/lib/chart/line');
 			require('echarts/lib/component/tooltip');
+			var fens, volume;
 			if(state.isshow.isfensshow == false) {
-				var volume = echarts.init(document.getElementById(x.id1));
+				volume = echarts.init(document.getElementById(x.id1));
 				volume.group = 'group1';
 				// 基于准备好的dom，初始化echarts实例
-				var fens = echarts.init(document.getElementById(x.id2));
+				fens = echarts.init(document.getElementById(x.id2));
 				fens.group = 'group1';
 				echarts.connect("group1");
 				state.isshow.isfensshow = true;
 			} else {
-				var volume = echarts.getInstanceByDom(document.getElementById(x.id1));
-				var fens = echarts.getInstanceByDom(document.getElementById(x.id2));
+				if(document.getElementById(x.id1) != null){
+					volume = echarts.getInstanceByDom(document.getElementById(x.id1));
+				}
+				if(document.getElementById(x.id2) != null){
+					fens = echarts.getInstanceByDom(document.getElementById(x.id2));
+				}
 			}
-
 			fens.setOption(state.market.option1);
 			volume.setOption(state.market.option2);
 		},

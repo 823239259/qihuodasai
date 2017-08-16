@@ -120,6 +120,12 @@
 		activated: function(){
 			this.username = this.$route.query.user;
 			this.pwd = this.$route.query.pwd;
+			
+			//不更新画图
+			this.$store.state.isshow.isklineshow = false;
+			this.$store.state.isshow.isfensshow = false;
+			this.$store.state.isshow.islightshow =  false;
+			
 		}
 	}
 </script>
