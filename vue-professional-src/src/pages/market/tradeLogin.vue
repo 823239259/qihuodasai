@@ -97,8 +97,7 @@
 					this.$children[0].isShow = true;
 					this.msg = '登录成功';
 					setTimeout(function(){
-//						this.$router.push({path: '/index', query: {isBack: 2}});
-						this.$router.push({path: '/index', query: {isBack: 2}});
+						this.$router.push({path: '/index', query: {isBack: 1}});
 					}.bind(this),500);
 //					this.initTrade();
 				}
