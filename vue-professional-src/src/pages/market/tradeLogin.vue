@@ -93,6 +93,7 @@
 					this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
 					var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
 					localStorage.setItem("tradeUser", JSON.stringify(userData));
+					this.pwd = '';
 					setTimeout(function(){
 						this.$router.push({path: '/index', query: {isBack: 1}});
 					}.bind(this),300);
