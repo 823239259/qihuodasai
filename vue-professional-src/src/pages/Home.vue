@@ -91,12 +91,11 @@
 			tipsDialog
 		},
 		computed: {
+			guideShow: function(){
+				return this.$store.state.isshow.guideshow;
+			},
 			msgTips: function(){
-//				if(this.$store.state.market.quoteConnectedMsg==0){
-//					return '行情服务器连接成功';
-//				}else{
-					return this.msg;
-//				}
+				return this.msg;
 			},
 			sysMsg: function(){
 				if(this.$store.state.market.quoteConnectedMsg==0){
@@ -117,6 +116,11 @@
 			}
 		},
 		watch: {
+			guideShow: function(n, o){
+				if(n == false){
+					this.$children[1].isShow = true;
+				}
+			},
 			isBack: function(n, o){
 				if(n == 1){
 					window.location.reload();
@@ -202,7 +206,7 @@
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
 			//提示框
-			this.$children[1].isShow = true;
+//			this.$children[1].isShow = true;
 			
 
 				
