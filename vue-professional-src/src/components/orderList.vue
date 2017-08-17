@@ -203,7 +203,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 450px;
+				width: 480px;
 				background: @deepblue;
 				padding-left: 15px;
 				border-top: 1px solid @black;
@@ -229,7 +229,7 @@
 					font-size: @fs14;
 					margin: 0 0.4%;
 					&:nth-child(1){
-						width: 100px;
+						width: 130px;
 					}
 					&:nth-child(2){
 						width: 50px;
@@ -276,7 +276,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 450px*@ip6;
+				width: 480px*@ip6;
 				background: @deepblue;
 				padding-left: 15px*@ip6;
 				border-top: 1px solid @black;
@@ -302,7 +302,7 @@
 					font-size: @fs14*@ip6;
 					margin: 0 0.4%;
 					&:nth-child(1){
-						width: 100px*@ip6;
+						width: 130px*@ip6;
 					}
 					&:nth-child(2){
 						width: 50px*@ip6;
@@ -349,7 +349,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 500px*@ip5;
+				width: 530px*@ip5;
 				background: @deepblue;
 				padding-left: 15px*@ip5;
 				border-top: 1px solid @black;
@@ -375,7 +375,7 @@
 					font-size: @fs14*@ip5;
 					margin: 0 0.4%;
 					&:nth-child(1){
-						width: 100px*@ip5;
+						width: 130px*@ip5;
 					}
 					&:nth-child(2){
 						width: 60px*@ip5;

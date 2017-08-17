@@ -1163,11 +1163,11 @@
 					height: 330px;
 					overflow-x: scroll;
 					li{
-						width: 480px;
+						width: 510px;
 						padding-left: 15px;
 						span{
 							&:nth-child(1){
-								width: 100px;
+								width: 130px;
 							}
 							&:nth-child(2){
 								width: 50px;
@@ -1230,11 +1230,11 @@
 					height: 330px;
 					overflow-x: scroll;
 					li{
-						width: 530px;
+						width: 560px;
 						padding-left: 15px;
 						span{
 							&:nth-child(1){
-								width: 100px;
+								width: 130px;
 							}
 							&:nth-child(2){
 								width: 50px;
@@ -1557,11 +1557,11 @@
 					height: 330px*@ip6;
 					overflow-x: scroll;
 					li{
-						width: 480px*@ip6;
+						width: 510px*@ip6;
 						padding-left: 15px*@ip6;
 						span{
 							&:nth-child(1){
-								width: 100px*@ip6;
+								width: 130px*@ip6;
 							}
 							&:nth-child(2){
 								width: 50px*@ip6;
@@ -1624,11 +1624,11 @@
 					height: 330px*@ip6;
 					overflow-x: scroll;
 					li{
-						width: 530px*@ip6;
+						width: 560px*@ip6;
 						padding-left: 15px*@ip6;
 						span{
 							&:nth-child(1){
-								width: 100px*@ip6;
+								width: 130px*@ip6;
 							}
 							&:nth-child(2){
 								width: 50px*@ip6;
@@ -1951,11 +1951,11 @@
 					height: 330px*@ip5;
 					overflow-x: scroll;
 					li{
-						width: 480px*@ip5;
+						width: 510px*@ip5;
 						padding-left: 15px*@ip5;
 						span{
 							&:nth-child(1){
-								width: 100px*@ip5;
+								width: 130px*@ip5;
 							}
 							&:nth-child(2){
 								width: 50px*@ip5;
@@ -2018,11 +2018,11 @@
 					height: 330px*@ip5;
 					overflow-x: scroll;
 					li{
-						width: 540px*@ip5;
+						width: 570px*@ip5;
 						padding-left: 15px*@ip5;
 						span{
 							&:nth-child(1){
-								width: 100px*@ip5;
+								width: 130px*@ip5;
 							}
 							&:nth-child(2){
 								width: 50px*@ip5;
