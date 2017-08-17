@@ -1587,7 +1587,7 @@ export default new Vuex.Store({
 //					console.log('报单请求回复');
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
-					context.dispatch('appendOrder',parameters);
+					context.dispatch('appendOrder00',parameters);
 					// 排队中委托单放入挂单列表
 					context.dispatch('appendApply',parameters);
 					break;
@@ -1717,6 +1717,9 @@ export default new Vuex.Store({
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
 				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 			}
+		},
+		appendOrder00:function(context,parameters){
+			context.state.market.OnRspOrderInsertEntrustCont.unshift(parameters);
 		},
 		appendOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.push(parameters);
