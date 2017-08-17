@@ -1187,11 +1187,11 @@
 					height: 330px;
 					overflow: scroll;
 					li{
-						width: 700px;
+						width: 730px;
 						padding-left: 15px;
 						span{
 							&:nth-child(1){
-								width: 100px;
+								width: 130px;
 							}
 							&:nth-child(2){
 								width: 90px;
@@ -1581,11 +1581,11 @@
 					height: 330px*@ip6;
 					overflow: scroll;
 					li{
-						width: 700px*@ip6;
+						width: 730px*@ip6;
 						padding-left: 15px*@ip6;
 						span{
 							&:nth-child(1){
-								width: 100px*@ip6;
+								width: 130px*@ip6;
 							}
 							&:nth-child(2){
 								width: 90px*@ip6;
@@ -1975,11 +1975,11 @@
 					height: 330px*@ip5;
 					overflow: scroll;
 					li{
-						width: 710px*@ip5;
+						width: 740px*@ip5;
 						padding-left: 15px*@ip5;
 						span{
 							&:nth-child(1){
-								width: 100px*@ip5;
+								width: 130px*@ip5;
 							}
 							&:nth-child(2){
 								width: 90px*@ip5;
