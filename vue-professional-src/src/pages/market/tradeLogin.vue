@@ -8,7 +8,7 @@
 			<div class="ipt_row mt15">
 				<label for="username">交易账号</label>
 				<input type="text" id="username" placeholder="请输入您的交易账号" v-model.trim="username" />
-				<span class="code">切换账号</span>
+				<!--<span class="code">切换账号</span>-->
 				<select class="switchUser" v-model="tradeUser">
 					<option value="CP1008611">CP1008611</option>
 					<option value="CP1008612">CP1008612</option>
@@ -51,6 +51,9 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
+			tradeConfig(){
+				return this.$store.state.market.tradeConfig;
+			}
 		},
 		data(){
 			return {
@@ -88,17 +91,38 @@
 					this.$children[0].isShow = true;
 					this.msg = '请输入您的交易密码';
 				}else{
-//					this.pwd = Base64.encode(this.pwd);
-					this.$store.state.market.tradeConfig.username = this.username;
-					this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
-					var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
-					localStorage.setItem("tradeUser", JSON.stringify(userData));
-					this.pwd = '';
-					setTimeout(function(){
-						this.$router.push({path: '/index', query: {isBack: 1}});
-					}.bind(this),300);
+					var  tradeSocket = new WebSocket(this.tradeConfig.url_real);
+					tradeSocket.onopen = function(evt){
+					//登录
+						if(tradeSocket.readyState==1){ //连接已建立，可以进行通信。
+							tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
+						}
+					}.bind(this);
+					tradeSocket.onmessage = function(evt) {
+						var data = JSON.parse(evt.data);
+						var parameters = data.Parameters;
+						switch (data.Method){
+							case 'OnRspLogin'://登录回复
+								if(parameters.Code==0){
+									this.$children[0].isShow = true;
+									this.msg = '登录成功';
+									this.$store.state.market.tradeConfig.username = this.username;
+									this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
+									var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
+									localStorage.setItem("tradeUser", JSON.stringify(userData));
+									setTimeout(function(){
+										this.$router.push({path: '/index', query: {isBack: 1}});
+									}.bind(this),300);
+								}else{
+									this.$children[0].isShow = true;
+									this.msg = '您的账户或密码输入错误';
+								}
+								break;
+							default:
+								break;
+						}
+					}.bind(this);
 				}
-				
 			},
 			openApply: function(){
 				this.$router.push({path: '/tradeapply'});
