@@ -88,10 +88,10 @@
 					this.$children[0].isShow = true;
 					this.msg = '请输入您的交易密码';
 				}else{
-					this.pwd = Base64.encode(this.pwd);
+//					this.pwd = Base64.encode(this.pwd);
 					this.$store.state.market.tradeConfig.username = this.username;
-					this.$store.state.market.tradeConfig.password = this.pwd;
-					var userData = {'username': this.username, 'password': this.pwd};  
+					this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
+					var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
 					localStorage.setItem("tradeUser", JSON.stringify(userData));
 					//初始化交易
 					this.$children[0].isShow = true;
