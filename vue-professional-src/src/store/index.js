@@ -2054,7 +2054,10 @@ export default new Vuex.Store({
 					if(JSON.parse(localStorage.getItem('tradeUser'))){
 						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 					}else{
-						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+						
+						if(context.state.market.tradeConfig.username!=''){
+							context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+						}	
 					}
 				}
 			};
