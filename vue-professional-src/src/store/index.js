@@ -55,6 +55,11 @@ var market = {
 			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
 			intervalCheckTime : 8000  // 间隔检查时间：8秒
 		},
+		HeartBeat00:{
+			lastHeartBeatTimestamp : 1,	// 最后心跳时间
+			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
+			intervalCheckTime : 8000  // 间隔检查时间：8秒
+		},
 		quoteConfig:{
 			url_real : "ws://192.168.0.213:9002", 
 			userName:"13677622344",
@@ -1484,7 +1489,7 @@ export default new Vuex.Store({
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
 						
-						console.log('交易服务器连接成功');
+//						console.log('交易服务器连接成功');
 						context.state.market.tradeLoginSuccessMsg='交易服务器连接成功';
 						
 						//启动交易心跳定时检查
@@ -1505,21 +1510,22 @@ export default new Vuex.Store({
 						
 						
 					}else{
-						console.log('登录失败');
-//						context.state.market.tradeLoginSuccessMsg='请登录交易服务器';
+//						console.log('登录失败');
 						context.state.market.tradeLoginSuccessMsg=parameters.Message;
 						context.state.tradeSocket.close();
 					}
 					break;
 				case 'OnRspLogout': //登出回复
 					if(parameters.Code==0){
-						console.log('登出成功');
+//						console.log('登出成功');
+						context.state.market.layer='登出成功'+Math.floor(Math.random()*10);
 					}else{
-						console.log('登出失败');
+//						console.log('登出失败');
+						context.state.market.layer=parameters.Message+Math.floor(Math.random()*10);
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复
-					console.log('查询持仓合计回复');		
+//					console.log('查询持仓合计回复');		
 					if (parameters == null || typeof(parameters) == "undefined" || parameters.length == 0){
 						context.state.market.ifUpdateHoldProfit=true;//可以使用最新行情更新持仓盈亏
 					}else{
@@ -1573,7 +1579,7 @@ export default new Vuex.Store({
 					context.dispatch('updateApply',parameters);
 					break;
 				case 'OnRspOrderInsert':
-					console.log('报单请求回复');
+//					console.log('报单请求回复');
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder',parameters);
@@ -1581,18 +1587,18 @@ export default new Vuex.Store({
 					context.dispatch('appendApply',parameters);
 					break;
 				case 'OnRtnHoldTotal':
-					console.log('持仓合计变化推送通知');
+//					console.log('持仓合计变化推送通知');
 					context.dispatch('updateHold',parameters);
 					break;
 				case 'OnRtnOrderTraded':
-					console.log('成交单通知');
+//					console.log('成交单通知');
 					if(parameters!=null){
 						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 					}
 					context.dispatch('layerOnRtnOrderTraded',parameters);
 					break;
 				case 'OnError':
-					console.log('OnError');
+//					console.log('OnError');
 					context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
 				default:
 					break;
@@ -1638,7 +1644,7 @@ export default new Vuex.Store({
 				
 				if(parameters.OrderStatus==5){
 					context.state.market.layer=parameters.StatusMsg+Math.floor(Math.random()*10);
-					console.log(parameters.StatusMsg);
+//					console.log(parameters.StatusMsg);
 					return;
 				}
 				
@@ -1724,6 +1730,8 @@ export default new Vuex.Store({
 			var positionListContCurrentIndex=0;
 			context.state.market.positionListCont.forEach(function(e,i){
 				if(e.commodityNocontractNo==parameters.ContractCode){
+					console.log('------>')
+					console.log(e);
 					positionListContCurrent = e;
 					positionListContCurrentIndex = i;
 					isExist = true;
@@ -1766,13 +1774,16 @@ export default new Vuex.Store({
 						positionListContCurrent.num=parameters.HoldNum;
 						if(parameters.Drection==0){
 							 positionListContCurrent.type ='多';
+							 positionListContCurrent.type_color='red';
 						}
 						if(parameters.Drection==1){
 							 positionListContCurrent.type='空';
+							  positionListContCurrent.type_color='green';
 						}
 						
 						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice)
 															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+						console.log('positionListContCurrentIndex:'+positionListContCurrentIndex);									
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
 						
 						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
@@ -1920,38 +1931,7 @@ export default new Vuex.Store({
 				context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo] = parameters;
 			}
 		},
-		LayerOnRspOrderInsert:function(context,parameters){
-			var CommodityName=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-			var DirectionStr;
-			if(parameters.Drection==0){
-				DirectionStr='买';
-			}
-			if(parameters.Drection==1){
-				DirectionStr='卖';
-			}
-			
-			var price;
-			if(parameters.OrderPriceType==1){
-				price = '市价';
-			}
-			if(parameters.OrderPriceType==0){
-				var DotSize = context.state.market.orderTemplist[parameters.CommodityNo].DotSize;
-				if (DotSize == null || typeof(DotSize) == "undefined" || DotSize.length == 0){
-					DotSize=0; 
-				}
-				price=parseFloat(parameters.OrderPrice).toFixed(DotSize);
-			}
-			
-			var OrderNum = parameters.OrderNum;
-			var OrderID = parameters.OrderID;
-			if(parameters.OrderStatus<4){
-				console.log("委托成功（"+CommodityName+","+price+","+DirectionStr+OrderNum+"手,委托号:"+OrderID+"）");
-			}else{
-				console.log("委托失败（"+CommodityName+","+price+","+DirectionStr+OrderNum+"手,失败原因:"+parameters.StatusMsg+"）");
-			}
-			
-			
-		},
+		
 		UpdateHoldProfit:function(context,parameters){
 			if(context.state.market.ifUpdateHoldProfit){
 				if(parameters!=null){
@@ -2058,7 +2038,7 @@ export default new Vuex.Store({
 			);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
-					console.log('交易服务器断开，正在重连');
+//					console.log('交易服务器断开，正在重连');
 					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
@@ -2143,7 +2123,7 @@ export default new Vuex.Store({
 					
 					context.state.market.subscribeIndex++;
 				} else if(context.state.wsjsondata.Method == "OnRtnQuote") { // 最新行情
-
+					
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
