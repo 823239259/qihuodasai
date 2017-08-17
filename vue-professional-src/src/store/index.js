@@ -2043,6 +2043,7 @@ export default new Vuex.Store({
 					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+					console.log(context.state.market.HeartBeat.lastHeartBeatTimestamp);
 				}
 			}
 			heartBeatUpdate();
