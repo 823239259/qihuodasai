@@ -644,55 +644,62 @@
 				}
 			},
 			buy:function(){
-					this.$children[1].isshow = true;
-					var commodityNo = this.detail.CommodityNo;
-					if(this.isShow==true){
-						
-							var buildIndex=0;
-							if(buildIndex>100){
-								buildIndex=0;
-							}
-							var b={
-								"Method":'InsertOrder',
-								"Parameters":{
-									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-									"CommodityNo":this.templateList[commodityNo].CommodityNo,
-									"ContractNo":this.detail.LastQuotation.ContractNo,
-									"OrderNum":this.$children[2].defaultNum,
-									"Drection":0,
-									"PriceType":1,
-									"LimitPrice":0.00,
-									"TriggerPrice":0,
-									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-								}
-							};
-							this.buyText = b;
-//							this.tradeSocket.send(JSON.stringify(b));
-						
+				var commodityNo = this.detail.CommodityNo;
+				if(this.isShow==true){
+					if(this.$children[2].defaultNum == 0){
+						this.$children[8].isShow = true;
+						this.msg = '手数不能为0';
 					}else{
-							var buildIndex=0;
-							if(buildIndex>100){
-								buildIndex=0;
+						this.$children[1].isshow = true;
+						var buildIndex=0;
+						if(buildIndex>100){
+							buildIndex=0;
+						}
+						var b={
+							"Method":'InsertOrder',
+							"Parameters":{
+								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+								"CommodityNo":this.templateList[commodityNo].CommodityNo,
+								"ContractNo":this.detail.LastQuotation.ContractNo,
+								"OrderNum":this.$children[2].defaultNum,
+								"Drection":0,
+								"PriceType":1,
+								"LimitPrice":0.00,
+								"TriggerPrice":0,
+								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
-							var b={
-								"Method":'InsertOrder',
-								"Parameters":{
-									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-									"CommodityNo":this.templateList[commodityNo].CommodityNo,
-									"ContractNo":this.detail.LastQuotation.ContractNo,
-									"OrderNum": parseInt(this.tradeNum),
-									"Drection":0,
-									"PriceType":0,
-									"LimitPrice":parseFloat(this.tradePrices),
-									"TriggerPrice":0,
-									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-								}
-							};
-							this.buyText = b;
-//							this.tradeSocket.send(JSON.stringify(b));
-						
+						};
+						this.buyText = b;
+//						this.tradeSocket.send(JSON.stringify(b));
 					}
-				
+				}else{
+					if(parseInt(this.tradeNum) == 0 || this.tradeNum == ''){
+						this.$children[8].isShow = true;
+						this.msg = '手数不能为0或空';
+					}else{
+						this.$children[1].isshow = true;
+						var buildIndex=0;
+						if(buildIndex>100){
+							buildIndex=0;
+						}
+						var b={
+							"Method":'InsertOrder',
+							"Parameters":{
+								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+								"CommodityNo":this.templateList[commodityNo].CommodityNo,
+								"ContractNo":this.detail.LastQuotation.ContractNo,
+								"OrderNum": parseInt(this.tradeNum),
+								"Drection":0,
+								"PriceType":0,
+								"LimitPrice":parseFloat(this.tradePrices),
+								"TriggerPrice":0,
+								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							}
+						};
+						this.buyText = b;
+//						this.tradeSocket.send(JSON.stringify(b));
+					}
+				}
 			},
 			showPrice: function(e){
 				if(this.isShow == true){
