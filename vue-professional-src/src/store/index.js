@@ -502,7 +502,7 @@ export default new Vuex.Store({
 	state: {
 
 		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'dev',
+		setting: 'build',
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
@@ -1730,8 +1730,6 @@ export default new Vuex.Store({
 			var positionListContCurrentIndex=0;
 			context.state.market.positionListCont.forEach(function(e,i){
 				if(e.commodityNocontractNo==parameters.ContractCode){
-					console.log('------>')
-					console.log(e);
 					positionListContCurrent = e;
 					positionListContCurrentIndex = i;
 					isExist = true;
@@ -1783,7 +1781,6 @@ export default new Vuex.Store({
 						
 						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice)
 															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-						console.log('positionListContCurrentIndex:'+positionListContCurrentIndex);									
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
 						
 						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
@@ -1976,7 +1973,7 @@ export default new Vuex.Store({
 			
 		},
 		updateHoldFloatingProfit:function(context,parameters){
-			console.log('根据订阅行情初始化持仓盈亏');
+//			console.log('根据订阅行情初始化持仓盈亏');
 //			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
 			var lastPrice = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.LastPrice;
 			var contract=parameters.ContractCode;
@@ -2062,13 +2059,13 @@ export default new Vuex.Store({
 				}
 			};
 			context.state.tradeSocket.onclose = function(evt) {
-				console.log('tradeClose:');
-				console.log(evt);
+//				console.log('tradeClose:');
+//				console.log(evt);
 				context.state.tradeSocket=null;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
-				console.log('tradeError:');
-				console.log(evt);
+//				console.log('tradeError:');
+//				console.log(evt);
 			};
 			context.state.tradeSocket.onmessage = function(evt) {
 				context.dispatch('handleTradeMessage',evt);
@@ -2078,15 +2075,15 @@ export default new Vuex.Store({
 		initQuoteClient: function(context) {
 			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
 			context.state.quoteSocket.onopen = function(evt) {
-				console.log('open');
+//				console.log('open');
 				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
 
 			};
 			context.state.quoteSocket.onclose = function(evt) {
-				console.log('close');
+//				console.log('close');
 			};
 			context.state.quoteSocket.onerror = function(evt) {
-				console.log('error');
+//				console.log('error');
 			};
 			context.state.quoteSocket.onmessage = function(evt) {
 				context.state.wsjsondata = JSON.parse(evt.data);
