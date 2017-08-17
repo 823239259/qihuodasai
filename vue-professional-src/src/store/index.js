@@ -55,6 +55,11 @@ var market = {
 			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
 			intervalCheckTime : 8000  // 间隔检查时间：8秒
 		},
+		quoteConfig:{
+			url_real : "ws://192.168.0.213:9002", 
+			userName:"13677622344",
+			passWord:"a123456"
+		},
 		tradeConfig:{
 			version : "3.3",	// 版本
 			url_real : "ws://192.168.0.213:6102", // 实盘地址
@@ -1632,7 +1637,7 @@ export default new Vuex.Store({
 //				context.state.market.qryHoldTotalArr
 				
 				if(parameters.OrderStatus==5){
-					context.state.market.layer=parameters.StatusMsg;
+					context.state.market.layer=parameters.StatusMsg+Math.floor(Math.random()*10);
 					console.log(parameters.StatusMsg);
 					return;
 				}
@@ -2091,11 +2096,10 @@ export default new Vuex.Store({
 			
 		},
 		initQuoteClient: function(context) {
-			context.state.quoteSocket = new WebSocket('ws://192.168.0.213:9002');
-//			context.state.quoteSocket = new WebSocket('ws://quote.vs.com:9002');
+			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
 			context.state.quoteSocket.onopen = function(evt) {
 				console.log('open');
-				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"13677622344","PassWord":"a123456"}}');
+				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
 
 			};
 			context.state.quoteSocket.onclose = function(evt) {
