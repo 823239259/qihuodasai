@@ -127,8 +127,14 @@
 			this.$store.state.isshow.sshow = false;
 			this.$store.state.isshow.kshow = false;
 			this.$store.state.isshow.bottomshow = false;
-			this.$children[0].isShow = true;
-			this.msg = this.tradeLoginSuccessMsg;
+			//判断交易账号是否已登录
+			if(localStorage.tradeUser){
+				this.$children[0].isShow = true;
+				this.msg = this.tradeLoginSuccessMsg;
+			}else{
+				this.$children[0].isShow = false;
+			}
+			
 		}
 	}
 </script>
