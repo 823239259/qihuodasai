@@ -2,7 +2,6 @@
 	<div id="home">
 		<template>
 			<tipsDialog :msg="msgTips"></tipsDialog>
-			<tipsDialog :msg="sysMsg"></tipsDialog>
 			<div id="disconnect" v-show='!isconnected'>
 				<div><s></s>&nbsp;&nbsp;行情连接已断开，<span>{{time}}</span>秒后自动重连</div>
 			</div>
@@ -91,34 +90,36 @@
 			tipsDialog
 		},
 		computed: {
-			guideShow: function(){
-				return this.$store.state.isshow.guideshow;
-			},
 			msgTips: function(){
 				return this.msg;
 			},
-			sysMsg: function(){
-				if(this.$store.state.market.quoteConnectedMsg==0){
-					return '行情服务器连接成功';
-				}
-			},
 			Parameters(){
-				return this.$store.state.market.Parameters
+				return this.$store.state.market.Parameters;
 			},
 			isconnected() {
-				return this.$store.state.isshow.isconnected
+				return this.$store.state.isshow.isconnected;
 			},
 			guideshow(){
-				return this.$store.state.isshow.guideshow
+				return this.$store.state.isshow.guideshow;
+			},
+			quoteConnectedMsg(){
+				return this.$store.state.market.quoteConnectedMsg;
 			},
 			isBack: function(){
 				return this.$route.query.isBack;
 			}
 		},
 		watch: {
-			guideShow: function(n, o){
+			quoteConnectedMsg: function(n, o){
+				if(n && this.guideshow == false){
+					this.$children[0].isShow = true;
+					this.msg = n.slice(0,-1);
+				}
+			},
+			guideshow: function(n, o){
 				if(n == false){
-					this.$children[1].isShow = true;
+					this.$children[0].isShow = true;
+					this.msg = '行情服务器连接成功';
 				}
 			},
 			isBack: function(n, o){
@@ -159,7 +160,8 @@
 				'initQuoteClient'
 			]),
 			refresh: function(e) {
-				this.$router.push({path: '/index', query: {isBack: 1}});
+//				this.$router.push({path: '/index', query: {isBack: 1}});
+				this.$router.push({path: '/space'});
 			},
 			selectClass: function(e) {
 				$(e.target).addClass('current').siblings('li').removeClass('current');
@@ -207,19 +209,6 @@
 			this.$store.state.isshow.isklineshow = false;
 			//提示框
 //			this.$children[1].isShow = true;
-			
-
-				
-			
-//			this.isBack = this.$route.query.isBack;
-//			if(this.isBack && this.isBack == 1){
-//				window.location.reload();
-//				this.$router.go(-1);
-//			}else if(this.isBack == 2){
-//				window.location.reload();
-////				this.$router.pu
-//			}
-			
 			
 		}
 	}

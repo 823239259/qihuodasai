@@ -2102,7 +2102,7 @@ export default new Vuex.Store({
 			context.state.quoteSocket.onmessage = function(evt) {
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
-					context.state.market.quoteConnectedMsg=0;
+					context.state.market.quoteConnectedMsg='行情服务器连接成功' + Math.floor(Math.random()*10);
 					// 查询服务器支持品种用于订阅
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
