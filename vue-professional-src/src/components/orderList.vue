@@ -2,7 +2,7 @@
 	<div id="orderList" class="list" :val="getData">
 		<alert title="确认全部平仓" :line2="closeAllOutAlert" :objstr='closeAllOutAlertObj' type="1"></alert>
 		<alert title="确认平仓"  :line2="closeOutAlert" :objstr='closeOutAlertObj'></alert>
-		<ul>
+		<ul class="list_cont_box">
 			<li class="list_head">
 				<span>合约名称</span>
 				<span>多空</span>
@@ -10,8 +10,6 @@
 				<span>持仓均价</span>
 				<span>浮动盈利</span>
 			</li>
-		</ul>
-		<ul class="list_cont_box">
 			<template v-for="k in datas">
 				<li @tap="listTap" :id="k.commodityNocontractNo">
 					<div :class="[list_cont,{current:k.showbar}]">
@@ -199,24 +197,25 @@
 	/*ip6p及以上*/
 	@media (min-width:411px) {
 		.list{
-			.list_cont_box{
+			ul{
+				width: 100%;
+				padding: 0;
 				overflow-y: scroll;
 			}
 			li{
-				width: 100%;
+				width: 450px;
 				background: @deepblue;
+				padding-left: 15px;
 				border-top: 1px solid @black;
 				&.current{
 					background: #2d3040;
 				}
 				&.list_head{
 					height: 44px;
-					padding: 0 3.62%;
 					background: #36394d;
 				}
 				.list_cont{
 					height: 44px;
-					padding: 0 3.62%;
 					&.current{
 						background: #2d3040;
 					}
@@ -230,19 +229,19 @@
 					font-size: @fs14;
 					margin: 0 0.4%;
 					&:nth-child(1){
-						width: 24%;
+						width: 100px;
 					}
 					&:nth-child(2){
-						width: 12%;
+						width: 50px;
 					}
 					&:nth-child(3){
-						width: 12%;
+						width: 50px;
 					}
 					&:nth-child(4){
-						width: 18%;
+						width: 50px;
 					}
 					&:nth-child(5){
-						width: 24%;
+						width: 130px;
 					}
 					&.red{
 						color: @red;
@@ -271,24 +270,25 @@
 	/*ip6*/
 	@media (min-width:371px) and (max-width:410px) {
 		.list{
-			.list_cont_box{
+			ul{
+				width: 100%;
+				padding: 0;
 				overflow-y: scroll;
 			}
 			li{
-				width: 100%;
+				width: 450px*@ip6;
 				background: @deepblue;
+				padding-left: 15px*@ip6;
 				border-top: 1px solid @black;
 				&.current{
 					background: #2d3040;
 				}
 				&.list_head{
 					height: 44px*@ip6;
-					padding: 0 3.62%;
 					background: #36394d;
 				}
 				.list_cont{
 					height: 44px*@ip6;
-					padding: 0 3.62%;
 					&.current{
 						background: #2d3040;
 					}
@@ -302,19 +302,19 @@
 					font-size: @fs14*@ip6;
 					margin: 0 0.4%;
 					&:nth-child(1){
-						width: 24%;
+						width: 100px*@ip6;
 					}
 					&:nth-child(2){
-						width: 12%;
+						width: 50px*@ip6;
 					}
 					&:nth-child(3){
-						width: 12%;
+						width: 50px*@ip6;
 					}
 					&:nth-child(4){
-						width: 18%;
+						width: 50px*@ip6;
 					}
 					&:nth-child(5){
-						width: 24%;
+						width: 130px*@ip6;
 					}
 					&.red{
 						color: @red;
@@ -343,24 +343,25 @@
 	/*ip5*/
 	@media(max-width:370px) {
 		.list{
-			.list_cont_box{
+			ul{
+				width: 100%;
+				padding: 0;
 				overflow-y: scroll;
 			}
 			li{
-				width: 100%;
+				width: 500px*@ip5;
 				background: @deepblue;
+				padding-left: 15px*@ip5;
 				border-top: 1px solid @black;
 				&.current{
 					background: #2d3040;
 				}
 				&.list_head{
 					height: 44px*@ip5;
-					padding: 0 3.62%;
 					background: #36394d;
 				}
 				.list_cont{
 					height: 44px*@ip5;
-					padding: 0 3.62%;
 					&.current{
 						background: #2d3040;
 					}
@@ -374,19 +375,19 @@
 					font-size: @fs14*@ip5;
 					margin: 0 0.4%;
 					&:nth-child(1){
-						width: 24%;
+						width: 100px*@ip5;
 					}
 					&:nth-child(2){
-						width: 12%;
+						width: 60px*@ip5;
 					}
 					&:nth-child(3){
-						width: 12%;
+						width: 60px*@ip5;
 					}
 					&:nth-child(4){
-						width: 18%;
+						width: 60px*@ip5;
 					}
 					&:nth-child(5){
-						width: 22%;
+						width: 150px*@ip5;
 					}
 					&.red{
 						color: @red;
