@@ -70,8 +70,8 @@
 			</div>
 		</div>
 		<div class="trade_btn mt10">
-			<tradebtn :marketprice="marketpriceEvent" transaction='buy' @tap.native='buy'></tradebtn>
-			<tradebtn :marketprice="marketpriceEvent" transaction='sell' @tap.native='sell'></tradebtn>
+			<tradebtn :marketprice="marketprice" transaction='buy' @tap.native='buy'></tradebtn>
+			<tradebtn :marketprice="marketprice" transaction='sell' @tap.native='sell'></tradebtn>
 		</div>
 		<div class="tab_box mt10" id="tabBox">
 			<template v-for="key in tabList">
@@ -206,24 +206,25 @@
 				tradePrices:0,
 				commodityName00: '',
 				commodityNo00: '',
+				marketprice: '市价',
 				list: [
 					{
 						type: '新',
-						price: '4556',
+						price: '0',
 						price_color: 'red',
-						num: 56
+						num: 0
 					},
 					{
 						type: '买',
-						price: '4556',
+						price: '0',
 						price_color: 'red',
-						num: 56
+						num: 0
 					},
 					{
 						type: '卖',
-						price: '4556',
+						price: '0',
 						price_color: 'green',
-						num: 56
+						num: 0
 					},
 				],
 				tabList: [{nav:'持仓'},{nav:'挂单'},{nav:'委托'},{nav:'成交'}],
@@ -241,13 +242,13 @@
 			}
 		},
 		computed:{
-			marketpriceEvent: function(){
-				if(this.isShow === true){
-					return '市价';
-				}else{
-					return parseFloat(this.detail.LastQuotation.LastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
-				}
-			},
+//			marketpriceEvent: function(){
+//				if(this.isShow === true){
+//					return '市价';
+//				}else{
+//					return parseFloat(this.detail.LastQuotation.LastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
+//				}
+//			},
 			forceLine(){
 				return this.$store.state.market.forceLine;
 			},
@@ -269,12 +270,9 @@
 				if(this.buyText){
 					return JSON.stringify(this.buyText);
 				}
-				
 			},
 			cancelOrderAlert:function(){
-				
 				var obj = this.buyText.Parameters;
-				
 				if(obj!=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;
 					var orderNum = obj.OrderNum;
@@ -320,7 +318,6 @@
 					return  this.$store.state.market.openChangealertCurrentObj.delegateNum;
 				}
 			},
-			
 			OrderType(){
 				return this.$store.state.market.OrderType;
 			},
@@ -382,7 +379,6 @@
 				return JSON.stringify(this.positionListCont);
 			},
 			detail(){
-//				return this.$parent.detail;
 				return this.$store.state.market.currentdetail
 			},
 			Parameters00(){   //合约详情obj
@@ -425,10 +421,10 @@
 			},
 			tradePrices: function(n, o){
 				if(n.length<1){
-					$(".redbtn li:first-child, .greenbtn li:first-child").text('');
+					this.marketprice = '';
 				}else{
 					if(this.isShow == false){
-						$(".redbtn li:first-child, .greenbtn li:first-child").text(n);
+						this.marketprice = n;
 					}
 				}
 			},
@@ -496,25 +492,24 @@
 					var CurrentObj = e;
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
 					var b={
-							"Method":'CancelOrder',
-							"Parameters":{
-								"OrderSysID":'',
-								"OrderID":CurrentObj.OrderID,
-								"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
-								"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
-								"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
-								"OrderNum":parseFloat(CurrentObj.delegateNum),
-								"Direction":function(){
-												if(CurrentObj.buyOrSell=='买'){
-													return 0;
-												}else{
-													return 1;
-												}
-											},
-								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
-							}
+						"Method":'CancelOrder',
+						"Parameters":{
+							"OrderSysID":'',
+							"OrderID":CurrentObj.OrderID,
+							"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
+							"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
+							"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+							"OrderNum":parseFloat(CurrentObj.delegateNum),
+							"Direction":function(){
+											if(CurrentObj.buyOrSell=='买'){
+												return 0;
+											}else{
+												return 1;
+											}
+										},
+							"OrderPrice":parseFloat(CurrentObj.delegatePrice)
+						}
 					};
-					
 //					this.tradeSocket.send(JSON.stringify(b));
 					arr.push(b);
 					this.buyText = arr;
@@ -539,32 +534,31 @@
 				if(isExist==true){
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
 					var b={
-							"Method":'CancelOrder',
-							"Parameters":{
-								"OrderSysID":'',
-								"OrderID":CurrentObj.OrderID,
-								"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
-								"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
-								"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
-								"OrderNum":parseFloat(CurrentObj.delegateNum),
-								"Direction":function(){
-												if(CurrentObj.buyOrSell=='买'){
-													return 0;
-												}else{
-													return 1;
-												}
-											},
-								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
-							}
-						};
-						this.buyText = b;
+						"Method":'CancelOrder',
+						"Parameters":{
+							"OrderSysID":'',
+							"OrderID":CurrentObj.OrderID,
+							"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
+							"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
+							"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+							"OrderNum":parseFloat(CurrentObj.delegateNum),
+							"Direction":function(){
+								if(CurrentObj.buyOrSell=='买'){
+									return 0;
+								}else{
+									return 1;
+								}
+							},
+							"OrderPrice":parseFloat(CurrentObj.delegatePrice)
+						}
+					};
+					this.buyText = b;
 //					this.tradeSocket.send(JSON.stringify(b));
 				}
 				if(len < 1){
 					this.$children[7].isShow = true;
 					this.msg = '请选择一条数据';
 				}
-				
 			},
 			openChangealert: function(){
 				var orderListId= this.orderListId;
@@ -579,7 +573,6 @@
 					}
 				}.bind(this));
 				if(i <= 0){
-					console.log(1111);
 					this.$children[7].isShow = true;
 					this.msg = '请选择一条数据';
 				}
@@ -715,9 +708,11 @@
 				if(this.isShow == true){
 					this.isShow = false;
 					$(e.currentTarget).find('span').text('限价');
+					this.marketprice = this.tradePrices;
 				}else{
 					this.isShow = true;
 					$(e.currentTarget).find('span').text('市价');
+					this.marketprice = '市价';
 				}
 			},
 			showCont: function(e){
