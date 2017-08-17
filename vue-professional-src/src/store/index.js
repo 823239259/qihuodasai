@@ -1542,20 +1542,20 @@ export default new Vuex.Store({
 					
 					break;
 				case 'OnRspQryOrder': //查询订单信息回复
-					console.log('查询订单信息回复');
+//					console.log('查询订单信息回复');
 					if(parameters!=null){
 						context.dispatch('appendOrder',parameters);
 						context.dispatch('appendApply',parameters);
 					}
 					break;
 				case 'OnRspQryTrade'://查询成交记录回复
-					console.log('查询成交记录回复');
+//					console.log('查询成交记录回复');
 					if(parameters!=null){
 						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 					}
 					break;
 				case 'OnRspQryAccount'://查询账户信息回复
-					console.log('查询账户信息回复');
+//					console.log('查询账户信息回复');
 					if(parameters == null || typeof(parameters) == "undefined" || parameters.length == 0){
 						context.dispatch('updateTotalAccount',parameters);
 						context.state.market.ifUpdateAccountProfit = true;

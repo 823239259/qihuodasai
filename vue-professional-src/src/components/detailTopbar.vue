@@ -25,8 +25,8 @@
 				this.$store.state.market.positionListCont=[];
 			},
 			tradeRefresh: function(){
-				window.location.reload();
-//				this.$router.push({path: '/index', query: {isBack: 1}});
+//				window.location.reload();
+				this.$router.push({path: '/index', query: {isBack: 1}});
 			}
 		}
 	}

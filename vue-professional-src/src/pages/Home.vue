@@ -155,9 +155,7 @@
 				'initQuoteClient'
 			]),
 			refresh: function(e) {
-				this.$router.push({
-					path: '/space'
-				});
+				this.$router.push({path: '/index', query: {isBack: 1}});
 			},
 			selectClass: function(e) {
 				$(e.target).addClass('current').siblings('li').removeClass('current');
