@@ -716,10 +716,10 @@ export default new Vuex.Store({
 						var ma20 = params[3].data;
 						var ma30 = params[4].data;
 						var rate = (kd[1] - kd[0]) / kd[0] * 100;
-						rate = rate.toFixed(dosizeL);
+						rate = parseFloat(rate).toFixed(dosizeL);
 						var res = "时间:" + params[0].name + '  涨跌 : ' + rate;
-						res += '<br/>  开盘 : ' + kd[0] + '  最高 : ' + kd[3];
-						res += '<br/>  收盘 : ' + kd[1] + ' 最低 : ' + kd[2];
+						res += '<br/>  开盘 : ' + parseFloat(kd[0]).toFixed(dosizeL) + '  最高 : ' + parseFloat(kd[3]).toFixed(dosizeL);
+						res += '<br/>  收盘 : ' + parseFloat(kd[1]).toFixed(dosizeL) + ' 最低 : ' + parseFloat(kd[2]).toFixed(dosizeL);
 						res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
 						res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
 						return res;
@@ -1031,7 +1031,8 @@ export default new Vuex.Store({
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-			})
+			});
+			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.option1 = {
 				grid: {
 					x: 50,
@@ -1129,7 +1130,7 @@ export default new Vuex.Store({
 					},
 					formatter: function(params) {
 						var time = params[0].name;
-						var val = params[0].value;
+						var val = parseFloat(params[0].value).toFixed(dosizeL);
 						if(time == null || time == "") {
 							return
 						}
@@ -1237,6 +1238,7 @@ export default new Vuex.Store({
 			var vol = [],
 				price = [],
 				time = [];
+			var dosizeL = state.market.currentdetail.DotSize;	
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
@@ -1339,7 +1341,7 @@ export default new Vuex.Store({
 					},
 					formatter: function(params) {
 						var time = params[0].name;
-						var val = params[0].value;
+						var val = parseFloat(params[0].value).toFixed(dosizeL);
 						if(time == null || time == "") {
 							return
 						}
