@@ -93,13 +93,9 @@
 					this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
 					var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
 					localStorage.setItem("tradeUser", JSON.stringify(userData));
-					//初始化交易
-					this.$children[0].isShow = true;
-					this.msg = '登录成功';
 					setTimeout(function(){
 						this.$router.push({path: '/index', query: {isBack: 1}});
 					}.bind(this),300);
-//					this.initTrade();
 				}
 				
 			},
