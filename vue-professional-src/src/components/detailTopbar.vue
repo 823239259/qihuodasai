@@ -23,6 +23,7 @@
 		methods:{
 			clearPositionListCont:function(){
 				this.$store.state.market.positionListCont=[];
+				this.$router.push({path: '/index', query: {isBack: 1}});
 			},
 			tradeRefresh: function(){
 //				window.location.reload();

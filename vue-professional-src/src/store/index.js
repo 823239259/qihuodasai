@@ -1570,14 +1570,14 @@ export default new Vuex.Store({
 					}
 					break;
 				case 'OnRtnMoney':
-					console.log('资金变化通知');
+//					console.log('资金变化通知');
 					// 更新资金账户信息
 					context.dispatch('updateCacheAccount',parameters);
 					// 更新资金汇总信息
 					context.dispatch('updateTotalAccount',parameters);
 					break;	
 				case 'OnRtnOrderState'://订单状态改变通知
-					console.log('订单状态改变通知');
+//					console.log('订单状态改变通知');
 					//更新委托表
 					context.dispatch('updateOrder',parameters);
 					//更新挂单表
@@ -2049,7 +2049,7 @@ export default new Vuex.Store({
 					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
-					console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
+//					console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
 				}
 			}
 			heartBeatUpdate();
@@ -2124,6 +2124,7 @@ export default new Vuex.Store({
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
 							context.state.market.Parameters.push(e);
+							
 						}
 					});
 					if(context.state.market.subscribeIndex==1){

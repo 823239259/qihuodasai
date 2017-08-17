@@ -112,7 +112,7 @@
 									localStorage.setItem("tradeUser", JSON.stringify(userData));
 									setTimeout(function(){
 										this.$router.push({path: '/index', query: {isBack: 1}});
-									}.bind(this),300);
+									}.bind(this),100);
 								}else{
 									this.$children[0].isShow = true;
 									this.msg = '您的账户或密码输入错误';

@@ -112,9 +112,7 @@
 					var drection;
 					if(this.positionListCont[i].Drection==0){
 						drection = 1;
-					}
-						
-					if(this.positionListCont[i].Drection==1){
+					}else if(this.positionListCont[i].Drection==1){
 						drection = 0;
 					}
 					var b={
@@ -131,7 +129,8 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 					};
-					
+					console.log('全部平仓');
+					console.log(JSON.stringify(b));
 //					this.$store.state.market.positionListCont.splice(positionCurrent,1);
 //					this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 					arr.push(b);
@@ -176,6 +175,8 @@
 //						this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 						
 						this.tempText = b;
+						console.log('平仓');
+						console.log(JSON.stringify(b));
 						return false;
 //						this.tradeSocket.send(JSON.stringify(b));
 					}
