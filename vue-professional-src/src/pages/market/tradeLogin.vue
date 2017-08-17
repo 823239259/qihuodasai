@@ -27,6 +27,7 @@
 			<btn name="开户申请" color="yellow" @tap.native='openApply'></btn>
 			<p class="tips">点击登录，表示同意<span class="yellow" @tap="toAgreement">《期货大赛用户协议》</span></p>
 		</div>
+		<div class="shade" v-show="shadeShow"></div>
 	</div>
 </template>
 
@@ -63,7 +64,8 @@
 				pwd: '',
 				token: '',
 				secret: '',
-				tradeUser: ''
+				tradeUser: '',
+				shadeShow: false
 			}
 		},
 		methods:{
@@ -102,8 +104,12 @@
 						var data = JSON.parse(evt.data);
 						var parameters = data.Parameters;
 						switch (data.Method){
+							case 'OnRtnHeartBeat':
+								console.log('last:'+parameters.Ref);
+								break;
 							case 'OnRspLogin'://登录回复
 								if(parameters.Code==0){
+									this.shadeShow = true;
 									this.$children[0].isShow = true;
 									this.msg = '登录成功';
 									this.$store.state.market.tradeConfig.username = this.username;
@@ -153,6 +159,19 @@
 
 <style scoped lang="less">
 @import url("../../assets/css/base.less");
+.shade{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #000;
+	opacity: 0.3;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1010;
+}
 /*ip6p及以上*/
 @media (min-width:411px) {
     #login{
