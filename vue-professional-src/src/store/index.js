@@ -1487,15 +1487,13 @@ export default new Vuex.Store({
 			switch (data.Method){
 				case 'OnRtnHeartBeat':
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
+					console.log('lastHeartBeatTimestamp:'+context.state.market.HeartBeat.lastHeartBeatTimestamp);
 					break;
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
 						
 //						console.log('交易服务器连接成功');
 						context.state.market.tradeLoginSuccessMsg='交易服务器连接成功';
-						
-						//启动交易心跳定时检查
-						context.dispatch('HeartBeatTimingCheck');
 						
 						context.state.market.forceLine = parameters.ForceLine;
 						
@@ -1509,6 +1507,9 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
+						
+						//启动交易心跳定时检查
+						context.dispatch('HeartBeatTimingCheck');
 						
 						
 					}else{
@@ -2034,15 +2035,18 @@ export default new Vuex.Store({
 		},
 		
 		HeartBeatTimingCheck:function(context){
+			
 			setInterval(
-				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
+//				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
+				heartBeatUpdate,15000
 			);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
-//					console.log('交易服务器断开，正在重连');
+					console.log('交易服务器断开，正在重连');
 					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+					console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
 				}
 			}
 			heartBeatUpdate();
