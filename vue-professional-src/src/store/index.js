@@ -502,7 +502,7 @@ export default new Vuex.Store({
 	state: {
 
 		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'build',
+		setting: 'dev',
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
@@ -1513,6 +1513,8 @@ export default new Vuex.Store({
 //						console.log('登录失败');
 						context.state.market.tradeLoginSuccessMsg=parameters.Message;
 						context.state.tradeSocket.close();
+						//清空本地交易登录信息
+						localStorage.tradeUser = null;
 					}
 					break;
 				case 'OnRspLogout': //登出回复

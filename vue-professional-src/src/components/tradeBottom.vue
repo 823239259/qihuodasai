@@ -325,12 +325,18 @@
 		text-align: center;
 		font-size: 18px;
 	}
-	
+	.handle span{
+		display: inline-block;
+		height: 44px;
+		line-height: 44px;
+	}
 	.handle span:last-child {
+		float: right;
 		font-size: 14px;
 	}
 	
 	.handle span:first-child {
+		float: left;
 		font-size: 16px;
 	}
 	
@@ -389,7 +395,7 @@
 			font-size: 26px*@ip5;
 		}
 		.handle {
-			height: 55px*@ip5;
+			height: 44px*@ip5;
 			width: 100%;
 			clear: both;
 		}
@@ -435,6 +441,11 @@
 			text-align: center;
 			font-size: 18px*@ip5;
 		}
+		.handle span{
+			display: inline-block;
+			height: 44px*@ip5;
+			line-height: 44px*@ip5;
+		}
 		.handle span:last-child {
 			font-size: 14px*@ip5;
 		}
@@ -453,7 +464,6 @@
 		}
 	}
 	/*ip6*/
-	
 	@media (min-width:371px) and (max-width:410px) {
 		.toppart {
 			height: 150px*@ip6;
@@ -490,7 +500,7 @@
 			font-size: 26px*@ip6;
 		}
 		.handle {
-			height: 55px*@ip6;
+			height: 44px*@ip6;
 			width: 100%;
 			clear: both;
 		}
@@ -535,6 +545,11 @@
 			background: transparent;
 			text-align: center;
 			font-size: 18px*@ip6;
+		}
+		.handle span{
+			display: inline-block;
+			height: 44px*@ip6;
+			line-height: 44px*@ip6;
 		}
 		.handle span:last-child {
 			font-size: 14px*@ip6;
