@@ -1,7 +1,7 @@
 <template>
 	<div id="menus">
 		<div>
-			<div class="icon" @tap='openmenu'>
+			<div class="icon icon_menu" @tap='openmenu'>
 
 			</div>
 			<div class="shade" v-show="shadeShow" @tap="openShade"></div>
@@ -35,13 +35,13 @@
 			toTradeLogin: function(){
 				this.open = false;
 				this.shadeShow = false;
-				$(".icon").css('background-image', 'url(' + url2 + ')');
+				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/tradeLogin'});
 			},
 			toHistoryTrade: function(){
 				this.open = false;
 				this.shadeShow = false;
-				$(".icon").css('background-image', 'url(' + url2 + ')');
+				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/historyTrade'});
 			},
 			openmenu: function(e) {
