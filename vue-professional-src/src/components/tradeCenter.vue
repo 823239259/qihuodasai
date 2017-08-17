@@ -397,7 +397,7 @@
 				this.msg = n.slice(0,-1);
 			},
 			layer: function(n, o){
-				this.$children[8].isShow = true;
+				this.$children[7].isShow = true;
 				this.msg = n.slice(0,-1);
 			},
 			selectId:function(n,o){
