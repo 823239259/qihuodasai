@@ -80,27 +80,27 @@
 						</li>
 						<li>
 							<span>买一</span>
-							<span :class="{red: Parameters.BidQty1 - Parameters.PreSettlePrice > 0, green: Parameters.BidQty1 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: Parameters.BidPrice1 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice1 | fixNum2(detail.DotSize)}}</span>
 							<span>{{Parameters.BidQty1}}</span>
 						</li>
 						<li>
 							<span>买二</span>
-							<span :class="{red: Parameters.BidQty2 - Parameters.PreSettlePrice > 0, green: Parameters.BidQty2 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: Parameters.BidPrice2 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice2 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice2 | fixNum2(detail.DotSize)}}</span>
 							<span>{{Parameters.BidQty2}}</span>
 						</li>
 						<li>
 							<span>买三</span>
-							<span :class="{red: Parameters.BidQty3 - Parameters.PreSettlePrice > 0, green: Parameters.BidQty3 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: Parameters.BidPrice3 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice3 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice3 | fixNum2(detail.DotSize)}}</span>
 							<span>{{Parameters.BidQty3}}</span>
 						</li>
 						<li>
 							<span>买四</span>
-							<span :class="{red: Parameters.BidQty4 - Parameters.PreSettlePrice > 0, green: Parameters.BidQty4 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: Parameters.BidPrice4 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice4 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice4 | fixNum2(detail.DotSize)}}</span>
 							<span>{{Parameters.BidQty4}}</span>
 						</li>
 						<li>
 							<span>买五</span>
-							<span :class="{red: Parameters.BidQty5 - Parameters.PreSettlePrice > 0, green: Parameters.BidQty5 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: Parameters.BidPrice5 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice5 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice5 | fixNum2(detail.DotSize)}}</span>
 							<span>{{Parameters.BidQty5}}</span>
 						</li>
 						<!--<li>
