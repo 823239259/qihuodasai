@@ -596,31 +596,40 @@
 				}
 			},
 			sell:function(){
-				this.$children[1].isshow = true;
 				var commodityNo = this.detail.CommodityNo;
 				if(this.isShow==true){
-					var buildIndex=0;
-					if(buildIndex>100){
-						buildIndex=0;
+					if(this.$children[2].defaultNum == 0){
+						this.$children[8].isShow = true;
+						this.msg = '手数不能为0';
+					}else{
+						this.$children[1].isshow = true;
+						var buildIndex=0;
+						if(buildIndex>100){
+							buildIndex=0;
+						}
+						var b={
+								"Method":'InsertOrder',
+								"Parameters":{
+									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+									"CommodityNo":this.templateList[commodityNo].CommodityNo,
+									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"OrderNum":this.$children[2].defaultNum,
+									"Drection":1,
+									"PriceType":1,
+									"LimitPrice":0.00,
+									"TriggerPrice":0,
+									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+						this.buyText = b;	
+//					    this.tradeSocket.send(JSON.stringify(b));
 					}
-					var b={
-							"Method":'InsertOrder',
-							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
-								"OrderNum":this.$children[2].defaultNum,
-								"Drection":1,
-								"PriceType":1,
-								"LimitPrice":0.00,
-								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-							}
-						};
-					this.buyText = b;	
-//					this.tradeSocket.send(JSON.stringify(b));
-					
 				}else{
+					if(parseInt(this.tradeNum) == 0 || this.tradeNum == ''){
+						this.$children[8].isShow = true;
+						this.msg = '手数不能为0或空';
+					}else{
+						this.$children[1].isshow = true;
 						var buildIndex=0;
 						if(buildIndex>100){
 							buildIndex=0;
@@ -641,6 +650,7 @@
 						};
 						this.buyText = b;
 //						this.tradeSocket.send(JSON.stringify(b));
+					}
 				}
 			},
 			buy:function(){
