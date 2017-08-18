@@ -222,6 +222,10 @@
 		},
 		activated: function(){
 			this.eachData();
+			//不更新画图
+			this.$store.state.isshow.isklineshow = false;
+			this.$store.state.isshow.isfensshow = false;
+			this.$store.state.isshow.islightshow =  false;
 		}
 		
 	}
