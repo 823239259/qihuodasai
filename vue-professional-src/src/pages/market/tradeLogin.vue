@@ -8,7 +8,7 @@
 			<div class="ipt_row mt15">
 				<label for="username">交易账号</label>
 				<input type="text" id="username" placeholder="请输入您的交易账号" v-model.trim="username" />
-				<!--<span class="code">切换账号</span>-->
+				<!--<span class="code">切换账号</span>
 				<select class="switchUser" v-model="tradeUser">
 					<option value="CP1008611">CP1008611</option>
 					<option value="CP1008612">CP1008612</option>
@@ -16,7 +16,7 @@
 					<option value="CP1008614">CP1008614</option>
 					<option value="CP1008615">CP1008615</option>
 					<option value="CP1008616">CP1008616</option>
-				</select>
+				</select>-->
 			</div>
 			<div class="ipt_row">
 				<label for="pwd">密码</label>
