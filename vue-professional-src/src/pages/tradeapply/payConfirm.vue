@@ -32,7 +32,7 @@
 		<ul class="payinfo">
 			<li>
 				<div class="fontyellow fl">
-					账户余额：{{balance | moneytype}}元
+					账户余额：{{balance}}元
 				</div>
 				<div class="fontgray fr">
 					<span v-if="enough">(账户余额充足)</span><span class="fontred" v-else="">(账户余额不足请充值)</span>
@@ -56,6 +56,7 @@
 	import bbtn from '../../components/bigBtn.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
 	import cs from '../../components/customerService.vue'
+	import pro from '../../assets/common.js'
 	export default {
 		name: 'payconfirm',
 		components: {
@@ -159,6 +160,8 @@
 				chooseType: 3000,
 				traderTotal: 0,
 				lineLoss: 0,
+				balance: 0.00,
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -174,10 +177,6 @@
 			secret() {
 				return this.$store.state.account.secret;
 			},
-			balance() {
-				return this.$store.state.account.balance	;
-//				return 50000
-			},
 			temp() {
 				return this.$store.state.tempTradeapply;
 			},
@@ -192,6 +191,37 @@
 		methods: {
 			toTradersRules: function(){
 				this.$router.push({path: '/tradersRules'});
+			},
+			getUserMsg: function(){
+				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
+					headers: {
+						'token':  this.userInfo.token,
+						'secret': this.userInfo.secret
+					},
+					params: {
+						businessType: 4
+					},
+					timeout: 5000
+				}).then(function(e){
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							this.balance = pro.parseTwoFloat(data.data.balance);
+						}
+					}else{
+						switch (data.code){
+							case '3':
+								this.$children[0].isShow = true;
+								this.msg = '用户信息不存在';
+								break;
+							default:
+								break;
+						}
+					}
+				}.bind(this), function(){
+					this.$children[0].isShow = true;
+					this.msg = '服务器连接失败';
+				});
 			},
 			tocom: function() {
 				//资金足够的时候
@@ -260,6 +290,9 @@
 			this.lineLoss = this.$route.query.lineLoss;
 		},
 		activated: function() {
+			this.userInfo = JSON.parse(localStorage.user);
+			//获取用户账户信息
+			this.getUserMsg();
 			this.chooseType = this.$route.query.chooseType;
 			this.traderTotal = this.$route.query.traderTotal;
 			this.lineLoss = this.$route.query.lineLoss;
