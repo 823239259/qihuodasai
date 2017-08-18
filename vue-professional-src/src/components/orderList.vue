@@ -108,7 +108,6 @@
 				this.$children[0].isshow = true;
 				var arr=[];
 				for(var i in this.qryHoldTotalArr){
-					console.log(this.qryHoldTotalArr[i]);
 					var buildIndex=0;
 					var drection;
 					if(this.qryHoldTotalArr[i].Drection==0){
