@@ -265,14 +265,21 @@
 		font-size: 14px;
 		padding: 8px 17px;
 	}
-	
-	.toppart>div:nth-child(2)>ul>li {
-		height: 82px/2;
-		line-height: 26px;
+	.toppart>div:nth-child(1)>ul>li span{
+		margin-left: 25px;
 	}
-	
+	.toppart>div:nth-child(2)>ul>li {
+		height: 30px;
+		line-height: 30px;
+		
+	}
+	.toppart>div:nth-child(2){
+		height: 82px;
+		padding-top: 8px;
+	}
 	.toppart>div:nth-child(2)>ul>li:first-child {
-		font-size: 26px;
+		font-size: 30px;
+		font-weight: bold;
 	}
 	
 	.handle {
@@ -387,12 +394,20 @@
 			font-size: 14px*@ip5;
 			padding: 8px*@ip5 17px*@ip5;
 		}
+		.toppart>div:nth-child(1)>ul>li span{
+			margin-left: 25px*@ip5;
+		}
 		.toppart>div:nth-child(2)>ul>li {
-			height: 82px*@ip5/2;
-			line-height: 26px*@ip5;
+			height: 30px*@ip5;
+			line-height: 30px*@ip5;
+		}
+		.toppart>div:nth-child(2){
+			height: 82px*@ip5;
+			padding-top: 8px*@ip5;
 		}
 		.toppart>div:nth-child(2)>ul>li:first-child {
-			font-size: 26px*@ip5;
+			font-size: 30px*@ip5;
+			font-weight: bold;
 		}
 		.handle {
 			height: 44px*@ip5;
@@ -492,12 +507,20 @@
 			font-size: 14px*@ip6;
 			padding: 8px*@ip6 17px*@ip6;
 		}
+		.toppart>div:nth-child(1)>ul>li span{
+			margin-left: 25px*@ip6;
+		}
 		.toppart>div:nth-child(2)>ul>li {
-			height: 82px*@ip6/2;
-			line-height: 26px*@ip6;
+			height: 30px*@ip6;
+			line-height: 30px*@ip6;
+		}
+		.toppart>div:nth-child(2){
+			height: 82px*@ip6;
+			padding-top: 8px*@ip6;
 		}
 		.toppart>div:nth-child(2)>ul>li:first-child {
-			font-size: 26px*@ip6;
+			font-size: 30px*@ip6;
+			font-weight: bold;
 		}
 		.handle {
 			height: 44px*@ip6;
