@@ -386,12 +386,6 @@
 			},
 		},
 		watch:{
-//			tradePrices: function(n, o){
-//				this.tradePrices = parseInt(n);
-//				if(this.numReg.test(n) == false || n < 0 || n == ''){
-//					this.tradePrices = 0;
-//				};
-//			},
 			tradeNum: function(n, o){
 				this.tradeNum = parseInt(n);
 				if(this.numReg.test(n) == false || n < 0 || n == ''){
@@ -428,12 +422,12 @@
 				}
 			},
 			tradePrices: function(n, o){
-				if(n.length<1){
-					this.marketprice = '';
-				}else{
-					if(this.isShow == false){
-						this.marketprice = n;
-					}
+				this.tradePrices = Number(n);
+				if(n < 0 || n == ''){
+					this.tradePrices = 0;
+				};
+				if(this.isShow == false){
+					this.marketprice = n;
 				}
 			},
 			OnRspOrderInsertEntrustCont:function(n,o){
