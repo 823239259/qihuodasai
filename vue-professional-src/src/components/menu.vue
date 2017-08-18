@@ -8,9 +8,9 @@
 			<!--<transition name="topdown" mode="out-in">-->
 			<div class="menulist" v-show="open">
 				<ul>
-					<li class="fontgray">条件单</li>
+					<!--<li class="fontgray">条件单</li>
 					<li class="fontgray">止损止盈</li>
-					<li class="fontgray">资金详情</li>
+					<li class="fontgray">资金详情</li>-->
 					<li class="fontgray" @tap="toHistoryTrade">历史成交</li>
 					<li class="fontgray" @tap="toTradeLogin">切换账号</li>
 				</ul>
