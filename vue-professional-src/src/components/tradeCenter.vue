@@ -230,7 +230,8 @@
 				tabList: [{nav:'持仓'},{nav:'挂单'},{nav:'委托'},{nav:'成交'}],
 				orderListId: '',
 				buyText:{},
-				obj: []
+				obj: [],
+				numReg: /^[0-9]*$/
 			}
 		},
 		filters:{
@@ -385,6 +386,11 @@
 			},
 		},
 		watch:{
+			tradeNum: function(n, o){
+				if(this.numReg.test(n) == false || n < 0){
+					return 0;
+				};
+			},
 			appendOrderMsg: function(n, o){
 				this.$children[7].isShow = true;
 				this.$children[8].isShow = true;
