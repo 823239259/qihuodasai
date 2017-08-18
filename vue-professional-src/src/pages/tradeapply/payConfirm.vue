@@ -171,12 +171,6 @@
 			PATH() {
 				return this.$store.getters.PATH
 			},
-			token() {
-				return this.$store.state.account.token;
-			},
-			secret() {
-				return this.$store.state.account.secret;
-			},
 			temp() {
 				return this.$store.state.tempTradeapply;
 			},
@@ -229,8 +223,8 @@
 					this.$http.post(
 						this.PATH + '/user/ftrade/handle', {emulateJSON: true}, {
 							headers:{
-								token:  this.token,
-								secret: this.secret
+								'token':  this.userInfo.token,
+								'secret': this.userInfo.secret
 							},
 							params: {
 								"vid":-1,
