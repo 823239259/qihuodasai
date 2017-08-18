@@ -161,14 +161,26 @@
 					BidPrice2: 0,
 					BidPrice3: 0,
 					BidPrice4: 0,
-					BidPrice5: 0
+					BidPrice5: 0,
+					
+					
+					AskQty5:0,
+					AskQty4:0,
+					AskQty3:0,
+					AskQty2:0,
+					AskQty1:0,
+					
+					BidQty5:0,
+					BidQty4:0,
+					BidQty3:0,
+					BidQty2:0,
+					BidQty1:0,
 				}
 			}
 		},
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
 			//初始化盘口
-			console.log(this.templateList[this.Parameters.CommodityNo]);
 			this.defaultParameters.ChangeValue = this.templateList[this.Parameters.CommodityNo].LastQuotation.ChangeValue;
 			this.defaultParameters.ChangeRate = this.templateList[this.Parameters.CommodityNo].LastQuotation.ChangeRate;
 			this.defaultParameters.TotalVolume = this.templateList[this.Parameters.CommodityNo].LastQuotation.TotalVolume;
@@ -188,6 +200,19 @@
 			this.defaultParameters.BidPrice3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice3;
 			this.defaultParameters.BidPrice4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice4;
 			this.defaultParameters.BidPrice5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice5;
+			
+			this.defaultParameters.AskQty5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty5;
+			this.defaultParameters.AskQty4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty4;
+			this.defaultParameters.AskQty3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty3;
+			this.defaultParameters.AskQty2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty2;
+			this.defaultParameters.AskQty1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty1;
+			
+			this.defaultParameters.BidQty5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty5;
+			this.defaultParameters.BidQty4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty4;
+			this.defaultParameters.BidQty3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty3;
+			this.defaultParameters.BidQty2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty2;
+			this.defaultParameters.BidQty1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty1;
+			
 		},
 		computed:{
 			detail(){
