@@ -10,35 +10,35 @@
 				<ul>
 					<li>
 						<span>涨跌</span>
-						<span :class="[{'green':Parameters.ChangeValue<0},{'red':Parameters.ChangeValue>0},{'white':Parameters.ChangeValue==0}]">{{Parameters.ChangeValue | fixNum2(detail.DotSize)}}/{{Parameters.ChangeRate | fixNum}}%</span>
+						<span :class="[{'green':defaultParameters.ChangeValue<0},{'red':defaultParameters.ChangeValue>0},{'white':defaultParameters.ChangeValue==0}]">{{defaultParameters.ChangeValue | fixNum2(detail.DotSize)}}/{{defaultParameters.ChangeRate | fixNum}}%</span>
 					</li>
 					<li>
 						<span>成交量</span>
-						<span>{{Parameters.TotalVolume}}</span>
+						<span>{{defaultParameters.TotalVolume}}</span>
 					</li>
 					<li>
 						<span>持仓量</span>
-						<span>{{Parameters.Position}}</span>
+						<span>{{defaultParameters.Position}}</span>
 					</li>
 					<li>
 						<span>昨结</span>
-						<span>{{Parameters.PreSettlePrice | fixNum2(detail.DotSize)}}</span>
+						<span>{{defaultParameters.PreSettlePrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最新</span>
-						<span :class="{red: Parameters.LastPrice - Parameters.PreSettlePrice > 0,green: Parameters.LastPrice - Parameters.PreSettlePrice < 0}">{{Parameters.LastPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.LastPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.LastPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.LastPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>开盘</span>
-						<span :class="{red: Parameters.OpenPrice - Parameters.PreSettlePrice > 0,green: Parameters.OpenPrice - Parameters.PreSettlePrice < 0}">{{Parameters.OpenPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.OpenPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.OpenPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.OpenPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最高</span>
-						<span :class="{red: Parameters.HighPrice - Parameters.PreSettlePrice > 0,green: Parameters.HighPrice - Parameters.PreSettlePrice < 0}">{{Parameters.HighPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.HighPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.HighPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.HighPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span>最低</span>
-						<span :class="{red: Parameters.LowPrice - Parameters.PreSettlePrice > 0,green: Parameters.LowPrice - Parameters.PreSettlePrice < 0}">{{Parameters.LowPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.LowPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.LowPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.LowPrice | fixNum2(detail.DotSize)}}</span>
 					</li>
 					<li>
 						<span></span>
@@ -55,53 +55,53 @@
 					<template>
 						<li>
 							<span>卖五</span>
-							<span :class="{red: Parameters.AskPrice5 - Parameters.PreSettlePrice > 0, green: Parameters.AskPrice5 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice5 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.AskQty5}}</span>
+							<span :class="{red: defaultParameters.AskPrice5 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice5 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.AskQty5}}</span>
 						</li>
 						<li>
 							<span>卖四</span>
-							<span :class="{red: Parameters.AskPrice4 - Parameters.PreSettlePrice > 0, green: Parameters.AskPrice4 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice4 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.AskQty4}}</span>
+							<span :class="{red: defaultParameters.AskPrice4 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice4 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.AskQty4}}</span>
 						</li>
 						<li>
 							<span>卖三</span>
-							<span :class="{red: Parameters.AskPrice3 - Parameters.PreSettlePrice > 0, green: Parameters.AskPrice3 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice3 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.AskQty3}}</span>
+							<span :class="{red: defaultParameters.AskPrice3 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice3 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.AskQty3}}</span>
 						</li>
 						<li>
 							<span>卖二</span>
-							<span :class="{red: Parameters.AskPrice2 - Parameters.PreSettlePrice > 0, green: Parameters.AskPrice2 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice2 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.AskQty2}}</span>
+							<span :class="{red: defaultParameters.AskPrice2 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice2 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.AskQty2}}</span>
 						</li>
 						<li>
 							<span>卖一</span>
-							<span :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0, green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice1 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.AskQty1}}</span>
+							<span :class="{red: defaultParameters.AskPrice1 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice1 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.AskQty1}}</span>
 						</li>
 						<li>
 							<span>买一</span>
-							<span :class="{red: Parameters.BidPrice1 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice1 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.BidQty1}}</span>
+							<span :class="{red: defaultParameters.BidPrice1 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice1 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.BidQty1}}</span>
 						</li>
 						<li>
 							<span>买二</span>
-							<span :class="{red: Parameters.BidPrice2 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice2 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice2 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.BidQty2}}</span>
+							<span :class="{red: defaultParameters.BidPrice2 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice2 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.BidQty2}}</span>
 						</li>
 						<li>
 							<span>买三</span>
-							<span :class="{red: Parameters.BidPrice3 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice3 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice3 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.BidQty3}}</span>
+							<span :class="{red: defaultParameters.BidPrice3 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice3 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.BidQty3}}</span>
 						</li>
 						<li>
 							<span>买四</span>
-							<span :class="{red: Parameters.BidPrice4 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice4 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice4 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.BidQty4}}</span>
+							<span :class="{red: defaultParameters.BidPrice4 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice4 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.BidQty4}}</span>
 						</li>
 						<li>
 							<span>买五</span>
-							<span :class="{red: Parameters.BidPrice5 - Parameters.PreSettlePrice > 0, green: Parameters.BidPrice5 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice5 | fixNum2(detail.DotSize)}}</span>
-							<span>{{Parameters.BidQty5}}</span>
+							<span :class="{red: defaultParameters.BidPrice5 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice5 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span>{{defaultParameters.BidQty5}}</span>
 						</li>
 						<!--<li>
 							<span></span>
@@ -142,11 +142,52 @@
 		components: {chartBtn, operatenum, alert},
 		data(){
 			return{
-				buyText: {}
+				buyText: {},
+				defaultParameters: {
+					ChangeValue: 0,
+					ChangeRate: 0,
+					TotalVolume: 0,
+					Position: 0,
+					PreSettlePrice: 0,
+					LastPrice: 0,
+					OpenPrice: 0,
+					HighPrice: 0,
+					LowPrice: 0,
+					AskPrice5: 0,
+					AskPrice4: 0,
+					AskPrice3: 0,
+					AskPrice2: 0,
+					AskPrice1: 0,
+					BidPrice2: 0,
+					BidPrice3: 0,
+					BidPrice4: 0,
+					BidPrice5: 0
+				}
 			}
 		},
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
+			//初始化盘口
+			console.log(this.templateList[this.Parameters.CommodityNo]);
+			this.defaultParameters.ChangeValue = this.templateList[this.Parameters.CommodityNo].LastQuotation.ChangeValue;
+			this.defaultParameters.ChangeRate = this.templateList[this.Parameters.CommodityNo].LastQuotation.ChangeRate;
+			this.defaultParameters.TotalVolume = this.templateList[this.Parameters.CommodityNo].LastQuotation.TotalVolume;
+			this.defaultParameters.Position = this.templateList[this.Parameters.CommodityNo].LastQuotation.Position;
+			this.defaultParameters.PreSettlePrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.PreSettlePrice;
+			this.defaultParameters.LastPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.LastPrice;
+			this.defaultParameters.OpenPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.OpenPrice;
+			this.defaultParameters.HighPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.HighPrice;
+			this.defaultParameters.LowPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.LowPrice;
+			this.defaultParameters.AskPrice5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice5;
+			this.defaultParameters.AskPrice4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice4;
+			this.defaultParameters.AskPrice3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice3;
+			this.defaultParameters.AskPrice2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice2;
+			this.defaultParameters.AskPrice1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice1;
+			this.defaultParameters.BidPrice1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice1;
+			this.defaultParameters.BidPrice2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice2;
+			this.defaultParameters.BidPrice3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice3;
+			this.defaultParameters.BidPrice4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice4;
+			this.defaultParameters.BidPrice5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice5;
 		},
 		computed:{
 			detail(){
@@ -188,12 +229,25 @@
 				}
 			},
 		},
+		watch: {
+			Parameters: function(n, o){
+				if(n){
+					this.defaultParameters = n;
+				}
+			}
+		},
 		filters:{
 			fixNum:function(num){
 				return num.toFixed(2);
 			},
 			fixNum2:function(num,dotsize){
-				return num.toFixed(dotsize);
+				if(num){
+					return parseFloat(num).toFixed(dotsize);
+				}else{
+					return 0;
+				}
+				
+				
 			}
 		},
 		methods:{
@@ -248,6 +302,9 @@
 				
 				
 			}
+		},
+		activated: function(){
+
 		}
 	}
 	
