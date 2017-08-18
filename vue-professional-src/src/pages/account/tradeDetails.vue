@@ -139,9 +139,9 @@
 						<span>成交价</span>
 						<span>交易手续费</span>
 					</li>
-					<template v-for="key in getFstTradeDetail">
+					<template v-for="(key,index) in getFstTradeDetail">
 						<li>
-							<span>1</span>
+							<span>{{index + 1}}</span>
 							<span>{{key.tradeDate}}</span>
 							<span>{{key.userNo}}</span>
 							<span>{{key.currencyNo}}</span>
