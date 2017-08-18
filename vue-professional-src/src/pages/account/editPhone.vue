@@ -7,7 +7,7 @@
 		<div class="page_cont">
 			<div class="ipt_row">
 				<label for="phone">原号码</label>
-				<input type="number" id="phone" placeholder="" disabled v-model="userInfo.phone" />
+				<input type="number" id="phone" placeholder="" disabled v-model="userInfo.username" />
 			</div>
 			<div class="ipt_row">
 				<label for="code">验证码</label>
@@ -46,7 +46,8 @@
 				oldTime: 0,
 				newTime: 0,
 				info:'获取验证码',
-				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/
+				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -69,9 +70,6 @@
 				}else{
 					return false
 				}
-			},
-			userInfo: function(){
-				return this.$store.state.account;
 			}
 		},
 		methods: {
@@ -94,7 +92,7 @@
 						'secret': this.userInfo.secret
 					},
 					params: {
-						mobile: this.userInfo.phone,
+						mobile: this.userInfo.username,
 						type: 1
 					},
 					timeout: 5000
@@ -272,7 +270,9 @@
 			//高度计算
 			$("#editPhone").css("height", window.screen.height - 20 + 'px');
 		},
-		activated: function(){}
+		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
+		}
 	}
 </script>
 

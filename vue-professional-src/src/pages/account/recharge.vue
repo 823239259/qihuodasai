@@ -5,7 +5,7 @@
 		<back></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
-			<p class="money_before">余额：<span>{{userInfo.balance}}</span>元</p>
+			<p class="money_before">余额：<span>{{balance}}</span>元</p>
 			<div class="ipt_row">
 				<label for="money">充值金额</label>
 				<input type="number" id="money" placeholder="请输入充值金额" v-model.trim="money" @keyup="testMoney" />
@@ -30,9 +30,11 @@
 			return {
 				isShow: false,
 				msg: '',
+				balance: 0.00,
 				money: '',
 				totalMoney: 0.00,
-				floatReg: /^[0-9]+([.][0-9]+)?$/
+				floatReg: /^[0-9]+([.][0-9]+)?$/,
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -41,10 +43,7 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
-			},
+			}
 		},
 		methods: {
 			testMoney: function(){
@@ -58,21 +57,53 @@
 					this.$children[0].isShow = true;
 					this.msg = '请输入充值金额';
 				}else{
-					window.location.href = 'http://www.dktai.cn/app/appPayinfo?mobile='+ this.userInfo.phone +'&money='+ this.money;
+					window.location.href = 'http://www.dktai.cn/app/appPayinfo?mobile='+ this.userInfo.username +'&money='+ this.money;
 				}
 				
+			},
+			getUserMsg: function(){
+				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
+					headers: {
+						'token':  this.userInfo.token,
+						'secret': this.userInfo.secret
+					},
+					params: {
+						businessType: 4
+					},
+					timeout: 5000
+				}).then(function(e){
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							this.balance = pro.parseTwoFloat(data.data.balance);
+							this.totalMoney = this.balance;
+						}
+					}else{
+						switch (data.code){
+							case '3':
+								this.$children[0].isShow = true;
+								this.msg = '用户信息不存在';
+								break;
+							default:
+								break;
+						}
+					}
+				}.bind(this), function(){
+					this.$children[0].isShow = true;
+					this.msg = '服务器连接失败';
+				});
 			}
 		},
 		watch: {
 			money: function(){
 				if(this.money == '' || this.money == NaN){
-					this.totalMoney = this.userInfo.balance;
+					this.totalMoney = this.balance;
 				}else{
 					var str = this.money.toString().split('.');
 					if(str[1] && str[1].length > 1){
 						this.money = parseFloat(str[0]+ '.'+str[1].substring(0,2));
 					}
-					this.totalMoney = (Number(this.userInfo.balance) + Number(this.money)).toFixed(2);
+					this.totalMoney = (Number(this.balance) + Number(this.money)).toFixed(2);
 					
 				}
 			}
@@ -82,7 +113,9 @@
 			$("#recharge").css("height", window.screen.height - 20 + 'px');
 		},
 		activated: function(){
-			this.totalMoney = this.userInfo.balance;
+			this.userInfo = JSON.parse(localStorage.user);
+			//获取用户账户信息
+			this.getUserMsg();
 		}
 	}
 </script>

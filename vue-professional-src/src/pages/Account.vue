@@ -5,11 +5,11 @@
 		<cs title="客服"></cs>
 		<div class="top_tips">
 			<img src="../assets/img/head_img.png" class="fl" />
-			<p class="fl ml10">欢迎你，<span id="userName">{{userInfo.isCertification ? userInfo.username : userInfo.phone}}</span></p>
+			<p class="fl ml10">欢迎你，<span id="userName">{{username}}</span></p>
 		</div>
 		<div class="money_option mt10">
 			<div class="money_option_row border_bottom">
-				<p>余额：{{userInfo.balance}}元</p>
+				<p>余额：{{balance}}元</p>
 			</div>
 			<div class="money_option_row">
 				<button class="fl yellow" @tap='recharge'>我要充值</button>
@@ -34,7 +34,7 @@
 					<img src="../assets/img/relname.png" />
 					<span>实名认证</span>
 					<img src="../assets/img/arrow.png" class="img_arrow"/>
-					<span>{{userInfo.isCertification ? '已认证' : '未认证'}}</span>
+					<span>{{isCertification ? '已认证' : '未认证'}}</span>
 				</li>
 				<li @tap='editPhone'>
 					<img src="../assets/img/phone_bind.png" />
@@ -66,7 +66,11 @@
 		data(){
 			return {
 				isShow: false,
-				msg: ''
+				msg: '',
+				balance: 0.00,
+				username: '',
+				isCertification: false,
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -75,18 +79,13 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
-			},
+			}
 		},
 		methods: {
 			recharge: function(){
 				this.$router.push({path:'/recharge',query: {balance: this.balance}});
 			},
 			withdrawal: function(){
-				//获取已绑定银行卡信息
-				this.getBindBankList();
 				this.$router.push({path:'/withdrawal'});
 			},
 			tradeRecord: function(){
@@ -112,46 +111,17 @@
 				this.$router.push({path:'/moneyLog'});
 			},
 			exit: function(){
-				this.$store.state.account.islogin = false;
-				this.$store.state.account.phone = '';
-				this.$store.state.account.password = '';
-				this.$store.state.account.token = '';
-				this.$store.state.account.secret = '';
-				this.$store.state.account.isCertification = false;
-				this.$store.state.account.username = '';
-				this.$store.state.account.balance = 0.00;
-				this.$store.state.account.operateMoney = 0.00;
+//				this.$store.state.account.islogin = false;
+//				this.$store.state.account.phone = '';
+//				this.$store.state.account.password = '';
+//				this.$store.state.account.token = '';
+//				this.$store.state.account.secret = '';
+//				this.$store.state.account.isCertification = false;
+//				this.$store.state.account.username = '';
+//				this.$store.state.account.balance = 0.00;
+//				this.$store.state.account.operateMoney = 0.00;
 				localStorage.removeItem("user");
 				this.$router.push({path:'/home'});
-			},
-			getBindBankList: function(){
-				this.$http.post(this.PATH + '/user/withdraw/bank_list', {emulateJSON: true},{
-					headers: {
-						'token':  this.userInfo.token,
-						'secret': this.userInfo.secret
-					},
-					params: {},
-					timeout: 5000
-				}).then(function(e){
-					var data = e.body;
-					if(data.success == true){
-						if(data.code == 1){
-							this.$store.state.account.bankList = data.data;
-						}
-					}else{
-						switch (data.code){
-							case '3':
-								this.$children[0].isShow = true;
-								this.msg = '用户信息不存在';
-								break;
-							default:
-								break;
-						}
-					}
-				}.bind(this), function(){
-					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败';
-				});
 			},
 			getUserMsg: function(){
 				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
@@ -167,7 +137,11 @@
 					var data = e.body;
 					if(data.success == true){
 						if(data.code == 1){
-							this.$store.state.account.balance = pro.parseTwoFloat(data.data.balance);
+							console.log(data);
+							this.username = this.userInfo.username;
+							this.isCertification = data.data.isCertification;
+							if(this.isCertification == true) this.username = data.data.username;
+							this.balance = pro.parseTwoFloat(data.data.balance);
 						}
 					}else{
 						switch (data.code){
@@ -188,8 +162,11 @@
 		mounted: function(){
 			//页面高度计算
 			$("#account").css("height",window.screen.height - 20 + "px");
+//			//获取用户账户信息
+//			this.getUserMsg();
 		},
 		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
 			//获取用户账户信息
 			this.getUserMsg();
 		}

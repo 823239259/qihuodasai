@@ -10,11 +10,11 @@
 				<span>我的银行卡</span>
 				<i class="icon_arrow"></i>
 				<!--<span v-if="!bankShow">绑定银行卡</span>-->
-				<span :id="defaultBank.abbreviation">{{!userInfo.bankList ? '绑定银行卡' : defaultBank.card | cardEvent}}</span>
+				<span>{{defaultBank}}</span>
 			</div>
 			<div class="money mt10">
-				<p>余额：{{userInfo.balance}}元</p>
-				<p>累计免提现手续费金额为：<span>{{userInfo.operateMoney}}元</span></p>
+				<p>余额：{{balance}}元</p>
+				<p>累计免提现手续费金额为：<span>{{operateMoney}}元</span></p>
 			</div>
 			<div class="fm_box mt10">
 				<div class="ipt_row">
@@ -60,22 +60,21 @@
 	export default{
 		name:'withdrawal',
 		components: {topbar, back, cs, btn, tipsDialog},
-		filters: {
-			cardEvent: function(e){
-				if(e){
-					return e.substr(0,4) + '***********' + e.substr(-4,4);
-				}
-			}
-		},
 		data(){
 			return {
 				msg: '',
 				eyeShow: false,
+				balance: 0.00,
+				operateMoney: 0.00,
 				money: '',
 				poundage: 0,
 				relmoney: '',
 				pwd: '',
+				defaultBank: '',
+				abbreviation: '',
+				defaultBankCard: '',
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -88,21 +87,6 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
-			},
-			defaultBank: function(){
-				var val = {};
-				if(this.userInfo.bankList){
-					this.bankShow = true;
-					this.userInfo.bankList.forEach(function(o, i){
-						if(o.default == true){
-							val = o;
-						}
-					});
-					return val;
-				}
 			}
 		},
 		watch: {
@@ -174,6 +158,79 @@
 			toMoneyPwd: function(){
 				this.$router.push({path: '/moneyPwd'});
 			},
+			getUserMsg: function(){
+				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
+					headers: {
+						'token':  this.userInfo.token,
+						'secret': this.userInfo.secret
+					},
+					params: {
+						businessType: 4
+					},
+					timeout: 5000
+				}).then(function(e){
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							this.balance = pro.parseTwoFloat(data.data.balance);
+							this.operateMoney = pro.parseTwoFloat(data.data.operateMoney);
+						}
+					}else{
+						switch (data.code){
+							case '3':
+								this.$children[0].isShow = true;
+								this.msg = '用户信息不存在';
+								break;
+							default:
+								break;
+						}
+					}
+				}.bind(this), function(){
+					this.$children[0].isShow = true;
+					this.msg = '服务器连接失败';
+				});
+			},
+			getBindBankList: function(){
+				this.$http.post(this.PATH + '/user/withdraw/bank_list', {emulateJSON: true},{
+					headers: {
+						'token':  this.userInfo.token,
+						'secret': this.userInfo.secret
+					},
+					params: {},
+					timeout: 5000
+				}).then(function(e){
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							if(data.data.length > 0){
+								console.log(data.data);
+								data.data.forEach(function(o, i){
+									if(o.default == true){
+										this.defaultBank = o.card.substr(0,4) + '***********' + o.card.substr(-4,4);
+										this.defaultBankCard = o.card;
+										this.abbreviation = o.abbreviation;
+									}
+								}.bind(this));
+							}else{
+								this.defaultBank = '去绑定';
+							}
+							
+						}
+					}else{
+						switch (data.code){
+							case '3':
+								this.$children[0].isShow = true;
+								this.msg = '用户信息不存在';
+								break;
+							default:
+								break;
+						}
+					}
+				}.bind(this), function(){
+					this.$children[0].isShow = true;
+					this.msg = '服务器连接失败';
+				});
+			},
 			confirmOperate: function(){
 				if(this.money == ''){
 					this.$children[0].isShow = true;
@@ -188,8 +245,8 @@
 							'secret': this.userInfo.secret
 						},
 						params: {
-							bank: this.defaultBank.abbreviation,
-							card: this.defaultBank.card,
+							bank: this.abbreviation,
+							card: this.defaultBankCard,
 							money: this.money,
 							withdrawPwd: this.pwd
 						},
@@ -281,7 +338,13 @@
 			//页面高度计算
 //			$("#withdrawal").css("height", window.screen.height - 20 + 'px');
 		},
-		activated: function(){}
+		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
+			//获取用户账户信息
+			this.getUserMsg();
+			//获取默认银行卡
+			this.getBindBankList();
+		}
 	}
 </script>
 

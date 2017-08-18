@@ -159,8 +159,6 @@ var market = {
 		appendOrderMsg: '',     //委托提示
 		
 		
-		
-		
 		//选择K线时候的值
 		selectTime: 1,
 		//存进入详情页的No
