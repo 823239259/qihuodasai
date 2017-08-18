@@ -242,13 +242,6 @@
 			}
 		},
 		computed:{
-//			marketpriceEvent: function(){
-//				if(this.isShow === true){
-//					return '市价';
-//				}else{
-//					return parseFloat(this.detail.LastQuotation.LastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
-//				}
-//			},
 			forceLine(){
 				return this.$store.state.market.forceLine;
 			},
@@ -393,11 +386,13 @@
 		},
 		watch:{
 			appendOrderMsg: function(n, o){
+				this.$children[7].isShow = true;
 				this.$children[8].isShow = true;
 				this.msg = n.slice(0,-1);
 			},
 			layer: function(n, o){
 				this.$children[7].isShow = true;
+				this.$children[8].isShow = true;
 				this.msg = n.slice(0,-1);
 			},
 			selectId:function(n,o){
@@ -592,6 +587,7 @@
 				var commodityNo = this.detail.CommodityNo;
 				if(this.isShow==true){
 					if(this.$children[2].defaultNum == 0){
+						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
 						this.msg = '手数不能为0';
 					}else{
@@ -619,6 +615,7 @@
 					}
 				}else{
 					if(parseInt(this.tradeNum) == 0 || this.tradeNum == ''){
+						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
 						this.msg = '手数不能为0或空';
 					}else{
@@ -650,6 +647,7 @@
 				var commodityNo = this.detail.CommodityNo;
 				if(this.isShow==true){
 					if(this.$children[2].defaultNum == 0){
+						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
 						this.msg = '手数不能为0';
 					}else{
@@ -677,6 +675,7 @@
 					}
 				}else{
 					if(parseInt(this.tradeNum) == 0 || this.tradeNum == ''){
+						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
 						this.msg = '手数不能为0或空';
 					}else{
