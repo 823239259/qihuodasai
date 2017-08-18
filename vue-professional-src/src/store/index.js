@@ -1504,6 +1504,7 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询账户信息 QryAccount
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
 						
@@ -1650,7 +1651,9 @@ export default new Vuex.Store({
     		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
     		
     		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
-			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+//			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+		
 		},
 		layerOnRtnOrderTraded:function(context,parameters){
 			if(parameters!=null){

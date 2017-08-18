@@ -116,7 +116,7 @@
 				
 				this.dataList = [];
 				this.$store.state.market.queryHisList = [];
-				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 				setTimeout(function(){
 						this.eachData();
 				}.bind(this),1000);
@@ -163,7 +163,7 @@
 		    		
 		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
 		    		this.$store.state.market.queryHisList = [];
-					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
 						this.eachData();
 					}.bind(this),1000);
@@ -184,7 +184,7 @@
 		    		
 		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
 		    		this.$store.state.market.queryHisList = [];
-					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
 						this.eachData();
 					}.bind(this),1000);
@@ -206,7 +206,7 @@
 		    		
 		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
 		    		this.$store.state.market.queryHisList = [];
-					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+this.$store.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
 						this.eachData();
 						}.bind(this),1000);
