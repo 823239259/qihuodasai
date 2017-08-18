@@ -1537,8 +1537,35 @@ export default new Vuex.Store({
 					}else{
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
+						
 						//初始化持仓列表中的浮动盈亏
 						context.dispatch('updateHoldFloatingProfit',parameters);
+						
+						var obj={};
+						obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
+						obj.type=function(){
+							if(parameters.Drection==0){
+								return '多'
+							}else{
+								return '空'
+							}
+						}();
+						obj.num=parameters.HoldNum;
+						obj.price=parameters.HoldAvgPrice.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+						obj.total=0;
+						obj.showbar=false;
+						obj.type_color=function(){
+							if(parameters.Drection==0){
+								return 'red'
+							}else{
+								return 'green'
+							}
+						}();
+						obj.total_color='green';
+						obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
+													+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
+						
+						context.state.market.positionListCont.unshift(obj);
 						
 					}
 					
@@ -1740,7 +1767,6 @@ export default new Vuex.Store({
 				if(e.commodityNocontractNo==parameters.ContractCode){
 					positionListContCurrent = e;
 					positionListContCurrentIndex = i;
-					context.state.market.positionListCont.splice(positionListContCurrentIndex,1,null);
 					isExist = true;
 				}
 			});
