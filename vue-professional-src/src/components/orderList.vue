@@ -130,9 +130,6 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 					};
-					console.log('全部平仓');
-					console.log(JSON.stringify(b));
-					
 					arr.push(b);
 					this.tempText = arr;
 				}
