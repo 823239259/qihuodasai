@@ -204,9 +204,6 @@
 			temp() {
 				return this.$store.state.tempTradeapply;
 			},
-			islogin() {
-				return this.$store.state.account.islogin;
-			},
 			PATH() {
 				return this.$store.getters.PATH
 			},
@@ -300,7 +297,7 @@
 			$('.margin_trade>ul>li:first-child>div>div').addClass('current');
 		},
 		activated: function() {
-			if(this.islogin == false) {
+			if(!localStorage.user) {
 				this.$router.replace({
 					'path': '/login'
 				});

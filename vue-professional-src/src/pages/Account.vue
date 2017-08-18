@@ -98,7 +98,7 @@
 				this.$router.push({path:'/editPhone'});
 			},
 			toidentify: function(){
-				if(this.userInfo.isCertification == true){
+				if(this.isCertification == true){
 					return;
 				}else{
 					this.$router.push({path:'/nameCertification'});

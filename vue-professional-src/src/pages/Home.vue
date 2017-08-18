@@ -24,7 +24,7 @@
 								<li class="fl fontgray">合约名称</li>
 								<li class="fl fontgray">成交量</li>
 								<li class="fl fontgray">最新价</li>
-								<li class="fl fontgray">涨跌幅 <i></i></li>
+								<li class="fl fontgray">涨跌幅 <!--<i></i>--></li>
 							</ol>
 						</li>
 					</ul>
