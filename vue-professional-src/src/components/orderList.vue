@@ -107,21 +107,22 @@
 			closeAllOut:function(){
 				this.$children[0].isshow = true;
 				var arr=[];
-				for(var i in this.positionListCont){
+				for(var i in this.qryHoldTotalArr){
+					console.log(this.qryHoldTotalArr[i]);
 					var buildIndex=0;
 					var drection;
-					if(this.positionListCont[i].Drection==0){
+					if(this.qryHoldTotalArr[i].Drection==0){
 						drection = 1;
-					}else if(this.positionListCont[i].Drection==1){
+					}else if(this.qryHoldTotalArr[i].Drection==1){
 						drection = 0;
 					}
 					var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.positionListCont[i].ExchangeNo,
-								"CommodityNo":this.positionListCont[i].CommodityNo,
-								"ContractNo":this.positionListCont[i].ContractNo,
-								"OrderNum":this.positionListCont[i].num,
+								"ExchangeNo":this.qryHoldTotalArr[i].ExchangeNo,
+								"CommodityNo":this.qryHoldTotalArr[i].CommodityNo,
+								"ContractNo":this.qryHoldTotalArr[i].ContractNo,
+								"OrderNum":this.qryHoldTotalArr[i].HoldNum,
 								"Drection":drection,
 								"PriceType":1,
 								"LimitPrice":0.00,
@@ -131,19 +132,22 @@
 					};
 					console.log('全部平仓');
 					console.log(JSON.stringify(b));
-//					this.$store.state.market.positionListCont.splice(positionCurrent,1);
-//					this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
+					
 					arr.push(b);
 					this.tempText = arr;
-//					this.tradeSocket.send(JSON.stringify(b));
-					
 				}
+				
 			},
 			closeOut:function(obj){
 				var i = 0;
-				var positionCurrent;
+				var positionCurrent=0;
+				var length= this.qryHoldTotalArr.length;
+				var qryHoldTotalArr = this.qryHoldTotalArr;
 				for(positionCurrent in this.positionListCont){
-					if(this.orderListId == this.positionListCont[positionCurrent].commodityNocontractNo){
+					
+					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
+						
+						console.log(qryHoldTotalArr[length-1-positionCurrent].ContractCode);
 						i++;
 						this.$children[1].isshow = true;
 						var buildIndex=0;
@@ -151,18 +155,19 @@
 							buildIndex=0;
 						}
 						var drection;
-						if(this.positionListCont[positionCurrent].Drection==0){
+						if(qryHoldTotalArr[length-1-positionCurrent].Drection==0){
 							drection = 1;
-						}else if(this.positionListCont[positionCurrent].Drection==1){
+						}else if(qryHoldTotalArr[length-1-positionCurrent].Drection==1){
 							drection = 0;
 						}
+						
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.positionListCont[positionCurrent].ExchangeNo,
-								"CommodityNo":this.positionListCont[positionCurrent].CommodityNo,
-								"ContractNo":this.positionListCont[positionCurrent].ContractNo,
-								"OrderNum":this.positionListCont[positionCurrent].num,
+								"ExchangeNo":qryHoldTotalArr[length-1-positionCurrent].ExchangeNo,
+								"CommodityNo":qryHoldTotalArr[length-1-positionCurrent].CommodityNo,
+								"ContractNo":qryHoldTotalArr[length-1-positionCurrent].ContractNo,
+								"OrderNum": qryHoldTotalArr[length-1-positionCurrent].HoldNum,
 								"Drection":drection,
 								"PriceType":1,
 								"LimitPrice":0.00,
@@ -170,17 +175,13 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 						};
-//						this.$store.state.market.positionListCont.splice(positionCurrent,1);
-//						
-//						this.$store.state.market.qryHoldTotalArr.splice(this.qryHoldTotalArr.length-1-positionCurrent,1);
 						
 						this.tempText = b;
-						console.log('平仓');
-						console.log(JSON.stringify(b));
 						return false;
-//						this.tradeSocket.send(JSON.stringify(b));
+						
 					}
 				}
+				
 				if(i < 1){
 					this.$children[4].isShow = true;
 					this.msg = '请选择一条数据';
