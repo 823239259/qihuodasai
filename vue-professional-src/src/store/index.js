@@ -1488,7 +1488,7 @@ export default new Vuex.Store({
 			switch (data.Method){
 				case 'OnRtnHeartBeat':
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
-					console.log('lastHeartBeatTimestamp:'+context.state.market.HeartBeat.lastHeartBeatTimestamp);
+//					console.log('lastHeartBeatTimestamp:'+context.state.market.HeartBeat.lastHeartBeatTimestamp);
 					break;
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
