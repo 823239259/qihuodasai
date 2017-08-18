@@ -231,7 +231,8 @@
 				orderListId: '',
 				buyText:{},
 				obj: [],
-				numReg: /^[0-9]*$/
+				numReg: /^[0-9]*$/,
+				priceReg: /^(([1-9]\d*)|0)(\.\d{1,2})?$/
 			}
 		},
 		filters:{
@@ -422,7 +423,7 @@
 				}
 			},
 			tradePrices: function(n, o){
-				this.tradePrices = parseFloat(n);
+				this.tradePrices = Number(n);
 				if(n < 0 || n == ''){
 					this.tradePrices = 0;
 				};
