@@ -103,7 +103,7 @@
 							this.$router.push({
 								path: '/login'
 							});
-							return
+							return;
 						}
 						this.$router.push({
 							path: '/account'

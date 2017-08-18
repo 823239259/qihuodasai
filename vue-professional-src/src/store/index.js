@@ -160,6 +160,7 @@ var market = {
 		
 		
 		
+		
 		//选择K线时候的值
 		selectTime: 1,
 		//存进入详情页的No
@@ -1646,9 +1647,8 @@ export default new Vuex.Store({
 			if(parameters!=null){
 //				console.log(parameters);
 //				context.state.market.qryHoldTotalArr
-				
 				if(parameters.OrderStatus==5){
-					context.state.market.layer=parameters.StatusMsg+Math.floor(Math.random()*10);
+					context.state.market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
 //					console.log(parameters.StatusMsg);
 					return;
 				}

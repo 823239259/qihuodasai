@@ -15,7 +15,7 @@
 			if(this.isShow == true){
 				setTimeout(function(){
 					this.isShow = false;
-				}.bind(this), 2000);
+				}.bind(this), 1000);
 			}
 		}
 	}

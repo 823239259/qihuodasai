@@ -121,7 +121,7 @@
 									}.bind(this),100);
 								}else{
 									this.$children[0].isShow = true;
-									this.msg = '您的账户或密码输入错误';
+									this.msg = parameters.Message;
 								}
 								break;
 							default:
