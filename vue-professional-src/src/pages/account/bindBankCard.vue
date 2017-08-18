@@ -7,7 +7,7 @@
 		<div class="page_cont">
 			<div class="bank_box">
 				<ul>
-					<template v-for="key in userInfo.bankList">
+					<template v-for="key in bindBankList">
 						<li :class="{current: key.default == true}">
 							<div class="fl">
 								<p class="white">{{key.bankName}}</p>
@@ -92,7 +92,8 @@
 				address: '',
 				card: '',
 				bankReg: /^(\d{16}|\d{19})$/,
-				nameReg: /^([\u4e00-\u9fa5]){2,7}$/
+				nameReg: /^([\u4e00-\u9fa5]){2,7}$/,
+				userInfo: ''
 			}
 		},
 		watch: {
@@ -115,9 +116,6 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
 			}
 		},
 		methods: {
@@ -140,13 +138,6 @@
 						if(data.code == 1){
 							this.$children[0].isShow = true;
 							this.msg = '设置成功';
-							this.userInfo.bankList.forEach(function(o, i){
-								if(o.bankId == bankId){
-									o.default = true;
-								}else{
-									o.default = false
-								}
-							});
 						}
 					}else{
 						switch (data.code){
@@ -168,7 +159,7 @@
 				});
 			},
 			deleteBank: function(e){
-//				if(!$(e.currentTarget).parents("li").hasClass("current")){
+				if(!$(e.currentTarget).parents("li").hasClass("current")){
 					var bankId = $(e.currentTarget).attr("id");
 					if(bankId){
 						this.$http.post(this.PATH + '/user/withdraw/del_bank', {emulateJSON: true},{
@@ -186,6 +177,7 @@
 								if(data.code == 1){
 									this.$children[0].isShow = true;
 									this.msg = '删除成功';
+									this.bindBankList = [];
 									//重接拉取已绑定银行卡数据
 									this.getBindBankList();
 								}
@@ -220,10 +212,10 @@
 							this.msg = '服务器连接失败';
 						});
 					}
-//				}else{
-//					this.$children[0].isShow = true;
-//					this.msg = '1246';
-//				}
+				}else{
+					this.$children[0].isShow = true;
+					this.msg = '此银行正在提现中，不可删除';
+				}
 				
 			},
 			addBankCard: function(){
@@ -271,6 +263,7 @@
 							if(data.code == 1){
 								this.$children[0].isShow = true;
 								this.msg = '添加成功';
+								this.bindBankList = [];
 								//重接拉取已绑定银行卡数据
 								this.getBindBankList();
 								this.username = '';
@@ -323,16 +316,13 @@
 				}).then(function(e){
 					var data = e.body;
 					if(data.success == true){
-						if(data.code == 1){
-							var len = 0;
+						console.log(data);
+						if(data.data.length > 0){
 							data.data.forEach(function(o, i){
-								if(o.default == true) len += 1;
-							});
-							if(len == 0){
-								data.data[0].default = true;
-							}
-							this.$store.state.account.bankList = data.data;
+								this.bindBankList.push(o);
+							}.bind(this));
 						}
+						
 					}else{
 						switch (data.code){
 							case '3':
@@ -378,11 +368,13 @@
 		},
 		mounted: function(){},
 		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
 			//获取支持提现的银行卡
 			this.getBankList();
 			//获取省市数据
 			this.provinceList = cityData;
 			//获取已绑定的银行卡
+			this.bindBankList = [];
 			this.getBindBankList();
 		}
 		

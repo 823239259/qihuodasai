@@ -7,7 +7,7 @@
 		<div class="page_cont">
 			<div class="ipt_row">
 				<label for="phone">手机号</label>
-				<input type="number" id="phone" placeholder="请输入您的手机号" disabled v-model="userInfo.phone" />
+				<input type="number" id="phone" placeholder="请输入您的手机号" disabled v-model="userInfo.username" />
 			</div>
 			<div class="ipt_row">
 				<label for="code">验证码</label>
@@ -49,9 +49,6 @@
 				}else{
 					return false
 				}
-			},
-			userInfo: function(){
-				return this.$store.state.account;
 			}
 		},
 		data(){
@@ -62,7 +59,8 @@
 				info:'获取验证码',
 				pwd: '',
 				newPwd: '',
-				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/
+				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				userInfo: ''
 			}
 		},
 		methods: {
@@ -85,7 +83,7 @@
 						'secret': this.userInfo.secret
 					},
 					params: {
-						mobile: this.userInfo.phone,
+						mobile: this.userInfo.username,
 						type: 2
 					},
 					timeout: 5000
@@ -202,7 +200,9 @@
 		mounted: function(){
 			$("#editPwd").css("height", window.screen.height - 20 + 'px');
 		},
-		activated: function(){}
+		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
+		}
 	}
 </script>
 

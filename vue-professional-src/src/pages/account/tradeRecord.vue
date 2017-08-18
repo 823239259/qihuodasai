@@ -116,7 +116,8 @@
 		data(){
 			return {
 				emptyShow: false,
-				tradeList: ''
+				tradeList: '',
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -125,9 +126,6 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
 			}
 		},
 		methods: {
@@ -176,6 +174,7 @@
 			$(".page_cont").height(h);
 		},
 		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
 			//获取操盘记录列表
 			this.getOperateDetails();
 		}

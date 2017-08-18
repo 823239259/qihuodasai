@@ -184,6 +184,7 @@
 				tradeDetails: '',
 				getFstTradeDetail: '',
 				tradeDetailsId: '',
+				userInfo: ''
 //				endParitie: ''
 			}
 		},
@@ -370,9 +371,6 @@
 				} else {
 					return false
 				}
-			},
-			userInfo: function(){
-				return this.$store.state.account;
 			}
 		},
 		methods: {
@@ -602,6 +600,7 @@
 			}
 		},
 		activated: function() {
+			this.userInfo = JSON.parse(localStorage.user);
 			this.isShow = true;
 			//获取操盘明细
 			this.getTradeDetails();

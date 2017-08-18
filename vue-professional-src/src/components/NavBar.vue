@@ -99,7 +99,7 @@
 						});
 						break;
 					case '我的':
-						if(!this.$store.state.account.islogin) {
+						if(!localStorage.user) {
 							this.$router.push({
 								path: '/login'
 							});

@@ -31,7 +31,8 @@
 			return {
 				msg: '',
 				name: '',
-				idcard: ''
+				idcard: '',
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -40,9 +41,6 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
 			}
 		},
 		methods: {
@@ -75,8 +73,8 @@
 							if(data.code == 1){
 								this.$children[0].isShow = true;
 								this.msg = '实名认证成功';
-								this.$store.state.account.isCertification = true;
-								this.$store.state.account.username = this.name;
+//								this.$store.state.account.isCertification = true;
+//								this.$store.state.account.username = this.name;
 								this.name = '';
 								this.idcard = '';
 								this.$router.replace({path: '/account'});
@@ -117,6 +115,9 @@
 		mounted: function(){
 			$("#nameCertification").css("height", window.screen.height - 20 + 'px');
 		},
+		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
+		}
 	}
 </script>
 

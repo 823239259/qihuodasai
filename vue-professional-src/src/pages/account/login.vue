@@ -96,18 +96,16 @@
 							if(data.code == 1){
 								this.$children[0].isShow = true;
 								this.msg = '登录成功';
-								this.$store.state.account.islogin = true;
-								this.$store.state.account.phone = this.phone;
-								this.$store.state.account.password = this.pwd;
-								this.$store.state.account.token = data.data.token;
-								this.$store.state.account.secret = data.data.secret;
+//								this.$store.state.account.islogin = true;
+//								this.$store.state.account.phone = this.phone;
+//								this.$store.state.account.password = this.pwd;
+//								this.$store.state.account.token = data.data.token;
+//								this.$store.state.account.secret = data.data.secret;
 								this.token = data.data.token;
 								this.secret = data.data.secret;
 								var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.$router.push({path: '/account'});
-								//获取用户信息
-								this.getUserMsg();
 							}
 						}else{
 							switch (data.code){
@@ -132,43 +130,43 @@
 			toFindPwd: function(){
 				this.$router.push({path: '/findPwd'});
 			},
-			getUserMsg: function(){
-				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
-					headers: {
-						'token':  this.token,
-						'secret': this.secret
-					},
-					params: {
-						businessType: 4
-					},
-					timeout: 5000
-				}).then(function(e){
-					var data = e.body;
-					if(data.success == true){
-						if(data.code == 1){
-							var info = data.data
-							if(info.isCertification == true){
-								this.$store.state.account.isCertification = true;
-								this.$store.state.account.username = info.username;
-							}
-							this.$store.state.account.balance = pro.parseTwoFloat(info.balance);
-							this.$store.state.account.operateMoney = pro.parseTwoFloat(info.operateMoney);
-						}
-					}else{
-						switch (data.code){
-							case '3':
-								this.$children[0].isShow = true;
-								this.msg = '用户信息不存在';
-								break;
-							default:
-								break;
-						}
-					}
-				}.bind(this), function(){
-					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败';
-				});
-			}
+//			getUserMsg: function(){
+//				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
+//					headers: {
+//						'token':  this.token,
+//						'secret': this.secret
+//					},
+//					params: {
+//						businessType: 4
+//					},
+//					timeout: 5000
+//				}).then(function(e){
+//					var data = e.body;
+//					if(data.success == true){
+//						if(data.code == 1){
+//							var info = data.data
+//							if(info.isCertification == true){
+//								this.$store.state.account.isCertification = true;
+//								this.$store.state.account.username = info.username;
+//							}
+//							this.$store.state.account.balance = pro.parseTwoFloat(info.balance);
+//							this.$store.state.account.operateMoney = pro.parseTwoFloat(info.operateMoney);
+//						}
+//					}else{
+//						switch (data.code){
+//							case '3':
+//								this.$children[0].isShow = true;
+//								this.msg = '用户信息不存在';
+//								break;
+//							default:
+//								break;
+//						}
+//					}
+//				}.bind(this), function(){
+//					this.$children[0].isShow = true;
+//					this.msg = '服务器连接失败';
+//				});
+//			}
 		},
 		mounted: function(){
 			//页面高度计算

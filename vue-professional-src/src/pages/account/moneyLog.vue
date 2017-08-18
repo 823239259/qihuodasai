@@ -86,7 +86,8 @@
 				incomeNum: 0,
 				outlayNum: 0,
 				incomeMoney: 0,
-				outlayMoney: 0
+				outlayMoney: 0,
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -95,10 +96,7 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
-			},
+			}
 		},
 		methods: {
 			getMoneyDetails: function(){
@@ -145,6 +143,7 @@
 			$(".log_list").css("height", window.screen.height - 20 - h + 'px');
 		},
 		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
 			//获取资金明细
 			this.getMoneyDetails();
 		}

@@ -7,7 +7,7 @@
 		<div class="page_cont">
 			<div class="money_box">
 				<span class="blue">账户余额：</span>
-				<span class="yellow">{{userInfo.balance}}元</span>
+				<span class="yellow">{{balance}}元</span>
 				<i class="icon_arrow"></i>
 				<span class="white fr" @tap="toRecharge">去充值</span>
 			</div>
@@ -41,15 +41,18 @@
 	import cs from '../../components/customerService.vue'
 	import btn from '../../components/bigBtn.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
+	import pro from '../../assets/common.js'
 	export default{
 		name:'addMoney',
 		components: {topbar, back, cs, btn, tipsDialog},
 		data(){
 			return {
 				msg: '',
+				balance: 0.00,
 				money: '',
 				rate: '',
-				moneyRate: '0.00'
+				moneyRate: '0.00',
+				userInfo: ''
 			}
 		},
 		computed: {
@@ -62,10 +65,7 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			userInfo: function(){
-				return this.$store.state.account;
-			},
+			}
 		},
 		methods: {
 			toRecharge: function(){
@@ -78,7 +78,7 @@
 				}else if(this.money < 500) {
 					this.$children[0].isShow = true;
 					this.msg = '追加金额最低500元！！';
-    			}else if(Number(this.userInfo.balance) < Number(this.money)) {
+    			}else if(Number(this.balance) < Number(this.money)) {
     				this.$children[0].isShow = true;
 					this.msg = '余额不足，请立即充值!';
     			}else{
@@ -98,7 +98,7 @@
 							if(data.code == 1){
 								this.$children[0].isShow = true;
 								this.msg = '追加成功';
-								this.$store.state.account.balance = this.userInfo.balance - this.money;
+								this.$store.state.account.balance = this.balance - this.money;
 								this.money = '';
 								this.moneyRate = '0.00';
 								this.$router.push({
@@ -167,8 +167,8 @@
 					var data = e.body;
 					if(data.success == true){
 						if(data.code == 1){
-							var info = data.data;
-							this.rate = info.rate;
+							this.balance = pro.parseTwoFloat(data.data.balance);
+							this.rate = data.data.rate;
 						}
 					}else{
 						switch (data.code){
@@ -189,10 +189,9 @@
 				if(this.money){
 					this.moneyRate = (this.money/this.rate).toFixed(2);
 					this.money = parseInt(this.money);
-					if(Number(this.money) > Number(this.userInfo.balance)){
+					if(Number(this.money) > Number(this.balance)){
 						this.$children[0].isShow = true;
 						this.msg = '余额不足！';
-//						this.money = this.userInfo.balance;
 					}
 				}else{
 					this.moneyRate = '0.00';
@@ -204,6 +203,7 @@
 			$("#addMoney").css("height", window.screen.height - 20 + 'px');
 		},
 		activated: function(){
+			this.userInfo = JSON.parse(localStorage.user);
 			//获取余额、汇率等
 			this.getUserMsg();
 		}
