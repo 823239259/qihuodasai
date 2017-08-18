@@ -1672,9 +1672,9 @@ export default new Vuex.Store({
 				var OrderID = parameters.OrderID;
 				
 				if(parameters.OrderStatus<4){
-					context.state.market.appendOrderMsg='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.floor(Math.random()*10);
+					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.floor(Math.random()*10);
 				}else{
-					context.state.market.appendOrderMsg='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.floor(Math.random()*10);
+					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.floor(Math.random()*10);
 				}
 				
 			}
@@ -1704,12 +1704,12 @@ export default new Vuex.Store({
 						=parameters.OrderPrice;
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						=parameters.OrderNum;	
-						
 				}
 			}else{
 				if(isExist==true){
 					context.state.market.orderListCont.splice(index,1);
 					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
+					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】'
 				}
 			}
 		},
