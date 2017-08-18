@@ -37,7 +37,7 @@
 		},
 		watch: {
 			defaultNum: function(n,o){
-				this.defaultNum = parseFloat(n);
+				this.defaultNum = parseInt(n);
 				if(n < 1 || n == ''){
 					this.defaultNum = 0;
 				}

@@ -387,8 +387,9 @@
 		},
 		watch:{
 			tradeNum: function(n, o){
-				if(this.numReg.test(n) == false || n < 0){
-					return 0;
+				this.tradeNum = parseInt(n);
+				if(this.numReg.test(n) == false || n < 0 || n == ''){
+					this.tradeNum = 0;
 				};
 			},
 			appendOrderMsg: function(n, o){
@@ -421,12 +422,12 @@
 				}
 			},
 			tradePrices: function(n, o){
-				if(n.length<1){
-					this.marketprice = '';
-				}else{
-					if(this.isShow == false){
-						this.marketprice = n;
-					}
+				this.tradePrices = parseFloat(n);
+				if(n < 0 || n == ''){
+					this.tradePrices = 0;
+				};
+				if(this.isShow == false){
+					this.marketprice = n;
 				}
 			},
 			OnRspOrderInsertEntrustCont:function(n,o){
