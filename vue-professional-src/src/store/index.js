@@ -1738,6 +1738,7 @@ export default new Vuex.Store({
 				if(e.commodityNocontractNo==parameters.ContractCode){
 					positionListContCurrent = e;
 					positionListContCurrentIndex = i;
+					context.state.market.positionListCont.splice(positionListContCurrentIndex,1,null);
 					isExist = true;
 				}
 			});
@@ -1775,6 +1776,7 @@ export default new Vuex.Store({
 			
 			if(isExist==true){
 					if(parameters.HoldNum!=0){
+						
 						positionListContCurrent.num=parameters.HoldNum;
 						if(parameters.Drection==0){
 							 positionListContCurrent.type ='多';
@@ -1787,11 +1789,14 @@ export default new Vuex.Store({
 						
 						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice)
 															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+															
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
 						
-						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
-						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].Drection = parameters.Drection;
-						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].OpenAvgPrice = parameters.OpenAvgPrice;
+//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
+//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].Drection = parameters.Drection;
+//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].OpenAvgPrice = parameters.OpenAvgPrice;
+						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
+					
 					}else{
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1);
 						context.state.market.qryHoldTotalArr.splice(context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);

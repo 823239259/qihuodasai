@@ -93,6 +93,7 @@
 				return this.$store.state.market.qryHoldTotalArr;
 			}
 		},
+		
 		methods: {
 			listTap: function(obj){
 				if(!$(obj.currentTarget).hasClass("current")){
