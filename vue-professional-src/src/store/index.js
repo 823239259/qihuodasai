@@ -1704,12 +1704,12 @@ export default new Vuex.Store({
 						=parameters.OrderPrice;
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						=parameters.OrderNum;	
-						
 				}
 			}else{
 				if(isExist==true){
 					context.state.market.orderListCont.splice(index,1);
 					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
+					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】'
 				}
 			}
 		},
