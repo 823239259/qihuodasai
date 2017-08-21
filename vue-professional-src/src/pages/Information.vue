@@ -65,7 +65,8 @@
 					<li class="lists">
 						<div>
 							<span id="time" class="fontgray">
-								{{key.localDateTime | getTime('HH:mm')}}
+								<!--{{key.localDateTime | getTime('HH:mm')}}-->
+								{{key.createTime | getTime('HH:mm')}}
 							</span>
 							<img :src="key.flagUrl" />
 							<span class="state fontgray">
@@ -137,39 +138,42 @@
 				}
 			},
 			getTime: function(e, format) {
-				//				var format = function(e, format) {
-				var len = e.toString().length;
-				var t;
-				if(len > 10){
-					t = new Date(e);
-				}else{
-					t = new Date(e * 1000);
-				}
-				var tf = function(i) {
-					return(i < 10 ? '0' : '') + i
-				};
-				return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function(a) {
-					switch(a) {
-						case 'yyyy':
-							return tf(t.getFullYear());
-							break;
-						case 'MM':
-							return tf(t.getMonth() + 1);
-							break;
-						case 'mm':
-							return tf(t.getMinutes());
-							break;
-						case 'dd':
-							return tf(t.getDate());
-							break;
-						case 'HH':
-							return tf(t.getHours());
-							break;
-						case 'ss':
-							return tf(t.getSeconds());
-							break;
+				//var format = function(e, format) {
+				if(e){
+					var len = e.toString().length;
+					var t;
+					if(len > 10){
+						t = new Date(e);
+					}else{
+						t = new Date(e * 1000);
+					}
+					var tf = function(i) {
+						return(i < 10 ? '0' : '') + i
 					};
-				});
+					return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function(a) {
+						switch(a) {
+							case 'yyyy':
+								return tf(t.getFullYear());
+								break;
+							case 'MM':
+								return tf(t.getMonth() + 1);
+								break;
+							case 'mm':
+								return tf(t.getMinutes());
+								break;
+							case 'dd':
+								return tf(t.getDate());
+								break;
+							case 'HH':
+								return tf(t.getHours());
+								break;
+							case 'ss':
+								return tf(t.getSeconds());
+								break;
+						};
+					});
+				}
+				
 				//				};
 			}
 		},
@@ -226,7 +230,7 @@
 					}
 
 				).then(function(e) {
-					//					console.log(e.body.data.data);
+					console.log(e.body.data.data);
 					var arr1 = [];
 					var arr2 = e.body.data.data;
 //					arr2.forEach(function(e){
@@ -847,7 +851,7 @@
 	
 	.lists>p {
 		line-height: 40px;
-		padding-left: 3%;
+		padding: 0 15px;
 		font-size: 16px;
 		font-weight: 200;
 	}
@@ -979,7 +983,7 @@
 		}
 		.lists>p {
 			line-height: 40px*@ip5;
-			padding-left: 3%;
+			padding: 0 15px*@ip5;
 			font-size: 16px*@ip5;
 			font-weight: 200;
 		}
@@ -1091,7 +1095,7 @@
 		}
 		.lists>p {
 			line-height: 40px*@ip6;
-			padding-left: 3%;
+			padding: 0 15px*@ip6;
 			font-size: 16px*@ip6;
 			font-weight: 200;
 		}
