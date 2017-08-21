@@ -181,37 +181,38 @@
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
 			//初始化盘口
-			this.defaultParameters.ChangeValue = this.templateList[this.Parameters.CommodityNo].LastQuotation.ChangeValue;
-			this.defaultParameters.ChangeRate = this.templateList[this.Parameters.CommodityNo].LastQuotation.ChangeRate;
-			this.defaultParameters.TotalVolume = this.templateList[this.Parameters.CommodityNo].LastQuotation.TotalVolume;
-			this.defaultParameters.Position = this.templateList[this.Parameters.CommodityNo].LastQuotation.Position;
-			this.defaultParameters.PreSettlePrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.PreSettlePrice;
-			this.defaultParameters.LastPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.LastPrice;
-			this.defaultParameters.OpenPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.OpenPrice;
-			this.defaultParameters.HighPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.HighPrice;
-			this.defaultParameters.LowPrice = this.templateList[this.Parameters.CommodityNo].LastQuotation.LowPrice;
-			this.defaultParameters.AskPrice5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice5;
-			this.defaultParameters.AskPrice4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice4;
-			this.defaultParameters.AskPrice3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice3;
-			this.defaultParameters.AskPrice2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice2;
-			this.defaultParameters.AskPrice1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskPrice1;
-			this.defaultParameters.BidPrice1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice1;
-			this.defaultParameters.BidPrice2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice2;
-			this.defaultParameters.BidPrice3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice3;
-			this.defaultParameters.BidPrice4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice4;
-			this.defaultParameters.BidPrice5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidPrice5;
+			console.log(this.templateList[this.Parameters.CommodityNo].ChangeValue);
+			this.defaultParameters.ChangeValue = this.templateList[this.Parameters.CommodityNo].ChangeValue;
+			this.defaultParameters.ChangeRate = this.templateList[this.Parameters.CommodityNo].ChangeRate;
+			this.defaultParameters.TotalVolume = this.templateList[this.Parameters.CommodityNo].TotalVolume;
+			this.defaultParameters.Position = this.templateList[this.Parameters.CommodityNo].Position;
+			this.defaultParameters.PreSettlePrice = this.templateList[this.Parameters.CommodityNo].PreSettlePrice;
+			this.defaultParameters.LastPrice = this.templateList[this.Parameters.CommodityNo].LastPrice;
+			this.defaultParameters.OpenPrice = this.templateList[this.Parameters.CommodityNo].OpenPrice;
+			this.defaultParameters.HighPrice = this.templateList[this.Parameters.CommodityNo].HighPrice;
+			this.defaultParameters.LowPrice = this.templateList[this.Parameters.CommodityNo].LowPrice;
+			this.defaultParameters.AskPrice5 = this.templateList[this.Parameters.CommodityNo].AskPrice5;
+			this.defaultParameters.AskPrice4 = this.templateList[this.Parameters.CommodityNo].AskPrice4;
+			this.defaultParameters.AskPrice3 = this.templateList[this.Parameters.CommodityNo].AskPrice3;
+			this.defaultParameters.AskPrice2 = this.templateList[this.Parameters.CommodityNo].AskPrice2;
+			this.defaultParameters.AskPrice1 = this.templateList[this.Parameters.CommodityNo].AskPrice1;
+			this.defaultParameters.BidPrice1 = this.templateList[this.Parameters.CommodityNo].BidPrice1;
+			this.defaultParameters.BidPrice2 = this.templateList[this.Parameters.CommodityNo].BidPrice2;
+			this.defaultParameters.BidPrice3 = this.templateList[this.Parameters.CommodityNo].BidPrice3;
+			this.defaultParameters.BidPrice4 = this.templateList[this.Parameters.CommodityNo].BidPrice4;
+			this.defaultParameters.BidPrice5 = this.templateList[this.Parameters.CommodityNo].BidPrice5;
 			
-			this.defaultParameters.AskQty5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty5;
-			this.defaultParameters.AskQty4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty4;
-			this.defaultParameters.AskQty3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty3;
-			this.defaultParameters.AskQty2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty2;
-			this.defaultParameters.AskQty1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.AskQty1;
+			this.defaultParameters.AskQty5 = this.templateList[this.Parameters.CommodityNo].AskQty5;
+			this.defaultParameters.AskQty4 = this.templateList[this.Parameters.CommodityNo].AskQty4;
+			this.defaultParameters.AskQty3 = this.templateList[this.Parameters.CommodityNo].AskQty3;
+			this.defaultParameters.AskQty2 = this.templateList[this.Parameters.CommodityNo].AskQty2;
+			this.defaultParameters.AskQty1 = this.templateList[this.Parameters.CommodityNo].AskQty1;
 			
-			this.defaultParameters.BidQty5 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty5;
-			this.defaultParameters.BidQty4 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty4;
-			this.defaultParameters.BidQty3 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty3;
-			this.defaultParameters.BidQty2 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty2;
-			this.defaultParameters.BidQty1 = this.templateList[this.Parameters.CommodityNo].LastQuotation.BidQty1;
+			this.defaultParameters.BidQty5 = this.templateList[this.Parameters.CommodityNo].BidQty5;
+			this.defaultParameters.BidQty4 = this.templateList[this.Parameters.CommodityNo].BidQty4;
+			this.defaultParameters.BidQty3 = this.templateList[this.Parameters.CommodityNo].BidQty3;
+			this.defaultParameters.BidQty2 = this.templateList[this.Parameters.CommodityNo].BidQty2;
+			this.defaultParameters.BidQty1 = this.templateList[this.Parameters.CommodityNo].BidQty1;
 			
 		},
 		computed:{
