@@ -2004,8 +2004,6 @@ export default new Vuex.Store({
 									context.commit('drawlight', 'lightcharts');
 								}
 								if(context.state.isshow.isklineshow == true) {
-									console.log(JSON.parse(evt.data).Parameters);
-//									console.log(JSON.parse(evt.data).Parameters); //TotalVolume
 									var arr = [];
 									arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
 									arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
