@@ -1,7 +1,7 @@
 <template>
 	<div id="tradebottom">
 		<div>
-			<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" :objstr='objst'></alert>
+			<alert title="确认下单" line1="" :line2="insertOrder" :objstr='objst'></alert>
 			<div class="toppart">
 				<div class="fl">
 					<ul>
@@ -58,6 +58,7 @@
 				<chartBtn type="buy" class="fl" @tap.native='buyOrder'></chartBtn>
 				<chartBtn type="sell" class="fr" @tap.native='sellOrder'></chartBtn>
 			</div>
+			<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
 		</div>
 	</div>
 </template>
@@ -116,50 +117,58 @@
 				this.lotnum--;
 			},
 			buyOrder:function(){
-				this.$children[0].isshow = true;
-				var buildIndex = 0;
-				if(buildIndex > 100){
-					buildIndex = 0;
-				}
-				var b ={
-					"Method":'InsertOrder',
-					"Parameters": {
-						"ExchangeNo": this.detail.LastQuotation.ExchangeNo,
-						"CommodityNo": this.detail.LastQuotation.CommodityNo,
-						"ContractNo": this.detail.LastQuotation.ContractNo,
-						"OrderNum": this.lotnum,
-						"Drection": 0,
-						"PriceType": 1,
-						"LimitPrice": 0.00,
-						"TriggerPrice": 0,
-						"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
+					this.$children[3].isshow = true;
+				}else{
+					this.$children[0].isshow = true;
+					var buildIndex = 0;
+					if(buildIndex > 100){
+						buildIndex = 0;
 					}
-				};
-				this.buyText = b;
-//				this.tradeSocket.send(JSON.stringify(b));			
+					var b ={
+						"Method":'InsertOrder',
+						"Parameters": {
+							"ExchangeNo": this.detail.LastQuotation.ExchangeNo,
+							"CommodityNo": this.detail.LastQuotation.CommodityNo,
+							"ContractNo": this.detail.LastQuotation.ContractNo,
+							"OrderNum": this.lotnum,
+							"Drection": 0,
+							"PriceType": 1,
+							"LimitPrice": 0.00,
+							"TriggerPrice": 0,
+							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.buyText = b;
+//					this.tradeSocket.send(JSON.stringify(b));
+				}
 			},
 			sellOrder:function(){
-				this.$children[0].isshow = true;
-				var buildIndex=0;
-				if(buildIndex>100){
-					buildIndex=0;
-				}
-				var b={
-					"Method":'InsertOrder',
-					"Parameters":{
-						"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
-						"CommodityNo":this.detail.LastQuotation.CommodityNo,
-						"ContractNo":this.detail.LastQuotation.ContractNo,
-						"OrderNum": this.lotnum,
-						"Drection":1,
-						"PriceType":1,
-						"LimitPrice":0.00,
-						"TriggerPrice":0,
-						"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
+					this.$children[3].isshow = true;
+				}else{
+					this.$children[0].isshow = true;
+					var buildIndex=0;
+					if(buildIndex>100){
+						buildIndex=0;
 					}
-				};
-				this.buyText = b;
-//				this.tradeSocket.send(JSON.stringify(b));
+					var b={
+						"Method":'InsertOrder',
+						"Parameters":{
+							"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
+							"CommodityNo":this.detail.LastQuotation.CommodityNo,
+							"ContractNo":this.detail.LastQuotation.ContractNo,
+							"OrderNum": this.lotnum,
+							"Drection":1,
+							"PriceType":1,
+							"LimitPrice":0.00,
+							"TriggerPrice":0,
+							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.buyText = b;
+//					this.tradeSocket.send(JSON.stringify(b));
+				}
 			}
 		},
 		computed:{

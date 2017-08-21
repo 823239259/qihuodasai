@@ -33,6 +33,7 @@
 		},
 		methods: {
 			toTradeLogin: function(){
+				localStorage.removeItem("tradeUser");
 				this.open = false;
 				this.shadeShow = false;
 				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
