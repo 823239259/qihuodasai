@@ -61,13 +61,15 @@ var market = {
 			intervalCheckTime : 8000  // 间隔检查时间：8秒
 		},
 		quoteConfig:{
-			url_real : "ws://192.168.0.213:9002", 
+			url_real: "ws://192.168.0.213:9002",  //测试地址
+//			url_real: "ws://quote.vs.com:9002",   //正式地址
 			userName:"13677622344",
 			passWord:"a123456"
 		},
 		tradeConfig:{
 			version : "3.3",	// 版本
-			url_real : "ws://192.168.0.213:6102", // 实盘地址
+			url_real : "ws://192.168.0.213:6102",   //测试地址
+//			url_real : "ws://139.196.215.169:6101",  //正式地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
 //			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)

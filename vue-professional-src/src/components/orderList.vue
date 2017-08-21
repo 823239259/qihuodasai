@@ -237,7 +237,7 @@
 						width: 50px;
 					}
 					&:nth-child(4){
-						width: 50px;
+						width: 65px;
 					}
 					&:nth-child(5){
 						width: 130px;
@@ -310,7 +310,7 @@
 						width: 50px*@ip6;
 					}
 					&:nth-child(4){
-						width: 50px*@ip6;
+						width: 65px*@ip6;
 					}
 					&:nth-child(5){
 						width: 130px*@ip6;
@@ -348,7 +348,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 530px*@ip5;
+				width: 540px*@ip5;
 				background: @deepblue;
 				padding-left: 15px*@ip5;
 				border-top: 1px solid @black;
@@ -383,7 +383,7 @@
 						width: 60px*@ip5;
 					}
 					&:nth-child(4){
-						width: 60px*@ip5;
+						width: 70px*@ip5;
 					}
 					&:nth-child(5){
 						width: 150px*@ip5;

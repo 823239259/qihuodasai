@@ -1476,7 +1476,7 @@
 					}
 					.ipt{
 						float: left;
-						width: 85px*@ip6;
+						width: 80px*@ip6;
 						height: 45px*@ip6;
 						text-align: left;
 						padding: 5px*@ip6;
@@ -1598,7 +1598,7 @@
 					height: 330px*@ip6;
 					overflow: scroll;
 					li{
-						width: 730px*@ip6;
+						width: 750px*@ip6;
 						padding-left: 15px*@ip6;
 						span{
 							&:nth-child(1){
@@ -1636,7 +1636,7 @@
 					height: 330px*@ip6;
 					overflow-x: scroll;
 					li{
-						width: 560px*@ip6;
+						width: 580px*@ip6;
 						padding-left: 15px*@ip6;
 						span{
 							&:nth-child(1){
