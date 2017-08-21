@@ -181,7 +181,6 @@
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
 			//初始化盘口
-			console.log(this.templateList[this.Parameters.CommodityNo].ChangeValue);
 			this.defaultParameters.ChangeValue = this.templateList[this.Parameters.CommodityNo].ChangeValue;
 			this.defaultParameters.ChangeRate = this.templateList[this.Parameters.CommodityNo].ChangeRate;
 			this.defaultParameters.TotalVolume = this.templateList[this.Parameters.CommodityNo].TotalVolume;
