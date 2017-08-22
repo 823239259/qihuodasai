@@ -181,6 +181,9 @@ var market = {
 		charttimems: 0,
 		charttimetime2: 0,
 		charttimems2: 0,
+		CacheLastQuote:[],
+		volume:0,
+		
 		jsonDataKline: {
 			"Method": "OnRspQryHistory",
 			"Parameters": {
@@ -213,6 +216,7 @@ var market = {
 				"HisQuoteType": 0
 			}
 		},
+		
 		//用于存放从后台抓取的合约数据
 		jsonTow: {
 			"Method": "OnRtnQuote",
@@ -1253,7 +1257,14 @@ export default new Vuex.Store({
 					state.market.tempArr[3] = e.LastQuotation.LowPrice.toFixed(e.DotSize);
 					state.market.tempArr[4] = e.LastQuotation.HighPrice.toFixed(e.DotSize);
 					state.market.tempArr[5] = e.LastQuotation.Position;
-					state.market.tempArr[6] = e.LastQuotation.LastVolume;
+//					state.market.tempArr[6] = e.LastQuotation.LastVolume;
+					if(state.market.CacheLastQuote[1].TotalVolume>=state.market.CacheLastQuote[0].TotalVolume){
+						state.market.tempArr[6] = state.market.CacheLastQuote[1].TotalVolume-state.market.CacheLastQuote[0].TotalVolume;
+					}else{
+						state.market.tempArr[6] = state.market.CacheLastQuote[1].LastVolume;
+					}
+					state.market.tempArr[7] = e.LastQuotation.TotalVolume;
+					
 				}
 			});
 			var arr1 = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
@@ -1263,10 +1274,14 @@ export default new Vuex.Store({
 			if(arr2[1] == arr4[1]) {
 				var time = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0];
 
-				var vol = parseInt(state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(state.market.tempArr[6]);
+//				var vol = parseInt(state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(state.market.tempArr[6]);
+				var preVolume = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length-1][6];
+				var lastVolume =  state.market.CacheLastQuote[1].TotalVolume - state.market.CacheLastQuote[0].TotalVolume;
+				var vol = preVolume+lastVolume;
 				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1] = state.market.tempArr;
 				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
 				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6] = vol;
+				console.log('vol:'+vol +'---->'+arr2[1]);
 			} else {
 				state.market.jsonData.Parameters.Data.shift();
 				state.market.jsonData.Parameters.Data.push(state.market.tempArr);
@@ -1979,6 +1994,10 @@ export default new Vuex.Store({
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {
+								context.state.market.CacheLastQuote.push(e.LastQuotation);
+								if(context.state.market.CacheLastQuote.length>2){
+									context.state.market.CacheLastQuote.shift();
+								}
 								context.commit('updateTempdata', context.state.market.currentNo);
 								context.commit('setfensoptionsecond');
 								context.state.market.jsonTow = JSON.parse(evt.data);
@@ -2013,7 +2032,6 @@ export default new Vuex.Store({
 									arr[5] = JSON.parse(evt.data).Parameters.Position;
 									arr[6] = JSON.parse(evt.data).Parameters.LastVolume;
 									
-									console.log(e.LastQuotation);
 									//									
 									var arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' '); //得到的时间
 									//["20", "47", "38"]
@@ -2037,8 +2055,9 @@ export default new Vuex.Store({
 											arr[1] = arr[1];
 											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
 											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-										} else if(arr2[1] > arr4[1]) {
+											arr[6] = JSON.parse(evt.data).Parameters.LastVolume;
+											
+										} else{
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
@@ -2048,7 +2067,9 @@ export default new Vuex.Store({
 											arrTemp[4] = arr[1];
 											arrTemp[5] = arr[5];
 											arrTemp[6] = arr[6];
+											
 											arr = arrTemp;
+											console.log(arrTemp[6]);
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 5){
