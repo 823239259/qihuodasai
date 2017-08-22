@@ -1967,6 +1967,7 @@ export default new Vuex.Store({
 				} else if(context.state.wsjsondata.Method == "OnRtnQuote") { // 最新行情
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
+//					console.log(context.state.market.templateList);
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
