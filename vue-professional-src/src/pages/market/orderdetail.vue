@@ -128,7 +128,7 @@
 			this.$store.state.isshow.kshow = false;
 			this.$store.state.isshow.bottomshow = false;
 			//判断交易账号是否已登录
-			if(localStorage.tradeUser){
+			if(localStorage.tradeUser != null || localStorage.tradeUser != undefined){
 				this.$children[0].isShow = true;
 				this.msg = this.tradeLoginSuccessMsg;
 			}else{
