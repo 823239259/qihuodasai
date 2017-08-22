@@ -381,9 +381,9 @@
 			tradePrice(){
 				return this.detail.LastQuotation.LastPrice;
 			},
-			appendOrderMsg(){
-				return this.$store.state.market.appendOrderMsg;
-			},
+//			appendOrderMsg(){
+//				return this.$store.state.market.appendOrderMsg;
+//			},
 		},
 		watch:{
 //			tradePrices: function(n, o){
@@ -398,14 +398,18 @@
 					this.tradeNum = 0;
 				};
 			},
-			appendOrderMsg: function(n, o){
-				this.$children[7].isShow = true;
-				this.$children[8].isShow = true;
-				this.msg = n.slice(0,-1);
-			},
+//			appendOrderMsg: function(n, o){
+//				this.$children[7].isShow = true;
+//				this.$children[8].isShow = true;
+//				this.msg = n.slice(0,-1);
+//			},
 			layer: function(n, o){
-				this.$children[7].isShow = true;
-				this.$children[8].isShow = true;
+				if(this.$children[7].isShow != undefined){
+					this.$children[7].isShow = true;
+				}
+				if(this.$children[8].isShow != undefined){
+					this.$children[8].isShow = true;
+				}
 				this.msg = n.slice(0,-1);
 			},
 			selectId:function(n,o){
