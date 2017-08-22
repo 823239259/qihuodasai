@@ -230,7 +230,7 @@
 					}
 
 				).then(function(e) {
-					console.log(e.body.data.data);
+//					console.log(e.body.data.data);
 					var arr1 = [];
 					var arr2 = e.body.data.data;
 //					arr2.forEach(function(e){
