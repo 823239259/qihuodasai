@@ -158,7 +158,7 @@ var market = {
 		
 		layerOnRtnOrder: '',     //买入成功提示
 		
-		appendOrderMsg: '',     //委托提示
+//		appendOrderMsg: '',     //委托提示
 		
 		
 		//选择K线时候的值
