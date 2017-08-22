@@ -321,7 +321,7 @@
 					}, {
 						params: {
 							pageIndex: 0,
-							size: 20,
+							size: 10,
 							minTime:s,
 							maxTime:e
 						},
