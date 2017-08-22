@@ -1280,8 +1280,11 @@ export default new Vuex.Store({
 				var vol = preVolume+lastVolume;
 				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1] = state.market.tempArr;
 				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6] = vol;
-				console.log('vol:'+vol +'---->'+arr2[1]);
+				
+				state.market.volume += vol;
+				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6] = state.market.volume;
+//				console.log('vol:'+state.market.volume +'---->'+arr2[1]);
+				
 			} else {
 				state.market.jsonData.Parameters.Data.shift();
 				state.market.jsonData.Parameters.Data.push(state.market.tempArr);
@@ -1995,9 +1998,11 @@ export default new Vuex.Store({
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {
-								context.state.market.CacheLastQuote.push(e.LastQuotation);
+								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
 								if(context.state.market.CacheLastQuote.length>2){
 									context.state.market.CacheLastQuote.shift();
+								}else{
+									return ;
 								}
 								context.commit('updateTempdata', context.state.market.currentNo);
 								context.commit('setfensoptionsecond');
@@ -2059,6 +2064,7 @@ export default new Vuex.Store({
 											arr[6] = JSON.parse(evt.data).Parameters.LastVolume;
 											
 										} else{
+											context.state.market.volume=0;
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
