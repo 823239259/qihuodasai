@@ -381,36 +381,24 @@
 			tradePrice(){
 				return this.detail.LastQuotation.LastPrice;
 			},
-//			appendOrderMsg(){
-//				return this.$store.state.market.appendOrderMsg;
-//			},
 		},
 		watch:{
-//			tradePrices: function(n, o){
-//				this.tradePrices = parseInt(n);
-//				if(this.numReg.test(n) == false || n < 0 || n == ''){
-//					this.tradePrices = 0;
-//				};
-//			},
 			tradeNum: function(n, o){
 				this.tradeNum = parseInt(n);
 				if(this.numReg.test(n) == false || n < 0 || n == ''){
 					this.tradeNum = 0;
 				};
 			},
-//			appendOrderMsg: function(n, o){
-//				this.$children[7].isShow = true;
-//				this.$children[8].isShow = true;
-//				this.msg = n.slice(0,-1);
-//			},
 			layer: function(n, o){
-				if(this.$children[7].isShow != undefined){
-					this.$children[7].isShow = true;
-				}
-				if(this.$children[8].isShow != undefined){
-					this.$children[8].isShow = true;
-				}
-				this.msg = n.slice(0,-1);
+				setTimeout(function(){
+					if(this.$children[7].isShow != undefined){
+						this.$children[7].isShow = true;
+					}
+					if(this.$children[8].isShow != undefined){
+						this.$children[8].isShow = true;
+					}
+					this.msg = n.slice(0,-1);
+				}.bind(this), 1000);
 			},
 			selectId:function(n,o){
 				if(n != undefined){
