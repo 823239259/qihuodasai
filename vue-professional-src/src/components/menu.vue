@@ -11,8 +11,8 @@
 					<!--<li class="fontgray">条件单</li>
 					<li class="fontgray">止损止盈</li>
 					<li class="fontgray">资金详情</li>-->
-					<li class="fontgray" @tap="toHistoryTrade">历史成交</li>
-					<li class="fontgray" @tap="toTradeLogin">切换账号</li>
+					<li class="fontgray" @tap="toHistoryTrade" v-show="historyShow">历史成交</li>
+					<li class="fontgray" @tap="toTradeLogin">{{userTitle}}</li>
 				</ul>
 			</div>
 			<!--</transition>-->
@@ -28,7 +28,9 @@
 		data() {
 			return {
 				open: false,
-				shadeShow: false
+				shadeShow: false,
+				historyShow: false,
+				userTitle: '切换账号'
 			}
 		},
 		methods: {
@@ -69,11 +71,14 @@
 			}
 		},
 		mounted: function() {
-			//			console.log($('*').not('#menus'));
-			//			$('*').not('#menus').on('click',function(){
-			//				this.open=false;
-			//				$('#menus').css('background-image','url('+url2+')');
-			//			});
+			//判断是否已登录交易账号
+			if(localStorage.tradeUser == undefined){
+				this.historyShow = false;
+				this.userTitle = '登录账号';
+			}else{
+				this.historyShow = true;
+				this.userTitle = '切换账号';
+			}
 		}
 	}
 </script>
