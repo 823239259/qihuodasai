@@ -38,6 +38,8 @@
 				localStorage.removeItem("tradeUser");
 				this.open = false;
 				this.shadeShow = false;
+				this.historyShow = false;
+				this.userTitle = '登录账号';
 				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/tradeLogin'});
 			},

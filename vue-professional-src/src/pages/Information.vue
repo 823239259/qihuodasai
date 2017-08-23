@@ -280,30 +280,15 @@
 					}
 				).then(function(e) {
 					var sevenMore = e.body.data.data;
-					sevenMore.forEach(function(o, i) {
-						this.$http.post(this.PATH + '/crawler/getCrawlerLiveContent', {emulateJSON: true}, {
-							params: {
-								liveId: o.liveWallstreetnId
-							},
-							timeout: 5000
-						}).then(function(obj) {
-							if(obj.body.success == true){
-								var str = obj.body.data.data[0].liveContentHtml.replace(/<p>/g, ' ');
-								str = str.replace(/<\/p>/g, ' ');
-								o.liveTitle = str;
-							}else{
-								this.$children[0].isShow = true;
-								this.msg = '获取数据失败';
-							}
-						}.bind(this), function() {
-							this.$children[0].isShow = true;
-							this.msg = '服务器连接失败';
-						});
-						this.sevenlist.push(o);
-					}.bind(this));
-					
-					$('#showmore').text('点击加载更多...');
-					if(e.body.data.data.length==0){
+					if(sevenMore != null){
+						sevenMore.forEach(function(o, i){
+							var str = o.liveTitle.replace(/<p>/g, '');
+							str = str.replace(/<\/p>/g, '');
+							o.liveTitle = str;
+							this.sevenlist.push(o);
+						}.bind(this));
+						$('#showmore').text('点击加载更多...');
+					}else{
 						$('#showmore').text('查询当日没有更多数据...点击加载前一天数据');
 						this.updateTime();
 						this.sevenlist=[];
@@ -321,7 +306,7 @@
 					}, {
 						params: {
 							pageIndex: 0,
-							size: 10,
+							size: 20,
 							minTime:s,
 							maxTime:e
 						},
@@ -330,46 +315,16 @@
 
 				).then(function(e) {
 					this.sevenlist = e.body.data.data;
-					this.sevenlist.forEach(function(o, i){
-						this.$http.post(this.PATH + '/crawler/getCrawlerLiveContent', {emulateJSON: true}, {
-							params: {
-								liveId: o.liveWallstreetnId
-							},
-							timeout: 5000
-						}).then(function(e) {
-							var data = e.body;
-							if(data.success == true){
-								var str = data.data.data[0].liveContentHtml.replace(/<p>/g, ' ');
-								str = str.replace(/<\/p>/g, ' ');
-								o.liveTitle = str;
-							}else{
-								switch (data.code){
-									case '2':
-										this.$children[0].isShow = true;
-										this.msg = '获取数据失败';
-										break;
-									default:
-										break;
-								}
-							}
-						}.bind(this), function() {
-							this.$children[0].isShow = true;
-							this.msg = '服务器连接失败'
-						});
-					}.bind(this));
-					
-					
-					
-					
-					
-					
-					
-					if(e.body.data.data.length<1){
-						this.msg = '查询当日没有更多数据...点击加载前一天数据';
-					}else{
+					if(this.sevenlist != null){
+						this.sevenlist.forEach(function(o, i){
+							var str = o.liveTitle.replace(/<p>/g, '');
+							str = str.replace(/<\/p>/g, '');
+							o.liveTitle = str;
+						}.bind(this));
 						this.msg = '点击查看更多...';
+					}else{
+						this.msg = '查询当日没有更多数据...点击加载前一天数据';
 					}
-					
 				}.bind(this), function(e) {
 					//alert('服务器请求失败，请稍后再试');
 					$('#showmore').text('点击重新请求数据...');
