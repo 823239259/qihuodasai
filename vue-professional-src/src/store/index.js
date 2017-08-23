@@ -1058,6 +1058,33 @@ export default new Vuex.Store({
 							color: "#ffffff"
 						}
 					},
+					markLine: {
+						symbol: ['none', 'none'],
+						clickable: true,
+						lineStyle: {
+							normal: {
+								width: 1,
+								color: "#ffffff"
+							}
+						},
+						label:{
+							normal:{
+								show:true,
+								position:'start'
+							}
+						},
+						data: [
+							{
+						        name: 'Y 轴值为 100 的水平线',
+						        yAxis: 47.52,
+						        value: 47.52
+						    },
+						    {
+						        name: 'Y 轴值为 100 的水平线',
+						        yAxis: 56
+						    }
+						]
+					},
 					symbolSize: 2,
 					data: averagePrices
 				}
