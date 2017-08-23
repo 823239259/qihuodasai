@@ -2035,6 +2035,7 @@ export default new Vuex.Store({
 									context.state.market.volume+=JSON.parse(evt.data).Parameters.LastVolume;
 									arr[6] = context.state.market.volume;
 									
+									
 									var arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' '); //得到的时间
 									//["20", "47", "38"]
 									var arr2 = arr1[1].split(':'); //得到的数据
@@ -2066,7 +2067,6 @@ export default new Vuex.Store({
 										} else{
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
-											//context.state.market.jsonDataKline.Parameters.Data.push(arr);
 											context.state.market.volume = 0;
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
 											arrTemp[1] = arr[1];
@@ -2079,8 +2079,7 @@ export default new Vuex.Store({
 											context.state.market.jsonDataKline.Parameters.Data.push(arrTemp);
 										}
 									}else if(context.state.market.selectTime == 5){
-										var timeDifference=arr2[1]-arr4[1]; 
-										if(timeDifference%5 == 0) {
+										if(arr2[1]%5 != 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2095,11 +2094,16 @@ export default new Vuex.Store({
 											arr[1] = arr[1];
 											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
 											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-										} else{
+											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
+											arr[6] = context.state.market.volume;
+											var length = context.state.market.jsonDataKline.Parameters.Data.length;
+											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
+											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
+										} else if(arr2[1]%5 == 0 && arr2[2]=='00'){
+											
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
+											context.state.market.volume=0;
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
 											arrTemp[1] = arr[1];
 											arrTemp[2] = arr[1];
@@ -2111,8 +2115,7 @@ export default new Vuex.Store({
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 15){
-										var timeDifference=arr2[1]-arr4[1]; 
-										if(timeDifference%15 == 0) {
+										if(arr2[1]%15 != 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2127,9 +2130,12 @@ export default new Vuex.Store({
 											arr[1] = arr[1];
 											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
 											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-										} else{
+											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
+											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
+											arr[6] = context.state.market.volume;
+											var length = context.state.market.jsonDataKline.Parameters.Data.length;
+											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
+										} else if(arr2[1]%15 == 0 && arr2[2]=='00'){
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
@@ -2140,11 +2146,11 @@ export default new Vuex.Store({
 											arrTemp[5] = arr[5];
 											arrTemp[6] = arr[6];
 											arr = arrTemp;
+											context.state.market.volume=0;
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 30){
-										var timeDifference=arr2[1]-arr4[1]; 
-										if(timeDifference%30 == 0) {
+										if(arr2[1]%30 != 0) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2159,9 +2165,12 @@ export default new Vuex.Store({
 											arr[1] = arr[1];
 											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
 											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-										} else{
+											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
+											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
+											arr[6] = context.state.market.volume;
+											var length = context.state.market.jsonDataKline.Parameters.Data.length;
+											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
+										} else if(arr2[1]%30 == 0 && arr2[2]=='00'){
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
@@ -2172,11 +2181,11 @@ export default new Vuex.Store({
 											arrTemp[5] = arr[5];
 											arrTemp[6] = arr[6];
 											arr = arrTemp;
+											context.state.market.volume = 0;
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}else if(context.state.market.selectTime == 1440){
-										var timeDifference=arr2[1]-arr4[1];
-										if(timeDifference%1440 == 0) {
+										if(arr2[1]=='00' && arr2[2]=='00') {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
@@ -2191,9 +2200,12 @@ export default new Vuex.Store({
 											arr[1] = arr[1];
 											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
 											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-										} else{
+											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
+											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
+											arr[6] = context.state.market.volume;
+											var length = context.state.market.jsonDataKline.Parameters.Data.length;
+											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
+										} else if(arr2[0]=='00' && arr2[1]=='00' && arr2[2]=='00'){
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
 											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
@@ -2204,6 +2216,7 @@ export default new Vuex.Store({
 											arrTemp[5] = arr[5];
 											arrTemp[6] = arr[6];
 											arr = arrTemp;
+											context.state.market.volume = 0;
 											context.state.market.jsonDataKline.Parameters.Data.push(arr);
 										}
 									}
@@ -2231,7 +2244,6 @@ export default new Vuex.Store({
 					} else if(context.state.isshow.kshow == true) {
 						
 						context.state.market.jsonDataKline = JSON.parse(evt.data);
-						console.log(context.state.market.jsonDataKline);
 						context.commit('setklineoption');
 						context.commit('drawkline', {
 							id1: 'kliness',
