@@ -1055,6 +1055,7 @@ export default new Vuex.Store({
 							color: "#ffffff"
 						}
 					},
+					symbolSize: 2,
 					data: averagePrices
 				}
 				]
