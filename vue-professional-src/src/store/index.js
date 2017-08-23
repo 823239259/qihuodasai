@@ -830,12 +830,13 @@ export default new Vuex.Store({
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
 				price = [],
-				time = [];
-
+				time = [],
+				averagePrices = [];
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
+				averagePrices.push(47.6);
 			});
 			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.option1 = {
@@ -991,7 +992,7 @@ export default new Vuex.Store({
 					x2: 30,
 					y2: 5
 				},
-				series: {
+				series: [{
 					type: 'line',
 					label: {
 						normal: {
@@ -1034,7 +1035,29 @@ export default new Vuex.Store({
 						]
 					},
 					data: price
+				},
+				{
+					type: 'line',
+					label: {
+						normal: {
+							show: false,
+							position: 'inside'
+						},
+					},
+					lineStyle: {
+						normal: {
+							width: 1,
+							color: "#ffffff"
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: "#ffffff"
+						}
+					},
+					data: averagePrices
 				}
+				]
 			};
 		},
 
@@ -1043,11 +1066,13 @@ export default new Vuex.Store({
 			var vol = [],
 				price = [],
 				time = [];
+//				averagePrices = [];
 			var dosizeL = state.market.currentdetail.DotSize;	
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
+//				averagePrices.push(45.6);
 			})
 			state.market.option1 = {
 				grid: {

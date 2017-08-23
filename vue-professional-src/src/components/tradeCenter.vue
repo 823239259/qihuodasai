@@ -33,17 +33,17 @@
 				<ul>
 					<li>
 						<span>新</span>
-						<span :class="color1">{{detail.LastQuotation.LastPrice | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span :class="{red: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.LastPrice | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
 						<span>{{detail.LastQuotation.TotalVolume}}</span>
 					</li>
 					<li>
 						<span>买</span>
-						<span :class="color2">{{detail.LastQuotation.BidPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span :class="{red: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.BidPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
 						<span>{{detail.LastQuotation.BidQty1}}</span>
 					</li>
 					<li>
 						<span>卖</span>
-						<span :class="color3">{{detail.LastQuotation.AskPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span :class="{red: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.AskPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
 						<span>{{detail.LastQuotation.AskQty1}}</span>
 					</li>
 				</ul>
@@ -357,15 +357,16 @@
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
-			color1:function(){
-				return this.Parameters.LastPrice-this.Parameters.OpenPrice >=0 ?  'red' :  'green'
-			},
-			color2:function(){
-				return this.Parameters.BidPrice1-this.Parameters.OpenPrice >=0 ?  'red' :  'green'
-			},
-			color3:function(){
-				return this.Parameters.AskPrice1-this.Parameters.OpenPrice >=0 ?  'red' :  'green'
-			},
+//			color1:function(){
+//				console.log(this.Parameters);
+//				return this.Parameters.LastPrice-this.Parameters.PreSettlePrice >=0 ?  'red' :  'green'
+//			},
+//			color2:function(){
+//				return this.Parameters.BidPrice1-this.Parameters.PreSettlePrice >=0 ?  'red' :  'green'
+//			},
+//			color3:function(){
+//				return this.Parameters.AskPrice1-this.Parameters.PreSettlePrice >=0 ?  'red' :  'green'
+//			},
 			Parameters(){
 				return this.$store.state.market.jsonTow.Parameters;
 			},
