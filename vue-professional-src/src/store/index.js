@@ -82,6 +82,7 @@ var market = {
 		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
 		qryHoldTotalArr:[],//持仓合计回复数组
+		qryHoldTotalKV:{},
 		/**
 		 * 缓存账户信息
 		 */
@@ -836,7 +837,9 @@ export default new Vuex.Store({
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-				averagePrices.push(47.6);
+				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice!=undefined){
+					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
+				}
 			});
 			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.option1 = {
@@ -1368,7 +1371,8 @@ export default new Vuex.Store({
 					}else{
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
-						
+						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
+						console.log(context.state.market.qryHoldTotalKV);
 						//初始化持仓列表中的浮动盈亏
 						context.dispatch('updateHoldFloatingProfit',parameters);
 						
