@@ -1372,7 +1372,6 @@ export default new Vuex.Store({
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
 						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
-						console.log(context.state.market.qryHoldTotalKV);
 						//初始化持仓列表中的浮动盈亏
 						context.dispatch('updateHoldFloatingProfit',parameters);
 						
