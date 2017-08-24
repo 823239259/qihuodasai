@@ -130,6 +130,7 @@
 			<chartBtn type="sell" class="fr" @tap.native='sell'></chartBtn>
 		</div>
 		<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
+		<tipsDialog :msg="msgTips"></tipsDialog>
 	</div>
 </template>
 
@@ -137,11 +138,13 @@
 	import chartBtn from '../components/chartBtn.vue'
 	import operatenum from '../components/oprtateNum.vue'
 	import alert from '../components/Tradealert.vue'
+	import tipsDialog from '../components/tipsDialog.vue'
 	export default{
 		name: 'dish',
-		components: {chartBtn, operatenum, alert},
+		components: {chartBtn, operatenum, alert, tipsDialog},
 		data(){
 			return{
+				msg: '',
 				buyText: {},
 				defaultParameters: {
 					ChangeValue: 0,
@@ -179,6 +182,9 @@
 			}
 		},
 		computed:{
+			msgTips: function(){
+				return this.msg;
+			},
 			detail(){
 				return this.$parent.detail;
 			},
@@ -278,6 +284,9 @@
 			buy:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 					this.$children[4].isshow = true;
+				}else if(this.$children[1].defaultNum == 0){
+					this.$children[5].isShow = true;
+					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
 					var commodityNo = this.detail.CommodityNo;
@@ -306,6 +315,9 @@
 			sell:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 					this.$children[4].isshow = true;
+				}else if(this.$children[1].defaultNum == 0){
+					this.$children[5].isShow = true;
+					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
 					var commodityNo = this.detail.CommodityNo;
