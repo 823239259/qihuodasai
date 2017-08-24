@@ -837,7 +837,6 @@ export default new Vuex.Store({
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
-				
 				price.push(e[1]);
 				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo]!=undefined){
 					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
@@ -989,7 +988,8 @@ export default new Vuex.Store({
 						lineStyle: {
 							color: "#8392A5"
 						}
-					}
+					},
+					
 				}],
 				grid: {
 					x: 50,
@@ -1018,9 +1018,13 @@ export default new Vuex.Store({
 //							}
 //						},
 //						symbolSize: 2,
-						showSymbol: false,
-       	 				hoverAnimation: false,
 						data: price,
+						markPoint: {
+		                    data: [
+		                        {type: 'max', name: '最大值'},
+		                        {type: 'min', name: '最小值'}
+		                    ]
+		                },
 						markLine: {
 //							symbolSize: 20,
 //							itemStyle:{
@@ -1037,36 +1041,62 @@ export default new Vuex.Store({
 //							    shadowBlur : null
 //				          },
 						  	data:[
-			                	{type: 'average', name: '平均值'}
+			                	{yAxis: 48.236}
 			                	
 				            ]
 						}
 						
 					},
-//					{
-//						type: 'line',
-//						lineStyle: {
-//							normal: {
-//								width: 1,
-//								color: "#ffffff"
-//							}
-//						},
-//						itemStyle: {
-//							normal: {
-//								color: "#ffffff"
-//							}
-//						},
-//						symbolSize: 10,
-//						data: averagePrices,
-//						markLine: {
-//							large:true,
-//							itemStyle:{
-//								normal:{lineStyle:{type:'solid',color:'#fff'},label:{show:true,position:'left'}}
-//							},
-//			                data: [
-//			                ]
-//			            }
-//					}
+					{
+						type: 'line',
+						lineStyle: {
+							normal: {
+								width: 1,
+								color: "#ffffff"
+							}
+						},
+						itemStyle: {
+							normal: {
+								color: "#ffffff"
+							}
+						},
+						symbolSize: 5,
+						data: averagePrices,
+						label: {
+			                normal: {
+			                    show: true,
+			                    position: 'top',
+			                    formatter:params({
+			                    			componentType: 'series',
+											    // 系列类型
+											    seriesType: string,
+											    // 系列在传入的 option.series 中的 index
+											    seriesIndex: time[0],
+											    // 系列名称
+											    seriesName: '',
+											    // 数据名，类目名
+											    name: '',
+											    // 数据在传入的 data 数组中的 index
+											    dataIndex: time[0],
+											    // 传入的原始数据项
+											    data: time,
+											    // 传入的数据值
+											    value: time[time.length-1],
+											    // 数据图形的颜色
+											    color: ''
+			                    			})=>string
+			                }
+			          	},
+			          	markPoint:{
+			          		symbol:'arrow',
+			          		data:[{
+			          			x: 50,
+        						y: 50
+			          		}]
+			          	}
+			          
+						
+					}
 				]
 			};
 		},
