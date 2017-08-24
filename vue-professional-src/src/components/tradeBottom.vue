@@ -59,6 +59,7 @@
 				<chartBtn type="sell" class="fr" @tap.native='sellOrder'></chartBtn>
 			</div>
 			<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
+			<tipsDialog :msg="msgTips"></tipsDialog>
 		</div>
 	</div>
 </template>
@@ -66,10 +67,11 @@
 <script>
 	import chartBtn from '../components/chartBtn.vue'
 	import alert from '../components/Tradealert.vue'
+	import tipsDialog from '../components/tipsDialog.vue'
 	export default {
 		name: 'tradebottom',
 		components: {
-			chartBtn, alert
+			chartBtn, alert, tipsDialog
 		},
 		filters:{
 			fixNum:function(num){
@@ -104,6 +106,7 @@
 		},
 		data() {
 			return {
+				msg: '',
 				lotnum: 1,
 				numReg: /^[0-9]*$/,
 				buyText: {}
@@ -119,6 +122,9 @@
 			buyOrder:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 					this.$children[3].isshow = true;
+				}else if(this.lotnum == 0){
+					this.$children[4].isShow = true;
+					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
 					var buildIndex = 0;
@@ -146,6 +152,9 @@
 			sellOrder:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 					this.$children[3].isshow = true;
+				}else if(this.lotnum == 0){
+					this.$children[4].isShow = true;
+					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
 					var buildIndex=0;
@@ -172,6 +181,9 @@
 			}
 		},
 		computed:{
+			msgTips: function(){
+				return this.msg;
+			},
 			//映射假数据
 			Data(){
 				return this.$store.state.market.jsonData.Parameters.Data;
