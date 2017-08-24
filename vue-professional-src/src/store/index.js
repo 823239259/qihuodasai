@@ -839,7 +839,7 @@ export default new Vuex.Store({
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				
 				price.push(e[1]);
-				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice!=undefined){
+				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo]!=undefined){
 					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
 				}
 			});
@@ -1018,28 +1018,29 @@ export default new Vuex.Store({
 //							}
 //						},
 //						symbolSize: 2,
+						showSymbol: false,
+       	 				hoverAnimation: false,
 						data: price,
 						markLine: {
-							itemStyle:{
-				            	normal:{lineStyle:{type:'solid',color:'#ff0000'},label:{show:true,position:'left'}}
-				            },
-				            large:true,
-				            effect:{
-				              	show: false,
-							    loop: true,
-							    period: 0,
-							    scaleSize : 2,
-							    color : null,
-							    shadowColor : null,
-							    shadowBlur : null
-				          },
+//							symbolSize: 20,
+//							itemStyle:{
+//				            	normal:{lineStyle:{type:'solid',color:'#ff0000'},label:{show:true,position:'left'}}
+//				            },
+//				            large:true,
+//				            effect:{
+//				              	show: false,
+//							    loop: true,
+//							    period: 0,
+//							    scaleSize : 2,
+//							    color : null,
+//							    shadowColor : null,
+//							    shadowBlur : null
+//				          },
 						  	data:[
-			                	[
-				        			{name: '标线1起点', value: 47.5, xAxis: '06:00', yAxis: 47.5},      // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
-				        			{name: '标线1终点', xAxis: '20:34', yAxis: 47.5},             // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
-				    			],
+			                	{type: 'average', name: '平均值'}
+			                	
 				            ]
-						},
+						}
 						
 					},
 //					{
@@ -1055,20 +1056,16 @@ export default new Vuex.Store({
 //								color: "#ffffff"
 //							}
 //						},
-//						symbolSize: 2,
+//						symbolSize: 10,
 //						data: averagePrices,
-//						markLine:{
-//	            			large:true,
-//	            			itemStyle:{
-//				            	normal:{lineStyle:{type:'solid',color:'#fff'},label:{show:true,position:'left'}}
-//				            },
-//			              	data:[
-//			                [
-//							        {name: '标线1起点', value: 45, xAxis: -1, yAxis: 45},      // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
-//							        {name: '标线1终点', xAxis: '19:49', yAxis: 45},             // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
-//							    ],
-//				            ]
-//	          			}
+//						markLine: {
+//							large:true,
+//							itemStyle:{
+//								normal:{lineStyle:{type:'solid',color:'#fff'},label:{show:true,position:'left'}}
+//							},
+//			                data: [
+//			                ]
+//			            }
 //					}
 				]
 			};
