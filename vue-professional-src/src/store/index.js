@@ -1000,62 +1000,30 @@ export default new Vuex.Store({
 				series: [
 					{
 						type: 'line',
-//						label: {
-//							normal: {
-//								show: false,
-//								position: 'inside'
-//							},
-//						},
-//						lineStyle: {
-//							normal: {
-//								width: 1,
-//								color: "#ffffff"
-//							}
-//						},
-//						itemStyle: {
-//							normal: {
-//								color: "#ffffff"
-//							}
-//						},
-//						symbolSize: 2,
 						data: price,
-						markPoint: {
-		                    data: [
-		                        {type: 'max', name: '最大值'},
-		                        {type: 'min', name: '最小值'}
-		                    ]
-		                },
 						markLine: {
-//							symbolSize: 20,
-//							itemStyle:{
-//				            	normal:{lineStyle:{type:'solid',color:'#ff0000'},label:{show:true,position:'left'}}
-//				            },
-//				            large:true,
-//				            effect:{
-//				              	show: false,
-//							    loop: true,
-//							    period: 0,
-//							    scaleSize : 2,
-//							    color : null,
-//							    shadowColor : null,
-//							    shadowBlur : null
-//				          },
+							symbol: ['none', 'none'],
 						  	data:[
-			                	{yAxis: 48.236}
-			                	
-				            ]
+			                	{ value: 48.12, xAxis: -1, yAxis: 48.12},     
+        						{ xAxis:123 , yAxis: 48.12},
+				            ],
+				            lineStyle: {
+				                   normal: {
+				                       width: 1,
+				                       color: "#ff0000"
+				                   }
+				                },
 						}
 						
 					},
 					{
 						type: 'line',
-						lineStyle: {
+						itemStyle: {
 							normal: {
-								width: 1,
 								color: "#ffffff"
 							}
 						},
-						itemStyle: {
+						itemLine: {
 							normal: {
 								color: "#ffffff"
 							}
@@ -1064,18 +1032,16 @@ export default new Vuex.Store({
 						data: averagePrices,
 						label: {
 			                normal: {
-			                    show: true,
+			                    show: false,
 			                    position: 'top'
-			                   
 			                }
-			          	},
-			          	markPoint:{
-			          		symbol:'arrow',
-			          		data:[{
-			          			x: 50,
-        						y: 50
-			          		}]
-			          	}
+			          },
+			          markLine:{
+			          	data:[
+			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
+        						{ xAxis:500 , yAxis: 48.2},
+				            ]
+			          }
 			          
 						
 					}
@@ -1280,14 +1246,14 @@ export default new Vuex.Store({
 						},
 						data: [{
 								name: '标线2起点',
-								value: 0,
+								value: 45.36,
 								xAxis: "1",
-								yAxis: 0
+								yAxis: -1
 							}, // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
 							{
 								name: '标线2终点',
 								xAxis: "2",
-								yAxis: 0
+								yAxis: 100
 							}
 						]
 					},
