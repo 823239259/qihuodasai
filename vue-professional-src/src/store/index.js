@@ -833,9 +833,11 @@ export default new Vuex.Store({
 				price = [],
 				time = [],
 				averagePrices = [];
+				
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
+				
 				price.push(e[1]);
 				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice!=undefined){
 					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
@@ -995,72 +997,79 @@ export default new Vuex.Store({
 					x2: 30,
 					y2: 5
 				},
-				series: [{
-					type: 'line',
-					label: {
-						normal: {
-							show: false,
-							position: 'inside'
+				series: [
+					{
+						type: 'line',
+//						label: {
+//							normal: {
+//								show: false,
+//								position: 'inside'
+//							},
+//						},
+//						lineStyle: {
+//							normal: {
+//								width: 1,
+//								color: "#ffffff"
+//							}
+//						},
+//						itemStyle: {
+//							normal: {
+//								color: "#ffffff"
+//							}
+//						},
+//						symbolSize: 2,
+						data: price,
+						markLine: {
+							itemStyle:{
+				            	normal:{lineStyle:{type:'solid',color:'#ff0000'},label:{show:true,position:'left'}}
+				            },
+				            large:true,
+				            effect:{
+				              	show: false,
+							    loop: true,
+							    period: 0,
+							    scaleSize : 2,
+							    color : null,
+							    shadowColor : null,
+							    shadowBlur : null
+				          },
+						  	data:[
+			                	[
+				        			{name: '标线1起点', value: 47.5, xAxis: '06:00', yAxis: 47.5},      // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				        			{name: '标线1终点', xAxis: '20:34', yAxis: 47.5},             // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				    			],
+				            ]
 						},
+						
 					},
-					lineStyle: {
-						normal: {
-							width: 1,
-							color: "#ffffff"
-						}
-					},
-					itemStyle: {
-						normal: {
-							color: "#ffffff"
-						}
-					},
-					symbolSize: 2,
-					markLine: {
-						symbol: ['none', 'none'],
-						clickable: false,
-						lineStyle: {
-							normal: {
-								width: 1,
-								color: "#ffffff"
-							}
-						},
-						data: [{
-								name: '标线2起点',
-								value: 0,
-								xAxis: "1",
-								yAxis: 0
-							}, // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
-							{
-								name: '标线2终点',
-								xAxis: "2",
-								yAxis: 0
-							}
-						]
-					},
-					data: price
-				},
-				{
-					type: 'line',
-					label: {
-						normal: {
-							show: false,
-							position: 'inside'
-						},
-					},
-					lineStyle: {
-						normal: {
-							width: 1,
-							color: "#ffffff"
-						}
-					},
-					itemStyle: {
-						normal: {
-							color: "#ffffff"
-						}
-					},
-					symbolSize: 2,
-					data: averagePrices
-				}
+//					{
+//						type: 'line',
+//						lineStyle: {
+//							normal: {
+//								width: 1,
+//								color: "#ffffff"
+//							}
+//						},
+//						itemStyle: {
+//							normal: {
+//								color: "#ffffff"
+//							}
+//						},
+//						symbolSize: 2,
+//						data: averagePrices,
+//						markLine:{
+//	            			large:true,
+//	            			itemStyle:{
+//				            	normal:{lineStyle:{type:'solid',color:'#fff'},label:{show:true,position:'left'}}
+//				            },
+//			              	data:[
+//			                [
+//							        {name: '标线1起点', value: 45, xAxis: -1, yAxis: 45},      // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+//							        {name: '标线1终点', xAxis: '19:49', yAxis: 45},             // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+//							    ],
+//				            ]
+//	          			}
+//					}
 				]
 			};
 		},
@@ -2031,7 +2040,6 @@ export default new Vuex.Store({
 									context.state.market.charttimetime = new Date();
 									context.state.market.charttimems = context.state.market.charttimetime.getTime();
 									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
-
 									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
 										context.commit('drawfens', {
 											id1: 'fens',
