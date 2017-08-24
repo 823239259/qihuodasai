@@ -518,8 +518,6 @@ export default new Vuex.Store({
 							return
 						}
 						var kd = params[0].data;
-						console.log(kd);
-						console.log('时间:'+params[0].name);
 						var ma5 = params[1].data;
 						var ma10 = params[2].data;
 						var ma20 = params[3].data;
