@@ -1028,7 +1028,7 @@ export default new Vuex.Store({
 								color: "#ffffff"
 							}
 						},
-						symbolSize: 5,
+						symbolSize: 0,
 						data: averagePrices,
 						label: {
 			                normal: {
