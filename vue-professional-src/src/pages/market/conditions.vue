@@ -53,146 +53,6 @@
 						type_color: 'green',
 						total_color: 'red'
 					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '美原油09',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
-					{
-						name: '美原油10',
-						type: '多',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'red',
-						total_color: 'green'
-					},
-					{
-						name: '123',
-						type: '空',
-						num: 12,
-						price: '123.98',
-						total: '4800.00',
-						showbar: false,
-						type_color: 'green',
-						total_color: 'red'
-					},
 					
 				],
 				yesListCont:[
@@ -234,6 +94,12 @@
 			$("#conditions").css("height", screenHeight + "px");
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
+		},
+		activated: function(){
+			//不更新画图
+			this.$store.state.isshow.isklineshow = false;
+			this.$store.state.isshow.isfensshow = false;
+			this.$store.state.isshow.islightshow =  false;
 		}
 	}
 </script>

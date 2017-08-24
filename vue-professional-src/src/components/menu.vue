@@ -8,10 +8,10 @@
 			<!--<transition name="topdown" mode="out-in">-->
 			<div class="menulist" v-show="open">
 				<ul>
-					<!--<li class="fontgray">条件单</li>
-					<li class="fontgray">止损止盈</li>
-					<li class="fontgray">资金详情</li>-->
-					<li class="fontgray" @tap="toHistoryTrade" v-show="historyShow">历史成交</li>
+					<li class="fontgray" @tap="toConditions" v-show="hasLoginShow">条件单</li>
+					<li class="fontgray" @tap="toStopMoney" v-show="hasLoginShow">止损止盈</li>
+					<li class="fontgray" @tap="toMoneyDetails" v-show="hasLoginShow">资金详情</li>
+					<li class="fontgray" @tap="toHistoryTrade" v-show="hasLoginShow">历史成交</li>
 					<li class="fontgray" @tap="toTradeLogin">{{userTitle}}</li>
 				</ul>
 			</div>
@@ -29,7 +29,7 @@
 			return {
 				open: false,
 				shadeShow: false,
-				historyShow: false,
+				hasLoginShow: false,
 				userTitle: '切换账号'
 			}
 		},
@@ -38,7 +38,7 @@
 				localStorage.removeItem("tradeUser");
 				this.open = false;
 				this.shadeShow = false;
-				this.historyShow = false;
+				this.hasLoginShow = false;
 				this.userTitle = '登录账号';
 				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/tradeLogin'});
@@ -48,6 +48,24 @@
 				this.shadeShow = false;
 				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
 				this.$router.push({path:'/historyTrade'});
+			},
+			toConditions: function(){
+				this.open = false;
+				this.shadeShow = false;
+				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
+				this.$router.push({path:'/conditions'});
+			},
+			toStopMoney: function(){
+				this.open = false;
+				this.shadeShow = false;
+				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
+				this.$router.push({path:'/stopMoney'});
+			},
+			toMoneyDetails: function(){
+				this.open = false;
+				this.shadeShow = false;
+				$(".icon_menu").css('background-image', 'url(' + url2 + ')');
+				this.$router.push({path:'/moneyDetails'});
 			},
 			openmenu: function(e) {
 				if(this.open == false) {
@@ -75,10 +93,10 @@
 		mounted: function() {
 			//判断是否已登录交易账号
 			if(localStorage.tradeUser == undefined){
-				this.historyShow = false;
+				this.hasLoginShow = false;
 				this.userTitle = '登录账号';
 			}else{
-				this.historyShow = true;
+				this.hasLoginShow = true;
 				this.userTitle = '切换账号';
 			}
 		}

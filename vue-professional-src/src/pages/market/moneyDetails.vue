@@ -121,6 +121,12 @@
 		components:{topbar, back},
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
+		},
+		activated: function(){
+			//不更新画图
+			this.$store.state.isshow.isklineshow = false;
+			this.$store.state.isshow.isfensshow = false;
+			this.$store.state.isshow.islightshow =  false;
 		}
 	}
 </script>
