@@ -47,7 +47,7 @@
 				</div>
 			</li>
 		</ul>
-		<bbtn name="确认支付" @tap.native="tocom"></bbtn>
+		<bbtn :name="btnName" @tap.native="tocom"></bbtn>
 	</div>
 </template>
 
@@ -161,7 +161,8 @@
 				traderTotal: 0,
 				lineLoss: 0,
 				balance: 0.00,
-				userInfo: ''
+				userInfo: '',
+				btnName: '确认支付'
 			}
 		},
 		computed: {
@@ -176,9 +177,11 @@
 			},
 			enough: function() {
 				if((this.balance - this.chooseType) < 0) {
-					return false
+					this.btnName = '立即充值';
+					return false;
 				} else {
-					return true
+					this.btnName = '确认支付';
+					return true;
 				}
 			}
 		},
