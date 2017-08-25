@@ -458,7 +458,7 @@ export default new Vuex.Store({
 				for(var i = 0; i < Len; i++) {
 					var time2 = parameters[i][0].split(" ");
 					var str1 = time2[1].split(":");
-					var str2 = str1[0] + ":" + str1[1]
+					var str2 = str1[0] + ":" + str1[1];
 					var openPrice = parseFloat(parameters[i][2]).toFixed(dosizeL);
 					var closePrice = parseFloat(parameters[i][1]).toFixed(dosizeL);
 					var sgData = [str2, openPrice, closePrice, parseFloat(parameters[i][3]).toFixed(dosizeL),parseFloat(parameters[i][4]).toFixed(dosizeL), parameters[i][0]];
@@ -512,6 +512,7 @@ export default new Vuex.Store({
 						}
 					},
 					formatter: function(params) {
+						console.log(params);
 						var time = params[0].name;
 						if(time == null || time == "") {
 							return
@@ -521,11 +522,11 @@ export default new Vuex.Store({
 						var ma10 = params[2].data;
 						var ma20 = params[3].data;
 						var ma30 = params[4].data;
-						var rate = (kd[1] - kd[0]) / kd[0] * 100;
+						var rate = (kd[2] - kd[1]) / kd[1] * 100;
 						rate = parseFloat(rate).toFixed(dosizeL);
 						var res = "时间:" + params[0].name + '  涨跌 : ' + rate;
-						res += '<br/>  开盘 : ' + parseFloat(kd[0]).toFixed(dosizeL) + '  最高 : ' + parseFloat(kd[3]).toFixed(dosizeL);
-						res += '<br/>  收盘 : ' + parseFloat(kd[1]).toFixed(dosizeL) + ' 最低 : ' + parseFloat(kd[2]).toFixed(dosizeL);
+						res += '<br/>  开盘 : ' + parseFloat(kd[1]).toFixed(dosizeL) + '  最高 : ' + parseFloat(kd[4]).toFixed(dosizeL);
+						res += '<br/>  收盘 : ' + parseFloat(kd[2]).toFixed(dosizeL) + ' 最低 : ' + parseFloat(kd[3]).toFixed(dosizeL);
 						res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
 						res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
 						return res;
