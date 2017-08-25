@@ -1410,7 +1410,6 @@ export default new Vuex.Store({
 						context.state.market.ifUpdateAccountProfit = true;
 					}else{
 						context.state.market.CacheAccount.moneyDetail.push(parameters);
-						console.log(context.state.market.CacheAccount.moneyDetail);
 						context.dispatch('initCacheAccount',parameters);
 					}
 					break;
@@ -1672,7 +1671,6 @@ export default new Vuex.Store({
 								= parseFloat(contractFloatingProfit.floatingProfit).toFixed(2);
 						}
 					}
-					
 					else{
 //						context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit[contractFloatingProfit.currencyNo]=0.0;
 						var tmp1 = parseFloat(context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit[contractFloatingProfit.currencyNo]);
@@ -1684,11 +1682,7 @@ export default new Vuex.Store({
 								=parseFloat(tmp1+tmp2).toFixed(2);
 						
 						}
-						
-						
 					}
-					
-					
 				}
 				// 根据币种更新资金账户：逐笔浮盈、逐笔浮盈率、当前权益、可用资金
 				for (var currencyNo in context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit){
@@ -1697,6 +1691,7 @@ export default new Vuex.Store({
 					var todayAmount = parseFloat(context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayAmount);
 					// 当前权益 = 当前结存 + 逐笔浮盈
 					var todayBalance = todayAmount + floatingProfit;
+					// 可用资金 = 当前权益 - 保证金 - 冻结资金
 					var deposit =parseFloat(context.state.market.CacheAccount.jCacheAccount[currencyNo].Deposit);
 					var frozenMoney =parseFloat(context.state.market.CacheAccount.jCacheAccount[currencyNo].FrozenMoney)
 					var todayCanUse = todayBalance - deposit - frozenMoney;
@@ -1704,6 +1699,16 @@ export default new Vuex.Store({
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayBalance=todayBalance;
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayCanUse=todayCanUse;
 					
+//					console.log(currencyNo);
+					context.state.market.CacheAccount.moneyDetail.forEach(function(e,i){
+						if(e.AccountNo ==currencyNo){
+							e.FloatingProfit = floatingProfit;
+							e.TodayBalance = todayBalance;
+							e.TodayCanUse = todayCanUse;
+							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
+						}
+					});
+//					console.log(context.state.market.CacheAccount.moneyDetail);
 				}
 				// 清空币种盈亏
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};

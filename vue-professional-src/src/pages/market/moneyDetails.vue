@@ -64,7 +64,7 @@
 		},
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
-//			console.log(this.moneyDetails);
+			console.log(this.moneyDetails);
 		},
 		activated: function(){
 			//不更新画图
@@ -72,53 +72,39 @@
 			this.$store.state.isshow.isfensshow = false;
 			this.$store.state.isshow.islightshow =  false;
 			//
-			var md = this.$store.state.market.CacheAccount.moneyDetail;
+			var moneyDetail = this.$store.state.market.CacheAccount.moneyDetail;
 			var OldAmount = {title: '昨结存', val: []}, 
 				TodayBalance = {title: '今收益', val: []}, 
 				TodayCanUse = {title: '今可用', val: []},  
 				Deposit = {title: '保证金', val: []},  
 				FrozenMoney = {title: '冻结资金', val: []}, 
 				FloatingProfit = {title: '逐笔浮盈', val: []},
-				
+				CloseProfit={title: '平仓盈亏', val: []},
 				InMoney = {title: '入金', val: []},
 				OutMoney = {title: '出金', val: []};
-			md.forEach(function(o, i){
-				OldAmount.val.push(o.OldAmount);
-				TodayBalance.val.push(o.TodayBalance);
-				TodayCanUse.val.push(o.TodayCanUse);
-				Deposit.val.push(o.Deposit);
-				FrozenMoney.val.push(o.FrozenMoney);
-				FloatingProfit.val.push(o.FloatingProfit);
-				
-				InMoney.val.push(o.InMoney);
-				OutMoney.val.push(o.OutMoney);
+			moneyDetail.forEach(function(o, i){
+				OldAmount.val.push(o.OldAmount); // 昨结存
+				TodayBalance.val.push(o.TodayBalance);//今权益
+				TodayCanUse.val.push(o.TodayCanUse);//今可用
+				Deposit.val.push(o.Deposit);//保证金
+				FrozenMoney.val.push(o.FrozenMoney);//冻结资金
+				FloatingProfit.val.push(o.FloatingProfit);//逐笔浮盈
+				CloseProfit.val.push(o.CloseProfit);//平仓盈亏
+				InMoney.val.push(o.InMoney); //入金
+				OutMoney.val.push(o.OutMoney);//出金
 			}.bind(this));
+			this.list = [];
 			this.list.push(OldAmount);
 			this.list.push(TodayBalance);
 			this.list.push(TodayCanUse);
 			this.list.push(Deposit);
 			this.list.push(FrozenMoney);
 			this.list.push(FloatingProfit);
+			this.list.push(CloseProfit);
 			this.list.push(InMoney);
 			this.list.push(OutMoney);
 			console.log(this.list);
 			
-			
-			
-			
-			
-//			var x = [];
-//			x.push(OldAmount);   
-
-
-//			console.log(x);
-			
-			
-//			var _OldAmount = OldAmount;
-//			arr.push();
-//			arr[OldAmount] = OldAmount;
-//			arr[2] = OldAmount;
-//			console.log(arr);
 		}
 	}
 </script>
