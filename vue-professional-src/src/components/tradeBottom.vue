@@ -184,6 +184,9 @@
 			msgTips: function(){
 				return this.msg;
 			},
+			layer(){
+				return this.$store.state.market.layer;
+			},
 			//映射假数据
 			Data(){
 				return this.$store.state.market.jsonData.Parameters.Data;
@@ -231,6 +234,12 @@
 			},
 		},
 		watch:{
+			layer: function(n, o){
+				setTimeout(function(){
+					this.$children[4].isShow = true;
+					this.msg = n.slice(0,-1);
+				}.bind(this), 1000);
+			},
 			lotnum:function(n,o){
 				this.lotnum = parseFloat(n);
 				if(this.numReg.test(n) == false || n < 0){
