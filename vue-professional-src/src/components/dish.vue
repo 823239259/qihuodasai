@@ -185,6 +185,9 @@
 			msgTips: function(){
 				return this.msg;
 			},
+			layer(){
+				return this.$store.state.market.layer;
+			},
 			detail(){
 				return this.$parent.detail;
 			},
@@ -260,6 +263,12 @@
 			this.defaultParameters.BidQty1 = this.templateList[this.detail.CommodityNo].BidQty1;
 		},
 		watch: {
+			layer: function(n, o){
+				setTimeout(function(){
+					this.$children[5].isShow = true;
+					this.msg = n.slice(0,-1);
+				}.bind(this), 1000);
+			},
 			Parameters: function(n, o){
 				if(n){
 					this.defaultParameters = n;
