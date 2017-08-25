@@ -119,6 +119,11 @@
 	export default{
 		name:'moneyDetails',
 		components:{topbar, back},
+		computed: {
+			moneyDetails(){
+				return this.$store.state.market.CacheAccount.moneyDetail;
+			}
+		},
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
 		},

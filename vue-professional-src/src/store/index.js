@@ -87,6 +87,7 @@ var market = {
 		 * 缓存账户信息
 		 */
 		CacheAccount:{
+			moneyDetail:{},
 			jCacheAccount : {},	// key 为CurrencyNo
 			jCacheTotalAccount:{
 				TodayBalance : 0.0,	// 今权益
@@ -1408,6 +1409,8 @@ export default new Vuex.Store({
 						context.dispatch('updateTotalAccount',parameters);
 						context.state.market.ifUpdateAccountProfit = true;
 					}else{
+						context.state.market.CacheAccount.moneyDetail[parameters.CurrencyNo] = parameters;
+						console.log(context.state.market.CacheAccount.moneyDetail);
 						context.dispatch('initCacheAccount',parameters);
 					}
 					break;
@@ -1767,22 +1770,7 @@ export default new Vuex.Store({
 			= context.state.market.CacheAccount.jCacheTotalAccount.Deposit / context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance / 100;
 			
 		},
-		updateAccount:function(context,parameters){
-			// 入金
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].InMoney = parameters.InMoney;
-			//出金
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].OutMoney = parameters.OutMoney;
-			// 手续费
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].CounterFee = parameters.Fee;
-			// 平仓盈亏
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].CloseProfit = parameters.CloseProfit;
-			// 今结存
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].TodayAmount = parameters.TodayAmount;
-			// 保证金
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].Deposit = parameters.Deposit;
-			// 挂单保证金
-			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].FrozenMoney = parameters.FrozenMoney;
-		},
+		
 		initCacheAccount:function(context,parameters){
 			if(parameters!=null){
 				context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo] = parameters;
