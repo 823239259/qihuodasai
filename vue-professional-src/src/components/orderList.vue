@@ -106,17 +106,18 @@
 				}
 			},
 			closeAllOut:function(){
-				this.$children[0].isshow = true;
-				var arr=[];
-				for(var i in this.qryHoldTotalArr){
-					var buildIndex=0;
-					var drection;
-					if(this.qryHoldTotalArr[i].Drection==0){
-						drection = 1;
-					}else if(this.qryHoldTotalArr[i].Drection==1){
-						drection = 0;
-					}
-					var b={
+				if(this.qryHoldTotalArr.length > 0){
+					this.$children[0].isshow = true;
+					var arr=[];
+					for(var i in this.qryHoldTotalArr){
+						var buildIndex=0;
+						var drection;
+						if(this.qryHoldTotalArr[i].Drection==0){
+							drection = 1;
+						}else if(this.qryHoldTotalArr[i].Drection==1){
+							drection = 0;
+						}
+						var b = {
 							"Method":'InsertOrder',
 							"Parameters":{
 								"ExchangeNo":this.qryHoldTotalArr[i].ExchangeNo,
@@ -129,11 +130,14 @@
 								"TriggerPrice":0,
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
-					};
-					arr.push(b);
-					this.tempText = arr;
+						};
+						arr.push(b);
+						this.tempText = arr;
+					}
+				}else{
+					this.$children[4].isShow = true;
+					this.msg = '暂无合约需要平仓';
 				}
-				
 			},
 			closeOut:function(obj){
 				var i = 0;
@@ -141,10 +145,7 @@
 				var length= this.qryHoldTotalArr.length;
 				var qryHoldTotalArr = this.qryHoldTotalArr;
 				for(positionCurrent in this.positionListCont){
-					
 					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
-						
-						console.log(qryHoldTotalArr[length-1-positionCurrent].ContractCode);
 						i++;
 						this.$children[1].isshow = true;
 						var buildIndex=0;
@@ -157,7 +158,6 @@
 						}else if(qryHoldTotalArr[length-1-positionCurrent].Drection==1){
 							drection = 0;
 						}
-						
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
@@ -172,13 +172,11 @@
 								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 							}
 						};
-						
 						this.tempText = b;
 						return false;
 						
 					}
 				}
-				
 				if(i < 1){
 					this.$children[4].isShow = true;
 					this.msg = '请选择一条数据';

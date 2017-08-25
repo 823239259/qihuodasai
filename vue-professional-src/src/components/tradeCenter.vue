@@ -487,35 +487,40 @@
 		},
 		methods: {
 			cancelAllOrder:function(){
-				this.$children[6].isshow = true;
-				var arr=[];
-				this.$store.state.market.orderListCont.forEach(function(e,i){
-					var CurrentObj = e;
-					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
-					var b={
-						"Method":'CancelOrder',
-						"Parameters":{
-							"OrderSysID":'',
-							"OrderID":CurrentObj.OrderID,
-							"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
-							"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
-							"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
-							"OrderNum":parseFloat(CurrentObj.delegateNum),
-							"Direction":function(){
-											if(CurrentObj.buyOrSell=='买'){
-												return 0;
-											}else{
-												return 1;
-											}
-										},
-							"OrderPrice":parseFloat(CurrentObj.delegatePrice)
-						}
-					};
-//					this.tradeSocket.send(JSON.stringify(b));
-					arr.push(b);
-					this.buyText = arr;
-				}.bind(this));
-				
+				console.log(this.$store.state.market.orderListCont.length);
+				if(this.$store.state.market.orderListCont.length > 0){
+					this.$children[6].isshow = true;
+					var arr=[];
+					this.$store.state.market.orderListCont.forEach(function(e,i){
+						var CurrentObj = e;
+						var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
+						var b={
+							"Method":'CancelOrder',
+							"Parameters":{
+								"OrderSysID":'',
+								"OrderID":CurrentObj.OrderID,
+								"ExchangeNo":this.templateList[Contract].ExchangeNo,
+								"CommodityNo":this.templateList[Contract].CommodityNo,
+								"ContractNo":this.templateList[Contract].ContractNo,
+								"OrderNum":parseFloat(CurrentObj.delegateNum),
+								"Direction":function(){
+												if(CurrentObj.buyOrSell=='买'){
+													return 0;
+												}else{
+													return 1;
+												}
+											},
+								"OrderPrice":parseFloat(CurrentObj.delegatePrice)
+							}
+						};
+//						this.tradeSocket.send(JSON.stringify(b));
+						arr.push(b);
+						this.buyText = arr;
+					}.bind(this));
+				}else{
+					this.$children[7].isShow = true;
+					this.msg = '暂无合约需要撤单';
+				}
 			},
 			cancelOrder:function(){
 				var orderListId= this.orderListId;
