@@ -487,7 +487,6 @@
 		},
 		methods: {
 			cancelAllOrder:function(){
-				console.log(this.$store.state.market.orderListCont.length);
 				if(this.$store.state.market.orderListCont.length > 0){
 					this.$children[6].isshow = true;
 					var arr=[];
