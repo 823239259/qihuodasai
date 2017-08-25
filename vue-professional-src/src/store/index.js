@@ -101,17 +101,6 @@ var market = {
 			}
 		},
 		
-		OldAmount:{title: '昨结存', val: []}, 
-		TodayBalance:{title: '今收益', val: []}, 
-		TodayCanUse:{title: '今可用', val: []},  
-		Deposit:{title: '保证金', val: []},  
-		FrozenMoney:{title: '冻结资金', val: []}, 
-		FloatingProfit:{title: '逐笔浮盈', val: []},
-		CloseProfit:{title: '平仓盈亏', val: []},
-		InMoney:{title: '入金', val: []},
-		OutMoney:{title: '出金', val: []},
-		moneyDetailList:[],
-		
 		//订阅推送次数统计
 		subscribeIndex:1,
 		
@@ -1418,31 +1407,7 @@ export default new Vuex.Store({
 						context.dispatch('updateTotalAccount',parameters);
 						context.state.market.ifUpdateAccountProfit = true;
 					}else{
-						context.state.market.CacheAccount.moneyDetail=[];
 						context.state.market.CacheAccount.moneyDetail.push(parameters);
-						context.state.market.CacheAccount.moneyDetail.forEach(function(o, i){
-							context.state.market.OldAmount.val.push(o.OldAmount); // 昨结存
-							context.state.market.TodayBalance.val.push(o.TodayBalance);//今权益
-							context.state.market.TodayCanUse.val.push(o.TodayCanUse);//今可用
-							context.state.market.Deposit.val.push(o.Deposit);//保证金
-							context.state.market.FrozenMoney.val.push(o.FrozenMoney);//冻结资金
-							context.state.market.FloatingProfit.val.push(o.FloatingProfit);//逐笔浮盈
-							context.state.market.CloseProfit.val.push(o.CloseProfit);//平仓盈亏
-							context.state.market.InMoney.val.push(o.InMoney); //入金
-							context.state.market.OutMoney.val.push(o.OutMoney);//出金
-						}.bind(this));
-						context.state.market.moneyDetailList = [];
-						context.state.market.moneyDetailList.push(context.state.market.OldAmount);
-						context.state.market.moneyDetailList.push(context.state.market.TodayBalance);
-						context.state.market.moneyDetailList.push(context.state.market.TodayCanUse);
-						context.state.market.moneyDetailList.push(context.state.market.Deposit);
-						context.state.market.moneyDetailList.push(context.state.market.FrozenMoney);
-						context.state.market.moneyDetailList.push(context.state.market.FloatingProfit);
-						context.state.market.moneyDetailList.push(context.state.market.CloseProfit);
-						context.state.market.moneyDetailList.push(context.state.market.InMoney);
-						context.state.market.moneyDetailList.push(context.state.market.OutMoney);
-						
-						
 						context.dispatch('initCacheAccount',parameters);
 					}
 					break;
@@ -1732,39 +1697,14 @@ export default new Vuex.Store({
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayBalance=todayBalance;
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayCanUse=todayCanUse;
 					
-//					console.log(currencyNo);
 					context.state.market.CacheAccount.moneyDetail.forEach(function(e,i){
-						if(e.AccountNo ==currencyNo){
+						if(e.AccountNo == currencyNo){
 							e.FloatingProfit = floatingProfit;
 							e.TodayBalance = todayBalance;
 							e.TodayCanUse = todayCanUse;
 							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
 						}
 					});
-					
-					context.state.market.CacheAccount.moneyDetail.forEach(function(o, i){
-							context.state.market.OldAmount.val.push(o.OldAmount); // 昨结存
-							context.state.market.TodayBalance.val.push(o.TodayBalance);//今权益
-							context.state.market.TodayCanUse.val.push(o.TodayCanUse);//今可用
-							context.state.market.Deposit.val.push(o.Deposit);//保证金
-							context.state.market.FrozenMoney.val.push(o.FrozenMoney);//冻结资金
-							context.state.market.FloatingProfit.val.push(o.FloatingProfit);//逐笔浮盈
-							context.state.market.CloseProfit.val.push(o.CloseProfit);//平仓盈亏
-							context.state.market.InMoney.val.push(o.InMoney); //入金
-							context.state.market.OutMoney.val.push(o.OutMoney);//出金
-						}.bind(this));
-						context.state.market.moneyDetailList = [];
-						context.state.market.moneyDetailList.push(context.state.market.OldAmount);
-						context.state.market.moneyDetailList.push(context.state.market.TodayBalance);
-						context.state.market.moneyDetailList.push(context.state.market.TodayCanUse);
-						context.state.market.moneyDetailList.push(context.state.market.Deposit);
-						context.state.market.moneyDetailList.push(context.state.market.FrozenMoney);
-						context.state.market.moneyDetailList.push(context.state.market.FloatingProfit);
-						context.state.market.moneyDetailList.push(context.state.market.CloseProfit);
-						context.state.market.moneyDetailList.push(context.state.market.InMoney);
-						context.state.market.moneyDetailList.push(context.state.market.OutMoney);
-					
-//					console.log(context.state.market.CacheAccount.moneyDetail);
 				}
 				// 清空币种盈亏
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};
@@ -2013,6 +1953,7 @@ export default new Vuex.Store({
 					context.state.market.markettemp.forEach(function(e) {
 						var key=e.CommodityNo;
 						context.state.market.orderTemplist[key]=e;
+						
 						if(e.IsUsed != 0) {
 							context.state.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + e.ExchangeNo + '","CommodityNo":"' + e.CommodityNo + '","ContractNo":"' + e.MainContract + '"}}');
 						}

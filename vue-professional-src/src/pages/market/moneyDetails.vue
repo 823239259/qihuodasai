@@ -8,8 +8,10 @@
 			<div class="list_left fl">
 				<ul>
 					<li><span>币种</span></li>
-					<li><span>昨结存</span></li>
-					<li><span>今收益</span></li>
+					<template v-for="key in moneyDetailList">
+						<li><span>{{key.title}}</span></li>
+					</template>
+					<!--<li><span>今收益</span></li>
 					<li><span>今可用</span></li>
 					<li><span>保证金</span></li>
 					<li><span>冻结资金</span></li>
@@ -18,7 +20,7 @@
 					<li><span>入金</span></li>
 					<li><span>出金</span></li>
 					<li><span>平仓线</span></li>
-					<li><span>风险度</span></li>
+					<li><span>风险度</span></li>-->
 				</ul>
 			</div>
 			<div class="list_right fl">
@@ -54,13 +56,46 @@
 		components:{topbar, back},
 		data(){
 			return{
-				
+				moneyDetailList: []
 			}
 		},
 		computed: {
-			moneyDetailList:function(){
-				
-				return this.$store.state.market.moneyDetailList;
+			moneyDetail: function(){
+				return this.$store.state.market.CacheAccount.moneyDetail;
+			}
+		},
+		watch: {
+			moneyDetail: function(n, o){
+				this.moneyDetailList = [];
+				var OldAmount = {title: '昨结存', val: []}, 
+					TodayBalance = {title: '今收益', val: []}, 
+					TodayCanUse = {title: '今可用', val: []},  
+					Deposit = {title: '保证金', val: []},  
+					FrozenMoney = {title: '冻结资金', val: []}, 
+					FloatingProfit = {title: '逐笔浮盈', val: []},
+					CloseProfit = {title: '平仓盈亏', val: []},
+					InMoney = {title: '入金', val: []},
+					OutMoney = {title: '出金', val: []};
+				n.forEach(function(o, i){
+					OldAmount.val.push(o.OldAmount); // 昨结存
+					TodayBalance.val.push(o.TodayBalance);//今权益
+					TodayCanUse.val.push(o.TodayCanUse);//今可用
+					Deposit.val.push(o.Deposit);//保证金
+					FrozenMoney.val.push(o.FrozenMoney);//冻结资金
+					FloatingProfit.val.push(o.FloatingProfit);//逐笔浮盈
+					CloseProfit.val.push(o.CloseProfit);//平仓盈亏
+					InMoney.val.push(o.InMoney); //入金
+					OutMoney.val.push(o.OutMoney);//出金
+				}.bind(this));
+				this.moneyDetailList.push(OldAmount);
+				this.moneyDetailList.push(TodayBalance);
+				this.moneyDetailList.push(TodayCanUse);
+				this.moneyDetailList.push(Deposit);
+				this.moneyDetailList.push(FrozenMoney);
+				this.moneyDetailList.push(FloatingProfit);
+				this.moneyDetailList.push(CloseProfit);
+				this.moneyDetailList.push(InMoney);
+				this.moneyDetailList.push(OutMoney);
 			}
 		},
 		mounted: function(){
