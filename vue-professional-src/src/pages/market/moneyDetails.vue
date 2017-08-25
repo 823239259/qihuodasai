@@ -37,76 +37,7 @@
 						<span>10000000</span>
 						<span>10000000</span>
 					</li>
-					<li>
-						<span>10000000</span>
-						<span>10000000</span>
-						<span>10000000</span>
-						<span>10000000</span>
-						<span>10000000</span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
-					<li>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</li>
+					
 				</ul>
 			</div>
 		</div>
@@ -120,18 +51,29 @@
 		name:'moneyDetails',
 		components:{topbar, back},
 		computed: {
-			moneyDetails(){
+			moneyDetails: function(){
 				return this.$store.state.market.CacheAccount.moneyDetail;
 			}
 		},
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
+			console.log(this.moneyDetails);
 		},
 		activated: function(){
 			//不更新画图
 			this.$store.state.isshow.isklineshow = false;
 			this.$store.state.isshow.isfensshow = false;
 			this.$store.state.isshow.islightshow =  false;
+			//
+			var md = this.$store.state.market.CacheAccount.moneyDetail;
+			var arr = [], OldAmount = [], TodayBalance = [], TodayCanUse = [], Deposit = [], FrozenMoney = [],
+				FloatingProfit = [];
+			md.forEach(function(o, i){
+				OldAmount.push(o.OldAmount);
+			}.bind(this));
+			arr[OldAmount] = OldAmount;
+			arr[2] = OldAmount;
+			console.log(arr);
 		}
 	}
 </script>

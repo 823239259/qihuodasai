@@ -87,7 +87,7 @@ var market = {
 		 * 缓存账户信息
 		 */
 		CacheAccount:{
-			moneyDetail:{},
+			moneyDetail:[],
 			jCacheAccount : {},	// key 为CurrencyNo
 			jCacheTotalAccount:{
 				TodayBalance : 0.0,	// 今权益
@@ -1409,7 +1409,7 @@ export default new Vuex.Store({
 						context.dispatch('updateTotalAccount',parameters);
 						context.state.market.ifUpdateAccountProfit = true;
 					}else{
-						context.state.market.CacheAccount.moneyDetail[parameters.CurrencyNo] = parameters;
+						context.state.market.CacheAccount.moneyDetail.push(parameters);
 						console.log(context.state.market.CacheAccount.moneyDetail);
 						context.dispatch('initCacheAccount',parameters);
 					}
