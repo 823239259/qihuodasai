@@ -25,7 +25,7 @@
 		<div class="list_tools">
 			<cbtn name="全部平仓" @tap.native="closeAllOut"></cbtn>
 			<cbtn name="平仓"  @tap.native="closeOut"></cbtn>
-			<!--<cbtn name="止损止赢"></cbtn>-->
+			<cbtn name="止损止赢"></cbtn>
 		</div>
 		<tipsDialog :msg="msgTips"></tipsDialog>
 	</div>
