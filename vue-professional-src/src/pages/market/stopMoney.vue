@@ -87,10 +87,9 @@
 	import back from '../../components/back.vue'
 	import cbtn from '../../components/conditionBtn.vue'
 	import refresh from '../../components/Refresh.vue'
-	import orderlist from '../../components/orderList.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, refresh, orderlist},
+		components:{topbar, back, cbtn, refresh},
 		data(){
 			return {
 				isShow: true,
@@ -399,7 +398,7 @@
 						width: 80px*@ip6;
 					}
 					&:nth-child(9){
-						width: 130px*@ip6;
+						width: 140px*@ip6;
 					}
 					&.red{
 						color: @red;
