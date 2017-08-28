@@ -1,9 +1,11 @@
 <template>
 	<div id="conditions">
+		<tipsDialog :msg="msgTips"></tipsDialog>
+		<ifalert></ifalert>
 		<div class="head">
 			<topbar title="条件单"></topbar>
 			<back></back>
-			<i class="add"></i>
+			<i class="add" @tap="addConditions"></i>
 		</div>
 		<div class="page_cont">
 			<div class="tab_box" id="tabBox">
@@ -71,7 +73,6 @@
 				</ul>
 			</div>
 		</div>
-		
 	</div>
 </template>
 
@@ -79,12 +80,14 @@
 	import topbar from '../../components/Topbar.vue'
 	import back from '../../components/back.vue'
 	import cbtn from '../../components/conditionBtn.vue'
-	import orderlist from '../../components/orderList.vue'
+	import ifalert from '../../components/ifalert.vue'
+	import tipsDialog from '../../components/tipsDialog.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, orderlist},
+		components:{topbar, back, cbtn, ifalert, tipsDialog},
 		data(){
 			return {
+				msg: '',
 				isShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
 				noListCont:[
@@ -113,6 +116,9 @@
 			}
 		},
 		computed:{
+			msgTips: function(){
+				return this.msg;
+			}
 		},
 		methods: {
 			showCont: function(e){
@@ -134,6 +140,10 @@
 					this.orderListId =null;
 				}
 			},
+			addConditions: function(){
+				console.log(this.$children);
+				this.$children[1].isshow = true;
+			}
 		},
 		mounted: function(){
 			//页面滚动高度计算
