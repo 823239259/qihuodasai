@@ -25,9 +25,10 @@
 		<div class="list_tools">
 			<cbtn name="全部平仓" @tap.native="closeAllOut"></cbtn>
 			<cbtn name="平仓"  @tap.native="closeOut"></cbtn>
-			<cbtn name="止损止赢"></cbtn>
+			<cbtn name="止损止赢" @tap.native="stopLossStopProfit"></cbtn>
 		</div>
 		<tipsDialog :msg="msgTips"></tipsDialog>
+		<stopmoneyalert :val="selectedOrderLists"></stopmoneyalert>
 	</div>
 </template>
 
@@ -35,16 +36,18 @@
 	import cbtn from '../components/conditionBtn.vue'
 	import alert from '../components/Tradealert.vue'
 	import tipsDialog from '../components/tipsDialog.vue'
+	import stopmoneyalert from '../components/stopmoneyalert.vue'
 	export default{
 		name: 'orderList',
-		components: {cbtn, alert, tipsDialog},
+		components: {cbtn, alert, tipsDialog,stopmoneyalert},
 		props: ['val'],
 		data(){
 			return {
 				msg: '',
 				datas: '',
 				orderListId: '',
-				tempText:{}
+				tempText:{},
+				selectedOrderList: ''
 			}
 		},
 		computed: {
@@ -91,6 +94,9 @@
 			},
 			qryHoldTotalArr(){
 				return this.$store.state.market.qryHoldTotalArr;
+			},
+			selectedOrderLists: function(){
+				return JSON.stringify(this.selectedOrderList);
 			}
 		},
 		
@@ -135,8 +141,27 @@
 						this.tempText = arr;
 					}
 				}else{
-					this.$children[4].isShow = true;
+					this.$children[5].isShow = true;
 					this.msg = '暂无合约需要平仓';
+				}
+			},
+			stopLossStopProfit:function(obj){
+				var i = 0;
+				var positionCurrent=0;
+				var length= this.qryHoldTotalArr.length;
+				var qryHoldTotalArr = this.qryHoldTotalArr;
+				for(positionCurrent in this.positionListCont){
+					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
+						i++;
+						this.$children[6].isshow = true;
+						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
+						return;
+						
+					}
+				}
+				if(i < 1){
+					this.$children[5].isShow = true;
+					this.msg = '请选择一条数据';
 				}
 			},
 			closeOut:function(obj){
@@ -178,7 +203,7 @@
 					}
 				}
 				if(i < 1){
-					this.$children[4].isShow = true;
+					this.$children[5].isShow = true;
 					this.msg = '请选择一条数据';
 				}
 				

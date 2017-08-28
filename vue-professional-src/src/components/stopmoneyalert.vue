@@ -14,10 +14,10 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">富时A50</li>
-							<li class="fl fontgray">多头</li>
+							<li class="fl fontwhite">{{commodityObj.CommodityName}}</li>
+							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">69.5</span>
+								最新：<span class="fontwhite">{{templateListObj.LastPrice}}</span>
 							</li>
 						</ol>
 					</li>
@@ -54,7 +54,7 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">富时A52</li>
+							<li class="fl fontwhite">{{commodityObj.CommodityName}}</li>
 							<li class="fl fontgray">多头</li>
 							<li class="fl fontgray">
 								最新：<span class="fontwhite">69.65</span>
@@ -103,9 +103,36 @@
 				isshow:false
 			}
 		},
+		props: ['val'],
 		computed: {
 			fl() {
 				return 'fl'
+			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
+			condition(){
+				console.log(JSON.parse(this.val));
+				return JSON.parse(this.val);
+			},
+			commodityObj(){
+				
+				return this.orderTemplist[this.condition.CommodityNo];
+			},
+			templateListObj(){
+//				this.$store.state.market.Parameters.forEach(function(a, r) {
+//				if(a.CommodityNo == this.condition.CommodityNo) {
+//					context.state.market.Parameters.splice(r, 1, e);
+//					}
+//				});
+//				console.log(this.$store.state.market.templateList[this.condition.CommodityNo]);
+				return this.$store.state.market.templateList[this.condition.CommodityNo];
+			}
+		},
+		watch:{
+			templateListObj:function(n,o){
+				console.log(1331);
+				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			}
 		},
 		methods: {
@@ -129,9 +156,8 @@
 				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
 				 */
 				this.isshow = false;
-//				var c = JSON.parse(b);
-//				console.log('地址是' + a + '数据是' + b);
-//				console.log(c);
+				console.log(this.val);
+				console.log(this.orderTemplist[this.condition.CommodityNo]);
 			}
 		}
 	}
