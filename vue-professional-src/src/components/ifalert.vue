@@ -2,8 +2,8 @@
 	<div id="ifalert" v-if="isshow">
 		<div>
 			<ul class="selectbar">
-				<li :class="[fl,fontgray,{selected:ifshow}]" @tap="selection">价格条件</li>
-				<li :class="[fl,fontgray,{selected:!ifshow}]"@tap="selection">时间条件</li>
+				<li class="fontgray fl" :class="{selected: ifshow}" @tap="selection">价格条件</li>
+				<li class="fontgray fl" :class="{selected: !ifshow}"@tap="selection">时间条件</li>
 			</ul>
 			<ul class="content">
 				<template v-if="ifshow">
@@ -157,12 +157,6 @@
 			}
 		},
 		computed:{
-			fl(){
-				return "fl"
-			},
-			fontgray(){
-				return "fontgray"
-			},
 			height1(){
 				return $('#ifalert>div').css('height').slice(0,-2);
 			},
@@ -172,7 +166,7 @@
 		},
 		methods:{
 			selection:function(e){
-				if(e.target.innerHTML=='价格条件'){
+				if(e.target.innerHTML == '价格条件'){
 					this.ifshow=true;
 					$('#ifalert>div').css('height',this.height1+'px');
 				}else{
@@ -181,6 +175,7 @@
 				}
 			},
 			close: function() {
+				console.log(132131);
 				this.isshow = false;
 			},
 			confirm: function() {
@@ -207,6 +202,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 1010;
 		background-color: rgba(0, 0, 0, .8);
 		font-size: 15px;
 	}
@@ -369,6 +365,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
+			z-index: 1010;
 			background-color: rgba(0, 0, 0, .8);
 			font-size: 15px*@ip5;
 		}
@@ -508,6 +505,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
+			z-index: 1010;
 			background-color: rgba(0, 0, 0, .8);
 			font-size: 15px*@ip6;
 		}

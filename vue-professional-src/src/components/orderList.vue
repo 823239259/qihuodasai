@@ -99,7 +99,6 @@
 				return JSON.stringify(this.selectedOrderList);
 			}
 		},
-		
 		methods: {
 			listTap: function(obj){
 				if(!$(obj.currentTarget).hasClass("current")){

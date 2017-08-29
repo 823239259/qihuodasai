@@ -1,14 +1,17 @@
 <template>
 	<div id="tradeapply">
+		<tipsDialog :msg="msgTips"></tipsDialog>
 		<topbar title="开户"></topbar>
 		<cs title="客服"></cs>
 		<!--轮播-->
 		<div class="mui-slider">
 			<div class="mui-slider-group">
 				<!--第一个内容区容器-->
-				<div class="mui-slider-item">
-					<img id="banner1" src="/src/assets/img/banner01.png" />
-				</div>
+				<template v-for="k in bannerList">
+					<div class="mui-slider-item">
+						<img id="banner1" :src="k.imgPath" />
+					</div>
+				</template>
 			</div>
 		</div>
 		<!--列表-->
@@ -42,25 +45,68 @@
 <script>
 	import topbar from '../components/Topbar.vue'
 	import cs from '../components/customerService.vue'
+	import tipsDialog from '../components/tipsDialog.vue'
 	export default {
 		name: 'tradeapply',
 		components: {
-			topbar, cs
+			topbar, cs, tipsDialog
 		},
-		methods: {
-			toDetail: function() {
-				this.$router.push({
-					path: '/applydetail'
-				});
+		data(){
+			return {
+				bannerList: []
 			}
 		},
 		computed: {
 			PATH() {
 				return this.$store.getters.PATH
 			},
+			msgTips: function(){
+				return this.msg;
+			},
+		},
+		methods: {
+			toDetail: function() {
+				this.$router.push({
+					path: '/applydetail'
+				});
+			},
+			getBanner: function(){
+				this.$http.post(this.PATH + '/banner/list', {emulateJSON: true},{
+					params: {
+						type: 9
+					},
+					timeout: 5000
+				}).then(function(e){
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							this.bannerList = data.data.bannerList;
+							this.bannerList.forEach(function(o, i){
+								o.imgPath = "http://manage.dktai.cn/" + o.imgPath;
+							});
+							console.log(this.bannerList);
+						}
+					}else{
+						switch (data.code){
+							case '2':
+								this.$children[0].isShow = true;
+								this.msg = '处理失败';
+								break;
+							default:
+								break;
+						}
+					}
+				}.bind(this), function(){
+					this.$children[0].isShow = true;
+					this.msg = '服务器连接失败';
+				});
+			}
 		},
 		mounted: function() {
-			$('#banner1').attr('src', require("../../src/assets/img/banner01.png"));
+			//初始化banner
+			this.getBanner();
+//			$('#banner1').attr('src', require("../../src/assets/img/banner01.png"));
+			//初始化各种合约数据
 			this.$http.post(
 				this.PATH + '/ftrade/params', {
 					emulateJSON: true

@@ -51,7 +51,7 @@
 			</ul>
 		</div>
 		<button class="btn mt10" @tap='exit'>退出登录</button>
-		<!--<button class="btn mt10" @tap='totest'>点我看其他demo</button>-->
+		<button class="btn mt10" @tap='totest'>点我看其他demo</button>
 	</div>
 </template>
 
