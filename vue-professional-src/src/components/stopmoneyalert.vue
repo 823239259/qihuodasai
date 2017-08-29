@@ -17,7 +17,7 @@
 							<li class="fl fontwhite">{{commodityObj.CommodityName}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice}}</span>
+								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -25,11 +25,11 @@
 						<ol class="cl">
 							<li class="fl fontgray">方式</li>
 							<li class="fl">
-								<select class="fontwhite sellong">
-									<option>止损价</option>
-									<option>动态价</option>
+								<select class="fontwhite sellong" v-model="selectStopLossType00">
+									<option value="0">止损价</option>
+									<option value="2">动态价</option>
 								</select>
-								<input type="text" value='89.64' class="inp" />
+								<input type="text" v-model="inputPrice" class="inp" />
 								<span class="fontgray">0.00%</span>
 							</li>
 						</ol>
@@ -37,12 +37,12 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">手数</li>
-							<li class="fl"><input class='inp' type="text" value="10" /></li>
+							<li class="fl"><input class='inp' type="text" v-model="Num" /></li>
 							<li class="fl  fontgray">
 								止损委托价：
-								<select name="" class='fontwhite selshort'>
-									<option value="">市价</option>
-									<option value="">限价</option>
+								<select name="" class='fontwhite selshort' v-model="orderType">
+									<option value="1">市价</option>
+									<option value="2">限价</option>
 								</select>
 							</li>
 						</ol>
@@ -100,39 +100,57 @@
 		data() {
 			return {
 				isstopm: true,
-				isshow:false
+				isshow:false,
+				Num:1,
+				selectStopLossType00:0,
+				inputPrice:0.00,
+				orderType:1
 			}
 		},
 		props: ['val'],
 		computed: {
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
+			
 			fl() {
 				return 'fl'
 			},
 			orderTemplist(){
+				console.log(this.$store.state.market.orderTemplist);
 				return	this.$store.state.market.orderTemplist;
 			},
 			condition(){
-				console.log(JSON.parse(this.val));
+				if(JSON.parse(this.val)==undefined)
+					return;
 				return JSON.parse(this.val);
 			},
 			commodityObj(){
-				
 				return this.orderTemplist[this.condition.CommodityNo];
 			},
 			templateListObj(){
-//				this.$store.state.market.Parameters.forEach(function(a, r) {
-//				if(a.CommodityNo == this.condition.CommodityNo) {
-//					context.state.market.Parameters.splice(r, 1, e);
-//					}
-//				});
-//				console.log(this.$store.state.market.templateList[this.condition.CommodityNo]);
+				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined)
+					return;
+				console.log(this.$store.state.market.templateList[this.condition.CommodityNo]);
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
+			},
+			orderTemplistDotSize(){
+				return	this.$store.state.market.orderTemplist[this.condition.CommodityNo].DotSize;
+			},
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
 			}
+			
 		},
 		watch:{
 			templateListObj:function(n,o){
-				console.log(1331);
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
+			}
+		},
+		filters:{
+			toFixed:function(value,dotSize){
+				if (!value) return '';
+				return parseFloat(value).toFixed(dotSize);
 			}
 		},
 		methods: {
@@ -151,14 +169,42 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				/*
-				 * 确认并提交数据到后台
-				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
-				 */
 				this.isshow = false;
-				console.log(this.val);
 				console.log(this.orderTemplist[this.condition.CommodityNo]);
+				var b={
+							"Method":'InsertStopLoss',
+							"Parameters":{
+								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
+								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
+								"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+								"Num":parseInt(this.Num),
+								"StopLossType":parseInt(this.selectStopLossType00),
+								"StopLossPrice":(function(){
+														if(parseInt(this.selectStopLossType00)==0){
+															return parseFloat(this.inputPrice);
+														}else{
+															return 0.00;
+														}
+													}).bind(this)(),
+								"StopLossDiff":(function(){
+													if(parseInt(this.selectStopLossType00)==2){
+														return parseFloat(this.inputPrice);
+													}else{
+														return 0.00;
+													}
+												}).bind(this)(),
+								"HoldAvgPrice":this.condition.HoldAvgPrice,
+								"HoldDirection":this.condition.Drection,
+								"OrderType":parseInt(this.orderType),
+							}
+					};
+					console.log(JSON.stringify(b));
+					this.tradeSocket.send(JSON.stringify(b));
 			}
+		},
+		mounted: function(){
+			this.inputPrice = this.templateListObj.LastPrice;
+			console.log(this.parameters);
 		}
 	}
 </script>
