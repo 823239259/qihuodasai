@@ -4,14 +4,20 @@
 		<topbar title="开户"></topbar>
 		<cs title="客服"></cs>
 		<!--轮播-->
-		<div class="mui-slider">
+		<div id="slider" class="mui-slider">
 			<div class="mui-slider-group">
+				<!--<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img :src="bannerList[bannerList.length - 1].imgPath"></a>
+				</div>-->
 				<!--第一个内容区容器-->
 				<template v-for="k in bannerList">
 					<div class="mui-slider-item">
-						<img id="banner1" :src="k.imgPath" />
+						<a href="#"><img :src="k.imgPath" /></a>
 					</div>
 				</template>
+				<!--<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img :src="bannerList[0].imgPath"></a>
+				</div>-->
 			</div>
 		</div>
 		<!--列表-->
@@ -82,9 +88,8 @@
 						if(data.code == 1){
 							this.bannerList = data.data.bannerList;
 							this.bannerList.forEach(function(o, i){
-								o.imgPath = "http://manage.dktai.cn/" + o.imgPath;
+								o.imgPath = "http://test.manage.dktai.cn/" + o.imgPath;
 							});
-							console.log(this.bannerList);
 						}
 					}else{
 						switch (data.code){
@@ -105,6 +110,10 @@
 		mounted: function() {
 			//初始化banner
 			this.getBanner();
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+			  interval: 0 //自动轮播周期，若为0则不自动播放，默认为0；
+			});
 //			$('#banner1').attr('src', require("../../src/assets/img/banner01.png"));
 			//初始化各种合约数据
 			this.$http.post(
@@ -284,11 +293,16 @@
 		.mui-slider {
 			width: @width;
 			height: 150px*@ip5;
-			padding: 15px*@ip5;
 			background-color: #242633;
 		}
 		.mui-slider-group {
-			height: 120px*@ip5;
+			height: 150px*@ip5;
+		}
+		.mui-slider-item{
+			width: @width;
+			height: 150px*@ip5;
+			overflow: hidden;
+			padding: 15px*@ip5;
 		}
 		img {
 			width: 100%;
@@ -371,11 +385,16 @@
 		.mui-slider {
 			width: @width;
 			height: 150px*@ip6;
-			padding: 15px*@ip6;
 			background-color: #242633;
 		}
 		.mui-slider-group {
-			height: 120px*@ip6;
+			height: 150px*@ip6;
+		}
+		.mui-slider-item{
+			width: @width;
+			height: 150px*@ip6;
+			overflow: hidden;
+			padding: 15px*@ip6;
 		}
 		img {
 			width: 100%;
@@ -448,11 +467,16 @@
 		.mui-slider {
 			width: @width;
 			height: 150px;
-			padding: 15px;
 			background-color: #242633;
 		}
 		.mui-slider-group {
-			height: 120px;
+			height: 150px;
+		}
+		.mui-slider-item{
+			width: @width;
+			height: 150px;
+			overflow: hidden;
+			padding: 15px;
 		}
 		img {
 			width: 100%;
