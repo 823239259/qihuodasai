@@ -112,7 +112,7 @@
 				return	this.$store.state.market.orderTemplist;
 			},
 			condition(){
-				console.log(JSON.parse(this.val));
+//				console.log(JSON.parse(this.val));
 				return JSON.parse(this.val);
 			},
 			commodityObj(){
@@ -127,11 +127,11 @@
 //				});
 //				console.log(this.$store.state.market.templateList[this.condition.CommodityNo]);
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
-			}
+			},
 		},
 		watch:{
 			templateListObj:function(n,o){
-				console.log(1331);
+//				console.log(1331);
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			}
 		},
@@ -159,6 +159,9 @@
 				console.log(this.val);
 				console.log(this.orderTemplist[this.condition.CommodityNo]);
 			}
+		},
+		mounted: function(){
+			console.log(this.$parent.$parent.$parent.$parent);
 		}
 	}
 </script>

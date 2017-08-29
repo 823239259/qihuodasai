@@ -97,7 +97,7 @@
 			},
 			selectedOrderLists: function(){
 				return JSON.stringify(this.selectedOrderList);
-			}
+			},
 		},
 		methods: {
 			listTap: function(obj){
