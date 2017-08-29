@@ -1463,11 +1463,13 @@ export default new Vuex.Store({
 				
 				case 'OnRspQryStopLoss':
 					if(parameters!=null){
-						context.state.market.stopLossList.push(parameters);
+						context.state.market.stopLossList.unshift(parameters);
 					}
 					break;
+				case 'OnRtnStopLossState':
+					console.log(parameters);
+					break;
 				case 'OnError':
-//					console.log('OnError');
 					context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
 				default:
 					break;
