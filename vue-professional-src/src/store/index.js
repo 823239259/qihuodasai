@@ -1465,10 +1465,10 @@ export default new Vuex.Store({
 				case 'OnRspQryStopLoss':
 					if(parameters!=null){
 						if(parameters.Status==0||parameters.Status==1){
+							console.log(parameters.Status);
 							context.state.market.stopLossList.unshift(parameters);
-						}
-						
-						if(parameters.Status==2||parameters.Status==3||parameters.Status==4||parameters.Status==5){
+						}else if(parameters.Status==2||parameters.Status==3||parameters.Status==4||parameters.Status==5){
+							console.log(parameters.Status);
 							context.state.market.stopLossTriggeredList.unshift(parameters);
 						}
 					}

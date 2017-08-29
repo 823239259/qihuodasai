@@ -112,6 +112,7 @@
 			},
 			hasYesstopLossList00(){
 				this.hasNostopLossList=[];
+				console.log(this.stopLossTriggeredList);
 				this.stopLossTriggeredList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
@@ -182,6 +183,7 @@
 			},
 			hasNostopLossList00(){
 				this.hasNostopLossList=[];
+				console.log(this.stopLossList);
 				this.stopLossList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
