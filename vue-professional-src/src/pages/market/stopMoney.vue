@@ -97,12 +97,11 @@
 			}
 		},
 		computed:{
-			
 			stopLossTriggeredList(){
 				return this.$store.state.market.stopLossTriggeredList;
 			},
 			hasYesstopLossList(){
-				return this.$store.state.market.hasNostopLossList;
+				return this.$store.state.market.hasYesstopLossList;
 			},
 			stopLossList(){
 				return this.$store.state.market.stopLossList;
@@ -110,9 +109,29 @@
 			hasNostopLossList(){
 				return this.$store.state.market.hasNostopLossList;
 			},
-			hasYesstopLossList00(){
-				this.hasNostopLossList=[];
-				console.log(this.stopLossTriggeredList);
+		},
+		methods: {
+			showCont: function(e){
+				$(e.currentTarget).find("span").addClass('current');
+				$(e.currentTarget).siblings().find("span").removeClass('current')
+				if($(e.currentTarget).index() == 0){
+					this.isShow = true;
+				}else{
+					this.isShow = false;
+				}
+			},
+			listTap: function(obj){
+				if(!$(obj.currentTarget).hasClass("current")){
+					$(obj.currentTarget).addClass("current");
+					$(obj.currentTarget).siblings().removeClass("current");
+					this.orderListId = $(obj.currentTarget).attr("id");
+				}else{
+					$(obj.currentTarget).removeClass("current");
+					this.orderListId =null;
+				}
+			},
+			hasYesstopLossList00: function(){
+				this.$store.state.market.hasYesstopLossList = [];
 				this.stopLossTriggeredList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
@@ -181,9 +200,8 @@
 					this.hasYesstopLossList.push(s);
 				}.bind(this));
 			},
-			hasNostopLossList00(){
-				this.hasNostopLossList=[];
-				console.log(this.stopLossList);
+			hasNostopLossList00: function(){
+				this.$store.state.market.hasNostopLossList = [];
 				this.stopLossList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
@@ -253,27 +271,6 @@
 				}.bind(this));
 			}
 		},
-		methods: {
-			showCont: function(e){
-				$(e.currentTarget).find("span").addClass('current');
-				$(e.currentTarget).siblings().find("span").removeClass('current')
-				if($(e.currentTarget).index() == 0){
-					this.isShow = true;
-				}else{
-					this.isShow = false;
-				}
-			},
-			listTap: function(obj){
-				if(!$(obj.currentTarget).hasClass("current")){
-					$(obj.currentTarget).addClass("current");
-					$(obj.currentTarget).siblings().removeClass("current");
-					this.orderListId = $(obj.currentTarget).attr("id");
-				}else{
-					$(obj.currentTarget).removeClass("current");
-					this.orderListId =null;
-				}
-			},
-		},
 		mounted: function(){
 			//页面滚动高度计算
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
@@ -281,11 +278,10 @@
 			$("#conditions").css("height", screenHeight + "px");
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
-			
-			this.hasNostopLossList00;
-			this.hasYesstopLossList00;
 		},
 		activated: function(){
+			this.hasNostopLossList00();
+			this.hasYesstopLossList00();
 			//不更新画图
 			this.$store.state.isshow.isklineshow = false;
 			this.$store.state.isshow.isfensshow = false;
