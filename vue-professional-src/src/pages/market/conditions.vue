@@ -141,7 +141,6 @@
 				}
 			},
 			addConditions: function(){
-				console.log(this.$children);
 				this.$children[1].isshow = true;
 			}
 		},
