@@ -89,7 +89,7 @@
 								时间
 							</li>
 							<li>
-								<input type="text" value='18:30:15' class='time'/>
+								<input type="time" value='18:30:15' class='time'/>
 							</li>
 						</ol>
 					</li>
@@ -175,7 +175,6 @@
 				}
 			},
 			close: function() {
-				console.log(132131);
 				this.isshow = false;
 			},
 			confirm: function() {
@@ -357,7 +356,6 @@
 		color: white;
 	}
 	/*ip5*/
-	
 	@media(max-width:370px) {
 		#ifalert {
 			position: fixed;
@@ -497,7 +495,6 @@
 	}
 	}
 	/*ip6*/
-	
 	@media (min-width:371px) and (max-width:410px) {
 		#ifalert {
 			position: fixed;
