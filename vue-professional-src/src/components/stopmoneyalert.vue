@@ -14,7 +14,7 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">{{commodityObj.CommodityName}}</li>
+							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
 								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
@@ -54,7 +54,7 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">{{commodityObj.CommodityName}}</li>
+							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
 							<li class="fl fontgray">多头</li>
 							<li class="fl fontgray">
 								最新：<span class="fontwhite">69.65</span>
@@ -126,12 +126,12 @@
 				return JSON.parse(this.val);
 			},
 			commodityObj(){
+				console.log(this.orderTemplist[this.condition.CommodityNo]);
 				return this.orderTemplist[this.condition.CommodityNo];
 			},
 			templateListObj(){
 				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined)
 					return;
-				console.log(this.$store.state.market.templateList[this.condition.CommodityNo]);
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			},
 			orderTemplistDotSize(){
@@ -142,11 +142,7 @@
 			}
 			
 		},
-		watch:{
-			templateListObj:function(n,o){
-				return this.$store.state.market.templateList[this.condition.CommodityNo];
-			}
-		},
+		
 		filters:{
 			toFixed:function(value,dotSize){
 				if (!value) return '';
@@ -197,12 +193,13 @@
 								"OrderType":parseInt(this.orderType),
 							}
 					};
-					console.log(JSON.stringify(b));
 					this.tradeSocket.send(JSON.stringify(b));
 			}
 		},
 		mounted: function(){
-			this.inputPrice = this.templateListObj.LastPrice;
+			if(this.templateListObj!=undefined){
+				this.inputPrice = this.templateListObj.LastPrice;
+			}
 		}
 	}
 </script>

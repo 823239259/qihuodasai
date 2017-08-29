@@ -165,7 +165,8 @@ var market = {
 		stopLossList:[],
 		hasNostopLossList:[],
 		
-		
+		stopLossTriggeredList:[],//已触发列表
+		hasYesstopLossList:[],
 		
 		
 		
@@ -1463,16 +1464,32 @@ export default new Vuex.Store({
 				
 				case 'OnRspQryStopLoss':
 					if(parameters!=null){
-						context.state.market.stopLossList.unshift(parameters);
+						if(parameters.Status==0||parameters.Status==1){
+							context.state.market.stopLossList.unshift(parameters);
+						}
+						
+						if(parameters.Status==2||parameters.Status==3||parameters.Status==4||parameters.Status==5){
+							context.state.market.stopLossTriggeredList.unshift(parameters);
+						}
 					}
 					break;
 				case 'OnRtnStopLossState':
 					console.log(parameters);
 					break;
+				case 'OnRspInsertStopLoss':
+					context.dispatch('layerOnRspInsertStopLoss',parameters);
+					break;
 				case 'OnError':
 					context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
 				default:
 					break;
+			}
+		},
+		layerOnRspInsertStopLoss:function(){
+			if(parameters.Status==0){
+				console.log('提交成功,单号【'+ parameters.StopLossNo+'】');
+			}else{
+				console.log('提交失败,原因:【'+parameters.StatusMsg+'】');
 			}
 		},
 		qryHisTrade:function(context){

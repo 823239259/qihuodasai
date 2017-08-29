@@ -30,7 +30,7 @@
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
 								<span>{{k.CommodityNo + k.ContractNo}}</span>
-								<span>{{k.StatusMsg}}</span>
+								<span>{{k.StatusMsg00}}</span>
 								<span>{{k.HoldDrection}}</span>
 								<span>{{k.StopLossType}}</span>
 								<span>{{k.Num}}</span>
@@ -59,18 +59,18 @@
 						<span>触发条件</span>
 						<span>委托价</span>
 						<span>有效期</span>
-						<span>下单时间</span>
+						<span>触发时间</span>
 					</li>
-					<template v-for="k in noListCont">
+					<template v-for="k in hasYesstopLossList">
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
-								<span>{{k.name}}</span>
+								<span>{{k.CommodityNo + k.ContractNo}}</span>
+								<span>{{k.StatusMsg00}}</span>
 								<span>{{k.HoldDrection}}</span>
-								<span>{{k.type}}</span>
-								<span>{{k.types}}</span>
-								<span>{{k.num}}</span>
-								<span>{{k.conditions}}</span>
-								<span>{{k.price}}</span>
+								<span>{{k.StopLossType}}</span>
+								<span>{{k.Num}}</span>
+								<span>{{k.triggerCondition}}</span>
+								<span>{{k.entrustPrice}}</span>
 								<span>{{k.validity}}</span>
 								<span>{{k.InsertDateTime}}</span>
 							</div>
@@ -93,44 +93,94 @@
 		data(){
 			return {
 				isShow: true,
-				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
-				noListCont:[
-					{
-						name: 'CL1710',
-						status: '运行中',
-						type: '多',
-						types: '限价止损',
-						num: 1,
-						conditions: '触发价:47.50',
-						price: '市价',
-						term: '当日有效',
-						time: '2017-08-28 10:01:04'
-					}
-				],
-				yesListCont:[
-					{
-						name: 'CL1710',
-						status: '运行中',
-						type: '多',
-						types: '限价止损',
-						num: 1,
-						conditions: '触发价:47.50',
-						price: '市价',
-						term: '当日有效',
-						time: '2017-08-28 10:01:04'
-					},
-				],
+				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}]
 			}
 		},
 		computed:{
+			
+			stopLossTriggeredList(){
+				return this.$store.state.market.stopLossTriggeredList;
+			},
+			hasYesstopLossList(){
+				return this.$store.state.market.hasNostopLossList;
+			},
 			stopLossList(){
 				return this.$store.state.market.stopLossList;
 			},
 			hasNostopLossList(){
 				return this.$store.state.market.hasNostopLossList;
 			},
+			hasYesstopLossList00(){
+				this.hasNostopLossList=[];
+				this.stopLossTriggeredList.forEach(function(e,i){
+					let s={};
+					s.ClientNo = e.ClientNo;
+					s.CommodityNo=e.CommodityNo;
+					s.ContractNo = e.ContractNo;
+					s.ExchangeNo = e.ExchangeNo;
+					s.HoldAvgPrice=e.HoldAvgPrice;
+					s.HoldDrection = (function(){
+							if(e.HoldDrection==0){
+								return '多';
+							}else{
+								return '空';
+							}
+							
+						})();
+					s.InsertDateTime = e.InsertDateTime;
+					s.Num = e.Num;
+					s.OrderType=(function(){
+						if(e.OrderType==1){
+							return '市价';
+						}else{
+							return '限价';
+						}
+					})();
+					s.Status = e.Status;
+					s.StatusMsg = e.StatusMsg;
+					s.StatusMsg00=(function(){
+						if(e.Status==0)
+							return '运行中';
+						if(e.Status==1)
+							return '暂停';
+						if(e.Status==2)
+							return '已触发';
+						if(e.Status==3)
+							return '已取消';
+						if(e.Status==4)
+							return '插入失败';
+						if(e.Status==5)
+							return '触发失败';	
+					})();
+					s.StopLossDiff = e.StopLossDiff;
+					s.StopLossNo = e.StopLossNo;
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(2);
+					s.StopLossType = (function(){
+						if(e.StopLossType==0)
+							return '限价止损';
+						if(e.StopLossType==1)	
+							return '限价止盈';
+						if(e.StopLossType==2)
+							return '动态止损';
+					})();
+					s.triggerCondition=(function(){
+						if(e.StopLossType==0 || e.StopLossType==1)
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(2);
+					})();
+					
+					s.entrustPrice=(function(){
+						if(e.OrderType==1){
+							return '市价';
+						}else{
+							return '对手价';
+						}
+					})();
+					s.validity = '当日有效';
+					s.InsertDateTime = e.InsertDateTime;
+					this.hasYesstopLossList.push(s);
+				}.bind(this));
+			},
 			hasNostopLossList00(){
-				console.log(this.stopLossList);
 				this.hasNostopLossList=[];
 				this.stopLossList.forEach(function(e,i){
 					let s={};
@@ -158,6 +208,20 @@
 					})();
 					s.Status = e.Status;
 					s.StatusMsg = e.StatusMsg;
+					s.StatusMsg00=(function(){
+						if(e.Status==0)
+							return '运行中';
+						if(e.Status==1)
+							return '暂停';
+						if(e.Status==2)
+							return '已触发';
+						if(e.Status==3)
+							return '已取消';
+						if(e.Status==4)
+							return '插入失败';
+						if(e.Status==5)
+							return '触发失败';	
+					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
 					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(2);
@@ -217,6 +281,7 @@
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 			
 			this.hasNostopLossList00;
+			this.hasYesstopLossList00;
 		},
 		activated: function(){
 			//不更新画图
