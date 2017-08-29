@@ -170,7 +170,6 @@
 			},
 			confirm: function() {
 				this.isshow = false;
-				console.log(this.orderTemplist[this.condition.CommodityNo]);
 				var b={
 							"Method":'InsertStopLoss',
 							"Parameters":{
@@ -204,7 +203,6 @@
 		},
 		mounted: function(){
 			this.inputPrice = this.templateListObj.LastPrice;
-			console.log(this.parameters);
 		}
 	}
 </script>

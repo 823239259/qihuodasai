@@ -161,6 +161,16 @@ var market = {
 //		appendOrderMsg: '',     //委托提示
 		
 		
+		//止损止盈---------------------------------
+		stopLossList:[],
+		hasNostopLossList:[],
+		
+		
+		
+		
+		
+		
+		
 		//选择K线时候的值
 		selectTime: 1,
 		//存进入详情页的No
@@ -1323,7 +1333,8 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询账户信息 QryAccount
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						
+						//查询止损单
+						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
 						
@@ -1448,6 +1459,12 @@ export default new Vuex.Store({
 						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 					}
 					context.dispatch('layerOnRtnOrderTraded',parameters);
+					break;
+				
+				case 'OnRspQryStopLoss':
+					if(parameters!=null){
+						context.state.market.stopLossList.push(parameters);
+					}
 					break;
 				case 'OnError':
 //					console.log('OnError');

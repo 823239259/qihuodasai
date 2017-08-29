@@ -26,18 +26,18 @@
 						<span>有效期</span>
 						<span>下单时间</span>
 					</li>
-					<template v-for="k in noListCont">
+					<template v-for="k in hasNostopLossList">
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
-								<span>{{k.name}}</span>
-								<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.status}}</span>
-								<span>{{k.type}}</span>
-								<span>{{k.types}}</span>
-								<span>{{k.num}}</span>
-								<span>{{k.conditions}}</span>
-								<span>{{k.price}}</span>
-								<span>{{k.term}}</span>
-								<span>{{k.time}}</span>
+								<span>{{k.CommodityNo + k.ContractNo}}</span>
+								<span>{{k.StatusMsg}}</span>
+								<span>{{k.HoldDrection}}</span>
+								<span>{{k.StopLossType}}</span>
+								<span>{{k.Num}}</span>
+								<span>{{k.triggerCondition}}</span>
+								<span>{{k.entrustPrice}}</span>
+								<span>{{k.validity}}</span>
+								<span>{{k.InsertDateTime}}</span>
 							</div>
 						</li>
 					</template>
@@ -65,14 +65,14 @@
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
 								<span>{{k.name}}</span>
-								<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.status}}</span>
+								<span>{{k.HoldDrection}}</span>
 								<span>{{k.type}}</span>
 								<span>{{k.types}}</span>
 								<span>{{k.num}}</span>
 								<span>{{k.conditions}}</span>
 								<span>{{k.price}}</span>
-								<span>{{k.term}}</span>
-								<span>{{k.time}}</span>
+								<span>{{k.validity}}</span>
+								<span>{{k.InsertDateTime}}</span>
 							</div>
 						</li>
 					</template>
@@ -123,6 +123,69 @@
 			}
 		},
 		computed:{
+			stopLossList(){
+				return this.$store.state.market.stopLossList;
+			},
+			hasNostopLossList(){
+				return this.$store.state.market.hasNostopLossList;
+			},
+			hasNostopLossList00(){
+				console.log(this.stopLossList);
+				this.hasNostopLossList=[];
+				this.stopLossList.forEach(function(e,i){
+					let s={};
+					s.ClientNo = e.ClientNo;
+					s.CommodityNo=e.CommodityNo;
+					s.ContractNo = e.ContractNo;
+					s.ExchangeNo = e.ExchangeNo;
+					s.HoldAvgPrice=e.HoldAvgPrice;
+					s.HoldDrection = (function(){
+							if(e.HoldDrection==0){
+								return '多';
+							}else{
+								return '空';
+							}
+							
+						})();
+					s.InsertDateTime = e.InsertDateTime;
+					s.Num = e.Num;
+					s.OrderType=(function(){
+						if(e.OrderType==1){
+							return '市价';
+						}else{
+							return '限价';
+						}
+					})();
+					s.Status = e.Status;
+					s.StatusMsg = e.StatusMsg;
+					s.StopLossDiff = e.StopLossDiff;
+					s.StopLossNo = e.StopLossNo;
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(2);
+					s.StopLossType = (function(){
+						if(e.StopLossType==0)
+							return '限价止损';
+						if(e.StopLossType==1)	
+							return '限价止盈';
+						if(e.StopLossType==2)
+							return '动态止损';
+					})();
+					s.triggerCondition=(function(){
+						if(e.StopLossType==0 || e.StopLossType==1)
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(2);
+					})();
+					
+					s.entrustPrice=(function(){
+						if(e.OrderType==1){
+							return '市价';
+						}else{
+							return '对手价';
+						}
+					})();
+					s.validity = '当日有效';
+					s.InsertDateTime = e.InsertDateTime;
+					this.hasNostopLossList.push(s);
+				}.bind(this));
+			}
 		},
 		methods: {
 			showCont: function(e){
@@ -152,6 +215,8 @@
 			$("#conditions").css("height", screenHeight + "px");
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
+			
+			this.hasNostopLossList00;
 		},
 		activated: function(){
 			//不更新画图
@@ -218,7 +283,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 900px;
+				width: 920px;
 				background: @deepblue;
 				padding-left: 15px;
 				border-top: 1px solid @black;
@@ -268,7 +333,7 @@
 						width: 80px;
 					}
 					&:nth-child(9){
-						width: 130px;
+						width: 150px;
 					}
 					&.red{
 						color: @red;
