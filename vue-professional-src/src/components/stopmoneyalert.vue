@@ -55,9 +55,9 @@
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
 							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
-							<li class="fl fontgray">多头</li>
+							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">69.65</span>
+								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -65,7 +65,7 @@
 						<ol class="cl">
 							<li class="fl fontgray">止盈价</li>
 							<li class="fl">
-								<input type="text" value='89.64' class="inp" />
+								<input type="text" class="inp" v-model="zhiYinInputPrice"/>
 								<span class="fontgray">0.00%</span>
 							</li>
 						</ol>
@@ -73,12 +73,12 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">手数</li>
-							<li class="fl"><input class='inp' type="text" value="10" /></li>
+							<li class="fl"><input class='inp' type="text" v-model="zhiYinNum" /></li>
 							<li class="fl  fontgray">
 								止损委托价：
-								<select name="" class='fontwhite selshort'>
-									<option value="">市价</option>
-									<option value="">限价</option>
+								<select name="" class='fontwhite selshort' v-model="zhiYinorderType">
+									<option value="1">市价</option>
+									<option value="2">限价</option>
 								</select>
 							</li>
 						</ol>
@@ -104,7 +104,11 @@
 				Num:1,
 				selectStopLossType00:0,
 				inputPrice:0.00,
-				orderType:1
+				orderType:1,
+				zhiYinInputPrice:0.00,
+				zhiYinNum:1,
+				zhiYinorderType:1
+				
 			}
 		},
 		props: ['val'],
