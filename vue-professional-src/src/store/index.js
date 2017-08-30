@@ -1489,6 +1489,7 @@ export default new Vuex.Store({
 		updateStopLoss:function(context,parameters){
 			if(parameters.Status>2){
 				context.state.market.stopLossTriggeredList.push(parameters);
+				context.state.market.hasYesstopLossList.push(parameters);
 			}else if(parameters.Status==2){
 				
 				context.state.market.hasNostopLossList.forEach(function(e,i){
