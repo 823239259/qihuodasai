@@ -27,7 +27,7 @@
 							<li>
 								<select class="fontwhite selectshort">
 									<option>&nbsp;&nbsp;>=</option>
-									<option&nbsp;&nbsp;<=</option>
+									<option>&nbsp;&nbsp;<=</option>
 								</select>
 								<input type="text" value="89.64" class="fontwhite" />
 							</li>

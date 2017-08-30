@@ -11,10 +11,10 @@
 			<div class="money_option_row border_bottom">
 				<p>余额：{{balance}}元</p>
 			</div>
-			<div class="money_option_row">
+			<!--<div class="money_option_row">
 				<button class="fl yellow" @tap='recharge'>我要充值</button>
 				<button class="fr blue" @tap='withdrawal'>我要提现</button>
-			</div>
+			</div>-->
 		</div>
 		<div class="list_option mt10">
 			<ul>
@@ -51,7 +51,7 @@
 			</ul>
 		</div>
 		<button class="btn mt10" @tap='exit'>退出登录</button>
-		<button class="btn mt10" @tap='totest'>点我看其他demo</button>
+		<!--<button class="btn mt10" @tap='totest'>点我看其他demo</button>-->
 	</div>
 </template>
 
@@ -198,7 +198,6 @@
 			}
 		}
 		.money_option{
-			height: 110px;
 			background: @deepblue;
 			.money_option_row{
 				height: 55px;
@@ -303,7 +302,6 @@
 			}
 		}
 		.money_option{
-			height: 110px*@ip6;
 			background: @deepblue;
 			.money_option_row{
 				height: 55px*@ip6;
@@ -408,7 +406,6 @@
 			}
 		}
 		.money_option{
-			height: 110px*@ip5;
 			background: @deepblue;
 			.money_option_row{
 				height: 55px*@ip5;
