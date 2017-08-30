@@ -132,7 +132,7 @@
 				}else{
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo==this.orderListId){
-//							this.hasNostopLossList.splice(i,1);
+							this.hasNostopLossList.splice(i,1);
 							console.log(e);
 							let b={
 								"Method":'ModifyStopLoss',
@@ -161,6 +161,8 @@
 					this.isShow = true;
 				}else{
 					this.isShow = false;
+					this.hasNostopLossList00();
+					this.hasYesstopLossList00();
 				}
 			},
 			listTap: function(obj){
@@ -230,6 +232,8 @@
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
 							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+						if(e.StopLossType==2)
+							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(orderTemplist[e.CommodityNo].DotSize);	
 					})();
 					
 					s.entrustPrice=(function(){
