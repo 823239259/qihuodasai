@@ -4,7 +4,7 @@
 		<!--tab切换-->
 		<changealert :price="bindPrice" :num="bindNum"></changealert>
 		<!--<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" addr="127.0.0.1" :objstr='objst'></alert>-->
-		<alert title="确认下单" line1="" :line2="insertOrder" :objstr='objst'></alert>
+		<alert title="确认下单" :line1="insertOrder" :objstr='objst'></alert>
 		<div class="money_total border_bottom">
 			<span>总资产</span>
 			<span class="white">{{this.jCacheTotalAccount.TodayBalance | fixNum}}</span>
@@ -177,8 +177,8 @@
 		<!--<orderlist :val="orderContEvent" id="orderCont" v-else-if="orderShow"></orderlist>
 		<orderlist :val="entrustContEvent" id="entrustCont" v-else-if="entrustShow"></orderlist>
 		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>-->
-		<alert title="确认撤单" :line2="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
-		<alert title="确认全部撤单"  :line2="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
+		<alert title="确认撤单" :line1="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
+		<alert title="确认全部撤单"  :line1="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
 		<tipsDialog :msg="msgTips"></tipsDialog>
 	</div>
 </template>

@@ -1,7 +1,7 @@
 <template>
 	<div id="tradebottom">
 		<div>
-			<alert title="确认下单" line1="" :line2="insertOrder" :objstr='objst'></alert>
+			<alert title="确认下单" :line1="insertOrder" :objstr='objst'></alert>
 			<div class="toppart">
 				<div class="fl">
 					<ul>

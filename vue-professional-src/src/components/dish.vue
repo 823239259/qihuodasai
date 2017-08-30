@@ -1,6 +1,6 @@
 <template>
 	<div id="dish">
-		<alert title="确认下单" line1="" :line2="insertOrder" :objstr='objst'></alert>
+		<alert title="确认下单" :line1="insertOrder" :objstr='objst'></alert>
 		<div class="title">
 			<span>盘口</span>
 			<span>五档</span>
