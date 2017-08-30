@@ -1463,18 +1463,22 @@ export default new Vuex.Store({
 					break;
 				
 				case 'OnRspQryStopLoss':
+					console.log('OnRspQryStopLoss');
 					if(parameters!=null){
 						if(parameters.Status==0||parameters.Status==1){
-							context.state.market.stopLossList.unshift(parameters);
+							context.state.market.stopLossList.push(parameters);
 						}else if(parameters.Status==2||parameters.Status==3||parameters.Status==4||parameters.Status==5){
-							context.state.market.stopLossTriggeredList.unshift(parameters);
+							context.state.market.stopLossTriggeredList.push(parameters);
 						}
 					}
 					break;
 				case 'OnRtnStopLossState':
+					console.log('OnRtnStopLossState');
 					console.log(parameters);
+					context.dispatch('updateStopLoss',parameters);
 					break;
 				case 'OnRspInsertStopLoss':
+					console.log('OnRspInsertStopLoss');
 					context.dispatch('layerOnRspInsertStopLoss',parameters);
 					break;
 				case 'OnError':
@@ -1483,8 +1487,30 @@ export default new Vuex.Store({
 					break;
 			}
 		},
-		layerOnRspInsertStopLoss:function(){
+		updateStopLoss:function(context,parameters){
+			if(parameters.Status>2){
+				context.state.market.stopLossTriggeredList.push(parameters);
+			}else if(parameters.Status==2){
+				
+			}else{
+				console.log('-------------------');
+				let hasExist = false;
+				context.state.market.stopLossList.forEach(function(e,i){
+					if(e.StopLossNo==parameters.StopLossNo){
+						console.log(e);
+						hasExist = true;
+					}
+				});
+				
+				if(hasExist==false){
+					context.state.market.stopLossList.push(parameters);
+				}
+				
+			}
+		},
+		layerOnRspInsertStopLoss:function(context,parameters){
 			if(parameters.Status==0){
+				
 				console.log('提交成功,单号【'+ parameters.StopLossNo+'】');
 			}else{
 				console.log('提交失败,原因:【'+parameters.StatusMsg+'】');

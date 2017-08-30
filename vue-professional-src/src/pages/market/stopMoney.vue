@@ -104,11 +104,15 @@
 				return this.$store.state.market.hasYesstopLossList;
 			},
 			stopLossList(){
+				console.log(this.$store.state.market.stopLossList);
 				return this.$store.state.market.stopLossList;
 			},
 			hasNostopLossList(){
 				return this.$store.state.market.hasNostopLossList;
 			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			}
 		},
 		methods: {
 			showCont: function(e){
@@ -132,6 +136,7 @@
 			},
 			hasYesstopLossList00: function(){
 				this.$store.state.market.hasYesstopLossList = [];
+				let orderTemplist = this.orderTemplist;
 				this.stopLossTriggeredList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
@@ -174,7 +179,8 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(2);
+					console.log(orderTemplist[e.CommodityNo]);
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
 							return '限价止损';
@@ -185,7 +191,7 @@
 					})();
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
-							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(2);
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
 					})();
 					
 					s.entrustPrice=(function(){
@@ -201,6 +207,7 @@
 				}.bind(this));
 			},
 			hasNostopLossList00: function(){
+				let orderTemplist = this.orderTemplist;
 				this.$store.state.market.hasNostopLossList = [];
 				this.stopLossList.forEach(function(e,i){
 					let s={};
@@ -244,7 +251,7 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(2);
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
 							return '限价止损';
@@ -255,7 +262,7 @@
 					})();
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
-							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(2);
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
 					})();
 					
 					s.entrustPrice=(function(){
@@ -280,6 +287,8 @@
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 		},
 		activated: function(){
+			this.stopLossList;
+			this.stopLossTriggeredList;
 			this.hasNostopLossList00();
 			this.hasYesstopLossList00();
 			//不更新画图
