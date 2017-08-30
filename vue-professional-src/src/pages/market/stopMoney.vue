@@ -9,7 +9,7 @@
 		<div class="page_cont">
 			<div class="tab_box" id="tabBox">
 				<template v-for="key in tabList">
-					<div class="tab_box_col">
+					<div class="tab_box_col" @tap="showCont">
 						<span>{{key.nav}}</span>
 					</div>
 				</template>
@@ -153,6 +153,15 @@
 					}.bind(this));
 				}
 				
+			},
+			showCont: function(e){
+				$(e.currentTarget).find("span").addClass('current');
+				$(e.currentTarget).siblings().find("span").removeClass('current')
+				if($(e.currentTarget).index() == 0){
+					this.isShow = true;
+				}else{
+					this.isShow = false;
+				}
 			},
 			listTap: function(obj){
 				if(!$(obj.currentTarget).hasClass("current")){
