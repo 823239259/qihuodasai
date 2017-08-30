@@ -128,6 +128,11 @@
 				return this.$store.state.tradeSocket;
 			}
 		},
+		watch: {
+			stopLossList: function(n, o){
+				this.hasNostopLossList00();
+			}
+		},
 		methods: {
 			suspendEvent:function(){
 				if(this.orderListId == '' || this.orderListId == null){
@@ -300,6 +305,7 @@
 				}.bind(this));
 			},
 			hasNostopLossList00: function(){
+				console.log(1211111);
 				let orderTemplist = this.orderTemplist;
 				this.$store.state.market.hasNostopLossList = [];
 				this.stopLossList.forEach(function(e,i){

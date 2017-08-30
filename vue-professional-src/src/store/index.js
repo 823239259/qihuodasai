@@ -1501,12 +1501,13 @@ export default new Vuex.Store({
 				context.state.market.stopLossTriggeredList.push(parameters);
 				
 			}else{
-				console.log('-------------------');
 				let hasExist = false;
 				context.state.market.stopLossList.forEach(function(e,i){
 					if(e.StopLossNo==parameters.StopLossNo){
 						hasExist = true;
-						
+						e.Status = parameters.Status;
+						context.state.market.stopLossList.splice(i,1,e);
+						context.state.market.hasNostopLossList.splice(i,1,e);
 					}
 				});
 				
