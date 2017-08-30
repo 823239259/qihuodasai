@@ -66,7 +66,7 @@
 						<div>
 							<span id="time" class="fontgray">
 								<!--{{key.localDateTime | getTime('HH:mm')}}-->
-								{{key.createTime | getTime('HH:mm')}}
+								{{key.timestamp | getTime('HH:mm')}}
 							</span>
 							<img :src="key.flagUrl" />
 							<span class="state fontgray">
@@ -233,6 +233,7 @@
 //					console.log(e.body.data.data);
 					var arr1 = [];
 					var arr2 = e.body.data.data;
+					console.log(arr2);
 //					arr2.forEach(function(e){
 //						console.log(e.importance);
 //					});

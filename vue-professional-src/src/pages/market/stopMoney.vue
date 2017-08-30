@@ -45,7 +45,7 @@
 				<div class="list_tools">
 					<cbtn name="暂停"></cbtn>
 					<cbtn name="修改"></cbtn>
-					<cbtn name="删除" @tap.native='delete'></cbtn>
+					<cbtn name="删除" @tap.native="deleteEvent"></cbtn>
 				</div>
 			</div>
 			<div id="yesCont" class="list" v-else="isShow">
@@ -114,6 +114,9 @@
 			}
 		},
 		methods: {
+			deleteEvent: function(){
+				
+			},
 			showCont: function(e){
 				$(e.currentTarget).find("span").addClass('current');
 				$(e.currentTarget).siblings().find("span").removeClass('current')
