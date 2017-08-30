@@ -118,19 +118,40 @@
 			},
 			orderTemplist(){
 				return	this.$store.state.market.orderTemplist;
+			},
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
 			}
 		},
 		methods: {
 			deleteEvent: function(){
+				
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
 				}else{
-					//执行删除操作
+					this.hasNostopLossList.forEach(function(e,i){
+						if(e.StopLossNo==this.orderListId){
+//							this.hasNostopLossList.splice(i,1);
+							console.log(e);
+							let b={
+								"Method":'ModifyStopLoss',
+								"Parameters":{
+									'StopLossNo':e.StopLossNo,
+									'ModifyFlag':1,
+									'Num':parseInt(e.Num),
+									'StopLossType':parseInt(e.StopLossType00),
+									'OrderType':parseInt(e.OrderType00),
+									'StopLossPrice':parseFloat(e.StopLossPrice),
+									'StopLossDiff':parseFloat(e.StopLossDiff)
+								}
+							};
+							
+							this.tradeSocket.send(JSON.stringify(b));
+							
+						}
+					}.bind(this));
 				}
-				
-				
-				
 				
 			},
 			listTap: function(obj){
@@ -241,6 +262,7 @@
 							return '限价';
 						}
 					})();
+					s.OrderType00 = e.OrderType;
 					s.Status = e.Status;
 					s.StatusMsg = e.StatusMsg;
 					s.StatusMsg00=(function(){
@@ -268,6 +290,7 @@
 						if(e.StopLossType==2)
 							return '动态止损';
 					})();
+					s.StopLossType00=e.StopLossType;
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
 							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);

@@ -1474,7 +1474,6 @@ export default new Vuex.Store({
 					break;
 				case 'OnRtnStopLossState':
 					console.log('OnRtnStopLossState');
-					console.log(parameters);
 					context.dispatch('updateStopLoss',parameters);
 					break;
 				case 'OnRspInsertStopLoss':
@@ -1492,13 +1491,21 @@ export default new Vuex.Store({
 				context.state.market.stopLossTriggeredList.push(parameters);
 			}else if(parameters.Status==2){
 				
+				context.state.market.hasNostopLossList.forEach(function(e,i){
+					if(e.StopLossNo==parameters.StopLossNo){
+						context.state.market.hasNostopLossList.splice(i,1);
+						context.state.market.stopLossList.splice(i,1);
+					}
+				});
+				context.state.market.stopLossTriggeredList.push(parameters);
+				
 			}else{
 				console.log('-------------------');
 				let hasExist = false;
 				context.state.market.stopLossList.forEach(function(e,i){
 					if(e.StopLossNo==parameters.StopLossNo){
-						console.log(e);
 						hasExist = true;
+						
 					}
 				});
 				
