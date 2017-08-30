@@ -23,7 +23,6 @@
 	@import url("../assets/css/base.less");
 	/*使用该组件的时候，请在挂载的页面ID样式加上padding-top:50px*/
 	/*ip5*/
-	
 	@media(max-width:370px) {
 		#topbar {
 			width: 100%;
@@ -38,13 +37,12 @@
 		#topbar h3 {
 			color: #fff;
 			font-size: 17px*@ip5;
-			font-weight: normal;
+			font-weight: bold;
 			height: 50px*@ip5;
 			line-height: 50px*@ip5;
 		}
 	}
 	/*ip6*/
-	
 	@media (min-width:371px) and (max-width:410px) {
 		#topbar {
 			width: 100%;
@@ -59,13 +57,12 @@
 		#topbar h3 {
 			color: #fff;
 			font-size: 17px*@ip6;
-			font-weight: normal;
+			font-weight: bold;
 			height: 50px*@ip6;
 			line-height: 50px*@ip6;
 		}
 	}
 	/*ip6p及以上*/
-	
 	@media (min-width:411px) {
 		#topbar {
 			width: 100%;
@@ -80,7 +77,7 @@
 		#topbar h3 {
 			color: #fff;
 			font-size: 17px;
-			font-weight: normal;
+			font-weight: bold;
 			height: 50px;
 			line-height: 50px;
 		}
