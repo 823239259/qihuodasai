@@ -27,7 +27,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in hasNostopLossList">
-						<li @tap="listTap" id="123">
+						<li @tap="listTap" :id="k.StopLossNo">
 							<div class="list_cont">
 								<span>{{k.CommodityNo + k.ContractNo}}</span>
 								<span>{{k.StatusMsg00}}</span>
@@ -45,7 +45,7 @@
 				<div class="list_tools">
 					<cbtn name="暂停"></cbtn>
 					<cbtn name="修改"></cbtn>
-					<cbtn name="删除"></cbtn>
+					<cbtn name="删除" @tap.native='delete'></cbtn>
 				</div>
 			</div>
 			<div id="yesCont" class="list" v-else="isShow">
@@ -62,7 +62,7 @@
 						<span>触发时间</span>
 					</li>
 					<template v-for="k in hasYesstopLossList">
-						<li @tap="listTap" id="123">
+						<li @tap="listTap" :id="k.StopLossNo">
 							<div class="list_cont">
 								<span>{{k.CommodityNo + k.ContractNo}}</span>
 								<span>{{k.StatusMsg00}}</span>
@@ -178,7 +178,6 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					console.log(orderTemplist[e.CommodityNo]);
 					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
