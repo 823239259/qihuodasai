@@ -44,8 +44,8 @@
 					</template>
 				</ul>
 				<div class="list_tools">
-					<cbtn name="暂停"></cbtn>
-					<cbtn name="修改"></cbtn>
+					<cbtn name="暂停" @tap.native="suspendEvent"></cbtn>
+					<cbtn name="修改" @tap.native="updateEvent"></cbtn>
 					<cbtn name="删除" @tap.native="deleteEvent"></cbtn>
 				</div>
 			</div>
@@ -124,6 +124,47 @@
 			}
 		},
 		methods: {
+			suspendEvent:function(){
+				if(this.orderListId == '' || this.orderListId == null){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请选择一条数据';
+				}else{
+					this.hasNostopLossList.forEach(function(e,i){
+						if(e.StopLossNo==this.orderListId){
+							if(e.Status==0){ //运行中
+								let b={
+									"Method":'ModifyStopLoss',
+									"Parameters":{
+										'StopLossNo':e.StopLossNo,
+										'ModifyFlag':2,
+										'Num':parseInt(e.Num),
+										'StopLossType':parseInt(e.StopLossType00),
+										'OrderType':parseInt(e.OrderType00),
+										'StopLossPrice':parseFloat(e.StopLossPrice),
+										'StopLossDiff':parseFloat(e.StopLossDiff)
+									}
+								};
+								this.tradeSocket.send(JSON.stringify(b));
+							} else if (e.Status==1){ //暂停
+								let b={
+									"Method":'ModifyStopLoss',
+									"Parameters":{
+										'StopLossNo':e.StopLossNo,
+										'ModifyFlag':3,
+										'Num':parseInt(e.Num),
+										'StopLossType':parseInt(e.StopLossType00),
+										'OrderType':parseInt(e.OrderType00),
+										'StopLossPrice':parseFloat(e.StopLossPrice),
+										'StopLossDiff':parseFloat(e.StopLossDiff)
+									}
+								};
+								this.tradeSocket.send(JSON.stringify(b));
+							}
+							
+						}
+					}.bind(this));
+				}
+			},
 			deleteEvent: function(){
 				
 				if(this.orderListId == '' || this.orderListId == null){
@@ -133,7 +174,7 @@
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo==this.orderListId){
 							this.hasNostopLossList.splice(i,1);
-							console.log(e);
+							this.stopLossList.splice(i,1);
 							let b={
 								"Method":'ModifyStopLoss',
 								"Parameters":{
