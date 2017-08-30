@@ -28,7 +28,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in hasNostopLossList">
-						<li @tap="listTap" :id="k.StopLossNo">
+						<li @tap="listTap" :id="k.StopLossNo" :status="k.Status">
 							<div class="list_cont">
 								<span>{{k.CommodityNo + k.ContractNo}}</span>
 								<span>{{k.StatusMsg00}}</span>
@@ -44,7 +44,7 @@
 					</template>
 				</ul>
 				<div class="list_tools">
-					<cbtn name="暂停" @tap.native="suspendEvent"></cbtn>
+					<cbtn :name="statusNameEvent" @tap.native="suspendEvent"></cbtn>
 					<cbtn name="修改" @tap.native="updateEvent"></cbtn>
 					<cbtn name="删除" @tap.native="deleteEvent"></cbtn>
 				</div>
@@ -97,10 +97,15 @@
 				msg: '',
 				isShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
-				orderListId: ''
+				orderListId: '',
+				orderStatus: '',
+				statusName: '暂停'
 			}
 		},
 		computed:{
+			statusNameEvent: function(){
+				return this.statusName;
+			},
 			msgTips: function(){
 				return this.msg;
 			},
@@ -166,7 +171,6 @@
 				}
 			},
 			deleteEvent: function(){
-				
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
@@ -211,6 +215,12 @@
 					$(obj.currentTarget).addClass("current");
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = $(obj.currentTarget).attr("id");
+					this.orderStatus = $(obj.currentTarget).attr("status");
+					if(this.orderStatus == 0){
+						this.statusName = '暂停';
+					}else{
+						this.statusName = '启动';
+					}
 				}else{
 					$(obj.currentTarget).removeClass("current");
 					this.orderListId = null;
