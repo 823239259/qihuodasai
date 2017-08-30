@@ -1,5 +1,6 @@
 <template>
 	<div id="conditions">
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<div class="head">
 			<topbar title="止损止赢"></topbar>
 			<back></back>
@@ -87,17 +88,22 @@
 	import back from '../../components/back.vue'
 	import cbtn from '../../components/conditionBtn.vue'
 	import refresh from '../../components/Refresh.vue'
+	import tipsDialog from '../../components/tipsDialog.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, refresh},
+		components:{topbar, back, cbtn, refresh, tipsDialog},
 		data(){
 			return {
+				msg: '',
 				isShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
 				orderListId: ''
 			}
 		},
 		computed:{
+			msgTips: function(){
+				return this.msg;
+			},
 			stopLossTriggeredList(){
 				return this.$store.state.market.stopLossTriggeredList;
 			},
@@ -116,7 +122,13 @@
 		},
 		methods: {
 			deleteEvent: function(){
-				console.log(this.orderListId);
+				if(this.orderListId == '' || this.orderListId == null){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请选择一条数据';
+				}else{
+					//执行删除操作
+				}
+				
 				
 				
 				
