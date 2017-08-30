@@ -25,4 +25,20 @@ pro.parseTwoFloat = function(num) {
 	}
 };
 
+/**
+ * 调用原生js拨打电话
+ * @param {} 
+ * 
+ */
+pro.callService = function(){
+	mui.plusReady(function(){
+		plus.nativeUI.confirm("账户余额不足，请拨打400-852-8008索要模拟金。",function(e){
+			if(e.index==1){
+				plus.device.dial("4008528008",false);
+			}
+		},
+		"400-852-8008",["取消","呼叫"]);
+	});
+}
+
 export default pro
