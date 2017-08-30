@@ -60,7 +60,7 @@
 				</div>
 				<div class="limit_cont_col">
 					<span>价格：</span>
-					<input type="number" class="ipt fl" v-model="tradePrices"/>
+					<input type="text" class="ipt fl" v-model="tradePrices" />
 					<span class="white">(元)</span>
 				</div>
 			</div>
@@ -231,7 +231,8 @@
 				orderListId: '',
 				buyText:{},
 				obj: [],
-				numReg: /^[0-9]*$/
+				numReg: /^[0-9]*$/,
+				moneyReg: /^(([1-9]\d*)|0)(\.\d{0,2})?$/
 			}
 		},
 		filters:{
@@ -357,16 +358,6 @@
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
-//			color1:function(){
-//				console.log(this.Parameters);
-//				return this.Parameters.LastPrice-this.Parameters.PreSettlePrice >=0 ?  'red' :  'green'
-//			},
-//			color2:function(){
-//				return this.Parameters.BidPrice1-this.Parameters.PreSettlePrice >=0 ?  'red' :  'green'
-//			},
-//			color3:function(){
-//				return this.Parameters.AskPrice1-this.Parameters.PreSettlePrice >=0 ?  'red' :  'green'
-//			},
 			Parameters(){
 				return this.$store.state.market.jsonTow.Parameters;
 			},
@@ -421,8 +412,10 @@
 				}
 			},
 			tradePrices: function(n, o){
-				if(n.length<1){
+				if(n == '' || this.moneyReg.test(n) == false){
+					this.tradePrices = '';
 					this.marketprice = '';
+					return '';
 				}else{
 					if(this.isShow == false){
 						this.marketprice = n;
