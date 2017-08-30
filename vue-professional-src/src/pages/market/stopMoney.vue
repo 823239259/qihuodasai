@@ -8,7 +8,7 @@
 		<div class="page_cont">
 			<div class="tab_box" id="tabBox">
 				<template v-for="key in tabList">
-					<div class="tab_box_col" @tap="showCont">
+					<div class="tab_box_col">
 						<span>{{key.nav}}</span>
 					</div>
 				</template>
@@ -93,7 +93,8 @@
 		data(){
 			return {
 				isShow: true,
-				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}]
+				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
+				orderListId: ''
 			}
 		},
 		computed:{
@@ -115,16 +116,10 @@
 		},
 		methods: {
 			deleteEvent: function(){
+				console.log(this.orderListId);
 				
-			},
-			showCont: function(e){
-				$(e.currentTarget).find("span").addClass('current');
-				$(e.currentTarget).siblings().find("span").removeClass('current')
-				if($(e.currentTarget).index() == 0){
-					this.isShow = true;
-				}else{
-					this.isShow = false;
-				}
+				
+				
 			},
 			listTap: function(obj){
 				if(!$(obj.currentTarget).hasClass("current")){
@@ -133,7 +128,7 @@
 					this.orderListId = $(obj.currentTarget).attr("id");
 				}else{
 					$(obj.currentTarget).removeClass("current");
-					this.orderListId =null;
+					this.orderListId = null;
 				}
 			},
 			hasYesstopLossList00: function(){
