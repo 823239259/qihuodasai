@@ -1,7 +1,7 @@
 <template>
 	<div id="orderList" class="list" :val="getData">
-		<alert title="确认全部平仓" :line2="closeAllOutAlert" :objstr='closeAllOutAlertObj' type="1"></alert>
-		<alert title="确认平仓"  :line2="closeOutAlert" :objstr='closeOutAlertObj'></alert>
+		<alert title="确认全部平仓" :line1="closeAllOutAlert" :objstr='closeAllOutAlertObj' type="1"></alert>
+		<alert title="确认平仓"  :line1="closeOutAlert" :objstr='closeOutAlertObj'></alert>
 		<ul class="list_cont_box">
 			<li class="list_head">
 				<span>合约名称</span>
