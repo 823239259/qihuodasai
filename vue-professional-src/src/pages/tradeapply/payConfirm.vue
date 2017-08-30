@@ -48,7 +48,6 @@
 			</li>
 		</ul>
 		<bbtn :name="btnName" @tap.native="tocom"></bbtn>
-		<alert title="提示" line1="账户余额不足，请拨打400-852-8008索要模拟金。" ref="confirm"></alert>
 	</div>
 </template>
 
@@ -58,10 +57,9 @@
 	import tipsDialog from '../../components/tipsDialog.vue'
 	import cs from '../../components/customerService.vue'
 	import pro from '../../assets/common.js'
-	import alert from '../../components/Tradealert.vue'
 	export default {
 		name: 'payconfirm',
-		components: {tp, bbtn, tipsDialog, cs, alert},
+		components: {tp, bbtn, tipsDialog, cs},
 		filters: {
 			filtershoushu: function(arr, chooseType) {
 				switch(chooseType) {
@@ -218,66 +216,64 @@
 				});
 			},
 			tocom: function() {
-				console.log(this.$refs.confirm);
-				this.$refs.confirm.isshow = true;
 				//资金足够的时候
-//				if(this.enough) {
-//					this.$http.post(
-//						this.PATH + '/user/ftrade/handle', {emulateJSON: true}, {
-//							headers:{
-//								'token':  this.userInfo.token,
-//								'secret': this.userInfo.secret
-//							},
-//							params: {
-//								"vid":-1,
-//								"traderBond":this.chooseType,
-//								"tranLever":0,
-//								"businessType":8
-//							},
-//							timeout: 5000
-//						}
-//					).then(function(e) {
-//						var data = e.body;
-//						if(data.success == true){
-//							if(data.code == 1){
-//								this.$store.state.account.programList.push(e.body.data);
-//								this.$router.replace({
-//									path: '/applycomplate',
-//									query:{
-//										'vid': data.data.id,
-//										'businessType': 8,
-//										'isPay': data.data.stateType
-//									}
-//								});
-//							}
-//						}else{
-//							switch (data.code){
-//								case '-1':
-//									this.$children[0].isShow = true;
-//									this.msg = '认证失败';
-//									break;
-//								case '2':
-//									this.$children[0].isShow = true;
-//									this.msg = '参数传入错误';
-//									break;
-//								case '3':
-//									this.$children[0].isShow = true;
-//									this.msg = '账户余额不足';
-//									break;
-//								default:
-//									break;
-//							}
-//						}
-//					}.bind(this), function(e) {
-//						this.$children[0].isShow = true;
-//						this.msg = '服务器连接失败';
-//					});
-//				}else{    //资金不足的时候
+				if(this.enough) {
+					this.$http.post(
+						this.PATH + '/user/ftrade/handle', {emulateJSON: true}, {
+							headers:{
+								'token':  this.userInfo.token,
+								'secret': this.userInfo.secret
+							},
+							params: {
+								"vid":-1,
+								"traderBond":this.chooseType,
+								"tranLever":0,
+								"businessType":8
+							},
+							timeout: 5000
+						}
+					).then(function(e) {
+						var data = e.body;
+						if(data.success == true){
+							if(data.code == 1){
+								this.$store.state.account.programList.push(e.body.data);
+								this.$router.replace({
+									path: '/applycomplate',
+									query:{
+										'vid': data.data.id,
+										'businessType': 8,
+										'isPay': data.data.stateType
+									}
+								});
+							}
+						}else{
+							switch (data.code){
+								case '-1':
+									this.$children[0].isShow = true;
+									this.msg = '认证失败';
+									break;
+								case '2':
+									this.$children[0].isShow = true;
+									this.msg = '参数传入错误';
+									break;
+								case '3':
+									this.$children[0].isShow = true;
+									this.msg = '账户余额不足';
+									break;
+								default:
+									break;
+							}
+						}
+					}.bind(this), function(e) {
+						this.$children[0].isShow = true;
+						this.msg = '服务器连接失败';
+					});
+				}else{    //资金不足的时候
 //					this.$router.replace({
 //						path: '/recharge'
 //					});
-//					this.$refs.confirm.isshow = true;
-//				}
+					pro.callService();
+				}
 			}
 		},
 		mounted: function() {
@@ -299,7 +295,6 @@
 <style scoped lang="less">
 	@import url("../../assets/css/main.less");
 	/*ip5*/
-	
 	@media(max-width:370px) {
 		#payconfirm {
 			padding-top: 50px*@ip5;
