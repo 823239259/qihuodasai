@@ -104,7 +104,6 @@
 				return this.$store.state.market.hasYesstopLossList;
 			},
 			stopLossList(){
-				console.log(this.$store.state.market.stopLossList);
 				return this.$store.state.market.stopLossList;
 			},
 			hasNostopLossList(){
@@ -263,6 +262,8 @@
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
 							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+						if(e.StopLossType==2)
+							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(orderTemplist[e.CommodityNo].DotSize);
 					})();
 					
 					s.entrustPrice=(function(){

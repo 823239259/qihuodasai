@@ -2,10 +2,10 @@
 	<div id="stopmoneyalert" v-if='isshow'>
 		<div class="bg">
 			<div>
-				<div :class="[fl,{current:isstopm}]" @click="sel">
+				<div :class="[fl,{current:isstopm}]" @tap="sel">
 					止损
 				</div>
-				<div :class="[fl,{current:!isstopm}]" @click="sel">
+				<div :class="[fl,{current:!isstopm}]" @tap="sel">
 					止盈
 				</div>
 			</div>
@@ -170,34 +170,53 @@
 			},
 			confirm: function() {
 				this.isshow = false;
-				var b={
-							"Method":'InsertStopLoss',
-							"Parameters":{
-								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
-								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
-								"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
-								"Num":parseInt(this.Num),
-								"StopLossType":parseInt(this.selectStopLossType00),
-								"StopLossPrice":(function(){
-														if(parseInt(this.selectStopLossType00)==0){
+				if(this.isstopm==true){
+					let b={
+								"Method":'InsertStopLoss',
+								"Parameters":{
+									"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
+									"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
+									"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+									"Num":parseInt(this.Num),
+									"StopLossType":parseInt(this.selectStopLossType00),
+									"StopLossPrice":(function(){
+															if(parseInt(this.selectStopLossType00)==0){
+																return parseFloat(this.inputPrice);
+															}else{
+																return 0.00;
+															}
+														}).bind(this)(),
+									"StopLossDiff":(function(){
+														if(parseInt(this.selectStopLossType00)==2){
 															return parseFloat(this.inputPrice);
 														}else{
 															return 0.00;
 														}
 													}).bind(this)(),
-								"StopLossDiff":(function(){
-													if(parseInt(this.selectStopLossType00)==2){
-														return parseFloat(this.inputPrice);
-													}else{
-														return 0.00;
-													}
-												}).bind(this)(),
-								"HoldAvgPrice":this.condition.HoldAvgPrice,
-								"HoldDirection":this.condition.Drection,
-								"OrderType":parseInt(this.orderType),
-							}
+									"HoldAvgPrice":this.condition.HoldAvgPrice,
+									"HoldDirection":this.condition.Drection,
+									"OrderType":parseInt(this.orderType),
+								}
+						};
+						this.tradeSocket.send(JSON.stringify(b));
+				}else{
+					let b={
+						"Method":'InsertStopLoss',
+						"Parameters":{
+							"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
+							"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
+							"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+							"Num":parseInt(this.zhiYinNum),
+							"StopLossType":1,
+							"StopLossPrice":parseFloat(this.zhiYinInputPrice),
+							"StopLossDiff":0.00,
+							"HoldAvgPrice":this.condition.HoldAvgPrice,
+							"HoldDirection":this.condition.Drection,
+							"OrderType":parseInt(this.orderType)
+						}
 					};
 					this.tradeSocket.send(JSON.stringify(b));
+				}
 			}
 		},
 		mounted: function(){
