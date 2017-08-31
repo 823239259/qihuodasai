@@ -87,7 +87,7 @@
 			</template>
 			<div class="cl">
 				<div class="fl fontgray" @tap='close'>关闭</div>
-				<div class="fl fontgray" @tap='confirm'>添加</div>
+				<div class="fl fontgray" @tap='confirm'>修改</div>
 			</div>
 
 		</div>

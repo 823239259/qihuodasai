@@ -54,10 +54,10 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
-							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
+							<li class="fl fontwhite">123</li>
+							<li class="fl fontgray">duo</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
+								最新：<span class="fontwhite">464</span>
 							</li>
 						</ol>
 					</li>
@@ -87,7 +87,7 @@
 			</template>
 			<div class="cl">
 				<div class="fl fontgray" @tap='close'>关闭</div>
-				<div class="fl fontgray" @tap='confirm'>添加</div>
+				<div class="fl fontgray" @tap='confirm'>修改</div>
 			</div>
 
 		</div>

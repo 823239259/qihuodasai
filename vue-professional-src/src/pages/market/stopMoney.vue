@@ -30,7 +30,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in hasNostopLossList">
-						<li @tap="listTap" :id="k.StopLossNo" :status="k.Status">
+						<li @tap="listTap" :id="k.StopLossNo" :status="k.Status" :StopLossType00="k.StopLossType00">
 							<div class="list_cont">
 								<span>{{k.CommodityNo + k.ContractNo}}</span>
 								<span>{{k.StatusMsg00}}</span>
@@ -103,7 +103,8 @@
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
 				orderListId: '',
 				orderStatus: '',
-				statusName: '暂停'
+				statusName: '暂停',
+				StopLossType00:''
 			}
 		},
 		computed:{
@@ -143,7 +144,16 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
 				}else{
-					this.$refs.stoplossalert.isshow = true;
+					
+//					this.orderListId
+//					this.orderStatus 
+					console.log(this.StopLossType00);
+					if(this.StopLossType00==0 || this.StopLossType00==2){
+						this.$refs.stoplossalert.isshow = true;
+					}else{
+						console.log('123');
+						this.$refs.stopwinalert.isshow = true;
+					}
 				}
 			},
 			suspendEvent:function(){
@@ -233,6 +243,7 @@
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = $(obj.currentTarget).attr("id");
 					this.orderStatus = $(obj.currentTarget).attr("status");
+					this.StopLossType00 = $(obj.currentTarget).attr("StopLossType00");
 					if(this.orderStatus == 0){
 						this.statusName = '暂停';
 					}else{
