@@ -62,7 +62,7 @@
 				isshow:false,
 				Num:1,
 //				selectStopLossType00:0,
-				inputPrice:0.00,
+//				inputPrice:0.00,
 				orderType:1,
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
@@ -93,6 +93,14 @@
 			},
 			selectStopLossType00(){
 				return this.stopLossListSelectOneObj.StopLossType00;
+			},
+			inputPrice(){
+				
+				if(this.selectStopLossType00==0){
+					return this.stopLossListSelectOneObj.StopLossPrice;
+				}else if(this.selectStopLossType00==2){
+					return this.stopLossListSelectOneObj.StopLossDiff;
+				}
 			}
 			
 		},

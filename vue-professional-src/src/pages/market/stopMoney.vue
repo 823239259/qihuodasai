@@ -247,6 +247,7 @@
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo == this.orderListId){
 							this.$store.state.market.stopLossListSelectOneObj=e;
+							console.log(e);
 						}
 					}.bind(this));
 					
