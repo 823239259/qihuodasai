@@ -150,7 +150,7 @@
 					if(data.success == true ){
 						if(data.code == 1){
 	            			this.tradeList = data.data.tradeList;
-	            			if(this.tradeList.length <= 0) this.emptyShow = true;
+	            			if(this.tradeList == null) this.emptyShow = true;
 						}
 					}else{
 						switch (data.code){

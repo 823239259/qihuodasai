@@ -121,24 +121,21 @@
 				return 'fl'
 			},
 			orderTemplist(){
-				console.log(this.$store.state.market.orderTemplist);
 				return	this.$store.state.market.orderTemplist;
 			},
 			condition(){
-				if(JSON.parse(this.val)==undefined)
-					return;
+				if(this.val==undefined) return false;
 				return JSON.parse(this.val);
 			},
 			commodityObj(){
-				console.log(this.orderTemplist[this.condition.CommodityNo]);
 				return this.orderTemplist[this.condition.CommodityNo];
 			},
 			templateListObj(){
-				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined)
-					return;
+				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined) return false;
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			},
 			orderTemplistDotSize(){
+				if(this.$store.state.market.orderTemplist[this.condition.CommodityNo]==undefined) return false;
 				return	this.$store.state.market.orderTemplist[this.condition.CommodityNo].DotSize;
 			},
 			tradeSocket() {

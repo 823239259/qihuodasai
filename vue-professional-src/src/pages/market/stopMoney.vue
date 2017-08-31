@@ -1,6 +1,8 @@
 <template>
 	<div id="conditions">
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
+		<stopLossAlert ref="stoplossalert"></stopLossAlert>
+		<stopWinAlert ref="stopwinalert"></stopWinAlert>
 		<div class="head">
 			<topbar title="止损止赢"></topbar>
 			<back></back>
@@ -89,9 +91,11 @@
 	import cbtn from '../../components/conditionBtn.vue'
 	import refresh from '../../components/Refresh.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
+	import stopLossAlert from '../../components/stopLossAlert.vue'
+	import stopWinAlert from '../../components/stopWinAlert.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, refresh, tipsDialog},
+		components:{topbar, back, cbtn, refresh, tipsDialog, stopLossAlert, stopWinAlert},
 		data(){
 			return {
 				msg: '',
@@ -134,6 +138,14 @@
 			}
 		},
 		methods: {
+			updateEvent: function(){
+				if(this.orderListId == '' || this.orderListId == null){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请选择一条数据';
+				}else{
+					this.$refs.stoplossalert.isshow = true;
+				}
+			},
 			suspendEvent:function(){
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
@@ -305,7 +317,6 @@
 				}.bind(this));
 			},
 			hasNostopLossList00: function(){
-				console.log(1211111);
 				let orderTemplist = this.orderTemplist;
 				this.$store.state.market.hasNostopLossList = [];
 				this.stopLossList.forEach(function(e,i){
