@@ -58,7 +58,7 @@
 								<span class="fontgray lot">手数</span>
 							</li>
 							<li>
-								<input type="text" value="10" class="fontwhite" />
+								<input type="text" :value="holdNum" class="fontwhite" />
 							</li>
 						</ol>
 					</li>
@@ -164,6 +164,7 @@
 				inputAdditionalPrice:'',
 				selectBuyOrSell:'',
 				selectMarketOrLimited:'',
+				holdNum:1
 			}
 		},
 		computed:{
@@ -182,7 +183,9 @@
 			templateList(){
 				return this.$store.state.market.templateList;
 			},
-			
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
+			},
 		},
 		watch:{
 			selectId:function(n,o){
@@ -194,7 +197,6 @@
 				}
 			},
 			selectAdditionalPrice:function(n,o){
-				console.log(1111111);
 				if(this.selectAdditionalPrice==-1){
 					 this.inputAdditionalPrice = '';
 				}else{
@@ -216,14 +218,35 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				/*
-				 * 确认并提交数据到后台
-				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
-				 */
 				this.isshow = false;
-//				var c = JSON.parse(b);
-//				console.log('地址是' + a + '数据是' + b);
-//				console.log(c);
+				if(this.ifshow==true){
+					let b={
+							"Method":'InsertCondition',
+							"Parameters":{
+								'ExchangeNo':'',
+								'CommodityNo':'',
+								'ContractNo':'',
+								'Num':'',
+								'ConditionType':'',
+								'PriceTriggerPonit':'',
+								'CompareType':'',
+								'TimeTriggerPoint':'',
+								'AB_BuyPoint':'',
+								'AB_SellPoint':'',
+								'OrderType':'',
+								'Direction':'',
+								'StopLossType':'',
+								'StopLossDiff':'',
+								'StopWinDiff':'',
+								'AdditionFlag':'',
+								'AdditionType':'',
+								'AdditionPrice':''
+							}
+						};
+					console.log(JSON.stringify(b));	
+//					this.tradeSocket.send(JSON.stringify(b));	
+				}
+				
 			}
 		},
 		mounted:function(){
@@ -238,6 +261,11 @@
 			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
 			this.selectAdditionalPrice = -1;
 			this.inputAdditionalPrice = this.inputPrice;
+			
+			this.selectBuyOrSell = 0;
+			this.selectMarketOrLimited=1;
+			
+			
 		}
 	}
 </script>
