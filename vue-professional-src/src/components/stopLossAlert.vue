@@ -5,19 +5,16 @@
 				<div class="fl" :class="{current:isstopm}" @tap="sel">
 					止损
 				</div>
-				<!--<div class="fl" :class="{current:!isstopm}" @tap="sel">
-					止盈
-				</div>-->
 			</div>
 			<template>
 				<ul class="cl">
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">CL1918</li>
-							<li class="fl fontgray">多</li>
+							<li class="fl fontwhite">{{stopLossListSelectOneObj.CommodityNo+stopLossListSelectOneObj.ContractNo}}</li>
+							<li class="fl fontgray">{{stopLossListSelectOneObj.HoldDrection}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">48.69</span>
+								最新：<span class="fontwhite">{{lastPrice}}</span>
 							</li>
 						</ol>
 					</li>
@@ -25,7 +22,7 @@
 						<ol class="cl">
 							<li class="fl fontgray">方式</li>
 							<li class="fl">
-								<select class="fontwhite sellong" v-model="selectStopLossType00">
+								<select class="fontwhite sellong" v-model="selectStopLossType11">
 									<option value="0">止损价</option>
 									<option value="2">动态价</option>
 								</select>
@@ -49,42 +46,6 @@
 					</li>
 				</ul>
 			</template>
-			<template>
-				<!--<ul class="cl">
-					<li>
-						<ol class="cl">
-							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
-							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
-							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol class="cl">
-							<li class="fl fontgray">止盈价</li>
-							<li class="fl">
-								<input type="text" class="inp" v-model="zhiYinInputPrice"/>
-								<span class="fontgray">0.00%</span>
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol class="cl">
-							<li class="fl fontgray">手数</li>
-							<li class="fl"><input class='inp' type="text" v-model="zhiYinNum" /></li>
-							<li class="fl  fontgray">
-								止损委托价：
-								<select name="" class='fontwhite selshort' v-model="zhiYinorderType">
-									<option value="1">市价</option>
-									<option value="2">限价</option>
-								</select>
-							</li>
-						</ol>
-					</li>
-				</ul>-->
-			</template>
 			<div class="cl">
 				<div class="fl fontgray" @tap='close'>关闭</div>
 				<div class="fl fontgray" @tap='confirm'>修改</div>
@@ -107,7 +68,8 @@
 				orderType:1,
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
-				zhiYinorderType:1
+				zhiYinorderType:1,
+				selectStopLossType11: '123'
 			}
 		},
 		props: ['val'],
@@ -120,6 +82,19 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
+			},
+			stopLossListSelectOneObj(){
+				return this.$store.state.market.stopLossListSelectOneObj;
+			},
+			templateList(){
+				return	this.$store.state.market.templateList;
+			},
+			lastPrice(){
+				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
+				return this.$store.state.market.templateList[commodityNo].LastPrice;
+			},
+			selectStopLossType00(){
+				return this.selectStopLossType00 = this.stopLossListSelectOneObj.StopLossType00;
 			}
 			
 		},
@@ -127,6 +102,14 @@
 			toFixed:function(value,dotSize){
 				if (!value) return '';
 				return parseFloat(value).toFixed(dotSize);
+			},
+			filterSelectStopLossType:function(value){
+				console.log('123');
+				if(value==0)
+					return '止损价';
+				if(value==2)
+					return '动态价';
+					
 			}
 		},
 		methods: {
@@ -146,12 +129,18 @@
 			},
 			confirm: function() {
 				this.isshow = false;
-				
-				
 			}
 		},
 		mounted: function(){
-			
+			console.log(this.selectStopLossType00);
+			if(this.selectStopLossType00 == 0){
+				this.selectStopLossType11 = '止损价';
+			}else{
+				this.selectStopLossType11 = '动态价';
+			}
+		},
+		activated:function(){
+//			this.selectStopLossType00 = this.stopLossListSelectOneObj.StopLossType00;
 		}
 	}
 </script>

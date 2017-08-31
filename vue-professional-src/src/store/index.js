@@ -168,7 +168,7 @@ var market = {
 		stopLossTriggeredList:[],//已触发列表
 		hasYesstopLossList:[],
 		
-		
+		stopLossListSelectOneObj:{},
 		
 		
 		
