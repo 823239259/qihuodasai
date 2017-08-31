@@ -2,9 +2,7 @@
 	<div id="stopmoneyalert" v-if='isshow'>
 		<div class="bg">
 			<div>
-				<div class="fl" :class="{current:isstopm}" @tap="sel">
-					止损
-				</div>
+				<div class="fl" :class="{current:isstopm}" @tap="sel">止损</div>
 			</div>
 			<template>
 				<ul class="cl">
@@ -22,7 +20,7 @@
 						<ol class="cl">
 							<li class="fl fontgray">方式</li>
 							<li class="fl">
-								<select class="fontwhite sellong" v-model="selectStopLossType11">
+								<select class="fontwhite sellong" v-model="selectStopLossType00">
 									<option value="0">止损价</option>
 									<option value="2">动态价</option>
 								</select>
@@ -63,7 +61,7 @@
 				isstopm: true,
 				isshow:false,
 				Num:1,
-				selectStopLossType00:0,
+//				selectStopLossType00:0,
 				inputPrice:0.00,
 				orderType:1,
 				zhiYinInputPrice:0.00,
@@ -94,7 +92,7 @@
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
 			},
 			selectStopLossType00(){
-				return this.selectStopLossType00 = this.stopLossListSelectOneObj.StopLossType00;
+				return this.stopLossListSelectOneObj.StopLossType00;
 			}
 			
 		},
@@ -104,12 +102,10 @@
 				return parseFloat(value).toFixed(dotSize);
 			},
 			filterSelectStopLossType:function(value){
-				console.log('123');
 				if(value==0)
 					return '止损价';
 				if(value==2)
 					return '动态价';
-					
 			}
 		},
 		methods: {
@@ -132,15 +128,8 @@
 			}
 		},
 		mounted: function(){
-			console.log(this.selectStopLossType00);
-			if(this.selectStopLossType00 == 0){
-				this.selectStopLossType11 = '止损价';
-			}else{
-				this.selectStopLossType11 = '动态价';
-			}
 		},
 		activated:function(){
-//			this.selectStopLossType00 = this.stopLossListSelectOneObj.StopLossType00;
 		}
 	}
 </script>
