@@ -11,10 +11,8 @@
 						<ol>
 							<li class="fontgray">合约</li>
 							<li>
-								<select name="contract" class="selectlong fontwhite">
-									<option>CL1710</option>
-									<option>FDXM1709</option>
-									<option>CL1710</option>
+								<select name="contract" class="selectlong fontwhite" v-model="selectId">
+									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
 								</select>
 							</li>
 						</ol>
@@ -25,20 +23,23 @@
 								价格
 							</li>
 							<li>
-								<select class="fontwhite selectshort">
-									<option>&nbsp;&nbsp;>=</option>
-									<option>&nbsp;&nbsp;<=</option>
+								<select class="fontwhite selectshort" v-model="selectPrice">
+									<option value="0">&nbsp;&nbsp;></option>
+									<option value="2">&nbsp;&nbsp;>=</option>
+									<option value="1">&nbsp;&nbsp;<</option>
+									<option value="3">&nbsp;&nbsp;<=</option>
 								</select>
-								<input type="text" value="89.64" class="fontwhite" />
+								<input type="text" :value="inputPrice" class="fontwhite" />
 							</li>
 							<li>
-								<select class="fontwhite selectshort">
-									<option>附加</option>
-									<option>附加</option>
-									<option>附加</option>
-									<option>附加</option>
+								<select class="fontwhite selectshort" v-model="selectAdditionalPrice">
+									<option value="-1">附加</option>
+									<option value="0">></option>
+									<option value="2">>=</option>
+									<option value="1"><</option>
+									<option value="3"><=</option>
 								</select>
-								<input type="text" value="89.64" />
+								<input type="text" :value="inputAdditionalPrice" />
 							</li>
 						</ol>
 					</li>
@@ -46,13 +47,13 @@
 						<ol>
 							<li class="fontgray">操作</li>
 							<li>
-								<select class="fontwhite  selectshort">
-									<option>&nbsp;&nbsp;买</option>
-									<option>&nbsp;&nbsp;卖</option>
+								<select class="fontwhite  selectshort" v-model="selectBuyOrSell">
+									<option value="0">&nbsp;&nbsp;买</option>
+									<option value="1">&nbsp;&nbsp;卖</option>
 								</select>
-								<select class="fontwhite selectshort">
-									<option>市价</option>
-									<option>限价</option>
+								<select class="fontwhite selectshort" v-model="selectMarketOrLimited ">
+									<option value="1">市价</option>
+									<option value="2">限价</option>
 								</select>
 								<span class="fontgray lot">手数</span>
 							</li>
@@ -76,9 +77,7 @@
 							<li class="fontgray">合约</li>
 							<li>
 								<select name="contract" class="selectlong fontwhite">
-									<option>富时A50</option>
-									<option>富时A50</option>
-									<option>富时A50</option>
+									<option v-for="v in parameters" :value="v.CommodityName + '&' + v.CommodityNo + '&' + v.MainContract">{{v.CommodityName}}</option>
 								</select>
 							</li>
 						</ol>
@@ -101,9 +100,10 @@
 							<li>
 								<select class="fontwhite selectshort">
 									<option>附加</option>
-									<option>附加</option>
-									<option>附加</option>
-									<option>附加</option>
+									<option>></option>
+									<option>>=</option>
+									<option><</option>
+									<option><=</option>
 								</select>
 								<input type="text" value="89.64" />
 							</li>
@@ -153,7 +153,17 @@
 		data(){
 			return {
 				ifshow:true,
-				isshow:false
+				isshow:false,
+				selectId:'',
+				selectPrice:'',
+				commodityNo:'',
+				contractNo:'',
+				selectPrice:'',
+				selectAdditionalPrice:'',
+				inputPrice:'',
+				inputAdditionalPrice:'',
+				selectBuyOrSell:'',
+				selectMarketOrLimited:'',
 			}
 		},
 		computed:{
@@ -162,6 +172,34 @@
 			},
 			height2(){
 				return this.height1*1.1585;
+			},
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
+			templateList(){
+				return this.$store.state.market.templateList;
+			},
+			
+		},
+		watch:{
+			selectId:function(n,o){
+				if(n != undefined){
+					this.commodityNo = n.substring(0,n.length-4);
+					this.contractNo = n.substring(n.length-4,n.length);
+					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+			
+				}
+			},
+			selectAdditionalPrice:function(n,o){
+				console.log(1111111);
+				if(this.selectAdditionalPrice==-1){
+					 this.inputAdditionalPrice = '';
+				}else{
+					this.inputAdditionalPrice =this.inputPrice;
+				}
 			}
 		},
 		methods:{
@@ -187,6 +225,19 @@
 //				console.log('地址是' + a + '数据是' + b);
 //				console.log(c);
 			}
+		},
+		mounted:function(){
+			this.selectPrice = 0;
+			let arr=[];
+			arr = this.parameters;
+			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
+			this.commodityNo = arr[0].CommodityNo;
+			
+			console.log(this.orderTemplist);
+			console.log(this.templateList[this.commodityNo]);
+			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+			this.selectAdditionalPrice = -1;
+			this.inputAdditionalPrice = this.inputPrice;
 		}
 	}
 </script>
