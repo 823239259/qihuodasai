@@ -464,7 +464,7 @@
 										x.tranLever = this.tradeDetails.mntranActualLever;
 										break;
 									case 11:
-										x.tranLever = this.tradeDetails.hsiTranActualLever;
+										x.tranLever = this.tradeDetails.mbtranActualLever;
 										break;
 									case 12:
 										x.tranLever = this.tradeDetails.daxtranActualLever;
@@ -476,7 +476,7 @@
 										x.tranLever = this.tradeDetails.lhsiTranActualLever;
 										break;
 									case 15:
-										x.tranLever = this.tradeDetails.hsiTranActualLever;
+										x.tranLever = this.tradeDetails.agTranActualLever;
 										break;
 									case 16:
 										x.tranLever = this.tradeDetails.hIndexActualLever;
