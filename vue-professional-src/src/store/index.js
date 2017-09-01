@@ -522,7 +522,6 @@ export default new Vuex.Store({
 						}
 					},
 					formatter: function(params) {
-						console.log(params);
 						var time = params[0].name;
 						if(time == null || time == "") {
 							return

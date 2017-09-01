@@ -62,7 +62,6 @@
 				selectStopLossType00:0,
 				inputPrice:0.00,
 				orderType:1,
-				zhiYinorderType:1
 			}
 		},
 		props: ['val'],
@@ -119,7 +118,18 @@
 			},
 			confirm: function() {
 				this.isshow = false;
-				
+				let b={
+						"Method":'ModifyStopLoss',
+						"Parameters":{
+							'StopLossNo':e.StopLossNo,
+							'ModifyFlag':1,
+							'Num':parseInt(e.Num),
+							'StopLossType':parseInt(e.StopLossType00),
+							'OrderType':parseInt(e.OrderType00),
+							'StopLossPrice':parseFloat(e.StopLossPrice),
+							'StopLossDiff':parseFloat(e.StopLossDiff)
+						}
+					};
 				
 			}
 		},

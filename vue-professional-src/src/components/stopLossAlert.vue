@@ -62,7 +62,7 @@
 				isshow:false,
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
-				zhiYinorderType:1,
+				selectStopLossType00:'',
 			}
 		},
 		props: ['val'],
@@ -86,9 +86,9 @@
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
 			},
-			selectStopLossType00(){
-				return this.stopLossListSelectOneObj.StopLossType00;
-			},
+//			selectStopLossType00(){
+//				return this.stopLossListSelectOneObj.StopLossType00;
+//			},
 			inputPrice(){
 				
 				if(this.selectStopLossType00==0){
@@ -134,11 +134,43 @@
 			},
 			confirm: function() {
 				this.isshow = false;
+				let b={
+						"Method":'ModifyStopLoss',
+						"Parameters":{
+							'StopLossNo':this.stopLossListSelectOneObj.StopLossNo,
+							'ModifyFlag':0,
+							'Num':parseInt(this.Num),
+							'StopLossType':parseInt(this.selectStopLossType00),
+							'OrderType':parseInt(this.orderType),
+							'StopLossPrice':(function(){
+												if(parseInt(this.orderType)==0)
+													return this.inputPrice;
+												if(parseInt(this.orderType)==2)
+													return 0.0;
+											})(),
+							'StopLossDiff':(function(){
+												if(parseInt(this.orderType)==0)
+													return 0;
+												if(parseInt(this.orderType)==2)
+													return this.inputPrice;
+											})()
+						}
+					};
+					
+					console.log(JSON.stringify(b));
+					
+					
 			}
 		},
 		mounted: function(){
 		},
+		watch:{
+			stopLossListSelectOneObj:function(n,o){
+				return this.$store.state.market.stopLossListSelectOneObj;
+			}
+		},
 		activated:function(){
+			this.selectStopLossType00=this.stopLossListSelectOneObj.StopLossType00;
 		}
 	}
 </script>
