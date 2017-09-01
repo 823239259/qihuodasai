@@ -32,7 +32,7 @@
 							<li class="fl fontgray">手数</li>
 							<li class="fl"><input class='inp' type="text" v-model="zhiYinNum" /></li>
 							<li class="fl  fontgray">
-								止损委托价：
+								止盈委托价：
 								<select name="" class='fontwhite selshort' v-model="zhiYinorderType">
 									<option value="1">市价</option>
 									<option value="2">限价</option>
@@ -64,6 +64,7 @@
 				orderType:1,
 				zhiYinInputPrice:'',
 				zhiYinNum:'',
+				zhiYinorderType:''
 			}
 		},
 		props: ['val'],
@@ -83,17 +84,6 @@
 			lastPrice(){
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
-			},
-//			zhiYinInputPrice(){
-//				if(this.stopLossListSelectOneObj.StopLossType00==1){
-//					return this.stopLossListSelectOneObj.StopLossPrice;
-//				}
-//			},
-//			zhiYinNum(){
-//				return this.stopLossListSelectOneObj.Num;
-//			},
-			zhiYinorderType(){
-				this.stopLossListSelectOneObj.OrderType00;
 			}
 			
 		},
@@ -101,6 +91,7 @@
 			stopLossListSelectOneObj:function(n,o){
 				this.zhiYinInputPrice = n.StopLossPrice;
 				this.zhiYinNum = n.Num;
+				this.zhiYinorderType = n.OrderType00;
 			}
 		},
 		filters:{
@@ -129,16 +120,15 @@
 				let b={
 						"Method":'ModifyStopLoss',
 						"Parameters":{
-							'StopLossNo':e.StopLossNo,
-							'ModifyFlag':1,
-							'Num':parseInt(e.Num),
-							'StopLossType':parseInt(e.StopLossType00),
-							'OrderType':parseInt(e.OrderType00),
-							'StopLossPrice':parseFloat(e.StopLossPrice),
-							'StopLossDiff':parseFloat(e.StopLossDiff)
+							'StopLossNo':this.stopLossListSelectOneObj.StopLossNo,
+							'ModifyFlag':0,
+							'Num':parseInt(this.Num),
+							'StopLossType':1,
+							'OrderType':parseInt(this.zhiYinorderType),
+							'StopLossPrice':parseFloat(this.zhiYinInputPrice),
+							'StopLossDiff':0
 						}
 					};
-				
 			}
 		},
 		mounted: function(){
