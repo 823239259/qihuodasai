@@ -1030,7 +1030,13 @@ export default new Vuex.Store({
 						type: 'line',
 						itemStyle: {
 							normal: {
-								color: "#ffffff"
+								color: "#fff"
+							}
+						},
+						lineStyle: {
+							normal: {
+								width: 1,
+								type: 'dashed'
 							}
 						},
 						itemLine: {
