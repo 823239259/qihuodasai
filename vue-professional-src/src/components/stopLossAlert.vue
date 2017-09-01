@@ -63,6 +63,9 @@
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
 				selectStopLossType00:'',
+				inputPrice:'',
+				Num:'',
+				orderType:''
 			}
 		},
 		props: ['val'],
@@ -86,24 +89,6 @@
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
 			},
-//			selectStopLossType00(){
-//				return this.stopLossListSelectOneObj.StopLossType00;
-//			},
-			inputPrice(){
-				
-				if(this.selectStopLossType00==0){
-					return this.stopLossListSelectOneObj.StopLossPrice;
-				}else if(this.selectStopLossType00==2){
-					return this.stopLossListSelectOneObj.StopLossDiff;
-				}
-			},
-			Num(){
-				return this.stopLossListSelectOneObj.Num;
-			},
-			orderType(){
-				return this.stopLossListSelectOneObj.OrderType00;
-			}
-			
 		},
 		filters:{
 			toFixed:function(value,dotSize){
@@ -120,6 +105,16 @@
 		watch:{
 			stopLossListSelectOneObj: function(n,o){
 				this.selectStopLossType00 = n.StopLossType00;
+				
+				if(this.selectStopLossType00==0){
+					this.inputPrice = n.StopLossPrice;
+				}else if(this.selectStopLossType00==2){
+					this.inputPrice = n.StopLossDiff;
+				}
+				
+				this.Num = n.Num;
+				this.orderType = n.OrderType00;
+				
 			}
 		},
 		methods: {
@@ -148,29 +143,28 @@
 							'StopLossType':parseInt(this.selectStopLossType00),
 							'OrderType':parseInt(this.orderType),
 							'StopLossPrice':(function(){
-												if(parseInt(this.orderType)==0)
-													return this.inputPrice;
-												if(parseInt(this.orderType)==2)
+												if(parseInt(this.selectStopLossType00)==0)
+													return parseFloat(this.inputPrice);
+												if(parseInt(this.selectStopLossType00)==2)
 													return 0.0;
-											})(),
+											}.bind(this))(),
 							'StopLossDiff':(function(){
-												if(parseInt(this.orderType)==0)
+												if(parseInt(this.selectStopLossType00)==0)
 													return 0;
-												if(parseInt(this.orderType)==2)
-													return this.inputPrice;
-											})()
+												if(parseInt(this.selectStopLossType00)==2)
+													return parseFloat(this.inputPrice);
+											}.bind(this))()
 						}
 					};
 					
 					console.log(JSON.stringify(b));
-					
+					this.tradeSocket.send(JSON.stringify(b));
 					
 			}
 		},
 		mounted: function(){
 		},
 		activated:function(){
-			this.selectStopLossType00=this.stopLossListSelectOneObj.StopLossType00;
 		}
 	}
 </script>
