@@ -533,7 +533,7 @@ export default new Vuex.Store({
 						var ma30 = params[4].data;
 						var rate = (kd[2] - kd[1]) / kd[1] * 100;
 						rate = parseFloat(rate).toFixed(2);
-						var res = "时间:" + params[0].name + '  涨跌 幅: ' + rate+'%';
+						var res = "时间:" + params[0].name + '  涨跌幅: ' + rate+'%';
 						res += '<br/>  开盘 : ' + parseFloat(kd[1]).toFixed(dosizeL) + '  最高 : ' + parseFloat(kd[4]).toFixed(dosizeL);
 						res += '<br/>  收盘 : ' + parseFloat(kd[2]).toFixed(dosizeL) + ' 最低 : ' + parseFloat(kd[3]).toFixed(dosizeL);
 						res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
