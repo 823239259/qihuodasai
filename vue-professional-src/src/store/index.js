@@ -1504,7 +1504,16 @@ export default new Vuex.Store({
 				context.state.market.stopLossList.forEach(function(e,i){
 					if(e.StopLossNo==parameters.StopLossNo){
 						hasExist = true;
+						console.log('e:');console.log(e);
+						console.log('parameters');console.log(parameters);
+						e.HoldDrection = parameters.HoldDrection;
+						e.Num = parameters.Num;
+						e.OrderType = parameters.OrderType;
 						e.Status = parameters.Status;
+						e.StopLossDiff = parameters.StopLossDiff;
+						e.StopLossPrice = parameters.StopLossPrice;
+						e.StopLossType = parameters.StopLossType;
+						
 						context.state.market.stopLossList.splice(i,1,e);
 						context.state.market.hasNostopLossList.splice(i,1,e);
 					}

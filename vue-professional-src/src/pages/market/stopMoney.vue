@@ -137,6 +137,7 @@
 			stopLossList: function(n, o){
 				this.hasNostopLossList00();
 			}
+			
 		},
 		methods: {
 			updateEvent: function(){
