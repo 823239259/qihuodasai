@@ -108,7 +108,6 @@
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
 			//初始化页面数据
-			console.log(this.jCacheAccount);
 			if(this.status == 0){
 				let TodayCanUse = parseFloat(this.jCacheAccount['USD'].TodayAmount) - parseFloat(this.jCacheAccount['USD'].Deposit) - parseFloat(this.jCacheAccount['USD'].FrozenMoney);
 				this.moneyDetailList.push({title: '昨结存', val: [parseFloat(this.jCacheAccount['USD'].OldAmount).toFixed(2),'0.00','0.00','0.00','0.00']});
