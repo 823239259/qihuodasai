@@ -1774,6 +1774,9 @@ export default new Vuex.Store({
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayBalance=todayBalance;
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayCanUse=todayCanUse;
 					
+					console.log(context.state.market.CacheAccount.jCacheAccount[currencyNo]);
+					
+					
 					context.state.market.CacheAccount.moneyDetail.forEach(function(e,i){
 						if(e.AccountNo == currencyNo){
 							e.FloatingProfit = floatingProfit;
