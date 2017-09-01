@@ -62,6 +62,8 @@
 				selectStopLossType00:0,
 				inputPrice:0.00,
 				orderType:1,
+				zhiYinInputPrice:'',
+				zhiYinNum:'',
 			}
 		},
 		props: ['val'],
@@ -82,18 +84,24 @@
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
 			},
-			zhiYinInputPrice(){
-				if(this.stopLossListSelectOneObj.StopLossType00==1){
-					return this.stopLossListSelectOneObj.StopLossPrice;
-				}
-			},
-			zhiYinNum(){
-				return this.stopLossListSelectOneObj.Num;
-			},
+//			zhiYinInputPrice(){
+//				if(this.stopLossListSelectOneObj.StopLossType00==1){
+//					return this.stopLossListSelectOneObj.StopLossPrice;
+//				}
+//			},
+//			zhiYinNum(){
+//				return this.stopLossListSelectOneObj.Num;
+//			},
 			zhiYinorderType(){
 				this.stopLossListSelectOneObj.OrderType00;
 			}
 			
+		},
+		watch:{
+			stopLossListSelectOneObj:function(n,o){
+				this.zhiYinInputPrice = n.StopLossPrice;
+				this.zhiYinNum = n.Num;
+			}
 		},
 		filters:{
 			toFixed:function(value,dotSize){

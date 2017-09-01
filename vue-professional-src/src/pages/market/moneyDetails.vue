@@ -77,15 +77,15 @@
 					InMoney = {title: '入金', val: []},
 					OutMoney = {title: '出金', val: []};
 				n.forEach(function(o, i){
-					OldAmount.val.push(o.OldAmount); // 昨结存
-					TodayBalance.val.push(o.TodayBalance);//今权益
-					TodayCanUse.val.push(o.TodayCanUse);//今可用
-					Deposit.val.push(o.Deposit);//保证金
-					FrozenMoney.val.push(o.FrozenMoney);//冻结资金
-					FloatingProfit.val.push(o.FloatingProfit);//逐笔浮盈
-					CloseProfit.val.push(o.CloseProfit);//平仓盈亏
-					InMoney.val.push(o.InMoney); //入金
-					OutMoney.val.push(o.OutMoney);//出金
+					OldAmount.val.push(parseFloat(o.OldAmount).toFixed(2)); // 昨结存
+					TodayBalance.val.push(parseFloat(o.TodayBalance).toFixed(2));//今权益
+					TodayCanUse.val.push(parseFloat(o.TodayCanUse).toFixed(2));//今可用
+					Deposit.val.push(parseFloat(o.Deposit).toFixed(2));//保证金
+					FrozenMoney.val.push(parseFloat(o.FrozenMoney).toFixed(2));//冻结资金
+					FloatingProfit.val.push(parseFloat(o.FloatingProfit).toFixed(2));//逐笔浮盈
+					CloseProfit.val.push(parseFloat(o.CloseProfit).toFixed(2));//平仓盈亏
+					InMoney.val.push(parseFloat(o.InMoney).toFixed(2)); //入金
+					OutMoney.val.push(parseFloat(o.OutMoney).toFixed(2));//出金
 				}.bind(this));
 				this.moneyDetailList.push(OldAmount);
 				this.moneyDetailList.push(TodayBalance);
