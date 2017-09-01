@@ -2,62 +2,19 @@
 	<div id="stopmoneyalert" v-if='isshow'>
 		<div class="bg">
 			<div>
-				<!--<div class="fl" :class="{current:isstopm}" @tap="sel">
-					止损
-				</div>-->
 				<div class="fl" :class="{current:!isstopm}" @tap="sel">
 					止盈
 				</div>
 			</div>
-			<!--<template v-if="isstopm">
-				<ul class="cl">
-					<li>
-						<ol class="cl">
-							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">CL1918</li>
-							<li class="fl fontgray">多</li>
-							<li class="fl fontgray">
-								最新：<span class="fontwhite">48.69</span>
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol class="cl">
-							<li class="fl fontgray">方式</li>
-							<li class="fl">
-								<select class="fontwhite sellong" v-model="selectStopLossType00">
-									<option value="0">止损价</option>
-									<option value="2">动态价</option>
-								</select>
-								<input type="text" v-model="inputPrice" class="inp" />
-								<span class="fontgray">0.00%</span>
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol class="cl">
-							<li class="fl fontgray">手数</li>
-							<li class="fl"><input class='inp' type="text" v-model="Num" /></li>
-							<li class="fl  fontgray">
-								止损委托价：
-								<select name="" class='fontwhite selshort' v-model="orderType">
-									<option value="1">市价</option>
-									<option value="2">限价</option>
-								</select>
-							</li>
-						</ol>
-					</li>
-				</ul>
-			</template>-->
 			<template>
 				<ul class="cl">
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">123</li>
-							<li class="fl fontgray">duo</li>
+							<li class="fl fontwhite">{{stopLossListSelectOneObj.CommodityNo+stopLossListSelectOneObj.ContractNo}}</li>
+							<li class="fl fontgray">{{stopLossListSelectOneObj.HoldDrection}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">464</span>
+								最新：<span class="fontwhite">{{lastPrice}}</span>
 							</li>
 						</ol>
 					</li>
@@ -105,8 +62,6 @@
 				selectStopLossType00:0,
 				inputPrice:0.00,
 				orderType:1,
-				zhiYinInputPrice:0.00,
-				zhiYinNum:1,
 				zhiYinorderType:1
 			}
 		},
@@ -120,6 +75,24 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
+			},
+			stopLossListSelectOneObj(){
+				return this.$store.state.market.stopLossListSelectOneObj;
+			},
+			lastPrice(){
+				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
+				return this.$store.state.market.templateList[commodityNo].LastPrice;
+			},
+			zhiYinInputPrice(){
+				if(this.stopLossListSelectOneObj.StopLossType00==1){
+					return this.stopLossListSelectOneObj.StopLossPrice;
+				}
+			},
+			zhiYinNum(){
+				return this.stopLossListSelectOneObj.Num;
+			},
+			zhiYinorderType(){
+				this.stopLossListSelectOneObj.OrderType00;
 			}
 			
 		},
