@@ -64,6 +64,9 @@
 		computed: {
 			moneyDetail: function(){
 				return this.$store.state.market.CacheAccount.moneyDetail;
+			},
+			jCacheAccount(){
+				return this.$store.state.market.CacheAccount.jCacheAccount;
 			}
 		},
 		watch: {
@@ -105,17 +108,18 @@
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
 			//初始化页面数据
-			console.log(this.moneyDetail);
+			console.log(this.jCacheAccount);
 			if(this.status == 0){
-				this.moneyDetailList.push({title: '昨结存', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '今权益', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '今可用', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '保证金', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '冻结资金', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '逐笔浮盈', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '平仓盈亏', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '入金', val: ['0.00','0.00','0.00','0.00','0.00']});
-				this.moneyDetailList.push({title: '出金', val: ['0.00','0.00','0.00','0.00','0.00']});
+				let TodayCanUse = parseFloat(this.jCacheAccount['USD'].TodayAmount) - parseFloat(this.jCacheAccount['USD'].Deposit) - parseFloat(this.jCacheAccount['USD'].FrozenMoney);
+				this.moneyDetailList.push({title: '昨结存', val: [parseFloat(this.jCacheAccount['USD'].OldAmount).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '今权益', val: [parseFloat(this.jCacheAccount['USD'].TodayAmount).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '今可用', val: [parseFloat(TodayCanUse).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '保证金', val: [parseFloat(this.jCacheAccount['USD'].Deposit).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '冻结资金', val: [parseFloat(this.jCacheAccount['USD'].FrozenMoney).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '逐笔浮盈', val: [parseFloat(this.jCacheAccount['USD'].FloatingProfit).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '平仓盈亏', val: [parseFloat(this.jCacheAccount['USD'].CloseProfit).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '入金', val: [parseFloat(this.jCacheAccount['USD'].InMoney).toFixed(2),'0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '出金', val: [parseFloat(this.jCacheAccount['USD'].OutMoney).toFixed(2),'0.00','0.00','0.00','0.00']});
 			}
 		},
 		activated: function(){
