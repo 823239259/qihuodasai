@@ -107,6 +107,15 @@
 			this.$store.state.isshow.isklineshow = false;
 			this.$store.state.isshow.isfensshow = false;
 			this.$store.state.isshow.islightshow =  false;
+			this.moneyDetailList.push({title: '昨结存', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '今权益', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '今可用', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '保证金', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '冻结资金', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '逐笔浮盈', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '平仓盈亏', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '入金', val: ['0.00','0.00','0.00','0.00','0.00']});
+			this.moneyDetailList.push({title: '出金', val: ['0.00','0.00','0.00','0.00','0.00']});
 		}
 	}
 </script>
