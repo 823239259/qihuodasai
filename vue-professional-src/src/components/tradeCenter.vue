@@ -232,7 +232,7 @@
 				buyText:{},
 				obj: [],
 				numReg: /^[0-9]*$/,
-				moneyReg: /^(([1-9]\d*)|0)(\.\d{0,2})?$/
+				moneyReg: /^(([1-9]\d*)|0)(\.\d{0,4})?$/
 			}
 		},
 		filters:{
@@ -412,13 +412,23 @@
 				}
 			},
 			tradePrices: function(n, o){
-				if(n == '' || this.moneyReg.test(n) == false){
-					this.tradePrices = '';
+				if(n == ''){
 					this.marketprice = '';
-					return '';
+					return true;
 				}else{
-					if(this.isShow == false){
-						this.marketprice = n;
+					if(this.moneyReg.test(n) == false){
+						var orderTemplist = this.orderTemplist;
+						var dotSize = orderTemplist[this.$store.state.market.currentdetail.LastQuotation.CommodityNo].DotSize;
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(dotSize);
+						this.marketprice = '';
+						if(this.isShow == true){
+							this.marketprice = '市价';
+						}
+						return '';
+					}else{
+						if(this.isShow == false){
+							this.marketprice = n;
+						}
 					}
 				}
 			},
@@ -908,7 +918,9 @@
 			this.commodityName00 = this.detail.CommodityName;
 			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
 			
+			
 			this.tradePrices = parseFloat(this.tradePrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
+			console.log(this.tradePrices);
 		},
 		activated: function(){}
 		
