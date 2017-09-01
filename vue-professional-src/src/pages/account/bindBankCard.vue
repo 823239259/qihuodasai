@@ -155,7 +155,7 @@
 					}
 				}.bind(this), function(){
 					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败';
+					this.msg = '网络不给力，请稍后再试！';
 				});
 			},
 			deleteBank: function(e){
@@ -209,7 +209,7 @@
 							}
 						}.bind(this), function(){
 							this.$children[0].isShow = true;
-							this.msg = '服务器连接失败';
+							this.msg = '网络不给力，请稍后再试！';
 						});
 					}
 				}else{
@@ -301,7 +301,7 @@
 						}
 					}.bind(this), function(){
 						this.$children[0].isShow = true;
-						this.msg = '服务器连接失败';
+						this.msg = '网络不给力，请稍后再试！';
 					});
 				}
 			},
@@ -335,7 +335,7 @@
 					}
 				}.bind(this), function(){
 					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败';
+					this.msg = '网络不给力，请稍后再试！';
 				});
 			},
 			getBankList: function(){
@@ -362,7 +362,7 @@
 					}
 				}.bind(this), function(){
 					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败';
+					this.msg = '网络不给力，请稍后再试！';
 				});
 			}
 		},

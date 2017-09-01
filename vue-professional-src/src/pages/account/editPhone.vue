@@ -127,7 +127,7 @@
 					}
 				}.bind(this), function(){
 					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败'
+					this.msg = '网络不给力，请稍后再试！'
 				});
 			},
 			getNewCode: function(e){
@@ -194,7 +194,7 @@
 						}
 					}.bind(this), function(){
 						this.$children[0].isShow = true;
-						this.msg = '服务器连接失败'
+						this.msg = '网络不给力，请稍后再试！'
 					});
 				}
 			},
@@ -261,7 +261,7 @@
 						}
 					}.bind(this), function(){
 						this.$children[0].isShow = true;
-						this.msg = '服务器连接失败';
+						this.msg = '网络不给力，请稍后再试！';
 					});
 				}
 			}
