@@ -1018,11 +1018,11 @@ export default new Vuex.Store({
         						{ xAxis:123 , yAxis: 48.12},
 				            ],
 				            lineStyle: {
-				                   normal: {
-				                       width: 1,
-				                       color: "#ff0000"
-				                   }
-				                },
+			                   normal: {
+			                       width: 1,
+			                       color: "#ff0000"
+			                   }
+			                },
 						}
 						
 					},
@@ -1052,14 +1052,12 @@ export default new Vuex.Store({
 			                    position: 'top'
 			                }
 			          },
-			          markLine:{
-			          	data:[
-			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
-        						{ xAxis:500 , yAxis: 48.2},
-				            ]
-			          }
-			          
-						
+//			          markLine:{
+//			          	data:[
+//			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
+//      						{ xAxis:500 , yAxis: 48.2},
+//				            ]
+//			          }
 					}
 				]
 			};
