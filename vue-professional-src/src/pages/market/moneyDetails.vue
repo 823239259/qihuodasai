@@ -57,6 +57,7 @@
 		components:{topbar, back},
 		data(){
 			return{
+				status: 0,
 				moneyDetailList: []
 			}
 		},
@@ -67,6 +68,8 @@
 		},
 		watch: {
 			moneyDetail: function(n, o){
+				console.log(1);
+				this.status = 1;
 				this.moneyDetailList = [];
 				var OldAmount = {title: '昨结存', val: []}, 
 					TodayBalance = {title: '今权益', val: []}, 
@@ -101,21 +104,25 @@
 		},
 		mounted: function(){
 			$("#moneyDetails").css("height",window.screen.height + "px");
+			//初始化页面数据
+			console.log(this.moneyDetail);
+			if(this.status == 0){
+				this.moneyDetailList.push({title: '昨结存', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '今权益', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '今可用', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '保证金', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '冻结资金', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '逐笔浮盈', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '平仓盈亏', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '入金', val: ['0.00','0.00','0.00','0.00','0.00']});
+				this.moneyDetailList.push({title: '出金', val: ['0.00','0.00','0.00','0.00','0.00']});
+			}
 		},
 		activated: function(){
 			//不更新画图
 			this.$store.state.isshow.isklineshow = false;
 			this.$store.state.isshow.isfensshow = false;
 			this.$store.state.isshow.islightshow =  false;
-			this.moneyDetailList.push({title: '昨结存', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '今权益', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '今可用', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '保证金', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '冻结资金', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '逐笔浮盈', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '平仓盈亏', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '入金', val: ['0.00','0.00','0.00','0.00','0.00']});
-			this.moneyDetailList.push({title: '出金', val: ['0.00','0.00','0.00','0.00','0.00']});
 		}
 	}
 </script>
