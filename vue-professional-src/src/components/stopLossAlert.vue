@@ -60,14 +60,9 @@
 			return {
 				isstopm: true,
 				isshow:false,
-				Num:1,
-//				selectStopLossType00:0,
-//				inputPrice:0.00,
-				orderType:1,
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
 				zhiYinorderType:1,
-				selectStopLossType11: '123'
 			}
 		},
 		props: ['val'],
@@ -101,6 +96,12 @@
 				}else if(this.selectStopLossType00==2){
 					return this.stopLossListSelectOneObj.StopLossDiff;
 				}
+			},
+			Num(){
+				return this.stopLossListSelectOneObj.Num;
+			},
+			orderType(){
+				return this.stopLossListSelectOneObj.OrderType00;
 			}
 			
 		},
