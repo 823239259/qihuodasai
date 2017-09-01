@@ -117,6 +117,11 @@
 					return '动态价';
 			}
 		},
+		watch:{
+			stopLossListSelectOneObj: function(n,o){
+				this.selectStopLossType00 = n.StopLossType00;
+			}
+		},
 		methods: {
 			sel: function(e) {
 				var txt = e.target.innerText;
@@ -163,11 +168,6 @@
 			}
 		},
 		mounted: function(){
-		},
-		watch:{
-			stopLossListSelectOneObj:function(n,o){
-				return this.$store.state.market.stopLossListSelectOneObj;
-			}
 		},
 		activated:function(){
 			this.selectStopLossType00=this.stopLossListSelectOneObj.StopLossType00;
