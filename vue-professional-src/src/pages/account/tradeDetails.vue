@@ -335,7 +335,7 @@
 				}
 			},
 			getexchangeRmb: function(e, a) {
-				return e * a;
+				return parseFloat(e * a).toFixed(2);
 			},
 			loss: function(e) {
 				if(e > 0) {
@@ -417,7 +417,7 @@
 						}
 					}.bind(this), function() {
 						this.$children[0].isShow = true;
-						this.msg = '服务器连接失败'
+						this.msg = '网络不给力，请稍后再试！'
 					});
 				}else if(this.type == 1){
 					this.$children[0].isShow = true;
@@ -445,6 +445,7 @@
 					if(data.success == true) {
 						if(data.code == 1) {
 							this.tradeDetails = data.data.details;
+							console.log(data);
 							this.tradeDetailsId = this.tradeDetails.id;
 							this.tradeDetails.outDiskVoList.forEach(function(x, i) {
 								switch(x.tradeType) {
@@ -514,7 +515,7 @@
 					}
 				}.bind(this), function() {
 					this.$children[0].isShow = true;
-					this.msg = '服务器连接失败'
+					this.msg = '网络不给力，请稍后再试！';
 				});
 			},
 			applyStopOrder: function(){
@@ -595,7 +596,7 @@
 						}
 					}.bind(this), function() {
 						this.$children[0].isShow = true;
-						this.msg = '服务器连接失败'
+						this.msg = '网络不给力，请稍后再试！'
 					});
 			}
 		},
