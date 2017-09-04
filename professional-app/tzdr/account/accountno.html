@@ -1,120 +1,231 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>我的账户</title>
-    <script type="text/javascript" src="../../js/mui.min.js"></script> 
-    <script type="text/javascript" src="../../js/common.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
-    <link rel="stylesheet" href="../../css/own.css" />
-    <style>
-    .mui-backdrop { z-index: 10;}
-    .mui-bar-tab { z-index: 15;}
-    </style>
-    <script>
-    	mui.init();    	
-    	mui.plusReady(function(){
-    		//初始化监听头部和底部事件
-    		var dataUrl={
-  				home:"../../home.html",
-  				account:"account.html",
-  				accountno:"tzdr/account/accountno.html",
-  				listrg:"../future/listrg.html",
-  				quotationMain:"../quotation/quotationMain.html",
-  				information:"../information/information.html"
-  			}
-  			initBottom(dataUrl);
-  			document.getElementById("regist").addEventListener("tap",function(){
-				mui.openWindow("../login/regist.html");
-			});
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的账户</title>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<style>
+			.mui-backdrop {
+				z-index: 10;
+			}
 			
-			document.getElementById("login").addEventListener("tap",function(){
-				mui.openWindow("../login/login.html");
+			.mui-bar-tab {
+				z-index: 15;
+			}
+		</style>
+		<style>
+			#find-tab li {
+				height: 60px;
+				padding: 0px;
+				border-bottom: 1px solid #ededed;
+				border-right: 1px solid #ededed;
+				background: #ffffff;
+			}
+			
+			.find_tab_div {
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+			
+			.find_tab_div>div {
+				text-align: left;
+				font-size: 14px;
+				color: #333333;
+				font-weight: bolder;
+				display: inline-block;
+				padding-left: 5px;
+				margin-top: 8px;
+			}
+			
+			.find_tab_div>div span {
+				font-size: 12px;
+				color: #999999;
+				font-weight: normal;
+				display: inline-block;
+				width: 108px;
+			}
+			
+			.find_tab_div img {
+				margin-bottom: 7px;
+				width: 20px;
+			}
+			
+			.mui-content .ac_money p {
+				text-align: left;
+				padding-left: 50px;
+			}
+			
+			.mui-content .ac_money p span {
+				color: #333333;
+			}
+			
+			.ac_listbtn.mui-table-view:before {
+				background: #fff;
+			}
+			
+			.ac_listbtn.mui-table-view:after {
+				background: #fff;
+			}
+			
+			.ac_listbtn .mui-table-view-cell>a:not(.mui-btn) {
+				padding: 0 15px;
+				height: 40px;
+				line-height: 40px;
+				background: #ffde3d;
+				margin: 0 15px;
+				border-radius: 20px;
+			}
+		</style>
+		<script>
+			mui.init();
+			mui.plusReady(function() {
+				//初始化监听头部和底部事件
+				var dataUrl = {
+					home: "../future/cp.html",
+					account: "account.html",
+					accountno: "tzdr/account/accountno.html",
+					listrg: "../future/listrg.html",
+					quotationMain: "../quotation/quotationMain.html",
+					information: "../information/information.html"
+				}
+				initBottom(dataUrl);
+				document.getElementById("regist").addEventListener("tap", function() {
+					mui.openWindow("../login/regist.html");
+				});
+
+				document.getElementById("login").addEventListener("tap", function() {
+					mui.openWindow("../login/login.html");
+				});
 			});
-  		});
-    </script>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav own-topbg">
-		<h1 class="mui-title">我的账户</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="telBtn">在线客服</a>
-	</header>
-	
-	<nav class="navlist">
-		<a class="" href="javascript:void(0);" id="quotationMain">
-			<!--<span class="mui-icon mui-icon-settings"></span>-->
-			<span class="mui-icon"><img src="../../images/0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">行情交易</span>
-		</a>
-		<a class="" href="javascript:void(0);"  id="product">
-			<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘申请</span>
-		</a>
-		<a href="javascript:void(0);"  id="information">
-			<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">资讯直播</span>
-		</a>
-		<a class="navon" id="account" href="javascript:void(0);">
-			<span class="mui-icon"><img src="../../images/3.0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
-	</nav>
-	<div class="mui-content">
-		<div class="mui-content-padded ac_money">
-			<h2 id="title_name">请先登录</h2>
-			<h3 id="title_balance">0.00元</h3>
-			<p>账户余额</p>
-		</div>			
-		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="charge"><img src="../../images/ac_01.png"><i>我要充值</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="withdraw"><img src="../../images/ac_02.png"><i>我要提现</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="funddetail"><img src="../../images/ac_03.png"><i>资金明细</i></a>
-			</li>
-		</ul>
-		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="user_verified"><img src="../../images/ac_04.png"><i>实名认证</i><b><span id="Certification">未认证</span></b></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="telPhone"><img src="../../images/ac_05.png"><i>手机绑定</i><b>修改</b></a>
-			</li>
-			<!--<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="weixin"><img src="../../images/weixinIcon.png"><i>微信绑定</i><b>已关注</b></a>
-			</li>-->
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)"><img src="../../images/ac_06.png"><i>登录密码</i><b>未登录</b></a>
-			</li>
-		</ul>
-		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
-			<!--<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="coupon"><img src="../../images/ac_04.png"><i>优惠券</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="Invitation"><img src="../../images/ac_04.png"><i>邀请有礼</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)"><img src="../../images/ac_05.png"><i>邀请好友</i><b>有奖励</b></a>
-			</li>-->
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="about"><img src="../../images/about.png"><i>关于国际期货通</i></a>
-			</li>
-		</ul>
-		<ul class="mui-table-view ac_listbtn">
-			<li class="mui-table-view-cell" style="text-align: center;">
-				<a  href="#quitaccc">退出账户</a>
-			</li>
-		</ul>
-	</div>	
-	<div class="mui-backdrop"></div>
-	<div class="main_nolg">		
-		<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>		
-		<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist" style="border-radius: 20px;">新用户注册</button>
-	</div>
-</body>
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<h1 class="mui-title">我的账户</h1>
+			<a href="javascript:void(0)" class="top-tel" id="telBtn">在线客服</a>
+		</header>
+
+		<nav class="navlist">
+			<a class="" href="javascript:void(0);" id="quotationMain">
+				<!--<span class="mui-icon mui-icon-settings"></span>-->
+				<span class="mui-icon"><img src="../../images/0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">行情交易</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="product">
+				<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">操盘申请</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="quickMode">
+				<img src="../../images/quickMode.png" style="width: 35px;height:35px; position: relative; top: 3px;">
+			</a>
+			<a href="javascript:void(0);" id="information">
+				<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">资讯直播</span>
+			</a>
+			<a class="navon" id="account" href="javascript:void(0);">
+				<span class="mui-icon"><img src="../../images/3.0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">账户</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<div class="mui-content-padded ac_money" style="height: 120px;">
+				<div style="height: 75px; position: relative; padding: 15px; border-bottom: 1px solid #e7e7e7;">
+					<img src="../../images/headPortrait.png" alt="" style="width: 50px; position: absolute;" />
+					<p>姓名：<span id="title_names"></span></p>
+					<p>手机号：<span id="title_iphones"></p>
+				</div>
+				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额:<span id="title_balance"></span></h2>
+			</div>
+			<div class="mui-slider" id="slider">
+				<div class="mui-slider-group mui-slider-loop" id="bannerloop">
+					<div class="mui-slider-item">
+						<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator" id="indicatorid">
+
+				</div>
+			</div>
+			<ul class="mui-table-view mui-grid-view mui-grid-9" id="find-tab">
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
+					<div class="find_tab_div">
+						<img src="../../images/ac_01.png">
+						<div>
+							我要充值<br/><span>申请开户，记得充值</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="withdraw">
+					<div class="find_tab_div">
+						<img src="../../images/ac_02.png">
+						<div>
+							我要提现<br/><span>结算方案，别忘提款</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="funddetail">
+					<div class="find_tab_div">
+						<img src="../../images/ac_03.png">
+						<div>
+							资金明细<br/><span>资金流水，一目了然</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
+					<div class="find_tab_div">
+						<img src="../../images/ac_04.png">
+						<div>
+							实名认证<br/><span id="Certification" style="color: #ff4c4c;">未认证</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="telPhone">
+					<div class="find_tab_div">
+						<img src="../../images/ac_05.png">
+						<div>
+							手机绑定<br/><span style="color: #ff4c4c;">修改</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="updatepw">
+					<div class="find_tab_div">
+						<img src="../../images/ac_06.png">
+						<div>
+							登录密码<br/><span style="color: #ff4c4c;">修改</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="noviceGuide">
+					<div class="find_tab_div">
+						<img src="../../images/ac_071.png">
+						<div>
+							新手指引<br/><span>遇到问题，戳这里</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toNews">
+					<div class="find_tab_div">
+						<img src="../../images/ac_081.png">
+						<div>
+							网站公告<br/><span>最新公告，看这里</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="mui-backdrop"></div>
+		<div class="main_nolg">
+			<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>
+			<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist" style="border-radius: 20px;">新用户注册</button>
+		</div>
+	</body>
+	<script></script>
 </html>

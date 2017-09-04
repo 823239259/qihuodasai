@@ -472,6 +472,7 @@ p{
 .productList {
 	width: 100%;
 	margin-top: 45px;
+    overflow: hidden;
 }
 .productList span,.productList p{
 	color:#FFFFFF;
@@ -484,12 +485,12 @@ p{
 	width: 100%;
 	height: 50px;
 	padding:0px 2%;
-	border-bottom:1px solid #454545;
+	border-bottom:1px solid #232323;
 	position: relative;
 }
 .productContentLeft{
 	height:50px;
-	width: 25%;
+	width: 33%;
 	text-align: left;
 	padding:9px 0px 13px;
 	font-size: 14px;
@@ -498,13 +499,14 @@ p{
 	position: absolute;
 	top:0px;
 	left:2%;
+	padding-left: 2%;
 }
 .CommodityNoName{
 	color:#999999!important;
 }
 .productContentRight{
 	height:50px;
-	width: 75%;
+	width: 66%;
 	padding:9px 0px 13px;
 	text-align: center;
 	line-height: 26px;
@@ -512,9 +514,22 @@ p{
 	top:0px;
 	right:2%;
 }
+.productContentRight span:nth-child(2) {
+	float: right;
+    line-height: 20px;
+    padding: 5px 0;
+    position: relative;
+    top: -10px;
+}
+.productContentRight span:nth-child(2) label{
+	text-align: right;
+	display: inline-block;
+    width: 100%;
+    padding-right: 5%;
+}
 .productContentRight span{
 	display: inline-block;
-	width: 31%;
+	width: 48%;
 	text-align: center;
 }
 .redFont{
@@ -525,7 +540,9 @@ p{
 	width: 80%;
 	height:26px;
 	border-radius: 2px;
-	background-color: #e9392a;
+	color: #e9392a;
+	text-align: right;
+	/*background-color: #e9392a;*/
 }
 .greenFont{
 	color:#16a951!important;
@@ -535,7 +552,9 @@ p{
 	width: 80%;
 	height:26px;
 	border-radius: 2px;
-	background-color: #16a951;
+	text-align: right;
+	color: #16a951;
+	/*background-color: #16a951;*/
 }
 .dateTimeL{
 		width: 120px !important;
@@ -573,8 +592,8 @@ input{
 }
 #fisrtLlist{
 	width: 100%;
-	padding: 0px 2%;
-	height: 40px;
+	/*padding: 0px 2%;*/
+	/*height: 40px;*/
 	line-height: 40px;
 	color: #FFFFFF;
 	position: fixed;
@@ -585,15 +604,63 @@ input{
 	border-top: 1px solid #454545;
 	background-color: #2B2B2B;
 }
+/*新手指引start*/
+#guide {
+	font-size: 12px;
+    color: #cccccc;
+    background: #454545;
+    line-height: 20px;
+    padding: 5px 40px 5px 2%;
+    position: relative;
+    z-index: 1;
+}
+#guideP {
+	font-size: 12px;
+    color: #cccccc;
+}
+#fisrtLlist #colse {
+	position: absolute;
+    right: 7px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    top: 10px;
+    font-size: 24px;
+    z-index: 10;
+}
+#fisrtLlist #colse:active {
+	color: #fff;
+}
+#guideMask {
+	background: rgba(0,0,0,0.7);
+	display: none;
+}
+#guideContent {
+	width: 90px;
+    height: 70px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -35px;
+    margin-left: -45px;
+}
+#guideContent:active {
+	cursor: pointer;
+	opacity: 0.9;
+}
+/*新手指引end*/
 #fisrtLlist span{
 	display: inline-block;
-	width: 25%;
+	width: 32%;
 	text-align: center;
 }
 #fisrtLlist span:nth-child(1){
-	display: inline-block;
-	width: 25%;
 	text-align: left;
+	padding-left: 2%;
+}
+#fisrtLlist span:nth-child(3){
+	text-align: right;
 }
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
 	border-radius: 0px;
@@ -650,7 +717,7 @@ input{
 }
 #checkBox i{
 	display: inline-block;
-	background-color: #fcc900;
+	background-color: #ff6a00;
 	border-radius: 50%;
 	
 }

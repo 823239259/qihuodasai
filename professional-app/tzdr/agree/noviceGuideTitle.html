@@ -1,0 +1,2904 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>详情</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/own.css" />
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+		<style>
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-bottom: 0;
+			}
+			.mui-content > div{
+				display: none;
+				font-size: 14px;
+			}
+			.mui-content tr {
+				height: 40px;
+				line-height: 40px;
+			}
+			.mui-content tr td:nth-child(1) {
+				color: #999999;
+				padding-left: 5px;
+				width: 110px;
+				border-right: 1px solid #efefef;
+			}
+			.mui-content tr td:nth-child(2) {
+				color: #333333;
+				padding-left: 5px;
+			}
+			.ap_main .acp_font table {
+			    background: #fff;
+			    width: 100%;
+			}
+			.ap_main .acp_font tr td {
+				background: #fff;
+			}
+			.ap_main .acp_font {margin-bottom: 0;}
+			.ap_main .acp_font tr td { border-bottom: 1px solid #efefef;}
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {margin: 0 15px; color: #ff4c4c;}
+			.ap_main .mui-table-view-cell {border-bottom: 5px solid #e6e6e6;}
+			.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {border-top: 1px solid #e6e6e6;}
+			.mui-table-view-cell.mui-active {background: #fff;}
+			.mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron {margin-right: 0px;}
+			.mui-table-view-cell p {color: #333333;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title" id="titleall"></h1>
+		</header>
+		<div class="mui-content">
+			<div class="ap_main" id="title1">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>国际原油</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>每手1000桶</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>0.01美元/桶</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=10美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午06:00:00-次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午06:00:00-次日04:55:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>次日04:55:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>89/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：港交所恒指期货，每点50港元，最小波动1点，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>国际原油最后持仓时间：04:55:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>交易品种涨幅≥20%时禁止买跌，跌幅≥20%时禁止买涨。</p>
+								<p>交易品种涨幅≥30%时持仓中买跌的交易全部强制平仓，跌幅≥30%时持仓中买涨的交易强制平仓</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>国际原油买手交易综合费：89元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>实盘交易下单</p>
+								<p>您的所有国际原油交易，全部经由平台的期货交易账户，下单到纽约商业交易所</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title2">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>恒指期货</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>港币</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数单</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>50港元/点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=50港元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午09:15:00 - 12:00:00</br>下午 13:00:00 - 16:30:00</br>夜间 17:15:00 - 23:45:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午09:15:00 - 12:00:00</br>下午13:00:00 - 16:30:00</br>夜间 17:15:00 - 23:35:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>白天16:25:00</br>夜间 23:35:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>69/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：港交所恒指期货，每点50港元，最小波动1点，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>恒指期货最后持仓时间：23:35</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>无涨跌幅限制</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>恒指期货买手交易综合费：69元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有恒生指数交易，全部经由平台的期货交易账户，下单到香港交易所</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title3">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>美黄金</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>每手100盎司</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>0.1美元/盎司</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=10美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午06:00:00-次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午06:00:00-次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>次日04:55:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：纽交所美黄金期货，每手100盎司，最小波动10美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美黄金最后持仓时间：04:55:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>无涨跌幅限制</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美黄金交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有美黄金交易，全部经由平台的期货交易账户，下单到纽约商品交易所</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title4">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>美元兑人民币</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>0.0001个指数单位</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>10美元/0.0001</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=10美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午09:00:00<br>下午16:30:00<br>晚上17:15:00-晚上23:45:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午09:00:00-下午16:30:00<br>晚上17:15:00-晚上23:35:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>晚上23:35:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：港交所恒指期货，每点50港元，最小波动1点，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美元兑人民币最后持仓时间：23:35</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>T+1时段的可委托价格区间为期货合约在T时段最后成交价的3%</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美元兑人民币交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有美元兑人民币交易，全部经由平台的期货交易账户，下单到香港交易所</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title5">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>德国DAX指数</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>欧元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>0.5个指数单位</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>12.5美元/0.5</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=12.5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>下午14:00:00-次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午14:00:00-次日03:55:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>次日早上03:55:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：欧洲期货期权交易所德国DAX指数期货，最小波动12.5美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>德国DAX指数最后持仓时间：03:55:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>T+1时段的可委托价格区间为期货合约在T时段最后成交价的5%</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>德国DAX指数交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有德国DAX指数交易，全部经由平台的期货交易账户，下单到欧洲期货期权交易所</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title6">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>小恒指</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>港元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数单位</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>10港元/1点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=10港元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午09:15:00 - 12:00:00</br>下午13:00:00 - 16:20:00</br>夜间 17:15:00 - 23:35:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午09:15:00 - 12:00:00</br>下午13:00:00 - 16:20:00</br>夜间 17:15:00 - 23:25:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>白天16:25:00</br>夜间23:25:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>46/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：香港交易所小恒指期货，最小波动10港元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>小恒指最后持仓时间：23:25:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>无涨跌限制</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>小恒指交易综合费：46元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有小恒指交易，全部经由平台的期货交易账户，下单到香港交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title7">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>富时A50</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>2.5美元/2.5点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=2.5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天09:00:00 - 16:20:00</br>夜间17:00:00 - 04:45:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天 09:00:00 - 16:25:00</br>夜间17:00:00 - 04:35:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>白天16:25:00</br>夜间 04:35:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>40/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：新加坡交易所富时A50期货，最小波动2.5美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>富时A50最后持仓时间：04:35:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当涨跌幅±10%和±15%时，分别熔断10分钟，之后无涨跌幅限制。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>富时A50交易综合费：40元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有富时A50交易，全部经由平台的期货交易账户，下单到新加坡交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title8">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>美铜</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>12.5美元/0.0005点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=12.5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天06:00:00 – 次日05:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天06:00:00 – 次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：纽约商品交易所美铜期货，最小波动12.5美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美铜最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>±0.40美元,所有合约熔断2分钟。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美铜交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有美铜交易，全部经由平台的期货交易账户，下单到纽约商品交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title9">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>美白银</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>25美元/0.005点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=25美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天06:00:00 – 次日05:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天06:00:00 – 次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：纽约商品交易所美白银期货，最小波动25美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美白银最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>±3美元, 所有合约熔断2分钟</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>美白银交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>实盘交易下单</p>
+								<p>您的所有美白银交易，全部经由平台的期货交易账户，下单到纽约商品交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title10">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>迷你道琼</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>5美元/1点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天06:00:00 – 16:15:00</br>夜间16:30:00-05:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天06:00:00 – 16:15:00</br>夜间16:30:00-04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：芝加哥期货交易所迷你道琼期货，最小波动5美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你道琼最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>7%、13%、20%(仅跌停)三级熔断。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你道琼交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有迷你道琼交易，全部经由平台的期货交易账户，下单到芝加哥期货交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title11">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>迷你纳斯达克</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>5美元/0.25点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天06:00:00 – 16:15:00</br>夜间16:30:00-05:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天06:00:00 – 16:15:00</br>夜间16:30:00-04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：芝加哥商业交易所迷你道琼期货，最小波动5美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你纳斯达克最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>7%、13%、20%(仅跌停)三级熔。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你纳斯达克交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有迷你纳斯达克交易，全部经由平台的期货交易账户，下单到芝加哥商业交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title12">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>迷你标准普尔</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>12.5美元/0.25点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=12.5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天06:00:00 – 16:15:00</br>夜间16:30:00-05:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天06:00:00 – 16:15:00</br>夜间16:30:00-04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：芝加哥商业交易所迷你标准普尔，最小波动12.5美元，可买涨买跌。。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你标准普尔最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>7%、13%、20%(仅跌停)三级熔段。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你标准普尔交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有迷你标准普尔交易，全部经由平台的期货交易账户，下单到芝加哥商业交易所</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title13">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>日经225</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>日元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>2500日元/5点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=2500日元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天07:30:00 – 16:30:00</br>夜间16:55:00-04:45:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天07:30:00 – 16:30:00</br>夜间16:55:00-04:35:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 04:35:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：新加坡交易所日经225，最小波动2500日元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>日经225最后持仓时间：04:35:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当涨跌幅±7.5%和±12.5%时，分别熔断15分钟，即月合约在最后交易日无涨跌停。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>日经225交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有日经225交易，全部经由平台的期货交易账户，下单到新加坡交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title14">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>H股指数</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>港元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>50港元/1点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=50港元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午09:15:00 – 12:00:00</br>下午13:00:00-16:30:00</br>夜间17:15:00-23:45:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午09:15:00 – 12:00:00</br>下午13:00:00-16:30:00</br>夜间17:15:00-23:25:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>夜间 23:35:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>76/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：香港交易所H股指数，最小波动50港元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>H股指数最后持仓时间：23:35:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>T+1时段的可委托价格区间为 期货合约在T时段最后成交价 的5%。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>H股指数交易综合费：76元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有H股指数交易，全部经由平台的期货交易账户，下单到香港交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title15">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>小原油</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>12.5美元/0.25点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=12.5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>白天06:00:00 – 次日05:50:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>白天06:00:00 – 次日05:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>次日 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：纽约商业交易所小原油期货，最小波动12.5美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>小原油最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>±10美元若最近的三个合约同时出现涨跌停，所有合约熔断5分钟。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>小原油交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有小原油交易，全部经由平台的期货交易账户，下单到纽约商业交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title16">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>迷你德国指数</td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>欧元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>5欧元/1点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=5欧元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>夜间14:00:00 – 次日04:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>夜间14:00:00 – 次日03:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>次日 03:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>69/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：欧洲期货期权交易所德国迷你指数期货，最小波动5欧元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你德国指数最后持仓时间：03:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>T+1时段的可委托价格区间为 期货合约在T时段最后成交价 的5%。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>迷你德国指数交易综合费：69元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>实盘交易下单</p>
+								<p>您的所有迷你德国指数交易，全部经由平台的期货交易账户，下单到欧洲期货期权交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="ap_main" id="title17">
+				<div class="acp_font">
+					<table border="0" cellpadding="0" cellspacing="0" id="table_list">
+						<tbody>
+							<tr>
+								<td>交易品种</td>
+								<td>天然气 </td>
+							</tr>
+							<tr>
+								<td>币种单位</td>
+								<td>美元</td>
+							</tr>
+							<tr>
+								<td>交易单位</td>
+								<td>1个指数点</td>
+							</tr>
+							<tr>
+								<td>最小波动</td>
+								<td>10美元/0.001点</td>
+							</tr>
+							<tr>
+								<td>波动盈亏</td>
+								<td>波动一次=5美元</td>
+							</tr>
+							<tr>
+								<td>买入交易时间</td>
+								<td>上午06:00:00 – 次日05:00:00</td>
+							</tr>
+							<tr>
+								<td>卖出时间</td>
+								<td>上午06:00:00 – 次日04:50:00</td>
+							</tr>
+							<tr>
+								<td>清仓时间</td>
+								<td>次日早上 04:50:00</td>
+							</tr>	
+							<tr>
+								<td>交易综合费</td>
+								<td>119/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="padding-top: 10px; padding-left: 5px;">注意：纽约商业交易所天然气期货，最小波动10美元，可买涨买跌。</p>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-collapse mui-active">
+						<a class="mui-navigate-right" href="#">什么是买涨？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是买跌？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当您买跌时，价格跌了你就赚钱，涨了亏钱。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止盈单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易盈利金额大于等于设定的止盈金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格在实时变动，不保证最终盈利金额与止盈金额一致，有可能小于设置的止盈金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是止损单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>当单笔交易亏损金额大于等于指定的止损金额时，该笔交易会被按市价自动强制平仓。</p>
+								<p>由于市场价格的实时变动，不保证最终亏损金额与止损金额一致，有可能大于设置的止损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是时间条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>到了您设定的某一时间就会触发（开仓或平仓）预先设定的委托单。如：尾盘自动平仓开盘抢单。保存于客户设备本地，当行情满足您设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是价格条件单？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>即预先设置某一价位（开仓或平仓），一旦触及该价格，系统自动提交您的委托，从而实现自动委托。保存于客户设备本地，当行情满足客户设定的条件，软件自动触发委托。注意：关机或者退出软件会导致条件单失效。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>天然气最后持仓时间：04:50:00</p>
+								<p>当持仓时间到点后，持仓中的交易会被强制平仓，不保证成交价格，请务必在到期前自己选择卖出。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是强平线？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>平台会根据交易所提提供的结果每天对您的盈亏状况进行结算，当您的账户余额达到设置的强平线时，系统将会把账户中的持仓合约强平掉，撤销掉所有挂单合约，并冻结账户。所以您在交易时，要时刻注意自己的资金状况。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是风险度？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>风险度越高标志着您距离被强平的越近，所以您在交易时，要时刻注意自己的资金状况。所以当保证金不能在规定时间内补足，期货价格波动较大的话，您可能面临强行平仓风险。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">涨跌幅限制</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>±1.00美元,若最近的三个合约同时出现涨跌停,所有合约熔断5分钟。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">交易综合费</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>天然气交易综合费：119元（买进卖出只收取一次）</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">履约保证金</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>履约保证金为您委托平台冻结用于履行交易亏损赔付义务的保证金。</p>
+								<p>以冻结的履约保证金作为承担交易亏损赔付，但交易亏损可能超出保证金金额，超出部分的亏损全部由您承担，平台不承担交易亏损。合作交易结束后，根据清结算结果，如交易盈利，您冻结的履约保证金全额退还。如交易亏损，从冻结的履约保证金中，扣减您所应承担的亏损赔付额，扣减后余额退还。如亏损超出保证金，则直接在您账户余额中扣除。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">盈利如何分配？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>盈利100%归用户所有，平台不参与盈利分成。</p>
+								<p>若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">什么是持仓时间？</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<p>您的所有天然气，全部经由平台的期货交易账户，下单到纽约商业交易所。</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init()
+		mui.plusReady(function() {
+			$("#titleall").text(plus.webview.currentWebview().titleall);
+			document.getElementById("back").addEventListener("tap", function() {
+				mui.app_refresh(plus.webview.currentWebview().backPage);
+			});
+			console.log(plus.webview.currentWebview().ids);
+			if(plus.webview.currentWebview().ids == 1){
+				$("#title1").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 2) {
+				$("#title2").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 3) {
+				$("#title3").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 4) {
+				$("#title4").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 5) {
+				$("#title5").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 6) {
+				$("#title6").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 7) {
+				$("#title7").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 8) {
+				$("#title8").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 9) {
+				$("#title9").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 10) {
+				$("#title10").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 11) {
+				$("#title11").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 12) {
+				$("#title12").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 13) {
+				$("#title13").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 14) {
+				$("#title14").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 15) {
+				$("#title15").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 16) {
+				$("#title16").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 17) {
+				$("#title17").css("display","block");
+			}else if(plus.webview.currentWebview().ids == 18) {
+				$("#title18").css("display","block");
+			}			
+		});
+	</script>
+
+</html>

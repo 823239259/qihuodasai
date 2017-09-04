@@ -274,8 +274,8 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain: "http://test.api.dktai.cn/",
-		api_recharge "http://test.www.dktai.cn/",//充值
+		api_domain: "http://api.dktai.cn/", 
+//		api_recharge "http://test.www.dktai.cn/",//充值
 //		api_domain:"http://192.168.0.72:8080/vs-api/",
 		//图片地址
 		base_images_url: 'http://manage.dktai.cn/',
@@ -417,11 +417,11 @@ var tzdr = {
 					
 				});
 				document.getElementById("product").addEventListener("tap",function(){
-					var p=plus.webview.getWebviewById("home");
+					var p=plus.webview.getWebviewById("cp");
 					if(p){
-						mui.app_refresh('home');  
+						mui.app_refresh('cp');  
 					}
-					mui.openWindow({url:data.home,id:"home"});
+					mui.openWindow({url:data.home,id:"cp"});
 				});
 			
 				document.getElementById("quotationMain").addEventListener("tap",function(){
@@ -498,6 +498,14 @@ var tzdr = {
 		document.getElementById("online").addEventListener("tap", function() {
 			var path = mui.app_filePath("chart.html");
 			mui.openWindow(path, "online");
+		});
+	},
+	operation: function() {
+		document.getElementById("quickMode").addEventListener("tap", function() {
+			$("#Operation_content").css("display","block");
+		});
+		document.getElementById("Operation_Close").addEventListener("tap", function() {
+			$("#Operation_content").css("display","none");
 		});
 	}
 }
@@ -638,11 +646,11 @@ function initBottom(data){
 					
 				});*/
 				document.getElementById("product").addEventListener("tap",function(){
-					var p=plus.webview.getWebviewById("home");
+					var p=plus.webview.getWebviewById("cp");
 					if(p){
-						mui.app_refresh('home');  
+						mui.app_refresh('cp');  
 					}
-					mui.openWindow({url:data.home,id:"home"});
+					mui.openWindow({url:data.home,id:"cp"});
 				});
 				document.getElementById("quotationMain").addEventListener("tap",function(){
 					var p=plus.webview.getWebviewById("quotationMain");
@@ -666,4 +674,14 @@ String.prototype.trim = function() {
 
 var tranferParam;
 
+function initOperation(data){
+	document.getElementById("kh").addEventListener("tap",function(){
+		mui.app_refresh('cp');
+		mui.openWindow({url:data.kh,id:"cp"});
+	});
+	document.getElementById("zjfa").addEventListener("tap",function(){
+		mui.app_refresh('openingRecord');
+		mui.openWindow({url:data.zj,id:"openingRecord"});
+	});
+}
 

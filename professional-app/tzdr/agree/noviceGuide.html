@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>新收指引</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/own.css" />
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.11.3.js"></script>
+		<style>
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-bottom: 0;
+			}
+			.mui-ios .mui-table-view-cell {
+				border-bottom: 1px solid #eee;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">新手指引</h1>
+		</header>
+		<div class="mui-content">
+			<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
+				<li class="mui-table-view-cell" data-type = "0">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>一分钟介绍</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "1">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>国际原油交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "2">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>恒指期货交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "3">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>美黄金交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "4">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>美元兑人民币交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "5">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>德国DAX指数交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "6">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>小恒指交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "7">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>富时A50交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "8">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>美铜交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "9">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>美白银交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "10">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>迷你道琼交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "11">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>迷你纳斯达克交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "12">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>迷你标准普尔交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "13">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>日经225交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "14">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>H股指数交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "15">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>小原油交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "16">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>迷你德国DAX指数交易规则</i></a>
+				</li>
+				<li class="mui-table-view-cell" data-type = "17">
+					<a class="mui-navigate-right" href="javascript:void(0)"><i>天然气交易规则</i></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init()
+		mui.plusReady(function() {
+			document.getElementById("back").addEventListener("tap", function() {
+				mui.app_refresh(plus.webview.currentWebview().backPage);
+			});
+			$("#list li").on("click",function() {
+				var _this = $(this);
+				if(_this.attr("data-type") ==0) {
+					mui.openWindow({
+						url: "minuteIntroduce.html",
+						id: "minuteIntroduce"
+					});
+				}else {
+					mui.openWindow({url:"noviceGuideTitle.html",id:"noviceGuideTitle",extras:{ids:_this.attr("data-type"),titleall:_this.find("i").text()}});
+				}
+				
+			});
+//			var old_back = mui.back;
+//			mui.back = function() {
+//				var wobj = plus.webview.getWebviewById("quotationMain");
+//				wobj.reload(true);
+//				old_back();
+//			}
+			
+		});
+	</script>
+
+</html>
