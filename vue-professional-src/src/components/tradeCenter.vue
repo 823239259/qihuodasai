@@ -534,9 +534,9 @@
 						"Parameters":{
 							"OrderSysID":'',
 							"OrderID":CurrentObj.OrderID,
-							"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
-							"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
-							"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+							"ExchangeNo":this.templateList[Contract].ExchangeNo,
+							"CommodityNo":this.templateList[Contract].CommodityNo,
+							"ContractNo":this.templateList[Contract].ContractNo,
 							"OrderNum":parseFloat(CurrentObj.delegateNum),
 							"Direction":function(){
 								if(CurrentObj.buyOrSell=='买'){
