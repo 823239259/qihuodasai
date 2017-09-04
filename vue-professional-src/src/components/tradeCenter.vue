@@ -126,17 +126,14 @@
 				</li>
 				<template v-for="k in obj">
 					<li :class="[{current:k.showbar}]">
-						<!--<div class="list_cont" >-->
-							<span>{{k.commodityName}}</span>
-							<!--<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.commodityStatus}}</span>-->
-							<span>{{k.commodityStatus}}</span>
-							<span>{{k.buyOrSell}}</span>
-							<span>{{k.delegatePrice}}</span>
-							<span>{{k.delegateNum}}</span>
-							<span>{{k.TradeNum}}</span>
-							<span>{{k.RevokeNum}}</span>
-							<span>{{k.InsertDateTime}}</span>
-						<!--</div>-->
+						<span>{{k.commodityName}}</span>
+						<span>{{k.commodityStatus}}</span>
+						<span>{{k.buyOrSell}}</span>
+						<span>{{k.delegatePrice}}</span>
+						<span>{{k.delegateNum}}</span>
+						<span>{{k.TradeNum}}</span>
+						<span>{{k.RevokeNum}}</span>
+						<span>{{k.InsertDateTime}}</span>
 					</li>
 				</template>
 			</ul>
@@ -162,13 +159,6 @@
 							<span>{{k.tradeNum}}</span>
 							<span>{{k.tradeDateTime}}</span>
 						</div>
-						<!--<transition name="fade" mode="out-in">
-							<div class="list_tools" v-show="k.showbar">
-								<cbtn name="暂停"></cbtn>
-								<cbtn name="修改"></cbtn>
-								<cbtn name="删除"></cbtn>
-							</div>
-						</transition>-->
 					</li>
 				</template>
 			</ul>
@@ -232,7 +222,8 @@
 				buyText:{},
 				obj: [],
 				numReg: /^[0-9]*$/,
-				moneyReg: /^(([1-9]\d*)|0)(\.\d{0,4})?$/
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/,
+				dotSize: ''
 			}
 		},
 		filters:{
@@ -288,7 +279,6 @@
 					if(obj.PriceType==1){
 						LimitPrice='市价';
 					}else{
-//						LimitPrice = obj.LimitPrice;
 						LimitPrice = this.tradePrices;
 					}
 					var orderNum = obj.OrderNum;
@@ -404,6 +394,7 @@
 						if(o.CommodityName == this.commodityName00){
 							this.$store.state.market.currentdetail = o;
 							this.tradePrices = dealDotSize(o.LastQuotation.LastPrice,o.LastQuotation);
+							this.dotSize = this.orderTemplist[o.LastQuotation.CommodityNo].DotSize;
 						}
 					}.bind(this));
 					function dealDotSize(price,LastQuotation){
@@ -412,23 +403,16 @@
 				}
 			},
 			tradePrices: function(n, o){
-				if(n == ''){
-					this.marketprice = '';
-					return true;
+				if(this.isShow == true){
+					this.marketprice = '市价';
 				}else{
-					if(this.moneyReg.test(n) == false){
-						var orderTemplist = this.orderTemplist;
-						var dotSize = orderTemplist[this.$store.state.market.currentdetail.LastQuotation.CommodityNo].DotSize;
-						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(dotSize);
+					if(n == ''){
 						this.marketprice = '';
-						if(this.isShow == true){
-							this.marketprice = '市价';
-						}
-						return '';
+					}else if(n.split('.')[1] && n.split('.')[1].length > this.dotSize || this.moneyReg.test(n) ==  false || this.dotSize == 0){
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
+						this.marketprice = this.tradePrices;
 					}else{
-						if(this.isShow == false){
-							this.marketprice = n;
-						}
+						this.marketprice = n;
 					}
 				}
 			},
@@ -652,7 +636,6 @@
 							}
 						};
 						this.buyText = b;
-//						this.tradeSocket.send(JSON.stringify(b));
 					}
 				}
 			},
@@ -684,7 +667,6 @@
 							}
 						};
 						this.buyText = b;
-//						this.tradeSocket.send(JSON.stringify(b));
 					}
 				}else{
 					if(parseInt(this.tradeNum) == 0 || this.tradeNum == ''){
@@ -712,7 +694,6 @@
 							}
 						};
 						this.buyText = b;
-//						this.tradeSocket.send(JSON.stringify(b));
 					}
 				}
 			},
@@ -784,14 +765,16 @@
 						obj.ContractCode = e.ContractCode;
 						obj.OrderID = e.OrderID;
 						this.obj.unshift(obj);
-	//					this.$store.state.market.entrustCont.push(obj);
 					}
 				}.bind(this));
 			}
 		},
 		mounted: function(){
+			//取小数点保留位数、改变正则
+			this.dotSize = this.orderTemplist[this.$store.state.market.currentdetail.LastQuotation.CommodityNo].DotSize;
+			//tab默认选中第一个
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
-//			$("#tradeCenter").css("height",window.screen.height - $("#detailTopbar").height() - $("#detailselectbar").height() - 10 + "px");
+			//页面高度计算
 			var h = $("#detailTopbar").height() + $("#detailselectbar").height() + $(".money_total").height() + 
 					$(".order_type").height() + $(".order_num").height() + $(".trade_btn").height() +
 					$(".tab_box").height() + $(".list ul:first-child").height();
@@ -920,7 +903,6 @@
 			
 			
 			this.tradePrices = parseFloat(this.tradePrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
-			console.log(this.tradePrices);
 		},
 		activated: function(){}
 		
