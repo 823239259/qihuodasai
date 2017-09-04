@@ -83,9 +83,10 @@
 					InMoney = {title: '入金', val: []},
 					OutMoney = {title: '出金', val: []};
 				n.forEach(function(o, i){
+					console.log(o);
 					OldAmount.val.push(parseFloat(o.OldAmount).toFixed(2)); // 昨结存
-					TodayBalance.val.push(parseFloat(o.TodayBalance).toFixed(2));//今权益
-					TodayCanUse.val.push(parseFloat(o.TodayCanUse).toFixed(2));//今可用
+					TodayBalance.val.push(parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2));//今权益
+					TodayCanUse.val.push(parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2));//今可用
 					Deposit.val.push(parseFloat(o.Deposit).toFixed(2));//保证金
 					FrozenMoney.val.push(parseFloat(o.FrozenMoney).toFixed(2));//冻结资金
 					FloatingProfit.val.push(parseFloat(o.FloatingProfit).toFixed(2));//逐笔浮盈

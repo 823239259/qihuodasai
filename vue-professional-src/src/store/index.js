@@ -1792,6 +1792,7 @@ export default new Vuex.Store({
 							e.FloatingProfit = floatingProfit;
 							e.TodayBalance = todayBalance;
 							e.TodayCanUse = todayCanUse;
+							
 							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
 						}
 					});
