@@ -29,17 +29,17 @@
 									<option value="1">&nbsp;&nbsp;<</option>
 									<option value="3">&nbsp;&nbsp;<=</option>
 								</select>
-								<input type="text" :value="inputPrice" class="fontwhite" />
+								<input type="text" v-model="inputPrice" class="fontwhite" />
 							</li>
 							<li>
 								<select class="fontwhite selectshort" v-model="selectAdditionalPrice">
-									<option value="-1">附加</option>
+									<option value="5">附加</option>
 									<option value="0">></option>
 									<option value="2">>=</option>
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" :value="inputAdditionalPrice" />
+								<input type="text" v-model="inputAdditionalPrice" />
 							</li>
 						</ol>
 					</li>
@@ -58,7 +58,7 @@
 								<span class="fontgray lot">手数</span>
 							</li>
 							<li>
-								<input type="number" :value="holdNum" class="fontwhite" />
+								<input type="number"  v-model="holdNum" class="fontwhite" />
 							</li>
 						</ol>
 					</li>
@@ -199,7 +199,7 @@
 				}
 			},
 			selectAdditionalPrice:function(n,o){
-				if(this.selectAdditionalPrice==-1){
+				if(this.selectAdditionalPrice==5){
 					 this.inputAdditionalPrice = '';
 					 this.additionFlag = false;
 					 this.inputAdditionalPrice='';
@@ -239,18 +239,18 @@
 								'ContractNo':this.contractNo,
 								'Num':parseInt(this.holdNum),
 								'ConditionType':0,
-								'PriceTriggerPonit':this.inputPrice,
-								'CompareType':this.selectPrice,
-								'TimeTriggerPoint':0,
+								'PriceTriggerPonit':parseFloat(this.inputPrice),
+								'CompareType':parseInt(this.selectPrice),
+								'TimeTriggerPoint':'',
 								'AB_BuyPoint':0.0,
 								'AB_SellPoint':0.0,
 								'OrderType':parseInt(this.selectMarketOrLimited),
 								'Direction':parseInt(this.selectBuyOrSell),
-								'StopLossType':-1,
+								'StopLossType':5,
 								'StopLossDiff':0.0,
 								'StopWinDiff':0.0,
 								'AdditionFlag':this.additionFlag,
-								'AdditionType':this.selectAdditionalPrice,
+								'AdditionType':parseInt(this.selectAdditionalPrice),
 								'AdditionPrice':(function(){
 													if(this.inputAdditionalPrice==''){
 														return  0;
@@ -274,7 +274,7 @@
 			this.commodityNo = arr[0].CommodityNo;
 			
 			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			this.selectAdditionalPrice = -1;
+			this.selectAdditionalPrice = 5;
 			this.inputAdditionalPrice = this.inputPrice;
 			
 			this.selectBuyOrSell = 0;

@@ -170,6 +170,9 @@ var market = {
 		
 		stopLossListSelectOneObj:{},
 		
+		conditionList:[],//条件单未触发列表
+		conditionTriggeredList:[],//条件单已触发列表
+		
 		
 		
 		//选择K线时候的值
@@ -1339,6 +1342,8 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询止损单
 						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						//查询条件单
+						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
 						
@@ -1480,11 +1485,14 @@ export default new Vuex.Store({
 					context.dispatch('updateStopLoss',parameters);
 					break;
 				case 'OnRspInsertStopLoss':
-					console.log('OnRspInsertStopLoss');
 					context.dispatch('layerOnRspInsertStopLoss',parameters);
 					break;
+				case 'OnRspQryCondition':
+					context.state.market.conditionList.push(parameters);
 				case 'OnError':
-					context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
+					if(parameters!=null){
+						context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
+					}
 				default:
 					break;
 			}
@@ -1784,9 +1792,11 @@ export default new Vuex.Store({
 							e.FloatingProfit = floatingProfit;
 							e.TodayBalance = todayBalance;
 							e.TodayCanUse = todayCanUse;
+							
 							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
 						}
 					});
+					
 				}
 				// 清空币种盈亏
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};
