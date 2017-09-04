@@ -88,7 +88,7 @@
 						if(data.code == 1){
 							this.bannerList = data.data.bannerList;
 							this.bannerList.forEach(function(o, i){
-								o.imgPath = "http://test.manage.dktai.cn/" + o.imgPath;
+								o.imgPath = "http://manage.dktai.cn/" + o.imgPath;
 							});
 						}
 					}else{
