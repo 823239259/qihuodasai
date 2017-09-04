@@ -29,7 +29,7 @@
 									<option value="1">&nbsp;&nbsp;<</option>
 									<option value="3">&nbsp;&nbsp;<=</option>
 								</select>
-								<input type="text" v-model="inputPrice" class="fontwhite" />
+								<input type="text" :value="inputPrice" class="fontwhite" />
 							</li>
 							<li>
 								<select class="fontwhite selectshort" v-model="selectAdditionalPrice">
