@@ -307,44 +307,40 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .ap_main .ap_time label { vertical-align: middle; display: block; float: left;}
 .ap_main .ap_time span { font-size: 15px; display: block; float:left; width: 70%;}
 .ap_main .ap_time span i { font-style: normal;}
-.ap_main .ap_choosetitle { color: #2b2b2b; overflow: hidden;background-color: #FFFFFF; padding-left: 5px;height: 40px;line-height: 40px;font-size: 14px;}
-#tradeingVariety{ padding:0px 5px;color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;margin: 5px 0px 0px;line-height: 30px; height: 30px;}
+.ap_main .ap_choosetitle { color: #fff; overflow: hidden;background-color: #2B2B2B; padding-left: 5px;height: 40px;line-height: 40px;font-size: 14px;}
+#tradeingVariety{ padding:0px 5px;color: #2b2b2b; overflow: hidden;background-color: #FFFFFF;margin: 0px;line-height: 30px; height: 30px;}
 #tradeingVariety b{ font-weight: normal; font-size: 14px;color:#666666};
 #tradeingVariety span{vertical-align: middle; color:#2b2b2b}
 .ap_main .ap_choosetitle b { font-weight: normal; font-size: 14px; float: left;line-height: 40px;height: 40px;}
 .ap_main .ap_choosetitle span { vertical-align: middle; float: left; line-height: 40px;height: 40px;}
 .ap_main .mui-grid-9 { background-color: #FFFFFF; border: none;}
-.ap_main .mui-grid-9 .mui-table-view-cell { text-align: center;border:1px solid #2b2b2b; background: #fff;color:#2b2b2b; width: 23%; margin: 0 1% 15px; border-radius: 5px;font-size:12px;padding:12px 5px;background-image: url(../images/gou.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;;}
-.ap_main .mui-grid-9 .on { color: #333333; border:1px solid #333333;background-color: #FFCC33;background-image: url(../images/gouOn.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;}
-.ap_main .sc_listsc li span { color: #2b2b2b ; }
+.ap_main .mui-grid-9 .mui-table-view-cell { text-align: center;border:1px solid #121212; background: #1f1f1f;color:#999999; width: 23%; margin: 0 1% 15px; border-radius: 5px;font-size:12px;padding:12px 5px;background-image: url(../images/gou.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;;}
+.ap_main .mui-grid-9 .on { color: #ff6a00; border:1px solid #121212;background-color: #1f1f1f;background-image: url(../images/gouOn.png);background-repeat: no-repeat;background-position:bottom right;background-size: 16px 16px;}
+#bond_num li:active {background-color: #1f1f1f;}
+.ap_main .sc_listsc li span { color: #FFFFFF; }
  .ap_main .mui-table-view-cell{padding: 8px 0px;font-size: 14px;;}
   .ap_main .mui-table-view-cell div{
   	float: left;
   }
- 
 .ap_main .sc_listsc li label { color: #666666 ; }
-.ap_main .sc_listsc li{border-bottom: 1px solid #f3f3f3;}
+.ap_main .sc_listsc li{border-bottom: 1px solid #1f1f1f;}
 .ap_main .sc_listsc li span i { font-style: normal;}
 .ap_main .ac_btn button { padding: 8px 0; background: #FFCC33; border:1px solid #333333; color: #333333; }
 .ap_main .ap_font { padding: 0 10px; position: relative; height: 300px;}
-.ap_main .acp_font { padding: 0 10px; overflow-x: scroll; overflow-y: hidden; margin-bottom: 20px;}
+.ap_main .acp_font {overflow-x: scroll; overflow-y: hidden; margin-bottom: 20px;}
 .ap_main .acp_font table {  background:#fff; width: 820px;}
 .AgreementList{
-	background-color: #FFFFFF;
 	height: auto;
-	border-bottom: 1px solid #E4E4E4;
-	border-top:1px solid #E4E4E4;
-	padding: 0px 5px;margin: 5px 0px 5px;
-	line-height: 40px;
-	font-size: 14px;;
-	/*height: 80px;*/
-	padding-bottom: 10px;
+    padding: 0px 5px;
+    line-height: 40px;
+    font-size: 14px;
+	border-top: #1f1f1f 5px solid;
+    border-bottom: #1f1f1f 5px solid;
 }
 .AgreementList a{
 	color:#fcc900;
 }
 .AgreementList p{
-	border-bottom: 1px solid #f2f2f2;
 	margin: 0px;height: auto;
 	/*height: 40px;*/
 	line-height: 40px;
@@ -366,9 +362,11 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 	font-size: 14px;
 	margin-left:10px; ;
 }
-.ap_main .acp_font table  tr{  padding:0px 10px;}
+
+.ap_main .acp_font table  tr{padding: 0 10px;}
 .ap_main .acp_font table td { padding-left:8px;border-bottom: 1px solid #e6e6e6;  text-align: left; color:#666666;font-size: 14px;height: 30px;line-height: 15px; padding:7.5px 0px; }
-.ap_main .acp_font table thead td { background: #f2f2f2;color:#2B2B2B}
+.ap_main .acp_font table thead td { background: #383838;color:#999999}
+.ap_main .acp_font tr td {background: #2b2b2b; border-bottom: 1px solid #1f1f1f;}
 /*.ap_main .mui-content-padded p { line-height: 40px;}*/
 /*支付页*/
 .pay_btn { background: #FFCC33; border: 1px solid #333333; color: #333333; padding: 8px 0;}
@@ -390,9 +388,9 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .pay_cp .sc_listac li p b { display: block; float: left; width: 47%; margin-right: 3%; font-weight: normal; color: #999999;}
 .pay_cp .sc_listac li span.pay_cpfont { clear: both; color: #999999; font-size: 14px; width: 100%; display: block; padding-top: 10px;}
 .navlist {bottom: 0; display: table; width: 100%; height: 50px; padding: 0; table-layout: fixed; border-top: 0; border-bottom: 0;-webkit-touch-callout: none; background: #333333;position: fixed;
-  z-index: 55; right: 0; left: 0;backface-visibility: hidden;-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .7); box-shadow: 0 0 2px rgba(0, 0, 0, .7);}
+  z-index: 997; right: 0; left: 0;backface-visibility: hidden;-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .7); box-shadow: 0 0 2px rgba(0, 0, 0, .7);}
 .navlist a {display: table-cell; overflow: hidden; width: 1%; height: 50px; text-align: center; vertical-align: middle; white-space: nowrap;  text-overflow: ellipsis; color: #999999;background-color: #2B2B2B;border-top: 1px solid #454545;}
-.navlist a.navon { color: #FFCC33;}
+.navlist a.navon { color: #ff6a00;}
 .navlist a .mui-icon {top: 3px; width: 24px; height: 24px; padding-top: 0;  padding-bottom: 0;font-size: 24px; position: relative;  z-index: 20;}
 .navlist .mui-icon~.mui-tab-label {
   font-size: 11px;
@@ -764,3 +762,10 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .tPgreen{
     		color:#16A951;
 }
+/*快捷入口*/
+#Operation_content {background-color: rgba(0,0,0,.8);display: none;}
+#Operation_content .Operation_all {position: fixed; bottom: 9px; z-index: 999; color: red; text-align: center; display: inline-block; width: 100%; font-size: 14px; color: #1f1f1f;}
+#Operation_content .Operation_all .Operation_title span {width: 90px; display: inline-block; height: 30px; line-height: 30px; background: #ff6a00; margin: 0 5px; border-radius: 5px; color: #fff;}
+#Operation_content .Operation_all .Operation_title span:active {background: #FFCC33;}
+#Operation_Close {color: #fff; font-size: 35px; width: 30px; display: inline-block; height: 30px; line-height: 30px; margin-top: 30px;}
+#Operation_Close:active {color: #FFCC33;}

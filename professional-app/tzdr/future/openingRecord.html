@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>综合操盘</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/own.css" />
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<link rel="stylesheet" href="../../css/recharge.css" />
+		<script src="../../js/jquery-1.11.3.js"></script>
+		<style>
+			body,
+			html {
+				background: #2b2b2b;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				height: 30px;
+				line-height: 30px;
+				display: inline-table;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background: #1f1f1f;
+				color: #fff;
+				border: none;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+				border: none;
+				width: 50%;
+				background: #383838;
+				float: left;
+			}
+			
+			.mui-bar-nav {
+				border-bottom: 1px solid #1f1f1f;
+			}
+			
+			.mui-bar .mui-segmented-control {
+				height: 30px !important;
+				display: inline-block;
+				line-height: 30px;
+				border-radius: 5px;
+				border: 1px solid #121212;
+			}
+			
+			#bond_num {
+				background: #2B2B2B;
+			}
+			
+			.mui-table-view {
+				background: #2b2b2b;
+			}
+			
+			#apply .mui-table-view:after {
+				background: #1f1f1f;
+				padding-bottom: 4px;
+			}
+			
+			#apply .mui-table-view:before {
+				background: #1f1f1f;
+				padding-top: 4px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<h1 class="mui-title">
+				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="operateApply">
+					<a class="mui-control-item title_school" href="#apply" id="applyall">开户申请</a> 
+					<a class="mui-control-item title_school mui-active" href="#krecord" id="krecordall">开户记录</a>
+				</div>
+			</h1>
+			<a href="javascript:void(0);" class="top-tel" id="online">在线客服</a>
+		</header>
+		<nav class="navlist">
+			<a class="" href="javascript:void(0);" id="quotationMain">
+				<span class="mui-icon"><img src="../../images/0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">行情交易</span>
+			</a>
+			<a class="navon" href="javascript:void(0);" id="product">
+				<span class="mui-icon"><img src="../../images/1.0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">操盘申请</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="quickMode">
+				<img src="../../images/quickMode.png" style="width: 35px;height:35px; position: relative; top: 3px;">
+			</a>
+			<a href="javascript:void(0);" id="information">
+				<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">资讯直播</span>
+			</a>
+			<a class="" id="account" href="javascript:void(0);">
+				<span class="mui-icon"><img src="../../images/3.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">账户</span>
+			</a>
+		</nav>
+		<div class="mui-content ap_main">
+			<div class="mui-slider-group">
+				<!--财经日历-->
+				<div class="mui-slider-item mui-control-content" id="apply">
+					
+				</div>
+				<!--7*24小时直播-->
+				<div class="mui-slider-item mui-control-content mui-active" id="krecord" style="background: #fff; padding-bottom: 0px;">
+					<div id="slider" class="mui-slider">
+						<div class="mui-slider-group" id="itembox">
+							<div id="stockTrade" class="mui-slider-item mui-control-content mui-active">
+								<!--下拉刷新容器-->
+								<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-bottom: 0;">
+									<div class="mui-scroll sc_list">
+										<!--数据列表-->
+										<ul class="mui-table-view mui-table-view-chevron" id="list_ul">
+											<div id="no_list" style="display: none;">
+												<img src="../../images/list_02.png" style="display: block;margin: 100px auto 0; width: 80px;"/>
+												<span style=" text-align: center; margin: 0 auto; width: 100%; display: block;">暂无操盘方案记录，赶快去申请吧！</span>
+												<div class="main_nolg" style="position: relative;width: 100%; padding: 0 15px; left: 0; top: 80px; z-index: 50;">		
+													<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>		
+													<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist" style="border-radius: 20px;">新用户注册</button>
+												</div>
+											</div>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--快捷入口-->
+		<div id="Operation_content" class="mui-backdrop">
+			<div class="Operation_all">
+				<div class="Operation_title">
+					<span id="kh">开户</span>
+					<span id="jydl">交易登录</span>
+					<span id="zjfa">终结方案</span>
+				</div>
+				<span id="Operation_Close">×</span>
+			</div>
+		</div>
+	</body>
+	<script>
+		tzdr.operation();
+		tzdr.online();
+		
+		document.getElementById("applyall").addEventListener("tap", function() {
+			mui.app_refresh('cp');
+			mui.openWindow({
+				url: "cp.html",
+				id: "cp"
+			});
+		});
+		//登陆
+		document.getElementById("login").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "../login/login.html",
+				id: "login"
+			});
+		});
+//		注册
+document.getElementById("regist").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "../login/regist.html",
+				id: "regist"
+			});
+		});
+		var kj = {
+			//开户
+			kh: "cp.html",
+			//交易
+			yy: "../login/operateLogin.html", 
+			//终结方案
+			zj: "cp.html" 
+		}
+		initOperation(kj);
+		document.getElementById("jydl").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "../login/operateLogin.html",
+				id: "operateLogin",
+				extras: {
+					backPage: 'cp'
+				}
+			});
+		});
+		var dataUrl = {
+			home: "cp.html",
+			account: "../account/account.html",
+			accountno: "../account/accountno.html",
+			listrg: "listrg.html",
+			quotationMain: "../quotation/quotationMain.html",
+			information: "../information/information.html"
+		}
+		initBottom(dataUrl);
+		//开户记录
+		var item = document.getElementById('itembox');
+		var scheight = document.documentElement.clientHeight;
+		//var infoheihgt = scheight - 44 -57;
+		var infoheihgt = scheight - 35;
+		item.style.height = infoheihgt + 'px';
+		(function($) {
+			$('.mui-scroll-wrapper').scroll({
+				//是否显示滚动条
+				indicators: true 
+			});
+		})(mui);
+		mui.init({});
+		//操盘方案常量
+		var ftrade_list = null;
+		var ftrade_list_num = 0;
+		//操盘方案常量
+		mui.plusReady(function() {
+			//初始化监听头部和底部事件
+			tzdr.init.initHearListener();
+
+			var paramUrl = {
+				url: "login/login.html"
+			}
+			if(mui.cacheUser.isLogin()) {
+				//获取用户合买方案列表
+				mui.app_request('/user/ftogether_trade/list', {},
+					function(result) {
+						var _html = '';
+						for(var i in result.data.trades) {
+							if(result.data.trades[i].status == 1) {
+								_html += '<li class="mui-table-view-cell sc_open" recordId="' + result.data.trades[i].id + '">';
+								_html += '<h4>' + result.data.trades[i].name + '</h4>';
+								_html += '<div class="sc_data">';
+								_html += '	<label>开仓：</label>';
+								_html += '	<span>' + result.data.trades[i].openTimeStr + '</span>';
+								_html += '	<br>';
+								_html += '	<label>盈亏占比：</label>';
+								_html += '	<span>— —</span>';
+								_html += '</div>';
+								_html += '<div class="sc_money">';
+								_html += '	<label>合买份数：</label>';
+								if(result.data.trades[i].direction == 1) {
+									_html += '	<span>看涨' + result.data.trades[i].copies + '份</span><br>';
+								} else {
+									_html += '	<span>看跌' + result.data.trades[i].copies + '份</span><br>';
+								}
+	
+								_html += '	<label>盈亏金额：</label>';
+								_html += '	<span>— —</span>';
+								_html += '</div>';
+								_html += '<p class="sc_statusfont"><img src="../../images/buystatus_01.png"></p>';
+								_html += '	</li>	';
+							}
+							if(result.data.trades[i].status == 2) {
+								_html += '<li class="mui-table-view-cell sc_trade" recordId="' + result.data.trades[i].id + '">';
+								_html += '<h4>' + result.data.trades[i].name + '</h4>';
+								_html += '<div class="sc_data">';
+								_html += '	<label>开仓：</label>';
+								_html += '   <span>' + result.data.trades[i].openTimeStr + '</span>';
+								_html += '	<br>';
+								_html += '	<label>盈亏占比：</label>';
+								_html += '	<span>— —</span>';
+								_html += '</div>';
+								_html += '<div class="sc_money">';
+								_html += '	<label>合买份数：</label>';
+								if(result.data.trades[i].direction == 1) {
+									_html += '	<span>看涨' + result.data.trades[i].copies + '份</span><br>';
+								} else {
+									_html += '	<span>看跌' + result.data.trades[i].copies + '份</span><br>';
+								}
+	
+								_html += '	<label>盈亏金额：</label>';
+								_html += '	<span>— —</span>';
+								_html += '</div>';
+								_html += '<p class="sc_statusfont"><img src="../../images/buystatus_02.png"></p>';
+								_html += '	</li>	';
+							}
+	
+							if(result.data.trades[i].status == 3) {
+	
+								var achieveProfitLoss = result.data.trades[i].achieveProfitLoss;
+								if(mui.isnull(achieveProfitLoss)) {
+									achieveProfitLoss = 0;
+								}
+								var profitlabel = '盈亏';
+								var achieveProfitLossShow = achieveProfitLoss;
+								if(achieveProfitLoss >= 0) {
+									if(result.data.trades[i].copies == result.data.trades[i].backCopies) {
+										profitlabel = '盈亏';
+									} else {
+										profitlabel = "盈利";
+										achieveProfitLossShow = "+" + achieveProfitLoss;
+									}
+	
+								}
+								if(achieveProfitLoss < 0) {
+									profitlabel = "亏损";
+								}
+								_html += '<li class="mui-table-view-cell sc_fail" recordId="' + result.data.trades[i].id + '">';
+								_html += '<h4>' + result.data.trades[i].name + '</h4>';
+								_html += '<div class="sc_data">';
+								_html += '	<label>开仓：</label>';
+								_html += '	<span>' + result.data.trades[i].openTimeStr + '</span>';
+								_html += '	<br>';
+								_html += '	<label>' + profitlabel + '占比：</label>';
+								var tempCopies = result.data.trades[i].copies - result.data.trades[i].backCopies;
+								var tempPerfect = (tempCopies == 0 ? "0.00" : (((tempCopies / result.data.trades[i].sameDireCopies) * 100).toFixed(2)));
+								if(achieveProfitLoss == 0) {
+									tempPerfect = "0.00";
+								}
+								_html += '	<span>' + tempPerfect + '%</span>';
+								_html += '</div>';
+								_html += '<div class="sc_money">';
+								_html += '	<label>合买份数：</label>';
+								if(result.data.trades[i].direction == 1) {
+									_html += '	<span>看涨' + result.data.trades[i].copies + '份</span><br>';
+								} else {
+									_html += '	<span>看跌' + result.data.trades[i].copies + '份</span><br>';
+								}
+								_html += '	<label>' + profitlabel + '金额：</label>';
+								_html += '	<span>' + achieveProfitLossShow + '元</span>';
+								_html += '</div>';
+								_html += '<p class="sc_statusfont"><img src="../../images/buystatus_03.png"></p>';
+								_html += '	</li>	';
+							}
+						}
+					},
+					function(result) {
+					}, paramUrl
+				);
+				//监听合买记录列表点击事件
+				mui("#list").on('tap', 'li', function() {
+					if(this.id == "noli") {
+						return;
+					}
+					//获取合买记录id
+					var recordId = this.getAttribute("recordId");
+					mui.openWindow({
+						url: "buy/buyInfo.html",
+						id: "buyInfo",
+						extras: {
+							recordId: recordId
+						}
+					});
+				});
+				// ------------------------------------获取用户合买方案列表---------------------------------------------
+	
+				//--------------------------------------操盘方案------------------------------------------------------
+				//加载方案信息
+				mui.app_request("/user/ftrade/list", {}, function(result) {
+					if(!mui.isnull(result.data)) {
+						ftrade_list = result.data.tradeList;
+						mui.each(ftrade_list, function(i, item) {
+							addlistNO(item);
+							ftrade_list_num++;
+						});
+						//绑定li点击事件
+						mui("#list_ul").on("tap", "li", function() {
+							var id = this.getAttribute("id");
+							if("no_list" == id) {
+								return;
+							}
+							var businessType = this.getElementsByTagName("span")[0].innerHTML;
+	
+							var new_url = null;
+							if("富时A50" == businessType) {
+								new_url = "DetailCn.html";
+							} else if("国际原油" == businessType) {
+								new_url = "DetailCl.html";
+							} else if("恒指期货" == businessType) {
+								new_url = "DetailHsi.html";
+							} else if("国际综合" == businessType) {
+								new_url = "DetailCp.html";
+							} else if("小恒指" == businessType) {
+								new_url = "DetailLhsi.html";
+							} else {
+								new_url = "../login/login.html";
+							}
+	
+							//点击跳转开户或开户失败方案详情页
+							mui.openWindow({
+								url: new_url,
+								id: new_url,
+								extras: {
+									did: id
+								}
+							});
+	
+						});
+	
+					}
+					if(mui.isnull(result.data.tradeList)) {
+						document.getElementById("no_list").style.display = "block";
+					}
+	
+				}, function(result) {
+					mui.toast(result.message);
+					return;
+				});
+			}else {
+				$("#no_list").css("display","block");
+				localStorage.removeItem('arr');
+			}
+			
+		});
+
+		var arr = [];
+
+		function addlistNO(ftrade_list) {
+			//获取当前方案信息   方案ID: win.did
+			mui.app_request("/user/ftrade/details", {
+				"id": ftrade_list.id
+			}, function(result) {
+				if(!mui.isnull(result.data.details)) {
+					//	    				var datas = {};
+					//  					datas.tranAccount = result.data.details.tranAccount;
+					//  					datas.tranPassword = result.data.details.tranPassword;
+					//  					arr.push(datas);
+					//  					localStorage.setItem('arr', JSON.stringify(arr));
+					if(result.data.details.stateType == 4) {
+						var datas = {};
+						datas.tranAccount = result.data.details.tranAccount;
+						datas.tranPassword = result.data.details.tranPassword;
+						arr.push(datas);
+						localStorage.setItem('arr', JSON.stringify(arr));
+					}
+				}
+			}, function(result) {
+				mui.toast(result.message);
+				return;
+			});
+			var list_ul = document.getElementById("list_ul");
+			if(mui.isnull(ftrade_list.stateType)) {
+				return;
+			}
+
+			var li = document.createElement("li");
+			li.setAttribute("id", ftrade_list.id);
+			var p = document.createElement("p");
+			p.setAttribute("class", "sc_statusfont");
+			var img = document.createElement("img");
+			switch(ftrade_list.stateType) {
+				case 1:
+					li.setAttribute("class", "mui-table-view-cell sc_open");
+					img.setAttribute("src", "../../images/status_01.png");
+
+					break;
+				case 4:
+					li.setAttribute("class", "mui-table-view-cell sc_trade");
+					img.setAttribute("src", "../../images/status_03.png");
+
+					break;
+				case 2:
+					li.setAttribute("class", "mui-table-view-cell sc_trade");
+					img.setAttribute("src", "../../images/status_03.png");
+
+					break;
+				case 3:
+					li.setAttribute("class", "mui-table-view-cell sc_trade");
+					img.setAttribute("src", "../../images/status_03.png");
+
+					break;
+				case 5:
+					li.setAttribute("class", "mui-table-view-cell sc_fail");
+					img.setAttribute("src", "../../images/status_02.png");
+
+					break;
+				case 6:
+					li.setAttribute("class", "mui-table-view-cell sc_fail");
+					img.setAttribute("src", "../../images/status_04.png");
+
+					break;
+			}
+
+			p.appendChild(img);
+			var h4 = document.createElement("h4");
+			h4.innerHTML = tzdr.dateUtil.getFormatDataByLong(ftrade_list.appTime, "yyyy-MM-dd hh:mm");
+
+			var div_1 = document.createElement("div");
+			div_1.setAttribute("class", "sc_data");
+
+			var label_1 = document.createElement("label");
+			var span_1 = document.createElement("span");
+			var label_2 = document.createElement("label");
+			var span_2 = document.createElement("span");
+			label_1.innerHTML = "交易品种";
+			label_2.innerHTML = "开仓手数";
+
+			if(mui.isnull(ftrade_list.tranLever)) {
+				span_2.innerHTML = " 手";
+			} else {
+				span_2.innerHTML = ftrade_list.tranLever + "手";
+			}
+
+			switch(ftrade_list.businessType) {
+				case 0:
+					span_1.innerHTML = "富时A50";
+					break;
+				case 6:
+					span_1.innerHTML = "国际原油";
+					break;
+				case 7:
+					span_1.innerHTML = "恒指期货";
+					break;
+				case 8:
+					span_1.innerHTML = "国际综合";
+					span_2.innerHTML = "参考初始可持仓手数";
+					break;
+				case 9:
+					span_1.innerHTML = "小恒指";
+					break;
+				default:
+					break;
+			}
+
+			var div_2 = document.createElement("div");
+			div_2.setAttribute("class", "sc_money");
+
+			var label_3 = document.createElement("label");
+			var span_3 = document.createElement("span");
+			var label_4 = document.createElement("label");
+			var span_4 = document.createElement("span");
+			label_3.innerHTML = "总操盘资金";
+			label_4.innerHTML = "亏损平仓线";
+			span_3.innerHTML = tzdr.moneyUtils.formatCurrency(ftrade_list.traderTotal) + "美元";
+			span_4.innerHTML = tzdr.moneyUtils.formatCurrency(ftrade_list.lineLoss) + "美元";
+
+			var br_1 = document.createElement("br");
+			var br_2 = document.createElement("br");
+
+			div_1.appendChild(label_1);
+			div_1.appendChild(span_1);
+			div_1.appendChild(br_1);
+			div_1.appendChild(label_2);
+			div_1.appendChild(span_2);
+
+			div_2.appendChild(label_3);
+			div_2.appendChild(span_3);
+			div_2.appendChild(br_2);
+			div_2.appendChild(label_4);
+			div_2.appendChild(span_4);
+
+			li.appendChild(h4);
+			li.appendChild(div_1);
+			li.appendChild(div_2);
+			li.appendChild(p);
+			list_ul.appendChild(li);
+		}
+	</script>
+
+</html>
