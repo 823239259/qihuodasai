@@ -1,443 +1,547 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>行情</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<script src="../../js/mui.min.js"></script>
-		 <script src="../../js/common.js"></script>
-		 <script type="text/javascript" src="../../js/common.config.js" ></script>
+		<script src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/common.config.js"></script>
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
 		<style>
-        .rotateClass {
-        	-webkit-transform: rotate(1000deg);
-        	-webkit-transition: all linear 3s;
-        }
+			.rotateClass {
+				-webkit-transform: rotate(1000deg);
+				-webkit-transition: all linear 3s;
+			}
 		</style>
 		<script>
-			window.onerror=function(sMessage, sUrl, sLine){
-			 	//alert( sMessage + sUrl+sLine +"\n");
-				}
+			window.onerror = function(sMessage, sUrl, sLine) {
+				//alert( sMessage + sUrl+sLine +"\n");
+			}
 		</script>
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
-		    <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" ></a>
+			<h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
+			<a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
 		</header>
-	<nav class="navlist">
-		<a class="navon" href="javascript:void(0);" id="quotationMain">
-			<span class="mui-icon"><img src="../../images/0.0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">行情交易</span>
-		</a>
-		<a class="" href="javascript:void(0);"  id="product">
-			<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘申请</span>
-		</a>
-		<a href="javascript:void(0);"  id="information">
-			<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">资讯直播</span>
-		</a>
-		<a class="" id="account" href="javascript:void(0);">
-			<span class="mui-icon"><img src="../../images/3.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
-	</nav>
-	<div class="mui-content">
-		<div id="netWorkTips">当前行情网络未连接，会自动连接！</div>
-		<div id="fisrtLlist"><span>合约名称</span><span>最新价</span><span>成交量</span><span>涨跌幅</span></div>
-		<div class="productList">
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
+		<nav class="navlist">
+			<a class="navon" href="javascript:void(0);" id="quotationMain">
+				<span class="mui-icon"><img src="../../images/0.0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">行情交易</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="product">
+				<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">操盘申请</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="quickMode" style="z-index: 997;">
+				<img src="../../images/quickMode.png" style="width: 35px;height:35px; position: relative; top: 3px;">
+			</a>
+			<a href="javascript:void(0);" id="information">
+				<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">资讯直播</span>
+			</a>
+			<a class="" id="account" href="javascript:void(0);">
+				<span class="mui-icon"><img src="../../images/3.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">账户</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<div id="netWorkTips">当前行情网络未连接，会自动连接！</div>
+
+			<div id="fisrtLlist">
+				<div id="guide" style="display: none;">
+					<p id="guideP">操盘流程：①->登录平台账号->②开交易账户->③登录交易账户，操盘->④操盘完成，终结方案 </p>
+					<span class="mui-pull-right" id="colse">×</span>
 				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-				 	<span class="LastVolume">-</span>
-					<span><p class=" ChangeRate">-</p></span>
+				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>最新价</span><!--<span>成交量</span>--><span>涨跌幅</span></p>
+			</div>
+			<div class="productList">
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName ">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
+				</div>
+				<div class='openPage'>
+					<div class="productContentLeft" class="mui-col-xs-3">
+						<p class="productName">-</p>
+						<p class="grayFont CommodityNo">-</p>
+					</div>
+					<div class="productContentRight" class="mui-col-xs-9">
+						<span class=" QLastPrice">-</span>
+						<!--<span class="LastVolume">-</span>-->
+						<span>
+							<p class=" ChangeRate">-</p>
+							<p class=" Fluctuation">-</p>
+						</span>
+					</div>
 				</div>
 			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName ">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
-				</div>
-			</div>
-			<div class='openPage'>
-				<div class="productContentLeft" class="mui-col-xs-3">
-					<p class="productName">-</p>
-					<p class="grayFont CommodityNo">-</p>
-				</div>
-				<div class="productContentRight" class="mui-col-xs-9">
-					<span class=" QLastPrice">-</span>
-					<span class="LastVolume">-</span>
-					<span ><p class=" ChangeRate">-</p></span>
+			<!--新手指南-->
+			<div id="guideMask" class="mui-backdrop"><img id="guideContent" src="../../images/minute.png" alt="" /></div>
+			<!--快捷入口-->
+			<div id="Operation_content" class="mui-backdrop">
+				<div class="Operation_all">
+					<div class="Operation_title">
+						<span id="kh">开户</span>
+						<span id="jydl">交易登录</span>
+						<span id="zjfa">终结方案</span>
+					</div>
+					<span id="Operation_Close">×</span>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script src="../../js/util.js" charset="UTF-8"></script>
-	<script src="../../js/jquery-1.11.3.js"></script>
+		<script src="../../js/util.js" charset="UTF-8"></script>
+		<script src="../../js/jquery-1.11.3.js"></script>
 		<script type="text/javascript" charset="UTF-8">
-				$(function(){
-					$("#refresh").addClass("rotateClass");
-				})
-		
-		//初始化导航栏
+			$(function() {
+				$("#refresh").addClass("rotateClass");
+			})
+			tzdr.operation();
+			//初始化导航栏
 			tzdr.init.initHearListener();
-			mui.plusReady(function(){
+			mui.plusReady(function() {
+				/*行情头部介绍*/
+				var kj = {
+					kh: "../future/cp.html",  /*开户*/
+					zj: "../future/openingRecord.html",  /*终结方案*/
+				}
+				initOperation(kj);
+				
+				if(plus.storage.getItem("MarketPrompt") == 1) {
+					$("#guide").css("display", "block");
+					$(".productList").css("margin-top", "95px");
+					document.getElementById("colse").addEventListener("tap", function() {
+						$("#guide").css("display", "none");
+						$(".productList").css("margin-top", "45px");
+						plus.storage.setItem("MarketPrompt", "2");
+					});
+					document.getElementById("guideP").addEventListener("tap", function() {
+						mui.openWindow({url:"../agree/minuteIntroduce.html",id:"minuteIntroduce"});
+					});
+				}
+				/*进入软件第一次行情一分钟介绍*/
+				if(plus.storage.getItem("beginnerGuide444") == null) {
+					$("#guideMask").css("display", "block");
+					document.getElementById("guideContent").addEventListener("tap", function() {
+						plus.storage.setItem("beginnerGuide444", "1");
+						mui.openWindow({url:"../agree/minuteIntroduce.html",id:"minuteIntroduce",extras:{backPage:'quotationMain'}});
+					});
+				}
+				
+				document.getElementById("jydl").addEventListener("tap",function(){
+					mui.app_refresh('operateLogin');
+					mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin",extras:{backPage:'quotationMain'}});
+				});
+				//end
 				var validationLoginTip = null;
-				var width=plus.display.resolutionWidth;
+				var width = plus.display.resolutionWidth;
 				var time = 30000;
-				if(plus.storage.getItem("QuotationGuidance")!=null){
-					if(localStorage.getItem("tipLogin") == 1){
-						alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
-					}else{
-						validationLoginTip = setTimeout(function(){ 
-							if(!mui.cacheUser.isLogin()){
-								localStorage.setItem("tipLogin",1);
-								alertProtype("登录后可使用更多功能哦~","登录提示",Btn.confirmedAndCancle(),openLogin,openHome);
+				if(plus.storage.getItem("QuotationGuidance") != null) {
+					if(localStorage.getItem("tipLogin") == 1) {
+						alertProtype("登录后可使用更多功能哦~", "登录提示", Btn.confirmedAndCancle(), openLogin, openHome);
+					} else {
+						validationLoginTip = setTimeout(function() {
+							if(!mui.cacheUser.isLogin()) {
+								localStorage.setItem("tipLogin", 1);
+								alertProtype("登录后可使用更多功能哦~", "登录提示", Btn.confirmedAndCancle(), openLogin, openHome);
 							}
-						},30000);
+						}, 30000);
 					}
 				}
-				function openLogin(){ 
-					mui.openWindow("../login/login.html","login");
-				} 
-				function openHome(){
-					mui.openWindow("../../home.html","home");
+
+				function openLogin() {
+					mui.openWindow("../login/login.html", "login");
+				}
+
+				function openHome() {
+					mui.openWindow("../../home.html", "home");
 				}
 				//链接socket;
-				var dataUrl={
-	  				home:"../../home.html",
-	  				account:"../account/account.html",
-	  				accountno:"../account/accountno.html",
-	  				listrg:"../future/listrg.html",
-	  				quotationMain:"quotationMain.html",
-	  				information: "../information/information.html"
-	  			}
+				var dataUrl = {
+					home: "../future/cp.html",
+					account: "../account/account.html",
+					accountno: "../account/accountno.html",
+					listrg: "../future/listrg.html",
+					quotationMain: "quotationMain.html",
+					information: "../information/information.html"
+				}
 				initBottom(dataUrl);
 				var url = marketSocketUrl;
-				var socket=null;
+				var socket = null;
 				//设置变量
-				var CommodityName=[];
-				var CommodityNo1=[];
-				var CommodityNo2=[];
-				var DotSize=[];
-				var ExchangeNo=[];
-				var MiniTikeSize=[];
+				var CommodityName = [];
+				var CommodityNo1 = [];
+				var CommodityNo2 = [];
+				var DotSize = [];
+				var ExchangeNo = [];
+				var MiniTikeSize = [];
 				var ContractSize = [];
-				var product={
-				    CommodityName:CommodityName,
-				    CommodityNo1:CommodityNo1,
-				    CommodityNo2:CommodityNo2,
-				    DotSize:DotSize,
-				    ExchangeNo:ExchangeNo,
-				    MiniTikeSize:MiniTikeSize,
-				    ContractSize:ContractSize
+				var product = {
+					CommodityName: CommodityName,
+					CommodityNo1: CommodityNo1,
+					CommodityNo2: CommodityNo2,
+					DotSize: DotSize,
+					ExchangeNo: ExchangeNo,
+					MiniTikeSize: MiniTikeSize,
+					ContractSize: ContractSize
 				}
-				function sendMessage(method,parameters){
-				    socket.send('{"Method":"'+method+'","Parameters":'+parameters+'}');
+
+				function sendMessage(method, parameters) {
+					socket.send('{"Method":"' + method + '","Parameters":' + parameters + '}');
 				}
 				initmarketSocket();
-				function initmarketSocket(){
+
+				function initmarketSocket() {
 					socket = new WebSocket(url);
-					if(socket==null){
+					if(socket == null) {
 						return
 					}
-					socket.onopen = function(evt){
-					    var user = marketUserName;
-					    var pwd = marketPassword;
-					    socket.send('{"Method":"Login","Parameters":{"UserName":"' + user +'","PassWord":"' + pwd +'"}}');
-					    $("#netWorkTips").css("display","none");
-					    mui.toast("行情服务器连接成功！");
-					    $(".mui-bar").css("background-color","#2b2b2b");
+					socket.onopen = function(evt) {
+						var user = marketUserName;
+						var pwd = marketPassword;
+						socket.send('{"Method":"Login","Parameters":{"UserName":"' + user + '","PassWord":"' + pwd + '"}}');
+						$("#netWorkTips").css("display", "none");
+						mui.toast("行情服务器连接成功！");
+						$(".mui-bar").css("background-color", "#2b2b2b");
 					};
-					socket.onclose = function(evt){
+					socket.onclose = function(evt) {};
+					socket.onmessage = function(evt) {
+						var data = evt.data;
+						var jsonData = JSON.parse(data);
+						var method = jsonData.Method;
+						if(method == "OnRspLogin") {
+							sendMessage('QryCommodity', null)
+						} else if(method == "OnRspQryCommodity") {
+							sendSubscrib(jsonData);
+							//插入主力合约
+							AddTo();
+							$(".productList").css({
+								"height": product.CommodityName.length * 50 -50 + "px"
+							});
+							$(".navlist").css({
+								"bottom": "0px"
+							});
+						} else if(method == "OnRspSubscribe") {
+							var MoreData = JSON.parse(evt.data).Parameters.LastQuotation;
+							//更新行情的数据
+							insertData1(MoreData);
+							$("#refresh").removeClass("rotateClass");
+						} else if(method == "OnRtnQuote") {
+							var MoreData = JSON.parse(evt.data).Parameters;
+							//更新行情的数据
+							insertData1(MoreData);
+						}
 					};
-					socket.onmessage = function(evt){ 
-					    var data = evt.data;
-					    var jsonData = JSON.parse(data);
-					    var method = jsonData.Method;
-					    if(method=="OnRspLogin"){
-					    	  sendMessage('QryCommodity',null)
-					    }else if(method == "OnRspQryCommodity"){
-					        sendSubscrib(jsonData);
-					        //插入主力合约
-					        AddTo();
-					        $(".productList").css({
-					        	"height":product.CommodityName.length*50+"px"
-					        });
-					    }else if(method == "OnRspSubscribe"){
-							var MoreData=JSON.parse(evt.data).Parameters.LastQuotation;
-					         //更新行情的数据
-					        	insertData1(MoreData);
-					        	$("#refresh").removeClass("rotateClass");
-					    }else if(method == "OnRtnQuote"){
-					         var MoreData=JSON.parse(evt.data).Parameters;
-					         //更新行情的数据
-					        	insertData1(MoreData);
-					    }
-					};
-					socket.onerror = function(evt){
-					};
+					socket.onerror = function(evt) {};
 				};
 				//订阅合约
-				function sendSubscrib(jsonData){
+				function sendSubscrib(jsonData) {
 					var commoditys = jsonData.Parameters;
-			        var size = commoditys.length;
-			        var setTime=null;	
-			        for(var i=0;i<size;i++){
-			        	
-			        	if(commoditys[i].IsUsed==0){
-			        		continue;
-			        	}
-			        	
-			            product.CommodityName.push(commoditys[i].CommodityName);
-			            product.CommodityNo1.push(commoditys[i].MainContract);
-			            product.CommodityNo2.push(commoditys[i].CommodityNo);
-			           	product.DotSize.push(commoditys[i].DotSize);
-			           	product.ExchangeNo.push(commoditys[i].ExchangeNo);
-			           	product.MiniTikeSize.push(commoditys[i].MiniTikeSize);
-			            product.ContractSize.push(commoditys[i].ContractSize);
-			           socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"'+commoditys[i].ExchangeNo+'","CommodityNo":"'+commoditys[i].CommodityNo+'","ContractNo":"'+commoditys[i].MainContract+'"}}');
-			        }
+					var size = commoditys.length;
+					var setTime = null;
+					for(var i = 0; i < size; i++) {
+
+						if(commoditys[i].IsUsed == 0) {
+							continue;
+						}
+
+						product.CommodityName.push(commoditys[i].CommodityName);
+						product.CommodityNo1.push(commoditys[i].MainContract);
+						product.CommodityNo2.push(commoditys[i].CommodityNo);
+						product.DotSize.push(commoditys[i].DotSize);
+						product.ExchangeNo.push(commoditys[i].ExchangeNo);
+						product.MiniTikeSize.push(commoditys[i].MiniTikeSize);
+						product.ContractSize.push(commoditys[i].ContractSize);
+						socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + commoditys[i].ExchangeNo + '","CommodityNo":"' + commoditys[i].CommodityNo + '","ContractNo":"' + commoditys[i].MainContract + '"}}');
+					}
 				}
-				function ManufacturingData(i){
-					var data=[];
-					return data=[product.CommodityName[i],product.CommodityNo1[i],product.CommodityNo2[i],product.ExchangeNo[i],product.DotSize[i],product.ContractSize[i],product.MiniTikeSize[i]];
-    			};
+
+				function ManufacturingData(i) {
+					var data = [];
+					return data = [product.CommodityName[i], product.CommodityNo1[i], product.CommodityNo2[i], product.ExchangeNo[i], product.DotSize[i], product.ContractSize[i], product.MiniTikeSize[i]];
+				};
 				//行情产品的插入
-				function AddTo(){
-				    var productList=document.getElementsByClassName("productList")[0];
-				     productList.innerHTML="";
-				     console.log(product.CommodityName);
-				    for(var i=0;i<product.CommodityName.length;i++){
-           				 productList.innerHTML+="<div class='openPage'><div class='productContentLeft mui-col-xs-3' >" +
-                    " <p class='productName'>"+product.CommodityName[i]+"</p> " +
-                    "<p class='grayFont CommodityNo'><span class='CommodityNoName'>"+product.CommodityNo2[i]+"</span>"+product.CommodityNo1[i]+"</p>" +
-                    " </div> " +
-                    "<div class='productContentRight' class='mui-col-xs-9'> " +
-                    "<span class='reenFont QLastPrice'>-</span> <span class='LastVolume'>-</span> <span class='ChangeRate'><p>-</p></span> </div></div>"
-    				};
-    				//生成页面传递的数据
-    				$(".productList").css("height",48*product.CommodityName.length+"px");
-    				
-			    	$(".openPage").click(function(){
-			    		$(".top,.bottom,#closeDiv").css({
-	    					"display":"none",
-	    				});
-			            var _this = $(this);
-			            _this.css("background-color","#1f1f1f")
-			            var index=_this.index();
-			            var data=ManufacturingData(index);
-			            sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-			            socket.close();
-			            clearInterval(checkNetWorkSateInterval);
-			            mui.openWindow({
-							url:"transactionDetails.html",
-							id:"transactionDetails",
-							 extras:{
-								name:data,
+				function AddTo() {
+					
+					var productList = document.getElementsByClassName("productList")[0];
+					productList.innerHTML = "";
+					console.log(product.CommodityName);
+					for(var i = 0; i < product.CommodityName.length; i++) {
+						productList.innerHTML += "<div class='openPage'>"+
+						"<div class='productContentLeft' class='mui-col-xs-3'>"+
+							"<p class='productName'>" + product.CommodityName[i] + "</p>"+
+							"<p class='grayFont CommodityNo'><span class='CommodityNoName'>" + product.CommodityNo2[i] + "</span>" + product.CommodityNo1[i] + "</p>"+
+						"</div>"+
+						"<div class='productContentRight' class='mui-col-xs-9'>"+
+							"<span class=' QLastPrice'>-</span>"+
+						"<span><label class=' ChangeRate'>-</label></br><label class=' ChangeValue'>-</label></span></div></div>";
+					};
+					//生成页面传递的数据
+					$(".productList").css("height", 48 * product.CommodityName.length - 50 + "px");
+
+					$(".productList .openPage").click(function() {
+						$(".top,.bottom,#closeDiv").css({
+							"display": "none",
+						});
+						var _this = $(this);
+						_this.css("background-color", "#1f1f1f")
+						var index = _this.index();
+						var data = ManufacturingData(index);
+						sendMessage('Logout', '{"UserName":"' + marketUserName + '"}');
+						socket.close();
+						clearInterval(checkNetWorkSateInterval);
+						mui.openWindow({
+							url: "transactionDetails.html",
+							id: "transactionDetails",
+							extras: {
+								name: data,
 							}
 						});
-			      });
+					});
 				};
 				//插入行情的方法
-			 	function insertData1(MoreData) {
-			        var productName = document.getElementsByClassName("productName");
-			        var CommodityNo = document.getElementsByClassName("CommodityNo");
-			        var LastVolume = document.getElementsByClassName("LastVolume");
-			        var ChangeRate = document.getElementsByClassName("ChangeRate");
-			        var LastPrice = document.getElementsByClassName("QLastPrice");
-			        var productContentLeft = document.getElementsByClassName("CommodityNoName");
-			        for (var i = 0; i < productContentLeft.length; i++) {          
-			            if (MoreData.CommodityNo == productContentLeft[i].innerHTML) {
-			                LastVolume[i].innerText = MoreData.TotalVolume;
-			                if (Number(MoreData.ChangeRate) < 0) {
-			                    ChangeRate[i].innerText = MoreData.ChangeRate.toFixed(2) + "%";
-			                    ChangeRate[i].className = "greenBg ChangeRate";
-			                }
-			                else {
-			                    ChangeRate[i].innerText = "+" + MoreData.ChangeRate.toFixed(2) + "%";
-			                    ChangeRate[i].className = "redBg ChangeRate";
-			                }
-			                if (Number(MoreData.LastPrice) - Number(MoreData.PreSettlePrice) < 0) {
-			                    LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
-			                    LastPrice[i].className = "greenFont QLastPrice";
-			                } else {
-			                    LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
-			                    LastPrice[i].className = "redFont QLastPrice";
-			                }
-			
-			            }
-			        };
-			    }
-				document.getElementById("product").addEventListener("tap",function(){
-					sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+				function insertData1(MoreData) {
+//					console.log(JSON.stringify(MoreData));
+					var productName = document.getElementsByClassName("productName");
+					var CommodityNo = document.getElementsByClassName("CommodityNo");
+					var ChangeValue = document.getElementsByClassName("ChangeValue");
+					var ChangeRate = document.getElementsByClassName("ChangeRate");
+					var LastPrice = document.getElementsByClassName("QLastPrice");
+					var productContentLeft = document.getElementsByClassName("CommodityNoName");
+					for(var i = 0; i < productContentLeft.length; i++) {
+						if(MoreData.CommodityNo == productContentLeft[i].innerHTML) {
+//							LastVolume[i].innerText = MoreData.TotalVolume;
+							if(Number(MoreData.ChangeRate) < 0) {
+								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(2);
+								ChangeValue[i].className = "greenBg ChangeValue";
+								ChangeRate[i].innerText = MoreData.ChangeRate.toFixed(2) + "%";
+								ChangeRate[i].className = "greenBg ChangeRate";
+							} else {
+								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(1);
+								ChangeValue[i].className = "redBg ChangeValue";
+								ChangeRate[i].innerText = "+" + MoreData.ChangeRate.toFixed(2) + "%";
+								ChangeRate[i].className = "redBg ChangeRate";
+							}
+							if(Number(MoreData.LastPrice) - Number(MoreData.PreSettlePrice) < 0) {
+								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
+								LastPrice[i].className = "greenFont QLastPrice";
+							} else {
+								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
+								LastPrice[i].className = "redFont QLastPrice";
+							}
+
+						}
+					};
+				}
+				document.getElementById("product").addEventListener("tap", function() {
+					sendMessage('Logout', '{"UserName":"' + marketUserName + '"}');
 					socket.close();
-					if(validationLoginTip != null){
+					if(validationLoginTip != null) {
 						clearTimeout(validationLoginTip);
 					}
 				});
-//				document.getElementById("scheme").addEventListener("tap",function(){
-//					sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
-//					socket.close();
-//					if(validationLoginTip != null){
-//						clearTimeout(validationLoginTip);
-//					}
-//				});
-				document.getElementById("account").addEventListener("tap",function(){
-					sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+				//				document.getElementById("scheme").addEventListener("tap",function(){
+				//					sendMessage('Logout','{"UserName":"'+marketUserName+'"}');
+				//					socket.close();
+				//					if(validationLoginTip != null){
+				//						clearTimeout(validationLoginTip);
+				//					}
+				//				});
+				document.getElementById("account").addEventListener("tap", function() {
+					sendMessage('Logout', '{"UserName":"' + marketUserName + '"}');
 					socket.close();
-					if(validationLoginTip != null){
+					if(validationLoginTip != null) {
 						clearTimeout(validationLoginTip);
 					}
 				});
-				document.getElementById("refresh").addEventListener("tap",function(){
-					var re=plus.webview.getWebviewById("quotationMain");
-					if(re != null && re !=undefined){
+				document.getElementById("refresh").addEventListener("tap", function() {
+					var re = plus.webview.getWebviewById("quotationMain");
+					if(re != null && re != undefined) {
 						re.reload();
 					}
 				});
 				setstatus();
-				function setstatus(){
-					if(plus.navigator.isFullscreen()){
+
+				function setstatus() {
+					if(plus.navigator.isFullscreen()) {
 						plus.navigator.setFullscreen(false);
 					}
 				};
-				var first=null;
+				var first = null;
 				//Android双击home键退出应用
-				mui.back = function(){
-	               if(!first) {
-						first = new Date().getTime(); 
+				mui.back = function() {
+					if(!first) {
+						first = new Date().getTime();
 						mui.toast('再按一次退出期货大赛');
 						setTimeout(function() {
-						first = null;
+							first = null;
 						}, 1000);
-						}else{
-							if (new Date().getTime() - first < 1000) {   
-								plus.runtime.quit();  
-							} 
+					} else {
+						if(new Date().getTime() - first < 1000) {
+							plus.runtime.quit();
 						}
-		        };
-		        var checkNetWorkSateInterval=setInterval(function(){
-		        	reconnectMarketSocket()
-		        },500);
-		        var netWorkState=true;
-		         /**
-		         *提示语消失
-		         * */
-		        var netWorkTipsTimeout=null;
-		        var checkNetWorkStateNum=0;
-		        function reconnectMarketSocket(){
-		        	var netWorkStateType=mui.checkNetworkState();
-		        	var netWorkTips=document.getElementById("netWorkTips");
-		        	if(netWorkStateType[plus.networkinfo.getCurrentType()]=="None connection"){
-		        		netWorkState=false;
-		        		if(checkNetWorkStateNum==0){
-		        			netWorkTips.style.display="block";
-		        			netWorkTipsTimeout=setTimeout(function(){
-				        	netWorkTips.style.display="none";
-				        		$(".mui-bar").css("background-color","#e9392a");
-				        	},2000);
-				        	checkNetWorkStateNum++;
-		        		}
-					}else{
-						if(netWorkState==false){
+					}
+				};
+				var checkNetWorkSateInterval = setInterval(function() {
+					reconnectMarketSocket()
+				}, 500);
+				var netWorkState = true;
+				/**
+				 *提示语消失
+				 * */
+				var netWorkTipsTimeout = null;
+				var checkNetWorkStateNum = 0;
+
+				function reconnectMarketSocket() {
+					var netWorkStateType = mui.checkNetworkState();
+					var netWorkTips = document.getElementById("netWorkTips");
+					if(netWorkStateType[plus.networkinfo.getCurrentType()] == "None connection") {
+						netWorkState = false;
+						if(checkNetWorkStateNum == 0) {
+							netWorkTips.style.display = "block";
+							netWorkTipsTimeout = setTimeout(function() {
+								netWorkTips.style.display = "none";
+								$(".mui-bar").css("background-color", "#e9392a");
+							}, 2000);
+							checkNetWorkStateNum++;
+						}
+					} else {
+						if(netWorkState == false) {
 							initmarketSocket();
 						}
-						checkNetWorkStateNum=0;
-						netWorkState=true;
+						checkNetWorkStateNum = 0;
+						netWorkState = true;
 						clearTimeout(netWorkTipsTimeout);
 					}
-		        }
+				}
 			});
 		</script>
 	</body>
+
 </html>

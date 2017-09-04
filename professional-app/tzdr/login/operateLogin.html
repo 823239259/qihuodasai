@@ -17,7 +17,12 @@
 		<link rel="stylesheet" href="../../css/own.css" />
 		<link rel="stylesheet" href="../../css/mui.min.css" />
 		<link rel="stylesheet" href="../../css/quotation.css" />
-		
+		<link href="../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			.commStyle {border-bottom: none; background: #1f1f1f; border-radius: 5px; padding-left:10px;}
+			#showUserPicker {width: 60px;height: 40px; line-height: 40px; margin: 0; padding: 0; position: absolute; right: 0; top: 0; background: #383838; font-size: 12px; text-align: center; color: #fff; border-top-right-radius: 5px; border-bottom-right-radius: 5px;}
+		</style>
 	</head>
 
 	<body>
@@ -40,6 +45,7 @@
 					<label>登录账号：</label>
 					<input type="text" placeholder="请输入您的账号" id='account' oninput="checkValue()" />
 					<img src="../../images/close.png" id="accountClear">
+					<div id="showUserPicker"> 切换账号</div>
 				</div>
 				<div class="commStyle">
 					<label>登录密码：</label>
@@ -47,14 +53,19 @@
 					<img src="../../images/close.png" id="passwordClear">
 				</div>
 				<div class="mui-content-padded" style="margin-top: 20px;">
-					<button class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
-					<button id='regLogin' class="mui-btn mui-btn-block">模拟盘开户申请</button>
+					<button class="mui-btn mui-btn-block" id="operateLogin" style="border-radius: 20px;">立即登录</button>
+					<button id='regLogin' class="mui-btn mui-btn-block" style="border-radius: 20px; background: #ff6a00; color: #fff;">立即开户</button>
 				</div>
 				<div class="mui-input-row mui-checkbox mui-left mui-content-padded" id="loginIform">
 					<p id="loginAgree"><span id="checkBox"><i ></i></span>
 						<sapn>阅读并接受</sapn>
-						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《国际期货通行情交易协议》</a>
+						<a href="javascript:void(0);" id="tzdr_info" style="color: #ff6a00;">《国际期货通行情交易协议》</a>
 					</p>
+				</div>
+				<div>
+					<p style="margin-bottom: 10px;">操盘交易帐号 ≠ 注册登录帐号</p>
+					<p style="margin-bottom: 10px;">交易帐号：<span style="color: #999999;">申请方案后系统自动发放，用于实盘交易的帐号。可查询交易明细，结算后将会更换。</span></p>
+					<p>登录帐号：<span style="color: #999999;">使用手机注册后的平台帐号，用于登录APP和网站，进行充值、提现、查看资金明细等。</span></p>	
 				</div>
 			</div>
 			<!--<div id="username_list">
@@ -63,6 +74,9 @@
 			</div>-->
 		</div>
 		<script type="text/javascript">
+			document.getElementById("backClose").addEventListener("tap", function() {
+				mui.app_refresh(plus.webview.currentWebview().backPage);
+			});
 			initTradeConfig();
 			mui.init();
 			tzdr.online();
@@ -265,8 +279,8 @@
 						"display": "none",
 					});
 					mui.openWindow({
-						url: "../../home.html",
-						id: "home"
+						url: "../future/cp.html",
+						id: "cp"
 					});
 				}
 
@@ -328,15 +342,20 @@
 										localStorage.setItem("isMock", tradeWebSocketIsMock);
 										islogin = true;
 										mui.back();
+										mui.toast("111");
 									} else {
 										plus.nativeUI.closeWaiting();
 										mui.toast("登录成功");
 										localStorage.setItem("isMock", tradeWebSocketIsMock);
 										islogin = true;
+										mui.app_refresh("quotationMain");
 										mui.openWindow({
 											url: "../quotation/quotationMain.html",
-											id: "quotationMain"
-										})
+											id: "quotationMain",
+											extras: {
+												Operation_content: "1"
+											}
+										});
 									}
 								} else {
 									alertProtype(loginMessage, "提示", Btn.confirmed());
@@ -398,5 +417,88 @@
 			};
 		</script>
 	</body>
-
+	<script src="../../js/mui.picker.js"></script>
+	<script src="../../js/mui.poppicker.js"></script>
+	<script>
+		var ftrade_list = null;
+		mui.plusReady(function() {
+			if(mui.cacheUser.isLogin()){
+				mui.app_request("/user/ftrade/list", {}, function(result) {
+					if(!mui.isnull(result.data)) {
+						ftrade_list = result.data.tradeList;
+						mui.each(ftrade_list, function(i, item) {
+							addlistNO(item);
+						});
+					}
+				});
+			}else{
+//				var re = plus.webview.getWebviewById("operateLogin");
+//				if(re != null && re != undefined) {
+//					re.reload();
+//				}
+				localStorage.removeItem('arr');
+			}
+		});
+		var arr = [];
+		function addlistNO(ftrade_list){
+			mui.app_request("/user/ftrade/details", {
+				"id": ftrade_list.id
+			}, function(result) {
+				if(!mui.isnull(result.data.details)) {
+					if(result.data.details.stateType == 4) {
+						var datas = {};
+						datas.tranAccount = result.data.details.tranAccount;
+						datas.tranPassword = result.data.details.tranPassword;
+						arr.push(datas);
+						localStorage.setItem('arr', JSON.stringify(arr));
+					}
+				}
+			});
+		}
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				/**
+				 * 获取对象属性的值
+				 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+				 * @param {Object} obj 对象
+				 * @param {String} param 属性名
+				 */
+				var _getParam = function(obj, param) {
+					return obj[param] || '';
+				};
+				//普通示例
+				var dataArr = JSON.parse(localStorage.getItem("arr"));
+				if(dataArr) {
+					var cityData = [];
+					for(var i = 0; i<dataArr.length; i++){
+						var cityVal = {};
+						cityVal.text = dataArr[i].tranAccount;
+						cityVal.password = dataArr[i].tranPassword;
+						cityData.push(cityVal);
+					}
+//					console.log(JSON.stringify(cityData));
+					var userPicker = new $.PopPicker();
+					userPicker.setData(cityData);
+					var showUserPickerButton = doc.getElementById('showUserPicker');
+					var account = doc.getElementById('account');
+					var passwords = doc.getElementById('password');
+					showUserPickerButton.addEventListener('tap', function(event) {
+						console.log(JSON.stringify(event));
+						userPicker.show(function(items) {
+							account.value = _getParam(items[0], 'text');
+							passwords.value = _getParam(items[0], 'password');
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);	
+				}else {
+					document.getElementById("showUserPicker").addEventListener("tap", function() {
+						mui.toast("您还没有操盘账号，请先开户申请。");
+		  				return;
+					});
+				}
+			})
+		})(mui, document);
+	</script>
 </html>

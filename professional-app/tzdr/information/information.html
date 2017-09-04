@@ -41,6 +41,9 @@
 				<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
 				<span class="mui-tab-label">操盘申请</span>
 			</a>
+			<a class="" href="javascript:void(0);" id="quickMode" style="z-index: 997;">
+				<img src="../../images/quickMode.png" style="width: 35px;height:35px; position: relative; top: 3px;">
+			</a>
 			<a class="navon"  href="javascript:void(0);"  id="information">
 				<span class="mui-icon"><img src="../../images/4.0.png" style="width: 20px;height:20px;"></span>
 				<span class="mui-tab-label">资讯直播</span>
@@ -123,6 +126,17 @@
 				</div>
 			</div>
 		</div>
+		<!--快捷入口-->
+		<div id="Operation_content" class="mui-backdrop">
+			<div class="Operation_all">
+				<div class="Operation_title">
+					<span id="kh">开户</span>
+					<span id="jydl">交易登录</span>
+					<span id="zjfa">终结方案</span>
+				</div>
+				<span id="Operation_Close">×</span>
+			</div>
+		</div>
 		<!--<img src="/templets/style/img/information_b.png" alt="" style="width: 100%; float: left;"/>-->
 	</body>
 	<script type="text/javascript" src="../../js/mui.min.js"></script>
@@ -135,6 +149,16 @@
 	<script type="text/javascript" src="../../js/common2.js"></script>
 	<script type="text/javascript">
 		mui.init();
+		tzdr.operation();
+		var kj = {
+			kh: "../future/cp.html",  /*开户*/
+			zj: "../future/openingRecord.html"  /*终结方案*/
+		}
+		initOperation(kj);
+		document.getElementById("jydl").addEventListener("tap",function(){
+			mui.app_refresh('operateLogin');
+			mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin",extras:{backPage:'information'}});
+		});
 		var dataUrl={
 			home:"../../home.html",
 			account:"../account/account.html",

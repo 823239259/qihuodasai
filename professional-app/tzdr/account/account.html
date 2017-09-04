@@ -1,293 +1,533 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>我的账户</title>
-    <script type="text/javascript" src="../../js/mui.min.js"></script> 
-    <script type="text/javascript" src="../../js/common.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
-    <link rel="stylesheet" href="../../css/own.css" />
-    <script src="../../js/jquery-1.11.3.js"></script>
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init({
 
-		  });
-		 
-      	var win=null;
-      	var title_name=null;
-      	var title_balance=null;
-      	var user_mobile=null;
-      	var Certification=null;
-      	mui.plusReady(function(){
-      		win=plus.webview.currentWebview();
-			//判断token和密钥是否存在,存在则获取用户信息
-				title_name=document.getElementById("title_name");
-      			title_balance=document.getElementById("title_balance");
-      			Certification=document.getElementById("Certification");
-      			user_mobile=plus.storage.getItem("user_mobile");
-      		//对登录状态判断
-      		if(mui.cacheUser.isLogin()){ 
-      			var paramUrl={
-					url:"../login/login.html"
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的账户</title>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<style>
+			#find-tab li {
+				height: 60px;
+				padding: 0px;
+				border-bottom: 1px solid #ededed;
+				border-right: 1px solid #ededed;
+				background: #ffffff;
+			}
+			
+			.find_tab_div {
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+			
+			.find_tab_div>div {
+				text-align: left;
+				font-size: 14px;
+				color: #333333;
+				font-weight: bolder;
+				display: inline-block;
+				padding-left: 5px;
+				margin-top: 8px;
+			}
+			
+			.find_tab_div>div span {
+				font-size: 12px;
+				color: #999999;
+				font-weight: normal;
+				display: inline-block;
+				width: 108px;
+			}
+			
+			.find_tab_div img {
+				margin-bottom: 7px;
+				width: 20px;
+			}
+			
+			.mui-content .ac_money p {
+				text-align: left;
+				padding-left: 50px;
+			}
+			
+			.mui-content .ac_money p span {
+				color: #333333;
+			}
+			
+			.ac_listbtn.mui-table-view:before {
+				background: #fff;
+			}
+			
+			.ac_listbtn.mui-table-view:after {
+				background: #fff;
+			}
+			
+			.ac_listbtn .mui-table-view-cell>a:not(.mui-btn) {
+				padding: 0 15px;
+				height: 40px;
+				line-height: 40px;
+				background: #ffde3d;
+				margin: 0 15px;
+				border-radius: 20px;
+			}
+		</style>
+		<script src="../../js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init({});
+
+			var win = null;
+			var title_name = null;
+			var title_balance = null;
+			var user_mobile = null;
+			var Certification = null;
+			mui.plusReady(function() {
+				win = plus.webview.currentWebview();
+				//判断token和密钥是否存在,存在则获取用户信息
+				title_name = document.getElementById("title_names");
+				title_iphones = document.getElementById("title_iphones");
+				title_balance = document.getElementById("title_balance");
+				Certification = document.getElementById("Certification");
+				user_mobile = plus.storage.getItem("user_mobile");
+				//				<p>姓名：<span id="title_names"></span></p>
+				//					<p>手机号：<span id="title_iphones"></p>
+				//对登录状态判断
+				if(mui.cacheUser.isLogin()) {
+					var paramUrl = {
+						url: "../login/login.html"
+					}
+					//获取用户信息 
+					mui.app_request('/user/getbalancerate', {
+						"businessType": 4
+					}, function(result) {
+						if(!mui.isnull(result.data.username)) {
+							title_name.innerHTML = result.data.username;
+							user_mobile = user_mobile.substring(0, 3) + "****" + user_mobile.substring(7, 11);
+							title_iphones.innerHTML = user_mobile;
+							plus.storage.setItem("userName", result.data.username);
+						} else if(!mui.isnull(user_mobile)) {
+							title_name.innerHTML = "未实名认证";
+							user_mobile = user_mobile.substring(0, 3) + "****" + user_mobile.substring(7, 11);
+							title_iphones.innerHTML = user_mobile;
+						}
+						if(!mui.isnull(result.data.balance)) {
+							title_balance.innerHTML = result.data.balance + "元";
+						} else {
+							title_balance.innerHTML = "0.00元";
+						}
+						if(result.data.isCertification) {
+							Certification.innerText = "已认证";
+							Certification.style.color = 'green';
+						} else {
+							Certification.innerText = "未认证";
+							Certification.style.color = '#888888';
+						}
+						if(result.data.wxAccount == null) {
+							$("#weixin b").text("未关注");
+						} else {
+							$("#weixin b").text("已关注").css({
+								"color": "green"
+							});
+						}
+						return;
+					}, function(result) {
+						return;
+					}, paramUrl);
+				} else {
+					title_name.innerHTML = "请您先登录";
+					title_balance.innerHTML = "0.00元";
 				}
-      			//获取用户信息 
-      			mui.app_request('/user/getbalancerate',{
-      				"businessType":4 
-      			},function(result){
-      					if(!mui.isnull(result.data.username)){
-      						title_name.innerHTML="欢迎您，"+result.data.username+":";
-      						plus.storage.setItem("userName",result.data.username);
-      					}else if(!mui.isnull(user_mobile)){
-      						user_mobile=user_mobile.substring(0,3)+"****"+user_mobile.substring(7,11);
-      						title_name.innerHTML="欢迎您，"+user_mobile+":";
-      					}
-      					if(!mui.isnull(result.data.balance)){
-      						title_balance.innerHTML=result.data.balance+"元";
-      					}else{
-      						title_balance.innerHTML="0.00元";
-      					}
-      					if(result.data.isCertification){
-      						Certification.innerText="已认证";
-      						Certification.style.color = 'green';
-      					}else{
-      						Certification.innerText="未认证";
-      						Certification.style.color = '#888888';
-      					}
-      					if(result.data.wxAccount==null){
-      						$("#weixin b").text("未关注");
-      					}else{
-      						$("#weixin b").text("已关注").css({"color":"green"});
-      					}
-      					return;
-      				},function(result){
-      					return;
-      			},paramUrl);
-      		}else{
-      			title_name.innerHTML="请您先登录";
-      			title_balance.innerHTML="0.00元";
-      		}
-      		var dataUrl={
-  				home:"../../home.html",
-  				account:"account.html",
-  				accountno:"tzdr/account/accountno.html",
-  				listrg:"../future/listrg.html",
-  				quotationMain:"../quotation/quotationMain.html",
-  				information:"../information/information.html"
-  			}
-      		
-      		
-			//初始化监听头部和底部事件
-			tzdr.init.initHearListener();
-  			initBottom(dataUrl);
-    		document.getElementById("charge").addEventListener("tap",function(){
-    			mui.openWindow({
-    				url:"recharge.html",
-    				id:"recharge.html",
-    				extras:{
-    					 backId:"account"
-    				}
-    			});
-    		});
-    		
-    		document.getElementById("withdraw").addEventListener("tap",function(){
-    				mui.openWindow("withdraw.html","withdraw");
-    		});
-    		document.getElementById("scheme").addEventListener("tap",function(){
-    			if(mui.cacheUser.isLogin()){
-    				mui.openWindow("../scheme.html","scheme");
-    			}else {
-    				mui.openWindow("../future/listrg.html","listrg");
-    			}
-    		});
-    		/*document.getElementById("about").addEventListener("tap",function(){
-    				mui.openWindow("about.html","about");
-    		});*/
-    		
-    	/*	document.getElementById("quit").addEventListener("tap",function(){
+				var dataUrl = {
+					home: "../future/cp.html",
+					account: "account.html",
+					accountno: "tzdr/account/accountno.html",
+					listrg: "../future/listrg.html",
+					quotationMain: "../quotation/quotationMain.html",
+					information: "../information/information.html"
+				}
+
+				//初始化监听头部和底部事件
+				tzdr.init.initHearListener();
+				initBottom(dataUrl);
+				document.getElementById("charge").addEventListener("tap", function() {
+					mui.openWindow({
+						url: "recharge.html",
+						id: "recharge.html",
+						extras: {
+							backId: "account"
+						}
+					});
+				});
+
+				document.getElementById("withdraw").addEventListener("tap", function() {
+					mui.openWindow("withdraw.html", "withdraw");
+				});
+				/*document.getElementById("scheme").addEventListener("tap", function() {
+					if(mui.cacheUser.isLogin()) {
+						mui.openWindow("../scheme.html", "scheme");
+					} else {
+						mui.openWindow("../future/listrg.html", "listrg");
+					}
+				});*/
+				/*document.getElementById("about").addEventListener("tap",function(){
+						mui.openWindow("about.html","about");
+				});*/
+
+				/*	document.getElementById("quit").addEventListener("tap",function(){
     			mui.cacheUser.clear();
     			// 清除缓存页面
 				mui.cacheUser.clearCachePages();
     			mui.openWindow("../login/login.html");
     		});*/
-    		 
-    		document.getElementById("user_verified").addEventListener("tap",function(){
-    			if("已认证"==Certification.innerText){
-    				return;
-    			}else{
-    				mui.openWindow({url:"verified.html",id:"verified",extras:{backPage:'account'}});
-    			}
-    		});
-    		
-    		document.getElementById("funddetail").addEventListener("tap",function(){
-    			mui.openWindow("fundDetail.html","fundDetail");
-    		});
-    		
-    		document.getElementById("telPhone").addEventListener("tap",function(){
-    			mui.app_refresh("telphone");
-    			mui.openWindow("telphone.html",'telphone');
-    		});
-    		document.getElementById("weixinCodeImage").addEventListener("tap",function(){
-    			mui.app_refresh("account");
-    			$("#weixinCodeImage").css({"display":"none"});
-    		})
-    		document.getElementById("updatepw").addEventListener("tap",function(){
-    			mui.app_refresh("retrievePassword.html");
-    			mui.openWindow({url:"../login/retrievePassword.html",id:"retrievePassword.html"});
-    		});
-    	
-    		// 监听确定退出事件
-	    	mui('body').on('tap', '.mui-popover-action li>a', function() {
-				var a = this,
-					parent;
-				//根据点击按钮，反推当前是哪个actionsheet
-				for (parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
-					if (parent.classList.contains('mui-popover-action')) {
-						break;
+
+				document.getElementById("user_verified").addEventListener("tap", function() {
+					if("已认证" == Certification.innerText) {
+						return;
+					} else {
+						mui.openWindow({
+							url: "verified.html",
+							id: "verified",
+							extras: {
+								backPage: 'account'
+							}
+						});
 					}
-				}
-				// 确认退出
-				var aid = a.id;
-				if ('confirm_quit'==aid){
-					mui.cacheUser.clear();
-						plus.storage.removeItem("isRealName");
-			      		plus.storage.removeItem("inviteUrl");   
-    				// 清除缓存页面    
-					//mui.cacheUser.clearCachePages();
-					mui.openWindow({url:"../account/accountno.html",id:"accountno"});
-//	    			mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"account"}});  
-				}
-				//关闭actionsheet
-				mui('#' + parent.id).popover('toggle');   
-				//alert(a.id);  
-			});
-			function chechCode(){
-				mui.app_request("/wechat/getWechatQrcodeTicket",{},function(res){
-					if(res.success){
-						document.getElementById("weixinCodeImg").src=res.data.url+"?ticket="+res.data.ticket;
-					}else{
-						mui.toast("重新加载")
-					}
-				},function(res){
+				});
+
+				document.getElementById("funddetail").addEventListener("tap", function() {
+					mui.openWindow("fundDetail.html", "fundDetail");
+				});
+
+				document.getElementById("telPhone").addEventListener("tap", function() {
+					mui.app_refresh("telphone");
+					mui.openWindow("telphone.html", 'telphone');
+				});
+				document.getElementById("weixinCodeImage").addEventListener("tap", function() {
+					mui.app_refresh("account");
+					$("#weixinCodeImage").css({
+						"display": "none"
+					});
 				})
-			}
-      	});
-      	
-    </script>
-</head>
-<body><!--id="online">在线客服</a>     tzdr.online();-->
-	<header class="mui-bar mui-bar-nav own-topbg">
-		<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>-->
-		<h1 class="mui-title">我的账户</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
-	</header>	
-	<nav class="navlist">
-		<a class="" href="javascript:void(0);" id="quotationMain" >
-			<!--<span class="mui-icon mui-icon-settings"></span>-->
-			<span class="mui-icon"><img src="../../images/0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">行情交易</span>
-		</a>
-		<a class="" href="javascript:void(0);"  id="product">
-			<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">操盘申请</span>
-		</a>
-		<a href="javascript:void(0);"  id="information">
-			<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label">资讯直播</span>
-		</a>
-		<a class="navon" id="account" href="javascript:void(0);">
-			<span class="mui-icon"><img src="../../images/3.0.png" style="width: 20px;height:20px;"></span>
-			<span class="mui-tab-label" >账户</span>
-		</a>
-	</nav>
-	<div class="mui-content">
-		<div class="mui-content-padded ac_money">
-			<h2 id="title_name"></h2>
-			<h3 id="title_balance"></h3>
-			<p>账户余额</p>
-		</div>			
-		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="charge"><img src="../../images/ac_01.png"><i>我要充值</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="withdraw"><img src="../../images/ac_02.png"><i>我要提现</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="funddetail"><img src="../../images/ac_03.png"><i>资金明细</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="scheme"><img src="../../images/ac_07.png"><i>操盘记录</i></a>
-			</li>
-		</ul>
-		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="user_verified"><img src="../../images/ac_04.png"><i>实名认证</i><b><span id="Certification">未认证</span><b></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="telPhone"><img src="../../images/ac_05.png"><i>手机绑定</i><b>修改</b></a>
-			</li>
-			<!--<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="weixin"><img src="../../images/weixinIcon.png"><i>微信绑定</i><b>未关注</b></a>
-			</li>-->
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="updatepw"><img src="../../images/ac_06.png"><i>登录密码</i><b>修改</b></a>
-			</li>
-		</ul>
-		<ul id="list" class="mui-table-view mui-table-view-chevron ac_list">
-			<!--<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="coupon"><img src="../../images/ac_04.png"><i>优惠券</i></a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="Invitation"><img src="../../images/ac_04.png"><i>邀请有礼</i></a>
-			</li>-->
-			<!--<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="javascript:void(0)" id="about"><img src="../../images/about.png"><i>关于国际期货通</i></a>
-			</li>-->
-		</ul>
-		<ul class="mui-table-view ac_listbtn">
-			<li class="mui-table-view-cell" style="text-align: center;">
-				<a  href="#quitaccc">退出账户</a>
-			</li>
-		</ul>
-		<div id="quitaccc" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#" style="color: red;" id="confirm_quit">确认退出</a>
+				document.getElementById("updatepw").addEventListener("tap", function() {
+					mui.app_refresh("retrievePassword.html");
+					mui.openWindow({
+						url: "../login/retrievePassword.html",
+						id: "retrievePassword.html"
+					});
+				});
+
+				// 监听确定退出事件
+				mui('body').on('tap', '.mui-popover-action li>a', function() {
+					var a = this,
+						parent;
+					//根据点击按钮，反推当前是哪个actionsheet
+					for(parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+						if(parent.classList.contains('mui-popover-action')) {
+							break;
+						}
+					}
+					// 确认退出
+					var aid = a.id;
+					if('confirm_quit' == aid) {
+						mui.cacheUser.clear();
+						plus.storage.removeItem("isRealName");
+						plus.storage.removeItem("inviteUrl");
+						// 清除缓存页面    
+						//mui.cacheUser.clearCachePages();
+						mui.openWindow({
+							url: "../account/accountno.html",
+							id: "accountno"
+						});
+						//	    			mui.openWindow({url:"../login/login.html",id:"login",extras:{backpageID:"account"}});  
+					}
+					//关闭actionsheet
+					mui('#' + parent.id).popover('toggle');
+					//alert(a.id);  
+				});
+
+				function chechCode() {
+					mui.app_request("/wechat/getWechatQrcodeTicket", {}, function(res) {
+						if(res.success) {
+							document.getElementById("weixinCodeImg").src = res.data.url + "?ticket=" + res.data.ticket;
+						} else {
+							mui.toast("重新加载")
+						}
+					}, function(res) {})
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<!--id="online">在线客服</a>     tzdr.online();-->
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>-->
+			<h1 class="mui-title">我的账户</h1>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
+		</header>
+		<nav class="navlist">
+			<a class="" href="javascript:void(0);" id="quotationMain">
+				<span class="mui-icon"><img src="../../images/0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">行情交易</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="product">
+				<span class="mui-icon"><img src="../../images/1.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">操盘申请</span>
+			</a>
+			<a class="" href="javascript:void(0);" id="quickMode">
+				<img src="../../images/quickMode.png" style="width: 35px;height:35px; position: relative; top: 3px;">
+			</a>
+			<a href="javascript:void(0);" id="information">
+				<span class="mui-icon"><img src="../../images/4.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">资讯直播</span>
+			</a>
+			<a class="navon" id="account" href="javascript:void(0);">
+				<span class="mui-icon"><img src="../../images/3.0.png" style="width: 20px;height:20px;"></span>
+				<span class="mui-tab-label">账户</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<div class="mui-content-padded ac_money" style="height: 120px;">
+				<div style="height: 75px; position: relative; padding: 15px; border-bottom: 1px solid #e7e7e7;">
+					<img src="../../images/headPortrait.png" alt="" style="width: 50px; position: absolute;" />
+					<p>姓名：<span id="title_names"></span></p>
+					<p>手机号：<span id="title_iphones"></p>
+				</div>
+				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额:<span id="title_balance"></span></h2>
+			</div>
+			<div class="mui-slider" id="slider">
+				<div class="mui-slider-group mui-slider-loop" id="bannerloop">
+					<div class="mui-slider-item">
+						<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator" id="indicatorid">
+
+				</div>
+			</div>
+			<ul class="mui-table-view mui-grid-view mui-grid-9" id="find-tab">
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
+					<div class="find_tab_div">
+						<img src="../../images/ac_01.png">
+						<div>
+							我要充值<br/><span>申请开户，记得充值</span>
+						</div>
+					</div>
 				</li>
-				
-			</ul>  
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">取消</a>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="withdraw">
+					<div class="find_tab_div">
+						<img src="../../images/ac_02.png">
+						<div>
+							我要提现<br/><span>结算方案，别忘提款</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="funddetail">
+					<div class="find_tab_div">
+						<img src="../../images/ac_03.png">
+						<div>
+							资金明细<br/><span>资金流水，一目了然</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
+					<div class="find_tab_div">
+						<img src="../../images/ac_04.png">
+						<div>
+							实名认证<br/><span id="Certification" style="color: #ff4c4c;">未认证</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="telPhone">
+					<div class="find_tab_div">
+						<img src="../../images/ac_05.png">
+						<div>
+							手机绑定<br/><span style="color: #ff4c4c;">修改</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="updatepw">
+					<div class="find_tab_div">
+						<img src="../../images/ac_06.png">
+						<div>
+							登录密码<br/><span style="color: #ff4c4c;">修改</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="noviceGuide">
+					<div class="find_tab_div">
+						<img src="../../images/ac_071.png">
+						<div>
+							新手指引<br/><span>遇到问题，戳这里</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toNews">
+					<div class="find_tab_div">
+						<img src="../../images/ac_081.png">
+						<div>
+							网站公告<br/><span>最新公告，看这里</span>
+						</div>
+					</div>
 				</li>
 			</ul>
-		</div>
-		
-	</div>	
-	<div id="weixinCodeImage">
-		<div id="box">
-			<p>微信绑定<img src="../../images/close1.png" id="close"></p>
-			<div id="weixinContent">  
-				<img src="../../images/close.png" id="weixinCodeImg">
-				<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+			<ul class="mui-table-view ac_listbtn">
+				<li class="mui-table-view-cell" style="text-align: center;">
+					<a href="#quitaccc">退出账户</a>
+				</li>
+			</ul>
+			<div id="quitaccc" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#" style="color: red;" id="confirm_quit">确认退出</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#">取消</a>
+					</li>
+				</ul>
 			</div>
-		</div>
-	</div>
-	<script>
-		mui.plusReady(function(){
-			 $("#weixinCodeImage").css({
-			  	"height":window.innerHeight+"px",
-			  	"position":"fixed",
-			  	"top":"0px",
-			  	"z-index":"999",
-			  	"padding-top":"25%"
-			  });
-			  $("#box").css({
-			  	"margin":"auto",
-			  });
-		});
-		tzdr.online();
-	</script>
-</body>
+
+			</div>
+			<div id="weixinCodeImage">
+				<div id="box">
+					<p>微信绑定<img src="../../images/close1.png" id="close"></p>
+					<div id="weixinContent">
+						<img src="../../images/close.png" id="weixinCodeImg">
+						<span>截图到本地，打开微信扫一扫，识别二维码，进行关注！</span>
+					</div>
+				</div>
+			</div>
+			<!--快捷入口-->
+			<div id="Operation_content" class="mui-backdrop">
+				<div class="Operation_all">
+					<div class="Operation_title">
+						<span id="kh">开户</span>
+						<span id="jydl">交易登录</span>
+						<span id="zjfa">终结方案</span>
+					</div>
+					<span id="Operation_Close">×</span>
+				</div>
+			</div>
+			<script>
+				var kj = {
+					kh: "../future/cp.html",  /*开户*/
+					zj: "../future/openingRecord.html"  /*终结方案*/
+				}
+				initOperation(kj);
+				document.getElementById("jydl").addEventListener("tap",function(){
+					mui.app_refresh('operateLogin');
+					mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin",extras:{backPage:'account'}});
+				});
+				document.getElementById("toNews").addEventListener("tap",function(){
+					mui.openWindow("../../tzdr/news/newslist.html");
+				});
+				document.getElementById("noviceGuide").addEventListener("tap",function(){
+					mui.openWindow("../agree/noviceGuide.html");
+				});
+				mui.plusReady(function() {
+					$("#weixinCodeImage").css({
+						"height": window.innerHeight + "px",
+						"position": "fixed",
+						"top": "0px",
+						"z-index": "999",
+						"padding-top": "25%"
+					});
+					$("#box").css({
+						"margin": "auto",
+					});
+					//获取banner图片
+					var imgId = [];
+					mui.app_request('banner/list', {
+							"type": 9
+						},
+						function(result) {
+							var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
+							if(bannerLen > 0) {
+								var banner_content = '';
+								var indicator_content = '';
+								for(var i = 0; i < bannerLen; i++) {
+
+									if(i == 0) {
+										banner_content += addBanner(result.data.bannerList[bannerLen - 1], true);
+										indicator_content += '<div class="mui-indicator mui-active"></div>';
+									} else {
+										indicator_content += '<div class="mui-indicator"></div>';
+									}
+
+									banner_content += addBanner(result.data.bannerList[i]);
+
+									if(i == (bannerLen - 1)) {
+										banner_content += addBanner(result.data.bannerList[0], true);
+									}
+
+								}
+								//alert(banner_content);
+								document.getElementById('bannerloop').innerHTML = banner_content;
+								document.getElementById('indicatorid').innerHTML = indicator_content;
+							}
+							var slider = mui("#slider");
+							slider.slider({
+								interval: 3000
+							});
+
+						},
+						function() {
+
+						});
+					//新增banner 显示
+					var timeNum = 0;
+
+					function addBanner(banner, firstend) {
+						var _html = '';
+						if(firstend) {
+							_html = '<div class="mui-slider-item mui-slider-item-duplicate" >';
+						} else {
+							_html = '<div class="mui-slider-item">';
+						}
+						_html += '<a class="id" href="javascript:void(0);" id="' + banner.linkUrl + '" data-id="' + timeNum + '"><img src="' + tzdr.constants.base_images_url + banner.imgPath + '" title=""/>';
+						_html += '</a></div>';
+						imgId.push(banner.linkUrl);
+						timeNum++;
+						return _html;
+					}
+					//监听banner点击事件
+					var clickNum = 0;
+					mui("#bannerloop").on('tap', 'a', function() {
+						//获取id
+						var nid = this.getAttribute("id");
+						if(clickNum <= imgId.length - 1) {
+							var clickId = $(this).attr('data-id');
+							nid = imgId[clickId];
+							clickNum++;
+						}
+						var str = "http";
+						if(nid == "" || nid == null || nid.length == 0) {} else if(nid.indexOf(str) == -1) {
+							mui.openWindow({
+								url: "../../tzdr/news/news.html",
+								id: nid,
+								extras: {
+									nid: nid
+								}
+							});
+						} else {
+							mui.openWindow({
+								url: "../../tzdr/news/active.html",
+								id: "active",
+								extras: {
+									nid: nid
+								}
+							});
+						}
+					});
+
+				});
+				tzdr.online();
+				tzdr.operation();
+			</script>
+	</body>
+
 </html>
