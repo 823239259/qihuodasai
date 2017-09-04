@@ -30,7 +30,7 @@
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
 								<span>{{k.name}}</span>
-								<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.status}}</span>
+								<span>{{k.status00}}</span>
 								<span>{{k.type}}</span>
 								<span>{{k.conditions}}</span>
 								<span>{{k.order}}</span>
@@ -61,7 +61,7 @@
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
 								<span>{{k.name}}</span>
-								<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.status}}</span>
+								<span>{{k.status}}</span>
 								<span>{{k.type}}</span>
 								<span>{{k.conditions}}</span>
 								<span>{{k.order}}</span>
@@ -97,6 +97,9 @@
 		computed:{
 			msgTips: function(){
 				return this.msg;
+			},
+			conditionList(){
+				return this.$store.state.market.conditionList;
 			}
 		},
 		methods: {
@@ -121,6 +124,68 @@
 			},
 			addConditions: function(){
 				this.$children[1].isshow = true;
+			},
+			regroupConditionList:function(){
+				this.conditionList.forEach(function(e,i){
+					let b={};
+					b.AB_BuyPoint = e.AB_BuyPoint;
+					b.AB_SellPoint = e.AB_SellPoint;
+					b.AdditionFlag=e.AdditionFlag;
+					b.AdditionPrice = e.AdditionPrice;
+					b.AdditionType = e.AdditionType;
+					b.CommodityNo = e.CommodityNo;
+					b.CompareType = e.CompareType;
+					b.ConditionNo = e.ConditionNo;
+					b.ConditionType = e.ConditionType;
+					b.ContractNo = e.ContractNo;
+					b.Drection = e.Drection;
+					b.ExchangeNo = e.ExchangeNo;
+					b.InsertDateTime = e.InsertDateTime;
+					b.Num = e.Num;
+					b.OrderType = e.OrderType;
+					b.PriceTriggerPonit = e.PriceTriggerPonit;
+					b.Status = e.Status;
+					b.StatusMsg = e.StatusMsg;
+					b.StopLossDiff = e.StopLossDiff;
+					b.StopLossType = e.StopLossType;
+					b.StopLossWin = e.StopLossWin;
+					b.TimeTriggerPoint = e.TimeTriggerPoint;
+					b.TriggedTime = e.TriggedTime;
+					
+					b.name=e.CommodityNo+e.ContractNo;
+					b.status00 = (function(){
+									if(e.Status==0){
+										return '运行中';
+									}else if(e.Status==1){
+										return '暂停';
+									}else if(e.Status==2){
+										return '已触发';
+									}else if(e.Status==3){
+										return '已取消';
+									}else if(e.Status==4){
+										return '插入失败';
+									}else if(e.Status==5){
+										return '触发失败';
+									}
+								})();
+					b.type = (function(){
+									if(e.ConditionType==0){
+										return '价格条件';
+									}else if(e.ConditionType==1){
+										return '时间条件';
+									}else if(e.ConditionType==2){
+										return 'AB单';
+									}
+								})();
+					
+					b.conditions = (function(){
+									
+								})();
+					
+					
+					this.noListCont.push(b);
+					
+				});
 			}
 		},
 		mounted: function(){
@@ -130,6 +195,8 @@
 			$("#conditions").css("height", screenHeight + "px");
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
+			console.log(this.conditionList);
+			
 		},
 		activated: function(){
 			//不更新画图

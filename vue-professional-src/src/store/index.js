@@ -170,6 +170,9 @@ var market = {
 		
 		stopLossListSelectOneObj:{},
 		
+		conditionList:[],//条件单未触发列表
+		conditionTriggeredList:[],//条件单已触发列表
+		
 		
 		
 		//选择K线时候的值
@@ -1485,11 +1488,8 @@ export default new Vuex.Store({
 					context.dispatch('layerOnRspInsertStopLoss',parameters);
 					break;
 				case 'OnRspQryCondition':
-					console.log('OnRspQryCondition');
-					console.log(parameters);
+					context.state.market.conditionList.push(parameters);
 				case 'OnError':
-					console.log('OnError');
-					console.log(parameters);
 					if(parameters!=null){
 						context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
 					}
@@ -1795,6 +1795,7 @@ export default new Vuex.Store({
 							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
 						}
 					});
+					
 				}
 				// 清空币种盈亏
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};
