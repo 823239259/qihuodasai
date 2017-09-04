@@ -76,14 +76,16 @@
 				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
 				 */
 				var Contract=this.$store.state.market.openChangealertCurrentObj.ContractCode.substring(0,this.$store.state.market.openChangealertCurrentObj.ContractCode.length-4);
+				console.log(this.templateList);
+				console.log(Contract);
 				var b={
 					"Method":'ModifyOrder',
 					"Parameters":{
 						"OrderSysID":'',
 						"OrderID":this.$store.state.market.openChangealertCurrentObj.OrderID,
-						"ExchangeNo":this.templateList[Contract].LastQuotation.ExchangeNo,
-						"CommodityNo":this.templateList[Contract].LastQuotation.CommodityNo,
-						"ContractNo":this.templateList[Contract].LastQuotation.ContractNo,
+						"ExchangeNo":this.templateList[Contract].ExchangeNo,
+						"CommodityNo":this.templateList[Contract].CommodityNo,
+						"ContractNo":this.templateList[Contract].ContractNo,
 						"OrderNum":parseFloat(this.entrustNum),
 						"Direction":function(){
 										if(this.$store.state.market.openChangealertCurrentObj.buyOrSell=='买'){
