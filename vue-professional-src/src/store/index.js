@@ -1339,6 +1339,8 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询止损单
 						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						//查询条件单
+						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
 						
@@ -1480,11 +1482,17 @@ export default new Vuex.Store({
 					context.dispatch('updateStopLoss',parameters);
 					break;
 				case 'OnRspInsertStopLoss':
-					console.log('OnRspInsertStopLoss');
 					context.dispatch('layerOnRspInsertStopLoss',parameters);
 					break;
+				case 'OnRspQryCondition':
+					console.log('OnRspQryCondition');
+					console.log(parameters);
 				case 'OnError':
-					context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
+					console.log('OnError');
+					console.log(parameters);
+					if(parameters!=null){
+						context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
+					}
 				default:
 					break;
 			}
