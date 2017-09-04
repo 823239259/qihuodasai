@@ -90,29 +90,8 @@
 				msg: '',
 				isShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
-				noListCont:[
-					{
-						name: 'CL1710',
-						status: '运行中',
-						type: '多',
-						conditions: '触发价:47.50',
-						order: '市价',
-						term: '当日有效',
-						time: '2017-08-28 10:01:04'
-					}
-					
-				],
-				yesListCont:[
-					{
-						name: 'CL1710',
-						status: '运行中',
-						type: '多',
-						conditions: '触发价:47.50',
-						order: '市价',
-						term: '当日有效',
-						time: '2017-08-28 10:01:04'
-					}
-				],
+				noListCont:[],
+				yesListCont:[],
 			}
 		},
 		computed:{

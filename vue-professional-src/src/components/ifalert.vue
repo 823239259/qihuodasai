@@ -58,7 +58,7 @@
 								<span class="fontgray lot">手数</span>
 							</li>
 							<li>
-								<input type="text" :value="holdNum" class="fontwhite" />
+								<input type="number" :value="holdNum" class="fontwhite" />
 							</li>
 						</ol>
 					</li>
@@ -98,12 +98,12 @@
 								价格
 							</li>
 							<li>
-								<select class="fontwhite selectshort">
-									<option>附加</option>
-									<option>></option>
-									<option>>=</option>
-									<option><</option>
-									<option><=</option>
+								<select class="fontwhite selectshort" v-model="additionValue">
+									<option value="-1">附加</option>
+									<option value="0">></option>
+									<option value="2">>=</option>
+									<option value="1"><</option>
+									<option value="3"><=</option>
 								</select>
 								<input type="text" value="89.64" />
 							</li>
@@ -164,7 +164,9 @@
 				inputAdditionalPrice:'',
 				selectBuyOrSell:'',
 				selectMarketOrLimited:'',
-				holdNum:1
+				holdNum:1,
+				additionValue:'',
+				additionFlag:false
 			}
 		},
 		computed:{
@@ -199,9 +201,15 @@
 			selectAdditionalPrice:function(n,o){
 				if(this.selectAdditionalPrice==-1){
 					 this.inputAdditionalPrice = '';
+					 this.additionFlag = false;
+					 this.inputAdditionalPrice='';
 				}else{
 					this.inputAdditionalPrice =this.inputPrice;
+					 this.additionFlag = true;
 				}
+			},
+			additionValue:function(n,o){
+				
 			}
 		},
 		methods:{
@@ -219,32 +227,41 @@
 			},
 			confirm: function() {
 				this.isshow = false;
+				console.log(this.templateList[this.commodityNo]);
+				console.log('selectAdditionalPrice:'+this.selectAdditionalPrice);
+				console.log('AdditionFlag:'+this.additionFlag);
 				if(this.ifshow==true){
 					let b={
 							"Method":'InsertCondition',
 							"Parameters":{
-								'ExchangeNo':'',
-								'CommodityNo':'',
-								'ContractNo':'',
-								'Num':'',
-								'ConditionType':'',
-								'PriceTriggerPonit':'',
-								'CompareType':'',
-								'TimeTriggerPoint':'',
-								'AB_BuyPoint':'',
-								'AB_SellPoint':'',
-								'OrderType':'',
-								'Direction':'',
-								'StopLossType':'',
-								'StopLossDiff':'',
-								'StopWinDiff':'',
-								'AdditionFlag':'',
-								'AdditionType':'',
-								'AdditionPrice':''
+								'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
+								'CommodityNo':this.commodityNo,
+								'ContractNo':this.contractNo,
+								'Num':parseInt(this.holdNum),
+								'ConditionType':0,
+								'PriceTriggerPonit':this.inputPrice,
+								'CompareType':this.selectPrice,
+								'TimeTriggerPoint':0,
+								'AB_BuyPoint':0.0,
+								'AB_SellPoint':0.0,
+								'OrderType':parseInt(this.selectMarketOrLimited),
+								'Direction':parseInt(this.selectBuyOrSell),
+								'StopLossType':-1,
+								'StopLossDiff':0.0,
+								'StopWinDiff':0.0,
+								'AdditionFlag':this.additionFlag,
+								'AdditionType':this.selectAdditionalPrice,
+								'AdditionPrice':(function(){
+													if(this.inputAdditionalPrice==''){
+														return  0;
+													}else{
+														return parseFloat(this.inputAdditionalPrice);
+													}
+												}.bind(this))()
 							}
 						};
 					console.log(JSON.stringify(b));	
-//					this.tradeSocket.send(JSON.stringify(b));	
+					this.tradeSocket.send(JSON.stringify(b));	
 				}
 				
 			}
@@ -256,8 +273,6 @@
 			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
 			this.commodityNo = arr[0].CommodityNo;
 			
-			console.log(this.orderTemplist);
-			console.log(this.templateList[this.commodityNo]);
 			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
 			this.selectAdditionalPrice = -1;
 			this.inputAdditionalPrice = this.inputPrice;
@@ -265,6 +280,7 @@
 			this.selectBuyOrSell = 0;
 			this.selectMarketOrLimited=1;
 			
+			this.additionValue = -1;
 			
 		}
 	}
