@@ -76,8 +76,6 @@
 				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
 				 */
 				var Contract=this.$store.state.market.openChangealertCurrentObj.ContractCode.substring(0,this.$store.state.market.openChangealertCurrentObj.ContractCode.length-4);
-				console.log(this.templateList);
-				console.log(Contract);
 				var b={
 					"Method":'ModifyOrder',
 					"Parameters":{

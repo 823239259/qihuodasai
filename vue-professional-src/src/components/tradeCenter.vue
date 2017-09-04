@@ -408,11 +408,15 @@
 				}else{
 					if(n == ''){
 						this.marketprice = '';
-					}else if(n.split('.')[1] && n.split('.')[1].length > this.dotSize || this.moneyReg.test(n) ==  false || this.dotSize == 0){
+					}else if(n.split('.')[1] && n.split('.')[1].length > this.dotSize || this.moneyReg.test(n) ==  false){
 						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
 						this.marketprice = this.tradePrices;
 					}else{
 						this.marketprice = n;
+					}
+					if(n.split('.')[1] == '' && this.dotSize == 0){
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
+						this.marketprice = this.tradePrices;
 					}
 				}
 			},
