@@ -1,5 +1,7 @@
 <template>
 	<div id="stopmoneyalert" v-if='isshow'>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
 		<div class="bg">
 			<div>
 				<div class="fl" :class="{current:isstopm}" @tap="sel">止损</div>
@@ -54,8 +56,11 @@
 </template>
 
 <script>
+	import tipsDialog from './tipsDialog.vue'
+	import alert from './Tradealert.vue'
 	export default {
 		name: 'stopmoneyalert',
+		components: {tipsDialog, alert},
 		data() {
 			return {
 				isstopm: true,
@@ -65,11 +70,23 @@
 				selectStopLossType00:'',
 				inputPrice:'',
 				Num:'',
-				orderType:''
+				orderType:'',
+				tipsMsg: '',
+				msg: '',
+				str: ''
 			}
 		},
 		props: ['val'],
 		computed: {
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
+			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			msgTips: function(){
+				return this.msg;
+			},
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
@@ -114,7 +131,6 @@
 				
 				this.Num = n.Num;
 				this.orderType = n.OrderType00;
-				
 			}
 		},
 		methods: {
@@ -133,8 +149,19 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				this.isshow = false;
-				let b={
+				if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入止损价';
+				}else if(this.inputPrice >= this.lastPrice){
+					this.$refs.dialog.isShow = true;
+					this.msg = '输入价格应该小于最新价';
+				}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入止损手数';
+				}else{
+					this.$refs.alert.isshow = true;
+					this.tipsMsg = '是否添加限价止损？';
+					let b={
 						"Method":'ModifyStopLoss',
 						"Parameters":{
 							'StopLossNo':this.stopLossListSelectOneObj.StopLossNo,
@@ -156,9 +183,16 @@
 											}.bind(this))()
 						}
 					};
-					
-					console.log(JSON.stringify(b));
-					this.tradeSocket.send(JSON.stringify(b));
+					this.str = b;
+				}
+				
+				
+				
+				
+//				this.isshow = false;
+				
+//				console.log(JSON.stringify(b));
+				this.tradeSocket.send(JSON.stringify(b));
 					
 			}
 		},

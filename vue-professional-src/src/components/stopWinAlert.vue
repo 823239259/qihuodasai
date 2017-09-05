@@ -1,5 +1,7 @@
 <template>
 	<div id="stopmoneyalert" v-if='isshow'>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
 		<div class="bg">
 			<div>
 				<div class="fl" :class="{current:!isstopm}" @tap="sel">
@@ -52,8 +54,11 @@
 </template>
 
 <script>
+	import tipsDialog from './tipsDialog.vue'
+	import alert from './Tradealert.vue'
 	export default {
 		name: 'stopmoneyalert',
+		components: {tipsDialog, alert},
 		data() {
 			return {
 				isstopm: true,
@@ -64,11 +69,23 @@
 				orderType:1,
 				zhiYinInputPrice:'',
 				zhiYinNum:'',
-				zhiYinorderType:''
+				zhiYinorderType:'',
+				tipsMsg: '',
+				msg: '',
+				str: ''
 			}
 		},
 		props: ['val'],
 		computed: {
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
+			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			msgTips: function(){
+				return this.msg;
+			},
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
@@ -116,8 +133,19 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				this.isshow = false;
-				let b={
+				if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入止赢价';
+				}else if(this.zhiYinInputPrice <= this.lastPrice){
+					this.$refs.dialog.isShow = true;
+					this.msg = '输入价格应该大于最新价';
+				}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入止赢手数';
+				}else{
+					this.$refs.alert.isshow = true;
+					this.tipsMsg = '是否添加限价止赢？';
+					let b={
 						"Method":'ModifyStopLoss',
 						"Parameters":{
 							'StopLossNo':this.stopLossListSelectOneObj.StopLossNo,
@@ -129,6 +157,8 @@
 							'StopLossDiff':0
 						}
 					};
+					this.str = b;
+				}
 			}
 		},
 		mounted: function(){
