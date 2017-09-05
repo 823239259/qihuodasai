@@ -88,7 +88,7 @@
 								时间
 							</li>
 							<li>
-								<input type="time" class="time" v-model="time"/>
+								<input type="time" value='18:30:15' class='time'/>
 							</li>
 						</ol>
 					</li>
@@ -166,8 +166,7 @@
 				selectMarketOrLimited:'',
 				holdNum:1,
 				additionValue:'',
-				additionFlag:false,
-				time: '16:00'
+				additionFlag:false
 			}
 		},
 		computed:{
