@@ -135,18 +135,19 @@
 				return	this.$store.state.market.orderTemplist;
 			},
 			condition(){
-				if(this.val==undefined) return false;
+				if(this.val==undefined) return;
 				return JSON.parse(this.val);
 			},
 			commodityObj(){
 				return this.orderTemplist[this.condition.CommodityNo];
 			},
 			templateListObj(){
-				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined) return false;
+				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined) return;
+				this.inputPrice = this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice;
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			},
 			orderTemplistDotSize(){
-				if(this.$store.state.market.orderTemplist[this.condition.CommodityNo]==undefined) return false;
+				if(this.$store.state.market.orderTemplist[this.condition.CommodityNo]==undefined) return;
 				return	this.$store.state.market.orderTemplist[this.condition.CommodityNo].DotSize;
 			},
 			tradeSocket() {
@@ -251,10 +252,7 @@
 			}
 		},
 		mounted: function(){
-			if(this.templateListObj!=undefined){
-				this.inputPrice = this.templateListObj.LastPrice;
-			}
-		}
+		},
 	}
 </script>
 

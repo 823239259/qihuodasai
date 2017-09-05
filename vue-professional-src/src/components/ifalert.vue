@@ -88,7 +88,7 @@
 								时间
 							</li>
 							<li>
-								<input type="time" value='18:30:15' class='time'/>
+								<input type="time" class="time" v-model="time"/>
 							</li>
 						</ol>
 					</li>
@@ -167,7 +167,7 @@
 				holdNum:1,
 				additionValue:'',
 				additionFlag:false,
-				selectTimeId:''
+				time: '16:00'
 			}
 		},
 		computed:{
