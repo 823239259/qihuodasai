@@ -180,12 +180,84 @@
 					
 					b.conditions = (function(){
 									
+									if(e.AdditionFlag==0){ //没有附件条件
+										if(e.CompareType==0){
+											return '>'+e.PriceTriggerPonit;
+										}else if(e.CompareType==1){
+											return '<'+e.PriceTriggerPonit;
+										}else if(e.CompareType==2){
+											return '>='+e.PriceTriggerPonit;
+										}else if(e.CompareType==3){
+											return '<='+e.PriceTriggerPonit;
+										}
+									}else{ //有附加条件
+										if(e.CompareType==0){
+											if(e.AdditionType==0){
+												return '>'+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '>'+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '>'+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '>'+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else if(e.CompareType==1){
+											if(e.AdditionType==0){
+												return '<'+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '<'+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '<'+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '<'+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else if(e.CompareType==2){
+											if(e.AdditionType==0){
+												return '>='+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '>='+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '>='+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '>='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else if(e.CompareType==3){
+											if(e.AdditionType==0){
+												return '<='+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '<='+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '<='+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '<='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}
+									}
+									
 								})();
-					
+					b.order = (function(){
+								if(e.Drection == 0){ //买
+									if(e.OrderType==1){
+										return '买,市价,'+e.Num+'手'
+									}else{
+										return '买,限价,'+e.Num+'手'
+									}
+								} else if(e.Drection == 1){//卖
+									if(e.OrderType==1){
+										return '卖,市价,'+e.Num+'手'
+									}else{
+										return '卖,限价,'+e.Num+'手'
+									}
+								}
+								
+								
+							})();
+					b.term = '当日有效';
+					b.time = e.InsertDateTime;
 					
 					this.noListCont.push(b);
 					
-				});
+				}.bind(this));
 			}
 		},
 		mounted: function(){
@@ -195,8 +267,7 @@
 			$("#conditions").css("height", screenHeight + "px");
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
-			console.log(this.conditionList);
-			
+			this.regroupConditionList();
 		},
 		activated: function(){
 			//不更新画图
