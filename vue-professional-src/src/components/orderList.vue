@@ -155,7 +155,6 @@
 						this.$children[6].isshow = true;
 						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
 						return;
-						
 					}
 				}
 				if(i < 1){
