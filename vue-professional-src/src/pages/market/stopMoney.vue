@@ -137,13 +137,16 @@
 			stopLossList: function(n, o){
 				this.hasNostopLossList00();
 			}
-			
 		},
 		methods: {
 			updateEvent: function(){
+				console.log(this.orderStatus);
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
+				}else if(this.orderStatus == 0){
+					this.$refs.dialog.isShow = true;
+					this.msg = '运行中的状态不能修改';
 				}else{
 					if(this.StopLossType00==0 || this.StopLossType00==2){
 						this.$refs.stoplossalert.isshow = true;
@@ -188,9 +191,9 @@
 								};
 								this.tradeSocket.send(JSON.stringify(b));
 							}
-							
 						}
 					}.bind(this));
+					$(".list_cont_box li").removeClass("current");
 				}
 			},
 			deleteEvent: function(){
@@ -214,13 +217,10 @@
 									'StopLossDiff':parseFloat(e.StopLossDiff)
 								}
 							};
-							
 							this.tradeSocket.send(JSON.stringify(b));
-							
 						}
 					}.bind(this));
 				}
-				
 			},
 			showCont: function(e){
 				$(e.currentTarget).find("span").addClass('current');
@@ -248,7 +248,6 @@
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo == this.orderListId){
 							this.$store.state.market.stopLossListSelectOneObj=e;
-							console.log(e);
 						}
 					}.bind(this));
 					
