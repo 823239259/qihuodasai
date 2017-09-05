@@ -143,6 +143,7 @@
 			},
 			templateListObj(){
 				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined) return;
+				this.inputPrice = this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice;
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			},
 			orderTemplistDotSize(){
@@ -251,9 +252,6 @@
 			}
 		},
 		mounted: function(){
-//			if(this.templateListObj){
-//				this.inputPrice = this.templateListObj.LastPrice;
-//			}
 		},
 	}
 </script>
