@@ -25,7 +25,7 @@
 		props: ['title', 'line1', 'addr', 'objstr','type', 'jump'],
 		data() {
 			return {
-				isshow: false
+				isshow: false,
 			}
 		},
 		computed:{
@@ -52,6 +52,7 @@
 					this.$router.push({path: '/tradeLogin'});
 				}
 				this.isshow = false;
+				this.$parent.isshow = false;
 			}
 		}
 	}

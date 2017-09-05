@@ -2,10 +2,10 @@
 	<div id="stopmoneyalert" v-if='isshow'>
 		<div class="bg">
 			<div>
-				<div :class="[fl,{current:isstopm}]" @tap="sel">
+				<div class="fl" :class="{current:isstopm}" @tap="sel">
 					止损
 				</div>
-				<div :class="[fl,{current:!isstopm}]" @tap="sel">
+				<div class="fl" :class="{current:!isstopm}" @tap="sel">
 					止盈
 				</div>
 			</div>
@@ -89,36 +89,47 @@
 				<div class="fl fontgray" @tap='close'>关闭</div>
 				<div class="fl fontgray" @tap='confirm'>添加</div>
 			</div>
-
 		</div>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 	</div>
 </template>
 
 <script>
+	import alert from './Tradealert.vue'
+	import tipsDialog from './tipsDialog.vue'
 	export default {
 		name: 'stopmoneyalert',
+		components: {alert, tipsDialog},
 		data() {
 			return {
 				isstopm: true,
-				isshow:false,
+				isshow: false,
 				Num:1,
 				selectStopLossType00:0,
 				inputPrice:0.00,
 				orderType:1,
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
-				zhiYinorderType:1
-				
+				zhiYinorderType:1,
+				tipsMsg: '',
+				msg: '',
+				str: ''
 			}
 		},
 		props: ['val'],
 		computed: {
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
+			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			msgTips: function(){
+				return this.msg;
+			},
 			parameters(){
 				return this.$store.state.market.Parameters;
-			},
-			
-			fl() {
-				return 'fl'
 			},
 			orderTemplist(){
 				return	this.$store.state.market.orderTemplist;
@@ -141,15 +152,18 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			}
-			
 		},
-		
 		filters:{
 			toFixed:function(value,dotSize){
 				if (!value) return '';
 				return parseFloat(value).toFixed(dotSize);
 			}
 		},
+//		watch: {
+//			tipsMsg: function(n, o){
+//				this.$refs.alert.isshow = true;
+//			}
+//		},
 		methods: {
 			sel: function(e) {
 				var txt = e.target.innerText;
@@ -166,53 +180,72 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				this.isshow = false;
-				if(this.isstopm==true){
-					let b={
-								"Method":'InsertStopLoss',
-								"Parameters":{
-									"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
-									"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
-									"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
-									"Num":parseInt(this.Num),
-									"StopLossType":parseInt(this.selectStopLossType00),
-									"StopLossPrice":(function(){
-															if(parseInt(this.selectStopLossType00)==0){
-																return parseFloat(this.inputPrice);
-															}else{
-																return 0.00;
-															}
-														}).bind(this)(),
-									"StopLossDiff":(function(){
-														if(parseInt(this.selectStopLossType00)==2){
-															return parseFloat(this.inputPrice);
-														}else{
-															return 0.00;
-														}
-													}).bind(this)(),
-									"HoldAvgPrice":this.condition.HoldAvgPrice,
-									"HoldDirection":this.condition.Drection,
-									"OrderType":parseInt(this.orderType),
-								}
+				if(this.isstopm == true){
+					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入止损价';
+					}else if(this.inputPrice >= this.templateListObj.LastPrice){
+						this.$refs.dialog.isShow = true;
+						this.msg = '输入价格应该小于最新价';
+					}else{
+						this.$refs.alert.isshow = true;
+						this.tipsMsg = '是否添加限价止损？';
+						let b={
+							"Method":'InsertStopLoss',
+							"Parameters":{
+								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
+								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
+								"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+								"Num":parseInt(this.Num),
+								"StopLossType":parseInt(this.selectStopLossType00),
+								"StopLossPrice":(function(){
+													if(parseInt(this.selectStopLossType00)==0){
+														return parseFloat(this.inputPrice);
+													}else{
+														return 0.00;
+													}
+												}).bind(this)(),
+								"StopLossDiff":(function(){
+													if(parseInt(this.selectStopLossType00)==2){
+														return parseFloat(this.inputPrice);
+													}else{
+														return 0.00;
+													}
+												}).bind(this)(),
+								"HoldAvgPrice":this.condition.HoldAvgPrice,
+								"HoldDirection":this.condition.Drection,
+								"OrderType":parseInt(this.orderType),
+							}
 						};
-						this.tradeSocket.send(JSON.stringify(b));
+						this.str = b;
+					}
 				}else{
-					let b={
-						"Method":'InsertStopLoss',
-						"Parameters":{
-							"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
-							"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
-							"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
-							"Num":parseInt(this.zhiYinNum),
-							"StopLossType":1,
-							"StopLossPrice":parseFloat(this.zhiYinInputPrice),
-							"StopLossDiff":0.00,
-							"HoldAvgPrice":this.condition.HoldAvgPrice,
-							"HoldDirection":this.condition.Drection,
-							"OrderType":parseInt(this.orderType)
-						}
-					};
-					this.tradeSocket.send(JSON.stringify(b));
+					if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入止盈价';
+					}else if(this.zhiYinInputPrice <= this.templateListObj.LastPrice){
+						this.$refs.dialog.isShow = true;
+						this.msg = '输入价格应该高于最新价';
+					}else{
+						this.$refs.alert.isshow = true;
+						this.tipsMsg = '是否添加限价止赢？';
+						let b={
+							"Method":'InsertStopLoss',
+							"Parameters":{
+								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
+								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
+								"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+								"Num":parseInt(this.zhiYinNum),
+								"StopLossType":1,
+								"StopLossPrice":parseFloat(this.zhiYinInputPrice),
+								"StopLossDiff":0.00,
+								"HoldAvgPrice":this.condition.HoldAvgPrice,
+								"HoldDirection":this.condition.Drection,
+								"OrderType":parseInt(this.orderType)
+							}
+						};
+						this.str = b;
+					}
 				}
 			}
 		},
