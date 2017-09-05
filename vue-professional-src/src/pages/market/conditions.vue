@@ -27,7 +27,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in noListCont">
-						<li @tap="listTap" id="123">
+						<li @tap="listTap" :id="k.ConditionNo">
 							<div class="list_cont">
 								<span>{{k.name}}</span>
 								<span>{{k.status00}}</span>
@@ -41,7 +41,7 @@
 					</template>
 				</ul>
 				<div class="list_tools">
-					<cbtn name="暂停"></cbtn>
+					<cbtn name="暂停" @tap.native="suspendEvent"></cbtn>
 					<cbtn name="修改"></cbtn>
 					<cbtn name="删除"></cbtn>
 				</div>
@@ -57,7 +57,7 @@
 						<span>有效日期</span>
 						<span>触发时间</span>
 					</li>
-					<template v-for="k in noListCont">
+					<template v-for="k in yesListCont">
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
 								<span>{{k.name}}</span>
@@ -103,6 +103,9 @@
 			}
 		},
 		methods: {
+			suspendEvent:function(){
+				
+			},
 			showCont: function(e){
 				$(e.currentTarget).find("span").addClass('current');
 				$(e.currentTarget).siblings().find("span").removeClass('current')
