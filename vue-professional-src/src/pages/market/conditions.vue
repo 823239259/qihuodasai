@@ -174,14 +174,7 @@
 						};
 						this.tradeSocket.send(JSON.stringify(b));	
 					}
-					
-					
-					
 				}
-				
-				
-				
-				
 				$(".list_cont_box li").removeClass("current");
 			},
 			showCont: function(e){
