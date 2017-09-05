@@ -114,42 +114,74 @@
 		methods: {
 			suspendEvent:function(){
 				
-				this.noListCont.forEach(function(e,i){
-					if(this.orderListId==e.ConditionNo){
-						this.$store.state.market.noObj = e;
-					}
-				}.bind(this));
-				let o = this.$store.state.market.noObj;
-				let b={
-						"Method":'ModifyCondition',
-						"Parameters":{
-							"ConditionNo":o.ConditionNo,
-							"ModifyFlag":(function(){
-											if(o.Status==0){ //如果处于运行中，则暂停
-												return 2;
-											}
-											if(o.Status==1){ //如果处于暂停，则启动
-												return 3;
-											}
-										})(), //暂停
-							"Num":o.Num,
-							"ConditionType":o.ConditionType,
-							"PriceTriggerPonit":o.PriceTriggerPonit,
-							"CompareType":o.CompareType,
-							"TimeTriggerPoint":o.TimeTriggerPoint,
-							"AB_BuyPoint":o.AB_BuyPoint,
-							"AB_SellPoint":o.AB_SellPoint,
-							"OrderType":o.OrderType,
-							"StopLossType":o.StopLossType,
-							"Direction":o.Drection,
-							"StopLossDiff":0.0,
-							"StopWinDiff":0.0,
-							"AdditionFlag":o.AdditionFlag,
-							"AdditionType":o.AdditionType,
-							"AdditionPrice":o.AdditionPrice
+				
+				if(this.orderListId == '' || this.orderListId == null){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请选择一条数据';
+				}else{
+					this.noListCont.forEach(function(e,i){
+						if(this.orderListId==e.ConditionNo){
+							this.$store.state.market.noObj = e;
 						}
-					};
-				this.tradeSocket.send(JSON.stringify(b));	
+					}.bind(this));
+					let o = this.$store.state.market.noObj;
+					if(o.Status==0){//如果处于运行中，则暂停
+							let b={
+							"Method":'ModifyCondition',
+							"Parameters":{
+								"ConditionNo":o.ConditionNo,
+								"ModifyFlag":2, //暂停
+								"Num":o.Num,
+								"ConditionType":o.ConditionType,
+								"PriceTriggerPonit":o.PriceTriggerPonit,
+								"CompareType":o.CompareType,
+								"TimeTriggerPoint":o.TimeTriggerPoint,
+								"AB_BuyPoint":o.AB_BuyPoint,
+								"AB_SellPoint":o.AB_SellPoint,
+								"OrderType":o.OrderType,
+								"StopLossType":o.StopLossType,
+								"Direction":o.Drection,
+								"StopLossDiff":0.0,
+								"StopWinDiff":0.0,
+								"AdditionFlag":o.AdditionFlag,
+								"AdditionType":o.AdditionType,
+								"AdditionPrice":o.AdditionPrice
+							}
+						};
+						this.tradeSocket.send(JSON.stringify(b));	
+					}else if(o.Status==1){
+						let b={
+							"Method":'ModifyCondition',
+							"Parameters":{
+								"ConditionNo":o.ConditionNo,
+								"ModifyFlag":3, //暂停
+								"Num":o.Num,
+								"ConditionType":o.ConditionType,
+								"PriceTriggerPonit":o.PriceTriggerPonit,
+								"CompareType":o.CompareType,
+								"TimeTriggerPoint":o.TimeTriggerPoint,
+								"AB_BuyPoint":o.AB_BuyPoint,
+								"AB_SellPoint":o.AB_SellPoint,
+								"OrderType":o.OrderType,
+								"StopLossType":o.StopLossType,
+								"Direction":o.Drection,
+								"StopLossDiff":0.0,
+								"StopWinDiff":0.0,
+								"AdditionFlag":o.AdditionFlag,
+								"AdditionType":o.AdditionType,
+								"AdditionPrice":o.AdditionPrice
+							}
+						};
+						this.tradeSocket.send(JSON.stringify(b));	
+					}
+					
+					
+					
+				}
+				
+				
+				
+				
 				$(".list_cont_box li").removeClass("current");
 			},
 			showCont: function(e){
