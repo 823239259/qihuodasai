@@ -159,11 +159,6 @@
 				return parseFloat(value).toFixed(dotSize);
 			}
 		},
-//		watch: {
-//			tipsMsg: function(n, o){
-//				this.$refs.alert.isshow = true;
-//			}
-//		},
 		methods: {
 			sel: function(e) {
 				var txt = e.target.innerText;
@@ -187,6 +182,9 @@
 					}else if(this.inputPrice >= this.templateListObj.LastPrice){
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格应该小于最新价';
+					}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入止损手数';
 					}else{
 						this.$refs.alert.isshow = true;
 						this.tipsMsg = '是否添加限价止损？';
@@ -226,6 +224,9 @@
 					}else if(this.zhiYinInputPrice <= this.templateListObj.LastPrice){
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格应该高于最新价';
+					}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入止赢手数';
 					}else{
 						this.$refs.alert.isshow = true;
 						this.tipsMsg = '是否添加限价止赢？';
