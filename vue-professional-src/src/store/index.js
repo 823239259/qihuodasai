@@ -1586,6 +1586,18 @@ export default new Vuex.Store({
 											}else if(e0.AdditionType==3){
 												return '<='+e0.PriceTriggerPonit+' <='+e0.AdditionPrice;
 											}
+										}else{
+											let s = e0.TimeTriggerPoint.split(' ');
+											if(e0.AdditionType==0){
+												return s[1]+' >'+e0.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return s[1]+' <'+e0.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return s[1]+' >='+e0.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return s[1]+' <='+e0.AdditionPrice;
+											}
+											
 										}
 									}
 									

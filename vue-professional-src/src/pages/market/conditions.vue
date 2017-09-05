@@ -27,7 +27,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in noListCont">
-						<li @tap="listTap" :id="k.ConditionNo" :status='k.Status'>
+						<li @tap="listTap" :id="k.ConditionNo" :status='k.Status' :compareType='k.CompareType'>
 							<div class="list_cont">
 								<span>{{k.name}}</span>
 								<span>{{k.status00}}</span>
@@ -42,7 +42,7 @@
 				</ul>
 				<div class="list_tools">
 					<cbtn :name="statusName" @tap.native="suspendEvent"></cbtn>
-					<cbtn name="修改"></cbtn>
+					<cbtn name="修改" @tap.native="modify"></cbtn>
 					<cbtn name="删除"></cbtn>
 				</div>
 			</div>
@@ -94,7 +94,8 @@
 //				noListCont:[],
 				yesListCont:[],
 				orderStatus: '',
-				statusName: '暂停'
+				statusName: '暂停',
+				orderType: ''
 			}
 		},
 		computed:{
@@ -112,9 +113,16 @@
 			}
 		},
 		methods: {
+			modify:function(){
+				this.$children[1].isshow = true;
+				if(this.orderType == 5){
+					this.$children[1].ifshow = false;
+				}else{
+					this.$children[1].ifshow = true;
+				}
+				
+			},
 			suspendEvent:function(){
-				
-				
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
@@ -192,6 +200,7 @@
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = $(obj.currentTarget).attr("id");
 					this.orderStatus = $(obj.currentTarget).attr("status");
+					this.orderType = $(obj.currentTarget).attr("compareType");
 					if(this.orderStatus == 0){
 						this.statusName = '暂停';
 					}else{
@@ -312,6 +321,7 @@
 												return '<='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
 											}
 										}else{
+											
 											let s = e.TimeTriggerPoint.split(' ');
 											if(e.AdditionType==0){
 												return s[1]+' >'+e.AdditionPrice;
