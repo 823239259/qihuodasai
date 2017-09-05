@@ -21,10 +21,12 @@
 			<p class="jump_operate"><span @tap="toFindPwd">忘记密码</span>  /  <span class="yellow" @tap="toRegister">用户注册</span></p>
 		</div>
 		<p class="bottom_tips">如遇问题请拨打：400-852-8008</p>
+		<codeDialog></codeDialog>
 	</div>
 </template>
 
 <script>
+	import codeDialog from '../../components/codeDialog.vue'
 	import topbar from '../../components/Topbar.vue'
 	import back from '../../components/back.vue'
 	import cs from '../../components/customerService.vue'
@@ -33,7 +35,7 @@
 	import pro from '../../assets/common.js'
 	export default{
 		name:'login',
-		components: {topbar, back, cs, btn, tipsDialog},
+		components: {topbar, back, cs, btn, tipsDialog, codeDialog},
 		computed: {
 			isJumpEvent: function(){
 				this.isJump = this.$route.query.isJump;
