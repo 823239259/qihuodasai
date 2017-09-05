@@ -3,6 +3,7 @@
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<stopLossAlert ref="stoplossalert"></stopLossAlert>
 		<stopWinAlert ref="stopwinalert"></stopWinAlert>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
 		<div class="head">
 			<topbar title="止损止赢"></topbar>
 			<back></back>
@@ -93,9 +94,10 @@
 	import tipsDialog from '../../components/tipsDialog.vue'
 	import stopLossAlert from '../../components/stopLossAlert.vue'
 	import stopWinAlert from '../../components/stopWinAlert.vue'
+	import alert from '../../components/Tradealert.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, refresh, tipsDialog, stopLossAlert, stopWinAlert},
+		components:{topbar, back, cbtn, refresh, tipsDialog, stopLossAlert, stopWinAlert, alert},
 		data(){
 			return {
 				msg: '',
@@ -105,9 +107,17 @@
 				orderStatus: '',
 				statusName: '暂停',
 				StopLossType00:'',
+				tipsMsg: '',
+				str: ''
 			}
 		},
 		computed:{
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
+			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
 			statusNameEvent: function(){
 				return this.statusName;
 			},
@@ -156,13 +166,16 @@
 				}
 			},
 			suspendEvent:function(){
+				console.log(this.orderListId);
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
 				}else{
+					this.$refs.alert.isshow = true;
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo==this.orderListId){
 							if(e.Status==0){ //运行中
+								this.tipsMsg = '是否暂停止损单？';
 								let b={
 									"Method":'ModifyStopLoss',
 									"Parameters":{
@@ -175,8 +188,10 @@
 										'StopLossDiff':parseFloat(e.StopLossDiff)
 									}
 								};
-								this.tradeSocket.send(JSON.stringify(b));
+								this.str = b;
+//								this.tradeSocket.send(JSON.stringify(b));
 							} else if (e.Status==1){ //暂停
+								this.tipsMsg = '是否启动止损单？';
 								let b={
 									"Method":'ModifyStopLoss',
 									"Parameters":{
@@ -189,7 +204,8 @@
 										'StopLossDiff':parseFloat(e.StopLossDiff)
 									}
 								};
-								this.tradeSocket.send(JSON.stringify(b));
+								this.str = b;
+//								this.tradeSocket.send(JSON.stringify(b));
 							}
 						}
 					}.bind(this));
@@ -201,6 +217,8 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
 				}else{
+					this.$refs.alert.isshow = true;
+					this.tipsMsg = '是否删除止损单？';
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo==this.orderListId){
 							this.hasNostopLossList.splice(i,1);
@@ -217,7 +235,8 @@
 									'StopLossDiff':parseFloat(e.StopLossDiff)
 								}
 							};
-							this.tradeSocket.send(JSON.stringify(b));
+							this.str = b;
+//							this.tradeSocket.send(JSON.stringify(b));
 						}
 					}.bind(this));
 				}
