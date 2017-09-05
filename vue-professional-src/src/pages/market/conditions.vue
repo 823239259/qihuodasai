@@ -27,7 +27,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in noListCont">
-						<li @tap="listTap" :id="k.ConditionNo">
+						<li @tap="listTap" :id="k.ConditionNo" :status='k.Status'>
 							<div class="list_cont">
 								<span>{{k.name}}</span>
 								<span>{{k.status00}}</span>
@@ -41,7 +41,7 @@
 					</template>
 				</ul>
 				<div class="list_tools">
-					<cbtn name="暂停" @tap.native="suspendEvent"></cbtn>
+					<cbtn :name="statusName" @tap.native="suspendEvent"></cbtn>
 					<cbtn name="修改"></cbtn>
 					<cbtn name="删除"></cbtn>
 				</div>
@@ -90,8 +90,11 @@
 				msg: '',
 				isShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
-				noListCont:[],
+				orderListId:'',
+//				noListCont:[],
 				yesListCont:[],
+				orderStatus: '',
+				statusName: '暂停'
 			}
 		},
 		computed:{
@@ -100,11 +103,54 @@
 			},
 			conditionList(){
 				return this.$store.state.market.conditionList;
+			},
+			noListCont(){
+				return this.$store.state.market.noListCont;
+			},
+			tradeSocket(){
+				return this.$store.state.tradeSocket;
 			}
 		},
 		methods: {
 			suspendEvent:function(){
 				
+				this.noListCont.forEach(function(e,i){
+					if(this.orderListId==e.ConditionNo){
+						this.$store.state.market.noObj = e;
+					}
+				}.bind(this));
+				let o = this.$store.state.market.noObj;
+				let b={
+						"Method":'ModifyCondition',
+						"Parameters":{
+							"ConditionNo":o.ConditionNo,
+							"ModifyFlag":(function(){
+											if(o.Status==0){ //如果处于运行中，则暂停
+												return 2;
+											}
+											if(o.Status==1){ //如果处于暂停，则启动
+												return 3;
+											}
+										})(), //暂停
+							"Num":o.Num,
+							"ConditionType":o.ConditionType,
+							"PriceTriggerPonit":o.PriceTriggerPonit,
+							"CompareType":o.CompareType,
+							"TimeTriggerPoint":o.TimeTriggerPoint,
+							"AB_BuyPoint":o.AB_BuyPoint,
+							"AB_SellPoint":o.AB_SellPoint,
+							"OrderType":o.OrderType,
+							"StopLossType":o.StopLossType,
+							"Direction":o.Drection,
+							"StopLossDiff":0.0,
+							"StopWinDiff":0.0,
+							"AdditionFlag":o.AdditionFlag,
+							"AdditionType":o.AdditionType,
+							"AdditionPrice":o.AdditionPrice
+						}
+					};
+				this.tradeSocket.send(JSON.stringify(b));	
+				$(".list_cont_box li").removeClass("current");
 			},
 			showCont: function(e){
 				$(e.currentTarget).find("span").addClass('current');
@@ -120,6 +166,12 @@
 					$(obj.currentTarget).addClass("current");
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = $(obj.currentTarget).attr("id");
+					this.orderStatus = $(obj.currentTarget).attr("status");
+					if(this.orderStatus == 0){
+						this.statusName = '暂停';
+					}else{
+						this.statusName = '启动';
+					}
 				}else{
 					$(obj.currentTarget).removeClass("current");
 					this.orderListId =null;
