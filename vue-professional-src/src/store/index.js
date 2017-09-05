@@ -1495,6 +1495,10 @@ export default new Vuex.Store({
 						context.state.market.conditionList.push(parameters);
 					}
 					break;
+				case "OnRspInsertCondition":
+					console.log('OnRspInsertCondition');
+					console.log(parameters);
+					break;
 				case 'OnRtnConditionState':
 					console.log('OnRtnConditionState');	
 					console.log(parameters);
@@ -1605,7 +1609,6 @@ export default new Vuex.Store({
 							})();
 							b.term = '当日有效';
 							b.time = e0.InsertDateTime;	
-							console.log(JSON.stringify(b));
 							context.state.market.noListCont.splice(i,1,b);
 						}
 					});

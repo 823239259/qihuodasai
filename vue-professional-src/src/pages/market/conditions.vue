@@ -311,6 +311,18 @@
 											}else if(e.AdditionType==3){
 												return '<='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
 											}
+										}else{
+											let s = e.TimeTriggerPoint.split(' ');
+											if(e.AdditionType==0){
+												return s[1]+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return s[1]+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return s[1]+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return s[1]+' <='+e.AdditionPrice;
+											}
+											
 										}
 									}
 									
