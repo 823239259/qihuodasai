@@ -70,14 +70,14 @@
 							</li>
 						</ol>
 					</li>
-				</template>
-				<template v-else="ifshow">
+	</template>
+	<template v-else="ifshow">
 					<li>
 						<ol>
 							<li class="fontgray">合约</li>
 							<li>
-								<select name="contract" class="selectlong fontwhite">
-									<option v-for="v in parameters" :value="v.CommodityName + '&' + v.CommodityNo + '&' + v.MainContract">{{v.CommodityName}}</option>
+								<select name="contract" class="selectlong fontwhite" v-model="selectTimeId">
+									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
 								</select>
 							</li>
 						</ol>
@@ -166,7 +166,8 @@
 				selectMarketOrLimited:'',
 				holdNum:1,
 				additionValue:'',
-				additionFlag:false
+				additionFlag:false,
+				selectTimeId:''
 			}
 		},
 		computed:{
@@ -262,6 +263,8 @@
 						};
 					console.log(JSON.stringify(b));	
 					this.tradeSocket.send(JSON.stringify(b));	
+				}else{
+					console.log(this.selectTimePrice); 
 				}
 				
 			}
@@ -281,6 +284,17 @@
 			this.selectMarketOrLimited=1;
 			
 			this.additionValue = -1;
+			
+			//-------------------时间条件------------------------
+			let arr00=[];
+			arr00 = this.parameters;
+			this.selectTimeId=arr00[0].CommodityNo+arr00[0].MainContract;
+			
+			
+			
+			
+			
+			
 			
 		}
 	}
