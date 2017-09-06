@@ -214,6 +214,8 @@
 				if(n != undefined){
 					this.commodityNo00 = n.substring(0,n.length-4);
 					this.contractNo00 = n.substring(n.length-4,n.length);
+					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+			
 				}	
 			},
 			selectAdditionalPrice:function(n,o){

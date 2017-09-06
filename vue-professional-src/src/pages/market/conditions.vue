@@ -139,9 +139,6 @@
 						}
 					}.bind(this));
 					let o = this.$store.state.market.noObj;
-					console.log('o---->');
-					console.log(JSON.stringify(o));
-					
 					let b={
 							"Method":'ModifyCondition',
 							"Parameters":{
@@ -164,11 +161,7 @@
 								"AdditionPrice":o.AdditionPrice
 							}
 						};
-						console.log('b---->');
-						console.log(JSON.stringify(b));
 						this.tradeSocket.send(JSON.stringify(b));	
-					
-					
 					
 				}
 			},

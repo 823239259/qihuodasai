@@ -1506,7 +1506,6 @@ export default new Vuex.Store({
 				case "OnRspInsertCondition":
 					console.log('OnRspInsertCondition');
 					console.log(parameters);
-					context.state.market.conditionList.push(parameters);
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
@@ -1643,7 +1642,7 @@ export default new Vuex.Store({
 							b.term = '当日有效';
 							b.time = e0.InsertDateTime;	
 							context.state.market.conditionList.splice(i,1,parameters);
-							if(e0.Status<=2){
+							if(e0.Status<2){
 								context.state.market.noListCont.splice(i,1,b);
 							}else{
 								context.state.market.noListCont.splice(i,1);
@@ -1771,7 +1770,13 @@ export default new Vuex.Store({
 			})();
 			b.term = '当日有效';
 			b.time = e0.InsertDateTime;	
-			context.state.market.noListCont.push(b);
+			if(e0.Status<2){
+				context.state.market.conditionList.push(parameters);
+				context.state.market.noListCont.push(b);
+			}else{
+				context.state.market.triggerConditionList.push(parameters);
+				context.state.market.yesListCont.push(b);
+			}
 		},
 		updateStopLoss:function(context,parameters){
 			if(parameters.Status>2){
