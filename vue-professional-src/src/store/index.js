@@ -1527,8 +1527,6 @@ export default new Vuex.Store({
 		dealWithOnRtnConditionState:function(context,parameters){
 			context.state.market.conditionList.forEach(function(e,i){
 						if(context.state.market.noObj.ConditionNo==e.ConditionNo){
-							context.state.market.conditionList.splice(i,1,parameters);
-							
 							let e0 = parameters;
 							let b={};
 							b.name=e0.CommodityNo+e0.ContractNo;
@@ -1644,7 +1642,16 @@ export default new Vuex.Store({
 							})();
 							b.term = '当日有效';
 							b.time = e0.InsertDateTime;	
-							context.state.market.noListCont.splice(i,1,b);
+							context.state.market.conditionList.splice(i,1,parameters);
+							if(e0.Status<=2){
+								context.state.market.noListCont.splice(i,1,b);
+							}else{
+								context.state.market.noListCont.splice(i,1);
+								
+								context.state.market.triggerConditionList.push(parameters);
+								context.state.market.yesListCont.push(b);
+							}
+							
 						}
 					});
 		},
