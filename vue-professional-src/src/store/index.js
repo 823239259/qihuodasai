@@ -1490,14 +1490,16 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspQryCondition':
 					console.log('OnRspQryCondition');
+					console.log(parameters);
 					if(parameters!=null){
-						console.log(parameters);
 						context.state.market.conditionList.push(parameters);
 					}
 					break;
 				case "OnRspInsertCondition":
 					console.log('OnRspInsertCondition');
 					console.log(parameters);
+					context.state.market.conditionList.push(parameters);
+					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
 					console.log('OnRtnConditionState');	
@@ -1547,7 +1549,7 @@ export default new Vuex.Store({
 										}
 									}else{ //有附加条件
 										if(e0.CompareType==0){
-											if(e.AdditionType==0){
+											if(e0.AdditionType==0){
 												return '>'+e0.PriceTriggerPonit+' >'+e0.AdditionPrice;
 											}else if(e0.AdditionType==1){
 												return '>'+e0.PriceTriggerPonit+' <'+e0.AdditionPrice;
@@ -1633,6 +1635,124 @@ export default new Vuex.Store({
 				default:
 					break;
 			}
+		},
+		dealWithOnRspInsertCondition:function(context,parameters){
+			let e0 = parameters;
+			let b={};
+			b.name=e0.CommodityNo+e0.ContractNo;
+			b.status00 = (function(){
+					if(e0.Status==0){
+						return '运行中';
+					}else if(e0.Status==1){
+						return '暂停';
+					}else if(e0.Status==2){
+						return '已触发';
+					}else if(e0.Status==3){
+						return '已取消';
+					}else if(e0.Status==4){
+						return '插入失败';
+					}else if(e0.Status==5){
+						return '触发失败';
+					}
+				})();
+			b.type = (function(){
+					if(e0.ConditionType==0){
+						return '价格条件';
+					}else if(e0.ConditionType==1){
+						return '时间条件';
+					}else if(e0.ConditionType==2){
+						return 'AB单';
+					}
+				})();	
+			b.conditions = (function(){
+					
+					if(e0.AdditionFlag==0){ //没有附件条件
+						if(e0.CompareType==0){
+							return '>'+e0.PriceTriggerPonit;
+						}else if(e0.CompareType==1){
+							return '<'+e0.PriceTriggerPonit;
+						}else if(e0.CompareType==2){
+							return '>='+e0.PriceTriggerPonit;
+						}else if(e0.CompareType==3){
+							return '<='+e0.PriceTriggerPonit;
+						}
+					}else{ //有附加条件
+						if(e0.CompareType==0){
+							if(e0.AdditionType==0){
+								return '>'+e0.PriceTriggerPonit+' >'+e0.AdditionPrice;
+							}else if(e0.AdditionType==1){
+								return '>'+e0.PriceTriggerPonit+' <'+e0.AdditionPrice;
+							}else if(e0.AdditionType==2){
+								return '>'+e0.PriceTriggerPonit+' >='+e0.AdditionPrice;
+							}else if(e0.AdditionType==3){
+								return '>'+e0.PriceTriggerPonit+' <='+e0.AdditionPrice;
+							}
+						}else if(e0.CompareType==1){
+							if(e0.AdditionType==0){
+								return '<'+e0.PriceTriggerPonit+' >'+e0.AdditionPrice;
+							}else if(e0.AdditionType==1){
+								return '<'+e0.PriceTriggerPonit+' <'+e0.AdditionPrice;
+							}else if(e0.AdditionType==2){
+								return '<'+e0.PriceTriggerPonit+' >='+e0.AdditionPrice;
+							}else if(e0.AdditionType==3){
+								return '<'+e0.PriceTriggerPonit+' <='+e0.AdditionPrice;
+							}
+						}else if(e0.CompareType==2){
+							if(e0.AdditionType==0){
+								return '>='+e0.PriceTriggerPonit+' >'+e0.AdditionPrice;
+							}else if(e0.AdditionType==1){
+								return '>='+e0.PriceTriggerPonit+' <'+e0.AdditionPrice;
+							}else if(e0.AdditionType==2){
+								return '>='+e0.PriceTriggerPonit+' >='+e0.AdditionPrice;
+							}else if(e0.AdditionType==3){
+								return '>='+e0.PriceTriggerPonit+' <='+e0.AdditionPrice;
+							}
+						}else if(e0.CompareType==3){
+							if(e0.AdditionType==0){
+								return '<='+e0.PriceTriggerPonit+' >'+e0.AdditionPrice;
+							}else if(e0.AdditionType==1){
+								return '<='+e0.PriceTriggerPonit+' <'+e0.AdditionPrice;
+							}else if(e0.AdditionType==2){
+								return '<='+e0.PriceTriggerPonit+' >='+e0.AdditionPrice;
+							}else if(e0.AdditionType==3){
+								return '<='+e0.PriceTriggerPonit+' <='+e0.AdditionPrice;
+							}
+						}else{
+							let s = e0.TimeTriggerPoint.split(' ');
+							if(e0.AdditionType==0){
+								return s[1]+' >'+e0.AdditionPrice;
+							}else if(e.AdditionType==1){
+								return s[1]+' <'+e0.AdditionPrice;
+							}else if(e.AdditionType==2){
+								return s[1]+' >='+e0.AdditionPrice;
+							}else if(e.AdditionType==3){
+								return s[1]+' <='+e0.AdditionPrice;
+							}
+							
+						}
+					}
+					
+				})();	
+			b.order = (function(){
+				if(e0.Drection == 0){ //买
+					if(e0.OrderType==1){
+						return '买,市价,'+e0.Num+'手'
+					}else{
+						return '买,限价,'+e0.Num+'手'
+					}
+				} else if(e0.Drection == 1){//卖
+					if(e0.OrderType==1){
+						return '卖,市价,'+e0.Num+'手'
+					}else{
+						return '卖,限价,'+e0.Num+'手'
+					}
+				}
+				
+				
+			})();
+			b.term = '当日有效';
+			b.time = e0.InsertDateTime;	
+			context.state.market.noListCont.push(b);
 		},
 		updateStopLoss:function(context,parameters){
 			if(parameters.Status>2){
