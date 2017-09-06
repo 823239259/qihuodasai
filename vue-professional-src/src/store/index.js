@@ -176,6 +176,10 @@ var market = {
 		noObj:'',
 		noListCont:[],
 		
+		triggerConditionList:[],
+		yesListCont:[],
+		
+		
 		//选择K线时候的值
 		selectTime: 1,
 		//存进入详情页的No
@@ -1492,7 +1496,11 @@ export default new Vuex.Store({
 					console.log('OnRspQryCondition');
 					console.log(parameters);
 					if(parameters!=null){
-						context.state.market.conditionList.push(parameters);
+						if(parameters.Status<=2){
+							context.state.market.conditionList.push(parameters);
+						}else{
+							context.state.market.triggerConditionList.push(parameters);
+						}
 					}
 					break;
 				case "OnRspInsertCondition":
