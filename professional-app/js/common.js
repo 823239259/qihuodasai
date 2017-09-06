@@ -274,7 +274,8 @@
 var tzdr = {
 	// 系统常量
 	constants:{
-		api_domain: "http://api.dktai.cn/", 
+		api_domain: "http://test.api.dktai.cn/", 
+		//api_domain: "http://192.168.0.221/", 
 //		api_recharge "http://test.www.dktai.cn/",//充值
 //		api_domain:"http://192.168.0.72:8080/vs-api/",
 		//图片地址
