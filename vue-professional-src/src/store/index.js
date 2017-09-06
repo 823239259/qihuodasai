@@ -1504,7 +1504,20 @@ export default new Vuex.Store({
 				case 'OnRtnConditionState':
 					console.log('OnRtnConditionState');	
 					console.log(parameters);
-					context.state.market.conditionList.forEach(function(e,i){
+					context.dispatch('dealWithOnRtnConditionState',parameters);
+					
+					break;	
+				case 'OnError':
+					if(parameters!=null){
+						context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
+					}
+					break;
+				default:
+					break;
+			}
+		},
+		dealWithOnRtnConditionState:function(context,parameters){
+			context.state.market.conditionList.forEach(function(e,i){
 						if(context.state.market.noObj.ConditionNo==e.ConditionNo){
 							context.state.market.conditionList.splice(i,1,parameters);
 							
@@ -1626,15 +1639,6 @@ export default new Vuex.Store({
 							context.state.market.noListCont.splice(i,1,b);
 						}
 					});
-					break;	
-				case 'OnError':
-					if(parameters!=null){
-						context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
-					}
-					break;
-				default:
-					break;
-			}
 		},
 		dealWithOnRspInsertCondition:function(context,parameters){
 			let e0 = parameters;
