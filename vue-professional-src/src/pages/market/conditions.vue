@@ -121,6 +121,7 @@
 		methods: {
 			modify:function(){
 				this.$children[1].isshow = true;
+				console.log('this.orderType:'+this.orderType);
 				if(this.orderType == 5){
 					this.$children[1].ifshow = false;
 				}else{
@@ -374,6 +375,8 @@
 												return s[1]+' >='+e.AdditionPrice;
 											}else if(e.AdditionType==3){
 												return s[1]+' <='+e.AdditionPrice;
+											}else{
+												return s[1];
 											}
 											
 										}
@@ -521,6 +524,8 @@
 												return s[1]+' >='+e.AdditionPrice;
 											}else if(e.AdditionType==3){
 												return s[1]+' <='+e.AdditionPrice;
+											}else {
+												return s[1];
 											}
 											
 										}

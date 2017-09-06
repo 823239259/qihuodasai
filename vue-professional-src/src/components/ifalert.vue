@@ -88,7 +88,8 @@
 								时间
 							</li>
 							<li>
-								<input type="time" v-model="time" class='time'/>
+								<!--<input type="time" v-model="time" class='time'/>-->
+								<input  v-model="time" class='time'/>
 							</li>
 						</ol>
 					</li>
@@ -169,7 +170,8 @@
 				addtionPrice:'',
 				
 				timeAddtionPrice:'',
-				time:'2017-09-05 20:00:00',
+				timeAddtionPrice00:'',
+				time:'2017-09-06 20:00:00',
 				timeAdditionFlag:false,
 				timeHoldNum:1,
 				commodityNo00:'',
@@ -215,6 +217,7 @@
 					this.commodityNo00 = n.substring(0,n.length-4);
 					this.contractNo00 = n.substring(n.length-4,n.length);
 					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
 			
 				}	
 			},
@@ -228,12 +231,11 @@
 				}
 			},
 			additionValue:function(n,o){
-				
 				if(this.additionValue==5){
 					this.timeAddtionPrice='';
 					this.timeAdditionFlag = false;
 				}else{
-					this.timeAddtionPrice = this.addtionPrice;
+					this.timeAddtionPrice = this.timeAddtionPrice00;
 					this.timeAdditionFlag = true;
 				}
 				

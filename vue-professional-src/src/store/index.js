@@ -1610,12 +1610,14 @@ export default new Vuex.Store({
 											let s = e0.TimeTriggerPoint.split(' ');
 											if(e0.AdditionType==0){
 												return s[1]+' >'+e0.AdditionPrice;
-											}else if(e.AdditionType==1){
+											}else if(e0.AdditionType==1){
 												return s[1]+' <'+e0.AdditionPrice;
-											}else if(e.AdditionType==2){
+											}else if(e0.AdditionType==2){
 												return s[1]+' >='+e0.AdditionPrice;
-											}else if(e.AdditionType==3){
+											}else if(e0.AdditionType==3){
 												return s[1]+' <='+e0.AdditionPrice;
+											}else{
+												return s[1];
 											}
 											
 										}
@@ -1739,12 +1741,14 @@ export default new Vuex.Store({
 							let s = e0.TimeTriggerPoint.split(' ');
 							if(e0.AdditionType==0){
 								return s[1]+' >'+e0.AdditionPrice;
-							}else if(e.AdditionType==1){
+							}else if(e0.AdditionType==1){
 								return s[1]+' <'+e0.AdditionPrice;
-							}else if(e.AdditionType==2){
+							}else if(e0.AdditionType==2){
 								return s[1]+' >='+e0.AdditionPrice;
-							}else if(e.AdditionType==3){
+							}else if(e0.AdditionType==3){
 								return s[1]+' <='+e0.AdditionPrice;
+							}else{
+								return s[1];
 							}
 							
 						}
@@ -1772,6 +1776,8 @@ export default new Vuex.Store({
 			b.time = e0.InsertDateTime;	
 			if(e0.Status<2){
 				context.state.market.conditionList.push(parameters);
+				console.log('1111111111111111111');
+				console.log(JSON.stringify(b));
 				context.state.market.noListCont.push(b);
 			}else{
 				context.state.market.triggerConditionList.push(parameters);
