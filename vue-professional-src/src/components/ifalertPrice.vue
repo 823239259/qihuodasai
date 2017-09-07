@@ -139,59 +139,24 @@
 			},
 		},
 		watch:{
+			
 			objstrParms:function(n,o){
 				let sb= JSON.parse(n);
-				console.log(n);
-				if(sb.CompareType==5){//时间条件
+				//价格条件
+				this.selectId = sb.CommodityNo+sb.ContractNo;
+				this.selectPrice = sb.CompareType;
+				this.inputPrice = sb.PriceTriggerPonit;
+				if(sb.AdditionFlag==0){ //没有附件条件
+					this.selectAdditionalPrice = 5
+					this.inputAdditionalPrice = '';
+				}else{//有附加条件
+					this.selectAdditionalPrice = sb.AdditionType;
+					this.inputAdditionalPrice = sb.AdditionPrice;
+				}
 					
-				}else{//价格条件
-					this.selectId = sb.CommodityNo+sb.ContractNo;
-					this.selectPrice = sb.CompareType;
-					this.inputPrice = sb.PriceTriggerPonit;
-					if(sb.AdditionFlag==0){ //没有附件条件
-						this.selectAdditionalPrice = 5
-						this.inputAdditionalPrice = '';
-					}else{//有附加条件
-						this.selectAdditionalPrice = sb.AdditionType;
-						this.inputAdditionalPrice = sb.AdditionPrice;
-					}
-				}
-			},
-			selectId:function(n,o){
-				if(n != undefined){
-					this.commodityNo = n.substring(0,n.length-4);
-					this.contractNo = n.substring(n.length-4,n.length);
-					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			
-				}
-			},
-			selectTimeId:function(n,o){
-				if(n != undefined){
-					this.commodityNo00 = n.substring(0,n.length-4);
-					this.contractNo00 = n.substring(n.length-4,n.length);
-					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			
-				}	
-			},
-			selectAdditionalPrice:function(n,o){
-				if(this.selectAdditionalPrice==5){
-					 this.inputAdditionalPrice = '';
-					 this.additionFlag = false;
-				}else{
-					this.inputAdditionalPrice =this.inputPrice;
-					this.additionFlag = true;
-				}
-			},
-			additionValue:function(n,o){
-				if(this.additionValue==5){
-					this.timeAddtionPrice='';
-					this.timeAdditionFlag = false;
-				}else{
-					this.timeAddtionPrice = this.timeAddtionPrice00;
-					this.timeAdditionFlag = true;
-				}
-				
+				this.selectBuyOrSell = sb.Drection;
+				this.selectMarketOrLimited = sb.OrderType;
+				this.holdNum = sb.Num;
 			}
 		},
 		methods:{
@@ -293,7 +258,6 @@
 			}
 		},
 		mounted:function(){
-			console.log(this.objstrParms);
 			/*
 			this.selectPrice = 0;
 			let arr=[];
