@@ -720,7 +720,7 @@
 							width: 80px;
 						}
 						&:nth-child(7){
-							width: 130px;
+							width: 140px;
 						}
 						&.red{
 							color: @red;
@@ -851,7 +851,7 @@
 							width: 80px*@ip6;
 						}
 						&:nth-child(7){
-							width: 130px*@ip6;
+							width: 140px*@ip6;
 						}
 						&.red{
 							color: @red;
