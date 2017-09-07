@@ -139,6 +139,7 @@
 			},
 		},
 		watch:{
+			/*
 			objstrParms:function(n,o){
 				let sb= JSON.parse(n);
 				console.log(n);
@@ -156,7 +157,7 @@
 						this.inputAdditionalPrice = sb.AdditionPrice;
 					}
 				}
-			},
+			},*/
 			selectId:function(n,o){
 				if(n != undefined){
 					this.commodityNo = n.substring(0,n.length-4);
