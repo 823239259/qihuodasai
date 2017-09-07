@@ -2,6 +2,8 @@
 	<div id="conditions">
 		<tipsDialog :msg="msgTips"></tipsDialog>
 		<ifalert :objstr="sendObj" ref="ifalert"></ifalert>
+		<ifalertPrice :objstr="sendObjPrice" ref="ifalertPrice"></ifalertPrice>
+		<ifalertTime :objstr="sendObjTime" ref="ifalertTime"></ifalertTime>
 		<div class="head">
 			<topbar title="条件单"></topbar>
 			<back></back>
@@ -81,10 +83,12 @@
 	import back from '../../components/back.vue'
 	import cbtn from '../../components/conditionBtn.vue'
 	import ifalert from '../../components/ifalert.vue'
+	import ifalertPrice from '../../components/ifalertPrice.vue'
+	import ifalertTime from '../../components/ifalertTime.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, ifalert, tipsDialog},
+		components:{topbar, back, cbtn, ifalert, tipsDialog, ifalertPrice, ifalertTime},
 		data(){
 			return {
 				msg: '',
@@ -121,15 +125,23 @@
 			sendObj: function(){
 				if(this.sendMsg) return JSON.stringify(this.sendMsg);
 			},
+			sendObjPrice: function(){
+				if(this.sendMsg) return JSON.stringify(this.sendMsg);
+			},
+			sendObjTime: function(){
+				if(this.sendMsg) return JSON.stringify(this.sendMsg);
+			},
 		},
 		methods: {
 			modify:function(){
-				this.$children[1].isshow = true;
 				if(this.orderType == 5){
-					this.$refs.ifalert.ifshow = false;
+					this.$refs.ifalertTime.isshow = true;
 				}else{
-					this.$refs.ifalert.ifshow = true;
+					this.$refs.ifalertPrice.isshow = true;
 				}
+				
+				
+//				this.$children[1].isshow = true;
 //					this.$children[1].ifshow = false;
 					this.noListCont.forEach(function(e,i){
 						if(this.orderListId == e.ConditionNo){
