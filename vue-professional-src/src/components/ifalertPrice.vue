@@ -258,31 +258,6 @@
 			}
 		},
 		mounted:function(){
-			/*
-			this.selectPrice = 0;
-			let arr=[];
-			arr = this.parameters;
-			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
-			this.commodityNo = arr[0].CommodityNo;
-			this.contractNo = arr[0].MainContract;
-			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			this.selectAdditionalPrice = 5;
-			this.inputAdditionalPrice = this.inputPrice;
-			
-			this.selectBuyOrSell = 0;
-			this.selectMarketOrLimited=1;
-			
-			
-			//-------------------时间条件------------------------
-			this.additionValue = 5;
-			
-			let arr00=[];
-			arr00 = this.parameters;
-			this.selectTimeId=arr00[0].CommodityNo+arr00[0].MainContract;
-			this.commodityNo00 = arr00[0].CommodityNo;
-			this.contractNo00 = arr00[0].MainContract;
-			this.addtionPrice = parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			*/
 		}
 	}
 </script>

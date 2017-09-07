@@ -146,6 +146,7 @@
 					this.noListCont.forEach(function(e,i){
 						if(this.orderListId == e.ConditionNo){
 							this.sendMsg = e;
+							this.$store.state.market.noObj = e;
 						}
 					}.bind(this));
 //					let o = this.$store.state.market.noObj;

@@ -72,7 +72,7 @@
 				
 				<li class="do">
 					<div class="fontgray" @tap="close">关闭</div>
-					<div class="fontgray" @tap='confirm'>添加</div>
+					<div class="fontgray" @tap='confirm'>修改</div>
 				</li>
 			</ul>
 		</div>
@@ -141,8 +141,9 @@
 		watch:{
 			
 			objstrParms:function(n,o){
-				let sb= JSON.parse(n);
 				console.log(n);
+				
+				let sb= JSON.parse(n);
 				this.selectTimeId = sb.CommodityNo+sb.ContractNo;
 				let time00 = sb.TimeTriggerPoint.split(' ')[1];
 				this.time = time00.split(':')[0]+':'+time00.split(':')[1];
@@ -192,98 +193,42 @@
 				}
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
 				this.isshow = false;
-				if(this.ifshow==true){
-					let b={
-							"Method":'InsertCondition',
-							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
-								'CommodityNo':this.commodityNo,
-								'ContractNo':this.contractNo,
-								'Num':parseInt(this.holdNum),
-								'ConditionType':0,
-								'PriceTriggerPonit':parseFloat(this.inputPrice),
-								'CompareType':parseInt(this.selectPrice),
-								'TimeTriggerPoint':'',
-								'AB_BuyPoint':0.0,
-								'AB_SellPoint':0.0,
-								'OrderType':parseInt(this.selectMarketOrLimited),
-								'Direction':parseInt(this.selectBuyOrSell),
-								'StopLossType':5,
-								'StopLossDiff':0.0,
-								'StopWinDiff':0.0,
-								'AdditionFlag':this.additionFlag,
-								'AdditionType':parseInt(this.selectAdditionalPrice),
-								'AdditionPrice':(function(){
-													if(this.inputAdditionalPrice==''){
-														return  0;
-													}else{
-														return parseFloat(this.inputAdditionalPrice);
-													}
-												}.bind(this))()
-							}
-						};
-					this.tradeSocket.send(JSON.stringify(b));	
-				}else{
-					let b={
-							"Method":'InsertCondition',
-							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo00].ExchangeNo,
-								'CommodityNo':this.commodityNo00,
-								'ContractNo':this.contractNo00,
-								'Num':parseInt(this.timeHoldNum),
-								'ConditionType':1,
-								'PriceTriggerPonit':0.0,
-								'CompareType':5,
-								'TimeTriggerPoint':dateTime,
-								'AB_BuyPoint':0.0,
-								'AB_SellPoint':0.0,
-								'OrderType':parseInt(this.timeOrderType),
-								'Direction':parseInt(this.timeBuyOrSell),
-								'StopLossType':5,
-								'StopLossDiff':0.0,
-								'StopWinDiff':0.0,
-								'AdditionFlag':this.timeAdditionFlag,
-								'AdditionType':parseInt(this.additionValue),
-								'AdditionPrice':(function(){
-													if(this.timeAddtionPrice==''){
-														return  0;
-													}else{
-														return parseFloat(this.timeAddtionPrice);
-													}
-												}.bind(this))()
-							}
-						};
-						
-					this.tradeSocket.send(JSON.stringify(b));	
-					
-				}
+				let mmp = JSON.parse(this.objstrParms);
+				let b={
+						"Method":'ModifyCondition',
+						"Parameters":{
+							'ConditionNo':mmp.ConditionNo,
+							'ModifyFlag':0,
+							'Num':parseInt(this.timeHoldNum),
+							'ConditionType':1,
+							'PriceTriggerPonit':0.00,
+							'CompareType':5,
+							'TimeTriggerPoint':dateTime,
+							'AB_BuyPoint':0.0,
+							'AB_SellPoint':0.0,
+							'OrderType':parseInt(this.timeOrderType),
+							'StopLossType':5,
+							'Direction':parseInt(this.timeBuyOrSell),
+							'StopLossDiff':0.0,
+							'StopWinDiff':0.0,
+							'AdditionFlag':(function(){
+												if(this.additionValue==5){
+													return false;
+												}else{
+													return true;
+												}
+										}.bind(this))(),
+							'AdditionType':parseInt(this.additionValue),
+							'AdditionPrice':parseFloat(this.timeAddtionPrice)
+							
+						}
+					};
+				console.log(JSON.stringify(b));
+				this.tradeSocket.send(JSON.stringify(b));	
 				
 			}
 		},
 		mounted:function(){
-			this.selectPrice = 0;
-			let arr=[];
-			arr = this.parameters;
-			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
-			this.commodityNo = arr[0].CommodityNo;
-			this.contractNo = arr[0].MainContract;
-			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			this.selectAdditionalPrice = 5;
-			this.inputAdditionalPrice = this.inputPrice;
-			
-			this.selectBuyOrSell = 0;
-			this.selectMarketOrLimited=1;
-			
-			
-			//-------------------时间条件------------------------
-			this.additionValue = 5;
-			
-			let arr00=[];
-			arr00 = this.parameters;
-			this.selectTimeId=arr00[0].CommodityNo+arr00[0].MainContract;
-			this.commodityNo00 = arr00[0].CommodityNo;
-			this.contractNo00 = arr00[0].MainContract;
-			this.addtionPrice = parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
 			
 		}
 	}
