@@ -48,7 +48,7 @@
 		},
 		methods: {
 			refreshCode: function(){
-				console.log(imgPath);
+//				console.log(imgPath);
 				
 			},
 			close: function(){
