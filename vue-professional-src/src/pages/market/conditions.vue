@@ -332,6 +332,21 @@
 											return '>='+e.PriceTriggerPonit;
 										}else if(e.CompareType==3){
 											return '<='+e.PriceTriggerPonit;
+										}else{
+											
+											let s = e.TimeTriggerPoint.split(' ');
+											if(e.AdditionType==0){
+												return s[1]+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return s[1]+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return s[1]+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return s[1]+' <='+e.AdditionPrice;
+											}else{
+												return s[1];
+											}
+											
 										}
 									}else{ //有附加条件
 										if(e.CompareType==0){
@@ -481,6 +496,19 @@
 											return '>='+e.PriceTriggerPonit;
 										}else if(e.CompareType==3){
 											return '<='+e.PriceTriggerPonit;
+										}else{
+											let s = e.TimeTriggerPoint.split(' ');
+											if(e.AdditionType==0){
+												return s[1]+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return s[1]+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return s[1]+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return s[1]+' <='+e.AdditionPrice;
+											}else {
+												return s[1];
+											}
 										}
 									}else{ //有附加条件
 										if(e.CompareType==0){
