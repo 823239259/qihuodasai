@@ -46,28 +46,23 @@
 				</div>
 			</div>
 		</template>
-			<guide v-if='guideshow'></guide>
+		<guide v-if='guideshow'></guide>
 	</div>
 
 </template>
 
 <script>
-	//	import store from '../store'
 	import tipsDialog from '../components/tipsDialog.vue'
 	import topbar from '../components/Topbar.vue'
 	import guide from './Guide.vue'
-	
-	import Vue from 'vue'
-	import Vuex from 'vuex'
+//	import Vue from 'vue'
+//	import Vuex from 'vuex'
 	import VueNativeSock from 'vue-native-websocket'
-//	import QuoteMethod from '../assets/n_quote_vo'
-//	import Quote from '../assets/QuoteUtils'
 	import { mapMutations,mapActions } from 'vuex'
 	
 	
 	export default {
 		name: 'home',
-		//		store,
 		data() {
 			return {
 				time: 3,
@@ -107,7 +102,10 @@
 			},
 			isBack: function(){
 				return this.$route.query.isBack;
-			}
+			},
+			PATH: function(){
+				return this.$store.getters.PATH;
+			},
 		},
 		watch: {
 			quoteConnectedMsg: function(n, o){
@@ -175,10 +173,30 @@
 					}
 				}.bind(this));
 				this.$router.push({path: '/orderdetail'});
+			},
+			getVersion: function(){
+				this.$http.post(this.PATH + '/getVersion', {emulateJSON: true}, {
+						params: {},
+						timeout: 5000
+				}).then(function(e) {
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							this.$store.state.version.ios = JSON.parse(data.data.version).iOS.version;
+							this.$store.state.version.android = JSON.parse(data.data.version).Android.version;
+						}
+					}
+				}.bind(this), function() {
+					this.$children[0].isShow = true;
+					this.msg = '网络不给力，请稍后再试！'
+				});
 			}
 		},
 		mounted: function() {
+			//初始化行情
 			this.initQuoteClient();
+			//取当前版本号
+			this.getVersion();
 			var sw = window.screen.width;
 			if(this.isconnected) {
 				if(sw <= 370) {
