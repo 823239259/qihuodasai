@@ -260,12 +260,22 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				console.log(this.time);
-				
+				function getNowFormatDate() {
+				    let date = new Date();
+				    let seperator1 = "-";
+				    let month = date.getMonth() + 1;
+				    let strDate = date.getDate();
+				    if (month >= 1 && month <= 9) {
+				        month = "0" + month;
+				    }
+				    if (strDate >= 0 && strDate <= 9) {
+				        strDate = "0" + strDate;
+				    }
+				    let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+				    return currentdate;
+				}
+				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
 				this.isshow = false;
-				console.log(this.templateList[this.commodityNo]);
-				console.log('selectAdditionalPrice:'+this.selectAdditionalPrice);
-				console.log('AdditionFlag:'+this.additionFlag);
 				if(this.ifshow==true){
 					let b={
 							"Method":'InsertCondition',
@@ -308,7 +318,7 @@
 								'ConditionType':1,
 								'PriceTriggerPonit':0.0,
 								'CompareType':5,
-								'TimeTriggerPoint':this.time,
+								'TimeTriggerPoint':dateTime,
 								'AB_BuyPoint':0.0,
 								'AB_SellPoint':0.0,
 								'OrderType':parseInt(this.timeOrderType),
@@ -328,7 +338,6 @@
 							}
 						};
 						
-					console.log(JSON.stringify(b));	
 					this.tradeSocket.send(JSON.stringify(b));	
 					
 				}

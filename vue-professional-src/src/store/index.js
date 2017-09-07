@@ -1534,6 +1534,31 @@ export default new Vuex.Store({
 						if(context.state.market.noObj.ConditionNo==e.ConditionNo){
 							let e0 = parameters;
 							let b={};
+							
+							b.AB_BuyPoint = e0.AB_BuyPoint;
+							b.AB_SellPoint = e0.AB_SellPoint;
+							b.AdditionFlag=e0.AdditionFlag;
+							b.AdditionPrice = e0.AdditionPrice;
+							b.AdditionType = e0.AdditionType;
+							b.CommodityNo = e0.CommodityNo;
+							b.CompareType = e0.CompareType;
+							b.ConditionNo = e0.ConditionNo;
+							b.ConditionType = e0.ConditionType;
+							b.ContractNo = e0.ContractNo;
+							b.Drection = e0.Drection;
+							b.ExchangeNo = e0.ExchangeNo;
+							b.InsertDateTime = e0.InsertDateTime;
+							b.Num = e0.Num;
+							b.OrderType = e0.OrderType;
+							b.PriceTriggerPonit = e0.PriceTriggerPonit;
+							b.Status = e0.Status;
+							b.StatusMsg = e0.StatusMsg;
+							b.StopLossDiff = e0.StopLossDiff;
+							b.StopLossType = e0.StopLossType;
+							b.StopLossWin = e0.StopLossWin;
+							b.TimeTriggerPoint = e0.TimeTriggerPoint;
+							b.TriggedTime = e0.TriggedTime;
+							
 							b.name=e0.CommodityNo+e0.ContractNo;
 							b.status00 = (function(){
 									if(e0.Status==0){
@@ -1570,6 +1595,20 @@ export default new Vuex.Store({
 											return '>='+e0.PriceTriggerPonit;
 										}else if(e0.CompareType==3){
 											return '<='+e0.PriceTriggerPonit;
+										}else{
+											let s = e0.TimeTriggerPoint.split(' ');
+											if(e0.AdditionType==0){
+												return s[1]+' >'+e0.AdditionPrice;
+											}else if(e0.AdditionType==1){
+												return s[1]+' <'+e0.AdditionPrice;
+											}else if(e0.AdditionType==2){
+												return s[1]+' >='+e0.AdditionPrice;
+											}else if(e0.AdditionType==3){
+												return s[1]+' <='+e0.AdditionPrice;
+											}else{
+												return s[1];
+											}
+											
 										}
 									}else{ //有附加条件
 										if(e0.CompareType==0){
@@ -1665,6 +1704,32 @@ export default new Vuex.Store({
 		dealWithOnRspInsertCondition:function(context,parameters){
 			let e0 = parameters;
 			let b={};
+			
+			b.AB_BuyPoint = e0.AB_BuyPoint;
+			b.AB_SellPoint = e0.AB_SellPoint;
+			b.AdditionFlag=e0.AdditionFlag;
+			b.AdditionPrice = e0.AdditionPrice;
+			b.AdditionType = e0.AdditionType;
+			b.CommodityNo = e0.CommodityNo;
+			b.CompareType = e0.CompareType;
+			b.ConditionNo = e0.ConditionNo;
+			b.ConditionType = e0.ConditionType;
+			b.ContractNo = e0.ContractNo;
+			b.Drection = e0.Drection;
+			b.ExchangeNo = e0.ExchangeNo;
+			b.InsertDateTime = e0.InsertDateTime;
+			b.Num = e0.Num;
+			b.OrderType = e0.OrderType;
+			b.PriceTriggerPonit = e0.PriceTriggerPonit;
+			b.Status = e0.Status;
+			b.StatusMsg = e0.StatusMsg;
+			b.StopLossDiff = e0.StopLossDiff;
+			b.StopLossType = e0.StopLossType;
+			b.StopLossWin = e0.StopLossWin;
+			b.TimeTriggerPoint = e0.TimeTriggerPoint;
+			b.TriggedTime = e0.TriggedTime;
+			
+			
 			b.name=e0.CommodityNo+e0.ContractNo;
 			b.status00 = (function(){
 					if(e0.Status==0){
@@ -1701,6 +1766,19 @@ export default new Vuex.Store({
 							return '>='+e0.PriceTriggerPonit;
 						}else if(e0.CompareType==3){
 							return '<='+e0.PriceTriggerPonit;
+						}else{
+							let s = e0.TimeTriggerPoint.split(' ');
+							if(e0.AdditionType==0){
+								return s[1]+' >'+e0.AdditionPrice;
+							}else if(e0.AdditionType==1){
+								return s[1]+' <'+e0.AdditionPrice;
+							}else if(e0.AdditionType==2){
+								return s[1]+' >='+e0.AdditionPrice;
+							}else if(e0.AdditionType==3){
+								return s[1]+' <='+e0.AdditionPrice;
+							}else{
+								return s[1];
+							}
 						}
 					}else{ //有附加条件
 						if(e0.CompareType==0){
@@ -1782,7 +1860,6 @@ export default new Vuex.Store({
 			b.time = e0.InsertDateTime;	
 			if(e0.Status<2){
 				context.state.market.conditionList.push(parameters);
-				console.log('1111111111111111111');
 				console.log(JSON.stringify(b));
 				context.state.market.noListCont.push(b);
 			}else{
