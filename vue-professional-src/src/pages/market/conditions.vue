@@ -674,13 +674,13 @@
 						font-size: @fs14;
 						margin: 0 0.4%;
 						&:nth-child(1){
-							width: 130px;
+							width: 100px;
 						}
 						&:nth-child(2){
 							width: 65px;
 						}
 						&:nth-child(3){
-							width: 50px;
+							width: 80px;
 						}
 						&:nth-child(4){
 							width: 150px;
