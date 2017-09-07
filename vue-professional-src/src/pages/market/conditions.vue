@@ -27,7 +27,7 @@
 						<span>下单时间</span>
 					</li>
 					<template v-for="k in noListCont">
-						<li @tap="listTap" :id="k.ConditionNo" :status='k.Status'>
+						<li @tap="listTap" :id="k.ConditionNo" :status='k.Status' :compareType='k.CompareType'>
 							<div class="list_cont">
 								<span>{{k.name}}</span>
 								<span>{{k.status00}}</span>
@@ -42,8 +42,8 @@
 				</ul>
 				<div class="list_tools">
 					<cbtn :name="statusName" @tap.native="suspendEvent"></cbtn>
-					<cbtn name="修改"></cbtn>
-					<cbtn name="删除"></cbtn>
+					<cbtn name="修改" @tap.native="modify"></cbtn>
+					<cbtn name="删除" @tap.native="deleteEvent"></cbtn>
 				</div>
 			</div>
 			<div id="yesCont" class="list" v-else="isShow">
@@ -61,7 +61,7 @@
 						<li @tap="listTap" id="123">
 							<div class="list_cont">
 								<span>{{k.name}}</span>
-								<span>{{k.status}}</span>
+								<span>{{k.status00}}</span>
 								<span>{{k.type}}</span>
 								<span>{{k.conditions}}</span>
 								<span>{{k.order}}</span>
@@ -92,9 +92,10 @@
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
 				orderListId:'',
 //				noListCont:[],
-				yesListCont:[],
+//				yesListCont:[],
 				orderStatus: '',
-				statusName: '暂停'
+				statusName: '暂停',
+				orderType: ''
 			}
 		},
 		computed:{
@@ -104,17 +105,68 @@
 			conditionList(){
 				return this.$store.state.market.conditionList;
 			},
+			triggerConditionList(){
+				return this.$store.state.market.triggerConditionList;
+			},
 			noListCont(){
 				return this.$store.state.market.noListCont;
+			},
+			yesListCont(){
+				return this.$store.state.market.yesListCont;
 			},
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
 			}
 		},
 		methods: {
+			modify:function(){
+				this.$children[1].isshow = true;
+				console.log('this.orderType:'+this.orderType);
+				if(this.orderType == 5){
+					this.$children[1].ifshow = false;
+				}else{
+					this.$children[1].ifshow = true;
+				}
+				
+			},
+			deleteEvent:function(){
+				if(this.orderListId == '' || this.orderListId == null){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请选择一条数据';
+				}else{
+					this.noListCont.forEach(function(e,i){
+						if(this.orderListId==e.ConditionNo){
+							this.$store.state.market.noObj = e;
+						}
+					}.bind(this));
+					let o = this.$store.state.market.noObj;
+					let b={
+							"Method":'ModifyCondition',
+							"Parameters":{
+								"ConditionNo":o.ConditionNo,
+								"ModifyFlag":1, //删除
+								"Num":o.Num,
+								"ConditionType":o.ConditionType,
+								"PriceTriggerPonit":o.PriceTriggerPonit,
+								"CompareType":o.CompareType,
+								"TimeTriggerPoint":o.TimeTriggerPoint,
+								"AB_BuyPoint":o.AB_BuyPoint,
+								"AB_SellPoint":o.AB_SellPoint,
+								"OrderType":o.OrderType,
+								"StopLossType":o.StopLossType,
+								"Direction":o.Drection,
+								"StopLossDiff":0.0,
+								"StopWinDiff":0.0,
+								"AdditionFlag":o.AdditionFlag,
+								"AdditionType":o.AdditionType,
+								"AdditionPrice":o.AdditionPrice
+							}
+						};
+						this.tradeSocket.send(JSON.stringify(b));	
+					
+				}
+			},
 			suspendEvent:function(){
-				
-				
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
@@ -192,6 +244,7 @@
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = $(obj.currentTarget).attr("id");
 					this.orderStatus = $(obj.currentTarget).attr("status");
+					this.orderType = $(obj.currentTarget).attr("compareType");
 					if(this.orderStatus == 0){
 						this.statusName = '暂停';
 					}else{
@@ -311,6 +364,21 @@
 											}else if(e.AdditionType==3){
 												return '<='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
 											}
+										}else{
+											
+											let s = e.TimeTriggerPoint.split(' ');
+											if(e.AdditionType==0){
+												return s[1]+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return s[1]+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return s[1]+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return s[1]+' <='+e.AdditionPrice;
+											}else{
+												return s[1];
+											}
+											
 										}
 									}
 									
@@ -338,6 +406,155 @@
 					this.noListCont.push(b);
 					
 				}.bind(this));
+			},
+			regroupTriggerConditionList:function(){
+				this.triggerConditionList.forEach(function(e,i){
+					let b={};
+					b.AB_BuyPoint = e.AB_BuyPoint;
+					b.AB_SellPoint = e.AB_SellPoint;
+					b.AdditionFlag=e.AdditionFlag;
+					b.AdditionPrice = e.AdditionPrice;
+					b.AdditionType = e.AdditionType;
+					b.CommodityNo = e.CommodityNo;
+					b.CompareType = e.CompareType;
+					b.ConditionNo = e.ConditionNo;
+					b.ConditionType = e.ConditionType;
+					b.ContractNo = e.ContractNo;
+					b.Drection = e.Drection;
+					b.ExchangeNo = e.ExchangeNo;
+					b.InsertDateTime = e.InsertDateTime;
+					b.Num = e.Num;
+					b.OrderType = e.OrderType;
+					b.PriceTriggerPonit = e.PriceTriggerPonit;
+					b.Status = e.Status;
+					b.StatusMsg = e.StatusMsg;
+					b.StopLossDiff = e.StopLossDiff;
+					b.StopLossType = e.StopLossType;
+					b.StopLossWin = e.StopLossWin;
+					b.TimeTriggerPoint = e.TimeTriggerPoint;
+					b.TriggedTime = e.TriggedTime;
+					
+					b.name=e.CommodityNo+e.ContractNo;
+					b.status00 = (function(){
+									if(e.Status==0){
+										return '运行中';
+									}else if(e.Status==1){
+										return '暂停';
+									}else if(e.Status==2){
+										return '已触发';
+									}else if(e.Status==3){
+										return '已取消';
+									}else if(e.Status==4){
+										return '插入失败';
+									}else if(e.Status==5){
+										return '触发失败';
+									}
+								})();
+					b.type = (function(){
+									if(e.ConditionType==0){
+										return '价格条件';
+									}else if(e.ConditionType==1){
+										return '时间条件';
+									}else if(e.ConditionType==2){
+										return 'AB单';
+									}
+								})();
+					
+					b.conditions = (function(){
+									
+									if(e.AdditionFlag==0){ //没有附件条件
+										if(e.CompareType==0){
+											return '>'+e.PriceTriggerPonit;
+										}else if(e.CompareType==1){
+											return '<'+e.PriceTriggerPonit;
+										}else if(e.CompareType==2){
+											return '>='+e.PriceTriggerPonit;
+										}else if(e.CompareType==3){
+											return '<='+e.PriceTriggerPonit;
+										}
+									}else{ //有附加条件
+										if(e.CompareType==0){
+											if(e.AdditionType==0){
+												return '>'+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '>'+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '>'+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '>'+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else if(e.CompareType==1){
+											if(e.AdditionType==0){
+												return '<'+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '<'+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '<'+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '<'+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else if(e.CompareType==2){
+											if(e.AdditionType==0){
+												return '>='+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '>='+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '>='+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '>='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else if(e.CompareType==3){
+											if(e.AdditionType==0){
+												return '<='+e.PriceTriggerPonit+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return '<='+e.PriceTriggerPonit+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return '<='+e.PriceTriggerPonit+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return '<='+e.PriceTriggerPonit+' <='+e.AdditionPrice;
+											}
+										}else{
+											
+											let s = e.TimeTriggerPoint.split(' ');
+											if(e.AdditionType==0){
+												return s[1]+' >'+e.AdditionPrice;
+											}else if(e.AdditionType==1){
+												return s[1]+' <'+e.AdditionPrice;
+											}else if(e.AdditionType==2){
+												return s[1]+' >='+e.AdditionPrice;
+											}else if(e.AdditionType==3){
+												return s[1]+' <='+e.AdditionPrice;
+											}else {
+												return s[1];
+											}
+											
+										}
+									}
+									
+								})();
+					b.order = (function(){
+								if(e.Drection == 0){ //买
+									if(e.OrderType==1){
+										return '买,市价,'+e.Num+'手'
+									}else{
+										return '买,限价,'+e.Num+'手'
+									}
+								} else if(e.Drection == 1){//卖
+									if(e.OrderType==1){
+										return '卖,市价,'+e.Num+'手'
+									}else{
+										return '卖,限价,'+e.Num+'手'
+									}
+								}
+								
+								
+							})();
+					b.term = '当日有效';
+					b.time = e.InsertDateTime;
+					
+					this.yesListCont.push(b);
+					
+				}.bind(this));
 			}
 		},
 		mounted: function(){
@@ -348,6 +565,7 @@
 			var h = $("#topbar").height() + $(".tab_box").height() + $(".list ul:first-child").height();
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 			this.regroupConditionList();
+			this.regroupTriggerConditionList();
 		},
 		activated: function(){
 			//不更新画图

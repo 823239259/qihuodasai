@@ -88,7 +88,8 @@
 								时间
 							</li>
 							<li>
-								<input type="time" value='18:30:15' class='time'/>
+								<!--<input type="time" v-model="time" class='time'/>-->
+								<input  v-model="time" class='time'/>
 							</li>
 						</ol>
 					</li>
@@ -99,13 +100,13 @@
 							</li>
 							<li>
 								<select class="fontwhite selectshort" v-model="additionValue">
-									<option value="-1">附加</option>
+									<option value="5">附加</option>
 									<option value="0">></option>
 									<option value="2">>=</option>
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" value="89.64" />
+								<input type="text" v-model="timeAddtionPrice" />
 							</li>
 						</ol>
 					</li>
@@ -113,18 +114,18 @@
 						<ol>
 							<li class="fontgray">操作</li>
 							<li>
-								<select class="fontwhite  selectshort">
-									<option>&nbsp;&nbsp;买</option>
-									<option>&nbsp;&nbsp;卖</option>
+								<select class="fontwhite  selectshort" v-model="timeBuyOrSell">
+									<option value="0">&nbsp;&nbsp;买</option>
+									<option value="1">&nbsp;&nbsp;卖</option>
 								</select>
-								<select class="fontwhite selectshort">
-									<option>市价</option>
-									<option>限价</option>
+								<select class="fontwhite selectshort" v-model="timeOrderType">
+									<option value="1">市价</option>
+									<option value="2">限价</option>
 								</select>
 								<span class="fontgray lot">手数</span>
 							</li>
 							<li>
-								<input type="text" value="10" class="fontwhite" />
+								<input type="text" v-model="timeHoldNum" class="fontwhite" />
 							</li>
 						</ol>
 					</li>
@@ -165,8 +166,21 @@
 				selectBuyOrSell:'',
 				selectMarketOrLimited:'',
 				holdNum:1,
+				additionFlag:false,
+				addtionPrice:'',
+				
+				timeAddtionPrice:'',
+				timeAddtionPrice00:'',
+				time:'2017-09-06 20:00:00',
+				timeAdditionFlag:false,
+				timeHoldNum:1,
+				commodityNo00:'',
+				contractNo00:'',
+				selectTimeId:'',
+				timeOrderType:1,
+				timeBuyOrSell:0,
 				additionValue:'',
-				additionFlag:false
+				
 			}
 		},
 		computed:{
@@ -198,17 +212,32 @@
 			
 				}
 			},
+			selectTimeId:function(n,o){
+				if(n != undefined){
+					this.commodityNo00 = n.substring(0,n.length-4);
+					this.contractNo00 = n.substring(n.length-4,n.length);
+					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+			
+				}	
+			},
 			selectAdditionalPrice:function(n,o){
 				if(this.selectAdditionalPrice==5){
 					 this.inputAdditionalPrice = '';
 					 this.additionFlag = false;
-					 this.inputAdditionalPrice='';
 				}else{
 					this.inputAdditionalPrice =this.inputPrice;
-					 this.additionFlag = true;
+					this.additionFlag = true;
 				}
 			},
 			additionValue:function(n,o){
+				if(this.additionValue==5){
+					this.timeAddtionPrice='';
+					this.timeAdditionFlag = false;
+				}else{
+					this.timeAddtionPrice = this.timeAddtionPrice00;
+					this.timeAdditionFlag = true;
+				}
 				
 			}
 		},
@@ -260,10 +289,41 @@
 												}.bind(this))()
 							}
 						};
-					console.log(JSON.stringify(b));	
 					this.tradeSocket.send(JSON.stringify(b));	
 				}else{
-					console.log(this.selectTimePrice); 
+					let b={
+							"Method":'InsertCondition',
+							"Parameters":{
+								'ExchangeNo':this.templateList[this.commodityNo00].ExchangeNo,
+								'CommodityNo':this.commodityNo00,
+								'ContractNo':this.contractNo00,
+								'Num':parseInt(this.timeHoldNum),
+								'ConditionType':1,
+								'PriceTriggerPonit':0.0,
+								'CompareType':5,
+								'TimeTriggerPoint':this.time,
+								'AB_BuyPoint':0.0,
+								'AB_SellPoint':0.0,
+								'OrderType':parseInt(this.timeOrderType),
+								'Direction':parseInt(this.timeBuyOrSell),
+								'StopLossType':5,
+								'StopLossDiff':0.0,
+								'StopWinDiff':0.0,
+								'AdditionFlag':this.timeAdditionFlag,
+								'AdditionType':parseInt(this.additionValue),
+								'AdditionPrice':(function(){
+													if(this.timeAddtionPrice==''){
+														return  0;
+													}else{
+														return parseFloat(this.timeAddtionPrice);
+													}
+												}.bind(this))()
+							}
+						};
+						
+					console.log(JSON.stringify(b));	
+					this.tradeSocket.send(JSON.stringify(b));	
+					
 				}
 				
 			}
@@ -274,7 +334,7 @@
 			arr = this.parameters;
 			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
 			this.commodityNo = arr[0].CommodityNo;
-			
+			this.contractNo = arr[0].MainContract;
 			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
 			this.selectAdditionalPrice = 5;
 			this.inputAdditionalPrice = this.inputPrice;
@@ -282,18 +342,16 @@
 			this.selectBuyOrSell = 0;
 			this.selectMarketOrLimited=1;
 			
-			this.additionValue = -1;
 			
 			//-------------------时间条件------------------------
+			this.additionValue = 5;
+			
 			let arr00=[];
 			arr00 = this.parameters;
 			this.selectTimeId=arr00[0].CommodityNo+arr00[0].MainContract;
-			
-			
-			
-			
-			
-			
+			this.commodityNo00 = arr00[0].CommodityNo;
+			this.contractNo00 = arr00[0].MainContract;
+			this.addtionPrice = parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
 			
 		}
 	}
