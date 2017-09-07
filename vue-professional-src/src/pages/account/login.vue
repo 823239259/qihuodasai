@@ -116,24 +116,35 @@
 							var num = data.data.num;
 							if(num > 2){
 								this.$refs.codeDialog.isshow = true;
-								this.$http.get(this.PATH + '/validate.code?1= Math.random()*10000',{emulateJSON: true}, {
-									params: {},
-									timeout: 5000
-								}).then(function(e){
-									if(this.environment == 'test'){
-										this.path = "http://test.api.dktai.cn/" + e.url.substr(12);
-									}else{
-										this.path = "http://api.dktai.cn/" + e.url.substr(12);
-									}
-									this.str = {
-										loginName: this.phone,
-										password: this.pwd,
-										path: this.path
-									};
-								}.bind(this),function(){
-									this.$refs.dialog.isShow = true;
-									this.msg = '网络不给力，请稍后再试！'
-								});
+								if(this.environment == 'test'){
+									this.path = "http://test.api.dktai.cn/validate.code?1= Math.random()*10000";
+								}else{
+									this.path = "http://api.dktai.cn/validate.code?1= Math.random()*10000" ;
+								}
+								this.str = {
+									loginName: this.phone,
+									password: this.pwd,
+									path: this.path
+								};
+//								this.$http.get(this.PATH + '/validate.code?1= Math.random()*10000',{emulateJSON: true}, {
+//									params: {},
+//									headers: {"Content-Type": "x-www-from-urlencoded"},
+//									timeout: 5000
+//								}).then(function(e){
+//									if(this.environment == 'test'){
+//										this.path = "http://test.api.dktai.cn/" + e.url.substr(4);
+//									}else{
+//										this.path = "http://api.dktai.cn/" + e.url.substr(4);
+//									}
+//									this.str = {
+//										loginName: this.phone,
+//										password: this.pwd,
+//										path: this.path
+//									};
+//								}.bind(this),function(){
+//									this.$refs.dialog.isShow = true;
+//									this.msg = '网络不给力，请稍后再试！'
+//								});
 							}else{
 								this.$refs.dialog.isShow = true;
 								this.msg = data.message;

@@ -13,10 +13,9 @@
 				<input type="number" id="phone" placeholder="请输入您的手机号" v-model.trim="phone" />
 			</div>
 			<div class="ipt_row">
-				<label for="code">图形验证码</label>
-				<input type="number" id="code" placeholder="请输入验证码" v-model.trim="code" />
-				<a href="javascript:void(0);" class="code"><img :src="imgPath"/></a>
-				<!--<span class="code" @tap="getCode">{{volid ? info : (time + '秒')}}</span>-->
+				<label for="imgCode">图形验证码</label>
+				<input type="number" id="imgCode" placeholder="请输入验证码" v-model.trim="imgCode" />
+				<a href="javascript:void(0);" class="code imgCode"><img :src="imgPath"/></a>
 			</div>
 			<div class="ipt_row">
 				<label for="code">手机验证码</label>
@@ -62,7 +61,11 @@
 				return this.$store.state.environment;
 			},
 			imgPath: function(){
-				if(this.path) return this.path;
+				if(this.environment == 'test'){
+					return "http://test.api.dktai.cn/validate.code?1= Math.random()*10000";
+				}else{
+					return "http://api.dktai.cn/validate.code?1= Math.random()*10000" ;
+				}
 			}
 		},
 		data(){
@@ -72,11 +75,11 @@
 				phone: '',
 				pwd: '',
 				code: '',
+				imgCode: '',
 				time: 0,
 				info:'获取验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
-				path: ''
 			}
 		},
 		methods: {
@@ -89,21 +92,6 @@
 					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
 				}
 			},
-			getImgCode: function(){
-				this.$http.get(this.PATH + '/validate.code?1= Math.random()*10000',{emulateJSON: true}, {
-					params: {},
-					timeout: 5000
-				}).then(function(e){
-					if(this.environment == 'test'){
-						this.path = "http://test.api.dktai.cn/" + e.url.substr(12);
-					}else{
-						this.path = "http://api.dktai.cn/" + e.url.substr(12);
-					}
-				}.bind(this),function(){
-					this.$refs.dialog.isShow = true;
-					this.msg = '网络不给力，请稍后再试！'
-				});
-			},
 			getCode: function(e){
 				if($(e.target).hasClass('current')) return false;
 				if(this.phone == ''){
@@ -112,6 +100,9 @@
 				}else if(this.phoneReg.test(this.phone) == false){
 					this.$children[0].isShow = true;
 					this.msg = '手机号格式错误';
+				}else if(this.imgCode == ''){
+					this.$children[0].isShow = true;
+					this.msg = '请输入图形验证码';
 				}else{
 					//页面效果
 					$(e.target).addClass('current');
@@ -180,9 +171,12 @@
 				}else if(this.phoneReg.test(this.phone) == false){
 					this.$children[0].isShow = true;
 					this.msg = '手机号格式错误';
+				}else if(this.imgCode == ''){
+					this.$children[0].isShow = true;
+					this.msg = '请输入图形验证码';
 				}else if(this.code == ''){
 					this.$children[0].isShow = true;
-					this.msg = '请输入验证码';
+					this.msg = '请输入手机验证码';
 				}else if(this.pwd == ''){
 					this.$children[0].isShow = true;
 					this.msg = '请输入密码';
@@ -191,74 +185,51 @@
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					//检验验证码
-					this.$http.post(this.PATH + '/validate/sms', {emulateJSON: true}, {
+//					this.$http.post(this.PATH + '/validate/sms', {emulateJSON: true}, {
+//							params: {
+//								mobile: this.phone,
+//								code: this.code
+//							},
+//							timeout: 5000
+//					}).then(function(e) {
+//						var data = e.body;
+//						if(data.success == true ){
+//							if(data.code == 1){
+					//注册请求
+					this.$http.post(this.PATH + '/regist', {emulateJSON: true}, {
 							params: {
 								mobile: this.phone,
-								code: this.code
+								password: this.pwd
 							},
 							timeout: 5000
 					}).then(function(e) {
 						var data = e.body;
 						if(data.success == true ){
 							if(data.code == 1){
-								//注册请求
-								this.$http.post(this.PATH + '/regist', {emulateJSON: true}, {
-										params: {
-											mobile: this.phone,
-											password: this.pwd
-										},
-										timeout: 5000
-								}).then(function(e) {
-									var data = e.body;
-									if(data.success == true ){
-										if(data.code == 1){
-											this.$children[0].isShow = true;
-											this.msg = '注册成功';
-											this.phone = '';
-											this.pwd = '';
-											this.code = '';
-											this.time = 0;
-											setTimeout(function(){
-												this.isShow = false;
-												this.$router.replace({path: '/login'});
-											}.bind(this), 1000);
-										}
-									}else{
-										switch (data.code){
-											case '2':
-												this.$children[0].isShow = true;
-												this.msg = '注册失败';
-												break;
-											case '3':
-												this.$children[0].isShow = true;
-												this.msg = '手机号码已经存在';
-												break;
-											case '4':
-												this.$children[0].isShow = true;
-												this.msg = '验证码错误';
-												break;
-											default:
-												break;
-										}
-									}
-								}.bind(this), function() {
-									this.$children[0].isShow = true;
-									this.msg = '网络不给力，请稍后再试！'
-								});
+								this.$children[0].isShow = true;
+								this.msg = '注册成功';
+								this.phone = '';
+								this.pwd = '';
+								this.code = '';
+								this.time = 0;
+								setTimeout(function(){
+									this.isShow = false;
+									this.$router.replace({path: '/login'});
+								}.bind(this), 1000);
 							}
 						}else{
 							switch (data.code){
+								case '2':
+									this.$children[0].isShow = true;
+									this.msg = '注册失败';
+									break;
 								case '3':
 									this.$children[0].isShow = true;
-									this.msg = '手机号码已被注册';
+									this.msg = '手机号码已经存在';
 									break;
 								case '4':
 									this.$children[0].isShow = true;
 									this.msg = '验证码错误';
-									break;
-								case '5':
-									this.$children[0].isShow = true;
-									this.msg = '验证码失效';
 									break;
 								default:
 									break;
@@ -268,6 +239,28 @@
 						this.$children[0].isShow = true;
 						this.msg = '网络不给力，请稍后再试！'
 					});
+//						}else{
+//							switch (data.code){
+//								case '3':
+//									this.$children[0].isShow = true;
+//									this.msg = '手机号码已被注册';
+//									break;
+//								case '4':
+//									this.$children[0].isShow = true;
+//									this.msg = '验证码错误';
+//									break;
+//								case '5':
+//									this.$children[0].isShow = true;
+//									this.msg = '验证码失效';
+//									break;
+//								default:
+//									break;
+//							}
+//						}
+//					}.bind(this), function() {
+//						this.$children[0].isShow = true;
+//						this.msg = '网络不给力，请稍后再试！'
+//					});
 				}
 			},
 			toLogin: function(){
@@ -311,6 +304,13 @@
     				color: @yellow;
     			}
     		}
+    		#imgCode{
+    			padding: 10px 120px 10px 110px;
+    		}
+    		.imgCode, .imgCode img{
+    			width: 110px;
+    			height: 52px;
+    		}
     	}
     	.bottom_tips{
     		position: fixed;
@@ -350,6 +350,13 @@
     				color: @yellow;
     			}
     		}
+    		#imgCode{
+    			padding: 10px*@ip6 120px*@ip6 10px*@ip6 110px*@ip6;
+    		}
+    		.imgCode, .imgCode img{
+    			width: 110px*@ip6;
+    			height: 52px*@ip6;
+    		}
     	}
     	.bottom_tips{
     		position: fixed;
@@ -388,6 +395,13 @@
     			span:hover{
     				color: @yellow;
     			}
+    		}
+    		#imgCode{
+    			padding: 10px*@ip5 120px*@ip5 10px*@ip5 110px*@ip5;
+    		}
+    		.imgCode, .imgCode img{
+    			width: 110px*@ip5;
+    			height: 52px*@ip5;
     		}
     	}
     	.bottom_tips{

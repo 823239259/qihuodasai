@@ -3,7 +3,7 @@
 		<div>
 			<ul class="selectbar">
 				<li class="fontgray fl" :class="{selected: ifshow}" @tap="selection">价格条件</li>
-				<li class="fontgray fl" :class="{selected: !ifshow}"@tap="selection">时间条件</li>
+				<li class="fontgray fl" :class="{selected: !ifshow}" @tap="selection">时间条件</li>
 			</ul>
 			<ul class="content">
 				<template v-if="ifshow">
@@ -19,9 +19,7 @@
 					</li>
 					<li>
 						<ol>
-							<li class="fontgray">
-								价格
-							</li>
+							<li class="fontgray">价格</li>
 							<li>
 								<select class="fontwhite selectshort" v-model="selectPrice">
 									<option value="0">&nbsp;&nbsp;></option>
@@ -55,9 +53,9 @@
 									<option value="1">市价</option>
 									<option value="2">限价</option>
 								</select>
-								<span class="fontgray lot">手数</span>
 							</li>
 							<li>
+								<span class="fontgray lot">手数</span>
 								<input type="number"  v-model="holdNum" class="fontwhite" />
 							</li>
 						</ol>
@@ -65,13 +63,11 @@
 					<li>
 						<ol>
 							<li class="fontgray">有效</li>
-							<li class="fontwhite today">
-								当日有效
-							</li>
+							<li class="fontwhite today">当日有效</li>
 						</ol>
 					</li>
-	</template>
-	<template v-else="ifshow">
+				</template>
+				<template v-else="ifshow">
 					<li>
 						<ol>
 							<li class="fontgray">合约</li>
@@ -224,7 +220,6 @@
 						this.selectAdditionalPrice = sb.AdditionType;
 						this.inputAdditionalPrice = sb.AdditionPrice;
 					}
-					
 				}
 			},
 			selectId:function(n,o){
@@ -232,7 +227,6 @@
 					this.commodityNo = n.substring(0,n.length-4);
 					this.contractNo = n.substring(n.length-4,n.length);
 					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			
 				}
 			},
 			selectTimeId:function(n,o){
@@ -241,7 +235,6 @@
 					this.contractNo00 = n.substring(n.length-4,n.length);
 					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
 					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			
 				}	
 			},
 			selectAdditionalPrice:function(n,o){
@@ -261,7 +254,6 @@
 					this.timeAddtionPrice = this.timeAddtionPrice00;
 					this.timeAdditionFlag = true;
 				}
-				
 			}
 		},
 		methods:{
@@ -357,9 +349,7 @@
 						};
 						
 					this.tradeSocket.send(JSON.stringify(b));	
-					
 				}
-				
 			}
 		},
 		mounted:function(){
@@ -417,26 +407,23 @@
 		box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), -1px -1px 3px rgba(0, 0, 0, 0.3);
 		border-radius: 5px;
 	}
-	.selectbar {
+	.selectbar{
 		width: 100%;
-		height: @selectbar_height;
+		height: 42px;
 		background-color: #242633;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 	}
-	@selectbar_height: 43px;
 	.selectbar li {
 		width: 50%;
 		text-align: center;
-		line-height: @selectbar_height;
+		line-height: 42px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 	}
-	
 	.selected {
 		color: #ffe100;
 	}
-	
 	.content {
 		background-color: #1b1b26;
 		height: 220px;
@@ -444,54 +431,50 @@
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
-	
-	.content>li {
-		height: @selectbar_height;
-		line-height: @selectbar_height;
+	.content>li{
+		height: 43px;
+		line-height: 42px;
+		overflow: hidden;
 		border-bottom: 1px solid #20212d;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
-	
 	.content>li:last-child {
 		width: 100%;
 		position: absolute;
 		bottom: 0;
 	}
-	
 	.content>li:last-child>div {
 		float: left;
 		width: 50%;
-		height: @selectbar_height;
-		line-height: @selectbar_height;
+		height: 42px;
+		line-height: 42px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
-	
 	ol>li {
 		float: left;
+		border-right: 1px solid #1b1b26;
 	}
-	
+	ol>li:last-child{
+		border: none;
+	}
 	ol>li:first-child {
 		width: 53px;
-		border-right: 1px solid #20212d;
 	}
-	
-	ol {
-		height: @selectbar_height;
+	ol{
+		height: 42px;
 	}
-	
-	li {
+	li{
 		text-align: center;
 		background-color: #242633;
 	}
-	
 	.selectshort {
 		width: 55px;
 		height: 32px;
 		background-color: #1b1b26;
-		text-indent: 0.8em;
 		transform: translateY(-1.5px);
+		padding: 0 8px;
 		margin-left: 5px;
 		background-image: url('../assets/img/sanjiao.png');
 		background-repeat: no-repeat;
@@ -499,49 +482,42 @@
 		background-position: 45px 21px;
 		border-radius: 3px;
 	}
-	
 	.selectlong {
-		width: 99px;
+		width: 135px;
 		height: 32px;
+		padding: 0 10px;
+		text-align: center;
 		background-color: #1b1b26;
-		text-indent: 1.5em;
-		transform: translateY(-1px);
 		margin-left: 5px;
 		border-radius: 3px;
 	}
-	
 	input {
 		width: 55px;
 		height: 32px;
 		background-color: #1b1b26;
 		color: white;
-		font-size: 15px;
+		font-size: 16px;
 		text-align: center;
 		margin-left: 5px;
 		margin-bottom: 0;
+		padding: 0;
 		border-radius: 3px;
 	}
-	
 	.today {
 		width: 275px;
 		text-align: center;
 	}
-	
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
-		border-right: 1px solid #20212d;
-		padding-right: 2%;
+		padding-right: 8px;
 	}
-	
 	.lot {
 		margin-left: 20px;
 	}
-	
 	.do {
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
-	
 	.do>div {
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
@@ -561,37 +537,32 @@
 		right: 0;
 		bottom: 0;
 		z-index: 1010;
-		background-color: rgba(0, 0, 0, .8);
-		font-size: 15px*@ip6;
+		background-color: rgba(0, 0, 0, .5);
+		font-size: 14px*@ip6;
 	}
 	#ifalert>div {
-		width: @width*@ip6;
-		height: @height*@ip6;
+		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
 		top: 212px*@ip6;
 		left: 40px*@ip6;
 		position: relative;
 		box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), -1px -1px 3px rgba(0, 0, 0, 0.3);
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-radius: 5px*@ip6;
 	}
-	.selectbar {
+	.selectbar{
 		width: 100%;
-		height: @selectbar_height*@ip6;
+		height: 42px*@ip6;
 		background-color: #242633;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
+		border-top-right-radius: 5px*@ip6;
+		border-top-left-radius: 5px*@ip6;
 	}
-	@selectbar_height: 43px;
 	.selectbar li {
 		width: 50%;
 		text-align: center;
-		line-height: @selectbar_height*@ip6;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
+		line-height: 42px*@ip6;
+		border-top-left-radius: 5px*@ip6;
+		border-top-right-radius: 5px*@ip6;
 	}
 	.selected {
 		color: #ffe100;
@@ -600,15 +571,16 @@
 		background-color: #1b1b26;
 		height: 220px*@ip6;
 		border-top: 1px solid #20212d;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px*@ip6;
+		border-bottom-right-radius: 5px*@ip6;
 	}
-	.content>li {
-		height: @selectbar_height*@ip6;
-		line-height: @selectbar_height*@ip6;
+	.content>li{
+		height: 43px*@ip6;
+		line-height: 42px*@ip6;
+		overflow: hidden;
 		border-bottom: 1px solid #20212d;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px*@ip6;
+		border-bottom-right-radius: 5px*@ip6;
 	}
 	.content>li:last-child {
 		width: 100%;
@@ -618,22 +590,25 @@
 	.content>li:last-child>div {
 		float: left;
 		width: 50%;
-		height: @selectbar_height*@ip6;
-		line-height: @selectbar_height*@ip6;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		height: 42px*@ip6;
+		line-height: 42px*@ip6;
+		border-bottom-left-radius: 5px*@ip6;
+		border-bottom-right-radius: 5px*@ip6;
 	}
 	ol>li {
 		float: left;
+		border-right: 1px solid #1b1b26;
+	}
+	ol>li:last-child{
+		border: none;
 	}
 	ol>li:first-child {
 		width: 53px*@ip6;
-		border-right: 1px solid #20212d;
 	}
-	ol {
-		height: @selectbar_height*@ip6;
+	ol{
+		height: 42px*@ip6;
 	}
-	li {
+	li{
 		text-align: center;
 		background-color: #242633;
 	}
@@ -641,34 +616,35 @@
 		width: 55px*@ip6;
 		height: 32px*@ip6;
 		background-color: #1b1b26;
-		text-indent: 0.8em*@ip6;
-		transform: translateY(-1.5px*@ip6);
+		transform: translateY(-1.5px);
+		padding: 0 8px*@ip6;
 		margin-left: 5px*@ip6;
 		background-image: url('../assets/img/sanjiao.png');
 		background-repeat: no-repeat;
 		background-size: 5px*@ip6;
 		background-position: 45px*@ip6 21px*@ip6;
-		border-radius: 3px;
+		border-radius: 3px*@ip6;
 	}
 	.selectlong {
-		width: 99px*@ip6;
+		width: 135px*@ip6;
 		height: 32px*@ip6;
+		padding: 0 10px*@ip6;
+		text-align: center;
 		background-color: #1b1b26;
-		text-indent: 1.5em*@ip6;
-		transform: translateY(-1px*@ip6);
 		margin-left: 5px*@ip6;
-		border-radius: 3px;
+		border-radius: 3px*@ip6;
 	}
 	input {
 		width: 55px*@ip6;
 		height: 32px*@ip6;
 		background-color: #1b1b26;
 		color: white;
-		font-size: 15px*@ip6;
+		font-size: 16px*@ip6;
 		text-align: center;
 		margin-left: 5px*@ip6;
 		margin-bottom: 0;
-		border-radius: 3px;
+		padding: 0;
+		border-radius: 3px*@ip6;
 	}
 	.today {
 		width: 275px*@ip6;
@@ -676,11 +652,18 @@
 	}
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
-		border-right: 1px solid #20212d;
-		padding-right: 2%;
+		padding-right: 8px*@ip6;
 	}
 	.lot {
 		margin-left: 20px*@ip6;
+	}
+	.do {
+		border-bottom-left-radius: 5px*@ip6;
+		border-bottom-right-radius: 5px*@ip6;
+	}
+	.do>div {
+		border-bottom-left-radius: 5px*@ip6;
+		border-bottom-right-radius: 5px*@ip6;
 	}
 	.time{
 		width: 99px*@ip6;
@@ -697,37 +680,32 @@
 		right: 0;
 		bottom: 0;
 		z-index: 1010;
-		background-color: rgba(0, 0, 0, .8);
-		font-size: 15px*@ip5;
+		background-color: rgba(0, 0, 0, .5);
+		font-size: 14px*@ip5;
 	}
 	#ifalert>div {
-		width: @width*@ip5;
-		height: @height*@ip5;
+		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
 		top: 212px*@ip5;
 		left: 40px*@ip5;
 		position: relative;
 		box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), -1px -1px 3px rgba(0, 0, 0, 0.3);
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-radius: 5px*@ip5;
 	}
-	.selectbar {
+	.selectbar{
 		width: 100%;
-		height: @selectbar_height*@ip5;
+		height: 42px*@ip5;
 		background-color: #242633;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
+		border-top-right-radius: 5px*@ip5;
+		border-top-left-radius: 5px*@ip5;
 	}
-	@selectbar_height: 43px;
 	.selectbar li {
 		width: 50%;
 		text-align: center;
-		line-height: @selectbar_height*@ip5;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
+		line-height: 42px*@ip5;
+		border-top-left-radius: 5px*@ip5;
+		border-top-right-radius: 5px*@ip5;
 	}
 	.selected {
 		color: #ffe100;
@@ -736,15 +714,16 @@
 		background-color: #1b1b26;
 		height: 220px*@ip5;
 		border-top: 1px solid #20212d;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px*@ip5;
+		border-bottom-right-radius: 5px*@ip5;
 	}
-	.content>li {
-		height: @selectbar_height*@ip5;
-		line-height: @selectbar_height*@ip5;
+	.content>li{
+		height: 43px*@ip5;
+		line-height: 42px*@ip5;
+		overflow: hidden;
 		border-bottom: 1px solid #20212d;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px*@ip5;
+		border-bottom-right-radius: 5px*@ip5;
 	}
 	.content>li:last-child {
 		width: 100%;
@@ -754,22 +733,25 @@
 	.content>li:last-child>div {
 		float: left;
 		width: 50%;
-		height: @selectbar_height*@ip5;
-		line-height: @selectbar_height*@ip5;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		height: 42px*@ip5;
+		line-height: 42px*@ip5;
+		border-bottom-left-radius: 5px*@ip5;
+		border-bottom-right-radius: 5px*@ip5;
 	}
 	ol>li {
 		float: left;
+		border-right: 1px solid #1b1b26;
+	}
+	ol>li:last-child{
+		border: none;
 	}
 	ol>li:first-child {
 		width: 53px*@ip5;
-		border-right: 1px solid #20212d;
 	}
-	ol {
-		height: @selectbar_height*@ip5;
+	ol{
+		height: 42px*@ip5;
 	}
-	li {
+	li{
 		text-align: center;
 		background-color: #242633;
 	}
@@ -777,37 +759,35 @@
 		width: 55px*@ip5;
 		height: 32px*@ip5;
 		background-color: #1b1b26;
-		text-indent: 0.8em*@ip5;
-		transform: translateY(-1.5px*@ip5);
+		transform: translateY(-1.5px);
+		padding: 0 8px*@ip5;
 		margin-left: 5px*@ip5;
 		background-image: url('../assets/img/sanjiao.png');
 		background-repeat: no-repeat;
 		background-size: 5px*@ip5;
 		background-position: 45px*@ip5 21px*@ip5;
-		border-radius: 3px;
-		font-size: 12px;
+		border-radius: 3px*@ip5;
 	}
 	.selectlong {
-		width: 99px*@ip5;
+		width: 135px*@ip5;
 		height: 32px*@ip5;
+		padding: 0 10px*@ip5;
+		text-align: center;
 		background-color: #1b1b26;
-		text-indent: 1.5em*@ip5;
-		transform: translateY(-1px*@ip5);
 		margin-left: 5px*@ip5;
-		border-radius: 3px;
-		font-size: 12px;
+		border-radius: 3px*@ip5;
 	}
 	input {
 		width: 55px*@ip5;
 		height: 32px*@ip5;
 		background-color: #1b1b26;
 		color: white;
-		font-size: 12px;
-		;
+		font-size: 16px*@ip5;
 		text-align: center;
 		margin-left: 5px*@ip5;
 		margin-bottom: 0;
-		border-radius: 3px;
+		padding: 0;
+		border-radius: 3px*@ip5;
 	}
 	.today {
 		width: 275px*@ip5;
@@ -815,11 +795,18 @@
 	}
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
-		border-right: 1px solid #20212d;
-		padding-right: 2%;
+		padding-right: 8px*@ip5;
 	}
 	.lot {
 		margin-left: 20px*@ip5;
+	}
+	.do {
+		border-bottom-left-radius: 5px*@ip5;
+		border-bottom-right-radius: 5px*@ip5;
+	}
+	.do>div {
+		border-bottom-left-radius: 5px*@ip5;
+		border-bottom-right-radius: 5px*@ip5;
 	}
 	.time{
 		width: 99px*@ip5;
