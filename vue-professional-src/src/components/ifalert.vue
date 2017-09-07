@@ -205,7 +205,7 @@
 			},
 			objstrParms: function(){
 				return this.objstr;
-			}
+			},
 		},
 		watch:{
 			selectId:function(n,o){

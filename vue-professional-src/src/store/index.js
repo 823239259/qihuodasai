@@ -1500,7 +1500,6 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspQryCondition':
 					console.log('OnRspQryCondition');
-					console.log(parameters);
 					if(parameters!=null){
 						if(parameters.Status<=2){
 							context.state.market.conditionList.push(parameters);
@@ -1511,12 +1510,12 @@ export default new Vuex.Store({
 					break;
 				case "OnRspInsertCondition":
 					console.log('OnRspInsertCondition');
-					console.log(parameters);
+//					console.log(parameters);
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
 					console.log('OnRtnConditionState');	
-					console.log(parameters);
+//					console.log(parameters);
 					context.dispatch('dealWithOnRtnConditionState',parameters);
 					
 					break;	

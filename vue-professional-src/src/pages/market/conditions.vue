@@ -1,7 +1,7 @@
 <template>
 	<div id="conditions">
 		<tipsDialog :msg="msgTips"></tipsDialog>
-		<ifalert :objstr="sendObj"></ifalert>
+		<ifalert :objstr="sendObj" ref="ifalert"></ifalert>
 		<div class="head">
 			<topbar title="条件单"></topbar>
 			<back></back>
@@ -120,12 +120,16 @@
 			},
 			sendObj: function(){
 				if(this.sendMsg) return JSON.stringify(this.sendMsg);
-			}
+			},
 		},
 		methods: {
 			modify:function(){
 				this.$children[1].isshow = true;
-//				if(this.orderType == 5){
+				if(this.orderType == 5){
+					this.$refs.ifalert.ifshow = false;
+				}else{
+					this.$refs.ifalert.ifshow = true;
+				}
 //					this.$children[1].ifshow = false;
 					this.noListCont.forEach(function(e,i){
 						if(this.orderListId == e.ConditionNo){
