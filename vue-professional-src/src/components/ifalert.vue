@@ -88,8 +88,8 @@
 								时间
 							</li>
 							<li>
-								<!--<input type="time" v-model="time" class='time'/>-->
-								<input  v-model="time" class='time'/>
+								<input type="time" v-model="time" class='time'/>
+								<!--<input  v-model="time" class='time'/>-->
 							</li>
 						</ol>
 					</li>
