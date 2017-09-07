@@ -208,6 +208,25 @@
 			},
 		},
 		watch:{
+			objstrParms:function(n,o){
+				let sb= JSON.parse(n);
+				console.log(n);
+				if(sb.CompareType==5){//时间条件
+					
+				}else{//价格条件
+					this.selectId = sb.CommodityNo+sb.ContractNo;
+					this.selectPrice = sb.CompareType;
+					this.inputPrice = sb.PriceTriggerPonit;
+					if(sb.AdditionFlag==0){ //没有附件条件
+						this.selectAdditionalPrice = 5
+						this.inputAdditionalPrice = '';
+					}else{//有附加条件
+						this.selectAdditionalPrice = sb.AdditionType;
+						this.inputAdditionalPrice = sb.AdditionPrice;
+					}
+					
+				}
+			},
 			selectId:function(n,o){
 				if(n != undefined){
 					this.commodityNo = n.substring(0,n.length-4);
@@ -247,7 +266,6 @@
 		},
 		methods:{
 			selection:function(e){
-				console.log(this.objstrParms);
 				if(e.target.innerHTML == '价格条件'){
 					this.ifshow=true;
 					$('#ifalert>div').css('height',this.height1+'px');
