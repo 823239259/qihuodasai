@@ -88,8 +88,8 @@
 								时间
 							</li>
 							<li>
-								<input type="time" v-model="time" class='time'/>
-								<!--<input  v-model="time" class='time'/>-->
+								<!--<input type="time" v-model="time" class='time'/>-->
+								<input type="time" class='time'/>
 							</li>
 						</ol>
 					</li>
@@ -183,6 +183,7 @@
 				
 			}
 		},
+		props: ['objstr'],
 		computed:{
 			height1(){
 				return $('#ifalert>div').css('height').slice(0,-2);
@@ -202,6 +203,9 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
+			objstrParms: function(){
+				return this.objstr;
+			}
 		},
 		watch:{
 			selectId:function(n,o){
@@ -243,6 +247,7 @@
 		},
 		methods:{
 			selection:function(e){
+				console.log(this.objstrParms);
 				if(e.target.innerHTML == '价格条件'){
 					this.ifshow=true;
 					$('#ifalert>div').css('height',this.height1+'px');

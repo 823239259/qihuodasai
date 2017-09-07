@@ -1,7 +1,7 @@
 <template>
 	<div id="conditions">
 		<tipsDialog :msg="msgTips"></tipsDialog>
-		<ifalert></ifalert>
+		<ifalert :objstr="sendObj"></ifalert>
 		<div class="head">
 			<topbar title="条件单"></topbar>
 			<back></back>
@@ -95,7 +95,8 @@
 //				yesListCont:[],
 				orderStatus: '',
 				statusName: '暂停',
-				orderType: ''
+				orderType: '',
+				sendMsg: ''
 			}
 		},
 		computed:{
@@ -116,25 +117,26 @@
 			},
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
+			},
+			sendObj: function(){
+				if(this.sendMsg) return JSON.stringify(this.sendMsg);
 			}
 		},
 		methods: {
 			modify:function(){
 				this.$children[1].isshow = true;
-				if(this.orderType == 5){
-					this.$children[1].ifshow = false;
+//				if(this.orderType == 5){
+//					this.$children[1].ifshow = false;
 					this.noListCont.forEach(function(e,i){
-						if(this.orderListId==e.ConditionNo){
-							this.$store.state.market.noObj = e;
+						if(this.orderListId == e.ConditionNo){
+							this.sendMsg = e;
 						}
 					}.bind(this));
-					let o = this.$store.state.market.noObj;
-					
-					console.log(JSON.stringify(o));
-					
-				}else{
-					this.$children[1].ifshow = true;
-				}
+//					let o = this.$store.state.market.noObj;
+//					console.log(JSON.stringify(o));
+//				}else{
+//					this.$children[1].ifshow = true;
+//				}
 				
 			},
 			deleteEvent:function(){
