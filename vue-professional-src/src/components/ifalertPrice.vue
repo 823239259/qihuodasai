@@ -11,9 +11,10 @@
 						<ol>
 							<li class="fontgray">合约</li>
 							<li>
-								<select name="contract" class="selectlong fontwhite" v-model="selectId">
+								<input type="text" v-model="selectId" class="selectlong fontwhite" disabled />
+								<!--<select name="contract" class="selectlong fontwhite" v-model="selectId">
 									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
-								</select>
+								</select>-->
 							</li>
 						</ol>
 					</li>
