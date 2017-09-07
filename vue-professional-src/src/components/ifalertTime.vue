@@ -223,7 +223,6 @@
 							
 						}
 					};
-				console.log(JSON.stringify(b));
 				this.tradeSocket.send(JSON.stringify(b));	
 				
 			}
