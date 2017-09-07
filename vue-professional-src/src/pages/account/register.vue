@@ -13,7 +13,13 @@
 				<input type="number" id="phone" placeholder="请输入您的手机号" v-model.trim="phone" />
 			</div>
 			<div class="ipt_row">
-				<label for="code">验证码</label>
+				<label for="code">图形验证码</label>
+				<input type="number" id="code" placeholder="请输入验证码" v-model.trim="code" />
+				<a href="javascript:void(0);" class="code"><img :src="imgPath"/></a>
+				<!--<span class="code" @tap="getCode">{{volid ? info : (time + '秒')}}</span>-->
+			</div>
+			<div class="ipt_row">
+				<label for="code">手机验证码</label>
 				<input type="number" id="code" placeholder="请输入验证码" v-model.trim="code" />
 				<span class="code" @tap="getCode">{{volid ? info : (time + '秒')}}</span>
 			</div>
@@ -51,6 +57,12 @@
 				}else{
 					return false
 				}
+			},
+			environment(){
+				return this.$store.state.environment;
+			},
+			imgPath: function(){
+				if(this.path) return this.path;
 			}
 		},
 		data(){
@@ -63,7 +75,8 @@
 				time: 0,
 				info:'获取验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
-				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/
+				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				path: ''
 			}
 		},
 		methods: {
@@ -75,6 +88,21 @@
 					this.eyeShow = false;
 					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
 				}
+			},
+			getImgCode: function(){
+				this.$http.get(this.PATH + '/validate.code?1= Math.random()*10000',{emulateJSON: true}, {
+					params: {},
+					timeout: 5000
+				}).then(function(e){
+					if(this.environment == 'test'){
+						this.path = "http://test.api.dktai.cn/" + e.url.substr(12);
+					}else{
+						this.path = "http://api.dktai.cn/" + e.url.substr(12);
+					}
+				}.bind(this),function(){
+					this.$refs.dialog.isShow = true;
+					this.msg = '网络不给力，请稍后再试！'
+				});
 			},
 			getCode: function(e){
 				if($(e.target).hasClass('current')) return false;

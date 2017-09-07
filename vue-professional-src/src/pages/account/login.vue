@@ -1,6 +1,6 @@
 <template>
 	<div id="login">
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<topbar title="登录"></topbar>
 		<back :title="isJumpEvent"></back>
 		<cs title="客服"></cs>
@@ -21,7 +21,7 @@
 			<p class="jump_operate"><span @tap="toFindPwd">忘记密码</span>  /  <span class="yellow" @tap="toRegister">用户注册</span></p>
 		</div>
 		<p class="bottom_tips">如遇问题请拨打：400-852-8008</p>
-		<codeDialog></codeDialog>
+		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
 	</div>
 </template>
 
@@ -47,6 +47,12 @@
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
+			environment(){
+				return this.$store.state.environment;
+			},
+			sendMsg(){
+				if(this.str) return JSON.stringify(this.str);
+			}
 		},
 		data(){
 			return {
@@ -56,7 +62,9 @@
 				phone: '',
 				pwd: '',
 				token: '',
-				secret: ''
+				secret: '',
+				path: '',
+				str: ''
 			}
 		},
 		methods:{
@@ -73,16 +81,16 @@
 				var phoneReg = /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
 				var pwdReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/;
 				if(this.phone == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手机号';
 				}else if(phoneReg.test(this.phone) == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '手机号格式错误';
 				}else if(this.pwd == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入密码';
 				}else if(pwdReg.test(this.pwd) == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					//登录请求
@@ -96,13 +104,8 @@
 						var data = e.body;
 						if(data.success == true ){
 							if(data.code == 1){
-								this.$children[0].isShow = true;
+								this.$refs.dialog.isShow = true;
 								this.msg = '登录成功';
-//								this.$store.state.account.islogin = true;
-//								this.$store.state.account.phone = this.phone;
-//								this.$store.state.account.password = this.pwd;
-//								this.$store.state.account.token = data.data.token;
-//								this.$store.state.account.secret = data.data.secret;
 								this.token = data.data.token;
 								this.secret = data.data.secret;
 								var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
@@ -110,20 +113,36 @@
 								this.$router.push({path: '/account'});
 							}
 						}else{
-							switch (data.code){
-								case '2':
-									this.$children[0].isShow = true;
-									this.msg = '用户名或者密码输入错误';
-									break;
-								default:
-									break;
+							var num = data.data.num;
+							if(num > 2){
+								this.$refs.codeDialog.isshow = true;
+								this.$http.get(this.PATH + '/validate.code?1= Math.random()*10000',{emulateJSON: true}, {
+									params: {},
+									timeout: 5000
+								}).then(function(e){
+									if(this.environment == 'test'){
+										this.path = "http://test.api.dktai.cn/" + e.url.substr(12);
+									}else{
+										this.path = "http://api.dktai.cn/" + e.url.substr(12);
+									}
+									this.str = {
+										loginName: this.phone,
+										password: this.pwd,
+										path: this.path
+									};
+								}.bind(this),function(){
+									this.$refs.dialog.isShow = true;
+									this.msg = '网络不给力，请稍后再试！'
+								});
+							}else{
+								this.$refs.dialog.isShow = true;
+								this.msg = data.message;
 							}
 						}
 					}.bind(this), function() {
-						this.$children[0].isShow = true;
+						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！'
 					});
-					
 				}
 			},
 			toRegister: function(){
@@ -132,43 +151,6 @@
 			toFindPwd: function(){
 				this.$router.push({path: '/findPwd'});
 			},
-//			getUserMsg: function(){
-//				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
-//					headers: {
-//						'token':  this.token,
-//						'secret': this.secret
-//					},
-//					params: {
-//						businessType: 4
-//					},
-//					timeout: 5000
-//				}).then(function(e){
-//					var data = e.body;
-//					if(data.success == true){
-//						if(data.code == 1){
-//							var info = data.data
-//							if(info.isCertification == true){
-//								this.$store.state.account.isCertification = true;
-//								this.$store.state.account.username = info.username;
-//							}
-//							this.$store.state.account.balance = pro.parseTwoFloat(info.balance);
-//							this.$store.state.account.operateMoney = pro.parseTwoFloat(info.operateMoney);
-//						}
-//					}else{
-//						switch (data.code){
-//							case '3':
-//								this.$children[0].isShow = true;
-//								this.msg = '用户信息不存在';
-//								break;
-//							default:
-//								break;
-//						}
-//					}
-//				}.bind(this), function(){
-//					this.$children[0].isShow = true;
-//					this.msg = '网络不给力，请稍后再试！';
-//				});
-//			}
 		},
 		mounted: function(){
 			//页面高度计算

@@ -324,20 +324,22 @@ export default new Vuex.Store({
 		account
 	},
 	state: {
-
+		//test 测试环境，online 正式环境
+		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'dev',
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
-		tradeSocket:null,
+		tradeSocket: null,
 		webuser: {
 			username: '13677622344',
 			password: 'a123456'
 		},
 		wsjsondata: {},
 		//连接提示语
-		wsmsg: ''
+		wsmsg: '',
+		version: {}
 		
 	},
 	getters: {
@@ -345,7 +347,11 @@ export default new Vuex.Store({
 			if(state.setting == 'dev') {
 				return '/api';
 			} else if(state.setting == 'build') {
-				return 'http://test.api.dktai.cn';
+				if(state.environment == 'test'){
+					return 'http://test.api.dktai.cn';
+				}else{
+					return 'http://api.dktai.cn';
+				}
 			} else if(state.setting == 'nat') {
 				return '/nat/vs-api';
 			}
