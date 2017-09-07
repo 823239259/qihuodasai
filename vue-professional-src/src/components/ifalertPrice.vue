@@ -70,77 +70,9 @@
 							</li>
 						</ol>
 					</li>
-	<!--</template>-->
-	<!--<template v-else="ifshow">
-					<li>
-						<ol>
-							<li class="fontgray">合约</li>
-							<li>
-								<select name="contract" class="selectlong fontwhite" v-model="selectTimeId">
-									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
-								</select>
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol>
-							<li class="fontgray">
-								时间
-							</li>
-							<li>
-								<input type="time" class="time" v-model="time" />
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol>
-							<li class="fontgray">
-								价格
-							</li>
-							<li>
-								<select class="fontwhite selectshort" v-model="additionValue">
-									<option value="5">附加</option>
-									<option value="0">></option>
-									<option value="2">>=</option>
-									<option value="1"><</option>
-									<option value="3"><=</option>
-								</select>
-								<input type="text" v-model="timeAddtionPrice" />
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol>
-							<li class="fontgray">操作</li>
-							<li>
-								<select class="fontwhite  selectshort" v-model="timeBuyOrSell">
-									<option value="0">&nbsp;&nbsp;买</option>
-									<option value="1">&nbsp;&nbsp;卖</option>
-								</select>
-								<select class="fontwhite selectshort" v-model="timeOrderType">
-									<option value="1">市价</option>
-									<option value="2">限价</option>
-								</select>
-								<span class="fontgray lot">手数</span>
-							</li>
-							<li>
-								<input type="text" v-model="timeHoldNum" class="fontwhite" />
-							</li>
-						</ol>
-					</li>
-					<li>
-						<ol>
-							<li class="fontgray">有效</li>
-							<li class="fontwhite today">
-								当日有效
-							</li>
-						</ol>
-					</li>
-				</template>-->
-				
 				<li class="do">
 					<div class="fontgray" @tap="close">关闭</div>
-					<div class="fontgray" @tap='confirm'>添加</div>
+					<div class="fontgray" @tap='confirm'>修改</div>
 				</li>
 			</ul>
 		</div>
@@ -207,59 +139,24 @@
 			},
 		},
 		watch:{
+			
 			objstrParms:function(n,o){
 				let sb= JSON.parse(n);
-				console.log(n);
-				if(sb.CompareType==5){//时间条件
+				//价格条件
+				this.selectId = sb.CommodityNo+sb.ContractNo;
+				this.selectPrice = sb.CompareType;
+				this.inputPrice = sb.PriceTriggerPonit;
+				if(sb.AdditionFlag==0){ //没有附件条件
+					this.selectAdditionalPrice = 5
+					this.inputAdditionalPrice = '';
+				}else{//有附加条件
+					this.selectAdditionalPrice = sb.AdditionType;
+					this.inputAdditionalPrice = sb.AdditionPrice;
+				}
 					
-				}else{//价格条件
-					this.selectId = sb.CommodityNo+sb.ContractNo;
-					this.selectPrice = sb.CompareType;
-					this.inputPrice = sb.PriceTriggerPonit;
-					if(sb.AdditionFlag==0){ //没有附件条件
-						this.selectAdditionalPrice = 5
-						this.inputAdditionalPrice = '';
-					}else{//有附加条件
-						this.selectAdditionalPrice = sb.AdditionType;
-						this.inputAdditionalPrice = sb.AdditionPrice;
-					}
-				}
-			},
-			selectId:function(n,o){
-				if(n != undefined){
-					this.commodityNo = n.substring(0,n.length-4);
-					this.contractNo = n.substring(n.length-4,n.length);
-					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			
-				}
-			},
-			selectTimeId:function(n,o){
-				if(n != undefined){
-					this.commodityNo00 = n.substring(0,n.length-4);
-					this.contractNo00 = n.substring(n.length-4,n.length);
-					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			
-				}	
-			},
-			selectAdditionalPrice:function(n,o){
-				if(this.selectAdditionalPrice==5){
-					 this.inputAdditionalPrice = '';
-					 this.additionFlag = false;
-				}else{
-					this.inputAdditionalPrice =this.inputPrice;
-					this.additionFlag = true;
-				}
-			},
-			additionValue:function(n,o){
-				if(this.additionValue==5){
-					this.timeAddtionPrice='';
-					this.timeAdditionFlag = false;
-				}else{
-					this.timeAddtionPrice = this.timeAddtionPrice00;
-					this.timeAdditionFlag = true;
-				}
-				
+				this.selectBuyOrSell = sb.Drection;
+				this.selectMarketOrLimited = sb.OrderType;
+				this.holdNum = sb.Num;
 			}
 		},
 		methods:{
@@ -361,6 +258,7 @@
 			}
 		},
 		mounted:function(){
+			/*
 			this.selectPrice = 0;
 			let arr=[];
 			arr = this.parameters;
@@ -384,7 +282,7 @@
 			this.commodityNo00 = arr00[0].CommodityNo;
 			this.contractNo00 = arr00[0].MainContract;
 			this.addtionPrice = parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			
+			*/
 		}
 	}
 </script>

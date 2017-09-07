@@ -139,60 +139,28 @@
 			},
 		},
 		watch:{
+			
 			objstrParms:function(n,o){
 				let sb= JSON.parse(n);
 				console.log(n);
-				if(sb.CompareType==5){//时间条件
-					
-				}else{//价格条件
-					this.selectId = sb.CommodityNo+sb.ContractNo;
-					this.selectPrice = sb.CompareType;
-					this.inputPrice = sb.PriceTriggerPonit;
-					if(sb.AdditionFlag==0){ //没有附件条件
-						this.selectAdditionalPrice = 5
-						this.inputAdditionalPrice = '';
-					}else{//有附加条件
-						this.selectAdditionalPrice = sb.AdditionType;
-						this.inputAdditionalPrice = sb.AdditionPrice;
-					}
-				}
-			},
-			selectId:function(n,o){
-				if(n != undefined){
-					this.commodityNo = n.substring(0,n.length-4);
-					this.contractNo = n.substring(n.length-4,n.length);
-					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			
-				}
-			},
-			selectTimeId:function(n,o){
-				if(n != undefined){
-					this.commodityNo00 = n.substring(0,n.length-4);
-					this.contractNo00 = n.substring(n.length-4,n.length);
-					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			
-				}	
-			},
-			selectAdditionalPrice:function(n,o){
-				if(this.selectAdditionalPrice==5){
-					 this.inputAdditionalPrice = '';
-					 this.additionFlag = false;
-				}else{
-					this.inputAdditionalPrice =this.inputPrice;
-					this.additionFlag = true;
-				}
-			},
-			additionValue:function(n,o){
-				if(this.additionValue==5){
-					this.timeAddtionPrice='';
-					this.timeAdditionFlag = false;
-				}else{
-					this.timeAddtionPrice = this.timeAddtionPrice00;
-					this.timeAdditionFlag = true;
+				this.selectTimeId = sb.CommodityNo+sb.ContractNo;
+				let time00 = sb.TimeTriggerPoint.split(' ')[1];
+				this.time = time00.split(':')[0]+':'+time00.split(':')[1];
+				
+				if(sb.AdditionFlag==0){ //没有附加价格
+					this.additionValue = 5;
+					this.timeAddtionPrice = '';
+				}else{//有附加价格
+					this.additionValue = sb.AdditionType;
+					this.timeAddtionPrice = sb.AdditionPrice;
 				}
 				
-			}
+				this.timeBuyOrSell = sb.Drection;
+				this.timeOrderType = sb.OrderType;
+				this.timeHoldNum = sb.Num;
+				
+				
+			},
 		},
 		methods:{
 			selection:function(e){
