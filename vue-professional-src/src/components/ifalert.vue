@@ -89,7 +89,7 @@
 							</li>
 							<li>
 								<!--<input type="time" v-model="time" class='time'/>-->
-								<input type="time" class='time'/>
+								<input type="time" class="time" v-model="time" />
 							</li>
 						</ol>
 					</li>
@@ -171,7 +171,7 @@
 				
 				timeAddtionPrice:'',
 				timeAddtionPrice00:'',
-				time:'2017-09-06 20:00:00',
+				time:'',
 				timeAdditionFlag:false,
 				timeHoldNum:1,
 				commodityNo00:'',
@@ -260,6 +260,8 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				console.log(this.time);
+				
 				this.isshow = false;
 				console.log(this.templateList[this.commodityNo]);
 				console.log('selectAdditionalPrice:'+this.selectAdditionalPrice);
