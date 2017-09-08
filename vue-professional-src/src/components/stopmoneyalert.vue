@@ -156,7 +156,8 @@
 				return this.$store.state.tradeSocket;
 			},
 			inputPrice(){
-				return this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice;
+				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
 			}
 		},
 		watch:{
