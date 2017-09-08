@@ -58,6 +58,7 @@
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				path: '',
+				num: 0
 			}
 		},
 		computed: {
@@ -76,6 +77,9 @@
 			},
 			environment(){
 				return this.$store.state.environment;
+			},
+			version: function(){
+				return JSON.parse(localStorage.version).ios;
 			}
 		},
 		methods: {
@@ -97,13 +101,42 @@
 					this.$children[0].isShow = true;
 					this.msg = '手机号格式错误';
 				}else{
-					this.$refs.codeDialog.isshow = true;
-					if(this.environment == 'test'){
-						this.$refs.codeDialog.path = "http://test.api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+					if(this.num && this.num > 2){
+						this.$refs.codeDialog.isshow = true;
+						if(this.environment == 'test'){
+							this.$refs.codeDialog.path = "http://test.api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+						}else{
+							this.$refs.codeDialog.path = "http://api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+						}
+						this.$refs.codeDialog.phone = this.phone;
 					}else{
-						this.$refs.codeDialog.path = "http://api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+						//请求发送验证码
+						this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
+							params: {
+								mobile: this.phone,
+								type: 1,
+								yzm: this.code
+							},
+							timeout: 5000
+						}).then(function(e){
+							var data = e.body;
+							if(data.success == true){
+								if(data.code == 1){
+									this.$refs.dialog.isShow = true;
+									this.msg = '发送成功';
+									setTimeout(function(){
+										this.isshow = false;
+									}.bind(this),1000);
+								}
+							}else{
+								this.$refs.dialog.isShow = true;
+								this.msg = data.message;
+							}
+						}.bind(this), function(){
+							this.$children[0].isShow = true;
+							this.msg = '网络不给力，请稍后再试！'
+						});
 					}
-					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
 					$(e.target).addClass('current');
 					this.time = 60;
@@ -114,7 +147,6 @@
 							$(e.target).removeClass('current');
 						}
 					}.bind(this), 1000);
-					
 				}
 			},
 			register: function(){
@@ -147,11 +179,12 @@
 //							if(data.code == 1){
 					//注册请求
 					this.$http.post(this.PATH + '/regist', {emulateJSON: true}, {
-							params: {
-								mobile: this.phone,
-								password: this.pwd
-							},
-							timeout: 5000
+						headers: {'version': this.version},
+						params: {
+							mobile: this.phone,
+							password: this.pwd
+						},
+						timeout: 5000
 					}).then(function(e) {
 						var data = e.body;
 						if(data.success == true ){
@@ -168,22 +201,9 @@
 								}.bind(this), 1000);
 							}
 						}else{
-							switch (data.code){
-								case '2':
-									this.$children[0].isShow = true;
-									this.msg = '注册失败';
-									break;
-								case '3':
-									this.$children[0].isShow = true;
-									this.msg = '手机号码已经存在';
-									break;
-								case '4':
-									this.$children[0].isShow = true;
-									this.msg = '验证码错误';
-									break;
-								default:
-									break;
-							}
+							this.num = data.data;
+							this.$children[0].isShow = true;
+							this.msg = data.message;
 						}
 					}.bind(this), function() {
 						this.$children[0].isShow = true;

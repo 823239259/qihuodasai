@@ -116,6 +116,7 @@
 						}else{
 							//请求发送验证码
 							this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
+								headers: {'version': this.version},
 								params: {
 									mobile: this.phone,
 									type: 1,
