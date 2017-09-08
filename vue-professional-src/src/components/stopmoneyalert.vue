@@ -108,9 +108,9 @@
 				isshow: false,
 				Num:1,
 				selectStopLossType00:0,
-//				inputPrice:'',
+				inputPrice:0.00,
 				orderType:1,
-//				zhiYinInputPrice:0.00,
+				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
 				zhiYinorderType:1,
 				tipsMsg: '',
@@ -156,15 +156,15 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
-			inputPrice(){
-				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
-				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
-				
-			},
-			zhiYinInputPrice(){
-				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
-				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
-			}
+//			inputPrice(){
+//				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+//				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
+//				
+//			},
+//			zhiYinInputPrice(){
+//				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+//				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
+//			}
 		},
 		watch:{
 			parameters:function(n,o){
@@ -278,6 +278,12 @@
 		mounted: function(){
 
 		},
+//		beforeMount: function(){
+//			console.log('nimabi');
+//		},
+		updated: function(){
+			console.log('nimabi');
+		}
 	}
 </script>
 

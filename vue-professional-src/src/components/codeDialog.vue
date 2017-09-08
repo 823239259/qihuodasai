@@ -7,7 +7,7 @@
 			<h3 class="title">请先输入图形 验证码</h3>
 			<div class="code_box">
 				<input type="number" class="fl" placeholder="图形验证码" v-model="code" />
-				<a href="javascript:void(0);" class="fr"><img :src="imgPath"/></a>
+				<a href="javascript:void(0);" class="fr"><img :src="imgPath" @tap="refreshCode" /></a>
 			</div>
 			<div class="btn_box">
 				<a href="javascript:void(0);" class="fl" @tap="confirm">确定</a>
@@ -56,6 +56,9 @@
 			},
 		},
 		methods: {
+			refreshCode: function(){
+				this.path = this.path + '&' + Math.random();
+			},
 			close: function(){
 				this.isshow = false;
 			},
@@ -119,7 +122,8 @@
 									type: 1,
 									yzm: this.code
 								},
-								timeout: 5000
+								timeout: 5000,
+								emulateJSON: true
 							}).then(function(e){
 								var data = e.body;
 								if(data.success == true){
@@ -137,6 +141,7 @@
 									this.msg = data.message;
 								}
 							}.bind(this), function(){
+								console.log(159);
 								this.$children[0].isShow = true;
 								this.msg = '网络不给力，请稍后再试！'
 							});
@@ -150,7 +155,8 @@
 								type: 2,
 								yzm: this.code
 							},
-							timeout: 5000
+							timeout: 5000,
+							emulateJSON: true
 						}).then(function(e){
 							var data = e.body;
 							this.$refs.dialog.isShow = true;

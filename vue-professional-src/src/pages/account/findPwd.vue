@@ -163,7 +163,8 @@
 							password: this.pwd,
 							code: this.code
 						},
-						timeout: 5000
+						timeout: 5000,
+						emulateJSON: true
 					}).then(function(e){
 						var data = e.body;
 						this.$refs.dialog.isShow = true;
