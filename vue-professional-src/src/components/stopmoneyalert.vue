@@ -17,7 +17,8 @@
 							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
+								<!--最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>-->
+								最新：<span class="fontwhite">{{lastPrice00 | toFixed(orderTemplistDotSize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -114,7 +115,8 @@
 				zhiYinorderType:1,
 				tipsMsg: '',
 				msg: '',
-				str: ''
+				str: '',
+				lastPrice00:''
 			}
 		},
 		props: ['val'],
@@ -152,6 +154,18 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
+			}
+		},
+		watch:{
+			parameters:function(n,o){
+				if(this.condition.CommodityNo!=undefined){
+					n.forEach(function(e,i){
+						if(this.condition.CommodityNo==e.CommodityNo){
+							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.LastPrice;
+						}
+						
+					}.bind(this));
+				}
 			}
 		},
 		filters:{
