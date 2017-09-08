@@ -108,7 +108,7 @@
 				isshow: false,
 				Num:1,
 				selectStopLossType00:0,
-//				inputPrice:0.00,
+//				inputPrice:'',
 				orderType:1,
 //				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
@@ -138,6 +138,7 @@
 				return	this.$store.state.market.orderTemplist;
 			},
 			condition(){
+				console.log(this.val);
 				if(this.val==undefined) return;
 				return JSON.parse(this.val);
 			},
@@ -275,6 +276,7 @@
 			}
 		},
 		mounted: function(){
+
 		},
 	}
 </script>

@@ -96,6 +96,7 @@
 				return this.$store.state.market.qryHoldTotalArr;
 			},
 			selectedOrderLists: function(){
+				console.log(JSON.stringify(this.selectedOrderList))
 				return JSON.stringify(this.selectedOrderList);
 			},
 		},
