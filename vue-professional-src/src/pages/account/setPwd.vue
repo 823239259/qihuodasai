@@ -46,7 +46,6 @@
 		},
 		methods: {
 			toLogin: function(){
-				var phone = this.$route.query.phone;
 				if(this.pwd == ''){
 					this.$children[0].isShow = true;
 					this.msg = '请输入新密码';
@@ -63,8 +62,9 @@
 					//请求设置新密码
 					this.$http.post(this.PATH + '/reset_password',{emulateJSON: true},{
 						params: {
-							mobile: phone,
-							password: this.pwd
+							mobile: this.phone,
+							password: this.pwd,
+							code: this.code
 						},
 						timeout: 5000
 					}).then(function(e){

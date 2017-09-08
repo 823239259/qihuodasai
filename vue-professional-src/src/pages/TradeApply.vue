@@ -92,9 +92,9 @@
 							this.bannerList = data.data.bannerList;
 							this.bannerList.forEach(function(o, i){
 								if(this.environment == 'test'){
-									o.imgPath = "http://test.manage.dktai.cn/" + o.imgPath;
+									o.imgPath = "http://test.manage.duokongtai.cn/" + o.imgPath;
 								}else{
-									o.imgPath = "http://manage.dktai.cn/" + o.imgPath;
+									o.imgPath = "http://manage.duokongtai.cn/" + o.imgPath;
 								}
 								
 							}.bind(this));

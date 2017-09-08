@@ -117,10 +117,11 @@
 							if(num > 2){
 								this.$refs.codeDialog.isshow = true;
 								if(this.environment == 'test'){
-									this.path = "http://test.api.dktai.cn/validate.code?1= Math.random()*10000";
+									this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 								}else{
-									this.path = "http://api.dktai.cn/validate.code?1= Math.random()*10000" ;
+									this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 								}
+								this.$refs.codeDialog.path = this.path;
 								this.str = {
 									loginName: this.phone,
 									password: this.pwd,

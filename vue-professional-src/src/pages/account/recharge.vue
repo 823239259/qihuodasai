@@ -57,7 +57,7 @@
 					this.$children[0].isShow = true;
 					this.msg = '请输入充值金额';
 				}else{
-					window.location.href = 'http://www.dktai.cn/app/appPayinfo?mobile='+ this.userInfo.username +'&money='+ this.money;
+					window.location.href = 'http://www.duokongtai.cn/app/appPayinfo?mobile='+ this.userInfo.username +'&money='+ this.money;
 				}
 				
 			},
