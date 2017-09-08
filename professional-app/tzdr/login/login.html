@@ -1,228 +1,355 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>用户登录</title>    
-    <link rel="stylesheet" href="../../css/mui.min.css" />
-    <link rel="stylesheet" href="../../css/own.css" />
-    <script type="text/javascript" src="../../js/mui.min.js"></script>  
-    <script type="text/javascript" src="../../js/common.js"></script>
-    <script src="../../js/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" href="../../css/quotation.css" />
-    <style>
-/*    body{
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>用户登录</title>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script src="../../js/jquery-1.11.3.js"></script>
+		<link rel="stylesheet" href="../../css/quotation.css" />
+		<style>
+			/*    body{
     	background-image: url("../../images/resigter.png");
     	background-size: cover;
     }*/
-    .mui-content{
-   	 	background-color: rgba(0,0,0,0);
-   	 }
-   	  .mui-bar{
-   	 	background-color: rgba(0,0,0,0);
-   	 	border-bottom: none;
-   	 }
-   	 .commStyle{
-   	 	border-bottom: 1px solid #999999;
-   	 }
-		</style>
-	<script>
-	var win= null;
-		mui.init();
-		mui.plusReady(function(){
-//			mui.back=function(){
-//				if (mui.cacheUser.isLogin()){
-//							var a=plus.webview.getWebviewById("account");
-//							if(a){
-//								mui.app_refresh('account');
-//							}
-//							mui.openWindow({url:"../account/account.html",id:'account'}); 
-//							return;
-//						}
-//						mui.openWindow({url:"../account/accountno.html",id:"accountno"});
-//			}
-			if (mui.cacheUser.isLogin()){
-				mui.openWindow("../quotation/quotationMain.html");
+			
+			.mui-content {
+				background-color: rgba(0, 0, 0, 0);
 			}
-			win=plus.webview.currentWebview();
-			 /*绑定事件
+			
+			.mui-bar {
+				background-color: rgba(0, 0, 0, 0);
+				border-bottom: none;
+			}
+			
+			.commStyle {
+				border-bottom: 1px solid #999999;
+			}
+			/*图形验证码*/
+			
+			#codelayer {
+				background-color: rgba(0, 0, 0, .7);
+				display: none;
+			}
+			
+			#codelayer .contnet {
+				padding: 10px 0;
+				width: 240px;
+				height: 140px;
+				background: #fff;
+				position: fixed;
+				left: 50%;
+				top: 50%;
+				margin-left: -120px;
+				margin-top: -70px;
+				color: #333;
+				border-radius: 5px;
+			}
+			
+			#codelayer .contnet input {
+				width: 50%;
+				text-align: left;
+				font-size: 12px;
+				padding: 0;
+				padding-left: 10px;
+			}
+			
+			#cz {
+				margin-top: 19px;
+			}
+			
+			#cz span {
+				width: 50%;
+				display: inline-block;
+				color: #333;
+				text-align: center;
+				height: 40px;
+				line-height: 40px;
+			}
+			
+			#cz span:active {
+				background: #999999;
+			}
+			/*图形验证码结束*/
+		</style>
+		<script>
+			var win = null;
+			mui.init();
+			mui.plusReady(function() {
+				if(mui.cacheUser.isLogin()) {
+					mui.openWindow("../quotation/quotationMain.html");
+				}
+				win = plus.webview.currentWebview();
+				/*绑定事件
 				 */
-				$("#accountClear").click(function(){
+				$("#accountClear").click(function() {
 					$("#account").val("");
 					checkValue();
 				});
-				$("#passwordClear").click(function(){
+				$("#passwordClear").click(function() {
 					$("#password").val("");
 					checkValue();
 				});
-			// 清除缓存页面
-			//mui.cacheUser.clearCachePages();
-			$(".mui-content").css({
-					"opacity":"1"
+				// 清除缓存页面
+				//mui.cacheUser.clearCachePages();
+				$(".mui-content").css({
+					"opacity": "1"
 				})
-			//清除遗留数据
-			clearinfo();
-			document.getElementById("back").addEventListener("tap",function(){
-				if (mui.cacheUser.isLogin()){
-							var a=plus.webview.getWebviewById("account");
-							if(a){
-								mui.app_refresh('account');
-							}
-							mui.openWindow({url:"../account/account.html",id:'account'}); 
-							return;
+
+				//清除遗留数据
+				clearinfo();
+				document.getElementById("back").addEventListener("tap", function() {
+					if(mui.cacheUser.isLogin()) {
+						var a = plus.webview.getWebviewById("account");
+						if(a) {
+							mui.app_refresh('account');
 						}
-						mui.openWindow({url:"../account/accountno.html",id:"accountno"});
-    		});
-    		/*document.getElementById("telBtn").addEventListener("tap",function(){
-    			mui.callService();
-    		});*/
-			document.getElementById("reg").addEventListener("tap",function(){
-				mui.openWindow("regist.html");
-			});
-			document.getElementById("forgetPassword").addEventListener("tap",function(){
-				mui.openWindow({url:"retrievePassword.html",id:"retrievePassword.html"});
-			});
-			document.getElementById("operateLogin").addEventListener("tap",function(){
-				userLogin();
-			});
-			document.getElementById("back").addEventListener("tap",function(){
-				plus.nativeUI.closeWaiting();
-				mui.app_back("quotationMain",true);
-			});
-	}); 
-		function clearinfo(){
-			document.getElementById("account").value="";
-			document.getElementById("password").value="";
-		};
-//		function MacthValue(){
-//			var mobile=document.getElementById("account").value;
-//			var mobilePattern={mobile: /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/ };
-//			
-//		}
-		function userLogin(){
-			var mobile=document.getElementById("account").value;
-			var password=document.getElementById("password").value;
-			//这里要对手机号码进行格式校验
-    		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
-    			mui.toast("请输入正确的手机号");
-    			return;
-    		}
-    		if(mui.isnull(password)){
-    			mui.toast("请输入正确密码！");
-    			return;
-    		}
-			var paramUrl={
-				url:"login.html"
-			}
-			mui.app_request('/login',{ 
-      			 'loginName':mobile,
-			    'password':password
-      	},function(result){
-      				mui.toast("登录成功！"); 
-      				//存储用户信息
-      				mui.cacheUser.save(result.data.token,result.data.secret,mobile);
-      				localStorage.removeItem("tipLogin");
-      				if (win.backpageID){ 
-      					mui.app_back(win.backpageID,true);   //放回businessPageId页面，并且刷新该页面信息
-      					return;
-      				} 
-      				var wsreload = plus.webview.getWebviewById("quotationMain");
-      				if(wsreload != null){
-	      				wsreload.reload(); 
-      				}
-      				mui.openWindow("../quotation/quotationMain.html","quotationMain");
-      				return;
-      			
-      	},function(result){
-      			if(result.code==3){
-      				mui.toast("用户名或密码为空！"); 
-      				return;
-      			}else if(result.code==4){
-      				mui.toast("帐号或密码错误！"); 
-      				return;
-      			}else if(result.code==2){
-      				mui.toast("登录失败！"); 
-      				return;
-      			}else{
-      				mui.toast("帐号或密码错误");
-      				return;
-      			}
-      			
-      		},paramUrl);
-			
-		};
-		/*按钮变色*/
-			function checkValue(){
-				var account=$("#account").val();
-				var password=$("#password").val();
-				if(account.length>0 && password.length>0){
-					$("#operateLogin").css({
-						"background-color":"#fcc900"
+						mui.openWindow({
+							url: "../account/account.html",
+							id: 'account'
+						});
+						return;
+					}
+					mui.openWindow({
+						url: "../account/accountno.html",
+						id: "accountno"
 					});
-				}else{
+				});
+				/*document.getElementById("telBtn").addEventListener("tap",function(){
+					mui.callService();
+				});*/
+				document.getElementById("reg").addEventListener("tap", function() {
+					mui.openWindow("regist.html");
+				});
+				document.getElementById("forgetPassword").addEventListener("tap", function() {
+					mui.openWindow({
+						url: "retrievePassword.html",
+						id: "retrievePassword.html"
+					});
+				});
+				document.getElementById("operateLogin").addEventListener("tap", function() {
+					userLogin();
+				});
+				document.getElementById("back").addEventListener("tap", function() {
+					plus.nativeUI.closeWaiting();
+					mui.app_back("quotationMain", true);
+				});
+				/*重新获取图形验证码*/
+				document.getElementById("refresh_code").addEventListener("tap", function() {
+					var mobile = document.getElementById("account").value;
+					$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+				});
+				//退出图形验证码框
+				document.getElementById("cancel").addEventListener("tap", function() {
+					$("#codelayer").css("display", "none");
+				});
+			});
+
+			function clearinfo() {
+				document.getElementById("account").value = "";
+				document.getElementById("password").value = "";
+			};
+			//		function MacthValue(){
+			//			var mobile=document.getElementById("account").value;
+			//			var mobilePattern={mobile: /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/ };
+			//			
+			//		}
+
+			function userLogin() {
+				var mobile = document.getElementById("account").value;
+				var password = document.getElementById("password").value;
+				var picCode = ""; //验证码
+				//这里要对手机号码进行格式校验
+				if(!tzdr.validate_mobile(mobile) || mui.isnull(mobile)) {
+					mui.toast("请输入正确的手机号");
+					return;
+				}
+				if(mui.isnull(password)) {
+					mui.toast("请输入正确密码！");
+					return;
+				}
+				var paramUrl = {
+					url: "login.html"
+				}
+				mui.app_request('/login', {
+					'loginName': mobile,
+					'password': password,
+					'code': picCode
+				}, function(result) {
+					mui.toast("登录成功！");
+					//存储用户信息
+					mui.cacheUser.save(result.data.token, result.data.secret, mobile);
+					localStorage.removeItem("tipLogin");
+					if(win.backpageID) {
+						mui.app_back(win.backpageID, true); //放回businessPageId页面，并且刷新该页面信息
+						return;
+					}
+					var wsreload = plus.webview.getWebviewById("quotationMain");
+					if(wsreload != null) {
+						wsreload.reload();
+					}
+					mui.openWindow("../quotation/quotationMain.html", "quotationMain");
+					return;
+				}, function(result) {
+					console.log("登录路失败状态码：" + result.code + "信息：" + result.message);
+					if(result.code == 6) { //被冻结
+						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+						return;
+					}
+					if(result.data.num != undefined && result.data.num != null && result.data.num >= 2) {
+						//  		图片验证码
+						$("#codelayer").css("display", "block");
+						$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+						$("#refresh_code_value").focus();
+						//					点击图片验证码确认按钮
+						document.getElementById("confirm").addEventListener("tap", function() {
+							//						获取用户输入验证码
+							var picCode = $("#refresh_code_value").val();
+							//						验证码判空
+							if(mui.isnull(picCode)) {
+								mui.toast("验证码不能为空！");
+								return;
+							};
+							//							
+							mui.app_request('/login', {
+								'loginName': mobile,
+								'password': password,
+								'code': picCode
+							}, function(result) { //成功
+								mui.toast("登录成功");
+								//存储用户信息
+								mui.cacheUser.save(result.data.token, result.data.secret, mobile);
+								localStorage.removeItem("tipLogin");
+								if(win.backpageID) {
+									mui.app_back(win.backpageID, true); //放回businessPageId页面，并且刷新该页面信息
+									return;
+								}
+								var wsreload = plus.webview.getWebviewById("quotationMain");
+								if(wsreload != null) {
+									wsreload.reload();
+								}
+								mui.openWindow("../quotation/quotationMain.html", "quotationMain");
+								return;
+								//$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+							}, function(result) { //失败
+								$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+								if(result.code == 2) {
+									mui.toast("用户名或者密码错误 ");
+									return;
+								} else if(result.code == 4) {
+									mui.toast("验证码输入错误");
+									return;
+								} else if(result.code == 6) {
+									mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+									return;
+								}
+							})
+						});
+						//mui.toast(result.message);
+					}
+					if(result.code == 2) {
+						mui.toast("用户名或者密码错误 ");
+						return;
+					} else if(result.code == 4) {
+						mui.toast("验证码输入错误");
+						return;
+					} else if(result.code == 6) {
+						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+						return;
+					}
+				}, paramUrl);
+
+			}
+
+			/*按钮变色*/
+			function checkValue() {
+				var account = $("#account").val();
+				var password = $("#password").val();
+				if(account.length > 0 && password.length > 0) {
 					$("#operateLogin").css({
-						"background-color":"#cccccc"
+						"background-color": "#fcc900"
+					});
+				} else {
+					$("#operateLogin").css({
+						"background-color": "#cccccc"
 					});
 				}
-				if(account=="" || account==null || account.length==0) {
+				if(account == "" || account == null || account.length == 0) {
 					$("#accountClear").css({
 						"display": "none"
 					});
 				}
-				if(password=="" || password==null || password.length==0){
+				if(password == "" || password == null || password.length == 0) {
 					$("#passwordClear").css({
-					"display":"none"
+						"display": "none"
 					});
 				};
-				if(account.length>0){
+				if(account.length > 0) {
 					$("#accountClear").css({
-						"display":"block"
+						"display": "block"
 					});
 				}
-				if(password.length>0){
+				if(password.length > 0) {
 					$("#passwordClear").css({
-						"display":"block"
+						"display": "block"
 					});
 				}
 			}
-	</script>
-</head>
-<body class="ui-page-login" style="background: #2B2B2B;">	
-	<header class="mui-bar mui-bar-nav topMenu">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
-		<h1 class="mui-title">登录</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
-	</header>
-	<div class="mui-content ">
-		<div id="logo">
-			<img src="../../images/LOGO.png" >
-		</div>
-		
-		<div id="inputList">
-			<div class="commStyle">
-				<label style="width: 43px;">手机：</label>
-				<input type="tel"  placeholder="请输入您的账号" id='account' oninput="checkValue()" autocomplete="off"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
-				<img src="../../images/close.png" id="accountClear">
-			</div>
-			<div class="commStyle">
-				<label style="width: 43px;">密码：</label>
-				<input type="password"  placeholder="请输入您的密码" id="password" oninput="checkValue()" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
-				<img src="../../images/close.png" id="passwordClear">
-			</div>
-			<div class="commStyle"  id="forgetPasswordDiv">
-				<span id="forgetPassword">忘记密码</span>
-			</div>
-			<div class="mui-content-padded">
-				<button  class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
-			</div>
-			<div class="commStyle"  id="resigterDiv">
-				<a id='reg' href="javascript:void(0)">注册账号</a>
+		</script>
+	</head>
+
+	<body class="ui-page-login" style="background: #2B2B2B;">
+		<!--打开图形验证码框-->
+		<div class="mui-backdrop" id="codelayer" style="">
+			<div class="contnet">
+				<p style="color: #333; text-align: center;">请先输入图形验证码</p>
+				<div style="margin-top: 10px; padding: 0 10px; height: 40px;">
+					<input type="text" id="refresh_code_value" value="" maxlength="5" placeholder="图形验证码" oninput="checkValue()" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+					<img src="" style="width: 46%; height: 38px; position: relative; top: 14px;" id="refresh_code" />
+				</div>
+				<p id="cz"><span id="cancel">取消</span><span id="confirm">确认</span></p>
 			</div>
 		</div>
-	</div>
-	<script src="../../js/jquery-1.11.3.js"></script>
-	<script>
-		tzdr.online();
-	</script>
-</body>
+		<header class="mui-bar mui-bar-nav topMenu">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">登录</h1>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
+		</header>
+		<div class="mui-content ">
+			<div id="logo">
+				<img src="../../images/LOGO.png">
+			</div>
+
+			<div id="inputList">
+				<div class="commStyle">
+					<label style="width: 43px;">手机：</label>
+					<input type="tel" placeholder="请输入您的账号" id='account' oninput="checkValue()" autocomplete="off" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+					<img src="../../images/close.png" id="accountClear">
+				</div>
+				<div class="commStyle">
+					<label style="width: 43px;">密码：</label>
+					<input type="password" placeholder="请输入您的密码" id="password" oninput="checkValue()" autocomplete="off" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+					<img src="../../images/close.png" id="passwordClear">
+				</div>
+				<div class="commStyle" id="forgetPasswordDiv">
+					<span id="forgetPassword">忘记密码</span>
+				</div>
+				<div class="mui-content-padded">
+					<button class="mui-btn mui-btn-block" id="operateLogin">立即登录</button>
+				</div>
+				<div class="commStyle" id="resigterDiv">
+					<a id='reg' href="javascript:void(0)">注册账号</a>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/jquery-1.11.3.js"></script>
+		<script>
+			tzdr.online();
+		</script>
+	</body>
+
 </html>

@@ -340,7 +340,11 @@
 					"images/close.png",
 					"images/close1.png",
 					"images/about.png",
-					"images/4.png"
+					"images/4.png",
+					"images/ac_081.png",
+					"images/ac_071.png",
+					"images/banner_load.jpg",
+					"images/headPortrait.png"
 				],
 				"refer": [
 					"tzdr/account/charge.html",
@@ -788,7 +792,8 @@
 					"css/recharge.css",
 					"js/jquery-1.11.3.js",
 					"images/gou.png",
-					"images/gouOn.png"
+					"images/gouOn.png",
+					"images/1.0.png"
 				],
 				"refer": [
 					"tzdr/account/account.html",
@@ -878,14 +883,19 @@
 					"images/2.png",
 					"images/1.png",
 					"images/weixinIcon.png",
-					"images/about.png"
+					"images/about.png",
+					"images/ac_081.png",
+					"images/ac_071.png",
+					"images/banner_load.jpg",
+					"images/headPortrait.png"
 				],
 				"refer": [
 					"tzdr/login/regist.html",
 					"tzdr/login/login.html",
 					"tzdr/future/listrg.html",
 					"tzdr/quotation/quotationMain.html",
-					"home.html"
+					"home.html",
+					"tzdr/information/information.html"
 				],
 				"priority": 0
 			},
@@ -1116,7 +1126,9 @@
 					"images/quotation0.png",
 					"images/quotation1.png",
 					"images/quotation4.png",
-					"images/4.png"
+					"images/4.png",
+					"images/minute.png",
+					"images/quickMode.png"
 				],
 				"refer": [
 					"home.html",
@@ -1126,7 +1138,9 @@
 					"tzdr/account/accountno.html",
 					"tzdr/future/listrg.html",
 					"tzdr/quotation/tutorial.html",
-					"tzdr/login/login.html"
+					"tzdr/login/login.html",
+					"tzdr/agree/minuteIntroduce.html",
+					"tzdr/future/cp.html"
 				],
 				"priority": 0
 			},
@@ -1752,6 +1766,19 @@
 					"tzdr/future/listrg.html",
 					"home.html"
 				],
+				"priority": 0
+			},
+			"tzdr/agree/minuteIntroduce.html": {
+				"resources": [
+					"css/own.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"images/minutes_lis3.png",
+					"css/mui.min.css",
+					"images/minutes_lis2.png",
+					"images/minutes_lis1.png"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
