@@ -1,265 +1,365 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>新用户注册</title>
-    <link rel="stylesheet" href="../../css/mui.min.css" />
-    <link rel="stylesheet" href="../../css/own.css" />
-    <script type="text/javascript" src="../../js/mui.min.js"></script>   
-    <script type="text/javascript" src="../../js/common.js"></script>
-    <script src="../../js/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" href="../../css/quotation.css" />
-    <style>
-    	 /*body{
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>新用户注册</title>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/own.css" />
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script src="../../js/jquery-1.11.3.js"></script>
+		<link rel="stylesheet" href="../../css/quotation.css" />
+		<style>
+			/*body{
     	background-image: url("../../images/login.png");
     	background-size: cover;
    	 }*/
-   	 .mui-content,input{
-   	 	background-color: rgba(0,0,0,0);
-   	 }
-   	 .mui-bar{
-   	 	background-color: rgba(0,0,0,0);
-   	 	border-bottom: none;
-   	 }
-   	 .commStyle{
-   	 	border-bottom: 1px solid #999999;
-   	 }
-   </style>
-    <script>
-    	mui.init();
-    	mui.plusReady(function(){
-			/*绑定事件
+			
+			.mui-content,
+			input {
+				background-color: rgba(0, 0, 0, 0);
+			}
+			
+			.mui-bar {
+				background-color: rgba(0, 0, 0, 0);
+				border-bottom: none;
+			}
+			
+			.commStyle {
+				border-bottom: 1px solid #999999;
+			}
+			/*图形验证码*/
+			
+			#codelayer {
+				background-color: rgba(0, 0, 0, .7);
+				display: none;
+			}
+			
+			#codelayer .contnet {
+				padding: 10px 0;
+				width: 240px;
+				height: 140px;
+				background: #fff;
+				position: fixed;
+				left: 50%;
+				top: 50%;
+				margin-left: -120px;
+				margin-top: -70px;
+				color: #333;
+				border-radius: 5px;
+			}
+			
+			#codelayer .contnet input {
+				width: 50%;
+				text-align: left;
+				font-size: 12px;
+				padding: 0;
+				padding-left: 10px;
+			}
+			
+			#cz {
+				margin-top: 19px;
+			}
+			
+			#cz span {
+				width: 50%;
+				display: inline-block;
+				color: #333;
+				text-align: center;
+				height: 40px;
+				line-height: 40px;
+			}
+			
+			#cz span:active {
+				background: #999999;
+			}
+			/*图形验证码结束*/
+		</style>
+		<script>
+			mui.init();
+			mui.plusReady(function() {
+				/*绑定事件
 				 */
-				$("#accountClear").click(function(){
+				$("#accountClear").click(function() {
 					$("#account").val("");
 					checkValue();
 				});
-				var num=0
+				var num = 0
 				$("#checkBox i").val(1);
-				$("#checkBox").click(function(){
-					if(num==0){
+				$("#checkBox").click(function() {
+					if(num == 0) {
 						$("#checkBox i").val(2);
 						$("#checkBox i").css({
-							"background-color":"rgba(0, 0, 0, 0)" ,
+							"background-color": "rgba(0, 0, 0, 0)",
 						})
-						num=1
-					}else{
+						num = 1
+					} else {
 						$("#checkBox i").val(1);
-						num=0;
+						num = 0;
 						$("#checkBox i").css({
-							"background-color":"#fcc900" ,
+							"background-color": "#fcc900",
 						})
 					}
 				});
-    		//获取友盟的统计代码
-    		//清除遗留数据
-//  		clearinfo();
-    		document.getElementById("back").addEventListener("tap",function(){
-    			history.back();
-    		});
-    		/*document.getElementById("telBtn").addEventListener("tap",function(){
-    			mui.callService();
-    		});*/
-    		document.getElementById("code").addEventListener("tap",function(){
-    			
-    			getCode();
-    		});
-    		document.getElementById("operateLogin").addEventListener("tap",function(){
-    			registUser();
-    		});
-    		
-    		document.getElementById("tzdr_info").addEventListener("tap",function(){
-    			mui.openWindow("../agree/tzdr.html");
-    		});
-   			document.getElementById("resigterDivButton").addEventListener("tap",function(){
-   				mui.openWindow("login.html");
-   			})
-    	
-    	
-    	function clearinfo(){
-    		document.getElementById("account").value="";
-			document.getElementById("password").value="";
-			document.getElementById("password_confirm").value="";
-			document.getElementById("email").value="";//确认密码
-    	};
-    	
-    	//获取验证码
-    	function getCode(){
-    		var mobile=document.getElementById("account").value;
-    		//这里要对手机号码进行格式校验
-    		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
-    			mui.toast("请输入正确的手机号");
-    			return;
-    		}   
-    		var paramUrl={
-				url:"login.html"
-			}
-    		mui.app_request('sms',{ 
-      			 'mobile':mobile,
-			     'type':1  
-      		},function(result){
-      				mui.toast("发送成功！");  
-      				var o=document.getElementById("code");
-		  			tzdr.smsTime(o); 
-      				return;
-      			
-      		},function(result){
-      			if(result.code==2){
-      				mui.toast("短信验证码发送失败！");
-      				return;
-      			}else if(result.code==5){
-      				mui.toast("操作过于频繁，请稍后再试！");
-      				return;
-      			}else if(result.code==3){
-      				mui.toast("手机号码已经存在！");
-      				return;
-      			}else{
-      				mui.toast("系统繁忙，请稍后再试！");
-      				return;
-      			}
-      			
-      		},paramUrl);
-    	}  
-    	function registUser(){
-    		
-    		var mobile=document.getElementById("account").value;
-			var code=document.getElementById("codeInput").value;
-			//这里要对手机号码进行格式校验
-    		if(!tzdr.validate_mobile(mobile)||mui.isnull(mobile)){
-    			mui.toast("请输入正确的手机号");
-    			return;
-    		}
-			if(mui.isnull(code)){
-				mui.toast("验证码不能为空！");
-				return;
-			}
-			if($("#checkBox i").val()==1){
-						        
-			}else{
-			     mui.toast("您还未勾选协议"); 
-			   return;
-			 };
-			var paramUrl={
-				url:"login.html"
-			}
-			plus.nativeUI.showWaiting();
-			mui.app_request('/validate/sms',{ 
-      			 'mobile':mobile,
-			    'code':code,
-	      	},function(result){
-	      		plus.nativeUI.closeWaiting();
-  				mui.openWindow({
-				    url:'confirmPassword.html',
-				    id:'confirmPassword.html',
-				    extras:{
-				        mobile : mobile,
-				       
-				    }
+				//获取友盟的统计代码
+				//清除遗留数据
+				//  		clearinfo();
+				document.getElementById("back").addEventListener("tap", function() {
+					history.back();
 				});
-  				return;
-      		},function(result){
-      			plus.nativeUI.closeWaiting();
-      			if(result.code==2){
-      				mui.toast("注册失败！");
-      				return;
-      			}else if(result.code==3){
-      				mui.toast("手机号码已经存在！");
-      				return;
-      			}else if(result.code==4){
-      				mui.toast("验证码错误或为空！");
-      				return;
-      			}else if(result.code==5){
-      				mui.toast("验证码失效！");
-      				return;
-      			}else if(result.code==6){
-      				mui.toast("推广码错误！"); 
-      				return;
-      			}else{
-      				mui.toast("系统繁忙，请稍后再试！");
-      				return;
-      			}
-      		},paramUrl);
-    	};
- 	});
- 	/*按钮变色*/
-			function checkValue(){
-				var account=$("#account").val();
-				var codeInput=$("#codeInput").val();
-				if(account.length>0 && codeInput.length>0){
-					$("#operateLogin").css({
-						"background-color":"#fcc900"
-					});
-				}else{
-					$("#operateLogin").css({
-						"background-color":"#cccccc"
+				/*document.getElementById("telBtn").addEventListener("tap",function(){
+					mui.callService();
+				});*/
+				document.getElementById("code").addEventListener("tap", function() {
+					var refresh_code_value = $("#refresh_code_value").val(""); //图形验证码输入框
+					//获取验证码
+					getCode();
+				});
+				document.getElementById("operateLogin").addEventListener("tap", function() {
+					registUser();
+				});
+
+				document.getElementById("tzdr_info").addEventListener("tap", function() {
+					mui.openWindow("../agree/tzdr.html");
+				});
+				document.getElementById("resigterDivButton").addEventListener("tap", function() {
+					mui.openWindow("login.html");
+				})
+
+				function clearinfo() {
+					document.getElementById("account").value = "";
+					document.getElementById("password").value = "";
+					document.getElementById("password_confirm").value = "";
+					document.getElementById("email").value = ""; //确认密码
+				};
+				/*重新获取图形验证码*/
+				document.getElementById("refresh_code").addEventListener("tap", function() {
+					var mobile = document.getElementById("account").value;
+					$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+				});
+				document.getElementById("cancel").addEventListener("tap", function() {
+					$("#codelayer").css("display", "none");
+				});
+				//获取验证码
+				function getCode() {
+					var mobile = document.getElementById("account").value;
+					//这里要对手机号码进行格式校验
+					if(!tzdr.validate_mobile(mobile) || mui.isnull(mobile)) {
+						mui.toast("请输入正确的手机号");
+						return;
+					}
+					//  		图片验证码
+					$("#codelayer").css("display", "block");
+					$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+					$("#refresh_code_value").focus();
+					document.getElementById("confirm").addEventListener("tap", function() {
+						var refresh_code_value = $("#refresh_code_value").val();
+						if(mui.isnull(refresh_code_value)) {
+							mui.toast("验证码不能为空！");
+							return;
+						}
+						var paramUrl = {
+							url: "login.html"
+						}
+						mui.app_request('sms', {
+							'mobile': mobile,
+							'type': 1,
+							'yzm': refresh_code_value
+						}, function(result) {
+							$("#codelayer").css("display", "none");
+							mui.toast("发送成功！");
+							var o = document.getElementById("code");
+							tzdr.smsTime(o);
+							return;
+						}, function(result) {
+							console.log("注册返回代码" + result.code + "信息：" + result.message)
+							$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+							if(result.code == 2) {
+								mui.toast("短信验证码发送失败！");
+								return;
+							} else if(result.code == 3) {
+								mui.toast("手机号码已经存在！");
+								return;
+							} else if(result.code == 4) {
+								mui.toast("手机号码不存在！");
+								return;
+							} else if(result.code == 5) {
+								mui.toast("操作过于频繁，请稍候再试（60s内重复调用）！");
+								return;
+							} else if(result.code == 6) {
+								mui.toast("电话号码格式错误！");
+								return;
+							} else if(result.code == 7) {
+								mui.toast("超过短信每天发送次数限制（5次）！");
+								return;
+							} 
+							else if(result.code == 8) {
+								mui.toast("请输入正确的验证码！");
+								return;
+							} 
+						}, paramUrl);
 					});
 				}
-				if(account=="" || account==null || account.length==0) {
+
+				function registUser() {
+
+					var mobile = document.getElementById("account").value;
+					var code = document.getElementById("codeInput").value;
+					//这里要对手机号码进行格式校验
+					if(!tzdr.validate_mobile(mobile) || mui.isnull(mobile)) {
+						mui.toast("请输入正确的手机号");
+						return;
+					}
+					if(mui.isnull(code)) {
+						mui.toast("验证码不能为空！");
+						return;
+					}
+					if($("#checkBox i").val() == 1) {
+
+					} else {
+						mui.toast("您还未勾选协议");
+						return;
+					};
+					var paramUrl = {
+						url: "login.html"
+					}
+					plus.nativeUI.showWaiting();
+					mui.app_request('/validate/sms', {
+						'mobile': mobile,
+						'code': code,
+					}, function(result) {
+						plus.nativeUI.closeWaiting();
+						mui.openWindow({
+							url: 'confirmPassword.html',
+							id: 'confirmPassword.html',
+							extras: {
+								mobile: mobile,
+								code:code
+
+							}
+						});
+						return;
+					}, function(result) {
+						console.log("注册失败："+result.code+result.message)
+						plus.nativeUI.closeWaiting();
+						if(result.code == 2) {
+							mui.toast("注册失败！");
+							return;
+						} else if(result.code == 3) {
+							mui.toast("手机号码已经存在！");
+							return;
+						} else if(result.code == 4) {
+							mui.toast("验证码错误或为空！");
+							return;
+						} else if(result.code == 5) {
+							mui.toast("验证码失效！");
+							return;
+						} else if(result.code == 6) {
+							mui.toast("推广码错误！");
+							return;
+						} else {
+							mui.toast("系统繁忙，请稍后再试！"+result.message);
+							return;
+						}
+					}, paramUrl);
+				};
+			});
+			/*按钮变色*/
+			function checkValue() {
+				var account = $("#account").val();
+				var codeInput = $("#codeInput").val();
+				if(account.length > 0 && codeInput.length > 0) {
+					$("#operateLogin").css({
+						"background-color": "#fcc900"
+					});
+				} else {
+					$("#operateLogin").css({
+						"background-color": "#cccccc"
+					});
+				}
+				if(account == "" || account == null || account.length == 0) {
 					$("#accountClear").css({
 						"display": "none"
 					});
 				}
-				if(codeInput=="" || codeInput==null || codeInput.length==0){
+				if(codeInput == "" || codeInput == null || codeInput.length == 0) {
 					$("#passwordClear").css({
-					"display":"none"
+						"display": "none"
 					});
 				};
-				if(account.length>0){
+				if(account.length > 0) {
 					$("#accountClear").css({
-						"display":"block"
+						"display": "block"
 					});
 				}
-				if(codeInput.length>0){
+				if(codeInput.length > 0) {
 					$("#passwordClear").css({
-						"display":"block"
+						"display": "block"
 					});
 				}
 			}
-    </script>
-</head>
-<body style="background-color: #2B2B2B">	
-	<header class="mui-bar mui-bar-nav own-topbg">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
-		<h1 class="mui-title">注册</h1>		
-		<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
-	</header>
-	<div class="mui-content">
-		<div id="logo">
-			<img src="../../images/LOGO.png" >
+		</script>
+	</head>
+
+	<body style="background-color: #2B2B2B">
+		<!--打开验证码框-->
+		<div class="mui-backdrop" id="codelayer" style="">
+			<div class="contnet">
+				<p style="color: #333; text-align: center;">请先输入图形验证码</p>
+				<div style="margin-top: 10px; padding: 0 10px; height: 40px;">
+					<input type="text" id="refresh_code_value" value="" maxlength="5" placeholder="图形验证码" oninput="checkValue()" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+					<img src="" style="width: 46%; height: 38px; position: relative; top: 14px;" id="refresh_code" />
+				</div>
+				<p id="cz"><span id="cancel">取消</span><span id="confirm">确认</span></p>
+			</div>
 		</div>
-		<div id="inputList">
-			<div class="commStyle">
-				<label style="width: 43px;">手机：</label>
-				<input type="number"  placeholder="请输入您的账号" id='account' oninput="checkValue()" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
-				<img src="../../images/close.png" id="accountClear">
+		<header class="mui-bar mui-bar-nav own-topbg">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
+			<h1 class="mui-title">注册</h1>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
+		</header>
+		<div class="mui-content">
+			<div id="logo">
+				<img src="../../images/LOGO.png">
 			</div>
-			<div class="commStyle">
-				<input type="number"  placeholder="请输入您的验证码" id="codeInput" oninput="checkValue()" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
-				<button type="button" id="code">发送验证码</button>
+			<div id="inputList">
+				<div class="commStyle">
+					<label style="width: 43px;">手机：</label>
+					<input type="number" placeholder="请输入您的账号" id='account' oninput="checkValue()" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+					<img src="../../images/close.png" id="accountClear">
+				</div>
+				<div class="commStyle">
+					<input type="number" placeholder="请输入您的验证码" id="codeInput" oninput="checkValue()" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+					<button type="button" id="code">发送验证码</button>
+				</div>
+				<div id="loginIform">
+					<p id="loginAgree"><span id="checkBox"><i ></i></span>
+						<sapn>同意</sapn>
+						<a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《国际期货通注册协议》</a>并开通模拟盘账户</p>
+				</div>
+				<div class="mui-content-padded">
+					<button class="mui-btn mui-btn-block" id="operateLogin">下一步</button>
+					<!--<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>-->
+				</div>
+				<div class="commStyle" id="resigterDiv">
+					<a id="resigterDivButton" href="javascript:void(0)">已有账号？立即登录</a>
+				</div>
+
 			</div>
-			<div  id="loginIform">
-				<p id="loginAgree"><span id="checkBox"><i ></i></span><sapn>同意</sapn><a href="javascript:void(0);" id="tzdr_info" style="color: #FFCC33;">《国际期货通注册协议》</a>并开通模拟盘账户</p>
-			</div>
-			<div class="mui-content-padded">
-				<button  class="mui-btn mui-btn-block" id="operateLogin">下一步</button>
-				<!--<button id='regLogin' class="mui-btn mui-btn-block">开通外盘期货账户</button>-->
-			</div>
-			<div class="commStyle"  id="resigterDiv">
-				<a  id="resigterDivButton" href="javascript:void(0)">已有账号？立即登录</a>
-			</div>
-			
 		</div>
-	</div>
-	<script>
-		tzdr.online();
-		var width=window.innerWidth;
-//  	$(".commStyle input").css({
-//				"width":width-120+"px"
-//		});
-		$("#codeInput").css({
-			"margin-left":48+"px"
-		})
-	</script>
-</body>
+
+		<script>
+			tzdr.online();
+			var width = window.innerWidth;
+			//  	$(".commStyle input").css({
+			//				"width":width-120+"px"
+			//		});
+			$("#codeInput").css({
+				"margin-left": 48 + "px"
+			})
+		</script>
+	</body>
+
 </html>

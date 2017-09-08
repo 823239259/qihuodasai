@@ -65,6 +65,9 @@
 				background: #1f1f1f;
 				padding-top: 4px;
 			}
+			#table_list tr td{
+				padding: 7.5px 10px;
+			}
 		</style>
 		<script>
 			mui.init();
@@ -97,10 +100,10 @@
 						"line-height": Proportion * 30 + "px",
 						"padding-left": Proportion * 5 + "px",
 					})
-					$("#theadTr td ").css({
+					$("#theadTr td").css({
 						"font-size": Proportion * 12 + "px",
 						"line-height": "15px",
-						"padding": "7.5px 0px"
+						"padding": "7.5px 10px"
 					});
 
 				}
@@ -439,7 +442,7 @@
 			<div class="mui-slider-group">
 				<!--财经日历-->
 				<div class="mui-slider-item mui-control-content mui-active" id="apply">
-					<h5 class="ap_choosetitle"><span>选择操盘保证金：</span><b>金额越多,可持仓手数越多</b></h5>
+					<h5 class="ap_choosetitle"><span>选择操盘保证金</span><b>（金额越多,可持仓手数越多）</b></h5>
 					<ul class="mui-table-view mui-grid-view mui-grid-9 borderClass" id="bond_num">
 
 					</ul>
@@ -457,19 +460,22 @@
 							<span id="lineLoss">10,450美元</span>
 						</li>
 					</ul>
-					<p id="tradeingVariety" style="background: #2b2b2b;"><span>可交易品种：</span><b>一个账号可同时交易17种期货产品</b></p>
-					<p class="tips" style="background: #2b2b2b;">（注意：请不要在交易时间外持单，以免被系统强制平仓）</p>
+					<h5 class="ap_choosetitle"><b>可交易品种（一个账号可同时交易17种期货产品）</b></h5>
+				<!--	<p id="tradeingVariety" style="background: #2b2b2b;"><b>可交易品种（一个账号可同时交易17种期货产品）</b></p>-->
+					<p class="tips" style="background: #2b2b2b;"><span style="color:#ff6a00">&nbsp;&nbsp;注意：</span>请不要在交易时间外持单，以免被系统强制平仓</p>
 					<p style="color: #666666;font-size: 12px;padding: 4px 10px;margin: 0px;background: #2b2b2b;">在各品种停止交易的5分钟内，即11:55-12:00,14:25-14:30,16:25-16:30,16:30-16:35,11:40-11:45,11:55-12:00六个时段所有品种只能平仓，不能开仓。</p>
 					<div class="acp_font" style="background: #2b2b2b;">
+						<center>
 						<table border="0" cellpadding="0" cellspacing="0" id="table_list">
 							<thead id="theadTr">
-								<td width="110px" style="padding-left: 10px;">期货产品</td>
+								<td width="110px">期货产品</td>
 								<td width="100px">主力合约</td>
 								<td width="280px">国际期货通交易时间段</td>
 								<td width="120px">交易手续费<br><i style="font-size: 10px;">结算时统一扣除</i></td>
 								<td width="340px" style="padding-right: 10px;">初始可持仓手数</td>
 							</thead>
 						</table>
+						</center>
 					</div>
 
 					<div class="AgreementList" style="margin-top: -15px; background: #2B2B2B;">
