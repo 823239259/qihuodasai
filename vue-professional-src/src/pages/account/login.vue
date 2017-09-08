@@ -65,7 +65,7 @@
 				secret: '',
 				path: '',
 				str: '',
-				num: 0
+				num: ''
 			}
 		},
 		methods:{
@@ -95,19 +95,19 @@
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					this.$refs.codeDialog.path = this.path + '&' + Math.random();
-					if(this.num >= 2 || this.num == 0){
-						this.$refs.codeDialog.isshow = true;
-						if(this.environment == 'test'){
-							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-						}else{
-							this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-						}
-						this.$refs.codeDialog.path = this.path + '&' + Math.random();
-						this.str = {
-							loginName: this.phone,
-							password: this.pwd
-						}
-					}else{
+//					if(this.num >= 2){
+//						this.$refs.codeDialog.isshow = true;
+//						if(this.environment == 'test'){
+//							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						}else{
+//							this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						}
+//						this.$refs.codeDialog.path = this.path + '&' + Math.random();
+//						this.str = {
+//							loginName: this.phone,
+//							password: this.pwd
+//						}
+//					}else{
 						//登录请求
 						this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
 							params: {
@@ -129,14 +129,35 @@
 								}
 							}else{
 								this.num = data.data.num;
-								this.$refs.dialog.isShow = true;
-								this.msg = data.message;
+								if(this.num > 2){
+									this.$refs.codeDialog.isshow = true;
+									if(this.environment == 'test'){
+										this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+									}else{
+										this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+									}
+									this.$refs.codeDialog.path = this.path + '&' + Math.random();
+									this.str = {
+										loginName: this.phone,
+										password: this.pwd
+									}
+								}else{
+									this.$refs.dialog.isShow = true;
+									if(data.data.date != undefined){
+										var h = (data.data.date/3600).toString();
+										var hour = h.split('.')[0];
+										var minute = parseInt((h - hour) * 60);
+										this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+									}else{
+										this.msg = data.message;
+									}
+								}
 							}
 						}.bind(this), function() {
 							this.$refs.dialog.isShow = true;
 							this.msg = '网络不给力，请稍后再试！';
 						});
-					}
+//					}
 				}
 			},
 			toRegister: function(){

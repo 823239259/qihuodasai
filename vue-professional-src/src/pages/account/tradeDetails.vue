@@ -582,6 +582,10 @@
 									this.$children[0].isShow = true;
 									this.msg = '有持仓，不能结算';
 									break;
+								case '11':
+									this.$children[0].isShow = true;
+									this.msg = '方案结算失败，每个用户每天最多可结算一个未操盘方案，该方案你可在明天发起申请';
+									break;
 								case '20':
 									this.$children[0].isShow = true;
 									this.msg = '连接服务不成功';
