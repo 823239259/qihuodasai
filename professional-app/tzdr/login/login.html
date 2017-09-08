@@ -200,7 +200,7 @@
 						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
 						return;
 					}
-					if(result.data.num != undefined && result.data.num != null && result.data.num >= 2) {
+					if(result.data.num != undefined && result.data.num != null && result.data.num >= 3) {
 						//  		图片验证码
 						$("#codelayer").css("display", "block");
 						$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
@@ -238,7 +238,7 @@
 							}, function(result) { //失败
 								$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 								if(result.code == 2) {
-									mui.toast("用户名或者密码错误 ");
+									mui.toast(result.message);
 									return;
 								} else if(result.code == 4) {
 									mui.toast("验证码输入错误");
@@ -252,13 +252,13 @@
 						//mui.toast(result.message);
 					}
 					if(result.code == 2) {
-						mui.toast("用户名或者密码错误 ");
+						mui.toast(result.message);
 						return;
 					} else if(result.code == 4) {
-						mui.toast("验证码输入错误");
+						mui.toast(result.message);
 						return;
 					} else if(result.code == 6) {
-						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+						mui.toast(result.message);
 						return;
 					}
 				}, paramUrl);
