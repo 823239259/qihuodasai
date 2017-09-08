@@ -348,9 +348,9 @@ export default new Vuex.Store({
 				return '/api';
 			} else if(state.setting == 'build') {
 				if(state.environment == 'test'){
-					return 'http://test.api.dktai.cn';
+					return 'http://test.api.duokongtai.cn';
 				}else{
-					return 'http://api.dktai.cn';
+					return 'http://api.duokongtai.cn';
 				}
 			} else if(state.setting == 'nat') {
 				return '/nat/vs-api';

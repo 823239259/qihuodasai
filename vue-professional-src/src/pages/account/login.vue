@@ -117,9 +117,9 @@
 							if(num > 2){
 								this.$refs.codeDialog.isshow = true;
 								if(this.environment == 'test'){
-									this.path = "http://test.api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+									this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 								}else{
-									this.path = "http://api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+									this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 								}
 								this.$refs.codeDialog.path = this.path;
 								this.str = {

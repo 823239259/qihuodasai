@@ -1,6 +1,6 @@
 <template>
 	<div id="register">
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<topbar title="注册"></topbar>
 		<back></back>
 		<cs title="客服"></cs>
@@ -104,9 +104,9 @@
 					if(this.num && this.num > 2){
 						this.$refs.codeDialog.isshow = true;
 						if(this.environment == 'test'){
-							this.$refs.codeDialog.path = "http://test.api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+							this.$refs.codeDialog.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 						}else{
-							this.$refs.codeDialog.path = "http://api.dktai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+							this.$refs.codeDialog.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 						}
 						this.$refs.codeDialog.phone = this.phone;
 					}else{
@@ -122,7 +122,7 @@
 							var data = e.body;
 							if(data.success == true){
 								if(data.code == 1){
-									this.$refs.dialog.isShow = true;
+									this.$refs.dialog.isshow = true;
 									this.msg = '发送成功';
 									setTimeout(function(){
 										this.isshow = false;
@@ -182,7 +182,8 @@
 						headers: {'version': this.version},
 						params: {
 							mobile: this.phone,
-							password: this.pwd
+							password: this.pwd,
+							code: this.code
 						},
 						timeout: 5000
 					}).then(function(e) {
