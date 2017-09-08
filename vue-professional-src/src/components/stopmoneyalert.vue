@@ -58,7 +58,7 @@
 							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
+								最新：<span class="fontwhite">{{lastPrice00 | toFixed(orderTemplistDotSize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -108,7 +108,7 @@
 				isshow: false,
 				Num:1,
 				selectStopLossType00:0,
-				inputPrice:0.00,
+//				inputPrice:0.00,
 				orderType:1,
 				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
@@ -154,6 +154,9 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
+			},
+			inputPrice(){
+				return this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice;
 			}
 		},
 		watch:{
