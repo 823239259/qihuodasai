@@ -94,21 +94,20 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
-					console.log(this.num);
 					this.$refs.codeDialog.path = this.path + '&' + Math.random();
-					if(this.num >= 2){
-						this.$refs.codeDialog.isshow = true;
-						if(this.environment == 'test'){
-							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-						}else{
-							this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-						}
-						this.$refs.codeDialog.path = this.path + '&' + Math.random();
-						this.str = {
-							loginName: this.phone,
-							password: this.pwd
-						}
-					}else{
+//					if(this.num >= 2){
+//						this.$refs.codeDialog.isshow = true;
+//						if(this.environment == 'test'){
+//							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						}else{
+//							this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						}
+//						this.$refs.codeDialog.path = this.path + '&' + Math.random();
+//						this.str = {
+//							loginName: this.phone,
+//							password: this.pwd
+//						}
+//					}else{
 						//登录请求
 						this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
 							params: {
@@ -129,15 +128,28 @@
 									this.$router.push({path: '/account'});
 								}
 							}else{
-								this.num = data.data.num;
 								this.$refs.dialog.isShow = true;
 								this.msg = data.message;
+								this.num = data.data.num;
+								if(this.num > 2){
+									this.$refs.codeDialog.isshow = true;
+									if(this.environment == 'test'){
+										this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+									}else{
+										this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+									}
+									this.$refs.codeDialog.path = this.path + '&' + Math.random();
+									this.str = {
+										loginName: this.phone,
+										password: this.pwd
+									}
+								}
 							}
 						}.bind(this), function() {
 							this.$refs.dialog.isShow = true;
 							this.msg = '网络不给力，请稍后再试！';
 						});
-					}
+//					}
 				}
 			},
 			toRegister: function(){
