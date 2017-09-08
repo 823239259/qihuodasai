@@ -5,17 +5,19 @@
 <script>
 	export default{
 		name:'tipsDialog',
-		props: ['msg'],
+		props: ['msg','time'],
 		data(){
 			return {
 				isShow: false,
+				times: 1000
 			}
 		},
 		updated: function(){
+			if(this.time) this.times = this.time;
 			if(this.isShow == true){
 				setTimeout(function(){
 					this.isShow = false;
-				}.bind(this), 1000);
+				}.bind(this), this.times);
 			}
 		}
 	}

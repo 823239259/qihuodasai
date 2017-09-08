@@ -1,6 +1,6 @@
 <template>
 	<div id="login">
-		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
+		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<topbar title="登录"></topbar>
 		<back :title="isJumpEvent"></back>
 		<cs title="客服"></cs>
