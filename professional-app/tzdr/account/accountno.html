@@ -82,6 +82,15 @@
 				margin: 0 15px;
 				border-radius: 20px;
 			}
+			.btn_login{
+				background: #ff6a00;
+				color:#FFF;
+				border:solid 1px #ff6a00;
+			}
+			.btn_regist{
+				color: #ff6a00;
+				solid 1px #ff6a00;
+			}
 		</style>
 		<script>
 			mui.init();
@@ -101,7 +110,11 @@
 				});
 
 				document.getElementById("login").addEventListener("tap", function() {
-					mui.openWindow("../login/login.html");
+					mui.app_refresh(login)
+					mui.openWindow({
+						url:"../login/login.html",
+						id:"login"
+						});
 				});
 				
 									//获取banner图片
@@ -200,6 +213,8 @@
 					<p>未登录<span id="title_names"></span></p>
 					<p>你还没有国际期货通账号喔<span id="title_iphones"></p>
 				</div>
+				<!--<button class="btn_login">立即登陆</button>
+				<button class="btn_regist">快速注册</button>-->
 				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额:<span id="title_balance"></span></h2>
 			</div>
 			<div class="mui-slider" id="slider">
