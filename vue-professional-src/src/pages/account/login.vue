@@ -128,15 +128,6 @@
 									this.$router.push({path: '/account'});
 								}
 							}else{
-								this.$refs.dialog.isShow = true;
-								if(data.data.date != undefined){
-									var h = (data.data.date/3600).toString();
-									var hour = h.split('.')[0];
-									var minute = parseInt((h - hour) * 60);
-									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
-								}else{
-									this.msg = data.message;
-								}
 								this.num = data.data.num;
 								if(this.num > 2){
 									this.$refs.codeDialog.isshow = true;
@@ -149,6 +140,16 @@
 									this.str = {
 										loginName: this.phone,
 										password: this.pwd
+									}
+								}else{
+									this.$refs.dialog.isShow = true;
+									if(data.data.date != undefined){
+										var h = (data.data.date/3600).toString();
+										var hour = h.split('.')[0];
+										var minute = parseInt((h - hour) * 60);
+										this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+									}else{
+										this.msg = data.message;
 									}
 								}
 							}
