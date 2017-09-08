@@ -110,7 +110,7 @@
 				selectStopLossType00:0,
 //				inputPrice:0.00,
 				orderType:1,
-				zhiYinInputPrice:0.00,
+//				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
 				zhiYinorderType:1,
 				tipsMsg: '',
@@ -156,6 +156,10 @@
 				return this.$store.state.tradeSocket;
 			},
 			inputPrice(){
+				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
+			},
+			zhiYinInputPrice(){
 				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
 				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
 			}
