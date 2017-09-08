@@ -132,6 +132,9 @@
 						}else if(result.code==10){
 							mui.toast("有持仓或挂单，请平仓后再试！");
 							return;
+						}else if(result.code==11){
+							mui.toast("方案结算失败，每个用户每天最多可结算一个未操盘方案，该方案你可在明天发起申请！");
+							return;
 						}else if(result.code==22 || result.code==20){
 							mui.toast("系统处理繁忙，请稍后再试。如多次尝试失败，请联系客服处理。");
 							return;

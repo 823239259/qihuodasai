@@ -82,7 +82,7 @@
 					mui.app_refresh('openingRecord');
 					mui.openWindow({
 						url: "openingRecord.html",
-						id: "openingRecord.html"
+						id: "openingRecord"
 					});
 				});
 				
@@ -517,6 +517,7 @@
 			kh: "cp.html",  /*开户*/
 			zj: "openingRecord.html"  /*终结方案*/
 		}
+		
 		initOperation(kj);
 		document.getElementById("jydl").addEventListener("tap",function(){
 			mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin",extras:{backPage:'account'}});
