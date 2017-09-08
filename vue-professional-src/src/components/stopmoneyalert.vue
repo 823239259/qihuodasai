@@ -156,9 +156,9 @@
 				return this.$store.state.tradeSocket;
 			},
 			inputPrice(){
-				console.log(this.orderTemplist[this.condition.CommodityNo]);
 				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
 				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
+				
 			},
 			zhiYinInputPrice(){
 				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
