@@ -64,11 +64,14 @@
 		},
 		computed: {
 			PATH() {
-				return this.$store.getters.PATH
+				return this.$store.getters.PATH;
 			},
 			msgTips: function(){
 				return this.msg;
 			},
+			environment(){
+				return this.$store.state.environment;
+			}
 		},
 		methods: {
 			toDetail: function() {
@@ -88,8 +91,13 @@
 						if(data.code == 1){
 							this.bannerList = data.data.bannerList;
 							this.bannerList.forEach(function(o, i){
-								o.imgPath = "http://manage.dktai.cn/" + o.imgPath;
-							});
+								if(this.environment == 'test'){
+									o.imgPath = "http://test.manage.duokongtai.cn/" + o.imgPath;
+								}else{
+									o.imgPath = "http://manage.duokongtai.cn/" + o.imgPath;
+								}
+								
+							}.bind(this));
 						}
 					}else{
 						switch (data.code){

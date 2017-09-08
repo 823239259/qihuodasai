@@ -17,7 +17,8 @@
 							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
+								<!--最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>-->
+								最新：<span class="fontwhite">{{lastPrice00 | toFixed(orderTemplistDotSize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -57,7 +58,7 @@
 							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
-								最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>
+								最新：<span class="fontwhite">{{lastPrice00 | toFixed(orderTemplistDotSize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -107,14 +108,15 @@
 				isshow: false,
 				Num:1,
 				selectStopLossType00:0,
-				inputPrice:0.00,
+//				inputPrice:0.00,
 				orderType:1,
-				zhiYinInputPrice:0.00,
+//				zhiYinInputPrice:0.00,
 				zhiYinNum:1,
 				zhiYinorderType:1,
 				tipsMsg: '',
 				msg: '',
-				str: ''
+				str: '',
+				lastPrice00:''
 			}
 		},
 		props: ['val'],
@@ -152,6 +154,26 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
+			},
+			inputPrice(){
+				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
+			},
+			zhiYinInputPrice(){
+				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
+			}
+		},
+		watch:{
+			parameters:function(n,o){
+				if(this.condition.CommodityNo!=undefined){
+					n.forEach(function(e,i){
+						if(this.condition.CommodityNo==e.CommodityNo){
+							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.LastPrice;
+						}
+						
+					}.bind(this));
+				}
 			}
 		},
 		filters:{

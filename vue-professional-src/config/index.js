@@ -40,7 +40,7 @@ module.exports = {
 		proxyTable: {
 			//    	跨域请求配置
 			'/api': {
-				target: 'http://test.api.dktai.cn',
+				target: 'http://test.api.duokongtai.cn',
 				changeOrigin: true,
 				pathRewrite: {
 			      '^/api': ''
