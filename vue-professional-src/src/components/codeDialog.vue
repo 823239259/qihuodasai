@@ -131,6 +131,8 @@
 										}.bind(this),1000);
 									}
 								}else{
+									this.code = '';
+									this.path = this.path + '&' + Math.random()*10;
 									this.$refs.dialog.isShow = true;
 									this.msg = data.message;
 								}
