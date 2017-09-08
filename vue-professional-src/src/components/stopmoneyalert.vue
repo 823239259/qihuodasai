@@ -66,8 +66,8 @@
 						<ol class="cl">
 							<li class="fl fontgray">止盈价</li>
 							<li class="fl">
-								<input type="text" class="inp" v-model="zhiYinInputPrice"/>
-								<span class="fontgray">0.00%</span>
+								<input type="text" class="inp" v-model="zhiYinInputPrice" />
+								<span class="fontgray">{{percent}}%</span>
 							</li>
 						</ol>
 					</li>
@@ -116,7 +116,8 @@
 				tipsMsg: '',
 				msg: '',
 				str: '',
-				lastPrice00:''
+				lastPrice00:'',
+				percent:0.00,
 			}
 		},
 		props: ['val'],
@@ -145,7 +146,6 @@
 			},
 			templateListObj(){
 				if(this.$store.state.market.templateList[this.condition.CommodityNo]==undefined) return;
-				this.inputPrice = this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice;
 				return this.$store.state.market.templateList[this.condition.CommodityNo];
 			},
 			orderTemplistDotSize(){
@@ -156,6 +156,7 @@
 				return this.$store.state.tradeSocket;
 			},
 			inputPrice(){
+				console.log(this.orderTemplist[this.condition.CommodityNo]);
 				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
 				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
 			},
