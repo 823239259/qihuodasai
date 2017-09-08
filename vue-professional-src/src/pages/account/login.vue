@@ -117,7 +117,6 @@
 							timeout: 5000
 						}).then(function(e) {
 							var data = e.body;
-							console.log(data);
 							if(data.success == true ){
 								if(data.code == 1){
 									this.$refs.dialog.isShow = true;
@@ -129,11 +128,15 @@
 									this.$router.push({path: '/account'});
 								}
 							}else{
-								var h = (data.data.date/3600).toString();
-								var hour = h.split('.')[0];
-								var minute = parseInt((h - hour) * 60);
 								this.$refs.dialog.isShow = true;
-								this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+								if(data.data.date != undefined){
+									var h = (data.data.date/3600).toString();
+									var hour = h.split('.')[0];
+									var minute = parseInt((h - hour) * 60);
+									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+								}else{
+									this.msg = data.message;
+								}
 								this.num = data.data.num;
 								if(this.num > 2){
 									this.$refs.codeDialog.isshow = true;
