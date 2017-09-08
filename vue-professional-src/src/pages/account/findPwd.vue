@@ -68,7 +68,8 @@
 				}
 			},
 			version: function(){
-				return JSON.parse(localStorage.version).ios;
+//				return JSON.parse(localStorage.version).ios;
+				return '1.1';
 			},
 			environment(){
 				return this.$store.state.environment;
@@ -84,7 +85,6 @@
 					this.$children[0].isShow = true;
 					this.msg = '手机号格式错误';
 				}else{
-					console.log(this.num);
 					if(this.num && this.num > 2){
 						this.$refs.codeDialog.isshow = true;
 						if(this.environment == 'test'){
@@ -96,6 +96,7 @@
 					}else{
 						//请求发送验证码
 						this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
+							headers: {'version': this.version},
 							params: {
 								mobile: this.phone,
 								type: 2,
@@ -103,7 +104,6 @@
 							timeout: 5000
 						}).then(function(e){
 							var data = e.body;
-							console.log(data);
 							if(data.success == true){
 								if(data.code == 1){
 									this.$refs.dialog.isShow = true;
@@ -179,8 +179,8 @@
 								this.newPwd = '';
 							}
 						}else{
+							this.code = '';
 							this.num = data.data;
-							console.log(this.num);
 							this.msg = data.message;
 						}
 					}.bind(this), function(){

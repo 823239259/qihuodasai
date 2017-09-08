@@ -177,26 +177,26 @@
 							console.log("注册返回代码" + result.code + "信息：" + result.message)
 							$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 							if(result.code == 2) {
-								mui.toast("注册失败，非法操作！");
+								mui.toast("短信验证码发送失败！");
 								return;
 							} else if(result.code == 3) {
-								mui.toast("该手机号码已被注册！");
+								mui.toast("手机号码已经存在！");
 								return;
 							} else if(result.code == 4) {
-								mui.toast("验证码错误！");
+								mui.toast("手机号码不存在！");
 								return;
 							} else if(result.code == 5) {
-								mui.toast("验证码失效！");
+								mui.toast("操作过于频繁，请稍候再试（60s内重复调用）！");
 								return;
 							} else if(result.code == 6) {
-								mui.toast("推广码错误！");
+								mui.toast("电话号码格式错误！");
 								return;
 							} else if(result.code == 7) {
-								mui.toast("密码格式有误！");
+								mui.toast("超过短信每天发送次数限制（5次）！");
 								return;
 							} 
 							else if(result.code == 8) {
-								mui.toast("验证码错误！");
+								mui.toast("请输入正确的验证码！");
 								return;
 							} 
 						}, paramUrl);
