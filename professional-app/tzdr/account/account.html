@@ -69,9 +69,13 @@
 				padding: 0 15px;
 				height: 40px;
 				line-height: 40px;
-				background: #ffde3d;
+				background: #ff6a00;
 				margin: 0 15px;
-				border-radius: 20px;
+				border-radius: 5px;
+			}
+			
+			#title_balance {
+				color: #ff4c4c
 			}
 		</style>
 		<script src="../../js/jquery-1.11.3.js"></script>
@@ -295,101 +299,102 @@
 					<p>姓名：<span id="title_names"></span></p>
 					<p>手机号：<span id="title_iphones"></p>
 				</div>
-				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额:<span id="title_balance"></span></h2>
-			</div>
-			<div class="mui-slider" id="slider">
-				<div class="mui-slider-group mui-slider-loop" id="bannerloop">
-					<div class="mui-slider-item">
-						<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
-					</div>
+				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额：<span id="title_balance"></span></h2>
 				</div>
-				<div class="mui-slider-indicator" id="indicatorid">
+				<div class="mui-slider" id="slider">
+					<div class="mui-slider-group mui-slider-loop" id="bannerloop" style="height: 120px;">
+						<div class="mui-slider-item">
+							<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator" id="indicatorid">
 
+					</div>
 				</div>
-			</div>
-			<ul class="mui-table-view mui-grid-view mui-grid-9" id="find-tab">
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
-					<div class="find_tab_div">
-						<img src="../../images/ac_01.png">
-						<div>
-							我要充值<br/><span>申请开户，记得充值</span>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" id="find-tab">
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
+						<div class="find_tab_div">
+							<img src="../../images/ac_01.png">
+							<div>
+								我要充值<br/><span>申请开户，记得充值</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="withdraw">
-					<div class="find_tab_div">
-						<img src="../../images/ac_02.png">
-						<div>
-							我要提现<br/><span>结算方案，别忘提款</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="withdraw">
+						<div class="find_tab_div">
+							<img src="../../images/ac_02.png">
+							<div>
+								我要提现<br/><span>结算方案，别忘提款</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="funddetail">
-					<div class="find_tab_div">
-						<img src="../../images/ac_03.png">
-						<div>
-							资金明细<br/><span>资金流水，一目了然</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="funddetail">
+						<div class="find_tab_div">
+							<img src="../../images/ac_03.png">
+							<div>
+								资金明细<br/><span>资金流水，一目了然</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
-					<div class="find_tab_div">
-						<img src="../../images/ac_04.png">
-						<div>
-							实名认证<br/><span id="Certification" style="color: #ff4c4c;">未认证</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
+						<div class="find_tab_div">
+							<img src="../../images/ac_04.png">
+							<div>
+								实名认证<br/><span id="Certification" style="color: #ff4c4c;">未认证</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="telPhone">
-					<div class="find_tab_div">
-						<img src="../../images/ac_05.png">
-						<div>
-							手机绑定<br/><span style="color: #ff4c4c;">修改</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="telPhone">
+						<div class="find_tab_div">
+							<img src="../../images/ac_05.png">
+							<div>
+								手机绑定<br/><span style="color: #ff4c4c;">修改</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="updatepw">
-					<div class="find_tab_div">
-						<img src="../../images/ac_06.png">
-						<div>
-							登录密码<br/><span style="color: #ff4c4c;">修改</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="updatepw">
+						<div class="find_tab_div">
+							<img src="../../images/ac_06.png">
+							<div>
+								登录密码<br/><span style="color: #ff4c4c;">修改</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="noviceGuide">
-					<div class="find_tab_div">
-						<img src="../../images/ac_071.png">
-						<div>
-							新手指引<br/><span>遇到问题，戳这里</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toTell">
+						<!--id="noviceGuide"-->
+						<div class="find_tab_div">
+							<img src="../../images/telephone.png">
+							<div>
+								联系我们<br/><span>客服专员，为您解惑</span>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toNews">
-					<div class="find_tab_div">
-						<img src="../../images/ac_081.png">
-						<div>
-							网站公告<br/><span>最新公告，看这里</span>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toNews">
+						<div class="find_tab_div">
+							<img src="../../images/ac_081.png">
+							<div>
+								网站公告<br/><span>最新公告，看这里</span>
+							</div>
 						</div>
-					</div>
-				</li>
-			</ul>
-			<ul class="mui-table-view ac_listbtn">
-				<li class="mui-table-view-cell" style="text-align: center;">
-					<a href="#quitaccc">退出账户</a>
-				</li>
-			</ul>
-			<div id="quitaccc" class="mui-popover mui-popover-action mui-popover-bottom">
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
-						<a href="#" style="color: red;" id="confirm_quit">确认退出</a>
 					</li>
 				</ul>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
-						<a href="#">取消</a>
+				<ul class="mui-table-view ac_listbtn">
+					<li class="mui-table-view-cell" style="text-align: center;color:#fff">
+						<a href="#quitaccc">退出账户</a>
 					</li>
 				</ul>
-			</div>
+				<div id="quitaccc" class="mui-popover mui-popover-action mui-popover-bottom">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#" style="color: red;" id="confirm_quit">确认退出</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#">取消</a>
+						</li>
+					</ul>
+				</div>
 
 			</div>
 			<div id="weixinCodeImage">
@@ -414,20 +419,35 @@
 			</div>
 			<script>
 				var kj = {
-					kh: "../future/cp.html",  /*开户*/
-					zj: "../future/openingRecord.html"  /*终结方案*/
+					kh: "../future/cp.html",
+					/*开户*/
+					zj: "../future/openingRecord.html" /*终结方案*/
 				}
 				initOperation(kj);
-				document.getElementById("jydl").addEventListener("tap",function(){
+				document.getElementById("jydl").addEventListener("tap", function() {
 					mui.app_refresh('operateLogin');
-					mui.openWindow({url:"../login/operateLogin.html",id:"operateLogin",extras:{backPage:'account'}});
+					mui.openWindow({
+						url: "../login/operateLogin.html",
+						id: "operateLogin",
+						extras: {
+							backPage: 'account'
+						}
+					});
 				});
-				document.getElementById("toNews").addEventListener("tap",function(){
+				document.getElementById("toNews").addEventListener("tap", function() {
 					mui.openWindow("../../tzdr/news/newslist.html");
 				});
-				document.getElementById("noviceGuide").addEventListener("tap",function(){
-					mui.openWindow("../agree/noviceGuide.html");
-				});
+				//				document.getElementById("noviceGuide").addEventListener("tap",function(){
+				//					mui.openWindow("../agree/noviceGuide.html");
+				//				});
+				document.getElementById("toTell").addEventListener("tap", function() {
+					plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00",
+						function(e) {
+							if(e.index == 1) {
+								plus.device.dial("4001801860", false);
+							}
+						}, "400-180-1860", ["取消", "呼叫"]);
+				})
 				mui.plusReady(function() {
 					$("#weixinCodeImage").css({
 						"height": window.innerHeight + "px",

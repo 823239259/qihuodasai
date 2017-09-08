@@ -136,7 +136,8 @@
 				};
 				/*重新获取图形验证码*/
 				document.getElementById("refresh_code").addEventListener("tap", function() {
-					$("#refresh_code").attr("src", tzdr.constants.api_domain + "validate.code?1=" + Math.random() * 10000);
+					var mobile = document.getElementById("account").value;
+					$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 				});
 				document.getElementById("cancel").addEventListener("tap", function() {
 					$("#codelayer").css("display", "none");
@@ -151,7 +152,7 @@
 					}
 					//  		图片验证码
 					$("#codelayer").css("display", "block");
-					$("#refresh_code").attr("src", tzdr.constants.api_domain + "validate.code?1=" + Math.random() * 10000);
+					$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 					$("#refresh_code_value").focus();
 					document.getElementById("confirm").addEventListener("tap", function() {
 						var refresh_code_value = $("#refresh_code_value").val();
@@ -175,6 +176,7 @@
 						}, function(result) {
 //							if(result.code == 2) {
 								mui.toast(result.message);
+								$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 								console.log("返回代码"+ result.code + "信息：" + result.message)
 								//$("#refresh_code").attr("src", tzdr.constants.api_domain + "validate.code?1=" + Math.random() * 10000);
 //								return;
@@ -300,7 +302,7 @@
 	</head>
 
 	<body style="background-color: #2B2B2B">
-		<!--打开短信验证码框-->
+		<!--打开验证码框-->
 		<div class="mui-backdrop" id="codelayer" style="">
 			<div class="contnet">
 				<p style="color: #333; text-align: center;">请先输入图形验证码</p>
