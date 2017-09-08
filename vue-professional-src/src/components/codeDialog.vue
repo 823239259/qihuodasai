@@ -7,7 +7,7 @@
 			<h3 class="title">请先输入图形 验证码</h3>
 			<div class="code_box">
 				<input type="number" class="fl" placeholder="图形验证码" v-model="code" />
-				<a href="javascript:void(0);" class="fr" @tap="refreshCode"><img :src="imgPath"/></a>
+				<a href="javascript:void(0);" class="fr"><img :src="imgPath"/></a>
 			</div>
 			<div class="btn_box">
 				<a href="javascript:void(0);" class="fl" @tap="confirm">确定</a>
@@ -29,7 +29,8 @@
 				token: '',
 				secret: '',
 				phone: '',
-				pwd: ''
+				pwd: '',
+				path: ''
 			}
 		},
 		props: ['objstr','type'],
@@ -50,14 +51,11 @@
 				return this.msg;
 			},
 			version: function(){
-				return JSON.parse(localStorage.version).ios;
+//				return JSON.parse(localStorage.version).ios;
+				return '1.1';
 			},
 		},
 		methods: {
-			refreshCode: function(){
-//				console.log(imgPath);
-				
-			},
 			close: function(){
 				this.isshow = false;
 			},
@@ -78,7 +76,6 @@
 							var data = e.body;
 							if(data.success == true ){
 								if(data.code == 1){
-									console.log(159);
 									this.$refs.dialog.isShow = true;
 									this.msg = '登录成功';
 									this.token = data.data.token;
@@ -93,7 +90,7 @@
 								}
 							}else{
 								this.code = '';
-								this.path = this.path + '&' + Math.random()*1000;
+								this.path = this.path + '&' + Math.random()*10;
 								if(data.code == 4){
 									this.$refs.dialog.isShow = true;
 									this.msg = data.message;

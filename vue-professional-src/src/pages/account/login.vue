@@ -64,7 +64,8 @@
 				token: '',
 				secret: '',
 				path: '',
-				str: ''
+				str: '',
+				num: 0
 			}
 		},
 		methods:{
@@ -93,68 +94,50 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
-					//登录请求
-					this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
+					console.log(this.num);
+					this.$refs.codeDialog.path = this.path + '&' + Math.random();
+					if(this.num >= 2 || this.num == 0){
+						this.$refs.codeDialog.isshow = true;
+						if(this.environment == 'test'){
+							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+						}else{
+							this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+						}
+						this.$refs.codeDialog.path = this.path + '&' + Math.random();
+						this.str = {
+							loginName: this.phone,
+							password: this.pwd
+						}
+					}else{
+						//登录请求
+						this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
 							params: {
 								loginName: this.phone,
 								password: this.pwd
 							},
 							timeout: 5000
-					}).then(function(e) {
-						var data = e.body;
-						if(data.success == true ){
-							if(data.code == 1){
-								this.$refs.dialog.isShow = true;
-								this.msg = '登录成功';
-								this.token = data.data.token;
-								this.secret = data.data.secret;
-								var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
-								localStorage.setItem("user", JSON.stringify(userData));
-								this.$router.push({path: '/account'});
-							}
-						}else{
-							var num = data.data.num;
-							if(num > 2){
-								this.$refs.codeDialog.isshow = true;
-								if(this.environment == 'test'){
-									this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-								}else{
-									this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+						}).then(function(e) {
+							var data = e.body;
+							if(data.success == true ){
+								if(data.code == 1){
+									this.$refs.dialog.isShow = true;
+									this.msg = '登录成功';
+									this.token = data.data.token;
+									this.secret = data.data.secret;
+									var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
+									localStorage.setItem("user", JSON.stringify(userData));
+									this.$router.push({path: '/account'});
 								}
-								this.$refs.codeDialog.path = this.path;
-								this.str = {
-									loginName: this.phone,
-									password: this.pwd,
-									path: this.path
-								};
-//								this.$http.get(this.PATH + '/validate.code?1= Math.random()*10000',{emulateJSON: true}, {
-//									params: {},
-//									headers: {"Content-Type": "x-www-from-urlencoded"},
-//									timeout: 5000
-//								}).then(function(e){
-//									if(this.environment == 'test'){
-//										this.path = "http://test.api.dktai.cn/" + e.url.substr(4);
-//									}else{
-//										this.path = "http://api.dktai.cn/" + e.url.substr(4);
-//									}
-//									this.str = {
-//										loginName: this.phone,
-//										password: this.pwd,
-//										path: this.path
-//									};
-//								}.bind(this),function(){
-//									this.$refs.dialog.isShow = true;
-//									this.msg = '网络不给力，请稍后再试！'
-//								});
 							}else{
+								this.num = data.data.num;
 								this.$refs.dialog.isShow = true;
 								this.msg = data.message;
 							}
-						}
-					}.bind(this), function() {
-						this.$refs.dialog.isShow = true;
-						this.msg = '网络不给力，请稍后再试！'
-					});
+						}.bind(this), function() {
+							this.$refs.dialog.isShow = true;
+							this.msg = '网络不给力，请稍后再试！';
+						});
+					}
 				}
 			},
 			toRegister: function(){

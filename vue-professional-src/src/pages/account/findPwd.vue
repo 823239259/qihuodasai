@@ -68,7 +68,8 @@
 				}
 			},
 			version: function(){
-				return JSON.parse(localStorage.version).ios;
+//				return JSON.parse(localStorage.version).ios;
+				return '1.1';
 			},
 			environment(){
 				return this.$store.state.environment;
@@ -96,6 +97,7 @@
 					}else{
 						//请求发送验证码
 						this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
+							headers: {'version': this.version},
 							params: {
 								mobile: this.phone,
 								type: 2,
