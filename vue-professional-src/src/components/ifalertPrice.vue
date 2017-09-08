@@ -11,9 +11,10 @@
 						<ol>
 							<li class="fontgray">合约</li>
 							<li>
-								<select name="contract" class="selectlong fontwhite" v-model="selectId">
+								<input type="text" v-model="selectId" class="selectlong fontwhite" disabled />
+								<!--<select name="contract" class="selectlong fontwhite" v-model="selectId">
 									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
-								</select>
+								</select>-->
 							</li>
 						</ol>
 					</li>
@@ -189,100 +190,41 @@
 				}
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
 				this.isshow = false;
-				if(this.ifshow==true){
-					let b={
-							"Method":'InsertCondition',
-							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
-								'CommodityNo':this.commodityNo,
-								'ContractNo':this.contractNo,
-								'Num':parseInt(this.holdNum),
-								'ConditionType':0,
-								'PriceTriggerPonit':parseFloat(this.inputPrice),
-								'CompareType':parseInt(this.selectPrice),
-								'TimeTriggerPoint':'',
-								'AB_BuyPoint':0.0,
-								'AB_SellPoint':0.0,
-								'OrderType':parseInt(this.selectMarketOrLimited),
-								'Direction':parseInt(this.selectBuyOrSell),
-								'StopLossType':5,
-								'StopLossDiff':0.0,
-								'StopWinDiff':0.0,
-								'AdditionFlag':this.additionFlag,
-								'AdditionType':parseInt(this.selectAdditionalPrice),
-								'AdditionPrice':(function(){
-													if(this.inputAdditionalPrice==''){
-														return  0;
-													}else{
-														return parseFloat(this.inputAdditionalPrice);
-													}
-												}.bind(this))()
-							}
-						};
-					this.tradeSocket.send(JSON.stringify(b));	
-				}else{
-					let b={
-							"Method":'InsertCondition',
-							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo00].ExchangeNo,
-								'CommodityNo':this.commodityNo00,
-								'ContractNo':this.contractNo00,
-								'Num':parseInt(this.timeHoldNum),
-								'ConditionType':1,
-								'PriceTriggerPonit':0.0,
-								'CompareType':5,
-								'TimeTriggerPoint':dateTime,
-								'AB_BuyPoint':0.0,
-								'AB_SellPoint':0.0,
-								'OrderType':parseInt(this.timeOrderType),
-								'Direction':parseInt(this.timeBuyOrSell),
-								'StopLossType':5,
-								'StopLossDiff':0.0,
-								'StopWinDiff':0.0,
-								'AdditionFlag':this.timeAdditionFlag,
-								'AdditionType':parseInt(this.additionValue),
-								'AdditionPrice':(function(){
-													if(this.timeAddtionPrice==''){
-														return  0;
-													}else{
-														return parseFloat(this.timeAddtionPrice);
-													}
-												}.bind(this))()
-							}
-						};
-						
-					this.tradeSocket.send(JSON.stringify(b));	
-					
-				}
+				let mmp = JSON.parse(this.objstrParms);
+				let b={
+						"Method":'ModifyCondition',
+						"Parameters":{
+							'ConditionNo':mmp.ConditionNo,
+							'ModifyFlag':0,
+							'Num':parseInt(this.holdNum),
+							'ConditionType':0,
+							'PriceTriggerPonit':parseFloat(this.inputPrice),
+							'CompareType':parseInt(this.selectPrice),
+							'TimeTriggerPoint':'',
+							'AB_BuyPoint':0.0,
+							'AB_SellPoint':0.0,
+							'OrderType':parseInt(this.selectMarketOrLimited),
+							'StopLossType':5,
+							'Drection':parseInt(this.selectBuyOrSell),
+							'StopLossDiff':0.0,
+							'StopWinDiff':0.0,
+							'AdditionFlag':(function(){
+												if(this.selectAdditionalPrice==5){
+													return false;
+												}else{
+													return true;
+												}
+										}.bind(this))(),
+							'AdditionType':parseInt(this.selectAdditionalPrice),
+							'AdditionPrice':parseFloat(this.inputAdditionalPrice)
+							
+						}
+					};
+				this.tradeSocket.send(JSON.stringify(b));		
 				
 			}
 		},
 		mounted:function(){
-			/*
-			this.selectPrice = 0;
-			let arr=[];
-			arr = this.parameters;
-			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
-			this.commodityNo = arr[0].CommodityNo;
-			this.contractNo = arr[0].MainContract;
-			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
-			this.selectAdditionalPrice = 5;
-			this.inputAdditionalPrice = this.inputPrice;
-			
-			this.selectBuyOrSell = 0;
-			this.selectMarketOrLimited=1;
-			
-			
-			//-------------------时间条件------------------------
-			this.additionValue = 5;
-			
-			let arr00=[];
-			arr00 = this.parameters;
-			this.selectTimeId=arr00[0].CommodityNo+arr00[0].MainContract;
-			this.commodityNo00 = arr00[0].CommodityNo;
-			this.contractNo00 = arr00[0].MainContract;
-			this.addtionPrice = parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-			*/
 		}
 	}
 </script>
