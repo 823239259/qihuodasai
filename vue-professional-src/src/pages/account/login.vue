@@ -94,7 +94,6 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
-					console.log(this.num);
 					this.$refs.codeDialog.path = this.path + '&' + Math.random();
 					if(this.num >= 2 || this.num == 0){
 						this.$refs.codeDialog.isshow = true;

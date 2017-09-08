@@ -85,7 +85,6 @@
 					this.$children[0].isShow = true;
 					this.msg = '手机号格式错误';
 				}else{
-					console.log(this.num);
 					if(this.num && this.num > 2){
 						this.$refs.codeDialog.isshow = true;
 						if(this.environment == 'test'){
@@ -105,7 +104,6 @@
 							timeout: 5000
 						}).then(function(e){
 							var data = e.body;
-							console.log(data);
 							if(data.success == true){
 								if(data.code == 1){
 									this.$refs.dialog.isShow = true;
@@ -181,8 +179,8 @@
 								this.newPwd = '';
 							}
 						}else{
+							this.code = '';
 							this.num = data.data;
-							console.log(this.num);
 							this.msg = data.message;
 						}
 					}.bind(this), function(){
