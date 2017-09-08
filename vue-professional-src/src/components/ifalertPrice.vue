@@ -205,7 +205,7 @@
 							'AB_SellPoint':0.0,
 							'OrderType':parseInt(this.selectMarketOrLimited),
 							'StopLossType':5,
-							'Direction':parseInt(this.selectBuyOrSell),
+							'Drection':parseInt(this.selectBuyOrSell),
 							'StopLossDiff':0.0,
 							'StopWinDiff':0.0,
 							'AdditionFlag':(function(){
@@ -220,7 +220,6 @@
 							
 						}
 					};
-				console.log(JSON.stringify(b));	
 				this.tradeSocket.send(JSON.stringify(b));		
 				
 			}

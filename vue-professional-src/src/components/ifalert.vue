@@ -302,7 +302,7 @@
 								'AB_BuyPoint':0.0,
 								'AB_SellPoint':0.0,
 								'OrderType':parseInt(this.selectMarketOrLimited),
-								'Direction':parseInt(this.selectBuyOrSell),
+								'Drection':parseInt(this.selectBuyOrSell),
 								'StopLossType':5,
 								'StopLossDiff':0.0,
 								'StopWinDiff':0.0,
@@ -317,6 +317,8 @@
 												}.bind(this))()
 							}
 						};
+					console.log('----------------------');	
+					console.log(JSON.stringify(b));	
 					this.tradeSocket.send(JSON.stringify(b));	
 				}else{
 					let b={
@@ -333,7 +335,7 @@
 								'AB_BuyPoint':0.0,
 								'AB_SellPoint':0.0,
 								'OrderType':parseInt(this.timeOrderType),
-								'Direction':parseInt(this.timeBuyOrSell),
+								'Drection':parseInt(this.timeBuyOrSell),
 								'StopLossType':5,
 								'StopLossDiff':0.0,
 								'StopWinDiff':0.0,

@@ -208,7 +208,7 @@
 							'AB_SellPoint':0.0,
 							'OrderType':parseInt(this.timeOrderType),
 							'StopLossType':5,
-							'Direction':parseInt(this.timeBuyOrSell),
+							'Drection':parseInt(this.timeBuyOrSell),
 							'StopLossDiff':0.0,
 							'StopWinDiff':0.0,
 							'AdditionFlag':(function(){
