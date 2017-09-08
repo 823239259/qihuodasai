@@ -196,6 +196,10 @@
 					return;
 				}, function(result) {
 					console.log("登录路失败状态码：" + result.code + "信息：" + result.message);
+					if(result.code == 6) { //被冻结
+						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+						return;
+					}
 					if(result.data.num != undefined && result.data.num != null && result.data.num >= 2) {
 						//  		图片验证码
 						$("#codelayer").css("display", "block");
@@ -215,8 +219,8 @@
 								'loginName': mobile,
 								'password': password,
 								'code': picCode
-							}, function(result) {
-								mui.toast(result.message);
+							}, function(result) { //成功
+								mui.toast("登录成功");
 								//存储用户信息
 								mui.cacheUser.save(result.data.token, result.data.secret, mobile);
 								localStorage.removeItem("tipLogin");
@@ -231,13 +235,31 @@
 								mui.openWindow("../quotation/quotationMain.html", "quotationMain");
 								return;
 								//$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
-							}, function(result) {
+							}, function(result) { //失败
 								$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
-								mui.toast(result.message);
-								return;
+								if(result.code == 2) {
+									mui.toast("用户名或者密码错误 ");
+									return;
+								} else if(result.code == 4) {
+									mui.toast("验证码输入错误");
+									return;
+								} else if(result.code == 6) {
+									mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+									return;
+								}
 							})
 						});
-						mui.toast(result.message);
+						//mui.toast(result.message);
+					}
+					if(result.code == 2) {
+						mui.toast("用户名或者密码错误 ");
+						return;
+					} else if(result.code == 4) {
+						mui.toast("验证码输入错误");
+						return;
+					} else if(result.code == 6) {
+						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+						return;
 					}
 				}, paramUrl);
 

@@ -74,7 +74,7 @@
 			headers: {
 				'token': mui.cacheUser.get(tzdr.constants.user_token),
 				'secret': mui.cacheUser.get(tzdr.constants.user_secret),
-				'version': '1.0.0'
+				'version': '1.1'
 			},
 			data: params,
 			timeout: 100000,
@@ -288,13 +288,13 @@ Date.prototype.format = function(format) {
 var tzdr = {
 	// 系统常量
 	constants: {
-		api_domain: "http://test.api.dktai.cn/",//测试环境
+		api_domain: "http://test.api.duokongtai.cn/",//测试环境
 		//api_domain: "http://192.168.199.169:8080/vs-api/",//高超测试环境
 		//api_domain: "http://192.168.0.221/", 
 		//		api_recharge "http://test.www.dktai.cn/",//充值
 		//		api_domain:"http://192.168.0.72:8080/vs-api/",
 		//图片地址
-		base_images_url: 'http://test.manage.dktai.cn/',
+		base_images_url: 'http://test.manage.duokongtai.cn/',
 		//		base_images_url:'http://manage.mzkqh.com/',
 		//token
 		user_token: 'user_token',

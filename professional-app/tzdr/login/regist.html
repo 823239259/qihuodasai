@@ -174,31 +174,31 @@
 							tzdr.smsTime(o);
 							return;
 						}, function(result) {
-//							if(result.code == 2) {
-								mui.toast(result.message);
-								$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
-								console.log("返回代码"+ result.code + "信息：" + result.message)
-								//$("#refresh_code").attr("src", tzdr.constants.api_domain + "validate.code?1=" + Math.random() * 10000);
-//								return;
-//							} else if(result.code == 3) {
-//								mui.toast(result.message);
-//								return;
-//							} else if(result.code == 4) {
-//								mui.toast(result.message);
-//								return;
-//							} else if(result.code == 5) {
-//								mui.toast(result.message);
-//								return;
-//							}else if(result.code == 6) {
-//								mui.toast(result.message);
-//								return;
-//							}else if(result.code == 7) {
-//								mui.toast(result.message);
-//								return;
-//							}else if(result.code == 8) {
-//								mui.toast(result.message);
-//								return;
-//							}
+							console.log("注册返回代码" + result.code + "信息：" + result.message)
+							$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
+							if(result.code == 2) {
+								mui.toast("注册失败，非法操作！");
+								return;
+							} else if(result.code == 3) {
+								mui.toast("该手机号码已被注册！");
+								return;
+							} else if(result.code == 4) {
+								mui.toast("验证码错误！");
+								return;
+							} else if(result.code == 5) {
+								mui.toast("验证码失效！");
+								return;
+							} else if(result.code == 6) {
+								mui.toast("推广码错误！");
+								return;
+							} else if(result.code == 7) {
+								mui.toast("密码格式有误！");
+								return;
+							} 
+							else if(result.code == 8) {
+								mui.toast("验证码错误！");
+								return;
+							} 
 						}, paramUrl);
 					});
 				}
@@ -236,11 +236,13 @@
 							id: 'confirmPassword.html',
 							extras: {
 								mobile: mobile,
+								code:code
 
 							}
 						});
 						return;
 					}, function(result) {
+						console.log("注册失败："+result.code+result.message)
 						plus.nativeUI.closeWaiting();
 						if(result.code == 2) {
 							mui.toast("注册失败！");
@@ -258,7 +260,7 @@
 							mui.toast("推广码错误！");
 							return;
 						} else {
-							mui.toast("系统繁忙，请稍后再试！");
+							mui.toast("系统繁忙，请稍后再试！"+result.message);
 							return;
 						}
 					}, paramUrl);
