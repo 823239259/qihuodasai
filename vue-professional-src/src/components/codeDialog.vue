@@ -116,7 +116,7 @@
 						}else{
 							//请求发送验证码
 							this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
-//								headers: {'version': this.version},
+								headers: {'version': this.version},
 								params: {
 									mobile: this.phone,
 									type: 1,
@@ -141,7 +141,6 @@
 									this.msg = data.message;
 								}
 							}.bind(this), function(){
-								console.log(159);
 								this.$children[0].isShow = true;
 								this.msg = '网络不给力，请稍后再试！'
 							});
