@@ -111,15 +111,6 @@
 				this.$router.push({path:'/moneyLog'});
 			},
 			exit: function(){
-//				this.$store.state.account.islogin = false;
-//				this.$store.state.account.phone = '';
-//				this.$store.state.account.password = '';
-//				this.$store.state.account.token = '';
-//				this.$store.state.account.secret = '';
-//				this.$store.state.account.isCertification = false;
-//				this.$store.state.account.username = '';
-//				this.$store.state.account.balance = 0.00;
-//				this.$store.state.account.operateMoney = 0.00;
 				localStorage.removeItem("user");
 				this.$router.push({path:'/home'});
 			},

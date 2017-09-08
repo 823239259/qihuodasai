@@ -3,7 +3,7 @@
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<div class="bg"></div>
 		<div class="page_cont">
-			<i></i>
+			<i @tap="close"></i>
 			<h3 class="title">请先输入图形 验证码</h3>
 			<div class="code_box">
 				<input type="number" class="fl" placeholder="图形验证码" v-model="code" />
@@ -28,23 +28,30 @@
 				msg: '',
 				token: '',
 				secret: '',
+				phone: '',
+				pwd: ''
 			}
 		},
 		props: ['objstr','type'],
 		components: {tipsDialog},
 		computed: {
 			info: function(){
-				if(this.objstr) return JSON.parse(this.objstr);
+				if(this.objstr){
+					return JSON.parse(this.objstr);
+				}
 			},
 			imgPath: function(){
-				if(this.objstr) return JSON.parse(this.objstr).path;
+				if(this.path) return this.path;
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
 			msgTips: function(){
 				return this.msg;
-			}
+			},
+			version: function(){
+				return JSON.parse(localStorage.version).ios;
+			},
 		},
 		methods: {
 			refreshCode: function(){
@@ -71,30 +78,96 @@
 							var data = e.body;
 							if(data.success == true ){
 								if(data.code == 1){
+									console.log(159);
 									this.$refs.dialog.isShow = true;
 									this.msg = '登录成功';
 									this.token = data.data.token;
 									this.secret = data.data.secret;
-									var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
+									var userData = {'username': this.info.loginName, 'password': this.info.password, 'token': data.data.token, 'secret': data.data.secret};  
 									localStorage.setItem("user", JSON.stringify(userData));
-									this.$router.push({path: '/account'});
+									this.code = '';
+									setTimeout(function(){
+										this.isshow = false;
+										this.$router.push({path: '/account'});
+									}.bind(this),1000);
 								}
 							}else{
+								this.code = '';
+								this.path = this.path + '&' + Math.random()*1000;
 								if(data.code == 4){
 									this.$refs.dialog.isShow = true;
 									this.msg = data.message;
 								}else{
 									this.$refs.dialog.isShow = true;
 									this.msg = data.message;
-									this.isshow = false;
+									setTimeout(function(){
+										this.isshow = false;
+									}.bind(this),1000);
 								}
 							}
 						}.bind(this), function() {
 							this.$refs.dialog.isShow = true;
 							this.msg = '网络不给力，请稍后再试！'
 						});
-					}else if(this.type == 'findPwd'){
-						
+					}else if(this.type == 'register'){
+						if(this.code == ''){
+							this.$refs.dialog.isShow = true;
+							this.msg = '请输入验证码';
+						}else{
+							//请求发送验证码
+							this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
+								params: {
+									mobile: this.phone,
+									type: 1,
+									yzm: this.code
+								},
+								timeout: 5000
+							}).then(function(e){
+								var data = e.body;
+								if(data.success == true){
+									if(data.code == 1){
+										this.$refs.dialog.isShow = true;
+										this.msg = '发送成功';
+										setTimeout(function(){
+											this.isshow = false;
+										}.bind(this),1000);
+									}
+								}else{
+									this.$refs.dialog.isShow = true;
+									this.msg = data.message;
+								}
+							}.bind(this), function(){
+								this.$children[0].isShow = true;
+								this.msg = '网络不给力，请稍后再试！'
+							});
+						}
+					}else if(this.type = 'findpwd'){
+						//请求发送验证码
+						this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
+							headers: {'version': this.version},
+							params: {
+								mobile: this.phone,
+								type: 2,
+								yzm: this.code
+							},
+							timeout: 5000
+						}).then(function(e){
+							var data = e.body;
+							this.$refs.dialog.isShow = true;
+							if(data.success == true){
+								if(data.code == 1){
+									this.msg = '发送成功';
+									setTimeout(function(){
+										this.isshow = false;
+									}.bind(this),1000);
+								}
+							}else{
+								this.msg = data.message;
+							}
+						}.bind(this), function(){
+							this.$refs.dialog.isShow = true;
+							this.msg = '网络不给力，请稍后再试！'
+						});
 					}
 				}
 			}

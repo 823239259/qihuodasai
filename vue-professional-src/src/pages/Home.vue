@@ -184,6 +184,11 @@
 						if(data.code == 1){
 							this.$store.state.version.ios = JSON.parse(data.data.version).iOS.version;
 							this.$store.state.version.android = JSON.parse(data.data.version).Android.version;
+							var version ={
+								ios: JSON.parse(data.data.version).iOS.version,
+								android: JSON.parse(data.data.version).Android.version
+							}
+							localStorage.version = JSON.stringify(version);
 						}
 					}
 				}.bind(this), function() {
