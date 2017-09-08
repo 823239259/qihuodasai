@@ -65,7 +65,7 @@
 				secret: '',
 				path: '',
 				str: '',
-				num: 0
+				num: ''
 			}
 		},
 		methods:{
@@ -95,7 +95,7 @@
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					this.$refs.codeDialog.path = this.path + '&' + Math.random();
-					if(this.num >= 2 || this.num == 0){
+					if(this.num >= 2 || this.num == ''){
 						this.$refs.codeDialog.isshow = true;
 						if(this.environment == 'test'){
 							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
