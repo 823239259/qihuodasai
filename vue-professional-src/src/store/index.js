@@ -1529,6 +1529,13 @@ export default new Vuex.Store({
 			}
 		},
 		dealWithOnRtnConditionState:function(context,parameters){
+			
+			if(parameters.Status==0){
+				context.state.market.layer='提交成功,单号【'+ parameters.StopLossNo+'】';
+			}else{
+				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】';
+			}
+			
 			context.state.market.conditionList.forEach(function(e,i){
 						if(context.state.market.noObj.ConditionNo==e.ConditionNo){
 							let e0 = parameters;
