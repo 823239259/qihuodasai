@@ -202,23 +202,17 @@
 				this.isshow = false;
 			},
 			confirm: function() {
-				
-				/*
-				var a = 46.41;
-				var b = 0.01;
-				var c = a/b;
-				var d = a%b;
-				if (d < 0.000000001 || b-d < 0.0000000001)
-				{
-					alert("yes");
-				}*/
+				//公式（判断输入价格是否符合最小变动价）
+//				var a = 46.41;
+//				var b = 0.01;
+//				var c = a/b;
+//				var d = a%b;
+//				if (d < 0.000000001 || b-d < 0.0000000001){
+//					alert("yes");
+//				}
 				var a0 = this.inputPrice;
 				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize
 				var d0 =a0%b0;
-				if(d0 < 0.000000001 || b0-d0 < 0.0000000001){
-					console.log('符合最小变动价');
-				}
-				
 				if(this.isstopm == true){
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
@@ -226,6 +220,9 @@
 					}else if(this.inputPrice >= this.templateListObj.LastPrice){
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格应该小于最新价';
+					}else if(d0 >= 0.000000001 || b0-d0 >= 0.0000000001){
+						this.$refs.dialog.isShow = true;
+						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
 					}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损手数';
