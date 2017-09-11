@@ -7,7 +7,7 @@
 		<div class="head">
 			<topbar title="条件单"></topbar>
 			<back></back>
-			<i class="add" @tap="addConditions"></i>
+			<i class="add" v-show="addConditionsShow" @tap="addConditions"></i>
 		</div>
 		<div class="page_cont">
 			<div class="tab_box" id="tabBox">
@@ -96,6 +96,7 @@
 			return {
 				msg: '',
 				isShow: true,
+				addConditionsShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
 				orderListId:'',
 //				noListCont:[],
@@ -282,8 +283,10 @@
 				$(e.currentTarget).siblings().find("span").removeClass('current')
 				if($(e.currentTarget).index() == 0){
 					this.isShow = true;
+					this.addConditionsShow = true;
 				}else{
 					this.isShow = false;
+					this.addConditionsShow = false;
 				}
 			},
 			listTap: function(obj){
