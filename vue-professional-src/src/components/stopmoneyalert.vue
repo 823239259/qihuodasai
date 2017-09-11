@@ -395,7 +395,7 @@
 		padding-left: 5px;
 	}
 	.inp {
-		width: 99px;
+		width: 95px;
 		height: 33px;
 		border-radius: 3px;
 		border: 1px solid #14151d;
@@ -407,7 +407,7 @@
 	}
 	.sellong {
 		padding: 0 10px;
-		width: 99px;
+		width: 95px;
 		height: 33px;
 		border-radius: 3px;
 		border: 1px solid #14151d;
@@ -534,7 +534,7 @@
 		padding-left: 5px*@ip6;
 	}
 	.inp {
-		width: 99px*@ip6;
+		width: 95px*@ip6;
 		height: 33px*@ip6;
 		border-radius: 3px*@ip6;
 		border: 1px solid #14151d;
@@ -546,7 +546,7 @@
 	}
 	.sellong {
 		padding: 0 10px*@ip6;
-		width: 99px*@ip6;
+		width: 95px*@ip6;
 		height: 33px*@ip6;
 		border-radius: 3px*@ip6;
 		border: 1px solid #14151d;
@@ -673,7 +673,7 @@
 		padding-left: 5px*@ip5;
 	}
 	.inp {
-		width: 99px*@ip5;
+		width: 95px*@ip5;
 		height: 33px*@ip5;
 		border-radius: 3px*@ip5;
 		border: 1px solid #14151d;
@@ -685,7 +685,7 @@
 	}
 	.sellong {
 		padding: 0 10px*@ip5;
-		width: 99px*@ip5;
+		width: 95px*@ip5;
 		height: 33px*@ip5;
 		border-radius: 3px*@ip5;
 		border: 1px solid #14151d;
