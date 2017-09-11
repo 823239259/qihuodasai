@@ -87,11 +87,12 @@
 				}else{
 					if(this.num && this.num > 2){
 						this.$refs.codeDialog.isshow = true;
-						if(this.environment == 'test'){
-							this.$refs.codeDialog.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-						}else{
-							this.$refs.codeDialog.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-						}
+						this.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						if(this.environment == 'test'){
+//							this.$refs.codeDialog.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						}else{
+//							this.$refs.codeDialog.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//						}
 						this.$refs.codeDialog.phone = this.phone;
 					}else{
 						//请求发送验证码
