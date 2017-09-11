@@ -102,7 +102,7 @@
 					this.msg = '手机号格式错误';
 				}else{
 					this.$refs.codeDialog.isshow = true;
-					this.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+					this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 //					if(this.environment == 'test'){
 //						this.$refs.codeDialog.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 //					}else{

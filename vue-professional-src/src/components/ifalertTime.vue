@@ -39,7 +39,7 @@
 								<option value="1"><</option>
 								<option value="3"><=</option>
 							</select>
-							<input type="text" v-model="timeAddtionPrice" />
+							<input type="text" disabled="disabled" class="additionalTime" v-model="timeAddtionPrice" />
 						</li>
 					</ol>
 				</li>
@@ -166,9 +166,17 @@
 				this.timeBuyOrSell = sb.Drection;
 				this.timeOrderType = sb.OrderType;
 				this.timeHoldNum = sb.Num;
-				
-				
 			},
+			additionValue: function(n,o){
+				if(this.additionValue == 5){
+					$(".additionalTime").attr("disabled","disabled");
+					this.timeAddtionPrice = '';
+				}else{
+					$(".additionalTime").removeAttr("disabled");
+					let size = this.orderTemplist[JSON.parse(this.objstrParms).CommodityNo].DotSize;
+					this.timeAddtionPrice = parseFloat(this.templateList[JSON.parse(this.objstrParms).CommodityNo].LastPrice).toFixed(size);
+				}
+			}
 		},
 		methods:{
 			selection:function(e){

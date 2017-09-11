@@ -41,7 +41,7 @@
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" v-model="inputAdditionalPrice" />
+								<input type="text" disabled="disabled" class="additionalPrice" v-model="inputAdditionalPrice" />
 							</li>
 						</ol>
 					</li>
@@ -167,7 +167,17 @@
 				this.selectBuyOrSell = sb.Drection;
 				this.selectMarketOrLimited = sb.OrderType;
 				this.holdNum = sb.Num;
-			}
+			},
+			selectAdditionalPrice: function(n,o){
+				console.log(n);
+				if(this.selectAdditionalPrice == 5){
+					 $(".additionalPrice").attr("disabled","disabled");
+					 this.inputAdditionalPrice = '';
+				}else{
+					$(".additionalPrice").removeAttr("disabled");
+					this.inputAdditionalPrice = this.inputPrice;
+				}
+			},
 		},
 		methods:{
 			selection:function(e){

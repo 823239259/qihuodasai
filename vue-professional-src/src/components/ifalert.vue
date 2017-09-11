@@ -37,7 +37,7 @@
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" class="additionalPrice00" v-model="inputAdditionalPrice" />
+								<input type="text" class="additionalPrice" disabled="disabled" v-model="inputAdditionalPrice" />
 							</li>
 						</ol>
 					</li>
@@ -102,7 +102,7 @@
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" class="additionalTime" v-model="timeAddtionPrice" />
+								<input type="text" class="additionalTime" disabled="disabled" v-model="timeAddtionPrice" />
 							</li>
 						</ol>
 					</li>
@@ -223,7 +223,6 @@
 				if(this.selectAdditionalPrice == 5){
 					 this.inputAdditionalPrice = '';
 					 this.additionFlag = false;
-					 console.log($(".additionalPrice00"));
 					 $(".additionalPrice").attr("disabled","disabled");
 				}else{
 					this.inputAdditionalPrice = this.inputPrice;
