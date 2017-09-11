@@ -53,7 +53,7 @@
 							</select>
 							<select class="fontwhite selectshort" v-model="timeOrderType">
 								<option value="1">市价</option>
-								<option value="2">限价</option>
+								<option value="2">对手价</option>
 							</select>
 							<span class="fontgray lot">手数</span>
 						</li>
