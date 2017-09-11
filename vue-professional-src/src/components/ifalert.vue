@@ -85,7 +85,7 @@
 							</li>
 							<li>
 								<!--<input type="time" v-model="time" class='time'/>-->
-								<input type="time" class="time" v-model="time" />
+								<input type="time" class="time" v-model="time" placeholder="显示时间" />
 							</li>
 						</ol>
 					</li>
