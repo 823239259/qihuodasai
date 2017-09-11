@@ -37,7 +37,7 @@
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" v-model="inputAdditionalPrice" />
+								<input type="text" class="additionalPrice00" v-model="inputAdditionalPrice" />
 							</li>
 						</ol>
 					</li>
@@ -102,7 +102,7 @@
 									<option value="1"><</option>
 									<option value="3"><=</option>
 								</select>
-								<input type="text" v-model="timeAddtionPrice" />
+								<input type="text" class="additionalTime" v-model="timeAddtionPrice" />
 							</li>
 						</ol>
 					</li>
@@ -204,25 +204,6 @@
 			},
 		},
 		watch:{
-			/*
-			objstrParms:function(n,o){
-				let sb= JSON.parse(n);
-				console.log(n);
-				if(sb.CompareType==5){//时间条件
-					
-				}else{//价格条件
-					this.selectId = sb.CommodityNo+sb.ContractNo;
-					this.selectPrice = sb.CompareType;
-					this.inputPrice = sb.PriceTriggerPonit;
-					if(sb.AdditionFlag==0){ //没有附件条件
-						this.selectAdditionalPrice = 5
-						this.inputAdditionalPrice = '';
-					}else{//有附加条件
-						this.selectAdditionalPrice = sb.AdditionType;
-						this.inputAdditionalPrice = sb.AdditionPrice;
-					}
-				}
-			},*/
 			selectId:function(n,o){
 				if(n != undefined){
 					this.commodityNo = n.substring(0,n.length-4);
@@ -239,21 +220,26 @@
 				}	
 			},
 			selectAdditionalPrice:function(n,o){
-				if(this.selectAdditionalPrice==5){
+				if(this.selectAdditionalPrice == 5){
 					 this.inputAdditionalPrice = '';
 					 this.additionFlag = false;
+					 console.log($(".additionalPrice00"));
+					 $(".additionalPrice").attr("disabled","disabled");
 				}else{
-					this.inputAdditionalPrice =this.inputPrice;
+					this.inputAdditionalPrice = this.inputPrice;
 					this.additionFlag = true;
+					$(".additionalPrice").removeAttr("disabled");
 				}
 			},
 			additionValue:function(n,o){
 				if(this.additionValue==5){
 					this.timeAddtionPrice='';
 					this.timeAdditionFlag = false;
+					$(".additionalTime").attr("disabled","disabled");
 				}else{
 					this.timeAddtionPrice = this.timeAddtionPrice00;
 					this.timeAdditionFlag = true;
+					$(".additionalTime").removeAttr("disabled");
 				}
 			}
 		},
