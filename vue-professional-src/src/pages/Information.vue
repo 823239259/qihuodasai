@@ -230,13 +230,8 @@
 					}
 
 				).then(function(e) {
-//					console.log(e.body.data.data);
 					var arr1 = [];
 					var arr2 = e.body.data.data;
-					console.log(arr2);
-//					arr2.forEach(function(e){
-//						console.log(e.importance);
-//					});
 					//筛选出重要为3星的
 					if(this.isimp == true) {
 						arr2.forEach(function(a) {
@@ -316,11 +311,14 @@
 
 				).then(function(e) {
 					this.sevenlist = e.body.data.data;
+//					console.log(this.sevenlist);
 					if(this.sevenlist != null){
 						this.sevenlist.forEach(function(o, i){
-							var str = o.liveTitle.replace(/<p>/g, '');
-							str = str.replace(/<\/p>/g, '');
-							o.liveTitle = str;
+							if(o.liveTitle != null){
+								var str = o.liveTitle.replace(/<p>/g, '');
+								str = str.replace(/<\/p>/g, '');
+								o.liveTitle = str;
+							}
 						}.bind(this));
 						this.msg = '点击查看更多...';
 					}else{
