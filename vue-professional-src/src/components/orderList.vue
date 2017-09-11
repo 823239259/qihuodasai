@@ -28,7 +28,7 @@
 			<cbtn name="止损止赢" @tap.native="stopLossStopProfit"></cbtn>
 		</div>
 		<tipsDialog :msg="msgTips"></tipsDialog>
-		<stopmoneyalert :val="selectedOrderLists"></stopmoneyalert>
+		<stopmoneyalert :val="selectedOrderLists" ref="stopmoneyalert"></stopmoneyalert>
 	</div>
 </template>
 
@@ -96,7 +96,6 @@
 				return this.$store.state.market.qryHoldTotalArr;
 			},
 			selectedOrderLists: function(){
-				console.log(JSON.stringify(this.selectedOrderList))
 				return JSON.stringify(this.selectedOrderList);
 			},
 		},
@@ -153,8 +152,9 @@
 				for(positionCurrent in this.positionListCont){
 					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
 						i++;
-						this.$children[6].isshow = true;
+						this.$refs.stopmoneyalert.isshow = true;
 						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
+						this.$refs.stopmoneyalert.inputPrice = this.selectedOrderList.OpenAvgPrice; 
 						return;
 					}
 				}

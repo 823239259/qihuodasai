@@ -138,7 +138,6 @@
 				return	this.$store.state.market.orderTemplist;
 			},
 			condition(){
-				console.log(this.val);
 				if(this.val==undefined) return;
 				return JSON.parse(this.val);
 			},
@@ -281,8 +280,13 @@
 //		beforeMount: function(){
 //			console.log('nimabi');
 //		},
+		activated: function(){
+			console.log(987);
+			this.inputPrice = 45;
+		},
 		updated: function(){
-			console.log('nimabi');
+//			let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
+//			this.inputPrice = parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
 		}
 	}
 </script>
