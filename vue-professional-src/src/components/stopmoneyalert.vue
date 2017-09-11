@@ -202,6 +202,23 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				
+				/*
+				var a = 46.41;
+				var b = 0.01;
+				var c = a/b;
+				var d = a%b;
+				if (d < 0.000000001 || b-d < 0.0000000001)
+				{
+					alert("yes");
+				}*/
+				var a0 = this.inputPrice;
+				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize
+				var d0 =a0%b0;
+				if(d0 < 0.000000001 || b0-d0 < 0.0000000001){
+					console.log('符合最小变动价');
+				}
+				
 				if(this.isstopm == true){
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
