@@ -7,7 +7,7 @@
 		<div class="head">
 			<topbar title="止损止赢"></topbar>
 			<back></back>
-			<refresh></refresh>
+			<refresh @tap.native="refresh"></refresh>
 		</div>
 		<div class="page_cont">
 			<div class="tab_box" id="tabBox">
@@ -149,6 +149,9 @@
 			}
 		},
 		methods: {
+			refresh: function(e) {
+				this.$router.push({path: '/space'});
+			},
 			updateEvent: function(){
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
