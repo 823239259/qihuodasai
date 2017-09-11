@@ -75,6 +75,7 @@
 				</ul>
 			</div>
 		</div>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 	</div>
 </template>
 
@@ -134,20 +135,22 @@
 		},
 		methods: {
 			modify:function(){
-				if(this.orderType == 5){
-					this.$refs.ifalertTime.isshow = true;
+				if(this.orderListId == '' || this.orderListId == null){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请选择一条数据';
 				}else{
-					this.$refs.ifalertPrice.isshow = true;
-				}
-				
-				
-				this.noListCont.forEach(function(e,i){
-					if(this.orderListId == e.ConditionNo){
-						this.sendMsg = e;
-						this.$store.state.market.noObj = e;
+					if(this.orderType == 5){
+						this.$refs.ifalertTime.isshow = true;
+					}else{
+						this.$refs.ifalertPrice.isshow = true;
 					}
-				}.bind(this));
-				
+					this.noListCont.forEach(function(e,i){
+						if(this.orderListId == e.ConditionNo){
+							this.sendMsg = e;
+							this.$store.state.market.noObj = e;
+						}
+					}.bind(this));
+				}
 			},
 			deleteEvent:function(){
 				if(this.orderListId == '' || this.orderListId == null){
@@ -161,32 +164,33 @@
 					}.bind(this));
 					let o = this.$store.state.market.noObj;
 					let b={
-							"Method":'ModifyCondition',
-							"Parameters":{
-								"ConditionNo":o.ConditionNo,
-								"ModifyFlag":1, //删除
-								"Num":o.Num,
-								"ConditionType":o.ConditionType,
-								"PriceTriggerPonit":o.PriceTriggerPonit,
-								"CompareType":o.CompareType,
-								"TimeTriggerPoint":o.TimeTriggerPoint,
-								"AB_BuyPoint":o.AB_BuyPoint,
-								"AB_SellPoint":o.AB_SellPoint,
-								"OrderType":o.OrderType,
-								"StopLossType":o.StopLossType,
-								"Direction":o.Drection,
-								"StopLossDiff":0.0,
-								"StopWinDiff":0.0,
-								"AdditionFlag":o.AdditionFlag,
-								"AdditionType":o.AdditionType,
-								"AdditionPrice":o.AdditionPrice
-							}
-						};
-						this.tradeSocket.send(JSON.stringify(b));	
-					
+						"Method":'ModifyCondition',
+						"Parameters":{
+							"ConditionNo":o.ConditionNo,
+							"ModifyFlag":1, //删除
+							"Num":o.Num,
+							"ConditionType":o.ConditionType,
+							"PriceTriggerPonit":o.PriceTriggerPonit,
+							"CompareType":o.CompareType,
+							"TimeTriggerPoint":o.TimeTriggerPoint,
+							"AB_BuyPoint":o.AB_BuyPoint,
+							"AB_SellPoint":o.AB_SellPoint,
+							"OrderType":o.OrderType,
+							"StopLossType":o.StopLossType,
+							"Direction":o.Drection,
+							"StopLossDiff":0.0,
+							"StopWinDiff":0.0,
+							"AdditionFlag":o.AdditionFlag,
+							"AdditionType":o.AdditionType,
+							"AdditionPrice":o.AdditionPrice
+						}
+					};
+					this.tradeSocket.send(JSON.stringify(b));	
 				}
 			},
-			suspendEvent:function(){
+			suspendEvent:function(){     //暂停
+				console.log(111111);
+				console.log(this.orderListId);
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
@@ -198,6 +202,7 @@
 					}.bind(this));
 					let o = this.$store.state.market.noObj;
 					if(o.Status==0){//如果处于运行中，则暂停
+							this.statusName = '启动';
 							let b={
 							"Method":'ModifyCondition',
 							"Parameters":{
@@ -222,6 +227,7 @@
 						};
 						this.tradeSocket.send(JSON.stringify(b));	
 					}else if(o.Status==1){
+						this.statusName = '暂停';
 						let b={
 							"Method":'ModifyCondition',
 							"Parameters":{
@@ -248,6 +254,7 @@
 					}
 				}
 				$(".list_cont_box li").removeClass("current");
+				this.orderListId = '';
 			},
 			showCont: function(e){
 				$(e.currentTarget).find("span").addClass('current');

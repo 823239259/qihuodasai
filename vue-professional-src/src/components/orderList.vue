@@ -155,6 +155,7 @@
 						this.$refs.stopmoneyalert.isshow = true;
 						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
 						this.$refs.stopmoneyalert.inputPrice = this.selectedOrderList.OpenAvgPrice; 
+						this.$refs.stopmoneyalert.zhiYinInputPrice = this.selectedOrderList.OpenAvgPrice; 
 						return;
 					}
 				}
