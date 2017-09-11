@@ -1,6 +1,7 @@
 <template>
 	<div id="ifalert" v-if="isshow">
-		<div>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<div class="ifalert_box">
 			<ul class="selectbar">
 				<li class="fontgray fl" :class="{selected: ifshow}" @tap="selection">价格条件</li>
 				<!--<li class="fontgray fl" :class="{selected: !ifshow}"@tap="selection">时间条件</li>-->
@@ -81,6 +82,7 @@
 </template>
 
 <script>
+	import alert from './Tradealert.vue'
 	export default {
 		name: 'ifalert',
 		data(){
@@ -112,10 +114,12 @@
 				timeOrderType:1,
 				timeBuyOrSell:0,
 				additionValue:'',
-				
+				tipsMsg: '',
+				str: ''
 			}
 		},
 		props: ['objstr'],
+		components: {alert},
 		computed:{
 			height1(){
 				return $('#ifalert>div').css('height').slice(0,-2);
@@ -138,9 +142,14 @@
 			objstrParms: function(){
 				return this.objstr;
 			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
+			},
 		},
 		watch:{
-			
 			objstrParms:function(n,o){
 				let sb= JSON.parse(n);
 				//价格条件
@@ -174,6 +183,8 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				this.$refs.alert.isshow = true;
+				this.tipsMsg = '是否修改价格条件单？';
 				function getNowFormatDate() {
 				    let date = new Date();
 				    let seperator1 = "-";
@@ -189,38 +200,39 @@
 				    return currentdate;
 				}
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
-				this.isshow = false;
+//				this.isshow = false;
 				let mmp = JSON.parse(this.objstrParms);
 				let b={
-						"Method":'ModifyCondition',
-						"Parameters":{
-							'ConditionNo':mmp.ConditionNo,
-							'ModifyFlag':0,
-							'Num':parseInt(this.holdNum),
-							'ConditionType':0,
-							'PriceTriggerPonit':parseFloat(this.inputPrice),
-							'CompareType':parseInt(this.selectPrice),
-							'TimeTriggerPoint':'',
-							'AB_BuyPoint':0.0,
-							'AB_SellPoint':0.0,
-							'OrderType':parseInt(this.selectMarketOrLimited),
-							'StopLossType':5,
-							'Drection':parseInt(this.selectBuyOrSell),
-							'StopLossDiff':0.0,
-							'StopWinDiff':0.0,
-							'AdditionFlag':(function(){
-												if(this.selectAdditionalPrice==5){
-													return false;
-												}else{
-													return true;
-												}
-										}.bind(this))(),
-							'AdditionType':parseInt(this.selectAdditionalPrice),
-							'AdditionPrice':parseFloat(this.inputAdditionalPrice)
-							
-						}
-					};
-				this.tradeSocket.send(JSON.stringify(b));		
+					"Method":'ModifyCondition',
+					"Parameters":{
+						'ConditionNo':mmp.ConditionNo,
+						'ModifyFlag':0,
+						'Num':parseInt(this.holdNum),
+						'ConditionType':0,
+						'PriceTriggerPonit':parseFloat(this.inputPrice),
+						'CompareType':parseInt(this.selectPrice),
+						'TimeTriggerPoint':'',
+						'AB_BuyPoint':0.0,
+						'AB_SellPoint':0.0,
+						'OrderType':parseInt(this.selectMarketOrLimited),
+						'StopLossType':5,
+						'Drection':parseInt(this.selectBuyOrSell),
+						'StopLossDiff':0.0,
+						'StopWinDiff':0.0,
+						'AdditionFlag':(function(){
+											if(this.selectAdditionalPrice==5){
+												return false;
+											}else{
+												return true;
+											}
+									}.bind(this))(),
+						'AdditionType':parseInt(this.selectAdditionalPrice),
+						'AdditionPrice':parseFloat(this.inputAdditionalPrice)
+						
+					}
+				};
+//				this.tradeSocket.send(JSON.stringify(b));		
+				this.str = b;
 				
 			}
 		},
@@ -245,7 +257,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -388,7 +400,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px*@ip6;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -531,7 +543,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px*@ip5;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;

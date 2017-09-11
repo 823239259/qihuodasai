@@ -76,6 +76,7 @@
 			</div>
 		</div>
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendStr" ref="alert"></alert>
 	</div>
 </template>
 
@@ -87,9 +88,10 @@
 	import ifalertPrice from '../../components/ifalertPrice.vue'
 	import ifalertTime from '../../components/ifalertTime.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
+	import alert from '../../components/Tradealert.vue'
 	export default{
 		name:'conditions',
-		components:{topbar, back, cbtn, ifalert, tipsDialog, ifalertPrice, ifalertTime},
+		components:{topbar, back, cbtn, ifalert, tipsDialog, ifalertPrice, ifalertTime, alert},
 		data(){
 			return {
 				msg: '',
@@ -101,7 +103,9 @@
 				orderStatus: '',
 				statusName: '暂停',
 				orderType: '',
-				sendMsg: ''
+				sendMsg: '',
+				tipsMsg: '',
+				str: ''
 			}
 		},
 		computed:{
@@ -132,12 +136,21 @@
 			sendObjTime: function(){
 				if(this.sendMsg) return JSON.stringify(this.sendMsg);
 			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			sendStr: function(){
+				if(this.str) return JSON.stringify(this.str);
+			}
 		},
 		methods: {
 			modify:function(){
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
+				}else if(this.orderStatus == 0){
+					this.$refs.dialog.isShow = true;
+					this.msg = '运行中的条件单不能修改';
 				}else{
 					if(this.orderType == 5){
 						this.$refs.ifalertTime.isshow = true;
@@ -151,19 +164,23 @@
 						}
 					}.bind(this));
 				}
+				$(".list_cont_box li").removeClass("current");
+				this.orderListId = '';
 			},
 			deleteEvent:function(){
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
 				}else{
+					this.$refs.alert.isshow = true;
+					this.tipsMsg = '是否删除条件单？';
 					this.noListCont.forEach(function(e,i){
 						if(this.orderListId==e.ConditionNo){
 							this.$store.state.market.noObj = e;
 						}
 					}.bind(this));
 					let o = this.$store.state.market.noObj;
-					let b={
+					let b = {
 						"Method":'ModifyCondition',
 						"Parameters":{
 							"ConditionNo":o.ConditionNo,
@@ -185,16 +202,16 @@
 							"AdditionPrice":o.AdditionPrice
 						}
 					};
-					this.tradeSocket.send(JSON.stringify(b));	
+//					this.tradeSocket.send(JSON.stringify(b));	
+					this.str = b;
 				}
 			},
 			suspendEvent:function(){     //暂停
-				console.log(111111);
-				console.log(this.orderListId);
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
 				}else{
+					this.$refs.alert.isshow = true;
 					this.noListCont.forEach(function(e,i){
 						if(this.orderListId==e.ConditionNo){
 							this.$store.state.market.noObj = e;
@@ -203,6 +220,7 @@
 					let o = this.$store.state.market.noObj;
 					if(o.Status==0){//如果处于运行中，则暂停
 							this.statusName = '启动';
+							this.tipsMsg = '是否暂停条件单？';
 							let b={
 							"Method":'ModifyCondition',
 							"Parameters":{
@@ -225,9 +243,11 @@
 								"AdditionPrice":o.AdditionPrice
 							}
 						};
-						this.tradeSocket.send(JSON.stringify(b));	
+//						this.tradeSocket.send(JSON.stringify(b));	
+						this.str = b;
 					}else if(o.Status==1){
 						this.statusName = '暂停';
+						this.tipsMsg = '是否启动条件单？';
 						let b={
 							"Method":'ModifyCondition',
 							"Parameters":{
@@ -250,7 +270,8 @@
 								"AdditionPrice":o.AdditionPrice
 							}
 						};
-						this.tradeSocket.send(JSON.stringify(b));	
+//						this.tradeSocket.send(JSON.stringify(b));
+						this.str = b;
 					}
 				}
 				$(".list_cont_box li").removeClass("current");

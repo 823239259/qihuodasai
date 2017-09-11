@@ -150,7 +150,6 @@
 		},
 		methods: {
 			updateEvent: function(){
-				console.log(this.orderStatus);
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';
@@ -166,7 +165,6 @@
 				}
 			},
 			suspendEvent:function(){
-				console.log(this.orderListId);
 				if(this.orderListId == '' || this.orderListId == null){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请选择一条数据';

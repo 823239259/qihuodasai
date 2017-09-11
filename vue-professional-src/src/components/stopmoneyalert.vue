@@ -277,17 +277,6 @@
 		mounted: function(){
 
 		},
-//		beforeMount: function(){
-//			console.log('nimabi');
-//		},
-		activated: function(){
-			console.log(987);
-			this.inputPrice = 45;
-		},
-		updated: function(){
-//			let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
-//			this.inputPrice = parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
-		}
 	}
 </script>
 

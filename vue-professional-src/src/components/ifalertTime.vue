@@ -1,6 +1,7 @@
 <template>
 	<div id="ifalert" v-if="isshow">
-		<div>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<div class="ifalert_box">
 			<ul class="selectbar">
 				<li class="fontgray fl selected" @tap="selection">时间条件</li>
 			</ul>
@@ -80,6 +81,7 @@
 </template>
 
 <script>
+	import alert from './Tradealert.vue'
 	export default {
 		name: 'ifalert',
 		data(){
@@ -111,10 +113,12 @@
 				timeOrderType:1,
 				timeBuyOrSell:0,
 				additionValue:'',
-				
+				tipsMsg: '',
+				str: ''
 			}
 		},
 		props: ['objstr'],
+		components: {alert},
 		computed:{
 			height1(){
 				return $('#ifalert>div').css('height').slice(0,-2);
@@ -137,12 +141,15 @@
 			objstrParms: function(){
 				return this.objstr;
 			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
+			},
 		},
 		watch:{
-			
 			objstrParms:function(n,o){
-				console.log(n);
-				
 				let sb= JSON.parse(n);
 				this.selectTimeId = sb.CommodityNo+sb.ContractNo;
 				let time00 = sb.TimeTriggerPoint.split(' ')[1];
@@ -177,6 +184,8 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				this.$refs.alert.isshow = true;
+				this.tipsMsg = '是否修改价格条件单？';
 				function getNowFormatDate() {
 				    let date = new Date();
 				    let seperator1 = "-";
@@ -192,7 +201,7 @@
 				    return currentdate;
 				}
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
-				this.isshow = false;
+//				this.isshow = false;
 				let mmp = JSON.parse(this.objstrParms);
 				let b={
 						"Method":'ModifyCondition',
@@ -249,7 +258,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -392,7 +401,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px*@ip6;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -535,7 +544,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px*@ip5;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
