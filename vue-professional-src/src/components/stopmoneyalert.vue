@@ -31,7 +31,7 @@
 									<option value="2">动态价</option>
 								</select>
 								<input type="text" v-model="inputPrice" class="inp" />
-								<span class="fontgray">0.00%</span>
+								<span class="fontgray">{{percentLoss}}%</span>
 							</li>
 						</ol>
 					</li>
@@ -67,7 +67,7 @@
 							<li class="fl fontgray">止盈价</li>
 							<li class="fl">
 								<input type="text" class="inp" v-model="zhiYinInputPrice" />
-								<span class="fontgray">{{percent}}%</span>
+								<span class="fontgray">{{percentWin}}%</span>
 							</li>
 						</ol>
 					</li>
@@ -117,7 +117,7 @@
 				msg: '',
 				str: '',
 				lastPrice00:'',
-				percent:0.00,
+				percent: 0.10,
 			}
 		},
 		props: ['val'],
@@ -155,15 +155,6 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
-//			inputPrice(){
-//				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
-//				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
-//				
-//			},
-//			zhiYinInputPrice(){
-//				let dotSize = this.orderTemplist[this.condition.CommodityNo].DotSize;
-//				return parseFloat(this.$store.state.market.templateList[this.condition.CommodityNo].LastPrice).toFixed(dotSize);
-//			}
 		},
 		watch:{
 			parameters:function(n,o){
@@ -174,6 +165,18 @@
 						}
 						
 					}.bind(this));
+				}
+			},
+			inputPrice: function(n, o){
+				if(n != undefined){
+					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
+					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
+				}
+			},
+			zhiYinInputPrice: function(n, o){
+				if(n != undefined){
+					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
+					this.percentWin = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
 			}
 		},
