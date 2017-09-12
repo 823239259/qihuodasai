@@ -9,7 +9,7 @@
 				<span class="blue">账户余额：</span>
 				<span class="yellow">{{balance}}元</span>
 				<i class="icon_arrow"></i>
-				<span class="white fr" @tap="toRecharge">去充值</span>
+				<!--<span class="white fr" @tap="toRecharge">去充值</span>-->
 			</div>
 			<div class="ipt_box">
 				<div class="ipt_row">
@@ -69,7 +69,7 @@
 		},
 		methods: {
 			toRecharge: function(){
-//				this.$router.push({path: '/recharge'});
+				this.$router.push({path: '/recharge'});
 			},
 			confirmAdd: function(){
 				if(this.money == ''){
