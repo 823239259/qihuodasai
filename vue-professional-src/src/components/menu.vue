@@ -8,8 +8,8 @@
 			<!--<transition name="topdown" mode="out-in">-->
 			<div class="menulist" v-show="open">
 				<ul>
-					<!--<li class="fontgray" @tap="toConditions" v-show="hasLoginShow">条件单</li>
-					<li class="fontgray" @tap="toStopMoney" v-show="hasLoginShow">止损止盈</li>-->
+					<li class="fontgray" @tap="toConditions" v-show="hasLoginShow">条件单</li>
+					<li class="fontgray" @tap="toStopMoney" v-show="hasLoginShow">止损止盈</li>
 					<li class="fontgray" @tap="toMoneyDetails" v-show="hasLoginShow">资金详情</li>
 					<li class="fontgray" @tap="toHistoryTrade" v-show="hasLoginShow">历史成交</li>
 					<li class="fontgray" @tap="toTradeLogin">{{userTitle}}</li>

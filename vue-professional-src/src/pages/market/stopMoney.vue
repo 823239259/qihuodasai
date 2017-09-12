@@ -5,7 +5,7 @@
 		<stopWinAlert ref="stopwinalert"></stopWinAlert>
 		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
 		<div class="head">
-			<topbar title="止损止赢"></topbar>
+			<topbar title="止损止盈"></topbar>
 			<back></back>
 			<refresh @tap.native="refresh"></refresh>
 		</div>

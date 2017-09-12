@@ -1,6 +1,7 @@
 <template>
 	<div id="ifalert" v-if="isshow">
-		<div>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<div class="ifalert_box">
 			<ul class="selectbar">
 				<li class="fontgray fl" :class="{selected: ifshow}" @tap="selection">价格条件</li>
 				<li class="fontgray fl" :class="{selected: !ifshow}" @tap="selection">时间条件</li>
@@ -85,7 +86,7 @@
 							</li>
 							<li>
 								<!--<input type="time" v-model="time" class='time'/>-->
-								<input type="time" class="time" v-model="time" placeholder="显示时间" />
+								<input type="time" class="time" v-model="time" placeholder="显示时间" defaultValue="显示时间" />
 							</li>
 						</ol>
 					</li>
@@ -145,6 +146,7 @@
 </template>
 
 <script>
+	import alert from './Tradealert.vue'
 	export default {
 		name: 'ifalert',
 		data(){
@@ -176,17 +178,19 @@
 				timeOrderType:1,
 				timeBuyOrSell:0,
 				additionValue:'',
-				
+				tipsMsg: '',
+				str: ''
 			}
 		},
 		props: ['objstr'],
+		components: {alert},
 		computed:{
-			height1(){
-				return $('#ifalert>div').css('height').slice(0,-2);
-			},
-			height2(){
-				return this.height1*1.1585;
-			},
+//			height1(){
+//				return $('#ifalert>div').css('height').slice(0,-2);
+//			},
+//			height2(){
+//				return this.height1*1.1585;
+//			},
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
@@ -201,6 +205,12 @@
 			},
 			objstrParms: function(){
 				return this.objstr;
+			},
+			tipsAlert: function(){
+				return this.tipsMsg;
+			},
+			sendMsg: function(){
+				if(this.str) return JSON.stringify(this.str);
 			},
 		},
 		watch:{
@@ -256,6 +266,7 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				this.$refs.alert.isshow = true;
 				function getNowFormatDate() {
 				    let date = new Date();
 				    let seperator1 = "-";
@@ -271,70 +282,73 @@
 				    return currentdate;
 				}
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
-				this.isshow = false;
+//				this.isshow = false;
 				if(this.ifshow==true){
+					this.tipsMsg = '是否添加价格条件单？';
 					let b={
-							"Method":'InsertCondition',
-							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
-								'CommodityNo':this.commodityNo,
-								'ContractNo':this.contractNo,
-								'Num':parseInt(this.holdNum),
-								'ConditionType':0,
-								'PriceTriggerPonit':parseFloat(this.inputPrice),
-								'CompareType':parseInt(this.selectPrice),
-								'TimeTriggerPoint':'',
-								'AB_BuyPoint':0.0,
-								'AB_SellPoint':0.0,
-								'OrderType':parseInt(this.selectMarketOrLimited),
-								'Drection':parseInt(this.selectBuyOrSell),
-								'StopLossType':5,
-								'StopLossDiff':0.0,
-								'StopWinDiff':0.0,
-								'AdditionFlag':this.additionFlag,
-								'AdditionType':parseInt(this.selectAdditionalPrice),
-								'AdditionPrice':(function(){
-													if(this.inputAdditionalPrice==''){
-														return  0;
-													}else{
-														return parseFloat(this.inputAdditionalPrice);
-													}
-												}.bind(this))()
-							}
-						};
-					this.tradeSocket.send(JSON.stringify(b));	
+						"Method":'InsertCondition',
+						"Parameters":{
+							'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
+							'CommodityNo':this.commodityNo,
+							'ContractNo':this.contractNo,
+							'Num':parseInt(this.holdNum),
+							'ConditionType':0,
+							'PriceTriggerPonit':parseFloat(this.inputPrice),
+							'CompareType':parseInt(this.selectPrice),
+							'TimeTriggerPoint':'',
+							'AB_BuyPoint':0.0,
+							'AB_SellPoint':0.0,
+							'OrderType':parseInt(this.selectMarketOrLimited),
+							'Drection':parseInt(this.selectBuyOrSell),
+							'StopLossType':5,
+							'StopLossDiff':0.0,
+							'StopWinDiff':0.0,
+							'AdditionFlag':this.additionFlag,
+							'AdditionType':parseInt(this.selectAdditionalPrice),
+							'AdditionPrice':(function(){
+												if(this.inputAdditionalPrice==''){
+													return  0;
+												}else{
+													return parseFloat(this.inputAdditionalPrice);
+												}
+											}.bind(this))()
+						}
+					};
+//					this.tradeSocket.send(JSON.stringify(b));
+					this.str = b;
 				}else{
+					this.tipsMsg = '是否添加时间条件单？';
 					let b={
-							"Method":'InsertCondition',
-							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo00].ExchangeNo,
-								'CommodityNo':this.commodityNo00,
-								'ContractNo':this.contractNo00,
-								'Num':parseInt(this.timeHoldNum),
-								'ConditionType':1,
-								'PriceTriggerPonit':0.0,
-								'CompareType':5,
-								'TimeTriggerPoint':dateTime,
-								'AB_BuyPoint':0.0,
-								'AB_SellPoint':0.0,
-								'OrderType':parseInt(this.timeOrderType),
-								'Drection':parseInt(this.timeBuyOrSell),
-								'StopLossType':5,
-								'StopLossDiff':0.0,
-								'StopWinDiff':0.0,
-								'AdditionFlag':this.timeAdditionFlag,
-								'AdditionType':parseInt(this.additionValue),
-								'AdditionPrice':(function(){
-													if(this.timeAddtionPrice==''){
-														return  0;
-													}else{
-														return parseFloat(this.timeAddtionPrice);
-													}
-												}.bind(this))()
-							}
-						};
-						
-					this.tradeSocket.send(JSON.stringify(b));	
+						"Method":'InsertCondition',
+						"Parameters":{
+							'ExchangeNo':this.templateList[this.commodityNo00].ExchangeNo,
+							'CommodityNo':this.commodityNo00,
+							'ContractNo':this.contractNo00,
+							'Num':parseInt(this.timeHoldNum),
+							'ConditionType':1,
+							'PriceTriggerPonit':0.0,
+							'CompareType':5,
+							'TimeTriggerPoint':dateTime,
+							'AB_BuyPoint':0.0,
+							'AB_SellPoint':0.0,
+							'OrderType':parseInt(this.timeOrderType),
+							'Drection':parseInt(this.timeBuyOrSell),
+							'StopLossType':5,
+							'StopLossDiff':0.0,
+							'StopWinDiff':0.0,
+							'AdditionFlag':this.timeAdditionFlag,
+							'AdditionType':parseInt(this.additionValue),
+							'AdditionPrice':(function(){
+												if(this.timeAddtionPrice==''){
+													return  0;
+												}else{
+													return parseFloat(this.timeAddtionPrice);
+												}
+											}.bind(this))()
+						}
+					};
+//					this.tradeSocket.send(JSON.stringify(b));	
+					this.str = b;
 				}
 			}
 		},
@@ -369,10 +383,10 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
-@width: 330px;
-@height: 265px;
 /*ip6p及以上*/
 @media (min-width:411px) {
+	@width: 330px;
+	@height: 265px;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -383,7 +397,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -509,13 +523,18 @@
 		border-bottom-right-radius: 5px;
 	}
 	.time{
-		width: 99px;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px;
 		height: 32px;
 		color: white;
+		padding: 0 5px;
 	}
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
+	@width: 330px*@ip6;
+	@height: 265px*@ip6;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -526,7 +545,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px*@ip6;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -652,13 +671,18 @@
 		border-bottom-right-radius: 5px*@ip6;
 	}
 	.time{
-		width: 99px*@ip6;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px*@ip6;
 		height: 32px*@ip6;
 		color: white;
+		padding: 0 5px*@ip6;
 	}
 }
 /*ip5*/
 @media(max-width:370px) {
+	@width: 330px*@ip5;
+	@height: 265px*@ip5;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -669,7 +693,7 @@
 		background-color: rgba(0, 0, 0, .5);
 		font-size: 14px*@ip5;
 	}
-	#ifalert>div {
+	#ifalert .ifalert_box{
 		width: @width;
 		background-color: #1b1b26;
 		position: fixed;
@@ -795,9 +819,12 @@
 		border-bottom-right-radius: 5px*@ip5;
 	}
 	.time{
-		width: 99px*@ip5;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px*@ip5;
 		height: 32px*@ip5;
 		color: white;
+		padding: 0 5px*@ip5;
 	}
 }
 </style>
