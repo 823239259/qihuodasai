@@ -96,7 +96,6 @@
 								}else{
 									o.imgPath = "http://manage.duokongtai.cn/" + o.imgPath;
 								}
-								
 							}.bind(this));
 						}
 					}else{

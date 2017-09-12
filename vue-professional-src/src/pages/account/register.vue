@@ -12,11 +12,6 @@
 				<label for="phone">手机号</label>
 				<input type="number" id="phone" placeholder="请输入您的手机号" v-model.trim="phone" />
 			</div>
-			<!--<div class="ipt_row">
-				<label for="imgCode">图形验证码</label>
-				<input type="number" id="imgCode" placeholder="请输入验证码" v-model.trim="imgCode" />
-				<a href="javascript:void(0);" class="code imgCode"><img :src="imgPath"/></a>
-			</div>-->
 			<div class="ipt_row">
 				<label for="code">手机验证码</label>
 				<input type="number" id="code" placeholder="请输入验证码" v-model.trim="code" />
@@ -103,11 +98,6 @@
 				}else{
 					this.$refs.codeDialog.isshow = true;
 					this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//					if(this.environment == 'test'){
-//						this.$refs.codeDialog.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//					}else{
-//						this.$refs.codeDialog.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//					}
 					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
 					$(e.target).addClass('current');

@@ -95,70 +95,51 @@
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					this.$refs.codeDialog.path = this.path + '&' + Math.random();
-//					if(this.num >= 2){
-//						this.$refs.codeDialog.isshow = true;
-//						if(this.environment == 'test'){
-//							this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//						}else{
-//							this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//						}
-//						this.$refs.codeDialog.path = this.path + '&' + Math.random();
-//						this.str = {
-//							loginName: this.phone,
-//							password: this.pwd
-//						}
-//					}else{
-						//登录请求
-						this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
-							params: {
-								loginName: this.phone,
-								password: this.pwd
-							},
-							timeout: 5000
-						}).then(function(e) {
-							var data = e.body;
-							if(data.success == true ){
-								if(data.code == 1){
-									this.$refs.dialog.isShow = true;
-									this.msg = '登录成功';
-									this.token = data.data.token;
-									this.secret = data.data.secret;
-									var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
-									localStorage.setItem("user", JSON.stringify(userData));
-									this.$router.push({path: '/account'});
+					//登录请求
+					this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
+						params: {
+							loginName: this.phone,
+							password: this.pwd
+						},
+						timeout: 5000
+					}).then(function(e) {
+						var data = e.body;
+						if(data.success == true ){
+							if(data.code == 1){
+								this.$refs.dialog.isShow = true;
+								this.msg = '登录成功';
+								this.token = data.data.token;
+								this.secret = data.data.secret;
+								var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
+								localStorage.setItem("user", JSON.stringify(userData));
+								this.$router.push({path: '/account'});
+							}
+						}else{
+							this.num = data.data.num;
+							if(this.num > 2){
+								this.$refs.codeDialog.isshow = true;
+								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+								this.$refs.codeDialog.path = this.path + '&' + Math.random();
+								this.str = {
+									loginName: this.phone,
+									password: this.pwd
 								}
 							}else{
-								this.num = data.data.num;
-								if(this.num > 2){
-									this.$refs.codeDialog.isshow = true;
-									this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//									if(this.environment == 'test'){
-//										this.path = "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//									}else{
-//										this.path = "http://api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//									}
-									this.$refs.codeDialog.path = this.path + '&' + Math.random();
-									this.str = {
-										loginName: this.phone,
-										password: this.pwd
-									}
+								this.$refs.dialog.isShow = true;
+								if(data.data.date != undefined){
+									var h = (data.data.date/3600).toString();
+									var hour = h.split('.')[0];
+									var minute = parseInt((h - hour) * 60);
+									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
 								}else{
-									this.$refs.dialog.isShow = true;
-									if(data.data.date != undefined){
-										var h = (data.data.date/3600).toString();
-										var hour = h.split('.')[0];
-										var minute = parseInt((h - hour) * 60);
-										this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
-									}else{
-										this.msg = data.message;
-									}
+									this.msg = data.message;
 								}
 							}
-						}.bind(this), function() {
-							this.$refs.dialog.isShow = true;
-							this.msg = '网络不给力，请稍后再试！';
-						});
-//					}
+						}
+					}.bind(this), function() {
+						this.$refs.dialog.isShow = true;
+						this.msg = '网络不给力，请稍后再试！';
+					});
 				}
 			},
 			toRegister: function(){

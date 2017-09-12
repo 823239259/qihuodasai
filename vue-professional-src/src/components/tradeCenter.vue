@@ -169,7 +169,7 @@
 		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>-->
 		<alert title="确认撤单" :line1="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
 		<alert title="确认全部撤单"  :line1="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 	</div>
 </template>
 

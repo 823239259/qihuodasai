@@ -16,7 +16,6 @@ import space from '../pages/space.vue'
 import findPwd from '../pages/account/findPwd.vue'
 import login from '../pages/account/login.vue'
 import register from '../pages/account/register.vue'
-import setPwd from '../pages/account/setPwd.vue'
 import ac from '../pages/tradeapply/applycomplate.vue'
 import ad from '../pages/tradeapply/applydetail.vue'
 import pc from '../pages/tradeapply/payConfirm.vue'
@@ -97,10 +96,6 @@ const router = new Router({
 		{
 			path: '/findPwd',
 			component: findPwd
-		},
-		{
-			path: '/setPwd',
-			component: setPwd
 		},
 		{
 			path: '/register',
