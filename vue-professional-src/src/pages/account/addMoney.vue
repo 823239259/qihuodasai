@@ -69,7 +69,7 @@
 		},
 		methods: {
 			toRecharge: function(){
-				this.$router.push({path: '/recharge'});
+//				this.$router.push({path: '/recharge'});
 			},
 			confirmAdd: function(){
 				if(this.money == ''){
