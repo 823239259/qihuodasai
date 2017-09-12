@@ -86,7 +86,7 @@
 							</li>
 							<li>
 								<!--<input type="time" v-model="time" class='time'/>-->
-								<input type="time" class="time" v-model="time" placeholder="显示时间" />
+								<input type="time" class="time" v-model="time" placeholder="显示时间" defaultValue="显示时间" />
 							</li>
 						</ol>
 					</li>
@@ -284,7 +284,7 @@
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
 //				this.isshow = false;
 				if(this.ifshow==true){
-					this.tipsMsg = '是否修改价格条件单？';
+					this.tipsMsg = '是否添加价格条件单？';
 					let b={
 						"Method":'InsertCondition',
 						"Parameters":{
@@ -317,7 +317,7 @@
 //					this.tradeSocket.send(JSON.stringify(b));
 					this.str = b;
 				}else{
-					this.tipsMsg = '是否修改时间条件单？';
+					this.tipsMsg = '是否添加时间条件单？';
 					let b={
 						"Method":'InsertCondition',
 						"Parameters":{
@@ -383,10 +383,10 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
-@width: 330px;
-@height: 265px;
 /*ip6p及以上*/
 @media (min-width:411px) {
+	@width: 330px;
+	@height: 265px;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -523,13 +523,18 @@
 		border-bottom-right-radius: 5px;
 	}
 	.time{
-		width: 99px;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px;
 		height: 32px;
 		color: white;
+		padding: 0 5px;
 	}
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
+	@width: 330px*@ip6;
+	@height: 265px*@ip6;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -666,13 +671,18 @@
 		border-bottom-right-radius: 5px*@ip6;
 	}
 	.time{
-		width: 99px*@ip6;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px*@ip6;
 		height: 32px*@ip6;
 		color: white;
+		padding: 0 5px*@ip6;
 	}
 }
 /*ip5*/
 @media(max-width:370px) {
+	@width: 330px*@ip5;
+	@height: 265px*@ip5;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -809,9 +819,12 @@
 		border-bottom-right-radius: 5px*@ip5;
 	}
 	.time{
-		width: 99px*@ip5;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px*@ip5;
 		height: 32px*@ip5;
 		color: white;
+		padding: 0 5px*@ip5;
 	}
 }
 </style>

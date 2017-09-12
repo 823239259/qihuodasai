@@ -252,10 +252,10 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
-@width: 330px;
-@height: 265px;
 /*ip6p及以上*/
 @media (min-width:411px) {
+	@width: 330px;
+	@height: 265px;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -392,13 +392,18 @@
 		border-bottom-right-radius: 5px;
 	}
 	.time{
-		width: 99px;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px;
 		height: 32px;
 		color: white;
+		padding: 0 5px;
 	}
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
+	@width: 330px*@ip6;
+	@height: 265px*@ip6;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -535,13 +540,18 @@
 		border-bottom-right-radius: 5px*@ip6;
 	}
 	.time{
-		width: 99px*@ip6;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px*@ip6;
 		height: 32px*@ip6;
 		color: white;
+		padding: 0 5px*@ip6;
 	}
 }
 /*ip5*/
 @media(max-width:370px) {
+	@width: 330px*@ip5;
+	@height: 265px*@ip5;
 	#ifalert {
 		position: fixed;
 		top: 0;
@@ -678,9 +688,12 @@
 		border-bottom-right-radius: 5px*@ip5;
 	}
 	.time{
-		width: 99px*@ip5;
+		display: inline-block;
+		vertical-align: middle;
+		width: 95px*@ip5;
 		height: 32px*@ip5;
 		color: white;
+		padding: 0 5px*@ip5;
 	}
 }
 </style>
