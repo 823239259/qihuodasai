@@ -81,12 +81,9 @@
 					</li>
 					<li>
 						<ol>
-							<li class="fontgray">
-								时间
-							</li>
+							<li class="fontgray">时间</li>
 							<li>
-								<!--<input type="time" v-model="time" class='time'/>-->
-								<input type="time" class="time" v-model="time" placeholder="显示时间" defaultValue="显示时间" />
+								<input type="time" class="time" v-model="time" placeholder="显示时间" />
 							</li>
 						</ol>
 					</li>
@@ -353,6 +350,12 @@
 			}
 		},
 		mounted:function(){
+			//获取当前时间
+			var date = new Date();
+			var hour = date.getHours().toString().length > 1 ? date.getHours().toString() : '0' + date.getHours().toString();
+			var minutes = date.getMinutes().toString().length > 1 ? date.getMinutes().toString() : '0' + date.getMinutes().toString();
+			this.time = hour + ':' + minutes;
+			
 			this.selectPrice = 0;
 			let arr=[];
 			arr = this.parameters;
