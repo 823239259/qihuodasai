@@ -119,7 +119,6 @@
 							if(this.num > 2){
 								this.$refs.codeDialog.isshow = true;
 								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-								this.$refs.codeDialog.path = this.path + '&' + Math.random();
 								this.str = {
 									loginName: this.phone,
 									password: this.pwd
