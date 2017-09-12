@@ -25,7 +25,7 @@
 		<div class="list_tools">
 			<cbtn name="全部平仓" @tap.native="closeAllOut"></cbtn>
 			<cbtn name="平仓"  @tap.native="closeOut"></cbtn>
-			<cbtn name="止损止盈" @tap.native="stopLossStopProfit"></cbtn>
+			<!--<cbtn name="止损止盈" @tap.native="stopLossStopProfit"></cbtn>-->
 		</div>
 		<tipsDialog :msg="msgTips"></tipsDialog>
 		<stopmoneyalert :val="selectedOrderLists" ref="stopmoneyalert"></stopmoneyalert>
