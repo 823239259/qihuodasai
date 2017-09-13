@@ -17,6 +17,9 @@
 									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
 								</select>
 							</li>
+							<li class="fl fontgray">
+								最新：<span class="fontwhite">00</span>
+							</li>
 						</ol>
 					</li>
 					<li>
@@ -77,6 +80,9 @@
 								<select name="contract" class="selectlong fontwhite" v-model="selectTimeId">
 									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
 								</select>
+							</li>
+							<li class="fl fontgray">
+								最新：<span class="fontwhite">00</span>
 							</li>
 						</ol>
 					</li>

@@ -239,18 +239,20 @@
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损手数';
 					}else{
-						if(this.condition.Drection == 0){
-							if(this.inputPrice > this.templateListObj.LastPrice){
-								this.$refs.dialog.isShow = true;
-								this.msg = '输入价格应该低于最新价';
-								return;
+						if(this.selectStopLossType00 == 0){
+							if(this.condition.Drection == 0){
+								if(this.inputPrice > this.templateListObj.LastPrice){
+									this.$refs.dialog.isShow = true;
+									this.msg = '输入价格应该低于最新价';
+									return;
+								}
 							}
-						}
-						if(this.condition.Drection == 1){
-							if(this.inputPrice < this.templateListObj.LastPrice){
-								this.$refs.dialog.isShow = true;
-								this.msg = '输入价格应该高于最新价';
-								return;
+							if(this.condition.Drection == 1){
+								if(this.inputPrice < this.templateListObj.LastPrice){
+									this.$refs.dialog.isShow = true;
+									this.msg = '输入价格应该高于最新价';
+									return;
+								}
 							}
 						}
 						this.$refs.alert.isshow = true;

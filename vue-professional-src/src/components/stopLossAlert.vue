@@ -167,9 +167,6 @@
 				if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止损价';
-				}else if(this.inputPrice >= this.lastPrice){
-					this.$refs.dialog.isShow = true;
-					this.msg = '输入价格应该小于最新价';
 				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
 					this.$refs.dialog.isShow = true;
 					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
@@ -177,6 +174,22 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止损手数';
 				}else{
+					if(this.selectStopLossType00 == 0){
+						if(this.stopLossListSelectOneObj.HoldDrection == '多'){
+							if(this.inputPrice > this.templateListObj.LastPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '输入价格应该低于最新价';
+								return;
+							}
+						}
+						if(this.stopLossListSelectOneObj.HoldDrection == '空'){
+							if(this.inputPrice < this.templateListObj.LastPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '输入价格应该高于最新价';
+								return;
+							}
+						}
+					}
 					this.$refs.alert.isshow = true;
 					this.tipsMsg = '是否添加限价止损？';
 					let b={
