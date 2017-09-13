@@ -51,7 +51,7 @@
 									<option value="0">&nbsp;&nbsp;买</option>
 									<option value="1">&nbsp;&nbsp;卖</option>
 								</select>
-								<select class="fontwhite selectshort" v-model="selectMarketOrLimited ">
+								<select class="fontwhite selectshort" v-model="selectMarketOrLimited">
 									<option value="1">市价</option>
 									<option value="2">对手价</option>
 								</select>
@@ -239,11 +239,13 @@
 			},
 			selectTimeId:function(n,o){
 				if(n != undefined){
+					this.commodityNo = n.substring(0,n.length-4);
 					this.commodityNo00 = n.substring(0,n.length-4);
 					this.contractNo00 = n.substring(n.length-4,n.length);
-					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+//					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
 					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-				}	
+					console.log(this.miniTikeSize);
+				}
 			},
 			selectAdditionalPrice:function(n,o){
 				if(this.selectAdditionalPrice == 5){
@@ -309,28 +311,28 @@
 					//判断价格与附加价格是否形成区间
 					switch (this.selectPrice){
 						case 0:
-							if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice <= this.inputPrice){
+							if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice && this.inputAdditionalPrice <= this.inputPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '附加条件添加错误';
 								return;
 							}
 							break;
 						case 2:
-							if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice <= this.inputPrice){
+							if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice && this.inputAdditionalPrice <= this.inputPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '附加条件添加错误';
 								return;
 							}
 							break;
 						case 1:
-							if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice >= this.inputPrice){
+							if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice && this.inputAdditionalPrice >= this.inputPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '附加条件添加错误';
 								return;
 							}
 							break;
 						case 3:
-							if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice >= this.inputPrice){
+							if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice && this.inputAdditionalPrice >= this.inputPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '附加条件添加错误';
 								return;
@@ -386,6 +388,7 @@
 					}
 				}else{
 					if(this.timeAddtionPrice){
+						console.log(this.miniTikeSize);
 						var d2 = this.timeAddtionPrice % this.miniTikeSize;
 						if(d2 >= 0.000000001 && parseFloat(this.miniTikeSize-d2) >= 0.0000000001){
 							this.$refs.dialog.isShow = true;
