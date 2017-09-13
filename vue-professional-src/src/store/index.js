@@ -1512,7 +1512,7 @@ export default new Vuex.Store({
 					if(parameters.Status==0){
 						context.state.market.layer='设置条件单成功';
 					}else{
-						context.state.market.layer='设置条件单失败，原因:【'+value.StatusMsg+'】';
+						context.state.market.layer='设置条件单失败，原因:【'+parameters.StatusMsg+'】';
 					}
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
