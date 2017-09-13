@@ -1510,6 +1510,11 @@ export default new Vuex.Store({
 				case "OnRspInsertCondition":
 					console.log('OnRspInsertCondition');
 //					console.log(parameters);
+					if(parameters.Status==0){
+						console.log('设置条件单成功!');
+					}else{
+						console.log('设置条件单失败，原因:【'+value.StatusMsg+'】');
+					}
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
@@ -1700,6 +1705,7 @@ export default new Vuex.Store({
 					});
 		},
 		dealWithOnRspInsertCondition:function(context,parameters){
+			
 			let e0 = parameters;
 			let b={};
 			
