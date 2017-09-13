@@ -152,7 +152,7 @@
 			},
 			layer: function(n, o){
 				this.$refs.dialog.isShow = true;
-				this.msg = n;
+				this.msg = n.slice(0,-1);
 			}
 		},
 		methods: {
