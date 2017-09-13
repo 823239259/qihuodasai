@@ -141,7 +141,7 @@
 									this.msg = data.message;
 								}
 							}.bind(this), function(){
-								this.$children[0].isShow = true;
+								this.$refs.dialog.isShow = true;
 								this.msg = '网络不给力，请稍后再试！'
 							});
 						}

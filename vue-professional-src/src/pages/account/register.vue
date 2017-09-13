@@ -90,10 +90,10 @@
 			getCode: function(e){
 				if($(e.target).hasClass('current')) return false;
 				if(this.phone == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手机号';
 				}else if(this.phoneReg.test(this.phone) == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '手机号格式错误';
 				}else{
 					this.$refs.codeDialog.isshow = true;
@@ -113,19 +113,19 @@
 			},
 			register: function(){
 				if(this.phone == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手机号';
 				}else if(this.phoneReg.test(this.phone) == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '手机号格式错误';
 				}else if(this.code == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手机验证码';
 				}else if(this.pwd == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入密码';
 				}else if(this.pwdReg.test(this.pwd) == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					//注册请求
@@ -142,7 +142,7 @@
 						var data = e.body;
 						if(data.success == true ){
 							if(data.code == 1){
-								this.$children[0].isShow = true;
+								this.$refs.dialog.isShow = true;
 								this.msg = '注册成功';
 								this.phone = '';
 								this.pwd = '';
@@ -154,11 +154,11 @@
 								}.bind(this), 1000);
 							}
 						}else{
-							this.$children[0].isShow = true;
+							this.$refs.dialog.isShow = true;
 							this.msg = data.message;
 						}
 					}.bind(this), function() {
-						this.$children[0].isShow = true;
+						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！'
 					});
 				}

@@ -631,7 +631,6 @@
 			$('#information').css('height', window.screen.height - 20 + 'px');
 		},
 		activated: function(){
-			this.getVal(this.sstartT,this.sendT);
 			this.getdate();
 		}
 	}
