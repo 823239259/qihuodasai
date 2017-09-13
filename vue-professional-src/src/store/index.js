@@ -1511,9 +1511,9 @@ export default new Vuex.Store({
 					console.log('OnRspInsertCondition');
 //					console.log(parameters);
 					if(parameters.Status==0){
-						console.log('设置条件单成功!');
+						context.state.market.layer='设置条件单成功';
 					}else{
-						console.log('设置条件单失败，原因:【'+value.StatusMsg+'】');
+						context.state.market.layer='设置条件单失败，原因:【'+value.StatusMsg+'】';
 					}
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
