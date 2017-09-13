@@ -1883,7 +1883,7 @@ export default new Vuex.Store({
 			}
 		},
 		updateStopLoss:function(context,parameters){
-			context.state.market.layer='单号【'+ parameters.StopLossNo+'】,更新成功';
+			context.state.market.layer='单号【'+ parameters.StopLossNo+'】,更新成功' + Math.floor(Math.random()*10);
 			if(parameters.Status>2){
 				context.state.market.stopLossTriggeredList.push(parameters);
 				context.state.market.hasYesstopLossList.push(parameters);
