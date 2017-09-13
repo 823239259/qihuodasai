@@ -217,15 +217,15 @@
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损价';
-					}else if(condition.Drection==0){
+					}else if(this.condition.Drection==0){
 						if(this.inputPrice >= this.templateListObj.LastPrice){
 							this.$refs.dialog.isShow = true;
-							this.msg = '输入价格应该小于最新价';
+							this.msg = '输入价格应该低于最新价';
 						}
-					}else if(condition.Drection==1){
+					}else if(this.condition.Drection==1){
 						if(this.inputPrice <= this.templateListObj.LastPrice){
 							this.$refs.dialog.isShow = true;
-							this.msg = '输入价格应该大于最新价';
+							this.msg = '输入价格应该高于最新价';
 						}
 					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
 						this.$refs.dialog.isShow = true;
@@ -269,9 +269,16 @@
 					if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止盈价';
-					}else if(this.zhiYinInputPrice <= this.templateListObj.LastPrice){
-						this.$refs.dialog.isShow = true;
-						this.msg = '输入价格应该高于最新价';
+					}else if(this.condition.Drection==0){
+						if(this.zhiYinInputPrice <= this.templateListObj.LastPrice){
+							this.$refs.dialog.isShow = true;
+							this.msg = '输入价格应该高于最新价';
+						}
+					}else if(this.condition.Drection==1){
+						if(this.zhiYinInputPrice >= this.templateListObj.LastPrice){
+							this.$refs.dialog.isShow = true;
+							this.msg = '输入价格应该低于最新价';
+						}
 					}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止赢手数';
