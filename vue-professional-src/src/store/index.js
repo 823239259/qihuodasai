@@ -1518,6 +1518,19 @@ export default new Vuex.Store({
 					break;
 				case 'OnRtnConditionState':
 //					console.log(parameters);
+					if(parameters.Status==0){
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行';
+					}else if(parameters.Status==1){
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停';
+					}else if(parameters.Status==2){
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发';
+					}else if(parameters.Status==3){
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消';
+					}else if(parameters.Status==4){
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败';
+					}else if(parameters.Status==5){
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败';
+					}
 					context.dispatch('dealWithOnRtnConditionState',parameters);
 					
 					break;	
