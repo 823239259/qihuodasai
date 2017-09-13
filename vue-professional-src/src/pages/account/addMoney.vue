@@ -1,6 +1,6 @@
 <template>
 	<div id="addMoney">
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<topbar title="追加保证金"></topbar>
 		<back :title="isJumpEvent"></back>
 		<cs title="客服"></cs>
@@ -73,13 +73,13 @@
 			},
 			confirmAdd: function(){
 				if(this.money == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入追加金额';
 				}else if(this.money < 500) {
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '追加金额最低500元！！';
     			}else if(Number(this.balance) < Number(this.money)) {
-    				this.$children[0].isShow = true;
+    				this.$refs.dialog.isShow = true;
 					this.msg = '余额不足，请立即充值!';
     			}else{
 					this.$http.post(this.PATH + '/user/ftrade/addbond', {emulateJSON: true},{
@@ -96,7 +96,7 @@
 						var data = e.body;
 						if(data.success == true){
 							if(data.code == 1){
-								this.$children[0].isShow = true;
+								this.$refs.dialog.isShow = true;
 								this.msg = '追加成功';
 								this.$store.state.account.balance = this.balance - this.money;
 								this.money = '';
@@ -112,35 +112,35 @@
 						}else{
 							switch (data.code){
 								case '-1':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '认证失败';
 									break;
 								case '2':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '余额不足';
 									break;
 								case '3':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '未找到该方案';
 									break;
 								case '4':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '该方案已完结';
 									break;
 								case '5':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '追加金额低于默认最小金额';
 									break;
 								case '6':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '方案编号不能为空';
 									break;
 								case '7':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '追加金额不能为空或者0';
 									break;
 								case '8':
-									this.$children[0].isShow = true;
+									this.$refs.dialog.isShow = true;
 									this.msg = '追加保证金失败！';
 									break;
 								default:
@@ -148,7 +148,7 @@
 							}
 						}
 					}.bind(this), function(){
-						this.$children[0].isShow = true;
+						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！';
 					});
 				}
@@ -173,7 +173,7 @@
 					}else{
 						switch (data.code){
 							case '3':
-								this.$children[0].isShow = true;
+								this.$refs.dialog.isShow = true;
 								this.msg = '用户信息不存在';
 								break;
 							default:
@@ -181,7 +181,7 @@
 						}
 					}
 				}.bind(this), function(){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '网络不给力，请稍后再试！';
 				});
 			},
@@ -190,7 +190,7 @@
 					this.moneyRate = (this.money/this.rate).toFixed(2);
 					this.money = parseInt(this.money);
 					if(Number(this.money) > Number(this.balance)){
-						this.$children[0].isShow = true;
+						this.$refs.dialog.isShow = true;
 						this.msg = '余额不足！';
 					}
 				}else{

@@ -373,12 +373,13 @@
 			},
 			layer: function(n, o){
 				setTimeout(function(){
-					if(this.$children[7].isShow != undefined){
-						this.$children[7].isShow = true;
-					}
-					if(this.$children[8].isShow != undefined){
-						this.$children[8].isShow = true;
-					}
+					this.$refs.dialog.isShow = true;
+//					if(this.$children[7].isShow != undefined){
+//						this.$children[7].isShow = true;
+//					}
+//					if(this.$children[8].isShow != undefined){
+//						this.$children[8].isShow = true;
+//					}
 					this.msg = n.slice(0,-1);
 				}.bind(this), 1000);
 			},

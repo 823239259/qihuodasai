@@ -79,10 +79,10 @@
 			getCode: function(e){
 				if($(e.target).hasClass('current')) return false;
 				if(this.phone == ''){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手机号';
 				}else if(this.phoneReg.test(this.phone) == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '手机号格式错误';
 				}else{
 					if(this.num && this.num > 2){

@@ -149,18 +149,8 @@
 		},
 		watch: {
 			layer: function(n, o){
-//				setTimeout(function(){
-//					if(this.$children[7].isShow != undefined){
-//						this.$children[7].isShow = true;
-//					}
-//					if(this.$children[8].isShow != undefined){
-//						this.$children[8].isShow = true;
-//					}
-					this.$refs.dialog.isShow = true;
-					this.msg = n;
-//					this.msg = n.slice(0,-1);
-
-//				}.bind(this), 1000);
+				this.$refs.dialog.isShow = true;
+				this.msg = n;
 			},
 		},
 		methods: {
@@ -326,7 +316,7 @@
 				}
 			},
 			addConditions: function(){
-				this.$children[1].isshow = true;
+				this.$refs.ifalert.isshow = true;
 			},
 			regroupConditionList:function(){
 				this.conditionList.forEach(function(e,i){
