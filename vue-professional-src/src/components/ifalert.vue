@@ -1,6 +1,7 @@
 <template>
 	<div id="ifalert" v-if="isshow">
 		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<div class="ifalert_box">
 			<ul class="selectbar">
 				<li class="fontgray fl" :class="{selected: ifshow}" @tap="selection">价格条件</li>
@@ -143,6 +144,7 @@
 </template>
 
 <script>
+	import tipsDialog from './tipsDialog.vue'
 	import alert from './Tradealert.vue'
 	export default {
 		name: 'ifalert',
@@ -176,18 +178,13 @@
 				timeBuyOrSell:0,
 				additionValue:'',
 				tipsMsg: '',
-				str: ''
+				str: '',
+				msg: ''
 			}
 		},
 		props: ['objstr'],
-		components: {alert},
+		components: {alert, tipsDialog},
 		computed:{
-//			height1(){
-//				return $('#ifalert>div').css('height').slice(0,-2);
-//			},
-//			height2(){
-//				return this.height1*1.1585;
-//			},
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
@@ -206,9 +203,15 @@
 			tipsAlert: function(){
 				return this.tipsMsg;
 			},
+			msgTips: function(){
+				return this.msg;
+			},
 			sendMsg: function(){
 				if(this.str) return JSON.stringify(this.str);
 			},
+			miniTikeSize(){
+				return this.orderTemplist[this.commodityNo].MiniTikeSize;
+			}
 		},
 		watch:{
 			selectId:function(n,o){
@@ -253,17 +256,16 @@
 			selection:function(e){
 				if(e.target.innerHTML == '价格条件'){
 					this.ifshow=true;
-					$('#ifalert>div').css('height',this.height1+'px');
+					this.selectAdditionalPrice = 5;
 				}else{
 					this.ifshow=false;
-					$('#ifalert>div').css('height',this.height2+'px');
+					this.additionValue = 5;
 				}
 			},
 			close: function() {
 				this.isshow = false;
 			},
 			confirm: function() {
-				this.$refs.alert.isshow = true;
 				function getNowFormatDate() {
 				    let date = new Date();
 				    let seperator1 = "-";
@@ -279,41 +281,67 @@
 				    return currentdate;
 				}
 				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
-//				this.isshow = false;
-				if(this.ifshow==true){
-					this.tipsMsg = '是否添加价格条件单？';
-					let b={
-						"Method":'InsertCondition',
-						"Parameters":{
-							'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
-							'CommodityNo':this.commodityNo,
-							'ContractNo':this.contractNo,
-							'Num':parseInt(this.holdNum),
-							'ConditionType':0,
-							'PriceTriggerPonit':parseFloat(this.inputPrice),
-							'CompareType':parseInt(this.selectPrice),
-							'TimeTriggerPoint':'',
-							'AB_BuyPoint':0.0,
-							'AB_SellPoint':0.0,
-							'OrderType':parseInt(this.selectMarketOrLimited),
-							'Drection':parseInt(this.selectBuyOrSell),
-							'StopLossType':5,
-							'StopLossDiff':0.0,
-							'StopWinDiff':0.0,
-							'AdditionFlag':this.additionFlag,
-							'AdditionType':parseInt(this.selectAdditionalPrice),
-							'AdditionPrice':(function(){
-												if(this.inputAdditionalPrice==''){
-													return  0;
-												}else{
-													return parseFloat(this.inputAdditionalPrice);
-												}
-											}.bind(this))()
+				if(this.ifshow == true){
+					if(this.inputAdditionalPrice){
+						var d1 = this.inputAdditionalPrice % this.miniTikeSize;
+						if(d1 >= 0.000000001 && parseFloat(this.miniTikeSize-d1) >= 0.0000000001){
+							this.$refs.dialog.isShow = true;
+							this.msg = '输入附加价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+							return;
 						}
-					};
-//					this.tradeSocket.send(JSON.stringify(b));
-					this.str = b;
+					}
+					var d0 = this.inputPrice%this.miniTikeSize;
+					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入价格';
+					}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
+						this.$refs.dialog.isShow = true;
+						this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+					}else{
+						this.$refs.alert.isshow = true;
+						this.tipsMsg = '是否添加价格条件单？';
+						let b={
+							"Method":'InsertCondition',
+							"Parameters":{
+								'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
+								'CommodityNo':this.commodityNo,
+								'ContractNo':this.contractNo,
+								'Num':parseInt(this.holdNum),
+								'ConditionType':0,
+								'PriceTriggerPonit':parseFloat(this.inputPrice),
+								'CompareType':parseInt(this.selectPrice),
+								'TimeTriggerPoint':'',
+								'AB_BuyPoint':0.0,
+								'AB_SellPoint':0.0,
+								'OrderType':parseInt(this.selectMarketOrLimited),
+								'Drection':parseInt(this.selectBuyOrSell),
+								'StopLossType':5,
+								'StopLossDiff':0.0,
+								'StopWinDiff':0.0,
+								'AdditionFlag':this.additionFlag,
+								'AdditionType':parseInt(this.selectAdditionalPrice),
+								'AdditionPrice':(function(){
+													if(this.inputAdditionalPrice==''){
+														return  0;
+													}else{
+														return parseFloat(this.inputAdditionalPrice);
+													}
+												}.bind(this))()
+							}
+						};
+	//					this.tradeSocket.send(JSON.stringify(b));
+						this.str = b;
+					}
 				}else{
+					if(this.timeAddtionPrice){
+						var d2 = this.timeAddtionPrice % this.miniTikeSize;
+						if(d2 >= 0.000000001 && parseFloat(this.miniTikeSize-d2) >= 0.0000000001){
+							this.$refs.dialog.isShow = true;
+							this.msg = '输入附加价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+							return;
+						}
+					}
+					this.$refs.alert.isshow = true;
 					this.tipsMsg = '是否添加时间条件单？';
 					let b={
 						"Method":'InsertCondition',

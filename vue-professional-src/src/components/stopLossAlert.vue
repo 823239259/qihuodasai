@@ -125,14 +125,6 @@
 		watch:{
 			stopLossListSelectOneObj: function(n,o){
 				this.selectStopLossType00 = n.StopLossType00;
-				
-//				if(this.selectStopLossType00==0){
-//					console.log(1);
-//					this.inputPrice = n.StopLossPrice;
-//				}else if(this.selectStopLossType00==2){
-//					console.log(2);
-//					this.inputPrice = n.StopLossDiff;
-//				}
 				this.Num = n.Num;
 				this.orderType = n.OrderType00;
 			},
@@ -160,12 +152,16 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				var d0 = this.inputPrice%this.miniTikeSize;
 				if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止损价';
 				}else if(this.inputPrice >= this.lastPrice){
 					this.$refs.dialog.isShow = true;
 					this.msg = '输入价格应该小于最新价';
+				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
+					this.$refs.dialog.isShow = true;
+					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
 				}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止损手数';
@@ -196,15 +192,8 @@
 					};
 					this.str = b;
 				}
-				
-				
-				
-				
 //				this.isshow = false;
-				
-//				console.log(JSON.stringify(b));
-				this.tradeSocket.send(JSON.stringify(b));
-					
+//				this.tradeSocket.send(JSON.stringify(b));
 			}
 		},
 		mounted: function(){

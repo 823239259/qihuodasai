@@ -101,6 +101,9 @@
 			lastPrice(){
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
+			},
+			miniTikeSize(){
+				return this.orderTemplist[this.stopLossListSelectOneObj.CommodityNo].MiniTikeSize;
 			}
 			
 		},
@@ -133,12 +136,16 @@
 				this.isshow = false;
 			},
 			confirm: function() {
+				var d0 = this.zhiYinInputPrice%this.miniTikeSize;
 				if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止赢价';
 				}else if(this.zhiYinInputPrice <= this.lastPrice){
 					this.$refs.dialog.isShow = true;
 					this.msg = '输入价格应该大于最新价';
+				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
+					this.$refs.dialog.isShow = true;
+					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
 				}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止赢手数';
