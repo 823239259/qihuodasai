@@ -118,7 +118,8 @@
 				additionValue:'',
 				tipsMsg: '',
 				str: '',
-				msg: ''
+				msg: '',
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
 			}
 		},
 		props: ['objstr'],
@@ -186,7 +187,12 @@
 					let size = this.orderTemplist[this.objstrParms.CommodityNo].DotSize;
 					this.timeAddtionPrice = parseFloat(this.templateList[this.objstrParms.CommodityNo].LastPrice).toFixed(size);
 				}
-			}
+			},
+			timeAddtionPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.timeAddtionPrice = '';
+				}
+			},
 		},
 		methods:{
 			close: function() {
@@ -200,6 +206,11 @@
 						this.msg = '输入附加价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
 						return;
 					}
+				}
+				if(this.timeHoldNum == '' || this.timeHoldNum == 0 || this.timeHoldNum == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入手数';
+					return;
 				}
 				this.$refs.alert.isshow = true;
 				this.tipsMsg = '是否修改价格条件单？';

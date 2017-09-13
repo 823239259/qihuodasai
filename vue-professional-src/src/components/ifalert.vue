@@ -179,7 +179,8 @@
 				additionValue:'',
 				tipsMsg: '',
 				str: '',
-				msg: ''
+				msg: '',
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
 			}
 		},
 		props: ['objstr'],
@@ -214,6 +215,21 @@
 			}
 		},
 		watch:{
+			inputPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputPrice = parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+				}
+			},
+			inputAdditionalPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputAdditionalPrice = '';
+				}
+			},
+			timeAddtionPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.timeAddtionPrice = '';
+				}
+			},
 			selectId:function(n,o){
 				if(n != undefined){
 					this.commodityNo = n.substring(0,n.length-4);
