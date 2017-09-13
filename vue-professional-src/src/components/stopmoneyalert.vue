@@ -223,12 +223,15 @@
 				var a0 = this.inputPrice;
 				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
 				var d0 = a0%b0;
+				console.log('d0------->');
+				console.log(d0+','+parseFloat(b0-d0));
 				if(this.isstopm == true){
 					
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损价';
-					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
+					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
+						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
 					}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
