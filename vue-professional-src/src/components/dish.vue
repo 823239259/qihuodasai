@@ -200,6 +200,9 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
 			objst: function(){
 				if(this.buyText){
 					return JSON.stringify(this.buyText);
@@ -306,7 +309,7 @@
 					var b={
 						"Method":'InsertOrder',
 						"Parameters":{
-							"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+							"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
 							"CommodityNo":this.templateList[commodityNo].CommodityNo,
 							"ContractNo":this.detail.LastQuotation.ContractNo,
 							"OrderNum":this.$children[1].defaultNum,
@@ -337,7 +340,7 @@
 					var b={
 						"Method":'InsertOrder',
 						"Parameters":{
-							"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+							"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
 							"CommodityNo":this.templateList[commodityNo].CommodityNo,
 							"ContractNo":this.detail.LastQuotation.ContractNo,
 							"OrderNum":this.$children[1].defaultNum,
