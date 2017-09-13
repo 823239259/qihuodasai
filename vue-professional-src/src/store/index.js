@@ -1508,7 +1508,6 @@ export default new Vuex.Store({
 					}
 					break;
 				case "OnRspInsertCondition":
-					console.log('OnRspInsertCondition');
 //					console.log(parameters);
 					if(parameters.Status==0){
 						context.state.market.layer='设置条件单成功';
@@ -1518,7 +1517,6 @@ export default new Vuex.Store({
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
-					console.log('OnRtnConditionState');	
 //					console.log(parameters);
 					context.dispatch('dealWithOnRtnConditionState',parameters);
 					
