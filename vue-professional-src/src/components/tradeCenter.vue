@@ -489,7 +489,7 @@
 							"Parameters":{
 								"OrderSysID":'',
 								"OrderID":CurrentObj.OrderID,
-								"ExchangeNo":this.templateList[Contract].ExchangeNo,
+								"ExchangeNo":this.orderTemplist[Contract].ExchangeNo,
 								"CommodityNo":this.templateList[Contract].CommodityNo,
 								"ContractNo":this.templateList[Contract].ContractNo,
 								"OrderNum":parseFloat(CurrentObj.delegateNum),
@@ -534,7 +534,7 @@
 						"Parameters":{
 							"OrderSysID":'',
 							"OrderID":CurrentObj.OrderID,
-							"ExchangeNo":this.templateList[Contract].ExchangeNo,
+							"ExchangeNo":this.orderTemplist[Contract].ExchangeNo,
 							"CommodityNo":this.templateList[Contract].CommodityNo,
 							"ContractNo":this.templateList[Contract].ContractNo,
 							"OrderNum":parseFloat(CurrentObj.delegateNum),
@@ -600,7 +600,7 @@
 						var b={
 								"Method":'InsertOrder',
 								"Parameters":{
-									"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+									"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
 									"CommodityNo":this.templateList[commodityNo].CommodityNo,
 									"ContractNo":this.detail.LastQuotation.ContractNo,
 									"OrderNum":this.$children[2].defaultNum,
@@ -628,7 +628,7 @@
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+								"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
 								"CommodityNo":this.templateList[commodityNo].CommodityNo,
 								"ContractNo":this.detail.LastQuotation.ContractNo,
 								"OrderNum": parseInt(this.tradeNum),
@@ -659,7 +659,7 @@
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+								"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
 								"CommodityNo":this.templateList[commodityNo].CommodityNo,
 								"ContractNo":this.detail.LastQuotation.ContractNo,
 								"OrderNum":this.$children[2].defaultNum,
@@ -686,7 +686,7 @@
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.templateList[commodityNo].ExchangeNo,
+								"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
 								"CommodityNo":this.templateList[commodityNo].CommodityNo,
 								"ContractNo":this.detail.LastQuotation.ContractNo,
 								"OrderNum": parseInt(this.tradeNum),
