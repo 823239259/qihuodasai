@@ -1500,7 +1500,7 @@ export default new Vuex.Store({
 				case 'OnRspQryCondition':
 					console.log('OnRspQryCondition');
 					if(parameters!=null){
-						if(parameters.Status<=2){
+						if(parameters.Status<2){
 							context.state.market.conditionList.push(parameters);
 						}else{
 							context.state.market.triggerConditionList.push(parameters);
@@ -1528,15 +1528,8 @@ export default new Vuex.Store({
 			}
 		},
 		dealWithOnRtnConditionState:function(context,parameters){
-			
-//			if(parameters.Status==0){
-//				context.state.market.layer='提交成功,单号【'+ parameters.StopLossNo+'】';
-//			}else{
-//				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】';
-//			}
-			
 			context.state.market.conditionList.forEach(function(e,i){
-						if(context.state.market.noObj.ConditionNo==e.ConditionNo){
+						if(parameters.ConditionNo==e.ConditionNo){
 							let e0 = parameters;
 							let b={};
 							
@@ -1694,7 +1687,7 @@ export default new Vuex.Store({
 							b.term = '当日有效';
 							b.time = e0.InsertDateTime;	
 							context.state.market.conditionList.splice(i,1,parameters);
-							if(e0.Status<2){
+							if(parameters.Status<2){
 								context.state.market.noListCont.splice(i,1,b);
 							}else{
 								context.state.market.noListCont.splice(i,1);
