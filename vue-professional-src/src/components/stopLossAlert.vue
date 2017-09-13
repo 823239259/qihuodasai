@@ -106,6 +106,9 @@
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
 				return this.$store.state.market.templateList[commodityNo].LastPrice;
 			},
+			miniTikeSize(){
+				return this.orderTemplist[this.stopLossListSelectOneObj.CommodityNo].MiniTikeSize;
+			}
 		},
 		filters:{
 			toFixed:function(value,dotSize){
@@ -123,15 +126,23 @@
 			stopLossListSelectOneObj: function(n,o){
 				this.selectStopLossType00 = n.StopLossType00;
 				
-				if(this.selectStopLossType00==0){
-					this.inputPrice = n.StopLossPrice;
-				}else if(this.selectStopLossType00==2){
-					this.inputPrice = n.StopLossDiff;
-				}
-				
+//				if(this.selectStopLossType00==0){
+//					console.log(1);
+//					this.inputPrice = n.StopLossPrice;
+//				}else if(this.selectStopLossType00==2){
+//					console.log(2);
+//					this.inputPrice = n.StopLossDiff;
+//				}
 				this.Num = n.Num;
 				this.orderType = n.OrderType00;
-			}
+			},
+			selectStopLossType00: function(n, o){
+				if(n == 2){
+					this.inputPrice = this.miniTikeSize;
+				}else if(n == 0){
+					this.inputPrice = this.stopLossListSelectOneObj.StopLossPrice;
+				}
+			},
 		},
 		methods: {
 			sel: function(e) {

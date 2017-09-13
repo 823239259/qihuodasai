@@ -155,6 +155,9 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
+			miniTikeSize(){
+				return this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+			}
 		},
 		watch:{
 			parameters:function(n,o){
@@ -163,12 +166,19 @@
 						if(this.condition.CommodityNo==e.CommodityNo){
 							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.LastPrice;
 						}
-						
 					}.bind(this));
+				}
+			},
+			selectStopLossType00: function(n, o){
+				if(n == 2){
+					this.inputPrice = this.miniTikeSize;
+				}else if(n == 0){
+					this.inputPrice = this.condition.OpenAvgPrice;
 				}
 			},
 			inputPrice: function(n, o){
 				if(n != undefined){
+					if(n == this.miniTikeSize) return;
 					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
@@ -211,9 +221,8 @@
 //					alert("yes");
 //				}
 				var a0 = this.inputPrice;
-				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize
-				var d0 =a0%b0;
-				console.log(this.inputPrice);
+				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+				var d0 = a0%b0;
 				if(this.isstopm == true){
 					
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
