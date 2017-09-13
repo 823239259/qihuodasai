@@ -1926,9 +1926,9 @@ export default new Vuex.Store({
 		},
 		layerOnRspInsertStopLoss:function(context,parameters){
 			if(parameters.Status==0){
-				context.state.market.layer='提交成功,单号【'+ parameters.StopLossNo+'】';
+				context.state.market.layer='提交成功,单号【'+ parameters.StopLossNo+'】'+Math.floor(Math.random()*10);
 			}else{
-				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】';
+				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】'+Math.floor(Math.random()*10);
 			}
 		},
 		qryHisTrade:function(context){

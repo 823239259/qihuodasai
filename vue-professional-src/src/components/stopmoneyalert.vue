@@ -223,8 +223,6 @@
 				var a0 = this.inputPrice;
 				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
 				var d0 = a0%b0;
-				console.log('d0------->');
-				console.log(d0+','+parseFloat(b0-d0));
 				if(this.isstopm == true){
 					
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
@@ -239,14 +237,14 @@
 						this.msg = '请输入止损手数';
 					}else{
 						if(this.condition.Drection == 0){
-							if(this.inputPrice >= this.templateListObj.LastPrice){
+							if(this.inputPrice > this.templateListObj.LastPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该低于最新价';
 								return;
 							}
 						}
 						if(this.condition.Drection == 1){
-							if(this.inputPrice <= this.templateListObj.LastPrice){
+							if(this.inputPrice < this.templateListObj.LastPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该高于最新价';
 								return;
@@ -295,14 +293,14 @@
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
 					}else{
 						if(this.condition.Drection==0){
-							if(this.zhiYinInputPrice <= this.templateListObj.LastPrice){
+							if(this.zhiYinInputPrice < this.templateListObj.LastPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该高于最新价';
 								return;
 							}
 						}
 						if(this.condition.Drection==1){
-							if(this.zhiYinInputPrice >= this.templateListObj.LastPrice){
+							if(this.zhiYinInputPrice > this.templateListObj.LastPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该低于最新价';
 								return;
