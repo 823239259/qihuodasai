@@ -179,7 +179,8 @@
 				additionValue:'',
 				tipsMsg: '',
 				str: '',
-				msg: ''
+				msg: '',
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
 			}
 		},
 		props: ['objstr'],
@@ -214,6 +215,21 @@
 			}
 		},
 		watch:{
+			inputPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputPrice = parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+				}
+			},
+			inputAdditionalPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputAdditionalPrice = '';
+				}
+			},
+			timeAddtionPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.timeAddtionPrice = '';
+				}
+			},
 			selectId:function(n,o){
 				if(n != undefined){
 					this.commodityNo = n.substring(0,n.length-4);
@@ -297,6 +313,9 @@
 					}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+					}else if(this.holdNum == '' || this.holdNum == 0 || this.holdNum == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入手数';
 					}else{
 						this.$refs.alert.isshow = true;
 						this.tipsMsg = '是否添加价格条件单？';
@@ -341,6 +360,11 @@
 							return;
 						}
 					}
+					if(this.timeHoldNum == '' || this.timeHoldNum == 0 || this.timeHoldNum == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入手数';
+						return;
+					}
 					this.$refs.alert.isshow = true;
 					this.tipsMsg = '是否添加时间条件单？';
 					let b={
@@ -382,7 +406,8 @@
 			var date = new Date();
 			var hour = date.getHours().toString().length > 1 ? date.getHours().toString() : '0' + date.getHours().toString();
 			var minutes = date.getMinutes().toString().length > 1 ? date.getMinutes().toString() : '0' + date.getMinutes().toString();
-			this.time = hour + ':' + minutes;
+			var second = date.getSeconds().toString().length > 1 ? date.getSeconds().toString() : '0' + date.getSeconds().toString();
+			this.time = hour + ':' + minutes + ':' + second;
 			
 			this.selectPrice = 0;
 			let arr=[];

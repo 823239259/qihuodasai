@@ -286,7 +286,7 @@
 						this.msg = '请输入止盈价';
 					}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
 						this.$refs.dialog.isShow = true;
-						this.msg = '请输入止赢手数';
+						this.msg = '请输入止盈手数';
 					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
@@ -306,7 +306,7 @@
 							}
 						}
 						this.$refs.alert.isshow = true;
-						this.tipsMsg = '是否添加限价止赢？';
+						this.tipsMsg = '是否添加限价止盈？';
 						let b={
 							"Method":'InsertStopLoss',
 							"Parameters":{

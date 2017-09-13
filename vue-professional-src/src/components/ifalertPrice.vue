@@ -118,7 +118,8 @@
 				additionValue:'',
 				tipsMsg: '',
 				str: '',
-				msg: ''
+				msg: '',
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
 			}
 		},
 		props: ['objstr'],
@@ -186,6 +187,16 @@
 					this.inputAdditionalPrice = this.inputPrice;
 				}
 			},
+			inputPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputPrice = parseFloat(this.templateList[this.objstrParms.CommodityNo].LastPrice).toFixed(this.orderTemplist[this.objstrParms.CommodityNo].DotSize);
+				}
+			},
+			inputAdditionalPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputAdditionalPrice = '';
+				}
+			},
 		},
 		methods:{
 			close: function() {
@@ -207,6 +218,9 @@
 				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
 					this.$refs.dialog.isShow = true;
 					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+				}else if(this.holdNum == '' || this.holdNum == 0 || this.holdNum == undefined){
+						this.$refs.dialog.isShow = true;
+						this.msg = '请输入手数';
 				}else{
 					this.$refs.alert.isshow = true;
 					this.tipsMsg = '是否修改价格条件单？';
