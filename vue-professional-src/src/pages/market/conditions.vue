@@ -1,6 +1,6 @@
 <template>
 	<div id="conditions">
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<ifalert :objstr="sendObj" ref="ifalert"></ifalert>
 		<ifalertPrice :objstr="sendObjPrice" ref="ifalertPrice"></ifalertPrice>
 		<ifalertTime :objstr="sendObjTime" ref="ifalertTime"></ifalertTime>
@@ -113,6 +113,9 @@
 			msgTips: function(){
 				return this.msg;
 			},
+			layer(){
+				return this.$store.state.market.layer;
+			},
 			conditionList(){
 				return this.$store.state.market.conditionList;
 			},
@@ -143,6 +146,22 @@
 			sendStr: function(){
 				if(this.str) return JSON.stringify(this.str);
 			}
+		},
+		watch: {
+			layer: function(n, o){
+//				setTimeout(function(){
+//					if(this.$children[7].isShow != undefined){
+//						this.$children[7].isShow = true;
+//					}
+//					if(this.$children[8].isShow != undefined){
+//						this.$children[8].isShow = true;
+//					}
+					this.$refs.dialog.isShow = true;
+					this.msg = n;
+//					this.msg = n.slice(0,-1);
+
+//				}.bind(this), 1000);
+			},
 		},
 		methods: {
 			modify:function(){
