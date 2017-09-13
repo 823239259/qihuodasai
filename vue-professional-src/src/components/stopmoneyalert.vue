@@ -43,7 +43,7 @@
 								止损委托价：
 								<select name="" class='fontwhite selshort' v-model="orderType">
 									<option value="1">市价</option>
-									<option value="2">限价</option>
+									<!--<option value="2">限价</option>-->
 								</select>
 							</li>
 						</ol>
@@ -79,7 +79,7 @@
 								止损委托价：
 								<select name="" class='fontwhite selshort' v-model="zhiYinorderType">
 									<option value="1">市价</option>
-									<option value="2">限价</option>
+									<!--<option value="2">限价</option>-->
 								</select>
 							</li>
 						</ol>
