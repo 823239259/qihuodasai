@@ -306,6 +306,39 @@
 							return;
 						}
 					}
+					//判断价格与附加价格是否形成区间
+					switch (this.selectPrice){
+						case 0:
+							if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice <= this.inputPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '附加条件添加错误';
+								return;
+							}
+							break;
+						case 2:
+							if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice <= this.inputPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '附加条件添加错误';
+								return;
+							}
+							break;
+						case 1:
+							if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice >= this.inputPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '附加条件添加错误';
+								return;
+							}
+							break;
+						case 3:
+							if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice >= this.inputPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '附加条件添加错误';
+								return;
+							}
+							break;
+						default:
+							break;
+					}
 					var d0 = this.inputPrice%this.miniTikeSize;
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
