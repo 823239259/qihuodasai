@@ -433,6 +433,8 @@
 	.inp {
 		width: 95px;
 		height: 33px;
+		line-height: 32px;
+		padding: 0;
 		border-radius: 3px;
 		border: 1px solid #14151d;
 		color: white;
@@ -572,6 +574,8 @@
 	.inp {
 		width: 95px*@ip6;
 		height: 33px*@ip6;
+		line-height: 32px*@ip6;
+		padding: 0;
 		border-radius: 3px*@ip6;
 		border: 1px solid #14151d;
 		color: white;
@@ -711,6 +715,8 @@
 	.inp {
 		width: 95px*@ip5;
 		height: 33px*@ip5;
+		line-height: 32px*@ip5;
+		padding: 0;
 		border-radius: 3px*@ip5;
 		border: 1px solid #14151d;
 		color: white;
