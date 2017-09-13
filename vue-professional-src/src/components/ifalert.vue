@@ -244,7 +244,6 @@
 					this.contractNo00 = n.substring(n.length-4,n.length);
 //					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
 					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-					console.log(this.miniTikeSize);
 				}
 			},
 			selectAdditionalPrice:function(n,o){

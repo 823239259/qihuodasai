@@ -27,7 +27,7 @@
 									<option value="2">动态价</option>
 								</select>
 								<input type="text" v-model="inputPrice" class="inp" />
-								<span class="fontgray">0.00%</span>
+								<span class="fontgray">{{percentLoss}}%</span>
 							</li>
 						</ol>
 					</li>
@@ -69,6 +69,7 @@
 				zhiYinNum:1,
 				selectStopLossType00:'',
 				inputPrice:'',
+				percentLoss: '0.00',
 				Num:'',
 				orderType:'',
 				tipsMsg: '',
@@ -133,6 +134,16 @@
 					this.inputPrice = this.miniTikeSize;
 				}else if(n == 0){
 					this.inputPrice = this.stopLossListSelectOneObj.StopLossPrice;
+				}
+			},
+			inputPrice: function(n, o){
+				if(n != undefined){
+					if(this.selectStopLossType00 == 2){
+						this.percentLoss = '0.00';
+						return;
+					}
+					var openAvgPrice = this.stopLossListSelectOneObj.HoldAvgPrice;
+					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
 			},
 		},

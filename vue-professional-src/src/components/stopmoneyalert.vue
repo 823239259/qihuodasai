@@ -178,7 +178,10 @@
 			},
 			inputPrice: function(n, o){
 				if(n != undefined){
-					if(n == this.miniTikeSize) return;
+					if(this.selectStopLossType00 == 2){
+						this.percentLoss = '0.00';
+						return;
+					}
 					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
