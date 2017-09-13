@@ -424,6 +424,7 @@
 			OnRspOrderInsertEntrustCont:function(n,o){
 				this.appendOrderList(n);
 			},
+			
 			OnRspOrderInsertOrderListCont:function(n,o){
 				this.$store.state.market.orderListCont=[];
 				this.OnRspOrderInsertOrderListCont.forEach(function(e){
@@ -453,6 +454,7 @@
 					this.$store.state.market.orderListCont.unshift(obj);
 				}.bind(this));
 			},
+			
 			OnRspQryTradeDealListCont:function(n,o){
 				this.$store.state.market.dealListCont=[];
 				this.OnRspQryTradeDealListCont.forEach(function(e){

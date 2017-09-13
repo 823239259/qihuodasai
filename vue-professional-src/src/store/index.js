@@ -1476,7 +1476,8 @@ export default new Vuex.Store({
 				case 'OnRtnOrderTraded':
 //					console.log('成交单通知');
 					if(parameters!=null){
-						context.state.market.OnRspQryTradeDealListCont.push(parameters);
+//						context.state.market.OnRspQryTradeDealListCont.push(parameters);
+						context.state.market.OnRspQryTradeDealListCont.unshift(parameters);
 					}
 					context.dispatch('layerOnRtnOrderTraded',parameters);
 					break;
