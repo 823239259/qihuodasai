@@ -95,15 +95,9 @@
 		<script>
 			mui.init();
 			mui.plusReady(function() {
-//				弹窗客服
+//				呼叫
 				document.getElementById("telus").addEventListener("tap",function(){
-					mui.confirm("工作日：08:30-24:00      周末：09:00-17:00","400-852-8008",new Array("取消","呼叫"),function(e){
-						if(e.index == 1){
-							mui.toast("哈哈哈")							
-						}else{
-							mui.toast("已取消")
-						}
-					})
+					mui.callService();
 				})
 				//初始化监听头部和底部事件
 				var dataUrl = {
@@ -165,7 +159,7 @@
 						},
 						function() {
 
-						});
+						},imgId);
 					//新增banner 显示
 					var timeNum = 0;
 

@@ -201,12 +201,8 @@
 					return;
 				}, 
 				function(result) {
-					if(result.code == 2 && result.data.num <=2) {
-						mui.toast(result.message);
-						return;
-						}
-					else if(result.code == 2 && result.data.num > 2) {
-
+					console.log(result.data.num)
+					if(result.data.num > 2) {
 						//  		图片验证码
 						$("#codelayer").css("display", "block");
 						$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
@@ -214,7 +210,9 @@
 						//点击图片验证码确认按钮
 						document.getElementById("confirm").addEventListener("tap", function() {
 							//获取用户输入验证码
+							
 							var picCode = $("#refresh_code_value").val();
+							console.log($("#refresh_code_value").val())
 							//						验证码判空
 							if(mui.isnull(picCode)) {
 								mui.toast("验证码不能为空！");
@@ -226,8 +224,6 @@
 								'password': password,
 								'code': picCode
 							}, function(result) { //成功
-//								console.log("登录路成功状态码：" + result.code + "信息：" + result.message);
-									
 										mui.toast("登录成功");
 										//存储用户信息
 										mui.cacheUser.save(result.data.token, result.data.secret, mobile);
@@ -241,12 +237,10 @@
 											wsreload.reload();
 											}
 										mui.openWindow("../quotation/quotationMain.html", "quotationMain");
-		
 										//退出图形验证码框
 										$("#codelayer").css("display", "none");
 										$("#refresh_code_value").val("");
-										clearinfo();
-																							
+										clearinfo();																							
 								return;
 							}, function(result) { //失败
 //								console.log("登录路失败状态码：" + result.code + "信息：" + result.message);
@@ -273,17 +267,21 @@
 						});
 						return;
 					}					
-					else if(result.code == 6){
-						var restTime = ((result.data.date) / 3600).toString();						
-									restTime = restTime.substring(0, 3)
-//									console.log(restTime)
-									if(restTime == 3) {
-										mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTime + "小时");
-									} else {
-										var restTimes = restTime.split(".", 2);
-										mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTimes[0] + "小时" + restTimes[1] * 6 + "分钟");
-									}
-									return;
+					else {
+//						var restTime = ((result.data.date) / 3600).toString();	
+//						if(restTime != 0){
+//							restTime = restTime.substring(0, 3)
+//							if(restTime == 3) {
+//								mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTime + "小时");
+//							} else {
+//								var restTimes = restTime.split(".", 2);
+//								mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTimes[0] + "小时" + restTimes[1] * 6 + "分钟");
+//							}
+//						}
+//						{
+						mui.toast(result.message)
+//						}	
+						return;
 					}
 				}, paramUrl);
 			}
