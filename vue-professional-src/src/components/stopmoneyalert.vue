@@ -241,14 +241,16 @@
 					}else{
 						if(this.selectStopLossType00 == 0){
 							if(this.condition.Drection == 0){
-								if(this.inputPrice > this.templateListObj.LastPrice){
+								//if(this.inputPrice > this.templateListObj.LastPrice){
+								if(parseFloat(this.inputPrice) >= parseFloat(this.lastPrice00)){	
 									this.$refs.dialog.isShow = true;
 									this.msg = '输入价格应该低于最新价';
 									return;
 								}
 							}
 							if(this.condition.Drection == 1){
-								if(this.inputPrice < this.templateListObj.LastPrice){
+								//if(this.inputPrice < this.templateListObj.LastPrice){
+								if(parseFloat(this.inputPrice) <= parseFloat(this.lastPrice00)){	
 									this.$refs.dialog.isShow = true;
 									this.msg = '输入价格应该高于最新价';
 									return;
@@ -298,14 +300,17 @@
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
 					}else{
 						if(this.condition.Drection==0){
-							if(this.zhiYinInputPrice < this.templateListObj.LastPrice){
+							
+							//if(this.zhiYinInputPrice < this.templateListObj.LastPrice){
+							if(parseFloat(this.zhiYinInputPrice) <= parseFloat(this.lastPrice00)){		
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该高于最新价';
 								return;
 							}
 						}
 						if(this.condition.Drection==1){
-							if(this.zhiYinInputPrice > this.templateListObj.LastPrice){
+							//if(this.zhiYinInputPrice > this.templateListObj.LastPrice){
+							if(parseFloat(this.zhiYinInputPrice) >= parseFloat(this.lastPrice00)){	
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该低于最新价';
 								return;
