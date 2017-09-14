@@ -176,14 +176,14 @@
 				}else{
 					if(this.selectStopLossType00 == 0){
 						if(this.stopLossListSelectOneObj.HoldDrection == '多'){
-							if(this.inputPrice > this.templateListObj.LastPrice){
+							if(this.inputPrice > this.lastPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该低于最新价';
 								return;
 							}
 						}
 						if(this.stopLossListSelectOneObj.HoldDrection == '空'){
-							if(this.inputPrice < this.templateListObj.LastPrice){
+							if(this.inputPrice < this.lastPrice){
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该高于最新价';
 								return;

@@ -21,9 +21,7 @@
 				</li>
 				<li>
 					<ol>
-						<li class="fontgray">
-							时间
-						</li>
+						<li class="fontgray">时间</li>
 						<li>
 							<input type="time" class="time" v-model="time" />
 						</li>
@@ -31,9 +29,7 @@
 				</li>
 				<li>
 					<ol>
-						<li class="fontgray">
-							价格
-						</li>
+						<li class="fontgray">价格</li>
 						<li>
 							<select class="fontwhite selectshort" v-model="additionValue">
 								<option value="5">附加</option>
@@ -204,6 +200,9 @@
 					this.timeAddtionPrice = '';
 				}
 			},
+			time: function(n, o){
+				console.log(1346);
+			}
 		},
 		methods:{
 			close: function() {

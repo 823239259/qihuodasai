@@ -140,9 +140,9 @@
 				if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止盈价';
-				}else if(this.zhiYinInputPrice <= this.lastPrice){
-					this.$refs.dialog.isShow = true;
-					this.msg = '输入价格应该大于最新价';
+//				}else if(this.zhiYinInputPrice <= this.lastPrice){
+//					this.$refs.dialog.isShow = true;
+//					this.msg = '输入价格应该大于最新价';
 				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
 					this.$refs.dialog.isShow = true;
 					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
@@ -150,6 +150,22 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入止盈手数';
 				}else{
+					if(this.selectStopLossType00 == 0){
+						if(this.stopLossListSelectOneObj.HoldDrection == '多'){
+							if(this.zhiYinInputPrice < this.lastPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '输入价格应该高于最新价';
+								return;
+							}
+						}
+						if(this.stopLossListSelectOneObj.HoldDrection == '空'){
+							if(this.zhiYinInputPrice > this.lastPrice){
+								this.$refs.dialog.isShow = true;
+								this.msg = '输入价格应该低于最新价';
+								return;
+							}
+						}
+					}
 					this.$refs.alert.isshow = true;
 					this.tipsMsg = '是否添加限价止盈？';
 					let b={

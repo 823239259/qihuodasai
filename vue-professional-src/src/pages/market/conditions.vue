@@ -57,7 +57,7 @@
 						<span>条件</span>
 						<span>下单</span>
 						<span>有效日期</span>
-						<span>触发时间</span>
+						<span>下单时间</span>
 					</li>
 					<template v-for="k in yesListCont">
 						<li @tap="listTap" id="123">
@@ -150,7 +150,7 @@
 		watch: {
 			layer: function(n, o){
 				this.$refs.dialog.isShow = true;
-				this.msg = n;
+				this.msg = n.slice(0,-1);
 			},
 		},
 		methods: {
@@ -463,13 +463,13 @@
 									if(e.OrderType==1){
 										return '买,市价,'+e.Num+'手'
 									}else{
-										return '买,限价,'+e.Num+'手'
+										return '买,对手价,'+e.Num+'手'
 									}
 								} else if(e.Drection == 1){//卖
 									if(e.OrderType==1){
 										return '卖,市价,'+e.Num+'手'
 									}else{
-										return '卖,限价,'+e.Num+'手'
+										return '卖,对手价,'+e.Num+'手'
 									}
 								}
 								
@@ -625,13 +625,13 @@
 									if(e.OrderType==1){
 										return '买,市价,'+e.Num+'手'
 									}else{
-										return '买,限价,'+e.Num+'手'
+										return '买,对手价,'+e.Num+'手'
 									}
 								} else if(e.Drection == 1){//卖
 									if(e.OrderType==1){
 										return '卖,市价,'+e.Num+'手'
 									}else{
-										return '卖,限价,'+e.Num+'手'
+										return '卖,对手价,'+e.Num+'手'
 									}
 								}
 								
