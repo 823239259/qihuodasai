@@ -91,7 +91,8 @@
 					<li>
 						<ol>
 							<li class="fontgray">时间</li>
-							<li>
+							<li class="li_time">
+								<input type="text" class="show_time" v-model="showTime" />
 								<input type="time" class="time" v-model="time" placeholder="显示时间" />
 							</li>
 						</ol>
@@ -178,6 +179,7 @@
 				timeAddtionPrice:'',
 				timeAddtionPrice00:'',
 				time:'',
+				showTime: '',
 				timeAdditionFlag:false,
 				timeHoldNum:1,
 				commodityNo00:'',
@@ -291,6 +293,11 @@
 					this.timeAdditionFlag = true;
 					$(".additionalTime").removeAttr("disabled");
 				}
+			},
+			time: function(n, o){
+				var date = new Date();
+				var second = date.getSeconds().toString().length > 1 ? date.getSeconds().toString() : '0' + date.getSeconds().toString();
+				this.showTime = n + ':' + second;
 			}
 		},
 		methods:{
@@ -466,7 +473,7 @@
 			var hour = date.getHours().toString().length > 1 ? date.getHours().toString() : '0' + date.getHours().toString();
 			var minutes = date.getMinutes().toString().length > 1 ? date.getMinutes().toString() : '0' + date.getMinutes().toString();
 			var second = date.getSeconds().toString().length > 1 ? date.getSeconds().toString() : '0' + date.getSeconds().toString();
-			this.time = hour + ':' + minutes + ':' + second;
+			this.showTime = hour + ':' + minutes + ':' + second;
 			
 			this.selectPrice = 0;
 			let arr=[];
@@ -644,13 +651,23 @@
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
-	.time{
+	.li_time{
+		position: relative;
+	}
+	.time, .show_time{
 		display: inline-block;
 		vertical-align: middle;
 		width: 95px;
 		height: 32px;
 		color: white;
 		padding: 0 5px;
+	}
+	.time{
+		position: absolute;
+		top: 5px;
+		left: 0;
+		z-index: 99;
+		opacity: 0;
 	}
 }
 /*ip6*/
@@ -796,13 +813,23 @@
 		border-bottom-left-radius: 5px*@ip6;
 		border-bottom-right-radius: 5px*@ip6;
 	}
-	.time{
+	.li_time{
+		position: relative;
+	}
+	.time, .show_time{
 		display: inline-block;
 		vertical-align: middle;
 		width: 95px*@ip6;
 		height: 32px*@ip6;
 		color: white;
 		padding: 0 5px*@ip6;
+	}
+	.time{
+		position: absolute;
+		top: 5px*@ip6;
+		left: 0;
+		z-index: 99;
+		opacity: 0;
 	}
 }
 /*ip5*/
@@ -948,13 +975,23 @@
 		border-bottom-left-radius: 5px*@ip5;
 		border-bottom-right-radius: 5px*@ip5;
 	}
-	.time{
+	.li_time{
+		position: relative;
+	}
+	.time, .show_time{
 		display: inline-block;
 		vertical-align: middle;
 		width: 95px*@ip5;
 		height: 32px*@ip5;
 		color: white;
 		padding: 0 5px*@ip5;
+	}
+	.time{
+		position: absolute;
+		top: 5px*@ip5;
+		left: 0;
+		z-index: 99;
+		opacity: 0;
 	}
 }
 </style>
